@@ -8,9 +8,17 @@ export type SNSPlatform =
   | "blog"
   | "website";
 
+/**
+ * SNSアカウントが本人公式のものと確認できているかどうかの状態。
+ * 「SNSなし」のような断定は避け、確認状況を事実として示すための語だけを使う。
+ */
+export type SocialVerificationStatus = "verified" | "unverified" | "not_found" | "inactive";
+
 export interface SNSLink {
   platform: SNSPlatform;
   url: string;
+  /** 未設定の場合、確認状況バッジは表示されない。 */
+  verificationStatus?: SocialVerificationStatus;
 }
 
 export interface Faction {
@@ -50,6 +58,12 @@ export interface SourceMeta {
   notes?: string;
 }
 
+/** 出典・参考資料の1件分（名称とURL）。 */
+export interface SourceEntry {
+  label: string;
+  url: string;
+}
+
 export interface GeneralQuestion extends SourceMeta {
   id: string;
   date: string;
@@ -74,7 +88,8 @@ export type VoteResult =
   | "退席"
   | "議長のため採決に加わらず"
   | "確認中"
-  | "記録なし";
+  | "記録なし"
+  | "確認できず";
 
 export interface BillVote extends SourceMeta {
   id: string;
@@ -97,7 +112,7 @@ export interface ActivityReport {
 
 export type Gender = "male" | "female" | "other" | "undisclosed" | "unknown";
 
-export interface CouncilMember {
+export interface CouncilMember extends SourceMeta {
   id: string;
   name: string;
   nameKana: string;
@@ -118,6 +133,8 @@ export interface CouncilMember {
   questions: GeneralQuestion[];
   votes: BillVote[];
   reports: ActivityReport[];
+  /** 出典・参考資料の一覧（延岡市議会公式プロフィール、選挙公報など）。未設定の場合は出典欄を表示しない。 */
+  sources?: SourceEntry[];
 }
 
 /**
@@ -178,6 +195,12 @@ export interface Mayor {
   officialUrl?: string;
   sourceUrl?: string;
   videos: MayorVideo[];
+  /** ISO形式。この情報をサイト運営者がいつ確認したか。 */
+  verifiedAt?: string;
+  /** ISO形式。サイト側でこの項目をいつ更新したか。 */
+  updatedAt?: string;
+  /** 出典・参考資料の一覧。未設定の場合は出典欄を表示しない。 */
+  sources?: SourceEntry[];
 }
 
 /** 議案の種別。 */

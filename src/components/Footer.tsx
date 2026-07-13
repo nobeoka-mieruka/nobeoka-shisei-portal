@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { DataNotice } from "./DataNotice";
 
 const linkClass =
   "rounded text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -15,6 +16,7 @@ export function Footer() {
         <p className="text-xs text-on-surface-variant">
           このβ版URLの無断転載・不特定多数への拡散はご遠慮ください。
         </p>
+        <DataNotice className="pt-1" />
         <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-1 text-sm sm:justify-start">
           <Link to="/" className={linkClass}>
             ホーム

@@ -5,6 +5,9 @@ import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceLink } from "../components/SourceLink";
+import { SourceList } from "../components/SourceList";
+import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
+import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { PlayIcon, GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -185,6 +188,16 @@ export function MayorPage() {
           </ul>
         </SectionCard>
       )}
+
+      {mayor.sources && mayor.sources.length > 0 && (
+        <SectionCard title="出典・参考資料">
+          <SourceList sources={mayor.sources} />
+        </SectionCard>
+      )}
+
+      <LastUpdatedInfo verifiedAt={mayor.verifiedAt} updatedAt={mayor.updatedAt} className="px-1" />
+
+      <CorrectionRequestButton />
     </div>
   );
 }

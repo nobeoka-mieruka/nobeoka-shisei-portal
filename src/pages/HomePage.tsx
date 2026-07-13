@@ -41,6 +41,11 @@ const termCountOptions = Array.from(new Set(members.map((m) => m.termCount).filt
   .sort((a, b) => a - b)
   .map((t) => ({ value: String(t), label: `当選${t}回` }));
 
+const snsOptions = [
+  { value: "has", label: "SNS登録あり" },
+  { value: "none", label: "SNS未登録" },
+];
+
 const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "市議会議員を見る", to: "/", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
@@ -58,10 +63,16 @@ export function HomePage() {
   const [gender, setGender] = useState<string>("all");
   const [committee, setCommittee] = useState<string>("all");
   const [termCount, setTermCount] = useState<string>("all");
+  const [sns, setSns] = useState<string>("all");
   const [sortKey, setSortKey] = useState<SortKey>("kana");
 
   const hasActiveFilter =
-    query !== "" || factionId !== "all" || gender !== "all" || committee !== "all" || termCount !== "all";
+    query !== "" ||
+    factionId !== "all" ||
+    gender !== "all" ||
+    committee !== "all" ||
+    termCount !== "all" ||
+    sns !== "all";
 
   const clearFilters = () => {
     setQuery("");
@@ -69,6 +80,7 @@ export function HomePage() {
     setGender("all");
     setCommittee("all");
     setTermCount("all");
+    setSns("all");
   };
 
   const filteredMembers = useMemo(() => {
@@ -84,7 +96,8 @@ export function HomePage() {
       const matchesGender = gender === "all" || m.gender === gender;
       const matchesCommittee = committee === "all" || m.committees.includes(committee);
       const matchesTermCount = termCount === "all" || String(m.termCount ?? "") === termCount;
-      return matchesQuery && matchesFaction && matchesGender && matchesCommittee && matchesTermCount;
+      const matchesSns = sns === "all" || (sns === "has" ? m.sns.length > 0 : m.sns.length === 0);
+      return matchesQuery && matchesFaction && matchesGender && matchesCommittee && matchesTermCount && matchesSns;
     });
 
     list = [...list].sort((a, b) => {
@@ -109,7 +122,7 @@ export function HomePage() {
     });
 
     return list;
-  }, [query, factionId, gender, committee, termCount, sortKey]);
+  }, [query, factionId, gender, committee, termCount, sns, sortKey]);
 
   return (
     <div className="px-4 py-4 sm:px-6">
@@ -179,6 +192,7 @@ export function HomePage() {
           <FilterSelect label="性別" value={gender} onChange={setGender} options={genderOptions} />
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
           <FilterSelect label="当選回数" value={termCount} onChange={setTermCount} options={termCountOptions} />
+          <FilterSelect label="SNS" value={sns} onChange={setSns} options={snsOptions} />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <SortSelect value={sortKey} onChange={setSortKey} />
@@ -206,7 +220,7 @@ export function HomePage() {
         </div>
       ) : (
         <p className="rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
-          該当する議員が見つかりませんでした。
+          条件に一致する議員が見つかりませんでした。
         </p>
       )}
     </div>

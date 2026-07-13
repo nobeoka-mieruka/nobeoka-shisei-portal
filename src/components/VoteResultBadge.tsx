@@ -9,6 +9,7 @@ const styles: Record<VoteResult, string> = {
   議長のため採決に加わらず: "bg-surface-variant text-on-surface-variant",
   確認中: "bg-surface-container-high text-on-surface-variant",
   記録なし: "bg-surface-container-high text-on-surface-variant",
+  確認できず: "bg-surface-container-high text-on-surface-variant",
 };
 
 export function VoteResultBadge({ result }: { result: VoteResult }) {
