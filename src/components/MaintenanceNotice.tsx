@@ -9,10 +9,8 @@ export function MaintenanceNotice() {
       <div className="mx-auto flex max-w-5xl items-start gap-3">
         <InfoIcon className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" aria-hidden="true" />
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-on-surface">{maintenanceNotice.title}</p>
-          <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant sm:text-sm">
-            {maintenanceNotice.message}
-          </p>
+          <p className="text-base font-semibold text-on-surface">{maintenanceNotice.title}</p>
+          <p className="mt-0.5 text-sm leading-relaxed text-on-surface-variant">{maintenanceNotice.message}</p>
         </div>
       </div>
     </div>

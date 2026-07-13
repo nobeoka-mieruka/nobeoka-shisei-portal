@@ -112,6 +112,27 @@ export function LineIcon(props: IconProps) {
   );
 }
 
+export function ThreadsIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path
+        d="M12 3c-4.4 0-7 2.6-7 7v4c0 4.4 2.6 7 7 7s7-2.6 7-7c0-2.5-1.4-3.8-3.4-4.3.1-2-1-3.2-2.8-3.2-1.4 0-2.4.7-2.9 1.8"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.3 12.5c.15 2.6-1.3 4-3.4 4-1.7 0-2.9-.9-2.9-2.2 0-1.5 1.4-2.3 3.3-2.3.9 0 1.7.1 2.4.4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function GlobeIcon(props: IconProps) {
   return (
     <svg {...base(props)}>

@@ -10,7 +10,7 @@ interface StatCardProps {
 export function StatCard({ label, value, unit, hint, compact = false }: StatCardProps) {
   return (
     <div className="rounded-xl bg-surface-container-low p-4 shadow-e1">
-      <p className="text-xs font-medium text-on-surface-variant">{label}</p>
+      <p className="text-sm font-medium text-on-surface-variant">{label}</p>
       <p
         className={`mt-1 font-bold leading-tight text-on-surface ${compact ? "text-lg" : "text-3xl leading-none"}`}
       >

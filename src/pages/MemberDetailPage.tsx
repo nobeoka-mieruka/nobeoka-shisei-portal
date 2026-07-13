@@ -38,6 +38,7 @@ export function MemberDetailPage() {
 
   const faction = getFaction(member.factionId);
   const isProfileConfirmed = member.profile !== PLACEHOLDER_PROFILE;
+  const hasActivityData = member.questions.length > 0 || member.votes.length > 0 || member.reports.length > 0;
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -104,96 +105,107 @@ export function MemberDetailPage() {
         )}
       </SectionCard>
 
-      <SectionCard title={`一般質問一覧（${member.questions.length}件）`}>
-        {member.questions.length > 0 ? (
-          <ul className="space-y-3">
-            {member.questions.map((q) => (
-              <li key={q.id} className="rounded-lg border border-outline-variant p-3">
-                <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-                  <span>{q.date}</span>
-                  <span aria-hidden>・</span>
-                  <span>{q.session}</span>
-                </div>
-                <p className="mt-1 font-medium text-on-surface">{q.title}</p>
-                {q.summary && <p className="mt-1 text-sm text-on-surface-variant">{q.summary}</p>}
-                {q.videoUrl && (
-                  <a
-                    href={q.videoUrl}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    aria-label={`${q.title}の質問動画を新しいタブで開く`}
-                    className={`mt-2 inline-flex items-center gap-1.5 rounded-full bg-tertiary-container px-3 py-1.5 text-xs font-medium text-on-tertiary-container transition hover:opacity-90 ${linkClass}`}
-                  >
-                    <PlayIcon className="h-4 w-4" />
-                    質問動画を見る
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyState />
-        )}
-      </SectionCard>
-
-      <SectionCard title={`議案賛否一覧（${member.votes.length}件）`}>
-        {member.votes.length > 0 ? (
-          <ul className="space-y-2">
-            {member.votes.map((v) => (
-              <li
-                key={v.id}
-                className="flex items-start justify-between gap-3 rounded-lg border border-outline-variant p-3"
-              >
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-                    <span>{v.date}</span>
-                    <span aria-hidden>・</span>
-                    <span>{v.session}</span>
-                    {v.billNumber && (
-                      <>
-                        <span aria-hidden>・</span>
-                        <span>{v.billNumber}</span>
-                      </>
+      {hasActivityData ? (
+        <>
+          <SectionCard title={`一般質問一覧（${member.questions.length}件）`}>
+            {member.questions.length > 0 ? (
+              <ul className="space-y-3">
+                {member.questions.map((q) => (
+                  <li key={q.id} className="rounded-lg border border-outline-variant p-3">
+                    <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                      <span>{q.date}</span>
+                      <span aria-hidden>・</span>
+                      <span>{q.session}</span>
+                    </div>
+                    <p className="mt-1 font-medium text-on-surface">{q.title}</p>
+                    {q.summary && <p className="mt-1 text-sm text-on-surface-variant">{q.summary}</p>}
+                    {q.videoUrl && (
+                      <a
+                        href={q.videoUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label={`${q.title}の質問動画を新しいタブで開く`}
+                        className={`mt-2 inline-flex items-center gap-1.5 rounded-full bg-tertiary-container px-3 py-1.5 text-xs font-medium text-on-tertiary-container transition hover:opacity-90 ${linkClass}`}
+                      >
+                        <PlayIcon className="h-4 w-4" />
+                        質問動画を見る
+                      </a>
                     )}
-                  </div>
-                  <p className="mt-1 text-sm text-on-surface">{v.billName}</p>
-                  {v.note && <p className="mt-1 text-xs text-on-surface-variant">{v.note}</p>}
-                </div>
-                <VoteResultBadge result={v.result} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyState />
-        )}
-      </SectionCard>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptyState />
+            )}
+          </SectionCard>
 
-      <SectionCard title={`活動レポート（${member.reports.length}件）`}>
-        {member.reports.length > 0 ? (
-          <ul className="space-y-3">
-            {member.reports.map((r) => (
-              <li key={r.id} className="rounded-lg border border-outline-variant p-3">
-                <div className="text-xs text-on-surface-variant">{r.date}</div>
-                <p className="mt-1 font-medium text-on-surface">{r.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{r.body}</p>
-                {r.url && (
-                  <a
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    aria-label={`${r.title}の詳細を新しいタブで開く`}
-                    className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+          <SectionCard title={`議案賛否一覧（${member.votes.length}件）`}>
+            {member.votes.length > 0 ? (
+              <ul className="space-y-2">
+                {member.votes.map((v) => (
+                  <li
+                    key={v.id}
+                    className="flex items-start justify-between gap-3 rounded-lg border border-outline-variant p-3"
                   >
-                    詳しく見る
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyState />
-        )}
-      </SectionCard>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                        <span>{v.date}</span>
+                        <span aria-hidden>・</span>
+                        <span>{v.session}</span>
+                        {v.billNumber && (
+                          <>
+                            <span aria-hidden>・</span>
+                            <span>{v.billNumber}</span>
+                          </>
+                        )}
+                      </div>
+                      <p className="mt-1 text-sm text-on-surface">{v.billName}</p>
+                      {v.note && <p className="mt-1 text-xs text-on-surface-variant">{v.note}</p>}
+                    </div>
+                    <VoteResultBadge result={v.result} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptyState />
+            )}
+          </SectionCard>
+
+          <SectionCard title={`活動レポート（${member.reports.length}件）`}>
+            {member.reports.length > 0 ? (
+              <ul className="space-y-3">
+                {member.reports.map((r) => (
+                  <li key={r.id} className="rounded-lg border border-outline-variant p-3">
+                    <div className="text-xs text-on-surface-variant">{r.date}</div>
+                    <p className="mt-1 font-medium text-on-surface">{r.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{r.body}</p>
+                    {r.url && (
+                      <a
+                        href={r.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label={`${r.title}の詳細を新しいタブで開く`}
+                        className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                      >
+                        詳しく見る
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptyState />
+            )}
+          </SectionCard>
+        </>
+      ) : (
+        <SectionCard title="議会活動データ">
+          <div className="space-y-1.5 text-sm leading-relaxed text-on-surface-variant">
+            <p className="font-medium text-on-surface">議会活動データは準備中です</p>
+            <p>一般質問、議案ごとの採決結果、活動情報は、公開資料を確認しながら順次追加します。</p>
+          </div>
+        </SectionCard>
+      )}
     </div>
   );
 }

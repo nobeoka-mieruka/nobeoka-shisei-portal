@@ -44,7 +44,6 @@ const termCountOptions = Array.from(new Set(members.map((m) => m.termCount).filt
 const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "市議会議員を見る", to: "/", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
-  { label: "市政ダッシュボードを見る", to: "/dashboard", ready: true },
   { label: "議案・採決結果を見る", to: "/bills", ready: true },
   { label: "一般質問を見る", ready: false },
   { label: "編集方針を見る", to: "/editorial-policy", ready: true },
@@ -116,27 +115,25 @@ export function HomePage() {
     <div className="px-4 py-4 sm:px-6">
       <div className="mb-5 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">
-          市議会議員{members.length}名
+          延岡市政を、もっと分かりやすく
         </h1>
-        <p className="mt-1 text-xs text-on-primary-container/70">
-          定数{COUNCIL_STATUTORY_SEATS}名／現員{members.length}名／欠員{vacantSeats}名
-        </p>
-        <p className="mt-2 text-sm text-on-primary-container/80">
-          市長・市議会・議案・政治資金・財政など、市政情報を分かりやすく公開する市民向けデータベース
+        <p className="mt-2 text-base leading-relaxed text-on-primary-container/80">
+          市長・市議会・議案・財政などの公開情報を、市民向けに分かりやすく整理しています。
         </p>
       </div>
 
-      <p className="mb-5 rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+      <p className="mb-5 rounded-xl bg-surface-container-low p-3 text-base leading-relaxed text-on-surface-variant">
         このサイトは、公開資料を市民向けに整理した非公式の情報サイトです。正式な情報は、延岡市および延岡市議会の公式資料をご確認ください。
       </p>
 
       <section aria-labelledby="city-data-summary-heading" className="mb-6">
-        <h2 id="city-data-summary-heading" className="mb-2 text-sm font-semibold text-on-surface">
+        <h2 id="city-data-summary-heading" className="mb-2 text-base font-semibold text-on-surface">
           市政データ概要
         </h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <StatCard label="議員定数" value={COUNCIL_STATUTORY_SEATS} unit="名" />
-          <StatCard label="現在登録されている議員数" value={members.length} unit="名" />
+          <StatCard label="市議会議員数" value={members.length} unit="名" />
+          <StatCard label="欠員" value={vacantSeats} unit="名" />
           <StatCard label="登録済み議案数" value={bills.length} unit="件" />
           <StatCard label="登録済み一般質問数" value={registeredQuestionCount} unit="件" />
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
@@ -150,7 +147,7 @@ export function HomePage() {
         </Link>
       </section>
 
-      <nav aria-label="サイト内のページ" className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+      <nav aria-label="サイト内のページ" className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {navLinks.map((link) =>
           link.ready && link.to ? (
             <Link
@@ -177,14 +174,14 @@ export function HomePage() {
 
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={query} onChange={setQuery} />
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <FactionFilter factions={allFactions} selected={factionId} onChange={setFactionId} />
-          <SortSelect value={sortKey} onChange={setSortKey} />
-        </div>
+        <FactionFilter factions={allFactions} selected={factionId} onChange={setFactionId} />
         <div className="flex flex-wrap items-center gap-2">
           <FilterSelect label="性別" value={gender} onChange={setGender} options={genderOptions} />
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
           <FilterSelect label="当選回数" value={termCount} onChange={setTermCount} options={termCountOptions} />
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <SortSelect value={sortKey} onChange={setSortKey} />
           {hasActiveFilter && (
             <button
               type="button"
@@ -202,7 +199,7 @@ export function HomePage() {
       </p>
 
       {filteredMembers.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {filteredMembers.map((member) => (
             <MemberCard key={member.id} member={member} />
           ))}

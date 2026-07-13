@@ -17,15 +17,15 @@ export function MemberCard({ member }: { member: CouncilMember }) {
       />
       <Avatar name={member.name} photoUrl={member.photoUrl} color={faction.color} size="lg" />
       <div className="min-w-0 max-w-full">
-        <p className="truncate text-base font-medium text-on-surface">{member.name}</p>
-        <p className="truncate text-xs text-on-surface-variant">{member.nameKana}</p>
+        <p className="truncate text-base font-semibold text-on-surface">{member.name}</p>
+        <p className="truncate text-sm text-on-surface-variant">{member.nameKana}</p>
       </div>
       <FactionChip faction={faction} />
       {(member.termCount || member.committees.length > 0) && (
-        <div className="min-w-0 max-w-full space-y-0.5 text-xs text-on-surface-variant">
+        <div className="min-w-0 max-w-full space-y-0.5 text-sm text-on-surface-variant">
           {member.termCount && <p>当選{member.termCount}回</p>}
           {member.committees.length > 0 && (
-            <p className="line-clamp-2 break-words">{member.committees.join("・")}</p>
+            <p className="line-clamp-2 break-words text-xs">{member.committees.join("・")}</p>
           )}
         </div>
       )}

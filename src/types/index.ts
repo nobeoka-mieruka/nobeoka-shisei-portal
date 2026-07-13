@@ -2,6 +2,7 @@ export type SNSPlatform =
   | "x"
   | "facebook"
   | "instagram"
+  | "threads"
   | "youtube"
   | "line"
   | "blog"

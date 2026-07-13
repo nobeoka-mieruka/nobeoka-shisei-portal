@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="mt-8 border-t border-outline-variant px-4 py-6 sm:px-6">
       <div className="mx-auto max-w-5xl space-y-2 text-center sm:text-left">
         <p className="text-xs font-medium text-on-surface-variant">β版・試験公開中</p>
-        <p className="text-xs text-on-surface-variant">
+        <p className="text-sm text-on-surface-variant">
           本サイトは、延岡市・延岡市議会が運営する公式サイトではありません。
         </p>
         <p className="text-xs text-on-surface-variant">
