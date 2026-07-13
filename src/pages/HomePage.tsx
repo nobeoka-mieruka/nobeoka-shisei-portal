@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
-import type { CouncilMember, Gender } from "../types";
+import billsData from "../data/bills.json";
+import mayorData from "../data/mayor.json";
+import type { CouncilMember, Gender, Bill, Mayor } from "../types";
 import { allFactions, getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { MemberCard } from "../components/MemberCard";
@@ -9,10 +11,15 @@ import { SearchBar } from "../components/SearchBar";
 import { FactionFilter } from "../components/FactionFilter";
 import { FilterSelect } from "../components/FilterSelect";
 import { SortSelect, type SortKey } from "../components/SortSelect";
+import { StatCard } from "../components/StatCard";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
+const bills = billsData as Bill[];
+const mayor = mayorData as Mayor;
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);
+const registeredQuestionCount = members.reduce((sum, m) => sum + m.questions.length, 0);
 
 const genderLabels: Record<Gender, string> = {
   male: "男性",
@@ -122,6 +129,26 @@ export function HomePage() {
       <p className="mb-5 rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         このサイトは、公開資料を市民向けに整理した非公式の情報サイトです。正式な情報は、延岡市および延岡市議会の公式資料をご確認ください。
       </p>
+
+      <section aria-labelledby="city-data-summary-heading" className="mb-6">
+        <h2 id="city-data-summary-heading" className="mb-2 text-sm font-semibold text-on-surface">
+          市政データ概要
+        </h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <StatCard label="議員定数" value={COUNCIL_STATUTORY_SEATS} unit="名" />
+          <StatCard label="現在登録されている議員数" value={members.length} unit="名" />
+          <StatCard label="登録済み議案数" value={bills.length} unit="件" />
+          <StatCard label="登録済み一般質問数" value={registeredQuestionCount} unit="件" />
+          <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
+          <StatCard label="最終更新日" value={formatJapaneseDate(SITE_LAST_UPDATED)} compact />
+        </div>
+        <Link
+          to="/dashboard"
+          className="mt-3 flex items-center justify-center rounded-full bg-primary-container px-4 py-3 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          市政ダッシュボードを詳しく見る
+        </Link>
+      </section>
 
       <nav aria-label="サイト内のページ" className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
         {navLinks.map((link) =>
