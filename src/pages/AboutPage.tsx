@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { SectionCard } from "../components/SectionCard";
 import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AboutPage() {
+  usePageTitle("このサイトについて");
+
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">

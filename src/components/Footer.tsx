@@ -15,17 +15,38 @@ export function Footer() {
         <p className="text-xs text-on-surface-variant">
           このβ版URLの無断転載・不特定多数への拡散はご遠慮ください。
         </p>
-        <div className="flex flex-col items-center gap-3 pt-1 text-sm sm:flex-row sm:justify-between">
-          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:justify-start">
-            <Link to="/about" className={linkClass}>
-              このサイトについて
-            </Link>
-            <Link to="/terms" className={linkClass}>
-              利用規約・免責事項
-            </Link>
-          </nav>
-          <p className="text-xs text-on-surface-variant">最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}</p>
-        </div>
+        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-1 text-sm sm:justify-start">
+          <Link to="/" className={linkClass}>
+            ホーム
+          </Link>
+          <Link to="/" className={linkClass}>
+            市議会議員一覧
+          </Link>
+          <Link to="/mayor" className={linkClass}>
+            市長情報
+          </Link>
+          <Link to="/dashboard" className={linkClass}>
+            ダッシュボード
+          </Link>
+          <Link to="/about" className={linkClass}>
+            このサイトについて
+          </Link>
+          <Link to="/editorial-policy" className={linkClass}>
+            編集方針
+          </Link>
+          <Link to="/contact" className={linkClass}>
+            情報提供・訂正依頼
+          </Link>
+          <Link to="/terms" className={linkClass}>
+            利用規約・免責事項
+          </Link>
+          <Link to="/terms#privacy" className={linkClass}>
+            プライバシーに関する案内
+          </Link>
+        </nav>
+        <p className="pt-2 text-xs text-on-surface-variant sm:text-left">
+          最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}
+        </p>
       </div>
     </footer>
   );

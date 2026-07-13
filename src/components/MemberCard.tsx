@@ -21,6 +21,14 @@ export function MemberCard({ member }: { member: CouncilMember }) {
         <p className="truncate text-xs text-on-surface-variant">{member.nameKana}</p>
       </div>
       <FactionChip faction={faction} />
+      {(member.termCount || member.committees.length > 0) && (
+        <div className="min-w-0 max-w-full space-y-0.5 text-xs text-on-surface-variant">
+          {member.termCount && <p>当選{member.termCount}回</p>}
+          {member.committees.length > 0 && (
+            <p className="line-clamp-2 break-words">{member.committees.join("・")}</p>
+          )}
+        </div>
+      )}
       {member.profileUrl && (
         <a
           href={member.profileUrl}

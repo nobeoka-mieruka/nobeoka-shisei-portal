@@ -9,6 +9,10 @@ import { MayorPage } from "./pages/MayorPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { AboutPage } from "./pages/AboutPage";
 import { TermsPage } from "./pages/TermsPage";
+import { EditorialPolicyPage } from "./pages/EditorialPolicyPage";
+import { ContactPage } from "./pages/ContactPage";
+import { BillsPage } from "./pages/BillsPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/bills" element={<BillsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
         <Footer />

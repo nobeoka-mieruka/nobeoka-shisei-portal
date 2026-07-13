@@ -10,6 +10,7 @@ import { BackLink } from "../components/BackLink";
 import { VoteResultBadge } from "../components/VoteResultBadge";
 import { EmptyState } from "../components/EmptyState";
 import { PlayIcon, GlobeIcon } from "../components/icons";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 const members = membersData as CouncilMember[];
 
@@ -21,6 +22,8 @@ const linkClass =
 export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
   const member = members.find((m) => m.id === id);
+
+  usePageTitle(member ? member.name : "議員情報");
 
   if (!member) {
     return (

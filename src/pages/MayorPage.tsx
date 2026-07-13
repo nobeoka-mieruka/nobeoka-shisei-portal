@@ -1,17 +1,27 @@
 import mayorData from "../data/mayor.json";
-import type { Mayor } from "../types";
+import type { Mayor, PledgeStatus } from "../types";
 import { Avatar } from "../components/Avatar";
 import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
+import { SourceLink } from "../components/SourceLink";
 import { PlayIcon, GlobeIcon } from "../components/icons";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 const mayor = mayorData as Mayor;
 
-const pledgeStatusClass: Record<string, string> = {
+const NO_STATUS_LABEL: PledgeStatus = "確認できる資料なし";
+
+const pledgeStatusClass: Partial<Record<PledgeStatus, string>> = {
   実施済み: "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]",
+  一部実施: "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]",
+  実施中: "bg-primary-container text-on-primary-container",
   取組中: "bg-primary-container text-on-primary-container",
   検討中: "bg-surface-variant text-on-surface-variant",
+  未着手を確認: "bg-surface-variant text-on-surface-variant",
+  方針変更: "bg-[#fff3d6] text-[#7a5900] dark:bg-[#3a2e00] dark:text-[#f2cf6b]",
+  中止を確認: "bg-surface-variant text-on-surface-variant",
+  確認できる資料なし: "bg-surface-variant text-on-surface-variant",
 };
 
 const linkClass =
@@ -22,6 +32,8 @@ const termStart = termStartEntry?.year ?? mayor.career[mayor.career.length - 1]?
 const pendingPledgeCount = mayor.pledges.filter((p) => !p.status).length;
 
 export function MayorPage() {
+  usePageTitle("市長情報");
+
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
       <section className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
@@ -75,7 +87,7 @@ export function MayorPage() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="公約分野" value={mayor.pledges.length} unit="件" />
         <StatCard label="SNS" value={mayor.sns.length} unit="件" />
-        <StatCard label="進捗確認中" value={pendingPledgeCount} unit="件" />
+        <StatCard label="確認できる資料なし" value={pendingPledgeCount} unit="件" />
         <StatCard label="任期開始" value={termStart ?? "情報確認中"} compact />
       </div>
 
@@ -105,13 +117,28 @@ export function MayorPage() {
                       : "bg-surface-variant text-on-surface-variant"
                   }`}
                 >
-                  {p.status ?? "進捗確認中"}
+                  {p.status ?? NO_STATUS_LABEL}
                 </span>
               </div>
               {p.category && <p className="mt-1 text-xs text-on-surface-variant">{p.category}</p>}
               <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-on-surface-variant">
                 {p.description}
               </p>
+              {(p.statusEvidenceUrl || p.sourceUrl || p.verifiedAt) && (
+                <div className="mt-2 border-t border-outline-variant pt-2">
+                  {(p.statusEvidenceUrl ?? p.sourceUrl) ? (
+                    <SourceLink
+                      url={(p.statusEvidenceUrl ?? p.sourceUrl) as string}
+                      label={p.statusEvidenceUrl ? "進捗の根拠資料を見る" : "出典を見る"}
+                      verifiedAt={p.verifiedAt}
+                    />
+                  ) : (
+                    p.verifiedAt && (
+                      <span className="text-xs text-on-surface-variant">最終確認：{p.verifiedAt}</span>
+                    )
+                  )}
+                </div>
+              )}
             </li>
           ))}
         </ul>

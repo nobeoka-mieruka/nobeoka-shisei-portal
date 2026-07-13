@@ -1,16 +1,30 @@
 import { useMemo } from "react";
 import membersData from "../data/members.json";
-import type { CouncilMember } from "../types";
+import mayorData from "../data/mayor.json";
+import billsData from "../data/bills.json";
+import type { CouncilMember, Gender, Mayor, Bill } from "../types";
 import { getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { BarList, type BarListItem } from "../components/dashboard/BarList";
 import { ProgressStat } from "../components/dashboard/ProgressStat";
+import { usePageTitle } from "../hooks/usePageTitle";
+import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
+const mayor = mayorData as Mayor;
+const bills = billsData as Bill[];
 
 const PLACEHOLDER_PROFILE = "情報確認中";
+
+const genderLabels: Record<Gender, string> = {
+  male: "男性",
+  female: "女性",
+  other: "その他",
+  undisclosed: "非公開",
+  unknown: "不明",
+};
 
 /** Strips committee-officer suffixes (委員長 / 副委員長) and normalizes incidental
  * whitespace so the same committee isn't split into multiple bars by formatting
@@ -20,6 +34,7 @@ function normalizeCommitteeName(committee: string): string {
 }
 
 export function DashboardPage() {
+  usePageTitle("ダッシュボード");
   const total = members.length;
   const vacancySeats = Math.max(COUNCIL_STATUTORY_SEATS - total, 0);
 
@@ -38,6 +53,21 @@ export function DashboardPage() {
   }, []);
 
   const femaleCount = useMemo(() => members.filter((m) => m.gender === "female").length, []);
+
+  const genderItems: BarListItem[] = useMemo(() => {
+    const counts = new Map<Gender, number>();
+    for (const m of members) {
+      counts.set(m.gender, (counts.get(m.gender) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([gender, count]) => ({ key: gender, label: genderLabels[gender], count }))
+      .sort((a, b) => b.count - a.count);
+  }, []);
+
+  const totalQuestions = useMemo(() => members.reduce((sum, m) => sum + m.questions.length, 0), []);
+  const totalPledges = mayor.pledges.length;
+  const totalBills = bills.length;
+  const billsWithResult = useMemo(() => bills.filter((b) => !!b.result).length, []);
 
   const factionItems: BarListItem[] = useMemo(() => {
     const counts = new Map<string, number>();
@@ -161,8 +191,19 @@ export function DashboardPage() {
         <StatCard label="女性議員数" value={femaleCount} unit="名" />
       </div>
 
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatCard label="登録済み一般質問数" value={totalQuestions} unit="件" />
+        <StatCard label="登録済み議案数" value={totalBills} unit="件" />
+        <StatCard label="採決情報が確認できた議案数" value={billsWithResult} unit="件" />
+        <StatCard label="市長公約の登録数" value={totalPledges} unit="件" />
+      </div>
+
       <SectionCard title="会派別人数">
         <BarList items={factionItems} />
+      </SectionCard>
+
+      <SectionCard title="男女別人数">
+        <BarList items={genderItems} />
       </SectionCard>
 
       <SectionCard title="年齢構成">
@@ -193,6 +234,8 @@ export function DashboardPage() {
           <ProgressStat label="活動レポートあり" count={completion.reports} total={total} />
         </div>
       </SectionCard>
+
+      <p className="text-xs text-on-surface-variant">最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}</p>
     </div>
   );
 }

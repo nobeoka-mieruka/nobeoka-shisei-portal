@@ -9,6 +9,13 @@ export function formatJapaneseDate(iso: string): string {
   return `${year}年${month}月${day}日`;
 }
 
+/**
+ * 情報提供・訂正依頼フォームのURL（Googleフォームなど）。
+ * まだ用意できていない間は空文字のままにしておくと、ページ側で「準備中」と表示される。
+ * フォームができたら、ここにURLを入れるだけで反映される。
+ */
+export const CONTACT_FORM_URL = "https://forms.gle/aPavgikpkoA6YP1L9";
+
 /** 全ページ共通の更新中告知バー。enabled を false にすると非表示になる。 */
 export const maintenanceNotice = {
   enabled: true,

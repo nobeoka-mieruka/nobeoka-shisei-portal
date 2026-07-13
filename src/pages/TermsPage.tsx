@@ -1,7 +1,8 @@
 import { SectionCard } from "../components/SectionCard";
 import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { usePageTitle } from "../hooks/usePageTitle";
 
-const sections = [
+const sections: { id?: string; title: string; body: string }[] = [
   {
     title: "1. 掲載情報について",
     body: "本サイトは、公開情報をもとに作成しています。情報の正確性や完全性の確保に努めていますが、内容を保証するものではありません。",
@@ -30,9 +31,16 @@ const sections = [
     title: "7. 誤りの連絡",
     body: "掲載内容に誤りがある場合は、確認のうえ必要に応じて修正します。",
   },
+  {
+    id: "privacy",
+    title: "8. プライバシーについて",
+    body: "当サイトの閲覧にあたって、会員登録やログインは必要なく、当サイト自体が閲覧者の個人情報を収集することはありません。「情報提供・訂正依頼」フォームからご連絡いただいた場合のみ、入力された内容を問い合わせ内容の確認・返信のために使用します。このフォームはGoogleフォームを利用しているため、入力内容はGoogleのサービスを通じて送信されます。",
+  },
 ];
 
 export function TermsPage() {
+  usePageTitle("利用規約・免責事項");
+
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
@@ -42,7 +50,7 @@ export function TermsPage() {
       <SectionCard title="規約・免責事項の内容">
         <div className="space-y-4">
           {sections.map((s) => (
-            <div key={s.title}>
+            <div key={s.title} id={s.id}>
               <h2 className="text-sm font-semibold text-on-surface">{s.title}</h2>
               <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{s.body}</p>
             </div>
