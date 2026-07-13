@@ -88,7 +88,7 @@ export function MemberDetailPage() {
             公式プロフィール
           </a>
         )}
-        {member.sns.length > 0 && <SnsLinks links={member.sns} className="mt-4" />}
+        <SnsLinks links={member.sns} className="mt-4" />
       </section>
 
       <SectionCard title="所属委員会">
@@ -145,7 +145,7 @@ export function MemberDetailPage() {
 
       <LastUpdatedInfo verifiedAt={member.verifiedAt} updatedAt={member.updatedAt} className="px-1" />
 
-      <CorrectionRequestButton />
+      <CorrectionRequestButton pageName={member.name} />
     </div>
   );
 }

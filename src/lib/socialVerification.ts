@@ -14,7 +14,7 @@ export const socialVerificationMeta: Record<SocialVerificationStatus, { label: s
     className: "bg-surface-container-high text-on-surface-variant",
   },
   inactive: {
-    label: "公式アカウントですが、長期間投稿が確認できません",
+    label: "公式アカウントですが、長期間更新が確認できません",
     className: "bg-[#fff3d6] text-[#7a5900] dark:bg-[#3a2e00] dark:text-[#f2cf6b]",
   },
 };

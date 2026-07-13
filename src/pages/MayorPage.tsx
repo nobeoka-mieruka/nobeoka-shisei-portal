@@ -72,7 +72,7 @@ export function MayorPage() {
             公式ホームページ
           </a>
         )}
-        {mayor.sns.length > 0 && <SnsLinks links={mayor.sns} className="mt-4" />}
+        <SnsLinks links={mayor.sns} className="mt-4" />
         {mayor.sourceUrl && (
           <a
             href={mayor.sourceUrl}
@@ -197,7 +197,7 @@ export function MayorPage() {
 
       <LastUpdatedInfo verifiedAt={mayor.verifiedAt} updatedAt={mayor.updatedAt} className="px-1" />
 
-      <CorrectionRequestButton />
+      <CorrectionRequestButton pageName={`${mayor.name}（市長）`} />
     </div>
   );
 }

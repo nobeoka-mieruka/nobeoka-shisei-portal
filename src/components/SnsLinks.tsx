@@ -8,7 +8,9 @@ interface SnsLinksProps {
 }
 
 export function SnsLinks({ links, className = "" }: SnsLinksProps) {
-  if (links.length === 0) return null;
+  if (links.length === 0) {
+    return <p className={`text-xs text-on-surface-variant ${className}`}>公式SNSは、現在確認できていません。</p>;
+  }
   const withStatus = links.filter((link) => link.verificationStatus);
 
   return (

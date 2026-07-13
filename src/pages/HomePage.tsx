@@ -220,7 +220,7 @@ export function HomePage() {
         </div>
       ) : (
         <p className="rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
-          条件に一致する議員が見つかりませんでした。
+          条件に一致する議員が見つかりませんでした。検索条件を変更してください。
         </p>
       )}
     </div>
