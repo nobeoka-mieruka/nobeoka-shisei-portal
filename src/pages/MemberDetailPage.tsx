@@ -13,6 +13,7 @@ import { EmptyState } from "../components/EmptyState";
 import { VotingRecordsSection } from "../components/VotingRecordsSection";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
+import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
 import { GlobeIcon } from "../components/icons";
@@ -230,6 +231,7 @@ export function MemberDetailPage() {
       )}
 
       <LastUpdatedInfo verifiedAt={member.verifiedAt} updatedAt={member.updatedAt} className="px-1" />
+      <LastUpdated className="px-1" />
 
       <CorrectionRequestButton pageName={member.name} />
     </div>

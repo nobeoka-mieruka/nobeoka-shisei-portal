@@ -2,6 +2,7 @@ import billsData from "../data/bills.json";
 import type { Bill } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { EmptyState } from "../components/EmptyState";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const bills = billsData as Bill[];
@@ -36,6 +37,8 @@ export function BillsPage() {
           </div>
         )}
       </SectionCard>
+
+      <LastUpdated />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import type { BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 
@@ -172,6 +173,8 @@ export function BillVotesPage() {
       <p className="mt-6 px-1 text-xs leading-relaxed text-on-surface-variant">
         このページは、延岡市議会が公開する議案書、議決結果、会議録などを基に整理しています。議員個人の賛否は、氏名別の公式記録を確認できた場合のみ掲載します。賛否のみで議員活動や議案の内容を評価できるものではありません。
       </p>
+
+      <LastUpdated className="mt-4" />
 
       <div className="mt-4">
         <CorrectionRequestButton pageName="議案ごとの賛否" />

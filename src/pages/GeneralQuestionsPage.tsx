@@ -7,6 +7,7 @@ import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { StatCard } from "../components/StatCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { GeneralQuestionCard } from "../components/questions/GeneralQuestionCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
@@ -256,6 +257,8 @@ export function GeneralQuestionsPage() {
         <GlobeIcon className="h-4 w-4" />
         延岡市議会の公式YouTubeチャンネルを見る
       </a>
+
+      <LastUpdated className="mt-4" />
 
       <div className="mt-4">
         <CorrectionRequestButton pageName="一般質問データベース" />

@@ -1,7 +1,4 @@
-/** サイト全体の設定値。更新日はここだけ書き換えれば全ページに反映される。 */
-
-/** YYYY-MM-DD 形式。サイトの内容を更新したら、この日付を書き換えてください。 */
-export const SITE_LAST_UPDATED = "2026-07-13";
+/** サイト全体の設定値。 */
 
 /** "2026-07-11" のようなISO形式の日付を "2026年7月11日" の表記に変換する。 */
 export function formatJapaneseDate(iso: string): string {

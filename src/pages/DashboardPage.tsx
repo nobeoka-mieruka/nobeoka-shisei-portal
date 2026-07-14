@@ -10,7 +10,7 @@ import { StatCard } from "../components/StatCard";
 import { BarList, type BarListItem } from "../components/dashboard/BarList";
 import { ProgressStat } from "../components/dashboard/ProgressStat";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { LastUpdated } from "../components/LastUpdated";
 import { Link } from "react-router-dom";
 import { ChartBarIcon } from "../components/icons";
 
@@ -244,7 +244,7 @@ export function DashboardPage() {
         </div>
       </SectionCard>
 
-      <p className="text-xs text-on-surface-variant">最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}</p>
+      <LastUpdated />
     </div>
   );
 }

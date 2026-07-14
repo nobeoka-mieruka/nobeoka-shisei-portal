@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
 import { DataNotice } from "./DataNotice";
+import { LastUpdated } from "./LastUpdated";
 
 const linkClass =
   "rounded text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -58,9 +58,7 @@ export function Footer() {
             プライバシーに関する案内
           </Link>
         </nav>
-        <p className="pt-2 text-xs text-on-surface-variant sm:text-left">
-          最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}
-        </p>
+        <LastUpdated className="pt-2 sm:text-left" />
       </div>
     </footer>
   );

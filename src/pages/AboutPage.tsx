@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { SectionCard } from "../components/SectionCard";
-import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AboutPage() {
@@ -43,7 +43,7 @@ export function AboutPage() {
         </div>
       </SectionCard>
 
-      <p className="text-xs text-on-surface-variant">最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}</p>
+      <LastUpdated />
 
       <p className="text-sm">
         <Link

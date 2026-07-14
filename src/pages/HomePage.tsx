@@ -15,7 +15,7 @@ import { SortSelect, type SortKey } from "../components/SortSelect";
 import { StatCard } from "../components/StatCard";
 import { SiteAnalyticsSummary } from "../components/SiteAnalyticsSummary";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { getLastUpdatedText } from "../lib/lastUpdated";
 
 const members = membersData as CouncilMember[];
 const bills = billsData as Bill[];
@@ -154,7 +154,7 @@ export function HomePage() {
           <StatCard label="登録済み議案数" value={bills.length} unit="件" />
           <StatCard label="登録済み一般質問数" value={registeredQuestionCount} unit="件" />
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
-          <StatCard label="最終更新日" value={formatJapaneseDate(SITE_LAST_UPDATED)} compact />
+          <StatCard label="最終更新日" value={getLastUpdatedText()} compact />
         </div>
         <Link
           to="/dashboard"

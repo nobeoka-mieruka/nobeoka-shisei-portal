@@ -1,5 +1,5 @@
 import { SectionCard } from "../components/SectionCard";
-import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const sections: { id?: string; title: string; body: string }[] = [
@@ -58,7 +58,7 @@ export function TermsPage() {
         </div>
       </SectionCard>
 
-      <p className="text-xs text-on-surface-variant">最終更新：{formatJapaneseDate(SITE_LAST_UPDATED)}</p>
+      <LastUpdated />
     </div>
   );
 }

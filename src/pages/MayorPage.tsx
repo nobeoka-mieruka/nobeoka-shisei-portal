@@ -7,6 +7,7 @@ import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
+import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -196,6 +197,7 @@ export function MayorPage() {
       )}
 
       <LastUpdatedInfo verifiedAt={mayor.verifiedAt} updatedAt={mayor.updatedAt} className="px-1" />
+      <LastUpdated className="px-1" />
 
       <CorrectionRequestButton pageName={`${mayor.name}（市長）`} />
     </div>
