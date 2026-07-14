@@ -6,6 +6,7 @@ import { MaintenanceNotice } from "./components/MaintenanceNotice";
 import { HomePage } from "./pages/HomePage";
 import { MemberDetailPage } from "./pages/MemberDetailPage";
 import { MayorPage } from "./pages/MayorPage";
+import { MayorPolicyProgressPage } from "./pages/MayorPolicyProgressPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { CompensationPage } from "./pages/CompensationPage";
 import { AboutPage } from "./pages/AboutPage";
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/members/:id" element={<MemberDetailPage />} />
             <Route path="/mayor" element={<MayorPage />} />
+            <Route path="/mayor/policy-progress" element={<MayorPolicyProgressPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/compensation" element={<CompensationPage />} />
             <Route path="/about" element={<AboutPage />} />

@@ -319,6 +319,32 @@ export interface SimilarMunicipalityComparison extends CompensationSourceMeta {
   roles: RoleRankingEntry[];
 }
 
+/** 市長公約1件分の進捗状況（土台段階：詳細な判定・関連予算の紐付けは行わない）。 */
+export interface MayorPolicyProgressItem {
+  id: string;
+  title: string;
+  /** 現在の状況を表す短い文章。詳細な判定はまだ行っていないため、断定的な評価語は避ける。 */
+  currentStatus: string;
+  /** 根拠資料を表す短い文章（資料名の一覧など）。 */
+  evidenceLabel: string;
+}
+
+/** PDFなど、根拠資料1件分（見出しとURL）。 */
+export interface PolicyProgressDocument {
+  label: string;
+  url: string;
+}
+
+/** 市長公約の進捗状況ページ全体のデータ。 */
+export interface MayorPolicyProgressData {
+  /** ISO形式。データの基準日。 */
+  referenceDate: string;
+  documents: PolicyProgressDocument[];
+  referenceUrl: string;
+  referenceLabel: string;
+  policies: MayorPolicyProgressItem[];
+}
+
 /** 議案の種別。 */
 export type BillCategory = "条例" | "予算" | "決算" | "人事" | "意見書" | "請願" | "その他";
 
