@@ -36,6 +36,9 @@ export function Footer() {
           <Link to="/questions" className={linkClass}>
             一般質問データベース
           </Link>
+          <Link to="/bills/votes" className={linkClass}>
+            議案ごとの賛否
+          </Link>
           <Link to="/about" className={linkClass}>
             このサイトについて
           </Link>

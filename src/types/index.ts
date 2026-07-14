@@ -678,6 +678,54 @@ export interface GeneralQuestionItem {
   notes?: string;
 }
 
+/**
+ * 議案ごとの賛否データベースにおける、議員1人分の議決結果。
+ * 表示ラベル: approve=賛成／oppose=反対／abstain=退席／absent=欠席／recused=除斥／notVoting=採決なし
+ */
+export type BillMemberVoteStatus = "approve" | "oppose" | "abstain" | "absent" | "recused" | "notVoting";
+
+/** 議案の議決結果。公式資料で確認できない場合は「確認中」を使う。 */
+export type BillVoteResult =
+  | "原案可決"
+  | "修正可決"
+  | "否決"
+  | "承認"
+  | "認定"
+  | "同意"
+  | "採択"
+  | "不採択"
+  | "継続審査"
+  | "撤回"
+  | "その他"
+  | "確認中";
+
+/** 議案ごとの賛否データベースにおける、議員1人分の賛否記録。 */
+export interface BillVoteMemberEntry {
+  memberId: string;
+  memberName: string;
+  faction: string;
+  vote: BillMemberVoteStatus;
+}
+
+/**
+ * 議案ごとの賛否データベース1件分のデータ（第1段階：構造のみ）。
+ * 架空の議案・議員・賛否結果は登録しないこと（未確認の場合は billVotes.json を空配列のままにする）。
+ */
+export interface BillVoteItem {
+  id: string;
+  fiscalYear: string;
+  session: string;
+  billNumber: string;
+  billTitle: string;
+  summary: string;
+  submittedDate?: string;
+  votingDate?: string;
+  committee?: string;
+  proposer?: string;
+  result: BillVoteResult;
+  memberVotes: BillVoteMemberEntry[];
+}
+
 /** 財政ダッシュボード全体のデータ（年度単位）。 */
 export interface FinanceDashboardData {
   /** 例: "2026"。将来の年度切替用のキー。 */
