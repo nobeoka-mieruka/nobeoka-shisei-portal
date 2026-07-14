@@ -155,7 +155,7 @@ export function BillVotesPage() {
                         )}
                       </div>
                       <Link
-                        to={`/bills/${bill.id}`}
+                        to={`/bills/votes/${bill.id}`}
                         className="shrink-0 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                       >
                         詳細を見る

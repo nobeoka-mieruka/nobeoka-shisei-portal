@@ -1,7 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import generalQuestionsData from "../data/generalQuestions.json";
-import type { CouncilMember, GeneralQuestionItem } from "../types";
+import billVotesData from "../data/billVotes.json";
+import type { CouncilMember, GeneralQuestionItem, BillVoteItem } from "../types";
 import { getFaction } from "../lib/factions";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -13,12 +14,14 @@ import { VotingRecordsSection } from "../components/VotingRecordsSection";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { BillVoteBadge } from "../components/bills/BillVoteBadge";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
+const billVotes = billVotesData as BillVoteItem[];
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -50,6 +53,11 @@ export function MemberDetailPage() {
     .sort((a, b) => b.questionDate.localeCompare(a.questionDate));
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
+
+  const memberBillVotes = billVotes
+    .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
+    .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""))
+    .slice(0, 5);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -168,6 +176,27 @@ export function MemberDetailPage() {
       </SectionCard>
 
       <VotingRecordsSection votes={member.votes} />
+
+      {memberBillVotes.length > 0 && (
+        <SectionCard title="議案の賛否">
+          <ul className="space-y-2">
+            {memberBillVotes.map((bill) => {
+              const vote = bill.memberVotes.find((v) => v.memberId === member.id)!;
+              return (
+                <li key={bill.id} className="flex items-center justify-between gap-3 rounded-lg border border-outline-variant p-3">
+                  <Link
+                    to={`/bills/votes/${bill.id}`}
+                    className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                  >
+                    {bill.billTitle}
+                  </Link>
+                  <BillVoteBadge vote={vote.vote} />
+                </li>
+              );
+            })}
+          </ul>
+        </SectionCard>
+      )}
 
       {member.reports.length > 0 && (
         <SectionCard title={`活動レポート（${member.reports.length}件）`}>

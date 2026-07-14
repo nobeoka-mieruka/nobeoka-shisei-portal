@@ -8,7 +8,7 @@ const itemClass = ({ isActive }: { isActive: boolean }) =>
 
 export function BottomNav() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-outline-variant bg-surface-container-low pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-outline-variant bg-surface-container-low pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 md:hidden print:hidden">
       <div className="mx-auto flex max-w-md items-stretch gap-2 px-4">
         <NavLink to="/" end className={itemClass}>
           {({ isActive }) => (

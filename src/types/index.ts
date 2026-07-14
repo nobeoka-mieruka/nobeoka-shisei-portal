@@ -707,6 +707,13 @@ export interface BillVoteMemberEntry {
   vote: BillMemberVoteStatus;
 }
 
+/** 議案の根拠資料1件分（根拠資料の固定URL項目でカバーできないものを列挙するための任意項目）。 */
+export interface BillRelatedDocument {
+  title: string;
+  url: string;
+  sourceType?: string;
+}
+
 /**
  * 議案ごとの賛否データベース1件分のデータ（第1段階：構造のみ）。
  * 架空の議案・議員・賛否結果は登録しないこと（未確認の場合は billVotes.json を空配列のままにする）。
@@ -724,6 +731,34 @@ export interface BillVoteItem {
   proposer?: string;
   result: BillVoteResult;
   memberVotes: BillVoteMemberEntry[];
+
+  // 議案の概要（詳細ページ用の任意項目。データがない項目は表示しない）
+  /** 提出理由。 */
+  reason?: string;
+  /** 主な変更内容の箇条書き。 */
+  mainChanges?: string[];
+  /** 市民生活への影響。 */
+  citizenImpact?: string;
+  /** 関連する予算の概要。 */
+  relatedBudgetSummary?: string;
+  topics?: string[];
+
+  /** ISO形式。サイト運営者がこの議案データをいつ確認したか。 */
+  lastVerified?: string;
+
+  // 根拠資料（存在するものだけ画面に表示する）
+  billDocumentUrl?: string;
+  resultDocumentUrl?: string;
+  transcriptUrl?: string;
+  committeeDocumentUrl?: string;
+  budgetDocumentUrl?: string;
+  relatedDocumentUrls?: BillRelatedDocument[];
+
+  // 関連情報（将来連携用の任意項目。今回は架空の関連付けを行わない）
+  relatedQuestionIds?: string[];
+  relatedCommitteeActivityIds?: string[];
+  relatedMayorPromiseIds?: string[];
+  relatedFinanceItems?: string[];
 }
 
 /** 財政ダッシュボード全体のデータ（年度単位）。 */

@@ -44,7 +44,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/bills" element={<BillsPage />} />
             <Route path="/bills/votes" element={<BillVotesPage />} />
-            <Route path="/bills/:id" element={<BillVoteDetailPage />} />
+            <Route path="/bills/votes/:id" element={<BillVoteDetailPage />} />
             <Route path="/questions" element={<GeneralQuestionsPage />} />
             <Route path="/updates" element={<UpdatesPage />} />
             <Route path="*" element={<NotFoundPage />} />
