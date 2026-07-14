@@ -156,6 +156,20 @@ export function ChartBarIcon(props: IconProps) {
   );
 }
 
+export function YenIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path
+        d="M6 4l6 8 6-8M12 12v8M8 15h8M8 18h8"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function PlayIcon(props: IconProps) {
   return (
     <svg {...base(props)}>

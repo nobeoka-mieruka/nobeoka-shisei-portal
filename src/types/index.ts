@@ -203,6 +203,41 @@ export interface Mayor {
   sources?: SourceEntry[];
 }
 
+/** 特別職・議員報酬の比較対象となる役職。 */
+export type CompensationRole = "mayor" | "chair" | "viceChair" | "member";
+
+/**
+ * 自治体ごとの首長・議長・副議長・議員報酬（月額）の比較データ。
+ * 金額はすべて所得税等を差し引く前の月額報酬（円）。政務活動費・旅費・共済費・退職手当は含まない。
+ */
+export interface CompensationComparisonEntry {
+  municipality: string;
+  prefecture: string;
+  /** ISO形式。報酬額の基準日。 */
+  referenceDate: string;
+  mayorMonthly: number;
+  chairMonthly: number;
+  viceChairMonthly: number;
+  memberMonthly: number;
+  /** 市長の期末手当支給月数。公式資料で確認できない場合は null。 */
+  mayorBonusMonths: number | null;
+  /** 議長・副議長・議員の期末手当支給月数。公式資料で確認できない場合は null。 */
+  councilBonusMonths: number | null;
+  /** 役職加算など、期末手当の算定基礎額に対する加算率。公式資料で確認できない場合は null（＝概算扱い）。 */
+  bonusAdjustmentRate: number | null;
+  sourceTitle: string;
+  sourceUrl: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  confirmedAt?: string;
+  notes: string;
+  /** 現行額とは別に、まだ施行されていない改定案（答申等）がある場合の補足。 */
+  pendingProposal?: {
+    description: string;
+    sourceTitle?: string;
+    sourceUrl?: string;
+  };
+}
+
 /** 議案の種別。 */
 export type BillCategory = "条例" | "予算" | "決算" | "人事" | "意見書" | "請願" | "その他";
 

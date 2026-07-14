@@ -19,6 +19,7 @@ npm run build    # 本番ビルド
 - `src/data/factions.json` … 会派一覧（id / name / color）
 - `src/data/members.json` … 議員27名分のデータ（配列）
 - `src/data/mayor.json` … 市長のデータ（単一オブジェクト）
+- `src/data/compensationComparison.json` … 市長・議長・副議長・議員の報酬比較データ（近隣市ごとの配列。`/compensation` ページで使用）
 
 型定義は `src/types/index.ts` にあります。フィールドの意味に迷ったらこちらを参照してください。
 

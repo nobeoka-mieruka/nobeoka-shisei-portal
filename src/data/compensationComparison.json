@@ -1,0 +1,71 @@
+[
+  {
+    "municipality": "延岡市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "mayorMonthly": 955000,
+    "chairMonthly": 516000,
+    "viceChairMonthly": 471000,
+    "memberMonthly": 435000,
+    "mayorBonusMonths": 3.45,
+    "councilBonusMonths": 3.45,
+    "bonusAdjustmentRate": null,
+    "sourceTitle": "延岡市公式「延岡市の人事行政の運営状況」",
+    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html",
+    "confirmedAt": "2026-07-14",
+    "notes": "期末手当は市長・議長・副議長・議員とも支給月数3.45か月分として公表されている。役職加算の有無が公式資料で確認できないため、年間支給見込額は概算として扱う。"
+  },
+  {
+    "municipality": "宮崎市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "mayorMonthly": 1053000,
+    "chairMonthly": 696000,
+    "viceChairMonthly": 625000,
+    "memberMonthly": 583000,
+    "mayorBonusMonths": 3.35,
+    "councilBonusMonths": 3.45,
+    "bonusAdjustmentRate": null,
+    "sourceTitle": "宮崎市公式「人事行政の運営等の状況の概要」",
+    "sourceUrl": "https://www.city.miyazaki.miyazaki.jp/city/management/administration/2144.html",
+    "confirmedAt": "2026-07-14",
+    "notes": "市長の期末手当は3.35か月分、議長・副議長・議員は3.45か月分として公表されている。役職加算の有無が公式資料で確認できないため、年間支給見込額は概算として扱う。"
+  },
+  {
+    "municipality": "都城市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "mayorMonthly": 940000,
+    "chairMonthly": 500000,
+    "viceChairMonthly": 420000,
+    "memberMonthly": 400000,
+    "mayorBonusMonths": 3.45,
+    "councilBonusMonths": 3.45,
+    "bonusAdjustmentRate": null,
+    "sourceTitle": "都城市公式「給与・定員管理などの状況」",
+    "sourceUrl": "https://www.city.miyakonojo.miyazaki.jp/soshiki/14/3844.html",
+    "confirmedAt": "2026-07-14",
+    "notes": "期末手当は市長・議長・副議長・議員とも支給月数3.45か月分として公表されている。役職加算の有無が公式資料で確認できないため、年間支給見込額は概算として扱う。"
+  },
+  {
+    "municipality": "日向市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "mayorMonthly": 865000,
+    "chairMonthly": 433000,
+    "viceChairMonthly": 379000,
+    "memberMonthly": 358000,
+    "mayorBonusMonths": null,
+    "councilBonusMonths": null,
+    "bonusAdjustmentRate": null,
+    "sourceTitle": "日向市公式「人事行政の運営等の状況の公表」",
+    "sourceUrl": "https://www.hyugacity.jp/sp/display.php?cont=211025164943",
+    "confirmedAt": "2026-07-14",
+    "notes": "期末手当の支給月数が公式資料で確認できないため、年間支給見込額は算定していない。",
+    "pendingProposal": {
+      "description": "日向市特別職報酬等審議会は議員報酬の増額（例：議員月額35万8千円→60万円）を答申しているが、これは現行額ではなく施行前の改定案である。本表の金額は答申額ではなく現行の月額報酬を使用している。",
+      "sourceTitle": "日向市議会「議員報酬に関する調査検討結果 報告書」（令和6年12月）",
+      "sourceUrl": "https://www.hyugacity.jp/shigikai/youbousyo/city/writtenReq20241224_report.pdf"
+    }
+  }
+]

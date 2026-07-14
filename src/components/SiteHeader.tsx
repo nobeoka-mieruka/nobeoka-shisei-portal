@@ -32,6 +32,9 @@ export function SiteHeader() {
           <NavLink to="/dashboard" className={navLinkClass}>
             ダッシュボード
           </NavLink>
+          <NavLink to="/compensation" className={navLinkClass}>
+            報酬
+          </NavLink>
         </nav>
       </div>
     </header>
