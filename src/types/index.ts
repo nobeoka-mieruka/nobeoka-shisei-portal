@@ -530,12 +530,58 @@ export interface FinanceGeneralAccount {
   supplementaryThousandYen: number;
 }
 
-/** まだ資料で確認できていないデータ区分（基金残高・人口推移など）。推定値は入れず、確認状況だけを持つ。 */
-export interface FinancePendingSection {
-  /** データが未確認であることを示す表示ラベル（例:「公式資料確認中」）。 */
-  unavailableLabel: string;
-  /** 将来データが揃ったときに使う項目一覧。今回は空配列。 */
-  items: FinanceAmountItem[];
+/** 財源調整用基金の年度末残高1件分（千円単位）。 */
+export interface FiscalAdjustmentFundEntry {
+  /** 例: "令和3年度末" */
+  fiscalYear: string;
+  amountThousands: number;
+  /** 決算額ではなく見込額の場合 true。 */
+  isEstimate: boolean;
+}
+
+/** ある年度末時点での基金全体の内訳（千円単位）。財源調整用基金と基金全体を混同しないためのデータ。 */
+export interface FundBalanceTotalBreakdown {
+  /** 例: "令和6年度末" */
+  fiscalYear: string;
+  fiscalAdjustmentFunds: number;
+  otherSpecificPurposeFunds: number;
+  total: number;
+}
+
+/** 基金残高データ。財源調整用基金の推移と、基金全体の内訳を区別して保持する。 */
+export interface FundBalanceData {
+  fiscalAdjustmentFunds: FiscalAdjustmentFundEntry[];
+  totalFunds: FundBalanceTotalBreakdown;
+  /** 「財源調整用基金」の定義を説明する注記。 */
+  definitionNote: string;
+}
+
+/** 各年1月1日現在の人口1件分。 */
+export interface PopulationTrendEntry {
+  /** 例: "令和2年" */
+  year: string;
+  /** ISO形式。 */
+  referenceDate: string;
+  population: number;
+}
+
+/** 直近の人口実数値（年次推移の系列とは基準日が異なるため別カードで扱う）。 */
+export interface PopulationLatestValue {
+  /** ISO形式。 */
+  referenceDate: string;
+  population: number;
+}
+
+/** 人口推移データ。 */
+export interface PopulationTrendData {
+  trend: PopulationTrendEntry[];
+  latest: PopulationLatestValue;
+  /** 令和2年から最新年までの減少数（人）。 */
+  decreaseCount: number;
+  /** 減少率（％）。 */
+  decreaseRatePercent: number;
+  /** 「現住人口」と「住民基本台帳人口」の違いについての注記。 */
+  note: string;
 }
 
 /** 財政ダッシュボードの1セクション分の出典情報。 */
@@ -568,8 +614,8 @@ export interface FinanceDashboardData {
   expenditureByPurpose: FinanceAmountItem[];
   expenditureByNature: FinanceAmountItem[];
   supplementaryBudgetProjects: FinanceProjectItem[];
-  fundBalance: FinancePendingSection;
-  populationTrend: FinancePendingSection;
+  fundBalance: FundBalanceData;
+  populationTrend: PopulationTrendData;
   /** 市債（歳入項目）についての注記。市債残高ではないことを明記する。 */
   debtNote: string;
   sources: FinanceSourceMeta[];

@@ -60,12 +60,35 @@
     { "title": "南延岡駅バリアフリー化整備促進事業", "amountThousandYen": 340 }
   ],
   "fundBalance": {
-    "unavailableLabel": "公式資料確認中",
-    "items": []
+    "fiscalAdjustmentFunds": [
+      { "fiscalYear": "令和3年度末", "amountThousands": 13447525, "isEstimate": false },
+      { "fiscalYear": "令和4年度末", "amountThousands": 13143179, "isEstimate": false },
+      { "fiscalYear": "令和5年度末", "amountThousands": 12262706, "isEstimate": false },
+      { "fiscalYear": "令和6年度末", "amountThousands": 10508279, "isEstimate": false },
+      { "fiscalYear": "令和7年度末見込", "amountThousands": 7319234, "isEstimate": true }
+    ],
+    "totalFunds": {
+      "fiscalYear": "令和6年度末",
+      "fiscalAdjustmentFunds": 10508279,
+      "otherSpecificPurposeFunds": 10446448,
+      "total": 20954727
+    },
+    "definitionNote": "財源調整用基金は、財政調整積立基金、地域づくり推進事業基金、退職手当基金、減債基金の合計です。令和7年度末は決算額ではなく見込額です。"
   },
   "populationTrend": {
-    "unavailableLabel": "公式データ確認中",
-    "items": []
+    "trend": [
+      { "year": "令和2年", "referenceDate": "2020-01-01", "population": 119164 },
+      { "year": "令和3年", "referenceDate": "2021-01-01", "population": 118138 },
+      { "year": "令和4年", "referenceDate": "2022-01-01", "population": 116566 },
+      { "year": "令和5年", "referenceDate": "2023-01-01", "population": 114777 },
+      { "year": "令和6年", "referenceDate": "2024-01-01", "population": 113061 },
+      { "year": "令和7年", "referenceDate": "2025-01-01", "population": 111150 },
+      { "year": "令和8年", "referenceDate": "2026-01-01", "population": 109266 }
+    ],
+    "latest": { "referenceDate": "2026-07-01", "population": 108044 },
+    "decreaseCount": 9898,
+    "decreaseRatePercent": 8.3,
+    "note": "各年1月1日現在の現住人口を比較しています。現住人口は住民基本台帳人口と異なる場合があります。"
   },
   "debtNote": "ここで表示する市債は、令和8年度予算に計上された市債額です。市債残高ではありません。",
   "sources": [
@@ -122,6 +145,33 @@
       "confirmedDate": "2026-07-14",
       "url": "/documents/mayor-policy/r8_policy_budget.pdf",
       "page": 15
+    },
+    {
+      "section": "fundBalanceTrend",
+      "title": "延岡市「令和8年度当初予算編成方針」（本市の財政状況について）",
+      "organization": "延岡市",
+      "referenceDate": "2026-03-31",
+      "confirmedDate": "2026-07-14",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+      "page": 2
+    },
+    {
+      "section": "fundBalanceTotal",
+      "title": "延岡市「令和6年度 延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」",
+      "organization": "延岡市監査委員",
+      "referenceDate": "2025-03-31",
+      "confirmedDate": "2026-07-14",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+      "page": 10
+    },
+    {
+      "section": "population",
+      "title": "延岡市「現住人口及び世帯数の推移」（令和8年7月1日現在）",
+      "organization": "延岡市",
+      "referenceDate": "2026-07-01",
+      "confirmedDate": "2026-07-14",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+      "page": 1
     }
   ],
   "notes": "表示額は延岡市が公表した予算資料を基に整理しています。億円表示は千円単位の数値を換算しているため、端数処理により資料上の数値と一致しない場合があります。市債額は当該年度の予算計上額であり、市債残高ではありません。"

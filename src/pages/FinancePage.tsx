@@ -3,6 +3,7 @@ import type { FinanceDashboardData, FinanceSourceMeta } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { FinanceBarList } from "../components/finance/FinanceBarList";
+import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
@@ -125,20 +126,64 @@ export function FinancePage() {
         <SectionSource section="supplementaryBudgetProjects" />
       </SectionCard>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <SectionCard title="基金残高">
-          <p className="text-sm text-on-surface-variant">{data.fundBalance.unavailableLabel}</p>
-          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-            今回使用した2資料だけでは正確な基金残高を確認できないため、推定値は掲載していません。
-          </p>
-        </SectionCard>
-        <SectionCard title="人口推移">
-          <p className="text-sm text-on-surface-variant">{data.populationTrend.unavailableLabel}</p>
-          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-            今回使用した2資料だけでは正確な人口推移を確認できないため、推定値は掲載していません。
-          </p>
-        </SectionCard>
-      </div>
+      <SectionCard title="財源調整用基金の推移">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          縦軸：億円／横軸：年度末。令和7年度は決算額ではなく見込額のため「令和7年度末見込」と表示し、他の年度と区別しています。
+        </p>
+        <FinanceLineChart
+          points={data.fundBalance.fiscalAdjustmentFunds.map((f) => ({
+            label: f.fiscalYear,
+            value: f.amountThousands,
+            isEstimate: f.isEstimate,
+          }))}
+          formatValue={formatOku}
+        />
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{data.fundBalance.definitionNote}</p>
+        <SectionSource section="fundBalanceTrend" />
+      </SectionCard>
+
+      <SectionCard title={`基金全体の内訳（${data.fundBalance.totalFunds.fiscalYear}）`}>
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          「基金全体」は財源調整用基金とその他特定目的基金の合計です。上記の財源調整用基金の推移とは対象が異なるため、混同しないようご注意ください。
+        </p>
+        <FinanceBarList
+          items={[
+            { label: "財源調整用基金", amountThousandYen: data.fundBalance.totalFunds.fiscalAdjustmentFunds },
+            { label: "その他特定目的基金", amountThousandYen: data.fundBalance.totalFunds.otherSpecificPurposeFunds },
+          ]}
+        />
+        <StatCard
+          label="基金全体"
+          value={formatThousandYen(data.fundBalance.totalFunds.total)}
+          hint={formatOku(data.fundBalance.totalFunds.total)}
+          compact
+        />
+        <SectionSource section="fundBalanceTotal" />
+      </SectionCard>
+
+      <SectionCard title="延岡市の人口推移">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          縦軸：人口／横軸：各年1月1日。{data.populationTrend.note}
+        </p>
+        <FinanceLineChart
+          points={data.populationTrend.trend.map((p) => ({ label: p.year, value: p.population }))}
+          formatValue={(v) => `${v.toLocaleString("ja-JP")}人`}
+        />
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <StatCard
+            label={`最新値（${formatJapaneseDate(data.populationTrend.latest.referenceDate)}現在）`}
+            value={`${data.populationTrend.latest.population.toLocaleString("ja-JP")}人`}
+            compact
+          />
+          <StatCard
+            label="令和2年からの減少数"
+            value={`${data.populationTrend.decreaseCount.toLocaleString("ja-JP")}人`}
+            compact
+          />
+          <StatCard label="減少率" value={`約${data.populationTrend.decreaseRatePercent}％`} compact />
+        </div>
+        <SectionSource section="population" />
+      </SectionCard>
 
       <SectionCard title="市債について">
         <p className="text-sm font-semibold text-on-surface">
