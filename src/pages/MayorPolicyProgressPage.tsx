@@ -20,7 +20,10 @@ const linkClass =
 const STATUS_ORDER: MayorPromiseStatusLabel[] = ["進行中", "検討中", "実施済み", "確認中"];
 
 export function MayorPolicyProgressPage() {
-  usePageTitle("市長公約の進捗状況");
+  usePageTitle({
+    title: "市長公約の進捗状況",
+    description: "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料を掲載しています。",
+  });
 
   const statusCounts = useMemo(() => {
     const counts: Record<MayorPromiseStatusLabel, number> = { 進行中: 0, 検討中: 0, 実施済み: 0, 確認中: 0 };

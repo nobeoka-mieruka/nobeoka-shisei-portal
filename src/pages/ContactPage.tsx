@@ -6,7 +6,10 @@ import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function ContactPage() {
-  usePageTitle("情報提供・訂正依頼");
+  usePageTitle({
+    title: "情報提供・訂正依頼",
+    description: "掲載内容の誤りのご指摘や、新しい公開資料の情報提供を受け付ける窓口です。",
+  });
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

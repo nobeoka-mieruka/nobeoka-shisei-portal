@@ -35,7 +35,10 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 export function EditorialPolicyPage() {
-  usePageTitle("編集方針");
+  usePageTitle({
+    title: "編集方針・情報源",
+    description: "延岡市政見える化ポータルの編集方針、情報源、掲載しない情報の範囲について説明しています。",
+  });
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

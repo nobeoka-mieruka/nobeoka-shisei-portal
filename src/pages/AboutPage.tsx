@@ -4,7 +4,10 @@ import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AboutPage() {
-  usePageTitle("このサイトについて");
+  usePageTitle({
+    title: "このサイトについて",
+    description: "延岡市政見える化ポータルの目的、運営方針、主な情報源について説明しています。",
+  });
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

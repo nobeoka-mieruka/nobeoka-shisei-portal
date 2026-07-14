@@ -19,7 +19,7 @@ export function SiteHeader() {
             延岡市政見える化ポータル
           </NavLink>
           <span className="shrink-0 rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant">
-            β版
+            非公式
           </span>
         </div>
         <nav className="hidden shrink-0 items-center gap-1 md:flex">

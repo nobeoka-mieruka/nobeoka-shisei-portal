@@ -8,7 +8,11 @@ import { usePageTitle } from "../hooks/usePageTitle";
 const bills = billsData as Bill[];
 
 export function BillsPage() {
-  usePageTitle("議案・採決結果");
+  usePageTitle({
+    title: "議案・採決結果",
+    description: "延岡市議会に提出された議案と採決結果をまとめる予定のページです。",
+    noindex: true,
+  });
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

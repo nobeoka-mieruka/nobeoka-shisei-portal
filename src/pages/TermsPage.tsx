@@ -39,7 +39,10 @@ const sections: { id?: string; title: string; body: string }[] = [
 ];
 
 export function TermsPage() {
-  usePageTitle("利用規約・免責事項");
+  usePageTitle({
+    title: "利用規約・免責事項",
+    description: "延岡市政見える化ポータルの利用規約、免責事項、プライバシーに関する案内を掲載しています。",
+  });
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

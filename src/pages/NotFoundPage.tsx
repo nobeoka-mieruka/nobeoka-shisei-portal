@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function NotFoundPage() {
-  usePageTitle("ページが見つかりません");
+  usePageTitle({ title: "ページが見つかりません", noindex: true });
 
   return (
     <div className="px-4 py-10 text-center sm:px-6">

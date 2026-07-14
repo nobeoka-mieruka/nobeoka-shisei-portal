@@ -11,6 +11,7 @@ import { BarList, type BarListItem } from "../components/dashboard/BarList";
 import { ProgressStat } from "../components/dashboard/ProgressStat";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { LastUpdated } from "../components/LastUpdated";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ChartBarIcon } from "../components/icons";
 
@@ -36,7 +37,10 @@ function normalizeCommitteeName(committee: string): string {
 }
 
 export function DashboardPage() {
-  usePageTitle("ダッシュボード");
+  usePageTitle({
+    title: "市政データダッシュボード",
+    description: "延岡市議会議員、議案、市長公約などの登録件数や構成を、データから自動集計して確認できます。",
+  });
   const total = members.length;
   const vacancySeats = Math.max(COUNCIL_STATUTORY_SEATS - total, 0);
 
@@ -179,6 +183,7 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "ダッシュボード" }]} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">ダッシュボード</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">現員{total}名の構成をひと目で確認できます。</p>

@@ -60,7 +60,12 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
 ];
 
 export function HomePage() {
-  usePageTitle();
+  usePageTitle({
+    title: "市長・市議会・議案を分かりやすく",
+    description:
+      "延岡市長、市議会議員、議案、採決結果、一般質問、報酬などの公開情報を、市民向けに分かりやすく整理した非公式データベースです。",
+    path: "/",
+  });
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [factionId, setFactionId] = useState<string | "all">(searchParams.get("faction") ?? "all");
@@ -135,7 +140,7 @@ export function HomePage() {
           延岡市政を、もっと分かりやすく
         </h1>
         <p className="mt-2 text-base leading-relaxed text-on-primary-container/80">
-          市長・市議会・議案・財政などの公開情報を、市民向けに分かりやすく整理しています。
+          延岡市政見える化ポータルでは、宮崎県延岡市の市長、市議会議員、議案、採決結果、一般質問、報酬などの公開情報を、市民がスマートフォンから確認しやすい形に整理しています。
         </p>
       </div>
 

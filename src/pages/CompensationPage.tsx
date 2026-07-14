@@ -16,6 +16,7 @@ import { StatCard } from "../components/StatCard";
 import { SourceLink } from "../components/SourceLink";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CompensationBarChart } from "../components/compensation/CompensationBarChart";
 import { MiyazakiComparisonTable } from "../components/compensation/MiyazakiComparisonTable";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -30,7 +31,10 @@ const similarMunicipality = similarMunicipalityData as SimilarMunicipalityCompar
 const NOBEOKA = "延岡市";
 
 export function CompensationPage() {
-  usePageTitle("市長・市議会議員の報酬");
+  usePageTitle({
+    title: "市長・市議会議員の報酬",
+    description: "延岡市長、議長、副議長、市議会議員の月額報酬、期末手当、年間見込額、算出根拠を掲載しています。",
+  });
 
   const nobeoka = comparison.find((c) => c.municipality === NOBEOKA);
 
@@ -47,6 +51,7 @@ export function CompensationPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "報酬" }]} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市長・市議会議員の報酬</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">

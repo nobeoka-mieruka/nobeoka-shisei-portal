@@ -5,6 +5,7 @@ import { StatCard } from "../components/StatCard";
 import { FinanceBarList } from "../components/finance/FinanceBarList";
 import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "../components/icons";
@@ -51,10 +52,14 @@ function SectionSource({ section }: { section: string }) {
 }
 
 export function FinancePage() {
-  usePageTitle("延岡市の財政");
+  usePageTitle({
+    title: "延岡市の財政",
+    description: `${data.fiscalYearLabel}の一般会計の歳入・歳出構成、基金残高、人口推移を公開資料に基づいて整理しています。`,
+  });
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "延岡市の財政" }]} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">延岡市の財政</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">

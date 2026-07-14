@@ -6,6 +6,7 @@ import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge, billVoteLabels } from "../components/bills/BillVoteBadge";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "../components/icons";
@@ -42,7 +43,14 @@ export function BillVoteDetailPage() {
   const bill = billVotes.find((b) => b.id === id);
   const [copied, setCopied] = useState(false);
 
-  usePageTitle(bill ? `${bill.billNumber} ${bill.billTitle}` : "議案情報");
+  usePageTitle(
+    bill
+      ? {
+          title: `${bill.billNumber}「${bill.billTitle}」｜採決結果・議員別賛否`,
+          description: `${bill.billNumber}「${bill.billTitle}」の概要、議決結果（${bill.result}）、議員別の賛否を掲載しています。`,
+        }
+      : { title: "議案情報", noindex: true },
+  );
 
   if (!bill) {
     return (
@@ -81,6 +89,13 @@ export function BillVoteDetailPage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6 print:space-y-3 print:px-0 print:py-0">
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", to: "/" },
+          { label: "議案一覧", to: "/bills/votes" },
+          { label: bill.billNumber },
+        ]}
+      />
       <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
         <BackLink to="/bills/votes" label="議案・賛否一覧に戻る" />
         <div className="flex items-center gap-2">

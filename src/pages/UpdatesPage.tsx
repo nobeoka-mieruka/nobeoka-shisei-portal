@@ -16,7 +16,10 @@ const categoryClass: Record<UpdateHistoryCategory, string> = {
 };
 
 export function UpdatesPage() {
-  usePageTitle("更新履歴");
+  usePageTitle({
+    title: "更新履歴",
+    description: "延岡市政見える化ポータルの機能追加、データ更新、表示改善などの更新履歴を掲載しています。",
+  });
 
   const sorted = useMemo(
     () => [...history].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)),

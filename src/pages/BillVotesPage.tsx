@@ -6,6 +6,7 @@ import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 
@@ -31,7 +32,10 @@ function safeFormatDate(iso?: string): string {
 }
 
 export function BillVotesPage() {
-  usePageTitle("議案ごとの賛否");
+  usePageTitle({
+    title: "議案ごとの賛否",
+    description: "延岡市議会に提出された議案の概要、採決結果、議員ごとの賛成・反対などを確認できます。",
+  });
 
   const [query, setQuery] = useState("");
   const [fiscalYear, setFiscalYear] = useState("all");
@@ -89,7 +93,8 @@ export function BillVotesPage() {
 
   return (
     <div className="px-4 py-4 sm:px-6">
-      <div className="mb-5 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "議案ごとの賛否" }]} />
+      <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">議案ごとの賛否</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           延岡市議会で審議された議案について、公開資料で確認できる議員ごとの賛否を整理する予定のページです。賛否の人数のみで議員活動を評価するものではありません。

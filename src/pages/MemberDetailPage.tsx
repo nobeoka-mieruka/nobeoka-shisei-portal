@@ -16,9 +16,11 @@ import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
+import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { formatJapaneseDate } from "../config/site";
+import { formatJapaneseDate, SITE_URL } from "../config/site";
 
 const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -33,7 +35,34 @@ export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
   const member = members.find((m) => m.id === id);
 
-  usePageTitle(member ? member.name : "議員情報");
+  const memberQuestions = member
+    ? generalQuestions
+        .filter((q) => q.memberId === member.id)
+        .sort((a, b) => b.questionDate.localeCompare(a.questionDate))
+    : [];
+  const memberBillVotes = member
+    ? billVotes
+        .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
+        .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""))
+        .slice(0, 5)
+    : [];
+
+  const titleParts = ["プロフィール"];
+  if (memberQuestions.length > 0) titleParts.push("一般質問");
+  if (memberBillVotes.length > 0) titleParts.push("議案賛否");
+
+  const descriptionParts = ["プロフィール", "所属会派", "所属委員会"];
+  if (memberQuestions.length > 0) descriptionParts.push("一般質問");
+  if (memberBillVotes.length > 0) descriptionParts.push("議案別の賛否");
+
+  usePageTitle(
+    member
+      ? {
+          title: `${member.name}議員｜${titleParts.join("・")}`,
+          description: `延岡市議会議員${member.name}氏の${descriptionParts.join("、")}などを掲載しています。`,
+        }
+      : { title: "議員情報", noindex: true },
+  );
 
   if (!member) {
     return (
@@ -48,21 +77,29 @@ export function MemberDetailPage() {
 
   const faction = getFaction(member.factionId);
   const isProfileConfirmed = member.profile !== PLACEHOLDER_PROFILE;
-
-  const memberQuestions = generalQuestions
-    .filter((q) => q.memberId === member.id)
-    .sort((a, b) => b.questionDate.localeCompare(a.questionDate));
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
 
-  const memberBillVotes = billVotes
-    .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
-    .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""))
-    .slice(0, 5);
+  const verifiedSns = member.sns.filter((s) => s.verificationStatus === "verified").map((s) => s.url);
+  const sameAs = [...(member.profileUrl ? [member.profileUrl] : []), ...verifiedSns];
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
+      <JsonLd
+        id="person-jsonld"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: member.name,
+          url: `${SITE_URL}/members/${member.id}`,
+          ...(sameAs.length > 0 ? { sameAs } : {}),
+          memberOf: { "@type": "Organization", name: "延岡市議会" },
+        }}
+      />
       <BackLink to="/" label="議員一覧に戻る" />
+      <Breadcrumbs
+        items={[{ label: "ホーム", to: "/" }, { label: "議員一覧", to: "/" }, { label: member.name }]}
+      />
 
       <section className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">

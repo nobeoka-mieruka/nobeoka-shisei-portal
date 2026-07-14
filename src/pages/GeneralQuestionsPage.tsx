@@ -8,6 +8,7 @@ import { FilterSelect } from "../components/FilterSelect";
 import { StatCard } from "../components/StatCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { GeneralQuestionCard } from "../components/questions/GeneralQuestionCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
@@ -50,7 +51,10 @@ const PRIMARY_SOURCES = [
 ];
 
 export function GeneralQuestionsPage() {
-  usePageTitle("一般質問データベース");
+  usePageTitle({
+    title: "一般質問データベース",
+    description: "延岡市議会の一般質問を議員別、テーマ別、年度別に検索できます。質問項目・要約・出典を掲載しています。",
+  });
   const [searchParams] = useSearchParams();
 
   const [query, setQuery] = useState("");
@@ -148,7 +152,8 @@ export function GeneralQuestionsPage() {
 
   return (
     <div className="px-4 py-4 sm:px-6">
-      <div className="mb-5 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "一般質問データベース" }]} />
+      <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">一般質問データベース</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           延岡市議会の一般質問・代表質問を、議員別、テーマ別、年度別に整理しています。質問回数や質問項目数のみで議員活動を評価するものではありません。

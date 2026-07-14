@@ -26,7 +26,10 @@ type MonthRow =
   | { month: string; status: "unconfirmed"; amount: null; count: null; items: [] };
 
 export function MayorEntertainmentExpensesPage() {
-  usePageTitle("市長交際費");
+  usePageTitle({
+    title: "市長交際費",
+    description: `${data.fiscalYearLabel}の市長交際費について、公式資料に基づく支出明細と月別・区分別の合計を掲載しています。`,
+  });
 
   const total = useMemo(() => data.expenses.reduce((sum, e) => sum + e.amount, 0), []);
   const count = data.expenses.length;

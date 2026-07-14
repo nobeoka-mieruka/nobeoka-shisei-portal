@@ -9,12 +9,9 @@ export function Footer() {
   return (
     <footer className="mt-8 border-t border-outline-variant px-4 py-6 sm:px-6 print:hidden">
       <div className="mx-auto max-w-5xl space-y-2 text-center sm:text-left">
-        <p className="text-xs font-medium text-on-surface-variant">β版・試験公開中</p>
+        <p className="text-xs font-medium text-on-surface-variant">公開運用中｜データ随時更新</p>
         <p className="text-sm text-on-surface-variant">
-          本サイトは、延岡市・延岡市議会が運営する公式サイトではありません。
-        </p>
-        <p className="text-xs text-on-surface-variant">
-          このβ版URLの無断転載・不特定多数への拡散はご遠慮ください。
+          延岡市・延岡市議会の公式サイトではありません。
         </p>
         <DataNotice className="pt-1" />
         <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-1 text-sm sm:justify-start">

@@ -5,8 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/generate-site-update.mjs && vite",
-    "build": "node scripts/generate-site-update.mjs && tsc -b && vite build",
+    "validate:data": "node scripts/validate-data.mjs",
+    "generate:site-update": "node scripts/generate-site-update.mjs",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "typecheck": "tsc -b",
+    "build": "node scripts/generate-site-update.mjs && node scripts/validate-data.mjs && node scripts/generate-sitemap.mjs && tsc -b && vite build",
     "lint": "oxlint",
+    "check": "npm run validate:data && npm run typecheck && npm run lint && npm run build",
+    "release:check": "npm run build && node scripts/release-check.mjs",
     "preview": "vite preview",
     "deploy": "wrangler deploy"
   },
