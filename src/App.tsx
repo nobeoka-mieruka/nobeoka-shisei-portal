@@ -1,4 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { initGoogleAnalytics, trackPageView } from "./lib/analytics";
 import { SiteHeader } from "./components/SiteHeader";
 import { BottomNav } from "./components/BottomNav";
 import { Footer } from "./components/Footer";
@@ -23,6 +25,16 @@ import { UpdatesPage } from "./pages/UpdatesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    initGoogleAnalytics();
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
   return (
     <div className="flex min-h-svh flex-col overflow-x-hidden bg-surface">
       <SiteHeader />
