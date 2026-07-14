@@ -345,6 +345,61 @@ export interface MayorPolicyProgressData {
   policies: MayorPolicyProgressItem[];
 }
 
+/**
+ * 個別公約の状況区分。サイト独自の採点・達成率ではなく、公表資料から確認できた事実の区分。
+ * 「達成」「未達成」のような断定は使わない。
+ */
+export type MayorPromiseStatusLabel = "進行中" | "検討中" | "実施済み" | "確認中";
+
+/** 根拠資料1件分（共有ドキュメント）。市長本人の公表資料か延岡市公式資料かを sourceType で区別する。 */
+export interface MayorPromiseDocument {
+  key: string;
+  label: string;
+  url: string;
+  sourceType: string;
+}
+
+/** 個別公約が属する政策カテゴリ（4つの政策）。 */
+export interface MayorPromiseCategory {
+  id: string;
+  title: string;
+}
+
+/** 個別公約1件分のデータ。 */
+export interface MayorPromiseItem {
+  id: string;
+  categoryId: string;
+  categoryTitle: string;
+  /** 公約の原文。要約・言い換えをせずそのまま保持する。 */
+  promiseText: string;
+  /** 内部区分キー（英字）。 */
+  status: string;
+  /** 画面表示用の日本語ラベル。 */
+  statusLabel: MayorPromiseStatusLabel;
+  /** 「現在確認できた取組」の箇条書き。事実の列挙であり、サイト独自の評価コメントは含めない。 */
+  progressSummary: string[];
+  /** この公約に関連する根拠資料（MayorPromiseDocument の key の配列）。 */
+  evidenceItems: string[];
+  /** 情報の出所区分（例：延岡市公式資料／市長本人の公表資料）。区別のためのタグ。 */
+  sources: string[];
+  /** ISO形式。この公約データの基準日。 */
+  referenceDate: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+  notes: string;
+}
+
+/** 市長公約の進捗状況ページ（個別公約12項目）全体のデータ。 */
+export interface MayorPromisesData {
+  /** ISO形式。データ全体の基準日。 */
+  referenceDate: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+  documents: MayorPromiseDocument[];
+  categories: MayorPromiseCategory[];
+  promises: MayorPromiseItem[];
+}
+
 /** 議案の種別。 */
 export type BillCategory = "条例" | "予算" | "決算" | "人事" | "意見書" | "請願" | "その他";
 

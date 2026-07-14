@@ -1,0 +1,259 @@
+{
+  "referenceDate": "2026-07-14",
+  "lastVerified": "2026-07-14",
+  "documents": [
+    {
+      "key": "policy_budget",
+      "label": "令和8年度 施政方針・予算説明",
+      "url": "/documents/mayor-policy/r8_policy_budget.pdf",
+      "sourceType": "延岡市公式資料（予算資料）"
+    },
+    {
+      "key": "june_supplementary",
+      "label": "令和8年度 6月補正予算の概要",
+      "url": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+      "sourceType": "延岡市公式資料（予算資料）"
+    },
+    {
+      "key": "official_site",
+      "label": "三浦久知公式サイト",
+      "url": "https://hisatomo-m.jp/",
+      "sourceType": "市長本人の進捗公表"
+    }
+  ],
+  "categories": [
+    { "id": "p1", "title": "全ての子どもたちの可能性を伸ばします" },
+    { "id": "p2", "title": "地域経済を活性化させます" },
+    { "id": "p3", "title": "シニア世代が輝き、安心して暮らせるまちにします" },
+    { "id": "p4", "title": "市役所をもっと前向きな組織にします" }
+  ],
+  "promises": [
+    {
+      "id": "1-1",
+      "categoryId": "p1",
+      "categoryTitle": "全ての子どもたちの可能性を伸ばします",
+      "promiseText": "家庭環境に関わらず、すべての子どもが延岡の自然体験に参加できる仕組みを整えます。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "こども未来創造機構による自然体験の充実",
+        "はらはらわくわくふるさと体験事業の拡充",
+        "地域への愛着と誇りを育むふるさと教育の推進",
+        "新たな自然体験事業の検討"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "1-2",
+      "categoryId": "p1",
+      "categoryTitle": "全ての子どもたちの可能性を伸ばします",
+      "promiseText": "子どもひとりひとりの理解度に合わせた学びを実現します。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "AI型学習教材Qubenaの活用検討",
+        "ICT、AI、習熟度別指導の推進",
+        "学力向上指導員の配置",
+        "NOBEOKAスクール・イノベーション事業",
+        "学校教育上の課題解決プロジェクトチーム"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "1-3",
+      "categoryId": "p1",
+      "categoryTitle": "全ての子どもたちの可能性を伸ばします",
+      "promiseText": "市役所に「こども未来部」を設置し子育て支援を強化します。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "こども未来部設置準備室の設置",
+        "令和9年度のこども未来部設置に向けた具体的検討"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "2-1",
+      "categoryId": "p2",
+      "categoryTitle": "地域経済を活性化させます",
+      "promiseText": "地域商社を設立し、延岡の優れた農林水産物の販売強化を行います。",
+      "status": "considering",
+      "statusLabel": "検討中",
+      "progressSummary": [
+        "庁内ワーキンググループでの協議",
+        "生産者、事業者へのヒアリング",
+        "包括連携協定を締結している企業との方向性整理",
+        "地域商社に必要な役割、機能の検討"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "2-2",
+      "categoryId": "p2",
+      "categoryTitle": "地域経済を活性化させます",
+      "promiseText": "愛宕山の魅力をさらに高めるカフェを誘致し、市民が集う拠点づくりと観光振興を図ります。",
+      "status": "considering",
+      "statusLabel": "検討中",
+      "progressSummary": [
+        "地域活性化起業人の活用",
+        "公園の立地条件などの整理",
+        "若手職員によるワークショップ",
+        "文化芸術分野の専門家による助言",
+        "実証事業の検討"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "2-3",
+      "categoryId": "p2",
+      "categoryTitle": "地域経済を活性化させます",
+      "promiseText": "アスリートタウン延岡アリーナや西階野球場を核に、スポーツ合宿・大会の誘致を拡大します。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "アスリートタウン延岡アリーナの活用",
+        "西階公園野球場の活用",
+        "国スポ・障スポに向けた大会誘致",
+        "プロ、実業団、大学等の大会・合宿誘致",
+        "プロリーグチーム創設に向けた活動"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "3-1",
+      "categoryId": "p3",
+      "categoryTitle": "シニア世代が輝き、安心して暮らせるまちにします",
+      "promiseText": "診療所やクリニックの事業承継を支援し、地域の身近な医療を守ります。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "新規開業支援への事業承継支援の追加",
+        "医療機関事業承継支援制度の運用"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "3-2",
+      "categoryId": "p3",
+      "categoryTitle": "シニア世代が輝き、安心して暮らせるまちにします",
+      "promiseText": "津波対策と福祉避難体制を強化し、避難所環境の質を高めることで、市民の命を守ります。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "大規模災害時の相互支援体制",
+        "避難所運営マニュアルの改訂",
+        "避難所運営訓練",
+        "段ボールベッド導入",
+        "インフレーターマット導入",
+        "福祉的なケアを必要とする避難者支援の協議"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "3-3",
+      "categoryId": "p3",
+      "categoryTitle": "シニア世代が輝き、安心して暮らせるまちにします",
+      "promiseText": "豊富な経験を持つシニア世代が地域で力を発揮できる仕組みを整えます。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "シニアボランティア制度の対象拡大",
+        "健康マイレージポイントへの対応",
+        "保育園や小学校向け活動受入体制の強化",
+        "シニア向け就職相談",
+        "就職支援セミナー"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "4-1",
+      "categoryId": "p4",
+      "categoryTitle": "市役所をもっと前向きな組織にします",
+      "promiseText": "若手職員によるプロジェクトチームを発足します。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "官民連携による次世代リーダー研修プログラム",
+        "若手職員による政策課題研究"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "4-2",
+      "categoryId": "p4",
+      "categoryTitle": "市役所をもっと前向きな組織にします",
+      "promiseText": "民間人材と市職員がチームを組む仕組みをつくり、新たな政策創出を実現します。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "延岡YEGと市役所若手職員によるプロジェクト",
+        "民間企業人と市職員による官民共同チーム",
+        "地域課題を題材にした施策立案・研究"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    },
+    {
+      "id": "4-3",
+      "categoryId": "p4",
+      "categoryTitle": "市役所をもっと前向きな組織にします",
+      "promiseText": "市民が身近な場所で気軽に悩みを相談できる体制を整えます。",
+      "status": "in_progress",
+      "statusLabel": "進行中",
+      "progressSummary": [
+        "出張なんでも総合相談センター",
+        "令和8年度に10か所程度で開催予定",
+        "みんなとみうらのタウンミーティング",
+        "児童生徒との意見交換会"
+      ],
+      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "referenceDate": "2026-07-14",
+      "lastVerified": "2026-07-14",
+      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+    }
+  ]
+}
