@@ -11,6 +11,8 @@ import { BarList, type BarListItem } from "../components/dashboard/BarList";
 import { ProgressStat } from "../components/dashboard/ProgressStat";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
+import { Link } from "react-router-dom";
+import { ChartBarIcon } from "../components/icons";
 
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
@@ -180,6 +182,13 @@ export function DashboardPage() {
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">ダッシュボード</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">現員{total}名の構成をひと目で確認できます。</p>
+        <Link
+          to="/finance"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <ChartBarIcon className="h-4 w-4" />
+          延岡市の財政を見る
+        </Link>
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">

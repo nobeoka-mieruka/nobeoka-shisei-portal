@@ -487,8 +487,10 @@ export interface MayorEntertainmentExpenseItem {
   lastVerified: string;
 }
 
-/** 市長交際費ページ全体のデータ。 */
+/** 市長交際費ページ全体のデータ（年度単位）。将来、複数年度分を配列で持てるようにしている。 */
 export interface MayorEntertainmentExpensesData {
+  /** 例: "2026"（西暦の会計年度開始年）。将来の年度切替用のキー。 */
+  fiscalYear: string;
   /** 例: "令和8年度" */
   fiscalYearLabel: string;
   /** ISO形式。データ全体の基準日。 */
@@ -498,37 +500,78 @@ export interface MayorEntertainmentExpensesData {
   sourcePageTitle: string;
   sourcePageUrl: string;
   expenses: MayorEntertainmentExpenseItem[];
+  /** 公式資料で支出0円と確認できた月（YYYY-MM形式）の一覧。未公表月とは区別して「0円」と表示する。 */
+  confirmedZeroMonths: string[];
   /** まだ公式資料が公表されていない月（YYYY-MM形式）の一覧。推定値を出さず「データ確認中」と表示するために使う。 */
   unconfirmedMonths: string[];
 }
 
-/** 財政ダッシュボードの金額1件分（千円単位）。 */
+/** 財政ダッシュボードの金額1件分（千円単位）。構成比は資料に記載された値をそのまま使用する（独自算定はしない）。 */
 export interface FinanceAmountItem {
   label: string;
   amountThousandYen: number;
+  /** 構成比（％）。資料に記載がある場合のみ設定する。 */
+  percentage?: number;
 }
 
-/** 補正予算の主な内容1件分。 */
-export interface FinanceHighlightItem {
+/** 6月補正予算の主な事業1件分（千円単位）。 */
+export interface FinanceProjectItem {
   title: string;
-  description: string;
-  /** 千円。金額が明確に特定できる場合のみ設定する。 */
-  amountThousandYen?: number;
+  amountThousandYen: number;
 }
 
-/** 財政ダッシュボード全体のデータ。 */
-export interface FinanceOverviewData {
+/** 一般会計の総額系数値（千円単位）。 */
+export interface FinanceGeneralAccount {
+  /** 補正後の総額。 */
+  totalThousandYen: number;
+  /** 補正前の総額。 */
+  totalBeforeThousandYen: number;
+  /** 補正額。 */
+  supplementaryThousandYen: number;
+}
+
+/** まだ資料で確認できていないデータ区分（基金残高・人口推移など）。推定値は入れず、確認状況だけを持つ。 */
+export interface FinancePendingSection {
+  /** データが未確認であることを示す表示ラベル（例:「公式資料確認中」）。 */
+  unavailableLabel: string;
+  /** 将来データが揃ったときに使う項目一覧。今回は空配列。 */
+  items: FinanceAmountItem[];
+}
+
+/** 財政ダッシュボードの1セクション分の出典情報。 */
+export interface FinanceSourceMeta {
+  /** どのセクションに対応するか（例: "revenue"）。 */
+  section: string;
+  title: string;
+  organization: string;
+  /** ISO形式。資料の基準日。 */
+  referenceDate: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  confirmedDate: string;
+  url: string;
+  /** 該当ページ番号（PDF内）。 */
+  page?: number;
+}
+
+/** 財政ダッシュボード全体のデータ（年度単位）。 */
+export interface FinanceDashboardData {
+  /** 例: "2026"。将来の年度切替用のキー。 */
+  fiscalYear: string;
   /** 例: "令和8年度" */
   fiscalYearLabel: string;
   /** ISO形式。データの基準日。 */
   referenceDate: string;
-  generalAccountTotalThousandYen: number;
-  supplementaryAmountThousandYen: number;
-  revenueItems: FinanceAmountItem[];
-  expenditureItems: FinanceAmountItem[];
-  supplementaryHighlights: FinanceHighlightItem[];
-  sources: { title: string; url: string }[];
   /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
   lastVerified: string;
+  generalAccount: FinanceGeneralAccount;
+  revenue: FinanceAmountItem[];
+  expenditureByPurpose: FinanceAmountItem[];
+  expenditureByNature: FinanceAmountItem[];
+  supplementaryBudgetProjects: FinanceProjectItem[];
+  fundBalance: FinancePendingSection;
+  populationTrend: FinancePendingSection;
+  /** 市債（歳入項目）についての注記。市債残高ではないことを明記する。 */
+  debtNote: string;
+  sources: FinanceSourceMeta[];
   notes: string;
 }

@@ -1,0 +1,128 @@
+{
+  "fiscalYear": "2026",
+  "fiscalYearLabel": "令和8年度",
+  "referenceDate": "2026-06-05",
+  "lastVerified": "2026-07-14",
+  "generalAccount": {
+    "totalThousandYen": 69988095,
+    "totalBeforeThousandYen": 69408240,
+    "supplementaryThousandYen": 579855
+  },
+  "revenue": [
+    { "label": "市税", "amountThousandYen": 16485497, "percentage": 23.6 },
+    { "label": "地方交付税", "amountThousandYen": 14800000, "percentage": 21.2 },
+    { "label": "国庫支出金", "amountThousandYen": 14693238, "percentage": 21.0 },
+    { "label": "県支出金", "amountThousandYen": 6117603, "percentage": 8.7 },
+    { "label": "繰入金", "amountThousandYen": 4056110, "percentage": 5.8 },
+    { "label": "市債", "amountThousandYen": 4072600, "percentage": 5.8 },
+    { "label": "諸収入", "amountThousandYen": 1920212, "percentage": 2.8 },
+    { "label": "寄附金", "amountThousandYen": 1570101, "percentage": 2.2 }
+  ],
+  "expenditureByPurpose": [
+    { "label": "民生費", "amountThousandYen": 28368821, "percentage": 40.5 },
+    { "label": "総務費", "amountThousandYen": 7958559, "percentage": 11.4 },
+    { "label": "公債費", "amountThousandYen": 6408767, "percentage": 9.2 },
+    { "label": "土木費", "amountThousandYen": 5933325, "percentage": 8.5 },
+    { "label": "衛生費", "amountThousandYen": 5933062, "percentage": 8.5 },
+    { "label": "教育費", "amountThousandYen": 5511532, "percentage": 7.9 },
+    { "label": "商工費", "amountThousandYen": 4161193, "percentage": 5.9 },
+    { "label": "農林水産業費", "amountThousandYen": 2333844, "percentage": 3.3 },
+    { "label": "消防費", "amountThousandYen": 2317981, "percentage": 3.3 },
+    { "label": "災害復旧費", "amountThousandYen": 596500, "percentage": 0.9 },
+    { "label": "議会費", "amountThousandYen": 353011, "percentage": 0.5 },
+    { "label": "予備費", "amountThousandYen": 100000, "percentage": 0.1 }
+  ],
+  "expenditureByNature": [
+    { "label": "扶助費", "amountThousandYen": 19239565, "percentage": 27.5 },
+    { "label": "人件費", "amountThousandYen": 11282186, "percentage": 16.1 },
+    { "label": "物件費", "amountThousandYen": 10574726, "percentage": 15.1 },
+    { "label": "投資的経費", "amountThousandYen": 7706113, "percentage": 11.0 },
+    { "label": "公債費", "amountThousandYen": 6408767, "percentage": 9.2 },
+    { "label": "繰出金", "amountThousandYen": 5715216, "percentage": 8.2 },
+    { "label": "補助費等", "amountThousandYen": 5913922, "percentage": 8.4 },
+    { "label": "積立金", "amountThousandYen": 1319695, "percentage": 1.9 },
+    { "label": "貸付金", "amountThousandYen": 1246663, "percentage": 1.8 }
+  ],
+  "supplementaryBudgetProjects": [
+    { "title": "水道事業補助金", "amountThousandYen": 305659 },
+    { "title": "学校給食支援金給付事業", "amountThousandYen": 101495 },
+    { "title": "島野浦ヨイトの宴造成事業", "amountThousandYen": 13500 },
+    { "title": "延岡植物園魅力アップ整備事業", "amountThousandYen": 13397 },
+    { "title": "私立学校等給食等支援金給付事業", "amountThousandYen": 13171 },
+    { "title": "祝子川エリア五感解放ガストロノミー＆宿泊造成事業", "amountThousandYen": 10750 },
+    { "title": "道の駅「北川はゆま」機能強化事業", "amountThousandYen": 9185 },
+    { "title": "自治公民館建設補助事業", "amountThousandYen": 5118 },
+    { "title": "市上水道未使用世帯等支援事業", "amountThousandYen": 4866 },
+    { "title": "延岡市南部地域子育て支援施設建設事業", "amountThousandYen": 3049 },
+    { "title": "児童生徒むし歯予防事業", "amountThousandYen": 3700 },
+    { "title": "アピアランスケア支援事業", "amountThousandYen": 750 },
+    { "title": "ワーカーズコレクティブ支援事業", "amountThousandYen": 700 },
+    { "title": "南延岡駅バリアフリー化整備促進事業", "amountThousandYen": 340 }
+  ],
+  "fundBalance": {
+    "unavailableLabel": "公式資料確認中",
+    "items": []
+  },
+  "populationTrend": {
+    "unavailableLabel": "公式データ確認中",
+    "items": []
+  },
+  "debtNote": "ここで表示する市債は、令和8年度予算に計上された市債額です。市債残高ではありません。",
+  "sources": [
+    {
+      "section": "generalAccount",
+      "title": "令和8年度6月補正予算の概要",
+      "organization": "延岡市",
+      "referenceDate": "2026-06-05",
+      "confirmedDate": "2026-07-14",
+      "url": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+      "page": 1
+    },
+    {
+      "section": "revenue",
+      "title": "令和8年度6月補正予算の概要",
+      "organization": "延岡市",
+      "referenceDate": "2026-06-05",
+      "confirmedDate": "2026-07-14",
+      "url": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+      "page": 2
+    },
+    {
+      "section": "expenditureByPurpose",
+      "title": "令和8年度6月補正予算の概要",
+      "organization": "延岡市",
+      "referenceDate": "2026-06-05",
+      "confirmedDate": "2026-07-14",
+      "url": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+      "page": 3
+    },
+    {
+      "section": "expenditureByNature",
+      "title": "令和8年度6月補正予算の概要",
+      "organization": "延岡市",
+      "referenceDate": "2026-06-05",
+      "confirmedDate": "2026-07-14",
+      "url": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+      "page": 4
+    },
+    {
+      "section": "supplementaryBudgetProjects",
+      "title": "令和8年度6月補正予算の概要（主要事業等内訳）",
+      "organization": "延岡市",
+      "referenceDate": "2026-06-05",
+      "confirmedDate": "2026-07-14",
+      "url": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+      "page": 5
+    },
+    {
+      "section": "policyBudget",
+      "title": "令和8年度施政方針・予算説明",
+      "organization": "延岡市",
+      "referenceDate": "2026-02-16",
+      "confirmedDate": "2026-07-14",
+      "url": "/documents/mayor-policy/r8_policy_budget.pdf",
+      "page": 15
+    }
+  ],
+  "notes": "表示額は延岡市が公表した予算資料を基に整理しています。億円表示は千円単位の数値を換算しているため、端数処理により資料上の数値と一致しない場合があります。市債額は当該年度の予算計上額であり、市債残高ではありません。"
+}
