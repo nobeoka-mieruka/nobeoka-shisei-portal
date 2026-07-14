@@ -13,6 +13,7 @@ import { FactionFilter } from "../components/FactionFilter";
 import { FilterSelect } from "../components/FilterSelect";
 import { SortSelect, type SortKey } from "../components/SortSelect";
 import { StatCard } from "../components/StatCard";
+import { SiteAnalyticsSummary } from "../components/SiteAnalyticsSummary";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
 
@@ -226,6 +227,10 @@ export function HomePage() {
           条件に一致する議員が見つかりませんでした。検索条件を変更してください。
         </p>
       )}
+
+      <div className="mt-6">
+        <SiteAnalyticsSummary />
+      </div>
     </div>
   );
 }
