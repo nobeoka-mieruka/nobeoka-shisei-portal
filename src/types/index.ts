@@ -365,6 +365,14 @@ export interface MayorPromiseCategory {
   title: string;
 }
 
+/** 根拠資料への参照1件分。ページ番号は実際にPDFを確認できた場合のみ設定する。 */
+export interface MayorPromiseEvidenceRef {
+  /** MayorPromiseDocument の key。 */
+  documentKey: string;
+  /** 該当ページ（例: "p.2"）。ウェブサイトなどページ概念がない資料、または該当箇所を確認できていない場合は省略する。 */
+  page?: string;
+}
+
 /** 個別公約1件分のデータ。 */
 export interface MayorPromiseItem {
   id: string;
@@ -378,10 +386,19 @@ export interface MayorPromiseItem {
   statusLabel: MayorPromiseStatusLabel;
   /** 「現在確認できた取組」の箇条書き。事実の列挙であり、サイト独自の評価コメントは含めない。 */
   progressSummary: string[];
-  /** この公約に関連する根拠資料（MayorPromiseDocument の key の配列）。 */
-  evidenceItems: string[];
+  /** この公約に関連する根拠資料への参照（ページ番号付き）。 */
+  evidenceItems: MayorPromiseEvidenceRef[];
   /** 情報の出所区分（例：延岡市公式資料／市長本人の公表資料）。区別のためのタグ。 */
   sources: string[];
+  /**
+   * 関連予算。個別事業ごとの予算額を資料内で特定できた場合はその内容を、
+   * 特定できない場合は「確認中」を設定する（推定はしない）。
+   */
+  relatedBudget: string;
+  /**
+   * 関連議案。議案データ（bills.json）が整うまでは「確認中」を設定する（推定はしない）。
+   */
+  relatedBill: string;
   /** ISO形式。この公約データの基準日。 */
   referenceDate: string;
   /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */

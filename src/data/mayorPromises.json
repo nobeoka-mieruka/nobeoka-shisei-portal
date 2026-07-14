@@ -6,7 +6,7 @@
       "key": "policy_budget",
       "label": "令和8年度 施政方針・予算説明",
       "url": "/documents/mayor-policy/r8_policy_budget.pdf",
-      "sourceType": "延岡市公式資料（予算資料）"
+      "sourceType": "延岡市公式資料（施政方針）"
     },
     {
       "key": "june_supplementary",
@@ -41,11 +41,16 @@
         "地域への愛着と誇りを育むふるさと教育の推進",
         "新たな自然体験事業の検討"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.2" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.2）で「はらはらわくわくふるさと体験事業」の充実とふるさと教育の推進について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "1-2",
@@ -61,11 +66,16 @@
         "NOBEOKAスクール・イノベーション事業",
         "学校教育上の課題解決プロジェクトチーム"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.3" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.3）でAI型学習教材の活用、学力向上指導員の配置、学校教育の課題解決プロジェクトチームについて言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "1-3",
@@ -78,11 +88,16 @@
         "こども未来部設置準備室の設置",
         "令和9年度のこども未来部設置に向けた具体的検討"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.3" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.3）で「こども未来部」設置に向けて準備を進める旨の記載を確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "2-1",
@@ -97,11 +112,16 @@
         "包括連携協定を締結している企業との方向性整理",
         "地域商社に必要な役割、機能の検討"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.3" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.3）で地域商社設立に向け庁内関係課によるワーキンググループで協議を進めている旨の記載を確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "2-2",
@@ -117,11 +137,16 @@
         "文化芸術分野の専門家による助言",
         "実証事業の検討"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.3" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.3）で愛宕山笠沙の御碕公園における地域活性化起業人制度の活用や実証実験について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "2-3",
@@ -137,11 +162,16 @@
         "プロ、実業団、大学等の大会・合宿誘致",
         "プロリーグチーム創設に向けた活動"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.3" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.3）でアスリートタウン延岡アリーナ・西階公園野球場を活用した大会・合宿誘致について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "3-1",
@@ -154,11 +184,16 @@
         "新規開業支援への事業承継支援の追加",
         "医療機関事業承継支援制度の運用"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.3〜4" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.3〜4）で新規開業支援や既存医療機関の事業承継による医師確保について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "3-2",
@@ -175,11 +210,16 @@
         "インフレーターマット導入",
         "福祉的なケアを必要とする避難者支援の協議"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.4" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.4）で避難所運営マニュアルの活用や福祉的ケアを必要とする避難者支援の協議について言及があることを確認。段ボールベッド・インフレーターマット導入や訓練の詳細個別予算は6月補正予算には確認できなかった。"
     },
     {
       "id": "3-3",
@@ -195,11 +235,16 @@
         "シニア向け就職相談",
         "就職支援セミナー"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.4" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.4）で高齢者ボランティアの健康マイレージポイント対応や対象施設拡大、シニア向け就労相談について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "4-1",
@@ -212,11 +257,15 @@
         "官民連携による次世代リーダー研修プログラム",
         "若手職員による政策課題研究"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "evidenceItems": [
+        { "documentKey": "official_site" }
+      ],
+      "sources": ["市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針・6月補正予算のいずれにも、この取組みに該当する記載箇所を特定できなかった。市長本人の公表資料のみを根拠として扱い、延岡市公式資料での該当箇所は確認中とする。"
     },
     {
       "id": "4-2",
@@ -230,11 +279,16 @@
         "民間企業人と市職員による官民共同チーム",
         "地域課題を題材にした施策立案・研究"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.4" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.4）で民間企業人と市職員による官民共同のチームを組み、地域課題を題材に施策の立案・研究を行う取組みについて言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
     },
     {
       "id": "4-3",
@@ -249,11 +303,16 @@
         "みんなとみうらのタウンミーティング",
         "児童生徒との意見交換会"
       ],
-      "evidenceItems": ["policy_budget", "june_supplementary", "official_site"],
+      "evidenceItems": [
+        { "documentKey": "policy_budget", "page": "p.6" },
+        { "documentKey": "official_site" }
+      ],
       "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "relatedBudget": "確認中",
+      "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
       "lastVerified": "2026-07-14",
-      "notes": "「現在確認できた取組」は延岡市公式資料および市長本人の公表内容をもとに整理した事実の一覧であり、サイト独自の達成判定ではありません。"
+      "notes": "施政方針（p.6）で「出張なんでも総合相談センター」「みんなとみうらのタウンミーティング」「児童・生徒を対象とした意見交換会」について言及があることを確認。開催予定10か所程度という件数、および6月補正予算における該当個別予算項目は確認できなかった。"
     }
   ]
 }

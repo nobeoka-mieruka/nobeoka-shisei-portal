@@ -18,9 +18,11 @@ interface PromiseCardProps {
 }
 
 export function PromiseCard({ promise, documents }: PromiseCardProps) {
-  const evidenceDocs = promise.evidenceItems
-    .map((key) => documents.find((d) => d.key === key))
-    .filter((d): d is MayorPromiseDocument => !!d);
+  const evidenceDocs: (MayorPromiseDocument & { page?: string })[] = [];
+  for (const ref of promise.evidenceItems) {
+    const doc = documents.find((d) => d.key === ref.documentKey);
+    if (doc) evidenceDocs.push({ ...doc, page: ref.page });
+  }
 
   return (
     <li className="rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
@@ -43,6 +45,17 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
         </div>
       )}
 
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <div>
+          <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
+          <p className="mt-1 text-sm text-on-surface">{promise.relatedBudget}</p>
+        </div>
+        <div>
+          <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
+          <p className="mt-1 text-sm text-on-surface">{promise.relatedBill}</p>
+        </div>
+      </div>
+
       {evidenceDocs.length > 0 && (
         <div className="mt-3">
           <p className="text-xs font-medium text-on-surface-variant">根拠資料</p>
@@ -53,11 +66,14 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
                   href={doc.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${doc.label}を新しいタブで開く`}
+                  aria-label={`${doc.label}${doc.page ? `（${doc.page}）` : ""}を新しいタブで開く`}
                   className={`inline-flex flex-wrap items-center gap-1.5 rounded text-sm text-primary hover:underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-3.5 w-3.5 shrink-0" />
-                  <span>{doc.label}</span>
+                  <span>
+                    {doc.label}
+                    {doc.page && `（${doc.page}）`}
+                  </span>
                   <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant">
                     {doc.sourceType}
                   </span>
