@@ -3,7 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import billsData from "../data/bills.json";
 import mayorData from "../data/mayor.json";
-import type { CouncilMember, Gender, Bill, Mayor } from "../types";
+import generalQuestionsData from "../data/generalQuestions.json";
+import type { CouncilMember, Gender, Bill, Mayor, GeneralQuestionItem } from "../types";
 import { allFactions, getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { MemberCard } from "../components/MemberCard";
@@ -18,8 +19,9 @@ import { SITE_LAST_UPDATED, formatJapaneseDate } from "../config/site";
 const members = membersData as CouncilMember[];
 const bills = billsData as Bill[];
 const mayor = mayorData as Mayor;
+const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);
-const registeredQuestionCount = members.reduce((sum, m) => sum + m.questions.length, 0);
+const registeredQuestionCount = generalQuestions.length;
 
 const genderLabels: Record<Gender, string> = {
   male: "男性",
@@ -50,7 +52,7 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "市議会議員を見る", to: "/", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
   { label: "議案・採決結果を見る", to: "/bills", ready: true },
-  { label: "一般質問を見る", ready: false },
+  { label: "一般質問を調べる", to: "/questions", ready: true },
   { label: "編集方針を見る", to: "/editorial-policy", ready: true },
   { label: "情報提供・訂正依頼を送る", to: "/contact", ready: true },
 ];

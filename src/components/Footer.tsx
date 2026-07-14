@@ -33,6 +33,9 @@ export function Footer() {
           <Link to="/finance" className={linkClass}>
             延岡市の財政
           </Link>
+          <Link to="/questions" className={linkClass}>
+            一般質問データベース
+          </Link>
           <Link to="/about" className={linkClass}>
             このサイトについて
           </Link>

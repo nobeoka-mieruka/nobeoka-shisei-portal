@@ -1,6 +1,7 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import membersData from "../data/members.json";
-import type { CouncilMember } from "../types";
+import generalQuestionsData from "../data/generalQuestions.json";
+import type { CouncilMember, GeneralQuestionItem } from "../types";
 import { getFaction } from "../lib/factions";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -8,15 +9,16 @@ import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { EmptyState } from "../components/EmptyState";
-import { GeneralQuestionsSection } from "../components/GeneralQuestionsSection";
 import { VotingRecordsSection } from "../components/VotingRecordsSection";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
+const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -42,6 +44,12 @@ export function MemberDetailPage() {
 
   const faction = getFaction(member.factionId);
   const isProfileConfirmed = member.profile !== PLACEHOLDER_PROFILE;
+
+  const memberQuestions = generalQuestions
+    .filter((q) => q.memberId === member.id)
+    .sort((a, b) => b.questionDate.localeCompare(a.questionDate));
+  const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
+  const latestQuestions = memberQuestions.slice(0, 3);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -108,7 +116,56 @@ export function MemberDetailPage() {
         )}
       </SectionCard>
 
-      <GeneralQuestionsSection questions={member.questions} />
+      <SectionCard title="一般質問">
+        {memberQuestions.length > 0 ? (
+          <>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">登録件数</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberQuestions.length}件</p>
+              </div>
+              <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">最新の質問日</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">
+                  {formatJapaneseDate(memberQuestions[0].questionDate)}
+                </p>
+              </div>
+              {mainThemes.length > 0 && (
+                <div className="col-span-2 rounded-lg bg-surface-container-high p-3 sm:col-span-1">
+                  <p className="text-xs text-on-surface-variant">主なテーマ</p>
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {mainThemes.slice(0, 4).map((t) => (
+                      <span key={t} className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-xs text-on-surface-variant">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <ul className="mt-3 space-y-2">
+              {latestQuestions.map((q) => (
+                <li key={q.id} className="rounded-lg border border-outline-variant p-3">
+                  <p className="text-xs text-on-surface-variant">
+                    {formatJapaneseDate(q.questionDate)}／{q.sessionName}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-on-surface">{q.title}</p>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to={`/questions?member=${member.id}`}
+              className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+            >
+              この議員の一般質問をすべて見る
+            </Link>
+          </>
+        ) : (
+          <EmptyState message="現在登録されている一般質問データはありません。" />
+        )}
+      </SectionCard>
 
       <VotingRecordsSection votes={member.votes} />
 

@@ -599,6 +599,85 @@ export interface FinanceSourceMeta {
   page?: number;
 }
 
+/** 一般質問データベースの会議区分。 */
+export type QuestionSessionType = "定例会" | "臨時会";
+
+/** 一般質問データベースの質問区分。 */
+export type QuestionType = "一般質問" | "代表質問";
+
+/** 一般質問データベースにおける資料区分。既存の SourceType（議員・市長データ用）とは別に定義する。 */
+export type QuestionSourceType = "議会会議録" | "議会映像" | "質問通告書" | "その他の公開資料";
+
+/**
+ * 一般質問データベース1件分のデータ。会議録検索システムで実際に確認できた内容のみを登録する。
+ * 架空の議員名・質問内容・日付は登録しないこと（未確認の場合は generalQuestions.json を空配列のままにする）。
+ */
+export interface GeneralQuestionItem {
+  id: string;
+  /** 例: "令和8年" */
+  councilYear: string;
+  /** 例: "令和8年度" */
+  fiscalYear: string;
+  /** 例: "令和8年6月定例会" */
+  sessionName: string;
+  sessionType: QuestionSessionType;
+  questionType: QuestionType;
+  /** ISO形式。質問を行った日。 */
+  questionDate: string;
+  memberId: string;
+  memberName: string;
+  title: string;
+  /** 全文転載は行わず、短い要約のみを掲載する。 */
+  summary: string;
+  topics: string[];
+  /** 質問通告書・会議録で確認できた質問項目の一覧。全文ではなく項目名・見出しのみ。 */
+  questionItems: string[];
+  /** 質問項目数。questionItems.length と一致させる。 */
+  questionCount?: number;
+  /** その定例会・質問区分内での質問順。 */
+  questionOrder?: number;
+
+  // 質問通告書（基礎資料）
+  noticeTitle?: string;
+  noticeUrl?: string;
+  /** 質問通告書PDFのURL（ある場合のみ）。 */
+  noticePdf?: string;
+
+  // 会議録（正式な発言記録）
+  transcriptUrl?: string;
+  /** 会議録内の該当箇所を示す参照情報（ページ・巻号など）。 */
+  transcriptReference?: string;
+
+  // 議会映像（延岡市議会公式YouTubeチャンネルの動画のみ）
+  videoUrl?: string;
+  /** 質問開始位置（秒）。会議録・映像で確認できた場合のみ設定し、推測では設定しない。 */
+  videoStartSeconds?: number;
+  /** 画面表示用の開始位置ラベル（例: "1:02:00"）。 */
+  videoStartLabel?: string;
+  videoTitle?: string;
+  videoChannelName?: string;
+  /** ISO形式。動画の視聴可否・内容をサイト運営者がいつ確認したか。 */
+  videoLastVerified?: string;
+
+  documentUrl?: string;
+
+  // 市側の答弁（将来拡張用。今回は未実装のため値を持たせない）
+  answerSummary?: string;
+  answerSpeaker?: string;
+  answerDepartment?: string;
+  speechOrder?: number;
+
+  sourceTitle: string;
+  sourceOrganization: string;
+  sourceUrl: string;
+  sourceType?: QuestionSourceType;
+  /** ISO形式。会議録等の基準日。 */
+  referenceDate?: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+  notes?: string;
+}
+
 /** 財政ダッシュボード全体のデータ（年度単位）。 */
 export interface FinanceDashboardData {
   /** 例: "2026"。将来の年度切替用のキー。 */

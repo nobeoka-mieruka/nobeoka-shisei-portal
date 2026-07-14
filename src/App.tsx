@@ -16,6 +16,7 @@ import { TermsPage } from "./pages/TermsPage";
 import { EditorialPolicyPage } from "./pages/EditorialPolicyPage";
 import { ContactPage } from "./pages/ContactPage";
 import { BillsPage } from "./pages/BillsPage";
+import { GeneralQuestionsPage } from "./pages/GeneralQuestionsPage";
 import { UpdatesPage } from "./pages/UpdatesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/bills" element={<BillsPage />} />
+            <Route path="/questions" element={<GeneralQuestionsPage />} />
             <Route path="/updates" element={<UpdatesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
