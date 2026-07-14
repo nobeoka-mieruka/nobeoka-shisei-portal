@@ -238,6 +238,32 @@ export interface CompensationComparisonEntry {
   };
 }
 
+/** 宮崎県内9市中の月額報酬順位（役職1件分）。 */
+export interface PrefectureCompensationRankingEntry {
+  role: CompensationRole;
+  monthly: number;
+  /** 県内順位（月額報酬のみで算定。期末手当を含む年間総額の順位ではない）。 */
+  rank: number;
+}
+
+/**
+ * 宮崎県内市町村（現在は9市）を対象とした月額報酬の順位データ。
+ * 個別自治体ごとの比較データ（CompensationComparisonEntry）とは別に、
+ * 県公表資料に基づく順位のみを保持する。
+ */
+export interface PrefectureCompensationRanking {
+  /** ISO形式。順位算定の基準日。 */
+  referenceDate: string;
+  /** 比較対象の市数。 */
+  totalMunicipalities: number;
+  sourceTitle: string;
+  sourceUrl: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  confirmedAt?: string;
+  note: string;
+  roles: PrefectureCompensationRankingEntry[];
+}
+
 /** 議案の種別。 */
 export type BillCategory = "条例" | "予算" | "決算" | "人事" | "意見書" | "請願" | "その他";
 

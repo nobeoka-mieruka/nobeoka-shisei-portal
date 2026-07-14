@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import compensationData from "../data/compensationComparison.json";
-import type { CompensationComparisonEntry } from "../types";
+import prefectureRankingData from "../data/prefectureCompensationRanking.json";
+import type { CompensationComparisonEntry, PrefectureCompensationRanking } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceLink } from "../components/SourceLink";
@@ -12,6 +13,7 @@ import { formatJapaneseDate } from "../config/site";
 import { COMPENSATION_ROLES, calcAnnualEstimate, findRank, formatYen, getMonthly, rankByRole } from "../lib/compensation";
 
 const comparison = compensationData as CompensationComparisonEntry[];
+const prefectureRanking = prefectureRankingData as PrefectureCompensationRanking;
 const NOBEOKA = "延岡市";
 
 export function CompensationPage() {
@@ -90,23 +92,49 @@ export function CompensationPage() {
       </SectionCard>
 
       <SectionCard title="宮崎県内・全国での順位">
-        <p className="text-sm leading-relaxed text-on-surface-variant">
-          全自治体の同一基準データを確認後に掲載予定です。一部の自治体データのみでは宮崎県内順位・全国順位を正しく算定できないため、現時点では推定値を掲載していません。
+        <h3 className="text-sm font-semibold text-on-surface">宮崎県9市中の順位（月額）</h3>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          比較対象は宮崎県内9市（基準日：{formatJapaneseDate(prefectureRanking.referenceDate)}
+          現在の公表月額）です。この順位は期末手当を含まない月額報酬のみで算定しており、期末手当を含む年間支給見込額の順位ではありません。
         </p>
-        <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
-          <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
-            宮崎県9市中の順位
-            <span className="mt-1 block font-medium text-on-surface">準備中</span>
-          </li>
-          <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
-            全国の類似団体中の順位
-            <span className="mt-1 block font-medium text-on-surface">準備中</span>
-          </li>
-          <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
-            全国の市区中の順位
-            <span className="mt-1 block font-medium text-on-surface">準備中</span>
-          </li>
-        </ul>
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-4">
+          {COMPENSATION_ROLES.map((r) => {
+            const entry = prefectureRanking.roles.find((e) => e.role === r.key);
+            return (
+              <StatCard
+                key={r.key}
+                label={r.label}
+                value={entry ? `${entry.rank}位／${prefectureRanking.totalMunicipalities}市` : "—"}
+                hint={entry ? `月額 ${formatYen(entry.monthly)}` : undefined}
+                compact
+              />
+            );
+          })}
+        </div>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{prefectureRanking.note}</p>
+        <SourceLink
+          url={prefectureRanking.sourceUrl}
+          label={prefectureRanking.sourceTitle}
+          verifiedAt={prefectureRanking.confirmedAt}
+          className="mt-2"
+        />
+
+        <div className="mt-5 border-t border-outline-variant pt-4">
+          <h3 className="text-sm font-semibold text-on-surface">全国での順位</h3>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+            全自治体の同一基準データを確認後に掲載予定です。一部の自治体データのみでは正しく算定できないため、現時点では推定値を掲載していません。
+          </p>
+          <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
+              全国の類似団体中の順位
+              <span className="mt-1 block font-medium text-on-surface">集計中</span>
+            </li>
+            <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
+              全国の市区中の順位
+              <span className="mt-1 block font-medium text-on-surface">集計中</span>
+            </li>
+          </ul>
+        </div>
       </SectionCard>
 
       <SectionCard title="自治体比較表">
