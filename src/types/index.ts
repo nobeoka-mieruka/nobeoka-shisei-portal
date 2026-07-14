@@ -450,3 +450,83 @@ export interface Bill extends SourceMeta {
   billDocumentUrl?: string;
   minutesUrl?: string;
 }
+
+/** サイト更新履歴の種別。 */
+export type UpdateHistoryCategory = "新規追加" | "データ更新" | "表示改善" | "出典追加" | "修正";
+
+/** サイトの更新履歴1件分。 */
+export interface UpdateHistoryEntry {
+  id: string;
+  /** ISO形式。更新日。 */
+  date: string;
+  title: string;
+  description: string;
+  /** 対象ページのラベル（複数可）。 */
+  targetPages: string[];
+  /** 使用した資料名（任意）。 */
+  sourceUsed?: string;
+  category: UpdateHistoryCategory;
+}
+
+/** 市長交際費の支出1件分。延岡市公式資料に掲載された内容をそのまま保持する。 */
+export interface MayorEntertainmentExpenseItem {
+  /** ISO形式。支出月日。 */
+  date: string;
+  /** 例: 慶弔費／渉外費／会費／協賛費 */
+  category: string;
+  description: string;
+  /** 円。 */
+  amount: number;
+  sourceTitle: string;
+  sourceUrl: string;
+  /** ISO形式。この支出データの基準日（公表月末日など）。 */
+  referenceDate: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+}
+
+/** 市長交際費ページ全体のデータ。 */
+export interface MayorEntertainmentExpensesData {
+  /** 例: "令和8年度" */
+  fiscalYearLabel: string;
+  /** ISO形式。データ全体の基準日。 */
+  referenceDate: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+  sourcePageTitle: string;
+  sourcePageUrl: string;
+  expenses: MayorEntertainmentExpenseItem[];
+  /** まだ公式資料が公表されていない月（YYYY-MM形式）の一覧。推定値を出さず「データ確認中」と表示するために使う。 */
+  unconfirmedMonths: string[];
+}
+
+/** 財政ダッシュボードの金額1件分（千円単位）。 */
+export interface FinanceAmountItem {
+  label: string;
+  amountThousandYen: number;
+}
+
+/** 補正予算の主な内容1件分。 */
+export interface FinanceHighlightItem {
+  title: string;
+  description: string;
+  /** 千円。金額が明確に特定できる場合のみ設定する。 */
+  amountThousandYen?: number;
+}
+
+/** 財政ダッシュボード全体のデータ。 */
+export interface FinanceOverviewData {
+  /** 例: "令和8年度" */
+  fiscalYearLabel: string;
+  /** ISO形式。データの基準日。 */
+  referenceDate: string;
+  generalAccountTotalThousandYen: number;
+  supplementaryAmountThousandYen: number;
+  revenueItems: FinanceAmountItem[];
+  expenditureItems: FinanceAmountItem[];
+  supplementaryHighlights: FinanceHighlightItem[];
+  sources: { title: string; url: string }[];
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+  notes: string;
+}

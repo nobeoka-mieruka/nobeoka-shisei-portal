@@ -30,8 +30,14 @@ export function Footer() {
           <Link to="/dashboard" className={linkClass}>
             ダッシュボード
           </Link>
+          <Link to="/finance" className={linkClass}>
+            延岡市の財政
+          </Link>
           <Link to="/about" className={linkClass}>
             このサイトについて
+          </Link>
+          <Link to="/updates" className={linkClass}>
+            更新履歴
           </Link>
           <Link to="/editorial-policy" className={linkClass}>
             編集方針

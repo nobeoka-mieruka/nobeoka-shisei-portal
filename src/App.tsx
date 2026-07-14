@@ -7,6 +7,8 @@ import { HomePage } from "./pages/HomePage";
 import { MemberDetailPage } from "./pages/MemberDetailPage";
 import { MayorPage } from "./pages/MayorPage";
 import { MayorPolicyProgressPage } from "./pages/MayorPolicyProgressPage";
+import { MayorEntertainmentExpensesPage } from "./pages/MayorEntertainmentExpensesPage";
+import { FinancePage } from "./pages/FinancePage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { CompensationPage } from "./pages/CompensationPage";
 import { AboutPage } from "./pages/AboutPage";
@@ -14,6 +16,7 @@ import { TermsPage } from "./pages/TermsPage";
 import { EditorialPolicyPage } from "./pages/EditorialPolicyPage";
 import { ContactPage } from "./pages/ContactPage";
 import { BillsPage } from "./pages/BillsPage";
+import { UpdatesPage } from "./pages/UpdatesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
@@ -28,6 +31,8 @@ function App() {
             <Route path="/members/:id" element={<MemberDetailPage />} />
             <Route path="/mayor" element={<MayorPage />} />
             <Route path="/mayor/policy-progress" element={<MayorPolicyProgressPage />} />
+            <Route path="/mayor/entertainment-expenses" element={<MayorEntertainmentExpensesPage />} />
+            <Route path="/finance" element={<FinancePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/compensation" element={<CompensationPage />} />
             <Route path="/about" element={<AboutPage />} />
@@ -35,6 +40,7 @@ function App() {
             <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/bills" element={<BillsPage />} />
+            <Route path="/updates" element={<UpdatesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

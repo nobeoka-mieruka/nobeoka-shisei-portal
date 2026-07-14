@@ -8,7 +8,7 @@ import { SourceLink } from "../components/SourceLink";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
-import { PlayIcon, GlobeIcon, ChartBarIcon } from "../components/icons";
+import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
 
@@ -67,6 +67,14 @@ export function MayorPage() {
         >
           <ChartBarIcon className="h-4 w-4" />
           公約の進捗状況
+        </Link>
+
+        <Link
+          to="/mayor/entertainment-expenses"
+          className={`mt-4 inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+        >
+          <YenIcon className="h-4 w-4" />
+          市長交際費を見る
         </Link>
 
         {mayor.officialUrl && (
