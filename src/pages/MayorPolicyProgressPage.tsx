@@ -51,8 +51,13 @@ export function MayorPolicyProgressPage() {
       <ul className="space-y-4">
         {data.policies.map((policy) => {
           const items = promisesData.promises.filter((p) => p.categoryTitle === policy.title);
+          const anchor = promisesData.categories.find((c) => c.id === policy.id)?.anchor;
           return (
-            <li key={policy.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+            <li
+              key={policy.id}
+              id={anchor}
+              className="scroll-mt-20 rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5"
+            >
               <h2 className="text-base font-semibold text-on-surface">{policy.title}</h2>
 
               <p className="mt-3 text-xs font-medium text-on-surface-variant">現在の状況</p>

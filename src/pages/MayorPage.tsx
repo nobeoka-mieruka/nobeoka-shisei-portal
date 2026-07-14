@@ -1,39 +1,26 @@
 import mayorData from "../data/mayor.json";
-import type { Mayor, PledgeStatus } from "../types";
+import mayorPromisesData from "../data/mayorPromises.json";
+import type { Mayor, MayorPromisesData } from "../types";
 import { Avatar } from "../components/Avatar";
 import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
-import { SourceLink } from "../components/SourceLink";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
+import { aggregateCategoryStatus, mayorPromiseStatusClass } from "../lib/mayorPromiseStatus";
 
 const mayor = mayorData as Mayor;
-
-const NO_STATUS_LABEL: PledgeStatus = "確認できる資料なし";
-
-const pledgeStatusClass: Partial<Record<PledgeStatus, string>> = {
-  実施済み: "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]",
-  一部実施: "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]",
-  実施中: "bg-primary-container text-on-primary-container",
-  取組中: "bg-primary-container text-on-primary-container",
-  検討中: "bg-surface-variant text-on-surface-variant",
-  未着手を確認: "bg-surface-variant text-on-surface-variant",
-  方針変更: "bg-[#fff3d6] text-[#7a5900] dark:bg-[#3a2e00] dark:text-[#f2cf6b]",
-  中止を確認: "bg-surface-variant text-on-surface-variant",
-  確認できる資料なし: "bg-surface-variant text-on-surface-variant",
-};
+const promisesData = mayorPromisesData as MayorPromisesData;
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 const termStartEntry = mayor.career.find((c) => c.description.includes("市長") && c.description.includes("就任"));
 const termStart = termStartEntry?.year ?? mayor.career[mayor.career.length - 1]?.year;
-const pendingPledgeCount = mayor.pledges.filter((p) => !p.status).length;
 
 export function MayorPage() {
   usePageTitle("市長情報");
@@ -107,7 +94,7 @@ export function MayorPage() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="公約分野" value={mayor.pledges.length} unit="件" />
         <StatCard label="SNS" value={mayor.sns.length} unit="件" />
-        <StatCard label="確認できる資料なし" value={pendingPledgeCount} unit="件" />
+        <StatCard label="個別公約数" value={promisesData.promises.length} unit="件" />
         <StatCard label="任期開始" value={termStart ?? "情報確認中"} compact />
       </div>
 
@@ -126,41 +113,37 @@ export function MayorPage() {
 
       <SectionCard title="公約">
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {mayor.pledges.map((p) => (
-            <li key={p.id} className="rounded-lg border border-outline-variant p-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="font-medium text-on-surface">{p.title}</p>
-                <span
-                  className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                    p.status
-                      ? (pledgeStatusClass[p.status] ?? "bg-surface-variant text-on-surface-variant")
-                      : "bg-surface-variant text-on-surface-variant"
-                  }`}
+          {mayor.pledges.map((p) => {
+            const category = promisesData.categories.find((c) => c.id === p.id);
+            const status = aggregateCategoryStatus(promisesData.promises, p.id);
+            const to = category ? `/mayor/policy-progress#${category.anchor}` : "/mayor/policy-progress";
+            return (
+              <li key={p.id}>
+                <Link
+                  to={to}
+                  className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
                 >
-                  {p.status ?? NO_STATUS_LABEL}
-                </span>
-              </div>
-              {p.category && <p className="mt-1 text-xs text-on-surface-variant">{p.category}</p>}
-              <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-on-surface-variant">
-                {p.description}
-              </p>
-              {(p.statusEvidenceUrl || p.sourceUrl || p.verifiedAt) && (
-                <div className="mt-2 border-t border-outline-variant pt-2">
-                  {(p.statusEvidenceUrl ?? p.sourceUrl) ? (
-                    <SourceLink
-                      url={(p.statusEvidenceUrl ?? p.sourceUrl) as string}
-                      label={p.statusEvidenceUrl ? "進捗の根拠資料を見る" : "出典を見る"}
-                      verifiedAt={p.verifiedAt}
-                    />
-                  ) : (
-                    p.verifiedAt && (
-                      <span className="text-xs text-on-surface-variant">最終確認：{p.verifiedAt}</span>
-                    )
-                  )}
-                </div>
-              )}
-            </li>
-          ))}
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="font-medium text-on-surface">{p.title}</p>
+                    {status && (
+                      <span
+                        className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[status]}`}
+                      >
+                        {status}
+                      </span>
+                    )}
+                  </div>
+                  {p.category && <p className="mt-1 text-xs text-on-surface-variant">{p.category}</p>}
+                  <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-on-surface-variant">
+                    {p.description}
+                  </p>
+                  <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">
+                    詳しい進捗と根拠資料を見る
+                  </p>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </SectionCard>
 

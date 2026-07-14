@@ -1,13 +1,7 @@
-import type { MayorPromiseDocument, MayorPromiseItem, MayorPromiseStatusLabel } from "../../types";
+import type { MayorPromiseDocument, MayorPromiseItem } from "../../types";
 import { GlobeIcon } from "../icons";
 import { formatJapaneseDate } from "../../config/site";
-
-const statusClass: Record<MayorPromiseStatusLabel, string> = {
-  進行中: "bg-primary-container text-on-primary-container",
-  検討中: "bg-surface-variant text-on-surface-variant",
-  実施済み: "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]",
-  確認中: "bg-surface-variant text-on-surface-variant",
-};
+import { mayorPromiseStatusClass } from "../../lib/mayorPromiseStatus";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -27,7 +21,7 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
   return (
     <li className="rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
       <span
-        className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusClass[promise.statusLabel]}`}
+        className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[promise.statusLabel]}`}
       >
         {promise.statusLabel}
       </span>

@@ -363,6 +363,8 @@ export interface MayorPromiseDocument {
 export interface MayorPromiseCategory {
   id: string;
   title: string;
+  /** 進捗ページ内のアンカーID（例: "children"）。他ページからこの政策まで直接リンクするために使う。 */
+  anchor: string;
 }
 
 /** 根拠資料への参照1件分。ページ番号は実際にPDFを確認できた場合のみ設定する。 */
