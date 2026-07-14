@@ -1,0 +1,19 @@
+{
+  "sourceTitle": "総務省「類似団体別職員数の状況」",
+  "sourceOrganization": "総務省",
+  "sourceUrl": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/ruiji-dantai/index.html",
+  "referenceDate": "2025-04-01",
+  "calculationMethod": "延岡市が属する総務省の類似団体区分、および区分内各市の月額給料・報酬を横断比較できる一次資料をまだ確認できていないため、順位は算定していない。",
+  "targetCount": null,
+  "lastVerified": "2026-07-14",
+  "notes": "総務省の財政上の類似団体区分を採用するか、人口10万人以上15万人未満の一般市（政令指定都市・中核市・東京23区を除く）を代替基準とするかを含め、比較対象自治体そのものが未確定の段階。対象自治体一覧が確定し、各市の報酬データを公式資料で確認できるまで「確認中」と表示する。",
+  "definition": "確認中（総務省の類似団体区分か代替基準かを含め未確定）",
+  "usesAlternativeDefinition": false,
+  "targetMunicipalities": [],
+  "roles": [
+    { "role": "mayor", "monthly": null, "rank": null },
+    { "role": "chair", "monthly": null, "rank": null },
+    { "role": "viceChair", "monthly": null, "rank": null },
+    { "role": "member", "monthly": null, "rank": null }
+  ]
+}

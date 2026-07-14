@@ -1,0 +1,23 @@
+{
+  "sourceTitle": "宮崎県「令和7年度市町村公務員制度の概況」第20-1表 特別職に属する職員等の定数及び給料（報酬）額",
+  "sourceOrganization": "宮崎県",
+  "sourceUrl": "https://www.pref.miyazaki.lg.jp/documents/107925/97124_20260330203858-1.xlsx",
+  "publishedDate": "2026-03-31",
+  "referenceDate": "2025-04-01",
+  "calculationMethod": "宮崎県公表資料「第20-1表」に掲載された市長・議長・副議長・議員の給料（報酬）月額（単位：百円）を円に換算してそのまま使用。順位は月額の高い順（競技順位方式、同額は同順位）で算出。",
+  "targetCount": 9,
+  "lastVerified": "2026-07-14",
+  "notes": "宮崎県内9市（延岡市・宮崎市・都城市・日南市・小林市・日向市・串間市・西都市・えびの市）を対象。町村は含まない。"
+  ,
+  "municipalities": [
+    { "municipality": "延岡市", "mayorMonthly": 955000, "chairMonthly": 516000, "viceChairMonthly": 471000, "memberMonthly": 435000 },
+    { "municipality": "宮崎市", "mayorMonthly": 1053000, "chairMonthly": 696000, "viceChairMonthly": 625000, "memberMonthly": 583000 },
+    { "municipality": "都城市", "mayorMonthly": 940000, "chairMonthly": 500000, "viceChairMonthly": 420000, "memberMonthly": 400000 },
+    { "municipality": "日南市", "mayorMonthly": 783000, "chairMonthly": 397000, "viceChairMonthly": 341000, "memberMonthly": 327000 },
+    { "municipality": "小林市", "mayorMonthly": 788000, "chairMonthly": 369000, "viceChairMonthly": 326000, "memberMonthly": 313000 },
+    { "municipality": "日向市", "mayorMonthly": 865000, "chairMonthly": 433000, "viceChairMonthly": 379000, "memberMonthly": 358000 },
+    { "municipality": "串間市", "mayorMonthly": 741000, "chairMonthly": 365000, "viceChairMonthly": 322000, "memberMonthly": 310000 },
+    { "municipality": "西都市", "mayorMonthly": 840000, "chairMonthly": 424000, "viceChairMonthly": 361000, "memberMonthly": 349000 },
+    { "municipality": "えびの市", "mayorMonthly": 772000, "chairMonthly": 357000, "viceChairMonthly": 315000, "memberMonthly": 304000 }
+  ]
+}

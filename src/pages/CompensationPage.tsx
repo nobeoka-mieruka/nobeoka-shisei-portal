@@ -1,19 +1,32 @@
 import { useMemo } from "react";
 import compensationData from "../data/compensationComparison.json";
 import prefectureRankingData from "../data/prefectureCompensationRanking.json";
-import type { CompensationComparisonEntry, PrefectureCompensationRanking } from "../types";
+import miyazakiComparisonData from "../data/miyazakiCompensationComparison.json";
+import nationalRankingData from "../data/nationalCompensationRanking.json";
+import similarMunicipalityData from "../data/similarMunicipalityComparison.json";
+import type {
+  CompensationComparisonEntry,
+  MiyazakiCompensationComparison,
+  NationalCompensationRanking,
+  PrefectureCompensationRanking,
+  SimilarMunicipalityComparison,
+} from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceLink } from "../components/SourceLink";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CompensationBarChart } from "../components/compensation/CompensationBarChart";
+import { MiyazakiComparisonTable } from "../components/compensation/MiyazakiComparisonTable";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { COMPENSATION_ROLES, calcAnnualEstimate, findRank, formatYen, getMonthly, rankByRole } from "../lib/compensation";
 
 const comparison = compensationData as CompensationComparisonEntry[];
 const prefectureRanking = prefectureRankingData as PrefectureCompensationRanking;
+const miyazakiComparison = miyazakiComparisonData as MiyazakiCompensationComparison;
+const nationalRanking = nationalRankingData as NationalCompensationRanking;
+const similarMunicipality = similarMunicipalityData as SimilarMunicipalityComparison;
 const NOBEOKA = "延岡市";
 
 export function CompensationPage() {
@@ -120,21 +133,102 @@ export function CompensationPage() {
         />
 
         <div className="mt-5 border-t border-outline-variant pt-4">
-          <h3 className="text-sm font-semibold text-on-surface">全国での順位</h3>
+          <h3 className="text-sm font-semibold text-on-surface">全国815市区中の順位（月額）</h3>
           <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
-            全自治体の同一基準データを確認後に掲載予定です。一部の自治体データのみでは正しく算定できないため、現時点では推定値を掲載していません。
+            総務省の令和7年地方公務員給与実態調査を基に、全国792市と東京23特別区を対象として、月額の高い順に算出しています。町村は含みません。基準日や調査時点は出典資料に準拠します。
           </p>
-          <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-            <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
-              全国の類似団体中の順位
-              <span className="mt-1 block font-medium text-on-surface">集計中</span>
-            </li>
-            <li className="rounded-lg border border-outline-variant p-3 text-sm text-on-surface-variant">
-              全国の市区中の順位
-              <span className="mt-1 block font-medium text-on-surface">集計中</span>
-            </li>
-          </ul>
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-4">
+            {COMPENSATION_ROLES.map((r) => {
+              const entry = nationalRanking.roles.find((e) => e.role === r.key);
+              const hasRank = entry?.rank !== null && entry?.rank !== undefined;
+              return (
+                <StatCard
+                  key={r.key}
+                  label={r.label}
+                  value={hasRank ? `${entry!.rank}位／${nationalRanking.targetCount}市区` : "確認中"}
+                  hint={hasRank ? `月額 ${formatYen(entry!.monthly as number)}` : "全国一括データ確認中"}
+                  compact
+                />
+              );
+            })}
+          </div>
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{nationalRanking.calculationMethod}</p>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{nationalRanking.notes}</p>
+          <SourceLink
+            url={nationalRanking.sourceUrl}
+            label={`${nationalRanking.sourceTitle}（${nationalRanking.sourceOrganization}）`}
+            verifiedAt={nationalRanking.lastVerified}
+            className="mt-2"
+          />
         </div>
+
+        <div className="mt-5 border-t border-outline-variant pt-4">
+          <h3 className="text-sm font-semibold text-on-surface">類似団体中の順位（月額）</h3>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">類似団体の定義：{similarMunicipality.definition}</p>
+          {similarMunicipality.usesAlternativeDefinition && (
+            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+              ここでの類似団体は、人口規模などを基準に当サイトが設定した比較対象です。総務省の財政上の類似団体区分とは異なる場合があります。
+            </p>
+          )}
+          <p className="mt-1 text-xs text-on-surface-variant">
+            対象自治体数：{similarMunicipality.targetCount ?? "確認中"}
+          </p>
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-4">
+            {COMPENSATION_ROLES.map((r) => {
+              const entry = similarMunicipality.roles.find((e) => e.role === r.key);
+              const hasRank = entry?.rank !== null && entry?.rank !== undefined;
+              return (
+                <StatCard
+                  key={r.key}
+                  label={r.label}
+                  value={hasRank ? `${entry!.rank}位／${similarMunicipality.targetCount}団体` : "確認中"}
+                  hint={hasRank ? `月額 ${formatYen(entry!.monthly as number)}` : "公式データ確認中"}
+                  compact
+                />
+              );
+            })}
+          </div>
+          {similarMunicipality.targetMunicipalities.length > 0 && (
+            <details className="mt-3 rounded-lg border border-outline-variant p-3">
+              <summary className="cursor-pointer text-sm font-medium text-primary">比較対象の自治体を見る</summary>
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {similarMunicipality.targetMunicipalities.map((m) => (
+                  <li key={m} className="rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant">
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{similarMunicipality.calculationMethod}</p>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{similarMunicipality.notes}</p>
+          <SourceLink
+            url={similarMunicipality.sourceUrl}
+            label={`${similarMunicipality.sourceTitle}（${similarMunicipality.sourceOrganization}）`}
+            verifiedAt={similarMunicipality.lastVerified}
+            className="mt-2"
+          />
+        </div>
+
+        <p className="mt-4 border-t border-outline-variant pt-3 text-xs leading-relaxed text-on-surface-variant">
+          このページに掲載する順位は、すべて期末手当を含まない月額給料・月額報酬による順位です。期末手当を含む年間総額での順位は、全国共通の条件で計算できるデータがそろうまで掲載しません。
+        </p>
+      </SectionCard>
+
+      <SectionCard title="宮崎県9市の比較（月額）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          比較対象は宮崎県内9市（基準日：{formatJapaneseDate(miyazakiComparison.referenceDate)}
+          現在の公表月額）です。列見出しをクリック（モバイルはボタンをタップ）すると並び替えができます。
+        </p>
+        <MiyazakiComparisonTable municipalities={miyazakiComparison.municipalities} />
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{miyazakiComparison.calculationMethod}</p>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{miyazakiComparison.notes}</p>
+        <SourceLink
+          url={miyazakiComparison.sourceUrl}
+          label={`${miyazakiComparison.sourceTitle}（${miyazakiComparison.sourceOrganization}）`}
+          verifiedAt={miyazakiComparison.lastVerified}
+          className="mt-2"
+        />
       </SectionCard>
 
       <SectionCard title="自治体比較表">

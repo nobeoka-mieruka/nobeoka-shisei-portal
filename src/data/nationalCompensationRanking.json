@@ -1,0 +1,17 @@
+{
+  "sourceTitle": "総務省「令和7年地方公共団体別給与等の比較」",
+  "sourceOrganization": "総務省",
+  "sourceUrl": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/teiin-kyuuyo02.html",
+  "publishedDate": "2026-03-30",
+  "referenceDate": "2025-04-01",
+  "calculationMethod": "全国792市＋東京23特別区（計815市区、町村を除く）を対象に、市長・議長・副議長・議員の月額給料・報酬を個別に比較できる総務省の一次資料が確認できていないため、順位は算定していない。市長給料月額については都道府県別・団体区分別の平均値の公表は確認できたが、市区ごとの個別値を横断比較できる形では確認できていない。議長・副議長・議員の個別月額を全国815市区分まとめて掲載した総務省資料は確認できていない。",
+  "targetCount": 815,
+  "lastVerified": "2026-07-14",
+  "notes": "全国統一の基準で815市区すべてを個別比較できる一次資料を確認でき次第、実数に置き換える。推定値・部分順位は掲載しない。",
+  "roles": [
+    { "role": "mayor", "monthly": null, "rank": null },
+    { "role": "chair", "monthly": null, "rank": null },
+    { "role": "viceChair", "monthly": null, "rank": null },
+    { "role": "member", "monthly": null, "rank": null }
+  ]
+}

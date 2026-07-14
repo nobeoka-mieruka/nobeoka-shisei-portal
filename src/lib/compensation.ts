@@ -1,4 +1,5 @@
 import type { CompensationComparisonEntry, CompensationRole } from "../types";
+import { rankGeneric } from "./ranking";
 
 export const COMPENSATION_ROLES: { key: CompensationRole; label: string }[] = [
   { key: "mayor", label: "市長" },
@@ -56,17 +57,9 @@ export interface RankedEntry {
 
 /** 月額報酬の高い順に自治体を順位付けする。同額は同順位（1, 2, 2, 4方式）とする。 */
 export function rankByRole(entries: CompensationComparisonEntry[], role: CompensationRole): RankedEntry[] {
-  const sorted = [...entries]
-    .map((entry) => ({ entry, monthly: getMonthly(entry, role) }))
-    .sort((a, b) => b.monthly - a.monthly);
-
-  let rank = 1;
-  return sorted.map((item, index) => {
-    if (index > 0 && item.monthly !== sorted[index - 1].monthly) {
-      rank = index + 1;
-    }
-    return { ...item, rank };
-  });
+  return rankGeneric(entries, (entry) => getMonthly(entry, role))
+    .filter((r): r is { item: CompensationComparisonEntry; value: number; rank: number } => r.rank !== null)
+    .map((r) => ({ entry: r.item, monthly: r.value, rank: r.rank }));
 }
 
 export function findRank(ranked: RankedEntry[], municipality: string): number | null {

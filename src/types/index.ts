@@ -264,6 +264,61 @@ export interface PrefectureCompensationRanking {
   roles: PrefectureCompensationRankingEntry[];
 }
 
+/** 一次資料の出所を記録するための共通メタ情報（報酬比較データ用）。 */
+export interface CompensationSourceMeta {
+  sourceTitle: string;
+  sourceOrganization: string;
+  sourceUrl: string;
+  /** ISO形式。資料の公表日。 */
+  publishedDate?: string;
+  /** ISO形式。データの基準日。 */
+  referenceDate: string;
+  /** 順位・金額の算定方法を説明する文章。 */
+  calculationMethod: string;
+  /** 比較対象の自治体数。未確定の場合は null。 */
+  targetCount: number | null;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified?: string;
+  notes: string;
+}
+
+/** 宮崎県内市の報酬月額（1市分）。第20-1表に掲載された数値をそのまま使用する。 */
+export interface MiyazakiMunicipalityCompensation {
+  municipality: string;
+  mayorMonthly: number;
+  chairMonthly: number;
+  viceChairMonthly: number;
+  memberMonthly: number;
+}
+
+/** 宮崎県内市の報酬比較データ（複数市＋出典メタ情報）。 */
+export interface MiyazakiCompensationComparison extends CompensationSourceMeta {
+  municipalities: MiyazakiMunicipalityCompensation[];
+}
+
+/** 役職1件分の順位データ。全国横断の一次資料が確認できない間は monthly/rank とも null。 */
+export interface RoleRankingEntry {
+  role: CompensationRole;
+  monthly: number | null;
+  rank: number | null;
+}
+
+/** 全国815市区（792市＋東京23特別区、町村は含まない）を対象とした月額報酬順位。 */
+export interface NationalCompensationRanking extends CompensationSourceMeta {
+  roles: RoleRankingEntry[];
+}
+
+/** 類似団体（総務省の類似団体区分、または代替基準）を対象とした月額報酬順位。 */
+export interface SimilarMunicipalityComparison extends CompensationSourceMeta {
+  /** 類似団体の定義文（総務省区分名、または代替基準の説明）。未確定の場合は「確認中」等の文言。 */
+  definition: string;
+  /** 総務省の財政上の類似団体区分ではなく、当サイト独自の代替基準を使っている場合の注記。 */
+  usesAlternativeDefinition: boolean;
+  /** 対象自治体名の一覧。未確定の場合は空配列。 */
+  targetMunicipalities: string[];
+  roles: RoleRankingEntry[];
+}
+
 /** 議案の種別。 */
 export type BillCategory = "条例" | "予算" | "決算" | "人事" | "意見書" | "請願" | "その他";
 
