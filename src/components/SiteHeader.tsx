@@ -10,7 +10,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-outline-variant bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 print:hidden">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <Link
             to="/"
@@ -22,7 +22,7 @@ export function SiteHeader() {
               alt="延岡市政見える化ポータル"
               width={1536}
               height={1024}
-              className="h-8 w-auto max-w-[72vw] shrink-0 rounded-md bg-white object-contain px-1.5 py-1 sm:h-10 md:h-11 lg:h-14 lg:max-w-[520px]"
+              className="h-auto w-[clamp(200px,38vw,400px)] max-w-full shrink-0 rounded-md bg-white object-contain px-2 py-1.5"
             />
             <h1 className="sr-only">延岡市政見える化ポータル</h1>
           </Link>
