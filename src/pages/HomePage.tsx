@@ -55,6 +55,7 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "議案・採決結果を見る", to: "/bills", ready: true },
   { label: "一般質問を調べる", to: "/questions", ready: true },
   { label: "議案ごとの賛否を見る", to: "/bills/votes", ready: true },
+  { label: "サイト内を検索する", to: "/search", ready: true },
   { label: "編集方針を見る", to: "/editorial-policy", ready: true },
   { label: "情報提供・訂正依頼を送る", to: "/contact", ready: true },
 ];

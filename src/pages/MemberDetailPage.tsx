@@ -21,6 +21,7 @@ import { JsonLd } from "../components/JsonLd";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate, SITE_URL } from "../config/site";
+import { memberOgImage } from "../lib/ogImage";
 
 const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -60,6 +61,7 @@ export function MemberDetailPage() {
       ? {
           title: `${member.name}議員｜${titleParts.join("・")}`,
           description: `延岡市議会議員${member.name}氏の${descriptionParts.join("、")}などを掲載しています。`,
+          image: memberOgImage(member.id),
         }
       : { title: "議員情報", noindex: true },
   );
@@ -103,7 +105,7 @@ export function MemberDetailPage() {
 
       <section className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
-          <Avatar name={member.name} photoUrl={member.photoUrl} color={faction.color} size="xl" />
+          <Avatar name={member.name} photoUrl={member.photoUrl} color={faction.color} size="xl" loading="eager" />
           <div className="min-w-0 flex-1">
             <h1 className="text-2xl font-semibold text-on-surface">{member.name}</h1>
             <p className="text-sm text-on-surface-variant">{member.nameKana}</p>

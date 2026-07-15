@@ -21,6 +21,7 @@ import { BillsPage } from "./pages/BillsPage";
 import { BillVotesPage } from "./pages/BillVotesPage";
 import { BillVoteDetailPage } from "./pages/BillVoteDetailPage";
 import { GeneralQuestionsPage } from "./pages/GeneralQuestionsPage";
+import { SearchPage } from "./pages/SearchPage";
 import { UpdatesPage } from "./pages/UpdatesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="/bills/votes" element={<BillVotesPage />} />
             <Route path="/bills/votes/:id" element={<BillVoteDetailPage />} />
             <Route path="/questions" element={<GeneralQuestionsPage />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="/updates" element={<UpdatesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

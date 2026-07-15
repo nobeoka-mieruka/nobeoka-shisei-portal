@@ -39,21 +39,22 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
         </span>
       </div>
 
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        aria-expanded={expanded}
-        className={`mt-2 block w-full text-left ${linkClass}`}
-      >
+      <div className="mt-2">
         <Link
           to={`/members/${item.memberId}`}
-          onClick={(e) => e.stopPropagation()}
-          className={`inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+          className={`inline-block py-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
         >
           {item.memberName}
         </Link>
-        <h3 className="mt-1 text-base font-semibold leading-snug text-on-surface">{item.title}</h3>
-      </button>
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          className={`block w-full text-left ${linkClass}`}
+        >
+          <h3 className="text-base font-semibold leading-snug text-on-surface">{item.title}</h3>
+        </button>
+      </div>
 
       {item.topics.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-1.5">

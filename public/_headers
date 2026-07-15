@@ -1,0 +1,30 @@
+# Vite出力のハッシュ付きJS/CSSは内容が変わればファイル名も変わるため、長期キャッシュして問題ない。
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ロゴ・共通OGP画像などの静的画像。中身は変わり得るため、長期キャッシュにはしない。
+/images/*
+  Cache-Control: public, max-age=604800
+
+/og/*
+  Cache-Control: public, max-age=86400
+
+/og-image.png
+  Cache-Control: public, max-age=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+# sitemap.xml・robots.txtはビルドのたびに内容が変わり得るため、短めのキャッシュにする。
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+# 全ページ共通のセキュリティ関連ヘッダー。
+# index.html（SPAのため実質すべてのルートで配信される）は、ここでは長期キャッシュを指定しない。
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

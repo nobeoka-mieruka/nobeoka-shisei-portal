@@ -4,12 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/generate-site-update.mjs && vite",
+    "dev": "node scripts/generate-site-update.mjs && node scripts/generate-search-index.mjs && vite",
     "validate:data": "node scripts/validate-data.mjs",
     "generate:site-update": "node scripts/generate-site-update.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "generate:search": "node scripts/generate-search-index.mjs",
+    "generate:og": "node scripts/generate-og.mjs",
+    "import:members": "node scripts/import-members.mjs",
     "typecheck": "tsc -b",
-    "build": "node scripts/generate-site-update.mjs && node scripts/validate-data.mjs && node scripts/generate-sitemap.mjs && tsc -b && vite build",
+    "build": "node scripts/generate-site-update.mjs && node scripts/validate-data.mjs && node scripts/generate-search-index.mjs && node scripts/generate-sitemap.mjs && tsc -b && vite build",
     "lint": "oxlint",
     "check": "npm run validate:data && npm run typecheck && npm run lint && npm run build",
     "release:check": "npm run build && node scripts/release-check.mjs",
@@ -31,6 +34,7 @@
     "oxlint": "^1.71.0",
     "tailwindcss": "^4.3.2",
     "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "xlsx": "^0.18.5"
   }
 }

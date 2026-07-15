@@ -35,7 +35,7 @@ export function MayorPage() {
       <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長情報" }]} />
       <section className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
-          <Avatar name={mayor.name} photoUrl={mayor.photoUrl} color="#375ca8" size="xl" />
+          <Avatar name={mayor.name} photoUrl={mayor.photoUrl} color="#375ca8" size="xl" loading="eager" />
           <div className="min-w-0 flex-1">
             <p className="text-sm text-on-surface-variant">延岡市長</p>
             <h1 className="text-2xl font-semibold text-on-surface">{mayor.name}</h1>

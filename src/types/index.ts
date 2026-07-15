@@ -783,3 +783,18 @@ export interface FinanceDashboardData {
   sources: FinanceSourceMeta[];
   notes: string;
 }
+
+/** サイト内横断検索のインデックス区分。 */
+export type SearchEntryType = "member" | "mayor" | "promise" | "bill" | "question" | "compensation" | "finance" | "update";
+
+/**
+ * サイト内横断検索のインデックス1件分。ビルド時に既存JSONから自動生成する（scripts/generate-search-index.mjs）。
+ * 手入力はしないこと。
+ */
+export interface SearchIndexEntry {
+  type: SearchEntryType;
+  title: string;
+  description: string;
+  url: string;
+  keywords: string[];
+}

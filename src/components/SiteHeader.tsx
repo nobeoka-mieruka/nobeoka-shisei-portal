@@ -18,7 +18,7 @@ export function SiteHeader() {
             className="flex min-w-0 items-center rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <img
-              src="/images/nobeoka-shisei-logo.png"
+              src="/images/nobeoka-shisei-logo.webp"
               alt="延岡市政見える化ポータル"
               width={1536}
               height={1024}

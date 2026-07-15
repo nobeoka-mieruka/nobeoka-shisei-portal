@@ -11,9 +11,18 @@ interface AvatarProps {
   color?: string;
   size?: keyof typeof sizeClasses;
   className?: string;
+  /** 一覧に多数並ぶ場合は既定の"lazy"のままにし、詳細ページの単体表示など画面上部に出る場合は"eager"を指定する。 */
+  loading?: "lazy" | "eager";
 }
 
-export function Avatar({ name, photoUrl, color = "#375ca8", size = "md", className = "" }: AvatarProps) {
+export function Avatar({
+  name,
+  photoUrl,
+  color = "#375ca8",
+  size = "md",
+  className = "",
+  loading = "lazy",
+}: AvatarProps) {
   const initial = name.trim().charAt(0) || "?";
 
   if (photoUrl) {
@@ -21,6 +30,8 @@ export function Avatar({ name, photoUrl, color = "#375ca8", size = "md", classNa
       <img
         src={photoUrl}
         alt={name}
+        loading={loading}
+        decoding="async"
         className={`${sizeClasses[size]} shrink-0 rounded-full object-cover ${className}`}
       />
     );

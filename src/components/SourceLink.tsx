@@ -18,7 +18,7 @@ export function SourceLink({ url, label = "根拠資料を見る", verifiedAt, c
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${label}（外部サイトが新しいタブで開きます）`}
-        className="inline-flex items-center gap-1 rounded text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="inline-flex items-center gap-1 rounded py-1 text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <GlobeIcon className="h-3.5 w-3.5" />
         {label}

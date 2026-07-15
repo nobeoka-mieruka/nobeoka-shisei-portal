@@ -43,7 +43,7 @@ export function ContactPage() {
             当サイトの基本的な考え方は、
             <Link
               to="/editorial-policy"
-              className="rounded text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="rounded text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               編集方針
             </Link>

@@ -23,15 +23,16 @@ const staticPages = [
   "/finance",
   "/dashboard",
   "/compensation",
-  "/bills",
   "/bills/votes",
   "/questions",
+  "/search",
   "/about",
   "/editorial-policy",
   "/contact",
   "/terms",
   "/updates",
 ];
+// 注：/bills は /bills/votes と内容が重複するためnoindex設定にしており、sitemapには含めない。
 
 /** @type {{ loc: string, lastmod?: string }[]} */
 const urls = [];
