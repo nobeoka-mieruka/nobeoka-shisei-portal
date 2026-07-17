@@ -17,6 +17,7 @@ const typeLabels: Record<SearchEntryType, string> = {
   compensation: "報酬",
   finance: "財政",
   update: "更新履歴",
+  guide: "案内",
 };
 
 const linkClass =

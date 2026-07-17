@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { HomeIcon, LandmarkIcon, ChartBarIcon, YenIcon } from "./icons";
+import { HomeIcon, LandmarkIcon, ChartBarIcon, YenIcon, CompassIcon } from "./icons";
 
 const itemClass = ({ isActive }: { isActive: boolean }) =>
   `flex flex-1 flex-col items-center justify-center gap-1 rounded-2xl py-2 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
@@ -63,6 +63,20 @@ export function BottomNav() {
                 <YenIcon className="h-5 w-5" />
               </span>
               報酬
+            </>
+          )}
+        </NavLink>
+        <NavLink to="/city-guide" className={itemClass}>
+          {({ isActive }) => (
+            <>
+              <span
+                className={`flex h-8 w-14 items-center justify-center rounded-full ${
+                  isActive ? "bg-secondary-container" : ""
+                }`}
+              >
+                <CompassIcon className="h-5 w-5" />
+              </span>
+              市役所案内
             </>
           )}
         </NavLink>

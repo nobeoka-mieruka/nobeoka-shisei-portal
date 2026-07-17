@@ -27,6 +27,9 @@ export function Footer() {
           <Link to="/dashboard" className={linkClass}>
             ダッシュボード
           </Link>
+          <Link to="/city-guide" className={linkClass}>
+            市役所案内
+          </Link>
           <Link to="/finance" className={linkClass}>
             延岡市の財政
           </Link>

@@ -785,7 +785,16 @@ export interface FinanceDashboardData {
 }
 
 /** サイト内横断検索のインデックス区分。 */
-export type SearchEntryType = "member" | "mayor" | "promise" | "bill" | "question" | "compensation" | "finance" | "update";
+export type SearchEntryType =
+  | "member"
+  | "mayor"
+  | "promise"
+  | "bill"
+  | "question"
+  | "compensation"
+  | "finance"
+  | "update"
+  | "guide";
 
 /**
  * サイト内横断検索のインデックス1件分。ビルド時に既存JSONから自動生成する（scripts/generate-search-index.mjs）。

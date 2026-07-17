@@ -20,6 +20,7 @@ npm run build    # 本番ビルド
 - `src/data/members.json` … 議員27名分のデータ（配列）
 - `src/data/mayor.json` … 市長のデータ（単一オブジェクト）
 - `src/data/compensationComparison.json` … 市長・議長・副議長・議員の報酬比較データ（近隣市ごとの配列。`/compensation` ページで使用）
+- `src/data/cityGuideData.ts` … 「延岡市役所 どこに行けばいい？診断」（`/city-guide`）のカテゴリ・質問・分岐・担当課データ。型定義は `src/types/cityGuide.ts`。電話番号・場所・受付時間・公式URLなど未確認の項目は空欄のままにし、推測で入力しないこと（公式URL未設定の課は「公式ページを見る」ボタンが自動的に非表示になる）
 
 型定義は `src/types/index.ts` にあります。フィールドの意味に迷ったらこちらを参照してください。
 

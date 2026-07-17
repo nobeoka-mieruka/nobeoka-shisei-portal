@@ -13,6 +13,7 @@ import { MayorEntertainmentExpensesPage } from "./pages/MayorEntertainmentExpens
 import { FinancePage } from "./pages/FinancePage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { CompensationPage } from "./pages/CompensationPage";
+import { CityGuidePage } from "./pages/CityGuidePage";
 import { AboutPage } from "./pages/AboutPage";
 import { TermsPage } from "./pages/TermsPage";
 import { EditorialPolicyPage } from "./pages/EditorialPolicyPage";
@@ -51,6 +52,7 @@ function App() {
             <Route path="/finance" element={<FinancePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/compensation" element={<CompensationPage />} />
+            <Route path="/city-guide" element={<CityGuidePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/editorial-policy" element={<EditorialPolicyPage />} />

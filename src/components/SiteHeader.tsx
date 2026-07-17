@@ -43,6 +43,9 @@ export function SiteHeader() {
           <NavLink to="/compensation" className={navLinkClass}>
             報酬
           </NavLink>
+          <NavLink to="/city-guide" className={navLinkClass}>
+            市役所案内
+          </NavLink>
         </nav>
       </div>
     </header>

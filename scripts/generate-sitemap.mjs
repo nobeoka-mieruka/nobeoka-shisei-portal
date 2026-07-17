@@ -23,6 +23,7 @@ const staticPages = [
   "/finance",
   "/dashboard",
   "/compensation",
+  "/city-guide",
   "/bills/votes",
   "/questions",
   "/search",
