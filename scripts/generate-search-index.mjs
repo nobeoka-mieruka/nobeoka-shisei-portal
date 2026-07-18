@@ -145,6 +145,27 @@ entries.push({
   ],
 });
 
+// --- mayor press conferences (データは src/data/mayorPressConferences.ts で管理しているため、ここでは固定エントリを登録する) ---
+entries.push({
+  type: "press-conference",
+  title: "令和8年7月16日市長定例記者会見",
+  description:
+    "県内初のリーグH公式戦開催、愛宕山実証実験イベント募集、自衛隊統合防災演習、INSECTS特別展、市民スペース開放、学びの多様化学校の学校名提案について",
+  url: "/mayor/press-conferences/2026-07-16",
+  keywords: [
+    "市長定例記者会見",
+    "リーグH",
+    "愛宕山",
+    "自衛隊統合防災演習",
+    "08JXR",
+    "INSECTS",
+    "内藤記念博物館",
+    "市民スペース",
+    "学びの多様化学校",
+    "熊野江教室",
+  ],
+});
+
 // --- update history ---
 const updateHistory = readJson("src/data/updateHistory.json");
 for (const u of updateHistory) {

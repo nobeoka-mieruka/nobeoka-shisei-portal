@@ -1,5 +1,6 @@
 import mayorData from "../data/mayor.json";
 import mayorPromisesData from "../data/mayorPromises.json";
+import { getSortedMayorPressConferences } from "../data/mayorPressConferences";
 import type { Mayor, MayorPromisesData } from "../types";
 import { Avatar } from "../components/Avatar";
 import { SnsLinks } from "../components/SnsLinks";
@@ -14,9 +15,11 @@ import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons"
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
 import { aggregateCategoryStatus, mayorPromiseStatusClass } from "../lib/mayorPromiseStatus";
+import { formatJapaneseDate } from "../config/site";
 
 const mayor = mayorData as Mayor;
 const promisesData = mayorPromisesData as MayorPromisesData;
+const pressConferences = getSortedMayorPressConferences();
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -152,6 +155,37 @@ export function MayorPage() {
           })}
         </ul>
       </SectionCard>
+
+      {pressConferences.length > 0 && (
+        <SectionCard title="市長定例記者会見・発表">
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            延岡市公式ホームページに掲載された市長定例記者会見の発表内容を、そのまま整理して掲載しています。当サイトは延岡市公式サイトではありません。
+          </p>
+          <ul className="space-y-2">
+            {pressConferences.map((c) => (
+              <li key={c.date}>
+                <Link
+                  to={`/mayor/press-conferences/${c.date}`}
+                  className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="font-medium text-on-surface">{c.title}</p>
+                    <span className="shrink-0 rounded-full bg-primary-container px-2.5 py-0.5 text-xs font-semibold text-on-primary-container">
+                      延岡市公式発表
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-on-surface-variant">
+                    開催日：{formatJapaneseDate(c.date)}／発表事項{c.announcements.length}件
+                  </p>
+                  <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">
+                    発表内容を見る
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
 
       {mayor.policies.length > 0 && (
         <SectionCard title="市政方針">

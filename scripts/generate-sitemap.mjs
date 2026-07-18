@@ -32,6 +32,9 @@ const staticPages = [
   "/contact",
   "/terms",
   "/updates",
+  // 市長定例記者会見の詳細ページ。データは src/data/mayorPressConferences.ts で管理しているため、
+  // 新しい記者会見を追加した際は、このリストにもURLを追加する。
+  "/mayor/press-conferences/2026-07-16",
 ];
 // 注：/bills は /bills/votes と内容が重複するためnoindex設定にしており、sitemapには含めない。
 
