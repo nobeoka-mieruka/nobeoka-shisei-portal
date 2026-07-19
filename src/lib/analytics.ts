@@ -5,7 +5,9 @@ declare global {
   }
 }
 
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+// 測定ID（G-XXXXXXXXXX）は公開情報のためコード内に直接記載している（Cloudflare Pagesの
+// ビルド環境変数の設定漏れでgtag.jsが読み込まれなくなる事故を避けるため、環境変数には依存しない）。
+const GA_MEASUREMENT_ID = "G-GHQCETJ7FN";
 
 const LOCALHOST_HOSTNAMES = ["localhost", "127.0.0.1", "[::1]"];
 

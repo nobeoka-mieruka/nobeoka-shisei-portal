@@ -66,12 +66,12 @@ if (!existsSync(join(root, "public", "og-image.png"))) {
   fail("public/og-image.png（共通OGP画像）が見つかりません。");
 }
 
-// --- .env.example / GA ---
+// --- GA（測定IDはanalytics.tsに直接記載する方式。ビルド環境変数の設定漏れで
+//     測定が止まる事故を防ぐため、Cloudflare Pagesの環境変数には依存しない） ---
 if (!existsSync(join(root, "src", "lib", "analytics.ts"))) {
   fail("src/lib/analytics.ts が見つかりません。GA4実装が失われている可能性があります。");
-}
-if (!existsSync(join(root, ".env.example")) || !read(".env.example").includes("VITE_GA_MEASUREMENT_ID")) {
-  warn(".env.example に VITE_GA_MEASUREMENT_ID が見つかりません。");
+} else if (!/GA_MEASUREMENT_ID\s*=\s*"G-[A-Z0-9]+"/.test(read("src/lib/analytics.ts"))) {
+  fail("src/lib/analytics.ts にGA測定ID（G-XXXXXXXXXX）のハードコードが見つかりません。");
 }
 
 // --- β版表記の残存チェック（更新履歴などの過去記録は除外） ---

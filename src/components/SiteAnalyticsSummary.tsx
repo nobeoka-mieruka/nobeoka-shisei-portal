@@ -3,10 +3,10 @@ import { SectionCard } from "./SectionCard";
 import { formatJapaneseDate } from "../config/site";
 
 interface SiteStats {
-  period: { from: string; to: string };
-  visitors: number;
-  pageViews: number;
-  pagesPerVisitor: number;
+  users7d: number;
+  users30d: number;
+  pageViews30d: number;
+  pageViewsToday: number;
   updatedAt: string;
 }
 
@@ -44,33 +44,39 @@ export function SiteAnalyticsSummary() {
   return (
     <SectionCard title="サイト利用状況">
       {state.status === "loading" && (
-        <p className="text-sm text-on-surface-variant">サイト利用状況を読み込んでいます</p>
+        <p className="text-sm text-on-surface-variant">利用状況を読み込んでいます</p>
       )}
       {state.status === "error" && (
-        <p className="text-sm text-on-surface-variant">現在、サイト利用状況を取得できません</p>
+        <p className="text-xs text-on-surface-variant">
+          利用状況は現在更新中です。しばらくしてから再度ご確認ください。
+        </p>
       )}
       {state.status === "success" && (
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="rounded-lg bg-surface-container-high p-3">
-              <p className="text-xs text-on-surface-variant">訪問者数</p>
+              <p className="text-xs text-on-surface-variant">過去7日間のユーザー数</p>
               <p className="mt-1 text-lg font-semibold text-on-surface">
-                {state.data.visitors.toLocaleString("ja-JP")}人
+                {state.data.users7d.toLocaleString("ja-JP")}人
               </p>
             </div>
             <div className="rounded-lg bg-surface-container-high p-3">
-              <p className="text-xs text-on-surface-variant">ページビュー</p>
+              <p className="text-xs text-on-surface-variant">過去30日間のユーザー数</p>
               <p className="mt-1 text-lg font-semibold text-on-surface">
-                {state.data.pageViews.toLocaleString("ja-JP")}PV
+                {state.data.users30d.toLocaleString("ja-JP")}人
               </p>
             </div>
             <div className="rounded-lg bg-surface-container-high p-3">
-              <p className="text-xs text-on-surface-variant">平均閲覧ページ数</p>
-              <p className="mt-1 text-lg font-semibold text-on-surface">{state.data.pagesPerVisitor}ページ</p>
+              <p className="text-xs text-on-surface-variant">過去30日間の表示回数</p>
+              <p className="mt-1 text-lg font-semibold text-on-surface">
+                {state.data.pageViews30d.toLocaleString("ja-JP")}回
+              </p>
             </div>
             <div className="rounded-lg bg-surface-container-high p-3">
-              <p className="text-xs text-on-surface-variant">集計期間</p>
-              <p className="mt-1 text-lg font-semibold text-on-surface">過去30日間</p>
+              <p className="text-xs text-on-surface-variant">本日の表示回数</p>
+              <p className="mt-1 text-lg font-semibold text-on-surface">
+                {state.data.pageViewsToday.toLocaleString("ja-JP")}回
+              </p>
             </div>
           </div>
           <p className="mt-2 text-xs text-on-surface-variant">最終更新：{formatUpdatedAt(state.data.updatedAt)}</p>
