@@ -1,5 +1,5 @@
 /**
- * GA4のサイト利用状況（ユーザー数・表示回数）を返すエンドポイント。
+ * GA4の累計表示回数（screenPageViews）を返すエンドポイント。
  * サービスアカウントの秘密鍵はここでのみ使用し、レスポンスには含めない。
  * GA_PROPERTY_ID はGoogle Analytics Data APIの数値プロパティID（測定ID "G-XXXX" とは別物）。
  */
@@ -11,12 +11,11 @@ interface Env {
 }
 
 interface SiteStatsPayload {
-  users7d: number;
-  users30d: number;
-  pageViews30d: number;
-  pageViewsToday: number;
-  updatedAt: string;
+  totalPageViews: number;
 }
+
+// 計測開始日より確実に前になる日付。累計値を取りこぼさないための起点。
+const TOTAL_START_DATE = "2020-01-01";
 
 const CACHE_TTL_SECONDS = 60 * 60; // 1時間
 const FALLBACK_TTL_SECONDS = 60 * 60 * 24; // 直前の正常値を保持しておく期間（24時間）
@@ -147,29 +146,21 @@ async function getAccessToken(env: Env): Promise<string> {
   return tokenJson.access_token;
 }
 
-interface GaReportRequest {
-  dateRanges: { startDate: string; endDate: string }[];
-  metrics: { name: string }[];
-}
+async function fetchTotalPageViews(env: Env): Promise<number> {
+  const accessToken = await getAccessToken(env);
 
-interface GaReport {
-  rows?: { metricValues?: { value?: string }[] }[];
-}
-
-async function runBatchReports(
-  env: Env,
-  accessToken: string,
-  requests: GaReportRequest[],
-): Promise<GaReport[]> {
   const res = await fetch(
-    `https://analyticsdata.googleapis.com/v1beta/properties/${env.GA_PROPERTY_ID}:batchRunReports`,
+    `https://analyticsdata.googleapis.com/v1beta/properties/${env.GA_PROPERTY_ID}:runReport`,
     {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ requests }),
+      body: JSON.stringify({
+        dateRanges: [{ startDate: TOTAL_START_DATE, endDate: "today" }],
+        metrics: [{ name: "screenPageViews" }],
+      }),
     },
   );
 
@@ -200,38 +191,13 @@ async function runBatchReports(
     );
   }
 
-  const json = (await res.json()) as { reports?: GaReport[] };
-  return json.reports ?? [];
-}
-
-function metricValue(report: GaReport | undefined, index: number): number {
-  return Number(report?.rows?.[0]?.metricValues?.[index]?.value ?? 0);
+  const json = (await res.json()) as { rows?: { metricValues?: { value?: string }[] }[] };
+  return Number(json.rows?.[0]?.metricValues?.[0]?.value ?? 0);
 }
 
 async function fetchGa4Stats(env: Env): Promise<SiteStatsPayload> {
-  const accessToken = await getAccessToken(env);
-
-  const reports = await runBatchReports(env, accessToken, [
-    { dateRanges: [{ startDate: "7daysAgo", endDate: "yesterday" }], metrics: [{ name: "activeUsers" }] },
-    {
-      dateRanges: [{ startDate: "30daysAgo", endDate: "yesterday" }],
-      metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
-    },
-    { dateRanges: [{ startDate: "today", endDate: "today" }], metrics: [{ name: "screenPageViews" }] },
-  ]);
-
-  const users7d = metricValue(reports[0], 0);
-  const users30d = metricValue(reports[1], 0);
-  const pageViews30d = metricValue(reports[1], 1);
-  const pageViewsToday = metricValue(reports[2], 0);
-
-  return {
-    users7d,
-    users30d,
-    pageViews30d,
-    pageViewsToday,
-    updatedAt: new Date().toISOString(),
-  };
+  const totalPageViews = await fetchTotalPageViews(env);
+  return { totalPageViews };
 }
 
 function jsonResponse(body: unknown, status: number, cacheControl?: string): Response {
