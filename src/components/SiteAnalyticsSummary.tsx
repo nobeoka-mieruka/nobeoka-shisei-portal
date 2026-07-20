@@ -26,6 +26,10 @@ type LoadState =
   | { status: "unavailable"; message: string };
 
 const GENERIC_UNAVAILABLE_MESSAGE = "アクセス数を一時的に取得できません。";
+// 公開画面での表示上の集計期間。APIは内部的に最大180日分（windowDays）を取得するが、
+// 現時点では実データが直近30日区間にしか存在しないため、表示は「直近30日間」に固定する。
+// 将来データが十分蓄積された場合は、この値とAPIのwindowDaysを揃えることを検討する。
+const DISPLAY_WINDOW_DAYS = 30;
 
 export function SiteAnalyticsSummary() {
   const [state, setState] = useState<LoadState>({ status: "loading" });
@@ -72,17 +76,25 @@ export function SiteAnalyticsSummary() {
         </div>
       )}
       {state.status === "success" && (
-        <div className="rounded-lg bg-surface-container-high p-4">
-          <p className="text-xs text-on-surface-variant">
-            {state.data.windowDays ? `直近${state.data.windowDays}日間のアクセス数` : "アクセス数"}
-          </p>
-          <p className="mt-1 text-3xl font-bold text-on-surface break-all">
-            {state.data.totalViews.toLocaleString("ja-JP")}回
-          </p>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="min-w-0 rounded-lg bg-surface-container-high p-4">
+            <p className="text-xs text-on-surface-variant">直近{DISPLAY_WINDOW_DAYS}日間のアクセス数</p>
+            <p className="mt-1 text-2xl font-bold tabular-nums text-on-surface sm:text-3xl">
+              {state.data.totalViews.toLocaleString("ja-JP")}
+              <span className="ml-1 text-sm font-medium text-on-surface-variant">件</span>
+            </p>
+          </div>
+          <div className="min-w-0 rounded-lg bg-surface-container-high p-4">
+            <p className="text-xs text-on-surface-variant">本日のアクセス数</p>
+            <p className="mt-1 text-2xl font-bold tabular-nums text-on-surface sm:text-3xl">
+              {state.data.todayViews.toLocaleString("ja-JP")}
+              <span className="ml-1 text-sm font-medium text-on-surface-variant">件</span>
+            </p>
+          </div>
         </div>
       )}
       <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-        Cloudflare Analyticsで取得可能な期間内の集計値です（サイト開設以来の累計ではありません）。個人を特定できる情報は表示していません。
+        Cloudflare Web Analyticsで確認できる期間内のページ閲覧数です。個人を特定できる情報は表示していません。
       </p>
     </SectionCard>
   );

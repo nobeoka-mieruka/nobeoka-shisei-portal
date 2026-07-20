@@ -75,7 +75,7 @@ const CHUNK_DAYS = 30;
 const DAY_MS = 24 * 60 * 60 * 1000;
 // quotaエラー修正（180日ウィンドウ化）後のコードであることをデバッグレスポンスから確認するための固定文字列。
 // このロジックを変更した場合は値も更新する。
-const CODE_VERSION = "cloudflare-analytics-180d-v3-sitetag-diag";
+const CODE_VERSION = "cloudflare-analytics-180d-v4-cache-key-bust";
 
 type SiteStatsFailureStage =
   | "token_error"
@@ -651,8 +651,11 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
   const debugRequested = url.searchParams.has("debug");
   const bypassCache = debugRequested || url.searchParams.has("nocache");
   const cache = caches.default;
-  const liveCacheKey = new Request(`${url.origin}${url.pathname}?variant=live`);
-  const fallbackCacheKey = new Request(`${url.origin}${url.pathname}?variant=fallback`);
+  // キャッシュキーにCODE_VERSIONを含めることで、集計ロジックを修正してCODE_VERSIONを上げるたびに
+  // 古い（修正前のデータに基づく）キャッシュ済みレスポンスを自動的に無効化する
+  // （過去に例あり：siteTag修正後も、修正前にキャッシュされた0件レスポンスが最大1時間残り続けた）。
+  const liveCacheKey = new Request(`${url.origin}${url.pathname}?variant=live&v=${CODE_VERSION}`);
+  const fallbackCacheKey = new Request(`${url.origin}${url.pathname}?variant=fallback&v=${CODE_VERSION}`);
 
   // 環境変数が未設定の場合はCloudflare APIを呼ばず、キャッシュもせずに安全な状態を返す。
   // 設定完了後すぐに反映されるよう、この状態はエッジキャッシュしない。

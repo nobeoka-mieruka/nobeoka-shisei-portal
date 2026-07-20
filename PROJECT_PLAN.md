@@ -46,7 +46,7 @@
 - [x] 情報提供・訂正フォーム（`CorrectionRequestButton` → Googleフォーム連携）
 - [x] サイト内検索（`/search`、`searchIndex.json` 自動生成）※2026-07-20、検索ロジック刷新（表記ゆれ吸収・関連度スコア）、検索結果ハイライト（`HighlightText`）、検索履歴（`useSearchHistory`、端末内localStorageのみ・外部送信なし）、ヘッダーへの検索導線を追加
 - [x] Google Analytics（測定ID `G-GHQCETJ7FN`、SPA遷移でpage_view送信）
-- [x] Cloudflare Analytics（累計アクセス数表示、`functions/api/site-stats.ts`、キャッシュ・フォールバック付き）※当初案では「実装中」でしたが、直近コミットで安定稼働しているため完成済みへ移動
+- [x] Cloudflare Analytics（`functions/api/site-stats.ts`、キャッシュ・フォールバック付き）※2026-07-20、本番で実データ取得を確認（根本原因は`CLOUDFLARE_SITE_TAG`環境変数の値の誤りで、保持期間・キャッシュ・レスポンス形状の複数のコード側修正も実施）。表示は「累計アクセス数」から「直近30日間のアクセス数」＋「本日のアクセス数」の2項目表示へ変更（実データの保持期間に合わせ、誤解を避けるため）
 - [x] SEO基本設定（title / description / canonical を `usePageTitle` で全ページ共通管理）
 - [x] JSON-LD（構造化データ、主要11ページに実装済み）
 - [x] パンくず（`Breadcrumbs` コンポーネント、主要ページに実装済み）

@@ -57,7 +57,7 @@
 
 ### TASK-002 Cloudflare Analytics API（/api/site-stats）の本番503エラー解消
 
-状態：BLOCKED（コード側は対応完了。Cloudflareダッシュボード側の設定確認が残作業）
+状態：DONE
 優先度：A
 対象：`functions/api/site-stats.ts`、`src/components/SiteAnalyticsSummary.tsx`、Cloudflare Pagesダッシュボード
 依存関係：なし
@@ -71,26 +71,29 @@
 - 公開ページ（`SiteAnalyticsSummary.tsx`）を新レスポンス契約に対応させ、「設定確認中」と「一時的に取得できません」を文言で区別
 - 管理者専用ページは既存に存在せず、認証機構もないため新規追加はしない（詳細診断情報を公開ページへは出さない）
 
-残作業（Cloudflareダッシュボード側・人手）：
-- Cloudflare Pagesダッシュボード → 対象プロジェクト → Settings → Variables and Secrets で、**Production環境**に`CLOUDFLARE_ACCOUNT_ID`/`CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_SITE_TAG`が設定されているか確認する（Preview環境のみだと本番に反映されない）
-- `CLOUDFLARE_API_TOKEN`に、Account単位の「Account Analytics」Read権限が付与されているか確認する（公式ドキュメントで確認済みの必要権限）
-- `CLOUDFLARE_SITE_TAG`が、対象サイトのWeb Analytics（RUM）設定画面に表示される正しいサイトタグと一致しているか確認する
-- 環境変数を追加・変更した場合は再デプロイが必要（Cloudflare Pagesは環境変数変更を次回デプロイから反映）
-- 変更後、Cloudflare Pagesの「Functions」リアルタイムログで`[site-stats] failed at stage=...`が出ていないか確認する
+解消までの経緯（2026-07-20、本番リアルタイムログでの一次情報に基づく段階的対応）：
+1. 保持期間超過エラー（`account cannot request data older than 26w2d`）を解消。31日×6区間（186日）だったチャンク方式を30日×6区間（180日、安全余裕あり）へ変更し、任意の`CLOUDFLARE_ANALYTICS_START_DATE`環境変数（未設定可）にも対応
+2. `?debug=1`診断エンドポイントを追加し、キャッシュが query 文字列を無視して共有される問題（`?nocache`等が効かない）を修正、`?debug=1`/`?nocache`時はキャッシュを完全に迂回するよう変更
+3. AdaptiveGroupsのレスポンス形状（`count`が単一オブジェクトではなく配列で返る）に対応するよう`readCount`を修正
+4. siteTag不一致の調査用に、直近30日→前30日→さらに前30日と遡る診断クエリ（`siteTagDiagnostics`）を追加。診断の結果、**`CLOUDFLARE_SITE_TAG`環境変数の値が実際のWeb Analyticsデータのsiteタグと一致していなかったことが根本原因と判明**（コードの不具合ではない）
+5. 診断クエリ自体もCloudflareの1回あたり最大期間（13w2d）を超えていたため30日単位へ修正。Cloudflareのエラーメッセージ自体にAccount IDが埋め込まれるケースがあり、ログ・デバッグレスポンスへ漏れていたため`redactSecrets()`で除去
+6. `CLOUDFLARE_SITE_TAG`をユーザーが正しい値へ更新後、`totalViews`/`todayViews`が実データ（890件／99件など）で取得できることを確認
+7. キャッシュキーに`CODE_VERSION`を含め、ロジック修正のたびに修正前データに基づく古いキャッシュ済みレスポンス（最大1時間残留）を自動的に無効化するよう変更
+8. 公開表示の文言を「累計アクセス数」から「直近30日間のアクセス数」＋「本日のアクセス数」の2項目表示に変更し、実際のデータ保持期間・意味と一致させた
 
 受入条件：
-- 本番`/api/site-stats`が503を返さない（コード変更により達成済み）
-- 環境変数設定後、本番で実際の累計アクセス数（`ok: true`）が返る（人手確認待ち）
-- コード変更を伴う場合、推測ではなく特定できた原因に基づく修正であること
+- 本番`/api/site-stats`が503を返さない（達成）
+- 環境変数設定後、本番で実際のアクセス数（`ok: true`、`totalViews`/`todayViews`が実データ）が返る（達成、2026-07-20確認）
+- コード変更を伴う場合、推測ではなく特定できた原因に基づく修正であること（達成。各段階とも本番ログ・`?debug=1`診断結果に基づく）
 
 公式資料：
 - Cloudflare公式ドキュメント（GraphQL Analytics API、Getting started／Authentication／Account Analytics権限）
-- Cloudflare Pagesダッシュボード（アクセス権が必要なため人手対応）
+- Cloudflare Pagesダッシュボード本番リアルタイムログ、`?debug=1`診断エンドポイント（一次情報として使用）
 
 完了記録：
-- 完了日：2026-07-20（コード側のみ。Cloudflare側設定確認まで完了した時点でDONEへ変更する）
-- コミットID：09b8d87
-- 変更概要：`functions/api/site-stats.ts`のレスポンス契約を`{ok,...}`形式に刷新し503を廃止、`todayViews`追加、公開コンポーネントを新契約へ対応。ローカルで`wrangler pages dev`により環境変数なし（`configuration_required`）・ダミー無効トークンあり（`temporarily_unavailable`、ログに秘密情報なし）の両方を確認済み。本番の実データ取得はCloudflareダッシュボード側の環境変数設定に依存するため引き続きBLOCKED。
+- 完了日：2026-07-20
+- コミットID：09b8d87（初回契約変更）、fe1fab8/aaab385/b1ad494（Redeploy）、7d4ea86（保持期間180日化）、59c1ec2（キャッシュ診断追加）、6c2e647（AdaptiveGroups配列対応）、a8e88bb（siteTag発見診断追加）、1bf7269（診断クエリ期間修正）、18f1bc0（Account ID漏えい修正）、c9f2253/2532634（env変更後再デプロイ）、775a115（siteTag比較のtrim/大文字小文字正規化）、（表示文言変更コミットは本記録更新と同時に追記予定）
+- 変更概要：上記1〜8のとおり。根本原因は環境変数`CLOUDFLARE_SITE_TAG`の値の誤りであり、コード側は保持期間・レスポンス形状・キャッシュ・診断機能の複数の実バグ修正と、原因特定のための診断機能追加を行った。
 
 ---
 
