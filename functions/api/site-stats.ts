@@ -30,6 +30,9 @@ interface SiteStatsDebugInfo {
   // 成功時のみ。alias（c0～c5、today）ごとの実際の値の形と、集計に使った件数。
   aliasShapes?: Record<string, string>;
   chunkCounts?: Record<string, number>;
+  // 成功時のみ。設定済みsiteTagでフィルタせず、実際にイベントが存在するsiteTag上位（件数降順）。
+  // 設定値が実データと一致しているかを確認するための調査用。
+  siteTagDiagnostics?: SiteTagDiagnosticsResult;
 }
 
 interface SiteStatsSuccessPayload {
@@ -436,6 +439,88 @@ async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<
   }
 }
 
+interface SiteTagDiagnosticsResult {
+  // 実際にイベントが存在するsiteTag上位。件数降順。siteTagはRUMビーコンのトークンで、
+  // 本番HTMLに`<script data-cf-beacon>`として公開されている値のため秘密情報ではない。
+  topSiteTags?: { siteTag: string | null; count: number }[];
+  error?: string;
+}
+
+/**
+ * ?debug=1専用の追加調査クエリ。設定済みCLOUDFLARE_SITE_TAGでフィルタせず、
+ * 指定期間内に実際にイベントが存在するsiteTagを件数降順で取得する。
+ * 本処理が失敗しても本来のtotalViews/todayViews取得には影響させない（常に例外を投げない）。
+ */
+async function fetchSiteTagDiagnostics(
+  env: Env,
+  requestedStart: string,
+  requestedEnd: string,
+): Promise<SiteTagDiagnosticsResult> {
+  const query = `
+    query SiteStatsSiteTagDiscovery($accountTag: string) {
+      viewer {
+        accounts(filter: { accountTag: $accountTag }) {
+          topSiteTags: rumPageloadEventsAdaptiveGroups(
+            filter: { datetime_geq: "${requestedStart}", datetime_leq: "${requestedEnd}" }
+            limit: 5
+            orderBy: [count_DESC]
+          ) {
+            count
+            dimensions {
+              siteTag
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const res = await fetch(GRAPHQL_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, variables: { accountTag: env.CLOUDFLARE_ACCOUNT_ID } }),
+    });
+    const rawText = await res.text();
+
+    let body: {
+      data?: { viewer?: { accounts?: { topSiteTags?: unknown }[] } };
+      errors?: GraphQlErrorEntry[];
+    };
+    try {
+      body = JSON.parse(rawText) as typeof body;
+    } catch {
+      return { error: `non-JSON response (status=${res.status})` };
+    }
+
+    if (!res.ok || (body.errors && body.errors.length > 0)) {
+      const messages = (body.errors ?? []).map((e) => e.message ?? "").join(" | ") || `request failed (status=${res.status})`;
+      console.warn(`[site-stats] debug siteTag discovery query failed — status=${res.status} messages=${truncateForLog(messages)}`);
+      return { error: messages };
+    }
+
+    const rows = body.data?.viewer?.accounts?.[0]?.topSiteTags;
+    if (!Array.isArray(rows)) {
+      return { error: "unexpected response shape for topSiteTags" };
+    }
+
+    return {
+      topSiteTags: rows.map((row) => {
+        const r = row as { count?: unknown; dimensions?: { siteTag?: unknown } };
+        return {
+          siteTag: typeof r.dimensions?.siteTag === "string" ? r.dimensions.siteTag : null,
+          count: typeof r.count === "number" && Number.isFinite(r.count) ? r.count : 0,
+        };
+      }),
+    };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 function jsonResponse(body: SiteStatsPayload, status: number, cacheControl: string): Response {
   return new Response(JSON.stringify(body), {
     status,
@@ -491,6 +576,9 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
 
   try {
     const stats = await fetchCloudflareStats(env, debugRequested);
+    const siteTagDiagnostics = debugRequested
+      ? await fetchSiteTagDiagnostics(env, stats.requestedStart, stats.requestedEnd)
+      : undefined;
     const payload: SiteStatsSuccessPayload = {
       ok: true,
       totalViews: stats.totalViews,
@@ -513,6 +601,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
               errorCodes: null,
               aliasShapes: stats.aliasShapes,
               chunkCounts: stats.chunkCounts,
+              siteTagDiagnostics,
             },
           }
         : {}),
