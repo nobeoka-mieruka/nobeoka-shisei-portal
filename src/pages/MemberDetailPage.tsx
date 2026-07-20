@@ -41,12 +41,22 @@ export function MemberDetailPage() {
         .filter((q) => q.memberId === member.id)
         .sort((a, b) => b.questionDate.localeCompare(a.questionDate))
     : [];
-  const memberBillVotes = member
+  const memberAllBillVotes = member
     ? billVotes
         .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
         .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""))
-        .slice(0, 5)
     : [];
+  const memberBillVotes = memberAllBillVotes.slice(0, 5);
+  const memberVoteCounts = member
+    ? memberAllBillVotes.reduce(
+        (acc, b) => {
+          const vote = b.memberVotes.find((v) => v.memberId === member.id)!.vote;
+          acc[vote] = (acc[vote] ?? 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      )
+    : {};
 
   const titleParts = ["プロフィール"];
   if (memberQuestions.length > 0) titleParts.push("一般質問");
@@ -217,26 +227,58 @@ export function MemberDetailPage() {
 
       <VotingRecordsSection votes={member.votes} />
 
-      {memberBillVotes.length > 0 && (
-        <SectionCard title="議案の賛否">
-          <ul className="space-y-2">
-            {memberBillVotes.map((bill) => {
-              const vote = bill.memberVotes.find((v) => v.memberId === member.id)!;
-              return (
-                <li key={bill.id} className="flex items-center justify-between gap-3 rounded-lg border border-outline-variant p-3">
-                  <Link
-                    to={`/bills/votes/${bill.id}`}
-                    className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
-                  >
-                    {bill.billTitle}
-                  </Link>
-                  <BillVoteBadge vote={vote.vote} />
-                </li>
-              );
-            })}
-          </ul>
-        </SectionCard>
-      )}
+      <SectionCard title="議案の賛否">
+        {memberAllBillVotes.length > 0 ? (
+          <>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">賛成件数</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.approve ?? 0}件</p>
+              </div>
+              <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">反対件数</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.oppose ?? 0}件</p>
+              </div>
+              <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">退席件数</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.abstain ?? 0}件</p>
+              </div>
+              <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">欠席件数</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.absent ?? 0}件</p>
+              </div>
+            </div>
+
+            <ul className="mt-3 space-y-2">
+              {memberBillVotes.map((bill) => {
+                const vote = bill.memberVotes.find((v) => v.memberId === member.id)!;
+                return (
+                  <li key={bill.id} className="flex items-center justify-between gap-3 rounded-lg border border-outline-variant p-3">
+                    <Link
+                      to={`/bills/votes/${bill.id}`}
+                      className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    >
+                      {bill.billTitle}
+                    </Link>
+                    <BillVoteBadge vote={vote.vote} />
+                  </li>
+                );
+              })}
+            </ul>
+
+            {memberAllBillVotes.length > memberBillVotes.length && (
+              <Link
+                to="/bills/votes"
+                className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+              >
+                議案を見る（すべての議案一覧へ）
+              </Link>
+            )}
+          </>
+        ) : (
+          <EmptyState message="現在、公開資料を確認しながら順次追加しています。" />
+        )}
+      </SectionCard>
 
       {member.reports.length > 0 && (
         <SectionCard title={`活動レポート（${member.reports.length}件）`}>

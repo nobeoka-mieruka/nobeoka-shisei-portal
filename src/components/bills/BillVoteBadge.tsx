@@ -1,13 +1,5 @@
 import type { BillMemberVoteStatus } from "../../types";
-
-export const billVoteLabels: Record<BillMemberVoteStatus, string> = {
-  approve: "賛成",
-  oppose: "反対",
-  abstain: "退席",
-  absent: "欠席",
-  recused: "除斥",
-  notVoting: "採決なし",
-};
+import { billVoteLabels, billVoteSymbols } from "../../lib/billVotes";
 
 const billVoteStyles: Record<BillMemberVoteStatus, string> = {
   approve: "bg-primary-container text-on-primary-container",
@@ -20,7 +12,8 @@ const billVoteStyles: Record<BillMemberVoteStatus, string> = {
 
 export function BillVoteBadge({ vote }: { vote: BillMemberVoteStatus }) {
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${billVoteStyles[vote]}`}>
+    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${billVoteStyles[vote]}`}>
+      <span aria-hidden>{billVoteSymbols[vote]}</span>
       {billVoteLabels[vote]}
     </span>
   );

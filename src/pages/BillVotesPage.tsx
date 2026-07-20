@@ -35,16 +35,45 @@ const proposerTypeOptions: { value: BillProposerType; label: string }[] = [
   { value: "other", label: "その他" },
 ];
 
-type SortKey = "newest" | "oldest" | "billNumber";
+type UnanimityFilter = "unanimous" | "split";
+
+const unanimityOptions: { value: UnanimityFilter; label: string }[] = [
+  { value: "unanimous", label: "全会一致" },
+  { value: "split", label: "賛否が分かれた議案" },
+];
+
+type SortKey = "newest" | "oldest" | "billNumber" | "approvalRate";
 
 const sortOptions: { value: SortKey; label: string }[] = [
   { value: "newest", label: "新しい順" },
   { value: "oldest", label: "古い順" },
   { value: "billNumber", label: "議案番号順" },
+  { value: "approvalRate", label: "賛成率順" },
 ];
 
 function safeFormatDate(iso?: string): string {
   return iso ? formatJapaneseDate(iso) : "確認中";
+}
+
+function voteCounts(bill: BillVoteItem) {
+  const approve = bill.memberVotes.filter((v) => v.vote === "approve").length;
+  const oppose = bill.memberVotes.filter((v) => v.vote === "oppose").length;
+  const abstain = bill.memberVotes.filter((v) => v.vote === "abstain").length;
+  const absent = bill.memberVotes.filter((v) => v.vote === "absent").length;
+  return { approve, oppose, abstain, absent };
+}
+
+/** 賛成率（賛成÷（賛成＋反対））。反対が0で賛成が1件以上あれば全会一致とみなす。賛否データが無い場合はnull。 */
+function approvalRate(bill: BillVoteItem): number | null {
+  const { approve, oppose } = voteCounts(bill);
+  if (approve + oppose === 0) return null;
+  return approve / (approve + oppose);
+}
+
+function isUnanimous(bill: BillVoteItem): boolean | null {
+  const { approve, oppose } = voteCounts(bill);
+  if (approve + oppose === 0) return null;
+  return oppose === 0;
 }
 
 /** 議案番号から先頭の数値を取り出す（例："議案第45号" → 45）。数値が見つからない場合はnull。 */
@@ -66,6 +95,16 @@ function sortBills(items: BillVoteItem[], sort: SortKey): BillVoteItem[] {
   const sorted = [...items];
   if (sort === "billNumber") {
     return sorted.sort(compareBillNumber);
+  }
+  if (sort === "approvalRate") {
+    return sorted.sort((a, b) => {
+      const ar = approvalRate(a);
+      const br = approvalRate(b);
+      if (ar === null && br === null) return 0;
+      if (ar === null) return 1;
+      if (br === null) return -1;
+      return br - ar;
+    });
   }
   return sorted.sort((a, b) => {
     const ad = a.votingDate ?? a.submittedDate;
@@ -89,6 +128,7 @@ export function BillVotesPage() {
   const [result, setResult] = useState("all");
   const [committee, setCommittee] = useState("all");
   const [proposerType, setProposerType] = useState("all");
+  const [unanimity, setUnanimity] = useState("all");
   const [sort, setSort] = useState<SortKey>("newest");
 
   const fiscalYearOptions = useMemo(
@@ -121,7 +161,8 @@ export function BillVotesPage() {
     session !== "all" ||
     result !== "all" ||
     committee !== "all" ||
-    proposerType !== "all";
+    proposerType !== "all" ||
+    unanimity !== "all";
 
   const clearFilters = () => {
     setQuery("");
@@ -130,6 +171,7 @@ export function BillVotesPage() {
     setResult("all");
     setCommittee("all");
     setProposerType("all");
+    setUnanimity("all");
   };
 
   const filteredBills = useMemo(() => {
@@ -142,10 +184,21 @@ export function BillVotesPage() {
       const matchesResult = result === "all" || b.result === result;
       const matchesCommittee = committee === "all" || b.committee === committee;
       const matchesProposerType = proposerType === "all" || b.proposerType === proposerType;
-      return matchesQuery && matchesFiscalYear && matchesSession && matchesResult && matchesCommittee && matchesProposerType;
+      const matchesUnanimity =
+        unanimity === "all" ||
+        (unanimity === "unanimous" ? isUnanimous(b) === true : isUnanimous(b) === false);
+      return (
+        matchesQuery &&
+        matchesFiscalYear &&
+        matchesSession &&
+        matchesResult &&
+        matchesCommittee &&
+        matchesProposerType &&
+        matchesUnanimity
+      );
     });
     return sortBills(matched, sort);
-  }, [query, fiscalYear, session, result, committee, proposerType, sort]);
+  }, [query, fiscalYear, session, result, committee, proposerType, unanimity, sort]);
 
   return (
     <div className="px-4 py-4 sm:px-6">
@@ -165,6 +218,7 @@ export function BillVotesPage() {
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
           <FilterSelect label="議決結果" value={result} onChange={setResult} options={resultOptions} />
           <FilterSelect label="提出者" value={proposerType} onChange={setProposerType} options={proposerTypeOptions} />
+          <FilterSelect label="採決の傾向" value={unanimity} onChange={setUnanimity} options={unanimityOptions} />
           <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
             <SortIcon className="h-4 w-4 shrink-0" />
             <select
@@ -208,10 +262,7 @@ export function BillVotesPage() {
           {filteredBills.length > 0 && (
             <ul className="space-y-3">
               {filteredBills.map((bill) => {
-                const approve = bill.memberVotes.filter((v) => v.vote === "approve").length;
-                const oppose = bill.memberVotes.filter((v) => v.vote === "oppose").length;
-                const abstain = bill.memberVotes.filter((v) => v.vote === "abstain").length;
-                const absent = bill.memberVotes.filter((v) => v.vote === "absent").length;
+                const { approve, oppose, abstain, absent } = voteCounts(bill);
                 return (
                   <li key={bill.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
                     <div className="flex flex-wrap items-start justify-between gap-3">

@@ -1,7 +1,8 @@
 import mayorData from "../data/mayor.json";
 import mayorPromisesData from "../data/mayorPromises.json";
+import billVotesData from "../data/billVotes.json";
 import { getSortedMayorPressConferences } from "../data/mayorPressConferences";
-import type { Mayor, MayorPromisesData } from "../types";
+import type { BillVoteItem, Mayor, MayorPromisesData } from "../types";
 import { Avatar } from "../components/Avatar";
 import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
@@ -11,6 +12,7 @@ import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { EmptyState } from "../components/EmptyState";
 import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
@@ -20,6 +22,10 @@ import { formatJapaneseDate } from "../config/site";
 const mayor = mayorData as Mayor;
 const promisesData = mayorPromisesData as MayorPromisesData;
 const pressConferences = getSortedMayorPressConferences();
+const billVotes = billVotesData as BillVoteItem[];
+const mayorSubmittedBills = billVotes
+  .filter((b) => b.proposerType === "mayor")
+  .sort((a, b) => (b.votingDate ?? b.submittedDate ?? "").localeCompare(a.votingDate ?? a.submittedDate ?? ""));
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -154,6 +160,40 @@ export function MayorPage() {
             );
           })}
         </ul>
+      </SectionCard>
+
+      <SectionCard title="市長提出議案">
+        {mayorSubmittedBills.length > 0 ? (
+          <>
+            <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+              市長が提出した議案のうち、公開資料で確認できたものを新しい順に表示しています。
+            </p>
+            <ul className="space-y-2">
+              {mayorSubmittedBills.slice(0, 5).map((bill) => (
+                <li key={bill.id}>
+                  <Link
+                    to={`/bills/votes/${bill.id}`}
+                    className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
+                  >
+                    <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                      <span>{bill.billNumber}</span>
+                      <span>{bill.session}</span>
+                    </div>
+                    <p className="mt-1 font-medium text-on-surface">{bill.billTitle}</p>
+                    <p className="mt-1 text-xs text-on-surface-variant">議決結果：{bill.result}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {mayorSubmittedBills.length > 5 && (
+              <Link to="/bills/votes" className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                市長提出議案をすべて見る
+              </Link>
+            )}
+          </>
+        ) : (
+          <EmptyState message="現在、公開資料を確認しながら順次追加しています。" />
+        )}
       </SectionCard>
 
       {pressConferences.length > 0 && (
