@@ -16,6 +16,19 @@ interface Env {
   CLOUDFLARE_ANALYTICS_START_DATE?: string;
 }
 
+// ?debug=1 リクエスト時のみレスポンスへ付与する診断情報。APIトークン・Account ID・Site Tag・IPアドレスは含めない。
+interface SiteStatsDebugInfo {
+  codeVersion: string;
+  cacheHit: boolean;
+  fallbackUsed: boolean;
+  graphQLRequested: boolean;
+  requestedStart: string | null;
+  requestedEnd: string | null;
+  lookbackDays: number | null;
+  errorStage: SiteStatsFailureStage | null;
+  errorCodes: string | null;
+}
+
 interface SiteStatsSuccessPayload {
   ok: true;
   totalViews: number;
@@ -26,6 +39,7 @@ interface SiteStatsSuccessPayload {
   windowDays: number;
   // 集計対象期間の開始日（YYYY-MM-DD、UTC基準）。
   rangeStartDate: string;
+  debug?: SiteStatsDebugInfo;
 }
 
 type SiteStatsFailureStatus = "configuration_required" | "temporarily_unavailable";
@@ -34,6 +48,7 @@ interface SiteStatsFailurePayload {
   ok: false;
   status: SiteStatsFailureStatus;
   message: string;
+  debug?: SiteStatsDebugInfo;
 }
 
 type SiteStatsPayload = SiteStatsSuccessPayload | SiteStatsFailurePayload;
@@ -52,6 +67,9 @@ const MAX_LOOKBACK_DAYS = 180;
 // GraphQL Analytics APIは1クエリあたりの日付範囲に上限があるため区間を分割する。180 = 30日 × 6区間。
 const CHUNK_DAYS = 30;
 const DAY_MS = 24 * 60 * 60 * 1000;
+// quotaエラー修正（180日ウィンドウ化）後のコードであることをデバッグレスポンスから確認するための固定文字列。
+// このロジックを変更した場合は値も更新する。
+const CODE_VERSION = "cloudflare-analytics-180d-v2";
 
 type SiteStatsFailureStage =
   | "token_error"
@@ -64,6 +82,11 @@ type SiteStatsFailureStage =
 
 class SiteStatsError extends Error {
   stage: SiteStatsFailureStage;
+  // デバッグレスポンス用の付帯情報。fetchCloudflareStats内でキャッチ時に付与する。
+  requestedStart?: string;
+  requestedEnd?: string;
+  lookbackDays?: number;
+  errorCodes?: string;
 
   constructor(stage: SiteStatsFailureStage, message: string) {
     super(message);
@@ -232,6 +255,8 @@ interface CloudflareStats {
   updatedAt: string;
   windowDays: number;
   rangeStartDate: string;
+  requestedStart: string;
+  requestedEnd: string;
 }
 
 async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
@@ -243,74 +268,88 @@ async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
 
   const requestedStart = chunks[0]?.start ?? todayRange.start;
   const requestedEnd = todayRange.end;
+  let errorCodesForDebug: string | undefined;
 
-  const res = await fetch(GRAPHQL_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query,
-      variables: { accountTag: env.CLOUDFLARE_ACCOUNT_ID },
-    }),
-  });
-
-  const rawText = await res.text();
-  let body: GraphQlResponseBody;
   try {
-    body = JSON.parse(rawText) as GraphQlResponseBody;
-  } catch {
-    console.error(
-      `[site-stats] Cloudflare API returned non-JSON response — status=${res.status} body=${truncateForLog(rawText)}`,
-    );
-    throw new SiteStatsError("unexpected_response", `Cloudflare API response was not valid JSON (status=${res.status})`);
-  }
+    const res = await fetch(GRAPHQL_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+        variables: { accountTag: env.CLOUDFLARE_ACCOUNT_ID },
+      }),
+    });
 
-  if (!res.ok || (body.errors && body.errors.length > 0)) {
-    const errorCodes = (body.errors ?? []).map((e) => e.code).filter((c) => c !== undefined).join(",");
-    // 原因切り分け用の詳細ログ。APIトークン・Account IDは含めない
-    // （queryにはsiteTagのみ埋め込まれており、これは公開情報。accountTagはGraphQL変数側にあり、ここには出力していない）。
-    console.error(
-      `[site-stats] Cloudflare GraphQL API error — status=${res.status} errorCodes=${errorCodes || "n/a"} ` +
-        `requestedStart=${requestedStart} requestedEnd=${requestedEnd} ` +
-        `lookbackDays=${lookback.days} clampedFromEnv=${lookback.clampedFromEnv} envDateInvalid=${lookback.envDateInvalid} ` +
-        `body=${truncateForLog(JSON.stringify(body))}`,
-    );
-    classifyAndThrow(res.status, body);
-  }
-
-  const accounts = body.data?.viewer?.accounts;
-  if (!accounts || accounts.length === 0) {
-    console.error(
-      `[site-stats] Cloudflare GraphQL API returned no accounts — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
-    );
-    throw new SiteStatsError("site_not_found", "Cloudflare GraphQL API returned no accounts for the given accountTag");
-  }
-
-  const account = accounts[0];
-  const readCount = (alias: string): number => {
-    const count = account[alias]?.count;
-    if (typeof count !== "number" || !Number.isFinite(count)) {
+    const rawText = await res.text();
+    let body: GraphQlResponseBody;
+    try {
+      body = JSON.parse(rawText) as GraphQlResponseBody;
+    } catch {
       console.error(
-        `[site-stats] Cloudflare GraphQL API missing count for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+        `[site-stats] Cloudflare API returned non-JSON response — status=${res.status} body=${truncateForLog(rawText)}`,
       );
-      throw new SiteStatsError("unexpected_response", `missing or non-numeric count for alias ${alias}`);
+      throw new SiteStatsError("unexpected_response", `Cloudflare API response was not valid JSON (status=${res.status})`);
     }
-    return count;
-  };
 
-  let totalViews = 0;
-  for (let i = 0; i < chunks.length; i++) totalViews += readCount(`c${i}`);
-  const todayViews = readCount("today");
+    if (!res.ok || (body.errors && body.errors.length > 0)) {
+      errorCodesForDebug = (body.errors ?? []).map((e) => e.code).filter((c) => c !== undefined).join(",") || undefined;
+      // 原因切り分け用の詳細ログ。APIトークン・Account ID・Site Tagは含めない
+      // （queryにはsiteTagが埋め込まれているが、このログには出力していない。accountTagはGraphQL変数側にあり、同様に出力していない）。
+      console.error(
+        `[site-stats] Cloudflare GraphQL API error — status=${res.status} errorCodes=${errorCodesForDebug ?? "n/a"} ` +
+          `requestedStart=${requestedStart} requestedEnd=${requestedEnd} ` +
+          `lookbackDays=${lookback.days} clampedFromEnv=${lookback.clampedFromEnv} envDateInvalid=${lookback.envDateInvalid} ` +
+          `body=${truncateForLog(JSON.stringify(body))}`,
+      );
+      classifyAndThrow(res.status, body);
+    }
 
-  return {
-    totalViews,
-    todayViews,
-    updatedAt: new Date(now).toISOString(),
-    windowDays: lookback.days,
-    rangeStartDate: requestedStart.slice(0, 10),
-  };
+    const accounts = body.data?.viewer?.accounts;
+    if (!accounts || accounts.length === 0) {
+      console.error(
+        `[site-stats] Cloudflare GraphQL API returned no accounts — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+      );
+      throw new SiteStatsError("site_not_found", "Cloudflare GraphQL API returned no accounts for the given accountTag");
+    }
+
+    const account = accounts[0];
+    const readCount = (alias: string): number => {
+      const count = account[alias]?.count;
+      if (typeof count !== "number" || !Number.isFinite(count)) {
+        console.error(
+          `[site-stats] Cloudflare GraphQL API missing count for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+        );
+        throw new SiteStatsError("unexpected_response", `missing or non-numeric count for alias ${alias}`);
+      }
+      return count;
+    };
+
+    let totalViews = 0;
+    for (let i = 0; i < chunks.length; i++) totalViews += readCount(`c${i}`);
+    const todayViews = readCount("today");
+
+    return {
+      totalViews,
+      todayViews,
+      updatedAt: new Date(now).toISOString(),
+      windowDays: lookback.days,
+      rangeStartDate: requestedStart.slice(0, 10),
+      requestedStart,
+      requestedEnd,
+    };
+  } catch (err) {
+    // デバッグレスポンス（?debug=1）用に、失敗時の要求範囲・区分をエラーオブジェクトへ付与する。
+    if (err instanceof SiteStatsError) {
+      err.requestedStart = requestedStart;
+      err.requestedEnd = requestedEnd;
+      err.lookbackDays = lookback.days;
+      err.errorCodes = errorCodesForDebug;
+    }
+    throw err;
+  }
 }
 
 function jsonResponse(body: SiteStatsPayload, status: number, cacheControl: string): Response {
@@ -322,6 +361,10 @@ function jsonResponse(body: SiteStatsPayload, status: number, cacheControl: stri
 
 export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil }) => {
   const url = new URL(request.url);
+  // ?debug=1 または ?nocache=<任意値> が付いている場合は、キャッシュ（live/fallbackとも）を完全に迂回し、
+  // 毎回Cloudflare GraphQL APIへ実際に問い合わせる。診断用レスポンス自体もキャッシュへ書き込まない。
+  const debugRequested = url.searchParams.has("debug");
+  const bypassCache = debugRequested || url.searchParams.has("nocache");
   const cache = caches.default;
   const liveCacheKey = new Request(`${url.origin}${url.pathname}?variant=live`);
   const fallbackCacheKey = new Request(`${url.origin}${url.pathname}?variant=fallback`);
@@ -332,14 +375,35 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
   if (missingEnv.length > 0) {
     console.warn(`[site-stats] configuration_required: missing ${missingEnv.join(", ")}`);
     return jsonResponse(
-      { ok: false, status: "configuration_required", message: "アクセス解析の設定を確認しています。" },
+      {
+        ok: false,
+        status: "configuration_required",
+        message: "アクセス解析の設定を確認しています。",
+        ...(debugRequested
+          ? {
+              debug: {
+                codeVersion: CODE_VERSION,
+                cacheHit: false,
+                fallbackUsed: false,
+                graphQLRequested: false,
+                requestedStart: null,
+                requestedEnd: null,
+                lookbackDays: null,
+                errorStage: null,
+                errorCodes: null,
+              },
+            }
+          : {}),
+      },
       200,
       "no-store",
     );
   }
 
-  const cached = await cache.match(liveCacheKey);
-  if (cached) return cached;
+  if (!bypassCache) {
+    const cached = await cache.match(liveCacheKey);
+    if (cached) return cached;
+  }
 
   try {
     const stats = await fetchCloudflareStats(env);
@@ -351,7 +415,27 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
       source: "cloudflare",
       windowDays: stats.windowDays,
       rangeStartDate: stats.rangeStartDate,
+      ...(debugRequested
+        ? {
+            debug: {
+              codeVersion: CODE_VERSION,
+              cacheHit: false,
+              fallbackUsed: false,
+              graphQLRequested: true,
+              requestedStart: stats.requestedStart,
+              requestedEnd: stats.requestedEnd,
+              lookbackDays: stats.windowDays,
+              errorStage: null,
+              errorCodes: null,
+            },
+          }
+        : {}),
     };
+
+    if (bypassCache) {
+      return jsonResponse(payload, 200, "no-store");
+    }
+
     const response = jsonResponse(payload, 200, `public, max-age=${CACHE_TTL_SECONDS}, s-maxage=${CACHE_TTL_SECONDS}`);
     const fallbackResponse = jsonResponse(
       payload,
@@ -363,18 +447,42 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
   } catch (err) {
     logFailure(err);
 
+    const debugInfo: SiteStatsDebugInfo | undefined = debugRequested
+      ? {
+          codeVersion: CODE_VERSION,
+          cacheHit: false,
+          fallbackUsed: false,
+          graphQLRequested: true,
+          requestedStart: err instanceof SiteStatsError ? (err.requestedStart ?? null) : null,
+          requestedEnd: err instanceof SiteStatsError ? (err.requestedEnd ?? null) : null,
+          lookbackDays: err instanceof SiteStatsError ? (err.lookbackDays ?? null) : null,
+          errorStage: err instanceof SiteStatsError ? err.stage : null,
+          errorCodes: err instanceof SiteStatsError ? (err.errorCodes ?? null) : null,
+        }
+      : undefined;
+
     // 直前の正常値がキャッシュに残っている場合だけ、それを安全にフォールバック表示する
-    // （架空の初期値は使わない）。
-    const fallback = await cache.match(fallbackCacheKey);
-    if (fallback) return fallback;
+    // （架空の初期値は使わない）。debug/nocache指定時はフォールバックも使わず、常に実際の失敗を返す。
+    if (!bypassCache) {
+      const fallback = await cache.match(fallbackCacheKey);
+      if (fallback) return fallback;
+    }
 
     const errorResponse = jsonResponse(
-      { ok: false, status: "temporarily_unavailable", message: "アクセス数を一時的に取得できません。" },
+      {
+        ok: false,
+        status: "temporarily_unavailable",
+        message: "アクセス数を一時的に取得できません。",
+        ...(debugInfo ? { debug: debugInfo } : {}),
+      },
       200,
-      `public, max-age=${ERROR_CACHE_TTL_SECONDS}, s-maxage=${ERROR_CACHE_TTL_SECONDS}`,
+      bypassCache ? "no-store" : `public, max-age=${ERROR_CACHE_TTL_SECONDS}, s-maxage=${ERROR_CACHE_TTL_SECONDS}`,
     );
-    // Cloudflare APIへの過剰アクセスを防ぐため、失敗レスポンス自体も短時間だけキャッシュする。
-    waitUntil(cache.put(liveCacheKey, errorResponse.clone()));
+    // Cloudflare APIへの過剰アクセスを防ぐため、失敗レスポンス自体も短時間だけキャッシュする
+    // （bypassCache時はキャッシュへ書き込まない）。
+    if (!bypassCache) {
+      waitUntil(cache.put(liveCacheKey, errorResponse.clone()));
+    }
     return errorResponse;
   }
 };
