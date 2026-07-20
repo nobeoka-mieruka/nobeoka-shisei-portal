@@ -27,9 +27,10 @@
 
 ### TASK-001 未コミットの検索機能改善を確認してコミットする
 
-状態：READY
+状態：DONE
 優先度：A
 対象：`src/lib/search.ts`、`src/hooks/useSearchHistory.ts`、`src/components/HighlightText.tsx`、`src/pages/SearchPage.tsx`、`src/components/SiteHeader.tsx`、`src/types/index.ts`、`scripts/generate-search-index.mjs`、`scripts/validate-data.mjs`
+状態遷移：READY → IN_PROGRESS → DONE（2026-07-20、「次へ」指示により実行）
 依存関係：なし（他の全タスクより優先）
 目的：既に実装済みで未コミットの検索機能改善（検索ロジック刷新、検索結果ハイライト、検索履歴、ヘッダーへの検索導線追加、`searchIndex.json`の検証強化）を確認し、安全であればコミット・プッシュする
 
@@ -48,9 +49,9 @@
 - 該当なし（サイト内機能改善のため）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-20
+- コミットID：732c724
+- 変更概要：検索ロジックを表記ゆれ吸収＋関連度スコア方式に刷新、検索結果ハイライト（`HighlightText`）、検索履歴（`useSearchHistory`、端末内localStorageのみ）、ヘッダーへの検索導線を追加。`validate-data.mjs`に`searchIndex.json`の検証（ID重複・URL・type・参照整合性）を追加。validate:data/typecheck/lint/buildすべて成功。
 
 ---
 
