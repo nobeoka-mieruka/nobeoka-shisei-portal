@@ -91,6 +91,7 @@ for (const q of generalQuestions) {
 const billVotes = readJson("src/data/billVotes.json");
 const billIds = new Set();
 const VALID_VOTE_STATUS = new Set(["approve", "oppose", "abstain", "absent", "recused", "notVoting"]);
+const VALID_PROPOSER_TYPES = new Set(["mayor", "member", "committee", "other"]);
 
 for (const b of billVotes) {
   const tag = `billVotes.json (${b.id ?? "id不明"})`;
@@ -112,8 +113,16 @@ for (const b of billVotes) {
     seenVoters.add(v.memberId);
   }
 
-  for (const url of [b.billDocumentUrl, b.resultDocumentUrl, b.transcriptUrl, b.committeeDocumentUrl, b.budgetDocumentUrl]) {
+  for (const url of [b.billDocumentUrl, b.resultDocumentUrl, b.transcriptUrl, b.committeeDocumentUrl, b.budgetDocumentUrl, b.videoUrl]) {
     if (url && !URL_RE.test(url)) err(tag, `根拠資料URLの形式が不正です: ${url}`);
+  }
+
+  if (b.proposerType && !VALID_PROPOSER_TYPES.has(b.proposerType)) {
+    err(tag, `未定義のproposerTypeです: ${b.proposerType}`);
+  }
+
+  for (const ordinance of b.relatedOrdinances ?? []) {
+    if (isBlank(ordinance)) err(tag, "relatedOrdinancesに空文字が含まれています");
   }
 
   for (const qId of b.relatedQuestionIds ?? []) {

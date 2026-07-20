@@ -34,7 +34,7 @@ export function BillsPage() {
           </ul>
         ) : (
           <div className="space-y-2">
-            <EmptyState message="議案・採決結果は準備中です。確認でき次第、公開資料をもとに掲載します。" />
+            <EmptyState message="現在、公開資料を確認しながら順次追加しています。" />
             <p className="text-xs text-on-surface-variant">
               議案番号や賛否の記録がない状態で、架空の議案を掲載することはありません。
             </p>

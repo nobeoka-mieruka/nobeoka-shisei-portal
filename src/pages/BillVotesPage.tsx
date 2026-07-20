@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
-import type { BillVoteItem, BillVoteResult } from "../types";
+import type { BillProposerType, BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
+import { SortIcon } from "../components/icons";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -27,8 +28,53 @@ const resultOptions: { value: BillVoteResult; label: string }[] = [
   { value: "確認中", label: "確認中" },
 ];
 
+const proposerTypeOptions: { value: BillProposerType; label: string }[] = [
+  { value: "mayor", label: "市長提出" },
+  { value: "member", label: "議員提出" },
+  { value: "committee", label: "委員会提出" },
+  { value: "other", label: "その他" },
+];
+
+type SortKey = "newest" | "oldest" | "billNumber";
+
+const sortOptions: { value: SortKey; label: string }[] = [
+  { value: "newest", label: "新しい順" },
+  { value: "oldest", label: "古い順" },
+  { value: "billNumber", label: "議案番号順" },
+];
+
 function safeFormatDate(iso?: string): string {
   return iso ? formatJapaneseDate(iso) : "確認中";
+}
+
+/** 議案番号から先頭の数値を取り出す（例："議案第45号" → 45）。数値が見つからない場合はnull。 */
+function extractBillNumberValue(billNumber: string): number | null {
+  const match = billNumber.match(/\d+/);
+  return match ? Number(match[0]) : null;
+}
+
+function compareBillNumber(a: BillVoteItem, b: BillVoteItem): number {
+  const av = extractBillNumberValue(a.billNumber);
+  const bv = extractBillNumberValue(b.billNumber);
+  if (av === null && bv === null) return a.billNumber.localeCompare(b.billNumber, "ja");
+  if (av === null) return 1;
+  if (bv === null) return -1;
+  return av - bv;
+}
+
+function sortBills(items: BillVoteItem[], sort: SortKey): BillVoteItem[] {
+  const sorted = [...items];
+  if (sort === "billNumber") {
+    return sorted.sort(compareBillNumber);
+  }
+  return sorted.sort((a, b) => {
+    const ad = a.votingDate ?? a.submittedDate;
+    const bd = b.votingDate ?? b.submittedDate;
+    if (!ad && !bd) return 0;
+    if (!ad) return 1;
+    if (!bd) return -1;
+    return sort === "newest" ? bd.localeCompare(ad) : ad.localeCompare(bd);
+  });
 }
 
 export function BillVotesPage() {
@@ -42,6 +88,8 @@ export function BillVotesPage() {
   const [session, setSession] = useState("all");
   const [result, setResult] = useState("all");
   const [committee, setCommittee] = useState("all");
+  const [proposerType, setProposerType] = useState("all");
+  const [sort, setSort] = useState<SortKey>("newest");
 
   const fiscalYearOptions = useMemo(
     () =>
@@ -68,7 +116,12 @@ export function BillVotesPage() {
   );
 
   const hasActiveFilter =
-    query !== "" || fiscalYear !== "all" || session !== "all" || result !== "all" || committee !== "all";
+    query !== "" ||
+    fiscalYear !== "all" ||
+    session !== "all" ||
+    result !== "all" ||
+    committee !== "all" ||
+    proposerType !== "all";
 
   const clearFilters = () => {
     setQuery("");
@@ -76,20 +129,23 @@ export function BillVotesPage() {
     setSession("all");
     setResult("all");
     setCommittee("all");
+    setProposerType("all");
   };
 
   const filteredBills = useMemo(() => {
     const q = query.trim();
-    return billVotes.filter((b) => {
+    const matched = billVotes.filter((b) => {
       const matchesQuery =
         q === "" || b.billNumber.includes(q) || b.billTitle.includes(q) || b.summary.includes(q);
       const matchesFiscalYear = fiscalYear === "all" || b.fiscalYear === fiscalYear;
       const matchesSession = session === "all" || b.session === session;
       const matchesResult = result === "all" || b.result === result;
       const matchesCommittee = committee === "all" || b.committee === committee;
-      return matchesQuery && matchesFiscalYear && matchesSession && matchesResult && matchesCommittee;
+      const matchesProposerType = proposerType === "all" || b.proposerType === proposerType;
+      return matchesQuery && matchesFiscalYear && matchesSession && matchesResult && matchesCommittee && matchesProposerType;
     });
-  }, [query, fiscalYear, session, result, committee]);
+    return sortBills(matched, sort);
+  }, [query, fiscalYear, session, result, committee, proposerType, sort]);
 
   return (
     <div className="px-4 py-4 sm:px-6">
@@ -97,7 +153,7 @@ export function BillVotesPage() {
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">議案ごとの賛否</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市議会で審議された議案について、公開資料で確認できる議員ごとの賛否を整理する予定のページです。賛否の人数のみで議員活動を評価するものではありません。
+          延岡市議会で審議された議案について、公開資料で確認できる議員ごとの賛否を整理しています。賛否の人数のみで議員活動を評価するものではありません。
         </p>
       </div>
 
@@ -105,9 +161,25 @@ export function BillVotesPage() {
         <SearchBar value={query} onChange={setQuery} placeholder="議案番号、議案名、概要で検索" />
         <div className="flex flex-wrap items-center gap-2">
           <FilterSelect label="年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
-          <FilterSelect label="会議" value={session} onChange={setSession} options={sessionOptions} />
-          <FilterSelect label="議決結果" value={result} onChange={setResult} options={resultOptions} />
+          <FilterSelect label="定例会" value={session} onChange={setSession} options={sessionOptions} />
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
+          <FilterSelect label="議決結果" value={result} onChange={setResult} options={resultOptions} />
+          <FilterSelect label="提出者" value={proposerType} onChange={setProposerType} options={proposerTypeOptions} />
+          <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+            <SortIcon className="h-4 w-4 shrink-0" />
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              aria-label="並び替え"
+              className="bg-transparent text-on-surface focus:outline-none"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
         {hasActiveFilter && (
           <div className="flex justify-end">
@@ -124,7 +196,7 @@ export function BillVotesPage() {
 
       {billVotes.length === 0 ? (
         <p className="mt-3 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
-          議案・賛否データを準備中です。公式資料を確認しながら定例会ごとに追加します。
+          現在、公開資料を確認しながら順次追加しています。
         </p>
       ) : (
         <>
@@ -149,9 +221,11 @@ export function BillVotesPage() {
                           <span>{bill.session}</span>
                         </div>
                         <h3 className="mt-1 text-base font-semibold leading-snug text-on-surface">{bill.billTitle}</h3>
+                        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-on-surface-variant">{bill.summary}</p>
                         <p className="mt-1 text-xs text-on-surface-variant">
                           提出日：{safeFormatDate(bill.submittedDate)}／議決日：{safeFormatDate(bill.votingDate)}／提出者：
                           {bill.proposer ?? "確認中"}
+                          {bill.submittingDepartment && `／担当課：${bill.submittingDepartment}`}
                         </p>
                         <p className="mt-1 text-sm font-medium text-on-surface">議決結果：{bill.result}</p>
                         {bill.memberVotes.length > 0 && (

@@ -744,6 +744,9 @@ export interface BillRelatedDocument {
   sourceType?: string;
 }
 
+/** 議案の提出者区分。公式資料で確認できた場合のみ設定する（推測で分類しない）。 */
+export type BillProposerType = "mayor" | "member" | "committee" | "other";
+
 /**
  * 議案ごとの賛否データベース1件分のデータ（第1段階：構造のみ）。
  * 架空の議案・議員・賛否結果は登録しないこと（未確認の場合は billVotes.json を空配列のままにする）。
@@ -759,6 +762,10 @@ export interface BillVoteItem {
   votingDate?: string;
   committee?: string;
   proposer?: string;
+  /** 提出者区分（市長提出／議員提出など）。公式資料で区分が確認できた場合のみ設定する。 */
+  proposerType?: BillProposerType;
+  /** 担当課・提出部局（公式資料で確認できた場合のみ）。 */
+  submittingDepartment?: string;
   result: BillVoteResult;
   memberVotes: BillVoteMemberEntry[];
 
@@ -771,6 +778,8 @@ export interface BillVoteItem {
   citizenImpact?: string;
   /** 関連する予算の概要。 */
   relatedBudgetSummary?: string;
+  /** 関連する条例名の一覧（公式資料で確認できた場合のみ）。 */
+  relatedOrdinances?: string[];
   topics?: string[];
 
   /** ISO形式。サイト運営者がこの議案データをいつ確認したか。 */
@@ -783,6 +792,8 @@ export interface BillVoteItem {
   committeeDocumentUrl?: string;
   budgetDocumentUrl?: string;
   relatedDocumentUrls?: BillRelatedDocument[];
+  /** 議会中継・録画のURL（延岡市議会公式のものに限る）。 */
+  videoUrl?: string;
 
   // 関連情報（将来連携用の任意項目。今回は架空の関連付けを行わない）
   relatedQuestionIds?: string[];

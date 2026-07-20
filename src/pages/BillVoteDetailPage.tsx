@@ -33,6 +33,7 @@ function collectDocuments(bill: BillVoteItem): DocumentLink[] {
   if (bill.committeeDocumentUrl)
     docs.push({ label: "委員会資料", url: bill.committeeDocumentUrl, sourceType: "委員会資料" });
   if (bill.budgetDocumentUrl) docs.push({ label: "予算資料", url: bill.budgetDocumentUrl, sourceType: "予算資料" });
+  if (bill.videoUrl) docs.push({ label: "議会中継・録画", url: bill.videoUrl, sourceType: "議会中継" });
   for (const d of bill.relatedDocumentUrls ?? []) {
     docs.push({ label: d.title, url: d.url, sourceType: d.sourceType ?? "関連資料" });
   }
@@ -67,7 +68,12 @@ export function BillVoteDetailPage() {
 
   const documents = collectDocuments(bill);
   const hasOverview =
-    bill.reason || (bill.mainChanges && bill.mainChanges.length > 0) || bill.citizenImpact || bill.relatedBudgetSummary || (bill.topics && bill.topics.length > 0);
+    bill.reason ||
+    (bill.mainChanges && bill.mainChanges.length > 0) ||
+    bill.citizenImpact ||
+    bill.relatedBudgetSummary ||
+    (bill.relatedOrdinances && bill.relatedOrdinances.length > 0) ||
+    (bill.topics && bill.topics.length > 0);
   const hasRelated =
     (bill.relatedQuestionIds && bill.relatedQuestionIds.length > 0) ||
     (bill.relatedCommitteeActivityIds && bill.relatedCommitteeActivityIds.length > 0) ||
@@ -155,6 +161,12 @@ export function BillVoteDetailPage() {
               <dd className="text-on-surface">{bill.committee}</dd>
             </div>
           )}
+          {bill.submittingDepartment && (
+            <div>
+              <dt className="text-xs text-on-surface-variant">担当課</dt>
+              <dd className="text-on-surface">{bill.submittingDepartment}</dd>
+            </div>
+          )}
           <div>
             <dt className="text-xs text-on-surface-variant">議決結果</dt>
             <dd className="font-medium text-on-surface">{bill.result}</dd>
@@ -198,6 +210,16 @@ export function BillVoteDetailPage() {
             <div>
               <p className="text-xs font-medium text-on-surface-variant">関連する予算</p>
               <p className="mt-1 text-sm leading-relaxed text-on-surface">{bill.relatedBudgetSummary}</p>
+            </div>
+          )}
+          {bill.relatedOrdinances && bill.relatedOrdinances.length > 0 && (
+            <div>
+              <p className="text-xs font-medium text-on-surface-variant">関連条例</p>
+              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-on-surface">
+                {bill.relatedOrdinances.map((o, i) => (
+                  <li key={i}>{o}</li>
+                ))}
+              </ul>
             </div>
           )}
           {bill.topics && bill.topics.length > 0 && (
