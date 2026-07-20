@@ -47,7 +47,7 @@ export function SiteAnalyticsSummary() {
         </div>
       )}
       <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-        Cloudflare Analyticsによる集計値です。集計方法により実際の閲覧回数と若干異なる場合があります。個人を特定できる情報は表示していません。
+        Cloudflare Analyticsによる集計値です。個人を特定できる情報は表示していません。
       </p>
     </SectionCard>
   );
