@@ -89,7 +89,7 @@
 
 完了記録：
 - 完了日：2026-07-20（コード側のみ。Cloudflare側設定確認まで完了した時点でDONEへ変更する）
-- コミットID：（本レポート後に記載）
+- コミットID：09b8d87
 - 変更概要：`functions/api/site-stats.ts`のレスポンス契約を`{ok,...}`形式に刷新し503を廃止、`todayViews`追加、公開コンポーネントを新契約へ対応。ローカルで`wrangler pages dev`により環境変数なし（`configuration_required`）・ダミー無効トークンあり（`temporarily_unavailable`、ログに秘密情報なし）の両方を確認済み。本番の実データ取得はCloudflareダッシュボード側の環境変数設定に依存するため引き続きBLOCKED。
 
 ---
