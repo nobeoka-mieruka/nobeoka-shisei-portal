@@ -23,22 +23,27 @@ const factionName = (id) => factions.find((f) => f.id === id)?.name ?? "";
 
 for (const m of members) {
   entries.push({
+    id: `member-${m.id}`,
     type: "member",
     title: m.name,
     description: [factionName(m.factionId), ...(m.committees ?? [])].filter(Boolean).join("／"),
     url: `/members/${m.id}`,
     keywords: [m.nameKana, factionName(m.factionId), ...(m.committees ?? []), m.district].filter(Boolean),
+    content: [m.profile, ...(m.sns ?? []).map((s) => s.platform)].filter(Boolean).join(" "),
+    sourceId: m.id,
   });
 }
 
 // --- mayor ---
 const mayor = readJson("src/data/mayor.json");
 entries.push({
+  id: "mayor-main",
   type: "mayor",
   title: `延岡市長 ${mayor.name}`,
   description: "延岡市長のプロフィール、経歴、公約、市政方針",
   url: "/mayor",
-  keywords: [mayor.name, mayor.nameKana].filter(Boolean),
+  keywords: [mayor.name, mayor.nameKana, "市長", "延岡市長"].filter(Boolean),
+  content: mayor.profile,
 });
 
 // --- mayor promises ---
@@ -48,11 +53,15 @@ try {
   for (const p of promisesData.promises ?? []) {
     const anchor = categoryAnchor.get(p.categoryId);
     entries.push({
+      id: `promise-${p.id}`,
       type: "promise",
       title: truncate(p.promiseText, 60),
       description: `${p.categoryTitle}／${p.statusLabel}`,
       url: p.id ? `/mayor/policy-progress/${p.id}` : anchor ? `/mayor/policy-progress#${anchor}` : "/mayor/policy-progress",
-      keywords: [p.categoryTitle, p.statusLabel, ...(p.progressSummary ?? [])],
+      keywords: [p.categoryTitle, p.statusLabel],
+      content: [...(p.progressSummary ?? []), p.notes].filter(Boolean).join(" "),
+      date: p.lastVerified,
+      sourceId: p.id,
     });
   }
 } catch {
@@ -63,11 +72,17 @@ try {
 const billVotes = readJson("src/data/billVotes.json");
 for (const b of billVotes) {
   entries.push({
+    id: `bill-${b.id}`,
     type: "bill",
     title: b.billTitle,
     description: `${b.billNumber}／${b.result}`,
     url: `/bills/votes/${b.id}`,
-    keywords: [b.billNumber, b.session, b.committee, b.proposer, ...(b.topics ?? [])].filter(Boolean),
+    keywords: [b.billNumber, b.session, b.committee, b.proposer, b.submittingDepartment, ...(b.topics ?? [])].filter(
+      Boolean,
+    ),
+    content: [b.summary, b.reason, b.citizenImpact, ...(b.relatedOrdinances ?? [])].filter(Boolean).join(" "),
+    date: b.votingDate || b.submittedDate,
+    sourceId: b.id,
   });
 }
 
@@ -75,11 +90,15 @@ for (const b of billVotes) {
 const generalQuestions = readJson("src/data/generalQuestions.json");
 for (const q of generalQuestions) {
   entries.push({
+    id: `question-${q.id}`,
     type: "question",
     title: q.title,
     description: truncate(q.summary, 80),
-    url: q.id ? `/questions/${q.id}` : `/questions?member=${q.memberId}`,
-    keywords: [q.memberName, q.sessionName, ...(q.topics ?? []), ...(q.questionItems ?? [])],
+    url: `/questions/${q.id}`,
+    keywords: [q.memberName, q.sessionName, q.fiscalYear, ...(q.topics ?? [])].filter(Boolean),
+    content: [...(q.questionItems ?? []), q.answerSummary].filter(Boolean).join(" "),
+    date: q.questionDate,
+    sourceId: q.id,
   });
 }
 
@@ -87,11 +106,14 @@ for (const q of generalQuestions) {
 try {
   const compensation = readJson("src/data/compensationComparison.json");
   entries.push({
+    id: "compensation-main",
     type: "compensation",
     title: "市長・市議会議員の報酬",
     description: "延岡市長・議長・副議長・議員の月額報酬、期末手当、年間見込額",
     url: "/compensation",
-    keywords: compensation.map((c) => c.municipality).filter(Boolean),
+    keywords: ["市長", "議長", "副議長", "議員", "報酬", "給料", ...compensation.map((c) => c.municipality)].filter(
+      Boolean,
+    ),
   });
 } catch {
   // データがない場合はスキップ
@@ -101,11 +123,15 @@ try {
 try {
   const finance = readJson("src/data/financeDashboard.json");
   entries.push({
+    id: "finance-main",
     type: "finance",
     title: "延岡市の財政",
     description: `${finance.fiscalYearLabel}の一般会計、歳入・歳出構成、基金残高、人口推移`,
     url: "/finance",
     keywords: [
+      "財政",
+      "予算",
+      "決算",
       ...(finance.revenue ?? []).map((r) => r.label),
       ...(finance.expenditureByPurpose ?? []).map((r) => r.label),
       ...(finance.supplementaryBudgetProjects ?? []).map((p) => p.title),
@@ -117,6 +143,7 @@ try {
 
 // --- city guide (診断ページの質問・担当課データは src/data/cityGuideData.ts で管理しているため、ここでは固定の案内エントリのみ登録する) ---
 entries.push({
+  id: "guide-main",
   type: "guide",
   title: "延岡市役所 どこに行けばいい？診断",
   description: "質問に答えるだけで、住民票・税金・子育て・介護・ごみ・道路など、市役所のどの課に相談すればよいかが分かります。",
@@ -147,6 +174,7 @@ entries.push({
 
 // --- mayor press conferences (データは src/data/mayorPressConferences.ts で管理しているため、ここでは固定エントリを登録する) ---
 entries.push({
+  id: "press-conference-2026-07-16",
   type: "press-conference",
   title: "令和8年7月16日市長定例記者会見",
   description:
@@ -164,18 +192,64 @@ entries.push({
     "学びの多様化学校",
     "熊野江教室",
   ],
+  date: "2026-07-16",
 });
 
 // --- update history ---
 const updateHistory = readJson("src/data/updateHistory.json");
 for (const u of updateHistory) {
   entries.push({
+    id: `update-${u.id}`,
     type: "update",
     title: u.title,
     description: truncate(u.description, 80),
     url: "/updates",
     keywords: [u.category, ...(u.targetPages ?? [])],
+    date: u.date,
+    sourceId: u.id,
   });
+}
+
+// --- 固定ページ（このサイトについて／編集方針／利用規約／お問い合わせ／ダッシュボード） ---
+const staticPages = [
+  {
+    id: "page-about",
+    title: "このサイトについて",
+    description: "延岡市政見える化ポータルの目的、運営方針、主な情報源について説明しています。",
+    url: "/about",
+    keywords: ["このサイトについて", "運営方針", "非公式"],
+  },
+  {
+    id: "page-editorial-policy",
+    title: "編集方針・情報源",
+    description: "延岡市政見える化ポータルの編集方針、情報源、掲載しない情報の範囲について説明しています。",
+    url: "/editorial-policy",
+    keywords: ["編集方針", "情報源", "出典"],
+  },
+  {
+    id: "page-terms",
+    title: "利用規約・免責事項",
+    description: "延岡市政見える化ポータルの利用規約、免責事項、プライバシーに関する案内を掲載しています。",
+    url: "/terms",
+    keywords: ["利用規約", "免責事項", "プライバシー"],
+  },
+  {
+    id: "page-contact",
+    title: "情報提供・訂正依頼",
+    description: "掲載内容の誤りのご指摘や、新しい公開資料の情報提供を受け付ける窓口です。",
+    url: "/contact",
+    keywords: ["情報提供", "訂正依頼", "お問い合わせ", "連絡先"],
+  },
+  {
+    id: "page-dashboard",
+    title: "市政データダッシュボード",
+    description: "延岡市議会議員、議案、市長公約などの登録件数や構成を、データから自動集計して確認できます。",
+    url: "/dashboard",
+    keywords: ["ダッシュボード", "統計", "集計", "会派別", "年齢構成"],
+  },
+];
+for (const p of staticPages) {
+  entries.push({ ...p, type: "page" });
 }
 
 writeFileSync(join(root, "src", "data", "searchIndex.json"), `${JSON.stringify(entries, null, 2)}\n`, "utf8");

@@ -342,6 +342,85 @@ function validateRoleRankingFile(relPath) {
 validateRoleRankingFile("src/data/nationalCompensationRanking.json");
 validateRoleRankingFile("src/data/similarMunicipalityComparison.json");
 
+// --- searchIndex.json（サイト内横断検索インデックス） ---
+const VALID_SEARCH_TYPES = new Set([
+  "member",
+  "mayor",
+  "promise",
+  "bill",
+  "question",
+  "compensation",
+  "finance",
+  "update",
+  "guide",
+  "press-conference",
+  "page",
+]);
+// 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。
+const VALID_URL_PREFIXES = [
+  "/",
+  "/members/",
+  "/mayor",
+  "/finance",
+  "/dashboard",
+  "/compensation",
+  "/city-guide",
+  "/bills",
+  "/questions",
+  "/search",
+  "/about",
+  "/editorial-policy",
+  "/terms",
+  "/contact",
+  "/updates",
+];
+
+try {
+  const searchIndex = readJson("src/data/searchIndex.json");
+  const searchIds = new Set();
+  const seenPairs = new Set();
+
+  for (const s of searchIndex) {
+    const tag = `searchIndex.json (${s.id ?? s.title ?? "id不明"})`;
+
+    if (isBlank(s.id)) err(tag, "idが空です");
+    else if (searchIds.has(s.id)) err(tag, `検索インデックスIDが重複しています: ${s.id}`);
+    else searchIds.add(s.id);
+
+    if (isBlank(s.title)) err(tag, "titleが空です");
+    if (isBlank(s.url)) err(tag, "urlが空です");
+    else if (!VALID_URL_PREFIXES.some((p) => s.url === p || s.url.startsWith(p))) {
+      err(tag, `既知のルートに含まれない、または非公開の可能性があるURLです: ${s.url}`);
+    }
+    if (!VALID_SEARCH_TYPES.has(s.type)) err(tag, `未定義のtypeです: ${s.type}`);
+    if (!Array.isArray(s.keywords) || s.keywords.length === 0) {
+      warn(tag, "keywordsが空です");
+    }
+    if (s.date && !DATE_RE.test(s.date)) err(tag, `dateの形式が不正です: ${s.date}`);
+
+    const pairKey = `${s.type}:${s.url}:${s.title}`;
+    if (seenPairs.has(pairKey)) warn(tag, `同一内容（type/url/title）のエントリが重複登録されています`);
+    seenPairs.add(pairKey);
+
+    if (s.sourceId) {
+      if (s.type === "member" && !memberIds.has(s.sourceId)) {
+        warn(tag, `存在しない議員IDを参照しています: ${s.sourceId}`);
+      }
+      if (s.type === "bill" && !billIds.has(s.sourceId)) {
+        warn(tag, `存在しない議案IDを参照しています: ${s.sourceId}`);
+      }
+      if (s.type === "promise" && !mayorPromiseIds.has(s.sourceId)) {
+        warn(tag, `存在しない市長公約IDを参照しています: ${s.sourceId}`);
+      }
+      if (s.type === "question" && !questionIds.has(s.sourceId)) {
+        warn(tag, `存在しない一般質問IDを参照しています: ${s.sourceId}`);
+      }
+    }
+  }
+} catch {
+  warn("searchIndex.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);

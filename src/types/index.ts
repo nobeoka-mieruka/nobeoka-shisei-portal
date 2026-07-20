@@ -853,16 +853,26 @@ export type SearchEntryType =
   | "compensation"
   | "finance"
   | "update"
-  | "guide";
+  | "guide"
+  | "press-conference"
+  | "page";
 
 /**
  * サイト内横断検索のインデックス1件分。ビルド時に既存JSONから自動生成する（scripts/generate-search-index.mjs）。
  * 手入力はしないこと。
  */
 export interface SearchIndexEntry {
+  /** 一意なID（例: "member-m01"）。生成スクリプトが`${type}-${元データのid}`の形式で付与する。 */
+  id: string;
   type: SearchEntryType;
   title: string;
   description: string;
   url: string;
   keywords: string[];
+  /** 画面には表示しないが検索マッチ対象に含める補足本文（プロフィール全文・質問項目など）。重み付けは低め。 */
+  content?: string;
+  /** ISO形式。新しい順・古い順の並び替えに使う日付（質問日・採決日・更新日など）。 */
+  date?: string;
+  /** 参照元データのID（例: members.jsonのid、billVotes.jsonのidなど）。validate:dataでの参照整合性チェックに使う。 */
+  sourceId?: string;
 }

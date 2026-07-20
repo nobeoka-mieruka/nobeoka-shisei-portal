@@ -44,7 +44,7 @@
 - [x] プライバシーポリシー ※独立ページではなく `/terms` 内の「8. プライバシーについて」に統合。分離が必要か要検討（下記「次の改善提案」参照）
 - [x] お問い合わせ（`/contact`）
 - [x] 情報提供・訂正フォーム（`CorrectionRequestButton` → Googleフォーム連携）
-- [x] サイト内検索（`/search`、`searchIndex.json` 自動生成）
+- [x] サイト内検索（`/search`、`searchIndex.json` 自動生成）※2026-07-20、検索ロジック刷新（表記ゆれ吸収・関連度スコア）、検索結果ハイライト（`HighlightText`）、検索履歴（`useSearchHistory`、端末内localStorageのみ・外部送信なし）、ヘッダーへの検索導線を追加
 - [x] Google Analytics（測定ID `G-GHQCETJ7FN`、SPA遷移でpage_view送信）
 - [x] Cloudflare Analytics（累計アクセス数表示、`functions/api/site-stats.ts`、キャッシュ・フォールバック付き）※当初案では「実装中」でしたが、直近コミットで安定稼働しているため完成済みへ移動
 - [x] SEO基本設定（title / description / canonical を `usePageTitle` で全ページ共通管理）
@@ -71,7 +71,6 @@
 - [ ] **全国報酬比較**（`nationalCompensationRanking.json`）：4役職分の枠は用意済みだが、`monthly`/`rank` は全て `null`（未確認）
 - [ ] **類似団体比較**（`similarMunicipalityComparison.json`）：同様に枠のみで値は `null`
 - [ ] **市債の推移**：単年度（令和8年度予算計上額）の注記付き表示のみ。複数年度の推移データは未整備
-- [ ] **サイト内検索の改善**：検索ロジック刷新、検索結果ハイライト表示（`HighlightText`）、検索履歴（`useSearchHistory`）、ヘッダーへの検索導線追加を実装済みだが、本セッション時点で未コミット。詳細は`TASKS.md` TASK-001参照
 
 ---
 
