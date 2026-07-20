@@ -1,3 +1,5 @@
-GA_PROPERTY_ID=
-GOOGLE_SERVICE_ACCOUNT_EMAIL=
-GOOGLE_PRIVATE_KEY=
+# /api/site-stats（Cloudflare GraphQL Analytics API / Web Analytics RUMビーコン集計）が使う環境変数。
+# gtag.js（測定ID G-GHQCETJ7FN、src/lib/analytics.tsに直接記載）とは別物・無関係。
+CLOUDFLARE_ACCOUNT_ID=
+CLOUDFLARE_API_TOKEN=
+CLOUDFLARE_SITE_TAG=

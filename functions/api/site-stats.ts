@@ -1,57 +1,39 @@
 /**
- * GA4の累計表示回数（screenPageViews）を返すエンドポイント。
- * サービスアカウントの秘密鍵はここでのみ使用し、レスポンスには含めない。
- * GA_PROPERTY_ID はGoogle Analytics Data APIの数値プロパティID（測定ID "G-XXXX" とは別物）。
+ * Cloudflare Web Analytics（RUMビーコン）の累計表示回数を返すエンドポイント。
+ * Cloudflare APIトークンはここでのみ使用し、レスポンスには含めない。
+ * G-GHQCETJ7FN（gtag.js、src/lib/analytics.ts）とは別の仕組みで、この関数とは無関係。
  */
 
 interface Env {
-  GA_PROPERTY_ID: string;
-  GOOGLE_SERVICE_ACCOUNT_EMAIL: string;
-  GOOGLE_PRIVATE_KEY: string;
+  CLOUDFLARE_ACCOUNT_ID: string;
+  CLOUDFLARE_API_TOKEN: string;
+  CLOUDFLARE_SITE_TAG: string;
 }
 
 interface SiteStatsPayload {
   totalPageViews: number;
+  source: "cloudflare";
+  updatedAt: string;
 }
-
-// 計測開始日より確実に前になる日付。累計値を取りこぼさないための起点。
-const TOTAL_START_DATE = "2020-01-01";
 
 const CACHE_TTL_SECONDS = 60 * 60; // 1時間
 const FALLBACK_TTL_SECONDS = 60 * 60 * 24; // 直前の正常値を保持しておく期間（24時間）
-const GA_SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
-const TOKEN_URL = "https://oauth2.googleapis.com/token";
+const GRAPHQL_URL = "https://api.cloudflare.com/client/v4/graphql";
 
-function base64UrlEncode(bytes: ArrayBuffer | Uint8Array): string {
-  const arr = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-  let binary = "";
-  for (const b of arr) binary += String.fromCharCode(b);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-
-function textToBase64Url(text: string): string {
-  return base64UrlEncode(new TextEncoder().encode(text));
-}
-
-/** GOOGLE_PRIVATE_KEYが "\n" ではなく "\\n" として保存されている場合にも対応する。 */
-function pemToArrayBuffer(pem: string): ArrayBuffer {
-  const normalized = pem.replace(/\\n/g, "\n");
-  const base64 = normalized
-    .replace(/-----BEGIN PRIVATE KEY-----/, "")
-    .replace(/-----END PRIVATE KEY-----/, "")
-    .replace(/\s+/g, "");
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  return bytes.buffer;
-}
+// Cloudflare Web AnalyticsのRUMデータ保持期間（約6ヶ月）の近似値。
+// 「サイト開設以来の真の累計」ではなく「取得可能な最も古い日付からの合計」であることに注意。
+const LOOKBACK_DAYS = 186;
+// GraphQL Analytics APIは1クエリあたりの日付範囲が31日までのため、区間を分割する。
+const CHUNK_DAYS = 31;
 
 type SiteStatsFailureStage =
   | "missing_env"
-  | "invalid_property_id"
-  | "access_token_error"
-  | "analytics_api_error"
-  | "permission_denied";
+  | "token_error"
+  | "graphql_error"
+  | "invalid_dataset"
+  | "site_not_found"
+  | "rate_limited"
+  | "unexpected_response";
 
 class SiteStatsError extends Error {
   stage: SiteStatsFailureStage;
@@ -73,9 +55,9 @@ function logFailure(err: unknown): void {
 function assertConfigured(env: Env): void {
   const missing = (
     [
-      ["GA_PROPERTY_ID", env.GA_PROPERTY_ID],
-      ["GOOGLE_SERVICE_ACCOUNT_EMAIL", env.GOOGLE_SERVICE_ACCOUNT_EMAIL],
-      ["GOOGLE_PRIVATE_KEY", env.GOOGLE_PRIVATE_KEY],
+      ["CLOUDFLARE_ACCOUNT_ID", env.CLOUDFLARE_ACCOUNT_ID],
+      ["CLOUDFLARE_API_TOKEN", env.CLOUDFLARE_API_TOKEN],
+      ["CLOUDFLARE_SITE_TAG", env.CLOUDFLARE_SITE_TAG],
     ] as const
   )
     .filter(([, value]) => !value)
@@ -84,120 +66,122 @@ function assertConfigured(env: Env): void {
   if (missing.length > 0) {
     throw new SiteStatsError("missing_env", `missing environment variables: ${missing.join(", ")}`);
   }
-
-  // 測定ID（G-XXXXXXXXXX）が誤って設定されていないか確認する。
-  // Data APIのプロパティIDは数字のみ。
-  if (!/^\d+$/.test(env.GA_PROPERTY_ID)) {
-    throw new SiteStatsError(
-      "invalid_property_id",
-      "GA_PROPERTY_ID must be numeric (the GA4 Data API property id, not the G-XXXX measurement id)",
-    );
-  }
 }
 
-async function getAccessToken(env: Env): Promise<string> {
-  let key: CryptoKey;
-  try {
-    key = await crypto.subtle.importKey(
-      "pkcs8",
-      pemToArrayBuffer(env.GOOGLE_PRIVATE_KEY),
-      { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-      false,
-      ["sign"],
-    );
-  } catch {
-    throw new SiteStatsError("access_token_error", "failed to import GOOGLE_PRIVATE_KEY");
+interface DateRangeChunk {
+  start: string;
+  end: string;
+}
+
+/** 直近LOOKBACK_DAYS日を、CHUNK_DAYSごとの連続した区間に分割する（古い順）。 */
+function buildDateRangeChunks(): DateRangeChunk[] {
+  const now = Date.now();
+  const dayMs = 24 * 60 * 60 * 1000;
+  const chunks: DateRangeChunk[] = [];
+
+  for (let daysAgoEnd = LOOKBACK_DAYS; daysAgoEnd > 0; daysAgoEnd -= CHUNK_DAYS) {
+    const daysAgoStart = Math.max(daysAgoEnd - CHUNK_DAYS, 0);
+    chunks.push({
+      start: new Date(now - daysAgoEnd * dayMs).toISOString(),
+      end: new Date(now - daysAgoStart * dayMs).toISOString(),
+    });
   }
+  return chunks;
+}
 
-  const nowSeconds = Math.floor(Date.now() / 1000);
-  const header = { alg: "RS256", typ: "JWT" };
-  const claims = {
-    iss: env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    scope: GA_SCOPE,
-    aud: TOKEN_URL,
-    iat: nowSeconds,
-    exp: nowSeconds + 3600,
-  };
+function buildGraphQlQuery(siteTag: string, chunks: DateRangeChunk[]): string {
+  const aliases = chunks
+    .map((chunk, i) => {
+      const filter = `{ AND: [ { datetime_geq: "${chunk.start}", datetime_leq: "${chunk.end}" }, { OR: [ { siteTag: "${siteTag}" } ] } ] }`;
+      return `c${i}: rumPageloadEventsAdaptiveGroups(filter: ${filter}, limit: 1) { count }`;
+    })
+    .join("\n      ");
 
-  const unsigned = `${textToBase64Url(JSON.stringify(header))}.${textToBase64Url(JSON.stringify(claims))}`;
-  const signature = await crypto.subtle.sign(
-    "RSASSA-PKCS1-v1_5",
-    key,
-    new TextEncoder().encode(unsigned),
-  );
-  const jwt = `${unsigned}.${base64UrlEncode(signature)}`;
+  return `
+    query SiteStatsTotalPageViews($accountTag: string) {
+      viewer {
+        accounts(filter: { accountTag: $accountTag }) {
+          ${aliases}
+        }
+      }
+    }
+  `;
+}
 
-  const tokenRes = await fetch(TOKEN_URL, {
+interface GraphQlAccountResult {
+  [alias: string]: { count?: number } | undefined;
+}
+
+interface GraphQlResponseBody {
+  data?: { viewer?: { accounts?: GraphQlAccountResult[] } };
+  errors?: { message?: string }[];
+}
+
+function classifyAndThrow(status: number, body: GraphQlResponseBody | undefined): never {
+  const messages = (body?.errors ?? []).map((e) => e.message ?? "").join(" | ");
+
+  if (status === 429 || /rate.?limit/i.test(messages)) {
+    throw new SiteStatsError("rate_limited", `Cloudflare API rate limited (status=${status})`);
+  }
+  if (status === 401 || status === 403 || /authenticat|authoriz|forbidden|invalid api token|permission/i.test(messages)) {
+    throw new SiteStatsError("token_error", `Cloudflare API auth failed (status=${status}, messages=${messages})`);
+  }
+  if (messages && /cannot query field|unknown (argument|type|field)|schema|rumPageloadEventsAdaptiveGroups/i.test(messages)) {
+    throw new SiteStatsError("invalid_dataset", `Cloudflare GraphQL schema mismatch (status=${status}, messages=${messages})`);
+  }
+  if (messages) {
+    throw new SiteStatsError("graphql_error", `Cloudflare GraphQL API returned errors (status=${status}, messages=${messages})`);
+  }
+  throw new SiteStatsError("graphql_error", `Cloudflare GraphQL API request failed (status=${status})`);
+}
+
+async function fetchCloudflareStats(env: Env): Promise<SiteStatsPayload> {
+  const chunks = buildDateRangeChunks();
+  const query = buildGraphQlQuery(env.CLOUDFLARE_SITE_TAG, chunks);
+
+  const res = await fetch(GRAPHQL_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: jwt,
+    headers: {
+      Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { accountTag: env.CLOUDFLARE_ACCOUNT_ID },
     }),
   });
 
-  if (!tokenRes.ok) {
-    throw new SiteStatsError("access_token_error", `token endpoint returned ${tokenRes.status}`);
-  }
-  const tokenJson = (await tokenRes.json()) as { access_token?: string };
-  if (!tokenJson.access_token) {
-    throw new SiteStatsError("access_token_error", "token response missing access_token");
-  }
-  return tokenJson.access_token;
-}
-
-async function fetchTotalPageViews(env: Env): Promise<number> {
-  const accessToken = await getAccessToken(env);
-
-  const res = await fetch(
-    `https://analyticsdata.googleapis.com/v1beta/properties/${env.GA_PROPERTY_ID}:runReport`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        dateRanges: [{ startDate: TOTAL_START_DATE, endDate: "today" }],
-        metrics: [{ name: "screenPageViews" }],
-      }),
-    },
-  );
-
-  if (!res.ok) {
-    let googleStatus = "";
-    try {
-      const errJson = (await res.json()) as { error?: { status?: string } };
-      googleStatus = errJson.error?.status ?? "";
-    } catch {
-      // レスポンスがJSONでない場合は無視する
-    }
-
-    if (res.status === 403 || googleStatus === "PERMISSION_DENIED") {
-      throw new SiteStatsError(
-        "permission_denied",
-        `Analytics Data API denied access (status=${res.status}, google_status=${googleStatus})`,
-      );
-    }
-    if (res.status === 400 || res.status === 404 || googleStatus === "INVALID_ARGUMENT" || googleStatus === "NOT_FOUND") {
-      throw new SiteStatsError(
-        "invalid_property_id",
-        `Analytics Data API rejected the property id (status=${res.status}, google_status=${googleStatus})`,
-      );
-    }
-    throw new SiteStatsError(
-      "analytics_api_error",
-      `Analytics Data API request failed (status=${res.status}, google_status=${googleStatus})`,
-    );
+  let body: GraphQlResponseBody | undefined;
+  try {
+    body = (await res.json()) as GraphQlResponseBody;
+  } catch {
+    throw new SiteStatsError("unexpected_response", `Cloudflare API response was not valid JSON (status=${res.status})`);
   }
 
-  const json = (await res.json()) as { rows?: { metricValues?: { value?: string }[] }[] };
-  return Number(json.rows?.[0]?.metricValues?.[0]?.value ?? 0);
-}
+  if (!res.ok || (body.errors && body.errors.length > 0)) {
+    classifyAndThrow(res.status, body);
+  }
 
-async function fetchGa4Stats(env: Env): Promise<SiteStatsPayload> {
-  const totalPageViews = await fetchTotalPageViews(env);
-  return { totalPageViews };
+  const accounts = body.data?.viewer?.accounts;
+  if (!accounts || accounts.length === 0) {
+    throw new SiteStatsError("site_not_found", "Cloudflare GraphQL API returned no accounts for the given accountTag");
+  }
+
+  const account = accounts[0];
+  let totalPageViews = 0;
+  for (let i = 0; i < chunks.length; i++) {
+    const count = account[`c${i}`]?.count;
+    if (typeof count !== "number" || !Number.isFinite(count)) {
+      throw new SiteStatsError("unexpected_response", `missing or non-numeric count for chunk c${i}`);
+    }
+    totalPageViews += count;
+  }
+
+  return {
+    totalPageViews,
+    source: "cloudflare",
+    updatedAt: new Date().toISOString(),
+  };
 }
 
 function jsonResponse(body: unknown, status: number, cacheControl?: string): Response {
@@ -217,7 +201,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
 
   try {
     assertConfigured(env);
-    const stats = await fetchGa4Stats(env);
+    const stats = await fetchCloudflareStats(env);
     const response = jsonResponse(stats, 200, `public, max-age=${CACHE_TTL_SECONDS}, s-maxage=${CACHE_TTL_SECONDS}`);
     const fallbackResponse = jsonResponse(stats, 200, `public, max-age=${FALLBACK_TTL_SECONDS}, s-maxage=${FALLBACK_TTL_SECONDS}`);
     waitUntil(Promise.all([cache.put(liveCacheKey, response.clone()), cache.put(fallbackCacheKey, fallbackResponse)]));
