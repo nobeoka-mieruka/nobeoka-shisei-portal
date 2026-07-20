@@ -107,6 +107,22 @@ function truncateForLog(text: string): string {
   return text.length > LOG_MAX_CHARS ? `${text.slice(0, LOG_MAX_CHARS)}...(truncated)` : text;
 }
 
+/**
+ * CloudflareのGraphQL APIが返すエラーメッセージ自体にAccount ID・APIトークンの値が
+ * 埋め込まれているケースがあるため、ログ・デバッグレスポンスへ出す前に必ず除去する。
+ * siteTagは秘密情報として扱わないため対象外（診断機能上、意図的に表示する）。
+ */
+function redactSecrets(text: string, env: Env): string {
+  let result = text;
+  if (env.CLOUDFLARE_ACCOUNT_ID) {
+    result = result.split(env.CLOUDFLARE_ACCOUNT_ID).join("[account-id]");
+  }
+  if (env.CLOUDFLARE_API_TOKEN) {
+    result = result.split(env.CLOUDFLARE_API_TOKEN).join("[api-token]");
+  }
+  return result;
+}
+
 /** APIトークンやAccount IDの値を含めず、原因の切り分けに必要な情報だけをログへ出す。 */
 function logFailure(err: unknown): void {
   if (err instanceof SiteStatsError) {
@@ -236,8 +252,8 @@ interface GraphQlResponseBody {
   errors?: GraphQlErrorEntry[];
 }
 
-function classifyAndThrow(status: number, body: GraphQlResponseBody | undefined): never {
-  const messages = (body?.errors ?? []).map((e) => e.message ?? "").join(" | ");
+function classifyAndThrow(status: number, body: GraphQlResponseBody | undefined, env: Env): never {
+  const messages = redactSecrets((body?.errors ?? []).map((e) => e.message ?? "").join(" | "), env);
 
   if (status === 429 || /rate.?limit/i.test(messages)) {
     throw new SiteStatsError("rate_limited", `Cloudflare API rate limited (status=${status})`);
@@ -327,7 +343,7 @@ async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<
       body = JSON.parse(rawText) as GraphQlResponseBody;
     } catch {
       console.error(
-        `[site-stats] Cloudflare API returned non-JSON response — status=${res.status} body=${truncateForLog(rawText)}`,
+        `[site-stats] Cloudflare API returned non-JSON response — status=${res.status} body=${truncateForLog(redactSecrets(rawText, env))}`,
       );
       throw new SiteStatsError("unexpected_response", `Cloudflare API response was not valid JSON (status=${res.status})`);
     }
@@ -340,15 +356,15 @@ async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<
         `[site-stats] Cloudflare GraphQL API error — status=${res.status} errorCodes=${errorCodesForDebug ?? "n/a"} ` +
           `requestedStart=${requestedStart} requestedEnd=${requestedEnd} ` +
           `lookbackDays=${lookback.days} clampedFromEnv=${lookback.clampedFromEnv} envDateInvalid=${lookback.envDateInvalid} ` +
-          `body=${truncateForLog(JSON.stringify(body))}`,
+          `body=${truncateForLog(redactSecrets(JSON.stringify(body), env))}`,
       );
-      classifyAndThrow(res.status, body);
+      classifyAndThrow(res.status, body, env);
     }
 
     const accounts = body.data?.viewer?.accounts;
     if (!accounts || accounts.length === 0) {
       console.error(
-        `[site-stats] Cloudflare GraphQL API returned no accounts — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+        `[site-stats] Cloudflare GraphQL API returned no accounts — status=${res.status} body=${truncateForLog(redactSecrets(JSON.stringify(body), env))}`,
       );
       throw new SiteStatsError("site_not_found", "Cloudflare GraphQL API returned no accounts for the given accountTag");
     }
@@ -387,10 +403,10 @@ async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<
         const sum = sumArrayCounts(value);
         if (sum === null) {
           console.warn(
-            `[site-stats] Cloudflare GraphQL API alias=${alias} array contains invalid item(s) — value=${truncateForLog(JSON.stringify(value))}`,
+            `[site-stats] Cloudflare GraphQL API alias=${alias} array contains invalid item(s) — value=${truncateForLog(redactSecrets(JSON.stringify(value), env))}`,
           );
           console.error(
-            `[site-stats] Cloudflare GraphQL API invalid array item for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+            `[site-stats] Cloudflare GraphQL API invalid array item for alias=${alias} — status=${res.status} body=${truncateForLog(redactSecrets(JSON.stringify(body), env))}`,
           );
           throw new SiteStatsError("unexpected_response", `invalid array item for alias ${alias}`);
         }
@@ -407,7 +423,7 @@ async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<
       }
 
       console.error(
-        `[site-stats] Cloudflare GraphQL API missing or invalid shape for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+        `[site-stats] Cloudflare GraphQL API missing or invalid shape for alias=${alias} — status=${res.status} body=${truncateForLog(redactSecrets(JSON.stringify(body), env))}`,
       );
       throw new SiteStatsError("unexpected_response", `missing or invalid shape for alias ${alias}`);
     };
@@ -510,7 +526,8 @@ async function queryTopSiteTagsForWindow(env: Env, start: string, end: string): 
     }
 
     if (!res.ok || (body.errors && body.errors.length > 0)) {
-      const messages = (body.errors ?? []).map((e) => e.message ?? "").join(" | ") || `request failed (status=${res.status})`;
+      const messages =
+        redactSecrets((body.errors ?? []).map((e) => e.message ?? "").join(" | "), env) || `request failed (status=${res.status})`;
       console.warn(
         `[site-stats] debug siteTag discovery query failed — window=${start}..${end} status=${res.status} messages=${truncateForLog(messages)}`,
       );
@@ -532,7 +549,7 @@ async function queryTopSiteTagsForWindow(env: Env, start: string, end: string): 
       }),
     };
   } catch (err) {
-    return { error: err instanceof Error ? err.message : String(err) };
+    return { error: redactSecrets(err instanceof Error ? err.message : String(err), env) };
   }
 }
 
