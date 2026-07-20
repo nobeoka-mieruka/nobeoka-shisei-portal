@@ -75,7 +75,7 @@ const CHUNK_DAYS = 30;
 const DAY_MS = 24 * 60 * 60 * 1000;
 // quotaエラー修正（180日ウィンドウ化）後のコードであることをデバッグレスポンスから確認するための固定文字列。
 // このロジックを変更した場合は値も更新する。
-const CODE_VERSION = "cloudflare-analytics-180d-v2";
+const CODE_VERSION = "cloudflare-analytics-180d-v3-sitetag-diag";
 
 type SiteStatsFailureStage =
   | "token_error"
@@ -439,29 +439,42 @@ async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<
   }
 }
 
+type SiteTagDiagnosticsStatus =
+  | "configured_tag_found"
+  | "configured_tag_not_found"
+  | "no_events_found"
+  | "query_failed";
+
 interface SiteTagDiagnosticsResult {
-  // 実際にイベントが存在するsiteTag上位。件数降順。siteTagはRUMビーコンのトークンで、
+  status: SiteTagDiagnosticsStatus;
+  configuredTagFound: boolean;
+  configuredTagCount: number | null;
+  // 実際にイベントが存在するsiteTag上位（件数降順、最大5件）。siteTagはRUMビーコンのトークンで、
   // 本番HTMLに`<script data-cf-beacon>`として公開されている値のため秘密情報ではない。
   topSiteTags?: { siteTag: string | null; count: number }[];
+  // 実際に問い合わせた30日区間（古い区間から探索した場合は複数になる）。
+  queriedWindows?: { start: string; end: string }[];
   error?: string;
 }
 
-/**
- * ?debug=1専用の追加調査クエリ。設定済みCLOUDFLARE_SITE_TAGでフィルタせず、
- * 指定期間内に実際にイベントが存在するsiteTagを件数降順で取得する。
- * 本処理が失敗しても本来のtotalViews/todayViews取得には影響させない（常に例外を投げない）。
- */
-async function fetchSiteTagDiagnostics(
-  env: Env,
-  requestedStart: string,
-  requestedEnd: string,
-): Promise<SiteTagDiagnosticsResult> {
+// Cloudflareの1回あたりの最大取得期間（実測で13w2d≒93日程度）を大きく下回る30日単位で問い合わせる。
+const SITE_TAG_DIAGNOSTIC_WINDOW_DAYS = 30;
+// 直近30日が空の場合のみ、その前・さらに前の30日区間まで遡る（最大3区間＝合計90日）。
+const SITE_TAG_DIAGNOSTIC_MAX_WINDOWS = 3;
+
+interface SiteTagWindowQueryResult {
+  rows?: { siteTag: string | null; count: number }[];
+  error?: string;
+}
+
+/** 30日以内の単一区間について、実際にイベントが存在するsiteTagを件数降順で取得する。 */
+async function queryTopSiteTagsForWindow(env: Env, start: string, end: string): Promise<SiteTagWindowQueryResult> {
   const query = `
     query SiteStatsSiteTagDiscovery($accountTag: string) {
       viewer {
         accounts(filter: { accountTag: $accountTag }) {
           topSiteTags: rumPageloadEventsAdaptiveGroups(
-            filter: { datetime_geq: "${requestedStart}", datetime_leq: "${requestedEnd}" }
+            filter: { datetime_geq: "${start}", datetime_leq: "${end}" }
             limit: 5
             orderBy: [count_DESC]
           ) {
@@ -498,7 +511,9 @@ async function fetchSiteTagDiagnostics(
 
     if (!res.ok || (body.errors && body.errors.length > 0)) {
       const messages = (body.errors ?? []).map((e) => e.message ?? "").join(" | ") || `request failed (status=${res.status})`;
-      console.warn(`[site-stats] debug siteTag discovery query failed — status=${res.status} messages=${truncateForLog(messages)}`);
+      console.warn(
+        `[site-stats] debug siteTag discovery query failed — window=${start}..${end} status=${res.status} messages=${truncateForLog(messages)}`,
+      );
       return { error: messages };
     }
 
@@ -508,7 +523,7 @@ async function fetchSiteTagDiagnostics(
     }
 
     return {
-      topSiteTags: rows.map((row) => {
+      rows: rows.map((row) => {
         const r = row as { count?: unknown; dimensions?: { siteTag?: unknown } };
         return {
           siteTag: typeof r.dimensions?.siteTag === "string" ? r.dimensions.siteTag : null,
@@ -519,6 +534,78 @@ async function fetchSiteTagDiagnostics(
   } catch (err) {
     return { error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+/**
+ * ?debug=1専用の追加調査。設定済みCLOUDFLARE_SITE_TAGでフィルタせず、
+ * 直近30日→その前30日→さらに前30日の順（最大90日）で、実際にイベントが存在するsiteTagを探索する。
+ * 各区間は独立した30日以内のGraphQLクエリで、直近区間が空の場合のみ遡る。
+ * 本処理が失敗しても本来のtotalViews/todayViews取得には影響させない（常に例外を投げない）。
+ */
+async function fetchSiteTagDiagnostics(env: Env, referenceEndIso: string): Promise<SiteTagDiagnosticsResult> {
+  const endMs = new Date(referenceEndIso).getTime();
+  const queriedWindows: { start: string; end: string }[] = [];
+  let queryError: string | undefined;
+  let foundRows: { siteTag: string | null; count: number }[] | undefined;
+
+  for (let i = 0; i < SITE_TAG_DIAGNOSTIC_MAX_WINDOWS; i++) {
+    const windowEndMs = endMs - i * SITE_TAG_DIAGNOSTIC_WINDOW_DAYS * DAY_MS;
+    const windowStartMs = windowEndMs - SITE_TAG_DIAGNOSTIC_WINDOW_DAYS * DAY_MS;
+    const windowEndIso = new Date(windowEndMs).toISOString();
+    const windowStartIso = new Date(windowStartMs).toISOString();
+    queriedWindows.push({ start: windowStartIso.slice(0, 10), end: windowEndIso.slice(0, 10) });
+
+    const result = await queryTopSiteTagsForWindow(env, windowStartIso, windowEndIso);
+    if (result.error) {
+      queryError = result.error;
+      break;
+    }
+    if (result.rows && result.rows.length > 0) {
+      foundRows = result.rows;
+      break;
+    }
+    // topSiteTagsが空だった場合のみ、より古い30日区間へフォールバックする。
+  }
+
+  if (queryError) {
+    return {
+      status: "query_failed",
+      configuredTagFound: false,
+      configuredTagCount: null,
+      queriedWindows,
+      error: queryError,
+    };
+  }
+
+  if (!foundRows || foundRows.length === 0) {
+    return {
+      status: "no_events_found",
+      configuredTagFound: false,
+      configuredTagCount: null,
+      topSiteTags: [],
+      queriedWindows,
+    };
+  }
+
+  // 同一siteTagが複数行で返るケースに備え、siteTag単位でcountを合算する。
+  const aggregated = new Map<string | null, number>();
+  for (const row of foundRows) {
+    aggregated.set(row.siteTag, (aggregated.get(row.siteTag) ?? 0) + row.count);
+  }
+  const topSiteTags = Array.from(aggregated.entries())
+    .map(([siteTag, count]) => ({ siteTag, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 5);
+
+  const configuredEntry = topSiteTags.find((t) => t.siteTag === env.CLOUDFLARE_SITE_TAG);
+
+  return {
+    status: configuredEntry ? "configured_tag_found" : "configured_tag_not_found",
+    configuredTagFound: Boolean(configuredEntry),
+    configuredTagCount: configuredEntry ? configuredEntry.count : null,
+    topSiteTags,
+    queriedWindows,
+  };
 }
 
 function jsonResponse(body: SiteStatsPayload, status: number, cacheControl: string): Response {
@@ -577,7 +664,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
   try {
     const stats = await fetchCloudflareStats(env, debugRequested);
     const siteTagDiagnostics = debugRequested
-      ? await fetchSiteTagDiagnostics(env, stats.requestedStart, stats.requestedEnd)
+      ? await fetchSiteTagDiagnostics(env, stats.requestedEnd)
       : undefined;
     const payload: SiteStatsSuccessPayload = {
       ok: true,
