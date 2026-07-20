@@ -3,3 +3,6 @@
 CLOUDFLARE_ACCOUNT_ID=
 CLOUDFLARE_API_TOKEN=
 CLOUDFLARE_SITE_TAG=
+# 任意。Web Analyticsの計測開始日（例: 2026-07-12）。未設定でも動作する。
+# 現在から180日より古い日付を指定した場合は自動的に180日前へ切り詰められる。
+CLOUDFLARE_ANALYTICS_START_DATE=
