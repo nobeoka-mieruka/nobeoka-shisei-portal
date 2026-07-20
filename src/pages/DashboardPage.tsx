@@ -2,7 +2,9 @@ import { useMemo } from "react";
 import membersData from "../data/members.json";
 import mayorData from "../data/mayor.json";
 import billsData from "../data/bills.json";
-import type { CouncilMember, Gender, Mayor, Bill } from "../types";
+import generalQuestionsData from "../data/generalQuestions.json";
+import billVotesData from "../data/billVotes.json";
+import type { CouncilMember, Gender, Mayor, Bill, GeneralQuestionItem, BillVoteItem } from "../types";
 import { getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
@@ -18,6 +20,8 @@ import { ChartBarIcon } from "../components/icons";
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
 const bills = billsData as Bill[];
+const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
+const billVotes = billVotesData as BillVoteItem[];
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -70,10 +74,62 @@ export function DashboardPage() {
       .sort((a, b) => b.count - a.count);
   }, []);
 
-  const totalQuestions = useMemo(() => members.reduce((sum, m) => sum + m.questions.length, 0), []);
+  const totalQuestions = generalQuestions.length;
   const totalPledges = mayor.pledges.length;
   const totalBills = bills.length;
   const billsWithResult = useMemo(() => bills.filter((b) => !!b.result).length, []);
+
+  const questionRankingItems: BarListItem[] = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const q of generalQuestions) {
+      counts.set(q.memberId, (counts.get(q.memberId) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([memberId, count]) => {
+        const m = members.find((mm) => mm.id === memberId);
+        return { key: memberId, label: m?.name ?? memberId, count, to: `/members/${memberId}` };
+      })
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
+  }, []);
+
+  const questionThemeItems: BarListItem[] = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const q of generalQuestions) {
+      for (const topic of q.topics) {
+        counts.set(topic, (counts.get(topic) ?? 0) + 1);
+      }
+    }
+    return [...counts.entries()]
+      .map(([topic, count]) => ({ key: topic, label: topic, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 12);
+  }, []);
+
+  const questionYearItems: BarListItem[] = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const q of generalQuestions) {
+      counts.set(q.fiscalYear, (counts.get(q.fiscalYear) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([year, count]) => ({ key: year, label: year, count }))
+      .sort((a, b) => a.label.localeCompare(b.label, "ja"));
+  }, []);
+
+  const questionFactionItems: BarListItem[] = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const q of generalQuestions) {
+      const m = members.find((mm) => mm.id === q.memberId);
+      const factionId = m?.factionId ?? "";
+      counts.set(factionId, (counts.get(factionId) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([factionId, count]) => {
+        const faction = getFaction(factionId);
+        return { key: factionId || "__none__", label: faction.name, count, color: faction.color };
+      })
+      .sort((a, b) => b.count - a.count);
+  }, []);
 
   const factionItems: BarListItem[] = useMemo(() => {
     const counts = new Map<string, number>();
@@ -171,12 +227,14 @@ export function DashboardPage() {
   }, []);
 
   const completion = useMemo(() => {
+    const questionMemberIds = new Set(generalQuestions.map((q) => q.memberId));
+    const voteMemberIds = new Set(billVotes.flatMap((b) => b.memberVotes.map((v) => v.memberId)));
     const photo = members.filter((m) => !!m.photoUrl).length;
     const profile = members.filter((m) => m.profile && m.profile !== PLACEHOLDER_PROFILE).length;
     const profileUrl = members.filter((m) => !!m.profileUrl).length;
     const sns = members.filter((m) => m.sns.length > 0).length;
-    const questions = members.filter((m) => m.questions.length > 0).length;
-    const votes = members.filter((m) => m.votes.length > 0).length;
+    const questions = members.filter((m) => questionMemberIds.has(m.id)).length;
+    const votes = members.filter((m) => voteMemberIds.has(m.id)).length;
     const reports = members.filter((m) => m.reports.length > 0).length;
     return { photo, profile, profileUrl, sns, questions, votes, reports };
   }, []);
@@ -235,6 +293,38 @@ export function DashboardPage() {
 
       <SectionCard title="委員会別所属人数">
         <BarList items={committeeItems} />
+      </SectionCard>
+
+      <SectionCard title="一般質問回数ランキング（上位10名）">
+        {questionRankingItems.length > 0 ? (
+          <BarList items={questionRankingItems} unit="件" />
+        ) : (
+          <p className="text-sm text-on-surface-variant">現在、公開資料を確認しながら順次追加しています。</p>
+        )}
+      </SectionCard>
+
+      <SectionCard title="一般質問 テーマ別件数">
+        {questionThemeItems.length > 0 ? (
+          <BarList items={questionThemeItems} unit="件" />
+        ) : (
+          <p className="text-sm text-on-surface-variant">現在、公開資料を確認しながら順次追加しています。</p>
+        )}
+      </SectionCard>
+
+      <SectionCard title="一般質問 年度別件数">
+        {questionYearItems.length > 0 ? (
+          <BarList items={questionYearItems} unit="件" />
+        ) : (
+          <p className="text-sm text-on-surface-variant">現在、公開資料を確認しながら順次追加しています。</p>
+        )}
+      </SectionCard>
+
+      <SectionCard title="一般質問 会派別件数">
+        {questionFactionItems.length > 0 ? (
+          <BarList items={questionFactionItems} unit="件" />
+        ) : (
+          <p className="text-sm text-on-surface-variant">現在、公開資料を確認しながら順次追加しています。</p>
+        )}
       </SectionCard>
 
       <SectionCard title="情報入力状況">

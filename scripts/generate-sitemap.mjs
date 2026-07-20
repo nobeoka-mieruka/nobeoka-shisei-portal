@@ -14,6 +14,7 @@ function readJson(relPath) {
 const members = readJson("src/data/members.json");
 const billVotes = readJson("src/data/billVotes.json");
 const mayorPromises = readJson("src/data/mayorPromises.json");
+const generalQuestions = readJson("src/data/generalQuestions.json");
 
 /** 実在する公開ページのみ。下書き・存在しないURLは含めない。 */
 const staticPages = [
@@ -57,6 +58,10 @@ for (const b of billVotes) {
 
 for (const p of mayorPromises.promises ?? []) {
   urls.push({ loc: `${SITE_URL}/mayor/policy-progress/${p.id}`, lastmod: p.lastVerified || undefined });
+}
+
+for (const q of generalQuestions) {
+  urls.push({ loc: `${SITE_URL}/questions/${q.id}`, lastmod: q.lastVerified || undefined });
 }
 
 const body = urls

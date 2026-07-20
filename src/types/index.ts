@@ -684,8 +684,12 @@ export interface GeneralQuestionItem {
 
   // 会議録（正式な発言記録）
   transcriptUrl?: string;
+  /** 会議録PDFのURL（会議録ページ＝transcriptUrlとは別に、PDFが確認できた場合のみ）。 */
+  transcriptPdfUrl?: string;
   /** 会議録内の該当箇所を示す参照情報（ページ・巻号など）。 */
   transcriptReference?: string;
+  /** 質問時間（分）。会議録で確認できた場合のみ設定する。 */
+  durationMinutes?: number;
 
   // 議会映像（延岡市議会公式YouTubeチャンネルの動画のみ）
   videoUrl?: string;
@@ -705,6 +709,11 @@ export interface GeneralQuestionItem {
   answerSpeaker?: string;
   answerDepartment?: string;
   speechOrder?: number;
+
+  /** 関連する議案（billVotes.jsonのid）。公式資料で関連が確認できた場合のみ設定する。 */
+  relatedBillVoteIds?: string[];
+  /** 関連する市長公約（mayorPromises.jsonのid）。公式資料で関連が確認できた場合のみ設定する。 */
+  relatedMayorPromiseIds?: string[];
 
   sourceTitle: string;
   sourceOrganization: string;

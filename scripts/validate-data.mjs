@@ -85,6 +85,12 @@ for (const q of generalQuestions) {
   if (q.questionCount !== undefined && q.questionItems && q.questionCount !== q.questionItems.length) {
     warn(tag, `questionCount(${q.questionCount})とquestionItemsの件数(${q.questionItems.length})が一致しません`);
   }
+  if (q.durationMinutes !== undefined && (typeof q.durationMinutes !== "number" || q.durationMinutes <= 0)) {
+    err(tag, `durationMinutesが不正です（0より大きい数値である必要があります）: ${q.durationMinutes}`);
+  }
+  if (q.transcriptPdfUrl && !URL_RE.test(q.transcriptPdfUrl)) {
+    err(tag, `transcriptPdfUrlの形式が不正です: ${q.transcriptPdfUrl}`);
+  }
 }
 
 // --- billVotes.json ---
@@ -224,6 +230,16 @@ try {
 for (const b of billVotes) {
   for (const pId of b.relatedMayorPromiseIds ?? []) {
     if (!mayorPromiseIds.has(pId)) warn(`billVotes.json (${b.id})`, `存在しない市長公約IDを参照しています: ${pId}`);
+  }
+}
+
+for (const q of generalQuestions) {
+  const tag = `generalQuestions.json (${q.id ?? "id不明"})`;
+  for (const bId of q.relatedBillVoteIds ?? []) {
+    if (!billIds.has(bId)) warn(tag, `存在しない議案IDを参照しています: ${bId}`);
+  }
+  for (const pId of q.relatedMayorPromiseIds ?? []) {
+    if (!mayorPromiseIds.has(pId)) warn(tag, `存在しない市長公約IDを参照しています: ${pId}`);
   }
 }
 

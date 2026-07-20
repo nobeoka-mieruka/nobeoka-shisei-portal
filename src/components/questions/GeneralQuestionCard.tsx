@@ -31,12 +31,20 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
 
   return (
     <li className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
-      <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-        <span>{formatJapaneseDate(item.questionDate)}</span>
-        <span>{item.sessionName}</span>
-        <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${questionTypeStyle[item.questionType]}`}>
-          {item.questionType}
-        </span>
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+          <span>{formatJapaneseDate(item.questionDate)}</span>
+          <span>{item.sessionName}</span>
+          <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${questionTypeStyle[item.questionType]}`}>
+            {item.questionType}
+          </span>
+        </div>
+        <Link
+          to={`/questions/${item.id}`}
+          className={`shrink-0 rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+        >
+          詳細を見る
+        </Link>
       </div>
 
       <div className="mt-2">

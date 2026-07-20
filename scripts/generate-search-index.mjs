@@ -78,7 +78,7 @@ for (const q of generalQuestions) {
     type: "question",
     title: q.title,
     description: truncate(q.summary, 80),
-    url: `/questions?member=${q.memberId}`,
+    url: q.id ? `/questions/${q.id}` : `/questions?member=${q.memberId}`,
     keywords: [q.memberName, q.sessionName, ...(q.topics ?? []), ...(q.questionItems ?? [])],
   });
 }
