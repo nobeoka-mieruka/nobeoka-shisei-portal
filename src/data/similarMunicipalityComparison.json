@@ -1,19 +1,19 @@
 {
-  "sourceTitle": "総務省「類似団体別職員数の状況」",
-  "sourceOrganization": "総務省",
-  "sourceUrl": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/ruiji-dantai/index.html",
+  "sourceTitle": "延岡市公式「延岡市の人事行政の運営状況」",
+  "sourceOrganization": "延岡市",
+  "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html",
   "referenceDate": "2025-04-01",
-  "calculationMethod": "延岡市が属する総務省の類似団体区分、および区分内各市の月額給料・報酬を横断比較できる一次資料をまだ確認できていないため、順位は算定していない。",
+  "calculationMethod": "延岡市公式資料「延岡市の人事行政の運営状況」（令和7年4月1日現在）に掲載された類似団体の最高額・最低額の範囲内で、延岡市の月額がどの位置にあるかを示している。最高額・最低額だけでは個別団体ごとの実額・順位は分からないため、対象自治体の一覧および個別実額を確認できるまで、順位（何位か）は算定しない。",
   "targetCount": null,
-  "lastVerified": "2026-07-14",
-  "notes": "総務省の財政上の類似団体区分を採用するか、人口10万人以上15万人未満の一般市（政令指定都市・中核市・東京23区を除く）を代替基準とするかを含め、比較対象自治体そのものが未確定の段階。対象自治体一覧が確定し、各市の報酬データを公式資料で確認できるまで「確認中」と表示する。",
-  "definition": "確認中（総務省の類似団体区分か代替基準かを含め未確定）",
+  "lastVerified": "2026-07-20",
+  "notes": "類似団体は、人口や産業構造などを基に総務省が区分する自治体群です。本ページでは、公式資料で確認できる最高額・最低額のみ掲載しており、個別団体の全データを確認できない間は、区分名・対象自治体数・順位を「公式資料を確認中」として扱います。",
+  "definition": "公式資料を確認中",
   "usesAlternativeDefinition": false,
   "targetMunicipalities": [],
   "roles": [
-    { "role": "mayor", "monthly": null, "rank": null },
-    { "role": "chair", "monthly": null, "rank": null },
-    { "role": "viceChair", "monthly": null, "rank": null },
-    { "role": "member", "monthly": null, "rank": null }
+    { "role": "mayor", "monthly": null, "rank": null, "max": 1061000, "min": 686000 },
+    { "role": "chair", "monthly": null, "rank": null, "max": 760000, "min": 450000 },
+    { "role": "viceChair", "monthly": null, "rank": null, "max": 670000, "min": 400000 },
+    { "role": "member", "monthly": null, "rank": null, "max": 620000, "min": 377000 }
   ]
 }

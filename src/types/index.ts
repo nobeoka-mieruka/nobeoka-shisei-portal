@@ -301,6 +301,9 @@ export interface RoleRankingEntry {
   role: CompensationRole;
   monthly: number | null;
   rank: number | null;
+  /** 類似団体比較などで、個別実数ではなく最高額・最低額の範囲のみ公式資料で確認できた場合に設定する。 */
+  max?: number;
+  min?: number;
 }
 
 /** 全国815市区（792市＋東京23特別区、町村は含まない）を対象とした月額報酬順位。 */

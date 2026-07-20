@@ -65,3 +65,13 @@ export function rankByRole(entries: CompensationComparisonEntry[], role: Compens
 export function findRank(ranked: RankedEntry[], municipality: string): number | null {
   return ranked.find((r) => r.entry.municipality === municipality)?.rank ?? null;
 }
+
+/**
+ * 最高額・最低額の範囲内で、value がどの位置（0〜100%）にあるかを返す。
+ * これは順位ではなく、範囲内での相対位置を示すためだけの値。
+ */
+export function calcRangePosition(value: number, min: number, max: number): number {
+  if (max <= min) return 50;
+  const ratio = ((value - min) / (max - min)) * 100;
+  return Math.min(100, Math.max(0, ratio));
+}
