@@ -27,6 +27,9 @@ interface SiteStatsDebugInfo {
   lookbackDays: number | null;
   errorStage: SiteStatsFailureStage | null;
   errorCodes: string | null;
+  // 成功時のみ。alias（c0～c5、today）ごとの実際の値の形と、集計に使った件数。
+  aliasShapes?: Record<string, string>;
+  chunkCounts?: Record<string, number>;
 }
 
 interface SiteStatsSuccessPayload {
@@ -214,8 +217,10 @@ function buildGraphQlQuery(siteTag: string, chunks: DateRangeChunk[], todayRange
   `;
 }
 
+// rumPageloadEventsAdaptiveGroupsはAdaptiveGroups系データセットのため、limit:1でも値は配列で返る
+// （例: { count: 123 }ではなく[{ count: 123 }]）。将来の形状変化にも耐えられるようunknownで受ける。
 interface GraphQlAccountResult {
-  [alias: string]: { count?: number } | undefined;
+  [alias: string]: unknown;
 }
 
 interface GraphQlErrorEntry {
@@ -257,9 +262,39 @@ interface CloudflareStats {
   rangeStartDate: string;
   requestedStart: string;
   requestedEnd: string;
+  aliasShapes?: Record<string, string>;
+  chunkCounts?: Record<string, number>;
 }
 
-async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
+/** AdaptiveGroupsの配列（例: [{ count: 123 }, ...]）内のcountを合計する。不正な要素があればnullを返す。 */
+function sumArrayCounts(items: unknown[]): number | null {
+  let sum = 0;
+  for (const item of items) {
+    if (item === null || typeof item !== "object") return null;
+    const count = (item as { count?: unknown }).count;
+    if (typeof count !== "number" || !Number.isFinite(count)) return null;
+    sum += count;
+  }
+  return sum;
+}
+
+/** デバッグログ用に、aliasの値の形（配列/オブジェクト/その他）を秘密情報を含まない形で要約する。 */
+function describeAliasValue(value: unknown): Record<string, unknown> {
+  if (Array.isArray(value)) {
+    const first: unknown = value[0];
+    return {
+      isArray: true,
+      length: value.length,
+      firstItemKeys: first && typeof first === "object" ? Object.keys(first as object) : null,
+    };
+  }
+  if (value && typeof value === "object") {
+    return { isArray: false, keys: Object.keys(value as object) };
+  }
+  return { isArray: false, valueType: typeof value };
+}
+
+async function fetchCloudflareStats(env: Env, debugRequested: boolean): Promise<CloudflareStats> {
   const now = Date.now();
   const lookback = resolveLookbackDays(env, now);
   const chunks = buildDateRangeChunks(now, lookback.days, CHUNK_DAYS);
@@ -316,15 +351,62 @@ async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
     }
 
     const account = accounts[0];
-    const readCount = (alias: string): number => {
-      const count = account[alias]?.count;
-      if (typeof count !== "number" || !Number.isFinite(count)) {
-        console.error(
-          `[site-stats] Cloudflare GraphQL API missing count for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
-        );
-        throw new SiteStatsError("unexpected_response", `missing or non-numeric count for alias ${alias}`);
+
+    if (debugRequested) {
+      const shapeDump: Record<string, unknown> = {};
+      for (const key of Object.keys(account)) {
+        shapeDump[key] = describeAliasValue(account[key]);
       }
-      return count;
+      console.log(`[site-stats] debug alias shapes: ${truncateForLog(JSON.stringify({ aliases: shapeDump }))}`);
+    }
+
+    const aliasShapes: Record<string, string> = {};
+    const chunkCounts: Record<string, number> = {};
+
+    // rumPageloadEventsAdaptiveGroupsはAdaptiveGroups系のため、limit:1でも配列（例: [{ count: 123 }]）で返る。
+    // 既存互換のためオブジェクト形式（{ count: 123 }）にも対応する。
+    const readCount = (alias: string): number => {
+      const value = account[alias];
+      aliasShapes[alias] = Array.isArray(value)
+        ? "array"
+        : value === null
+          ? "null"
+          : typeof value === "object"
+            ? "object"
+            : typeof value;
+
+      if (Array.isArray(value)) {
+        // 該当期間にアクセスがない場合は空配列で返るため、0件として扱う。
+        if (value.length === 0) {
+          chunkCounts[alias] = 0;
+          return 0;
+        }
+        const sum = sumArrayCounts(value);
+        if (sum === null) {
+          console.warn(
+            `[site-stats] Cloudflare GraphQL API alias=${alias} array contains invalid item(s) — value=${truncateForLog(JSON.stringify(value))}`,
+          );
+          console.error(
+            `[site-stats] Cloudflare GraphQL API invalid array item for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+          );
+          throw new SiteStatsError("unexpected_response", `invalid array item for alias ${alias}`);
+        }
+        chunkCounts[alias] = sum;
+        return sum;
+      }
+
+      if (value && typeof value === "object") {
+        const count = (value as { count?: unknown }).count;
+        if (typeof count === "number" && Number.isFinite(count)) {
+          chunkCounts[alias] = count;
+          return count;
+        }
+      }
+
+      console.error(
+        `[site-stats] Cloudflare GraphQL API missing or invalid shape for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+      );
+      throw new SiteStatsError("unexpected_response", `missing or invalid shape for alias ${alias}`);
     };
 
     let totalViews = 0;
@@ -339,6 +421,8 @@ async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
       rangeStartDate: requestedStart.slice(0, 10),
       requestedStart,
       requestedEnd,
+      aliasShapes: debugRequested ? aliasShapes : undefined,
+      chunkCounts: debugRequested ? chunkCounts : undefined,
     };
   } catch (err) {
     // デバッグレスポンス（?debug=1）用に、失敗時の要求範囲・区分をエラーオブジェクトへ付与する。
@@ -406,7 +490,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
   }
 
   try {
-    const stats = await fetchCloudflareStats(env);
+    const stats = await fetchCloudflareStats(env, debugRequested);
     const payload: SiteStatsSuccessPayload = {
       ok: true,
       totalViews: stats.totalViews,
@@ -427,6 +511,8 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
               lookbackDays: stats.windowDays,
               errorStage: null,
               errorCodes: null,
+              aliasShapes: stats.aliasShapes,
+              chunkCounts: stats.chunkCounts,
             },
           }
         : {}),
