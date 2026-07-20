@@ -3,7 +3,45 @@ import { DataNotice } from "./DataNotice";
 import { LastUpdated } from "./LastUpdated";
 
 const linkClass =
-  "rounded text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "block rounded py-2 text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+interface FooterLinkGroup {
+  heading: string;
+  links: { to: string; label: string }[];
+}
+
+const footerGroups: FooterLinkGroup[] = [
+  {
+    heading: "市政情報",
+    links: [
+      { to: "/", label: "ホーム" },
+      { to: "/", label: "市議会議員一覧" },
+      { to: "/mayor", label: "市長情報" },
+      { to: "/dashboard", label: "ダッシュボード" },
+      { to: "/finance", label: "延岡市の財政" },
+    ],
+  },
+  {
+    heading: "データ・案内",
+    links: [
+      { to: "/city-guide", label: "市役所案内" },
+      { to: "/questions", label: "一般質問データベース" },
+      { to: "/bills/votes", label: "議案ごとの賛否" },
+      { to: "/search", label: "サイト内検索" },
+      { to: "/updates", label: "更新履歴" },
+    ],
+  },
+  {
+    heading: "サイト運営",
+    links: [
+      { to: "/about", label: "このサイトについて" },
+      { to: "/editorial-policy", label: "編集方針" },
+      { to: "/contact", label: "情報提供・訂正依頼" },
+      { to: "/terms", label: "利用規約・免責事項" },
+      { to: "/terms#privacy", label: "プライバシーに関する案内" },
+    ],
+  },
+];
 
 export function Footer() {
   return (
@@ -14,54 +52,23 @@ export function Footer() {
           延岡市・延岡市議会の公式サイトではありません。
         </p>
         <DataNotice className="pt-1" />
-        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-1 text-sm sm:justify-start">
-          <Link to="/" className={linkClass}>
-            ホーム
-          </Link>
-          <Link to="/" className={linkClass}>
-            市議会議員一覧
-          </Link>
-          <Link to="/mayor" className={linkClass}>
-            市長情報
-          </Link>
-          <Link to="/dashboard" className={linkClass}>
-            ダッシュボード
-          </Link>
-          <Link to="/city-guide" className={linkClass}>
-            市役所案内
-          </Link>
-          <Link to="/finance" className={linkClass}>
-            延岡市の財政
-          </Link>
-          <Link to="/questions" className={linkClass}>
-            一般質問データベース
-          </Link>
-          <Link to="/bills/votes" className={linkClass}>
-            議案ごとの賛否
-          </Link>
-          <Link to="/search" className={linkClass}>
-            サイト内検索
-          </Link>
-          <Link to="/about" className={linkClass}>
-            このサイトについて
-          </Link>
-          <Link to="/updates" className={linkClass}>
-            更新履歴
-          </Link>
-          <Link to="/editorial-policy" className={linkClass}>
-            編集方針
-          </Link>
-          <Link to="/contact" className={linkClass}>
-            情報提供・訂正依頼
-          </Link>
-          <Link to="/terms" className={linkClass}>
-            利用規約・免責事項
-          </Link>
-          <Link to="/terms#privacy" className={linkClass}>
-            プライバシーに関する案内
-          </Link>
-        </nav>
-        <LastUpdated className="pt-2 sm:text-left" />
+
+        <div className="grid grid-cols-1 gap-x-6 gap-y-5 pt-3 text-left sm:grid-cols-3">
+          {footerGroups.map((group) => (
+            <div key={group.heading}>
+              <h3 className="mb-1 text-xs font-semibold text-on-surface-variant">{group.heading}</h3>
+              <nav aria-label={group.heading} className="grid grid-cols-2 gap-x-3 sm:grid-cols-1 sm:gap-x-0">
+                {group.links.map((link, i) => (
+                  <Link key={`${link.to}-${i}`} to={link.to} className={`${linkClass} text-sm`}>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          ))}
+        </div>
+
+        <LastUpdated className="mt-4 border-t border-outline-variant pt-3 sm:text-left" />
       </div>
     </footer>
   );

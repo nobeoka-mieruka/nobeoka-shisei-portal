@@ -31,11 +31,18 @@ export function SiteAnalyticsSummary() {
   }, []);
 
   return (
-    <SectionCard title="サイト利用状況">
+    <SectionCard title="サイト利用状況" titleClassName="text-lg font-bold text-on-surface">
       {state.status === "loading" && (
         <p className="text-sm text-on-surface-variant">累計アクセス数を読み込んでいます</p>
       )}
-      {state.status === "error" && <p className="text-xs text-on-surface-variant">現在集計中です</p>}
+      {state.status === "error" && (
+        <div>
+          <p className="text-sm text-on-surface-variant">累計アクセス数は現在集計中です</p>
+          <p className="mt-1 text-xs text-on-surface-variant">
+            Cloudflare Analyticsの集計結果が利用可能になり次第、表示します。
+          </p>
+        </div>
+      )}
       {state.status === "success" && (
         <div className="rounded-lg bg-surface-container-high p-4">
           <p className="text-xs text-on-surface-variant">累計アクセス数</p>
@@ -45,7 +52,7 @@ export function SiteAnalyticsSummary() {
         </div>
       )}
       <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-        Cloudflareによる集計値です。個人を特定できる情報は表示していません。
+        Cloudflare Analyticsによる集計値です。個人を特定できる情報は表示していません。
       </p>
     </SectionCard>
   );
