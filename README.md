@@ -51,6 +51,15 @@ npm run build    # 本番ビルド
 
 会派を追加・変更する場合は `factions.json` に `{ "id": ..., "name": ..., "color": "#rrggbb" }` を追加するだけです。`color` は省略可（自動で色が割り当てられます）。
 
+## 開発・運用管理
+
+- [CLAUDE.md](./CLAUDE.md) … 開発ルールと自律実行手順
+- [PROJECT_ROADMAP.md](./PROJECT_ROADMAP.md) … 中長期の開発方針と優先順位
+- [TASKS.md](./TASKS.md) … 現在実行する具体的タスク
+- [PROJECT_PLAN.md](./PROJECT_PLAN.md) … 機能ごとの実装状況
+- [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) … 公開前後の確認項目
+- [UPDATE_GUIDE.md](./UPDATE_GUIDE.md) … データ更新、GitHub Push、Cloudflare Pages反映手順
+
 ## 注意事項
 
 現在収録されている議員・市長のプロフィール、会派名、質問内容、議案、活動レポート等は**すべてサンプル（仮）データ**です。実際の延岡市議会の情報に置き換えてご利用ください。顔写真も仮アバター表示になっています。
