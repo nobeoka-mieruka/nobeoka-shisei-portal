@@ -59,6 +59,13 @@ class SiteStatsError extends Error {
   }
 }
 
+const LOG_MAX_CHARS = 4000;
+
+/** Cloudflare Pages Functionsのログ行が長大になりすぎないよう切り詰める。 */
+function truncateForLog(text: string): string {
+  return text.length > LOG_MAX_CHARS ? `${text.slice(0, LOG_MAX_CHARS)}...(truncated)` : text;
+}
+
 /** APIトークンやAccount IDの値を含めず、原因の切り分けに必要な情報だけをログへ出す。 */
 function logFailure(err: unknown): void {
   if (err instanceof SiteStatsError) {
@@ -184,19 +191,31 @@ async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
     }),
   });
 
-  let body: GraphQlResponseBody | undefined;
+  const rawText = await res.text();
+  let body: GraphQlResponseBody;
   try {
-    body = (await res.json()) as GraphQlResponseBody;
+    body = JSON.parse(rawText) as GraphQlResponseBody;
   } catch {
+    console.error(
+      `[site-stats] Cloudflare API returned non-JSON response — status=${res.status} body=${truncateForLog(rawText)}`,
+    );
     throw new SiteStatsError("unexpected_response", `Cloudflare API response was not valid JSON (status=${res.status})`);
   }
 
   if (!res.ok || (body.errors && body.errors.length > 0)) {
+    // 原因切り分け用の詳細ログ。APIトークン・Account IDは含めない
+    // （queryにはsiteTagのみ埋め込まれており、これは公開情報。accountTagはGraphQL変数側にあり、ここには出力していない）。
+    console.error(
+      `[site-stats] Cloudflare GraphQL API error — status=${res.status} body=${truncateForLog(JSON.stringify(body))} query=${truncateForLog(query.trim())}`,
+    );
     classifyAndThrow(res.status, body);
   }
 
   const accounts = body.data?.viewer?.accounts;
   if (!accounts || accounts.length === 0) {
+    console.error(
+      `[site-stats] Cloudflare GraphQL API returned no accounts — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+    );
     throw new SiteStatsError("site_not_found", "Cloudflare GraphQL API returned no accounts for the given accountTag");
   }
 
@@ -204,6 +223,9 @@ async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
   const readCount = (alias: string): number => {
     const count = account[alias]?.count;
     if (typeof count !== "number" || !Number.isFinite(count)) {
+      console.error(
+        `[site-stats] Cloudflare GraphQL API missing count for alias=${alias} — status=${res.status} body=${truncateForLog(JSON.stringify(body))}`,
+      );
       throw new SiteStatsError("unexpected_response", `missing or non-numeric count for alias ${alias}`);
     }
     return count;
