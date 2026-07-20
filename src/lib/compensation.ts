@@ -55,11 +55,15 @@ export interface RankedEntry {
   rank: number;
 }
 
-/** 月額報酬の高い順に自治体を順位付けする。同額は同順位（1, 2, 2, 4方式）とする。 */
+/**
+ * 月額報酬の高い順に自治体を順位付けする。同額は同順位（1, 2, 2, 4方式）とする。
+ * 返り値は必ず金額の高い順（＝順位の昇順）に並べる。
+ */
 export function rankByRole(entries: CompensationComparisonEntry[], role: CompensationRole): RankedEntry[] {
   return rankGeneric(entries, (entry) => getMonthly(entry, role))
     .filter((r): r is { item: CompensationComparisonEntry; value: number; rank: number } => r.rank !== null)
-    .map((r) => ({ entry: r.item, monthly: r.value, rank: r.rank }));
+    .map((r) => ({ entry: r.item, monthly: r.value, rank: r.rank }))
+    .sort((a, b) => a.rank - b.rank);
 }
 
 export function findRank(ranked: RankedEntry[], municipality: string): number | null {

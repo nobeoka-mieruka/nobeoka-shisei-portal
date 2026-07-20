@@ -4,10 +4,12 @@ import prefectureRankingData from "../data/prefectureCompensationRanking.json";
 import miyazakiComparisonData from "../data/miyazakiCompensationComparison.json";
 import nationalRankingData from "../data/nationalCompensationRanking.json";
 import similarMunicipalityData from "../data/similarMunicipalityComparison.json";
+import pendingMunicipalitiesData from "../data/compensationPendingMunicipalities.json";
 import type {
   CompensationComparisonEntry,
   MiyazakiCompensationComparison,
   NationalCompensationRanking,
+  PendingMunicipalityEntry,
   PrefectureCompensationRanking,
   SimilarMunicipalityComparison,
 } from "../types";
@@ -36,6 +38,7 @@ const prefectureRanking = prefectureRankingData as PrefectureCompensationRanking
 const miyazakiComparison = miyazakiComparisonData as MiyazakiCompensationComparison;
 const nationalRanking = nationalRankingData as NationalCompensationRanking;
 const similarMunicipality = similarMunicipalityData as SimilarMunicipalityComparison;
+const pendingMunicipalities = pendingMunicipalitiesData as PendingMunicipalityEntry[];
 const NOBEOKA = "延岡市";
 
 export function CompensationPage() {
@@ -88,7 +91,7 @@ export function CompensationPage() {
                 hint={
                   est.amount !== null
                     ? "月額報酬と公表された支給月数による概算"
-                    : "支給月数が公式資料で確認できないため未算定"
+                    : "理由：期末手当の公式資料を確認できていないため"
                 }
                 compact
               />
@@ -96,7 +99,7 @@ export function CompensationPage() {
           })}
         </div>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          年間支給見込額＝月額報酬×（12＋期末手当支給月数）で算定した概算です。交通費・旅費・政務活動費・共済費、および市長の退職手当は性質が異なるため含めていません。
+          年間支給見込額は、月額×12か月＋期末手当で算出しています。退職手当・その他手当・旅費・費用弁償は含みません。市長と議員で期末手当の支給月数が異なる場合は区別して表示し、期末手当の公式資料を確認できない自治体は「算定不可」としています。
         </p>
       </SectionCard>
 
@@ -119,7 +122,7 @@ export function CompensationPage() {
 
       <SectionCard title="宮崎県内・全国での順位">
         <ul className="list-disc space-y-1 pl-5 text-xs leading-relaxed text-on-surface-variant">
-          <li>順位は月額のみを対象とし、期末手当等を含みません。</li>
+          <li>順位は月額のみを対象とし、期末手当、退職手当、その他手当を含みません。</li>
           <li>全国順位は、全国の対象自治体を同一条件で比較できる公式個別データを確認できた場合のみ掲載します。</li>
           <li>類似団体は、公式資料で確認できる最高額・最低額を掲載しています。個別団体の全データが確認できない場合、順位は算定しません。</li>
         </ul>
@@ -166,7 +169,11 @@ export function CompensationPage() {
                   key={r.key}
                   label={r.label}
                   value={hasRank ? `${entry!.rank}位／${nationalRanking.targetCount}市区` : "算定していません"}
-                  hint={hasRank ? `月額 ${formatYen(entry!.monthly as number)}` : undefined}
+                  hint={
+                    hasRank
+                      ? `月額 ${formatYen(entry!.monthly as number)}`
+                      : "理由：公式個別データを確認できていないため"
+                  }
                   compact
                 />
               );
@@ -228,6 +235,11 @@ export function CompensationPage() {
                       <dt className="text-on-surface-variant">順位</dt>
                       <dd className="text-on-surface">{hasRank ? `${entry!.rank}位` : "算定不可"}</dd>
                     </div>
+                    {!hasRank && (
+                      <p className="text-[11px] leading-snug text-on-surface-variant">
+                        理由：個別団体すべての月額データを確認できていないため
+                      </p>
+                    )}
                   </dl>
 
                   {hasRange && position !== null && (
@@ -306,7 +318,7 @@ export function CompensationPage() {
       <SectionCard title="自治体比較表">
         <p className="mb-2 text-xs text-on-surface-variant sm:hidden">表は横にスクロールできます</p>
         <div className="hidden overflow-x-auto rounded-lg sm:block">
-          <table className="border-collapse text-sm tabular-nums">
+          <table className="min-w-[1150px] border-collapse text-sm tabular-nums">
             <thead>
               <tr className="border-b border-outline-variant text-left text-xs text-on-surface-variant">
                 <th className="sticky left-0 z-20 min-w-[90px] whitespace-nowrap bg-surface-container-low px-3 py-2.5 text-left font-medium">
@@ -316,7 +328,7 @@ export function CompensationPage() {
                 <th className="min-w-[110px] whitespace-nowrap px-3 py-2.5 text-right font-medium">議長月額</th>
                 <th className="min-w-[120px] whitespace-nowrap px-3 py-2.5 text-right font-medium">副議長月額</th>
                 <th className="min-w-[110px] whitespace-nowrap px-3 py-2.5 text-right font-medium">議員月額</th>
-                <th className="min-w-[100px] whitespace-nowrap px-3 py-2.5 text-center font-medium">期末手当</th>
+                <th className="min-w-[110px] whitespace-nowrap px-3 py-2.5 text-center font-medium">期末手当</th>
                 <th className="min-w-[150px] whitespace-nowrap px-3 py-2.5 text-right font-medium">年間支給見込額（議員）</th>
                 <th className="min-w-[120px] whitespace-nowrap px-3 py-2.5 text-center font-medium">基準日</th>
                 <th className="min-w-[220px] px-3 py-2.5 text-left font-medium">出典</th>
@@ -352,7 +364,7 @@ export function CompensationPage() {
                     <td className="min-w-[110px] whitespace-nowrap px-3 py-3 text-right text-on-surface">
                       {formatYen(c.memberMonthly)}
                     </td>
-                    <td className="min-w-[100px] whitespace-nowrap px-3 py-3 text-center text-on-surface-variant">
+                    <td className="min-w-[110px] whitespace-nowrap px-3 py-3 text-center text-on-surface-variant">
                       {c.councilBonusMonths !== null ? `${c.councilBonusMonths}か月分` : "資料未確認"}
                       {c.mayorBonusMonths !== null && c.mayorBonusMonths !== c.councilBonusMonths && (
                         <span className="block text-xs">（市長 {c.mayorBonusMonths}か月分）</span>
@@ -429,11 +441,35 @@ export function CompensationPage() {
             );
           })}
         </div>
+
+        {pendingMunicipalities.length > 0 && (
+          <details className="mt-3 rounded-lg border border-outline-variant p-3">
+            <summary className="cursor-pointer text-xs font-medium text-primary">
+              公式資料確認中の自治体（{pendingMunicipalities.length}件）
+            </summary>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              宮崎県内の他の市についても掲載を検討していますが、次の自治体は基準日・月額・期末手当を公式資料で確認できていないため、正式には掲載していません。確認でき次第、追加します。
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {pendingMunicipalities.map((m) => (
+                <li
+                  key={m.municipality}
+                  className="rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant"
+                >
+                  {m.municipality}：公式資料確認中
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
       </SectionCard>
 
       <SectionCard title="月額報酬の比較（役職別グラフ）">
         <CompensationBarChart entries={comparison} />
         <p className="mt-4 text-xs leading-relaxed text-on-surface-variant">
+          比較条件：基準日{formatJapaneseDate(nobeoka.referenceDate)}時点の公表月額（期末手当を含まない）で高い順に表示し、同額の場合は同順位としています。
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
           自治体ごとに人口、財政規模、職責、期末手当の算定方法などが異なるため、金額の高低だけで行政や議会を評価するものではありません。
         </p>
       </SectionCard>

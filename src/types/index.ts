@@ -211,6 +211,8 @@ export type CompensationRole = "mayor" | "chair" | "viceChair" | "member";
  * 金額はすべて所得税等を差し引く前の月額報酬（円）。政務活動費・旅費・共済費・退職手当は含まない。
  */
 export interface CompensationComparisonEntry {
+  /** 自治体を一意に識別するID（ローマ字スラッグ）。 */
+  id: string;
   municipality: string;
   prefecture: string;
   /** ISO形式。報酬額の基準日。 */
@@ -236,6 +238,13 @@ export interface CompensationComparisonEntry {
     sourceTitle?: string;
     sourceUrl?: string;
   };
+}
+
+/** 正式掲載に必要な条件（公式資料・基準日・月額の確認）が揃っていない自治体1件分。 */
+export interface PendingMunicipalityEntry {
+  municipality: string;
+  /** 未掲載の理由区分。今のところ「公式資料を確認できていない」の1種類のみ。 */
+  status: "official_data_pending";
 }
 
 /** 宮崎県内9市中の月額報酬順位（役職1件分）。 */

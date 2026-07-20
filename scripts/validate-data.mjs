@@ -227,6 +227,105 @@ for (const b of billVotes) {
   }
 }
 
+// --- compensationComparison.json ---
+function isPositiveAmount(v) {
+  return typeof v === "number" && Number.isFinite(v) && v > 0;
+}
+
+try {
+  const compensation = readJson("src/data/compensationComparison.json");
+  const compensationIds = new Set();
+  const sourceUrls = new Map();
+
+  for (const c of compensation) {
+    const tag = `compensationComparison.json (${c.id ?? c.municipality ?? "id不明"})`;
+
+    if (isBlank(c.id)) err(tag, "idが空です");
+    else if (compensationIds.has(c.id)) err(tag, `自治体IDが重複しています: ${c.id}`);
+    else compensationIds.add(c.id);
+
+    if (isBlank(c.municipality)) err(tag, "municipalityが空です");
+    if (isBlank(c.prefecture)) err(tag, "prefectureが空です");
+    if (!c.referenceDate || !DATE_RE.test(c.referenceDate)) err(tag, `referenceDateが未登録または形式が不正です: ${c.referenceDate}`);
+    if (c.confirmedAt && !DATE_RE.test(c.confirmedAt)) err(tag, `confirmedAtの形式が不正です: ${c.confirmedAt}`);
+
+    for (const [key, label] of [
+      ["mayorMonthly", "市長月額"],
+      ["chairMonthly", "議長月額"],
+      ["viceChairMonthly", "副議長月額"],
+      ["memberMonthly", "議員月額"],
+    ]) {
+      if (!isPositiveAmount(c[key])) err(tag, `${label}(${key})が不正、または0以下の金額です: ${c[key]}`);
+    }
+
+    for (const key of ["mayorBonusMonths", "councilBonusMonths", "bonusAdjustmentRate"]) {
+      const v = c[key];
+      if (v !== null && (typeof v !== "number" || !Number.isFinite(v) || v < 0)) {
+        err(tag, `${key}が不正です（null または0以上の数値である必要があります）: ${v}`);
+      }
+    }
+
+    if (!URL_RE.test(c.sourceUrl ?? "")) err(tag, `sourceUrlの形式が不正です: ${c.sourceUrl}`);
+    if (isBlank(c.sourceTitle)) err(tag, "sourceTitleが空です");
+    if (c.sourceUrl) {
+      const prevMunicipality = sourceUrls.get(c.sourceUrl);
+      if (prevMunicipality && prevMunicipality !== c.municipality) {
+        warn(tag, `sourceUrlが別の自治体（${prevMunicipality}）と重複しています: ${c.sourceUrl}`);
+      }
+      sourceUrls.set(c.sourceUrl, c.municipality);
+    }
+
+    if (c.pendingProposal?.sourceUrl && !URL_RE.test(c.pendingProposal.sourceUrl)) {
+      err(tag, `pendingProposal.sourceUrlの形式が不正です: ${c.pendingProposal.sourceUrl}`);
+    }
+  }
+} catch {
+  warn("compensationComparison.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
+// --- nationalCompensationRanking.json / similarMunicipalityComparison.json（役職別の順位・範囲データ） ---
+function validateRoleRankingFile(relPath) {
+  try {
+    const data = readJson(relPath);
+    const tag = (role) => `${relPath} (${role})`;
+
+    if (!URL_RE.test(data.sourceUrl ?? "")) err(relPath, `sourceUrlの形式が不正です: ${data.sourceUrl}`);
+    if (data.referenceDate && !DATE_RE.test(data.referenceDate)) err(relPath, `referenceDateの形式が不正です: ${data.referenceDate}`);
+    if (data.lastVerified && !DATE_RE.test(data.lastVerified)) err(relPath, `lastVerifiedの形式が不正です: ${data.lastVerified}`);
+
+    for (const r of data.roles ?? []) {
+      const hasRank = r.rank !== null && r.rank !== undefined;
+      const hasMonthly = r.monthly !== null && r.monthly !== undefined;
+      if (hasRank !== hasMonthly) {
+        err(tag(r.role), `順位状態(rank)と順位値(monthly)の整合性が取れていません: rank=${r.rank}, monthly=${r.monthly}`);
+      }
+      if (r.max !== undefined && r.min !== undefined) {
+        if (r.min > r.max) {
+          err(tag(r.role), `最低額(min=${r.min})が最高額(max=${r.max})を上回っています`);
+        }
+        const nobeoka = (readJson("src/data/compensationComparison.json") ?? []).find((c) => c.id === "nobeoka");
+        if (nobeoka) {
+          const monthlyKey = { mayor: "mayorMonthly", chair: "chairMonthly", viceChair: "viceChairMonthly", member: "memberMonthly" }[
+            r.role
+          ];
+          const nobeokaAmount = nobeoka[monthlyKey];
+          if (typeof nobeokaAmount === "number" && (nobeokaAmount < r.min || nobeokaAmount > r.max)) {
+            err(
+              tag(r.role),
+              `延岡市の金額(${nobeokaAmount})が類似団体の最高・最低範囲(${r.min}〜${r.max})の外にあります`,
+            );
+          }
+        }
+      }
+    }
+  } catch {
+    warn(relPath, "読み込めませんでした（存在しない場合はスキップ）");
+  }
+}
+
+validateRoleRankingFile("src/data/nationalCompensationRanking.json");
+validateRoleRankingFile("src/data/similarMunicipalityComparison.json");
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);
