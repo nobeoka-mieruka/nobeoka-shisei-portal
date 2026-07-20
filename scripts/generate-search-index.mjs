@@ -51,7 +51,7 @@ try {
       type: "promise",
       title: truncate(p.promiseText, 60),
       description: `${p.categoryTitle}／${p.statusLabel}`,
-      url: anchor ? `/mayor/policy-progress#${anchor}` : "/mayor/policy-progress",
+      url: p.id ? `/mayor/policy-progress/${p.id}` : anchor ? `/mayor/policy-progress#${anchor}` : "/mayor/policy-progress",
       keywords: [p.categoryTitle, p.statusLabel, ...(p.progressSummary ?? [])],
     });
   }

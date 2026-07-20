@@ -375,6 +375,21 @@ export interface MayorPromiseEvidenceRef {
   page?: string;
 }
 
+/** 公約詳細ページの「関連リンク」1件分（PDF以外の参考ページなど）。 */
+export interface MayorPromiseRelatedLink {
+  label: string;
+  url: string;
+}
+
+/** 公約の進捗状態が変化した記録1件分。確認できた時点のみ追加する（推測で埋めない）。 */
+export interface MayorPromiseHistoryEntry {
+  /** ISO形式。この状態を確認した日。 */
+  date: string;
+  statusLabel: MayorPromiseStatusLabel;
+  /** 変化の内容を示す短い注記。 */
+  note?: string;
+}
+
 /** 個別公約1件分のデータ。 */
 export interface MayorPromiseItem {
   id: string;
@@ -406,6 +421,18 @@ export interface MayorPromiseItem {
   /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
   lastVerified: string;
   notes: string;
+  /** 担当部署。公式資料で確認できない場合は省略する（表示側は「情報未登録」とする。推測で埋めない）。 */
+  department?: string;
+  /** 市民向けの分かりやすい概要。公約原文（promiseText）とは別に用意できた場合のみ設定する。 */
+  citizenSummary?: string;
+  /** この公約が発表された日（選挙公報・マニフェスト公表日など）。確認できない場合は省略する。 */
+  announcedDate?: string;
+  /** サイト側でこの公約データを最後に更新した日（ISO形式）。lastVerified（資料確認日）とは別の概念。 */
+  siteUpdatedAt?: string;
+  /** 関連リンク（PDF以外の参考ページなど）。 */
+  relatedLinks?: MayorPromiseRelatedLink[];
+  /** 進捗状態の変更履歴。確認できた時点のみ追加する（未設定の場合、詳細ページは最新の状態のみを表示する）。 */
+  progressHistory?: MayorPromiseHistoryEntry[];
 }
 
 /** 市長公約の進捗状況ページ（個別公約12項目）全体のデータ。 */

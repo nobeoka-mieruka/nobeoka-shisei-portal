@@ -2,19 +2,20 @@
 
 **現在の判定：未判定**
 
-理由：コード・データ・ビルド・本番HTTPレスポンスの機械的な確認は今回のセッションで完了しましたが、実機スマートフォンでの目視確認、Google Analyticsリアルタイム計測の確認、情報提供フォームの実送信テスト、Lighthouse計測、Search Consoleのインデックス状況確認など、人手・別ツールでしか行えない確認が複数残っているため、「公開可能」「条件付き公開可能」と断定できる段階ではありません。これらの未確認項目がすべて確認できた時点で、判定を更新してください。
+理由：唯一の必須未完了項目だった「公約ごとの独立した詳細ページ」は今回のセッションで実装済みです。しかし、実機スマートフォンでの目視確認、Google Analyticsリアルタイム計測の確認、情報提供フォームの実送信テスト、Lighthouse計測、Search Consoleのインデックス状況確認など、人手・別ツールでしか行えない確認が複数残っており、また `/api/site-stats` の本番503が未解消（Cloudflare側の設定確認が必要）のため、「公開可能」「条件付き公開可能」と断定できる段階ではありません。これらがすべて確認・解消できた時点で、判定を更新してください。
 
 | 項目 | 内容 |
 |---|---|
-| 判定日 | 2026-07-20 |
-| 最終確認者 | Claude Code（本セッションでの自動調査。実機・Analytics・フォーム送信テストは未実施） |
-| 対象コミット | `7c1fa4e`（本チェックリスト追加コミットはこの後に作成） |
+| 判定日 | 2026-07-20（初版）／2026-07-20（本更新：公約詳細ページ実装後） |
+| 最終確認者 | Claude Code（本セッションでの自動調査・実装。実機・Analytics・フォーム送信テスト・Cloudflareダッシュボード確認は未実施） |
+| 対象コミット | 本更新をコミットした時点のHEAD（最終報告のコミットIDを参照） |
 | 対象公開URL | https://nobeoka-shisei-portal.pages.dev/ |
 
-**公開を妨げる必須項目（現時点で確認できた範囲）**：なし（`validate:data` / `typecheck` / `lint` / `build` / `release-check` / `npm audit` はすべて問題なし。本番の主要ページも全てHTTP 200で表示される）
+**公開を妨げる必須項目（現時点で確認できた範囲）**：なし（`validate:data` / `typecheck` / `lint` / `build` はすべて問題なし。本番の主要ページも全てHTTP 200で表示される。必須項目の未完了は本更新で解消）
 
 **未確認項目（必須レベルを含む。詳細は各セクション参照）**：
-- Cloudflare Web Analytics累計アクセス数APIが本番で `503`（原因未特定、Cloudflare Pages側の環境変数確認が必要）
+- Cloudflare Web Analytics累計アクセス数APIが本番で `503`（コード・クエリ構造は公式仕様と矛盾なしと確認済み。Cloudflare Pages側の環境変数・トークン権限・サイトタグの確認が必要。詳細はセクション10）
+- 新設した公約詳細ページの実機ブラウザでの目視確認（ローカルHTTP 200・コードレビュー・typecheckは実施済みだが、レンダリング結果のスクリーンショット等での確認は未実施）
 - 実機スマートフォンでの表示確認（375/390/768/1280px、実端末）
 - Google Analyticsリアルタイム計測の実確認
 - 情報提供・訂正フォームの実送信テスト
@@ -118,8 +119,8 @@
 ### 必須
 
 - [x] 完了 — 公約一覧ページが開く（`/mayor/policy-progress`）
-- [ ] 未完了 — 公約詳細ページ（個別公約ごとの独立URL）は存在しない。現状は`/mayor/policy-progress`内で`PromiseCard`をカテゴリ単位にインライン表示する方式のみ
-- [ ] 対象外 — 「存在しないIDで適切な案内が出る」：個別公約に独立したURL/IDルーティングが無いため、この項目自体が現状の実装には該当しません（詳細ページ実装時に要対応）
+- [x] 完了（2026-07-20追加実装） — 公約詳細ページを`/mayor/policy-progress/:id`に実装（`MayorPromiseDetailPage.tsx`）。公約名・カテゴリ・進捗状態・公約原文・市民向け概要・現在の進捗・判断根拠・根拠資料一覧（PDF判定バッジ付き）・関連予算／議案・担当部署・発表日・最終確認日・最終更新日・関連リンク・進捗履歴・注意事項・編集方針へのリンクを表示。既存データにない項目（担当部署・市民向け概要・発表日・最終更新日・関連リンク・進捗履歴）は型を追加のうえ「情報未登録」と表示し、架空の値では埋めていない。ローカルビルド・`curl`でのHTTP 200確認・コードレビューは実施済みだが、実機ブラウザでの目視確認は未実施（要確認）
+- [x] 完了（2026-07-20追加実装） — 「存在しないIDで適切な案内が出る」：`/mayor/policy-progress/存在しないID`で「該当する公約が見つかりません」＋「公約一覧へ戻る」ボタンを表示することをコード・ローカルHTTP確認で確認済み
 - [x] 完了 — 公約原文とサイト説明が区別されている（`promiseText`と`progressSummary`/`notes`をデータ上分離）
 - [x] 完了 — 進捗状態が統一されている（`statusLabel`は「進行中」「検討中」「実施済み」「確認中」の4種のみ、`validate:data`相当のUnion型で担保）
 - [x] 完了 — 状態が色だけでなく文字でも分かる（`mayorPromiseStatusClass`のコメントに明記、バッジは常にラベル文字列を併記）
@@ -134,9 +135,10 @@
 - [ ] 未完了 — 検索が動作する：未実装（`SearchBar`コンポーネントが本ページに組み込まれていない）
 - [ ] 未完了 — カテゴリ絞り込みが動作する：未実装（カテゴリは固定4件を上から並べる表示のみ）
 - [ ] 未完了 — 進捗状態絞り込みが動作する：未実装
-- [ ] 未完了 — 進捗履歴が表示できる：未実装（`referenceDate`/`lastVerified`の単一時点のみ保持し、変更履歴の時系列表示は無い）
-- [ ] 要確認 — トップページと市長ページから導線がある：市長ページ（`/mayor`）からは導線ありを確認。**ホームページ（`/`）からの直接導線は見つからず**（`/mayor`経由のみ）
-- [ ] 要確認 — 更新履歴と連携している：`updateHistory.json`に公約関連の更新記録はあるが、該当ページへの直接リンクは無くテキスト記載のみ
+- [x] 完了（2026-07-20追加実装） — 進捗履歴が表示できる：`MayorPromiseItem`に任意項目`progressHistory`を追加し、詳細ページに表示欄を実装。現時点ではどの公約にも履歴データは未投入のため、投入済みデータがある場合は時系列表示、無い場合は「詳細な変更履歴はまだ記録していません」という正直な文言を表示する（履歴データそのものの拡充は今後の課題として残る）
+- [ ] 要確認 — トップページと市長ページから導線がある：市長ページ（`/mayor`）からは導線ありを確認。**ホームページ（`/`）からの直接導線は見つからず**（`/mayor`経由のみ、今回のセッションでは対応していない）
+- [ ] 要確認 — 更新履歴と連携している：`updateHistory.json`に公約関連の更新記録はあるが、該当ページへの直接リンクは無くテキスト記載のみ（今回のセッションでは対応していない）
+- [x] 完了（2026-07-20追加実装） — 公約一覧から詳細ページへのリンク：`PromiseCard`に「詳細を見る」ボタンを追加（`BillVotesPage`の同名ボタンとデザインを統一）。カード全体をリンク化はせず、独立したタップ領域として実装（PDFリンク等との`<a>`入れ子を避けるため）
 
 ---
 
@@ -217,7 +219,7 @@
 ### 必須
 
 - [x] 完了 — 主要JSONの構文が正しい（`npm run validate:data`・`npm run build`とも構文エラーなしで通過）
-- [x] 完了 — ID重複がない（`validate-data.mjs`が`members`/`generalQuestions`/`billVotes`のID重複を検査。実行結果：エラー0件）
+- [x] 完了 — ID重複がない（`validate-data.mjs`が`members`/`generalQuestions`/`billVotes`/`mayorPromises`のID重複を検査。実行結果：エラー0件。2026-07-20に`mayorPromises`向けの検証（ID重複・空ID・categoryId/documentKey参照整合性・status⇔statusLabel対応矛盾・日付形式・進捗履歴の日付順など）を追加）
 - [x] 完了 — 必須項目不足がない（同上のバリデータで確認、エラー0件）
 - [x] 完了 — 不正な日付形式がない（`DATE_RE`によるチェック、エラー0件）
 - [x] 完了 — 不正なURLがない（`URL_RE`によるチェック、エラー0件）
@@ -242,7 +244,7 @@
 - [x] 完了 — 各主要ページにmeta descriptionがある（同上）
 - [x] 完了 — canonicalが正しい（`usePageTitle`が`SITE_URL + path`で生成。ホームページで本番HTML確認済み）
 - [x] 完了 — robots.txtが存在する（本番`curl`で内容確認。`Allow: /`、`Sitemap:`記載あり）
-- [x] 完了 — sitemap.xmlが存在する（本番`curl`で43件のURLを確認）
+- [x] 完了 — sitemap.xmlが存在する（前回セッション時点で本番`curl`にて43件を確認。今回、公約詳細ページ12件分のURLを`generate-sitemap.mjs`に追加し、ローカルビルドで55件になったことを確認。本番反映は次回デプロイ後に要確認）
 - [x] 完了 — 404ページがnoindexまたは適切に処理される（`NotFoundPage`が`noindex: true`を設定。ただしSPAのためHTTPステータス自体は200、セクション3の注記を参照）
 - [x] 完了 — OGP画像とタイトルが設定されている（本番HTMLで`og:image`/`og:title`等を確認）
 - [x] 完了 — 画像altが適切（`Avatar.tsx`/`SiteHeader.tsx`とも`alt`属性を確認、`<img>`タグの目視漏れなし）
@@ -294,7 +296,7 @@
 
 - [x] 完了 — サイト上では累計アクセス数だけを表示する（`SiteAnalyticsSummary.tsx`で確認）
 - [x] 完了 — 取得元の説明が現在の実装と一致する（「Cloudflare Analyticsによる集計値です」と表示）
-- [x] 完了 — 取得失敗時に技術的エラーが表示されない（本番APIが実際に503を返す状態で確認した結果、`累計アクセス数は現在集計中です`という安全な文言が表示されることをコードで確認）
+- [x] 完了（2026-07-20再確認） — 取得失敗時に技術的エラーが表示されない（`SiteAnalyticsSummary.tsx`は「累計アクセス数は現在集計中です」「Cloudflare Analyticsの集計結果が利用可能になり次第、表示します。」の文言で固定表示。「APIエラー」「環境変数不足」「GraphQLエラー」「認証失敗」「Google Analyticsによる期間集計値です」に該当する文字列が`src/`配下に無いことをgrepで確認済み。コードは変更していない（元から要件を満たしていたため））
 - [x] 完了 — 「現在集計中です」等の安全な表示になる（同上）
 - [x] 完了 — APIトークンや秘密情報をブラウザへ返さない（`functions/api/site-stats.ts`のレスポンスは`totalPageViews`/`source`/`updatedAt`のみ。エラー時も`{"error": "site-stats unavailable"}`のみでスタック情報等は含まない。本番`curl`でも確認）
 - [x] 完了 — キャッシュが機能する（`caches.default`と`liveCacheKey`/`fallbackCacheKey`の実装を確認）
@@ -302,7 +304,27 @@
 
 ### 重大な注記：サイト利用状況APIが本番で動作していません
 
-本番の `https://nobeoka-shisei-portal.pages.dev/api/site-stats` に対して本セッション中に実際にリクエストしたところ、**HTTP 503**（`{"error":"site-stats unavailable"}`）が返りました。フロントエンドは前述のとおり安全に失敗（「現在集計中です」表示）しますが、**累計アクセス数の機能自体は現在本番で動作していません**。原因はコードからは特定できず、Cloudflare Pagesプロジェクトの環境変数（`CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_SITE_TAG`）の設定状況、またはCloudflare API側のトークン権限・レート制限を、Cloudflareダッシュボードで確認する必要があります。（**重要**。ユーザー向け表示は安全なため必須ブロッカーとまでは言えませんが、公開前の対応を強く推奨します）
+本番の `https://nobeoka-shisei-portal.pages.dev/api/site-stats` に対して実際にリクエストしたところ、**HTTP 503**（`{"error":"site-stats unavailable"}`）が返りました。フロントエンドは前述のとおり安全に失敗（「現在集計中です」表示）しますが、**累計アクセス数の機能自体は現在本番で動作していません**。
+
+#### 503の原因調査（2026-07-20）
+
+`functions/api/site-stats.ts`のコード、GraphQLクエリ構造、環境変数名を精査し、Cloudflare公式ドキュメント（`developers.cloudflare.com/analytics/graphql-api/`）と突き合わせて確認しました。
+
+- 環境変数名（`CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_SITE_TAG`）は、コード（`site-stats.ts`）と`.dev.vars.example`で一致しており、変数名自体の誤りは見つかりませんでした。
+- GraphQLクエリの変数型宣言 `$accountTag: string`（小文字の`string`）は、Cloudflare公式ドキュメントの実例（`$zoneTag: string`）と一致する、Cloudflare GraphQL Analytics API独自のカスタムスカラー表記であることを確認しました（推測ではなく公式ドキュメントで確認済み）。
+- `rumPageloadEventsAdaptiveGroups(filter: ..., limit: ...) { count }`という、`count`をフラットなフィールドとして取得する形も、公式ドキュメントの類似クエリ例（`httpRequestsAdaptiveGroups`等と同系統のGroups系フィールド）と整合しています。
+- ローカル環境には`.dev.vars`（実際の認証情報）が存在せず、`wrangler pages dev`等でCloudflareの実APIに対して本セッション内で直接検証することはできませんでした。そのため、GraphQLクエリを実際にCloudflare APIへ送信して応答を確認する、という一次情報での切り分けはできていません。
+- **推測でのコード変更は行っていません**（ユーザー指示のとおり）。`functions/api/site-stats.ts`はコード上、変数名・クエリ構造とも公式仕様と矛盾する点が見当たらないため、503の原因はコードの不具合よりも、Cloudflare Pages側の設定（環境変数の未設定・環境（Production/Preview）の設定漏れ・APIトークンの権限不足・`CLOUDFLARE_SITE_TAG`の値の誤り・当該サイトでWeb Analyticsが有効化されていない、など）である可能性が高いと考えられます。
+
+#### 必要なCloudflare側の確認（人手作業）
+
+1. Cloudflare Pagesダッシュボード → 対象プロジェクト → Settings → Environment variables で、**Production環境**に`CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_SITE_TAG`の3つが設定されているか確認する（Preview環境にしか設定されていないと本番では機能しません）
+2. `CLOUDFLARE_API_TOKEN`に、Account内の「Account Analytics」（GraphQL Analytics API）を読み取れる権限が付与されているか確認する
+3. `CLOUDFLARE_SITE_TAG`が、対象サイトのWeb Analytics（RUM）設定画面に表示される正しいサイトタグと一致しているか確認する
+4. 対象ドメインでCloudflare Web Analytics（RUMビーコン）自体が有効になっているか確認する（本番HTMLには`static.cloudflareinsights.com/beacon.min.js`の読み込みは確認済みだが、Analytics側の紐付け設定は別途必要な場合がある）
+5. Cloudflare Pagesの「Functions」ログ（リアルタイムログ、または`wrangler pages deployment tail`）で、`[site-stats] failed at stage=...`のログを確認する。`missing_env` / `token_error` / `invalid_dataset` / `site_not_found` / `rate_limited` / `graphql_error` / `unexpected_response`のいずれが記録されているかで、上記1〜4のどれが原因かを一次情報で特定できる
+
+このログ確認（5）を最初に行うことを強く推奨します。これにより、上記1〜4のうちどれを直せばよいかが明確になり、無駄な設定変更を避けられます。（**重要**。ユーザー向け表示は安全なため必須ブロッカーとまでは言えませんが、公開前の対応を強く推奨します）
 
 ### 重要
 
@@ -438,48 +460,27 @@
 - [x] 完了 — Functionsが本番で動作する（`/api/site-stats`へのリクエストで応答があることを確認。現在は503を返しているが、Functions自体は動作しエラーハンドリングも機能している）
 - [x] 完了 — 秘密情報がGitHubにない（セクション11参照）
 
-**実行結果**：
+**実行結果（2026-07-20、公約詳細ページ実装後の再実行）**：
 
 ```
-$ git status -sb
-## main...origin/main
- M .claude/settings.local.json
-
-$ git log --oneline -10
-7c1fa4e Add project roadmap
-d1e6667 Add project instructions for Claude Code
-f514f39 Fix analytics wording and improve footer layout
-23a3d68 style: サイト利用状況カードの表示を調整（数字を大きく、文言を簡略化）
-9900278 fix: サイト利用状況の説明文をCloudflare Analytics向けの表記に統一
-56e5fa4 refactor: 累計アクセス数の取得元をGA4からCloudflare Web Analyticsへ移行
-bd2eab2 refactor: サイト利用状況の表示を「累計アクセス数」1項目に簡略化
-c488386 fix: サイト利用状況とGoogle Analytics計測が動作しない問題を修正
-bbd1d7e feat: 2026年7月16日市長定例記者会見を追加
-6a84e87 市役所の相談先診断ページを追加
-
 $ npm run validate:data
 [validate-data] members=26 generalQuestions=14 billVotes=0 — errors=0 warnings=0
+（公約データ検証（ID重複／status-statusLabel整合／根拠資料参照／進捗履歴の日付順など）を追加した状態でもエラー0件）
 
 $ npm run typecheck
 （エラーなし）
 
 $ npm run lint
 src/components/bills/BillVoteBadge.tsx:3:14: warning react(only-export-components): Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.
-（エラーなし、警告1件）
+（既存warning1件のみ。今回の変更による新規warning・errorはなし）
 
 $ npm run build
-[generate-site-update] lastUpdated = 2026-07-20T10:28:36+09:00
-[validate-data] members=26 generalQuestions=14 billVotes=0 — errors=0 warnings=0
 [generate-search-index] wrote 73 entries to src/data/searchIndex.json
-[generate-sitemap] wrote 43 URLs to public/sitemap.xml
-✓ built in 293ms（チャンクサイズ警告1件、セクション14参照）
-
-$ npm run release:check
-[release-check] failures=0 warnings=0
-
-$ npm audit --omit=dev
-found 0 vulnerabilities
+[generate-sitemap] wrote 55 URLs to public/sitemap.xml（公約詳細ページ12件分を追加。前回は43件）
+✓ built in 335ms（チャンクサイズ警告1件、内容は前回と同様。セクション14参照）
 ```
+
+（前回セッション時点の実行結果・コミット履歴は本ファイルのGit履歴、および前回のコミット`3b9603c`時点の内容を参照）
 
 ---
 
@@ -540,15 +541,26 @@ found 0 vulnerabilities
 
 ---
 
-## 19. 今回のセッションで安全に修正した項目
+## 19. 今回のセッションで対応した項目（2026-07-20）
 
-今回は監査とチェックリスト作成を優先し、大規模な機能追加・修正は行っていません。コード・データへの変更は行わず、本ファイル（`RELEASE_CHECKLIST.md`）の新規作成のみです。
+前回のセッションでは監査とチェックリスト作成のみを行いましたが、今回は必須未完了項目の解消を行いました。
 
-発見した問題のうち、次のものは**安全な修正ではなく運営者の判断が必要**と考え、今回は変更していません。
+### 実装した内容
 
-- `.claude/settings.local.json`をGit追跡から外すかどうか（秘密情報は無いが、CLAUDE.mdの方針との整合性は運営者判断が必要）
-- Cloudflare Analytics APIの503（Cloudflareダッシュボード側の環境変数・トークン確認が必要で、コード修正では解決しない可能性が高い）
-- ページ固有OGPのSNS共有時の反映（プリレンダリング導入など設計判断を伴うため）
+- **公約詳細ページ**（`/mayor/policy-progress/:id`）を新規実装（`src/pages/MayorPromiseDetailPage.tsx`）。既存の公約一覧ページ・データを重複実装せず、`mayorPromises.json`をそのまま利用
+- `MayorPromiseItem`型に、担当部署・市民向け概要・発表日・最終更新日・関連リンク・進捗履歴の6項目を**任意項目として追加**（`src/types/index.ts`）。既存データは1件も変更しておらず、既存のJSONはそのまま有効
+- 公約一覧ページの各カード（`PromiseCard.tsx`）に「詳細を見る」ボタンを追加し、詳細ページへの導線を用意
+- 存在しない公約IDへのアクセス時に「該当する公約が見つかりません」＋「公約一覧へ戻る」を表示する処理を実装
+- `scripts/validate-data.mjs`に公約データ検証を追加（ID重複、空ID、categoryId/documentKey参照整合性、status⇔statusLabelの対応矛盾検出、日付形式、関連リンクURL形式、進捗履歴の日付順、詳細ページ生成に必要な最低項目の充足）
+- `scripts/generate-sitemap.mjs` / `scripts/generate-search-index.mjs` を更新し、公約詳細ページ12件分をsitemap・検索インデックスに追加
+
+### 調査したが変更しなかった項目
+
+- **`/api/site-stats`の503**：`functions/api/site-stats.ts`のコード・GraphQLクエリ構造をCloudflare公式ドキュメントと突き合わせて確認した結果、コード起因の不具合は見つかりませんでした。**推測でのコード変更は行っていません**。原因はCloudflare Pages側の環境変数・トークン権限・サイトタグ設定である可能性が高く、Cloudflareダッシュボード側の確認が必要です（詳細はセクション10）
+- **サイト利用状況の失敗時表示**：ユーザー指定の文言（「累計アクセス数は現在集計中です」等）は、変更前から既に実装済みであることを確認しました。禁止文言（APIエラー・環境変数不足・GraphQLエラー・認証失敗・Google Analyticsによる期間集計値です）が含まれていないこともgrepで確認済みです。コードの変更は行っていません
+- `.claude/settings.local.json`をGit追跡から外すかどうか（秘密情報は無いが、CLAUDE.mdの方針との整合性は運営者判断が必要。今回も未対応）
+- ページ固有OGPのSNS共有時の反映（プリレンダリング導入など設計判断を伴うため。今回も未対応）
+- ホームページから公約進捗ページへの直接導線、公約一覧の検索・カテゴリ絞り込み・進捗状態絞り込み（今回のユーザー指示の範囲外のため未対応。次回以降の課題として残す）
 
 ---
 

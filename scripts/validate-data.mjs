@@ -123,13 +123,90 @@ for (const b of billVotes) {
 
 // --- mayorPromises.json ---
 let mayorPromiseIds = new Set();
+const VALID_PROMISE_STATUS_LABELS = new Set(["進行中", "検討中", "実施済み", "確認中"]);
+
 try {
   const mayorPromises = readJson("src/data/mayorPromises.json");
+  const categoryIds = new Set((mayorPromises.categories ?? []).map((c) => c.id));
+  const documentKeys = new Set((mayorPromises.documents ?? []).map((d) => d.key));
+  // status(内部キー)とstatusLabel(表示ラベル)の対応が公約データ全体で一貫しているかを確認する
+  // （固定の対応表を用意するのではなく、実データ内の対応関係自体の矛盾を検出する）。
+  const statusToLabel = new Map();
+  const labelToStatus = new Map();
+
   for (const p of mayorPromises.promises ?? []) {
     const tag = `mayorPromises.json (${p.id ?? "id不明"})`;
+
     if (isBlank(p.id)) err(tag, "idが空です");
     else if (mayorPromiseIds.has(p.id)) err(tag, `公約IDが重複しています: ${p.id}`);
     else mayorPromiseIds.add(p.id);
+
+    if (isBlank(p.promiseText)) err(tag, "promiseTextが空です");
+    if (isBlank(p.categoryTitle)) err(tag, "categoryTitleが空です");
+    if (isBlank(p.categoryId)) err(tag, "categoryIdが空です");
+    else if (!categoryIds.has(p.categoryId)) err(tag, `存在しないcategoryIdを参照しています: ${p.categoryId}`);
+
+    if (!VALID_PROMISE_STATUS_LABELS.has(p.statusLabel)) err(tag, `未定義のstatusLabelです: ${p.statusLabel}`);
+    if (isBlank(p.status)) {
+      err(tag, "statusが空です");
+    } else if (p.statusLabel) {
+      const mappedLabel = statusToLabel.get(p.status);
+      if (mappedLabel === undefined) {
+        statusToLabel.set(p.status, p.statusLabel);
+      } else if (mappedLabel !== p.statusLabel) {
+        err(
+          tag,
+          `statusとstatusLabelの対応が他の公約と矛盾しています: status="${p.status}" が "${mappedLabel}" と "${p.statusLabel}" の両方に対応付けられています`,
+        );
+      }
+
+      const mappedStatus = labelToStatus.get(p.statusLabel);
+      if (mappedStatus === undefined) labelToStatus.set(p.statusLabel, p.status);
+      else if (mappedStatus !== p.status) {
+        warn(tag, `statusLabel="${p.statusLabel}" に複数のstatusキー（"${mappedStatus}" と "${p.status}"）が使われています`);
+      }
+    }
+
+    if (p.referenceDate && !DATE_RE.test(p.referenceDate)) err(tag, `referenceDateの形式が不正です: ${p.referenceDate}`);
+    if (p.lastVerified && !DATE_RE.test(p.lastVerified)) err(tag, `lastVerifiedの形式が不正です: ${p.lastVerified}`);
+    if (p.announcedDate && !DATE_RE.test(p.announcedDate)) err(tag, `announcedDateの形式が不正です: ${p.announcedDate}`);
+    if (p.siteUpdatedAt && !DATE_RE.test(p.siteUpdatedAt)) err(tag, `siteUpdatedAtの形式が不正です: ${p.siteUpdatedAt}`);
+
+    const seenDocKeys = new Set();
+    for (const ev of p.evidenceItems ?? []) {
+      if (!documentKeys.has(ev.documentKey)) err(tag, `存在しないdocumentKeyを参照しています: ${ev.documentKey}`);
+      if (seenDocKeys.has(ev.documentKey)) warn(tag, `同じ根拠資料（${ev.documentKey}）が重複して参照されています`);
+      seenDocKeys.add(ev.documentKey);
+    }
+
+    for (const link of p.relatedLinks ?? []) {
+      if (!URL_RE.test(link.url ?? "")) err(tag, `relatedLinksのURL形式が不正です: ${link.url}`);
+    }
+
+    if (p.progressHistory && p.progressHistory.length > 0) {
+      for (const h of p.progressHistory) {
+        if (!DATE_RE.test(h.date ?? "")) err(tag, `progressHistory[].dateの形式が不正です: ${h.date}`);
+        if (!VALID_PROMISE_STATUS_LABELS.has(h.statusLabel))
+          err(tag, `progressHistory[]に未定義のstatusLabelがあります: ${h.statusLabel}`);
+      }
+      const dates = p.progressHistory.map((h) => h.date);
+      const sortedDates = [...dates].sort();
+      if (JSON.stringify(dates) !== JSON.stringify(sortedDates)) {
+        err(tag, "progressHistoryが日付の昇順に並んでいません");
+      }
+    }
+
+    // 詳細ページ（/mayor/policy-progress/:id）を安全に描画できるかの最低条件。
+    if (isBlank(p.id) || isBlank(p.promiseText) || !VALID_PROMISE_STATUS_LABELS.has(p.statusLabel)) {
+      err(tag, "詳細ページの生成に必要な項目（id / promiseText / statusLabel）が不足しています");
+    }
+  }
+
+  const docUrls = new Set();
+  for (const d of mayorPromises.documents ?? []) {
+    if (isBlank(d.url)) continue;
+    if (docUrls.has(d.url)) warn("mayorPromises.json (documents)", `根拠資料のURLが重複しています: ${d.url}`);
+    docUrls.add(d.url);
   }
 } catch {
   warn("mayorPromises.json", "読み込めませんでした（存在しない場合はスキップ）");

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { MayorPromiseDocument, MayorPromiseItem } from "../../types";
 import { GlobeIcon } from "../icons";
 import { formatJapaneseDate } from "../../config/site";
@@ -20,11 +21,19 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
 
   return (
     <li className="rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
-      <span
-        className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[promise.statusLabel]}`}
-      >
-        {promise.statusLabel}
-      </span>
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <span
+          className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[promise.statusLabel]}`}
+        >
+          {promise.statusLabel}
+        </span>
+        <Link
+          to={`/mayor/policy-progress/${promise.id}`}
+          className={`shrink-0 rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+        >
+          詳細を見る
+        </Link>
+      </div>
 
       <p className="mt-2 text-sm font-medium leading-relaxed text-on-surface">{promise.promiseText}</p>
 
