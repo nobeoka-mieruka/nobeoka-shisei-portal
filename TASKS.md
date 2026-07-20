@@ -57,30 +57,40 @@
 
 ### TASK-002 Cloudflare Analytics API（/api/site-stats）の本番503エラー解消
 
-状態：BLOCKED
+状態：BLOCKED（コード側は対応完了。Cloudflareダッシュボード側の設定確認が残作業）
 優先度：A
-対象：`functions/api/site-stats.ts`、Cloudflare Pagesダッシュボード
+対象：`functions/api/site-stats.ts`、`src/components/SiteAnalyticsSummary.tsx`、Cloudflare Pagesダッシュボード
 依存関係：なし
 目的：本番の累計アクセス数表示が「集計中」のまま動作していない問題を解消する
 
-作業内容：
-- Cloudflare Pagesダッシュボードで環境変数（`CLOUDFLARE_ACCOUNT_ID`/`CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_SITE_TAG`）がProduction環境に設定されているか確認（人手作業）
-- APIトークンの権限、サイトタグの値を確認（人手作業）
-- Functionsログで `[site-stats] failed at stage=...` を確認し原因を特定（人手作業）
-- 原因判明後、コード側の修正が必要な場合のみ実装する
+作業内容（コード側・完了）：
+- レスポンス契約を`{ok, ...}`形式へ変更し、環境変数未設定時・Cloudflare API障害時ともHTTP 503ではなく200＋安全なJSON（`configuration_required`/`temporarily_unavailable`）を返すようにした
+- APIトークン・Account ID・Cloudflareの詳細なエラー内容は引き続きレスポンス・ログへ含めない設計を維持
+- 本日のアクセス数（`todayViews`、JST基準）を同一クエリで追加取得
+- 環境変数未設定時はCloudflare APIを呼ばず`no-store`で即応答、Cloudflare API障害時は直前の正常値があればフォールバック、無ければ60秒だけ短時間キャッシュして過剰アクセスを防止
+- 公開ページ（`SiteAnalyticsSummary.tsx`）を新レスポンス契約に対応させ、「設定確認中」と「一時的に取得できません」を文言で区別
+- 管理者専用ページは既存に存在せず、認証機構もないため新規追加はしない（詳細診断情報を公開ページへは出さない）
+
+残作業（Cloudflareダッシュボード側・人手）：
+- Cloudflare Pagesダッシュボード → 対象プロジェクト → Settings → Variables and Secrets で、**Production環境**に`CLOUDFLARE_ACCOUNT_ID`/`CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_SITE_TAG`が設定されているか確認する（Preview環境のみだと本番に反映されない）
+- `CLOUDFLARE_API_TOKEN`に、Account単位の「Account Analytics」Read権限が付与されているか確認する（公式ドキュメントで確認済みの必要権限）
+- `CLOUDFLARE_SITE_TAG`が、対象サイトのWeb Analytics（RUM）設定画面に表示される正しいサイトタグと一致しているか確認する
+- 環境変数を追加・変更した場合は再デプロイが必要（Cloudflare Pagesは環境変数変更を次回デプロイから反映）
+- 変更後、Cloudflare Pagesの「Functions」リアルタイムログで`[site-stats] failed at stage=...`が出ていないか確認する
 
 受入条件：
-- 本番`/api/site-stats`がエラーなく累計アクセス数を返す
+- 本番`/api/site-stats`が503を返さない（コード変更により達成済み）
+- 環境変数設定後、本番で実際の累計アクセス数（`ok: true`）が返る（人手確認待ち）
 - コード変更を伴う場合、推測ではなく特定できた原因に基づく修正であること
 
 公式資料：
-- Cloudflare公式ドキュメント（GraphQL Analytics API）
+- Cloudflare公式ドキュメント（GraphQL Analytics API、Getting started／Authentication／Account Analytics権限）
 - Cloudflare Pagesダッシュボード（アクセス権が必要なため人手対応）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-20（コード側のみ。Cloudflare側設定確認まで完了した時点でDONEへ変更する）
+- コミットID：（本レポート後に記載）
+- 変更概要：`functions/api/site-stats.ts`のレスポンス契約を`{ok,...}`形式に刷新し503を廃止、`todayViews`追加、公開コンポーネントを新契約へ対応。ローカルで`wrangler pages dev`により環境変数なし（`configuration_required`）・ダミー無効トークンあり（`temporarily_unavailable`、ログに秘密情報なし）の両方を確認済み。本番の実データ取得はCloudflareダッシュボード側の環境変数設定に依存するため引き続きBLOCKED。
 
 ---
 

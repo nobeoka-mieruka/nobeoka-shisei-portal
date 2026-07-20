@@ -302,7 +302,13 @@
 - [x] 完了 — キャッシュが機能する（`caches.default`と`liveCacheKey`/`fallbackCacheKey`の実装を確認）
 - [x] 完了 — 環境変数未設定時に安全に失敗する（`assertConfigured`が`missing_env`として例外化し、フォールバックまたは503を返す設計を確認）
 
-### 重大な注記：サイト利用状況APIが本番で動作していません
+### 2026-07-20追記：コード側の対応完了、本番反映は未確認
+
+`functions/api/site-stats.ts`のレスポンス契約を見直しました。環境変数未設定時・Cloudflare API障害時のいずれも、HTTP 503ではなく200＋`{"ok":false,"status":"configuration_required"|"temporarily_unavailable","message":"..."}`を返すよう変更し、`SiteAnalyticsSummary.tsx`も新契約に対応させました。ローカルの`wrangler pages dev`で、環境変数なし・ダミー無効トークンありの両パターンを確認し、いずれも安全なメッセージが返り、ログにも秘密情報が出力されないことを確認しました（詳細は`TASKS.md` TASK-002参照）。
+
+ただし、本番のCloudflare Pages環境変数（`CLOUDFLARE_ACCOUNT_ID`/`CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_SITE_TAG`）が実際にProduction環境へ設定・反映されているかは、ダッシュボードへのアクセス権が必要なため本セッションでは確認できていません。設定済みであれば次回デプロイ後に実際の累計アクセス数が表示され、未設定であれば「アクセス解析の設定を確認しています」という安全な表示のままになります（いずれの場合もエラー表示や503にはなりません）。
+
+### 重大な注記：サイト利用状況APIが本番で動作していません（2026-07-20時点、上記コード修正前の記録として保持）
 
 本番の `https://nobeoka-shisei-portal.pages.dev/api/site-stats` に対して実際にリクエストしたところ、**HTTP 503**（`{"error":"site-stats unavailable"}`）が返りました。フロントエンドは前述のとおり安全に失敗（「現在集計中です」表示）しますが、**累計アクセス数の機能自体は現在本番で動作していません**。
 

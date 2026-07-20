@@ -1,13 +1,29 @@
 import { useEffect, useState } from "react";
 import { SectionCard } from "./SectionCard";
 
-interface SiteStats {
-  totalPageViews: number;
-  source: "cloudflare";
+interface SiteStatsSuccess {
+  ok: true;
+  totalViews: number;
+  todayViews: number;
   updatedAt: string;
+  source: "cloudflare";
 }
 
-type LoadState = { status: "loading" } | { status: "success"; data: SiteStats } | { status: "error" };
+interface SiteStatsFailure {
+  ok: false;
+  status: "configuration_required" | "temporarily_unavailable";
+  message: string;
+}
+
+type SiteStatsResponse = SiteStatsSuccess | SiteStatsFailure;
+
+type LoadState =
+  | { status: "loading" }
+  | { status: "success"; data: SiteStatsSuccess }
+  | { status: "configuration_required"; message: string }
+  | { status: "unavailable"; message: string };
+
+const GENERIC_UNAVAILABLE_MESSAGE = "アクセス数を一時的に取得できません。";
 
 export function SiteAnalyticsSummary() {
   const [state, setState] = useState<LoadState>({ status: "loading" });
@@ -15,15 +31,19 @@ export function SiteAnalyticsSummary() {
   useEffect(() => {
     let cancelled = false;
     fetch("/api/site-stats")
-      .then((res) => {
-        if (!res.ok) throw new Error(`status ${res.status}`);
-        return res.json();
-      })
-      .then((data: SiteStats) => {
-        if (!cancelled) setState({ status: "success", data });
+      .then((res) => res.json())
+      .then((data: SiteStatsResponse) => {
+        if (cancelled) return;
+        if (data.ok) {
+          setState({ status: "success", data });
+        } else if (data.status === "configuration_required") {
+          setState({ status: "configuration_required", message: data.message });
+        } else {
+          setState({ status: "unavailable", message: data.message });
+        }
       })
       .catch(() => {
-        if (!cancelled) setState({ status: "error" });
+        if (!cancelled) setState({ status: "unavailable", message: GENERIC_UNAVAILABLE_MESSAGE });
       });
     return () => {
       cancelled = true;
@@ -35,9 +55,15 @@ export function SiteAnalyticsSummary() {
       {state.status === "loading" && (
         <p className="text-sm text-on-surface-variant">累計アクセス数を読み込んでいます</p>
       )}
-      {state.status === "error" && (
+      {state.status === "configuration_required" && (
         <div>
-          <p className="text-sm text-on-surface-variant">累計アクセス数は現在集計中です</p>
+          <p className="text-sm text-on-surface-variant">アクセス解析の設定を確認しています</p>
+          <p className="mt-1 text-xs text-on-surface-variant">準備が整い次第、累計アクセス数を表示します。</p>
+        </div>
+      )}
+      {state.status === "unavailable" && (
+        <div>
+          <p className="text-sm text-on-surface-variant">アクセス数を確認中です</p>
           <p className="mt-1 text-xs text-on-surface-variant">
             Cloudflare Analyticsの集計結果が利用可能になり次第、表示します。
           </p>
@@ -47,7 +73,7 @@ export function SiteAnalyticsSummary() {
         <div className="rounded-lg bg-surface-container-high p-4">
           <p className="text-xs text-on-surface-variant">累計アクセス数</p>
           <p className="mt-1 text-3xl font-bold text-on-surface break-all">
-            {state.data.totalPageViews.toLocaleString("ja-JP")}回
+            {state.data.totalViews.toLocaleString("ja-JP")}回
           </p>
         </div>
       )}

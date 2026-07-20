@@ -1,7 +1,10 @@
 /**
- * Cloudflare Web Analytics（RUMビーコン）の累計表示回数を返すエンドポイント。
- * Cloudflare APIトークンはここでのみ使用し、レスポンスには含めない。
+ * Cloudflare Web Analytics（RUMビーコン）の累計・本日の表示回数を返すエンドポイント。
+ * Cloudflare APIトークンはここでのみ使用し、レスポンス・ログには含めない。
  * G-GHQCETJ7FN（gtag.js、src/lib/analytics.ts）とは別の仕組みで、この関数とは無関係。
+ *
+ * レスポンスは常にHTTP 200＋JSONで返す（環境変数未設定・Cloudflare API障害時も503にしない）。
+ * フロントエンドは常にJSONをパースし、`ok`フィールドで成功/失敗を判定する。
  */
 
 interface Env {
@@ -10,14 +13,27 @@ interface Env {
   CLOUDFLARE_SITE_TAG: string;
 }
 
-interface SiteStatsPayload {
-  totalPageViews: number;
-  source: "cloudflare";
+interface SiteStatsSuccessPayload {
+  ok: true;
+  totalViews: number;
+  todayViews: number;
   updatedAt: string;
+  source: "cloudflare";
 }
 
-const CACHE_TTL_SECONDS = 60 * 60; // 1時間
+type SiteStatsFailureStatus = "configuration_required" | "temporarily_unavailable";
+
+interface SiteStatsFailurePayload {
+  ok: false;
+  status: SiteStatsFailureStatus;
+  message: string;
+}
+
+type SiteStatsPayload = SiteStatsSuccessPayload | SiteStatsFailurePayload;
+
+const CACHE_TTL_SECONDS = 60 * 60; // 成功時：1時間キャッシュ
 const FALLBACK_TTL_SECONDS = 60 * 60 * 24; // 直前の正常値を保持しておく期間（24時間）
+const ERROR_CACHE_TTL_SECONDS = 60; // 一時的エラー時、Cloudflare APIへの過剰アクセスを防ぐための短時間キャッシュ
 const GRAPHQL_URL = "https://api.cloudflare.com/client/v4/graphql";
 
 // Cloudflare Web AnalyticsのRUMデータ保持期間（約6ヶ月）の近似値。
@@ -27,7 +43,6 @@ const LOOKBACK_DAYS = 186;
 const CHUNK_DAYS = 31;
 
 type SiteStatsFailureStage =
-  | "missing_env"
   | "token_error"
   | "graphql_error"
   | "invalid_dataset"
@@ -44,6 +59,7 @@ class SiteStatsError extends Error {
   }
 }
 
+/** APIトークンやAccount IDの値を含めず、原因の切り分けに必要な情報だけをログへ出す。 */
 function logFailure(err: unknown): void {
   if (err instanceof SiteStatsError) {
     console.error(`[site-stats] failed at stage=${err.stage}: ${err.message}`);
@@ -52,8 +68,8 @@ function logFailure(err: unknown): void {
   console.error(`[site-stats] failed at stage=unknown: ${err instanceof Error ? err.message : String(err)}`);
 }
 
-function assertConfigured(env: Env): void {
-  const missing = (
+function getMissingEnvNames(env: Env): string[] {
+  return (
     [
       ["CLOUDFLARE_ACCOUNT_ID", env.CLOUDFLARE_ACCOUNT_ID],
       ["CLOUDFLARE_API_TOKEN", env.CLOUDFLARE_API_TOKEN],
@@ -62,10 +78,6 @@ function assertConfigured(env: Env): void {
   )
     .filter(([, value]) => !value)
     .map(([name]) => name);
-
-  if (missing.length > 0) {
-    throw new SiteStatsError("missing_env", `missing environment variables: ${missing.join(", ")}`);
-  }
 }
 
 interface DateRangeChunk {
@@ -74,8 +86,7 @@ interface DateRangeChunk {
 }
 
 /** 直近LOOKBACK_DAYS日を、CHUNK_DAYSごとの連続した区間に分割する（古い順）。 */
-function buildDateRangeChunks(): DateRangeChunk[] {
-  const now = Date.now();
+function buildDateRangeChunks(now: number): DateRangeChunk[] {
   const dayMs = 24 * 60 * 60 * 1000;
   const chunks: DateRangeChunk[] = [];
 
@@ -89,19 +100,33 @@ function buildDateRangeChunks(): DateRangeChunk[] {
   return chunks;
 }
 
-function buildGraphQlQuery(siteTag: string, chunks: DateRangeChunk[]): string {
-  const aliases = chunks
-    .map((chunk, i) => {
-      const filter = `{ AND: [ { datetime_geq: "${chunk.start}", datetime_leq: "${chunk.end}" }, { OR: [ { siteTag: "${siteTag}" } ] } ] }`;
-      return `c${i}: rumPageloadEventsAdaptiveGroups(filter: ${filter}, limit: 1) { count }`;
-    })
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+
+/** 日本時間（JST）の当日0時から現在時刻までの範囲を返す。 */
+function buildTodayRange(now: number): DateRangeChunk {
+  const jstNow = new Date(now + JST_OFFSET_MS);
+  const jstMidnightAsUtc = Date.UTC(jstNow.getUTCFullYear(), jstNow.getUTCMonth(), jstNow.getUTCDate(), 0, 0, 0);
+  return {
+    start: new Date(jstMidnightAsUtc - JST_OFFSET_MS).toISOString(),
+    end: new Date(now).toISOString(),
+  };
+}
+
+function buildGraphQlQuery(siteTag: string, chunks: DateRangeChunk[], todayRange: DateRangeChunk): string {
+  const rangeFilter = (range: DateRangeChunk) =>
+    `{ AND: [ { datetime_geq: "${range.start}", datetime_leq: "${range.end}" }, { OR: [ { siteTag: "${siteTag}" } ] } ] }`;
+
+  const chunkAliases = chunks
+    .map((chunk, i) => `c${i}: rumPageloadEventsAdaptiveGroups(filter: ${rangeFilter(chunk)}, limit: 1) { count }`)
     .join("\n      ");
+  const todayAlias = `today: rumPageloadEventsAdaptiveGroups(filter: ${rangeFilter(todayRange)}, limit: 1) { count }`;
 
   return `
-    query SiteStatsTotalPageViews($accountTag: string) {
+    query SiteStatsPageViews($accountTag: string) {
       viewer {
         accounts(filter: { accountTag: $accountTag }) {
-          ${aliases}
+          ${chunkAliases}
+          ${todayAlias}
         }
       }
     }
@@ -135,9 +160,17 @@ function classifyAndThrow(status: number, body: GraphQlResponseBody | undefined)
   throw new SiteStatsError("graphql_error", `Cloudflare GraphQL API request failed (status=${status})`);
 }
 
-async function fetchCloudflareStats(env: Env): Promise<SiteStatsPayload> {
-  const chunks = buildDateRangeChunks();
-  const query = buildGraphQlQuery(env.CLOUDFLARE_SITE_TAG, chunks);
+interface CloudflareStats {
+  totalViews: number;
+  todayViews: number;
+  updatedAt: string;
+}
+
+async function fetchCloudflareStats(env: Env): Promise<CloudflareStats> {
+  const now = Date.now();
+  const chunks = buildDateRangeChunks(now);
+  const todayRange = buildTodayRange(now);
+  const query = buildGraphQlQuery(env.CLOUDFLARE_SITE_TAG, chunks, todayRange);
 
   const res = await fetch(GRAPHQL_URL, {
     method: "POST",
@@ -168,26 +201,26 @@ async function fetchCloudflareStats(env: Env): Promise<SiteStatsPayload> {
   }
 
   const account = accounts[0];
-  let totalPageViews = 0;
-  for (let i = 0; i < chunks.length; i++) {
-    const count = account[`c${i}`]?.count;
+  const readCount = (alias: string): number => {
+    const count = account[alias]?.count;
     if (typeof count !== "number" || !Number.isFinite(count)) {
-      throw new SiteStatsError("unexpected_response", `missing or non-numeric count for chunk c${i}`);
+      throw new SiteStatsError("unexpected_response", `missing or non-numeric count for alias ${alias}`);
     }
-    totalPageViews += count;
-  }
-
-  return {
-    totalPageViews,
-    source: "cloudflare",
-    updatedAt: new Date().toISOString(),
+    return count;
   };
+
+  let totalViews = 0;
+  for (let i = 0; i < chunks.length; i++) totalViews += readCount(`c${i}`);
+  const todayViews = readCount("today");
+
+  return { totalViews, todayViews, updatedAt: new Date(now).toISOString() };
 }
 
-function jsonResponse(body: unknown, status: number, cacheControl?: string): Response {
-  const headers: Record<string, string> = { "Content-Type": "application/json" };
-  if (cacheControl) headers["Cache-Control"] = cacheControl;
-  return new Response(JSON.stringify(body), { status, headers });
+function jsonResponse(body: SiteStatsPayload, status: number, cacheControl: string): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json", "Cache-Control": cacheControl },
+  });
 }
 
 export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil }) => {
@@ -196,21 +229,53 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, waitUntil
   const liveCacheKey = new Request(`${url.origin}${url.pathname}?variant=live`);
   const fallbackCacheKey = new Request(`${url.origin}${url.pathname}?variant=fallback`);
 
+  // 環境変数が未設定の場合はCloudflare APIを呼ばず、キャッシュもせずに安全な状態を返す。
+  // 設定完了後すぐに反映されるよう、この状態はエッジキャッシュしない。
+  const missingEnv = getMissingEnvNames(env);
+  if (missingEnv.length > 0) {
+    console.warn(`[site-stats] configuration_required: missing ${missingEnv.join(", ")}`);
+    return jsonResponse(
+      { ok: false, status: "configuration_required", message: "アクセス解析の設定を確認しています。" },
+      200,
+      "no-store",
+    );
+  }
+
   const cached = await cache.match(liveCacheKey);
   if (cached) return cached;
 
   try {
-    assertConfigured(env);
     const stats = await fetchCloudflareStats(env);
-    const response = jsonResponse(stats, 200, `public, max-age=${CACHE_TTL_SECONDS}, s-maxage=${CACHE_TTL_SECONDS}`);
-    const fallbackResponse = jsonResponse(stats, 200, `public, max-age=${FALLBACK_TTL_SECONDS}, s-maxage=${FALLBACK_TTL_SECONDS}`);
-    waitUntil(Promise.all([cache.put(liveCacheKey, response.clone()), cache.put(fallbackCacheKey, fallbackResponse)]));
+    const payload: SiteStatsSuccessPayload = {
+      ok: true,
+      totalViews: stats.totalViews,
+      todayViews: stats.todayViews,
+      updatedAt: stats.updatedAt,
+      source: "cloudflare",
+    };
+    const response = jsonResponse(payload, 200, `public, max-age=${CACHE_TTL_SECONDS}, s-maxage=${CACHE_TTL_SECONDS}`);
+    const fallbackResponse = jsonResponse(
+      payload,
+      200,
+      `public, max-age=${FALLBACK_TTL_SECONDS}, s-maxage=${FALLBACK_TTL_SECONDS}`,
+    );
+    waitUntil(Promise.all([cache.put(liveCacheKey, response.clone()), cache.put(fallbackCacheKey, fallbackResponse.clone())]));
     return response;
   } catch (err) {
     logFailure(err);
+
+    // 直前の正常値がキャッシュに残っている場合だけ、それを安全にフォールバック表示する
+    // （架空の初期値は使わない）。
     const fallback = await cache.match(fallbackCacheKey);
     if (fallback) return fallback;
-    // ブラウザには秘密情報や詳細なエラー内容を返さない。
-    return jsonResponse({ error: "site-stats unavailable" }, 503);
+
+    const errorResponse = jsonResponse(
+      { ok: false, status: "temporarily_unavailable", message: "アクセス数を一時的に取得できません。" },
+      200,
+      `public, max-age=${ERROR_CACHE_TTL_SECONDS}, s-maxage=${ERROR_CACHE_TTL_SECONDS}`,
+    );
+    // Cloudflare APIへの過剰アクセスを防ぐため、失敗レスポンス自体も短時間だけキャッシュする。
+    waitUntil(cache.put(liveCacheKey, errorResponse.clone()));
+    return errorResponse;
   }
 };
