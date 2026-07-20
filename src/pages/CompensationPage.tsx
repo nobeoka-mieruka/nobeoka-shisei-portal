@@ -304,19 +304,22 @@ export function CompensationPage() {
       </SectionCard>
 
       <SectionCard title="自治体比較表">
-        <div className="hidden overflow-x-auto sm:block">
-          <table className="w-full min-w-[820px] border-collapse text-sm">
+        <p className="mb-2 text-xs text-on-surface-variant sm:hidden">表は横にスクロールできます</p>
+        <div className="hidden overflow-x-auto rounded-lg sm:block">
+          <table className="border-collapse text-sm tabular-nums">
             <thead>
               <tr className="border-b border-outline-variant text-left text-xs text-on-surface-variant">
-                <th className="py-2 pr-3 font-medium">自治体名</th>
-                <th className="px-3 py-2 text-right font-medium">市長月額</th>
-                <th className="px-3 py-2 text-right font-medium">議長月額</th>
-                <th className="px-3 py-2 text-right font-medium">副議長月額</th>
-                <th className="px-3 py-2 text-right font-medium">議員月額</th>
-                <th className="px-3 py-2 text-left font-medium">期末手当</th>
-                <th className="px-3 py-2 text-right font-medium">年間支給見込額（議員）</th>
-                <th className="px-3 py-2 text-left font-medium">基準日</th>
-                <th className="px-3 py-2 text-left font-medium">出典</th>
+                <th className="sticky left-0 z-20 min-w-[90px] whitespace-nowrap bg-surface-container-low px-3 py-2.5 text-left font-medium">
+                  自治体名
+                </th>
+                <th className="min-w-[110px] whitespace-nowrap px-3 py-2.5 text-right font-medium">市長月額</th>
+                <th className="min-w-[110px] whitespace-nowrap px-3 py-2.5 text-right font-medium">議長月額</th>
+                <th className="min-w-[120px] whitespace-nowrap px-3 py-2.5 text-right font-medium">副議長月額</th>
+                <th className="min-w-[110px] whitespace-nowrap px-3 py-2.5 text-right font-medium">議員月額</th>
+                <th className="min-w-[100px] whitespace-nowrap px-3 py-2.5 text-center font-medium">期末手当</th>
+                <th className="min-w-[150px] whitespace-nowrap px-3 py-2.5 text-right font-medium">年間支給見込額（議員）</th>
+                <th className="min-w-[120px] whitespace-nowrap px-3 py-2.5 text-center font-medium">基準日</th>
+                <th className="min-w-[220px] px-3 py-2.5 text-left font-medium">出典</th>
               </tr>
             </thead>
             <tbody>
@@ -326,34 +329,51 @@ export function CompensationPage() {
                 return (
                   <tr
                     key={c.municipality}
-                    className={`border-b border-outline-variant align-top last:border-0 ${
+                    className={`border-b border-outline-variant align-top last:border-0 even:bg-surface-container-low/40 ${
                       isNobeoka ? "border-l-4 border-l-primary bg-primary-container/30" : ""
                     }`}
                   >
-                    <td className="py-3 pr-3 font-medium text-on-surface">{c.municipality}</td>
-                    <td className="px-3 py-3 text-right text-on-surface">{formatYen(c.mayorMonthly)}</td>
-                    <td className="px-3 py-3 text-right text-on-surface">{formatYen(c.chairMonthly)}</td>
-                    <td className="px-3 py-3 text-right text-on-surface">{formatYen(c.viceChairMonthly)}</td>
-                    <td className="px-3 py-3 text-right text-on-surface">{formatYen(c.memberMonthly)}</td>
-                    <td className="px-3 py-3 text-on-surface-variant">
+                    <td
+                      className={`sticky left-0 z-10 min-w-[90px] whitespace-nowrap px-3 py-3 text-left font-medium text-on-surface ${
+                        isNobeoka ? "bg-primary-container" : "bg-surface-container-low"
+                      }`}
+                    >
+                      {c.municipality}
+                    </td>
+                    <td className="min-w-[110px] whitespace-nowrap px-3 py-3 text-right text-on-surface">
+                      {formatYen(c.mayorMonthly)}
+                    </td>
+                    <td className="min-w-[110px] whitespace-nowrap px-3 py-3 text-right text-on-surface">
+                      {formatYen(c.chairMonthly)}
+                    </td>
+                    <td className="min-w-[120px] whitespace-nowrap px-3 py-3 text-right text-on-surface">
+                      {formatYen(c.viceChairMonthly)}
+                    </td>
+                    <td className="min-w-[110px] whitespace-nowrap px-3 py-3 text-right text-on-surface">
+                      {formatYen(c.memberMonthly)}
+                    </td>
+                    <td className="min-w-[100px] whitespace-nowrap px-3 py-3 text-center text-on-surface-variant">
                       {c.councilBonusMonths !== null ? `${c.councilBonusMonths}か月分` : "資料未確認"}
                       {c.mayorBonusMonths !== null && c.mayorBonusMonths !== c.councilBonusMonths && (
                         <span className="block text-xs">（市長 {c.mayorBonusMonths}か月分）</span>
                       )}
                     </td>
-                    <td className="px-3 py-3 text-right text-on-surface">
+                    <td className="min-w-[150px] whitespace-nowrap px-3 py-3 text-right text-on-surface">
                       {memberEstimate.amount !== null ? formatYen(memberEstimate.amount) : "算定不可"}
                     </td>
-                    <td className="px-3 py-3 text-on-surface-variant">{formatJapaneseDate(c.referenceDate)}</td>
-                    <td className="px-3 py-3">
+                    <td className="min-w-[120px] whitespace-nowrap px-3 py-3 text-center text-on-surface-variant">
+                      {formatJapaneseDate(c.referenceDate)}
+                    </td>
+                    <td className="min-w-[220px] px-3 py-3 text-left">
                       <a
                         href={c.sourceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        title={c.sourceTitle}
                         aria-label={`${c.sourceTitle}を新しいタブで開く`}
                         className="text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                       >
-                        {c.sourceTitle}
+                        {c.municipality}公式資料
                       </a>
                     </td>
                   </tr>
@@ -374,35 +394,36 @@ export function CompensationPage() {
                   isNobeoka ? "border-l-4 border-l-primary bg-primary-container/30" : "bg-surface-container-low"
                 }`}
               >
-                <p className="font-semibold text-on-surface">{c.municipality}</p>
-                <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm">
-                  <dt className="text-on-surface-variant">市長月額</dt>
-                  <dd className="text-right text-on-surface">{formatYen(c.mayorMonthly)}</dd>
-                  <dt className="text-on-surface-variant">議長月額</dt>
-                  <dd className="text-right text-on-surface">{formatYen(c.chairMonthly)}</dd>
-                  <dt className="text-on-surface-variant">副議長月額</dt>
-                  <dd className="text-right text-on-surface">{formatYen(c.viceChairMonthly)}</dd>
-                  <dt className="text-on-surface-variant">議員月額</dt>
-                  <dd className="text-right text-on-surface">{formatYen(c.memberMonthly)}</dd>
-                  <dt className="text-on-surface-variant">期末手当</dt>
-                  <dd className="text-right text-on-surface">
+                <p className="whitespace-nowrap font-semibold text-on-surface">{c.municipality}</p>
+                <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm tabular-nums">
+                  <dt className="whitespace-nowrap text-on-surface-variant">市長月額</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">{formatYen(c.mayorMonthly)}</dd>
+                  <dt className="whitespace-nowrap text-on-surface-variant">議長月額</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">{formatYen(c.chairMonthly)}</dd>
+                  <dt className="whitespace-nowrap text-on-surface-variant">副議長月額</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">{formatYen(c.viceChairMonthly)}</dd>
+                  <dt className="whitespace-nowrap text-on-surface-variant">議員月額</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">{formatYen(c.memberMonthly)}</dd>
+                  <dt className="whitespace-nowrap text-on-surface-variant">期末手当</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">
                     {c.councilBonusMonths !== null ? `${c.councilBonusMonths}か月分` : "資料未確認"}
                   </dd>
-                  <dt className="text-on-surface-variant">年間支給見込額（議員）</dt>
-                  <dd className="text-right text-on-surface">
+                  <dt className="whitespace-nowrap text-on-surface-variant">年間支給見込額（議員）</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">
                     {memberEstimate.amount !== null ? formatYen(memberEstimate.amount) : "算定不可"}
                   </dd>
-                  <dt className="text-on-surface-variant">基準日</dt>
-                  <dd className="text-right text-on-surface">{formatJapaneseDate(c.referenceDate)}</dd>
+                  <dt className="whitespace-nowrap text-on-surface-variant">基準日</dt>
+                  <dd className="whitespace-nowrap text-right text-on-surface">{formatJapaneseDate(c.referenceDate)}</dd>
                 </dl>
                 <a
                   href={c.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  title={c.sourceTitle}
                   aria-label={`${c.sourceTitle}を新しいタブで開く`}
-                  className="mt-2 inline-block text-sm text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="mt-2 inline-block whitespace-nowrap text-sm text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  {c.sourceTitle}
+                  {c.municipality}公式資料
                 </a>
               </div>
             );

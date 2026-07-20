@@ -40,7 +40,7 @@ export function CompensationBarChart({ entries }: CompensationBarChartProps) {
           return (
             <li key={entry.municipality}>
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-                <span className="break-words text-sm text-on-surface sm:w-24 sm:shrink-0">
+                <span className="whitespace-nowrap text-sm text-on-surface sm:w-24 sm:shrink-0">
                   {rank}位　{entry.municipality}
                 </span>
                 <span className="flex flex-1 items-center gap-3">
@@ -53,7 +53,7 @@ export function CompensationBarChart({ entries }: CompensationBarChartProps) {
                       }}
                     />
                   </span>
-                  <span className="w-28 shrink-0 text-right text-sm font-semibold text-on-surface">
+                  <span className="w-28 shrink-0 whitespace-nowrap text-right text-sm font-semibold tabular-nums text-on-surface">
                     {formatYen(monthly)}
                   </span>
                 </span>
