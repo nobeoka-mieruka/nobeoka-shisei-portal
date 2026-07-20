@@ -470,6 +470,10 @@ interface SiteTagDiagnosticsResult {
   topSiteTags?: { siteTag: string | null; count: number }[];
   // 実際に問い合わせた30日区間（古い区間から探索した場合は複数になる）。
   queriedWindows?: { start: string; end: string }[];
+  // debug=1専用。設定済みsiteTagと、実際に最も件数が多いsiteTag（前後空白・大文字小文字の差異が
+  // ないか比較しやすいよう、正規化前の値をそのまま返す）。
+  configuredSiteTag?: string;
+  actualSiteTag?: string | null;
   error?: string;
 }
 
@@ -590,6 +594,7 @@ async function fetchSiteTagDiagnostics(env: Env, referenceEndIso: string): Promi
       configuredTagFound: false,
       configuredTagCount: null,
       queriedWindows,
+      configuredSiteTag: env.CLOUDFLARE_SITE_TAG,
       error: queryError,
     };
   }
@@ -601,6 +606,8 @@ async function fetchSiteTagDiagnostics(env: Env, referenceEndIso: string): Promi
       configuredTagCount: null,
       topSiteTags: [],
       queriedWindows,
+      configuredSiteTag: env.CLOUDFLARE_SITE_TAG,
+      actualSiteTag: null,
     };
   }
 
@@ -614,7 +621,10 @@ async function fetchSiteTagDiagnostics(env: Env, referenceEndIso: string): Promi
     .sort((a, b) => b.count - a.count)
     .slice(0, 5);
 
-  const configuredEntry = topSiteTags.find((t) => t.siteTag === env.CLOUDFLARE_SITE_TAG);
+  // 前後の空白・大文字小文字の違いだけで不一致にならないよう正規化して比較する
+  // （Cloudflareダッシュボードからのコピペで混入しやすいため）。
+  const configured = env.CLOUDFLARE_SITE_TAG.trim().toLowerCase();
+  const configuredEntry = topSiteTags.find((t) => (t.siteTag ?? "").trim().toLowerCase() === configured);
 
   return {
     status: configuredEntry ? "configured_tag_found" : "configured_tag_not_found",
@@ -622,6 +632,8 @@ async function fetchSiteTagDiagnostics(env: Env, referenceEndIso: string): Promi
     configuredTagCount: configuredEntry ? configuredEntry.count : null,
     topSiteTags,
     queriedWindows,
+    configuredSiteTag: env.CLOUDFLARE_SITE_TAG,
+    actualSiteTag: topSiteTags[0]?.siteTag ?? null,
   };
 }
 
