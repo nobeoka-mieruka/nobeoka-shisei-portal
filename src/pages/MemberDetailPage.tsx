@@ -241,7 +241,7 @@ export function MemberDetailPage() {
               </div>
               <div className="rounded-lg bg-surface-container-high p-3">
                 <p className="text-xs text-on-surface-variant">退席件数</p>
-                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.abstain ?? 0}件</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.departed ?? 0}件</p>
               </div>
               <div className="rounded-lg bg-surface-container-high p-3">
                 <p className="text-xs text-on-surface-variant">欠席件数</p>

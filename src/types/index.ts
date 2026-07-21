@@ -425,7 +425,7 @@ export interface MayorPromiseItem {
    */
   relatedBudget: string;
   /**
-   * 関連議案。議案データ（bills.json）が整うまでは「確認中」を設定する（推定はしない）。
+   * 関連議案。議案データ（billVotes.json）との紐付けが確認できるまでは「確認中」を設定する（推定はしない）。
    */
   relatedBill: string;
   /** ISO形式。この公約データの基準日。 */
@@ -456,40 +456,6 @@ export interface MayorPromisesData {
   documents: MayorPromiseDocument[];
   categories: MayorPromiseCategory[];
   promises: MayorPromiseItem[];
-}
-
-/** 議案の種別。 */
-export type BillCategory = "条例" | "予算" | "決算" | "人事" | "意見書" | "請願" | "その他";
-
-/** 議案に対する、議員1人ごとの賛否記録。 */
-export interface MemberBillVoteRecord {
-  memberId: string;
-  result: VoteResult;
-}
-
-/**
- * 議案・採決結果。今後の機能拡張用の型で、現時点では実データを持たない
- * （src/data/bills.json は空配列）。架空の議案データをここに基づいて作成しないこと。
- */
-export interface Bill extends SourceMeta {
-  id: string;
-  billNumber: string;
-  billName: string;
-  summary?: string;
-  /** ISO形式。議案の提出日。 */
-  submittedAt?: string;
-  /** ISO形式。採決日。 */
-  votedAt?: string;
-  billType?: BillCategory;
-  submitter?: string;
-  result?: VoteResult;
-  yesCount?: number;
-  noCount?: number;
-  abstainCount?: number;
-  absentCount?: number;
-  memberVotes?: MemberBillVoteRecord[];
-  billDocumentUrl?: string;
-  minutesUrl?: string;
 }
 
 /** サイト更新履歴の種別。 */
@@ -728,9 +694,21 @@ export interface GeneralQuestionItem {
 
 /**
  * 議案ごとの賛否データベースにおける、議員1人分の議決結果。
- * 表示ラベル: approve=賛成／oppose=反対／abstain=退席／absent=欠席／recused=除斥／notVoting=採決なし
+ * 表示ラベル: approve=賛成／oppose=反対／departed=退席／absent=欠席／recused=除斥／
+ * notVoting=採決なし／abstained=棄権／unconfirmed=確認不能
+ * "abstained"（棄権＝出席のうえで意思表示しない）と"departed"（退席＝採決前に議場を退出）は
+ * 別概念のため区別している。公式記録で個人の賛否が明示されていない場合は"unconfirmed"を使う
+ * （推測で"approve"/"oppose"を割り当てないこと）。
  */
-export type BillMemberVoteStatus = "approve" | "oppose" | "abstain" | "absent" | "recused" | "notVoting";
+export type BillMemberVoteStatus =
+  | "approve"
+  | "oppose"
+  | "departed"
+  | "absent"
+  | "recused"
+  | "notVoting"
+  | "abstained"
+  | "unconfirmed";
 
 /** 議案の議決結果。公式資料で確認できない場合は「確認中」を使う。 */
 export type BillVoteResult =

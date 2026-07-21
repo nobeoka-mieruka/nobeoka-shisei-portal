@@ -58,9 +58,9 @@ function safeFormatDate(iso?: string): string {
 function voteCounts(bill: BillVoteItem) {
   const approve = bill.memberVotes.filter((v) => v.vote === "approve").length;
   const oppose = bill.memberVotes.filter((v) => v.vote === "oppose").length;
-  const abstain = bill.memberVotes.filter((v) => v.vote === "abstain").length;
+  const departed = bill.memberVotes.filter((v) => v.vote === "departed").length;
   const absent = bill.memberVotes.filter((v) => v.vote === "absent").length;
-  return { approve, oppose, abstain, absent };
+  return { approve, oppose, departed, absent };
 }
 
 /** 賛成率（賛成÷（賛成＋反対））。反対が0で賛成が1件以上あれば全会一致とみなす。賛否データが無い場合はnull。 */
@@ -262,7 +262,7 @@ export function BillVotesPage() {
           {filteredBills.length > 0 && (
             <ul className="space-y-3">
               {filteredBills.map((bill) => {
-                const { approve, oppose, abstain, absent } = voteCounts(bill);
+                const { approve, oppose, departed, absent } = voteCounts(bill);
                 return (
                   <li key={bill.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
                     <div className="flex flex-wrap items-start justify-between gap-3">
@@ -281,7 +281,7 @@ export function BillVotesPage() {
                         <p className="mt-1 text-sm font-medium text-on-surface">議決結果：{bill.result}</p>
                         {bill.memberVotes.length > 0 && (
                           <p className="mt-1 text-xs text-on-surface-variant">
-                            賛成{approve}人／反対{oppose}人／退席{abstain}人／欠席{absent}人
+                            賛成{approve}人／反対{oppose}人／退席{departed}人／欠席{absent}人
                           </p>
                         )}
                       </div>

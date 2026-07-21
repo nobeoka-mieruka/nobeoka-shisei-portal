@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import membersData from "../data/members.json";
 import mayorData from "../data/mayor.json";
-import billsData from "../data/bills.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
-import type { CouncilMember, Gender, Mayor, Bill, GeneralQuestionItem, BillVoteItem } from "../types";
+import type { CouncilMember, Gender, Mayor, GeneralQuestionItem, BillVoteItem } from "../types";
 import { getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
@@ -19,7 +18,6 @@ import { ChartBarIcon } from "../components/icons";
 
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
-const bills = billsData as Bill[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = billVotesData as BillVoteItem[];
 
@@ -76,8 +74,8 @@ export function DashboardPage() {
 
   const totalQuestions = generalQuestions.length;
   const totalPledges = mayor.pledges.length;
-  const totalBills = bills.length;
-  const billsWithResult = useMemo(() => bills.filter((b) => !!b.result).length, []);
+  const totalBills = billVotes.length;
+  const billsWithResult = useMemo(() => billVotes.filter((b) => b.result !== "確認中").length, []);
 
   const questionRankingItems: BarListItem[] = useMemo(() => {
     const counts = new Map<string, number>();

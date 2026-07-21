@@ -66,7 +66,7 @@
 
 - [ ] **市長公約達成状況**（`/mayor/policy-progress`）：4カテゴリ・複数公約は確認済みだが、公約全体の網羅性は継続確認中
 - [ ] **公約詳細ページ**：現状は `PromiseCard` を一覧ページ内にインライン表示のみ。公約ごとの個別URL（詳細ページ）は未実装
-- [ ] **議案賛否データベース**（`/bills/votes`, `/bills/votes/:id`）：画面・検索・フィルタ・検証ロジックは完成済みだが、`billVotes.json` は実データ確認まで意図的に空配列
+- [ ] **議案賛否データベース**（`/bills/votes`, `/bills/votes/:id`）：画面・検索・フィルタ・検証ロジックは完成済み（2026-07-21、旧`/bills`スタブの重複解消・賛否区分拡張・検索インデックス強化を実施、TASK-028）。`billVotes.json` は実データ確認まで意図的に空配列（TASK-004、BLOCKED）
 - [ ] **一般質問データベース**（`/questions`）：令和8年6月定例会14件は実データ投入済みだが、答弁内容（`answerSummary`等）は会議録未公開のため未入力
 - [ ] **全国報酬比較**（`nationalCompensationRanking.json`）：4役職分の枠は用意済みだが、`monthly`/`rank` は全て `null`（未確認）
 - [ ] **類似団体比較**（`similarMunicipalityComparison.json`）：同様に枠のみで値は `null`

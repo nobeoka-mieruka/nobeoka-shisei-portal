@@ -96,8 +96,31 @@ for (const q of generalQuestions) {
 // --- billVotes.json ---
 const billVotes = readJson("src/data/billVotes.json");
 const billIds = new Set();
-const VALID_VOTE_STATUS = new Set(["approve", "oppose", "abstain", "absent", "recused", "notVoting"]);
+const VALID_VOTE_STATUS = new Set([
+  "approve",
+  "oppose",
+  "departed",
+  "absent",
+  "recused",
+  "notVoting",
+  "abstained",
+  "unconfirmed",
+]);
 const VALID_PROPOSER_TYPES = new Set(["mayor", "member", "committee", "other"]);
+const VALID_BILL_VOTE_RESULTS = new Set([
+  "原案可決",
+  "修正可決",
+  "否決",
+  "承認",
+  "認定",
+  "同意",
+  "採択",
+  "不採択",
+  "継続審査",
+  "撤回",
+  "その他",
+  "確認中",
+]);
 
 for (const b of billVotes) {
   const tag = `billVotes.json (${b.id ?? "id不明"})`;
@@ -110,6 +133,7 @@ for (const b of billVotes) {
   if (isBlank(b.summary)) err(tag, "summaryが空です");
   if (b.submittedDate && !DATE_RE.test(b.submittedDate)) err(tag, `submittedDateの形式が不正です: ${b.submittedDate}`);
   if (b.votingDate && !DATE_RE.test(b.votingDate)) err(tag, `votingDateの形式が不正です: ${b.votingDate}`);
+  if (!VALID_BILL_VOTE_RESULTS.has(b.result)) err(tag, `未定義の議決結果です: ${b.result}`);
 
   const seenVoters = new Set();
   for (const v of b.memberVotes ?? []) {
@@ -119,8 +143,14 @@ for (const b of billVotes) {
     seenVoters.add(v.memberId);
   }
 
-  for (const url of [b.billDocumentUrl, b.resultDocumentUrl, b.transcriptUrl, b.committeeDocumentUrl, b.budgetDocumentUrl, b.videoUrl]) {
+  const billDocUrls = [b.billDocumentUrl, b.resultDocumentUrl, b.transcriptUrl, b.committeeDocumentUrl, b.budgetDocumentUrl, b.videoUrl];
+  for (const url of billDocUrls) {
     if (url && !URL_RE.test(url)) err(tag, `根拠資料URLの形式が不正です: ${url}`);
+  }
+  // 「確認中」以外＝議決結果が確定しているデータには、必ず何らかの根拠資料URLを求める。
+  const hasAnyDocument = billDocUrls.some(Boolean) || (b.relatedDocumentUrls ?? []).length > 0;
+  if (b.result && b.result !== "確認中" && !hasAnyDocument) {
+    err(tag, "議決結果が確定しているのに根拠資料URLが1件もありません");
   }
 
   if (b.proposerType && !VALID_PROPOSER_TYPES.has(b.proposerType)) {

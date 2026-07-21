@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { initGoogleAnalytics, trackPageView } from "./lib/analytics";
 import { SiteHeader } from "./components/SiteHeader";
 import { BottomNav } from "./components/BottomNav";
@@ -20,7 +20,6 @@ import { AboutPage } from "./pages/AboutPage";
 import { TermsPage } from "./pages/TermsPage";
 import { EditorialPolicyPage } from "./pages/EditorialPolicyPage";
 import { ContactPage } from "./pages/ContactPage";
-import { BillsPage } from "./pages/BillsPage";
 import { BillVotesPage } from "./pages/BillVotesPage";
 import { BillVoteDetailPage } from "./pages/BillVoteDetailPage";
 import { GeneralQuestionsPage } from "./pages/GeneralQuestionsPage";
@@ -62,7 +61,8 @@ function App() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/bills" element={<BillsPage />} />
+            {/* /bills は /bills/votes（議案ごとの賛否データベース）へ統合済み。旧URLへのアクセスもリダイレクトする。 */}
+            <Route path="/bills" element={<Navigate to="/bills/votes" replace />} />
             <Route path="/bills/votes" element={<BillVotesPage />} />
             <Route path="/bills/votes/:id" element={<BillVoteDetailPage />} />
             <Route path="/questions" element={<GeneralQuestionsPage />} />

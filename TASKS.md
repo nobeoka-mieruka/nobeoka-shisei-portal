@@ -1,6 +1,6 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-07-20
+最終更新日：2026-07-21
 
 ---
 
@@ -129,8 +129,8 @@
 
 状態：BLOCKED
 優先度：A
-対象：`src/data/bills.json`、`src/data/billVotes.json`
-依存関係：なし（画面・検証ロジックは実装済み）
+対象：`src/data/billVotes.json`（旧`src/data/bills.json`はTASK-028で廃止・削除済み）
+依存関係：なし（画面・検索・フィルタ・検証ロジックは実装済み。2026-07-21、TASK-028で画面側の残課題も解消済み）
 目的：議案ごとの賛否を公式資料に基づいて登録する
 
 作業内容：
@@ -753,3 +753,44 @@
 - 完了日：
 - コミットID：
 - 変更概要：
+
+---
+
+### TASK-028 議案賛否データベースの画面整合性修正・検索インデックス強化
+
+状態：DONE
+優先度：A
+対象：`src/App.tsx`、`src/pages/HomePage.tsx`、`src/pages/DashboardPage.tsx`、`src/pages/BillVotesPage.tsx`、`src/pages/BillVoteDetailPage.tsx`、`src/pages/MemberDetailPage.tsx`、`src/components/bills/BillVoteBadge.tsx`、`src/lib/billVotes.ts`、`src/types/index.ts`、`scripts/validate-data.mjs`、`scripts/generate-search-index.mjs`、（削除）`src/pages/BillsPage.tsx`、`src/data/bills.json`
+依存関係：TASK-004（議案賛否データの投入）の前提となる画面側の土台。今回の対応でTASK-004は実データ投入のみが残作業になった
+目的：ユーザーから「議案ごとの賛否データベースを正式実装してほしい」という依頼を受けて`/bills`・`/bills/votes`・関連コードを調査したところ、画面・検索・フィルタ・検証ロジックの大部分は既に実装済みだったが、以下の実バグ・不整合が見つかったため修正した
+
+作業内容（調査で判明した問題と対応）：
+- `/bills`が、実データを持たない旧`Bill`型（`bills.json`、常に0件）のスタブページのままで、`/bills/votes`（`BillVoteItem`型、検索・フィルタ・検証まで実装済み）と機能重複していた（`generate-sitemap.mjs`に「重複するためnoindex」という既存コメントで判明）。ホームページの「議案・採決結果を見る」導線も、実装済みの`/bills/votes`ではなくこのスタブへ向いていた
+- `DashboardPage.tsx`・`HomePage.tsx`の「登録済み議案数」統計カードが、常に空の`bills.json`を集計しており、実データが入っている`billVotes.json`を見ていなかった
+- 賛否区分（`BillMemberVoteStatus`）に「棄権」「確認不能」が無く、退席（`abstain`）との呼称の紛らわしさもあった
+- 検索インデックス（`generate-search-index.mjs`）の議案キーワードに年度・投票議員名が含まれていなかった
+- `validate-data.mjs`に議決結果（`BillVoteResult`）の値検証、および「議決結果が確定しているのに根拠資料URLが無い」場合の検証が無かった
+
+実施した修正：
+- `/bills`ルートを`/bills/votes`へリダイレクト（`<Navigate replace>`）に変更し、旧`BillsPage.tsx`・`bills.json`・型（`Bill`/`BillCategory`/`MemberBillVoteRecord`）を削除。ホームページのナビゲーションリンクも修正（重複していた2つの議案リンクを1つに統合）
+- `DashboardPage.tsx`・`HomePage.tsx`の議案数統計を`billVotes.json`ベースに変更
+- `BillMemberVoteStatus`に`abstained`（棄権）・`unconfirmed`（確認不能）を追加し、紛らわしかった`abstain`は`departed`（退席）へ改名（実データが空のため安全に実施）。`lib/billVotes.ts`のラベル・記号、`BillVoteBadge.tsx`、一覧・詳細ページの集計表示、`validate-data.mjs`の許容値を追随修正
+- 検索インデックスへ`fiscalYear`と`memberVotes[].memberName`をキーワード追加
+- `validate-data.mjs`へ`BillVoteResult`の値検証と、確定済み議決結果に根拠資料URLが1件も無い場合のエラーを追加
+
+受入条件：
+- `validate:data` / `typecheck` / `lint` / `build`すべて成功
+- 既存の`/bills/votes`・`/bills/votes/:id`・議員詳細ページの議案賛否表示・検索・OGP・サイトマップ機能を壊していない
+- 実データ（`billVotes.json`）は空のまま。架空の議案・賛否データは追加していない
+
+公式資料：
+- 該当なし（画面・検証ロジックの整合性修正のため。実データ投入はTASK-004で別途対応）
+
+未対応・既知の限界：
+- ブラウザでの実機・実表示確認（375/390/430/768/1280px）は本セッションでは実行できていない（ブラウザ操作ツール未接続）。CSS計算上は横スクロール・数字の折り返しが発生しない設計だが、目視確認が別途必要
+- 議案の実データ収集（議案書・採決結果・会議録の確認、議員ごとの賛否の構造化）はTASK-004（BLOCKED）で別途対応する
+
+完了記録：
+- 完了日：2026-07-21
+- コミットID：（本コミットに含む）
+- 変更概要：上記のとおり。ユーザー依頼（4機能の正式実装）のうち、TASKS.mdへのタスク登録と、議案ごとの賛否データベースの画面側整合性修正・検索インデックス強化までを実施。一般質問・市長公約・財政ダッシュボードの拡張（TASK-005〜007、011〜014）には着手していない。

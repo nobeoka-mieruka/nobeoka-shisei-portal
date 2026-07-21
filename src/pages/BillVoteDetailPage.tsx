@@ -15,7 +15,16 @@ import { GlobeIcon } from "../components/icons";
 
 const billVotes = billVotesData as BillVoteItem[];
 
-const voteOrder: BillMemberVoteStatus[] = ["approve", "oppose", "abstain", "absent", "recused", "notVoting"];
+const voteOrder: BillMemberVoteStatus[] = [
+  "approve",
+  "oppose",
+  "abstained",
+  "departed",
+  "absent",
+  "recused",
+  "notVoting",
+  "unconfirmed",
+];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -242,7 +251,7 @@ export function BillVoteDetailPage() {
       <SectionCard title="議決結果">
         <p className="text-2xl font-bold text-on-surface">{bill.result}</p>
         {bill.memberVotes.length > 0 && (
-          <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-6">
+          <div className="mt-4 grid grid-cols-4 gap-2">
             {voteOrder.map((v) => {
               const count = bill.memberVotes.filter((mv) => mv.vote === v).length;
               return (

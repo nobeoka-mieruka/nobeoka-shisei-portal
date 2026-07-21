@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
-import billsData from "../data/bills.json";
+import billVotesData from "../data/billVotes.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
-import type { CouncilMember, Gender, Bill, Mayor, GeneralQuestionItem } from "../types";
+import type { CouncilMember, Gender, BillVoteItem, Mayor, GeneralQuestionItem } from "../types";
 import { allFactions, getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { MemberCard } from "../components/MemberCard";
@@ -18,7 +18,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
 
 const members = membersData as CouncilMember[];
-const bills = billsData as Bill[];
+const billVotes = billVotesData as BillVoteItem[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);
@@ -52,7 +52,6 @@ const snsOptions = [
 const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "市議会議員を見る", to: "/", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
-  { label: "議案・採決結果を見る", to: "/bills", ready: true },
   { label: "一般質問を調べる", to: "/questions", ready: true },
   { label: "議案ごとの賛否を見る", to: "/bills/votes", ready: true },
   { label: "サイト内を検索する", to: "/search", ready: true },
@@ -157,7 +156,7 @@ export function HomePage() {
           <StatCard label="議員定数" value={COUNCIL_STATUTORY_SEATS} unit="名" />
           <StatCard label="市議会議員数" value={members.length} unit="名" />
           <StatCard label="欠員" value={vacantSeats} unit="名" />
-          <StatCard label="登録済み議案数" value={bills.length} unit="件" />
+          <StatCard label="登録済み議案数" value={billVotes.length} unit="件" />
           <StatCard label="登録済み一般質問数" value={registeredQuestionCount} unit="件" />
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
           <StatCard label="最終更新日" value={getLastUpdatedText()} compact />
