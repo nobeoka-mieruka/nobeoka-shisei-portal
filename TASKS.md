@@ -324,7 +324,7 @@
 
 完了記録：
 - 完了日：2026-07-21
-- コミットID：（後続コミットで記録、TASK-027と共通）
+- コミットID：772d9ad（TASK-027と共通）
 - 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
@@ -786,7 +786,7 @@
 
 完了記録：
 - 完了日：2026-07-21
-- コミットID：（後続コミットで記録、TASK-010と共通）
+- コミットID：772d9ad（TASK-010と共通）
 - 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
