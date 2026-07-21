@@ -235,8 +235,8 @@
 
 完了記録：
 - 完了日：2026-07-21
-- コミットID：（後続コミットで記録）
-- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
+- コミットID：70f638e
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。Playwrightで375/390/430/768/1280px幅の横スクロールなしを確認、検索・絞り込み・条件リセット・カテゴリアンカー遷移・詳細ページの動作をヘッドレスブラウザで確認、コンソールエラーなし。
 
 ---
 
