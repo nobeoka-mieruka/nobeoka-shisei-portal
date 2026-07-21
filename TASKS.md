@@ -292,7 +292,7 @@
 
 完了記録：
 - 完了日：2026-07-21
-- コミットID：（後続コミットで記録）
+- コミットID：a0270c1
 - 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。Playwrightで`/questions/:id`・`/mayor/policy-progress/:id`の「関連情報は登録されていません」表示とコンソールエラーなしを確認。
 
 ---
