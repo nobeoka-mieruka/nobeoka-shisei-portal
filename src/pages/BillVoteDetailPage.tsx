@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
-import type { BillMemberVoteStatus, BillVoteItem } from "../types";
+import generalQuestionsData from "../data/generalQuestions.json";
+import mayorPromisesData from "../data/mayorPromises.json";
+import type { BillMemberVoteStatus, BillVoteItem, GeneralQuestionItem, MayorPromisesData } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
@@ -14,6 +16,8 @@ import { billOgImage } from "../lib/ogImage";
 import { GlobeIcon } from "../components/icons";
 
 const billVotes = billVotesData as BillVoteItem[];
+const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
+const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
 
 const voteOrder: BillMemberVoteStatus[] = [
   "approve",
@@ -77,6 +81,12 @@ export function BillVoteDetailPage() {
   }
 
   const documents = collectDocuments(bill);
+  const relatedQuestions = (bill.relatedQuestionIds ?? [])
+    .map((qId) => generalQuestions.find((q) => q.id === qId))
+    .filter((q): q is GeneralQuestionItem => !!q);
+  const relatedPromises = (bill.relatedMayorPromiseIds ?? [])
+    .map((pId) => mayorPromises.find((p) => p.id === pId))
+    .filter((p): p is (typeof mayorPromises)[number] => !!p);
   const hasOverview =
     bill.reason ||
     (bill.mainChanges && bill.mainChanges.length > 0) ||
@@ -324,38 +334,40 @@ export function BillVoteDetailPage() {
       )}
 
       {/* 関連情報 */}
-      {hasRelated && (
-        <SectionCard title="関連情報">
+      <SectionCard title="関連情報">
+        {hasRelated ? (
           <ul className="space-y-2 text-sm">
-            {bill.relatedQuestionIds && bill.relatedQuestionIds.length > 0 && (
-              <li>
-                <Link to="/questions" className={`text-primary hover:underline ${linkClass}`}>
-                  関連する一般質問（{bill.relatedQuestionIds.length}件）
+            {relatedQuestions.map((q) => (
+              <li key={q.id}>
+                <Link to={`/questions/${q.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                  関連する一般質問：{q.title}（{q.memberName}議員）
                 </Link>
               </li>
-            )}
+            ))}
             {bill.relatedCommitteeActivityIds && bill.relatedCommitteeActivityIds.length > 0 && (
               <li className="text-on-surface-variant">
                 関連する委員会活動（{bill.relatedCommitteeActivityIds.length}件）※委員会活動データベースは準備中です
               </li>
             )}
-            {bill.relatedMayorPromiseIds && bill.relatedMayorPromiseIds.length > 0 && (
-              <li>
-                <Link to="/mayor/policy-progress" className={`text-primary hover:underline ${linkClass}`}>
-                  関連する市長公約（{bill.relatedMayorPromiseIds.length}件）
+            {relatedPromises.map((p) => (
+              <li key={p.id}>
+                <Link to={`/mayor/policy-progress/${p.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                  関連する市長公約：{p.promiseText}
                 </Link>
               </li>
-            )}
+            ))}
             {bill.relatedFinanceItems && bill.relatedFinanceItems.length > 0 && (
               <li>
                 <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
-                  関連する予算・財政情報（{bill.relatedFinanceItems.length}件）
+                  関連する予算・財政情報：{bill.relatedFinanceItems.join("、")}
                 </Link>
               </li>
             )}
           </ul>
-        </SectionCard>
-      )}
+        ) : (
+          <p className="text-sm text-on-surface-variant">関連情報は登録されていません</p>
+        )}
+      </SectionCard>
 
       {/* 前後の議案 */}
       {(prevBill || nextBill) && (

@@ -267,27 +267,33 @@
 
 ### TASK-009 議員・一般質問・議案・公約の相互リンク棚卸し
 
-状態：READY
+状態：DONE
 優先度：A
-対象：`src/pages/MemberDetailPage.tsx`、`src/pages/GeneralQuestionDetailPage.tsx`、`src/pages/BillVoteDetailPage.tsx`、`src/pages/MayorPromiseDetailPage.tsx`
+対象：`src/pages/MemberDetailPage.tsx`、`src/pages/GeneralQuestionDetailPage.tsx`、`src/pages/BillVoteDetailPage.tsx`、`src/pages/MayorPromiseDetailPage.tsx`、`src/types/index.ts`、`scripts/validate-data.mjs`
 依存関係：なし
-目的：議員↔一般質問↔議案↔公約の相互リンクが網羅されているか確認し、不足箇所を補う
+目的：議員↔一般質問↔議案↔公約↔財政↔記者会見の相互リンクが網羅されているか確認し、不足箇所を補う
 
-作業内容：
-- 各詳細ページの関連リンク実装状況を確認する
-- データが揃っている箇所でリンクが欠けている場合は追加する
+作業内容（調査で判明した問題と対応）：
+- `MemberDetailPage`（所属委員会・会派・一般質問・議案賛否）は既に網羅済みで、`EmptyState`によるゼロ件表示も実装済みだった（変更なし）
+- `MayorPromiseDetailPage`（TASK-007で追加した関連議案・関連一般質問・財政ページ導線）も実装済みだった
+- `BillVoteDetailPage`の「関連する一般質問」「関連する市長公約」が、個別ページへのID参照リンクではなく、一覧ページへの件数リンク（例："関連する一般質問（3件）"→`/questions`）になっていたバグを修正し、`GeneralQuestionDetailPage`/`MayorPromiseDetailPage`と同様に個別項目ごとのタイトル付きリンクへ変更した
+- `GeneralQuestionItem`・`BillVoteItem`双方に存在した`relatedFinanceItems`（財政項目、IDを持たないデータのため文言で保持）について、`GeneralQuestionDetailPage`には表示箇所が無かったため追加した
+- `MayorPromiseItem`に`relatedPressConferenceDates`（市長定例記者会見, `mayorPressConferences.ts`のdate参照）を新設し、`MayorPromiseDetailPage`に関連記者会見の表示を追加（実データの紐付けは公式資料で個別に確認できていないため未設定のまま）
+- ユーザーからの追加指示「関連データがない場合は空欄にせず『関連情報は登録されていません』と表示」に基づき、`GeneralQuestionDetailPage`・`BillVoteDetailPage`・`MayorPromiseDetailPage`の関連情報セクションを、データが無い場合でも非表示にせず明示メッセージを表示する方式へ変更した（旧受入条件「データが存在しない場合はリンクを表示しない」から方針変更）
+- `validate-data.mjs`に、`relatedFinanceItems`の空文字チェック、`relatedPressConferenceDates`の日付形式チェックを追加（`mayorPressConferences.ts`はTypeScriptモジュールのためID参照整合性チェックは対象外、形式チェックのみ）
 
 受入条件：
-- 主要な関連データがある場合、双方向にリンクできる
-- データが存在しない場合はリンクを表示しない（空リンクを作らない）
+- 主要な関連データがある場合、個別ページへ双方向にリンクできる（達成）
+- 関連データが存在しない場合は「関連情報は登録されていません」と明示する（達成、方針変更）
+- ID参照（memberId/billId/questionId/promiseId等）で結合し、氏名やタイトルの文字列一致では結合していない（達成）
 
 公式資料：
-- 該当なし
+- 該当なし（UI・型・検証ロジックの整合性強化のため。実データの紐付けは各データ投入タスクで別途対応）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-21
+- コミットID：（後続コミットで記録）
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。Playwrightで`/questions/:id`・`/mayor/policy-progress/:id`の「関連情報は登録されていません」表示とコンソールエラーなしを確認。
 
 ---
 

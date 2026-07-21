@@ -91,6 +91,9 @@ for (const q of generalQuestions) {
   if (q.transcriptPdfUrl && !URL_RE.test(q.transcriptPdfUrl)) {
     err(tag, `transcriptPdfUrlの形式が不正です: ${q.transcriptPdfUrl}`);
   }
+  for (const item of q.relatedFinanceItems ?? []) {
+    if (isBlank(item)) err(tag, "relatedFinanceItemsに空文字が含まれています");
+  }
 }
 
 // --- billVotes.json ---
@@ -163,6 +166,10 @@ for (const b of billVotes) {
 
   for (const qId of b.relatedQuestionIds ?? []) {
     if (!questionIds.has(qId)) warn(tag, `存在しない一般質問IDを参照しています: ${qId}`);
+  }
+
+  for (const item of b.relatedFinanceItems ?? []) {
+    if (isBlank(item)) err(tag, "relatedFinanceItemsに空文字が含まれています");
   }
 }
 
@@ -247,6 +254,10 @@ try {
     }
     for (const qId of p.relatedQuestionIds ?? []) {
       if (!questionIds.has(qId)) warn(tag, `存在しない一般質問IDを参照しています: ${qId}`);
+    }
+    // mayorPressConferences.tsはTypeScriptモジュールのためこのスクリプトからは直接参照できず、日付形式のみ検証する。
+    for (const d of p.relatedPressConferenceDates ?? []) {
+      if (!DATE_RE.test(d)) err(tag, `relatedPressConferenceDatesの形式が不正です: ${d}`);
     }
 
     if (p.progressHistory && p.progressHistory.length > 0) {

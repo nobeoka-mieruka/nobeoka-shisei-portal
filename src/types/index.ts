@@ -470,6 +470,8 @@ export interface MayorPromiseItem {
   relatedBillVoteIds?: string[];
   /** 関連する一般質問（generalQuestions.jsonのid）。公式資料で関連が確認できた場合のみ設定する。 */
   relatedQuestionIds?: string[];
+  /** 関連する市長定例記者会見（mayorPressConferences.tsのdate、ISO形式）。公式資料で関連が確認できた場合のみ設定する。 */
+  relatedPressConferenceDates?: string[];
 }
 
 /** 市長公約の進捗状況ページ（個別公約12項目）全体のデータ。 */
@@ -727,6 +729,8 @@ export interface GeneralQuestionItem {
   relatedBillVoteIds?: string[];
   /** 関連する市長公約（mayorPromises.jsonのid）。公式資料で関連が確認できた場合のみ設定する。 */
   relatedMayorPromiseIds?: string[];
+  /** 関連する予算・財政項目（financeDashboard.jsonの項目名。IDを持たないデータのため文言で保持する）。 */
+  relatedFinanceItems?: string[];
 
   sourceTitle: string;
   sourceOrganization: string;

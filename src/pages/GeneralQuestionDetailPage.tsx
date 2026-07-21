@@ -168,8 +168,8 @@ export function GeneralQuestionDetailPage() {
         </dl>
       </SectionCard>
 
-      {(relatedBills.length > 0 || relatedPromises.length > 0) && (
-        <SectionCard title="関連情報">
+      <SectionCard title="関連情報">
+        {relatedBills.length > 0 || relatedPromises.length > 0 || (item.relatedFinanceItems?.length ?? 0) > 0 ? (
           <ul className="space-y-2 text-sm">
             {relatedBills.map((bill) => (
               <li key={bill.id}>
@@ -185,9 +185,18 @@ export function GeneralQuestionDetailPage() {
                 </Link>
               </li>
             ))}
+            {item.relatedFinanceItems && item.relatedFinanceItems.length > 0 && (
+              <li>
+                <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
+                  関連する予算・財政情報：{item.relatedFinanceItems.join("、")}
+                </Link>
+              </li>
+            )}
           </ul>
-        </SectionCard>
-      )}
+        ) : (
+          <p className="text-sm text-on-surface-variant">関連情報は登録されていません</p>
+        )}
+      </SectionCard>
 
       <SectionCard title="出典">
         {sourceLinks.length > 0 ? (

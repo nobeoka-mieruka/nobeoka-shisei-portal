@@ -3,6 +3,7 @@ import policyProgressData from "../data/mayorPolicyProgress.json";
 import mayorPromisesData from "../data/mayorPromises.json";
 import billVotesData from "../data/billVotes.json";
 import generalQuestionsData from "../data/generalQuestions.json";
+import { mayorPressConferences } from "../data/mayorPressConferences";
 import type {
   BillVoteItem,
   GeneralQuestionItem,
@@ -86,6 +87,9 @@ export function MayorPromiseDetailPage() {
   const relatedQuestions = (promise.relatedQuestionIds ?? [])
     .map((questionId) => generalQuestions.find((q) => q.id === questionId))
     .filter((q): q is GeneralQuestionItem => !!q);
+  const relatedPressConferences = (promise.relatedPressConferenceDates ?? [])
+    .map((date) => mayorPressConferences.find((c) => c.date === date))
+    .filter((c): c is (typeof mayorPressConferences)[number] => !!c);
   const categoryPromises = promisesData.promises.filter((p) => p.categoryId === promise.categoryId);
   const idx = categoryPromises.findIndex((p) => p.id === promise.id);
   const prevPromise = idx > 0 ? categoryPromises[idx - 1] : undefined;
@@ -215,9 +219,9 @@ export function MayorPromiseDetailPage() {
         </dl>
       </SectionCard>
 
-      {/* 関連議案・関連一般質問（ID参照で確認できたもののみ表示） */}
-      {(relatedBills.length > 0 || relatedQuestions.length > 0) && (
-        <SectionCard title="関連する議案・一般質問">
+      {/* 関連議案・関連一般質問・関連記者会見（ID参照で確認できたもののみ表示） */}
+      <SectionCard title="関連する議案・一般質問・記者会見">
+        {relatedBills.length > 0 || relatedQuestions.length > 0 || relatedPressConferences.length > 0 ? (
           <ul className="space-y-2 text-sm">
             {relatedBills.map((bill) => (
               <li key={bill.id}>
@@ -233,9 +237,18 @@ export function MayorPromiseDetailPage() {
                 </Link>
               </li>
             ))}
+            {relatedPressConferences.map((c) => (
+              <li key={c.date}>
+                <Link to={`/mayor/press-conferences/${c.date}`} className={`text-primary hover:underline ${linkClass}`}>
+                  関連する市長記者会見：{c.title}
+                </Link>
+              </li>
+            ))}
           </ul>
-        </SectionCard>
-      )}
+        ) : (
+          <p className="text-sm text-on-surface-variant">関連情報は登録されていません</p>
+        )}
+      </SectionCard>
 
       {/* 関連する財政データ */}
       <SectionCard title="関連する財政データ">
