@@ -165,6 +165,27 @@ try {
   // データがない場合はスキップ
 }
 
+// --- mayor entertainment expenses ---
+try {
+  const expenses = readJson("src/data/mayorEntertainmentExpenses.json");
+  entries.push({
+    id: "mayor-entertainment-expenses-main",
+    type: "finance",
+    title: "市長交際費",
+    description: `${expenses.fiscalYearLabel}の市長交際費の支出明細、月別・区分別の合計`,
+    url: "/mayor/entertainment-expenses",
+    keywords: [
+      "市長交際費",
+      "交際費",
+      expenses.fiscalYearLabel,
+      ...Array.from(new Set((expenses.expenses ?? []).map((e) => e.category))),
+    ].filter(Boolean),
+    content: (expenses.expenses ?? []).map((e) => e.description).join(" "),
+  });
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- city guide (診断ページの質問・担当課データは src/data/cityGuideData.ts で管理しているため、ここでは固定の案内エントリのみ登録する) ---
 entries.push({
   id: "guide-main",

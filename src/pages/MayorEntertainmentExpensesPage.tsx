@@ -1,15 +1,27 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import expensesData from "../data/mayorEntertainmentExpenses.json";
 import type { MayorEntertainmentExpenseItem, MayorEntertainmentExpensesData } from "../types";
 import { BackLink } from "../components/BackLink";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceLink } from "../components/SourceLink";
+import { SearchBar } from "../components/SearchBar";
+import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 
 const data = expensesData as MayorEntertainmentExpensesData;
+
+type ExpenseSortKey = "dateDesc" | "dateAsc" | "amountDesc" | "amountAsc";
+
+const sortOptions: { value: ExpenseSortKey; label: string }[] = [
+  { value: "dateDesc", label: "支出日：新しい順" },
+  { value: "dateAsc", label: "支出日：古い順" },
+  { value: "amountDesc", label: "金額：高い順" },
+  { value: "amountAsc", label: "金額：低い順" },
+];
 
 function formatYen(value: number): string {
   return `${value.toLocaleString("ja-JP")}円`;
@@ -77,7 +89,59 @@ export function MayorEntertainmentExpensesPage() {
     return [...map.entries()].sort((a, b) => b[1] - a[1]);
   }, []);
 
-  const sortedExpenses = useMemo(() => [...data.expenses].sort((a, b) => (a.date < b.date ? 1 : -1)), []);
+  const [query, setQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [monthFilter, setMonthFilter] = useState("all");
+  const [fiscalYearFilter, setFiscalYearFilter] = useState("all");
+  const [sortKey, setSortKey] = useState<ExpenseSortKey>("dateDesc");
+
+  const categoryOptions = useMemo(
+    () => Array.from(new Set(data.expenses.map((e) => e.category))).map((c) => ({ value: c, label: c })),
+    [],
+  );
+  const monthOptions = useMemo(
+    () =>
+      Array.from(new Set(data.expenses.map((e) => e.date.slice(0, 7))))
+        .sort()
+        .map((ym) => ({ value: ym, label: formatMonthLabel(ym) })),
+    [],
+  );
+  const fiscalYearOptions = useMemo(() => [{ value: data.fiscalYear, label: data.fiscalYearLabel }], []);
+
+  const hasActiveFilter =
+    query !== "" || categoryFilter !== "all" || monthFilter !== "all" || fiscalYearFilter !== "all";
+
+  const clearFilters = () => {
+    setQuery("");
+    setCategoryFilter("all");
+    setMonthFilter("all");
+    setFiscalYearFilter("all");
+  };
+
+  const sortedExpenses = useMemo(() => {
+    const q = query.trim();
+    let list = data.expenses.filter((e) => {
+      const matchesQuery = q === "" || e.description.includes(q) || e.category.includes(q);
+      const matchesCategory = categoryFilter === "all" || e.category === categoryFilter;
+      const matchesMonth = monthFilter === "all" || e.date.slice(0, 7) === monthFilter;
+      const matchesFiscalYear = fiscalYearFilter === "all" || fiscalYearFilter === data.fiscalYear;
+      return matchesQuery && matchesCategory && matchesMonth && matchesFiscalYear;
+    });
+    list = [...list].sort((a, b) => {
+      switch (sortKey) {
+        case "dateAsc":
+          return a.date.localeCompare(b.date);
+        case "amountDesc":
+          return b.amount - a.amount;
+        case "amountAsc":
+          return a.amount - b.amount;
+        case "dateDesc":
+        default:
+          return b.date.localeCompare(a.date);
+      }
+    });
+    return list;
+  }, [query, categoryFilter, monthFilter, fiscalYearFilter, sortKey]);
 
   const monthlySources = useMemo(() => {
     const seen = new Map<string, { sourceTitle: string; sourceUrl: string }>();
@@ -89,6 +153,7 @@ export function MayorEntertainmentExpensesPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長情報", to: "/mayor" }, { label: "市長交際費" }]} />
       <BackLink to="/mayor" label="市長情報に戻る" />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
@@ -168,6 +233,46 @@ export function MayorEntertainmentExpensesPage() {
             </li>
           ))}
         </ul>
+      </SectionCard>
+
+      <SectionCard title="支出明細を検索">
+        <div className="space-y-3">
+          <SearchBar value={query} onChange={setQuery} label="支出先・内容をキーワードで検索" placeholder="団体名、香典、会費など" />
+          <div className="flex flex-wrap items-center gap-2">
+            <FilterSelect label="年度" value={fiscalYearFilter} onChange={setFiscalYearFilter} options={fiscalYearOptions} />
+            <FilterSelect label="月" value={monthFilter} onChange={setMonthFilter} options={monthOptions} />
+            <FilterSelect label="区分" value={categoryFilter} onChange={setCategoryFilter} options={categoryOptions} />
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+              <span className="sr-only">並び替え</span>
+              <select
+                value={sortKey}
+                onChange={(e) => setSortKey(e.target.value as ExpenseSortKey)}
+                aria-label="並び替え"
+                className="bg-transparent text-on-surface focus:outline-none"
+              >
+                {sortOptions.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {hasActiveFilter && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                条件をリセット
+              </button>
+            )}
+          </div>
+          <p className="text-sm text-on-surface-variant">
+            {sortedExpenses.length > 0
+              ? `${sortedExpenses.length}件表示中（全${data.expenses.length}件中）`
+              : "条件に一致する支出はありませんでした。"}
+          </p>
+        </div>
       </SectionCard>
 
       <SectionCard title="支出明細">
