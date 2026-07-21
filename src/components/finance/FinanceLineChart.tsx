@@ -7,6 +7,8 @@ interface FinanceLineChartPoint {
 interface FinanceLineChartProps {
   points: FinanceLineChartPoint[];
   formatValue: (value: number) => string;
+  /** スクリーンリーダー向けの説明。省略時は汎用の「推移グラフ」を使う（直後の表で詳細を確認できる）。 */
+  ariaLabel?: string;
 }
 
 const WIDTH = 600;
@@ -14,7 +16,7 @@ const HEIGHT = 220;
 const PAD_X = 24;
 const PAD_Y = 20;
 
-export function FinanceLineChart({ points, formatValue }: FinanceLineChartProps) {
+export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グラフ" }: FinanceLineChartProps) {
   const values = points.map((p) => p.value);
   const max = Math.max(...values);
   const min = Math.min(...values);
@@ -30,7 +32,7 @@ export function FinanceLineChart({ points, formatValue }: FinanceLineChartProps)
 
   return (
     <div>
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="h-auto w-full" role="img" aria-label="推移グラフ">
+      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="h-auto w-full" role="img" aria-label={ariaLabel}>
         <line
           x1={PAD_X}
           y1={HEIGHT - PAD_Y}

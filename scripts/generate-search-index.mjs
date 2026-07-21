@@ -133,20 +133,33 @@ try {
 // --- finance ---
 try {
   const finance = readJson("src/data/financeDashboard.json");
+  const fi = finance.financialIndicators;
   entries.push({
     id: "finance-main",
     type: "finance",
     title: "延岡市の財政",
-    description: `${finance.fiscalYearLabel}の一般会計、歳入・歳出構成、基金残高、人口推移`,
+    description: `${finance.fiscalYearLabel}の一般会計、歳入・歳出構成、基金残高、人口推移、財政指標`,
     url: "/finance",
     keywords: [
       "財政",
       "予算",
       "決算",
+      "人口推移",
+      "基金残高",
+      "市債",
+      "市民1人当たり",
+      "財政力指数",
+      "経常収支比率",
+      "実質公債費比率",
+      "将来負担比率",
+      "実質収支",
+      "健全化判断比率",
       ...(finance.revenue ?? []).map((r) => r.label),
       ...(finance.expenditureByPurpose ?? []).map((r) => r.label),
+      ...(finance.expenditureByNature ?? []).map((r) => r.label),
       ...(finance.supplementaryBudgetProjects ?? []).map((p) => p.title),
-    ],
+      ...(fi ? [fi.fiscalYearLabel, ...(fi.notApplicableIndicators ?? [])] : []),
+    ].filter(Boolean),
   });
 } catch {
   // データがない場合はスキップ

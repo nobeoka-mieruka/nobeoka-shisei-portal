@@ -90,7 +90,17 @@
     "decreaseRatePercent": 8.3,
     "note": "各年1月1日現在の現住人口を比較しています。現住人口は住民基本台帳人口と異なる場合があります。"
   },
-  "debtNote": "ここで表示する市債は、令和8年度予算に計上された市債額です。市債残高ではありません。",
+  "debtNote": "ここで表示する市債は、令和8年度予算に計上された市債額です。市債残高ではありません。市債残高の複数年度推移は、決算書・財政状況資料集での確認を継続しています（確認でき次第追加します）。",
+  "financialIndicators": {
+    "fiscalYearLabel": "令和6年度決算",
+    "realDebtServiceRatioPercent": 8.6,
+    "futureBurdenRatioPercent": 15.9,
+    "fiscalStrengthIndex": null,
+    "currentBalanceRatioPercent": null,
+    "realBalanceThousandYen": null,
+    "notApplicableIndicators": ["実質赤字比率", "連結実質赤字比率", "資金不足比率"],
+    "note": "実質赤字比率・連結実質赤字比率・資金不足比率は、延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされています。財政力指数・経常収支比率・実質収支は、今回の確認では公式資料から数値を特定できなかったため「確認中」としています。"
+  },
   "sources": [
     {
       "section": "generalAccount",
@@ -172,6 +182,14 @@
       "confirmedDate": "2026-07-14",
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
       "page": 1
+    },
+    {
+      "section": "financialIndicators",
+      "title": "令和6年度健全化判断比率等の公表",
+      "organization": "延岡市",
+      "referenceDate": "2025-09-19",
+      "confirmedDate": "2026-07-21",
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html"
     }
   ],
   "notes": "表示額は延岡市が公表した予算資料を基に整理しています。億円表示は千円単位の数値を換算しているため、端数処理により資料上の数値と一致しない場合があります。市債額は当該年度の予算計上額であり、市債残高ではありません。"

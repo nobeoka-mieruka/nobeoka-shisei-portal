@@ -398,6 +398,131 @@ function validateRoleRankingFile(relPath) {
 validateRoleRankingFile("src/data/nationalCompensationRanking.json");
 validateRoleRankingFile("src/data/similarMunicipalityComparison.json");
 
+// --- financeDashboard.json ---
+try {
+  const finance = readJson("src/data/financeDashboard.json");
+  const tag = "financeDashboard.json";
+
+  if (finance.fiscalYear && !/^\d{4}$/.test(finance.fiscalYear)) err(tag, `fiscalYearの形式が不正です: ${finance.fiscalYear}`);
+  if (finance.referenceDate && !DATE_RE.test(finance.referenceDate)) err(tag, `referenceDateの形式が不正です: ${finance.referenceDate}`);
+  if (finance.lastVerified && !DATE_RE.test(finance.lastVerified)) err(tag, `lastVerifiedの形式が不正です: ${finance.lastVerified}`);
+
+  function checkAmountItems(items, label) {
+    const seenLabels = new Set();
+    for (const item of items ?? []) {
+      const itemTag = `${tag} (${label}:${item.label ?? "項目不明"})`;
+      if (isBlank(item.label)) err(itemTag, "labelが空です");
+      else if (seenLabels.has(item.label)) err(itemTag, `${label}内で項目名が重複しています: ${item.label}`);
+      else seenLabels.add(item.label);
+      if (typeof item.amountThousandYen !== "number" || !Number.isFinite(item.amountThousandYen)) {
+        err(itemTag, `amountThousandYenが数値ではありません: ${item.amountThousandYen}`);
+      } else if (item.amountThousandYen < 0) {
+        err(itemTag, `amountThousandYenが負の値です: ${item.amountThousandYen}`);
+      }
+      if (item.percentage !== undefined && (item.percentage < 0 || item.percentage > 100)) {
+        err(itemTag, `percentageが0〜100の範囲外です: ${item.percentage}`);
+      }
+    }
+  }
+  checkAmountItems(finance.revenue, "revenue");
+  checkAmountItems(finance.expenditureByPurpose, "expenditureByPurpose");
+  checkAmountItems(finance.expenditureByNature, "expenditureByNature");
+
+  for (const p of finance.supplementaryBudgetProjects ?? []) {
+    if (isBlank(p.title)) err(tag, "supplementaryBudgetProjects[].titleが空です");
+    if (typeof p.amountThousandYen !== "number" || p.amountThousandYen < 0) {
+      err(tag, `supplementaryBudgetProjects[].amountThousandYenが不正です: ${p.amountThousandYen}`);
+    }
+  }
+
+  // 年度重複・年度欠落（連続する年度が飛んでいないか）・負の値のチェック
+  function checkFiscalYearSeries(entries, label, yearField, amountField) {
+    const seenYears = new Set();
+    for (const e of entries ?? []) {
+      const y = e[yearField];
+      const seriesTag = `${tag} (${label}:${y ?? "年度不明"})`;
+      if (isBlank(y)) err(seriesTag, "年度ラベルが空です");
+      else if (seenYears.has(y)) err(seriesTag, `${label}内で年度が重複しています: ${y}`);
+      else seenYears.add(y);
+      const amount = e[amountField];
+      if (typeof amount !== "number" || !Number.isFinite(amount)) {
+        err(seriesTag, `${amountField}が数値ではありません: ${amount}`);
+      } else if (amount < 0) {
+        err(seriesTag, `${amountField}が負の値です: ${amount}`);
+      }
+    }
+  }
+  checkFiscalYearSeries(finance.fundBalance?.fiscalAdjustmentFunds, "fundBalance.fiscalAdjustmentFunds", "fiscalYear", "amountThousands");
+  checkFiscalYearSeries(finance.debtBalanceTrend, "debtBalanceTrend", "fiscalYear", "amountThousandYen");
+
+  if (finance.fundBalance?.totalFunds) {
+    const t = finance.fundBalance.totalFunds;
+    const sum = (t.fiscalAdjustmentFunds ?? 0) + (t.otherSpecificPurposeFunds ?? 0);
+    if (typeof t.total === "number" && sum !== t.total) {
+      err(tag, `fundBalance.totalFunds: 内訳の合計(${sum})とtotal(${t.total})が一致しません`);
+    }
+  }
+
+  // 人口推移：年度重複・0以下の人口（0除算防止）・世界的にありえない値の防止
+  const seenPopYears = new Set();
+  for (const p of finance.populationTrend?.trend ?? []) {
+    const popTag = `${tag} (populationTrend:${p.year ?? "年不明"})`;
+    if (seenPopYears.has(p.year)) err(popTag, `populationTrend内で年が重複しています: ${p.year}`);
+    else seenPopYears.add(p.year);
+    if (p.referenceDate && !DATE_RE.test(p.referenceDate)) err(popTag, `referenceDateの形式が不正です: ${p.referenceDate}`);
+    if (typeof p.population !== "number" || p.population <= 0) {
+      err(popTag, `populationが不正です（0より大きい数値が必要）: ${p.population}`);
+    }
+  }
+  if (finance.populationTrend?.latest) {
+    const latest = finance.populationTrend.latest;
+    if (typeof latest.population !== "number" || latest.population <= 0) {
+      err(tag, `populationTrend.latest.populationが不正です（人口0除算の原因になります）: ${latest.population}`);
+    }
+    if (latest.referenceDate && !DATE_RE.test(latest.referenceDate)) {
+      err(tag, `populationTrend.latest.referenceDateの形式が不正です: ${latest.referenceDate}`);
+    }
+  }
+
+  // 財政指標：%範囲チェック（0〜100を超えることがある比率は除外し、常識的な範囲のみチェック）
+  const fi = finance.financialIndicators;
+  if (fi) {
+    if (isBlank(fi.fiscalYearLabel)) err(`${tag} (financialIndicators)`, "fiscalYearLabelが空です");
+    for (const [key, label] of [
+      ["realDebtServiceRatioPercent", "実質公債費比率"],
+      ["futureBurdenRatioPercent", "将来負担比率"],
+      ["currentBalanceRatioPercent", "経常収支比率"],
+    ]) {
+      const v = fi[key];
+      if (v !== null && (typeof v !== "number" || v < 0)) {
+        err(`${tag} (financialIndicators)`, `${label}(${key})が不正です（nullまたは0以上の数値が必要）: ${v}`);
+      }
+    }
+    if (fi.fiscalStrengthIndex !== null && (typeof fi.fiscalStrengthIndex !== "number" || fi.fiscalStrengthIndex < 0)) {
+      err(`${tag} (financialIndicators)`, `fiscalStrengthIndexが不正です: ${fi.fiscalStrengthIndex}`);
+    }
+  }
+
+  // 出典：sectionの重複、URL形式、日付形式
+  const seenSections = new Set();
+  for (const s of finance.sources ?? []) {
+    const sourceTag = `${tag} (sources:${s.section ?? "section不明"})`;
+    if (isBlank(s.section)) err(sourceTag, "sectionが空です");
+    else if (seenSections.has(s.section)) warn(sourceTag, `同じsectionの出典が複数登録されています: ${s.section}`);
+    seenSections.add(s.section);
+    if (isBlank(s.title)) err(sourceTag, "titleが空です");
+    if (isBlank(s.organization)) err(sourceTag, "organizationが空です");
+    // 資料URLはドキュメントルート相対パス（/documents/...）または絶対URLのいずれかを許可する。
+    if (isBlank(s.url) || !(s.url.startsWith("/") || URL_RE.test(s.url))) {
+      err(sourceTag, `urlの形式が不正です: ${s.url}`);
+    }
+    if (s.referenceDate && !DATE_RE.test(s.referenceDate)) err(sourceTag, `referenceDateの形式が不正です: ${s.referenceDate}`);
+    if (s.confirmedDate && !DATE_RE.test(s.confirmedDate)) err(sourceTag, `confirmedDateの形式が不正です: ${s.confirmedDate}`);
+  }
+} catch {
+  warn("financeDashboard.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
 // --- searchIndex.json（サイト内横断検索インデックス） ---
 const VALID_SEARCH_TYPES = new Set([
   "member",

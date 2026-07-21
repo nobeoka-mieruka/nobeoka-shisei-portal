@@ -614,6 +614,28 @@ export interface PopulationTrendData {
   note: string;
 }
 
+/**
+ * 健全化判断比率等の財政指標。総務省の地方公共団体財政健全化法に基づき延岡市が公表した数値のみを掲載する。
+ * 今回確認できなかった指標はnullとし、「確認中」と表示する（0や架空値で埋めない）。
+ */
+export interface FinancialIndicatorsData {
+  /** 例: "令和6年度決算" */
+  fiscalYearLabel: string;
+  /** 実質公債費比率（%）。 */
+  realDebtServiceRatioPercent: number | null;
+  /** 将来負担比率（%）。 */
+  futureBurdenRatioPercent: number | null;
+  /** 財政力指数。今回未確認のためnull。 */
+  fiscalStrengthIndex: number | null;
+  /** 経常収支比率（%）。今回未確認のためnull。 */
+  currentBalanceRatioPercent: number | null;
+  /** 実質収支（千円）。今回未確認のためnull。 */
+  realBalanceThousandYen: number | null;
+  /** 「対象なし」（黒字等のため算定対象外）として公表された指標名の一覧。未確認（null）とは区別する。 */
+  notApplicableIndicators: string[];
+  note: string;
+}
+
 /** 財政ダッシュボードの1セクション分の出典情報。 */
 export interface FinanceSourceMeta {
   /** どのセクションに対応するか（例: "revenue"）。 */
@@ -842,6 +864,9 @@ export interface FinanceDashboardData {
   populationTrend: PopulationTrendData;
   /** 市債（歳入項目）についての注記。市債残高ではないことを明記する。 */
   debtNote: string;
+  /** 市債の複数年度残高推移。公式資料で確認できるまでは未設定のままにする（推測しない）。 */
+  debtBalanceTrend?: { fiscalYear: string; amountThousandYen: number; isEstimate: boolean }[];
+  financialIndicators?: FinancialIndicatorsData;
   sources: FinanceSourceMeta[];
   notes: string;
 }
