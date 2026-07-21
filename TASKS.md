@@ -729,7 +729,7 @@
 
 完了記録：
 - 完了日：2026-07-21
-- コミットID：（後続コミットで記録）
+- コミットID：ef161c8
 - 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
