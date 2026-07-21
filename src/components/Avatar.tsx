@@ -5,6 +5,9 @@ const sizeClasses = {
   xl: "h-32 w-32 text-3xl",
 } as const;
 
+/** sizeClassesの高さ・幅と対応するpx値。imgのwidth/height属性でCLSを防ぐために使う。 */
+const sizePx = { sm: 40, md: 64, lg: 96, xl: 128 } as const;
+
 interface AvatarProps {
   name: string;
   photoUrl?: string;
@@ -30,6 +33,8 @@ export function Avatar({
       <img
         src={photoUrl}
         alt={name}
+        width={sizePx[size]}
+        height={sizePx[size]}
         loading={loading}
         decoding="async"
         className={`${sizeClasses[size]} shrink-0 rounded-full object-cover ${className}`}

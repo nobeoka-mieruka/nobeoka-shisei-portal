@@ -704,27 +704,33 @@
 
 ### TASK-025 議員写真の画像最適化
 
-状態：READY
+状態：DONE
 優先度：C
-対象：`public/photos/*.jpg`
+対象：`public/photos/*.jpg`→`*.webp`、`src/data/members.json`、`src/data/mayor.json`、`src/components/Avatar.tsx`
 依存関係：なし
-目的：未最適化の議員写真（jpg）を圧縮・webp化する
+目的：未最適化の議員写真（jpg）を圧縮・webp化する（ユーザー依頼では「TASK-020 画像最適化」として指示されたが、リポジトリの実際のTASK-020は「YouTube連携」のため、内容が一致するTASK-025として実施）
 
 作業内容：
-- 既存画像の圧縮率・サイズを確認する
-- 画質を保ちながら最適化する
+- `sharp`（`npm install --no-save`で一時導入、`package.json`には追加していない）で、議員26名＋市長1名、計27枚の写真（300x300 JPEG）をWebP（quality 82、同一寸法）へ変換
+- `members.json`・`mayor.json`の`photoUrl`を`.jpg`→`.webp`へ更新し、変換元の`.jpg`は削除（`validate-data.mjs`が`photoUrl`の実ファイル存在を検証するため、変換とJSON更新を同一処理で実施し不整合を防止）
+- `Avatar.tsx`の`<img>`へ`width`/`height`属性（表示サイズに対応するpx値）を追加し、CLS対策を強化（`loading="lazy"`/`decoding="async"`は既に実装済みだったため変更なし）
+- OGP画像（`public/og-image.png`、`public/og/members/*.jpg`）はWebP化を見送り。多くのSNS・メッセージアプリ（LINE等）でOGP画像のWebP対応が不安定なため、社会的シェア時の表示崩れリスクを避けるためJPEG/PNGのまま維持
+
+計測結果：
+- 議員・市長写真の合計サイズ：1,067.0KB → 244.5KB（77.1%削減、約822KB削減）
+- 画質はPlaywrightで実機表示を確認し、劣化なし（quality 82、300x300のまま）
 
 受入条件：
-- 画像の見た目が損なわれない
-- ファイルサイズが削減される
+- 画像の見た目が損なわれない（達成。Playwrightでのスクリーンショット確認済み）
+- ファイルサイズが削減される（達成。77.1%削減）
 
 公式資料：
 - 該当なし
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-21
+- コミットID：（後続コミットで記録）
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
 
