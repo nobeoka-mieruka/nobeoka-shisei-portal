@@ -297,3 +297,48 @@ export function QuestionMarkCircleIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** 進捗状況バッジ用：達成・実施済みを表す。 */
+export function CheckCircleIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+      <path d="M8 12.3l2.6 2.6L16 9.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** 進捗状況バッジ用：進行中を表す。 */
+export function ClockIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+      <path d="M12 7v5.3l3.5 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** 進捗状況バッジ用：未着手を表す。 */
+export function MinusCircleIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+      <path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** 進捗状況バッジ用：方針変更を表す。 */
+export function ArrowPathIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path
+        d="M5 11a7 7 0 0112-4.5M19 6v4h-4M19 13a7 7 0 01-12 4.5M5 18v-4h4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

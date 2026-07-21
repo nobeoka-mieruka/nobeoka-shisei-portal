@@ -168,7 +168,18 @@ for (const b of billVotes) {
 
 // --- mayorPromises.json ---
 let mayorPromiseIds = new Set();
-const VALID_PROMISE_STATUS_LABELS = new Set(["進行中", "検討中", "実施済み", "確認中"]);
+const VALID_PROMISE_STATUS_LABELS = new Set([
+  "達成",
+  "進行中",
+  "一部実施",
+  "未着手",
+  "方針変更",
+  "確認中",
+  "検討中",
+  "実施済み",
+]);
+// 「達成」相当の確定的な状況。確定ステータスなのに根拠資料がない場合はエラーとする。
+const CONFIRMED_PROMISE_STATUSES = new Set(["達成", "実施済み"]);
 
 try {
   const mayorPromises = readJson("src/data/mayorPromises.json");
@@ -192,6 +203,9 @@ try {
     else if (!categoryIds.has(p.categoryId)) err(tag, `存在しないcategoryIdを参照しています: ${p.categoryId}`);
 
     if (!VALID_PROMISE_STATUS_LABELS.has(p.statusLabel)) err(tag, `未定義のstatusLabelです: ${p.statusLabel}`);
+    if (CONFIRMED_PROMISE_STATUSES.has(p.statusLabel) && (p.evidenceItems ?? []).length === 0) {
+      err(tag, `statusLabel="${p.statusLabel}"（確定的な状況）なのに根拠資料（evidenceItems）が1件もありません`);
+    }
     if (isBlank(p.status)) {
       err(tag, "statusが空です");
     } else if (p.statusLabel) {
@@ -228,11 +242,21 @@ try {
       if (!URL_RE.test(link.url ?? "")) err(tag, `relatedLinksのURL形式が不正です: ${link.url}`);
     }
 
+    for (const bId of p.relatedBillVoteIds ?? []) {
+      if (!billIds.has(bId)) warn(tag, `存在しない議案IDを参照しています: ${bId}`);
+    }
+    for (const qId of p.relatedQuestionIds ?? []) {
+      if (!questionIds.has(qId)) warn(tag, `存在しない一般質問IDを参照しています: ${qId}`);
+    }
+
     if (p.progressHistory && p.progressHistory.length > 0) {
       for (const h of p.progressHistory) {
         if (!DATE_RE.test(h.date ?? "")) err(tag, `progressHistory[].dateの形式が不正です: ${h.date}`);
         if (!VALID_PROMISE_STATUS_LABELS.has(h.statusLabel))
           err(tag, `progressHistory[]に未定義のstatusLabelがあります: ${h.statusLabel}`);
+        // 進捗状況の変更には出典URLと確認日（date）を必須とする。
+        if (isBlank(h.sourceUrl)) err(tag, `progressHistory[]（${h.date ?? "日付不明"}）にsourceUrl（出典URL）がありません`);
+        else if (!URL_RE.test(h.sourceUrl)) err(tag, `progressHistory[].sourceUrlの形式が不正です: ${h.sourceUrl}`);
       }
       const dates = p.progressHistory.map((h) => h.date);
       const sortedDates = [...dates].sort();
@@ -249,6 +273,8 @@ try {
 
   const docUrls = new Set();
   for (const d of mayorPromises.documents ?? []) {
+    const docTag = `mayorPromises.json (documents:${d.key ?? "key不明"})`;
+    if (d.publishedDate && !DATE_RE.test(d.publishedDate)) err(docTag, `publishedDateの形式が不正です: ${d.publishedDate}`);
     if (isBlank(d.url)) continue;
     if (docUrls.has(d.url)) warn("mayorPromises.json (documents)", `根拠資料のURLが重複しています: ${d.url}`);
     docUrls.add(d.url);

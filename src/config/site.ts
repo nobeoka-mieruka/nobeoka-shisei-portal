@@ -17,6 +17,20 @@ export function formatJapaneseDate(iso: string): string {
   return `${year}年${month}月${day}日`;
 }
 
+/** 令和元年（2019年）を基準とした年度換算の起点。 */
+const REIWA_START_YEAR = 2019;
+
+/**
+ * "2026-07-11" のようなISO形式の日付を、日本の会計年度（4月始まり）に基づく
+ * "令和8年度" のような表記に変換する。絞り込み条件の年度表示に使う。
+ */
+export function toFiscalYearLabel(iso: string): string {
+  const [year, month] = iso.split("-").map(Number);
+  const fiscalYear = month >= 4 ? year : year - 1;
+  const reiwaYear = fiscalYear - REIWA_START_YEAR + 1;
+  return `令和${reiwaYear}年度`;
+}
+
 /**
  * 情報提供・訂正依頼フォームのURL（Googleフォームなど）。
  * まだ用意できていない間は空文字のままにしておくと、ページ側で「準備中」と表示される。

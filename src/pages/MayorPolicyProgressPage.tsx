@@ -1,40 +1,153 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import policyProgressData from "../data/mayorPolicyProgress.json";
 import mayorPromisesData from "../data/mayorPromises.json";
-import type { MayorPolicyProgressData, MayorPromiseStatusLabel, MayorPromisesData } from "../types";
+import type { MayorPolicyProgressData, MayorPromiseItem, MayorPromiseStatusLabel, MayorPromisesData } from "../types";
 import { BackLink } from "../components/BackLink";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
+import { SearchBar } from "../components/SearchBar";
+import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { PromiseCard } from "../components/mayor/PromiseCard";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { formatJapaneseDate } from "../config/site";
+import { formatJapaneseDate, toFiscalYearLabel } from "../config/site";
 
 const data = policyProgressData as MayorPolicyProgressData;
 const promisesData = mayorPromisesData as MayorPromisesData;
+const promises = promisesData.promises;
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
-const STATUS_ORDER: MayorPromiseStatusLabel[] = ["進行中", "検討中", "実施済み", "確認中"];
+/** 「進捗が動いている」区分を優先し、確認中・未着手を後ろに置く表示順。 */
+const STATUS_DISPLAY_ORDER: MayorPromiseStatusLabel[] = [
+  "達成",
+  "実施済み",
+  "進行中",
+  "一部実施",
+  "方針変更",
+  "検討中",
+  "未着手",
+  "確認中",
+];
+
+type PresenceFilterValue = "yes" | "no";
+
+const presenceOptions: { value: PresenceFilterValue; label: string }[] = [
+  { value: "yes", label: "あり" },
+  { value: "no", label: "なし" },
+];
+
+const documentByKey = new Map(promisesData.documents.map((d) => [d.key, d]));
+
+function evidenceLabelsFor(promise: MayorPromiseItem): string[] {
+  return promise.evidenceItems
+    .map((ev) => documentByKey.get(ev.documentKey)?.label)
+    .filter((l): l is string => !!l);
+}
 
 export function MayorPolicyProgressPage() {
   usePageTitle({
     title: "市長公約の進捗状況",
-    description: "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料を掲載しています。",
+    description: "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料をキーワード・政策分野・進捗状況などで検索できます。",
   });
 
+  const [query, setQuery] = useState("");
+  const [status, setStatus] = useState("all");
+  const [categoryId, setCategoryId] = useState("all");
+  const [evidence, setEvidence] = useState("all");
+  const [hasBill, setHasBill] = useState("all");
+  const [hasQuestion, setHasQuestion] = useState("all");
+  const [fiscalYear, setFiscalYear] = useState("all");
+
+  const statusOptions = useMemo(() => {
+    const present = new Set(promises.map((p) => p.statusLabel));
+    return STATUS_DISPLAY_ORDER.filter((s) => present.has(s)).map((s) => ({ value: s, label: s }));
+  }, []);
+
+  const categoryOptions = useMemo(
+    () => promisesData.categories.map((c) => ({ value: c.id, label: c.title })),
+    [],
+  );
+
+  const fiscalYearOptions = useMemo(
+    () =>
+      Array.from(new Set(promises.map((p) => toFiscalYearLabel(p.lastVerified))))
+        .sort((a, b) => b.localeCompare(a, "ja"))
+        .map((y) => ({ value: y, label: y })),
+    [],
+  );
+
+  const hasActiveFilter =
+    query !== "" ||
+    status !== "all" ||
+    categoryId !== "all" ||
+    evidence !== "all" ||
+    hasBill !== "all" ||
+    hasQuestion !== "all" ||
+    fiscalYear !== "all";
+
+  const clearFilters = () => {
+    setQuery("");
+    setStatus("all");
+    setCategoryId("all");
+    setEvidence("all");
+    setHasBill("all");
+    setHasQuestion("all");
+    setFiscalYear("all");
+  };
+
+  const matchesPromise = useMemo(() => {
+    const q = query.trim();
+    return (p: MayorPromiseItem): boolean => {
+      const matchesQuery =
+        q === "" ||
+        p.promiseText.includes(q) ||
+        (p.citizenSummary ?? "").includes(q) ||
+        p.categoryTitle.includes(q) ||
+        p.progressSummary.some((s) => s.includes(q)) ||
+        (p.notes ?? "").includes(q) ||
+        evidenceLabelsFor(p).some((l) => l.includes(q));
+      const matchesStatus = status === "all" || p.statusLabel === status;
+      const matchesCategory = categoryId === "all" || p.categoryId === categoryId;
+      const matchesEvidence =
+        evidence === "all" || (evidence === "yes" ? p.evidenceItems.length > 0 : p.evidenceItems.length === 0);
+      const matchesBill =
+        hasBill === "all" ||
+        (hasBill === "yes" ? (p.relatedBillVoteIds?.length ?? 0) > 0 : (p.relatedBillVoteIds?.length ?? 0) === 0);
+      const matchesQuestion =
+        hasQuestion === "all" ||
+        (hasQuestion === "yes"
+          ? (p.relatedQuestionIds?.length ?? 0) > 0
+          : (p.relatedQuestionIds?.length ?? 0) === 0);
+      const matchesFiscalYear = fiscalYear === "all" || toFiscalYearLabel(p.lastVerified) === fiscalYear;
+      return (
+        matchesQuery &&
+        matchesStatus &&
+        matchesCategory &&
+        matchesEvidence &&
+        matchesBill &&
+        matchesQuestion &&
+        matchesFiscalYear
+      );
+    };
+  }, [query, status, categoryId, evidence, hasBill, hasQuestion, fiscalYear]);
+
+  const filteredPromises = useMemo(() => promises.filter(matchesPromise), [matchesPromise]);
+
   const statusCounts = useMemo(() => {
-    const counts: Record<MayorPromiseStatusLabel, number> = { 進行中: 0, 検討中: 0, 実施済み: 0, 確認中: 0 };
-    for (const p of promisesData.promises) {
-      counts[p.statusLabel] += 1;
+    const counts = new Map<MayorPromiseStatusLabel, number>();
+    for (const p of promises) {
+      counts.set(p.statusLabel, (counts.get(p.statusLabel) ?? 0) + 1);
     }
     return counts;
   }, []);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長公約の進捗状況" }]} />
       <BackLink to="/mayor" label="市長情報に戻る" />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
@@ -44,17 +157,58 @@ export function MayorPolicyProgressPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
-        <StatCard label="全公約" value={promisesData.promises.length} unit="件" />
-        {STATUS_ORDER.map((label) => (
-          <StatCard key={label} label={label} value={statusCounts[label]} unit="件" />
-        ))}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatCard label="全公約数" value={promises.length} unit="件" />
+        {[...statusCounts.entries()]
+          .sort((a, b) => STATUS_DISPLAY_ORDER.indexOf(a[0]) - STATUS_DISPLAY_ORDER.indexOf(b[0]))
+          .map(([label, count]) => (
+            <StatCard key={label} label={label} value={count} unit="件" />
+          ))}
+      </div>
+
+      <div className="space-y-3 rounded-xl bg-surface-container-low p-4 sm:p-5">
+        <SearchBar
+          value={query}
+          onChange={setQuery}
+          label="公約をキーワードで検索"
+          placeholder="子育て、医療、交通など"
+        />
+        <div className="flex flex-wrap items-center gap-2">
+          <FilterSelect label="進捗状況" value={status} onChange={setStatus} options={statusOptions} />
+          <FilterSelect label="政策分野" value={categoryId} onChange={setCategoryId} options={categoryOptions} />
+          <FilterSelect label="根拠資料の有無" value={evidence} onChange={setEvidence} options={presenceOptions} />
+          <FilterSelect label="関連議案の有無" value={hasBill} onChange={setHasBill} options={presenceOptions} />
+          <FilterSelect
+            label="関連一般質問の有無"
+            value={hasQuestion}
+            onChange={setHasQuestion}
+            options={presenceOptions}
+          />
+          <FilterSelect label="確認年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="text-sm text-on-surface-variant">
+            {filteredPromises.length > 0
+              ? `${filteredPromises.length}件の公約が見つかりました`
+              : "条件に一致する公約は見つかりませんでした。"}
+          </p>
+          {hasActiveFilter && (
+            <button
+              type="button"
+              onClick={clearFilters}
+              className={`shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+            >
+              条件をリセット
+            </button>
+          )}
+        </div>
       </div>
 
       <ul className="space-y-4">
         {data.policies.map((policy) => {
-          const items = promisesData.promises.filter((p) => p.categoryTitle === policy.title);
+          const items = promises.filter((p) => p.categoryTitle === policy.title && matchesPromise(p));
           const anchor = promisesData.categories.find((c) => c.id === policy.id)?.anchor;
+          if (hasActiveFilter && items.length === 0) return null;
           return (
             <li
               key={policy.id}
@@ -85,12 +239,18 @@ export function MayorPolicyProgressPage() {
                 ))}
               </div>
 
-              {items.length > 0 && (
+              {items.length > 0 ? (
                 <ul className="mt-4 space-y-3 border-t border-outline-variant pt-4">
                   {items.map((p) => (
                     <PromiseCard key={p.id} promise={p} documents={promisesData.documents} />
                   ))}
                 </ul>
+              ) : (
+                hasActiveFilter && (
+                  <p className="mt-4 border-t border-outline-variant pt-4 text-sm text-on-surface-variant">
+                    条件に一致する公約はありません。
+                  </p>
+                )
               )}
             </li>
           );

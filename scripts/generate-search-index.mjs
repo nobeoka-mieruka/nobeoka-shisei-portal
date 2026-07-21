@@ -50,16 +50,20 @@ entries.push({
 try {
   const promisesData = readJson("src/data/mayorPromises.json");
   const categoryAnchor = new Map((promisesData.categories ?? []).map((c) => [c.id, c.anchor]));
+  const documentByKey = new Map((promisesData.documents ?? []).map((d) => [d.key, d]));
   for (const p of promisesData.promises ?? []) {
     const anchor = categoryAnchor.get(p.categoryId);
+    const evidenceLabels = (p.evidenceItems ?? [])
+      .map((ev) => documentByKey.get(ev.documentKey)?.label)
+      .filter(Boolean);
     entries.push({
       id: `promise-${p.id}`,
       type: "promise",
       title: truncate(p.promiseText, 60),
       description: `${p.categoryTitle}／${p.statusLabel}`,
       url: p.id ? `/mayor/policy-progress/${p.id}` : anchor ? `/mayor/policy-progress#${anchor}` : "/mayor/policy-progress",
-      keywords: [p.categoryTitle, p.statusLabel],
-      content: [...(p.progressSummary ?? []), p.notes].filter(Boolean).join(" "),
+      keywords: [p.categoryTitle, p.statusLabel, ...evidenceLabels],
+      content: [p.citizenSummary, ...(p.progressSummary ?? []), p.notes].filter(Boolean).join(" "),
       date: p.lastVerified,
       sourceId: p.id,
     });

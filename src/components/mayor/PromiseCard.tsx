@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { MayorPromiseDocument, MayorPromiseItem } from "../../types";
 import { GlobeIcon } from "../icons";
 import { formatJapaneseDate } from "../../config/site";
-import { mayorPromiseStatusClass } from "../../lib/mayorPromiseStatus";
+import { MayorPromiseStatusBadge } from "./MayorPromiseStatusBadge";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -22,11 +22,12 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
   return (
     <li className="rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <span
-          className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[promise.statusLabel]}`}
-        >
-          {promise.statusLabel}
-        </span>
+        <div className="flex flex-wrap items-center gap-1.5">
+          <MayorPromiseStatusBadge status={promise.statusLabel} />
+          <span className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-xs text-on-surface-variant">
+            {promise.categoryTitle}
+          </span>
+        </div>
         <Link
           to={`/mayor/policy-progress/${promise.id}`}
           className={`shrink-0 rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
@@ -36,6 +37,9 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
       </div>
 
       <p className="mt-2 text-sm font-medium leading-relaxed text-on-surface">{promise.promiseText}</p>
+      {promise.citizenSummary && (
+        <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{promise.citizenSummary}</p>
+      )}
 
       {promise.progressSummary.length > 0 && (
         <div className="mt-3">
@@ -59,9 +63,9 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
         </div>
       </div>
 
-      {evidenceDocs.length > 0 && (
+      {evidenceDocs.length > 0 ? (
         <div className="mt-3">
-          <p className="text-xs font-medium text-on-surface-variant">根拠資料</p>
+          <p className="text-xs font-medium text-on-surface-variant">根拠資料あり</p>
           <ul className="mt-1 space-y-1.5">
             {evidenceDocs.map((doc) => (
               <li key={doc.key}>
@@ -85,6 +89,8 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
             ))}
           </ul>
         </div>
+      ) : (
+        <p className="mt-3 text-xs text-on-surface-variant">根拠資料を確認中</p>
       )}
 
       <p className="mt-3 text-xs text-on-surface-variant">最終確認日：{formatJapaneseDate(promise.lastVerified)}</p>

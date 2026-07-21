@@ -16,7 +16,8 @@ import { EmptyState } from "../components/EmptyState";
 import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
-import { aggregateCategoryStatus, mayorPromiseStatusClass } from "../lib/mayorPromiseStatus";
+import { aggregateCategoryStatus } from "../lib/mayorPromiseStatus";
+import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { formatJapaneseDate } from "../config/site";
 
 const mayor = mayorData as Mayor;
@@ -140,13 +141,7 @@ export function MayorPage() {
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="font-medium text-on-surface">{p.title}</p>
-                    {status && (
-                      <span
-                        className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[status]}`}
-                      >
-                        {status}
-                      </span>
-                    )}
+                    {status && <MayorPromiseStatusBadge status={status} className="shrink-0" />}
                   </div>
                   {p.category && <p className="mt-1 text-xs text-on-surface-variant">{p.category}</p>}
                   <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-on-surface-variant">

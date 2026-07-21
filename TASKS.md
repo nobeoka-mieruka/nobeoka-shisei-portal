@@ -207,28 +207,36 @@
 
 ### TASK-007 市長公約一覧・詳細ページへの検索・カテゴリ・進捗状態フィルタ実装
 
-状態：READY
+状態：DONE
 優先度：A
-対象：`src/pages/MayorPolicyProgressPage.tsx`
-依存関係：なし（既存の`SearchBar`/`FilterSelect`コンポーネントを流用可能）
-目的：`RELEASE_CHECKLIST.md`セクション4で「未完了」とされている検索・カテゴリ絞り込み・進捗状態絞り込みを実装する
+対象：`src/pages/MayorPolicyProgressPage.tsx`、`src/pages/MayorPromiseDetailPage.tsx`、`src/pages/MayorPage.tsx`、`src/components/mayor/PromiseCard.tsx`、`src/components/mayor/MayorPromiseStatusBadge.tsx`（新規）、`src/components/SearchBar.tsx`、`src/components/icons.tsx`、`src/lib/mayorPromiseStatus.ts`、`src/config/site.ts`、`src/types/index.ts`、`scripts/generate-search-index.mjs`、`scripts/validate-data.mjs`
+依存関係：なし（既存の`SearchBar`/`FilterSelect`コンポーネントを流用）
+目的：`RELEASE_CHECKLIST.md`セクション4で「未完了」とされていた検索・カテゴリ絞り込み・進捗状態絞り込みを実装する
 
-作業内容：
-- `BillVotesPage`等で使用済みの`SearchBar`/`FilterSelect`を公約一覧ページへ組み込む
-- カテゴリ・進捗状態でのフィルタリングを実装する
+作業内容（実施済み）：
+- 公約一覧ページへキーワード検索（公約名・公約原文・公約概要・政策分野・進捗説明・根拠資料名を対象）を追加
+- 絞り込み条件（進捗状況／政策分野／根拠資料の有無／関連議案の有無／関連一般質問の有無／確認年度）と「条件をリセット」ボタンを追加
+- 全公約数・検索結果件数・進捗状況ごとの件数を表示（独自の達成率・総合点は追加していない）
+- 進捗状況区分を`達成`/`進行中`/`一部実施`/`未着手`/`方針変更`/`確認中`へ拡張。既存データが使用していた`検討中`/`実施済み`は後方互換のため型に残し、値は変更していない（`MayorPromiseStatusLabel`）
+- 進捗状況を色だけでなく文字＋アイコンでも識別できる`MayorPromiseStatusBadge`コンポーネントを新設し、一覧カード・詳細ページ・市長ページ・進捗履歴の表示を統一
+- 公約カードに政策分野チップ、公約概要（`citizenSummary`）、「根拠資料あり」/「根拠資料を確認中」の文字表示を追加
+- 公約詳細ページに、関連議案・関連一般質問（ID参照、`relatedBillVoteIds`/`relatedQuestionIds`を新設）、財政ダッシュボードへの導線、根拠資料の公開日（`publishedDate`、任意）を追加。予算措置の項目名を明確化
+- 進捗履歴（`progressHistory`）の型を`summary`/`sourceTitle`/`sourceUrl`へ拡張し、`validate-data.mjs`で出典URL必須を検証するようにした（既存データに進捗履歴は0件のため、既存値への影響なし）
+- `validate-data.mjs`に、拡張後の進捗状況区分の検証、確定的な状況（達成・実施済み）に根拠資料が無い場合のエラー、`relatedBillVoteIds`/`relatedQuestionIds`の参照整合性チェック、根拠資料`publishedDate`の日付形式チェックを追加
+- `generate-search-index.mjs`に、根拠資料名・公約概要（`citizenSummary`）をキーワード・本文へ追加
 
 受入条件：
-- キーワード検索が動作する
-- カテゴリ・進捗状態での絞り込みが動作する
-- 既存の一覧表示・詳細ページへの導線を壊さない
+- キーワード検索が動作する（達成）
+- カテゴリ・進捗状態での絞り込みが動作する（達成）
+- 既存の一覧表示・詳細ページへの導線を壊さない（達成。カテゴリ別グルーピング・アンカーリンク・PDF一覧は維持）
 
 公式資料：
-- 該当なし（UI機能追加）
+- 該当なし（UI機能追加。データは既存の12件から変更していない）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-21
+- コミットID：（後続コミットで記録）
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
 

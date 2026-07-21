@@ -359,9 +359,19 @@ export interface MayorPolicyProgressData {
 
 /**
  * 個別公約の状況区分。サイト独自の採点・達成率ではなく、公表資料から確認できた事実の区分。
- * 「達成」「未達成」のような断定は使わない。
+ * 「未達成」と断定できる公的根拠がない場合は使わない。
+ * 「検討中」「実施済み」は初期データで使われていた区分（後方互換のため維持）、
+ * それ以外は2026-07-21のTASK-007で追加した区分。
  */
-export type MayorPromiseStatusLabel = "進行中" | "検討中" | "実施済み" | "確認中";
+export type MayorPromiseStatusLabel =
+  | "達成"
+  | "進行中"
+  | "一部実施"
+  | "未着手"
+  | "方針変更"
+  | "確認中"
+  | "検討中"
+  | "実施済み";
 
 /** 根拠資料1件分（共有ドキュメント）。市長本人の公表資料か延岡市公式資料かを sourceType で区別する。 */
 export interface MayorPromiseDocument {
@@ -369,6 +379,8 @@ export interface MayorPromiseDocument {
   label: string;
   url: string;
   sourceType: string;
+  /** ISO形式。資料が公開された日（確認できた場合のみ設定する）。 */
+  publishedDate?: string;
 }
 
 /** 個別公約が属する政策カテゴリ（4つの政策）。 */
@@ -393,12 +405,21 @@ export interface MayorPromiseRelatedLink {
   url: string;
 }
 
-/** 公約の進捗状態が変化した記録1件分。確認できた時点のみ追加する（推測で埋めない）。 */
+/**
+ * 公約の進捗状態が変化した記録1件分。確認できた時点のみ追加する（推測で埋めない）。
+ * 進捗状況を変更する場合は、出典（sourceUrl）と確認日（date）を必須とする（validate-data.mjsで検証）。
+ */
 export interface MayorPromiseHistoryEntry {
   /** ISO形式。この状態を確認した日。 */
   date: string;
   statusLabel: MayorPromiseStatusLabel;
-  /** 変化の内容を示す短い注記。 */
+  /** 進捗内容の説明。 */
+  summary?: string;
+  /** 根拠資料名。 */
+  sourceTitle?: string;
+  /** 根拠資料の公式URL。進捗状況を変更する場合は必須。 */
+  sourceUrl?: string;
+  /** 変化の内容を示す短い注記（summaryを優先し、noteは後方互換のため残す）。 */
   note?: string;
 }
 
@@ -445,6 +466,10 @@ export interface MayorPromiseItem {
   relatedLinks?: MayorPromiseRelatedLink[];
   /** 進捗状態の変更履歴。確認できた時点のみ追加する（未設定の場合、詳細ページは最新の状態のみを表示する）。 */
   progressHistory?: MayorPromiseHistoryEntry[];
+  /** 関連する議案（billVotes.jsonのid）。公式資料で関連が確認できた場合のみ設定する。 */
+  relatedBillVoteIds?: string[];
+  /** 関連する一般質問（generalQuestions.jsonのid）。公式資料で関連が確認できた場合のみ設定する。 */
+  relatedQuestionIds?: string[];
 }
 
 /** 市長公約の進捗状況ページ（個別公約12項目）全体のデータ。 */

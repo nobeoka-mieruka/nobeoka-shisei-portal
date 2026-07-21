@@ -1,18 +1,29 @@
 import { Link, useParams } from "react-router-dom";
 import policyProgressData from "../data/mayorPolicyProgress.json";
 import mayorPromisesData from "../data/mayorPromises.json";
-import type { MayorPolicyProgressData, MayorPromiseDocument, MayorPromiseItem, MayorPromisesData } from "../types";
+import billVotesData from "../data/billVotes.json";
+import generalQuestionsData from "../data/generalQuestions.json";
+import type {
+  BillVoteItem,
+  GeneralQuestionItem,
+  MayorPolicyProgressData,
+  MayorPromiseDocument,
+  MayorPromiseItem,
+  MayorPromisesData,
+} from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
-import { GlobeIcon, DocumentIcon } from "../components/icons";
-import { mayorPromiseStatusClass } from "../lib/mayorPromiseStatus";
+import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
+import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 
 const promisesData = mayorPromisesData as MayorPromisesData;
 const policyData = policyProgressData as MayorPolicyProgressData;
+const billVotes = billVotesData as BillVoteItem[];
+const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -69,6 +80,12 @@ export function MayorPromiseDetailPage() {
 
   const evidenceDocs = collectEvidenceDocs(promise);
   const category = promisesData.categories.find((c) => c.id === promise.categoryId);
+  const relatedBills = (promise.relatedBillVoteIds ?? [])
+    .map((billId) => billVotes.find((b) => b.id === billId))
+    .filter((b): b is BillVoteItem => !!b);
+  const relatedQuestions = (promise.relatedQuestionIds ?? [])
+    .map((questionId) => generalQuestions.find((q) => q.id === questionId))
+    .filter((q): q is GeneralQuestionItem => !!q);
   const categoryPromises = promisesData.promises.filter((p) => p.categoryId === promise.categoryId);
   const idx = categoryPromises.findIndex((p) => p.id === promise.id);
   const prevPromise = idx > 0 ? categoryPromises[idx - 1] : undefined;
@@ -88,11 +105,7 @@ export function MayorPromiseDetailPage() {
       {/* 公約の基本情報 */}
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
-          <span
-            className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[promise.statusLabel]}`}
-          >
-            {promise.statusLabel}
-          </span>
+          <MayorPromiseStatusBadge status={promise.statusLabel} />
           <Link
             to={category ? `/mayor/policy-progress#${category.anchor}` : "/mayor/policy-progress"}
             className={`text-xs text-on-primary-container/80 hover:underline ${linkClass}`}
@@ -164,24 +177,29 @@ export function MayorPromiseDetailPage() {
                       {doc.sourceType}
                     </span>
                   </a>
+                  {doc.publishedDate && (
+                    <p className="mt-0.5 text-xs text-on-surface-variant">
+                      資料公開日：{formatJapaneseDate(doc.publishedDate)}
+                    </p>
+                  )}
                 </li>
               );
             })}
           </ul>
         ) : (
-          <p className="text-sm text-on-surface-variant">{UNREGISTERED}</p>
+          <p className="text-sm text-on-surface-variant">根拠資料を確認中です</p>
         )}
       </SectionCard>
 
-      {/* 関連予算・担当部署・発表日 */}
+      {/* 予算措置・担当部署・発表日 */}
       <SectionCard title="関連情報">
         <dl className="grid grid-cols-1 gap-x-4 gap-y-3 text-sm sm:grid-cols-2">
           <div>
-            <dt className="text-xs font-medium text-on-surface-variant">関連予算</dt>
+            <dt className="text-xs font-medium text-on-surface-variant">予算措置</dt>
             <dd className="mt-0.5 text-on-surface">{promise.relatedBudget}</dd>
           </div>
           <div>
-            <dt className="text-xs font-medium text-on-surface-variant">関連議案</dt>
+            <dt className="text-xs font-medium text-on-surface-variant">関連議案（公約文中の言及）</dt>
             <dd className="mt-0.5 text-on-surface">{promise.relatedBill}</dd>
           </div>
           <div>
@@ -195,6 +213,42 @@ export function MayorPromiseDetailPage() {
             </dd>
           </div>
         </dl>
+      </SectionCard>
+
+      {/* 関連議案・関連一般質問（ID参照で確認できたもののみ表示） */}
+      {(relatedBills.length > 0 || relatedQuestions.length > 0) && (
+        <SectionCard title="関連する議案・一般質問">
+          <ul className="space-y-2 text-sm">
+            {relatedBills.map((bill) => (
+              <li key={bill.id}>
+                <Link to={`/bills/votes/${bill.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                  関連議案：{bill.billTitle}
+                </Link>
+              </li>
+            ))}
+            {relatedQuestions.map((q) => (
+              <li key={q.id}>
+                <Link to={`/questions/${q.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                  関連する一般質問：{q.title}（{q.memberName}議員）
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
+
+      {/* 関連する財政データ */}
+      <SectionCard title="関連する財政データ">
+        <p className="text-sm leading-relaxed text-on-surface-variant">
+          この公約に対応する個別の予算項目は、公式資料での特定ができ次第「予算措置」欄に反映します。延岡市全体の歳入・歳出、基金残高等は財政ダッシュボードで確認できます。
+        </p>
+        <Link
+          to="/finance"
+          className={`mt-2 inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+        >
+          <YenIcon className="h-3.5 w-3.5 shrink-0" />
+          延岡市の財政データを見る
+        </Link>
       </SectionCard>
 
       {/* 関連リンク */}
@@ -222,16 +276,28 @@ export function MayorPromiseDetailPage() {
       {/* 進捗履歴 */}
       <SectionCard title="進捗履歴">
         {promise.progressHistory && promise.progressHistory.length > 0 ? (
-          <ul className="space-y-2">
-            {promise.progressHistory.map((h, i) => (
-              <li key={i} className="flex flex-wrap items-baseline gap-2 border-b border-outline-variant pb-2 last:border-0 last:pb-0">
-                <span className="text-xs text-on-surface-variant">{formatJapaneseDate(h.date)}</span>
-                <span
-                  className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${mayorPromiseStatusClass[h.statusLabel]}`}
-                >
-                  {h.statusLabel}
-                </span>
-                {h.note && <span className="text-sm text-on-surface">{h.note}</span>}
+          <ul className="space-y-3">
+            {[...promise.progressHistory].reverse().map((h, i) => (
+              <li key={i} className="border-b border-outline-variant pb-3 last:border-0 last:pb-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs text-on-surface-variant">{formatJapaneseDate(h.date)}</span>
+                  <MayorPromiseStatusBadge status={h.statusLabel} />
+                </div>
+                {(h.summary || h.note) && (
+                  <p className="mt-1 text-sm text-on-surface">{h.summary ?? h.note}</p>
+                )}
+                {h.sourceUrl && (
+                  <a
+                    href={h.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${h.sourceTitle ?? "根拠資料"}を新しいタブで開く`}
+                    className={`mt-1 inline-flex items-center gap-1 text-xs text-primary hover:underline ${linkClass}`}
+                  >
+                    <GlobeIcon className="h-3 w-3 shrink-0" />
+                    {h.sourceTitle ?? "根拠資料を見る"}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
