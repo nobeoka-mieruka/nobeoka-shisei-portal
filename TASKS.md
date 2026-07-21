@@ -848,3 +848,36 @@
 - 完了日：2026-07-21
 - コミットID：ae462ec
 - 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。Playwrightで375/390/430/768/1024/1280px幅の横スクロールなしと新規セクションの表示、コンソールエラーなしを確認。
+
+---
+
+### TASK-030 市長定例記者会見の一覧ページ追加
+
+状態：DONE
+優先度：A
+対象：`src/pages/MayorPressConferencesPage.tsx`（新規）、`src/App.tsx`、`src/pages/MayorPage.tsx`、`scripts/generate-sitemap.mjs`、`scripts/generate-search-index.mjs`
+依存関係：なし（既存の`mayorPressConferences.ts`・詳細ページ`/mayor/press-conferences/:date`を流用）
+目的：ユーザーから「市長記者会見データベース（想定URL `/mayor/press-conferences`、`/mayor/press-conferences/:id`）」の確認を依頼され調査したところ、詳細ページ（`/mayor/press-conferences/:date`）と`MayorPage`からのインライン表示は実装済みだったが、一覧ページ（`/mayor/press-conferences`）が存在しなかったため追加した
+
+作業内容：
+- `MayorPressConferencesPage.tsx`を新規作成し、`getSortedMayorPressConferences()`を使って開催日順の一覧・登録件数・空データ時の案内文を表示
+- `/mayor/press-conferences`ルートを追加（既存の`/mayor/press-conferences/:date`はそのまま維持）
+- `MayorPage.tsx`の記者会見セクションに「市長定例記者会見をすべて見る」リンクを追加
+- `generate-sitemap.mjs`・`generate-search-index.mjs`に一覧ページを追加
+
+備考：
+- 開催日、タイトル、会見概要、資料PDF、市公式ページ、確認日は既存の詳細ページ（`MayorPressConferenceDetailPage.tsx`）で対応済み
+- 「質問と回答」「関連公約」「関連議案」「関連一般質問」「動画」は、延岡市公式ホームページの記者会見発表内容に該当情報が無いため未実装（架空データを追加しないため）。関連付けができる公式資料が確認できた場合に別途対応する
+- 記者会見データは現在1件（2026-07-16）のみ。新規記者会見の追加は引き続き`src/data/mayorPressConferences.ts`への手入力で対応する
+
+受入条件：
+- `/mayor/press-conferences`にアクセスでき、既存の詳細ページへ遷移できる（達成）
+- 既存の`/mayor/press-conferences/:date`・`MayorPage`のインライン表示を壊さない（達成）
+
+公式資料：
+- 該当なし（既存データを一覧表示する画面追加のため）
+
+完了記録：
+- 完了日：2026-07-21
+- コミットID：（後続コミットで記録）
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。

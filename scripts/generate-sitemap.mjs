@@ -22,6 +22,7 @@ const staticPages = [
   "/mayor",
   "/mayor/policy-progress",
   "/mayor/entertainment-expenses",
+  "/mayor/press-conferences",
   "/finance",
   "/dashboard",
   "/compensation",

@@ -271,6 +271,13 @@ const staticPages = [
     url: "/dashboard",
     keywords: ["ダッシュボード", "統計", "集計", "会派別", "年齢構成"],
   },
+  {
+    id: "page-mayor-press-conferences",
+    title: "市長定例記者会見",
+    description: "延岡市長の定例記者会見の発表事項を、延岡市公式ホームページに基づいて開催日順に整理しています。",
+    url: "/mayor/press-conferences",
+    keywords: ["市長定例記者会見", "記者会見", "発表事項"],
+  },
 ];
 for (const p of staticPages) {
   entries.push({ ...p, type: "page" });

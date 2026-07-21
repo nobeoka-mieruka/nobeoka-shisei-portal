@@ -219,6 +219,9 @@ export function MayorPage() {
               </li>
             ))}
           </ul>
+          <Link to="/mayor/press-conferences" className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}>
+            市長定例記者会見をすべて見る
+          </Link>
         </SectionCard>
       )}
 

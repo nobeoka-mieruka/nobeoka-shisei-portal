@@ -11,6 +11,7 @@ import { MayorPage } from "./pages/MayorPage";
 import { MayorPolicyProgressPage } from "./pages/MayorPolicyProgressPage";
 import { MayorPromiseDetailPage } from "./pages/MayorPromiseDetailPage";
 import { MayorEntertainmentExpensesPage } from "./pages/MayorEntertainmentExpensesPage";
+import { MayorPressConferencesPage } from "./pages/MayorPressConferencesPage";
 import { MayorPressConferenceDetailPage } from "./pages/MayorPressConferenceDetailPage";
 import { FinancePage } from "./pages/FinancePage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -52,6 +53,7 @@ function App() {
             <Route path="/mayor/policy-progress" element={<MayorPolicyProgressPage />} />
             <Route path="/mayor/policy-progress/:id" element={<MayorPromiseDetailPage />} />
             <Route path="/mayor/entertainment-expenses" element={<MayorEntertainmentExpensesPage />} />
+            <Route path="/mayor/press-conferences" element={<MayorPressConferencesPage />} />
             <Route path="/mayor/press-conferences/:date" element={<MayorPressConferenceDetailPage />} />
             <Route path="/finance" element={<FinancePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
