@@ -21,7 +21,12 @@ interface FinanceTableProps<T> {
  */
 export function FinanceTable<T>({ caption, srOnlyCaption = true, columns, rows, rowKey }: FinanceTableProps<T>) {
   return (
-    <div className="mt-3 overflow-x-auto rounded-lg border border-outline-variant">
+    <div
+      className="mt-3 overflow-x-auto rounded-lg border border-outline-variant focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      role="region"
+      aria-label={caption}
+      tabIndex={0}
+    >
       <table className="w-full min-w-[360px] border-collapse text-sm">
         <caption className={srOnlyCaption ? "sr-only" : "px-3 py-2 text-left text-xs text-on-surface-variant"}>
           {caption}

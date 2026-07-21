@@ -217,7 +217,7 @@ export function CompensationPage() {
                       <dt className="text-on-surface-variant">延岡市</dt>
                       <dd className="font-medium text-on-surface">{formatYen(nobeokaAmount)}</dd>
                     </div>
-                    {hasRange ? (
+                    {hasRange && (
                       <>
                         <div className="flex items-baseline justify-between gap-2">
                           <dt className="text-on-surface-variant">類似団体最高</dt>
@@ -228,19 +228,20 @@ export function CompensationPage() {
                           <dd className="text-on-surface">{formatYen(entry!.min as number)}</dd>
                         </div>
                       </>
-                    ) : (
-                      <p className="text-xs text-on-surface-variant">類似団体の最高額・最低額を確認中です。</p>
                     )}
                     <div className="flex items-baseline justify-between gap-2 border-t border-outline-variant pt-1.5">
                       <dt className="text-on-surface-variant">順位</dt>
                       <dd className="text-on-surface">{hasRank ? `${entry!.rank}位` : "算定不可"}</dd>
                     </div>
-                    {!hasRank && (
-                      <p className="text-[11px] leading-snug text-on-surface-variant">
-                        理由：個別団体すべての月額データを確認できていないため
-                      </p>
-                    )}
                   </dl>
+                  {!hasRange && (
+                    <p className="mt-1.5 text-xs text-on-surface-variant">類似団体の最高額・最低額を確認中です。</p>
+                  )}
+                  {!hasRank && (
+                    <p className="mt-1 text-[11px] leading-snug text-on-surface-variant">
+                      理由：個別団体すべての月額データを確認できていないため
+                    </p>
+                  )}
 
                   {hasRange && position !== null && (
                     <div className="mt-3">
@@ -317,7 +318,12 @@ export function CompensationPage() {
 
       <SectionCard title="自治体比較表">
         <p className="mb-2 text-xs text-on-surface-variant sm:hidden">表は横にスクロールできます</p>
-        <div className="hidden overflow-x-auto rounded-lg sm:block">
+        <div
+          className="hidden overflow-x-auto rounded-lg sm:block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          role="region"
+          aria-label="自治体比較表"
+          tabIndex={0}
+        >
           <table className="min-w-[1150px] border-collapse text-sm tabular-nums">
             <thead>
               <tr className="border-b border-outline-variant text-left text-xs text-on-surface-variant">

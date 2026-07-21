@@ -32,7 +32,6 @@ export function SiteHeader() {
               height={1024}
               className="h-auto w-[clamp(200px,38vw,400px)] max-w-full shrink-0 rounded-md bg-white object-contain px-2 py-1.5"
             />
-            <h1 className="sr-only">延岡市政見える化ポータル</h1>
           </Link>
           <span className="shrink-0 rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant sm:px-2.5 sm:text-xs">
             非公式

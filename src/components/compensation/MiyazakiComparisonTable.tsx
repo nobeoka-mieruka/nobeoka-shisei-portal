@@ -49,7 +49,12 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
 
   return (
     <div>
-      <div className="hidden overflow-x-auto sm:block">
+      <div
+        className="hidden overflow-x-auto sm:block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        role="region"
+        aria-label="宮崎県9市の比較（月額）の表"
+        tabIndex={0}
+      >
         <table className="w-full min-w-[560px] border-collapse text-sm">
           <thead>
             <tr className="border-b border-outline-variant text-left text-xs text-on-surface-variant">

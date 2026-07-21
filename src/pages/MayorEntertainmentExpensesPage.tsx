@@ -276,7 +276,12 @@ export function MayorEntertainmentExpensesPage() {
       </SectionCard>
 
       <SectionCard title="支出明細">
-        <div className="hidden overflow-x-auto sm:block">
+        <div
+          className="hidden overflow-x-auto sm:block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          role="region"
+          aria-label="市長交際費 支出明細の表"
+          tabIndex={0}
+        >
           <table className="w-full min-w-[820px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-outline-variant text-left text-xs text-on-surface-variant">

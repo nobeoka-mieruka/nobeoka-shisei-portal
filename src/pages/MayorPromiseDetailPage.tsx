@@ -342,7 +342,7 @@ export function MayorPromiseDetailPage() {
       <SectionCard title="注意事項">
         <p className="text-xs leading-relaxed text-on-surface-variant">
           このページは、市長の公約、市長本人が公表した進捗資料、延岡市の施政方針・予算書などを基に公開情報を整理したものです。市長本人の自己評価と、延岡市が公表した事実は区別して表示しています。サイト独自の達成率・採点は行っておらず、根拠資料が確認できない場合に「未着手」と判定することもありません。掲載内容は、特定の政治家を支持、推薦、批判することを目的としたものではありません。詳しくは
-          <Link to="/editorial-policy" className={`text-primary hover:underline ${linkClass}`}>
+          <Link to="/editorial-policy" className={`text-primary underline ${linkClass}`}>
             編集方針
           </Link>
           をご覧ください。

@@ -300,28 +300,32 @@
 
 ### TASK-010 スマホ表示崩れの全体確認
 
-状態：READY
+状態：DONE
 優先度：A
-対象：主要ページ全体
+対象：主要ページ全体（19ページ）
 依存関係：なし
-目的：`RELEASE_CHECKLIST.md`セクション12で「要確認」とされているスマホ表示（375/390/430/768/1280px）を確認する
+目的：`RELEASE_CHECKLIST.md`セクション12で「要確認」とされているスマホ表示（375/390/430/768/1024/1280px）を確認する
 
 作業内容：
-- 主要ページを各幅で確認する（開発サーバーでのブラウザ幅シミュレーション、または実機）
-- 横スクロール、文字の縦書き・不自然な改行、下部ナビゲーションとの重なりを確認する
-- 問題があれば修正する
+- Playwright（Chromium、`npm install --no-save playwright`で一時導入、`package.json`には追加していない）で、ホーム・議員詳細・市長ページ・市長公約一覧/詳細・一般質問一覧/詳細・議案賛否一覧/詳細（存在しないID）・財政・ダッシュボード・市長記者会見一覧/詳細・市長交際費・検索・市役所案内・更新履歴・お問い合わせ・編集方針の19ページ×6幅＝114パターンを自動確認
+- 確認項目：`document.documentElement`のページ全体の横スクロール有無、ビューポート外へはみ出す要素の検出、コンソールエラー、HTTPステータス、見出し数、パンくずの有無
+
+調査結果：
+- 全114パターンでページ全体の横スクロールは0件（`scrollWidth === clientWidth`を全幅で確認）
+- 検出された「要素のはみ出し」3件（財政ページの表、市長交際費ページの表）は、いずれも`overflow-x-auto`でスコープされた表自体の意図的な横スクロール（CLAUDE.mdが許容する「幅の広い表は横スクロールを使用する」パターン）であり、ページ全体には影響しないことを確認。実害なし
+- 調査の過程で、`SiteHeader.tsx`の`<h1 className="sr-only">延岡市政見える化ポータル</h1>`が、各ページ自身の`<h1>`（ページタイトル）と重複し、全ページでh1が2つ存在する状態になっていたことを発見。ロゴ画像に`alt="延岡市政見える化ポータル"`、リンクに`aria-label="延岡市政見える化ポータルのトップページへ"`が既に設定されており、このh1は情報として重複していたため削除し、全ページで見出し階層を「h1は1つ」の状態に修正（TASK-027の調査と合わせて対応）
 
 受入条件：
-- 主要ページで横スクロールが発生しない
-- 下部ナビゲーションが本文と重ならない
+- 主要ページで横スクロールが発生しない（達成）
+- 下部ナビゲーションが本文と重ならない（達成。`pb-24 md:pb-10`の余白設計を確認、はみ出し要素の検出でも該当なし）
 
 公式資料：
 - 該当なし
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-21
+- コミットID：（後続コミットで記録、TASK-027と共通）
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
 
@@ -670,7 +674,6 @@
 - 完了日：
 - コミットID：
 - 変更概要：サイト内にFAQPage構造化データを適用できる静的なQ&Aコンテンツが存在しないため、BLOCKEDとした。将来、市役所案内診断とは別に固定のFAQコンテンツ（例：「よくある質問」ページ）を新設する場合に再検討する。
-- 変更概要：
 
 ---
 
@@ -753,27 +756,38 @@
 
 ### TASK-027 WCAGアクセシビリティ簡易チェック
 
-状態：READY
+状態：DONE
 優先度：C
-対象：主要ページ全体
+対象：`src/components/SiteHeader.tsx`、`src/components/finance/FinanceTable.tsx`、`src/components/compensation/MiyazakiComparisonTable.tsx`、`src/pages/CompensationPage.tsx`、`src/pages/MayorEntertainmentExpensesPage.tsx`、`src/pages/MayorPromiseDetailPage.tsx`
 依存関係：なし
 目的：axe-core等でWCAG簡易チェックを実施し、コントラスト・aria属性等の問題を確認する
 
 作業内容：
-- 主要ページで自動チェックツールを実行する
-- 検出された問題を修正する
+- `@axe-core/playwright`（`npm install --no-save`で一時導入、`package.json`には追加していない）で、主要18ページをwcag2a/wcag2aa/wcag21a/wcag21aaルールセットで自動チェック
+- 検出された違反（重大度serious）を修正
+
+検出・修正した問題：
+1. **`link-in-text-block`**：`MayorPromiseDetailPage.tsx`の「注意事項」内、文中リンク（編集方針）が`hover:underline`のみ（通常時は色のみで判別）だったため、常時下線表示（`underline`）に変更
+2. **`scrollable-region-focusable`**：`FinanceTable.tsx`（財政ページの表）、`MayorEntertainmentExpensesPage.tsx`（市長交際費の支出明細表）、`MiyazakiComparisonTable.tsx`・`CompensationPage.tsx`（報酬ページの比較表）の`overflow-x-auto`スクロール領域が、キーボードのみでは操作できなかったため、`role="region"`・`aria-label`・`tabIndex={0}`・フォーカスリング（`focus-visible:outline`）を追加
+3. **`definition-list`**：`CompensationPage.tsx`の`<dl>`内に、`dt`/`dd`ペアでない補足説明の`<p>`が直接の子要素として混在し、定義リストの構造が不正だった（当初`<div>`で囲む対応をしたが、`div`はdt/dd以外を含んではならないため解消せず）。該当する補足文（「類似団体の最高額・最低額を確認中です」「理由：個別団体すべての月額データを確認できていないため」）を`</dl>`の外側（兄弟要素）へ移動し、`<dl>`内をdt/dd（および対応するdiv包含）のみに整理して解消
+4. （TASK-010との共通調査）`SiteHeader.tsx`の重複h1を削除し、見出し階層違反の原因を解消
+
+検証結果：
+- 修正後、対象18ページ＋報酬ページ（390px/1024px）で違反0件を確認
+- キーボード操作・フォーカス表示：`focus-visible:outline`パターンがサイト全体で一貫して使用されていることを確認
+- 表のcaption：既存の`FinanceTable`等で対応済み（`TASK-029`で導入）
 
 受入条件：
-- 重大な違反（Critical/Serious）を解消する
-- 既存デザインを大きく崩さない
+- 重大な違反（Critical/Serious）を解消する（達成。axe-coreで検出された3種類の重大違反をすべて修正）
+- 既存デザインを大きく崩さない（達成。視覚的な変更は文中リンクの下線常時表示のみ）
 
 公式資料：
 - 該当なし
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-07-21
+- コミットID：（後続コミットで記録、TASK-010と共通）
+- 変更概要：上記のとおり。`validate:data`（errors=0 warnings=0）/`typecheck`/`lint`/`build`すべて成功。
 
 ---
 
