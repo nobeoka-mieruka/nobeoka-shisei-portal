@@ -644,15 +644,20 @@
 
 ### TASK-023 FAQ構造化データの実装
 
-状態：READY
+状態：BLOCKED
 優先度：C
 対象：`src/pages/CityGuidePage.tsx`、`src/pages/EditorialPolicyPage.tsx`等
 依存関係：なし
 目的：既存のFAQ的コンテンツにFAQ構造化データ（JSON-LD）を追加する
 
+調査結果（2026-07-21）：
+- `CityGuidePage.tsx`は「質問」「回答」の固定文ペアではなく、選択肢に応じて分岐する診断UI（`DiagnosisStep`、`cityGuideQuestions`）であり、FAQPageが想定する静止したQ&Aコンテンツとは性質が異なる
+- `EditorialPolicyPage.tsx`・`AboutPage.tsx`・`TermsPage.tsx`等を確認したが、「Q.」「質問」「回答」形式の固定コンテンツは見つからなかった
+- ユーザー指示「構造化データは内容に適合する範囲のみ使用し、誤解を招くOrganizationやGovernmentOrganization設定は避ける」に基づき、実態に合わないFAQPage構造化データの追加は見送った
+
 作業内容：
-- FAQ形式のコンテンツを洗い出す
-- `FAQPage`のJSON-LDを追加する
+- FAQ形式のコンテンツを洗い出す（実施済み、該当なし）
+- `FAQPage`のJSON-LDを追加する（該当コンテンツが無いため未実施）
 
 受入条件：
 - 構造化データテストで検証エラーがない
@@ -664,6 +669,7 @@
 完了記録：
 - 完了日：
 - コミットID：
+- 変更概要：サイト内にFAQPage構造化データを適用できる静的なQ&Aコンテンツが存在しないため、BLOCKEDとした。将来、市役所案内診断とは別に固定のFAQコンテンツ（例：「よくある質問」ページ）を新設する場合に再検討する。
 - 変更概要：
 
 ---
