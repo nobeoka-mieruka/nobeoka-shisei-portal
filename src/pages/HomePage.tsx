@@ -52,8 +52,10 @@ const snsOptions = [
 const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "市議会議員を見る", to: "/", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
+  { label: "市長公約の進捗を見る", to: "/mayor/policy-progress", ready: true },
   { label: "一般質問を調べる", to: "/questions", ready: true },
   { label: "議案ごとの賛否を見る", to: "/bills/votes", ready: true },
+  { label: "延岡市の財政を見る", to: "/finance", ready: true },
   { label: "サイト内を検索する", to: "/search", ready: true },
   { label: "編集方針を見る", to: "/editorial-policy", ready: true },
   { label: "情報提供・訂正依頼を送る", to: "/contact", ready: true },
