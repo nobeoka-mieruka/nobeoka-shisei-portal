@@ -20,7 +20,9 @@ npm run build    # 本番ビルド
 - `src/data/members.json` … 議員27名分のデータ（配列）
 - `src/data/mayor.json` … 市長のデータ（単一オブジェクト）
 - `src/data/compensationComparison.json` … 市長・議長・副議長・議員の報酬比較データ（近隣市ごとの配列。`/compensation` ページで使用）
-- `src/data/cityGuideData.ts` … 「延岡市役所 どこに行けばいい？診断」（`/city-guide`）のカテゴリ・質問・分岐・担当課データ。型定義は `src/types/cityGuide.ts`。電話番号・場所・受付時間・公式URLなど未確認の項目は空欄のままにし、推測で入力しないこと（公式URL未設定の課は「公式ページを見る」ボタンが自動的に非表示になる）
+- `src/data/cityGuideCategories.json` … 「延岡市役所 どこに行けばいい？診断」（`/city-guide`）の相談カテゴリ一覧（行政組織名ではなく、市民が検索しやすい相談内容の切り口で分類）
+- `src/data/cityGuideEntries.json` … 同診断の相談窓口データベース本体（id / category / question / department / phone / location / officialUrl / description / lastChecked）。同じカテゴリ内では配列の並び順どおりに「はい／いいえ」で質問し、「はい」で担当課が確定する。電話番号・場所・公式URL・lastChecked は延岡市公式ホームページ「組織でさがす」の各課ページで確認できたものだけを登録し、未確認の項目は空文字列のままにする（推測で入力しないこと）
+- `src/data/cityGuideConfig.json` … 同診断の全課共通設定（受付時間 officeHours、市役所名 officeName、補足 note、代表電話 representativePhone など）。受付時間はここ1か所を書き換えるだけで全結果画面に反映される。型定義は `src/types/cityGuide.ts`、読み込み層は `src/lib/cityGuide.ts`
 
 型定義は `src/types/index.ts` にあります。フィールドの意味に迷ったらこちらを参照してください。
 

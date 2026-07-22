@@ -20,7 +20,10 @@ export function CategorySelector({ categories, onSelect }: CategorySelectorProps
             onClick={() => onSelect(category)}
             className="tap-highlight-none flex items-start gap-3 rounded-xl bg-surface-container-low p-4 text-left shadow-e1 transition hover:bg-surface-container hover:shadow-e2 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-container text-on-primary-container">
+            <span
+              aria-hidden="true"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-container text-on-primary-container"
+            >
               <CityGuideCategoryIcon icon={category.icon} className="h-5 w-5" />
             </span>
             <span className="min-w-0">

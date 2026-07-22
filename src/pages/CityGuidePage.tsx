@@ -7,86 +7,97 @@ import { CategorySelector } from "../components/city-guide/CategorySelector";
 import { QuestionCard } from "../components/city-guide/QuestionCard";
 import { ResultCard } from "../components/city-guide/ResultCard";
 import { DepartmentList } from "../components/city-guide/DepartmentList";
-import { cityGuideCategories, cityGuideDepartments, cityGuideQuestions } from "../data/cityGuideData";
+import {
+  GENERAL_INFO_ENTRY_ID,
+  cityGuideCategories,
+  cityGuideEntries,
+  getCategory,
+  getEntriesForCategory,
+  getEntry,
+  isDirectResultCategory,
+} from "../lib/cityGuide";
 import type { CityGuideCategory } from "../types/cityGuide";
 
 type ViewMode = "diagnosis" | "list";
 type DiagnosisStep = "category" | "question" | "result";
 
-const GENERAL_INFO_DEPARTMENT_ID = "general-info";
-
 export function CityGuidePage() {
   usePageTitle({
-    title: "延岡市役所 どこに行けばいい？診断",
+    title: "延岡市役所 どこに行けばいい？診断｜相談先の課を簡単検索",
     description:
-      "質問に答えるだけで、住民票・税金・子育て・介護・ごみ・道路など、延岡市役所のどの課に相談すればよいかが分かる診断ページです。",
+      "延岡市で困った時、どこの課に相談すればよいか質問に答えるだけで確認できます。福祉、子育て、高齢者、防災、生活相談など、市役所の相談窓口を分かりやすく案内します。",
   });
 
   const [mode, setMode] = useState<ViewMode>("diagnosis");
   const [step, setStep] = useState<DiagnosisStep>("category");
-  const [selectedCategory, setSelectedCategory] = useState<CityGuideCategory | null>(null);
-  const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
-  const [questionCount, setQuestionCount] = useState(0);
-  const [resultDepartmentId, setResultDepartmentId] = useState<string | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [currentEntryIndex, setCurrentEntryIndex] = useState(0);
+  const [resultEntryId, setResultEntryId] = useState<string | null>(null);
 
-  const questionMap = useMemo(() => new Map(cityGuideQuestions.map((q) => [q.id, q])), []);
-  const departmentMap = useMemo(() => new Map(cityGuideDepartments.map((d) => [d.id, d])), []);
+  const categoryEntries = useMemo(
+    () => (selectedCategoryId ? getEntriesForCategory(selectedCategoryId) : []),
+    [selectedCategoryId],
+  );
 
   function resetToCategories() {
     setMode("diagnosis");
     setStep("category");
-    setSelectedCategory(null);
-    setCurrentQuestionId(null);
-    setQuestionCount(0);
-    setResultDepartmentId(null);
+    setSelectedCategoryId(null);
+    setCurrentEntryIndex(0);
+    setResultEntryId(null);
   }
 
   function handleSelectCategory(category: CityGuideCategory) {
-    setSelectedCategory(category);
-    if (category.firstQuestionId === null) {
-      setResultDepartmentId(category.directResultDepartmentId ?? GENERAL_INFO_DEPARTMENT_ID);
-      setCurrentQuestionId(null);
+    setSelectedCategoryId(category.id);
+    if (isDirectResultCategory(category.id)) {
+      const entries = getEntriesForCategory(category.id);
+      setResultEntryId(entries[0]?.id ?? GENERAL_INFO_ENTRY_ID);
       setStep("result");
       return;
     }
-    setCurrentQuestionId(category.firstQuestionId);
-    setQuestionCount(1);
+    setCurrentEntryIndex(0);
     setStep("question");
   }
 
-  function handleAnswer(choiceIndex: number) {
-    if (!currentQuestionId) return;
-    const question = questionMap.get(currentQuestionId);
-    const choice = question?.choices[choiceIndex];
-    if (!choice) return;
+  function handleYes() {
+    const entry = categoryEntries[currentEntryIndex];
+    if (!entry) return;
+    setResultEntryId(entry.id);
+    setStep("result");
+  }
 
-    if (choice.resultDepartmentId) {
-      setResultDepartmentId(choice.resultDepartmentId);
-      setStep("result");
+  function handleNo() {
+    const nextIndex = currentEntryIndex + 1;
+    if (nextIndex < categoryEntries.length) {
+      setCurrentEntryIndex(nextIndex);
       return;
     }
-    if (choice.nextQuestionId) {
-      setCurrentQuestionId(choice.nextQuestionId);
-      setQuestionCount((n) => n + 1);
-    }
+    setResultEntryId(GENERAL_INFO_ENTRY_ID);
+    setStep("result");
   }
 
   function handleShowGeneralInfo() {
     setMode("diagnosis");
-    setSelectedCategory(null);
-    setCurrentQuestionId(null);
-    setResultDepartmentId(GENERAL_INFO_DEPARTMENT_ID);
+    setSelectedCategoryId(null);
+    setCurrentEntryIndex(0);
+    setResultEntryId(GENERAL_INFO_ENTRY_ID);
     setStep("result");
   }
 
-  const currentQuestion = currentQuestionId ? questionMap.get(currentQuestionId) : undefined;
-  const resultDepartment = resultDepartmentId ? departmentMap.get(resultDepartmentId) : undefined;
+  const currentEntry = step === "question" ? categoryEntries[currentEntryIndex] : undefined;
+  const selectedCategory = selectedCategoryId ? getCategory(selectedCategoryId) : undefined;
+  const resultEntry = resultEntryId ? getEntry(resultEntryId) : undefined;
+  const resultCategory = resultEntry ? getCategory(resultEntry.category) : undefined;
 
   const showFloatingButton = mode === "diagnosis" && (step === "category" || step === "question");
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
       <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市役所案内" }]} />
+
+      <p className="rounded-xl border border-outline-variant bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+        本ページは、延岡市民の皆さまが相談先を探す際の参考情報として、独自に作成した非公式案内です。最新の情報や正式な手続きについては、延岡市公式ホームページまたは各担当窓口へご確認ください。
+      </p>
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">
@@ -124,18 +135,24 @@ export function CityGuidePage() {
         <CategorySelector categories={cityGuideCategories} onSelect={handleSelectCategory} />
       )}
 
-      {mode === "diagnosis" && step === "question" && currentQuestion && selectedCategory && (
+      {mode === "diagnosis" && step === "question" && currentEntry?.question && selectedCategory && (
         <QuestionCard
           categoryName={selectedCategory.name}
-          question={currentQuestion}
-          stepNumber={questionCount}
-          onAnswer={handleAnswer}
+          questionText={currentEntry.question}
+          stepNumber={currentEntryIndex + 1}
+          onYes={handleYes}
+          onNo={handleNo}
           onBackToCategories={resetToCategories}
         />
       )}
 
-      {mode === "diagnosis" && step === "result" && resultDepartment && (
-        <ResultCard department={resultDepartment} onRestart={resetToCategories} onShowList={() => setMode("list")} />
+      {mode === "diagnosis" && step === "result" && resultEntry && resultCategory && (
+        <ResultCard
+          entry={resultEntry}
+          categoryName={resultCategory.name}
+          onRestart={resetToCategories}
+          onShowList={() => setMode("list")}
+        />
       )}
 
       {mode === "list" && (
@@ -147,7 +164,7 @@ export function CityGuidePage() {
           >
             診断へ戻る
           </button>
-          <DepartmentList categories={cityGuideCategories} departments={cityGuideDepartments} />
+          <DepartmentList categories={cityGuideCategories} entries={cityGuideEntries} />
           <button
             type="button"
             onClick={() => setMode("diagnosis")}

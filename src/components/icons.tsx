@@ -308,7 +308,7 @@ export function CheckCircleIcon(props: IconProps) {
   );
 }
 
-/** 進捗状況バッジ用：進行中を表す。 */
+/** 進捗状況バッジ用：進行中を表す。市役所案内の受付時間アイコンとしても共用する。 */
 export function ClockIcon(props: IconProps) {
   return (
     <svg {...base(props)}>
@@ -339,6 +339,43 @@ export function ArrowPathIcon(props: IconProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+export function PhoneIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path
+        d="M5.5 4.5h3l1.5 4-2 1.5a11 11 0 005.5 5.5l1.5-2 4 1.5v3c0 1-.9 1.8-1.9 1.6C10.9 19 5 13.1 3.9 6.4 3.7 5.4 4.5 4.5 5.5 4.5z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function BuildingIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <rect x="5" y="4" width="10" height="16" rx="1" stroke="currentColor" strokeWidth="2" />
+      <path d="M15 9h4v11h-4M8 8h1M11 8h1M8 11h1M11 11h1M8 14h1M11 14h1M8 17h1M11 17h1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function MapPinIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path
+        d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }

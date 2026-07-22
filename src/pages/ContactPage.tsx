@@ -31,6 +31,16 @@ export function ContactPage() {
           <p>
             いただいた情報は、公開資料や公式情報を確認したうえで、必要に応じて修正・追加します。すべての内容を掲載するとは限りません。
           </p>
+          <p>
+            延岡市役所の手続きや相談先（住民票、税金、子育て、介護、ごみ、道路など）をお探しの場合は、
+            <Link
+              to="/city-guide"
+              className="rounded text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              延岡市役所 どこに行けばいい？診断
+            </Link>
+            もあわせてご利用ください。
+          </p>
         </div>
       </SectionCard>
 
