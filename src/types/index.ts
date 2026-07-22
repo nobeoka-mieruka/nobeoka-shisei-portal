@@ -500,6 +500,10 @@ export interface UpdateHistoryEntry {
   /** 使用した資料名（任意）。 */
   sourceUsed?: string;
   category: UpdateHistoryCategory;
+  /** 関連ページへのリンク先パス（任意）。指定した場合のみ linkLabel のボタンを表示する。 */
+  linkUrl?: string;
+  /** リンクボタンの表示文言（任意）。linkUrl とセットで指定する。 */
+  linkLabel?: string;
 }
 
 /** 市長交際費の支出1件分。延岡市公式資料に掲載された内容をそのまま保持する。 */

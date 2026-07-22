@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import updateHistoryData from "../data/updateHistory.json";
 import type { UpdateHistoryCategory, UpdateHistoryEntry } from "../types";
 import { SectionCard } from "../components/SectionCard";
@@ -60,6 +61,14 @@ export function UpdatesPage() {
               </div>
               {entry.sourceUsed && (
                 <p className="mt-2 text-xs text-on-surface-variant">使用資料：{entry.sourceUsed}</p>
+              )}
+              {entry.linkUrl && entry.linkLabel && (
+                <Link
+                  to={entry.linkUrl}
+                  className="mt-3 inline-flex items-center rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  {entry.linkLabel}
+                </Link>
               )}
             </SectionCard>
           </li>
