@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { getSeoForPath } from "../lib/seo";
 
 export function AboutPage() {
-  usePageTitle({
-    title: "このサイトについて",
-    description: "延岡市政見える化ポータルの目的、運営方針、主な情報源について説明しています。",
-  });
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
+  usePageTitle();
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">このサイトについて</h1>
       </div>

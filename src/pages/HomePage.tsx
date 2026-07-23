@@ -63,12 +63,7 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
 ];
 
 export function HomePage() {
-  usePageTitle({
-    title: "市長・市議会・議案を分かりやすく",
-    description:
-      "延岡市長、市議会議員、議案、採決結果、一般質問、報酬などの公開情報を、市民向けに分かりやすく整理した非公式データベースです。",
-    path: "/",
-  });
+  usePageTitle();
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [factionId, setFactionId] = useState<string | "all">(searchParams.get("faction") ?? "all");

@@ -11,14 +11,16 @@ import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { EmptyState } from "../components/EmptyState";
 import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { aggregateCategoryStatus } from "../lib/mayorPromiseStatus";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const mayor = mayorData as Mayor;
 const promisesData = mayorPromisesData as MayorPromisesData;
@@ -35,14 +37,16 @@ const termStartEntry = mayor.career.find((c) => c.description.includes("市長")
 const termStart = termStartEntry?.year ?? mayor.career[mayor.career.length - 1]?.year;
 
 export function MayorPage() {
-  usePageTitle({
-    title: `延岡市長 ${mayor.name}`,
-    description: `延岡市長${mayor.name}氏のプロフィール、経歴、公約、市政方針を公開資料に基づいて掲載しています。`,
-  });
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
+  usePageTitle();
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長情報" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <section className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
           <Avatar name={mayor.name} photoUrl={mayor.photoUrl} color="#375ca8" size="xl" loading="eager" />

@@ -12,10 +12,7 @@ const linkClass =
 export function MayorPressConferencesPage() {
   const conferences = getSortedMayorPressConferences();
 
-  usePageTitle({
-    title: "市長定例記者会見",
-    description: "延岡市長の定例記者会見の発表事項を、延岡市公式ホームページに基づいて開催日順に整理しています。",
-  });
+  usePageTitle();
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">

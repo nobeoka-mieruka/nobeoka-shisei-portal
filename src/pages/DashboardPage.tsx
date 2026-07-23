@@ -39,10 +39,7 @@ function normalizeCommitteeName(committee: string): string {
 }
 
 export function DashboardPage() {
-  usePageTitle({
-    title: "市政データダッシュボード",
-    description: "延岡市議会議員、議案、市長公約などの登録件数や構成を、データから自動集計して確認できます。",
-  });
+  usePageTitle();
   const total = members.length;
   const vacancySeats = Math.max(COUNCIL_STATUTORY_SEATS - total, 0);
 

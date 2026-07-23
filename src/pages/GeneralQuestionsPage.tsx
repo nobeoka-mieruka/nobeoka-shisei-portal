@@ -51,10 +51,7 @@ const PRIMARY_SOURCES = [
 ];
 
 export function GeneralQuestionsPage() {
-  usePageTitle({
-    title: "一般質問データベース",
-    description: "延岡市議会の一般質問を議員別、テーマ別、年度別に検索できます。質問項目・要約・出典を掲載しています。",
-  });
+  usePageTitle();
   const [searchParams] = useSearchParams();
 
   const [query, setQuery] = useState("");

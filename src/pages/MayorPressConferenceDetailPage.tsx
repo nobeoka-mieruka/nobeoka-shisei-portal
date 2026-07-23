@@ -1,6 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { getMayorPressConferenceByDate } from "../data/mayorPressConferences";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { MayorPressConferenceAnnouncementCard } from "../components/MayorPressConferenceAnnouncementCard";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
@@ -8,18 +9,15 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 export function MayorPressConferenceDetailPage() {
   const { date } = useParams<{ date: string }>();
+  const location = useLocation();
   const conference = date ? getMayorPressConferenceByDate(date) : undefined;
+  const seo = getSeoForPath(location.pathname);
 
-  usePageTitle({
-    title: conference ? conference.title : "記者会見が見つかりません",
-    description: conference
-      ? `延岡市長定例記者会見（${formatJapaneseDate(conference.date)}）で発表された内容を、延岡市公式ホームページに基づいて掲載しています。`
-      : undefined,
-    noindex: !conference,
-  });
+  usePageTitle();
 
   if (!conference) {
     return (
@@ -42,6 +40,9 @@ export function MayorPressConferenceDetailPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
       <Breadcrumbs
         items={[
           { label: "ホーム", to: "/" },

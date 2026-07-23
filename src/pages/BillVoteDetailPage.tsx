@@ -12,7 +12,6 @@ import { billVoteLabels } from "../lib/billVotes";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
-import { billOgImage } from "../lib/ogImage";
 import { GlobeIcon } from "../components/icons";
 
 const billVotes = billVotesData as BillVoteItem[];
@@ -59,15 +58,7 @@ export function BillVoteDetailPage() {
   const bill = billVotes.find((b) => b.id === id);
   const [copied, setCopied] = useState(false);
 
-  usePageTitle(
-    bill
-      ? {
-          title: `${bill.billNumber}「${bill.billTitle}」｜採決結果・議員別賛否`,
-          description: `${bill.billNumber}「${bill.billTitle}」の概要、議決結果（${bill.result}）、議員別の賛否を掲載しています。`,
-          image: billOgImage(bill.id),
-        }
-      : { title: "議案情報", noindex: true },
-  );
+  usePageTitle();
 
   if (!bill) {
     return (

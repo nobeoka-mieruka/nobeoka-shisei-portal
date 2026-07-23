@@ -1,9 +1,6 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const root = join(__dirname, "..");
+import { join } from "node:path";
+import { getPrerenderRoutes, root } from "./lib/public-routes.mjs";
 
 const failures = [];
 const warnings = [];
@@ -36,6 +33,22 @@ if (!existsSync(distIndexPath)) {
   if (!html.includes('property="og:image"')) warn("index.html にog:imageが見つかりません。");
   const titleMatch = html.match(/<title>([^<]*)<\/title>/);
   if (!titleMatch || titleMatch[1].trim().length === 0) fail("index.html のtitleが空です。");
+}
+
+// --- プリレンダリング対象URLごとのdist HTML存在確認 ---
+function distPathFor(routePath) {
+  if (routePath === "/") return join(root, "dist", "index.html");
+  return join(root, "dist", routePath.replace(/^\//, ""), "index.html");
+}
+const prerenderRoutes = getPrerenderRoutes();
+const missingRoutes = prerenderRoutes.filter((r) => !existsSync(distPathFor(r.path)));
+if (missingRoutes.length > 0) {
+  fail(
+    `プリレンダリング対象${prerenderRoutes.length}件中${missingRoutes.length}件のHTMLがdist/に存在しません（例: ${missingRoutes[0].path}）。`,
+  );
+}
+if (!existsSync(join(root, "dist", "404.html"))) {
+  fail("dist/404.html が見つかりません。");
 }
 
 // --- robots.txt / sitemap.xml / _redirects / og-image ---

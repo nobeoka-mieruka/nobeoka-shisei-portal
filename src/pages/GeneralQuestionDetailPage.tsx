@@ -33,14 +33,7 @@ export function GeneralQuestionDetailPage() {
   const { id } = useParams<{ id: string }>();
   const item = questions.find((q) => q.id === id);
 
-  usePageTitle(
-    item
-      ? {
-          title: `${item.title}｜${item.memberName}議員の一般質問`,
-          description: `${item.memberName}議員が${formatJapaneseDate(item.questionDate)}の${item.sessionName}で行った質問「${item.title}」の内容・答弁・出典を掲載しています。`,
-        }
-      : { title: "一般質問情報", noindex: true },
-  );
+  usePageTitle();
 
   if (!item) {
     return (

@@ -117,10 +117,7 @@ function sortBills(items: BillVoteItem[], sort: SortKey): BillVoteItem[] {
 }
 
 export function BillVotesPage() {
-  usePageTitle({
-    title: "議案ごとの賛否",
-    description: "延岡市議会に提出された議案の概要、採決結果、議員ごとの賛成・反対などを確認できます。",
-  });
+  usePageTitle();
 
   const [query, setQuery] = useState("");
   const [fiscalYear, setFiscalYear] = useState("all");
@@ -248,6 +245,7 @@ export function BillVotesPage() {
         )}
       </div>
 
+      <h2 className="sr-only">議案一覧</h2>
       {billVotes.length === 0 ? (
         <p className="mt-3 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
           現在、公開資料を確認しながら順次追加しています。
@@ -271,7 +269,7 @@ export function BillVotesPage() {
                           <span>{bill.billNumber}</span>
                           <span>{bill.session}</span>
                         </div>
-                        <h3 className="mt-1 text-base font-semibold leading-snug text-on-surface">{bill.billTitle}</h3>
+                        <h2 className="mt-1 text-base font-semibold leading-snug text-on-surface">{bill.billTitle}</h2>
                         <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-on-surface-variant">{bill.summary}</p>
                         <p className="mt-1 text-xs text-on-surface-variant">
                           提出日：{safeFormatDate(bill.submittedDate)}／議決日：{safeFormatDate(bill.votingDate)}／提出者：

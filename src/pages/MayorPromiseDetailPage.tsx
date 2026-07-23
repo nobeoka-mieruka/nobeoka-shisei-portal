@@ -53,14 +53,7 @@ export function MayorPromiseDetailPage() {
   const { id } = useParams<{ id: string }>();
   const promise = promisesData.promises.find((p) => p.id === id);
 
-  usePageTitle(
-    promise
-      ? {
-          title: `${promise.promiseText}｜市長公約の進捗状況`,
-          description: `市長公約「${promise.promiseText}」の進捗状況（${promise.statusLabel}）、根拠資料、最終確認日を掲載しています。`,
-        }
-      : { title: "公約情報", noindex: true },
-  );
+  usePageTitle();
 
   if (!promise) {
     return (

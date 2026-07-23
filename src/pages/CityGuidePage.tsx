@@ -22,11 +22,7 @@ type ViewMode = "diagnosis" | "list";
 type DiagnosisStep = "category" | "question" | "result";
 
 export function CityGuidePage() {
-  usePageTitle({
-    title: "延岡市役所 どこに行けばいい？診断｜相談先の課を簡単検索",
-    description:
-      "延岡市で困った時、どこの課に相談すればよいか質問に答えるだけで確認できます。福祉、子育て、高齢者、防災、生活相談など、市役所の相談窓口を分かりやすく案内します。",
-  });
+  usePageTitle();
 
   const [mode, setMode] = useState<ViewMode>("diagnosis");
   const [step, setStep] = useState<DiagnosisStep>("category");

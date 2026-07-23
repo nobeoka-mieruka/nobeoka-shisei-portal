@@ -42,10 +42,7 @@ const pendingMunicipalities = pendingMunicipalitiesData as PendingMunicipalityEn
 const NOBEOKA = "延岡市";
 
 export function CompensationPage() {
-  usePageTitle({
-    title: "市長・市議会議員の報酬",
-    description: "延岡市長、議長、副議長、市議会議員の月額報酬、期末手当、年間見込額、算出根拠を掲載しています。",
-  });
+  usePageTitle();
 
   const nobeoka = comparison.find((c) => c.municipality === NOBEOKA);
 

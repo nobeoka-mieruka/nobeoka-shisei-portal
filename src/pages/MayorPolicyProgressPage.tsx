@@ -49,10 +49,7 @@ function evidenceLabelsFor(promise: MayorPromiseItem): string[] {
 }
 
 export function MayorPolicyProgressPage() {
-  usePageTitle({
-    title: "市長公約の進捗状況",
-    description: "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料をキーワード・政策分野・進捗状況などで検索できます。",
-  });
+  usePageTitle();
 
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("all");

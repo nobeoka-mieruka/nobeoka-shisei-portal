@@ -1,6 +1,8 @@
 import { type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { getSeoForPath } from "../lib/seo";
 
 const categoryList = [
   "延岡市公式情報",
@@ -35,13 +37,13 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 export function EditorialPolicyPage() {
-  usePageTitle({
-    title: "編集方針・情報源",
-    description: "延岡市政見える化ポータルの編集方針、情報源、掲載しない情報の範囲について説明しています。",
-  });
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
+  usePageTitle();
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">編集方針</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">

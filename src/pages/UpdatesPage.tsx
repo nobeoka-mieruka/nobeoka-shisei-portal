@@ -1,10 +1,12 @@
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import updateHistoryData from "../data/updateHistory.json";
 import type { UpdateHistoryCategory, UpdateHistoryEntry } from "../types";
 import { SectionCard } from "../components/SectionCard";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const history = updateHistoryData as UpdateHistoryEntry[];
 
@@ -17,10 +19,9 @@ const categoryClass: Record<UpdateHistoryCategory, string> = {
 };
 
 export function UpdatesPage() {
-  usePageTitle({
-    title: "更新履歴",
-    description: "延岡市政見える化ポータルの機能追加、データ更新、表示改善などの更新履歴を掲載しています。",
-  });
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
+  usePageTitle();
 
   const sorted = useMemo(
     () => [...history].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)),
@@ -29,6 +30,7 @@ export function UpdatesPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">更新履歴</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">

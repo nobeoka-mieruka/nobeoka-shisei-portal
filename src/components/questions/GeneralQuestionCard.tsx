@@ -60,7 +60,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
           aria-expanded={expanded}
           className={`block w-full text-left ${linkClass}`}
         >
-          <h3 className="text-base font-semibold leading-snug text-on-surface">{item.title}</h3>
+          <h2 className="text-base font-semibold leading-snug text-on-surface">{item.title}</h2>
         </button>
       </div>
 

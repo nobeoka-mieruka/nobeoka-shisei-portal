@@ -79,11 +79,7 @@ export function SearchPage() {
 
   const hasQuery = query.trim().length > 0;
 
-  usePageTitle({
-    title: "サイト内検索",
-    description: "議員、一般質問、議案、市長公約、財政、報酬、市役所案内などをまとめて検索できます。",
-    noindex: hasQuery,
-  });
+  usePageTitle();
 
   const allResults: SearchResult[] = useMemo(() => searchEntries(searchIndex, query), [query]);
 

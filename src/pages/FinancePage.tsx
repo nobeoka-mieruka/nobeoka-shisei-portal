@@ -68,10 +68,7 @@ function SectionSource({ section }: { section: string }) {
 }
 
 export function FinancePage() {
-  usePageTitle({
-    title: "延岡市の財政",
-    description: `${data.fiscalYearLabel}の一般会計の歳入・歳出構成、基金残高、人口推移、財政指標を公開資料に基づいて整理しています。`,
-  });
+  usePageTitle();
 
   const populationWithYoy = useMemo(
     () =>

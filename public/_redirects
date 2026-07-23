@@ -1,1 +1,5 @@
-/* /index.html 200
+# すべてのURL（サイトマップ対象ページ、/search、/bills）はビルド時に
+# scripts/prerender.mjs が実体のHTMLファイルとして生成するため、
+# ここでSPA用の無条件フォールバック（/* /index.html 200）は行わない。
+# 一致する静的ファイルがないURLは、wrangler.jsonc の not_found_handling（404-page）により
+# dist/404.html が実際のHTTP 404として返される。

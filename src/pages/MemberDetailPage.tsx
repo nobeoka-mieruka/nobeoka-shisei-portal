@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
@@ -20,8 +20,8 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { formatJapaneseDate, SITE_URL } from "../config/site";
-import { memberOgImage } from "../lib/ogImage";
+import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -34,7 +34,9 @@ const linkClass =
 
 export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const member = members.find((m) => m.id === id);
+  const seo = getSeoForPath(location.pathname);
 
   const memberQuestions = member
     ? generalQuestions
@@ -58,23 +60,7 @@ export function MemberDetailPage() {
       )
     : {};
 
-  const titleParts = ["プロフィール"];
-  if (memberQuestions.length > 0) titleParts.push("一般質問");
-  if (memberBillVotes.length > 0) titleParts.push("議案賛否");
-
-  const descriptionParts = ["プロフィール", "所属会派", "所属委員会"];
-  if (memberQuestions.length > 0) descriptionParts.push("一般質問");
-  if (memberBillVotes.length > 0) descriptionParts.push("議案別の賛否");
-
-  usePageTitle(
-    member
-      ? {
-          title: `${member.name}議員｜${titleParts.join("・")}`,
-          description: `延岡市議会議員${member.name}氏の${descriptionParts.join("、")}などを掲載しています。`,
-          image: memberOgImage(member.id),
-        }
-      : { title: "議員情報", noindex: true },
-  );
+  usePageTitle();
 
   if (!member) {
     return (
@@ -92,26 +78,13 @@ export function MemberDetailPage() {
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
 
-  const verifiedSns = member.sns.filter((s) => s.verificationStatus === "verified").map((s) => s.url);
-  const sameAs = [...(member.profileUrl ? [member.profileUrl] : []), ...verifiedSns];
-
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
-      <JsonLd
-        id="person-jsonld"
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: member.name,
-          url: `${SITE_URL}/members/${member.id}`,
-          ...(sameAs.length > 0 ? { sameAs } : {}),
-          memberOf: { "@type": "Organization", name: "延岡市議会" },
-        }}
-      />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
       <BackLink to="/" label="議員一覧に戻る" />
-      <Breadcrumbs
-        items={[{ label: "ホーム", to: "/" }, { label: "議員一覧", to: "/" }, { label: member.name }]}
-      />
+      <Breadcrumbs items={seo.breadcrumbs} />
 
       <section className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
