@@ -32,6 +32,7 @@ import type {
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
+import { normalizePathname, safeDecodeURIComponent } from "./normalizePathname";
 
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
@@ -736,27 +737,33 @@ const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
  * optionsのlastmodは、プリレンダリング時にサイトマップと同じ値（public-routes.mjs）を渡すことで、
  * WebPage/DatasetのdateModifiedとサイトマップのlastmodを一致させる。クライアント側の通常のページ
  * 遷移ではlastmodを渡さないため、dateModifiedは省略される（初期HTML側はプリレンダリングで確定済み）。
+ *
+ * pathnameは、ルート判定（switch文・正規表現の完全一致）の前に必ずnormalizePathnameへ通す。
+ * Cloudflare Pagesが末尾スラッシュなしURLを末尾スラッシュ付きURLへリダイレクトするため、
+ * クライアント側で実際に読まれるlocation.pathnameは末尾スラッシュを含み得る
+ * （例: "/compensation/"）。正規化しないと「未登録のURL」と誤判定し、robotsが
+ * noindex, nofollowへ書き換わってしまう。
  */
 export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult {
-  const path = pathname === "" ? "/" : pathname;
+  const path = normalizePathname(pathname);
 
   const staticResult = staticPageSeo(path, options);
   if (staticResult) return staticResult;
 
   const memberMatch = path.match(MEMBER_RE);
-  if (memberMatch) return memberSeo(decodeURIComponent(memberMatch[1]), options);
+  if (memberMatch) return memberSeo(safeDecodeURIComponent(memberMatch[1]), options);
 
   const questionMatch = path.match(QUESTION_RE);
-  if (questionMatch) return questionSeo(decodeURIComponent(questionMatch[1]), options);
+  if (questionMatch) return questionSeo(safeDecodeURIComponent(questionMatch[1]), options);
 
   const promiseMatch = path.match(PROMISE_RE);
-  if (promiseMatch) return promiseSeo(decodeURIComponent(promiseMatch[1]), options);
+  if (promiseMatch) return promiseSeo(safeDecodeURIComponent(promiseMatch[1]), options);
 
   const billVoteMatch = path.match(BILL_VOTE_RE);
-  if (billVoteMatch) return billVoteSeo(decodeURIComponent(billVoteMatch[1]), options);
+  if (billVoteMatch) return billVoteSeo(safeDecodeURIComponent(billVoteMatch[1]), options);
 
   const pressConferenceMatch = path.match(PRESS_CONFERENCE_RE);
-  if (pressConferenceMatch) return pressConferenceSeo(decodeURIComponent(pressConferenceMatch[1]), options);
+  if (pressConferenceMatch) return pressConferenceSeo(safeDecodeURIComponent(pressConferenceMatch[1]), options);
 
   return notFound(path, "ページが見つかりません");
 }
