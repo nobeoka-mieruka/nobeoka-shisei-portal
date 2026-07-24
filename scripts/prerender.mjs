@@ -16,13 +16,11 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { getPrerenderRoutes, root } from "./lib/public-routes.mjs";
+import { DEFAULT_OG_IMAGE, SITE_NAME } from "./lib/site-config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 void __dirname;
 
-const SITE_URL = "https://nobeoka-shisei-portal.pages.dev";
-const SITE_NAME = "延岡市政見える化ポータル";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const NOT_FOUND_SENTINEL_PATH = "/__prerender_not_found__";
 
 const distDir = join(root, "dist");
@@ -129,7 +127,7 @@ const failures = [];
 
 for (const route of routes) {
   try {
-    const seo = getSeoForPath(route.path);
+    const seo = getSeoForPath(route.path, { lastmod: route.lastmod });
     const isBillsRedirectStub = route.path === "/bills";
     const appHtml = isBillsRedirectStub ? billsRedirectStubHtml() : await renderApp(route.path);
     const extraHeadHtml = isBillsRedirectStub

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import generalQuestionsData from "../data/generalQuestions.json";
 import membersData from "../data/members.json";
 import type { CouncilMember, GeneralQuestionItem } from "../types";
@@ -9,9 +9,11 @@ import { StatCard } from "../components/StatCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { GeneralQuestionCard } from "../components/questions/GeneralQuestionCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
+import { getSeoForPath } from "../lib/seo";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -51,6 +53,8 @@ const PRIMARY_SOURCES = [
 ];
 
 export function GeneralQuestionsPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [searchParams] = useSearchParams();
 
@@ -149,7 +153,10 @@ export function GeneralQuestionsPage() {
 
   return (
     <div className="px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "一般質問データベース" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">一般質問データベース</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">

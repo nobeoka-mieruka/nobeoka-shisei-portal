@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import policyProgressData from "../data/mayorPolicyProgress.json";
 import mayorPromisesData from "../data/mayorPromises.json";
 import billVotesData from "../data/billVotes.json";
@@ -14,12 +14,14 @@ import type {
 } from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const promisesData = mayorPromisesData as MayorPromisesData;
 const policyData = policyProgressData as MayorPolicyProgressData;
@@ -51,7 +53,9 @@ function collectEvidenceDocs(promise: MayorPromiseItem): EvidenceDoc[] {
 
 export function MayorPromiseDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const promise = promisesData.promises.find((p) => p.id === id);
+  const seo = getSeoForPath(location.pathname);
 
   usePageTitle();
 
@@ -90,13 +94,10 @@ export function MayorPromiseDetailPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs
-        items={[
-          { label: "ホーム", to: "/" },
-          { label: "市長公約の進捗状況", to: "/mayor/policy-progress" },
-          { label: category?.title ?? promise.categoryTitle },
-        ]}
-      />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <BackLink to="/mayor/policy-progress" label="公約一覧に戻る" />
 
       {/* 公約の基本情報 */}

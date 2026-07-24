@@ -6,23 +6,20 @@
  *   検索結果ページ（/search）の索引対象化はしない。
  * - /bills, /search は「実在するが索引対象ではないページ」として、
  *   サイトマップには含めず、プリレンダリング対象には含める（直接アクセスで404にしないため）。
+ * - lastmodは scripts/lib/lastmod.mjs の優先順位（データ内の日付→更新履歴→
+ *   データファイルのGit更新日→サイト全体の最終更新日）に従って解決する。
+ *   ビルドした日を無条件に設定することはしない。
  */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { maxValidDate, resolveLastmod } from "./lastmod.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const root = join(__dirname, "..", "..");
 
-const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
-
 function readJson(relPath) {
   return JSON.parse(readFileSync(join(root, relPath), "utf8"));
-}
-
-/** 日付形式（YYYY-MM-DD）のときだけlastmodとして採用する。ビルド日時や当日日付での代用はしない。 */
-function asLastmod(value) {
-  return typeof value === "string" && DATE_RE.test(value) ? value : undefined;
 }
 
 /**
@@ -95,31 +92,127 @@ function loadData() {
   const mayorPromises = readJson("src/data/mayorPromises.json");
   const generalQuestions = readJson("src/data/generalQuestions.json");
   const mayorPressConferences = readMayorPressConferences();
-  return { members, billVotes, mayorPromises, generalQuestions, mayorPressConferences };
+  const mayor = readJson("src/data/mayor.json");
+  const financeDashboard = readJson("src/data/financeDashboard.json");
+  const mayorEntertainmentExpenses = readJson("src/data/mayorEntertainmentExpenses.json");
+  const compensationComparison = readJson("src/data/compensationComparison.json");
+  const cityGuideEntries = readJson("src/data/cityGuideEntries.json");
+  const mayorPolicyProgress = readJson("src/data/mayorPolicyProgress.json");
+  const updateHistory = readJson("src/data/updateHistory.json");
+  return {
+    members,
+    billVotes,
+    mayorPromises,
+    generalQuestions,
+    mayorPressConferences,
+    mayor,
+    financeDashboard,
+    mayorEntertainmentExpenses,
+    compensationComparison,
+    cityGuideEntries,
+    mayorPolicyProgress,
+    updateHistory,
+  };
 }
 
-/** サイトマップに載せる索引対象URL（{path, lastmod}[]）。現在69件。 */
+/** 固定ページごとのlastmod解決ルール。 */
+function staticPageLastmod(path, data) {
+  switch (path) {
+    case "/":
+      return resolveLastmod(path, [], [
+        "src/data/members.json",
+        "src/data/mayor.json",
+        "src/data/billVotes.json",
+        "src/data/generalQuestions.json",
+        "src/data/mayorPromises.json",
+      ]);
+    case "/mayor":
+      return resolveLastmod(path, [data.mayor.verifiedAt, data.mayor.updatedAt], ["src/data/mayor.json"]);
+    case "/mayor/policy-progress":
+      return resolveLastmod(
+        path,
+        [data.mayorPolicyProgress.referenceDate, maxValidDate((data.mayorPromises.promises ?? []).map((p) => p.lastVerified))],
+        ["src/data/mayorPolicyProgress.json", "src/data/mayorPromises.json"],
+      );
+    case "/mayor/entertainment-expenses":
+      return resolveLastmod(path, [data.mayorEntertainmentExpenses.lastVerified], ["src/data/mayorEntertainmentExpenses.json"]);
+    case "/mayor/press-conferences":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.mayorPressConferences.map((c) => c.verifiedAt))],
+        ["src/data/mayorPressConferences.ts"],
+      );
+    case "/finance":
+      return resolveLastmod(path, [data.financeDashboard.lastVerified], ["src/data/financeDashboard.json"]);
+    case "/dashboard":
+      return resolveLastmod(path, [], ["src/data/members.json", "src/data/billVotes.json", "src/data/mayorPromises.json"]);
+    case "/compensation":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.compensationComparison.map((c) => c.confirmedAt))],
+        ["src/data/compensationComparison.json"],
+      );
+    case "/city-guide":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.cityGuideEntries.map((e) => e.lastChecked))],
+        ["src/data/cityGuideEntries.json"],
+      );
+    case "/bills/votes":
+      return resolveLastmod(path, [maxValidDate(data.billVotes.map((b) => b.lastVerified))], ["src/data/billVotes.json"]);
+    case "/questions":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.generalQuestions.map((q) => q.lastVerified))],
+        ["src/data/generalQuestions.json"],
+      );
+    case "/about":
+      return resolveLastmod(path, [], ["src/pages/AboutPage.tsx", "src/config/operator.ts"]);
+    case "/editorial-policy":
+      return resolveLastmod(path, [], ["src/pages/EditorialPolicyPage.tsx"]);
+    case "/contact":
+      return resolveLastmod(path, [], ["src/pages/ContactPage.tsx"]);
+    case "/terms":
+      return resolveLastmod(path, [], ["src/pages/TermsPage.tsx"]);
+    case "/updates":
+      return resolveLastmod(path, [maxValidDate(data.updateHistory.map((u) => u.date))], ["src/data/updateHistory.json"]);
+    default:
+      return undefined;
+  }
+}
+
+/** サイトマップに載せる索引対象URL（{path, lastmod}[]）。 */
 export function getIndexableRoutes() {
-  const { members, billVotes, mayorPromises, generalQuestions, mayorPressConferences } = loadData();
+  const data = loadData();
+  const { members, billVotes, mayorPromises, generalQuestions, mayorPressConferences } = data;
   const urls = [];
 
   for (const path of STATIC_INDEXABLE_PAGES) {
-    urls.push({ path });
+    urls.push({ path, lastmod: staticPageLastmod(path, data) });
   }
   for (const m of members) {
-    urls.push({ path: `/members/${m.id}`, lastmod: asLastmod(m.updatedAt) });
+    urls.push({ path: `/members/${m.id}`, lastmod: resolveLastmod(`/members/${m.id}`, [m.updatedAt, m.verifiedAt], ["src/data/members.json"]) });
   }
   for (const b of billVotes) {
-    urls.push({ path: `/bills/votes/${b.id}`, lastmod: asLastmod(b.lastVerified) });
+    urls.push({ path: `/bills/votes/${b.id}`, lastmod: resolveLastmod(`/bills/votes/${b.id}`, [b.lastVerified], ["src/data/billVotes.json"]) });
   }
   for (const p of mayorPromises.promises ?? []) {
-    urls.push({ path: `/mayor/policy-progress/${p.id}`, lastmod: asLastmod(p.lastVerified) });
+    urls.push({
+      path: `/mayor/policy-progress/${p.id}`,
+      lastmod: resolveLastmod(`/mayor/policy-progress/${p.id}`, [p.lastVerified], ["src/data/mayorPromises.json"]),
+    });
   }
   for (const q of generalQuestions) {
-    urls.push({ path: `/questions/${q.id}`, lastmod: asLastmod(q.lastVerified) });
+    urls.push({
+      path: `/questions/${q.id}`,
+      lastmod: resolveLastmod(`/questions/${q.id}`, [q.lastVerified, q.questionDate], ["src/data/generalQuestions.json"]),
+    });
   }
   for (const c of mayorPressConferences) {
-    urls.push({ path: `/mayor/press-conferences/${c.date}`, lastmod: asLastmod(c.verifiedAt) });
+    urls.push({
+      path: `/mayor/press-conferences/${c.date}`,
+      lastmod: resolveLastmod(`/mayor/press-conferences/${c.date}`, [c.verifiedAt, c.date], ["src/data/mayorPressConferences.ts"]),
+    });
   }
 
   const dedupedByPath = new Map();

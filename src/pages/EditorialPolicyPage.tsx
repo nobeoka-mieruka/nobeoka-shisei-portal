@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 
@@ -27,9 +28,9 @@ const sourceList = [
   "政党、会派、政治団体などの公式発表",
 ];
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
   return (
-    <section className="mt-8 first:mt-0">
+    <section id={id} className="mt-8 scroll-mt-20 first:mt-0">
       <h2 className="text-base font-semibold text-slate-900 sm:text-lg">{title}</h2>
       <div className="mt-2 space-y-3 text-[15px] leading-relaxed text-slate-700">{children}</div>
     </section>
@@ -43,6 +44,9 @@ export function EditorialPolicyPage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
       <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">編集方針</h1>
@@ -74,12 +78,18 @@ export function EditorialPolicyPage() {
           <p>未確認の噂、匿名の情報、根拠の確認できない情報は掲載しません。</p>
         </Section>
 
-        <Section title="公正中立性について">
-          <p>当サイト独自の採点、ランキング、推薦、当落予測などは行いません。</p>
+        <Section id="neutrality" title="政治的中立性と利益相反">
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>特定の政党、会派、政治家、候補者の宣伝を目的としません。</li>
+            <li>掲載の有無や表示順を、支持・不支持によって変更しません。</li>
+            <li>運営者と掲載対象者に関係がある場合でも、公開資料に基づいて掲載します。</li>
+            <li>利害関係により公平性へ影響する可能性がある場合は、必要に応じて明示します。</li>
+            <li>意見、推測、評価と、確認できた事実を区別して掲載します。</li>
+            <li>独自の当落予測、人物採点、推薦は掲載しません。</li>
+          </ul>
           <p>
-            一般質問の回数、議案への賛否、公約の進捗などを掲載する場合も、その数字だけで議員や市長を評価することはありません。
+            一般質問の回数、議案への賛否、公約の進捗などを掲載する場合も、その数字だけで議員や市長を評価することはありません。市民が公開情報を確認するための材料を、できる限り分かりやすく整理して掲載します。
           </p>
-          <p>市民が公開情報を確認するための材料を、できる限り分かりやすく整理して掲載します。</p>
         </Section>
 
         <Section title="公的資料と本人発信の区別">
@@ -102,9 +112,15 @@ export function EditorialPolicyPage() {
           <p>最新の情報については、延岡市、延岡市議会、選挙管理委員会、議員本人などが公開する公式情報をご確認ください。</p>
         </Section>
 
-        <Section title="訂正と情報提供">
-          <p>掲載内容に誤りがある場合や、追加すべき公開情報がある場合は、情報提供・訂正依頼窓口からご連絡ください。</p>
-          <p>提供された情報は、公開資料や公式情報を確認したうえで、必要に応じて修正または追加します。</p>
+        <Section id="correction-policy" title="訂正・更新方針">
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>誤りが確認された場合は、速やかに修正します。</li>
+            <li>重要な訂正は、更新履歴にも掲載します。</li>
+            <li>情報提供があった場合でも、公式資料や一次情報を確認したうえで反映します。即時には反映されないことがあります。</li>
+            <li>根拠が確認できない情報は掲載しません。</li>
+            <li>古い情報には、確認日または更新日を表示します。</li>
+            <li>公式情報が更新された場合でも、当サイトへ自動的に即時反映されるとは限りません。</li>
+          </ul>
           <p>情報提供を受けたすべての内容を掲載するとは限りません。</p>
           <p>
             誹謗中傷、個人情報、根拠の確認できない情報、特定の候補者などの宣伝を目的とした内容は掲載しません。
@@ -119,7 +135,6 @@ export function EditorialPolicyPage() {
         <Section title="選挙期間中の掲載方針">
           <p>選挙期間中も、特定の候補者を支持、推薦または批判する目的で情報を掲載しません。</p>
           <p>候補者情報を掲載する場合は、選挙管理委員会、候補者本人、政党その他の公式情報を基にします。</p>
-          <p>候補者のおすすめ、独自採点、当落予測、人気投票などは行いません。</p>
           <p>現職議員、市長、候補者、立候補予定者を混同しないように表示します。</p>
         </Section>
 

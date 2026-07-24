@@ -4,6 +4,7 @@ import updateHistoryData from "../data/updateHistory.json";
 import type { UpdateHistoryCategory, UpdateHistoryEntry } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -30,6 +31,9 @@ export function UpdatesPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
       <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">更新履歴</h1>

@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useRef } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { initGoogleAnalytics, trackPageView } from "./lib/analytics";
 import { SiteHeader } from "./components/SiteHeader";
@@ -55,7 +55,10 @@ function RouteLoadingFallback() {
       role="status"
       aria-live="polite"
     >
-      <span className="h-8 w-8 animate-spin rounded-full border-4 border-outline-variant border-t-primary" />
+      <span
+        aria-hidden="true"
+        className="h-8 w-8 animate-spin rounded-full border-4 border-outline-variant border-t-primary"
+      />
       <span className="sr-only">読み込み中</span>
     </div>
   );
@@ -63,6 +66,8 @@ function RouteLoadingFallback() {
 
 function App() {
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     initGoogleAnalytics();
@@ -72,11 +77,35 @@ function App() {
     trackPageView(location.pathname + location.search);
   }, [location]);
 
+  // ページ（パス）が変わったときだけ、本文の先頭へスクロールしフォーカスを移す。
+  // 初回表示時（ブラウザの初期フォーカス）と、検索・絞り込みなどクエリ文字列だけが
+  // 変わる操作では、意図せずフォーカスを奪わないようlocation.pathnameだけを監視する。
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0 });
+    mainRef.current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
   return (
     <div className="flex min-h-svh flex-col overflow-x-hidden bg-surface">
+      <a
+        href="#main-content"
+        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-2 focus-visible:top-2 focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-primary focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium focus-visible:text-on-primary focus-visible:shadow-e2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-primary"
+      >
+        本文へ移動
+      </a>
       <SiteHeader />
       <MaintenanceNotice />
-      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col pb-24 md:pb-10">
+      <main
+        id="main-content"
+        ref={mainRef}
+        tabIndex={-1}
+        className="mx-auto flex w-full max-w-5xl flex-1 flex-col pb-24 outline-none md:pb-10"
+      >
         <div className="flex-1">
           <Suspense fallback={<RouteLoadingFallback />}>
             <Routes>

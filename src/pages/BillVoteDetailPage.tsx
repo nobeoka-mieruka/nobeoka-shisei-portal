@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import mayorPromisesData from "../data/mayorPromises.json";
@@ -10,9 +10,11 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
 import { billVoteLabels } from "../lib/billVotes";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "../components/icons";
+import { getSeoForPath } from "../lib/seo";
 
 const billVotes = billVotesData as BillVoteItem[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -55,7 +57,9 @@ function collectDocuments(bill: BillVoteItem): DocumentLink[] {
 
 export function BillVoteDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const bill = billVotes.find((b) => b.id === id);
+  const seo = getSeoForPath(location.pathname);
   const [copied, setCopied] = useState(false);
 
   usePageTitle();
@@ -108,13 +112,10 @@ export function BillVoteDetailPage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6 print:space-y-3 print:px-0 print:py-0">
-      <Breadcrumbs
-        items={[
-          { label: "ホーム", to: "/" },
-          { label: "議案一覧", to: "/bills/votes" },
-          { label: bill.billNumber },
-        ]}
-      />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
         <BackLink to="/bills/votes" label="議案・賛否一覧に戻る" />
         <div className="flex items-center gap-2">

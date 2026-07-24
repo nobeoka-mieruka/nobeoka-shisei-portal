@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import generalQuestionsData from "../data/generalQuestions.json";
 import membersData from "../data/members.json";
 import billVotesData from "../data/billVotes.json";
@@ -6,6 +6,7 @@ import mayorPromisesData from "../data/mayorPromises.json";
 import type { BillVoteItem, CouncilMember, GeneralQuestionItem, MayorPromisesData } from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FactionChip } from "../components/FactionChip";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
@@ -13,6 +14,7 @@ import { GlobeIcon, PlayIcon } from "../components/icons";
 import { getFaction } from "../lib/factions";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -31,7 +33,9 @@ function videoHref(item: GeneralQuestionItem): string {
 
 export function GeneralQuestionDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const item = questions.find((q) => q.id === id);
+  const seo = getSeoForPath(location.pathname);
 
   usePageTitle();
 
@@ -79,13 +83,10 @@ export function GeneralQuestionDetailPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs
-        items={[
-          { label: "ホーム", to: "/" },
-          { label: "一般質問データベース", to: "/questions" },
-          { label: item.memberName },
-        ]}
-      />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <BackLink to="/questions" label="一般質問データベースに戻る" />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">

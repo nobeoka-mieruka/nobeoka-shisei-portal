@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import policyProgressData from "../data/mayorPolicyProgress.json";
 import mayorPromisesData from "../data/mayorPromises.json";
 import type { MayorPolicyProgressData, MayorPromiseItem, MayorPromiseStatusLabel, MayorPromisesData } from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SearchBar } from "../components/SearchBar";
@@ -13,6 +15,7 @@ import { PromiseCard } from "../components/mayor/PromiseCard";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate, toFiscalYearLabel } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const data = policyProgressData as MayorPolicyProgressData;
 const promisesData = mayorPromisesData as MayorPromisesData;
@@ -49,6 +52,8 @@ function evidenceLabelsFor(promise: MayorPromiseItem): string[] {
 }
 
 export function MayorPolicyProgressPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
   const [query, setQuery] = useState("");
@@ -144,7 +149,10 @@ export function MayorPolicyProgressPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長公約の進捗状況" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <BackLink to="/mayor" label="市長情報に戻る" />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">

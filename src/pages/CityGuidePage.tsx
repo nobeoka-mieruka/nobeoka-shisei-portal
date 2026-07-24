@@ -1,8 +1,11 @@
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { getSeoForPath } from "../lib/seo";
 import { CategorySelector } from "../components/city-guide/CategorySelector";
 import { QuestionCard } from "../components/city-guide/QuestionCard";
 import { ResultCard } from "../components/city-guide/ResultCard";
@@ -22,6 +25,8 @@ type ViewMode = "diagnosis" | "list";
 type DiagnosisStep = "category" | "question" | "result";
 
 export function CityGuidePage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
   const [mode, setMode] = useState<ViewMode>("diagnosis");
@@ -89,7 +94,10 @@ export function CityGuidePage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市役所案内" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
 
       <p className="rounded-xl border border-outline-variant bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         本ページは、延岡市民の皆さまが相談先を探す際の参考情報として、独自に作成した非公式案内です。最新の情報や正式な手続きについては、延岡市公式ホームページまたは各担当窓口へご確認ください。

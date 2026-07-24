@@ -18,8 +18,8 @@ const searchLinkClass = ({ isActive }: { isActive: boolean }) =>
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-outline-variant bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 print:hidden">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
-        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-2 gap-y-1.5 px-3 py-2 sm:gap-x-4 sm:gap-y-2 sm:px-4 sm:py-3">
+        <div className="flex min-w-0 items-center gap-1.5 sm:gap-3">
           <Link
             to="/"
             aria-label="延岡市政見える化ポータルのトップページへ"
@@ -30,7 +30,7 @@ export function SiteHeader() {
               alt="延岡市政見える化ポータル"
               width={1536}
               height={1024}
-              className="h-auto w-[clamp(200px,38vw,400px)] max-w-full shrink-0 rounded-md bg-white object-contain px-2 py-1.5"
+              className="h-auto w-[160px] max-w-full shrink-0 rounded-md bg-white object-contain px-1.5 py-1 sm:w-[clamp(200px,38vw,400px)] sm:px-2 sm:py-1.5"
             />
           </Link>
           <span className="shrink-0 rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant sm:px-2.5 sm:text-xs">

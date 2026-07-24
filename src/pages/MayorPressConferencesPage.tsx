@@ -1,22 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getSortedMayorPressConferences } from "../data/mayorPressConferences";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { StatCard } from "../components/StatCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 export function MayorPressConferencesPage() {
   const conferences = getSortedMayorPressConferences();
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
 
   usePageTitle();
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長情報", to: "/mayor" }, { label: "市長定例記者会見" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市長定例記者会見</h1>

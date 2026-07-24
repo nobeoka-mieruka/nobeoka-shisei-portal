@@ -4,6 +4,7 @@ import { GlobeIcon } from "../components/icons";
 import { CONTACT_FORM_URL } from "../config/site";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 
@@ -14,6 +15,9 @@ export function ContactPage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
       <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">情報提供・訂正依頼</h1>

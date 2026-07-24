@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import billVotesData from "../data/billVotes.json";
 import mayorData from "../data/mayor.json";
@@ -14,8 +14,12 @@ import { FilterSelect } from "../components/FilterSelect";
 import { SortSelect, type SortKey } from "../components/SortSelect";
 import { StatCard } from "../components/StatCard";
 import { SiteAnalyticsSummary } from "../components/SiteAnalyticsSummary";
+import { JsonLd } from "../components/JsonLd";
+import { CompassIcon, QuestionMarkCircleIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
+import { getSeoForPath } from "../lib/seo";
+import { coverageHint } from "../data/dataCoverage";
 
 const members = membersData as CouncilMember[];
 const billVotes = billVotesData as BillVoteItem[];
@@ -63,6 +67,8 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
 ];
 
 export function HomePage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
@@ -133,6 +139,9 @@ export function HomePage() {
 
   return (
     <div className="px-4 py-4 sm:px-6">
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
       <div className="mb-5 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">
           延岡市政を、もっと分かりやすく
@@ -142,9 +151,93 @@ export function HomePage() {
         </p>
       </div>
 
-      <p className="mb-5 rounded-xl bg-surface-container-low p-3 text-base leading-relaxed text-on-surface-variant">
+      <p className="mb-3 rounded-xl bg-surface-container-low p-3 text-base leading-relaxed text-on-surface-variant">
         このサイトは、公開資料を市民向けに整理した非公式の情報サイトです。正式な情報は、延岡市および延岡市議会の公式資料をご確認ください。
       </p>
+
+      <nav aria-label="サイトの信頼性に関する情報" className="mb-5 flex flex-wrap gap-x-4 gap-y-1.5 px-1 text-sm">
+        <Link
+          to="/about"
+          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          このサイトについて
+        </Link>
+        <Link
+          to="/editorial-policy"
+          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          編集方針・情報源
+        </Link>
+        <Link
+          to="/contact"
+          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          情報提供・訂正依頼
+        </Link>
+        <Link
+          to="/updates"
+          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          更新履歴
+        </Link>
+      </nav>
+
+      <section aria-labelledby="purpose-nav-heading" className="mb-6">
+        <h2 id="purpose-nav-heading" className="mb-2 text-base font-semibold text-on-surface">
+          目的から探す
+        </h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <Link
+            to="/city-guide"
+            className="flex flex-col gap-2 rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container text-on-tertiary-container">
+              <CompassIcon className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span className="text-sm font-semibold text-on-surface">市役所の相談先を探す</span>
+            <span className="text-xs leading-relaxed text-on-surface-variant">
+              質問に答えて、担当課・電話番号・受付時間・公式情報を確認できます。
+            </span>
+          </Link>
+
+          <Link
+            to="/questions"
+            className="flex flex-col gap-2 rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
+              <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span className="text-sm font-semibold text-on-surface">議員・一般質問を調べる</span>
+            <span className="text-xs leading-relaxed text-on-surface-variant">
+              市議会議員や一般質問の内容を検索できます。
+            </span>
+          </Link>
+
+          <div className="flex flex-col gap-2 rounded-xl bg-surface-container-low p-4 shadow-e1">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-container text-on-primary-container">
+              <YenIcon className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span className="text-sm font-semibold text-on-surface">財政・報酬を見る</span>
+            <span className="text-xs leading-relaxed text-on-surface-variant">
+              延岡市の予算、財政、市長・議員報酬を確認できます。
+            </span>
+            <div className="mt-1 flex gap-2">
+              <Link
+                to="/finance"
+                className="flex-1 rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                財政を見る
+              </Link>
+              <Link
+                to="/compensation"
+                className="flex-1 rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                報酬を見る
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section aria-labelledby="city-data-summary-heading" className="mb-6">
         <h2 id="city-data-summary-heading" className="mb-2 text-base font-semibold text-on-surface">
@@ -154,8 +247,18 @@ export function HomePage() {
           <StatCard label="議員定数" value={COUNCIL_STATUTORY_SEATS} unit="名" />
           <StatCard label="市議会議員数" value={members.length} unit="名" />
           <StatCard label="欠員" value={vacantSeats} unit="名" />
-          <StatCard label="登録済み議案数" value={billVotes.length} unit="件" />
-          <StatCard label="登録済み一般質問数" value={registeredQuestionCount} unit="件" />
+          <StatCard
+            label="登録済み議案数"
+            value={billVotes.length}
+            unit="件"
+            hint={coverageHint("billVotes", billVotes.length)}
+          />
+          <StatCard
+            label="登録済み一般質問数"
+            value={registeredQuestionCount}
+            unit="件"
+            hint={coverageHint("generalQuestions", registeredQuestionCount)}
+          />
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
           <StatCard label="最終更新日" value={getLastUpdatedText()} compact />
         </div>
@@ -215,7 +318,7 @@ export function HomePage() {
         </div>
       </div>
 
-      <p className="mb-3 mt-3 text-sm text-on-surface-variant">
+      <p className="mb-3 mt-3 text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
         {members.length}名中{filteredMembers.length}名を表示
       </p>
 

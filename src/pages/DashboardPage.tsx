@@ -13,8 +13,11 @@ import { ProgressStat } from "../components/dashboard/ProgressStat";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
-import { Link } from "react-router-dom";
+import { JsonLd } from "../components/JsonLd";
+import { Link, useLocation } from "react-router-dom";
 import { ChartBarIcon } from "../components/icons";
+import { getSeoForPath } from "../lib/seo";
+import { coverageHint } from "../data/dataCoverage";
 
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
@@ -39,6 +42,8 @@ function normalizeCommitteeName(committee: string): string {
 }
 
 export function DashboardPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const total = members.length;
   const vacancySeats = Math.max(COUNCIL_STATUTORY_SEATS - total, 0);
@@ -236,7 +241,10 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "ダッシュボード" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">ダッシュボード</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">現員{total}名の構成をひと目で確認できます。</p>
@@ -259,8 +267,13 @@ export function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="登録済み一般質問数" value={totalQuestions} unit="件" />
-        <StatCard label="登録済み議案数" value={totalBills} unit="件" />
+        <StatCard
+          label="登録済み一般質問数"
+          value={totalQuestions}
+          unit="件"
+          hint={coverageHint("generalQuestions", totalQuestions)}
+        />
+        <StatCard label="登録済み議案数" value={totalBills} unit="件" hint={coverageHint("billVotes", totalBills)} />
         <StatCard label="採決情報が確認できた議案数" value={billsWithResult} unit="件" />
         <StatCard label="市長公約の登録数" value={totalPledges} unit="件" />
       </div>

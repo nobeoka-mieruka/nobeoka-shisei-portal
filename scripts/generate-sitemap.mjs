@@ -1,8 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { getIndexableRoutes, root } from "./lib/public-routes.mjs";
-
-const SITE_URL = "https://nobeoka-shisei-portal.pages.dev";
+import { SITE_URL } from "./lib/site-config.mjs";
 
 function escapeXml(text) {
   return String(text)

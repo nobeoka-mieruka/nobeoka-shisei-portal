@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import expensesData from "../data/mayorEntertainmentExpenses.json";
 import type { MayorEntertainmentExpenseItem, MayorEntertainmentExpensesData } from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceLink } from "../components/SourceLink";
@@ -11,6 +13,7 @@ import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 
 const data = expensesData as MayorEntertainmentExpensesData;
 
@@ -38,6 +41,8 @@ type MonthRow =
   | { month: string; status: "unconfirmed"; amount: null; count: null; items: [] };
 
 export function MayorEntertainmentExpensesPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
   const total = useMemo(() => data.expenses.reduce((sum, e) => sum + e.amount, 0), []);
@@ -150,7 +155,10 @@ export function MayorEntertainmentExpensesPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "市長情報", to: "/mayor" }, { label: "市長交際費" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <BackLink to="/mayor" label="市長情報に戻る" />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">

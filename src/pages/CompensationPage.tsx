@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import compensationData from "../data/compensationComparison.json";
 import prefectureRankingData from "../data/prefectureCompensationRanking.json";
 import miyazakiComparisonData from "../data/miyazakiCompensationComparison.json";
@@ -19,10 +20,12 @@ import { SourceLink } from "../components/SourceLink";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { CompensationBarChart } from "../components/compensation/CompensationBarChart";
 import { MiyazakiComparisonTable } from "../components/compensation/MiyazakiComparisonTable";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
 import {
   COMPENSATION_ROLES,
   calcAnnualEstimate,
@@ -42,6 +45,8 @@ const pendingMunicipalities = pendingMunicipalitiesData as PendingMunicipalityEn
 const NOBEOKA = "延岡市";
 
 export function CompensationPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
   const nobeoka = comparison.find((c) => c.municipality === NOBEOKA);
@@ -59,7 +64,10 @@ export function CompensationPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-4 px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "報酬" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市長・市議会議員の報酬</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">

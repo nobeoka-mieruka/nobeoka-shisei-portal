@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
 import type { BillProposerType, BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
@@ -8,8 +8,11 @@ import { SortIcon } from "../components/icons";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
+import { getSeoForPath } from "../lib/seo";
+import { dataCoverage } from "../data/dataCoverage";
 
 const billVotes = billVotesData as BillVoteItem[];
 
@@ -117,6 +120,8 @@ function sortBills(items: BillVoteItem[], sort: SortKey): BillVoteItem[] {
 }
 
 export function BillVotesPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
   const [query, setQuery] = useState("");
@@ -199,7 +204,10 @@ export function BillVotesPage() {
 
   return (
     <div className="px-4 py-4 sm:px-6">
-      <Breadcrumbs items={[{ label: "ホーム", to: "/" }, { label: "議案ごとの賛否" }]} />
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">議案ごとの賛否</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
@@ -248,7 +256,7 @@ export function BillVotesPage() {
       <h2 className="sr-only">議案一覧</h2>
       {billVotes.length === 0 ? (
         <p className="mt-3 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
-          現在、公開資料を確認しながら順次追加しています。
+          {dataCoverage.billVotes.zeroCountNote}
         </p>
       ) : (
         <>
