@@ -1,0 +1,670 @@
+{
+  "version": 1,
+  "generatedAt": "2026-08-02",
+  "members": [
+    {
+      "memberId": "m01",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m02",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m03",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m04",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m05",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m06",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m07",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 1,
+      "analysisStatus": "pending",
+      "generatedAt": "2026-08-02",
+      "verifiedAt": null,
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの1会期で確認された質問内容を整理しています。データが限られているため、継続的な傾向を示すものではありません。確認された主なテーマは、人口減少対策、熱中症対策などです。質問の取り上げ方としては、課題の指摘、事業導入の提案などが確認されています。市側からは、回答のみで方針不明1件、実施予定1件などの答弁が確認されています。未解析の25会期はこの分析に含まれていません。",
+      "mainTopics": [
+        {
+          "label": "人口減少対策",
+          "statement": "人口減少対策について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m07-2025-09-09-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2025-09"
+          ]
+        },
+        {
+          "label": "熱中症対策",
+          "statement": "熱中症対策について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m07-2025-09-09-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2025-09"
+          ]
+        }
+      ],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [
+        {
+          "label": "課題の指摘",
+          "count": 1
+        },
+        {
+          "label": "事業導入の提案",
+          "count": 1
+        }
+      ],
+      "answerStatusCounts": [
+        {
+          "label": "回答のみで方針不明",
+          "count": 1
+        },
+        {
+          "label": "実施予定",
+          "count": 1
+        }
+      ],
+      "evidenceSpeechIds": [
+        "m07-2025-09-09-ippan-shitsumon"
+      ],
+      "limitations": [
+        "未解析の25会期は分析に含まれていません。",
+        "解析済みの会期が1会期のみのため、継続テーマ・新規テーマの判定は行っていません（2会期以上のデータが揃い次第、対応します）。"
+      ]
+    },
+    {
+      "memberId": "m08",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m09",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m10",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m11",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m12",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m13",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m14",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m15",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m16",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m17",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m18",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m19",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m20",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m21",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 1,
+      "analysisStatus": "pending",
+      "generatedAt": "2026-08-02",
+      "verifiedAt": null,
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの1会期で確認された質問内容を整理しています。データが限られているため、継続的な傾向を示すものではありません。確認された主なテーマは、パブリックコメント、ふるさと納税、基金、予算編成などです。質問の取り上げ方としては、今後の方針の確認、予算・数値の確認などが確認されています。市側からは、継続対応1件、検討中1件、実施予定1件などの答弁が確認されています。未解析の25会期はこの分析に含まれていません。",
+      "mainTopics": [
+        {
+          "label": "パブリックコメント",
+          "statement": "パブリックコメントについて、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m21-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        },
+        {
+          "label": "ふるさと納税",
+          "statement": "ふるさと納税について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m21-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        },
+        {
+          "label": "基金",
+          "statement": "基金について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m21-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        },
+        {
+          "label": "予算編成",
+          "statement": "予算編成について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m21-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        }
+      ],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [
+        {
+          "label": "今後の方針の確認",
+          "count": 2
+        },
+        {
+          "label": "予算・数値の確認",
+          "count": 1
+        }
+      ],
+      "answerStatusCounts": [
+        {
+          "label": "継続対応",
+          "count": 1
+        },
+        {
+          "label": "検討中",
+          "count": 1
+        },
+        {
+          "label": "実施予定",
+          "count": 1
+        }
+      ],
+      "evidenceSpeechIds": [
+        "m21-2026-02-25-daihyo-shitsumon"
+      ],
+      "limitations": [
+        "未解析の25会期は分析に含まれていません。",
+        "解析済みの会期が1会期のみのため、継続テーマ・新規テーマの判定は行っていません（2会期以上のデータが揃い次第、対応します）。"
+      ]
+    },
+    {
+      "memberId": "m22",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m23",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m24",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 1,
+      "analysisStatus": "pending",
+      "generatedAt": "2026-08-02",
+      "verifiedAt": null,
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの1会期で確認された質問内容を整理しています。データが限られているため、継続的な傾向を示すものではありません。確認された主なテーマは、回覧板、自治会、予算編成などです。質問の取り上げ方としては、改善提案、現状確認、今後の方針の確認などが確認されています。市側からは、継続対応2件、調査・研究1件などの答弁が確認されています。未解析の25会期はこの分析に含まれていません。",
+      "mainTopics": [
+        {
+          "label": "回覧板",
+          "statement": "回覧板について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        },
+        {
+          "label": "自治会",
+          "statement": "自治会について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        },
+        {
+          "label": "予算編成",
+          "statement": "予算編成について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2026-02-25-daihyo-shitsumon"
+          ],
+          "sessionIds": [
+            "2026-03"
+          ]
+        }
+      ],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [
+        {
+          "label": "改善提案",
+          "count": 1
+        },
+        {
+          "label": "現状確認",
+          "count": 1
+        },
+        {
+          "label": "今後の方針の確認",
+          "count": 1
+        }
+      ],
+      "answerStatusCounts": [
+        {
+          "label": "継続対応",
+          "count": 2
+        },
+        {
+          "label": "調査・研究",
+          "count": 1
+        }
+      ],
+      "evidenceSpeechIds": [
+        "m24-2026-02-25-daihyo-shitsumon"
+      ],
+      "limitations": [
+        "未解析の25会期は分析に含まれていません。",
+        "解析済みの会期が1会期のみのため、継続テーマ・新規テーマの判定は行っていません（2会期以上のデータが揃い次第、対応します）。"
+      ]
+    },
+    {
+      "memberId": "m25",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    },
+    {
+      "memberId": "m26",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 0,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
+      "limitations": []
+    }
+  ]
+}

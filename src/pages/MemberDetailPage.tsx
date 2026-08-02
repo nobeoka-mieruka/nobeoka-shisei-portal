@@ -1,13 +1,24 @@
 import { useMemo, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
-import type { BillCategory, CouncilMember, GeneralQuestionItem, BillVoteItem, CouncilSpeechSummaryData } from "../types";
+import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
+import type {
+  BillCategory,
+  CouncilMember,
+  GeneralQuestionItem,
+  BillVoteItem,
+  CouncilSpeechSummaryData,
+  MemberSpeechAnalysisData,
+} from "../types";
 import { getFaction } from "../lib/factions";
-import { findMemberSpeechRecord, publicSpeeches } from "../lib/councilSpeeches";
+import { findMemberSpeechRecord, publicSpeeches, aggregateMemberTopics, findMemberSpeechAnalysis } from "../lib/councilSpeeches";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
+import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
+import { MemberSpeechAnalysisStatusBadge } from "../components/council/MemberSpeechAnalysisStatusBadge";
+import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
 import { SnsLinks } from "../components/SnsLinks";
@@ -33,6 +44,7 @@ const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const memberSpeechAnalysisList = (memberSpeechAnalysisData as MemberSpeechAnalysisData).members;
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -42,8 +54,17 @@ const linkClass =
 export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const member = members.find((m) => m.id === id);
   const seo = getSeoForPath(location.pathname);
+  const selectedTopic = searchParams.get("questionTopic") ?? "";
+
+  const setSelectedTopic = (topic: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (topic) next.set("questionTopic", topic);
+    else next.delete("questionTopic");
+    setSearchParams(next, { replace: true });
+  };
 
   const memberQuestions = member
     ? generalQuestions
@@ -52,6 +73,12 @@ export function MemberDetailPage() {
     : [];
   const speechRecord = member ? findMemberSpeechRecord(speechSummaryData.members, member.id) : undefined;
   const publishedMemberSpeeches = publicSpeeches(speechRecord);
+  const topicAggregates = useMemo(() => aggregateMemberTopics(publishedMemberSpeeches), [publishedMemberSpeeches]);
+  const hasPendingSpeech = publishedMemberSpeeches.some((s) => s.summaryStatus !== "verified");
+  const displayedSpeeches = selectedTopic
+    ? publishedMemberSpeeches.filter((s) => s.topics.includes(selectedTopic))
+    : publishedMemberSpeeches;
+  const memberAnalysis = member ? findMemberSpeechAnalysis(memberSpeechAnalysisList, member.id) : undefined;
   const memberAllBillVotes = member
     ? billVotes
         .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
@@ -248,34 +275,193 @@ export function MemberDetailPage() {
               <p className="mt-1 text-xs text-on-surface-variant">
                 収録対象：令和5年5月15日（令和5年第1回臨時会、現在の議員任期における最初の本会議）以降に開催された本会議
               </p>
-              <ul className="mt-2 space-y-2">
-                {publishedMemberSpeeches.map((s) => (
-                  <li key={s.id} className="rounded-lg border border-outline-variant p-3">
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="text-xs text-on-surface-variant">
-                        {s.date ? formatJapaneseDate(s.date) : "日付確認中"}／{s.meetingType}／{s.speechType}
-                      </span>
-                      <SpeechSummaryStatusBadge status={s.summaryStatus} />
+
+              {speechRecord && (
+                <div className="mt-3 rounded-lg bg-surface-container-high p-3">
+                  <p className="text-xs font-medium text-on-surface">収録・解析状況</p>
+                  <dl className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-on-surface-variant sm:grid-cols-3">
+                    <div>
+                      <dt className="inline">解析済み：</dt>
+                      <dd className="inline text-on-surface">{speechRecord.analyzedSessionCount}会期</dd>
                     </div>
-                    {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{s.shortSummary}</p>}
-                    {s.topics.length > 0 && (
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {s.topics.map((t) => (
-                          <span key={t} className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-xs text-on-surface-variant">
-                            {t}
-                          </span>
-                        ))}
+                    <div>
+                      <dt className="inline">質問・質疑を確認：</dt>
+                      <dd className="inline text-on-surface">{speechRecord.sessionsWithSpeechCount}会期</dd>
+                    </div>
+                    <div>
+                      <dt className="inline">発言確認なし：</dt>
+                      <dd className="inline text-on-surface">{speechRecord.sessionsWithoutSpeechCount}会期</dd>
+                    </div>
+                    <div>
+                      <dt className="inline">未解析：</dt>
+                      <dd className="inline text-on-surface">{speechRecord.unfetchedSessionCount}会期</dd>
+                    </div>
+                    {speechRecord.lastAnalyzedAt && (
+                      <div>
+                        <dt className="inline">最終解析日：</dt>
+                        <dd className="inline text-on-surface">{formatJapaneseDate(speechRecord.lastAnalyzedAt)}</dd>
                       </div>
                     )}
-                    <Link
-                      to={`/members/${member.id}/questions/${s.id}`}
-                      className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
-                    >
-                      質問・答弁の詳細を見る
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                  </dl>
+                  <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
+                    現在解析済みの会期に基づく暫定集計です。未解析の会期は集計に含まれていません。
+                  </p>
+                </div>
+              )}
+
+              {topicAggregates.length > 0 && (
+                <div className="mt-3">
+                  <h4 className="text-sm font-semibold text-on-surface">質問テーマの傾向</h4>
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                    収録した公式会議録で、各テーマに関する質問・質疑が確認された会期数を表示しています。質問回数、活動量、議員の優劣を示すものではありません。同じ会期で同一テーマを複数回取り上げた場合も、1会期として数えています。
+                  </p>
+                  {hasPendingSpeech && (
+                    <p className="mt-1 text-xs text-on-surface-variant">確認待ちのAI要約を含む暫定集計です。</p>
+                  )}
+                  <div className="mt-2">
+                    <QuestionTopicChart topics={topicAggregates} onSelectTopic={setSelectedTopic} selectedTopic={selectedTopic} />
+                  </div>
+                </div>
+              )}
+
+              {memberAnalysis && memberAnalysis.analysisStatus !== "not-analyzed" && (
+                <div className="mt-4 border-t border-outline-variant pt-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h4 className="text-sm font-semibold text-on-surface">AIによる質問内容の分析</h4>
+                    <MemberSpeechAnalysisStatusBadge status={memberAnalysis.analysisStatus} />
+                  </div>
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                    この分析は、{councilSpeechPeriod.from.slice(0, 4)}年{Number(councilSpeechPeriod.from.slice(5, 7))}月{Number(councilSpeechPeriod.from.slice(8, 10))}日以降に開催された延岡市議会本会議の公式会議録を基に、AIが質問テーマや取り上げ方を中立的に整理したものです。議員の能力、活動量、政策の良し悪し、政治的立場を評価するものではありません。未解析の会期は分析に含まれていません。正式な発言内容は公式会議録をご確認ください。
+                  </p>
+                  {memberAnalysis.analysisStatus === "pending" && (
+                    <p className="mt-1 text-xs text-on-surface-variant">この分析は現在確認中の暫定掲載です。</p>
+                  )}
+
+                  {memberAnalysis.analysisStatus === "insufficient-data" ? (
+                    <p className="mt-2 text-sm text-on-surface-variant">
+                      現在解析済みの会議録が限られているため、質問傾向の分析に必要なデータが不足しています。
+                    </p>
+                  ) : (
+                    <>
+                      {memberAnalysis.overview && (
+                        <p className="mt-2 text-sm leading-relaxed text-on-surface">{memberAnalysis.overview}</p>
+                      )}
+
+                      {memberAnalysis.mainTopics.length > 0 && (
+                        <div className="mt-3">
+                          <p className="text-xs font-medium text-on-surface">主に確認されたテーマ</p>
+                          <ul className="mt-1 flex flex-wrap gap-1.5">
+                            {memberAnalysis.mainTopics.map((t) => (
+                              <li key={t.label}>
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedTopic(t.label)}
+                                  className={`rounded-full bg-surface-container-high px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container-highest ${linkClass}`}
+                                >
+                                  {t.label}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {memberAnalysis.recurringTopics.length > 0 && (
+                        <div className="mt-3">
+                          <p className="text-xs font-medium text-on-surface">複数会期で確認されたテーマ</p>
+                          <ul className="mt-1 space-y-0.5 text-xs text-on-surface-variant">
+                            {memberAnalysis.recurringTopics.map((t) => (
+                              <li key={t.label}>
+                                {t.label}　{t.sessionIds.length}会期
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {memberAnalysis.questionApproaches.length > 0 && (
+                        <div className="mt-3">
+                          <p className="text-xs font-medium text-on-surface">質問の主な取り上げ方</p>
+                          <ul className="mt-1 space-y-0.5 text-xs text-on-surface-variant">
+                            {memberAnalysis.questionApproaches.map((a) => (
+                              <li key={a.label}>・{a.label}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {memberAnalysis.answerStatusCounts.length > 0 && (
+                        <div className="mt-3">
+                          <p className="text-xs font-medium text-on-surface">市側答弁で確認された状態</p>
+                          <ul className="mt-1 space-y-0.5 text-xs text-on-surface-variant">
+                            {memberAnalysis.answerStatusCounts.map((a) => (
+                              <li key={a.label}>
+                                ・{a.label}　{a.count}件
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {memberAnalysis.limitations.length > 0 && (
+                        <div className="mt-3 rounded-lg bg-surface-container-high p-3">
+                          <p className="text-xs font-medium text-on-surface">分析上の注意</p>
+                          <ul className="mt-1 space-y-0.5 text-xs leading-relaxed text-on-surface-variant">
+                            {memberAnalysis.limitations.map((l) => (
+                              <li key={l}>・{l}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+
+              <div className="mt-3 flex items-center justify-between gap-2">
+                <h4 className="text-sm font-semibold text-on-surface">会期別の質問・答弁要約</h4>
+                {selectedTopic && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedTopic("")}
+                    className={`text-xs font-medium text-primary hover:underline ${linkClass}`}
+                  >
+                    「{selectedTopic}」の絞り込みを解除
+                  </button>
+                )}
+              </div>
+              {displayedSpeeches.length === 0 ? (
+                <p className="mt-2 text-xs text-on-surface-variant">「{selectedTopic}」に該当する会期別の質問・答弁は見つかりませんでした。</p>
+              ) : (
+                <ul className="mt-2 space-y-2">
+                  {displayedSpeeches.map((s) => (
+                    <li key={s.id} className="rounded-lg border border-outline-variant p-3">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="text-xs text-on-surface-variant">
+                          {s.date ? formatJapaneseDate(s.date) : "日付確認中"}／{s.meetingType}／{s.speechType}
+                        </span>
+                        <SpeechSummaryStatusBadge status={s.summaryStatus} />
+                      </div>
+                      {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{s.shortSummary}</p>}
+                      {s.topics.length > 0 && (
+                        <div className="mt-1.5 flex flex-wrap gap-1">
+                          {s.topics.map((t) => (
+                            <span key={t} className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-xs text-on-surface-variant">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <Link
+                        to={`/members/${member.id}/questions/${s.id}`}
+                        className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                      >
+                        質問・答弁の詳細を見る
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </>
           ) : (
             <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">

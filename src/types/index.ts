@@ -1275,6 +1275,20 @@ export interface CouncilSpeechQuestionItem {
   exchanges: CouncilSpeechExchange[];
   relatedBills: CouncilSpeechRelatedBill[];
   relatedDocuments?: string[];
+  /**
+   * 質問の取り上げ方（原文で明確に確認できる場合のみ設定する。例:
+   * "現状確認" "制度内容の確認" "予算・数値の確認" "実施時期の確認" "今後の方針の確認" "改善提案"
+   * "事業導入の提案" "対応の要望" "課題の指摘" "再質問による追加確認"）。発言者の意図を
+   * 推測して分類しない。未確認の場合は省略する。
+   */
+  questionApproach?: string;
+  /**
+   * 答弁の状態（原文で明確に確認できる場合のみ設定する。例: "実施済み" "実施中" "実施予定"
+   * "検討中" "調査・研究" "関係機関と協議" "継続対応" "現時点では予定なし" "制度上対応困難"
+   * "回答のみで方針不明" "質問との対応確認中"）。答弁の十分性を評価する表現は使わない。
+   * 未確認の場合は省略する。
+   */
+  answerStatus?: string;
 }
 
 /**
@@ -1330,6 +1344,65 @@ export interface CouncilSpeechSummaryData {
   /** ISO形式。このデータを最後に生成した日時。null＝まだ生成（会議録取得・解析）を実行していない。 */
   generatedAt: string | null;
   members: CouncilMemberSpeechRecord[];
+}
+
+/**
+ * 議員1名分の「AIによる質問内容の分析」の確認状態。councilSpeechSummariesの
+ * SpeechSummaryStatusとは別軸（分析結果そのものの確認状況）。
+ * "insufficient-data"＝分析に必要なデータ（発言者確定・出典URL・質問要約等）が不足／
+ * "not-analyzed"＝まだ分析処理を実行していない。
+ */
+export type MemberSpeechAnalysisStatus = "verified" | "partially-verified" | "pending" | "insufficient-data" | "not-analyzed";
+
+/** 分析項目1件分（主なテーマ・継続テーマ・新規テーマで共通の形）。根拠となる発言IDを必ず保持する。 */
+export interface MemberSpeechAnalysisTopicEvidence {
+  label: string;
+  /** 会議録本文・質問要約に基づく事実の記述のみ。評価・推測を含めない。 */
+  statement: string;
+  evidenceSpeechIds: string[];
+  sessionIds: string[];
+}
+
+/** 質問形式・答弁状態の集計1件分。 */
+export interface MemberSpeechAnalysisCount {
+  label: string;
+  count: number;
+}
+
+/**
+ * 議員1名分の「AIによる質問内容の分析」。councilSpeechSummaries.jsonの
+ * isPublished:trueの発言データから機械的に生成する（手入力しない）。
+ */
+export interface MemberSpeechAnalysis {
+  memberId: string;
+  analysisPeriod: { from: string; to: string | null };
+  analyzedSessionCount: number;
+  analysisStatus: MemberSpeechAnalysisStatus;
+  /** ISO形式。null＝まだ生成していない。 */
+  generatedAt: string | null;
+  /** ISO形式。人による確認日。null＝未確認。 */
+  verifiedAt: string | null;
+  /** 300〜700字程度の概要文。データが少ない場合は無理に長文化しない。 */
+  overview: string;
+  mainTopics: MemberSpeechAnalysisTopicEvidence[];
+  /** 異なる2会期以上で確認できたテーマのみ（同一会期内の複数質問は継続と扱わない）。 */
+  recurringTopics: MemberSpeechAnalysisTopicEvidence[];
+  /** 解析済み会期の中で新たに確認されたテーマ。未解析会期がある場合は断定表現を避ける。 */
+  newTopics: MemberSpeechAnalysisTopicEvidence[];
+  /** 原文で確認できる質問形式のみ（例: "現状確認" "改善提案"）。推測で分類しない。 */
+  questionApproaches: MemberSpeechAnalysisCount[];
+  /** 原文で確認できる答弁状態のみ（例: "検討中" "実施予定"）。答弁の良し悪しは評価しない。 */
+  answerStatusCounts: MemberSpeechAnalysisCount[];
+  evidenceSpeechIds: string[];
+  /** 未解析会期・データ不足等、分析の限界を明記する文のリスト。 */
+  limitations: string[];
+}
+
+/** src/data/memberSpeechAnalysis.json 全体の形。 */
+export interface MemberSpeechAnalysisData {
+  version: number;
+  generatedAt: string | null;
+  members: MemberSpeechAnalysis[];
 }
 
 /** 財政ダッシュボード全体のデータ（年度単位）。 */

@@ -903,9 +903,36 @@ const VALID_SPEECH_SUMMARY_STATUSES = new Set([
   "question-answer-link-pending",
 ]);
 const VALID_SPEECH_RELATION_STATUSES = new Set(["confirmed", "suggested", "rejected"]);
+const RECOMMENDED_QUESTION_APPROACHES = new Set([
+  "現状確認",
+  "制度内容の確認",
+  "予算・数値の確認",
+  "実施時期の確認",
+  "今後の方針の確認",
+  "改善提案",
+  "事業導入の提案",
+  "対応の要望",
+  "課題の指摘",
+  "再質問による追加確認",
+]);
+const RECOMMENDED_ANSWER_STATUSES = new Set([
+  "実施済み",
+  "実施中",
+  "実施予定",
+  "検討中",
+  "調査・研究",
+  "関係機関と協議",
+  "継続対応",
+  "現時点では予定なし",
+  "制度上対応困難",
+  "回答のみで方針不明",
+  "質問との対応確認中",
+]);
 const VALID_QA_LINK_STATUSES = new Set(["confirmed", "partially-confirmed", "pending", "ambiguous"]);
 const NOT_YET_PUBLISHABLE_STATUSES = new Set(["minutes-not-fetched", "source-unavailable"]);
 const sessionIdSet = new Set(councilSessions.map((s) => s.id));
+const speechIds = new Set();
+const publishedSpeechIds = new Set();
 
 try {
   const speechData = readJson("src/data/councilSpeechSummaries.json");
@@ -917,7 +944,6 @@ try {
     err("councilSpeechSummaries.json", "membersが配列ではありません");
   } else {
     const seenMemberIds = new Set();
-    const seenSpeechIds = new Set();
 
     for (const record of speechData.members) {
       const tag = `councilSpeechSummaries.json (${record.memberId ?? "議員id不明"})`;
@@ -933,8 +959,9 @@ try {
       for (const speech of record.speeches ?? []) {
         const speechTag = `councilSpeechSummaries.json (${record.memberId} / ${speech.id ?? "発言id不明"})`;
         if (isBlank(speech.id)) err(speechTag, "発言のidが空です");
-        else if (seenSpeechIds.has(speech.id)) err(speechTag, `発言IDが重複しています: ${speech.id}`);
-        else seenSpeechIds.add(speech.id);
+        else if (speechIds.has(speech.id)) err(speechTag, `発言IDが重複しています: ${speech.id}`);
+        else speechIds.add(speech.id);
+        if (speech.id && speech.isPublished) publishedSpeechIds.add(speech.id);
 
         if (speech.memberId !== record.memberId) {
           err(speechTag, `発言のmemberIdがレコードのmemberIdと一致しません: ${speech.memberId}`);
@@ -977,6 +1004,12 @@ try {
           if (q.questionAnswerLinkStatus === "ambiguous" && !isBlank(q.answerSummary)) {
             warn(speechTag, `questionAnswerLinkStatus="ambiguous"なのにanswerSummaryが設定されています（対応関係が曖昧な場合は無理に埋めないこと）`);
           }
+          if (q.questionApproach && !RECOMMENDED_QUESTION_APPROACHES.has(q.questionApproach)) {
+            warn(speechTag, `questionApproachが推奨語彙にありません（誤りではないが確認推奨）: ${q.questionApproach}`);
+          }
+          if (q.answerStatus && !RECOMMENDED_ANSWER_STATUSES.has(q.answerStatus)) {
+            warn(speechTag, `answerStatusが推奨語彙にありません（誤りではないが確認推奨）: ${q.answerStatus}`);
+          }
 
           for (const rel of q.relatedBills ?? []) {
             if (isBlank(rel.billId) || !billVotesById.has(rel.billId)) {
@@ -996,6 +1029,66 @@ try {
 } catch (e) {
   if (e?.code === "ENOENT") {
     warn("councilSpeechSummaries.json", "読み込めませんでした（存在しない場合はスキップ）");
+  } else {
+    throw e;
+  }
+}
+
+// --- memberSpeechAnalysis.json（AIによる質問内容の分析） ---
+const VALID_MEMBER_ANALYSIS_STATUSES = new Set(["verified", "partially-verified", "pending", "insufficient-data", "not-analyzed"]);
+
+try {
+  const analysisData = readJson("src/data/memberSpeechAnalysis.json");
+  if (typeof analysisData.version !== "number") err("memberSpeechAnalysis.json", "versionが数値ではありません");
+  if (!Array.isArray(analysisData.members)) {
+    err("memberSpeechAnalysis.json", "membersが配列ではありません");
+  } else {
+    const seenAnalysisMemberIds = new Set();
+    for (const a of analysisData.members) {
+      const tag = `memberSpeechAnalysis.json (${a.memberId ?? "議員id不明"})`;
+      if (isBlank(a.memberId)) err(tag, "memberIdが空です");
+      else if (!memberIds.has(a.memberId)) err(tag, `存在しない議員IDです: ${a.memberId}`);
+      if (seenAnalysisMemberIds.has(a.memberId)) err(tag, `同じ議員のAI分析が重複しています: ${a.memberId}`);
+      else seenAnalysisMemberIds.add(a.memberId);
+
+      if (!VALID_MEMBER_ANALYSIS_STATUSES.has(a.analysisStatus)) {
+        err(tag, `未定義のanalysisStatusです: ${a.analysisStatus}`);
+      }
+      if (a.analysisStatus === "verified" || a.analysisStatus === "partially-verified") {
+        if (isBlank(a.overview)) err(tag, `analysisStatus="${a.analysisStatus}"なのにoverviewが空です`);
+        if (!a.verifiedAt || !DATE_RE.test(a.verifiedAt)) err(tag, `analysisStatus="${a.analysisStatus}"なのにverifiedAtが未設定または不正です`);
+      }
+      if ((a.analysisStatus === "pending" || a.analysisStatus === "partially-verified") && isBlank(a.overview)) {
+        err(tag, `analysisStatus="${a.analysisStatus}"なのにoverviewが空です`);
+      }
+      if (a.generatedAt && !DATE_RE.test(a.generatedAt)) err(tag, `generatedAtの形式が不正です: ${a.generatedAt}`);
+      if (a.verifiedAt && !DATE_RE.test(a.verifiedAt)) err(tag, `verifiedAtの形式が不正です: ${a.verifiedAt}`);
+      if (a.analysisPeriod && a.analysisPeriod.from !== councilSpeechPeriod.from) {
+        err(tag, `analysisPeriod.fromがcouncilSpeechPeriod.from（${councilSpeechPeriod.from}）と一致しません: ${a.analysisPeriod.from}`);
+      }
+      if (a.recurringTopics?.some((t) => t.sessionIds.length < 2)) {
+        err(tag, "recurringTopicsに、確認できた会期が2会期未満のテーマが含まれています（継続テーマの条件は2会期以上）");
+      }
+
+      for (const group of [a.mainTopics ?? [], a.recurringTopics ?? [], a.newTopics ?? []]) {
+        for (const t of group) {
+          for (const sid of t.evidenceSpeechIds ?? []) {
+            if (!speechIds.has(sid)) err(tag, `テーマ「${t.label}」が存在しない発言IDを参照しています: ${sid}`);
+          }
+          for (const sesId of t.sessionIds ?? []) {
+            if (!sessionIdSet.has(sesId)) err(tag, `テーマ「${t.label}」が存在しない会期IDを参照しています: ${sesId}`);
+          }
+        }
+      }
+      for (const sid of a.evidenceSpeechIds ?? []) {
+        if (!speechIds.has(sid)) err(tag, `存在しない発言IDを参照しています: ${sid}`);
+        else if (!publishedSpeechIds.has(sid)) warn(tag, `非公開の発言IDを根拠として参照しています: ${sid}`);
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") {
+    warn("memberSpeechAnalysis.json", "読み込めませんでした（存在しない場合はスキップ）");
   } else {
     throw e;
   }

@@ -176,7 +176,9 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "回答のみで方針不明"
             },
             {
               "id": "q2",
@@ -202,7 +204,9 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionApproach": "課題の指摘",
+              "answerStatus": "実施予定"
             }
           ],
           "summarySources": [
@@ -546,7 +550,9 @@
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "confirmed"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "予算・数値の確認",
+              "answerStatus": "継続対応"
             },
             {
               "id": "q2",
@@ -572,7 +578,9 @@
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "confirmed"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "今後の方針の確認",
+              "answerStatus": "実施予定"
             },
             {
               "id": "q3",
@@ -598,7 +606,9 @@
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "confirmed"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "今後の方針の確認",
+              "answerStatus": "検討中"
             }
           ],
           "summarySources": [
@@ -728,7 +738,9 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionApproach": "今後の方針の確認",
+              "answerStatus": "継続対応"
             },
             {
               "id": "q2",
@@ -754,7 +766,9 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
             },
             {
               "id": "q3",
@@ -780,7 +794,9 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionApproach": "改善提案",
+              "answerStatus": "調査・研究"
             }
           ],
           "summarySources": [

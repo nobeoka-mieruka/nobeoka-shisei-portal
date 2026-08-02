@@ -160,3 +160,19 @@ npm run speeches:list-pending
 答弁者を単純に「市長」＝現職市長として扱わないこと。市長交代のタイミングを会議日と照合し、
 必要であれば発言者を市長名で明示する、または別途市長の在任期間データを追加するなどの対応を
 先に検討すること（今回は対象範囲がすべて現職市長の在任期間内だったため、この問題は発生していない）。
+
+## 17. 質問テーマの傾向グラフ・AIによる質問内容の分析（2026年8月追加）
+
+- 「質問テーマの傾向」（横棒グラフ）は、`councilSpeechSummaries.json`の`speech.topics`/`sessionId`から
+  `src/lib/councilSpeeches.ts`の`aggregateMemberTopics()`が都度計算する（別ファイルへの
+  生成・保存はしていない。常に元データと一致することを優先した設計）。
+- 「AIによる質問内容の分析」は、各`questionItem`に人が原文を読んで設定した
+  `questionApproach`（質問の取り上げ方）・`answerStatus`（答弁状態）を集計するだけで、
+  スクリプト自身が原文を解釈して新たに分類することはしない
+  （`scripts/generate-member-speech-analysis.mjs`）。生成結果は`src/data/memberSpeechAnalysis.json`
+  へ保存し、必ず`analysisStatus: "pending"`とする（自動でverifiedにしない）。
+  `npm run member-analysis:list-pending` / `--review` / `--approve` / `--reject`
+  （`scripts/review-member-speech-analysis.mjs`）で人による確認を行う。
+- 継続テーマ（`recurringTopics`）は異なる2会期以上のデータがある場合のみ生成する。
+  新規テーマ（`newTopics`）は、比較対象となる「以前に解析済みのテーマ」がまだ存在しないため
+  現時点では意図的に空のまま生成し、理由を`limitations`に明記している。
