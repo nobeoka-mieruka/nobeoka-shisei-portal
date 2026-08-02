@@ -613,7 +613,8 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         {
           path: "/about",
           pageTitle: "このサイトについて",
-          description: "延岡市政見える化ポータルの目的、運営方針、主な情報源について説明しています。",
+          description:
+            "延岡市政見える化ポータルを運営する「のべおか市政データラボ」の運営目的、情報源、政治的中立性、訂正方針、個人情報の取り扱いについて説明します。",
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "このサイトについて" }],
           extraJsonLd: [organizationJsonLd()],
         },

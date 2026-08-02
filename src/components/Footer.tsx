@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { DataNotice } from "./DataNotice";
 import { LastUpdated } from "./LastUpdated";
+import { getOperatorField } from "../config/operator";
 
 const linkClass =
   "block rounded py-2 text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -45,12 +46,18 @@ const footerGroups: FooterLinkGroup[] = [
 ];
 
 export function Footer() {
+  const operatorName = getOperatorField("operatorName");
+
   return (
     <footer className="mt-8 border-t border-outline-variant px-4 py-6 sm:px-6 print:hidden">
       <div className="mx-auto max-w-5xl space-y-2 text-center sm:text-left">
         <p className="text-xs font-medium text-on-surface-variant">公開運用中｜データ随時更新</p>
+        {operatorName && <p className="text-sm text-on-surface-variant">運営：{operatorName}</p>}
         <p className="text-sm text-on-surface-variant">
           延岡市・延岡市議会の公式サイトではありません。
+        </p>
+        <p className="text-xs text-on-surface-variant">
+          掲載している公的資料等の権利は、それぞれの公表元または権利者に帰属します。
         </p>
         <DataNotice className="pt-1" />
 
