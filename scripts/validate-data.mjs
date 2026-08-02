@@ -185,7 +185,14 @@ const VALID_DOCUMENT_CATEGORIES = new Set([
   "other",
 ]);
 const VALID_STORAGE_TYPES = new Set(["local", "external"]);
-const VALID_VERIFICATION_STATUSES = new Set(["確認済み", "要確認"]);
+const VALID_VERIFICATION_STATUSES = new Set(["確認済み", "要確認", "自動取得"]);
+const VALID_PUBLICATION_STATUSES = new Set([
+  "published",
+  "pendingReview",
+  "updatedPendingReview",
+  "removedPendingReview",
+  "error",
+]);
 
 /**
  * filePathが実在するかを、大文字小文字を区別して確認する。
@@ -250,6 +257,15 @@ try {
       }
       if (d.verificationStatus === "要確認") {
         warn(docTag, "自動検出されたPDFです。資料名・分類・出典URLを人の目で確認してください。");
+      }
+      if (d.publicationStatus && !VALID_PUBLICATION_STATUSES.has(d.publicationStatus)) {
+        err(docTag, `未定義のpublicationStatusです: ${d.publicationStatus}`);
+      }
+      if (d.publicationStatus && d.publicationStatus !== "published") {
+        warn(docTag, `公開保留状態です（publicationStatus: ${d.publicationStatus}）。一般公開ページには表示されません。`);
+      }
+      if (d.sourcePageUrl && !URL_RE.test(d.sourcePageUrl)) {
+        err(docTag, `sourcePageUrlの形式が不正です: ${d.sourcePageUrl}`);
       }
 
       if (d.storageType === "local") {

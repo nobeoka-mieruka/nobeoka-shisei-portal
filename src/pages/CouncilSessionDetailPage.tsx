@@ -7,7 +7,7 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CouncilDocumentCard } from "../components/council/CouncilDocumentCard";
-import { councilDocumentCategoryLabels, councilDocumentCategoryOrder } from "../lib/councilDocuments";
+import { councilDocumentCategoryLabels, councilDocumentCategoryOrder, publicDocuments } from "../lib/councilDocuments";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -45,8 +45,9 @@ export function CouncilSessionDetailPage() {
     );
   }
 
+  const visibleDocuments = publicDocuments(session.documents);
   const documentsByCategory = councilDocumentCategoryOrder
-    .map((category) => ({ category, documents: session.documents.filter((d) => d.category === category) }))
+    .map((category) => ({ category, documents: visibleDocuments.filter((d) => d.category === category) }))
     .filter((group) => group.documents.length > 0);
 
   return (
@@ -77,7 +78,7 @@ export function CouncilSessionDetailPage() {
           </div>
           <div>
             <dt className="inline text-xs">登録資料数：</dt>
-            <dd className="inline">{session.documents.length}件</dd>
+            <dd className="inline">{visibleDocuments.length}件</dd>
           </div>
           <div>
             <dt className="inline text-xs">最終更新日：</dt>

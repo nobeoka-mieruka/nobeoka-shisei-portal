@@ -16,26 +16,17 @@
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  CATEGORY_FOLDER_SET as CATEGORY_FOLDERS,
+  eraYearFor,
+  parseSessionId,
+  titleForSessionId,
+} from "./lib/council-shared.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 const councilDocsDir = join(root, "public", "council-documents");
 const dataPath = join(root, "src", "data", "councilSessions.json");
-
-const CATEGORY_FOLDERS = new Set([
-  "proposals",
-  "results",
-  "petitions",
-  "statements",
-  "minutes",
-  "newsletters",
-  "other",
-]);
-
-const REIWA_START_YEAR = 2019;
-function eraYearFor(year) {
-  return `令和${year - REIWA_START_YEAR + 1}年`;
-}
 
 function walkPdfFiles(dir, results = []) {
   if (!existsSync(dir)) return results;
@@ -49,28 +40,6 @@ function walkPdfFiles(dir, results = []) {
     }
   }
   return results;
-}
-
-/** "2023-07-extraordinary-02" → { year:2023, month:7, extraordinary:true, seq:2 } */
-function parseSessionId(sessionId) {
-  const match = sessionId.match(/^(\d{4})-(\d{2})(-extraordinary)?(?:-(\d+))?$/);
-  if (!match) return null;
-  const [, yearStr, monthStr, extraordinaryFlag, seqStr] = match;
-  return {
-    year: Number(yearStr),
-    month: Number(monthStr),
-    extraordinary: !!extraordinaryFlag,
-    seq: seqStr ? Number(seqStr) : undefined,
-  };
-}
-
-function titleForSessionId(sessionId) {
-  const parsed = parseSessionId(sessionId);
-  if (!parsed) return sessionId;
-  const eraYear = eraYearFor(parsed.year);
-  const sessionType = parsed.extraordinary ? "臨時会" : "定例会";
-  const suffix = parsed.seq ? `（${parsed.seq}）` : "";
-  return `${eraYear}${parsed.month}月${sessionType}${suffix}`;
 }
 
 function titleFromFilename(filename) {

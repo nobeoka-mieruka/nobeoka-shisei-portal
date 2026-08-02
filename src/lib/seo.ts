@@ -35,6 +35,7 @@ import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../c
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
 import { normalizePathname, safeDecodeURIComponent } from "./normalizePathname";
+import { publicDocuments } from "./councilDocuments";
 import photoDimensionsData from "../data/photoDimensions.json";
 
 const photoDimensions = photoDimensionsData as Record<string, { width: number; height: number }>;
@@ -784,12 +785,13 @@ function billVoteSeo(id: string, options?: SeoOptions): SeoResult {
 function councilSessionSeo(sessionId: string, options?: SeoOptions): SeoResult {
   const session = councilSessions.find((s) => s.id === sessionId);
   if (!session) return notFound(`/council-documents/${sessionId}`, "定例会情報");
+  const visibleDocumentCount = publicDocuments(session.documents).length;
 
   return makeResult(
     {
       path: `/council-documents/${sessionId}`,
       pageTitle: `${session.title}の議会資料`,
-      description: `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${session.documents.length}件）を掲載しています。`,
+      description: `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${visibleDocumentCount}件）を掲載しています。`,
       breadcrumbs: [
         { label: "ホーム", to: "/" },
         { label: "定例会・議会資料", to: "/council-documents" },

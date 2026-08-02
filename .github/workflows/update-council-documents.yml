@@ -1,0 +1,75 @@
+name: Update council documents
+
+# 延岡市議会公式サイト「議案等審議結果」ページを毎日確認し、新しい定例会・臨時会PDFを
+# 検出してこのリポジトリへ反映する。差分がある場合のみコミット・pushする。
+# cronはUTC基準のため、日本時間 午前6時ごろ（UTC 21:00）に設定している。
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-council-documents
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch official council documents
+        run: npm run fetch:council-documents
+
+      - name: Reconcile with local PDF folder
+        run: npm run generate:council-documents
+
+      - name: Validate data
+        run: npm run validate:data
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build (includes prerender + SEO checks)
+        run: npm run build
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git status --porcelain | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/councilSessions.json src/data/councilDocumentSources.json src/data/updateHistory.json src/data/searchIndex.json src/data/siteUpdate.json public/council-documents public/sitemap.xml public/robots.txt reports/council-document-update-report.json
+          git commit -m "chore: 延岡市議会の最新資料を自動更新"
+          git push origin HEAD:main
+
+      - name: Upload update report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: council-document-update-report
+          path: reports/council-document-update-report.json
+          if-no-files-found: ignore
+          retention-days: 90

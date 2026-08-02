@@ -598,95 +598,111 @@
     "year": 2023,
     "fiscalYear": 2023,
     "eraYear": "令和5年",
-    "title": "令和5年5月定例会",
-    "sessionType": "定例会",
+    "title": "令和5年5月臨時会（2）",
+    "sessionType": "臨時会",
     "folderPath": "/council-documents/2023/2023-05",
     "documents": [
       {
         "id": "2023-05-other-auto-1",
-        "category": "other",
-        "title": "2023 05",
+        "category": "results",
+        "title": "議案等審議結果",
         "storageType": "local",
         "filePath": "/council-documents/2023/2023-05/2023-05.pdf",
         "fileType": "PDF",
-        "sourceUrl": "",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14278.pdf",
         "isOfficial": true,
-        "verificationStatus": "要確認"
+        "verificationStatus": "自動取得",
+        "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "verifiedAt": "2026-08-02"
       }
     ],
     "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
-    "status": "要確認"
+    "status": "要確認",
+    "sessionNumber": "第2回",
+    "lastVerified": "2026-08-02"
   },
   {
     "id": "2023-05-extraordinary",
     "year": 2023,
     "fiscalYear": 2023,
     "eraYear": "令和5年",
-    "title": "令和5年5月臨時会",
+    "title": "令和5年5月臨時会（1）",
     "sessionType": "臨時会",
     "folderPath": "/council-documents/2023/2023-05-extraordinary",
     "documents": [
       {
         "id": "2023-05-extraordinary-other-auto-1",
-        "category": "other",
-        "title": "2023 05 e 01",
+        "category": "results",
+        "title": "議案等審議結果",
         "storageType": "local",
         "filePath": "/council-documents/2023/2023-05-extraordinary/2023-05-e-01.pdf",
         "fileType": "PDF",
-        "sourceUrl": "",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14277.pdf",
         "isOfficial": true,
-        "verificationStatus": "要確認"
+        "verificationStatus": "自動取得",
+        "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "verifiedAt": "2026-08-02"
       }
     ],
     "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
-    "status": "要確認"
+    "status": "要確認",
+    "sessionNumber": "第1回",
+    "lastVerified": "2026-08-02"
   },
   {
     "id": "2024-05-extraordinary-01",
     "year": 2024,
     "fiscalYear": 2024,
     "eraYear": "令和6年",
-    "title": "令和6年5月臨時会（1）",
+    "title": "令和6年5月臨時会（2）",
     "sessionType": "臨時会",
     "folderPath": "/council-documents/2024/2024-05-extraordinary-01",
     "documents": [
       {
         "id": "2024-05-extraordinary-01-other-auto-1",
-        "category": "other",
-        "title": "2024 05 e 01",
+        "category": "results",
+        "title": "議案等審議結果",
         "storageType": "local",
         "filePath": "/council-documents/2024/2024-05-extraordinary-01/2024-05-e-01.pdf",
         "fileType": "PDF",
-        "sourceUrl": "",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/18295.pdf",
         "isOfficial": true,
-        "verificationStatus": "要確認"
+        "verificationStatus": "自動取得",
+        "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "verifiedAt": "2026-08-02"
       }
     ],
     "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
-    "status": "要確認"
+    "status": "要確認",
+    "sessionNumber": "第11回",
+    "lastVerified": "2026-08-02"
   },
   {
     "id": "2024-05-extraordinary-02",
     "year": 2024,
     "fiscalYear": 2024,
     "eraYear": "令和6年",
-    "title": "令和6年5月臨時会（2）",
+    "title": "令和6年5月臨時会（1）",
     "sessionType": "臨時会",
     "folderPath": "/council-documents/2024/2024-05-extraordinary-02",
     "documents": [
       {
         "id": "2024-05-extraordinary-02-other-auto-1",
-        "category": "other",
-        "title": "2024 05 e 2",
+        "category": "results",
+        "title": "議案等審議結果",
         "storageType": "local",
         "filePath": "/council-documents/2024/2024-05-extraordinary-02/2024-05-e-2.pdf",
         "fileType": "PDF",
-        "sourceUrl": "",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/18059.pdf",
         "isOfficial": true,
-        "verificationStatus": "要確認"
+        "verificationStatus": "自動取得",
+        "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "verifiedAt": "2026-08-02"
       }
     ],
     "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
-    "status": "要確認"
+    "status": "要確認",
+    "sessionNumber": "第10回",
+    "lastVerified": "2026-08-02"
   }
 ]

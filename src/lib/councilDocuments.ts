@@ -1,4 +1,4 @@
-import type { CouncilDocumentCategory } from "../types";
+import type { CouncilDocument, CouncilDocumentCategory } from "../types";
 
 /** 資料分類の表示順（このページ内の並び順として使う）。 */
 export const councilDocumentCategoryOrder: CouncilDocumentCategory[] = [
@@ -20,3 +20,17 @@ export const councilDocumentCategoryLabels: Record<CouncilDocumentCategory, stri
   newsletters: "市議会だより",
   other: "その他の資料",
 };
+
+/**
+ * 一般公開ページに表示してよい資料かどうか。
+ * publicationStatus未設定（既存データとの後方互換）は"published"として扱う。
+ * pendingReview系（自動取得後、人の確認が済んでいない資料）は一覧・詳細ページに表示しない。
+ */
+export function isPubliclyVisible(doc: CouncilDocument): boolean {
+  return doc.publicationStatus === undefined || doc.publicationStatus === "published";
+}
+
+/** セッション内の、一般公開してよい資料だけを返す。 */
+export function publicDocuments(documents: CouncilDocument[]): CouncilDocument[] {
+  return documents.filter(isPubliclyVisible);
+}

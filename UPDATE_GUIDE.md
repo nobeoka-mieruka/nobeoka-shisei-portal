@@ -197,6 +197,10 @@
 
 詳しい手順（フォルダ名・ファイル名のルール、資料分類の意味、`storageType`の使い分け、議案データとの連携方法など）は、`docs/council-document-registration.md` にまとめています。**この機能を触るときは必ずそちらも参照してください。**
 
+### 自動更新（審議結果PDF）
+
+「議案等審議結果」ページについては、GitHub Actions（`.github/workflows/update-council-documents.yml`）が毎日自動確認し、新しいPDFがあれば自動でコミット・pushします。手動で今すぐ確認したい場合は `npm run fetch:council-documents -- --dry-run` を実行してください。詳しくは `docs/council-document-registration.md` の「自動更新の仕組み」を参照してください。
+
 ### 未確認項目の扱い
 
 会期の開始日・終了日など、公式資料で確認できていない項目は省略してください（他のデータベースと同じく、空文字や推測値を入れないでください）。

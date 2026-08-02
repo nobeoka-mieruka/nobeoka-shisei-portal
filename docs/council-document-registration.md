@@ -182,6 +182,46 @@ npm run dev
 
 ---
 
+## 10.5 自動更新の仕組み（審議結果PDF）
+
+「議案等審議結果」ページ（https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html ）については、
+毎日日本時間午前6時ごろ、GitHub Actions（`.github/workflows/update-council-documents.yml`）が
+自動的に確認し、新しいPDFがあれば取得・登録・コミット・pushします。差分がない日はコミットしません。
+
+### 手動で今すぐ確認したいとき
+
+GitHubの「Actions」タブから `Update council documents` ワークフローを開き、「Run workflow」で手動実行できます。
+
+### ローカルで確認・テストする方法
+
+```
+npm run fetch:council-documents -- --dry-run   # 検出結果だけ確認（何も書き込まない）
+npm run fetch:council-documents                # 実際に取得・登録する
+npm run generate:council-documents             # public/配下のPDFとの整合を取る
+npm run validate:data
+```
+
+### 自動登録される資料の扱い
+
+- 新規に見つかった審議結果PDFは `verificationStatus: "自動取得"` を付けて自動公開されます。
+- 既存資料の内容が公式サイト側で変わっていた場合は、`publicationStatus: "updatedPendingReview"` を付けて
+  **一般公開ページには表示されません**。内容を確認し、問題なければ `publicationStatus` を削除するか
+  `"published"` にしてください。
+- 公式ページからPDFリンクが削除された場合も、サイト内のPDFは自動削除されず、
+  `publicationStatus: "removedPendingReview"` を付けて一般公開ページから外れるだけです。
+
+### 安全のための自動停止条件
+
+以下の場合、自動更新は何も変更せずに終了します（詳しくはスクリプト冒頭のコメントを参照）。
+
+- 公式ページを取得できない／HTML解析に失敗した
+- PDFリンクが0件しか見つからない
+- 前回確認できていたPDFの50%以上が一度に消えた
+- ダウンロードした内容がPDFではない（Content-Type・先頭バイトの不正、0バイト）
+- 許可ドメイン（www.city.nobeoka.miyazaki.jp / city.nobeoka.miyazaki.jp）以外への通信
+
+---
+
 ## 11. 削除・差し替え方法
 
 - **資料を1件削除する**：`councilSessions.json`の該当`documents`配列から要素を削除する。PDFファイル自体を残しても画面には出ません（不要なら`public/council-documents/`配下からファイルも削除してください）

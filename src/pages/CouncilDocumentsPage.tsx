@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import councilSessionsData from "../data/councilSessions.json";
 import type { CouncilSession } from "../types";
+import { publicDocuments } from "../lib/councilDocuments";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
@@ -125,7 +126,7 @@ export function CouncilDocumentsPage() {
                       </div>
                       <p className="mt-1 text-xs text-on-surface-variant">{formatSessionPeriod(session)}</p>
                       <p className="mt-1 text-xs text-on-surface-variant">
-                        登録資料数：{session.documents.length}件／最終更新日：
+                        登録資料数：{publicDocuments(session.documents).length}件／最終更新日：
                         {session.lastVerified ? formatJapaneseDate(session.lastVerified) : "確認中"}
                       </p>
                       <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">詳細を見る</p>

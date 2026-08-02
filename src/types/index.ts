@@ -889,9 +889,23 @@ export type CouncilDocumentStorageType = "local" | "external";
  * データの確認状態（管理用の内部フラグ）。
  * "要確認" は scripts/generate-council-documents.mjs がPDFを自動検出した際、
  * 資料名・分類・定例会情報などを人が確認できていないことを示すために付ける。
+ * "自動取得" は scripts/fetch-nobeoka-council-documents.mjs が延岡市議会公式サイトの
+ * 一覧ページから機械的に取得したことを示す（出典・回次は公式ページの記載どおりだが、
+ * 資料名・説明文などを人が手直ししていない状態）。
  * 画面上でこの値を一般利用者向けに強調表示することはしない（管理用データとして保持する）。
  */
-export type CouncilVerificationStatus = "確認済み" | "要確認";
+export type CouncilVerificationStatus = "確認済み" | "要確認" | "自動取得";
+
+/**
+ * 資料の公開状態。未設定（省略）の場合は"published"として扱う（既存データとの後方互換のため）。
+ * pendingReview系の資料は、一般公開ページ（一覧・詳細）には表示しない。
+ */
+export type CouncilPublicationStatus =
+  | "published"
+  | "pendingReview"
+  | "updatedPendingReview"
+  | "removedPendingReview"
+  | "error";
 
 /** 定例会・議会資料ページにおける、資料（PDF）1件分のデータ。 */
 export interface CouncilDocument {
@@ -905,6 +919,8 @@ export interface CouncilDocument {
   fileType?: string;
   /** 延岡市議会・延岡市公式サイト上の元の資料URL。storageTypeによらず、確認できた場合は必ず入力する。 */
   sourceUrl?: string;
+  /** 公式サイト上で、この資料へのリンクが掲載されているページのURL（一覧ページ等）。 */
+  sourcePageUrl?: string;
   /** ISO形式。公式サイトでの公開日（確認できた場合のみ）。 */
   publishedDate?: string;
   pages?: number | null;
@@ -915,6 +931,8 @@ export interface CouncilDocument {
   isOfficial: boolean;
   /** 未設定（省略）の場合は"確認済み"として扱う。 */
   verificationStatus?: CouncilVerificationStatus;
+  /** 未設定（省略）の場合は"published"として扱う。 */
+  publicationStatus?: CouncilPublicationStatus;
   notes?: string;
 }
 
