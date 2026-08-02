@@ -36,6 +36,7 @@ import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
 import { normalizePathname, safeDecodeURIComponent } from "./normalizePathname";
 import { publicDocuments } from "./councilDocuments";
+import { publicBills } from "./billVotes";
 import photoDimensionsData from "../data/photoDimensions.json";
 
 const photoDimensions = photoDimensionsData as Record<string, { width: number; height: number }>;
@@ -68,7 +69,7 @@ const SITE_IDENTITY_DESCRIPTION =
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
 const financeDashboard = financeDashboardData as FinanceDashboardData;

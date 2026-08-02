@@ -15,10 +15,11 @@ import { getFaction } from "../lib/factions";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { publicBills } from "../lib/billVotes";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const promisesData = mayorPromisesData as MayorPromisesData;
 
 const linkClass =

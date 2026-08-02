@@ -18,11 +18,12 @@ import { Link, useLocation } from "react-router-dom";
 import { ChartBarIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 import { coverageHint } from "../data/dataCoverage";
+import { publicBills } from "../lib/billVotes";
 
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 

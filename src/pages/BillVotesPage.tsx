@@ -13,8 +13,9 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { dataCoverage } from "../data/dataCoverage";
+import { publicBills } from "../lib/billVotes";
 
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 
 const resultOptions: { value: BillVoteResult; label: string }[] = [
   { value: "原案可決", label: "原案可決" },

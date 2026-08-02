@@ -20,9 +20,10 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
 import { coverageHint } from "../data/dataCoverage";
+import { publicBills } from "../lib/billVotes";
 
 const members = membersData as CouncilMember[];
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);

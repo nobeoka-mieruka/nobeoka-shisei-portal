@@ -773,12 +773,36 @@ export type BillVoteResult =
   | "承認"
   | "認定"
   | "同意"
+  | "不同意"
   | "採択"
+  | "一部採択"
+  | "趣旨採択"
   | "不採択"
   | "継続審査"
   | "撤回"
+  | "廃案"
   | "その他"
   | "確認中";
+
+/** 案件の分類。公式資料の内容から機械的に判定できない場合は"その他"を使う（推測で細分類しない）。 */
+export type BillCategory =
+  | "条例"
+  | "予算"
+  | "決算"
+  | "契約"
+  | "財産取得"
+  | "人事"
+  | "意見書"
+  | "決議"
+  | "請願"
+  | "陳情"
+  | "その他";
+
+/**
+ * 議案・表決データの公開状態。未設定（省略）の場合は"published"として扱う
+ * （手入力・既存データとの後方互換のため）。pendingReview系は一般公開ページに表示しない。
+ */
+export type BillPublicationStatus = "published" | "pendingReview" | "updatedPendingReview" | "rejected" | "error";
 
 /** 議案ごとの賛否データベースにおける、議員1人分の賛否記録。 */
 export interface BillVoteMemberEntry {
@@ -861,6 +885,41 @@ export interface BillVoteItem {
   sourceFilePath?: string;
   /** PDF内でこの議案が掲載されているページ番号（確認できた場合のみ）。 */
   sourcePage?: number;
+
+  /** 案件分類（機械的に判定できた場合のみ）。 */
+  category?: BillCategory;
+  /**
+   * 未設定（省略）の場合は"published"として扱う。
+   * scripts/extract-council-pdf-data.mjs がPDFから自動抽出したデータの公開可否を管理する。
+   */
+  publicationStatus?: BillPublicationStatus;
+  /** "automatic"はPDFからの自動抽出、省略または"manual"は手入力・人による確認済みを表す。 */
+  extractionSource?: "manual" | "automatic";
+  /** 抽出結果の内部的な確からしさ（0〜1）。一般公開ページには表示しない。 */
+  extractionConfidence?: number;
+  /** pendingReview等になった理由（人が確認する際の手がかり。一般公開ページには表示しない）。 */
+  extractionNotes?: string;
+  /** ISO形式。自動抽出処理を実行した日時。 */
+  extractedAt?: string;
+
+  /**
+   * 複数回の採決がある場合の段階別記録（任意項目。第1段階：型のみ）。
+   * 現在の自動抽出（審議結果PDF）は案件ごとに単一の結果のみを記載しており、
+   * 修正案・再議等の段階別データは含まれない。将来、会議録等のより詳細な資料から
+   * 抽出できるようになった場合のための拡張ポイントとして用意している。
+   */
+  voteStages?: BillVoteStage[];
+}
+
+/** 1つの議案に対する採決が複数回行われる場合の、1段階分の記録。 */
+export interface BillVoteStage {
+  id: string;
+  /** 例: "修正案" "修正後の原案" "原案" "再議" */
+  label: string;
+  /** 例: "修正部分を除く原案を可決すること" */
+  questionText?: string;
+  result: BillVoteResult;
+  memberVotes: BillVoteMemberEntry[];
 }
 
 /**
@@ -934,6 +993,14 @@ export interface CouncilDocument {
   /** 未設定（省略）の場合は"published"として扱う。 */
   publicationStatus?: CouncilPublicationStatus;
   notes?: string;
+  /**
+   * PDF本文のテキスト抽出状態。
+   * "extracted"＝文字情報を抽出できた／"ocrRequired"＝画像のみでOCRが必要／
+   * "error"＝抽出処理でエラー／未設定は"notAttempted"（未実行）として扱う。
+   */
+  textExtractionStatus?: "extracted" | "ocrRequired" | "error" | "notAttempted";
+  /** ISO形式。PDF本文抽出処理を実行した日時。 */
+  textExtractedAt?: string;
 }
 
 /** 定例会・臨時会の区分。 */

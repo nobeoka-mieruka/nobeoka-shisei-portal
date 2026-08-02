@@ -73,7 +73,10 @@ try {
 }
 
 // --- bills / votes ---
-const billVotes = readJson("src/data/billVotes.json");
+// pendingReview系（PDF自動抽出で未確認）の議案は検索インデックスに含めない（一般公開ページに出さないため）。
+const billVotes = readJson("src/data/billVotes.json").filter(
+  (b) => b.publicationStatus === undefined || b.publicationStatus === "published",
+);
 for (const b of billVotes) {
   entries.push({
     id: `bill-${b.id}`,

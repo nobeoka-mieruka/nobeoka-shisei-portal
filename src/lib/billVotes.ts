@@ -1,4 +1,18 @@
-import type { BillMemberVoteStatus } from "../types";
+import type { BillMemberVoteStatus, BillVoteItem } from "../types";
+
+/**
+ * 一般公開ページに表示してよい議案かどうか。
+ * publicationStatus未設定（既存データ・手入力データとの後方互換）は"published"として扱う。
+ * pendingReview系（PDFから自動抽出したが確認が済んでいないデータ）は一覧・詳細ページに表示しない。
+ */
+export function isPubliclyVisibleBill(bill: BillVoteItem): boolean {
+  return bill.publicationStatus === undefined || bill.publicationStatus === "published";
+}
+
+/** 一般公開してよい議案だけを返す。 */
+export function publicBills(bills: BillVoteItem[]): BillVoteItem[] {
+  return bills.filter(isPubliclyVisibleBill);
+}
 
 export const billVoteLabels: Record<BillMemberVoteStatus, string> = {
   approve: "賛成",

@@ -9,7 +9,7 @@ import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
-import { billVoteLabels } from "../lib/billVotes";
+import { billVoteLabels, publicBills } from "../lib/billVotes";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -17,7 +17,7 @@ import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;

@@ -22,10 +22,11 @@ import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { publicBills } from "../lib/billVotes";
 
 const promisesData = mayorPromisesData as MayorPromisesData;
 const policyData = policyProgressData as MayorPolicyProgressData;
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 
 const linkClass =

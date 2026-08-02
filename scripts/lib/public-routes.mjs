@@ -89,7 +89,10 @@ export const STATIC_NOINDEX_PAGES = ["/bills", "/search"];
 
 function loadData() {
   const members = readJson("src/data/members.json");
-  const billVotes = readJson("src/data/billVotes.json");
+  // pendingReview系（PDF自動抽出で未確認）の議案は、サイトマップ・プリレンダリング対象に含めない。
+  const billVotes = readJson("src/data/billVotes.json").filter(
+    (b) => b.publicationStatus === undefined || b.publicationStatus === "published",
+  );
   const councilSessions = readJson("src/data/councilSessions.json");
   const mayorPromises = readJson("src/data/mayorPromises.json");
   const generalQuestions = readJson("src/data/generalQuestions.json");

@@ -117,12 +117,36 @@ const VALID_BILL_VOTE_RESULTS = new Set([
   "承認",
   "認定",
   "同意",
+  "不同意",
   "採択",
+  "一部採択",
+  "趣旨採択",
   "不採択",
   "継続審査",
   "撤回",
+  "廃案",
   "その他",
   "確認中",
+]);
+const VALID_BILL_CATEGORIES = new Set([
+  "条例",
+  "予算",
+  "決算",
+  "契約",
+  "財産取得",
+  "人事",
+  "意見書",
+  "決議",
+  "請願",
+  "陳情",
+  "その他",
+]);
+const VALID_BILL_PUBLICATION_STATUSES = new Set([
+  "published",
+  "pendingReview",
+  "updatedPendingReview",
+  "rejected",
+  "error",
 ]);
 
 for (const b of billVotes) {
@@ -159,6 +183,22 @@ for (const b of billVotes) {
   if (b.proposerType && !VALID_PROPOSER_TYPES.has(b.proposerType)) {
     err(tag, `未定義のproposerTypeです: ${b.proposerType}`);
   }
+  if (b.category && !VALID_BILL_CATEGORIES.has(b.category)) {
+    err(tag, `未定義のcategoryです: ${b.category}`);
+  }
+  if (b.publicationStatus && !VALID_BILL_PUBLICATION_STATUSES.has(b.publicationStatus)) {
+    err(tag, `未定義のpublicationStatusです: ${b.publicationStatus}`);
+  }
+  if (b.publicationStatus && b.publicationStatus !== "published") {
+    warn(tag, `公開保留状態です（publicationStatus: ${b.publicationStatus}）。一般公開ページには表示されません。`);
+  }
+  if (
+    b.extractionConfidence !== undefined &&
+    (typeof b.extractionConfidence !== "number" || b.extractionConfidence < 0 || b.extractionConfidence > 1)
+  ) {
+    err(tag, `extractionConfidenceが不正です（0〜1の数値が必要）: ${b.extractionConfidence}`);
+  }
+  if (b.extractedAt && !DATE_RE.test(b.extractedAt)) err(tag, `extractedAtの形式が不正です: ${b.extractedAt}`);
 
   for (const ordinance of b.relatedOrdinances ?? []) {
     if (isBlank(ordinance)) err(tag, "relatedOrdinancesに空文字が含まれています");

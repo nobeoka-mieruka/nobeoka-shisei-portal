@@ -14,7 +14,9 @@
     "generate:photo-dimensions": "node scripts/generate-photo-dimensions.mjs",
     "generate:council-documents": "node scripts/generate-council-documents.mjs",
     "fetch:council-documents": "node scripts/fetch-nobeoka-council-documents.mjs",
-    "update:council-documents": "npm run fetch:council-documents && npm run generate:council-documents && npm run validate:data",
+    "extract:council-data": "node scripts/extract-council-pdf-data.mjs",
+    "approve:council-data": "node scripts/approve-council-data.mjs",
+    "update:council-documents": "npm run fetch:council-documents && npm run extract:council-data && npm run generate:council-documents && npm run validate:data",
     "import:members": "node scripts/import-members.mjs",
     "typecheck": "tsc -b",
     "prerender": "node scripts/prerender.mjs",
@@ -27,6 +29,7 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
+    "pdfjs-dist": "^4.10.38",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1"

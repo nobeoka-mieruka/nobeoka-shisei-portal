@@ -11,6 +11,7 @@ import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { EmptyState } from "../components/EmptyState";
 import { VotingRecordsSection } from "../components/VotingRecordsSection";
+import { publicBills } from "../lib/billVotes";
 import { SourceList } from "../components/SourceList";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { LastUpdated } from "../components/LastUpdated";
@@ -25,7 +26,7 @@ import { getSeoForPath } from "../lib/seo";
 
 const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 

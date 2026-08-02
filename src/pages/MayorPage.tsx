@@ -8,6 +8,7 @@ import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { SourceList } from "../components/SourceList";
+import { publicBills } from "../lib/billVotes";
 import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -25,7 +26,7 @@ import { getSeoForPath } from "../lib/seo";
 const mayor = mayorData as Mayor;
 const promisesData = mayorPromisesData as MayorPromisesData;
 const pressConferences = getSortedMayorPressConferences();
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const mayorSubmittedBills = billVotes
   .filter((b) => b.proposerType === "mayor")
   .sort((a, b) => (b.votingDate ?? b.submittedDate ?? "").localeCompare(a.votingDate ?? a.submittedDate ?? ""));
