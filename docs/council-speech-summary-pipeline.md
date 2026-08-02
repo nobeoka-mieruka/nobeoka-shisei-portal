@@ -25,26 +25,31 @@
 
 `generalQuestions.json`には答弁データが一切なく、質問項目も「予定」でしかありません。実際に何を質問し、市がどう答弁したかを掲載するには、公式**会議録**（本会議の発言記録）本文が必須です。
 
-## 3. 現在のブロッカー
+## 3. 現在の状況（2026年8月更新）
 
 - `public/council-documents/**/minutes/` フォルダは全26会期分存在するが、中身は空（0ファイル）。
 - `scripts/fetch-nobeoka-council-documents.mjs` は「議案等審議結果」一覧PDFしか取得しておらず、会議録は対象外。
-- 公式の会議録検索システム（`https://www.kensakusystem.jp/nobeoka/`）は固定URLではなく、セッションCode方式のCGI（`cgi-bin3/Search2.exe?Code=...&sTarget=2`）。単純なGETリクエストでは本文にたどり着けない。
-- `robots.txt`は存在しない（404）が、これは無制限アクセスの許可を意味しない。過度な連続アクセスは避けること。
+- **公式の会議録検索システム（`https://www.kensakusystem.jp/nobeoka/`）から、Node.jsで会議録本文を取得できることを実証済み**（詳細は`docs/nobeoka-minutes-fetch-investigation.md`）。以前の「セッションCGIで取得不可」という判断は誤りだった。実際には`Code`はサイト固有の固定値であり、Cookie・セッション状態は不要。`scripts/lib/minutes-source.mjs`に、発言順・発言者付きで本会議日ごとの発言セグメント一覧を取得する関数（`listMeetingDays` / `listSpeakerSegments` / `fetchSegmentText`）を実装済み。
+- `robots.txt`は存在しない（404）が、トップページの`<meta name="robots" content="follow,index">`によりクロール自体は許可されている。ただし過度な連続アクセスは避けること（`scripts/lib/minutes-source.mjs`は最低2秒間隔のスロットリングを実装済み）。
 
 ## 4. 会議録取得処理の想定
 
-`scripts/lib/minutes-source.mjs` の `fetchMinutesForSpeech(input)` が入出力インターフェースを定義済み（現在は常に `status: "not-fetched"` を返すスタブ）。
+`scripts/lib/minutes-source.mjs` に、実際に動作を確認した低レベル関数を実装済み（詳細は`docs/nobeoka-minutes-fetch-investigation.md`）。
 
-入力：`{ sessionId, meetingDate, meetingNumber, officialSearchUrl, memberId }`
-出力：`{ sourceType, sourceUrl, fetchedAt, rawTextPath, normalizedTextPath, status }`
+- `listMeetingDays({code, sessionLabel})` … 会期内の本会議日一覧（fileName）を取得
+- `fetchMeetingTitle({code, fileName})` … 本会議日の正式な会議名を取得
+- `listSpeakerSegments({code, fileName})` … その本会議日の発言セグメント一覧（発言順・発言者・開始位置）を取得
+- `fetchSegmentText({code, fileName, pos})` … 発言セグメント1件の本文を取得
+- `classifySpeakerLabel(label)` … 発言者ラベルから種別（市長／幹部職員／議長／議員）を推定
+
+一方、`fetchMinutesForSpeech(input)`（`{sessionId, meetingDate, meetingNumber, officialSearchUrl, memberId}` → `{sourceType, sourceUrl, fetchedAt, rawTextPath, normalizedTextPath, status}`）は、councilSessions.json・members.jsonの情報から上記の低レベル関数を自動的に呼び出す高レベルインターフェースとして設計したものだが、**まだ未実装のスタブのまま**（常に`status: "not-fetched"`を返す）。これを実装することが次のステップ。
 
 実装時に決めるべきこと：
 
-1. 会議録検索システムの検索フォーム送信方法（GET/POST、必要なパラメータ）を実際のHTMLから調査する。
-2. 取得した生テキストの保存場所：Gitで管理するか（著作物のため慎重に判断）、`.gitignore`対象のローカルキャッシュ／CI成果物のみとするかを決める。個人的には後者（Git管理しない）を推奨。理由：公式サイトの著作物をそのまま複製・再配布する形になりやすく、鮮度管理も難しいため。
-3. Cookie・セッショントークン・APIキー等はリポジトリへ一切コミットしない（`.env`等を使う場合も`.gitignore`必須）。
-4. 取得間隔を空け、同じ資料を再実行のたびに毎回取得しない（キャッシュ・ハッシュ比較で差分のみ処理する。`scripts/lib/council-shared.mjs`の`sha256OfBuffer`等、既存の仕組みを流用できる）。
+1. `See.exe`の1階層目（年の選択）を自動化し、councilSessions.jsonの`title`（例: "令和8年3月定例会"）から`sessionLabel`（例: "令和 8年 第24回定例会 "）を機械的に導出する処理（現状は手動で値を渡している）。
+2. 取得した生テキストの保存場所：Gitで管理するか（著作物のため慎重に判断）、`.gitignore`対象のローカルキャッシュ／CI成果物のみとするかを決める。個人的には後者（Git管理しない）を推奨。理由：公式サイトの著作物をそのまま複製・再配布する形になりやすく、鮮度管理も難しいため。今回の試験データ（`data/minutes/`）は例外的に少数件のみコミットしている。
+3. Cookie・セッショントークン・APIキー等はリポジトリへ一切コミットしない（今回の調査で判明したとおり、このシステム自体はCookie不要だが、AI要約生成で外部LLM APIキーを使う場合は`.env`等を使い`.gitignore`必須）。
+4. 取得間隔を空け、同じ資料を再実行のたびに毎回取得しない（`scripts/fetch-nobeoka-speaker-minutes.mjs`は出力ファイルの存在チェックで再取得を防止済み。本格実装でも同様の仕組みを維持する）。
 
 ## 5. 発言者識別
 
@@ -133,6 +138,7 @@ npm run speeches:list-pending
 
 元の依頼メッセージの【28】節のとおり、段階的に進める。
 
-1. **第1段階**：`scripts/lib/minutes-source.mjs`を実装し、1名・1会期で会議録本文の取得→発言抽出→要約→`pending`保存→人の確認→承認までを試験する。テスト対象は、公式会議録で発言範囲を明確に確認できる議員・会期を選ぶ（特定の議員を優遇しているように見えないよう、試験実装であることをコミットメッセージ等に明記する）。
-2. **第2段階**：複数議員・複数会期に拡大し、テーマ集計・関連議案候補抽出を検証する。
-3. **第3段階**：現在の任期（令和5年5月以降）の全26会期・全26議員に展開し、`generate-speech-summary-scaffold.mjs`が示す「未取得」件数を減らしていく。
+1. **第1段階（試験実装まで完了・2026年8月）**：1名・1会期（前田遼議員／令和8年3月定例会 第2号）で、会議録本文の取得→発言抽出→要約候補作成→`pending`保存までを実証した（詳細は`docs/nobeoka-minutes-fetch-investigation.md`）。人による確認・承認（`npm run speeches:approve`）は、公式会議録との照合が必要なため未実施のまま残している。
+2. **次にやること**：`fetchMinutesForSpeech()`を、councilSessions.json・members.jsonの情報から`See.exe`の年階層探索を含めて自動的に低レベル関数を呼び出す実装へ置き換える（現状は`sessionLabel`等を手動で渡している）。
+3. **第2段階**：複数議員・複数会期に拡大し、テーマ集計・関連議案候補抽出を検証する。
+4. **第3段階**：現在の任期（令和5年5月以降）の全26会期・全26議員に展開し、`generate-speech-summary-scaffold.mjs`が示す「未取得」件数を減らしていく。

@@ -365,20 +365,149 @@
     {
       "memberId": "m21",
       "analysisPeriod": {
-        "from": null,
-        "to": null
+        "from": "2026-02-25",
+        "to": "2026-02-25"
       },
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 0,
-      "sessionsWithSpeechCount": 0,
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 26,
-      "lastAnalyzedAt": null,
-      "topicCounts": [],
-      "speeches": []
+      "unfetchedSessionCount": 25,
+      "lastAnalyzedAt": "2026-08-02",
+      "topicCounts": [
+        {
+          "topic": "予算編成",
+          "sessionCount": 1
+        },
+        {
+          "topic": "基金",
+          "sessionCount": 1
+        },
+        {
+          "topic": "パブリックコメント",
+          "sessionCount": 1
+        },
+        {
+          "topic": "ふるさと納税",
+          "sessionCount": 1
+        }
+      ],
+      "speeches": [
+        {
+          "id": "m21-2026-02-25-daihyo-shitsumon",
+          "memberId": "m21",
+          "sessionId": "2026-03",
+          "date": "2026-02-25",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": false,
+          "summaryStatus": "pending",
+          "topics": [
+            "予算編成",
+            "基金",
+            "パブリックコメント",
+            "ふるさと納税"
+          ],
+          "shortSummary": "令和8年3月定例会（第2号）で前田遼議員が友愛クラブを代表して行った代表質問のうち、予算編成、基金、パブリックコメント、ふるさと納税に関する部分と、市長の答弁を試験的に要約したものです（確認待ち・暫定）。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "予算編成におけるマイナス10％シーリングの効果と基金の状況",
+              "questionSummary": "令和8年度当初予算編成におけるマイナス10％シーリングの効果、および財源調整用基金の状況について質問した。",
+              "answerSummary": "マイナス10％シーリングにより一般財源ベースで約14億円減となったが、予算規模は690億円と過去2番目の規模になったと説明した。社会保障費等の義務的経費はシーリングの対象外とし、事業見直し・効率化を進めた結果であるとした。基金については、将来にわたる財政運営の安定性を担保する上で重要なものと認識しているとし、限られた財源の中で市民サービスの維持向上と将来への投資を両立させながら持続可能な財政運営を実現するとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m21",
+                  "summary": "予算編成におけるマイナス10％シーリングの効果と基金の状況について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "シーリングの効果（約14億円減、予算規模690億円）と、基金に対する認識・今後の財政運営の方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            },
+            {
+              "id": "q2",
+              "title": "効果的なパブリックコメントの実施",
+              "questionSummary": "パブリックコメントについて、市民が意見を出しやすくなるよう改善する必要があると述べ、市の評価と今後の改善方針を質問した。",
+              "answerSummary": "令和5年度から実施している、無作為抽出で選んだ市民から意見を聞く事業について、回答率が令和5年度10.1％、令和6年度9.9％、今年度7.7％と推移していることを説明した。この無作為抽出による事業は来年度中止し、今後はイラストや専門用語の注釈を増やす資料の工夫、広報のべおかへの二次元コード掲載などにより、意見を出しやすい環境整備を行うとした。また、令和8年度の組織改正で政策形成・周知に関する部署を統合し、機能強化を図るとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m21",
+                  "summary": "効果的なパブリックコメントの実施について、市の評価と今後の改善方針を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "無作為抽出による意見聴取事業の回答率の推移を説明し、同事業は来年度中止すること、資料の工夫や周知方法の改善、組織改正による機能強化を今後の方針として説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            },
+            {
+              "id": "q3",
+              "title": "ふるさと納税受入額の増加に向けた取り組み",
+              "questionSummary": "ふるさと納税の受入額が令和5年度をピークに伸び悩んでいるとして、来年度に向けた新たな取り組みや方針を質問した。",
+              "answerSummary": "令和8年度の新たな取り組みとして、市内事業者の生産性向上と合わせてふるさと納税の寄附受入額増加を目的とする地場産品創出等支援事業（ふるさと納税3.0）、およびふるさと納税と連動した地域商社の設立に向けた検討を進めるとした。返礼品の掘り起こしや魅力向上、PR強化、市長自身によるトップセールスも行っていくとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m21",
+                  "summary": "ふるさと納税受入額の増加に向けた来年度の新たな取り組みや方針について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "ふるさと納税3.0（地場産品創出等支援事業）と地域商社設立の検討、返礼品の充実・PR強化、トップセールスの実施を今後の方針として説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和8年第24回定例会（第2号 2月25日） 前田遼君（代表質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/15368/10/1//0/0",
+              "speakerSection": "pos=15368"
+            },
+            {
+              "title": "令和8年第24回定例会（第2号 2月25日） 市長（三浦久知君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/27292/10/1//0/0",
+              "speakerSection": "pos=27292"
+            }
+          ],
+          "verifiedAt": null,
+          "verificationNote": "会議録取得インターフェースの試験実装（2026年8月）により生成した要約候補です。人による公式会議録との照合前のため、summaryStatus: pending・isPublished: falseとしています。前田議員の代表質問には、この要約に含めた4テーマ以外にも多数の質問項目がありますが、対応する答弁本文を未取得のため、今回は市長答弁で確認できた範囲（予算編成・基金・パブリックコメント・ふるさと納税）のみを要約対象としています。"
+        }
+      ]
     },
     {
       "memberId": "m22",
