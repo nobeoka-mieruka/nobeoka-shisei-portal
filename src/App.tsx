@@ -38,6 +38,12 @@ const BillVotesPage = lazy(() => import("./pages/BillVotesPage").then((m) => ({ 
 const BillVoteDetailPage = lazy(() =>
   import("./pages/BillVoteDetailPage").then((m) => ({ default: m.BillVoteDetailPage })),
 );
+const CouncilDocumentsPage = lazy(() =>
+  import("./pages/CouncilDocumentsPage").then((m) => ({ default: m.CouncilDocumentsPage })),
+);
+const CouncilSessionDetailPage = lazy(() =>
+  import("./pages/CouncilSessionDetailPage").then((m) => ({ default: m.CouncilSessionDetailPage })),
+);
 const GeneralQuestionsPage = lazy(() =>
   import("./pages/GeneralQuestionsPage").then((m) => ({ default: m.GeneralQuestionsPage })),
 );
@@ -129,6 +135,8 @@ function App() {
               <Route path="/bills" element={<Navigate to="/bills/votes" replace />} />
               <Route path="/bills/votes" element={<BillVotesPage />} />
               <Route path="/bills/votes/:id" element={<BillVoteDetailPage />} />
+              <Route path="/council-documents" element={<CouncilDocumentsPage />} />
+              <Route path="/council-documents/:sessionId" element={<CouncilSessionDetailPage />} />
               <Route path="/questions" element={<GeneralQuestionsPage />} />
               <Route path="/questions/:id" element={<GeneralQuestionDetailPage />} />
               <Route path="/search" element={<SearchPage />} />

@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -171,6 +171,128 @@ for (const b of billVotes) {
   for (const item of b.relatedFinanceItems ?? []) {
     if (isBlank(item)) err(tag, "relatedFinanceItemsに空文字が含まれています");
   }
+}
+
+// --- councilSessions.json ---
+const VALID_COUNCIL_SESSION_TYPES = new Set(["定例会", "臨時会"]);
+const VALID_DOCUMENT_CATEGORIES = new Set([
+  "proposals",
+  "results",
+  "petitions",
+  "statements",
+  "minutes",
+  "newsletters",
+  "other",
+]);
+const VALID_STORAGE_TYPES = new Set(["local", "external"]);
+const VALID_VERIFICATION_STATUSES = new Set(["確認済み", "要確認"]);
+
+/**
+ * filePathが実在するかを、大文字小文字を区別して確認する。
+ * Windows等の大文字小文字を区別しないファイルシステムでも existsSync だけでは検出できない
+ * ケース（例: "Results.pdf" と登録したが実ファイルは "results.pdf"）を検出するため、
+ * 実際のディレクトリ一覧（readdirSync）と完全一致するかを確認する。
+ */
+function localFileExistsCaseSensitive(relFilePath) {
+  const absPath = join(root, "public", relFilePath.replace(/^\//, ""));
+  const dir = dirname(absPath);
+  const base = absPath.split(/[\\/]/).pop();
+  if (!existsSync(dir)) return false;
+  try {
+    return readdirSync(dir).includes(base);
+  } catch {
+    return false;
+  }
+}
+
+let councilSessions = [];
+try {
+  councilSessions = readJson("src/data/councilSessions.json");
+  const sessionIds = new Set();
+  const documentIds = new Set();
+  const usedFilePaths = new Map();
+
+  for (const s of councilSessions) {
+    const tag = `councilSessions.json (${s.id ?? "id不明"})`;
+    if (isBlank(s.id)) err(tag, "idが空です");
+    else if (sessionIds.has(s.id)) err(tag, `定例会IDが重複しています: ${s.id}`);
+    else sessionIds.add(s.id);
+
+    if (isBlank(s.title)) err(tag, "titleが空です");
+    if (isBlank(s.eraYear)) err(tag, "eraYearが空です");
+    if (typeof s.year !== "number") err(tag, "yearが数値ではありません");
+    if (typeof s.fiscalYear !== "number") err(tag, "fiscalYearが数値ではありません");
+    if (!VALID_COUNCIL_SESSION_TYPES.has(s.sessionType)) err(tag, `未定義のsessionTypeです: ${s.sessionType}`);
+    if (isBlank(s.folderPath) || !s.folderPath.startsWith("/council-documents/")) {
+      err(tag, `folderPathの形式が不正です: ${s.folderPath}`);
+    }
+    if (s.startDate && !DATE_RE.test(s.startDate)) err(tag, `startDateの形式が不正です: ${s.startDate}`);
+    if (s.endDate && !DATE_RE.test(s.endDate)) err(tag, `endDateの形式が不正です: ${s.endDate}`);
+    if (s.lastVerified && !DATE_RE.test(s.lastVerified)) err(tag, `lastVerifiedの形式が不正です: ${s.lastVerified}`);
+    if (s.officialSessionUrl && !URL_RE.test(s.officialSessionUrl)) {
+      err(tag, `officialSessionUrlの形式が不正です: ${s.officialSessionUrl}`);
+    }
+    if (s.status && !VALID_VERIFICATION_STATUSES.has(s.status)) err(tag, `未定義のstatusです: ${s.status}`);
+    if (s.status === "要確認") warn(tag, "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。");
+
+    for (const d of s.documents ?? []) {
+      const docTag = `councilSessions.json (${s.id ?? "id不明"} / ${d.id ?? "資料id不明"})`;
+      if (isBlank(d.id)) err(docTag, "資料のidが空です");
+      else if (documentIds.has(d.id)) err(docTag, `資料IDが重複しています: ${d.id}`);
+      else documentIds.add(d.id);
+
+      if (isBlank(d.title)) err(docTag, "資料のtitleが空です");
+      if (!VALID_DOCUMENT_CATEGORIES.has(d.category)) err(docTag, `未定義のcategoryです: ${d.category}`);
+      if (!VALID_STORAGE_TYPES.has(d.storageType)) err(docTag, `未定義のstorageTypeです: ${d.storageType}`);
+      if (typeof d.isOfficial !== "boolean") err(docTag, "isOfficialが真偽値ではありません");
+      if (d.verificationStatus && !VALID_VERIFICATION_STATUSES.has(d.verificationStatus)) {
+        err(docTag, `未定義のverificationStatusです: ${d.verificationStatus}`);
+      }
+      if (d.verificationStatus === "要確認") {
+        warn(docTag, "自動検出されたPDFです。資料名・分類・出典URLを人の目で確認してください。");
+      }
+
+      if (d.storageType === "local") {
+        if (isBlank(d.filePath)) {
+          err(docTag, 'storageType="local"なのにfilePathが未設定です');
+        } else {
+          if (!d.filePath.startsWith("/council-documents/")) {
+            err(docTag, `filePathは/council-documents/配下である必要があります: ${d.filePath}`);
+          }
+          if (/[^ -~]/.test(d.filePath) || /\s/.test(d.filePath)) {
+            warn(docTag, `filePathに日本語または空白が含まれています（半角英数字を推奨）: ${d.filePath}`);
+          }
+          if (!localFileExistsCaseSensitive(d.filePath)) {
+            err(docTag, `filePathのファイルが見つかりません（大文字小文字の違いも含む）: ${d.filePath}`);
+          }
+          const prevOwner = usedFilePaths.get(d.filePath);
+          if (prevOwner) err(docTag, `同じfilePathが複数の資料で重複登録されています: ${d.filePath}（${prevOwner}）`);
+          else usedFilePaths.set(d.filePath, docTag);
+        }
+      } else if (d.storageType === "external" && isBlank(d.sourceUrl)) {
+        err(docTag, 'storageType="external"なのにsourceUrlが未設定です');
+      }
+
+      if (d.sourceUrl && !URL_RE.test(d.sourceUrl)) err(docTag, `sourceUrlの形式が不正です: ${d.sourceUrl}`);
+      if (d.publishedDate && !DATE_RE.test(d.publishedDate)) err(docTag, `publishedDateの形式が不正です: ${d.publishedDate}`);
+      if (d.verifiedAt && !DATE_RE.test(d.verifiedAt)) err(docTag, `verifiedAtの形式が不正です: ${d.verifiedAt}`);
+      if (d.pages !== undefined && d.pages !== null && (typeof d.pages !== "number" || d.pages <= 0)) {
+        err(docTag, `pagesが不正です（nullまたは0より大きい数値である必要があります）: ${d.pages}`);
+      }
+    }
+  }
+
+  for (const b of billVotes) {
+    const tag = `billVotes.json (${b.id})`;
+    if (b.sessionId && !sessionIds.has(b.sessionId)) {
+      warn(tag, `存在しない定例会IDを参照しています: ${b.sessionId}`);
+    }
+    if (b.sourceDocumentId && !documentIds.has(b.sourceDocumentId)) {
+      warn(tag, `存在しない定例会資料IDを参照しています: ${b.sourceDocumentId}`);
+    }
+  }
+} catch {
+  warn("councilSessions.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
 // --- mayorPromises.json ---
@@ -558,6 +680,7 @@ const VALID_URL_PREFIXES = [
   "/compensation",
   "/city-guide",
   "/bills",
+  "/council-documents",
   "/questions",
   "/search",
   "/about",
@@ -618,7 +741,7 @@ for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);
 
 console.log(
-  `[validate-data] members=${members.length} generalQuestions=${generalQuestions.length} billVotes=${billVotes.length} — errors=${errors.length} warnings=${warnings.length}`,
+  `[validate-data] members=${members.length} generalQuestions=${generalQuestions.length} billVotes=${billVotes.length} councilSessions=${councilSessions.length} — errors=${errors.length} warnings=${warnings.length}`,
 );
 
 if (errors.length > 0) {

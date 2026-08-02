@@ -71,6 +71,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/compensation",
   "/city-guide",
   "/bills/votes",
+  "/council-documents",
   "/questions",
   "/about",
   "/editorial-policy",
@@ -89,6 +90,7 @@ export const STATIC_NOINDEX_PAGES = ["/bills", "/search"];
 function loadData() {
   const members = readJson("src/data/members.json");
   const billVotes = readJson("src/data/billVotes.json");
+  const councilSessions = readJson("src/data/councilSessions.json");
   const mayorPromises = readJson("src/data/mayorPromises.json");
   const generalQuestions = readJson("src/data/generalQuestions.json");
   const mayorPressConferences = readMayorPressConferences();
@@ -102,6 +104,7 @@ function loadData() {
   return {
     members,
     billVotes,
+    councilSessions,
     mayorPromises,
     generalQuestions,
     mayorPressConferences,
@@ -160,6 +163,12 @@ function staticPageLastmod(path, data) {
       );
     case "/bills/votes":
       return resolveLastmod(path, [maxValidDate(data.billVotes.map((b) => b.lastVerified))], ["src/data/billVotes.json"]);
+    case "/council-documents":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.councilSessions.map((s) => s.lastVerified))],
+        ["src/data/councilSessions.json"],
+      );
     case "/questions":
       return resolveLastmod(
         path,
@@ -184,7 +193,7 @@ function staticPageLastmod(path, data) {
 /** サイトマップに載せる索引対象URL（{path, lastmod}[]）。 */
 export function getIndexableRoutes() {
   const data = loadData();
-  const { members, billVotes, mayorPromises, generalQuestions, mayorPressConferences } = data;
+  const { members, billVotes, councilSessions, mayorPromises, generalQuestions, mayorPressConferences } = data;
   const urls = [];
 
   for (const path of STATIC_INDEXABLE_PAGES) {
@@ -195,6 +204,12 @@ export function getIndexableRoutes() {
   }
   for (const b of billVotes) {
     urls.push({ path: `/bills/votes/${b.id}`, lastmod: resolveLastmod(`/bills/votes/${b.id}`, [b.lastVerified], ["src/data/billVotes.json"]) });
+  }
+  for (const s of councilSessions) {
+    urls.push({
+      path: `/council-documents/${s.id}`,
+      lastmod: resolveLastmod(`/council-documents/${s.id}`, [s.lastVerified], ["src/data/councilSessions.json"]),
+    });
   }
   for (const p of mayorPromises.promises ?? []) {
     urls.push({

@@ -14,6 +14,7 @@ import membersData from "../data/members.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
+import councilSessionsData from "../data/councilSessions.json";
 import mayorPromisesData from "../data/mayorPromises.json";
 import financeDashboardData from "../data/financeDashboard.json";
 import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
@@ -23,6 +24,7 @@ import type {
   BillVoteItem,
   CompensationComparisonEntry,
   CouncilMember,
+  CouncilSession,
   FinanceDashboardData,
   GeneralQuestionItem,
   Mayor,
@@ -33,11 +35,40 @@ import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../c
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
 import { normalizePathname, safeDecodeURIComponent } from "./normalizePathname";
+import photoDimensionsData from "../data/photoDimensions.json";
+
+const photoDimensions = photoDimensionsData as Record<string, { width: number; height: number }>;
+
+/** photoUrl（例: "/photos/xxx.webp"）から、実画像の寸法を引く。見つからない場合はundefined。 */
+function photoDimensionsFor(photoUrl?: string): { width: number; height: number } | undefined {
+  if (!photoUrl) return undefined;
+  const filename = photoUrl.split("/").pop();
+  return filename ? photoDimensions[filename] : undefined;
+}
+
+/** WebSiteとOrganizationを相互参照させるための@id。 */
+export const websiteId = `${SITE_URL}/#website`;
+export const organizationId = `${SITE_URL}/#organization`;
+
+/** サイト自体のロゴ（実寸法: 1536×1024, public/images/nobeoka-shisei-logo.webp）。 */
+const SITE_LOGO = {
+  url: `${SITE_URL}/images/nobeoka-shisei-logo.webp`,
+  width: 1536,
+  height: 1024,
+};
+
+/**
+ * このサイトが延岡市・延岡市議会が運営する公式サイトではないことを明示する説明文。
+ * /about, /editorial-policy に掲載されている文言と一致させている。
+ */
+const SITE_IDENTITY_DESCRIPTION =
+  "延岡市の市長、市議会議員、会派、議会活動、市政に関する情報を市民に分かりやすく伝えることを目的とした情報サイトです。延岡市や延岡市議会が運営する公式サイトではありません。";
 
 const members = membersData as CouncilMember[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = billVotesData as BillVoteItem[];
+const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
 const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
@@ -104,7 +135,15 @@ function breadcrumbJsonLd(items: BreadcrumbEntry[]): JsonLdEntry {
   };
 }
 
-function personJsonLd(id: string, name: string, url: string, sameAs: string[], memberOfName?: string): JsonLdEntry {
+function personJsonLd(
+  id: string,
+  name: string,
+  url: string,
+  sameAs: string[],
+  memberOfName?: string,
+  photoUrl?: string,
+): JsonLdEntry {
+  const dims = photoDimensionsFor(photoUrl);
   return {
     id,
     data: {
@@ -114,28 +153,69 @@ function personJsonLd(id: string, name: string, url: string, sameAs: string[], m
       url,
       ...(sameAs.length > 0 ? { sameAs } : {}),
       ...(memberOfName ? { memberOf: { "@type": "Organization", name: memberOfName } } : {}),
+      ...(photoUrl && dims
+        ? {
+            image: {
+              "@type": "ImageObject",
+              url: `${SITE_URL}${photoUrl}`,
+              width: dims.width,
+              height: dims.height,
+            },
+          }
+        : {}),
     },
   };
 }
 
-/** 運営者情報が1項目でも設定されている場合だけ返す。存在しない団体をでっち上げないための判定。 */
-function organizationJsonLd(): JsonLdEntry | undefined {
-  if (!isOperatorConfigured()) return undefined;
+/**
+ * サイト自体を表すOrganization（運営者個人の氏名などは含めない）。
+ * 運営者情報（src/config/operator.ts）が設定されている場合のみ、確認済みの追加項目
+ * （連絡先メール・所在地域・開設日・運営目的）を上乗せする。未確認情報は絶対に含めない。
+ */
+function organizationJsonLd(): JsonLdEntry {
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": organizationId,
     name: organizationName(),
     url: SITE_URL,
+    logo: { "@type": "ImageObject", ...SITE_LOGO },
+    description: SITE_IDENTITY_DESCRIPTION,
   };
-  const email = getOperatorField("contactEmail");
-  if (email) data.email = email;
-  const region = getOperatorField("region");
-  if (region) data.areaServed = region;
-  const founded = getOperatorField("foundedDate");
-  if (founded) data.foundingDate = founded;
-  const purpose = getOperatorField("purpose");
-  if (purpose) data.description = purpose;
+  if (isOperatorConfigured()) {
+    const email = getOperatorField("contactEmail");
+    if (email) data.email = email;
+    const region = getOperatorField("region");
+    if (region) data.areaServed = region;
+    const founded = getOperatorField("foundedDate");
+    if (founded) data.foundingDate = founded;
+    const purpose = getOperatorField("purpose");
+    if (purpose) data.description = purpose;
+  }
   return { id: "organization-jsonld", data };
+}
+
+/** WebSite構造化データ（トップページのみ）。サイト内検索が実在するためSearchActionを付与する。 */
+function websiteJsonLd(): JsonLdEntry {
+  return {
+    id: "website-jsonld",
+    data: {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: SITE_NAME,
+      url: SITE_URL,
+      publisher: { "@id": organizationId },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+  };
 }
 
 interface WebPageInput {
@@ -159,7 +239,7 @@ function webPageJsonLd(input: WebPageInput): JsonLdEntry {
       description: input.description,
       url: input.url,
       inLanguage: "ja",
-      isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+      isPartOf: { "@id": websiteId },
       ...(input.breadcrumbs.length > 0 ? { breadcrumb: breadcrumbListData(input.breadcrumbs) } : {}),
       primaryImageOfPage: { "@type": "ImageObject", url: input.image },
       ...(input.datePublished ? { datePublished: input.datePublished } : {}),
@@ -191,8 +271,8 @@ function datasetJsonLd(input: DatasetInput): JsonLdEntry {
       name: input.name,
       description: input.description,
       url: input.url,
-      creator: { "@type": "Organization", name: organizationName() },
-      publisher: { "@type": "Organization", name: organizationName() },
+      creator: { "@type": "Organization", "@id": organizationId, name: organizationName() },
+      publisher: { "@type": "Organization", "@id": organizationId, name: organizationName() },
       inLanguage: "ja",
       spatialCoverage: "宮崎県延岡市",
       ...(input.temporalCoverage ? { temporalCoverage: input.temporalCoverage } : {}),
@@ -281,10 +361,7 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
           description,
           breadcrumbs: [],
           extraJsonLd: [
-            {
-              id: "website-jsonld",
-              data: { "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
-            },
+            websiteJsonLd(),
             organizationJsonLd(),
             datasetJsonLd({
               id: "dataset-members-jsonld",
@@ -309,7 +386,7 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
           pageTitle: `延岡市長 ${mayor.name}`,
           description: `延岡市長${mayor.name}氏のプロフィール、経歴、公約、市政方針を公開資料に基づいて掲載しています。`,
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市長情報" }],
-          extraJsonLd: [personJsonLd("person-jsonld", mayor.name, url, sameAs)],
+          extraJsonLd: [personJsonLd("person-jsonld", mayor.name, url, sameAs, undefined, mayor.photoUrl)],
           mainEntity: { "@type": "Person", name: mayor.name, url },
         },
         options,
@@ -488,6 +565,27 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/council-documents":
+      return makeResult(
+        {
+          path: "/council-documents",
+          pageTitle: "延岡市議会の定例会・議会資料",
+          description:
+            "延岡市議会の定例会・臨時会ごとに、議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料を整理して掲載しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "定例会・議会資料" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-council-documents-jsonld",
+              name: "延岡市議会 定例会・議会資料データ",
+              description: "延岡市議会の定例会・臨時会ごとの議案、審議結果、請願・陳情、会議録、市議会だよりなどの資料一覧データです。",
+              url: `${SITE_URL}/council-documents`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/questions":
       return makeResult(
         {
@@ -610,7 +708,7 @@ function memberSeo(id: string, options?: SeoOptions): SeoResult {
       description: `延岡市議会議員${member.name}氏の${descriptionParts.join("、")}などを掲載しています。`,
       image: memberOgImage(member.id),
       breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議員一覧", to: "/" }, { label: member.name }],
-      extraJsonLd: [personJsonLd("person-jsonld", member.name, url, sameAs, "延岡市議会")],
+      extraJsonLd: [personJsonLd("person-jsonld", member.name, url, sameAs, "延岡市議会", member.photoUrl)],
       mainEntity: { "@type": "Person", name: member.name, url },
     },
     options,
@@ -682,6 +780,26 @@ function billVoteSeo(id: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/** /council-documents/:sessionId */
+function councilSessionSeo(sessionId: string, options?: SeoOptions): SeoResult {
+  const session = councilSessions.find((s) => s.id === sessionId);
+  if (!session) return notFound(`/council-documents/${sessionId}`, "定例会情報");
+
+  return makeResult(
+    {
+      path: `/council-documents/${sessionId}`,
+      pageTitle: `${session.title}の議会資料`,
+      description: `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${session.documents.length}件）を掲載しています。`,
+      breadcrumbs: [
+        { label: "ホーム", to: "/" },
+        { label: "定例会・議会資料", to: "/council-documents" },
+        { label: session.title },
+      ],
+    },
+    options,
+  );
+}
+
 /** /mayor/press-conferences/:date */
 function pressConferenceSeo(date: string, options?: SeoOptions): SeoResult {
   const conference = mayorPressConferences.find((c) => c.date === date);
@@ -713,8 +831,8 @@ function pressConferenceSeo(date: string, options?: SeoOptions): SeoResult {
             mainEntityOfPage: `${SITE_URL}/mayor/press-conferences/${conference.date}`,
             url: `${SITE_URL}/mayor/press-conferences/${conference.date}`,
             description,
-            author: { "@type": "Organization", name: organizationName() },
-            publisher: { "@type": "Organization", name: organizationName() },
+            author: { "@type": "Organization", "@id": organizationId, name: organizationName() },
+            publisher: { "@type": "Organization", "@id": organizationId, name: organizationName() },
             isBasedOn: conference.sourceUrl,
             citation: conference.sourceUrl,
           },
@@ -729,6 +847,7 @@ const MEMBER_RE = /^\/members\/([^/]+)$/;
 const QUESTION_RE = /^\/questions\/([^/]+)$/;
 const PROMISE_RE = /^\/mayor\/policy-progress\/([^/]+)$/;
 const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
+const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 
 /**
@@ -761,6 +880,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const billVoteMatch = path.match(BILL_VOTE_RE);
   if (billVoteMatch) return billVoteSeo(safeDecodeURIComponent(billVoteMatch[1]), options);
+
+  const councilSessionMatch = path.match(COUNCIL_SESSION_RE);
+  if (councilSessionMatch) return councilSessionSeo(safeDecodeURIComponent(councilSessionMatch[1]), options);
 
   const pressConferenceMatch = path.match(PRESS_CONFERENCE_RE);
   if (pressConferenceMatch) return pressConferenceSeo(safeDecodeURIComponent(pressConferenceMatch[1]), options);

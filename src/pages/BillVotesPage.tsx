@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
 import type { BillProposerType, BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
@@ -123,10 +123,11 @@ export function BillVotesPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
+  const [searchParams] = useSearchParams();
 
   const [query, setQuery] = useState("");
   const [fiscalYear, setFiscalYear] = useState("all");
-  const [session, setSession] = useState("all");
+  const [session, setSession] = useState(searchParams.get("session") ?? "all");
   const [result, setResult] = useState("all");
   const [committee, setCommittee] = useState("all");
   const [proposerType, setProposerType] = useState("all");

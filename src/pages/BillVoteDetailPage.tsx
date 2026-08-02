@@ -3,7 +3,8 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import mayorPromisesData from "../data/mayorPromises.json";
-import type { BillMemberVoteStatus, BillVoteItem, GeneralQuestionItem, MayorPromisesData } from "../types";
+import councilSessionsData from "../data/councilSessions.json";
+import type { BillMemberVoteStatus, BillVoteItem, CouncilSession, GeneralQuestionItem, MayorPromisesData } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
@@ -18,6 +19,7 @@ import { getSeoForPath } from "../lib/seo";
 
 const billVotes = billVotesData as BillVoteItem[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
+const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
 
 const voteOrder: BillMemberVoteStatus[] = [
@@ -55,6 +57,33 @@ function collectDocuments(bill: BillVoteItem): DocumentLink[] {
   return docs;
 }
 
+interface CouncilDocumentLink {
+  url: string;
+  title: string;
+  sessionId: string;
+  sessionTitle: string;
+  sourcePage?: number;
+}
+
+/** 議案データのsessionId/sourceDocumentIdから、対応する定例会資料PDFへのリンクを解決する（確認できた場合のみ）。 */
+function resolveCouncilDocumentLink(bill: BillVoteItem): CouncilDocumentLink | undefined {
+  if (!bill.sessionId) return undefined;
+  const session = councilSessions.find((s) => s.id === bill.sessionId);
+  if (!session) return undefined;
+  const doc = bill.sourceDocumentId
+    ? session.documents.find((d) => d.id === bill.sourceDocumentId)
+    : session.documents.find((d) => d.category === "results");
+  const url = (doc?.storageType === "local" ? doc.filePath : doc?.sourceUrl) ?? bill.sourceFilePath;
+  if (!url) return undefined;
+  return {
+    url,
+    title: doc?.title ?? "議案等審議結果",
+    sessionId: session.id,
+    sessionTitle: session.title,
+    sourcePage: bill.sourcePage,
+  };
+}
+
 export function BillVoteDetailPage() {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
@@ -76,6 +105,7 @@ export function BillVoteDetailPage() {
   }
 
   const documents = collectDocuments(bill);
+  const councilDocumentLink = resolveCouncilDocumentLink(bill);
   const relatedQuestions = (bill.relatedQuestionIds ?? [])
     .map((qId) => generalQuestions.find((q) => q.id === qId))
     .filter((q): q is GeneralQuestionItem => !!q);
@@ -322,6 +352,33 @@ export function BillVoteDetailPage() {
               </li>
             ))}
           </ul>
+        </SectionCard>
+      )}
+
+      {/* 定例会資料PDFとの連携 */}
+      {councilDocumentLink && (
+        <SectionCard title="掲載されている定例会資料">
+          <p className="text-sm leading-relaxed text-on-surface">
+            この議案は「{councilDocumentLink.sessionTitle}」の資料「{councilDocumentLink.title}」に掲載されています。
+            {councilDocumentLink.sourcePage != null && `（該当ページ：${councilDocumentLink.sourcePage}ページ目）`}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <a
+              href={councilDocumentLink.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="この議案が掲載されているPDFを新しいタブで開く"
+              className={`inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+            >
+              この議案が掲載されているPDFを開く
+            </a>
+            <Link
+              to={`/council-documents/${councilDocumentLink.sessionId}`}
+              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+            >
+              定例会の資料一覧を見る
+            </Link>
+          </div>
         </SectionCard>
       )}
 

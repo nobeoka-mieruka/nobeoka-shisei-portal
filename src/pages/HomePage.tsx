@@ -60,6 +60,7 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "市役所どこに行けばいい？診断", to: "/city-guide", ready: true },
   { label: "一般質問を調べる", to: "/questions", ready: true },
   { label: "議案ごとの賛否を見る", to: "/bills/votes", ready: true },
+  { label: "定例会・議会資料を見る", to: "/council-documents", ready: true },
   { label: "延岡市の財政を見る", to: "/finance", ready: true },
   { label: "サイト内を検索する", to: "/search", ready: true },
   { label: "編集方針を見る", to: "/editorial-policy", ready: true },

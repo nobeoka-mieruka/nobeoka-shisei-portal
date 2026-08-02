@@ -27,6 +27,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/city-guide", label: "市役所案内" },
       { to: "/questions", label: "一般質問データベース" },
       { to: "/bills/votes", label: "議案ごとの賛否" },
+      { to: "/council-documents", label: "定例会・議会資料" },
       { to: "/search", label: "サイト内検索" },
       { to: "/updates", label: "更新履歴" },
     ],

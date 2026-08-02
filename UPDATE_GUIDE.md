@@ -183,7 +183,27 @@
 
 ---
 
-## 5. 公開する方法
+## 5. 定例会・議会資料PDFを追加する方法
+
+### 編集するファイル
+
+`src/data/councilSessions.json`（PDFの実ファイルは `public/council-documents/` 配下）
+
+### 手順の概要
+
+1. `public/council-documents/<年度>/<定例会ID>/<資料分類>/` にPDFを置く（または公式サイトへの外部リンクのみにする）
+2. `src/data/templates/councilSessionTemplate.ts` をコピーして `councilSessions.json` に追加する
+3. `npm run validate:data` で確認する
+
+詳しい手順（フォルダ名・ファイル名のルール、資料分類の意味、`storageType`の使い分け、議案データとの連携方法など）は、`docs/council-document-registration.md` にまとめています。**この機能を触るときは必ずそちらも参照してください。**
+
+### 未確認項目の扱い
+
+会期の開始日・終了日など、公式資料で確認できていない項目は省略してください（他のデータベースと同じく、空文字や推測値を入れないでください）。
+
+---
+
+## 6. 公開する方法
 
 1. 上記の手順でデータファイル（JSON）を編集する
 2. ターミナルで次を実行する

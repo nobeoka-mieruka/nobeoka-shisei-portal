@@ -851,6 +851,111 @@ export interface BillVoteItem {
   relatedCommitteeActivityIds?: string[];
   relatedMayorPromiseIds?: string[];
   relatedFinanceItems?: string[];
+
+  // 定例会・議会資料PDFとの連携（任意項目。公式資料で確認できた場合のみ設定する）
+  /** この議案が審議された定例会・臨時会のID（councilSessions.jsonのid）。 */
+  sessionId?: string;
+  /** この議案が掲載されている資料のID（councilSessions.json内のCouncilDocument.id）。 */
+  sourceDocumentId?: string;
+  /** 上記資料のPDFパス（サイト内保存の場合）。councilSessions.json側の値と重複するが、参照解決できない場合のフォールバック用に持たせる。 */
+  sourceFilePath?: string;
+  /** PDF内でこの議案が掲載されているページ番号（確認できた場合のみ）。 */
+  sourcePage?: number;
+}
+
+/**
+ * 定例会・臨時会ごとの議会資料（PDF）を分類するカテゴリ。
+ * proposals=議案・条例・予算／results=審議結果・表決結果／petitions=請願・陳情／
+ * statements=意見書・決議・討論／minutes=会議録／newsletters=市議会だより／other=その他
+ */
+export type CouncilDocumentCategory =
+  | "proposals"
+  | "results"
+  | "petitions"
+  | "statements"
+  | "minutes"
+  | "newsletters"
+  | "other";
+
+/**
+ * 資料の表示方式。
+ * local … サイト内（public/council-documents/配下）に保存したPDFを表示する。
+ * external … サイト内には複製せず、公式サイトのURL（sourceUrl）のみを案内する。
+ * 公開可否が確認できない資料は必ずexternalにする（無断複製を避けるため）。
+ */
+export type CouncilDocumentStorageType = "local" | "external";
+
+/**
+ * データの確認状態（管理用の内部フラグ）。
+ * "要確認" は scripts/generate-council-documents.mjs がPDFを自動検出した際、
+ * 資料名・分類・定例会情報などを人が確認できていないことを示すために付ける。
+ * 画面上でこの値を一般利用者向けに強調表示することはしない（管理用データとして保持する）。
+ */
+export type CouncilVerificationStatus = "確認済み" | "要確認";
+
+/** 定例会・議会資料ページにおける、資料（PDF）1件分のデータ。 */
+export interface CouncilDocument {
+  id: string;
+  category: CouncilDocumentCategory;
+  title: string;
+  description?: string;
+  storageType: CouncilDocumentStorageType;
+  /** storageType="local"の場合のみ使用。/council-documents/配下のパス（例: "/council-documents/2026/2026-06/results/deliberation-results.pdf"）。 */
+  filePath?: string;
+  fileType?: string;
+  /** 延岡市議会・延岡市公式サイト上の元の資料URL。storageTypeによらず、確認できた場合は必ず入力する。 */
+  sourceUrl?: string;
+  /** ISO形式。公式サイトでの公開日（確認できた場合のみ）。 */
+  publishedDate?: string;
+  pages?: number | null;
+  fileSize?: string;
+  /** ISO形式。サイト運営者がこの資料の内容・公開状況をいつ確認したか。 */
+  verifiedAt?: string;
+  /** 延岡市・延岡市議会が公開した公式資料であるかどうか。 */
+  isOfficial: boolean;
+  /** 未設定（省略）の場合は"確認済み"として扱う。 */
+  verificationStatus?: CouncilVerificationStatus;
+  notes?: string;
+}
+
+/** 定例会・臨時会の区分。 */
+export type CouncilSessionType = "定例会" | "臨時会";
+
+/**
+ * 定例会・臨時会ごとの議会資料データ1件分（第1段階：構造のみ）。
+ * 架空の会期日程・資料は登録しないこと。未確認の項目は省略する（空文字を入れない）。
+ */
+export interface CouncilSession {
+  id: string;
+  /** 開催年（西暦）。会期の開催月が属する暦年（例: 令和8年3月定例会なら2026）。 */
+  year: number;
+  /** 年度（西暦、4月始まり）。フォルダ分類・一覧ページの年度別グルーピングに使う。 */
+  fiscalYear: number;
+  /** 元号表記（例: "令和8年"）。開催年（year）に対応する。 */
+  eraYear: string;
+  /** 例: "令和8年6月定例会" */
+  title: string;
+  sessionType: CouncilSessionType;
+  /** 延岡市議会の回次（例: "第26回"）。公式資料で確認できた場合のみ設定する。 */
+  sessionNumber?: string;
+  /** ISO形式。会期開始日（確認できた場合のみ）。 */
+  startDate?: string;
+  /** ISO形式。会期終了日（確認できた場合のみ）。 */
+  endDate?: string;
+  /** public/council-documents/配下のフォルダパス（例: "/council-documents/2026/2026-06"）。 */
+  folderPath: string;
+  description?: string;
+  documents: CouncilDocument[];
+  /** 延岡市議会公式サイトの、この定例会に関する情報が確認できるページのURL。 */
+  officialSessionUrl?: string;
+  /** ISO形式。サイト運営者がこの定例会データをいつ確認したか。 */
+  lastVerified?: string;
+  /**
+   * 未設定（省略）の場合は"確認済み"として扱う。
+   * scripts/generate-council-documents.mjs がPDFフォルダから自動生成した定例会（正式名称・会期を
+   * 未確認）には"要確認"を設定する。画面上ではこの値を一般利用者向けに強調表示しない。
+   */
+  status?: CouncilVerificationStatus;
 }
 
 /** 財政ダッシュボード全体のデータ（年度単位）。 */
