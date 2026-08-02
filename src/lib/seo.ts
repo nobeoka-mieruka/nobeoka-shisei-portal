@@ -808,11 +808,19 @@ function councilSessionSeo(sessionId: string, options?: SeoOptions): SeoResult {
   if (!session) return notFound(`/council-documents/${sessionId}`, "定例会情報");
   const visibleDocumentCount = publicDocuments(session.documents).length;
 
+  const baseDescription = `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${visibleDocumentCount}件）を掲載しています。`;
+  const description =
+    session.summaryStatus === "verified"
+      ? `${session.title}で審議された議案、審議結果および関連する公式資料を掲載しています。${baseDescription}`
+      : session.summaryStatus && session.summaryStatus !== "unavailable"
+        ? `${session.title}について、公式資料を基に確認できた議案、審議結果、資料等を掲載しています。会期概要の一部は現在確認中です。`
+        : baseDescription;
+
   return makeResult(
     {
       path: `/council-documents/${sessionId}`,
       pageTitle: `${session.title}の議会資料`,
-      description: `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${visibleDocumentCount}件）を掲載しています。`,
+      description,
       breadcrumbs: [
         { label: "ホーム", to: "/" },
         { label: "定例会・議会資料", to: "/council-documents" },

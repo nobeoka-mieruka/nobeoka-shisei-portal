@@ -291,6 +291,7 @@ const VALID_DOCUMENT_CATEGORIES = new Set([
 ]);
 const VALID_STORAGE_TYPES = new Set(["local", "external"]);
 const VALID_VERIFICATION_STATUSES = new Set(["確認済み", "要確認", "自動取得"]);
+const VALID_SESSION_SUMMARY_STATUSES = new Set(["verified", "partially-verified", "pending", "unavailable"]);
 const VALID_PUBLICATION_STATUSES = new Set([
   "published",
   "pendingReview",
@@ -346,6 +347,29 @@ try {
     }
     if (s.status && !VALID_VERIFICATION_STATUSES.has(s.status)) err(tag, `未定義のstatusです: ${s.status}`);
     if (s.status === "要確認") warn(tag, "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。");
+
+    if (s.summaryStatus && !VALID_SESSION_SUMMARY_STATUSES.has(s.summaryStatus)) {
+      err(tag, `未定義のsummaryStatusです: ${s.summaryStatus}`);
+    }
+    if (s.summaryStatus === "unavailable" && (s.summary || s.shortSummary)) {
+      err(tag, 'summaryStatus="unavailable"なのにsummary/shortSummaryが設定されています');
+    }
+    if (s.summaryStatus && s.summaryStatus !== "unavailable" && isBlank(s.summary)) {
+      err(tag, `summaryStatus="${s.summaryStatus}"なのにsummaryが空です`);
+    }
+    if (s.summaryStatus && s.summaryStatus !== "verified") {
+      warn(tag, `会期要約が確認待ち状態です（summaryStatus: ${s.summaryStatus}）。`);
+    }
+    if (s.summaryGeneratedAt && !DATE_RE.test(s.summaryGeneratedAt)) {
+      err(tag, `summaryGeneratedAtの形式が不正です: ${s.summaryGeneratedAt}`);
+    }
+    if (s.summaryVerifiedAt && !DATE_RE.test(s.summaryVerifiedAt)) {
+      err(tag, `summaryVerifiedAtの形式が不正です: ${s.summaryVerifiedAt}`);
+    }
+    for (const src of s.summarySources ?? []) {
+      if (isBlank(src.title)) err(tag, "summarySourcesの資料titleが空です");
+      if (src.sourceUrl && !URL_RE.test(src.sourceUrl)) err(tag, `summarySourcesのsourceUrlの形式が不正です: ${src.sourceUrl}`);
+    }
 
     for (const d of s.documents ?? []) {
       const docTag = `councilSessions.json (${s.id ?? "id不明"} / ${d.id ?? "資料id不明"})`;

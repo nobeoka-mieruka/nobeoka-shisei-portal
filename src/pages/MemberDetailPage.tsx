@@ -134,9 +134,14 @@ export function MemberDetailPage() {
         {isProfileConfirmed ? (
           <p className="mt-4 text-sm leading-relaxed text-on-surface">{member.profile}</p>
         ) : (
-          <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-on-surface-variant">
-            プロフィールは情報確認中です
-          </p>
+          <div className="mt-4 rounded-xl bg-surface-container-high p-4">
+            <p className="text-sm font-medium text-on-surface">
+              {member.profileUrl ? "プロフィール未掲載" : "プロフィールを作成中です"}
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">
+              公開資料を基にプロフィールを整理しています。詳しくは公式プロフィールをご覧ください。
+            </p>
+          </div>
         )}
 
         {member.profileUrl && (
@@ -145,10 +150,10 @@ export function MemberDetailPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${member.name}の公式プロフィールを新しいタブで開く`}
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+            className={`mt-4 inline-flex h-10 items-center gap-1.5 rounded-full bg-primary-container px-4 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
           >
             <GlobeIcon className="h-4 w-4" />
-            公式プロフィール
+            {isProfileConfirmed ? "公式プロフィール" : "公式プロフィールを見る"}
           </a>
         )}
         <SnsLinks links={member.sns} className="mt-4" />

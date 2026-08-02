@@ -47,6 +47,9 @@ jobs:
       - name: Reconcile with local PDF folder
         run: npm run generate:council-documents
 
+      - name: Generate session summaries
+        run: npm run generate:session-summaries
+
       - name: Generate search index
         run: npm run generate:search
 

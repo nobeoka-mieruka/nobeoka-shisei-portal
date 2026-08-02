@@ -6,6 +6,7 @@ import { publicDocuments } from "../lib/councilDocuments";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { SessionSummaryStatusBadge } from "../components/council/SessionSummaryStatusBadge";
 import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
@@ -128,6 +129,12 @@ export function CouncilDocumentsPage() {
                       <p className="mt-1 text-xs text-on-surface-variant">
                         登録資料数：{publicDocuments(session.documents).length}件／最終更新日：
                         {session.lastVerified ? formatJapaneseDate(session.lastVerified) : "確認中"}
+                      </p>
+                      {session.summaryStatus !== "verified" && session.summaryStatus && (
+                        <SessionSummaryStatusBadge status={session.summaryStatus} className="mt-2" />
+                      )}
+                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-on-surface-variant">
+                        {session.shortSummary ?? "この会期の概要は現在整理中です。"}
                       </p>
                       <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">詳細を見る</p>
                     </Link>

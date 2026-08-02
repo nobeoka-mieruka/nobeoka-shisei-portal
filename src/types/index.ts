@@ -1067,6 +1067,46 @@ export interface CouncilDocument {
 export type CouncilSessionType = "定例会" | "臨時会";
 
 /**
+ * 会期要約の確認状態。議案ごとのverificationStatusとは別軸で、要約文そのものの確認状況を表す。
+ * "verified"＝要約の元になった構造化データ（議案・資料）がすべて確認済み／
+ * "partially-verified"＝一部の議案・資料が確認待ちの状態を含む／
+ * "pending"＝要約文自体が人による確認前（暫定掲載）／
+ * "unavailable"＝要約作成に必要な資料（議案・資料）が登録されていない。
+ */
+export type SessionSummaryStatus = "verified" | "partially-verified" | "pending" | "unavailable";
+
+/** 会期要約の作成に使用した資料1件分。 */
+export interface SessionSummarySource {
+  /** 対応するCouncilDocument.id（確認できる場合）。 */
+  documentId?: string;
+  title: string;
+  filePath?: string;
+  sourceUrl?: string;
+  page?: number;
+}
+
+/**
+ * 本会議・委員会1回分の概要（将来拡張用）。
+ * 発言議員・トピックは、公式会議録等で発言者を確定できる場合のみ設定し、推測では補わない。
+ */
+export interface CouncilMeetingDay {
+  id: string;
+  /** ISO形式。開催日。 */
+  date: string;
+  /** 例: "第2号" */
+  meetingNumber?: string;
+  meetingType?: "本会議" | "委員会";
+  title?: string;
+  summary?: string;
+  summaryStatus?: SessionSummaryStatus;
+  /** 発言が公式資料で確認できた議員のmemberId。確定できない場合は空配列のままにする。 */
+  speakerMemberIds?: string[];
+  /** 会議録・議案名に明記された語句のみを設定する（独自分類・タグ付けはしない）。 */
+  topics?: string[];
+  documentIds?: string[];
+}
+
+/**
  * 定例会・臨時会ごとの議会資料データ1件分（第1段階：構造のみ）。
  * 架空の会期日程・資料は登録しないこと。未確認の項目は省略する（空文字を入れない）。
  */
@@ -1101,6 +1141,26 @@ export interface CouncilSession {
    * 未確認）には"要確認"を設定する。画面上ではこの値を一般利用者向けに強調表示しない。
    */
   status?: CouncilVerificationStatus;
+
+  /** 一覧カード用の短い要約（80〜160字目安）。scripts/generate-session-summaries.mjsが生成する。 */
+  shortSummary?: string;
+  /**
+   * 会期全体の要約（200〜500字目安）。議案・資料として登録済みの構造化データ（件名・分類・
+   * 議決結果・資料区分等）のみから機械的に整えたもの。公式資料の本文をそのまま転載しない。
+   */
+  summary?: string;
+  summaryStatus?: SessionSummaryStatus;
+  /** ISO形式。summaryを生成・更新した日時。 */
+  summaryGeneratedAt?: string;
+  /** ISO形式。summaryの内容を人が公式資料と照合した日時（未確認の場合は未設定）。 */
+  summaryVerifiedAt?: string;
+  summarySources?: SessionSummarySource[];
+
+  /**
+   * 本会議・委員会ごとの概要（将来拡張用）。公式会議録から日別に整理できる場合のみ設定する。
+   * 現時点のデータ基盤（審議結果一覧PDF）では発言者・トピックを確定できないため、通常は未設定。
+   */
+  meetingDays?: CouncilMeetingDay[];
 }
 
 /** 財政ダッシュボード全体のデータ（年度単位）。 */

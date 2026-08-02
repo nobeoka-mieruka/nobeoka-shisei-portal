@@ -1,19 +1,23 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import councilSessionsData from "../data/councilSessions.json";
-import type { CouncilSession } from "../types";
+import billVotesData from "../data/billVotes.json";
+import type { BillVoteItem, CouncilSession } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CouncilDocumentCard } from "../components/council/CouncilDocumentCard";
+import { SessionSummaryStatusBadge } from "../components/council/SessionSummaryStatusBadge";
 import { councilDocumentCategoryLabels, councilDocumentCategoryOrder, publicDocuments } from "../lib/councilDocuments";
+import { billsForSession, sessionBillStats, sessionSummaryStatusLabels } from "../lib/councilSessions";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { GlobeIcon } from "../components/icons";
 
 const councilSessions = councilSessionsData as CouncilSession[];
+const billVotes = billVotesData as BillVoteItem[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -49,6 +53,10 @@ export function CouncilSessionDetailPage() {
   const documentsByCategory = councilDocumentCategoryOrder
     .map((category) => ({ category, documents: visibleDocuments.filter((d) => d.category === category) }))
     .filter((group) => group.documents.length > 0);
+
+  const sessionBills = billsForSession(billVotes, session);
+  const stats = sessionBillStats(sessionBills);
+  const summaryStatus = session.summaryStatus;
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -102,6 +110,82 @@ export function CouncilSessionDetailPage() {
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         掲載しているPDFは、延岡市議会および延岡市が公開している公式資料を、市民が確認しやすいよう定例会ごとに整理したものです。資料の内容は変更せず掲載しています。最新情報および正式な内容については、延岡市議会公式サイトもあわせてご確認ください。当サイトは、特定の議員、会派、政党、議案への支持・反対を目的とするものではありません。
       </p>
+
+      <SectionCard title="この会期の概要">
+        {summaryStatus && summaryStatus !== "unavailable" ? (
+          <div className="space-y-3">
+            {summaryStatus !== "verified" && <SessionSummaryStatusBadge status={summaryStatus} />}
+            <p className="whitespace-pre-line text-sm leading-relaxed text-on-surface">{session.summary}</p>
+            {summaryStatus !== "verified" && (
+              <p className="rounded-lg bg-surface-container-high p-3 text-xs leading-relaxed text-on-surface-variant">
+                この要約は公式資料を基に作成していますが、一部の内容（{sessionSummaryStatusLabels[summaryStatus]}）を確認中です。正式な内容は出典資料をご確認ください。
+              </p>
+            )}
+
+            {stats && (
+              <div className="rounded-lg bg-surface-container-high p-3 text-sm text-on-surface">
+                <p className="font-medium">主な件数</p>
+                <ul className="mt-1 space-y-0.5 text-xs text-on-surface-variant">
+                  <li>登録議案：{stats.registered}件</li>
+                  {stats.byResult.map(({ result, count }) => (
+                    <li key={result}>
+                      {result}：{count}件
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="border-t border-outline-variant pt-3">
+              <p className="text-xs leading-relaxed text-on-surface-variant">
+                この要約は延岡市議会が公開している会議録、議案書、審議結果等を基に作成しています。
+              </p>
+              {session.summarySources && session.summarySources.length > 0 && (
+                <ul className="mt-2 space-y-1.5">
+                  {session.summarySources.map((src, i) => {
+                    const href = src.filePath ?? src.sourceUrl;
+                    return (
+                      <li key={`${src.documentId ?? src.title}-${i}`} className="text-xs text-on-surface-variant">
+                        {href ? (
+                          <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${src.title}を新しいタブで開く`}
+                            className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                          >
+                            {src.title}
+                            {src.page && `（${src.page}ページ）`}
+                          </a>
+                        ) : (
+                          <span>
+                            {src.title}
+                            {src.page && `（${src.page}ページ）`}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              {session.summaryVerifiedAt && (
+                <p className="mt-1.5 text-xs text-on-surface-variant">
+                  確認日：{formatJapaneseDate(session.summaryVerifiedAt)}
+                </p>
+              )}
+            </div>
+
+            <CorrectionRequestButton
+              pageName={`${session.title}の要約`}
+              buttonLabel="要約内容の訂正・情報提供"
+            />
+          </div>
+        ) : (
+          <p className="text-sm leading-relaxed text-on-surface-variant">
+            要約作成に必要な公式資料が不足しています。資料を確認でき次第、掲載します。
+          </p>
+        )}
+      </SectionCard>
 
       {documentsByCategory.length === 0 ? (
         <SectionCard title="議会資料">
