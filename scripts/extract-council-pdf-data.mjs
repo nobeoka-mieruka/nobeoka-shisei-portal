@@ -21,6 +21,7 @@ import { fileURLToPath } from "node:url";
 import { extractPdfText } from "./lib/pdf-text.mjs";
 import { extractRecordsFromPage, buildProposalId } from "./lib/council-bill-extraction.mjs";
 import { sha256OfBuffer } from "./lib/council-shared.mjs";
+import { buildDetailSummary } from "./lib/bill-summary.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -166,7 +167,6 @@ async function main() {
         session: session.title,
         billNumber: record.billNumber,
         billTitle: record.title ?? "",
-        summary: "概要は確認中です。詳細は出典PDFをご確認ください。",
         votingDate: record.votingDate ?? undefined,
         result: record.result ?? "確認中",
         category: record.category,
@@ -189,6 +189,9 @@ async function main() {
           : "公式資料の記載が複合的、または非定型のため、内容を確認中です。正式な内容は出典PDFをご確認ください。",
         unresolvedFields: isClean ? undefined : ["result"],
       };
+      candidateFields.summary = buildDetailSummary(candidateFields);
+      candidateFields.summaryGeneratedAt = todayIso();
+      candidateFields.summarySource = "template";
 
       if (!existing) {
         // pendingReviewも一般公開する（「確認待ち＝非公開」にはしない）。publicationStatusは技術的な

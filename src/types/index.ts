@@ -850,7 +850,21 @@ export interface BillVoteItem {
   session: string;
   billNumber: string;
   billTitle: string;
+  /**
+   * 議案の概要文。確認できた事実（議案名・案件分類・定例会・議決結果等）のみを自然文に整えたもの。
+   * 現在の情報源（審議結果PDF）には提案理由・目的等の本文は含まれないため、
+   * それらを推測で補って記述することはしない。
+   */
   summary: string;
+  /** ISO形式。summaryを生成・更新した日時。 */
+  summaryGeneratedAt?: string;
+  /**
+   * summaryの生成方法。
+   * "template"＝確認済みの構造化データ（件名・分類・結果等）からの機械生成／
+   * "pdf"＝議案本文PDFから抽出した内容に基づく／"manual"＝人が執筆・確認済み。
+   * 未設定（省略）の場合は既存データとの互換のため区別しない。
+   */
+  summarySource?: "template" | "pdf" | "manual";
   submittedDate?: string;
   votingDate?: string;
   committee?: string;

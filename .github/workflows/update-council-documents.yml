@@ -38,6 +38,9 @@ jobs:
       - name: Extract bill/vote data from result PDFs
         run: npm run extract:council-data
 
+      - name: Generate bill summaries
+        run: npm run generate:bill-summaries
+
       - name: Suggest bill revision-history comparison candidates
         run: npm run suggest:bill-relations
 

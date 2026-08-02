@@ -160,6 +160,7 @@ const VALID_BILL_VERIFICATION_STATUSES = new Set([
   "pending",
   "individual-votes-unavailable",
 ]);
+const VALID_BILL_SUMMARY_SOURCES = new Set(["template", "pdf", "manual"]);
 
 for (const b of billVotes) {
   const tag = `billVotes.json (${b.id ?? "id不明"})`;
@@ -170,6 +171,12 @@ for (const b of billVotes) {
   if (isBlank(b.billNumber)) err(tag, "billNumberが空です");
   if (isBlank(b.billTitle)) err(tag, "billTitleが空です");
   if (isBlank(b.summary)) err(tag, "summaryが空です");
+  if (b.summarySource && !VALID_BILL_SUMMARY_SOURCES.has(b.summarySource)) {
+    err(tag, `未定義のsummarySourceです: ${b.summarySource}`);
+  }
+  if (b.summaryGeneratedAt && !DATE_RE.test(b.summaryGeneratedAt)) {
+    err(tag, `summaryGeneratedAtの形式が不正です: ${b.summaryGeneratedAt}`);
+  }
   if (b.submittedDate && !DATE_RE.test(b.submittedDate)) err(tag, `submittedDateの形式が不正です: ${b.submittedDate}`);
   if (b.votingDate && !DATE_RE.test(b.votingDate)) err(tag, `votingDateの形式が不正です: ${b.votingDate}`);
   if (!VALID_BILL_VOTE_RESULTS.has(b.result)) err(tag, `未定義の議決結果です: ${b.result}`);
