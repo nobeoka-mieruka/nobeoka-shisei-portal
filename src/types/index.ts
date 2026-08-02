@@ -771,7 +771,9 @@ export type BillVoteResult =
   | "修正可決"
   | "否決"
   | "承認"
+  | "不承認"
   | "認定"
+  | "不認定"
   | "同意"
   | "不同意"
   | "採択"
@@ -796,7 +798,9 @@ export type BillCategory =
   | "決議"
   | "請願"
   | "陳情"
-  | "その他";
+  | "専決処分"
+  | "その他"
+  | "不明";
 
 /**
  * 議案・表決データの公開状態。未設定（省略）の場合は"published"として扱う
@@ -909,6 +913,25 @@ export interface BillVoteItem {
    * 抽出できるようになった場合のための拡張ポイントとして用意している。
    */
   voteStages?: BillVoteStage[];
+
+  // 議案間の関連付け（議案差分比較機能用。任意項目、確認できたものだけ設定する）
+  /** 関連する議案ID（種類を問わない緩い関連付け）。 */
+  relatedBillIds?: string[];
+  /** この議案が「改正後」にあたる場合の、改正前（元）の議案ID。 */
+  revisionOfBillId?: string | null;
+  /** この議案が過去の別議案を置き換える場合の、置き換え対象の議案ID。 */
+  replacesBillId?: string | null;
+  /** この議案が別の新しい議案に置き換えられた場合の、置き換え後の議案ID。 */
+  supersededByBillId?: string | null;
+  /** 出典PDFの内容ハッシュ等、差分比較の元テキストのバージョンを識別する値（任意）。 */
+  sourceVersionHash?: string;
+  /**
+   * 議案間の関連付けの確からしさ。
+   * "confirmed"＝人が確認して関連を確定したもの／"suggested"＝名称類似等による自動候補（未確定）／
+   * "rejected"＝候補として提示されたが誤りと判断されたもの。
+   * 一般公開ページでは"confirmed"の関連のみを確定情報として扱う。
+   */
+  relationStatus?: "confirmed" | "suggested" | "rejected";
 }
 
 /** 1つの議案に対する採決が複数回行われる場合の、1段階分の記録。 */

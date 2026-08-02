@@ -38,8 +38,14 @@ jobs:
       - name: Extract bill/vote data from result PDFs
         run: npm run extract:council-data
 
+      - name: Suggest bill revision-history comparison candidates
+        run: npm run suggest:bill-relations
+
       - name: Reconcile with local PDF folder
         run: npm run generate:council-documents
+
+      - name: Generate search index
+        run: npm run generate:search
 
       - name: Validate data
         run: npm run validate:data
@@ -52,6 +58,9 @@ jobs:
 
       - name: Build (includes prerender + SEO checks)
         run: npm run build
+
+      - name: Release check
+        run: node scripts/release-check.mjs
 
       - name: Check for changes
         id: diff

@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import billVotesData from "../data/billVotes.json";
-import type { BillProposerType, BillVoteItem, BillVoteResult } from "../types";
+import type { BillCategory, BillProposerType, BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { SortIcon } from "../components/icons";
@@ -37,6 +37,22 @@ const proposerTypeOptions: { value: BillProposerType; label: string }[] = [
   { value: "member", label: "議員提出" },
   { value: "committee", label: "委員会提出" },
   { value: "other", label: "その他" },
+];
+
+const categoryOptions: { value: BillCategory; label: string }[] = [
+  { value: "条例", label: "条例" },
+  { value: "予算", label: "予算" },
+  { value: "決算", label: "決算" },
+  { value: "契約", label: "契約" },
+  { value: "財産取得", label: "財産取得" },
+  { value: "人事", label: "人事" },
+  { value: "意見書", label: "意見書" },
+  { value: "決議", label: "決議" },
+  { value: "請願", label: "請願" },
+  { value: "陳情", label: "陳情" },
+  { value: "専決処分", label: "専決処分" },
+  { value: "その他", label: "その他" },
+  { value: "不明", label: "不明" },
 ];
 
 type UnanimityFilter = "unanimous" | "split";
@@ -124,16 +140,31 @@ export function BillVotesPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [query, setQuery] = useState("");
-  const [fiscalYear, setFiscalYear] = useState("all");
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
+  const [fiscalYear, setFiscalYear] = useState(searchParams.get("year") ?? "all");
   const [session, setSession] = useState(searchParams.get("session") ?? "all");
-  const [result, setResult] = useState("all");
-  const [committee, setCommittee] = useState("all");
-  const [proposerType, setProposerType] = useState("all");
+  const [category, setCategory] = useState(searchParams.get("category") ?? "all");
+  const [result, setResult] = useState(searchParams.get("result") ?? "all");
+  const [committee, setCommittee] = useState(searchParams.get("committee") ?? "all");
+  const [proposerType, setProposerType] = useState(searchParams.get("proposer") ?? "all");
   const [unanimity, setUnanimity] = useState("all");
   const [sort, setSort] = useState<SortKey>("newest");
+
+  // 検索条件をURLクエリへ反映し、再読み込みや共有後も条件を維持できるようにする。
+  useEffect(() => {
+    const next = new URLSearchParams();
+    if (query) next.set("q", query);
+    if (fiscalYear !== "all") next.set("year", fiscalYear);
+    if (session !== "all") next.set("session", session);
+    if (category !== "all") next.set("category", category);
+    if (result !== "all") next.set("result", result);
+    if (committee !== "all") next.set("committee", committee);
+    if (proposerType !== "all") next.set("proposer", proposerType);
+    setSearchParams(next, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, fiscalYear, session, category, result, committee, proposerType]);
 
   const fiscalYearOptions = useMemo(
     () =>
@@ -163,6 +194,7 @@ export function BillVotesPage() {
     query !== "" ||
     fiscalYear !== "all" ||
     session !== "all" ||
+    category !== "all" ||
     result !== "all" ||
     committee !== "all" ||
     proposerType !== "all" ||
@@ -172,6 +204,7 @@ export function BillVotesPage() {
     setQuery("");
     setFiscalYear("all");
     setSession("all");
+    setCategory("all");
     setResult("all");
     setCommittee("all");
     setProposerType("all");
@@ -185,6 +218,7 @@ export function BillVotesPage() {
         q === "" || b.billNumber.includes(q) || b.billTitle.includes(q) || b.summary.includes(q);
       const matchesFiscalYear = fiscalYear === "all" || b.fiscalYear === fiscalYear;
       const matchesSession = session === "all" || b.session === session;
+      const matchesCategory = category === "all" || b.category === category;
       const matchesResult = result === "all" || b.result === result;
       const matchesCommittee = committee === "all" || b.committee === committee;
       const matchesProposerType = proposerType === "all" || b.proposerType === proposerType;
@@ -195,6 +229,7 @@ export function BillVotesPage() {
         matchesQuery &&
         matchesFiscalYear &&
         matchesSession &&
+        matchesCategory &&
         matchesResult &&
         matchesCommittee &&
         matchesProposerType &&
@@ -202,7 +237,7 @@ export function BillVotesPage() {
       );
     });
     return sortBills(matched, sort);
-  }, [query, fiscalYear, session, result, committee, proposerType, unanimity, sort]);
+  }, [query, fiscalYear, session, category, result, committee, proposerType, unanimity, sort]);
 
   return (
     <div className="px-4 py-4 sm:px-6">
@@ -222,6 +257,7 @@ export function BillVotesPage() {
         <div className="flex flex-wrap items-center gap-2">
           <FilterSelect label="年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
           <FilterSelect label="定例会" value={session} onChange={setSession} options={sessionOptions} />
+          <FilterSelect label="分類" value={category} onChange={setCategory} options={categoryOptions} />
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
           <FilterSelect label="議決結果" value={result} onChange={setResult} options={resultOptions} />
           <FilterSelect label="提出者" value={proposerType} onChange={setProposerType} options={proposerTypeOptions} />
@@ -278,6 +314,11 @@ export function BillVotesPage() {
                         <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
                           <span>{bill.billNumber}</span>
                           <span>{bill.session}</span>
+                          {bill.category && (
+                            <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-on-surface-variant">
+                              {bill.category}
+                            </span>
+                          )}
                         </div>
                         <h2 className="mt-1 text-base font-semibold leading-snug text-on-surface">{bill.billTitle}</h2>
                         <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-on-surface-variant">{bill.summary}</p>

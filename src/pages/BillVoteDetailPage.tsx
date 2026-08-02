@@ -124,6 +124,9 @@ export function BillVoteDetailPage() {
     (bill.relatedCommitteeActivityIds && bill.relatedCommitteeActivityIds.length > 0) ||
     (bill.relatedMayorPromiseIds && bill.relatedMayorPromiseIds.length > 0) ||
     (bill.relatedFinanceItems && bill.relatedFinanceItems.length > 0);
+  const relatedBills = (bill.relatedBillIds ?? [])
+    .map((id) => billVotes.find((b) => b.id === id))
+    .filter((b): b is BillVoteItem => !!b);
 
   const sessionBills = billVotes.filter((b) => b.session === bill.session);
   const idx = sessionBills.findIndex((b) => b.id === bill.id);
@@ -379,6 +382,35 @@ export function BillVoteDetailPage() {
               定例会の資料一覧を見る
             </Link>
           </div>
+        </SectionCard>
+      )}
+
+      {/* 関連する議案（改正の履歴等） */}
+      {relatedBills.length > 0 && (
+        <SectionCard title="関連する議案">
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            {bill.relationStatus === "confirmed"
+              ? "人が確認し、関連を確定した議案です。"
+              : "議案名が同じ条例名を含むことなどから機械的に抽出した候補です。同一の条例改正であると断定するものではありません。"}
+          </p>
+          <ul className="space-y-2">
+            {relatedBills.map((rb) => (
+              <li key={rb.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-outline-variant p-3">
+                <div className="min-w-0">
+                  <p className="text-xs text-on-surface-variant">{rb.billNumber}／{rb.session}</p>
+                  <Link to={`/bills/votes/${rb.id}`} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                    {rb.billTitle}
+                  </Link>
+                </div>
+                <Link
+                  to={`/bills/compare?left=${encodeURIComponent(bill.id)}&right=${encodeURIComponent(rb.id)}`}
+                  className={`shrink-0 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+                >
+                  比較する
+                </Link>
+              </li>
+            ))}
+          </ul>
         </SectionCard>
       )}
 

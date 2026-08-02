@@ -193,6 +193,12 @@ async function main() {
         continue;
       }
 
+      // 却下済み（rejected）のデータは、人が明示的に取り消すまで自動抽出で復活させない。
+      if (existing.publicationStatus === "rejected") {
+        report.proposalsUnchanged++;
+        continue;
+      }
+
       // 既に人が確認・入力したデータ（自動抽出由来ではない）は絶対に上書きしない。
       if (existing.extractionSource !== "automatic") {
         const changed = existing.result !== candidateFields.result || existing.votingDate !== candidateFields.votingDate;
@@ -216,7 +222,8 @@ async function main() {
       const unchanged =
         existing.result === candidateFields.result &&
         existing.votingDate === candidateFields.votingDate &&
-        existing.billTitle === candidateFields.billTitle;
+        existing.billTitle === candidateFields.billTitle &&
+        existing.category === candidateFields.category;
       if (unchanged) {
         report.proposalsUnchanged++;
         continue;

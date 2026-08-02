@@ -88,6 +88,8 @@ for (const b of billVotes) {
       b.billNumber,
       b.fiscalYear,
       b.session,
+      b.category,
+      b.result,
       b.committee,
       b.proposer,
       b.submittingDepartment,

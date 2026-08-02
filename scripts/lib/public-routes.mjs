@@ -85,7 +85,7 @@ export const STATIC_INDEXABLE_PAGES = [
  * /bills … /bills/votes へのリダイレクト専用URL。
  * /search … 入力内容によって表示が変わり続けるため常にnoindex。
  */
-export const STATIC_NOINDEX_PAGES = ["/bills", "/search"];
+export const STATIC_NOINDEX_PAGES = ["/bills", "/search", "/bills/compare"];
 
 function loadData() {
   const members = readJson("src/data/members.json");

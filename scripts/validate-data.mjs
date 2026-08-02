@@ -99,6 +99,7 @@ for (const q of generalQuestions) {
 // --- billVotes.json ---
 const billVotes = readJson("src/data/billVotes.json");
 const billIds = new Set();
+const billVotesById = new Map(billVotes.filter((b) => !isBlank(b?.id)).map((b) => [b.id, b]));
 const VALID_VOTE_STATUS = new Set([
   "approve",
   "oppose",
@@ -115,7 +116,9 @@ const VALID_BILL_VOTE_RESULTS = new Set([
   "修正可決",
   "否決",
   "承認",
+  "不承認",
   "認定",
+  "不認定",
   "同意",
   "不同意",
   "採択",
@@ -139,8 +142,11 @@ const VALID_BILL_CATEGORIES = new Set([
   "決議",
   "請願",
   "陳情",
+  "専決処分",
   "その他",
+  "不明",
 ]);
+const VALID_RELATION_STATUSES = new Set(["confirmed", "suggested", "rejected"]);
 const VALID_BILL_PUBLICATION_STATUSES = new Set([
   "published",
   "pendingReview",
@@ -210,6 +216,42 @@ for (const b of billVotes) {
 
   for (const item of b.relatedFinanceItems ?? []) {
     if (isBlank(item)) err(tag, "relatedFinanceItemsに空文字が含まれています");
+  }
+
+  if (b.relationStatus && !VALID_RELATION_STATUSES.has(b.relationStatus)) {
+    err(tag, `未定義のrelationStatusです: ${b.relationStatus}`);
+  }
+  if (b.revisionOfBillId === b.id) err(tag, "revisionOfBillIdが自分自身を参照しています");
+  if (b.replacesBillId === b.id) err(tag, "replacesBillIdが自分自身を参照しています");
+  if (b.supersededByBillId === b.id) err(tag, "supersededByBillIdが自分自身を参照しています");
+  if ((b.relatedBillIds ?? []).includes(b.id)) err(tag, "relatedBillIdsに自分自身が含まれています");
+}
+
+// 関連議案の参照整合性・循環参照チェック（全IDが出揃った後に行う）。
+for (const b of billVotes) {
+  const tag = `billVotes.json (${b.id ?? "id不明"})`;
+  for (const relId of b.relatedBillIds ?? []) {
+    if (!billIds.has(relId)) warn(tag, `存在しない議案IDをrelatedBillIdsで参照しています: ${relId}`);
+  }
+  for (const [field, relId] of [
+    ["revisionOfBillId", b.revisionOfBillId],
+    ["replacesBillId", b.replacesBillId],
+    ["supersededByBillId", b.supersededByBillId],
+  ]) {
+    if (relId && !billIds.has(relId)) warn(tag, `存在しない議案IDを${field}で参照しています: ${relId}`);
+  }
+  // revisionOfBillId → その議案のrevisionOfBillId → … と辿って自分自身に戻ってこないかを確認する（循環参照防止）。
+  if (b.revisionOfBillId) {
+    const visited = new Set([b.id]);
+    let cursor = billVotesById.get(b.revisionOfBillId);
+    while (cursor) {
+      if (visited.has(cursor.id)) {
+        err(tag, `revisionOfBillIdの参照が循環しています: ${[...visited, cursor.id].join(" → ")}`);
+        break;
+      }
+      visited.add(cursor.id);
+      cursor = cursor.revisionOfBillId ? billVotesById.get(cursor.revisionOfBillId) : undefined;
+    }
   }
 }
 
@@ -777,8 +819,16 @@ try {
       if (s.type === "member" && !memberIds.has(s.sourceId)) {
         warn(tag, `存在しない議員IDを参照しています: ${s.sourceId}`);
       }
-      if (s.type === "bill" && !billIds.has(s.sourceId)) {
-        warn(tag, `存在しない議案IDを参照しています: ${s.sourceId}`);
+      if (s.type === "bill") {
+        if (!billIds.has(s.sourceId)) {
+          warn(tag, `存在しない議案IDを参照しています: ${s.sourceId}`);
+        } else {
+          const referencedBill = billVotesById.get(s.sourceId);
+          const status = referencedBill?.publicationStatus;
+          if (status && status !== "published") {
+            err(tag, `確認待ち（publicationStatus: ${status}）の議案が検索インデックスに含まれています: ${s.sourceId}`);
+          }
+        }
       }
       if (s.type === "promise" && !mayorPromiseIds.has(s.sourceId)) {
         warn(tag, `存在しない市長公約IDを参照しています: ${s.sourceId}`);

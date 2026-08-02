@@ -1,8 +1,9 @@
+import { useMemo, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
-import type { CouncilMember, GeneralQuestionItem, BillVoteItem } from "../types";
+import type { BillCategory, CouncilMember, GeneralQuestionItem, BillVoteItem } from "../types";
 import { getFaction } from "../lib/factions";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -10,6 +11,7 @@ import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { EmptyState } from "../components/EmptyState";
+import { FilterSelect } from "../components/FilterSelect";
 import { VotingRecordsSection } from "../components/VotingRecordsSection";
 import { publicBills } from "../lib/billVotes";
 import { SourceList } from "../components/SourceList";
@@ -49,7 +51,6 @@ export function MemberDetailPage() {
         .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
         .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""))
     : [];
-  const memberBillVotes = memberAllBillVotes.slice(0, 5);
   const memberVoteCounts = member
     ? memberAllBillVotes.reduce(
         (acc, b) => {
@@ -60,6 +61,28 @@ export function MemberDetailPage() {
         {} as Record<string, number>,
       )
     : {};
+
+  const [voteYearFilter, setVoteYearFilter] = useState("all");
+  const [voteCategoryFilter, setVoteCategoryFilter] = useState("all");
+
+  const voteYearOptions = useMemo(
+    () => Array.from(new Set(memberAllBillVotes.map((b) => b.fiscalYear))).sort((a, b) => b.localeCompare(a, "ja")),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [member?.id],
+  );
+  const voteCategoryOptions = useMemo(
+    () =>
+      Array.from(new Set(memberAllBillVotes.map((b) => b.category).filter((c): c is BillCategory => !!c))).sort((a, b) =>
+        a.localeCompare(b, "ja"),
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [member?.id],
+  );
+  const memberBillVotes = memberAllBillVotes.filter(
+    (b) =>
+      (voteYearFilter === "all" || b.fiscalYear === voteYearFilter) &&
+      (voteCategoryFilter === "all" || b.category === voteCategoryFilter),
+  );
 
   usePageTitle();
 
@@ -201,7 +224,10 @@ export function MemberDetailPage() {
 
       <VotingRecordsSection votes={member.votes} />
 
-      <SectionCard title="議案の賛否">
+      <SectionCard title="議案・表決履歴">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          延岡市議会の公式資料で、{member.name}議員の個人別表決を確認できた案件を掲載しています。個人別の賛否が公開資料で確認できない案件は含まれません（推測では補いません）。件数は事実の集計であり、議員活動の評価・順位付けを目的としたものではありません。
+        </p>
         {memberAllBillVotes.length > 0 ? (
           <>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -214,6 +240,10 @@ export function MemberDetailPage() {
                 <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.oppose ?? 0}件</p>
               </div>
               <div className="rounded-lg bg-surface-container-high p-3">
+                <p className="text-xs text-on-surface-variant">棄権件数</p>
+                <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.abstained ?? 0}件</p>
+              </div>
+              <div className="rounded-lg bg-surface-container-high p-3">
                 <p className="text-xs text-on-surface-variant">退席件数</p>
                 <p className="mt-1 text-lg font-semibold text-on-surface">{memberVoteCounts.departed ?? 0}件</p>
               </div>
@@ -223,34 +253,60 @@ export function MemberDetailPage() {
               </div>
             </div>
 
-            <ul className="mt-3 space-y-2">
-              {memberBillVotes.map((bill) => {
-                const vote = bill.memberVotes.find((v) => v.memberId === member.id)!;
-                return (
-                  <li key={bill.id} className="flex items-center justify-between gap-3 rounded-lg border border-outline-variant p-3">
-                    <Link
-                      to={`/bills/votes/${bill.id}`}
-                      className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
-                    >
-                      {bill.billTitle}
-                    </Link>
-                    <BillVoteBadge vote={vote.vote} />
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <FilterSelect
+                label="年度"
+                value={voteYearFilter}
+                onChange={setVoteYearFilter}
+                options={voteYearOptions.map((y) => ({ value: y, label: y }))}
+              />
+              <FilterSelect
+                label="案件分類"
+                value={voteCategoryFilter}
+                onChange={setVoteCategoryFilter}
+                options={voteCategoryOptions.map((c) => ({ value: c, label: c }))}
+              />
+            </div>
 
-            {memberAllBillVotes.length > memberBillVotes.length && (
-              <Link
-                to="/bills/votes"
-                className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
-              >
-                議案を見る（すべての議案一覧へ）
-              </Link>
+            {memberBillVotes.length > 0 ? (
+              <ul className="mt-3 space-y-2">
+                {memberBillVotes.map((bill) => {
+                  const vote = bill.memberVotes.find((v) => v.memberId === member.id)!;
+                  return (
+                    <li key={bill.id} className="rounded-lg border border-outline-variant p-3">
+                      <div className="flex flex-wrap items-center gap-1.5 text-xs text-on-surface-variant">
+                        <span>{bill.votingDate ? formatJapaneseDate(bill.votingDate) : "議決日確認中"}</span>
+                        <span aria-hidden>・</span>
+                        <span>{bill.session}</span>
+                        <span aria-hidden>・</span>
+                        <span>{bill.billNumber}</span>
+                        {bill.category && (
+                          <>
+                            <span aria-hidden>・</span>
+                            <span>{bill.category}</span>
+                          </>
+                        )}
+                      </div>
+                      <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
+                        <Link
+                          to={`/bills/votes/${bill.id}`}
+                          className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                        >
+                          {bill.billTitle}
+                        </Link>
+                        <BillVoteBadge vote={vote.vote} />
+                      </div>
+                      <p className="mt-1 text-xs text-on-surface-variant">議会全体の結果：{bill.result}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm text-on-surface-variant">条件に一致する案件は見つかりませんでした。</p>
             )}
           </>
         ) : (
-          <EmptyState message="現在、公開資料を確認しながら順次追加しています。" />
+          <EmptyState message="延岡市議会の公式資料で、この議員の個人別表決を確認できた案件は現在ありません。個人別表決は確認できません。" />
         )}
       </SectionCard>
 

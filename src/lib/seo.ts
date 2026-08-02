@@ -678,6 +678,20 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/bills/compare":
+      // 選択した2議案によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/bills/compare",
+          pageTitle: "議案の比較",
+          description: "2つの議案を選んで、定例会・提出日・議決日・議決結果を比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議案ごとの賛否", to: "/bills/votes" }, { label: "議案の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
     default:
       return undefined;
   }

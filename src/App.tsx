@@ -38,6 +38,7 @@ const BillVotesPage = lazy(() => import("./pages/BillVotesPage").then((m) => ({ 
 const BillVoteDetailPage = lazy(() =>
   import("./pages/BillVoteDetailPage").then((m) => ({ default: m.BillVoteDetailPage })),
 );
+const BillComparePage = lazy(() => import("./pages/BillComparePage").then((m) => ({ default: m.BillComparePage })));
 const CouncilDocumentsPage = lazy(() =>
   import("./pages/CouncilDocumentsPage").then((m) => ({ default: m.CouncilDocumentsPage })),
 );
@@ -134,6 +135,7 @@ function App() {
               {/* /bills は /bills/votes（議案ごとの賛否データベース）へ統合済み。旧URLへのアクセスもリダイレクトする。 */}
               <Route path="/bills" element={<Navigate to="/bills/votes" replace />} />
               <Route path="/bills/votes" element={<BillVotesPage />} />
+              <Route path="/bills/compare" element={<BillComparePage />} />
               <Route path="/bills/votes/:id" element={<BillVoteDetailPage />} />
               <Route path="/council-documents" element={<CouncilDocumentsPage />} />
               <Route path="/council-documents/:sessionId" element={<CouncilSessionDetailPage />} />

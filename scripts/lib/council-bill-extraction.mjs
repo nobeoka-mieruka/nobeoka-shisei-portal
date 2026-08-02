@@ -38,7 +38,9 @@ const RESULT_KEYWORD_MAP = [
   ["取下げ", "撤回"],
   ["撤回", "撤回"],
   ["廃案", "廃案"],
+  ["不認定", "不認定"],
   ["認定", "認定"],
+  ["不承認", "不承認"],
   ["承認", "承認"],
 ];
 const RESULT_KEYWORD_RE = new RegExp(RESULT_KEYWORD_MAP.map(([k]) => k).join("|"), "g");
@@ -87,6 +89,8 @@ export function classifyCategory(recordType, title) {
   if (recordType === "ketsugi") return "決議";
   if (recordType === "seigan") return "請願";
   if (recordType === "chinjo") return "陳情";
+  if (!title) return "不明";
+  if (/専決処分/.test(title)) return "専決処分";
   if (/条例/.test(title)) return "条例";
   if (/決算/.test(title)) return "決算";
   if (/予算/.test(title)) return "予算";
