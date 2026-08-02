@@ -108,6 +108,86 @@ export async function listMeetingDays({ code, sessionLabel }) {
   return days;
 }
 
+async function postTreedepth(code, treedepth) {
+  const body = `Code=${code}&treedepth=${sjisPercentEncode(treedepth)}&page=&fileName=`;
+  const { buf } = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+  });
+  return decodeSjis(buf);
+}
+
+/** See.exeのHTMLから、左サイドバーの「年（またはグループ）」タブ一覧を取得する。 */
+function parseYearTabs(html) {
+  const re = /treedepth\.value='([^']+)'"><IMG SRC="[^"]*" BORDER="0" ALT="([^"]*)">/g;
+  const tabs = [];
+  let m;
+  while ((m = re.exec(html))) tabs.push({ treedepth: m[1], altLabel: m[2] });
+  return tabs;
+}
+
+/** "令和 8年" → 2026、"令和 5年～令和 7年" → {fromYear: 2023, toYear: 2025}。令和のみ対応（平成以前は今回対象外）。 */
+function parseYearRange(altLabel) {
+  const nums = [...altLabel.matchAll(/令和\s*(元|\d+)年/g)].map((m) => (m[1] === "元" ? 1 : Number(m[1])));
+  if (nums.length === 0) return null;
+  const toCalendarYear = (eraNum) => eraNum + 2018;
+  const years = nums.map(toCalendarYear);
+  return { fromYear: Math.min(...years), toYear: Math.max(...years) };
+}
+
+/**
+ * 指定した西暦年に対応する、See.exeの「年」treedepth値を解決する（サイドバーのタブを実際に
+ * 解析して求める。値を推測で組み立てない）。令和5年〜令和8年の範囲で動作確認済み。
+ * @param {{code: string, year: number}} params
+ */
+export async function resolveYearTreedepth({ code, year }) {
+  const eraNum = year - 2018;
+  const targetLabel = eraNum === 1 ? "令和元年" : `令和 ${eraNum}年`;
+
+  const rootHtml = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe?Code=${code}`, {}).then(({ buf }) => decodeSjis(buf));
+  let tabs = parseYearTabs(rootHtml);
+
+  const direct = tabs.find((t) => t.altLabel === targetLabel);
+  if (direct) return direct.treedepth;
+
+  for (const t of tabs) {
+    const range = parseYearRange(t.altLabel);
+    if (range && year >= range.fromYear && year <= range.toYear) {
+      const groupHtml = await postTreedepth(code, t.treedepth);
+      const innerTabs = parseYearTabs(groupHtml);
+      const innerMatch = innerTabs.find((it) => it.altLabel === targetLabel);
+      if (innerMatch) return innerMatch.treedepth;
+      if (t.treedepth === targetLabel) return t.treedepth;
+    }
+  }
+  throw new Error(`年 ${year} に対応するタブが見つかりませんでした（令和5年〜令和8年の範囲で確認済み）`);
+}
+
+/** 会期ラベル（例: "令和 7年 第15回臨時会"）から、回次・区分を抽出する。 */
+function parseSessionLabel(label) {
+  const m = label.match(/第(\d+)回(定例会|臨時会)/);
+  return m ? { sessionNumber: `第${m[1]}回`, sessionType: m[2] } : { sessionNumber: undefined, sessionType: undefined };
+}
+
+/**
+ * 指定した西暦年の、会期（定例会・臨時会）一覧を取得する。
+ * @param {{code: string, year: number}} params
+ * @returns {Promise<{treedepth: string, label: string, sessionNumber?: string, sessionType?: string}[]>}
+ */
+export async function listSessionsForYear({ code, year }) {
+  const yearTreedepth = await resolveYearTreedepth({ code, year });
+  const html = await postTreedepth(code, yearTreedepth);
+  const re = /treedepth\.value='([^']+)'"><IMG SRC="\/nobeoka\/image\/(?:r|down)\.gif"[^>]*>([^<]*)<\/A>/g;
+  const sessions = [];
+  let m;
+  while ((m = re.exec(html))) {
+    const label = m[2].trim();
+    sessions.push({ treedepth: m[1], label, ...parseSessionLabel(label) });
+  }
+  return sessions;
+}
+
 /**
  * 指定した本会議日（fileName）の、発言セグメント一覧（発言順・発言者・開始位置）を取得する。
  * 本文そのものは含まない（プレビュー抜粋のみ）。本文はfetchSegmentText()で別途取得する。
@@ -193,6 +273,48 @@ export function classifySpeakerLabel(label) {
   if (/部長|課長|局長|次長|事務局長/.test(label)) return { speakerType: "official", title: label.replace(/（.*/, "") };
   if (label.startsWith("議長") || label.startsWith("副議長")) return { speakerType: "chair", title: label.replace(/（.*/, "") };
   return { speakerType: "member", title: undefined };
+}
+
+/**
+ * 発言者ラベル（会議録上の表記）を正規化し、比較しやすい形（敬称・空白除去）にする。
+ * 例："前田遼君"／"前田 遼君"／"前田 遼議員"／"○番（前田遼君）" → いずれも"前田遼"。
+ */
+function normalizeSpeakerName(label) {
+  let s = label.trim();
+  // "○番（前田遼君）"のように、役職名を伴わない丸括弧内の氏名は中身を優先する
+  // （市長・部長等の役職ラベルはclassifySpeakerLabelで別処理するため、ここでは対象外）。
+  const isOfficialLabel = /^(市長|副市長|教育長|議長|副議長|.*部長|.*課長|.*局長|.*委員長|.*管理者|.*事務局長)/.test(s);
+  if (!isOfficialLabel) {
+    const parenMatch = s.match(/[（(]([^）)]+)[）)]/);
+    if (parenMatch) s = parenMatch[1];
+  }
+  return s
+    .replace(/^\d+番/, "")
+    .replace(/(君|議員|さん|氏)$/g, "")
+    .replace(/\s+/g, "");
+}
+
+/**
+ * 発言者ラベルを既存議員データ（members.json）とマッチングする。
+ * 氏名の完全一致（敬称・空白を除去した上で）でのみ確定させ、部分一致・あいまい一致では
+ * 確定しない（同姓同名や誤認識のリスクを避けるため）。一致しない場合はundefinedを返し、
+ * 呼び出し側でsummaryStatus: "speaker-identification-pending"とすること。
+ *
+ * 未対応：旧姓・異体字（例: 髙/高、﨑/崎）の表記ゆれ。将来、必要になった時点で
+ * 個別の議員データに「別表記」を追加する形で拡張する想定。
+ *
+ * @param {string} label 会議録上の発言者ラベル
+ * @param {{id: string, name: string}[]} members members.jsonの配列
+ * @returns {{memberId: string, confidence: "exact"} | undefined}
+ */
+export function matchSpeakerToMember(label, members) {
+  const normalizedLabel = normalizeSpeakerName(label);
+  if (!normalizedLabel) return undefined;
+
+  const candidates = members.filter((m) => m.name.replace(/\s+/g, "") === normalizedLabel);
+  if (candidates.length === 1) return { memberId: candidates[0].id, confidence: "exact" };
+  // 同姓同名など複数該当、または該当なしの場合は確定しない。
+  return undefined;
 }
 
 /**

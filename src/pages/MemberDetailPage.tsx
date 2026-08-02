@@ -241,19 +241,39 @@ export function MemberDetailPage() {
             {publishedMemberSpeeches.length === 0 && <SpeechSummaryStatusBadge status="minutes-not-fetched" />}
           </div>
           {publishedMemberSpeeches.length > 0 ? (
-            <ul className="mt-2 space-y-2">
-              {publishedMemberSpeeches.map((s) => (
-                <li key={s.id} className="rounded-lg border border-outline-variant p-3">
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="text-xs text-on-surface-variant">
-                      {s.date ? formatJapaneseDate(s.date) : "日付確認中"}／{s.meetingType}／{s.speechType}
-                    </span>
-                    <SpeechSummaryStatusBadge status={s.summaryStatus} />
-                  </div>
-                  {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{s.shortSummary}</p>}
-                </li>
-              ))}
-            </ul>
+            <>
+              <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
+                延岡市議会が公開している公式会議録を基に、本会議で行われた質問や質疑と、市長・部長・教育長等の答弁をAIで中立的に要約しています。議員や答弁内容への評価・論評は加えていません。正式な発言内容は、各項目の公式会議録をご確認ください。
+              </p>
+              <ul className="mt-2 space-y-2">
+                {publishedMemberSpeeches.map((s) => (
+                  <li key={s.id} className="rounded-lg border border-outline-variant p-3">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-xs text-on-surface-variant">
+                        {s.date ? formatJapaneseDate(s.date) : "日付確認中"}／{s.meetingType}／{s.speechType}
+                      </span>
+                      <SpeechSummaryStatusBadge status={s.summaryStatus} />
+                    </div>
+                    {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{s.shortSummary}</p>}
+                    {s.topics.length > 0 && (
+                      <div className="mt-1.5 flex flex-wrap gap-1">
+                        {s.topics.map((t) => (
+                          <span key={t} className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-xs text-on-surface-variant">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <Link
+                      to={`/members/${member.id}/questions/${s.id}`}
+                      className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    >
+                      質問・答弁の詳細を見る
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : (
             <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
               公式会議録本文を基にした質問・答弁の要約は、現在準備中です。現在掲載している一般質問情報には、質問通告書等を基に整理した予定質問項目が含まれます。正式な発言内容は、延岡市議会の公式会議録をご確認ください。

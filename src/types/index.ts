@@ -1252,6 +1252,15 @@ export interface CouncilSpeechSummarySource {
   speakerSection?: string;
 }
 
+/**
+ * 質問と答弁の対応付けの確からしさ。
+ * "confirmed"＝発言順が一致し、答弁者が質問内容へ明確に回答しており、原文位置も確認できる／
+ * "partially-confirmed"＝対応関係はおおむね確認できるが、一部不明瞭な点がある／
+ * "pending"＝対応関係を未確認／"ambiguous"＝答弁が複数の質問にまたがる等、対応を1つに
+ * 確定できない（この場合、answerSummaryは無理に埋めない）。
+ */
+export type QuestionAnswerLinkStatus = "confirmed" | "partially-confirmed" | "pending" | "ambiguous";
+
 /** 一般質問・質疑1回分の中の、質問項目1つ分。 */
 export interface CouncilSpeechQuestionItem {
   id: string;
@@ -1262,6 +1271,7 @@ export interface CouncilSpeechQuestionItem {
   answerSummary: string;
   /** 答弁者名・役職（会議録で確認できた場合のみ）。 */
   answerers?: string[];
+  questionAnswerLinkStatus: QuestionAnswerLinkStatus;
   exchanges: CouncilSpeechExchange[];
   relatedBills: CouncilSpeechRelatedBill[];
   relatedDocuments?: string[];

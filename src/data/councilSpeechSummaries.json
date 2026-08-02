@@ -113,20 +113,128 @@
     {
       "memberId": "m07",
       "analysisPeriod": {
-        "from": null,
-        "to": null
+        "from": "2025-09-09",
+        "to": "2025-09-09"
       },
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 0,
-      "sessionsWithSpeechCount": 0,
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 26,
-      "lastAnalyzedAt": null,
-      "topicCounts": [],
-      "speeches": []
+      "unfetchedSessionCount": 25,
+      "lastAnalyzedAt": "2026-08-02",
+      "topicCounts": [
+        {
+          "topic": "人口減少対策",
+          "sessionCount": 1
+        },
+        {
+          "topic": "熱中症対策",
+          "sessionCount": 1
+        }
+      ],
+      "speeches": [
+        {
+          "id": "m07-2025-09-09-ippan-shitsumon",
+          "memberId": "m07",
+          "sessionId": "2025-09",
+          "date": "2025-09-09",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "pending",
+          "topics": [
+            "人口減少対策",
+            "熱中症対策"
+          ],
+          "shortSummary": "令和7年9月定例会（第2号）で甲斐忠篤議員が行った一般質問のうち、人口減少対策室の新設と熱中症対策（クーリングシェルターの周知）に関する部分と、市長・市民環境部長の答弁を試験的に要約したものです（確認待ち・暫定）。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "人口減少対策室の新設について",
+              "questionSummary": "少子化・高齢化などへの効果検証や調査研究を全庁的に連携して行う、人口減少問題に特化した「人口減少対策室」を新しく設置できないか、市長に質問した。",
+              "answerSummary": "子育て支援や教育環境の充実、地域経済の活性化、安心・安全なまちづくりといった重点的取り組みを、策定中の長期総合計画や次期人口ビジョン・総合戦略に位置づける考えを示した。また、庁内組織として「こども未来部」を設置し、子育て支援に関する部署・政策を集約するとし、関係部署が連携して全庁的に人口減少対策に取り組むとした（「人口減少対策室」の新設そのものへの可否は明言されなかった）。",
+              "answerers": [
+                "市長"
+              ],
+              "questionAnswerLinkStatus": "confirmed",
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m07",
+                  "summary": "人口減少対策に特化した組織「人口減少対策室」の新設について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "長期総合計画等への施策の位置づけと、こども未来部設置による関係部署連携の方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            },
+            {
+              "id": "q2",
+              "title": "熱中症対策（クーリングシェルターの周知）",
+              "questionSummary": "熱中症特別警戒アラート発表時に開放される12施設のクーリングシェルターについて、これまで複数の議員が質問してきた経緯を踏まえても市民への浸透が不足していると指摘し、周知不足への対応を再質問として質問した。",
+              "answerSummary": "昨年7月の12施設指定時に、市役所玄関前での啓発イベント、市民スペースでのパネル展示、高齢者へのチラシ配布などにより周知を行ったが、浸透が不足している点は認識していると回答。今後、広報紙・ホームページ・SNS等での熱中症対策周知と合わせ、クーリングシェルターについても積極的に情報発信していきたいとした。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "questionAnswerLinkStatus": "confirmed",
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "follow-up-question",
+                  "speakerId": "m07",
+                  "summary": "クーリングシェルターの市民への周知不足について再質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "これまでの周知活動の内容を説明した上で、浸透不足を認め、今後の情報発信強化を回答した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和7年第21回定例会（第2号 9月9日） 甲斐忠篤君（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/8762/10/1//0/0",
+              "speakerSection": "pos=8762"
+            },
+            {
+              "title": "令和7年第21回定例会（第2号 9月9日） 市長（三浦久知君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/12848/10/1//0/0",
+              "speakerSection": "pos=12848"
+            },
+            {
+              "title": "令和7年第21回定例会（第2号 9月9日） 甲斐忠篤君（再質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/16952/10/1//0/0",
+              "speakerSection": "pos=16952"
+            },
+            {
+              "title": "令和7年第21回定例会（第2号 9月9日） 市民環境部長（松田康寿君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/18540/10/1//0/0",
+              "speakerSection": "pos=18540"
+            }
+          ],
+          "verifiedAt": null,
+          "verificationNote": "会議録取得の試験実装（2026年8月）により生成した要約候補です。人による公式会議録との照合前のため、summaryStatus: pending・isPublished: falseとしています。甲斐議員の一般質問には副市長の抱負や熱中症搬送者数の推移等、他にも質問項目がありますが、今回は原文を精読して確認できた範囲（人口減少対策室・クーリングシェルター周知）のみを要約対象としています。"
+        }
+      ]
     },
     {
       "memberId": "m08",
@@ -404,7 +512,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": false,
+          "isPublished": true,
           "summaryStatus": "pending",
           "topics": [
             "予算編成",
@@ -437,7 +545,8 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed"
             },
             {
               "id": "q2",
@@ -462,7 +571,8 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed"
             },
             {
               "id": "q3",
@@ -487,7 +597,8 @@
                 }
               ],
               "relatedBills": [],
-              "relatedDocuments": []
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed"
             }
           ],
           "summarySources": [
@@ -507,7 +618,8 @@
           "verifiedAt": null,
           "verificationNote": "会議録取得インターフェースの試験実装（2026年8月）により生成した要約候補です。人による公式会議録との照合前のため、summaryStatus: pending・isPublished: falseとしています。前田議員の代表質問には、この要約に含めた4テーマ以外にも多数の質問項目がありますが、対応する答弁本文を未取得のため、今回は市長答弁で確認できた範囲（予算編成・基金・パブリックコメント・ふるさと納税）のみを要約対象としています。"
         }
-      ]
+      ],
+      "verificationNote": "会議録取得の試験実装（2026年8月）により生成した要約候補です。人による公式会議録との照合前のため、summaryStatus: pending・isPublished: falseとしています。前田議員の代表質問には、この要約に含めた4テーマ以外にも多数の質問項目がありますが、対応する答弁本文を未取得のため、今回は市長答弁で確認できた範囲（予算編成・基金・パブリックコメント・ふるさと納税）のみを要約対象としています。"
     },
     {
       "memberId": "m22",
@@ -548,20 +660,159 @@
     {
       "memberId": "m24",
       "analysisPeriod": {
-        "from": null,
-        "to": null
+        "from": "2026-02-25",
+        "to": "2026-02-25"
       },
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 0,
-      "sessionsWithSpeechCount": 0,
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 26,
-      "lastAnalyzedAt": null,
-      "topicCounts": [],
-      "speeches": []
+      "unfetchedSessionCount": 25,
+      "lastAnalyzedAt": "2026-08-02",
+      "topicCounts": [
+        {
+          "topic": "予算編成",
+          "sessionCount": 1
+        },
+        {
+          "topic": "自治会",
+          "sessionCount": 1
+        },
+        {
+          "topic": "回覧板",
+          "sessionCount": 1
+        }
+      ],
+      "speeches": [
+        {
+          "id": "m24-2026-02-25-daihyo-shitsumon",
+          "memberId": "m24",
+          "sessionId": "2026-03",
+          "date": "2026-02-25",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": true,
+          "summaryStatus": "pending",
+          "topics": [
+            "予算編成",
+            "自治会",
+            "回覧板"
+          ],
+          "shortSummary": "令和8年3月定例会（第2号）で宮田博徳議員が立憲民主党市議団を代表して行った代表質問のうち、予算編成方針と自治会回覧板に関する部分と、市長・総務部長の答弁を試験的に要約したものです（確認待ち・暫定）。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "令和8年度当初予算への政治的意思の反映・前市政との違い",
+              "questionSummary": "令和8年度当初予算に、三浦市長としてどのような政治的意思を反映したのか、前市長の市政運営との違いをどう位置づけ、どのような新たなビジョンを込めたのかを質問した。",
+              "answerSummary": "公約として掲げた4つの政策（子供たちの可能性を伸ばす、地域経済の活性化、シニア世代が輝き安心して暮らせるまちづくり、市役所をもっと前向きな組織へ）に基づく新規事業を盛り込んだと説明。前市政の施策の成果は継承しつつ、一部事業は休止するなど見直しを行ったとし、国・県・関係機関・議会・市民と力を合わせた「オール延岡」体制で、挑戦を続ける前向きな組織を目指すとした。",
+              "answerers": [
+                "市長"
+              ],
+              "questionAnswerLinkStatus": "confirmed",
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m24",
+                  "summary": "令和8年度当初予算への政治的意思の反映と前市政との違いについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "4つの公約政策に基づく新規事業の内容と、前市政施策の継承・見直し方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            },
+            {
+              "id": "q2",
+              "title": "予算編成におけるマイナス10％シーリングの市民生活への影響",
+              "questionSummary": "マイナス10％シーリングにより見送られた事業や縮小された事業があるはずだとして、市民生活への影響をどのように検証しているかを質問した。",
+              "answerSummary": "扶助費など市民生活に直結する経費はシーリングの対象外とするなど影響を考慮したとし、関係団体への説明や意見を踏まえて各部局と協議し、影響が懸念される事項には必要な事業費を確保する再調整を行ったと説明。シーリングによる見直しは事業内容を検証する重要な機会となったとし、今後も検証しながら対応するとした。",
+              "answerers": [
+                "市長"
+              ],
+              "questionAnswerLinkStatus": "confirmed",
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m24",
+                  "summary": "シーリングによる市民生活への影響の検証状況について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "義務的経費を対象外とした配慮や、影響が懸念される事項への再調整を行った経緯を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            },
+            {
+              "id": "q3",
+              "title": "紙の回覧板のホームページ掲載（デジタル化の移行措置）",
+              "questionSummary": "デジタル回覧板の本格導入までの移行措置として、現行の紙の回覧板（自治会の同時発送文書）を、後日ホームページ等で市民が確認できるよう掲載できないか、再質問として質問した。",
+              "answerSummary": "広報のべおかと合わせて発送している同時発送文書は、特定地区向けの一時的な情報が大半でホームページへの長期掲載に不向きな面があり、体裁の違いや外部団体からの依頼など状況が異なるためデータ化・形式統一に時間を要すると説明。今後、ホームページ掲載実施の可能性について研究していきたいとした。",
+              "answerers": [
+                "総務部長"
+              ],
+              "questionAnswerLinkStatus": "confirmed",
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "follow-up-question",
+                  "speakerId": "m24",
+                  "summary": "紙の回覧板をホームページへ掲載する移行措置の可否について再質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "follow-up-answer",
+                  "speakerName": "総務部長",
+                  "summary": "同時発送文書の性質上の課題を説明し、ホームページ掲載の可能性について研究するとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": []
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和8年第24回定例会（第2号 2月25日） 宮田博徳君（代表質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/70992/10/1//0/0",
+              "speakerSection": "pos=70992"
+            },
+            {
+              "title": "令和8年第24回定例会（第2号 2月25日） 市長（三浦久知君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/92062/10/1//0/0",
+              "speakerSection": "pos=92062"
+            },
+            {
+              "title": "令和8年第24回定例会（第2号 2月25日） 宮田博徳君（再質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/115536/10/1//0/0",
+              "speakerSection": "pos=115536"
+            },
+            {
+              "title": "令和8年第24回定例会（第2号 2月25日） 総務部長（齋藤章二君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/116012/10/1//0/0",
+              "speakerSection": "pos=116012"
+            }
+          ],
+          "verifiedAt": null,
+          "verificationNote": "会議録取得の試験実装（2026年8月）により生成した要約候補です。人による公式会議録との照合前のため、summaryStatus: pending・isPublished: falseとしています。宮田議員の代表質問には人権問題・台湾訪問等、他にも多数の質問項目がありますが、今回は本文を精読して確認できた範囲（予算編成方針・自治会回覧板）のみを要約対象としています。"
+        }
+      ]
     },
     {
       "memberId": "m25",

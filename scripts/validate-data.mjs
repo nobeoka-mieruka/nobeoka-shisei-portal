@@ -901,6 +901,7 @@ const VALID_SPEECH_SUMMARY_STATUSES = new Set([
   "question-answer-link-pending",
 ]);
 const VALID_SPEECH_RELATION_STATUSES = new Set(["confirmed", "suggested", "rejected"]);
+const VALID_QA_LINK_STATUSES = new Set(["confirmed", "partially-confirmed", "pending", "ambiguous"]);
 const NOT_YET_PUBLISHABLE_STATUSES = new Set(["minutes-not-fetched", "source-unavailable"]);
 const sessionIdSet = new Set(councilSessions.map((s) => s.id));
 
@@ -962,6 +963,13 @@ try {
           if (isBlank(q.id)) err(speechTag, "質問項目のidが空です");
           else if (questionItemIds.has(q.id)) err(speechTag, `同一発言内で質問項目IDが重複しています: ${q.id}`);
           else questionItemIds.add(q.id);
+
+          if (q.questionAnswerLinkStatus && !VALID_QA_LINK_STATUSES.has(q.questionAnswerLinkStatus)) {
+            err(speechTag, `未定義のquestionAnswerLinkStatusです: ${q.questionAnswerLinkStatus}`);
+          }
+          if (q.questionAnswerLinkStatus === "ambiguous" && !isBlank(q.answerSummary)) {
+            warn(speechTag, `questionAnswerLinkStatus="ambiguous"なのにanswerSummaryが設定されています（対応関係が曖昧な場合は無理に埋めないこと）`);
+          }
 
           for (const rel of q.relatedBills ?? []) {
             if (isBlank(rel.billId) || !billVotesById.has(rel.billId)) {
