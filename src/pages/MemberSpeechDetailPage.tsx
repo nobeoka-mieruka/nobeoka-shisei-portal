@@ -21,6 +21,21 @@ const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
+const EXCHANGE_TYPE_LABELS: Record<string, string> = {
+  question: "議員の質問",
+  answer: "答弁",
+  "follow-up-question": "再質問",
+  "follow-up-answer": "再答弁",
+};
+
+function exchangeSpeakerLabel(
+  exchange: { type: string; speakerId?: string; speakerName?: string },
+  memberName: string,
+): string {
+  if (exchange.type === "question" || exchange.type === "follow-up-question") return memberName;
+  return exchange.speakerName ?? "答弁者確認中";
+}
+
 /**
  * 一般質問・質疑の詳細ページ。
  *
@@ -80,20 +95,65 @@ export function MemberSpeechDetailPage() {
       </p>
 
       <SectionCard title="質問項目">
-        <ul className="space-y-4">
-          {speech.questionItems.map((q, i) => (
-            <li key={q.id} className="rounded-lg border border-outline-variant p-3">
-              <p className="text-sm font-semibold text-on-surface">
-                質問{i + 1}　{q.title}
-              </p>
-              <p className="mt-2 text-xs font-medium text-on-surface-variant">質問の要点</p>
-              <p className="text-sm leading-relaxed text-on-surface">{q.questionSummary}</p>
-              <p className="mt-2 text-xs font-medium text-on-surface-variant">
-                市の答弁の要点{q.answerers && q.answerers.length > 0 && `（答弁者：${q.answerers.join("、")}）`}
-              </p>
-              <p className="text-sm leading-relaxed text-on-surface">{q.answerSummary}</p>
-            </li>
-          ))}
+        <ul className="space-y-5">
+          {speech.questionItems.map((q, i) => {
+            const isConfirmed = q.questionAnswerLinkStatus === "confirmed" || q.questionAnswerLinkStatus === "partially-confirmed";
+            const sortedExchanges = [...q.exchanges].sort((a, b) => a.order - b.order);
+            return (
+              <li key={q.id} className="rounded-lg border border-outline-variant p-3">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <p className="text-sm font-semibold text-on-surface">
+                    質問{i + 1}　{q.title}
+                  </p>
+                  {!isConfirmed && (
+                    <span className="rounded-full bg-secondary-container px-2 py-0.5 text-xs font-medium text-on-secondary-container">
+                      対応関係確認中
+                    </span>
+                  )}
+                </div>
+
+                {sortedExchanges.length > 0 ? (
+                  <ol className="mt-3 space-y-2">
+                    {sortedExchanges.map((ex, idx) => (
+                      <li key={ex.order}>
+                        {idx > 0 && (
+                          <p className="py-1 text-center text-xs text-on-surface-variant" aria-hidden="true">
+                            ↓
+                          </p>
+                        )}
+                        <div className="rounded-lg bg-surface-container-high p-2.5">
+                          <p className="text-xs font-medium text-on-surface">
+                            【{EXCHANGE_TYPE_LABELS[ex.type] ?? ex.type}】{exchangeSpeakerLabel(ex, member.name)}
+                          </p>
+                          <p className="mt-1 text-sm leading-relaxed text-on-surface">{ex.summary}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                ) : (
+                  <>
+                    <p className="mt-2 text-xs font-medium text-on-surface-variant">質問の要点</p>
+                    <p className="text-sm leading-relaxed text-on-surface">{q.questionSummary}</p>
+                    {isConfirmed ? (
+                      <>
+                        <p className="mt-2 text-xs font-medium text-on-surface-variant">
+                          市の答弁の要点{q.answerers && q.answerers.length > 0 && `（答弁者：${q.answerers.join("、")}）`}
+                        </p>
+                        <p className="text-sm leading-relaxed text-on-surface">{q.answerSummary}</p>
+                      </>
+                    ) : (
+                      <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">質問と答弁の対応関係を現在確認中です。</p>
+                    )}
+                  </>
+                )}
+
+                {q.questionApproach && (
+                  <p className="mt-2 text-xs text-on-surface-variant">質問の取り上げ方：{q.questionApproach}</p>
+                )}
+                {q.answerStatus && <p className="text-xs text-on-surface-variant">答弁の状態：{q.answerStatus}</p>}
+              </li>
+            );
+          })}
         </ul>
       </SectionCard>
 

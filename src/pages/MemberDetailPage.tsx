@@ -5,6 +5,7 @@ import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
+import councilSessionsData from "../data/councilSessions.json";
 import type {
   BillCategory,
   CouncilMember,
@@ -12,11 +13,19 @@ import type {
   BillVoteItem,
   CouncilSpeechSummaryData,
   MemberSpeechAnalysisData,
+  CouncilSession,
 } from "../types";
 import { getFaction } from "../lib/factions";
-import { findMemberSpeechRecord, publicSpeeches, aggregateMemberTopics, findMemberSpeechAnalysis } from "../lib/councilSpeeches";
+import {
+  findMemberSpeechRecord,
+  publicSpeeches,
+  aggregateMemberTopics,
+  aggregateYearlySpeechCounts,
+  findMemberSpeechAnalysis,
+} from "../lib/councilSpeeches";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
 import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
+import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { MemberSpeechAnalysisStatusBadge } from "../components/council/MemberSpeechAnalysisStatusBadge";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { Avatar } from "../components/Avatar";
@@ -45,6 +54,9 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const memberSpeechAnalysisList = (memberSpeechAnalysisData as MemberSpeechAnalysisData).members;
+// councilSessions.jsonは既に「現在の議員任期（令和5年5月〜）」の会期のみを収録しているため、
+// 収録対象期間（councilSpeechPeriod.from）より前の会期は構造上含まれていない。
+const allSessionIdsInPeriod = (councilSessionsData as CouncilSession[]).map((s) => s.id);
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -74,6 +86,10 @@ export function MemberDetailPage() {
   const speechRecord = member ? findMemberSpeechRecord(speechSummaryData.members, member.id) : undefined;
   const publishedMemberSpeeches = publicSpeeches(speechRecord);
   const topicAggregates = useMemo(() => aggregateMemberTopics(publishedMemberSpeeches), [publishedMemberSpeeches]);
+  const yearlyCounts = useMemo(
+    () => aggregateYearlySpeechCounts(publishedMemberSpeeches, allSessionIdsInPeriod),
+    [publishedMemberSpeeches],
+  );
   const hasPendingSpeech = publishedMemberSpeeches.some((s) => s.summaryStatus !== "verified");
   const displayedSpeeches = selectedTopic
     ? publishedMemberSpeeches.filter((s) => s.topics.includes(selectedTopic))
@@ -309,29 +325,15 @@ export function MemberDetailPage() {
                 </div>
               )}
 
-              {topicAggregates.length > 0 && (
-                <div className="mt-3">
-                  <h4 className="text-sm font-semibold text-on-surface">質問テーマの傾向</h4>
-                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
-                    収録した公式会議録で、各テーマに関する質問・質疑が確認された会期数を表示しています。質問回数、活動量、議員の優劣を示すものではありません。同じ会期で同一テーマを複数回取り上げた場合も、1会期として数えています。
-                  </p>
-                  {hasPendingSpeech && (
-                    <p className="mt-1 text-xs text-on-surface-variant">確認待ちのAI要約を含む暫定集計です。</p>
-                  )}
-                  <div className="mt-2">
-                    <QuestionTopicChart topics={topicAggregates} onSelectTopic={setSelectedTopic} selectedTopic={selectedTopic} />
-                  </div>
-                </div>
-              )}
-
               {memberAnalysis && memberAnalysis.analysisStatus !== "not-analyzed" && (
-                <div className="mt-4 border-t border-outline-variant pt-3">
+                <div className="mt-3">
                   <div className="flex flex-wrap items-center gap-2">
                     <h4 className="text-sm font-semibold text-on-surface">AIによる質問内容の分析</h4>
+                    <span className="text-[11px] text-on-surface-variant">（公式会議録に基づく中立的な整理）</span>
                     <MemberSpeechAnalysisStatusBadge status={memberAnalysis.analysisStatus} />
                   </div>
                   <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
-                    この分析は、{councilSpeechPeriod.from.slice(0, 4)}年{Number(councilSpeechPeriod.from.slice(5, 7))}月{Number(councilSpeechPeriod.from.slice(8, 10))}日以降に開催された延岡市議会本会議の公式会議録を基に、AIが質問テーマや取り上げ方を中立的に整理したものです。議員の能力、活動量、政策の良し悪し、政治的立場を評価するものではありません。未解析の会期は分析に含まれていません。正式な発言内容は公式会議録をご確認ください。
+                    前回市議会議員選挙の投票日である{councilSpeechPeriod.from.slice(0, 4)}年{Number(councilSpeechPeriod.from.slice(5, 7))}月{Number(councilSpeechPeriod.from.slice(8, 10))}日以降に開催された本会議の公式会議録を基に、AIが質問テーマや取り上げ方を整理しています。議員の能力、活動量、質問の良し悪し、政治的立場を評価するものではありません。未解析の会期は分析に含まれていません。
                   </p>
                   {memberAnalysis.analysisStatus === "pending" && (
                     <p className="mt-1 text-xs text-on-surface-variant">この分析は現在確認中の暫定掲載です。</p>
@@ -363,6 +365,7 @@ export function MemberDetailPage() {
                               </li>
                             ))}
                           </ul>
+                          <p className="mt-1 text-[11px] text-on-surface-variant">テーマ名をクリックすると、根拠となる質問・答弁を確認できます。</p>
                         </div>
                       )}
 
@@ -418,7 +421,71 @@ export function MemberDetailPage() {
                 </div>
               )}
 
-              <div className="mt-3 flex items-center justify-between gap-2">
+              {topicAggregates.length > 0 && (
+                <div className="mt-4 border-t border-outline-variant pt-3">
+                  <h4 className="text-sm font-semibold text-on-surface">質問テーマの傾向</h4>
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                    {councilSpeechPeriod.from.slice(0, 4)}年{Number(councilSpeechPeriod.from.slice(5, 7))}月{Number(councilSpeechPeriod.from.slice(8, 10))}日以降に開催された本会議のうち、解析済みの公式会議録で各テーマに関する質問・質疑が確認された会期数を表示しています。同一会期で同じテーマを複数回取り上げた場合も、1会期として数えています。質問回数、活動量、議員の優劣を示すものではありません。
+                  </p>
+                  {hasPendingSpeech && (
+                    <p className="mt-1 text-xs text-on-surface-variant">確認待ちのAI要約を含む暫定集計です。</p>
+                  )}
+                  <div className="mt-2">
+                    <QuestionTopicChart topics={topicAggregates} onSelectTopic={setSelectedTopic} selectedTopic={selectedTopic} />
+                  </div>
+                </div>
+              )}
+
+              {yearlyCounts.length > 0 && (
+                <div className="mt-4 border-t border-outline-variant pt-3">
+                  <h4 className="text-sm font-semibold text-on-surface">年別の質問・質疑推移</h4>
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                    年別の数値は、解析済みの公式本会議録で質問・質疑が確認された会期数です。未解析の会期は含まれていません。
+                  </p>
+                  <YearlySpeechTrendChart counts={yearlyCounts} />
+                </div>
+              )}
+
+              {topicAggregates.length > 0 && (
+                <div className="mt-4 border-t border-outline-variant pt-3">
+                  <h4 className="text-sm font-semibold text-on-surface">質問テーマ</h4>
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                    公式会議録本文から確認できた質問テーマです。タグを選択すると、該当する質問・答弁だけへ絞り込めます。
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-1.5">
+                    {topicAggregates.map((t) => {
+                      const isSelected = selectedTopic === t.topic;
+                      return (
+                        <li key={t.topic}>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedTopic(isSelected ? "" : t.topic)}
+                            aria-pressed={isSelected}
+                            className={`rounded-full px-3 py-1.5 text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                              isSelected
+                                ? "bg-primary text-on-primary"
+                                : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
+                            }`}
+                          >
+                            #{t.topic}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {selectedTopic && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedTopic("")}
+                      className={`mt-2 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                    >
+                      絞り込みを解除
+                    </button>
+                  )}
+                </div>
+              )}
+
+              <div className="mt-4 border-t border-outline-variant pt-3 flex items-center justify-between gap-2">
                 <h4 className="text-sm font-semibold text-on-surface">会期別の質問・答弁要約</h4>
                 {selectedTopic && (
                   <button
