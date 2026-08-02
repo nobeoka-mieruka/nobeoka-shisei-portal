@@ -15,7 +15,7 @@ import { SortSelect, type SortKey } from "../components/SortSelect";
 import { StatCard } from "../components/StatCard";
 import { SiteAnalyticsSummary } from "../components/SiteAnalyticsSummary";
 import { JsonLd } from "../components/JsonLd";
-import { CompassIcon, QuestionMarkCircleIcon, YenIcon } from "../components/icons";
+import { CompassIcon, DocumentIcon, QuestionMarkCircleIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
@@ -237,6 +237,45 @@ export function HomePage() {
                 報酬を見る
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="speech-answers-heading" className="mb-6">
+        <div className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
+              <DocumentIcon className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <h2 id="speech-answers-heading" className="text-base font-semibold text-on-surface">
+              一般質問・答弁を調べる
+            </h2>
+            <span className="rounded-full bg-tertiary-container px-2.5 py-0.5 text-xs font-medium text-on-tertiary-container">
+              試験公開中
+            </span>
+          </div>
+          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+            延岡市議会で行われた一般質問と、市長・執行部の答弁を、議員・テーマ・年度から確認できます。現在は一部の会議録から順次登録しています。
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link
+              to="/"
+              className="rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              議員から探す
+            </Link>
+            <Link
+              to="/themes"
+              className="rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              テーマから探す
+            </Link>
+            <Link
+              to="/executive-answers"
+              className="rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              答弁を検索する
+            </Link>
           </div>
         </div>
       </section>

@@ -20,6 +20,7 @@ import financeDashboardData from "../data/financeDashboard.json";
 import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
 import compensationComparisonData from "../data/compensationComparison.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
 import type {
   BillVoteItem,
@@ -32,8 +33,9 @@ import type {
   Mayor,
   MayorEntertainmentExpensesData,
   MayorPromisesData,
+  Theme,
 } from "../types";
-import { findPublishedSpeech } from "./councilSpeeches";
+import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
@@ -76,6 +78,7 @@ const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const themes = themesData as Theme[];
 const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
 const compensationComparison = compensationComparisonData as CompensationComparisonEntry[];
@@ -612,6 +615,46 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/themes":
+      return makeResult(
+        {
+          path: "/themes",
+          pageTitle: "テーマから探す",
+          description: "延岡市議会の一般質問・質疑を、公式会議録本文から確認できたテーマ別に検索できます。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "テーマから探す" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-themes-jsonld",
+              name: "延岡市議会 一般質問テーマ別データ",
+              description: "延岡市議会の一般質問・質疑を、公式会議録本文から確認できたテーマ別に整理したデータです。",
+              url: `${SITE_URL}/themes`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/executive-answers":
+      return makeResult(
+        {
+          path: "/executive-answers",
+          pageTitle: "市長・執行部答弁の検索",
+          description: "延岡市長、副市長、教育長、部長などの答弁を、公式会議録本文から確認できた範囲で横断検索できます。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市長・執行部答弁の検索" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-executive-answers-jsonld",
+              name: "延岡市長・執行部答弁データ",
+              description: "延岡市長、副市長、教育長、部長などの答弁を、公式会議録本文から確認できた範囲で整理したデータです。",
+              url: `${SITE_URL}/executive-answers`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/about":
       return makeResult(
         {
@@ -793,6 +836,38 @@ function questionSeo(id: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/** /themes/:themeSlug */
+function themeDetailSeo(slug: string, options?: SeoOptions): SeoResult {
+  const theme = themes.find((t) => t.slug === slug);
+  if (!theme) return notFound(`/themes/${slug}`, "テーマ情報");
+
+  const aggregate = aggregateSpeechesByTheme(speechSummaryData.members).find((a) => a.slug === slug);
+  const questionCount = aggregate?.speechIds.length ?? 0;
+  const description =
+    questionCount > 0
+      ? `${theme.description}公式会議録本文から確認できた質問件数：${questionCount}件。`
+      : `${theme.description}現在、このテーマに関する質問は確認できていません。`;
+
+  return makeResult(
+    {
+      path: `/themes/${slug}`,
+      pageTitle: `${theme.name}に関する一般質問`,
+      description,
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "テーマから探す", to: "/themes" }, { label: theme.name }],
+      extraJsonLd: [
+        datasetJsonLd({
+          id: "dataset-theme-detail-jsonld",
+          name: `延岡市議会 ${theme.name}に関する一般質問データ`,
+          description: `延岡市議会の一般質問のうち、${theme.name}に分類された質問・答弁のデータです。`,
+          url: `${SITE_URL}/themes/${slug}`,
+          dateModified: options?.lastmod,
+        }),
+      ],
+    },
+    options,
+  );
+}
+
 /** /mayor/policy-progress/:id */
 function promiseSeo(id: string, options?: SeoOptions): SeoResult {
   const promise = mayorPromises.find((p) => p.id === id);
@@ -916,6 +991,7 @@ function pressConferenceSeo(date: string, options?: SeoOptions): SeoResult {
 const MEMBER_RE = /^\/members\/([^/]+)$/;
 const SPEECH_DETAIL_RE = /^\/members\/([^/]+)\/questions\/([^/]+)$/;
 const QUESTION_RE = /^\/questions\/([^/]+)$/;
+const THEME_DETAIL_RE = /^\/themes\/([^/]+)$/;
 const PROMISE_RE = /^\/mayor\/policy-progress\/([^/]+)$/;
 const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
 const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
@@ -950,6 +1026,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const questionMatch = path.match(QUESTION_RE);
   if (questionMatch) return questionSeo(safeDecodeURIComponent(questionMatch[1]), options);
+
+  const themeDetailMatch = path.match(THEME_DETAIL_RE);
+  if (themeDetailMatch) return themeDetailSeo(safeDecodeURIComponent(themeDetailMatch[1]), options);
 
   const promiseMatch = path.match(PROMISE_RE);
   if (promiseMatch) return promiseSeo(safeDecodeURIComponent(promiseMatch[1]), options);

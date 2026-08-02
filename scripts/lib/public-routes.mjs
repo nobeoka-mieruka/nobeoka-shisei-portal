@@ -74,6 +74,8 @@ export const STATIC_INDEXABLE_PAGES = [
   "/bills/votes",
   "/council-documents",
   "/questions",
+  "/themes",
+  "/executive-answers",
   "/about",
   "/editorial-policy",
   "/contact",
@@ -107,6 +109,7 @@ function loadData() {
   const mayorPolicyProgress = readJson("src/data/mayorPolicyProgress.json");
   const updateHistory = readJson("src/data/updateHistory.json");
   const councilSpeechSummaries = readJson("src/data/councilSpeechSummaries.json");
+  const themes = readJson("src/data/themes.json");
   return {
     members,
     billVotes,
@@ -122,6 +125,7 @@ function loadData() {
     mayorPolicyProgress,
     updateHistory,
     councilSpeechSummaries,
+    themes,
   };
 }
 
@@ -196,6 +200,13 @@ function staticPageLastmod(path, data) {
         [maxValidDate(data.generalQuestions.map((q) => q.lastVerified))],
         ["src/data/generalQuestions.json"],
       );
+    case "/themes":
+    case "/executive-answers":
+      return resolveLastmod(
+        path,
+        [maxValidDate(publishedSpeeches(data.councilSpeechSummaries).map(({ speech }) => speech.verifiedAt ?? speech.date))],
+        ["src/data/councilSpeechSummaries.json", "src/data/themes.json"],
+      );
     case "/about":
       return resolveLastmod(path, [], ["src/pages/AboutPage.tsx", "src/config/operator.ts"]);
     case "/editorial-policy":
@@ -253,6 +264,17 @@ export function getIndexableRoutes() {
   for (const { memberId, speech } of publishedSpeeches(councilSpeechSummaries)) {
     const path = `/members/${memberId}/questions/${speech.id}`;
     urls.push({ path, lastmod: resolveLastmod(path, [speech.verifiedAt, speech.date], ["src/data/councilSpeechSummaries.json"]) });
+  }
+  for (const t of data.themes) {
+    const path = `/themes/${t.slug}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [maxValidDate(publishedSpeeches(councilSpeechSummaries).map(({ speech }) => speech.verifiedAt ?? speech.date))],
+        ["src/data/councilSpeechSummaries.json", "src/data/themes.json"],
+      ),
+    });
   }
 
   const dedupedByPath = new Map();

@@ -972,6 +972,9 @@ try {
         if (speech.date !== null && speech.date !== undefined && !DATE_RE.test(speech.date)) {
           err(speechTag, `dateの形式が不正です: ${speech.date}`);
         }
+        if (speech.generatedAt !== null && speech.generatedAt !== undefined && !DATE_RE.test(speech.generatedAt)) {
+          err(speechTag, `generatedAtの形式が不正です: ${speech.generatedAt}`);
+        }
         if (speech.date && speech.date < councilSpeechPeriod.from) {
           const msg = `発言日（${speech.date}）が収録対象期間（${councilSpeechPeriod.from}以降）より前です`;
           if (speech.isPublished) err(speechTag, `${msg}。公開できません`);
@@ -1029,6 +1032,37 @@ try {
 } catch (e) {
   if (e?.code === "ENOENT") {
     warn("councilSpeechSummaries.json", "読み込めませんでした（存在しない場合はスキップ）");
+  } else {
+    throw e;
+  }
+}
+
+// --- themes.json（質問テーマの固定辞書） ---
+try {
+  const themes = readJson("src/data/themes.json");
+  if (!Array.isArray(themes)) {
+    err("themes.json", "配列ではありません");
+  } else {
+    const seenIds = new Set();
+    const seenSlugs = new Set();
+    for (const theme of themes) {
+      const tag = `themes.json (${theme.slug ?? theme.id ?? "id不明"})`;
+      if (isBlank(theme.id)) err(tag, "idが空です");
+      else if (seenIds.has(theme.id)) err(tag, `idが重複しています: ${theme.id}`);
+      else seenIds.add(theme.id);
+
+      if (isBlank(theme.slug)) err(tag, "slugが空です");
+      else if (seenSlugs.has(theme.slug)) err(tag, `slugが重複しています: ${theme.slug}`);
+      else seenSlugs.add(theme.slug);
+
+      if (isBlank(theme.name)) err(tag, "nameが空です");
+      if (isBlank(theme.description)) err(tag, "descriptionが空です");
+      if (!Array.isArray(theme.keywords)) err(tag, "keywordsが配列ではありません");
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") {
+    warn("themes.json", "読み込めませんでした（存在しない場合はスキップ）");
   } else {
     throw e;
   }

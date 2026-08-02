@@ -1316,7 +1316,37 @@ export interface CouncilSpeech {
   /** ISO形式。人が公式会議録と照合した日時。未確認の場合はnull。 */
   verifiedAt?: string | null;
   verificationNote?: string;
+  /** ISO形式。この発言データ（要約・exchanges等）を最後に生成・更新した日時。未設定の場合はnull。 */
+  generatedAt?: string | null;
 }
+
+/**
+ * 質問テーマの大分類（固定辞書）。src/data/themes.jsonの1件分。
+ * 会議録データ本体ではなく、テーマ分類のための参照データ。
+ * 各質問へのテーマの割り当ては保存せず、topicsから常に計算する
+ * （src/lib/themeClassification.ts）。
+ */
+export interface Theme {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  /** テーマ分類（キーワード一致）に使う語句。 */
+  keywords: string[];
+}
+
+/**
+ * 答弁者の役職区分。speakerName（自由記述、例: "市長"）から機械的に分類する計算結果であり、
+ * データとして保存はしない。判別できない場合はunknownとする（勝手に推測しない）。
+ */
+export type AnswererRole =
+  | "mayor"
+  | "deputyMayor"
+  | "superintendent"
+  | "departmentDirector"
+  | "sectionManager"
+  | "otherExecutive"
+  | "unknown";
 
 /** 議員1名分の、一般質問・質疑の収録・解析状況とデータ本体。 */
 export interface CouncilMemberSpeechRecord {

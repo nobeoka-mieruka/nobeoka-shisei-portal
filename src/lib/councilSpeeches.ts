@@ -1,6 +1,9 @@
 import type {
+  AnswererRole,
   CouncilMemberSpeechRecord,
   CouncilSpeech,
+  CouncilSpeechExchange,
+  CouncilSpeechQuestionItem,
   CouncilSpeechSummaryData,
   MemberSpeechAnalysis,
   MemberSpeechAnalysisStatus,
@@ -8,6 +11,7 @@ import type {
 } from "../types";
 import { isWithinCouncilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { normalizeTopicLabel } from "./topicNormalization";
+import { classifyTopicToThemeSlug } from "./themeClassification";
 
 export const memberSpeechAnalysisStatusLabels: Record<MemberSpeechAnalysisStatus, string> = {
   verified: "AI分析・内容確認済み",
@@ -161,4 +165,169 @@ export function aggregateYearlySpeechCounts(
     publishedItemCount: itemCountByYear.get(year) ?? 0,
     targetSessionCount: targetCountByYear.get(year) ?? 0,
   }));
+}
+
+/** 全議員分の公開・収録対象期間内の発言を1つの配列にまとめる。 */
+export function allPublicSpeeches(records: CouncilMemberSpeechRecord[]): CouncilSpeech[] {
+  return records.flatMap((record) => publicSpeeches(record));
+}
+
+/** テーマ1件分の会期横断集計（/themes 一覧ページ用）。件数はすべて公開・確認済みの実データに基づく事実集計。 */
+export interface ThemeAggregate {
+  slug: string;
+  sessionIds: string[];
+  memberIds: string[];
+  speechIds: string[];
+}
+
+/**
+ * 議員横断で、テーマ別（src/data/themes.jsonのslug）に会期・議員・発言を集計する。
+ * speech.topicsをclassifyTopicToThemeSlugで分類するのみで、別ファイルへは保存しない。
+ */
+export function aggregateSpeechesByTheme(records: CouncilMemberSpeechRecord[]): ThemeAggregate[] {
+  const bySlug = new Map<string, { sessionIds: Set<string>; memberIds: Set<string>; speechIds: Set<string> }>();
+  for (const speech of allPublicSpeeches(records)) {
+    const slugs = new Set(speech.topics.map(classifyTopicToThemeSlug));
+    for (const slug of slugs) {
+      const entry = bySlug.get(slug) ?? { sessionIds: new Set(), memberIds: new Set(), speechIds: new Set() };
+      entry.sessionIds.add(speech.sessionId);
+      entry.memberIds.add(speech.memberId);
+      entry.speechIds.add(speech.id);
+      bySlug.set(slug, entry);
+    }
+  }
+  return [...bySlug.entries()].map(([slug, { sessionIds, memberIds, speechIds }]) => ({
+    slug,
+    sessionIds: [...sessionIds].sort(),
+    memberIds: [...memberIds],
+    speechIds: [...speechIds],
+  }));
+}
+
+/** テーマ詳細ページで表示する、該当テーマの発言1件分（議員・会期の紐付き情報を含む）。 */
+export interface ThemeSpeechMatch {
+  memberId: string;
+  speech: CouncilSpeech;
+  matchedTopics: string[];
+}
+
+/** 指定テーマslugに一致する発言を、公開・収録対象期間内のデータから抽出する。 */
+export function findSpeechesByThemeSlug(records: CouncilMemberSpeechRecord[], themeSlug: string): ThemeSpeechMatch[] {
+  const matches: ThemeSpeechMatch[] = [];
+  for (const speech of allPublicSpeeches(records)) {
+    const matchedTopics = speech.topics.filter((t) => classifyTopicToThemeSlug(t) === themeSlug);
+    if (matchedTopics.length > 0) {
+      matches.push({ memberId: speech.memberId, speech, matchedTopics });
+    }
+  }
+  return matches;
+}
+
+/**
+ * 答弁者名（自由記述）から役職区分を機械的に分類する。データとしては保存しない計算結果。
+ * 「副市長」は「市長」を含むため、必ず先に判定する。判別できない場合はunknownとし、推測しない。
+ */
+export function classifyAnswererRole(speakerName: string | undefined): AnswererRole {
+  if (!speakerName) return "unknown";
+  if (speakerName.includes("副市長")) return "deputyMayor";
+  if (speakerName.includes("市長")) return "mayor";
+  if (speakerName.includes("教育長")) return "superintendent";
+  if (speakerName.includes("部長")) return "departmentDirector";
+  if (speakerName.includes("課長")) return "sectionManager";
+  if (/局長|次長|室長|事務局長|管理者|消防長/.test(speakerName)) return "otherExecutive";
+  return "unknown";
+}
+
+export const answererRoleLabels: Record<AnswererRole, string> = {
+  mayor: "市長",
+  deputyMayor: "副市長",
+  superintendent: "教育長",
+  departmentDirector: "部長級",
+  sectionManager: "課長級",
+  otherExecutive: "その他執行部",
+  unknown: "確認中",
+};
+
+/** /executive-answers 検索対象の答弁1件分。 */
+export interface ExecutiveAnswerEntry {
+  id: string;
+  memberId: string;
+  speechId: string;
+  sessionId: string;
+  date: string | null;
+  questionTitle: string;
+  answererName: string;
+  answererRole: AnswererRole;
+  summary: string;
+  topics: string[];
+  /** 原本（会議録・PDF等）へのリンク。確認できた資料が無い場合はundefined（存在しないURLは作らない）。 */
+  sourceUrl?: string;
+}
+
+function primarySourceUrl(speech: CouncilSpeech): string | undefined {
+  return speech.summarySources.find((s) => s.sourceUrl)?.sourceUrl;
+}
+
+function answerEntriesFromExchanges(
+  speech: CouncilSpeech,
+  item: CouncilSpeechQuestionItem,
+): ExecutiveAnswerEntry[] {
+  const answerExchanges = item.exchanges.filter(
+    (ex): ex is CouncilSpeechExchange & { type: "answer" | "follow-up-answer" } =>
+      ex.type === "answer" || ex.type === "follow-up-answer",
+  );
+  return answerExchanges.map((ex) => {
+    const answererName = ex.speakerName ?? "答弁者確認中";
+    return {
+      id: `${speech.id}-${item.id}-${ex.order}`,
+      memberId: speech.memberId,
+      speechId: speech.id,
+      sessionId: speech.sessionId,
+      date: speech.date,
+      questionTitle: item.title,
+      answererName,
+      answererRole: classifyAnswererRole(ex.speakerName),
+      summary: ex.summary,
+      topics: speech.topics,
+      sourceUrl: primarySourceUrl(speech),
+    };
+  });
+}
+
+/**
+ * 全議員分の公開・収録対象期間内データから、市長・執行部の答弁を横断検索用にフラット化する。
+ * exchangesがある場合はそこから、無い場合で質問と答弁の対応が確認済みの場合のみanswerSummaryから
+ * 生成する。対応関係が未確認（pending/ambiguous）の質問は含めない。
+ * 検索・絞り込みロジックはこの関数側に持たせ、コンポーネントからは分離する。
+ */
+export function collectExecutiveAnswers(records: CouncilMemberSpeechRecord[]): ExecutiveAnswerEntry[] {
+  const entries: ExecutiveAnswerEntry[] = [];
+  for (const speech of allPublicSpeeches(records)) {
+    for (const item of speech.questionItems) {
+      const fromExchanges = answerEntriesFromExchanges(speech, item);
+      if (fromExchanges.length > 0) {
+        entries.push(...fromExchanges);
+        continue;
+      }
+      const isConfirmed =
+        item.questionAnswerLinkStatus === "confirmed" || item.questionAnswerLinkStatus === "partially-confirmed";
+      if (isConfirmed && item.answerSummary) {
+        const answererName = item.answerers && item.answerers.length > 0 ? item.answerers.join("、") : "答弁者確認中";
+        entries.push({
+          id: `${speech.id}-${item.id}`,
+          memberId: speech.memberId,
+          speechId: speech.id,
+          sessionId: speech.sessionId,
+          date: speech.date,
+          questionTitle: item.title,
+          answererName,
+          answererRole: classifyAnswererRole(item.answerers?.[0]),
+          summary: item.answerSummary,
+          topics: speech.topics,
+          sourceUrl: primarySourceUrl(speech),
+        });
+      }
+    }
+  }
+  return entries;
 }

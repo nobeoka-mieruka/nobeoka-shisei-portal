@@ -54,6 +54,11 @@ const GeneralQuestionsPage = lazy(() =>
 const GeneralQuestionDetailPage = lazy(() =>
   import("./pages/GeneralQuestionDetailPage").then((m) => ({ default: m.GeneralQuestionDetailPage })),
 );
+const ThemesPage = lazy(() => import("./pages/ThemesPage").then((m) => ({ default: m.ThemesPage })));
+const ThemeDetailPage = lazy(() => import("./pages/ThemeDetailPage").then((m) => ({ default: m.ThemeDetailPage })));
+const ExecutiveAnswersPage = lazy(() =>
+  import("./pages/ExecutiveAnswersPage").then((m) => ({ default: m.ExecutiveAnswersPage })),
+);
 const SearchPage = lazy(() => import("./pages/SearchPage").then((m) => ({ default: m.SearchPage })));
 const UpdatesPage = lazy(() => import("./pages/UpdatesPage").then((m) => ({ default: m.UpdatesPage })));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
@@ -145,6 +150,9 @@ function App() {
               <Route path="/council-documents/:sessionId" element={<CouncilSessionDetailPage />} />
               <Route path="/questions" element={<GeneralQuestionsPage />} />
               <Route path="/questions/:id" element={<GeneralQuestionDetailPage />} />
+              <Route path="/themes" element={<ThemesPage />} />
+              <Route path="/themes/:themeSlug" element={<ThemeDetailPage />} />
+              <Route path="/executive-answers" element={<ExecutiveAnswersPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/updates" element={<UpdatesPage />} />
               <Route path="*" element={<NotFoundPage />} />
