@@ -968,7 +968,7 @@ export interface BillVoteItem {
    * "rejected"＝候補として提示されたが誤りと判断されたもの。
    * 一般公開ページでは"confirmed"の関連のみを確定情報として扱う。
    */
-  relationStatus?: "confirmed" | "suggested" | "rejected";
+  relationStatus?: RelationStatus;
 }
 
 /** 1つの議案に対する採決が複数回行われる場合の、1段階分の記録。 */
@@ -1161,6 +1161,165 @@ export interface CouncilSession {
    * 現時点のデータ基盤（審議結果一覧PDF）では発言者・トピックを確定できないため、通常は未設定。
    */
   meetingDays?: CouncilMeetingDay[];
+}
+
+/**
+ * 議案間・質問間などの関連付けの確からしさを表す共通の型。
+ * "confirmed"＝人が確認して関連を確定したもの／"suggested"＝自動検出等による候補（未確定）／
+ * "rejected"＝候補として提示されたが誤りと判断されたもの。
+ * 一般公開ページでは"confirmed"の関連のみを確定情報として扱う。
+ */
+export type RelationStatus = "confirmed" | "suggested" | "rejected";
+
+/**
+ * 一般質問・質疑の要約1件（本会議での1人・1回分の発言）の確認状態。
+ * "minutes-not-fetched"＝この発言の元になる公式会議録本文そのものを未取得（現在の初期状態）／
+ * "source-unavailable"＝会議録本文は確認したが、対象議員の発言範囲を特定できない等で資料が不足／
+ * "speaker-identification-pending"＝発言者を会議録上で確定できていない／
+ * "question-answer-link-pending"＝質問項目と答弁の対応関係が未確定。
+ */
+export type SpeechSummaryStatus =
+  | "verified"
+  | "partially-verified"
+  | "pending"
+  | "source-unavailable"
+  | "minutes-not-fetched"
+  | "speaker-identification-pending"
+  | "question-answer-link-pending";
+
+/**
+ * 要約の元になった資料の種別。
+ * "official-minutes-html"＝会議録検索システムのHTML本文／"official-minutes-pdf"＝本会議録PDF／
+ * "general-question-notice"＝一般質問通告書（予定項目のみ、実際の発言内容の確認資料ではない）／
+ * "council-newsletter"＝市議会だより／"other-official-source"＝その他の公式資料。
+ */
+export type SpeechSourceType =
+  | "official-minutes-html"
+  | "official-minutes-pdf"
+  | "general-question-notice"
+  | "council-newsletter"
+  | "other-official-source";
+
+/** 本会議での発言区分。質問・質疑系と、討論等のその他区分を混同しない。 */
+export type CouncilSpeechType =
+  | "一般質問"
+  | "代表質問"
+  | "総括質疑"
+  | "議案質疑"
+  | "討論"
+  | "動議"
+  | "議事進行"
+  | "委員長報告"
+  | "議案提出理由"
+  | "その他";
+
+/** 会議区分。将来、委員会質疑を追加できるよう区分だけ用意しておく。 */
+export type CouncilSpeechMeetingType = "本会議" | "予算審査特別委員会" | "常任委員会" | "その他";
+
+export type CouncilSpeechExchangeType = "question" | "answer" | "follow-up-question" | "follow-up-answer";
+
+/** 一問一答等での、質問・答弁の1つのやり取り。全文ではなく要点のみを保持する。 */
+export interface CouncilSpeechExchange {
+  order: number;
+  type: CouncilSpeechExchangeType;
+  /** type="question"/"follow-up-question"の場合、既存議員データのmemberId。 */
+  speakerId?: string;
+  /** type="answer"/"follow-up-answer"の場合の答弁者名（例: "市長"）。会議録で確定できた場合のみ設定する。 */
+  speakerName?: string;
+  summary: string;
+}
+
+/** 質問内容と議案・予算・条例との関連候補。自動確定はせず、必ずRelationStatusを区別する。 */
+export interface CouncilSpeechRelatedBill {
+  /** 既存billVotesのid。 */
+  billId: string;
+  relationType: "explicit-reference" | "topic-match" | "budget-reference" | "other";
+  relationStatus: RelationStatus;
+  /** 関連付けの根拠（例: "質問本文で議案第12号に言及"）。 */
+  evidence?: string;
+  sourcePage?: number;
+}
+
+/** 要約の作成に使用した資料1件分。 */
+export interface CouncilSpeechSummarySource {
+  title: string;
+  sourceType?: SpeechSourceType;
+  sourceUrl?: string;
+  filePath?: string;
+  pageFrom?: number;
+  pageTo?: number;
+  /** 会議録内で対象議員の発言区間を特定する手がかり（ページ内見出し等）。 */
+  speakerSection?: string;
+}
+
+/** 一般質問・質疑1回分の中の、質問項目1つ分。 */
+export interface CouncilSpeechQuestionItem {
+  id: string;
+  title: string;
+  /** 質問本文に記載された事実のみから作成する要約。推測・評価を含めない。 */
+  questionSummary: string;
+  /** 対応する答弁が会議録上で明確な場合のみ作成する要約。 */
+  answerSummary: string;
+  /** 答弁者名・役職（会議録で確認できた場合のみ）。 */
+  answerers?: string[];
+  exchanges: CouncilSpeechExchange[];
+  relatedBills: CouncilSpeechRelatedBill[];
+  relatedDocuments?: string[];
+}
+
+/**
+ * 一般質問・質疑1回分（1議員・1会期・1本会議）のデータ。
+ * questionItems・summarySourcesが空の場合は、summaryStatusが
+ * "minutes-not-fetched"（会議録本文未取得）または"source-unavailable"（資料不足）である。
+ */
+export interface CouncilSpeech {
+  id: string;
+  memberId: string;
+  sessionId: string;
+  /** ISO形式。発言（本会議開催）日。未確定の場合はnull。 */
+  date: string | null;
+  meetingNumber?: string;
+  meetingType: CouncilSpeechMeetingType;
+  speechType: CouncilSpeechType;
+  /** 「公開するかどうか」と「確認が済んでいるかどうか」は別軸で管理する（議案データと同じ方針）。 */
+  isPublished: boolean;
+  summaryStatus: SpeechSummaryStatus;
+  /** 会議録・質問本文に明記された語句のみ（独自分類・タグ付けはしない）。 */
+  topics: string[];
+  shortSummary?: string;
+  questionItems: CouncilSpeechQuestionItem[];
+  summarySources: CouncilSpeechSummarySource[];
+  /** ISO形式。人が公式会議録と照合した日時。未確認の場合はnull。 */
+  verifiedAt?: string | null;
+  verificationNote?: string;
+}
+
+/** 議員1名分の、一般質問・質疑の収録・解析状況とデータ本体。 */
+export interface CouncilMemberSpeechRecord {
+  memberId: string;
+  /** 解析対象とした期間。会議録本文を1件も取得・解析していない間はfrom/toともnull。 */
+  analysisPeriod: { from: string | null; to: string | null };
+  /** 現時点の収録範囲。将来、委員会質疑（"committee"）を追加できるようにしておく。 */
+  scope: ("plenary" | "committee")[];
+  analyzedSessionCount: number;
+  sessionsWithSpeechCount: number;
+  sessionsWithoutSpeechCount: number;
+  unavailableSessionCount: number;
+  /** 会議録本文そのものを未取得の会期数。現時点ではこの値が対象会期数と一致する。 */
+  unfetchedSessionCount: number;
+  /** ISO形式。null＝まだ一度も解析していない。 */
+  lastAnalyzedAt: string | null;
+  /** テーマ別の登場会期数（活動量の指標ではない旨を画面側で必ず併記する）。 */
+  topicCounts: { topic: string; sessionCount: number }[];
+  speeches: CouncilSpeech[];
+}
+
+/** src/data/councilSpeechSummaries.json 全体の形。 */
+export interface CouncilSpeechSummaryData {
+  version: number;
+  /** ISO形式。このデータを最後に生成した日時。null＝まだ生成（会議録取得・解析）を実行していない。 */
+  generatedAt: string | null;
+  members: CouncilMemberSpeechRecord[];
 }
 
 /** 財政ダッシュボード全体のデータ（年度単位）。 */

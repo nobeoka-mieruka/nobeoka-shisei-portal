@@ -8,6 +8,9 @@ import { MaintenanceNotice } from "./components/MaintenanceNotice";
 import { HomePage } from "./pages/HomePage";
 
 const MemberDetailPage = lazy(() => import("./pages/MemberDetailPage").then((m) => ({ default: m.MemberDetailPage })));
+const MemberSpeechDetailPage = lazy(() =>
+  import("./pages/MemberSpeechDetailPage").then((m) => ({ default: m.MemberSpeechDetailPage })),
+);
 const MayorPage = lazy(() => import("./pages/MayorPage").then((m) => ({ default: m.MayorPage })));
 const MayorPolicyProgressPage = lazy(() =>
   import("./pages/MayorPolicyProgressPage").then((m) => ({ default: m.MayorPolicyProgressPage })),
@@ -118,6 +121,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/members/:id" element={<MemberDetailPage />} />
+              <Route path="/members/:memberId/questions/:speechId" element={<MemberSpeechDetailPage />} />
               <Route path="/mayor" element={<MayorPage />} />
               <Route path="/mayor/policy-progress" element={<MayorPolicyProgressPage />} />
               <Route path="/mayor/policy-progress/:id" element={<MayorPromiseDetailPage />} />

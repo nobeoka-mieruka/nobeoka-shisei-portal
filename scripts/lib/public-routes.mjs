@@ -105,6 +105,7 @@ function loadData() {
   const cityGuideEntries = readJson("src/data/cityGuideEntries.json");
   const mayorPolicyProgress = readJson("src/data/mayorPolicyProgress.json");
   const updateHistory = readJson("src/data/updateHistory.json");
+  const councilSpeechSummaries = readJson("src/data/councilSpeechSummaries.json");
   return {
     members,
     billVotes,
@@ -119,7 +120,19 @@ function loadData() {
     cityGuideEntries,
     mayorPolicyProgress,
     updateHistory,
+    councilSpeechSummaries,
   };
+}
+
+/**
+ * 公開済み（isPublished: true）の一般質問・質疑要約のみを{memberId, speech}の形で返す。
+ * 現時点ではcouncilSpeechSummaries.jsonに公開済みレコードが1件も無いため、常に空配列になる
+ * （会議録本文の解析結果が承認・公開された時点で自動的に対象へ含まれる）。
+ */
+function publishedSpeeches(councilSpeechSummaries) {
+  return councilSpeechSummaries.members.flatMap((m) =>
+    m.speeches.filter((s) => s.isPublished).map((s) => ({ memberId: m.memberId, speech: s })),
+  );
 }
 
 /** 固定ページごとのlastmod解決ルール。 */
@@ -197,7 +210,7 @@ function staticPageLastmod(path, data) {
 /** サイトマップに載せる索引対象URL（{path, lastmod}[]）。 */
 export function getIndexableRoutes() {
   const data = loadData();
-  const { members, billVotes, councilSessions, mayorPromises, generalQuestions, mayorPressConferences } = data;
+  const { members, billVotes, councilSessions, mayorPromises, generalQuestions, mayorPressConferences, councilSpeechSummaries } = data;
   const urls = [];
 
   for (const path of STATIC_INDEXABLE_PAGES) {
@@ -232,6 +245,10 @@ export function getIndexableRoutes() {
       path: `/mayor/press-conferences/${c.date}`,
       lastmod: resolveLastmod(`/mayor/press-conferences/${c.date}`, [c.verifiedAt, c.date], ["src/data/mayorPressConferences.ts"]),
     });
+  }
+  for (const { memberId, speech } of publishedSpeeches(councilSpeechSummaries)) {
+    const path = `/members/${memberId}/questions/${speech.id}`;
+    urls.push({ path, lastmod: resolveLastmod(path, [speech.verifiedAt, speech.date], ["src/data/councilSpeechSummaries.json"]) });
   }
 
   const dedupedByPath = new Map();

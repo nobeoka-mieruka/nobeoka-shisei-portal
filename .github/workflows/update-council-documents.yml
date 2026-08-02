@@ -50,6 +50,9 @@ jobs:
       - name: Generate session summaries
         run: npm run generate:session-summaries
 
+      - name: Update speech-summary scaffold (bookkeeping only; no minutes fetching yet)
+        run: npm run generate:speech-summary-scaffold
+
       - name: Generate search index
         run: npm run generate:search
 

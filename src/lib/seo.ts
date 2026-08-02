@@ -19,18 +19,21 @@ import mayorPromisesData from "../data/mayorPromises.json";
 import financeDashboardData from "../data/financeDashboard.json";
 import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
 import compensationComparisonData from "../data/compensationComparison.json";
+import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
 import type {
   BillVoteItem,
   CompensationComparisonEntry,
   CouncilMember,
   CouncilSession,
+  CouncilSpeechSummaryData,
   FinanceDashboardData,
   GeneralQuestionItem,
   Mayor,
   MayorEntertainmentExpensesData,
   MayorPromisesData,
 } from "../types";
+import { findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
@@ -72,6 +75,7 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
+const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
 const compensationComparison = compensationComparisonData as CompensationComparisonEntry[];
@@ -732,6 +736,41 @@ function memberSeo(id: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/**
+ * /members/:memberId/questions/:speechId
+ * isPublished:trueの発言データが存在する場合のみ実ページとして扱う。現時点では
+ * councilSpeechSummaries.jsonにisPublished:trueのレコードが1件も無いため、常にnotFoundとなる
+ * （サイトマップ・プリレンダリング対象にも含まれない。scripts/lib/public-routes.mjs参照）。
+ */
+function speechDetailSeo(memberId: string, speechId: string, options?: SeoOptions): SeoResult {
+  const member = members.find((m) => m.id === memberId);
+  const speech = member && findPublishedSpeech(speechSummaryData, memberId, speechId);
+  if (!member || !speech) return notFound(`/members/${memberId}/questions/${speechId}`, "一般質問・質疑の要約");
+
+  const session = councilSessions.find((s) => s.id === speech.sessionId);
+  const isVerified = speech.summaryStatus === "verified";
+  const description = isVerified
+    ? `${session?.title ?? speech.sessionId}で${member.name}議員が行った${speech.speechType}と、市の答弁を公式会議録に基づいて要約しています。`
+    : `${session?.title ?? speech.sessionId}で${member.name}議員が行った${speech.speechType}について、公式会議録を基に確認できた内容を掲載しています。要約の一部は現在確認中です。`;
+
+  return makeResult(
+    {
+      path: `/members/${memberId}/questions/${speechId}`,
+      pageTitle: `${member.name}議員の${speech.speechType}｜${session?.title ?? speech.sessionId}`,
+      description,
+      ogType: "article",
+      breadcrumbs: [
+        { label: "ホーム", to: "/" },
+        { label: "議員一覧", to: "/" },
+        { label: member.name, to: `/members/${memberId}` },
+        { label: speech.speechType },
+      ],
+      datePublished: speech.date ?? undefined,
+    },
+    options,
+  );
+}
+
 /** /questions/:id */
 function questionSeo(id: string, options?: SeoOptions): SeoResult {
   const item = generalQuestions.find((q) => q.id === id);
@@ -875,6 +914,7 @@ function pressConferenceSeo(date: string, options?: SeoOptions): SeoResult {
 }
 
 const MEMBER_RE = /^\/members\/([^/]+)$/;
+const SPEECH_DETAIL_RE = /^\/members\/([^/]+)\/questions\/([^/]+)$/;
 const QUESTION_RE = /^\/questions\/([^/]+)$/;
 const PROMISE_RE = /^\/mayor\/policy-progress\/([^/]+)$/;
 const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
@@ -899,6 +939,11 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const staticResult = staticPageSeo(path, options);
   if (staticResult) return staticResult;
+
+  const speechDetailMatch = path.match(SPEECH_DETAIL_RE);
+  if (speechDetailMatch) {
+    return speechDetailSeo(safeDecodeURIComponent(speechDetailMatch[1]), safeDecodeURIComponent(speechDetailMatch[2]), options);
+  }
 
   const memberMatch = path.match(MEMBER_RE);
   if (memberMatch) return memberSeo(safeDecodeURIComponent(memberMatch[1]), options);

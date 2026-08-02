@@ -890,6 +890,102 @@ try {
   warn("searchIndex.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
+// --- councilSpeechSummaries.json ---
+const VALID_SPEECH_SUMMARY_STATUSES = new Set([
+  "verified",
+  "partially-verified",
+  "pending",
+  "source-unavailable",
+  "minutes-not-fetched",
+  "speaker-identification-pending",
+  "question-answer-link-pending",
+]);
+const VALID_SPEECH_RELATION_STATUSES = new Set(["confirmed", "suggested", "rejected"]);
+const NOT_YET_PUBLISHABLE_STATUSES = new Set(["minutes-not-fetched", "source-unavailable"]);
+const sessionIdSet = new Set(councilSessions.map((s) => s.id));
+
+try {
+  const speechData = readJson("src/data/councilSpeechSummaries.json");
+  if (typeof speechData.version !== "number") err("councilSpeechSummaries.json", "versionが数値ではありません");
+  if (speechData.generatedAt !== null && !DATE_RE.test(speechData.generatedAt ?? "")) {
+    err("councilSpeechSummaries.json", `generatedAtの形式が不正です: ${speechData.generatedAt}`);
+  }
+  if (!Array.isArray(speechData.members)) {
+    err("councilSpeechSummaries.json", "membersが配列ではありません");
+  } else {
+    const seenMemberIds = new Set();
+    const seenSpeechIds = new Set();
+
+    for (const record of speechData.members) {
+      const tag = `councilSpeechSummaries.json (${record.memberId ?? "議員id不明"})`;
+      if (isBlank(record.memberId)) err(tag, "memberIdが空です");
+      else if (!memberIds.has(record.memberId)) err(tag, `存在しない議員IDです: ${record.memberId}`);
+      if (seenMemberIds.has(record.memberId)) err(tag, `同じ議員のレコードが重複しています: ${record.memberId}`);
+      else seenMemberIds.add(record.memberId);
+
+      if (record.lastAnalyzedAt !== null && !DATE_RE.test(record.lastAnalyzedAt ?? "")) {
+        err(tag, `lastAnalyzedAtの形式が不正です: ${record.lastAnalyzedAt}`);
+      }
+
+      for (const speech of record.speeches ?? []) {
+        const speechTag = `councilSpeechSummaries.json (${record.memberId} / ${speech.id ?? "発言id不明"})`;
+        if (isBlank(speech.id)) err(speechTag, "発言のidが空です");
+        else if (seenSpeechIds.has(speech.id)) err(speechTag, `発言IDが重複しています: ${speech.id}`);
+        else seenSpeechIds.add(speech.id);
+
+        if (speech.memberId !== record.memberId) {
+          err(speechTag, `発言のmemberIdがレコードのmemberIdと一致しません: ${speech.memberId}`);
+        }
+        if (isBlank(speech.sessionId) || !sessionIdSet.has(speech.sessionId)) {
+          err(speechTag, `存在しない会期IDです: ${speech.sessionId}`);
+        }
+        if (speech.date !== null && speech.date !== undefined && !DATE_RE.test(speech.date)) {
+          err(speechTag, `dateの形式が不正です: ${speech.date}`);
+        }
+        if (!VALID_SPEECH_SUMMARY_STATUSES.has(speech.summaryStatus)) {
+          err(speechTag, `未定義のsummaryStatusです: ${speech.summaryStatus}`);
+        }
+        if (speech.isPublished && NOT_YET_PUBLISHABLE_STATUSES.has(speech.summaryStatus)) {
+          err(speechTag, `summaryStatus="${speech.summaryStatus}"のまま公開（isPublished: true）されています`);
+        }
+        if (speech.summaryStatus === "verified") {
+          if (!speech.summarySources || speech.summarySources.length === 0) {
+            err(speechTag, 'summaryStatus="verified"なのに出典（summarySources）がありません');
+          }
+          if (!speech.questionItems || speech.questionItems.length === 0 || speech.questionItems.some((q) => isBlank(q.questionSummary))) {
+            err(speechTag, 'summaryStatus="verified"なのに空の質問要約があります');
+          }
+        }
+
+        const questionItemIds = new Set();
+        for (const q of speech.questionItems ?? []) {
+          if (isBlank(q.id)) err(speechTag, "質問項目のidが空です");
+          else if (questionItemIds.has(q.id)) err(speechTag, `同一発言内で質問項目IDが重複しています: ${q.id}`);
+          else questionItemIds.add(q.id);
+
+          for (const rel of q.relatedBills ?? []) {
+            if (isBlank(rel.billId) || !billVotesById.has(rel.billId)) {
+              err(speechTag, `関連議案として存在しない議案IDを参照しています: ${rel.billId}`);
+            }
+            if (!VALID_SPEECH_RELATION_STATUSES.has(rel.relationStatus)) {
+              err(speechTag, `未定義のrelationStatusです: ${rel.relationStatus}`);
+            }
+            if (rel.relationStatus === "confirmed" && isBlank(rel.evidence)) {
+              warn(speechTag, `confirmedの関連議案(${rel.billId})に根拠（evidence）が設定されていません`);
+            }
+          }
+        }
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") {
+    warn("councilSpeechSummaries.json", "読み込めませんでした（存在しない場合はスキップ）");
+  } else {
+    throw e;
+  }
+}
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);

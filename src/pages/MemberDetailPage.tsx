@@ -3,8 +3,11 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
-import type { BillCategory, CouncilMember, GeneralQuestionItem, BillVoteItem } from "../types";
+import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import type { BillCategory, CouncilMember, GeneralQuestionItem, BillVoteItem, CouncilSpeechSummaryData } from "../types";
 import { getFaction } from "../lib/factions";
+import { findMemberSpeechRecord, publicSpeeches } from "../lib/councilSpeeches";
+import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
 import { SnsLinks } from "../components/SnsLinks";
@@ -29,6 +32,7 @@ import { getSeoForPath } from "../lib/seo";
 const members = membersData as CouncilMember[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
+const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -46,6 +50,8 @@ export function MemberDetailPage() {
         .filter((q) => q.memberId === member.id)
         .sort((a, b) => b.questionDate.localeCompare(a.questionDate))
     : [];
+  const speechRecord = member ? findMemberSpeechRecord(speechSummaryData.members, member.id) : undefined;
+  const publishedMemberSpeeches = publicSpeeches(speechRecord);
   const memberAllBillVotes = member
     ? billVotes
         .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
@@ -177,9 +183,12 @@ export function MemberDetailPage() {
       </SectionCard>
 
       <SectionCard title="一般質問">
+        <p className="text-xs leading-relaxed text-on-surface-variant">
+          質問通告書等に掲載された予定質問項目を基に整理しています。実際の発言内容や答弁は公式会議録をご確認ください。
+        </p>
         {memberQuestions.length > 0 ? (
           <>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div className="rounded-lg bg-surface-container-high p-3">
                 <p className="text-xs text-on-surface-variant">登録件数</p>
                 <p className="mt-1 text-lg font-semibold text-on-surface">{memberQuestions.length}件</p>
@@ -225,6 +234,32 @@ export function MemberDetailPage() {
         ) : (
           <EmptyState message="現在登録されている一般質問データはありません。" />
         )}
+
+        <div className="mt-4 border-t border-outline-variant pt-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-sm font-semibold text-on-surface">一般質問・質疑の要約</h3>
+            {publishedMemberSpeeches.length === 0 && <SpeechSummaryStatusBadge status="minutes-not-fetched" />}
+          </div>
+          {publishedMemberSpeeches.length > 0 ? (
+            <ul className="mt-2 space-y-2">
+              {publishedMemberSpeeches.map((s) => (
+                <li key={s.id} className="rounded-lg border border-outline-variant p-3">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="text-xs text-on-surface-variant">
+                      {s.date ? formatJapaneseDate(s.date) : "日付確認中"}／{s.meetingType}／{s.speechType}
+                    </span>
+                    <SpeechSummaryStatusBadge status={s.summaryStatus} />
+                  </div>
+                  {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{s.shortSummary}</p>}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
+              公式会議録本文を基にした質問・答弁の要約は、現在準備中です。現在掲載している一般質問情報には、質問通告書等を基に整理した予定質問項目が含まれます。正式な発言内容は、延岡市議会の公式会議録をご確認ください。
+            </p>
+          )}
+        </div>
       </SectionCard>
 
       <VotingRecordsSection votes={member.votes} />
