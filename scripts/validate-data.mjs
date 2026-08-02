@@ -154,6 +154,12 @@ const VALID_BILL_PUBLICATION_STATUSES = new Set([
   "rejected",
   "error",
 ]);
+const VALID_BILL_VERIFICATION_STATUSES = new Set([
+  "verified",
+  "partially-verified",
+  "pending",
+  "individual-votes-unavailable",
+]);
 
 for (const b of billVotes) {
   const tag = `billVotes.json (${b.id ?? "id不明"})`;
@@ -195,8 +201,18 @@ for (const b of billVotes) {
   if (b.publicationStatus && !VALID_BILL_PUBLICATION_STATUSES.has(b.publicationStatus)) {
     err(tag, `未定義のpublicationStatusです: ${b.publicationStatus}`);
   }
-  if (b.publicationStatus && b.publicationStatus !== "published") {
-    warn(tag, `公開保留状態です（publicationStatus: ${b.publicationStatus}）。一般公開ページには表示されません。`);
+  // rejected・errorのみ一般公開ページから除外する。pendingReview等は「確認待ち」表示を伴って公開される。
+  if (b.publicationStatus === "rejected" || b.publicationStatus === "error") {
+    warn(tag, `一般公開ページから除外されます（publicationStatus: ${b.publicationStatus}）。`);
+  }
+  if (b.verificationStatus && !VALID_BILL_VERIFICATION_STATUSES.has(b.verificationStatus)) {
+    err(tag, `未定義のverificationStatusです: ${b.verificationStatus}`);
+  }
+  if (b.verificationStatus && b.verificationStatus !== "verified") {
+    warn(tag, `確認待ち状態です（verificationStatus: ${b.verificationStatus}）。一般公開ページには「確認待ち」等の表示を伴って掲載されます。`);
+    if (isBlank(b.verificationNote)) {
+      err(tag, `verificationStatus="${b.verificationStatus}"なのにverificationNote（利用者向けの確認待ち理由）が設定されていません`);
+    }
   }
   if (
     b.extractionConfidence !== undefined &&
@@ -825,8 +841,9 @@ try {
         } else {
           const referencedBill = billVotesById.get(s.sourceId);
           const status = referencedBill?.publicationStatus;
-          if (status && status !== "published") {
-            err(tag, `確認待ち（publicationStatus: ${status}）の議案が検索インデックスに含まれています: ${s.sourceId}`);
+          // rejected・errorのみ一般公開の対象外（pendingReview等は「確認待ち」表示を伴い検索対象に含めてよい）。
+          if (status === "rejected" || status === "error") {
+            err(tag, `一般公開対象外（publicationStatus: ${status}）の議案が検索インデックスに含まれています: ${s.sourceId}`);
           }
         }
       }

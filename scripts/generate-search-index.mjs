@@ -73,16 +73,20 @@ try {
 }
 
 // --- bills / votes ---
-// pendingReview系（PDF自動抽出で未確認）の議案は検索インデックスに含めない（一般公開ページに出さないため）。
+// rejected・errorのみ検索インデックスから除外する。pendingReview等（確認待ち）は「確認待ち」表示を
+// 伴って一般公開しているため、検索対象にも含める。
 const billVotes = readJson("src/data/billVotes.json").filter(
-  (b) => b.publicationStatus === undefined || b.publicationStatus === "published",
+  (b) => b.publicationStatus !== "rejected" && b.publicationStatus !== "error",
 );
 for (const b of billVotes) {
   entries.push({
     id: `bill-${b.id}`,
     type: "bill",
     title: b.billTitle,
-    description: `${b.billNumber}／${b.result}`,
+    description:
+      b.verificationStatus && b.verificationStatus !== "verified"
+        ? `${b.billNumber}／${b.result}（確認待ち）`
+        : `${b.billNumber}／${b.result}`,
     url: `/bills/votes/${b.id}`,
     keywords: [
       b.billNumber,

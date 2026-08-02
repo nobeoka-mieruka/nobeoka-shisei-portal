@@ -1,11 +1,16 @@
 /**
- * pendingReview状態の議案データを確認したうえで公開する（publicationStatus: "published"へ変更する）ための
- * 補助スクリプト。データそのものは書き換えず、公開可否の判定に必要な確認だけを行う。
+ * 確認待ち（verificationStatus: "pending" 等）の議案データを、人が確認したうえで
+ * "verified"へ変更するための補助スクリプト。
+ *
+ * 重要：このサイトでは「確認待ち＝非公開」にはしていない。確認待ちの議案も
+ * 「確認待ち」の表示を伴って既に一般公開されている。このスクリプトは公開・非公開を
+ * 切り替えるものではなく、確認状況（verificationStatus）を更新するためのものである。
  *
  * 使い方：
  *   node scripts/approve-council-data.mjs --bill=2026-06-gian-42
  *   node scripts/approve-council-data.mjs --bill=2026-06-gian-42 --dry-run
- *   node scripts/approve-council-data.mjs --session=2026-06   （そのセッションの確認待ちを一括承認）
+ *   node scripts/approve-council-data.mjs --bill=2026-06-gian-42 --reviewed-by=事務局確認
+ *   node scripts/approve-council-data.mjs --session=2026-06   （そのセッションの確認待ちを一括確認）
  *   node scripts/approve-council-data.mjs --list              （確認待ち一覧を表示するだけ）
  *
  * 承認前に以下を確認する（該当しない項目は"対象外"としてスキップする）：
@@ -27,6 +32,7 @@ const isDryRun = args.includes("--dry-run");
 const shouldList = args.includes("--list");
 const billId = (args.find((a) => a.startsWith("--bill=")) ?? args.find((a) => a.startsWith("--proposal=")))?.split("=")[1];
 const sessionId = args.find((a) => a.startsWith("--session="))?.split("=")[1];
+const reviewedBy = args.find((a) => a.startsWith("--reviewed-by="))?.split("=").slice(1).join("=");
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -34,12 +40,16 @@ function readJson(path) {
 function writeJson(path, data) {
   writeFileSync(path, `${JSON.stringify(data, null, 2)}\n`, "utf8");
 }
+function todayIso() {
+  return new Date().toISOString().slice(0, 10);
+}
 
 const billVotes = readJson(billVotesPath);
 const memberIds = new Set(readJson(membersPath).map((m) => m.id));
 
 function isPending(b) {
-  return b.publicationStatus === "pendingReview" || b.publicationStatus === "updatedPendingReview";
+  const status = b.verificationStatus ?? "verified";
+  return status === "pending" || status === "partially-verified";
 }
 
 function runChecks(bill) {
@@ -71,7 +81,7 @@ function runChecks(bill) {
 }
 
 function approveOne(bill) {
-  console.log(`\n[approve-council-data] ${bill.id}（${bill.billNumber} ${bill.billTitle}）の承認前チェック:`);
+  console.log(`\n[approve-council-data] ${bill.id}（${bill.billNumber} ${bill.billTitle}）の確認前チェック:`);
   const checks = runChecks(bill);
   let allOk = true;
   for (const c of checks) {
@@ -79,16 +89,21 @@ function approveOne(bill) {
     if (!c.ok) allOk = false;
   }
   if (!allOk) {
-    console.error(`[approve-council-data] ${bill.id}: 確認に失敗した項目があるため承認しませんでした。`);
+    console.error(`[approve-council-data] ${bill.id}: 確認に失敗した項目があるため verified にしませんでした。`);
     return false;
   }
   if (isDryRun) {
     console.log(`[approve-council-data] ${bill.id}: --dry-run のため実際の変更は行いませんでした。`);
     return true;
   }
+  bill.verificationStatus = "verified";
   bill.publicationStatus = "published";
+  bill.lastVerified = todayIso();
+  if (reviewedBy) bill.reviewedBy = reviewedBy;
+  delete bill.verificationNote;
+  delete bill.unresolvedFields;
   delete bill.extractionNotes;
-  console.log(`[approve-council-data] ${bill.id} を publicationStatus: "published" に変更しました。`);
+  console.log(`[approve-council-data] ${bill.id} を verificationStatus: "verified" に変更しました。`);
   return true;
 }
 
@@ -97,10 +112,10 @@ if (shouldList) {
   if (pending.length === 0) {
     console.log("[approve-council-data] 確認待ちの議案はありません。");
   } else {
-    console.log(`[approve-council-data] 確認待ち ${pending.length}件:`);
+    console.log(`[approve-council-data] 確認待ち ${pending.length}件（いずれも「確認待ち」表示で既に一般公開されています）:`);
     for (const b of pending) {
       console.log(
-        `  --bill=${b.id}  ${b.billNumber} ${b.billTitle}  結果=${b.result}  理由=${b.extractionNotes ?? "(理由未記録)"}`,
+        `  --bill=${b.id}  ${b.billNumber} ${b.billTitle}  結果=${b.result}  理由=${b.verificationNote ?? b.extractionNotes ?? "(理由未記録)"}`,
       );
     }
   }
@@ -118,7 +133,7 @@ if (sessionId) {
     if (approveOne(bill)) approvedCount++;
   }
   if (!isDryRun) writeJson(billVotesPath, billVotes);
-  console.log(`\n[approve-council-data] ${sessionId}: ${approvedCount}/${targets.length}件を承認しました。`);
+  console.log(`\n[approve-council-data] ${sessionId}: ${approvedCount}/${targets.length}件を確認済みにしました。`);
   process.exit(0);
 }
 
@@ -133,7 +148,7 @@ if (!bill) {
   process.exit(1);
 }
 if (!isPending(bill)) {
-  console.log(`[approve-council-data] この議案は確認待ちではありません（publicationStatus: ${bill.publicationStatus ?? "published"}）。`);
+  console.log(`[approve-council-data] この議案は確認待ちではありません（verificationStatus: ${bill.verificationStatus ?? "verified"}）。`);
   process.exit(0);
 }
 

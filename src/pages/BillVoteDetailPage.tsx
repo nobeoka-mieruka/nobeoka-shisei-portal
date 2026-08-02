@@ -9,7 +9,8 @@ import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
-import { billVoteLabels, publicBills } from "../lib/billVotes";
+import { billVoteLabels, publicBills, verificationStatusOf } from "../lib/billVotes";
+import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -58,7 +59,10 @@ function collectDocuments(bill: BillVoteItem): DocumentLink[] {
 }
 
 interface CouncilDocumentLink {
+  /** PDFを開くURL。sourcePageが分かる場合は #page=N を付与する（対応ブラウザでは該当ページへ直接移動する）。 */
   url: string;
+  /** 延岡市議会公式サイト上のURL（storageTypeがlocalの場合のみ、urlとは別に案内する）。 */
+  officialUrl?: string;
   title: string;
   sessionId: string;
   sessionTitle: string;
@@ -73,14 +77,19 @@ function resolveCouncilDocumentLink(bill: BillVoteItem): CouncilDocumentLink | u
   const doc = bill.sourceDocumentId
     ? session.documents.find((d) => d.id === bill.sourceDocumentId)
     : session.documents.find((d) => d.category === "results");
-  const url = (doc?.storageType === "local" ? doc.filePath : doc?.sourceUrl) ?? bill.sourceFilePath;
-  if (!url) return undefined;
+  const isLocal = doc?.storageType === "local";
+  const baseUrl = (isLocal ? doc.filePath : doc?.sourceUrl) ?? bill.sourceFilePath;
+  if (!baseUrl) return undefined;
+  const sourcePage = bill.sourcePage;
+  // ブラウザによってはPDFの#page=フラグメントに対応していないため、画面上にも該当ページ数を文字で併記する。
+  const url = sourcePage != null ? `${baseUrl}#page=${sourcePage}` : baseUrl;
   return {
     url,
+    officialUrl: isLocal ? doc?.sourceUrl : undefined,
     title: doc?.title ?? "議案等審議結果",
     sessionId: session.id,
     sessionTitle: session.title,
-    sourcePage: bill.sourcePage,
+    sourcePage,
   };
 }
 
@@ -128,6 +137,9 @@ export function BillVoteDetailPage() {
     .map((id) => billVotes.find((b) => b.id === id))
     .filter((b): b is BillVoteItem => !!b);
 
+  const verification = verificationStatusOf(bill);
+  const isVerified = verification === "verified";
+
   const sessionBills = billVotes.filter((b) => b.session === bill.session);
   const idx = sessionBills.findIndex((b) => b.id === bill.id);
   const prevBill = idx > 0 ? sessionBills[idx - 1] : undefined;
@@ -169,9 +181,26 @@ export function BillVoteDetailPage() {
         </div>
       </div>
 
+      {/* 確認状況の注意表示（確認済み以外の場合のみ） */}
+      {!isVerified && (
+        <div className="rounded-2xl border-2 border-tertiary bg-tertiary-container p-4 text-on-tertiary-container shadow-e1 sm:p-5">
+          <div className="flex items-center gap-2">
+            <VerificationStatusBadge bill={bill} className="!bg-surface-container-lowest !text-on-surface" />
+            <p className="text-sm font-semibold">この案件は現在確認作業中です</p>
+          </div>
+          <p className="mt-2 text-sm leading-relaxed">
+            {bill.verificationNote ??
+              "この案件は公式資料の記載が複雑なため、現在確認作業中です。議会全体の結果や個人別表決の一部に、未確定の項目があります。正式な内容は延岡市議会の公式資料をご確認ください。"}
+          </p>
+        </div>
+      )}
+
       {/* 議案基本情報 */}
       <div className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6 print:rounded-none print:border print:border-outline-variant print:shadow-none">
-        <p className="text-sm text-on-surface-variant">{bill.billNumber}</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="text-sm text-on-surface-variant">{bill.billNumber}</p>
+          <VerificationStatusBadge bill={bill} />
+        </div>
         <h1 className="mt-1 text-xl font-semibold text-on-surface sm:text-2xl">{bill.billTitle}</h1>
         <dl className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 text-sm sm:grid-cols-2">
           <div>
@@ -284,7 +313,15 @@ export function BillVoteDetailPage() {
 
       {/* 議決結果 */}
       <SectionCard title="議決結果">
+        <p className="text-xs text-on-surface-variant">議会全体の結果</p>
         <p className="text-2xl font-bold text-on-surface">{bill.result}</p>
+        {!isVerified && (
+          <p className="mt-1 text-xs text-on-surface-variant">
+            {bill.unresolvedFields?.includes("result")
+              ? "資料の表現が複合的なため、結果区分を確認中です。上記は現時点で読み取れた表記です。"
+              : "確認中の項目があります。"}
+          </p>
+        )}
         {bill.memberVotes.length > 0 && (
           <div className="mt-4 grid grid-cols-4 gap-2">
             {voteOrder.map((v) => {
@@ -324,7 +361,7 @@ export function BillVoteDetailPage() {
           </ul>
         ) : (
           <p className="rounded-lg bg-surface-container-high/70 px-3 py-2.5 text-xs leading-relaxed text-on-surface-variant">
-            議員個人の賛否は、公開資料で確認できていません。
+            個人別の表決：現時点で確認できる公式資料には、各議員の賛成・反対・棄権等が明確に掲載されていません。全会一致と記録されている場合でも、在席者・欠席者・議長・除斥者が確認できないため、推測で議員個人の賛否を割り当てることはしていません。
           </p>
         )}
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
@@ -375,11 +412,22 @@ export function BillVoteDetailPage() {
             >
               この議案が掲載されているPDFを開く
             </a>
+            {councilDocumentLink.officialUrl && (
+              <a
+                href={councilDocumentLink.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="延岡市議会公式サイトでこの資料を確認する（新しいタブで開く）"
+                className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+              >
+                公式サイトで確認する
+              </a>
+            )}
             <Link
               to={`/council-documents/${councilDocumentLink.sessionId}`}
               className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
             >
-              定例会の資料一覧を見る
+              同じ定例会の資料を見る
             </Link>
           </div>
         </SectionCard>
@@ -479,7 +527,15 @@ export function BillVoteDetailPage() {
       )}
 
       <div className="print:hidden">
-        <CorrectionRequestButton pageName={bill.billTitle} />
+        <CorrectionRequestButton
+          pageName={bill.billTitle}
+          buttonLabel={!isVerified ? "資料の読み取りに関する情報提供・訂正依頼" : undefined}
+        />
+        {!isVerified && (
+          <p className="mt-2 px-1 text-xs leading-relaxed text-on-surface-variant">
+            フォーム内に、議案ID「{bill.id}」「{bill.billNumber}」「{bill.session}」および、根拠となる公式資料の該当ページなどをご記入ください。第三者からの情報提供のみで内容を確定することはなく、公式資料と照合したうえで反映します。
+          </p>
+        )}
       </div>
     </div>
   );

@@ -181,9 +181,18 @@ async function main() {
         extractionNotes: record.unresolvedReasons.length > 0 ? record.unresolvedReasons.join("; ") : undefined,
         extractedAt: todayIso(),
         lastVerified: todayIso(),
+        // 公開するかどうか（publicationStatus）と確認状況（verificationStatus）は別軸で管理する。
+        // 確認待ちであっても、以下のとおり一般公開はする（「確認待ち」の表示を伴って掲載する）。
+        verificationStatus: isClean ? "verified" : "pending",
+        verificationNote: isClean
+          ? undefined
+          : "公式資料の記載が複合的、または非定型のため、内容を確認中です。正式な内容は出典PDFをご確認ください。",
+        unresolvedFields: isClean ? undefined : ["result"],
       };
 
       if (!existing) {
+        // pendingReviewも一般公開する（「確認待ち＝非公開」にはしない）。publicationStatusは技術的な
+        // 抽出結果の内部管理に使い、一般公開ページからの除外はrejected・errorのみで行う。
         candidateFields.publicationStatus = isClean ? "published" : "pendingReview";
         billVotes.push(candidateFields);
         billVotesById.set(id, candidateFields);

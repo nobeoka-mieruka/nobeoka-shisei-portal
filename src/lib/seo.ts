@@ -779,11 +779,16 @@ function billVoteSeo(id: string, options?: SeoOptions): SeoResult {
   const bill = billVotes.find((b) => b.id === id);
   if (!bill) return notFound(`/bills/votes/${id}`, "議案情報");
 
+  const isVerified = (bill.verificationStatus ?? "verified") === "verified";
+  const description = isVerified
+    ? `${bill.billNumber}「${bill.billTitle}」の概要、議決結果（${bill.result}）、議員別の賛否を掲載しています。`
+    : `${bill.billNumber}「${bill.billTitle}」について、延岡市議会の公式資料を基に確認できた審議情報を掲載しています。一部の結果表記は現在確認中です。`;
+
   return makeResult(
     {
       path: `/bills/votes/${id}`,
       pageTitle: `${bill.billNumber}「${bill.billTitle}」｜採決結果・議員別賛否`,
-      description: `${bill.billNumber}「${bill.billTitle}」の概要、議決結果（${bill.result}）、議員別の賛否を掲載しています。`,
+      description,
       image: billOgImage(bill.id),
       ogType: "article",
       breadcrumbs: [

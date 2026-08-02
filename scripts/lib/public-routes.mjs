@@ -89,9 +89,10 @@ export const STATIC_NOINDEX_PAGES = ["/bills", "/search", "/bills/compare"];
 
 function loadData() {
   const members = readJson("src/data/members.json");
-  // pendingReview系（PDF自動抽出で未確認）の議案は、サイトマップ・プリレンダリング対象に含めない。
+  // rejected・error（誤抽出として却下、または抽出エラー）のみサイトマップ・プリレンダリング対象から除く。
+  // pendingReview等（確認待ち）は「確認待ち」表示を伴って一般公開するため対象に含める。
   const billVotes = readJson("src/data/billVotes.json").filter(
-    (b) => b.publicationStatus === undefined || b.publicationStatus === "published",
+    (b) => b.publicationStatus !== "rejected" && b.publicationStatus !== "error",
   );
   const councilSessions = readJson("src/data/councilSessions.json");
   const mayorPromises = readJson("src/data/mayorPromises.json");

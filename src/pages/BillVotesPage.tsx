@@ -13,7 +13,8 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { dataCoverage } from "../data/dataCoverage";
-import { publicBills } from "../lib/billVotes";
+import { publicBills, verificationStatusOf, verificationStatusLabels } from "../lib/billVotes";
+import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 
@@ -53,6 +54,13 @@ const categoryOptions: { value: BillCategory; label: string }[] = [
   { value: "専決処分", label: "専決処分" },
   { value: "その他", label: "その他" },
   { value: "不明", label: "不明" },
+];
+
+const verificationOptions: { value: string; label: string }[] = [
+  { value: "verified", label: verificationStatusLabels.verified },
+  { value: "partially-verified", label: verificationStatusLabels["partially-verified"] },
+  { value: "pending", label: verificationStatusLabels.pending },
+  { value: "individual-votes-unavailable", label: verificationStatusLabels["individual-votes-unavailable"] },
 ];
 
 type UnanimityFilter = "unanimous" | "split";
@@ -146,6 +154,7 @@ export function BillVotesPage() {
   const [fiscalYear, setFiscalYear] = useState(searchParams.get("year") ?? "all");
   const [session, setSession] = useState(searchParams.get("session") ?? "all");
   const [category, setCategory] = useState(searchParams.get("category") ?? "all");
+  const [verification, setVerification] = useState(searchParams.get("status") ?? "all");
   const [result, setResult] = useState(searchParams.get("result") ?? "all");
   const [committee, setCommittee] = useState(searchParams.get("committee") ?? "all");
   const [proposerType, setProposerType] = useState(searchParams.get("proposer") ?? "all");
@@ -159,12 +168,13 @@ export function BillVotesPage() {
     if (fiscalYear !== "all") next.set("year", fiscalYear);
     if (session !== "all") next.set("session", session);
     if (category !== "all") next.set("category", category);
+    if (verification !== "all") next.set("status", verification);
     if (result !== "all") next.set("result", result);
     if (committee !== "all") next.set("committee", committee);
     if (proposerType !== "all") next.set("proposer", proposerType);
     setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, fiscalYear, session, category, result, committee, proposerType]);
+  }, [query, fiscalYear, session, category, verification, result, committee, proposerType]);
 
   const fiscalYearOptions = useMemo(
     () =>
@@ -195,6 +205,7 @@ export function BillVotesPage() {
     fiscalYear !== "all" ||
     session !== "all" ||
     category !== "all" ||
+    verification !== "all" ||
     result !== "all" ||
     committee !== "all" ||
     proposerType !== "all" ||
@@ -205,6 +216,7 @@ export function BillVotesPage() {
     setFiscalYear("all");
     setSession("all");
     setCategory("all");
+    setVerification("all");
     setResult("all");
     setCommittee("all");
     setProposerType("all");
@@ -219,6 +231,7 @@ export function BillVotesPage() {
       const matchesFiscalYear = fiscalYear === "all" || b.fiscalYear === fiscalYear;
       const matchesSession = session === "all" || b.session === session;
       const matchesCategory = category === "all" || b.category === category;
+      const matchesVerification = verification === "all" || verificationStatusOf(b) === verification;
       const matchesResult = result === "all" || b.result === result;
       const matchesCommittee = committee === "all" || b.committee === committee;
       const matchesProposerType = proposerType === "all" || b.proposerType === proposerType;
@@ -230,6 +243,7 @@ export function BillVotesPage() {
         matchesFiscalYear &&
         matchesSession &&
         matchesCategory &&
+        matchesVerification &&
         matchesResult &&
         matchesCommittee &&
         matchesProposerType &&
@@ -237,7 +251,7 @@ export function BillVotesPage() {
       );
     });
     return sortBills(matched, sort);
-  }, [query, fiscalYear, session, category, result, committee, proposerType, unanimity, sort]);
+  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, unanimity, sort]);
 
   return (
     <div className="px-4 py-4 sm:px-6">
@@ -252,12 +266,17 @@ export function BillVotesPage() {
         </p>
       </div>
 
+      <p className="mb-4 rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+        本サイトでは、公式資料で確認できた議案を掲載しています。資料の表現が複雑な案件については、非掲載にせず「確認待ち」として公開しています。確認待ちの情報は、公式資料との照合作業後に更新します。
+      </p>
+
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={query} onChange={setQuery} placeholder="議案番号、議案名、概要で検索" />
         <div className="flex flex-wrap items-center gap-2">
           <FilterSelect label="年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
           <FilterSelect label="定例会" value={session} onChange={setSession} options={sessionOptions} />
           <FilterSelect label="分類" value={category} onChange={setCategory} options={categoryOptions} />
+          <FilterSelect label="確認状況" value={verification} onChange={setVerification} options={verificationOptions} />
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
           <FilterSelect label="議決結果" value={result} onChange={setResult} options={resultOptions} />
           <FilterSelect label="提出者" value={proposerType} onChange={setProposerType} options={proposerTypeOptions} />
@@ -319,6 +338,7 @@ export function BillVotesPage() {
                               {bill.category}
                             </span>
                           )}
+                          <VerificationStatusBadge bill={bill} />
                         </div>
                         <h2 className="mt-1 text-base font-semibold leading-snug text-on-surface">{bill.billTitle}</h2>
                         <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-on-surface-variant">{bill.summary}</p>

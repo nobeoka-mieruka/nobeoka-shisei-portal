@@ -803,10 +803,24 @@ export type BillCategory =
   | "不明";
 
 /**
- * 議案・表決データの公開状態。未設定（省略）の場合は"published"として扱う
- * （手入力・既存データとの後方互換のため）。pendingReview系は一般公開ページに表示しない。
+ * 議案・表決データの公開状態。未設定（省略）の場合は"published"として扱う（既存データとの後方互換のため）。
+ *
+ * 「公開するかどうか」と「確認が済んでいるかどうか」は別の軸として扱う（BillVerificationStatus参照）。
+ * pendingReview・updatedPendingReviewは、確認は済んでいないが一般公開はする状態
+ * （一覧・詳細ページに「確認待ち」等の表示を伴って掲載される）。
+ * rejected（誤抽出と判断され却下）とerror（抽出処理でのエラー）のみ、一般公開ページから除外する。
  */
 export type BillPublicationStatus = "published" | "pendingReview" | "updatedPendingReview" | "rejected" | "error";
+
+/**
+ * 議案データの確認状況。「公開状態（BillPublicationStatus）」とは独立した軸で管理する。
+ * - verified：議案番号・件名・結果・議決日などの事実関係を確認済み
+ * - partially-verified：一部の項目は確認できたが、一部は確認できていない
+ * - pending：公式資料の記載が複合的・非定型的で、内容を確認中
+ * - individual-votes-unavailable：案件単位の情報は確認できるが、議員個人の賛否は公式資料に記載がない
+ * 未設定（省略）の場合は"verified"として扱う（既存データとの後方互換のため）。
+ */
+export type BillVerificationStatus = "verified" | "partially-verified" | "pending" | "individual-votes-unavailable";
 
 /** 議案ごとの賛否データベースにおける、議員1人分の賛否記録。 */
 export interface BillVoteMemberEntry {
@@ -901,10 +915,19 @@ export interface BillVoteItem {
   extractionSource?: "manual" | "automatic";
   /** 抽出結果の内部的な確からしさ（0〜1）。一般公開ページには表示しない。 */
   extractionConfidence?: number;
-  /** pendingReview等になった理由（人が確認する際の手がかり。一般公開ページには表示しない）。 */
+  /** pendingReview等になった技術的な理由（開発・確認作業者向けの手がかり。一般公開ページには表示しない）。 */
   extractionNotes?: string;
   /** ISO形式。自動抽出処理を実行した日時。 */
   extractedAt?: string;
+
+  /** 未設定（省略）の場合は"verified"として扱う。 */
+  verificationStatus?: BillVerificationStatus;
+  /** 確認待ち・一部確認済みの理由を、利用者向けに分かりやすく説明する文章（議案詳細ページの注意表示に使う）。 */
+  verificationNote?: string;
+  /** 確認作業を行った担当者・体制の識別子（任意。個人名は入れない）。 */
+  reviewedBy?: string;
+  /** 確認が済んでいない項目名の一覧（例: ["result", "individualVotes"]）。内部の手がかり用。 */
+  unresolvedFields?: string[];
 
   /**
    * 複数回の採決がある場合の段階別記録（任意項目。第1段階：型のみ）。
