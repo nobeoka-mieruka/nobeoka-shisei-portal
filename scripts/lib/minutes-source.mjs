@@ -170,6 +170,17 @@ function parseSessionLabel(label) {
   return m ? { sessionNumber: `第${m[1]}回`, sessionType: m[2] } : { sessionNumber: undefined, sessionType: undefined };
 }
 
+const REIWA_START_YEAR = 2018; // 令和1年 = 2019年（西暦 = 2018 + 元号年）
+
+/** 会議ファイル名（例: "R080216A" → 令和8年2月16日）をISO形式の日付へ変換する。令和のみ対応。 */
+export function fileNameToIsoDate(fileName) {
+  const m = fileName.match(/^R(\d{2})(\d{2})(\d{2})[A-Z]$/);
+  if (!m) return undefined;
+  const [, eraYearStr, monthStr, dayStr] = m;
+  const year = REIWA_START_YEAR + Number(eraYearStr);
+  return `${year}-${monthStr}-${dayStr}`;
+}
+
 /**
  * 指定した西暦年の、会期（定例会・臨時会）一覧を取得する。
  * @param {{code: string, year: number}} params

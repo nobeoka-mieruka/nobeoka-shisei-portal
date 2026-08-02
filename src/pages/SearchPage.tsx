@@ -19,6 +19,7 @@ const typeLabels: Record<SearchEntryType, string> = {
   promise: "市長公約",
   bill: "議案",
   question: "一般質問",
+  speech: "質問・答弁（会議録）",
   compensation: "報酬",
   finance: "財政",
   update: "更新履歴",

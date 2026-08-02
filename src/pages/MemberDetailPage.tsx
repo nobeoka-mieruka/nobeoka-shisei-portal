@@ -245,6 +245,9 @@ export function MemberDetailPage() {
               <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
                 延岡市議会が公開している公式会議録を基に、本会議で行われた質問や質疑と、市長・部長・教育長等の答弁をAIで中立的に要約しています。議員や答弁内容への評価・論評は加えていません。正式な発言内容は、各項目の公式会議録をご確認ください。
               </p>
+              <p className="mt-1 text-xs text-on-surface-variant">
+                収録対象：令和5年5月15日（令和5年第1回臨時会、現在の議員任期における最初の本会議）以降に開催された本会議
+              </p>
               <ul className="mt-2 space-y-2">
                 {publishedMemberSpeeches.map((s) => (
                   <li key={s.id} className="rounded-lg border border-outline-variant p-3">

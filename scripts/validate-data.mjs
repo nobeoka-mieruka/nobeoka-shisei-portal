@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -808,6 +809,7 @@ const VALID_SEARCH_TYPES = new Set([
   "promise",
   "bill",
   "question",
+  "speech",
   "compensation",
   "finance",
   "update",
@@ -942,6 +944,11 @@ try {
         }
         if (speech.date !== null && speech.date !== undefined && !DATE_RE.test(speech.date)) {
           err(speechTag, `dateの形式が不正です: ${speech.date}`);
+        }
+        if (speech.date && speech.date < councilSpeechPeriod.from) {
+          const msg = `発言日（${speech.date}）が収録対象期間（${councilSpeechPeriod.from}以降）より前です`;
+          if (speech.isPublished) err(speechTag, `${msg}。公開できません`);
+          else warn(speechTag, msg);
         }
         if (!VALID_SPEECH_SUMMARY_STATUSES.has(speech.summaryStatus)) {
           err(speechTag, `未定義のsummaryStatusです: ${speech.summaryStatus}`);

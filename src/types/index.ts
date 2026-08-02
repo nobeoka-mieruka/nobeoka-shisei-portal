@@ -1365,6 +1365,7 @@ export type SearchEntryType =
   | "promise"
   | "bill"
   | "question"
+  | "speech"
   | "compensation"
   | "finance"
   | "update"

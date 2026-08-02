@@ -76,7 +76,7 @@ export function MemberSpeechDetailPage() {
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-        掲載している質問・答弁の要約は、延岡市議会が公開する公式会議録を基にAIで作成し、確認状況を表示しています。原文のすべての文脈や表現を再現するものではありません。正式な発言内容は公式会議録をご確認ください。
+        掲載している質問・答弁の要約は、延岡市議会が公開する公式会議録を基にAIで作成し、確認状況を表示しています。原文のすべての文脈や表現を再現するものではありません。正式な発言内容は公式会議録をご確認ください。収録対象は、令和5年5月15日（令和5年第1回臨時会、現在の議員任期における最初の本会議）以降に開催された本会議です。
       </p>
 
       <SectionCard title="質問項目">

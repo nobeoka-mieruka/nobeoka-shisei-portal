@@ -14,6 +14,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { maxValidDate, resolveLastmod } from "./lastmod.mjs";
+import { councilSpeechPeriod } from "./council-speech-period.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const root = join(__dirname, "..", "..");
@@ -125,13 +126,16 @@ function loadData() {
 }
 
 /**
- * 公開済み（isPublished: true）の一般質問・質疑要約のみを{memberId, speech}の形で返す。
- * 現時点ではcouncilSpeechSummaries.jsonに公開済みレコードが1件も無いため、常に空配列になる
- * （会議録本文の解析結果が承認・公開された時点で自動的に対象へ含まれる）。
+ * 公開済み（isPublished: true）かつ収録対象期間（src/config/councilSpeechPeriod.json）内の
+ * 一般質問・質疑要約のみを{memberId, speech}の形で返す。期間より前のデータは、万一登録されて
+ * いても（validate-data.mjsが本来エラーにするが、念のための多重防御として）サイトマップ・
+ * プリレンダリング対象から除外する。
  */
 function publishedSpeeches(councilSpeechSummaries) {
   return councilSpeechSummaries.members.flatMap((m) =>
-    m.speeches.filter((s) => s.isPublished).map((s) => ({ memberId: m.memberId, speech: s })),
+    m.speeches
+      .filter((s) => s.isPublished && s.date && s.date >= councilSpeechPeriod.from)
+      .map((s) => ({ memberId: m.memberId, speech: s })),
   );
 }
 

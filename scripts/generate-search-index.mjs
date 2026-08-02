@@ -122,6 +122,35 @@ for (const q of generalQuestions) {
   });
 }
 
+// --- council speech summaries（会議録本文ベースの一般質問・答弁要約） ---
+// 収録対象期間（councilSpeechPeriod.from）より前のデータ、および非公開（isPublished:false）
+// のデータは検索対象に含めない。
+try {
+  const { councilSpeechPeriod } = await import("./lib/council-speech-period.mjs");
+  const speechData = readJson("src/data/councilSpeechSummaries.json");
+  const members2 = readJson("src/data/members.json");
+  const memberName = (id) => members2.find((m) => m.id === id)?.name ?? id;
+
+  for (const record of speechData.members ?? []) {
+    for (const s of record.speeches ?? []) {
+      if (!s.isPublished || !s.date || s.date < councilSpeechPeriod.from) continue;
+      entries.push({
+        id: `speech-${s.id}`,
+        type: "speech",
+        title: `${memberName(s.memberId)}議員の${s.speechType}`,
+        description: truncate(s.shortSummary ?? "", 80),
+        url: `/members/${s.memberId}/questions/${s.id}`,
+        keywords: [memberName(s.memberId), s.speechType, s.meetingType, ...(s.topics ?? [])].filter(Boolean),
+        content: s.questionItems.flatMap((q) => [q.title, q.questionSummary, q.answerSummary]).filter(Boolean).join(" "),
+        date: s.date,
+        sourceId: s.id,
+      });
+    }
+  }
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- compensation ---
 try {
   const compensation = readJson("src/data/compensationComparison.json");

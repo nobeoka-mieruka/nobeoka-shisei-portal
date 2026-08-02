@@ -1,4 +1,5 @@
 import type { CouncilMemberSpeechRecord, CouncilSpeech, CouncilSpeechSummaryData, SpeechSummaryStatus } from "../types";
+import { isWithinCouncilSpeechPeriod } from "../config/councilSpeechPeriod";
 
 export const speechSummaryStatusLabels: Record<SpeechSummaryStatus, string> = {
   "minutes-not-fetched": "会議録本文未取得",
@@ -22,9 +23,13 @@ export function findMemberSpeechRecord(
   return data.find((m) => m.memberId === memberId);
 }
 
-/** 一般公開してよい発言だけを返す（isPublished:trueのみ）。 */
+/**
+ * 一般公開してよい発言だけを返す（isPublished:true、かつ収録対象期間内のみ）。
+ * 期間の判定はsrc/config/councilSpeechPeriod.tsが単一情報源（validate-data.mjs・
+ * scripts/lib/public-routes.mjsの対応するチェックと同じ基準）。
+ */
 export function publicSpeeches(record: CouncilMemberSpeechRecord | undefined): CouncilSpeech[] {
-  return record ? record.speeches.filter((s) => s.isPublished) : [];
+  return record ? record.speeches.filter((s) => s.isPublished && isWithinCouncilSpeechPeriod(s.date)) : [];
 }
 
 export function findPublishedSpeech(
@@ -33,5 +38,5 @@ export function findPublishedSpeech(
   speechId: string,
 ): CouncilSpeech | undefined {
   const record = findMemberSpeechRecord(data.members, memberId);
-  return record?.speeches.find((s) => s.id === speechId && s.isPublished);
+  return record?.speeches.find((s) => s.id === speechId && s.isPublished && isWithinCouncilSpeechPeriod(s.date));
 }

@@ -12,6 +12,9 @@
  * - --dry-run で、実際に本文取得する前に対象一覧だけを確認できる
  * - 取得済み（出力ファイルが既に存在する）セグメントは再取得しない（途中再開が可能）
  *
+ * 対象期間（src/config/councilSpeechPeriod.json）より前の本会議日は取得対象にしない
+ * （--fromで明示的に上書きしない限り、councilSpeechPeriod.fromが既定値）。
+ *
  * 使い方：
  *   node scripts/fetch-nobeoka-minutes-batch.mjs --year=2026 --limit=10 --dry-run
  *   node scripts/fetch-nobeoka-minutes-batch.mjs --year=2026 --limit=10
@@ -28,7 +31,9 @@ import {
   matchSpeakerToMember,
   classifySpeakerLabel,
   looksGarbled,
+  fileNameToIsoDate,
 } from "./lib/minutes-source.mjs";
+import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
 
 const CODE = "48o046ot0cia1xvtw7";
 
@@ -37,6 +42,7 @@ const year = Number(args.find((a) => a.startsWith("--year="))?.split("=")[1]);
 const limit = Number(args.find((a) => a.startsWith("--limit="))?.split("=")[1] ?? "10");
 const isDryRun = args.includes("--dry-run");
 const outputDir = args.find((a) => a.startsWith("--output="))?.split("=")[1] ?? "data/minutes";
+const from = args.find((a) => a.startsWith("--from="))?.split("=")[1] ?? councilSpeechPeriod.from;
 
 if (!year || Number.isNaN(year)) {
   console.error("[fetch-nobeoka-minutes-batch] --year=<西暦年> を指定してください（例: --year=2026）。");
@@ -52,18 +58,24 @@ function slug(url) {
 }
 
 async function main() {
-  console.log(`[fetch-nobeoka-minutes-batch] ${year}年の会期を検索します...`);
+  console.log(`[fetch-nobeoka-minutes-batch] ${year}年の会期を検索します...（対象期間: ${from}以降）`);
   const sessions = await listSessionsForYear({ code: CODE, year });
   console.log(`[fetch-nobeoka-minutes-batch] ${sessions.length}件の会期が見つかりました。`);
 
   /** @type {{sessionTitle: string, fileName: string, dayLabel: string, memberSegment: object, answerSegment: object|null, memberId: string}[]} */
   const targets = [];
+  let excludedDays = 0;
 
   for (const session of sessions) {
     if (targets.length >= limit) break;
     const days = await listMeetingDays({ code: CODE, sessionLabel: session.treedepth });
     for (const day of days) {
       if (targets.length >= limit) break;
+      const isoDate = fileNameToIsoDate(day.fileName);
+      if (isoDate && isoDate < from) {
+        excludedDays++;
+        continue;
+      }
       const { segments } = await listSpeakerSegments({ code: CODE, fileName: day.fileName });
       for (let i = 0; i < segments.length; i++) {
         if (targets.length >= limit) break;
@@ -90,6 +102,9 @@ async function main() {
     }
   }
 
+  if (excludedDays > 0) {
+    console.log(`[fetch-nobeoka-minutes-batch] 対象期間（${from}以降）より前のため、${excludedDays}件の本会議日を除外しました。`);
+  }
   console.log(`\n[fetch-nobeoka-minutes-batch] 取得対象（上限${limit}件）: ${targets.length}件`);
   for (const t of targets) {
     console.log(
@@ -134,6 +149,7 @@ async function main() {
             title: result.title,
             sessionTitle: t.sessionTitle,
             fileName: t.fileName,
+            meetingDate: fileNameToIsoDate(t.fileName),
             pos: seg.pos,
             speakerLabel: seg.speakerLabel,
             memberId: seg === t.memberSegment ? t.memberId : undefined,
