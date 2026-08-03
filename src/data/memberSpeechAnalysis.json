@@ -206,11 +206,11 @@
         "from": "2023-04-23",
         "to": null
       },
-      "analyzedSessionCount": 2,
+      "analyzedSessionCount": 3,
       "analysisStatus": "pending",
-      "generatedAt": "2026-08-02",
+      "generatedAt": "2026-08-03",
       "verifiedAt": null,
-      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの2会期では、次のような質問が確認されています。確認された主なテーマは、市長の政治姿勢、予算編成などです。このうち、市長の政治姿勢（2会期）は複数の会期で確認されています。質問の取り上げ方としては、現状確認、予算・数値の確認などが確認されています。市側からは、継続対応2件、実施済み1件などの答弁が確認されています。未解析の24会期はこの分析に含まれていません。",
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの3会期では、次のような質問が確認されています。確認された主なテーマは、市長の政治姿勢、デジタル、観光、企業、教育、道路などです。このうち、市長の政治姿勢（2会期）は複数の会期で確認されています。質問の取り上げ方としては、拡充の要望、検証の要望、現状確認、検証・所見確認、予算・数値の確認などが確認されています。市側からは、継続対応3件、検討中3件、実施予定3件、実施済み2件、実施中2件などの答弁が確認されています。未解析の23会期はこの分析に含まれていません。",
       "mainTopics": [
         {
           "label": "市長の政治姿勢",
@@ -222,6 +222,76 @@
           "sessionIds": [
             "2025-09",
             "2026-03"
+          ]
+        },
+        {
+          "label": "デジタル",
+          "statement": "デジタルについて、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "観光",
+          "statement": "観光について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "企業",
+          "statement": "企業について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "教育",
+          "statement": "教育について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "道路",
+          "statement": "道路について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "農林水産業",
+          "statement": "農林水産業について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "防災",
+          "statement": "防災について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m03-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
           ]
         },
         {
@@ -252,8 +322,20 @@
       "newTopics": [],
       "questionApproaches": [
         {
+          "label": "拡充の要望",
+          "count": 7
+        },
+        {
+          "label": "検証の要望",
+          "count": 3
+        },
+        {
           "label": "現状確認",
           "count": 2
+        },
+        {
+          "label": "検証・所見確認",
+          "count": 1
         },
         {
           "label": "予算・数値の確認",
@@ -263,19 +345,32 @@
       "answerStatusCounts": [
         {
           "label": "継続対応",
-          "count": 2
+          "count": 3
+        },
+        {
+          "label": "検討中",
+          "count": 3
+        },
+        {
+          "label": "実施予定",
+          "count": 3
         },
         {
           "label": "実施済み",
-          "count": 1
+          "count": 2
+        },
+        {
+          "label": "実施中",
+          "count": 2
         }
       ],
       "evidenceSpeechIds": [
         "m03-2026-02-26-daihyo-shitsumon",
-        "m03-2025-09-10-ippan-shitsumon"
+        "m03-2025-09-10-ippan-shitsumon",
+        "m03-2023-06-29-ippan-shitsumon"
       ],
       "limitations": [
-        "未解析の24会期は分析に含まれていません。"
+        "未解析の23会期は分析に含まれていません。"
       ]
     },
     {
@@ -659,11 +754,11 @@
         "from": "2023-04-23",
         "to": null
       },
-      "analyzedSessionCount": 2,
+      "analyzedSessionCount": 3,
       "analysisStatus": "pending",
-      "generatedAt": "2026-08-02",
+      "generatedAt": "2026-08-03",
       "verifiedAt": null,
-      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの2会期では、次のような質問が確認されています。確認された主なテーマは、愛宕山公園賑わい創出などです。このうち、愛宕山公園賑わい創出（2会期）は複数の会期で確認されています。質問の取り上げ方としては、今後の方針の確認、実施時期の確認などが確認されています。市側からは、検討中2件などの答弁が確認されています。未解析の24会期はこの分析に含まれていません。",
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの3会期では、次のような質問が確認されています。確認された主なテーマは、愛宕山公園賑わい創出、医療・健康、環境、道路、福祉などです。このうち、愛宕山公園賑わい創出（2会期）は複数の会期で確認されています。質問の取り上げ方としては、拡充の要望、現状確認、今後の方針の確認、実施時期の確認などが確認されています。市側からは、検討中6件などの答弁が確認されています。未解析の23会期はこの分析に含まれていません。",
       "mainTopics": [
         {
           "label": "愛宕山公園賑わい創出",
@@ -675,6 +770,46 @@
           "sessionIds": [
             "2025-09",
             "2026-03"
+          ]
+        },
+        {
+          "label": "医療・健康",
+          "statement": "医療・健康について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m08-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "環境",
+          "statement": "環境について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m08-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "道路",
+          "statement": "道路について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m08-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "福祉",
+          "statement": "福祉について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m08-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
           ]
         }
       ],
@@ -695,6 +830,14 @@
       "newTopics": [],
       "questionApproaches": [
         {
+          "label": "拡充の要望",
+          "count": 4
+        },
+        {
+          "label": "現状確認",
+          "count": 1
+        },
+        {
           "label": "今後の方針の確認",
           "count": 1
         },
@@ -706,15 +849,16 @@
       "answerStatusCounts": [
         {
           "label": "検討中",
-          "count": 2
+          "count": 6
         }
       ],
       "evidenceSpeechIds": [
         "m08-2026-02-27-ippan-shitsumon",
-        "m08-2025-09-09-ippan-shitsumon"
+        "m08-2025-09-09-ippan-shitsumon",
+        "m08-2023-06-29-ippan-shitsumon"
       ],
       "limitations": [
-        "未解析の24会期は分析に含まれていません。"
+        "未解析の23会期は分析に含まれていません。"
       ]
     },
     {
@@ -1377,12 +1521,42 @@
         "from": "2023-04-23",
         "to": null
       },
-      "analyzedSessionCount": 3,
+      "analyzedSessionCount": 4,
       "analysisStatus": "pending",
-      "generatedAt": "2026-08-02",
+      "generatedAt": "2026-08-03",
       "verifiedAt": null,
-      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの3会期では、次のような質問が確認されています。確認された主なテーマは、市長の政治姿勢、女性職員の登用、人権教育、男女共同参画などです。質問の取り上げ方としては、現状確認、今後の方針の確認、対応の要望などが確認されています。市側からは、継続対応2件、実施中1件などの答弁が確認されています。未解析の23会期はこの分析に含まれていません。",
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの4会期では、次のような質問が確認されています。確認された主なテーマは、医療・健康、環境、教育、市長の政治姿勢、女性職員の登用、人権教育などです。質問の取り上げ方としては、拡充の要望、検証・所見確認、現状確認、今後の方針の確認、所信の確認、対応の要望などが確認されています。市側からは、継続対応2件、検討中2件、実施中2件、実施予定2件、現時点では予定なし1件などの答弁が確認されています。未解析の22会期はこの分析に含まれていません。",
       "mainTopics": [
+        {
+          "label": "医療・健康",
+          "statement": "医療・健康について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m17-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "環境",
+          "statement": "環境について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m17-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "教育",
+          "statement": "教育について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m17-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
         {
           "label": "市長の政治姿勢",
           "statement": "市長の政治姿勢について、質問・質疑が確認されています（1会期）。",
@@ -1422,17 +1596,49 @@
           "sessionIds": [
             "2025-12"
           ]
+        },
+        {
+          "label": "都市整備",
+          "statement": "都市整備について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m17-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "防災",
+          "statement": "防災について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m17-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
         }
       ],
       "recurringTopics": [],
       "newTopics": [],
       "questionApproaches": [
         {
+          "label": "拡充の要望",
+          "count": 6
+        },
+        {
+          "label": "検証・所見確認",
+          "count": 1
+        },
+        {
           "label": "現状確認",
           "count": 1
         },
         {
           "label": "今後の方針の確認",
+          "count": 1
+        },
+        {
+          "label": "所信の確認",
           "count": 1
         },
         {
@@ -1446,17 +1652,30 @@
           "count": 2
         },
         {
+          "label": "検討中",
+          "count": 2
+        },
+        {
           "label": "実施中",
+          "count": 2
+        },
+        {
+          "label": "実施予定",
+          "count": 2
+        },
+        {
+          "label": "現時点では予定なし",
           "count": 1
         }
       ],
       "evidenceSpeechIds": [
         "m17-2026-02-25-kanren-shitsumon",
         "m17-2025-12-03-ippan-shitsumon",
-        "m17-2025-09-09-ippan-shitsumon"
+        "m17-2025-09-09-ippan-shitsumon",
+        "m17-2023-06-29-ippan-shitsumon"
       ],
       "limitations": [
-        "未解析の23会期は分析に含まれていません。"
+        "未解析の22会期は分析に含まれていません。"
       ]
     },
     {
@@ -2030,11 +2249,11 @@
         "from": "2023-04-23",
         "to": null
       },
-      "analyzedSessionCount": 3,
+      "analyzedSessionCount": 4,
       "analysisStatus": "pending",
-      "generatedAt": "2026-08-02",
+      "generatedAt": "2026-08-03",
       "verifiedAt": null,
-      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの3会期では、次のような質問が確認されています。確認された主なテーマは、DX推進人材の採用、最低賃金の引き上げ、東九州新幹線などです。質問の取り上げ方としては、現状確認、今後の方針の確認などが確認されています。市側からは、継続対応1件、実施中1件、実施予定1件などの答弁が確認されています。未解析の23会期はこの分析に含まれていません。",
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの4会期では、次のような質問が確認されています。確認された主なテーマは、DX推進人材の採用、環境、最低賃金の引き上げ、子育て、人口減少・移住、都市整備などです。質問の取り上げ方としては、拡充の要望、検証・所見確認、現状確認、検証の要望、今後の方針の確認、所信の確認などが確認されています。市側からは、継続対応3件、実施予定3件、関係機関と協議2件、検討中2件、実施中2件、調査・研究1件などの答弁が確認されています。未解析の22会期はこの分析に含まれていません。",
       "mainTopics": [
         {
           "label": "DX推進人材の採用",
@@ -2044,6 +2263,16 @@
           ],
           "sessionIds": [
             "2025-06"
+          ]
+        },
+        {
+          "label": "環境",
+          "statement": "環境について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m23-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
           ]
         },
         {
@@ -2057,6 +2286,36 @@
           ]
         },
         {
+          "label": "子育て",
+          "statement": "子育てについて、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m23-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "人口減少・移住",
+          "statement": "人口減少・移住について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m23-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "都市整備",
+          "statement": "都市整備について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m23-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
           "label": "東九州新幹線",
           "statement": "東九州新幹線について、質問・質疑が確認されています（1会期）。",
           "evidenceSpeechIds": [
@@ -2065,41 +2324,90 @@
           "sessionIds": [
             "2025-12"
           ]
+        },
+        {
+          "label": "道路・交通",
+          "statement": "道路・交通について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m23-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
+          "label": "防災",
+          "statement": "防災について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m23-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
         }
       ],
       "recurringTopics": [],
       "newTopics": [],
       "questionApproaches": [
         {
+          "label": "拡充の要望",
+          "count": 6
+        },
+        {
+          "label": "検証・所見確認",
+          "count": 3
+        },
+        {
           "label": "現状確認",
           "count": 2
         },
         {
+          "label": "検証の要望",
+          "count": 1
+        },
+        {
           "label": "今後の方針の確認",
+          "count": 1
+        },
+        {
+          "label": "所信の確認",
           "count": 1
         }
       ],
       "answerStatusCounts": [
         {
           "label": "継続対応",
-          "count": 1
-        },
-        {
-          "label": "実施中",
-          "count": 1
+          "count": 3
         },
         {
           "label": "実施予定",
+          "count": 3
+        },
+        {
+          "label": "関係機関と協議",
+          "count": 2
+        },
+        {
+          "label": "検討中",
+          "count": 2
+        },
+        {
+          "label": "実施中",
+          "count": 2
+        },
+        {
+          "label": "調査・研究",
           "count": 1
         }
       ],
       "evidenceSpeechIds": [
         "m23-2025-12-04-ippan-shitsumon",
         "m23-2025-09-11-ippan-shitsumon",
-        "m23-2025-06-18-ippan-shitsumon"
+        "m23-2025-06-18-ippan-shitsumon",
+        "m23-2023-06-29-ippan-shitsumon"
       ],
       "limitations": [
-        "未解析の23会期は分析に含まれていません。"
+        "未解析の22会期は分析に含まれていません。"
       ]
     },
     {
@@ -2108,12 +2416,22 @@
         "from": "2023-04-23",
         "to": null
       },
-      "analyzedSessionCount": 4,
+      "analyzedSessionCount": 5,
       "analysisStatus": "pending",
-      "generatedAt": "2026-08-02",
+      "generatedAt": "2026-08-03",
       "verifiedAt": null,
-      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの4会期では、次のような質問が確認されています。確認された主なテーマは、回覧板、行政における生成AI活用、国勢調査の調査員事務、自治会、人口減少・少子高齢化対策、予算編成などです。質問の取り上げ方としては、現状確認、今後の方針の確認、改善提案などが確認されています。市側からは、継続対応4件、実施予定1件、調査・研究1件などの答弁が確認されています。未解析の22会期はこの分析に含まれていません。",
+      "overview": "2023年4月23日以降の本会議のうち、現在解析済みの5会期では、次のような質問が確認されています。確認された主なテーマは、デジタル、回覧板、教育、行政における生成AI活用、国勢調査の調査員事務、市役所・職員などです。質問の取り上げ方としては、現状確認、拡充の要望、今後の方針の確認、改善提案、検証・所見確認、所信の確認などが確認されています。市側からは、継続対応5件、実施予定2件、検討中1件、現時点では予定なし1件、実施中1件、調査・研究1件などの答弁が確認されています。未解析の21会期はこの分析に含まれていません。",
       "mainTopics": [
+        {
+          "label": "デジタル",
+          "statement": "デジタルについて、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
         {
           "label": "回覧板",
           "statement": "回覧板について、質問・質疑が確認されています（1会期）。",
@@ -2122,6 +2440,16 @@
           ],
           "sessionIds": [
             "2026-03"
+          ]
+        },
+        {
+          "label": "教育",
+          "statement": "教育について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
           ]
         },
         {
@@ -2145,6 +2473,16 @@
           ]
         },
         {
+          "label": "市役所・職員",
+          "statement": "市役所・職員について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
           "label": "自治会",
           "statement": "自治会について、質問・質疑が確認されています（1会期）。",
           "evidenceSpeechIds": [
@@ -2165,6 +2503,16 @@
           ]
         },
         {
+          "label": "防災",
+          "statement": "防災について、質問・質疑が確認されています（1会期）。",
+          "evidenceSpeechIds": [
+            "m24-2023-06-29-ippan-shitsumon"
+          ],
+          "sessionIds": [
+            "2023-06"
+          ]
+        },
+        {
           "label": "予算編成",
           "statement": "予算編成について、質問・質疑が確認されています（1会期）。",
           "evidenceSpeechIds": [
@@ -2180,6 +2528,10 @@
       "questionApproaches": [
         {
           "label": "現状確認",
+          "count": 4
+        },
+        {
+          "label": "拡充の要望",
           "count": 3
         },
         {
@@ -2189,15 +2541,35 @@
         {
           "label": "改善提案",
           "count": 1
+        },
+        {
+          "label": "検証・所見確認",
+          "count": 1
+        },
+        {
+          "label": "所信の確認",
+          "count": 1
         }
       ],
       "answerStatusCounts": [
         {
           "label": "継続対応",
-          "count": 4
+          "count": 5
         },
         {
           "label": "実施予定",
+          "count": 2
+        },
+        {
+          "label": "検討中",
+          "count": 1
+        },
+        {
+          "label": "現時点では予定なし",
+          "count": 1
+        },
+        {
+          "label": "実施中",
           "count": 1
         },
         {
@@ -2209,10 +2581,11 @@
         "m24-2026-02-25-daihyo-shitsumon",
         "m24-2025-12-04-ippan-shitsumon",
         "m24-2025-09-10-ippan-shitsumon",
-        "m24-2025-06-19-ippan-shitsumon"
+        "m24-2025-06-19-ippan-shitsumon",
+        "m24-2023-06-29-ippan-shitsumon"
       ],
       "limitations": [
-        "未解析の22会期は分析に含まれていません。"
+        "未解析の21会期は分析に含まれていません。"
       ]
     },
     {
