@@ -1204,6 +1204,7 @@ export type SpeechSourceType =
 export type CouncilSpeechType =
   | "一般質問"
   | "代表質問"
+  | "関連質問"
   | "総括質疑"
   | "議案質疑"
   | "討論"
