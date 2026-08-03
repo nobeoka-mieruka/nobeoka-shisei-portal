@@ -4,7 +4,8 @@ import themesData from "../data/themes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
 import membersData from "../data/members.json";
-import type { CouncilMember, CouncilSession, CouncilSpeechSummaryData, Theme } from "../types";
+import formerMembersData from "../data/formerMembers.json";
+import type { CouncilMember, CouncilSession, CouncilSpeechSummaryData, FormerMember, Theme } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
@@ -13,7 +14,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
-import { findSpeechesByThemeSlug } from "../lib/councilSpeeches";
+import { findSpeechesByThemeSlug, resolveMemberDisplayName } from "../lib/councilSpeeches";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -22,6 +23,7 @@ const themes = themesData as Theme[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const councilSessions = councilSessionsData as CouncilSession[];
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -160,13 +162,13 @@ export function ThemeDetailPage() {
         ) : (
           <ul className="mt-2 space-y-3">
             {filteredMatches.map(({ memberId: mId, speech, matchedTopics }) => {
-              const member = members.find((m) => m.id === mId);
+              const memberName = resolveMemberDisplayName(mId, members, formerMembers);
               const session = councilSessions.find((s) => s.id === speech.sessionId);
               return (
                 <li key={speech.id} className="rounded-lg border border-outline-variant p-3">
                   <div className="flex flex-wrap items-center gap-1.5">
                     <span className="text-xs text-on-surface-variant">
-                      {member?.name ?? mId}／{session?.title ?? speech.sessionId}
+                      {memberName}／{session?.title ?? speech.sessionId}
                       {speech.date && `／${formatJapaneseDate(speech.date)}`}
                     </span>
                     <SpeechSummaryStatusBadge status={speech.summaryStatus} />

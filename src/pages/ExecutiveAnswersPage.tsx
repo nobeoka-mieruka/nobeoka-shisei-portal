@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
 import membersData from "../data/members.json";
-import type { AnswererRole, CouncilMember, CouncilSession, CouncilSpeechSummaryData } from "../types";
+import formerMembersData from "../data/formerMembers.json";
+import type { AnswererRole, CouncilMember, CouncilSession, CouncilSpeechSummaryData, FormerMember } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SearchBar } from "../components/SearchBar";
@@ -12,7 +13,7 @@ import { StatCard } from "../components/StatCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { GlobeIcon } from "../components/icons";
-import { answererRoleLabels, collectExecutiveAnswers } from "../lib/councilSpeeches";
+import { answererRoleLabels, collectExecutiveAnswers, resolveMemberDisplayName } from "../lib/councilSpeeches";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -20,6 +21,7 @@ import { getSeoForPath } from "../lib/seo";
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const councilSessions = councilSessionsData as CouncilSession[];
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -136,7 +138,7 @@ export function ExecutiveAnswersPage() {
           {filtered.length > 0 && (
             <ul className="space-y-3">
               {filtered.map((e) => {
-                const member = members.find((m) => m.id === e.memberId);
+                const memberName = resolveMemberDisplayName(e.memberId, members, formerMembers);
                 const session = councilSessions.find((s) => s.id === e.sessionId);
                 return (
                   <li key={e.id} className="rounded-lg border border-outline-variant p-3">
@@ -150,7 +152,7 @@ export function ExecutiveAnswersPage() {
                       </span>
                     </div>
                     <p className="mt-1 text-xs text-on-surface-variant">
-                      質問議員：{member?.name ?? e.memberId}／質問「{e.questionTitle}」
+                      質問議員：{memberName}／質問「{e.questionTitle}」
                     </p>
                     <p className="mt-1.5 text-sm leading-relaxed text-on-surface">{e.summary}</p>
                     <p className="mt-1 text-[11px] text-on-surface-variant">この要約はAIを利用して作成しています。正確な内容は会議録原文をご確認ください。</p>

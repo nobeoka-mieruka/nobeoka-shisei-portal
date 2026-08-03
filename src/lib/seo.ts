@@ -11,6 +11,7 @@
  *   （サイトマップのlastmodと矛盾しないようにするため）。
  */
 import membersData from "../data/members.json";
+import formerMembersData from "../data/formerMembers.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
@@ -29,6 +30,7 @@ import type {
   CouncilSession,
   CouncilSpeechSummaryData,
   FinanceDashboardData,
+  FormerMember,
   GeneralQuestionItem,
   Mayor,
   MayorEntertainmentExpensesData,
@@ -72,6 +74,7 @@ const SITE_IDENTITY_DESCRIPTION =
   "延岡市の市長、市議会議員、会派、議会活動、市政に関する情報を市民に分かりやすく伝えることを目的とした情報サイトです。延岡市や延岡市議会が運営する公式サイトではありません。";
 
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
@@ -786,7 +789,9 @@ function memberSeo(id: string, options?: SeoOptions): SeoResult {
  * （サイトマップ・プリレンダリング対象にも含まれない。scripts/lib/public-routes.mjs参照）。
  */
 function speechDetailSeo(memberId: string, speechId: string, options?: SeoOptions): SeoResult {
-  const member = members.find((m) => m.id === memberId);
+  const activeMember = members.find((m) => m.id === memberId);
+  const formerMember = !activeMember ? formerMembers.find((m) => m.id === memberId) : undefined;
+  const member = activeMember ?? formerMember;
   const speech = member && findPublishedSpeech(speechSummaryData, memberId, speechId);
   if (!member || !speech) return notFound(`/members/${memberId}/questions/${speechId}`, "一般質問・質疑の要約");
 

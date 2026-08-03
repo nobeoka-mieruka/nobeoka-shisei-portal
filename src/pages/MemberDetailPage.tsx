@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
+import formerMembersData from "../data/formerMembers.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
@@ -9,6 +10,7 @@ import councilSessionsData from "../data/councilSessions.json";
 import type {
   BillCategory,
   CouncilMember,
+  FormerMember,
   GeneralQuestionItem,
   BillVoteItem,
   CouncilSpeechSummaryData,
@@ -50,6 +52,8 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
+const councilSessions = councilSessionsData as CouncilSession[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
@@ -68,6 +72,7 @@ export function MemberDetailPage() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const member = members.find((m) => m.id === id);
+  const formerMember = !member ? formerMembers.find((m) => m.id === id) : undefined;
   const seo = getSeoForPath(location.pathname);
   const selectedTopic = searchParams.get("questionTopic") ?? "";
 
@@ -134,6 +139,57 @@ export function MemberDetailPage() {
   );
 
   usePageTitle();
+
+  if (formerMember) {
+    const formerSpeechRecord = findMemberSpeechRecord(speechSummaryData.members, formerMember.id);
+    const formerSpeeches = publicSpeeches(formerSpeechRecord);
+    return (
+      <div className="space-y-4 px-4 py-4 sm:px-6">
+        <Breadcrumbs items={seo.breadcrumbs} />
+        <BackLink to="/" label="議員一覧に戻る" />
+        <div className="rounded-2xl bg-surface-container-low p-5 shadow-e1 sm:p-6">
+          <span className="rounded-full bg-surface-container-lowest px-2.5 py-0.5 text-xs font-semibold text-on-surface">
+            元議員（現職ではありません）
+          </span>
+          <h1 className="mt-2 text-2xl font-semibold text-on-surface">{formerMember.name}</h1>
+          <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{formerMember.note}</p>
+          {formerMember.sourceNote && (
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{formerMember.sourceNote}</p>
+          )}
+          {formerMember.lastVerified && (
+            <p className="mt-2 text-xs text-on-surface-variant">確認日：{formatJapaneseDate(formerMember.lastVerified)}</p>
+          )}
+        </div>
+
+        <SectionCard title="在職当時の一般質問・発言記録">
+          {formerSpeeches.length === 0 ? (
+            <p className="text-sm text-on-surface-variant">公開している発言記録はまだありません。</p>
+          ) : (
+            <ul className="space-y-2">
+              {formerSpeeches.map((s) => {
+                const session = councilSessions.find((cs) => cs.id === s.sessionId);
+                return (
+                  <li key={s.id}>
+                    <Link
+                      to={`/members/${formerMember.id}/questions/${s.id}`}
+                      className={`block rounded-lg bg-surface-container-high p-3 text-sm text-primary hover:underline ${linkClass}`}
+                    >
+                      {session?.title ?? s.sessionId}
+                      {s.date && `（${formatJapaneseDate(s.date)}）`}の{s.speechType}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </SectionCard>
+
+        <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+          この人物は現職議員ではないため、議員一覧・報酬比較・議員比較等の対象には含まれません。当時（在職していた会期）の一般質問記録のみ、過去の議会活動の記録として掲載しています。
+        </p>
+      </div>
+    );
+  }
 
   if (!member) {
     return (

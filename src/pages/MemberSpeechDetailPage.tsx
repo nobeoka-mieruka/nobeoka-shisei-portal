@@ -1,8 +1,9 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import membersData from "../data/members.json";
+import formerMembersData from "../data/formerMembers.json";
 import councilSessionsData from "../data/councilSessions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
-import type { CouncilMember, CouncilSession, CouncilSpeechSummaryData } from "../types";
+import type { CouncilMember, CouncilSession, CouncilSpeechSummaryData, FormerMember } from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -15,8 +16,19 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+
+/** 現職議員（members.json）に一致しない場合、元議員（formerMembers.json）を確認する。 */
+function findMemberOrFormer(id: string | undefined): { id: string; name: string; isFormer: boolean } | undefined {
+  if (!id) return undefined;
+  const active = members.find((m) => m.id === id);
+  if (active) return { id: active.id, name: active.name, isFormer: false };
+  const former = formerMembers.find((m) => m.id === id);
+  if (former) return { id: former.id, name: former.name, isFormer: true };
+  return undefined;
+}
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -46,7 +58,7 @@ function exchangeSpeakerLabel(
 export function MemberSpeechDetailPage() {
   const { memberId, speechId } = useParams<{ memberId: string; speechId: string }>();
   const location = useLocation();
-  const member = members.find((m) => m.id === memberId);
+  const member = findMemberOrFormer(memberId);
   const speech = member && speechId ? findPublishedSpeech(speechSummaryData, member.id, speechId) : undefined;
   const seo = getSeoForPath(location.pathname);
 
@@ -79,6 +91,11 @@ export function MemberSpeechDetailPage() {
             {speech.speechType}
           </span>
           <SpeechSummaryStatusBadge status={speech.summaryStatus} />
+          {member.isFormer && (
+            <span className="rounded-full bg-surface-container-lowest px-2.5 py-0.5 text-xs font-semibold text-on-surface">
+              元議員（当時の在職記録）
+            </span>
+          )}
         </div>
         <h1 className="mt-2 text-xl font-semibold leading-snug text-on-primary-container sm:text-2xl">
           {member.name}議員の{speech.speechType}

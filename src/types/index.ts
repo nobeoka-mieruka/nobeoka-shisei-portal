@@ -138,6 +138,23 @@ export interface CouncilMember extends SourceMeta {
 }
 
 /**
+ * 現職ではない元議員（src/data/formerMembers.json）。
+ * 過去会期の一般質問・発言履歴を保持するための最小限の人物データで、CouncilMemberとは
+ * 別の管理単位。現職議員一覧・比較・集計の対象には含めない。
+ */
+export interface FormerMember {
+  id: string;
+  name: string;
+  nameKana?: string | null;
+  status: "former";
+  /** 在職・発言を公式資料で確認できた会期IDの一覧（sessionId、例: "2024-12"）。 */
+  servedSessions: string[];
+  note: string;
+  sourceNote?: string;
+  lastVerified?: string | null;
+}
+
+/**
  * 公約の進捗区分。独自の評価に見えないよう、事実の確認状況を表す語だけを使う。
  * "取組中" は旧データとの後方互換のために残している値。
  */

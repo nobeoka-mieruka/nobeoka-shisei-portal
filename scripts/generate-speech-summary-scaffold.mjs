@@ -18,6 +18,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 const membersPath = join(root, "src", "data", "members.json");
+const formerMembersPath = join(root, "src", "data", "formerMembers.json");
 const sessionsPath = join(root, "src", "data", "councilSessions.json");
 const outPath = join(root, "src", "data", "councilSpeechSummaries.json");
 
@@ -45,6 +46,8 @@ function emptyMemberRecord(memberId) {
 
 function main() {
   const members = readJson(membersPath);
+  const formerMembers = existsSync(formerMembersPath) ? readJson(formerMembersPath) : [];
+  const formerMemberIds = new Set(formerMembers.map((m) => m.id));
   const sessions = readJson(sessionsPath);
   const totalSessionCount = sessions.length;
 
@@ -74,18 +77,24 @@ function main() {
   }
 
   // members.jsonに存在しない議員IDのレコードは残さない（削除された議員データの整合性維持）。
+  // ただし、formerMembers.jsonに登録済みの元議員（過去会期の発言履歴として意図的に保持する
+  // レコード）は、現職ではなくなっていてもここでは削除しない。
   const memberIds = new Set(members.map((m) => m.id));
   for (const id of [...byMemberId.keys()]) {
-    if (!memberIds.has(id)) {
+    if (!memberIds.has(id) && !formerMemberIds.has(id)) {
       byMemberId.delete(id);
       touched++;
     }
   }
 
+  const formerMemberRecords = [...byMemberId.entries()]
+    .filter(([id]) => formerMemberIds.has(id))
+    .map(([, record]) => record);
+
   const nextData = {
     version: 1,
     generatedAt: existing.generatedAt,
-    members: members.map((m) => byMemberId.get(m.id)).filter(Boolean),
+    members: [...members.map((m) => byMemberId.get(m.id)).filter(Boolean), ...formerMemberRecords],
   };
 
   console.log(

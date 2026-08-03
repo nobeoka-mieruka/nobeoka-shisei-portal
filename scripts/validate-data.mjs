@@ -27,6 +27,28 @@ function isBlank(v) {
   return typeof v !== "string" || v.trim().length === 0;
 }
 
+// --- formerMembers.json（現職ではない元議員。過去会期の発言履歴を保持するための別マスター） ---
+let formerMemberIds = new Set();
+const formerMemberServedSessions = new Map();
+try {
+  const formerMembers = readJson("src/data/formerMembers.json");
+  if (!Array.isArray(formerMembers)) throw new Error("配列ではありません");
+  for (const fm of formerMembers) {
+    formerMemberServedSessions.set(fm.id, new Set(Array.isArray(fm.servedSessions) ? fm.servedSessions : []));
+    const tag = `formerMembers.json (${fm.id ?? "id不明"})`;
+    if (isBlank(fm.id)) err(tag, "idが空です");
+    else if (formerMemberIds.has(fm.id)) err(tag, `idが重複しています: ${fm.id}`);
+    else formerMemberIds.add(fm.id);
+    if (isBlank(fm.name)) err(tag, "nameが空です");
+    if (!Array.isArray(fm.servedSessions) || fm.servedSessions.length === 0) {
+      err(tag, "servedSessionsが空です（在職を確認できた会期を1件以上指定してください）");
+    }
+    if (fm.lastVerified && !DATE_RE.test(fm.lastVerified)) err(tag, `lastVerifiedの形式が不正です: ${fm.lastVerified}`);
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") warn("formerMembers.json", `読み込みに失敗しました: ${e.message}`);
+}
+
 // --- members.json ---
 const members = readJson("src/data/members.json");
 const memberIds = new Set();
@@ -63,6 +85,9 @@ for (const m of members) {
   }
   for (const q of m.questions ?? []) {
     if (q.date && !DATE_RE.test(q.date)) err(tag, `questions[].dateの形式が不正です: ${q.date}`);
+  }
+  if (formerMemberIds.has(m.id)) {
+    err(tag, `現職議員IDと元議員（formerMembers.json）IDが重複しています: ${m.id}`);
   }
 }
 
@@ -1001,7 +1026,12 @@ try {
     for (const record of speechData.members) {
       const tag = `councilSpeechSummaries.json (${record.memberId ?? "議員id不明"})`;
       if (isBlank(record.memberId)) err(tag, "memberIdが空です");
-      else if (!memberIds.has(record.memberId)) err(tag, `存在しない議員IDです: ${record.memberId}`);
+      else if (!memberIds.has(record.memberId) && !formerMemberIds.has(record.memberId)) {
+        err(tag, `現職・元議員のいずれのIDにも一致しません: ${record.memberId}`);
+      }
+      if (record.isFormerMember && !formerMemberIds.has(record.memberId)) {
+        err(tag, `isFormerMember:trueですがformerMembers.jsonに存在しないIDです: ${record.memberId}`);
+      }
       if (seenMemberIds.has(record.memberId)) err(tag, `同じ議員のレコードが重複しています: ${record.memberId}`);
       else seenMemberIds.add(record.memberId);
 
@@ -1021,6 +1051,17 @@ try {
         }
         if (isBlank(speech.sessionId) || !sessionIdSet.has(speech.sessionId)) {
           err(speechTag, `存在しない会期IDです: ${speech.sessionId}`);
+        }
+        if (formerMemberIds.has(record.memberId)) {
+          const served = formerMemberServedSessions.get(record.memberId);
+          if (!served || served.size === 0) {
+            warn(speechTag, `元議員のservedSessionsが未設定のため、会期時点の在職を確認できません（needsReview）`);
+          } else if (speech.sessionId && !served.has(speech.sessionId)) {
+            err(
+              speechTag,
+              `元議員の在職確認済み会期（servedSessions: ${[...served].join("、")}）に含まれない会期の発言です: ${speech.sessionId}（推測で在職期間を広げないでください）`,
+            );
+          }
         }
         if (speech.date !== null && speech.date !== undefined && !DATE_RE.test(speech.date)) {
           err(speechTag, `dateの形式が不正です: ${speech.date}`);
@@ -1134,7 +1175,9 @@ try {
     for (const a of analysisData.members) {
       const tag = `memberSpeechAnalysis.json (${a.memberId ?? "議員id不明"})`;
       if (isBlank(a.memberId)) err(tag, "memberIdが空です");
-      else if (!memberIds.has(a.memberId)) err(tag, `存在しない議員IDです: ${a.memberId}`);
+      else if (!memberIds.has(a.memberId) && !formerMemberIds.has(a.memberId)) {
+        err(tag, `現職・元議員のいずれのIDにも一致しません: ${a.memberId}`);
+      }
       if (seenAnalysisMemberIds.has(a.memberId)) err(tag, `同じ議員のAI分析が重複しています: ${a.memberId}`);
       else seenAnalysisMemberIds.add(a.memberId);
 

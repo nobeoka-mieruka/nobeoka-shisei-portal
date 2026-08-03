@@ -1,10 +1,12 @@
 import type {
   AnswererRole,
+  CouncilMember,
   CouncilMemberSpeechRecord,
   CouncilSpeech,
   CouncilSpeechExchange,
   CouncilSpeechQuestionItem,
   CouncilSpeechSummaryData,
+  FormerMember,
   MemberSpeechAnalysis,
   MemberSpeechAnalysisStatus,
   SpeechSummaryStatus,
@@ -12,6 +14,18 @@ import type {
 import { isWithinCouncilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { normalizeTopicLabel } from "./topicNormalization";
 import { classifyTopicToThemeSlug } from "./themeClassification";
+
+/**
+ * 現職議員（members.json）に一致しない場合、元議員（formerMembers.json）を確認して氏名を返す。
+ * どちらにも一致しない場合はmemberIdをそのまま返す（表示が空にならないようにするフォールバック）。
+ */
+export function resolveMemberDisplayName(
+  memberId: string,
+  members: CouncilMember[],
+  formerMembers: FormerMember[],
+): string {
+  return members.find((m) => m.id === memberId)?.name ?? formerMembers.find((m) => m.id === memberId)?.name ?? memberId;
+}
 
 export const memberSpeechAnalysisStatusLabels: Record<MemberSpeechAnalysisStatus, string> = {
   verified: "AI分析・内容確認済み",
