@@ -5506,21 +5506,49 @@
     {
       "memberId": "m11",
       "analysisPeriod": {
-        "from": "2025-12-02",
+        "from": "2023-09-06",
         "to": "2025-12-02"
       },
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 1,
-      "sessionsWithSpeechCount": 1,
+      "analyzedSessionCount": 2,
+      "sessionsWithSpeechCount": 2,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 25,
-      "lastAnalyzedAt": "2026-08-02",
+      "unfetchedSessionCount": 24,
+      "lastAnalyzedAt": "2026-08-03",
       "topicCounts": [
         {
           "topic": "市長の政治姿勢",
+          "sessionCount": 1
+        },
+        {
+          "topic": "農業",
+          "sessionCount": 1
+        },
+        {
+          "topic": "医療・福祉",
+          "sessionCount": 1
+        },
+        {
+          "topic": "子育て",
+          "sessionCount": 1
+        },
+        {
+          "topic": "防災・減災",
+          "sessionCount": 1
+        },
+        {
+          "topic": "スポーツ",
+          "sessionCount": 1
+        },
+        {
+          "topic": "環境",
+          "sessionCount": 1
+        },
+        {
+          "topic": "市役所・職員",
           "sessionCount": 1
         }
       ],
@@ -5585,9 +5613,849 @@
           ],
           "verifiedAt": "2026-08-02",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。"
+        },
+        {
+          "id": "m11-2023-09-06-ippan-shitsumon",
+          "memberId": "m11",
+          "sessionId": "2023-09",
+          "date": "2023-09-06",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "農業",
+            "医療・福祉",
+            "子育て",
+            "防災・減災",
+            "スポーツ",
+            "環境",
+            "市役所・職員"
+          ],
+          "shortSummary": "令和5年9月定例会（第3号）で北林幹雄議員が行った一般質問の要約です。子牛価格低迷への畜産農家支援、食の危機対策、医師・看護師不足対策、保育園定員数の適正化、河道掘削事業、国民スポーツ大会への対応、新築家屋の合併浄化槽補助金、上水道未給水地への対応、総務課職員による窃盗事件と管理監督体制について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "子牛価格低迷への支援（畜産農家支援）",
+              "questionSummary": "北林議員は、子牛価格の低迷により経営が圧迫されている肥育・繁殖農家、特に新規参入した若手経営者への借入金返済・利子補給等の市独自支援の考えを市長に尋ねた。",
+              "answerSummary": "市長は、繁殖牛増頭補助やキャトルセンター利用料補助、子牛購入費助成、増頭・施設拡大資金の利子・保証料の全額支援、7月補正での飼料高騰対策等、既存の市独自支援策を説明し、若手農家の多くは利子の大半を国・県・市が助成する制度資金を利用しているとして、今後も関係機関と協議しながら必要に応じ対策強化を検討するとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "子牛価格低迷による若手肥育・繁殖農家への市独自支援（利子補給等）の考えを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "既存の市独自支援策を説明し、今後の関係機関との協議・検討を述べた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q2",
+              "title": "食の危機対策・農林水産費の増額",
+              "questionSummary": "北林議員は、我が国の食料自給率の低さや食の安全保障上の懸念を踏まえ、本市農林水産費のさらなる増額や、後継者・遊休農地対策のプラン形成の有無を市長に尋ねた。",
+              "answerSummary": "市長は、令和5年度7月補正後の農林水産業費が約24.3億円（平成29年度比約1.5倍）であることを説明し、延岡市農業所得アップアクションプランに基づくベストミックス拡大や園芸用ハウス整備補助等の施策、7月補正での燃料等価格高騰対策予算、国のデジタル田園都市国家構想交付金を活用した中山間地域振興の3か年計画等を紹介し、食料確保は一義的に国の役割であるとして骨太方針2023に基づく国への要望を続けるとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "農林水産費のさらなる増額や食の危機対策のプラン形成について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "現行の農林水産費の水準と各種振興施策、国への要望方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q3",
+              "title": "牛肉プレミアム商品券・地元食材活用キャンペーン",
+              "questionSummary": "北林議員は、牛肉限定のプレミアム商品券発行の考えと、学校給食など地元食材活用による農業活性化キャンペーンの実施について市長に尋ねた。",
+              "answerSummary": "市長は、県の新たな補正予算による価格低下部分の穴埋め制度に期待を示しつつ県・ミヤチク等と意見交換するとし、ECサイト「のべちょる」の販売促進等、地元農産物の販売促進策を既に講じているとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "牛肉限定プレミアム商品券発行の考えを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "県の新制度への期待と関係者との意見交換の方針を述べた。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "学校給食等での地元食材活用キャンペーンの実施を提案した。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "ECサイト「のべちょる」の販売促進等の既存施策を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q4",
+              "title": "医師・看護師不足対策",
+              "questionSummary": "北林議員は、県北・延岡市の深刻な医師・看護師不足を踏まえ、医師・看護師に本市にとどまってもらうための対応策を市長に尋ねた。",
+              "answerSummary": "市長は、県立延岡病院の医師確保について14年以上要請を続けているが改善が見られない現状を説明し、市独自の病院誘致補助や産婦人科・小児科医師雇用支援、看護専門学校運営費補助、復職支援研修補助等の取り組みに加え、空飛ぶクルマによる先進的医療の展開を医師・看護師確保の新たな訴求点として挙げた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "医師・看護師に本市にとどまってもらうための対応策を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "県立病院医師確保の要請状況と市独自の各種支援策、空飛ぶクルマ構想を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q5",
+              "title": "看護師奨学金制度（就学時応援資金）の進捗",
+              "questionSummary": "北林議員は、看護師育成のための奨学金制度確立の検討状況を市長に尋ねた。",
+              "answerSummary": "健康福祉部長は、金額等は未確定だが「奨学金」ではなく「就学時応援資金」の名称で医師会長・理事と協議中であり、今後この方向で看護師募集に力を入れたいと答弁した。",
+              "answerers": [
+                "市長",
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "看護師育成奨学金制度の検討状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "検討状況の概要を述べ、詳細は健康福祉部長に答弁を委ねた。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "「就学時応援資金」の名称で医師会と協議中であることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q6",
+              "title": "県立延岡病院の輪番制の改善",
+              "questionSummary": "北林議員は、14年続く医師輪番制の異常な状態を正常化するための方策と、議会としての協力体制について市長に尋ねた。",
+              "answerSummary": "市長は、宮崎大学に加え大分大学・熊本大学にも医師派遣を要請してきた経緯を説明し、県議会議員への働きかけの場に議会にも参加を求め、共に県・国立大学へ要請していく考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "輪番制を正常化するための方策を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "他県の国立大学への要請等、これまでの取り組みを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "議会としても協力体制をつくりたいと提案した。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "県議会議員への説明の場に議会の参加・協力を求める考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q7",
+              "title": "保育園定員数の適正化・保育士確保",
+              "questionSummary": "北林議員は、定員割れ保育所の割合・数の10年間の推移、ゼロ・一歳児の入所困難な推定人数と必要保育士数、保育士確保が親・事業所双方に関わる課題であることへの見解を尋ねた。",
+              "answerSummary": "健康福祉部長は、定員割れ施設の割合が平成27年度27％から令和5年8月時点76％まで上昇していると説明し、利用定員は延岡市子ども・子育て会議での協議を経て見直していると答弁した。ゼロ・一歳児の入所困難な推定人数は約100名とし、保育士確保策として小田原短期大学の誘致や就業支援（12名、5年勤務で返還免除）、九州各県への人材確保訪問等を挙げた。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "定員割れ保育所の推移と定員適正化の考えを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "定員割れ割合の推移と利用定員見直しの手続きを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "ゼロ・一歳児の入所困難な推定人数と必要保育士数を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "手元に資料がなく後日答弁するとした。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "保育士確保が親・事業所双方に関わる課題であるとの認識を尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "小田原短期大学誘致や就業支援等の保育士確保策を説明した。"
+                },
+                {
+                  "order": 7,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "ゼロ・一歳児の入所困難な推定人数を約100名と答弁した（保留事項への後日回答）。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q8",
+              "title": "河道掘削事業の推進",
+              "questionSummary": "北林議員は、河道掘削事業の未整備箇所の認識、目標達成率、堆積砂利が繰り返される原因分析について都市建設部長に尋ねた。",
+              "answerSummary": "都市建設部長は、五ヶ瀬川・北川・祝子川・小川・曽木川等で未実施箇所が多く残ると認識し、国・県への要望18件中5件が事業実施中（約30％）と答弁した。堆積の原因は近年の大雨や山林荒廃による土砂流出の影響が大きいとした。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "河道掘削事業の未整備箇所の認識を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "未実施箇所が多く残る河川を挙げ、国・県への働きかけを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "河道掘削の目標達成率を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "要望18件中5件、約30％の実施率と答弁した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "堆積砂利が繰り返される原因の分析状況を尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "近年の大雨や山林荒廃による土砂流出が要因の一つとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q9",
+              "title": "国民スポーツ大会への対応（宿泊施設・選手育成）",
+              "questionSummary": "北林議員は、令和9年の国民スポーツ大会に向けた宿泊施設の確保見込みと、宮崎県選手の育成・誘致の取り組み状況を尋ねた。",
+              "answerSummary": "企画部長は、来客数を約7.5万人と見込み、県北5市町の宿泊可能人数は1日当たり2,111人であるが、ピーク時には宮崎県内全域・大分県も含めた宿泊が必要になり得るとし、市所有施設（浜木綿村・清流荘・須美江家族旅行村・旧下鹿川小学校）の改修整備を進めるとした。教育部長は、選手育成・誘致は県主体で進めており、本市も小中高連携事業やレガシー形成事業を通じて競技力向上・底辺拡大に取り組むと答弁した。",
+              "answerers": [
+                "企画部長",
+                "教育部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "宿泊施設の確保見込みと来客数の分析を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "来客数見込みと宿泊施設整備の取り組みを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "宮崎県選手の育成・誘致の取り組み状況を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育部長",
+                  "summary": "県主体の取り組みと本市の小中高連携事業等を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q10",
+              "title": "新築家屋への合併浄化槽補助金",
+              "questionSummary": "北林議員は、新築家屋には適用されない合併浄化槽補助金について、市独自に適用対象を拡大する考えがないか、新築家屋数や補助した場合の見込み額を尋ねた。",
+              "answerSummary": "市民環境部長は、補助制度は単独処理浄化槽から合併処理浄化槽への転換を誘導する目的であり、新築家屋への補助は財政負担や事業目的の観点から研究課題とし、新築家屋数等のデータは手元になく後日報告するとした。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "新築家屋への合併浄化槽補助金の適用拡大を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "現行補助制度の目的を説明し、新築家屋への補助は研究課題とした。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "過去5年間の新築家屋数と補助した場合の見込み額を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "手元に資料がなく後日報告するとした。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "定住前提の新築家屋への優遇の考えを尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "現行制度の目的を再度説明し、新築への補助は検討していないとした。"
+                },
+                {
+                  "order": 7,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "定住優先の観点から再度配慮を求めた。"
+                },
+                {
+                  "order": 8,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "他市の状況等を調査し検討したいとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "調査・研究"
+            },
+            {
+              "id": "q11",
+              "title": "上水道未給水地への対応",
+              "questionSummary": "北林議員は、上水道未給水地（約1,370人）における衛生的な水の供給を100％にする対応策と、必要とする世帯数の調査の考えを尋ねた。",
+              "answerSummary": "市民環境部長は、令和4年度に補助上限額の撤廃や戸数制限の緩和等、他市より手厚い補助制度拡充を行ってきたと説明し、令和5年3月末時点で15地区に未整備地区があると把握しているとした上で、今後も住民意見を聞きながら検討するとした。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "上水道未給水地への対応策を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "既存の補助制度拡充の内容を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "衛生的な水を必要とする世帯数の調査を提案した。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "15地区に未整備地区があると把握していると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q12",
+              "title": "総務課職員の窃盗事件と管理監督体制",
+              "questionSummary": "北林議員は、総務課職員による公物（カメラレンズ等）窃取事件について、発生日・発覚日・懲戒処分日・返還請求日を尋ね、事件発覚後約1年間、管理監督者が市長・副市長への報告を保留していた経緯や、宮日新聞論説の「政治への忖度」との指摘に対する市長の見解を尋ねた。",
+              "answerSummary": "総務部長は、事件発生を令和4年4月頃～令和5年2月頃、実態としての発覚を令和4年7月28日（同僚が確認）、当該職員による窃取自認を令和5年6月19日、懲戒処分を令和5年8月1日とし、告訴に必要な書類は警察に提出済み、賠償請求は監査委員の判断待ちと答弁した。市長は「政治への忖度」との指摘は自身を指すものとは考えていないとし、管理監督者が報告を保留した理由は職員の心身負担への配慮と説明を受けているが、いかなる理由でも大至急報告すべき案件であり問題があったとして、市長・副市長の給料減額条例案を提出したこと、職員研修やマニュアル改定等により報告・連絡・相談を確実にする取り組みに既に着手していると答弁した。",
+              "answerers": [
+                "総務部長",
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "窃盗事件の各日付（発生・発覚・処分・返還請求）を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "各日付と告訴・賠償請求の状況を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "報告が約1年保留された経緯と宮日新聞論説「政治への忖度」への市長の見解を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "忖度の指摘は自身を指すものではないとし、報告保留は問題であり給料減額条例案を提出したと説明した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m11",
+                  "summary": "報告が保留された理由が不明であるとして、報連相を機能させる体制改善の考えを尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "警察による捜査への全面協力の方針と、職員研修・マニュアル改定等の取り組みに既に着手していると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：子牛価格低迷・食の危機）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/77824/10/1//0/0",
+              "speakerSection": "pos=77824"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/81910/10/1//0/0",
+              "speakerSection": "pos=81910"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 議長（松田満男君）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/85394/10/1//0/0",
+              "speakerSection": "pos=85394"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：牛肉プレミアム商品券）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/85456/10/1//0/0",
+              "speakerSection": "pos=85456"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/85826/10/1//0/0",
+              "speakerSection": "pos=85826"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：地元食材活用）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/86440/10/1//0/0",
+              "speakerSection": "pos=86440"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/87058/10/1//0/0",
+              "speakerSection": "pos=87058"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：医師・看護師不足）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/88114/10/1//0/0",
+              "speakerSection": "pos=88114"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/88978/10/1//0/0",
+              "speakerSection": "pos=88978"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：看護師奨学金）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/93362/10/1//0/0",
+              "speakerSection": "pos=93362"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/93502/10/1//0/0",
+              "speakerSection": "pos=93502"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/93924/10/1//0/0",
+              "speakerSection": "pos=93924"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：輪番制）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/94226/10/1//0/0",
+              "speakerSection": "pos=94226"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/94550/10/1//0/0",
+              "speakerSection": "pos=94550"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：議会の協力）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/96310/10/1//0/0",
+              "speakerSection": "pos=96310"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/96722/10/1//0/0",
+              "speakerSection": "pos=96722"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：保育園定員数）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/97316/10/1//0/0",
+              "speakerSection": "pos=97316"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/98020/10/1//0/0",
+              "speakerSection": "pos=98020"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：ゼロ・一歳児入所）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/99032/10/1//0/0",
+              "speakerSection": "pos=99032"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（再答弁：資料なし）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/99338/10/1//0/0",
+              "speakerSection": "pos=99338"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：保育士確保）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/99442/10/1//0/0",
+              "speakerSection": "pos=99442"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/100140/10/1//0/0",
+              "speakerSection": "pos=100140"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：河道掘削事業）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/101056/10/1//0/0",
+              "speakerSection": "pos=101056"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/101704/10/1//0/0",
+              "speakerSection": "pos=101704"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：達成率）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/102746/10/1//0/0",
+              "speakerSection": "pos=102746"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/102872/10/1//0/0",
+              "speakerSection": "pos=102872"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：堆積要因）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/103156/10/1//0/0",
+              "speakerSection": "pos=103156"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/103400/10/1//0/0",
+              "speakerSection": "pos=103400"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：国民スポーツ大会）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/103892/10/1//0/0",
+              "speakerSection": "pos=103892"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 企画部長（吉岡修君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/104736/10/1//0/0",
+              "speakerSection": "pos=104736"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：選手育成誘致）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/106856/10/1//0/0",
+              "speakerSection": "pos=106856"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育部長（丸山真二君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/107334/10/1//0/0",
+              "speakerSection": "pos=107334"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：合併浄化槽補助金）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/108364/10/1//0/0",
+              "speakerSection": "pos=108364"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/109260/10/1//0/0",
+              "speakerSection": "pos=109260"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：新築家屋数）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/110206/10/1//0/0",
+              "speakerSection": "pos=110206"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（再答弁：資料なし）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/110434/10/1//0/0",
+              "speakerSection": "pos=110434"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：定住優遇）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/110518/10/1//0/0",
+              "speakerSection": "pos=110518"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/110740/10/1//0/0",
+              "speakerSection": "pos=110740"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：再度の要望）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/111324/10/1//0/0",
+              "speakerSection": "pos=111324"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/111520/10/1//0/0",
+              "speakerSection": "pos=111520"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：上水道未給水地）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/111760/10/1//0/0",
+              "speakerSection": "pos=111760"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/112284/10/1//0/0",
+              "speakerSection": "pos=112284"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：世帯数調査）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/112996/10/1//0/0",
+              "speakerSection": "pos=112996"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/113400/10/1//0/0",
+              "speakerSection": "pos=113400"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（質問：職員不祥事）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/113684/10/1//0/0",
+              "speakerSection": "pos=113684"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 総務部長（齋藤章二君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/114872/10/1//0/0",
+              "speakerSection": "pos=114872"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：市長への忖度に対する見解）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/116076/10/1//0/0",
+              "speakerSection": "pos=116076"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/117294/10/1//0/0",
+              "speakerSection": "pos=117294"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 北林幹雄君（再質問：報連相体制）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/118750/10/1//0/0",
+              "speakerSection": "pos=118750"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/119890/10/1//0/0",
+              "speakerSection": "pos=119890"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（追加答弁：ゼロ・一歳児推定人数）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/121694/10/1//0/0",
+              "speakerSection": "pos=121694"
+            }
+          ],
+          "verifiedAt": "2026-08-03",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全51セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上での質問及び全再質問について答弁本文を確認できた。総務課職員の窃盗事件に関する内容は、公表済みの懲戒処分・議会答弁の範囲のみを記載し、当該職員個人を特定する情報は含めていない。"
         }
       ],
-      "verificationNote": "会議録取得により生成した要約候補です。北林議員の一般質問には、この要約に含めた1テーマ以外にも、高市新政権の積極財政・減税政策への認識に関する質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。"
+      "verificationNote": "会議録取得により生成した要約候補です。北林議員の一般質問には、この要約に含めた1テーマ以外にも、高市新政権の積極財政・減税政策への認識に関する質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年9月定例会（2023年9月6日）分を追加した。"
     },
     {
       "memberId": "m12",
@@ -5702,18 +6570,18 @@
     {
       "memberId": "m13",
       "analysisPeriod": {
-        "from": "2025-06-19",
+        "from": "2023-09-06",
         "to": "2025-09-10"
       },
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 2,
-      "sessionsWithSpeechCount": 2,
+      "analyzedSessionCount": 3,
+      "sessionsWithSpeechCount": 3,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 24,
-      "lastAnalyzedAt": "2026-08-02",
+      "unfetchedSessionCount": 23,
+      "lastAnalyzedAt": "2026-08-03",
       "topicCounts": [
         {
           "topic": "商店街アーチの老朽化",
@@ -5725,6 +6593,26 @@
         },
         {
           "topic": "自治会区長の成り手不足",
+          "sessionCount": 1
+        },
+        {
+          "topic": "市役所・職員",
+          "sessionCount": 1
+        },
+        {
+          "topic": "環境",
+          "sessionCount": 1
+        },
+        {
+          "topic": "子育て",
+          "sessionCount": 1
+        },
+        {
+          "topic": "医療・健康",
+          "sessionCount": 1
+        },
+        {
+          "topic": "福祉",
           "sessionCount": 1
         }
       ],
@@ -5879,9 +6767,399 @@
           ],
           "verifiedAt": "2026-08-02",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、数値（区加入率68.7％等）、発言者、質問と答弁の対応関係を確認済み。"
+        },
+        {
+          "id": "m13-2023-09-06-ippan-shitsumon",
+          "memberId": "m13",
+          "sessionId": "2023-09",
+          "date": "2023-09-06",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "市役所・職員",
+            "環境",
+            "子育て",
+            "医療・健康",
+            "福祉"
+          ],
+          "shortSummary": "令和5年9月定例会（第3号）で小御門綾議員が行った、初当選後初めての一般質問の要約です。市職員の不祥事における組織的責任・事業者への対応、熊本県山都町の最終処分場問題、子育て支援策（保育料・給食費無償化）、子宮頸がんワクチン（HPV）の積極的勧奨、高齢者福祉バスの最少催行人数、ふるさと納税の使途、空き家活用モデル事業について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "市職員の不祥事における組織的責任と対応",
+              "questionSummary": "小御門議員は、窃取疑惑発覚後に上司へ適切な報告がなされなかった組織的責任と職場環境について市長に尋ねた。また、上下水道局の虚偽公文書作成事案について、関与した工事業者名の公表と、業者への聞き取りを行わずに処分を決定したことの妥当性を尋ねた。",
+              "answerSummary": "市長は、報告が遅れたことは大きな誤りであったとし、組織運営の責任として市長・担当副市長の給料減額条例案を今議会に提案しているとした。業者名は、責任の有無が不明な段階での公表は名誉毀損のおそれがあるため非公表とし、業者への聞き取りは警察から求められていないため行っておらず、捜査の妨げにならないよう警察の求める範囲で対応していると説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m13",
+                  "summary": "窃取疑惑での報告の遅れを踏まえた組織的責任・職場環境を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "報告の遅れは誤りだったとし、給料減額条例案の提案を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "職場環境自体に問題がなかったか改めて尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "勤務時間等から特段の問題はなかったとの認識を示した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "虚偽公文書作成事案での工事業者への聞き取りの必要性を尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "警察から聞き取りを求められておらず、捜査の妨げを避けるため行っていないと説明した。"
+                },
+                {
+                  "order": 7,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "十分な調査なしでの処分決定への懸念を重ねて示した。"
+                },
+                {
+                  "order": 8,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "市としてできる範囲の調査は行い、残りは警察の捜査に委ねる方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証・所見確認"
+            },
+            {
+              "id": "q2",
+              "title": "熊本県山都町の最終処分場問題",
+              "questionSummary": "小御門議員は、五ヶ瀬川上流（熊本県山都町）に計画される最終処分場問題について、流域市町村との連携・注視の姿勢を尋ねた。",
+              "answerSummary": "市は、宮崎県や西臼杵三町と連携・情報共有しながら対応するとした。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m13",
+                  "summary": "山都町最終処分場問題への注視・連携の姿勢を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "県・西臼杵三町との連携・情報共有を継続するとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q3",
+              "title": "子育て支援策（保育料・給食費無償化）",
+              "questionSummary": "小御門議員は、都城市の保育料完全無償化を踏まえた本市での実施可能性、希望する保育所への入所対策、学校給食費無償化への所見を尋ねた。",
+              "answerSummary": "市長は、独自無償化には年間約4億円の追加財源が必要で世代間バランス等の課題があるとし、国策としての実施を要望していくとした。市独自には保育料の3分の2軽減や多子軽減拡大等を実施しているとした。給食費無償化も年間約4億6千万円を要するとし、国の検討動向を注視しつつ市長会等を通じて国への要請を続けるとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m13",
+                  "summary": "保育料の完全無償化の実施可能性を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "財政負担の大きさを踏まえ、国策としての実施を要望する考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "関係機関と協議"
+            },
+            {
+              "id": "q4",
+              "title": "子宮頸がんワクチン（HPV）の積極的勧奨",
+              "questionSummary": "小御門議員は、本市のHPVワクチン接種率の低さ（中学1年6.5％・高校1年18％）を踏まえ、副反応に関するエビデンスの分かりやすい周知について、再質問の形で確認した。",
+              "answerSummary": "市は、ワクチンの有効性と子宮頸がん検診の併用による予防を推進するとし、副反応との因果関係が証明されていないことの周知や、産婦人科医会・医師会と連携した接種体制の研究・検討を進めるとした。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "副反応に関するエビデンスの分かりやすい周知を求めた。"
+                },
+                {
+                  "order": 2,
+                  "type": "follow-up-answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "有効性の周知と医師会と連携した接種体制の検討を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q5",
+              "title": "高齢者福祉バスの最少催行人数の緩和",
+              "questionSummary": "小御門議員は、高齢化・コロナ後の参加者減少により最少催行人数（20人）の確保が困難になっている高齢者福祉バス・ふれあいバスについて、対象事業の確認を含め要件緩和の状況を尋ねた。",
+              "answerSummary": "市は、高齢者福祉バス・ふれあいバスいずれについても、催行人数・料金面を含め見直しを検討するとした。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "見直し検討の対象が高齢者福祉バスかふれあいバスかを確認した。"
+                },
+                {
+                  "order": 2,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "両事業とも催行人数・料金面の見直しを検討するとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q6",
+              "title": "ふるさと納税の使途（答弁未確認）",
+              "questionSummary": "小御門議員は、令和4年度のふるさと納税額（企業版含む14億1,700万円）が実際にどのような事業に充てられたかを尋ねた。",
+              "answerSummary": "",
+              "answerers": [],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m13",
+                  "summary": "令和4年度ふるさと納税の充当事業を尋ねた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "pending",
+              "questionApproach": "検証の要望"
+            },
+            {
+              "id": "q7",
+              "title": "空き家活用モデル事業（山下新天街）",
+              "questionSummary": "小御門議員は、山下新天街の空き物件活用モデル事業（採択事業者は佐賀県の事業者）が採択から1年近く未着手である状況を踏まえ、物件の事前確認不足、家主への説明不足、地元事業者選定の可能性について尋ねた。",
+              "answerSummary": "市は、物件を決め打ちで募集したため事前確認できた面はあったとしつつ、各種補助制度の活用を前提とした提案だったと推測されるとした。事業は採択事業者と空き家所有者間の直接契約によるもので、現在は賃貸借契約が締結されているとした。地元事業者を優先選定しない理由は、全国から新たな発想を募る事業趣旨のためと説明した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m13",
+                  "summary": "物件の事前確認不足について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "決め打ち募集であったため確認できた面はあったと説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "家主への進捗説明不足を指摘した。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "現在は賃貸借契約が締結されていると説明した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m13",
+                  "summary": "地元事業者の優先選定の可能性を尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "全国から新たな発想を募る事業趣旨のため地元優先はしていないと説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証・所見確認"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（質問：不祥事）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/9192/10/1//0/0",
+              "speakerSection": "pos=9192"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/18592/10/1//0/0",
+              "speakerSection": "pos=18592"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問：職場環境）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/32350/10/1//0/0",
+              "speakerSection": "pos=32350"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/32576/10/1//0/0",
+              "speakerSection": "pos=32576"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問：業者聞き取り）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/32802/10/1//0/0",
+              "speakerSection": "pos=32802"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/33332/10/1//0/0",
+              "speakerSection": "pos=33332"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/34898/10/1//0/0",
+              "speakerSection": "pos=34898"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/35412/10/1//0/0",
+              "speakerSection": "pos=35412"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（質問：山都町処分場）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/36158/10/1//0/0",
+              "speakerSection": "pos=36158"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/36876/10/1//0/0",
+              "speakerSection": "pos=36876"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問：HPVワクチン）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/37032/10/1//0/0",
+              "speakerSection": "pos=37032"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/37848/10/1//0/0",
+              "speakerSection": "pos=37848"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問：高齢者福祉バス確認）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/39022/10/1//0/0",
+              "speakerSection": "pos=39022"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/39618/10/1//0/0",
+              "speakerSection": "pos=39618"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（質問：空き家活用事業）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/39852/10/1//0/0",
+              "speakerSection": "pos=39852"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/40236/10/1//0/0",
+              "speakerSection": "pos=40236"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問：家主説明）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/40876/10/1//0/0",
+              "speakerSection": "pos=40876"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/41290/10/1//0/0",
+              "speakerSection": "pos=41290"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 小御門綾君（再質問：地元事業者）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/41738/10/1//0/0",
+              "speakerSection": "pos=41738"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/42582/10/1//0/0",
+              "speakerSection": "pos=42582"
+            }
+          ],
+          "verifiedAt": "2026-08-03",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全21セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。質問の中で、議員本人が子宮頸がんの前がん病変で手術を受けた経験に触れているが、これは議員本人が公の場で自らの経験として政策論拠に用いた発言であり、原文の趣旨に沿って質問要約に反映した。上下水道局職員の不祥事に関するやり取り（q1）は、市長の発言をそのまま要約し、当サイトとして当否の判断は行っていない。"
         }
       ],
-      "verificationNote": "会議録取得により生成した要約候補です。小御門議員の一般質問には、この要約に含めた1テーマ以外にも、延岡市立図書館の特別資料整理期間に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年6月定例会（2025年6月19日）分について、小御門議員の一般質問には、この要約に含めた2テーマ以外にも、延岡市の米の地産地消に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。"
+      "verificationNote": "会議録取得により生成した要約候補です。小御門議員の一般質問には、この要約に含めた1テーマ以外にも、延岡市立図書館の特別資料整理期間に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年6月定例会（2025年6月19日）分について、小御門議員の一般質問には、この要約に含めた2テーマ以外にも、延岡市の米の地産地消に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月6日、初当選後初めての一般質問）分を追加した。"
     },
     {
       "memberId": "m14",
@@ -7817,11 +9095,11 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 4,
-      "sessionsWithSpeechCount": 4,
+      "analyzedSessionCount": 5,
+      "sessionsWithSpeechCount": 5,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 22,
+      "unfetchedSessionCount": 21,
       "lastAnalyzedAt": "2026-08-03",
       "topicCounts": [
         {
@@ -7854,6 +9132,30 @@
         },
         {
           "topic": "環境",
+          "sessionCount": 1
+        },
+        {
+          "topic": "教育",
+          "sessionCount": 1
+        },
+        {
+          "topic": "市役所・職員",
+          "sessionCount": 1
+        },
+        {
+          "topic": "子育て",
+          "sessionCount": 1
+        },
+        {
+          "topic": "道路・交通",
+          "sessionCount": 1
+        },
+        {
+          "topic": "環境",
+          "sessionCount": 1
+        },
+        {
+          "topic": "農業",
           "sessionCount": 1
         },
         {
@@ -8569,9 +9871,467 @@
           ],
           "verifiedAt": "2026-08-03",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全30セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。一問一答形式で、壇上での質問8テーマ全てについて答弁本文を確認できた。答弁者の部署名は原文中に明記が確認できなかった箇所は一般的な呼称とした。"
+        },
+        {
+          "id": "m17-2023-09-06-ippan-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2023-09",
+          "date": "2023-09-06",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "市役所・職員",
+            "子育て",
+            "道路・交通",
+            "環境",
+            "農業",
+            "教育"
+          ],
+          "shortSummary": "令和5年9月定例会（第3号）で長友幸子議員が行った一般質問の要約です。人権啓発（こころのメッセージ・SNS誹謗中傷）、放課後児童クラブの運営効率化、道路改良（桜小路野地線・西階通線・惣領堤防線）、ごみ搬出ルールの周知・有料ごみ袋単価、農業の担い手育成、不登校児童生徒のオンライン学習支援について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "人権啓発（こころのメッセージ・SNS誹謗中傷）",
+              "questionSummary": "長友議員は、市民から募集する人権啓発「こころのメッセージ」への所感と、SNS上の誹謗中傷の現状への所見を市長に尋ねた。",
+              "answerSummary": "市長は、こころのメッセージの取り組みを人権意識の醸成につながるものと評価し、SNSの誹謗中傷は深刻な人権侵害になり得るとして、延岡市人権教育・啓発推進方針に基づく取り組みを継続するとした。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "こころのメッセージへの所感とSNS誹謗中傷への所見を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "取り組みの評価と人権侵害防止の方針を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "言葉の重みについて改めて所見を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "人権教育・啓発推進方針に基づく取り組み強化の考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "所信の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q2",
+              "title": "放課後児童クラブの運営効率化",
+              "questionSummary": "長友議員は、運営委員会・NPO法人が担う放課後児童クラブのスタッフ確保・事務効率化について、令和4年6月議会での答弁を踏まえた進捗状況を尋ねた。",
+              "answerSummary": "市は、東海小学校・東小学校の2団体から法人等への一括管理委託の申出があり、令和6年4月運用開始を目指し9月補正予算案に債務負担行為を提案したと説明した。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "放課後児童クラブの運営効率化の進捗状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "2校での法人一括管理委託の申出と令和6年4月運用開始の方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施予定"
+            },
+            {
+              "id": "q3",
+              "title": "道路改良（桜小路野地線・西階通線・惣領堤防線）",
+              "questionSummary": "長友議員は、（1）市道桜小路野地線（新体育館前）の右折レーン設置の進捗、（2）市道西階通線の右折レーン設置の進捗、（3）市道惣領堤防線のガードレール・照明不足と夏場の除草頻度について、それぞれ尋ねた。",
+              "answerSummary": "市は、桜小路野地線は用地取得交渉中で歩道の一部が完成、西階通線は令和6年度着工・令和7年度完成を目指すとした。惣領堤防線は河川管理上ガードレール・照明の設置に制約があるため国と協議するとし、除草は繁茂期に合わせた回数増を検討するとした。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "桜小路野地線の右折レーン設置の進捗を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "用地取得交渉中で一部工事着手済みと答弁した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "西階通線の右折レーン設置の進捗を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "令和6年度着工・令和7年度完成を目指すと答弁した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "惣領堤防線のガードレール・照明不足への対策を尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "河川管理上の制約を説明し、国と協議する考えを示した。"
+                },
+                {
+                  "order": 7,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "夏場の除草頻度の見直しを求めた。"
+                },
+                {
+                  "order": 8,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "繁茂期に合わせた除草回数の増加を検討するとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q4",
+              "title": "ごみ搬出ルールの周知・有料ごみ袋単価",
+              "questionSummary": "長友議員は、転入者を含むごみ搬出ルールの丁寧な周知について所見を尋ね、原油価格高騰を踏まえた指定ごみ袋の作成単価への影響と値上げの可能性を尋ねた。",
+              "answerSummary": "市は、令和5年3月改訂のごみ出しルールブック配布やLINE検索機能等での周知を継続し、転入者向けQ&A作成も検討するとした。指定ごみ袋の作成単価は原油高騰で約40％上昇（1枚約7.2円→約10.1円）したが、有料化はごみ減量目的でありごみ袋作成費用は価格に含まれないため、現時点で値上げは考えていないとした。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "ごみ搬出ルールの丁寧な周知について所見を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "ルールブック改訂やLINE機能等の周知策を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "指定ごみ袋の作成単価への原油高騰の影響を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "単価は約40％上昇したが、価格には含まれないため値上げは考えていないと答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "現時点では予定なし"
+            },
+            {
+              "id": "q5",
+              "title": "農業の担い手育成",
+              "questionSummary": "長友議員は、高校生等の若者が農作業を手伝う機会創出（アルバイト等）による担い手育成への所見と、農産物の付加価値向上・消費拡大策を尋ねた。",
+              "answerSummary": "市は、お試し就農事業やのべおか里山塾、農林業マッチングサイト「のべワーカー」を通じた担い手確保策を説明し、中高生の参加については学校関係者と協議するとした。所得向上策として水田でのベストミックス拡大や直売所支援等を挙げた。",
+              "answerers": [
+                "農林水産部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "高校生等の農作業アルバイトによる担い手育成への所見を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "農林水産部長",
+                  "summary": "お試し就農事業等の取り組みを説明し、中高生参加は学校と協議するとした。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "農産物の加工・消費拡大による所得向上策を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "農林水産部長",
+                  "summary": "ベストミックス拡大や直売所支援等の取り組みを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q6",
+              "title": "不登校児童生徒のオンライン学習支援",
+              "questionSummary": "長友議員は、9月1日開始のオンライン学習支援の受講状況・学習内容を尋ね、再質問では不登校児童生徒への具体的な社会的自立支援の内容を尋ねた。",
+              "answerSummary": "教育長は、登録10名のうち初日の参加は6名（月曜5名）で、AIドリルや社会性を育む学習（1コマ約30分）を実施し、学校長判断で出席扱いにできるとした。具体的支援としては「世の中タイム」等、多様な価値観を持つ外部人材との交流の機会を今後充実させたいとした。",
+              "answerers": [
+                "教育長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "オンライン学習支援の受講人数と学習内容を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育長",
+                  "summary": "登録10名・学習内容・出席扱いの制度を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "具体的な社会的自立支援の内容を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育長",
+                  "summary": "初日の様子や「世の中タイム」等の取り組みを説明した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m17",
+                  "summary": "不登校経験者からのメッセージを届ける機会の創出を提案した。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育長",
+                  "summary": "子供の価値観を関係性の中で捉えながら検討する考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：人権啓発）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/45084/10/1//0/0",
+              "speakerSection": "pos=45084"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/48358/10/1//0/0",
+              "speakerSection": "pos=48358"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（再質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/50574/10/1//0/0",
+              "speakerSection": "pos=50574"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/51652/10/1//0/0",
+              "speakerSection": "pos=51652"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：放課後児童クラブ）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/53160/10/1//0/0",
+              "speakerSection": "pos=53160"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/54150/10/1//0/0",
+              "speakerSection": "pos=54150"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：桜小路野地線）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/55190/10/1//0/0",
+              "speakerSection": "pos=55190"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/56236/10/1//0/0",
+              "speakerSection": "pos=56236"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：西階通線）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/57112/10/1//0/0",
+              "speakerSection": "pos=57112"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/57558/10/1//0/0",
+              "speakerSection": "pos=57558"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：惣領堤防線）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/58460/10/1//0/0",
+              "speakerSection": "pos=58460"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/59580/10/1//0/0",
+              "speakerSection": "pos=59580"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（再質問：除草頻度）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/60794/10/1//0/0",
+              "speakerSection": "pos=60794"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/61504/10/1//0/0",
+              "speakerSection": "pos=61504"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：ごみ搬出ルール）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/61954/10/1//0/0",
+              "speakerSection": "pos=61954"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/62830/10/1//0/0",
+              "speakerSection": "pos=62830"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：有料ごみ袋）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/65076/10/1//0/0",
+              "speakerSection": "pos=65076"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市民環境部長（甲斐国雄君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/65562/10/1//0/0",
+              "speakerSection": "pos=65562"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：農業担い手）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/66426/10/1//0/0",
+              "speakerSection": "pos=66426"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 農林水産部長（木原倉道君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/67578/10/1//0/0",
+              "speakerSection": "pos=67578"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（再質問：付加価値向上）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/69070/10/1//0/0",
+              "speakerSection": "pos=69070"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 農林水産部長（木原倉道君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/69976/10/1//0/0",
+              "speakerSection": "pos=69976"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（質問：オンライン学習支援）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/71340/10/1//0/0",
+              "speakerSection": "pos=71340"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/72254/10/1//0/0",
+              "speakerSection": "pos=72254"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（再質問：具体的支援）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/72960/10/1//0/0",
+              "speakerSection": "pos=72960"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/73508/10/1//0/0",
+              "speakerSection": "pos=73508"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 長友幸子君（再質問：不登校経験者メッセージ）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/75442/10/1//0/0",
+              "speakerSection": "pos=75442"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/76026/10/1//0/0",
+              "speakerSection": "pos=76026"
+            }
+          ],
+          "verifiedAt": "2026-08-03",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全28セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上での質問6テーマ全てについて答弁本文を確認できた。子供の作文・投稿等、第三者の個人情報に関わる部分は要約には含めていない。"
         }
       ],
-      "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。"
+      "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年9月定例会（2023年9月6日）分を追加した。"
     },
     {
       "memberId": "m18",
@@ -9193,11 +10953,11 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 3,
-      "sessionsWithSpeechCount": 3,
+      "analyzedSessionCount": 4,
+      "sessionsWithSpeechCount": 4,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 23,
+      "unfetchedSessionCount": 22,
       "lastAnalyzedAt": "2026-08-03",
       "topicCounts": [
         {
@@ -9230,6 +10990,30 @@
         },
         {
           "topic": "教育",
+          "sessionCount": 1
+        },
+        {
+          "topic": "医療・福祉",
+          "sessionCount": 1
+        },
+        {
+          "topic": "環境",
+          "sessionCount": 1
+        },
+        {
+          "topic": "防災・減災",
+          "sessionCount": 1
+        },
+        {
+          "topic": "道路・交通",
+          "sessionCount": 1
+        },
+        {
+          "topic": "子育て",
+          "sessionCount": 1
+        },
+        {
+          "topic": "議会",
           "sessionCount": 1
         }
       ],
@@ -9967,9 +11751,536 @@
           ],
           "verifiedAt": "2026-08-03",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全37セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。救急車の出動・待機時間については答弁本文を今回取得できていないためpendingとしている。避難施設耐震化の答弁者は原文中に部署名の明記が確認できなかったため一般的な呼称とした。中間副市長への私的な雑談（行縢の滝の認知）はエピソードとして扱い要約から除外した。"
+        },
+        {
+          "id": "m20-2023-09-06-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2023-09",
+          "date": "2023-09-06",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "医療・福祉",
+            "環境",
+            "防災・減災",
+            "道路・交通",
+            "子育て",
+            "議会"
+          ],
+          "shortSummary": "令和5年9月定例会（第3号）で平田信広議員が行った一般質問・総括質疑の要約です。マイナンバーカードと健康保険証一体化問題、PFAS（有機フッ素化合物）による水源地の汚染懸念、日本カーシェアリング協会との災害協定、避難施設（自治公民館）の耐震性、市道の区画線整備、子供医療費助成の拡充、学校給食費無償化請願への対応について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "マイナンバーカードと健康保険証一体化問題",
+              "questionSummary": "平田議員は、健康保険証廃止・マイナンバーカード一体化方針への不安の広がりを踏まえ、保険証存続を求める考えを市長に尋ね、宮日新聞のアンケートで市長が「延期すべき」と回答したことについて考えに変わりがないか、再度尋ねた。",
+              "answerSummary": "市長は、マイナンバー総点検で登録ミスが計8,441件確認されたこと等の混乱状況を説明し、国において総点検の状況を見極めた上で廃止時期の見直しも含め適切に対応すべきとの考えを示し、宮日新聞のアンケートには「延期すべきである」と回答したことを認めた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "健康保険証存続を求める市長の考えを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "マイナ保険証を巡る混乱の現状を説明し、国の適切な判断を求める考えを示した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "宮日新聞アンケートで「延期すべき」と回答したことについて考えに変わりがないか尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "「延期すべきである」と回答したことを認め、その理由を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "所信の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q2",
+              "title": "PFAS（有機フッ素化合物）による水源地の汚染懸念",
+              "questionSummary": "平田議員は、富美山町の住民から寄せられた、旭化成エレクトロニクス半導体工場火災を踏まえたPFASによる祝子水源地の汚染懸念について、公的機関による調査の実施を求めた。",
+              "answerSummary": "上下水道局長は、祝子水源地は井戸からの取水であり祝子川の表流水を直接取水していないこと、旭化成に確認したところ当該工場ではPFAS・PFOAを製造原料として使用していないとの回答を得たことから影響は想定されないとしつつ、市民の不安に配慮し水源地での水質検査を実施する考えを示した。",
+              "answerers": [
+                "上下水道局長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "PFASによる祝子水源地の汚染懸念について公的機関による調査を求めた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "上下水道局長",
+                  "summary": "取水構造や旭化成への確認結果を説明し、水質検査を実施する考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施予定"
+            },
+            {
+              "id": "q3",
+              "title": "日本カーシェアリング協会との災害時協定",
+              "questionSummary": "平田議員は、日本カーシェアリング協会との災害時車両無償貸与協定の具体的内容と、同協会の活動実績を尋ねた。",
+              "answerSummary": "総務部長は、災害で自動車を失った被災者等に協会所管の車両を無償貸与する事業であり、事業場所は市が確保し周知は市・協会双方で行うと説明した。協会は東日本大震災を機に2011年設立され、全国で延べ2,400件以上、今年の能登半島沖地震・台風2号・7月豪雨でも8自治体・200件以上の貸出し実績があるとした。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "協定の具体的内容を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "協定の目的・仕組み・周知方法を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "協会の活動実績を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "総務部長",
+                  "summary": "全国・直近の貸出し実績を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施済み"
+            },
+            {
+              "id": "q4",
+              "title": "災害避難施設（自治公民館）の耐震性",
+              "questionSummary": "平田議員は、緊急避難施設・避難施設に指定している自治公民館の数と、耐震性に問題がある施設数を尋ねた。",
+              "answerSummary": "総務部長は、洪水時指定緊急避難場所のうち自治公民館は5カ所、中長期避難所のうち自治公民館は26カ所（うち2カ所は緊急避難場所と重複）とし、耐震性が確認されていないのは富美山北団地公民館と妙見港区公民館の2施設のみで、それ以外は新耐震基準に適合していると答弁した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "避難施設指定の自治公民館の数を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "指定数の内訳を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "耐震性に問題がある公民館の数を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "総務部長",
+                  "summary": "耐震性未確認は2施設のみと答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q5",
+              "title": "市道のセンターライン等区画線整備",
+              "questionSummary": "平田議員は、市道のセンターライン等区画線の消えかかっている箇所への対応方針を尋ねた。",
+              "answerSummary": "都市建設部長は、通学路を重点に区画線更新を進めており、令和4年度予算から維持補修工事費を増額し、令和4年度14.7km・令和5年度約16kmを施工予定で、通学路については令和6年度でおおむね完了見込みとし、今後は国民スポーツ大会に向け交通量の多い路線も重点的に更新すると答弁した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "区画線整備の方針を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "重点整備方針と施工実績・見込みを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q6",
+              "title": "子供医療費助成の18歳までの拡充・時間外診療の対象化",
+              "questionSummary": "平田議員は、18歳までの子ども医療費助成拡充を評価しつつ、時間外診療が対象外である問題について、他自治体並みに時間外を含めた実施ができないか尋ねた。",
+              "answerSummary": "健康福祉部長は、医師会から時間外対応は医療機関への過度な負担や医療従事者の疲弊につながるとの指摘があり、医師不足が深刻な本市の地域医療体制への影響が懸念されるため協議に時間を要したと説明し、時間外診療の対象化についても医師会にいずれ実現したい意向を伝え、引き続き働きかけていくとした。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "時間外診療の対象化ができないか尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "医師会との協議経緯と今後の働きかけ方針を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q7",
+              "title": "子供医療費助成の県への引き上げ要請",
+              "questionSummary": "平田議員は、県の子ども医療費助成（未就学児まで）を引き上げるよう要請した後の状況を尋ねた。",
+              "answerSummary": "健康福祉部長は、県の助成は依然として未就学児までであり、九市市長会を通じて継続的に県へ要望しているとし、全国的には子供の医療費を国の制度とすべきとの動きが広がり、地方三団体が国へ要請していると説明した。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "県への引き上げ要請のその後の状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "県への継続要望の状況と国への動きを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q8",
+              "title": "学校給食費無償化請願（全会一致採択）への対応",
+              "questionSummary": "平田議員は、自身が紹介議員となった学校給食費無償化請願が6月議会で全会一致採択されたことへの市長の受け止めを尋ね、小泉新副市長の事務分担に「子ども・子育て支援」が追加されたことを確認した上で、財源・制度設計を研究する専門チームの担当課内設置を提案した。",
+              "answerSummary": "市長は、全会一致の議会決定を重く受け止めているとしつつ、市独自での無償化は毎年約4億円の財源負担等の課題があるため、国の責任による実施を市長会等を通じて働きかけていく考えを示した。副市長は子ども・子育て支援が自身の事務分担であることを認めた。専門チーム設置の提案については、体制強化や連携の必要性を認めつつ、チームとする是非も含めてまず検討したいと答弁した。",
+              "answerers": [
+                "市長",
+                "副市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "請願全会一致採択への受け止めを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "財源等の課題と国への働きかけ方針を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "副市長の事務分担に子ども・子育て支援が追加されたことを確認した。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "副市長",
+                  "summary": "子ども・子育て支援が自身の事務分担であることを認めた。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "請願採択の受け止めについて改めて明確な回答を求めた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "議会の決定を重く受け止めているとし、国への働きかけを続ける考えを再度示した。"
+                },
+                {
+                  "order": 7,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "財源・制度設計を研究する専門チームの担当課内設置を提案した。"
+                },
+                {
+                  "order": 8,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "体制強化の必要性を認め、チーム化の是非を含め検討する考えを示した。"
+                },
+                {
+                  "order": 9,
+                  "type": "follow-up-question",
+                  "speakerId": "m20",
+                  "summary": "専門チーム提案について検討の方向性を改めて確認した。"
+                },
+                {
+                  "order": 10,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "情報収集と迅速な対応のための体制強化をまず検討すると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：マイナ保険証）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/122246/10/1//0/0",
+              "speakerSection": "pos=122246"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/124472/10/1//0/0",
+              "speakerSection": "pos=124472"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 議長（松田満男君）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/126584/10/1//0/0",
+              "speakerSection": "pos=126584"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：延期すべきとの考え）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/126646/10/1//0/0",
+              "speakerSection": "pos=126646"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/127238/10/1//0/0",
+              "speakerSection": "pos=127238"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：PFAS汚染懸念）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/128926/10/1//0/0",
+              "speakerSection": "pos=128926"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 上下水道局長（岡田勇一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/130758/10/1//0/0",
+              "speakerSection": "pos=130758"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：日本カーシェアリング協会協定）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/131862/10/1//0/0",
+              "speakerSection": "pos=131862"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 総務部長（齋藤章二君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/132396/10/1//0/0",
+              "speakerSection": "pos=132396"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：協会の実績）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/133082/10/1//0/0",
+              "speakerSection": "pos=133082"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 総務部長（齋藤章二君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/133168/10/1//0/0",
+              "speakerSection": "pos=133168"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：避難施設の指定状況）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/133548/10/1//0/0",
+              "speakerSection": "pos=133548"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 総務部長（齋藤章二君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/134116/10/1//0/0",
+              "speakerSection": "pos=134116"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：耐震性）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/134442/10/1//0/0",
+              "speakerSection": "pos=134442"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 総務部長（齋藤章二君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/134668/10/1//0/0",
+              "speakerSection": "pos=134668"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：区画線整備）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/134940/10/1//0/0",
+              "speakerSection": "pos=134940"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/135578/10/1//0/0",
+              "speakerSection": "pos=135578"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：子供医療費時間外診療）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/136462/10/1//0/0",
+              "speakerSection": "pos=136462"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/137470/10/1//0/0",
+              "speakerSection": "pos=137470"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：県への引き上げ要請）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/138684/10/1//0/0",
+              "speakerSection": "pos=138684"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/139010/10/1//0/0",
+              "speakerSection": "pos=139010"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（質問：学校給食費無償化請願）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/139436/10/1//0/0",
+              "speakerSection": "pos=139436"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/140596/10/1//0/0",
+              "speakerSection": "pos=140596"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：副市長事務分担）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/141762/10/1//0/0",
+              "speakerSection": "pos=141762"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 副市長（小泉智明君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/142096/10/1//0/0",
+              "speakerSection": "pos=142096"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：受け止めの再確認）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/142280/10/1//0/0",
+              "speakerSection": "pos=142280"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/143188/10/1//0/0",
+              "speakerSection": "pos=143188"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：専門チーム設置提案）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/143768/10/1//0/0",
+              "speakerSection": "pos=143768"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/147184/10/1//0/0",
+              "speakerSection": "pos=147184"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（再質問：検討の方向性確認）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/148476/10/1//0/0",
+              "speakerSection": "pos=148476"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/148910/10/1//0/0",
+              "speakerSection": "pos=148910"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 平田信広君（結び）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/149256/10/1//0/0",
+              "speakerSection": "pos=149256"
+            }
+          ],
+          "verifiedAt": "2026-08-03",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全32セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上での質問及び全再質問について答弁本文を確認できた。"
         }
       ],
-      "verificationNote": "会議録取得により生成した要約候補です。平田議員の質問には、国政に関する所見を求める部分など、市政運営と直接関わらない項目も含まれていましたが、当サイトは特定の政党・政治家を評価しない方針のため、市政運営に関する地域新電力会社の質問項目のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、救急車出動待機時間の答弁が未確認のためpendingとしている。"
+      "verificationNote": "会議録取得により生成した要約候補です。平田議員の質問には、国政に関する所見を求める部分など、市政運営と直接関わらない項目も含まれていましたが、当サイトは特定の政党・政治家を評価しない方針のため、市政運営に関する地域新電力会社の質問項目のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、救急車出動待機時間の答弁が未確認のためpendingとしている。 令和5年9月定例会（2023年9月6日）分を追加した。"
     },
     {
       "memberId": "m21",
@@ -13151,18 +15462,18 @@
     {
       "memberId": "m25",
       "analysisPeriod": {
-        "from": "2025-03-04",
+        "from": "2023-09-06",
         "to": "2026-02-25"
       },
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 3,
-      "sessionsWithSpeechCount": 3,
+      "analyzedSessionCount": 4,
+      "sessionsWithSpeechCount": 4,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 23,
-      "lastAnalyzedAt": "2026-08-02",
+      "unfetchedSessionCount": 22,
+      "lastAnalyzedAt": "2026-08-03",
       "topicCounts": [
         {
           "topic": "学校給食無償化",
@@ -13178,6 +15489,34 @@
         },
         {
           "topic": "南延岡駅バリアフリー化",
+          "sessionCount": 1
+        },
+        {
+          "topic": "市役所・職員",
+          "sessionCount": 1
+        },
+        {
+          "topic": "道路・交通",
+          "sessionCount": 1
+        },
+        {
+          "topic": "医療・福祉",
+          "sessionCount": 1
+        },
+        {
+          "topic": "人権",
+          "sessionCount": 1
+        },
+        {
+          "topic": "教育",
+          "sessionCount": 1
+        },
+        {
+          "topic": "住宅・まちづくり",
+          "sessionCount": 1
+        },
+        {
+          "topic": "子育て",
           "sessionCount": 1
         }
       ],
@@ -13441,9 +15780,570 @@
           ],
           "verifiedAt": "2026-08-02",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。この答弁は三浦市長就任（令和7年7月）以前の読谷山洋司前市長によるものであるため、現職市長と混同しないよう「読谷山市長」と明記しています。山本議員の代表質問には、自治会加入促進、駅周辺まちづくり構想、シニア世代のスマホサポーター、障がい福祉、多様な学び方など多数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。"
+        },
+        {
+          "id": "m25-2023-09-06-ippan-shitsumon",
+          "memberId": "m25",
+          "sessionId": "2023-09",
+          "date": "2023-09-06",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "市役所・職員",
+            "道路・交通",
+            "医療・福祉",
+            "人権",
+            "教育",
+            "住宅・まちづくり",
+            "子育て"
+          ],
+          "shortSummary": "令和5年9月定例会（第3号）で山本珠美議員が初当選後初めて行った一般質問・総括質疑の要約です。自治会（区）への支援強化、運転免許証返納時の支援、市道区画線更新、HPVワクチン接種の勧奨、人権啓発・同和教育の取り組み、市営住宅一ケ岡B・C団地跡地活用、病児保育の案内・周知について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "自治会（区）への支援強化・現場状況把握",
+              "questionSummary": "山本議員は、自治会（区）の現場状況をどのように把握しているか市長に尋ねた。",
+              "answerSummary": "市長は、区長連絡協議会への出席、市内10地区ごとの地域担当職員制度、各区からの要望把握、4年ぶりに再開した移動市役所での意見聴取等、複数の手段で状況把握に努めていると答弁した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "自治会（区）の現場状況把握の方法を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "地域担当職員制度や移動市役所等の把握手段を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q2",
+              "title": "運転免許証返納時の自転車購入補助（商品券選択制）",
+              "questionSummary": "山本議員は、運転免許証返納後に自転車・電動アシスト自転車を選択する方向けに、既存の交通系ICカード・タクシー券と同等の商品券を選択制にできないか尋ねた。",
+              "answerSummary": "企画部長は、現行支援は返納者の安全面と公共交通機関の利用促進を考慮した内容であり、利用者の大部分が75歳以上であることから、自転車利用時の事故リスク等を踏まえ、まずは交通機関を利用した安全な移動を重視する考えを示した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "自転車購入商品券の選択制導入を提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "現行支援策の考え方と安全面への配慮を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "現時点では予定なし"
+            },
+            {
+              "id": "q3",
+              "title": "市道区画線更新の予算拡充",
+              "questionSummary": "山本議員は、区画線更新費用（本年度予算4,500万円）と延岡市の道路総延長（約1,450km）を踏まえ、現行予算では更新に長期間を要するとして、予算の見直しによる更新距離の拡大を求めた。",
+              "answerSummary": "都市建設部長は、都市計画道路等の交通量の多い路線から国民スポーツ大会に向けて更新していく方針を示し、現行の4,500万円の予算規模ではスピード感を持った対応が難しく、予算拡充が必要と認識していると答弁した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "区画線更新費用の内訳を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "従来の交付金事業と道路維持補修事業の予算内訳、施工実績を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "道路総延長を踏まえた予算見直しによる更新距離拡大を求めた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "現行予算では不十分であり、予算拡充が必要と認識していると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q4",
+              "title": "HPVワクチン接種のキャッチアップ接種・医療機関連携勧奨",
+              "questionSummary": "山本議員は、令和7年3月末で無償終了となるHPVワクチンキャッチアップ接種対象者への勧奨について、産婦人科に限らない医療機関の幅を広げた連携勧奨の取り組みを尋ねた。",
+              "answerSummary": "健康福祉部長は、産婦人科に限らず小児科・内科等、医師会の協力医療機関でのポスター掲示を行うほか、医師の協力による対象者・保護者向け講演会の開催も検討していると答弁した。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "医療機関の幅を広げた連携勧奨の取り組みを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "産婦人科以外の医療機関での周知や講演会開催の検討を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q5",
+              "title": "男性へのHPVワクチン接種の情報発信",
+              "questionSummary": "山本議員は、任意接種となる男性へのHPVワクチン接種について、市による情報発信の取り組みを尋ねた。",
+              "answerSummary": "健康福祉部長は、男性は市内医療機関で現在も接種可能であり、有料である旨を市ホームページ等で周知していく考えを示し、接種費用助成については国の定期接種化の動向を注視しながら研究するとした。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "男性へのHPVワクチン接種の情報発信を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "ホームページ等での周知と、費用助成は国の動向を注視し研究するとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "調査・研究"
+            },
+            {
+              "id": "q6",
+              "title": "人権啓発（部落差別解消推進法後の取り組み・講師人選）",
+              "questionSummary": "山本議員は、部落差別の解消の推進に関する法律施行後の市の人権啓発の取り組みと、講演会講師の人選方針を尋ねた。",
+              "answerSummary": "企画部長は、令和元年制定の人権尊重まちづくり条例や令和3年改定の人権教育・啓発推進方針に基づく講演会・人権セミナー等の取り組みを説明し、講師は部落差別を受けながら差別と闘ってきた方など、差別の現実を深く理解する方を招聘していると答弁した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "部落差別解消推進法後の市の取り組みを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "条例・方針に基づく啓発の取り組みを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "講演会講師の人選方針を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "企画部長",
+                  "summary": "差別の現実を深く理解する方を招聘していると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q7",
+              "title": "教育委員会における同和教育の取り組み",
+              "questionSummary": "山本議員は、教育委員会の同和教育の取り組み内容、校長会での講話内容・講師、各種教職員研修会の内容、人権セミナーの開催回数・内容を教育長に尋ねた。",
+              "answerSummary": "教育長は、人権教育・啓発推進方針に基づく学校・社会教育双方での取り組みを説明し、校長会講話や転入教職員研修会は人権啓発指導員・社会教育指導員を講師に、学校人権・同和教育研修会は授業実践を中心に行っているとした。人権セミナーは市・教育委員会・人権啓発推進協議会の共催で年4回実施し、毎回部落差別に関する内容を含めていると答弁した。",
+              "answerers": [
+                "教育長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "教育委員会の同和教育の取り組みを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育長",
+                  "summary": "学校・社会教育双方での取り組みを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "校長会での講話内容と講師を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育長",
+                  "summary": "講師名と講話内容を説明した。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "学校人権・同和教育研修会等でも同様の内容・講師かを尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育長",
+                  "summary": "研修会ごとに対象・内容が異なることを説明した。"
+                },
+                {
+                  "order": 7,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "人権セミナーの開催回数を尋ねた。"
+                },
+                {
+                  "order": 8,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育長",
+                  "summary": "年4回の開催内容とスケジュールを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q8",
+              "title": "市営住宅一ケ岡B団地・C団地跡地活用",
+              "questionSummary": "山本議員は、市営住宅一ケ岡B団地・C団地跡地活用に関する地域との意見交換会の実施状況と、B団地跡地に設置される脱炭素関連企業店舗の使用期間について尋ねた。",
+              "answerSummary": "都市建設部長は、D・E団地のPFI導入可能性調査事業の中で1月・2月に住民説明会・アンケート・ワークショップを実施し、子育て支援施設等の活用を求める意見が寄せられたとし、今後PFIアドバイザリー事業で再度意見聴取の上、パブリックコメントも予定していると説明した。B団地跡地の店舗は市営住宅用地の目的外使用の単年度契約で、事業完了後は撤去予定と答弁した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "地域との意見交換会の実施状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "説明会・アンケート・ワークショップの実施状況と今後の予定を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "B団地跡地の脱炭素関連企業店舗の使用期間を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "単年度契約の目的外使用であり、事業完了後は撤去予定と答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q9",
+              "title": "病児保育の案内・周知",
+              "questionSummary": "山本議員は、病児保育の案内・周知方法と、紙媒体の子育てガイドの配布タイミングを尋ねた。",
+              "answerSummary": "健康福祉部長は、トトロこどもクリニック病児保育室さんぽ、延岡共立病院いちご保育園病児保育室の2カ所で実施しており、子育て情報アプリすくすくワクチンや子育てガイドで周知しているとし、10月から病児・病後児保育施設の利用料補助も実施予定と説明した。子育てガイドは出産届提出時に配布し、こども保育課・おやこ保健福祉課・市民課窓口や保健師の訪問時にも配布していると答弁した。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m25",
+                  "summary": "病児保育の案内・周知方法を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "実施施設と周知手段、10月からの利用料補助を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m25",
+                  "summary": "紙媒体の子育てガイドの配布タイミングを尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "出産届提出時の配布と各窓口・保健師訪問時の配布を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状認識の確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（質問：自治会支援・免許返納・区画線）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/150212/10/1//0/0",
+              "speakerSection": "pos=150212"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 市長（読谷山洋司君）（答弁：自治会支援）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/154206/10/1//0/0",
+              "speakerSection": "pos=154206"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 企画部長（吉岡修君）（答弁：免許返納）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/155630/10/1//0/0",
+              "speakerSection": "pos=155630"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁：区画線）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/156236/10/1//0/0",
+              "speakerSection": "pos=156236"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 議長（松田満男君）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/157042/10/1//0/0",
+              "speakerSection": "pos=157042"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：免許返納後の自転車購入）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/157104/10/1//0/0",
+              "speakerSection": "pos=157104"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 企画部長（吉岡修君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/158500/10/1//0/0",
+              "speakerSection": "pos=158500"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：区画線予算拡充）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/159316/10/1//0/0",
+              "speakerSection": "pos=159316"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/160256/10/1//0/0",
+              "speakerSection": "pos=160256"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（質問：HPVワクチン医療機関連携）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/160868/10/1//0/0",
+              "speakerSection": "pos=160868"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/163572/10/1//0/0",
+              "speakerSection": "pos=163572"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：男性HPVワクチン）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/163966/10/1//0/0",
+              "speakerSection": "pos=163966"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/164530/10/1//0/0",
+              "speakerSection": "pos=164530"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（質問：部落差別解消推進法後の取り組み）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/165028/10/1//0/0",
+              "speakerSection": "pos=165028"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 企画部長（吉岡修君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/165916/10/1//0/0",
+              "speakerSection": "pos=165916"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：講師人選）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/166790/10/1//0/0",
+              "speakerSection": "pos=166790"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 企画部長（吉岡修君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/167080/10/1//0/0",
+              "speakerSection": "pos=167080"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（質問：同和教育の取り組み）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/167292/10/1//0/0",
+              "speakerSection": "pos=167292"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/167848/10/1//0/0",
+              "speakerSection": "pos=167848"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：校長会講話・講師）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/169806/10/1//0/0",
+              "speakerSection": "pos=169806"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/169914/10/1//0/0",
+              "speakerSection": "pos=169914"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：教職員研修会）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/170598/10/1//0/0",
+              "speakerSection": "pos=170598"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/170994/10/1//0/0",
+              "speakerSection": "pos=170994"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：人権セミナー）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/172220/10/1//0/0",
+              "speakerSection": "pos=172220"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 教育長（澤野幸司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/172360/10/1//0/0",
+              "speakerSection": "pos=172360"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（質問：一ケ岡B・C団地跡地活用）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/173376/10/1//0/0",
+              "speakerSection": "pos=173376"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/174084/10/1//0/0",
+              "speakerSection": "pos=174084"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：脱炭素企業店舗）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/175158/10/1//0/0",
+              "speakerSection": "pos=175158"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 都市建設部長（中川真一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/175770/10/1//0/0",
+              "speakerSection": "pos=175770"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（質問：病児保育の案内・周知）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/175976/10/1//0/0",
+              "speakerSection": "pos=175976"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/176810/10/1//0/0",
+              "speakerSection": "pos=176810"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 山本珠美君（再質問：子育てガイド配布）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/177668/10/1//0/0",
+              "speakerSection": "pos=177668"
+            },
+            {
+              "title": "令和 5年第7回定例会（第3号9月6日） 健康福祉部長（児島典子君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/177910/10/1//0/0",
+              "speakerSection": "pos=177910"
+            }
+          ],
+          "verifiedAt": "2026-08-03",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、全34セグメント）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上での質問及び全再質問について答弁本文を確認できた。"
         }
       ],
-      "verificationNote": "会議録取得により生成した要約候補です。山本議員の関連質問（令和8年3月定例会・2026年2月25日分）には、この要約に含めた2テーマ以外にも南延岡駅東側乗り入れ口等の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。令和7年9月定例会（2025年9月9日）分については、この要約に含めた学校給食無償化以外にも、QaaSシステム高度化に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。"
+      "verificationNote": "会議録取得により生成した要約候補です。山本議員の関連質問（令和8年3月定例会・2026年2月25日分）には、この要約に含めた2テーマ以外にも南延岡駅東側乗り入れ口等の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。令和7年9月定例会（2025年9月9日）分については、この要約に含めた学校給食無償化以外にも、QaaSシステム高度化に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月6日）分を追加した。"
     },
     {
       "memberId": "m26",
