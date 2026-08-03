@@ -71,40 +71,184 @@ const USER_AGENT = "Mozilla/5.0 (compatible; NobeokaShiseiPortalBot/1.0; +https:
 
 /**
  * 適応型の同時実行数制御。
- * - 同時に飛ばすリクエストは最大 maxConcurrency 件（既定3件）。
- * - さらに、リクエストの「発行間隔」にも下限（dispatchIntervalMs）を設け、
- *   maxConcurrency=3にしてもバースト（3件が同時刻に発火）しないようにする。
- * - 429（Too Many Requests）やネットワークエラーが起きた場合は、
- *   maxConcurrencyを1まで段階的に縮小し、発行間隔を指数的に伸ばす。
- *   一定回数、成功が続いたら緩やかに元の設定へ戻す。
+ * - 同時実行数は 3→4→5 と段階的にのみ引き上げる（各段階で10件連続成功したら次段階へ）。
+ * - 429・403 が1件でも出たら、直ちに同時実行数を1へ緊急引き下げる（段階を最初からやり直す）。
+ * - 5xxまたはタイムアウトが連続2件出たら、同時実行数を3へ引き下げる。
+ * - 応答時間が直近平均の3倍を超えた場合も、同時実行数を3へ引き下げる。
+ * - リクエストの「発行間隔」にも下限（DISPATCH_INTERVAL_MS、既定500ms）を設け、
+ *   バースト（複数件が同時刻に発火）しないようにする。
  */
-const BASE_MAX_CONCURRENCY = 3;
 const MIN_MAX_CONCURRENCY = 1;
-const BASE_DISPATCH_INTERVAL_MS = 700; // 3件/2.1秒 相当のペース
-const MAX_DISPATCH_INTERVAL_MS = 10000;
+const STEP_UP_THRESHOLD = 10; // この件数だけ連続成功したら次の並列段階へ引き上げる
+const DISPATCH_INTERVAL_MS = 500; // ワーカー間の最低発行間隔
+const DISPATCH_JITTER_MS = 150; // リクエスト開始時刻を少しずつずらすためのランダム幅
+const RESPONSE_TIME_WINDOW = 30; // 平均応答時間を算出する直近件数
+const SLOW_RESPONSE_MULTIPLIER = 3; // 直近平均のこの倍数を超えたら遅延とみなす
+const BACKOFF_DELAYS_MS = [2000, 5000, 10000]; // 再試行間隔（最大3回）
+const RETRIES = 3;
 
-let maxConcurrency = BASE_MAX_CONCURRENCY;
-let dispatchIntervalMs = BASE_DISPATCH_INTERVAL_MS;
+const FAILED_URLS_FILE = join(CACHE_DIR, "..", "failed-urls.json");
+
+// 同時実行数の制御設定。既定は3→4→5の段階的引き上げ。
+// configureConcurrency()で挙動を変更できる（例: 検証目的で10並列固定にする、など）。
+const concurrencyConfig = {
+  levels: [3, 4, 5], // 段階的に上げていく並列数の候補
+  autoStepUp: true, // 連続成功による自動引き上げを行うか
+  rateLimitDropLevel: MIN_MAX_CONCURRENCY, // 429/403検知時の引き下げ先
+  rateLimitDropThreshold: 1, // この回数だけ429/403が出たら引き下げる（1=即時）
+  errorDropLevel: 3, // 5xx/タイムアウト・応答遅延検知時の引き下げ先
+};
+let consecutiveRateLimitHits = 0;
+
+let concurrencyLevelIndex = 0; // concurrencyConfig.levelsのインデックス
+let maxConcurrency = concurrencyConfig.levels[0];
 let activeCount = 0;
 let lastDispatchAt = 0;
-let consecutiveSuccesses = 0;
+let consecutiveSuccessesAtLevel = 0;
+let consecutiveServerErrors = 0;
 
-function registerThrottleError() {
-  maxConcurrency = Math.max(MIN_MAX_CONCURRENCY, maxConcurrency - 1);
-  dispatchIntervalMs = Math.min(MAX_DISPATCH_INTERVAL_MS, dispatchIntervalMs * 2);
-  consecutiveSuccesses = 0;
-  console.warn(`[minutes-source] スロットル調整: maxConcurrency=${maxConcurrency}, dispatchIntervalMs=${dispatchIntervalMs}`);
+/**
+ * 同時実行数制御の挙動を変更する。
+ * @param {{levels?: number[], start?: number, autoStepUp?: boolean, rateLimitDropLevel?: number, rateLimitDropThreshold?: number, errorDropLevel?: number}} options
+ */
+export function configureConcurrency(options = {}) {
+  if (options.levels) concurrencyConfig.levels = options.levels;
+  if (typeof options.autoStepUp === "boolean") concurrencyConfig.autoStepUp = options.autoStepUp;
+  if (typeof options.rateLimitDropLevel === "number") concurrencyConfig.rateLimitDropLevel = options.rateLimitDropLevel;
+  if (typeof options.rateLimitDropThreshold === "number") concurrencyConfig.rateLimitDropThreshold = options.rateLimitDropThreshold;
+  if (typeof options.errorDropLevel === "number") concurrencyConfig.errorDropLevel = options.errorDropLevel;
+  concurrencyLevelIndex = 0;
+  maxConcurrency = options.start ?? concurrencyConfig.levels[0];
+  consecutiveSuccessesAtLevel = 0;
+  consecutiveServerErrors = 0;
+  consecutiveRateLimitHits = 0;
+  console.log(
+    `[minutes-source] 並列数設定を変更: 開始=${maxConcurrency} 候補段階=[${concurrencyConfig.levels.join(",")}] ` +
+      `自動引き上げ=${concurrencyConfig.autoStepUp} 429/403引き下げ先=${concurrencyConfig.rateLimitDropLevel}(${concurrencyConfig.rateLimitDropThreshold}件で発動) エラー引き下げ先=${concurrencyConfig.errorDropLevel}`
+  );
 }
 
-function registerThrottleSuccess() {
-  consecutiveSuccesses++;
-  // 10回連続成功でペースを段階的に戻す（急に戻して429を誘発しないよう緩やかに）
-  if (consecutiveSuccesses % 10 === 0) {
-    if (dispatchIntervalMs > BASE_DISPATCH_INTERVAL_MS) {
-      dispatchIntervalMs = Math.max(BASE_DISPATCH_INTERVAL_MS, Math.round(dispatchIntervalMs / 1.5));
-    } else if (maxConcurrency < BASE_MAX_CONCURRENCY) {
-      maxConcurrency++;
+/**
+ * 検証目的で、開始時点から並列数10で実行するモードに切り替える。
+ * 429・タイムアウトが複数回発生した場合は自動的に並列数5へ引き下げ、
+ * エラーが収まっても10へは自動復帰しない（このバッチの残りは5で継続する）。
+ */
+export function enableTenParallelTestMode() {
+  configureConcurrency({
+    levels: [10],
+    start: 10,
+    autoStepUp: false,
+    rateLimitDropLevel: 5,
+    rateLimitDropThreshold: 2,
+    errorDropLevel: 5,
+  });
+}
+
+const stats = {
+  completed: 0,
+  success: 0,
+  errors: 0,
+  count429: 0,
+  count403: 0,
+  count5xx: 0,
+  responseTimes: [],
+};
+
+function currentAvgResponseMs() {
+  if (stats.responseTimes.length === 0) return null;
+  const sum = stats.responseTimes.reduce((a, b) => a + b, 0);
+  return sum / stats.responseTimes.length;
+}
+
+function recordResponseTime(ms) {
+  stats.responseTimes.push(ms);
+  if (stats.responseTimes.length > RESPONSE_TIME_WINDOW) stats.responseTimes.shift();
+}
+
+function dropConcurrencyTo(level) {
+  const idx = concurrencyConfig.levels.indexOf(level);
+  concurrencyLevelIndex = idx >= 0 ? idx : 0;
+  maxConcurrency = level;
+  consecutiveSuccessesAtLevel = 0;
+}
+
+function printStatus(currentSessionLabel) {
+  const avg = currentAvgResponseMs();
+  console.log(
+    `[minutes-source] 状況: 並列数=${maxConcurrency} 完了=${stats.completed} 成功=${stats.success} エラー=${stats.errors} ` +
+      `429=${stats.count429} 403=${stats.count403} 5xx=${stats.count5xx} 平均応答=${avg ? Math.round(avg) + "ms" : "-"}` +
+      (currentSessionLabel ? ` 対象=${currentSessionLabel}` : "")
+  );
+}
+
+function registerRequestStart() {
+  return Date.now();
+}
+
+function registerSuccess(startedAt) {
+  const elapsedMs = Date.now() - startedAt;
+  const avgBefore = currentAvgResponseMs();
+  stats.completed++;
+  stats.success++;
+  consecutiveServerErrors = 0;
+  consecutiveRateLimitHits = 0;
+
+  if (avgBefore !== null && elapsedMs > avgBefore * SLOW_RESPONSE_MULTIPLIER) {
+    console.warn(`[minutes-source] 応答遅延検出（${Math.round(elapsedMs)}ms、平常時平均の${SLOW_RESPONSE_MULTIPLIER}倍超）。並列数を${concurrencyConfig.errorDropLevel}へ引き下げます。`);
+    dropConcurrencyTo(Math.min(concurrencyConfig.errorDropLevel, maxConcurrency));
+  } else {
+    consecutiveSuccessesAtLevel++;
+    if (concurrencyConfig.autoStepUp && consecutiveSuccessesAtLevel >= STEP_UP_THRESHOLD && concurrencyLevelIndex < concurrencyConfig.levels.length - 1) {
+      concurrencyLevelIndex++;
+      maxConcurrency = concurrencyConfig.levels[concurrencyLevelIndex];
+      consecutiveSuccessesAtLevel = 0;
+      console.log(`[minutes-source] ${STEP_UP_THRESHOLD}件連続成功のため並列数を${maxConcurrency}へ引き上げます。`);
     }
+  }
+  recordResponseTime(elapsedMs);
+  if (stats.completed % 5 === 0) printStatus();
+}
+
+function registerRateLimitError(status) {
+  if (status === 429) stats.count429++;
+  if (status === 403) stats.count403++;
+  stats.completed++;
+  stats.errors++;
+  consecutiveServerErrors = 0;
+  consecutiveRateLimitHits++;
+  if (consecutiveRateLimitHits >= concurrencyConfig.rateLimitDropThreshold) {
+    console.warn(`[minutes-source] HTTP ${status} を${consecutiveRateLimitHits}件検出。並列数を${concurrencyConfig.rateLimitDropLevel}へ緊急引き下げます。`);
+    dropConcurrencyTo(concurrencyConfig.rateLimitDropLevel);
+    consecutiveRateLimitHits = 0;
+  }
+  printStatus();
+}
+
+function registerServerError(isTimeout) {
+  stats.completed++;
+  stats.errors++;
+  if (!isTimeout) stats.count5xx++;
+  consecutiveServerErrors++;
+  if (consecutiveServerErrors >= 2) {
+    console.warn(`[minutes-source] 5xx/タイムアウトが連続2件検出。並列数を${concurrencyConfig.errorDropLevel}へ引き下げます。`);
+    dropConcurrencyTo(Math.min(concurrencyConfig.errorDropLevel, maxConcurrency));
+    consecutiveServerErrors = 0;
+  }
+  printStatus();
+}
+
+function persistFailedUrl(url, reason) {
+  let list = [];
+  try {
+    if (existsSync(FAILED_URLS_FILE)) list = JSON.parse(readFileSync(FAILED_URLS_FILE, "utf8"));
+  } catch {
+    list = [];
+  }
+  list.push({ url, reason, at: new Date().toISOString() });
+  try {
+    writeFileSync(FAILED_URLS_FILE, JSON.stringify(list, null, 2), "utf8");
+  } catch {
+    // 失敗URLの記録に失敗しても致命的ではないため無視する
   }
 }
 
@@ -113,12 +257,12 @@ async function acquireSlot() {
   for (;;) {
     const now = Date.now();
     const sinceLast = now - lastDispatchAt;
-    if (activeCount < maxConcurrency && sinceLast >= dispatchIntervalMs) {
+    if (activeCount < maxConcurrency && sinceLast >= DISPATCH_INTERVAL_MS) {
       lastDispatchAt = Date.now();
       activeCount++;
       return;
     }
-    const wait = Math.max(50, dispatchIntervalMs - sinceLast);
+    const wait = Math.max(50, DISPATCH_INTERVAL_MS - sinceLast);
     await new Promise((resolve) => setTimeout(resolve, wait));
   }
 }
@@ -141,14 +285,18 @@ function sjisPercentEncode(str) {
   return out;
 }
 
-async function fetchWithRetry(url, init, retries = 4) {
+async function fetchWithRetry(url, init, retries = RETRIES) {
   const cacheKey = cacheKeyFor(url, init);
   const cached = readCache(cacheKey);
   if (cached) return cached;
 
+  // 同時に発行される複数リクエストの開始時刻を少しずつずらし、バーストを避ける。
+  await new Promise((r) => setTimeout(r, Math.random() * DISPATCH_JITTER_MS));
+
   let lastError;
   for (let attempt = 0; attempt <= retries; attempt++) {
     await acquireSlot();
+    const startedAt = registerRequestStart();
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 20000);
@@ -163,35 +311,66 @@ async function fetchWithRetry(url, init, retries = 4) {
         clearTimeout(timeoutId);
       }
 
-      const isThrottleStatus = res.status === 429 || res.status === 403 || res.status >= 500;
-      if (isThrottleStatus) {
-        registerThrottleError();
+      const isRateLimitStatus = res.status === 429 || res.status === 403;
+      const isServerErrorStatus = res.status >= 500;
+      if (isRateLimitStatus) {
+        registerRateLimitError(res.status);
         const retryAfterSec = Number(res.headers.get("retry-after"));
-        const backoff = Number.isFinite(retryAfterSec) && retryAfterSec > 0 ? retryAfterSec * 1000 : dispatchIntervalMs * 2 ** attempt;
-        await new Promise((r) => setTimeout(r, Math.min(backoff, 30000)));
+        const backoff = Number.isFinite(retryAfterSec) && retryAfterSec > 0 ? retryAfterSec * 1000 : BACKOFF_DELAYS_MS[Math.min(attempt, BACKOFF_DELAYS_MS.length - 1)];
+        await new Promise((r) => setTimeout(r, backoff));
+        throw new Error(`HTTP ${res.status}`);
+      }
+      if (isServerErrorStatus) {
+        registerServerError(false);
+        await new Promise((r) => setTimeout(r, BACKOFF_DELAYS_MS[Math.min(attempt, BACKOFF_DELAYS_MS.length - 1)]));
         throw new Error(`HTTP ${res.status}`);
       }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const buf = Buffer.from(await res.arrayBuffer());
       const contentType = res.headers.get("content-type") ?? "";
-      registerThrottleSuccess();
+      registerSuccess(startedAt);
       const result = { status: res.status, contentType, buf };
       writeCache(cacheKey, result);
       return result;
     } catch (e) {
       lastError = e;
-      const isThrottleStatus = /HTTP (429|403|5\d\d)/.test(String(e?.message));
-      if (!isThrottleStatus) {
-        // タイムアウト（AbortError）など、ステータス起因でないエラーでも念のため速度を落とす
-        registerThrottleError();
-        await new Promise((r) => setTimeout(r, 1500 * 2 ** attempt));
+      const isKnownHttpError = /HTTP (429|403|5\d\d)/.test(String(e?.message));
+      if (!isKnownHttpError) {
+        // タイムアウト（AbortError）などステータス起因でないエラーも、5xxと同様の速度低下対象とする
+        registerServerError(true);
+        await new Promise((r) => setTimeout(r, BACKOFF_DELAYS_MS[Math.min(attempt, BACKOFF_DELAYS_MS.length - 1)]));
       }
     } finally {
       releaseSlot();
     }
   }
+  persistFailedUrl(url, String(lastError?.message ?? lastError));
   throw lastError;
+}
+
+/** 直近取得の統計情報を返す（呼び出し側での進捗表示用）。 */
+export function getFetchStats() {
+  return { ...stats, maxConcurrency, avgResponseMs: currentAvgResponseMs() };
+}
+
+/** これまでに全リトライを使い切って失敗したURL一覧を返す（再処理用）。 */
+export function getFailedUrls() {
+  try {
+    if (existsSync(FAILED_URLS_FILE)) return JSON.parse(readFileSync(FAILED_URLS_FILE, "utf8"));
+  } catch {
+    // 読み込み失敗時は空配列を返す
+  }
+  return [];
+}
+
+/** 失敗URL一覧をクリアする（再処理が完了した後などに使う）。 */
+export function clearFailedUrls() {
+  try {
+    writeFileSync(FAILED_URLS_FILE, "[]", "utf8");
+  } catch {
+    // 致命的ではないため無視する
+  }
 }
 
 function decodeSjis(buf) {
