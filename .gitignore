@@ -21,6 +21,11 @@ dist-ssr
 generated/
 backups/
 
+# 会議録検索システムから取得した生HTML・正規化テキストのローカルキャッシュ
+# （公式会議録の著作物をそのまま複製・再配布しない方針のため、Git管理しない。
+# docs/council-speech-summary-pipeline.md 参照）
+data/minutes/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
