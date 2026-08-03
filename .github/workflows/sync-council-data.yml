@@ -1,0 +1,164 @@
+name: Sync council data (5-day check)
+
+# 延岡市議会公式サイトの各種資料（会議日程・意見書決議・委員会活動報告書・
+# 一般質問質問通告一覧・議員名簿の変更検知）を確認し、差分がある場合のみ
+# botブランチ経由でPull Requestを作成する（本番ブランチへ直接pushしない）。
+#
+# 実際には「正確に5日ごと」ではなく、毎日起動した上で、前回正常実行から
+# 120時間（5日）以上経過している場合のみ本処理を実行する（月またぎでも
+# ずれないようにするため）。前回正常実行日時は scripts/sync-council-data.mjs が
+# 管理するローカル状態ファイル（scripts/_sync-state.json）で判定し、
+# このファイル自体はactions/cacheで実行間を跨いで保持する（Gitへはコミットしない）。
+#
+# cronはUTC基準のため、日本時間 午前3時30分ごろ（UTC 18:30、前日）に設定している。
+on:
+  schedule:
+    - cron: "30 18 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "120時間ゲートを無視して即時実行する"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-council-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore sync state
+        uses: actions/cache/restore@v4
+        with:
+          path: scripts/_sync-state.json
+          key: sync-council-data-state-${{ github.run_id }}
+          restore-keys: |
+            sync-council-data-state-
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run council data sync
+        id: sync
+        run: |
+          FORCE_FLAG=""
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+          node scripts/sync-council-data.mjs $FORCE_FLAG | tee sync-output.log
+          if grep -q "^SYNC_RAN=true$" sync-output.log; then
+            echo "ran=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ran=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate / typecheck / lint / build
+        if: steps.sync.outputs.ran == 'true'
+        run: npm run check
+
+      - name: Mark this run as successful (for next run's 120-hour gate)
+        if: steps.sync.outputs.ran == 'true'
+        run: node scripts/sync-council-data.mjs --mark-success
+
+      - name: Save sync state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: scripts/_sync-state.json
+          key: sync-council-data-state-${{ github.run_id }}
+
+      - name: Check for portal data changes
+        id: diff
+        if: steps.sync.outputs.ran == 'true'
+        run: |
+          if git status --porcelain -- src/data/councilWatchedDocuments.json | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit and open Pull Request
+        if: steps.sync.outputs.ran == 'true' && steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          BRANCH="bot/sync-council-data-$(date -u +%Y%m%d%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add src/data/councilWatchedDocuments.json reports/sync-council-data-report.json
+          git commit -m "chore: 延岡市議会の資料自動巡回（$(date -u +%Y-%m-%d)）"
+          git push origin "$BRANCH"
+
+          node -e '
+            const r = require("./reports/sync-council-data-report.json");
+            const lines = [];
+            lines.push("## 延岡市議会 自動巡回結果");
+            lines.push("");
+            lines.push(`- 実行日時: ${r.runAt}`);
+            lines.push(`- 前回正常実行日時: ${r.lastSuccessfulRunAt ?? "記録なし"}`);
+            lines.push(`- 確認したページ数: ${r.categories.filter(c => c.status === "ok").length}`);
+            const sum = (key) => r.categories.reduce((s, c) => s + (c[key] ?? 0), 0);
+            lines.push(`- 新規: ${sum("new")} / 更新: ${sum("updated")} / 変更なし: ${sum("unchanged")}`);
+            lines.push(`- 削除疑い: ${sum("removedSuspected") + sum("urlChangeSuspected")} / 取得失敗: ${sum("errors")} / 要確認: ${sum("needsReview")}`);
+            lines.push(`- 429/403/5xx: ${r.fetchStats?.count429 ?? 0}/${r.fetchStats?.count403 ?? 0}/${r.fetchStats?.count5xx ?? 0}`);
+            lines.push("");
+            lines.push("### カテゴリ別");
+            lines.push("");
+            lines.push("| カテゴリ | 検出 | 新規 | 更新 | 変更なし | エラー |");
+            lines.push("|---|---|---|---|---|---|");
+            for (const c of r.categories.filter(c => c.status === "ok")) {
+              lines.push(`| ${c.categoryLabel} | ${c.detected ?? "-"} | ${c.new ?? "-"} | ${c.updated ?? "-"} | ${c.unchanged ?? "-"} | ${c.errors ?? 0} |`);
+            }
+            lines.push("");
+            lines.push("### 対象外・未確認のカテゴリ");
+            for (const c of r.unavailableCategories ?? []) {
+              lines.push(`- **${c.categoryLabel}**（${c.status}）: ${c.note}`);
+            }
+            lines.push("");
+            lines.push("### 変更ファイル一覧");
+            lines.push("- src/data/councilWatchedDocuments.json");
+            lines.push("- reports/sync-council-data-report.json");
+            lines.push("");
+            lines.push("### 原文URL一覧");
+            for (const c of r.categories.filter(c => c.status === "ok")) {
+              lines.push(`- ${c.categoryLabel}: ${c.pageUrl}`);
+            }
+            lines.push("");
+            lines.push("人が内容を確認し、問題なければマージしてください。本番ブランチへの自動push・自動デプロイは行っていません。");
+            require("fs").writeFileSync("pr-body.md", lines.join("\n"));
+          '
+
+          gh pr create \
+            --title "chore: 延岡市議会の資料自動巡回（$(date -u +%Y-%m-%d)）" \
+            --body-file pr-body.md \
+            --base main \
+            --head "$BRANCH"
+
+      - name: Upload sync report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sync-council-data-report
+          path: |
+            reports/sync-council-data-report.json
+            sync-output.log
+          if-no-files-found: ignore
+          retention-days: 90

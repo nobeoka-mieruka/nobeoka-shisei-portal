@@ -1,0 +1,104 @@
+{
+  "runAt": "2026-08-03T19:52:56.348Z",
+  "dryRun": false,
+  "forced": true,
+  "lastSuccessfulRunAt": null,
+  "hoursSinceLast": null,
+  "gateReason": "force",
+  "ran": true,
+  "allowedHosts": [
+    "www.city.nobeoka.miyazaki.jp",
+    "city.nobeoka.miyazaki.jp"
+  ],
+  "categories": [
+    {
+      "category": "session-schedule",
+      "categoryLabel": "会議日程",
+      "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "status": "ok",
+      "detected": 2,
+      "new": 2,
+      "updated": 0,
+      "unchanged": 0,
+      "removedSuspected": 0,
+      "urlChangeSuspected": 0,
+      "errors": 0
+    },
+    {
+      "category": "statement-resolution",
+      "categoryLabel": "意見書・決議",
+      "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/19435.html",
+      "status": "ok",
+      "detected": 41,
+      "new": 41,
+      "updated": 0,
+      "unchanged": 0,
+      "removedSuspected": 0,
+      "urlChangeSuspected": 0,
+      "errors": 0
+    },
+    {
+      "category": "committee-activity-report",
+      "categoryLabel": "委員会活動報告書",
+      "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/43039.html",
+      "status": "ok",
+      "detected": 6,
+      "new": 6,
+      "updated": 0,
+      "unchanged": 0,
+      "removedSuspected": 0,
+      "urlChangeSuspected": 0,
+      "errors": 0
+    },
+    {
+      "category": "question-notice",
+      "categoryLabel": "一般質問 質問通告一覧",
+      "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html",
+      "detailUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1402.html",
+      "sessionTitle": "第26回延岡市議会(令和8年6月定例会)",
+      "status": "ok",
+      "detected": 14,
+      "new": 14,
+      "updated": 0,
+      "unchanged": 0,
+      "removedSuspected": 0,
+      "urlChangeSuspected": 0,
+      "needsReview": 0,
+      "errors": 0
+    },
+    {
+      "category": "member-roster-watch",
+      "categoryLabel": "議員名簿（変更検知）",
+      "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
+      "status": "ok",
+      "changed": true
+    }
+  ],
+  "unavailableCategories": [
+    {
+      "category": "question-memorandum",
+      "categoryLabel": "質問主意書・答弁書",
+      "status": "対象資料なし",
+      "note": "延岡市議会の公式サイトを実地調査したが、「質問主意書」という名称の制度・公開資料は確認できなかった。一般質問は本会議での口頭質問（質問通告一覧・会議録）のみが公式資料として存在する。"
+    },
+    {
+      "category": "committee-minutes",
+      "categoryLabel": "常任委員会・特別委員会の会議録",
+      "status": "未確認",
+      "note": "会議録検索システム（kensakusystem.jp）で本会議のCodeは確認済みだが、委員会分のCodeは未特定。誤ったCodeでの取得を避けるため、今回は対象外とした。"
+    },
+    {
+      "category": "petition-register",
+      "categoryLabel": "請願・陳情の個別一覧・審査結果",
+      "status": "対象資料なし",
+      "note": "/site/gikai/1429.html は制度説明・様式提供のみで、個別の請願・陳情一覧や審査結果を掲載する公開ページは確認できなかった。審査結果は審議結果PDF（既存のfetch-nobeoka-council-documents.mjsが扱う範囲）に含まれる場合がある。"
+    }
+  ],
+  "fetchStats": {
+    "checked": 69,
+    "count429": 0,
+    "count403": 0,
+    "count5xx": 0,
+    "errors": 0
+  }
+}

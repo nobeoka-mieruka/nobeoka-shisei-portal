@@ -677,6 +677,58 @@ function validateRoleRankingFile(relPath) {
 validateRoleRankingFile("src/data/nationalCompensationRanking.json");
 validateRoleRankingFile("src/data/similarMunicipalityComparison.json");
 
+// --- councilWatchedDocuments.json（5日ごと自動巡回の差分取得結果） ---
+try {
+  const watched = readJson("src/data/councilWatchedDocuments.json");
+  if (!Array.isArray(watched)) throw new Error("配列ではありません");
+
+  const ALLOWED_WATCH_CATEGORIES = new Set([
+    "session-schedule",
+    "statement-resolution",
+    "committee-activity-report",
+    "question-notice",
+    "member-roster-watch",
+  ]);
+  const ALLOWED_WATCH_STATUS = new Set([
+    "published",
+    "baseline",
+    "url-change-suspected",
+    "removed-confirmed-suspected",
+    "要確認（変更検知）",
+  ]);
+  const ALLOWED_OCR_STATUS = new Set(["text-extracted", "OCR確認待ち", undefined, null]);
+  const ALLOWED_HOST_RE = /^https:\/\/(www\.)?city\.nobeoka\.miyazaki\.jp\//;
+
+  const seenIds = new Set();
+  for (const r of watched) {
+    const tag = `councilWatchedDocuments.json (${r.id ?? "id不明"})`;
+    if (isBlank(r.id)) err(tag, "idが空です");
+    else if (seenIds.has(r.id)) err(tag, `idが重複しています: ${r.id}`);
+    else seenIds.add(r.id);
+
+    if (!ALLOWED_WATCH_CATEGORIES.has(r.category)) err(tag, `未知のcategoryです: ${r.category}`);
+    if (isBlank(r.title)) err(tag, "titleが空です");
+    if (!r.sourceUrl || !ALLOWED_HOST_RE.test(r.sourceUrl)) {
+      err(tag, `sourceUrlが延岡市公式サイト以外、または不正です: ${r.sourceUrl}`);
+    }
+    if (r.status !== undefined && !ALLOWED_WATCH_STATUS.has(r.status)) {
+      warn(tag, `statusが想定外の値です（誤りではないが確認推奨）: ${r.status}`);
+    }
+    if (!ALLOWED_OCR_STATUS.has(r.ocrStatus)) {
+      warn(tag, `ocrStatusが想定外の値です（誤りではないが確認推奨）: ${r.ocrStatus}`);
+    }
+    if (r.firstDetectedAt && !DATE_RE.test(r.firstDetectedAt)) err(tag, `firstDetectedAtの形式が不正です: ${r.firstDetectedAt}`);
+    if (r.lastCheckedAt && !DATE_RE.test(r.lastCheckedAt)) err(tag, `lastCheckedAtの形式が不正です: ${r.lastCheckedAt}`);
+
+    if (r.category === "question-notice" && r.memberId) {
+      const memberExists = (members ?? []).some((m) => m.id === r.memberId);
+      if (!memberExists) err(tag, `memberIdが議員データに存在しません: ${r.memberId}`);
+    }
+  }
+} catch {
+  warn("councilWatchedDocuments.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
 // --- financeDashboard.json ---
 try {
   const finance = readJson("src/data/financeDashboard.json");
