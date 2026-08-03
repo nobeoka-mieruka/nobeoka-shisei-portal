@@ -135,3 +135,15 @@ export async function fetchCitySiteBuffer(url) {
   const res = await fetchCitySite(url);
   return Buffer.from(await res.arrayBuffer());
 }
+
+/** 本文に加え、変更検知に使う条件付きリクエスト用ヘッダー（ETag等）も返す。 */
+export async function fetchCitySiteWithMeta(url) {
+  const res = await fetchCitySite(url);
+  const buffer = Buffer.from(await res.arrayBuffer());
+  return {
+    buffer,
+    etag: res.headers.get("etag"),
+    lastModified: res.headers.get("last-modified"),
+    contentLength: res.headers.get("content-length"),
+  };
+}

@@ -43,7 +43,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ALLOWED_HOSTS, fetchCitySiteBuffer, fetchCitySiteText, resolveUrl, sha256OfBuffer, stats as fetchStats } from "./lib/city-site-fetch.mjs";
+import { ALLOWED_HOSTS, fetchCitySiteText, fetchCitySiteWithMeta, resolveUrl, sha256OfBuffer, stats as fetchStats } from "./lib/city-site-fetch.mjs";
 import { extractPdfText } from "./lib/pdf-text.mjs";
 import { matchSpeakerToMember } from "./lib/minutes-source.mjs";
 import { appendHistory, loadLocalState, saveLocalState, shouldRun } from "./lib/sync-state.mjs";
@@ -99,11 +99,28 @@ function todayIso() {
   return new Date().toISOString().slice(0, 10);
 }
 
-async function downloadAndAssess(sourceUrl) {
-  const buffer = await fetchCitySiteBuffer(sourceUrl);
+/** "第26回延岡市議会(令和8年6月定例会)" + 月日 → "2026-06-23"（令和年が読み取れない場合はnull）。 */
+function deriveQuestionDate(sessionTitle, month, day) {
+  const m = sessionTitle?.match(/令和(\d+)年/);
+  if (!m) return null;
+  const year = Number(m[1]) + 2018;
+  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+const MAX_STORED_TEXT_CHARS = 6000;
+
+/**
+ * @param {string} sourceUrl
+ * @param {{includeText?: boolean}} [options] includeText: 質問通告書PDF等、本文プレビューを
+ *   保存したいカテゴリでのみtrueにする（他カテゴリでのJSON肥大化を避けるため既定false）。
+ */
+async function downloadAndAssess(sourceUrl, options = {}) {
+  const meta = await fetchCitySiteWithMeta(sourceUrl);
+  const { buffer } = meta;
   const fileHash = sha256OfBuffer(buffer);
   let ocrRequired = null;
   let totalChars = null;
+  let extractedText = null;
   if (/\.pdf$/i.test(sourceUrl)) {
     const tmpPath = join(root, "scripts", ".cache", "sync-pdf-check.pdf");
     mkdirSync(dirname(tmpPath), { recursive: true });
@@ -112,11 +129,27 @@ async function downloadAndAssess(sourceUrl) {
       const extracted = await extractPdfText(tmpPath);
       ocrRequired = extracted.ocrRequired;
       totalChars = extracted.totalChars;
+      if (options.includeText && !ocrRequired) {
+        extractedText = extracted.pages
+          .map((p) => p.rawText)
+          .join("\n")
+          .trim()
+          .slice(0, MAX_STORED_TEXT_CHARS);
+      }
     } catch (e) {
       console.warn(`[sync-council-data] PDFテキスト抽出に失敗（OCR要否を判定できず）: ${sourceUrl} - ${e.message}`);
     }
   }
-  return { buffer, fileHash, ocrRequired, totalChars };
+  return {
+    buffer,
+    fileHash,
+    ocrRequired,
+    totalChars,
+    extractedText,
+    etag: meta.etag,
+    lastModified: meta.lastModified,
+    contentLength: meta.contentLength,
+  };
 }
 
 /** 種別＋原文URLを基本キーに、既存レコードを探す。 */
@@ -235,7 +268,15 @@ async function syncGenericListing({ category, categoryLabel, pageUrl, records, r
   );
 }
 
-/** 一般質問 質問通告一覧（1416.html → 最新会期の通告一覧ページ）を確認する。 */
+/**
+ * 一般質問 質問通告一覧（1416.html → 最新会期の通告一覧ページ）を確認する。
+ *
+ * 1416.htmlは同一URLのまま内容（対象会期・PDFリンク等）が入れ替わるページのため、
+ * URLの一致だけで「取得済み」と判定しない。ページタイトル・更新日・対象会期・本文
+ * ハッシュ・PDFのETag/Last-Modified/Content-Length/SHA-256のいずれかが変化した場合を
+ * 「更新」として検出する。新しい会期を検出した場合は、既存の会期の記録を上書きせず、
+ * 新しい会期のレコード（sourceUrlが異なるため自然に別レコードとなる）として追加する。
+ */
 async function syncQuestionNotices({ records, report, members }) {
   const indexUrl = "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html";
   console.log(`[sync-council-data] 一般質問 質問通告一覧 を確認します: ${indexUrl}`);
@@ -248,6 +289,12 @@ async function syncQuestionNotices({ records, report, members }) {
     return;
   }
   const body = extractMainBody(indexHtml);
+  const indexTitleMatch = indexHtml.match(/<h1>([^<]*)<\/h1>/);
+  const indexTitle = indexTitleMatch ? indexTitleMatch[1].trim() : null;
+  const indexUpdateDateMatch = indexHtml.match(/更新日：([^<]*)更新/);
+  const indexUpdateDate = indexUpdateDateMatch ? indexUpdateDateMatch[1].trim() : null;
+  const indexBodyHash = sha256OfBuffer(Buffer.from(body, "utf8"));
+
   const linkMatch = body.match(/<li><a href="([^"]+)">([^<]*)<\/a><\/li>/);
   if (!linkMatch) {
     console.warn("[sync-council-data] 質問通告一覧: 入口ページの構造が想定と異なるため、検出0件として記録します。");
@@ -266,6 +313,71 @@ async function syncQuestionNotices({ records, report, members }) {
   const detailBody = extractMainBody(detailHtml);
   const sessionTitleMatch = detailBody.match(/<h2><strong>([^<]*)<\/strong><\/h2>/);
   const sessionTitle = sessionTitleMatch ? sessionTitleMatch[1].trim() : null;
+  const detailBodyHash = sha256OfBuffer(Buffer.from(detailBody, "utf8"));
+
+  // ページタイトル・更新日・対象会期・詳細ページ本文ハッシュのいずれも変化していない場合は、
+  // 個々のPDFの再ダウンロード・再解析を行わない（公式サーバー負荷対策）。
+  const indexStateId = "question-notice-index-state";
+  const previousState = records.find((r) => r.id === indexStateId);
+  const unchangedSinceLastCheck =
+    previousState &&
+    previousState.indexTitle === indexTitle &&
+    previousState.indexUpdateDate === indexUpdateDate &&
+    previousState.sessionTitle === sessionTitle &&
+    previousState.detailBodyHash === detailBodyHash;
+
+  if (!isDryRun) {
+    if (previousState) {
+      previousState.indexTitle = indexTitle;
+      previousState.indexUpdateDate = indexUpdateDate;
+      previousState.sessionTitle = sessionTitle;
+      previousState.indexBodyHash = indexBodyHash;
+      previousState.detailUrl = detailUrl;
+      previousState.detailBodyHash = detailBodyHash;
+      previousState.lastCheckedAt = todayIso();
+    } else {
+      records.push({
+        id: indexStateId,
+        category: "question-notice-index-state",
+        title: "質問通告一覧ページの状態（変更検知用）",
+        sourceUrl: indexUrl,
+        indexTitle,
+        indexUpdateDate,
+        sessionTitle,
+        indexBodyHash,
+        detailUrl,
+        detailBodyHash,
+        status: "baseline",
+        isOfficial: true,
+        firstDetectedAt: todayIso(),
+        lastCheckedAt: todayIso(),
+      });
+    }
+  }
+
+  if (unchangedSinceLastCheck) {
+    const existingMemberRecords = records.filter((r) => r.category === "question-notice");
+    for (const r of existingMemberRecords) r.lastCheckedAt = todayIso();
+    report.categories.push({
+      category: "question-notice",
+      categoryLabel: "一般質問 質問通告一覧",
+      pageUrl: indexUrl,
+      detailUrl,
+      sessionTitle,
+      status: "ok",
+      detected: existingMemberRecords.length,
+      new: 0,
+      updated: 0,
+      unchanged: existingMemberRecords.length,
+      removedSuspected: 0,
+      urlChangeSuspected: 0,
+      needsReview: existingMemberRecords.filter((r) => r.speakerIdentificationStatus === "要確認").length,
+      errors: 0,
+      note: "一覧ページのタイトル・更新日・対象会期・本文ハッシュが前回確認時と一致したため、PDFの再取得・再解析をスキップしました。",
+    });
+    console.log("[sync-council-data] 質問通告一覧: 前回確認時から変更なし（タイトル・更新日・会期・本文ハッシュ一致）。PDFの再解析をスキップしました。");
+    return;
+  }
 
   const dayBlockRe = /<h3>【(\d{1,2})月(\d{1,2})日[^】]*】[^<]*<\/h3>([\s\S]*?)(?=<h3>|$)/g;
   let dayMatch;
@@ -304,10 +416,18 @@ async function syncQuestionNotices({ records, report, members }) {
             unchangedCount++;
             continue;
           }
-          const { fileHash, ocrRequired } = await downloadAndAssess(sourceUrl);
-          if (fileHash !== existing.fileHash) {
+          const { fileHash, ocrRequired, extractedText, etag, lastModified, contentLength } = await downloadAndAssess(sourceUrl, {
+            includeText: true,
+          });
+          const metaChanged = existing.etag !== etag || existing.lastModified !== lastModified || existing.contentLength !== contentLength;
+          if (fileHash !== existing.fileHash || metaChanged) {
             existing.fileHash = fileHash;
             existing.ocrStatus = ocrRequired ? "OCR確認待ち" : "text-extracted";
+            existing.extractedTextPreview = extractedText;
+            existing.etag = etag;
+            existing.lastModified = lastModified;
+            existing.contentLength = contentLength;
+            existing.fetchedAt = new Date().toISOString();
             existing.updatedAt = todayIso();
             updatedCount++;
           } else {
@@ -316,11 +436,15 @@ async function syncQuestionNotices({ records, report, members }) {
         } else {
           newCount++;
           if (isDryRun) continue;
-          const { fileHash, ocrRequired } = await downloadAndAssess(sourceUrl);
+          const { fileHash, ocrRequired, extractedText, etag, lastModified, contentLength } = await downloadAndAssess(sourceUrl, {
+            includeText: true,
+          });
           records.push({
             id: `question-notice-${sha256OfBuffer(Buffer.from(sourceUrl)).slice(0, 12)}`,
             category: "question-notice",
             title: `${sessionTitle ?? "会期未特定"}（${monthStr}月${dayStr}日 個人質問）`,
+            sessionTitle: sessionTitle ?? null,
+            questionDate: deriveQuestionDate(sessionTitle, Number(monthStr), Number(dayStr)),
             memberName: name,
             memberId: matched?.memberId ?? null,
             speakerIdentificationStatus: matched ? "confirmed" : "要確認",
@@ -330,10 +454,15 @@ async function syncQuestionNotices({ records, report, members }) {
             sourcePageUrl: detailUrl,
             fileHash,
             ocrStatus: ocrRequired ? "OCR確認待ち" : "text-extracted",
+            extractedTextPreview: extractedText,
+            etag,
+            lastModified,
+            contentLength,
             status: "published",
             isOfficial: true,
             firstDetectedAt: todayIso(),
             lastCheckedAt: todayIso(),
+            fetchedAt: new Date().toISOString(),
             updatedAt: null,
             missingStreak: 0,
           });

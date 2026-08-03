@@ -687,6 +687,7 @@ try {
     "statement-resolution",
     "committee-activity-report",
     "question-notice",
+    "question-notice-index-state",
     "member-roster-watch",
   ]);
   const ALLOWED_WATCH_STATUS = new Set([
