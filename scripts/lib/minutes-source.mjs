@@ -26,16 +26,105 @@
  * - 議員名の表記ゆれ（敬称の有無、姓名の間のスペース等）の正規化ルールは今後精査する。
  */
 import iconv from "iconv-lite";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const BASE = "https://www.kensakusystem.jp/nobeoka";
-const USER_AGENT = "Mozilla/5.0 (compatible; NobeokaShiseiPortalBot/1.0; +https://nobeoka-shisei-portal.pages.dev/about)";
-const MIN_REQUEST_INTERVAL_MS = 2000;
 
-let lastRequestAt = 0;
-async function throttle() {
-  const wait = lastRequestAt + MIN_REQUEST_INTERVAL_MS - Date.now();
-  if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
-  lastRequestAt = Date.now();
+// ローカルHTMLキャッシュ（.gitignore対象）。同一URL・同一POST bodyの再取得を防ぐ。
+// 会議録は既に確定した過去日程分のみを扱うため、内容が変わることはない前提でキャッシュする。
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const CACHE_DIR = join(__dirname, "..", ".cache", "minutes");
+
+function cacheKeyFor(url, init) {
+  const method = init?.method ?? "GET";
+  const body = init?.body ?? "";
+  return createHash("sha256").update(`${method}\n${url}\n${body}`).digest("hex");
+}
+
+function readCache(key) {
+  const file = join(CACHE_DIR, `${key}.json`);
+  if (!existsSync(file)) return null;
+  try {
+    const raw = JSON.parse(readFileSync(file, "utf8"));
+    return { status: raw.status, contentType: raw.contentType, buf: Buffer.from(raw.bufBase64, "base64") };
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(key, result) {
+  try {
+    if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true });
+    writeFileSync(
+      join(CACHE_DIR, `${key}.json`),
+      JSON.stringify({ status: result.status, contentType: result.contentType, bufBase64: result.buf.toString("base64") }),
+      "utf8"
+    );
+  } catch {
+    // キャッシュ書き込み失敗は致命的ではないため無視して続行する
+  }
+}
+const USER_AGENT = "Mozilla/5.0 (compatible; NobeokaShiseiPortalBot/1.0; +https://nobeoka-shisei-portal.pages.dev/about)";
+
+/**
+ * 適応型の同時実行数制御。
+ * - 同時に飛ばすリクエストは最大 maxConcurrency 件（既定3件）。
+ * - さらに、リクエストの「発行間隔」にも下限（dispatchIntervalMs）を設け、
+ *   maxConcurrency=3にしてもバースト（3件が同時刻に発火）しないようにする。
+ * - 429（Too Many Requests）やネットワークエラーが起きた場合は、
+ *   maxConcurrencyを1まで段階的に縮小し、発行間隔を指数的に伸ばす。
+ *   一定回数、成功が続いたら緩やかに元の設定へ戻す。
+ */
+const BASE_MAX_CONCURRENCY = 3;
+const MIN_MAX_CONCURRENCY = 1;
+const BASE_DISPATCH_INTERVAL_MS = 700; // 3件/2.1秒 相当のペース
+const MAX_DISPATCH_INTERVAL_MS = 10000;
+
+let maxConcurrency = BASE_MAX_CONCURRENCY;
+let dispatchIntervalMs = BASE_DISPATCH_INTERVAL_MS;
+let activeCount = 0;
+let lastDispatchAt = 0;
+let consecutiveSuccesses = 0;
+
+function registerThrottleError() {
+  maxConcurrency = Math.max(MIN_MAX_CONCURRENCY, maxConcurrency - 1);
+  dispatchIntervalMs = Math.min(MAX_DISPATCH_INTERVAL_MS, dispatchIntervalMs * 2);
+  consecutiveSuccesses = 0;
+  console.warn(`[minutes-source] スロットル調整: maxConcurrency=${maxConcurrency}, dispatchIntervalMs=${dispatchIntervalMs}`);
+}
+
+function registerThrottleSuccess() {
+  consecutiveSuccesses++;
+  // 10回連続成功でペースを段階的に戻す（急に戻して429を誘発しないよう緩やかに）
+  if (consecutiveSuccesses % 10 === 0) {
+    if (dispatchIntervalMs > BASE_DISPATCH_INTERVAL_MS) {
+      dispatchIntervalMs = Math.max(BASE_DISPATCH_INTERVAL_MS, Math.round(dispatchIntervalMs / 1.5));
+    } else if (maxConcurrency < BASE_MAX_CONCURRENCY) {
+      maxConcurrency++;
+    }
+  }
+}
+
+/** 同時実行スロットと最小発行間隔の両方が空くまで待つ。 */
+async function acquireSlot() {
+  for (;;) {
+    const now = Date.now();
+    const sinceLast = now - lastDispatchAt;
+    if (activeCount < maxConcurrency && sinceLast >= dispatchIntervalMs) {
+      lastDispatchAt = Date.now();
+      activeCount++;
+      return;
+    }
+    const wait = Math.max(50, dispatchIntervalMs - sinceLast);
+    await new Promise((resolve) => setTimeout(resolve, wait));
+  }
+}
+
+function releaseSlot() {
+  activeCount = Math.max(0, activeCount - 1);
 }
 
 /** Shift_JIS文字列をパーセントエンコードする（バイト単位、大文字16進）。URLのクエリ部分の構築に使う。 */
@@ -52,19 +141,54 @@ function sjisPercentEncode(str) {
   return out;
 }
 
-async function fetchWithRetry(url, init, retries = 2) {
-  await throttle();
+async function fetchWithRetry(url, init, retries = 4) {
+  const cacheKey = cacheKeyFor(url, init);
+  const cached = readCache(cacheKey);
+  if (cached) return cached;
+
   let lastError;
   for (let attempt = 0; attempt <= retries; attempt++) {
+    await acquireSlot();
     try {
-      const res = await fetch(url, { ...init, headers: { "User-Agent": USER_AGENT, ...(init?.headers ?? {}) } });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000);
+      let res;
+      try {
+        res = await fetch(url, {
+          ...init,
+          signal: controller.signal,
+          headers: { "User-Agent": USER_AGENT, ...(init?.headers ?? {}) },
+        });
+      } finally {
+        clearTimeout(timeoutId);
+      }
+
+      const isThrottleStatus = res.status === 429 || res.status === 403 || res.status >= 500;
+      if (isThrottleStatus) {
+        registerThrottleError();
+        const retryAfterSec = Number(res.headers.get("retry-after"));
+        const backoff = Number.isFinite(retryAfterSec) && retryAfterSec > 0 ? retryAfterSec * 1000 : dispatchIntervalMs * 2 ** attempt;
+        await new Promise((r) => setTimeout(r, Math.min(backoff, 30000)));
+        throw new Error(`HTTP ${res.status}`);
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
       const buf = Buffer.from(await res.arrayBuffer());
       const contentType = res.headers.get("content-type") ?? "";
-      return { status: res.status, contentType, buf };
+      registerThrottleSuccess();
+      const result = { status: res.status, contentType, buf };
+      writeCache(cacheKey, result);
+      return result;
     } catch (e) {
       lastError = e;
-      if (attempt < retries) await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
+      const isThrottleStatus = /HTTP (429|403|5\d\d)/.test(String(e?.message));
+      if (!isThrottleStatus) {
+        // タイムアウト（AbortError）など、ステータス起因でないエラーでも念のため速度を落とす
+        registerThrottleError();
+        await new Promise((r) => setTimeout(r, 1500 * 2 ** attempt));
+      }
+    } finally {
+      releaseSlot();
     }
   }
   throw lastError;

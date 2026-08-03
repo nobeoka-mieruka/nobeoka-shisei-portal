@@ -26,6 +26,9 @@ backups/
 # docs/council-speech-summary-pipeline.md 参照）
 data/minutes/
 
+# scripts/lib/minutes-source.mjs のHTTP取得結果ローカルキャッシュ（同一URL再取得防止）
+scripts/.cache/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
