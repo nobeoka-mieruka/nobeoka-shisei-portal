@@ -181,7 +181,7 @@ export function MemberDetailPage() {
         </div>
 
         {isProfileConfirmed ? (
-          <p className="mt-4 text-sm leading-relaxed text-on-surface">{member.profile}</p>
+          <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-on-surface">{member.profile}</p>
         ) : (
           <div className="mt-4 rounded-xl bg-surface-container-high p-4">
             <p className="text-sm font-medium text-on-surface">
