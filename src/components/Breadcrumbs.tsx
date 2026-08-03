@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { SITE_URL } from "../config/site";
 
 export interface BreadcrumbItem {
   label: string;
@@ -8,40 +6,13 @@ export interface BreadcrumbItem {
   to?: string;
 }
 
-const JSONLD_ID = "breadcrumb-jsonld";
-
-function upsertJsonLd(data: object): void {
-  let el = document.getElementById(JSONLD_ID) as HTMLScriptElement | null;
-  if (!el) {
-    el = document.createElement("script");
-    el.type = "application/ld+json";
-    el.id = JSONLD_ID;
-    document.head.appendChild(el);
-  }
-  el.textContent = JSON.stringify(data);
-}
-
-/** 画面表示のパンくずと、同じデータから生成するBreadcrumbList構造化データ（JSON-LD）。 */
+/**
+ * 画面表示用のパンくずナビゲーション。
+ * BreadcrumbList構造化データは、この見た目と同じ内容（items）から
+ * src/lib/seo.ts の breadcrumbJsonLd() が生成し、各ページの <JsonLd> 経由で
+ * 出力する（唯一の情報源。ここでは重複してJSON-LDを生成しない）。
+ */
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
-  const key = items.map((i) => `${i.label}:${i.to ?? ""}`).join("|");
-
-  useEffect(() => {
-    upsertJsonLd({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: items.map((item, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: item.label,
-        ...(item.to ? { item: `${SITE_URL}${item.to}` } : {}),
-      })),
-    });
-    return () => {
-      document.getElementById(JSONLD_ID)?.remove();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key]);
-
   return (
     <nav aria-label="パンくずリスト" className="overflow-x-auto">
       <ol className="flex items-center gap-1 text-xs text-on-surface-variant">
