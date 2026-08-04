@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
 import {
+  ARCHIVE_VERIFICATION_STATUSES,
   checkAnyNonNullRequiresField,
   checkDuplicateIds,
   checkDuplicateSlugs,
@@ -1237,6 +1238,196 @@ try {
   else throw e;
 }
 
+// --- archivePolicyCategories.json / archivePolicies.json / archivePolicyQuestionRelations.json /
+//     archivePolicyFiscalRelations.json（延岡市政アーカイブ：政策） ---
+let archivePolicyCategoryIds = new Set();
+try {
+  const archivePolicyCategories = readJson("src/data/archivePolicyCategories.json");
+  if (!Array.isArray(archivePolicyCategories)) throw new Error("配列ではありません");
+
+  archivePolicyCategoryIds = checkDuplicateIds({ err, warn }, archivePolicyCategories, "id", "archivePolicyCategories.json");
+  for (const c of archivePolicyCategories) {
+    const tag = `archivePolicyCategories.json (${c.id ?? "id不明"})`;
+    if (isBlank(c.label)) err(tag, "labelが空です");
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archivePolicyCategories.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+let archivePolicyIds = new Set();
+try {
+  const archivePolicies = readJson("src/data/archivePolicies.json");
+  if (!Array.isArray(archivePolicies)) throw new Error("配列ではありません");
+
+  archivePolicyIds = checkDuplicateIds({ err, warn }, archivePolicies, "id", "archivePolicies.json");
+  checkDuplicateSlugs({ err, warn }, archivePolicies, "slug", "archivePolicies.json");
+
+  // factions.jsonはvalidate-data.mjs全体で他ファイルからの参照整合性チェック対象になっていないため、
+  // ここでは政策のownerId検証専用に読み込む（会派マスタそのものの検証は行わない）。
+  let policyFactionIds = new Set();
+  try {
+    const factions = readJson("src/data/factions.json");
+    policyFactionIds = new Set((factions ?? []).map((f) => f.id));
+  } catch {
+    // 読み込めない場合はfaction所有者のID参照チェックのみスキップする
+  }
+
+  const VALID_POLICY_OWNER_TYPES = new Set(["mayor", "member", "formerMember", "faction", "city"]);
+  const VALID_POLICY_SOURCE_TYPES = new Set([
+    "electionManifesto",
+    "policyDocument",
+    "councilQuestion",
+    "mayorPolicySpeech",
+    "budgetDocument",
+    "settlementDocument",
+    "comprehensivePlan",
+    "ordinance",
+    "bill",
+    "officialStatement",
+    "otherOfficialSource",
+  ]);
+  const VALID_POLICY_STATUSES = new Set([
+    "proposed",
+    "planned",
+    "budgeted",
+    "started",
+    "ongoing",
+    "completed",
+    "changed",
+    "suspended",
+    "notVerified",
+  ]);
+
+  for (const p of archivePolicies) {
+    const tag = `archivePolicies.json (${p.id ?? "id不明"})`;
+    if (isBlank(p.title)) err(tag, "titleが空です");
+    if (isBlank(p.summary)) err(tag, "summaryが空です");
+    if (!VALID_POLICY_OWNER_TYPES.has(p.ownerType)) err(tag, `未定義のownerTypeです: ${p.ownerType}`);
+    if (!VALID_POLICY_SOURCE_TYPES.has(p.sourceType)) err(tag, `未定義のsourceTypeです: ${p.sourceType}`);
+    if (p.status !== undefined && !VALID_POLICY_STATUSES.has(p.status)) err(tag, `未定義のstatusです: ${p.status}`);
+    if (p.lastVerifiedAt && !DATE_RE.test(p.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${p.lastVerifiedAt}`);
+    if (p.announcedDate && !DATE_RE.test(p.announcedDate)) err(tag, `announcedDateの形式が不正です: ${p.announcedDate}`);
+
+    checkSourceRefs({ err, warn }, p.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, p.sourceRefs, tag);
+
+    if (!Array.isArray(p.categoryIds) || p.categoryIds.length === 0) {
+      warn(tag, "categoryIdsが未設定です（テーマ未分類）");
+    }
+    for (const cid of p.categoryIds ?? []) {
+      checkReferenceExists({ err, warn }, cid, archivePolicyCategoryIds, tag, `存在しない政策テーマIDを参照しています: ${cid}`);
+    }
+
+    if (p.ownerType === "city") {
+      if (p.ownerId) err(tag, "ownerType=cityの場合、ownerIdは設定しないでください（特定の主体に紐づかないため）");
+    } else if (isBlank(p.ownerId)) {
+      err(tag, "ownerIdが空です（ownerType=city以外はownerId必須）");
+    } else if (p.ownerType === "mayor") {
+      checkReferenceExists({ err, warn }, p.ownerId, archiveMayorIds, tag, `存在しない市長IDを参照しています: ${p.ownerId}`);
+    } else if (p.ownerType === "member") {
+      checkReferenceExists({ err, warn }, p.ownerId, memberIds, tag, `存在しない現職議員IDを参照しています: ${p.ownerId}`);
+    } else if (p.ownerType === "formerMember") {
+      checkReferenceExists({ err, warn }, p.ownerId, formerMemberIds, tag, `存在しない元議員IDを参照しています: ${p.ownerId}`);
+    } else if (p.ownerType === "faction" && policyFactionIds.size > 0) {
+      checkReferenceExists({ err, warn }, p.ownerId, policyFactionIds, tag, `存在しない会派IDを参照しています: ${p.ownerId}`);
+    }
+
+    for (const bid of p.relatedBillVoteIds ?? []) {
+      checkReferenceExists({ err, warn }, bid, billIds, tag, `存在しない議案IDを参照しています: ${bid}`);
+    }
+    for (const qid of p.relatedQuestionIds ?? []) {
+      checkReferenceExists({ err, warn }, qid, questionIds, tag, `存在しない一般質問IDを参照しています: ${qid}`);
+    }
+
+    // 完了・変更・停止のような「確定的な状況」を示すstatusは、独自判定ではなく公式資料の裏付けを
+    // 必須とする（達成・未達成の推測登録を防ぐ）。verified出典またはstatusEvidenceUrlのどちらも
+    // 無い場合は警告する。
+    const CONFIRMED_POLICY_STATUSES = new Set(["completed", "changed", "suspended"]);
+    if (CONFIRMED_POLICY_STATUSES.has(p.status)) {
+      const hasVerifiedSource = (p.sourceRefs ?? []).some((r) => r.verificationStatus === "verified");
+      if (!hasVerifiedSource && isBlank(p.statusEvidenceUrl)) {
+        warn(
+          tag,
+          `status="${p.status}"（確定的な状況）ですが、確認済み(verified)の出典・statusEvidenceUrlのいずれもありません`,
+        );
+      }
+    }
+
+    // AI生成コンテンツ（aiAnalysis）は公式データ（summary/sourceOriginalText）と型レベルで
+    // 分離されている前提を検証する。原文へのリンクが無いままAI要約だけが独り歩きしないようにする。
+    if (p.aiAnalysis) {
+      const aiTag = `${tag} (aiAnalysis)`;
+      const checkAiContent = (content, fieldLabel) => {
+        if (!content) return;
+        if (isBlank(content.text)) err(aiTag, `${fieldLabel}.textが空です`);
+        if (!content.generatedAt || !/^\d{4}-\d{2}-\d{2}/.test(content.generatedAt)) {
+          err(aiTag, `${fieldLabel}.generatedAtの形式が不正です: ${content.generatedAt}`);
+        }
+        if (typeof content.humanReviewed !== "boolean") err(aiTag, `${fieldLabel}.humanReviewedが真偽値ではありません`);
+      };
+      checkAiContent(p.aiAnalysis.aiSummary, "aiSummary");
+      checkAiContent(p.aiAnalysis.aiCategoryLabels, "aiCategoryLabels");
+      if (p.aiAnalysis.aiSummary && isBlank(p.sourceOriginalText)) {
+        warn(aiTag, "aiSummaryが設定されていますが、公式原文（sourceOriginalText）が未設定です（AI要約と原文を分離して確認できません）");
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archivePolicies.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archivePolicyQuestionRelations = readJson("src/data/archivePolicyQuestionRelations.json");
+  if (!Array.isArray(archivePolicyQuestionRelations)) throw new Error("配列ではありません");
+
+  const VALID_QUESTION_RELATION_TYPES = new Set([
+    "proposedInQuestion",
+    "discussedInQuestion",
+    "requestedInQuestion",
+    "answeredByCity",
+    "relatedTheme",
+    "needsReview",
+  ]);
+  checkDuplicateIds({ err, warn }, archivePolicyQuestionRelations, "id", "archivePolicyQuestionRelations.json");
+  for (const r of archivePolicyQuestionRelations) {
+    const tag = `archivePolicyQuestionRelations.json (${r.id ?? "id不明"})`;
+    checkReferenceExists({ err, warn }, r.policyId, archivePolicyIds, tag, `存在しない政策IDを参照しています: ${r.policyId}`);
+    checkReferenceExists({ err, warn }, r.questionId, questionIds, tag, `存在しない一般質問IDを参照しています: ${r.questionId}`);
+    if (!VALID_QUESTION_RELATION_TYPES.has(r.relationType)) err(tag, `未定義のrelationTypeです: ${r.relationType}`);
+    if (!r.verificationStatus || !ARCHIVE_VERIFICATION_STATUSES.has(r.verificationStatus)) {
+      err(tag, `未定義または未設定のverificationStatusです: ${r.verificationStatus}`);
+    }
+    if (r.sourceRef) checkSourceRefs({ err, warn }, [r.sourceRef], tag);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archivePolicyQuestionRelations.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archivePolicyFiscalRelations = readJson("src/data/archivePolicyFiscalRelations.json");
+  if (!Array.isArray(archivePolicyFiscalRelations)) throw new Error("配列ではありません");
+
+  const VALID_FISCAL_RELATION_TYPES = new Set(["proposed", "budgeted", "includedInProject", "settled", "related", "needsReview"]);
+  checkDuplicateIds({ err, warn }, archivePolicyFiscalRelations, "id", "archivePolicyFiscalRelations.json");
+  for (const r of archivePolicyFiscalRelations) {
+    const tag = `archivePolicyFiscalRelations.json (${r.id ?? "id不明"})`;
+    checkReferenceExists({ err, warn }, r.policyId, archivePolicyIds, tag, `存在しない政策IDを参照しています: ${r.policyId}`);
+    checkYearRange({ err }, r.fiscalYear, tag);
+    if (!VALID_FISCAL_RELATION_TYPES.has(r.relationType)) err(tag, `未定義のrelationTypeです: ${r.relationType}`);
+    if (!r.verificationStatus || !ARCHIVE_VERIFICATION_STATUSES.has(r.verificationStatus)) {
+      err(tag, `未定義または未設定のverificationStatusです: ${r.verificationStatus}`);
+    }
+    checkNonNegative({ err }, r.amountYen ?? null, "amountYen", tag);
+    if (r.sourceRef) checkSourceRefs({ err, warn }, [r.sourceRef], tag);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archivePolicyFiscalRelations.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- searchIndex.json（サイト内横断検索インデックス） ---
 const VALID_SEARCH_TYPES = new Set([
   "member",
@@ -1251,6 +1442,7 @@ const VALID_SEARCH_TYPES = new Set([
   "update",
   "guide",
   "press-conference",
+  "policy",
   "page",
 ]);
 // 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。
@@ -1258,6 +1450,8 @@ const VALID_URL_PREFIXES = [
   "/",
   "/members/",
   "/mayor",
+  "/mayors",
+  "/policies",
   "/finance",
   "/dashboard",
   "/compensation",
@@ -1321,6 +1515,9 @@ try {
       }
       if (s.type === "question" && !questionIds.has(s.sourceId)) {
         warn(tag, `存在しない一般質問IDを参照しています: ${s.sourceId}`);
+      }
+      if (s.type === "policy" && archivePolicyIds.size > 0 && !archivePolicyIds.has(s.sourceId)) {
+        warn(tag, `存在しない政策IDを参照しています: ${s.sourceId}`);
       }
     }
   }

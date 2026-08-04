@@ -54,6 +54,86 @@ try {
   // データがない場合はスキップ
 }
 
+// --- archive: policies ---
+// AI生成コンテンツ（aiAnalysis）は、公式資料（summary/sourceOriginalText）と混同しないよう
+// content/description/keywordsには一切含めない（検索インデックスをAI生成文で汚染しない）。
+try {
+  const archivePolicies = readJson("src/data/archivePolicies.json");
+  const archivePolicyCategories = readJson("src/data/archivePolicyCategories.json");
+  const archivePolicyQuestionRelations = readJson("src/data/archivePolicyQuestionRelations.json");
+  const archiveMayors = readJson("src/data/archiveMayors.json");
+  const formerMembers = readJson("src/data/formerMembers.json");
+  const generalQuestionsForPolicies = readJson("src/data/generalQuestions.json");
+
+  const categoryLabel = (id) => archivePolicyCategories.find((c) => c.id === id)?.label ?? "";
+  const questionTitle = (id) => generalQuestionsForPolicies.find((q) => q.id === id)?.title ?? "";
+
+  const POLICY_OWNER_TYPE_LABELS = {
+    mayor: "市長",
+    member: "議員",
+    formerMember: "元議員",
+    faction: "会派",
+    city: "市",
+  };
+  const POLICY_SOURCE_TYPE_LABELS = {
+    electionManifesto: "選挙公約",
+    policyDocument: "政策文書",
+    councilQuestion: "一般質問",
+    mayorPolicySpeech: "市長施政方針",
+    budgetDocument: "予算資料",
+    settlementDocument: "決算資料",
+    comprehensivePlan: "総合計画",
+    ordinance: "条例",
+    bill: "議案",
+    officialStatement: "公式発表",
+    otherOfficialSource: "その他公式資料",
+  };
+
+  function policyOwnerName(p) {
+    if (p.ownerType === "city") return "延岡市";
+    if (!p.ownerId) return "";
+    if (p.ownerType === "mayor") return archiveMayors.find((m) => m.id === p.ownerId)?.name ?? "";
+    if (p.ownerType === "member") return members.find((m) => m.id === p.ownerId)?.name ?? "";
+    if (p.ownerType === "formerMember") return formerMembers.find((m) => m.id === p.ownerId)?.name ?? "";
+    if (p.ownerType === "faction") return factionName(p.ownerId);
+    return "";
+  }
+
+  for (const p of archivePolicies) {
+    const relatedQuestionIds = [
+      ...new Set([
+        ...(p.relatedQuestionIds ?? []),
+        ...archivePolicyQuestionRelations.filter((r) => r.policyId === p.id).map((r) => r.questionId),
+      ]),
+    ];
+    const relatedQuestionTitles = relatedQuestionIds.map(questionTitle).filter(Boolean);
+    const announcedYear = p.announcedDate ? p.announcedDate.slice(0, 4) : undefined;
+
+    entries.push({
+      id: `policy-${p.id}`,
+      type: "policy",
+      title: p.title,
+      description: p.summary,
+      url: `/policies/${p.slug}`,
+      keywords: [
+        policyOwnerName(p),
+        POLICY_OWNER_TYPE_LABELS[p.ownerType],
+        ...(p.categoryIds ?? []).map(categoryLabel),
+        POLICY_SOURCE_TYPE_LABELS[p.sourceType],
+        announcedYear ? `${announcedYear}年度` : undefined,
+        ...(p.relatedFiscalYears ?? []).map((y) => `${y}年度`),
+        ...relatedQuestionTitles,
+      ].filter(Boolean),
+      // 公式資料（要約・原文）のみを全文検索対象にする。AI生成の要約・分類はここに含めない。
+      content: [p.summary, p.sourceOriginalText].filter(Boolean).join(" "),
+      date: p.announcedDate ?? p.lastVerifiedAt,
+      sourceId: p.id,
+    });
+  }
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- mayor ---
 const mayor = readJson("src/data/mayor.json");
 entries.push({
