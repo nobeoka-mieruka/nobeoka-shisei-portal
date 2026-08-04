@@ -60,6 +60,7 @@ export interface ArchiveMemberProfile {
   /** 公式資料で確認できる場合のみ設定する。推測で埋めない。 */
   retirementReason?: ArchiveRetirementReason;
   sourceRefs: ArchiveSourceRef[];
+  notes?: string;
   lastVerifiedAt?: string;
 }
 

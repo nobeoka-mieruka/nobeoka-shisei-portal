@@ -34,6 +34,26 @@ for (const m of members) {
   });
 }
 
+// --- archive: former members ---
+try {
+  const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
+  for (const p of archiveMemberProfiles) {
+    entries.push({
+      id: `former-member-${p.id}`,
+      type: "former-member",
+      title: `${p.name}（元議員）`,
+      description: "現職ではない過去の延岡市議会議員。公式資料で確認できた在職・活動の記録を掲載しています。",
+      url: `/members/former/${p.slug}`,
+      keywords: [p.nameKana, "元議員", "過去の議員"].filter(Boolean),
+      content: p.notes ?? "",
+      date: p.lastVerifiedAt,
+      sourceId: p.id,
+    });
+  }
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- mayor ---
 const mayor = readJson("src/data/mayor.json");
 entries.push({
@@ -329,6 +349,20 @@ const staticPages = [
     description: "延岡市議会議員、議案、市長公約などの登録件数や構成を、データから自動集計して確認できます。",
     url: "/dashboard",
     keywords: ["ダッシュボード", "統計", "集計", "会派別", "年齢構成"],
+  },
+  {
+    id: "page-members-former",
+    title: "元議員（延岡市政アーカイブ）",
+    description: "現職ではない過去の延岡市議会議員について、公式資料で確認できた在職・活動の記録を整理しています。",
+    url: "/members/former",
+    keywords: ["元議員", "過去の議員", "延岡市政アーカイブ"],
+  },
+  {
+    id: "page-members-history",
+    title: "議員在籍履歴（延岡市政アーカイブ）",
+    description: "会期ごとに、公式資料で在籍が確認できた元議員を整理しています。",
+    url: "/members/history",
+    keywords: ["議員在籍履歴", "在籍履歴", "延岡市政アーカイブ"],
   },
   {
     id: "page-mayor-press-conferences",

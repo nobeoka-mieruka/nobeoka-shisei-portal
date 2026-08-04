@@ -1,0 +1,27 @@
+[
+  {
+    "id": "archive-fm01",
+    "legacyFormerMemberId": "fm01",
+    "slug": "fm01",
+    "name": "吉本 靖",
+    "status": "former",
+    "currentMember": false,
+    "sourceRefs": [
+      {
+        "sourceTitle": "延岡市議会会議録検索システム（令和6年12月定例会 第3号、令和6年12月4日、本会議）",
+        "sourceOrganization": "延岡市議会",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "本人発言（一般質問）として直接確認済み。在職・一般質問の事実の一次資料。会議録検索システムは動的検索のため恒久的なURLを保存できていない。"
+      },
+      {
+        "sourceOrganization": "報道機関（複数、2025年7月）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "令和7年7月20日執行の延岡市長選挙に無所属新人（元延岡市議会議員）として立候補したとする報道を複数確認したが、確認時点で該当記事の直接URLが無効になっており恒久的な一次資料URLは登録できていない。退任日・退任理由（辞職／失職／任期満了等の区分）を示す公式資料は確認できておらず、未確認のため登録していない。"
+      }
+    ],
+    "notes": "現在の議員名簿には氏名がなく、現職議員一覧・比較・集計の対象には含めない。既存 src/data/formerMembers.json（id: fm01）と同一人物。retirementReasonは公式資料で確認できていないため未設定。",
+    "lastVerifiedAt": "2026-08-04"
+  }
+]

@@ -68,6 +68,8 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/entertainment-expenses",
   "/mayor/press-conferences",
   "/mayors",
+  "/members/former",
+  "/members/history",
   "/finance",
   "/finance/budget",
   "/finance/debt",
@@ -127,6 +129,7 @@ function loadData() {
   const themes = readJson("src/data/themes.json");
   const archiveMayors = readJson("src/data/archiveMayors.json");
   const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
+  const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
   return {
     members,
     billVotes,
@@ -145,6 +148,7 @@ function loadData() {
     themes,
     archiveMayors,
     archiveFiscalYears,
+    archiveMemberProfiles,
   };
 }
 
@@ -206,6 +210,22 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.archiveMayors.flatMap((m) => [m.lastVerifiedAt, ...m.sourceRefs.map((r) => r.sourcePublishedDate)]))],
         ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json"],
+      );
+    case "/members/former":
+      return resolveLastmod(
+        path,
+        [
+          maxValidDate(
+            data.archiveMemberProfiles.flatMap((p) => [p.lastVerifiedAt, ...p.sourceRefs.map((r) => r.sourcePublishedDate)]),
+          ),
+        ],
+        ["src/data/archiveMemberProfiles.json", "src/data/archiveMemberTerms.json", "src/data/archiveMemberAffiliations.json"],
+      );
+    case "/members/history":
+      return resolveLastmod(
+        path,
+        [],
+        ["src/data/archiveMemberProfiles.json", "src/data/archiveMemberTerms.json", "src/data/formerMembers.json"],
       );
     case "/finance":
       return resolveLastmod(path, [data.financeDashboard.lastVerified], ["src/data/financeDashboard.json"]);
@@ -324,6 +344,17 @@ export function getIndexableRoutes() {
         path,
         [m.lastVerifiedAt, maxValidDate(m.sourceRefs.map((r) => r.sourcePublishedDate))],
         ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json"],
+      ),
+    });
+  }
+  for (const p of data.archiveMemberProfiles) {
+    const path = `/members/former/${p.slug}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [p.lastVerifiedAt, maxValidDate(p.sourceRefs.map((r) => r.sourcePublishedDate))],
+        ["src/data/archiveMemberProfiles.json", "src/data/archiveMemberTerms.json", "src/data/archiveMemberAffiliations.json"],
       ),
     });
   }

@@ -1113,9 +1113,134 @@ try {
   else throw e;
 }
 
+// --- archiveMemberProfiles.json / archiveMemberTerms.json / archiveMemberAffiliations.json（延岡市政アーカイブ：過去議員） ---
+let archiveMemberProfileIds = new Set();
+try {
+  const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
+  if (!Array.isArray(archiveMemberProfiles)) throw new Error("配列ではありません");
+
+  archiveMemberProfileIds = checkDuplicateIds({ err, warn }, archiveMemberProfiles, "id", "archiveMemberProfiles.json");
+  checkDuplicateSlugs({ err, warn }, archiveMemberProfiles, "slug", "archiveMemberProfiles.json");
+
+  const seenLegacyMemberIds = new Set();
+  const seenLegacyFormerMemberIds = new Set();
+  for (const p of archiveMemberProfiles) {
+    const tag = `archiveMemberProfiles.json (${p.id ?? "id不明"})`;
+    if (isBlank(p.name)) err(tag, "nameが空です");
+    if (typeof p.currentMember !== "boolean") err(tag, "currentMemberが真偽値ではありません");
+    if (p.lastVerifiedAt && !DATE_RE.test(p.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${p.lastVerifiedAt}`);
+    checkSourceRefs({ err, warn }, p.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, p.sourceRefs, tag);
+
+    if (p.legacyMemberId) {
+      checkReferenceExists(
+        { err, warn },
+        p.legacyMemberId,
+        memberIds,
+        tag,
+        `存在しない現職議員IDを参照しています: ${p.legacyMemberId}`,
+      );
+      if (seenLegacyMemberIds.has(p.legacyMemberId)) {
+        err(tag, `legacyMemberIdが他のプロフィールと重複しています: ${p.legacyMemberId}`);
+      } else seenLegacyMemberIds.add(p.legacyMemberId);
+    }
+    if (p.legacyFormerMemberId) {
+      checkReferenceExists(
+        { err, warn },
+        p.legacyFormerMemberId,
+        formerMemberIds,
+        tag,
+        `存在しない元議員IDを参照しています: ${p.legacyFormerMemberId}`,
+      );
+      if (seenLegacyFormerMemberIds.has(p.legacyFormerMemberId)) {
+        err(tag, `legacyFormerMemberIdが他のプロフィールと重複しています: ${p.legacyFormerMemberId}`);
+      } else seenLegacyFormerMemberIds.add(p.legacyFormerMemberId);
+    }
+    if (!p.legacyMemberId && !p.legacyFormerMemberId) {
+      warn(tag, "legacyMemberId・legacyFormerMemberIdのいずれも設定されていません（既存データとの対応が不明です）");
+    }
+    if (p.legacyMemberId && p.legacyFormerMemberId) {
+      err(tag, "legacyMemberIdとlegacyFormerMemberIdを同時に設定できません（現職・元職どちらか一方を参照してください）");
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveMemberProfiles.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveMemberTerms = readJson("src/data/archiveMemberTerms.json");
+  if (!Array.isArray(archiveMemberTerms)) throw new Error("配列ではありません");
+
+  checkDuplicateIds({ err, warn }, archiveMemberTerms, "id", "archiveMemberTerms.json");
+  for (const t of archiveMemberTerms) {
+    const tag = `archiveMemberTerms.json (${t.id ?? "id不明"})`;
+    checkReferenceExists(
+      { err, warn },
+      t.memberProfileId,
+      archiveMemberProfileIds,
+      tag,
+      `存在しない議員プロフィールIDを参照しています: ${t.memberProfileId}`,
+    );
+    checkPeriodConsistency({ err }, t.termStart, t.termEnd, tag);
+    checkSourceRefs({ err, warn }, t.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, t.sourceRefs, tag);
+  }
+  checkNoOverlappingPeriods(
+    { err },
+    archiveMemberTerms,
+    { groupField: "memberProfileId", startField: "termStart", endField: "termEnd" },
+    "archiveMemberTerms.json",
+  );
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveMemberTerms.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveMemberAffiliations = readJson("src/data/archiveMemberAffiliations.json");
+  if (!Array.isArray(archiveMemberAffiliations)) throw new Error("配列ではありません");
+
+  const VALID_AFFILIATION_TYPES = new Set(["faction", "party", "committee", "councilRole"]);
+  checkDuplicateIds({ err, warn }, archiveMemberAffiliations, "id", "archiveMemberAffiliations.json");
+  for (const a of archiveMemberAffiliations) {
+    const tag = `archiveMemberAffiliations.json (${a.id ?? "id不明"})`;
+    checkReferenceExists(
+      { err, warn },
+      a.memberProfileId,
+      archiveMemberProfileIds,
+      tag,
+      `存在しない議員プロフィールIDを参照しています: ${a.memberProfileId}`,
+    );
+    if (!VALID_AFFILIATION_TYPES.has(a.affiliationType)) err(tag, `未定義のaffiliationTypeです: ${a.affiliationType}`);
+    if (isBlank(a.affiliationId)) err(tag, "affiliationIdが空です");
+    checkPeriodConsistency({ err }, a.startDate, a.endDate, tag);
+    if (a.sourceRef) checkSourceRefs({ err, warn }, [a.sourceRef], tag);
+    else err(tag, "sourceRefが設定されていません");
+  }
+  const byGroup = new Map();
+  for (const a of archiveMemberAffiliations) {
+    const key = `${a.memberProfileId}::${a.affiliationType}::${a.affiliationId}`;
+    if (!byGroup.has(key)) byGroup.set(key, []);
+    byGroup.get(key).push(a);
+  }
+  for (const records of byGroup.values()) {
+    checkNoOverlappingPeriods(
+      { err },
+      records,
+      { groupField: "memberProfileId", startField: "startDate", endField: "endDate" },
+      "archiveMemberAffiliations.json",
+    );
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveMemberAffiliations.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- searchIndex.json（サイト内横断検索インデックス） ---
 const VALID_SEARCH_TYPES = new Set([
   "member",
+  "former-member",
   "mayor",
   "promise",
   "bill",

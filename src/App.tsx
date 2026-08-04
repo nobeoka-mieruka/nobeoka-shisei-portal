@@ -11,6 +11,15 @@ const MemberDetailPage = lazy(() => import("./pages/MemberDetailPage").then((m) 
 const MemberSpeechDetailPage = lazy(() =>
   import("./pages/MemberSpeechDetailPage").then((m) => ({ default: m.MemberSpeechDetailPage })),
 );
+const MembersFormerPage = lazy(() =>
+  import("./pages/MembersFormerPage").then((m) => ({ default: m.MembersFormerPage })),
+);
+const MemberFormerDetailPage = lazy(() =>
+  import("./pages/MemberFormerDetailPage").then((m) => ({ default: m.MemberFormerDetailPage })),
+);
+const MembersHistoryPage = lazy(() =>
+  import("./pages/MembersHistoryPage").then((m) => ({ default: m.MembersHistoryPage })),
+);
 const MayorPage = lazy(() => import("./pages/MayorPage").then((m) => ({ default: m.MayorPage })));
 const MayorPolicyProgressPage = lazy(() =>
   import("./pages/MayorPolicyProgressPage").then((m) => ({ default: m.MayorPolicyProgressPage })),
@@ -151,6 +160,9 @@ function App() {
           <Suspense fallback={<RouteLoadingFallback />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/members/former" element={<MembersFormerPage />} />
+              <Route path="/members/former/:slug" element={<MemberFormerDetailPage />} />
+              <Route path="/members/history" element={<MembersHistoryPage />} />
               <Route path="/members/:id" element={<MemberDetailPage />} />
               <Route path="/members/:memberId/questions/:speechId" element={<MemberSpeechDetailPage />} />
               <Route path="/mayor" element={<MayorPage />} />

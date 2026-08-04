@@ -893,3 +893,41 @@ flowchart LR
   新規3ページを「アーカイブのサブページ」として追加する案を採用した（5章の設計方針どおり）。
   `/finance`自体を年度比較ページへ置き換える案は、既存の詳細な単年度表示を失うリスクが
   あるため採用しなかった。
+
+### フェーズ5（本コミット）
+- 過去議員アーカイブの基盤：フェーズ1で定義済みの`ArchiveMemberProfile`・
+  `ArchiveMemberTerm`・`ArchiveMemberAffiliation`型（`src/types/historicalArchive.ts`）を
+  初めて実データで使用した（`notes?: string`フィールドを追加）。既存2ファイル
+  （`members.json`・`formerMembers.json`）は複製せず、`legacyMemberId`/
+  `legacyFormerMemberId`で参照する追加インデックス層として実装した（フェーズ2の
+  `ArchiveMayor`と同じ設計）。
+- データ：`src/data/archiveMemberProfiles.json`（既存`formerMembers.json`の吉本靖氏
+  （fm01）1名のみを新構造へマッピング。slugは氏名の推測romanizationを避け、確認済みの
+  レガシーID`fm01`をそのまま使用）、`archiveMemberTerms.json`・
+  `archiveMemberAffiliations.json`（在籍期間・会派・委員会履歴は公式資料で確認できておらず、
+  いずれも空配列。フェーズ5時点では登録0件であり、画面上は「確認中」と明示している）。
+  **新規の外部データ調査は行っていない。**
+- ページ：`/members/former`（`MembersFormerPage.tsx`、一覧）・`/members/former/:slug`
+  （`MemberFormerDetailPage.tsx`、詳細。既存`/members/fm01`ページへの相互リンクあり）・
+  `/members/history`（`MembersHistoryPage.tsx`、会期別の在籍確認状況。現職議員は現行データ上
+  会期ごとの異動を収録していないため全会期同一構成として表示する制約を明記した骨格実装）。
+- 会期時点の在籍判定：`src/lib/archiveMembers.ts`の`sessionMembershipStatus()`が、
+  ArchiveMemberTermの期間（あれば）→無ければ既存`formerMembers.json`の
+  `servedSessions`（在職確認済み会期リスト）の順で判定し、どちらにも根拠が無い場合は
+  在籍扱いにせず`needsReview`扱いとする。
+- 検証：`scripts/validate-data.mjs`へID/slug重複、`legacyMemberId`/`legacyFormerMemberId`の
+  参照整合性・排他性（両方同時設定を禁止）・重複、任期・所属の期間整合性、出典必須チェックを
+  追加（`scripts/lib/validate-archive-common.mjs`の既存ヘルパーを再利用）。発言データの
+  memberId照合は既存ロジック（現職・元議員のいずれにも一致しない場合のみエラー）がそのまま
+  該当し、変更していない。
+- 検索インデックス：`scripts/generate-search-index.mjs`に元議員エントリ（type:
+  "former-member"）と`/members/former`・`/members/history`の固定ページエントリを追加。
+- 既存機能への影響：`/members`（現職一覧＝ホーム）、`/members/:id`、一般質問、議案賛否、
+  `/mayor`、`/mayors`、`/finance`、比較ページ、自動巡回、既存検索エントリは無変更。
+- 今後の過去議員追加手順：(1) 対象人物の在職期間・会派・委員会を市議会だより・議員名簿等の
+  一次資料で確認、(2)確認できた範囲のみ`archiveMemberProfiles.json`・
+  `archiveMemberTerms.json`・`archiveMemberAffiliations.json`へ出典付きで追加、
+  (3) `formerMembers.json`側にレコードが無い場合はそちらも同時に追加（既存の
+  `generate-speech-summary-scaffold.mjs`が現職以外のIDをbuild時に削除しないよう、
+  `formerMembers.json`への登録を必ず伴わせる）、(4) `npm run validate:data`で参照整合性を
+  確認。

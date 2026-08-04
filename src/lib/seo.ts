@@ -24,6 +24,7 @@ import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
 import archiveMayorsData from "../data/archiveMayors.json";
+import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import type {
   BillVoteItem,
   CompensationComparisonEntry,
@@ -38,7 +39,7 @@ import type {
   MayorPromisesData,
   Theme,
 } from "../types";
-import type { ArchiveMayor } from "../types/historicalArchive";
+import type { ArchiveMayor, ArchiveMemberProfile } from "../types/historicalArchive";
 import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
@@ -88,6 +89,7 @@ const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
 const compensationComparison = compensationComparisonData as CompensationComparisonEntry[];
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
+const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -390,6 +392,37 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
     }
+
+    case "/members/former":
+      return makeResult(
+        {
+          path: "/members/former",
+          pageTitle: "元議員（延岡市政アーカイブ）",
+          description: "現職ではない過去の延岡市議会議員について、公式資料で確認できた在職・活動の記録を整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "元議員" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-former-members-jsonld",
+              name: "延岡市 元議員データ",
+              description: "現職ではない過去の延岡市議会議員の在職・活動記録を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/members/former`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/members/history":
+      return makeResult(
+        {
+          path: "/members/history",
+          pageTitle: "議員在籍履歴（延岡市政アーカイブ）",
+          description: "会期ごとに、公式資料で在籍が確認できた元議員を整理しています。現在の所属を過去の会期へ遡って適用していません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議員在籍履歴" }],
+        },
+        options,
+      );
 
     case "/mayor": {
       const verifiedSns = mayor.sns.filter((s) => s.verificationStatus === "verified").map((s) => s.url);
@@ -1072,6 +1105,27 @@ function mayorDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/** /members/former/:slug */
+function memberFormerDetailSeo(slug: string, options?: SeoOptions): SeoResult {
+  const profile = archiveMemberProfiles.find((p) => p.slug === slug);
+  if (!profile) return notFound(`/members/former/${slug}`, "元議員情報");
+
+  const url = `${SITE_URL}/members/former/${slug}`;
+  const sameAs = profile.sourceRefs.map((r) => r.sourceUrl).filter((u): u is string => Boolean(u));
+
+  return makeResult(
+    {
+      path: `/members/former/${slug}`,
+      pageTitle: `${profile.name}｜元議員`,
+      description: `延岡市議会の元議員${profile.name}氏について、公式資料で確認できた在職・活動の記録を掲載しています。`,
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "元議員", to: "/members/former" }, { label: profile.name }],
+      extraJsonLd: [personJsonLd("person-jsonld", profile.name, url, sameAs)],
+      mainEntity: { "@type": "Person", name: profile.name, url },
+    },
+    options,
+  );
+}
+
 /** /mayor/policy-progress/:id */
 function promiseSeo(id: string, options?: SeoOptions): SeoResult {
   const promise = mayorPromises.find((p) => p.id === id);
@@ -1201,6 +1255,7 @@ const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
 const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
+const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
 
 /**
  * 現在のURLパス（クエリ・ハッシュを除く）から、そのページのSEO情報を返す。
@@ -1225,6 +1280,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
   if (speechDetailMatch) {
     return speechDetailSeo(safeDecodeURIComponent(speechDetailMatch[1]), safeDecodeURIComponent(speechDetailMatch[2]), options);
   }
+
+  const memberFormerDetailMatch = path.match(MEMBER_FORMER_DETAIL_RE);
+  if (memberFormerDetailMatch) return memberFormerDetailSeo(safeDecodeURIComponent(memberFormerDetailMatch[1]), options);
 
   const memberMatch = path.match(MEMBER_RE);
   if (memberMatch) return memberSeo(safeDecodeURIComponent(memberMatch[1]), options);
