@@ -5,6 +5,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FinanceTable } from "../components/finance/FinanceTable";
+import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { YenIcon } from "../components/icons";
@@ -12,6 +13,11 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
 import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+
+const budgetInitialMetric = financeMetricByKey("budgetInitial")!;
+const budgetFinalMetric = financeMetricByKey("budgetFinal")!;
+const settlementMetric = financeMetricByKey("settlement")!;
 
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
 const linkClass =
@@ -49,7 +55,19 @@ export function FinanceBudgetPage() {
         現在登録している年度は限られています。過去年度への遡及調査は今後、公式資料（予算書・決算書）を確認しながら段階的に進めます。「確認中」は資料が未確認であることを示し、0（ゼロ）とは異なります。人口・物価・国庫支出金・大型事業等の影響により予算規模は変動するため、金額の増減だけで単純に評価することは避けてください。
       </div>
 
-      <SectionCard title="年度別 予算・決算">
+      <SectionCard title="当初予算の年度推移">
+        <FinanceMetricSection metric={budgetInitialMetric} years={rows} />
+      </SectionCard>
+
+      <SectionCard title="補正後予算の年度推移">
+        <FinanceMetricSection metric={budgetFinalMetric} years={rows} />
+      </SectionCard>
+
+      <SectionCard title="決算額の年度推移">
+        <FinanceMetricSection metric={settlementMetric} years={rows} />
+      </SectionCard>
+
+      <SectionCard title="年度別 予算・決算（一覧）">
         {rows.length === 0 ? (
           <p className="text-sm text-on-surface-variant">登録済みの年度データはまだありません。</p>
         ) : (
@@ -68,7 +86,15 @@ export function FinanceBudgetPage() {
       </SectionCard>
 
       {rows.map((y) => (
-        <SectionCard key={y.fiscalYear} title={`${fiscalYearLabel(y.fiscalYear)}の出典・確認状況`}>
+        <SectionCard
+          key={y.fiscalYear}
+          title={`${fiscalYearLabel(y.fiscalYear)}の出典・確認状況`}
+          action={
+            <Link to={`/timeline/${y.fiscalYear}`} className={`shrink-0 text-xs text-primary hover:underline ${linkClass}`}>
+              この年度のタイムラインを見る
+            </Link>
+          }
+        >
           {y.budget?.notes && <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">{y.budget.notes}</p>}
           <ul className="space-y-2">
             {(y.budget?.sourceRefs ?? []).map((ref, i) => (

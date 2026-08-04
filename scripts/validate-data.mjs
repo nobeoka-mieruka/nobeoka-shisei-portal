@@ -968,9 +968,11 @@ try {
 }
 
 // --- archiveFiscalYears.json（延岡市政アーカイブ：財政） ---
+let archiveFiscalYearSet = new Set();
 try {
   const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
   if (!Array.isArray(archiveFiscalYears)) throw new Error("配列ではありません");
+  archiveFiscalYearSet = new Set(archiveFiscalYears.map((e) => e.fiscalYear));
 
   checkDuplicateYears({ err, warn }, archiveFiscalYears, "fiscalYear", "archiveFiscalYears.json");
   checkYearGaps({ err, warn }, archiveFiscalYears.map((e) => e.fiscalYear), "archiveFiscalYears.json");
@@ -1339,6 +1341,13 @@ try {
     for (const qid of p.relatedQuestionIds ?? []) {
       checkReferenceExists({ err, warn }, qid, questionIds, tag, `存在しない一般質問IDを参照しています: ${qid}`);
     }
+    if (archiveFiscalYearSet.size > 0) {
+      for (const fy of p.relatedFiscalYears ?? []) {
+        if (!archiveFiscalYearSet.has(fy)) {
+          warn(tag, `relatedFiscalYearsの年度(${fy})がarchiveFiscalYears.jsonに存在しません（/timeline/${fy}に反映されません）`);
+        }
+      }
+    }
 
     // 完了・変更・停止のような「確定的な状況」を示すstatusは、独自判定ではなく公式資料の裏付けを
     // 必須とする（達成・未達成の推測登録を防ぐ）。verified出典またはstatusEvidenceUrlのどちらも
@@ -1496,6 +1505,9 @@ try {
     // nullと0の区別：fiscalYearは必須の数値（西暦）であり、null/未確認を許容しないフィールドのため
     // 通常のcheckYearRangeで整数・範囲のみを検証する（0や架空値で埋めていないかは別途、出典必須チェックで担保）。
     checkYearRange({ err }, d.fiscalYear, tag, { min: 1947, max: 2100 });
+    if (archiveFiscalYearSet.size > 0 && d.fiscalYear != null && !archiveFiscalYearSet.has(d.fiscalYear)) {
+      warn(tag, `fiscalYear(${d.fiscalYear})がarchiveFiscalYears.jsonに存在しません（/timeline/${d.fiscalYear}の財政データ欄には反映されません）`);
+    }
 
     if (d.sessionId) {
       checkReferenceExists({ err, warn }, d.sessionId, sessionIdSet, tag, `存在しない会期IDを参照しています: ${d.sessionId}`);

@@ -23,12 +23,12 @@ export function ComparePopulationPage() {
   usePageTitle();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const selected = parseCompareSelection(searchParams, yearIds);
+  const selected = parseCompareSelection(searchParams, yearIds, "years");
   const selectedRows = archiveFiscalYears
     .filter((y) => selected.includes(String(y.fiscalYear)))
     .sort((a, b) => a.fiscalYear - b.fiscalYear);
 
-  const handleChange = (ids: string[]) => setSearchParams(buildCompareSearchParams(ids), { replace: true });
+  const handleChange = (ids: string[]) => setSearchParams(buildCompareSearchParams(ids, "years"), { replace: true });
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

@@ -11,6 +11,18 @@ import type {
   ArchiveOrdinanceRevisionType,
 } from "../types/historicalArchive";
 
+const DOCUMENT_BASE_PATHS: Record<ArchiveCouncilDocumentType, string> = {
+  bill: "/bills",
+  ordinance: "/ordinances",
+  petition: "/petitions",
+  request: "/requests",
+};
+
+/** 議案・条例・請願・陳情の種別に応じた詳細ページへのパスを組み立てる。 */
+export function documentPath(document: Pick<ArchiveCouncilDocument, "documentType" | "slug">): string {
+  return `${DOCUMENT_BASE_PATHS[document.documentType]}/${document.slug}`;
+}
+
 export function documentTypeLabel(type: ArchiveCouncilDocumentType): string {
   switch (type) {
     case "bill":

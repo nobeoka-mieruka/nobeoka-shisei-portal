@@ -64,6 +64,7 @@ const CompareFundsPage = lazy(() =>
   import("./pages/CompareFundsPage").then((m) => ({ default: m.CompareFundsPage })),
 );
 const TimelinePage = lazy(() => import("./pages/TimelinePage").then((m) => ({ default: m.TimelinePage })));
+const TimelineYearPage = lazy(() => import("./pages/TimelineYearPage").then((m) => ({ default: m.TimelineYearPage })));
 const PoliciesPage = lazy(() => import("./pages/PoliciesPage").then((m) => ({ default: m.PoliciesPage })));
 const PolicyDetailPage = lazy(() =>
   import("./pages/PolicyDetailPage").then((m) => ({ default: m.PolicyDetailPage })),
@@ -219,6 +220,7 @@ function App() {
               <Route path="/compare/debt" element={<CompareDebtPage />} />
               <Route path="/compare/funds" element={<CompareFundsPage />} />
               <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/timeline/:year" element={<TimelineYearPage />} />
               <Route path="/compare/policies" element={<PolicyComparePage />} />
               <Route path="/policies" element={<PoliciesPage />} />
               <Route path="/policies/:slug" element={<PolicyDetailPage />} />

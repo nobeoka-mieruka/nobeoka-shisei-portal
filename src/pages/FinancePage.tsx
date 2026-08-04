@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import financeData from "../data/financeDashboard.json";
+import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import type { FinanceDashboardData, FinanceSourceMeta } from "../types";
+import type { ArchiveFiscalYear } from "../types/historicalArchive";
+import { sortedFiscalYears } from "../lib/archiveFinance";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
 import { FinanceBarList } from "../components/finance/FinanceBarList";
@@ -16,6 +19,7 @@ import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 
 const data = financeData as FinanceDashboardData;
+const latestArchiveFiscalYear = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]).at(-1)?.fiscalYear;
 
 function formatThousandYen(value: number): string {
   return `${value.toLocaleString("ja-JP")}千円`;
@@ -124,9 +128,20 @@ export function FinancePage() {
           <Link to="/finance/funds" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
             基金残高の推移
           </Link>
+          <Link to="/compare/finance" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+            年度を比較する
+          </Link>
           <Link to="/compare" className={`rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}>
             年度・市長を選んで比較する
           </Link>
+          {latestArchiveFiscalYear != null && (
+            <Link
+              to={`/timeline/${latestArchiveFiscalYear}`}
+              className={`rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}
+            >
+              この年度のタイムラインを見る
+            </Link>
+          )}
         </div>
       </div>
 

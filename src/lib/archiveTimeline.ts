@@ -1,12 +1,29 @@
-import type { ArchiveFiscalYear, ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
+import type { ArchiveFiscalYear, ArchiveMayor, ArchiveMayorTerm, ArchiveMemberTerm } from "../types/historicalArchive";
 import type { ArchiveTimelineEvent, ArchiveTimelineYearGroup } from "../types/timeline";
 import { formatJapaneseDate } from "../config/site";
 import { fiscalYearLabel } from "./archiveFinance";
 
 /** 会計年度は4月始まり。1〜3月は前年度扱いにする（config/site.tsのtoFiscalYearLabelと同じ定義）。 */
-function fiscalYearOfIsoDate(iso: string): number {
+export function fiscalYearOfIsoDate(iso: string): number {
   const [year, month] = iso.split("-").map(Number);
   return month >= 4 ? year : year - 1;
+}
+
+/** 任期（start〜end）が指定した会計年度（4月始まり）と重なっているかを判定する。 */
+function termOverlapsFiscalYear(termStart: string, termEnd: string | null, fiscalYear: number): boolean {
+  const yearStart = `${fiscalYear}-04-01`;
+  const yearEnd = `${fiscalYear + 1}-03-31`;
+  return termStart <= yearEnd && (termEnd === null || termEnd >= yearStart);
+}
+
+/** 指定した会計年度に在職していた（任期が重なる）市長任期を返す。 */
+export function mayorTermsInFiscalYear(terms: ArchiveMayorTerm[], fiscalYear: number): ArchiveMayorTerm[] {
+  return terms.filter((t) => termOverlapsFiscalYear(t.termStart, t.termEnd, fiscalYear));
+}
+
+/** 指定した会計年度に在職していた（任期が重なる）議員任期を返す。 */
+export function memberTermsInFiscalYear(terms: ArchiveMemberTerm[], fiscalYear: number): ArchiveMemberTerm[] {
+  return terms.filter((t) => termOverlapsFiscalYear(t.termStart, t.termEnd, fiscalYear));
 }
 
 /**
@@ -77,7 +94,7 @@ export function buildFiscalYearEvents(fiscalYears: ArchiveFiscalYear[]): Archive
       fiscalYear: y.fiscalYear,
       title: `${fiscalYearLabel(y.fiscalYear)}の財政・人口データ`,
       description: parts.length > 0 ? parts.join("、") : "確認できたデータはまだありません",
-      relatedPath: `/compare/finance?items=${y.fiscalYear}`,
+      relatedPath: `/compare/finance?years=${y.fiscalYear}`,
       sourceRefs,
     } satisfies ArchiveTimelineEvent;
   });

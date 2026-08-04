@@ -23,4 +23,6 @@ export interface CompareSourceNoticeItem {
   sourceRefs: ArchiveSourceRef[];
   /** 数値・区分の定義が資料により異なる場合の注記（例：市債残高の区分、基金の合算範囲）。 */
   definitionNote?: string;
+  /** 数値の単位（例："円（億円表示）"・"%"）。金額・比率等を扱う場合のみ設定する。 */
+  unit?: string;
 }

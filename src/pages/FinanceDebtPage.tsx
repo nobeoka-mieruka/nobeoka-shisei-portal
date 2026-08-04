@@ -5,12 +5,17 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FinanceTable } from "../components/finance/FinanceTable";
+import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { ChartBarIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+
+const debtIssuanceMetric = financeMetricByKey("debtIssuance")!;
+const debtBalanceGeneralMetric = financeMetricByKey("debtBalanceGeneral")!;
 
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
 
@@ -42,7 +47,15 @@ export function FinanceDebtPage() {
         市債の増減は市長個人だけの成果・責任ではなく、国の制度・大型事業・災害復旧など複数の要因が影響します。市長・議員の評価目的での単純な比較には利用しないでください。
       </div>
 
-      <SectionCard title="年度別 市債発行額・残高">
+      <SectionCard title="市債発行額の年度推移">
+        <FinanceMetricSection metric={debtIssuanceMetric} years={rows} />
+      </SectionCard>
+
+      <SectionCard title="年度末市債残高（一般会計）の年度推移">
+        <FinanceMetricSection metric={debtBalanceGeneralMetric} years={rows} />
+      </SectionCard>
+
+      <SectionCard title="年度別 市債発行額・残高（一覧）">
         {rows.length === 0 ? (
           <p className="text-sm text-on-surface-variant">登録済みの年度データはまだありません。</p>
         ) : (
@@ -62,7 +75,15 @@ export function FinanceDebtPage() {
       </SectionCard>
 
       {rows.map((y) => (
-        <SectionCard key={y.fiscalYear} title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}>
+        <SectionCard
+          key={y.fiscalYear}
+          title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}
+          action={
+            <Link to={`/timeline/${y.fiscalYear}`} className="shrink-0 text-xs text-primary hover:underline">
+              この年度のタイムラインを見る
+            </Link>
+          }
+        >
           <p className="text-xs leading-relaxed text-on-surface-variant">{y.debt?.balance.definitionNote}</p>
           {y.debt?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.debt.notes}</p>}
         </SectionCard>

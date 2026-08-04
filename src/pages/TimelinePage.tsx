@@ -53,7 +53,18 @@ export function TimelinePage() {
       )}
 
       {yearGroups.map((group) => (
-        <SectionCard key={group.fiscalYear} title={`${group.fiscalYear}年度`}>
+        <SectionCard
+          key={group.fiscalYear}
+          title={`${group.fiscalYear}年度`}
+          action={
+            <Link
+              to={`/timeline/${group.fiscalYear}`}
+              className="shrink-0 rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              この年度のタイムラインを見る
+            </Link>
+          }
+        >
           <ul className="space-y-4">
             {group.events.map((event) => (
               <li key={event.id} className="rounded-lg border border-outline-variant p-3">
@@ -85,7 +96,7 @@ export function TimelinePage() {
       ))}
 
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
-        現在登録されている年表データは限られています（市長任期・年度別財政のみ）。議案・条例・請願・陳情、政策、一般質問等の年表への追加は今後、公式資料で確認できたものから順次行います。
+        このページでは市長任期・年度別財政データのみを一覧表示しています。各年度の「この年度のタイムラインを見る」からは、一般質問・議案・条例・請願・陳情・政策も含めた年度別の詳細を確認できます。
       </p>
 
       <LastUpdated className="mt-4" />

@@ -6,12 +6,16 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { FinanceTable } from "../components/finance/FinanceTable";
+import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LandmarkIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+
+const fundTotalMetric = financeMetricByKey("fundTotal")!;
 
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
 
@@ -72,8 +76,20 @@ export function FinanceFundsPage() {
             />
           </SectionCard>
 
+          <SectionCard title="基金総額の年度推移">
+            <FinanceMetricSection metric={fundTotalMetric} years={rows} />
+          </SectionCard>
+
           {rows.map((y) => (
-            <SectionCard key={y.fiscalYear} title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}>
+            <SectionCard
+              key={y.fiscalYear}
+              title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}
+              action={
+                <Link to={`/timeline/${y.fiscalYear}`} className="shrink-0 text-xs text-primary hover:underline">
+                  この年度のタイムラインを見る
+                </Link>
+              }
+            >
               <p className="text-xs leading-relaxed text-on-surface-variant">{y.fund?.balance.definitionNote}</p>
               {y.fund?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.fund.notes}</p>}
             </SectionCard>

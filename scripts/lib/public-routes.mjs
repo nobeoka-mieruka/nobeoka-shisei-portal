@@ -135,6 +135,7 @@ function loadData() {
   const councilSpeechSummaries = readJson("src/data/councilSpeechSummaries.json");
   const themes = readJson("src/data/themes.json");
   const archiveMayors = readJson("src/data/archiveMayors.json");
+  const archiveMayorTerms = readJson("src/data/archiveMayorTerms.json");
   const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
   const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
   const archivePolicies = readJson("src/data/archivePolicies.json");
@@ -157,6 +158,7 @@ function loadData() {
     councilSpeechSummaries,
     themes,
     archiveMayors,
+    archiveMayorTerms,
     archiveFiscalYears,
     archiveMemberProfiles,
     archivePolicies,
@@ -454,6 +456,20 @@ export function getIndexableRoutes() {
         path,
         [maxValidDate(publishedSpeeches(councilSpeechSummaries).map(({ speech }) => speech.verifiedAt ?? speech.date))],
         ["src/data/councilSpeechSummaries.json", "src/data/themes.json"],
+      ),
+    });
+  }
+  for (const y of data.archiveFiscalYears) {
+    const path = `/timeline/${y.fiscalYear}`;
+    const overlappingMayorTermDates = data.archiveMayorTerms
+      .filter((t) => t.termStart <= `${y.fiscalYear + 1}-03-31` && (t.termEnd === null || t.termEnd >= `${y.fiscalYear}-04-01`))
+      .flatMap((t) => t.sourceRefs.map((r) => r.sourcePublishedDate));
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [...archiveFiscalYearDates([y]), ...overlappingMayorTermDates],
+        ["src/data/archiveFiscalYears.json", "src/data/archiveMayorTerms.json", "src/data/generalQuestions.json", "src/data/archiveCouncilDocuments.json", "src/data/archivePolicies.json"],
       ),
     });
   }

@@ -1238,6 +1238,24 @@ function mayorDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/**
+ * /timeline/:year。年度に該当データが無くても「該当データなし」を安全に表示するページのため、
+ * archiveFiscalYearsに無い年度でもnotFoundにはしない（年の形式が不正な場合のみ通常のnotFoundに
+ * フォールバックする。フォールバックはgetSeoForPath側のTIMELINE_YEAR_RE不一致で処理する）。
+ */
+function timelineYearSeo(yearText: string, options?: SeoOptions): SeoResult {
+  const year = Number(yearText);
+  return makeResult(
+    {
+      path: `/timeline/${year}`,
+      pageTitle: `${year}年度の年表`,
+      description: `${year}年度の市長任期・財政・一般質問・議案等を、公式資料で確認できた範囲で一覧表示します。`,
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市政の年表", to: "/timeline" }, { label: `${year}年度` }],
+    },
+    options,
+  );
+}
+
 /** /policies/:slug */
 function policyDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   const policy = archivePolicies.find((p) => p.slug === slug);
@@ -1461,6 +1479,7 @@ const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
 const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
+const TIMELINE_YEAR_RE = /^\/timeline\/(\d{4})$/;
 const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
 const POLICY_DETAIL_RE = /^\/policies\/([^/]+)$/;
 const BILL_ARCHIVE_DETAIL_RE = /^\/bills\/([^/]+)$/;
@@ -1519,6 +1538,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const mayorDetailMatch = path.match(MAYOR_DETAIL_RE);
   if (mayorDetailMatch) return mayorDetailSeo(safeDecodeURIComponent(mayorDetailMatch[1]), options);
+
+  const timelineYearMatch = path.match(TIMELINE_YEAR_RE);
+  if (timelineYearMatch) return timelineYearSeo(timelineYearMatch[1], options);
 
   const policyDetailMatch = path.match(POLICY_DETAIL_RE);
   if (policyDetailMatch) return policyDetailSeo(safeDecodeURIComponent(policyDetailMatch[1]), options);
