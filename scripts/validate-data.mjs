@@ -2,6 +2,22 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
+import {
+  checkAnyNonNullRequiresField,
+  checkDuplicateIds,
+  checkDuplicateSlugs,
+  checkDuplicateYears,
+  checkNoOverlappingPeriods,
+  checkNonNegative,
+  checkPercentRange,
+  checkPeriodConsistency,
+  checkReferenceExists,
+  checkSourceRefs,
+  checkValuesHaveSource,
+  checkYearGaps,
+  checkYearRange,
+  requireAtLeastOneSourceRef,
+} from "./lib/validate-archive-common.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -878,6 +894,223 @@ try {
   }
 } catch {
   warn("financeDashboard.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
+// --- archiveMayors.json / archiveMayorTerms.json（延岡市政アーカイブ：歴代市長） ---
+let archiveMayorIds = new Set();
+let archiveMayorTermIds = new Set();
+try {
+  const archiveMayors = readJson("src/data/archiveMayors.json");
+  if (!Array.isArray(archiveMayors)) throw new Error("配列ではありません");
+
+  archiveMayorIds = checkDuplicateIds({ err, warn }, archiveMayors, "id", "archiveMayors.json");
+  checkDuplicateSlugs({ err, warn }, archiveMayors, "slug", "archiveMayors.json");
+
+  const currentMayors = archiveMayors.filter((m) => m.isCurrentMayor);
+  if (currentMayors.length > 1) {
+    err("archiveMayors.json", `isCurrentMayor:trueが複数登録されています: ${currentMayors.map((m) => m.id).join("、")}`);
+  }
+
+  for (const m of archiveMayors) {
+    const tag = `archiveMayors.json (${m.id ?? "id不明"})`;
+    if (isBlank(m.name)) err(tag, "nameが空です");
+    if (typeof m.isCurrentMayor !== "boolean") err(tag, "isCurrentMayorが真偽値ではありません");
+    if (m.lastVerifiedAt && !DATE_RE.test(m.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${m.lastVerifiedAt}`);
+    checkSourceRefs({ err, warn }, m.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, m.sourceRefs, tag);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveMayors.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveMayorTerms = readJson("src/data/archiveMayorTerms.json");
+  if (!Array.isArray(archiveMayorTerms)) throw new Error("配列ではありません");
+
+  archiveMayorTermIds = checkDuplicateIds({ err, warn }, archiveMayorTerms, "id", "archiveMayorTerms.json");
+
+  for (const t of archiveMayorTerms) {
+    const tag = `archiveMayorTerms.json (${t.id ?? "id不明"})`;
+    checkReferenceExists({ err, warn }, t.mayorId, archiveMayorIds, tag, `存在しない市長IDを参照しています: ${t.mayorId}`);
+    checkPeriodConsistency({ err }, t.termStart, t.termEnd, tag);
+    if (t.termNumber !== undefined && typeof t.termNumber !== "number") err(tag, "termNumberが数値ではありません");
+    checkNonNegative({ err }, t.populationAtStart ?? null, "populationAtStart", tag);
+    checkReferenceExists(
+      { err, warn },
+      t.previousMayorId,
+      archiveMayorIds,
+      tag,
+      `存在しない前任市長IDを参照しています: ${t.previousMayorId}`,
+      { level: "warn" },
+    );
+    checkReferenceExists(
+      { err, warn },
+      t.nextMayorId,
+      archiveMayorIds,
+      tag,
+      `存在しない後任市長IDを参照しています: ${t.nextMayorId}`,
+      { level: "warn" },
+    );
+    checkSourceRefs({ err, warn }, t.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, t.sourceRefs, tag);
+  }
+  checkNoOverlappingPeriods(
+    { err },
+    archiveMayorTerms,
+    { groupField: "mayorId", startField: "termStart", endField: "termEnd" },
+    "archiveMayorTerms.json",
+  );
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveMayorTerms.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+// --- archiveFiscalYears.json（延岡市政アーカイブ：財政） ---
+try {
+  const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
+  if (!Array.isArray(archiveFiscalYears)) throw new Error("配列ではありません");
+
+  checkDuplicateYears({ err, warn }, archiveFiscalYears, "fiscalYear", "archiveFiscalYears.json");
+  checkYearGaps({ err, warn }, archiveFiscalYears.map((e) => e.fiscalYear), "archiveFiscalYears.json");
+
+  const BUDGET_YEN_FIELDS = [
+    "generalAccountInitialBudgetYen",
+    "generalAccountFinalBudgetYen",
+    "generalAccountSettlementYen",
+    "specialAccountBudgetYen",
+    "enterpriseAccountBudgetYen",
+    "totalRevenueYen",
+    "totalExpenditureYen",
+    "localTaxRevenueYen",
+    "localAllocationTaxYen",
+    "nationalSubsidiesYen",
+    "prefecturalSubsidiesYen",
+  ];
+  const BOND_BALANCE_FIELDS = [
+    "generalAccountBondBalanceYen",
+    "ordinaryAccountLocalBondBalanceYen",
+    "includingSpecialAccountsYen",
+    "includingEnterpriseAccountsYen",
+    "perCapitaYen",
+  ];
+  const FUND_BALANCE_FIELDS = [
+    "totalYen",
+    "fiscalAdjustmentFundYen",
+    "bondRedemptionFundYen",
+    "otherSpecificPurposeFundsYen",
+    "perCapitaYen",
+  ];
+  const FINANCE_RATIO_FIELDS = [
+    "debtServiceRatioPercent",
+    "realDebtServiceRatioPercent",
+    "futureBurdenRatioPercent",
+    "currentAccountRatioPercent",
+  ];
+
+  for (const entry of archiveFiscalYears) {
+    const tag = `archiveFiscalYears.json (${entry.fiscalYear ?? "年度不明"})`;
+    checkYearRange({ err }, entry.fiscalYear, tag);
+    checkReferenceExists(
+      { err, warn },
+      entry.mayorId,
+      archiveMayorIds,
+      tag,
+      `存在しない市長IDを参照しています: ${entry.mayorId}`,
+      { level: "warn" },
+    );
+    checkReferenceExists(
+      { err, warn },
+      entry.mayorTermId,
+      archiveMayorTermIds,
+      tag,
+      `存在しない市長任期IDを参照しています: ${entry.mayorTermId}`,
+      { level: "warn" },
+    );
+    if (entry.verifiedAt && !DATE_RE.test(entry.verifiedAt)) err(tag, `verifiedAtの形式が不正です: ${entry.verifiedAt}`);
+
+    if (entry.population) {
+      const p = entry.population;
+      const pTag = `${tag} / population`;
+      if (p.fiscalYear !== entry.fiscalYear) {
+        err(pTag, `population.fiscalYear(${p.fiscalYear})が年度エントリのfiscalYear(${entry.fiscalYear})と一致しません`);
+      }
+      checkNonNegative({ err }, p.population, "population", pTag);
+      checkNonNegative({ err }, p.households, "households", pTag);
+      if (p.referenceDate && !DATE_RE.test(p.referenceDate)) err(pTag, `referenceDateの形式が不正です: ${p.referenceDate}`);
+      checkSourceRefs({ err, warn }, p.sourceRefs, pTag);
+      checkValuesHaveSource({ warn }, p, ["population", "households"], p.sourceRefs, pTag);
+    }
+
+    if (entry.budget) {
+      const b = entry.budget;
+      const bTag = `${tag} / budget`;
+      if (b.fiscalYear !== entry.fiscalYear) {
+        err(bTag, `budget.fiscalYear(${b.fiscalYear})が年度エントリのfiscalYear(${entry.fiscalYear})と一致しません`);
+      }
+      for (const f of BUDGET_YEN_FIELDS) checkNonNegative({ err }, b[f], f, bTag);
+      checkSourceRefs({ err, warn }, b.sourceRefs, bTag);
+      checkValuesHaveSource({ warn }, b, BUDGET_YEN_FIELDS, b.sourceRefs, bTag);
+    }
+
+    if (entry.debt) {
+      const d = entry.debt;
+      const dTag = `${tag} / debt`;
+      if (d.fiscalYear !== entry.fiscalYear) {
+        err(dTag, `debt.fiscalYear(${d.fiscalYear})が年度エントリのfiscalYear(${entry.fiscalYear})と一致しません`);
+      }
+      checkNonNegative({ err }, d.municipalBondIssuanceYen, "municipalBondIssuanceYen", dTag);
+      if (d.municipalBondIssuanceYen !== null && d.municipalBondIssuanceYen !== undefined && isBlank(d.notes)) {
+        warn(
+          dTag,
+          "municipalBondIssuanceYenが設定されていますが、出典を示すnotesがありません（ArchiveDebtには発行額専用のsourceRefsが無いため、notesでの出典明記を推奨）",
+        );
+      }
+      if (d.balance) {
+        const balTag = `${dTag} / balance`;
+        for (const f of BOND_BALANCE_FIELDS) checkNonNegative({ err }, d.balance[f], f, balTag);
+        checkAnyNonNullRequiresField(
+          { err },
+          d.balance,
+          BOND_BALANCE_FIELDS,
+          "definitionNote",
+          balTag,
+          "市債残高の区分に値があるのにdefinitionNote（元資料の定義注記）が空です",
+        );
+        checkSourceRefs({ err, warn }, d.balance.sourceRefs, balTag);
+        checkValuesHaveSource({ warn }, d.balance, BOND_BALANCE_FIELDS, d.balance.sourceRefs, balTag);
+      }
+    }
+
+    if (entry.fund) {
+      const f = entry.fund;
+      const fTag = `${tag} / fund`;
+      if (f.fiscalYear !== entry.fiscalYear) {
+        err(fTag, `fund.fiscalYear(${f.fiscalYear})が年度エントリのfiscalYear(${entry.fiscalYear})と一致しません`);
+      }
+      if (f.balance) {
+        const balTag = `${fTag} / balance`;
+        for (const ff of FUND_BALANCE_FIELDS) checkNonNegative({ err }, f.balance[ff], ff, balTag);
+        checkSourceRefs({ err, warn }, f.balance.sourceRefs, balTag);
+        checkValuesHaveSource({ warn }, f.balance, FUND_BALANCE_FIELDS, f.balance.sourceRefs, balTag);
+      }
+    }
+
+    if (entry.finance) {
+      const fi = entry.finance;
+      const fiTag = `${tag} / finance`;
+      if (fi.fiscalYear !== entry.fiscalYear) {
+        err(fiTag, `finance.fiscalYear(${fi.fiscalYear})が年度エントリのfiscalYear(${entry.fiscalYear})と一致しません`);
+      }
+      for (const rf of FINANCE_RATIO_FIELDS) checkPercentRange({ err }, fi[rf], rf, fiTag);
+      checkNonNegative({ err }, fi.financialStrengthIndex, "financialStrengthIndex", fiTag);
+      checkSourceRefs({ err, warn }, fi.sourceRefs, fiTag);
+      checkValuesHaveSource({ warn }, fi, [...FINANCE_RATIO_FIELDS, "financialStrengthIndex"], fi.sourceRefs, fiTag);
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveFiscalYears.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
 }
 
 // --- searchIndex.json（サイト内横断検索インデックス） ---
