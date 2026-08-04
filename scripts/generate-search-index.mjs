@@ -76,17 +76,20 @@ try {
         }),
       ),
     ];
+    // 全任期が職務代理（acting/temporaryActing）のみの人物は、公選の元市長と混同しないよう表記を分ける。
+    const isActingOnly = terms.length > 0 && terms.every((t) => t.mayorRole === "acting" || t.mayorRole === "temporaryActing");
+    const roleLabel = m.isCurrentMayor ? "現市長" : isActingOnly ? "元市長職務代理者" : "元市長";
     entries.push({
       id: `mayor-${m.id}`,
       type: "mayor",
-      title: m.isCurrentMayor ? `${m.name}（現市長）` : `${m.name}（元市長）`,
+      title: `${m.name}（${roleLabel}）`,
       description: tenure ? `在任期間：${tenure}` : "任期は確認中です。",
       url: `/mayors/${m.slug}`,
       keywords: [
         m.nameKana,
         ...(m.alternateNames ?? []),
-        "市長",
-        m.isCurrentMayor ? "現市長" : "元市長",
+        isActingOnly ? "市長職務代理者" : "市長",
+        roleLabel,
         ...fiscalYearsInvolved.map((y) => `${y}年度`),
       ].filter(Boolean),
       content: [m.profile, m.manifestoSummary].filter(Boolean).join(" "),

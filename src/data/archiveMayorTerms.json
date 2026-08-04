@@ -8,7 +8,7 @@
     "termNumber": 1,
     "electionDate": "2025-07-20",
     "populationAtStart": null,
-    "previousMayorId": "mayor-03",
+    "previousMayorId": "mayor-14",
     "nextMayorId": null,
     "sourceRefs": [
       {
@@ -212,7 +212,7 @@
     "retirementReason": "辞職",
     "populationAtStart": null,
     "previousMayorId": null,
-    "nextMayorId": "mayor-01",
+    "nextMayorId": "mayor-14",
     "sourceRefs": [
       {
         "sourceUrl": "https://go2senkyo.com/local/senkyo/22481",
@@ -943,5 +943,40 @@
       }
     ],
     "notes": "2006年市長選挙で首藤正治氏に敗れて退任したため、退任理由は「選挙落選」とした。"
+  },
+  {
+    "id": "mayor-14-term-01",
+    "mayorId": "mayor-14",
+    "termStart": "2025-07-01",
+    "termStartPrecision": "day",
+    "termEnd": "2025-07-19",
+    "termEndPrecision": "day",
+    "termNumber": 1,
+    "mayorRole": "acting",
+    "retirementReason": "職務代理終了",
+    "populationAtStart": null,
+    "previousMayorId": "mayor-03",
+    "nextMayorId": "mayor-01",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+        "sourceTitle": "宮崎県延岡市長、肺と膵臓に腫瘍が見つかり辞職へ「公約全てを実現できておらず大変申し訳ない」",
+        "sourceOrganization": "読売新聞オンライン（Yahoo!ニュース配信）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "2026-08-05時点でURLは404（掲載期間終了）。検索結果のスニペットで「来月1日以降は山本一丸副市長（65）が市長職務代理者に就く予定」との記述を確認したが、原文への直接アクセスでの再確認はできていない。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html",
+        "sourceTitle": "延岡市長 三浦 久知(みうら ひさとも) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "三浦久知市長の就任日「令和7年7月20日」を確認。termEndの2025-07-19は、この確認済みの就任日の前日として設定した値であり、山本氏の職務代理終了そのものを直接記載した資料ではない。"
+      }
+    ],
+    "notes": "termStartの2025-07-01は、読谷山洋司市長の辞職日（2025-06-30付、報道で確認済み）の翌日を報じた「来月1日以降」の記述に基づく。termEndの2025-07-19は、後任・三浦久知市長の確認済み就任日（2025-07-20）の前日として設定した推定値であり、山本氏自身の退任日を直接記載した一次資料は確認できていない。氏名・職務代理就任の事実は複数の報道で独立に確認できたが、記事原文URLがいずれも失効しているため、mayor-14本体のnotesと合わせてverificationStatus: needsReviewとしている。"
   }
 ]

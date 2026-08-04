@@ -121,6 +121,9 @@ export function buildPersonIndex(): PersonSummary[] {
   for (const mayor of archiveMayors) {
     const terms = archiveMayorTerms.filter((t) => t.mayorId === mayor.id);
     const tenureYears = terms.flatMap((t) => yearRangeFromTerm(t.termStart, t.termEnd));
+    // 全任期が職務代理（acting/temporaryActing）のみの人物は、公選の市長と混同しないよう表記を分ける。
+    const isActingOnly = terms.length > 0 && terms.every((t) => t.mayorRole === "acting" || t.mayorRole === "temporaryActing");
+    const roleLabel = mayor.isCurrentMayor ? "現市長" : isActingOnly ? "元市長職務代理者" : "元市長";
     people.push({
       personType: "mayor",
       id: mayor.id,
@@ -128,7 +131,7 @@ export function buildPersonIndex(): PersonSummary[] {
       name: mayor.name,
       nameKana: mayor.nameKana,
       isCurrent: mayor.isCurrentMayor,
-      tenureLabel: terms.length > 0 ? `${mayor.isCurrentMayor ? "現市長" : "元市長"}（${terms.length}期）` : mayor.isCurrentMayor ? "現市長" : "元市長",
+      tenureLabel: terms.length > 0 ? `${roleLabel}（${terms.length}期）` : roleLabel,
       tenureYears: [...new Set(tenureYears)],
       verificationStatus: mayor.sourceRefs[0]?.verificationStatus ?? "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("mayor", mayor.id),

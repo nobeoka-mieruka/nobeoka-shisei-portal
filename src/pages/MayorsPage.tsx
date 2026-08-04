@@ -27,6 +27,15 @@ export function MayorsPage() {
   usePageTitle();
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
 
+  const actingOnlyCount = useMemo(
+    () =>
+      archiveMayors.filter((mayor) => {
+        const terms = termsForMayor(archiveMayorTerms, mayor.id);
+        return terms.length > 0 && terms.every(isActingMayorTerm);
+      }).length,
+    [],
+  );
+
   const sortedMayors = useMemo(() => {
     const withStart = archiveMayors.map((mayor) => ({ mayor, start: earliestTermStart(mayor, archiveMayorTerms) ?? "" }));
     withStart.sort((a, b) => (sortOrder === "newest" ? b.start.localeCompare(a.start) : a.start.localeCompare(b.start)));
@@ -58,6 +67,8 @@ export function MayorsPage() {
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           延岡市長の任期・経歴を公式資料で確認できた範囲で整理しています。市長個人への評価・採点は行っていません。全{archiveMayors.length}名を登録しています（1933年の市制施行〜現在）。
+          {actingOnlyCount > 0 &&
+            `うち${actingOnlyCount}名は公選の市長ではなく、市長職務代理者（副市長等）としての在任です。`}
         </p>
       </div>
 

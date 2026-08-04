@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-04T17:57:07.691Z",
-  "totalItems": 56,
+  "generatedAt": "2026-08-04T22:22:36.968Z",
+  "totalItems": 58,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 10,
     "relationCandidate": 4,
-    "sourceInsufficient": 13,
+    "sourceInsufficient": 15,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -236,6 +236,18 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-13",
       "detail": "出典「桜井哲雄 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-14",
+      "detail": "出典「宮崎県延岡市長、肺と膵臓に腫瘍が見つかり辞職へ「公約全てを実現できておらず大変申し訳ない」」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-14",
+      "detail": "出典「【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",

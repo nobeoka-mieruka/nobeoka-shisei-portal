@@ -33,6 +33,7 @@ import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import { fiscalYearLabel } from "../lib/archiveFinance";
 import { mayorTermsInFiscalYear, memberTermsInFiscalYear, fiscalYearOfIsoDate } from "../lib/archiveTimeline";
+import { isActingMayorTerm, mayorRoleLabel } from "../lib/archiveMayors";
 import { FINANCE_METRICS } from "../lib/archiveFinanceMetrics";
 import { documentPath, documentTypeLabel, documentResultLabel } from "../lib/archiveCouncilDocuments";
 import { policyOwnerName, policyOwnerLinkTo, type PolicyOwnerLookup } from "../lib/archivePolicies";
@@ -133,6 +134,11 @@ export function TimelineYearPage() {
                         <Link to={`/mayors/${mayor.slug}`} className="font-semibold text-primary hover:underline">
                           {mayor.name}
                         </Link>
+                        {isActingMayorTerm(term) && (
+                          <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-semibold text-on-surface-variant">
+                            {mayorRoleLabel(term.mayorRole)}
+                          </span>
+                        )}
                       </div>
                       <p className="mt-1 text-xs text-on-surface-variant">
                         任期：{formatJapaneseDate(term.termStart)}〜{term.termEnd ? formatJapaneseDate(term.termEnd) : "現在"}

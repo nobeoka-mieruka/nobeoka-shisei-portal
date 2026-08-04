@@ -15,7 +15,7 @@ import { LandmarkIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
-import { archiveVerificationStatusLabel, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
+import { archiveVerificationStatusLabel, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
 import { buildPersonIndex, councilDocumentsForPerson, policiesForPerson } from "../lib/people";
 
@@ -23,6 +23,12 @@ const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const mayorIds = archiveMayors.map((m) => m.id);
 const personIndex = buildPersonIndex();
+
+/** 全任期が職務代理（acting/temporaryActing）のみの人物か。公選の市長と混同しないよう表記を分けるために使う。 */
+function isActingOnlyMayor(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): boolean {
+  const own = termsForMayor(terms, mayor.id);
+  return own.length > 0 && own.every(isActingMayorTerm);
+}
 
 function latestTermLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string {
   const own = termsForMayor(terms, mayor.id);
@@ -95,7 +101,11 @@ export function CompareMayorsPage() {
       <SectionCard title="比較する市長を選ぶ">
         <CompareItemPicker
           legend="市長"
-          options={archiveMayors.map((m) => ({ id: m.id, label: m.name, sublabel: m.isCurrentMayor ? "現職" : undefined }))}
+          options={archiveMayors.map((m) => ({
+            id: m.id,
+            label: m.name,
+            sublabel: m.isCurrentMayor ? "現職" : isActingOnlyMayor(m, archiveMayorTerms) ? "市長職務代理者" : undefined,
+          }))}
           selected={selected}
           onChange={handleChange}
         />
@@ -119,7 +129,10 @@ export function CompareMayorsPage() {
               rowKey={(m) => m.id}
               columns={[
                 { header: "氏名", render: (m) => m.name },
-                { header: "区分", render: (m) => (m.isCurrentMayor ? "現職" : "元職") },
+                {
+                  header: "区分",
+                  render: (m) => (m.isCurrentMayor ? "現職" : isActingOnlyMayor(m, archiveMayorTerms) ? "元職務代理者" : "元職"),
+                },
                 { header: "任期", render: (m) => latestTermLabel(m, archiveMayorTerms) },
                 { header: "就任回数", render: (m) => mayorTermCountLabel(m, archiveMayorTerms) },
                 {

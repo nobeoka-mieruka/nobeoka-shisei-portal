@@ -434,5 +434,35 @@
     ],
     "notes": "生没年等の経歴はWikipediaの記述のみにとどまり、独立資料による確認はできていない。就任・退任の日単位の正確な日付も同様にWikipediaのみが根拠（延岡市公式資料は年月単位まで）。",
     "lastVerifiedAt": "2026-08-05"
+  },
+  {
+    "id": "mayor-14",
+    "slug": "yamamoto-kazumaru",
+    "name": "山本 一丸",
+    "status": "unknown",
+    "profile": "延岡市副市長（当時65歳）。読谷山洋司市長の辞職（2025年6月30日付）を受け、2025年7月1日から三浦久知市長の就任（2025年7月20日）までの間、地方自治法に基づく市長職務代理者を務めた。公選による市長ではない。",
+    "isCurrentMayor": false,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+        "sourceTitle": "宮崎県延岡市長、肺と膵臓に腫瘍が見つかり辞職へ「公約全てを実現できておらず大変申し訳ない」",
+        "sourceOrganization": "読売新聞オンライン（Yahoo!ニュース配信）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "2026-08-05時点でURLは404（掲載期間終了）。検索結果のスニペットに「市長選は50日以内に行われ、来月1日以降は山本一丸副市長（65）が市長職務代理者に就く予定」との記述があることを確認したが、記事原文への直接アクセスでの再確認はできていない。"
+      },
+      {
+        "sourceUrl": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "sourceTitle": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため",
+        "sourceOrganization": "宮崎日日新聞（Miyanichi e-press）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "2026-08-05時点でURLは404（掲載期間終了）。検索結果に同記事からの抜粋が表示され、上記読売新聞オンライン記事の記述と独立に一致することを確認したが、記事原文への直接アクセスでの再確認はできていない。"
+      }
+    ],
+    "notes": "公選による市長ではなく、副市長としての市長職務代理者（mayorRole: acting）。氏名の読み方（ふりがな）は今回の調査で確認できていない（slugは一般的な読み方を仮に用いたローマ字表記であり、確認済みの読み方ではない）。生没年・出身地・経歴等は未調査。出典2件はいずれも記事原文のURLが2026年8月時点で404となっており、検索エンジンの検索結果スニペット経由でのみ内容を確認した点に注意（verificationStatus: needsReview）。",
+    "lastVerifiedAt": "2026-08-05"
   }
 ]
