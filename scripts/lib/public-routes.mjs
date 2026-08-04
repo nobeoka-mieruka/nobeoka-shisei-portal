@@ -69,6 +69,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/press-conferences",
   "/mayors",
   "/policies",
+  "/people",
   "/bills",
   "/ordinances",
   "/petitions",
@@ -113,6 +114,7 @@ export const STATIC_NOINDEX_PAGES = [
 
 function loadData() {
   const members = readJson("src/data/members.json");
+  const formerMembers = readJson("src/data/formerMembers.json");
   // rejected・error（誤抽出として却下、または抽出エラー）のみサイトマップ・プリレンダリング対象から除く。
   // pendingReview等（確認待ち）は「確認待ち」表示を伴って一般公開するため対象に含める。
   const billVotes = readJson("src/data/billVotes.json").filter(
@@ -138,6 +140,7 @@ function loadData() {
   const archiveCouncilDocuments = readJson("src/data/archiveCouncilDocuments.json");
   return {
     members,
+    formerMembers,
     billVotes,
     councilSessions,
     mayorPromises,
@@ -241,6 +244,12 @@ function staticPageLastmod(path, data) {
         ["src/data/archiveCouncilDocuments.json"],
       );
     }
+    case "/people":
+      return resolveLastmod(
+        path,
+        [],
+        ["src/data/members.json", "src/data/formerMembers.json", "src/data/archiveMayors.json", "src/data/archivePolicies.json", "src/data/archiveCouncilDocuments.json"],
+      );
     case "/members/former":
       return resolveLastmod(
         path,
@@ -396,6 +405,25 @@ export function getIndexableRoutes() {
         path,
         [p.lastVerifiedAt, maxValidDate(p.sourceRefs.map((r) => r.sourcePublishedDate))],
         ["src/data/archivePolicies.json"],
+      ),
+    });
+  }
+  for (const m of data.members) {
+    const path = `/people/member-${m.id}`;
+    urls.push({ path, lastmod: resolveLastmod(path, [m.updatedAt, m.verifiedAt], ["src/data/members.json"]) });
+  }
+  for (const fm of data.formerMembers) {
+    const path = `/people/former-member-${fm.id}`;
+    urls.push({ path, lastmod: resolveLastmod(path, [fm.lastVerified], ["src/data/formerMembers.json"]) });
+  }
+  for (const m of data.archiveMayors) {
+    const path = `/people/mayor-${m.id}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [m.lastVerifiedAt, maxValidDate(m.sourceRefs.map((r) => r.sourcePublishedDate))],
+        ["src/data/archiveMayors.json"],
       ),
     });
   }

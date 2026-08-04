@@ -20,6 +20,16 @@ export interface SearchResult {
   entry: SearchIndexEntry;
   score: number;
   matchedKeywords: string[];
+  /** ルールベース分類候補（AI候補）に一致した場合のみ設定。公式keywordsとは別に扱う。 */
+  matchedAiCandidateKeywords: string[];
+}
+
+export interface SearchEntriesOptions {
+  /**
+   * true の場合のみ、aiCandidateKeywords（ルールベース分類候補、外部AI API不使用）も
+   * 検索対象に含める。既定はfalse（公式データのみを検索対象にする、既存動作を維持）。
+   */
+  includeAi?: boolean;
 }
 
 const RECENCY_HALF_LIFE_DAYS = 365;
@@ -52,10 +62,15 @@ function countOccurrences(haystack: string, needle: string): number {
  * タイトル完全一致 > タイトル部分一致 > キーワード一致 > 概要一致 > 本文一致 の順で重み付けし、
  * 出現回数と更新の新しさをわずかに加点する。生成AIによる要約や推定順位は使用しない。
  */
-export function searchEntries(entries: SearchIndexEntry[], query: string): SearchResult[] {
+export function searchEntries(
+  entries: SearchIndexEntry[],
+  query: string,
+  options: SearchEntriesOptions = {},
+): SearchResult[] {
   const tokens = tokenize(query);
   if (tokens.length === 0) return [];
   const normalizedQuery = normalize(query);
+  const includeAi = options.includeAi ?? false;
 
   const results: SearchResult[] = [];
 
@@ -64,7 +79,9 @@ export function searchEntries(entries: SearchIndexEntry[], query: string): Searc
     const description = normalize(entry.description);
     const keywordsNorm = entry.keywords.map(normalize);
     const content = normalize(entry.content ?? "");
-    const haystack = [title, description, ...keywordsNorm, content].join(" ");
+    const aiCandidateKeywords = includeAi ? (entry.aiCandidateKeywords ?? []) : [];
+    const aiCandidateKeywordsNorm = aiCandidateKeywords.map(normalize);
+    const haystack = [title, description, ...keywordsNorm, content, ...aiCandidateKeywordsNorm].join(" ");
 
     if (!tokens.every((t) => haystack.includes(t))) continue;
 
@@ -73,6 +90,7 @@ export function searchEntries(entries: SearchIndexEntry[], query: string): Searc
     else if (title.includes(normalizedQuery)) score += 60;
 
     const matchedKeywords: string[] = [];
+    const matchedAiCandidateKeywords: string[] = [];
     for (const token of tokens) {
       if (title.includes(token)) score += 20;
 
@@ -80,6 +98,13 @@ export function searchEntries(entries: SearchIndexEntry[], query: string): Searc
       if (hitKeywords.length > 0) {
         score += 12;
         matchedKeywords.push(...hitKeywords);
+      }
+
+      const hitAiKeywords = aiCandidateKeywords.filter((_, i) => aiCandidateKeywordsNorm[i].includes(token));
+      if (hitAiKeywords.length > 0) {
+        // AI候補一致は公式一致より低い加点にとどめ、公式データを優先表示する。
+        score += 4;
+        matchedAiCandidateKeywords.push(...hitAiKeywords);
       }
 
       if (description.includes(token)) score += 5;
@@ -90,7 +115,12 @@ export function searchEntries(entries: SearchIndexEntry[], query: string): Searc
 
     score += recencyBoost(entry.date);
 
-    results.push({ entry, score, matchedKeywords: [...new Set(matchedKeywords)] });
+    results.push({
+      entry,
+      score,
+      matchedKeywords: [...new Set(matchedKeywords)],
+      matchedAiCandidateKeywords: [...new Set(matchedAiCandidateKeywords)],
+    });
   }
 
   results.sort((a, b) => b.score - a.score);

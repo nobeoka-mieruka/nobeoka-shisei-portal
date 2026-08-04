@@ -27,6 +27,32 @@ export function classifyTopicToThemeSlug(rawTopic: string): string {
   return UNCLASSIFIED_SLUG;
 }
 
+/**
+ * 質問テーマ（themes.json、一般質問の分類用）と政策テーママスタ（archivePolicyCategories.json、
+ * アーカイブ横断の共通テーマ辞書）は別々のタクソノミーとして運用しているため、
+ * 人が一度だけ定義した直接対応表（推測・機械分類ではない）で橋渡しする。
+ * 新しいテーマ・カテゴリを追加した場合は、このマップも合わせて見直すこと。
+ */
+export const THEME_TO_POLICY_CATEGORY_IDS: Record<string, string[]> = {
+  "theme-education": ["childcare", "education"],
+  "theme-welfare": ["welfare", "senior", "disability"],
+  "theme-health": ["healthcare"],
+  "theme-disaster": ["disaster-prevention", "fire-service"],
+  "theme-population": ["population-decline", "migration"],
+  "theme-industry": ["commerce", "employment"],
+  "theme-tourism": ["tourism"],
+  "theme-primary-industry": ["agriculture-fishery"],
+  "theme-transportation": ["public-transport", "infrastructure"],
+  "theme-urban-development": ["downtown-revitalization"],
+  "theme-environment": ["environment", "decarbonization"],
+  "theme-finance-reform": ["finance", "administrative-reform"],
+  "theme-digital": ["digitalization"],
+  "theme-city-office": ["city-hall-reform"],
+  "theme-community": ["community"],
+  "theme-other": ["other"],
+  "theme-unclassified": [],
+};
+
 // ===== フェーズ8：横断検索・テーマ分類の基盤（ルールベース、外部AI APIは使用しない） =====
 
 export interface ThemeMatch {

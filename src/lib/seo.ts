@@ -27,6 +27,7 @@ import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
+import { buildPersonIndex, parsePersonSlug, personTypeLabel } from "./people";
 import type {
   BillVoteItem,
   CompensationComparisonEntry,
@@ -467,6 +468,17 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
               dateModified: lastmod,
             }),
           ],
+        },
+        options,
+      );
+
+    case "/people":
+      return makeResult(
+        {
+          path: "/people",
+          pageTitle: "人物から探す",
+          description: "現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "人物から探す" }],
         },
         options,
       );
@@ -1271,6 +1283,23 @@ function councilDocumentDetailSeo(
   );
 }
 
+/** /people/:slug */
+function personDetailSeo(slug: string, options?: SeoOptions): SeoResult {
+  const parsed = parsePersonSlug(slug);
+  const person = parsed ? buildPersonIndex().find((p) => p.slug === slug) : undefined;
+  if (!parsed || !person) return notFound(`/people/${slug}`, "人物情報");
+
+  return makeResult(
+    {
+      path: `/people/${slug}`,
+      pageTitle: `${person.name}｜${personTypeLabel(parsed.personType)}`,
+      description: `${person.name}（${personTypeLabel(parsed.personType)}）に関連する政策・議案・条例・請願・陳情を横断して確認できます。`,
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "人物から探す", to: "/people" }, { label: person.name }],
+    },
+    options,
+  );
+}
+
 /** /members/former/:slug */
 function memberFormerDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   const profile = archiveMemberProfiles.find((p) => p.slug === slug);
@@ -1427,6 +1456,7 @@ const BILL_ARCHIVE_DETAIL_RE = /^\/bills\/([^/]+)$/;
 const ORDINANCE_DETAIL_RE = /^\/ordinances\/([^/]+)$/;
 const PETITION_DETAIL_RE = /^\/petitions\/([^/]+)$/;
 const REQUEST_DETAIL_RE = /^\/requests\/([^/]+)$/;
+const PERSON_DETAIL_RE = /^\/people\/([^/]+)$/;
 
 /**
  * 現在のURLパス（クエリ・ハッシュを除く）から、そのページのSEO情報を返す。
@@ -1501,6 +1531,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
   if (requestDetailMatch) {
     return councilDocumentDetailSeo("request", safeDecodeURIComponent(requestDetailMatch[1]), options);
   }
+
+  const personDetailMatch = path.match(PERSON_DETAIL_RE);
+  if (personDetailMatch) return personDetailSeo(safeDecodeURIComponent(personDetailMatch[1]), options);
 
   return notFound(path, "ページが見つかりません");
 }

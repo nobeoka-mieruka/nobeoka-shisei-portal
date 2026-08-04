@@ -1515,4 +1515,14 @@ export interface SearchIndexEntry {
   date?: string;
   /** 参照元データのID（例: members.jsonのid、billVotes.jsonのidなど）。validate:dataでの参照整合性チェックに使う。 */
   sourceId?: string;
+  /** 西暦の会計年度（確認できるエントリのみ）。/searchの年度絞り込みに使う。 */
+  fiscalYear?: number;
+  /** 元データのverificationStatus（確認できるエントリのみ）。/searchの確認状況絞り込みに使う。 */
+  verificationStatus?: string;
+  /**
+   * ルールベース（キーワード一致）で抽出したテーマ分類候補のラベル。外部AI APIは未使用。
+   * 通常検索では対象にせず、利用者が「AI候補を含める」を選択した場合のみ検索対象に含める
+   * （公式のkeywordsとは必ず分離する）。
+   */
+  aiCandidateKeywords?: string[];
 }

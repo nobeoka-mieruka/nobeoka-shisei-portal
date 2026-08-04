@@ -419,7 +419,8 @@
       "選挙公約"
     ],
     "content": "家庭環境に関わらず自然体験に参加できる仕組み、理解度に応じた学び、こども未来部設置を掲げる公約。 ・家庭環境に関わらず自然体験に参加できる仕組み\n・理解度に応じた学び\n・こども未来部設置",
-    "sourceId": "policy-mayor01-01"
+    "sourceId": "policy-mayor01-01",
+    "verificationStatus": "needsReview"
   },
   {
     "id": "policy-policy-mayor01-02",
@@ -436,7 +437,8 @@
       "選挙公約"
     ],
     "content": "地域商社設立、愛宕山カフェ誘致、スポーツ合宿・大会誘致を掲げる公約。 ・地域商社設立\n・愛宕山カフェ誘致\n・スポーツ合宿・大会誘致",
-    "sourceId": "policy-mayor01-02"
+    "sourceId": "policy-mayor01-02",
+    "verificationStatus": "needsReview"
   },
   {
     "id": "policy-policy-mayor01-03",
@@ -453,7 +455,8 @@
       "選挙公約"
     ],
     "content": "診療所等の事業承継支援、津波対策・福祉避難体制強化、シニア活躍の仕組みづくりを掲げる公約。 ・診療所等の事業承継支援\n・津波対策・福祉避難体制強化\n・シニア活躍の仕組みづくり",
-    "sourceId": "policy-mayor01-03"
+    "sourceId": "policy-mayor01-03",
+    "verificationStatus": "needsReview"
   },
   {
     "id": "policy-policy-mayor01-04",
@@ -468,7 +471,8 @@
       "選挙公約"
     ],
     "content": "若手職員プロジェクト、民間と市職員のチームづくり、市民相談体制強化を掲げる公約。 ・若手職員プロジェクト\n・民間と市職員のチームづくり\n・市民相談体制強化",
-    "sourceId": "policy-mayor01-04"
+    "sourceId": "policy-mayor01-04",
+    "verificationStatus": "needsReview"
   },
   {
     "id": "policy-policy-q-gq2026-06-m24-01",
@@ -487,7 +491,9 @@
     ],
     "content": "令和8年6月定例会の一般質問で、宮田博徳議員が指定管理者制度の賃金スライド制度導入について取り上げた。",
     "date": "2026-06-23",
-    "sourceId": "policy-q-gq2026-06-m24-01"
+    "sourceId": "policy-q-gq2026-06-m24-01",
+    "fiscalYear": 2026,
+    "verificationStatus": "needsReview"
   },
   {
     "id": "policy-policy-q-gq2026-06-m24-02",
@@ -505,7 +511,9 @@
     ],
     "content": "令和8年6月定例会の一般質問で、宮田博徳議員が本市独自のハラスメント防止条例制定の必要性について取り上げた。",
     "date": "2026-06-23",
-    "sourceId": "policy-q-gq2026-06-m24-02"
+    "sourceId": "policy-q-gq2026-06-m24-02",
+    "fiscalYear": 2026,
+    "verificationStatus": "needsReview"
   },
   {
     "id": "council-document-doc-ordinance-01",
@@ -522,7 +530,9 @@
     ],
     "content": "延岡市特別用途地区内における建築物の制限に関する条例の制定 令和5年6月定例会で議決された条例議案。議決結果は「原案可決」。詳細は既存の議案賛否データ（existingBillVoteId参照）を参照。",
     "date": "2023-07-07",
-    "sourceId": "doc-ordinance-01"
+    "sourceId": "doc-ordinance-01",
+    "fiscalYear": 2023,
+    "verificationStatus": "verified"
   },
   {
     "id": "council-document-doc-ordinance-02",
@@ -539,7 +549,9 @@
     ],
     "content": "延岡市印鑑の登録及び証明に関する条例の一部を改正する条例の制定 令和8年6月定例会で議決された条例改正議案。タイトルに「一部を改正する」と明記されており、一部改正に区分した。議決結果は「原案可決」。",
     "date": "2026-06-12",
-    "sourceId": "doc-ordinance-02"
+    "sourceId": "doc-ordinance-02",
+    "fiscalYear": 2026,
+    "verificationStatus": "verified"
   },
   {
     "id": "council-document-doc-ordinance-03",
@@ -556,7 +568,9 @@
     ],
     "content": "延岡市北方ふれあい交流センター条例を廃止する条例の制定 令和5年9月定例会で議決された条例廃止議案。タイトルに「廃止する」と明記されており、廃止に区分した。議決結果は「原案可決」。",
     "date": "2023-09-15",
-    "sourceId": "doc-ordinance-03"
+    "sourceId": "doc-ordinance-03",
+    "fiscalYear": 2023,
+    "verificationStatus": "verified"
   },
   {
     "id": "council-document-doc-petition-01",
@@ -573,7 +587,12 @@
     ],
     "content": "学校給食の無償化についての請願 令和5年6月定例会に提出された請願。審査結果は「採択」。",
     "date": "2023-07-07",
-    "sourceId": "doc-petition-01"
+    "sourceId": "doc-petition-01",
+    "fiscalYear": 2023,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "教育"
+    ]
   },
   {
     "id": "council-document-doc-petition-02",
@@ -590,7 +609,12 @@
     ],
     "content": "新型コロナウイルス感染症予防接種に導入されるレプリコンワクチンへの懸念の精査を求める請願 令和6年9月定例会に提出された請願。審査結果は「採択」。",
     "date": "2024-09-20",
-    "sourceId": "doc-petition-02"
+    "sourceId": "doc-petition-02",
+    "fiscalYear": 2024,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "医療"
+    ]
   },
   {
     "id": "council-document-doc-petition-03",
@@ -606,7 +630,12 @@
       "取下げ"
     ],
     "content": "延岡市における不登校児童生徒に対して更なる多様な学習機会の確保のための支援制度を求める請願 令和8年3月定例会に提出された請願。審査結果は「撤回」。",
-    "sourceId": "doc-petition-03"
+    "sourceId": "doc-petition-03",
+    "fiscalYear": 2025,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "子育て"
+    ]
   },
   {
     "id": "council-document-doc-request-01",
@@ -623,7 +652,13 @@
     ],
     "content": "デジタル田園都市国家構想交付金関連事業予算の早期可決を求める陳情 令和5年7月臨時会（3）に提出された陳情。審査結果は「採択」。",
     "date": "2023-07-31",
-    "sourceId": "doc-request-01"
+    "sourceId": "doc-request-01",
+    "fiscalYear": 2023,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "デジタル化",
+      "財政"
+    ]
   },
   {
     "id": "council-document-doc-request-02",
@@ -640,7 +675,9 @@
     ],
     "content": "議会改革についての陳情 令和5年12月定例会に提出された陳情。審査結果は「不採択」。",
     "date": "2023-12-15",
-    "sourceId": "doc-request-02"
+    "sourceId": "doc-request-02",
+    "fiscalYear": 2023,
+    "verificationStatus": "verified"
   },
   {
     "id": "council-document-doc-request-03",
@@ -657,7 +694,9 @@
     ],
     "content": "ガザ地区における人命保護と即時停戦に関する決議を求める陳情 令和6年6月定例会に提出された陳情。審査結果は「採択」。",
     "date": "2024-07-08",
-    "sourceId": "doc-request-03"
+    "sourceId": "doc-request-03",
+    "fiscalYear": 2024,
+    "verificationStatus": "verified"
   },
   {
     "id": "council-document-doc-request-04",
@@ -674,7 +713,12 @@
     ],
     "content": "津波避難困難地区の解消に向けた取り組みについての陳情 令和7年3月定例会に提出された陳情。審査結果は「継続審査」。",
     "date": "2025-03-21",
-    "sourceId": "doc-request-04"
+    "sourceId": "doc-request-04",
+    "fiscalYear": 2024,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "防災"
+    ]
   },
   {
     "id": "council-document-doc-bill-01",
@@ -691,7 +735,12 @@
     ],
     "content": "令和8年度延岡市一般会計補正予算（二次分） 令和8年6月定例会で議決された予算議案。議決結果は「原案可決」。タイトルに明記された年度（令和8年度＝2026年度）の予算に関連付けている。",
     "date": "2026-06-26",
-    "sourceId": "doc-bill-01"
+    "sourceId": "doc-bill-01",
+    "fiscalYear": 2026,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "財政"
+    ]
   },
   {
     "id": "council-document-doc-bill-02",
@@ -708,7 +757,9 @@
     ],
     "content": "監査委員の選任（後藤博文氏） 令和8年6月定例会で議決された人事議案。議決結果は「同意」。",
     "date": "2026-06-12",
-    "sourceId": "doc-bill-02"
+    "sourceId": "doc-bill-02",
+    "fiscalYear": 2026,
+    "verificationStatus": "verified"
   },
   {
     "id": "council-document-doc-bill-03",
@@ -725,7 +776,12 @@
     ],
     "content": "工事請負変更契約の締結（下赤橋橋梁修繕工事） 令和8年6月定例会で議決された契約議案。議決結果は「原案可決」。",
     "date": "2026-07-03",
-    "sourceId": "doc-bill-03"
+    "sourceId": "doc-bill-03",
+    "fiscalYear": 2026,
+    "verificationStatus": "verified",
+    "aiCandidateKeywords": [
+      "道路・インフラ"
+    ]
   },
   {
     "id": "mayor-main",

@@ -108,6 +108,8 @@ const RequestsPage = lazy(() =>
 const RequestDetailPage = lazy(() =>
   import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.RequestDetailPage })),
 );
+const PeoplePage = lazy(() => import("./pages/PeoplePage").then((m) => ({ default: m.PeoplePage })));
+const PersonDetailPage = lazy(() => import("./pages/PeoplePage").then((m) => ({ default: m.PersonDetailPage })));
 const CouncilDocumentsPage = lazy(() =>
   import("./pages/CouncilDocumentsPage").then((m) => ({ default: m.CouncilDocumentsPage })),
 );
@@ -237,6 +239,8 @@ function App() {
               <Route path="/petitions/:slug" element={<PetitionDetailPage />} />
               <Route path="/requests" element={<RequestsPage />} />
               <Route path="/requests/:slug" element={<RequestDetailPage />} />
+              <Route path="/people" element={<PeoplePage />} />
+              <Route path="/people/:slug" element={<PersonDetailPage />} />
               <Route path="/council-documents" element={<CouncilDocumentsPage />} />
               <Route path="/council-documents/:sessionId" element={<CouncilSessionDetailPage />} />
               <Route path="/questions" element={<GeneralQuestionsPage />} />

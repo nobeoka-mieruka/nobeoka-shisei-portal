@@ -5,7 +5,19 @@ import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
+import archivePoliciesData from "../data/archivePolicies.json";
+import archivePolicyCategoriesData from "../data/archivePolicyCategories.json";
+import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
+import archiveAiCategoryCandidatesData from "../data/archiveAiCategoryCandidates.json";
+import archiveMayorsData from "../data/archiveMayors.json";
 import type { CouncilMember, CouncilSession, CouncilSpeechSummaryData, FormerMember, Theme } from "../types";
+import type {
+  ArchiveAiCategoryCandidate,
+  ArchiveCouncilDocument,
+  ArchiveMayor,
+  ArchivePolicy,
+  ArchivePolicyCategory,
+} from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
@@ -15,6 +27,9 @@ import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
 import { findSpeechesByThemeSlug, resolveMemberDisplayName } from "../lib/councilSpeeches";
+import { THEME_TO_POLICY_CATEGORY_IDS } from "../lib/themeClassification";
+import { categoryLabel, policyStatusLabel } from "../lib/archivePolicies";
+import { documentResultLabel, documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -24,6 +39,18 @@ const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData
 const councilSessions = councilSessionsData as CouncilSession[];
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
+const archivePolicies = archivePoliciesData as ArchivePolicy[];
+const archivePolicyCategories = archivePolicyCategoriesData as ArchivePolicyCategory[];
+const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
+const archiveAiCategoryCandidates = archiveAiCategoryCandidatesData as ArchiveAiCategoryCandidate[];
+const archiveMayors = archiveMayorsData as ArchiveMayor[];
+
+const COUNCIL_DOCUMENT_BASE_PATHS: Record<string, string> = {
+  bill: "/bills",
+  ordinance: "/ordinances",
+  petition: "/petitions",
+  request: "/requests",
+};
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -82,12 +109,30 @@ export function ThemeDetailPage() {
   const memberCounts = members
     .map((m) => ({ member: m, count: matches.filter((x) => x.memberId === m.id).length }))
     .filter((mc) => mc.count > 0);
+  const formerMemberCounts = formerMembers
+    .map((m) => ({ member: m, count: matches.filter((x) => x.memberId === m.id).length }))
+    .filter((mc) => mc.count > 0);
 
   // 年度別の質問件数（新しい年から表示）。
   const yearCounts = Array.from(new Set(matches.map((m) => m.speech.sessionId.slice(0, 4))))
     .sort((a, b) => b.localeCompare(a))
     .map((y) => ({ year: y, count: matches.filter((m) => m.speech.sessionId.startsWith(y)).length }));
   const maxYearCount = Math.max(...yearCounts.map((y) => y.count), 1);
+
+  // フェーズ8：政策テーママスタ（archivePolicyCategories.json）との対応表を使って、
+  // 確認済みの政策・その所有者（市長）を横断表示する。対応表自体は人による直接定義（推測ではない）。
+  const relatedCategoryIds = THEME_TO_POLICY_CATEGORY_IDS[theme.id] ?? [];
+  const confirmedPolicies = archivePolicies.filter((p) => p.categoryIds.some((c) => relatedCategoryIds.includes(c)));
+  const confirmedMayors = archiveMayors.filter((m) =>
+    confirmedPolicies.some((p) => p.ownerType === "mayor" && p.ownerId === m.id),
+  );
+
+  // 議案・条例・請願・陳情は現状テーマ分類が未確定のため、キーワード一致の候補
+  // （archiveAiCategoryCandidates.json、status="candidate"）のみを「AI候補」として区別表示する。
+  const candidateEntries = archiveAiCategoryCandidates
+    .filter((c) => relatedCategoryIds.includes(c.categoryId))
+    .map((c) => ({ candidate: c, document: archiveCouncilDocuments.find((d) => d.id === c.sourceEntityId) }))
+    .filter((e): e is { candidate: ArchiveAiCategoryCandidate; document: ArchiveCouncilDocument } => Boolean(e.document));
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -103,6 +148,7 @@ export function ThemeDetailPage() {
         <p className="mt-2 text-xs text-on-primary-container/80">
           このテーマに関する質問件数：{matches.length}件（{memberCounts.length}名の議員）
         </p>
+        {/* フェーズ9で「このテーマの年表を見る」（/themes/:slug/timeline 等）をここに追加予定。今回は未実装のため表示しない。 */}
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
@@ -141,6 +187,97 @@ export function ThemeDetailPage() {
                 <span className="text-xs text-on-surface-variant">{count}件</span>
               </li>
             ))}
+          </ul>
+        </section>
+      )}
+
+      {formerMemberCounts.length > 0 && (
+        <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+          <h2 className="text-base font-semibold text-on-surface">元議員別の質問件数</h2>
+          <ul className="mt-2 divide-y divide-outline-variant text-sm">
+            {formerMemberCounts.map(({ member, count }) => (
+              <li key={member.id} className="flex items-center justify-between gap-2 py-2">
+                <Link to={`/members/former/${member.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                  {member.name}
+                </Link>
+                <span className="text-xs text-on-surface-variant">{count}件</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 className="text-base font-semibold text-on-surface">関連する政策・市長（確認済み）</h2>
+        {confirmedPolicies.length === 0 ? (
+          <p className="mt-2 text-sm text-on-surface-variant">該当資料なし（このテーマに対応する政策の登録はまだありません）</p>
+        ) : (
+          <>
+            <ul className="mt-2 space-y-2">
+              {confirmedPolicies.map((p) => (
+                <li key={p.id} className="rounded-lg border border-outline-variant p-3 text-sm">
+                  <Link to={`/policies/${p.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                    {p.title}
+                  </Link>
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
+                      {policyStatusLabel(p.status)}
+                    </span>
+                    {p.categoryIds.map((cid) => (
+                      <span key={cid} className="rounded-full bg-primary-container px-2 py-0.5 text-xs text-on-primary-container">
+                        {categoryLabel(archivePolicyCategories, cid)}
+                      </span>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {confirmedMayors.length > 0 && (
+              <p className="mt-3 text-xs text-on-surface-variant">
+                関係する市長：
+                {confirmedMayors.map((m, i) => (
+                  <span key={m.id}>
+                    {i > 0 && "、"}
+                    <Link to={`/mayors/${m.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                      {m.name}
+                    </Link>
+                  </span>
+                ))}
+              </p>
+            )}
+          </>
+        )}
+        <p className="mt-2 text-xs text-on-surface-variant">財政年度：資料未確認（このテーマ単位での財政データとの確認済みの対応付けはまだありません）</p>
+      </section>
+
+      {candidateEntries.length > 0 && (
+        <section className="rounded-xl border border-dashed border-outline-variant bg-surface-container-low p-4 shadow-e1 sm:p-5">
+          <h2 className="text-base font-semibold text-on-surface">関連の可能性がある議案・条例・請願・陳情（AI候補・要確認）</h2>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+            外部AIは使用せず、キーワード一致（ルールベース）で機械的に抽出した候補です。人による確認前のため、確定情報として扱わないでください。
+          </p>
+          <ul className="mt-2 space-y-2">
+            {candidateEntries.map(({ candidate, document }) => {
+              const basePath = COUNCIL_DOCUMENT_BASE_PATHS[document.documentType] ?? "/bills";
+              return (
+                <li key={candidate.id} className="rounded-lg border border-outline-variant p-3 text-sm">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Link to={`${basePath}/${document.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                      {document.title}
+                    </Link>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
+                      {documentTypeLabel(document.documentType)}
+                    </span>
+                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">
+                      AI候補（確信度{Math.round(candidate.confidence * 100)}%）
+                    </span>
+                  </div>
+                  {document.result && (
+                    <p className="mt-1 text-xs text-on-surface-variant">結果：{documentResultLabel(document.result)}</p>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </section>
       )}

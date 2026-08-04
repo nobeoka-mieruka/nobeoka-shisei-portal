@@ -50,6 +50,9 @@ export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
   const [typeFilter, setTypeFilter] = useState<"all" | SearchEntryType>("all");
+  const [fiscalYearFilter, setFiscalYearFilter] = useState(() => searchParams.get("fiscalYear") ?? "");
+  const [verificationStatusFilter, setVerificationStatusFilter] = useState(() => searchParams.get("verificationStatus") ?? "");
+  const [includeAi, setIncludeAi] = useState(() => searchParams.get("includeAi") === "true");
   const [sort, setSort] = useState<SearchSortKey>("relevance");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -79,13 +82,30 @@ export function SearchPage() {
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [query, typeFilter, sort]);
+  }, [query, typeFilter, fiscalYearFilter, verificationStatusFilter, includeAi, sort]);
+
+  // 年度・確認状況・AI候補を含めるかの絞り込みは、選択のたびに即座にURLへ反映する
+  // （検索結果URLを共有できるようにするため）。
+  useEffect(() => {
+    const next = new URLSearchParams(searchParams);
+    if (fiscalYearFilter) next.set("fiscalYear", fiscalYearFilter);
+    else next.delete("fiscalYear");
+    if (verificationStatusFilter) next.set("verificationStatus", verificationStatusFilter);
+    else next.delete("verificationStatus");
+    if (includeAi) next.set("includeAi", "true");
+    else next.delete("includeAi");
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fiscalYearFilter, verificationStatusFilter, includeAi]);
 
   const hasQuery = query.trim().length > 0;
 
   usePageTitle();
 
-  const allResults: SearchResult[] = useMemo(() => searchEntries(searchIndex, query), [query]);
+  const allResults: SearchResult[] = useMemo(
+    () => searchEntries(searchIndex, query, { includeAi }),
+    [query, includeAi],
+  );
 
   const countsByType = useMemo(() => {
     const counts = new Map<SearchEntryType, number>();
@@ -98,9 +118,20 @@ export function SearchPage() {
     [countsByType],
   );
 
+  const fiscalYearOptions = useMemo(
+    () => [...new Set(searchIndex.map((e) => e.fiscalYear).filter((y): y is number => typeof y === "number"))].sort((a, b) => b - a),
+    [],
+  );
+
   const filteredResults = useMemo(
-    () => (typeFilter === "all" ? allResults : allResults.filter((r) => r.entry.type === typeFilter)),
-    [allResults, typeFilter],
+    () =>
+      allResults.filter((r) => {
+        if (typeFilter !== "all" && r.entry.type !== typeFilter) return false;
+        if (fiscalYearFilter && String(r.entry.fiscalYear ?? "") !== fiscalYearFilter) return false;
+        if (verificationStatusFilter && (r.entry.verificationStatus ?? "") !== verificationStatusFilter) return false;
+        return true;
+      }),
+    [allResults, typeFilter, fiscalYearFilter, verificationStatusFilter],
   );
 
   const sortedResults = useMemo(() => sortResults(filteredResults, sort), [filteredResults, sort]);
@@ -306,6 +337,49 @@ export function SearchPage() {
             ))}
           </div>
 
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+              <span className="sr-only">年度</span>
+              <select
+                value={fiscalYearFilter}
+                onChange={(e) => setFiscalYearFilter(e.target.value)}
+                aria-label="年度で絞り込み"
+                className="bg-transparent text-on-surface focus:outline-none"
+              >
+                <option value="">年度：すべて</option>
+                {fiscalYearOptions.map((y) => (
+                  <option key={y} value={y}>
+                    {y}年度
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+              <span className="sr-only">確認状況</span>
+              <select
+                value={verificationStatusFilter}
+                onChange={(e) => setVerificationStatusFilter(e.target.value)}
+                aria-label="確認状況で絞り込み"
+                className="bg-transparent text-on-surface focus:outline-none"
+              >
+                <option value="">確認状況：すべて</option>
+                <option value="verified">確認済み</option>
+                <option value="partiallyVerified">一部確認済み</option>
+                <option value="needsReview">要確認</option>
+                <option value="sourceUnavailable">出典資料未確認</option>
+              </select>
+            </label>
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+              <input type="checkbox" checked={includeAi} onChange={(e) => setIncludeAi(e.target.checked)} className="h-4 w-4" />
+              AI候補を含める
+            </label>
+          </div>
+          {includeAi && (
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              「AI候補を含める」を選択すると、外部AIを使わないキーワード一致（ルールベース）によるテーマ分類候補も検索対象に含まれます。該当する結果には「AI候補」と表示され、公式データとは区別されます。
+            </p>
+          )}
+
           <div className="mt-3 flex items-center justify-between gap-2">
             <p className="text-sm text-on-surface-variant" aria-live="polite">
               {sortedResults.length > 0 ? `${sortedResults.length}件見つかりました` : "0件"}
@@ -362,7 +436,7 @@ export function SearchPage() {
           ) : (
             <>
               <ul className="mt-3 space-y-3">
-                {visibleResults.map(({ entry, matchedKeywords }) => (
+                {visibleResults.map(({ entry, matchedKeywords, matchedAiCandidateKeywords }) => (
                   <li key={entry.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1">
                     <Link to={entry.url} className={`block rounded ${linkClass}`}>
                       <div className="flex flex-wrap items-center gap-2">
@@ -371,6 +445,11 @@ export function SearchPage() {
                         </span>
                         {entry.date && (
                           <span className="text-xs text-on-surface-variant">{formatJapaneseDate(entry.date)}</span>
+                        )}
+                        {matchedAiCandidateKeywords.length > 0 && (
+                          <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">
+                            AI候補
+                          </span>
                         )}
                       </div>
                       <p className="mt-1.5 text-base font-semibold leading-snug text-on-surface">
@@ -384,6 +463,11 @@ export function SearchPage() {
                       {matchedKeywords.length > 0 && (
                         <p className="mt-1 text-xs text-on-surface-variant">
                           該当キーワード：{matchedKeywords.slice(0, 3).join("、")}
+                        </p>
+                      )}
+                      {matchedAiCandidateKeywords.length > 0 && (
+                        <p className="mt-1 text-xs text-on-surface-variant">
+                          AI候補（ルールベース、外部AI API不使用）で一致：{matchedAiCandidateKeywords.slice(0, 3).join("、")}
                         </p>
                       )}
                     </Link>

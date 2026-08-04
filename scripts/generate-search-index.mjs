@@ -128,6 +128,8 @@ try {
       content: [p.summary, p.sourceOriginalText].filter(Boolean).join(" "),
       date: p.announcedDate ?? p.lastVerifiedAt,
       sourceId: p.id,
+      fiscalYear: announcedYear ? Number(announcedYear) : (p.relatedFiscalYears ?? [])[0],
+      verificationStatus: p.sourceRefs[0]?.verificationStatus,
     });
   }
 } catch {
@@ -160,12 +162,18 @@ try {
   };
   const sessionTitleFor = (id) => councilSessionsForDocs.find((s) => s.id === id)?.title ?? id;
   const policyCategoryLabel = (id) => archivePolicyCategoriesForDocs.find((c) => c.id === id)?.label ?? "";
+  const archiveAiCategoryCandidatesForDocs = readJson("src/data/archiveAiCategoryCandidates.json");
 
   for (const d of archiveCouncilDocuments) {
     const relatedPolicies = (d.relatedPolicyIds ?? [])
       .map((id) => archivePoliciesForDocs.find((p) => p.id === id))
       .filter(Boolean);
     const relatedPolicyThemes = relatedPolicies.flatMap((p) => (p.categoryIds ?? []).map(policyCategoryLabel));
+    // ルールベース分類候補（外部AI API不使用）のみをaiCandidateKeywordsへ入れる。公式keywordsとは分離する。
+    const aiCandidateKeywords = archiveAiCategoryCandidatesForDocs
+      .filter((c) => c.sourceEntityType === d.documentType && c.sourceEntityId === d.id)
+      .map((c) => policyCategoryLabel(c.categoryId))
+      .filter(Boolean);
 
     entries.push({
       id: `council-document-${d.id}`,
@@ -187,6 +195,9 @@ try {
       content: [d.title, d.summary].filter(Boolean).join(" "),
       date: d.decisionDate ?? d.submittedDate,
       sourceId: d.id,
+      fiscalYear: d.fiscalYear,
+      verificationStatus: d.verificationStatus,
+      aiCandidateKeywords: aiCandidateKeywords.length > 0 ? aiCandidateKeywords : undefined,
     });
   }
 } catch {
