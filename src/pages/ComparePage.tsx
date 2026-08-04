@@ -77,6 +77,14 @@ export function ComparePage() {
         現在登録されているデータは限られています。登録が少ない項目は各比較ページで「比較には2件以上の選択が必要です」等、状況をそのまま表示します。公式資料で確認できたものから順次追加します。
       </p>
 
+      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
+        年度・任期をまたいだ時系列の一覧は
+        <Link to="/timeline" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+          延岡市政の年表
+        </Link>
+        でも確認できます。
+      </p>
+
       <LastUpdated className="mt-4" />
     </div>
   );

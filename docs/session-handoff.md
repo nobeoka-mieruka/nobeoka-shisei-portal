@@ -1,113 +1,109 @@
-# セッション引き継ぎメモ（2026-08-04 更新・フェーズ8完全完了）
+# セッション引き継ぎメモ（2026-08-04 更新・フェーズ9A完了）
 
-フェーズ8「AI横断検索・テーマ検索」が完全完了した（データ層＋ページ層）。
-push・デプロイは未実施。**フェーズ9は開始していない**（詳細指示は受領済み）。
+フェーズ9「比較・可視化・タイムライン」を小分けで進めている。今回は**フェーズ9A（共通基盤＋入口ページ）**が完了した。
+push・デプロイは未実施。個別の比較ページ（市長・議員・政策・財政の詳細比較グラフ等）は次回（フェーズ9B以降）。
 
 ## ロードマップ
 
 1. フェーズ6：政策データ・政策比較基盤 → 完了
 2. フェーズ7：議案・条例・請願・陳情アーカイブ → 完了
-3. フェーズ8：AI横断検索・テーマ検索 → **完全完了**
-4. フェーズ9：比較・可視化・タイムライン → 詳細指示を受領済み、未着手
+3. フェーズ8：AI横断検索・テーマ検索 → 完了
+4. フェーズ9：比較・可視化・タイムライン
+   - **9A：共通型・共通コンポーネント・`/compare`入口整理・`/timeline`基盤ページ → 完了**
+   - 9B以降：個別の比較ページ拡張（市長任期比較の強化、議員比較`/compare/members`等）・グラフ追加・
+     `/timeline/:year`詳細・`/themes/:slug/timeline`連携 → 未着手
 5. フェーズ10：自動巡回の完成・全体検証・本番デプロイ
 
 ## 直近のコミット（ローカルのみ、未push）
 
 ```
+（このセッションでのコミットをここに追記）
+91cd8fd docs: フェーズ8完全完了をセッション引き継ぎメモへ記録
 6dd8f59 feat: complete cross-archive search pages
 a3441f1 docs: フェーズ8基盤完了・ページ層未着手をセッション引き継ぎメモへ記録
 815cf51 feat: add cross-archive search data layer (phase 8, foundational scope)
-93fb6ef docs: フェーズ7完了を反映しセッション引き継ぎメモを更新
-3af84bb feat: add council documents archive
 ```
 
 `git status`は`.claude/settings.local.json`（ローカル専用）以外クリーン。
 
 停止直前に確認済み：`npm run validate:data`（errors=0, warnings=1257＝既存警告のみ）／
-`npm run typecheck`／`npx oxlint`（クリーン）／`npm run build`（904ページ生成、
+`npm run typecheck`／`npx oxlint`（クリーン）／`npm run build`（905ページ生成、
 prerender成功）／`npm run validate:seo`（failures=0, warnings=0）すべて成功。
 
-## 完了した作業（フェーズ8：全体）
+## 完了した作業（フェーズ9A）
 
-### データ層（コミット815cf51）
+### 調査
 
-- バグ修正：`SearchEntryType`に`"former-member"`・`"policy"`・`"council-document"`を追加
-  （検索結果のラベルが`undefined`表示になっていた問題を修正）。
-- 型：`ArchiveSearchDocument`・`ArchiveRelationCandidate`・`ArchiveAiSummary`・
-  `ArchiveAiCategoryCandidate`（`src/types/historicalArchive.ts`）。
-- ルールベース分類：`src/lib/themeClassification.ts`に`matchPolicyCategoriesForText()`
-  （外部AI API不使用、キーワード一致のみ）。
-- 候補データ：`archiveAiCategoryCandidates.json`（8件）・`archiveRelationCandidates.json`
-  （4件）、すべて`status="candidate"`。`archiveAiSummaries.json`は0件（型のみ）。
-- 管理者向け要確認キュー：`adminReviewQueue.json`（公開ルート非参照）。
-- `validate-data.mjs`に上記ファイルの参照整合性・confidence範囲等の検証を追加。
+- 既存の比較ページ（`/compare`・`/compare/mayors`・`/compare/finance`・`/compare/population`・
+  `/compare/budget`・`/compare/debt`・`/compare/funds`・`/compare/policies`）とそのルーティング
+  （`App.tsx`）・SEO登録（`src/lib/seo.ts`）・索引対象登録（`scripts/lib/public-routes.mjs`）を確認。
+  `/timeline`・`/timeline/:year`・`/themes/:slug/timeline`は未実装（ThemeDetailPage.tsxに導線コメントのみ）。
+- 比較対象選択は既存`CompareItemPicker`（`src/components/compare/`）、比較表は既存`FinanceTable`
+  （ジェネリックで財政専用ではなく、市長比較・政策比較でも流用済み）がすでに共通コンポーネントとして
+  機能していることを確認。出典表示だけは`CompareMayorsPage`・`PolicyComparePage`にほぼ同一コードが
+  重複していた。
 
-### ページ層（コミット6dd8f59）
+### 追加した共通型・共通コンポーネント
 
-- **`/themes/:slug`拡張**：既存の質問テーマ詳細（14テーマ）はそのまま維持。
-  `THEME_TO_POLICY_CATEGORY_IDS`（質問テーマ↔政策テーママスタの人による直接対応表、
-  推測ではない）を使い、確認済みの関連政策・関係する市長を表示。議案・条例・請願・陳情は
-  ルールベース分類候補のみを「AI候補・要確認」と明確に区別して表示（確定情報として扱わない）。
-  元議員別の質問件数も追加（既存は現職議員のみ集計）。財政年度は確認済みデータが無いため
-  「資料未確認」と表示。
-- **`/people`（新規）**：現職議員26名・元議員1名・市長1名を横断する一覧。
-  絞り込み：人物種別・現職元職・会派・在籍年度（現職は当年度のみ、過去年度は
-  データ未整備のため推測していない）。
-- **`/people/:slug`（新規）**：人物詳細。既存`/members/:id`・`/members/former/:slug`・
-  `/mayors/:slug`（プロフィール・発言・任期）へリンクしつつ、そこに無い横断情報
-  （関連政策・関連議案条例請願陳情・関連財政年度・議案賛否件数）のみ新規表示
-  （重複実装を避けた）。過去の所属・役職は当時確認できた情報のみを表示し、
-  現在の所属を遡って適用していない。
-- **`/search`拡張**：`fiscalYear`・`verificationStatus`・`includeAi`をURLクエリに反映する形で追加
-  （例：`/search?q=防災&fiscalYear=2023&verificationStatus=verified&includeAi=true`）。
-  `includeAi=false`では既存動作のまま。`true`の場合のみルールベース分類候補
-  （`aiCandidateKeywords`）も検索対象に含め、結果に「AI候補」バッジを表示して公式データと区別。
-- 検索インデックス：`archivePolicies`/`archiveCouncilDocuments`エントリに`fiscalYear`・
-  `verificationStatus`・`aiCandidateKeywords`を追加（既存フィールド・既存タイプは無変更、
-  重複生成なし）。
-- ルーティング・SEO・サイトマップ：`/people`・`/people/:slug`を追加（29ページ）。
-  既存`/bills/votes`・`/compare/*`・`/themes`一覧等は無変更。
-- **フェーズ9への導線**：リンク未実装のため表示せず、挿入予定箇所にコメントのみ残した
-  （`src/pages/PeoplePage.tsx`の人物詳細ヒーロー部、`src/pages/ThemeDetailPage.tsx`の
-  テーマヒーロー部）。
+- `src/types/compare.ts`（新規）：`CompareOption`（比較対象選択肢）・`CompareSourceNoticeItem`
+  （比較対象1件分の出典・定義注記）。
+- `src/types/timeline.ts`（新規）：`ArchiveTimelineEvent`・`ArchiveTimelineYearGroup`。日単位の日付が
+  確認できないイベント（年度のみ確認等）は`date: null`とし、`dateLabel`で代替表示する設計。
+- `src/components/compare/CompareItemPicker.tsx`：ローカル定義していた`CompareItemOption`を
+  `types/compare.ts`の`CompareOption`ベースに整理（型の重複を解消、既存の使い方は変更なし）。
+- `src/components/compare/CompareTable.tsx`（新規）：既存`FinanceTable`を`CompareTable`として
+  再エクスポートするだけの薄いラッパー。表組みの実装を複製せず、`/compare`以外（`/timeline`等）からも
+  同じ名前で参照できるようにした。
+- `src/components/compare/CompareSourceNotice.tsx`（新規）：比較対象ごとの出典一覧・定義注記の共通表示。
+  `CompareMayorsPage`・`PolicyComparePage`にあった重複コード（出典URL・確認状況・「出典未登録」表示）
+  を置き換えた（表示内容・HTML構造は変更なし、コードのみ共通化）。`TimelinePage`でも同じコンポーネントを
+  イベント単位の出典表示に流用している。
 
-## 次にやること
+### `/compare`（入口ページ）
 
-**フェーズ9「比較・可視化・タイムライン」**（ユーザーから詳細指示を受領済み）。主な要点：
+- 既存`ComparePage.tsx`はそのまま維持。末尾に「延岡市政の年表」（`/timeline`）への案内リンクを1行追加した。
 
-- 既存の比較ページ（`/compare/mayors`・`/compare/policies`・`/compare/finance`等）は
-  維持しつつ拡張する（新規URLは`/compare/members`等、まだ無いもののみ追加）。
-- 比較対象2〜4件、URLクエリで共有可能（例：`/compare/mayors?ids=mayor-a,mayor-b`）。
-- 点数化・順位付け・勝敗判定・独自達成度・AIによる人物評価は禁止。同じ定義・単位・期間の
-  数値のみ直接比較し、定義が異なる場合は「定義が異なるため単純比較できません」と明示。
-- 市長任期と年度の対応（年度途中の市長交代の扱い）を明確にする設計が必要。
-- `/timeline`・`/timeline/[year]`・`/themes/[slug]/timeline`（市政タイムライン）。
-- 共通コンポーネント候補：ArchiveLineChart・ArchiveBarChart・ArchiveComparisonTable・
-  ArchiveMetricCard・ArchiveSourceList・ArchiveDefinitionNote・ArchiveMissingDataNotice・
-  ArchiveTimeline。
-- フェーズ8で残したコメントの導線（「この人物を比較」「このテーマの年表を見る」）を実装する。
-- 詳細は次回、ユーザーに詳細指示の再掲を依頼するか、本セッションの会話ログを参照。
+### `/timeline`（基盤ページ、新規）
+
+- `src/lib/archiveTimeline.ts`（新規）：`buildMayorTermEvents`（歴代市長の就任・退任）・
+  `buildFiscalYearEvents`（年度別財政・人口データの有無サマリー）・`groupEventsByFiscalYear`
+  （会計年度単位でまとめ、新しい年度が先）。既存`archiveMayors.json`・`archiveMayorTerms.json`・
+  `archiveFiscalYears.json`のみを参照し、新規データファイルは追加していない。
+- `src/pages/TimelinePage.tsx`（新規）：年度別に市長任期・財政データの有無を一覧表示する基盤ページ。
+  出典は`CompareSourceNotice`で表示。財政年度イベントは`/compare/finance?items=年度`へリンクし、
+  市長就任・退任イベントは`/mayors/:slug`へリンクする（既存ページへの導線、新規詳細ページは作らず）。
+  点数化・評価は行わない。データが少ない年度は「確認できたデータはまだありません」と表示し0と区別。
+- ルーティング・SEO・索引登録：`App.tsx`に`/timeline`ルート追加、`src/lib/seo.ts`に
+  title・description・breadcrumbsを追加（indexable、query依存なし）、
+  `scripts/lib/public-routes.mjs`の`STATIC_INDEXABLE_PAGES`・`staticPageLastmod`に追加
+  （sitemap・robots・prerender・release-checkへ自動反映されることを確認済み）。
+  `Footer.tsx`にも「延岡市政の年表」リンクを追加。
+- **今回実装していないもの**（次回9B以降）：`/timeline/:year`詳細ページ、`/themes/:slug/timeline`連携、
+  市長・議員・政策・財政それぞれの個別比較ページ拡張・グラフ追加、`/compare/members`等の新規比較ページ。
 
 ## 既知の注意点・落とし穴（継続）
 
 - **`npm run build`実行のたびに`src/data/siteUpdate.json`のタイムスタンプだけが更新される**。
-  実データ変更を伴わない場合はコミットせず`git restore`で戻してよい。
+  実データ変更を伴わない場合はコミットせず`git restore`で戻してよい（今回も実施）。
 - `archiveAiCategoryCandidates.json`・`archiveRelationCandidates.json`・
   `adminReviewQueue.json`・`searchIndex.json`・`sitemap.xml`も、`npm run build`のたびに
-  タイムスタンプ等が再生成される（内容が同じでも差分が出ることがある）。
-- **`THEME_TO_POLICY_CATEGORY_IDS`のキーは`theme.id`（例："theme-education"）であり、
-  `theme.slug`（例："education"）ではない**。今回`theme.slug`で参照する実装ミスがあり、
-  ビルド後の確認で発見・修正した（`npm run build`後、生成された`dist/`のHTMLを
-  `grep`で確認する習慣が有効だった）。
+  タイムスタンプ等が再生成される（内容が同じでも差分が出ることがある）。ただし`sitemap.xml`は
+  今回`/timeline`追加という実質的な差分を含むため、そちらはコミット対象。
+- `ArchiveDebt`・`ArchiveFund`の`sourceRefs`は型のトップレベルではなく`balance.sourceRefs`にネストされている
+  （`ArchiveMunicipalBondBalance`・`ArchiveFundBalance`側）。年表イベント生成時にハマった点。
 - 令和年→西暦の変換式：`西暦 = 2018 + 令和年`。
 - 比較ページの命名規則は`/xxx/compare`ではなく`/compare/xxx`。
 - 委員会マスタが存在しない（`committeeId`は1件も確認できていない）。
 - `validate-seo.mjs`には`public-routes.mjs`とは独立したハードコードチェックが一部ある。
+- ブラウザ操作ツール（claude-in-chrome）が本セッションでは未接続だったため、`/timeline`の
+  スマホ幅での見た目は実ブラウザで直接確認できていない。既存の`/compare`系ページと同じ共通コンポーネント
+  （`SectionCard`・`Breadcrumbs`・`CompareSourceNotice`等、375/390/768/1280pxで確認済みのもの）のみで
+  構成しているためレイアウト崩れのリスクは低いが、次回セッションで実機・ブラウザでの確認を推奨する。
 
 ## 次セッション開始時の推奨手順
 
 1. `git log --oneline -10`と`git status`で本メモと状態が一致しているか確認。
 2. `npm run validate:data && npm run typecheck`で現状に問題がないか確認。
-3. フェーズ9「比較・可視化・タイムライン」の詳細指示（本メモ「次にやること」参照、
-   または会話ログ）に沿って着手する。既存の比較ページ・タイムライン相当の機能が
-   無いことを確認してから実装する（重複実装を避ける）。
+3. 可能であれば`/timeline`をブラウザで375px・390px・768px・1280pxで確認する（前回未実施）。
+4. フェーズ9B（個別の比較ページ拡張・グラフ追加、`/timeline/:year`、`/themes/:slug/timeline`連携等）に
+   着手する。詳細はユーザーの指示を確認する（本メモは基盤部分の完了報告のみ）。

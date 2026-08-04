@@ -13,6 +13,7 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FinanceTable } from "../components/finance/FinanceTable";
 import { CompareItemPicker } from "../components/compare/CompareItemPicker";
+import { CompareSourceNotice } from "../components/compare/CompareSourceNotice";
 import { DocumentIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
@@ -107,33 +108,9 @@ export function PolicyComparePage() {
             ]}
           />
 
-          <div className="mt-4 space-y-3">
-            {selectedPolicies.map((p) => (
-              <div key={p.id} className="rounded-lg border border-outline-variant p-3 text-xs">
-                <p className="font-semibold text-on-surface">{p.title}の出典</p>
-                <ul className="mt-1 space-y-1">
-                  {p.sourceRefs.map((ref, i) => (
-                    <li key={i} className="text-on-surface-variant">
-                      {ref.sourceUrl ? (
-                        <a
-                          href={ref.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline"
-                        >
-                          {ref.sourceTitle ?? ref.sourceUrl}
-                        </a>
-                      ) : (
-                        "出典URL未確認"
-                      )}
-                      （{archiveVerificationStatusLabel(ref.verificationStatus)}）
-                    </li>
-                  ))}
-                  {p.sourceRefs.length === 0 && <li className="text-on-surface-variant">出典未登録</li>}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <CompareSourceNotice
+            items={selectedPolicies.map((p) => ({ label: p.title, sourceRefs: p.sourceRefs }))}
+          />
         </SectionCard>
       )}
     </div>

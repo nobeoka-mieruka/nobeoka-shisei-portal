@@ -8,6 +8,7 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FinanceTable } from "../components/finance/FinanceTable";
 import { CompareItemPicker } from "../components/compare/CompareItemPicker";
+import { CompareSourceNotice } from "../components/compare/CompareSourceNotice";
 import { LandmarkIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
@@ -95,33 +96,9 @@ export function CompareMayorsPage() {
             ]}
           />
 
-          <div className="mt-4 space-y-3">
-            {selectedMayors.map((m) => (
-              <div key={m.id} className="rounded-lg border border-outline-variant p-3 text-xs">
-                <p className="font-semibold text-on-surface">{m.name}の出典</p>
-                <ul className="mt-1 space-y-1">
-                  {m.sourceRefs.map((ref, i) => (
-                    <li key={i} className="text-on-surface-variant">
-                      {ref.sourceUrl ? (
-                        <a
-                          href={ref.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline"
-                        >
-                          {ref.sourceTitle ?? ref.sourceUrl}
-                        </a>
-                      ) : (
-                        "出典URL未確認"
-                      )}
-                      （{archiveVerificationStatusLabel(ref.verificationStatus)}）
-                    </li>
-                  ))}
-                  {m.sourceRefs.length === 0 && <li className="text-on-surface-variant">出典未登録</li>}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <CompareSourceNotice
+            items={selectedMayors.map((m) => ({ label: m.name, sourceRefs: m.sourceRefs }))}
+          />
         </SectionCard>
       )}
     </div>

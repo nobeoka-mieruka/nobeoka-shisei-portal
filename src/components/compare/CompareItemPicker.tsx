@@ -1,14 +1,11 @@
 import { MAX_COMPARE_ITEMS } from "../../lib/archiveCompare";
+import type { CompareOption } from "../../types/compare";
 
-export interface CompareItemOption {
-  id: string;
-  label: string;
-  sublabel?: string;
-}
+export type { CompareOption as CompareItemOption } from "../../types/compare";
 
 interface CompareItemPickerProps {
   legend: string;
-  options: CompareItemOption[];
+  options: CompareOption[];
   selected: string[];
   onChange: (ids: string[]) => void;
   max?: number;

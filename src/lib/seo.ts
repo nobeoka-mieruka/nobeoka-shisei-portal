@@ -754,6 +754,17 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/timeline":
+      return makeResult(
+        {
+          path: "/timeline",
+          pageTitle: "延岡市政の年表",
+          description: "市長任期・年度別財政データを、公式資料で確認できた範囲で年度別に一覧表示します。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市政の年表" }],
+        },
+        options,
+      );
+
     case "/dashboard":
       return makeResult(
         {

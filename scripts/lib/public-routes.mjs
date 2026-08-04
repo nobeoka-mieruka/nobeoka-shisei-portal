@@ -81,6 +81,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/finance/debt",
   "/finance/funds",
   "/compare",
+  "/timeline",
   "/dashboard",
   "/compensation",
   "/city-guide",
@@ -277,6 +278,12 @@ function staticPageLastmod(path, data) {
         ["src/data/archiveFiscalYears.json"],
       );
     case "/compare":
+      return resolveLastmod(
+        path,
+        [maxValidDate(archiveFiscalYearDates(data.archiveFiscalYears))],
+        ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json", "src/data/archiveFiscalYears.json"],
+      );
+    case "/timeline":
       return resolveLastmod(
         path,
         [maxValidDate(archiveFiscalYearDates(data.archiveFiscalYears))],

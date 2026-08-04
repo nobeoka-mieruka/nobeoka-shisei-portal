@@ -22,6 +22,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/dashboard", label: "ダッシュボード" },
       { to: "/finance", label: "延岡市の財政" },
       { to: "/compare", label: "市政アーカイブの比較" },
+      { to: "/timeline", label: "延岡市政の年表" },
     ],
   },
   {
