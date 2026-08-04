@@ -65496,12 +65496,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 12,
-      "sessionsWithSpeechCount": 12,
+      "analyzedSessionCount": 13,
+      "sessionsWithSpeechCount": 13,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 14,
-      "lastAnalyzedAt": "2026-08-04",
+      "unfetchedSessionCount": 13,
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "予算編成",
@@ -65697,6 +65697,14 @@
         },
         {
           "topic": "観光・地域振興",
+          "sessionCount": 1
+        },
+        {
+          "topic": "行政運営",
+          "sessionCount": 1
+        },
+        {
+          "topic": "上下水道",
           "sessionCount": 1
         }
       ],
@@ -70143,9 +70151,184 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の代表質問原文・当局の一括答弁原文（壇上質問と、それに続く各部局長答弁）を取得し内容・発言者・対応関係を確認した。宮田議員はこの後order78〜94で総務部長・副市長・市長・健康福祉部長・商工観光文化部長・教育長に対する再質問（約9往復）を行っているが、量が多いため個々の再質問本文までは逐一取得・要約せず、壇上質問と当局の一括答弁を基に16項目に整理した。詳細確認が必要な場合は上記sourceUrlのpos範囲（115536〜133114）を参照すること。令和8年3月定例会（2026年2月25日）分として新規登録した。"
+        },
+        {
+          "id": "m24-2025-03-05-kanren-shitsumon",
+          "memberId": "m24",
+          "sessionId": "2025-03",
+          "date": "2025-03-05",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "関連質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "行政運営",
+            "上下水道"
+          ],
+          "shortSummary": "令和7年3月定例会（第3号）で宮田博徳議員が上杉泰洋議員の質問枠内で行った関連質問の要約です。窓口業務の受付時間見直しに向けたデータ把握と、下水道事業経営戦略の見直し（経営効率化・使用料の在り方）について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "窓口業務の受付時間見直しに向けたデータ把握",
+              "questionSummary": "宮田議員は、先進的に取り組む宮崎市・都城市の事例（短縮後の受付時間内に来庁する市民の割合が9割超）を挙げ、本市でも改革を恐れず、まずはこうしたデータの把握から始めるべきではないかと総務部長に尋ねた。",
+              "answerSummary": "総務部長は、本市の窓口受付時間は長年市民に定着しており、朝早く・夕方遅くのニーズもあると考えられること、窓口では様々な業務を行っていることから、どのようなデータが有効か、その必要性も含めて慎重に検討する必要があると説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m24",
+                  "summary": "宮崎市・都城市の事例を踏まえ、まずデータ把握から始めるべきではないかと尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "長年定着した受付時間であり、有効なデータの検討を含め慎重に検討する必要があると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "対応の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q2",
+              "title": "下水道事業経営戦略の見直し（経営効率化・使用料の在り方・老朽化対策）",
+              "questionSummary": "宮田議員は、令和五年度公営企業会計決算審査意見書の指摘（経営効率化・使用料の在り方の検討の必要性）を踏まえ、経営戦略見直しの考え方、現行使用料体系の改定時期、管渠改善率（年平均0.05%、全更新に千年以上を要する見通し）・老朽化率（17.9%の見通し）、埼玉県八潮市の道路陥没事故の事例を挙げ、経営効率化・使用料の在り方について検討すべきではないかと市長に尋ねた。",
+              "answerSummary": "上下水道局長は、老朽化施設の統廃合・広域化やウォーターPPP導入により維持管理費削減を図る一方、使用料は物価高騰の影響を考慮し現行体系に基づき策定していると説明し、現行料金の最終改定は平成24年4月（12年経過）と答弁した。市長は、埼玉県八潮市の事故を踏まえた点検を継続するとした上で、経営戦略の見直しでは管渠強化と浸水対策（富美山町のポンプ整備等）を優先する方針を示し、使用料については他自治体水準の把握を含め不断に検討を行っているが、物価高の中で市民負担を増やすことは困難な状況であるとの認識を述べた。",
+              "answerers": [
+                "上下水道局長",
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m24",
+                  "summary": "経営効率化・使用料の在り方の見直しはどのような考えに基づくか尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "上下水道局長",
+                  "summary": "施設統廃合・広域化・ウォーターPPP導入で維持管理費を削減する一方、使用料は現行体系を維持すると説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m24",
+                  "summary": "現行の下水道使用料はいつ改定されたか尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "上下水道局長",
+                  "summary": "平成24年4月に改定し、12年が経過していると答えた。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m24",
+                  "summary": "管渠改善率0.05%（全更新に千年以上）、老朽化率17.9%の見通し、埼玉県八潮市の道路陥没事故を踏まえ、経営効率化・使用料の在り方の検討について市長の所見を尋ねた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "八潮市の事故を踏まえた点検継続、管渠強化と浸水対策（富美山町のポンプ整備等）を優先する方針を示し、使用料は物価高の中で市民負担増は困難との認識を述べた。"
+                },
+                {
+                  "order": 7,
+                  "type": "follow-up-question",
+                  "speakerId": "m24",
+                  "summary": "使用料の改定でなく、適正水準の「検討」自体をすべきではないかと重ねて尋ねた。"
+                },
+                {
+                  "order": 8,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長",
+                  "summary": "他自治体水準の把握等、検討は不断に実施しているが、浸水対策等がより緊急性が高いとの考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 宮田博徳君（関連質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/134041/10/1//0/0",
+              "speakerSection": "pos=134041"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 総務部長（齋藤章二君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/134961/10/1//0/0",
+              "speakerSection": "pos=134961"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 宮田博徳君（下水道経営戦略・質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/135277/10/1//0/0",
+              "speakerSection": "pos=135277"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 上下水道局長（岡田勇一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/135975/10/1//0/0",
+              "speakerSection": "pos=135975"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 宮田博徳君（再質問：使用料改定時期）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/136477/10/1//0/0",
+              "speakerSection": "pos=136477"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 上下水道局長（岡田勇一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/136937/10/1//0/0",
+              "speakerSection": "pos=136937"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 宮田博徳君（再質問：老朽化・八潮市事故）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/137201/10/1//0/0",
+              "speakerSection": "pos=137201"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/138811/10/1//0/0",
+              "speakerSection": "pos=138811"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 宮田博徳君（再質問：検討の要望）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/140685/10/1//0/0",
+              "speakerSection": "pos=140685"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 市長（読谷山洋司君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/141553/10/1//0/0",
+              "speakerSection": "pos=141553"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を取得し、内容、発言者、質問と答弁の対応関係を確認した。この発言は上杉泰洋議員の総括質疑及び一般質問の枠内で行われた関連質問であり、議長発言（「これより二三番　長友幸子議員の総括質疑及び一般質問を許可いたします」）から会議録上の区分を確認した。監査で判明していた未登録分として今回新規登録した。"
         }
       ],
-      "verificationNote": "令和7年12月定例会（2025年12月4日）分について、宮田議員の一般質問には、この要約に含めた1テーマ以外にも、職員の名札の在り方、指定暑熱避難施設の開放基準など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日、初当選後初めての一般質問）分は、答弁未確認の4テーマをpendingとして記録している。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年3月定例会（2024年3月5日）分（関連質問）を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
+      "verificationNote": "令和7年12月定例会（2025年12月4日）分について、宮田議員の一般質問には、この要約に含めた1テーマ以外にも、職員の名札の在り方、指定暑熱避難施設の開放基準など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日、初当選後初めての一般質問）分は、答弁未確認の4テーマをpendingとして記録している。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年3月定例会（2024年3月5日）分（関連質問）を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。 2025-03（2025-03-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
     },
     {
       "memberId": "m25",
@@ -73330,12 +73513,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 8,
-      "sessionsWithSpeechCount": 8,
+      "analyzedSessionCount": 9,
+      "sessionsWithSpeechCount": 9,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 18,
-      "lastAnalyzedAt": "2026-08-04",
+      "unfetchedSessionCount": 17,
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "災害時物流システム",
@@ -73487,6 +73670,14 @@
         },
         {
           "topic": "農林水産",
+          "sessionCount": 1
+        },
+        {
+          "topic": "教育・給食",
+          "sessionCount": 1
+        },
+        {
+          "topic": "教育",
           "sessionCount": 1
         }
       ],
@@ -76694,9 +76885,182 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 149-188）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。令和6年12月定例会（2024年12月5日）分を追加し、2024年12月定例会の一般質問登録を完了した。"
+        },
+        {
+          "id": "m26-2025-03-05-kanren-shitsumon",
+          "memberId": "m26",
+          "sessionId": "2025-03",
+          "date": "2025-03-05",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "関連質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "教育・給食",
+            "教育"
+          ],
+          "shortSummary": "令和7年3月定例会（第3号）で吉田茂仁議員が上杉泰洋議員の質問枠内で行った関連質問の要約です。物価高騰下での学校給食の質の維持と、いじめの認知件数の推移について、教育部長・教育長の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "物価高騰下での学校給食の質の維持",
+              "questionSummary": "吉田議員は、物価高騰が続く中での本市の学校給食の質を保つための対策を尋ねた。再質問では、栄養摂取基準（充足率92.6%）が児童生徒の体格変化に応じて更新されているか、また子供たちへの給食満足度アンケートの実施を求めた。",
+              "answerSummary": "教育部長は、給食単価を平均1食あたり20円程度値上げしたこと、令和4・5年度は給食調理場への食材補助支援金を給付したことを説明した。栄養摂取基準の更新状況については、その場での回答が難しいとした。満足度アンケートについては、各学校で栄養教諭が子供にアンケートを取り、リクエストを反映した献立を提供する等の取り組みを説明した。",
+              "answerers": [
+                "教育部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m26",
+                  "summary": "物価高騰の中、給食の質をどう保っているか対策を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育部長",
+                  "summary": "給食単価の値上げ（平均1食20円程度）と、令和4・5年度の食材補助支援金の給付を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m26",
+                  "summary": "児童生徒の体格変化に応じ、栄養摂取基準は年々更新されているか尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育部長",
+                  "summary": "現在の知識では回答が難しいとした。"
+                },
+                {
+                  "order": 5,
+                  "type": "follow-up-question",
+                  "speakerId": "m26",
+                  "summary": "給食の量・質の評価は子供たち自身が行うべきとして、満足度アンケートの実施を求めた。"
+                },
+                {
+                  "order": 6,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育部長",
+                  "summary": "各学校で栄養教諭が子供へアンケートを取り、リクエストを反映した献立を提供する等の取り組みを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認"
+            },
+            {
+              "id": "q2",
+              "title": "いじめの認知件数の推移と初期対応体制",
+              "questionSummary": "吉田議員は、保護者からのいじめ相談を受けたことを契機に、本市におけるいじめ認知件数の推移を尋ねた。再質問では、教員がいじめの兆候に早期に気づき初期対応できる環境づくりについて教育長の所見を求めた。",
+              "answerSummary": "教育長は、今年度（1月時点）の認知件数が小学校で約1000件強・中学校で約140件であり、前年同期比で小学校が約400件、中学校が約40件それぞれ減少していると答弁した。初期対応体制については、教科担任制の一部導入や学年で子供を見る体制、生徒指導支援員の増員等、教員の負担軽減を図る取り組みを説明した。",
+              "answerers": [
+                "教育長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m26",
+                  "summary": "延岡市のいじめ認知件数の推移を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育長",
+                  "summary": "今年度は小学校約1000件強・中学校約140件で、前年同期比で減少していると説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "m26",
+                  "summary": "教員がいじめの兆候に早期に気づき初期対応できる体制づくりへの所見を求めた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "教育長",
+                  "summary": "教科担任制の一部導入、学年で見る体制、生徒指導支援員の増員等の取り組みを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 吉田茂仁君（関連質問：学校給食）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/72594/10/1//0/0",
+              "speakerSection": "pos=72594"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 教育部長（丸山真二君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/73176/10/1//0/0",
+              "speakerSection": "pos=73176"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 吉田茂仁君（再質問：栄養摂取基準）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/73586/10/1//0/0",
+              "speakerSection": "pos=73586"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 教育部長（丸山真二君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/74296/10/1//0/0",
+              "speakerSection": "pos=74296"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 吉田茂仁君（再質問：満足度アンケート）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/74412/10/1//0/0",
+              "speakerSection": "pos=74412"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 教育部長（丸山真二君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/75160/10/1//0/0",
+              "speakerSection": "pos=75160"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 吉田茂仁君（関連質問：いじめ認知件数）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/75678/10/1//0/0",
+              "speakerSection": "pos=75678"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 教育長（髙森賢一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/76662/10/1//0/0",
+              "speakerSection": "pos=76662"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 吉田茂仁君（再質問：初期対応体制）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/77312/10/1//0/0",
+              "speakerSection": "pos=77312"
+            },
+            {
+              "title": "令和 7年第16回定例会（第3号 3月5日） 教育長（髙森賢一君）（再答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/78050/10/1//0/0",
+              "speakerSection": "pos=78050"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を取得し、内容、発言者、質問と答弁の対応関係を確認した。この発言は上杉泰洋議員の総括質疑及び一般質問の枠内で行われた関連質問であり、議長発言（「これをもって、上杉泰洋議員の総括質疑及び一般質問を終わります」）から会議録上の区分を確認した。監査で判明していた未登録分として今回新規登録した。"
         }
       ],
-      "verificationNote": "会議録取得により生成した要約候補です。 令和5年6月定例会（2023年6月28日、初当選後初めての一般質問）分は、答弁未確認の3テーマをpendingとして記録している。 令和5年12月定例会（2023年12月6日）分を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
+      "verificationNote": "会議録取得により生成した要約候補です。 令和5年6月定例会（2023年6月28日、初当選後初めての一般質問）分は、答弁未確認の3テーマをpendingとして記録している。 令和5年12月定例会（2023年12月6日）分を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。 2025-03（2025-03-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
     },
     {
       "memberId": "fm01",
@@ -76705,15 +77069,15 @@
         "plenary"
       ],
       "analysisPeriod": {
-        "from": "2024-12-04",
+        "from": "2023-06-28",
         "to": "2024-12-04"
       },
-      "analyzedSessionCount": 1,
-      "sessionsWithSpeechCount": 1,
+      "analyzedSessionCount": 4,
+      "sessionsWithSpeechCount": 4,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
-      "lastAnalyzedAt": "2026-08-04",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "観光・地域振興",
@@ -76729,6 +77093,46 @@
         },
         {
           "topic": "農林水産",
+          "sessionCount": 1
+        },
+        {
+          "topic": "公共交通",
+          "sessionCount": 1
+        },
+        {
+          "topic": "観光・地域振興",
+          "sessionCount": 1
+        },
+        {
+          "topic": "防犯",
+          "sessionCount": 1
+        },
+        {
+          "topic": "道路",
+          "sessionCount": 1
+        },
+        {
+          "topic": "観光・地域振興",
+          "sessionCount": 1
+        },
+        {
+          "topic": "道路",
+          "sessionCount": 1
+        },
+        {
+          "topic": "教育・給食",
+          "sessionCount": 1
+        },
+        {
+          "topic": "観光・地域振興",
+          "sessionCount": 1
+        },
+        {
+          "topic": "道路",
+          "sessionCount": 1
+        },
+        {
+          "topic": "スポーツ",
           "sessionCount": 1
         }
       ],
@@ -77375,9 +77779,897 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 65-117）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。吉本靖氏は令和6年12月定例会当時は市議会議員であったが、現在の議員名簿には含まれない（詳細はsrc/data/formerMembers.jsonを参照）。過去会期の在職記録として、現職議員マスターとは別に登録した。"
+        },
+        {
+          "id": "fm01-2023-06-28-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2023-06",
+          "date": "2023-06-28",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公共交通",
+            "観光・地域振興",
+            "防犯",
+            "道路"
+          ],
+          "shortSummary": "令和5年6月定例会（第3号）で吉本靖議員が行った一般質問の要約です。南延岡駅前再整備・浜踏切拡幅・券売機改善、新宮崎県体育館の経済効果、青色防犯パトロールへの支援、長浜・方財海岸の侵食問題、延岡南道路の料金について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "南延岡駅前再整備・浜踏切拡幅・券売機改善",
+              "questionSummary": "吉本議員は、令和4年度の南延岡駅前再整備可能性調査事業の結果、浜踏切（幅員5.4m）拡幅の検討状況、南延岡駅の券売機がインターネット予約・カード決済に対応していない問題について尋ねた。再質問では、南延岡駅を交通結節点として発展させる可能性（宮崎交通バスターミナルとの連携等）、駅舎（1978年築）の老朽化と建て替え、撤去された電光掲示板の再設置についても尋ねた。",
+              "answerSummary": "市長は、南延岡駅前再整備可能性調査により駅前ロータリー化・路線バス乗り入れ案を作成しJR九州に提示済みで、駅舎バリアフリー化・建て替えも含め協議を継続していると説明した。都市建設部長は、市道構口緑ケ丘線の拡幅により浜踏切拡幅を検討しており、令和5年2月にJRとの協議・6月に地元説明会を実施したと説明した。企画部長は、券売機の早期導入をJR九州に要望していると答弁した。",
+              "answerers": [
+                "市長",
+                "企画部長",
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "南延岡駅前再整備調査の結果、浜踏切拡幅の検討状況、券売機のインターネット予約対応を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長・企画部長・都市建設部長",
+                  "summary": "駅前ロータリー化案をJR九州に提示済み、浜踏切は市道拡幅にあわせ検討中（地元説明会実施済み）、券売機導入をJR九州へ要望していると説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "fm01",
+                  "summary": "南延岡駅を交通結節点として発展させる可能性（バス連携）、駅舎の老朽化・建て替え、電光掲示板の再設置を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "市長・企画部長",
+                  "summary": "バス連携は宮崎交通等の意向を確認したいとし、駅舎建て替えはJR九州側の検討が前提であるとした。電光掲示板は老朽化のため撤去されたが、利用者要望があればJR九州へ設置を要望するとした。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q2",
+              "title": "新宮崎県体育館の本市への経済効果",
+              "questionSummary": "吉本議員は、令和7年12月完成予定の新宮崎県体育館について、国スポ・障スポ開催や各種大会誘致による本市への経済効果をどう考えているか尋ねた。",
+              "answerSummary": "企画部長は、公式な経済効果の試算はないとしつつ、国スポ・障スポだけで選手・関係者約7万5千人の来訪が見込まれ、宿泊・消費・情報発信等の大きな経済効果が期待できると説明し、国スポ・障スポ後も幅広く活用されるよう県と協議していると答弁した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "新宮崎県体育館の完成による本市への経済効果をどう考えているか尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "公式試算はないが、国スポ・障スポで約7万5千人の来訪が見込まれ大きな経済効果を期待していると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認"
+            },
+            {
+              "id": "q3",
+              "title": "青色防犯パトロールの自動車保険料補助",
+              "questionSummary": "吉本議員は、全国的な強盗事件の増加を踏まえ、青色防犯パトロールで使用する個人所有車両への自動車保険料補助を検討できないか尋ねた。",
+              "answerSummary": "市民環境部長は、青パトへは1台年5千円の活動費補助や資機材貸与、ボランティア保険料負担等の支援を行っているが、自動車保険に限定した補助は本市・県内他市とも実施していないとした上で、今後、延岡地区防犯協会と連携し適当な支援方法を検討したいと答弁した。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "青色防犯パトロールで使用する個人車両への自動車保険料補助を検討できないか尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "自動車保険に限定した補助は現状ないが、防犯協会と連携し適当な支援方法を検討したいと答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "対応の要望",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q4",
+              "title": "長浜・方財海岸の侵食問題（意見交換会名称変更・専門家出席・知事現場視察）",
+              "questionSummary": "吉本議員は、県主催の意見交換会が「侵食に関する地元」の文言を削った名称に変更された理由、専門家（宮崎大学村上教授）が欠席した理由、県知事による公式な現場視察が実現していない状況について、市の認識と対応を尋ねた。再質問では、県の調査予算・内容、市独自の簡易調査の可能性、名称を元に戻し専門家を交えた意見交換会の実現を求めた。",
+              "answerSummary": "都市建設部長は、県に確認したところ名称変更後も地形変化に関する意見交換という会の趣旨は変わっていないとの回答であったこと、村上教授の欠席理由は「所用のため」とのことであったこと、知事は令和4年5月に非公式に一度現場視察をしたが公式視察は実現していないことを説明し、今後も現場視察や専門家出席の実現に向け県へ働きかけを続けるとした。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "意見交換会の名称変更の理由、専門家欠席の理由、知事の公式現場視察の実現状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "県によれば名称変更後も会の趣旨は変わっていないとのこと、専門家欠席は所用のため、知事は令和4年5月に非公式視察をしたが公式視察は未実現と説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "fm01",
+                  "summary": "県の調査予算・内容、市独自の簡易調査の可能性、名称を元に戻し専門家を交えた意見交換会の実現を求めた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "県の測量データの活用を含め検討するとし、地元の意見を県へ伝え、行政連絡会議でも共有・協議していきたいと答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q5",
+              "title": "延岡南道路の料金（普通車・軽自動車の見直し要望）",
+              "questionSummary": "吉本議員は、平成30年の県知事・前市長連名の要望書に、普通車・軽自動車は住宅地の安全性に影響を及ぼしていないとの記述があり、これが料金見直し見送りの一因になっているとして、これは事実誤認であり県と共に訂正すべきではないかと尋ねた。",
+              "answerSummary": "都市建設部長は、当時の要望書の意図を正確に把握することは困難であり、記述内容が地域の深刻な渋滞の現状を正確に表していないとは考えているが、過去の要望書を取り戻して修正することは現実的に難しいとし、現在は当時より一歩進んだ要請活動を行っていることを重視してほしいと答弁した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "平成30年要望書の「普通車・軽自動車は住宅地の安全性に影響しない」との記述は事実誤認であり訂正すべきではと尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "記述内容が現状を正確に表していないとは考えるが、過去の要望書の修正は現実的に難しく、現在の要請活動を重視してほしいと答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 吉本靖君（質問・南延岡駅等）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/4750/10/1//0/0",
+              "speakerSection": "pos=4750"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/12060/10/1//0/0",
+              "speakerSection": "pos=12060"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 企画部長（吉岡修君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/13484/10/1//0/0",
+              "speakerSection": "pos=13484"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 市民環境部長（甲斐国雄君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/15286/10/1//0/0",
+              "speakerSection": "pos=15286"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 商工観光文化部長（河野修君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/16274/10/1//0/0",
+              "speakerSection": "pos=16274"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/17196/10/1//0/0",
+              "speakerSection": "pos=17196"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 吉本靖君（再質問：侵食問題）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/22664/10/1//0/0",
+              "speakerSection": "pos=22664"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 都市建設部長（中川真一君）（再答弁：侵食問題）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/23354/10/1//0/0",
+              "speakerSection": "pos=23354"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 吉本靖君（再質問：南延岡駅発展性）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/27220/10/1//0/0",
+              "speakerSection": "pos=27220"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 市長（読谷山洋司君）（再答弁：バス連携）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/27830/10/1//0/0",
+              "speakerSection": "pos=27830"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 吉本靖君（再質問：駅舎建て替え）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/28072/10/1//0/0",
+              "speakerSection": "pos=28072"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 市長（読谷山洋司君）（再答弁：駅舎建て替え）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/28416/10/1//0/0",
+              "speakerSection": "pos=28416"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 吉本靖君（再質問：延岡南道路要望書）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/31084/10/1//0/0",
+              "speakerSection": "pos=31084"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 都市建設部長（中川真一君）（再答弁：延岡南道路要望書）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/31970/10/1//0/0",
+              "speakerSection": "pos=31970"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 吉本靖君（再質問：青パト支援）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/32482/10/1//0/0",
+              "speakerSection": "pos=32482"
+            },
+            {
+              "title": "令和 5年第3回定例会（第3号 6月28日） 市民環境部長（甲斐国雄君）（再答弁：青パト支援）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/32946/10/1//0/0",
+              "speakerSection": "pos=32946"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を取得し、内容、発言者、質問と答弁の対応関係を確認した。吉本靖氏は当時の在職議員（現在は元議員、formerMembers.json参照）。監査（docs/minutes-reflection-audit.md）で判明していた未登録分として今回新規登録した。質問には、この要約に含めた項目以外にも複数の細目（例：料金所建設の経緯、要望活動の日程等）が含まれるが、主要な論点のみを要約対象としている。"
+        },
+        {
+          "id": "fm01-2023-12-05-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2023-12",
+          "date": "2023-12-05",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "観光・地域振興",
+            "道路",
+            "教育・給食"
+          ],
+          "shortSummary": "令和5年12月定例会（第2号）で吉本靖議員が行った一般質問の要約です。長浜・方財海岸の侵食問題（意見交換会・AI導入・砂利採取・土砂投入）、延岡南道路のさらなる料金引下げ、県道稲葉崎平原線・鶴ケ丘交差点の整備、南延岡駅周辺整備、愛宕山のライトアップ、小中学校トイレの洋式化について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "長浜・方財海岸の侵食問題（意見交換会・AI導入・砂利採取・土砂投入）",
+              "questionSummary": "吉本議員は、県主催の意見交換会を現地で海岸断面の測量結果を示しながら開催するよう県へ要望できないか、海岸観測へのAI導入を国・県へ働きかけられないか、令和5年度の五ヶ瀬川河口の砂利採取許認可の状況、長浜海岸への土砂投入（養浜）の進捗を尋ねた。",
+              "answerSummary": "都市建設部長は、現地での測量に基づく意見交換会の開催を県へ働きかけること、AI活用による海岸モニタリングを行政連絡会議で提案したいことを説明した。商工観光文化部長は、今年度11月末時点で国から砂利採取計画の通報はないと答弁した。都市建設部長は、土砂投入は計画520mのうち約210m（約40%、約2万8600立米）が完了していると説明した。",
+              "answerers": [
+                "都市建設部長",
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "現地での意見交換会開催、AI導入の働きかけ、砂利採取の許認可状況、土砂投入の進捗を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長・商工観光文化部長",
+                  "summary": "現地開催・AI導入を県へ働きかける方針、砂利採取の通報は現時点でなし、土砂投入は計画の約4割完了と説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "fm01",
+                  "summary": "県の調査予算の内訳、市独自の簡易な後退量チェックの可能性、養浜の効果を踏まえた市の対応を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "調査予算は測量・土砂収支検討・波浪観測で計約4950万円と説明し、県の測量データ活用や地元感覚の共有を通じて対応する考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q2",
+              "title": "延岡南道路のさらなる料金引下げ",
+              "questionSummary": "吉本議員は、普通車料金（1kmあたり100円、全国平均の3倍）について、令和6年3月末の見直し期限に合わせたさらなる引下げの見通しを尋ねた。再質問では、令和4年度の営業収支差（約6億7千万円の黒字）を踏まえ、大型車無料化やターミナルチャージの引下げによる社会実験の実施を提案し、要望活動の状況・料金が下がらない理由を尋ねた。",
+              "answerSummary": "都市建設部長は、国道10号の渋滞緩和のため普通車等のさらなる引下げを国・ネクスコ西日本へ要請しているが、令和6年4月以降の方針は示されていないと答弁した。再質問では、5月から7月にかけて期成会・市長等による国・県・ネクスコへの要望活動（複数回）を説明し、料金が下がらない理由として、延岡南道路が全国の高速道路料金プール制に組み込まれ単独での引下げが困難であるとネクスコ・国交省から聞いていると答弁した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "普通車料金のさらなる引下げの見通しを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "国・ネクスコへ引下げを要請しているが、令和6年4月以降の方針は未定と答弁した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "fm01",
+                  "summary": "営業収支差（約6.7億円）を踏まえた大型車無料化・ターミナルチャージ引下げの社会実験を提案し、要望活動の状況と料金が下がらない理由を尋ねた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "複数回の要望活動を説明した上で、全国料金プール制に組み込まれており単独引下げが困難と聞いていると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業プロセス・実施方法の確認",
+              "answerStatus": "現時点では予定なし"
+            },
+            {
+              "id": "q3",
+              "title": "県道稲葉崎平原線・鶴ケ丘交差点周辺の整備",
+              "questionSummary": "吉本議員は、県道稲葉崎平原線の構口工区・平原工区の進捗、鶴ケ丘交差点周辺の渋滞解消に向けた用地取得（市の主体的関与）、用地取得に関わる個人情報（地権者情報）の取扱いについて尋ねた。",
+              "answerSummary": "都市建設部長は、構口工区は事業進捗率約60%・用地取得率約91%（令和4年度末）、平原工区は今年度新規着手し国へ事業認可を申請中と説明した。鶴ケ丘交差点については、関係区長への説明会開催等により地権者の理解を得る取り組みを進めると答弁し、個人情報については本人の同意が得られれば地元へ提供する考えを示した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "県道稲葉崎平原線の各工区の進捗、鶴ケ丘交差点の用地取得への市の関与、地権者の個人情報の取扱いを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "構口工区は進捗率約6割、平原工区は事業認可申請中と説明し、鶴ケ丘交差点は関係区長への説明会等で理解を得る考え、個人情報は本人同意があれば提供する考えを示した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q4",
+              "title": "南延岡駅周辺整備（JR貨物廃止後の協議・電光表示板）",
+              "questionSummary": "吉本議員は、令和5年8月のJR貨物輸送廃止を受けたJR九州との協議の進展、南延岡駅改札口の電光表示板（撤去済み）の再設置について尋ねた。",
+              "answerSummary": "企画部長は、JR貨物の土地活用は駅前再整備・バリアフリー化に不可欠と考えており、JR九州がJR貨物への要請も取りまとめる旨表明したと説明し、電光表示板については営業時間短縮とあわせ利用者の利便性が損なわれているとして、JR九州への要請を継続すると答弁した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "JR貨物輸送廃止後のJR九州との協議の進展、電光表示板の再設置を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "JR九州がJR貨物への要請も取りまとめると表明したこと、電光表示板は利便性向上に向けJR九州へ要請を続けると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q5",
+              "title": "愛宕山の電波塔・展望台のライトアップ",
+              "questionSummary": "吉本議員は、日本夜景遺産等に選定される愛宕山の魅力向上のため、電波塔や展望台のライトアップを提案した。",
+              "answerSummary": "商工観光文化部長は、ライトアップは愛宕山の魅力アップにつながる手法の一つと考えられるが、眺望への影響や電波塔管理者の許可等の課題もあるため、関係者と協議しながら検討を進めると答弁した。",
+              "answerers": [
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "愛宕山の電波塔・展望台のライトアップを提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "魅力アップの手法の一つと考えられるが、眺望への影響等の課題もあり関係者と協議しながら検討すると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q6",
+              "title": "小中学校トイレの洋式化",
+              "questionSummary": "吉本議員は、報道で全国平均を下回る自治体があると紹介されたことを踏まえ、本市の小中学校トイレの洋式化の現状と課題を尋ねた。",
+              "answerSummary": "教育部長は、平成28年度の整備率27.8%から整備を進め、今年度末には73.6%に達する見込みで、全国平均（68.3%）・県平均（55.7%）を上回り県内9市中トップと答弁した。課題として、学校ごとの整備率のばらつきを挙げ、年次的な整備を継続するとした。",
+              "answerers": [
+                "教育部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "小中学校トイレの洋式化の現状と課題を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育部長",
+                  "summary": "今年度末の整備率は73.6%見込みで全国・県平均を上回り県内9市中トップ、課題は学校間のばらつきと説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（質問・侵食問題等）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/111815/10/1//0/0",
+              "speakerSection": "pos=111815"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 商工観光文化部長（河野修君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/115133/10/1//0/0",
+              "speakerSection": "pos=115133"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/116115/10/1//0/0",
+              "speakerSection": "pos=116115"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（再質問：延岡南道路料金）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/124205/10/1//0/0",
+              "speakerSection": "pos=124205"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 都市建設部長（中川真一君）（再答弁：延岡南道路料金）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/127575/10/1//0/0",
+              "speakerSection": "pos=127575"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（再質問：要望活動・料金が下がらない理由）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/128517/10/1//0/0",
+              "speakerSection": "pos=128517"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 都市建設部長（中川真一君）（再答弁：料金が下がらない理由）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/128733/10/1//0/0",
+              "speakerSection": "pos=128733"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（県道稲葉崎平原線・鶴ケ丘交差点）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/129103/10/1//0/0",
+              "speakerSection": "pos=129103"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 都市建設部長（中川真一君）（答弁：県道・交差点）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/129617/10/1//0/0",
+              "speakerSection": "pos=129617"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（南延岡駅周辺整備）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/137811/10/1//0/0",
+              "speakerSection": "pos=137811"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 企画部長（吉岡修君）（答弁：南延岡駅）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/138705/10/1//0/0",
+              "speakerSection": "pos=138705"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（愛宕山ライトアップ）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/141203/10/1//0/0",
+              "speakerSection": "pos=141203"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 商工観光文化部長（河野修君）（答弁：愛宕山）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/141907/10/1//0/0",
+              "speakerSection": "pos=141907"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 吉本靖君（学校トイレ洋式化）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/142525/10/1//0/0",
+              "speakerSection": "pos=142525"
+            },
+            {
+              "title": "令和 5年第 8回定例会（第2号12月5日） 教育部長（丸山真二君）（答弁：学校トイレ）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/143029/10/1//0/0",
+              "speakerSection": "pos=143029"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を取得し、内容、発言者、質問と答弁の対応関係を確認した。吉本靖氏は当時の在職議員（現在は元議員、formerMembers.json参照）。監査（docs/minutes-reflection-audit.md）で判明していた未登録分として今回新規登録した。質問には、この要約に含めた項目以外にも複数の細目（例：料金所建設の経緯、要望活動の日程等）が含まれるが、主要な論点のみを要約対象としている。"
+        },
+        {
+          "id": "fm01-2024-06-25-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2024-06",
+          "date": "2024-06-25",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "観光・地域振興",
+            "道路",
+            "スポーツ"
+          ],
+          "shortSummary": "令和6年6月定例会（第2号）で吉本靖議員が行った一般質問の要約です。長浜・方財海岸の侵食問題（意見交換会未開催・土砂投入実績・市独自調査・砂利採取）、延岡南道路の料金問題（計画交通量・料金所設置の経緯・料金引下げの財源）、天下一！のべおか中学駅伝競走大会、「我が家の・私の宝物展」の提案、北方町鹿川の観光資源、南延岡駅の利便性向上について、市長等の答弁とあわせて整理しています。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "長浜・方財海岸の侵食問題（意見交換会未開催・土砂投入実績・市独自調査・砂利採取）",
+              "questionSummary": "吉本議員は、令和5年度に県主催の意見交換会が開催されなかったことへの見解、長浜海岸への土砂投入の実績、宮崎県と市の見解の相違を踏まえた市独自の海岸侵食調査の実施、令和6年度の砂利採取許認可の現状について尋ねた。",
+              "answerSummary": "都市建設部長は、測量成果が6月末に完了予定であり今年度中に意見交換会を開催すると県から聞いていること、令和5年度末までに国・県・旭化成合わせて約6万8660立米の土砂を投入したことを説明した。市独自調査については、市に海洋工学の専門知識がなく海岸保全は県の責任であることから市予算での調査は困難とし、県への要請を継続する考えを示した。商工観光文化部長は、今年度の砂利採取について本日現在通報はないと答弁した。",
+              "answerers": [
+                "都市建設部長",
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "意見交換会未開催の理由、土砂投入実績、市独自調査の実施、砂利採取の許認可状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長・商工観光文化部長",
+                  "summary": "測量完了後に今年度中の意見交換会開催を県が予定、土砂投入は約6万8660立米、市独自調査は専門知識・所管の理由で困難、砂利採取の通報は現時点でなしと説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "follow-up-question",
+                  "speakerId": "fm01",
+                  "summary": "現地での測量結果比較を伴う意見交換会の開催、台風後の現場確認を県・市に求めた。"
+                },
+                {
+                  "order": 4,
+                  "type": "follow-up-answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "7月の行政連絡会議で地元の意見として要請する考え、台風通過後は市としても現地を確認していると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q2",
+              "title": "延岡南道路の料金問題（計画交通量・料金所設置の経緯・料金引下げの財源）",
+              "questionSummary": "吉本議員は、令和6年5月の国会質疑（長友衆議院議員）を踏まえ、延岡南道路の計画交通量、延岡南インターチェンジ料金所設置と延岡道路の関係、令和4年度の営業収支差（約6.7億円）を踏まえた普通車料金引下げの可能性について尋ねた。",
+              "answerSummary": "都市建設部長は、国会答弁で開通初年度（平成2年度）の計画交通量は約1日1万1千台と示されたこと、延岡南インターチェンジ料金所は中型車以上の迂回車両からの料金徴収を目的とし延岡道路の有料化には当たらないこと、大型車の料金引下げが3年間延長されたことを説明した。市としては料金引下げの検討にあたり営業収支差を勘案してほしいと考えていると答弁した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "延岡南道路の計画交通量、料金所設置の経緯、料金引下げの財源（営業収支差）について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "計画交通量は開通初年度約1万1千台、料金所は迂回車両からの徴収が目的、料金引下げの検討で収支差を勘案してほしいと考えていると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "予算・数値の確認"
+            },
+            {
+              "id": "q3",
+              "title": "天下一！のべおか中学駅伝競走大会の成果と展望",
+              "questionSummary": "吉本議員は、第10回の節目を迎えた同大会について、これまでの成果と今後の展望を尋ねた。",
+              "answerSummary": "教育部長は、第1回大会（平成27年）は2県からの参加であったが、第10回大会（令和6年2月）には九州5県から過去最多505名が参加し、旭化成陸上部との連携等、他大会にない付加価値が創出されていると説明し、延岡西日本マラソン等と共にアスリートタウンのべおかを代表する大会となるよう努めると答弁した。",
+              "answerers": [
+                "教育部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "第10回を迎えた同大会のこれまでの成果と今後の展望を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育部長",
+                  "summary": "参加が2県から九州5県505名まで拡大し、旭化成陸上部との連携等の付加価値が創出されていると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認"
+            },
+            {
+              "id": "q4",
+              "title": "「我が家の・私の宝物展」の開催提案",
+              "questionSummary": "吉本議員は、令和14年の市制施行100周年に向けた機運醸成として、市民が所有する「宝物」をエピソードとともに延岡城・内藤記念博物館で展示する企画展の開催を提案した。",
+              "answerSummary": "商工観光文化部長は、延岡城・内藤記念博物館では文化芸術企画アドバイザーの助言を得ながら様々な企画展を実施しているとし、市制施行100周年を迎える際のイベントとして、提案のような企画展の開催も含め機運醸成につながる事業を検討すると答弁した。",
+              "answerers": [
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "市制施行100周年に向け、市民の宝物を展示する企画展の開催を提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "提案のような企画展の開催を含め、機運醸成につながる文化事業の実施を検討すると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q5",
+              "title": "北方町鹿川の天然滑り台再開・キャンプ場遊具",
+              "questionSummary": "吉本議員は、平成22年から遊泳禁止となっている鹿川渓谷の天然滑り台について、専門家による安全な活用の可能性調査（平成30年）を踏まえた再開に向けた取り組み、および鹿川キャンプ場で点検中のため利用中止となっている木製遊具の早期対応について尋ねた。",
+              "answerSummary": "北方総合支所長は、天然滑り台については専門家調査でインストラクター管理・装具着用による安全な活用が可能とされていることを踏まえ、キャニオニング事業の実施団体（ノベスタ）と開催に向け協議していく考えを示した。木製遊具については、点検予算を計上しており予算成立後速やかに点検し、大規模修繕が必要な場合はリニューアルも含め検討すると答弁した。",
+              "answerers": [
+                "北方総合支所長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "鹿川渓谷の天然滑り台の再開、鹿川キャンプ場の木製遊具の早期対応を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "北方総合支所長",
+                  "summary": "天然滑り台はキャニオニング実施団体と開催に向け協議、木製遊具は点検予算成立後速やかに点検すると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "対応の要望",
+              "answerStatus": "実施予定"
+            },
+            {
+              "id": "q6",
+              "title": "南延岡駅の利便性向上（窓口時間延長等）",
+              "questionSummary": "吉本議員は、近隣の串間駅・門川駅と比較して短い南延岡駅の窓口営業時間（7時30分〜15時）の延長について尋ねた。",
+              "answerSummary": "企画部長は、駅の営業時間短縮により障がいのある方の利用に懸念が生じている等、利用者の利便性が損なわれている状況を認識しており、県・県市長会等と連携しJR九州へ営業体制見直し等を引き続き強く要請すると答弁した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "近隣駅と比較して短い南延岡駅の窓口営業時間の延長を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "利用者の利便性が損なわれている状況を認識しており、JR九州へ営業体制見直し等を引き続き要請すると答弁した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "対応の要望",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（質問・侵食問題等）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/44500/10/1//0/0",
+              "speakerSection": "pos=44500"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 商工観光文化部長（河野修君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/48772/10/1//0/0",
+              "speakerSection": "pos=48772"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 都市建設部長（中川真一君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/49744/10/1//0/0",
+              "speakerSection": "pos=49744"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（再質問：現地開催要望）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/52506/10/1//0/0",
+              "speakerSection": "pos=52506"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 都市建設部長（中川真一君）（再答弁：現地開催要望）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/53396/10/1//0/0",
+              "speakerSection": "pos=53396"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（延岡南道路：計画交通量）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/56164/10/1//0/0",
+              "speakerSection": "pos=56164"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 都市建設部長（中川真一君）（答弁：計画交通量）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/57370/10/1//0/0",
+              "speakerSection": "pos=57370"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（天下一中学駅伝）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/60036/10/1//0/0",
+              "speakerSection": "pos=60036"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 教育部長（丸山真二君）（答弁：中学駅伝）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/61194/10/1//0/0",
+              "speakerSection": "pos=61194"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（宝物展の提案）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/62134/10/1//0/0",
+              "speakerSection": "pos=62134"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 商工観光文化部長（河野修君）（答弁：宝物展）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/63498/10/1//0/0",
+              "speakerSection": "pos=63498"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（鹿川渓谷・キャンプ場）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/64474/10/1//0/0",
+              "speakerSection": "pos=64474"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 北方総合支所長（黒木敏郎君）（答弁：鹿川渓谷）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/65278/10/1//0/0",
+              "speakerSection": "pos=65278"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 北方総合支所長（黒木敏郎君）（答弁：キャンプ場遊具）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/66984/10/1//0/0",
+              "speakerSection": "pos=66984"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（南延岡駅窓口時間）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/67658/10/1//0/0",
+              "speakerSection": "pos=67658"
+            },
+            {
+              "title": "令和 6年第12回定例会（第2号 6月25日） 企画部長（吉岡修君）（答弁：南延岡駅窓口時間）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/68256/10/1//0/0",
+              "speakerSection": "pos=68256"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を取得し、内容、発言者、質問と答弁の対応関係を確認した。吉本靖氏は当時の在職議員（現在は元議員、formerMembers.json参照）。監査（docs/minutes-reflection-audit.md）で判明していた未登録分として今回新規登録した。質問には、この要約に含めた項目以外にも複数の細目（例：料金所建設の経緯、要望活動の日程等）が含まれるが、主要な論点のみを要約対象としている。"
         }
       ],
-      "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。"
+      "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
     }
   ]
 }
