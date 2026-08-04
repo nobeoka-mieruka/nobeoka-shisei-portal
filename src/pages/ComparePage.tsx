@@ -3,7 +3,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
-import { ChartBarIcon, LandmarkIcon, YenIcon } from "../components/icons";
+import { ChartBarIcon, DocumentIcon, LandmarkIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 
@@ -23,6 +23,7 @@ const compareLinks: CompareLink[] = [
   { to: "/compare/budget", title: "予算・決算の比較", description: "一般会計の当初予算・補正後予算・決算額を比較します。" },
   { to: "/compare/debt", title: "市債の比較", description: "市債発行額・年度末残高（区分別）を比較します。" },
   { to: "/compare/funds", title: "基金の比較", description: "財源調整用基金・その他特定目的基金の残高を比較します。" },
+  { to: "/compare/policies", title: "政策の比較", description: "市長・議員・会派・市の政策を最大4件まで並べて比較します。" },
 ];
 
 export function ComparePage() {
@@ -58,6 +59,8 @@ export function ComparePage() {
                 <div className="flex items-center gap-2">
                   {c.to === "/compare/mayors" ? (
                     <LandmarkIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
+                  ) : c.to === "/compare/policies" ? (
+                    <DocumentIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
                   ) : (
                     <YenIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
                   )}

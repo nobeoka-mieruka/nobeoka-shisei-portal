@@ -25,6 +25,7 @@ import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
+import archivePoliciesData from "../data/archivePolicies.json";
 import type {
   BillVoteItem,
   CompensationComparisonEntry,
@@ -39,7 +40,7 @@ import type {
   MayorPromisesData,
   Theme,
 } from "../types";
-import type { ArchiveMayor, ArchiveMemberProfile } from "../types/historicalArchive";
+import type { ArchiveMayor, ArchiveMemberProfile, ArchivePolicy } from "../types/historicalArchive";
 import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
@@ -90,6 +91,7 @@ const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainme
 const compensationComparison = compensationComparisonData as CompensationComparisonEntry[];
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+const archivePolicies = archivePoliciesData as ArchivePolicy[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -461,6 +463,26 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/policies":
+      return makeResult(
+        {
+          path: "/policies",
+          pageTitle: "政策（延岡市政アーカイブ）",
+          description: "市長・議員・会派・市の政策を、公式資料の原文と出典に基づいて整理しています。達成・未達成の独自判定や優劣評価は行っていません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "政策" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-policies-jsonld",
+              name: "延岡市政 政策データ",
+              description: "市長・議員・会派・市の政策を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/policies`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/mayor/policy-progress":
       return makeResult(
         {
@@ -623,6 +645,20 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
           description: "歴代市長を最大4名まで選んで、任期・就任回数・出典を比較できます。",
           robots: "noindex, follow",
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "歴代市長の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
+    case "/compare/policies":
+      // 選択した政策によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/policies",
+          pageTitle: "政策の比較",
+          description: "市長・議員・会派・市の政策を最大4件まで選んで、所有者・テーマ・状況を比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "政策の比較" }],
           skipWebPage: true,
         },
         options,
@@ -1105,6 +1141,22 @@ function mayorDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/** /policies/:slug */
+function policyDetailSeo(slug: string, options?: SeoOptions): SeoResult {
+  const policy = archivePolicies.find((p) => p.slug === slug);
+  if (!policy) return notFound(`/policies/${slug}`, "政策情報");
+
+  return makeResult(
+    {
+      path: `/policies/${slug}`,
+      pageTitle: `${policy.title}｜政策`,
+      description: policy.summary,
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "政策", to: "/policies" }, { label: policy.title }],
+    },
+    options,
+  );
+}
+
 /** /members/former/:slug */
 function memberFormerDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   const profile = archiveMemberProfiles.find((p) => p.slug === slug);
@@ -1256,6 +1308,7 @@ const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
 const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
+const POLICY_DETAIL_RE = /^\/policies\/([^/]+)$/;
 
 /**
  * 現在のURLパス（クエリ・ハッシュを除く）から、そのページのSEO情報を返す。
@@ -1307,6 +1360,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const mayorDetailMatch = path.match(MAYOR_DETAIL_RE);
   if (mayorDetailMatch) return mayorDetailSeo(safeDecodeURIComponent(mayorDetailMatch[1]), options);
+
+  const policyDetailMatch = path.match(POLICY_DETAIL_RE);
+  if (policyDetailMatch) return policyDetailSeo(safeDecodeURIComponent(policyDetailMatch[1]), options);
 
   return notFound(path, "ページが見つかりません");
 }

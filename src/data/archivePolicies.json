@@ -1,0 +1,142 @@
+[
+  {
+    "id": "policy-mayor01-01",
+    "slug": "mayor-miura-children",
+    "ownerType": "mayor",
+    "ownerId": "mayor-01",
+    "title": "① 全ての子どもたちの可能性を伸ばします",
+    "summary": "家庭環境に関わらず自然体験に参加できる仕組み、理解度に応じた学び、こども未来部設置を掲げる公約。",
+    "sourceOriginalText": "・家庭環境に関わらず自然体験に参加できる仕組み\n・理解度に応じた学び\n・こども未来部設置",
+    "categoryIds": ["childcare", "education"],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://hisatomo-m.jp/",
+        "sourceTitle": "三浦ひさとも 公式サイト",
+        "sourceOrganization": "本人（後援会）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存 src/data/mayor.json の pledges（p1）をアーカイブ用政策データへ移行したもの。公約の個別発表日はサイト上で確認できていないため announcedDate は未設定。"
+      }
+    ],
+    "status": "proposed",
+    "notes": "既存mayor.jsonのpledges配列（id: p1）に基づく。達成・未達成の判定は行っていない。"
+  },
+  {
+    "id": "policy-mayor01-02",
+    "slug": "mayor-miura-economy",
+    "ownerType": "mayor",
+    "ownerId": "mayor-01",
+    "title": "② 地域経済を活性化させます",
+    "summary": "地域商社設立、愛宕山カフェ誘致、スポーツ合宿・大会誘致を掲げる公約。",
+    "sourceOriginalText": "・地域商社設立\n・愛宕山カフェ誘致\n・スポーツ合宿・大会誘致",
+    "categoryIds": ["industry-promotion", "tourism", "sports"],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://hisatomo-m.jp/",
+        "sourceTitle": "三浦ひさとも 公式サイト",
+        "sourceOrganization": "本人（後援会）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存 src/data/mayor.json の pledges（p2）をアーカイブ用政策データへ移行したもの。"
+      }
+    ],
+    "status": "proposed",
+    "notes": "既存mayor.jsonのpledges配列（id: p2）に基づく。"
+  },
+  {
+    "id": "policy-mayor01-03",
+    "slug": "mayor-miura-senior",
+    "ownerType": "mayor",
+    "ownerId": "mayor-01",
+    "title": "③ シニア世代が輝き安心して暮らせるまち",
+    "summary": "診療所等の事業承継支援、津波対策・福祉避難体制強化、シニア活躍の仕組みづくりを掲げる公約。",
+    "sourceOriginalText": "・診療所等の事業承継支援\n・津波対策・福祉避難体制強化\n・シニア活躍の仕組みづくり",
+    "categoryIds": ["senior", "healthcare", "disaster-prevention"],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://hisatomo-m.jp/",
+        "sourceTitle": "三浦ひさとも 公式サイト",
+        "sourceOrganization": "本人（後援会）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存 src/data/mayor.json の pledges（p3）をアーカイブ用政策データへ移行したもの。"
+      }
+    ],
+    "status": "proposed",
+    "notes": "既存mayor.jsonのpledges配列（id: p3）に基づく。"
+  },
+  {
+    "id": "policy-mayor01-04",
+    "slug": "mayor-miura-city-hall",
+    "ownerType": "mayor",
+    "ownerId": "mayor-01",
+    "title": "④ 市役所をもっと前向きな組織へ",
+    "summary": "若手職員プロジェクト、民間と市職員のチームづくり、市民相談体制強化を掲げる公約。",
+    "sourceOriginalText": "・若手職員プロジェクト\n・民間と市職員のチームづくり\n・市民相談体制強化",
+    "categoryIds": ["city-hall-reform"],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://hisatomo-m.jp/",
+        "sourceTitle": "三浦ひさとも 公式サイト",
+        "sourceOrganization": "本人（後援会）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存 src/data/mayor.json の pledges（p4）をアーカイブ用政策データへ移行したもの。"
+      }
+    ],
+    "status": "proposed",
+    "notes": "既存mayor.jsonのpledges配列（id: p4）に基づく。"
+  },
+  {
+    "id": "policy-q-gq2026-06-m24-01",
+    "slug": "member-miyata-designated-manager-wage",
+    "ownerType": "member",
+    "ownerId": "m24",
+    "title": "指定管理者制度における賃金スライド制度の導入",
+    "summary": "令和8年6月定例会の一般質問で、宮田博徳議員が指定管理者制度の賃金スライド制度導入について取り上げた。",
+    "categoryIds": ["employment", "administrative-reform"],
+    "announcedDate": "2026-06-23",
+    "sourceType": "councilQuestion",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27613.pdf",
+        "sourceTitle": "総括質疑及び一般質問通告書（宮田 博徳、令和8年6月定例会）",
+        "sourceOrganization": "延岡市議会",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存src/data/generalQuestions.json（id: gq2026-06-m24）のquestionItemsのうち1項目を政策テーマとして登録したもの。答弁内容・その後の実施状況は今回確認していない。"
+      }
+    ],
+    "status": "proposed",
+    "relatedQuestionIds": ["gq2026-06-m24"],
+    "notes": "一般質問で扱われたテーマの登録であり、市の公式政策として確定した事実ではない。"
+  },
+  {
+    "id": "policy-q-gq2026-06-m24-02",
+    "slug": "member-miyata-harassment-ordinance",
+    "ownerType": "member",
+    "ownerId": "m24",
+    "title": "ハラスメント防止に関する市独自条例の制定",
+    "summary": "令和8年6月定例会の一般質問で、宮田博徳議員が本市独自のハラスメント防止条例制定の必要性について取り上げた。",
+    "categoryIds": ["city-hall-reform"],
+    "announcedDate": "2026-06-23",
+    "sourceType": "councilQuestion",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27613.pdf",
+        "sourceTitle": "総括質疑及び一般質問通告書（宮田 博徳、令和8年6月定例会）",
+        "sourceOrganization": "延岡市議会",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存src/data/generalQuestions.json（id: gq2026-06-m24）のquestionItemsのうち1項目を政策テーマとして登録したもの。答弁内容・その後の実施状況は今回確認していない。"
+      }
+    ],
+    "status": "proposed",
+    "relatedQuestionIds": ["gq2026-06-m24"],
+    "notes": "一般質問で扱われたテーマの登録であり、市の公式政策として確定した事実ではない。"
+  }
+]

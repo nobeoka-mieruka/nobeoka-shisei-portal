@@ -63,6 +63,13 @@ const CompareDebtPage = lazy(() => import("./pages/CompareDebtPage").then((m) =>
 const CompareFundsPage = lazy(() =>
   import("./pages/CompareFundsPage").then((m) => ({ default: m.CompareFundsPage })),
 );
+const PoliciesPage = lazy(() => import("./pages/PoliciesPage").then((m) => ({ default: m.PoliciesPage })));
+const PolicyDetailPage = lazy(() =>
+  import("./pages/PolicyDetailPage").then((m) => ({ default: m.PolicyDetailPage })),
+);
+const PolicyComparePage = lazy(() =>
+  import("./pages/PolicyComparePage").then((m) => ({ default: m.PolicyComparePage })),
+);
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then((m) => ({ default: m.DashboardPage })));
 const CompensationPage = lazy(() => import("./pages/CompensationPage").then((m) => ({ default: m.CompensationPage })));
 const CityGuidePage = lazy(() => import("./pages/CityGuidePage").then((m) => ({ default: m.CityGuidePage })));
@@ -184,6 +191,9 @@ function App() {
               <Route path="/compare/budget" element={<CompareBudgetPage />} />
               <Route path="/compare/debt" element={<CompareDebtPage />} />
               <Route path="/compare/funds" element={<CompareFundsPage />} />
+              <Route path="/compare/policies" element={<PolicyComparePage />} />
+              <Route path="/policies" element={<PoliciesPage />} />
+              <Route path="/policies/:slug" element={<PolicyDetailPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/compensation" element={<CompensationPage />} />
               <Route path="/city-guide" element={<CityGuidePage />} />

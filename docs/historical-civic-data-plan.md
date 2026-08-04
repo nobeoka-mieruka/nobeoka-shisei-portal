@@ -1,8 +1,11 @@
 # 延岡市政アーカイブ 拡張設計（フェーズ1：調査・設計）
 
 作成日：2026-08-04
-ステータス：フェーズ1（設計）・フェーズ2（歴代市長基盤）・フェーズ3（財政データ基盤）実装済み。
-フェーズ4以降（比較・グラフ機能の本格実装、政策データ、自動巡回拡張）は未着手。
+ステータス：フェーズ1（設計）・フェーズ2（歴代市長基盤）・フェーズ3（財政データ基盤）・
+フェーズ4（比較・グラフ基盤）・フェーズ5（過去議員アーカイブ基盤）・
+フェーズ6（政策データ・政策比較基盤、型・データ・一覧・詳細・比較画面のみ）実装済み。
+フェーズ6の`scripts/validate-data.mjs`参照整合性チェック・検索インデックス連携は次回対応
+（下記フェーズ6節参照）。自動巡回拡張は未着手。
 関連文書：[historical-civic-data-plan-requirements.md](./historical-civic-data-plan-requirements.md)（要件原文）
 
 このドキュメントは、一般質問データ登録（2023-06〜2026-03、全会期完了）の後に着手した
@@ -931,3 +934,36 @@ flowchart LR
   `generate-speech-summary-scaffold.mjs`が現職以外のIDをbuild時に削除しないよう、
   `formerMembers.json`への登録を必ず伴わせる）、(4) `npm run validate:data`で参照整合性を
   確認。
+
+### フェーズ6（本コミット、一部）
+- 政策データ・政策比較の基盤：`ArchivePolicy`型を`slug`・`sourceRefs[]`（複数出典）ベースに
+  再設計し、`ArchivePolicyCategory`（政策テーママスタ）・`ArchivePolicyQuestionRelation`
+  （政策と一般質問の関連付け）・`ArchivePolicyFiscalRelation`（政策と財政データの関連付け、
+  将来用・現時点は空配列）を新設した。`ArchivePolicyOwnerType`に`formerMember`を追加し、
+  `ArchivePolicySourceType`に`settlementDocument`/`ordinance`/`bill`/`otherOfficialSource`を
+  追加した。
+- データ：`src/data/archivePolicies.json`（6件：既存`mayor.json`のpledges 4件、令和8年6月
+  定例会の一般質問通告書からの2件を出典付きで移行・登録）、`archivePolicyCategories.json`
+  （テーママスタ28件）、`archivePolicyQuestionRelations.json`（2件）、
+  `archivePolicyFiscalRelations.json`（0件、財政データとの関連はまだ確認できていない）。
+  **新規の外部データ取得は行っていない**（既存`mayorPromises.json`・`generalQuestions.json`
+  からの構造移行のみ）。
+- ライブラリ：`src/lib/archivePolicies.ts`（所有者名・出典・テーマ・関連質問の解決ヘルパー）。
+- ページ：`/policies`（`PoliciesPage.tsx`、一覧・所有者種別/テーマ絞り込み）、
+  `/policies/:slug`（`PolicyDetailPage.tsx`、概要・原文・関連質問・関連財政データ・出典）、
+  `/compare/policies`（`PolicyComparePage.tsx`、既存`CompareMayorsPage.tsx`と同じ
+  `CompareItemPicker`/`FinanceTable`パターンで最大4件比較）。比較ページの命名は要件原文の
+  `/policies/compare`ではなく、既存の確立済み規則（`/compare/mayors`等）に合わせて
+  `/compare/policies`とした。
+- ルーティング：`src/App.tsx`・`src/lib/seo.ts`（一覧・詳細・比較のSEO情報、
+  `/compare/policies`は選択内容で変わり続けるため常にnoindex）・
+  `scripts/lib/public-routes.mjs`（サイトマップ・プリレンダリング対象へ追加）を更新。
+  `src/pages/ComparePage.tsx`の比較一覧に政策比較へのリンクを追加。
+- 既存機能への影響：`/mayor`、`/mayors`、`/finance`、`/members/former`、既存比較ページ、
+  自動巡回、既存検索は無変更。`npm run build`のプリレンダリング件数は859ページ
+  （政策一覧1・詳細6・比較1などが純増）。
+- **未実施（次回対応が必要）**：`scripts/validate-data.mjs`へのarchivePolicies系4ファイルの
+  参照整合性チェック（categoryIds・ownerId・relatedBillVoteIds・relatedQuestionIds等の存在確認、
+  id/slug重複チェック）、`scripts/generate-search-index.mjs`への政策エントリ追加。
+  これらは未実装のまま既存データには影響しないため安全側だが、政策データの入力ミスを
+  自動検出できない状態である点に注意。

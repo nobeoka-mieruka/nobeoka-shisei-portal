@@ -264,7 +264,7 @@ export interface ArchiveFiscalYear {
   verifiedAt?: string;
 }
 
-export type ArchivePolicyOwnerType = "mayor" | "member" | "faction" | "city";
+export type ArchivePolicyOwnerType = "mayor" | "member" | "formerMember" | "faction" | "city";
 
 export type ArchivePolicySourceType =
   | "electionManifesto"
@@ -272,8 +272,12 @@ export type ArchivePolicySourceType =
   | "councilQuestion"
   | "mayorPolicySpeech"
   | "budgetDocument"
+  | "settlementDocument"
   | "comprehensivePlan"
-  | "officialStatement";
+  | "ordinance"
+  | "bill"
+  | "officialStatement"
+  | "otherOfficialSource";
 
 /**
  * 公式資料に基づく確認状態のみ。「達成」「未達成」は市が公式に進捗評価を公表している場合を除き
@@ -303,14 +307,23 @@ export interface ArchiveAIGeneratedContent {
   humanReviewedBy?: string;
 }
 
+/** 政策テーマの分類マスタ。固定ラベルではなくJSON管理とし、将来テーマを追加できるようにする。 */
+export interface ArchivePolicyCategory {
+  id: string;
+  label: string;
+  description?: string;
+}
+
 /**
- * 市長・議員・会派・市の政策1件分。出典のない政策は登録しないこと。
+ * 市長・議員・元議員・会派・市の政策1件分。出典のない政策は登録しないこと。
  * テーマ分類・比較は事実検索の補助であり、政治的評価・優劣判定を含めない。
  */
 export interface ArchivePolicy {
   id: string;
+  slug: string;
   ownerType: ArchivePolicyOwnerType;
-  ownerId: string;
+  /** ownerType=cityの場合は特定の主体に紐づかないため設定しない。 */
+  ownerId?: string;
   title: string;
   /** 公式資料からの引用・人による整理。AI生成ではない。 */
   summary: string;
@@ -319,20 +332,71 @@ export interface ArchivePolicy {
   categoryIds: string[];
   announcedDate?: string;
   sourceType: ArchivePolicySourceType;
-  sourceUrl?: string;
-  sourceDocument?: string;
+  sourceRefs: ArchiveSourceRef[];
   status?: ArchivePolicyStatus;
   statusEvidenceUrl?: string;
   relatedFiscalYears?: number[];
   relatedProjects?: string[];
   /** 既存billVotes.jsonのid。公式資料で関連が確認できた場合のみ設定する。 */
   relatedBillVoteIds?: string[];
+  /** 条例ID（フェーズ7で追加予定のArchiveOrdinance想定）。現時点では未使用。 */
+  relatedOrdinanceIds?: string[];
   /** 既存generalQuestions.jsonのid。公式資料で関連が確認できた場合のみ設定する。 */
   relatedQuestionIds?: string[];
+  /** 予算関連ID（将来の予算項目単位の想定）。現時点では未使用。 */
+  relatedBudgetIds?: string[];
+  /** 登録経緯・移行元データ等、人による補足メモ。公式見解ではない。 */
+  notes?: string;
   /** AIによる分類・要約。公式見解として表示しないこと。原文（sourceOriginalText）へのリンクを必ず併記する。 */
   aiAnalysis?: {
     aiSummary?: ArchiveAIGeneratedContent;
     aiCategoryLabels?: ArchiveAIGeneratedContent;
   };
   lastVerifiedAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type ArchivePolicyQuestionRelationType =
+  | "proposedInQuestion"
+  | "discussedInQuestion"
+  | "requestedInQuestion"
+  | "answeredByCity"
+  | "relatedTheme"
+  | "needsReview";
+
+/** 政策と一般質問の関連付け1件分。AIによる自動関連付けは候補（needsReview）のまま確定データと分離する。 */
+export interface ArchivePolicyQuestionRelation {
+  id: string;
+  policyId: string;
+  /** 既存generalQuestions.jsonのid。 */
+  questionId: string;
+  relationType: ArchivePolicyQuestionRelationType;
+  sourceRef?: ArchiveSourceRef;
+  verificationStatus: ArchiveVerificationStatus;
+}
+
+export type ArchivePolicyFiscalRelationType =
+  | "proposed"
+  | "budgeted"
+  | "includedInProject"
+  | "settled"
+  | "related"
+  | "needsReview";
+
+/**
+ * 政策と財政データ（年度別）の関連付け1件分。政策と財政数値を直接同一視せず、
+ * 年度・relationTypeごとに明示的に管理する。
+ */
+export interface ArchivePolicyFiscalRelation {
+  id: string;
+  policyId: string;
+  fiscalYear: number;
+  budgetId?: string;
+  projectId?: string;
+  relationType: ArchivePolicyFiscalRelationType;
+  amountYen?: number | null;
+  amountDefinition?: string;
+  sourceRef?: ArchiveSourceRef;
+  verificationStatus: ArchiveVerificationStatus;
 }

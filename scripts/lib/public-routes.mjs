@@ -68,6 +68,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/entertainment-expenses",
   "/mayor/press-conferences",
   "/mayors",
+  "/policies",
   "/members/former",
   "/members/history",
   "/finance",
@@ -100,6 +101,7 @@ export const STATIC_NOINDEX_PAGES = [
   "/search",
   "/bills/compare",
   "/compare/mayors",
+  "/compare/policies",
   "/compare/finance",
   "/compare/population",
   "/compare/budget",
@@ -130,6 +132,7 @@ function loadData() {
   const archiveMayors = readJson("src/data/archiveMayors.json");
   const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
   const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
+  const archivePolicies = readJson("src/data/archivePolicies.json");
   return {
     members,
     billVotes,
@@ -149,6 +152,7 @@ function loadData() {
     archiveMayors,
     archiveFiscalYears,
     archiveMemberProfiles,
+    archivePolicies,
   };
 }
 
@@ -210,6 +214,16 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.archiveMayors.flatMap((m) => [m.lastVerifiedAt, ...m.sourceRefs.map((r) => r.sourcePublishedDate)]))],
         ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json"],
+      );
+    case "/policies":
+      return resolveLastmod(
+        path,
+        [
+          maxValidDate(
+            data.archivePolicies.flatMap((p) => [p.lastVerifiedAt, ...p.sourceRefs.map((r) => r.sourcePublishedDate)]),
+          ),
+        ],
+        ["src/data/archivePolicies.json", "src/data/archivePolicyCategories.json"],
       );
     case "/members/former":
       return resolveLastmod(
@@ -355,6 +369,17 @@ export function getIndexableRoutes() {
         path,
         [p.lastVerifiedAt, maxValidDate(p.sourceRefs.map((r) => r.sourcePublishedDate))],
         ["src/data/archiveMemberProfiles.json", "src/data/archiveMemberTerms.json", "src/data/archiveMemberAffiliations.json"],
+      ),
+    });
+  }
+  for (const p of data.archivePolicies) {
+    const path = `/policies/${p.slug}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [p.lastVerifiedAt, maxValidDate(p.sourceRefs.map((r) => r.sourcePublishedDate))],
+        ["src/data/archivePolicies.json"],
       ),
     });
   }
