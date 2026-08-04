@@ -1,10 +1,16 @@
 /**
- * フェーズ10A：自動巡回基盤の型。
+ * フェーズ10A・10B：自動巡回基盤の型。
  *
- * このフェーズでは実際のHTTP取得・AI解析・差分の自動反映は行わない
- * （src/lib/archiveCrawler.tsはダミー実装）。一般質問・議案・条例・請願・陳情・議員名簿は
- * 既にscripts/sync-council-data.mjs・scripts/fetch-nobeoka-council-documents.mjsが実データ取得を
- * 行っているため、ここでは重複実装せず、ArchiveCrawlerTarget.existingImplementationで参照する。
+ * 一般質問・議案・条例・請願・陳情・議員名簿は既にscripts/sync-council-data.mjs・
+ * scripts/fetch-nobeoka-council-documents.mjsが実データ取得を行っているため、ここでは
+ * 重複取得せず、それぞれの実行結果（reports/配下のレポートJSON）を読み込んで統合する
+ * （ArchiveCrawlerTarget.existingImplementationで参照）。
+ *
+ * 財政・人口・基金は、既存のscripts/lib/city-site-fetch.mjs（許可ドメイン制限・429/403/5xx処理・
+ * SHA-256ハッシュ）を使って実際にHTTP取得する（scripts/run-archive-crawler.mjs側）。
+ * このファイル（src/lib/archiveCrawler.ts）自体はブラウザ向けビルドにも含まれうるsrc/lib配下のため、
+ * Node専用API（node:crypto・実際のHTTP取得）を直接呼び出さず、判定結果を受け取って処理する
+ * 環境非依存のロジックのみを持つ。
  */
 
 export type ArchiveCrawlerCategory =
@@ -37,26 +43,37 @@ export interface ArchiveCrawlerTarget {
   notes?: string;
 }
 
-export type ArchiveCrawlerRunStatus = "ok" | "changed" | "unchanged" | "error" | "skipped";
+/**
+ * new＝前回状態が無く今回初めて確認できた／changed＝前回とハッシュが異なる／
+ * unchanged＝前回とハッシュが一致／possiblyRemoved＝2回以上連続で取得できず削除候補
+ * （1回の失敗だけでは削除扱いにしない）／error＝取得エラー（404除く。404は初回はnew判定に
+ * 使えないため、これもerror扱いとしnotesに記録する）／skipped＝既存実装がある、または
+ * 監視対象URLが未確認、または許可ドメイン外のため取得しない。
+ */
+export type ArchiveCrawlerRunStatus = "new" | "changed" | "unchanged" | "possiblyRemoved" | "error" | "skipped";
 
 /** 1対象・1回分の巡回結果。 */
 export interface ArchiveCrawlerResult {
   targetId: string;
   status: ArchiveCrawlerRunStatus;
   checkedAt: string;
-  /** ダミー実装では常にnull。実装後はページ本文等から算出したハッシュ値を入れる。 */
+  /** 取得した内容のSHA-256ハッシュ。取得しなかった（skipped/error）場合はnull。 */
   contentHash: string | null;
   errorMessage?: string;
+  /** HTTPステータスコード（取得できた場合のみ）。 */
+  httpStatus?: number;
 }
 
-/** logs/YYYY-MM-DD.json 1件分の形。今回のフェーズでは型のみ（実際のファイル出力は行わない）。 */
+/** logs/YYYY-MM-DD.json 1件分の形。今回のフェーズでも型のみ（実際のファイル出力は行わない）。 */
 export interface ArchiveCrawlerLog {
   runAt: string;
   results: ArchiveCrawlerResult[];
   summary: {
     total: number;
+    new: number;
     changed: number;
     unchanged: number;
+    possiblyRemoved: number;
     errors: number;
     skipped: number;
   };
@@ -66,9 +83,14 @@ export interface ArchiveCrawlerLog {
 export interface ArchiveCrawlerTargetState {
   targetId: string;
   lastCheckedAt: string | null;
+  /** 最後にstatus=error以外だった日時（削除判定・120時間ゲートの起点）。 */
   lastSuccessfulAt: string | null;
+  /** 最後に内容の変更を確認できた日時（new/changedの最終発生日時）。 */
+  lastUpdatedAt: string | null;
   lastStatus: ArchiveCrawlerRunStatus | null;
   lastContentHash: string | null;
+  /** 取得できなかった（404等）連続回数。2以上でpossiblyRemoved判定に使う。 */
+  consecutiveNotFoundCount: number;
 }
 
 /** src/data/archiveCrawlerState.json全体の形。 */
@@ -80,8 +102,10 @@ export interface ArchiveCrawlerState {
   targets: ArchiveCrawlerTargetState[];
   /** 直近の巡回対象件数。 */
   totalCount: number;
-  /** 直近の巡回で変更ありと判定された件数。 */
+  /** 直近の巡回でnew/changedと判定された件数（差分件数）。 */
   changedCount: number;
-  /** 直近の巡回で取得エラーとなった件数。 */
+  /** 直近の巡回でpossiblyRemovedと判定された件数（削除候補件数）。 */
+  removedCount: number;
+  /** 直近の巡回で取得エラーとなった件数（失敗件数）。 */
   errorCount: number;
 }

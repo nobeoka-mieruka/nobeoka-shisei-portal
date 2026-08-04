@@ -1,25 +1,39 @@
 /**
- * フェーズ10A：自動巡回基盤（ダミー実装）。
+ * フェーズ10A・10B：自動巡回基盤の判定ロジック（環境非依存）。
  *
- * ここでのHTTP取得は行わない（runDummyCrawlは常に「スキップ」または「変更なし」を返す）。
- * 対象読込・差分確認・更新判定・削除判定・ログ出力のインターフェースだけを用意し、
- * 実データ取得（フェーズ10B以降）はこの形にそのまま差し込めるようにする。
+ * このファイルはsrc/lib配下（ブラウザ向けビルドにも含まれうる）のため、Node専用API
+ * （node:crypto・実際のHTTP取得）を直接呼び出さない。実際のHTTP取得・SHA-256ハッシュ計算・
+ * 既存巡回スクリプト（sync-council-data.mjs・fetch-nobeoka-council-documents.mjs）の
+ * レポート読み込みは scripts/run-archive-crawler.mjs（Node実行スクリプト）側で行い、
+ * その結果（ハッシュ・HTTPステータス等）をここへ渡して状態遷移を判定する。
  *
- * 一般質問・議案・条例・請願・陳情・議員名簿は既にscripts/sync-council-data.mjs・
- * scripts/fetch-nobeoka-council-documents.mjsで実データ取得を行っているため、
- * ここでは重複実装しない（対象のexistingImplementationが設定されている場合は常にスキップする）。
+ * 一般質問・議案・条例・請願・陳情・議員名簿は既存スクリプトが実データ取得を行っているため、
+ * ここでは重複取得しない（対象のexistingImplementationが設定されている場合は常にスキップする）。
  *
- * CI（.github/workflows/civic-archive-sync.yml）からはscripts/run-archive-crawler.mjsが
- * 同じ判定ロジックを（TypeScriptを直接importできないNode実行環境のため）ミラー実装して呼び出す。
- * ロジックを変更する場合は両方を更新すること。
+ * scripts/run-archive-crawler.mjsは同じ判定ロジックを（TypeScriptを直接importできないNode実行
+ * 環境のため）ミラー実装して呼び出す。ロジックを変更する場合は両方を更新すること。
  */
 import type {
   ArchiveCrawlerLog,
   ArchiveCrawlerResult,
+  ArchiveCrawlerRunStatus,
   ArchiveCrawlerState,
   ArchiveCrawlerTarget,
   ArchiveCrawlerTargetState,
 } from "../types/archiveCrawler";
+
+/** 取得結果の要約を集計する（ArchiveCrawlerLog.summary）。 */
+export function summarizeResults(results: ArchiveCrawlerResult[]): ArchiveCrawlerLog["summary"] {
+  return {
+    total: results.length,
+    new: results.filter((r) => r.status === "new").length,
+    changed: results.filter((r) => r.status === "changed").length,
+    unchanged: results.filter((r) => r.status === "unchanged").length,
+    possiblyRemoved: results.filter((r) => r.status === "possiblyRemoved").length,
+    errors: results.filter((r) => r.status === "error").length,
+    skipped: results.filter((r) => r.status === "skipped").length,
+  };
+}
 
 /**
  * 対象1件分のダミー取得。
@@ -51,24 +65,22 @@ export function runDummyCrawl(targets: ArchiveCrawlerTarget[], now: Date = new D
     return { targetId: target.id, status: "unchanged", checkedAt, contentHash: null };
   });
 
-  return {
-    runAt: checkedAt,
-    results,
-    summary: {
-      total: results.length,
-      changed: results.filter((r) => r.status === "changed").length,
-      unchanged: results.filter((r) => r.status === "unchanged").length,
-      errors: results.filter((r) => r.status === "error").length,
-      skipped: results.filter((r) => r.status === "skipped").length,
-    },
-  };
+  return { runAt: checkedAt, results, summary: summarizeResults(results) };
 }
 
 /**
- * 削除判定：URLに再度アクセスできなかった回数（consecutiveNotFoundCount）が2回以上、かつ
- * 代替URLが確認できていない場合のみ「削除候補」として扱う。1回だけの取得失敗では
+ * 実際に取得できた場合の状態を、前回のハッシュと比較して判定する。
+ * 前回ハッシュが無い（初回確認）場合は"new"、一致すれば"unchanged"、異なれば"changed"。
+ */
+export function determineFetchStatus(previousHash: string | null, newHash: string): "new" | "changed" | "unchanged" {
+  if (previousHash == null) return "new";
+  return previousHash === newHash ? "unchanged" : "changed";
+}
+
+/**
+ * 削除判定：URLに再度アクセスできなかった回数（consecutiveNotFoundCount、今回の404を含む）が
+ * 2回以上、かつ代替URLが確認できていない場合のみ「削除候補」として扱う。1回だけの取得失敗では
  * 削除候補にしない（サーバー側の一時的な不調と区別できないため）。
- * ダミー実装では取得失敗自体が発生しないため、この関数は今回のフェーズでは呼び出されない。
  */
 export function shouldFlagAsPossiblyRemoved(consecutiveNotFoundCount: number, hasAlternateUrlCandidate: boolean): boolean {
   return consecutiveNotFoundCount >= 2 && !hasAlternateUrlCandidate;
@@ -80,23 +92,33 @@ export function mergeCrawlerState(previous: ArchiveCrawlerState, log: ArchiveCra
 
   for (const result of log.results) {
     const prev = byId.get(result.targetId);
+    const isFailure: ArchiveCrawlerRunStatus[] = ["error", "possiblyRemoved"];
+    const consecutiveNotFoundCount =
+      result.status === "possiblyRemoved" || result.status === "error"
+        ? (prev?.consecutiveNotFoundCount ?? 0) + 1
+        : 0;
+
     byId.set(result.targetId, {
       targetId: result.targetId,
       lastCheckedAt: result.checkedAt,
-      lastSuccessfulAt: result.status === "error" ? (prev?.lastSuccessfulAt ?? null) : result.checkedAt,
+      lastSuccessfulAt: isFailure.includes(result.status) ? (prev?.lastSuccessfulAt ?? null) : result.checkedAt,
+      lastUpdatedAt: result.status === "new" || result.status === "changed" ? result.checkedAt : (prev?.lastUpdatedAt ?? null),
       lastStatus: result.status,
-      lastContentHash: result.contentHash ?? prev?.lastContentHash ?? null,
+      lastContentHash: result.contentHash ?? (result.status === "unchanged" ? prev?.lastContentHash ?? null : null),
+      consecutiveNotFoundCount,
     });
   }
 
-  const hadErrors = log.summary.errors > 0;
+  const summary = summarizeResults(log.results);
+  const hadErrors = summary.errors > 0;
 
   return {
     lastRunAt: log.runAt,
     lastSuccessfulRunAt: hadErrors ? previous.lastSuccessfulRunAt : log.runAt,
     targets: [...byId.values()],
-    totalCount: log.summary.total,
-    changedCount: log.summary.changed,
-    errorCount: log.summary.errors,
+    totalCount: summary.total,
+    changedCount: summary.new + summary.changed,
+    removedCount: summary.possiblyRemoved,
+    errorCount: summary.errors,
   };
 }

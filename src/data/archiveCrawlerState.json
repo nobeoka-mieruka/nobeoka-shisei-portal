@@ -1,100 +1,127 @@
 {
-  "lastRunAt": "2026-08-04T12:52:13.227Z",
-  "lastSuccessfulRunAt": "2026-08-04T12:52:13.227Z",
+  "lastRunAt": "2026-08-04T13:13:30.397Z",
+  "lastSuccessfulRunAt": "2026-08-04T13:13:30.397Z",
   "targets": [
     {
       "targetId": "general-question",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "unchanged",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "bill",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "unchanged",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "ordinance",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "unchanged",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "petition",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "unchanged",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "request",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "unchanged",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "member-roster",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "unchanged",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "mayor",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "unchanged",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
+      "lastStatus": "skipped",
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "finance",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
-      "lastStatus": "unchanged",
-      "lastContentHash": null
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": "2026-08-04T13:13:30.397Z",
+      "lastStatus": "changed",
+      "lastContentHash": "0ae54c8ebf41e9d28af57b9dff5ed6579abebcaf4eeb1e92d303545382b07c7b",
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "population",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": "2026-08-04T13:12:54.661Z",
       "lastStatus": "unchanged",
-      "lastContentHash": null
+      "lastContentHash": "addfb70cbf605a6c3b2bbd15de244c18e1776702ffdcdbcf2ed867cbb79dacd3",
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "fund",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": "2026-08-04T13:12:54.661Z",
       "lastStatus": "unchanged",
-      "lastContentHash": null
+      "lastContentHash": "18b3592480a6487fe02aafb6a9f091e4e255117b0944367ec848b3db62895444",
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "debt",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
       "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "policy",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
       "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "theme",
-      "lastCheckedAt": "2026-08-04T12:52:13.227Z",
-      "lastSuccessfulAt": "2026-08-04T12:52:13.227Z",
+      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
+      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastUpdatedAt": null,
       "lastStatus": "skipped",
-      "lastContentHash": null
+      "lastContentHash": null,
+      "consecutiveNotFoundCount": 0
     }
   ],
   "totalCount": 13,
-  "changedCount": 0,
+  "changedCount": 1,
+  "removedCount": 0,
   "errorCount": 0
 }

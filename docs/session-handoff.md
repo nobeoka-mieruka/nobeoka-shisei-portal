@@ -1,131 +1,143 @@
-# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10A完了）
+# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10B完了）
 
-フェーズ9（9A〜9D：比較・可視化・タイムライン）は完了・コミット済み。今回は**フェーズ10A
-（自動巡回基盤）**が完了した。push・デプロイは未実施。**フェーズ10B以降は開始していない**。
+フェーズ9（9A〜9D）・フェーズ10A（自動巡回基盤）は完了・コミット済み。今回は**フェーズ10B
+（実データ巡回・差分検知）**が完了した。push・デプロイは未実施。**フェーズ10C（AI解析・自動登録）
+は開始していない**。
 
-フェーズ9（9A〜9D）の詳細は本メモには残していない（`git log`の各コミットメッセージを参照）。
-このメモは直近フェーズの状態・次にやることを中心に記録する。
+フェーズ9・10Aの詳細は本メモには残していない（`git log`の各コミットメッセージを参照）。
 
 ## ロードマップ
 
 1. フェーズ6〜9（政策比較基盤〜比較・可視化・タイムライン） → **すべて完了**
 2. フェーズ10：自動巡回の完成・全体検証・本番デプロイ
-   - **10A：自動巡回基盤 → 完了**（今回。実データ取得・AI解析・push・デプロイは行っていない）
-   - 10B以降：ユーザーから複数回、内容の異なる指示を受領済み（下記「フェーズ10Bの定義について
-     の注意」参照）。未着手。
+   - 10A：自動巡回基盤（ダミー実装） → 完了
+   - **10B：実データ巡回・差分検知 → 完了**（今回。取得したデータのサイトへの反映＝
+     AI解析・自動登録は行っていない）
+   - 10C以降：AI解析・自動登録、全体最終検証、GitHubへpush、Cloudflare Pagesデプロイ確認等 →
+     未着手（フェーズ10の内訳は過去に複数回、内容の異なる指示を受け取っているため、
+     着手前にユーザーに範囲を確認すること）
 
-## 完了した作業（フェーズ10A：自動巡回基盤）
+## 完了した作業（フェーズ10B：実データ巡回・差分検知）
 
-「基盤のみ」実装。実際のHTTP取得・AI解析・push・デプロイは行っていない。
+**実際にHTTP取得を行った**（10Aはダミー実装だったが、今回は本物のfetch）。取得したデータの
+サイトデータ（`src/data/archiveFiscalYears.json`等）への反映（AI解析・自動登録）は行っていない
+（`archiveCrawlerState.json`という巡回専用の状態ファイルのみ更新）。
 
-### 既存実装の調査（重複実装を避けるため）
+### 巡回対象と方式（13対象）
 
-着手前に、この用途の自動化がすでに存在するか調査した。
+- **既存実装への統合**（重複取得しない）：一般質問（`general-question`）・議員名簿
+  （`member-roster`）は`reports/sync-council-data-report.json`を、議案・条例・請願・陳情
+  （`bill`/`ordinance`/`petition`/`request`、4対象とも同一の議案審議結果一覧ページ）は
+  `reports/council-document-update-report.json`を読み込み、既存スクリプトの実行結果を
+  `ArchiveCrawlerResult`へマッピングした（再取得していない）。
+- **実際にHTTP取得**（`scripts/lib/city-site-fetch.mjs`を再利用）：財政（`finance`、
+  健全化判断比率等の公表ページ）・人口（`population`、xls）・基金（`fund`、PDF）の3対象。
+  許可ドメイン（`www.city.nobeoka.miyazaki.jp`）内のURLのみ取得している。
+- **スキップ**（推測でアクセスしない）：市長（`mayor`）は監視対象URLが市長個人サイト
+  （`hisatomo-m.jp`）で許可ドメイン外のため取得していない（費用対効果よりも、
+  city-site-fetch.mjsの許可ドメイン制限という既存の安全策を尊重する判断。フェーズ10Aで
+  一つの対象にまとめている「歴代市長・現職市長」は今回も分割していない＝歴代市長個別の
+  公式ページは確認できておらず、現職市長の監視は上記の理由で対象外）。市債（`debt`）・
+  政策（`policy`）・テーマ（`theme`）は監視対象URLが未確認/複数出典に分散のため引き続きスキップ。
 
-- `.github/workflows/sync-council-data.yml` + `scripts/sync-council-data.mjs`
-  （5日間隔・120時間ゲート・bot branch経由PR、既存実装）：一般質問質問通告
-  （question-notice）・議員名簿変更検知（member-roster-watch）・会議日程・意見書決議・
-  委員会活動報告書を既に巡回している。
-- `scripts/fetch-nobeoka-council-documents.mjs` + `scripts/generate-council-documents.mjs`
-  （既存実装）：議案審議結果一覧ページ（議案・条例・請願・陳情）を既に取得している。
+### 差分検知方式
 
-このため、今回追加した巡回対象定義（`archiveCrawlerTargets.json`）では、これらと重複する
-カテゴリに`existingImplementation`フィールドで既存スクリプトのパスを明記し、ダミー巡回では
-常にスキップする（重複取得しない）設計にした。
+- 一般質問・議員名簿・議案等：既存スクリプトのレポートが持つnew/updated/unchanged件数
+  （議員名簿は`changed`真偽値）をそのまま採用。
+- 財政・人口・基金：取得したバイト列のSHA-256ハッシュを`scripts/lib/city-site-fetch.mjs`の
+  `sha256OfBuffer()`で算出し、前回ハッシュ（`archiveCrawlerState.json`）と比較。
+  前回ハッシュが無ければ`new`、一致すれば`unchanged`、異なれば`changed`。
 
-### 追加したファイル
+### 更新判定・状態保存
 
-- `src/types/archiveCrawler.ts`（新規）：`ArchiveCrawlerTarget`・`ArchiveCrawlerResult`・
-  `ArchiveCrawlerLog`・`ArchiveCrawlerTargetState`・`ArchiveCrawlerState`・
-  `ArchiveCrawlerCategory`（13種）。
-- `src/data/archiveCrawlerTargets.json`（新規）：巡回対象13件。すべて実在するURL
-  （`financeDashboard.json`・`mayor.json`・`members.json`・既存sync scriptsが既に参照している
-  URLを再利用、推測のURLは追加していない）。市債（`debt`）・政策（`policy`）・テーマ（`theme`）は
-  単一の公式監視対象ページが無い/未確認のため`url: null`。
-- `src/lib/archiveCrawler.ts`（新規）：`runDummyCrawl()`（対象ごとに
-  既存実装ありなら"skipped"、url未確認なら"skipped"、それ以外は"unchanged"を返すダミー実装）・
-  `shouldFlagAsPossiblyRemoved()`（削除判定：2回連続未検出、かつ代替URL無しの場合のみ削除候補、
-  ダミー実装では未使用）・`mergeCrawlerState()`。
-- `src/data/archiveCrawlerState.json`（新規）：初期状態。`scripts/run-archive-crawler.mjs`を
-  ローカルで実際に1回実行して動作確認した結果を反映している（対象13件、変更0、エラー0、
-  9件skipped＝既存実装ありまたはurl未確認、4件unchanged＝url確認済み・既存実装なし）。
-- `scripts/run-archive-crawler.mjs`（新規）：CI実行用のプレーンJSランナー。
-  `src/lib/archiveCrawler.ts`と同じ判定ロジックをミラー実装している（このプロジェクトの
-  scripts/配下は他ファイルと同様、ビルド前のTypeScriptを直接importできないため。
-  `scripts/lib/public-routes.mjs`の既存コメントと同じ理由）。ロジック変更時は両方を更新すること。
-  `--force`で120時間ゲートを無視できる。
-- `.github/workflows/civic-archive-sync.yml`（新規）：5日間隔（120時間ゲート、
-  `sync-council-data.yml`と同じ方式）・`workflow_dispatch`（forceオプション付き）・
-  `timeout-minutes: 10`・`concurrency`グループ・ログはGitHub Actions Summary＋コンソール出力。
-  **今回はダミー実装のためcommit・PR作成は行わない**（実データ取得を実装する時点で
-  `sync-council-data.yml`と同じbot branch経由PR方式を追加する）。
+`ArchiveCrawlerRunStatus`を`"ok"`から`"new" | "changed" | "unchanged" | "possiblyRemoved" |
+"error" | "skipped"`へ整理（フェーズ10Aの型を拡張）。`archiveCrawlerState.json`が保持する項目：
 
-### 変更した既存ファイル
+- `lastRunAt`（最終巡回日時）／`lastSuccessfulRunAt`（最終成功日時、120時間ゲートの起点）
+- 対象ごとの`lastCheckedAt`・`lastSuccessfulAt`・`lastUpdatedAt`（新規/変更検出日時）・
+  `lastStatus`・`lastContentHash`・`consecutiveNotFoundCount`（削除判定用）
+- `totalCount`（対象件数）・`changedCount`（新規+変更の差分件数）・`removedCount`（削除候補件数）・
+  `errorCount`（失敗件数）
 
-- `scripts/lib/sync-state.mjs`：`loadLocalState()`・`saveLocalState()`に`statePath`引数を追加
-  （デフォルトは既存の`scripts/_sync-state.json`のため後方互換）。新しい巡回ジョブ
-  （`run-archive-crawler.mjs`）が120時間ゲートの状態ファイルを分離して使えるようにした
-  （既存の`sync-council-data.mjs`とゲートが混ざらないように）。
-- `.gitignore`：`scripts/_archive-crawler-sync-state.json`（新しいゲート状態ファイル、
-  Git管理外）を追加。
-- `scripts/validate-data.mjs`：巡回対象の重複ID・URL重複（既存実装が食い違う場合のみ警告、
-  bill/ordinance/petition/requestが同一URLを意図的に共有するのは許容）・category妥当性・
-  url形式・`archiveCrawlerState.json`とのstate整合性（存在しない対象IDの参照、日時形式、
-  件数の非負性）を検証する処理を追加。
+### エラー処理
 
-## 検証結果（フェーズ10A）
+`scripts/lib/city-site-fetch.mjs`（既存、変更していない）が429（Retry-After尊重・1回再試行）・
+403（連続再試行しない）・5xx（最大2回再試行）・15秒タイムアウトを既に実装済みだったため再利用。
+今回`scripts/run-archive-crawler.mjs`に追加したのは、タイムアウト等のネットワークエラーの
+1回リトライ（既存インフラが対応していなかった箇所のみ追加）。404は2回連続で初めて
+`possiblyRemoved`（削除候補）とし、1回だけの失敗では削除候補にしない。
 
+### 削除判定
+
+`shouldFlagAsPossiblyRemoved(consecutiveNotFoundCount, hasAlternateUrlCandidate)`
+（フェーズ10Aで用意済み）：2回以上連続で取得できず、かつ代替URLが無い場合のみ`possiblyRemoved`。
+今回の実行では404は発生しなかった（該当なし）。
+
+### 実行して見つかった重要な制約（正直に記録）
+
+`finance`（財政健全化判断比率等の公表ページ、HTML）を数分間隔で2回実際に取得したところ、
+**内容が変わっていないはずなのにSHA-256ハッシュが一致しなかった**（`changed`と誤判定）。
+`Last-Modified`ヘッダーも取得時刻に近い値を返しており、ページが動的生成されている
+（本文に生成時刻等の変動要素を含む）可能性が高い。一方、`population`（xls）・`fund`（pdf）は
+2回とも同一ハッシュで一致し、安定して差分検知できた。**HTMLページの生バイト列比較は
+誤検知（false positive）のリスクがあり、そのまま自動反映の判断根拠にするのは危険**。
+本文の特定部分のみを抽出して比較する等の改善が今後必要（今回は時間の都合で見送り、
+既知の注意点として記録するに留めた）。
+
+### 変更したファイル
+
+- `src/types/archiveCrawler.ts`：ステータス種別の整理（new/possiblyRemoved追加）、
+  `ArchiveCrawlerTargetState`に`lastUpdatedAt`・`consecutiveNotFoundCount`追加、
+  `ArchiveCrawlerState`に`removedCount`追加。
+- `src/lib/archiveCrawler.ts`：`determineFetchStatus()`（ハッシュ比較による新規/変更/変更なし
+  判定）・`summarizeResults()`を追加。引き続きNode専用API（実際のfetch・`node:crypto`）は
+  呼び出さない（判定ロジックのみ、環境非依存）。
+- `scripts/run-archive-crawler.mjs`：既存レポート統合・実際のHTTP取得・ネットワークエラー
+  リトライを追加した本実装（10Aはダミーのみ）。
+- `.github/workflows/civic-archive-sync.yml`：コメントを更新（ダミー実装の説明を削除）。
+  **コミット・PR作成の挙動は変更していない**（引き続き行わない。データのサイトへの反映は
+  次フェーズの範囲）。
+- `scripts/validate-data.mjs`：巡回結果整合性（`changedCount`等が`totalCount`を超えない）・
+  `lastStatus`の妥当性・削除判定の妥当性（`possiblyRemoved`は`consecutiveNotFoundCount`が
+  2以上の場合のみ）を追加。
+
+## 検証結果（フェーズ10B）
+
+- `node scripts/run-archive-crawler.mjs --force`をローカルで**実際に2回**実行し、
+  実HTTP取得（財政・人口・基金、3件）・120時間ゲート（2回目は`--force`無しで正しく
+  スキップされることを確認）・差分検知（xls/pdfは安定、htmlは上記の制約あり）が
+  動作することを確認した。取得統計：checked=3, 429/403/5xx=0, errors=0（実行のたびに増える）。
 - `npm run validate:data`：errors=0, warnings=1257（既存警告のみ、新規警告0件）。
-  意図的に対象IDを重複させて新チェックが実際に発火することを確認済み（その後、正しい内容に戻した）。
-- `npm run typecheck`：エラーなし（`tsconfig.app.json`の`include: ["src"]`により、
-  未importの新規ファイルも型検査対象になっていることを確認）。
+- `npm run typecheck`：エラーなし。
 - `npx oxlint`：クリーン。
-- `npm run build`：912ページ生成（新規Reactページは追加していないためページ数は前回と同一。
-  `archiveCrawler`関連コードはどのページからもimportされていないため、ビルド後のバンドルに
-  含まれない＝バンドルサイズへの影響なしを確認）。
+- `npm run build`：912ページ生成（新規Reactページなし、ページ数前回と同一）。
 - `npm run validate:seo`：failures=0, warnings=0。
-- `node scripts/run-archive-crawler.mjs`をローカルで実際に実行し、120時間ゲート判定・
-  ダミー巡回・`archiveCrawlerState.json`の更新が動作することを確認済み。
-
-## フェーズ10Bの定義についての注意
-
-本セッション中、フェーズ10の内訳についてユーザーから複数回、内容の異なる指示を受け取っている。
-
-1. 1回目：10A＝自動巡回基盤、10B＝全体最終検証と公開前監査、10C＝GitHubへpush、
-   10D＝Cloudflare Pagesデプロイ確認（10A・10B完了後にいったん停止、10C・10Dは明示許可待ち）。
-2. 2回目（今回のフェーズ10A実施指示）：「フェーズ10B（実データ巡回）は開始しないでください」
-   とあり、10Bを「実データ巡回」と表現している（1回目の「全体最終検証」という定義と異なる）。
-
-次回、フェーズ10Bに着手する際は、どちらの定義（全体最終検証／実データ巡回）を指すか
-ユーザーに確認すること。指示文だけで判断せず、`git log`・このメモ・実際のリポジトリ状態を
-正として確認してから着手する（本セッションでは実際に前段階が未完了の状態で
-「フェーズ1〜9（またはフェーズ1〜9D）は完了済み」という前提の指示が複数回届いたことがある）。
 
 ## 既知の注意点・落とし穴（継続）
 
-- **`npm run build`実行のたびに`src/data/siteUpdate.json`・`archiveAiCategoryCandidates.json`・
-  `archiveRelationCandidates.json`・`adminReviewQueue.json`のタイムスタンプだけが更新される**。
+- **HTMLページ（`finance`ターゲット）のSHA-256全文比較は動的生成コンテンツにより誤検知しうる**
+  （上記「実行して見つかった重要な制約」参照）。今後、自動反映に使う場合は本文の安定部分のみを
+  抽出する等の改善が必要。xls/pdf（`population`・`fund`）は問題なし。
+- `mayor`ターゲットの監視対象URL（`hisatomo-m.jp`）は`scripts/lib/city-site-fetch.mjs`の
+  許可ドメイン外のため取得できない。市長の巡回を実装する場合は、別のfetchクライアントを
+  用意するか、市の公式サイト内に市長プロフィールページが無いか確認すること
+  （推測でドメイン許可リストを広げない）。
+- `npm run build`実行のたびに`src/data/siteUpdate.json`等のタイムスタンプだけが更新される。
   実データ変更を伴わない場合はコミットせず`git restore`で戻す。
-- `scripts/`配下のNode実行スクリプトは、ビルド前の`src/`配下のTypeScriptを直接importできない
-  （Vite/tsxのようなトランスパイル実行環境が入っていないため）。同じロジックが必要な場合は
-  `.mjs`側にミラー実装する（`scripts/lib/public-routes.mjs`・今回の
-  `scripts/run-archive-crawler.mjs`と同じパターン）。
+- `scripts/`配下のNode実行スクリプトは、ビルド前の`src/`配下のTypeScriptを直接importできない。
+  同じロジックが必要な場合は`.mjs`側にミラー実装する。
 - 自動巡回関連のローカル状態ファイル（`scripts/_sync-state.json`・
-  `scripts/_archive-crawler-sync-state.json`）はGit管理外。GitHub Actions側は`actions/cache`で
-  実行間を跨いで保持する。
-- 一般質問・議案・条例・請願・陳情・議員名簿の自動巡回は`sync-council-data.yml`・
-  `fetch-nobeoka-council-documents.mjs`が既に担っている。歴代市長・財政・人口・基金・市債・政策・
-  テーマの自動巡回は`archiveCrawlerTargets.json`に対象定義のみあり、実装は未着手（フェーズ10B以降）。
+  `scripts/_archive-crawler-sync-state.json`）はGit管理外。
 - 令和年→西暦の変換式：`西暦 = 2018 + 令和年`。会計年度は4月始まり。
-- 比較ページのクエリパラメータは年度ベース（finance/budget/debt/funds/population）が`?years=`、
-  市長・議員・政策比較が`?items=`（統一していない）。
+- 比較ページのクエリパラメータは年度ベースが`?years=`、市長・議員・政策比較が`?items=`
+  （統一していない）。
 - 委員会マスタが存在しない（`committeeId`は1件も確認できていない）。
 
 ## 次セッション開始時の推奨手順
 
 1. `git log --oneline -10`と`git status`で本メモと状態が一致しているか確認。
 2. `npm run validate:data && npm run typecheck`で現状に問題がないか確認。
-3. フェーズ10Bに着手する場合は、上記「フェーズ10Bの定義についての注意」を踏まえ、
-   ユーザーに意図（全体最終検証か、実データ巡回か）を確認してから着手する。
+3. フェーズ10の残り（AI解析・自動登録、全体最終検証、push、デプロイ確認等）に着手する場合は、
+   範囲・順序をユーザーに確認してから着手する（フェーズ10の内訳定義は過去に複数回変わっている）。
 4. 可能であれば`/timeline`・`/compare/*`等をブラウザで375px・390px・768px・1280pxで確認する
    （フェーズ9A以降、実機確認が未実施のまま）。

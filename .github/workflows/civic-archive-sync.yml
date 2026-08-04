@@ -1,16 +1,19 @@
-name: Civic archive crawler (foundation, 5-day check)
+name: Civic archive crawler (5-day check)
 
-# フェーズ10A：自動巡回基盤。
+# フェーズ10B：実データ巡回・差分検知。
 #
 # 一般質問・議案・条例・請願・陳情・議員名簿は既に .github/workflows/sync-council-data.yml
 # （scripts/sync-council-data.mjs・scripts/fetch-nobeoka-council-documents.mjs）が実データ取得を
-# 行っているため、このワークフローでは重複取得しない（src/data/archiveCrawlerTargets.jsonの
-# existingImplementationが設定された対象は常にスキップする）。
+# 行っているため、このワークフローでは重複取得しない（reports/配下の既存レポートを読み込んで
+# 統合する。src/data/archiveCrawlerTargets.jsonのexistingImplementationが設定された対象）。
+# 財政・人口・基金は、scripts/lib/city-site-fetch.mjs（許可ドメイン制限・429/403/5xx処理・
+# SHA-256ハッシュ）を使って実際にHTTP取得し、前回ハッシュと比較して新規・変更・変更なし・
+# 削除候補を判定する。市長（歴代・現職とも）・市債・政策・テーマは、許可ドメイン外／
+# 監視対象URL未確認のため取得しない（推測でアクセスしない）。
 #
-# 今回のフェーズでは実際のHTTP取得・差分の自動反映は行わない
-# （scripts/run-archive-crawler.mjsのダミー実装）。そのため、このワークフローは
-# コミット・Pull Requestの作成を行わない（src/data/archiveCrawlerState.jsonの更新結果は
-# ワークフロー実行ログ・GitHub Actions Summaryでのみ確認できる）。実データ取得を実装する際は
+# このワークフローはコミット・Pull Requestの作成をまだ行わない（src/data/archiveCrawlerState.json
+# の更新結果はワークフロー実行ログ・GitHub Actions Summaryでのみ確認できる）。取得した差分を
+# 実際にサイトのデータへ反映する（AI解析・自動登録）場合は、次フェーズで
 # .github/workflows/sync-council-data.yml と同様のbotブランチ経由Pull Request方式を追加すること。
 #
 # 5日間隔の実現方法は sync-council-data.yml と同じ考え方：毎日起動した上で、
@@ -63,7 +66,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run archive crawler (foundation, dummy fetch)
+      - name: Run archive crawler (real fetch + diff detection)
         run: |
           FORCE_FLAG=""
           if [ "${{ github.event.inputs.force }}" = "true" ]; then

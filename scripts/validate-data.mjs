@@ -2162,6 +2162,8 @@ try {
     }
   }
 
+  const VALID_CRAWLER_STATUSES = new Set(["new", "changed", "unchanged", "possiblyRemoved", "error", "skipped"]);
+
   try {
     const archiveCrawlerState = readJson("src/data/archiveCrawlerState.json");
     const stateTag = "archiveCrawlerState.json";
@@ -2172,18 +2174,43 @@ try {
         const v = archiveCrawlerState[field];
         if (v != null && Number.isNaN(Date.parse(v))) err(stateTag, `${field}の形式が不正です: ${v}`);
       }
-      for (const field of ["totalCount", "changedCount", "errorCount"]) {
+      // 巡回結果整合性：totalCountは巡回対象の総数と一致し、changedCount（新規+変更）・
+      // removedCount（削除候補）・errorCountはいずれもtotalCountを超えない。
+      for (const field of ["totalCount", "changedCount", "removedCount", "errorCount"]) {
         const v = archiveCrawlerState[field];
         if (typeof v !== "number" || v < 0) err(stateTag, `${field}が非負の数値ではありません: ${v}`);
       }
+      if (typeof archiveCrawlerState.totalCount === "number") {
+        for (const field of ["changedCount", "removedCount", "errorCount"]) {
+          const v = archiveCrawlerState[field];
+          if (typeof v === "number" && v > archiveCrawlerState.totalCount) {
+            err(stateTag, `${field}(${v})がtotalCount(${archiveCrawlerState.totalCount})を超えています`);
+          }
+        }
+      }
+
       for (const ts of archiveCrawlerState.targets) {
         const tsTag = `${stateTag} (${ts.targetId ?? "id不明"})`;
         if (!crawlerTargetIds.has(ts.targetId)) {
           err(tsTag, `archiveCrawlerTargets.jsonに存在しない巡回対象IDを参照しています: ${ts.targetId}`);
         }
-        for (const field of ["lastCheckedAt", "lastSuccessfulAt"]) {
+        for (const field of ["lastCheckedAt", "lastSuccessfulAt", "lastUpdatedAt"]) {
           const v = ts[field];
           if (v != null && Number.isNaN(Date.parse(v))) err(tsTag, `${field}の形式が不正です: ${v}`);
+        }
+        if (ts.lastStatus != null && !VALID_CRAWLER_STATUSES.has(ts.lastStatus)) {
+          err(tsTag, `未定義のlastStatusです: ${ts.lastStatus}`);
+        }
+        if (typeof ts.consecutiveNotFoundCount !== "number" || ts.consecutiveNotFoundCount < 0) {
+          err(tsTag, `consecutiveNotFoundCountが非負の数値ではありません: ${ts.consecutiveNotFoundCount}`);
+        }
+        // 削除判定の妥当性：possiblyRemovedは2回以上連続で取得できなかった場合のみ成立する
+        // （src/lib/archiveCrawler.tsのshouldFlagAsPossiblyRemovedと同じ条件）。
+        if (ts.lastStatus === "possiblyRemoved" && ts.consecutiveNotFoundCount < 2) {
+          err(tsTag, `lastStatus="possiblyRemoved"ですが、consecutiveNotFoundCount(${ts.consecutiveNotFoundCount})が2未満です（1回の失敗だけでは削除候補にしない）`);
+        }
+        if (ts.lastStatus != null && ts.lastStatus !== "error" && ts.lastStatus !== "possiblyRemoved" && ts.consecutiveNotFoundCount !== 0) {
+          warn(tsTag, `lastStatus="${ts.lastStatus}"ですが、consecutiveNotFoundCountが0にリセットされていません: ${ts.consecutiveNotFoundCount}`);
         }
       }
       // state整合性：登録済みの全対象がstateにも存在するか（片方にしか無い＝生成漏れ・削除漏れの可能性）。
