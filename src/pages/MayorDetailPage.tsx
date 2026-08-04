@@ -11,7 +11,13 @@ import { GlobeIcon, ClockIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
-import { archiveVerificationStatusLabel, termsForMayor } from "../lib/archiveMayors";
+import {
+  archiveVerificationStatusLabel,
+  formatArchiveDateWithPrecision,
+  isActingMayorTerm,
+  mayorRoleLabel,
+  termsForMayor,
+} from "../lib/archiveMayors";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 
@@ -61,7 +67,18 @@ export function MayorDetailPage() {
           )}
         </div>
         {mayor.nameKana && <p className="mt-1 text-sm text-on-surface-variant">{mayor.nameKana}</p>}
+        {mayor.alternateNames && mayor.alternateNames.length > 0 && (
+          <p className="mt-1 text-xs text-on-surface-variant">別表記：{mayor.alternateNames.join("、")}</p>
+        )}
+        <p className="mt-2 text-xs text-on-surface-variant">
+          生没年：
+          {mayor.birthDate || mayor.deathDate
+            ? `${mayor.birthDate ? formatJapaneseDate(mayor.birthDate) : "不明"}〜${mayor.deathDate ? formatJapaneseDate(mayor.deathDate) : mayor.status === "deceased" ? "不明" : ""}`
+            : "資料未確認"}
+          {mayor.birthplace ? `／出身地：${mayor.birthplace}` : ""}
+        </p>
         {mayor.profile && <p className="mt-3 text-base leading-loose text-on-surface">{mayor.profile}</p>}
+        {mayor.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{mayor.notes}</p>}
 
         <div className="mt-4 flex flex-wrap gap-2">
           {mayor.isCurrentMayor && (
@@ -100,15 +117,25 @@ export function MayorDetailPage() {
               const next = term.nextMayorId ? mayorById.get(term.nextMayorId) : undefined;
               return (
                 <li key={term.id} className="rounded-lg border border-outline-variant p-3">
-                  <p className="flex items-center gap-1.5 text-sm font-medium text-on-surface">
+                  <p className="flex flex-wrap items-center gap-1.5 text-sm font-medium text-on-surface">
                     <ClockIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
                     {term.termNumber ? `第${term.termNumber}期　` : ""}
-                    {formatJapaneseDate(term.termStart)}〜{term.termEnd ? formatJapaneseDate(term.termEnd) : "現在"}
+                    {formatArchiveDateWithPrecision(term.termStart, term.termStartPrecision, formatJapaneseDate)}〜
+                    {formatArchiveDateWithPrecision(term.termEnd, term.termEndPrecision, formatJapaneseDate)}
+                    {isActingMayorTerm(term) && (
+                      <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-semibold text-on-surface-variant">
+                        {mayorRoleLabel(term.mayorRole)}
+                      </span>
+                    )}
                   </p>
                   <dl className="mt-2 grid grid-cols-1 gap-x-3 gap-y-1 text-xs text-on-surface-variant sm:grid-cols-2">
                     <div>
                       <dt className="inline">選挙区分：</dt>
                       <dd className="inline">{term.electionType ?? "確認中"}</dd>
+                    </div>
+                    <div>
+                      <dt className="inline">退任理由：</dt>
+                      <dd className="inline">{term.retirementReason ?? "確認中"}</dd>
                     </div>
                     <div>
                       <dt className="inline">就任当時人口：</dt>
@@ -129,6 +156,7 @@ export function MayorDetailPage() {
                       </dd>
                     </div>
                   </dl>
+                  {term.notes && <p className="mt-2 text-xs text-on-surface-variant">{term.notes}</p>}
                 </li>
               );
             })}

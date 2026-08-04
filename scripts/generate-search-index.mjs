@@ -54,6 +54,50 @@ try {
   // データがない場合はスキップ
 }
 
+// --- archive: mayors（延岡市政アーカイブ：歴代市長） ---
+try {
+  const archiveMayors = readJson("src/data/archiveMayors.json");
+  const archiveMayorTerms = readJson("src/data/archiveMayorTerms.json");
+  for (const m of archiveMayors) {
+    const terms = archiveMayorTerms
+      .filter((t) => t.mayorId === m.id)
+      .sort((a, b) => a.termStart.localeCompare(b.termStart));
+    const tenure = terms
+      .map((t) => `${t.termStart}〜${t.termEnd ?? "現在"}`)
+      .join("、");
+    const fiscalYearsInvolved = [
+      ...new Set(
+        terms.flatMap((t) => {
+          const startYear = Number.parseInt(t.termStart.slice(0, 4), 10);
+          const endYear = t.termEnd ? Number.parseInt(t.termEnd.slice(0, 4), 10) : new Date().getFullYear();
+          const years = [];
+          for (let y = startYear; y <= endYear; y++) years.push(y);
+          return years;
+        }),
+      ),
+    ];
+    entries.push({
+      id: `mayor-${m.id}`,
+      type: "mayor",
+      title: m.isCurrentMayor ? `${m.name}（現市長）` : `${m.name}（元市長）`,
+      description: tenure ? `在任期間：${tenure}` : "任期は確認中です。",
+      url: `/mayors/${m.slug}`,
+      keywords: [
+        m.nameKana,
+        ...(m.alternateNames ?? []),
+        "市長",
+        m.isCurrentMayor ? "現市長" : "元市長",
+        ...fiscalYearsInvolved.map((y) => `${y}年度`),
+      ].filter(Boolean),
+      content: [m.profile, m.manifestoSummary].filter(Boolean).join(" "),
+      date: m.lastVerifiedAt,
+      sourceId: m.id,
+    });
+  }
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- archive: policies ---
 // AI生成コンテンツ（aiAnalysis）は、公式資料（summary/sourceOriginalText）と混同しないよう
 // content/description/keywordsには一切含めない（検索インデックスをAI生成文で汚染しない）。

@@ -38,7 +38,19 @@ export type ArchiveMemberStatus =
   | "termCompleted"
   | "unknown";
 
-export type ArchiveRetirementReason = "任期満了" | "辞職" | "失職" | "市長選挙立候補" | "死去" | "不明";
+export type ArchiveRetirementReason =
+  | "任期満了"
+  | "辞職"
+  | "失職"
+  | "市長選挙立候補"
+  | "死去"
+  | "選挙落選"
+  | "合併・制度変更"
+  | "職務代理終了"
+  | "不明";
+
+/** 日付の確認できた精度。dayでない場合、対応する日付フィールドは並び替え用の暫定アンカー（月初・年初）であり、事実として確定した日ではない。 */
+export type ArchiveDatePrecision = "day" | "month" | "year";
 
 /**
  * 現職議員（members.json）・元議員（formerMembers.json）を人物単位で束ねるインデックス層。
@@ -108,29 +120,49 @@ export interface ArchiveMayor {
   slug: string;
   name: string;
   nameKana?: string;
+  /** 旧字体・改姓・通称等、公式資料で確認できた別表記。氏名表記のゆれによる同一人物の重複登録を防ぐために使う。 */
+  alternateNames?: string[];
+  /** 公式資料で確認できた場合のみ設定する。推測で埋めない。 */
+  birthDate?: string;
+  deathDate?: string;
+  birthplace?: string;
   status: "current" | "former" | "deceased" | "unknown";
+  /** 経歴・出身・学歴・市長就任前後の職歴等の要約（原文引用ではなく事実の整理）。 */
   profile?: string;
   manifestoSummary?: string;
   isCurrentMayor: boolean;
   sourceRefs: ArchiveSourceRef[];
+  /** 登録経緯・調査状況等、人による補足メモ。公式見解ではない。 */
+  notes?: string;
   lastVerifiedAt?: string;
 }
 
 export interface ArchiveMayorTerm {
   id: string;
   mayorId: string;
+  /** 精度がday未満（termStartPrecision参照）の場合、月初・年初日を並び替え用の暫定アンカーとして保持する（架空の就任日ではない）。 */
   termStart: string;
+  /** termStartの確認できた精度。未設定はday（既存データとの後方互換）。 */
+  termStartPrecision?: ArchiveDatePrecision;
   termEnd: string | null;
+  /** termEndの確認できた精度。未設定はday（既存データとの後方互換）。termEndがnullの場合は無関係。 */
+  termEndPrecision?: ArchiveDatePrecision;
   termNumber?: number;
   electionDate?: string;
   /** 例: "通常選挙" "補欠選挙" "無投票"。公式資料で確認できた場合のみ設定する。 */
   electionType?: string;
+  /** 退任理由。公式資料で確認できた場合のみ設定する。任期満了と選挙落選を混同しないこと。 */
+  retirementReason?: ArchiveRetirementReason;
+  /** 公選の市長本人か職務代理者かの区別。未設定はelected（既存データとの後方互換）。 */
+  mayorRole?: "elected" | "acting" | "temporaryActing";
   /** 就任当時人口。fiscalYearsとの重複を許容し、任期詳細ページ単体での表示用に保持する。 */
   populationAtStart?: number | null;
   /** 前任・後任市長。確認できた場合のみ設定する。 */
   previousMayorId?: string | null;
   nextMayorId?: string | null;
   sourceRefs: ArchiveSourceRef[];
+  /** 不自然な任期間隔の理由等、人による補足メモ。公式見解ではない。 */
+  notes?: string;
 }
 
 /**

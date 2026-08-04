@@ -23,3 +23,47 @@ export function mayorTermCountLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm
   const own = termsForMayor(terms, mayor.id);
   return own.length > 0 ? `${own.length}期` : "確認中";
 }
+
+/** 就任順の並び替え用に、その市長の最も早い任期の開始日を返す（任期未登録の場合はundefined）。 */
+export function earliestTermStart(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string | undefined {
+  return termsForMayor(terms, mayor.id)[0]?.termStart;
+}
+
+/** 一覧の年代別グルーピング用ラベル（西暦の10年区切り）。例: "1933-04-15" → "1930年代"。 */
+export function decadeLabel(isoDate: string): string {
+  const year = Number.parseInt(isoDate.slice(0, 4), 10);
+  if (!Number.isInteger(year)) return "年代不明";
+  return `${Math.floor(year / 10) * 10}年代`;
+}
+
+export function mayorRoleLabel(role: ArchiveMayorTerm["mayorRole"]): string {
+  switch (role) {
+    case "acting":
+      return "職務代理";
+    case "temporaryActing":
+      return "一時的職務代理";
+    case "elected":
+    case undefined:
+      return "公選";
+  }
+}
+
+/** 職務代理者（acting/temporaryActing）の任期かどうか。未設定はelected（公選）扱い。 */
+export function isActingMayorTerm(term: ArchiveMayorTerm): boolean {
+  return term.mayorRole === "acting" || term.mayorRole === "temporaryActing";
+}
+
+/**
+ * 日付を表示用に整形し、precisionがday未満の場合は「ごろ」を付け、
+ * 日付そのものが確定した事実ではないことを明示する。dateがnullの場合は"現在"を返す。
+ */
+export function formatArchiveDateWithPrecision(
+  date: string | null,
+  precision: "day" | "month" | "year" | undefined,
+  formatJapaneseDate: (iso: string) => string,
+): string {
+  if (date === null) return "現在";
+  const formatted = formatJapaneseDate(date);
+  if (precision === undefined || precision === "day") return formatted;
+  return `${formatted}ごろ（${precision === "month" ? "月まで確認・日は未確定" : "年のみ確認・月日は未確定"}）`;
+}

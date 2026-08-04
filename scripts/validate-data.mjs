@@ -912,13 +912,29 @@ try {
     err("archiveMayors.json", `isCurrentMayor:trueが複数登録されています: ${currentMayors.map((m) => m.id).join("、")}`);
   }
 
+  const ARCHIVE_MAYOR_STATUSES = new Set(["current", "former", "deceased", "unknown"]);
+  const mayorNameKeys = new Map(); // 氏名の重複登録（同一人物の別ID登録）検出用
   for (const m of archiveMayors) {
     const tag = `archiveMayors.json (${m.id ?? "id不明"})`;
     if (isBlank(m.name)) err(tag, "nameが空です");
     if (typeof m.isCurrentMayor !== "boolean") err(tag, "isCurrentMayorが真偽値ではありません");
+    if (m.status !== undefined && !ARCHIVE_MAYOR_STATUSES.has(m.status)) err(tag, `statusの値が不正です: ${m.status}`);
+    if (m.birthDate && !DATE_RE.test(m.birthDate)) err(tag, `birthDateの形式が不正です: ${m.birthDate}`);
+    if (m.deathDate && !DATE_RE.test(m.deathDate)) err(tag, `deathDateの形式が不正です: ${m.deathDate}`);
+    if (m.birthDate && m.deathDate && m.birthDate > m.deathDate) err(tag, `birthDate(${m.birthDate})がdeathDate(${m.deathDate})より後になっています`);
+    if (m.alternateNames !== undefined && !Array.isArray(m.alternateNames)) err(tag, "alternateNamesが配列ではありません");
     if (m.lastVerifiedAt && !DATE_RE.test(m.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${m.lastVerifiedAt}`);
     checkSourceRefs({ err, warn }, m.sourceRefs, tag);
     requireAtLeastOneSourceRef({ err }, m.sourceRefs, tag);
+
+    // 同一氏名（別表記含む）が別IDで重複登録されていないかを警告する（同一人物の重複登録防止）。
+    for (const key of [m.name, ...(m.alternateNames ?? [])].filter((n) => !isBlank(n))) {
+      if (mayorNameKeys.has(key) && mayorNameKeys.get(key) !== m.id) {
+        warn(tag, `氏名「${key}」が別の市長ID（${mayorNameKeys.get(key)}）と重複しています。同一人物の重複登録でないか確認してください`);
+      } else {
+        mayorNameKeys.set(key, m.id);
+      }
+    }
   }
 } catch (e) {
   if (e?.code === "ENOENT") warn("archiveMayors.json", "読み込めませんでした（存在しない場合はスキップ）");
@@ -931,12 +947,45 @@ try {
 
   archiveMayorTermIds = checkDuplicateIds({ err, warn }, archiveMayorTerms, "id", "archiveMayorTerms.json");
 
+  const ARCHIVE_DATE_PRECISIONS = new Set(["day", "month", "year"]);
+  const ARCHIVE_RETIREMENT_REASONS = new Set([
+    "任期満了",
+    "辞職",
+    "失職",
+    "市長選挙立候補",
+    "死去",
+    "選挙落選",
+    "合併・制度変更",
+    "職務代理終了",
+    "不明",
+  ]);
+  const ARCHIVE_MAYOR_ROLES = new Set(["elected", "acting", "temporaryActing"]);
+
   for (const t of archiveMayorTerms) {
     const tag = `archiveMayorTerms.json (${t.id ?? "id不明"})`;
     checkReferenceExists({ err, warn }, t.mayorId, archiveMayorIds, tag, `存在しない市長IDを参照しています: ${t.mayorId}`);
     checkPeriodConsistency({ err }, t.termStart, t.termEnd, tag);
     if (t.termNumber !== undefined && typeof t.termNumber !== "number") err(tag, "termNumberが数値ではありません");
     checkNonNegative({ err }, t.populationAtStart ?? null, "populationAtStart", tag);
+    if (t.termStartPrecision !== undefined && !ARCHIVE_DATE_PRECISIONS.has(t.termStartPrecision)) {
+      err(tag, `termStartPrecisionの値が不正です: ${t.termStartPrecision}`);
+    }
+    if (t.termEndPrecision !== undefined && !ARCHIVE_DATE_PRECISIONS.has(t.termEndPrecision)) {
+      err(tag, `termEndPrecisionの値が不正です: ${t.termEndPrecision}`);
+    }
+    if (t.retirementReason !== undefined && !ARCHIVE_RETIREMENT_REASONS.has(t.retirementReason)) {
+      err(tag, `retirementReasonの値が不正です: ${t.retirementReason}`);
+    }
+    if (t.mayorRole !== undefined && !ARCHIVE_MAYOR_ROLES.has(t.mayorRole)) {
+      err(tag, `mayorRoleの値が不正です: ${t.mayorRole}`);
+    }
+    // 前任・後任が自分自身（同一mayorId）を指していないかを確認する（単純な自己参照の防止）。
+    if (t.previousMayorId && t.previousMayorId === t.mayorId) {
+      err(tag, `previousMayorIdが自分自身（${t.mayorId}）を指しています`);
+    }
+    if (t.nextMayorId && t.nextMayorId === t.mayorId) {
+      err(tag, `nextMayorIdが自分自身（${t.mayorId}）を指しています`);
+    }
     checkReferenceExists(
       { err, warn },
       t.previousMayorId,
@@ -962,6 +1011,36 @@ try {
     { groupField: "mayorId", startField: "termStart", endField: "termEnd" },
     "archiveMayorTerms.json",
   );
+
+  // 現在市長を含む在任期間全体（最古の任期開始〜現在）に、どの市長の任期にも属さない
+  // 空白期間がないかを警告する（1933年市制施行からの完全収録を目指す指標。エラーではなく
+  // 警告とし、調査途上のデータでもvalidate:data自体は失敗させない）。
+  // 退任日の翌日に次の任期が始まる場合（termEndを含む日まで在職）は空白ではないため、
+  // 日付を1日進めてから比較する（単純な文字列比較では退任日と就任日が連続していても
+  // 1日分の見せかけの空白として誤検出してしまうため）。
+  if (archiveMayorTerms.length > 0 && archiveMayorTerms.every((t) => DATE_RE.test(t.termStart))) {
+    const nextDay = (iso) => {
+      const d = new Date(`${iso}T00:00:00Z`);
+      d.setUTCDate(d.getUTCDate() + 1);
+      return d.toISOString().slice(0, 10);
+    };
+    const sortedByStart = [...archiveMayorTerms].sort((a, b) => String(a.termStart).localeCompare(String(b.termStart)));
+    const todayIso = new Date().toISOString().slice(0, 10);
+    let coveredUntil = sortedByStart[0].termStart;
+    const gaps = [];
+    for (const t of sortedByStart) {
+      if (t.termStart > nextDay(coveredUntil)) gaps.push([coveredUntil, t.termStart]);
+      const end = t.termEnd ?? todayIso;
+      if (end > coveredUntil) coveredUntil = end;
+    }
+    if (coveredUntil < todayIso) gaps.push([coveredUntil, todayIso]);
+    if (gaps.length > 0) {
+      warn(
+        "archiveMayorTerms.json",
+        `任期が登録されていない空白期間があります（${gaps.length}件）: ${gaps.map(([from, to]) => `${from}〜${to}`).join("、")}`,
+      );
+    }
+  }
 } catch (e) {
   if (e?.code === "ENOENT") warn("archiveMayorTerms.json", "読み込めませんでした（存在しない場合はスキップ）");
   else throw e;

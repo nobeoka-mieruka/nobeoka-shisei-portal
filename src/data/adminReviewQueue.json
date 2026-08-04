@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-04T13:51:58.325Z",
-  "totalItems": 51,
+  "generatedAt": "2026-08-04T17:57:07.691Z",
+  "totalItems": 56,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 10,
     "relationCandidate": 4,
-    "sourceInsufficient": 8,
+    "sourceInsufficient": 13,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -206,6 +206,36 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-01",
       "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-05",
+      "detail": "出典「鈴木憲太郎 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-06",
+      "detail": "出典「大島文彦 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-09",
+      "detail": "出典「青木善祐 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-10",
+      "detail": "出典「折小野良一 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-13",
+      "detail": "出典「桜井哲雄 - Wikipedia」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",

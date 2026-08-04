@@ -2,7 +2,8 @@
   {
     "id": "mayor-01-term-01",
     "mayorId": "mayor-01",
-    "termStart": "2025-07-22",
+    "termStart": "2025-07-20",
+    "termStartPrecision": "day",
     "termEnd": null,
     "termNumber": 1,
     "electionDate": "2025-07-20",
@@ -16,7 +17,25 @@
         "sourceOrganization": "本人（後援会）",
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
-        "notes": "既存 src/data/mayor.json career配列の「令和7年7月22日 第29代延岡市長就任」を基に登録。"
+        "notes": "既存 src/data/mayor.json career配列の「令和7年7月22日 第29代延岡市長就任」を基に当初登録していたが、延岡市公式サイト（市長プロフィールページ）で「令和7年7月20日 第29代延岡市長就任」と明記されていることが判明したため、2026-08-05にtermStartを2025-07-20へ修正した。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html",
+        "sourceTitle": "延岡市長 三浦 久知(みうら ひさとも) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「令和7年7月20日 第29代延岡市長就任」と明記。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/79/2719.html",
+        "sourceTitle": "公職の任期、定数 - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "市長の任期満了日「令和11年7月19日」・前回選挙執行日「令和7年7月20日」の記載を確認。4年任期・任期満了日から逆算すると就任日は2025-07-20と整合する。"
       },
       {
         "sourceUrl": "https://go2senkyo.com/local/senkyo/26032",
@@ -33,11 +52,13 @@
     "id": "mayor-02-term-01",
     "mayorId": "mayor-02",
     "termStart": "2006-02-06",
+    "termStartPrecision": "month",
     "termEnd": "2010-02-05",
+    "termEndPrecision": "month",
     "termNumber": 1,
     "electionDate": "2006-01-29",
     "populationAtStart": null,
-    "previousMayorId": null,
+    "previousMayorId": "mayor-13",
     "nextMayorId": null,
     "sourceRefs": [
       {
@@ -47,16 +68,25 @@
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "partiallyVerified",
-        "notes": "就任日2006-02-06を確認。任期満了日（2010-02-05）は、次の任期の選挙日（2010-01-24、下記出典）、延岡市長の任期が地方自治法上4年であること、同市の市長就任日が例年2月6日である実績パターン（読谷山洋司・三浦久知の任期からも同パターンを確認）から機械的に算出した。前任市長（櫻井哲雄）は今回未登録。"
+        "notes": "就任日2006-02-06を確認。任期満了日（2010-02-05）は、次期の選挙日（2010-01-24）と延岡市長任期が地方自治法上4年であること、同市の市長就任日が例年2月6日である実績パターンから機械的に算出した。"
       },
       {
-        "sourceUrl": "https://go2senkyo.com/local/jichitai/3791/head",
-        "sourceTitle": "宮崎県延岡市長の選挙一覧 - 選挙ドットコム",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+        "sourceTitle": "近代の年表(1991～2010年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「2006年1月 延岡市長に首藤正治氏が初当選した」「2006年2月 櫻井哲雄延岡市長が退任した」「2006年2月 首藤正治延岡市長が就任した」を確認（年月単位）。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/1321",
+        "sourceTitle": "延岡市長選挙 - 2006年01月29日投票 | 選挙ドットコム",
         "sourceOrganization": "選挙ドットコム",
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "2006年1月29日投票（告示2006年1月22日）の延岡市長選挙の実施を確認（当選者名はこのページ単体には記載なし。上記Wikipedia出典と組み合わせて首藤正治の初当選選挙と判断）。"
+        "notes": "投票日2006-01-29（告示2006-01-22）、首藤正治23,749票で当選、現職櫻井哲雄14,965票で落選したことを確認。"
       }
     ]
   },
@@ -64,7 +94,9 @@
     "id": "mayor-02-term-02",
     "mayorId": "mayor-02",
     "termStart": "2010-02-06",
+    "termStartPrecision": "month",
     "termEnd": "2014-02-05",
+    "termEndPrecision": "month",
     "termNumber": 2,
     "electionDate": "2010-01-24",
     "populationAtStart": null,
@@ -81,13 +113,22 @@
         "notes": "3期12年（2006-02-06〜2018-02-05）の記述から、2期目であることを確認。個別の期日は選挙日（2010-01-24）と4年任期・2月6日就任パターンから機械的に算出した。"
       },
       {
-        "sourceUrl": "https://go2senkyo.com/local/jichitai/3791/head",
-        "sourceTitle": "宮崎県延岡市長の選挙一覧 - 選挙ドットコム",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+        "sourceTitle": "近代の年表(1991～2010年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「2010年1月 延岡市長に首藤正治氏が再選した」「2010年2月 首藤正治延岡市長が就任した」を確認（年月単位）。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/644",
+        "sourceTitle": "延岡市長選挙 - 2010年01月24日投票 | 選挙ドットコム",
         "sourceOrganization": "選挙ドットコム",
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "2010年1月24日投票（告示2010年1月17日）の延岡市長選挙の実施を確認（当選者名はこのページ単体には記載なし）。"
+        "notes": "投票日2010-01-24（告示2010-01-17）、首藤正治41,738票で再選（対立候補23,029票）を確認。"
       }
     ]
   },
@@ -95,9 +136,12 @@
     "id": "mayor-02-term-03",
     "mayorId": "mayor-02",
     "termStart": "2014-02-06",
+    "termStartPrecision": "month",
     "termEnd": "2018-02-05",
+    "termEndPrecision": "month",
     "termNumber": 3,
     "electionDate": "2014-01-26",
+    "retirementReason": "任期満了",
     "populationAtStart": null,
     "previousMayorId": null,
     "nextMayorId": "mayor-03",
@@ -109,24 +153,27 @@
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "partiallyVerified",
-        "notes": "3期目・任期満了日2018-02-05（12年間の市長職を終えた旨の記述）を確認。就任日（2014-02-06）は選挙日（2014-01-26）と4年任期・2月6日就任パターンから機械的に算出した。"
+        "notes": "3期目・任期満了日2018-02-05（12年間の市長職を終えた旨の記述）、2017年に次期市長選への不出馬を表明し引退したことを確認。就任日（2014-02-06）は選挙日（2014-01-26）と4年任期・2月6日就任パターンから機械的に算出した。"
       },
       {
-        "sourceUrl": "https://go2senkyo.com/local/jichitai/3791/head",
-        "sourceTitle": "宮崎県延岡市長の選挙一覧 - 選挙ドットコム",
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/6024",
+        "sourceTitle": "延岡市長選挙 - 2014年01月26日投票 | 選挙ドットコム",
         "sourceOrganization": "選挙ドットコム",
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "2014年1月26日投票（告示2014年1月19日）の延岡市長選挙の実施を確認（当選者名はこのページ単体には記載なし）。"
+        "notes": "投票日2014-01-26（告示2014-01-19）、首藤正治33,479票で3選（対立候補2名）を確認。2018年選挙には出馬せず、後継指名した永山英也氏は落選（読谷山洋司氏が初当選）。"
       }
-    ]
+    ],
+    "notes": "3期12年を経て2018年市長選には出馬せず勇退したため、退任理由は「任期満了」とした（選挙での落選ではない）。"
   },
   {
     "id": "mayor-03-term-01",
     "mayorId": "mayor-03",
     "termStart": "2018-02-06",
+    "termStartPrecision": "month",
     "termEnd": "2022-02-05",
+    "termEndPrecision": "month",
     "termNumber": 1,
     "electionDate": "2018-01-28",
     "electionType": "通常選挙",
@@ -149,8 +196,8 @@
         "sourceOrganization": "Wikipedia",
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
-        "verificationStatus": "partiallyVerified",
-        "notes": "就任日2018-02-06、任期満了日2022-02-05を確認。"
+        "verificationStatus": "needsReview",
+        "notes": "就任日について、記事内で「2月6日」（infobox）と「2月26日」（本文）という内部矛盾があることを確認した。市長就任日が例年2月6日である実績パターン（他の代の任期から確認）とinfoboxの記載に基づき2018-02-06を採用したが、独立資料による日単位の確認はできていないため、精度をmonthとしている。"
       }
     ]
   },
@@ -162,6 +209,7 @@
     "termNumber": 2,
     "electionDate": "2022-01-23",
     "electionType": "通常選挙",
+    "retirementReason": "辞職",
     "populationAtStart": null,
     "previousMayorId": null,
     "nextMayorId": "mayor-01",
@@ -182,8 +230,718 @@
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "2025年6月30日付での辞職（退任）を報道で確認。"
+        "notes": "2025年6月30日付での辞職（退任）を報道で確認。理由は肺・膵臓の腫瘍発見による健康上の理由。"
       }
     ]
+  },
+  {
+    "id": "mayor-04-term-01",
+    "mayorId": "mayor-04",
+    "termStart": "1933-04-15",
+    "termStartPrecision": "month",
+    "termEnd": "1937-01-06",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-05",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1933年4月 初代市長仲田又次郎氏が就任した」「1937年1月 仲田市長が退職した」を年月単位で確認。市制施行に伴う延岡市初代市長。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/仲田又次郎",
+        "sourceTitle": "仲田又次郎 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1933-04-15・退任日1937-01-06という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "延岡市制施行（1933年4月1日）に伴う初代市長。退任理由は延岡市公式資料に「退職」とのみ記載され、辞職か任期満了かは判別できない。"
+  },
+  {
+    "id": "mayor-05-term-01",
+    "mayorId": "mayor-05",
+    "termStart": "1937-03-06",
+    "termStartPrecision": "month",
+    "termEnd": "1937-04-14",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": "mayor-04",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1937年3月 鈴木憲太郎氏が市長に就任したが衆議院議員選挙立候補のため4月に退職した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/鈴木憲太郎",
+        "sourceTitle": "鈴木憲太郎 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1937-03-06・退任日1937-04-14という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "衆議院議員選挙立候補のための辞職と延岡市公式資料で確認。"
+  },
+  {
+    "id": "mayor-05-term-02",
+    "mayorId": "mayor-05",
+    "termStart": "1937-05-16",
+    "termStartPrecision": "month",
+    "termEnd": "1937-06-15",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-06",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1937年5月 鈴木憲太郎氏が再び市長に就任したが、6月に辞職した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/鈴木憲太郎",
+        "sourceTitle": "鈴木憲太郎 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1937-05-16・退任日1937-06-15という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "辞職の事実は延岡市公式資料で確認できるが、具体的な理由の記載はなく不明。"
+  },
+  {
+    "id": "mayor-06-term-01",
+    "mayorId": "mayor-06",
+    "termStart": "1937-09-26",
+    "termStartPrecision": "month",
+    "termEnd": "1941-09-25",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-05",
+    "nextMayorId": "mayor-07",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1937年9月 大島文彦氏が市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/大島文彦",
+        "sourceTitle": "大島文彦 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1937-09-26・退任日1941-09-25という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "退任理由は延岡市公式資料・Wikipediaいずれにも記載がなく不明。"
+  },
+  {
+    "id": "mayor-07-term-01",
+    "mayorId": "mayor-07",
+    "termStart": "1941-10-22",
+    "termStartPrecision": "month",
+    "termEnd": "1942-04-25",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": "mayor-06",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1941年10月 三浦虎雄氏が市長に就任した」「三浦虎雄氏は衆議院議員選挙立候補のため4月に市長を辞職した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/三浦虎雄",
+        "sourceTitle": "三浦虎雄 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1941-10-22・退任日1942-04-25という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "衆議院議員選挙立候補のための辞職と延岡市公式資料で確認。"
+  },
+  {
+    "id": "mayor-07-term-02",
+    "mayorId": "mayor-07",
+    "termStart": "1942-05-19",
+    "termStartPrecision": "month",
+    "termEnd": "1946-03-06",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-05",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「三浦虎雄氏は...4月に市長を辞職したが、再び市長に就任した」「1946年3月 三浦虎雄氏が公職追放により辞職し、鈴木憲太郎氏が市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/三浦虎雄",
+        "sourceTitle": "三浦虎雄 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1942-05-19・退任日1946-03-06という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "GHQによる公職追放を受けての辞職と延岡市公式資料の文言（「公職追放により辞職し」）に基づき登録。"
+  },
+  {
+    "id": "mayor-05-term-03",
+    "mayorId": "mayor-05",
+    "termStart": "1946-03-29",
+    "termStartPrecision": "month",
+    "termEnd": "1947-03-22",
+    "termEndPrecision": "month",
+    "termNumber": 3,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-07",
+    "nextMayorId": "mayor-08",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1946年3月 三浦虎雄氏が公職追放により辞職し、鈴木憲太郎氏が市長に就任した」を確認。退任月は公式資料に明記がなく、次代・佐藤千吉郎の就任（1947年4月）より前であることのみ判明。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/鈴木憲太郎",
+        "sourceTitle": "鈴木憲太郎 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1946-03-29・退任日1947-03-22という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "退任理由は延岡市公式資料・Wikipediaいずれにも記載がなく不明。"
+  },
+  {
+    "id": "mayor-08-term-01",
+    "mayorId": "mayor-08",
+    "termStart": "1947-04-16",
+    "termStartPrecision": "month",
+    "termEnd": "1948-06-06",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-05",
+    "nextMayorId": "mayor-04",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1947年4月 佐藤千吉郎氏が市長に就任した」を確認。退任月は公式資料に明記がなく、次代・仲田又次郎の就任（1948年7月）より前であることのみ判明。"
+      }
+    ],
+    "notes": "退任日はWikipediaの表にのみ記載があり（1948-06-06）、それ以外の情報源では確認できていない。退任理由も一切の資料で確認できていない。"
+  },
+  {
+    "id": "mayor-04-term-02",
+    "mayorId": "mayor-04",
+    "termStart": "1948-07-16",
+    "termStartPrecision": "month",
+    "termEnd": "1952-06-19",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-08",
+    "nextMayorId": "mayor-07",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceTitle": "近代の年表(1930～1950年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1948年7月 仲田又次郎氏が市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/13/1690.html",
+        "sourceTitle": "名誉市民 - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「昭和23年に再び第9代市長となり」と、代数（第9代）・就任年（1948年）を明記していることを確認。"
+      }
+    ],
+    "notes": "退任月は公式資料に明記がなく、次代・三浦虎雄の就任（1952年7月）より前であることのみ判明。退任理由も一切の資料で確認できていない。"
+  },
+  {
+    "id": "mayor-07-term-03",
+    "mayorId": "mayor-07",
+    "termStart": "1952-07-11",
+    "termStartPrecision": "month",
+    "termEnd": "1956-03-27",
+    "termEndPrecision": "month",
+    "termNumber": 3,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-04",
+    "nextMayorId": "mayor-09",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceTitle": "近代の年表(1951～1970年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1952年7月 三浦虎雄氏が市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/13/1690.html",
+        "sourceTitle": "名誉市民 - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「第5・6・10代市長をつとめ」と代数（第10代）を明記していることを確認。"
+      }
+    ],
+    "notes": "退任月は公式資料に明記がなく、次代・青木善祐の就任（1956年4月）より前であることのみ判明。退任理由も一切の資料で確認できていない。"
+  },
+  {
+    "id": "mayor-09-term-01",
+    "mayorId": "mayor-09",
+    "termStart": "1956-04-21",
+    "termStartPrecision": "month",
+    "termEnd": "1960-04-18",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-07",
+    "nextMayorId": "mayor-10",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceTitle": "近代の年表(1951～1970年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1956年4月 青木善祐氏が市長に就任した」「1960年4月 折小野良一氏が市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/青木善祐",
+        "sourceTitle": "青木善祐 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1956-04-21・退任日1960-04-18という日単位の記載があるが、独立資料での確認はできていない。同記事は折小野良一氏の記事内で「1960年の延岡市長選挙で現職の青木善祐を1139票差で破り初当選」との記述があり、選挙落選の可能性を示唆するが、独立資料での確認はできていないため退任理由は登録していない。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-10-term-01",
+    "mayorId": "mayor-10",
+    "termStart": "1960-04-19",
+    "termStartPrecision": "month",
+    "termEnd": "1964-04-18",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-09",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceTitle": "近代の年表(1951～1970年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1960年4月 折小野良一氏が市長に就任した」「1964年4月 折小野良一氏が再び市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/折小野良一",
+        "sourceTitle": "折小野良一 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1960-04-19・退任日1964-04-18という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-10-term-02",
+    "mayorId": "mayor-10",
+    "termStart": "1964-04-19",
+    "termStartPrecision": "month",
+    "termEnd": "1966-12-01",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-11",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceTitle": "近代の年表(1951～1970年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1966年12月 折小野良一市長が衆議院議員立候補のため辞職した」を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/折小野良一",
+        "sourceTitle": "折小野良一 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1964-04-19・退任日1966-12-01という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ],
+    "notes": "衆議院議員選挙立候補のための辞職と延岡市公式資料で確認。退任後、実際に衆議院議員に当選している。"
+  },
+  {
+    "id": "mayor-11-term-01",
+    "mayorId": "mayor-11",
+    "termStart": "1967-01-22",
+    "termStartPrecision": "month",
+    "termEnd": "1971-01-21",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-10",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceTitle": "近代の年表(1951～1970年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1967年1月 房野博氏が市長に就任した」を確認。"
+      }
+    ],
+    "notes": "退任日1971-01-21はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+  },
+  {
+    "id": "mayor-11-term-02",
+    "mayorId": "mayor-11",
+    "termStart": "1971-01-22",
+    "termStartPrecision": "month",
+    "termEnd": "1975-01-21",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+        "sourceTitle": "近代の年表(1971～1990年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1971年1月 房野博氏が再び市長に就任した」を確認。"
+      }
+    ],
+    "notes": "退任日1975-01-21はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+  },
+  {
+    "id": "mayor-11-term-03",
+    "mayorId": "mayor-11",
+    "termStart": "1975-01-22",
+    "termStartPrecision": "month",
+    "termEnd": "1978-10-05",
+    "termEndPrecision": "month",
+    "termNumber": 3,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-12",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+        "sourceTitle": "近代の年表(1971～1990年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1975年1月 房野博氏が三たび市長に就任した」「1978年10月 房野博市長が辞職した」を確認。"
+      }
+    ],
+    "notes": "辞職の事実は延岡市公式資料で確認できるが、具体的な理由の記載はなく不明。"
+  },
+  {
+    "id": "mayor-12-term-01",
+    "mayorId": "mayor-12",
+    "termStart": "1978-11-05",
+    "termStartPrecision": "month",
+    "termEnd": "1982-11-04",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-11",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+        "sourceTitle": "近代の年表(1971～1990年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1978年11月 早生隆彦氏が市長に就任した」を確認。"
+      }
+    ],
+    "notes": "退任日1982-11-04はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+  },
+  {
+    "id": "mayor-12-term-02",
+    "mayorId": "mayor-12",
+    "termStart": "1982-11-05",
+    "termStartPrecision": "month",
+    "termEnd": "1986-11-04",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+        "sourceTitle": "近代の年表(1971～1990年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1982年11月 早生隆彦氏が再び市長に就任した」を確認。"
+      }
+    ],
+    "notes": "退任日1986-11-04はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+  },
+  {
+    "id": "mayor-12-term-03",
+    "mayorId": "mayor-12",
+    "termStart": "1986-11-05",
+    "termStartPrecision": "month",
+    "termEnd": "1990-11-04",
+    "termEndPrecision": "month",
+    "termNumber": 3,
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+        "sourceTitle": "近代の年表(1971～1990年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1986年11月 早生隆彦氏が三たび市長に就任した」を確認。"
+      }
+    ],
+    "notes": "退任日1990-11-04はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+  },
+  {
+    "id": "mayor-12-term-04",
+    "mayorId": "mayor-12",
+    "termStart": "1990-11-05",
+    "termStartPrecision": "month",
+    "termEnd": "1994-01-11",
+    "termEndPrecision": "month",
+    "termNumber": 4,
+    "retirementReason": "辞職",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-13",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+        "sourceTitle": "近代の年表(1971～1990年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1990年11月 早生隆彦氏が四たび市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+        "sourceTitle": "近代の年表(1991～2010年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1994年1月 早生隆彦市長が辞職した」を確認。"
+      }
+    ],
+    "notes": "辞職の事実は延岡市公式資料で確認できるが、具体的な理由の記載はなく不明。"
+  },
+  {
+    "id": "mayor-13-term-01",
+    "mayorId": "mayor-13",
+    "termStart": "1994-02-06",
+    "termStartPrecision": "month",
+    "termEnd": "1998-02-05",
+    "termEndPrecision": "month",
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": "mayor-12",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+        "sourceTitle": "近代の年表(1991～2010年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1994年2月 櫻井哲雄氏が市長に就任した」を確認。前任・早生隆彦市長の辞職（1994年1月）を受けての選挙とみられるが、投票日を直接記載した一次資料は本調査では発見できなかった。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/桜井哲雄",
+        "sourceTitle": "桜井哲雄 - Wikipedia",
+        "sourceOrganization": "Wikipedia（全国歴代知事・市長総覧等を出典として明記）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1994-02-06・退任日1998-02-05という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-13-term-02",
+    "mayorId": "mayor-13",
+    "termStart": "1998-02-06",
+    "termStartPrecision": "month",
+    "termEnd": "2002-02-05",
+    "termEndPrecision": "month",
+    "termNumber": 2,
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+        "sourceTitle": "近代の年表(1991～2010年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「1998年 櫻井哲雄氏が再び市長に就任した」を確認（年単位。月の記載は箇所により不明瞭で、2月とする直接記載は確認できなかった）。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/桜井哲雄",
+        "sourceTitle": "桜井哲雄 - Wikipedia",
+        "sourceOrganization": "Wikipedia（全国歴代知事・市長総覧等を出典として明記）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "就任日1998-02-06・退任日2002-02-05という日単位の記載があるが、独立資料での確認はできていない。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-13-term-03",
+    "mayorId": "mayor-13",
+    "termStart": "2002-02-06",
+    "termStartPrecision": "month",
+    "termEnd": "2006-02-05",
+    "termEndPrecision": "month",
+    "termNumber": 3,
+    "electionDate": "2002-01-27",
+    "retirementReason": "選挙落選",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-02",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+        "sourceTitle": "近代の年表(1991～2010年) - 延岡市公式ホームページ",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「2002年 櫻井市長3期目当選」「2006年1月 延岡市長に首藤正治氏が初当選した」「2006年2月 櫻井哲雄延岡市長が退任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/1166",
+        "sourceTitle": "延岡市長選挙 - 2002年01月27日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "投票日2002-01-27（告示2002-01-20）、現職櫻井哲雄が33,737票で3選したことを確認。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/1321",
+        "sourceTitle": "延岡市長選挙 - 2006年01月29日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "投票日2006-01-29、首藤正治23,749票で当選、現職櫻井哲雄14,965票で落選したことを確認。第23代の退任理由が選挙落選であることの根拠。"
+      }
+    ],
+    "notes": "2006年市長選挙で首藤正治氏に敗れて退任したため、退任理由は「選挙落選」とした。"
   }
 ]

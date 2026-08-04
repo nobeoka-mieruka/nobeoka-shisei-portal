@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
@@ -10,7 +11,7 @@ import { LandmarkIcon, ClockIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
-import { mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
+import { decadeLabel, earliestTermStart, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -18,10 +19,30 @@ const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
+type SortOrder = "newest" | "oldest";
+
 export function MayorsPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
+
+  const sortedMayors = useMemo(() => {
+    const withStart = archiveMayors.map((mayor) => ({ mayor, start: earliestTermStart(mayor, archiveMayorTerms) ?? "" }));
+    withStart.sort((a, b) => (sortOrder === "newest" ? b.start.localeCompare(a.start) : a.start.localeCompare(b.start)));
+    return withStart.map((w) => w.mayor);
+  }, [sortOrder]);
+
+  const groups = useMemo(() => {
+    const byDecade = new Map<string, ArchiveMayor[]>();
+    for (const mayor of sortedMayors) {
+      const start = earliestTermStart(mayor, archiveMayorTerms);
+      const label = start ? decadeLabel(start) : "年代不明";
+      if (!byDecade.has(label)) byDecade.set(label, []);
+      byDecade.get(label)!.push(mayor);
+    }
+    return [...byDecade.entries()];
+  }, [sortedMayors]);
 
   return (
     <div className="px-4 py-4 sm:px-6">
@@ -36,46 +57,76 @@ export function MayorsPage() {
           <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">歴代市長（延岡市政アーカイブ）</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市長の任期・経歴を公式資料で確認できた範囲で整理しています。市長個人への評価・採点は行っていません。
+          延岡市長の任期・経歴を公式資料で確認できた範囲で整理しています。市長個人への評価・採点は行っていません。全{archiveMayors.length}名を登録しています（1933年の市制施行〜現在）。
         </p>
       </div>
 
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
-        現在登録しているのは現職市長のみです。前任・歴代の市長については、公式資料（市政要覧・市議会だより等）で在任期間・経歴を確認できたものから順次追加します。未登録の期間があることは、情報が「無い」ことを意味しません。
+        就任・退任の年月日は、延岡市公式資料（近代の年表等）で年月まで確認できたものが中心です。日単位の日付はWikipedia等の二次資料にとどまり独立資料で未確認のものを含みます。前任・後任市長の間に登録期間が無い箇所は、資料で確認できない空白期間であり、職務代理者を推測で補ってはいません。
       </div>
 
-      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {archiveMayors.map((mayor) => {
-          const terms = termsForMayor(archiveMayorTerms, mayor.id);
-          const latestTerm = terms.at(-1);
-          return (
-            <li key={mayor.id}>
-              <Link
-                to={`/mayors/${mayor.slug}`}
-                className={`block h-full rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container-high ${linkClass}`}
-              >
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-base font-semibold text-on-surface">{mayor.name}</p>
-                  {mayor.isCurrentMayor && (
-                    <span className="rounded-full bg-primary-container px-2 py-0.5 text-xs font-semibold text-on-primary-container">
-                      現職
-                    </span>
-                  )}
-                </div>
-                {mayor.nameKana && <p className="mt-0.5 text-xs text-on-surface-variant">{mayor.nameKana}</p>}
-                <p className="mt-2 flex items-center gap-1 text-xs text-on-surface-variant">
-                  <ClockIcon className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                  {latestTerm
-                    ? `任期 ${formatJapaneseDate(latestTerm.termStart)}〜${
-                        latestTerm.termEnd ? formatJapaneseDate(latestTerm.termEnd) : "現在"
-                      }（${mayorTermCountLabel(mayor, archiveMayorTerms)}）`
-                    : "任期情報：確認中"}
-                </p>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="mb-4 flex items-center justify-end gap-2">
+        <span className="text-xs text-on-surface-variant">並び順：</span>
+        <div className="inline-flex overflow-hidden rounded-full border border-outline-variant" role="group" aria-label="並び替え">
+          {(["newest", "oldest"] as SortOrder[]).map((order) => (
+            <button
+              key={order}
+              type="button"
+              onClick={() => setSortOrder(order)}
+              aria-pressed={sortOrder === order}
+              className={`min-h-[36px] px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                sortOrder === order ? "bg-primary text-on-primary" : "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
+              }`}
+            >
+              {order === "newest" ? "新しい順" : "古い順"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {groups.map(([decade, mayors]) => (
+        <section key={decade} className="mb-6">
+          <h2 className="mb-2 px-1 text-sm font-semibold text-on-surface-variant">{decade}</h2>
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {mayors.map((mayor) => {
+              const terms = termsForMayor(archiveMayorTerms, mayor.id);
+              const latestTerm = terms.at(-1);
+              const hasActingTerm = terms.some(isActingMayorTerm);
+              return (
+                <li key={mayor.id}>
+                  <Link
+                    to={`/mayors/${mayor.slug}`}
+                    className={`block h-full rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container-high ${linkClass}`}
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-base font-semibold text-on-surface">{mayor.name}</p>
+                      {mayor.isCurrentMayor && (
+                        <span className="rounded-full bg-primary-container px-2 py-0.5 text-xs font-semibold text-on-primary-container">
+                          現職
+                        </span>
+                      )}
+                      {hasActingTerm && (
+                        <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-semibold text-on-surface-variant">
+                          職務代理を含む
+                        </span>
+                      )}
+                    </div>
+                    {mayor.nameKana && <p className="mt-0.5 text-xs text-on-surface-variant">{mayor.nameKana}</p>}
+                    <p className="mt-2 flex items-center gap-1 text-xs text-on-surface-variant">
+                      <ClockIcon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                      {latestTerm
+                        ? `任期 ${formatJapaneseDate(latestTerm.termStart)}〜${
+                            latestTerm.termEnd ? formatJapaneseDate(latestTerm.termEnd) : "現在"
+                          }（${mayorTermCountLabel(mayor, archiveMayorTerms)}）`
+                        : "任期情報：確認中"}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
 
       <p className="mt-6 px-1 text-xs leading-relaxed text-on-surface-variant">
         現職市長の公約・市政方針・記者会見等の詳細は
