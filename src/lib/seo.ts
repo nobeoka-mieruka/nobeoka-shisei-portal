@@ -1158,6 +1158,12 @@ function speechDetailSeo(memberId: string, speechId: string, options?: SeoOption
   const description = isVerified
     ? `${session?.title ?? speech.sessionId}で${member.name}議員が行った${speech.speechType}と、市の答弁を公式会議録に基づいて要約しています。`
     : `${session?.title ?? speech.sessionId}で${member.name}議員が行った${speech.speechType}について、公式会議録を基に確認できた内容を掲載しています。要約の一部は現在確認中です。`;
+  const memberHref = activeMember
+    ? `/members/${memberId}`
+    : (() => {
+        const profile = archiveMemberProfiles.find((p) => p.legacyFormerMemberId === memberId || p.legacyMemberId === memberId);
+        return profile ? `/members/former/${profile.slug}` : "/members/former";
+      })();
 
   return makeResult(
     {
@@ -1168,7 +1174,7 @@ function speechDetailSeo(memberId: string, speechId: string, options?: SeoOption
       breadcrumbs: [
         { label: "ホーム", to: "/" },
         { label: "議員一覧", to: "/" },
-        { label: member.name, to: `/members/${memberId}` },
+        { label: member.name, to: memberHref },
         { label: speech.speechType },
       ],
       datePublished: speech.date ?? undefined,

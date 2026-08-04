@@ -83,14 +83,6 @@ export function MemberFormerDetailPage() {
         {profile.notes && <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{profile.notes}</p>}
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {legacyId && (
-            <Link
-              to={`/members/${legacyId}`}
-              className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
-            >
-              従来の元議員ページ（発言記録）を見る
-            </Link>
-          )}
           {profile.legacyFormerMemberId && (
             <Link
               to={`/compare/members?${buildCompareSearchParams([personSlug("former-member", profile.legacyFormerMemberId)]).toString()}`}
