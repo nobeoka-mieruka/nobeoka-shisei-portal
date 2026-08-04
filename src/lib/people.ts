@@ -4,7 +4,8 @@ import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
-import type { CouncilMember, FormerMember } from "../types";
+import billVotesData from "../data/billVotes.json";
+import type { BillVoteItem, CouncilMember, FormerMember } from "../types";
 import type { ArchiveCouncilDocument, ArchiveMayor, ArchiveMayorTerm, ArchivePolicy } from "../types/historicalArchive";
 
 const members = membersData as CouncilMember[];
@@ -13,6 +14,7 @@ const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
+const billVotes = billVotesData as BillVoteItem[];
 
 export type PersonType = "member" | "former-member" | "mayor";
 
@@ -159,4 +161,9 @@ export function councilDocumentsForPerson(id: string): ArchiveCouncilDocument[] 
     const ids = [...(d.proposerIds ?? []), ...(d.relatedMemberIds ?? []), ...(d.relatedMayorIds ?? [])];
     return ids.includes(id);
   });
+}
+
+/** 既存billVotes.json（議員別賛否記録）で、この人物（議員）の賛否が確認できる議案件数。 */
+export function voteCountForPerson(id: string): number {
+  return billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === id)).length;
 }

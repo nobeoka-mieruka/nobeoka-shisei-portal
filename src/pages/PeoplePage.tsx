@@ -4,8 +4,7 @@ import formerMembersData from "../data/formerMembers.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import factionsData from "../data/factions.json";
-import billVotesData from "../data/billVotes.json";
-import type { CouncilMember, FormerMember, BillVoteItem } from "../types";
+import type { CouncilMember, FormerMember } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
@@ -23,9 +22,11 @@ import {
   parsePersonSlug,
   personTypeLabel,
   policiesForPerson,
+  voteCountForPerson,
   type PersonType,
 } from "../lib/people";
 import { documentResultLabel, documentTypeLabel } from "../lib/archiveCouncilDocuments";
+import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { policyStatusLabel, categoryLabel } from "../lib/archivePolicies";
 import archivePolicyCategoriesData from "../data/archivePolicyCategories.json";
 import type { ArchivePolicyCategory } from "../types/historicalArchive";
@@ -35,7 +36,6 @@ const formerMembers = formerMembersData as FormerMember[];
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const factions = factionsData as { id: string; name: string }[];
-const billVotes = billVotesData as BillVoteItem[];
 const archivePolicyCategories = archivePolicyCategoriesData as ArchivePolicyCategory[];
 
 const linkClass =
@@ -57,6 +57,15 @@ function primaryDetailLinkFor(personType: PersonType, id: string): string {
   }
   const mayor = archiveMayors.find((m) => m.id === id);
   return mayor ? `/mayors/${mayor.slug}` : "/mayors";
+}
+
+/**
+ * 「この人物を比較」への導線。市長は/compare/mayors（市長id基準）、
+ * 議員・元議員は/compare/members（/people/:slugと同じslug基準）へ、この人物を選択済みの状態でリンクする。
+ */
+function compareLinkFor(personType: PersonType, id: string, slug: string): string {
+  if (personType === "mayor") return `/compare/mayors?${buildCompareSearchParams([id]).toString()}`;
+  return `/compare/members?${buildCompareSearchParams([slug]).toString()}`;
 }
 
 export function PeoplePage() {
@@ -235,7 +244,7 @@ export function PersonDetailPage() {
   const primaryDetailLink = primaryDetailLinkFor(personType, id);
   const policies = policiesForPerson(personType, id);
   const councilDocuments = councilDocumentsForPerson(id);
-  const voteCount = billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === id)).length;
+  const voteCount = voteCountForPerson(id);
   const mayorTerms = personType === "mayor" ? termsForMayor(archiveMayorTerms, id) : [];
   const relatedFiscalYears = [
     ...new Set([...policies.flatMap((p) => p.relatedFiscalYears ?? []), ...councilDocuments.flatMap((d) => d.relatedFiscalYears ?? [])]),
@@ -262,13 +271,20 @@ export function PersonDetailPage() {
           {person.factionId ? `／会派：${factionName(person.factionId) ?? person.factionId}` : ""}
         </p>
         <p className="mt-1 text-xs text-on-surface-variant">確認状況：{archiveVerificationStatusLabel(person.verificationStatus)}</p>
-        <Link
-          to={primaryDetailLink}
-          className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
-        >
-          プロフィール・発言記録の詳細を見る
-        </Link>
-        {/* フェーズ9で「この人物を比較」導線（/compare/members?ids=... 等）をここに追加予定。今回は未実装のため表示しない。 */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            to={primaryDetailLink}
+            className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+          >
+            プロフィール・発言記録の詳細を見る
+          </Link>
+          <Link
+            to={compareLinkFor(personType, id, person.slug)}
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            この人物を比較
+          </Link>
+        </div>
       </section>
 
       {personType === "mayor" && (

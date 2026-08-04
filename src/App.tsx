@@ -50,6 +50,9 @@ const ComparePage = lazy(() => import("./pages/ComparePage").then((m) => ({ defa
 const CompareMayorsPage = lazy(() =>
   import("./pages/CompareMayorsPage").then((m) => ({ default: m.CompareMayorsPage })),
 );
+const CompareMembersPage = lazy(() =>
+  import("./pages/CompareMembersPage").then((m) => ({ default: m.CompareMembersPage })),
+);
 const CompareFinancePage = lazy(() =>
   import("./pages/CompareFinancePage").then((m) => ({ default: m.CompareFinancePage })),
 );
@@ -214,6 +217,7 @@ function App() {
               <Route path="/finance/funds" element={<FinanceFundsPage />} />
               <Route path="/compare" element={<ComparePage />} />
               <Route path="/compare/mayors" element={<CompareMayorsPage />} />
+              <Route path="/compare/members" element={<CompareMembersPage />} />
               <Route path="/compare/finance" element={<CompareFinancePage />} />
               <Route path="/compare/population" element={<ComparePopulationPage />} />
               <Route path="/compare/budget" element={<CompareBudgetPage />} />

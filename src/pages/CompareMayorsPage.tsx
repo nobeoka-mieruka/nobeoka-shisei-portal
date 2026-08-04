@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
@@ -6,19 +7,22 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
-import { FinanceTable } from "../components/finance/FinanceTable";
+import { CompareTable } from "../components/compare/CompareTable";
 import { CompareItemPicker } from "../components/compare/CompareItemPicker";
 import { CompareSourceNotice } from "../components/compare/CompareSourceNotice";
+import { FinanceBarChart } from "../components/finance/FinanceBarChart";
 import { LandmarkIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import { archiveVerificationStatusLabel, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
+import { buildPersonIndex, councilDocumentsForPerson, policiesForPerson } from "../lib/people";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const mayorIds = archiveMayors.map((m) => m.id);
+const personIndex = buildPersonIndex();
 
 function latestTermLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string {
   const own = termsForMayor(terms, mayor.id);
@@ -28,11 +32,38 @@ function latestTermLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string
     .join(" / ");
 }
 
+/** 任期の開始・終了年から算出した概算の在籍年数（暦年ベース、実日数ではない）。任期が未確認の場合はnull。 */
+function tenureYearsOrNull(mayor: ArchiveMayor): number | null {
+  const person = personIndex.find((p) => p.personType === "mayor" && p.id === mayor.id);
+  if (!person || person.tenureYears.length === 0) return null;
+  return person.tenureYears.length;
+}
+
+type CountMetricKey = "tenureYears" | "policyCount" | "documentCount";
+
+const countMetrics: { key: CountMetricKey; label: string; unit: string }[] = [
+  { key: "tenureYears", label: "在籍年数（概算）", unit: "年" },
+  { key: "policyCount", label: "関連政策件数", unit: "件" },
+  { key: "documentCount", label: "関連議案・条例・請願・陳情件数", unit: "件" },
+];
+
+function countMetricValue(mayor: ArchiveMayor, key: CountMetricKey): number | null {
+  switch (key) {
+    case "tenureYears":
+      return tenureYearsOrNull(mayor);
+    case "policyCount":
+      return policiesForPerson("mayor", mayor.id).length;
+    case "documentCount":
+      return councilDocumentsForPerson(mayor.id).length;
+  }
+}
+
 export function CompareMayorsPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [metricKey, setMetricKey] = useState<CountMetricKey>("tenureYears");
 
   const selected = parseCompareSelection(searchParams, mayorIds);
   const selectedMayors = selected.map((id) => archiveMayors.find((m) => m.id === id)).filter((m): m is ArchiveMayor => !!m);
@@ -40,6 +71,8 @@ export function CompareMayorsPage() {
   const handleChange = (ids: string[]) => {
     setSearchParams(buildCompareSearchParams(ids), { replace: true });
   };
+
+  const activeMetric = countMetrics.find((m) => m.key === metricKey)!;
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -55,7 +88,7 @@ export function CompareMayorsPage() {
           <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">歴代市長の比較</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          歴代市長を最大4名まで選んで、任期・就任回数を比較できます。市長個人への評価・採点は行っていません。
+          歴代市長を最大4名まで選んで、任期・就任回数・関連する政策や議案の件数を比較できます。市長個人への評価・採点は行っていません。件数は当サイトに登録済みのデータの範囲での集計であり、実際の全件数を保証するものではありません。
         </p>
       </div>
 
@@ -78,28 +111,70 @@ export function CompareMayorsPage() {
       )}
 
       {selectedMayors.length >= MIN_COMPARE_ITEMS && (
-        <SectionCard title="比較結果">
-          <FinanceTable
-            caption="選択した市長の任期・就任回数の比較"
-            rows={selectedMayors}
-            rowKey={(m) => m.id}
-            columns={[
-              { header: "氏名", render: (m) => m.name },
-              { header: "区分", render: (m) => (m.isCurrentMayor ? "現職" : "元職") },
-              { header: "任期", render: (m) => latestTermLabel(m, archiveMayorTerms) },
-              { header: "就任回数", render: (m) => mayorTermCountLabel(m, archiveMayorTerms) },
-              {
-                header: "確認状況",
-                render: (m) =>
-                  m.sourceRefs[0] ? archiveVerificationStatusLabel(m.sourceRefs[0].verificationStatus) : "確認中",
-              },
-            ]}
-          />
+        <>
+          <SectionCard title="比較結果">
+            <CompareTable
+              caption="選択した市長の任期・就任回数・関連件数の比較"
+              rows={selectedMayors}
+              rowKey={(m) => m.id}
+              columns={[
+                { header: "氏名", render: (m) => m.name },
+                { header: "区分", render: (m) => (m.isCurrentMayor ? "現職" : "元職") },
+                { header: "任期", render: (m) => latestTermLabel(m, archiveMayorTerms) },
+                { header: "就任回数", render: (m) => mayorTermCountLabel(m, archiveMayorTerms) },
+                {
+                  header: "在籍年数（概算）",
+                  align: "right",
+                  render: (m) => {
+                    const v = tenureYearsOrNull(m);
+                    return v != null ? `約${v}年` : "確認中";
+                  },
+                },
+                { header: "関連政策件数", align: "right", render: (m) => `${policiesForPerson("mayor", m.id).length}件` },
+                { header: "関連議案等件数", align: "right", render: (m) => `${councilDocumentsForPerson(m.id).length}件` },
+                {
+                  header: "確認状況",
+                  render: (m) =>
+                    m.sourceRefs[0] ? archiveVerificationStatusLabel(m.sourceRefs[0].verificationStatus) : "確認中",
+                },
+              ]}
+            />
 
-          <CompareSourceNotice
-            items={selectedMayors.map((m) => ({ label: m.name, sourceRefs: m.sourceRefs }))}
-          />
-        </SectionCard>
+            <CompareSourceNotice
+              items={selectedMayors.map((m) => ({ label: m.name, sourceRefs: m.sourceRefs }))}
+            />
+          </SectionCard>
+
+          <SectionCard title="件数を選んで比較">
+            <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+              在籍年数は任期開始・終了年から算出した概算（暦年ベース）であり、実日数ではありません。任期が未確認の市長は算出していません。
+            </p>
+            <div className="flex flex-wrap gap-2" role="group" aria-label="比較する件数の切り替え">
+              {countMetrics.map((m) => (
+                <button
+                  key={m.key}
+                  type="button"
+                  onClick={() => setMetricKey(m.key)}
+                  aria-pressed={metricKey === m.key}
+                  className={`min-h-[36px] rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                    metricKey === m.key
+                      ? "bg-primary text-on-primary"
+                      : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
+                  }`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+            <div className="mt-4">
+              <FinanceBarChart
+                points={selectedMayors.map((m) => ({ label: m.name, value: countMetricValue(m, metricKey) }))}
+                formatValue={(v) => (v != null ? `${v}${activeMetric.unit}` : "確認中")}
+                ariaLabel={`選択した市長の${activeMetric.label}の比較棒グラフ。詳細は上の表を参照してください。`}
+              />
+            </div>
+          </SectionCard>
+        </>
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
-import { ChartBarIcon, DocumentIcon, LandmarkIcon, YenIcon } from "../components/icons";
+import { BriefcaseIcon, ChartBarIcon, DocumentIcon, LandmarkIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 
@@ -18,6 +18,7 @@ interface CompareLink {
 
 const compareLinks: CompareLink[] = [
   { to: "/compare/mayors", title: "歴代市長の比較", description: "任期・就任回数・出典を最大4名まで並べて比較します。" },
+  { to: "/compare/members", title: "議員の比較", description: "現職議員・元議員を横断して最大4名まで並べて比較します。" },
   { to: "/compare/finance", title: "年度別財政の比較", description: "人口・予算・市債・基金・財政健全化判断比率をまとめて比較します。" },
   { to: "/compare/population", title: "人口の比較", description: "人口・世帯数を最大4年度まで並べて比較します。" },
   { to: "/compare/budget", title: "予算・決算の比較", description: "一般会計の当初予算・補正後予算・決算額を比較します。" },
@@ -59,6 +60,8 @@ export function ComparePage() {
                 <div className="flex items-center gap-2">
                   {c.to === "/compare/mayors" ? (
                     <LandmarkIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
+                  ) : c.to === "/compare/members" ? (
+                    <BriefcaseIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
                   ) : c.to === "/compare/policies" ? (
                     <DocumentIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
                   ) : (

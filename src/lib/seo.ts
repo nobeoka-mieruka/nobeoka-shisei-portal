@@ -670,6 +670,20 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/compare/members":
+      // 選択した議員によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/members",
+          pageTitle: "議員の比較",
+          description: "現職議員・元議員を横断して最大4名まで選び、会派・在籍状況・関連する政策や議案の件数を比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "議員の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
     case "/compare/policies":
       // 選択した政策によって内容が変わり続けるページのため、常にnoindexにする。
       return makeResult(

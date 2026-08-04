@@ -105,6 +105,7 @@ export const STATIC_NOINDEX_PAGES = [
   "/search",
   "/bills/compare",
   "/compare/mayors",
+  "/compare/members",
   "/compare/policies",
   "/compare/finance",
   "/compare/population",
