@@ -1,0 +1,21 @@
+[
+  {
+    "id": "mayor-01",
+    "slug": "miura-hisatomo",
+    "name": "三浦 久知",
+    "nameKana": "みうら ひさとも",
+    "status": "current",
+    "profile": "昭和57年日向市生まれ（本籍地：延岡市北方町美々地）。県立日向高等学校卒業。中央大学商学部卒業。早稲田大学大学院公共経営研究科修了。宮崎県庁、延岡市役所を経て、令和7年7月、第29代延岡市長に就任。",
+    "isCurrentMayor": true,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://hisatomo-m.jp/",
+        "sourceTitle": "三浦ひさとも 公式サイト",
+        "sourceOrganization": "本人（後援会）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存 src/data/mayor.json のプロフィール・出典URLを延岡市政アーカイブ用に移行したもの。アーカイブ層としての個別確認日は未実施のため needsReview としている。"
+      }
+    ]
+  }
+]

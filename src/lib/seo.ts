@@ -23,6 +23,7 @@ import compensationComparisonData from "../data/compensationComparison.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
+import archiveMayorsData from "../data/archiveMayors.json";
 import type {
   BillVoteItem,
   CompensationComparisonEntry,
@@ -37,6 +38,7 @@ import type {
   MayorPromisesData,
   Theme,
 } from "../types";
+import type { ArchiveMayor } from "../types/historicalArchive";
 import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
@@ -85,6 +87,7 @@ const themes = themesData as Theme[];
 const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
 const compensationComparison = compensationComparisonData as CompensationComparisonEntry[];
+const archiveMayors = archiveMayorsData as ArchiveMayor[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -404,6 +407,26 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
     }
+
+    case "/mayors":
+      return makeResult(
+        {
+          path: "/mayors",
+          pageTitle: "歴代市長（延岡市政アーカイブ）",
+          description: "延岡市長の任期・経歴を公式資料で確認できた範囲で整理しています。市長個人への評価・採点は行っていません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "歴代市長" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-mayors-jsonld",
+              name: "延岡市 歴代市長データ",
+              description: "延岡市長の任期・経歴を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/mayors`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
 
     case "/mayor/policy-progress":
       return makeResult(
@@ -873,6 +896,27 @@ function themeDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/** /mayors/:slug */
+function mayorDetailSeo(slug: string, options?: SeoOptions): SeoResult {
+  const archiveMayor = archiveMayors.find((m) => m.slug === slug);
+  if (!archiveMayor) return notFound(`/mayors/${slug}`, "市長情報");
+
+  const url = `${SITE_URL}/mayors/${slug}`;
+  const sameAs = archiveMayor.sourceRefs.map((r) => r.sourceUrl).filter((u): u is string => Boolean(u));
+
+  return makeResult(
+    {
+      path: `/mayors/${slug}`,
+      pageTitle: `${archiveMayor.name}｜歴代市長`,
+      description: `延岡市長${archiveMayor.name}氏の任期・経歴を公式資料で確認できた範囲で掲載しています。`,
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "歴代市長", to: "/mayors" }, { label: archiveMayor.name }],
+      extraJsonLd: [personJsonLd("person-jsonld", archiveMayor.name, url, sameAs)],
+      mainEntity: { "@type": "Person", name: archiveMayor.name, url },
+    },
+    options,
+  );
+}
+
 /** /mayor/policy-progress/:id */
 function promiseSeo(id: string, options?: SeoOptions): SeoResult {
   const promise = mayorPromises.find((p) => p.id === id);
@@ -1001,6 +1045,7 @@ const PROMISE_RE = /^\/mayor\/policy-progress\/([^/]+)$/;
 const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
 const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
+const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
 
 /**
  * 現在のURLパス（クエリ・ハッシュを除く）から、そのページのSEO情報を返す。
@@ -1046,6 +1091,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const pressConferenceMatch = path.match(PRESS_CONFERENCE_RE);
   if (pressConferenceMatch) return pressConferenceSeo(safeDecodeURIComponent(pressConferenceMatch[1]), options);
+
+  const mayorDetailMatch = path.match(MAYOR_DETAIL_RE);
+  if (mayorDetailMatch) return mayorDetailSeo(safeDecodeURIComponent(mayorDetailMatch[1]), options);
 
   return notFound(path, "ページが見つかりません");
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mayor-01-term-01",
+    "mayorId": "mayor-01",
+    "termStart": "2025-07-22",
+    "termEnd": null,
+    "termNumber": 1,
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://hisatomo-m.jp/",
+        "sourceTitle": "三浦ひさとも 公式サイト",
+        "sourceOrganization": "本人（後援会）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存 src/data/mayor.json career配列の「令和7年7月22日 第29代延岡市長就任」を基に登録。前任・後任市長、選挙区分、就任当時人口は未確認。"
+      }
+    ]
+  }
+]

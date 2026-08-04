@@ -18,6 +18,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/", label: "ホーム" },
       { to: "/", label: "市議会議員一覧" },
       { to: "/mayor", label: "市長情報" },
+      { to: "/mayors", label: "歴代市長（アーカイブ）" },
       { to: "/dashboard", label: "ダッシュボード" },
       { to: "/finance", label: "延岡市の財政" },
     ],

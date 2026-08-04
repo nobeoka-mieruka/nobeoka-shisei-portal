@@ -67,6 +67,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/policy-progress",
   "/mayor/entertainment-expenses",
   "/mayor/press-conferences",
+  "/mayors",
   "/finance",
   "/dashboard",
   "/compensation",
@@ -110,6 +111,7 @@ function loadData() {
   const updateHistory = readJson("src/data/updateHistory.json");
   const councilSpeechSummaries = readJson("src/data/councilSpeechSummaries.json");
   const themes = readJson("src/data/themes.json");
+  const archiveMayors = readJson("src/data/archiveMayors.json");
   return {
     members,
     billVotes,
@@ -126,6 +128,7 @@ function loadData() {
     updateHistory,
     councilSpeechSummaries,
     themes,
+    archiveMayors,
   };
 }
 
@@ -169,6 +172,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.mayorPressConferences.map((c) => c.verifiedAt))],
         ["src/data/mayorPressConferences.ts"],
+      );
+    case "/mayors":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.archiveMayors.flatMap((m) => [m.lastVerifiedAt, ...m.sourceRefs.map((r) => r.sourcePublishedDate)]))],
+        ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json"],
       );
     case "/finance":
       return resolveLastmod(path, [data.financeDashboard.lastVerified], ["src/data/financeDashboard.json"]);
@@ -264,6 +273,17 @@ export function getIndexableRoutes() {
   for (const { memberId, speech } of publishedSpeeches(councilSpeechSummaries)) {
     const path = `/members/${memberId}/questions/${speech.id}`;
     urls.push({ path, lastmod: resolveLastmod(path, [speech.verifiedAt, speech.date], ["src/data/councilSpeechSummaries.json"]) });
+  }
+  for (const m of data.archiveMayors) {
+    const path = `/mayors/${m.slug}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [m.lastVerifiedAt, maxValidDate(m.sourceRefs.map((r) => r.sourcePublishedDate))],
+        ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json"],
+      ),
+    });
   }
   for (const t of data.themes) {
     const path = `/themes/${t.slug}`;
