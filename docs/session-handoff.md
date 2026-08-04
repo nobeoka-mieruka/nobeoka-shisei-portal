@@ -1,4 +1,56 @@
-# セッション引き継ぎメモ（2026-08-05 更新・公開品質改善フェーズA〜H実施、/data-status新設）
+# セッション引き継ぎメモ（2026-08-05 更新・本セッション分をコミット・push・本番デプロイ完了）
+
+## 2026-08-05（同日6回目）：これまでの成果をコミット・push・本番デプロイ
+
+同日1〜5回目（歴代市長アーカイブ拡充、一般質問アーカイブの/questions反映、公開品質改善
+フェーズA・B・D・E・F・G・H）の成果を、ユーザー指示によりまとめてpush・本番デプロイした。
+
+### コミット・デプロイ
+
+- `dc29171` fix: close 2025 mayor term gap with acting-mayor record（歴代市長、同日3回目分）
+- `d0b3c4d` feat: connect existing verified general-question archive to /questions（同日4回目分）
+- `00fe436` feat: improve public archive quality and navigation（フェーズA-I、同日5回目分）
+- `715e2d9` fix: correct mayor.json inauguration date to match verified official source
+  （本番巡回確認中に発見：`/mayor`ページの現職市長プロフィール（`src/data/mayor.json`）の
+  就任日が「令和7年7月22日」のまま残っていた。歴代市長アーカイブ側は既に公式資料で
+  「令和7年7月20日」と確認・修正済みだったが、現職プロフィール側への反映が漏れていた。）
+
+4コミットとも`git push origin main`でpush済み。GitHub Actions/Cloudflare Pages
+Git連携の自動デプロイが両コミットとも`check-runs`で`conclusion: success`となったことを
+`gh api`で確認した。
+
+### 本番確認（`https://nobeoka-shisei-portal.pages.dev/`）
+
+WebFetchで以下を確認：トップページ（「このサイトでできること」表示、議員一覧）、
+`/dashboard`、`/mayors`（歴代市長14名、スタットカード、山本一丸の職務代理表示）、
+`/mayors/yamamoto-kazumaru`、`/mayor`（現職市長プロフィール）、`/questions`
+（確認済み一般質問アーカイブ、12/13会期）、`/questions/gq2026-06-m24`（詳細ページ）、
+`/members/m01`（議員詳細）、`/updates`、`/data-status`（新規）。いずれも正常表示を確認。
+
+`/mayor`ページの日付修正について、WebFetch自体の15分キャッシュにより初回再確認時は
+修正前の内容が返ってきたが、ローカルの`npm run build`成果物（デプロイ内容と同一）で
+「令和7年7月20日」が正しく3箇所とも反映されていることを直接確認済み。
+
+スマートフォン幅表示は、今回追加したUI（StatCard・カードグリッド等）がすべて既存の
+Tailwindレスポンシブパターン（`grid-cols-2 sm:grid-cols-4`等、サイト全体で一貫して
+使用済み）を踏襲していることを確認したのみで、実機・ブラウザでの目視確認は未実施。
+
+### 現在も作業途中の項目
+
+- 歴代市長の任期空白13件（1937〜1994年）：未解消。
+- `/bills`のプリレンダリング特別扱い（`/bills/votes`へのredirect）とBillsArchivePageの
+  ルート重複：既存仕様として温存、ユーザー判断待ち。
+- 一般質問アーカイブの現議員任期（2023-04-23）より前への遡及拡張：未着手。
+- 元議員アーカイブの本格拡充（会派履歴・委員会履歴等）：未着手。
+- LastUpdatedコンポーネントの全ページ展開：`/data-status`・`/mayors`のみ適用済み。
+
+### 次回優先して行う作業
+
+1. 歴代市長の任期空白13件の追加調査（延岡市史・官報等のオフライン資料）。
+2. `/bills`ルート重複の扱いをユーザーに確認。
+3. 一般質問アーカイブの過去任期への拡張方針の検討。
+
+---
 
 ## 2026-08-05（同日5回目）：一般質問以外の公開品質・ナビゲーション・データ収録状況の改善
 
