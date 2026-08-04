@@ -5,8 +5,9 @@
     "termStart": "2025-07-22",
     "termEnd": null,
     "termNumber": 1,
+    "electionDate": "2025-07-20",
     "populationAtStart": null,
-    "previousMayorId": null,
+    "previousMayorId": "mayor-03",
     "nextMayorId": null,
     "sourceRefs": [
       {
@@ -15,7 +16,173 @@
         "sourceOrganization": "本人（後援会）",
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
-        "notes": "既存 src/data/mayor.json career配列の「令和7年7月22日 第29代延岡市長就任」を基に登録。前任・後任市長、選挙区分、就任当時人口は未確認。"
+        "notes": "既存 src/data/mayor.json career配列の「令和7年7月22日 第29代延岡市長就任」を基に登録。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/26032",
+        "sourceTitle": "延岡市長選挙 - 2025年07月20日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "投票日2025-07-20（告示2025-07-13）、三浦久知が20,052票（36.3%）で当選、次点ごとう哲朗20,016票（36.2%）、吉本やすし15,196票（27.5%）、36票差の接戦だったことを確認。前任市長を読谷山洋司（mayor-03、2025-06-30付辞職）と特定。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-02-term-01",
+    "mayorId": "mayor-02",
+    "termStart": "2006-02-06",
+    "termEnd": "2010-02-05",
+    "termNumber": 1,
+    "electionDate": "2006-01-29",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/首藤正治",
+        "sourceTitle": "首藤正治 - Wikipedia",
+        "sourceOrganization": "Wikipedia（全国歴代知事・市長総覧等を出典として明記）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "就任日2006-02-06を確認。任期満了日（2010-02-05）は、次の任期の選挙日（2010-01-24、下記出典）、延岡市長の任期が地方自治法上4年であること、同市の市長就任日が例年2月6日である実績パターン（読谷山洋司・三浦久知の任期からも同パターンを確認）から機械的に算出した。前任市長（櫻井哲雄）は今回未登録。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/jichitai/3791/head",
+        "sourceTitle": "宮崎県延岡市長の選挙一覧 - 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "2006年1月29日投票（告示2006年1月22日）の延岡市長選挙の実施を確認（当選者名はこのページ単体には記載なし。上記Wikipedia出典と組み合わせて首藤正治の初当選選挙と判断）。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-02-term-02",
+    "mayorId": "mayor-02",
+    "termStart": "2010-02-06",
+    "termEnd": "2014-02-05",
+    "termNumber": 2,
+    "electionDate": "2010-01-24",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/首藤正治",
+        "sourceTitle": "首藤正治 - Wikipedia",
+        "sourceOrganization": "Wikipedia（全国歴代知事・市長総覧等を出典として明記）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "3期12年（2006-02-06〜2018-02-05）の記述から、2期目であることを確認。個別の期日は選挙日（2010-01-24）と4年任期・2月6日就任パターンから機械的に算出した。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/jichitai/3791/head",
+        "sourceTitle": "宮崎県延岡市長の選挙一覧 - 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "2010年1月24日投票（告示2010年1月17日）の延岡市長選挙の実施を確認（当選者名はこのページ単体には記載なし）。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-02-term-03",
+    "mayorId": "mayor-02",
+    "termStart": "2014-02-06",
+    "termEnd": "2018-02-05",
+    "termNumber": 3,
+    "electionDate": "2014-01-26",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-03",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/首藤正治",
+        "sourceTitle": "首藤正治 - Wikipedia",
+        "sourceOrganization": "Wikipedia（全国歴代知事・市長総覧等を出典として明記）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "3期目・任期満了日2018-02-05（12年間の市長職を終えた旨の記述）を確認。就任日（2014-02-06）は選挙日（2014-01-26）と4年任期・2月6日就任パターンから機械的に算出した。"
+      },
+      {
+        "sourceUrl": "https://go2senkyo.com/local/jichitai/3791/head",
+        "sourceTitle": "宮崎県延岡市長の選挙一覧 - 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "2014年1月26日投票（告示2014年1月19日）の延岡市長選挙の実施を確認（当選者名はこのページ単体には記載なし）。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-03-term-01",
+    "mayorId": "mayor-03",
+    "termStart": "2018-02-06",
+    "termEnd": "2022-02-05",
+    "termNumber": 1,
+    "electionDate": "2018-01-28",
+    "electionType": "通常選挙",
+    "populationAtStart": null,
+    "previousMayorId": "mayor-02",
+    "nextMayorId": null,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/17033",
+        "sourceTitle": "延岡市長選挙 - 2018年01月28日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "投票日2018-01-28（告示2018-01-21、事由「任期満了」）、読谷山洋司26,094票（50.5%）で当選、次点永山英也25,527票（49.5%）を確認。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/読谷山洋司",
+        "sourceTitle": "読谷山洋司 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "就任日2018-02-06、任期満了日2022-02-05を確認。"
+      }
+    ]
+  },
+  {
+    "id": "mayor-03-term-02",
+    "mayorId": "mayor-03",
+    "termStart": "2022-02-06",
+    "termEnd": "2025-06-30",
+    "termNumber": 2,
+    "electionDate": "2022-01-23",
+    "electionType": "通常選挙",
+    "populationAtStart": null,
+    "previousMayorId": null,
+    "nextMayorId": "mayor-01",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/22481",
+        "sourceTitle": "延岡市長選挙 - 2022年01月23日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "投票日2022-01-23（告示2022-01-16、事由「任期満了」）、現職読谷山洋司が31,760票（56.9%）で再選、新人うちだりさ24,088票を確認。"
+      },
+      {
+        "sourceUrl": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "sourceTitle": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため",
+        "sourceOrganization": "宮崎日日新聞（Miyanichi e-press）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "2025年6月30日付での辞職（退任）を報道で確認。"
       }
     ]
   }

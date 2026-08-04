@@ -167,6 +167,15 @@ function loadData() {
   };
 }
 
+/**
+ * src/lib/archiveTimeline.ts の fiscalYearOfIsoDate と同じ定義（会計年度は4月始まり）。
+ * このスクリプト（.mjs）からはビルド前のsrc/配下TypeScriptを直接importできないためミラー実装する。
+ */
+function fiscalYearOfIsoDate(iso) {
+  const [year, month] = iso.split("-").map(Number);
+  return month >= 4 ? year : year - 1;
+}
+
 /** archiveFiscalYears.json内の全sourceRefsから、確認可能な日付だけを平坦化して集める。 */
 function archiveFiscalYearDates(archiveFiscalYears) {
   return archiveFiscalYears.flatMap((y) => [
@@ -472,6 +481,27 @@ export function getIndexableRoutes() {
         [...archiveFiscalYearDates([y]), ...overlappingMayorTermDates],
         ["src/data/archiveFiscalYears.json", "src/data/archiveMayorTerms.json", "src/data/generalQuestions.json", "src/data/archiveCouncilDocuments.json", "src/data/archivePolicies.json"],
       ),
+    });
+  }
+  // archiveFiscalYears.jsonに存在しない年度でも、archiveMayorTerms.jsonの任期開始・終了が
+  // その年度にかかる場合はページを生成する（TimelineYearPage.tsxは財政データが無い年度でも
+  // 市長任期のみで表示できる設計のため）。生成しないと、/timeline・市長詳細ページの
+  // 「年表で見る」リンクが実在しないURLを指してしまう（プリレンダリング対象外＝本番404）。
+  const financeCoveredFiscalYears = new Set(data.archiveFiscalYears.map((y) => y.fiscalYear));
+  const mayorTermFiscalYears = new Set();
+  for (const t of data.archiveMayorTerms) {
+    mayorTermFiscalYears.add(fiscalYearOfIsoDate(t.termStart));
+    if (t.termEnd) mayorTermFiscalYears.add(fiscalYearOfIsoDate(t.termEnd));
+  }
+  for (const fiscalYear of mayorTermFiscalYears) {
+    if (financeCoveredFiscalYears.has(fiscalYear)) continue;
+    const path = `/timeline/${fiscalYear}`;
+    const overlappingMayorTermDates = data.archiveMayorTerms
+      .filter((t) => t.termStart <= `${fiscalYear + 1}-03-31` && (t.termEnd === null || t.termEnd >= `${fiscalYear}-04-01`))
+      .flatMap((t) => t.sourceRefs.map((r) => r.sourcePublishedDate));
+    urls.push({
+      path,
+      lastmod: resolveLastmod(path, overlappingMayorTermDates, ["src/data/archiveMayorTerms.json"]),
     });
   }
 

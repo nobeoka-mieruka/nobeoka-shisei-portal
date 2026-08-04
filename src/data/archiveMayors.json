@@ -17,5 +17,65 @@
         "notes": "既存 src/data/mayor.json のプロフィール・出典URLを延岡市政アーカイブ用に移行したもの。アーカイブ層としての個別確認日は未実施のため needsReview としている。"
       }
     ]
+  },
+  {
+    "id": "mayor-02",
+    "slug": "sudo-masaharu",
+    "name": "首藤 正治",
+    "nameKana": "すどう まさはる",
+    "status": "former",
+    "profile": "延岡市長を3期12年務めた（2006年2月6日〜2018年2月5日）。2006年の市長選で現職の櫻井哲雄氏を破り初当選。2017年に次期市長選への不出馬・引退を表明し、2018年2月に退任。退任後は大正大学客員教授に就任。",
+    "isCurrentMayor": false,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/首藤正治",
+        "sourceTitle": "首藤正治 - Wikipedia",
+        "sourceOrganization": "Wikipedia（記事内に「全国歴代知事・市長総覧」（日外アソシエーツ、2022年）・西日本新聞等の出典が明記されている）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "氏名・在任期間（2006-02-06〜2018-02-05、3期12年）・初当選の経緯・引退の経緯・前任市長（櫻井哲雄）・後任市長（読谷山洋司）の記述を確認。Wikipedia自体は二次資料のため、市公式資料（市政要覧・市史等）による裏付けは今回未実施。前任の櫻井哲雄氏は今回未登録（別途調査が必要）。"
+      },
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/読谷山洋司",
+        "sourceTitle": "読谷山洋司 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "後任市長・読谷山洋司の記事内で、前任市長として首藤正治（2006-02-06〜2018-02-05）の記載があり、上記出典と相互に一致することを確認。"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-05"
+  },
+  {
+    "id": "mayor-03",
+    "slug": "yomiyama-yoji",
+    "name": "読谷山 洋司",
+    "nameKana": "よみやま ようじ",
+    "status": "former",
+    "profile": "延岡市長を2期務めた（2018年2月6日〜2025年6月30日）。旧自治省（総務省）官僚、岡山市副市長等を経て、2018年の市長選で初当選。2022年に再選。2025年6月、肺・膵臓の腫瘍発見による健康上の理由から任期途中での辞職を表明し、同年6月30日付で退任した。",
+    "isCurrentMayor": false,
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://ja.wikipedia.org/wiki/読谷山洋司",
+        "sourceTitle": "読谷山洋司 - Wikipedia",
+        "sourceOrganization": "Wikipedia",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "氏名・経歴・在任期間（2018-02-06〜2025-06-30、2期）・前任市長（首藤正治）・後任市長（三浦久知）・辞職の経緯を確認。"
+      },
+      {
+        "sourceUrl": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "sourceTitle": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため",
+        "sourceOrganization": "宮崎日日新聞（Miyanichi e-press）",
+        "accessedAt": "2026-08-05",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "2025年6月2日の記者会見で、健康上の理由により2025年6月30日付で市長を辞職すると発表したことを報道で確認。複数の報道機関（UMK、琉球新報、宮崎日日新聞等）が同日程を報じている。"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-05"
   }
 ]
