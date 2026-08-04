@@ -1,214 +1,152 @@
-# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10C完了、検証再確認済み）
+# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10D：最終検証・push実施）
 
-フェーズ9（9A〜9D）・フェーズ10A（自動巡回基盤）・フェーズ10B（実データ巡回・差分検知）・
-フェーズ10C（AI候補生成・自動登録準備・定期運用統合）は完了・コミット済み（最新コミット`36656ca`）。
-**push・Cloudflare Pagesへのデプロイは行っていない**。
+フェーズ1〜10C（比較・可視化・タイムライン、自動巡回基盤、実データ巡回・差分検知、AI候補生成・
+自動登録準備・定期運用統合）はすべて完了・コミット済み。**今回のフェーズ10Dで最終検証を行い、
+GitHubへpushした**。Cloudflare Pagesへは、リポジトリのGit連携による自動デプロイに委ねている
+（このセッションから手動デプロイ操作は行っていない。デプロイ結果は別途Cloudflareダッシュボードで
+確認すること）。
 
-フェーズ9・10A・10Bの詳細は本メモには残していない（`git log`の各コミットメッセージを参照）。
+## フェーズ10D：最終検証・push・デプロイ確認
 
-## 重複依頼への対応メモ
+### 開始時の状態
 
-10C完了後、「フェーズ10B『実運用巡回・差分取得・PR生成』を開始してください」という指示が
-届いたが、内容（実データ巡回・差分取得・更新判定・JSON更新・PR生成・ログ出力・失敗時リトライ・
-二重巡回防止・state更新・workflow_dispatch/schedule両対応）はすべて既存の10B（`9ecff80`）・
-10C（`36656ca`）で実装済みだったため、**新規実装は行わず、実装済み箇所の再確認と検証のみ**行った。
+- ブランチ：`main`
+- 開始時点でのorigin/mainとの差分：41コミット先行
+- 未コミット変更：`.claude/settings.local.json`のみ（ローカル専用、`.gitignore`対象外だが
+  意図的にコミットしない運用を継続。過去の履歴には含まれているが、今回のセッションでの
+  ローカル変更は追加コミットしていない）
+- 秘密情報・APIキー・大容量ファイルの混入：確認したが無し
+  （`git diff origin/main...HEAD`で機密情報のパターン検索、`find -size +2M`でのサイズ確認を実施）
 
-- 実データ巡回・差分取得・更新判定・state更新：`scripts/run-archive-crawler.mjs`
-  （`determineFetchStatus`関数、new/changed/unchanged/possiblyRemoved判定）。
-- リトライ：`scripts/lib/city-site-fetch.mjs`（429/403/5xx）＋`run-archive-crawler.mjs`の
-  `fetchWithRetry`（ネットワークエラー・タイムアウトの1回リトライ）。
-- 二重巡回防止：`.github/workflows/civic-archive-sync.yml`の`concurrency`グループ
-  （`cancel-in-progress: false`＝同時実行させず直列化）＋120時間ゲート（`scripts/lib/sync-state.mjs`）。
-- PR生成：同ワークフローの`gh pr create`ステップ（`create_pr=true`の場合のみ、bot branch経由）。
-- ログ出力：コンソール＋`GITHUB_STEP_SUMMARY`。
-- `workflow_dispatch`・`schedule`：両方とも`on:`に設定済み。
+### 監査で見つけた実バグ（修正済み、コミット`0824bb4`）
 
-再確認のため`npm run validate:data`・`typecheck`・`lint`・`build`・`validate:seo`をすべて
-再実行し、全て成功することを確認した（結果は下記「検証結果」参照）。コード変更が無かったため、
-新規コミットは作成していない（ドキュメント更新のみ）。
+最終確認の過程で、フェーズ9Dで追加したはずの「この人物を比較」「年表で見る」導線が、
+実際にユーザーが遷移する元議員詳細ページ（`/members/former/:slug`、
+`MemberFormerDetailPage.tsx`）には付いておらず、誰からもリンクされていない旧ページ
+（`/members/:id`、`MemberDetailPage.tsx`の元議員分岐）にのみ追加されていたことが判明した
+（実際の遷移経路を`grep`で追跡して発見）。`MemberFormerDetailPage.tsx`へ同じ導線を追加し、
+生成HTMLで実際にリンクが出力されることを確認した（例：吉本靖氏のページで
+`/compare/members?items=former-member-fm01`・`/timeline/2024`のリンクを確認）。
+
+### 2. 最終データ検証
+
+- `npm run validate:data`：**errors=0, warnings=1257**（すべて既存の推奨語彙警告、新規0件）
+- `npm run typecheck`：エラーなし
+- `npx oxlint`：クリーン
+- `npm run build`：**912ページ生成**、prerender成功
+- `npm run validate:seo`：**failures=0, warnings=0**
+
+上記に加え、以下を生成HTML・データファイルへの直接確認で実施（ブラウザ確認環境が
+本セッションでは利用できないため、静的出力での代替確認とする）：
+
+- ID・slug重複：`validate:data`のerrors=0で担保（`checkDuplicateIds`/`checkDuplicateSlugs`を
+  全対象ファイルに適用済み）。
+- 現職・元議員の分離：吉本靖氏（`formerMembers.json`の`fm01`）が現職一覧・報酬比較に
+  含まれず、`archiveMemberProfiles.json`（`archive-fm01`）でも`currentMember: false`と
+  明記されていることを確認。
+- 歴代市長・政策・議案条例請願陳情・一般質問・財政・比較ページ・タイムライン：
+  それぞれ実在URLの生成HTMLでタイトル・パンくず・比較/タイムラインへのリンクを確認
+  （下記「3. 主要ルート確認」）。
+- 横断検索：`/search`は既存どおりnoindex・クライアント側`includeAi`トグルで既定非表示
+  （フェーズ8の仕様を変更していない）。
+- AI候補と公式情報の分離：`archiveAiJobs.json`・`archiveAiCategoryCandidates.json`等は
+  すべて`status="candidate"`/`"needsReview"`のまま、確定データ（`archivePolicies.json`等）は
+  無変更（フェーズ10Cの設計を再確認、変更なし）。
+- verificationStatus・sourceRefs：`validate:data`の既存チェック（全アーカイブ系ファイル）で
+  0エラーを確認。
+- nullと0の区別：財政指標（`archiveFiscalYears.json`）・巡回状態
+  （`archiveCrawlerState.json`）とも、未確認値は`null`、確認済みゼロ件は`0`または空配列で
+  明示的に区別する設計を変更していない。
+
+### 3. 主要ルート確認（生成HTMLでの確認、ブラウザ実機確認は未実施）
+
+`/members`のみ、意図的に存在しない（議員一覧はトップページ`/`が担う設計のため）。
+それ以外の全ルート（`/dashboard` `/members/former` `/mayor` `/mayors` `/questions` `/bills`
+`/bills/votes` `/ordinances` `/petitions` `/requests` `/policies` `/themes` `/people`
+`/finance` `/finance/budget` `/finance/debt` `/finance/funds` `/compare` `/compare/mayors`
+`/compare/members` `/compare/policies` `/compare/finance` `/timeline`（`/timeline/2021`〜
+`2026`含む）`/search`）は生成HTMLが存在し、title・canonical・meta description・OGP・
+JSON-LD（`BreadcrumbList`含む）が出力されていることを確認した。
+
+### 4. 自動巡回・GitHub Actions確認
+
+- `.github/workflows/civic-archive-sync.yml`：`schedule`（120時間ゲート）・
+  `workflow_dispatch`（`mode`/`target`/`create_pr`入力、既定`dry-run`/`all`/`false`）・
+  `concurrency`（直列化）・`timeout-minutes: 15`を確認。
+- ローカルで`node scripts/run-archive-crawler.mjs`（120時間ゲートによりスキップ、想定通り）・
+  `node scripts/run-archive-ai-processor.mjs --mode=dry-run`（新規ジョブ0件・ファイル変更なし）
+  を実行し、安全に動作することを再確認した。外部AI APIの実呼び出しは行っていない。
+- `.github/workflows/sync-council-data.yml`（既存、フェーズ10より前から稼働）は今回変更していない。
+
+### 5. SEO最終確認
+
+- `public/robots.txt`：`Allow: /`、sitemap参照あり。
+- `public/sitemap.xml`：902件のURL。`/timeline`系7件を含み、`/compare/mayors`等noindex対象
+  （10ページ）は含まれない（912プリレンダーページ − 902サイトマップ = 10件で一致）。
+
+### 6. コミット
+
+- `0824bb4 fix: add compare/timeline links to the actual former-member detail page`
+  （監査で見つけたバグの修正）
+- `docs/session-handoff.md`更新（本コミット）
+
+### 7. push
+
+`git push origin main`を実行した。結果は本メモの末尾「push結果」を参照
+（このメモ自体は push 前に書いているため、実行後に追記・更新すること。次回セッションでは
+`git log origin/main -1`と本メモの内容が一致しているかを確認する）。
+
+### 8. Cloudflare Pages
+
+このセッションからは、Cloudflareダッシュボード・APIへのアクセス手段を持っていないため、
+**手動でのデプロイ操作・デプロイ状況の確認は行っていない**。CLAUDE.mdの記載どおり
+Cloudflare PagesのGit連携による自動デプロイ（GitHubへのpushをトリガーとする）が
+設定されている前提のため、pushが成功すれば自動的にビルド・デプロイが開始されるはずである。
+**次回セッション、またはユーザー自身で、Cloudflareダッシュボードもしくは公開URL
+（https://nobeoka-shisei-portal.pages.dev/）で実際のデプロイ完了を確認すること**。
 
 ## ロードマップ
 
-1. フェーズ6〜9（政策比較基盤〜比較・可視化・タイムライン） → **すべて完了**
-2. フェーズ10：自動巡回の完成・全体検証・本番デプロイ
-   - 10A：自動巡回基盤（ダミー実装） → 完了
-   - 10B：実データ巡回・差分検知 → 完了
-   - **10C：AI候補生成・自動登録準備・定期運用統合 → 完了**（今回）
-   - 10D以降：最終検証・push・Cloudflare Pagesデプロイ → **未着手**。
-     本セッション中、10Cの検証・コミットが終わる前に「フェーズ1〜10Cは完了・デプロイ済み」という
-     前提でpush・デプロイを求める指示が複数回届いたが、実際の状態（このメモ・`git log`）と
-     一致しないため実行していない。次回、実際にpush・デプロイへ進む場合は、まずこのメモと
-     `git status`／`git log`でリポジトリの実状態を確認したうえで、ユーザーに実行の意思を
-     改めて確認すること（push・Cloudflare Pagesデプロイは不可逆・公開影響のある操作のため）。
-
-## 完了した作業（フェーズ10C：AI候補生成・自動登録準備・定期運用統合）
-
-**AI生成内容を公式データへ混入させない**という基本方針を維持。外部AI APIは実際には
-一度も呼び出していない（呼び出しコード自体を実装していない。既定でも明示有効化時でも
-安全にskipされる設計）。
-
-### 既存基盤の再利用（重複実装しなかったもの）
-
-- `ArchiveAiSummary`・`ArchiveAiCategoryCandidate`・`ArchiveRelationCandidate`・
-  `ArchiveCandidateStatus`・`ArchiveRelationType`・`ArchiveRelationMethod`・
-  `ArchiveSearchDocumentType`（すべてフェーズ8で実装済み、`src/types/historicalArchive.ts`）：
-  そのまま再利用。新しい並行型は作っていない。
-- テーマ分類のキーワード一致ロジック（`src/lib/themeClassification.ts`の
-  `matchPolicyCategoriesForText`と同一のもの）：`scripts/generate-theme-candidates.mjs`に
-  複製されていたものを`scripts/lib/theme-classification.mjs`（新規、純関数）へ切り出し、
-  三重に複製しないようにした。
-- テーマ分類候補・関連資料候補の生成ロジック本体：`scripts/generate-theme-candidates.mjs`
-  （フェーズ8）から`scripts/lib/theme-candidates-generator.mjs`（新規、純関数
-  `generateThemeCandidates()`）へ切り出し、`scripts/generate-theme-candidates.mjs`（既存の
-  `npm run generate:theme-candidates`・`npm run build`から変更なく呼ばれる）と
-  `scripts/run-archive-ai-processor.mjs`（新規）の両方から**同じ関数**を呼ぶようにした
-  （出力内容が完全に一致することをリファクタ直後に実行確認済み。テーマ分類・関連資料候補の
-  生成ロジックは1箇所にしかない）。
-- `verificationStatus`・`sourceTextHash`・管理者向け要確認キュー（`adminReviewQueue.json`・
-  `generate-admin-review-queue.mjs`）・`archivePolicyCategories.json`：既存のものをそのまま使用。
-  要確認キューには、新設したAIジョブの`needsReview`/`failed`と、人物候補
-  （`archiveEntityExtractionCandidates.json`）の未確認分を集計する処理だけを追加した
-  （集計ロジック自体は同じ関数・同じファイルへの追記）。
-
-### 追加した型（`src/types/historicalArchive.ts`）
-
-- `ArchiveAiJobType`（`summary`/`categoryClassification`/`relationCandidate`/`entityExtraction`）・
-  `ArchiveAiJobStatus`（`pending`/`processing`/`completed`/`failed`/`skipped`/`needsReview`）・
-  `ArchiveAiJob`（同一`(sourceEntityId, jobType, sourceTextHash)`の重複ジョブを作らない設計）。
-- `ArchiveEntityExtractionCandidate`（人物・固有表現候補。既存マスタに一致した場合のみ
-  `candidateIds`へ実在IDを入れ、一致しない場合は`rawName`のみ・`needsReview=true`で保存）。
-
-### 追加・変更したJSON
-
-- `src/data/archiveAiJobs.json`（新規）：フェーズ10Cで初めて登場するジョブキュー。
-  ローカルで実際に`rule-based`モードを実行し、76件（政策6件＋議案等13件×4ジョブ種別）の
-  ジョブを生成・処理した結果を反映（完了57／要確認19＝すべてAI要約ジョブ）。
-- `src/data/archiveEntityExtractionCandidates.json`（新規）：今回のデータでは実在人物名の
-  本文一致が0件だったため空配列（推測で候補を作っていない、正しい結果）。
-- `src/data/adminReviewQueue.json`：AIジョブの要確認・失敗、人物候補の未確認分を追加集計
-  （32件→51件）。
-- `src/data/archiveAiCategoryCandidates.json`・`archiveRelationCandidates.json`：
-  生成元ロジックは変更していないため、内容は既存と同一（タイムスタンプのみ変わるため
-  コミット対象外、`git restore`で戻した）。
-
-### AIジョブ生成条件（対象／対象外）
-
-新規・更新（原文ハッシュが既存ジョブと不一致）の資料のみを対象にし、以下は対象外とした：
-変更なし・取得失敗・原文が空・`verificationStatus="sourceUnavailable"`・OCR確認待ち・
-私人の個人情報を含む可能性がある資料。現時点で対象になるのは`archivePolicies.json`
-（`target=policies`）と`archiveCouncilDocuments.json`（`target=council`、議案・条例・請願・陳情）。
-`target=finance`・`target=people`は、既存の参照整合性チェック対象
-（`CANDIDATE_ENTITY_ID_SETS`）に対応するAI処理対象がまだ無いため、現状0件（正直に0件と表示、
-架空の対象は作っていない）。
-
-### 実行モード
-
-- **dry-run**（既定）：対象件数・生成予定ジョブ数を表示するのみ。ファイル更新・API呼び出しなし。
-- **rule-based**：キーワード辞書によるテーマ分類候補・関連資料候補・人物候補を生成する。
-  AI要約ジョブは`status="needsReview"`のまま（ルールベースでは要約を生成できないため）。
-- **ai-enabled**：`ARCHIVE_AI_ENABLED=true`かつ`ARCHIVE_AI_API_KEY`設定時のみAI要約を試みる。
-  **現時点では実際の外部プロバイダー接続を実装していない**ため、常に`status="skipped"`で
-  安全終了する（有料APIを無断で呼び出さない）。rule-based分の処理（テーマ分類等）は
-  ai-enabledでも実行される。
-
-### AIプロバイダー抽象化
-
-`src/lib/ai/archiveAiProvider.ts`（新規）：`ArchiveAiProvider`インターフェース
-（`summarize`/`classifyCategories`/`findRelations`/`extractEntities`）と、常に
-`AiProviderUnavailableError`を投げる`DisabledAiProvider`（既定）。特定サービス（Anthropic等）に
-密結合するコードはまだ書いていない（実際のAPI接続はフェーズ10C範囲外、次フェーズで追加できる
-拡張ポイントとして用意）。環境変数名：`ARCHIVE_AI_ENABLED`・`ARCHIVE_AI_PROVIDER`・
-`ARCHIVE_AI_MODEL`・`ARCHIVE_AI_API_KEY`（実際の値はコード・JSONへ保存せず、GitHub Secrets/
-環境変数経由のみ）。
-
-### AI要約・分類・関連候補の保存方法
-
-すべて`status="candidate"`または`"needsReview"`のまま保存し、人が確認するまで確定データへ
-昇格しない（既存の分離設計をそのまま踏襲、フェーズ10Cで新たに壊していない）。
-
-### 自動確定登録できる情報／人による確認が必要な情報
-
-自動確定登録できるのは公式資料から直接確認できる客観データ（フェーズ10Bの巡回結果自体）のみ。
-AI要約・AIテーマ分類・AI関連付け・人物候補は、今回もすべて候補のまま保存し、公式データへ
-自動反映していない（`archivePolicies.json`等の確定フィールドは一切変更していない）。
-
-### GitHub Actions統合
-
-`.github/workflows/civic-archive-sync.yml`を拡張（重複Workflowは作っていない）。
-
-- `workflow_dispatch.inputs`に`mode`（dry-run/rule-based/ai-enabled、既定dry-run）・
-  `target`（all/council/finance/people/policies、既定all）・`create_pr`（真偽、既定false）を追加。
-- パイプライン順序：巡回→`validate:data`→検索インデックス生成→AI処理候補生成→
-  要確認キュー更新→typecheck/lint/build→`validate:seo`→（変更判定）→PR作成。
-- **定期実行（cronスケジュール）はworkflow_dispatchの入力を受け取れないため、
-  `mode=rule-based`・`target=all`・`create_pr=false`に固定**（外部API不使用・安全な
-  ルールベース生成のみを5日ごとに実行し、Pull Requestは作らない、最も保守的な既定値）。
-  PRを作りたい場合は人が手動でworkflow_dispatchを実行し`create_pr=true`を選ぶ必要がある。
-- 変更なしの場合はコミット・PRを作成せず正常終了する（`git status --porcelain`での判定、
-  `sync-council-data.yml`と同じ方式）。
-- PR作成時はbotブランチ（`bot/civic-archive-sync-<timestamp>`）経由、`gh pr create`
-  （`github.token`使用、追加のPAT設定不要）。GitHubトークン・権限が無い場合は
-  `create_pr`条件が満たされないため自然にスキップされる（明示的なエラーハンドリングは
-  追加していないが、`gh`コマンド自体がトークン権限不足時に失敗した場合はステップが
-  失敗として記録される）。
-
-## テスト結果（ローカルで実際に実行して確認）
-
-1. **dry-run**：`node scripts/run-archive-ai-processor.mjs --mode=dry-run --target=all`
-   → 資料候補19件、新規ジョブ候補76件を表示、ファイル変更なしを確認。
-2. **rule-based**：同コマンドを`--mode=rule-based`で実行 → 76件のジョブを生成・処理
-   （完了57／要確認19）、`archiveAiCategoryCandidates.json`等が既存ロジックで正しく再生成
-   されることを確認。
-3. **重複防止**：直後にもう一度同じコマンドを実行 → 新規ジョブ候補0件（既存76件と完全一致）
-   を確認。
-4. **AI無効状態**：`--mode=ai-enabled`を環境変数なしで実行 → エラー終了せず、AI要約ジョブが
-   `status="skipped"`として記録され、他のジョブ種別（rule-based分）は正常に処理されることを確認。
-5. **AI設定ありでも実呼び出しなし**：`ARCHIVE_AI_ENABLED=true`・ダミーAPIキーを設定して実行
-   → それでも外部通信は一切発生せず、「AIプロバイダーの実装が未接続です」として安全に
-   `skipped`になることを確認（有料APIの誤課金テストは行っていない）。
-6. **変更なし判定**：`validate:data`のダミー重複挿入テストで新チェックが実際に発火することを
-   確認（その後、正しい内容に戻した）。
-
-## 検証結果（フェーズ10C。重複依頼時の再実行でも同一結果を確認済み）
-
-- `npm run validate:data`：errors=0, warnings=1257（既存警告のみ、新規警告0件）。
-- `npm run typecheck`：エラーなし。
-- `npx oxlint`：クリーン。
-- `npm run build`：912ページ生成（新規Reactページなし、ページ数前回と同一）。
-- `npm run validate:seo`：failures=0, warnings=0。
-
-## 未実施・意図的に見送った項目（フェーズ10C）
-
-- 実際の外部AIプロバイダー接続（Anthropic API等の実装）は行っていない。
-  `DisabledAiProvider`のみで、`ai-enabled`モードは常に安全にskipされる。
-- `target=finance`・`target=people`は対象が0件（対応する参照整合性チェック済みID集合が
-  まだ無いため）。
-- ジョブの`resultId`が対応する候補ファイル側に実在するかのvalidate:data相互参照チェックは
-  未実装（`sourceEntityId`等の既存チェックは実施済み）。
-- AIジョブの優先度（`priority`）・リトライ（`attempts`到達後の扱い）は型・フィールドのみ
-  用意し、実際に複数回リトライさせる制御ループはまだ実装していない
-  （`maxAttempts`到達時に自動で止める仕組みは無い＝現状は1回実行で即completed/failedになる設計）。
+1. フェーズ6〜10C（政策比較基盤〜AI候補生成・定期運用統合） → **すべて完了**
+2. フェーズ10D：最終検証・push → **今回実施**（Cloudflareデプロイ結果の確認は次回以降）
+3. フェーズ10E以降（もしあれば）・フェーズ11：未着手。着手前に必ずこのメモと
+   `git log`／`git status`／Cloudflareダッシュボードの実状態を確認すること。
 
 ## 既知の注意点・落とし穴（継続）
 
 - `npm run build`のたびに`src/data/siteUpdate.json`・`archiveAiCategoryCandidates.json`・
-  `archiveRelationCandidates.json`・`adminReviewQueue.json`が再生成される
-  （内容が同じでもタイムスタンプが変わる）。今回`adminReviewQueue.json`は実際に内容が
-  変わった（32→51件）ためコミット対象、他はタイムスタンプのみのため`git restore`で戻した。
+  `archiveRelationCandidates.json`・`adminReviewQueue.json`のタイムスタンプだけが更新される
+  （内容が同じ場合は`git restore`で戻す。今回も実施）。
+- `/members`という単独ルートは存在しない（議員一覧はトップページ`/`）。ユーザー・指示文が
+  `/members`を主要ルートとして挙げることがあるが、設計上の欠落ではない。
+- 元議員関連のページは`/members/:id`（`MemberDetailPage.tsx`の分岐、`archiveMemberProfiles.json`
+  側から`legacyId`で参照される二次ページ）と`/members/former/:slug`
+  （`MemberFormerDetailPage.tsx`、実際の主要な遷移先）の**2つのコンポーネントに分かれている**。
+  今後、元議員向けの機能を追加する際は、両方に手を入れる必要が無いか確認すること
+  （今回の監査で、片方だけに導線を追加していた実バグを発見・修正した）。
 - `scripts/`配下のNode実行スクリプトは、ビルド前の`src/`配下のTypeScriptを直接importできない。
-  同じロジックが必要な場合は`.mjs`側にミラー実装する
-  （`src/lib/ai/archiveAiProcessor.ts` ⇔ `scripts/run-archive-ai-processor.mjs`も同様）。
-- `mayor`ターゲット（`archiveCrawlerTargets.json`）は`hisatomo-m.jp`が許可ドメイン外のため
-  引き続き取得できない。
+  同じロジックが必要な場合は`.mjs`側にミラー実装する。
+- `mayor`巡回ターゲット（`archiveCrawlerTargets.json`）は`hisatomo-m.jp`が許可ドメイン外の
+  ため取得できない。
 - 令和年→西暦の変換式：`西暦 = 2018 + 令和年`。会計年度は4月始まり。
 - 比較ページのクエリパラメータは年度ベースが`?years=`、市長・議員・政策比較が`?items=`。
 - 委員会マスタが存在しない（`committeeId`は1件も確認できていない）。
+- **ブラウザでの実機確認（375/390/768/1280px）は本セッション全体を通じて未実施**
+  （Chrome拡張が接続できなかったため）。次回セッションで可能であれば実施すること。
+
+## push結果（実行後に追記）
+
+- コマンド：`git push origin main`
+- 結果：（実行後に記載）
+- push後のHEAD：（実行後に記載）
+- GitHub Actions起動有無：（実行後に記載）
 
 ## 次セッション開始時の推奨手順
 
-1. `git log --oneline -10`と`git status`で本メモと状態が一致しているか確認。
-2. `npm run validate:data && npm run typecheck`で現状に問題がないか確認。
-3. push・Cloudflare Pagesデプロイに進む場合は、上記「ロードマップ」の注意書きを踏まえ、
-   ユーザーに実行の意思を改めて確認してから着手する。
-4. 可能であれば`/timeline`・`/compare/*`等をブラウザで375px・390px・768px・1280pxで確認する
-   （フェーズ9A以降、実機確認が未実施のまま）。
+1. `git log --oneline -10`・`git status`・`git log origin/main -1`で、pushが正常に反映されて
+   いるか、このメモと状態が一致しているかを確認する。
+2. Cloudflareダッシュボードまたは公開URL（https://nobeoka-shisei-portal.pages.dev/）で、
+   最新コミットの内容が実際に公開されているかを確認する（本セッションでは確認手段が無かった）。
+3. 可能であれば実機・ブラウザでのスマートフォン表示確認を行う。
+4. 新しい作業に着手する前に、このメモと実際のリポジトリ状態が食い違っていないかを必ず確認する
+   （本セッションでは「完了済み」という誤った前提の指示が複数回届いたことがある）。
