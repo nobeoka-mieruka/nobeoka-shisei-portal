@@ -1,0 +1,344 @@
+[
+  {
+    "fiscalYear": 2021,
+    "population": {
+      "fiscalYear": 2021,
+      "population": 118138,
+      "households": null,
+      "referenceDate": "2021-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存 src/data/financeDashboard.json の populationTrend.trend（各年1月1日現在）から移行。会計年度（4月始まり）ではなく暦年1月1日時点の値のため、年度末人口とは一致しない。"
+        }
+      ]
+    },
+    "fund": {
+      "fiscalYear": 2021,
+      "isEstimate": false,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": 13447525000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "totalYen": null,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。このためbondRedemptionFundYen（減債基金単独）は財源調整用基金に含まれており、別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+            "sourceTitle": "延岡市「令和8年度当初予算編成方針」（本市の財政状況について）",
+            "sourceOrganization": "延岡市",
+            "pageNumber": 2,
+            "sourcePublishedDate": "2026-03-31",
+            "accessedAt": "2026-07-14",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和3年度末）から移行。"
+          }
+        ]
+      },
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。"
+    }
+  },
+  {
+    "fiscalYear": 2022,
+    "population": {
+      "fiscalYear": 2022,
+      "population": 116566,
+      "households": null,
+      "referenceDate": "2022-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。"
+        }
+      ]
+    },
+    "fund": {
+      "fiscalYear": 2022,
+      "isEstimate": false,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": 13143179000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "totalYen": null,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+            "sourceTitle": "延岡市「令和8年度当初予算編成方針」（本市の財政状況について）",
+            "sourceOrganization": "延岡市",
+            "pageNumber": 2,
+            "sourcePublishedDate": "2026-03-31",
+            "accessedAt": "2026-07-14",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和4年度末）から移行。"
+          }
+        ]
+      },
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。"
+    }
+  },
+  {
+    "fiscalYear": 2023,
+    "population": {
+      "fiscalYear": 2023,
+      "population": 114777,
+      "households": null,
+      "referenceDate": "2023-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。"
+        }
+      ]
+    },
+    "fund": {
+      "fiscalYear": 2023,
+      "isEstimate": false,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": 12262706000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "totalYen": null,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+            "sourceTitle": "延岡市「令和8年度当初予算編成方針」（本市の財政状況について）",
+            "sourceOrganization": "延岡市",
+            "pageNumber": 2,
+            "sourcePublishedDate": "2026-03-31",
+            "accessedAt": "2026-07-14",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和5年度末）から移行。"
+          }
+        ]
+      },
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。"
+    }
+  },
+  {
+    "fiscalYear": 2024,
+    "population": {
+      "fiscalYear": 2024,
+      "population": 113061,
+      "households": null,
+      "referenceDate": "2024-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。"
+        }
+      ]
+    },
+    "fund": {
+      "fiscalYear": 2024,
+      "isEstimate": false,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": 10508279000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 10446448000,
+        "totalYen": 20954727000,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。totalYen（基金全体）は財源調整用基金とその他特定目的基金の合計。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+            "sourceTitle": "延岡市「令和8年度当初予算編成方針」（本市の財政状況について）",
+            "sourceOrganization": "延岡市",
+            "pageNumber": 2,
+            "sourcePublishedDate": "2026-03-31",
+            "accessedAt": "2026-07-14",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和6年度末）から移行。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+            "sourceTitle": "延岡市「令和6年度 延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 10,
+            "sourcePublishedDate": "2025-03-31",
+            "accessedAt": "2026-07-14",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "既存financeDashboard.jsonのfundBalance.totalFunds（令和6年度末、その他特定目的基金・基金全体）から移行。"
+          }
+        ]
+      },
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds・totalFundsから移行（決算額）。"
+    },
+    "finance": {
+      "fiscalYear": 2024,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 8.6,
+      "futureBurdenRatioPercent": 15.9,
+      "currentAccountRatioPercent": null,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html",
+          "sourceTitle": "令和6年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2025-09-19",
+          "accessedAt": "2026-07-21",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのfinancialIndicators（令和6年度決算）から移行。財政力指数・経常収支比率・実質収支は既存データでも「確認中」（未特定）。"
+        }
+      ],
+      "notes": "実質赤字比率・連結実質赤字比率・資金不足比率は延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされている。"
+    }
+  },
+  {
+    "fiscalYear": 2025,
+    "population": {
+      "fiscalYear": 2025,
+      "population": 111150,
+      "households": null,
+      "referenceDate": "2025-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。"
+        }
+      ]
+    },
+    "fund": {
+      "fiscalYear": 2025,
+      "isEstimate": true,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": 7319234000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "totalYen": null,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。この年度は決算未確定の見込額（isEstimate: true）。その他特定目的基金・基金全体（total）は未確認。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+            "sourceTitle": "延岡市「令和8年度当初予算編成方針」（本市の財政状況について）",
+            "sourceOrganization": "延岡市",
+            "pageNumber": 2,
+            "sourcePublishedDate": "2026-03-31",
+            "accessedAt": "2026-07-14",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和7年度末見込）から移行。決算額ではなく見込額。"
+          }
+        ]
+      },
+      "notes": "決算未確定の見込額。決算確定後に更新が必要。"
+    }
+  },
+  {
+    "fiscalYear": 2026,
+    "mayorId": "mayor-01",
+    "mayorTermId": "mayor-01-term-01",
+    "population": {
+      "fiscalYear": 2026,
+      "population": 108044,
+      "households": null,
+      "referenceDate": "2026-07-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-07-01",
+          "accessedAt": "2026-07-14",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのpopulationTrend.latestから移行。令和8年1月1日時点のトレンド値（109,266人）より新しい令和8年7月1日時点の最新値を採用。"
+        }
+      ]
+    },
+    "budget": {
+      "fiscalYear": 2026,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": 69988095000,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": null,
+      "totalExpenditureYen": null,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+          "sourceTitle": "令和8年度6月補正予算の概要",
+          "sourceOrganization": "延岡市",
+          "pageNumber": 1,
+          "sourcePublishedDate": "2026-06-05",
+          "accessedAt": "2026-07-14",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "既存financeDashboard.jsonのgeneralAccount.totalThousandYen（6月補正後の一般会計総額）から移行。当初予算額（4月時点）はこの資料からは特定できず未確認としている。決算額は年度未終了のため存在しない。"
+        }
+      ],
+      "notes": "令和8年度は年度途中のため、決算額は存在しない。予算額も今後の補正でさらに変わる可能性がある。"
+    },
+    "debt": {
+      "fiscalYear": 2026,
+      "municipalBondIssuanceYen": 4072600000,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "年度末市債残高（普通会計・一般会計等の区分別）は、延岡市決算書・財政状況資料集で確認中。municipalBondIssuanceYenは令和8年度予算に計上された発行額（歳入の「市債」科目）であり、残高ではない。",
+        "sourceRefs": []
+      },
+      "notes": "残高（ストック）データは今回未登録。発行額（フロー）のみ既存financeDashboard.jsonのrevenue「市債」科目から移行。"
+    }
+  }
+]

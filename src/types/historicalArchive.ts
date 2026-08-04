@@ -153,28 +153,38 @@ export interface ArchiveMunicipalBondBalance {
 export interface ArchiveFundBalance {
   totalYen: number | null;
   fiscalAdjustmentFundYen: number | null;
-  /** 減債基金。 */
+  /** 減債基金。財源調整用基金の定義に含まれ単独では確認できない場合はnullのまま、definitionNoteで補足する。 */
   bondRedemptionFundYen: number | null;
   otherSpecificPurposeFundsYen: number | null;
   perCapitaYen: number | null;
+  /** 元資料の基金分類定義をそのまま記録する注記（例：どの基金を合算した数値か）。 */
+  definitionNote?: string;
   sourceRefs: ArchiveSourceRef[];
 }
 
 /**
- * 年度単位の財政データ。金額はすべて円（内部値）。表示側で億円・万円へ変換する。
- * 元資料が千円単位の場合は変換元単位をnotesに明記した上で円に正規化して保存する。
- * 未取得値は0にせず、必ずnullにする。
+ * 人口・世帯数（Population型）。年度単位。元資料の基準日が会計年度末と一致しない場合が
+ * あるため、referenceDateを必ず保持し、UI側で基準日のずれを明示する。
  */
-export interface ArchiveFiscalYear {
+export interface ArchivePopulation {
   /** 西暦の会計年度（4月始まり）。例: 2026 = 令和8年度。 */
   fiscalYear: number;
-  mayorId?: string;
-  mayorTermId?: string;
   population: number | null;
   households: number | null;
+  /** 元資料の基準日（ISO）。会計年度末（3/31）と一致しない場合がある。 */
+  referenceDate?: string;
+  sourceRefs: ArchiveSourceRef[];
+}
+
+/**
+ * 予算・決算規模（Budget型）。予算（当初・補正後）と決算は型レベルで別フィールドにし、
+ * 混同しない。金額はすべて円（内部値）。未取得値は0にせず、必ずnullにする。
+ */
+export interface ArchiveBudget {
+  fiscalYear: number;
   /** 一般会計当初予算。 */
   generalAccountInitialBudgetYen: number | null;
-  /** 一般会計補正後（最終）予算。 */
+  /** 一般会計補正後（最終）予算。決算額ではない。 */
   generalAccountFinalBudgetYen: number | null;
   /** 一般会計決算。予算とは別の数値として扱う。 */
   generalAccountSettlementYen: number | null;
@@ -186,9 +196,40 @@ export interface ArchiveFiscalYear {
   localAllocationTaxYen: number | null;
   nationalSubsidiesYen: number | null;
   prefecturalSubsidiesYen: number | null;
+  sourceRefs: ArchiveSourceRef[];
+  notes?: string;
+}
+
+/**
+ * 市債（Debt型）。年度単位で、発行額（フロー）と残高（ストック、5区分）を分離する。
+ * 残高の5区分は同一グラフで直接比較しないこと（ArchiveMunicipalBondBalance参照）。
+ */
+export interface ArchiveDebt {
+  fiscalYear: number;
+  /** 当該年度の市債発行額（予算計上額・決算額のいずれかはnotesで明記する）。残高ではない。 */
   municipalBondIssuanceYen: number | null;
-  bondBalance: ArchiveMunicipalBondBalance;
-  fundBalance: ArchiveFundBalance;
+  balance: ArchiveMunicipalBondBalance;
+  notes?: string;
+}
+
+/**
+ * 基金（Fund型）。年度単位。決算額か見込額かをisEstimateで区別する
+ * （既存financeDashboard.jsonの「令和7年度末見込」のような扱いを踏襲）。
+ */
+export interface ArchiveFund {
+  fiscalYear: number;
+  /** true = 決算未確定の見込額、false/undefined = 決算額。 */
+  isEstimate?: boolean;
+  balance: ArchiveFundBalance;
+  notes?: string;
+}
+
+/**
+ * 財政健全化判断比率等（Finance型）。総務省の地方公共団体財政健全化法に基づき
+ * 市が公表した指標のみを扱い、独自の評価・順位づけは行わない。
+ */
+export interface ArchiveFinance {
+  fiscalYear: number;
   /** 実質公債費比率とは別の起債制限比率系指標がある場合のための単純な公債費負担率(%)。未確認ならnull。 */
   debtServiceRatioPercent: number | null;
   /** 実質公債費比率(%)。 */
@@ -200,6 +241,24 @@ export interface ArchiveFiscalYear {
   /** 財政力指数。 */
   financialStrengthIndex: number | null;
   sourceRefs: ArchiveSourceRef[];
+  notes?: string;
+}
+
+/**
+ * 年度単位の財政データ全体（FiscalYear型）。Population/Budget/Debt/Fund/Financeを
+ * 年度単位で束ねる。各サブ型が確認できていない年度はundefinedのまま欠落させ、
+ * 0や架空値で埋めない。市長比較・年度比較・将来の政策比較の共通土台として使う。
+ */
+export interface ArchiveFiscalYear {
+  /** 西暦の会計年度（4月始まり）。例: 2026 = 令和8年度。 */
+  fiscalYear: number;
+  mayorId?: string;
+  mayorTermId?: string;
+  population?: ArchivePopulation;
+  budget?: ArchiveBudget;
+  debt?: ArchiveDebt;
+  fund?: ArchiveFund;
+  finance?: ArchiveFinance;
   notes?: string;
   verifiedAt?: string;
 }

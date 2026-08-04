@@ -1,7 +1,8 @@
 # 延岡市政アーカイブ 拡張設計（フェーズ1：調査・設計）
 
 作成日：2026-08-04
-ステータス：**設計・型定義案のみ。実データ登録・画面実装は未着手（フェーズ2以降）。**
+ステータス：フェーズ1（設計）・フェーズ2（歴代市長基盤）・フェーズ3（財政データ基盤）実装済み。
+フェーズ4以降（比較・グラフ機能の本格実装、政策データ、自動巡回拡張）は未着手。
 関連文書：[historical-civic-data-plan-requirements.md](./historical-civic-data-plan-requirements.md)（要件原文）
 
 このドキュメントは、一般質問データ登録（2023-06〜2026-03、全会期完了）の後に着手した
@@ -827,22 +828,29 @@ flowchart LR
 | 市長からのメッセージ（施政方針・記者会見等の入口） | 延岡市公式サイト「市長室」 | https://www.city.nobeoka.miyazaki.jp/site/mayor/list25-146.html |
 | 総務省 財政状況資料集（市区町村別、全国横断の様式参考） | 総務省 | https://www.soumu.go.jp/iken/zaisei/jyoukyou_shiryou/（年度別） |
 | 市町村別二役・議長・副議長等名簿 | 宮崎県 | https://www.pref.miyazaki.lg.jp/shichoson/kense/shichoson/index-03.html |
+| 延岡市の財政事情（複数年度、決算・予算の概況） | 延岡市公式サイト | https://www.city.nobeoka.miyazaki.jp/soshiki/18/49302.html（令和7年度後期）、/soshiki/18/45428.html（令和6年度決算・令和7年度前期）、/soshiki/18/41743.html（令和6年度後期） |
+| 延岡市財政分析報告書（貸借対照表・行政コスト計算書等、平成28年度〜） | 延岡市公式サイト | https://www.city.nobeoka.miyazaki.jp/soshiki/18/40989.html |
+| 健全化判断比率等の公表（年度別） | 延岡市公式サイト | https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html（令和6年度）、/soshiki/18/37572.html（令和5年度） |
 
 ### 取得元未確認（次フェーズで個別調査が必要）
 
 - **歴代市長の一覧・在任期間そのものを掲載した公式ページ**：延岡市公式サイト内で歴代市長一覧の
   専用ページを今回確認できなかった。市の沿革・市政要覧等に掲載されている可能性があるが、
   該当ページの特定には至っていない。
-- **統計書**：延岡市公式サイト内の該当ページを今回確認できなかった。
+- **統計書**：延岡市公式サイト内の該当ページを今回確認できなかった（オープンデータ portal
+  `display.php?list=17`配下にある可能性があるが、個別ページの特定には至っていない）。
 - **市勢要覧**：同上、確認できなかった。
-- **財政健全化判断比率の個別公表ページ**：「財政」ページ配下に含まれる可能性が高いが、
-  個別URLは今回確認できなかった（財政ページ全体は確認済み）。
+- **予算書・決算書そのもののPDF直接リンク**：上記「延岡市の財政事情」「財政分析報告書」ページは
+  概況・分析資料であり、予算書・決算書そのもの（原本PDF）へのリンクは今回のページ確認では
+  見つからなかった。財政課への直接掲載ページが別途ある可能性があり、次フェーズで要確認。
+- **財政状況資料集**：「健全化判断比率等の公表」ページ配下に含まれる可能性が高いが、
+  「財政状況資料集」という名称そのものでの掲載は今回確認できなかった。
 - **e-Stat上の延岡市個別統計（人口・世帯数等）の該当ページURL**：総合ポータルの存在は既知だが、
   延岡市に絞った個別ページURLは今回確認していない。
 - **地方公共団体の給与・定員管理資料（延岡市分）**：個別ページ未確認。
 - **市議会だより（バックナンバー一覧ページ）**：今回未確認。
 
-上記「取得元未確認」の項目は、フェーズ2〜3の着手時に個別調査を行い、確認できた時点で
+上記「取得元未確認」の項目は、フェーズ4以降の着手時に個別調査を行い、確認できた時点で
 本セクションを更新する。
 
 ---
@@ -851,6 +859,37 @@ flowchart LR
 
 （この節はコミット前に実施した検証結果を記載する。詳細はコミットログ・レポートを参照）
 
+### フェーズ1（コミット ff464b2）
 - 変更・追加ファイル：`docs/historical-civic-data-plan.md`（新規）、
   `src/types/historicalArchive.ts`（新規）
 - 既存ファイルの変更：なし
+
+### フェーズ2（コミット 5dd5c69）
+- 歴代市長の基盤：`src/data/archiveMayors.json`・`archiveMayorTerms.json`（新規）、
+  `src/pages/MayorsPage.tsx`（`/mayors`）・`MayorDetailPage.tsx`（`/mayors/:slug`）、
+  `src/lib/archiveMayors.ts`（新規）。現職市長1名のみ登録し、歴代（前任以前）は未登録。
+  既存`mayor.json`・`/mayor`ページは無変更。
+
+### フェーズ3（本コミット）
+- 財政データ基盤：`src/types/historicalArchive.ts`を拡張し、`ArchivePopulation`
+  （Population型）・`ArchiveBudget`（Budget型）・`ArchiveDebt`（Debt型）・
+  `ArchiveFund`（Fund型）・`ArchiveFinance`（Finance型）を新設し、`ArchiveFiscalYear`
+  （FiscalYear型）はこれらを年度単位で束ねる構成に再設計した（未使用の型のため既存コードへの
+  影響なし）。`ArchiveFundBalance`に`definitionNote`を追加。
+- データ：`src/data/archiveFiscalYears.json`（新規）。既存`src/data/financeDashboard.json`の
+  已確認済みの複数年度データ（財源調整用基金トレンド：令和3〜7年度末、人口推移、
+  令和6年度決算の健全化判断比率、令和8年度6月補正後予算、市債発行額）を年度単位に
+  再構成して登録した。**新規の外部データ取得は行っていない**（既存データの構造移行のみ）。
+  年度によって確認できる項目が異なるため、population/budget/debt/fund/financeの各サブ
+  フィールドは存在する年度にのみ設定し、無い年度はキー自体を持たせていない（0埋めしない）。
+- ページ：`/finance/budget`（`FinanceBudgetPage.tsx`）・`/finance/debt`
+  （`FinanceDebtPage.tsx`）・`/finance/funds`（`FinanceFundsPage.tsx`）を新規追加。
+  既存`/finance`（`FinancePage.tsx`）は内容を変更せず、新規3ページへのリンクバナーのみを
+  追加した（既存コンテンツの削除・改変なし）。
+- 既存`FinanceDashboardData`型・`financeDashboard.json`・既存ページ表示内容は無変更。
+- ルーティング：`src/App.tsx`・`src/lib/seo.ts`・`scripts/lib/public-routes.mjs`へ
+  3ページ分のルート・SEO・サイトマップ定義を追加。
+- 既存`/finance`との整合方針：既存ダッシュボード（単年度）はそのまま維持し、
+  新規3ページを「アーカイブのサブページ」として追加する案を採用した（5章の設計方針どおり）。
+  `/finance`自体を年度比較ページへ置き換える案は、既存の詳細な単年度表示を失うリスクが
+  あるため採用しなかった。

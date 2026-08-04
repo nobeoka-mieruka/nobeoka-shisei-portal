@@ -510,6 +510,66 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/finance/budget":
+      return makeResult(
+        {
+          path: "/finance/budget",
+          pageTitle: "予算・決算規模の推移（延岡市政アーカイブ）",
+          description: "延岡市の一般会計当初予算・補正後予算・決算額を、年度ごとに区別して整理しています。予算と決算は別の数値として扱っています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市の財政", to: "/finance" }, { label: "予算・決算規模の推移" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-finance-budget-jsonld",
+              name: "延岡市 予算・決算規模の年度別データ",
+              description: "延岡市の一般会計当初予算・補正後予算・決算額を年度別に整理したデータです。",
+              url: `${SITE_URL}/finance/budget`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/finance/debt":
+      return makeResult(
+        {
+          path: "/finance/debt",
+          pageTitle: "市債の推移（延岡市政アーカイブ）",
+          description: "延岡市の市債発行額・年度末残高を、区分（一般会計・普通会計・特別会計・企業会計・一人当たり）ごとに整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市の財政", to: "/finance" }, { label: "市債の推移" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-finance-debt-jsonld",
+              name: "延岡市 市債の年度別データ",
+              description: "延岡市の市債発行額・残高を年度別・区分別に整理したデータです。",
+              url: `${SITE_URL}/finance/debt`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/finance/funds":
+      return makeResult(
+        {
+          path: "/finance/funds",
+          pageTitle: "基金残高の推移（延岡市政アーカイブ）",
+          description: "延岡市の年度末基金残高（財源調整用基金・その他特定目的基金等）を、年度ごとに整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市の財政", to: "/finance" }, { label: "基金残高の推移" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-finance-funds-jsonld",
+              name: "延岡市 基金残高の年度別データ",
+              description: "延岡市の年度末基金残高を年度別に整理したデータです。",
+              url: `${SITE_URL}/finance/funds`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/dashboard":
       return makeResult(
         {

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import financeData from "../data/financeDashboard.json";
 import type { FinanceDashboardData, FinanceSourceMeta } from "../types";
 import { SectionCard } from "../components/SectionCard";
@@ -107,6 +107,24 @@ export function FinancePage() {
           {data.fiscalYearLabel}6月補正後の一般会計（基準日：{formatJapaneseDate(data.referenceDate)}
           ）を、公開資料に基づいて整理しています。
         </p>
+      </div>
+
+      <div className="rounded-xl bg-surface-container-low p-4 shadow-e1">
+        <p className="text-sm font-medium text-on-surface">複数年度にわたる推移データ（延岡市政アーカイブ）</p>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          このページは単年度の詳細です。年度をまたいだ比較は以下の各ページで確認できます。
+        </p>
+        <div className="mt-2 flex flex-wrap gap-2 text-xs">
+          <Link to="/finance/budget" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+            予算・決算規模の推移
+          </Link>
+          <Link to="/finance/debt" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+            市債の推移
+          </Link>
+          <Link to="/finance/funds" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+            基金残高の推移
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">

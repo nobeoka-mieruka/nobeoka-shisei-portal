@@ -69,6 +69,9 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/press-conferences",
   "/mayors",
   "/finance",
+  "/finance/budget",
+  "/finance/debt",
+  "/finance/funds",
   "/dashboard",
   "/compensation",
   "/city-guide",
@@ -112,6 +115,7 @@ function loadData() {
   const councilSpeechSummaries = readJson("src/data/councilSpeechSummaries.json");
   const themes = readJson("src/data/themes.json");
   const archiveMayors = readJson("src/data/archiveMayors.json");
+  const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
   return {
     members,
     billVotes,
@@ -129,7 +133,20 @@ function loadData() {
     councilSpeechSummaries,
     themes,
     archiveMayors,
+    archiveFiscalYears,
   };
+}
+
+/** archiveFiscalYears.json内の全sourceRefsから、確認可能な日付だけを平坦化して集める。 */
+function archiveFiscalYearDates(archiveFiscalYears) {
+  return archiveFiscalYears.flatMap((y) => [
+    y.verifiedAt,
+    ...(y.population?.sourceRefs?.map((r) => r.sourcePublishedDate) ?? []),
+    ...(y.budget?.sourceRefs?.map((r) => r.sourcePublishedDate) ?? []),
+    ...(y.debt?.balance?.sourceRefs?.map((r) => r.sourcePublishedDate) ?? []),
+    ...(y.fund?.balance?.sourceRefs?.map((r) => r.sourcePublishedDate) ?? []),
+    ...(y.finance?.sourceRefs?.map((r) => r.sourcePublishedDate) ?? []),
+  ]);
 }
 
 /**
@@ -181,6 +198,14 @@ function staticPageLastmod(path, data) {
       );
     case "/finance":
       return resolveLastmod(path, [data.financeDashboard.lastVerified], ["src/data/financeDashboard.json"]);
+    case "/finance/budget":
+    case "/finance/debt":
+    case "/finance/funds":
+      return resolveLastmod(
+        path,
+        [maxValidDate(archiveFiscalYearDates(data.archiveFiscalYears))],
+        ["src/data/archiveFiscalYears.json"],
+      );
     case "/dashboard":
       return resolveLastmod(path, [], ["src/data/members.json", "src/data/billVotes.json", "src/data/mayorPromises.json"]);
     case "/compensation":

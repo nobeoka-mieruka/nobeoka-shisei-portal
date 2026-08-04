@@ -30,6 +30,13 @@ const MayorPressConferenceDetailPage = lazy(() =>
 const MayorsPage = lazy(() => import("./pages/MayorsPage").then((m) => ({ default: m.MayorsPage })));
 const MayorDetailPage = lazy(() => import("./pages/MayorDetailPage").then((m) => ({ default: m.MayorDetailPage })));
 const FinancePage = lazy(() => import("./pages/FinancePage").then((m) => ({ default: m.FinancePage })));
+const FinanceBudgetPage = lazy(() =>
+  import("./pages/FinanceBudgetPage").then((m) => ({ default: m.FinanceBudgetPage })),
+);
+const FinanceDebtPage = lazy(() => import("./pages/FinanceDebtPage").then((m) => ({ default: m.FinanceDebtPage })));
+const FinanceFundsPage = lazy(() =>
+  import("./pages/FinanceFundsPage").then((m) => ({ default: m.FinanceFundsPage })),
+);
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then((m) => ({ default: m.DashboardPage })));
 const CompensationPage = lazy(() => import("./pages/CompensationPage").then((m) => ({ default: m.CompensationPage })));
 const CityGuidePage = lazy(() => import("./pages/CityGuidePage").then((m) => ({ default: m.CityGuidePage })));
@@ -138,6 +145,9 @@ function App() {
               <Route path="/mayors" element={<MayorsPage />} />
               <Route path="/mayors/:slug" element={<MayorDetailPage />} />
               <Route path="/finance" element={<FinancePage />} />
+              <Route path="/finance/budget" element={<FinanceBudgetPage />} />
+              <Route path="/finance/debt" element={<FinanceDebtPage />} />
+              <Route path="/finance/funds" element={<FinanceFundsPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/compensation" element={<CompensationPage />} />
               <Route path="/city-guide" element={<CityGuidePage />} />

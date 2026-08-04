@@ -1,0 +1,85 @@
+import { Link, useLocation } from "react-router-dom";
+import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
+import type { ArchiveFiscalYear } from "../types/historicalArchive";
+import { Breadcrumbs } from "../components/Breadcrumbs";
+import { JsonLd } from "../components/JsonLd";
+import { SectionCard } from "../components/SectionCard";
+import { FinanceTable } from "../components/finance/FinanceTable";
+import { LastUpdated } from "../components/LastUpdated";
+import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { ChartBarIcon } from "../components/icons";
+import { usePageTitle } from "../hooks/usePageTitle";
+import { getSeoForPath } from "../lib/seo";
+import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+
+const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
+
+export function FinanceDebtPage() {
+  const location = useLocation();
+  const seo = getSeoForPath(location.pathname);
+  usePageTitle();
+
+  const rows = archiveFiscalYears.filter((y) => y.debt);
+
+  return (
+    <div className="space-y-4 px-4 py-4 sm:px-6">
+      {seo.jsonLd.map((entry) => (
+        <JsonLd key={entry.id} id={entry.id} data={entry.data} />
+      ))}
+      <Breadcrumbs items={seo.breadcrumbs} />
+
+      <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
+        <div className="flex items-center gap-2">
+          <ChartBarIcon className="h-6 w-6 shrink-0 text-on-primary-container" aria-hidden />
+          <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市債の推移</h1>
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
+          市債の発行額（その年度に新たに借り入れた額）と、年度末の残高は別の数値です。また「市債残高」は資料によって、一般会計のみの残高・普通会計の地方債残高・特別会計を含む残高・企業会計を含む全会計残高・市民1人当たり残高、と定義が異なります。定義が異なる数値を同一のグラフで直接比較しないでください。
+        </p>
+      </div>
+
+      <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
+        市債の増減は市長個人だけの成果・責任ではなく、国の制度・大型事業・災害復旧など複数の要因が影響します。市長・議員の評価目的での単純な比較には利用しないでください。
+      </div>
+
+      <SectionCard title="年度別 市債発行額・残高">
+        {rows.length === 0 ? (
+          <p className="text-sm text-on-surface-variant">登録済みの年度データはまだありません。</p>
+        ) : (
+          <FinanceTable
+            caption="年度別の市債発行額・残高（区分別）"
+            rows={rows}
+            rowKey={(y) => String(y.fiscalYear)}
+            columns={[
+              { header: "年度", render: (y) => fiscalYearLabel(y.fiscalYear) },
+              { header: "発行額", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.municipalBondIssuanceYen) },
+              { header: "一般会計残高", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.balance.generalAccountBondBalanceYen) },
+              { header: "普通会計残高", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.balance.ordinaryAccountLocalBondBalanceYen) },
+              { header: "一人当たり", align: "right", render: (y) => (y.debt?.balance.perCapitaYen != null ? `${y.debt.balance.perCapitaYen.toLocaleString("ja-JP")}円` : "確認中") },
+            ]}
+          />
+        )}
+      </SectionCard>
+
+      {rows.map((y) => (
+        <SectionCard key={y.fiscalYear} title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}>
+          <p className="text-xs leading-relaxed text-on-surface-variant">{y.debt?.balance.definitionNote}</p>
+          {y.debt?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.debt.notes}</p>}
+        </SectionCard>
+      ))}
+
+      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
+        当該年度の一般会計の歳入における市債の計上額（予算・決算の区分は各年度データを参照）は
+        <Link to="/finance/budget" className="mx-1 text-primary hover:underline">
+          予算・決算規模の推移
+        </Link>
+        でも確認できます。
+      </p>
+
+      <LastUpdated className="mt-4" />
+      <div className="mt-4">
+        <CorrectionRequestButton pageName="市債の推移" />
+      </div>
+    </div>
+  );
+}
