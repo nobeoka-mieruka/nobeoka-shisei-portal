@@ -10,6 +10,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
+import { StatCard } from "../components/StatCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { DocumentIcon } from "../components/icons";
@@ -68,6 +69,13 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const docs = documentsOfType(archiveCouncilDocuments, documentType);
+  const resultConfirmedCount = docs.filter((d) => !!d.result).length;
+  const memberVoteConfirmedCount = docs.filter((d) => {
+    if (!d.existingBillVoteId) return false;
+    const linked = billVotes.find((b) => b.id === d.existingBillVoteId);
+    return !!linked && linked.memberVotes && linked.memberVotes.length > 0;
+  }).length;
+  const sourceUnavailableCount = docs.filter((d) => d.verificationStatus === "sourceUnavailable").length;
   const fiscalYearFilter = searchParams.get("fiscalYear") ?? "";
   const sessionFilter = searchParams.get("session") ?? "";
   const resultFilter = searchParams.get("result") ?? "";
@@ -105,12 +113,19 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">{heroDescription}</p>
       </div>
 
+      <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatCard label="登録件数" value={docs.length} unit="件" />
+        <StatCard label="議決・審査結果確認済み" value={resultConfirmedCount} unit="件" hint={`全${docs.length}件中`} />
+        <StatCard label="個人別賛否確認済み" value={memberVoteConfirmedCount} unit="件" hint="0件と未収録は別（下記参照）" />
+        <StatCard label="出典資料未公開" value={sourceUnavailableCount} unit="件" />
+      </div>
+
       <div className="mb-1 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         現在登録している{documentTypeLabel(documentType)}は{docs.length}件です。既存の議案賛否データ（
         <Link to="/bills/votes" className={`text-primary hover:underline ${linkClass}`}>
           /bills/votes
         </Link>
-        ）で公式資料を確認できたものから少数ずつ登録しています。未登録は「情報が無い」ことを意味しません。
+        ）で公式資料を確認できたものから少数ずつ登録しています。未登録は「情報が無い」ことを意味しません。「個人別賛否確認済み」は、この一覧の各件が既存の議案賛否データ側で議員ごとの賛否まで登録されているかを示します（議決結果そのものは全件で確認済みです）。
       </div>
 
       <SectionCard title="絞り込み">

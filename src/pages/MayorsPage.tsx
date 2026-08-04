@@ -7,11 +7,16 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { StatCard } from "../components/StatCard";
 import { LandmarkIcon, ClockIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import { decadeLabel, earliestTermStart, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
+import archivePoliciesData from "../data/archivePolicies.json";
+import type { ArchivePolicy } from "../types/historicalArchive";
+
+const archivePolicies = archivePoliciesData as ArchivePolicy[];
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -35,6 +40,20 @@ export function MayorsPage() {
       }).length,
     [],
   );
+
+  // 収録状況スタット（自動集計。手入力値は使わない）。
+  const termDates = archiveMayorTerms.map((t) => t.termStart).filter(Boolean).sort();
+  const coveragePeriod = termDates.length > 0 ? `${termDates[0].slice(0, 4)}年〜現在` : "確認中";
+  const dayPreciseTermCount = archiveMayorTerms.filter((t) => (t.termStartPrecision ?? "day") === "day").length;
+  const unknownStatusCount = archiveMayors.filter((m) => m.status === "unknown").length;
+  const profileConfirmedCount = archiveMayors.filter((m) => m.profile && m.profile.length > 0).length;
+  const policyConfirmedMayorIds = new Set(archivePolicies.filter((p) => p.ownerType === "mayor").map((p) => p.ownerId));
+  const policyConfirmedCount = archiveMayors.filter((m) => policyConfirmedMayorIds.has(m.id)).length;
+  const latestVerifiedAt = archiveMayors
+    .map((m) => m.lastVerifiedAt)
+    .filter((d): d is string => !!d)
+    .sort()
+    .at(-1);
 
   const sortedMayors = useMemo(() => {
     const withStart = archiveMayors.map((mayor) => ({ mayor, start: earliestTermStart(mayor, archiveMayorTerms) ?? "" }));
@@ -72,8 +91,18 @@ export function MayorsPage() {
         </p>
       </div>
 
+      <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatCard label="収録人数" value={archiveMayors.length} unit="名" />
+        <StatCard label="収録任期数" value={archiveMayorTerms.length} unit="件" />
+        <StatCard label="収録期間" value={coveragePeriod} compact />
+        <StatCard label="日単位で確認済みの任期" value={dayPreciseTermCount} unit="件" hint={`全${archiveMayorTerms.length}件中`} />
+        <StatCard label="経歴を確認できた人数" value={profileConfirmedCount} unit="名" />
+        <StatCard label="政策・公約を確認できた人数" value={policyConfirmedCount} unit="名" />
+        <StatCard label="調査中（在任状況未確認）" value={unknownStatusCount} unit="名" />
+      </div>
+
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
-        就任・退任の年月日は、延岡市公式資料（近代の年表等）で年月まで確認できたものが中心です。日単位の日付はWikipedia等の二次資料にとどまり独立資料で未確認のものを含みます。前任・後任市長の間に登録期間が無い箇所は、資料で確認できない空白期間であり、職務代理者を推測で補ってはいません。
+        就任・退任の年月日は、延岡市公式資料（近代の年表等）で年月まで確認できたものが中心です。日単位の日付はWikipedia等の二次資料にとどまり独立資料で未確認のものを含みます。前任・後任市長の間に登録期間が無い箇所は、資料で確認できない空白期間であり、職務代理者を推測で補ってはいません（2026年8月時点で13件の空白期間が未解消です）。経歴・政策の確認は一部にとどまります。
       </div>
 
       <div className="mb-4 flex items-center justify-end gap-2">
@@ -151,7 +180,11 @@ export function MayorsPage() {
         をご利用ください。
       </p>
 
-      <LastUpdated className="mt-4" />
+      <LastUpdated
+        className="mt-4"
+        dataAsOfLabel="歴代市長データの最終確認日（最新値）"
+        dataAsOf={latestVerifiedAt ? formatJapaneseDate(latestVerifiedAt) : undefined}
+      />
 
       <div className="mt-4">
         <CorrectionRequestButton pageName="歴代市長" />

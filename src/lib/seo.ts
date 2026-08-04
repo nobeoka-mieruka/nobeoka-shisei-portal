@@ -1051,6 +1051,18 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/data-status":
+      return makeResult(
+        {
+          path: "/data-status",
+          pageTitle: "データ収録状況",
+          description:
+            "延岡市政見える化ポータルが登録している議員・元議員・歴代市長・議案・条例・請願・陳情・政策・財政・一般質問等の収録件数と確認状況を、既存データから自動集計して表示します。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "データ収録状況" }],
+        },
+        options,
+      );
+
     case "/terms":
       return makeResult(
         {

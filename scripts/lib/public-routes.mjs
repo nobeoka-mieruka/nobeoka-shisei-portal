@@ -95,6 +95,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/contact",
   "/terms",
   "/updates",
+  "/data-status",
 ];
 
 /**
@@ -346,6 +347,26 @@ function staticPageLastmod(path, data) {
       return resolveLastmod(path, [], ["src/pages/TermsPage.tsx"]);
     case "/updates":
       return resolveLastmod(path, [maxValidDate(data.updateHistory.map((u) => u.date))], ["src/data/updateHistory.json"]);
+    case "/data-status":
+      return resolveLastmod(
+        path,
+        [],
+        [
+          "src/data/members.json",
+          "src/data/formerMembers.json",
+          "src/data/archiveMemberProfiles.json",
+          "src/data/archiveMayors.json",
+          "src/data/archiveMayorTerms.json",
+          "src/data/archiveCouncilDocuments.json",
+          "src/data/billVotes.json",
+          "src/data/archivePolicies.json",
+          "src/data/archiveFiscalYears.json",
+          "src/data/generalQuestions.json",
+          "src/data/councilSpeechSummaries.json",
+          "src/data/questionCollectionStatus.json",
+          "src/data/searchIndex.json",
+        ],
+      );
     default:
       return undefined;
   }

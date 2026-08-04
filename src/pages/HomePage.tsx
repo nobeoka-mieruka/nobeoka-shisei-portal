@@ -55,14 +55,25 @@ const snsOptions = [
 ];
 
 const navLinks: { label: string; to?: string; ready: boolean }[] = [
+  { label: "人物から探す", to: "/people", ready: true },
   { label: "市議会議員を見る", to: "/", ready: true },
+  { label: "元議員を見る", to: "/members/former", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
+  { label: "歴代市長を見る", to: "/mayors", ready: true },
   { label: "市長公約の進捗を見る", to: "/mayor/policy-progress", ready: true },
   { label: "市役所どこに行けばいい？診断", to: "/city-guide", ready: true },
   { label: "一般質問を調べる", to: "/questions", ready: true },
+  { label: "議案を見る", to: "/bills", ready: true },
+  { label: "条例を見る", to: "/ordinances", ready: true },
+  { label: "請願を見る", to: "/petitions", ready: true },
+  { label: "陳情を見る", to: "/requests", ready: true },
   { label: "議案ごとの賛否を見る", to: "/bills/votes", ready: true },
   { label: "定例会・議会資料を見る", to: "/council-documents", ready: true },
   { label: "延岡市の財政を見る", to: "/finance", ready: true },
+  { label: "報酬を見る", to: "/compensation", ready: true },
+  { label: "比較する", to: "/compare", ready: true },
+  { label: "年表を見る", to: "/timeline", ready: true },
+  { label: "データ収録状況を見る", to: "/data-status", ready: true },
   { label: "サイト内を検索する", to: "/search", ready: true },
   { label: "編集方針を見る", to: "/editorial-policy", ready: true },
   { label: "情報提供・訂正依頼を送る", to: "/contact", ready: true },
@@ -311,7 +322,8 @@ export function HomePage() {
         </Link>
       </section>
 
-      <nav aria-label="サイト内のページ" className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
+      <h2 className="mb-2 px-1 text-base font-semibold text-on-surface">このサイトでできること</h2>
+      <nav aria-label="このサイトでできること" className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {navLinks.map((link) =>
           link.ready && link.to ? (
             <Link

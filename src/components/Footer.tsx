@@ -13,37 +13,50 @@ interface FooterLinkGroup {
 
 const footerGroups: FooterLinkGroup[] = [
   {
-    heading: "市政情報",
+    heading: "人物",
     links: [
-      { to: "/", label: "ホーム" },
-      { to: "/", label: "市議会議員一覧" },
+      { to: "/people", label: "人物から探す" },
+      { to: "/", label: "現職議員一覧" },
+      { to: "/members/former", label: "元議員一覧" },
       { to: "/mayor", label: "市長情報" },
       { to: "/mayors", label: "歴代市長（アーカイブ）" },
-      { to: "/dashboard", label: "ダッシュボード" },
-      { to: "/finance", label: "延岡市の財政" },
-      { to: "/compare", label: "市政アーカイブの比較" },
-      { to: "/timeline", label: "延岡市政の年表" },
     ],
   },
   {
-    heading: "データ・案内",
+    heading: "議会",
     links: [
-      { to: "/city-guide", label: "市役所案内" },
+      { to: "/bills", label: "議案" },
+      { to: "/ordinances", label: "条例" },
+      { to: "/petitions", label: "請願" },
+      { to: "/requests", label: "陳情" },
+      { to: "/bills/votes", label: "議案ごとの賛否" },
+      { to: "/council-documents", label: "定例会・議会資料" },
       { to: "/questions", label: "一般質問データベース" },
       { to: "/themes", label: "テーマから探す" },
       { to: "/executive-answers", label: "市長・執行部答弁" },
-      { to: "/bills/votes", label: "議案ごとの賛否" },
-      { to: "/council-documents", label: "定例会・議会資料" },
-      { to: "/search", label: "サイト内検索" },
-      { to: "/updates", label: "更新履歴" },
     ],
   },
   {
-    heading: "サイト運営",
+    heading: "市政",
     links: [
-      { to: "/about", label: "このサイトについて" },
-      { to: "/editorial-policy", label: "編集方針" },
+      { to: "/policies", label: "政策・公約" },
+      { to: "/finance", label: "延岡市の財政" },
+      { to: "/compensation", label: "報酬" },
+      { to: "/compare", label: "比較する" },
+      { to: "/timeline", label: "年表を見る" },
+      { to: "/dashboard", label: "ダッシュボード" },
+    ],
+  },
+  {
+    heading: "市民向け",
+    links: [
+      { to: "/city-guide", label: "市役所案内" },
+      { to: "/data-status", label: "データ収録状況" },
+      { to: "/search", label: "サイト内検索" },
+      { to: "/updates", label: "更新履歴" },
       { to: "/contact", label: "情報提供・訂正依頼" },
+      { to: "/editorial-policy", label: "編集方針" },
+      { to: "/about", label: "このサイトについて" },
       { to: "/terms", label: "利用規約・免責事項" },
       { to: "/terms#privacy", label: "プライバシーに関する案内" },
     ],
@@ -66,7 +79,7 @@ export function Footer() {
         </p>
         <DataNotice className="pt-1" />
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-5 pt-3 text-left sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-5 pt-3 text-left sm:grid-cols-2 lg:grid-cols-4">
           {footerGroups.map((group) => (
             <div key={group.heading}>
               <h3 className="mb-1 text-xs font-semibold text-on-surface-variant">{group.heading}</h3>
