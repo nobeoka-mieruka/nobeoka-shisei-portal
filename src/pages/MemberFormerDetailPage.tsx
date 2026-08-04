@@ -25,6 +25,9 @@ import {
   speechesForProfile,
   termsForMemberProfile,
 } from "../lib/archiveMembers";
+import { buildCompareSearchParams } from "../lib/archiveCompare";
+import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
+import { personSlug } from "../lib/people";
 
 const profiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const terms = archiveMemberTermsData as ArchiveMemberTerm[];
@@ -79,14 +82,36 @@ export function MemberFormerDetailPage() {
         {profile.nameKana && <p className="mt-1 text-sm text-on-surface-variant">{profile.nameKana}</p>}
         {profile.notes && <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{profile.notes}</p>}
 
-        {legacyId && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {legacyId && (
+            <Link
+              to={`/members/${legacyId}`}
+              className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            >
+              従来の元議員ページ（発言記録）を見る
+            </Link>
+          )}
+          {profile.legacyFormerMemberId && (
+            <Link
+              to={`/compare/members?${buildCompareSearchParams([personSlug("former-member", profile.legacyFormerMemberId)]).toString()}`}
+              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            >
+              この議員を比較
+            </Link>
+          )}
           <Link
-            to={`/members/${legacyId}`}
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            to={
+              own[0]
+                ? `/timeline/${fiscalYearOfIsoDate(own[0].termStart)}`
+                : speeches[0]?.date
+                  ? `/timeline/${fiscalYearOfIsoDate(speeches[0].date)}`
+                  : "/timeline"
+            }
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
-            従来の元議員ページ（発言記録）を見る
+            年表で見る
           </Link>
-        )}
+        </div>
       </section>
 
       <SectionCard title="在籍期間・選挙・任期履歴">
