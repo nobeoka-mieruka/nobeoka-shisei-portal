@@ -1,223 +1,139 @@
-# セッション引き継ぎメモ（2026-08-04 更新・フェーズ7は調査・設計のみ、実装未着手）
+# セッション引き継ぎメモ（2026-08-04 更新・フェーズ7完了）
 
-フェーズ6「政策データ・政策比較基盤」は完全完了（コミット`48832bb`・`fb8d18c`）。
-フェーズ7「議案・条例・請願・陳情アーカイブ」は**調査・設計のみ実施し、コード・データの
-実装は未着手**のままコンテキスト予算の都合で停止した。次セッションは本メモの設計に沿って
-実装から再開できる（調査のやり直しは不要）。push・デプロイは未実施。
+フェーズ7「議案・条例・請願・陳情アーカイブ」の基盤を実装した。push・デプロイは未実施。
 
-## ロードマップ（ユーザー確認済み）
+## ロードマップ
 
 1. フェーズ6：政策データ・政策比較基盤 → **完了**
-2. フェーズ7：議案・条例・請願・陳情アーカイブ → **調査・設計のみ完了、実装は次回**
-3. フェーズ8：AI横断検索・テーマ検索
+2. フェーズ7：議案・条例・請願・陳情アーカイブ → **完了**
+3. フェーズ8：AI横断検索・テーマ検索 → 次回
 4. フェーズ9：比較・可視化・タイムライン
 5. フェーズ10：自動巡回の完成・全体検証・本番デプロイ
 
-## 直近のコミット・現在の状態
+## 直近のコミット（ローカルのみ、未push）
 
 ```
+3af84bb feat: add council documents archive
+5402e06 docs: フェーズ7の調査・設計をセッション引き継ぎメモへ記録
 fb8d18c docs: フェーズ6完全完了を反映しセッション引き継ぎメモを更新
 48832bb chore: complete policy archive validation and search indexing
 87af7b1 feat: 延岡市政アーカイブの政策データ・政策比較基盤（フェーズ6）を追加
 ```
 
-本セッションではコード変更を行っていない（型定義への着手を1件行ったが、データ・画面が
-伴わない中途半端な変更だったため`git restore`で元に戻した）。`git status`は
-`.claude/settings.local.json`（ローカル専用）以外クリーン。
+`git status`は`.claude/settings.local.json`（ローカル専用）以外クリーン。
 
-停止直前に確認済み：`npm run validate:data`（errors=0, warnings=1244＝既存警告のみ）／
-`npm run typecheck`／`npx oxlint`（クリーン）／`npm run build`（859ページ生成）／
-`npm run validate:seo`（failures=0, warnings=0）すべて成功（＝現在のコミット済みコードは
-健全な状態）。
+停止直前に確認済み：`npm run validate:data`（errors=0、既存の推奨語彙警告＋新規
+archiveCouncilDocuments.jsonの出典accessedAt未設定13件のみ）／`npm run typecheck`／
+`npx oxlint`（クリーン）／`npm run build`（875ページ生成、prerender成功）／
+`npm run validate:seo`（failures=0, warnings=0）すべて成功。
 
-## フェーズ7：調査結果（重要、実装前に必ず読むこと）
+## 完了した作業（フェーズ7：議案・条例・請願・陳情アーカイブ）
 
-### 既存構造の調査結果
+### 設計方針
 
-- `src/types/index.ts`の`BillVoteItem`（`src/data/billVotes.json`、546件）は、想定より
-  はるかに豊富にフェーズ7の要件をすでにカバーしている。
-  - `BillCategory`に**すでに**`"条例"`（142件）・`"請願"`（3件）・`"陳情"`（9件）が
-    含まれている。
-  - `BillMemberVoteStatus`（議員別賛否）は**すでに**8区分ある：
-    `approve`(賛成)/`oppose`(反対)/`abstained`(棄権)/`departed`(退席)/`absent`(欠席)/
-    `recused`(議長のため採決不参加)/`unconfirmed`(不明)/`notVoting`(採決なし)。
-    ユーザー要件の「資料未確認」に完全一致する値は無いが、item単位の
-    `BillVerificationStatus`に`"individual-votes-unavailable"`（案件は確認できるが
-    議員個人の賛否は資料に記載なし）があり、実質的にこの区別を担っている。
-  - `BillVoteResult`は**すでに**`採択`/`一部採択`/`不採択`/`継続審査`/`撤回`等を含む
-    （請願・陳情の審査結果もここに統合されている）。「提出」「付託」「審議未了」に
-    直接対応する値は無い（新設が必要）。
-  - `relatedBillIds`/`revisionOfBillId`/`replacesBillId`/`supersededByBillId`により、
-    議案間の改正・置き換え関係は**すでに**型として存在する（条例の改正チェーンに転用可）。
-  - `sourceDocumentId`/`sourceFilePath`/`sourcePage`/`resultDocumentUrl`/
-    `billDocumentUrl`等が出典として機能している（`ArchiveSourceRef`ほど構造化されていない）。
-- **ルーティングの衝突**：`/bills`は既存で`<Navigate to="/bills/votes" replace />`という
-  リダイレクト専用ルートとしてすでに使われている（`STATIC_NOINDEX_PAGES`）。要件の
-  `/bills`・`/bills/[slug]`をそのまま新設すると、この既存の再配置ページと意味的に衝突する。
-  - `/bills/votes`（一覧）は**すでに**年度・会期・種別（`BillCategory`＝条例/予算/決算/…/
-    請願/陳情）・結果（`BillVoteResult`）・提出者区分（`BillProposerType`）による絞り込みを
-    実装済み（`src/pages/BillVotesPage.tsx`）。
-  - `/bills/votes/:id`（詳細）・`/bills/compare`（比較）も既存。
-  - → **要件の「既存のURLやルーティングがある場合は、それを優先して互換性を維持」に従い、
-    `/bills`・`/bills/[slug]`は新設しない**。議案全般（条例・請願・陳情を含む全区分）の
-    一覧・詳細・絞り込みは既存`/bills/votes`系にすでに実装済みのため、重複実装を避ける。
-- **請願・陳情の個人情報**：`billVotes.json`の請願・陳情エントリを確認したところ、
-  提出者名・住所等は**もともと登録されていない**（`billTitle`は議題名のみ）。既存の
-  プライバシー方針をすでに満たしている。
+既存`billVotes.json`（546件）が条例・請願・陳情のカテゴリ・議員別賛否・議決結果を
+すでに広くカバーしていたため、新規アーカイブ層は**複製せず参照する**設計にした
+（歴代市長・元議員アーカイブと同じパターン）。`ArchiveCouncilDocument.existingBillVoteId`
+で既存レコードを参照し、議員別賛否・出典PDFはそちらを正とする。
 
-### 設計方針（次回実装時にそのまま使える）
+### 型（`src/types/historicalArchive.ts`）
 
-議案（bill）全般は既存`/bills/votes`に譲り、フェーズ7の新規アーカイブ層は
-**条例・請願・陳情の3種類のみ**を対象とし、既存`billVotes.json`のレコードを
-`legacyBillVoteId`で参照するインデックス層として設計する（歴代市長・元議員アーカイブと
-同じ「複製せず参照する」パターン）。新規に追加するのは、既存データに無い部分
-（条例の制定区分・施行日・公布日・現行/失効、請願・陳情の広い審査ステータス、
-政策・予算年度との関連付け）のみ。
+`ArchiveCouncilDocumentType`（bill/ordinance/petition/request）、
+`ArchiveCouncilDocument`（共通項目一式：id/slug/documentType/title/summary/number/
+fiscalYear/sessionId/meetingDate/submittedDate/decisionDate/proposerType/proposerIds/
+status/result/committeeId/relatedMemberIds/relatedMayorIds/relatedPolicyIds/
+relatedQuestionIds/relatedBudgetIds/relatedFiscalYears/sourceRefs/verificationStatus/
+notes/createdAt/updatedAt/existingBillVoteId/voteEntries）、`ArchiveCouncilDocumentDetail`
+（判別可能ユニオン）、`ArchiveBillDetail`・`ArchiveOrdinanceDetail`・`ArchivePetitionDetail`・
+`ArchiveRequestDetail`、`ArchiveCouncilDecision`、`ArchiveCouncilVote`
+（既存`BillMemberVoteStatus`8区分＋`sourceUnavailable`＝資料未確認）、
+`ArchiveCouncilRelation`（member/mayor/policy/question/budget/documentの汎用関連付け）。
 
-`src/types/historicalArchive.ts`に追記する型（設計案、未実装）：
+### データ
 
-```ts
-import type { BillMemberVoteStatus, BillProposerType, BillVoteResult } from "./index";
+`src/data/archiveCouncilDocuments.json`（13件：条例3・請願3（全件）・陳情4・議案3、
+すべて既存`billVotes.json`から`existingBillVoteId`で参照・出典付きで移行。新規外部取得
+なし）、`archiveCouncilRelations.json`（0件、関連付けの仕組みのみ用意）。
 
-export type ArchiveDocumentType = "ordinance" | "petition" | "request"; // 条例／請願／陳情
+条例の改廃区分（`revisionType`）はタイトル文言（「一部を改正する」「廃止する」等）から
+確認できる事実のみで判定し、`effectStatus`（現行/失効）は現行例規集との突合ができていない
+ため全件`"unknown"`のままにした（推測で埋めていない）。施行日・公布日も未確認のため空欄。
 
-// 請願・陳情の審査状況。既存BillVoteResultより広い区分（提出・付託・審議未了等）を扱う。
-export type ArchivePetitionResult =
-  | "submitted" | "referred" | "continuedReview" | "adopted" | "partiallyAdopted"
-  | "rejected" | "withdrawn" | "unresolved" | "sourceUnavailable";
+### ページ
 
-export type ArchiveOrdinanceRevisionType = "enactment" | "fullRevision" | "partialRevision" | "repeal";
-export type ArchiveOrdinanceEffectStatus = "inForce" | "expired" | "unknown";
+- `/bills`（議案アーカイブ一覧）・`/bills/:slug`（詳細）：既存の
+  `<Route path="/bills" element={<Navigate to="/bills/votes" replace />} />`を
+  置き換えた。既存`/bills/votes`（議員別賛否専用）・`/bills/votes/:id`・`/bills/compare`
+  は無変更。
+- `/ordinances`・`/ordinances/:slug`、`/petitions`・`/petitions/:slug`、
+  `/requests`・`/requests/:slug`：新規。
+- 実装は`src/pages/CouncilDocumentsArchivePage.tsx`1ファイルに、共通の
+  `DocumentsListPage`/`DocumentDetailPage`内部コンポーネントから8つの named export
+  （`BillsArchivePage`/`BillArchiveDetailPage`/`OrdinancesPage`/`OrdinanceDetailPage`/
+  `PetitionsPage`/`PetitionDetailPage`/`RequestsPage`/`RequestDetailPage`）を切り出す形で
+  重複実装を避けた。
+- 絞り込み：年度・会期・結果（各ページ共通）。委員会・提出者の絞り込みは、現状
+  確認できているデータに変化が無い（committeeIdが1件も確認できていない）ため見送った
+  （下記「残っている作業」参照）。
+- 詳細ページは議員別賛否（`existingBillVoteId`経由で`/bills/votes/:id`へリンク）・
+  関連する一般質問・関連政策・関連財政年度・条例の改廃区分・出典を表示する。
 
-// 既存BillMemberVoteStatusを再利用し、「資料未確認」のみ新規アーカイブ層で追加する
-// （既存billVotes.jsonの型・データは一切変更しない）。
-export type ArchiveDocumentVoteStatus = BillMemberVoteStatus | "sourceUnavailable";
+### 検索インデックス・validate-data.mjs
 
-export interface ArchiveDocumentVoteEntry {
-  memberId: string;
-  vote: ArchiveDocumentVoteStatus;
-}
+- `scripts/generate-search-index.mjs`に`type: "council-document"`で13件追加
+  （議案名・概要・資料番号・年度・会期・提出者・議決結果・関連政策テーマをkeywordsに）。
+- `scripts/validate-data.mjs`に、id/slug重複、documentType/status/result妥当性
+  （議案・条例はBillVoteResult、請願・陳情は独自の審査結果区分で別々に検証）、
+  sessionId/proposerIds/relatedMemberIds/relatedMayorIds/relatedPolicyIds/
+  relatedQuestionIds/existingBillVoteIdの参照整合性、sourceRefs必須、
+  verificationStatus妥当性、documentTypeとdetailブロックの整合性（例：
+  documentType≠"ordinance"なのにordinanceDetailがある場合はエラー）、
+  請願・陳情の`petitionerCategory`が許可リスト外（＝私人の氏名等の疑い）の場合の検出を追加。
+- `scripts/validate-seo.mjs`の`/bills`に関する古いnoindex前提チェック
+  （`for (const p of ["/search", "/bills"])`）を、/billsが実在の索引対象ページになった
+  ことに合わせて修正した（`/search`のみに変更）。
 
-export interface ArchiveOrdinanceDetail {
-  revisionType: ArchiveOrdinanceRevisionType;
-  effectStatus: ArchiveOrdinanceEffectStatus; // 初期データは原則"unknown"（現行例規集との突合が別途必要）
-  promulgationDate?: string; // 公布日（確認できる場合のみ）
-  enforcementDate?: string;  // 施行日（確認できる場合のみ）
-  relatedOrdinanceDocumentIds?: string[];
-}
+### 既存機能への影響
 
-export interface ArchivePetitionDetail {
-  // 私人の氏名・住所等は登録しない。区分（地域団体／市民個人／事業者団体等）のみ。
-  petitionerCategory?: string;
-  introducerMemberIds?: string[]; // 紹介議員（請願、確認できる場合のみ）
-  committeeReferral?: string;
-}
+`/bills/votes`・`/bills/votes/:id`・`/bills/compare`・一般質問・現職/元議員・市長・
+歴代市長・政策・財政・検索・SEO・5日ごとの自動巡回は無変更。`npm run build`の
+プリレンダリング件数は875ページ（フェーズ6の859から純増）。
 
-export interface ArchiveCouncilDocument {
-  id: string;
-  slug: string;
-  documentType: ArchiveDocumentType;
-  title: string;
-  summary: string;
-  number?: string; // 例："請願第1号"
-  fiscalYear: number; // 西暦（sessionIdの先頭4桁から導出。令和年→西暦は 2018+令和年）
-  sessionId?: string;
-  meetingDate?: string;
-  submittedDate?: string;
-  decisionDate?: string;
-  proposerType?: BillProposerType;
-  proposerIds?: string[];
-  status?: "pending" | "referred" | "continuedReview" | "decided" | "withdrawn";
-  result?: BillVoteResult | ArchivePetitionResult;
-  committeeId?: string;
-  relatedMemberIds?: string[];
-  relatedMayorIds?: string[];
-  relatedPolicyIds?: string[];
-  relatedQuestionIds?: string[];
-  relatedBudgetIds?: string[];
-  sourceRefs: ArchiveSourceRef[];
-  verificationStatus: ArchiveVerificationStatus;
-  notes?: string;
-  // 既存billVotes.jsonの対応レコードid。設定されている場合、議決結果・議員別賛否・
-  // 出典PDFはそちらを正とし、このファイルには重複登録しない。
-  legacyBillVoteId?: string;
-  voteEntries?: ArchiveDocumentVoteEntry[]; // legacyBillVoteId未設定の場合のみ使用
-  ordinanceDetail?: ArchiveOrdinanceDetail; // documentType="ordinance"のみ
-  petitionDetail?: ArchivePetitionDetail;   // documentType="petition"|"request"のみ
-  createdAt?: string;
-  updatedAt?: string;
-}
-```
+## 残っている作業（次回以降）
 
-### 初期データ候補（調査済み、追加取得不要・出典確認済み）
-
-`billVotes.json`から`legacyBillVoteId`で参照する形で移行する（新規外部取得なし、
-「大量の過去資料取得はしない」方針に沿い少数のみ）。
-
-- **条例（3件）**：
-  - `2023-06-gian-15`「延岡市特別用途地区内における建築物の制限に関する条例の制定」
-    → `revisionType: "enactment"`（タイトルに「改正」「廃止」を含まない新規制定）
-  - `2026-06-gian-14`「延岡市印鑑の登録及び証明に関する条例の一部を改正する条例の制定」
-    → `revisionType: "partialRevision"`（タイトルに「一部を改正する」と明記）
-  - `2023-09-gian-51`「延岡市北方ふれあい交流センター条例を廃止する条例の制定」
-    → `revisionType: "repeal"`（タイトルに「廃止する」と明記）
-  - `promulgationDate`/`enforcementDate`は未確認のため空欄のまま（billVotes.jsonに
-    情報なし、新規PDF取得はしない）。`effectStatus`は`"unknown"`のまま
-    （現行例規集との突合が別途必要、推測しない）。
-  - revisionTypeの判定はタイトル文言に明記された事実のみに基づく（推測ではない）。
-    `fullRevision`（全部改正）の実例は現データ内に見つからなかった（0件、無理に登録しない）。
-- **請願（3件、全件）**：`2023-06-seigan-1`（採択）・`2024-09-seigan-2`（採択）・
-  `2026-03-seigan-3`（撤回）
-- **陳情（4件、抜粋）**：`2023-07-extraordinary-03-chinjo-1`（採択）・
-  `2023-12-chinjo-3`（不採択）・`2024-06-chinjo-5`（採択）・`2025-03-chinjo-6`（継続審査）
-  ※陳情は全9件中4件のみ採用（結果の多様性を優先、残りは次回以降）。
-
-### ルーティング・ページ設計（未実装）
-
-- `/ordinances`・`/ordinances/:slug`（新規、条例アーカイブ専用）
-- `/petitions`・`/petitions/:slug`（新規、請願）
-- `/requests`・`/requests/:slug`（新規、陳情）
-- `/bills`・`/bills/[slug]`は**新設しない**（上記理由により既存`/bills/votes`系を維持）
-- 請願・陳情はデータ構造がほぼ同一のため、実装時は1ファイル
-  （例：`src/pages/PetitionsRequestsPage.tsx`）から`PetitionsPage`/`PetitionDetailPage`/
-  `RequestsPage`/`RequestDetailPage`の4つをexportする形で重複実装を避けられる
-  （`App.tsx`の`lazy()`は名前付きexportを個別importできるため問題なく成立する）。
-- 絞り込み：年度（fiscalYear）・会期（sessionId）・結果（result）を各ページに実装する。
-  「種別」は各ページがdocumentType単位のため実質不要（条例/請願/陳情でページ自体が
-  分かれている）。「提出者」は条例で意味を持つ（proposerType）が、請願・陳情は
-  ほぼ市民提出のため優先度は低い。
-
-### validate-data.mjs・検索インデックスへの追加方針（未実装）
-
-- フェーズ6の`archivePolicies.json`検証ブロック（`scripts/validate-data.mjs`）と
-  同じ構成で実装する：id/slug重複、documentType別のresult/status列挙値チェック、
-  `legacyBillVoteId`→`billIds`参照整合性（既存`billVotes.json`のIDセットを再利用）、
-  `relatedQuestionIds`/`relatedPolicyIds`/`relatedMemberIds`等の参照整合性、
-  `voteEntries[].memberId`の参照整合性、sourceRefs必須、null/0の区別
-  （`ArchiveOrdinanceDetail`の日付フィールドは未確認=undefined、確認済みのみ設定）。
-  条例↔請願・陳情の相互不整合チェック（例：`ordinanceDetail`が`documentType!=="ordinance"`
-  なのに設定されている等）も追加する。
-- `scripts/generate-search-index.mjs`にフェーズ6の政策パターンを踏襲して追加する
-  （所有者名・関連質問・関連政策等をkeywordsに、AI生成物があれば分離）。
+- **委員会マスタが存在しない**：`committee`/`committeeId`のデータが1件も確認できて
+  いないため、委員会での絞り込み・参照整合性チェックは実装していない。委員会活動報告書
+  等から委員会マスタを整備できた時点で追加する。
+- **relatedBudgetIds・relatedPolicyIdsの参照整合性は空文字チェックのみ**：予算項目単位の
+  IDマスタが未整備のため、`relatedBudgetIds`は参照整合性チェックを行っていない
+  （空文字のみエラー）。`relatedPolicyIds`は`archivePolicies.json`との参照整合性を
+  検証済みだが、初期データでは実際の関連付けは0件（確認できたものが無かったため）。
+- **条例の効力状況（`effectStatus`）が全件`"unknown"`**：現行例規集との突合を行っていない。
+  次回、延岡市の例規集公開ページを調査し、確認できたものから`inForce`/`expired`を設定する。
+- **陳情の重複審査回**：`request-tsunami-evacuation-area-2025-03`
+  （`doc-request-04`）と同一議題が令和7年6月・9月定例会でも継続審査・撤回として
+  扱われているが（`2025-06-chinjo-6`・`2025-09-chinjo-6`）、初期データでは最初の登録分
+  のみを対象とした。継続案件の追跡方法（同一documentIdで更新するか、別レコードにして
+  関連付けるか）は次回設計が必要。
+- **議案アーカイブ（`/bills`）の対象は代表3件のみ**：既存議案賛否（546件）全体をアーカイブ
+  層へ拡張するかどうかは未定。少数の代表例のみ登録した状態。
 
 ## 次セッション開始時の推奨手順
 
 1. `git log --oneline -10`と`git status`で本メモと状態が一致しているか確認。
 2. `npm run validate:data && npm run typecheck`で現状に問題がないか確認。
-3. 本メモの「フェーズ7：調査結果」をそのまま実装に落とし込む
-   （調査・設計は完了済みのため、型定義の追記から着手できる）。
-4. 実装順序の目安：(1) 型定義追記 → (2) `archiveCouncilDocuments.json`（初期10件） →
-   (3) `src/lib/archiveCouncilDocuments.ts`（ラベル・所有者解決等のヘルパー） →
-   (4) ページ（Ordinances→Petitions/Requests） → (5) ルーティング/SEO/サイトマップ →
-   (6) 検索インデックス → (7) validate-data.mjs → (8) 検証・コミット。
+3. フェーズ8「AI横断検索・テーマ検索」の調査・設計から着手する。
 
 ## 既知の注意点・落とし穴（継続）
 
 - **`npm run build`実行のたびに`src/data/siteUpdate.json`のタイムスタンプだけが更新される**。
-  実データ変更を伴わない場合はコミットせず`git restore`で戻してよい（本セッションでも実施）。
-- `src/data/searchIndex.json`は生成物だがGit管理下にある。`generate-search-index.mjs`を
-  変更した場合は再生成して差分をコミットに含めること。
+  実データ変更を伴わない場合はコミットせず`git restore`で戻してよい。
+- `src/data/searchIndex.json`・`public/sitemap.xml`は生成物だがGit管理下にある。
+  データ・生成スクリプトを変更した場合は`npm run build`で再生成して差分をコミットに含める。
 - 令和年→西暦の変換式：`西暦 = 2018 + 令和年`（`scripts/lib/minutes-source.mjs`の
   `REIWA_START_YEAR`を参照）。
 - 比較ページの命名規則は`/xxx/compare`ではなく`/compare/xxx`
   （既存の`/compare/mayors`・`/compare/policies`等に合わせる）。
+- `validate-seo.mjs`にはpublic-routes.mjsとは独立したハードコードチェック
+  （サイトマップにnoindexページが含まれていないか等）が一部あるため、既存ページの
+  索引状態を変更する場合はこのファイルも確認すること（今回`/bills`変更時に見落としかけた）。
