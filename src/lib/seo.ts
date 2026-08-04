@@ -26,6 +26,7 @@ import { mayorPressConferences } from "../data/mayorPressConferences";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archivePoliciesData from "../data/archivePolicies.json";
+import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import type {
   BillVoteItem,
   CompensationComparisonEntry,
@@ -40,7 +41,13 @@ import type {
   MayorPromisesData,
   Theme,
 } from "../types";
-import type { ArchiveMayor, ArchiveMemberProfile, ArchivePolicy } from "../types/historicalArchive";
+import type {
+  ArchiveCouncilDocument,
+  ArchiveCouncilDocumentType,
+  ArchiveMayor,
+  ArchiveMemberProfile,
+  ArchivePolicy,
+} from "../types/historicalArchive";
 import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
@@ -92,6 +99,7 @@ const compensationComparison = compensationComparisonData as CompensationCompari
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
+const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -790,16 +798,82 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
       );
 
     case "/bills":
-      // /bills/votes へのリダイレクト専用URL。直接アクセスされても404にならないよう実体は残すが、
-      // 索引対象・OGP対象は統合先の/bills/votesとする。
+      // フェーズ7：議案アーカイブ（一覧）。議員別賛否そのものは既存/bills/votesが専用ルートとして扱う。
       return makeResult(
         {
           path: "/bills",
-          canonicalPath: "/bills/votes",
-          pageTitle: "議案ごとの賛否",
-          description: "延岡市議会に提出された議案の概要、採決結果、議員ごとの賛成・反対などを確認できます。",
-          robots: "noindex, follow",
-          skipWebPage: true,
+          pageTitle: "議案アーカイブ",
+          description: "延岡市議会に提出された議案を、公式資料の原文と出典に基づいて整理しています。議員別の賛否は議案ごとの賛否ページでご確認いただけます。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議案アーカイブ" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-bills-jsonld",
+              name: "延岡市議会 議案アーカイブデータ",
+              description: "延岡市議会に提出された議案を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/bills`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/ordinances":
+      return makeResult(
+        {
+          path: "/ordinances",
+          pageTitle: "条例アーカイブ",
+          description: "延岡市の条例の制定・改正・廃止を、公式資料の原文と出典に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "条例アーカイブ" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-ordinances-jsonld",
+              name: "延岡市 条例アーカイブデータ",
+              description: "延岡市の条例の制定・改正・廃止を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/ordinances`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/petitions":
+      return makeResult(
+        {
+          path: "/petitions",
+          pageTitle: "請願アーカイブ",
+          description: "延岡市議会へ提出された請願の審査状況を、公式資料の原文と出典に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "請願アーカイブ" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-petitions-jsonld",
+              name: "延岡市議会 請願アーカイブデータ",
+              description: "延岡市議会へ提出された請願の審査状況を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/petitions`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
+    case "/requests":
+      return makeResult(
+        {
+          path: "/requests",
+          pageTitle: "陳情アーカイブ",
+          description: "延岡市議会へ提出された陳情の審査状況を、公式資料の原文と出典に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "陳情アーカイブ" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-archive-requests-jsonld",
+              name: "延岡市議会 陳情アーカイブデータ",
+              description: "延岡市議会へ提出された陳情の審査状況を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/requests`,
+              dateModified: lastmod,
+            }),
+          ],
         },
         options,
       );
@@ -1157,6 +1231,46 @@ function policyDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   );
 }
 
+const COUNCIL_DOCUMENT_TYPE_LABELS: Record<ArchiveCouncilDocumentType, string> = {
+  bill: "議案",
+  ordinance: "条例",
+  petition: "請願",
+  request: "陳情",
+};
+
+const COUNCIL_DOCUMENT_BASE_PATHS: Record<ArchiveCouncilDocumentType, string> = {
+  bill: "/bills",
+  ordinance: "/ordinances",
+  petition: "/petitions",
+  request: "/requests",
+};
+
+/** /bills/:slug・/ordinances/:slug・/petitions/:slug・/requests/:slug 共通。 */
+function councilDocumentDetailSeo(
+  documentType: ArchiveCouncilDocumentType,
+  slug: string,
+  options?: SeoOptions,
+): SeoResult {
+  const basePath = COUNCIL_DOCUMENT_BASE_PATHS[documentType];
+  const typeLabel = COUNCIL_DOCUMENT_TYPE_LABELS[documentType];
+  const doc = archiveCouncilDocuments.find((d) => d.documentType === documentType && d.slug === slug);
+  if (!doc) return notFound(`${basePath}/${slug}`, `${typeLabel}情報`);
+
+  return makeResult(
+    {
+      path: `${basePath}/${slug}`,
+      pageTitle: `${doc.title}｜${typeLabel}`,
+      description: doc.summary,
+      breadcrumbs: [
+        { label: "ホーム", to: "/" },
+        { label: `${typeLabel}アーカイブ`, to: basePath },
+        { label: doc.title },
+      ],
+    },
+    options,
+  );
+}
+
 /** /members/former/:slug */
 function memberFormerDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   const profile = archiveMemberProfiles.find((p) => p.slug === slug);
@@ -1309,6 +1423,10 @@ const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
 const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
 const POLICY_DETAIL_RE = /^\/policies\/([^/]+)$/;
+const BILL_ARCHIVE_DETAIL_RE = /^\/bills\/([^/]+)$/;
+const ORDINANCE_DETAIL_RE = /^\/ordinances\/([^/]+)$/;
+const PETITION_DETAIL_RE = /^\/petitions\/([^/]+)$/;
+const REQUEST_DETAIL_RE = /^\/requests\/([^/]+)$/;
 
 /**
  * 現在のURLパス（クエリ・ハッシュを除く）から、そのページのSEO情報を返す。
@@ -1363,6 +1481,26 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const policyDetailMatch = path.match(POLICY_DETAIL_RE);
   if (policyDetailMatch) return policyDetailSeo(safeDecodeURIComponent(policyDetailMatch[1]), options);
+
+  const billArchiveDetailMatch = path.match(BILL_ARCHIVE_DETAIL_RE);
+  if (billArchiveDetailMatch) {
+    return councilDocumentDetailSeo("bill", safeDecodeURIComponent(billArchiveDetailMatch[1]), options);
+  }
+
+  const ordinanceDetailMatch = path.match(ORDINANCE_DETAIL_RE);
+  if (ordinanceDetailMatch) {
+    return councilDocumentDetailSeo("ordinance", safeDecodeURIComponent(ordinanceDetailMatch[1]), options);
+  }
+
+  const petitionDetailMatch = path.match(PETITION_DETAIL_RE);
+  if (petitionDetailMatch) {
+    return councilDocumentDetailSeo("petition", safeDecodeURIComponent(petitionDetailMatch[1]), options);
+  }
+
+  const requestDetailMatch = path.match(REQUEST_DETAIL_RE);
+  if (requestDetailMatch) {
+    return councilDocumentDetailSeo("request", safeDecodeURIComponent(requestDetailMatch[1]), options);
+  }
 
   return notFound(path, "ページが見つかりません");
 }

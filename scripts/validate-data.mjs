@@ -1428,6 +1428,196 @@ try {
   else throw e;
 }
 
+// --- archiveCouncilDocuments.json / archiveCouncilRelations.json（延岡市政アーカイブ：議案・条例・請願・陳情） ---
+let archiveCouncilDocumentIds = new Set();
+try {
+  const archiveCouncilDocuments = readJson("src/data/archiveCouncilDocuments.json");
+  if (!Array.isArray(archiveCouncilDocuments)) throw new Error("配列ではありません");
+
+  archiveCouncilDocumentIds = checkDuplicateIds({ err, warn }, archiveCouncilDocuments, "id", "archiveCouncilDocuments.json");
+  checkDuplicateSlugs({ err, warn }, archiveCouncilDocuments, "slug", "archiveCouncilDocuments.json");
+
+  const sessionIdSet = new Set(councilSessions.map((s) => s.id));
+  const VALID_DOCUMENT_TYPES = new Set(["bill", "ordinance", "petition", "request"]);
+  const VALID_DOCUMENT_STATUSES = new Set([
+    "submitted",
+    "accepted",
+    "referred",
+    "continuedReview",
+    "decided",
+    "withdrawn",
+    "unresolved",
+  ]);
+  // 議案・条例は既存BillVoteResult（原案可決等）、請願・陳情はArchivePetitionOutcome（英語キー）を使う。
+  const BILL_ORDINANCE_RESULTS = new Set([
+    "原案可決",
+    "修正可決",
+    "否決",
+    "承認",
+    "不承認",
+    "認定",
+    "不認定",
+    "同意",
+    "不同意",
+    "採択",
+    "一部採択",
+    "趣旨採択",
+    "不採択",
+    "継続審査",
+    "撤回",
+    "廃案",
+    "その他",
+    "確認中",
+  ]);
+  const PETITION_REQUEST_RESULTS = new Set([
+    "submitted",
+    "accepted",
+    "referred",
+    "continuedReview",
+    "adopted",
+    "partiallyAdopted",
+    "rejected",
+    "withdrawn",
+    "unresolved",
+    "sourceUnavailable",
+  ]);
+  const VALID_REVISION_TYPES = new Set(["enactment", "fullRevision", "partialRevision", "repeal"]);
+  const VALID_EFFECT_STATUSES = new Set(["inForce", "expired", "unknown"]);
+  // 私人の氏名等が紛れ込んでいないかを検出するための許可リスト（自由記述を禁止する）。
+  const ALLOWED_PETITIONER_CATEGORIES = new Set(["地域団体", "市民個人", "事業者団体", "その他"]);
+
+  for (const d of archiveCouncilDocuments) {
+    const tag = `archiveCouncilDocuments.json (${d.id ?? "id不明"})`;
+    if (isBlank(d.title)) err(tag, "titleが空です");
+    if (isBlank(d.summary)) err(tag, "summaryが空です");
+    if (!VALID_DOCUMENT_TYPES.has(d.documentType)) err(tag, `未定義のdocumentTypeです: ${d.documentType}`);
+    if (d.status !== undefined && !VALID_DOCUMENT_STATUSES.has(d.status)) err(tag, `未定義のstatusです: ${d.status}`);
+
+    // nullと0の区別：fiscalYearは必須の数値（西暦）であり、null/未確認を許容しないフィールドのため
+    // 通常のcheckYearRangeで整数・範囲のみを検証する（0や架空値で埋めていないかは別途、出典必須チェックで担保）。
+    checkYearRange({ err }, d.fiscalYear, tag, { min: 1947, max: 2100 });
+
+    if (d.sessionId) {
+      checkReferenceExists({ err, warn }, d.sessionId, sessionIdSet, tag, `存在しない会期IDを参照しています: ${d.sessionId}`);
+    }
+    for (const pid of d.proposerIds ?? []) {
+      checkReferenceExists({ err, warn }, pid, memberIds, tag, `存在しない議員IDを参照しています（proposerIds）: ${pid}`);
+    }
+    for (const mid of d.relatedMemberIds ?? []) {
+      checkReferenceExists({ err, warn }, mid, memberIds, tag, `存在しない議員IDを参照しています（relatedMemberIds）: ${mid}`);
+    }
+    for (const mayorId of d.relatedMayorIds ?? []) {
+      checkReferenceExists({ err, warn }, mayorId, archiveMayorIds, tag, `存在しない市長IDを参照しています（relatedMayorIds）: ${mayorId}`);
+    }
+    for (const pid of d.relatedPolicyIds ?? []) {
+      checkReferenceExists({ err, warn }, pid, archivePolicyIds, tag, `存在しない政策IDを参照しています（relatedPolicyIds）: ${pid}`);
+    }
+    for (const qid of d.relatedQuestionIds ?? []) {
+      checkReferenceExists({ err, warn }, qid, questionIds, tag, `存在しない一般質問IDを参照しています（relatedQuestionIds）: ${qid}`);
+    }
+    // relatedBudgetIds: 予算項目単位のID体系が未整備のため、参照整合性チェックは対象外
+    // （空文字のみチェックする）。将来、予算項目マスタが整備された時点で参照チェックを追加する。
+    for (const bid of d.relatedBudgetIds ?? []) {
+      if (isBlank(bid)) err(tag, "relatedBudgetIdsに空文字が含まれています");
+    }
+    if (d.existingBillVoteId) {
+      checkReferenceExists({ err, warn }, d.existingBillVoteId, billIds, tag, `存在しない既存議案IDを参照しています（existingBillVoteId）: ${d.existingBillVoteId}`);
+    }
+
+    checkSourceRefs({ err, warn }, d.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, d.sourceRefs, tag);
+    if (!d.verificationStatus || !ARCHIVE_VERIFICATION_STATUSES.has(d.verificationStatus)) {
+      err(tag, `未定義または未設定のverificationStatusです: ${d.verificationStatus}`);
+    }
+
+    // 議案と条例の関連整合性：documentTypeに対応するdetailブロックのみを許可する。
+    if (d.billDetail && d.documentType !== "bill") err(tag, "documentType!=\"bill\"なのにbillDetailが設定されています");
+    if (d.ordinanceDetail && d.documentType !== "ordinance") {
+      err(tag, "documentType!=\"ordinance\"なのにordinanceDetailが設定されています");
+    }
+    if (d.petitionDetail && d.documentType !== "petition") {
+      err(tag, "documentType!=\"petition\"なのにpetitionDetailが設定されています");
+    }
+    if (d.requestDetail && d.documentType !== "request") {
+      err(tag, "documentType!=\"request\"なのにrequestDetailが設定されています");
+    }
+    if (d.documentType === "ordinance" && !d.ordinanceDetail) warn(tag, "documentType=\"ordinance\"ですがordinanceDetailが未設定です");
+
+    if (d.ordinanceDetail) {
+      if (!VALID_REVISION_TYPES.has(d.ordinanceDetail.revisionType)) {
+        err(tag, `未定義のordinanceDetail.revisionTypeです: ${d.ordinanceDetail.revisionType}`);
+      }
+      if (!VALID_EFFECT_STATUSES.has(d.ordinanceDetail.effectStatus)) {
+        err(tag, `未定義のordinanceDetail.effectStatusです: ${d.ordinanceDetail.effectStatus}`);
+      }
+      for (const relId of d.ordinanceDetail.relatedOrdinanceDocumentIds ?? []) {
+        checkReferenceExists(
+          { err, warn },
+          relId,
+          archiveCouncilDocumentIds,
+          tag,
+          `存在しない関連条例IDを参照しています: ${relId}`,
+        );
+      }
+    }
+
+    // 請願・陳情の審査結果整合性：billVoteResult系の値を請願・陳情に、あるいはその逆を使っていないか。
+    if (d.result) {
+      if ((d.documentType === "bill" || d.documentType === "ordinance") && !BILL_ORDINANCE_RESULTS.has(d.result)) {
+        err(tag, `documentType="${d.documentType}"のresultが議決結果の値ではありません: ${d.result}`);
+      }
+      if ((d.documentType === "petition" || d.documentType === "request") && !PETITION_REQUEST_RESULTS.has(d.result)) {
+        err(tag, `documentType="${d.documentType}"のresultが請願・陳情の審査結果の値ではありません: ${d.result}`);
+      }
+    }
+
+    // 私人情報の不要な保存がないこと：petitionerCategoryは許可リスト外の自由記述（氏名等の疑い）を禁止する。
+    const petitionerCategory = d.petitionDetail?.petitionerCategory ?? d.requestDetail?.petitionerCategory;
+    if (petitionerCategory && !ALLOWED_PETITIONER_CATEGORIES.has(petitionerCategory)) {
+      err(
+        tag,
+        `petitionerCategoryが許可リスト外の値です（氏名等の個人情報が混入していないか確認してください）: ${petitionerCategory}`,
+      );
+    }
+
+    for (const v of d.voteEntries ?? []) {
+      checkReferenceExists({ err, warn }, v.memberId, memberIds, tag, `存在しない議員IDを参照しています（voteEntries）: ${v.memberId}`);
+    }
+    if (d.existingBillVoteId && (d.voteEntries?.length ?? 0) > 0) {
+      warn(tag, "existingBillVoteIdとvoteEntriesの両方が設定されています（議員別賛否が重複登録されている可能性があります）");
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveCouncilDocuments.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveCouncilRelations = readJson("src/data/archiveCouncilRelations.json");
+  if (!Array.isArray(archiveCouncilRelations)) throw new Error("配列ではありません");
+
+  const VALID_RELATION_TYPES = new Set(["member", "mayor", "policy", "question", "budget", "document"]);
+  checkDuplicateIds({ err, warn }, archiveCouncilRelations, "id", "archiveCouncilRelations.json");
+  for (const r of archiveCouncilRelations) {
+    const tag = `archiveCouncilRelations.json (${r.id ?? "id不明"})`;
+    checkReferenceExists(
+      { err, warn },
+      r.documentId,
+      archiveCouncilDocumentIds,
+      tag,
+      `存在しない文書IDを参照しています: ${r.documentId}`,
+    );
+    if (!VALID_RELATION_TYPES.has(r.relationType)) err(tag, `未定義のrelationTypeです: ${r.relationType}`);
+    if (!r.verificationStatus || !ARCHIVE_VERIFICATION_STATUSES.has(r.verificationStatus)) {
+      err(tag, `未定義または未設定のverificationStatusです: ${r.verificationStatus}`);
+    }
+    if (r.sourceRef) checkSourceRefs({ err, warn }, [r.sourceRef], tag);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveCouncilRelations.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- searchIndex.json（サイト内横断検索インデックス） ---
 const VALID_SEARCH_TYPES = new Set([
   "member",
@@ -1443,6 +1633,7 @@ const VALID_SEARCH_TYPES = new Set([
   "guide",
   "press-conference",
   "policy",
+  "council-document",
   "page",
 ]);
 // 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。
@@ -1457,6 +1648,9 @@ const VALID_URL_PREFIXES = [
   "/compensation",
   "/city-guide",
   "/bills",
+  "/ordinances",
+  "/petitions",
+  "/requests",
   "/council-documents",
   "/questions",
   "/search",
@@ -1518,6 +1712,9 @@ try {
       }
       if (s.type === "policy" && archivePolicyIds.size > 0 && !archivePolicyIds.has(s.sourceId)) {
         warn(tag, `存在しない政策IDを参照しています: ${s.sourceId}`);
+      }
+      if (s.type === "council-document" && archiveCouncilDocumentIds.size > 0 && !archiveCouncilDocumentIds.has(s.sourceId)) {
+        warn(tag, `存在しない議案・条例・請願・陳情IDを参照しています: ${s.sourceId}`);
       }
     }
   }

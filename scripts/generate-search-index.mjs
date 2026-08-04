@@ -134,6 +134,65 @@ try {
   // データがない場合はスキップ
 }
 
+// --- archive: council documents（議案・条例・請願・陳情アーカイブ、フェーズ7） ---
+// AI生成情報はこの文書アーカイブにはまだ存在しないが、将来追加された場合も公式原文
+// （title/summary）と混同しないよう、AI由来のフィールドはcontent/keywordsに含めない方針を踏襲する。
+try {
+  const archiveCouncilDocuments = readJson("src/data/archiveCouncilDocuments.json");
+  const councilSessionsForDocs = readJson("src/data/councilSessions.json");
+  const archivePoliciesForDocs = readJson("src/data/archivePolicies.json");
+  const archivePolicyCategoriesForDocs = readJson("src/data/archivePolicyCategories.json");
+
+  const DOCUMENT_TYPE_LABELS = { bill: "議案", ordinance: "条例", petition: "請願", request: "陳情" };
+  const DOCUMENT_BASE_PATHS = { bill: "/bills", ordinance: "/ordinances", petition: "/petitions", request: "/requests" };
+  const PROPOSER_TYPE_LABELS_FOR_DOCS = { mayor: "市長提出", member: "議員提出", committee: "委員会提出", other: "その他" };
+  const PETITION_OUTCOME_LABELS = {
+    submitted: "提出",
+    accepted: "受理",
+    referred: "委員会付託",
+    continuedReview: "継続審査",
+    adopted: "採択",
+    partiallyAdopted: "一部採択",
+    rejected: "不採択",
+    withdrawn: "取下げ",
+    unresolved: "審議未了",
+    sourceUnavailable: "資料未確認",
+  };
+  const sessionTitleFor = (id) => councilSessionsForDocs.find((s) => s.id === id)?.title ?? id;
+  const policyCategoryLabel = (id) => archivePolicyCategoriesForDocs.find((c) => c.id === id)?.label ?? "";
+
+  for (const d of archiveCouncilDocuments) {
+    const relatedPolicies = (d.relatedPolicyIds ?? [])
+      .map((id) => archivePoliciesForDocs.find((p) => p.id === id))
+      .filter(Boolean);
+    const relatedPolicyThemes = relatedPolicies.flatMap((p) => (p.categoryIds ?? []).map(policyCategoryLabel));
+
+    entries.push({
+      id: `council-document-${d.id}`,
+      type: "council-document",
+      title: d.title,
+      description: d.summary,
+      url: `${DOCUMENT_BASE_PATHS[d.documentType]}/${d.slug}`,
+      keywords: [
+        DOCUMENT_TYPE_LABELS[d.documentType],
+        d.number,
+        `${d.fiscalYear}年度`,
+        d.sessionId ? sessionTitleFor(d.sessionId) : undefined,
+        d.proposerType ? PROPOSER_TYPE_LABELS_FOR_DOCS[d.proposerType] : undefined,
+        d.result ? (PETITION_OUTCOME_LABELS[d.result] ?? d.result) : undefined,
+        ...relatedPolicies.map((p) => p.title),
+        ...relatedPolicyThemes,
+      ].filter(Boolean),
+      // 公式資料（title/summary）のみを全文検索対象にする。
+      content: [d.title, d.summary].filter(Boolean).join(" "),
+      date: d.decisionDate ?? d.submittedDate,
+      sourceId: d.id,
+    });
+  }
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- mayor ---
 const mayor = readJson("src/data/mayor.json");
 entries.push({

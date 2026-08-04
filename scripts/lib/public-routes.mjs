@@ -60,7 +60,7 @@ function readMayorPressConferences() {
   }
 }
 
-/** 実在する公開ページのみ。下書き・存在しないURL・リダイレクト専用URL（/bills）・検索結果（/search）は含めない。 */
+/** 実在する公開ページのみ。下書き・存在しないURL・検索結果（/search）は含めない。 */
 export const STATIC_INDEXABLE_PAGES = [
   "/",
   "/mayor",
@@ -69,6 +69,10 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/press-conferences",
   "/mayors",
   "/policies",
+  "/bills",
+  "/ordinances",
+  "/petitions",
+  "/requests",
   "/members/former",
   "/members/history",
   "/finance",
@@ -93,11 +97,9 @@ export const STATIC_INDEXABLE_PAGES = [
 
 /**
  * 実在し直接アクセス可能だが、索引対象（サイトマップ・robots index）には含めないページ。
- * /bills … /bills/votes へのリダイレクト専用URL。
  * /search … 入力内容によって表示が変わり続けるため常にnoindex。
  */
 export const STATIC_NOINDEX_PAGES = [
-  "/bills",
   "/search",
   "/bills/compare",
   "/compare/mayors",
@@ -133,6 +135,7 @@ function loadData() {
   const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
   const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
   const archivePolicies = readJson("src/data/archivePolicies.json");
+  const archiveCouncilDocuments = readJson("src/data/archiveCouncilDocuments.json");
   return {
     members,
     billVotes,
@@ -153,6 +156,7 @@ function loadData() {
     archiveFiscalYears,
     archiveMemberProfiles,
     archivePolicies,
+    archiveCouncilDocuments,
   };
 }
 
@@ -225,6 +229,18 @@ function staticPageLastmod(path, data) {
         ],
         ["src/data/archivePolicies.json", "src/data/archivePolicyCategories.json"],
       );
+    case "/bills":
+    case "/ordinances":
+    case "/petitions":
+    case "/requests": {
+      const typeByPath = { "/bills": "bill", "/ordinances": "ordinance", "/petitions": "petition", "/requests": "request" };
+      const docs = data.archiveCouncilDocuments.filter((d) => d.documentType === typeByPath[path]);
+      return resolveLastmod(
+        path,
+        [maxValidDate(docs.flatMap((d) => [d.decisionDate, ...d.sourceRefs.map((r) => r.sourcePublishedDate)]))],
+        ["src/data/archiveCouncilDocuments.json"],
+      );
+    }
     case "/members/former":
       return resolveLastmod(
         path,
@@ -380,6 +396,18 @@ export function getIndexableRoutes() {
         path,
         [p.lastVerifiedAt, maxValidDate(p.sourceRefs.map((r) => r.sourcePublishedDate))],
         ["src/data/archivePolicies.json"],
+      ),
+    });
+  }
+  const COUNCIL_DOCUMENT_BASE_PATHS = { bill: "/bills", ordinance: "/ordinances", petition: "/petitions", request: "/requests" };
+  for (const d of data.archiveCouncilDocuments) {
+    const path = `${COUNCIL_DOCUMENT_BASE_PATHS[d.documentType]}/${d.slug}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [d.decisionDate, maxValidDate(d.sourceRefs.map((r) => r.sourcePublishedDate))],
+        ["src/data/archiveCouncilDocuments.json"],
       ),
     });
   }

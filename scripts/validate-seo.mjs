@@ -258,7 +258,9 @@ for (const route of noindexRoutes) {
   const sitemapPath = join(root, "public", "sitemap.xml");
   if (existsSync(sitemapPath)) {
     const sitemap = readFileSync(sitemapPath, "utf8");
-    for (const p of ["/search", "/bills"]) {
+    // フェーズ7で/billsは「議案アーカイブ」の実在する索引対象ページへ変更したため対象外にした
+    // （かつては/bills/votesへのリダイレクト専用URLだったため、ここに含めていた）。
+    for (const p of ["/search"]) {
       if (sitemap.includes(`<loc>${SITE_URL}${p}</loc>`)) {
         fail(`sitemap.xml に noindexページ ${p} が含まれています。`);
       }

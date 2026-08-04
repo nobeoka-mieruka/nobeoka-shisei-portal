@@ -7,6 +7,8 @@
  * 設計の背景・各フィールドの根拠は docs/historical-civic-data-plan.md を参照。
  */
 
+import type { BillMemberVoteStatus, BillProposerType, BillVoteResult } from "./index";
+
 export type ArchiveVerificationStatus = "verified" | "partiallyVerified" | "needsReview" | "sourceUnavailable";
 
 /** 出典1件分。既存のSourceMetaより詳細な来歴（ページ番号・抽出方法等）を保持できるよう拡張している。 */
@@ -399,4 +401,191 @@ export interface ArchivePolicyFiscalRelation {
   amountDefinition?: string;
   sourceRef?: ArchiveSourceRef;
   verificationStatus: ArchiveVerificationStatus;
+}
+
+// ===== フェーズ7：議案・条例・請願・陳情アーカイブ =====
+//
+// 議員別の賛否・議決結果・出典PDFは既存 src/data/billVotes.json（BillVoteItem）が
+// すでに広くカバーしているため、ここでは複製しない。既存レコードがある場合は
+// ArchiveCouncilDocument.existingBillVoteId で参照し（歴代市長・元議員アーカイブと同じ
+// 「複製せず参照する」パターン）、既存データに無い部分（条例の制定区分・施行日・公布日・
+// 現行/失効、請願・陳情の広い審査ステータス、政策・予算年度との関連付け）のみを追加する。
+
+export type ArchiveCouncilDocumentType = "bill" | "ordinance" | "petition" | "request";
+
+/** 案件の進行状況。「結果（result）」とは別軸で、審査の段階そのものを表す。 */
+export type ArchiveCouncilDocumentStatus =
+  | "submitted" // 提出
+  | "accepted" // 受理
+  | "referred" // 委員会付託
+  | "continuedReview" // 継続審査
+  | "decided" // 議決・審査確定
+  | "withdrawn" // 取下げ
+  | "unresolved"; // 審議未了
+
+/**
+ * 請願・陳情の審査結果。既存BillVoteResultより広い区分（提出・受理・付託・審議未了等）を扱う。
+ * 議案・条例は既存BillVoteResult（原案可決・否決等）をそのまま使う。
+ */
+export type ArchivePetitionOutcome =
+  | "submitted"
+  | "accepted"
+  | "referred"
+  | "continuedReview"
+  | "adopted"
+  | "partiallyAdopted"
+  | "rejected"
+  | "withdrawn"
+  | "unresolved"
+  | "sourceUnavailable";
+
+export type ArchiveCouncilDocumentResult = BillVoteResult | ArchivePetitionOutcome;
+
+export type ArchiveOrdinanceRevisionType = "enactment" | "fullRevision" | "partialRevision" | "repeal";
+
+/** 条例の現在の効力状態。現行例規集との突合ができていない場合は必ず"unknown"のままにする。 */
+export type ArchiveOrdinanceEffectStatus = "inForce" | "expired" | "unknown";
+
+/**
+ * 議員別賛否の区分。既存BillMemberVoteStatus（8区分）をそのまま再利用し、
+ * 「資料未確認」のみアーカイブ層で追加する（既存billVotes.jsonの型・データは変更しない）。
+ */
+export type ArchiveCouncilVoteStatus = BillMemberVoteStatus | "sourceUnavailable";
+
+/** 議員別賛否1件分。existingBillVoteIdが設定されている場合は使用しない（billVotes.json側を正とする）。 */
+export interface ArchiveCouncilVote {
+  memberId: string;
+  vote: ArchiveCouncilVoteStatus;
+}
+
+/** 条例の改正履歴1件分。確認できない改正は登録せず、確認できた範囲のみ追加する。 */
+export interface ArchiveOrdinanceRevisionHistoryEntry {
+  date?: string;
+  description: string;
+  /** 改正を行った議案・条例のarchiveCouncilDocuments.json上のid（確認できた場合のみ）。 */
+  relatedDocumentId?: string;
+  sourceRef?: ArchiveSourceRef;
+  verificationStatus: ArchiveVerificationStatus;
+}
+
+/** 議案（一般）固有の追加情報。現状は最小限とし、詳細は既存billVotes.jsonに委ねる。 */
+export interface ArchiveBillDetail {
+  /** 既存BillCategoryのラベルを表示用にそのまま保持する（参照整合性はexistingBillVoteId経由）。 */
+  billCategory?: string;
+}
+
+export interface ArchiveOrdinanceDetail {
+  revisionType: ArchiveOrdinanceRevisionType;
+  /** 現行例規集との突合ができるまでは"unknown"のままにする（推測しない）。 */
+  effectStatus: ArchiveOrdinanceEffectStatus;
+  /** 公布日。確認できた場合のみ設定する。 */
+  promulgationDate?: string;
+  /** 施行日。確認できた場合のみ設定する。 */
+  enforcementDate?: string;
+  relatedOrdinanceDocumentIds?: string[];
+  /** 改正履歴。確認できない場合は空配列のままにし、推測で埋めない。 */
+  revisionHistory?: ArchiveOrdinanceRevisionHistoryEntry[];
+}
+
+/**
+ * 請願固有の追加情報。請願者が私人の場合、公式サイトで公開されている範囲を超えて
+ * 氏名・住所等は保存しない（petitionerCategoryは「地域団体」「市民個人」等の区分のみ）。
+ */
+export interface ArchivePetitionDetail {
+  petitionerCategory?: string;
+  /** 紹介議員（請願は原則必要、公式資料で確認できた場合のみ）。 */
+  introducerMemberIds?: string[];
+  committeeReferral?: string;
+}
+
+/** 陳情固有の追加情報。陳情は紹介議員を要しないためintroducerMemberIdsを持たない。 */
+export interface ArchiveRequestDetail {
+  petitionerCategory?: string;
+  committeeReferral?: string;
+}
+
+/**
+ * documentTypeごとの詳細情報を discriminated union として表した型。
+ * 実データ（ArchiveCouncilDocument）ではdocumentTypeに応じたoptionalフィールド
+ * （ordinanceDetail/petitionDetail/requestDetail）として直接保持するため、この型は
+ * 将来ジェネリックに「その文書の詳細情報」を1つの値として扱いたい場合の補助定義として用意する。
+ */
+export type ArchiveCouncilDocumentDetail =
+  | ({ documentType: "bill" } & ArchiveBillDetail)
+  | ({ documentType: "ordinance" } & ArchiveOrdinanceDetail)
+  | ({ documentType: "petition" } & ArchivePetitionDetail)
+  | ({ documentType: "request" } & ArchiveRequestDetail);
+
+/** 議決・審査結果1件分。ArchiveCouncilDocument本体のdecisionDate/resultの根拠を出典付きで補足する。 */
+export interface ArchiveCouncilDecision {
+  decisionDate?: string;
+  result?: ArchiveCouncilDocumentResult;
+  committeeId?: string;
+  verificationStatus: ArchiveVerificationStatus;
+  sourceRef?: ArchiveSourceRef;
+}
+
+export type ArchiveCouncilRelationType = "member" | "mayor" | "policy" | "question" | "budget" | "document";
+
+/**
+ * 議案・条例・請願・陳情と、議員・市長・政策・一般質問・予算・他の文書との関連付け1件分。
+ * ArchivePolicyQuestionRelation等と同様、AIによる自動関連付けは候補（needsReview）のまま
+ * 確定データと分離する。
+ */
+export interface ArchiveCouncilRelation {
+  id: string;
+  documentId: string;
+  relationType: ArchiveCouncilRelationType;
+  /** relationTypeに応じた相手側のid（members.json/archiveMayors.json/archivePolicies.json/
+   * generalQuestions.json/archiveFiscalYears.json（年度）/archiveCouncilDocuments.jsonのいずれか）。 */
+  targetId: string;
+  sourceRef?: ArchiveSourceRef;
+  verificationStatus: ArchiveVerificationStatus;
+  notes?: string;
+}
+
+/**
+ * 議案・条例・請願・陳情アーカイブ1件分。出典のないデータは登録しないこと。
+ * 議員別賛否・議決結果・出典PDF等、既存billVotes.jsonにすでにある情報は
+ * existingBillVoteIdで参照し、このファイルには重複登録しない。
+ */
+export interface ArchiveCouncilDocument {
+  id: string;
+  slug: string;
+  documentType: ArchiveCouncilDocumentType;
+  title: string;
+  summary: string;
+  /** 例："請願第1号"。 */
+  number?: string;
+  /** 西暦の会計年度。 */
+  fiscalYear: number;
+  sessionId?: string;
+  meetingDate?: string;
+  submittedDate?: string;
+  decisionDate?: string;
+  proposerType?: BillProposerType;
+  proposerIds?: string[];
+  status?: ArchiveCouncilDocumentStatus;
+  result?: ArchiveCouncilDocumentResult;
+  committeeId?: string;
+  relatedMemberIds?: string[];
+  relatedMayorIds?: string[];
+  relatedPolicyIds?: string[];
+  relatedQuestionIds?: string[];
+  relatedBudgetIds?: string[];
+  relatedFiscalYears?: number[];
+  sourceRefs: ArchiveSourceRef[];
+  verificationStatus: ArchiveVerificationStatus;
+  notes?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  /** 既存billVotes.jsonの対応レコードid。設定されている場合、議決結果・議員別賛否・
+   * 出典PDFはそちらを正とし、このファイルには重複登録しない。 */
+  existingBillVoteId?: string;
+  /** existingBillVoteIdが未設定の場合のみ使用する議員別賛否。 */
+  voteEntries?: ArchiveCouncilVote[];
+  billDetail?: ArchiveBillDetail;
+  ordinanceDetail?: ArchiveOrdinanceDetail;
+  petitionDetail?: ArchivePetitionDetail;
+  requestDetail?: ArchiveRequestDetail;
 }

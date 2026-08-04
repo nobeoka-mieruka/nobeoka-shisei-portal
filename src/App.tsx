@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useRef } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { initGoogleAnalytics, trackPageView } from "./lib/analytics";
 import { SiteHeader } from "./components/SiteHeader";
 import { BottomNav } from "./components/BottomNav";
@@ -84,6 +84,30 @@ const BillVoteDetailPage = lazy(() =>
   import("./pages/BillVoteDetailPage").then((m) => ({ default: m.BillVoteDetailPage })),
 );
 const BillComparePage = lazy(() => import("./pages/BillComparePage").then((m) => ({ default: m.BillComparePage })));
+const BillsArchivePage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.BillsArchivePage })),
+);
+const BillArchiveDetailPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.BillArchiveDetailPage })),
+);
+const OrdinancesPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.OrdinancesPage })),
+);
+const OrdinanceDetailPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.OrdinanceDetailPage })),
+);
+const PetitionsPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.PetitionsPage })),
+);
+const PetitionDetailPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.PetitionDetailPage })),
+);
+const RequestsPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.RequestsPage })),
+);
+const RequestDetailPage = lazy(() =>
+  import("./pages/CouncilDocumentsArchivePage").then((m) => ({ default: m.RequestDetailPage })),
+);
 const CouncilDocumentsPage = lazy(() =>
   import("./pages/CouncilDocumentsPage").then((m) => ({ default: m.CouncilDocumentsPage })),
 );
@@ -202,10 +226,17 @@ function App() {
               <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
               <Route path="/contact" element={<ContactPage />} />
               {/* /bills は /bills/votes（議案ごとの賛否データベース）へ統合済み。旧URLへのアクセスもリダイレクトする。 */}
-              <Route path="/bills" element={<Navigate to="/bills/votes" replace />} />
+              <Route path="/bills" element={<BillsArchivePage />} />
               <Route path="/bills/votes" element={<BillVotesPage />} />
               <Route path="/bills/compare" element={<BillComparePage />} />
               <Route path="/bills/votes/:id" element={<BillVoteDetailPage />} />
+              <Route path="/bills/:slug" element={<BillArchiveDetailPage />} />
+              <Route path="/ordinances" element={<OrdinancesPage />} />
+              <Route path="/ordinances/:slug" element={<OrdinanceDetailPage />} />
+              <Route path="/petitions" element={<PetitionsPage />} />
+              <Route path="/petitions/:slug" element={<PetitionDetailPage />} />
+              <Route path="/requests" element={<RequestsPage />} />
+              <Route path="/requests/:slug" element={<RequestDetailPage />} />
               <Route path="/council-documents" element={<CouncilDocumentsPage />} />
               <Route path="/council-documents/:sessionId" element={<CouncilSessionDetailPage />} />
               <Route path="/questions" element={<GeneralQuestionsPage />} />
