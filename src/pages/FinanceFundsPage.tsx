@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import type { ArchiveFiscalYear } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -80,6 +80,14 @@ export function FinanceFundsPage() {
           ))}
         </>
       )}
+
+      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
+        年度を選んで並べて比較したい場合は
+        <Link to="/compare/funds" className="mx-1 text-primary hover:underline">
+          基金の比較
+        </Link>
+        をご利用ください。
+      </p>
 
       <LastUpdated className="mt-4" />
       <div className="mt-4">

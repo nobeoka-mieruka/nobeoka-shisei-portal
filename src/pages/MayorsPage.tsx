@@ -82,7 +82,11 @@ export function MayorsPage() {
         <Link to="/mayor" className={`mx-1 text-primary hover:underline ${linkClass}`}>
           市長情報ページ
         </Link>
-        でも確認できます。
+        でも確認できます。市長を選んで比較したい場合は
+        <Link to="/compare/mayors" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+          歴代市長の比較
+        </Link>
+        をご利用ください。
       </p>
 
       <LastUpdated className="mt-4" />

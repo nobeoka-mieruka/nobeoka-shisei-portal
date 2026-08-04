@@ -37,6 +37,23 @@ const FinanceDebtPage = lazy(() => import("./pages/FinanceDebtPage").then((m) =>
 const FinanceFundsPage = lazy(() =>
   import("./pages/FinanceFundsPage").then((m) => ({ default: m.FinanceFundsPage })),
 );
+const ComparePage = lazy(() => import("./pages/ComparePage").then((m) => ({ default: m.ComparePage })));
+const CompareMayorsPage = lazy(() =>
+  import("./pages/CompareMayorsPage").then((m) => ({ default: m.CompareMayorsPage })),
+);
+const CompareFinancePage = lazy(() =>
+  import("./pages/CompareFinancePage").then((m) => ({ default: m.CompareFinancePage })),
+);
+const ComparePopulationPage = lazy(() =>
+  import("./pages/ComparePopulationPage").then((m) => ({ default: m.ComparePopulationPage })),
+);
+const CompareBudgetPage = lazy(() =>
+  import("./pages/CompareBudgetPage").then((m) => ({ default: m.CompareBudgetPage })),
+);
+const CompareDebtPage = lazy(() => import("./pages/CompareDebtPage").then((m) => ({ default: m.CompareDebtPage })));
+const CompareFundsPage = lazy(() =>
+  import("./pages/CompareFundsPage").then((m) => ({ default: m.CompareFundsPage })),
+);
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then((m) => ({ default: m.DashboardPage })));
 const CompensationPage = lazy(() => import("./pages/CompensationPage").then((m) => ({ default: m.CompensationPage })));
 const CityGuidePage = lazy(() => import("./pages/CityGuidePage").then((m) => ({ default: m.CityGuidePage })));
@@ -148,6 +165,13 @@ function App() {
               <Route path="/finance/budget" element={<FinanceBudgetPage />} />
               <Route path="/finance/debt" element={<FinanceDebtPage />} />
               <Route path="/finance/funds" element={<FinanceFundsPage />} />
+              <Route path="/compare" element={<ComparePage />} />
+              <Route path="/compare/mayors" element={<CompareMayorsPage />} />
+              <Route path="/compare/finance" element={<CompareFinancePage />} />
+              <Route path="/compare/population" element={<ComparePopulationPage />} />
+              <Route path="/compare/budget" element={<CompareBudgetPage />} />
+              <Route path="/compare/debt" element={<CompareDebtPage />} />
+              <Route path="/compare/funds" element={<CompareFundsPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/compensation" element={<CompensationPage />} />
               <Route path="/city-guide" element={<CityGuidePage />} />

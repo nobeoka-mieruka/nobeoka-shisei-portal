@@ -98,6 +98,14 @@ export function FinanceBudgetPage() {
         </SectionCard>
       ))}
 
+      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
+        年度を選んで並べて比較したい場合は
+        <Link to="/compare/budget" className={`mx-1 underline ${linkClass}`}>
+          予算・決算の比較
+        </Link>
+        をご利用ください。
+      </p>
+
       <LastUpdated className="mt-4" />
       <div className="mt-4">
         <CorrectionRequestButton pageName="予算・決算規模の推移" />

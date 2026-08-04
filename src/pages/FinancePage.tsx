@@ -124,6 +124,9 @@ export function FinancePage() {
           <Link to="/finance/funds" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
             基金残高の推移
           </Link>
+          <Link to="/compare" className={`rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}>
+            年度・市長を選んで比較する
+          </Link>
         </div>
       </div>
 

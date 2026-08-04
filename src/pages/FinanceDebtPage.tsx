@@ -73,7 +73,11 @@ export function FinanceDebtPage() {
         <Link to="/finance/budget" className="mx-1 text-primary hover:underline">
           予算・決算規模の推移
         </Link>
-        でも確認できます。
+        でも確認できます。年度を選んで並べて比較したい場合は
+        <Link to="/compare/debt" className="mx-1 text-primary hover:underline">
+          市債の比較
+        </Link>
+        をご利用ください。
       </p>
 
       <LastUpdated className="mt-4" />

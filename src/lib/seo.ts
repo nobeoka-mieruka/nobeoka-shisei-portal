@@ -570,6 +570,101 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/compare":
+      return makeResult(
+        {
+          path: "/compare",
+          pageTitle: "市政アーカイブの比較",
+          description: "歴代市長・年度別財政（人口・予算・市債・基金）を、最大4件まで選んで比較できます。点数化や優劣判定は行いません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較" }],
+        },
+        options,
+      );
+
+    case "/compare/mayors":
+      // 選択した市長によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/mayors",
+          pageTitle: "歴代市長の比較",
+          description: "歴代市長を最大4名まで選んで、任期・就任回数・出典を比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "歴代市長の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
+    case "/compare/finance":
+      // 選択した年度によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/finance",
+          pageTitle: "年度別財政の比較",
+          description: "人口・予算・市債・基金・財政健全化判断比率を、最大4年度まで選んで比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "年度別財政の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
+    case "/compare/population":
+      // 選択した年度によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/population",
+          pageTitle: "人口の比較",
+          description: "延岡市の人口・世帯数を、最大4年度まで選んで比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "人口の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
+    case "/compare/budget":
+      // 選択した年度によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/budget",
+          pageTitle: "予算・決算の比較",
+          description: "一般会計の当初予算・補正後予算・決算額を、最大4年度まで選んで比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "予算・決算の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
+    case "/compare/debt":
+      // 選択した年度によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/debt",
+          pageTitle: "市債の比較",
+          description: "市債発行額・年度末残高（区分別）を、最大4年度まで選んで比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "市債の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
+    case "/compare/funds":
+      // 選択した年度によって内容が変わり続けるページのため、常にnoindexにする。
+      return makeResult(
+        {
+          path: "/compare/funds",
+          pageTitle: "基金の比較",
+          description: "年度末の基金残高（財源調整用基金・その他特定目的基金）を、最大4年度まで選んで比較できます。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "基金の比較" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
     case "/dashboard":
       return makeResult(
         {

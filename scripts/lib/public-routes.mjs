@@ -72,6 +72,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/finance/budget",
   "/finance/debt",
   "/finance/funds",
+  "/compare",
   "/dashboard",
   "/compensation",
   "/city-guide",
@@ -92,7 +93,17 @@ export const STATIC_INDEXABLE_PAGES = [
  * /bills … /bills/votes へのリダイレクト専用URL。
  * /search … 入力内容によって表示が変わり続けるため常にnoindex。
  */
-export const STATIC_NOINDEX_PAGES = ["/bills", "/search", "/bills/compare"];
+export const STATIC_NOINDEX_PAGES = [
+  "/bills",
+  "/search",
+  "/bills/compare",
+  "/compare/mayors",
+  "/compare/finance",
+  "/compare/population",
+  "/compare/budget",
+  "/compare/debt",
+  "/compare/funds",
+];
 
 function loadData() {
   const members = readJson("src/data/members.json");
@@ -205,6 +216,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(archiveFiscalYearDates(data.archiveFiscalYears))],
         ["src/data/archiveFiscalYears.json"],
+      );
+    case "/compare":
+      return resolveLastmod(
+        path,
+        [maxValidDate(archiveFiscalYearDates(data.archiveFiscalYears))],
+        ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json", "src/data/archiveFiscalYears.json"],
       );
     case "/dashboard":
       return resolveLastmod(path, [], ["src/data/members.json", "src/data/billVotes.json", "src/data/mayorPromises.json"]);

@@ -21,6 +21,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/mayors", label: "歴代市長（アーカイブ）" },
       { to: "/dashboard", label: "ダッシュボード" },
       { to: "/finance", label: "延岡市の財政" },
+      { to: "/compare", label: "市政アーカイブの比較" },
     ],
   },
   {
