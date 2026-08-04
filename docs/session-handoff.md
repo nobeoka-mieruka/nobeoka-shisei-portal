@@ -1,4 +1,4 @@
-# セッション引き継ぎメモ（2026-08-04）
+# セッション引き継ぎメモ（2026-08-04 更新）
 
 セッション使用率94%のため、安全な地点で作業を停止した。push・デプロイは未実施。
 次のセッションはこのファイルを読んでから再開すること。
@@ -6,6 +6,9 @@
 ## 直近のコミット（すべてローカルのみ、未push）
 
 ```
+5eff696 docs: 延岡市政アーカイブ拡張の要件原文を保存
+797a7c5 chore: 進捗ファイルに令和7年12月定例会の登録済み状態を反映
+14f9980 docs: セッション引き継ぎメモを追加
 e65b323 feat: 令和6年12月定例会に吉本靖(元議員)分を追加、令和7年9月定例会 一般質問データを登録
 b5a10a5 fix: preserve former member speech history
 bb31f27 feat: 令和7年3月定例会 一般質問データを登録
@@ -15,69 +18,80 @@ ba22289 feat: 令和6年12月定例会 一般質問データを追加（残り9�
 90db4f4 feat: 延岡市議会公式資料の5日ごと自動巡回基盤を追加（差分取得・GitHub Actions・PR自動作成）
 ```
 
-`origin/main`からの合計差分は上記を含め本セッション開始時点から約9コミット。
-`git status`は`.claude/settings.local.json`（ローカル専用・意図的に未コミット）以外はクリーン。
+`origin/main`は本セッション開始時点でローカルより11コミット遅れており、本セッションで
+2コミット追加したため計13コミット遅れ。`git status`は`.claude/settings.local.json`
+（ローカル専用・意図的に未コミット）以外はクリーン。
 
-停止直前に検証済み：`npm run validate:data`（errors=0）／`npm run typecheck`／`npx oxlint`／
-`npm run build`／`validate:seo`（failures=0）すべて成功。
+停止直前に検証済み：`npm run validate:data`（errors=0, warnings=1085＝既存の推奨語彙
+警告のみ）／`npm run typecheck`／`npx oxlint`／`npm run build`（828/828ページ生成）／
+`npm run validate:seo`（failures=0）すべて成功。
 
-## 完了した作業
+## 今回のセッションで完了した作業
 
-### 1. 自動巡回基盤（Phase 1、5日ごと差分取得）
-- `.github/workflows/sync-council-data.yml`、`scripts/sync-council-data.mjs`、
-  `scripts/lib/city-site-fetch.mjs` 等。会議日程・意見書決議・委員会活動報告書・
-  質問通告一覧（1416.html→1402.html、URL不変でも本文ハッシュ変化を検出）・議員名簿変更検知。
-- 質問主意書・委員会会議録（本会議以外）・請願陳情個別一覧は「公式サイトで確認できず」と
-  明記し対象外扱い。
-- ドライラン・実行とも成功、429/403/5xxなし。
+### 1. 2025-12会期（令和7年第22回定例会）の状況確認
+- 前回セッションの引き継ぎメモには「未完了」と記載されていたが、実際には
+  R071202A/R071203A/R071204Aの登壇者11名（m01, m06, m11, m17, m19, m20, m21, m22,
+  m23, m24, m26）は**過去のコミット（dae58dd／ba22289／bb31f27／e65b323）で既に
+  councilSpeechSummaries.jsonへsummaryStatus=verifiedとして登録済み**だった。
+- 未登録だったのは`scripts/_collection-progress.json`（進捗トラッキング用）への
+  反映のみ。これを`797a7c5`で修正。**新規の議員発言データ登録は発生していない。**
+- 表記ゆれ・重複ID・未一致はなし。
 
-### 2. 一般質問データ登録（会議録本文ベース、councilSpeechSummaries.json）
-完了した会期：2024-06, 2024-09, 2024-12, 2025-03, 2025-06（検証のみ、既存データで充足）, 2025-09
-
-| 会期 | 登録人数 | 備考 |
-|---|---|---|
-| 2024-12 | 13名（+元議員1名） | 吉本靖氏（R061204A）は現議員名簿に不在。市長選立候補による退任と判断し、元議員として別管理 |
-| 2025-03 | 12名 | 代表質問2件（m01, m25）を含む |
-| 2025-06 | 0件（新規） | 既存データで全9名分が登録済みと確認済み |
-| 2025-09 | 16名 | 重複ID2件（m07, m25）を統合、summaryStatus欠落1件を修正 |
-
-`scripts/_collection-progress.json`に会期ごとの会議日・登録議員・特記事項を記録済み。
-
-### 3. 元議員（former member）データ構造
-- `src/data/formerMembers.json`新設。現職議員一覧・比較・集計には含めない。
-- `src/types/index.ts`に`FormerMember`型を追加。
-- `validate-data.mjs`：現職/元議員どちらのIDにも一致しない発言をエラー、現職IDと元議員IDの
-  重複を検出、元議員の発言がservedSessions（在職確認済み会期）外なら推測せずエラー。
-- `generate-speech-summary-scaffold.mjs`：ビルド時の再生成で元議員レコードを誤削除しないよう修正。
-- `MemberDetailPage.tsx` / `MemberSpeechDetailPage.tsx` / `ThemeDetailPage.tsx` /
-  `ExecutiveAnswersPage.tsx` / `src/lib/seo.ts` / `src/lib/councilSpeeches.ts`：
-  元議員IDでも表示・SEOが壊れないよう対応（現職ページとは別の簡易表示）。
+### 2. 「延岡市政アーカイブ」拡張要件の受領・保存
+- ユーザーから、現職議員中心のポータルを過去の議員・市長・市政・財政を時系列比較
+  できる形へ拡張する大規模要件を受領（フェーズ1〜6構成）。
+- セッション使用率94%のため、調査・設計作業（`docs/historical-civic-data-plan.md`
+  の作成）には着手せず、要件原文を`docs/historical-civic-data-plan-requirements.md`
+  にそのまま保存（コミット`5eff696`）。**実装・調査は一切行っていない。**
 
 ## 未完了の作業（次にやること、優先順）
 
-1. **一般質問データ登録の残り**：2025-12, 2026-03, 2026-06
-   - 2025-12（令和7年第22回定例会）：会議日 R071202A(2025-12-02)/R071203A(12-03)/R071204A(12-04)。
+1. **一般質問データ登録の残り**：2026-03, 2026-06
+   - 2025-12は上記の通り完了確認済みのため、この2会期に着手する前に着手不要。
+   - 2026-03（令和8年第24回定例会）：会議日 R080225A/R080226A/R080227A/R080302A
+     が一般質問日の候補（R080216A開会・R080319A閉会は手続きのみの可能性、要確認）。
      各日の発言者一覧は未取得（`listSpeakerSegments`で確認してから着手）。
-   - 2026-03（令和8年第24回定例会）：会議日 R080225A/R080226A/R080227A/R080302A が一般質問日の候補
-     （R080216A開会・R080319A閉会は手続きのみの可能性、要確認）。
-   - **2026-06は会議録検索システムに本文が未公開の可能性が高い**（`node scripts/discover-nobeoka-minutes.mjs --year=2026`
-     を実行すると令和8年第24回定例会までしか出てこない＝第25回・第26回の会議録は現時点で未掲載）。
-     質問通告書（予定）は`src/data/generalQuestions.json`に既に14名分登録済み（sync-council-dataの成果）。
-     会議録が未公開の場合は「会議録未公開」と明記し、推測で発言内容を補わないこと。
-   - 各会期とも、これまでと同じ手順：`listSpeakerSegments`→発言者名を`matchSpeakerToMember`で
-     現職・元議員（`formerMembers.json`）と照合→未一致なら推測せず要確認として記録→
+   - **2026-06は会議録検索システムに本文が未公開の可能性が高い**（`node
+     scripts/discover-nobeoka-minutes.mjs --year=2026`を実行すると令和8年第24回
+     定例会までしか出てこない＝第25回・第26回の会議録は現時点で未掲載）。質問通告書
+     （予定）は`src/data/generalQuestions.json`に既に14名分登録済み（sync-council-
+     dataの成果）。会議録が未公開の場合は「会議録未公開」と明記し、推測で発言内容を
+     補わないこと。
+   - 手順：`listSpeakerSegments`→発言者名を`matchSpeakerToMember`で現職・元議員
+     （`formerMembers.json`）と照合→未一致なら推測せず要確認として記録→
      `scripts/_tmp-add-*.mjs`パターンで1名ずつ追記→使用後delete→会期完了ごとに
      validate:data/typecheck/lint/build/validate:seo→会期単位でコミット。
+   - **着手前に必ず`_collection-progress.json`だけでなく、
+     `councilSpeechSummaries.json`の実データを直接確認して、その会期が本当に未登録か
+     再確認すること**（今回、進捗ファイルの記載漏れだけで実データは登録済みという
+     ケースがあったため）。
 
-2. **フェーズ1設計文書（ユーザーからの追加要件、まだ着手していない）**：
-   `docs/historical-civic-data-plan.md`として、歴代議員・歴代市長・財政データ・政策データの
-   データモデル案、画面/ルーティング案、取得元候補、実装フェーズ、影響範囲、移行方法、
-   自動巡回への追加方法を**設計のみ**（実装はしない）でまとめる。ユーザー指示の全文は
-   このセッションの会話履歴に詳細あり（フェーズ1〜6の区分、禁止事項リストを含む）。
-   ユーザーは「現在進行中の一般質問登録を完了してから」着手するよう明示しているため、
-   上記1（残り3会期）を終えてから着手すること。
+2. **「延岡市政アーカイブ」拡張 フェーズ1：調査・設計**（新規、最優先で次に着手）
+   - 要件全文は`docs/historical-civic-data-plan-requirements.md`を参照。
+   - 上記1（2026-03, 2026-06）の会期登録完了後に着手する
+     （ユーザーが「進行中の一般質問登録を完了してから」と明示）。
+   - 最初にやること：**調査・設計のみ**（実装はしない）。成果物は
+     `docs/historical-civic-data-plan.md`として新規作成：
+     1. 現在のデータ構造の調査結果（members.json, formerMembers.json,
+        councilSpeechSummaries.json等の型・構造）
+     2. 追加・変更が必要な型とJSON構造（members/memberTerms/
+        memberAffiliationHistory/mayors/mayorTerms/fiscalYears/policies等）
+     3. 過去議員の管理方法（氏名をIDに使わない、吉本靖氏の扱いを踏襲）
+     4. 歴代市長の管理方法
+     5. 財政データの年度別構造（市債残高の定義違いに注意、単位統一）
+     6. 政策データの構造（AI分類は原文保存＋AI分類明示＋人による修正可能）
+     7. 画面・ルーティング案（/mayors, /members/history, /finance等）
+     8. 公式取得元候補の一覧
+     9. 実装フェーズと概算作業量
+     10. 既存機能への影響
+     11. データ移行方法
+     12. 自動巡回への追加方法（regular-sync／historical-backfillの分離）
+   - 設計段階では大量データ取得・画面実装を開始しない。型定義案・調査結果を作成し、
+     typecheck・lint・buildを確認してコミットした時点で一度ユーザーへ報告する。
+   - 禁止事項多数あり（推測での在職期間登録禁止、市債と予算の混同禁止、未取得値を
+     0で登録禁止等）。着手前に要件原文の「禁止事項」セクションを必ず再読すること。
 
-3. **最終横断検証**（ユーザー指示、全会期完了後に実施）：
+3. **最終横断検証**（全会期の一般質問データ登録が完了した後に実施）：
    - 全26現職議員について未登録会期がないか横断確認
    - 発言件数・一般質問回数の再集計
    - 重複ID・議員ID整合性の最終確認
@@ -87,27 +101,34 @@ ba22289 feat: 令和6年12月定例会 一般質問データを追加（残り9�
 
 ## 既知の注意点・落とし穴
 
-- **councilSpeechSummaries.jsonへの重複書き込みに注意**：2025-09登録時、事前に存在していた
-  「試験的」な部分データ（m07, m25等）に気づかず新規追加してしまい、同一speech IDが2件
-  重複する不具合が発生した（本セッションで修正済み）。新しい会期に着手する前に、必ず
-  `node -e "..."`で対象会期の既存登録状況を確認してから追記すること（このメモの「完了した
-  作業」表を参照、または`_collection-progress.json`を参照）。
+- **`_collection-progress.json`だけを信用しない**：今回、この進捗ファイルの
+  記載漏れにより「2025-12は未完了」と誤って引き継がれた。次の会期に着手する前は
+  必ず`councilSpeechSummaries.json`の実データを直接grep等で確認すること。
+- **councilSpeechSummaries.jsonへの重複書き込みに注意**：2025-09登録時、事前に
+  存在していた「試験的」な部分データ（m07, m25等）に気づかず新規追加してしまい、
+  同一speech IDが2件重複する不具合が発生したことがある（修正済み）。
 - **generate-speech-summary-scaffold.mjs**は`npm run build`の一部として実行され、
-  members.jsonにないIDのレコードを削除する。元議員IDは`formerMembers.json`に登録されて
-  いれば保持されるが、**新しい元議員を追加する際は必ずformerMembers.jsonへの追加を
-  councilSpeechSummaries.jsonへの追加と同時に行うこと**（片方だけだとビルド時に消える）。
-- 会議録検索システム（kensakusystem.jp）の本文取得は`scripts/lib/minutes-source.mjs`の
-  `listSpeakerSegments` / `fetchSegmentText`を使う。取得結果はローカルキャッシュされる
-  （`scripts/.cache/`、Git管理外）。
-- 議員名の会議録上の表記ゆれは`matchSpeakerToMember`が確認一致のみで判定する。不一致の
-  場合は推測でIDを割り当てず、`_collection-progress.json`に経緯を記録して保留すること
-  （吉本靖氏のケースを参照）。
+  members.jsonにないIDのレコードを削除する。元議員IDは`formerMembers.json`に
+  登録されていれば保持されるが、**新しい元議員を追加する際は必ず
+  formerMembers.jsonへの追加をcouncilSpeechSummaries.jsonへの追加と同時に行うこと**
+  （片方だけだとビルド時に消える）。
+- 会議録検索システム（kensakusystem.jp）の本文取得は`scripts/lib/minutes-source.mjs`
+  の`listSpeakerSegments` / `fetchSegmentText`を使う。取得結果はローカルキャッシュ
+  される（`scripts/.cache/`、Git管理外）。
+- 議員名の会議録上の表記ゆれは`matchSpeakerToMember`が確認一致のみで判定する。
+  不一致の場合は推測でIDを割り当てず、`_collection-progress.json`に経緯を記録して
+  保留すること（吉本靖氏のケースを参照）。
+- `npm run build`実行のたびに`src/data/siteUpdate.json`のタイムスタンプだけが
+  更新される。実データ変更を伴わない場合はコミットせず`git restore`で戻してよい
+  （過去のパターンでは実データ変更を伴うコミットにのみ同梱されている）。
 
 ## 次セッション開始時の推奨手順
 
 1. `git log --oneline -10`と`git status`で本メモと状態が一致しているか確認。
 2. `npm run validate:data && npm run typecheck`で現状に問題がないか確認。
-3. 2025-12の会議日発言者一覧を`listSpeakerSegments`で取得し、この会期から再開。
-4. 3会期（2025-12, 2026-03, 2026-06）を完了させる。
-5. `docs/historical-civic-data-plan.md`の設計作業に着手する。
+3. 2026-03の会議日発言者一覧を`listSpeakerSegments`で取得し、この会期から再開
+   （着手前に`councilSpeechSummaries.json`の実データで未登録を再確認）。
+4. 2026-06を確認・処理する（会議録未公開の可能性が高い点に注意）。
+5. `docs/historical-civic-data-plan-requirements.md`を読み、フェーズ1の
+   調査・設計（`docs/historical-civic-data-plan.md`作成）に着手する。
 6. 最終横断検証を実施し、ユーザーへ報告する。
