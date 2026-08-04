@@ -120,6 +120,28 @@ for (const [key, group] of bySource) {
   }
 }
 
+// --- AIジョブの要確認・失敗（フェーズ10C） ---
+for (const j of readJsonSafe("src/data/archiveAiJobs.json")) {
+  if (j.status === "needsReview") {
+    pushItem("aiSummaryPending", j.sourceEntityType, j.sourceEntityId, `AIジョブ（${j.jobType}）が要確認です: ${j.lastError ?? "詳細未記録"}`);
+  } else if (j.status === "failed") {
+    pushItem("aiJobFailed", j.sourceEntityType, j.sourceEntityId, `AIジョブ（${j.jobType}）が失敗しました（${j.attempts}/${j.maxAttempts}回試行）: ${j.lastError ?? "詳細未記録"}`);
+  }
+}
+
+// --- 人物・固有表現候補が未確認（フェーズ10C） ---
+for (const e of readJsonSafe("src/data/archiveEntityExtractionCandidates.json")) {
+  if (e.status !== "candidate" && e.status !== "needsReview") continue;
+  pushItem(
+    "entityExtractionCandidate",
+    e.sourceEntityType,
+    e.sourceEntityId,
+    e.candidateIds.length > 0
+      ? `「${e.rawName}」の人物候補（${e.candidateIds.join("、")}）が未確認です`
+      : `「${e.rawName}」が既存マスタと一致せず未確認です`,
+  );
+}
+
 const queue = {
   generatedAt: new Date().toISOString(),
   totalItems: items.length,

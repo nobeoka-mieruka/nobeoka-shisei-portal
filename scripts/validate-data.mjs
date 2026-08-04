@@ -2230,6 +2230,88 @@ try {
   else throw e;
 }
 
+// --- archiveAiJobs.json / archiveEntityExtractionCandidates.json（フェーズ10C：AI処理ジョブキュー） ---
+try {
+  const archiveAiJobs = readJson("src/data/archiveAiJobs.json");
+  if (!Array.isArray(archiveAiJobs)) throw new Error("配列ではありません");
+
+  const VALID_JOB_TYPES = new Set(["summary", "categoryClassification", "relationCandidate", "entityExtraction"]);
+  const VALID_JOB_STATUSES = new Set(["pending", "processing", "completed", "failed", "skipped", "needsReview"]);
+  const VALID_CANDIDATE_STATUSES_4 = new Set(["candidate", "confirmed", "rejected", "needsReview"]);
+
+  checkDuplicateIds({ err, warn }, archiveAiJobs, "id", "archiveAiJobs.json");
+
+  // 同一(sourceEntityId, jobType, sourceTextHash)のジョブ重複を検出する
+  // （src/lib/ai/archiveAiProcessor.tsのfilterUnprocessedJobRequestsが本来防ぐはずの状態）。
+  const jobKeyCounts = new Map();
+  for (const j of archiveAiJobs) {
+    const key = `${j.sourceEntityId}::${j.jobType}::${j.sourceTextHash}`;
+    jobKeyCounts.set(key, (jobKeyCounts.get(key) ?? 0) + 1);
+  }
+
+  for (const j of archiveAiJobs) {
+    const tag = `archiveAiJobs.json (${j.id ?? "id不明"})`;
+    checkCandidateEntityRef({ err, warn }, j.sourceEntityType, j.sourceEntityId, tag, "sourceEntityId");
+    if (!VALID_JOB_TYPES.has(j.jobType)) err(tag, `未定義のjobTypeです: ${j.jobType}`);
+    if (!VALID_JOB_STATUSES.has(j.status)) err(tag, `未定義のstatusです: ${j.status}`);
+    if (isBlank(j.sourceTextHash)) err(tag, "sourceTextHashが未設定です（原文変更時の再確認判定ができません）");
+    if (!j.createdAt) err(tag, "createdAtが未設定です");
+    if (typeof j.attempts !== "number" || j.attempts < 0) err(tag, `attemptsが非負の数値ではありません: ${j.attempts}`);
+    if (typeof j.maxAttempts !== "number" || j.maxAttempts < 1) err(tag, `maxAttemptsが1以上の数値ではありません: ${j.maxAttempts}`);
+    if (typeof j.attempts === "number" && typeof j.maxAttempts === "number" && j.attempts > j.maxAttempts) {
+      err(tag, `attempts(${j.attempts})がmaxAttempts(${j.maxAttempts})を超えています`);
+    }
+    if (j.verificationStatus != null && !VALID_CANDIDATE_STATUSES_4.has(j.verificationStatus)) {
+      err(tag, `未定義のverificationStatusです: ${j.verificationStatus}`);
+    }
+    const key = `${j.sourceEntityId}::${j.jobType}::${j.sourceTextHash}`;
+    if ((jobKeyCounts.get(key) ?? 0) > 1) {
+      err(tag, `同一資料・同一ジョブ種別・同一原文ハッシュのジョブが重複しています（(sourceEntityId, jobType, sourceTextHash)の組み合わせが一意ではありません）`);
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveAiJobs.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveEntityExtractionCandidates = readJson("src/data/archiveEntityExtractionCandidates.json");
+  if (!Array.isArray(archiveEntityExtractionCandidates)) throw new Error("配列ではありません");
+
+  let knownPersonIds = new Set();
+  try {
+    const factions = readJson("src/data/factions.json");
+    knownPersonIds = new Set([...memberIds, ...formerMemberIds, ...archiveMayorIds, ...(factions ?? []).map((f) => f.id)]);
+  } catch {
+    // factions.jsonが読めない場合は会派IDの参照チェックのみスキップする
+  }
+
+  const VALID_CANDIDATE_STATUSES_5 = new Set(["candidate", "confirmed", "rejected", "needsReview"]);
+  checkDuplicateIds({ err, warn }, archiveEntityExtractionCandidates, "id", "archiveEntityExtractionCandidates.json");
+
+  for (const e of archiveEntityExtractionCandidates) {
+    const tag = `archiveEntityExtractionCandidates.json (${e.id ?? "id不明"})`;
+    checkCandidateEntityRef({ err, warn }, e.sourceEntityType, e.sourceEntityId, tag, "sourceEntityId");
+    if (isBlank(e.rawName)) err(tag, "rawNameが空です");
+    if (!Array.isArray(e.candidateIds)) {
+      err(tag, "candidateIdsが配列ではありません");
+    } else if (knownPersonIds.size > 0) {
+      for (const cid of e.candidateIds) {
+        if (!knownPersonIds.has(cid)) err(tag, `既存マスタに存在しない候補IDを参照しています（推測でIDを割り当てていないか確認）: ${cid}`);
+      }
+    }
+    if (typeof e.needsReview !== "boolean") err(tag, `needsReviewが真偽値ではありません: ${e.needsReview}`);
+    // 一致候補が0件（rawNameのみ）の場合はneedsReview=trueが必須（未確認のまま既存人物と暗黙に紐付けない）。
+    if (Array.isArray(e.candidateIds) && e.candidateIds.length === 0 && e.needsReview !== true) {
+      err(tag, "candidateIdsが空（既存マスタと一致なし）にもかかわらずneedsReview=trueではありません");
+    }
+    if (!VALID_CANDIDATE_STATUSES_5.has(e.status)) err(tag, `未定義のstatusです: ${e.status}`);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveEntityExtractionCandidates.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);

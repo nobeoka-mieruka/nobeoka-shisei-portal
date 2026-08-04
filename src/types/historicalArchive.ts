@@ -758,3 +758,61 @@ export interface ArchiveAiCategoryCandidate {
   generatedAt: string;
   status: ArchiveCandidateStatus;
 }
+
+// ===== フェーズ10C：AI処理ジョブキュー・固有表現候補 =====
+//
+// 自動巡回（フェーズ10A・10B）が検出した新規・更新資料のうち、どれを（再）処理すべきかを
+// 追跡するための実行管理層。ArchiveAiSummary・ArchiveAiCategoryCandidate・
+// ArchiveRelationCandidateは「生成された結果」を保持する型であり、ArchiveAiJobは
+// 「その結果をいつ・どの原文（sourceTextHash）に対して生成すべきか／したか」という
+// 実行状態だけを持つ（結果の実体は複製せず、resultIdで参照する）。
+
+export type ArchiveAiJobType = "summary" | "categoryClassification" | "relationCandidate" | "entityExtraction";
+
+export type ArchiveAiJobStatus = "pending" | "processing" | "completed" | "failed" | "skipped" | "needsReview";
+
+/**
+ * AI処理ジョブ1件分。同一(sourceEntityId, jobType, sourceTextHash)の組み合わせでは
+ * 重複したジョブを作らない（原文が変わらない限り再生成しない）。
+ */
+export interface ArchiveAiJob {
+  id: string;
+  sourceEntityType: ArchiveSearchDocumentType;
+  sourceEntityId: string;
+  jobType: ArchiveAiJobType;
+  /** ジョブ作成時点の原文のハッシュ値（SHA-256）。原文が変われば新しいジョブになる。 */
+  sourceTextHash: string;
+  status: ArchiveAiJobStatus;
+  /** 数値が小さいほど優先。既定は0。 */
+  priority: number;
+  attempts: number;
+  maxAttempts: number;
+  createdAt: string;
+  startedAt?: string;
+  completedAt?: string;
+  lastError?: string;
+  /** 完了時、生成された結果のid（archiveAiSummaries.json・archiveAiCategoryCandidates.json・
+   * archiveRelationCandidates.json・archiveEntityExtractionCandidates.jsonのいずれか）。 */
+  resultId?: string;
+  /** 結果（resultId先）の確認状況のコピー。要確認キュー集計を高速化するための非正規化フィールド。 */
+  verificationStatus?: ArchiveCandidateStatus;
+}
+
+/**
+ * 本文中の人物・固有表現の抽出候補1件分。既存マスタ（現職議員・元議員・市長・会派・委員会）に
+ * 一致した場合のみcandidateIdsへ実在するIDを入れる。一致しない場合はrawNameのみを保持し、
+ * 推測でIDを割り当てない（needsReview=trueのまま人による確認を待つ）。
+ */
+export interface ArchiveEntityExtractionCandidate {
+  id: string;
+  sourceEntityType: ArchiveSearchDocumentType;
+  sourceEntityId: string;
+  /** 原文に出現した表記そのまま。 */
+  rawName: string;
+  /** 既存マスタ側のID（member/formerMember/mayor/faction/committee等）。一致が無ければ空配列。 */
+  candidateIds: string[];
+  needsReview: boolean;
+  method: ArchiveRelationMethod;
+  generatedAt: string;
+  status: ArchiveCandidateStatus;
+}

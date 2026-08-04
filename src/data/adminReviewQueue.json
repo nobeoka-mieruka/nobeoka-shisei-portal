@@ -1,13 +1,14 @@
 {
-  "generatedAt": "2026-08-04T07:41:21.002Z",
-  "totalItems": 32,
+  "generatedAt": "2026-08-04T13:51:58.325Z",
+  "totalItems": 51,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 10,
     "relationCandidate": 4,
     "sourceInsufficient": 8,
     "committeeIdMissing": 1,
-    "possibleDuplicateCandidate": 1
+    "possibleDuplicateCandidate": 1,
+    "aiSummaryPending": 19
   },
   "items": [
     {
@@ -223,6 +224,120 @@
       "sourceEntityType": "request",
       "sourceEntityId": "doc-request-01",
       "detail": "同一資料に対して2件のテーマ分類候補があります（digitalization、finance）"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-01",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-02",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-03",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-04",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-q-gq2026-06-m24-01",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-q-gq2026-06-m24-02",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "ordinance",
+      "sourceEntityId": "doc-ordinance-01",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "ordinance",
+      "sourceEntityId": "doc-ordinance-02",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "ordinance",
+      "sourceEntityId": "doc-ordinance-03",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-01",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-02",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-03",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-02",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-03",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-04",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-01",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-02",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
+    },
+    {
+      "category": "aiSummaryPending",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-03",
+      "detail": "AIジョブ（summary）が要確認です: ルールベースでは要約を生成できません（人による要約作成、または将来のAI有効化を待っています）。"
     }
   ]
 }

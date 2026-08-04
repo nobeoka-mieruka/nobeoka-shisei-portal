@@ -1,6 +1,6 @@
 name: Civic archive crawler (5-day check)
 
-# フェーズ10B：実データ巡回・差分検知。
+# フェーズ10C：AI候補生成・自動登録準備・定期運用統合。
 #
 # 一般質問・議案・条例・請願・陳情・議員名簿は既に .github/workflows/sync-council-data.yml
 # （scripts/sync-council-data.mjs・scripts/fetch-nobeoka-council-documents.mjs）が実データ取得を
@@ -8,13 +8,20 @@ name: Civic archive crawler (5-day check)
 # 統合する。src/data/archiveCrawlerTargets.jsonのexistingImplementationが設定された対象）。
 # 財政・人口・基金は、scripts/lib/city-site-fetch.mjs（許可ドメイン制限・429/403/5xx処理・
 # SHA-256ハッシュ）を使って実際にHTTP取得し、前回ハッシュと比較して新規・変更・変更なし・
-# 削除候補を判定する。市長（歴代・現職とも）・市債・政策・テーマは、許可ドメイン外／
-# 監視対象URL未確認のため取得しない（推測でアクセスしない）。
+# 削除候補を判定する（フェーズ10B）。
 #
-# このワークフローはコミット・Pull Requestの作成をまだ行わない（src/data/archiveCrawlerState.json
-# の更新結果はワークフロー実行ログ・GitHub Actions Summaryでのみ確認できる）。取得した差分を
-# 実際にサイトのデータへ反映する（AI解析・自動登録）場合は、次フェーズで
-# .github/workflows/sync-council-data.yml と同様のbotブランチ経由Pull Request方式を追加すること。
+# フェーズ10Cで追加：巡回結果に基づくAI処理ジョブ（要約・テーマ分類・関連資料候補・人物候補）を
+# scripts/run-archive-ai-processor.mjsで生成する。テーマ分類・関連資料候補の生成ロジックは
+# scripts/lib/theme-candidates-generator.mjs（フェーズ8の既存ロジック）をそのまま再利用し、
+# 重複実装しない。AI要約は既定で生成しない（ARCHIVE_AI_ENABLED=trueかつAPIキー設定時のみ
+# 試みるが、現時点では外部プロバイダー接続を実装していないため常にskippedになる。
+# 有料外部APIを無断で呼び出すことはない）。
+#
+# 変更があった場合でも、create_pr=trueが明示された場合のみbotブランチ経由でPull Requestを
+# 作成する（.github/workflows/sync-council-data.ymlと同じ方式）。本番ブランチへ直接pushしない。
+# 5日ごとの定期実行（cronスケジュール）では、workflow_dispatchの入力を受け取れないため、
+# mode=rule-based（安全・外部API不使用）で固定実行し、create_prは明示的な手動実行でのみtrueにできる
+# （定期実行では既定でPRを作成しない、最も保守的な既定値）。
 #
 # 5日間隔の実現方法は sync-council-data.yml と同じ考え方：毎日起動した上で、
 # 前回正常実行から120時間（5日）以上経過している場合のみ本処理を実行する。
@@ -33,9 +40,32 @@ on:
         description: "120時間ゲートを無視して即時実行する"
         type: boolean
         default: false
+      mode:
+        description: "AI処理モード"
+        type: choice
+        options:
+          - dry-run
+          - rule-based
+          - ai-enabled
+        default: dry-run
+      target:
+        description: "AI処理対象"
+        type: choice
+        options:
+          - all
+          - council
+          - finance
+          - people
+          - policies
+        default: all
+      create_pr:
+        description: "変更があった場合にPull Requestを作成する"
+        type: boolean
+        default: false
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
   group: civic-archive-sync
@@ -44,7 +74,7 @@ concurrency:
 jobs:
   crawl:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,6 +96,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Resolve run parameters
+        id: params
+        run: |
+          # 手動実行（workflow_dispatch）の入力をそのまま使う。定期実行（schedule）には入力が
+          # 無いため、mode=rule-based（安全・外部API不使用）・target=all・create_pr=falseで固定する。
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
+            echo "target=${{ github.event.inputs.target }}" >> "$GITHUB_OUTPUT"
+            echo "create_pr=${{ github.event.inputs.create_pr }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=rule-based" >> "$GITHUB_OUTPUT"
+            echo "target=all" >> "$GITHUB_OUTPUT"
+            echo "create_pr=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run archive crawler (real fetch + diff detection)
         run: |
           FORCE_FLAG=""
@@ -81,11 +126,70 @@ jobs:
           path: scripts/_archive-crawler-sync-state.json
           key: civic-archive-crawler-state-${{ github.run_id }}
 
-      - name: Upload crawler state artifact
+      - name: Validate official data
+        run: npm run validate:data
+
+      - name: Generate search index
+        run: npm run generate:search
+
+      # AI要約を実際に生成する場合は、リポジトリのSecretsにARCHIVE_AI_API_KEY等を設定し、
+      # ここへ env として渡すこと（現時点では未設定でもエラーにならず、安全にskipされる）。
+      - name: Run AI candidate processing
+        env:
+          ARCHIVE_AI_ENABLED: ${{ secrets.ARCHIVE_AI_ENABLED }}
+          ARCHIVE_AI_PROVIDER: ${{ secrets.ARCHIVE_AI_PROVIDER }}
+          ARCHIVE_AI_MODEL: ${{ secrets.ARCHIVE_AI_MODEL }}
+          ARCHIVE_AI_API_KEY: ${{ secrets.ARCHIVE_AI_API_KEY }}
+        run: node scripts/run-archive-ai-processor.mjs --mode=${{ steps.params.outputs.mode }} --target=${{ steps.params.outputs.target }}
+
+      - name: Update admin review queue
+        if: steps.params.outputs.mode != 'dry-run'
+        run: npm run generate:admin-review-queue
+
+      - name: Typecheck / lint / build
+        if: steps.params.outputs.mode != 'dry-run'
+        run: npm run typecheck && npm run lint && npm run build
+
+      - name: Validate SEO
+        if: steps.params.outputs.mode != 'dry-run'
+        run: npm run validate:seo
+
+      - name: Check for data changes
+        id: diff
+        run: |
+          if git status --porcelain -- src/data/archiveCrawlerState.json src/data/archiveAiJobs.json src/data/archiveAiCategoryCandidates.json src/data/archiveRelationCandidates.json src/data/archiveEntityExtractionCandidates.json src/data/archiveAiSummaries.json src/data/adminReviewQueue.json src/data/searchIndex.json | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit and open Pull Request
+        if: steps.params.outputs.create_pr == 'true' && steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          BRANCH="bot/civic-archive-sync-$(date -u +%Y%m%d%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add src/data/archiveCrawlerState.json src/data/archiveAiJobs.json src/data/archiveAiCategoryCandidates.json src/data/archiveRelationCandidates.json src/data/archiveEntityExtractionCandidates.json src/data/archiveAiSummaries.json src/data/adminReviewQueue.json src/data/searchIndex.json
+          git commit -m "chore: 自動巡回・AI候補生成の更新（$(date -u +%Y-%m-%d)、mode=${{ steps.params.outputs.mode }}）"
+          git push origin "$BRANCH"
+          gh pr create \
+            --title "chore: 自動巡回・AI候補生成の更新（$(date -u +%Y-%m-%d)）" \
+            --body "実行日時: $(date -u +%Y-%m-%dT%H:%M:%SZ) ／ mode=${{ steps.params.outputs.mode }} target=${{ steps.params.outputs.target }}。詳細はワークフロー実行ログ・GitHub Actions Summaryを参照してください。人が内容を確認し、問題なければマージしてください。本番ブランチへの自動push・自動デプロイは行っていません。" \
+            --base main \
+            --head "$BRANCH"
+
+      - name: Upload run artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: archive-crawler-state
-          path: src/data/archiveCrawlerState.json
+          path: |
+            src/data/archiveCrawlerState.json
+            src/data/archiveAiJobs.json
+            src/data/adminReviewQueue.json
           if-no-files-found: ignore
           retention-days: 30
