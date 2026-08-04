@@ -1,10 +1,31 @@
-# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10C完了）
+# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10C完了、検証再確認済み）
 
-フェーズ9（9A〜9D）・フェーズ10A（自動巡回基盤）・フェーズ10B（実データ巡回・差分検知）は
-完了・コミット済み。今回は**フェーズ10C（AI候補生成・自動登録準備・定期運用統合）**が完了した。
+フェーズ9（9A〜9D）・フェーズ10A（自動巡回基盤）・フェーズ10B（実データ巡回・差分検知）・
+フェーズ10C（AI候補生成・自動登録準備・定期運用統合）は完了・コミット済み（最新コミット`36656ca`）。
 **push・Cloudflare Pagesへのデプロイは行っていない**。
 
 フェーズ9・10A・10Bの詳細は本メモには残していない（`git log`の各コミットメッセージを参照）。
+
+## 重複依頼への対応メモ
+
+10C完了後、「フェーズ10B『実運用巡回・差分取得・PR生成』を開始してください」という指示が
+届いたが、内容（実データ巡回・差分取得・更新判定・JSON更新・PR生成・ログ出力・失敗時リトライ・
+二重巡回防止・state更新・workflow_dispatch/schedule両対応）はすべて既存の10B（`9ecff80`）・
+10C（`36656ca`）で実装済みだったため、**新規実装は行わず、実装済み箇所の再確認と検証のみ**行った。
+
+- 実データ巡回・差分取得・更新判定・state更新：`scripts/run-archive-crawler.mjs`
+  （`determineFetchStatus`関数、new/changed/unchanged/possiblyRemoved判定）。
+- リトライ：`scripts/lib/city-site-fetch.mjs`（429/403/5xx）＋`run-archive-crawler.mjs`の
+  `fetchWithRetry`（ネットワークエラー・タイムアウトの1回リトライ）。
+- 二重巡回防止：`.github/workflows/civic-archive-sync.yml`の`concurrency`グループ
+  （`cancel-in-progress: false`＝同時実行させず直列化）＋120時間ゲート（`scripts/lib/sync-state.mjs`）。
+- PR生成：同ワークフローの`gh pr create`ステップ（`create_pr=true`の場合のみ、bot branch経由）。
+- ログ出力：コンソール＋`GITHUB_STEP_SUMMARY`。
+- `workflow_dispatch`・`schedule`：両方とも`on:`に設定済み。
+
+再確認のため`npm run validate:data`・`typecheck`・`lint`・`build`・`validate:seo`をすべて
+再実行し、全て成功することを確認した（結果は下記「検証結果」参照）。コード変更が無かったため、
+新規コミットは作成していない（ドキュメント更新のみ）。
 
 ## ロードマップ
 
@@ -148,7 +169,7 @@ AI要約・AIテーマ分類・AI関連付け・人物候補は、今回もす�
 6. **変更なし判定**：`validate:data`のダミー重複挿入テストで新チェックが実際に発火することを
    確認（その後、正しい内容に戻した）。
 
-## 検証結果（フェーズ10C）
+## 検証結果（フェーズ10C。重複依頼時の再実行でも同一結果を確認済み）
 
 - `npm run validate:data`：errors=0, warnings=1257（既存警告のみ、新規警告0件）。
 - `npm run typecheck`：エラーなし。
