@@ -1,161 +1,131 @@
-# セッション引き継ぎメモ（2026-08-04 更新・フェーズ9D完了）
+# セッション引き継ぎメモ（2026-08-04 更新・フェーズ10A完了）
 
-フェーズ9「比較・可視化・タイムライン」を小分けで進めている。今回は**フェーズ9D（比較・可視化・
-タイムラインの仕上げ）**が完了し、フェーズ9全体が完了した。push・デプロイは未実施。
-**フェーズ10は開始していない**。詳細指示は本セッション中に複数回受領済みだが、いずれもフェーズ9の
-検証・コミットが終わる前に届いたため、「一度に複数の大規模タスクを開始しない」という運用方針に
-従い着手していない。詳細は下記「次にやること」を参照。
+フェーズ9（9A〜9D：比較・可視化・タイムライン）は完了・コミット済み。今回は**フェーズ10A
+（自動巡回基盤）**が完了した。push・デプロイは未実施。**フェーズ10B以降は開始していない**。
+
+フェーズ9（9A〜9D）の詳細は本メモには残していない（`git log`の各コミットメッセージを参照）。
+このメモは直近フェーズの状態・次にやることを中心に記録する。
 
 ## ロードマップ
 
-1. フェーズ6：政策データ・政策比較基盤 → 完了
-2. フェーズ7：議案・条例・請願・陳情アーカイブ → 完了
-3. フェーズ8：AI横断検索・テーマ検索 → 完了
-4. フェーズ9：比較・可視化・タイムライン → **すべて完了**
-   - 9A：共通型・共通コンポーネント・`/compare`入口整理・`/timeline`基盤ページ → 完了
-   - 9B：財政比較・グラフ・年度別タイムライン → 完了
-   - 9C：市長・議員・政策比較 → 完了
-   - **9D：比較・可視化・タイムラインの仕上げ → 完了**
-5. フェーズ10：自動巡回の完成・全体検証・本番デプロイ → 詳細指示（10A〜10D）を受領済み、未着手
-   （下記「次にやること」参照）
+1. フェーズ6〜9（政策比較基盤〜比較・可視化・タイムライン） → **すべて完了**
+2. フェーズ10：自動巡回の完成・全体検証・本番デプロイ
+   - **10A：自動巡回基盤 → 完了**（今回。実データ取得・AI解析・push・デプロイは行っていない）
+   - 10B以降：ユーザーから複数回、内容の異なる指示を受領済み（下記「フェーズ10Bの定義について
+     の注意」参照）。未着手。
 
-## 完了した作業（フェーズ9D）
+## 完了した作業（フェーズ10A：自動巡回基盤）
 
-### タイムラインの拡張（`/timeline`）
+「基盤のみ」実装。実際のHTTP取得・AI解析・push・デプロイは行っていない。
 
-- `src/types/timeline.ts`：`ArchiveTimelineEventCategory`に`memberTerm`・`finance`・
-  `generalQuestion`・`councilDocument`・`policy`を追加（旧`fiscalYear`は`finance`に統合）。
-- `src/lib/archiveTimeline.ts`：新規イベント生成関数を追加。
-  - `buildMemberTermEvents()`：議員任期（`archiveMemberTerms.json`が0件のため現状は空配列を返すのみ。
-    データ追加時にコード変更なしで反映される）。
-  - `buildFinanceMetricEvents()`：**フェーズ9Bの`FINANCE_METRICS`レジストリをそのまま再利用**し、
-    年度別財政（人口・世帯数・予算3種・歳入歳出・市税・地方交付税・国庫支出金・市債発行額・
-    市債残高2区分・基金総額・財源調整用基金・財政指標4種）を指標単位のイベントに変換
-    （旧`buildFiscalYearEvents()`の「1年度1件のまとめイベント」から置き換え。値が未確認の指標は
-    イベントを作らない）。
-  - `buildGeneralQuestionEvents()`：一般質問14件をイベント化。
-  - `buildCouncilDocumentEvents()`：議案・条例・請願・陳情13件をイベント化
-    （`documentPath()`で種別ごとの詳細ページへリンク）。
-  - `buildPolicyEvents()`：政策6件をイベント化（`announcedDate`優先、無ければ
-    `relatedFiscalYears`の年度ごとに複数イベント。いずれも無い政策は時点不明のため年表に含めない）。
-- `src/pages/TimelinePage.tsx`：上記すべてのイベントストリームを統合し、カテゴリ別アイコン・
-  ラベルを表示。**カテゴリで絞り込むフィルター**（チェックボタン形式、複数選択可）を追加。
-  既存の「この年度のタイムラインを見る」（`/timeline/:year`）導線は維持。
+### 既存実装の調査（重複実装を避けるため）
 
-### 比較・タイムラインへの導線追加
+着手前に、この用途の自動化がすでに存在するか調査した。
 
-「この人物を比較」（フェーズ9Cで`/people/:slug`に実装済み）に加え、以下のページへ導線を追加した。
+- `.github/workflows/sync-council-data.yml` + `scripts/sync-council-data.mjs`
+  （5日間隔・120時間ゲート・bot branch経由PR、既存実装）：一般質問質問通告
+  （question-notice）・議員名簿変更検知（member-roster-watch）・会議日程・意見書決議・
+  委員会活動報告書を既に巡回している。
+- `scripts/fetch-nobeoka-council-documents.mjs` + `scripts/generate-council-documents.mjs`
+  （既存実装）：議案審議結果一覧ページ（議案・条例・請願・陳情）を既に取得している。
 
-- `/mayors/:slug`：「この市長を比較」（`/compare/mayors?items=<id>`）・
-  「この市長の任期を年表で見る」（`/timeline/:year`、最初の任期開始年度）。
-- `/members/:id`（現職）：「この議員を比較」（`/compare/members?items=member-<id>`）・
-  「年表で見る」（`/timeline`、議員個別の年度が確認できないため汎用リンク）。
-- `/members/:id`（元議員）：同上（`/compare/members?items=former-member-<id>`）・
-  在職確認済み会期から算出した年度の`/timeline/:year`。**あわせて、フェーズ9C以前から残っていた
-  「議員一覧・報酬比較・議員比較等の対象には含まれません」という誤った案内文を修正**
-  （`/compare/members`は元議員も対象に含む。フェーズ9Cで実装済みだった事実と矛盾していた）。
-- `/policies/:slug`：「この政策を比較」・「年表で見る」（`announcedDate`または
-  `relatedFiscalYears[0]`の年度）。
-- `/themes/:slug`：フェーズ8で残していたコメント（「このテーマの年表を見る」挿入予定）を実装。
-  テーマ単位の比較・年表は存在しないため、汎用の`/timeline`・`/compare`へリンク
-  （個別機能があるかのような誤解を避けるため「このテーマを比較」ではなく「比較ページを見る」と表記）。
-- `/questions/:id`：「年表で見る」（質問日の年度）・「比較ページを見る」（汎用、個別の質問比較機能は無い）。
-- 議案・条例・請願・陳情の詳細ページ（`CouncilDocumentsArchivePage.tsx`の共通`DocumentDetailPage`、
-  4種別すべてに反映）：「年表で見る」（`doc.fiscalYear`）・「比較ページを見る」（汎用）。
-- `/people/:slug`：「年表で見る」を追加（市長は任期開始年度、それ以外は関連財政年度の最新年、
-  いずれも無ければ汎用`/timeline`）。
-- `/finance`・`/finance/budget`・`/finance/debt`・`/finance/funds`はフェーズ9Bで導線済みのため変更なし。
+このため、今回追加した巡回対象定義（`archiveCrawlerTargets.json`）では、これらと重複する
+カテゴリに`existingImplementation`フィールドで既存スクリプトのパスを明記し、ダミー巡回では
+常にスキップする（重複取得しない）設計にした。
 
-一般質問・議案・条例・請願・陳情・テーマには個別の比較機能が存在しないため、これらのページからは
-汎用の`/compare`（比較トップ）へリンクしている。「この○○を比較」のように存在しない機能を
-示唆する表現は使っていない。
+### 追加したファイル
 
-### 比較UI改善
+- `src/types/archiveCrawler.ts`（新規）：`ArchiveCrawlerTarget`・`ArchiveCrawlerResult`・
+  `ArchiveCrawlerLog`・`ArchiveCrawlerTargetState`・`ArchiveCrawlerState`・
+  `ArchiveCrawlerCategory`（13種）。
+- `src/data/archiveCrawlerTargets.json`（新規）：巡回対象13件。すべて実在するURL
+  （`financeDashboard.json`・`mayor.json`・`members.json`・既存sync scriptsが既に参照している
+  URLを再利用、推測のURLは追加していない）。市債（`debt`）・政策（`policy`）・テーマ（`theme`）は
+  単一の公式監視対象ページが無い/未確認のため`url: null`。
+- `src/lib/archiveCrawler.ts`（新規）：`runDummyCrawl()`（対象ごとに
+  既存実装ありなら"skipped"、url未確認なら"skipped"、それ以外は"unchanged"を返すダミー実装）・
+  `shouldFlagAsPossiblyRemoved()`（削除判定：2回連続未検出、かつ代替URL無しの場合のみ削除候補、
+  ダミー実装では未使用）・`mergeCrawlerState()`。
+- `src/data/archiveCrawlerState.json`（新規）：初期状態。`scripts/run-archive-crawler.mjs`を
+  ローカルで実際に1回実行して動作確認した結果を反映している（対象13件、変更0、エラー0、
+  9件skipped＝既存実装ありまたはurl未確認、4件unchanged＝url確認済み・既存実装なし）。
+- `scripts/run-archive-crawler.mjs`（新規）：CI実行用のプレーンJSランナー。
+  `src/lib/archiveCrawler.ts`と同じ判定ロジックをミラー実装している（このプロジェクトの
+  scripts/配下は他ファイルと同様、ビルド前のTypeScriptを直接importできないため。
+  `scripts/lib/public-routes.mjs`の既存コメントと同じ理由）。ロジック変更時は両方を更新すること。
+  `--force`で120時間ゲートを無視できる。
+- `.github/workflows/civic-archive-sync.yml`（新規）：5日間隔（120時間ゲート、
+  `sync-council-data.yml`と同じ方式）・`workflow_dispatch`（forceオプション付き）・
+  `timeout-minutes: 10`・`concurrency`グループ・ログはGitHub Actions Summary＋コンソール出力。
+  **今回はダミー実装のためcommit・PR作成は行わない**（実データ取得を実装する時点で
+  `sync-council-data.yml`と同じbot branch経由PR方式を追加する）。
 
-- `src/components/compare/CompareItemPicker.tsx`（全8つの比較ページで共通利用）に
-  「選択をすべて解除」ボタンを追加（1件でも選択されている場合のみ表示）。共通コンポーネントの
-  変更のため、個別ページを変更せず全比較ページに反映される。
+### 変更した既存ファイル
 
-### validate:data
+- `scripts/lib/sync-state.mjs`：`loadLocalState()`・`saveLocalState()`に`statePath`引数を追加
+  （デフォルトは既存の`scripts/_sync-state.json`のため後方互換）。新しい巡回ジョブ
+  （`run-archive-crawler.mjs`）が120時間ゲートの状態ファイルを分離して使えるようにした
+  （既存の`sync-council-data.mjs`とゲートが混ざらないように）。
+- `.gitignore`：`scripts/_archive-crawler-sync-state.json`（新しいゲート状態ファイル、
+  Git管理外）を追加。
+- `scripts/validate-data.mjs`：巡回対象の重複ID・URL重複（既存実装が食い違う場合のみ警告、
+  bill/ordinance/petition/requestが同一URLを意図的に共有するのは許容）・category妥当性・
+  url形式・`archiveCrawlerState.json`とのstate整合性（存在しない対象IDの参照、日時形式、
+  件数の非負性）を検証する処理を追加。
 
-- `archiveCouncilDocuments`の`decisionDate`・`submittedDate`・`meetingDate`の日付形式検証を追加
-  （フェーズ9Dで`decisionDate`が年表イベントの日付・並び順に直接使われるようになったため）。
-- person存在確認（`memberId`等）・fiscalYear存在確認・sourceRefs必須・verificationStatus検証は
-  フェーズ7〜9Bまでに既に広く整備済みであることを確認した（新規データファイルを追加していないため、
-  大規模な追加は行っていない）。
+## 検証結果（フェーズ10A）
 
-## 検証結果（フェーズ9D）
+- `npm run validate:data`：errors=0, warnings=1257（既存警告のみ、新規警告0件）。
+  意図的に対象IDを重複させて新チェックが実際に発火することを確認済み（その後、正しい内容に戻した）。
+- `npm run typecheck`：エラーなし（`tsconfig.app.json`の`include: ["src"]`により、
+  未importの新規ファイルも型検査対象になっていることを確認）。
+- `npx oxlint`：クリーン。
+- `npm run build`：912ページ生成（新規Reactページは追加していないためページ数は前回と同一。
+  `archiveCrawler`関連コードはどのページからもimportされていないため、ビルド後のバンドルに
+  含まれない＝バンドルサイズへの影響なしを確認）。
+- `npm run validate:seo`：failures=0, warnings=0。
+- `node scripts/run-archive-crawler.mjs`をローカルで実際に実行し、120時間ゲート判定・
+  ダミー巡回・`archiveCrawlerState.json`の更新が動作することを確認済み。
 
-- `npm run validate:data`：errors=0, warnings=1257（既存警告のみ、新規警告0件）
-- `npm run typecheck`：エラーなし
-- `npx oxlint`：クリーン
-- `npm run build`：912ページ生成（新規ルートは追加していないため件数は前回と同一）、prerender成功
-- `npm run validate:seo`：failures=0, warnings=0
-- 生成HTML確認：`/timeline`（6カテゴリすべての表示、一般質問14件・議案条例請願陳情13件（種別内訳
-  議案3・条例3・請願3・陳情4）・政策の各イベントが実データと一致することをユニークタイトルで確認）、
-  `/mayors/mayor-01`・`/policies/*`・`/questions/*`（比較・年表リンクのhrefを確認）、
-  `/themes/*`（「年表で見る」「比較ページを見る」を確認）をそれぞれgrepで確認済み。
-- **ブラウザでの実機確認は未実施**（Chrome拡張が本セッションでも未接続。フェーズ9A〜9Cから継続する
-  既知の制約）。
+## フェーズ10Bの定義についての注意
 
-## 未実施・意図的に見送った項目（フェーズ9D）
+本セッション中、フェーズ10の内訳についてユーザーから複数回、内容の異なる指示を受け取っている。
 
-- テーマ別・人物別・年度別の専用タイムラインページ（例：`/themes/:slug/timeline`）は作らず、
-  既存の汎用`/timeline`・`/timeline/:year`へのリンクに留めた。個別機能を作ると
-  「既存機能の優先・重複実装を避ける」方針、および今回の実装時間に見合わないため。
-- 検索結果ページ（`/search`）からの比較・タイムライン導線は未実装。
-- AI候補表示の統一（`archiveAiCategoryCandidates.json`等の表示方法の見直し）は、フェーズ8で
-  実装済みの表示方法（「AI候補・要確認」バッジ）を変更する必要が見当たらなかったため、
-  今回は手を加えていない。
-- テーマ単位・人物単位の比較機能（「このテーマを比較」等）は存在しないため作っておらず、
-  該当ページからは汎用の`/compare`・`/timeline`へリンクしている。
+1. 1回目：10A＝自動巡回基盤、10B＝全体最終検証と公開前監査、10C＝GitHubへpush、
+   10D＝Cloudflare Pagesデプロイ確認（10A・10B完了後にいったん停止、10C・10Dは明示許可待ち）。
+2. 2回目（今回のフェーズ10A実施指示）：「フェーズ10B（実データ巡回）は開始しないでください」
+   とあり、10Bを「実データ巡回」と表現している（1回目の「全体最終検証」という定義と異なる）。
 
-## 次にやること
-
-### フェーズ10「自動巡回・最終検証・本番公開準備」（受領済み指示の要約、10A〜10Dの4段階）
-
-- **10A**：自動巡回システムの完成。既存`.github/workflows/sync-council-data.yml`・
-  `scripts/sync-council-data.mjs`（フェーズ8以前に基盤あり）の調査から着手すること。
-  regular-sync（5日間隔、差分中心）とhistorical-backfill（手動、段階的取得）の分離、
-  120時間判定によるスケジュール、URL一致だけに頼らない差分検出（ハッシュ・ETag等）、
-  2回連続未検出でのみ削除候補化、AI候補生成は公式データと完全分離、GitHub Actionsの
-  concurrency/timeout/ログ/自動PR（bot branchのみ、mainへ直接pushしない）等。
-- **10B**：全体最終検証（Git状態・全JSON整合性・主要ルート・SEO・アクセシビリティ・
-  パフォーマンス・実ブラウザ確認）。
-- **10A・10B完了後、いったん停止してユーザーに報告すること**（指示で明示されている）。
-- **10C（GitHubへpush）・10D（Cloudflare Pagesデプロイ確認）は、ユーザーの明示的な許可を
-  受けるまで実行しないこと**。
-
-**重要**：フェーズ10着手時は、まず`git log`・`git status`・`docs/session-handoff.md`で実際の
-リポジトリ状態を確認すること。ユーザー指示に「フェーズ1〜9（またはフェーズ1〜9D）は完了済み」と
-あっても、実際のコミット履歴とこのメモを正として確認してから着手する
-（本セッションでは実際に9C・9D未完了の段階で複数回「完了済み」という前提の指示が届いたことがある）。
+次回、フェーズ10Bに着手する際は、どちらの定義（全体最終検証／実データ巡回）を指すか
+ユーザーに確認すること。指示文だけで判断せず、`git log`・このメモ・実際のリポジトリ状態を
+正として確認してから着手する（本セッションでは実際に前段階が未完了の状態で
+「フェーズ1〜9（またはフェーズ1〜9D）は完了済み」という前提の指示が複数回届いたことがある）。
 
 ## 既知の注意点・落とし穴（継続）
 
 - **`npm run build`実行のたびに`src/data/siteUpdate.json`・`archiveAiCategoryCandidates.json`・
   `archiveRelationCandidates.json`・`adminReviewQueue.json`のタイムスタンプだけが更新される**。
-  実データ変更を伴わない場合はコミットせず`git restore`で戻す（今回も実施）。
-- `ArchiveDebt`・`ArchiveFund`の`sourceRefs`は型のトップレベルではなく`balance.sourceRefs`にネスト
-  されている。
-- 令和年→西暦の変換式：`西暦 = 2018 + 令和年`。会計年度は4月始まり（1〜3月は前年度扱い、
-  `fiscalYearOfIsoDate()`に集約済み）。
-- 比較ページの命名規則は`/xxx/compare`ではなく`/compare/xxx`。年度ベースの比較ページ
-  （finance/budget/debt/funds/population）は`?years=`、市長・議員・政策比較は`?items=`
-  （歴史的経緯、統一していない）。
-- 議員・元議員のid空間（`m01`等／`fm01`等）はプレフィックスで衝突しないことを確認済み。
-  `/people/:slug`のslugは`personType-id`形式（例："member-m01"）で、比較ページの選択IDにも
-  この形式（議員のみ）を使っている。
+  実データ変更を伴わない場合はコミットせず`git restore`で戻す。
+- `scripts/`配下のNode実行スクリプトは、ビルド前の`src/`配下のTypeScriptを直接importできない
+  （Vite/tsxのようなトランスパイル実行環境が入っていないため）。同じロジックが必要な場合は
+  `.mjs`側にミラー実装する（`scripts/lib/public-routes.mjs`・今回の
+  `scripts/run-archive-crawler.mjs`と同じパターン）。
+- 自動巡回関連のローカル状態ファイル（`scripts/_sync-state.json`・
+  `scripts/_archive-crawler-sync-state.json`）はGit管理外。GitHub Actions側は`actions/cache`で
+  実行間を跨いで保持する。
+- 一般質問・議案・条例・請願・陳情・議員名簿の自動巡回は`sync-council-data.yml`・
+  `fetch-nobeoka-council-documents.mjs`が既に担っている。歴代市長・財政・人口・基金・市債・政策・
+  テーマの自動巡回は`archiveCrawlerTargets.json`に対象定義のみあり、実装は未着手（フェーズ10B以降）。
+- 令和年→西暦の変換式：`西暦 = 2018 + 令和年`。会計年度は4月始まり。
+- 比較ページのクエリパラメータは年度ベース（finance/budget/debt/funds/population）が`?years=`、
+  市長・議員・政策比較が`?items=`（統一していない）。
 - 委員会マスタが存在しない（`committeeId`は1件も確認できていない）。
-- `validate-seo.mjs`には`public-routes.mjs`とは独立したハードコードチェックが一部ある。
-- 一般質問・議案・条例・請願・陳情・テーマには個別の比較ページが存在しない
-  （汎用`/compare`へリンクしている）。新たに専用の比較ページを作る場合は、既存の
-  `CompareTable`・`CompareSourceNotice`・`CompareItemPicker`・`archiveCompare.ts`を再利用すること。
 
 ## 次セッション開始時の推奨手順
 
 1. `git log --oneline -10`と`git status`で本メモと状態が一致しているか確認。
 2. `npm run validate:data && npm run typecheck`で現状に問題がないか確認。
-3. 可能であれば`/timeline`・`/mayors/mayor-01`等をブラウザで375px・390px・768px・1280pxで
-   確認する（フェーズ9A〜9Dとも実機確認が未実施のまま）。
-4. フェーズ10（10A→10Bの順、10C・10Dはユーザー許可待ち）に、ユーザーの指示を確認の上で着手する。
+3. フェーズ10Bに着手する場合は、上記「フェーズ10Bの定義についての注意」を踏まえ、
+   ユーザーに意図（全体最終検証か、実データ巡回か）を確認してから着手する。
+4. 可能であれば`/timeline`・`/compare/*`等をブラウザで375px・390px・768px・1280pxで確認する
+   （フェーズ9A以降、実機確認が未実施のまま）。

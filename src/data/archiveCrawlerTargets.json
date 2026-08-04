@@ -1,0 +1,106 @@
+[
+  {
+    "id": "general-question",
+    "category": "generalQuestion",
+    "categoryLabel": "一般質問・質問通告",
+    "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html",
+    "existingImplementation": "scripts/sync-council-data.mjs",
+    "notes": "質問通告一覧ページ。差分検知はscripts/sync-council-data.mjs（question-notice）で既に実施済み。"
+  },
+  {
+    "id": "bill",
+    "category": "bill",
+    "categoryLabel": "議案",
+    "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+    "existingImplementation": "scripts/fetch-nobeoka-council-documents.mjs",
+    "notes": "議案審議結果一覧ページ。取得・archiveCouncilDocuments.jsonへの反映はscripts/fetch-nobeoka-council-documents.mjs＋scripts/generate-council-documents.mjsで既に実施済み。"
+  },
+  {
+    "id": "ordinance",
+    "category": "ordinance",
+    "categoryLabel": "条例",
+    "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+    "existingImplementation": "scripts/fetch-nobeoka-council-documents.mjs",
+    "notes": "議案審議結果一覧ページ内に条例改廃議案も含まれる（billと同一ページ）。"
+  },
+  {
+    "id": "petition",
+    "category": "petition",
+    "categoryLabel": "請願",
+    "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+    "existingImplementation": "scripts/fetch-nobeoka-council-documents.mjs",
+    "notes": "議案審議結果一覧ページ内に請願の審査結果も含まれる。"
+  },
+  {
+    "id": "request",
+    "category": "request",
+    "categoryLabel": "陳情",
+    "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+    "existingImplementation": "scripts/fetch-nobeoka-council-documents.mjs",
+    "notes": "議案審議結果一覧ページ内に陳情の審査結果も含まれる。個別の請願・陳情一覧ページ（petition-register）は未確認（scripts/sync-council-data.mjs側でも status=unavailable）。"
+  },
+  {
+    "id": "member-roster",
+    "category": "memberRoster",
+    "categoryLabel": "議員一覧・会派構成",
+    "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
+    "existingImplementation": "scripts/sync-council-data.mjs",
+    "notes": "議員名簿ページ。変更検知はscripts/sync-council-data.mjs（member-roster-watch）で既に実施済み。委員会構成の変更検知は未確認。"
+  },
+  {
+    "id": "mayor",
+    "category": "mayor",
+    "categoryLabel": "市長情報（歴代市長を含む）",
+    "url": "https://hisatomo-m.jp/",
+    "existingImplementation": null,
+    "notes": "現職市長の公式サイト（src/data/mayor.jsonのofficialUrl/sourceUrlと同一）。歴代（前任以前）市長の公式ページは未確認。archiveMayors.json・archiveMayorTerms.jsonは手入力で管理しており、自動巡回は未実装。"
+  },
+  {
+    "id": "finance",
+    "category": "finance",
+    "categoryLabel": "財政（予算・決算・財政健全化判断比率）",
+    "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html",
+    "existingImplementation": null,
+    "notes": "健全化判断比率等の公表ページ（financeDashboard.jsonのfinancialIndicators出典と同一）。予算書・決算書はPDF単位で個別に確認しており、一覧ページでの自動巡回は未実装。"
+  },
+  {
+    "id": "population",
+    "category": "population",
+    "categoryLabel": "人口・世帯数",
+    "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+    "existingImplementation": null,
+    "notes": "現住人口及び世帯数の推移（xls）。archiveFiscalYears.jsonのpopulation出典と同一。自動巡回は未実装。"
+  },
+  {
+    "id": "fund",
+    "category": "fund",
+    "categoryLabel": "基金残高",
+    "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+    "existingImplementation": null,
+    "notes": "令和8年度当初予算編成方針（本市の財政状況について）PDF。archiveFiscalYears.jsonのfund出典と同一。自動巡回は未実装。"
+  },
+  {
+    "id": "debt",
+    "category": "debt",
+    "categoryLabel": "市債残高",
+    "url": null,
+    "existingImplementation": null,
+    "notes": "年度末市債残高（区分別）の公式資料URLは未確認（archiveFiscalYears.jsonのdebt.balance.sourceRefsも現状すべて空）。確認できるまでurlはnullのままとし、推測で埋めない。"
+  },
+  {
+    "id": "policy",
+    "category": "policy",
+    "categoryLabel": "政策（公約・施政方針等）",
+    "url": null,
+    "existingImplementation": null,
+    "notes": "政策は選挙公約・施政方針・予算資料等、複数の出典に分散しており単一の監視対象ページに集約できない。archivePolicies.jsonの各エントリはsourceRefsで個別に出典を管理している。"
+  },
+  {
+    "id": "theme",
+    "category": "theme",
+    "categoryLabel": "テーマ（質問テーマ分類）",
+    "url": null,
+    "existingImplementation": null,
+    "notes": "themes.jsonは当サイトが定義する内部の固定分類であり、外部の公式ページを持たない。巡回対象としては形式上登録するが、常にurl=null・巡回スキップとなる。"
+  }
+]

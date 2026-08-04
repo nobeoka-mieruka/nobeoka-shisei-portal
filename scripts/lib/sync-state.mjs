@@ -18,12 +18,17 @@ export const MIN_HOURS_BETWEEN_RUNS = 120;
 
 const MAX_HISTORY = 30;
 
-export function loadLocalState() {
-  if (!existsSync(STATE_PATH)) {
+/**
+ * statePathを省略した場合は既存のscripts/_sync-state.json（sync-council-data.mjs用）を使う。
+ * 他の巡回ジョブ（例：archive-crawler）が同じ仕組みを使う場合は、別のパスを渡して
+ * 状態ファイルを分離すること（同じファイルを共有すると、120時間ゲートが混ざってしまうため）。
+ */
+export function loadLocalState(statePath = STATE_PATH) {
+  if (!existsSync(statePath)) {
     return { lastSuccessfulRunAt: null, lastAttemptAt: null, history: [] };
   }
   try {
-    const data = JSON.parse(readFileSync(STATE_PATH, "utf8"));
+    const data = JSON.parse(readFileSync(statePath, "utf8"));
     return {
       lastSuccessfulRunAt: data.lastSuccessfulRunAt ?? null,
       lastAttemptAt: data.lastAttemptAt ?? null,
@@ -34,9 +39,9 @@ export function loadLocalState() {
   }
 }
 
-export function saveLocalState(state) {
+export function saveLocalState(state, statePath = STATE_PATH) {
   const trimmed = { ...state, history: state.history.slice(0, MAX_HISTORY) };
-  writeFileSync(STATE_PATH, `${JSON.stringify(trimmed, null, 2)}\n`, "utf8");
+  writeFileSync(statePath, `${JSON.stringify(trimmed, null, 2)}\n`, "utf8");
 }
 
 export function hoursSince(isoString, now = new Date()) {

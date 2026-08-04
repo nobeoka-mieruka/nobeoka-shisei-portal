@@ -29,9 +29,10 @@ data/minutes/
 # scripts/lib/minutes-source.mjs のHTTP取得結果ローカルキャッシュ（同一URL再取得防止）
 scripts/.cache/
 
-# scripts/sync-council-data.mjs の実行状態（5日ごと自動巡回の前回正常実行日時等）。
-# GitHub Actions側ではactions/cacheで保持し、Gitへはコミットしない。
+# scripts/sync-council-data.mjs / scripts/run-archive-crawler.mjs の実行状態
+# （5日ごと自動巡回の前回正常実行日時等）。GitHub Actions側ではactions/cacheで保持し、Gitへはコミットしない。
 scripts/_sync-state.json
+scripts/_archive-crawler-sync-state.json
 
 # Editor directories and files
 .vscode/*

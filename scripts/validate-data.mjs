@@ -2108,6 +2108,101 @@ try {
   }
 }
 
+// --- archiveCrawlerTargets.json / archiveCrawlerState.json（フェーズ10A：自動巡回基盤） ---
+try {
+  const archiveCrawlerTargets = readJson("src/data/archiveCrawlerTargets.json");
+  if (!Array.isArray(archiveCrawlerTargets)) throw new Error("配列ではありません");
+
+  const VALID_CRAWLER_CATEGORIES = new Set([
+    "generalQuestion",
+    "bill",
+    "ordinance",
+    "petition",
+    "request",
+    "mayor",
+    "memberRoster",
+    "finance",
+    "population",
+    "fund",
+    "debt",
+    "policy",
+    "theme",
+  ]);
+
+  const crawlerTargetIds = checkDuplicateIds({ err, warn }, archiveCrawlerTargets, "id", "archiveCrawlerTargets.json");
+
+  // URL重複：議案・条例・請願・陳情のように、同一の一覧ページを複数対象が意図的に共有する場合は
+  // 許容する（existingImplementationが揃っている場合）。異なる実装が同じURLを指している場合のみ
+  // 所有関係が曖昧なため警告する。
+  const byUrl = new Map();
+  for (const t of archiveCrawlerTargets) {
+    if (!t.url) continue;
+    const list = byUrl.get(t.url) ?? [];
+    list.push(t);
+    byUrl.set(t.url, list);
+  }
+  for (const [url, list] of byUrl) {
+    if (list.length < 2) continue;
+    const impls = new Set(list.map((t) => t.existingImplementation ?? null));
+    if (impls.size > 1) {
+      warn(
+        "archiveCrawlerTargets.json",
+        `URLが複数対象で共有されていますが、既存実装（existingImplementation）が一致しません: ${url}（対象: ${list.map((t) => t.id).join("、")}）`,
+      );
+    }
+  }
+
+  for (const t of archiveCrawlerTargets) {
+    const tag = `archiveCrawlerTargets.json (${t.id ?? "id不明"})`;
+    if (!VALID_CRAWLER_CATEGORIES.has(t.category)) err(tag, `未定義のcategoryです: ${t.category}`);
+    if (isBlank(t.categoryLabel)) err(tag, "categoryLabelが空です");
+    if (t.url != null && !URL_RE.test(t.url)) err(tag, `urlの形式が不正です: ${t.url}`);
+    if (t.url == null && t.existingImplementation) {
+      warn(tag, "urlが未確認なのにexistingImplementationが設定されています（矛盾している可能性があります）");
+    }
+  }
+
+  try {
+    const archiveCrawlerState = readJson("src/data/archiveCrawlerState.json");
+    const stateTag = "archiveCrawlerState.json";
+    if (!Array.isArray(archiveCrawlerState.targets)) {
+      err(stateTag, "targetsが配列ではありません");
+    } else {
+      for (const field of ["lastRunAt", "lastSuccessfulRunAt"]) {
+        const v = archiveCrawlerState[field];
+        if (v != null && Number.isNaN(Date.parse(v))) err(stateTag, `${field}の形式が不正です: ${v}`);
+      }
+      for (const field of ["totalCount", "changedCount", "errorCount"]) {
+        const v = archiveCrawlerState[field];
+        if (typeof v !== "number" || v < 0) err(stateTag, `${field}が非負の数値ではありません: ${v}`);
+      }
+      for (const ts of archiveCrawlerState.targets) {
+        const tsTag = `${stateTag} (${ts.targetId ?? "id不明"})`;
+        if (!crawlerTargetIds.has(ts.targetId)) {
+          err(tsTag, `archiveCrawlerTargets.jsonに存在しない巡回対象IDを参照しています: ${ts.targetId}`);
+        }
+        for (const field of ["lastCheckedAt", "lastSuccessfulAt"]) {
+          const v = ts[field];
+          if (v != null && Number.isNaN(Date.parse(v))) err(tsTag, `${field}の形式が不正です: ${v}`);
+        }
+      }
+      // state整合性：登録済みの全対象がstateにも存在するか（片方にしか無い＝生成漏れ・削除漏れの可能性）。
+      const stateTargetIds = new Set(archiveCrawlerState.targets.map((t) => t.targetId));
+      for (const t of archiveCrawlerTargets) {
+        if (!stateTargetIds.has(t.id)) {
+          warn(stateTag, `archiveCrawlerTargets.jsonの対象がstateに存在しません（未実行のため反映されていない可能性）: ${t.id}`);
+        }
+      }
+    }
+  } catch (e) {
+    if (e?.code === "ENOENT") warn("archiveCrawlerState.json", "読み込めませんでした（存在しない場合はスキップ）");
+    else throw e;
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveCrawlerTargets.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);
