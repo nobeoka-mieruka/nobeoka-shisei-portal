@@ -27,6 +27,39 @@ export function resolveMemberDisplayName(
   return members.find((m) => m.id === memberId)?.name ?? formerMembers.find((m) => m.id === memberId)?.name ?? memberId;
 }
 
+/** 議員詳細（現職／元議員）への遷移先リンク情報。 */
+export interface MemberOrFormerLink {
+  id: string;
+  name: string;
+  isFormer: boolean;
+  href: string;
+}
+
+/**
+ * 現職議員（members.json）に一致しない場合、元議員（formerMembers.json）を確認し、
+ * 正しい詳細ページへのリンク先（現職:/members/:id、元議員:archiveMemberProfiles.json経由の
+ * /members/former/:slug）を返す。どちらにも一致しない場合はundefined。
+ */
+export function findMemberOrFormerLink(
+  memberId: string | undefined,
+  members: CouncilMember[],
+  formerMembers: FormerMember[],
+  archiveMemberProfiles: { legacyFormerMemberId?: string; legacyMemberId?: string; slug: string }[],
+): MemberOrFormerLink | undefined {
+  if (!memberId) return undefined;
+  const active = members.find((m) => m.id === memberId);
+  if (active) return { id: active.id, name: active.name, isFormer: false, href: `/members/${active.id}` };
+  const former = formerMembers.find((m) => m.id === memberId);
+  if (former) {
+    const profile = archiveMemberProfiles.find(
+      (p) => p.legacyFormerMemberId === former.id || p.legacyMemberId === former.id,
+    );
+    const href = profile ? `/members/former/${profile.slug}` : "/members/former";
+    return { id: former.id, name: former.name, isFormer: true, href };
+  }
+  return undefined;
+}
+
 export const memberSpeechAnalysisStatusLabels: Record<MemberSpeechAnalysisStatus, string> = {
   verified: "AI分析・内容確認済み",
   "partially-verified": "AI分析・一部確認済み",

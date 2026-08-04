@@ -2,7 +2,19 @@ import { useMemo, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import generalQuestionsData from "../data/generalQuestions.json";
 import membersData from "../data/members.json";
-import type { CouncilMember, GeneralQuestionItem } from "../types";
+import formerMembersData from "../data/formerMembers.json";
+import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
+import councilSessionsData from "../data/councilSessions.json";
+import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import type {
+  CouncilMember,
+  CouncilSession,
+  CouncilSpeech,
+  CouncilSpeechSummaryData,
+  FormerMember,
+  GeneralQuestionItem,
+} from "../types";
+import type { ArchiveMemberProfile } from "../types/historicalArchive";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { StatCard } from "../components/StatCard";
@@ -11,12 +23,27 @@ import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { GeneralQuestionCard } from "../components/questions/GeneralQuestionCard";
+import { VerifiedSpeechCard } from "../components/questions/VerifiedSpeechCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
+import { allPublicSpeeches, findMemberOrFormerLink, resolveMemberDisplayName } from "../lib/councilSpeeches";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
+const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+const councilSessions = councilSessionsData as CouncilSession[];
+const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+
+/** /questionsで「一般質問データベース」として扱う発言区分（討論・動議等の議事系区分は除く）。 */
+const QUESTION_LIKE_SPEECH_TYPES = new Set(["一般質問", "代表質問", "関連質問", "総括質疑"]);
+
+const verifiedSpeeches: CouncilSpeech[] = allPublicSpeeches(speechSummaryData.members)
+  .filter((s) => QUESTION_LIKE_SPEECH_TYPES.has(s.speechType))
+  .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+
+const REGULAR_SESSION_TYPES = new Set(["定例会"]);
 
 type QuestionSortKey = "dateDesc" | "dateAsc" | "memberName";
 
@@ -151,6 +178,87 @@ export function GeneralQuestionsPage() {
   const registeredThemeCount = useMemo(() => new Set(questions.flatMap((q) => q.topics)).size, []);
   const fiscalYearCount = useMemo(() => new Set(questions.map((q) => q.fiscalYear)).size, []);
 
+  // --- 確認済み一般質問アーカイブ（councilSpeechSummaries.json、公式会議録ベース） ---
+  const [vQuery, setVQuery] = useState("");
+  const [vMemberId, setVMemberId] = useState("all");
+  const [vTheme, setVTheme] = useState("all");
+  const [vYear, setVYear] = useState("all");
+  const [vSessionId, setVSessionId] = useState("all");
+
+  const verifiedMemberOptions = useMemo(() => {
+    const ids = new Set(verifiedSpeeches.map((s) => s.memberId));
+    return [...ids]
+      .map((id) => ({ value: id, label: resolveMemberDisplayName(id, members, formerMembers) }))
+      .sort((a, b) => a.label.localeCompare(b.label, "ja"));
+  }, []);
+
+  const verifiedThemeOptions = useMemo(
+    () =>
+      Array.from(new Set(verifiedSpeeches.flatMap((s) => s.topics)))
+        .sort((a, b) => a.localeCompare(b, "ja"))
+        .map((t) => ({ value: t, label: t })),
+    [],
+  );
+
+  const verifiedYearOptions = useMemo(
+    () =>
+      Array.from(new Set(verifiedSpeeches.map((s) => s.sessionId.slice(0, 4))))
+        .sort((a, b) => b.localeCompare(a))
+        .map((y) => ({ value: y, label: `${y}年` })),
+    [],
+  );
+
+  const verifiedSessionOptions = useMemo(() => {
+    const ids = new Set(verifiedSpeeches.map((s) => s.sessionId));
+    return councilSessions
+      .filter((s) => ids.has(s.id))
+      .map((s) => ({ value: s.id, label: s.title }))
+      .sort((a, b) => b.value.localeCompare(a.value));
+  }, []);
+
+  const hasVerifiedFilter = vQuery !== "" || vMemberId !== "all" || vTheme !== "all" || vYear !== "all" || vSessionId !== "all";
+  const clearVerifiedFilters = () => {
+    setVQuery("");
+    setVMemberId("all");
+    setVTheme("all");
+    setVYear("all");
+    setVSessionId("all");
+  };
+
+  const filteredVerifiedSpeeches = useMemo(() => {
+    const q = vQuery.trim();
+    return verifiedSpeeches.filter((s) => {
+      const memberName = resolveMemberDisplayName(s.memberId, members, formerMembers);
+      const matchesQuery =
+        q === "" ||
+        memberName.includes(q) ||
+        s.topics.some((t) => t.includes(q)) ||
+        (s.shortSummary ?? "").includes(q) ||
+        s.questionItems.some((qi) => qi.title.includes(q) || qi.questionSummary.includes(q));
+      const matchesMember = vMemberId === "all" || s.memberId === vMemberId;
+      const matchesTheme = vTheme === "all" || s.topics.includes(vTheme);
+      const matchesYear = vYear === "all" || s.sessionId.startsWith(vYear);
+      const matchesSession = vSessionId === "all" || s.sessionId === vSessionId;
+      return matchesQuery && matchesMember && matchesTheme && matchesYear && matchesSession;
+    });
+  }, [vQuery, vMemberId, vTheme, vYear, vSessionId]);
+
+  // 収録状況：対象期間内の定例会（一般質問が行われる会議区分）のうち、確認済み発言が1件以上ある会期の割合。
+  const regularSessionsInPeriod = useMemo(
+    () => councilSessions.filter((s) => REGULAR_SESSION_TYPES.has(s.sessionType)),
+    [],
+  );
+  const coveredSessionIds = useMemo(() => new Set(verifiedSpeeches.map((s) => s.sessionId)), []);
+  const coveredRegularSessionCount = regularSessionsInPeriod.filter((s) => coveredSessionIds.has(s.id)).length;
+  const uncoveredRegularSessions = regularSessionsInPeriod.filter((s) => !coveredSessionIds.has(s.id));
+  const verifiedQuestionItemCount = useMemo(
+    () => verifiedSpeeches.reduce((sum, s) => sum + s.questionItems.length, 0),
+    [],
+  );
+  const verifiedDates = verifiedSpeeches.map((s) => s.date).filter((d): d is string => !!d).sort();
+  const verifiedEarliestDate = verifiedDates[0];
+  const verifiedLatestDate = verifiedDates[verifiedDates.length - 1];
+
   return (
     <div className="px-4 py-4 sm:px-6">
       {seo.jsonLd.map((entry) => (
@@ -160,7 +268,7 @@ export function GeneralQuestionsPage() {
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">一般質問データベース</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市議会の一般質問・代表質問を、議員別、テーマ別、年度別に整理しています。質問回数や質問項目数のみで議員活動を評価するものではありません。
+          延岡市議会の一般質問・代表質問を、議員別、テーマ別、年度別に整理しています。質問回数や質問項目数のみで議員活動を評価するものではありません。このページには2種類のデータがあります。（1）直近会期の「質問通告書」に基づく予定質問項目（会議録公開前の暫定情報）、（2）公式会議録本文で実際の質問・答弁まで確認できた過去会期のアーカイブです。
         </p>
       </div>
 
@@ -187,6 +295,9 @@ export function GeneralQuestionsPage() {
         </p>
       </div>
 
+      <h2 className="mb-2 px-1 text-base font-semibold text-on-surface">
+        1. 最新会期の予定質問項目（質問通告書ベース・会議録公開前）
+      </h2>
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="登録済み質問数" value={questions.length} unit="件" />
         <StatCard label="登録済み議員数" value={registeredMemberCount} unit="名" />
@@ -247,6 +358,89 @@ export function GeneralQuestionsPage() {
               {filteredQuestions.map((item) => (
                 <GeneralQuestionCard key={item.id} item={item} />
               ))}
+            </ul>
+          )}
+        </>
+      )}
+
+      <hr className="my-8 border-outline-variant" />
+
+      <h2 className="mb-2 px-1 text-base font-semibold text-on-surface">
+        2. 確認済み一般質問アーカイブ（公式会議録ベース）
+      </h2>
+      <p className="mb-4 px-1 text-xs leading-relaxed text-on-surface-variant">
+        延岡市議会の公式会議録本文で、実際の質問・答弁まで確認できた過去会期の記録です。現在の議員任期における最初の本会議（令和5年5月15日、令和5年第1回臨時会）以降を対象としています。要約はAIが作成し人が確認したものですが、正確な内容は必ず公式会議録原文をご確認ください。
+      </p>
+
+      <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatCard
+          label="収録済み定例会"
+          value={`${coveredRegularSessionCount}/${regularSessionsInPeriod.length}`}
+          unit="会期"
+          hint="現任期（令和5年5月〜）の定例会のうち、確認済み発言が登録済みの会期数"
+        />
+        <StatCard label="確認済み発言数" value={verifiedSpeeches.length} unit="件" />
+        <StatCard label="質問項目数" value={verifiedQuestionItemCount} unit="件" />
+        <StatCard
+          label="収録期間"
+          value={verifiedEarliestDate && verifiedLatestDate ? `${verifiedEarliestDate.slice(0, 7)}〜${verifiedLatestDate.slice(0, 7)}` : "確認中"}
+          compact
+        />
+      </div>
+
+      {uncoveredRegularSessions.length > 0 && (
+        <p className="mb-4 rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+          未収録・会議録未公開の定例会：
+          {uncoveredRegularSessions.map((s) => s.title).join("、")}
+          （公式会議録の公開を確認でき次第、追加します。「質問なし」ではなく「未確認」です。）
+        </p>
+      )}
+
+      <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
+        <SearchBar value={vQuery} onChange={setVQuery} placeholder="質問内容、議員名、テーマで検索" />
+        <div className="flex flex-wrap items-center gap-2">
+          <FilterSelect label="議員" value={vMemberId} onChange={setVMemberId} options={verifiedMemberOptions} />
+          <FilterSelect label="テーマ" value={vTheme} onChange={setVTheme} options={verifiedThemeOptions} />
+          <FilterSelect label="年" value={vYear} onChange={setVYear} options={verifiedYearOptions} />
+          <FilterSelect label="会議" value={vSessionId} onChange={setVSessionId} options={verifiedSessionOptions} />
+          {hasVerifiedFilter && (
+            <button
+              type="button"
+              onClick={clearVerifiedFilters}
+              className="shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              条件をリセット
+            </button>
+          )}
+        </div>
+      </div>
+
+      {verifiedSpeeches.length === 0 ? (
+        <p className="mt-3 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
+          確認済みの会議録ベース一般質問データを準備中です。
+        </p>
+      ) : (
+        <>
+          <p className="mb-3 mt-3 text-sm text-on-surface-variant">
+            {filteredVerifiedSpeeches.length > 0
+              ? `${filteredVerifiedSpeeches.length}件の質問が見つかりました`
+              : "条件に一致する一般質問は見つかりませんでした。"}
+          </p>
+          {filteredVerifiedSpeeches.length > 0 && (
+            <ul className="space-y-3">
+              {filteredVerifiedSpeeches.map((speech) => {
+                const memberLink = findMemberOrFormerLink(speech.memberId, members, formerMembers, archiveMemberProfiles);
+                const session = councilSessions.find((s) => s.id === speech.sessionId);
+                return (
+                  <VerifiedSpeechCard
+                    key={speech.id}
+                    speech={speech}
+                    memberName={memberLink?.name ?? speech.memberId}
+                    memberHref={memberLink?.href ?? "/members"}
+                    sessionTitle={session?.title ?? speech.sessionId}
+                  />
+                );
+              })}
             </ul>
           )}
         </>

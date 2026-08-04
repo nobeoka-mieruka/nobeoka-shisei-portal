@@ -1,3 +1,76 @@
+# セッション引き継ぎメモ（2026-08-05 更新・/questionsに確認済み一般質問アーカイブ12会期分を反映）
+
+## 2026-08-05（同日4回目）：既存の会議録ベース一般質問データ（未反映だった172発言）を/questionsへ接続
+
+### 発見した実態
+
+ユーザーから「過去の一般質問アーカイブを大幅に拡充してほしい」との指示を受けて調査したところ、
+`docs/council-speech-summary-pipeline.md`（2026年8月上旬時点の記述）は「2会期・議員3名・3発言」の
+試験公開段階だったが、**実際のデータ（`src/data/councilSpeechSummaries.json`）はその後大きく進み、
+現議員任期（`src/config/councilSpeechPeriod.json`: 2023-04-23以降）の定例会13会期中12会期・
+26議員＋元議員1名・172発言（全て`isPublished:true`・`summaryStatus:"verified"`）まで収録済み**
+だったことが判明した（ドキュメントが実データに追随していなかった）。
+
+一方、`/questions`ページ（`GeneralQuestionsPage.tsx`）は「質問通告書」ベースの`generalQuestions.json`
+（直近1会期・14件のみ）しか参照しておらず、**この172件の確認済みデータは`/members/:id`・`/themes`・
+`/executive-answers`からは閲覧できるのに、市民が一般質問を探す入口である`/questions`からは一切
+閲覧できない状態**だった。新規の外部データ取得は行わず、この「反映漏れ」を解消することが
+最も安全かつ価値の高い改善と判断し、今回はこれを実施した。
+
+延岡市議会公式サイト（`/site/gikai/1416.html`等）で過去の質問通告書アーカイブページの有無を確認したが、
+**質問通告書は最新会期のみ掲載され、過去会期のバックナンバーは公開されていない**ことを確認した
+（通告書ベースでの拡張は不可能。過去分は公式会議録検索システム経由の`councilSpeechSummaries.json`が
+唯一の経路であることを再確認）。
+
+### 実施内容
+
+- `/questions`を2セクション構成に変更：「1. 最新会期の予定質問項目（質問通告書ベース）」（既存、変更なし）
+  と「2. 確認済み一般質問アーカイブ（公式会議録ベース）」（新規）を明確に分離し、データの出所・確度の
+  違いを混同しないよう表示（プロジェクトの既存方針と同じ）。
+- 新規セクションに、年・会期・議員・テーマでの検索・絞り込み、収録状況スタット（収録済み定例会12/13、
+  確認済み発言172件、質問項目数、収録期間2023年6月〜2026年3月）、未収録会期（令和8年6月定例会、
+  会議録未公開）の明示を実装。
+- 新規コンポーネント`src/components/questions/VerifiedSpeechCard.tsx`。
+- `src/lib/councilSpeeches.ts`に`findMemberOrFormerLink`を追加し、`MemberSpeechDetailPage.tsx`の
+  重複ローカル関数を置き換え（現職・元議員の詳細ページへの正しいリンク解決を共通化）。
+- バグ修正：`scripts/generate-search-index.mjs`が元議員の発言を検索インデックス登録する際、
+  氏名解決が`members.json`のみを見ており、元議員（`formerMembers.json`）の発言タイトルが
+  「fm01議員の一般質問」のように議員IDのまま表示されていた不具合を修正（吉本靖議員の発言で発覚）。
+- `src/pages/MemberSpeechDetailPage.tsx`冒頭のコード内ドキュメントコメントが「isPublished:trueの
+  レコードが1件も存在しない」という古い前提のままだったため、実態（172件公開済み）に合わせて修正。
+- 新規`src/data/questionCollectionStatus.json`：現任期13定例会分の収録進捗を機械集計（発言者数・
+  質問項目数はcouncilSpeechSummaries.jsonから、`expectedSpeakerCount`等は個別の通告書突合ができて
+  いないため`null`のまま。`status`は0件を`transcriptUnavailable`、1件以上を`partial`とし、
+  機械集計だけでは`complete`と断定しない）。`scripts/validate-data.mjs`に対応する検証を追加
+  （sessionId重複・存在確認、status enum検証、complete/transcriptUnavailableの矛盾検出）。
+
+### 今回やらなかったこと（範囲外）
+
+- 現議員任期より前（2023-04-23より前）の会期への遡及拡張：`councilSpeechPeriod.json`のfrom境界を
+  動かす設計判断が必要（旧任期の議員マスター整備、当時の市長・答弁者の特定等、別セッションでの
+  検討が必要）。
+- 令和8年6月定例会（唯一の未収録会期）の会議録取得：`discover-nobeoka-minutes.mjs`で確認を試みたが、
+  取得結果の構造解析に時間がかかり、ユーザーからの優先度変更指示を受けて中断。次回に持ち越し。
+- ユーザーからの追加指示（現職・元議員プロフィールの全面拡充）：一般質問アーカイブとは別の大規模
+  機能のため、今回は着手していない。
+
+### 検証結果
+
+`npm run validate:data`（errors=0, warnings=1258）／`npm run typecheck`／`npm run lint`／
+`npm run build`（966/966ページ）／`npm run validate:seo`（failures=0, warnings=0）／
+内部リンク検査（967ページ・46,569リンク、broken=0）すべて成功。
+
+### 変更ファイル
+
+`src/pages/GeneralQuestionsPage.tsx`、`src/pages/MemberSpeechDetailPage.tsx`、
+`src/components/questions/VerifiedSpeechCard.tsx`（新規）、`src/lib/councilSpeeches.ts`、
+`src/data/questionCollectionStatus.json`（新規）、`scripts/generate-search-index.mjs`、
+`scripts/validate-data.mjs`、`src/data/searchIndex.json`（自動生成）。
+
+push・デプロイは未実施。
+
+---
+
 # セッション引き継ぎメモ（2026-08-05 更新・歴代市長アーカイブ拡充：1933年〜現在の14名・30任期を登録、空白13件）
 
 ## 2026-08-05（同日3回目）：歴代市長アーカイブの空白期間追加調査・職務代理者1件登録・表示区分修正

@@ -12,7 +12,7 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
-import { findPublishedSpeech } from "../lib/councilSpeeches";
+import { findMemberOrFormerLink, findPublishedSpeech } from "../lib/councilSpeeches";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -22,22 +22,6 @@ const formerMembers = formerMembersData as FormerMember[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
-
-/** 現職議員（members.json）に一致しない場合、元議員（formerMembers.json）を確認する。 */
-function findMemberOrFormer(
-  id: string | undefined,
-): { id: string; name: string; isFormer: boolean; backHref: string } | undefined {
-  if (!id) return undefined;
-  const active = members.find((m) => m.id === id);
-  if (active) return { id: active.id, name: active.name, isFormer: false, backHref: `/members/${active.id}` };
-  const former = formerMembers.find((m) => m.id === id);
-  if (former) {
-    const profile = archiveMemberProfiles.find((p) => p.legacyFormerMemberId === former.id || p.legacyMemberId === former.id);
-    const backHref = profile ? `/members/former/${profile.slug}` : "/members/former";
-    return { id: former.id, name: former.name, isFormer: true, backHref };
-  }
-  return undefined;
-}
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -58,16 +42,13 @@ function exchangeSpeakerLabel(
 }
 
 /**
- * 一般質問・質疑の詳細ページ。
- *
- * 現時点ではcouncilSpeechSummaries.jsonにisPublished:trueのレコードが1件も存在しないため、
- * このページは常に「見つかりませんでした」を表示する（将来、公式会議録本文の解析結果が
- * 承認・公開された時点で、実際の内容が表示されるようになる）。
+ * 一般質問・質疑の詳細ページ。公式会議録本文を基にした確認済み質問・答弁要約
+ * （councilSpeechSummaries.json、isPublished:true）を表示する。
  */
 export function MemberSpeechDetailPage() {
   const { memberId, speechId } = useParams<{ memberId: string; speechId: string }>();
   const location = useLocation();
-  const member = findMemberOrFormer(memberId);
+  const member = findMemberOrFormerLink(memberId, members, formerMembers, archiveMemberProfiles);
   const speech = member && speechId ? findPublishedSpeech(speechSummaryData, member.id, speechId) : undefined;
   const seo = getSeoForPath(location.pathname);
 
@@ -76,7 +57,7 @@ export function MemberSpeechDetailPage() {
   if (!member || !speech) {
     return (
       <div className="space-y-4 px-4 py-4 sm:px-6">
-        <BackLink to={member ? member.backHref : "/"} label={member ? `${member.name}議員のページに戻る` : "トップに戻る"} />
+        <BackLink to={member ? member.href : "/"} label={member ? `${member.name}議員のページに戻る` : "トップに戻る"} />
         <p className="mt-4 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
           指定された質問・質疑の要約は見つかりませんでした。
         </p>
@@ -92,7 +73,7 @@ export function MemberSpeechDetailPage() {
         <JsonLd key={entry.id} id={entry.id} data={entry.data} />
       ))}
       <Breadcrumbs items={seo.breadcrumbs} />
-      <BackLink to={member.backHref} label={`${member.name}議員のページに戻る`} />
+      <BackLink to={member.href} label={`${member.name}議員のページに戻る`} />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
@@ -205,7 +186,7 @@ export function MemberSpeechDetailPage() {
         <CorrectionRequestButton pageName={`${member.name}議員の${speech.speechType}要約`} buttonLabel="要約内容の訂正・情報提供" />
       </div>
 
-      <Link to={member.backHref} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+      <Link to={member.href} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
         {member.name}議員のページに戻る
       </Link>
     </div>

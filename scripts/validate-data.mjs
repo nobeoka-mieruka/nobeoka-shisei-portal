@@ -2094,6 +2094,53 @@ try {
   }
 }
 
+// --- questionCollectionStatus.json（一般質問の会期別収録進捗） ---
+const VALID_COLLECTION_STATUSES = new Set([
+  "notStarted",
+  "inProgress",
+  "partial",
+  "complete",
+  "transcriptUnavailable",
+  "needsReview",
+  "failed",
+]);
+try {
+  const progress = readJson("src/data/questionCollectionStatus.json");
+  if (!Array.isArray(progress.sessions)) {
+    err("questionCollectionStatus.json", "sessionsが配列ではありません");
+  } else {
+    const seenSessionIds = new Set();
+    for (const s of progress.sessions) {
+      const tag = `questionCollectionStatus.json (${s.sessionId ?? "会期id不明"})`;
+      if (isBlank(s.sessionId)) err(tag, "sessionIdが空です");
+      else if (seenSessionIds.has(s.sessionId)) err(tag, `sessionIdが重複しています: ${s.sessionId}`);
+      else seenSessionIds.add(s.sessionId);
+
+      if (s.sessionId && !sessionIdSet.has(s.sessionId)) {
+        err(tag, `councilSessions.jsonに存在しない会期IDです: ${s.sessionId}`);
+      }
+      if (!VALID_COLLECTION_STATUSES.has(s.status)) {
+        err(tag, `未定義のstatusです: ${s.status}`);
+      }
+      if (s.status === "complete" && (s.registeredSpeakerCount ?? 0) === 0) {
+        err(tag, 'status="complete"なのにregisteredSpeakerCountが0件です（未完了の会期をcompleteにしないでください）');
+      }
+      if (s.status === "transcriptUnavailable" && s.transcriptAvailable === true) {
+        err(tag, 'status="transcriptUnavailable"なのにtranscriptAvailable:trueは矛盾しています');
+      }
+      // 会期の実際の収録件数（councilSpeechSummaries.json側の公開済み発言）との不一致を検出する。
+      const actualCount = speechIds.size > 0 ? [...publishedSpeechIds].filter((id) => id).length : 0;
+      void actualCount; // 発言単位の件数比較はsessionId単位の集計が必要なため、将来の拡張余地として関数はここまでに留める。
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") {
+    warn("questionCollectionStatus.json", "読み込めませんでした（存在しない場合はスキップ）");
+  } else {
+    throw e;
+  }
+}
+
 // --- themes.json（質問テーマの固定辞書） ---
 try {
   const themes = readJson("src/data/themes.json");

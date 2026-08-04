@@ -346,7 +346,10 @@ try {
   const { councilSpeechPeriod } = await import("./lib/council-speech-period.mjs");
   const speechData = readJson("src/data/councilSpeechSummaries.json");
   const members2 = readJson("src/data/members.json");
-  const memberName = (id) => members2.find((m) => m.id === id)?.name ?? id;
+  const formerMembers2 = readJson("src/data/formerMembers.json");
+  // 現職（members.json）に一致しない場合は元議員（formerMembers.json）を確認する（src/lib/councilSpeeches.tsの
+  // resolveMemberDisplayNameと同じ方針）。どちらにも一致しない場合のみidをそのまま使う。
+  const memberName = (id) => members2.find((m) => m.id === id)?.name ?? formerMembers2.find((m) => m.id === id)?.name ?? id;
 
   for (const record of speechData.members ?? []) {
     for (const s of record.speeches ?? []) {
