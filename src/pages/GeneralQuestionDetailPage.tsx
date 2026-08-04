@@ -16,6 +16,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
+import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -102,6 +103,20 @@ export function GeneralQuestionDetailPage() {
             {item.memberName}議員
           </Link>
           {faction && <FactionChip faction={faction} />}
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            to={`/timeline/${fiscalYearOfIsoDate(item.questionDate)}`}
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            年表で見る
+          </Link>
+          <Link
+            to="/compare"
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            比較ページを見る
+          </Link>
         </div>
       </div>
 

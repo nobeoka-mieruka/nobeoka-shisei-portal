@@ -12,6 +12,8 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import { archiveVerificationStatusLabel, termsForMayor } from "../lib/archiveMayors";
+import { buildCompareSearchParams } from "../lib/archiveCompare";
+import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -61,14 +63,30 @@ export function MayorDetailPage() {
         {mayor.nameKana && <p className="mt-1 text-sm text-on-surface-variant">{mayor.nameKana}</p>}
         {mayor.profile && <p className="mt-3 text-base leading-loose text-on-surface">{mayor.profile}</p>}
 
-        {mayor.isCurrentMayor && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {mayor.isCurrentMayor && (
+            <Link
+              to="/mayor"
+              className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            >
+              現職市長の公約・市政方針を見る
+            </Link>
+          )}
           <Link
-            to="/mayor"
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            to={`/compare/mayors?${buildCompareSearchParams([mayor.id]).toString()}`}
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
-            現職市長の公約・市政方針を見る
+            この市長を比較
           </Link>
-        )}
+          {terms[0] && (
+            <Link
+              to={`/timeline/${fiscalYearOfIsoDate(terms[0].termStart)}`}
+              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            >
+              この市長の任期を年表で見る
+            </Link>
+          )}
+        </div>
       </section>
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">

@@ -148,7 +148,20 @@ export function ThemeDetailPage() {
         <p className="mt-2 text-xs text-on-primary-container/80">
           このテーマに関する質問件数：{matches.length}件（{memberCounts.length}名の議員）
         </p>
-        {/* フェーズ9で「このテーマの年表を見る」（/themes/:slug/timeline 等）をここに追加予定。今回は未実装のため表示しない。 */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            to="/timeline"
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            年表で見る
+          </Link>
+          <Link
+            to="/compare"
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            比較ページを見る
+          </Link>
+        </div>
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">

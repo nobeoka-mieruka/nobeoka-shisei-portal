@@ -27,9 +27,20 @@ export function CompareItemPicker({ legend, options, selected, onChange, max = M
 
   return (
     <fieldset>
-      <legend className="mb-2 text-sm font-medium text-on-surface">
-        {legend}（最大{max}件まで選択できます。現在{selected.length}件選択中）
-      </legend>
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <legend className="text-sm font-medium text-on-surface">
+          {legend}（最大{max}件まで選択できます。現在{selected.length}件選択中）
+        </legend>
+        {selected.length > 0 && (
+          <button
+            type="button"
+            onClick={() => onChange([])}
+            className="rounded-full px-2 py-1 text-xs text-on-surface-variant underline hover:text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            選択をすべて解除
+          </button>
+        )}
+      </div>
       <div className="flex flex-wrap gap-2">
         {options.map((opt) => {
           const checked = selected.includes(opt.id);

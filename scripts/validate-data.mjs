@@ -1509,6 +1509,12 @@ try {
       warn(tag, `fiscalYear(${d.fiscalYear})がarchiveFiscalYears.jsonに存在しません（/timeline/${d.fiscalYear}の財政データ欄には反映されません）`);
     }
 
+    // decisionDate/submittedDate/meetingDateは/timeline・/timeline/:yearの年表イベントの日付・
+    // 並び順に直接使われるため（フェーズ9D）、形式不正が並び順の乱れにつながらないよう検証する。
+    if (d.decisionDate && !DATE_RE.test(d.decisionDate)) err(tag, `decisionDateの形式が不正です: ${d.decisionDate}`);
+    if (d.submittedDate && !DATE_RE.test(d.submittedDate)) err(tag, `submittedDateの形式が不正です: ${d.submittedDate}`);
+    if (d.meetingDate && !DATE_RE.test(d.meetingDate)) err(tag, `meetingDateの形式が不正です: ${d.meetingDate}`);
+
     if (d.sessionId) {
       checkReferenceExists({ err, warn }, d.sessionId, sessionIdSet, tag, `存在しない会期IDを参照しています: ${d.sessionId}`);
     }

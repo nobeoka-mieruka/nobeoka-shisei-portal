@@ -6,7 +6,13 @@
  */
 import type { ArchiveSourceRef } from "./historicalArchive";
 
-export type ArchiveTimelineEventCategory = "mayorTerm" | "fiscalYear";
+export type ArchiveTimelineEventCategory =
+  | "mayorTerm"
+  | "memberTerm"
+  | "finance"
+  | "generalQuestion"
+  | "councilDocument"
+  | "policy";
 
 /**
  * 年表1件分。日単位の日付が確認できない場合（年度のみ確認等）はdateをnullにし、

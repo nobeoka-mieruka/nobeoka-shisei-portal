@@ -50,6 +50,8 @@ import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { buildCompareSearchParams } from "../lib/archiveCompare";
+import { personSlug } from "../lib/people";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -159,6 +161,22 @@ export function MemberDetailPage() {
           {formerMember.lastVerified && (
             <p className="mt-2 text-xs text-on-surface-variant">確認日：{formatJapaneseDate(formerMember.lastVerified)}</p>
           )}
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              to={`/compare/members?${buildCompareSearchParams([personSlug("former-member", formerMember.id)]).toString()}`}
+              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            >
+              この議員を比較
+            </Link>
+            {formerMember.servedSessions[0] && (
+              <Link
+                to={`/timeline/${formerMember.servedSessions[0].slice(0, 4)}`}
+                className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+              >
+                年表で見る
+              </Link>
+            )}
+          </div>
         </div>
 
         <SectionCard title="在職当時の一般質問・発言記録">
@@ -185,7 +203,7 @@ export function MemberDetailPage() {
         </SectionCard>
 
         <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-          この人物は現職議員ではないため、議員一覧・報酬比較・議員比較等の対象には含まれません。当時（在職していた会期）の一般質問記録のみ、過去の議会活動の記録として掲載しています。
+          この人物は現職議員ではないため、現職議員一覧・報酬比較の対象には含まれません。議員比較（`/compare/members`）では現職議員と横断して比較できます。当時（在職していた会期）の一般質問記録のみ、過去の議会活動の記録として掲載しています。
         </p>
       </div>
     );
@@ -262,6 +280,21 @@ export function MemberDetailPage() {
           </a>
         )}
         <SnsLinks links={member.sns} className="mt-4" />
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            to={`/compare/members?${buildCompareSearchParams([personSlug("member", member.id)]).toString()}`}
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            この議員を比較
+          </Link>
+          <Link
+            to="/timeline"
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            年表で見る
+          </Link>
+        </div>
       </section>
 
       <SectionCard title="所属委員会">

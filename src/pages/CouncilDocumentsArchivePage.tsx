@@ -300,6 +300,20 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
             <dd className="inline">{doc.committeeId ?? "確認中"}</dd>
           </div>
         </dl>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            to={`/timeline/${doc.fiscalYear}`}
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            年表で見る
+          </Link>
+          <Link
+            to="/compare"
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            比較ページを見る
+          </Link>
+        </div>
       </section>
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">

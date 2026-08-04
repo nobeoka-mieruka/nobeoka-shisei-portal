@@ -27,6 +27,7 @@ import {
 } from "../lib/people";
 import { documentResultLabel, documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
+import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { policyStatusLabel, categoryLabel } from "../lib/archivePolicies";
 import archivePolicyCategoriesData from "../data/archivePolicyCategories.json";
 import type { ArchivePolicyCategory } from "../types/historicalArchive";
@@ -283,6 +284,18 @@ export function PersonDetailPage() {
             className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             この人物を比較
+          </Link>
+          <Link
+            to={
+              personType === "mayor" && mayorTerms[0]
+                ? `/timeline/${fiscalYearOfIsoDate(mayorTerms[0].termStart)}`
+                : relatedFiscalYears[0] != null
+                  ? `/timeline/${relatedFiscalYears[0]}`
+                  : "/timeline"
+            }
+            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+          >
+            年表で見る
           </Link>
         </div>
       </section>
