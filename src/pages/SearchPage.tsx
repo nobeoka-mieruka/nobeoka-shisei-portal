@@ -15,9 +15,12 @@ const searchIndex = searchIndexData as SearchIndexEntry[];
 
 const typeLabels: Record<SearchEntryType, string> = {
   member: "議員",
+  "former-member": "元議員",
   mayor: "市長",
   promise: "市長公約",
   bill: "議案",
+  policy: "政策",
+  "council-document": "条例・請願・陳情",
   question: "一般質問",
   speech: "質問・答弁（会議録）",
   compensation: "報酬",
@@ -35,7 +38,7 @@ const sortOptions: { value: SearchSortKey; label: string }[] = [
   { value: "kana", label: "五十音順" },
 ];
 
-const EXAMPLE_KEYWORDS = ["市長公約", "一般質問", "議案", "子育て", "防災", "報酬", "財政", "市役所案内"];
+const EXAMPLE_KEYWORDS = ["市長公約", "一般質問", "議案", "条例", "政策", "子育て", "防災", "報酬", "財政", "市役所案内"];
 
 const PAGE_SIZE = 20;
 const URL_SYNC_DELAY_MS = 200;

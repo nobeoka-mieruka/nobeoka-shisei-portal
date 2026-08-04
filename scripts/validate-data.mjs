@@ -1618,6 +1618,120 @@ try {
   else throw e;
 }
 
+// --- archiveAiCategoryCandidates.json / archiveRelationCandidates.json / archiveAiSummaries.json
+//     （延岡市政アーカイブ：フェーズ8 横断検索・テーマ分類の候補データ。外部AI APIは未使用） ---
+// sourceEntityType/targetEntityTypeのうち、現時点で参照整合性チェック可能な種別のみ対応する
+// （他の20種別は今回データが存在しないため、存在しない種別も含めエラーにはしない）。
+const CANDIDATE_ENTITY_ID_SETS = {
+  policy: archivePolicyIds,
+  bill: archiveCouncilDocumentIds,
+  ordinance: archiveCouncilDocumentIds,
+  petition: archiveCouncilDocumentIds,
+  request: archiveCouncilDocumentIds,
+};
+function checkCandidateEntityRef({ err, warn }, entityType, entityId, tag, label) {
+  const idSet = CANDIDATE_ENTITY_ID_SETS[entityType];
+  if (!idSet) return; // 未対応の種別（今回データなし）は参照整合性チェックをスキップする
+  checkReferenceExists({ err, warn }, entityId, idSet, tag, `存在しない${label}を参照しています: ${entityType}:${entityId}`);
+}
+
+try {
+  const archiveAiCategoryCandidates = readJson("src/data/archiveAiCategoryCandidates.json");
+  if (!Array.isArray(archiveAiCategoryCandidates)) throw new Error("配列ではありません");
+
+  checkDuplicateIds({ err, warn }, archiveAiCategoryCandidates, "id", "archiveAiCategoryCandidates.json");
+  const VALID_CANDIDATE_STATUSES = new Set(["candidate", "confirmed", "rejected", "needsReview"]);
+
+  for (const c of archiveAiCategoryCandidates) {
+    const tag = `archiveAiCategoryCandidates.json (${c.id ?? "id不明"})`;
+    checkCandidateEntityRef({ err, warn }, c.sourceEntityType, c.sourceEntityId, tag, "sourceEntityId");
+    checkReferenceExists(
+      { err, warn },
+      c.categoryId,
+      archivePolicyCategoryIds,
+      tag,
+      `存在しないテーマIDを参照しています: ${c.categoryId}`,
+    );
+    if (typeof c.confidence !== "number" || c.confidence < 0 || c.confidence > 1) {
+      err(tag, `confidenceが0〜1の範囲外、または数値ではありません: ${c.confidence}`);
+    }
+    if (!VALID_CANDIDATE_STATUSES.has(c.status)) err(tag, `未定義のstatusです: ${c.status}`);
+    if (!c.generatedAt) err(tag, "generatedAtが未設定です");
+    // AI分類候補と確定分類の分離：このファイルはあくまで候補置き場であり、
+    // 確定分類（archivePolicies.json等のcategoryIds）とは別ファイルであること自体が分離を担保する。
+    // ここでは「confirmed」のまま放置されていないか（人による確認記録が無いのにconfirmedになっていないか）を検出する。
+    if (c.status === "confirmed" && !c.reviewedBy && !c.reviewedAt) {
+      warn(tag, "status=confirmedですが、reviewedBy/reviewedAtが記録されていません（未確認候補が確定データへ混入していないか確認してください）");
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveAiCategoryCandidates.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveRelationCandidates = readJson("src/data/archiveRelationCandidates.json");
+  if (!Array.isArray(archiveRelationCandidates)) throw new Error("配列ではありません");
+
+  const VALID_RELATION_CANDIDATE_TYPES = new Set([
+    "sameTheme",
+    "relatedQuestion",
+    "relatedAnswer",
+    "relatedPolicy",
+    "relatedBill",
+    "relatedOrdinance",
+    "relatedBudget",
+    "relatedPerson",
+    "sameFiscalYear",
+    "possibleDuplicate",
+    "needsReview",
+  ]);
+  const VALID_RELATION_METHODS = new Set(["explicitReference", "ruleBased", "keywordMatch", "manual", "aiCandidate"]);
+  const VALID_CANDIDATE_STATUSES_2 = new Set(["candidate", "confirmed", "rejected", "needsReview"]);
+
+  checkDuplicateIds({ err, warn }, archiveRelationCandidates, "id", "archiveRelationCandidates.json");
+  for (const r of archiveRelationCandidates) {
+    const tag = `archiveRelationCandidates.json (${r.id ?? "id不明"})`;
+    checkCandidateEntityRef({ err, warn }, r.sourceEntityType, r.sourceEntityId, tag, "sourceEntityId");
+    checkCandidateEntityRef({ err, warn }, r.targetEntityType, r.targetEntityId, tag, "targetEntityId");
+    if (!VALID_RELATION_CANDIDATE_TYPES.has(r.relationType)) err(tag, `未定義のrelationTypeです: ${r.relationType}`);
+    if (!VALID_RELATION_METHODS.has(r.method)) err(tag, `未定義のmethodです: ${r.method}`);
+    if (typeof r.confidence !== "number" || r.confidence < 0 || r.confidence > 1) {
+      err(tag, `confidenceが0〜1の範囲外、または数値ではありません: ${r.confidence}`);
+    }
+    if (!VALID_CANDIDATE_STATUSES_2.has(r.status)) err(tag, `未定義のstatusです: ${r.status}`);
+    if (!r.createdAt) err(tag, "createdAtが未設定です");
+    if (r.status === "confirmed" && !r.reviewedBy && !r.reviewedAt) {
+      warn(tag, "status=confirmedですが、reviewedBy/reviewedAtが記録されていません（未確認候補が確定データへ混入していないか確認してください）");
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveRelationCandidates.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+try {
+  const archiveAiSummaries = readJson("src/data/archiveAiSummaries.json");
+  if (!Array.isArray(archiveAiSummaries)) throw new Error("配列ではありません");
+
+  const VALID_CANDIDATE_STATUSES_3 = new Set(["candidate", "confirmed", "rejected", "needsReview"]);
+  checkDuplicateIds({ err, warn }, archiveAiSummaries, "id", "archiveAiSummaries.json");
+  for (const s of archiveAiSummaries) {
+    const tag = `archiveAiSummaries.json (${s.id ?? "id不明"})`;
+    checkCandidateEntityRef({ err, warn }, s.sourceEntityType, s.sourceEntityId, tag, "sourceEntityId");
+    if (isBlank(s.summary)) err(tag, "summaryが空です");
+    if (isBlank(s.model)) err(tag, "modelが空です");
+    // AI要約と公式本文の分離：summaryはAI生成テキストであり、公式データ（archivePolicies.json等の
+    // summary/body）とは別ファイル・別フィールドで管理されていること自体が分離の担保。
+    // ここでは再確認判定に必要なsourceTextHashの存在のみ確認する。
+    if (isBlank(s.sourceTextHash)) err(tag, "sourceTextHashが未設定です（原文変更時の再確認判定ができません）");
+    if (!VALID_CANDIDATE_STATUSES_3.has(s.verificationStatus)) err(tag, `未定義のverificationStatusです: ${s.verificationStatus}`);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveAiSummaries.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- searchIndex.json（サイト内横断検索インデックス） ---
 const VALID_SEARCH_TYPES = new Set([
   "member",

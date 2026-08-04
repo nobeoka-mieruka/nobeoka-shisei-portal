@@ -309,11 +309,17 @@ export interface ArchiveAIGeneratedContent {
   humanReviewedBy?: string;
 }
 
-/** 政策テーマの分類マスタ。固定ラベルではなくJSON管理とし、将来テーマを追加できるようにする。 */
+/**
+ * 政策テーマの分類マスタ。固定ラベルではなくJSON管理とし、将来テーマを追加できるようにする。
+ * フェーズ8以降は政策以外のアーカイブ（議案・条例・請願・陳情等）を横断する共通テーママスタ
+ * としても利用する（新規のテーマ体系は作らず、これを正本として参照する）。
+ */
 export interface ArchivePolicyCategory {
   id: string;
   label: string;
   description?: string;
+  /** ルールベース分類（キーワード一致）に使う同義語・関連語。未設定の場合はlabelのみで一致判定する。 */
+  keywords?: string[];
 }
 
 /**
@@ -588,4 +594,167 @@ export interface ArchiveCouncilDocument {
   ordinanceDetail?: ArchiveOrdinanceDetail;
   petitionDetail?: ArchivePetitionDetail;
   requestDetail?: ArchiveRequestDetail;
+}
+
+// ===== フェーズ8：横断検索・テーマ検索の基盤 =====
+//
+// 今回のフェーズでは外部AI APIを一切呼び出していない。AI要約・AI分類は型・保存構造・
+// 表示区分・管理フローのみを用意し、実データは0件（archiveAiSummaries.json）または
+// 既存キーワード辞書によるルールベース判定の候補のみ（method="keywordMatch"、
+// 架空のAI生成データではない）とする。確定データ（confirmed*）と候補
+// （candidate、AI/ルールベース）は型レベルで必ず分離し、人が確認するまで
+// 確定情報として公開表示しない。
+
+/**
+ * 横断検索ドキュメントの種別。既存の documentType 命名（bill/ordinance/petition/request/policy等、
+ * フェーズ6・7で確立済み）と衝突しないよう、既存命名をそのまま再利用している。
+ */
+export type ArchiveSearchDocumentType =
+  | "councilQuestion"
+  | "councilTranscript"
+  | "questionNotice"
+  | "mayorAnswer"
+  | "bill"
+  | "billVote"
+  | "ordinance"
+  | "petition"
+  | "request"
+  | "policy"
+  | "budget"
+  | "settlement"
+  | "debt"
+  | "fund"
+  | "population"
+  | "mayor"
+  | "member"
+  | "formerMember"
+  | "faction"
+  | "committee"
+  | "comprehensivePlan"
+  | "policySpeech"
+  | "statistics";
+
+/**
+ * 横断検索の共通ドキュメント型。既存の検索インデックス（SearchIndexEntry・searchIndex.json、
+ * src/lib/search.ts）はそのまま維持し、この型は「テーマ横断表示・人物別横断表示」等の
+ * フェーズ8新規機能が使う、より詳細な関連付け情報を持つ拡張レイヤーとして位置づける
+ * （既存 /search を壊さないための段階的統合方針）。
+ */
+export interface ArchiveSearchDocument {
+  id: string;
+  documentType: ArchiveSearchDocumentType;
+  /** 元データ（既存JSON。billVotes.json/archivePolicies.json等）側のid。 */
+  sourceEntityId: string;
+  slug?: string;
+  title: string;
+  /** 公式資料からの引用・要約本文。AI生成ではない。 */
+  body: string;
+  /** 人が確認した要約（あれば）。AI要約（aiSummary）とは必ず別フィールドで管理する。 */
+  confirmedSummary?: string;
+  /** AIによる要約。公式データとして扱わず、原文（body）へのリンクを必ず併記する。 */
+  aiSummary?: string;
+  keywords: string[];
+  /** 人が確認したテーマ分類（archivePolicyCategories.jsonのid、共通テーママスタ）。 */
+  confirmedCategoryIds: string[];
+  /** ルールベース・AIによる分類候補（未確定）。confirmedCategoryIdsとは必ず分離する。 */
+  aiCategoryCandidates?: string[];
+  personIds?: string[];
+  memberIds?: string[];
+  formerMemberIds?: string[];
+  mayorIds?: string[];
+  factionIds?: string[];
+  committeeIds?: string[];
+  fiscalYears?: number[];
+  sessionIds?: string[];
+  meetingIds?: string[];
+  relatedEntityIds?: string[];
+  sourceRefs: ArchiveSourceRef[];
+  publishedDate?: string;
+  updatedDate?: string;
+  verificationStatus: ArchiveVerificationStatus;
+  /** AI生成情報（aiSummary/aiCategoryCandidates）自体の確認状況。公式データのverificationStatusとは別軸。 */
+  aiVerificationStatus?: "notReviewed" | "needsReview" | "reviewed" | "rejected";
+  /** ビルド時にこのドキュメントを検索インデックスへ反映した日時（ISO）。 */
+  indexedAt?: string;
+}
+
+export type ArchiveRelationType =
+  | "sameTheme"
+  | "relatedQuestion"
+  | "relatedAnswer"
+  | "relatedPolicy"
+  | "relatedBill"
+  | "relatedOrdinance"
+  | "relatedBudget"
+  | "relatedPerson"
+  | "sameFiscalYear"
+  | "possibleDuplicate"
+  | "needsReview";
+
+/** ruleBased/keywordMatchはキーワード辞書による機械的な一致判定。aiCandidateは外部AI APIによる候補（今回は未使用）。 */
+export type ArchiveRelationMethod = "explicitReference" | "ruleBased" | "keywordMatch" | "manual" | "aiCandidate";
+
+export type ArchiveCandidateStatus = "candidate" | "confirmed" | "rejected" | "needsReview";
+
+/**
+ * 異なるアーカイブ間（一般質問・政策・議案等）の関連候補1件分。
+ * AIまたはルールベースで生成した関連はstatus="candidate"のまま保存し、
+ * 人が確認するまで確定関連として公開表示しない。
+ */
+export interface ArchiveRelationCandidate {
+  id: string;
+  sourceEntityType: ArchiveSearchDocumentType;
+  sourceEntityId: string;
+  targetEntityType: ArchiveSearchDocumentType;
+  targetEntityId: string;
+  relationType: ArchiveRelationType;
+  /** 0〜1の確信度。ruleBased/keywordMatchの場合はキーワード一致度から機械的に算出する。 */
+  confidence: number;
+  method: ArchiveRelationMethod;
+  reason?: string;
+  /** 一致根拠となった原文の抜粋（キーワード一致箇所等）。 */
+  evidenceText?: string;
+  status: ArchiveCandidateStatus;
+  reviewedBy?: string;
+  reviewedAt?: string;
+  createdAt: string;
+}
+
+/**
+ * AIによる要約1件分。フェーズ8では外部AI APIを呼び出していないため、実データは
+ * 0件（型・保存構造のみ用意）。将来生成する場合も、原文が変わった場合に既存要約を
+ * 「再確認が必要」と判定できるよう、生成時点の原文ハッシュ（sourceTextHash）を必須にする。
+ */
+export interface ArchiveAiSummary {
+  id: string;
+  sourceEntityType: ArchiveSearchDocumentType;
+  sourceEntityId: string;
+  summary: string;
+  keyPoints?: string[];
+  generatedAt: string;
+  model: string;
+  promptVersion?: string;
+  /** 生成時点の原文のハッシュ値。再計算したハッシュと一致しない場合は再確認が必要と判定する。 */
+  sourceTextHash: string;
+  verificationStatus: ArchiveCandidateStatus;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  revisionHistory?: { summary: string; generatedAt: string; model: string }[];
+}
+
+/**
+ * ルールベース（キーワード一致）またはAIによるテーマ分類候補1件分。
+ * ArchiveSearchDocument.confirmedCategoryIds（人が確認した分類）とは必ず分離する。
+ */
+export interface ArchiveAiCategoryCandidate {
+  id: string;
+  sourceEntityType: ArchiveSearchDocumentType;
+  sourceEntityId: string;
+  /** archivePolicyCategories.jsonのid（共通テーママスタ）。 */
+  categoryId: string;
+  confidence: number;
+  reason?: string;
+  evidenceText?: string;
+  generatedAt: string;
+  status: ArchiveCandidateStatus;
 }

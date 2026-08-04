@@ -1482,9 +1482,12 @@ export interface FinanceDashboardData {
 /** サイト内横断検索のインデックス区分。 */
 export type SearchEntryType =
   | "member"
+  | "former-member"
   | "mayor"
   | "promise"
   | "bill"
+  | "policy"
+  | "council-document"
   | "question"
   | "speech"
   | "compensation"

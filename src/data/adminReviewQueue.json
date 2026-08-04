@@ -1,0 +1,228 @@
+{
+  "generatedAt": "2026-08-04T07:16:20.087Z",
+  "totalItems": 32,
+  "byCategory": {
+    "aiCategoryCandidate": 8,
+    "lowConfidenceCandidate": 10,
+    "relationCandidate": 4,
+    "sourceInsufficient": 8,
+    "committeeIdMissing": 1,
+    "possibleDuplicateCandidate": 1
+  },
+  "items": [
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-01",
+      "detail": "テーマ分類候補「education」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-01",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-02",
+      "detail": "テーマ分類候補「healthcare」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-03",
+      "detail": "テーマ分類候補「childcare」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-03",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "テーマ分類候補「digitalization」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "テーマ分類候補「finance」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-04",
+      "detail": "テーマ分類候補「disaster-prevention」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-04",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-01",
+      "detail": "テーマ分類候補「finance」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-01",
+      "detail": "分類候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-03",
+      "detail": "テーマ分類候補「infrastructure」（確信度0.35）が未確認です",
+      "confidence": 0.35
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "bill",
+      "sourceEntityId": "doc-bill-03",
+      "detail": "分類候補の確信度が低いです（0.35）",
+      "confidence": 0.35
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-01",
+      "detail": "policy（policy-mayor01-01）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-01",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-02",
+      "detail": "policy（policy-mayor01-03）との関連候補「sameTheme」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-03",
+      "detail": "policy（policy-mayor01-01）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-03",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-04",
+      "detail": "policy（policy-mayor01-03）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-04",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-01",
+      "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-02",
+      "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-03",
+      "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor01-04",
+      "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-q-gq2026-06-m24-01",
+      "detail": "出典「総括質疑及び一般質問通告書（宮田 博徳、令和8年6月定例会）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-q-gq2026-06-m24-02",
+      "detail": "出典「総括質疑及び一般質問通告書（宮田 博徳、令和8年6月定例会）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-01",
+      "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "memberProfile",
+      "sourceEntityId": "archive-fm01",
+      "detail": "出典「資料名未確認」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "committeeIdMissing",
+      "sourceEntityType": "councilDocument",
+      "sourceEntityId": "(全件)",
+      "detail": "委員会マスタが未整備のため、13件すべてでcommitteeIdが未設定です"
+    },
+    {
+      "category": "possibleDuplicateCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "同一資料に対して2件のテーマ分類候補があります（digitalization、finance）"
+    }
+  ]
+}
