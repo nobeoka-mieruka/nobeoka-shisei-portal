@@ -2780,8 +2780,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 6,
-      "sessionsWithSpeechCount": 6,
+      "analyzedSessionCount": 7,
+      "sessionsWithSpeechCount": 7,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 21,
@@ -5697,6 +5697,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m02-2022-06-22-ippan-shitsumon",
+          "memberId": "m02",
+          "sessionId": "2022-06",
+          "date": "2022-06-22",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "医療・健康",
+            "新型コロナウイルス"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第3号）で猪之鼻哲議員（現職継続）が行った一般質問のうち、新しい生活様式の実践期間に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新しい生活様式（マスク着用等）の実践期間",
+              "questionSummary": "新型コロナウイルスに関する新しい生活様式（マスク着用等）をいつまで実践することが望ましいか質問した。",
+              "answerSummary": "感染症対策は国の方針に基づき行うものであること、厚生労働省の令和4年5月20日付通知に基づき、距離が確保できる場合等はマスクを外すことを推奨する一方、距離が確保できず会話する場合等は着用を推奨する対応が求められていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m02",
+                  "summary": "新型コロナウイルスに関する新しい生活様式（マスク着用等）をいつまで実践することが望ましいか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "感染症対策は国の方針に基づき行うものであること、厚生労働省の令和4年5月20日付通知に基づき、距離が確保できる場合等はマスクを外すことを推奨する一方、距離が確保できず会話する場合等は着用を推奨する対応が求められていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/62934/10/1//0/0",
+              "speakerSection": "pos=62934"
+            },
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/67548/10/1//0/0",
+              "speakerSection": "pos=67548"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。猪之鼻議員の一般質問には、この要約に含めた1テーマ以外にも、デジタル・コックピット事業、延岡城三階櫓復元、子供の遊び場、西階公園プールなど複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025-03-06）の一般質問データを公式会議録より登録。"
@@ -5710,8 +5773,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 11,
-      "sessionsWithSpeechCount": 11,
+      "analyzedSessionCount": 12,
+      "sessionsWithSpeechCount": 12,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 17,
@@ -11153,6 +11216,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m03-2022-06-21-ippan-shitsumon",
+          "memberId": "m03",
+          "sessionId": "2022-06",
+          "date": "2022-06-21",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "中心市街地活性化"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第2号）で上杉泰洋議員（現職継続）が行った一般質問のうち、エンクロスの管理運営見直しに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "エンクロス管理運営見直し案作成時に留意した事項",
+              "questionSummary": "エンクロスの令和5年度以降の管理運営見直し案を作成する際に留意した事項を質問した。",
+              "answerSummary": "5年契約の満了に伴い公募前に施設管理の考え方を決める必要があったこと、移動市役所やワークショップ、パブリックコメントを経て管理運営方針を決定したこと、年間1億3,500万円・5年間で6億5千万円以上の支出について中心市街地活性化の効果を含め検証したことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m03",
+                  "summary": "エンクロスの令和5年度以降の管理運営見直し案を作成する際に留意した事項を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "5年契約の満了に伴い公募前に施設管理の考え方を決める必要があったこと、移動市役所やワークショップ、パブリックコメントを経て管理運営方針を決定したこと、年間1億3,500万円・5年間で6億5千万円以上の支出について中心市街地活性化の効果を含め検証したことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施済み"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/42359/10/1//0/0",
+              "speakerSection": "pos=42359"
+            },
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/45105/10/1//0/0",
+              "speakerSection": "pos=45105"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。上杉議員の代表質問には、この要約に含めた2テーマ（市長の政治姿勢・予算編成）以外にも、第七次長期総合計画（挑戦の考え方）、東九州新幹線、臨時経済対策事業など多数の質問項目がありますが、対応する答弁本文の一部（企画部長答弁以降）を今回は未取得のため、市長答弁で確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年3月定例会（2024年3月5日）分（関連質問）を追加した。 令和6年6月定例会（2024年6月25日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -11166,8 +11291,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 9,
-      "sessionsWithSpeechCount": 9,
+      "analyzedSessionCount": 10,
+      "sessionsWithSpeechCount": 10,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 18,
@@ -14773,6 +14898,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050308A/90044/10/1//0/0",
               "speakerSection": "pos=90044"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m04-2022-06-22-ippan-shitsumon",
+          "memberId": "m04",
+          "sessionId": "2022-06",
+          "date": "2022-06-22",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "土地利用",
+            "防災"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第3号）で小野正二議員（現職継続）が行った一般質問のうち、所有者不明土地の活用に関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "改正法による所有者不明土地の活用",
+              "questionSummary": "所有者不明土地の利用円滑化に関する法改正を踏まえた市の対応を質問した。",
+              "answerSummary": "所有者不明土地の増加が見込まれ利用円滑化と管理適正化が喫緊の課題であること、法改正により備蓄倉庫や再生可能エネルギー発電設備等も活用対象に加わったこと、対策計画の作成や協議会設置が可能となったため必要に応じ関係機関と連携して対応していく考えであることを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m04",
+                  "summary": "所有者不明土地の利用円滑化に関する法改正を踏まえた市の対応を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "所有者不明土地の増加が見込まれ利用円滑化と管理適正化が喫緊の課題であること、法改正により備蓄倉庫や再生可能エネルギー発電設備等も活用対象に加わったこと、対策計画の作成や協議会設置が可能となったため必要に応じ関係機関と連携して対応していく考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/31494/10/1//0/0",
+              "speakerSection": "pos=31494"
+            },
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/38478/10/1//0/0",
+              "speakerSection": "pos=38478"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -18395,8 +18583,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 7,
-      "sessionsWithSpeechCount": 7,
+      "analyzedSessionCount": 8,
+      "sessionsWithSpeechCount": 8,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 20,
@@ -21104,6 +21292,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/14322/10/1//0/0",
               "speakerSection": "pos=14322"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m06-2022-06-23-ippan-shitsumon",
+          "memberId": "m06",
+          "sessionId": "2022-06",
+          "date": "2022-06-23",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "中心市街地活性化"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第4号）で甲斐行雄議員（現職継続）が行った一般質問のうち、エンクロス管理運営方針パブリックコメントに関する部分と商工観光文化部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "エンクロス管理運営方針に関するパブリックコメントの結果",
+              "questionSummary": "エンクロスの指定管理契約満了に伴う今後の見直し案について、パブリックコメントの結果を質問した。",
+              "answerSummary": "523人と多くの市民から意見が寄せられたこと、延岡城・内藤記念博物館や新宮崎県体育館、西階野球場等の整備が進む中で西からまちなかへの人の流れを作る必要性の認識を広げていくこと、意見を踏まえこれまでの取り組みを検証し修正した管理運営方針を示したことを説明した。",
+              "answerers": [
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m06",
+                  "summary": "エンクロスの指定管理契約満了に伴う今後の見直し案について、パブリックコメントの結果を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "523人と多くの市民から意見が寄せられたこと、延岡城・内藤記念博物館や新宮崎県体育館、西階野球場等の整備が進む中で西からまちなかへの人の流れを作る必要性の認識を広げていくこと、意見を踏まえこれまでの取り組みを検証し修正した管理運営方針を示したことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施済み"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/35827/10/1//0/0",
+              "speakerSection": "pos=35827"
+            },
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/40810/10/1//0/0",
+              "speakerSection": "pos=40810"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -24375,8 +24625,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 7,
-      "sessionsWithSpeechCount": 7,
+      "analyzedSessionCount": 8,
+      "sessionsWithSpeechCount": 8,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 20,
@@ -27456,6 +27706,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050309A/87530/10/1//0/0",
               "speakerSection": "pos=87530"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m08-2022-06-23-ippan-shitsumon",
+          "memberId": "m08",
+          "sessionId": "2022-06",
+          "date": "2022-06-23",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防犯",
+            "公共交通"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第4号）で甲斐正幸議員（現職継続）が行った一般質問のうち、無人駅の防犯対策に関する部分と市民環境部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "無人駅への監視カメラの設置",
+              "questionSummary": "旭ケ丘駅をはじめとする無人駅での自転車いたずら対策として、監視カメラの設置を質問した。",
+              "answerSummary": "無人駅の駐輪場の防犯対策は管理者であるJRが行う必要があると考えていること、まずは旭ケ丘駅など無人駅についてJRや周辺の区へ状況確認を行い、監視カメラや照明設置等の効果的な防犯対策をJRと協議していく考えであることを説明した。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m08",
+                  "summary": "旭ケ丘駅をはじめとする無人駅での自転車いたずら対策として、監視カメラの設置を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "無人駅の駐輪場の防犯対策は管理者であるJRが行う必要があると考えていること、まずは旭ケ丘駅など無人駅についてJRや周辺の区へ状況確認を行い、監視カメラや照明設置等の効果的な防犯対策をJRと協議していく考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "調査・研究"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/4894/10/1//0/0",
+              "speakerSection": "pos=4894"
+            },
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/16390/10/1//0/0",
+              "speakerSection": "pos=16390"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -38936,8 +39249,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 12,
-      "sessionsWithSpeechCount": 12,
+      "analyzedSessionCount": 13,
+      "sessionsWithSpeechCount": 13,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 16,
@@ -43770,6 +44083,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040906A/16408/10/1//0/0",
               "speakerSection": "pos=16408"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m14-2022-06-23-ippan-shitsumon",
+          "memberId": "m14",
+          "sessionId": "2022-06",
+          "date": "2022-06-23",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "財政",
+            "ふるさと納税"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第4号）で柴浩信議員（現職継続）が行った一般質問のうち、ふるさと納税のPRに関する部分と商工観光文化部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "延岡駅西口街区ビルのデジタルサイネージを活用したふるさと納税PR",
+              "questionSummary": "延岡駅西口街区ビルの大型デジタルサイネージでふるさと納税・返礼品を告知してはどうか質問した。",
+              "answerSummary": "デジタルサイネージは駅正面に設置され多くの人の目に留まりやすく、ビジネスマンや観光客・帰省客への情報発信に有効な手段の一つであること、シティプロモーションと併せてふるさと納税のきっかけづくりのツールとして活用を検討していくことを説明した。",
+              "answerers": [
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m14",
+                  "summary": "延岡駅西口街区ビルの大型デジタルサイネージでふるさと納税・返礼品を告知してはどうか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "デジタルサイネージは駅正面に設置され多くの人の目に留まりやすく、ビジネスマンや観光客・帰省客への情報発信に有効な手段の一つであること、シティプロモーションと併せてふるさと納税のきっかけづくりのツールとして活用を検討していくことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/99418/10/1//0/0",
+              "speakerSection": "pos=99418"
+            },
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/100712/10/1//0/0",
+              "speakerSection": "pos=100712"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -48926,8 +49302,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 11,
-      "sessionsWithSpeechCount": 11,
+      "analyzedSessionCount": 12,
+      "sessionsWithSpeechCount": 12,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 16,
@@ -52847,6 +53223,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m17-2022-06-23-ippan-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2022-06",
+          "date": "2022-06-23",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政・政治"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第4号）で長友幸子議員（現職継続）が行った一般質問のうち、核兵器使用の脅威に対する見解に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "核兵器使用の脅威がある現状への見解",
+              "questionSummary": "ロシアによるウクライナ侵攻で核の脅威が懸念される中、市長の見解を質問した。",
+              "answerSummary": "核兵器による威嚇・使用は万が一にも許されるものではなく、非核三原則を堅持する唯一の戦争被爆国としてこのことを国際社会に訴えていく必要があると考えていること、核兵器禁止条約は核兵器のない世界への出口と政府が位置づけていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "ロシアによるウクライナ侵攻で核の脅威が懸念される中、市長の見解を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "核兵器による威嚇・使用は万が一にも許されるものではなく、非核三原則を堅持する唯一の戦争被爆国としてこのことを国際社会に訴えていく必要があると考えていること、核兵器禁止条約は核兵器のない世界への出口と政府が位置づけていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/70991/10/1//0/0",
+              "speakerSection": "pos=70991"
+            },
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/74639/10/1//0/0",
+              "speakerSection": "pos=74639"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月5日）分（代表質問）を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -55534,8 +55972,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 9,
-      "sessionsWithSpeechCount": 9,
+      "analyzedSessionCount": 10,
+      "sessionsWithSpeechCount": 10,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 19,
@@ -58617,6 +59055,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m20-2022-06-22-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2022-06",
+          "date": "2022-06-22",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政・政治"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第3号）で平田信広議員（現職継続）が行った総括質疑及び一般質問のうち、核共有論に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "日米の核共有論への見解",
+              "questionSummary": "安倍元首相や日本維新の会が提起する日米の核共有論について、市長の見解を質問した。",
+              "answerSummary": "岸田総理大臣が「政府として核共有の議論をすることは考えていない、非核三原則を堅持する」と明言していることを踏まえ、非核三原則の「持ち込ませず」を堅持する政府の考えこそ必要であり、唯一の戦争被爆国としてこの考えを持ち続ける必要があると考えていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "安倍元首相や日本維新の会が提起する日米の核共有論について、市長の見解を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "岸田総理大臣が「政府として核共有の議論をすることは考えていない、非核三原則を堅持する」と明言していることを踏まえ、非核三原則の「持ち込ませず」を堅持する政府の考えこそ必要であり、唯一の戦争被爆国としてこの考えを持ち続ける必要があると考えていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/100898/10/1//0/0",
+              "speakerSection": "pos=100898"
+            },
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/102926/10/1//0/0",
+              "speakerSection": "pos=102926"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。平田議員の質問には、国政に関する所見を求める部分など、市政運営と直接関わらない項目も含まれていましたが、当サイトは特定の政党・政治家を評価しない方針のため、市政運営に関する地域新電力会社の質問項目のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、救急車出動待機時間の答弁が未確認のためpendingとしている。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年12月定例会（2024年12月3日）分を追加した。"
@@ -61663,8 +62163,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 3,
-      "sessionsWithSpeechCount": 3,
+      "analyzedSessionCount": 4,
+      "sessionsWithSpeechCount": 4,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 24,
@@ -62559,6 +63059,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m22-2022-06-21-ippan-shitsumon",
+          "memberId": "m22",
+          "sessionId": "2022-06",
+          "date": "2022-06-21",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "中心市街地活性化"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第2号）で松田満男議員（現職継続）が行った一般質問のうち、エンクロス管理運営見直しへのパブリックコメント反映に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "エンクロス管理運営見直し案へのパブリックコメントの反映",
+              "questionSummary": "エンクロスの令和5年度以降の管理運営見直し案が、パブリックコメントの意見を十分考慮した結果か質問した。",
+              "answerSummary": "移動市役所やワークショップ、パブリックコメントを経て方針を決定したこと、食事提供機能・バス待合機能の改修は多額の費用や補助金返還懸念から見送り弁当販売等に見直したこと、市民活動サポートやイベントの充実を求める意見を踏まえマンパワーを増やす見直しを行ったことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m22",
+                  "summary": "エンクロスの令和5年度以降の管理運営見直し案が、パブリックコメントの意見を十分考慮した結果か質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "移動市役所やワークショップ、パブリックコメントを経て方針を決定したこと、食事提供機能・バス待合機能の改修は多額の費用や補助金返還懸念から見送り弁当販売等に見直したこと、市民活動サポートやイベントの充実を求める意見を踏まえマンパワーを増やす見直しを行ったことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施済み"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/78587/10/1//0/0",
+              "speakerSection": "pos=78587"
+            },
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/81183/10/1//0/0",
+              "speakerSection": "pos=81183"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "松田議員は令和6年1月に膵臓がんの診断を受け治療中であることを冒頭で述べているが、この点は個人の健康情報であり要約には含めていない。今回要約した一般質問（一括質問方式）には、上記5テーマ以外の質問項目は含まれていなかった（原文を確認したうえで全項目を要約対象とした）。 令和6年9月定例会（2024年9月11日）分を追加した。"
@@ -62572,8 +63134,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 11,
-      "sessionsWithSpeechCount": 11,
+      "analyzedSessionCount": 12,
+      "sessionsWithSpeechCount": 12,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 17,
@@ -67043,6 +67605,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040907A/44203/10/1//0/0",
               "speakerSection": "pos=44203"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m23-2022-06-21-ippan-shitsumon",
+          "memberId": "m23",
+          "sessionId": "2022-06",
+          "date": "2022-06-21",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公共交通",
+            "中心市街地活性化"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第2号）で峯田克明議員（現職継続）が行った一般質問のうち、エンクロス指定管理料の段階的減額の可能性に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "エンクロス指定管理料の段階的な減額の可能性",
+              "questionSummary": "エンクロスの指定管理料について、段階的な減額ができないか質問した。",
+              "answerSummary": "市の指定管理者制度運用方針では指定期間中の指定管理料は仕様変更がない限り毎年度同額としていること、パブリックコメントの意見や中心市街地活性化の方針を踏まえ必要経費を積み上げ適正な水準の予定額を算出しており、段階的な見直しは行わない考えであることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m23",
+                  "summary": "エンクロスの指定管理料について、段階的な減額ができないか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "市の指定管理者制度運用方針では指定期間中の指定管理料は仕様変更がない限り毎年度同額としていること、パブリックコメントの意見や中心市街地活性化の方針を踏まえ必要経費を積み上げ適正な水準の予定額を算出しており、段階的な見直しは行わない考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "制度上対応困難"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/109528/10/1//0/0",
+              "speakerSection": "pos=109528"
+            },
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/119731/10/1//0/0",
+              "speakerSection": "pos=119731"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -78637,8 +79262,8 @@
         "from": "2023-06-28",
         "to": "2024-12-04"
       },
-      "analyzedSessionCount": 5,
-      "sessionsWithSpeechCount": 5,
+      "analyzedSessionCount": 6,
+      "sessionsWithSpeechCount": 6,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -80294,6 +80919,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm01-2022-06-23-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2022-06",
+          "date": "2022-06-23",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "人権",
+            "多様性"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第4号）で吉本靖議員（旧任期）が行った一般質問のうち、行政文書の性別欄削除の取り組みに関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "行政文書の性別欄削除の取り組みの現状",
+              "questionSummary": "性的少数者への配慮として、本市の行政文書における性別欄削除の取り組みの現状を質問した。",
+              "answerSummary": "延岡市すべての市民の人権が尊重されるまちづくり条例に基づき性的少数者の人権問題を重要課題として位置づけていること、パートナーシップ宣誓制度導入に向けた課題整理の中で申請書等の性別欄の現状を調査し、令和2年度までに国民健康保険証再交付申請書等12種類の申請書等の性別欄を削除したことを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "性的少数者への配慮として、本市の行政文書における性別欄削除の取り組みの現状を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "延岡市すべての市民の人権が尊重されるまちづくり条例に基づき性的少数者の人権問題を重要課題として位置づけていること、パートナーシップ宣誓制度導入に向けた課題整理の中で申請書等の性別欄の現状を調査し、令和2年度までに国民健康保険証再交付申請書等12種類の申請書等の性別欄を削除したことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施済み"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/135755/10/1//0/0",
+              "speakerSection": "pos=135755"
+            },
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/142827/10/1//0/0",
+              "speakerSection": "pos=142827"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
@@ -80307,8 +80994,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 2,
-      "sessionsWithSpeechCount": 2,
+      "analyzedSessionCount": 3,
+      "sessionsWithSpeechCount": 3,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -80490,6 +81177,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040907A/105245/10/1//0/0",
               "speakerSection": "pos=105245"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm02-2022-06-21-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "fm02",
+          "sessionId": "2022-06",
+          "date": "2022-06-21",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "教育",
+            "子育て"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第2号）で佐藤誠議員（旧任期）が行った総括質疑及び一般質問のうち、教育格差をなくす施策に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "教育格差をなくす施策",
+              "questionSummary": "ひとり親家庭や生活保護世帯等の児童生徒に希望ある教育予算を投入すべきではないか質問した。",
+              "answerSummary": "健康福祉部の組織改編でなんでも総合相談センターの機能強化・子育て家庭相談支援カウンターを設置したこと、ヤングケアラー支援地域力向上事業を補正予算に計上したこと、AI・クラウド型授業支援アプリの活用やオンライン学習環境緊急整備事業、スクールソーシャルワーカー等の配置充実を進めていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm02",
+                  "summary": "ひとり親家庭や生活保護世帯等の児童生徒に希望ある教育予算を投入すべきではないか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "健康福祉部の組織改編でなんでも総合相談センターの機能強化・子育て家庭相談支援カウンターを設置したこと、ヤングケアラー支援地域力向上事業を補正予算に計上したこと、AI・クラウド型授業支援アプリの活用やオンライン学習環境緊急整備事業、スクールソーシャルワーカー等の配置充実を進めていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 (旧任期・元議員)（総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/8175/10/1//0/0",
+              "speakerSection": "pos=8175"
+            },
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/17368/10/1//0/0",
+              "speakerSection": "pos=17368"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -80731,8 +81480,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 1,
-      "sessionsWithSpeechCount": 1,
+      "analyzedSessionCount": 2,
+      "sessionsWithSpeechCount": 2,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -80800,6 +81549,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm05-2022-06-22-ippan-shitsumon",
+          "memberId": "fm05",
+          "sessionId": "2022-06",
+          "date": "2022-06-22",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "デジタル"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第3号）で白石良盛議員（旧任期）が行った一般質問のうち、IT企業誘致とデジタル団地整備に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "IT企業誘致の現状とデジタル団地の整備",
+              "questionSummary": "スマートシティ施策の一環であるIT企業誘致の現状と、コンテナ型オフィスによるデジタル団地整備の進め方を質問した。",
+              "answerSummary": "昨年度1年間で新たに10社が進出・開設し、駅西口街区ビル2階のIT企業誘致フロアは満床であること、コスト・期間を抑えられるコンテナ型オフィスによるデジタル団地整備を検討しており、中川原地区の旧高千穂鉄道跡地を候補地の一つとして配置やコストを検討していることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm05",
+                  "summary": "スマートシティ施策の一環であるIT企業誘致の現状と、コンテナ型オフィスによるデジタル団地整備の進め方を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "昨年度1年間で新たに10社が進出・開設し、駅西口街区ビル2階のIT企業誘致フロアは満床であること、コスト・期間を抑えられるコンテナ型オフィスによるデジタル団地整備を検討しており、中川原地区の旧高千穂鉄道跡地を候補地の一つとして配置やコストを検討していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/138907/10/1//0/0",
+              "speakerSection": "pos=138907"
+            },
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/148237/10/1//0/0",
+              "speakerSection": "pos=148237"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -80813,8 +81623,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 2,
-      "sessionsWithSpeechCount": 2,
+      "analyzedSessionCount": 3,
+      "sessionsWithSpeechCount": 3,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -80943,6 +81753,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm06-2022-06-23-gian-shitsugi",
+          "memberId": "fm06",
+          "sessionId": "2022-06",
+          "date": "2022-06-23",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "議案質疑",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "都市景観",
+            "都市基盤"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第4号）で田村吉宏議員（旧任期）が行った議案質疑（一般質問ではない）のうち、看板整備と都市景観条例との関係に関する部分と市長の答弁を要約したもの。本人が原文で「一般質問する予定ではなかったが、追加提案された二次補正予算について議案質疑をさせていただきます」と明言しており、一般質問には含めていない。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "看板の整備と都市景観条例との関係",
+              "questionSummary": "二次補正予算で追加提案された歴史・文化ゾーン内駐車場管理システム・看板等整備事業について、看板（道路附属物）の設置と都市景観条例（設置は必要最小限に抑える）との関係を質疑した。",
+              "answerSummary": "城山周辺地区等は延岡市景観計画で景観形成重点地区に指定されており、看板等の設置は必要最低限・周辺景観との調和・視点場や眺望への配慮が必要であること、一方で渋滞対策として必要不可欠な事業であり景観条例を守ることを大前提に整備を進める考えであることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm06",
+                  "summary": "二次補正予算で追加提案された歴史・文化ゾーン内駐車場管理システム・看板等整備事業について、看板（道路附属物）の設置と都市景観条例（設置は必要最小限に抑える）との関係を質疑した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "城山周辺地区等は延岡市景観計画で景観形成重点地区に指定されており、看板等の設置は必要最低限・周辺景観との調和・視点場や眺望への配慮が必要であること、一方で渋滞対策として必要不可欠な事業であり景観条例を守ることを大前提に整備を進める考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "実施予定"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 (旧任期・元議員)（議案質疑）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/164753/10/1//0/0",
+              "speakerSection": "pos=164753"
+            },
+            {
+              "title": "令和4年第24回定例会 第4号6月23日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/165565/10/1//0/0",
+              "speakerSection": "pos=165565"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -80956,8 +81828,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 1,
-      "sessionsWithSpeechCount": 1,
+      "analyzedSessionCount": 2,
+      "sessionsWithSpeechCount": 2,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -81025,6 +81897,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm07-2022-06-21-ippan-shitsumon",
+          "memberId": "fm07",
+          "sessionId": "2022-06",
+          "date": "2022-06-21",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "環境",
+            "脱炭素"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第2号）で松本哲也議員（旧任期）が行った一般質問のうち、ゼロカーボンシティ宣言に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "ゼロカーボン都市宣言と脱炭素施策の実現",
+              "questionSummary": "本市においてゼロカーボン都市を宣言し、実現のための施策を実行していくべきではないか質問した。",
+              "answerSummary": "今年度、脱炭素政策室を新設し、副市長・教育長・各部長で構成する脱炭素政策推進本部を設置したこと、脱炭素まちづくり計画の策定や脱炭素先行地域の計画提案に向けた予算を計上していること、延岡市脱炭素推進協議会の設立時にゼロカーボンシティ宣言を行う考えであることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm07",
+                  "summary": "本市においてゼロカーボン都市を宣言し、実現のための施策を実行していくべきではないか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "今年度、脱炭素政策室を新設し、副市長・教育長・各部長で構成する脱炭素政策推進本部を設置したこと、脱炭素まちづくり計画の策定や脱炭素先行地域の計画提案に向けた予算を計上していること、延岡市脱炭素推進協議会の設立時にゼロカーボンシティ宣言を行う考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "実施予定"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/143562/10/1//0/0",
+              "speakerSection": "pos=143562"
+            },
+            {
+              "title": "令和4年第24回定例会 第2号6月21日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/145624/10/1//0/0",
+              "speakerSection": "pos=145624"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -81038,8 +81972,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 1,
-      "sessionsWithSpeechCount": 1,
+      "analyzedSessionCount": 2,
+      "sessionsWithSpeechCount": 2,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -81103,6 +82037,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/86236/10/1//0/0",
               "speakerSection": "pos=86236"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm08-2022-06-22-ippan-shitsumon",
+          "memberId": "fm08",
+          "sessionId": "2022-06",
+          "date": "2022-06-22",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "市役所・職員",
+            "ハラスメント・服務"
+          ],
+          "shortSummary": "令和4年6月定例会（第24回定例会、第3号）で下田英樹議員（旧任期）が行った一般質問のうち、カスタマーハラスメントに関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "カスタマーハラスメントへの対応",
+              "questionSummary": "市役所窓口等でのカスタマーハラスメントへの対応状況を質問した。",
+              "answerSummary": "不当な要求や人格否定発言の繰り返し等、社会通念上不当・悪質なクレームはカスタマーハラスメントに当たると考えていること、延岡コンシェルジュセミナーやハードクレーム対応セミナー等のクレーム対応研修を実施していること、悪質なクレームには組織的な対応を行っていくことを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm08",
+                  "summary": "市役所窓口等でのカスタマーハラスメントへの対応状況を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "不当な要求や人格否定発言の繰り返し等、社会通念上不当・悪質なクレームはカスタマーハラスメントに当たると考えていること、延岡コンシェルジュセミナーやハードクレーム対応セミナー等のクレーム対応研修を実施していること、悪質なクレームには組織的な対応を行っていくことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/4838/10/1//0/0",
+              "speakerSection": "pos=4838"
+            },
+            {
+              "title": "令和4年第24回定例会 第3号6月22日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/9936/10/1//0/0",
+              "speakerSection": "pos=9936"
             }
           ],
           "verifiedAt": "2026-08-05",
