@@ -6259,6 +6259,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m02-2020-06-ippan-shitsumon",
+          "memberId": "m02",
+          "sessionId": "2020-06",
+          "date": "2020-06-17",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "経済"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第3号）で猪之鼻哲議員が行った一般質問のうち、経済的ダメージを軽減する延岡モデルづくりに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "経済的ダメージを軽減する延岡モデルづくり",
+              "questionSummary": "新型コロナウイルスによる経済的ダメージを軽減するための延岡モデルづくりについて質問した。",
+              "answerSummary": "深刻な医師不足を踏まえ他自治体より厳格な制限を行いつつ段階的緩和策を示していること、なんでも総合相談センターでの土日祝日対応など延岡ならではの対応を行っていること、新たな消費拡大策やリモート時代に対応した事業者支援を補正予算に盛り込み、三次にわたる対策を通じて新たな時代の羅針盤を示していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m02",
+                  "summary": "新型コロナウイルスによる経済的ダメージを軽減するための延岡モデルづくりについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "深刻な医師不足を踏まえ他自治体より厳格な制限を行いつつ段階的緩和策を示していること、なんでも総合相談センターでの土日祝日対応など延岡ならではの対応を行っていること、新たな消費拡大策やリモート時代に対応した事業者支援を補正予算に盛り込み、三次にわたる対策を通じて新たな時代の羅針盤を示していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第3号 6月17日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020617A/35036/10/1//0/0",
+              "speakerSection": "pos=35036"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第3号 6月17日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020617A/44802/10/1//0/0",
+              "speakerSection": "pos=44802"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。猪之鼻議員の一般質問には、この要約に含めた1テーマ以外にも、デジタル・コックピット事業、延岡城三階櫓復元、子供の遊び場、西階公園プールなど複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025-03-06）の一般質問データを公式会議録より登録。"
@@ -22667,6 +22730,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021208A/146192/10/1//0/0",
               "speakerSection": "pos=146192"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m06-2020-06-ippan-shitsumon",
+          "memberId": "m06",
+          "sessionId": "2020-06",
+          "date": "2020-06-16",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "経済"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第2号）で甲斐行雄議員が行った一般質問のうち、新型コロナウイルス感染症によって悪化した本市経済への対応に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナウイルス感染症によって悪化した本市経済への対応",
+              "questionSummary": "食に関連する事業者をはじめ経済的影響が甚大であるとして、悪化した本市経済への対応を質問した。",
+              "answerSummary": "第1次対策として事業者への無利子・無担保緊急貸付や雇用維持支援、第2次対策として地元事業者緊急支援事業や緊急雇用創出事業等を実施したこと、第3次対策として過去最大規模のプレミアム商品券事業とプレミアム付リフォーム商品券事業（当初予算の1.5倍に拡大）に取り組む考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m06",
+                  "summary": "食に関連する事業者をはじめ経済的影響が甚大であるとして、悪化した本市経済への対応を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "第1次対策として事業者への無利子・無担保緊急貸付や雇用維持支援、第2次対策として地元事業者緊急支援事業や緊急雇用創出事業等を実施したこと、第3次対策として過去最大規模のプレミアム商品券事業とプレミアム付リフォーム商品券事業（当初予算の1.5倍に拡大）に取り組む考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/134407/10/1//0/0",
+              "speakerSection": "pos=134407"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/137699/10/1//0/0",
+              "speakerSection": "pos=137699"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -46903,6 +47029,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m14-2020-06-ippan-shitsumon",
+          "memberId": "m14",
+          "sessionId": "2020-06",
+          "date": "2020-06-16",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "障がい福祉"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第2号）で柴浩信議員が行った一般質問のうち、新型コロナウイルスの影響を受けた障がい福祉事業所の現状に関する部分と健康福祉部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナウイルスの影響を受けた障がい福祉事業所の現状",
+              "questionSummary": "市内の就労継続支援事業所や地域活動支援センター等が新型コロナウイルスの影響で仕事が減り利用者の工賃が減少している現状について質問した。",
+              "answerSummary": "聞き取りにより、イベント自粛や就労支援アンテナショップの休止等で売上げ・工賃に影響が出ていることを把握しており、市役所本庁舎職員向けの福祉事業所商品デリバリーサービスや、のべおか産品応援キャンペーン事業への福祉事業所商品の組み込みなど支援策を実施していると説明した。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m14",
+                  "summary": "市内の就労継続支援事業所や地域活動支援センター等が新型コロナウイルスの影響で仕事が減り利用者の工賃が減少している現状について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "聞き取りにより、イベント自粛や就労支援アンテナショップの休止等で売上げ・工賃に影響が出ていることを把握しており、市役所本庁舎職員向けの福祉事業所商品デリバリーサービスや、のべおか産品応援キャンペーン事業への福祉事業所商品の組み込みなど支援策を実施していると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/100728/10/1//0/0",
+              "speakerSection": "pos=100728"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/107583/10/1//0/0",
+              "speakerSection": "pos=107583"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月26日、一般質問）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。 令和5年6月定例会（2023年6月27日、初当選後二期目の一般質問）分を追加した。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
@@ -56536,6 +56725,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m17-2020-06-ippan-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2020-06",
+          "date": "2020-06-16",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第2号）で長友幸子議員が行った一般質問のうち、新型コロナウイルス禍における国の対応に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナウイルス禍における国の対応についての所見",
+              "questionSummary": "全国一斉休校や特別定額給付金の対応など国の新型コロナウイルス対策が地方任せになっているとして、市長の所見を質問した。",
+              "answerSummary": "事態が進行中であり全体を通した所見は難しいとしつつ、学校休業前の準備期間や国民の緊張の緩みへの対応に感想を持っているとした上で、市民一人一人が自分の身を自分で守る意識を持つことも必要であり、市として果たすべきことをよく考え取り組んでいく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "全国一斉休校や特別定額給付金の対応など国の新型コロナウイルス対策が地方任せになっているとして、市長の所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "事態が進行中であり全体を通した所見は難しいとしつつ、学校休業前の準備期間や国民の緊張の緩みへの対応に感想を持っているとした上で、市民一人一人が自分の身を自分で守る意識を持つことも必要であり、市として果たすべきことをよく考え取り組んでいく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/164531/10/1//0/0",
+              "speakerSection": "pos=164531"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/168595/10/1//0/0",
+              "speakerSection": "pos=168595"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月5日）分（代表質問）を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -63180,6 +63431,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m20-2020-06-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2020-06",
+          "date": "2020-06-16",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "格差社会"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第2号）で平田信広議員が行った一般質問のうち、新型コロナウイルスと格差社会に対する認識に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナウイルスと格差社会に対する市長の認識",
+              "questionSummary": "コロナ問題を大局的な視点から捉えた市長の認識を質問した。",
+              "answerSummary": "感染拡大により現代社会の脆弱性・危険性が明らかになったとした上で、社会的弱者ほど影響が深刻であるため中小事業者や市民生活の支援に注力してきたこと、支援策を活用できる人とできない人の差によって経済的格差が拡大する懸念があると説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "コロナ問題を大局的な視点から捉えた市長の認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "感染拡大により現代社会の脆弱性・危険性が明らかになったとした上で、社会的弱者ほど影響が深刻であるため中小事業者や市民生活の支援に注力してきたこと、支援策を活用できる人とできない人の差によって経済的格差が拡大する懸念があると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/72848/10/1//0/0",
+              "speakerSection": "pos=72848"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/75674/10/1//0/0",
+              "speakerSection": "pos=75674"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。平田議員の質問には、国政に関する所見を求める部分など、市政運営と直接関わらない項目も含まれていましたが、当サイトは特定の政党・政治家を評価しない方針のため、市政運営に関する地域新電力会社の質問項目のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、救急車出動待機時間の答弁が未確認のためpendingとしている。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年12月定例会（2024年12月3日）分を追加した。"
@@ -67365,6 +67679,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021208A/91814/10/1//0/0",
               "speakerSection": "pos=91814"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m22-2020-06-ippan-shitsumon",
+          "memberId": "m22",
+          "sessionId": "2020-06",
+          "date": "2020-06-16",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "予算"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第2号）で松田満男議員が行った一般質問のうち、既存事業の精査・整理などによる新たな視点での事業の選択と集中に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "既存事業の精査・整理による事業の選択と集中",
+              "questionSummary": "コロナ対策事業が緊急性を要する一方で予算・財源に限界があるとして、既存事業のうち今年度停止可能な事業の予算をコロナ対策に充てるなど、既存事業の精査・整理による新たな視点での選択と集中を図るべきではないか質問した。",
+              "answerSummary": "6月補正を含む3次にわたる緊急経済対策で総額約145億円を計上して事業を実施しているとした上で、既存事業は今年度取り組むべき事業として提案したものであり、緊急時はまず予備費や補正予算で対応し、既存事業停止による財源捻出ではなく国の臨時交付金や基金活用を基本とする考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m22",
+                  "summary": "コロナ対策事業が緊急性を要する一方で予算・財源に限界があるとして、既存事業のうち今年度停止可能な事業の予算をコロナ対策に充てるなど、既存事業の精査・整理による新たな視点での選択と集中を図るべきではないか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "6月補正を含む3次にわたる緊急経済対策で総額約145億円を計上して事業を実施しているとした上で、既存事業は今年度取り組むべき事業として提案したものであり、緊急時はまず予備費や補正予算で対応し、既存事業停止による財源捻出ではなく国の臨時交付金や基金活用を基本とする考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/42198/10/1//0/0",
+              "speakerSection": "pos=42198"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/47006/10/1//0/0",
+              "speakerSection": "pos=47006"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -86454,8 +86831,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 4,
-      "sessionsWithSpeechCount": 4,
+      "analyzedSessionCount": 5,
+      "sessionsWithSpeechCount": 5,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -86703,6 +87080,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030302A/32784/10/1//0/0",
               "speakerSection": "pos=32784"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm04-2020-06-ippan-shitsumon",
+          "memberId": "fm04",
+          "sessionId": "2020-06",
+          "date": "2020-06-17",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防災",
+            "コロナ対策"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第3号）で三上毅議員（旧任期）が行った一般質問のうち、避難所の新型コロナウイルス感染症対策に関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "避難所の新型コロナウイルス感染症対策",
+              "questionSummary": "内閣府による避難所の感染症対策等に関する自治体ヒアリング調査（5月27日付通知）の内容を踏まえ、避難所の新型コロナウイルス感染症対策について質問した。",
+              "answerSummary": "三密を防ぐため避難所不足のおそれがあることから新たな施設活用の検討が必要であり、重症化リスクの高い方向けにホテル・旅館等の活用について協議中であること、車中避難や市営住宅の避難所活用についても併せて検討していることを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm04",
+                  "summary": "内閣府による避難所の感染症対策等に関する自治体ヒアリング調査（5月27日付通知）の内容を踏まえ、避難所の新型コロナウイルス感染症対策について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "三密を防ぐため避難所不足のおそれがあることから新たな施設活用の検討が必要であり、重症化リスクの高い方向けにホテル・旅館等の活用について協議中であること、車中避難や市営住宅の避難所活用についても併せて検討していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第3号 6月17日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020617A/5790/10/1//0/0",
+              "speakerSection": "pos=5790"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第3号 6月17日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020617A/9250/10/1//0/0",
+              "speakerSection": "pos=9250"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -88606,8 +89045,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 1,
-      "sessionsWithSpeechCount": 1,
+      "analyzedSessionCount": 2,
+      "sessionsWithSpeechCount": 2,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -88671,6 +89110,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021210A/17104/10/1//0/0",
               "speakerSection": "pos=17104"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm10-2020-06-ippan-shitsumon",
+          "memberId": "fm10",
+          "sessionId": "2020-06",
+          "date": "2020-06-16",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "予算"
+          ],
+          "shortSummary": "令和2年6月定例会（第8回定例会、第2号）で本部仁俊議員（旧任期）が行った一般質問のうち、新型コロナウイルス感染症対策としての補正予算編成のポイントに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "コロナ対策補正予算編成のポイント",
+              "questionSummary": "新型コロナウイルス感染症対策を中心とした今回の補正予算編成のポイントを質問した。",
+              "answerSummary": "感染拡大の防止（PCR検査整備、リモート対応推進等）、緊急経済対策（地元中小事業者・家庭向け支援）、学校臨時休業に伴う子供の学習・生活支援など、5つの観点に意を用いて補正予算を編成したことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm10",
+                  "summary": "新型コロナウイルス感染症対策を中心とした今回の補正予算編成のポイントを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "感染拡大の防止（PCR検査整備、リモート対応推進等）、緊急経済対策（地元中小事業者・家庭向け支援）、学校臨時休業に伴う子供の学習・生活支援など、5つの観点に意を用いて補正予算を編成したことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/7264/10/1//0/0",
+              "speakerSection": "pos=7264"
+            },
+            {
+              "title": "令和 2年第 8回定例会（第2号 6月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/11936/10/1//0/0",
+              "speakerSection": "pos=11936"
             }
           ],
           "verifiedAt": "2026-08-05",
