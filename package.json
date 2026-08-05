@@ -38,6 +38,7 @@
     "update:council-documents": "npm run fetch:council-documents && npm run extract:council-data && npm run generate:bill-summaries && npm run generate:council-documents && npm run generate:session-summaries && npm run generate:speech-summary-scaffold && npm run speeches:analyze-members && npm run validate:data",
     "import:members": "node scripts/import-members.mjs",
     "typecheck": "tsc -b",
+    "test": "node scripts/test-activity-radar.mjs",
     "prerender": "node scripts/prerender.mjs",
     "validate:seo": "node scripts/validate-seo.mjs",
     "build": "node scripts/generate-photo-dimensions.mjs && node scripts/generate-site-update.mjs && node scripts/generate-council-documents.mjs && node scripts/generate-speech-summary-scaffold.mjs && node scripts/generate-member-speech-analysis.mjs && node scripts/generate-theme-candidates.mjs && node scripts/generate-admin-review-queue.mjs && node scripts/validate-data.mjs && node scripts/generate-search-index.mjs && node scripts/generate-robots.mjs && node scripts/generate-sitemap.mjs && tsc -b && vite build && npm run prerender && npm run validate:seo",

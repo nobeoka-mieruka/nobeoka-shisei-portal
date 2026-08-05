@@ -1063,6 +1063,18 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/methodology/activity-radar":
+      return makeResult(
+        {
+          path: "/methodology/activity-radar",
+          pageTitle: "議会活動データ（レーダーチャート）の算定方法",
+          description:
+            "議員詳細ページに表示している議会活動データ（レーダーチャート）の定義・計算式・欠損データの扱い・在職期間の扱いを説明します。議員の能力や優劣を評価するものではありません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議会活動データの算定方法" }],
+        },
+        options,
+      );
+
     case "/terms":
       return makeResult(
         {

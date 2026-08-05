@@ -1,4 +1,50 @@
-# セッション引き継ぎメモ（2026-08-05 更新・一般質問アーカイブの議事録反映率100%達成）
+# セッション引き継ぎメモ（2026-08-05 更新・議員詳細ページに議会活動レーダーチャートを追加）
+
+## 2026-08-05（同日8回目）：議員詳細ページへの活動レーダーチャート追加
+
+ユーザー指示「各議員の詳細ページに、議会活動を視覚的に確認できるレーダーチャートを追加する」を受けて実施。
+最重要方針（人物評価・優劣・順位を示さない）に沿って、既存グラフライブラリを新規導入せず、
+既存の自前SVGチャート（FinanceLineChart.tsx等）の作法を踏襲して実装した。
+
+### 実施内容
+
+- `src/lib/activityRadar.ts`（新規）：6指標（一般質問・議会発言・出席状況・議案等の意思表示・
+  提案討論等・情報公開）の計算関数を分離。欠損データは0点にせず`value: null`・
+  `dataStatus: "missing"`として扱う設計を徹底。
+- **重要な事実確認**：本サイトには現時点で（1）個別の出席記録、（2）議員別の議案賛否内訳
+  （`billVotes.json`の`memberVotes`は全546件で空配列）、（3）議員別の提案者情報
+  （`archiveCouncilDocuments.json`に`proposerIds`等が未収録）のいずれも存在しないことを実装前に
+  確認した。このため「出席状況」「議案等の意思表示」「提案・討論等」の3指標は、現状**全議員で
+  dataStatus:"missing"**として表示される（0点ではなく「対象記録なし」）。実際に指数が出るのは
+  「一般質問」「議会発言」「情報公開」の3指標のみ。
+- `src/components/council/ActivityRadarChart.tsx`（新規）：自前SVGレーダーチャート。欠損軸は
+  塗りつぶし多角形に含めず破線マーカーで表示し、0点として描画しない。
+- `src/components/council/ActivityRadarSection.tsx`（新規）：見出し「議会活動データ」、指標詳細
+  カード、算定方法の開閉パネルを実装。
+- `src/pages/MethodologyActivityRadarPage.tsx`（新規）・ルート`/methodology/activity-radar`：
+  算定方法の説明ページ。
+- `src/pages/MemberDetailPage.tsx`・`src/pages/MemberFormerDetailPage.tsx`：プロフィール概要と
+  活動実績の間へセクションを追加。在職期間の扱いは、現職議員は会議録取得済み全12会期、元議員は
+  `formerMembers.json`の`servedSessions`（確認済み在職会期）を対象とする設計。
+- `scripts/test-activity-radar.mjs`（新規）・`package.json`に`"test"`スクリプト追加：
+  このプロジェクトにテストランナーが導入されていなかったため（vitest/jest等は未導入）、
+  既存の`validate-data.mjs`と同じ「プレーンなNodeスクリプト＋assert」方式を踏襲。TypeScript
+  ファイルをNode 24のネイティブ型除去で直接実行しつつ、Vite専用のJSON import構文のみ
+  `readFileSync`ベースへ一時的に置換して実行する方式（元のソースは書き換えない）。25件全て成功。
+
+### 検証結果
+
+`npm run typecheck`／`npm run lint`／`npm run test`（25/25成功）／`npm run build`
+（973/973ページ、新規`/methodology/activity-radar`分+1）／`npm run validate:seo`
+（failures=0）／内部リンク検査（974ページ・54,733リンク、broken=0）すべて成功。
+
+### 今後の課題
+
+- 出席状況・議案等の意思表示・提案討論等の3指標を実際に算定できるようにするには、それぞれ
+  出席記録・議員別議案賛否内訳・議員別提案者情報という新規データソースの整備が別途必要。
+- 市議会全体の平均値（参考線）は今回未実装（要求仕様では任意機能）。
+
+---
 
 ## 2026-08-05（同日7回目）：議事録反映状況の監査・未登録分の登録・反映率100%達成
 

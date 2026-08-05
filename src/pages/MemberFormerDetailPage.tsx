@@ -4,8 +4,9 @@ import archiveMemberTermsData from "../data/archiveMemberTerms.json";
 import archiveMemberAffiliationsData from "../data/archiveMemberAffiliations.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
+import formerMembersData from "../data/formerMembers.json";
 import type { ArchiveMemberAffiliation, ArchiveMemberProfile, ArchiveMemberTerm } from "../types/historicalArchive";
-import type { CouncilSession, CouncilSpeechSummaryData } from "../types";
+import type { CouncilSession, CouncilSpeechSummaryData, FormerMember } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
@@ -28,12 +29,23 @@ import {
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { personSlug } from "../lib/people";
+import { ActivityRadarSection } from "../components/council/ActivityRadarSection";
+import {
+  calculateAttendanceIndex,
+  calculateInformationDisclosureIndex,
+  calculateProposalActivityIndex,
+  calculateQuestionActivityIndex,
+  calculateSpeechActivityIndex,
+  calculateVotingDisclosureIndex,
+  eligibleSessionIdsFor,
+} from "../lib/activityRadar";
 
 const profiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const terms = archiveMemberTermsData as ArchiveMemberTerm[];
 const affiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const councilSessions = councilSessionsData as CouncilSession[];
+const formerMembers = formerMembersData as FormerMember[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -63,6 +75,36 @@ export function MemberFormerDetailPage() {
   const roleHistory = affiliationsForMemberProfileByType(affiliations, profile.id, "councilRole");
   const speeches = speechesForProfile(profile, speechSummaryData);
   const legacyId = profile.legacyFormerMemberId ?? profile.legacyMemberId;
+  const formerMemberRecord = profile.legacyFormerMemberId
+    ? formerMembers.find((m) => m.id === profile.legacyFormerMemberId)
+    : undefined;
+
+  // 議会活動データ（レーダーチャート）。在職確認済み会期（formerMembers.jsonのservedSessions）
+  // のみを対象期間とする（在職期間全体を保証する記録ではない旨は算定方法ページで説明する）。
+  const radarEligibleSessions = eligibleSessionIdsFor({
+    isFormerMember: true,
+    servedSessions: formerMemberRecord?.servedSessions,
+  });
+  const radarMetrics = [
+    calculateQuestionActivityIndex(speeches, radarEligibleSessions, profile.lastVerifiedAt),
+    calculateSpeechActivityIndex(speeches, radarEligibleSessions, profile.lastVerifiedAt),
+    calculateAttendanceIndex(),
+    calculateVotingDisclosureIndex(0, 0),
+    calculateProposalActivityIndex(),
+    calculateInformationDisclosureIndex(
+      [
+        { label: "経歴・概要", filled: !!profile.notes },
+        { label: "読み方", filled: !!profile.nameKana },
+        { label: "在籍期間・任期履歴", filled: own.length > 0 },
+        { label: "会派履歴", filled: factionHistory.length > 0 },
+        { label: "委員会履歴", filled: committeeHistory.length > 0 },
+        { label: "一般質問履歴", filled: speeches.length > 0 },
+        { label: "出典", filled: profile.sourceRefs.length > 0 },
+        { label: "議案賛否履歴", filled: false },
+      ],
+      profile.lastVerifiedAt,
+    ),
+  ];
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -105,6 +147,12 @@ export function MemberFormerDetailPage() {
           </Link>
         </div>
       </section>
+
+      <ActivityRadarSection
+        metrics={radarMetrics}
+        targetPeriodLabel="在職を確認できた会期（公式会議録で在職・発言を確認できた範囲）"
+        updatedAt={profile.lastVerifiedAt}
+      />
 
       <SectionCard title="在籍期間・選挙・任期履歴">
         {own.length === 0 ? (

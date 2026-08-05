@@ -29,6 +29,16 @@ import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummarySta
 import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { MemberSpeechAnalysisStatusBadge } from "../components/council/MemberSpeechAnalysisStatusBadge";
+import { ActivityRadarSection } from "../components/council/ActivityRadarSection";
+import {
+  calculateAttendanceIndex,
+  calculateInformationDisclosureIndex,
+  calculateProposalActivityIndex,
+  calculateQuestionActivityIndex,
+  calculateSpeechActivityIndex,
+  calculateVotingDisclosureIndex,
+  eligibleSessionIdsFor,
+} from "../lib/activityRadar";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -58,6 +68,10 @@ const formerMembers = formerMembersData as FormerMember[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
+// 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数。現時点では全議案で0件のため、
+// レーダーチャートの「議案等の意思表示」は全議員で対象記録なし（missing）として扱われる
+// （議員個人が非公開なのではなく、サイト側にこのデータがまだ収録されていないため）。
+const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const memberSpeechAnalysisList = (memberSpeechAnalysisData as MemberSpeechAnalysisData).members;
 // councilSessions.jsonは既に「現在の議員任期（令和5年5月〜）」の会期のみを収録しているため、
@@ -225,6 +239,30 @@ export function MemberDetailPage() {
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
 
+  // 議会活動データ（レーダーチャート）。議員の能力・優劣を示すものではなく、
+  // 公開データの共通基準による指数化であることをコンポーネント側でも明示している。
+  const radarEligibleSessions = eligibleSessionIdsFor({ isFormerMember: false });
+  const radarMetrics = [
+    calculateQuestionActivityIndex(publishedMemberSpeeches, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
+    calculateSpeechActivityIndex(publishedMemberSpeeches, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
+    calculateAttendanceIndex(),
+    calculateVotingDisclosureIndex(memberAllBillVotes.length, billsWithAnyMemberVoteDisclosed),
+    calculateProposalActivityIndex(),
+    calculateInformationDisclosureIndex(
+      [
+        { label: "経歴", filled: isProfileConfirmed },
+        { label: "所属会派", filled: !!member.factionId },
+        { label: "所属委員会", filled: member.committees.length > 0 },
+        { label: "当選回数", filled: !!member.termCount },
+        { label: "公式ページ", filled: !!member.profileUrl },
+        { label: "SNS", filled: member.sns.length > 0 },
+        { label: "一般質問履歴", filled: memberQuestions.length > 0 || publishedMemberSpeeches.length > 0 },
+        { label: "議案賛否履歴", filled: memberAllBillVotes.length > 0 },
+      ],
+      member.updatedAt ?? member.verifiedAt,
+    ),
+  ];
+
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
       {seo.jsonLd.map((entry) => (
@@ -296,6 +334,12 @@ export function MemberDetailPage() {
           </Link>
         </div>
       </section>
+
+      <ActivityRadarSection
+        metrics={radarMetrics}
+        targetPeriodLabel="令和5年6月〜令和8年3月定例会（会議録取得済みの会期）"
+        updatedAt={member.updatedAt ?? member.verifiedAt}
+      />
 
       <SectionCard title="所属委員会">
         {member.committees.length > 0 ? (

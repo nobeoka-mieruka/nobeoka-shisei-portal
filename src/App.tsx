@@ -135,6 +135,9 @@ const ExecutiveAnswersPage = lazy(() =>
 const SearchPage = lazy(() => import("./pages/SearchPage").then((m) => ({ default: m.SearchPage })));
 const UpdatesPage = lazy(() => import("./pages/UpdatesPage").then((m) => ({ default: m.UpdatesPage })));
 const DataStatusPage = lazy(() => import("./pages/DataStatusPage").then((m) => ({ default: m.DataStatusPage })));
+const MethodologyActivityRadarPage = lazy(() =>
+  import("./pages/MethodologyActivityRadarPage").then((m) => ({ default: m.MethodologyActivityRadarPage })),
+);
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
 function RouteLoadingFallback() {
@@ -260,6 +263,7 @@ function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/updates" element={<UpdatesPage />} />
               <Route path="/data-status" element={<DataStatusPage />} />
+              <Route path="/methodology/activity-radar" element={<MethodologyActivityRadarPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

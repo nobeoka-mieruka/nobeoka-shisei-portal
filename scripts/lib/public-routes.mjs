@@ -96,6 +96,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/terms",
   "/updates",
   "/data-status",
+  "/methodology/activity-radar",
 ];
 
 /**
@@ -367,6 +368,8 @@ function staticPageLastmod(path, data) {
           "src/data/searchIndex.json",
         ],
       );
+    case "/methodology/activity-radar":
+      return resolveLastmod(path, [], ["src/lib/activityRadar.ts", "src/pages/MethodologyActivityRadarPage.tsx"]);
     default:
       return undefined;
   }
