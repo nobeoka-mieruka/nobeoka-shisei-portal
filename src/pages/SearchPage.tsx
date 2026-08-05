@@ -25,6 +25,7 @@ const typeLabels: Record<SearchEntryType, string> = {
   speech: "質問・答弁（会議録）",
   compensation: "報酬",
   finance: "財政",
+  "political-fund": "政治資金収支報告書",
   update: "更新履歴",
   guide: "市役所案内",
   "press-conference": "市長記者会見",

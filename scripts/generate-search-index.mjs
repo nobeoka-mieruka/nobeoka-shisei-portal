@@ -498,6 +498,22 @@ entries.push({
   date: "2026-07-16",
 });
 
+// --- political fund organizations（政治資金収支報告書。TASK-015時点では実データ0件） ---
+const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
+const politicalFundReports = readJson("src/data/politicalFundReports.json");
+for (const org of politicalFundOrganizations) {
+  const reports = politicalFundReports.filter((r) => r.organizationId === org.id);
+  entries.push({
+    id: `political-fund-${org.id}`,
+    type: "political-fund",
+    title: `${org.name}（政治資金収支報告書）`,
+    description: `${org.organizationType}「${org.name}」（代表者：${org.representativeName}）の政治資金収支報告書です。`,
+    url: `/political-funds/${org.id}`,
+    keywords: [org.name, org.organizationType, org.representativeName, ...reports.map((r) => r.fiscalYear)].filter(Boolean),
+    sourceId: org.id,
+  });
+}
+
 // --- update history ---
 const updateHistory = readJson("src/data/updateHistory.json");
 for (const u of updateHistory) {
@@ -570,6 +586,13 @@ const staticPages = [
     description: "延岡市長の定例記者会見の発表事項を、延岡市公式ホームページに基づいて開催日順に整理しています。",
     url: "/mayor/press-conferences",
     keywords: ["市長定例記者会見", "記者会見", "発表事項"],
+  },
+  {
+    id: "page-political-funds",
+    title: "政治資金収支報告書",
+    description: "政治資金規正法に基づき政治団体が公表した収支報告書の内容を、総務省・宮崎県選挙管理委員会等の公式資料に基づいて整理しています。",
+    url: "/political-funds",
+    keywords: ["政治資金収支報告書", "政治団体", "収支報告書", "政治資金"],
   },
 ];
 for (const p of staticPages) {

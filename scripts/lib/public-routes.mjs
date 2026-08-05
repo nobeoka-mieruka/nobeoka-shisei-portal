@@ -97,6 +97,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/updates",
   "/data-status",
   "/methodology/activity-radar",
+  "/political-funds",
 ];
 
 /**
@@ -143,6 +144,8 @@ function loadData() {
   const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
   const archivePolicies = readJson("src/data/archivePolicies.json");
   const archiveCouncilDocuments = readJson("src/data/archiveCouncilDocuments.json");
+  const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
+  const politicalFundReports = readJson("src/data/politicalFundReports.json");
   return {
     members,
     formerMembers,
@@ -166,6 +169,8 @@ function loadData() {
     archiveMemberProfiles,
     archivePolicies,
     archiveCouncilDocuments,
+    politicalFundOrganizations,
+    politicalFundReports,
   };
 }
 
@@ -370,6 +375,12 @@ function staticPageLastmod(path, data) {
       );
     case "/methodology/activity-radar":
       return resolveLastmod(path, [], ["src/lib/activityRadar.ts", "src/pages/MethodologyActivityRadarPage.tsx"]);
+    case "/political-funds":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.politicalFundOrganizations.map((o) => o.verifiedAt))],
+        ["src/data/politicalFundOrganizations.json", "src/data/politicalFundReports.json"],
+      );
     default:
       return undefined;
   }
@@ -412,6 +423,18 @@ export function getIndexableRoutes() {
     urls.push({
       path: `/mayor/press-conferences/${c.date}`,
       lastmod: resolveLastmod(`/mayor/press-conferences/${c.date}`, [c.verifiedAt, c.date], ["src/data/mayorPressConferences.ts"]),
+    });
+  }
+  for (const o of data.politicalFundOrganizations) {
+    const path = `/political-funds/${o.id}`;
+    const reports = data.politicalFundReports.filter((r) => r.organizationId === o.id);
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [o.verifiedAt, maxValidDate(reports.map((r) => r.verifiedAt))],
+        ["src/data/politicalFundOrganizations.json", "src/data/politicalFundReports.json"],
+      ),
     });
   }
   for (const { memberId, speech } of publishedSpeeches(councilSpeechSummaries)) {

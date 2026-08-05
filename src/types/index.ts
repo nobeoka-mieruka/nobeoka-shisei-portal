@@ -1479,6 +1479,126 @@ export interface FinanceDashboardData {
   notes: string;
 }
 
+/**
+ * 政治資金収支報告書関連の型（TASK-015）。
+ *
+ * 【方針】政治資金規正法に基づき、政治団体が都道府県選挙管理委員会または総務省へ提出し、
+ * 公表された収支報告書の内容を、確認できた範囲のみ転記する。独自の評価・ランキング・
+ * 「多い/少ない」等の論評は加えない。未確認の金額は0円ではなくnullとして扱う。
+ * 本タスク（TASK-015）では型・画面の設計のみを行い、実データの投入はTASK-016で別途行う。
+ */
+
+/** 政治団体の区分（政治資金規正法上の分類のうち、地方議員・首長に関係し得るもの）。 */
+export type PoliticalFundOrganizationType = "資金管理団体" | "後援会" | "政党支部" | "その他の政治団体" | "確認中";
+
+/** 収支報告書の提出先・公表元。 */
+export type PoliticalFundDisclosureAuthority = "総務省" | "宮崎県選挙管理委員会" | "延岡市選挙管理委員会" | "確認中";
+
+/** 政治団体1件分。members.json等と同様、IDは本ファイル内で一意とする。 */
+export interface PoliticalFundOrganization {
+  id: string;
+  /** 政治団体の名称（収支報告書の記載どおり）。 */
+  name: string;
+  organizationType: PoliticalFundOrganizationType;
+  /** 代表者の氏名。収支報告書に記載の氏名をそのまま用いる。 */
+  representativeName: string;
+  /** 会計責任者の氏名。非公表・未確認の場合はnull。 */
+  treasurerName: string | null;
+  /**
+   * members.jsonまたはformerMembers.jsonのidへの参照。公式資料上で本人の団体と確認できた場合のみ設定する。
+   * 同姓同名等により断定できない場合はnullのままにし、relatedPersonNameのみで補助表示する。
+   */
+  relatedMemberId: string | null;
+  /** 関連する氏名の表示用補助（relatedMemberIdが未確定の場合の参考表示）。 */
+  relatedPersonName: string | null;
+  disclosureAuthority: PoliticalFundDisclosureAuthority;
+  /** 選管・総務省が公表している政治団体一覧・収支報告書公表ページのURL。 */
+  officialListUrl: string | null;
+  /** ISO形式。サイト運営者がこの政治団体の情報をいつ確認したか。 */
+  verifiedAt: string | null;
+  /** 補足事項（任意）。 */
+  notes: string | null;
+}
+
+/** 収入の内訳（政治資金規正法の収支報告書様式に準拠した主要区分）。単位は円。未確認の項目はnull。 */
+export interface PoliticalFundIncomeBreakdown {
+  /** 個人の負担する党費又は会費。 */
+  membershipFees: number | null;
+  /** 個人からの寄附。 */
+  donationsFromIndividuals: number | null;
+  /** 法人その他の団体からの寄附。 */
+  donationsFromOrganizations: number | null;
+  /** 政党匿名寄附を除く政治団体からの寄附。 */
+  donationsFromPoliticalOrganizations: number | null;
+  /** 機関紙誌の発行その他の事業による収入。 */
+  businessIncome: number | null;
+  /** 借入金。 */
+  loans: number | null;
+  /** 本部又は支部から供与された交付金。 */
+  grantsFromHeadquartersOrBranches: number | null;
+  /** その他の収入。 */
+  other: number | null;
+}
+
+/** 支出の内訳（政治資金規正法の収支報告書様式に準拠した主要区分）。単位は円。未確認の項目はnull。 */
+export interface PoliticalFundExpenditureBreakdown {
+  /** 経常経費のうち人件費。 */
+  personnelExpenses: number | null;
+  /** 経常経費のうち光熱水費。 */
+  utilityExpenses: number | null;
+  /** 経常経費のうち備品・消耗品費。 */
+  equipmentExpenses: number | null;
+  /** 経常経費のうち事務所費。 */
+  officeExpenses: number | null;
+  /** 政治活動費のうち組織活動費。 */
+  organizationActivityExpenses: number | null;
+  /** 政治活動費のうち選挙関係費。 */
+  electionExpenses: number | null;
+  /** 政治活動費のうち機関紙誌の発行その他の事業費。 */
+  publicationExpenses: number | null;
+  /** 政治活動費のうち調査研究費。 */
+  researchExpenses: number | null;
+  /** 政治活動費のうち寄附・交付金。 */
+  donationsAndGrantsPaid: number | null;
+  /** その他の経費。 */
+  other: number | null;
+}
+
+/** 収支報告書1件分の確認状況。 */
+export type PoliticalFundReportStatus = "確認済み" | "確認中" | "情報未登録";
+
+/** 政治団体1団体・1年分の収支報告書。 */
+export interface PoliticalFundReport {
+  id: string;
+  /** PoliticalFundOrganization.id への参照。 */
+  organizationId: string;
+  /** 例: "令和6年分"。収支報告書の対象年（暦年）。 */
+  fiscalYear: string;
+  reportStatus: PoliticalFundReportStatus;
+  /** 金額の単位。円と千円の混同を防ぐため、値ではなく型で固定する。 */
+  amountUnit: "円";
+  /** 前年繰越額。 */
+  carriedOverFromPreviousYear: number | null;
+  /** 本年収入額（前年繰越額を含まない、その年の収入のみ）。 */
+  totalIncome: number | null;
+  incomeBreakdown: PoliticalFundIncomeBreakdown | null;
+  /** 本年支出額。 */
+  totalExpenditure: number | null;
+  expenditureBreakdown: PoliticalFundExpenditureBreakdown | null;
+  /** 翌年繰越額。 */
+  carriedOverToNextYear: number | null;
+  /** 選管・総務省による公表日。 */
+  publishedDate: string | null;
+  /** 一次資料（収支報告書PDF等）のタイトル。 */
+  sourceTitle: string | null;
+  /** 一次資料（収支報告書PDF等）のURL。 */
+  sourceUrl: string | null;
+  /** ISO形式。サイト運営者がこの報告書をいつ確認したか。 */
+  verifiedAt: string | null;
+  /** 補足事項（任意）。収支報告書の様式変更・非公表項目の有無等。 */
+  notes: string | null;
+}
+
 /** サイト内横断検索のインデックス区分。 */
 export type SearchEntryType =
   | "member"
@@ -1492,6 +1612,7 @@ export type SearchEntryType =
   | "speech"
   | "compensation"
   | "finance"
+  | "political-fund"
   | "update"
   | "guide"
   | "press-conference"

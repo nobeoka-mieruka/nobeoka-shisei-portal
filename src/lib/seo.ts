@@ -23,6 +23,8 @@ import compensationComparisonData from "../data/compensationComparison.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
+import politicalFundOrganizationsData from "../data/politicalFundOrganizations.json";
+import politicalFundReportsData from "../data/politicalFundReports.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archivePoliciesData from "../data/archivePolicies.json";
@@ -40,6 +42,8 @@ import type {
   Mayor,
   MayorEntertainmentExpensesData,
   MayorPromisesData,
+  PoliticalFundOrganization,
+  PoliticalFundReport,
   Theme,
 } from "../types";
 import type {
@@ -101,6 +105,8 @@ const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
+const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFundOrganization[];
+const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -560,6 +566,18 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
             { label: "市長情報", to: "/mayor" },
             { label: "市長定例記者会見" },
           ],
+        },
+        options,
+      );
+
+    case "/political-funds":
+      return makeResult(
+        {
+          path: "/political-funds",
+          pageTitle: "政治資金収支報告書",
+          description:
+            "政治資金規正法に基づき政治団体が公表した収支報告書の内容を、総務省・宮崎県選挙管理委員会等の公式資料に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "政治資金収支報告書" }],
         },
         options,
       );
@@ -1514,6 +1532,41 @@ function pressConferenceSeo(date: string, options?: SeoOptions): SeoResult {
   );
 }
 
+/** /political-funds/:id */
+function politicalFundOrganizationSeo(id: string, options?: SeoOptions): SeoResult {
+  const organization = politicalFundOrganizations.find((o) => o.id === id);
+  if (!organization) return notFound(`/political-funds/${id}`, "政治団体が見つかりません");
+
+  const reportCount = politicalFundReports.filter((r) => r.organizationId === organization.id).length;
+  const description = `${organization.name}（${organization.organizationType}）の政治資金収支報告書を、${organization.disclosureAuthority}の公表資料に基づいて整理しています。`;
+
+  return makeResult(
+    {
+      path: `/political-funds/${id}`,
+      pageTitle: `${organization.name}の政治資金収支報告書`,
+      description,
+      breadcrumbs: [
+        { label: "ホーム", to: "/" },
+        { label: "政治資金収支報告書", to: "/political-funds" },
+        { label: organization.name },
+      ],
+      extraJsonLd:
+        reportCount > 0
+          ? [
+              datasetJsonLd({
+                id: "dataset-political-fund-jsonld",
+                name: `${organization.name} 政治資金収支報告書データ`,
+                description,
+                url: `${SITE_URL}/political-funds/${id}`,
+                dateModified: options?.lastmod,
+              }),
+            ]
+          : [],
+    },
+    options,
+  );
+}
+
 const MEMBER_RE = /^\/members\/([^/]+)$/;
 const SPEECH_DETAIL_RE = /^\/members\/([^/]+)\/questions\/([^/]+)$/;
 const QUESTION_RE = /^\/questions\/([^/]+)$/;
@@ -1522,6 +1575,7 @@ const PROMISE_RE = /^\/mayor\/policy-progress\/([^/]+)$/;
 const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
 const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
+const POLITICAL_FUND_ORGANIZATION_RE = /^\/political-funds\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
 const TIMELINE_YEAR_RE = /^\/timeline\/(\d{4})$/;
 const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
@@ -1579,6 +1633,11 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const pressConferenceMatch = path.match(PRESS_CONFERENCE_RE);
   if (pressConferenceMatch) return pressConferenceSeo(safeDecodeURIComponent(pressConferenceMatch[1]), options);
+
+  const politicalFundOrganizationMatch = path.match(POLITICAL_FUND_ORGANIZATION_RE);
+  if (politicalFundOrganizationMatch) {
+    return politicalFundOrganizationSeo(safeDecodeURIComponent(politicalFundOrganizationMatch[1]), options);
+  }
 
   const mayorDetailMatch = path.match(MAYOR_DETAIL_RE);
   if (mayorDetailMatch) return mayorDetailSeo(safeDecodeURIComponent(mayorDetailMatch[1]), options);

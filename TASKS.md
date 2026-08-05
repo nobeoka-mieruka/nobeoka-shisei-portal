@@ -441,29 +441,30 @@
 
 ### TASK-015 政治資金データベースの型・画面設計
 
-状態：READY
+状態：DONE
 優先度：B
-対象：`src/types/index.ts`、`src/data/`、新規ページ
+対象：`src/types/index.ts`、`src/data/politicalFundOrganizations.json`（新規）、`src/data/politicalFundReports.json`（新規）、`src/lib/politicalFunds.ts`（新規）、`src/pages/PoliticalFundsPage.tsx`（新規）、`src/pages/PoliticalFundOrganizationDetailPage.tsx`（新規）、`src/App.tsx`、`src/lib/seo.ts`、`src/pages/SearchPage.tsx`、`scripts/lib/public-routes.mjs`、`scripts/generate-search-index.mjs`、`scripts/validate-data.mjs`
 依存関係：なし（データ投入はTASK-016で別管理）
 目的：政治資金収支報告書等を整理するためのデータ構造と画面を設計する（データ投入は行わない）
 
 作業内容：
-- 政治資金収支報告書の公開項目を確認し、型定義を設計する
-- 一覧・詳細画面のUI設計を行う
-- 空データの状態で画面が壊れないことを確認する
+- 政治資金収支報告書の公開項目（収入内訳・支出内訳・繰越額・提出先・公開状況・出典・確認日）を確認し、型定義（`PoliticalFundOrganization`/`PoliticalFundReport`/収入・支出内訳）を設計
+- 一覧ページ（`/political-funds`）・詳細ページ（`/political-funds/:id`）を実装
+- 空データ（0件）の状態で画面が壊れないこと、既存の`EmptyState`コンポーネントで「現在公開できる収支報告書データはありません」等を表示することを確認
+- SEO（`/political-funds`は0件でもnoindexにしない）、サイト内検索（団体名・代表者・年度をキーワード化）、パンくず（ホーム→政治資金収支報告書→団体名）を実装
+- 元議員（`formerMembers.json`）に紐づく団体を`/members/:id`へ直接リンクすると本番404になる既知の不具合を避けるため、既存の`findMemberOrFormerLink`ヘルパーで現職・元議員を正しく判定してリンク先を解決
 
 受入条件：
-- 型定義が`validate:data`の検証対象に組み込まれる
-- データ0件でも「情報未登録」等の表示になる
+- 型定義が`validate:data`の検証対象に組み込まれる（達成：ID重複・区分値・議員ID参照整合性・年度重複・金額非負・確認済みなのに出典なし等を検証）
+- データ0件でも「情報未登録」等の表示になる（達成）
 
 公式資料：
-- 政治資金収支報告書（公表される場合）
-- 総務省資料
+- 該当なし（型・画面の設計のみ。実データ投入はTASK-016で対応）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-08-05
+- コミットID：e20ccab
+- 変更概要：政治資金収支報告書データベースの基盤（型・一覧画面・詳細画面・検証・検索・SEO）を実装。実データは0件のまま。TASK-016で公式資料（総務省・宮崎県選挙管理委員会の公表資料）を確認しながら投入する。
 
 ---
 

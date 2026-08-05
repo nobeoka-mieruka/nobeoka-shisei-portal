@@ -897,6 +897,85 @@ try {
   warn("financeDashboard.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
+// --- politicalFundOrganizations.json / politicalFundReports.json（政治資金収支報告書。TASK-015時点では実データ0件） ---
+try {
+  const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
+  const politicalFundReports = readJson("src/data/politicalFundReports.json");
+  const VALID_ORG_TYPES = new Set(["資金管理団体", "後援会", "政党支部", "その他の政治団体", "確認中"]);
+  const VALID_DISCLOSURE_AUTHORITIES = new Set(["総務省", "宮崎県選挙管理委員会", "延岡市選挙管理委員会", "確認中"]);
+  const VALID_REPORT_STATUSES = new Set(["確認済み", "確認中", "情報未登録"]);
+  const orgIds = new Set();
+
+  for (const o of politicalFundOrganizations) {
+    const tag = `politicalFundOrganizations.json (${o.id ?? "id不明"})`;
+    if (isBlank(o.id)) err(tag, "idが空です");
+    else if (orgIds.has(o.id)) err(tag, `idが重複しています: ${o.id}`);
+    else orgIds.add(o.id);
+
+    if (isBlank(o.name)) err(tag, "nameが空です");
+    if (isBlank(o.representativeName)) err(tag, "representativeNameが空です");
+    if (!VALID_ORG_TYPES.has(o.organizationType)) err(tag, `未定義のorganizationTypeです: ${o.organizationType}`);
+    if (!VALID_DISCLOSURE_AUTHORITIES.has(o.disclosureAuthority)) {
+      err(tag, `未定義のdisclosureAuthorityです: ${o.disclosureAuthority}`);
+    }
+    if (o.relatedMemberId && !memberIds.has(o.relatedMemberId) && !formerMemberIds.has(o.relatedMemberId)) {
+      err(tag, `存在しない議員IDをrelatedMemberIdで参照しています: ${o.relatedMemberId}`);
+    }
+    if (o.officialListUrl && !URL_RE.test(o.officialListUrl)) err(tag, `officialListUrlの形式が不正です: ${o.officialListUrl}`);
+    if (o.verifiedAt && !DATE_RE.test(o.verifiedAt)) err(tag, `verifiedAtの形式が不正です: ${o.verifiedAt}`);
+  }
+
+  const reportIds = new Set();
+  const seenOrgYearPairs = new Set();
+  for (const r of politicalFundReports) {
+    const tag = `politicalFundReports.json (${r.id ?? "id不明"})`;
+    if (isBlank(r.id)) err(tag, "idが空です");
+    else if (reportIds.has(r.id)) err(tag, `idが重複しています: ${r.id}`);
+    else reportIds.add(r.id);
+
+    if (isBlank(r.organizationId)) err(tag, "organizationIdが空です");
+    else if (!orgIds.has(r.organizationId)) err(tag, `存在しない政治団体IDを参照しています: ${r.organizationId}`);
+    if (isBlank(r.fiscalYear)) err(tag, "fiscalYearが空です");
+    if (!VALID_REPORT_STATUSES.has(r.reportStatus)) err(tag, `未定義のreportStatusです: ${r.reportStatus}`);
+    if (r.amountUnit !== "円") err(tag, `amountUnitは"円"固定です: ${r.amountUnit}`);
+
+    const pairKey = `${r.organizationId}::${r.fiscalYear}`;
+    if (seenOrgYearPairs.has(pairKey)) err(tag, `同じ政治団体・同じ年分の収支報告書が重複登録されています: ${r.fiscalYear}`);
+    seenOrgYearPairs.add(pairKey);
+
+    for (const amountField of [
+      "carriedOverFromPreviousYear",
+      "totalIncome",
+      "totalExpenditure",
+      "carriedOverToNextYear",
+    ]) {
+      const v = r[amountField];
+      if (v !== null && v !== undefined && (typeof v !== "number" || v < 0)) {
+        err(tag, `${amountField}が不正です（null、または0以上の数値が必要）: ${v}`);
+      }
+    }
+    for (const breakdown of [r.incomeBreakdown, r.expenditureBreakdown]) {
+      if (!breakdown) continue;
+      for (const [k, v] of Object.entries(breakdown)) {
+        if (v !== null && v !== undefined && (typeof v !== "number" || v < 0)) {
+          err(tag, `内訳項目${k}が不正です（null、または0以上の数値が必要）: ${v}`);
+        }
+      }
+    }
+    if (r.publishedDate && !DATE_RE.test(r.publishedDate)) err(tag, `publishedDateの形式が不正です: ${r.publishedDate}`);
+    if (r.verifiedAt && !DATE_RE.test(r.verifiedAt)) err(tag, `verifiedAtの形式が不正です: ${r.verifiedAt}`);
+    if (r.sourceUrl && !URL_RE.test(r.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${r.sourceUrl}`);
+    // 確認済み（金額が確定している）状態には一次資料URLを求める。情報未登録・確認中はまだ資料未収集のため対象外。
+    if (r.reportStatus === "確認済み" && isBlank(r.sourceUrl)) {
+      err(tag, 'reportStatus="確認済み"なのにsourceUrl（一次資料）が設定されていません');
+    }
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("politicalFundOrganizations.json / politicalFundReports.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- archiveMayors.json / archiveMayorTerms.json（延岡市政アーカイブ：歴代市長） ---
 let archiveMayorIds = new Set();
 let archiveMayorTermIds = new Set();
@@ -1845,6 +1924,7 @@ const VALID_SEARCH_TYPES = new Set([
   "press-conference",
   "policy",
   "council-document",
+  "political-fund",
   "page",
 ]);
 // 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。
@@ -1870,6 +1950,7 @@ const VALID_URL_PREFIXES = [
   "/terms",
   "/contact",
   "/updates",
+  "/political-funds",
 ];
 
 try {

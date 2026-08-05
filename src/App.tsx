@@ -36,6 +36,12 @@ const MayorPressConferencesPage = lazy(() =>
 const MayorPressConferenceDetailPage = lazy(() =>
   import("./pages/MayorPressConferenceDetailPage").then((m) => ({ default: m.MayorPressConferenceDetailPage })),
 );
+const PoliticalFundsPage = lazy(() =>
+  import("./pages/PoliticalFundsPage").then((m) => ({ default: m.PoliticalFundsPage })),
+);
+const PoliticalFundOrganizationDetailPage = lazy(() =>
+  import("./pages/PoliticalFundOrganizationDetailPage").then((m) => ({ default: m.PoliticalFundOrganizationDetailPage })),
+);
 const MayorsPage = lazy(() => import("./pages/MayorsPage").then((m) => ({ default: m.MayorsPage })));
 const MayorDetailPage = lazy(() => import("./pages/MayorDetailPage").then((m) => ({ default: m.MayorDetailPage })));
 const FinancePage = lazy(() => import("./pages/FinancePage").then((m) => ({ default: m.FinancePage })));
@@ -213,6 +219,8 @@ function App() {
               <Route path="/mayor/entertainment-expenses" element={<MayorEntertainmentExpensesPage />} />
               <Route path="/mayor/press-conferences" element={<MayorPressConferencesPage />} />
               <Route path="/mayor/press-conferences/:date" element={<MayorPressConferenceDetailPage />} />
+              <Route path="/political-funds" element={<PoliticalFundsPage />} />
+              <Route path="/political-funds/:id" element={<PoliticalFundOrganizationDetailPage />} />
               <Route path="/mayors" element={<MayorsPage />} />
               <Route path="/mayors/:slug" element={<MayorDetailPage />} />
               <Route path="/finance" element={<FinancePage />} />
