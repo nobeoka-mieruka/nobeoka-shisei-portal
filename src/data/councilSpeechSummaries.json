@@ -51801,7 +51801,7 @@
       "sessionsWithSpeechCount": 0,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 26,
+      "unfetchedSessionCount": 27,
       "lastAnalyzedAt": null,
       "topicCounts": [],
       "speeches": []
@@ -78670,6 +78670,145 @@
         }
       ],
       "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
+    },
+    {
+      "memberId": "fm02",
+      "analysisPeriod": {
+        "from": null,
+        "to": null
+      },
+      "scope": [
+        "plenary"
+      ],
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
+      "sessionsWithoutSpeechCount": 0,
+      "unavailableSessionCount": 0,
+      "unfetchedSessionCount": 0,
+      "lastAnalyzedAt": "2026-08-05",
+      "topicCounts": [],
+      "speeches": [
+        {
+          "id": "fm02-2023-03-07-ippan-shitsumon",
+          "memberId": "fm02",
+          "sessionId": "2023-03",
+          "date": "2023-03-07",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "歴史・文化ゾーン駐車場",
+            "空飛ぶクルマ",
+            "エンクロス"
+          ],
+          "shortSummary": "令和5年3月定例会（第29回定例会、第2号）で佐藤誠議員（旧任期、現行議員任期には該当なし）が行った一般質問のうち、歴史・文化ゾーン駐車場管理システムのパブリックコメント、空飛ぶクルマの実証実験、エンクロスの市民活動情報発信に関する部分と、市長の答弁を要約したものです。当該議員は現行議員任期（2023-04-23執行の選挙）以降の現職議員名簿には該当がありません。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "歴史・文化ゾーン内駐車場管理システム等整備事業のパブリックコメント",
+              "questionSummary": "同事業について、議会が過去に一度否決した経緯があり、その後駐車場の混雑は見られていない状況で、システム構築とビデオカメラ設置に1億6千万円の予算を計上している。1億円以上の事業はパブリックコメントを実施するはずだが、それを行わずに議案へ提出した理由を質問した。",
+              "answerSummary": "駐車場の位置や満空情報が分かりにくい現状を改善するための管理システムであり、令和4年5月に実施したパブリックコメントの内容の一部であること、議会審議の前にパブリックコメントを行うより当初予算案として提案し審議いただくことを優先したこと、可決された場合は改めてパブリックコメントを行う考えであることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm02",
+                  "summary": "歴史・文化ゾーン駐車場管理システム等整備事業について、パブリックコメントを行わずに議案へ提出した理由を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "既に実施したパブリックコメントの内容の一部であること、審議前より当初予算案としての提案を優先したこと、可決後に改めてパブリックコメントを行う考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "実施予定"
+            },
+            {
+              "id": "q2",
+              "title": "空飛ぶクルマ実証実験の根拠と経過",
+              "questionSummary": "前年3月議会で市長が「2025年大阪万博より前に実証実験を行う」と答弁した根拠と、その後の具体的な経過を質問した。",
+              "answerSummary": "延岡市は空飛ぶクルマラボを有し、慶應義塾大学大学院システムデザイン・マネジメント研究所と令和3年12月に連携協定を締結していること、その一環として国のデジタル田園都市国家構想推進交付金事業に採択された新たな救急搬送システム整備を進めていること、同大学による離発着場候補地の現地視察・医療機関ヒアリング等が既に実施されていること、年内に試験飛行またはVRシミュレーターによる実証実験の実施を同大学と協議中であることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm02",
+                  "summary": "空飛ぶクルマの実証実験について、2025年大阪万博前に実施できるとした根拠と具体的な経過を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "慶應義塾大学との連携協定、国の交付金事業採択、現地視察・ヒアリングの実施状況、年内の実証実験実施へ向けた協議状況を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q3",
+              "title": "エンクロスの市民活動情報発信",
+              "questionSummary": "前年12月議会で市長が、エンクロスでの市民活動の情報発信は指定管理業務仕様書に記載されていると答弁したが、仕様書を確認してもそのような記載が見当たらないとして、記載箇所を質問した。",
+              "answerSummary": "令和5年度からの第二期指定管理業務仕様書の「業務処理の基準」に「複合施設内のイベント等について、定期的にチラシやホームページを作成し、情報発信を行うこと」との記載があり、これに基づき市民活動についても一定の情報発信が必要と考えていること、他の公共施設と同様にホームページやデジタルサイネージでの発信を指定管理者と協議中であることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm02",
+                  "summary": "エンクロスでの市民活動の情報発信が指定管理業務仕様書のどこに記載されているか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "第二期指定管理業務仕様書の「業務処理の基準」の記載を根拠として示し、指定管理者との情報発信の協議状況を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和5年第29回定例会（第2号 3月7日） 佐藤誠君（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050307A/84703/10/1//0/0",
+              "speakerSection": "pos=84703"
+            },
+            {
+              "title": "令和5年第29回定例会（第2号 3月7日） 市長（読谷山洋司君）（答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050307A/96095/10/1//0/0",
+              "speakerSection": "pos=96095"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他に多数の項目（西階野球場整備、市制90周年記念式典、災害対策、耐震化、保育体制、神話のまちづくり、舞野インター整備、愛宕山周辺整備、金堂ケ池活用等）が含まれるが、市長答弁で直接・明確に対応が確認できた3項目のみを要約対象とした（他項目は答弁原文で対応関係を個別確認できていないため含めていない）。佐藤誠氏は現行議員任期（2023-04-23執行の選挙）の現職議員名簿に該当する氏名がなく、元議員（fm02）として登録した。"
+        }
+      ],
+      "isFormerMember": true
     }
   ]
 }

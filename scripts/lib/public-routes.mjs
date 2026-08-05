@@ -199,12 +199,13 @@ function archiveFiscalYearDates(archiveFiscalYears) {
  * 公開済み（isPublished: true）かつ収録対象期間（src/config/councilSpeechPeriod.json）内の
  * 一般質問・質疑要約のみを{memberId, speech}の形で返す。期間より前のデータは、万一登録されて
  * いても（validate-data.mjsが本来エラーにするが、念のための多重防御として）サイトマップ・
- * プリレンダリング対象から除外する。
+ * プリレンダリング対象から除外する。ただしisFormerMember:true（旧任期のみ在職した元議員、
+ * TASK-005系）のレコードは、この現任期カットオフの対象外とする。
  */
 function publishedSpeeches(councilSpeechSummaries) {
   return councilSpeechSummaries.members.flatMap((m) =>
     m.speeches
-      .filter((s) => s.isPublished && s.date && s.date >= councilSpeechPeriod.from)
+      .filter((s) => s.isPublished && s.date && (m.isFormerMember || s.date >= councilSpeechPeriod.from))
       .map((s) => ({ memberId: m.memberId, speech: s })),
   );
 }

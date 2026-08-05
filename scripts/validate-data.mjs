@@ -2232,7 +2232,11 @@ try {
         if (speech.generatedAt !== null && speech.generatedAt !== undefined && !DATE_RE.test(speech.generatedAt)) {
           err(speechTag, `generatedAtの形式が不正です: ${speech.generatedAt}`);
         }
-        if (speech.date && speech.date < councilSpeechPeriod.from) {
+        // councilSpeechPeriod.fromは「現議員任期の対象範囲」を表す。旧任期のみに在職した元議員
+        // （formerMembers.jsonのIDで、servedSessionsが別途検証済み）の発言は、この現任期カットオフの
+        // 対象外とする（旧任期アーカイブ拡張、TASK-005系）。現職議員IDの発言は引き続きこのカットオフで検証する
+        // （現任期の集計・議会活動データ等、他機能への影響を避けるため）。
+        if (speech.date && speech.date < councilSpeechPeriod.from && !formerMemberIds.has(record.memberId)) {
           const msg = `発言日（${speech.date}）が収録対象期間（${councilSpeechPeriod.from}以降）より前です`;
           if (speech.isPublished) err(speechTag, `${msg}。公開できません`);
           else warn(speechTag, msg);

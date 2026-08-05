@@ -1406,6 +1406,12 @@ export type AnswererRole =
 /** 議員1名分の、一般質問・質疑の収録・解析状況とデータ本体。 */
 export interface CouncilMemberSpeechRecord {
   memberId: string;
+  /**
+   * trueの場合、memberIdはformerMembers.jsonのIDであり、現議員任期より前（councilSpeechPeriod.from
+   * より前）の発言も対象になり得る（旧任期一般質問アーカイブ、TASK-005系）。現職議員（members.json）の
+   * レコードでは設定しない。
+   */
+  isFormerMember?: boolean;
   /** 解析対象とした期間。会議録本文を1件も取得・解析していない間はfrom/toともnull。 */
   analysisPeriod: { from: string | null; to: string | null };
   /** 現時点の収録範囲。将来、委員会質疑（"committee"）を追加できるようにしておく。 */

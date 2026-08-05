@@ -182,29 +182,178 @@
 
 ---
 
-### TASK-005 一般質問対象年度の拡大
+### TASK-005 一般質問対象年度の拡大（旧任期アーカイブ拡張）
 
-状態：BLOCKED
+状態：分割済み（TASK-005A〜005Gへ分割。本タスク自体は進行管理のみ）
 優先度：A
-対象：`src/data/generalQuestions.json`
+対象：`src/data/councilSpeechSummaries.json`、`src/data/formerMembers.json`、`src/data/councilSessions.json`
 依存関係：なし
-目的：現状の令和8年6月定例会14件に加え、他の定例会分の一般質問データを追加する
+目的：現議員任期（2023-04-23〜）の会議録確認済み一般質問177件に加え、それより前（旧任期、2019年5月頃〜2023年4月頃）の一般質問を、公式会議録検索システム（kensakusystem.jp/nobeoka）から拡張する
 
-作業内容：
-- 対象定例会の会議録・議事日程を確認する
-- 議員、質問日、テーマ、質問内容要約、会議録リンクを登録する
+- TASK-005A：旧任期会期マスター整理
+- TASK-005B：旧任期議員ID対応
+- TASK-005C：2022年度一般質問
+- TASK-005D：2021年度一般質問
+- TASK-005E：2020年度一般質問
+- TASK-005F：2019年度一般質問
+- TASK-005G：表示・検索・検証統合
 
-受入条件：
-- `validate:data`のエラーが0件
-- 全件に出典（会議録リンク）がある
+---
+
+### TASK-005A 旧任期会期マスター整理
+
+状態：IN_PROGRESS
+優先度：A
+対象：`src/data/councilSessions.json`、`data/minutes/discovery-*.json`（作業用、未コミット）
+依存関係：なし
+目的：令和元年（2019年）〜令和5年3月（2023年4月選挙前）の定例会・臨時会を一覧化する
+
+実施内容：
+- `node scripts/discover-nobeoka-minutes.mjs --year=<年> --from=2019-01-01`で、令和元年〜令和5年3月分の
+  会期・本会議日を自動取得できることを確認した（`See.exe`の年階層ナビゲーションが2023-2026年だけでなく
+  2019-2022年でも正しく動作することを確認済み）。5年分・30会期・約98本会議日の一覧を確認した
+- `councilSessions.json`へ実際に登録したのは、最優先1件（`2023-03`＝令和5年3月定例会／第29回定例会、
+  開会2023-02-24・閉会2023-03-24）のみ。他29会期は未登録
+
+未着手：
+- 残り29会期の`councilSessions.json`登録（開会日・閉会日・一般質問有無・収録状態等）
 
 公式資料：
-- 延岡市議会公式ホームページ（会議録）
+- 延岡市議会会議録検索システム（https://www.kensakusystem.jp/nobeoka/）
+
+完了記録：
+- 完了日：（一部完了のみ、TASK-005Aは継続中）
+- コミットID：（後述）
+- 変更概要：`2023-03`会期を追加。
+
+---
+
+### TASK-005B 旧任期議員ID対応
+
+状態：IN_PROGRESS
+優先度：A
+対象：`src/data/formerMembers.json`
+依存関係：TASK-005Aの完了後（一部完了で着手）
+目的：旧任期当時の議員と、現職・元議員マスターの対応を確認する
+
+実施内容（令和5年3月定例会＝2023-03の発言者一覧より）：
+- 一般質問を行った12名を会議録検索システムの発言者一覧（`r_Speakers.exe`）で確認した
+- うち7名（稲田雅之m01・上杉泰洋m03・小野正二m04・甲斐忠篤m07・甲斐正幸m08・河野治満m10・
+  中城あかねm16）は現職議員名簿の氏名と一致（続投した議員）
+- うち5名（佐藤誠・松田和己・三上毅・白石良盛・田村吉宏）は現職議員名簿に該当する氏名がなく、
+  新規元議員として`fm02`〜`fm06`を登録した（servedSessions:["2023-03"]、ふりがな・当選回数・
+  経歴等は未確認のため登録していない）
+
+未着手・保留：
+- 続投した7名（m01・m03・m04・m07・m08・m10・m16）の旧任期発言を、現職議員IDのまま
+  `councilSpeechSummaries.json`へ追加する方法は、今回あえて見送った。`councilSpeechPeriod.from`
+  （2023-04-23）は議会活動レーダーチャート（TASK活動レーダー）等、現任期を前提に設計された機能が
+  複数依存しており、現職IDへ旧任期データを混在させる場合の影響範囲の精査がまだ済んでいないため
+  （元議員IDのみ現任期カットオフの対象外とする対応は今回実施済み、TASK-005G参照）。次回以降、
+  影響範囲を確認した上で対応する
+- 残り29会期分の議員ID対応表の作成
+
+公式資料：
+- 延岡市議会会議録検索システム（発言者一覧、令和5年第29回定例会）
+
+完了記録：
+- 完了日：（一部完了のみ）
+- コミットID：（後述）
+- 変更概要：元議員5名（fm02〜fm06）を新規登録。
+
+---
+
+### TASK-005C 2022年度一般質問
+
+状態：READY
+優先度：A
+対象：`src/data/councilSpeechSummaries.json`
+依存関係：TASK-005A・005Bの完了後
+公式資料：延岡市議会会議録検索システム
 
 完了記録：
 - 完了日：
 - コミットID：
 - 変更概要：
+
+---
+
+### TASK-005D 2021年度一般質問
+
+状態：READY
+優先度：A
+対象：`src/data/councilSpeechSummaries.json`
+依存関係：TASK-005A・005Bの完了後
+公式資料：延岡市議会会議録検索システム
+
+完了記録：
+- 完了日：
+- コミットID：
+- 変更概要：
+
+---
+
+### TASK-005E 2020年度一般質問
+
+状態：READY
+優先度：A
+対象：`src/data/councilSpeechSummaries.json`
+依存関係：TASK-005A・005Bの完了後
+公式資料：延岡市議会会議録検索システム
+
+完了記録：
+- 完了日：
+- コミットID：
+- 変更概要：
+
+---
+
+### TASK-005F 2019年度一般質問
+
+状態：READY
+優先度：A
+対象：`src/data/councilSpeechSummaries.json`
+依存関係：TASK-005A・005Bの完了後
+公式資料：延岡市議会会議録検索システム
+
+完了記録：
+- 完了日：
+- コミットID：
+- 変更概要：
+
+---
+
+### TASK-005G 表示・検索・検証統合
+
+状態：IN_PROGRESS
+優先度：A
+対象：`src/lib/councilSpeeches.ts`、`scripts/lib/public-routes.mjs`、`scripts/generate-search-index.mjs`、
+`scripts/validate-data.mjs`、`src/types/index.ts`
+依存関係：なし（旧任期データが1件でもあれば必要になるため先行実施）
+目的：旧任期データが、現任期専用に設計されていた収録対象期間カットオフ（`councilSpeechPeriod.from`）で
+誤って除外・非公開・検索対象外・validate:dataエラーにならないようにする
+
+実施内容（2026-08-05、TASK-005A/Bの`2023-03`会期・`fm02`登録に伴い発見・対応）：
+- `CouncilMemberSpeechRecord`型へ`isFormerMember?: boolean`を追加（現議員任期より前の発言を
+  含み得る元議員レコードであることを示す）
+- `src/lib/councilSpeeches.ts`の`publicSpeeches`/`findPublishedSpeech`、`scripts/lib/public-routes.mjs`の
+  `publishedSpeeches`、`scripts/generate-search-index.mjs`の会議録要約インデックス生成処理を、
+  `isFormerMember:true`の場合は`councilSpeechPeriod.from`カットオフを適用しないよう修正
+- `scripts/validate-data.mjs`の収録対象期間チェックも同様に、元議員IDの発言は対象外とした
+  （元議員の在職確認はservedSessionsで別途検証済み）
+- 現職議員（members.json）の発言には引き続き`councilSpeechPeriod.from`カットオフを適用する
+  （議会活動レーダーチャート等、現任期を前提とした機能への影響を避けるため）
+
+受入条件：
+- 旧任期の元議員データが、トップページ・`/questions`・検索・サイトマップ・元議員詳細ページに
+  正しく反映される（達成：`fm02`登録後、確認済み件数が177→178件に反映されることを確認）
+- 現職議員の集計・議会活動レーダーチャート等、既存の現任期機能を壊さない（達成：`validate:data`
+  errors=0、typecheck/lint/test/build成功）
+
+完了記録：
+- 完了日：2026-08-05
+- コミットID：（後述）
+- 変更概要：上記のとおり。
 
 ---
 

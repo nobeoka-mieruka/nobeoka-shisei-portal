@@ -109,9 +109,13 @@ export function findMemberSpeechRecord(
  * 一般公開してよい発言だけを返す（isPublished:true、かつ収録対象期間内のみ）。
  * 期間の判定はsrc/config/councilSpeechPeriod.tsが単一情報源（validate-data.mjs・
  * scripts/lib/public-routes.mjsの対応するチェックと同じ基準）。
+ * ただし、record.isFormerMember:true（旧任期のみ在職した元議員、TASK-005系）のレコードは、
+ * 現議員任期の対象期間カットオフの対象外とする（旧任期の発言も公開してよい）。
  */
 export function publicSpeeches(record: CouncilMemberSpeechRecord | undefined): CouncilSpeech[] {
-  return record ? record.speeches.filter((s) => s.isPublished && isWithinCouncilSpeechPeriod(s.date)) : [];
+  if (!record) return [];
+  if (record.isFormerMember) return record.speeches.filter((s) => s.isPublished);
+  return record.speeches.filter((s) => s.isPublished && isWithinCouncilSpeechPeriod(s.date));
 }
 
 export function findPublishedSpeech(
@@ -120,7 +124,10 @@ export function findPublishedSpeech(
   speechId: string,
 ): CouncilSpeech | undefined {
   const record = findMemberSpeechRecord(data.members, memberId);
-  return record?.speeches.find((s) => s.id === speechId && s.isPublished && isWithinCouncilSpeechPeriod(s.date));
+  if (!record) return undefined;
+  return record.speeches.find(
+    (s) => s.id === speechId && s.isPublished && (record.isFormerMember || isWithinCouncilSpeechPeriod(s.date)),
+  );
 }
 
 /** テーマ1件分の会期単位集計。会期数（sessionCount）は同一会期内の重複を除いた実会期数。 */

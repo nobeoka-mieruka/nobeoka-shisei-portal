@@ -353,7 +353,9 @@ try {
 
   for (const record of speechData.members ?? []) {
     for (const s of record.speeches ?? []) {
-      if (!s.isPublished || !s.date || s.date < councilSpeechPeriod.from) continue;
+      // isFormerMember:true（旧任期のみ在職した元議員、TASK-005系）は現任期カットオフの対象外。
+      if (!s.isPublished || !s.date) continue;
+      if (!record.isFormerMember && s.date < councilSpeechPeriod.from) continue;
       entries.push({
         id: `speech-${s.id}`,
         type: "speech",

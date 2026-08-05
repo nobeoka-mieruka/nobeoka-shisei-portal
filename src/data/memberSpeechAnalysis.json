@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-04",
+  "generatedAt": "2026-08-05",
   "members": [
     {
       "memberId": "m01",
@@ -11155,6 +11155,25 @@
         "fm01-2023-12-05-ippan-shitsumon",
         "fm01-2024-06-25-ippan-shitsumon"
       ],
+      "limitations": []
+    },
+    {
+      "memberId": "fm02",
+      "analysisPeriod": {
+        "from": "2023-04-23",
+        "to": null
+      },
+      "analyzedSessionCount": 1,
+      "analysisStatus": "not-analyzed",
+      "generatedAt": null,
+      "verifiedAt": null,
+      "overview": "",
+      "mainTopics": [],
+      "recurringTopics": [],
+      "newTopics": [],
+      "questionApproaches": [],
+      "answerStatusCounts": [],
+      "evidenceSpeechIds": [],
       "limitations": []
     }
   ]
