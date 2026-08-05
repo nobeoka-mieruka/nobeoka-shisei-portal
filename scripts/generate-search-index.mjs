@@ -498,18 +498,25 @@ entries.push({
   date: "2026-07-16",
 });
 
-// --- political fund organizations（政治資金収支報告書。TASK-015時点では実データ0件） ---
+// --- political fund organizations（政治資金収支報告書。TASK-016Aから実データを順次登録） ---
 const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
 const politicalFundReports = readJson("src/data/politicalFundReports.json");
 for (const org of politicalFundOrganizations) {
   const reports = politicalFundReports.filter((r) => r.organizationId === org.id);
+  const representativeLabel = org.representativeName ?? "確認中";
   entries.push({
     id: `political-fund-${org.id}`,
     type: "political-fund",
     title: `${org.name}（政治資金収支報告書）`,
-    description: `${org.organizationType}「${org.name}」（代表者：${org.representativeName}）の政治資金収支報告書です。`,
+    description: `${org.organizationType}「${org.name}」（代表者：${representativeLabel}）の政治資金収支報告書です。`,
     url: `/political-funds/${org.id}`,
-    keywords: [org.name, org.organizationType, org.representativeName, ...reports.map((r) => r.fiscalYear)].filter(Boolean),
+    keywords: [
+      org.name,
+      org.organizationType,
+      org.representativeName,
+      org.relatedPersonName,
+      ...reports.map((r) => r.fiscalYear),
+    ].filter(Boolean),
     sourceId: org.id,
   });
 }

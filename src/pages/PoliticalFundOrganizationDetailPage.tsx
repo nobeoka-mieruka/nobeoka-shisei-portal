@@ -113,7 +113,7 @@ export function PoliticalFundOrganizationDetailPage() {
         <h1 className="mt-2 text-xl font-semibold leading-relaxed text-on-primary-container break-words sm:text-2xl">
           {organization.name}
         </h1>
-        <p className="mt-1 text-sm text-on-primary-container/80">代表者：{organization.representativeName}</p>
+        <p className="mt-1 text-sm text-on-primary-container/80">代表者：{organization.representativeName ?? "確認中"}</p>
         {relatedMemberLink ? (
           <Link
             to={relatedMemberLink.href}

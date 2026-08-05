@@ -1494,16 +1494,31 @@ export type PoliticalFundOrganizationType = "資金管理団体" | "後援会" |
 /** 収支報告書の提出先・公表元。 */
 export type PoliticalFundDisclosureAuthority = "総務省" | "宮崎県選挙管理委員会" | "延岡市選挙管理委員会" | "確認中";
 
+/**
+ * 政治団体レコード全体の確認状況（TASK-016A）。
+ * - confirmed：主要項目（代表者名を含む）を一次資料で確認済み。
+ * - partiallyVerified：団体の実在・団体区分・提出先・関連人物は公式資料で確認できたが、
+ *   代表者名等の一部項目は未確認（例：公表PDFが画像スキャンでテキスト抽出できない）。
+ * - pending：団体の実在自体、公式な提出先での公表がまだ確認できていない（候補者本人サイト等のみ）。
+ */
+export type PoliticalFundOrganizationVerificationStatus = "confirmed" | "partiallyVerified" | "pending";
+
 /** 政治団体1件分。members.json等と同様、IDは本ファイル内で一意とする。 */
 export interface PoliticalFundOrganization {
   id: string;
   /** 政治団体の名称（収支報告書の記載どおり）。 */
   name: string;
   organizationType: PoliticalFundOrganizationType;
-  /** 代表者の氏名。収支報告書に記載の氏名をそのまま用いる。 */
-  representativeName: string;
+  /**
+   * 代表者の氏名。収支報告書に記載の氏名をそのまま用いる。
+   * 一次資料（画像PDF等）から確認できない場合はnull（推測値・placeholder文字列は入れない）。
+   * 画面側はnullを「確認中」と表示する。
+   */
+  representativeName: string | null;
   /** 会計責任者の氏名。非公表・未確認の場合はnull。 */
   treasurerName: string | null;
+  /** このレコードの確認状況。representativeName等がnullの場合、validate:dataはこの値を見てエラーか許容かを判定する。 */
+  verificationStatus: PoliticalFundOrganizationVerificationStatus;
   /**
    * members.jsonまたはformerMembers.jsonのidへの参照。公式資料上で本人の団体と確認できた場合のみ設定する。
    * 同姓同名等により断定できない場合はnullのままにし、relatedPersonNameのみで補助表示する。

@@ -1,4 +1,69 @@
-# セッション引き継ぎメモ（2026-08-05 更新・議員詳細ページに議会活動レーダーチャートを追加）
+# セッション引き継ぎメモ（2026-08-05 更新・TASK-016A 政治団体マスター21件を登録）
+
+## 2026-08-05（同日9回目）：TASK-016A 政治資金収支報告書データベースへ政治団体マスター21件を登録
+
+ユーザー指示「TASK-016A（政治団体マスターの登録）のみ実施、収支金額・TASK-016B以降は着手しない」を受けて実施。
+**結論：政治団体21件（現職議員19件、元議員1件、市長1件）を登録した。代表者名・会計責任者・主たる事務所の
+所在地は、公式PDFが画像スキャン形式で本セッションではOCRできなかったため、全件`null`（画面表示は
+「確認中」）のまま。**
+
+### 発生した重大な制約とユーザーとのやり取り
+
+- 宮崎県選挙管理委員会が公表する政治資金収支報告書の個別団体PDF（様式その1）は、確認した8件全てが
+  紙提出をスキャンした画像PDF（CCITTFaxDecode、テキスト層なし）だった。WebFetch・pdfjs-dist（本プロジェクトの
+  既存依存）のどちらでも文字を1文字も抽出できず、この環境にはpoppler/ghostscript等のPDF画像化手段も
+  無いため、代表者名等をOCRで読み取る手段が無かった。
+- この制約をユーザーに報告したところ、ユーザーが「団体名と延岡市議・元議員・市長との対応関係は
+  自分（サイト運営者）が既に確認済みで全て正しい」と明言し、relatedMemberId／relatedPersonNameを
+  ユーザー確認に基づいて設定するよう明示的に指示された。一方、代表者名・会計責任者・所在地は
+  「PDFで確認できた値のみ登録し、確認できない場合はnullのままにする」という指示だったため、
+  `representativeName`の型を`string`から`string | null`へ変更した（ユーザーが型変更を承認）。
+- 团体の実在・団体区分・提出先は宮崎県選挙管理委員会の公式公表資料（令和6年分）で確認できている一方、
+  代表者名等は未確認という状態を区別するため、`verificationStatus`（`confirmed`/`partiallyVerified`/
+  `pending`）を新設した。
+
+### 登録した21団体
+
+現職議員19件（稲田雅之・小野正二・小野挙・甲斐行雄・甲斐忠篤・甲斐正幸・梶本英一・河野治満・北林幹雄・
+小御門綾・柴浩信・中城あかね・早瀬賢一・比江島久美子・平田信広・前田遼・松田満男・宮田博徳の各後援会/
+資金管理団体）、元議員1件（吉本靖／吉本やすし後援会）、市長1件（三浦久知／みうら久知後援会）。
+
+- 現職議員・元議員19+1=20件は、宮崎県選挙管理委員会「令和6年分政治資金収支報告書」の資金管理団体一覧
+  および「その他の政治団体」50音別一覧（https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public.html）
+  で団体名・団体区分・提出先を確認し、公式PDFのURLを`officialListUrl`に登録した（`verificationStatus:
+  "partiallyVerified"`）。
+- 市長の後援会（みうら久知後援会）は、三浦久知市長本人の公式サイト（hisatomo-m.jp/donation/）でのみ
+  団体名を確認できた。三浦氏は2025年7月就任のため、宮崎県選管の令和7年分定期公表（例年11月頃）が
+  本セッション時点でまだ行われておらず、公式な提出先・団体区分は未確認（`disclosureAuthority:
+  "確認中"`, `organizationType: "確認中"`, `verificationStatus: "pending"`）。
+
+### 実装・検証
+
+- `src/types/index.ts`：`representativeName`を`string | null`へ変更、`PoliticalFundOrganizationVerificationStatus`
+  型を新設し`verificationStatus`を必須項目として追加。
+- `src/pages/PoliticalFundOrganizationDetailPage.tsx`：代表者名がnullの場合「確認中」を表示するよう修正。
+- `scripts/generate-search-index.mjs`：政治団体の検索エントリにrelatedPersonNameをキーワードとして追加し、
+  representativeNameがnullの場合に説明文へ文字列"null"がそのまま出力されるバグを修正。
+- `scripts/validate-data.mjs`：verificationStatusの値検証、representativeNameがnullなのにverificationStatus
+  がconfirmedになっている矛盾の検出、relatedMemberIdとrelatedPersonNameの氏名不一致検出、verifiedAtが
+  あるのにofficialListUrlが無い場合のエラー、団体名の正規化（全角/半角スペース等を除去）重複候補の警告を追加。
+- 検証結果：`npm run validate:data`（errors=0、政治団体関連の新規warning/errorは0件）／`npm run typecheck`／
+  `npm run lint`／`npm run test`（25/25）／`npm run build`（995/995ページ、新規21件の団体詳細ページ分）／
+  `npm run validate:seo`（failures=0, warnings=0）すべて成功。生成済みHTMLで、代表者名「確認中」表示・
+  現職議員へのリンク（`/members/m13`等）・元議員へのリンク（`/members/former/fm01`）・市長ページには
+  リンクを出さず「関連する氏名（参考）：三浦 久知」表示・団体名の`break-words`（320px幅での折り返し）・
+  検索インデックス21件登録を確認した。
+
+### 未実施（次回以降）
+
+- TASK-016B（収支報告書の金額データ登録）：今回未着手。
+- TASK-016C（代表者名・会計責任者・所在地の追加確認）：21件全件が対象。個別団体PDFを人手（または
+  OCR環境）で確認する必要がある。
+- TASK-016D（出典URLの定期精査）：今回未着手。
+- みうら久知後援会（pf-org-001）：宮崎県選管の令和7年分公表後（例年11月頃）に団体区分・提出先を
+  再確認する必要がある。
+
+---
 
 ## 2026-08-05（同日8回目）：議員詳細ページへの活動レーダーチャート追加
 

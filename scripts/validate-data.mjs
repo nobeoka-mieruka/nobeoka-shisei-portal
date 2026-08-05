@@ -897,14 +897,29 @@ try {
   warn("financeDashboard.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
-// --- politicalFundOrganizations.json / politicalFundReports.json（政治資金収支報告書。TASK-015時点では実データ0件） ---
+// --- politicalFundOrganizations.json / politicalFundReports.json（政治資金収支報告書。TASK-016Aから実データを順次登録） ---
 try {
   const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
   const politicalFundReports = readJson("src/data/politicalFundReports.json");
   const VALID_ORG_TYPES = new Set(["資金管理団体", "後援会", "政党支部", "その他の政治団体", "確認中"]);
   const VALID_DISCLOSURE_AUTHORITIES = new Set(["総務省", "宮崎県選挙管理委員会", "延岡市選挙管理委員会", "確認中"]);
   const VALID_REPORT_STATUSES = new Set(["確認済み", "確認中", "情報未登録"]);
+  const VALID_ORG_VERIFICATION_STATUSES = new Set(["confirmed", "partiallyVerified", "pending"]);
   const orgIds = new Set();
+
+  // relatedMemberIdとrelatedPersonNameの矛盾検出用（現職・元議員の氏名を突合する）。
+  const memberNameById = new Map(members.map((m) => [m.id, m.name]));
+  try {
+    const formerMembersForNameCheck = readJson("src/data/formerMembers.json");
+    for (const fm of formerMembersForNameCheck) memberNameById.set(fm.id, fm.name);
+  } catch {
+    // formerMembers.jsonの読み込み自体は別のブロックで検証済みのためここでは無視する
+  }
+
+  // 団体名の重複候補検出用（全角/半角スペース・記号の差だけで別団体扱いにしないよう正規化して比較する）。
+  const normalizeOrgName = (name) =>
+    typeof name === "string" ? name.replace(/[\s　]+/g, "").normalize("NFKC") : "";
+  const seenNormalizedNames = new Map();
 
   for (const o of politicalFundOrganizations) {
     const tag = `politicalFundOrganizations.json (${o.id ?? "id不明"})`;
@@ -913,16 +928,56 @@ try {
     else orgIds.add(o.id);
 
     if (isBlank(o.name)) err(tag, "nameが空です");
-    if (isBlank(o.representativeName)) err(tag, "representativeNameが空です");
     if (!VALID_ORG_TYPES.has(o.organizationType)) err(tag, `未定義のorganizationTypeです: ${o.organizationType}`);
     if (!VALID_DISCLOSURE_AUTHORITIES.has(o.disclosureAuthority)) {
       err(tag, `未定義のdisclosureAuthorityです: ${o.disclosureAuthority}`);
     }
+    if (!VALID_ORG_VERIFICATION_STATUSES.has(o.verificationStatus)) {
+      err(tag, `未定義のverificationStatusです: ${o.verificationStatus}`);
+    }
+
+    // representativeName：nullは「一次資料で未確認」を表す正式な状態として許容するが、
+    // その場合はverificationStatusがconfirmed（確認済み扱い）であってはならない。
+    // 空文字（""）はnullと違い単なる入力漏れとみなし、常にエラーとする。
+    if (o.representativeName === null) {
+      if (o.verificationStatus === "confirmed") {
+        err(tag, "representativeNameがnullなのにverificationStatusがconfirmedです（未確認の項目が残っています）");
+      }
+    } else if (isBlank(o.representativeName)) {
+      err(tag, "representativeNameが空文字です（未確認の場合はnull、確認済みの場合は氏名を設定してください）");
+    }
+
     if (o.relatedMemberId && !memberIds.has(o.relatedMemberId) && !formerMemberIds.has(o.relatedMemberId)) {
       err(tag, `存在しない議員IDをrelatedMemberIdで参照しています: ${o.relatedMemberId}`);
     }
+    // relatedMemberIdとrelatedPersonNameの矛盾：両方設定されている場合、参照先の氏名と一致しなければならない。
+    if (o.relatedMemberId && !isBlank(o.relatedPersonName)) {
+      const resolvedName = memberNameById.get(o.relatedMemberId);
+      if (resolvedName && resolvedName !== o.relatedPersonName) {
+        err(
+          tag,
+          `relatedPersonName（${o.relatedPersonName}）がrelatedMemberId（${o.relatedMemberId}）の氏名（${resolvedName}）と一致しません`,
+        );
+      }
+    }
     if (o.officialListUrl && !URL_RE.test(o.officialListUrl)) err(tag, `officialListUrlの形式が不正です: ${o.officialListUrl}`);
     if (o.verifiedAt && !DATE_RE.test(o.verifiedAt)) err(tag, `verifiedAtの形式が不正です: ${o.verifiedAt}`);
+    // 確認日を記録している（＝サイト運営者が確認済みとして扱っている）のに一次資料へのリンクが無いのは
+    // 出典不備として扱う。
+    if (o.verifiedAt && isBlank(o.officialListUrl)) {
+      err(tag, "verifiedAtが設定されているのにofficialListUrlが未設定です（確認済み扱いには出典URLが必要です）");
+    }
+
+    // 同一団体と思われる重複候補（表記ゆれのみの違いは警告に留め、機械的にエラー扱いしない）。
+    const normalized = normalizeOrgName(o.name);
+    if (normalized) {
+      const prevId = seenNormalizedNames.get(normalized);
+      if (prevId && prevId !== o.id) {
+        warn(tag, `団体名が正規化後に一致する団体があります（重複候補、要目視確認）: ${prevId}`);
+      } else {
+        seenNormalizedNames.set(normalized, o.id);
+      }
+    }
   }
 
   const reportIds = new Set();
