@@ -22,8 +22,12 @@ const RECORD_TYPES = [
 ];
 
 // 長い（より具体的な）パターンを短いパターンより先に並べること（例: "不採択"は"採択"より先）。
+// 水道・下水道事業会計等の「剰余金の処分及び決算の認定」議案は、可決／認定（または否決／不認定）が
+// 1件の議案として一体で議決されるため、公式資料の複合表記をそのままcanonical値として扱う
+// （個別の"認定"等より先に判定できるよう、同じ先頭文字を持つ短い語より前に置く）。
 const RESULT_KEYWORD_MAP = [
-  ["原案可決及び認定", null],
+  ["原案可決及び認定", "原案可決及び認定"],
+  ["否決及び不認定", "否決及び不認定"],
   ["不採択", "不採択"],
   ["一部採択", "一部採択"],
   ["趣旨採択", "趣旨採択"],
@@ -98,6 +102,21 @@ export function classifyCategory(recordType, title) {
   if (/財産の取得/.test(title)) return "財産取得";
   if (/選任|委員の同意|副市長|教育委員/.test(title)) return "人事";
   return "その他";
+}
+
+// 「議案等審議結果」PDFの見出し【市長提出議案】【議員提出議案】【委員会提出議案】【陳情】【請願】は、
+// 誰がこの案件を提出したかを公式資料自身が明記したものなので、この対応関係は推測ではなく直接の抽出結果として扱う。
+const PROPOSER_TYPE_BY_SECTION = {
+  市長提出議案: { proposerType: "mayor", proposer: "市長" },
+  議員提出議案: { proposerType: "member", proposer: undefined },
+  委員会提出議案: { proposerType: "committee", proposer: undefined },
+  陳情: { proposerType: "other", proposer: undefined },
+  請願: { proposerType: "other", proposer: undefined },
+};
+
+/** 見出しラベル（空白除去済み）から提出者区分を判定する。未知の見出しの場合はundefinedを返す（推測しない）。 */
+export function proposerInfoFromSection(sectionLabel) {
+  return PROPOSER_TYPE_BY_SECTION[sectionLabel];
 }
 
 export function buildProposalId(sessionId, recordType, num) {

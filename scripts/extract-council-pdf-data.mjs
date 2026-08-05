@@ -19,7 +19,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractPdfText } from "./lib/pdf-text.mjs";
-import { extractRecordsFromPage, buildProposalId } from "./lib/council-bill-extraction.mjs";
+import { extractRecordsFromPage, buildProposalId, proposerInfoFromSection } from "./lib/council-bill-extraction.mjs";
 import { sha256OfBuffer } from "./lib/council-shared.mjs";
 import { buildDetailSummary } from "./lib/bill-summary.mjs";
 
@@ -102,6 +102,7 @@ async function main() {
     proposalsPublished: 0,
     proposalsPendingReview: 0,
     proposalsUpdatedPendingReview: 0,
+    proposalsSupplementalUpdated: 0,
     proposalsUnchanged: 0,
     proposalsConflict: 0,
     memberVoteNote:
@@ -160,6 +161,12 @@ async function main() {
       const id = buildProposalId(session.id, record.recordType, record.proposalNumRaw);
       const existing = billVotesById.get(id);
       const isClean = record.unresolvedReasons.length === 0;
+      // 【市長提出議案】等の見出しは公式資料自身が明記した提出者区分であり、推測ではない。
+      const proposerInfo = record.section ? proposerInfoFromSection(record.section) : undefined;
+      const existingMemberVotes = existing?.memberVotes && existing.memberVotes.length > 0 ? existing.memberVotes : [];
+      // 個人別賛否の公開状況：memberVotesが既にあればdisclosed、無ければ
+      // 「非公表と確認できた」わけではないのでunconfirmed（確認待ち）とする。
+      const individualVoteDisclosureStatus = existingMemberVotes.length > 0 ? "disclosed" : "unconfirmed";
 
       const candidateFields = {
         id,
@@ -170,7 +177,10 @@ async function main() {
         votingDate: record.votingDate ?? undefined,
         result: record.result ?? "確認中",
         category: record.category,
-        memberVotes: [],
+        memberVotes: existingMemberVotes,
+        proposerType: proposerInfo?.proposerType,
+        proposer: proposerInfo?.proposer,
+        individualVoteDisclosureStatus,
         sessionId: session.id,
         sourceDocumentId: doc.id,
         sourceFilePath: doc.filePath,
@@ -230,17 +240,39 @@ async function main() {
         continue;
       }
 
-      // 以前も自動抽出で登録されたデータ：内容が変わっていなければ何もしない。
-      const unchanged =
-        existing.result === candidateFields.result &&
-        existing.votingDate === candidateFields.votingDate &&
-        existing.billTitle === candidateFields.billTitle &&
-        existing.category === candidateFields.category;
-      if (unchanged) {
-        report.proposalsUnchanged++;
+      // 以前も自動抽出で登録されたデータ：件名・結果・議決日・分類（中核事実）が変わっていなければ、
+      // publicationStatus/verificationStatusはそのまま維持し、提出者区分・個人別賛否公開状況のような
+      // 補助的な追加情報のみを静かに補完する（再確認待ちへ戻さない）。
+      const coreChanged =
+        existing.result !== candidateFields.result ||
+        existing.votingDate !== candidateFields.votingDate ||
+        existing.billTitle !== candidateFields.billTitle ||
+        existing.category !== candidateFields.category;
+
+      if (!coreChanged) {
+        let supplementalChanged = false;
+        if (candidateFields.proposerType && existing.proposerType !== candidateFields.proposerType) {
+          existing.proposerType = candidateFields.proposerType;
+          supplementalChanged = true;
+        }
+        if (candidateFields.proposer && existing.proposer !== candidateFields.proposer) {
+          existing.proposer = candidateFields.proposer;
+          supplementalChanged = true;
+        }
+        if (existing.individualVoteDisclosureStatus !== individualVoteDisclosureStatus) {
+          existing.individualVoteDisclosureStatus = individualVoteDisclosureStatus;
+          supplementalChanged = true;
+        }
+        if (supplementalChanged) {
+          report.proposalsSupplementalUpdated = (report.proposalsSupplementalUpdated ?? 0) + 1;
+        } else {
+          report.proposalsUnchanged++;
+        }
         continue;
       }
 
+      // 中核事実が変わった場合のみ、確認待ちへ戻す（個人別賛否データは既存のものを保持し、
+      // 空配列で上書きしない）。
       Object.assign(existing, candidateFields);
       existing.publicationStatus = isClean ? "updatedPendingReview" : "pendingReview";
       report.proposalsUpdatedPendingReview++;
@@ -325,7 +357,7 @@ function buildMarkdownReport(report) {
     `- 対象定例会: ${report.sessionFilter ?? "全件"}`,
     `- 処理PDF数: ${report.documentsProcessed}（変更なしスキップ: ${report.documentsSkippedUnchanged} / OCR要: ${report.documentsOcrRequired} / エラー: ${report.documentsError}）`,
     `- 抽出件数: ${report.proposalsExtracted}`,
-    `- 公開: ${report.proposalsPublished} / 確認待ち: ${report.proposalsPendingReview} / 更新確認待ち: ${report.proposalsUpdatedPendingReview} / 変更なし: ${report.proposalsUnchanged} / 手動データとの不一致: ${report.proposalsConflict}`,
+    `- 公開: ${report.proposalsPublished} / 確認待ち: ${report.proposalsPendingReview} / 更新確認待ち: ${report.proposalsUpdatedPendingReview} / 補助情報のみ補完: ${report.proposalsSupplementalUpdated ?? 0} / 変更なし: ${report.proposalsUnchanged} / 手動データとの不一致: ${report.proposalsConflict}`,
     "",
     `> ${report.memberVoteNote}`,
     "",
@@ -347,7 +379,7 @@ function printSummary(report) {
     `[extract-council-data] PDF処理=${report.documentsProcessed}（スキップ=${report.documentsSkippedUnchanged} OCR要=${report.documentsOcrRequired} エラー=${report.documentsError}） 抽出=${report.proposalsExtracted}`,
   );
   console.log(
-    `[extract-council-data] 公開=${report.proposalsPublished} 確認待ち=${report.proposalsPendingReview} 更新確認待ち=${report.proposalsUpdatedPendingReview} 変更なし=${report.proposalsUnchanged} 手動データ不一致=${report.proposalsConflict}`,
+    `[extract-council-data] 公開=${report.proposalsPublished} 確認待ち=${report.proposalsPendingReview} 更新確認待ち=${report.proposalsUpdatedPendingReview} 補助情報のみ補完=${report.proposalsSupplementalUpdated ?? 0} 変更なし=${report.proposalsUnchanged} 手動データ不一致=${report.proposalsConflict}`,
   );
   const summaryPath = process.env.GITHUB_STEP_SUMMARY;
   if (summaryPath) {

@@ -162,6 +162,8 @@ const VALID_BILL_VOTE_RESULTS = new Set([
   "不承認",
   "認定",
   "不認定",
+  "原案可決及び認定",
+  "否決及び不認定",
   "同意",
   "不同意",
   "採択",
@@ -204,6 +206,18 @@ const VALID_BILL_VERIFICATION_STATUSES = new Set([
   "individual-votes-unavailable",
 ]);
 const VALID_BILL_SUMMARY_SOURCES = new Set(["template", "pdf", "manual"]);
+const VALID_BILL_VOTE_METHODS = new Set([
+  "全会一致",
+  "起立多数",
+  "起立少数",
+  "簡易採決",
+  "記名投票",
+  "無記名投票",
+  "採決なし",
+  "確認できず",
+]);
+const VALID_INDIVIDUAL_VOTE_DISCLOSURE_STATUSES = new Set(["disclosed", "notDisclosed", "unconfirmed"]);
+const seenSessionBillNumberPairs = new Map();
 
 for (const b of billVotes) {
   const tag = `billVotes.json (${b.id ?? "id不明"})`;
@@ -214,6 +228,43 @@ for (const b of billVotes) {
   if (isBlank(b.billNumber)) err(tag, "billNumberが空です");
   if (isBlank(b.billTitle)) err(tag, "billTitleが空です");
   if (isBlank(b.summary)) err(tag, "summaryが空です");
+
+  // 同一会期・同一議案番号の重複登録（同じ案件を別IDで二重登録していないか）。
+  if (!isBlank(b.sessionId) && !isBlank(b.billNumber)) {
+    const pairKey = `${b.sessionId}::${b.billNumber}`;
+    const prevId = seenSessionBillNumberPairs.get(pairKey);
+    if (prevId && prevId !== b.id) {
+      err(tag, `同一会期・同一議案番号のデータが重複登録されています: ${b.billNumber}（既存: ${prevId}）`);
+    } else {
+      seenSessionBillNumberPairs.set(pairKey, b.id);
+    }
+  }
+
+  if (b.submittedDate && b.votingDate && b.submittedDate > b.votingDate) {
+    err(tag, `votingDate（${b.votingDate}）がsubmittedDate（${b.submittedDate}）より前です`);
+  }
+  if (b.voteMethod && !VALID_BILL_VOTE_METHODS.has(b.voteMethod)) {
+    err(tag, `未定義のvoteMethodです: ${b.voteMethod}`);
+  }
+  if (
+    b.individualVoteDisclosureStatus &&
+    !VALID_INDIVIDUAL_VOTE_DISCLOSURE_STATUSES.has(b.individualVoteDisclosureStatus)
+  ) {
+    err(tag, `未定義のindividualVoteDisclosureStatusです: ${b.individualVoteDisclosureStatus}`);
+  }
+  // 個人別賛否データがあるのにdisclosed以外、または無いのにdisclosedのままという矛盾を防ぐ。
+  const hasMemberVotes = (b.memberVotes ?? []).length > 0;
+  if (hasMemberVotes && b.individualVoteDisclosureStatus && b.individualVoteDisclosureStatus !== "disclosed") {
+    err(tag, `memberVotesがあるのにindividualVoteDisclosureStatusが"${b.individualVoteDisclosureStatus}"です`);
+  }
+  if (!hasMemberVotes && b.individualVoteDisclosureStatus === "disclosed") {
+    err(tag, 'memberVotesが空なのにindividualVoteDisclosureStatusが"disclosed"です');
+  }
+  // 最終確認日（lastVerified）が古すぎる場合は、内容の再確認を推奨する警告を出す（エラーにはしない）。
+  if (b.lastVerified && DATE_RE.test(b.lastVerified)) {
+    const ageDays = (Date.now() - new Date(b.lastVerified).getTime()) / (1000 * 60 * 60 * 24);
+    if (ageDays > 365) warn(tag, `lastVerifiedが1年以上前です（${b.lastVerified}）。内容の再確認を推奨します。`);
+  }
   if (b.summarySource && !VALID_BILL_SUMMARY_SOURCES.has(b.summarySource)) {
     err(tag, `未定義のsummarySourceです: ${b.summarySource}`);
   }

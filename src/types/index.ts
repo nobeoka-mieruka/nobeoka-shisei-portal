@@ -782,7 +782,12 @@ export type BillMemberVoteStatus =
   | "abstained"
   | "unconfirmed";
 
-/** 議案の議決結果。公式資料で確認できない場合は「確認中」を使う。 */
+/**
+ * 議案の議決結果。公式資料で確認できない場合は「確認中」を使う。
+ * 「原案可決及び認定」「否決及び不認定」は、水道・下水道事業会計等の剰余金処分と決算認定が
+ * 1件の議案にまとめて提案され、可決／認定が一体で議決される場合の公式資料の表記をそのまま用いる
+ * （議決結果の複合表記を単一の値へ強引に単純化しない）。
+ */
 export type BillVoteResult =
   | "原案可決"
   | "修正可決"
@@ -791,6 +796,8 @@ export type BillVoteResult =
   | "不承認"
   | "認定"
   | "不認定"
+  | "原案可決及び認定"
+  | "否決及び不認定"
   | "同意"
   | "不同意"
   | "採択"
@@ -858,6 +865,32 @@ export interface BillRelatedDocument {
 export type BillProposerType = "mayor" | "member" | "committee" | "other";
 
 /**
+ * 採決方法。公式資料（会議録等）で確認できた場合のみ設定する（TASK-004）。
+ * 現在の主な情報源（議案等審議結果PDF）には採決方法の記載が無いため、確認できるまでは未設定のままにする
+ * （"確認できず"は「確認を試みたが記載が無かった」ことを明示したい場合に使う値であり、単に未着手の場合は
+ * フィールド自体を省略する）。
+ */
+export type BillVoteMethod =
+  | "全会一致"
+  | "起立多数"
+  | "起立少数"
+  | "簡易採決"
+  | "記名投票"
+  | "無記名投票"
+  | "採決なし"
+  | "確認できず";
+
+/**
+ * 個人別（議員ごと）の賛否が公開されているかどうかの状態。
+ * verificationStatus（案件全体の確認状況）とは別の軸として管理する。
+ * - disclosed：memberVotesに実際の個人別記録がある
+ * - notDisclosed：公式資料を確認した結果、個人別の賛否は公表されていないと確認できた
+ * - unconfirmed：まだ確認していない（memberVotesが空でも、非公表と決めつけない。既定値）
+ * 議決結果（可決／否決）だけから個人別の賛否を推測してはならない。
+ */
+export type IndividualVoteDisclosureStatus = "disclosed" | "notDisclosed" | "unconfirmed";
+
+/**
  * 議案ごとの賛否データベース1件分のデータ（第1段階：構造のみ）。
  * 架空の議案・議員・賛否結果は登録しないこと（未確認の場合は billVotes.json を空配列のままにする）。
  */
@@ -892,6 +925,10 @@ export interface BillVoteItem {
   submittingDepartment?: string;
   result: BillVoteResult;
   memberVotes: BillVoteMemberEntry[];
+  /** 採決方法。公式資料（主に会議録）で確認できた場合のみ設定する。 */
+  voteMethod?: BillVoteMethod;
+  /** 個人別賛否の公開状況。未設定はunconfirmedと同義に扱う（可決/否決の結果だけから推測しないこと）。 */
+  individualVoteDisclosureStatus?: IndividualVoteDisclosureStatus;
 
   // 議案の概要（詳細ページ用の任意項目。データがない項目は表示しない）
   /** 提出理由。 */
