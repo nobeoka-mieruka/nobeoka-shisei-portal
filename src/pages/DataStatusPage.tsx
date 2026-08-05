@@ -166,7 +166,7 @@ export function DataStatusPage() {
       unit: "名",
       scope: "現職のみ（議会同意議案で就任が確認できた範囲）",
       detail:
-        "監査委員会・選挙管理委員会は、委員全員の氏名を確実に特定できる公式資料を確認できていないため未掲載です。",
+        "選挙管理委員会は、委員全員の氏名を確実に特定できる公式資料を確認できていないため未掲載です。",
       linkTo: "/city-officials",
       linkLabel: "一覧を見る",
       fullyCovered: false,
