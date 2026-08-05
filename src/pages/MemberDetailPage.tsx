@@ -64,6 +64,17 @@ import { getSeoForPath } from "../lib/seo";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { personSlug } from "../lib/people";
 
+/** TASK-018：一般質問・議案表決・活動レポートを日付順に統合表示するための年表イベント1件分。 */
+interface MemberTimelineEvent {
+  id: string;
+  /** ISO形式の日付。 */
+  date: string;
+  kind: "question" | "vote" | "report";
+  label: string;
+  href?: string;
+  badge?: string;
+}
+
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
 const councilSessions = councilSessionsData as CouncilSession[];
@@ -133,6 +144,7 @@ export function MemberDetailPage() {
       )
     : {};
 
+  const [showAllTimeline, setShowAllTimeline] = useState(false);
   const [voteYearFilter, setVoteYearFilter] = useState("all");
   const [voteCategoryFilter, setVoteCategoryFilter] = useState("all");
 
@@ -154,6 +166,49 @@ export function MemberDetailPage() {
       (voteYearFilter === "all" || b.fiscalYear === voteYearFilter) &&
       (voteCategoryFilter === "all" || b.category === voteCategoryFilter),
   );
+
+  const timelineEvents = useMemo<MemberTimelineEvent[]>(() => {
+    if (!member) return [];
+    const events: MemberTimelineEvent[] = [];
+    for (const s of publishedMemberSpeeches) {
+      if (!s.date) continue;
+      const label = s.shortSummary
+        ? s.shortSummary.length > 44
+          ? `${s.shortSummary.slice(0, 44)}…`
+          : s.shortSummary
+        : `${s.speechType}`;
+      events.push({
+        id: `q-${s.id}`,
+        date: s.date,
+        kind: "question",
+        label,
+        href: `/members/${member.id}/questions/${s.id}`,
+      });
+    }
+    for (const b of memberAllBillVotes) {
+      if (!b.votingDate) continue;
+      const vote = b.memberVotes.find((v) => v.memberId === member.id);
+      events.push({
+        id: `v-${b.id}`,
+        date: b.votingDate,
+        kind: "vote",
+        label: b.billTitle,
+        href: `/bills/votes/${b.id}`,
+        badge: vote?.vote,
+      });
+    }
+    for (const r of member.reports) {
+      events.push({
+        id: `r-${r.id}`,
+        date: r.date,
+        kind: "report",
+        label: r.title,
+        href: r.url,
+      });
+    }
+    return events.sort((a, b) => b.date.localeCompare(a.date));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [member?.id]);
 
   usePageTitle();
 
@@ -344,6 +399,75 @@ export function MemberDetailPage() {
         targetPeriodLabel="令和5年6月〜令和8年3月定例会（会議録取得済みの会期）"
         updatedAt={member.updatedAt ?? member.verifiedAt}
       />
+
+      <SectionCard title={`議員活動年表（${timelineEvents.length}件）`}>
+        <p className="text-xs leading-relaxed text-on-surface-variant">
+          会議録で確認済みの一般質問・議案表決・活動レポートを日付順に並べています（新しい順）。既存データのみで構成しており、独自の評価や推測は含みません。
+        </p>
+        {timelineEvents.length === 0 ? (
+          <EmptyState message="現時点で日付が確認できる一般質問・議案表決・活動レポートの記録はありません。" />
+        ) : (
+          <>
+            <ol className="mt-3 space-y-2 border-l-2 border-outline-variant pl-4">
+              {(showAllTimeline ? timelineEvents : timelineEvents.slice(0, 15)).map((ev) => (
+                <li key={ev.id} className="relative">
+                  <span
+                    className={`absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full ${
+                      ev.kind === "question"
+                        ? "bg-primary"
+                        : ev.kind === "vote"
+                          ? "bg-tertiary"
+                          : "bg-secondary"
+                    }`}
+                    aria-hidden
+                  />
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-on-surface-variant">
+                    <span>{formatJapaneseDate(ev.date)}</span>
+                    <span aria-hidden>・</span>
+                    <span>
+                      {ev.kind === "question" ? "一般質問" : ev.kind === "vote" ? "議案表決" : "活動レポート"}
+                    </span>
+                    {ev.badge && (
+                      <>
+                        <span aria-hidden>・</span>
+                        <span>{ev.badge}</span>
+                      </>
+                    )}
+                  </div>
+                  {ev.href && ev.kind !== "report" ? (
+                    <Link
+                      to={ev.href}
+                      className={`mt-0.5 block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    >
+                      {ev.label}
+                    </Link>
+                  ) : ev.href ? (
+                    <a
+                      href={ev.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className={`mt-0.5 block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    >
+                      {ev.label}
+                    </a>
+                  ) : (
+                    <p className="mt-0.5 text-sm text-on-surface">{ev.label}</p>
+                  )}
+                </li>
+              ))}
+            </ol>
+            {timelineEvents.length > 15 && (
+              <button
+                type="button"
+                onClick={() => setShowAllTimeline((v) => !v)}
+                className={`mt-3 text-sm font-medium text-primary hover:underline ${linkClass}`}
+              >
+                {showAllTimeline ? "表示を減らす" : `すべて表示（${timelineEvents.length}件）`}
+              </button>
+            )}
+          </>
+        )}
+      </SectionCard>
 
       {member.career && member.career.length > 0 && (
         <SectionCard title="経歴">
