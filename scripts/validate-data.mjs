@@ -1974,6 +1974,8 @@ const NOT_YET_PUBLISHABLE_STATUSES = new Set(["minutes-not-fetched", "source-una
 const sessionIdSet = new Set(councilSessions.map((s) => s.id));
 const speechIds = new Set();
 const publishedSpeechIds = new Set();
+// src/lib/questionLikeSpeechTypes.tsと同じ値。このスクリプトはVite専用のTS importを使えないため複製する。
+const QUESTION_LIKE_SPEECH_TYPES_FOR_VALIDATION = new Set(["一般質問", "代表質問", "関連質問", "総括質疑", "総括質疑・一般質問"]);
 
 try {
   const speechData = readJson("src/data/councilSpeechSummaries.json");
@@ -2084,6 +2086,39 @@ try {
           }
         }
       }
+    }
+
+    // 「同じ会期・同じ議員・同じ質問日」の重複登録チェック（IDが異なっていても、実質的な二重登録を検出する）。
+    // isPublished:trueかつ一般質問データベース対象区分（src/lib/questionLikeSpeechTypes.tsと同じ値を
+    // ここに複製する。このスクリプトはVite専用のTS importを使えないため複製せざるを得ない）のみを対象にする。
+    const seenMemberSessionDate = new Map();
+    const memberIdsWithConfirmedQuestion = new Set();
+    for (const record of speechData.members) {
+      for (const speech of record.speeches ?? []) {
+        if (!speech.isPublished || !QUESTION_LIKE_SPEECH_TYPES_FOR_VALIDATION.has(speech.speechType)) continue;
+        memberIdsWithConfirmedQuestion.add(record.memberId);
+        // speechTypeも含める。同じ議員が同じ会期・同じ日に代表質問と一般質問の両方を行う等、
+        // 区分が異なる複数登壇は正当なデータのため誤検出しない（区分が同じ場合のみ重複とみなす）。
+        const key = `${record.memberId}::${speech.sessionId}::${speech.date ?? "日付不明"}::${speech.speechType}`;
+        const existing = seenMemberSessionDate.get(key);
+        if (existing) {
+          err(
+            `councilSpeechSummaries.json (${record.memberId})`,
+            `同じ議員・同じ会期・同じ質問日の一般質問が重複登録されている可能性があります: ${existing} と ${speech.id}（意図的な複数登壇の場合は無視して構いませんが、確認してください）`,
+          );
+        } else {
+          seenMemberSessionDate.set(key, speech.id);
+        }
+      }
+    }
+    // 現職議員（members.json）で、会議録確認済みの一般質問が1件も無い議員を警告として洗い出す
+    // （エラーにはしない。単に未登壇の可能性もあり、欠損データとは限らないため）。
+    const membersWithoutConfirmedQuestion = members.filter((m) => !memberIdsWithConfirmedQuestion.has(m.id));
+    if (membersWithoutConfirmedQuestion.length > 0) {
+      warn(
+        "councilSpeechSummaries.json",
+        `会議録で確認済みの一般質問が1件も無い現職議員: ${membersWithoutConfirmedQuestion.map((m) => `${m.id}(${m.name})`).join("、")}`,
+      );
     }
   }
 } catch (e) {

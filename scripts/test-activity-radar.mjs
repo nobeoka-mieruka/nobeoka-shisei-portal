@@ -37,11 +37,27 @@ if (patched === source) {
   throw new Error("パッチ対象の行が見つかりませんでした（src/lib/activityRadar.tsの構造が変わった可能性があります）。");
 }
 
+// Node ESMは（Viteと異なり）拡張子なしの相対importを解決できないため、明示的に.tsを付ける。
+const patchedWithExtension = patched.replace(
+  'from "./questionLikeSpeechTypes"',
+  'from "./questionLikeSpeechTypes.ts"',
+);
+if (patchedWithExtension === patched) {
+  throw new Error("questionLikeSpeechTypesのimport行が見つかりませんでした。");
+}
+
 const tmpDir = mkdtempSync(join(tmpdir(), "activity-radar-test-"));
 // Node（v22.6+）はネイティブのTS型除去（strip-only）を.ts拡張子で自動認識するため、
 // .tsのまま出力する（.mjsだと型構文がそのままJSとして評価されSyntaxErrorになる）。
 const tmpFile = join(tmpDir, "activityRadar.ts");
-writeFileSync(tmpFile, patched);
+writeFileSync(tmpFile, patchedWithExtension);
+
+// activityRadar.tsが相対importする依存先（JSON importを含まない「葉」モジュールのみ）は、
+// 同じ一時ディレクトリへそのまま複製する（このファイル自体は書き換え不要）。
+writeFileSync(
+  join(tmpDir, "questionLikeSpeechTypes.ts"),
+  readFileSync(join(ROOT, "src/lib/questionLikeSpeechTypes.ts"), "utf8"),
+);
 
 const mod = await import(pathToFileURL(tmpFile));
 const {

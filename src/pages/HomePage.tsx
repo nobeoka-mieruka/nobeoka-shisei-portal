@@ -4,7 +4,15 @@ import membersData from "../data/members.json";
 import billVotesData from "../data/billVotes.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
-import type { CouncilMember, Gender, BillVoteItem, Mayor, GeneralQuestionItem } from "../types";
+import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import type {
+  CouncilMember,
+  Gender,
+  BillVoteItem,
+  Mayor,
+  GeneralQuestionItem,
+  CouncilSpeechSummaryData,
+} from "../types";
 import { allFactions, getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { MemberCard } from "../components/MemberCard";
@@ -21,13 +29,15 @@ import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
 import { coverageHint } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
+import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
 
 const members = membersData as CouncilMember[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
+const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);
-const registeredQuestionCount = generalQuestions.length;
+const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
 
 const genderLabels: Record<Gender, string> = {
   male: "男性",
@@ -306,11 +316,19 @@ export function HomePage() {
             hint={coverageHint("billVotes", billVotes.length)}
           />
           <StatCard
-            label="登録済み一般質問数"
-            value={registeredQuestionCount}
+            label="会議録確認済み一般質問"
+            value={questionStats.confirmedCount}
             unit="件"
-            hint={coverageHint("generalQuestions", registeredQuestionCount)}
+            hint={`収録済み${questionStats.collectedSessionCount}／対象${questionStats.targetSessionCount}会期`}
           />
+          {questionStats.scheduledCount > 0 && (
+            <StatCard
+              label="最新会期の予定質問"
+              value={questionStats.scheduledCount}
+              unit="件"
+              hint={questionStats.scheduledSessionName ? `${questionStats.scheduledSessionName}／質問通告書ベース` : undefined}
+            />
+          )}
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
           <StatCard label="最終更新日" value={getLastUpdatedText()} compact />
         </div>

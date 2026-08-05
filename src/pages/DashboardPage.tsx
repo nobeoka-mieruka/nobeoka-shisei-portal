@@ -1,9 +1,21 @@
 import { useMemo } from "react";
 import membersData from "../data/members.json";
+import formerMembersData from "../data/formerMembers.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
-import type { CouncilMember, Gender, Mayor, GeneralQuestionItem, BillVoteItem } from "../types";
+import councilSessionsData from "../data/councilSessions.json";
+import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import type {
+  CouncilMember,
+  Gender,
+  Mayor,
+  GeneralQuestionItem,
+  BillVoteItem,
+  CouncilSession,
+  CouncilSpeechSummaryData,
+  FormerMember,
+} from "../types";
 import { getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
@@ -19,11 +31,25 @@ import { ChartBarIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 import { coverageHint } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
+import { allPublicSpeeches, questionLikeSpeeches, resolveMemberDisplayName } from "../lib/councilSpeeches";
+import {
+  aggregateConfirmedQuestionsByFiscalYear,
+  aggregateConfirmedQuestionsByMember,
+  aggregateConfirmedQuestionsByTopic,
+  calculateGeneralQuestionStats,
+} from "../lib/generalQuestionStats";
 
 const members = membersData as CouncilMember[];
+const formerMembers = formerMembersData as FormerMember[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
+const councilSessions = councilSessionsData as CouncilSession[];
+const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
+const confirmedQuestionMemberIds = new Set(
+  questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).map((s) => s.memberId),
+);
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -75,54 +101,42 @@ export function DashboardPage() {
       .sort((a, b) => b.count - a.count);
   }, []);
 
-  const totalQuestions = generalQuestions.length;
   const totalPledges = mayor.pledges.length;
   const totalBills = billVotes.length;
   const billsWithResult = useMemo(() => billVotes.filter((b) => b.result !== "確認中").length, []);
 
+  // 以下の一般質問の内訳（議員別・テーマ別・年度別・会派別）は、いずれも会議録本文で内容を
+  // 確認済みの累計データ（councilSpeechSummaries.json、questionStats.confirmedCount件）を
+  // 対象とする。会議録が未公開の最新会期の予定質問（generalQuestions.json）は、実際に登壇するか
+  // 未確定のため、この内訳には含めない（別途「最新会期の予定質問」として区別して表示する）。
   const questionRankingItems: BarListItem[] = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const q of generalQuestions) {
-      counts.set(q.memberId, (counts.get(q.memberId) ?? 0) + 1);
-    }
-    return [...counts.entries()]
-      .map(([memberId, count]) => {
-        const m = members.find((mm) => mm.id === memberId);
-        return { key: memberId, label: m?.name ?? memberId, count, to: `/members/${memberId}` };
-      })
-      .sort((a, b) => b.count - a.count)
+    return aggregateConfirmedQuestionsByMember(speechSummaryData.members, (memberId) =>
+      resolveMemberDisplayName(memberId, members, formerMembers),
+    )
+      .map((item) => ({
+        ...item,
+        to: members.some((m) => m.id === item.key) ? `/members/${item.key}` : undefined,
+      }))
       .slice(0, 10);
   }, []);
 
-  const questionThemeItems: BarListItem[] = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const q of generalQuestions) {
-      for (const topic of q.topics) {
-        counts.set(topic, (counts.get(topic) ?? 0) + 1);
-      }
-    }
-    return [...counts.entries()]
-      .map(([topic, count]) => ({ key: topic, label: topic, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 12);
-  }, []);
+  const questionThemeItems: BarListItem[] = useMemo(
+    () => aggregateConfirmedQuestionsByTopic(speechSummaryData.members).slice(0, 12),
+    [],
+  );
 
-  const questionYearItems: BarListItem[] = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const q of generalQuestions) {
-      counts.set(q.fiscalYear, (counts.get(q.fiscalYear) ?? 0) + 1);
-    }
-    return [...counts.entries()]
-      .map(([year, count]) => ({ key: year, label: year, count }))
-      .sort((a, b) => a.label.localeCompare(b.label, "ja"));
-  }, []);
+  const questionYearItems: BarListItem[] = useMemo(
+    () => aggregateConfirmedQuestionsByFiscalYear(speechSummaryData.members, councilSessions),
+    [],
+  );
 
+  // 会派は現職議員のみが持つ概念のため、元議員（fm01等）の確認済み質問はこの内訳の対象外とする。
   const questionFactionItems: BarListItem[] = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const q of generalQuestions) {
-      const m = members.find((mm) => mm.id === q.memberId);
-      const factionId = m?.factionId ?? "";
-      counts.set(factionId, (counts.get(factionId) ?? 0) + 1);
+    for (const speech of questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members))) {
+      const m = members.find((mm) => mm.id === speech.memberId);
+      if (!m) continue;
+      counts.set(m.factionId, (counts.get(m.factionId) ?? 0) + 1);
     }
     return [...counts.entries()]
       .map(([factionId, count]) => {
@@ -228,13 +242,15 @@ export function DashboardPage() {
   }, []);
 
   const completion = useMemo(() => {
-    const questionMemberIds = new Set(generalQuestions.map((q) => q.memberId));
     const voteMemberIds = new Set(billVotes.flatMap((b) => b.memberVotes.map((v) => v.memberId)));
     const photo = members.filter((m) => !!m.photoUrl).length;
     const profile = members.filter((m) => m.profile && m.profile !== PLACEHOLDER_PROFILE).length;
     const profileUrl = members.filter((m) => !!m.profileUrl).length;
     const sns = members.filter((m) => m.sns.length > 0).length;
-    const questions = members.filter((m) => questionMemberIds.has(m.id)).length;
+    // 「一般質問あり」は、会議録で確認済みの累計データ（confirmedQuestionMemberIds）を基準とする。
+    // 会議録未公開の最新会期の予定質問（generalQuestions.json）だけを見ると、過去の会期で
+    // 確認済みの質問がある議員まで「質問なし」と誤判定してしまうため使わない。
+    const questions = members.filter((m) => confirmedQuestionMemberIds.has(m.id)).length;
     const votes = members.filter((m) => voteMemberIds.has(m.id)).length;
     const reports = members.filter((m) => m.reports.length > 0).length;
     return { photo, profile, profileUrl, sns, questions, votes, reports };
@@ -269,11 +285,19 @@ export function DashboardPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard
-          label="登録済み一般質問数"
-          value={totalQuestions}
+          label="会議録確認済み一般質問"
+          value={questionStats.confirmedCount}
           unit="件"
-          hint={coverageHint("generalQuestions", totalQuestions)}
+          hint={`収録済み${questionStats.collectedSessionCount}／対象${questionStats.targetSessionCount}会期`}
         />
+        {questionStats.scheduledCount > 0 && (
+          <StatCard
+            label="最新会期の予定質問"
+            value={questionStats.scheduledCount}
+            unit="件"
+            hint={questionStats.scheduledSessionName ? `${questionStats.scheduledSessionName}／質問通告書ベース` : undefined}
+          />
+        )}
         <StatCard label="登録済み議案数" value={totalBills} unit="件" hint={coverageHint("billVotes", totalBills)} />
         <StatCard label="採決情報が確認できた議案数" value={billsWithResult} unit="件" />
         <StatCard label="市長公約の登録数" value={totalPledges} unit="件" />
@@ -304,7 +328,13 @@ export function DashboardPage() {
         <BarList items={committeeItems} />
       </SectionCard>
 
-      <SectionCard title="一般質問回数ランキング（上位10名）">
+      <p className="px-1 text-xs text-on-surface-variant">
+        以下の一般質問の内訳は、会議録本文で内容を確認済みの累計{questionStats.confirmedCount}件（対象
+        {questionStats.targetSessionCount}会期中、収録済み{questionStats.collectedSessionCount}会期分）が対象です。
+        会議録が未公開の最新会期の予定質問（{questionStats.scheduledCount}件）は含みません。
+      </p>
+
+      <SectionCard title="一般質問回数ランキング（上位10名・確認済み分）">
         {questionRankingItems.length > 0 ? (
           <BarList items={questionRankingItems} unit="件" />
         ) : (

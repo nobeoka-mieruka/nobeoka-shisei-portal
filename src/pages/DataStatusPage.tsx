@@ -10,7 +10,6 @@ import archivePoliciesData from "../data/archivePolicies.json";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
-import questionCollectionStatusData from "../data/questionCollectionStatus.json";
 import searchIndexData from "../data/searchIndex.json";
 import type { CouncilMember, FormerMember, BillVoteItem, GeneralQuestionItem, CouncilSpeechSummaryData } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm, ArchiveCouncilDocument, ArchivePolicy, ArchiveFiscalYear } from "../types/historicalArchive";
@@ -22,7 +21,8 @@ import { SectionCard } from "../components/SectionCard";
 import { ChartBarIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { allPublicSpeeches } from "../lib/councilSpeeches";
+import { allPublicSpeeches, questionLikeSpeeches } from "../lib/councilSpeeches";
+import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 
 const members = membersData as CouncilMember[];
@@ -77,8 +77,14 @@ export function DataStatusPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
-  // --- 議員 ---
+  // --- 議員プロフィール収録率 ---
+  const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
+  const memberProfileCount = members.filter((m) => !!m.profile).length;
+  const memberProfileUrlCount = members.filter((m) => !!m.profileUrl).length;
   const memberSnsCount = members.filter((m) => m.sns && m.sns.length > 0).length;
+  const memberCommitteeCount = members.filter((m) => m.committees && m.committees.length > 0).length;
+  const memberBillVoteMemberIds = new Set(billVotes.flatMap((b) => (b.memberVotes ?? []).map((v) => v.memberId)));
+  const memberWithBillVoteCount = members.filter((m) => memberBillVoteMemberIds.has(m.id)).length;
 
   // --- 歴代市長 ---
   const electedMayorTerms = archiveMayorTerms.filter((t) => t.mayorRole !== "acting" && t.mayorRole !== "temporaryActing");
@@ -96,9 +102,13 @@ export function DataStatusPage() {
   const verifiedDocumentCount = archiveCouncilDocuments.filter((d) => d.verificationStatus === "verified").length;
 
   // --- 一般質問 ---
-  const verifiedSpeechCount = allPublicSpeeches(speechSummaryData.members).length;
-  const coveredSessions = questionCollectionStatusData.sessions.filter((s) => s.transcriptAvailable).length;
-  const totalRegularSessions = questionCollectionStatusData.sessions.length;
+  // ページ間の件数不一致を防ぐため、トップページ・ダッシュボード・一般質問一覧と同じ
+  // 共通集計関数（src/lib/generalQuestionStats.ts）を使う。
+  const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
+  const confirmedQuestionMemberIds = new Set(
+    questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).map((s) => s.memberId),
+  );
+  const membersWithoutConfirmedQuestion = members.filter((m) => !confirmedQuestionMemberIds.has(m.id));
 
   // --- 財政 ---
   const fiscalYearsWithBudget = archiveFiscalYears.filter((f) => !!f.budget).length;
@@ -116,7 +126,7 @@ export function DataStatusPage() {
       count: members.length,
       unit: "名",
       scope: "現在の任期",
-      detail: `公式SNSリンク登録：${memberSnsCount}名`,
+      detail: `顔写真：${memberPhotoCount}／${members.length}名／公式プロフィール：${memberProfileCount}／${members.length}名／公式サイト：${memberProfileUrlCount}／${members.length}名／SNS：${memberSnsCount}／${members.length}名／所属委員会登録：${memberCommitteeCount}／${members.length}名／一般質問（会議録確認済み）：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名／議案賛否（個人別）：${memberWithBillVoteCount}／${members.length}名`,
       linkTo: "/",
       linkLabel: "議員一覧を見る",
     },
@@ -164,19 +174,19 @@ export function DataStatusPage() {
   const questions: DataDomain[] = [
     {
       label: "一般質問（会議録ベース・確認済み）",
-      count: verifiedSpeechCount,
+      count: questionStats.confirmedCount,
       unit: "件",
       scope: "令和5年5月15日〜令和8年3月定例会",
-      detail: `対象定例会${totalRegularSessions}会期中${coveredSessions}会期を収録`,
+      detail: `対象定例会${questionStats.targetSessionCount}会期中${questionStats.collectedSessionCount}会期を収録／確認済み質問がある現職議員：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名${membersWithoutConfirmedQuestion.length > 0 ? `（未確認：${membersWithoutConfirmedQuestion.map((m) => m.name).join("、")}）` : ""}`,
       linkTo: "/questions",
       linkLabel: "一般質問データベースを見る",
     },
     {
       label: "一般質問（質問通告書ベース・予定項目）",
-      count: generalQuestions.length,
+      count: questionStats.scheduledCount,
       unit: "件",
-      scope: "直近1会期",
-      detail: "会議録公開前の暫定情報です。",
+      scope: questionStats.scheduledSessionName ?? "直近1会期",
+      detail: "会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。",
       linkTo: "/questions",
     },
   ];

@@ -14,6 +14,14 @@ import type {
 import { isWithinCouncilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { normalizeTopicLabel } from "./topicNormalization";
 import { classifyTopicToThemeSlug } from "./themeClassification";
+import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
+
+export { QUESTION_LIKE_SPEECH_TYPES };
+
+/** 公開・収録対象期間内の発言のうち、一般質問データベース対象区分（QUESTION_LIKE_SPEECH_TYPES）のみを返す。 */
+export function questionLikeSpeeches(speeches: CouncilSpeech[]): CouncilSpeech[] {
+  return speeches.filter((s) => QUESTION_LIKE_SPEECH_TYPES.has(s.speechType));
+}
 
 /**
  * 現職議員（members.json）に一致しない場合、元議員（formerMembers.json）を確認して氏名を返す。

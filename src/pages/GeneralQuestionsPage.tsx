@@ -27,7 +27,7 @@ import { VerifiedSpeechCard } from "../components/questions/VerifiedSpeechCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
-import { allPublicSpeeches, findMemberOrFormerLink, resolveMemberDisplayName } from "../lib/councilSpeeches";
+import { allPublicSpeeches, findMemberOrFormerLink, questionLikeSpeeches, resolveMemberDisplayName } from "../lib/councilSpeeches";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -36,12 +36,9 @@ const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[
 const councilSessions = councilSessionsData as CouncilSession[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 
-/** /questionsで「一般質問データベース」として扱う発言区分（討論・動議等の議事系区分は除く）。 */
-const QUESTION_LIKE_SPEECH_TYPES = new Set(["一般質問", "代表質問", "関連質問", "総括質疑"]);
-
-const verifiedSpeeches: CouncilSpeech[] = allPublicSpeeches(speechSummaryData.members)
-  .filter((s) => QUESTION_LIKE_SPEECH_TYPES.has(s.speechType))
-  .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+const verifiedSpeeches: CouncilSpeech[] = questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).sort(
+  (a, b) => (b.date ?? "").localeCompare(a.date ?? ""),
+);
 
 const REGULAR_SESSION_TYPES = new Set(["定例会"]);
 

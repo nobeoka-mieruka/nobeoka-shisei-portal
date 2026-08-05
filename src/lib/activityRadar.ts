@@ -1,5 +1,6 @@
 import type { CouncilSpeech } from "../types";
 import questionCollectionStatusData from "../data/questionCollectionStatus.json";
+import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
 
 /**
  * 議員詳細ページの「議会活動データ」レーダーチャート用の集計モジュール。
@@ -35,9 +36,6 @@ export interface RadarMetric {
   dataStatus: RadarDataStatus;
 }
 
-/** 一般質問・議会発言の集計対象とする質問系区分（討論・動議・議事進行等は含めない）。 */
-const QUESTION_LIKE_TYPES = new Set(["一般質問", "代表質問", "関連質問", "総括質疑", "総括質疑・一般質問"]);
-
 /**
  * 発言データの収録対象期間内で、実際に会議録本文を取得・検証済み（transcriptAvailable:true）の
  * 定例会IDの一覧（単一情報源はsrc/data/questionCollectionStatus.json）。
@@ -69,7 +67,7 @@ export function eligibleSessionIdsFor(options: { isFormerMember: boolean; served
 
 /** 指定した議員の発言のうち、公開・確認済み（isPublished:true）のものだけを対象にする。 */
 function publicQuestionLikeSpeeches(speeches: CouncilSpeech[]): CouncilSpeech[] {
-  return speeches.filter((s) => s.isPublished && QUESTION_LIKE_TYPES.has(s.speechType));
+  return speeches.filter((s) => s.isPublished && QUESTION_LIKE_SPEECH_TYPES.has(s.speechType));
 }
 
 /**
