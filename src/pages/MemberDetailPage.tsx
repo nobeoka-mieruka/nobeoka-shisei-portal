@@ -345,6 +345,19 @@ export function MemberDetailPage() {
         updatedAt={member.updatedAt ?? member.verifiedAt}
       />
 
+      {member.career && member.career.length > 0 && (
+        <SectionCard title="経歴">
+          <ul className="space-y-2">
+            {member.career.map((c) => (
+              <li key={c.id} className="flex gap-3 text-sm">
+                <span className="w-28 shrink-0 text-on-surface-variant">{c.year}</span>
+                <span className="text-on-surface">{c.description}</span>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
+
       <SectionCard title="所属委員会">
         {member.committees.length > 0 ? (
           <div className="flex flex-wrap gap-2">

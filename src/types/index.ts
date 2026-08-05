@@ -133,6 +133,12 @@ export interface CouncilMember extends SourceMeta {
   questions: GeneralQuestion[];
   votes: BillVote[];
   reports: ActivityReport[];
+  /**
+   * 学歴・職歴等の経歴。延岡市議会公式プロフィールページには経歴の記載がないため、
+   * 本人公式サイト・政党公式サイト等で個別に確認できた範囲のみ登録する（未確認の議員は省略）。
+   * 推測で埋めない。
+   */
+  career?: CareerEntry[];
   /** 出典・参考資料の一覧（延岡市議会公式プロフィール、選挙公報など）。未設定の場合は出典欄を表示しない。 */
   sources?: SourceEntry[];
 }
