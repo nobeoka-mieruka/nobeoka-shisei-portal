@@ -12152,6 +12152,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m03-2020-03-kanren-shitsumon",
+          "memberId": "m03",
+          "sessionId": "2020-03",
+          "date": "2020-03-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "関連質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "交通安全",
+            "教育"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第2号）で上杉泰洋議員が河野治満議員の代表質問への関連質問として行った、小学校の通学路や幼稚園等の散歩ゾーンの安全対策に関する部分と都市建設部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "通学路・散歩ゾーンの交差点安全対策",
+              "questionSummary": "小学校の通学路や幼稚園等の散歩ゾーンの交差点における横断歩道やポストコーン等の安全対策の状況について質問した。",
+              "answerSummary": "平成31年1月に国土交通省が示した交差点対策（ラバーポールやガードレールの設置等）を踏まえ、交差点ごとに形態が異なるため地元や関係機関と協議し、合意ができた箇所から順次子供たちを守る対策を進めていく考えを説明した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m03",
+                  "summary": "小学校の通学路や幼稚園等の散歩ゾーンの交差点における横断歩道やポストコーン等の安全対策の状況について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "平成31年1月に国土交通省が示した交差点対策（ラバーポールやガードレールの設置等）を踏まえ、交差点ごとに形態が異なるため地元や関係機関と協議し、合意ができた箇所から順次子供たちを守る対策を進めていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （関連質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/204442/10/1//0/0",
+              "speakerSection": "pos=204442"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/205740/10/1//0/0",
+              "speakerSection": "pos=205740"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。上杉議員の代表質問には、この要約に含めた2テーマ（市長の政治姿勢・予算編成）以外にも、第七次長期総合計画（挑戦の考え方）、東九州新幹線、臨時経済対策事業など多数の質問項目がありますが、対応する答弁本文の一部（企画部長答弁以降）を今回は未取得のため、市長答弁で確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年3月定例会（2024年3月5日）分（関連質問）を追加した。 令和6年6月定例会（2024年6月25日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -16148,6 +16211,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/13326/10/1//0/0",
               "speakerSection": "pos=13326"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m04-2020-03-daihyo-shitsumon",
+          "memberId": "m04",
+          "sessionId": "2020-03",
+          "date": "2020-03-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "福祉",
+            "バリアフリー"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第2号）で小野正二議員（公明党市議団を代表）が行った代表質問のうち、心のバリアフリーに関する本市の推進状況に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "心のバリアフリーの推進状況",
+              "questionSummary": "改正バリアフリー法の閣議決定を踏まえ、心のバリアフリーの推進に関する本市の取り組みについて質問した。",
+              "answerSummary": "心のバリアフリーは重要と認識しており、昨年8月に障がい者雇用の全国モデル企業役員による講演会を開催したこと、就労支援アンテナショップを毎週火・木曜日に実施していること、今年2月には聴覚障がいのあるビジネス界の活躍者やデフリンピック代表を招いた講演会を開催したことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m04",
+                  "summary": "改正バリアフリー法の閣議決定を踏まえ、心のバリアフリーの推進に関する本市の取り組みについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "心のバリアフリーは重要と認識しており、昨年8月に障がい者雇用の全国モデル企業役員による講演会を開催したこと、就労支援アンテナショップを毎週火・木曜日に実施していること、今年2月には聴覚障がいのあるビジネス界の活躍者やデフリンピック代表を招いた講演会を開催したことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （代表質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/84520/10/1//0/0",
+              "speakerSection": "pos=84520"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/103812/10/1//0/0",
+              "speakerSection": "pos=103812"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -26302,6 +26428,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m07-2020-03-ippan-shitsumon",
+          "memberId": "m07",
+          "sessionId": "2020-03",
+          "date": "2020-03-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地域振興",
+            "行政運営"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第4号）で甲斐忠篤議員が行った一般質問のうち、地域担当職員制度の成果と今後の取り組みに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "地域担当職員制度の成果と今後の取り組み",
+              "questionSummary": "昨年6月から試行中の地域担当職員制度（10地区13人配置）について、約9か月経過後のこれまでの成果と今後の取り組みを質問した。",
+              "answerSummary": "各担当職員が通常業務と並行して担当地区へ出向き区長会等と連携して課題解決に取り組んでおり、地域の実情を予算編成や政策決定に生かしていること、令和2年度当初予算に一部市道整備やJR土々呂駅トイレ整備、北方・北川地区のごみ祝日収集などを盛り込んだこと、今年度以降も制度を継続していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m07",
+                  "summary": "昨年6月から試行中の地域担当職員制度（10地区13人配置）について、約9か月経過後のこれまでの成果と今後の取り組みを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "各担当職員が通常業務と並行して担当地区へ出向き区長会等と連携して課題解決に取り組んでおり、地域の実情を予算編成や政策決定に生かしていること、令和2年度当初予算に一部市道整備やJR土々呂駅トイレ整備、北方・北川地区のごみ祝日収集などを盛り込んだこと、今年度以降も制度を継続していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/101418/10/1//0/0",
+              "speakerSection": "pos=101418"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/109662/10/1//0/0",
+              "speakerSection": "pos=109662"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "令和8年3月定例会（2026年2月27日）分について、甲斐議員の一般質問には、この要約に含めた2テーマ（ふるさと納税・企業版ふるさと納税）以外にも、市有林の木材売却（農林水産部長答弁）など複数の質問項目がありますが、今回は市長答弁で確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和7年3月定例会（2025年3月6日）分を追加した。 令和7年9月定例会（2025-09-09）の一般質問データを公式会議録より登録。"
@@ -34027,6 +34216,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m10-2020-03-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m10",
+          "sessionId": "2020-03",
+          "date": "2020-03-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "市長の政治姿勢"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第2号）で河野治満議員（令和のべおか市民派クラブを代表）が行った総括質疑及び一般質問のうち、市長就任2年間の感想と残る2年間の決意に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "市長就任2年間の感想と残る2年間の決意",
+              "questionSummary": "市長就任から2年が経過したことを踏まえ、これまでの2年間の感想と残る任期2年間への決意を質問した。",
+              "answerSummary": "ごみ処理手数料・水道料金引き下げ、こども医療費助成拡大、新たなバス交通ネットワーク整備、産業団地分譲完売、ふるさと納税の大幅増など公約「七つの提言」の取り組みが着実に成果を上げていると自負しているとした上で、今後も移動市役所や出前市長室を通じた対話を積み重ね市民目線改革を加速していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m10",
+                  "summary": "市長就任から2年が経過したことを踏まえ、これまでの2年間の感想と残る任期2年間への決意を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "ごみ処理手数料・水道料金引き下げ、こども医療費助成拡大、新たなバス交通ネットワーク整備、産業団地分譲完売、ふるさと納税の大幅増など公約「七つの提言」の取り組みが着実に成果を上げていると自負しているとした上で、今後も移動市役所や出前市長室を通じた対話を積み重ね市民目線改革を加速していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/150136/10/1//0/0",
+              "speakerSection": "pos=150136"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/167826/10/1//0/0",
+              "speakerSection": "pos=167826"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。河野議員の一般質問には、この要約に含めた1テーマ以外にも、政策構想の公表、執行機関と議会の関係構築など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月7日）分を追加した。 令和6年3月定例会（2024年3月5日）分（代表質問）を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和6年12月定例会（2024年12月4日）分を追加した。"
@@ -36615,6 +36866,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/81514/10/1//0/0",
               "speakerSection": "pos=81514"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m11-2020-03-daihyo-shitsumon",
+          "memberId": "m11",
+          "sessionId": "2020-03",
+          "date": "2020-03-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "憲法"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第2号）で北林幹雄議員（自民党きずなの会を代表）が行った代表質問のうち、憲法改正に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "憲法改正についての認識",
+              "questionSummary": "憲法問題について、市長の認識を質問した。",
+              "answerSummary": "現行憲法が基本的人権の尊重・国民主権・平和主義を三原則として戦後日本の平和と繁栄に大きく貢献してきたことは高く評価すべきとした上で、改正については国政の場で十分検討され最終的には国民的議論の中で徹底的に検討がなされるべきものであり、活発な議論自体は民主主義の発展上重要と認識していることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "憲法問題について、市長の認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "現行憲法が基本的人権の尊重・国民主権・平和主義を三原則として戦後日本の平和と繁栄に大きく貢献してきたことは高く評価すべきとした上で、改正については国政の場で十分検討され最終的には国民的議論の中で徹底的に検討がなされるべきものであり、活発な議論自体は民主主義の発展上重要と認識していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （代表質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/18814/10/1//0/0",
+              "speakerSection": "pos=18814"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第2号 3月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020303A/39406/10/1//0/0",
+              "speakerSection": "pos=39406"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -56787,6 +57100,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m17-2020-03-kanren-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2020-03",
+          "date": "2020-03-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "関連質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "福祉",
+            "バリアフリー"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第3号）で長友幸子議員が行った関連質問のうち、オストメイト対応トイレの整備に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "市役所庁内オストメイト対応トイレの改修",
+              "questionSummary": "市役所庁内のオストメイト対応トイレが立ったまま使用する形式で車椅子利用者が使えないことを指摘し、市民スペースのトイレの早急な改修を求めて質問した。",
+              "answerSummary": "車椅子利用のオストメイトの方への対応にはまだ課題があるとの指摘を踏まえ、限られた時間とスペースの中でどのような方法が可能か取り急ぎ模索していきたい考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "市役所庁内のオストメイト対応トイレが立ったまま使用する形式で車椅子利用者が使えないことを指摘し、市民スペースのトイレの早急な改修を求めて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "車椅子利用のオストメイトの方への対応にはまだ課題があるとの指摘を踏まえ、限られた時間とスペースの中でどのような方法が可能か取り急ぎ模索していきたい考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第3号 3月 4日） （関連質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/144946/10/1//0/0",
+              "speakerSection": "pos=144946"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第3号 3月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/146050/10/1//0/0",
+              "speakerSection": "pos=146050"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月5日）分（代表質問）を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -59956,6 +60332,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/12204/10/1//0/0",
               "speakerSection": "pos=12204"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m19-2020-03-ippan-shitsumon",
+          "memberId": "m19",
+          "sessionId": "2020-03",
+          "date": "2020-03-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防災",
+            "ペット同行避難"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第4号）で比江島久美子議員が行った一般質問のうち、災害時の避難場所へのペット同行に関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "災害時の避難場所へのペット同行",
+              "questionSummary": "防災ハンドブック案でペット同行を認めるような記載があったことを踏まえ、避難場所へのペット同行についての考えを質問した。",
+              "answerSummary": "ペットは家族の一員と考える人が多い一方、動物が苦手な人やアレルギーのある人もいるため飼い主の配慮と啓発が必要と認識しているとした上で、作成中の防災ハンドブックを活用した防災講話や、ペット防災に精通した講師を招いた普及啓発を行い、共生できる環境づくりに努めていく考えを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m19",
+                  "summary": "防災ハンドブック案でペット同行を認めるような記載があったことを踏まえ、避難場所へのペット同行についての考えを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "ペットは家族の一員と考える人が多い一方、動物が苦手な人やアレルギーのある人もいるため飼い主の配慮と啓発が必要と認識しているとした上で、作成中の防災ハンドブックを活用した防災講話や、ペット防災に精通した講師を招いた普及啓発を行い、共生できる環境づくりに努めていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/47178/10/1//0/0",
+              "speakerSection": "pos=47178"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/52074/10/1//0/0",
+              "speakerSection": "pos=52074"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -72732,6 +73171,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/105784/10/1//0/0",
               "speakerSection": "pos=105784"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m23-2020-03-ippan-shitsumon",
+          "memberId": "m23",
+          "sessionId": "2020-03",
+          "date": "2020-03-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地域新電力会社"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第4号）で峯田克明議員（無会派）が行った一般質問のうち、地域新電力会社の設立理念策定によるPRに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "地域新電力会社の設立理念策定によるPR",
+              "questionSummary": "他自治体の新電力視察を踏まえ、（仮称）延岡電力の設立に向けて再生可能エネルギーによる地産地消・地域循環経済社会・脱炭素社会への理念を前面に出したPRを行うべきではないか質問した。",
+              "answerSummary": "新電力会社は電気の安価提供に加え市の財源確保、地域内経済循環、再生可能エネルギー活用の中心的役割を担い低炭素まちづくりの核となることを目指しているとした上で、国の制度改革の動向を踏まえた具体的な事業戦略の検討の中で設立理念を創業事業計画書に反映し議会・市民にPRしていく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m23",
+                  "summary": "他自治体の新電力視察を踏まえ、（仮称）延岡電力の設立に向けて再生可能エネルギーによる地産地消・地域循環経済社会・脱炭素社会への理念を前面に出したPRを行うべきではないか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "新電力会社は電気の安価提供に加え市の財源確保、地域内経済循環、再生可能エネルギー活用の中心的役割を担い低炭素まちづくりの核となることを目指しているとした上で、国の制度改革の動向を踏まえた具体的な事業戦略の検討の中で設立理念を創業事業計画書に反映し議会・市民にPRしていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/127020/10/1//0/0",
+              "speakerSection": "pos=127020"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/132062/10/1//0/0",
+              "speakerSection": "pos=132062"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -86303,8 +86804,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 5,
-      "sessionsWithSpeechCount": 5,
+      "analyzedSessionCount": 6,
+      "sessionsWithSpeechCount": 6,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -86672,6 +87173,67 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021209A/49858/10/1//0/0",
               "speakerSection": "pos=49858"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm02-2020-03-ippan-shitsumon",
+          "memberId": "fm02",
+          "sessionId": "2020-03",
+          "date": "2020-03-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地域新電力会社"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第4号）で佐藤誠議員（旧任期）が行った一般質問のうち、新電力会社構想における市職員のネットワーク活用に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新電力会社構想における市職員のネットワーク活用",
+              "questionSummary": "延岡市地域新電力会社構想について、市職員の人的ネットワークを活用した顧客獲得の具体的な内容を質問した。",
+              "answerSummary": "新電力会社は市の財源確保が目的であり広く市民に知っていただく必要があるとした上で、市職員がふるさと納税推進と同様に家庭・親類・知人へ事業趣旨を説明し協力を要請するなど、PR等に一定程度関与することを想定していると説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm02",
+                  "summary": "延岡市地域新電力会社構想について、市職員の人的ネットワークを活用した顧客獲得の具体的な内容を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "新電力会社は市の財源確保が目的であり広く市民に知っていただく必要があるとした上で、市職員がふるさと納税推進と同様に家庭・親類・知人へ事業趣旨を説明し協力を要請するなど、PR等に一定程度関与することを想定していると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/69090/10/1//0/0",
+              "speakerSection": "pos=69090"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/77084/10/1//0/0",
+              "speakerSection": "pos=77084"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -87425,8 +87987,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 7,
-      "sessionsWithSpeechCount": 7,
+      "analyzedSessionCount": 8,
+      "sessionsWithSpeechCount": 8,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -87862,6 +88424,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm06-2020-03-ippan-shitsumon",
+          "memberId": "fm06",
+          "sessionId": "2020-03",
+          "date": "2020-03-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政",
+            "公務員"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第4号）で田村吉宏議員（旧任期）が行った一般質問のうち、内閣官房職員の言動に対する所見に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "内閣官房職員の言動に対する所見（公務員のあるべき姿）",
+              "questionSummary": "桜を見る会をめぐる国会審議での内閣官房職員の対応を踏まえ、公務員のあるべき姿について市長の所見を質問した。",
+              "answerSummary": "国会における質疑応答の詳細な実態は把握していないため具体的な言及は難しいとしつつ、一般論として国家公務員は公務の原則を認識しながら国民の不安・疑問に真摯に対応する姿勢が必要であるとした上で、本市が策定した人材育成基本計画の目指すべき職員像を紹介し、対話を大切にする職員育成に取り組む考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm06",
+                  "summary": "桜を見る会をめぐる国会審議での内閣官房職員の対応を踏まえ、公務員のあるべき姿について市長の所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "国会における質疑応答の詳細な実態は把握していないため具体的な言及は難しいとしつつ、一般論として国家公務員は公務の原則を認識しながら国民の不安・疑問に真摯に対応する姿勢が必要であるとした上で、本市が策定した人材育成基本計画の目指すべき職員像を紹介し、対話を大切にする職員育成に取り組む考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/14380/10/1//0/0",
+              "speakerSection": "pos=14380"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/18126/10/1//0/0",
+              "speakerSection": "pos=18126"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -87875,8 +88499,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 8,
-      "sessionsWithSpeechCount": 8,
+      "analyzedSessionCount": 9,
+      "sessionsWithSpeechCount": 9,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -88375,6 +88999,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm07-2020-03-daihyo-shitsumon",
+          "memberId": "fm07",
+          "sessionId": "2020-03",
+          "date": "2020-03-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公約"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第3号）で松本哲也議員（社民党市議団を代表、旧任期）が行った代表質問のうち、公約「七つの提言」の進捗状況・達成状況に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "公約「七つの提言」の進捗状況・達成状況",
+              "questionSummary": "市長就任2年を迎えたことを踏まえ、公約である七つの提言の進捗状況や達成状況、今後の方針を質問した。",
+              "answerSummary": "七つの提言を細分化した45項目のうちほとんど全てに着手し、37項目が何らかの達成を見ているとした上で、こども医療費助成の拡大やなんでも総合相談センターの開設、令和2年度当初予算では農山漁村版ハローワーク創設等の進捗を図るなど、さらなる取り組みを進めていく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm07",
+                  "summary": "市長就任2年を迎えたことを踏まえ、公約である七つの提言の進捗状況や達成状況、今後の方針を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "七つの提言を細分化した45項目のうちほとんど全てに着手し、37項目が何らかの達成を見ているとした上で、こども医療費助成の拡大やなんでも総合相談センターの開設、令和2年度当初予算では農山漁村版ハローワーク創設等の進捗を図るなど、さらなる取り組みを進めていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第3号 3月 4日） (旧任期・元議員)（代表質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/81308/10/1//0/0",
+              "speakerSection": "pos=81308"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第3号 3月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/105826/10/1//0/0",
+              "speakerSection": "pos=105826"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -88388,8 +89073,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 5,
-      "sessionsWithSpeechCount": 5,
+      "analyzedSessionCount": 6,
+      "sessionsWithSpeechCount": 6,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -88703,6 +89388,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm08-2020-03-daihyo-shitsumon",
+          "memberId": "fm08",
+          "sessionId": "2020-03",
+          "date": "2020-03-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第3号）で下田英樹議員（国民民主党友愛クラブを代表、旧任期）が行った代表質問のうち、国政に対する所見に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "国政に対する所見",
+              "questionSummary": "第二次安倍政権7年余りの動向を踏まえ、国政に対する市長の所見を質問した。",
+              "answerSummary": "地方分権や人口減少、少子高齢化、医師不足など多くの地方自治体が直面する課題が国会の主要な論点になっていないことを残念に思い危機感を抱いているとした上で、各自治体が十分な自主財源を持ち柔軟に事業を実施できるよう地方の課題に光を当てる国政であってほしいと念願していることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm08",
+                  "summary": "第二次安倍政権7年余りの動向を踏まえ、国政に対する市長の所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "地方分権や人口減少、少子高齢化、医師不足など多くの地方自治体が直面する課題が国会の主要な論点になっていないことを残念に思い危機感を抱いているとした上で、各自治体が十分な自主財源を持ち柔軟に事業を実施できるよう地方の課題に光を当てる国政であってほしいと念願していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第3号 3月 4日） (旧任期・元議員)（代表質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/14308/10/1//0/0",
+              "speakerSection": "pos=14308"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第3号 3月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/40346/10/1//0/0",
+              "speakerSection": "pos=40346"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -88716,8 +89462,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 5,
-      "sessionsWithSpeechCount": 5,
+      "analyzedSessionCount": 6,
+      "sessionsWithSpeechCount": 6,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -89027,6 +89773,67 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/39078/10/1//0/0",
               "speakerSection": "pos=39078"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm09-2020-03-ippan-shitsumon",
+          "memberId": "fm09",
+          "sessionId": "2020-03",
+          "date": "2020-03-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策"
+          ],
+          "shortSummary": "令和2年3月定例会（第6回定例会、第4号）で松田勝則議員（旧任期）が行った一般質問のうち、新型コロナウイルス対策に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナウイルス感染症への市の対応",
+              "questionSummary": "新型インフルエンザ等特別措置法改正等の動きを踏まえ、新型コロナウイルスへの本市の対応について市長に質問した。",
+              "answerSummary": "国の基本方針を踏まえ2月28日に新型コロナウイルス対策本部を設置し緊急対応を発表したこと、市主催イベントの中止・延期や小中学校の臨時休業、小学1・2年生等の学校受け入れやファミリーサポートセンターの利用推奨（3月4日から全学年無料化）、中小企業向け相談窓口の設置など段階的な対応を行ってきたことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm09",
+                  "summary": "新型インフルエンザ等特別措置法改正等の動きを踏まえ、新型コロナウイルスへの本市の対応について市長に質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "国の基本方針を踏まえ2月28日に新型コロナウイルス対策本部を設置し緊急対応を発表したこと、市主催イベントの中止・延期や小中学校の臨時休業、小学1・2年生等の学校受け入れやファミリーサポートセンターの利用推奨（3月4日から全学年無料化）、中小企業向け相談窓口の設置など段階的な対応を行ってきたことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/161110/10/1//0/0",
+              "speakerSection": "pos=161110"
+            },
+            {
+              "title": "令和 2年第 6回定例会（第4号 3月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/166056/10/1//0/0",
+              "speakerSection": "pos=166056"
             }
           ],
           "verifiedAt": "2026-08-05",
