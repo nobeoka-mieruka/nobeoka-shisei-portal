@@ -1,4 +1,46 @@
-# セッション引き継ぎメモ（2026-08-05 更新・旧任期一般質問アーカイブ：令和4年3月定例会 完全収録、単位2完了）
+# セッション引き継ぎメモ（2026-08-05 更新・元議員プロフィールページのリンク切れ修正、単位3準備中）
+
+## 2026-08-05（同日18回目）：データ品質修正（元議員詳細ページ`/members/former/fm0X`のリンク切れ解消）
+
+前回コミット（令和4年3月定例会分）の本番確認中に、`/people/former-member-fm0X`ページの
+「プロフィール・発言記録の詳細を見る」ボタンのリンク先が壊れていることを発見し、修正した。
+
+### 発見の経緯
+- `/people/former-member-fm09`を本番で確認した際、WebFetchの要約で「一般質問の件数：0件」と
+  出たため詳しく調査したところ、これは`/people/`ページ自体の議案賛否件数欄（一般質問件数とは無関係）
+  の誤読だったが、調査の過程で「プロフィール・発言記録の詳細を見る」ボタンのリンク先
+  `/members/former/fm09`が実際には404（`MemberFormerDetailPage`が`archiveMemberProfiles.json`を
+  `slug`で検索するが、同ファイルにはfm01のプロフィールしか登録されていなかった）になっていることを
+  発見した
+- 影響範囲：旧任期一般質問アーカイブ拡張で新規登録した元議員fm02〜fm09の8名全員
+  （`/people/former-member-fm0X`自体はformerMembers.json直読みのため正常表示だったが、
+  そこからの「詳細を見る」導線が壊れていた）
+
+### 対応内容
+- `src/data/formerMembers.json`の既存確認済みデータ（name/note/sourceNote/lastVerified）から、
+  fm01の既存プロフィール形式に倣って`src/data/archiveMemberProfiles.json`へfm02〜fm09の
+  エントリ8件を追加（`legacyFormerMemberId`・`slug`をformerMembers.jsonのidと一致させ、
+  `speechesForProfile`が正しくcouncilSpeechSummaries.jsonの発言記録を参照できるようにした）
+- 新たな事実の追加・推測は一切行っていない（既存の確認済みデータを構造化しただけ）
+
+### 検証結果
+typecheck／lint／test（26/26）／validate:data（errors=0、fm02〜fm09の出典URL未設定警告は
+fm01と同様の既知の制約でありエラーではない）／build（1083/1083ページ、`/members/former/fm02`〜
+`fm09`が新規生成されたことを確認）／validate:seo（failures=0）すべて成功。ローカルビルド成果物で
+`/members/former/fm09`に代表質問・友愛クラブ等、正しい発言内容が反映されていることを確認。
+
+### コミット・デプロイ
+（本メモ更新と同一コミットで反映予定）
+
+### 次回再開のポイント
+1. 単位3（令和3年度4会期：12月＝第17回・9月＝第16回・6月＝第15回・3月＝第12回定例会）へ進む。
+   `data/minutes/discovery-2021.json`を参照する
+2. 新規元議員を追加する際は、`formerMembers.json`への追加と同時に、`archiveMemberProfiles.json`
+   へも対応するプロフィールエントリを追加すること（今回のリンク切れの再発防止）
+3. 完了後は単位4（令和2年度）→単位5（令和元年度）の順に継続する
+
+---
+
 
 ## 2026-08-05（同日17回目）：旧任期一般質問アーカイブ拡張 継続（単位2の4件目：令和4年3月定例会 完了、単位2完了）
 

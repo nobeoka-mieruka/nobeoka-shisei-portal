@@ -407,6 +407,19 @@
 - コミットID：（後述）
 - 変更概要：上記のとおり。
 
+追記（2026-08-05、令和4年3月定例会分の本番確認中に発見・対応）：
+- `/people/former-member-fm0X`ページの「プロフィール・発言記録の詳細を見る」ボタンが
+  `/members/former/fm0X`（`MemberFormerDetailPage`）へリンクしているが、`src/data/archiveMemberProfiles.json`
+  にはfm01のプロフィールしか登録されておらず、fm02〜fm09（8名、旧任期一般質問アーカイブ拡張で
+  新規登録した元議員全員）はこのリンク先が「指定された元議員情報は見つかりませんでした」と
+  なるリンク切れ状態だったことを発見した
+- `src/data/formerMembers.json`の既存確認済みデータ（name/note/sourceNote/lastVerified）から、
+  fm01の既存プロフィール形式に倣ってfm02〜fm09の`archiveMemberProfiles.json`エントリ8件を追加
+  （新たな事実の追加ではなく、既存の確認済みデータの構造化のみ。新規調査・推測は行っていない）
+- 修正後、`/members/former/fm02`〜`/members/former/fm09`が正しく表示され、
+  `speechesForProfile`経由でcouncilSpeechSummaries.jsonの発言記録・活動レーダーチャートが
+  正しく反映されることをローカルビルド・本番デプロイ後に確認した
+
 ---
 
 ### TASK-006 一般質問の答弁概要データ追加
