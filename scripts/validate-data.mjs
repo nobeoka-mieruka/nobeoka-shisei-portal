@@ -344,6 +344,17 @@ for (const b of billVotes) {
   if ((b.relatedBillIds ?? []).includes(b.id)) err(tag, "relatedBillIdsに自分自身が含まれています");
 }
 
+// 一般公開ページ（/bills/votes等）が表示する件数（publicationStatusがrejected/error以外）が、
+// 実データが存在するのに0件になる回帰を検知するための保険。
+{
+  const publiclyVisibleCount = billVotes.filter(
+    (b) => b.publicationStatus !== "rejected" && b.publicationStatus !== "error",
+  ).length;
+  if (billVotes.length > 0 && publiclyVisibleCount === 0) {
+    err("billVotes.json", `議案データが${billVotes.length}件存在するのに、一般公開対象の集計が0件になっています`);
+  }
+}
+
 // 関連議案の参照整合性・循環参照チェック（全IDが出揃った後に行う）。
 for (const b of billVotes) {
   const tag = `billVotes.json (${b.id ?? "id不明"})`;
@@ -2305,6 +2316,24 @@ try {
       warn(
         "councilSpeechSummaries.json",
         `会議録で確認済みの一般質問が1件も無い現職議員: ${membersWithoutConfirmedQuestion.map((m) => `${m.id}(${m.name})`).join("、")}`,
+      );
+    }
+
+    // トップページ・ダッシュボード等が使う「会議録確認済み一般質問」の集計（src/lib/generalQuestionStats.ts の
+    // confirmedCount）は、この配列と同じ条件（isPublished && questionLikeSpeechTypes）で数える。
+    // 実データが存在するのに、公開設定・区分判定の不具合で集計が0件になる回帰を検知するための保険。
+    const totalConfirmedQuestionLikeSpeeches = speechData.members.reduce(
+      (sum, record) =>
+        sum +
+        (record.speeches ?? []).filter((s) => s.isPublished && QUESTION_LIKE_SPEECH_TYPES_FOR_VALIDATION.has(s.speechType))
+          .length,
+      0,
+    );
+    const totalSpeechRecords = speechData.members.reduce((sum, record) => sum + (record.speeches ?? []).length, 0);
+    if (totalSpeechRecords > 0 && totalConfirmedQuestionLikeSpeeches === 0) {
+      err(
+        "councilSpeechSummaries.json",
+        `発言データが${totalSpeechRecords}件存在するのに、会議録確認済み一般質問の集計が0件になっています（isPublished/speechTypeの判定条件を確認してください）`,
       );
     }
   }
