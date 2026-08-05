@@ -478,6 +478,27 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/city-officials":
+      return makeResult(
+        {
+          path: "/city-officials",
+          pageTitle: "副市長・教育長・行政委員会委員",
+          description:
+            "延岡市の副市長・教育長・農業委員会委員など、市長以外の特別職・行政委員会委員のうち、市議会の同意を経て就任したことが公式資料で確認できる現職者を掲載しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "副市長・教育長・行政委員会委員" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-city-special-posts-jsonld",
+              name: "延岡市 副市長・教育長・行政委員会委員データ",
+              description: "延岡市の副市長・教育長・農業委員会委員等の現職者を公式資料に基づいて整理したデータです。",
+              url: `${SITE_URL}/city-officials`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/people":
       return makeResult(
         {

@@ -44,6 +44,9 @@ const PoliticalFundOrganizationDetailPage = lazy(() =>
 );
 const MayorsPage = lazy(() => import("./pages/MayorsPage").then((m) => ({ default: m.MayorsPage })));
 const MayorDetailPage = lazy(() => import("./pages/MayorDetailPage").then((m) => ({ default: m.MayorDetailPage })));
+const CityOfficialsPage = lazy(() =>
+  import("./pages/CityOfficialsPage").then((m) => ({ default: m.CityOfficialsPage })),
+);
 const FinancePage = lazy(() => import("./pages/FinancePage").then((m) => ({ default: m.FinancePage })));
 const FinanceBudgetPage = lazy(() =>
   import("./pages/FinanceBudgetPage").then((m) => ({ default: m.FinanceBudgetPage })),
@@ -223,6 +226,7 @@ function App() {
               <Route path="/political-funds/:id" element={<PoliticalFundOrganizationDetailPage />} />
               <Route path="/mayors" element={<MayorsPage />} />
               <Route path="/mayors/:slug" element={<MayorDetailPage />} />
+              <Route path="/city-officials" element={<CityOfficialsPage />} />
               <Route path="/finance" element={<FinancePage />} />
               <Route path="/finance/budget" element={<FinanceBudgetPage />} />
               <Route path="/finance/debt" element={<FinanceDebtPage />} />

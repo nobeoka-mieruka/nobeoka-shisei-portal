@@ -20,6 +20,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/members/former", label: "元議員一覧" },
       { to: "/mayor", label: "市長情報" },
       { to: "/mayors", label: "歴代市長（アーカイブ）" },
+      { to: "/city-officials", label: "副市長・教育長・行政委員会委員" },
     ],
   },
   {

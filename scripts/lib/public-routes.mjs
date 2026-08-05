@@ -68,6 +68,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/entertainment-expenses",
   "/mayor/press-conferences",
   "/mayors",
+  "/city-officials",
   "/policies",
   "/people",
   "/bills",
@@ -146,6 +147,7 @@ function loadData() {
   const archiveCouncilDocuments = readJson("src/data/archiveCouncilDocuments.json");
   const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
   const politicalFundReports = readJson("src/data/politicalFundReports.json");
+  const citySpecialPosts = readJson("src/data/citySpecialPosts.json");
   return {
     members,
     formerMembers,
@@ -171,6 +173,7 @@ function loadData() {
     archiveCouncilDocuments,
     politicalFundOrganizations,
     politicalFundReports,
+    citySpecialPosts,
   };
 }
 
@@ -242,6 +245,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.archiveMayors.flatMap((m) => [m.lastVerifiedAt, ...m.sourceRefs.map((r) => r.sourcePublishedDate)]))],
         ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.json"],
+      );
+    case "/city-officials":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.citySpecialPosts.map((p) => p.lastVerifiedAt))],
+        ["src/data/citySpecialPosts.json"],
       );
     case "/policies":
       return resolveLastmod(

@@ -70,6 +70,7 @@ const navLinks: { label: string; to?: string; ready: boolean }[] = [
   { label: "元議員を見る", to: "/members/former", ready: true },
   { label: "市長情報を見る", to: "/mayor", ready: true },
   { label: "歴代市長を見る", to: "/mayors", ready: true },
+  { label: "副市長・教育長・行政委員会委員を見る", to: "/city-officials", ready: true },
   { label: "市長公約の進捗を見る", to: "/mayor/policy-progress", ready: true },
   { label: "市役所どこに行けばいい？診断", to: "/city-guide", ready: true },
   { label: "一般質問を調べる", to: "/questions", ready: true },

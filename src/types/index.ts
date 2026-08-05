@@ -143,6 +143,40 @@ export interface CouncilMember extends SourceMeta {
   sources?: SourceEntry[];
 }
 
+/** 副市長・教育長・監査委員・農業委員会委員等、市長以外の特別職・行政委員会委員の役職区分。 */
+export type CitySpecialPostRole =
+  | "deputy-mayor"
+  | "superintendent"
+  | "auditor"
+  | "agricultural-committee-member";
+
+/**
+ * 副市長・教育長・監査委員・農業委員会委員等（src/data/citySpecialPosts.json）。
+ * 現職のみを対象とし、歴代（過去の在任者）は収録しない。市長（mayor.json）・
+ * 歴代市長アーカイブ（archiveMayors.json）とは別管理。
+ */
+export interface CitySpecialPost {
+  id: string;
+  role: CitySpecialPostRole;
+  /** 表示用の役職名（例："副市長"）。 */
+  roleLabel: string;
+  name: string;
+  nameKana?: string;
+  /** 議会同意等で就任が確認できた年月日（ISO形式）。未確認の場合はnull。 */
+  appointedDate: string | null;
+  /** 任期・退任予定等、公式資料で確認できた場合のみ記載する自由記述。 */
+  termNote?: string;
+  /** 担当業務・所管の説明（公式資料で確認できた範囲）。 */
+  duties?: string;
+  profile?: string;
+  /** 関連する議案（同意議案等）や公式ページへのリンク。 */
+  relatedLinks?: { label: string; to: string }[];
+  sourceRefs: SourceEntry[];
+  /** 確認状況に関する補足（未確定要素がある場合に明記する）。 */
+  notes?: string;
+  lastVerifiedAt: string;
+}
+
 /**
  * 現職ではない元議員（src/data/formerMembers.json）。
  * 過去会期の一般質問・発言履歴を保持するための最小限の人物データで、CouncilMemberとは

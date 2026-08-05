@@ -4,6 +4,7 @@ import formerMembersData from "../data/formerMembers.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
+import citySpecialPostsData from "../data/citySpecialPosts.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import billVotesData from "../data/billVotes.json";
 import archivePoliciesData from "../data/archivePolicies.json";
@@ -11,7 +12,14 @@ import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import searchIndexData from "../data/searchIndex.json";
-import type { CouncilMember, FormerMember, BillVoteItem, GeneralQuestionItem, CouncilSpeechSummaryData } from "../types";
+import type {
+  CouncilMember,
+  FormerMember,
+  BillVoteItem,
+  GeneralQuestionItem,
+  CouncilSpeechSummaryData,
+  CitySpecialPost,
+} from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm, ArchiveCouncilDocument, ArchivePolicy, ArchiveFiscalYear } from "../types/historicalArchive";
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -30,6 +38,7 @@ const formerMembers = formerMembersData as FormerMember[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
+const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const billVotes = billVotesData as BillVoteItem[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
@@ -150,6 +159,17 @@ export function DataStatusPage() {
       linkTo: "/mayors",
       linkLabel: "歴代市長一覧を見る",
       fullyCovered: mayorGapCount === 0,
+    },
+    {
+      label: "副市長・教育長・行政委員会委員",
+      count: citySpecialPosts.length,
+      unit: "名",
+      scope: "現職のみ（議会同意議案で就任が確認できた範囲）",
+      detail:
+        "監査委員会・選挙管理委員会は、委員全員の氏名を確実に特定できる公式資料を確認できていないため未掲載です。",
+      linkTo: "/city-officials",
+      linkLabel: "一覧を見る",
+      fullyCovered: false,
     },
   ];
 
