@@ -205,7 +205,7 @@ function archiveFiscalYearDates(archiveFiscalYears) {
 function publishedSpeeches(councilSpeechSummaries) {
   return councilSpeechSummaries.members.flatMap((m) =>
     m.speeches
-      .filter((s) => s.isPublished && s.date && (m.isFormerMember || s.date >= councilSpeechPeriod.from))
+      .filter((s) => s.isPublished && s.date && (m.isFormerMember || s.term === "previous" || s.date >= councilSpeechPeriod.from))
       .map((s) => ({ memberId: m.memberId, speech: s })),
   );
 }

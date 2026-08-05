@@ -179,6 +179,21 @@ test("発言が全くなければ0以上100以下の値になる（NaNになら�
   assert.ok(Number.isFinite(m.value));
   assert.equal(m.value, 0);
 });
+test("回帰防止：eligibleSessionIds外の会期の発言も質問項目数（volumeComponent）に加算される（呼び出し側で" +
+  "currentTermPublicSpeeches等により事前に絞り込む責任がある。旧任期発言を現職memberIdへ追加する場合、" +
+  "この関数自身はterm:previousを判定しないため、フィルタせずに渡すと現任期指数が汚染される）", () => {
+  const eligible = ["2023-06"];
+  // 2019-03は対象外の会期（旧任期発言を想定）だが、この関数はeligibleSessionIdsに関わらず
+  // questionItemsを合算する仕様であることを明示するテスト。
+  const previousTermSpeech = makeSpeech("2019-03", "一般質問", 10);
+  const withoutOldSpeech = calculateSpeechActivityIndex([], eligible);
+  const withOldSpeech = calculateSpeechActivityIndex([previousTermSpeech], eligible);
+  assert.equal(withoutOldSpeech.value, 0);
+  assert.ok(
+    withOldSpeech.value > withoutOldSpeech.value,
+    "対象期間外の発言でもvalueが増加する（=呼び出し側のフィルタが必須であることの裏付け）",
+  );
+});
 
 console.log("\ncalculateAttendanceIndex / calculateProposalActivityIndex");
 test("出席状況は常にmissing（0点にしない）", () => {

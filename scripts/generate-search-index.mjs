@@ -355,7 +355,7 @@ try {
     for (const s of record.speeches ?? []) {
       // isFormerMember:true（旧任期のみ在職した元議員、TASK-005系）は現任期カットオフの対象外。
       if (!s.isPublished || !s.date) continue;
-      if (!record.isFormerMember && s.date < councilSpeechPeriod.from) continue;
+      if (!record.isFormerMember && s.term !== "previous" && s.date < councilSpeechPeriod.from) continue;
       entries.push({
         id: `speech-${s.id}`,
         type: "speech",

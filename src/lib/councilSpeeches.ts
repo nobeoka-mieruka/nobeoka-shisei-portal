@@ -106,16 +106,26 @@ export function findMemberSpeechRecord(
 }
 
 /**
- * 一般公開してよい発言だけを返す（isPublished:true、かつ収録対象期間内のみ）。
- * 期間の判定はsrc/config/councilSpeechPeriod.tsが単一情報源（validate-data.mjs・
- * scripts/lib/public-routes.mjsの対応するチェックと同じ基準）。
- * ただし、record.isFormerMember:true（旧任期のみ在職した元議員、TASK-005系）のレコードは、
- * 現議員任期の対象期間カットオフの対象外とする（旧任期の発言も公開してよい）。
+ * 発言1件が、現議員任期の対象期間カットオフ（councilSpeechPeriod.from）の対象外（旧任期扱い）かどうか。
+ * - record.isFormerMember:true（旧任期のみ在職した元議員、TASK-005系）のレコード内の発言は、
+ *   レコード全体が旧任期扱いのため常に対象外。
+ * - speech.term:"previous"（継続して現職を務める議員の旧任期発言を、現職の既存memberIdへ
+ *   追加した場合。TASK-005系）も対象外。
+ */
+function isExemptFromCurrentTermCutoff(record: CouncilMemberSpeechRecord, speech: CouncilSpeech): boolean {
+  return !!record.isFormerMember || speech.term === "previous";
+}
+
+/**
+ * 一般公開してよい発言だけを返す（isPublished:true、かつ収録対象期間内、または旧任期として
+ * 明示された発言のみ）。期間の判定はsrc/config/councilSpeechPeriod.tsが単一情報源
+ * （validate-data.mjs・scripts/lib/public-routes.mjsの対応するチェックと同じ基準）。
  */
 export function publicSpeeches(record: CouncilMemberSpeechRecord | undefined): CouncilSpeech[] {
   if (!record) return [];
-  if (record.isFormerMember) return record.speeches.filter((s) => s.isPublished);
-  return record.speeches.filter((s) => s.isPublished && isWithinCouncilSpeechPeriod(s.date));
+  return record.speeches.filter(
+    (s) => s.isPublished && (isExemptFromCurrentTermCutoff(record, s) || isWithinCouncilSpeechPeriod(s.date)),
+  );
 }
 
 export function findPublishedSpeech(
@@ -126,8 +136,20 @@ export function findPublishedSpeech(
   const record = findMemberSpeechRecord(data.members, memberId);
   if (!record) return undefined;
   return record.speeches.find(
-    (s) => s.id === speechId && s.isPublished && (record.isFormerMember || isWithinCouncilSpeechPeriod(s.date)),
+    (s) =>
+      s.id === speechId &&
+      s.isPublished &&
+      (isExemptFromCurrentTermCutoff(record, s) || isWithinCouncilSpeechPeriod(s.date)),
   );
+}
+
+/**
+ * 現議員任期（現任期）の発言のみを返す。議会活動レーダーチャート等、現任期のみを対象とする
+ * 集計は、必ずこの関数（またはterm:"previous"を除外するフィルタ）を通してから使うこと
+ * （旧任期の発言を現職memberIdへ追加した場合、活動指数の分子・分母双方を汚染しないため）。
+ */
+export function currentTermPublicSpeeches(record: CouncilMemberSpeechRecord | undefined): CouncilSpeech[] {
+  return publicSpeeches(record).filter((s) => s.term !== "previous" && !record?.isFormerMember);
 }
 
 /** テーマ1件分の会期単位集計。会期数（sessionCount）は同一会期内の重複を除いた実会期数。 */

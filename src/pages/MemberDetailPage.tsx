@@ -21,6 +21,7 @@ import { getFaction } from "../lib/factions";
 import {
   findMemberSpeechRecord,
   publicSpeeches,
+  currentTermPublicSpeeches,
   aggregateMemberTopics,
   aggregateYearlySpeechCounts,
   findMemberSpeechAnalysis,
@@ -241,10 +242,13 @@ export function MemberDetailPage() {
 
   // 議会活動データ（レーダーチャート）。議員の能力・優劣を示すものではなく、
   // 公開データの共通基準による指数化であることをコンポーネント側でも明示している。
+  // 旧任期の発言（speech.term:"previous"、TASK-005系）を現職memberIdへ追加した場合でも、
+  // 現任期のみを対象とする指数を汚染しないよう、currentTermPublicSpeechesで明示的に絞り込む。
   const radarEligibleSessions = eligibleSessionIdsFor({ isFormerMember: false });
+  const currentTermSpeechesForRadar = currentTermPublicSpeeches(speechRecord);
   const radarMetrics = [
-    calculateQuestionActivityIndex(publishedMemberSpeeches, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
-    calculateSpeechActivityIndex(publishedMemberSpeeches, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
+    calculateQuestionActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
+    calculateSpeechActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
     calculateAttendanceIndex(),
     calculateVotingDisclosureIndex(memberAllBillVotes.length, billsWithAnyMemberVoteDisclosed),
     calculateProposalActivityIndex(),

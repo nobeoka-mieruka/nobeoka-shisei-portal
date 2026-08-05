@@ -2233,13 +2233,34 @@ try {
           err(speechTag, `generatedAtの形式が不正です: ${speech.generatedAt}`);
         }
         // councilSpeechPeriod.fromは「現議員任期の対象範囲」を表す。旧任期のみに在職した元議員
-        // （formerMembers.jsonのIDで、servedSessionsが別途検証済み）の発言は、この現任期カットオフの
-        // 対象外とする（旧任期アーカイブ拡張、TASK-005系）。現職議員IDの発言は引き続きこのカットオフで検証する
+        // （formerMembers.jsonのIDで、servedSessionsが別途検証済み）の発言、および継続して現職を
+        // 務める議員の旧任期発言（speech.term:"previous"、TASK-005系）は、この現任期カットオフの
+        // 対象外とする。それ以外の現職議員IDの発言は引き続きこのカットオフで検証する
         // （現任期の集計・議会活動データ等、他機能への影響を避けるため）。
-        if (speech.date && speech.date < councilSpeechPeriod.from && !formerMemberIds.has(record.memberId)) {
+        if (
+          speech.date &&
+          speech.date < councilSpeechPeriod.from &&
+          !formerMemberIds.has(record.memberId) &&
+          speech.term !== "previous"
+        ) {
           const msg = `発言日（${speech.date}）が収録対象期間（${councilSpeechPeriod.from}以降）より前です`;
           if (speech.isPublished) err(speechTag, `${msg}。公開できません`);
           else warn(speechTag, msg);
+        }
+        if (speech.term !== undefined && speech.term !== "current" && speech.term !== "previous") {
+          err(speechTag, `未定義のtermです: ${speech.term}`);
+        }
+        // term:"previous"は「旧任期の発言である」という明示的な申告のため、実際の発言日が
+        // カットオフより前であることと矛盾していないかを確認する（誤って現任期の発言に
+        // term:"previous"を付けると、活動レーダーチャート等の現任期集計から誤って除外されてしまう）。
+        if (speech.term === "previous" && speech.date && speech.date >= councilSpeechPeriod.from) {
+          err(
+            speechTag,
+            `term:"previous"（旧任期）と設定されていますが、発言日（${speech.date}）が現任期の対象期間（${councilSpeechPeriod.from}以降）です`,
+          );
+        }
+        if (formerMemberIds.has(record.memberId) && speech.term === "previous") {
+          warn(speechTag, 'formerMembers.jsonの元議員レコードにterm:"previous"は不要です（レコード全体が旧任期扱いのため）');
         }
         if (!VALID_SPEECH_SUMMARY_STATUSES.has(speech.summaryStatus)) {
           err(speechTag, `未定義のsummaryStatusです: ${speech.summaryStatus}`);

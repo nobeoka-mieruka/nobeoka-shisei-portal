@@ -1373,6 +1373,15 @@ export interface CouncilSpeech {
   verificationNote?: string;
   /** ISO形式。この発言データ（要約・exchanges等）を最後に生成・更新した日時。未設定の場合はnull。 */
   generatedAt?: string | null;
+  /**
+   * "previous"の場合、現議員任期（councilSpeechPeriod.from）より前の旧任期の発言であることを明示する
+   * （継続して現職を務める議員の旧任期発言を、現職の既存memberIdへ追加する場合に使う。TASK-005系）。
+   * 未設定は"current"と同義（既存データとの後方互換）。isFormerMember:trueのレコード内の発言には
+   * 通常設定不要（レコード全体が旧任期扱いのため）。
+   * 議会活動レーダーチャート等、現任期のみを対象とする集計は、この値が"previous"の発言を
+   * 対象から除外すること（src/lib/activityRadar.tsの利用側で必ずフィルタする）。
+   */
+  term?: "current" | "previous";
 }
 
 /**
