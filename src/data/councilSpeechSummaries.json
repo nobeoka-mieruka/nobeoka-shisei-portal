@@ -5822,6 +5822,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m02-2021-12-ippan-shitsumon",
+          "memberId": "m02",
+          "sessionId": "2021-12",
+          "date": "2021-12-08",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "事業者支援"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第3号）で猪之鼻哲議員が行った一般質問のうち、コロナ禍の影響が色濃く残る業種への支援に関する部分と商工観光部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "コロナ禍の影響が色濃く残る業種への補償",
+              "questionSummary": "まちなかの飲食店などで自粛要請が緩和され客足が戻りつつある一方、いまだに影響の多い業種への補償について質問した。",
+              "answerSummary": "事業継続支援金として30万円を、売上げ25％以上減少を要件に幅広い業種へ給付していること、国の事業復活支援金（売上げ30％以上減少が対象）が閣議決定されており制度の周知や手続支援に努めること、人数制限が残る業種にはワクチン・検査パッケージの活用で県と連携して環境づくりに努める考えを説明した。",
+              "answerers": [
+                "商工観光部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m02",
+                  "summary": "まちなかの飲食店などで自粛要請が緩和され客足が戻りつつある一方、いまだに影響の多い業種への補償について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光部長",
+                  "summary": "事業継続支援金として30万円を、売上げ25％以上減少を要件に幅広い業種へ給付していること、国の事業復活支援金（売上げ30％以上減少が対象）が閣議決定されており制度の周知や手続支援に努めること、人数制限が残る業種にはワクチン・検査パッケージの活用で県と連携して環境づくりに努める考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/73666/10/1//0/0",
+              "speakerSection": "pos=73666"
+            },
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/75542/10/1//0/0",
+              "speakerSection": "pos=75542"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。猪之鼻議員の一般質問には、この要約に含めた1テーマ以外にも、デジタル・コックピット事業、延岡城三階櫓復元、子供の遊び場、西階公園プールなど複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025-03-06）の一般質問データを公式会議録より登録。"
@@ -15153,6 +15216,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m04-2021-12-ippan-shitsumon",
+          "memberId": "m04",
+          "sessionId": "2021-12",
+          "date": "2021-12-08",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "脱炭素",
+            "ゼロカーボンシティ"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第3号）で小野正二議員が行った一般質問のうち、ゼロカーボンシティ宣言の実施に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "ゼロカーボンシティ宣言の実施",
+              "questionSummary": "宮崎県や宮崎市など県内の他自治体が既にゼロカーボンシティ宣言を行っていることを踏まえ、本市としても脱炭素社会を目指す決意としてゼロカーボンシティ宣言を実施してはどうかと質問した。",
+              "answerSummary": "脱炭素化の流れが世界中で広がり国も2050年カーボンニュートラル宣言を行う中、本市としても脱炭素のまちづくりに向けた取り組みが必要と認識しており、取り急ぎ本市の実態調査・把握に着手するとともに今後の取り組み計画を策定し、ゼロカーボンシティ宣言はその計画策定の中で併せて行いたい考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m04",
+                  "summary": "宮崎県や宮崎市など県内の他自治体が既にゼロカーボンシティ宣言を行っていることを踏まえ、本市としても脱炭素社会を目指す決意としてゼロカーボンシティ宣言を実施してはどうかと質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "脱炭素化の流れが世界中で広がり国も2050年カーボンニュートラル宣言を行う中、本市としても脱炭素のまちづくりに向けた取り組みが必要と認識しており、取り急ぎ本市の実態調査・把握に着手するとともに今後の取り組み計画を策定し、ゼロカーボンシティ宣言はその計画策定の中で併せて行いたい考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/11258/10/1//0/0",
+              "speakerSection": "pos=11258"
+            },
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/20162/10/1//0/0",
+              "speakerSection": "pos=20162"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。小野（正）議員の代表質問（令和8年3月定例会・2026年2月25日分）には、この要約に含めた2テーマ以外にも、南延岡駅東側乗り入れ口・駐車場整備、通学高校生数、防災対策（北川町小川上流地区掘削工事等）、農林水産部長・都市建設部長・危機管理部長・上下水道局長への質問項目が多数ありますが、今回は確認できた市長答弁の範囲のみを要約対象としています。令和7年9月定例会（2025年9月9日）分については、Lアラートの運用体制以外にも、新総合防災情報システム、事前復興計画、健康福祉部・上下水道局への質問項目が多数ありますが、今回は確認できた範囲のみを要約対象としています。 令和5年12月定例会（2023年12月5日）分を追加した。 令和6年3月定例会（2024年3月6日）分（関連質問）を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年12月定例会（2024年12月3日）分を追加した。 令和7年9月定例会（2025-09-09）の一般質問データを公式会議録より登録。 令和7年9月定例会（2025-09-09）の一般質問データを試験的スキャフォールドから完全版へ更新し公式会議録より登録。"
@@ -21541,6 +21667,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040623A/40810/10/1//0/0",
               "speakerSection": "pos=40810"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m06-2021-12-ippan-shitsumon",
+          "memberId": "m06",
+          "sessionId": "2021-12",
+          "date": "2021-12-07",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "観光",
+            "コロナ禍の経済対策"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第2号）で甲斐行雄議員が行った一般質問のうち、コロナ禍からの経済回復に向けた観光施策・飲食業界支援に関する部分と商工観光部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "日豊海岸を活かした観光施策と飲食業界の収入確保策",
+              "questionSummary": "コロナ禍で疲弊した経済の回復に向け、日豊海岸国定公園エリアの魅力を最大限に生かした今後の観光施策と、市内飲食業界の収入確保に向けた新たな取り組みを質問した。",
+              "answerSummary": "日豊海岸国定公園内のうみウララエリアを重点観光エリアと位置づけ、須美江のドッグラン整備や島野浦の交流促進施設整備補助などに取り組んでいること、飲食業界には使おやっ！のべおかプレミアム商品券や宅配タクシーによる売上げ確保策等の効果が出ていること、ひなた飲食店認証制度の登録呼びかけを積極的に行っていることを説明した。",
+              "answerers": [
+                "商工観光部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m06",
+                  "summary": "コロナ禍で疲弊した経済の回復に向け、日豊海岸国定公園エリアの魅力を最大限に生かした今後の観光施策と、市内飲食業界の収入確保に向けた新たな取り組みを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光部長",
+                  "summary": "日豊海岸国定公園内のうみウララエリアを重点観光エリアと位置づけ、須美江のドッグラン整備や島野浦の交流促進施設整備補助などに取り組んでいること、飲食業界には使おやっ！のべおかプレミアム商品券や宅配タクシーによる売上げ確保策等の効果が出ていること、ひなた飲食店認証制度の登録呼びかけを積極的に行っていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "今後の方針の確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/11424/10/1//0/0",
+              "speakerSection": "pos=11424"
+            },
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/15360/10/1//0/0",
+              "speakerSection": "pos=15360"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -44588,6 +44777,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m14-2021-12-ippan-shitsumon",
+          "memberId": "m14",
+          "sessionId": "2021-12",
+          "date": "2021-12-09",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防災",
+            "ペット同伴避難"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第4号）で柴浩信議員が行った一般質問のうち、災害時のペット同伴避難場所の施設整備に関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "ペット同伴避難場所のリード用ポール等の施設整備",
+              "questionSummary": "市内にペット同伴可能な指定避難場所が56カ所あるが、大型犬用のリードをつなぐリングやカラビナ等が避難所に無く、避難時に混乱を招く懸念があるとして、施設整備の状況を質問した。",
+              "answerSummary": "風水害時の指定緊急避難場所は一時的な避難場所のためリード用ポールの代替設備の利用を想定しているが代替施設のない避難場所もあり先進事例等を情報収集しながら対応を検討する必要があること、大規模災害後の指定避難所ではペット飼育用スペースが必要となるためリード用ポールの設置を検討することを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m14",
+                  "summary": "市内にペット同伴可能な指定避難場所が56カ所あるが、大型犬用のリードをつなぐリングやカラビナ等が避難所に無く、避難時に混乱を招く懸念があるとして、施設整備の状況を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "風水害時の指定緊急避難場所は一時的な避難場所のためリード用ポールの代替設備の利用を想定しているが代替施設のない避難場所もあり先進事例等を情報収集しながら対応を検討する必要があること、大規模災害後の指定避難所ではペット飼育用スペースが必要となるためリード用ポールの設置を検討することを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/72752/10/1//0/0",
+              "speakerSection": "pos=72752"
+            },
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/77538/10/1//0/0",
+              "speakerSection": "pos=77538"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月26日、一般質問）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。 令和5年6月定例会（2023年6月27日、初当選後二期目の一般質問）分を追加した。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
@@ -49726,6 +49978,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m16-2021-12-ippan-shitsumon",
+          "memberId": "m16",
+          "sessionId": "2021-12",
+          "date": "2021-12-08",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "若者のまちづくり参画"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第3号）で中城あかね議員が行った一般質問のうち、若者が描く魅力あるまちづくり推進事業（ワークショップ）に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "若者が描く魅力あるまちづくりミーティングの開催結果",
+              "questionSummary": "8〜10月に3回開催された「若者が描く魅力あるまちづくりミーティング」について、ワークショップの内容と、それを踏まえた所感を質問した。",
+              "answerSummary": "初めての試みとして3つのテーマでワークショップを開催し市長自ら3回とも最後まで出席したこと、就職関連の情報提供の要望とともに延岡での起業・創業意欲を持つ若者の声、新しい観光施設のアイデア、子育てと仕事の両立や父親の子育て関与についての意見が出たことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m16",
+                  "summary": "8〜10月に3回開催された「若者が描く魅力あるまちづくりミーティング」について、ワークショップの内容と、それを踏まえた所感を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "初めての試みとして3つのテーマでワークショップを開催し市長自ら3回とも最後まで出席したこと、就職関連の情報提供の要望とともに延岡での起業・創業意欲を持つ若者の声、新しい観光施設のアイデア、子育てと仕事の両立や父親の子育て関与についての意見が出たことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/109810/10/1//0/0",
+              "speakerSection": "pos=109810"
+            },
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/118626/10/1//0/0",
+              "speakerSection": "pos=118626"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。中城議員の一般質問には、この要約に含めた1テーマ以外にも、INOBECHスポーツパークの利用状況・スケートボードセクション増設、土砂災害対策など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、答弁未確認の2テーマ（遊休農地・有機農産物）をpendingとして記録している。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和7年3月定例会（2025年3月6日）分を追加した。"
@@ -53784,6 +54098,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m17-2021-12-ippan-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2021-12",
+          "date": "2021-12-09",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地球温暖化対策"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第4号）で長友幸子議員が行った一般質問のうち、地球温暖化対策への各国の取り組みに対する所見に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "地球温暖化対策に対する所見",
+              "questionSummary": "COP26で気温上昇を1.5度に抑える目標が再認識される中、地球温暖化対策として日本を含む世界各国の取り組みに対する所見を質問した。",
+              "answerSummary": "地球温暖化により生態系・海水面・食料問題等が懸念され人類の生活が既に脅かされていると危惧しているとした上で、延岡市においてもマイカーに頼らないまちづくり、地域新電力会社の設立、森林環境譲与税を活用した林業振興など、できることから着実に取り組んでいく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "COP26で気温上昇を1.5度に抑える目標が再認識される中、地球温暖化対策として日本を含む世界各国の取り組みに対する所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "地球温暖化により生態系・海水面・食料問題等が懸念され人類の生活が既に脅かされていると危惧しているとした上で、延岡市においてもマイカーに頼らないまちづくり、地域新電力会社の設立、森林環境譲与税を活用した林業振興など、できることから着実に取り組んでいく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/11264/10/1//0/0",
+              "speakerSection": "pos=11264"
+            },
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/13874/10/1//0/0",
+              "speakerSection": "pos=13874"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月5日）分（代表質問）を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -53862,6 +54238,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040908A/109827/10/1//0/0",
               "speakerSection": "pos=109827"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m18-2021-12-ippan-shitsumon",
+          "memberId": "m18",
+          "sessionId": "2021-12",
+          "date": "2021-12-08",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "雇用"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第3号）で早瀨賢一議員が行った一般質問のうち、新型コロナウイルス感染症緊急雇用対策に関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナウイルス感染症緊急雇用対策の状況",
+              "questionSummary": "休業や解雇、収入減少等により就労を希望する市民を対象とした延岡市会計年度任用職員の緊急雇用対策について、その取り組み状況を質問した。",
+              "answerSummary": "令和2年4月より兼業可・勤務日時柔軟な緊急雇用創出事業に取り組んでおり、採用期間は来年3月末までだが感染状況を踏まえ柔軟に対応する考えであること、市がPRを希望する民間事業所51社の情報も緊急雇用の相談者全員に案内していることを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m18",
+                  "summary": "休業や解雇、収入減少等により就労を希望する市民を対象とした延岡市会計年度任用職員の緊急雇用対策について、その取り組み状況を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "令和2年4月より兼業可・勤務日時柔軟な緊急雇用創出事業に取り組んでおり、採用期間は来年3月末までだが感染状況を踏まえ柔軟に対応する考えであること、市がPRを希望する民間事業所51社の情報も緊急雇用の相談者全員に案内していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/41708/10/1//0/0",
+              "speakerSection": "pos=41708"
+            },
+            {
+              "title": "令和 3年第17回定例会（第3号12月 8日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/46414/10/1//0/0",
+              "speakerSection": "pos=46414"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -59678,6 +60117,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m20-2021-12-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2021-12",
+          "date": "2021-12-09",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "日本国憲法"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第4号）で平田信広議員が行った一般質問のうち、日本国憲法への認識に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "日本国憲法への認識",
+              "questionSummary": "日本国憲法が公布から75年になることを踏まえ、市長就任時に聞きそびれた憲法に対する市長自身の認識を質問した。",
+              "answerSummary": "日本国憲法は侵すことのできない永久の権利として全ての国民に基本的人権を保障するとともに戦争と武力行使を永久に放棄し戦後75年以上他国と戦火を交えていないとした上で、憲法改正については基本原理が尊重される中で国政の場で慎重に検討され国民的議論が十分尽くされるべきとの認識を説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "日本国憲法が公布から75年になることを踏まえ、市長就任時に聞きそびれた憲法に対する市長自身の認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "日本国憲法は侵すことのできない永久の権利として全ての国民に基本的人権を保障するとともに戦争と武力行使を永久に放棄し戦後75年以上他国と戦火を交えていないとした上で、憲法改正については基本原理が尊重される中で国政の場で慎重に検討され国民的議論が十分尽くされるべきとの認識を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/106223/10/1//0/0",
+              "speakerSection": "pos=106223"
+            },
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/108423/10/1//0/0",
+              "speakerSection": "pos=108423"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。平田議員の質問には、国政に関する所見を求める部分など、市政運営と直接関わらない項目も含まれていましたが、当サイトは特定の政党・政治家を評価しない方針のため、市政運営に関する地域新電力会社の質問項目のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、救急車出動待機時間の答弁が未確認のためpendingとしている。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年12月定例会（2024年12月3日）分を追加した。"
@@ -63677,6 +64178,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/81183/10/1//0/0",
               "speakerSection": "pos=81183"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m22-2021-12-ippan-shitsumon",
+          "memberId": "m22",
+          "sessionId": "2021-12",
+          "date": "2021-12-07",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "延岡経済リンケージ機構"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第2号）で松田満男議員が行った一般質問のうち、（仮称）延岡経済リンケージ機構の人材確保・代表者選任に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "延岡経済リンケージ機構の人材確保と代表者の選任",
+              "questionSummary": "来年1月設立予定の（仮称）延岡経済リンケージ機構について、調整力や企業経営等の高いスキルを持った人材の確保状況と、任意団体・協議会としての代表者の就任予定者を質問した。",
+              "answerSummary": "本年5月に延岡経済リンケージ協議会を設立し、8月の第2回総会で機構を令和4年1月中に市が設置し、事業統括責任者に商工行政に精通した市の管理職経験者を設置することが承認されたこと、機構の長は協議会での協議により市長が務めることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m22",
+                  "summary": "来年1月設立予定の（仮称）延岡経済リンケージ機構について、調整力や企業経営等の高いスキルを持った人材の確保状況と、任意団体・協議会としての代表者の就任予定者を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "本年5月に延岡経済リンケージ協議会を設立し、8月の第2回総会で機構を令和4年1月中に市が設置し、事業統括責任者に商工行政に精通した市の管理職経験者を設置することが承認されたこと、機構の長は協議会での協議により市長が務めることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "実施時期の確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/99060/10/1//0/0",
+              "speakerSection": "pos=99060"
+            },
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/103026/10/1//0/0",
+              "speakerSection": "pos=103026"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -68292,6 +68855,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040310A/168540/10/1//0/0",
               "speakerSection": "pos=168540"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m23-2021-12-ippan-shitsumon",
+          "memberId": "m23",
+          "sessionId": "2021-12",
+          "date": "2021-12-09",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "貧困対策"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第4号）で峯田克明議員（無会派）が行った一般質問のうち、本市の相対的貧困の実情への認識に関する部分と健康福祉部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "本市の相対的貧困の実情への認識",
+              "questionSummary": "全国及び本市の平均所得のデータを踏まえ、本市の相対的貧困の実情について当局の認識を質問した。",
+              "answerSummary": "国民生活基礎調査の相対的貧困率と単純比較はできないとしつつ、市内小中学校の就学援助認定者数が令和2年度1,445名から令和3年8月末1,378名と微減にとどまっていることや、生活福祉資金貸付の申請件数が増加していることから、子供のいる世帯を含め経済的貧困の現状は変わらず深刻と認識していると説明した。",
+              "answerers": [
+                "健康福祉部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m23",
+                  "summary": "全国及び本市の平均所得のデータを踏まえ、本市の相対的貧困の実情について当局の認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "国民生活基礎調査の相対的貧困率と単純比較はできないとしつつ、市内小中学校の就学援助認定者数が令和2年度1,445名から令和3年8月末1,378名と微減にとどまっていることや、生活福祉資金貸付の申請件数が増加していることから、子供のいる世帯を含め経済的貧困の現状は変わらず深刻と認識していると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/40868/10/1//0/0",
+              "speakerSection": "pos=40868"
+            },
+            {
+              "title": "令和 3年第17回定例会（第4号12月 9日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/44094/10/1//0/0",
+              "speakerSection": "pos=44094"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -79886,8 +80511,8 @@
         "from": "2023-06-28",
         "to": "2024-12-04"
       },
-      "analyzedSessionCount": 6,
-      "sessionsWithSpeechCount": 6,
+      "analyzedSessionCount": 7,
+      "sessionsWithSpeechCount": 7,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -81605,6 +82230,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm01-2021-12-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2021-12",
+          "date": "2021-12-07",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "長浜・方財海岸の侵食"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第2号）で吉本靖議員（旧任期）が行った一般質問のうち、長浜・方財海岸の海岸侵食に対する現状認識に関する部分と都市建設部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "長浜・方財海岸の海岸侵食に対する現状認識",
+              "questionSummary": "長浜・方財海岸で侵食が激しく進み、施設の倒壊や護岸の陥没等が発生している状況を踏まえ、海岸侵食の現状について市当局がどのように捉えているか、現状認識を質問した。",
+              "answerSummary": "今年3月の宮崎県主催の地元意見交換会では、県から現状は著しい侵食傾向にないとの説明があったが、地元の方々からは砂浜が狭くなっているとの指摘が多く、県の認識と地域住民・市の見解は一致していないと説明した。",
+              "answerers": [
+                "都市建設部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "長浜・方財海岸で侵食が激しく進み、施設の倒壊や護岸の陥没等が発生している状況を踏まえ、海岸侵食の現状について市当局がどのように捉えているか、現状認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "今年3月の宮崎県主催の地元意見交換会では、県から現状は著しい侵食傾向にないとの説明があったが、地元の方々からは砂浜が狭くなっているとの指摘が多く、県の認識と地域住民・市の見解は一致していないと説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/44326/10/1//0/0",
+              "speakerSection": "pos=44326"
+            },
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/49410/10/1//0/0",
+              "speakerSection": "pos=49410"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
@@ -82781,8 +83467,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 2,
-      "sessionsWithSpeechCount": 2,
+      "analyzedSessionCount": 3,
+      "sessionsWithSpeechCount": 3,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -82908,6 +83594,67 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040622A/9936/10/1//0/0",
               "speakerSection": "pos=9936"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm08-2021-12-ippan-shitsumon",
+          "memberId": "fm08",
+          "sessionId": "2021-12",
+          "date": "2021-12-07",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "スーパーシティ構想"
+          ],
+          "shortSummary": "令和3年12月定例会（第17回定例会、第2号）で下田英樹議員（旧任期）が行った一般質問のうち、スーパーシティ構想がもたらす延岡市の未来像に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "スーパーシティ構想がもたらす延岡市の未来像",
+              "questionSummary": "延岡市が今年4月に申請したスーパーシティ構想（国家戦略特別区域法）について、それがもたらす延岡市の未来像を質問した。",
+              "answerSummary": "スーパーシティとは各分野のスマート化を交通・防災・教育など市民生活に直結する分野へ広げ、都会との格差をなくす「丸ごと未来都市」の実現を目指すものであり、誰一人取り残さない教育、東京大学と連携した公共交通・防災対策の構築、空飛ぶクルマの救急医療活用など様々な提案を行っていると説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm08",
+                  "summary": "延岡市が今年4月に申請したスーパーシティ構想（国家戦略特別区域法）について、それがもたらす延岡市の未来像を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "スーパーシティとは各分野のスマート化を交通・防災・教育など市民生活に直結する分野へ広げ、都会との格差をなくす「丸ごと未来都市」の実現を目指すものであり、誰一人取り残さない教育、東京大学と連携した公共交通・防災対策の構築、空飛ぶクルマの救急医療活用など様々な提案を行っていると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "今後の方針の確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/71382/10/1//0/0",
+              "speakerSection": "pos=71382"
+            },
+            {
+              "title": "令和 3年第17回定例会（第2号12月 7日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/74952/10/1//0/0",
+              "speakerSection": "pos=74952"
             }
           ],
           "verifiedAt": "2026-08-05",
