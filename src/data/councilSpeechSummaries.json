@@ -2717,12 +2717,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 5,
-      "sessionsWithSpeechCount": 5,
+      "analyzedSessionCount": 6,
+      "sessionsWithSpeechCount": 6,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 21,
-      "lastAnalyzedAt": "2026-08-04",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "第三セクターへの職員関与",
@@ -5572,6 +5572,68 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 181-230）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。副市長（山本一丸）が答弁を保留した第三者権利の有無については、質問終了後の同日会議内で追加回答があり、その内容も含めて整理した。令和7年3月定例会（2025年3月6日）分として新規登録した。"
+        },
+        {
+          "id": "m02-2022-12-07-ippan-shitsumon",
+          "memberId": "m02",
+          "sessionId": "2022-12",
+          "date": "2022-12-07",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "医療・健康"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第3号）で猪之鼻哲議員（現職継続）が行った一般質問のうち、新型コロナワクチンの安全性に対する認識に関する部分と健康福祉部参事の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナワクチンの安全性に対する認識",
+              "questionSummary": "新型コロナワクチン接種後の死亡・重篤な副反応の報告件数が他ワクチンと比べて多いとされる中、当局としての現状認識を質問した。",
+              "answerSummary": "国において臨床試験等を実施し安全性・効果の厳格な評価を経て薬事承認されたワクチンであると認識していること、接種は強制ではなく市民が正しい知識を持った上で判断できるよう接種券発送時に説明書等を同封していることを説明した。",
+              "answerers": [
+                "健康福祉部参事"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m02",
+                  "summary": "新型コロナワクチン接種後の死亡・重篤な副反応の報告件数が他ワクチンと比べて多いとされる中、当局としての現状認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部参事",
+                  "summary": "国において臨床試験等を実施し安全性・効果の厳格な評価を経て薬事承認されたワクチンであると認識していること、接種は強制ではなく市民が正しい知識を持った上で判断できるよう接種券発送時に説明書等を同封していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/42610/10/1//0/0",
+              "speakerSection": "pos=42610"
+            },
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/44340/10/1//0/0",
+              "speakerSection": "pos=44340"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。猪之鼻議員の一般質問には、この要約に含めた1テーマ以外にも、デジタル・コックピット事業、延岡城三階櫓復元、子供の遊び場、西階公園プールなど複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025-03-06）の一般質問データを公式会議録より登録。"
@@ -5585,8 +5647,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 10,
-      "sessionsWithSpeechCount": 10,
+      "analyzedSessionCount": 11,
+      "sessionsWithSpeechCount": 11,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 17,
@@ -10961,6 +11023,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050307A/75868/10/1//0/0",
               "speakerSection": "pos=75868"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m03-2022-12-07-ippan-shitsumon",
+          "memberId": "m03",
+          "sessionId": "2022-12",
+          "date": "2022-12-07",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "市長の政治姿勢"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第3号）で上杉泰洋議員（現職継続）が行った一般質問のうち、市長の十の提言政策の進捗確認に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "十の提言政策の進捗状況確認で心がけていること",
+              "questionSummary": "市長公約である「十の提言」の進捗状況を確認する際に心がけていることを質問した。",
+              "answerSummary": "「安く暮らせる延岡づくり」（地域新電力会社の調査継続、高齢者バス利用助成拡充等）、「逃げ遅れゼロの防災対策」（避難場所の自動鍵ボックス化等）、「子育てするなら延岡」（保育料引下げ、放課後児童クラブの受入学年拡大）等、各提言の進捗状況を具体的に説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m03",
+                  "summary": "市長公約である「十の提言」の進捗状況を確認する際に心がけていることを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "「安く暮らせる延岡づくり」（地域新電力会社の調査継続、高齢者バス利用助成拡充等）、「逃げ遅れゼロの防災対策」（避難場所の自動鍵ボックス化等）、「子育てするなら延岡」（保育料引下げ、放課後児童クラブの受入学年拡大）等、各提言の進捗状況を具体的に説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/111014/10/1//0/0",
+              "speakerSection": "pos=111014"
+            },
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/113294/10/1//0/0",
+              "speakerSection": "pos=113294"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -18208,12 +18332,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 6,
-      "sessionsWithSpeechCount": 6,
+      "analyzedSessionCount": 7,
+      "sessionsWithSpeechCount": 7,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 20,
-      "lastAnalyzedAt": "2026-08-04",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "国スポ・障スポリハーサル大会",
@@ -20860,6 +20984,68 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 4-46）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。令和7年3月定例会（2025年3月6日）分として新規登録した。"
+        },
+        {
+          "id": "m06-2022-12-07-ippan-shitsumon",
+          "memberId": "m06",
+          "sessionId": "2022-12",
+          "date": "2022-12-07",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "教育"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第3号）で甲斐行雄議員（現職継続）が行った一般質問のうち、本市教育の現状と将来のビジョンに関する部分と教育長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "わかあゆ教育プラン改定後の教育施策への取り組み",
+              "questionSummary": "本年度改定されたわかあゆ教育プランの下での本市教育の取り組みについて質問した。",
+              "answerSummary": "改定したわかあゆ教育プランは市民の願いを構築したもので、3つの基本目標に基づき各学校で特色ある取り組みが展開されていること（例：北浦クルージングを取り入れた学習、幼保小連携会議での研修等）を説明した。",
+              "answerers": [
+                "教育長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m06",
+                  "summary": "本年度改定されたわかあゆ教育プランの下での本市教育の取り組みについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育長",
+                  "summary": "改定したわかあゆ教育プランは市民の願いを構築したもので、3つの基本目標に基づき各学校で特色ある取り組みが展開されていること（例：北浦クルージングを取り入れた学習、幼保小連携会議での研修等）を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/11240/10/1//0/0",
+              "speakerSection": "pos=11240"
+            },
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/14322/10/1//0/0",
+              "speakerSection": "pos=14322"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "令和7年12月定例会（2025年12月3日）分について、甲斐（行）議員の一般質問には、予算編成テーマ以外にも、北方地域ユネスコエコパーク宿泊滞在型施設等整備に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年9月定例会（2025年9月10日）分について、甲斐（行）議員の一般質問には、この要約に含めた1テーマ以外にも、須美江家族旅行村の宿泊施設整備に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月6日）分（代表質問）を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和7年3月定例会（2025年3月6日）分を追加した。"
@@ -38562,12 +38748,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 10,
-      "sessionsWithSpeechCount": 10,
+      "analyzedSessionCount": 11,
+      "sessionsWithSpeechCount": 11,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 16,
-      "lastAnalyzedAt": "2026-08-04",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "学校のタブレット整備",
@@ -43275,6 +43461,69 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）をすべて取得し、内容、発言者、質問と答弁の対応関係を確認した。柴議員の発言は同日の代表質問（小野挙議員等）のテーマに連なる関連質問であり、6項目とも一問一答形式で正確に対応関係を確認できた。令和8年3月定例会（2026年2月26日）分として新規登録した。"
+        },
+        {
+          "id": "m14-2022-12-08-ippan-shitsumon",
+          "memberId": "m14",
+          "sessionId": "2022-12",
+          "date": "2022-12-08",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "農業",
+            "環境"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第4号）で柴浩信議員（現職継続）が行った一般質問のうち、延岡地区有機肥料センターの機能強化に関する部分と農林水産部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "延岡地区有機肥料センターの処理能力・人員の機能強化",
+              "questionSummary": "台風被害時の受入れ逼迫や肥料価格高騰を踏まえ、延岡地区有機肥料センターの処理能力・人員等の機能強化の考えを質問した。",
+              "answerSummary": "肥料価格高騰対策として国事業への独自上乗せ支援を行い堆肥利用を促進していること、主要設備は平成25〜27年度のストックマネジメント事業で更新済みで、その後も必要な支援を継続しており、今年度は家畜排せつ物収集車両の更新を支援していることを説明した。",
+              "answerers": [
+                "農林水産部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m14",
+                  "summary": "台風被害時の受入れ逼迫や肥料価格高騰を踏まえ、延岡地区有機肥料センターの処理能力・人員等の機能強化の考えを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "農林水産部長",
+                  "summary": "肥料価格高騰対策として国事業への独自上乗せ支援を行い堆肥利用を促進していること、主要設備は平成25〜27年度のストックマネジメント事業で更新済みで、その後も必要な支援を継続しており、今年度は家畜排せつ物収集車両の更新を支援していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/81948/10/1//0/0",
+              "speakerSection": "pos=81948"
+            },
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/83484/10/1//0/0",
+              "speakerSection": "pos=83484"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月26日、一般質問）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。 令和5年6月定例会（2023年6月27日、初当選後二期目の一般質問）分を追加した。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
@@ -52239,7 +52488,7 @@
       "sessionsWithSpeechCount": 0,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
-      "unfetchedSessionCount": 27,
+      "unfetchedSessionCount": 28,
       "lastAnalyzedAt": null,
       "topicCounts": [],
       "speeches": []
@@ -52253,12 +52502,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 7,
-      "sessionsWithSpeechCount": 7,
+      "analyzedSessionCount": 8,
+      "sessionsWithSpeechCount": 8,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 19,
-      "lastAnalyzedAt": "2026-08-04",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "南延岡駅バリアフリー化",
@@ -54706,6 +54955,69 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 120-160）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。令和6年12月定例会（2024年12月4日）分を追加した。"
+        },
+        {
+          "id": "m19-2022-12-07-ippan-shitsumon",
+          "memberId": "m19",
+          "sessionId": "2022-12",
+          "date": "2022-12-07",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公共交通",
+            "バリアフリー"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第3号）で比江島久美子議員（現職継続）が行った一般質問のうち、南延岡駅の現状に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "南延岡駅の窓口業務時間短縮・バリアフリー化等の現状への認識",
+              "questionSummary": "南延岡駅の窓口業務時間の短縮や、案内表示の撤去、バリアフリー未対応の現状について、市の認識を質問した。",
+              "answerSummary": "駅はJR九州の施設であり本来同社が解決すべき問題としつつ、市長就任後もJR九州へバリアフリー化改修を直接要請してきたこと、南延岡駅バリアフリー化促進期成会の署名（41,672人分）と連携し働きかけを行っていること、窓口営業時間短縮についても大分県側自治体と連携して回復を要請していることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m19",
+                  "summary": "南延岡駅の窓口業務時間の短縮や、案内表示の撤去、バリアフリー未対応の現状について、市の認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "駅はJR九州の施設であり本来同社が解決すべき問題としつつ、市長就任後もJR九州へバリアフリー化改修を直接要請してきたこと、南延岡駅バリアフリー化促進期成会の署名（41,672人分）と連携し働きかけを行っていること、窓口営業時間短縮についても大分県側自治体と連携して回復を要請していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/78446/10/1//0/0",
+              "speakerSection": "pos=78446"
+            },
+            {
+              "title": "令和4年第28回定例会 第3号12月7日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041207A/91032/10/1//0/0",
+              "speakerSection": "pos=91032"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。比江島議員の一般質問には、この要約に含めた1テーマ以外にも、軟骨伝導イヤホン、AEDケース屋外設置化など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年6月定例会（2025年6月17日）分について、比江島議員の一般質問には、この要約に含めた1テーマ以外にも、自転車ヘルメット着用、アピアランスケア助成、南部地域開発（道の駅）など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、答弁未確認の3テーマをpendingとして記録している。 令和6年3月定例会（2024年3月6日）分（代表質問）を追加した。 令和6年6月定例会（2024年6月25日）分を追加した。 令和6年12月定例会（2024年12月4日）分を追加した。"
@@ -54719,12 +55031,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 7,
-      "sessionsWithSpeechCount": 7,
+      "analyzedSessionCount": 8,
+      "sessionsWithSpeechCount": 8,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 19,
-      "lastAnalyzedAt": "2026-08-03",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "地域新電力会社設立",
@@ -57677,6 +57989,69 @@
           ],
           "verifiedAt": "2026-08-03",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 42-75）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。議会事務局職員人事を巡る市長の発言については、公式会議録の記載のみに基づき、双方の主張を中立的に要約した。令和6年12月定例会（2024年12月3日）分を追加した。"
+        },
+        {
+          "id": "m20-2022-12-08-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2022-12",
+          "date": "2022-12-08",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政・政治",
+            "デジタル"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第4号）で平田信広議員（現職継続）が行った総括質疑及び一般質問のうち、マイナンバーカードの健康保険証利用に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "マイナンバーカードと健康保険証の一体化についての懸念",
+              "questionSummary": "健康保険証を廃止しマイナンバーカードへ一体化する国の方針について、情報流出等への懸念を踏まえて質問した。",
+              "answerSummary": "マイナンバーカードと保険証の一体化により医療機関間での情報共有や限度額適用認定証申請の省略等の利便性向上が見込まれること、マイナンバーカード自体には医療情報が保存されない仕組みのため情報流出の心配はないと考えていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "健康保険証を廃止しマイナンバーカードへ一体化する国の方針について、情報流出等への懸念を踏まえて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "マイナンバーカードと保険証の一体化により医療機関間での情報共有や限度額適用認定証申請の省略等の利便性向上が見込まれること、マイナンバーカード自体には医療情報が保存されない仕組みのため情報流出の心配はないと考えていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/47782/10/1//0/0",
+              "speakerSection": "pos=47782"
+            },
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/49954/10/1//0/0",
+              "speakerSection": "pos=49954"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。平田議員の質問には、国政に関する所見を求める部分など、市政運営と直接関わらない項目も含まれていましたが、当サイトは特定の政党・政治家を評価しない方針のため、市政運営に関する地域新電力会社の質問項目のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、救急車出動待機時間の答弁が未確認のためpendingとしている。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年12月定例会（2024年12月3日）分を追加した。"
@@ -60723,12 +61098,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 2,
-      "sessionsWithSpeechCount": 2,
+      "analyzedSessionCount": 3,
+      "sessionsWithSpeechCount": 3,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 24,
-      "lastAnalyzedAt": "2026-08-03",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "人事",
@@ -61557,6 +61932,68 @@
           ],
           "verifiedAt": "2026-08-03",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 4-53）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。市長と松田議員の間で事実関係の主張が対立している箇所については、いずれか一方の主張を正しいと断定せず、公式会議録に記載された双方の発言をそのまま中立的に要約した。令和6年9月定例会（2024年9月11日）分を追加した。"
+        },
+        {
+          "id": "m22-2022-12-06-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m22",
+          "sessionId": "2022-12",
+          "date": "2022-12-06",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "デジタル"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第2号）で松田満男議員（現職継続、会派代表）が行った総括質疑及び一般質問のうち、ポータルアプリ構築事業に関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "ポータルアプリ構築事業の完成時期と周知方法",
+              "questionSummary": "のべおかCOIN・健康マイレージ・防災のべおかの3アプリの会員情報登録等を一元化するポータルアプリについて、完成時期と周知方法を質問した。",
+              "answerSummary": "12月1日に「のべおかポータル」の名称で公開・運用を開始したこと、公式ホームページやSNS、ポスター等で周知しているほか、今後はYouTube動画配信やスマートフォン教室でのインストール補助等も予定していることを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m22",
+                  "summary": "のべおかCOIN・健康マイレージ・防災のべおかの3アプリの会員情報登録等を一元化するポータルアプリについて、完成時期と周知方法を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "12月1日に「のべおかポータル」の名称で公開・運用を開始したこと、公式ホームページやSNS、ポスター等で周知しているほか、今後はYouTube動画配信やスマートフォン教室でのインストール補助等も予定していることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "実施時期の確認",
+              "answerStatus": "実施済み"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/14757/10/1//0/0",
+              "speakerSection": "pos=14757"
+            },
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/18472/10/1//0/0",
+              "speakerSection": "pos=18472"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "松田議員は令和6年1月に膵臓がんの診断を受け治療中であることを冒頭で述べているが、この点は個人の健康情報であり要約には含めていない。今回要約した一般質問（一括質問方式）には、上記5テーマ以外の質問項目は含まれていなかった（原文を確認したうえで全項目を要約対象とした）。 令和6年9月定例会（2024年9月11日）分を追加した。"
@@ -61570,12 +62007,12 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 9,
-      "sessionsWithSpeechCount": 9,
+      "analyzedSessionCount": 10,
+      "sessionsWithSpeechCount": 10,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 17,
-      "lastAnalyzedAt": "2026-08-04",
+      "lastAnalyzedAt": "2026-08-05",
       "topicCounts": [
         {
           "topic": "東九州新幹線",
@@ -65921,6 +66358,69 @@
           ],
           "verifiedAt": "2026-08-04",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ、orders 50-95）を取得し、内容、発言者、質問と答弁の対応関係を確認した。壇上の質問及び全再質問について答弁本文を確認できた。質問項目が多岐にわたるため、各項目は要点を中心に要約した。令和6年12月定例会（2024年12月5日）分を追加した。"
+        },
+        {
+          "id": "m23-2022-12-08-ippan-shitsumon",
+          "memberId": "m23",
+          "sessionId": "2022-12",
+          "date": "2022-12-08",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防災",
+            "台風14号被害"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第4号）で峯田克明議員（現職継続）が行った一般質問のうち、台風14号浸水被害を踏まえた住宅・公共施設の高台移転・かさ上げ助成に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "浸水被害を受けた住宅・公共施設の高台移転・かさ上げへの助成",
+              "questionSummary": "台風14号による浸水被害を踏まえ、住宅・公共施設の高台移転やかさ上げへの助成の考えを質問した。",
+              "answerSummary": "五ヶ瀬川流域では県管理区間で輪中堤・宅地かさ上げ等の土地利用一体型水防災事業を実施してきたが、未対策の地区も多く残っており、県へ新規採択・早期実施を要請していくこと、北方総合支所については台風14号浸水（内水）対策検証事業でパイピング現象の調査・分析も行い実現可能な浸水軽減策を検討していく考えであることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m23",
+                  "summary": "台風14号による浸水被害を踏まえ、住宅・公共施設の高台移転やかさ上げへの助成の考えを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "五ヶ瀬川流域では県管理区間で輪中堤・宅地かさ上げ等の土地利用一体型水防災事業を実施してきたが、未対策の地区も多く残っており、県へ新規採択・早期実施を要請していくこと、北方総合支所については台風14号浸水（内水）対策検証事業でパイピング現象の調査・分析も行い実現可能な浸水軽減策を検討していく考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/118136/10/1//0/0",
+              "speakerSection": "pos=118136"
+            },
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/119480/10/1//0/0",
+              "speakerSection": "pos=119480"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。峯田議員の一般質問は13項目にわたる非常に長いものであり、この要約に含めた1テーマ（シンポジウム配信対応）以外にも、東九州新幹線の実現可能性、期成会の民間主導化、国際観光旅客税の活用など多数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年6月定例会（2025年6月18日）分について、峯田議員の一般質問には、この要約に含めた1テーマ以外にも、市長辞職後の事業継承に関する質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日、二期目の一般質問）分を追加した。 令和5年9月定例会（2023年9月5日）分は、消防本部浸水対策の答弁が未確認のためpendingとしている。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月25日）分を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
@@ -77510,8 +78010,8 @@
         "from": "2023-06-28",
         "to": "2024-12-04"
       },
-      "analyzedSessionCount": 4,
-      "sessionsWithSpeechCount": 4,
+      "analyzedSessionCount": 5,
+      "sessionsWithSpeechCount": 5,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -79105,6 +79605,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を取得し、内容、発言者、質問と答弁の対応関係を確認した。吉本靖氏は当時の在職議員（現在は元議員、formerMembers.json参照）。監査（docs/minutes-reflection-audit.md）で判明していた未登録分として今回新規登録した。質問には、この要約に含めた項目以外にも複数の細目（例：料金所建設の経緯、要望活動の日程等）が含まれるが、主要な論点のみを要約対象としている。"
+        },
+        {
+          "id": "fm01-2022-12-06-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2022-12",
+          "date": "2022-12-06",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "環境",
+            "産業廃棄物"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第2号）で吉本靖議員（旧任期）が行った一般質問のうち、熊本県山都町の産業廃棄物最終処分場事業計画に関する部分と市民環境部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "熊本県山都町の産業廃棄物最終処分場事業計画の経緯と影響",
+              "questionSummary": "熊本県山都町蘇陽地区で計画されている産業廃棄物最終処分場について、これまでの経緯と影響を質問した。",
+              "answerSummary": "報道を受け宮崎県・西臼杵三町と協議し、熊本県へ住民説明会開催や環境配慮書の縦覧期間延長を要請したこと、延岡市内での住民説明会開催や五ヶ瀬川への影響に関する詳しい証明の記載などを事業者へ要請したこと、9月14日に事業者が事業計画見直しに伴う環境配慮書の廃止手続を公表したことを説明した。",
+              "answerers": [
+                "市民環境部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "熊本県山都町蘇陽地区で計画されている産業廃棄物最終処分場について、これまでの経緯と影響を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "報道を受け宮崎県・西臼杵三町と協議し、熊本県へ住民説明会開催や環境配慮書の縦覧期間延長を要請したこと、延岡市内での住民説明会開催や五ヶ瀬川への影響に関する詳しい証明の記載などを事業者へ要請したこと、9月14日に事業者が事業計画見直しに伴う環境配慮書の廃止手続を公表したことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "調査・研究"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/112312/10/1//0/0",
+              "speakerSection": "pos=112312"
+            },
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/119644/10/1//0/0",
+              "speakerSection": "pos=119644"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
@@ -79567,6 +80129,251 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050309A/172385/10/1//0/0",
               "speakerSection": "pos=172385"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        }
+      ],
+      "isFormerMember": true
+    },
+    {
+      "memberId": "fm07",
+      "analysisPeriod": {
+        "from": null,
+        "to": null
+      },
+      "scope": [
+        "plenary"
+      ],
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
+      "sessionsWithoutSpeechCount": 0,
+      "unavailableSessionCount": 0,
+      "unfetchedSessionCount": 0,
+      "lastAnalyzedAt": "2026-08-05",
+      "topicCounts": [],
+      "speeches": [
+        {
+          "id": "fm07-2022-12-06-ippan-shitsumon",
+          "memberId": "fm07",
+          "sessionId": "2022-12",
+          "date": "2022-12-06",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政・政治",
+            "社会保障"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第2号）で松本哲也議員（旧任期）が行った一般質問のうち、国の防衛費・社会保障政策への受け止めに関する部分と市長の答弁を要約したもの。現行議員任期（2023-04-23執行の選挙）の現職議員名簿には該当がなく、元議員として登録している。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "国の防衛費増額・社会保障負担増への受け止め",
+              "questionSummary": "防衛費の増額方針や、年金支給額の引下げ・後期高齢者医療費の自己負担割合引上げなど社会保障の負担増が検討される中、市長の受け止めを質問した。",
+              "answerSummary": "国民生活への影響が大きい事項は国会でしっかり議論してほしいと考えていること、市として介護保険料・国民健康保険税値上げストップ作戦を今年度から開始したこと、コロナ禍や物価高への対応として約335億円の市の対策を講じてきたことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm07",
+                  "summary": "防衛費の増額方針や、年金支給額の引下げ・後期高齢者医療費の自己負担割合引上げなど社会保障の負担増が検討される中、市長の受け止めを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "国民生活への影響が大きい事項は国会でしっかり議論してほしいと考えていること、市として介護保険料・国民健康保険税値上げストップ作戦を今年度から開始したこと、コロナ禍や物価高への対応として約335億円の市の対策を講じてきたことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/49146/10/1//0/0",
+              "speakerSection": "pos=49146"
+            },
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/51596/10/1//0/0",
+              "speakerSection": "pos=51596"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        }
+      ],
+      "isFormerMember": true
+    },
+    {
+      "memberId": "fm08",
+      "analysisPeriod": {
+        "from": null,
+        "to": null
+      },
+      "scope": [
+        "plenary"
+      ],
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
+      "sessionsWithoutSpeechCount": 0,
+      "unavailableSessionCount": 0,
+      "unfetchedSessionCount": 0,
+      "lastAnalyzedAt": "2026-08-05",
+      "topicCounts": [],
+      "speeches": [
+        {
+          "id": "fm08-2022-12-06-ippan-shitsumon",
+          "memberId": "fm08",
+          "sessionId": "2022-12",
+          "date": "2022-12-06",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公共交通",
+            "都市基盤"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第2号）で下田英樹議員（旧任期）が行った一般質問のうち、延岡駅東口トイレの設置に関する部分と商工観光文化部長の答弁を要約したもの。現行議員任期（2023-04-23執行の選挙）の現職議員名簿には該当がなく、元議員として登録している。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "延岡駅東口トイレの設置",
+              "questionSummary": "延岡駅東口にトイレがないことについて、設置の考えを質問した。",
+              "answerSummary": "東口広場は平成29年度に景観に配慮したコンクリートブロック舗装で整備済みのため、トイレ設置には手戻り工事や2,200万円以上の整備費、清掃・防犯管理経費がかかること、地元からの要望も認識しており、費用対効果や維持管理面を含め総合的に検討していく考えであることを説明した。",
+              "answerers": [
+                "商工観光文化部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm08",
+                  "summary": "延岡駅東口にトイレがないことについて、設置の考えを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "東口広場は平成29年度に景観に配慮したコンクリートブロック舗装で整備済みのため、トイレ設置には手戻り工事や2,200万円以上の整備費、清掃・防犯管理経費がかかること、地元からの要望も認識しており、費用対効果や維持管理面を含め総合的に検討していく考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/83646/10/1//0/0",
+              "speakerSection": "pos=83646"
+            },
+            {
+              "title": "令和4年第28回定例会 第2号12月6日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041206A/86236/10/1//0/0",
+              "speakerSection": "pos=86236"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        }
+      ],
+      "isFormerMember": true
+    },
+    {
+      "memberId": "fm09",
+      "analysisPeriod": {
+        "from": null,
+        "to": null
+      },
+      "scope": [
+        "plenary"
+      ],
+      "analyzedSessionCount": 1,
+      "sessionsWithSpeechCount": 1,
+      "sessionsWithoutSpeechCount": 0,
+      "unavailableSessionCount": 0,
+      "unfetchedSessionCount": 0,
+      "lastAnalyzedAt": "2026-08-05",
+      "topicCounts": [],
+      "speeches": [
+        {
+          "id": "fm09-2022-12-08-ippan-shitsumon",
+          "memberId": "fm09",
+          "sessionId": "2022-12",
+          "date": "2022-12-08",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "文化・芸術"
+          ],
+          "shortSummary": "令和4年12月定例会（第28回定例会、第4号）で松田勝則議員（旧任期）が行った一般質問のうち、郷土芸能の無形民俗文化財指定に関する部分と教育部長の答弁を要約したもの。現行議員任期（2023-04-23執行の選挙）の現職議員名簿には該当がなく、元議員として登録している。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "郷土芸能を無形民俗文化財に指定することについて",
+              "questionSummary": "延岡市の郷土芸能・民俗芸能の無形民俗文化財への指定について、その後の検討状況を質問した。",
+              "answerSummary": "これまでに県指定1件・市指定2件の計3件が無形民俗文化財の指定を受けていること、指定を受けると出演機会が増え後継者の意欲醸成につながっていること、市史編さん事業や県による神楽の現地調査の結果を踏まえ、今後の指定に向け検討していく考えであることを説明した。",
+              "answerers": [
+                "教育部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm09",
+                  "summary": "延岡市の郷土芸能・民俗芸能の無形民俗文化財への指定について、その後の検討状況を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育部長",
+                  "summary": "これまでに県指定1件・市指定2件の計3件が無形民俗文化財の指定を受けていること、指定を受けると出演機会が増え後継者の意欲醸成につながっていること、市史編さん事業や県による神楽の現地調査の結果を踏まえ、今後の指定に向け検討していく考えであることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/11566/10/1//0/0",
+              "speakerSection": "pos=11566"
+            },
+            {
+              "title": "令和4年第28回定例会 第4号12月8日 （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/13590/10/1//0/0",
+              "speakerSection": "pos=13590"
             }
           ],
           "verifiedAt": "2026-08-05",
