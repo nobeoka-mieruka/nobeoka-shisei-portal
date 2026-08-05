@@ -2953,6 +2953,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m01-2020-09-ippan-shitsumon",
+          "memberId": "m01",
+          "sessionId": "2020-09",
+          "date": "2020-09-15",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第4号）で稲田雅之議員が行った一般質問のうち、第二次安倍政権に対する評価と新政権に対する期待に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "第二次安倍政権への評価と新政権への期待",
+              "questionSummary": "7年9か月に及んだ第二次安倍政権のアベノミクス等の成果を踏まえ、市長の評価と新政権への期待を質問した。",
+              "answerSummary": "地方自治体の首長として地方分権が大きなテーマにならなかったことを残念に思うとした上で、国土強靭化での予算確保には感謝しつつ分権的な視点をさらに求めたいこと、電力制度改革により2016年から地域新電力の設立が可能になったことは市民に安い電気を供給し財源を増やす政策につながり、その活用が市に課せられた使命と考えていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m01",
+                  "summary": "7年9か月に及んだ第二次安倍政権のアベノミクス等の成果を踏まえ、市長の評価と新政権への期待を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "地方自治体の首長として地方分権が大きなテーマにならなかったことを残念に思うとした上で、国土強靭化での予算確保には感謝しつつ分権的な視点をさらに求めたいこと、電力制度改革により2016年から地域新電力の設立が可能になったことは市民に安い電気を供給し財源を増やす政策につながり、その活用が市に課せられた使命と考えていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/166034/10/1//0/0",
+              "speakerSection": "pos=166034"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/179000/10/1//0/0",
+              "speakerSection": "pos=179000"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。稲田議員の一般質問には、この要約に含めた1テーマ以外にも、令和8年度当初予算編成方針、財源調整用基金、自衛隊駐屯地等の誘致など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年6月定例会（2025年6月17日）分について、稲田議員の一般質問には、この要約に含めた1テーマ以外にも、市長退任に伴う施策の継続性、シルバー人材センター跡地の利活用、ゼロカーボンシティ推進事業など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月27日）分について、質問冒頭で在職20年表彰に触れているが個人的な事柄のため要約には含めていない。壇上での8テーマのうち、答弁本文で直接の回答を確認できたのはデジタル田園都市国家構想交付金事業・宮崎県置県140年・地域新電力会社創業事業計画の3テーマのみで、残り3テーマ（津波二次避難・脱炭素先行地域のメンテナンス支援・道路インフラ）は答弁未確認のため今後の追加取得の対象としている。 令和5年12月定例会（2023年12月6日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年12月定例会（2024年12月4日）分を追加した。 令和7年3月定例会（2025年3月4日）分を追加した。"
@@ -11964,6 +12026,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m03-2020-09-ippan-shitsumon",
+          "memberId": "m03",
+          "sessionId": "2020-09",
+          "date": "2020-09-16",
+          "meetingNumber": "第5号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "外交",
+            "国際情勢"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第5号）で上杉泰洋議員が行った一般質問のうち、国際情勢に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "尖閣諸島・南シナ海・香港をめぐる国際情勢",
+              "questionSummary": "国際情勢について質問した。",
+              "answerSummary": "尖閣諸島は我が国固有の領土であり領有権問題は存在せず、南シナ海問題では緊張を高める行為への反対を日本政府が声明していること、香港国家安全法制定等に対しても政府が遺憾の意を表明していることを紹介した上で、外交は国の専管事項だが現状は深く憂慮すべき事態であり、中国政府・共産党が国際世論を真摯に受け止め国際法を遵守すべきと考えていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m03",
+                  "summary": "国際情勢について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "尖閣諸島は我が国固有の領土であり領有権問題は存在せず、南シナ海問題では緊張を高める行為への反対を日本政府が声明していること、香港国家安全法制定等に対しても政府が遺憾の意を表明していることを紹介した上で、外交は国の専管事項だが現状は深く憂慮すべき事態であり、中国政府・共産党が国際世論を真摯に受け止め国際法を遵守すべきと考えていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/68636/10/1//0/0",
+              "speakerSection": "pos=68636"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/71362/10/1//0/0",
+              "speakerSection": "pos=71362"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。上杉議員の代表質問には、この要約に含めた2テーマ（市長の政治姿勢・予算編成）以外にも、第七次長期総合計画（挑戦の考え方）、東九州新幹線、臨時経済対策事業など多数の質問項目がありますが、対応する答弁本文の一部（企画部長答弁以降）を今回は未取得のため、市長答弁で確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年3月定例会（2024年3月5日）分（関連質問）を追加した。 令和6年6月定例会（2024年6月25日）分を追加した。 令和6年9月定例会（2024年9月12日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -15897,6 +16022,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021208A/24820/10/1//0/0",
               "speakerSection": "pos=24820"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m04-2020-09-ippan-shitsumon",
+          "memberId": "m04",
+          "sessionId": "2020-09",
+          "date": "2020-09-14",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "子育て支援"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第3号）で小野正二議員が行った一般質問のうち、支給基準日以降の出生児への特別定額給付金に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "支給基準日以降の出生児への特別定額給付金の支給",
+              "questionSummary": "国の特別定額給付金の支給基準日（令和2年4月27日）に1日でも遅れた新生児への不支給は不公平として、他自治体の独自給付事例を挙げ本市の対応を質問した。",
+              "answerSummary": "国基準以外の独自対応は多額の財政負担が課題であるとした上で、リモート相談試行事業、なんでも総合相談センターによる相談対応、保育園定員の増加、こども医療費助成の拡大など、新生児のいる家庭への支援強化により対応していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m04",
+                  "summary": "国の特別定額給付金の支給基準日（令和2年4月27日）に1日でも遅れた新生児への不支給は不公平として、他自治体の独自給付事例を挙げ本市の対応を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "国基準以外の独自対応は多額の財政負担が課題であるとした上で、リモート相談試行事業、なんでも総合相談センターによる相談対応、保育園定員の増加、こども医療費助成の拡大など、新生児のいる家庭への支援強化により対応していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/9872/10/1//0/0",
+              "speakerSection": "pos=9872"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/13326/10/1//0/0",
+              "speakerSection": "pos=13326"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -25926,6 +26114,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m07-2020-09-ippan-shitsumon",
+          "memberId": "m07",
+          "sessionId": "2020-09",
+          "date": "2020-09-15",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公共交通"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第4号）で甲斐忠篤議員が行った一般質問のうち、本市における地域公共交通の将来展望に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "本市における地域公共交通の将来展望",
+              "questionSummary": "延岡市地域公共交通網形成計画に基づく取り組みを踏まえ、将来の本市の地域公共交通について質問した。",
+              "answerSummary": "バス交通ネットワークの再構築は喫緊の課題として、既存路線の改善（乗合タクシーのダイヤ改正、北方町・北浦町のルート変更等）と、新たな路線・移動手段の創出（スクールバスの活用検討、まちなか循環バス3路線の実証運行、地域住民連携型有償運送の補助制度）の2方向で取り組む考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m07",
+                  "summary": "延岡市地域公共交通網形成計画に基づく取り組みを踏まえ、将来の本市の地域公共交通について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "バス交通ネットワークの再構築は喫緊の課題として、既存路線の改善（乗合タクシーのダイヤ改正、北方町・北浦町のルート変更等）と、新たな路線・移動手段の創出（スクールバスの活用検討、まちなか循環バス3路線の実証運行、地域住民連携型有償運送の補助制度）の2方向で取り組む考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/6786/10/1//0/0",
+              "speakerSection": "pos=6786"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/16428/10/1//0/0",
+              "speakerSection": "pos=16428"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "令和8年3月定例会（2026年2月27日）分について、甲斐議員の一般質問には、この要約に含めた2テーマ（ふるさと納税・企業版ふるさと納税）以外にも、市有林の木材売却（農林水産部長答弁）など複数の質問項目がありますが、今回は市長答弁で確認できた範囲のみを要約対象としています。 令和5年9月定例会（2023年9月5日）分を追加した。 令和6年3月定例会（2024年3月7日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和7年3月定例会（2025年3月6日）分を追加した。 令和7年9月定例会（2025-09-09）の一般質問データを公式会議録より登録。"
@@ -29271,6 +29521,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030303A/31658/10/1//0/0",
               "speakerSection": "pos=31658"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m08-2020-09-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m08",
+          "sessionId": "2020-09",
+          "date": "2020-09-14",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "スポーツ振興"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第3号）で甲斐正幸議員が行った総括質疑及び一般質問のうち、国民スポーツ大会延期によるハード面の整備に関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "国民スポーツ大会延期によるハード面の整備への影響",
+              "questionSummary": "本県で開催予定の国民スポーツ大会に関し、延期によるハード面の整備への影響について質問した。",
+              "answerSummary": "本市では正式競技6・公開競技2が予定されており、（仮称）新宮崎県体育館や西階公園野球場の必要な整備を進める予定であること、大会1年延期による整備へのマイナス影響はないとの県の見解を踏まえ、当初予定どおり整備を進めていく考えを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m08",
+                  "summary": "本県で開催予定の国民スポーツ大会に関し、延期によるハード面の整備への影響について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "本市では正式競技6・公開競技2が予定されており、（仮称）新宮崎県体育館や西階公園野球場の必要な整備を進める予定であること、大会1年延期による整備へのマイナス影響はないとの県の見解を踏まえ、当初予定どおり整備を進めていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/139418/10/1//0/0",
+              "speakerSection": "pos=139418"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/150088/10/1//0/0",
+              "speakerSection": "pos=150088"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -36114,6 +36426,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030302A/88482/10/1//0/0",
               "speakerSection": "pos=88482"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m11-2020-09-ippan-shitsumon",
+          "memberId": "m11",
+          "sessionId": "2020-09",
+          "date": "2020-09-14",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "経済"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第3号）で北林幹雄議員が行った一般質問のうち、コロナ後の世界の動向に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "コロナ後の世界の動向を見据えた対応",
+              "questionSummary": "コロナ後の世界は数年にわたり影響が続くとの見方があるとして、観光・産業面への影響を含めたコロナ後の世界の動向をどう見据えているか質問した。",
+              "answerSummary": "アメリカ大統領選挙も控え今後の見通しは難しいとしつつ、企業の国内回帰傾向を踏まえ企業誘致や人材育成に注力するとともに、まずは感染に歯止めをかけ国内経済や市民生活の安定的な基盤づくりに貢献していく必要があり、6次にわたるコロナ対策の効果を出しつつ臨機応変な経済対策・市民生活対策を検討していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m11",
+                  "summary": "コロナ後の世界は数年にわたり影響が続くとの見方があるとして、観光・産業面への影響を含めたコロナ後の世界の動向をどう見据えているか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "アメリカ大統領選挙も控え今後の見通しは難しいとしつつ、企業の国内回帰傾向を踏まえ企業誘致や人材育成に注力するとともに、まずは感染に歯止めをかけ国内経済や市民生活の安定的な基盤づくりに貢献していく必要があり、6次にわたるコロナ対策の効果を出しつつ臨機応変な経済対策・市民生活対策を検討していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/74050/10/1//0/0",
+              "speakerSection": "pos=74050"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/81514/10/1//0/0",
+              "speakerSection": "pos=81514"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -46465,6 +46840,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m14-2020-09-ippan-shitsumon",
+          "memberId": "m14",
+          "sessionId": "2020-09",
+          "date": "2020-09-15",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "教育資金"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第4号）で柴浩信議員が行った一般質問のうち、教育資金緊急融資事業の学生向け融資の今後の見通しに関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "教育資金緊急融資事業（学生向け融資）の申込状況",
+              "questionSummary": "市独自の教育資金緊急融資事業について、保護者向け融資は30件の申込みがある一方、学生向け融資は申込みゼロ件となっている状況を踏まえ、今後の見通しを質問した。",
+              "answerSummary": "何度も周知活動を行い大学からも感謝されているが、対象大学の後期授業料締切りが10月末で支払通知がまだ発送されていないため申請に至っていない状況であり、制度設計時から想定していたとして、10月の通知発送以降に申請が本格化すると考え、広報・新聞広告・大学ホームページでの周知を続ける考えを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m14",
+                  "summary": "市独自の教育資金緊急融資事業について、保護者向け融資は30件の申込みがある一方、学生向け融資は申込みゼロ件となっている状況を踏まえ、今後の見通しを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "何度も周知活動を行い大学からも感謝されているが、対象大学の後期授業料締切りが10月末で支払通知がまだ発送されていないため申請に至っていない状況であり、制度設計時から想定していたとして、10月の通知発送以降に申請が本格化すると考え、広報・新聞広告・大学ホームページでの周知を続ける考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "実施時期の確認",
+              "answerStatus": "実施予定"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/35524/10/1//0/0",
+              "speakerSection": "pos=35524"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/40092/10/1//0/0",
+              "speakerSection": "pos=40092"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月26日、一般質問）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。 令和5年6月定例会（2023年6月27日、初当選後二期目の一般質問）分を追加した。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
@@ -56036,6 +56474,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m17-2020-09-ippan-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2020-09",
+          "date": "2020-09-15",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "平和"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第4号）で長友幸子議員が行った一般質問のうち、戦後75年を迎えた夏についての所感に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "戦後75年を迎えた夏についての所感",
+              "questionSummary": "戦後75年の節目の年、核兵器廃絶の願いを踏まえ、8月という月を市長がどのように捉えているか質問した。",
+              "answerSummary": "戦争体験世代から直接話を聞いて育った世代として、それを行政に生かし次世代に伝える使命を毎年この時期に新たにしているとした上で、司馬遼太郎氏のエピソードに触れつつ、市民目線を忘れず国民・市民を守るための行政・政治であることを常に肝に銘じる決意を説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "戦後75年の節目の年、核兵器廃絶の願いを踏まえ、8月という月を市長がどのように捉えているか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "戦争体験世代から直接話を聞いて育った世代として、それを行政に生かし次世代に伝える使命を毎年この時期に新たにしているとした上で、司馬遼太郎氏のエピソードに触れつつ、市民目線を忘れず国民・市民を守るための行政・政治であることを常に肝に銘じる決意を説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/135316/10/1//0/0",
+              "speakerSection": "pos=135316"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/137878/10/1//0/0",
+              "speakerSection": "pos=137878"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月25日）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。同日には代表質問（前田議員・宮田議員分は別途登録済み）に対する関連質問として他の議員も発言していますが、今回はこの議員の発言分のみを対象としています。 令和7年9月定例会（2025年9月9日）分について、長友議員の一般質問には、この要約に含めた1テーマ以外にも、平和に関する市長の思いについての質問項目がありますが、今回は市政運営に直接関わる範囲のみを要約対象としています。 令和5年6月定例会（2023年6月29日）分を追加した。 令和5年9月定例会（2023年9月6日）分を追加した。 令和6年3月定例会（2024年3月5日）分（代表質問）を追加した。 令和6年6月定例会（2024年6月26日）分を追加した。 令和6年9月定例会（2024年9月11日）分を追加した。 令和7年3月定例会（2025年3月5日）分を追加した。"
@@ -56239,6 +56739,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030617A/73680/10/1//0/0",
               "speakerSection": "pos=73680"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m18-2020-09-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m18",
+          "sessionId": "2020-09",
+          "date": "2020-09-14",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "公共事業",
+            "野口遵記念館"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第3号）で早瀨賢一議員が行った総括質疑及び一般質問のうち、野口遵記念館建設事業の分離発注業種に関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "野口遵記念館建設事業の分離発注業種",
+              "questionSummary": "野口遵記念館建設事業について質問した。",
+              "answerSummary": "地元企業活性化・雇用安定のため可能な限り地元業者への優先発注を行っており、野口遵記念館建設では建設関連団体からの請願も踏まえ建築主体・電気設備・空気調和設備・舞台機構設備の4業種に分割発注したこと、今後さらに給排水衛生設備等4業種を今年度内に、外構工事等を次年度以降に別途発注する予定であることを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m18",
+                  "summary": "野口遵記念館建設事業について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "地元企業活性化・雇用安定のため可能な限り地元業者への優先発注を行っており、野口遵記念館建設では建設関連団体からの請願も踏まえ建築主体・電気設備・空気調和設備・舞台機構設備の4業種に分割発注したこと、今後さらに給排水衛生設備等4業種を今年度内に、外構工事等を次年度以降に別途発注する予定であることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/107338/10/1//0/0",
+              "speakerSection": "pos=107338"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/110378/10/1//0/0",
+              "speakerSection": "pos=110378"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -59079,6 +59642,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021208A/124398/10/1//0/0",
               "speakerSection": "pos=124398"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m19-2020-09-ippan-shitsumon",
+          "memberId": "m19",
+          "sessionId": "2020-09",
+          "date": "2020-09-16",
+          "meetingNumber": "第5号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "デジタル化",
+            "マイナンバー"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第5号）で比江島久美子議員が行った一般質問のうち、マイナンバーカードの登録者数と自治体ポイントに関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "マイナンバーカードの登録者数と自治体ポイント制度",
+              "questionSummary": "本市のマイナンバーカード交付状況（令和2年7月31日現在21.6%）と、マイナンバーカードを活用した自治体ポイント制度について質問した。",
+              "answerSummary": "マイナポイント事業の開始により今後さらにカード登録者数が増える見込みであること、自治体ポイントについては本市が先行して進めている地域ポイント制度や健康マイレージ実証事業との調整を行っており、現時点では未導入だが今後導入する方向で検討していく考えを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m19",
+                  "summary": "本市のマイナンバーカード交付状況（令和2年7月31日現在21.6%）と、マイナンバーカードを活用した自治体ポイント制度について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "マイナポイント事業の開始により今後さらにカード登録者数が増える見込みであること、自治体ポイントについては本市が先行して進めている地域ポイント制度や健康マイレージ実証事業との調整を行っており、現時点では未導入だが今後導入する方向で検討していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/6924/10/1//0/0",
+              "speakerSection": "pos=6924"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/12204/10/1//0/0",
+              "speakerSection": "pos=12204"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -62486,6 +63112,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021210A/147924/10/1//0/0",
               "speakerSection": "pos=147924"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m20-2020-09-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2020-09",
+          "date": "2020-09-16",
+          "meetingNumber": "第5号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政",
+            "税制"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第5号）で平田信広議員が行った一般質問のうち、消費税引き上げをはじめとする日本経済への影響に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "消費税引き上げが暮らしに与えた影響",
+              "questionSummary": "安倍政権下で2度実施された消費税引き上げが庶民の暮らしを直撃したとして、日本経済への影響に対する所見を質問した。",
+              "answerSummary": "消費税は国の社会保障と税の一体改革の中で年金・医療・介護等の重要な財源として位置づけられており、少子高齢化で社会保障費が増える中、現役世代への負担集中を避けるためにも消費税は必要で引下げは現実的に難しいと考えているとした上で、国には将来にわたる財政の持続性を確保しつつ必要な政策の実行を求めたい考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "安倍政権下で2度実施された消費税引き上げが庶民の暮らしを直撃したとして、日本経済への影響に対する所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "消費税は国の社会保障と税の一体改革の中で年金・医療・介護等の重要な財源として位置づけられており、少子高齢化で社会保障費が増える中、現役世代への負担集中を避けるためにも消費税は必要で引下げは現実的に難しいと考えているとした上で、国には将来にわたる財政の持続性を確保しつつ必要な政策の実行を求めたい考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/103832/10/1//0/0",
+              "speakerSection": "pos=103832"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/107238/10/1//0/0",
+              "speakerSection": "pos=107238"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -71604,6 +72293,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021209A/116048/10/1//0/0",
               "speakerSection": "pos=116048"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m23-2020-09-ippan-shitsumon",
+          "memberId": "m23",
+          "sessionId": "2020-09",
+          "date": "2020-09-15",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "社会保障"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第4号）で峯田克明議員（無会派）が行った一般質問のうち、ベーシックインカムに対する所見に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "ベーシックインカムに対する所見",
+              "questionSummary": "ベーシックインカムに対する市長の所見を質問した。",
+              "answerSummary": "消費税増税議論の時期に国会で議論されたが慎重な議論が必要として採用に至らなかった経緯があるとした上で、日本型ベーシックインカム構想の経緯や、フィンランド・スイスでの海外事例における財源問題を紹介し、財源をどうするかが最大の課題であり、税と社会保障の一体的な制度改革の中で議論されるべき事項と考えていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m23",
+                  "summary": "ベーシックインカムに対する市長の所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "消費税増税議論の時期に国会で議論されたが慎重な議論が必要として採用に至らなかった経緯があるとした上で、日本型ベーシックインカム構想の経緯や、フィンランド・スイスでの海外事例における財源問題を紹介し、財源をどうするかが最大の課題であり、税と社会保障の一体的な制度改革の中で議論されるべき事項と考えていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/102350/10/1//0/0",
+              "speakerSection": "pos=102350"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/105784/10/1//0/0",
+              "speakerSection": "pos=105784"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -83198,8 +83949,8 @@
         "from": "2023-06-28",
         "to": "2024-12-04"
       },
-      "analyzedSessionCount": 9,
-      "sessionsWithSpeechCount": 9,
+      "analyzedSessionCount": 10,
+      "sessionsWithSpeechCount": 10,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -85100,6 +85851,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm01-2020-09-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2020-09",
+          "date": "2020-09-14",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "子育て支援",
+            "医療費助成"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第3号）で吉本靖議員（旧任期）が行った一般質問のうち、子どもの医療費助成の全国及び県内の現状に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "子どもの医療費助成の全国及び県内の状況",
+              "questionSummary": "本市が中学3年生まで医療費助成を拡充する補正予算が計上されたことを受け、子どもの医療費助成の全国及び県内の現状を質問した。",
+              "answerSummary": "全国では平成30年4月時点で中学生以上を対象とする自治体が入院で約96%・外来で約89%であること、県内では26市町村全てが何らかの助成を行い入院は全市町村、外来は23自治体が中学生を対象としていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "本市が中学3年生まで医療費助成を拡充する補正予算が計上されたことを受け、子どもの医療費助成の全国及び県内の現状を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "全国では平成30年4月時点で中学生以上を対象とする自治体が入院で約96%・外来で約89%であること、県内では26市町村全てが何らかの助成を行い入院は全市町村、外来は23自治体が中学生を対象としていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/170240/10/1//0/0",
+              "speakerSection": "pos=170240"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/175794/10/1//0/0",
+              "speakerSection": "pos=175794"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
@@ -85907,8 +86720,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 3,
-      "sessionsWithSpeechCount": 3,
+      "analyzedSessionCount": 4,
+      "sessionsWithSpeechCount": 4,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -86099,6 +86912,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm05-2020-09-ippan-shitsumon",
+          "memberId": "fm05",
+          "sessionId": "2020-09",
+          "date": "2020-09-14",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "デジタル化"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第3号）で白石良盛議員（旧任期）が行った一般質問のうち、デジタル社会に対する本市の方向性に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "デジタル社会に対する本市の方向性",
+              "questionSummary": "国のデジタル手続法成立等を踏まえ、急速に進むデジタル社会に対する本市の方向性を質問した。",
+              "answerSummary": "庁内プロジェクトチームで検討を進め情報政策推進計画を今年度中に策定すること、行政手続のオンライン化やマイナンバーカード普及、RPA導入拡充、電子版プレミアム商品券やPayPay納税などのキャッシュレス化、ケーブルテレビ網の光化事業などにより本市・企業・市民のICT化を進める考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm05",
+                  "summary": "国のデジタル手続法成立等を踏まえ、急速に進むデジタル社会に対する本市の方向性を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "庁内プロジェクトチームで検討を進め情報政策推進計画を今年度中に策定すること、行政手続のオンライン化やマイナンバーカード普及、RPA導入拡充、電子版プレミアム商品券やPayPay納税などのキャッシュレス化、ケーブルテレビ網の光化事業などにより本市・企業・市民のICT化を進める考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/42298/10/1//0/0",
+              "speakerSection": "pos=42298"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第3号 9月14日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/46812/10/1//0/0",
+              "speakerSection": "pos=46812"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -86112,8 +86986,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 6,
-      "sessionsWithSpeechCount": 6,
+      "analyzedSessionCount": 7,
+      "sessionsWithSpeechCount": 7,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -86487,6 +87361,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm06-2020-09-ippan-shitsumon",
+          "memberId": "fm06",
+          "sessionId": "2020-09",
+          "date": "2020-09-16",
+          "meetingNumber": "第5号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "コロナ対策",
+            "教育"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第5号）で田村吉宏議員（旧任期）が行った一般質問のうち、学校休業中の準要保護世帯の給食費に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "新型コロナ対策における学校休業中の準要保護世帯の給食費",
+              "questionSummary": "生活保護世帯・準要保護世帯・一般世帯を例に、学校休業中の子供の昼食代の公平性を指摘し、準要保護世帯への給食費の取り扱いについて質問した。",
+              "answerSummary": "国は学校休業に伴う給食費について生活保護世帯には家庭へ直接渡し市への返還も不要とする一方、準要保護世帯は対象外となっており支援がなされていない状態であることを、5月の補正予算審査後に説明を受け県内他市や国の対応を調べさせたところ、他市も特段の対応をしておらず国も財政措置を行っていないことを確認したと説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm06",
+                  "summary": "生活保護世帯・準要保護世帯・一般世帯を例に、学校休業中の子供の昼食代の公平性を指摘し、準要保護世帯への給食費の取り扱いについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "国は学校休業に伴う給食費について生活保護世帯には家庭へ直接渡し市への返還も不要とする一方、準要保護世帯は対象外となっており支援がなされていない状態であることを、5月の補正予算審査後に説明を受け県内他市や国の対応を調べさせたところ、他市も特段の対応をしておらず国も財政措置を行っていないことを確認したと説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/132626/10/1//0/0",
+              "speakerSection": "pos=132626"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/144464/10/1//0/0",
+              "speakerSection": "pos=144464"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -86500,8 +87436,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 7,
-      "sessionsWithSpeechCount": 7,
+      "analyzedSessionCount": 8,
+      "sessionsWithSpeechCount": 8,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -86939,6 +87875,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm07-2020-09-ippan-shitsumon",
+          "memberId": "fm07",
+          "sessionId": "2020-09",
+          "date": "2020-09-15",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "国政"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第4号）で松本哲也議員（社民党市議団、旧任期）が行った一般質問のうち、7年8か月の安倍政権への所見に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "7年8か月の安倍政権に対する所見",
+              "questionSummary": "安倍首相の辞任表明を受け、7年8か月に及んだ安倍政権への所見を質問した。",
+              "answerSummary": "地方分権という言葉があまり話題に上らなくなり大きなテーマにならなかったことを残念に思うとした上で、市町村へのワンストップ的な行政サービス提供のための財源・権限移譲という地方分権の推進が、コロナ対応も含め重要なテーマであり課題が残ったままになっていると考えていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm07",
+                  "summary": "安倍首相の辞任表明を受け、7年8か月に及んだ安倍政権への所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "地方分権という言葉があまり話題に上らなくなり大きなテーマにならなかったことを残念に思うとした上で、市町村へのワンストップ的な行政サービス提供のための財源・権限移譲という地方分権の推進が、コロナ対応も含め重要なテーマであり課題が残ったままになっていると考えていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/68842/10/1//0/0",
+              "speakerSection": "pos=68842"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第4号 9月15日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/71976/10/1//0/0",
+              "speakerSection": "pos=71976"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -87280,8 +88277,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 4,
-      "sessionsWithSpeechCount": 4,
+      "analyzedSessionCount": 5,
+      "sessionsWithSpeechCount": 5,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -87529,6 +88526,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030304A/47394/10/1//0/0",
               "speakerSection": "pos=47394"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm09-2020-09-ippan-shitsumon",
+          "memberId": "fm09",
+          "sessionId": "2020-09",
+          "date": "2020-09-16",
+          "meetingNumber": "第5号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "文化財",
+            "市史編さん"
+          ],
+          "shortSummary": "令和2年9月定例会（第9回定例会、第5号）で松田勝則議員（旧任期）が行った一般質問のうち、市史編さん事業に伴う文化財の指定に関する部分と教育部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "市史編さん事業に伴う新たな文化財の指定",
+              "questionSummary": "市制施行100周年を目指す市史編さん事業の過程で、新たな史料・文献が発見された場合に文化財として指定し後世に残す可能性について質問した。",
+              "answerSummary": "市史編さん事業懇話会の意見を踏まえ本年度基本計画を策定し、来年度以降の悉皆調査等で新たな史料・文献が発見される可能性があるとした上で、史料そのものに価値がある場合や未指定文化財の再検証につながる場合には新たに市の指定文化財となる可能性があることを説明した。",
+              "answerers": [
+                "教育部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm09",
+                  "summary": "市制施行100周年を目指す市史編さん事業の過程で、新たな史料・文献が発見された場合に文化財として指定し後世に残す可能性について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育部長",
+                  "summary": "市史編さん事業懇話会の意見を踏まえ本年度基本計画を策定し、来年度以降の悉皆調査等で新たな史料・文献が発見される可能性があるとした上で、史料そのものに価値がある場合や未指定文化財の再検証につながる場合には新たに市の指定文化財となる可能性があることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/32730/10/1//0/0",
+              "speakerSection": "pos=32730"
+            },
+            {
+              "title": "令和 2年第 9回定例会（第5号 9月16日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020916A/39078/10/1//0/0",
+              "speakerSection": "pos=39078"
             }
           ],
           "verifiedAt": "2026-08-05",
