@@ -3015,6 +3015,68 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m01-2019-12-ippan-shitsumon",
+          "memberId": "m01",
+          "sessionId": "2019-12",
+          "date": "2019-12-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地域新電力会社"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第3号）で稲田雅之議員が行った一般質問のうち、地域新電力会社の事業化における経営組織体制に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "地域新電力会社の経営組織体制",
+              "questionSummary": "事業化可能性調査報告書で社員を最小3人体制とする方針が示されていることを踏まえ、人材確保のハードルの高さについて所見を質問した。",
+              "answerSummary": "供給初年度は運営支援会社と契約して支援を受けること、需給管理業務や書類作成等の専門業務は他自治体出資会社の例を参考に外部委託を活用すること、顧問という形で専門人材の助言を受けながら地元採用も含め必要な人材を今後採用していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m01",
+                  "summary": "事業化可能性調査報告書で社員を最小3人体制とする方針が示されていることを踏まえ、人材確保のハードルの高さについて所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "供給初年度は運営支援会社と契約して支援を受けること、需給管理業務や書類作成等の専門業務は他自治体出資会社の例を参考に外部委託を活用すること、顧問という形で専門人材の助言を受けながら地元採用も含め必要な人材を今後採用していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/39604/10/1//0/0",
+              "speakerSection": "pos=39604"
+            },
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/48708/10/1//0/0",
+              "speakerSection": "pos=48708"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。稲田議員の一般質問には、この要約に含めた1テーマ以外にも、令和8年度当初予算編成方針、財源調整用基金、自衛隊駐屯地等の誘致など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和7年6月定例会（2025年6月17日）分について、稲田議員の一般質問には、この要約に含めた1テーマ以外にも、市長退任に伴う施策の継続性、シルバー人材センター跡地の利活用、ゼロカーボンシティ推進事業など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月27日）分について、質問冒頭で在職20年表彰に触れているが個人的な事柄のため要約には含めていない。壇上での8テーマのうち、答弁本文で直接の回答を確認できたのはデジタル田園都市国家構想交付金事業・宮崎県置県140年・地域新電力会社創業事業計画の3テーマのみで、残り3テーマ（津波二次避難・脱炭素先行地域のメンテナンス支援・道路インフラ）は答弁未確認のため今後の追加取得の対象としている。 令和5年12月定例会（2023年12月6日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年12月定例会（2024年12月4日）分を追加した。 令和7年3月定例会（2025年3月4日）分を追加した。"
@@ -6317,6 +6379,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020617A/44802/10/1//0/0",
               "speakerSection": "pos=44802"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m02-2019-12-ippan-shitsumon",
+          "memberId": "m02",
+          "sessionId": "2019-12",
+          "date": "2019-12-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "行政運営",
+            "情報発信"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第4号）で猪之鼻哲議員が行った一般質問のうち、個人のSNSと延岡市のSNSの運用の違いに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "市長のSNS発信の運用",
+              "questionSummary": "水道料金見直し問題を巡る情報発信を踏まえ、市長個人のSNSと延岡市公式SNSの運用の違いについて質問した。",
+              "answerSummary": "市公式フェイスブックは運用規定に基づき経営政策課職員が1日1回程度、パブリックコメントやイベント等の情報を発信していること、市長個人のフェイスブックは市のフェイスブックのシェアや延岡の魅力の発信に加えその時々の発信を行っていること、水道料金の資料修正は正確な情報を伝えるために必要な対応だったことを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m02",
+                  "summary": "水道料金見直し問題を巡る情報発信を踏まえ、市長個人のSNSと延岡市公式SNSの運用の違いについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "市公式フェイスブックは運用規定に基づき経営政策課職員が1日1回程度、パブリックコメントやイベント等の情報を発信していること、市長個人のフェイスブックは市のフェイスブックのシェアや延岡の魅力の発信に加えその時々の発信を行っていること、水道料金の資料修正は正確な情報を伝えるために必要な対応だったことを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/37352/10/1//0/0",
+              "speakerSection": "pos=37352"
+            },
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/41662/10/1//0/0",
+              "speakerSection": "pos=41662"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -22919,6 +23044,69 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/137699/10/1//0/0",
               "speakerSection": "pos=137699"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m06-2019-12-ippan-shitsumon",
+          "memberId": "m06",
+          "sessionId": "2019-12",
+          "date": "2019-12-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "移住定住",
+            "人口減少"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第3号）で甲斐行雄議員が行った一般質問のうち、企業と連携した移住・定住の取組の推進に関する部分と企画部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "企業と連携した移住・定住の取組の推進",
+              "questionSummary": "人口減少対策として、地元企業の魅力を発信する取り組みを含めた企業と連携した移住・定住施策の推進について質問した。",
+              "answerSummary": "移住定住推進室で移住希望者への相談にワンストップ対応し、移住・定住サイト等での情報発信や都市部での移住相談会での企業紹介を行っていること、Uターン希望者を重要なターゲットと捉えていること、今後複数の地元中小企業によるインターンシッププログラム作成等も踏まえ、推進体制のあり方を検討していく考えを説明した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m06",
+                  "summary": "人口減少対策として、地元企業の魅力を発信する取り組みを含めた企業と連携した移住・定住施策の推進について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "移住定住推進室で移住希望者への相談にワンストップ対応し、移住・定住サイト等での情報発信や都市部での移住相談会での企業紹介を行っていること、Uターン希望者を重要なターゲットと捉えていること、今後複数の地元中小企業によるインターンシッププログラム作成等も踏まえ、推進体制のあり方を検討していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/105550/10/1//0/0",
+              "speakerSection": "pos=105550"
+            },
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/109620/10/1//0/0",
+              "speakerSection": "pos=109620"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -47405,6 +47593,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m14-2019-12-ippan-shitsumon",
+          "memberId": "m14",
+          "sessionId": "2019-12",
+          "date": "2019-12-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防災",
+            "備蓄"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第3号）で柴浩信議員が行った一般質問のうち、災害用備蓄品の管理状況と配布に関する部分と総務部長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "災害用備蓄品の管理状況（旧下赤小学校への偏在）",
+              "questionSummary": "災害用備蓄品十品目の多くが北川町の旧下赤小学校に集中して備蓄されている現状を踏まえ、管理状況について質問した。",
+              "answerSummary": "これまで旧下赤小学校を含む5か所の公共施設で災害用備蓄品を集中管理し各避難所へ配送する計画としていたが、道路等インフラ被災による輸送支障の懸念から、平成30年度より指定避難所への飲料水の分散備蓄を開始しており、今後その他物資についても分散備蓄を進め迅速な配布ができるよう適正管理に努める考えを説明した。",
+              "answerers": [
+                "総務部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m14",
+                  "summary": "災害用備蓄品十品目の多くが北川町の旧下赤小学校に集中して備蓄されている現状を踏まえ、管理状況について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "これまで旧下赤小学校を含む5か所の公共施設で災害用備蓄品を集中管理し各避難所へ配送する計画としていたが、道路等インフラ被災による輸送支障の懸念から、平成30年度より指定避難所への飲料水の分散備蓄を開始しており、今後その他物資についても分散備蓄を進め迅速な配布ができるよう適正管理に努める考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/72454/10/1//0/0",
+              "speakerSection": "pos=72454"
+            },
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/76872/10/1//0/0",
+              "speakerSection": "pos=76872"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録の該当会期（令和8年3月定例会・令和8年2月26日、一般質問）を取得・照合し、関連質問として発言が確認できた範囲を要約したものです。 令和5年6月定例会（2023年6月27日、初当選後二期目の一般質問）分を追加した。 令和5年9月定例会（2023年9月7日）分を追加した。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和6年9月定例会（2024年9月13日）分を追加した。 令和6年12月定例会（2024年12月5日）分を追加した。"
@@ -52668,6 +52919,69 @@
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
           "term": "previous"
+        },
+        {
+          "id": "m16-2019-12-ippan-shitsumon",
+          "memberId": "m16",
+          "sessionId": "2019-12",
+          "date": "2019-12-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "行政運営",
+            "指定管理者"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第4号）で中城あかね議員が行った一般質問のうち、指定管理者の処遇改善に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "指定管理者の処遇改善",
+              "questionSummary": "公共施設の運営管理を委託している指定管理者の処遇改善について質問した。",
+              "answerSummary": "指定管理者制度は施設の設置目的をより効果的に達成する有効な手法と考えているとした上で、指定管理料の積算に事業者提案も勘案していること、受託者の人件費・待遇は基本的に経営上の考え方によるが法令遵守について情報収集・研修を検討し、ヒアリング等で状況把握に努めていく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m16",
+                  "summary": "公共施設の運営管理を委託している指定管理者の処遇改善について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "指定管理者制度は施設の設置目的をより効果的に達成する有効な手法と考えているとした上で、指定管理料の積算に事業者提案も勘案していること、受託者の人件費・待遇は基本的に経営上の考え方によるが法令遵守について情報収集・研修を検討し、ヒアリング等で状況把握に努めていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/9222/10/1//0/0",
+              "speakerSection": "pos=9222"
+            },
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/11450/10/1//0/0",
+              "speakerSection": "pos=11450"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
         }
       ],
       "verificationNote": "会議録取得により生成した要約候補です。中城議員の一般質問には、この要約に含めた1テーマ以外にも、INOBECHスポーツパークの利用状況・スケートボードセクション増設、土砂災害対策など複数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。 令和5年6月定例会（2023年6月28日）分は、答弁未確認の2テーマ（遊休農地・有機農産物）をpendingとして記録している。 令和5年12月定例会（2023年12月7日）分を追加した。 令和6年6月定例会（2024年6月27日）分を追加した。 令和7年3月定例会（2025年3月6日）分を追加した。"
@@ -57158,6 +57472,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020304A/146050/10/1//0/0",
               "speakerSection": "pos=146050"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m17-2019-12-ippan-shitsumon",
+          "memberId": "m17",
+          "sessionId": "2019-12",
+          "date": "2019-12-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "平和"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第4号）で長友幸子議員が行った一般質問のうち、フランシスコ教皇の平和と核廃絶に関するメッセージへの思いに関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "フランシスコ教皇の核廃絶メッセージへの思い",
+              "questionSummary": "来日したフランシスコ教皇が被爆地の長崎・広島を訪れ核兵器廃絶を訴えたことを踏まえ、市長の思いを質問した。",
+              "answerSummary": "教皇が戦争のための原子力使用は犯罪であり核兵器の使用は倫理に反すると述べたことを紹介し、唯一の被爆国として令和の時代も平和実現へリーダーシップをとり過去の記憶を受け継ぐ必要があると考えさせられたとした上で、本市としても戦争の悲惨さや命の大切さを後世に伝える取り組みを引き続き行っていく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m17",
+                  "summary": "来日したフランシスコ教皇が被爆地の長崎・広島を訪れ核兵器廃絶を訴えたことを踏まえ、市長の思いを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "教皇が戦争のための原子力使用は犯罪であり核兵器の使用は倫理に反すると述べたことを紹介し、唯一の被爆国として令和の時代も平和実現へリーダーシップをとり過去の記憶を受け継ぐ必要があると考えさせられたとした上で、本市としても戦争の悲惨さや命の大切さを後世に伝える取り組みを引き続き行っていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/108144/10/1//0/0",
+              "speakerSection": "pos=108144"
+            },
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/111260/10/1//0/0",
+              "speakerSection": "pos=111260"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -63928,6 +64304,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/75674/10/1//0/0",
               "speakerSection": "pos=75674"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m20-2019-12-soukatsu-shitsugi-ippan-shitsumon",
+          "memberId": "m20",
+          "sessionId": "2019-12",
+          "date": "2019-12-04",
+          "meetingNumber": "第3号",
+          "meetingType": "本会議",
+          "speechType": "総括質疑・一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "税制"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第3号）で平田信広議員が行った総括質疑及び一般質問のうち、消費税増税に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "消費税増税についての認識",
+              "questionSummary": "消費税が10%に引き上げられて2か月が経過したことを踏まえ、消費税に対する市長の認識を質問した。",
+              "answerSummary": "消費税は社会保障と税の一体改革の中で年金・医療・介護等の社会保障給付や少子化対策に充てるものとされ、少子高齢化が進む中で所得税・法人税への依存は現役世代への負担集中につながるため広く負担する消費税は必要と考えているとした上で、低所得者や中小企業、地域経済への負担軽減策には万全を期す必要があると説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m20",
+                  "summary": "消費税が10%に引き上げられて2か月が経過したことを踏まえ、消費税に対する市長の認識を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "消費税は社会保障と税の一体改革の中で年金・医療・介護等の社会保障給付や少子化対策に充てるものとされ、少子高齢化が進む中で所得税・法人税への依存は現役世代への負担集中につながるため広く負担する消費税は必要と考えているとした上で、低所得者や中小企業、地域経済への負担軽減策には万全を期す必要があると説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （総括質疑・一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/9186/10/1//0/0",
+              "speakerSection": "pos=9186"
+            },
+            {
+              "title": "令和元年第 5回定例会（第3号12月 4日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011204A/11490/10/1//0/0",
+              "speakerSection": "pos=11490"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -73233,6 +73671,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020305A/132062/10/1//0/0",
               "speakerSection": "pos=132062"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。",
+          "term": "previous"
+        },
+        {
+          "id": "m23-2019-12-ippan-shitsumon",
+          "memberId": "m23",
+          "sessionId": "2019-12",
+          "date": "2019-12-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地域新電力会社"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第2号）で峯田克明議員（無会派）が行った一般質問のうち、（仮称）延岡電力の事業の継続性に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "（仮称）延岡電力の事業の継続性",
+              "questionSummary": "事業化可能性調査の収支シミュレーションを踏まえ、他社との価格競争による事業破綻の懸念について、事業の継続性に関する所見を質問した。",
+              "answerSummary": "過去3年間で最も事業環境が厳しかった2017年度水準でも収支が成り立つか継続性を含めて試算しており、供給開始後は1年目から黒字が続く試算結果であることから事業の継続性は確保できると考えていること、区が代理店になることで区の財源確保にもつながる考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m23",
+                  "summary": "事業化可能性調査の収支シミュレーションを踏まえ、他社との価格競争による事業破綻の懸念について、事業の継続性に関する所見を質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "過去3年間で最も事業環境が厳しかった2017年度水準でも収支が成り立つか継続性を含めて試算しており、供給開始後は1年目から黒字が続く試算結果であることから事業の継続性は確保できると考えていること、区が代理店になることで区の財源確保にもつながる考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） （一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/46746/10/1//0/0",
+              "speakerSection": "pos=46746"
+            },
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/55544/10/1//0/0",
+              "speakerSection": "pos=55544"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -84827,8 +85327,8 @@
         "from": "2023-06-28",
         "to": "2024-12-04"
       },
-      "analyzedSessionCount": 10,
-      "sessionsWithSpeechCount": 10,
+      "analyzedSessionCount": 11,
+      "sessionsWithSpeechCount": 11,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -86791,6 +87291,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm01-2019-12-ippan-shitsumon",
+          "memberId": "fm01",
+          "sessionId": "2019-12",
+          "date": "2019-12-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "経済"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第2号）で吉本靖議員（旧任期）が行った一般質問のうち、本市の人口一人当たり市民所得の現状と推移に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "本市の一人当たり市民所得の現状と推移",
+              "questionSummary": "本市の一人当たり市民所得が県平均を下回っている現状を踏まえ、県内他市町村と比較した現状と過去10年間の動きについて質問した。",
+              "answerSummary": "平成28年度の本市の一人当たり市民所得は225.6万円で県内9市中4位、県民所得より低い水準であること、雇用者報酬は非就業者含む比較で4位だが就業者一人当たりでは2位であること、60〜79歳の就業率が県平均より4％以上低いことが要因の一つと推察されることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm01",
+                  "summary": "本市の一人当たり市民所得が県平均を下回っている現状を踏まえ、県内他市町村と比較した現状と過去10年間の動きについて質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "平成28年度の本市の一人当たり市民所得は225.6万円で県内9市中4位、県民所得より低い水準であること、雇用者報酬は非就業者含む比較で4位だが就業者一人当たりでは2位であること、60〜79歳の就業率が県平均より4％以上低いことが要因の一つと推察されることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "回答のみで方針不明"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/77130/10/1//0/0",
+              "speakerSection": "pos=77130"
+            },
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/85928/10/1//0/0",
+              "speakerSection": "pos=85928"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "verificationNote": "令和6年12月定例会（2024年12月4日）分を登録した。当時の在職記録であり、現職議員としての集計・一覧・比較対象には含めない（src/data/formerMembers.json参照）。 2023-06（2023-06-28）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2023-12（2023-12-05）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。 2024-06（2024-06-25）分を、docs/minutes-reflection-audit.mdの監査で判明した未登録分として追加した。"
@@ -87393,8 +87954,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 5,
-      "sessionsWithSpeechCount": 5,
+      "analyzedSessionCount": 6,
+      "sessionsWithSpeechCount": 6,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -87708,6 +88269,67 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm04-2019-12-ippan-shitsumon",
+          "memberId": "fm04",
+          "sessionId": "2019-12",
+          "date": "2019-12-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "地域新電力会社"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第2号）で三上毅議員（旧任期）が行った一般質問のうち、延岡市地域新電力会社の設立に向けた取り組み（資金の確保）に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "地域新電力会社設立に伴う資金確保の方法",
+              "questionSummary": "延岡市地域新電力会社の事業化可能性調査報告書を踏まえ、必要な資金の確保について、市が保証や貸付けを想定しているか質問した。",
+              "answerSummary": "報告書の株主による債務保証との記述は、新電力会社が金融機関から借り入れる際に十分な資力を持つ株主が保証を行うことで借り入れをしやすくする趣旨であるとした上で、売掛金に伴う借り入れであれば融資を受けやすい面もあり、今後より確実な資金確保の手段を検討していく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm04",
+                  "summary": "延岡市地域新電力会社の事業化可能性調査報告書を踏まえ、必要な資金の確保について、市が保証や貸付けを想定しているか質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "報告書の株主による債務保証との記述は、新電力会社が金融機関から借り入れる際に十分な資力を持つ株主が保証を行うことで借り入れをしやすくする趣旨であるとした上で、売掛金に伴う借り入れであれば融資を受けやすい面もあり、今後より確実な資金確保の手段を検討していく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "課題の指摘",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/13514/10/1//0/0",
+              "speakerSection": "pos=13514"
+            },
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/15882/10/1//0/0",
+              "speakerSection": "pos=15882"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -87721,8 +88343,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 4,
-      "sessionsWithSpeechCount": 4,
+      "analyzedSessionCount": 5,
+      "sessionsWithSpeechCount": 5,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -87970,6 +88592,68 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/46812/10/1//0/0",
               "speakerSection": "pos=46812"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm05-2019-12-ippan-shitsumon",
+          "memberId": "fm05",
+          "sessionId": "2019-12",
+          "date": "2019-12-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "防災",
+            "河川"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第2号）で白石良盛議員（旧任期）が行った一般質問のうち、大武川流域の内水被害対策（排水ポンプ設置）に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "大武川流域の内水被害対策（排水ポンプ設置）",
+              "questionSummary": "近年頻発する台風・大雨による浸水被害を踏まえ、大武川流域の内水被害対策について質問した。",
+              "answerSummary": "平成9年の台風19号豪雨で北川において甚大な浸水被害が発生し激甚災害の指定を受け築堤・水門・排水樋管等が整備されたこと、以降大きな浸水被害は発生していないが、近年の想定を超える豪雨を踏まえポンプ場建設が実現すれば市民生活に大いに寄与すると考えられるため、河川管理者である県に対し地元の懸念の声を伝えながら対策を働きかけていく考えを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm05",
+                  "summary": "近年頻発する台風・大雨による浸水被害を踏まえ、大武川流域の内水被害対策について質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "平成9年の台風19号豪雨で北川において甚大な浸水被害が発生し激甚災害の指定を受け築堤・水門・排水樋管等が整備されたこと、以降大きな浸水被害は発生していないが、近年の想定を超える豪雨を踏まえポンプ場建設が実現すれば市民生活に大いに寄与すると考えられるため、河川管理者である県に対し地元の懸念の声を伝えながら対策を働きかけていく考えを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "対応の要望",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/108288/10/1//0/0",
+              "speakerSection": "pos=108288"
+            },
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/110802/10/1//0/0",
+              "speakerSection": "pos=110802"
             }
           ],
           "verifiedAt": "2026-08-05",
@@ -89462,8 +90146,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 6,
-      "sessionsWithSpeechCount": 6,
+      "analyzedSessionCount": 7,
+      "sessionsWithSpeechCount": 7,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -89838,6 +90522,68 @@
           ],
           "verifiedAt": "2026-08-05",
           "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm09-2019-12-ippan-shitsumon",
+          "memberId": "fm09",
+          "sessionId": "2019-12",
+          "date": "2019-12-05",
+          "meetingNumber": "第4号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "文化財",
+            "観光"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第4号）で松田勝則議員（旧任期）が行った一般質問のうち、城下町延岡を伝える古民家（後藤邸）の解体材の活用に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "後藤邸の解体材の活用",
+              "questionSummary": "野口遵記念館建設に伴い解体される昭和12年建築の古民家・後藤邸について、その解体材の活用の考えを質問した。",
+              "answerSummary": "後藤邸は延岡大空襲でも戦火を免れた貴重な建物で欄間や丸太の桁など建物としての価値も高いとした上で、ひき家や移築は費用が大きいことが判明したため、解体材を一部活用して城山周辺に古民家風のインフォメーションセンター的機能や、くつろげる空間の整備ができないか可能性を探っていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm09",
+                  "summary": "野口遵記念館建設に伴い解体される昭和12年建築の古民家・後藤邸について、その解体材の活用の考えを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "後藤邸は延岡大空襲でも戦火を免れた貴重な建物で欄間や丸太の桁など建物としての価値も高いとした上で、ひき家や移築は費用が大きいことが判明したため、解体材を一部活用して城山周辺に古民家風のインフォメーションセンター的機能や、くつろげる空間の整備ができないか可能性を探っていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/72548/10/1//0/0",
+              "speakerSection": "pos=72548"
+            },
+            {
+              "title": "令和元年第 5回定例会（第4号12月 5日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/77404/10/1//0/0",
+              "speakerSection": "pos=77404"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
         }
       ],
       "isFormerMember": true
@@ -89852,8 +90598,8 @@
       "scope": [
         "plenary"
       ],
-      "analyzedSessionCount": 2,
-      "sessionsWithSpeechCount": 2,
+      "analyzedSessionCount": 3,
+      "sessionsWithSpeechCount": 3,
       "sessionsWithoutSpeechCount": 0,
       "unavailableSessionCount": 0,
       "unfetchedSessionCount": 0,
@@ -89979,6 +90725,67 @@
               "sourceType": "official-minutes-html",
               "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/11936/10/1//0/0",
               "speakerSection": "pos=11936"
+            }
+          ],
+          "verifiedAt": "2026-08-05",
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）を実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文には他にも項目が含まれる場合があるが、上記の答弁で直接・明確に対応が確認できた項目のみを要約対象とした。"
+        },
+        {
+          "id": "fm10-2019-12-ippan-shitsumon",
+          "memberId": "fm10",
+          "sessionId": "2019-12",
+          "date": "2019-12-03",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": true,
+          "summaryStatus": "verified",
+          "topics": [
+            "子育て支援"
+          ],
+          "shortSummary": "令和元年12月定例会（第5回定例会、第2号）で本部仁俊議員（旧任期）が行った一般質問のうち、子育て世代包括支援センターの利用状況と相談後の対応に関する部分と市長の答弁を要約したもの。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "子育て世代包括支援センターの利用状況と相談後の対応",
+              "questionSummary": "4月に開設された子育て世代包括支援センターについて、8か月経過後の利用状況（相談内容の内訳含む）と相談後の解決までの対応の流れを質問した。",
+              "answerSummary": "4月から10月までの利用は合計140件、月平均20件であり、相談内容は妊産婦の育児不安や体調管理、子供の発達、学校生活に関する相談などであること、相談後は地区担当保健師への連絡や子育て支援施設利用の助言、療育機関の紹介、アウトリーチ訪問など継続した支援を行っていることを説明した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm10",
+                  "summary": "4月に開設された子育て世代包括支援センターについて、8か月経過後の利用状況（相談内容の内訳含む）と相談後の解決までの対応の流れを質問した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長",
+                  "summary": "4月から10月までの利用は合計140件、月平均20件であり、相談内容は妊産婦の育児不安や体調管理、子供の発達、学校生活に関する相談などであること、相談後は地区担当保健師への連絡や子育て支援施設利用の助言、療育機関の紹介、アウトリーチ訪問など継続した支援を行っていることを説明した。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） (旧任期・元議員)（一般質問）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/137404/10/1//0/0",
+              "speakerSection": "pos=137404"
+            },
+            {
+              "title": "令和元年第 5回定例会（第2号12月 3日） （答弁）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011203A/139112/10/1//0/0",
+              "speakerSection": "pos=139112"
             }
           ],
           "verifiedAt": "2026-08-05",
