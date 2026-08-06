@@ -1097,6 +1097,82 @@ try {
   }
 }
 
+// --- committees.json（常任委員会・議会運営委員会・特別委員会） ---
+try {
+  const committees = readJson("src/data/committees.json");
+  const VALID_COMMITTEE_TYPES = new Set(["常任委員会", "議会運営委員会", "特別委員会"]);
+  const VALID_COMMITTEE_ROLES = new Set(["委員長", "副委員長", "委員"]);
+  const committeeIds = new Set();
+  const committeeNames = new Set();
+
+  for (const c of committees) {
+    const tag = `committees.json (${c.id ?? "id不明"})`;
+    if (isBlank(c.id)) err(tag, "idが空です");
+    else if (committeeIds.has(c.id)) err(tag, `idが重複しています: ${c.id}`);
+    else committeeIds.add(c.id);
+
+    if (isBlank(c.name)) err(tag, "nameが空です");
+    else if (committeeNames.has(c.name)) err(tag, `nameが重複しています: ${c.name}`);
+    else committeeNames.add(c.name);
+
+    if (!VALID_COMMITTEE_TYPES.has(c.type)) err(tag, `未定義のtypeです: ${c.type}`);
+
+    if (!Array.isArray(c.members) || c.members.length === 0) {
+      err(tag, "membersが空です");
+    } else {
+      const seenMemberIds = new Set();
+      let chairCount = 0;
+      let viceChairCount = 0;
+      for (const mem of c.members) {
+        if (isBlank(mem.memberId)) {
+          err(tag, "membersにmemberIdが空の要素があります");
+        } else if (!memberIds.has(mem.memberId) && !formerMemberIds.has(mem.memberId)) {
+          err(tag, `存在しない議員IDを参照しています: ${mem.memberId}`);
+        } else if (seenMemberIds.has(mem.memberId)) {
+          err(tag, `同じ議員が委員として重複登録されています: ${mem.memberId}`);
+        } else {
+          seenMemberIds.add(mem.memberId);
+        }
+        if (!VALID_COMMITTEE_ROLES.has(mem.role)) err(tag, `未定義のroleです: ${mem.role}`);
+        if (mem.role === "委員長") chairCount++;
+        if (mem.role === "副委員長") viceChairCount++;
+      }
+      if (chairCount > 1) err(tag, `委員長が複数登録されています（${chairCount}名）`);
+      if (viceChairCount > 1) err(tag, `副委員長が複数登録されています（${viceChairCount}名）`);
+      if (c.memberCount !== c.members.length) {
+        err(tag, `memberCount（${c.memberCount}）がmembers配列の要素数（${c.members.length}）と一致しません`);
+      }
+    }
+
+    if (c.termStart && !DATE_RE.test(c.termStart)) err(tag, `termStartの形式が不正です: ${c.termStart}`);
+    if (c.termEnd && !DATE_RE.test(c.termEnd)) err(tag, `termEndの形式が不正です: ${c.termEnd}`);
+    if (c.establishedDate && !DATE_RE.test(c.establishedDate)) err(tag, `establishedDateの形式が不正です: ${c.establishedDate}`);
+    if (c.termStart && c.termEnd && c.termStart > c.termEnd) err(tag, "termStartがtermEndより後の日付です");
+    if (c.minutesSearchUrl && !URL_RE.test(c.minutesSearchUrl)) err(tag, `minutesSearchUrlの形式が不正です: ${c.minutesSearchUrl}`);
+    if (!Array.isArray(c.sourceRefs) || c.sourceRefs.length === 0) {
+      err(tag, "sourceRefsが空です（出典が必要です）");
+    } else {
+      for (const s of c.sourceRefs) {
+        if (isBlank(s.url) || !URL_RE.test(s.url)) err(tag, `sourceRefsのurlが不正です: ${s.url}`);
+      }
+    }
+    if (!c.lastVerifiedAt || !DATE_RE.test(c.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${c.lastVerifiedAt}`);
+  }
+
+  // billVotes.jsonのcommitteeフィールドが、committees.jsonに存在しない委員会名を参照している場合は
+  // 気づけるよう警告する（委員会条例改正等で名称が変わった場合の見落とし防止。誤りとは限らないためwarn）。
+  const billCommitteeNames = new Set(billVotes.map((b) => b.committee).filter(Boolean));
+  for (const name of billCommitteeNames) {
+    if (!committeeNames.has(name) && !/審査特別委員会$/.test(name)) {
+      warn("committees.json", `billVotes.jsonのcommitteeで参照されているが委員会名簿に無い委員会名です: ${name}`);
+    }
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("committees.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- archiveMayors.json / archiveMayorTerms.json（延岡市政アーカイブ：歴代市長） ---
 let archiveMayorIds = new Set();
 let archiveMayorTermIds = new Set();
@@ -2046,6 +2122,7 @@ const VALID_SEARCH_TYPES = new Set([
   "policy",
   "council-document",
   "political-fund",
+  "committee",
   "page",
 ]);
 // 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。
@@ -2072,6 +2149,7 @@ const VALID_URL_PREFIXES = [
   "/contact",
   "/updates",
   "/political-funds",
+  "/committees",
 ];
 
 try {

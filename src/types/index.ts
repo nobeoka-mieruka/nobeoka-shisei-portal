@@ -177,6 +177,55 @@ export interface CitySpecialPost {
   lastVerifiedAt: string;
 }
 
+/** 委員会の区分。 */
+export type CommitteeType = "常任委員会" | "議会運営委員会" | "特別委員会";
+
+/** 委員会1名分の役職（委員長・副委員長・委員のいずれか）。 */
+export type CommitteeRole = "委員長" | "副委員長" | "委員";
+
+/** 委員会の構成員1名分。 */
+export interface CommitteeMemberEntry {
+  /** members.jsonまたはformerMembers.jsonのid。 */
+  memberId: string;
+  /** 表示用の氏名（公式名簿の表記）。 */
+  memberName: string;
+  role: CommitteeRole;
+  /** その役職への就任日が名簿に個別注記されている場合のみ（例："令和7年5月9日委員長就任"）。 */
+  appointedNote?: string;
+}
+
+/**
+ * 常任委員会・議会運営委員会・特別委員会1件分（src/data/committees.json）。
+ * 現在の任期（名簿記載時点）の構成のみを対象とし、予算審査特別委員会・決算審査特別委員会・
+ * 長期総合計画審査特別委員会等、会期ごとに議長を除く全議員で構成・設置される臨時の委員会は
+ * 対象外とする（委員名簿に個別掲載されないため）。審査した議案は billVotes.json の
+ * committee フィールドから逆引きする（本ファイルには議案一覧を重複して持たない）。
+ */
+export interface Committee {
+  id: string;
+  name: string;
+  type: CommitteeType;
+  /**
+   * 所管事項の説明。延岡市議会委員会条例の該当条文を確認できていないため、
+   * 現時点では未確認。確認でき次第、条文に基づく記載へ更新する。
+   */
+  jurisdiction: string | null;
+  members: CommitteeMemberEntry[];
+  /** 委員定数（名簿記載の実人数。条例上の定数と異なる場合は備考に記載）。 */
+  memberCount: number;
+  /** 任期開始日（ISO形式）。名簿に記載がある場合のみ。 */
+  termStart: string | null;
+  /** 任期終了日（ISO形式）。名簿に記載がある場合のみ。 */
+  termEnd: string | null;
+  /** 設置日（特別委員会等、設置年月日が公式資料で確認できる場合）。 */
+  establishedDate: string | null;
+  /** 会議録検索システムでの当該委員会の発言記録を横断的に探すための参考リンク（トップページ）。 */
+  minutesSearchUrl?: string;
+  sourceRefs: SourceEntry[];
+  notes?: string;
+  lastVerifiedAt: string;
+}
+
 /**
  * 現職ではない元議員（src/data/formerMembers.json）。
  * 過去会期の一般質問・発言履歴を保持するための最小限の人物データで、CouncilMemberとは
@@ -1727,6 +1776,7 @@ export type SearchEntryType =
   | "compensation"
   | "finance"
   | "political-fund"
+  | "committee"
   | "update"
   | "guide"
   | "press-conference"

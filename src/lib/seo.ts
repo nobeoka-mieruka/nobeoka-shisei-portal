@@ -25,6 +25,7 @@ import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
 import politicalFundOrganizationsData from "../data/politicalFundOrganizations.json";
 import politicalFundReportsData from "../data/politicalFundReports.json";
+import committeesData from "../data/committees.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archivePoliciesData from "../data/archivePolicies.json";
@@ -32,6 +33,7 @@ import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import { buildPersonIndex, parsePersonSlug, personTypeLabel } from "./people";
 import type {
   BillVoteItem,
+  Committee,
   CompensationComparisonEntry,
   CouncilMember,
   CouncilSession,
@@ -107,6 +109,7 @@ const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFundOrganization[];
 const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
+const committees = committeesData as Committee[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -599,6 +602,18 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
           description:
             "政治資金規正法に基づき政治団体が公表した収支報告書の内容を、総務省・宮崎県選挙管理委員会等の公式資料に基づいて整理しています。",
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "政治資金収支報告書" }],
+        },
+        options,
+      );
+
+    case "/committees":
+      return makeResult(
+        {
+          path: "/committees",
+          pageTitle: "委員会一覧",
+          description:
+            "延岡市議会の常任委員会・議会運営委員会・特別委員会の委員名簿を、延岡市議会公式ホームページの公表資料に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "委員会一覧" }],
         },
         options,
       );
@@ -1588,6 +1603,28 @@ function politicalFundOrganizationSeo(id: string, options?: SeoOptions): SeoResu
   );
 }
 
+/** /committees/:id */
+function committeeDetailSeo(id: string, options?: SeoOptions): SeoResult {
+  const committee = committees.find((c) => c.id === id);
+  if (!committee) return notFound(`/committees/${id}`, "委員会が見つかりません");
+
+  const description = `${committee.name}（${committee.type}）の委員名簿・委員長・副委員長・任期を、延岡市議会公式ホームページの公表資料に基づいて整理しています。`;
+
+  return makeResult(
+    {
+      path: `/committees/${id}`,
+      pageTitle: `${committee.name}の委員名簿`,
+      description,
+      breadcrumbs: [
+        { label: "ホーム", to: "/" },
+        { label: "委員会一覧", to: "/committees" },
+        { label: committee.name },
+      ],
+    },
+    options,
+  );
+}
+
 const MEMBER_RE = /^\/members\/([^/]+)$/;
 const SPEECH_DETAIL_RE = /^\/members\/([^/]+)\/questions\/([^/]+)$/;
 const QUESTION_RE = /^\/questions\/([^/]+)$/;
@@ -1597,6 +1634,7 @@ const BILL_VOTE_RE = /^\/bills\/votes\/([^/]+)$/;
 const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 const POLITICAL_FUND_ORGANIZATION_RE = /^\/political-funds\/([^/]+)$/;
+const COMMITTEE_DETAIL_RE = /^\/committees\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
 const TIMELINE_YEAR_RE = /^\/timeline\/(\d{4})$/;
 const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
@@ -1659,6 +1697,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
   if (politicalFundOrganizationMatch) {
     return politicalFundOrganizationSeo(safeDecodeURIComponent(politicalFundOrganizationMatch[1]), options);
   }
+
+  const committeeDetailMatch = path.match(COMMITTEE_DETAIL_RE);
+  if (committeeDetailMatch) return committeeDetailSeo(safeDecodeURIComponent(committeeDetailMatch[1]), options);
 
   const mayorDetailMatch = path.match(MAYOR_DETAIL_RE);
   if (mayorDetailMatch) return mayorDetailSeo(safeDecodeURIComponent(mayorDetailMatch[1]), options);

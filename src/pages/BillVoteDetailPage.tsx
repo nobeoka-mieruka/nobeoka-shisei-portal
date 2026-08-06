@@ -10,6 +10,7 @@ import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
 import { billVoteLabels, publicBills, verificationStatusOf } from "../lib/billVotes";
+import { getCommitteeByName } from "../lib/committees";
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -115,6 +116,7 @@ export function BillVoteDetailPage() {
 
   const documents = collectDocuments(bill);
   const councilDocumentLink = resolveCouncilDocumentLink(bill);
+  const committeeForBill = bill.committee ? getCommitteeByName(bill.committee) : undefined;
   const relatedQuestions = (bill.relatedQuestionIds ?? [])
     .map((qId) => generalQuestions.find((q) => q.id === qId))
     .filter((q): q is GeneralQuestionItem => !!q);
@@ -232,7 +234,15 @@ export function BillVoteDetailPage() {
           {bill.committee && (
             <div>
               <dt className="text-xs text-on-surface-variant">担当委員会</dt>
-              <dd className="text-on-surface">{bill.committee}</dd>
+              <dd className="text-on-surface">
+                {committeeForBill ? (
+                  <Link to={`/committees/${committeeForBill.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                    {bill.committee}
+                  </Link>
+                ) : (
+                  bill.committee
+                )}
+              </dd>
             </div>
           )}
           {bill.voteMethod && (

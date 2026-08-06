@@ -19474,6 +19474,153 @@
     "sourceId": "pf-org-021"
   },
   {
+    "id": "committee-committee-somu-seisaku",
+    "type": "committee",
+    "title": "総務政策委員会（常任委員会）",
+    "description": "総務政策委員会の委員名簿です。委員長：河野 治満。委員9名。",
+    "url": "/committees/committee-somu-seisaku",
+    "keywords": [
+      "総務政策委員会",
+      "常任委員会",
+      "河野 治満",
+      "中島 誠治",
+      "宮田 博徳",
+      "後藤 司光",
+      "小野 挙",
+      "甲斐 忠篤",
+      "比江島 久美子",
+      "峯田 克明",
+      "甲斐 行雄"
+    ],
+    "sourceId": "committee-somu-seisaku"
+  },
+  {
+    "id": "committee-committee-sangyo-kensetsu",
+    "type": "committee",
+    "title": "産業建設委員会（常任委員会）",
+    "description": "産業建設委員会の委員名簿です。委員長：梶本 英一。委員8名。",
+    "url": "/committees/committee-sangyo-kensetsu",
+    "keywords": [
+      "産業建設委員会",
+      "常任委員会",
+      "梶本 英一",
+      "前田 遼",
+      "柴 浩信",
+      "北林 幹雄",
+      "平田 信広",
+      "長友 幸子",
+      "小野 正二",
+      "甲斐 正幸"
+    ],
+    "sourceId": "committee-sangyo-kensetsu"
+  },
+  {
+    "id": "committee-committee-kosei-kyoiku",
+    "type": "committee",
+    "title": "厚生教育委員会（常任委員会）",
+    "description": "厚生教育委員会の委員名簿です。委員長：猪之鼻 哲。委員8名。",
+    "url": "/committees/committee-kosei-kyoiku",
+    "keywords": [
+      "厚生教育委員会",
+      "常任委員会",
+      "猪之鼻 哲",
+      "山本 珠美",
+      "吉田 茂仁",
+      "小御門 綾",
+      "稲田 雅之",
+      "松田 満男",
+      "中城 あかね",
+      "上杉 泰洋"
+    ],
+    "sourceId": "committee-kosei-kyoiku"
+  },
+  {
+    "id": "committee-committee-gikai-unei",
+    "type": "committee",
+    "title": "議会運営委員会（議会運営委員会）",
+    "description": "議会運営委員会の委員名簿です。委員長：甲斐 行雄。委員6名。",
+    "url": "/committees/committee-gikai-unei",
+    "keywords": [
+      "議会運営委員会",
+      "議会運営委員会",
+      "甲斐 行雄",
+      "梶本 英一",
+      "山本 珠美",
+      "宮田 博徳",
+      "猪之鼻 哲",
+      "河野 治満"
+    ],
+    "sourceId": "committee-gikai-unei"
+  },
+  {
+    "id": "committee-committee-gikai-kasseika",
+    "type": "committee",
+    "title": "議会活性化特別委員会（特別委員会）",
+    "description": "議会活性化特別委員会の委員名簿です。委員長：柴 浩信。委員7名。",
+    "url": "/committees/committee-gikai-kasseika",
+    "keywords": [
+      "議会活性化特別委員会",
+      "特別委員会",
+      "柴 浩信",
+      "小御門 綾",
+      "中島 誠治",
+      "山本 珠美",
+      "峯田 克明",
+      "平田 信広",
+      "長友 幸子"
+    ],
+    "sourceId": "committee-gikai-kasseika"
+  },
+  {
+    "id": "committee-committee-gikai-arikata",
+    "type": "committee",
+    "title": "議会のあり方検討特別委員会（特別委員会）",
+    "description": "議会のあり方検討特別委員会の委員名簿です。委員長：稲田 雅之。委員7名。",
+    "url": "/committees/committee-gikai-arikata",
+    "keywords": [
+      "議会のあり方検討特別委員会",
+      "特別委員会",
+      "稲田 雅之",
+      "上杉 泰洋",
+      "宮田 博徳",
+      "甲斐 忠篤",
+      "比江島 久美子",
+      "甲斐 行雄",
+      "平田 信広"
+    ],
+    "sourceId": "committee-gikai-arikata"
+  },
+  {
+    "id": "update-u65",
+    "type": "update",
+    "title": "委員会一覧・委員会詳細ページを新設し、常任委員会・議会運営委員会・特別委員会の委員名簿を掲載しました",
+    "description": "延岡市議会公式ホームページが公表する委員名簿（正・副議長、各委員会等名簿）に基づき、総務政策委員会・産業建設委員会・厚生教育委員会（常任委員会）、議会運営委員会…",
+    "url": "/updates",
+    "keywords": [
+      "新規追加",
+      "委員会一覧",
+      "委員会詳細",
+      "議員詳細",
+      "議案詳細"
+    ],
+    "date": "2026-08-06",
+    "sourceId": "u65"
+  },
+  {
+    "id": "update-u64",
+    "type": "update",
+    "title": "令和8年3月定例会の議案66件すべてに、委員会付託先・採決方法・提出日を登録しました（令和7年度分完了）",
+    "description": "延岡市議会の公式会議録を精読し、令和8年3月定例会（令和8年度当初予算・第七次長期総合計画を審議した定例会）に提出された議案66件について、審査を行った委員会、…",
+    "url": "/updates",
+    "keywords": [
+      "データ更新",
+      "議案ごとの賛否",
+      "議案詳細"
+    ],
+    "date": "2026-08-06",
+    "sourceId": "u64"
+  },
+  {
     "id": "update-u63",
     "type": "update",
     "title": "令和7年12月臨時会の議案1件に、委員会付託先・採決方法・提出日を追加しました",

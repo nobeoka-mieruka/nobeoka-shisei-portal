@@ -1913,3 +1913,56 @@ TASK-005C〜005F全体＝令和4年度〜令和元年度の旧任期一般質問
   登録した。あわせて、データとしては存在していたが画面に表示されていなかった「採決方法」の
   表示欄をBillVoteDetailPage.tsxへ新設し、新規に「施行日」欄も追加した。令和8年度分
   （2026-05-extraordinary・2026-06、計24件）は公式会議録が未公開のためBLOCKED。
+
+### TASK-037 委員会データベースの新設（Priority1：常任委員会・議会運営委員会・特別委員会の委員名簿）
+
+状態：DONE（2026-08-06）
+優先度：A（ユーザー指示「次フェーズ：データベース充実（Phase 2）」Priority1）
+対象：`src/types/index.ts`、`src/data/committees.json`（新設）、`scripts/validate-data.mjs`、
+`src/lib/committees.ts`（新設）、`src/pages/CommitteesPage.tsx`（新設）、
+`src/pages/CommitteeDetailPage.tsx`（新設）、`src/App.tsx`、`src/lib/seo.ts`、
+`scripts/lib/public-routes.mjs`、`scripts/generate-search-index.mjs`、`src/types/index.ts`
+（SearchEntryType）、`src/pages/SearchPage.tsx`、`src/pages/MemberDetailPage.tsx`、
+`src/pages/BillVoteDetailPage.tsx`
+
+目的：延岡市議会の常任委員会（総務政策・産業建設・厚生教育）・議会運営委員会・特別委員会
+（議会活性化・議会のあり方検討）の委員名簿（委員長・副委員長・委員・任期）を、一次資料のみで
+データベース化し、議案ページ・議員ページ・委員会ページを相互リンクする。
+
+一次資料：
+- 「延岡市議会 正・副議長、各委員会等名簿（令和8年5月8日現在）」
+  （`https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27271.pdf`）
+- 延岡市議会「市議会の構成」ページ（`https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html`）
+- 議会のあり方検討特別委員会のみ、設置時（令和8年3月19日）の会議録も出典に追加
+
+実装内容：
+- `Committee`/`CommitteeMemberEntry`/`CommitteeType`/`CommitteeRole`型を新設し、6委員会分の
+  データを`committees.json`へ登録（常任委員会3・議会運営委員会1・特別委員会2）
+- 所管事項（jurisdiction）は、延岡市議会委員会条例の該当条文を一次資料として確認できなかったため、
+  議会のあり方検討特別委員会（設置時の会議録で確認済み）以外はnullとし、`notes`に未確認である旨を
+  明記した（推測で補完しない）
+- 会期ごとの臨時委員会（予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会）は
+  委員名簿に個別掲載されないため、`committees.json`には収録せず、`billsForCommittee()`による
+  議案側からの逆引き表示のみ対応
+- `validate-data.mjs`に、委員ID・役職・委員長/副委員長の重複禁止・日付/URL形式・
+  `billVotes.json`の`committee`値との整合性チェック（審査特別委員会を除く）を追加
+- 一覧ページ（`/committees`）・詳細ページ（`/committees/:id`、委員名簿・審査した議案・根拠資料を表示）を新設
+- 相互リンク：議員詳細ページの「所属委員会」表示、議案詳細ページの「担当委員会」表示を、
+  一致する委員会がある場合は`/committees/:id`へのリンクに変更
+- SEO（title/description/breadcrumbs/canonical）、サイトマップ・プリレンダリング対象
+  （`public-routes.mjs`）、サイト内検索インデックス（`generate-search-index.mjs`、
+  `SearchEntryType`に`"committee"`追加）にも対応
+
+検証結果：
+- `npm run validate:data` → errors=0（新規warningなし、既存warningのみ）
+- `npm run typecheck` → 成功
+- `npm run lint` → 成功（0件）
+- `npm run test` → 26件成功
+- `npm run build`（prerender・validate:seo・validate:content含む） → 1270ルート生成、
+  validate:seo failures=0 warnings=0、validate:content errors=0 warnings=0
+
+残作業：
+- 5委員会分の所管事項（jurisdiction）は、延岡市議会委員会条例の条文を確認できるまで「確認中」
+  のまま。条例本文（`https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD`）は
+  フォーム検索が必要でWebFetchから直接取得できなかったため、別タスクで確認する
+- 議会活性化特別委員会の任期（名簿上に記載なし）も同様に未確認

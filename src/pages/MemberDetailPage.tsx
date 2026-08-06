@@ -18,6 +18,7 @@ import type {
   CouncilSession,
 } from "../types";
 import { getFaction } from "../lib/factions";
+import { getCommitteeByName } from "../lib/committees";
 import {
   findMemberSpeechRecord,
   publicSpeeches,
@@ -485,14 +486,25 @@ export function MemberDetailPage() {
       <SectionCard title="所属委員会">
         {member.committees.length > 0 ? (
           <div className="flex flex-wrap gap-2">
-            {member.committees.map((committee) => (
-              <span
-                key={committee}
-                className="rounded-full bg-surface-container-high px-3 py-1 text-sm text-on-surface-variant"
-              >
-                {committee}
-              </span>
-            ))}
+            {member.committees.map((committee) => {
+              const matched = getCommitteeByName(committee);
+              return matched ? (
+                <Link
+                  key={committee}
+                  to={`/committees/${matched.id}`}
+                  className="rounded-full bg-surface-container-high px-3 py-1 text-sm text-on-surface-variant transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  {committee}
+                </Link>
+              ) : (
+                <span
+                  key={committee}
+                  className="rounded-full bg-surface-container-high px-3 py-1 text-sm text-on-surface-variant"
+                >
+                  {committee}
+                </span>
+              );
+            })}
           </div>
         ) : (
           <EmptyState />

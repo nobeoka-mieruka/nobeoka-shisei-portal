@@ -99,6 +99,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/data-status",
   "/methodology/activity-radar",
   "/political-funds",
+  "/committees",
 ];
 
 /**
@@ -148,6 +149,7 @@ function loadData() {
   const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");
   const politicalFundReports = readJson("src/data/politicalFundReports.json");
   const citySpecialPosts = readJson("src/data/citySpecialPosts.json");
+  const committees = readJson("src/data/committees.json");
   return {
     members,
     formerMembers,
@@ -174,6 +176,7 @@ function loadData() {
     politicalFundOrganizations,
     politicalFundReports,
     citySpecialPosts,
+    committees,
   };
 }
 
@@ -391,6 +394,12 @@ function staticPageLastmod(path, data) {
         [maxValidDate(data.politicalFundOrganizations.map((o) => o.verifiedAt))],
         ["src/data/politicalFundOrganizations.json", "src/data/politicalFundReports.json"],
       );
+    case "/committees":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.committees.map((c) => c.lastVerifiedAt))],
+        ["src/data/committees.json"],
+      );
     default:
       return undefined;
   }
@@ -445,6 +454,13 @@ export function getIndexableRoutes() {
         [o.verifiedAt, maxValidDate(reports.map((r) => r.verifiedAt))],
         ["src/data/politicalFundOrganizations.json", "src/data/politicalFundReports.json"],
       ),
+    });
+  }
+  for (const c of data.committees) {
+    const path = `/committees/${c.id}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(path, [c.lastVerifiedAt], ["src/data/committees.json"]),
     });
   }
   for (const { memberId, speech } of publishedSpeeches(councilSpeechSummaries)) {
