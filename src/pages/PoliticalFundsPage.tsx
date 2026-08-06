@@ -70,7 +70,8 @@ export function PoliticalFundsPage() {
                     {latestReport ? latestReport.fiscalYear : "未登録"}
                   </p>
                   <p className="mt-1 text-xs text-on-surface-variant">最終確認日：{formatVerifiedAt(org.verifiedAt)}</p>
-                  <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">詳しく見る</p>
+                  <p className="mt-1 text-xs text-on-surface-variant">提出先：{org.disclosureAuthority}</p>
+                  <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">詳しく見る（収支報告書PDFへのリンクを含む）</p>
                 </Link>
               </li>
             );
@@ -79,7 +80,7 @@ export function PoliticalFundsPage() {
       )}
 
       {organizations.length > 0 && hasOrganizationsWithoutReports && (
-        <EmptyState message="一部の政治団体は、収支報告書の登録が未了です。確認でき次第、順次追加します。" />
+        <EmptyState message="収支の金額データは、多くの団体でデータベース化準備中です（公表元の収支報告書PDFが画像形式のため、当サイトの環境では自動的な読み取りができていません）。各団体のページから、公式資料のPDFを直接ご覧いただけます。" />
       )}
 
       <CorrectionRequestButton pageName="政治資金収支報告書" />

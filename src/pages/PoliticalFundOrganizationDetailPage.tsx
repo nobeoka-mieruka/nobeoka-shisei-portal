@@ -20,6 +20,11 @@ const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 
+/** 提出先（disclosureAuthority）ごとの、収支報告書を公表している公式サイトのトップページ。 */
+const DISCLOSURE_AUTHORITY_PAGE_URL: Record<string, string> = {
+  宮崎県選挙管理委員会: "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/",
+};
+
 const INCOME_LABELS: Record<keyof PoliticalFundIncomeBreakdown, string> = {
   membershipFees: "個人の負担する党費又は会費",
   donationsFromIndividuals: "個人からの寄附",
@@ -146,12 +151,26 @@ export function PoliticalFundOrganizationDetailPage() {
         {organization.officialListUrl && (
           <SourceLink url={organization.officialListUrl} label="公表元の一覧ページを見る" className="mt-3" />
         )}
+        {DISCLOSURE_AUTHORITY_PAGE_URL[organization.disclosureAuthority] && (
+          <SourceLink
+            url={DISCLOSURE_AUTHORITY_PAGE_URL[organization.disclosureAuthority]}
+            label={`${organization.disclosureAuthority}の公式公表ページを見る`}
+            className="mt-2"
+          />
+        )}
         {organization.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{organization.notes}</p>}
       </SectionCard>
 
       <SectionCard title="収支報告書">
         {reports.length === 0 ? (
-          <EmptyState message="この団体の収支報告書は現在未登録です。公式資料を確認でき次第、順次追加します。" />
+          <div className="space-y-3">
+            <p className="rounded-lg bg-surface-container-high/70 px-3 py-2.5 text-xs leading-relaxed text-on-surface-variant">
+              金額データのデータベース化準備中です。{organization.disclosureAuthority}が公表する収支報告書PDFの多くは紙資料をスキャンした画像形式のため、当サイトの環境では文字を自動的に読み取れていません。OCR技術の導入や手入力での確認ができ次第、収入・支出・繰越額等を順次追加します。
+            </p>
+            {organization.officialListUrl && (
+              <SourceLink url={organization.officialListUrl} label="収支報告書PDFを見る（外部サイト・公式資料）" />
+            )}
+          </div>
         ) : (
           <ul className="space-y-4">
             {reports.map((report) => (
