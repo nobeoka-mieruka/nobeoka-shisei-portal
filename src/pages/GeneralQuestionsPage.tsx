@@ -366,7 +366,7 @@ export function GeneralQuestionsPage() {
         2. 確認済み一般質問アーカイブ（公式会議録ベース）
       </h2>
       <p className="mb-4 px-1 text-xs leading-relaxed text-on-surface-variant">
-        延岡市議会の公式会議録本文で、実際の質問・答弁まで確認できた過去会期の記録です。現在の議員任期における最初の本会議（令和5年5月15日、令和5年第1回臨時会）以降を対象としています。要約はAIが作成し人が確認したものですが、正確な内容は必ず公式会議録原文をご確認ください。
+        延岡市議会の公式会議録本文で、実際の質問・答弁まで確認できた記録です。現在の議員任期（令和5年5月15日、令和5年第1回臨時会以降）に加え、旧任期（令和元年6月〜令和5年3月）の一般質問アーカイブも対象に含みます。要約はAIが作成し人が確認したものですが、正確な内容は必ず公式会議録原文をご確認ください。
       </p>
 
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -374,7 +374,7 @@ export function GeneralQuestionsPage() {
           label="収録済み定例会"
           value={`${coveredRegularSessionCount}/${regularSessionsInPeriod.length}`}
           unit="会期"
-          hint="現任期（令和5年5月〜）の定例会のうち、確認済み発言が登録済みの会期数"
+          hint="現任期・旧任期を合わせた対象定例会のうち、確認済み発言が登録済みの会期数"
         />
         <StatCard label="確認済み発言数" value={verifiedSpeeches.length} unit="件" />
         <StatCard label="質問項目数" value={verifiedQuestionItemCount} unit="件" />
