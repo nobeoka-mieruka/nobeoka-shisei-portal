@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import billVotesData from "../data/billVotes.json";
 import mayorData from "../data/mayor.json";
@@ -23,7 +23,7 @@ import { SortSelect, type SortKey } from "../components/SortSelect";
 import { StatCard } from "../components/StatCard";
 import { SiteAnalyticsSummary } from "../components/SiteAnalyticsSummary";
 import { JsonLd } from "../components/JsonLd";
-import { CompassIcon, DocumentIcon, QuestionMarkCircleIcon, YenIcon } from "../components/icons";
+import { BriefcaseIcon, LandmarkIcon, BuildingIcon, ChartBarIcon, SearchIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
@@ -64,37 +64,79 @@ const snsOptions = [
   { value: "none", label: "SNS未登録" },
 ];
 
-const navLinks: { label: string; to?: string; ready: boolean }[] = [
-  { label: "人物から探す", to: "/people", ready: true },
-  { label: "市議会議員を見る", to: "/", ready: true },
-  { label: "元議員を見る", to: "/members/former", ready: true },
-  { label: "市長情報を見る", to: "/mayor", ready: true },
-  { label: "歴代市長を見る", to: "/mayors", ready: true },
-  { label: "副市長・教育長・行政委員会委員を見る", to: "/city-officials", ready: true },
-  { label: "市長公約の進捗を見る", to: "/mayor/policy-progress", ready: true },
-  { label: "市役所どこに行けばいい？診断", to: "/city-guide", ready: true },
-  { label: "一般質問を調べる", to: "/questions", ready: true },
-  { label: "議案を見る", to: "/bills", ready: true },
-  { label: "条例を見る", to: "/ordinances", ready: true },
-  { label: "請願を見る", to: "/petitions", ready: true },
-  { label: "陳情を見る", to: "/requests", ready: true },
-  { label: "議案ごとの賛否を見る", to: "/bills/votes", ready: true },
-  { label: "定例会・議会資料を見る", to: "/council-documents", ready: true },
-  { label: "延岡市の財政を見る", to: "/finance", ready: true },
-  { label: "報酬を見る", to: "/compensation", ready: true },
-  { label: "比較する", to: "/compare", ready: true },
-  { label: "年表を見る", to: "/timeline", ready: true },
-  { label: "データ収録状況を見る", to: "/data-status", ready: true },
-  { label: "サイト内を検索する", to: "/search", ready: true },
-  { label: "編集方針を見る", to: "/editorial-policy", ready: true },
-  { label: "情報提供・訂正依頼を送る", to: "/contact", ready: true },
+const focusRing =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+interface CategoryCard {
+  icon: React.ComponentType<{ className?: string }>;
+  iconBg: string;
+  title: string;
+  description: string;
+  links: { label: string; to: string }[];
+}
+
+const categoryCards: CategoryCard[] = [
+  {
+    icon: BriefcaseIcon,
+    iconBg: "bg-primary-container text-on-primary-container",
+    title: "人物を調べる",
+    description: "議員・市長・特別職を、現職・元職を問わず確認できます。",
+    links: [
+      { label: "現職議員", to: "/people?type=member" },
+      { label: "歴代議員", to: "/members/former" },
+      { label: "市長", to: "/mayor" },
+      { label: "歴代市長", to: "/mayors" },
+      { label: "副市長・教育長・行政委員会", to: "/city-officials" },
+    ],
+  },
+  {
+    icon: LandmarkIcon,
+    iconBg: "bg-secondary-container text-on-secondary-container",
+    title: "市議会を調べる",
+    description: "一般質問、議案、委員会、採決結果を確認できます。",
+    links: [
+      { label: "一般質問", to: "/questions" },
+      { label: "議案ごとの賛否", to: "/bills/votes" },
+      { label: "委員会", to: "/committees" },
+      { label: "定例会・議会資料", to: "/council-documents" },
+      { label: "テーマから探す", to: "/themes" },
+    ],
+  },
+  {
+    icon: BuildingIcon,
+    iconBg: "bg-tertiary-container text-on-tertiary-container",
+    title: "市政を調べる",
+    description: "条例、請願・陳情、財政、公約、市役所の相談先を確認できます。",
+    links: [
+      { label: "条例", to: "/ordinances" },
+      { label: "請願・陳情", to: "/petitions" },
+      { label: "延岡市の財政", to: "/finance" },
+      { label: "市長公約の進捗", to: "/mayor/policy-progress" },
+      { label: "市役所どこに行けばいい？診断", to: "/city-guide" },
+    ],
+  },
+  {
+    icon: ChartBarIcon,
+    iconBg: "bg-primary-container text-on-primary-container",
+    title: "データを見る",
+    description: "件数の推移、比較、報酬、データの収録状況を確認できます。",
+    links: [
+      { label: "市政ダッシュボード", to: "/dashboard" },
+      { label: "比較する", to: "/compare" },
+      { label: "報酬を見る", to: "/compensation" },
+      { label: "政治資金収支報告書", to: "/political-funds" },
+      { label: "データ収録状況", to: "/data-status" },
+    ],
+  },
 ];
 
 export function HomePage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [searchParams] = useSearchParams();
+  const [heroQuery, setHeroQuery] = useState("");
   const [query, setQuery] = useState("");
   const [factionId, setFactionId] = useState<string | "all">(searchParams.get("faction") ?? "all");
   const [gender, setGender] = useState<string>("all");
@@ -118,6 +160,12 @@ export function HomePage() {
     setCommittee("all");
     setTermCount("all");
     setSns("all");
+  };
+
+  const handleHeroSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = heroQuery.trim();
+    navigate(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
   };
 
   const filteredMembers = useMemo(() => {
@@ -166,141 +214,102 @@ export function HomePage() {
       {seo.jsonLd.map((entry) => (
         <JsonLd key={entry.id} id={entry.id} data={entry.data} />
       ))}
-      <div className="mb-5 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
-        <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">
-          延岡市政を、もっと分かりやすく
+
+      {/* ① ヒーロー */}
+      <div className="mb-5 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-7">
+        <h1 className="text-2xl font-bold leading-snug text-on-primary-container sm:text-3xl">
+          延岡市政を、調べる・探す・比較する
         </h1>
-        <p className="mt-2 text-base leading-relaxed text-on-primary-container/80">
-          延岡市政見える化ポータルでは、宮崎県延岡市の市長、市議会議員、議案、採決結果、一般質問、報酬などの公開情報を、市民がスマートフォンから確認しやすい形に整理しています。
+        <p className="mt-3 text-base leading-relaxed text-on-primary-container/80">
+          宮崎県延岡市の市長、市議会議員、議案、一般質問、財政、報酬などの公開情報を、スマートフォンからでも分かりやすく確認できる非公式サイトです。
         </p>
+        <form onSubmit={handleHeroSearchSubmit} className="mt-4" role="search">
+          <label className="flex items-center gap-3 rounded-full bg-surface px-4 py-3.5 shadow-e2 transition focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary sm:py-4">
+            <SearchIcon className="h-6 w-6 shrink-0 text-on-surface-variant" aria-hidden="true" />
+            <input
+              type="search"
+              value={heroQuery}
+              onChange={(e) => setHeroQuery(e.target.value)}
+              placeholder="人物名、議案、テーマなどでサイト内を検索"
+              aria-label="サイト内検索"
+              className="w-full min-w-0 bg-transparent text-base text-on-surface placeholder:text-on-surface-variant focus:outline-none"
+            />
+            <button
+              type="submit"
+              className={`shrink-0 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary transition hover:opacity-90 ${focusRing}`}
+            >
+              検索
+            </button>
+          </label>
+        </form>
       </div>
 
-      <p className="mb-3 rounded-xl bg-surface-container-low p-3 text-base leading-relaxed text-on-surface-variant">
-        このサイトは、公開資料を市民向けに整理した非公式の情報サイトです。正式な情報は、延岡市および延岡市議会の公式資料をご確認ください。
+      {/* ② サイト概要 */}
+      <p className="mb-5 rounded-xl bg-surface-container-low p-3.5 text-sm leading-relaxed text-on-surface-variant">
+        このサイトは、延岡市・延岡市議会が公表する資料をもとに整理した非公式の情報サイトです。特定の政党・会派・議員・候補者への支持や批判、独自の採点や順位付けは行っていません。正式な情報は、延岡市および延岡市議会の公式資料をご確認ください。
       </p>
 
-      <nav aria-label="サイトの信頼性に関する情報" className="mb-5 flex flex-wrap gap-x-4 gap-y-1.5 px-1 text-sm">
-        <Link
-          to="/about"
-          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+      {/* ③ 目的から探す（カテゴリカード） */}
+      <section aria-labelledby="purpose-nav-heading" className="mb-6">
+        <h2 id="purpose-nav-heading" className="mb-3 px-1 text-lg font-semibold text-on-surface">
+          目的から探す
+        </h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {categoryCards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <div key={card.title} className="flex flex-col rounded-2xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+                <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${card.iconBg}`}>
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 className="mt-3 text-base font-semibold text-on-surface sm:text-lg">{card.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-on-surface-variant">{card.description}</p>
+                <ul className="mt-3 space-y-1.5">
+                  {card.links.map((link) => (
+                    <li key={link.to + link.label}>
+                      <Link
+                        to={link.to}
+                        className={`flex min-h-[44px] items-center rounded-lg bg-surface-container-high px-3.5 py-2.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${focusRing}`}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+
+          <Link
+            to="/search"
+            className={`flex flex-col justify-center rounded-2xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container sm:p-5 ${focusRing}`}
+          >
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
+              <SearchIcon className="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 className="mt-3 text-base font-semibold text-on-surface sm:text-lg">サイト内を検索する</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-on-surface-variant">
+              議員名、議案名、テーマなど、サイト全体を横断して探せます。
+            </p>
+          </Link>
+        </div>
+      </section>
+
+      {/* このサイトについて・編集方針等の信頼性情報 */}
+      <nav aria-label="サイトの信頼性に関する情報" className="mb-6 flex flex-wrap gap-x-4 gap-y-1.5 px-1 text-sm">
+        <Link to="/about" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           このサイトについて
         </Link>
-        <Link
-          to="/editorial-policy"
-          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <Link to="/editorial-policy" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           編集方針・情報源
         </Link>
-        <Link
-          to="/contact"
-          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <Link to="/contact" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           情報提供・訂正依頼
         </Link>
-        <Link
-          to="/updates"
-          className="rounded text-primary underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <Link to="/updates" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           更新履歴
         </Link>
       </nav>
-
-      <section aria-labelledby="purpose-nav-heading" className="mb-6">
-        <h2 id="purpose-nav-heading" className="mb-2 text-base font-semibold text-on-surface">
-          目的から探す
-        </h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <Link
-            to="/city-guide"
-            className="flex flex-col gap-2 rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container text-on-tertiary-container">
-              <CompassIcon className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span className="text-sm font-semibold text-on-surface">市役所の相談先を探す</span>
-            <span className="text-xs leading-relaxed text-on-surface-variant">
-              質問に答えて、担当課・電話番号・受付時間・公式情報を確認できます。
-            </span>
-          </Link>
-
-          <Link
-            to="/questions"
-            className="flex flex-col gap-2 rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
-              <QuestionMarkCircleIcon className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span className="text-sm font-semibold text-on-surface">議員・一般質問を調べる</span>
-            <span className="text-xs leading-relaxed text-on-surface-variant">
-              市議会議員や一般質問の内容を検索できます。
-            </span>
-          </Link>
-
-          <div className="flex flex-col gap-2 rounded-xl bg-surface-container-low p-4 shadow-e1">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-container text-on-primary-container">
-              <YenIcon className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span className="text-sm font-semibold text-on-surface">財政・報酬を見る</span>
-            <span className="text-xs leading-relaxed text-on-surface-variant">
-              延岡市の予算、財政、市長・議員報酬を確認できます。
-            </span>
-            <div className="mt-1 flex gap-2">
-              <Link
-                to="/finance"
-                className="flex-1 rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                財政を見る
-              </Link>
-              <Link
-                to="/compensation"
-                className="flex-1 rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                報酬を見る
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="speech-answers-heading" className="mb-6">
-        <div className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
-              <DocumentIcon className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <h2 id="speech-answers-heading" className="text-base font-semibold text-on-surface">
-              一般質問・答弁を調べる
-            </h2>
-            <span className="rounded-full bg-tertiary-container px-2.5 py-0.5 text-xs font-medium text-on-tertiary-container">
-              試験公開中
-            </span>
-          </div>
-          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-            延岡市議会で行われた一般質問と、市長・執行部の答弁を、議員・テーマ・年度から確認できます。現在は一部の会議録から順次登録しています。
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <Link
-              to="/"
-              className="rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              議員から探す
-            </Link>
-            <Link
-              to="/themes"
-              className="rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              テーマから探す
-            </Link>
-            <Link
-              to="/executive-answers"
-              className="rounded-full bg-surface-container-high px-3 py-2 text-center text-xs font-medium text-on-surface transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              答弁を検索する
-            </Link>
-          </div>
-        </div>
-      </section>
 
       <section aria-labelledby="city-data-summary-heading" className="mb-6">
         <h2 id="city-data-summary-heading" className="mb-2 text-base font-semibold text-on-surface">
@@ -335,37 +344,17 @@ export function HomePage() {
         </div>
         <Link
           to="/dashboard"
-          className="mt-3 flex items-center justify-center rounded-full bg-primary-container px-4 py-3 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className={`mt-3 flex min-h-[44px] items-center justify-center rounded-full bg-primary-container px-4 py-3 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${focusRing}`}
         >
           市政ダッシュボードを詳しく見る
         </Link>
       </section>
 
-      <h2 className="mb-2 px-1 text-base font-semibold text-on-surface">このサイトでできること</h2>
-      <nav aria-label="このサイトでできること" className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
-        {navLinks.map((link) =>
-          link.ready && link.to ? (
-            <Link
-              key={link.label}
-              to={link.to}
-              className="flex items-center justify-center rounded-xl bg-surface-container-low px-3 py-3 text-center text-sm font-medium text-on-surface shadow-e1 transition hover:bg-surface-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              {link.label}
-            </Link>
-          ) : (
-            <span
-              key={link.label}
-              aria-disabled="true"
-              className="flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-outline-variant px-3 py-3 text-center text-sm font-medium text-on-surface-variant"
-            >
-              {link.label}
-              <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-semibold">
-                準備中
-              </span>
-            </span>
-          ),
-        )}
-      </nav>
+      <section aria-labelledby="current-members-heading" className="mb-2">
+        <h2 id="current-members-heading" className="mb-2 px-1 text-lg font-semibold text-on-surface">
+          現職議員を探す
+        </h2>
+      </section>
 
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={query} onChange={setQuery} />
@@ -382,7 +371,7 @@ export function HomePage() {
             <button
               type="button"
               onClick={clearFilters}
-              className="shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className={`shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${focusRing}`}
             >
               絞り込みを解除
             </button>
