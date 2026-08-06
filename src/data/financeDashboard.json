@@ -2,7 +2,7 @@
   "fiscalYear": "2026",
   "fiscalYearLabel": "令和8年度",
   "referenceDate": "2026-06-05",
-  "lastVerified": "2026-07-14",
+  "lastVerified": "2026-08-06",
   "generalAccount": {
     "totalThousandYen": 69988095,
     "totalBeforeThousandYen": 69408240,
@@ -95,11 +95,11 @@
     "fiscalYearLabel": "令和6年度決算",
     "realDebtServiceRatioPercent": 8.6,
     "futureBurdenRatioPercent": 15.9,
-    "fiscalStrengthIndex": null,
-    "currentBalanceRatioPercent": null,
-    "realBalanceThousandYen": null,
+    "fiscalStrengthIndex": 0.53,
+    "currentBalanceRatioPercent": 97.2,
+    "realBalanceThousandYen": 1762775,
     "notApplicableIndicators": ["実質赤字比率", "連結実質赤字比率", "資金不足比率"],
-    "note": "実質赤字比率・連結実質赤字比率・資金不足比率は、延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされています。財政力指数・経常収支比率・実質収支は、今回の確認では公式資料から数値を特定できなかったため「確認中」としています。"
+    "note": "実質赤字比率・連結実質赤字比率・資金不足比率は、延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされています。このほか、当サイトの掲載項目にない参考指標として、実質収支比率5.4%、公債費負担比率13.9%が同資料に記載されています。"
   },
   "sources": [
     {
@@ -185,11 +185,11 @@
     },
     {
       "section": "financialIndicators",
-      "title": "令和6年度健全化判断比率等の公表",
+      "title": "延岡市の財政事情（令和6年度決算及び令和7年度前期）－令和6年度一般会計決算状況及び各種財政指標、基金の状況",
       "organization": "延岡市",
-      "referenceDate": "2025-09-19",
-      "confirmedDate": "2026-07-21",
-      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html"
+      "referenceDate": "2025-11-01",
+      "confirmedDate": "2026-08-06",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24781.pdf"
     }
   ],
   "notes": "表示額は延岡市が公表した予算資料を基に整理しています。億円表示は千円単位の数値を換算しているため、端数処理により資料上の数値と一致しない場合があります。市債額は当該年度の予算計上額であり、市債残高ではありません。"
