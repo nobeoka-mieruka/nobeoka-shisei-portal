@@ -39,6 +39,11 @@ export function CityOfficialsPage() {
   const roleLabelFor = (role: CitySpecialPostRole) =>
     citySpecialPosts.find((p) => p.role === role)?.roleLabel ?? role;
 
+  const latestVerifiedAt = citySpecialPosts.reduce<string | undefined>(
+    (latest, p) => (!latest || p.lastVerifiedAt > latest ? p.lastVerifiedAt : latest),
+    undefined,
+  );
+
   return (
     <div className="px-4 py-4 sm:px-6">
       {seo.jsonLd.map((entry) => (
@@ -65,7 +70,8 @@ export function CityOfficialsPage() {
       </div>
 
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
-        選挙管理委員会委員については、公式資料で委員全員の氏名・任期を確認できていないため、本ページには未掲載です（委員長のみ報道等で氏名の手がかりがありますが、一次資料での確認が取れ次第、追加します）。監査委員は、延岡市公式ホームページ「監査委員制度の概要」で識見委員2名・議選委員1名の計3名と明記されていることを確認し、掲載しています。
+        選挙管理委員会委員については、公式資料で委員全員の氏名・任期を確認できていないため、本ページには未掲載です（委員長のみ報道等で氏名の手がかりがありますが、一次資料での確認が取れ次第、追加します。最終確認日：
+        {latestVerifiedAt ? formatJapaneseDate(latestVerifiedAt) : "確認中"}）。監査委員は、延岡市公式ホームページ「監査委員制度の概要」で識見委員2名・議選委員1名の計3名と明記されていることを確認し、掲載しています。
       </div>
 
       {byRole.map(({ role, posts }) => (
@@ -102,7 +108,11 @@ export function CityOfficialsPage() {
         </SectionCard>
       ))}
 
-      <LastUpdated className="mt-4" />
+      <LastUpdated
+        className="mt-4"
+        dataAsOfLabel="掲載データの最終確認日"
+        dataAsOf={latestVerifiedAt ? formatJapaneseDate(latestVerifiedAt) : undefined}
+      />
 
       <div className="mt-4">
         <CorrectionRequestButton pageName="副市長・教育長・行政委員会委員" />

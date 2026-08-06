@@ -89,10 +89,20 @@ export function CommitteeDetailPage() {
             <dt className="text-on-surface-variant">区分</dt>
             <dd className="font-medium text-on-surface">{committee.type}</dd>
           </div>
-          <div className="flex items-center justify-between gap-2 py-1.5">
-            <dt className="text-on-surface-variant">所管事項</dt>
-            <dd className="text-right font-medium text-on-surface">{committee.jurisdiction ?? "確認中"}</dd>
-          </div>
+          {committee.jurisdiction ? (
+            <div className="flex items-center justify-between gap-2 py-1.5">
+              <dt className="text-on-surface-variant">所管事項</dt>
+              <dd className="text-right font-medium text-on-surface">{committee.jurisdiction}</dd>
+            </div>
+          ) : (
+            <div className="py-1.5">
+              <dt className="text-on-surface-variant">所管事項</dt>
+              <dd className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                延岡市議会委員会条例の該当条文を確認できておらず、確定できていません（最終確認日：
+                {formatDateOrRaw(committee.lastVerifiedAt)}）。新たな一次資料を確認でき次第、更新します。
+              </dd>
+            </div>
+          )}
           {(committee.termStart || committee.termEnd) && (
             <div className="flex items-center justify-between gap-2 py-1.5">
               <dt className="text-on-surface-variant">任期</dt>

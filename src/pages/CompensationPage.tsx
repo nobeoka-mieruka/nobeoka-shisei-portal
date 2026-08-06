@@ -240,7 +240,10 @@ export function CompensationPage() {
                     </div>
                   </dl>
                   {!hasRange && (
-                    <p className="mt-1.5 text-xs text-on-surface-variant">類似団体の最高額・最低額を確認中です。</p>
+                    <p className="mt-1.5 text-xs text-on-surface-variant">
+                      類似団体の最高額・最低額は公式資料でまだ確認できていません（最終確認日：
+                      {formatJapaneseDate(similarMunicipality.lastVerified ?? similarMunicipality.referenceDate)}）。
+                    </p>
                   )}
                   {!hasRank && (
                     <p className="mt-1 text-[11px] leading-snug text-on-surface-variant">

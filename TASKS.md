@@ -2017,3 +2017,71 @@ BLOCKEDと判断）：
 - 所管事項（jurisdiction）・歴代委員長（過去年度の委員名簿）は、一次資料が見つからず今回も未着手
 - Phase3の残り6項目（①③④②⑥⑦）は、CLAUDE.mdの「一度に複数の大規模タスクを開始しない」方針に
   従い、ユーザーの次の指示を待って着手する
+
+### TASK-039 「確認中」等の曖昧表示の再調査・BLOCKED理由の明確化
+
+状態：DONE（絞り込み版で実施。全面的な状態タクソノミー統一は見送り、理由は下記）
+優先度：A（ユーザー指示）
+対象：`src/pages/CommitteeDetailPage.tsx`、`src/pages/CityOfficialsPage.tsx`、`src/pages/CompensationPage.tsx`
+依存関係：TASK-034（同種の全面監査を実施済み）
+
+目的：ユーザー指示「サイト全体に残っている『確認中』『準備中』『未確認』『情報なし』等の表示を
+全面的に再調査し、修正する」に基づき対応する。ただし、TASK-034が2日前（2026-08-06）に同じ調査を
+実施し、「該当107ファイルの大半（100件超）はnull値に対する意図的な表示フォールバックであり、
+これを6段階の状態タクソノミー（verified/partially_verified/awaiting_publication/
+not_found_in_official_sources/blocked/unknown）へ全面置換することは、既に適切に機能している
+表示ロジックを壊すリスクが高く、便益に見合わない」と明示的に判断・記録していたため、着手前に
+ユーザーへこの経緯を報告し、方針を確認した。
+
+ユーザー回答：「絞り込み版（推奨）」を選択。null値の健全なフォールバック表示（100件超）はそのまま
+残し、本当にBLOCKED理由が曖昧な箇所（委員会所管事項・選挙管理委員会・類似団体報酬比較データ）に
+限定して、理由と最終確認日を明記する方針で実施した。
+
+再調査結果（2026-08-06時点、src配下の該当ファイル数）：
+- 該当キーワードを含むファイル：108件（src配下。pages 49・lib+components 32・data 20、
+  ほかscripts 23・docs 13）。TASK-034時点（リポジトリ全体107件）から、TASK-035〜038の追加分だけ
+  自然増。個別に確認したところ、追加分もTASK-034と同様の健全なnullフォールバックが大半
+
+分類・対応した3件（ユーザー指定のBLOCKED項目に対応）：
+1. **委員会の所管事項**（`CommitteeDetailPage.tsx`）：C分類（延岡市議会委員会条例の条文が
+   一次資料として確認できていない）。所管事項が`null`の場合、単なる「確認中」から
+   「延岡市議会委員会条例の該当条文を確認できておらず、確定できていません（最終確認日：
+   {committee.lastVerifiedAt}）。新たな一次資料を確認でき次第、更新します。」へ変更（5委員会が対象）
+2. **選挙管理委員会等の未確認情報**（`CityOfficialsPage.tsx`）：C分類。既存の理由文（委員全員の
+   氏名・任期を確認できていない旨）はTASK-034時点で既に明記済みだったため、最終確認日
+   （citySpecialPosts.jsonの`lastVerifiedAt`の最大値）をその場に追記し、あわせてページ下部の
+   `LastUpdated`コンポーネントへ`dataAsOfLabel`/`dataAsOf`（ビルド日時と区別した「掲載データの
+   最終確認日」）を追加した（従来はビルド日時のみ表示、データ確認日が別途表示されていなかった）
+3. **類似団体報酬比較データ**（`CompensationPage.tsx`、TASK-011/012関連）：C分類。理由文
+   （個別団体すべての月額データを確認できていない）は既存のまま、最終確認日
+   （`similarMunicipalityComparison.json`の`lastVerified`）を追記。ただし現在登録済みの全ロールで
+   最高額・最低額データ自体は既に存在するため、この分岐は現状非表示（将来同種のデータ欠落が
+   発生した場合に備えた防御的改善であり、TASK-034が既に確認していた他の「準備中」到達不能表示と
+   同様の位置づけ）
+
+歴代委員長：Committee型に委員長履歴フィールド自体が存在せず、ページにも表示していない
+（誤解を招く表示は無いため、今回は追加実装なし。過去年度の委員名簿PDFを発見でき次第、
+別タスクで検討する）
+
+全面的な状態タクソノミー統一（verified/partially_verified/awaiting_publication/
+not_found_in_official_sources/blocked/unknown）：TASK-034の判断を維持し、今回も実施しなかった。
+新設予定だった`validate:routes`/`validate:links`/`validate:statuses`も、既存の`validate-seo.mjs`・
+`validate-content.mjs`・`validate-data.mjs`が同等の検査（内部リンク切れ、undefined/null/NaN表示、
+verificationStatus未設定、重複ID等）を既にカバーしているため新規追加しなかった。
+
+検証結果：
+- `npm run validate:data` → errors=0
+- `npm run typecheck` → 成功
+- `npm run lint` → 成功
+- `npm run test` → 26件成功
+- `npm run build`（prerender・validate:seo・validate:content含む） → 1270ルート生成、失敗0件
+
+完了報告への追加項目：
+- 巡回した公開ページ数：1270ページ（`validate-content.mjs`による機械走査、prerender成果物全件）
+- 発見した「確認中」等の該当ファイル数：108件（src配下）
+- 確定情報へ修正した件数：0件（推測での確定は行っていない）
+- 公式公開待ち・理由付き表示へ修正した件数：3ファイル（上記）
+- 一次資料不足として残した件数：105件（健全なnullフォールバック、TASK-034の判断を継続）
+- 修正した空欄・null・undefined・リンク切れ：0件（`validate-content.mjs`で既に0件を確認済み）
+- 追加した自動検査：なし（既存3スクリプトで十分と判断）
+- BLOCKEDとして残した項目：委員会所管事項の根拠条例本文、歴代委員長、選挙管理委員会委員名簿
