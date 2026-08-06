@@ -20,7 +20,9 @@ const CITY_OFFICIALS_CSV_COLUMNS: CsvColumn<CitySpecialPost>[] = [
   { header: "役職", value: (p) => p.roleLabel },
   { header: "氏名", value: (p) => p.name },
   { header: "読み仮名", value: (p) => p.nameKana },
+  { header: "現職・歴代", value: (p) => (p.status === "former" ? "歴代" : "現職") },
   { header: "就任日", value: (p) => p.appointedDate },
+  { header: "退任日", value: (p) => p.retiredDate },
   { header: "出典URL", value: (p) => p.sourceRefs.map((s) => s.url) },
   { header: "最終確認日", value: (p) => p.lastVerifiedAt },
   { header: "サイト内URL", value: () => `${SITE_URL}/city-officials` },
@@ -43,9 +45,12 @@ export function CityOfficialsPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
+  const currentPosts = citySpecialPosts.filter((p) => p.status !== "former");
+  const formerPosts = citySpecialPosts.filter((p) => p.status === "former");
+
   const byRole = ROLE_ORDER.map((role) => ({
     role,
-    posts: citySpecialPosts.filter((p) => p.role === role),
+    posts: currentPosts.filter((p) => p.role === role),
   })).filter((g) => g.posts.length > 0);
 
   const roleLabelFor = (role: CitySpecialPostRole) =>
@@ -123,6 +128,43 @@ export function CityOfficialsPage() {
           </ul>
         </SectionCard>
       ))}
+
+      {formerPosts.length > 0 && (
+        <SectionCard title={`歴代（元職、${formerPosts.length}名）`} className="mb-4">
+          <p className="text-xs leading-relaxed text-on-surface-variant">
+            既存データベース（議案ごとの賛否）に登録済みの人事同意議案から、現職者の先代にあたることが確認できた方のみ掲載しています。退任日は、退任自体に議会同意を要しないため公式資料で確認できない場合があります。
+          </p>
+          <ul className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {formerPosts.map((p) => (
+              <li key={p.id} className="rounded-lg border border-outline-variant p-3">
+                <p className="text-sm font-semibold text-on-surface">
+                  {p.roleLabel}：{p.name}
+                  {p.nameKana && <span className="ml-1.5 text-xs font-normal text-on-surface-variant">（{p.nameKana}）</span>}
+                </p>
+                <p className="mt-1 text-xs text-on-surface-variant">
+                  {p.appointedDate ? `${formatJapaneseDate(p.appointedDate)} 就任（議会同意）` : "就任日確認中"}
+                  {p.retiredDate ? `〜${formatJapaneseDate(p.retiredDate)} 退任` : "〜退任日確認中"}
+                </p>
+                {p.termNote && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{p.termNote}</p>}
+                {p.relatedLinks && p.relatedLinks.length > 0 && (
+                  <ul className="mt-2 space-y-1">
+                    {p.relatedLinks.map((l) => (
+                      <li key={l.to}>
+                        <Link to={l.to} className={`text-xs font-medium text-primary hover:underline ${linkClass}`}>
+                          {l.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="mt-2">
+                  <SourceList sources={p.sourceRefs} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
 
       <LastUpdated
         className="mt-4"

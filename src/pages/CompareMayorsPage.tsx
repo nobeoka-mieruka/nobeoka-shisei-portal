@@ -17,7 +17,7 @@ import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import { archiveVerificationStatusLabel, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
-import { buildPersonIndex, councilDocumentsForPerson, policiesForPerson } from "../lib/people";
+import { buildPersonIndex, mayorSubmittedBillCount, policiesForPerson } from "../lib/people";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -59,8 +59,10 @@ function countMetricValue(mayor: ArchiveMayor, key: CountMetricKey): number | nu
       return tenureYearsOrNull(mayor);
     case "policyCount":
       return policiesForPerson("mayor", mayor.id).length;
-    case "documentCount":
-      return councilDocumentsForPerson(mayor.id).length;
+    case "documentCount": {
+      const { count, hasDataCoverage } = mayorSubmittedBillCount(mayor.id);
+      return hasDataCoverage ? count : null;
+    }
   }
 }
 
@@ -143,8 +145,24 @@ export function CompareMayorsPage() {
                     return v != null ? `約${v}年` : "確認中";
                   },
                 },
-                { header: "関連政策件数", align: "right", render: (m) => `${policiesForPerson("mayor", m.id).length}件` },
-                { header: "関連議案等件数", align: "right", render: (m) => `${councilDocumentsForPerson(m.id).length}件` },
+                {
+                  header: "関連政策件数",
+                  align: "right",
+                  render: (m) => {
+                    const n = policiesForPerson("mayor", m.id).length;
+                    if (n > 0) return `${n}件`;
+                    return m.isCurrentMayor ? "0件" : "0件（歴代市長の公約データは未収集）";
+                  },
+                },
+                {
+                  header: "関連議案・条例・請願・陳情件数",
+                  align: "right",
+                  render: (m) => {
+                    const { count, hasDataCoverage } = mayorSubmittedBillCount(m.id);
+                    if (!hasDataCoverage) return "収録期間外（未収録）";
+                    return `${count}件`;
+                  },
+                },
                 {
                   header: "確認状況",
                   render: (m) =>

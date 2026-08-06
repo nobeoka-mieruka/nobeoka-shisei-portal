@@ -166,6 +166,40 @@ export function councilDocumentsForPerson(id: string): ArchiveCouncilDocument[] 
   });
 }
 
+/** billVotes.json全体が実際にカバーしている議決日の範囲（最古・最新）。データが無ければundefined。 */
+function billVotesCoverageRange(): { start: string; end: string } | undefined {
+  const dates = billVotes.map((b) => b.votingDate).filter((d): d is string => !!d).sort();
+  if (dates.length === 0) return undefined;
+  return { start: dates[0], end: dates[dates.length - 1] };
+}
+
+/**
+ * 市長が提出した議案（billVotes.jsonのproposerType==="mayor"）のうち、その市長の在任期間内に
+ * 議決されたものの件数を返す。archiveCouncilDocuments.json（proposerIds等）は市長の紐付けが
+ * ほぼ未収録のため、より網羅的なbillVotes.jsonの議決日と任期を突き合わせて算出する。
+ *
+ * hasDataCoverage:falseは「その市長の任期がbillVotes.jsonの収録期間と全く重ならない」ことを示す
+ * （＝0件ではなく「未収録」）。任期が確認できない市長も同様にfalseとする。
+ * 任期終了日が未確認（termEnd:null。現職、または退任日未確認）の場合は、収録期間の終端まで
+ * 在任していたものとして扱う。
+ */
+export function mayorSubmittedBillCount(mayorId: string): { count: number; hasDataCoverage: boolean } {
+  const coverage = billVotesCoverageRange();
+  const terms = archiveMayorTerms.filter((t) => t.mayorId === mayorId);
+  if (!coverage || terms.length === 0) return { count: 0, hasDataCoverage: false };
+
+  const inTerm = (dateIso: string) =>
+    terms.some((t) => dateIso >= t.termStart && dateIso <= (t.termEnd ?? coverage.end));
+
+  const overlapsCoverage = terms.some((t) => t.termStart <= coverage.end && (t.termEnd ?? coverage.end) >= coverage.start);
+  if (!overlapsCoverage) return { count: 0, hasDataCoverage: false };
+
+  const count =
+    billVotes.filter((b) => b.proposerType === "mayor" && b.votingDate && inTerm(b.votingDate)).length +
+    councilDocumentsForPerson(mayorId).length;
+  return { count, hasDataCoverage: true };
+}
+
 /** 既存billVotes.json（議員別賛否記録）で、この人物（議員）の賛否が確認できる議案件数。 */
 export function voteCountForPerson(id: string): number {
   return billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === id)).length;

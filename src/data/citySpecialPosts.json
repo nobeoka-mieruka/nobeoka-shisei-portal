@@ -624,5 +624,23 @@
     ],
     "notes": "延岡市公式ホームページ「監査委員制度の概要」に、議選委員として明記されている。現職市議会議員（m08）と同一人物。",
     "lastVerifiedAt": "2026-08-06"
+  },
+  {
+    "id": "csp-26",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "小泉 智明",
+    "status": "former",
+    "appointedDate": "2023-06-27",
+    "retiredDate": null,
+    "termNote": "現職の赤木繁男氏（2025年8月12日同意）・上猶真美氏（2026年3月19日同意）に先立って副市長を務めた。退任日は公式資料で確認できていない。",
+    "relatedLinks": [
+      { "label": "就任時の同意議案（副市長の選任（小泉智明氏））", "to": "/bills/votes/2023-06-gian-27" }
+    ],
+    "sourceRefs": [
+      { "label": "令和5年6月定例会 議案等審議結果（副市長の選任（小泉智明氏））", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14665.pdf" }
+    ],
+    "notes": "既存データベース（billVotes.json、令和5年6月定例会の人事同意議案）に基づき登録。退任に関する議決記録は存在しない（副市長の退任は議会同意を要しないため）ため、退任日は未確認のまま。",
+    "lastVerifiedAt": "2026-08-06"
   }
 ]

@@ -152,7 +152,11 @@ export type CitySpecialPostRole =
 
 /**
  * 副市長・教育長・監査委員・農業委員会委員等（src/data/citySpecialPosts.json）。
- * 現職のみを対象とし、歴代（過去の在任者）は収録しない。市長（mayor.json）・
+ * 現職に加え、既存データ（billVotes.jsonの人事同意議案）から後任者が明確に確認できる
+ * 歴代在任者（status: "former"）も収録する（2026年8月に追加）。ただし、監査委員・
+ * 教育委員会委員等、複数議席が短い周期で交代する役職の網羅的な歴代整理は、
+ * 議選委員か識見委員かの区別や在任期間の境界を推測せずに確定させることが難しいため対象外とし、
+ * 単一後任への交代が明確に確認できたもの（副市長等）のみを登録する。市長（mayor.json）・
  * 歴代市長アーカイブ（archiveMayors.json）とは別管理。
  */
 export interface CitySpecialPost {
@@ -162,8 +166,12 @@ export interface CitySpecialPost {
   roleLabel: string;
   name: string;
   nameKana?: string;
+  /** 現職か歴代（過去の在任者）か。省略時はcurrentとして扱う。 */
+  status?: "current" | "former";
   /** 議会同意等で就任が確認できた年月日（ISO形式）。未確認の場合はnull。 */
   appointedDate: string | null;
+  /** 退任日（ISO形式）。公式資料で確認できた場合のみ設定する。未確認の場合はnull。 */
+  retiredDate?: string | null;
   /** 任期・退任予定等、公式資料で確認できた場合のみ記載する自由記述。 */
   termNote?: string;
   /** 担当業務・所管の説明（公式資料で確認できた範囲）。 */
