@@ -561,6 +561,27 @@ export function getIndexableRoutes() {
       lastmod: resolveLastmod(path, overlappingMayorTermDates, ["src/data/archiveMayorTerms.json"]),
     });
   }
+  // 旧任期一般質問アーカイブ（councilSpeechSummaries.json、term:"previous"またはisFormerMember:trueの発言）が
+  // カバーする会計年度も、財政データ・市長任期のいずれにも該当しない場合はページを生成する。
+  // 元議員詳細ページ（MemberFormerDetailPage.tsx）の「年表で見る」リンクが、発言日から算出した年度を
+  // 指すため、その年度のページが実在しないとプリレンダリング対象外＝本番404になる。
+  const speechCoveredFiscalYears = new Set();
+  for (const member of data.councilSpeechSummaries.members ?? []) {
+    for (const speech of member.speeches ?? []) {
+      if (!speech.date) continue;
+      if (speech.term === "previous" || member.isFormerMember) {
+        speechCoveredFiscalYears.add(fiscalYearOfIsoDate(speech.date));
+      }
+    }
+  }
+  for (const fiscalYear of speechCoveredFiscalYears) {
+    if (financeCoveredFiscalYears.has(fiscalYear) || mayorTermFiscalYears.has(fiscalYear)) continue;
+    const path = `/timeline/${fiscalYear}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(path, [], ["src/data/councilSpeechSummaries.json"]),
+    });
+  }
 
   const dedupedByPath = new Map();
   for (const u of urls) {

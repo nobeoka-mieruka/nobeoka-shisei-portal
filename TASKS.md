@@ -1532,3 +1532,78 @@ TASK-005C〜005F全体＝令和4年度〜令和元年度の旧任期一般質問
 - コミットID：（後述）
 - 変更概要：上記のとおり。`validate:data`/`typecheck`/`lint`/`build`/`validate:seo`すべて成功
   （1251/1251ページ生成、SEO failures=0）。選挙管理委員会の追加登録は今後の課題として残る。
+
+---
+
+### TASK-034 全公開ページの「確認中」等の表示監査、及びvalidate:content検証スクリプトの新設
+
+状態：DONE（監査は完了。文言の全面的な状態タクソノミー統一は見送り、理由を記録）
+優先度：B
+対象：`scripts/validate-content.mjs`（新規）、`scripts/lib/public-routes.mjs`、`package.json`
+依存関係：なし
+目的：ユーザー指示「全ページの『確認中』表示の再調査・解消」に基づき、公開中の全ページを対象に、
+未確認・準備中等の曖昧表示や、undefined/null/NaNの表示バグ、内部リンク切れを洗い出し、修正可能なものを
+修正する
+
+実施内容：
+- リポジトリ全体を`確認中|調査中|準備中|更新中|登録中|未確認|未収録|データなし|情報なし|詳細不明|
+  公開待ち|取得中|整備中|後日追加|Coming Soon|TODO|TBD|仮データ|暫定|サンプル|ダミー|未実装|作成中|
+  近日公開`で検索し、107ファイルが該当することを確認した
+- 内訳を精査した結果、「確認中」の大半（100件超）は、金額・日付等のnull値に対する意図的な表示
+  フォールバック（例：`archiveFinance.ts`の`formatYen`等、値がnullの場合のみ「確認中」を返す関数）で
+  あり、CLAUDE.mdの既存方針（未確認データを0や空欄で埋めない）に沿った健全な設計であることを確認した。
+  これらを一律に6段階の状態タクソノミー（verified/partially_verified/awaiting_publication/
+  not_found_in_official_sources/blocked/unknown）へ置き換える全面改修は、既に適切に機能している
+  表示ロジックを壊すリスクが高く、対応する便益（表示文言の精緻化のみ）に見合わないと判断し、
+  今回は実施しなかった（判断理由は本タスクに記録）
+- 「準備中」の4件（`CouncilDocumentsPage.tsx`・`GeneralQuestionsPage.tsx`・`BillVoteDetailPage.tsx`・
+  `ContactPage.tsx`）は、いずれも実データが存在する現状では到達しない防御的な空データフォールバック
+  （例：Googleフォームの`CONTACT_FORM_URL`が実際には設定済みのため、else分岐は表示されない）である
+  ことをコードを読んで確認した。実害はないため文言はそのまま残した
+- 政治資金団体`pf-org-001`（みうら久知後援会）の`organizationType`/`disclosureAuthority`が「確認中」の
+  1件は、令和7年分の政治資金収支報告書が例年11月頃公表のため現時点で未公表であることが
+  `notes`フィールドに明記されており、詳細ページ本文にもその理由が表示されていることを確認した
+  （C分類：公式情報がまだ公開されていない、として適切に処理済み）
+- 上記の手作業レビューに加え、`scripts/validate-content.mjs`を新設し、`npm run build`のprerender成果物
+  （dist/配下、1254ページ）を機械的に走査して、undefined/null/NaNの直接表示、および内部リンク切れを
+  検出する検証を追加した（`package.json`の`build`スクリプトへ`validate:content`として統合）
+- この検証により、実際のバグを1件発見・修正した：元議員詳細ページ（`MemberFormerDetailPage.tsx`）の
+  「年表で見る」リンクが、旧任期一般質問アーカイブ拡張（本セッションで令和元年度〜令和4年度分を追加）
+  により新たに参照されるようになった会計年度（例：fm10の場合`/timeline/2020`）を指すが、
+  `scripts/lib/public-routes.mjs`の年度別タイムラインページ生成が財政データ・市長任期の年度のみを
+  対象としており、一般質問アーカイブが対象年度に含まれていなかったため、本番で404となっていた。
+  `public-routes.mjs`に、`councilSpeechSummaries.json`の`term:"previous"`または`isFormerMember:true`の
+  発言日から算出した会計年度も生成対象へ追加し、解消した（1251→1253ページに増加）
+
+受入条件：
+- リポジトリ全体の対象文言検索を実施した（達成）
+- 修正可能な「確認中」は確定情報へ置換した（達成：該当なし。全て意図的な設計と判断）
+- 公開待ちは理由と確認日を表示した（達成：既存のpf-org-001が該当し、既に対応済みと確認）
+- 一次資料不足は推測せず明記した（達成：既存の設計方針のまま）
+- 空欄・undefined・null・NaNの公開表示がない（達成：`validate:content`で全1254ページを機械検証、0件）
+- 内部リンク切れがない（達成：`validate:content`で検出した1件を修正、再検証で0件）
+- 今後同種のバグが本番へ混入しないよう自動検査を追加した（達成：`npm run validate:content`を新設し、
+  `npm run build`に統合）
+
+公式資料：
+- 該当なし（既存コード・データの監査、及び検証ツールの追加）
+
+完了報告への追加項目：
+- 巡回した公開ページ数：1254ページ（dist/配下の全prerender成果物、`validate-content.mjs`による機械走査）
+- 発見した「確認中」等の該当ファイル数：107ファイル（grep一次検索）。うち曖昧・改善余地ありと判断：0件
+  （全て意図的な設計、または実害のない防御的フォールバックと確認）
+- 確定情報へ修正した件数：0件（推測での確定は行っていない。pf-org-001は元々「公開待ち」理由が
+  明記済みのため変更不要と判断）
+- 発見・修正した実バグ：1件（`/timeline/2020`等の内部リンク切れ、根本原因は年度別ページ生成漏れ）
+- 追加した自動検査：`npm run validate:content`（`scripts/validate-content.mjs`、undefined/null/NaN表示・
+  内部リンク切れを機械検出、`npm run build`に統合済み）
+- 未解決項目：全面的な状態タクソノミー統一（verified/partially_verified/awaiting_publication/
+  not_found_in_official_sources/blocked/unknown）は、既存設計の健全性とリスクを踏まえ実施を見送った。
+  選挙管理委員会の委員名簿（TASK-033で継続課題）、及び現職22名・元議員10名の経歴データ
+  （TASK-032で継続課題）は本タスクの対象外として引き続き別タスクで扱う
+
+完了記録：
+- 完了日：2026-08-06
+- コミットID：（後述）
+- 変更概要：上記のとおり。`validate:data`/`typecheck`/`lint`/`test`/`build`（`validate:seo`・
+  `validate:content`を含む）すべて成功。
