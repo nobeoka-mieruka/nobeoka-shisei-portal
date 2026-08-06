@@ -1,4 +1,19 @@
-# セッション引き継ぎメモ（2026-08-06 更新・TASK-040完了、トップページUIリニューアル）
+# セッション引き継ぎメモ（2026-08-06 更新・TASK-041完了、データ収録状況ページに委員会集計を追加）
+
+## 2026-08-06（同日14回目）：データ品質確認の一環でTASK-041（データ収録状況ページへ委員会集計追加）完了
+
+TASK-040（トップページUI）完了後、優先順位「3.データ品質・件数・表示整合性」の確認に着手。
+members/formerMembers/mayors/citySpecialPosts/questions/bills/sessions/committees/
+committeeActivityReportsの重複ID・重複氏名を機械的に検査し、問題なしを確認（validate-data.mjsの
+errors=0と一致）。/data-statusの集計値がすべて元データ配列から直接算出されており、手動固定の定数が
+無いことも確認した。
+
+その過程で、TASK-037・038で新設した委員会データベースが/data-statusの集計対象に含まれていない
+抜け漏れを発見し、TASK-041として追加した。
+
+### 検証結果
+`validate:data`（errors=0）／`typecheck`／`lint`／`test`（26/26）／`build`（prerender・
+`validate:seo`・`validate:content`含む、1270ルート、失敗0件）すべて成功。
 
 ## 2026-08-06（同日13回目）：残タスク連続消化、トップページUIリニューアル（TASK-040）完了
 

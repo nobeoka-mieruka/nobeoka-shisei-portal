@@ -2194,3 +2194,36 @@ verificationStatus未設定、重複ID等）を既にカバーしているため
 - 完了日：2026-08-06
 - コミットID：（後述）
 - 変更概要：上記のとおり。
+
+---
+
+### TASK-041 データ収録状況ページへ委員会データベースの集計を追加
+
+状態：DONE（2026-08-06）
+優先度：B（ユーザー指示による残タスク連続消化の一環、データ品質・表示整合性の確認中に発見）
+対象：`src/pages/DataStatusPage.tsx`
+依存関係：TASK-037（委員会データベース新設）、TASK-038（活動報告書掲載）
+
+目的：TASK-037・038で新設した委員会データベース（`committees.json`・`committeeActivityReports.json`）が、
+`/data-status`ページの集計対象に含まれていなかったため追加する。
+
+実施内容：
+- 全公開データの件数を機械的に突合し（members/formerMembers/mayors/citySpecialPosts/questions/bills/
+  sessions/committees/committeeActivityReportsの重複ID検査、現職議員の重複氏名検査）、実データに
+  重複・欠損は無いことを確認した（`validate-data.mjs`のerrors=0と一致）。/data-statusの各集計値は
+  すべて同一の元データ配列から直接算出しており（手動固定の定数ではない）、トップページ・一覧ページと
+  常に一致する設計であることも確認した
+- `/data-status`の「議会（議案・条例・請願・陳情）」セクションへ、委員会（常任・議会運営・特別）の
+  件数・所管事項確認済み件数・活動報告書件数を表示する新しい行を追加した
+
+検証結果：
+- `npm run validate:data` → errors=0
+- `npm run typecheck` → 成功
+- `npm run lint` → 成功
+- `npm run test` → 26件成功
+- `npm run build`（prerender・validate:seo・validate:content含む） → 1270ルート生成、失敗0件
+
+完了記録：
+- 完了日：2026-08-06
+- コミットID：（後述）
+- 変更概要：上記のとおり。

@@ -12,6 +12,8 @@ import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import searchIndexData from "../data/searchIndex.json";
+import committeesData from "../data/committees.json";
+import committeeActivityReportsData from "../data/committeeActivityReports.json";
 import type {
   CouncilMember,
   FormerMember,
@@ -19,6 +21,8 @@ import type {
   GeneralQuestionItem,
   CouncilSpeechSummaryData,
   CitySpecialPost,
+  Committee,
+  CommitteeActivityReport,
 } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm, ArchiveCouncilDocument, ArchivePolicy, ArchiveFiscalYear } from "../types/historicalArchive";
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
@@ -45,6 +49,8 @@ const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const committees = committeesData as Committee[];
+const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -191,6 +197,18 @@ export function DataStatusPage() {
     linkLabel: "議案ごとの賛否を見る",
   };
 
+  const committeesWithJurisdiction = committees.filter((c) => c.jurisdiction !== null).length;
+  const councilCommittees: DataDomain = {
+    label: "委員会（常任・議会運営・特別）",
+    count: committees.length,
+    unit: "件",
+    scope: "現行の委員名簿（令和8年5月8日現在）",
+    detail: `委員名簿・任期を登録済み。所管事項が確認できたもの：${committeesWithJurisdiction}／${committees.length}件（延岡市議会委員会条例の条文が未確認のため残りは「確認できず」と表示）。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。`,
+    linkTo: "/committees",
+    linkLabel: "委員会一覧を見る",
+    fullyCovered: committeesWithJurisdiction === committees.length,
+  };
+
   const questions: DataDomain[] = [
     {
       label: "一般質問（会議録ベース・確認済み）",
@@ -281,6 +299,7 @@ export function DataStatusPage() {
             <DomainRow key={d.label} domain={d} />
           ))}
           <DomainRow domain={councilExtra} />
+          <DomainRow domain={councilCommittees} />
         </ul>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           「議決・審査結果確認済み：{resultConfirmedCount}／{archiveCouncilDocuments.length}件」「出典確認済み（verified）：{verifiedDocumentCount}件」。議員個人の賛否記録は「議案ごとの議員別賛否（既存機能）」側で管理しており、混同していません。
