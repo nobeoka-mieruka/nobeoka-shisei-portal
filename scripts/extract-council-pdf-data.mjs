@@ -152,8 +152,16 @@ async function main() {
     }
 
     let records = [];
+    let carriedSection; // ページ跨ぎでセクション見出しが引き継がれる場合の対応（PDF自身の見出しの継続、推測ではない）
     for (const page of extraction.pages) {
-      records = records.concat(extractRecordsFromPage(page.normalizedText, session.year, page.pageNumber));
+      const { records: pageRecords, lastSection } = extractRecordsFromPage(
+        page.normalizedText,
+        session.year,
+        page.pageNumber,
+        carriedSection,
+      );
+      records = records.concat(pageRecords);
+      carriedSection = lastSection;
     }
     report.proposalsExtracted += records.length;
 

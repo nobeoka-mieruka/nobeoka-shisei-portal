@@ -78,13 +78,13 @@ function findSectionMarkers(text) {
   return markers;
 }
 
-function sectionAt(markers, index) {
+function sectionAt(markers, index, fallback) {
   let current;
   for (const m of markers) {
     if (m.index <= index) current = m;
     else break;
   }
-  return current?.label;
+  return current?.label ?? fallback;
 }
 
 /** 案件分類を機械的に判定する。判定できない場合は"その他"を返す（推測で細分類しない）。 */
@@ -136,7 +136,17 @@ export function canonicalBillNumber(recordType, num) {
  * @param {number} pageNumber
  * @returns {Array<object>} 抽出レコード配列（報告第は含まない）
  */
-export function extractRecordsFromPage(normalizedText, sessionCalendarYear, pageNumber) {
+/**
+ * @param {string} normalizedText 空白を除去したページ全文
+ * @param {number} sessionCalendarYear
+ * @param {number} pageNumber
+ * @param {string} [initialSection] 直前のページの末尾で有効だったセクション見出し（ページ跨ぎ対応）。
+ *   このページ内に見出しが1つも出現しない場合、または最初の案件より前に見出しが無い場合に使う
+ *   （公式資料自身の見出しの継続であり、推測ではない）。
+ * @returns {{ records: Array<object>, lastSection: string|undefined }} lastSectionは、このページの
+ *   末尾時点で有効なセクション見出し（次ページへの引き継ぎに使う）。
+ */
+export function extractRecordsFromPage(normalizedText, sessionCalendarYear, pageNumber, initialSection) {
   const text = zenkakuDigitsToHankaku(normalizedText);
   const sectionMarkers = findSectionMarkers(text);
   // 「再議」（議決のやり直し）のページは、通常の一覧表ではなく経緯説明文や議員別賛否表を含む
@@ -162,7 +172,7 @@ export function extractRecordsFromPage(normalizedText, sessionCalendarYear, page
     // （例："【委員会提出議案】【議員提出議案】【陳情】【市長報告】"の直後に別セクションの議案が続く）、
     // 見出しの直近一致だけでは所属セクションを正しく特定できないため、除外判定には使わない。
 
-    const section = sectionAt(sectionMarkers, cur.index);
+    const section = sectionAt(sectionMarkers, cur.index, initialSection);
 
     // このレコードの範囲は、直後の(a)次のレコード開始位置 (b)次のセクション区切り のうち近い方まで。
     const nextRecordIndex = recordMatches[i + 1]?.index ?? Infinity;
@@ -230,5 +240,8 @@ export function extractRecordsFromPage(normalizedText, sessionCalendarYear, page
     records.push(record);
   }
 
-  return records;
+  // このページの末尾時点のセクション：ページ内に見出しがあればその最後のもの、無ければ
+  // 引き継いだinitialSectionをそのまま次ページへ渡す（見出しの継続）。
+  const lastSection = sectionMarkers.length > 0 ? sectionMarkers[sectionMarkers.length - 1].label : initialSection;
+  return { records, lastSection };
 }
