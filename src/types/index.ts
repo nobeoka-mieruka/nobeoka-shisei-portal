@@ -969,6 +969,13 @@ export interface BillVoteItem {
   voteMethod?: BillVoteMethod;
   /** 個人別賛否の公開状況。未設定はunconfirmedと同義に扱う（可決/否決の結果だけから推測しないこと）。 */
   individualVoteDisclosureStatus?: IndividualVoteDisclosureStatus;
+  /**
+   * 施行日（条例の制定・改正議案等で、公式資料に明記がある場合のみ設定する）。
+   * 単一の施行日に整理できない場合（複数の規定でそれぞれ異なる日から施行される等）は、
+   * 自由記述の文字列として登録する（例："令和6年4月1日（給料表）・令和6年12月1日（期末勤勉手当）、
+   * いずれも遡及適用"）。ISO日付形式に限定しない。
+   */
+  effectiveDate?: string;
 
   // 議案の概要（詳細ページ用の任意項目。データがない項目は表示しない）
   /** 提出理由。 */

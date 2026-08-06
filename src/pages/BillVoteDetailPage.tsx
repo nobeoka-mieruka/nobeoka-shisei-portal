@@ -235,6 +235,18 @@ export function BillVoteDetailPage() {
               <dd className="text-on-surface">{bill.committee}</dd>
             </div>
           )}
+          {bill.voteMethod && (
+            <div>
+              <dt className="text-xs text-on-surface-variant">採決方法</dt>
+              <dd className="text-on-surface">{bill.voteMethod}</dd>
+            </div>
+          )}
+          {bill.effectiveDate && (
+            <div>
+              <dt className="text-xs text-on-surface-variant">施行日</dt>
+              <dd className="text-on-surface">{bill.effectiveDate}</dd>
+            </div>
+          )}
           {bill.submittingDepartment && (
             <div>
               <dt className="text-xs text-on-surface-variant">担当課</dt>
