@@ -1,4 +1,19 @@
-# セッション引き継ぎメモ（2026-08-06 更新・TASK-041完了、データ収録状況ページに委員会集計を追加）
+# セッション引き継ぎメモ（2026-08-06 更新・TASK-042完了、委員会活動報告書CSVを追加）
+
+## 2026-08-06（同日15回目）：TASK-042（委員会活動報告書CSV）完了、内部リンクは既存実装で概ね充足を確認
+
+TASK-041に続き、優先順位「4.CSVダウンロード」の残対象を確認。`committeeActivityReports.json`が
+CSV化されていなかったため、`/committees`へ「活動報告書一覧CSV」ボタンを追加した（TASK-042）。
+
+続けて優先順位「6.内部リンク・回遊導線の強化」を確認。BillVoteDetailPage→委員会リンク、
+CommitteeDetailPage→委員一覧・審査議案・活動報告書、MemberDetailPage→所属委員会リンク、
+GeneralQuestionDetailPage→質問者・関連議案・関連公約リンクは、TASK-009・TASK-037・TASK-038で
+既に実装済みであることを確認した。同一会期・同一テーマへの直接リンクなど一部は未実装だが、
+テーマ別ページ（/themes）経由での到達は可能なため、今回は新規の大規模改修は行わなかった。
+
+### 検証結果
+`validate:data`（errors=0）／`typecheck`／`lint`／`test`（26/26）／`build`（prerender・
+`validate:seo`・`validate:content`含む、1270ルート、失敗0件）すべて成功。
 
 ## 2026-08-06（同日14回目）：データ品質確認の一環でTASK-041（データ収録状況ページへ委員会集計追加）完了
 

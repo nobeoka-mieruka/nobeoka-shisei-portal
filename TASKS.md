@@ -2227,3 +2227,33 @@ verificationStatus未設定、重複ID等）を既にカバーしているため
 - 完了日：2026-08-06
 - コミットID：（後述）
 - 変更概要：上記のとおり。
+
+---
+
+### TASK-042 委員会活動報告書一覧のCSVダウンロード追加（TASK-017の残対象）
+
+状態：DONE（2026-08-06）
+優先度：B
+対象：`src/pages/CommitteesPage.tsx`
+依存関係：TASK-017（CSVダウンロード機能）、TASK-038（活動報告書掲載）
+
+目的：TASK-017実施時にCSV化できていなかった「委員会活動報告書」一覧（`committeeActivityReports.json`）
+をCSVダウンロード対象に追加する。
+
+実施内容：
+- `/committees`ページへ「活動報告書一覧CSV」ボタンを追加（委員会名・年度・調査テーマ・報告書PDF・
+  出典ページ・最終確認日の列）
+- 実データに対してCSV生成ロジックを実行し、件数（15件）一致・UTF-8 BOM付き・null等の文字列化なしを確認
+
+検証結果：
+- `npm run validate:data` → errors=0
+- `npm run typecheck` → 成功
+- `npm run lint` → 成功
+- `npm run test` → 26件成功
+- `npm run build`（prerender・validate:seo・validate:content含む） → 1270ルート生成、失敗0件
+- CSV検証：15件一致・BOM付き・null等の文字列化なしを確認
+
+完了記録：
+- 完了日：2026-08-06
+- コミットID：（後述）
+- 変更概要：上記のとおり。
