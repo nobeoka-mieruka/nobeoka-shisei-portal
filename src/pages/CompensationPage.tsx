@@ -23,6 +23,8 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { CompensationBarChart } from "../components/compensation/CompensationBarChart";
 import { MiyazakiComparisonTable } from "../components/compensation/MiyazakiComparisonTable";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import type { CsvColumn } from "../lib/csv";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -43,6 +45,14 @@ const nationalRanking = nationalRankingData as NationalCompensationRanking;
 const similarMunicipality = similarMunicipalityData as SimilarMunicipalityComparison;
 const pendingMunicipalities = pendingMunicipalitiesData as PendingMunicipalityEntry[];
 const NOBEOKA = "延岡市";
+
+const MIYAZAKI_COMPARISON_CSV_COLUMNS: CsvColumn<MiyazakiCompensationComparison["municipalities"][number]>[] = [
+  { header: "市名", value: (m) => m.municipality },
+  { header: "市長月額", value: (m) => m.mayorMonthly },
+  { header: "議長月額", value: (m) => m.chairMonthly },
+  { header: "副議長月額", value: (m) => m.viceChairMonthly },
+  { header: "議員月額", value: (m) => m.memberMonthly },
+];
 
 export function CompensationPage() {
   const location = useLocation();
@@ -308,7 +318,17 @@ export function CompensationPage() {
         </p>
       </SectionCard>
 
-      <SectionCard title="宮崎県9市の比較（月額）">
+      <SectionCard
+        title="宮崎県9市の比較（月額）"
+        action={
+          <CsvDownloadButton
+            filename="nobeoka-miyazaki-compensation-comparison.csv"
+            rows={miyazakiComparison.municipalities}
+            columns={MIYAZAKI_COMPARISON_CSV_COLUMNS}
+            label="CSV"
+          />
+        }
+      >
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           比較対象は宮崎県内9市（基準日：{formatJapaneseDate(miyazakiComparison.referenceDate)}
           現在の公表月額）です。列見出しをクリック（モバイルはボタンをタップ）すると並び替えができます。

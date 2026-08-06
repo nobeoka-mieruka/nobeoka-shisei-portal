@@ -15,8 +15,30 @@ import { getSeoForPath } from "../lib/seo";
 import { dataCoverage } from "../data/dataCoverage";
 import { publicBills, verificationStatusOf, verificationStatusLabels } from "../lib/billVotes";
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import type { CsvColumn } from "../lib/csv";
+import { SITE_URL } from "../config/site";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
+
+const BILL_VOTES_CSV_COLUMNS: CsvColumn<BillVoteItem>[] = [
+  { header: "年度", value: (b) => b.fiscalYear },
+  { header: "定例会・臨時会", value: (b) => b.session },
+  { header: "議案番号", value: (b) => b.billNumber },
+  { header: "件名", value: (b) => b.billTitle },
+  { header: "分類", value: (b) => b.category },
+  { header: "提出者区分", value: (b) => b.proposerType },
+  { header: "提出者", value: (b) => b.proposer },
+  { header: "提出日", value: (b) => b.submittedDate },
+  { header: "議決日", value: (b) => b.votingDate },
+  { header: "議決結果", value: (b) => b.result },
+  { header: "採決方法", value: (b) => b.voteMethod },
+  { header: "付託委員会", value: (b) => b.committee },
+  { header: "施行日", value: (b) => b.effectiveDate },
+  { header: "議決結果PDF", value: (b) => b.resultDocumentUrl },
+  { header: "会議録URL", value: (b) => b.transcriptUrl },
+  { header: "詳細ページURL", value: (b) => `${SITE_URL}/bills/votes/${b.id}` },
+];
 
 const resultOptions: { value: BillVoteResult; label: string }[] = [
   { value: "原案可決", label: "原案可決" },
@@ -317,11 +339,16 @@ export function BillVotesPage() {
         </p>
       ) : (
         <>
-          <p className="mb-3 mt-3 text-sm text-on-surface-variant">
-            {filteredBills.length > 0
-              ? `${filteredBills.length}件の議案が見つかりました`
-              : "条件に一致する議案は見つかりませんでした。"}
-          </p>
+          <div className="mb-3 mt-3 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm text-on-surface-variant">
+              {filteredBills.length > 0
+                ? `${filteredBills.length}件の議案が見つかりました`
+                : "条件に一致する議案は見つかりませんでした。"}
+            </p>
+            {filteredBills.length > 0 && (
+              <CsvDownloadButton filename="nobeoka-bill-votes.csv" rows={filteredBills} columns={BILL_VOTES_CSV_COLUMNS} />
+            )}
+          </div>
           {filteredBills.length > 0 && (
             <ul className="space-y-3">
               {filteredBills.map((bill) => {

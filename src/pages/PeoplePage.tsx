@@ -15,6 +15,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BriefcaseIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
+import { SITE_URL } from "../config/site";
 import { archiveVerificationStatusLabel, termsForMayor } from "../lib/archiveMayors";
 import {
   buildPersonIndex,
@@ -31,6 +32,9 @@ import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { policyStatusLabel, categoryLabel } from "../lib/archivePolicies";
 import archivePolicyCategoriesData from "../data/archivePolicyCategories.json";
 import type { ArchivePolicyCategory } from "../types/historicalArchive";
+import type { PersonSummary } from "../lib/people";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import type { CsvColumn } from "../lib/csv";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -68,6 +72,18 @@ function compareLinkFor(personType: PersonType, id: string, slug: string): strin
   if (personType === "mayor") return `/compare/mayors?${buildCompareSearchParams([id]).toString()}`;
   return `/compare/members?${buildCompareSearchParams([slug]).toString()}`;
 }
+
+const PEOPLE_CSV_COLUMNS: CsvColumn<PersonSummary>[] = [
+  { header: "種別", value: (p) => personTypeLabel(p.personType) },
+  { header: "氏名", value: (p) => p.name },
+  { header: "読み仮名", value: (p) => p.nameKana },
+  { header: "現職・元職", value: (p) => (p.isCurrent ? "現職" : "元職") },
+  { header: "会派", value: (p) => factionName(p.factionId) },
+  { header: "在籍期間", value: (p) => p.tenureLabel },
+  { header: "確認状況", value: (p) => archiveVerificationStatusLabel(p.verificationStatus) },
+  { header: "関連資料件数", value: (p) => p.relatedDocumentCount },
+  { header: "詳細ページURL", value: (p) => `${SITE_URL}/people/${p.slug}` },
+];
 
 export function PeoplePage() {
   const location = useLocation();
@@ -182,6 +198,15 @@ export function PeoplePage() {
           現職議員の在籍年度は、在籍履歴データが未整備のため今年度のみを表示しています（過去の在籍年度を推測していません）。
         </p>
       </SectionCard>
+
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs text-on-surface-variant">{filtered.length}件</p>
+        <CsvDownloadButton
+          filename="nobeoka-people.csv"
+          rows={filtered}
+          columns={PEOPLE_CSV_COLUMNS}
+        />
+      </div>
 
       <ul className="space-y-3">
         {filtered.map((p) => (

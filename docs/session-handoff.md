@@ -1,4 +1,37 @@
-# セッション引き継ぎメモ（2026-08-06 更新・TASK-039完了、「確認中」表示の再調査）
+# セッション引き継ぎメモ（2026-08-06 更新・TASK-017完了、CSVダウンロード機能を7一覧へ追加）
+
+## 2026-08-06（同日12回目）：READYタスク連続消化の第1弾、CSVダウンロード機能（TASK-017）完了
+
+ユーザーから「TASKS.md・docs/session-handoff.mdのREADYタスクを優先順位順に連続実施してほしい」との
+指示（優先順位：①自治体比較データ再確認 ②CSVダウンロード ③Excel出力拡充 ④内部リンク強化
+⑤Lighthouse改善 ⑥議員プロフィール拡充 ⑦市政年表 ⑧財政・政治資金整理 ⑨歴代市政関係者追加
+⑩残存READY消化）を受けて着手した。
+
+### 第1優先：自治体比較データの再確認
+既存の報酬比較データ（`compensationComparison.json`・`miyazakiCompensationComparison.json`・
+`nationalCompensationRanking.json`・`prefectureCompensationRanking.json`・
+`similarMunicipalityComparison.json`）を再確認。すべて基準日2025-04-01で統一されており、
+月額/期末手当の単位混在・年度混在は無し。出典URL・確認日も揃っている。BLOCKED（TASK-011〜013）は
+新たな一次資料が見つかっていないため、同じ検索を繰り返さず、TASKS.mdへ具体的な再開条件
+（必要な統計データの種類）を追記するにとどめた。
+
+### 第2優先：CSVダウンロード機能 → TASK-017として完了
+`src/lib/csv.ts`（RFC4180準拠エスケープ、UTF-8 BOM付き、null/undefinedは空文字列化）と
+`CsvDownloadButton`コンポーネントを新設し、以下7ページへ追加：
+`/people`（人物一覧）、`/questions`（一般質問一覧）、`/bills/votes`（議案賛否一覧）、
+`/committees`（委員会一覧）、`/mayors`（歴代市長）、`/city-officials`（市政関係者）、
+`/compensation`（宮崎県9市報酬比較）。実データに対してCSV生成ロジックを直接実行し、
+件数一致・BOM付き・null等の文字列化なしを確認した。
+
+### 検証結果
+`validate:data`（errors=0）／`typecheck`／`lint`／`test`（26/26）／`build`（prerender・
+`validate:seo`・`validate:content`含む、1270ルート、失敗0件）すべて成功。CSV個別検証も
+7ファイルすべて合格。
+
+### 残作業（優先順位③以降、未着手）
+③Excel/XLSX出力（新規依存の追加を避けるため今回は見送り。CSVで代替）、④内部リンク強化、
+⑤Lighthouse改善、⑥議員プロフィール拡充、⑦市政年表、⑧財政・政治資金整理、
+⑨歴代市政関係者追加、⑩残存READYタスク（TASK-016C/016D/021/024/026）は次回以降に着手する。
 
 ## 2026-08-06（同日11回目）：全ページ「確認中」等の表示再調査 → TASK-039（絞り込み版）で完了
 

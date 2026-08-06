@@ -15,6 +15,9 @@ import { formatJapaneseDate } from "../config/site";
 import { decadeLabel, earliestTermStart, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
 import archivePoliciesData from "../data/archivePolicies.json";
 import type { ArchivePolicy } from "../types/historicalArchive";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import type { CsvColumn } from "../lib/csv";
+import { SITE_URL } from "../config/site";
 
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 
@@ -23,6 +26,24 @@ const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+const MAYORS_CSV_COLUMNS: CsvColumn<ArchiveMayor>[] = [
+  { header: "氏名", value: (m) => m.name },
+  { header: "読み仮名", value: (m) => m.nameKana },
+  { header: "現職", value: (m) => (m.isCurrentMayor ? "現職" : "") },
+  { header: "在任状況", value: (m) => m.status },
+  {
+    header: "直近任期開始",
+    value: (m) => termsForMayor(archiveMayorTerms, m.id).at(-1)?.termStart,
+  },
+  {
+    header: "直近任期終了",
+    value: (m) => termsForMayor(archiveMayorTerms, m.id).at(-1)?.termEnd,
+  },
+  { header: "通算任期", value: (m) => mayorTermCountLabel(m, archiveMayorTerms) },
+  { header: "最終確認日", value: (m) => m.lastVerifiedAt },
+  { header: "詳細ページURL", value: (m) => `${SITE_URL}/mayors/${m.slug}` },
+];
 
 type SortOrder = "newest" | "oldest";
 
@@ -105,7 +126,8 @@ export function MayorsPage() {
         就任・退任の年月日は、延岡市公式資料（近代の年表等）で年月まで確認できたものが中心です。日単位の日付はWikipedia等の二次資料にとどまり独立資料で未確認のものを含みます。前任・後任市長の間に登録期間が無い箇所は、資料で確認できない空白期間であり、職務代理者を推測で補ってはいません（2026年8月時点で13件の空白期間が未解消です）。経歴・政策の確認は一部にとどまります。
       </div>
 
-      <div className="mb-4 flex items-center justify-end gap-2">
+      <div className="mb-4 flex flex-wrap items-center justify-end gap-2">
+        <CsvDownloadButton filename="nobeoka-mayors.csv" rows={archiveMayors} columns={MAYORS_CSV_COLUMNS} />
         <span className="text-xs text-on-surface-variant">並び順：</span>
         <div className="inline-flex overflow-hidden rounded-full border border-outline-variant" role="group" aria-label="並び替え">
           {(["newest", "oldest"] as SortOrder[]).map((order) => (

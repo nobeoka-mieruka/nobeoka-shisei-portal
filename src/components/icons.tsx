@@ -379,3 +379,14 @@ export function MapPinIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** CSVダウンロードボタン用。 */
+export function DownloadIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M12 4v11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M8 11l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5 19h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}

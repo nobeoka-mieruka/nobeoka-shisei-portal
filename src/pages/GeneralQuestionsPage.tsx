@@ -28,6 +28,9 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 import { allPublicSpeeches, findMemberOrFormerLink, questionLikeSpeeches, resolveMemberDisplayName } from "../lib/councilSpeeches";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import type { CsvColumn } from "../lib/csv";
+import { SITE_URL } from "../config/site";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -56,6 +59,20 @@ const sortOptions: { value: QuestionSortKey; label: string }[] = [
   { value: "dateDesc", label: "新しい順" },
   { value: "dateAsc", label: "古い順" },
   { value: "memberName", label: "議員名順" },
+];
+
+const QUESTIONS_CSV_COLUMNS: CsvColumn<GeneralQuestionItem>[] = [
+  { header: "年度", value: (q) => q.fiscalYear },
+  { header: "定例会・臨時会", value: (q) => q.sessionName },
+  { header: "質問日", value: (q) => q.questionDate },
+  { header: "議員", value: (q) => q.memberName },
+  { header: "質問区分", value: (q) => q.questionType },
+  { header: "件名", value: (q) => q.title },
+  { header: "テーマ", value: (q) => q.topics },
+  { header: "質問項目", value: (q) => q.questionItems },
+  { header: "質問通告書URL", value: (q) => q.noticePdf ?? q.noticeUrl },
+  { header: "会議録URL", value: (q) => q.transcriptUrl },
+  { header: "詳細ページURL", value: (q) => `${SITE_URL}/questions/${q.id}` },
 ];
 
 const PRIMARY_SOURCES = [
@@ -345,11 +362,16 @@ export function GeneralQuestionsPage() {
         </p>
       ) : (
         <>
-          <p className="mb-3 mt-3 text-sm text-on-surface-variant">
-            {filteredQuestions.length > 0
-              ? `${filteredQuestions.length}件の質問が見つかりました`
-              : "条件に一致する一般質問は見つかりませんでした。"}
-          </p>
+          <div className="mb-3 mt-3 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm text-on-surface-variant">
+              {filteredQuestions.length > 0
+                ? `${filteredQuestions.length}件の質問が見つかりました`
+                : "条件に一致する一般質問は見つかりませんでした。"}
+            </p>
+            {filteredQuestions.length > 0 && (
+              <CsvDownloadButton filename="nobeoka-general-questions.csv" rows={filteredQuestions} columns={QUESTIONS_CSV_COLUMNS} />
+            )}
+          </div>
           {filteredQuestions.length > 0 && (
             <ul className="space-y-3">
               {filteredQuestions.map((item) => (

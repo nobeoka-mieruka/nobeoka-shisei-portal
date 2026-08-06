@@ -3,8 +3,27 @@ import { sortedCommittees } from "../lib/committees";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
+import type { Committee } from "../types";
+import type { CsvColumn } from "../lib/csv";
+import { SITE_URL } from "../config/site";
+
+const COMMITTEES_CSV_COLUMNS: CsvColumn<Committee>[] = [
+  { header: "委員会名", value: (c) => c.name },
+  { header: "区分", value: (c) => c.type },
+  { header: "所管事項", value: (c) => c.jurisdiction },
+  { header: "委員数", value: (c) => c.memberCount },
+  { header: "委員長", value: (c) => c.members.find((m) => m.role === "委員長")?.memberName },
+  { header: "副委員長", value: (c) => c.members.find((m) => m.role === "副委員長")?.memberName },
+  { header: "委員一覧", value: (c) => c.members.map((m) => m.memberName) },
+  { header: "任期開始", value: (c) => c.termStart },
+  { header: "任期終了", value: (c) => c.termEnd },
+  { header: "設置日", value: (c) => c.establishedDate },
+  { header: "最終確認日", value: (c) => c.lastVerifiedAt },
+  { header: "詳細ページURL", value: (c) => `${SITE_URL}/committees/${c.id}` },
+];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -39,6 +58,10 @@ export function CommitteesPage() {
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会など、定例会・臨時会ごとに議長を除く全議員で構成・設置される委員会は、委員名簿に個別掲載されないため、ここには含めていません（各委員会が審査した議案は「議案ごとの賛否」ページで確認できます）。
       </p>
+
+      <div className="flex justify-end">
+        <CsvDownloadButton filename="nobeoka-committees.csv" rows={committees} columns={COMMITTEES_CSV_COLUMNS} />
+      </div>
 
       {(["常任委員会", "議会運営委員会", "特別委員会"] as const).map((type) => {
         const list = committees.filter((c) => c.type === type);

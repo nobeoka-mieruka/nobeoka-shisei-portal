@@ -8,11 +8,23 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SectionCard } from "../components/SectionCard";
 import { SourceList } from "../components/SourceList";
 import { LandmarkIcon } from "../components/icons";
+import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { formatJapaneseDate } from "../config/site";
+import { formatJapaneseDate, SITE_URL } from "../config/site";
+import type { CsvColumn } from "../lib/csv";
 
 const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
+
+const CITY_OFFICIALS_CSV_COLUMNS: CsvColumn<CitySpecialPost>[] = [
+  { header: "役職", value: (p) => p.roleLabel },
+  { header: "氏名", value: (p) => p.name },
+  { header: "読み仮名", value: (p) => p.nameKana },
+  { header: "就任日", value: (p) => p.appointedDate },
+  { header: "出典URL", value: (p) => p.sourceRefs.map((s) => s.url) },
+  { header: "最終確認日", value: (p) => p.lastVerifiedAt },
+  { header: "サイト内URL", value: () => `${SITE_URL}/city-officials` },
+];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -72,6 +84,10 @@ export function CityOfficialsPage() {
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         選挙管理委員会委員については、公式資料で委員全員の氏名・任期を確認できていないため、本ページには未掲載です（委員長のみ報道等で氏名の手がかりがありますが、一次資料での確認が取れ次第、追加します。最終確認日：
         {latestVerifiedAt ? formatJapaneseDate(latestVerifiedAt) : "確認中"}）。監査委員は、延岡市公式ホームページ「監査委員制度の概要」で識見委員2名・議選委員1名の計3名と明記されていることを確認し、掲載しています。
+      </div>
+
+      <div className="mb-4 flex justify-end">
+        <CsvDownloadButton filename="nobeoka-city-officials.csv" rows={citySpecialPosts} columns={CITY_OFFICIALS_CSV_COLUMNS} />
       </div>
 
       {byRole.map(({ role, posts }) => (
