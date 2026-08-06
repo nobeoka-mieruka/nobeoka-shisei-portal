@@ -112,6 +112,7 @@ const categoryCards: CategoryCard[] = [
       { label: "請願・陳情", to: "/petitions" },
       { label: "延岡市の財政", to: "/finance" },
       { label: "市長公約の進捗", to: "/mayor/policy-progress" },
+      { label: "市政年表", to: "/history" },
       { label: "市役所どこに行けばいい？診断", to: "/city-guide" },
     ],
   },

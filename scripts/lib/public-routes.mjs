@@ -100,6 +100,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/methodology/activity-radar",
   "/political-funds",
   "/committees",
+  "/history",
 ];
 
 /**
@@ -151,6 +152,7 @@ function loadData() {
   const citySpecialPosts = readJson("src/data/citySpecialPosts.json");
   const committees = readJson("src/data/committees.json");
   const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
+  const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
   return {
     members,
     formerMembers,
@@ -179,6 +181,7 @@ function loadData() {
     citySpecialPosts,
     committees,
     committeeActivityReports,
+    civicTimelineEvents,
   };
 }
 
@@ -401,6 +404,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.committees.map((c) => c.lastVerifiedAt))],
         ["src/data/committees.json"],
+      );
+    case "/history":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.civicTimelineEvents.map((e) => e.lastVerifiedAt))],
+        ["src/data/civicTimelineEvents.json"],
       );
     default:
       return undefined;

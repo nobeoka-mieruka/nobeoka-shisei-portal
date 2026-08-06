@@ -1706,6 +1706,13 @@ BLOCKED理由・再開条件（2026-08-06に既存データの健全性を再確
   到達できなかった。AI検索の要約で「委員長は木原一成氏」との情報が一度示されたが、実際のページを
   直接確認できておらず出典として採用できないため、氏名は一切登録していない。今回は掲載を見送り、
   次回以降の追加調査課題（BLOCKED）とする
+  - 【2026-08-06追加調査】市公式サイト探索とは異なる角度として、延岡市議会会議録検索システム
+    （kensakusystem.jp）で現任期開始日（2023-05-16、令和5年5月臨時会）の本会議発言をすべて取得し、
+    「選挙管理委員」を含む発言を機械的に検索したが、該当する発言は0件だった（44発言セグメントを
+    全件確認）。選挙管理委員及び補充員の選挙が、この日の本会議で行われていない、または会議録上の
+    表記が異なる可能性がある。再開条件：選挙管理委員の選任が行われた具体的な本会議日が
+    別途特定できた場合（市議会だより等での言及、または他年の本会議記録の確認）に、その日の
+    会議録を同様に検索する
 - 新規ページ`/city-officials`を追加し、ホーム・フッター・データ収録状況ページから導線を設置。
   SEO（pageTitle/description/breadcrumbs/JSON-LD）、サイトマップ（lastmod計算）、
   サイト内検索インデックスへも登録した
@@ -2252,6 +2259,70 @@ verificationStatus未設定、重複ID等）を既にカバーしているため
 - `npm run test` → 26件成功
 - `npm run build`（prerender・validate:seo・validate:content含む） → 1270ルート生成、失敗0件
 - CSV検証：15件一致・BOM付き・null等の文字列化なしを確認
+
+完了記録：
+- 完了日：2026-08-06
+- コミットID：（後述）
+- 変更概要：上記のとおり。
+
+---
+
+### TASK-043 市政年表（/history）の新設
+
+状態：DONE（2026-08-06）
+優先度：A（ユーザー指示「未着手・BLOCKEDのうち一次資料調査で進められるもの」優先順位2）
+対象：`src/types/index.ts`（`CivicTimelineEvent`・`CivicTimelineCategory`）、
+`src/data/civicTimelineEvents.json`（新設）、`src/lib/civicTimeline.ts`（新設）、
+`src/pages/HistoryPage.tsx`（新設）、`src/App.tsx`、`src/lib/seo.ts`、
+`scripts/lib/public-routes.mjs`、`scripts/generate-search-index.mjs`、`scripts/validate-data.mjs`、
+`src/pages/HomePage.tsx`
+依存関係：なし
+
+目的：延岡市公式ホームページが公表する年表資料から、一次資料で確認できる出来事のみを構造化して
+掲載する「市政年表」ページを新設する。既存の`/timeline`（市長任期・年度別財政データの年度別表示）
+とは別の新機能。歴代市長の就任・退任は既存の`archiveMayors.json`/`archiveMayorTerms.json`で
+別管理のため対象外とした（重複調査・重複登録を避けるため）。
+
+一次資料：
+- 延岡市公式ホームページ「近代の年表」シリーズ（1930〜1950年・1951〜1970年・1971〜1990年・
+  1991〜2010年・2011年〜、各`city.nobeoka.miyazaki.jp/soshiki/6/…`）
+- 「延岡市の歴史」ページ、公式PDF「延岡市年表」（2003〜2013年詳細版）
+
+実施内容：
+- `CivicTimelineEvent`型（year・dateLabel・category・title・summary・relatedPersonIds・
+  relatedPages・sourceRefs・notes・lastVerifiedAt・verificationStatus）を新設
+- 市制施行・合併／市庁舎／行政組織／災害／公共事業／教育・福祉・産業の6分類、計60件を
+  `civicTimelineEvents.json`へ登録。日付が「月まで」しか公式資料で確認できないものは
+  「1933年2月（日不明）」のようにそのまま表示し、日付を推測で補完していない
+- 市制施行の正確な日付（日）は、公式年表・公式PDFいずれも月までの記載にとどまるため、
+  `verificationStatus: "partiallyVerified"`とし、`notes`に他情報源との差異（非公式の「2月11日」説）
+  を明記して推測での確定を避けた
+- 財政上の主な出来事（財政再建団体指定等）は、延岡市に該当する公式記載が見つからなかったため
+  今回は登録していない（BLOCKED、下記参照）
+- 2021年以降の出来事は、参照した「近代の年表(2011年〜)」ページの更新が2020年3月で止まっており
+  確認できなかった（広報のべおか・市議会だより等、別の一次資料での追加調査が必要）
+- `/history`ページを新設。年代・分類での絞り込み、CSVダウンロード、パンくず、関連ページリンク
+  （副市長制導入・副市長2人制開始の2件から`/city-officials`へ）に対応
+- SEO（pageTitle/description/breadcrumbs/JSON-LD）、サイトマップ・プリレンダリングのlastmod、
+  サイト内検索インデックス、`validate-data.mjs`（id重複・category/verificationStatus妥当性・
+  sourceRefs必須等）にも対応
+- ホームページの「市政を調べる」カードへ「市政年表」リンクを追加
+
+BLOCKED（今回一次資料が見つからず）：
+- 財政上の主な出来事（財政再建団体指定・大型基金設置等）：延岡市の公式年表・PDFに該当記載なし。
+  検索語「延岡市 財政再建団体」「延岡市 財政危機」等でも延岡市固有の事例は確認できなかった
+  （夕張市の事例が参考事項として記載されているのみ）。再開条件：延岡市公式資料に財政上の
+  重大事項の記載が新たに見つかった場合
+- 2021年以降の出来事：参照した公式年表ページの更新が止まっているため未確認。
+  再開条件：「広報のべおか」バックナンバー、市議会だより等、別の一次資料が確認できた場合
+
+検証結果：
+- `npm run validate:data` → errors=0
+- `npm run typecheck` → 成功
+- `npm run lint` → 成功
+- `npm run test` → 26件成功
+- `npm run build`（prerender・validate:seo・validate:content含む） → 1271ルート生成（新規+1）、失敗0件
+- CSV検証：60件一致・BOM付き・null等の文字列化なしを確認
 
 完了記録：
 - 完了日：2026-08-06

@@ -249,6 +249,39 @@ export interface CommitteeActivityReport {
   lastVerifiedAt: string;
 }
 
+/** 市政年表1件分の分類。 */
+export type CivicTimelineCategory =
+  | "市制施行・合併"
+  | "市庁舎"
+  | "行政組織"
+  | "災害"
+  | "公共事業"
+  | "教育・福祉・産業";
+
+/**
+ * 市政年表1件分（src/data/civicTimelineEvents.json）。延岡市公式ホームページが公表する
+ * 「近代の年表」等の一次資料のみを対象とし、推測で日付・出来事を補完しない。
+ * 歴代市長の就任・退任はarchiveMayors.json/archiveMayorTerms.jsonで別管理のため対象外。
+ */
+export interface CivicTimelineEvent {
+  id: string;
+  /** 絞り込み用の西暦年。 */
+  year: number;
+  /** 表示用の日付文字列（例："1933年2月"「2006年2月20日」）。日・月が資料上不明な場合はその粒度のまま。 */
+  dateLabel: string;
+  category: CivicTimelineCategory;
+  title: string;
+  summary: string;
+  /** 関連する人物（歴代市長id等）。公式資料で明確に確認できた場合のみ設定する。 */
+  relatedPersonIds?: string[];
+  relatedPages?: { label: string; to: string }[];
+  sourceRefs: SourceEntry[];
+  /** 日付の粒度・出典間の記載差異等の補足。 */
+  notes?: string;
+  lastVerifiedAt: string;
+  verificationStatus: "verified" | "partiallyVerified";
+}
+
 /**
  * 現職ではない元議員（src/data/formerMembers.json）。
  * 過去会期の一般質問・発言履歴を保持するための最小限の人物データで、CouncilMemberとは

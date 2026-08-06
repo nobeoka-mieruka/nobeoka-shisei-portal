@@ -540,6 +540,20 @@ for (const c of committees) {
   });
 }
 
+// --- civic timeline events（市政年表） ---
+const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
+for (const ev of civicTimelineEvents) {
+  entries.push({
+    id: `civic-timeline-${ev.id}`,
+    type: "page",
+    title: `${ev.title}（${ev.dateLabel}）`,
+    description: truncate(ev.summary, 80),
+    url: "/history",
+    keywords: [ev.title, ev.category, String(ev.year)],
+    sourceId: ev.id,
+  });
+}
+
 // --- update history ---
 const updateHistory = readJson("src/data/updateHistory.json");
 for (const u of updateHistory) {

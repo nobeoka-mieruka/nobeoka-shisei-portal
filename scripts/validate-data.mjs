@@ -1204,6 +1204,51 @@ try {
   }
 }
 
+// --- civicTimelineEvents.json（市政年表） ---
+try {
+  const events = readJson("src/data/civicTimelineEvents.json");
+  const VALID_TIMELINE_CATEGORIES = new Set(["市制施行・合併", "市庁舎", "行政組織", "災害", "公共事業", "教育・福祉・産業"]);
+  const VALID_TIMELINE_VERIFICATION = new Set(["verified", "partiallyVerified"]);
+  const eventIds = new Set();
+
+  for (const ev of events) {
+    const tag = `civicTimelineEvents.json (${ev.id ?? "id不明"})`;
+    if (isBlank(ev.id)) err(tag, "idが空です");
+    else if (eventIds.has(ev.id)) err(tag, `idが重複しています: ${ev.id}`);
+    else eventIds.add(ev.id);
+
+    if (!Number.isInteger(ev.year) || ev.year < 1868 || ev.year > new Date().getFullYear() + 1) {
+      err(tag, `yearが不正です: ${ev.year}`);
+    }
+    if (isBlank(ev.dateLabel)) err(tag, "dateLabelが空です");
+    if (!VALID_TIMELINE_CATEGORIES.has(ev.category)) err(tag, `未定義のcategoryです: ${ev.category}`);
+    if (isBlank(ev.title)) err(tag, "titleが空です");
+    if (isBlank(ev.summary)) err(tag, "summaryが空です");
+    if (ev.relatedPersonIds) {
+      for (const pid of ev.relatedPersonIds) {
+        if (!memberIds.has(pid) && !formerMemberIds.has(pid)) {
+          warn(tag, `relatedPersonIdsに存在しない可能性のあるIDがあります: ${pid}`);
+        }
+      }
+    }
+    if (!Array.isArray(ev.sourceRefs) || ev.sourceRefs.length === 0) {
+      err(tag, "sourceRefsが空です（出典が必要です）");
+    } else {
+      for (const s of ev.sourceRefs) {
+        if (isBlank(s.url) || !URL_RE.test(s.url)) err(tag, `sourceRefsのurlが不正です: ${s.url}`);
+      }
+    }
+    if (!ev.lastVerifiedAt || !DATE_RE.test(ev.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${ev.lastVerifiedAt}`);
+    if (!VALID_TIMELINE_VERIFICATION.has(ev.verificationStatus)) {
+      err(tag, `未定義のverificationStatusです: ${ev.verificationStatus}`);
+    }
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("civicTimelineEvents.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- archiveMayors.json / archiveMayorTerms.json（延岡市政アーカイブ：歴代市長） ---
 let archiveMayorIds = new Set();
 let archiveMayorTermIds = new Set();

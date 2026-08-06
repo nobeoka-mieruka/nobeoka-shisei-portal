@@ -833,6 +833,26 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/history":
+      return makeResult(
+        {
+          path: "/history",
+          pageTitle: "延岡市 市政年表",
+          description: "市制施行、合併、市庁舎、行政組織、災害、公共事業等、延岡市公式資料で確認できる主な出来事を年代順に整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政年表" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-civic-timeline-jsonld",
+              name: "延岡市 市政年表データ",
+              description: "延岡市公式資料で確認できる、市制施行・合併・市庁舎・行政組織・災害・公共事業等の主な出来事のデータです。",
+              url: `${SITE_URL}/history`,
+              dateModified: options?.lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/dashboard":
       return makeResult(
         {
