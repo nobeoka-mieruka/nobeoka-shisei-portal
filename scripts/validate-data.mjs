@@ -277,7 +277,11 @@ for (const b of billVotes) {
 
   const seenVoters = new Set();
   for (const v of b.memberVotes ?? []) {
-    if (!memberIds.has(v.memberId)) err(tag, `存在しない議員IDを参照しています: ${v.memberId}`);
+    // 議決当時は現職議員だったが、その後退任してformerMembers.json側へ移った人物の記名投票結果も
+    // 有効な参照として認める（現職・元議員のいずれのIDにも一致しない場合のみエラーとする）。
+    if (!memberIds.has(v.memberId) && !formerMemberIds.has(v.memberId)) {
+      err(tag, `存在しない議員IDを参照しています: ${v.memberId}`);
+    }
     if (!VALID_VOTE_STATUS.has(v.vote)) err(tag, `未定義の賛否状態です: ${v.vote}`);
     if (seenVoters.has(v.memberId)) err(tag, `同じ議員の賛否が二重登録されています: ${v.memberId}`);
     seenVoters.add(v.memberId);

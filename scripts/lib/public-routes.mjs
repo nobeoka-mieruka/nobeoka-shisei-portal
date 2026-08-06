@@ -597,7 +597,14 @@ export function getIndexableRoutes() {
 export function getPrerenderRoutes() {
   const indexable = getIndexableRoutes();
   const noindex = STATIC_NOINDEX_PAGES.map((path) => ({ path }));
-  return [...indexable, ...noindex].sort((a, b) => a.path.localeCompare(b.path));
+  // MemberDetailPage.tsx（/members/:id）は、現職議員に一致しない場合formerMembers.jsonへ
+  // フォールバックして元議員の簡易ビューを表示する設計のため、そのURLもプリレンダリング対象へ含める
+  // （404を防ぐため。議員別賛否（BillVoteMemberEntry.memberId）が元議員IDを参照する場合の
+  // リンク先として使われる）。ただし元議員の正規URLは/members/former/:slugであり、重複コンテンツを
+  // 避けるためサイトマップ・索引対象（getIndexableRoutes）には含めず、noindexとして生成のみ行う。
+  const data = loadData();
+  const formerMemberFallback = data.formerMembers.map((fm) => ({ path: `/members/${fm.id}` }));
+  return [...indexable, ...noindex, ...formerMemberFallback].sort((a, b) => a.path.localeCompare(b.path));
 }
 
 /** 公開前チェック（release-check）が確認すべきURL一覧。プリレンダリング対象と同じ。 */

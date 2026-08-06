@@ -1421,11 +1421,174 @@
     "fiscalYear": "令和5年度",
     "session": "令和5年7月臨時会（1）",
     "billNumber": "議案第9号",
-    "billTitle": "令和5年度延岡市一般会計補正予算の原案を再度採決した結果、賛成少数により、",
-    "summary": "令和5年7月臨時会（1）に提出された予算議案「令和5年度延岡市一般会計補正予算の原案を再度採決した結果、賛成少数により、」です。結果区分は現在確認中です。詳細な内容は出典PDFでご確認ください。",
+    "billTitle": "令和5年度延岡市一般会計補正予算に対する再議",
+    "summary": "令和5年6月定例会で修正議決された「令和5年度延岡市一般会計補正予算」について、市長が地方自治法第176条第1項の規定により再議に付した議案です。地方自治法第176条第3項の規定により出席議員27名の3分の2（18名）以上の同意が必要でしたが、記名投票の結果、賛成16票・反対11票にとどまり、さきの議決（修正案）どおり決することは否決されました。続いて市長提出の原案について改めて起立採決が行われましたが、起立少数で原案も否決され、結果として6月定例会で議決された修正案（減額修正後の補正予算）が確定しました。",
     "result": "否決",
     "category": "予算",
-    "memberVotes": [],
+    "memberVotes": [
+      {
+        "memberId": "m22",
+        "memberName": "松田満男",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m14",
+        "memberName": "柴浩信",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m15",
+        "memberName": "中島誠治",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m25",
+        "memberName": "山本珠美",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m24",
+        "memberName": "宮田博徳",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m09",
+        "memberName": "梶本英一",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m05",
+        "memberName": "小野挙",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m07",
+        "memberName": "甲斐忠篤",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m02",
+        "memberName": "猪之鼻哲",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m19",
+        "memberName": "比江島久美子",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m06",
+        "memberName": "甲斐行雄",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m01",
+        "memberName": "稲田雅之",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m16",
+        "memberName": "中城あかね",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m11",
+        "memberName": "北林幹雄",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m17",
+        "memberName": "長友幸子",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m04",
+        "memberName": "小野正二",
+        "faction": "確認中",
+        "vote": "approve"
+      },
+      {
+        "memberId": "m12",
+        "memberName": "後藤司光",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m26",
+        "memberName": "吉田茂仁",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m13",
+        "memberName": "小御門綾",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m21",
+        "memberName": "前田遼",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m23",
+        "memberName": "峯田克明",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "fm01",
+        "memberName": "吉本靖",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m20",
+        "memberName": "平田信広",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m08",
+        "memberName": "甲斐正幸",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m03",
+        "memberName": "上杉泰洋",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m10",
+        "memberName": "河野治満",
+        "faction": "確認中",
+        "vote": "oppose"
+      },
+      {
+        "memberId": "m18",
+        "memberName": "早瀬賢一",
+        "faction": "確認中",
+        "vote": "oppose"
+      }
+    ],
     "sessionId": "2023-07-extraordinary-01",
     "sourceDocumentId": "2023-07-extraordinary-01-results",
     "sourceFilePath": "/council-documents/2023/2023-07-extraordinary-01/2023-07-e-01.pdf",
@@ -1433,18 +1596,19 @@
     "resultDocumentUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14688.pdf",
     "extractionSource": "automatic",
     "extractionConfidence": 0.4,
-    "extractionNotes": "このページには「再議」に関する記述が含まれており、通常の一覧表と構成が異なるため自動抽出の精度が保証できません",
+    "extractionNotes": "「再議」のページのため通常の一覧表と構成が異なり自動抽出の精度が保証できなかった。2026-08-06に会議録原文（R050711A）を精読し、件名・提出者・議決日・記名投票の個人別結果を確認して手動で修正した。",
     "extractedAt": "2026-08-02",
     "lastVerified": "2026-08-02",
-    "publicationStatus": "pendingReview",
-    "verificationStatus": "pending",
-    "verificationNote": "再議（議決のやり直し）に関する記載があり、通常の議案とは採決過程が異なるため確認中です。",
-    "unresolvedFields": [
-      "result",
-      "individualVotes"
-    ],
+    "publicationStatus": "published",
+    "verificationStatus": "verified",
+    "verificationNote": "会議録原文（令和5年7月臨時会、R050711A）を精読し、再議の経緯・記名投票結果（個人別内訳を含む）を確認済み。",
+    "unresolvedFields": [],
     "summaryGeneratedAt": "2026-08-02",
-    "summarySource": "template"
+    "summarySource": "template",
+    "proposerType": "mayor",
+    "proposer": "市長",
+    "votingDate": "2023-07-11",
+    "individualVoteDisclosureStatus": "disclosed"
   },
   {
     "id": "2023-07-extraordinary-02-gian-28",
@@ -11684,7 +11848,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-62",
@@ -11710,7 +11876,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-63",
@@ -11736,7 +11904,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-64",
@@ -11762,7 +11932,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-65",
@@ -11788,7 +11960,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-66",
@@ -11814,7 +11988,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-67",
@@ -11840,7 +12016,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-68",
@@ -11866,7 +12044,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-gian-69",
@@ -11918,7 +12098,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "mayor",
+    "proposer": "市長"
   },
   {
     "id": "2025-09-ikensho-6",
@@ -11944,7 +12126,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "committee",
+    "proposer": "議会運営委員会"
   },
   {
     "id": "2025-09-ketsugi-9",
@@ -11970,7 +12154,9 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "member",
+    "proposer": "宮田博徳議員"
   },
   {
     "id": "2025-09-chinjo-6",
@@ -11995,7 +12181,8 @@
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
-    "individualVoteDisclosureStatus": "unconfirmed"
+    "individualVoteDisclosureStatus": "unconfirmed",
+    "proposerType": "other"
   },
   {
     "id": "2025-12-gian-71",
