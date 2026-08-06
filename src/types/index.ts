@@ -227,6 +227,29 @@ export interface Committee {
 }
 
 /**
+ * 委員会活動報告書（所管事務調査報告書）1件分（src/data/committeeActivityReports.json）。
+ * 延岡市議会公式サイト「委員会活動報告書」ページが年度ごとに公表するPDFへのインデックス。
+ * 常任委員会・議会活性化特別委員会が毎年度選ぶ調査テーマの視察・調査まとめであり、
+ * 委員会単独の会議録（開催日・出席委員・発言全文等）ではない点に注意（そのような一次資料は
+ * 現時点で公表されていないことを2026年8月に確認済み）。
+ */
+export interface CommitteeActivityReport {
+  id: string;
+  /** committees.jsonのid。現行名簿に無い委員会（活動終了した特別委員会等）の場合はnull。 */
+  committeeId: string | null;
+  /** PDF公表時点の委員会表記をそのまま使う（committees.json側の名称と異なる場合がある）。 */
+  committeeName: string;
+  /** 対象年度（西暦、4月始まり）。例：令和7年度 → 2025。 */
+  fiscalYear: number;
+  /** 調査テーマ名、または「最終報告書」「中間報告書（第N回）」等の表記。 */
+  title: string;
+  url: string;
+  /** この報告書PDFへのリンクを掲載している一覧ページのURL。 */
+  sourceUrl: string;
+  lastVerifiedAt: string;
+}
+
+/**
  * 現職ではない元議員（src/data/formerMembers.json）。
  * 過去会期の一般質問・発言履歴を保持するための最小限の人物データで、CouncilMemberとは
  * 別の管理単位。現職議員一覧・比較・集計の対象には含めない。

@@ -1,5 +1,5 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import { getCommittee, billsForCommittee } from "../lib/committees";
+import { getCommittee, billsForCommittee, reportsForCommittee } from "../lib/committees";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -19,6 +19,12 @@ const ROLE_ORDER: Record<CommitteeRole, number> = { 委員長: 0, 副委員長: 
 
 function formatDateOrRaw(value: string): string {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) ? formatJapaneseDate(value) : value;
+}
+
+/** "令和6年度"等の和暦年度表記から、並び替え用の数値を取り出す（表示自体は元の文字列のまま使う）。 */
+function eraYearNumber(label: string | undefined): number {
+  const m = label?.match(/(\d+)/);
+  return m ? Number(m[1]) : 0;
 }
 
 export function CommitteeDetailPage() {
@@ -42,6 +48,19 @@ export function CommitteeDetailPage() {
 
   const orderedMembers = [...committee.members].sort((a, b) => ROLE_ORDER[a.role] - ROLE_ORDER[b.role]);
   const reviewedBills = billsForCommittee(committee.name);
+  const activityReports = reportsForCommittee(committee.id);
+
+  const billsByFiscalYear = new Map<string, typeof reviewedBills>();
+  for (const bill of reviewedBills) {
+    const key = bill.fiscalYear ?? "年度不明";
+    const group = billsByFiscalYear.get(key);
+    if (group) group.push(bill);
+    else billsByFiscalYear.set(key, [bill]);
+  }
+  const fiscalYearGroups = [...billsByFiscalYear.entries()].sort(
+    (a, b) => eraYearNumber(b[0]) - eraYearNumber(a[0]),
+  );
+  const distinctSessionCount = new Set(reviewedBills.map((b) => b.sessionId).filter(Boolean)).size;
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -121,24 +140,57 @@ export function CommitteeDetailPage() {
             当サイトのデータベースで、本委員会が付託先として確認できた議案はまだ登録されていません。
           </p>
         ) : (
+          <>
+            <p className="mb-3 text-xs text-on-surface-variant">
+              議案{reviewedBills.length}件（{distinctSessionCount}会期分）。委員会単独の開催日・開催回数は
+              公式資料で公表されていないため、ここでは議案が審査された定例会・臨時会の会期数で示しています。
+            </p>
+            <div className="space-y-4">
+              {fiscalYearGroups.map(([fiscalYear, bills]) => (
+                <div key={fiscalYear}>
+                  <h3 className="text-xs font-semibold text-on-surface-variant">
+                    {fiscalYear}（{bills.length}件）
+                  </h3>
+                  <ul className="mt-2 space-y-2">
+                    {bills.map((bill) => (
+                      <li key={bill.id}>
+                        <Link
+                          to={`/bills/votes/${bill.id}`}
+                          className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
+                        >
+                          <p className="text-xs text-on-surface-variant">
+                            {bill.billNumber}
+                            {bill.votingDate ? `（${formatDateOrRaw(bill.votingDate)}）` : ""}
+                          </p>
+                          <p className="mt-0.5 font-medium text-on-surface">{bill.billTitle}</p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </SectionCard>
+
+      {activityReports.length > 0 && (
+        <SectionCard title="活動報告書（所管事務調査）">
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            延岡市議会公式ホームページが公表する、本委員会が年度ごとに選んだ調査テーマの視察・調査まとめです。
+            議案の審査記録ではありません。
+          </p>
           <ul className="space-y-2">
-            {reviewedBills.map((bill) => (
-              <li key={bill.id}>
-                <Link
-                  to={`/bills/votes/${bill.id}`}
-                  className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
-                >
-                  <p className="text-xs text-on-surface-variant">
-                    {bill.billNumber}
-                    {bill.votingDate ? `（${formatDateOrRaw(bill.votingDate)}）` : ""}
-                  </p>
-                  <p className="mt-0.5 font-medium text-on-surface">{bill.billTitle}</p>
-                </Link>
+            {activityReports.map((report) => (
+              <li key={report.id} className="rounded-lg border border-outline-variant p-3">
+                <p className="text-xs text-on-surface-variant">令和{report.fiscalYear - 2018}年度</p>
+                <p className="mt-0.5 font-medium text-on-surface">{report.title}</p>
+                <SourceLink url={report.url} label="報告書PDFを見る" className="mt-2" />
               </li>
             ))}
           </ul>
-        )}
-      </SectionCard>
+        </SectionCard>
+      )}
 
       <SectionCard title="根拠資料">
         <ul className="space-y-2">

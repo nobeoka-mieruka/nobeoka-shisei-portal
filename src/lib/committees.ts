@@ -1,6 +1,7 @@
 import committeesData from "../data/committees.json";
 import billVotesData from "../data/billVotes.json";
-import type { Committee, BillVoteItem } from "../types";
+import committeeActivityReportsData from "../data/committeeActivityReports.json";
+import type { Committee, BillVoteItem, CommitteeActivityReport } from "../types";
 
 /**
  * 委員会（常任委員会・議会運営委員会・特別委員会）関連のデータアクセスヘルパー。
@@ -13,6 +14,7 @@ import type { Committee, BillVoteItem } from "../types";
 
 export const committees = committeesData as Committee[];
 const billVotes = billVotesData as BillVoteItem[];
+const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 
 export function sortedCommittees(): Committee[] {
   const order = { 常任委員会: 0, 議会運営委員会: 1, 特別委員会: 2 } as const;
@@ -42,4 +44,11 @@ export function billsForCommittee(committeeName: string): BillVoteItem[] {
 /** 指定した議員が所属している委員会の一覧（現行の委員会名簿に基づく）。 */
 export function committeesForMember(memberId: string): Committee[] {
   return committees.filter((c) => c.members.some((m) => m.memberId === memberId));
+}
+
+/** 指定した委員会（committees.jsonのid）の活動報告書（所管事務調査報告書）を、年度の新しい順で返す。 */
+export function reportsForCommittee(committeeId: string): CommitteeActivityReport[] {
+  return committeeActivityReports
+    .filter((r) => r.committeeId === committeeId)
+    .sort((a, b) => b.fiscalYear - a.fiscalYear);
 }

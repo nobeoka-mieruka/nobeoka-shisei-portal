@@ -525,15 +525,17 @@ for (const org of politicalFundOrganizations) {
 
 // --- committees（委員会。TASK-037で新規登録） ---
 const committees = readJson("src/data/committees.json");
+const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
 for (const c of committees) {
   const chair = c.members.find((m) => m.role === "委員長");
+  const reports = committeeActivityReports.filter((r) => r.committeeId === c.id);
   entries.push({
     id: `committee-${c.id}`,
     type: "committee",
     title: `${c.name}（${c.type}）`,
     description: `${c.name}の委員名簿です。${chair ? `委員長：${chair.memberName}。` : ""}委員${c.memberCount}名。`,
     url: `/committees/${c.id}`,
-    keywords: [c.name, c.type, ...c.members.map((m) => m.memberName)],
+    keywords: [c.name, c.type, ...c.members.map((m) => m.memberName), ...reports.map((r) => r.title)],
     sourceId: c.id,
   });
 }

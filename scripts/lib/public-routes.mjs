@@ -150,6 +150,7 @@ function loadData() {
   const politicalFundReports = readJson("src/data/politicalFundReports.json");
   const citySpecialPosts = readJson("src/data/citySpecialPosts.json");
   const committees = readJson("src/data/committees.json");
+  const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
   return {
     members,
     formerMembers,
@@ -177,6 +178,7 @@ function loadData() {
     politicalFundReports,
     citySpecialPosts,
     committees,
+    committeeActivityReports,
   };
 }
 
@@ -458,9 +460,14 @@ export function getIndexableRoutes() {
   }
   for (const c of data.committees) {
     const path = `/committees/${c.id}`;
+    const reports = data.committeeActivityReports.filter((r) => r.committeeId === c.id);
     urls.push({
       path,
-      lastmod: resolveLastmod(path, [c.lastVerifiedAt], ["src/data/committees.json"]),
+      lastmod: resolveLastmod(
+        path,
+        [c.lastVerifiedAt, maxValidDate(reports.map((r) => r.lastVerifiedAt))],
+        ["src/data/committees.json", "src/data/committeeActivityReports.json"],
+      ),
     });
   }
   for (const { memberId, speech } of publishedSpeeches(councilSpeechSummaries)) {

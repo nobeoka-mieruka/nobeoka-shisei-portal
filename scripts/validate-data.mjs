@@ -1173,6 +1173,37 @@ try {
   }
 }
 
+// --- committeeActivityReports.json（委員会活動報告書・所管事務調査報告書） ---
+try {
+  const reports = readJson("src/data/committeeActivityReports.json");
+  const committeesForReports = readJson("src/data/committees.json");
+  const knownCommitteeIds = new Set(committeesForReports.map((c) => c.id));
+  const reportIds = new Set();
+
+  for (const r of reports) {
+    const tag = `committeeActivityReports.json (${r.id ?? "id不明"})`;
+    if (isBlank(r.id)) err(tag, "idが空です");
+    else if (reportIds.has(r.id)) err(tag, `idが重複しています: ${r.id}`);
+    else reportIds.add(r.id);
+
+    if (r.committeeId !== null && !knownCommitteeIds.has(r.committeeId)) {
+      err(tag, `存在しない委員会IDを参照しています: ${r.committeeId}`);
+    }
+    if (isBlank(r.committeeName)) err(tag, "committeeNameが空です");
+    if (!Number.isInteger(r.fiscalYear) || r.fiscalYear < 2000 || r.fiscalYear > 2100) {
+      err(tag, `fiscalYearが不正です: ${r.fiscalYear}`);
+    }
+    if (isBlank(r.title)) err(tag, "titleが空です");
+    if (isBlank(r.url) || !URL_RE.test(r.url)) err(tag, `urlの形式が不正です: ${r.url}`);
+    if (isBlank(r.sourceUrl) || !URL_RE.test(r.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${r.sourceUrl}`);
+    if (!r.lastVerifiedAt || !DATE_RE.test(r.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${r.lastVerifiedAt}`);
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("committeeActivityReports.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- archiveMayors.json / archiveMayorTerms.json（延岡市政アーカイブ：歴代市長） ---
 let archiveMayorIds = new Set();
 let archiveMayorTermIds = new Set();
