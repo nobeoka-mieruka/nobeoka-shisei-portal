@@ -168,10 +168,17 @@ export function CommitteeDetailPage() {
                           to={`/bills/votes/${bill.id}`}
                           className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
                         >
-                          <p className="text-xs text-on-surface-variant">
-                            {bill.billNumber}
-                            {bill.votingDate ? `（${formatDateOrRaw(bill.votingDate)}）` : ""}
-                          </p>
+                          <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+                            <p className="text-xs text-on-surface-variant">
+                              {bill.billNumber}
+                              {bill.votingDate ? `（${formatDateOrRaw(bill.votingDate)}）` : ""}
+                            </p>
+                            {bill.result && (
+                              <span className="shrink-0 rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-semibold text-on-surface">
+                                本会議：{bill.result}
+                              </span>
+                            )}
+                          </div>
                           <p className="mt-0.5 font-medium text-on-surface">{bill.billTitle}</p>
                         </Link>
                       </li>
