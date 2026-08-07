@@ -90,7 +90,14 @@
     "decreaseRatePercent": 8.3,
     "note": "各年1月1日現在の現住人口を比較しています。現住人口は住民基本台帳人口と異なる場合があります。"
   },
-  "debtNote": "ここで表示する市債は、令和8年度予算に計上された市債額です。市債残高ではありません。市債残高の複数年度推移は、決算書・財政状況資料集での確認を継続しています（確認でき次第追加します）。",
+  "debtNote": "ここで表示する市債（歳入）は、令和8年度予算に計上された市債額です。市債残高ではありません。下記「市債残高の年度推移」は、延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）を、令和2〜6年度分すべて同一資料の同一項目で統一して掲載しています。予算計上額とは対象が異なるほか、企業会計（水道事業債・下水道事業債）は含みません。別に公表されている「市債残高」資料（会計区分・算定基準が異なる場合がある）とは数値が完全には一致しないことがあります。",
+  "debtBalanceTrend": [
+    { "fiscalYear": "令和2年度末", "amountThousandYen": 55428571, "isEstimate": false },
+    { "fiscalYear": "令和3年度末", "amountThousandYen": 56172738, "isEstimate": false },
+    { "fiscalYear": "令和4年度末", "amountThousandYen": 54689691, "isEstimate": false },
+    { "fiscalYear": "令和5年度末", "amountThousandYen": 54021888, "isEstimate": false },
+    { "fiscalYear": "令和6年度末", "amountThousandYen": 53950273, "isEstimate": false }
+  ],
   "financialIndicators": {
     "fiscalYearLabel": "令和6年度決算",
     "realDebtServiceRatioPercent": 8.6,
@@ -190,6 +197,14 @@
       "referenceDate": "2025-11-01",
       "confirmedDate": "2026-08-06",
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24781.pdf"
+    },
+    {
+      "section": "debtBalanceTrend",
+      "title": "延岡市「財政状況資料集」（令和3年度版〜令和6年度版、総括表）",
+      "organization": "延岡市",
+      "referenceDate": "2025-03-31",
+      "confirmedDate": "2026-08-07",
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html"
     }
   ],
   "notes": "表示額は延岡市が公表した予算資料を基に整理しています。億円表示は千円単位の数値を換算しているため、端数処理により資料上の数値と一致しない場合があります。市債額は当該年度の予算計上額であり、市債残高ではありません。"

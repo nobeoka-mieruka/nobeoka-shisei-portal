@@ -310,6 +310,7 @@ export function FinancePage() {
                 { header: "区分", render: (d) => (d.isEstimate ? "見込額" : "決算額") },
               ]}
             />
+            <SectionSource section="debtBalanceTrend" />
           </>
         ) : (
           <p className="mt-3 rounded-lg bg-surface-container-high p-3 text-xs leading-relaxed text-on-surface-variant">
