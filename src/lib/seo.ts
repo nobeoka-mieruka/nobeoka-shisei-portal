@@ -822,6 +822,17 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/compare/municipalities":
+      return makeResult(
+        {
+          path: "/compare/municipalities",
+          pageTitle: "延岡市と宮崎県内5市の比較",
+          description: "延岡市と宮崎市・都城市・日向市・日南市・小林市・西都市の人口、議員報酬、財政指標等を、公式資料で確認できた範囲で比較します。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "延岡市と宮崎県内5市の比較" }],
+        },
+        options,
+      );
+
     case "/timeline":
       return makeResult(
         {

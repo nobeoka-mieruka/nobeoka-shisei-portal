@@ -290,6 +290,46 @@ export interface CivicTimelineEvent {
   verificationStatus: "verified" | "partiallyVerified";
 }
 
+/** 数値と、その数値の基準日・出典を1組にしたもの。自治体比較のように項目ごとに基準日が異なりうる場合に使う。 */
+export interface DatedMetric {
+  /** 未確認、または値が定義されない（例：将来負担比率が算定されない）場合はnull。 */
+  value: number | null;
+  /** ISO形式の基準日、または「令和7年度決算」のような和暦表記。 */
+  referenceDate: string | null;
+  /** 値がnullの理由（未確認なのか、制度上算定されないのかを区別する）。 */
+  notApplicableReason?: string;
+}
+
+/**
+ * 宮崎県内自治体比較1件分（src/data/municipalityComparison.json）。延岡市および比較対象6市
+ * （宮崎市・都城市・日向市・日南市・小林市・西都市）を、公式資料で同一条件（同一年度・同一算定方法）
+ * が確認できた範囲でのみ比較する。年度が異なる項目は、指標ごとにreferenceDateで個別に明示し、
+ * 異なる年度の数値を無理に揃えない。推定順位・独自評価は行わない。
+ */
+export interface MunicipalityComparisonEntry {
+  id: string;
+  municipality: string;
+  isNobeoka: boolean;
+  population: DatedMetric;
+  areaKm2: DatedMetric;
+  councilSeats: DatedMetric;
+  /** 議員報酬月額（円）。期末手当は含まない。 */
+  councilMemberMonthlyYen: DatedMetric;
+  mayorMonthlyYen: DatedMetric;
+  deputyMayorMonthlyYen: DatedMetric;
+  superintendentMonthlyYen: DatedMetric;
+  fiscalStrengthIndex: DatedMetric;
+  realDebtServiceRatioPercent: DatedMetric;
+  futureBurdenRatioPercent: DatedMetric;
+  /** 基金残高（百万円、基金全体）。 */
+  fundBalanceMillionYen: DatedMetric;
+  /** 地方債現在高（千円）。 */
+  municipalBondBalanceThousandYen: DatedMetric;
+  sourceRefs: SourceEntry[];
+  notes?: string;
+  lastVerifiedAt: string;
+}
+
 /**
  * 現職ではない元議員（src/data/formerMembers.json）。
  * 過去会期の一般質問・発言履歴を保持するための最小限の人物データで、CouncilMemberとは

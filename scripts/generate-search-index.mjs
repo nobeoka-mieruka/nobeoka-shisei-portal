@@ -554,6 +554,20 @@ for (const ev of civicTimelineEvents) {
   });
 }
 
+// --- municipality comparison（自治体比較） ---
+const municipalityComparisons = readJson("src/data/municipalityComparison.json");
+for (const m of municipalityComparisons) {
+  entries.push({
+    id: `municipality-comparison-${m.id}`,
+    type: "page",
+    title: `${m.municipality}との比較データ`,
+    description: `延岡市と${m.municipality}の人口・議員報酬・財政指標の比較データです。`,
+    url: "/compare/municipalities",
+    keywords: [m.municipality, "自治体比較", "財政指標", "議員報酬"],
+    sourceId: m.id,
+  });
+}
+
 // --- update history ---
 const updateHistory = readJson("src/data/updateHistory.json");
 for (const u of updateHistory) {

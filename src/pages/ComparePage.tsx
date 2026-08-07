@@ -17,6 +17,7 @@ interface CompareLink {
 }
 
 const compareLinks: CompareLink[] = [
+  { to: "/compare/municipalities", title: "延岡市と宮崎県内5市の比較", description: "人口・議員報酬・財政指標等を、宮崎市・都城市・日向市・日南市・小林市・西都市と比較します。" },
   { to: "/compare/mayors", title: "歴代市長の比較", description: "任期・就任回数・出典を最大4名まで並べて比較します。" },
   { to: "/compare/members", title: "議員の比較", description: "現職議員・元議員を横断して最大4名まで並べて比較します。" },
   { to: "/compare/finance", title: "年度別財政の比較", description: "人口・予算・市債・基金・財政健全化判断比率をまとめて比較します。" },
@@ -58,7 +59,7 @@ export function ComparePage() {
                 className={`block h-full rounded-xl bg-surface-container-low p-4 shadow-e1 transition hover:bg-surface-container-high ${linkClass}`}
               >
                 <div className="flex items-center gap-2">
-                  {c.to === "/compare/mayors" ? (
+                  {c.to === "/compare/mayors" || c.to === "/compare/municipalities" ? (
                     <LandmarkIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
                   ) : c.to === "/compare/members" ? (
                     <BriefcaseIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />

@@ -1249,6 +1249,66 @@ try {
   }
 }
 
+// --- municipalityComparison.json（宮崎県内自治体比較） ---
+try {
+  const munis = readJson("src/data/municipalityComparison.json");
+  const muniIds = new Set();
+  const metricFields = [
+    "population",
+    "areaKm2",
+    "councilSeats",
+    "councilMemberMonthlyYen",
+    "mayorMonthlyYen",
+    "deputyMayorMonthlyYen",
+    "superintendentMonthlyYen",
+    "fiscalStrengthIndex",
+    "realDebtServiceRatioPercent",
+    "futureBurdenRatioPercent",
+    "fundBalanceMillionYen",
+    "municipalBondBalanceThousandYen",
+  ];
+
+  const nobeokaCount = munis.filter((m) => m.isNobeoka).length;
+  if (nobeokaCount !== 1) err("municipalityComparison.json", `isNobeoka:trueは1件である必要があります（実際: ${nobeokaCount}件）`);
+
+  for (const m of munis) {
+    const tag = `municipalityComparison.json (${m.id ?? "id不明"})`;
+    if (isBlank(m.id)) err(tag, "idが空です");
+    else if (muniIds.has(m.id)) err(tag, `idが重複しています: ${m.id}`);
+    else muniIds.add(m.id);
+
+    if (isBlank(m.municipality)) err(tag, "municipalityが空です");
+    if (typeof m.isNobeoka !== "boolean") err(tag, "isNobeokaがbooleanではありません");
+
+    for (const field of metricFields) {
+      const metric = m[field];
+      if (!metric || typeof metric !== "object") {
+        err(tag, `${field}が未設定です`);
+        continue;
+      }
+      if (metric.value !== null && typeof metric.value !== "number") {
+        err(tag, `${field}.valueが数値でもnullでもありません: ${metric.value}`);
+      }
+      if (metric.value === null && !metric.notApplicableReason) {
+        warn(tag, `${field}.valueがnullですがnotApplicableReasonが未設定です（未確認の理由を明記してください）`);
+      }
+    }
+
+    if (!Array.isArray(m.sourceRefs) || m.sourceRefs.length === 0) {
+      err(tag, "sourceRefsが空です（出典が必要です）");
+    } else {
+      for (const s of m.sourceRefs) {
+        if (isBlank(s.url) || !URL_RE.test(s.url)) err(tag, `sourceRefsのurlが不正です: ${s.url}`);
+      }
+    }
+    if (!m.lastVerifiedAt || !DATE_RE.test(m.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${m.lastVerifiedAt}`);
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("municipalityComparison.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- archiveMayors.json / archiveMayorTerms.json（延岡市政アーカイブ：歴代市長） ---
 let archiveMayorIds = new Set();
 let archiveMayorTermIds = new Set();
