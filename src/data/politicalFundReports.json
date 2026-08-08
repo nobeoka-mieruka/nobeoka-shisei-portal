@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": "pfr-pf-org-002-r6",
+    "organizationId": "pf-org-002",
+    "fiscalYear": "令和6年分",
+    "reportStatus": "確認済み",
+    "amountUnit": "円",
+    "carriedOverFromPreviousYear": 0,
+    "totalIncome": 0,
+    "incomeBreakdown": null,
+    "totalExpenditure": 0,
+    "expenditureBreakdown": null,
+    "carriedOverToNextYear": 0,
+    "publishedDate": null,
+    "sourceTitle": "いなだまさゆき後援会 政治資金収支報告書（令和6年分）",
+    "sourceUrl": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/023.pdf",
+    "verifiedAt": "2026-08-08",
+    "notes": "収入・支出とも記載欄はすべて0（該当なし）。前年繰越額も0円のため、繰越額の推移で見ても令和6年中の資金の動きは確認されない。資産等の状況（その17）もすべて「無」。宣誓書の日付は令和7年2月27日。"
+  },
+  {
+    "id": "pfr-pf-org-021-r6",
+    "organizationId": "pf-org-021",
+    "fiscalYear": "令和6年分",
+    "reportStatus": "確認済み",
+    "amountUnit": "円",
+    "carriedOverFromPreviousYear": 22530,
+    "totalIncome": 600000,
+    "incomeBreakdown": {
+      "membershipFees": 0,
+      "donationsFromIndividuals": 0,
+      "donationsFromOrganizations": 0,
+      "donationsFromPoliticalOrganizations": 600000,
+      "businessIncome": null,
+      "loans": null,
+      "grantsFromHeadquartersOrBranches": null,
+      "other": null
+    },
+    "totalExpenditure": 0,
+    "expenditureBreakdown": null,
+    "carriedOverToNextYear": 622530,
+    "publishedDate": null,
+    "sourceTitle": "吉本やすし後援会 政治資金収支報告書（令和6年分）",
+    "sourceUrl": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/551.pdf",
+    "verifiedAt": "2026-08-08",
+    "notes": "収入は「政治団体からの寄附」のみ。寄附者は国民民主党宮崎県総支部連合会（延岡市中町2丁目2-10、代表者：長友慎治）で、令和6年5月17日・6月20日・9月19日・12月2日の4回、各150,000円（計600,000円）。支出は0円（記載なし）。資産等の状況（その17）はすべて「無」。"
+  }
+]
