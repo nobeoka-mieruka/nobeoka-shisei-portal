@@ -21,10 +21,6 @@
       "fiscalYear": 2021,
       "isEstimate": false,
       "balance": {
-        "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
-        "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 13447525000,
         "bondRedemptionFundYen": null,
@@ -46,6 +42,31 @@
         ]
       },
       "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。"
+    },
+    "debt": {
+      "fiscalYear": 2021,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 56172738000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+            "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2025-03-31",
+            "accessedAt": "2026-08-07",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+          }
+        ]
+      },
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
     }
   },
   {
@@ -70,10 +91,6 @@
       "fiscalYear": 2022,
       "isEstimate": false,
       "balance": {
-        "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
-        "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 13143179000,
         "bondRedemptionFundYen": null,
@@ -95,6 +112,31 @@
         ]
       },
       "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。"
+    },
+    "debt": {
+      "fiscalYear": 2022,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 54689691000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+            "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2025-03-31",
+            "accessedAt": "2026-08-07",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+          }
+        ]
+      },
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
     }
   },
   {
@@ -119,10 +161,6 @@
       "fiscalYear": 2023,
       "isEstimate": false,
       "balance": {
-        "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
-        "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 12262706000,
         "bondRedemptionFundYen": null,
@@ -144,6 +182,31 @@
         ]
       },
       "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。"
+    },
+    "debt": {
+      "fiscalYear": 2023,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 54021888000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+            "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2025-03-31",
+            "accessedAt": "2026-08-07",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+          }
+        ]
+      },
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
     }
   },
   {
@@ -168,10 +231,6 @@
       "fiscalYear": 2024,
       "isEstimate": false,
       "balance": {
-        "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
-        "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 10508279000,
         "bondRedemptionFundYen": null,
@@ -225,6 +284,31 @@
         }
       ],
       "notes": "実質赤字比率・連結実質赤字比率・資金不足比率は延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされている。"
+    },
+    "debt": {
+      "fiscalYear": 2024,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 53950273000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+            "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2025-03-31",
+            "accessedAt": "2026-08-07",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+          }
+        ]
+      },
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
     }
   },
   {
@@ -249,10 +333,6 @@
       "fiscalYear": 2025,
       "isEstimate": true,
       "balance": {
-        "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
-        "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 7319234000,
         "bondRedemptionFundYen": null,
