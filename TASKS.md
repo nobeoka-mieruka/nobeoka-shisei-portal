@@ -2638,6 +2638,13 @@ BLOCKED（今回の修正では解消せず）：
   『延岡市史』等の公式刊行物や、当時の官報・県公報でなければ確認できない可能性が高く、
   本セッションで利用できるWeb検索の範囲では一次資料に到達できなかった
 
+【2026-08-08追記】Wikipediaのカテゴリページ「Category:延岡市長」から歴代市長の個別記事
+（鈴木憲太郎・大島文彦等）が存在することを確認し、鈴木憲太郎の記事を確認したが、
+記載されている任期も「1937.3-1937.6」のように月単位までで、日単位の情報はWikipedia側にも
+無いことを確認した。Wikipediaも含め、オンラインで到達できる情報源はいずれも月単位が
+限界であり、今回のスコープでは解消不可能と判断する。同じ検索を繰り返さないよう、
+再開条件（延岡市史等の一次資料）を満たすまでは着手しない。
+
 BLOCKED理由・再開条件：
 - 一次資料（延岡市史、当時の官報等）がオンラインで確認できないため、推測で日付を埋めることは
   行わない。再開条件：延岡市が公式サイト等で歴代市長の詳細な就任・退任日一覧を新たに公開した
@@ -2647,3 +2654,61 @@ BLOCKED理由・再開条件：
 - 完了日：（BLOCKED、未完了）
 - コミットID：
 - 変更概要：一次資料未到達のためデータ変更なし。調査結果を記録した。
+
+---
+
+### TASK-046 validate-data.mjs warningsの縮小（出典accessedAt欠落分）
+
+状態：IN_PROGRESS（2026-08-08、87件→59件。残りは個別の一次資料調査が必要なため今回は対象外）
+優先度：C
+対象：`src/data/archiveFiscalYears.json`、`src/data/archivePolicies.json`、
+`src/data/archivePolicyQuestionRelations.json`、`src/data/archiveCouncilDocuments.json`、
+`src/data/archiveMayors.json`、`src/data/billVotes.json`
+依存関係：なし
+
+目的：ユーザー指示「歴代市長未確認が完了したらwarnings」の対応として、`npm run validate:data`が
+出す87件のwarningsのうち、実際に出典を再訪問して確認できる範囲を縮小する。推測による
+穴埋めは行わず、確認できたものだけaccessedAt等を設定する。
+
+実施内容：
+- `archiveMayors.json`（mayor-01）：公式サイト（hisatomo-m.jp）を再訪問し、肩書き・
+  プロフィール・経歴・公約4件すべてが現在も掲載されていることを確認したうえで、
+  sourceRefsのaccessedAtを設定した（この対応は前段のTASK-045作業時に実施、コミット8cfb722）
+- `archiveFiscalYears.json`（2021〜2025年度のpopulation、5件）：出典のExcelファイル
+  （延岡市「現住人口及び世帯数の推移」）を再取得し、xlsxライブラリで実際の数値
+  （令和3〜7年1月1日時点の人口）を読み取り、登録済みの5件すべてと完全一致することを
+  確認したうえでaccessedAtを設定した
+- `archivePolicies.json`（6件：市長公約4件・宮田博徳議員の一般質問由来政策2件）：
+  出典（hisatomo-m.jp、延岡市議会「総括質疑及び一般質問通告書」PDF）を再訪問し、
+  該当する公約・質問項目のタイトルが現在も掲載されていることを確認したうえで
+  accessedAtを設定した
+- `archivePolicyQuestionRelations.json`（2件）：上記と同じ出典PDFで確認済みのため
+  同様にaccessedAtを設定した
+- `archiveCouncilDocuments.json`（13件）：出典PDF（延岡市議会「議案等審議結果」等、
+  重複を除き9種類のURL）すべてがHTTP 200で到達可能であることを確認したうえで
+  accessedAtを設定した
+- `billVotes.json`（2024-06-gian-25、1件）：本セッション中に会議録原文（R060708A）を
+  精読した際に確認済みの内容（審査請求を「原案のとおり棄却すべきものと決定」）を反映し、
+  result: "確認中" → "原案可決"へ修正した（この対応は前段のTASK-045作業時に実施、
+  コミット8cfb722）
+
+warnings件数の推移：87→85（TASK-045作業時の2件）→80（人口5件）→72（政策・関連6件）
+→59（議会資料13件）
+
+残る59件の内訳（今回は対象外）：
+- `archiveMemberProfiles.json`（23件）：元議員fm01〜fm10のプロフィール出典が未登録。
+  個別に一次資料を新たに探す必要があり、今回のスコープを超える
+- `councilSessions.json`（21件）：会期要約の確認待ち・自動生成データの人手確認待ち。
+  実質的にTASK-005系列の残作業であり、既存タスクの再開が必要
+- `councilSpeechSummaries.json`（13件）：questionApproachの推奨語彙外警告（誤りではなく
+  確認推奨の注意喚起のみ、エラーではない）
+- `archiveMayorTerms.json`（任期空白13件）：TASK-045でBLOCKEDと判断済み
+
+受入条件：
+- `validate-data.mjs`のエラーが0件のまま（達成）
+- 推測でaccessedAt等を埋めていない（達成。すべて実際に出典を再訪問・再確認したうえで設定）
+
+完了記録：
+- 完了日：（一部完了、残り59件は別タスクとして継続）
+- コミットID：（後述）
+- 変更概要：出典を再確認できた28件のwarningsを解消した。

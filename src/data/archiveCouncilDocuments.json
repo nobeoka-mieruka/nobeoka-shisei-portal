@@ -16,7 +16,8 @@
         "sourceTitle": "議案審議結果（令和5年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -45,7 +46,8 @@
         "sourceTitle": "議案審議結果（令和8年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -74,7 +76,8 @@
         "sourceTitle": "議案審議結果（令和5年9月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -104,7 +107,8 @@
         "sourceTitle": "請願審議結果（令和5年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -130,7 +134,8 @@
         "sourceTitle": "請願審議結果（令和6年9月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -155,7 +160,8 @@
         "sourceTitle": "請願審議結果（令和8年3月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -181,7 +187,8 @@
         "sourceTitle": "陳情審議結果（令和5年7月臨時会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -207,7 +214,8 @@
         "sourceTitle": "陳情審議結果（令和5年12月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -233,7 +241,8 @@
         "sourceTitle": "陳情審議結果（令和6年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -259,7 +268,8 @@
         "sourceTitle": "陳情審議結果（令和7年3月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
@@ -278,20 +288,25 @@
     "sessionId": "2026-06",
     "decisionDate": "2026-06-26",
     "result": "原案可決",
-    "relatedFiscalYears": [2026],
+    "relatedFiscalYears": [
+      2026
+    ],
     "sourceRefs": [
       {
         "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf",
         "sourceTitle": "議案審議結果（令和8年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
     "existingBillVoteId": "2026-06-gian-20",
     "notes": "既存議案賛否から代表的な議案としてカテゴリ「予算」を1件、アーカイブ層へインデックスしたもの。",
-    "billDetail": { "billCategory": "予算" }
+    "billDetail": {
+      "billCategory": "予算"
+    }
   },
   {
     "id": "doc-bill-02",
@@ -310,13 +325,16 @@
         "sourceTitle": "議案審議結果（令和8年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
     "existingBillVoteId": "2026-06-gian-19",
     "notes": "既存議案賛否から代表的な議案としてカテゴリ「人事」を1件、アーカイブ層へインデックスしたもの。",
-    "billDetail": { "billCategory": "人事" }
+    "billDetail": {
+      "billCategory": "人事"
+    }
   },
   {
     "id": "doc-bill-03",
@@ -335,12 +353,15 @@
         "sourceTitle": "議案審議結果（令和8年6月定例会）",
         "sourceOrganization": "延岡市議会",
         "extractionMethod": "pdf-extraction",
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "accessedAt": "2026-08-08"
       }
     ],
     "verificationStatus": "verified",
     "existingBillVoteId": "2026-06-gian-21",
     "notes": "既存議案賛否から代表的な議案としてカテゴリ「契約」を1件、アーカイブ層へインデックスしたもの。",
-    "billDetail": { "billCategory": "契約" }
+    "billDetail": {
+      "billCategory": "契約"
+    }
   }
 ]
