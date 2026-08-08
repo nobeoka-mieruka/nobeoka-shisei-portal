@@ -2792,3 +2792,50 @@ warnings件数の推移：87→85（TASK-045作業時の2件）→80（人口5�
   3360b28（fm05）、6fa3768（fm06）、a6c6aca（fm07）、0d58855（fm08）、4311cb6（fm09）、
   60b53f3（fm10）
 - 変更概要：上記のとおり。対象10名（archiveMemberProfiles.jsonの全件）を完了。
+  この結果、archiveMemberProfiles.json由来のwarnings（23件）はすべて解消した。
+
+---
+
+### TASK-048 validate-data.mjs warningsの分類（ユーザー指示によるA/B/C/D分類）
+
+状態：DONE（2026-08-08）
+優先度：C
+
+TASK-046・TASK-047の完了時点でwarningsは87件→35件（mayor-01-term-01のaccessedAt
+1件追加解消分を含む）。ユーザー指示により、残る35件を分類した。
+
+【A：今回の作業で解消】
+本セッション（TASK-046・TASK-047・本タスク）で解消した52件：
+- 出典accessedAt欠落（archiveFiscalYears 5件、archivePolicies 6件、
+  archivePolicyQuestionRelations 2件、archiveCouncilDocuments 13件、archiveMayors 1件、
+  archiveMayorTerms 1件）＝28件
+- archiveMemberProfiles.jsonの出典sourceUrl／sourceTitle／accessedAt欠落（fm01〜fm10、
+  23件）＝TASK-047で全件解消
+- billVotes.json（2024-06-gian-25の確認中→確定）＝1件
+
+【B：別途一次資料調査・レビューが必要】（21件）
+- councilSessions.json（21件）：会期要約が確認待ち（16件：summaryStatus unavailable、
+  1件：partially-verified）、自動生成された定例会データの人の目での確認待ち（4件）。
+  いずれもTASK-005系列（旧任期一般質問アーカイブ）や個別会期の要約作成という、
+  それ自体が独立した作業量の大きいタスクであり、今回のスコープ外とした
+
+【C：仕様上残してよい】（13件）
+- councilSpeechSummaries.json（13件）：`questionApproach`が推奨語彙にない、という
+  注意喚起のみで、エラーではない。自由記述の質問アプローチを許容しつつ、統一的な
+  語彙からの逸脱を確認推奨として警告する設計であり、データの誤りを意味しない
+
+【D：外部資料公開待ち／一次資料未到達】（1件）
+- archiveMayorTerms.json（任期空白13件、1警告として集約表示）：TASK-045で調査済み。
+  『延岡市史』等の一次資料が本セッションのWeb検索では確認できず、BLOCKED。オンライン公開
+  待ちというより「非デジタル資料へのアクセス手段の確保待ち」に近く、B寄りの性質もあるが、
+  ユーザー指示のD区分に含めた
+
+合計：A 52件（解消済み）／B 21件／C 13件／D 1件（B+C+D=35件、現在のwarnings件数と一致）
+
+「警告を0件にするためのダミーデータ追加」は行っていない。B・C・Dの35件はいずれも
+実データの不足または仕様上の設計であり、機械的に埋められるものではない。
+
+完了記録：
+- 完了日：2026-08-08
+- コミットID：（後述）
+- 変更概要：mayor-01-term-01のaccessedAt欠落を追加解消（36→35）。残り35件を分類した。
