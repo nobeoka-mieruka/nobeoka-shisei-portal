@@ -2361,6 +2361,11 @@ const VALID_SPEECH_SUMMARY_STATUSES = new Set([
   "question-answer-link-pending",
 ]);
 const VALID_SPEECH_RELATION_STATUSES = new Set(["confirmed", "suggested", "rejected"]);
+// 2026-08-08、warnings=1294の内訳を集計したところ、以下8語は実データで18〜558件と
+// 頻出しているにもかかわらず当初の推奨語彙に含まれておらず、意味のある新規カテゴリという
+// より当初の語彙表が単に網羅していなかっただけと判断し追加した（データ側は変更していない）。
+// 1〜2件のみの語（「事業プロセス・実施方法の確認」等）は、まだ定着した分類か判断できないため
+// 追加せず、引き続き確認推奨の警告対象のままとする。
 const RECOMMENDED_QUESTION_APPROACHES = new Set([
   "現状確認",
   "制度内容の確認",
@@ -2372,6 +2377,14 @@ const RECOMMENDED_QUESTION_APPROACHES = new Set([
   "対応の要望",
   "課題の指摘",
   "再質問による追加確認",
+  "拡充の要望",
+  "検証の要望",
+  "現状認識の確認",
+  "現状の確認",
+  "所信の確認",
+  "進捗の確認",
+  "所感の確認",
+  "検証・所見確認",
 ]);
 const RECOMMENDED_ANSWER_STATUSES = new Set([
   "実施済み",
@@ -2385,6 +2398,9 @@ const RECOMMENDED_ANSWER_STATUSES = new Set([
   "制度上対応困難",
   "回答のみで方針不明",
   "質問との対応確認中",
+  "課題あり",
+  "実施予定なし",
+  "見解の相違",
 ]);
 const VALID_QA_LINK_STATUSES = new Set(["confirmed", "partially-confirmed", "pending", "ambiguous"]);
 const NOT_YET_PUBLISHABLE_STATUSES = new Set(["minutes-not-fetched", "source-unavailable"]);
