@@ -1,19 +1,398 @@
 {
-  "checkedAt": "2026-08-07T23:00:36.812Z",
+  "checkedAt": "2026-08-08T14:32:13.623Z",
   "dryRun": false,
-  "sessionFilter": null,
+  "sessionFilter": "2021-12",
   "limit": null,
-  "documentsProcessed": 0,
-  "documentsSkippedUnchanged": 26,
+  "documentsProcessed": 1,
+  "documentsSkippedUnchanged": 0,
   "documentsOcrRequired": 0,
   "documentsError": 0,
-  "proposalsExtracted": 0,
-  "proposalsPublished": 0,
+  "proposalsExtracted": 42,
+  "proposalsPublished": 42,
   "proposalsPendingReview": 0,
   "proposalsUpdatedPendingReview": 0,
   "proposalsSupplementalUpdated": 0,
   "proposalsUnchanged": 0,
   "proposalsConflict": 0,
   "memberVoteNote": "このPDF（議案等審議結果）には議員個人の賛否は記載されていないため、議員別賛否（memberVotes）は抽出していません。",
-  "items": []
+  "items": [
+    {
+      "id": "2021-12-gian-65",
+      "session": "2021-12",
+      "billNumber": "議案第65号",
+      "title": "令和3年度延岡市一般会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-66",
+      "session": "2021-12",
+      "billNumber": "議案第66号",
+      "title": "令和3年度延岡市国民健康保険特別会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-67",
+      "session": "2021-12",
+      "billNumber": "議案第67号",
+      "title": "令和3年度延岡市介護保険特別会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-68",
+      "session": "2021-12",
+      "billNumber": "議案第68号",
+      "title": "令和3年度延岡市後期高齢者医療特別会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-69",
+      "session": "2021-12",
+      "billNumber": "議案第69号",
+      "title": "令和3年度延岡市水道事業会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-70",
+      "session": "2021-12",
+      "billNumber": "議案第70号",
+      "title": "令和3年度延岡市下水道事業会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-71",
+      "session": "2021-12",
+      "billNumber": "議案第71号",
+      "title": "延岡市職員の服務の宣誓に関する条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-72",
+      "session": "2021-12",
+      "billNumber": "議案第72号",
+      "title": "延岡市防災会議条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-73",
+      "session": "2021-12",
+      "billNumber": "議案第73号",
+      "title": "延岡市北方中部地区集落センター条例を廃止する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-74",
+      "session": "2021-12",
+      "billNumber": "議案第74号",
+      "title": "延岡市北方文化センター条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-75",
+      "session": "2021-12",
+      "billNumber": "議案第75号",
+      "title": "延岡市コワーキングスペース条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-76",
+      "session": "2021-12",
+      "billNumber": "議案第76号",
+      "title": "延岡市お試しサテライトオフィス条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-77",
+      "session": "2021-12",
+      "billNumber": "議案第77号",
+      "title": "延岡市道路占用料徴収条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-78",
+      "session": "2021-12",
+      "billNumber": "議案第78号",
+      "title": "延岡市移動等円滑化のために必要な特定道路の構造に関する基準を定める条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-79",
+      "session": "2021-12",
+      "billNumber": "議案第79号",
+      "title": "延岡市手数料条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-80",
+      "session": "2021-12",
+      "billNumber": "議案第80号",
+      "title": "延岡市国民健康保険条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-81",
+      "session": "2021-12",
+      "billNumber": "議案第81号",
+      "title": "延岡市特定教育・保育施設及び特定地域型保育事業の運営に関する基準を定める条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-82",
+      "session": "2021-12",
+      "billNumber": "議案第82号",
+      "title": "カルチャープラザのべおか条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-83",
+      "session": "2021-12",
+      "billNumber": "議案第83号",
+      "title": "延岡総合文化センター条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-84",
+      "session": "2021-12",
+      "billNumber": "議案第84号",
+      "title": "財産の取得（野口遵記念館ピアノ及び附属品(その1)）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-85",
+      "session": "2021-12",
+      "billNumber": "議案第85号",
+      "title": "財産の取得（野口遵記念館ピアノ及び附属品(その2)）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-86",
+      "session": "2021-12",
+      "billNumber": "議案第86号",
+      "title": "市道の路線廃止（1路線）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-87",
+      "session": "2021-12",
+      "billNumber": "議案第87号",
+      "title": "市道の路線認定（10路線）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-88",
+      "session": "2021-12",
+      "billNumber": "議案第88号",
+      "title": "新たに生じた土地の確認（浦城町公有水面埋立地）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-89",
+      "session": "2021-12",
+      "billNumber": "議案第89号",
+      "title": "町の区域の変更（浦城町公有水面埋立地）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-90",
+      "session": "2021-12",
+      "billNumber": "議案第90号",
+      "title": "藤の木辺地に係る総合整備計画の変更",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-91",
+      "session": "2021-12",
+      "billNumber": "議案第91号",
+      "title": "祝子川辺地に係る総合整備計画の変更",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-92",
+      "session": "2021-12",
+      "billNumber": "議案第92号",
+      "title": "指定管理者の指定（延岡市川中コミュニティセンター）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-93",
+      "session": "2021-12",
+      "billNumber": "議案第93号",
+      "title": "指定管理者の指定（延岡市祝子川森林レクリエーション施設）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-94",
+      "session": "2021-12",
+      "billNumber": "議案第94号",
+      "title": "指定管理者の指定（延岡市舞野地区多目的研修センター）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-95",
+      "session": "2021-12",
+      "billNumber": "議案第95号",
+      "title": "指定管理者の指定（延岡市須美江家族旅行村）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-96",
+      "session": "2021-12",
+      "billNumber": "議案第96号",
+      "title": "指定管理者の指定（延岡市長井健康増進センター）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-97",
+      "session": "2021-12",
+      "billNumber": "議案第97号",
+      "title": "指定管理者の指定（延岡市まちなか子育て交流広場「まちなかキッズホーム」）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-98",
+      "session": "2021-12",
+      "billNumber": "議案第98号",
+      "title": "指定管理者の指定（西階公園野球場外18施設）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-99",
+      "session": "2021-12",
+      "billNumber": "議案第99号",
+      "title": "指定管理者の指定（西階公園遊泳場、浜川公園遊泳場）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-100",
+      "session": "2021-12",
+      "billNumber": "議案第100号",
+      "title": "指定管理者の指定（延岡市一ケ岡コミュニティセンター）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-101",
+      "session": "2021-12",
+      "billNumber": "議案第101号",
+      "title": "専決処分の承認（令和3年度延岡市一般会計補正予算）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-102",
+      "session": "2021-12",
+      "billNumber": "議案第102号",
+      "title": "令和3年度延岡市一般会計補正予算（2次分）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-103",
+      "session": "2021-12",
+      "billNumber": "議案第103号",
+      "title": "令和3年度延岡市一般会計補正予算（3次分）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-104",
+      "session": "2021-12",
+      "billNumber": "議案第104号",
+      "title": "市長及び副市長の給料の減額に関する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-105",
+      "session": "2021-12",
+      "billNumber": "議案第105号",
+      "title": "教育委員会委員の選任（宮田靖氏）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2021-12-gian-106",
+      "session": "2021-12",
+      "billNumber": "議案第106号",
+      "title": "監査委員の選任（服部俊明氏）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    }
+  ]
 }
