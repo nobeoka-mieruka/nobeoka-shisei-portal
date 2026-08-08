@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-08T12:41:19.545Z",
-  "totalItems": 57,
+  "generatedAt": "2026-08-08T12:43:46.991Z",
+  "totalItems": 58,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 10,
     "relationCandidate": 4,
-    "sourceInsufficient": 14,
+    "sourceInsufficient": 15,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -248,6 +248,12 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-14",
       "detail": "出典「【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため」の確認状況が「sourceUnavailable」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "memberProfile",
+      "sourceEntityId": "archive-fm03",
+      "detail": "出典「延岡市議会議員選挙 2019年04月21日投票（選挙ドットコム）」の確認状況が「needsReview」です"
     },
     {
       "category": "committeeIdMissing",
