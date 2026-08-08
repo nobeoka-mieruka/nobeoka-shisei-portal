@@ -1,0 +1,5443 @@
+{
+  "generatedAt": "2026-08-08T07:11:49.631Z",
+  "targetCount": 479,
+  "cacheReused": 0,
+  "newlyChecked": 479,
+  "summary": {
+    "ok": 438,
+    "not_found_404": 31,
+    "redirect": 8,
+    "error": 2
+  },
+  "results": [
+    {
+      "url": "http://cms.city.miyakonojo.miyazaki.jp/display.php?cont=121010163150",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.904Z",
+      "status": null,
+      "location": null,
+      "category": "error",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.063Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/1166",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.250Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/1321",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.622Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/17033",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.301Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/22481",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.362Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/26032",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.532Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/6024",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.448Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/local/senkyo/644",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.377Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://hisatomo-m.jp/",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "archiveMayors.json",
+        "archiveMayorTerms.json",
+        "archivePolicies.json",
+        "mayor.json",
+        "mayorPolicyProgress.json",
+        "mayorPromises.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.745Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://hisatomo-m.jp/donation/",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.574Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/桜井哲雄",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.005Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/三浦虎雄",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.548Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/首藤正治",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.439Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/青木善祐",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.920Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/折小野良一",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.128Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/大島文彦",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.072Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.417Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/読谷山洋司",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.404Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://ja.wikipedia.org/wiki/鈴木憲太郎",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.247Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://kotobank.jp/word/%E4%B8%89%E6%B5%A6%20%E8%99%8E%E9%9B%84-1678003",
+      "files": [
+        "archiveMayors.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.185Z",
+      "status": 301,
+      "location": "/word/%E4%B8%89%E6%B5%A6%E8%99%8E%E9%9B%84-1678003",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://kotobank.jp/word/%E4%BB%B2%E7%94%B0%E5%8F%88%E6%AC%A1%E9%83%8E-1096772",
+      "files": [
+        "archiveMayors.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.372Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://lin.ee/HLXDNIS",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.721Z",
+      "status": 301,
+      "location": "https://line.me/R/ti/p/@674sqgtj",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://masayuki-ricefield.hatenablog.jp/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.741Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.567Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD",
+      "files": [
+        "committees.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.859Z",
+      "status": 302,
+      "location": "https://ops-jg.d1-law.com/opensearch/css/font.css",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://www.%E3%81%BF%E3%81%AD%E3%81%A0%E5%85%8B%E6%98%8E.com/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.494Z",
+      "status": null,
+      "location": null,
+      "category": "error",
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.city.kobayashi.lg.jp/gyoseijoho/shinogaiyo/tokei_opendata/3165.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.004Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.kobayashi.lg.jp/material/files/group/1/20241001_15.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.262Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.kobayashi.lg.jp/soshikikarasagasu/gikaijimukyoku/gikai/2/1143.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.286Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.kobayashi.lg.jp/soshikikarasagasu/sogoseisakubukikakuseisakuka/shinogaiyo/2/1659.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.658Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyakonojo.miyazaki.jp/soshiki/12/3849.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.814Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyakonojo.miyazaki.jp/soshiki/14/3844.html",
+      "files": [
+        "compensationComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.448Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyakonojo.miyazaki.jp/soshiki/6/2802.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.452Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyakonojo.miyazaki.jp/uploaded/attachment/41346.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.192Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyazaki.miyazaki.jp/city/city_life/388316.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.809Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyazaki.miyazaki.jp/city/management/administration/2144.html",
+      "files": [
+        "compensationComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.499Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyazaki.miyazaki.jp/fs/8/5/9/2/8/1/_/859281.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.180Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyazaki.miyazaki.jp/parliament/list/300461.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.456Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nichinan.lg.jp/material/files/group/20/nichinanR7.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.478Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nichinan.lg.jp/material/files/group/8/586b4aa27993a8297ae348e9d5760bd5_1.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.730Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1394.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:48.413Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1395.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:43.346Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1396.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:46.102Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1397.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:31.684Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1398.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:39.681Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1399.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:35.042Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1400.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:35.670Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1402.html",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:17.321Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html",
+      "files": [
+        "committees.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:43.821Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.053Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1420.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:37.598Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1421.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:38.859Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1423.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:34.419Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1424.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:40.345Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1440.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:31.063Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1441.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:41.247Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1442.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:44.802Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1443.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:36.945Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1444.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:43.966Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1445.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:45.480Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1446.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:33.578Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1447.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:32.322Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1448.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:46.949Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1449.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:36.307Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1450.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:32.956Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1451.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:47.791Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1452.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:38.233Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1453.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:42.719Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1454.html",
+      "files": [
+        "members.backup-ui.json",
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:41.879Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.254Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.671Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/19435.html",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:47.930Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/33584.html",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:39.790Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/37757.html",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:35.349Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/43039.html",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:29.545Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:45.832Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/kigyorichi/24122.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:49.270Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.013Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/49506.html",
+      "files": [
+        "mayorEntertainmentExpenses.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:28.279Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1760.html",
+      "files": [
+        "citySpecialPosts.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:25.477Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/13/1690.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.181Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/15/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:24.837Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html",
+      "files": [
+        "compensationComparison.json",
+        "municipalityComparison.json",
+        "similarMunicipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:44.491Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.875Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+      "files": [
+        "archiveFiscalYears.json",
+        "financeDashboard.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.796Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/19/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.784Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/20/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:09.400Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/21/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:10.060Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/23/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.037Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/24/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:17.895Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/25/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:17.223Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/28/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:14.661Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/29/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:16.607Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/30/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:10.707Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/31/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:15.959Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/32/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:11.335Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/33/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:15.319Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/37/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:22.367Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/38/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:23.703Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/39/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:22.985Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/40/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:21.183Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/48/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:19.838Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/50/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:18.537Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/59/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:13.201Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json",
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.528Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json",
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.035Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json",
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.669Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json",
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.859Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1687.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:28.060Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1689.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:26.763Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1698.html",
+      "files": [
+        "cityGuideConfig.json",
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:07.391Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/78/1207.html",
+      "files": [
+        "citySpecialPosts.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:26.139Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/79/2719.html",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.321Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/8.html",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:20.532Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/92/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:12.550Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/98/",
+      "files": [
+        "cityGuideEntries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:19.189Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10619.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:03.188Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10620.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:04.034Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10621.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:02.525Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10622.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:00.980Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10623.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:01.634Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10624.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:59.265Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10626.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:58.014Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10627.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:58.639Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10628.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:00.132Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10629.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:04.697Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10630.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:05.368Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10631.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:06.055Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10632.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:13.159Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10633.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:13.845Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10634.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:14.732Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10635.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:15.374Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10636.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:16.041Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11283.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:57.054Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11284.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:56.412Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11285.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:55.715Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11286.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:54.828Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11589.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:54.180Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/13422.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:53.468Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14277.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:55.473Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14278.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:54.198Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14665.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.235Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14666.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:52.806Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14688.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:56.185Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14730.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:56.831Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14869.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.672Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15532.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.801Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15535.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:52.159Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15536.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:12.271Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/16472.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.283Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1726.pdf",
+      "files": [
+        "archiveMemberProfiles.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.942Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17382.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:57.500Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17384.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:39.140Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17385.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:40.450Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17386.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:41.130Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17387.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:41.807Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17389.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:11.508Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/18059.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:59.005Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/18295.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:58.148Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19073.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.879Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19088.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:51.471Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19091.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:10.635Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19092.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:09.960Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19093.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:16.681Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19844.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.429Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19877.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:50.802Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19878.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:09.297Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20692.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:59.646Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20693.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:08.641Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21047.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:00.502Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21853.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.472Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21951.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:07.985Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21952.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:34.159Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21953.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:35.965Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21954.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:36.627Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21955.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:37.527Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/22653.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:01.138Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/22654.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:07.357Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23190.pdf",
+      "files": [
+        "committeeActivityReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:38.244Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23226.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:50.151Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23255.pdf",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:33.536Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23257.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:01.998Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23654.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:02.635Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23791.pdf",
+      "files": [
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.284Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24335.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:49.503Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24484.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:06.700Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24485.pdf",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:32.694Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24487.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.913Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+      "files": [
+        "archiveFiscalYears.json",
+        "financeDashboard.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.408Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24781.pdf",
+      "files": [
+        "financeDashboard.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:27.081Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "archiveFiscalYears.json",
+        "financeDashboard.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.176Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25189.pdf",
+      "files": [
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:04.757Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25396.pdf",
+      "files": [
+        "billVotes.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:06.002Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26395.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.048Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26667.pdf",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:28.922Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26668.pdf",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:30.201Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26669.pdf",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:31.399Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26670.pdf",
+      "files": [
+        "committeeActivityReports.json",
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:32.037Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27188.pdf",
+      "files": [
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:06.673Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27216.pdf",
+      "files": [
+        "mayorEntertainmentExpenses.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:29.147Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27271.pdf",
+      "files": [
+        "committees.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:43.153Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27569.pdf",
+      "files": [
+        "mayorEntertainmentExpenses.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:29.771Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27613.pdf",
+      "files": [
+        "archivePolicies.json",
+        "archivePolicyQuestionRelations.json",
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:53.567Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27614.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:17.998Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27615.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:18.870Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27617.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:19.521Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27618.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:20.385Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27619.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:21.016Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27620.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:21.659Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27621.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:22.319Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27622.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:22.994Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27623.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:23.643Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27624.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:24.274Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27625.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:24.952Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27626.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:25.805Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27627.pdf",
+      "files": [
+        "councilWatchedDocuments.json",
+        "generalQuestions.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:26.442Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:45.146Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf",
+      "files": [
+        "archiveCouncilDocuments.json",
+        "billVotes.json",
+        "citySpecialPosts.json",
+        "councilDocumentSources.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.183Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27930.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:47.263Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27931.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:48.621Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "archiveFiscalYears.json",
+        "financeDashboard.json",
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.458Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28034.pdf",
+      "files": [
+        "mayorEntertainmentExpenses.json"
+      ],
+      "checkedAt": "2026-08-08T07:11:30.422Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:46.554Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:27.429Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.saito.lg.jp/0340260f132475c4521ffacfc0369c0f.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.104Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.saito.lg.jp/493c767c9a50af2b2c5a6fd70af41749.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.728Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.comicadoaya.com/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.844Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/100080664301633/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:15.495Z",
+      "status": 301,
+      "location": "https://www.facebook.com/people/%E5%8C%97%E6%9E%97%E3%81%BF%E3%81%8D%E3%81%8A%E5%BE%8C%E6%8F%B4%E4%BC%9A/100080664301633/",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/100083679123855/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:18.422Z",
+      "status": 301,
+      "location": "https://www.facebook.com/people/%E4%B8%AD%E5%B3%B6-%E3%82%88%E3%81%97%E3%81%AF%E3%82%8B/pfbid0sPQPyAp6u3cX2FUhWWvugJ6jAJaUmDZQCGdPrUZ4fbyNBxp14DpGuzmy2K5DdST5l/",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/579107342584087/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:21.262Z",
+      "status": 301,
+      "location": "https://www.facebook.com/100027116246393/",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/aya.comicado",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:17.650Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/hironori.miyata.3/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:33.084Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/ikuo.kai.5/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:13.901Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/kenichi.hayase.7/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:19.590Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/miura.hisatomo/",
+      "files": [
+        "mayor.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.482Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/morimitsu.g/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:16.826Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin01",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.257Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin02",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.011Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin03",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.904Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin04",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.934Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin05",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.724Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin06",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.501Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin07",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.352Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin08",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.389Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin09",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.200Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin10",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.015Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin11",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.764Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin12",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.554Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin13",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.348Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin14",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.126Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin15",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.905Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin16",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.745Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin17",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:02.731Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin18",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.718Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin19",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:04.563Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin20",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:05.431Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin21",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:06.215Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin22",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:07.099Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin23",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.051Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin24",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.992Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin26",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:09.754Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.giin27",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:10.565Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/nobeoka.shicho",
+      "files": [
+        "mayor.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.619Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/p/%E7%94%B2%E6%96%90%E5%BF%A0%E7%AF%A4-100028794542251/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:14.702Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/profile.php?id=100007160117141",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:13.129Z",
+      "status": 301,
+      "location": "https://www.facebook.com/people/%E5%B0%8F%E9%87%8E-%E6%AD%A3%E4%BA%8C/pfbid0hNxCMzPxcWFqmfS5nD1DvNgqz3xksRqU7zCME6NYFXeHCUCEu9ne5Lpb7eyCb46Ml/",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/profile.php?id=100039255065122",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:12.346Z",
+      "status": 301,
+      "location": "https://www.facebook.com/people/%E6%B3%B0%E6%B4%8B%E4%B8%8A%E6%9D%89/100039255065122/",
+      "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/ryo.maeda.54772/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:20.377Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/satoshi.inohana/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:11.560Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.facebook.com/shigehito.yoshida.16/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:33.978Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.hyugacity.jp/reiki_new/reiki_honbun/q607RG00000163.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.222Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.hyugacity.jp/shigikai/",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.514Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.hyugacity.jp/shigikai/youbousyo/city/writtenReq20241224_report.pdf",
+      "files": [
+        "compensationComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.185Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.hyugacity.jp/sp/display.php?cont=211025164943",
+      "files": [
+        "compensationComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.533Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.hyugacity.jp/tempimg/20250926103907.pdf",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.883Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/hayase_kenichi/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.342Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/masayuki_inada/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.290Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/miura.hisatomo/",
+      "files": [
+        "mayor.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.658Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/miyata.hironori/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:53.102Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/morimitsugoto/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.746Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin01",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.624Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin04",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.801Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin07",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.750Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin10",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.115Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin13",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.923Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin16",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.773Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin19",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.589Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/nobeoka_giin22",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.412Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/papa.mama.marchan/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.855Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/ryomaeda_saw/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.155Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/satoshi.inohana/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.090Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/shiba_hiro_rosso1541/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.549Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/shigehitoyoshida627/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:53.927Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.instagram.com/yoshiharu_nakashima/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.477Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010626A/113024/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.207Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010904A/45344/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:56.102Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/106567/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.586Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/60932/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:57.994Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/74282/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:59.349Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/118274/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:02.598Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/157822/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.599Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/41092/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.320Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/156236/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:05.279Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/60794/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:57.202Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/111955/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.936Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/164869/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.818Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/174836/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.030Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/39448/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:00.050Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/74635/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.722Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/205944/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.461Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/64884/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.214Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/166754/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:53.251Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/45106/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.000Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/82786/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:55.336Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/199943/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.475Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/31220/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:54.688Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/67564/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.984Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/107760/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:04.597Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/167789/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.275Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/174384/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.915Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/27936/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.837Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/64952/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.289Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/190765/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.214Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/9484/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:06.682Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/45178/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:58.676Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/13980/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.172Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/72306/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:07.451Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/103422/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:54.002Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/114731/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.711Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/45820/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:05.990Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/88538/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.370Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R071203A/72820/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:01.842Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080226A/113183/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.659Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060529A&startPos=0",
+      "files": [
+        "billVotes.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.507Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.komei.or.jp/km/nobeoka-ono-syoji/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.045Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.komei.or.jp/km/nobeoka-yamamoto-akemi/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.124Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/documents/104008/104008_20260109102356-1.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.328Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/documents/104010/104010_20260109102106-1.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.918Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/documents/107925/97124_20260330203858-1.xlsx",
+      "files": [
+        "miyazakiCompensationComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.833Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/023.pdf",
+      "files": [
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.988Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/068.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.628Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/069.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.237Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/072.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.551Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/075.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.200Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/082.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.818Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/105.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.500Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/116.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.123Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/176.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.806Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/205.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.424Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/297.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.068Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/299.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.712Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/362.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.943Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/385.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.546Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/412.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.151Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/420.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.746Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/508.pdf",
+      "files": [
+        "politicalFundOrganizations.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.351Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/551.pdf",
+      "files": [
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.984Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.pref.miyazaki.lg.jp/shichoson/kense/shichoson/20260331085107.html",
+      "files": [
+        "prefectureCompensationRanking.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.631Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.ryomaeda.com/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.861Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.soumu.go.jp/iken/kikinzandaka.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.902Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/teiin-kyuuyo02.html",
+      "files": [
+        "nationalCompensationRanking.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.135Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.383Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://www.threads.com/@shiba_hiro_rosso1541",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.894Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/@nobeoka-city",
+      "files": [
+        "mayor.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:37.545Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCbD24WObkKTQnPN3eI16b4g/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:44.776Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/sunandwave",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:43.939Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka-mayor-2025",
+      "files": [
+        "mayor.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.475Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka-mayor-meeting",
+      "files": [
+        "mayor.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.233Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka01q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.945Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka01q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.728Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka01q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.466Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka02q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:42.209Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka02q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.561Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka02q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.289Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka03q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.019Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka03q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.760Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka03q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.476Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka04q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.667Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka04q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.422Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka04q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.151Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka05q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.854Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka05q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.579Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka05q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:51.293Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka06q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.050Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka06q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.803Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka06q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:53.541Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka07q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:54.251Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka07q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:54.988Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka07q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:55.715Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka08q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:56.460Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka08q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:57.187Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka08q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:57.918Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka09q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:59.171Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka09q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:59.935Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka09q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:01.251Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka10q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:01.974Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka10q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:02.706Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka10q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.451Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka11q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:04.242Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka11q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:05.570Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka11q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:06.329Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka12q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:07.070Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka12q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.214Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka12q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.931Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka13q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:09.649Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka13q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:10.434Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka13q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:11.199Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka14q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:11.964Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka14q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:12.695Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka14q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:13.466Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka15q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:14.215Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka15q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:14.967Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka15q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:15.752Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka16q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:16.482Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka16q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:17.244Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka16q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:17.987Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka17q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:19.269Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka17q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:20.022Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka17q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:20.829Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka18q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:21.580Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka18q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:22.362Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka18q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:23.821Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka19q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:24.528Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka19q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:25.239Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka19q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:26.896Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka20q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:27.765Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka20q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:28.621Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka20q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:29.377Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka21q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:30.109Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka21q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:30.868Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka21q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:31.580Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka22q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:32.315Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka22q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:33.097Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka22q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:33.874Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka23q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:34.625Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka23q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:35.394Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka23q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:36.106Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka24q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:36.841Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka24q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:37.632Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka24q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:38.416Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka26q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:39.202Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka26q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:39.958Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka26q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:40.672Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka27q1",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:41.434Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka27q2",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:42.163Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nobeoka27q3",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:42.937Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www1.g-reiki.net/mkj/reiki/reiki_int/reiki_honbun/r322RG00000186.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.234Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www1.g-reiki.net/saito/reiki_honbun/q609RG00000018.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.883Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://x.com/hisatomo_m",
+      "files": [
+        "mayor.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:39.751Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://x.com/komei_yamamoto",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:13.771Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://x.com/Morimitsugoto",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:10.630Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin01",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:40.836Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin02",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:41.922Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin03",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:43.094Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin04",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:44.214Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin05",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:45.330Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin06",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:46.441Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin07",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:47.502Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin08",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:48.678Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin09",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:49.841Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin10",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:50.907Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin11",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:52.032Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin12",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:53.266Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin13",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:54.414Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin14",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:55.517Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin15",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:56.552Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin16",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:57.536Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin17",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:58.723Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin18",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:59.828Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin19",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:01.088Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin20",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:02.178Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin21",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:03.320Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin22",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:04.435Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin23",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:05.538Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin24",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:06.535Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin26",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:07.627Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_giin27",
+      "files": [
+        "members.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:08.835Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/nobeoka_shicho",
+      "files": [
+        "mayor.backup.json"
+      ],
+      "checkedAt": "2026-08-08T07:09:38.103Z",
+      "status": 404,
+      "location": null,
+      "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://x.com/ryomaeda_saw",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T07:10:12.295Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    }
+  ]
+}
