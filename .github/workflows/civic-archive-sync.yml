@@ -78,6 +78,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # scripts/lib/lastmod.mjsがgit log -1 -- <path>でページ更新日を求めるため、
+          # 浅いclone（デフォルト）だと未変更ファイルの履歴を辿れずlastmodがビルド実行日に
+          # フォールバックしてしまう問題があった（詳細はupdate-council-documents.yml参照）。
+          fetch-depth: 0
 
       - name: Restore crawler gate state
         uses: actions/cache/restore@v4

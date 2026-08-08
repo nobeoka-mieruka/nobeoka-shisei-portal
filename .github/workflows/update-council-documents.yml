@@ -22,6 +22,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # sitemap.xml/構造化データのlastmod（scripts/lib/lastmod.mjs）は、各ファイルの
+          # 実際のGit最終コミット日を`git log -1 -- <path>`で調べて求めている。デフォルトの
+          # 浅いclone（fetch-depth:1）だと、直近コミットで変更されていないファイルは履歴を
+          # 辿れずlastmodがundefinedとなり、フォールバックの「サイト全体の最終更新日
+          # （＝ビルド実行日）」に落ちてしまい、実際には更新していないページのlastmodが
+          # 毎回「今日」に見えてしまう不具合があったため、全履歴を取得する。
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
