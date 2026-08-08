@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
+import { QUESTION_LIKE_SPEECH_TYPES } from "../src/lib/questionLikeSpeechTypes.ts";
 import {
   ARCHIVE_VERIFICATION_STATUSES,
   checkAnyNonNullRequiresField,
@@ -2390,8 +2391,11 @@ const NOT_YET_PUBLISHABLE_STATUSES = new Set(["minutes-not-fetched", "source-una
 const sessionIdSet = new Set(councilSessions.map((s) => s.id));
 const speechIds = new Set();
 const publishedSpeechIds = new Set();
-// src/lib/questionLikeSpeechTypes.tsと同じ値。このスクリプトはVite専用のTS importを使えないため複製する。
-const QUESTION_LIKE_SPEECH_TYPES_FOR_VALIDATION = new Set(["一般質問", "代表質問", "関連質問", "総括質疑", "総括質疑・一般質問"]);
+// src/lib/questionLikeSpeechTypes.tsから直接import（値を手で複製すると、2026-08-05に発生した
+// 「177件中174件しか集計できていない」バグのように値が食い違う恐れがあるため、単一情報源を
+// このスクリプトからも直接参照する。questionLikeSpeechTypes.tsはVite依存のimportを持たない
+// 「葉」モジュールのため、Node ESM単体（node scripts/validate-data.mjs）でも直接importできる）。
+const QUESTION_LIKE_SPEECH_TYPES_FOR_VALIDATION = QUESTION_LIKE_SPEECH_TYPES;
 
 try {
   const speechData = readJson("src/data/councilSpeechSummaries.json");
@@ -2930,6 +2934,26 @@ try {
 } catch (e) {
   if (e?.code === "ENOENT") warn("archiveEntityExtractionCandidates.json", "読み込めませんでした（存在しない場合はスキップ）");
   else throw e;
+}
+
+// --- /people ページ（src/pages/PeoplePage.tsx）の「人物種別」絞り込みが、現職議員・元議員・
+//     歴代市長を混同せずに正しい件数を返すことのデータ側チェック。src/lib/people.tsの
+//     buildPersonIndex()は、この3つのIDセット（member/former-member/mayor）を単純に連結する
+//     だけなので、IDが複数カテゴリにまたがって重複していると、絞り込み結果に別カテゴリの
+//     人物が紛れ込む可能性がある（例：type=memberなのに元議員や市長が交じって表示される）。
+{
+  const memberOnlyIds = [...memberIds].filter((id) => formerMemberIds.has(id) || archiveMayorIds.has(id));
+  const formerOnlyIds = [...formerMemberIds].filter((id) => memberIds.has(id) || archiveMayorIds.has(id));
+  for (const id of memberOnlyIds) {
+    err("people-index", `現職議員IDが元議員または歴代市長のIDと重複しています（/people?type=memberの絞り込みで別カテゴリの人物と混同する恐れ）: ${id}`);
+  }
+  for (const id of formerOnlyIds) {
+    err("people-index", `元議員IDが現職議員または歴代市長のIDと重複しています（/people?type=former-memberの絞り込みで別カテゴリの人物と混同する恐れ）: ${id}`);
+  }
+  const expectedPeopleTotal = memberIds.size + formerMemberIds.size + archiveMayorIds.size;
+  console.log(
+    `[validate-data] people-index: 現職議員=${memberIds.size} 元議員=${formerMemberIds.size} 歴代市長=${archiveMayorIds.size}（/people絞り込みなしの合計想定件数=${expectedPeopleTotal}）`,
+  );
 }
 
 // --- report ---

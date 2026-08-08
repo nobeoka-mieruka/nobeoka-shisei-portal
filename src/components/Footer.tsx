@@ -16,7 +16,7 @@ const footerGroups: FooterLinkGroup[] = [
     heading: "人物",
     links: [
       { to: "/people", label: "人物から探す" },
-      { to: "/", label: "現職議員一覧" },
+      { to: "/people?type=member", label: "現職議員一覧" },
       { to: "/members/former", label: "元議員一覧" },
       { to: "/mayor", label: "市長情報" },
       { to: "/mayors", label: "歴代市長（アーカイブ）" },

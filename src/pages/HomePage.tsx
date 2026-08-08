@@ -330,7 +330,7 @@ export function HomePage() {
             label="会議録確認済み一般質問"
             value={questionStats.confirmedCount}
             unit="件"
-            hint={`収録済み${questionStats.collectedSessionCount}／対象${questionStats.targetSessionCount}会期`}
+            hint={`現任期対象会期：収録済み${questionStats.collectedSessionCount}／${questionStats.targetSessionCount}会期（現任期＋旧任期の全期間の会期数は一般質問データベースに別掲）`}
           />
           {questionStats.scheduledCount > 0 && (
             <StatCard

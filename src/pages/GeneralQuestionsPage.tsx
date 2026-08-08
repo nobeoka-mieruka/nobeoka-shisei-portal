@@ -393,10 +393,10 @@ export function GeneralQuestionsPage() {
 
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard
-          label="収録済み定例会"
+          label="全収録対象会期（現任期＋旧任期）"
           value={`${coveredRegularSessionCount}/${regularSessionsInPeriod.length}`}
           unit="会期"
-          hint="現任期・旧任期を合わせた対象定例会のうち、確認済み発言が登録済みの会期数"
+          hint="現任期・旧任期を合わせた定例会のうち、確認済み発言が登録済みの会期数。トップページの「現任期対象会期」（現任期の定例会のみが対象）とは集計範囲が異なります。"
         />
         <StatCard label="確認済み発言数" value={verifiedSpeeches.length} unit="件" />
         <StatCard label="質問項目数" value={verifiedQuestionItemCount} unit="件" />
