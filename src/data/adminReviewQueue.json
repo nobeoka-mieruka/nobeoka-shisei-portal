@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-08T12:12:28.648Z",
-  "totalItems": 58,
+  "generatedAt": "2026-08-08T12:32:52.104Z",
+  "totalItems": 57,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 10,
     "relationCandidate": 4,
-    "sourceInsufficient": 15,
+    "sourceInsufficient": 14,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -248,12 +248,6 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-14",
       "detail": "出典「【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため」の確認状況が「sourceUnavailable」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "memberProfile",
-      "sourceEntityId": "archive-fm01",
-      "detail": "出典「資料名未確認」の確認状況が「needsReview」です"
     },
     {
       "category": "committeeIdMissing",
