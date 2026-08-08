@@ -2839,3 +2839,69 @@ TASK-046・TASK-047の完了時点でwarningsは87件→35件（mayor-01-term-01
 - 完了日：2026-08-08
 - コミットID：（後述）
 - 変更概要：mayor-01-term-01のaccessedAt欠落を追加解消（36→35）。残り35件を分類した。
+
+---
+
+### TASK-049 councilSessions.json B分類21件の縮小
+
+状態：IN_PROGRESS（2026-08-08開始）
+優先度：C
+対象：`src/data/councilSessions.json`
+依存関係：TASK-048の分類結果
+
+目的：ユーザー指示により、B分類（別途一次資料調査が必要）21件のうち、安全に確認できる
+範囲を縮小する。1会期または最大5件のバッチで、一次資料と照合できたものだけを
+「確認済み」へ変更する。warningを0件にすることではなく、確認できる事実を確認済みに
+することを目的とする。
+
+事前調査（一括修正はせず、まず全21件の内訳を確認）：
+- 4件（2023-05・2023-05-extraordinary・2024-05-extraordinary-01・
+  2024-05-extraordinary-02）：`status: "要確認"`（自動生成データの人の目での確認待ち）。
+  各会期にはすでに「議案等審議結果」PDFが`documents`に登録済み（`verificationStatus:
+  "自動取得"`）で、summaryStatusは既に"verified"（summary自体は生成済み）。不足していたのは
+  会期の`startDate`/`endDate`と、PDF内容とタイトル・議案数・議決結果の一致を人の目で
+  確認した記録のみ
+- 17件（2019-06〜2023-03、2024-06）：`summaryStatus`が"unavailable"（16件）または
+  "partially-verified"（1件：2024-06）。`scripts/lib/session-summary.mjs`の生成ロジックを
+  確認したところ、`summaryStatus`が"verified"になるのは「billVotes.jsonに当該会期の
+  議案が1件以上登録されており、かつその全件がverificationStatus="verified"」の場合のみ。
+  billVotes.jsonを確認したところ、2019-06〜2023-03の16会期は登録議案が0件（現議員任期
+  である2023-05以降のみが収録対象、TASK-004の既存スコープ）であり、`documents`配列も
+  空のため、summaryStatus="unavailable"は事実として正確（機能不全ではない）。これを
+  "verified"にするには、各会期の「議案等審議結果」PDFを新たに収集し、TASK-004と同等の
+  議案データ抽出（billVotes.json相当のデータ登録）を各会期ごとに行う必要があり、
+  1会期あたりでも相応の調査量になる大規模タスクである
+
+バッチ1（2026-08-08）：
+- 対象：2023-05、2023-05-extraordinary、2024-05-extraordinary-01、2024-05-extraordinary-02
+  （4件、いずれも"status: 要確認"のみで、summary自体は既に生成・検証済み）
+- 一次資料確認：各会期の「議案等審議結果」PDF（延岡市公式ホームページ公表分、
+  documents配列に登録済みのsourceUrl）を取得し、会期名称（第◯回延岡市議会（臨時会））・
+  会期日程・議案数・議決結果が、councilSessions.jsonの既存summary記述（自動生成）と
+  一致することを確認した
+  - 2023-05：第2回臨時会、令和5年5月30日、議案2件（原案可決2件）→ 一致
+  - 2023-05-extraordinary：第1回臨時会、令和5年5月15日〜16日、議案6件（承認4件・同意2件）
+    → 一致
+  - 2024-05-extraordinary-01：第11回臨時会、令和6年5月29日、議案1件（原案可決1件）→ 一致
+  - 2024-05-extraordinary-02：第10回臨時会、令和6年5月7日、議案3件（承認1件・同意2件）
+    → 一致
+- 確認できたstartDate・endDateを追加し、`status`を"要確認"から"確認済み"へ変更、
+  documents[0]のverificationStatusも"自動取得"から"確認済み"へ変更した
+- 推測は行っていない（既存の自動生成summaryが一次資料と完全一致することを確認したうえで
+  ステータスのみ変更）
+
+バッチ1報告：
+- 対象会期：4件（2023-05、2023-05-extraordinary、2024-05-extraordinary-01、
+  2024-05-extraordinary-02）
+- 対象warning数：4
+- 解消数：4
+- needsReview残数：0
+- BLOCKED数：0
+- 追加出典数：0（既存のdocuments参照を再確認・ステータス更新のみ）
+- warning総数：35→31
+- コミットID：（後述）
+
+残り17件（2019-06〜2023-03の16会期・2024-06）は、上記のとおり議案データそのものの
+新規収集が必要な大規模タスクであるため、今回のバッチ処理では安全に縮小できる範囲を
+超える。個別の判断をTASKS.mdに記録し、B分類のまま残す（次回以降、TASK-004の旧任期版
+として独立タスク化を検討）。
