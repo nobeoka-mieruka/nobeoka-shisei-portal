@@ -9,7 +9,7 @@ import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
-import { billVoteLabels, publicBills, verificationStatusOf } from "../lib/billVotes";
+import { billVoteLabels, memberVotesUnavailableReason, publicBills, verificationStatusOf } from "../lib/billVotes";
 import { getCommitteeByName } from "../lib/committees";
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -383,7 +383,7 @@ export function BillVoteDetailPage() {
           </ul>
         ) : (
           <p className="rounded-lg bg-surface-container-high/70 px-3 py-2.5 text-xs leading-relaxed text-on-surface-variant">
-            個人別の表決：現時点で確認できる公式資料には、各議員の賛成・反対・棄権等が明確に掲載されていません。全会一致と記録されている場合でも、在席者・欠席者・議長・除斥者が確認できないため、推測で議員個人の賛否を割り当てることはしていません。
+            {memberVotesUnavailableReason(bill)}
           </p>
         )}
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">

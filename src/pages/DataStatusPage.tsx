@@ -188,11 +188,13 @@ export function DataStatusPage() {
   }));
 
   const billVotesWithMemberVotes = billVotes.filter((b) => b.memberVotes && b.memberVotes.length > 0).length;
+  const billVotesNotDisclosed = billVotes.filter((b) => b.individualVoteDisclosureStatus === "notDisclosed").length;
+  const billVotesUnconfirmed = billVotes.length - billVotesWithMemberVotes - billVotesNotDisclosed;
   const councilExtra: DataDomain = {
     label: "議案ごとの議決結果（既存機能）",
     count: billVotes.length,
     unit: "件",
-    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳を登録済みの件数：${billVotesWithMemberVotes}件（0件と「未収録」は区別しています。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです）。`,
+    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳：公開あり${billVotesWithMemberVotes}件（記名投票等）／会議録で非公開と確認済み${billVotesNotDisclosed}件（起立採決等で個人名が記録されていないことを会議録で確認）／未確認${billVotesUnconfirmed}件（会議録を未確認）。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
     linkTo: "/bills/votes",
     linkLabel: "議案ごとの賛否を見る",
   };
