@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-08T12:43:46.991Z",
-  "totalItems": 58,
+  "generatedAt": "2026-08-08T12:45:59.069Z",
+  "totalItems": 59,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 10,
     "relationCandidate": 4,
-    "sourceInsufficient": 15,
+    "sourceInsufficient": 16,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -253,6 +253,12 @@
       "category": "sourceInsufficient",
       "sourceEntityType": "memberProfile",
       "sourceEntityId": "archive-fm03",
+      "detail": "出典「延岡市議会議員選挙 2019年04月21日投票（選挙ドットコム）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "memberProfile",
+      "sourceEntityId": "archive-fm04",
       "detail": "出典「延岡市議会議員選挙 2019年04月21日投票（選挙ドットコム）」の確認状況が「needsReview」です"
     },
     {
