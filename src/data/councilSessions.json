@@ -1423,10 +1423,37 @@
     "endDate": "2021-06-25",
     "folderPath": "/council-documents/2021/2021-06",
     "description": "延岡市議会 第15回定例会（令和3年6月）。旧任期（現議員任期より前）の会期。",
-    "documents": [],
+    "documents": [
+      {
+        "id": "2021-06-results",
+        "category": "results",
+        "title": "議案等審議結果",
+        "description": "延岡市議会公式ホームページに掲載されている、議案ごとの審議結果一覧（PDF）です。",
+        "storageType": "local",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1528.pdf",
+        "isOfficial": true,
+        "verifiedAt": "2026-08-08",
+        "filePath": "/council-documents/2021/2021-06/2021-06.pdf",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-08-08"
+      }
+    ],
     "officialSessionUrl": "https://www.kensakusystem.jp/nobeoka/",
-    "lastVerified": "2026-08-05",
-    "summaryStatus": "unavailable"
+    "lastVerified": "2026-08-08",
+    "summaryStatus": "verified",
+    "shortSummary": "令和3年6月定例会では、条例、予算、その他、財産取得などに関する議案が審議されました。議決結果は原案可決22件、修正可決1件、承認1件、同意1件などです。",
+    "summary": "令和3年6月定例会は、令和3年6月8日から令和3年6月25日まで開催されました。条例、予算、その他、財産取得などに関する議案が審議されました。登録議案数は25件です。主な審議結果は、原案可決22件、修正可決1件、承認1件、同意1件などです。このページでは、議案一覧、審議結果、関連する公式資料を掲載しています。",
+    "summaryGeneratedAt": "2026-08-08",
+    "summaryVerifiedAt": "2026-08-08",
+    "summarySources": [
+      {
+        "documentId": "2021-06-results",
+        "title": "議案等審議結果",
+        "filePath": "/council-documents/2021/2021-06/2021-06.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1528.pdf"
+      }
+    ]
   },
   {
     "id": "2021-03",
@@ -1616,10 +1643,37 @@
     "endDate": "2020-03-18",
     "folderPath": "/council-documents/2019/2020-03",
     "description": "延岡市議会 第6回定例会（令和2年3月）。旧任期（現議員任期より前）の会期。",
-    "documents": [],
+    "documents": [
+      {
+        "id": "2020-03-results",
+        "category": "results",
+        "title": "議案等審議結果",
+        "description": "延岡市議会公式ホームページに掲載されている、議案ごとの審議結果一覧（PDF）です。",
+        "storageType": "local",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1556.pdf",
+        "isOfficial": true,
+        "verifiedAt": "2026-08-08",
+        "filePath": "/council-documents/2020/2020-03/2020-03.pdf",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-08-08"
+      }
+    ],
     "officialSessionUrl": "https://www.kensakusystem.jp/nobeoka/",
-    "lastVerified": "2026-08-05",
-    "summaryStatus": "unavailable"
+    "lastVerified": "2026-08-08",
+    "summaryStatus": "verified",
+    "shortSummary": "令和2年3月定例会では、その他、人事、予算、条例などに関する議案が審議されました。議決結果は原案可決53件、同意21件、承認2件、継続審査2件などです。",
+    "summary": "令和2年3月定例会は、令和2年2月25日から令和2年3月18日まで開催されました。その他、人事、予算、条例などに関する議案が審議されました。請願・陳情の審査も行われました。登録議案数は81件です。主な審議結果は、原案可決53件、同意21件、承認2件、継続審査2件などです。このページでは、議案一覧、審議結果、関連する公式資料を掲載しています。",
+    "summaryGeneratedAt": "2026-08-08",
+    "summaryVerifiedAt": "2026-08-08",
+    "summarySources": [
+      {
+        "documentId": "2020-03-results",
+        "title": "議案等審議結果",
+        "filePath": "/council-documents/2020/2020-03/2020-03.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1556.pdf"
+      }
+    ]
   },
   {
     "id": "2019-12",
@@ -1633,10 +1687,37 @@
     "endDate": "2019-12-13",
     "folderPath": "/council-documents/2019/2019-12",
     "description": "延岡市議会 第5回定例会（令和元年12月）。旧任期（現議員任期より前）の会期。",
-    "documents": [],
+    "documents": [
+      {
+        "id": "2019-12-results",
+        "category": "results",
+        "title": "議案等審議結果",
+        "description": "延岡市議会公式ホームページに掲載されている、議案ごとの審議結果一覧（PDF）です。",
+        "storageType": "local",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1555.pdf",
+        "isOfficial": true,
+        "verifiedAt": "2026-08-08",
+        "filePath": "/council-documents/2019/2019-12/2019-12.pdf",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-08-08"
+      }
+    ],
     "officialSessionUrl": "https://www.kensakusystem.jp/nobeoka/",
-    "lastVerified": "2026-08-05",
-    "summaryStatus": "unavailable"
+    "lastVerified": "2026-08-08",
+    "summaryStatus": "verified",
+    "shortSummary": "令和元年12月定例会では、予算、条例、その他、契約などに関する議案が審議されました。議決結果は原案可決30件、継続審査2件などです。",
+    "summary": "令和元年12月定例会は、令和1年11月26日から令和1年12月13日まで開催されました。予算、条例、その他、契約などに関する議案が審議されました。請願・陳情の審査も行われました。登録議案数は32件です。主な審議結果は、原案可決30件、継続審査2件などです。このページでは、議案一覧、審議結果、関連する公式資料を掲載しています。",
+    "summaryGeneratedAt": "2026-08-08",
+    "summaryVerifiedAt": "2026-08-08",
+    "summarySources": [
+      {
+        "documentId": "2019-12-results",
+        "title": "議案等審議結果",
+        "filePath": "/council-documents/2019/2019-12/2019-12.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1555.pdf"
+      }
+    ]
   },
   {
     "id": "2019-09",
@@ -1650,10 +1731,37 @@
     "endDate": "2019-09-30",
     "folderPath": "/council-documents/2019/2019-09",
     "description": "延岡市議会 第3回定例会（令和元年9月）。旧任期（現議員任期より前）の会期。",
-    "documents": [],
+    "documents": [
+      {
+        "id": "2019-09-results",
+        "category": "results",
+        "title": "議案等審議結果",
+        "description": "延岡市議会公式ホームページに掲載されている、議案ごとの審議結果一覧（PDF）です。",
+        "storageType": "local",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1595.pdf",
+        "isOfficial": true,
+        "verifiedAt": "2026-08-08",
+        "filePath": "/council-documents/2019/2019-09/2019-09.pdf",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-08-08"
+      }
+    ],
     "officialSessionUrl": "https://www.kensakusystem.jp/nobeoka/",
-    "lastVerified": "2026-08-05",
-    "summaryStatus": "unavailable"
+    "lastVerified": "2026-08-08",
+    "summaryStatus": "verified",
+    "shortSummary": "令和元年9月定例会では、条例、決算、予算、その他などに関する議案が審議されました。議決結果は原案可決25件、認定5件、修正可決1件、同意1件などです。",
+    "summary": "令和元年9月定例会は、令和1年8月27日から令和1年9月30日まで開催されました。条例、決算、予算、その他などに関する議案が審議されました。請願・陳情の審査も行われました。登録議案数は33件です。主な審議結果は、原案可決25件、認定5件、修正可決1件、同意1件などです。このページでは、議案一覧、審議結果、関連する公式資料を掲載しています。",
+    "summaryGeneratedAt": "2026-08-08",
+    "summaryVerifiedAt": "2026-08-08",
+    "summarySources": [
+      {
+        "documentId": "2019-09-results",
+        "title": "議案等審議結果",
+        "filePath": "/council-documents/2019/2019-09/2019-09.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1595.pdf"
+      }
+    ]
   },
   {
     "id": "2019-06",
@@ -1667,9 +1775,36 @@
     "endDate": "2019-07-05",
     "folderPath": "/council-documents/2019/2019-06",
     "description": "延岡市議会 第2回定例会（令和元年6月）。旧任期（現議員任期より前）の会期。統一地方選挙後、初の定例会。",
-    "documents": [],
+    "documents": [
+      {
+        "id": "2019-06-results",
+        "category": "results",
+        "title": "議案等審議結果",
+        "description": "延岡市議会公式ホームページに掲載されている、議案ごとの審議結果一覧（PDF）です。",
+        "storageType": "local",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1597.pdf",
+        "isOfficial": true,
+        "verifiedAt": "2026-08-08",
+        "filePath": "/council-documents/2019/2019-06/2019-06.pdf",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-08-08"
+      }
+    ],
     "officialSessionUrl": "https://www.kensakusystem.jp/nobeoka/",
-    "lastVerified": "2026-08-06",
-    "summaryStatus": "unavailable"
+    "lastVerified": "2026-08-08",
+    "summaryStatus": "partially-verified",
+    "shortSummary": "令和元年6月定例会では、議案の審議が行われました。",
+    "summary": "令和元年6月定例会は、令和1年6月17日から令和1年7月5日まで開催されました。議案の審議が行われました。このページでは、議案一覧、審議結果、関連する公式資料を掲載しています。",
+    "summaryGeneratedAt": "2026-08-08",
+    "summaryVerifiedAt": "2026-08-08",
+    "summarySources": [
+      {
+        "documentId": "2019-06-results",
+        "title": "議案等審議結果",
+        "filePath": "/council-documents/2019/2019-06/2019-06.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1597.pdf"
+      }
+    ]
   }
 ]
