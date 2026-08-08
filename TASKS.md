@@ -3111,3 +3111,43 @@ TASKS.mdに記録する。
 
 このタスクは次回セッションの最優先事項とする。データ側の作業（B分類21件解消等）は
 正常に完了しているため、原因はデプロイパイプライン側にあると判断している。
+
+【2026-08-09 解決】
+
+状態：DONE
+
+`wrangler pages deployment list`（Cloudflare Pages CLI、読み取り専用トークンをAPI呼び出し
+のみに使用し画面へは一切表示しない方式でユーザー承認済み）で直近の全デプロイ履歴を確認した
+結果、`819dbb9`を含む直近の本番デプロイが**すべて"Failure"（ビルド失敗）**になっており、
+本番は最後に成功したビルドをそのまま配信し続けていたことが判明した（Git連携自体やWebhookの
+不具合ではなかった）。
+
+根本原因（実ビルドログで確認）：
+- Cloudflare Pagesのビルド環境：Node.js v22.16.0
+- ローカル開発環境：Node.js v24.18.0
+- `scripts/validate-data.mjs`（`npm run build`の一部）が`src/lib/questionLikeSpeechTypes.ts`
+  を素の`node`で直接importしており、Node v24はTypeScriptのネイティブ型除去がデフォルト
+  有効なため偶然動いていたが、Node v22.16.0はデフォルト無効なため
+  `ERR_UNKNOWN_FILE_EXTENSION`で確実にビルドが失敗していた
+
+修正：
+- `package.json`の2箇所（`validate:data`スクリプト、`build`スクリプト内）で
+  `node scripts/validate-data.mjs` → `node --experimental-strip-types scripts/validate-data.mjs`
+  （Node 22.6.0以降が対応するフラグを明示指定）。データ内容・集計ロジック・
+  `questionLikeSpeechTypes.ts`の構造は変更していない
+- validate:data/typecheck/lint/test/build（validate:seo・validate:content含む）
+  すべて成功を確認したのちコミット・プッシュ
+
+結果確認（本番URLへの実アクセスで確認、2026-08-09）：
+- Cloudflare Pagesデプロイステータス：Failure → Active（デプロイ`ce2833ad`、commit`78034dd`）
+- `/data-status`のbillVotes表示：546件 → **1,177件**
+- `/updates`の最新更新履歴：2026-08-09に更新
+- 新規議案詳細ページ4件（`/bills/votes/2019-06-gian-10`・`2019-06-chinjo-1`・
+  `2019-12-gian-60`・`2020-09-gian-40`）すべてHTTP 200
+- 主要ページ（`/`・`/questions`・`/people`・`/political-funds`）すべてHTTP 200
+
+完了記録：
+- 完了日：2026-08-09
+- コミットID：78034dd
+- 変更概要：上記のとおり。本番デプロイ停止（Cloudflare Pagesビルド環境のNode.jsバージョン差
+  によるビルド失敗）を解消し、本番を最新データ（billVotes 1,177件）へ復旧した。
