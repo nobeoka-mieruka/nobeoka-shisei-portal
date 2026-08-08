@@ -14,6 +14,8 @@ import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import searchIndexData from "../data/searchIndex.json";
 import committeesData from "../data/committees.json";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
+import politicalFundOrganizationsData from "../data/politicalFundOrganizations.json";
+import politicalFundReportsData from "../data/politicalFundReports.json";
 import type {
   CouncilMember,
   FormerMember,
@@ -23,6 +25,8 @@ import type {
   CitySpecialPost,
   Committee,
   CommitteeActivityReport,
+  PoliticalFundOrganization,
+  PoliticalFundReport,
 } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm, ArchiveCouncilDocument, ArchivePolicy, ArchiveFiscalYear } from "../types/historicalArchive";
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
@@ -51,6 +55,8 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const committees = committeesData as Committee[];
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
+const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFundOrganization[];
+const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -240,6 +246,31 @@ export function DataStatusPage() {
     },
   ];
 
+  // --- 政治資金 ---
+  // 「完全確認」＝代表者・会計責任者・当該年分の収支報告書のいずれも確認済み。
+  // 「一部確認」＝代表者・会計責任者等の一部メタデータのみ確認済み（収支金額は未確認）。
+  // 「未確認」＝団体名・提出先以外、確認できた情報がない。
+  const pfReportedOrgIds = new Set(politicalFundReports.map((r) => r.organizationId));
+  const pfFullyConfirmed = politicalFundOrganizations.filter(
+    (o) => o.representativeName && o.treasurerName && pfReportedOrgIds.has(o.id),
+  ).length;
+  const pfPartiallyConfirmed = politicalFundOrganizations.filter(
+    (o) => (o.representativeName || o.treasurerName || pfReportedOrgIds.has(o.id)) && !(o.representativeName && o.treasurerName && pfReportedOrgIds.has(o.id)),
+  ).length;
+  const pfUnconfirmed = politicalFundOrganizations.length - pfFullyConfirmed - pfPartiallyConfirmed;
+  const politicalFunds: DataDomain[] = [
+    {
+      label: "政治資金団体",
+      count: politicalFundOrganizations.length,
+      unit: "団体",
+      scope: "宮崎県選挙管理委員会公表分（令和6年分収支報告書提出団体）",
+      detail: `完全確認（代表者・会計責任者・当該年分収支のすべて確認済み）：${pfFullyConfirmed}団体／一部確認（団体名・提出先等の一部のみ）：${pfPartiallyConfirmed}団体／未確認：${pfUnconfirmed}団体。収支報告書PDFは画像スキャン形式のため、AI画像認識による読み取りを慎重に進めています（推測での金額登録はしていません）。`,
+      linkTo: "/political-funds",
+      linkLabel: "政治資金団体一覧を見る",
+      fullyCovered: pfUnconfirmed === 0 && pfPartiallyConfirmed === 0,
+    },
+  ];
+
   const finance: DataDomain[] = [
     {
       label: "財政・人口・基金・市債（年度データ）",
@@ -316,9 +347,9 @@ export function DataStatusPage() {
         </ul>
       </SectionCard>
 
-      <SectionCard title="政策・財政">
+      <SectionCard title="政策・財政・政治資金">
         <ul className="space-y-2">
-          {[...policy, ...finance].map((d) => (
+          {[...policy, ...finance, ...politicalFunds].map((d) => (
             <DomainRow key={d.label} domain={d} />
           ))}
         </ul>
