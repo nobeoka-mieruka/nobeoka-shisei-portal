@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-08T07:11:49.631Z",
-  "targetCount": 479,
-  "cacheReused": 0,
-  "newlyChecked": 479,
+  "generatedAt": "2026-08-08T21:19:44.548Z",
+  "targetCount": 457,
+  "cacheReused": 437,
+  "newlyChecked": 20,
   "summary": {
-    "ok": 438,
+    "ok": 417,
     "not_found_404": 31,
     "redirect": 8,
-    "error": 2
+    "error": 1
   },
   "results": [
     {
@@ -67,6 +67,17 @@
       "error": null
     },
     {
+      "url": "https://go2senkyo.com/local/senkyo/18472",
+      "files": [
+        "archiveMemberProfiles.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:36.503Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://go2senkyo.com/local/senkyo/22481",
       "files": [
         "archiveMayorTerms.json"
@@ -80,7 +91,8 @@
     {
       "url": "https://go2senkyo.com/local/senkyo/26032",
       "files": [
-        "archiveMayorTerms.json"
+        "archiveMayorTerms.json",
+        "archiveMemberProfiles.json"
       ],
       "checkedAt": "2026-08-08T07:09:38.532Z",
       "status": 200,
@@ -361,6 +373,17 @@
         "municipalityComparison.json"
       ],
       "checkedAt": "2026-08-08T07:09:39.658Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.miyakonojo.miyazaki.jp/site/gikai/2861.html",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:36.122Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1359,6 +1382,18 @@
       "error": null
     },
     {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10082.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:37.836Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10619.pdf",
       "files": [
         "councilWatchedDocuments.json"
@@ -1590,6 +1625,18 @@
       "error": null
     },
     {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11466.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:37.391Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11589.pdf",
       "files": [
         "councilWatchedDocuments.json"
@@ -1601,11 +1648,46 @@
       "error": null
     },
     {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/12479.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:36.949Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/13307.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:36.510Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/13422.pdf",
       "files": [
         "councilWatchedDocuments.json"
       ],
       "checkedAt": "2026-08-08T07:10:53.468Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14188.pdf",
+      "files": [
+        "archiveMemberProfiles.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:36.063Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1704,6 +1786,18 @@
       "error": null
     },
     {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1528.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:43.746Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15532.pdf",
       "files": [
         "archiveCouncilDocuments.json",
@@ -1734,6 +1828,102 @@
         "councilWatchedDocuments.json"
       ],
       "checkedAt": "2026-08-08T07:11:12.271Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1555.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:42.854Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1556.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:43.297Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1558.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:41.763Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1560.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:41.108Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1561.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:40.456Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1563.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:39.809Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1595.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:42.416Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1597.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:44.191Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2637,6 +2827,42 @@
         "civicTimelineEvents.json"
       ],
       "checkedAt": "2026-08-08T07:10:27.429Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6051.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:39.375Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/7290.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:38.717Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/8530.pdf",
+      "files": [
+        "billVotes.json",
+        "councilSessions.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:38.281Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3866,7 +4092,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/documents/104008/104008_20260109102356-1.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:47.328Z",
       "status": 200,
@@ -3877,7 +4104,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/documents/104010/104010_20260109102106-1.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:40.918Z",
       "status": 200,
@@ -3911,7 +4139,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/068.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:39.628Z",
       "status": 200,
@@ -3922,7 +4151,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/069.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:40.237Z",
       "status": 200,
@@ -3933,7 +4163,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/072.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:41.551Z",
       "status": 200,
@@ -3944,7 +4175,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/075.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:42.200Z",
       "status": 200,
@@ -3955,7 +4187,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/082.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:42.818Z",
       "status": 200,
@@ -3966,7 +4199,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/105.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:43.500Z",
       "status": 200,
@@ -3977,7 +4211,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/116.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:44.123Z",
       "status": 200,
@@ -3988,7 +4223,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/176.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:44.806Z",
       "status": 200,
@@ -3999,7 +4235,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/205.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:45.424Z",
       "status": 200,
@@ -4010,7 +4247,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/297.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:46.068Z",
       "status": 200,
@@ -4021,7 +4259,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/299.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:46.712Z",
       "status": 200,
@@ -4032,7 +4271,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/362.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:47.943Z",
       "status": 200,
@@ -4043,7 +4283,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/385.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:48.546Z",
       "status": 200,
@@ -4054,7 +4295,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/412.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:49.151Z",
       "status": 200,
@@ -4065,7 +4307,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/420.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:49.746Z",
       "status": 200,
@@ -4076,7 +4319,8 @@
     {
       "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public/teiki/2024/sonota/documents/508.pdf",
       "files": [
-        "politicalFundOrganizations.json"
+        "politicalFundOrganizations.json",
+        "politicalFundReports.json"
       ],
       "checkedAt": "2026-08-08T07:09:50.351Z",
       "status": 200,
@@ -5075,6 +5319,17 @@
       "location": null,
       "category": "ok",
       "error": null
+    },
+    {
+      "url": "https://www.みねだ克明.com/",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-08T21:19:36.205Z",
+      "status": null,
+      "location": null,
+      "category": "error",
+      "error": "fetch failed"
     },
     {
       "url": "https://www1.g-reiki.net/mkj/reiki/reiki_int/reiki_honbun/r322RG00000186.html",
