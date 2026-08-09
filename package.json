@@ -37,6 +37,7 @@
     "suggest:bill-relations": "node scripts/suggest-bill-relations.mjs",
     "update:council-documents": "npm run fetch:council-documents && npm run extract:council-data && npm run generate:bill-summaries && npm run generate:council-documents && npm run generate:session-summaries && npm run generate:speech-summary-scaffold && npm run speeches:analyze-members && npm run validate:data",
     "import:members": "node scripts/import-members.mjs",
+    "import:bills": "node scripts/import-bills.mjs",
     "typecheck": "tsc -b",
     "test": "node scripts/test-activity-radar.mjs",
     "prerender": "node scripts/prerender.mjs",
