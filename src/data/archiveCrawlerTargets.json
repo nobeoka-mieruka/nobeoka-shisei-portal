@@ -102,5 +102,13 @@
     "url": null,
     "existingImplementation": null,
     "notes": "themes.jsonは当サイトが定義する内部の固定分類であり、外部の公式ページを持たない。巡回対象としては形式上登録するが、常にurl=null・巡回スキップとなる。"
+  },
+  {
+    "id": "election-fund-report",
+    "category": "politicalFund",
+    "categoryLabel": "政治資金収支報告書（宮崎県選挙管理委員会公表）",
+    "url": "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public.html",
+    "existingImplementation": null,
+    "notes": "宮崎県選挙管理委員会が政治資金収支報告書を公表するページ。TASK-016B（pf-org-001＝市長の後援会、令和7年分は令和8年11月頃公表見込み）の再開条件を自動検知するために2026-08-10追加。ページのハッシュ変更を検知するのみで、公表された金額データの自動抽出・登録は行わない（画像スキャンPDFのためOCR環境が別途必要、TASK-016B参照）。変更を検知した場合は、次回セッションで人手により内容を確認すること。"
   }
 ]

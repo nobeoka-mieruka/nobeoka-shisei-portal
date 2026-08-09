@@ -1,11 +1,13 @@
 /**
- * 延岡市公式サイト（www.city.nobeoka.miyazaki.jp）向けの、5日ごと自動巡回で使う
- * 低レベルfetchヘルパー。scripts/lib/minutes-source.mjsの適応型並列制御とは別に、
- * こちらは単純な直列実行・固定間隔（DISPATCH_INTERVAL_MS）を基本とする
+ * 延岡市公式サイト（www.city.nobeoka.miyazaki.jp）等、本プロジェクトが定期巡回の対象とする
+ * 公的機関サイト向けの低レベルfetchヘルパー。scripts/lib/minutes-source.mjsの適応型並列制御とは
+ * 別に、こちらは単純な直列実行・固定間隔（DISPATCH_INTERVAL_MS）を基本とする
  * （公式サイトの通常ページ向けであり、会議録検索システムほど大量アクセスしないため）。
  *
  * 安全方針：
- * - 許可ドメイン外へは一切アクセスしない（リダイレクト先も検査する）。
+ * - 許可ドメイン外へは一切アクセスしない（リダイレクト先も検査する）。ALLOWED_HOSTSは
+ *   実際に巡回する必要が生じた対象（src/data/archiveCrawlerTargets.jsonのurl）のホストのみを
+ *   個別に追加すること。ワイルドカードや広いドメイン許可はしない。
  * - 429はRetry-Afterを尊重し、指数バックオフで再試行する。
  * - 403は連続再試行しない（1回失敗したら即座に諦める）。
  * - 5xxは最大2回まで再試行する。
@@ -14,7 +16,13 @@
  */
 import { createHash } from "node:crypto";
 
-export const ALLOWED_HOSTS = new Set(["www.city.nobeoka.miyazaki.jp", "city.nobeoka.miyazaki.jp"]);
+export const ALLOWED_HOSTS = new Set([
+  "www.city.nobeoka.miyazaki.jp",
+  "city.nobeoka.miyazaki.jp",
+  // 2026-08-10追加：宮崎県公式サイト（延岡市選出の政治団体の政治資金収支報告書公表ページ、
+  // TASK-016B pf-org-001の令和7年分公表待ちを自動検知するために追加）。
+  "www.pref.miyazaki.lg.jp",
+]);
 export const BASE_URL = "https://www.city.nobeoka.miyazaki.jp";
 const USER_AGENT =
   "Nobeoka-Shisei-Portal/1.0 (Council data sync; +https://nobeoka-shisei-portal.pages.dev/about)";

@@ -2767,6 +2767,7 @@ try {
     "debt",
     "policy",
     "theme",
+    "politicalFund",
   ]);
 
   const crawlerTargetIds = checkDuplicateIds({ err, warn }, archiveCrawlerTargets, "id", "archiveCrawlerTargets.json");

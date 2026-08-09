@@ -1,11 +1,11 @@
 {
-  "lastRunAt": "2026-08-04T13:13:30.397Z",
-  "lastSuccessfulRunAt": "2026-08-04T13:13:30.397Z",
+  "lastRunAt": "2026-08-09T15:03:19.419Z",
+  "lastSuccessfulRunAt": "2026-08-09T15:03:19.419Z",
   "targets": [
     {
       "targetId": "general-question",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "unchanged",
       "lastContentHash": null,
@@ -13,8 +13,8 @@
     },
     {
       "targetId": "bill",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "unchanged",
       "lastContentHash": null,
@@ -22,8 +22,8 @@
     },
     {
       "targetId": "ordinance",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "unchanged",
       "lastContentHash": null,
@@ -31,8 +31,8 @@
     },
     {
       "targetId": "petition",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "unchanged",
       "lastContentHash": null,
@@ -40,8 +40,8 @@
     },
     {
       "targetId": "request",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "unchanged",
       "lastContentHash": null,
@@ -49,8 +49,8 @@
     },
     {
       "targetId": "member-roster",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "unchanged",
       "lastContentHash": null,
@@ -58,8 +58,8 @@
     },
     {
       "targetId": "mayor",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "skipped",
       "lastContentHash": null,
@@ -67,17 +67,17 @@
     },
     {
       "targetId": "finance",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
-      "lastUpdatedAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
+      "lastUpdatedAt": "2026-08-09T15:03:19.419Z",
       "lastStatus": "changed",
-      "lastContentHash": "0ae54c8ebf41e9d28af57b9dff5ed6579abebcaf4eeb1e92d303545382b07c7b",
+      "lastContentHash": "25ebf288eab1dc9794a2c0f1ae07f11f90c83ee03a872c6cd37e9252eaafa293",
       "consecutiveNotFoundCount": 0
     },
     {
       "targetId": "population",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": "2026-08-04T13:12:54.661Z",
       "lastStatus": "unchanged",
       "lastContentHash": "addfb70cbf605a6c3b2bbd15de244c18e1776702ffdcdbcf2ed867cbb79dacd3",
@@ -85,8 +85,8 @@
     },
     {
       "targetId": "fund",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": "2026-08-04T13:12:54.661Z",
       "lastStatus": "unchanged",
       "lastContentHash": "18b3592480a6487fe02aafb6a9f091e4e255117b0944367ec848b3db62895444",
@@ -94,8 +94,8 @@
     },
     {
       "targetId": "debt",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "skipped",
       "lastContentHash": null,
@@ -103,8 +103,8 @@
     },
     {
       "targetId": "policy",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "skipped",
       "lastContentHash": null,
@@ -112,16 +112,25 @@
     },
     {
       "targetId": "theme",
-      "lastCheckedAt": "2026-08-04T13:13:30.397Z",
-      "lastSuccessfulAt": "2026-08-04T13:13:30.397Z",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
       "lastUpdatedAt": null,
       "lastStatus": "skipped",
       "lastContentHash": null,
       "consecutiveNotFoundCount": 0
+    },
+    {
+      "targetId": "election-fund-report",
+      "lastCheckedAt": "2026-08-09T15:03:19.419Z",
+      "lastSuccessfulAt": "2026-08-09T15:03:19.419Z",
+      "lastUpdatedAt": "2026-08-09T15:03:19.419Z",
+      "lastStatus": "changed",
+      "lastContentHash": "c896367d5b5fa3ebde9acf420b06c2c70ee02834681c0b876f232d44dc0af21c",
+      "consecutiveNotFoundCount": 0
     }
   ],
-  "totalCount": 13,
-  "changedCount": 1,
+  "totalCount": 14,
+  "changedCount": 2,
   "removedCount": 0,
   "errorCount": 0
 }
