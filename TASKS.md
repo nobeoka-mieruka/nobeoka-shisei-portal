@@ -1,13 +1,12 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-09（最終クローズ監査。TASK数を機械集計し、状態欄を実態に整合。
-TASK-004・016B・032を、真の残課題が一次資料不足に限定されることを踏まえIN_PROGRESSから
-BLOCKEDへ変更。TASK-011を、新しい情報源候補は見つかったが環境制約で読み取れないことが
-判明したためC分類からD分類へ変更）
+最終更新日：2026-08-10（TASK-052「BLOCKEDタスクの安全な自動再開判定」を新設・完了。
+BLOCKED 7件はステータス自体は変わらず継続BLOCKEDのままだが、一次資料の変化を機械的に
+検知する仕組み（src/data/blockedTaskWatch.json・scripts/check-blocked-resume.mjs）を追加した）
 
-現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-09時点）：
-DONE 53／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計62
+現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-10時点）：
+DONE 54／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計63
 
 READY・IN_PROGRESSは現時点で0件。残るBLOCKED 7件はいずれも一次資料の不存在・未公表・
 環境制約が理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」参照）。
@@ -3824,3 +3823,105 @@ CDNなし、Brotli非圧縮、ローカルディスクI/O）を測定対象に�
 - 変更概要：`src/main.tsx`を`hydrateRoot`対応にし、prerender済みSSR出力の無駄な
   クライアント側再レンダリングを解消した。TASK-026の当初のLCP診断（測定環境起因の
   誤りだったことを判明・訂正）、CLSの残課題を記録した。
+
+---
+
+### TASK-052 BLOCKEDタスクの安全な自動再開判定の実装
+
+状態：DONE（2026-08-10）
+優先度：B
+対象：`src/data/blockedTaskWatch.json`（新設）、`scripts/check-blocked-resume.mjs`（新設）、
+`src/data/archiveCrawlerTargets.json`、`scripts/lib/city-site-fetch.mjs`、`scripts/run-archive-crawler.mjs`、
+`scripts/validate-data.mjs`、`.github/workflows/civic-archive-sync.yml`
+依存関係：既存の自動巡回基盤（フェーズ10A〜10C、TASK-016B時点で追加した`election-fund-report`監視対象を含む）
+
+目的：ユーザー指示「BLOCKEDタスクの安全な自動再開判定」の実装。BLOCKED状態のタスクについて、
+新しい一次資料が公式サイト等で公開された場合に、人が毎回TASKS.mdを確認しなくても自動的に
+「再調査候補」として検知できるようにする。ただしBLOCKEDを無条件でREADYへ変更することは
+絶対に行わず、一次資料の存在を機械的に確認できた場合のみ`review_required`（人による内容確認が
+必要）へ状態変更する。
+
+実装内容：
+- `src/data/blockedTaskWatch.json`：既存BLOCKED 7件それぞれについて、blockedReason相当の情報
+  （resumeCondition・sourceUrl・expectedSourceType・crawlerTargetId・autoResumeClass・
+  matchConfidence・lastAcknowledgedHash・lastCheckedAt等）を機械判定可能な構造で登録した
+- `scripts/check-blocked-resume.mjs`：`archiveCrawlerState.json`（既存の巡回結果）と
+  `blockedTaskWatch.json`を突き合わせ、監視対象URLのコンテンツハッシュが前回人が承認した
+  値（lastAcknowledgedHash）と異なる場合のみ`status: "blocked" → "review_required"`へ変更する。
+  絶対に`"ready"`へは変更しない設計（`validate-data.mjs`側でも`status`に`"ready"`を許可しない
+  検証を追加し、機械的に禁止した）。既に`review_required`のエントリは再送しない（冪等）。
+  実データ（人物経歴・金額・日付等）の取得・登録・解釈は一切行わない
+- 新規監視対象3件を`archiveCrawlerTargets.json`へ追加（いずれも各タスクが既に出典として
+  使用している/発見済みのURLを再利用し、新規に推測したURLは無い）：
+  - `similar-municipality-compensation`（TASK-012、`.../soshiki/16/14315.html`、
+    既存データsimilarMunicipalityComparison.json等が既に使用しているURLと同一）
+  - `nobeoka-history-publications`（TASK-045、`.../soshiki/13/2786.html`、間接的な弱いシグナル）
+  - `gichokai-compensation-survey`（TASK-011、`https://www.si-gichokai.jp/research/teisu/`、
+    2026-08-09〜10に発見済みの情報源の索引ページ。ドメインを`ALLOWED_HOSTS`へ追加）
+- **重要な発見・修正**：上記の実装検証中、`www.city.nobeoka.miyazaki.jp`・`www.pref.miyazaki.lg.jp`の
+  一部ページがCloudflareのメールアドレス難読化機能（`cdn-cgi/l/email-protection`・
+  `data-cfemail`属性）を使用しており、リクエストのたびにランダムな鍵で再エンコードされるため、
+  単純なsha256ハッシュでは実際の表示内容が同じでも毎回ハッシュが変わってしまう（＝常に
+  「変更あり」と誤検知し続ける）ことを発見した。`scripts/lib/city-site-fetch.mjs`へ
+  `sha256OfBufferForDiff()`（難読化部分を正規化してからハッシュ化、対象パターンが無い場合は
+  従来どおり）を追加し、`scripts/run-archive-crawler.mjs`の差分判定で採用した。修正後、
+  対象4URL（election-fund-report含む既存分・新規3件）について3回連続の巡回でハッシュが
+  安定する（unchanged）ことを実機で確認したうえでベースラインを設定した。この問題は
+  `scripts/sync-council-data.mjs`側の一部ハッシュ判定にも理論上存在し得るが、実際の
+  GitHub Actions実行履歴でPRが一度も作成されていない（＝誤検知が顕在化していない）ことを
+  確認できたため、今回は本タスクの新規対象のみ修正し、既存パイプラインには手を加えなかった
+  （残課題として記録、下記参照）
+- `.github/workflows/civic-archive-sync.yml`：巡回・validate:data実行後に
+  `check-blocked-resume.mjs`を常時実行するステップを追加。状態変化（`review_required`への
+  遷移）が発生した場合のみ、validate:data／typecheck／lint／test／build／validate:seo／
+  validate:content／release-checkのフルゲートを実行し、すべて成功した場合のみ
+  `blockedTaskWatch.json`とレポートのみをmainへ直接commit・push（既存のAI候補生成PR経路とは
+  独立。実データを含まないメタ情報のみの変更のため低リスクと判断した）
+- `scripts/validate-data.mjs`：`blockedTaskWatch.json`のスキーマ検証を追加
+  （taskId重複・status enum・"ready"の使用禁止・crawlerTargetIdの参照整合性・
+  review_required時のlastTransitionAt必須等）
+
+現在のBLOCKED 7件の分類：
+- **自動再開可能（auto）**：TASK-004（既存の日次フル抽出パイプラインが既にカバー、新規監視
+  対象は不要）・TASK-012（新規監視対象、既存出典URLと完全一致）・TASK-016B（既存監視対象、
+  完全一致）
+- **条件付き自動再開（conditional）**：TASK-011（新規監視対象、全国市議会議長会の索引ページ。
+  変更検知後もOCR要否は人の確認が必要）・TASK-045（新規監視対象、延岡市史刊行物ページ。
+  間接的な弱いシグナルで、変更検知後も対象期間を扱うかは人の確認が必要）
+- **手動確認必須（manual）**：TASK-023（外部一次資料の公開待ちではなく、本サイト自身の
+  コンテンツ構成に依存するため監視対象外）・TASK-032（対象17名それぞれに監視できる既存URLが
+  存在しないため監視対象を設定できない。推測でURLを作らない）
+
+受入条件：
+- BLOCKEDを無条件でREADYへ変更しない（達成。スクリプト・validate-data.mjsの両方で機械的に禁止）
+- 一次資料の存在を機械的に確認できた場合のみ状態変更する（達成。ハッシュ比較のみで判定し、
+  内容の解釈は行わない）
+- 推測・Wikipedia・検索結果スニペット・第三者まとめサイトだけを根拠に解除しない（達成。
+  監視対象はすべて各タスクが既に一次資料として使用・発見済みの公式URLのみ）
+- 状態変更が発生した場合のみ後続処理（フル検証・commit・push）を起動する（達成）
+- 同一資料による毎回の再開判定を防ぐ（達成。lastAcknowledgedHashとの比較、review_required後は
+  再送しない冪等設計）
+- 既存データ（billVotes 1,177件・確認済み一般質問397件・質問項目1,470件・現職議員26名）を
+  減少・破壊させない（達成、下記検証参照）
+- 既存3ワークフローを壊さない（達成。civic-archive-sync.ymlへの追加のみ、他2ワークフローは無変更）
+
+公式資料：
+- 各監視対象の出典URL（上記参照。いずれも各BLOCKEDタスクが既に一次資料として使用・
+  発見済みのもの）
+
+残課題（次回以降）：
+- `scripts/sync-council-data.mjs`のHTML本文ハッシュ判定（indexBodyHash・detailBodyHash・
+  question-notice等）も、監視対象ページがCloudflareのメールアドレス難読化機能を使っている
+  場合は同様の誤検知リスクを理論上抱えている。実行履歴上は誤検知が顕在化していないため
+  今回は変更していないが、対象ページを確認し、必要であれば同じく`sha256OfBufferForDiff()`へ
+  切り替えることを推奨する
+- `review_required`になったエントリの一覧を、`data-status`ページ等で市民向けにも
+  分かりやすく表示するかどうかは今回スコープ外とした（現状は`reports/blocked-resume-check-report.json`
+  と`blockedTaskWatch.json`のみで確認可能）
+
+完了記録：
+- 完了日：2026-08-10
+- コミットID：（後述）
+- 変更概要：上記のとおり。BLOCKEDタスクの安全な自動再開判定の仕組みを新設し、
+  実機検証（誤検知の発見・修正・3回連続の安定性確認・遷移動作のテスト）を行ったうえで
+  導入した。データ内容の変更は無し（既存civic dataは一切変更していない）。

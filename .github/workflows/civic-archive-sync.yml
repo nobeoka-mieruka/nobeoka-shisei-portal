@@ -134,6 +134,47 @@ jobs:
       - name: Validate official data
         run: npm run validate:data
 
+      # BLOCKEDタスクの安全な自動再開判定：src/data/blockedTaskWatch.jsonが監視する
+      # 一次資料URLについて、承認済みハッシュから変化があった場合のみ status を
+      # "review_required" へ変更する（"ready" へは絶対に変更しない。内容の解釈・登録は
+      # 別途、人またはClaude Codeの別セッションが行う）。mode（dry-run等）に関わらず、
+      # AI候補生成とは独立して常に実行する。
+      - name: Check BLOCKED task auto-resume signals
+        id: blocked_resume
+        run: |
+          node scripts/check-blocked-resume.mjs | tee blocked-resume-output.log
+          if grep -q "^BLOCKED_RESUME_CHANGED=true$" blocked-resume-output.log; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # 状態変化（review_requiredへの遷移）があった場合のみ、フルの検証ゲートを通したうえで
+      # 直接mainへcommit・pushする（civic-archive-sync.ymlの他のcommit経路とは異なり、
+      # PRを経由しない。blockedTaskWatch.jsonの変更は「人による内容確認が必要」という
+      # メタ情報の更新のみで、実データ（人物経歴・金額・日付等）は一切書き換えないため、
+      # 低リスクと判断した）。
+      - name: Full validation gate (only if a BLOCKED task signal changed)
+        if: steps.blocked_resume.outputs.changed == 'true'
+        run: |
+          npm run validate:data
+          npm run typecheck
+          npm run lint
+          npm test
+          npm run build
+          npm run validate:seo
+          npm run validate:content
+          node scripts/release-check.mjs
+
+      - name: Commit and push blocked-resume state (only if validation passed)
+        if: steps.blocked_resume.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/blockedTaskWatch.json reports/blocked-resume-check-report.json
+          git commit -m "chore: BLOCKEDタスクの一次資料に変化を検知（review_required、要人手確認）"
+          git push origin HEAD:main
+
       - name: Generate search index
         run: npm run generate:search
 

@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-08-09T23:05:49.412Z",
+  "anyTransition": false,
+  "results": [
+    {
+      "taskId": "TASK-004",
+      "action": "skipped",
+      "reason": "detectionMode=existing-pipeline（監視対象URLなし、または既存の別の仕組みでカバー済み）"
+    },
+    {
+      "taskId": "TASK-011",
+      "action": "no_change",
+      "reason": "前回承認済みハッシュと一致（変化なし）"
+    },
+    {
+      "taskId": "TASK-012",
+      "action": "no_change",
+      "reason": "前回承認済みハッシュと一致（変化なし）"
+    },
+    {
+      "taskId": "TASK-016B",
+      "action": "no_change",
+      "reason": "前回承認済みハッシュと一致（変化なし）"
+    },
+    {
+      "taskId": "TASK-023",
+      "action": "skipped",
+      "reason": "detectionMode=not-monitored（監視対象URLなし、または既存の別の仕組みでカバー済み）"
+    },
+    {
+      "taskId": "TASK-032",
+      "action": "skipped",
+      "reason": "detectionMode=not-monitored（監視対象URLなし、または既存の別の仕組みでカバー済み）"
+    },
+    {
+      "taskId": "TASK-045",
+      "action": "no_change",
+      "reason": "前回承認済みハッシュと一致（変化なし）"
+    }
+  ]
+}

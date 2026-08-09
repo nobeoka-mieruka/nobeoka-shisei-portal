@@ -22,6 +22,10 @@ export const ALLOWED_HOSTS = new Set([
   // 2026-08-10追加：宮崎県公式サイト（延岡市選出の政治団体の政治資金収支報告書公表ページ、
   // TASK-016B pf-org-001の令和7年分公表待ちを自動検知するために追加）。
   "www.pref.miyazaki.lg.jp",
+  // 2026-08-10追加：全国市議会議長会公式サイト（TASK-011「市議会議員報酬に関する調査結果」の
+  // 最新年度版公表を自動検知するために追加。公的な業界団体の調査ページであり、市区町村サイトでは
+  // ないが、TASK-011の再開条件として既に特定・利用しているURLのドメインのみを許可する）。
+  "www.si-gichokai.jp",
 ]);
 export const BASE_URL = "https://www.city.nobeoka.miyazaki.jp";
 const USER_AGENT =
@@ -54,6 +58,31 @@ export function resolveUrl(href, base = BASE_URL) {
 
 export function sha256OfBuffer(buffer) {
   return createHash("sha256").update(buffer).digest("hex");
+}
+
+/**
+ * 変更検知（差分判定）用のハッシュ。単純にsha256OfBuffer(buffer)するだけでは、
+ * Cloudflareのメールアドレス難読化機能（cdn-cgi/l/email-protection・data-cfemail属性）が
+ * リクエストのたびにランダムな鍵で再エンコードするHTMLページで、ページの実際の表示内容が
+ * 一切変わっていなくても毎回異なるハッシュになってしまう（誤検知の原因）ことが判明したため、
+ * このランダム部分を固定のプレースホルダーへ正規化してからハッシュ化する。
+ * バイナリ（PDF等）やこの機能を使っていないページには影響しない
+ * （該当パターンが含まれない場合は元のバッファをそのままハッシュ化する）。
+ */
+export function sha256OfBufferForDiff(buffer) {
+  let text;
+  try {
+    text = buffer.toString("utf8");
+  } catch {
+    return sha256OfBuffer(buffer);
+  }
+  if (!text.includes("cdn-cgi/l/email-protection") && !text.includes("data-cfemail=")) {
+    return sha256OfBuffer(buffer);
+  }
+  const normalized = text
+    .replace(/cdn-cgi\/l\/email-protection#[0-9a-f]+/gi, "cdn-cgi/l/email-protection#NORMALIZED")
+    .replace(/data-cfemail="[0-9a-f]+"/gi, 'data-cfemail="NORMALIZED"');
+  return createHash("sha256").update(normalized, "utf8").digest("hex");
 }
 
 /**

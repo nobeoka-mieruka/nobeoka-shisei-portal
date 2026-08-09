@@ -2768,6 +2768,8 @@ try {
     "policy",
     "theme",
     "politicalFund",
+    "compensation",
+    "publication",
   ]);
 
   const crawlerTargetIds = checkDuplicateIds({ err, warn }, archiveCrawlerTargets, "id", "archiveCrawlerTargets.json");
@@ -2868,6 +2870,77 @@ try {
   }
 } catch (e) {
   if (e?.code === "ENOENT") warn("archiveCrawlerTargets.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
+// --- blockedTaskWatch.json（BLOCKEDタスクの安全な自動再開判定レジストリ） ---
+try {
+  const blockedTaskWatch = readJson("src/data/blockedTaskWatch.json");
+  if (!Array.isArray(blockedTaskWatch)) throw new Error("配列ではありません");
+
+  const VALID_WATCH_STATUSES = new Set(["blocked", "review_required"]);
+  const VALID_AUTO_RESUME_CLASSES = new Set(["auto", "conditional", "manual"]);
+  const VALID_DETECTION_MODES = new Set(["hash", "existing-pipeline", "not-monitored"]);
+  const VALID_MATCH_CONFIDENCES = new Set(["exact", "indirect", "none", "not-applicable"]);
+  const VALID_EXPECTED_SOURCE_TYPES = new Set(["official-page", "official-pdf", "not-source-dependent", "none-identified"]);
+
+  checkDuplicateIds({ err, warn }, blockedTaskWatch, "taskId", "blockedTaskWatch.json");
+
+  const crawlerTargetIdsForWatch = new Set(
+    (() => {
+      try {
+        const t = readJson("src/data/archiveCrawlerTargets.json");
+        return Array.isArray(t) ? t.map((x) => x.id) : [];
+      } catch {
+        return [];
+      }
+    })(),
+  );
+
+  for (const w of blockedTaskWatch) {
+    const tag = `blockedTaskWatch.json (${w.taskId ?? "taskId不明"})`;
+    if (isBlank(w.taskId)) err(tag, "taskIdが空です");
+    if (isBlank(w.title)) err(tag, "titleが空です");
+    if (isBlank(w.resumeCondition)) err(tag, "resumeConditionが空です");
+    // このレジストリは「新しい一次資料が見つかったかもしれない」というフラグを立てるだけの
+    // 仕組みであり、内容の解釈・確定は必ず人が行う設計のため、statusに"ready"を許可しない
+    // （blocked→readyへの自動遷移を機械的に禁止する）。
+    if (!VALID_WATCH_STATUSES.has(w.status)) {
+      err(tag, `statusが不正です（"ready"は許可されません。blocked/review_requiredのいずれかにしてください）: ${w.status}`);
+    }
+    if (!VALID_AUTO_RESUME_CLASSES.has(w.autoResumeClass)) err(tag, `未定義のautoResumeClassです: ${w.autoResumeClass}`);
+    if (!VALID_DETECTION_MODES.has(w.detectionMode)) err(tag, `未定義のdetectionModeです: ${w.detectionMode}`);
+    if (!VALID_MATCH_CONFIDENCES.has(w.matchConfidence)) err(tag, `未定義のmatchConfidenceです: ${w.matchConfidence}`);
+    if (w.expectedSourceType != null && !VALID_EXPECTED_SOURCE_TYPES.has(w.expectedSourceType)) {
+      err(tag, `未定義のexpectedSourceTypeです: ${w.expectedSourceType}`);
+    }
+    if (w.sourceUrl != null && !URL_RE.test(w.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${w.sourceUrl}`);
+
+    if (w.detectionMode === "hash") {
+      if (isBlank(w.crawlerTargetId)) {
+        err(tag, "detectionMode=hashですがcrawlerTargetIdが未設定です");
+      } else if (!crawlerTargetIdsForWatch.has(w.crawlerTargetId)) {
+        err(tag, `archiveCrawlerTargets.jsonに存在しない巡回対象IDを参照しています: ${w.crawlerTargetId}`);
+      }
+      if (isBlank(w.sourceUrl)) warn(tag, "detectionMode=hashですがsourceUrlが未設定です");
+    } else if (w.crawlerTargetId != null) {
+      warn(tag, `detectionMode=${w.detectionMode}なのにcrawlerTargetIdが設定されています（矛盾している可能性があります）: ${w.crawlerTargetId}`);
+    }
+
+    for (const field of ["lastAcknowledgedAt", "lastTransitionAt", "lastCheckedAt"]) {
+      const v = w[field];
+      if (v != null && Number.isNaN(Date.parse(v))) err(tag, `${field}の形式が不正です: ${v}`);
+    }
+    // review_required状態は、必ず「いつ検知したか」を記録する（人が対応状況を追跡できるようにするため）。
+    if (w.status === "review_required" && isBlank(w.lastTransitionAt)) {
+      err(tag, "status=review_requiredですがlastTransitionAtが未設定です");
+    }
+    if (w.status === "blocked" && w.lastTransitionAt != null) {
+      warn(tag, "status=blockedですがlastTransitionAtが設定されたままです（review_requiredから戻す際はnullへリセットしてください）");
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("blockedTaskWatch.json", "読み込めませんでした（存在しない場合はスキップ）");
   else throw e;
 }
 

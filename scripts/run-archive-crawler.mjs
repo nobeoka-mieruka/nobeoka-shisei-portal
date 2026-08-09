@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadLocalState, saveLocalState, shouldRun, appendHistory } from "./lib/sync-state.mjs";
-import { fetchCitySiteBuffer, sha256OfBuffer, isAllowedUrl, stats as fetchStats } from "./lib/city-site-fetch.mjs";
+import { fetchCitySiteBuffer, sha256OfBufferForDiff, isAllowedUrl, stats as fetchStats } from "./lib/city-site-fetch.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -159,7 +159,7 @@ async function fetchRealTarget(target, prevTargetState, checkedAt) {
   }
   try {
     const buffer = await fetchWithRetry(target.url);
-    const hash = sha256OfBuffer(buffer);
+    const hash = sha256OfBufferForDiff(buffer);
     const status = determineFetchStatus(prevTargetState?.lastContentHash ?? null, hash);
     return { targetId: target.id, status, checkedAt, contentHash: hash };
   } catch (e) {
