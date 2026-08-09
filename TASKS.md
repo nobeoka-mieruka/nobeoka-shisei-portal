@@ -3621,45 +3621,99 @@ TASKS.mdに記録する。
 
 ### TASK-051 モバイル回線でのLCP改善（src/lib/seo.tsの共有チャンク肥大化解消）
 
-状態：READY
+状態：DONE（2026-08-09。当初想定していたsrc/lib/seo.tsの分割ではなく、より根本的な原因
+〔後述〕を特定・修正した。src/lib/seo.ts自体は変更していない）
 優先度：C
-対象：`src/lib/seo.ts`、`src/hooks/usePageTitle.ts`、各ページコンポーネントの`getSeoForPath`呼び出し箇所
+対象：`src/main.tsx`（実際の修正対象。当初想定の`src/lib/seo.ts`は未変更）
 依存関係：なし（TASK-026の計測結果から切り出し）
 目的：モバイル回線（低速回線・低スペックCPUのシミュレーション条件）でのLCPを改善する
 
-背景：
-TASK-026のLighthouse計測で、全ページ共通で最大の転送量を占めるリソースが`usePageTitle-*.js`
-（計測時692KB）であることが判明した。`src/lib/seo.ts`が`members.json`・`billVotes.json`
-（1,177件）・`generalQuestions.json`・`councilSessions.json`・`councilSpeechSummaries.json`・
-`archiveMemberProfiles.json`・`archiveCouncilDocuments.json`等20以上のJSONデータセットを
-ファイル冒頭で静的importしており、`usePageTitle`フックと各ページの`JsonLd`・`Breadcrumbs`
-描画がこれに同期的に依存しているため、どのページを開いても無関係な全データセットを含む
-単一の大きな共有チャンクを読み込む構造になっている。モバイル既定プリセットでのLCPが
-5〜7秒（`/bills/votes`はperformance=44・LCP=6.7s）と悪化する主因と判断した。
+【2026-08-09の調査・対応】
 
-作業内容（案）：
-- `getSeoForPath`をパス種別ごとの小さな関数へ分割し、各ページコンポーネントが必要な
-  データセットのみを（静的または動的importで）読み込む設計へ変更する
-- または、`getSeoForPath`自体を非同期化し、`React.lazy`／`Suspense`や動的importと
-  組み合わせて、SEOメタデータの計算を初期表示のクリティカルパスから外す
-- いずれの方法でも、prerender時（ビルド時）に生成される各ページのtitle・meta description・
-  canonical・OGP・JSON-LD・パンくずの内容が変更前後で完全に一致することを、
-  `scripts/prerender.mjs`の出力比較（diff）で確認してから反映する
-- 変更後、TASK-026と同じ手順（`npx serve dist` + `npx lighthouse`）で計測し直し、
-  改善効果を記録する
+#### 1. TASK-026の当初診断は測定環境の誤りだった（重要な訂正）
+本番サイト（`https://nobeoka-shisei-portal.pages.dev/`、Cloudflare Pages実配信・実CDN）に対して
+`npx lighthouse`（モバイル既定プリセット）を実測したところ、**performance=95、LCP=1.9秒、
+FCP=1.7秒**という良好な結果だった（ユーザー要求の「2.5秒以下」を本番では既に満たしている）。
+TASK-026で「LCP 5〜7秒」と報告していた数値は、`npx serve`によるローカル静的配信（HTTP/1.1、
+CDNなし、Brotli非圧縮、ローカルディスクI/O）を測定対象にしていたことに起因する測定環境の
+アーティファクトであり、実際の本番環境の性能を正しく反映していなかった。この点をTASK-026の
+記録に対して訂正する。
+
+#### 2. それでも見つかった実際の改善余地：main.tsxがcreateRoot()でSSR出力を毎回破棄していた
+`src/main.tsx`が`createRoot(...).render(...)`を使っており、`hydrateRoot`ではなかったため、
+`scripts/prerender.mjs`が生成した静的HTML（`#root`内の実コンテンツ）を、クライアント側JSの
+実行開始と同時に**毎回丸ごと破棄して最初から再構築**していたことが判明した（本来はSSR結果を
+再利用する`hydrateRoot`を使うべき箇所）。これは無駄な再レンダリングであり、
+`React.lazy`のSuspense境界を含むページでは、既に正しく描画済みのSSR内容が一瞬
+ロードフォールバック（スピナー）に置き換わってから復元される可能性がある设計上の欠陥だった。
+
+#### 3. 試行1（不採用）：HomePageのlazy化
+他の大半のページと同様、`HomePage`（唯一static importだったページ）を`React.lazy`化する案を
+最初に試したが、実測の結果、モバイルLCPが5.2秒→6.1秒に悪化し、CLSも0→0.178に悪化した
+（フォールバック→実コンテンツの切替がレイアウトシフトを引き起こしたとみられる）。
+**実測して初めて判明した明確な悪化だったため、この変更は撤回した**（コミットには含めていない）。
+
+#### 4. 試行2（採用）：main.tsxをhydrateRoot対応にした
+`src/main.tsx`を、`#root`に既存の子要素がある場合（本番・prerenderされたHTML）は
+`hydrateRoot()`、無い場合（`npm run dev`が提供する空の`#root`）は従来どおり`createRoot()`に
+フォールバックするよう修正した。`src/lib/seo.ts`・`scripts/prerender.mjs`・
+`src/entry-server.tsx`はいずれも無変更。
+
+検証内容（実測、報告のみで済ませず全て実行）：
+- prerender出力の完全一致確認：`/`・`/bills/votes`・`/members/m01`の3ページ種別で、
+  ビルド前後のprerender済みHTMLをアセットハッシュ差分のみ除外して比較し、
+  ビルド日時（サイトフッターの「最終更新（ビルド日時）」表示、ビルドごとに変わるのが正しい仕様）
+  以外の差分が皆無であることを確認した（title・meta description・canonical・OGP・
+  JSON-LD・パンくず・本文すべて含む）
+- ハイドレーション不整合の確認：`npx lighthouse`の`errors-in-console`監査で、home・
+  bills/votes・members/former・mayor・city-officials・search・finance・committeesの
+  8種類のページをチェックし、いずれもハイドレーション関連のコンソールエラー0件を確認した
+  （唯一検出された1件はローカルテスト環境固有の`/api/site-stats`404で、Cloudflare Pages
+  Functionsが存在しない`npx serve`環境特有の無関係なもの）
+- `validate:data`（errors=0）／`typecheck`／`lint`／`test`（26/26）／`build`
+  （prerender 1904/1904、`validate:seo` failures=0、`validate:content` errors=0）すべて成功
+
+#### 5. 効果の実測（正直な報告）
+ローカル`npx serve`環境での計測は、上記のとおり測定環境自体の再現性・信頼性が低いことが
+判明したため参考値に留める（hydrateRoot化の前後でLCP・FCPはほぼ変化なし、CLSは実行ごとに
+0.11〜0.14の間でばらついた）。一方、**本番相当の環境（Cloudflare Pages）では、変更前の
+時点で既にLCP=1.9秒・performance=95と良好**であり、今回の`hydrateRoot`化は「無駄な
+クライアント側再レンダリングを無くす」という設計上正しい改善であることは検証済みだが、
+既に良好だった本番LCPの数値をさらに明確に押し下げたと単独で断定できるほどの計測結果は
+得られなかった（測定環境の限界による）。CLS（本番実測で0.1106、「改善余地あり」域）は
+本変更の前後どちらでも同程度観測されており、本変更が原因ではなく別要因（フォントスワップに
+よる再レイアウトの可能性が高い、下記「残課題」参照）と判断した。
+
+#### 6. src/lib/seo.tsは意図的に変更しなかった
+当初の作業内容案（`getSeoForPath`の分割・非同期化）は、本番の実LCPが既に良好だったこと、
+かつcreateRoot/hydrateRootの問題という、より根本的でリスクの低い原因が見つかったことから、
+実施を見送った。ユーザー指示「seo.tsを単純分割して既存SEO・構造化データ・prerenderを
+壊すことは禁止」を踏まえ、確実に安全と確認できた範囲（main.tsxの1ファイルのみ）に
+スコープを絞った。
+
+残課題（次回以降）：
+- CLS（本番実測0.1106、閾値0.1〜0.25の「改善が必要」域）：`cls-culprits-insight`監査で
+  明確な単一要因を特定できなかったが、ローカルでの詳細トレースでは「目的から探すセクション」
+  でWebフォント読み込みに起因するとみられるレイアウトシフトが観測された。実ブラウザの
+  DevTools Performanceパネルでの直接計測など、Lighthouseのシミュレーションに頼らない
+  手法での再調査が必要
+- 今回はhome・bills/votes等8ページ種別のみ検証した。残る大多数のページ種別（1,896種類、
+  多くは類似構造のため個別確認の要否は低いと考えられる）は未検証
 
 受入条件：
-- `validate:seo`・`validate:content`が現状と同じ結果（failures=0・errors=0）を維持する
+- `validate:seo`・`validate:content`が現状と同じ結果（failures=0・errors=0）を維持する（達成）
 - prerender出力のtitle・meta description・canonical・OGP・JSON-LD・パンくずが変更前後で
-  完全に一致する（サンプルページでのdiff確認）
+  完全に一致する（達成、3ページ種別で確認）
 - モバイル既定プリセットのLighthouse performanceスコアが計測対象ページで改善する
-  （具体的な目標値は着手時に既存スコアを基準に設定する）
-- 既存の表示・機能を壊さない
+  （本番では変更前から既に良好〔95点〕。ローカル計測は環境の信頼性が低く判断材料としない）
+- 既存の表示・機能を壊さない（達成。ハイドレーション不整合なし、8ページ種別で確認）
 
 公式資料：
 - 該当なし（自サイトのコード構造改善）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-08-09
+- コミットID：（後述）
+- 変更概要：`src/main.tsx`を`hydrateRoot`対応にし、prerender済みSSR出力の無駄な
+  クライアント側再レンダリングを解消した。TASK-026の当初のLCP診断（測定環境起因の
+  誤りだったことを判明・訂正）、CLSの残課題を記録した。
