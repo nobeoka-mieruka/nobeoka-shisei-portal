@@ -1,4 +1,119 @@
-# セッション引き継ぎメモ（2026-08-07 更新・TASK-014完了、TOP5の1番目は環境制約でスキップ、TOP5の3・4番目は調査のみで終了）
+# セッション引き継ぎメモ（2026-08-09更新・残タスク一斉棚卸しセッション：11件のタスクをDONE化、選挙管理委員会名簿を確定）
+
+## 2026-08-09（残タスク一斉棚卸しセッション）
+
+ユーザーから「前セッションから引き継いだ残タスクを確認し、優先順位順にTASKS.md・PROJECT_PLAN.md・
+本メモに残る未完了タスクを最後まで自動で処理し、最終的にA（DONE）/B（公開資料待ち）/
+C（一次資料なし）/D（外部環境不足）/E（仕様上対応不要）のいずれかに整理してほしい」との
+包括的な指示を受け、TASK-004（billVotes）が実質完了済みという前提のもと、TASKS.md・
+docs/session-handoff.mdに残る未完了タスクを優先順位順に処理した。
+
+### 完了したタスク（11件、いずれもDONE化）
+
+1. **TASK-033（副市長・教育長・監査委員・農業委員会委員・選挙管理委員会）完全解決**：
+   `scripts/lib/minutes-source.mjs`（HTTP直接アクセス、ブラウザ不要）で現任期（令和5年5月〜）の
+   本会議録を全会期・全本会議日にわたり機械的に走査し、「選挙管理委員」を含む発言を検索した。
+   令和5年12月定例会（12月7日、R051207A、開会日でも閉会日でもない中日）で「日程第四　選挙管理委員
+   及び補充員の選挙」を発見し、委員4名（木原一成・甲斐克則・竹原哲郎・奴田原君枝）・補充員4名
+   （猪俣さよみ・高城まり子・安藤俊則・川原博之、補欠順序付き）の氏名を一次資料で確定した。
+   これまで「AI要約のハルシネーションの可能性」として不採用としていた「委員長は木原一成氏」
+   という情報も、令和5年6月29日の本会議（一般質問への答弁で本人が登壇）で少なくとも当時の
+   委員長だったことを確認できたが、本選任（同年12月20日以降の任期）の委員長は委員の互選で
+   決まり非公開のため特定していない。`citySpecialPosts.json`へ8名（csp-27〜34）を登録、
+   `CitySpecialPostRole`に`election-commission-member`/`election-commission-alternate`を追加。
+   住所（番地）は既存の政治資金団体ページと同じ方針で非掲載。
+2. **TASK-021（Excel取込対象の拡大）**：`scripts/import-bills.mjs`を新設し、既存の議員データ
+   取込パターン（下書き生成＋人手確認、`src/data/billVotes.json`を自動的に上書きしない）を
+   議案データにも拡大。`extractionSource: "manual"`で自動抽出データと区別。
+   `templates/bills-template.xlsx`・`UPDATE_GUIDE.md`更新も実施。
+3. **TASK-024（内部リンク強化）**：棚卸しの結果、主要ページの相互リンクは概ね実装済みと確認。
+   新たに発見した欠落（監査委員・甲斐正幸氏＝現職議員m08と同一人物であることが議員詳細ページから
+   分からない）を`CitySpecialPost.relatedMemberId`の新設と`MemberDetailPage.tsx`への
+   「兼務する特別職・行政委員会委員」セクション追加で解消。
+4. **TASK-026（Lighthouse・Core Web Vitals計測）**：`npx serve`+`npx lighthouse`（新規依存
+   追加なし）でビルド成果物を計測。デスクトップ97点、モバイル既定44〜69点（LCP 5〜7秒）。
+   原因は`src/lib/seo.ts`が20以上のJSONデータセットを静的importしており、全ページ共通の
+   大きな共有チャンク（計測時692KB）になっていること。改善はSEO中核モジュールの変更を伴い
+   リスクがあるため、専用の検証手順込みでTASK-051として切り出した（改善本体は未実施）。
+5. **TASK-032（現職議員経歴データ拡充）続き**：所属政党（立憲民主党・公明党・新・国民民主党）の
+   公式サイトに議員紹介データベースがあることに着目し、WebSearch/WebFetchで4名分
+   （宮田博徳・長友幸子・比江島久美子・甲斐行雄）の経歴を新規確認・登録した（5→9名）。
+   自民党宮崎県連・日本共産党には市町村議員個別ページが無いことを確認し、残る17名
+   （自民党きずなの会8名・無所属5名・無会派3名）は情報源を使い切ったと判断。
+6. **TASK-004残課題**：データ収録状況ページ（`/data-status`）へ議案品質集計（提出者区分・
+   採決方法・付託委員会の確認済み件数）を追加。真の残課題は提出者区分の1件のみに整理。
+7. **TASK-006（一般質問の答弁概要データ追加）**：当初想定の`generalQuestions.json.answerSummary`
+   ではなく、既に構築されていた`councilSpeechSummaries.json`（397件、質問・答弁を会議録原文で
+   個別確認・構造化）と関連ページ（`MemberSpeechDetailPage`・`ExecutiveAnswersPage`等）が
+   目的を実質的に達成済みであることを確認し、状態を整合した（コード変更なし）。
+8. **TASK-019・TASK-020（議会中継・録画への導線／YouTube連携）**：延岡市議会公式ホームページに
+   直接リンクされている公式YouTubeチャンネル（`UCGo355CFS2v2pAjbIkgzSAQ`）を確認し、
+   `/council-documents`へ導線リンクを追加（埋め込みはCookie・トラッキングを避けるため見送り）。
+9. **TASK-022（PDF自動取得）**：既存の3ワークフロー（`update-council-documents.yml`・
+   `sync-council-data.yml`・`civic-archive-sync.yml`）が既に目的を満たしていることを確認し、
+   状態を整合した（コード変更なし）。
+10. **TASK-046（validate-data.mjs warningsの縮小）**：残59件のうち44件はTASK-047・TASK-049で
+    既に解消済み、残る14件（語彙警告13件・任期空白1件〔TASK-045で既にBLOCKED判断済み〕）は
+    対応不要と判断し、状態を整合した（コード変更なし）。
+
+### 新規に切り出したタスク
+
+- **TASK-051（モバイル回線でのLCP改善）**：TASK-026の計測で判明した`src/lib/seo.ts`の
+  共有チャンク肥大化問題。SEO中核モジュールの変更はリスクが高いため、prerender出力の
+  完全一致を確認する専用の検証手順込みで別タスクとして切り出した（READY、次回セッションの
+  優先候補）。
+
+### 最終的な残タスクの状態整理（A〜E分類）
+
+- **A（DONE）**：上記11件すべて。他にTASK-001〜005G・007〜010・013〜015・016A・016C・016D・
+  017・018・025・027〜031・034〜044・047〜050も既存どおりDONE
+- **B（公開資料待ち）**：TASK-016B残課題のうちpf-org-001（市長の後援会、令和7年分は
+  令和8年11月頃公表見込み）
+- **C（一次資料なし）**：TASK-004残1件（提出者区分、2025-09-gian-69）、TASK-011・012
+  （全国・類似団体の同一条件個別データ未確認）、TASK-016B残課題のうちpf-org-016
+  （前年・翌年繰越額が訂正印で判読不能）、TASK-032残17名（政党公式サイト等の情報源を
+  使い切った）、TASK-045（歴代市長任期空白13件、戦前・戦時中の記録）
+- **D（外部環境不足）**：該当なし（本セッションで新たに該当するものは発生せず）
+- **E（仕様上対応不要）**：TASK-023（固定FAQコンテンツが存在しないためFAQ構造化データの
+  適用対象がない）、TASK-020のYouTube埋め込み（意図的にリンクのみに留めた設計判断）
+
+### 検証結果（各コミットごとに実施、すべて成功）
+`validate:data`（errors=0、warnings=14→内訳は上記TASK-046参照）／`typecheck`／`lint`／
+`test`（26/26）／`build`（prerender 1904/1904、`validate:seo` failures=0、`validate:content`
+errors=0）。
+
+### コミット・デプロイ
+本セッションのコミット（新しい順）：
+- `968fb41` docs: refresh PROJECT_PLAN.md
+- `0b3e223` docs: mark TASK-006 and TASK-046 as DONE
+- `86f4d71` docs: mark TASK-022 as DONE
+- `5fdef7b` feat(council-documents): add link to official YouTube channel（TASK-019/020）
+- `b33a55a` feat(data-status): add bill data quality aggregation（TASK-004残課題）
+- `2e791cb` data(members): add career info for 4 more current members（TASK-032）
+- `7732e3e` docs: mark TASK-033 as DONE
+- `48172d2` docs(perf): record Lighthouse/Core Web Vitals measurement（TASK-026）
+- `2ff823a` feat(members): cross-link council members who also hold a special post（TASK-024）
+- `0165770` feat(import): add Excel/CSV import for bills data（TASK-021）
+- `cbeda9c` data(city-officials): register election commission members via council minutes（TASK-033）
+
+すべて`origin/main`へpush済み。各コミット後、本番URLへの実アクセスで反映を確認済み
+（`/city-officials`の選挙管理委員8名表示、`/members/m24`等の経歴表示、`/data-status`の
+品質集計表示）。
+
+### 次回セッションへの引き継ぎ
+- **TASK-051**（モバイル回線でのLCP改善）が次回の最優先候補。`src/lib/seo.ts`の分割は
+  prerender出力（title/meta/canonical/OGP/JSON-LD/パンくず）の完全一致を確認しながら
+  慎重に進めること
+- TASK-032の残17名は、本人・所属政党の新規公式サイト開設が確認できない限り追加調査の
+  費用対効果が低い（同じSNS・同じ政党サイトへの再アクセスを繰り返さないこと）
+- TASK-011・012（報酬全国比較）・TASK-045（歴代市長任期空白）は、新しい公式資料が
+  見つからない限り再調査不要（BLOCKED理由は明確に記録済み）
+- 残っているのは実質的に軽微な継続的改善項目（RSS自動更新、AI検索、Excel取込の一般質問・
+  報酬データ対応拡大等）のみで、いずれも優先度C・具体的な着手条件は本ファイル・TASKS.mdに
+  記載済み
+
+---
+
 
 ## 2026-08-07（前回の続き）：TASK-014完了、TOP5の1・3・4番目は新規知見を得てBLOCKED維持
 
