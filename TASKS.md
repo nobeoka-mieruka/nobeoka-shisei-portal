@@ -1915,27 +1915,54 @@ pf-org-002・021の2団体（令和6年分）を試験登録した（収支報�
 
 ### TASK-026 Lighthouse・Core Web Vitals計測と改善
 
-状態：READY
+状態：DONE（計測・原因特定は完了。改善本体はリスクを踏まえTASK-051へ分離、下記参照）
 優先度：C
 対象：主要ページ全体
 依存関係：なし
 目的：未計測のLighthouseスコア・Core Web Vitalsを計測し、必要な改善を行う
 
-作業内容：
-- 主要ページでLighthouseを計測する
-- スコアが低い場合は原因を特定し改善する
+実施内容（2026-08-09）：
+- ローカル環境（Chrome、`npx serve dist` + `npx lighthouse`、CLIツールのみ・新規依存追加なし）で
+  本番相当のビルド成果物（`npm run build`のprerender出力）に対してLighthouseを計測した
+- デスクトッププリセット（`/`）：performance=97 / accessibility=100 / best-practices=96 / seo=100、
+  LCP=1.1s・CLS=0・TBT=0ms
+- モバイル既定プリセット（低速回線・低スペックCPUのシミュレーション、CLAUDE.mdの
+  「スマートフォン表示を最優先する」方針に対応する条件）：
+  - `/`：performance=69、LCP=5.2s
+  - `/bills/votes`：performance=44、LCP=6.7s（総バイト数2,597KiB）
+  - `/questions`：performance=64、LCP=6.7s
+  - `/members/m01`：performance=65、LCP=6.2s
+  - `/finance`：performance=63、LCP=5.5s
+  - accessibility=100・seo=100・best-practices=96〜100は全ページ共通で良好（TASK-027の成果と整合）
+- 原因を特定：全ページで最大の転送量を占めるリソースが一貫して`usePageTitle-*.js`
+  （計測時692KB、2位以下のリソースの5倍以上）だった。`src/hooks/usePageTitle.ts`が
+  `src/lib/seo.ts`の`getSeoForPath`を静的importしており、`src/lib/seo.ts`自体が
+  `members.json`・`billVotes.json`（1,177件）・`generalQuestions.json`・`councilSessions.json`・
+  `councilSpeechSummaries.json`・`archiveMemberProfiles.json`・`archiveCouncilDocuments.json`等
+  20以上のJSONデータセットをファイル冒頭で静的importしている。各ページコンポーネントも
+  `JsonLd`・`Breadcrumbs`描画のため`getSeoForPath`を直接importしており、結果として
+  「どのページを開いても、そのページに無関係な全データセットを含む単一の大きな共有チャンク」を
+  読み込む構造になっている。これがモバイル回線でのLCP悪化（5〜7秒）の主因と判断した
+- 改善の実施は見送った：`lib/seo.ts`はSEO（title/meta/canonical/OGP/JSON-LD/パンくず）を
+  一元管理する中核モジュールであり、全ページの`JsonLd`・`Breadcrumbs`がこれに同期的に依存している。
+  安全に分割するには「パス種別ごとに必要なデータだけを動的import する」設計変更が必要で、
+  誤ると各ページ種別のJSON-LD・OGP・canonicalが壊れるリスクがある（CLAUDE.mdの
+  「SEOを悪化させない」「既存のページや機能を壊さない」に反するおそれ）。本タスクの受入条件
+  「既存の表示・機能を壊さない改善のみ行う」を安全に満たすには専用の検証込みで別タスクとして
+  着手すべきと判断し、TASK-051として切り出した
 
 受入条件：
-- 計測結果を記録する
-- 既存の表示・機能を壊さない改善のみ行う
+- 計測結果を記録する（達成。上記のとおりTASKS.mdへ記録）
+- 既存の表示・機能を壊さない改善のみ行う（達成。今回はコード変更を伴う改善は行わず、
+  リスクのある変更を避けた。改善自体はTASK-051で慎重に行う）
 
 公式資料：
 - 該当なし
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-08-09
+- コミットID：（後述）
+- 変更概要：上記のとおり。Lighthouse計測・原因特定を完了し、改善はTASK-051へ分離した。
 
 ---
 
@@ -3471,3 +3498,50 @@ TASKS.mdに記録する。
 - コミットID：78034dd
 - 変更概要：上記のとおり。本番デプロイ停止（Cloudflare Pagesビルド環境のNode.jsバージョン差
   によるビルド失敗）を解消し、本番を最新データ（billVotes 1,177件）へ復旧した。
+
+---
+
+### TASK-051 モバイル回線でのLCP改善（src/lib/seo.tsの共有チャンク肥大化解消）
+
+状態：READY
+優先度：C
+対象：`src/lib/seo.ts`、`src/hooks/usePageTitle.ts`、各ページコンポーネントの`getSeoForPath`呼び出し箇所
+依存関係：なし（TASK-026の計測結果から切り出し）
+目的：モバイル回線（低速回線・低スペックCPUのシミュレーション条件）でのLCPを改善する
+
+背景：
+TASK-026のLighthouse計測で、全ページ共通で最大の転送量を占めるリソースが`usePageTitle-*.js`
+（計測時692KB）であることが判明した。`src/lib/seo.ts`が`members.json`・`billVotes.json`
+（1,177件）・`generalQuestions.json`・`councilSessions.json`・`councilSpeechSummaries.json`・
+`archiveMemberProfiles.json`・`archiveCouncilDocuments.json`等20以上のJSONデータセットを
+ファイル冒頭で静的importしており、`usePageTitle`フックと各ページの`JsonLd`・`Breadcrumbs`
+描画がこれに同期的に依存しているため、どのページを開いても無関係な全データセットを含む
+単一の大きな共有チャンクを読み込む構造になっている。モバイル既定プリセットでのLCPが
+5〜7秒（`/bills/votes`はperformance=44・LCP=6.7s）と悪化する主因と判断した。
+
+作業内容（案）：
+- `getSeoForPath`をパス種別ごとの小さな関数へ分割し、各ページコンポーネントが必要な
+  データセットのみを（静的または動的importで）読み込む設計へ変更する
+- または、`getSeoForPath`自体を非同期化し、`React.lazy`／`Suspense`や動的importと
+  組み合わせて、SEOメタデータの計算を初期表示のクリティカルパスから外す
+- いずれの方法でも、prerender時（ビルド時）に生成される各ページのtitle・meta description・
+  canonical・OGP・JSON-LD・パンくずの内容が変更前後で完全に一致することを、
+  `scripts/prerender.mjs`の出力比較（diff）で確認してから反映する
+- 変更後、TASK-026と同じ手順（`npx serve dist` + `npx lighthouse`）で計測し直し、
+  改善効果を記録する
+
+受入条件：
+- `validate:seo`・`validate:content`が現状と同じ結果（failures=0・errors=0）を維持する
+- prerender出力のtitle・meta description・canonical・OGP・JSON-LD・パンくずが変更前後で
+  完全に一致する（サンプルページでのdiff確認）
+- モバイル既定プリセットのLighthouse performanceスコアが計測対象ページで改善する
+  （具体的な目標値は着手時に既存スコアを基準に設定する）
+- 既存の表示・機能を壊さない
+
+公式資料：
+- 該当なし（自サイトのコード構造改善）
+
+完了記録：
+- 完了日：
+- コミットID：
+- 変更概要：
