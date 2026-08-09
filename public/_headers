@@ -25,16 +25,39 @@
 # 全ページ共通のセキュリティ関連ヘッダー。
 # index.html（SPAのため実質すべてのルートで配信される）は、ここでは長期キャッシュを指定しない。
 #
-# Content-Security-Policyのscript-srcは、React 19のストリーミングSSR（プリレンダリング）が
-# 全ページで出力する固定2種類のインラインscript（$RC等の描画完了通知、requestAnimationFrameの
-# 計測用コード）だけをsha256ハッシュで許可し、'unsafe-inline'は使わない。
-# React/Viteのバージョン更新でこの生成コードが変わるとハッシュが一致しなくなるが、その場合も
-# クライアント側のReact（createRoot）がページ全体を再描画するため表示は壊れない
-# （dist/*.htmlの該当scriptを再取得し、ハッシュを再計算のうえ更新すること）。
+# Content-Security-Policyのscript-srcは、固定3種類のインラインscriptだけをsha256ハッシュで
+# 許可し、'unsafe-inline'は使わない：
+# 1. Google Fontsスタイルシートの読み込み完了後にmedia="print"→"all"へ切り替えるscript
+#    （index.html、TASK-051で発見・修正：従来はonload属性＝インラインイベントハンドラーだった
+#    ため、ハッシュ許可の対象外でありCSPに常時ブロックされ続けていた。結果としてNoto Sans JP
+#    フォントが実際には一度も適用されず、システム標準フォントにフォールバックし続けていた
+#    可能性が高い。2026-08-09、<script>タグ＋addEventListener方式へ変更しハッシュ許可した）
+# 2〜3. React 19のストリーミングSSR（プリレンダリング）が全ページで出力する固定2種類の
+#    インラインscript（$RC等の描画完了通知、requestAnimationFrameの計測用コード）
+# 【2026-08-09（TASK-051）重要な訂正】src/main.tsxをhydrateRoot対応にしたため、
+# 「ハッシュ不一致でインラインscriptがCSPブロックされても、クライアント側React
+# （旧createRoot）がページ全体を再描画するため表示は壊れない」という従来の前提は
+# もはや成立しない。ただし、scripts/prerender.mjsはstream.allReadyを待ってから
+# HTMLを確定しており、この時点で全Suspense境界は解決済み（DOM内に未解決のプレース
+# ホルダーは残らない）ため、これらのインラインscript自体は実行されなくても実害のない
+# 後始末用コードのはずである（2026-08-09時点でhydrateRoot化後の実機検証・8ページ種別で
+# ハイドレーション関連の不整合は確認されていない）。それでもReact/Viteのバージョン更新で
+# この生成コードが変わりハッシュが一致しなくなった場合は、表示崩壊のリスクがゼロとは
+# 言えなくなったため、dist/*.htmlの該当scriptを再取得してハッシュを再計算し、
+# 速やかに本ファイルを更新すること。
+#
+# 【2026-08-09（TASK-051の副次的発見）】Cloudflare Pagesダッシュボードの「Web Analytics」設定で
+# 自動注入される計測beacon（https://static.cloudflareinsights.com/beacon.min.js、CLAUDE.mdの
+# 「Cloudflare Analytics」節が言及するアクセス数取得とは別の、Cloudflare側の標準機能）が、
+# 従来のCSPでは許可されておらず常時ブロックされていた。ブロック自体で表示は壊れないが、
+# 意図的にオフにする方針の記録がCLAUDE.md等に見当たらないため、既存のダッシュボード設定を
+# 尊重してCSP側を許可する対応とした（script-src/connect-srcへ追加）。今後この計測を
+# 使わない方針にする場合は、Cloudflareダッシュボード側でも無効化したうえで、
+# 本CSP設定からも削除すること。
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-7mu4H06fwDCjmnxxr/xNHyuQC6pLTHr4M2E4jXw5WZs=' 'sha256-QAlSewaQLi/NPCznjAZSyvQ72heD0VdxmNDDkZeCxgc=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-UqkJlcUVbdU+1nbxzzWROzef/JjOjfrKbktl5AKuwFM=' 'sha256-7mu4H06fwDCjmnxxr/xNHyuQC6pLTHr4M2E4jXw5WZs=' 'sha256-QAlSewaQLi/NPCznjAZSyvQ72heD0VdxmNDDkZeCxgc=' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
