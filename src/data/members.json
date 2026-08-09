@@ -726,6 +726,10 @@
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/hayase_kenichi/"
+      },
+      {
+        "platform": "website",
+        "url": "https://new-kokumin.jp/member/hayase-kenichi"
       }
     ],
     "questions": [],
@@ -734,12 +738,28 @@
     "sourceType": "延岡市議会公式情報",
     "sourceTitle": "延岡市議会 議員プロフィール",
     "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1453.html",
-    "verifiedAt": "2026-08-03",
-    "notes": "学歴・職歴は延岡市議会公式ページには記載がないため、本人公式サイトまたは政党公式サイトで確認できた範囲のみ別区分で掲載している。Facebook・Instagram・X等のSNSは自動取得ではプロフィール本文を確認できなかったため、リンクの掲載に留め、経歴等の記載内容には使用していない。",
+    "verifiedAt": "2026-08-09",
+    "notes": "学歴・職歴は延岡市議会公式ページには記載がないため、本人所属政党（新・国民民主党）公式サイトのプロフィールページで確認できた範囲のみ別区分で掲載している。Facebook・Instagram等のSNSは自動取得ではプロフィール本文を確認できなかったため、リンクの掲載に留め、経歴等の記載内容には使用していない。初当選年・職歴（勤務先等）は同ページに記載が無く、他のニュース記事で言及を見たが原本ページが404で確認できなかったため未掲載とした。",
     "sources": [
       {
         "label": "延岡市議会公式プロフィール",
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1453.html"
+      },
+      {
+        "label": "新・国民民主党 議員プロフィール",
+        "url": "https://new-kokumin.jp/member/hayase-kenichi"
+      }
+    ],
+    "career": [
+      {
+        "id": "c1",
+        "year": "1965年6月16日",
+        "description": "生年月日"
+      },
+      {
+        "id": "c2",
+        "year": "（卒業年不明）",
+        "description": "宮崎県立延岡商業高等学校卒業"
       }
     ]
   },
