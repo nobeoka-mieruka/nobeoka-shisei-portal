@@ -196,11 +196,14 @@ export function DataStatusPage() {
   const billVotesWithMemberVotes = billVotes.filter((b) => b.memberVotes && b.memberVotes.length > 0).length;
   const billVotesNotDisclosed = billVotes.filter((b) => b.individualVoteDisclosureStatus === "notDisclosed").length;
   const billVotesUnconfirmed = billVotes.length - billVotesWithMemberVotes - billVotesNotDisclosed;
+  const billVotesVoteMethodKnown = billVotes.filter((b) => b.voteMethod).length;
+  const billVotesCommitteeKnown = billVotes.filter((b) => b.committee).length;
+  const billVotesProposerTypeKnown = billVotes.filter((b) => b.proposerType).length;
   const councilExtra: DataDomain = {
     label: "議案ごとの議決結果（既存機能）",
     count: billVotes.length,
     unit: "件",
-    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳：公開あり${billVotesWithMemberVotes}件（記名投票等）／会議録で非公開と確認済み${billVotesNotDisclosed}件（起立採決等で個人名が記録されていないことを会議録で確認）／未確認${billVotesUnconfirmed}件（会議録を未確認）。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
+    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳：公開あり${billVotesWithMemberVotes}件（記名投票等）／会議録で非公開と確認済み${billVotesNotDisclosed}件（起立採決等で個人名が記録されていないことを会議録で確認）／未確認${billVotesUnconfirmed}件（会議録を未確認）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会は、人事案件・意見書・決議等の委員会付託を省略する案件を含むため、必ずしも全件一致が正しい状態とは限りません）。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
     linkTo: "/bills/votes",
     linkLabel: "議案ごとの賛否を見る",
   };
