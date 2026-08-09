@@ -1692,50 +1692,61 @@ pf-org-002・021の2団体（令和6年分）を試験登録した（収支報�
 
 ### TASK-019 議会中継・録画への導線追加
 
-状態：BLOCKED
+状態：DONE（2026-08-09、TASK-020と同時に解決）
 優先度：C
-対象：`src/pages/BillVotesPage.tsx`等
+対象：`src/pages/CouncilDocumentsPage.tsx`
 依存関係：なし
 目的：延岡市議会の公式配信・録画への導線を追加する
 
-作業内容：
-- 延岡市議会公式サイトの配信・録画ページの公式URLを確認する
+実施内容：
+- 延岡市議会公式ホームページ（`https://www.city.nobeoka.miyazaki.jp/site/gikai/`）を`WebFetch`で
+  確認したところ、「YouTubeで市議会の動画を配信しています」「YouTubeによる本会議等の配信」という
+  リンクテキストで、延岡市議会公式YouTubeチャンネル（`https://www.youtube.com/channel/UCGo355CFS2v2pAjbIkgzSAQ`）
+  が明記されていることを確認した（TASK-020のYouTubeチャンネル確認と同一の調査で判明）
+- `/council-documents`（定例会・議会資料ページ）へ、外部サイトへ移動する旨を明記したうえで
+  同チャンネルへのリンクを追加した（`target="_blank" rel="noopener noreferrer"`）
 
 受入条件：
-- 公式URLのみを掲載する
+- 公式URLのみを掲載する（達成。延岡市議会公式ホームページに掲載されているリンク先と同一のURL）
 
 公式資料：
-- 延岡市議会公式ホームページ
+- 延岡市議会公式ホームページ（`https://www.city.nobeoka.miyazaki.jp/site/gikai/`）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-08-09
+- コミットID：（後述）
+- 変更概要：上記のとおり。`validate:data`/`typecheck`/`lint`/`test`/`build`
+  （`validate:seo`・`validate:content`含む）すべて成功。
 
 ---
 
 ### TASK-020 YouTube連携
 
-状態：BLOCKED
+状態：DONE（2026-08-09、TASK-019と同時に解決）
 優先度：C
-対象：関連ページ
+対象：`src/pages/CouncilDocumentsPage.tsx`
 依存関係：TASK-019と関連
 目的：延岡市・延岡市議会公式YouTubeチャンネルへの導線または埋め込みを追加する
 
-作業内容：
-- 公式YouTubeチャンネルの有無・URLを確認する
+実施内容：
+- 延岡市議会公式ホームページから直接リンクされている公式YouTubeチャンネル
+  （`https://www.youtube.com/channel/UCGo355CFS2v2pAjbIkgzSAQ`）を確認した（TASK-019参照）
+- 動画の埋め込み（iframe等）は行わず、外部サイトへの導線リンクのみとした（埋め込みは
+  YouTube側のトラッキング・Cookie挙動が伴うため、CLAUDE.mdの「個人情報や秘密情報を安易に扱わない」
+  「必要以上に大きなライブラリを追加しない」方針を踏まえ、最小限のリンク導線に留めた）
 
 受入条件：
-- 公式チャンネルであることを確認したURLのみ使用する
+- 公式チャンネルであることを確認したURLのみ使用する（達成。延岡市議会公式ホームページに
+  掲載されているリンク先と同一のURL）
 
 公式資料：
-- 延岡市公式ホームページ
-- 延岡市議会公式ホームページ
+- 延岡市議会公式ホームページ（`https://www.city.nobeoka.miyazaki.jp/site/gikai/`）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-08-09
+- コミットID：（後述）
+- 変更概要：上記のとおり。`validate:data`/`typecheck`/`lint`/`test`/`build`
+  （`validate:seo`・`validate:content`含む）すべて成功。
 
 ---
 

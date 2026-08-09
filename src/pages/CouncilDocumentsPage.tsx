@@ -85,6 +85,23 @@ export function CouncilDocumentsPage() {
         本ページは、延岡市議会および延岡市が公開している会議録、審議結果、市議会だよりなどの一次資料を、市民が確認しやすいよう定例会ごとに整理したものです。資料の内容は変更せず掲載しています。最新情報および正式な内容については、延岡市議会公式サイトもあわせてご確認ください。当サイトは、特定の議員、会派、政党、議案への支持・反対を目的とするものではありません。
       </p>
 
+      <a
+        href="https://www.youtube.com/channel/UCGo355CFS2v2pAjbIkgzSAQ"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`mb-4 flex items-center justify-between gap-3 rounded-xl bg-surface-container-low p-4 text-sm text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+      >
+        <span>
+          本会議・委員会の様子は、延岡市議会公式YouTubeチャンネルで配信・録画公開されています。
+          <span className="mt-0.5 block text-xs text-on-surface-variant">
+            外部サイト（YouTube）へ移動します
+          </span>
+        </span>
+        <span aria-hidden className="shrink-0 text-primary">
+          ↗
+        </span>
+      </a>
+
       {groups.length === 0 ? (
         <p className="rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
           定例会・議会資料データを準備中です。公開資料を確認しながら順次追加します。
