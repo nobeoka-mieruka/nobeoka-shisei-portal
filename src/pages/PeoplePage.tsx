@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
@@ -91,12 +92,24 @@ export function PeoplePage() {
   usePageTitle();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // このページは/peopleとして絞り込みなし（クエリ文字列なし）でのみ事前生成（prerender）される。
+  // 静的ホスティング（Cloudflare Pages）はクエリ文字列を無視してファイルを配信するため、
+  // /people/?type=member等でアクセスされた場合もサーバー生成HTMLの中身は常に絞り込みなし版になる。
+  // hydrateRoot（初回クライアント描画）でいきなりクエリ文字列を反映すると、サーバーHTMLと
+  // 内容が食い違い、Reactのhydrationエラー（テキスト不一致）が発生してしまう。
+  // これを避けるため、マウント前（＝hydration中）はサーバーと同じ「絞り込みなし」を返し、
+  // マウント後（＝通常のクライアント側再描画）にのみURLのクエリ文字列を反映する。
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   const people = buildPersonIndex();
 
-  const typeFilter = searchParams.get("type") ?? "";
-  const statusFilter = searchParams.get("status") ?? "";
-  const factionFilter = searchParams.get("faction") ?? "";
-  const yearFilter = searchParams.get("year") ?? "";
+  const typeFilter = hasMounted ? (searchParams.get("type") ?? "") : "";
+  const statusFilter = hasMounted ? (searchParams.get("status") ?? "") : "";
+  const factionFilter = hasMounted ? (searchParams.get("faction") ?? "") : "";
+  const yearFilter = hasMounted ? (searchParams.get("year") ?? "") : "";
 
   const factionIds = [...new Set(members.map((m) => m.factionId))];
   const yearOptions = [...new Set(people.flatMap((p) => p.tenureYears))].sort((a, b) => b - a);
