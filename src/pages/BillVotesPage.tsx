@@ -16,10 +16,15 @@ import { dataCoverage } from "../data/dataCoverage";
 import { publicBills, verificationStatusOf, verificationStatusLabels } from "../lib/billVotes";
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import { Pagination } from "../components/Pagination";
 import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
+
+// 1,177件（2026-08時点）を1ページに全件表示すると、スマートフォンで
+// スクロールが極端に長くなるため、20件ずつページ分割して表示する。
+const BILLS_PAGE_SIZE = 20;
 
 const BILL_VOTES_CSV_COLUMNS: CsvColumn<BillVoteItem>[] = [
   { header: "年度", value: (b) => b.fiscalYear },
@@ -182,6 +187,7 @@ export function BillVotesPage() {
   const [proposerType, setProposerType] = useState(searchParams.get("proposer") ?? "all");
   const [unanimity, setUnanimity] = useState("all");
   const [sort, setSort] = useState<SortKey>("newest");
+  const [page, setPage] = useState(1);
 
   // 検索条件をURLクエリへ反映し、再読み込みや共有後も条件を維持できるようにする。
   useEffect(() => {
@@ -275,6 +281,19 @@ export function BillVotesPage() {
     return sortBills(matched, sort);
   }, [query, fiscalYear, session, category, verification, result, committee, proposerType, unanimity, sort]);
 
+  // 検索条件が変わったら1ページ目に戻す（前の絞り込みでの途中ページのまま次の検索結果を
+  // 見せてしまい、0件や範囲外ページに見えてしまう事故を防ぐ）。
+  useEffect(() => {
+    setPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, unanimity, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredBills.length / BILLS_PAGE_SIZE));
+  const pagedBills = useMemo(
+    () => filteredBills.slice((page - 1) * BILLS_PAGE_SIZE, page * BILLS_PAGE_SIZE),
+    [filteredBills, page],
+  );
+
   return (
     <div className="px-4 py-4 sm:px-6">
       {seo.jsonLd.map((entry) => (
@@ -332,7 +351,7 @@ export function BillVotesPage() {
         )}
       </div>
 
-      <h2 className="sr-only">議案一覧</h2>
+      <h2 id="bill-votes-list-heading" className="sr-only">議案一覧</h2>
       {billVotes.length === 0 ? (
         <p className="mt-3 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
           {dataCoverage.billVotes.zeroCountNote}
@@ -342,7 +361,7 @@ export function BillVotesPage() {
           <div className="mb-3 mt-3 flex flex-wrap items-center justify-between gap-2">
             <p className="text-sm text-on-surface-variant">
               {filteredBills.length > 0
-                ? `${filteredBills.length}件の議案が見つかりました`
+                ? `${filteredBills.length}件の議案が見つかりました（全${totalPages}ページ中${page}ページ目）`
                 : "条件に一致する議案は見つかりませんでした。"}
             </p>
             {filteredBills.length > 0 && (
@@ -351,7 +370,7 @@ export function BillVotesPage() {
           </div>
           {filteredBills.length > 0 && (
             <ul className="space-y-3">
-              {filteredBills.map((bill) => {
+              {pagedBills.map((bill) => {
                 const { approve, oppose, departed, absent } = voteCounts(bill);
                 return (
                   <li key={bill.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
@@ -393,6 +412,12 @@ export function BillVotesPage() {
               })}
             </ul>
           )}
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            scrollTargetId="bill-votes-list-heading"
+          />
         </>
       )}
 
