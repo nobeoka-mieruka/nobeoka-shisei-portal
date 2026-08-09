@@ -35077,12 +35077,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された予算議案「令和3年度延岡市一般会計補正予算」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "予算審査特別委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-6",
@@ -35104,13 +35107,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された予算議案「令和3年度延岡市一般会計補正予算（二次分）」です。議決結果は「修正可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "verificationNote": "延岡市議会公式ホームページ公表の「議案等審議結果」PDF原文（1ページ目・市長提出議案の表）を目視で確認し、件名・審議結果を手動で修正した（自動抽出が2ページ目の決議第2号「議案第6号 令和3年度延岡市一般会計補正予算に対する附帯決議」の記述と混同し、誤った件名・審議結果を抽出していたため）。決議第2号（附帯決議）本体は別レコード（2021-06-ketsugi-2）として登録済み。"
+    "verificationNote": "延岡市議会公式ホームページ公表の「議案等審議結果」PDF原文（1ページ目・市長提出議案の表）を目視で確認し、件名・審議結果を手動で修正した（自動抽出が2ページ目の決議第2号「議案第6号 令和3年度延岡市一般会計補正予算に対する附帯決議」の記述と混同し、誤った件名・審議結果を抽出していたため）。決議第2号（附帯決議）本体は別レコード（2021-06-ketsugi-2）として登録済み。 会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。",
+    "committee": "予算審査特別委員会",
+    "voteMethod": "起立多数"
   },
   {
     "id": "2021-06-gian-7",
@@ -35133,12 +35138,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された予算議案「令和3年度延岡市水道事業会計補正予算」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "予算審査特別委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-8",
@@ -35161,7 +35169,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市税条例等の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35172,7 +35180,10 @@
       "2022-06-gian-11"
     ],
     "revisionOfBillId": "2019-06-gian-8",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "総務政策委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-9",
@@ -35195,7 +35206,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市山村定住住宅条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35210,7 +35221,10 @@
       "2026-06-gian-13"
     ],
     "revisionOfBillId": "2020-06-gian-12",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "産業建設委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-10",
@@ -35233,7 +35247,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市国民健康保険税条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35250,7 +35264,10 @@
       "2026-03-gian-148"
     ],
     "revisionOfBillId": "2020-06-gian-14",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-11",
@@ -35273,7 +35290,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市手数料条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35292,7 +35309,10 @@
       "2024-06-gian-10"
     ],
     "revisionOfBillId": "2021-03-gian-125",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-12",
@@ -35315,7 +35335,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市家庭的保育事業等の設備及び運営に関する基準を定める条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35329,7 +35349,10 @@
       "2025-03-gian-130"
     ],
     "revisionOfBillId": "2020-06-gian-16",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-13",
@@ -35352,7 +35375,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市特定教育・保育施設及び特定地域型保育事業の運営に関する基準を定める条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35368,7 +35391,10 @@
       "2024-03-gian-127"
     ],
     "revisionOfBillId": "2020-06-gian-17",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-14",
@@ -35391,7 +35417,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市都市公園条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35403,7 +35429,10 @@
       "2024-03-gian-150",
       "2026-03-gian-155"
     ],
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-15",
@@ -35426,7 +35455,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市体育館条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35437,7 +35466,10 @@
       "2023-09-gian-50"
     ],
     "revisionOfBillId": "2021-03-gian-134",
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-16",
@@ -35460,12 +35492,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡勤労者体育センター条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-17",
@@ -35488,7 +35523,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市北方運動公園条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35497,7 +35532,10 @@
     "relatedBillIds": [
       "2024-06-gian-14"
     ],
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-18",
@@ -35520,12 +35558,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市北浦運動公園条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-19",
@@ -35548,12 +35589,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市北川運動公園条例の一部を改正する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-20",
@@ -35576,12 +35620,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された議案「藤の木辺地に係る総合整備計画の策定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "総務政策委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-21",
@@ -35604,12 +35651,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された議案「松瀬辺地に係る総合整備計画の策定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "総務政策委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-22",
@@ -35632,12 +35682,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された専決処分の承認議案「専決処分の承認（令和3年度延岡市一般会計補正予算）」です。議決結果は「承認」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "予算審査特別委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-23",
@@ -35660,12 +35713,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された財産取得に関する議案「財産の取得（高規格救急自動車の購入）」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "総務政策委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-24",
@@ -35688,12 +35744,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された財産取得に関する議案「財産の取得（延岡城・内藤記念博物館収蔵棚の調達）」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-25",
@@ -35716,12 +35775,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された議案「市道の路線認定（1路線）」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "産業建設委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-26",
@@ -35744,7 +35806,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された条例議案「延岡市避難行動要支援者名簿に関する条例の制定」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
@@ -35753,7 +35815,10 @@
     "relatedBillIds": [
       "2022-06-gian-15"
     ],
-    "relationStatus": "suggested"
+    "relationStatus": "suggested",
+    "committee": "厚生教育委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-27",
@@ -35776,12 +35841,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された予算議案「令和3年度延岡市一般会計補正予算（三次分）」です。議決結果は「原案可決」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "committee": "予算審査特別委員会",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。"
   },
   {
     "id": "2021-06-gian-28",
@@ -35804,12 +35872,14 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
     "summary": "令和3年6月定例会に提出された人事議案「固定資産評価審査委員会委員の選任（甲斐達也氏）」です。議決結果は「同意」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
-    "publicationStatus": "published"
+    "publicationStatus": "published",
+    "voteMethod": "簡易採決",
+    "verificationNote": "会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。 委員会付託省略（本会議で直接、御異議なく選任に同意）。"
   },
   {
     "id": "2021-06-ketsugi-2",
@@ -35831,15 +35901,16 @@
     "extractionConfidence": 0.4,
     "extractionNotes": "結果を示すキーワードが見つかりませんでした; 件名を特定できませんでした",
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-09",
     "verificationStatus": "verified",
-    "verificationNote": "延岡市議会公式ホームページ公表の「議案等審議結果」PDF原文（出典PDF該当ページ）を目視で確認し、件名・審議結果・議決日を手動で補完した（自動抽出は決議の件名が複合的な記載形式のため件名を特定できず、確認待ちとなっていた）。",
+    "verificationNote": "延岡市議会公式ホームページ公表の「議案等審議結果」PDF原文（出典PDF該当ページ）を目視で確認し、件名・審議結果・議決日を手動で補完した（自動抽出は決議の件名が複合的な記載形式のため件名を特定できず、確認待ちとなっていた）。 会議録原文（令和3年6月定例会、R030608A＝6月8日／R030625A＝6月25日）の委員長報告・議長の採決宣言を精読し確認した。 委員会付託省略（本会議へ直接提出）。議案第6号（一般会計補正予算二次分）に対する附帯決議。採決時に異議ありとの発言があり、起立採決となった（起立多数で可決）。",
     "unresolvedFields": [],
     "summary": "令和3年6月定例会に提出された決議「議案第6号 令和3年度延岡市一般会計補正予算に対する附帯決議」です。議決結果は「原案可決」です。議員提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "votingDate": "2021-06-25"
+    "votingDate": "2021-06-25",
+    "voteMethod": "起立多数"
   },
   {
     "id": "2019-06-gian-5",
