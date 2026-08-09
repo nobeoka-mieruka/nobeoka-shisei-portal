@@ -351,50 +351,60 @@ export function HomePage() {
         </Link>
       </section>
 
-      <section aria-labelledby="current-members-heading" className="mb-2">
-        <h2 id="current-members-heading" className="mb-2 px-1 text-lg font-semibold text-on-surface">
-          現職議員を探す
-        </h2>
-      </section>
+      <details className="group mb-2 rounded-xl bg-surface-container-low shadow-e1">
+        <summary
+          className={`flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-4 py-3.5 text-lg font-semibold text-on-surface transition hover:bg-surface-container-high ${focusRing}`}
+        >
+          <span>
+            現職議員を探す
+            <span className="ml-2 text-sm font-normal text-on-surface-variant">（{members.length}名）</span>
+          </span>
+          <span aria-hidden className="shrink-0 text-on-surface-variant transition group-open:rotate-180">
+            ▼
+          </span>
+        </summary>
 
-      <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
-        <SearchBar value={query} onChange={setQuery} />
-        <FactionFilter factions={allFactions} selected={factionId} onChange={setFactionId} />
-        <div className="flex flex-wrap items-center gap-2">
-          <FilterSelect label="性別" value={gender} onChange={setGender} options={genderOptions} />
-          <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
-          <FilterSelect label="当選回数" value={termCount} onChange={setTermCount} options={termCountOptions} />
-          <FilterSelect label="SNS" value={sns} onChange={setSns} options={snsOptions} />
-        </div>
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <SortSelect value={sortKey} onChange={setSortKey} />
-          {hasActiveFilter && (
-            <button
-              type="button"
-              onClick={clearFilters}
-              className={`shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${focusRing}`}
-            >
-              絞り込みを解除
-            </button>
+        <div className="px-4 pb-4 sm:px-5">
+          <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
+            <SearchBar value={query} onChange={setQuery} />
+            <FactionFilter factions={allFactions} selected={factionId} onChange={setFactionId} />
+            <div className="flex flex-wrap items-center gap-2">
+              <FilterSelect label="性別" value={gender} onChange={setGender} options={genderOptions} />
+              <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
+              <FilterSelect label="当選回数" value={termCount} onChange={setTermCount} options={termCountOptions} />
+              <FilterSelect label="SNS" value={sns} onChange={setSns} options={snsOptions} />
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <SortSelect value={sortKey} onChange={setSortKey} />
+              {hasActiveFilter && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className={`shrink-0 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${focusRing}`}
+                >
+                  絞り込みを解除
+                </button>
+              )}
+            </div>
+          </div>
+
+          <p className="mb-3 mt-3 text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
+            {members.length}名中{filteredMembers.length}名を表示
+          </p>
+
+          {filteredMembers.length > 0 ? (
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+              {filteredMembers.map((member) => (
+                <MemberCard key={member.id} member={member} />
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
+              条件に一致する議員が見つかりませんでした。検索条件を変更してください。
+            </p>
           )}
         </div>
-      </div>
-
-      <p className="mb-3 mt-3 text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
-        {members.length}名中{filteredMembers.length}名を表示
-      </p>
-
-      {filteredMembers.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-          {filteredMembers.map((member) => (
-            <MemberCard key={member.id} member={member} />
-          ))}
-        </div>
-      ) : (
-        <p className="rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
-          条件に一致する議員が見つかりませんでした。検索条件を変更してください。
-        </p>
-      )}
+      </details>
 
       <div className="mt-6">
         <SiteAnalyticsSummary />
