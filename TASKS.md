@@ -983,27 +983,38 @@ TASK-005C〜005F全体＝令和4年度〜令和元年度の旧任期一般質問
 
 ### TASK-006 一般質問の答弁概要データ追加
 
-状態：BLOCKED
+状態：DONE（2026-08-09、既存の`councilSpeechSummaries.json`＋関連ページが目的を実質的に
+達成済みであることを確認して整合。詳細は下記）
 優先度：A
 対象：`src/data/generalQuestions.json`（`answerSummary`等）
 依存関係：TASK-005と一部重複するが別データ項目のため独立管理
 目的：会議録が公開された一般質問について答弁概要を追加する
 
-作業内容：
-- 会議録公開状況を確認する
-- 公開されている範囲で答弁概要を要約して登録する（全文転載はしない）
+【2026-08-09追記・状態整合】本タスクは当初`generalQuestions.json`への`answerSummary`
+フィールド追加として起票されていたが、現在の`generalQuestions.json`（14件）は現任期最新
+定例会（令和8年6月）の通告書ベース予定質問のみを保持する設計に変わっており、会議録公開後の
+答弁内容は、別途新設された`councilSpeechSummaries.json`（会議録原文から質問・答弁を個別に
+確認し、`questionItems[].answerSummary`・出典URL・確認日を構造化して格納するデータベース、
+397件）と、それを表示する専用ページ（`/members/:memberId/questions/:speechId`＝
+`MemberSpeechDetailPage.tsx`、`/executive-answers`＝`ExecutiveAnswersPage.tsx`、
+`ThemeDetailPage.tsx`等）によって、本タスクの目的（会議録が公開された一般質問への答弁概要の
+追加）が実質的に達成済みであることを確認した。`generalQuestions.json`の14件は、会議録が
+未公開の現任期最新分のみが対象であり、公開され次第`councilSpeechSummaries.json`側へ
+確認・登録する既存フロー（TASK-005系列）で処理される設計のため、これは正当な状態である。
 
 受入条件：
-- `validate:data`のエラーが0件
-- 会議録が未公開の質問には答弁概要を追加しない（推測で埋めない）
+- `validate:data`のエラーが0件（達成）
+- 会議録が未公開の質問には答弁概要を追加しない（達成。`councilSpeechSummaries.json`は
+  会議録原文で確認できた speeches のみを登録しており、未公開分は含まれない）
 
 公式資料：
-- 延岡市議会公式ホームページ（会議録）
+- 延岡市議会公式ホームページ（会議録、`scripts/lib/minutes-source.mjs`経由で取得）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：
+- 完了日：2026-08-09
+- コミットID：（後述）
+- 変更概要：既存の`councilSpeechSummaries.json`＋関連ページが本タスクの目的を満たしている
+  ことを確認し、ステータスをBLOCKED→DONEへ整合した（新規コード変更は無し、ドキュメントのみ）。
 
 ---
 
@@ -3121,7 +3132,8 @@ BLOCKED理由・再開条件：
 
 ### TASK-046 validate-data.mjs warningsの縮小（出典accessedAt欠落分）
 
-状態：IN_PROGRESS（2026-08-08、87件→59件。残りは個別の一次資料調査が必要なため今回は対象外）
+状態：DONE（2026-08-09時点で87件→14件。残る14件はTASK-047・TASK-049が既に個別タスクとして
+解消済み、または対応不要の分類語彙警告のみであることを確認したため完了とする、下記参照）
 優先度：C
 対象：`src/data/archiveFiscalYears.json`、`src/data/archivePolicies.json`、
 `src/data/archivePolicyQuestionRelations.json`、`src/data/archiveCouncilDocuments.json`、
@@ -3157,7 +3169,7 @@ BLOCKED理由・再開条件：
 warnings件数の推移：87→85（TASK-045作業時の2件）→80（人口5件）→72（政策・関連6件）
 →59（議会資料13件）
 
-残る59件の内訳（今回は対象外）：
+残る59件の内訳（2026-08-08時点、今回は対象外）：
 - `archiveMemberProfiles.json`（23件）：元議員fm01〜fm10のプロフィール出典が未登録。
   個別に一次資料を新たに探す必要があり、今回のスコープを超える
 - `councilSessions.json`（21件）：会期要約の確認待ち・自動生成データの人手確認待ち。
@@ -3166,14 +3178,23 @@ warnings件数の推移：87→85（TASK-045作業時の2件）→80（人口5�
   確認推奨の注意喚起のみ、エラーではない）
 - `archiveMayorTerms.json`（任期空白13件）：TASK-045でBLOCKEDと判断済み
 
+【2026-08-09追記・状態整合】上記59件のうち、`archiveMemberProfiles.json`（23件）はTASK-047
+（元議員プロフィールの出典充実、2026-08-08完了済み）で、`councilSessions.json`（21件）は
+TASK-049（councilSessions.json B分類21件の縮小、2026-08-08完了済み）でそれぞれ解消済みで
+あることを確認した。現在の`validate:data`実行結果はwarnings=14件（`councilSpeechSummaries.json`
+13件・`archiveMayorTerms.json`1件〔13件分をまとめた1警告〕）のみであり、いずれも対応不要と
+判断できる（前者は確認推奨の語彙警告でエラーではない、後者はTASK-045で一次資料が見つからず
+BLOCKEDと判断済みの任期空白）。よってTASK-046は完了として整合する。
+
 受入条件：
 - `validate-data.mjs`のエラーが0件のまま（達成）
 - 推測でaccessedAt等を埋めていない（達成。すべて実際に出典を再訪問・再確認したうえで設定）
 
 完了記録：
-- 完了日：（一部完了、残り59件は別タスクとして継続）
+- 完了日：2026-08-09（初期対応：2026-08-08）
 - コミットID：（後述）
-- 変更概要：出典を再確認できた28件のwarningsを解消した。
+- 変更概要：出典を再確認できた28件のwarningsを解消（2026-08-08）。残り59件のうち44件は
+  TASK-047・TASK-049で別途解消済みであることを確認し、残る14件は対応不要と判断してDONEへ整合。
 
 ---
 
