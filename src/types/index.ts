@@ -148,7 +148,9 @@ export type CitySpecialPostRole =
   | "deputy-mayor"
   | "superintendent"
   | "auditor"
-  | "agricultural-committee-member";
+  | "agricultural-committee-member"
+  | "election-commission-member"
+  | "election-commission-alternate";
 
 /**
  * 副市長・教育長・監査委員・農業委員会委員等（src/data/citySpecialPosts.json）。

@@ -31,13 +31,24 @@ const CITY_OFFICIALS_CSV_COLUMNS: CsvColumn<CitySpecialPost>[] = [
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
-const ROLE_ORDER: CitySpecialPostRole[] = ["deputy-mayor", "superintendent", "auditor", "agricultural-committee-member"];
+const ROLE_ORDER: CitySpecialPostRole[] = [
+  "deputy-mayor",
+  "superintendent",
+  "auditor",
+  "agricultural-committee-member",
+  "election-commission-member",
+  "election-commission-alternate",
+];
 
 const ROLE_DESCRIPTIONS: Record<CitySpecialPostRole, string> = {
   "deputy-mayor": "市長を補佐し、市長に事故があるとき等にその職務を代理します。市議会の同意を得て市長が選任します。",
   superintendent: "教育委員会の指揮監督のもと、教育委員会の事務をつかさどります。市議会の同意を得て市長が任命します。",
   auditor: "市の財務・事務執行を監査します。市議会の同意を得て市長が選任します。",
   "agricultural-committee-member": "農地の利用最適化等に関する事務を担う行政委員会（農業委員会）の委員です。市議会の同意を得て市長が任命します。",
+  "election-commission-member":
+    "選挙の管理執行に関する事務を担う行政委員会（選挙管理委員会）の委員です（地方自治法第182条）。市議会が指名推選により選挙します。委員長・職務代理者は委員の互選によるため、本ページでは委員長を特定していません。",
+  "election-commission-alternate":
+    "選挙管理委員に欠員が生じた場合に、あらかじめ議会が定めた順序で補欠する候補者です（地方自治法第182条）。",
 };
 
 export function CityOfficialsPage() {
@@ -55,6 +66,17 @@ export function CityOfficialsPage() {
 
   const roleLabelFor = (role: CitySpecialPostRole) =>
     citySpecialPosts.find((p) => p.role === role)?.roleLabel ?? role;
+
+  // 副市長・教育長・監査委員・農業委員会委員は市長が任命し市議会が同意する（同意議決）。
+  // 選挙管理委員・補充員は市議会が指名推選により選挙する（同意ではない）。表記を役職ごとに区別する。
+  const isCouncilElected = (role: CitySpecialPostRole) =>
+    role === "election-commission-member" || role === "election-commission-alternate";
+  const appointmentLabelFor = (p: CitySpecialPost) => {
+    if (!p.appointedDate) return "就任日確認中";
+    return isCouncilElected(p.role)
+      ? `${formatJapaneseDate(p.appointedDate)} 市議会にて選挙（指名推選）`
+      : `${formatJapaneseDate(p.appointedDate)} 就任（議会同意）`;
+  };
 
   const latestVerifiedAt = citySpecialPosts.reduce<string | undefined>(
     (latest, p) => (!latest || p.lastVerifiedAt > latest ? p.lastVerifiedAt : latest),
@@ -87,7 +109,7 @@ export function CityOfficialsPage() {
       </div>
 
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
-        選挙管理委員会委員については、公式資料で委員全員の氏名・任期を確認できていないため、本ページには未掲載です（委員長のみ報道等で氏名の手がかりがありますが、一次資料での確認が取れ次第、追加します。最終確認日：
+        選挙管理委員・補充員は、令和5年12月定例会（12月7日）の本会議録原文（日程第四 選挙管理委員及び補充員の選挙）で、委員4名・補充員4名の氏名が確定していることを確認し掲載しています。ただし委員長は委員の互選で決まるため公開の本会議では確認できず、本ページでは特定していません（最終確認日：
         {latestVerifiedAt ? formatJapaneseDate(latestVerifiedAt) : "確認中"}）。監査委員は、延岡市公式ホームページ「監査委員制度の概要」で識見委員2名・議選委員1名の計3名と明記されていることを確認し、掲載しています。
       </div>
 
@@ -105,9 +127,8 @@ export function CityOfficialsPage() {
                   {p.name}
                   {p.nameKana && <span className="ml-1.5 text-xs font-normal text-on-surface-variant">（{p.nameKana}）</span>}
                 </p>
-                <p className="mt-1 text-xs text-on-surface-variant">
-                  {p.appointedDate ? `${formatJapaneseDate(p.appointedDate)} 就任（議会同意）` : "就任日確認中"}
-                </p>
+                <p className="mt-1 text-xs text-on-surface-variant">{appointmentLabelFor(p)}</p>
+                {p.termNote && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{p.termNote}</p>}
                 {p.notes && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{p.notes}</p>}
                 {p.relatedLinks && p.relatedLinks.length > 0 && (
                   <ul className="mt-2 space-y-1">

@@ -642,5 +642,141 @@
     ],
     "notes": "既存データベース（billVotes.json、令和5年6月定例会の人事同意議案）に基づき登録。退任に関する議決記録は存在しない（副市長の退任は議会同意を要しないため）ため、退任日は未確認のまま。",
     "lastVerifiedAt": "2026-08-06"
+  },
+  {
+    "id": "csp-27",
+    "role": "election-commission-member",
+    "roleLabel": "選挙管理委員",
+    "name": "木原 一成",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "地方自治法第182条に基づく選挙管理委員の任期は4年。前任期は令和5年12月20日満了。本会議（令和5年12月定例会、12月7日）で議長指名推選により当選。令和5年6月29日の本会議（一般質問への答弁）では本人が「選挙管理委員会委員長」として登壇していることを確認済みだが、本選任後（令和5年12月20日以降）の委員長人事は公開の本会議での選任事項ではなく、確認できていない。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "延岡市議会会議録検索システムの本会議録原文で、議長が「現在の延岡市選挙管理委員及び補充員の任期は、本年十二月二十日で満了となりますので、これに伴い、後任の選挙を…行います」と述べたうえで、指名推選により4名を選挙管理委員として指名し、異議なく当選が決定したことを確認した。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-28",
+    "role": "election-commission-member",
+    "roleLabel": "選挙管理委員",
+    "name": "甲斐 克則",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "地方自治法第182条に基づく選挙管理委員の任期は4年。前任期は令和5年12月20日満了。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "csp-27（木原一成）と同一の本会議で、同時に指名推選・当選が決定した。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-29",
+    "role": "election-commission-member",
+    "roleLabel": "選挙管理委員",
+    "name": "竹原 哲郎",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "地方自治法第182条に基づく選挙管理委員の任期は4年。前任期は令和5年12月20日満了。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "csp-27（木原一成）と同一の本会議で、同時に指名推選・当選が決定した。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-30",
+    "role": "election-commission-member",
+    "roleLabel": "選挙管理委員",
+    "name": "奴田原 君枝",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "地方自治法第182条に基づく選挙管理委員の任期は4年。前任期は令和5年12月20日満了。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "csp-27（木原一成）と同一の本会議で、同時に指名推選・当選が決定した。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-31",
+    "role": "election-commission-alternate",
+    "roleLabel": "選挙管理委員補充員（第1順位）",
+    "name": "猪俣 さよみ",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "選挙管理委員に欠員が生じた場合に、議長指名時に決定された順序（第1〜4順位）で補欠する。地方自治法第182条に基づく任期は4年。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "選挙管理委員（csp-27〜30）と同一の本会議で、補充員4名の指名推選・当選が決定した。補欠順序は指名順（本項目が第1順位）。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-32",
+    "role": "election-commission-alternate",
+    "roleLabel": "選挙管理委員補充員（第2順位）",
+    "name": "高城 まり子",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "選挙管理委員に欠員が生じた場合に、議長指名時に決定された順序（第1〜4順位）で補欠する。地方自治法第182条に基づく任期は4年。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "選挙管理委員（csp-27〜30）と同一の本会議で、補充員4名の指名推選・当選が決定した。補欠順序は指名順（本項目が第2順位）。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-33",
+    "role": "election-commission-alternate",
+    "roleLabel": "選挙管理委員補充員（第3順位）",
+    "name": "安藤 俊則",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "選挙管理委員に欠員が生じた場合に、議長指名時に決定された順序（第1〜4順位）で補欠する。地方自治法第182条に基づく任期は4年。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "選挙管理委員（csp-27〜30）と同一の本会議で、補充員4名の指名推選・当選が決定した。補欠順序は指名順（本項目が第3順位）。",
+    "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-34",
+    "role": "election-commission-alternate",
+    "roleLabel": "選挙管理委員補充員（第4順位）",
+    "name": "川原 博之",
+    "status": "current",
+    "appointedDate": "2023-12-07",
+    "termNote": "選挙管理委員に欠員が生じた場合に、議長指名時に決定された順序（第1〜4順位）で補欠する。地方自治法第182条に基づく任期は4年。",
+    "sourceRefs": [
+      {
+        "label": "令和5年12月定例会 本会議録（12月7日、日程第四 選挙管理委員及び補充員の選挙）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051207A&startPos=0"
+      }
+    ],
+    "notes": "選挙管理委員（csp-27〜30）と同一の本会議で、補充員4名の指名推選・当選が決定した。補欠順序は指名順（本項目が第4順位）。",
+    "lastVerifiedAt": "2026-08-09"
   }
 ]
