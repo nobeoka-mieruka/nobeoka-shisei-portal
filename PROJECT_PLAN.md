@@ -102,8 +102,18 @@
 - [x] Search Console所有権確認（確認タグ設置済み、`release-check.mjs` で重複・欠落を検証）
 - [ ] FAQ構造化データ（固定のFAQコンテンツが無いためBLOCKED、TASK-023）
 - [x] 内部リンク強化（継続的な改善対象。2026-08-09、TASK-024で棚卸しし、議員⇔特別職ページの相互リンク欠落を解消。他の主要ページは同一会期の前後議案・質問への直接リンク等が実装済みであることを確認）
-- [x] Core Web Vitals計測（2026-08-09、TASK-026でnpx lighthouseにより計測完了。デスクトップ97点・モバイル既定44〜69点。改善の実施はTASK-051へ分離、下記「実装中」参照）
-- [ ] **Lighthouse performanceスコアの改善**（モバイル既定プリセットで44〜69点、原因は`src/lib/seo.ts`が20以上のJSONデータセットを静的importしており全ページ共通の大きな共有チャンク（計測時692KB）になっていること。改善は専用の検証手順が必要なためTASK-051として別タスク化。accessibility=100・seo=100は全ページ共通で良好）
+- [x] Core Web Vitals計測・改善（2026-08-09、TASK-026で計測、TASK-051で改善・訂正）※TASK-026の
+  当初計測は`npx serve`によるローカル静的配信を対象にしており、実際の本番環境（Cloudflare Pages）
+  とは性能特性が異なる測定環境のアーティファクトだったと判明した。本番（Cloudflare Pages実配信）
+  へ直接`npx lighthouse`を実行したところ、performance=95・LCP=1.9秒・FCP=1.7秒と良好だった。
+  それでも見つかった実際の改善点として、`src/main.tsx`が`createRoot()`を使っており
+  prerender済みのSSR出力を毎回丸ごと破棄して再構築していた設計上の欠陥を`hydrateRoot()`化で
+  是正し、副次的にCSPが未着手のまま2件のインラインイベントハンドラー／外部scriptをブロックし
+  続けていた不具合（Google FontsのCSS遅延適用が機能しておらずNoto Sans JPフォントが実際には
+  一度も適用されていなかった可能性、Cloudflare Web Analytics beaconのブロック）も解消した。
+  accessibility=100・seo=100は全ページ共通で良好。CLS（本番実測0.11、改善余地あり）は
+  今回の変更前後で同程度観測されており、別要因（Webフォント読み込み起因の可能性）として
+  今後の課題に残した
 - [x] 画像最適化（ロゴはwebp化済み。2026-07-21、TASK-025で議員・市長写真27枚をjpg→webp化、77.1%削減。OGP画像はSNS互換性のためjpg/pngのまま維持）
 
 ---
