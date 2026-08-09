@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import generalQuestionsData from "../data/generalQuestions.json";
 import membersData from "../data/members.json";
@@ -23,6 +23,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { GeneralQuestionCard } from "../components/questions/GeneralQuestionCard";
+import { Pagination } from "../components/Pagination";
 import { VerifiedSpeechCard } from "../components/questions/VerifiedSpeechCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
@@ -42,6 +43,10 @@ const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData
 const verifiedSpeeches: CouncilSpeech[] = questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).sort(
   (a, b) => (b.date ?? "").localeCompare(a.date ?? ""),
 );
+
+// 397件（2026-08時点）にのぼる確認済み一般質問を1ページに全件表示すると、スマートフォンで
+// スクロールが極端に長くなる（実測で18万px超）ため、20件ずつページ分割して表示する。
+const VERIFIED_PAGE_SIZE = 20;
 
 const REGULAR_SESSION_TYPES = new Set(["定例会"]);
 
@@ -198,6 +203,7 @@ export function GeneralQuestionsPage() {
   const [vTheme, setVTheme] = useState("all");
   const [vYear, setVYear] = useState("all");
   const [vSessionId, setVSessionId] = useState("all");
+  const [vPage, setVPage] = useState(1);
 
   const verifiedMemberOptions = useMemo(() => {
     const ids = new Set(verifiedSpeeches.map((s) => s.memberId));
@@ -256,6 +262,18 @@ export function GeneralQuestionsPage() {
       return matchesQuery && matchesMember && matchesTheme && matchesYear && matchesSession;
     });
   }, [vQuery, vMemberId, vTheme, vYear, vSessionId]);
+
+  // 検索条件が変わったら1ページ目に戻す（前の絞り込みでの途中ページのまま次の検索結果を
+  // 見せてしまい、0件や範囲外ページに見えてしまう事故を防ぐ）。
+  useEffect(() => {
+    setVPage(1);
+  }, [vQuery, vMemberId, vTheme, vYear, vSessionId]);
+
+  const verifiedTotalPages = Math.max(1, Math.ceil(filteredVerifiedSpeeches.length / VERIFIED_PAGE_SIZE));
+  const pagedVerifiedSpeeches = useMemo(
+    () => filteredVerifiedSpeeches.slice((vPage - 1) * VERIFIED_PAGE_SIZE, vPage * VERIFIED_PAGE_SIZE),
+    [filteredVerifiedSpeeches, vPage],
+  );
 
   // 収録状況：対象期間内の定例会（一般質問が行われる会議区分）のうち、確認済み発言が1件以上ある会期の割合。
   const regularSessionsInPeriod = useMemo(
@@ -384,7 +402,7 @@ export function GeneralQuestionsPage() {
 
       <hr className="my-8 border-outline-variant" />
 
-      <h2 className="mb-2 px-1 text-base font-semibold text-on-surface">
+      <h2 id="verified-speeches-heading" className="mb-2 px-1 text-base font-semibold text-on-surface">
         2. 確認済み一般質問アーカイブ（公式会議録ベース）
       </h2>
       <p className="mb-4 px-1 text-xs leading-relaxed text-on-surface-variant">
@@ -442,12 +460,12 @@ export function GeneralQuestionsPage() {
         <>
           <p className="mb-3 mt-3 text-sm text-on-surface-variant">
             {filteredVerifiedSpeeches.length > 0
-              ? `${filteredVerifiedSpeeches.length}件の質問が見つかりました`
+              ? `${filteredVerifiedSpeeches.length}件の質問が見つかりました（全${verifiedTotalPages}ページ中${vPage}ページ目）`
               : "条件に一致する一般質問は見つかりませんでした。"}
           </p>
           {filteredVerifiedSpeeches.length > 0 && (
             <ul className="space-y-3">
-              {filteredVerifiedSpeeches.map((speech) => {
+              {pagedVerifiedSpeeches.map((speech) => {
                 const memberLink = findMemberOrFormerLink(speech.memberId, members, formerMembers, archiveMemberProfiles);
                 const session = councilSessions.find((s) => s.id === speech.sessionId);
                 return (
@@ -462,6 +480,12 @@ export function GeneralQuestionsPage() {
               })}
             </ul>
           )}
+          <Pagination
+            currentPage={vPage}
+            totalPages={verifiedTotalPages}
+            onPageChange={setVPage}
+            scrollTargetId="verified-speeches-heading"
+          />
         </>
       )}
 
