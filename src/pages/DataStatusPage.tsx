@@ -176,9 +176,9 @@ export function DataStatusPage() {
       label: "副市長・教育長・行政委員会委員",
       count: citySpecialPosts.length,
       unit: "名",
-      scope: "現職のみ（議会同意議案で就任が確認できた範囲）",
+      scope: "現職・直前の歴代（後任者が確認できた範囲）",
       detail:
-        "選挙管理委員会は、委員全員の氏名を確実に特定できる公式資料を確認できていないため未掲載です。",
+        "副市長・教育長・監査委員・農業委員会委員に加え、選挙管理委員（4名）・補充員（4名）も本会議録で氏名を確認し掲載済みです。ただし選挙管理委員会の委員長は委員の互選で決まり、公開の本会議では確認できないため未掲載です。",
       linkTo: "/city-officials",
       linkLabel: "一覧を見る",
       fullyCovered: false,
