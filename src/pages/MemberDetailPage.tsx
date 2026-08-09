@@ -7,6 +7,7 @@ import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
 import councilSessionsData from "../data/councilSessions.json";
+import citySpecialPostsData from "../data/citySpecialPosts.json";
 import type {
   BillCategory,
   CouncilMember,
@@ -16,6 +17,7 @@ import type {
   CouncilSpeechSummaryData,
   MemberSpeechAnalysisData,
   CouncilSession,
+  CitySpecialPost,
 } from "../types";
 import { getFaction } from "../lib/factions";
 import { getCommitteeByName } from "../lib/committees";
@@ -87,6 +89,7 @@ const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const memberSpeechAnalysisList = (memberSpeechAnalysisData as MemberSpeechAnalysisData).members;
+const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
 // councilSessions.jsonは既に「現在の議員任期（令和5年5月〜）」の会期のみを収録しているため、
 // 収録対象期間（councilSpeechPeriod.from）より前の会期は構造上含まれていない。
 const allSessionIdsInPeriod = (councilSessionsData as CouncilSession[]).map((s) => s.id);
@@ -117,6 +120,8 @@ export function MemberDetailPage() {
         .filter((q) => q.memberId === member.id)
         .sort((a, b) => b.questionDate.localeCompare(a.questionDate))
     : [];
+  // 議選委員等、市議会議員が兼務する特別職・行政委員会委員の役職（公式資料で同一人物と確認できたもののみ）。
+  const memberSpecialPosts = member ? citySpecialPosts.filter((p) => p.relatedMemberId === member.id) : [];
   const speechRecord = member ? findMemberSpeechRecord(speechSummaryData.members, member.id) : undefined;
   const publishedMemberSpeeches = publicSpeeches(speechRecord);
   const topicAggregates = useMemo(() => aggregateMemberTopics(publishedMemberSpeeches), [publishedMemberSpeeches]);
@@ -477,6 +482,21 @@ export function MemberDetailPage() {
               <li key={c.id} className="flex gap-3 text-sm">
                 <span className="w-28 shrink-0 text-on-surface-variant">{c.year}</span>
                 <span className="text-on-surface">{c.description}</span>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
+
+      {memberSpecialPosts.length > 0 && (
+        <SectionCard title="兼務する特別職・行政委員会委員">
+          <ul className="space-y-2">
+            {memberSpecialPosts.map((p) => (
+              <li key={p.id} className="text-sm">
+                <Link to="/city-officials" className={`font-medium text-primary hover:underline ${linkClass}`}>
+                  {p.roleLabel}
+                </Link>
+                {p.notes && <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">{p.notes}</p>}
               </li>
             ))}
           </ul>

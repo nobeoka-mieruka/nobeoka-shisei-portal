@@ -181,6 +181,8 @@ export interface CitySpecialPost {
   profile?: string;
   /** 関連する議案（同意議案等）や公式ページへのリンク。 */
   relatedLinks?: { label: string; to: string }[];
+  /** 同一人物が現職市議会議員でもある場合、members.jsonのidを設定する（議選委員等）。公式資料で同一人物と確認できた場合のみ設定する。 */
+  relatedMemberId?: string;
   sourceRefs: SourceEntry[];
   /** 確認状況に関する補足（未確定要素がある場合に明記する）。 */
   notes?: string;
