@@ -8,6 +8,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
@@ -161,6 +162,11 @@ export function MayorPolicyProgressPage() {
           市長の選挙公約、市長本人の進捗公表、延岡市の施政方針・予算書などの公開情報を整理しています。サイト独自の採点や達成率の算定は行っていません。
         </p>
       </div>
+
+      <GlossaryNote
+        term="進捗状況の表示"
+        definition="「未着手」は、市長本人の公表資料等で着手していないことが確認できた場合に使います。まだ確認できていない場合は「確認中」と表示し、「未着手」とは区別しています（「確認中」は0件・未達成を意味しません）。"
+      />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="全公約数" value={promises.length} unit="件" />
