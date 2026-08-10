@@ -4037,7 +4037,10 @@ BLOCKED理由・再開条件：
 
 完了記録：
 - 完了日：2026-08-10
-- コミットID：（このコミット）
+- コミットID：75ea0f5（データ本体：answerSummary/answerers/summarySources追加）、
+  6a0be02（表示不具合の自己点検・修正：exchanges配列とquestionAnswerLinkStatusを
+  未更新のまま残していたため、本番で答弁が表示されない状態になっていたことを
+  デプロイ後の実機確認で発見し、即座に修正・再検証・再デプロイ）
 - 変更概要：
   対象17項目すべてについて、`summarySources`に記録済みのkensakusystem.jp URLを起点に、
   `listSpeakerSegments()`で該当日の発言一覧を取得し直し、質問者の発言に続く答弁者
