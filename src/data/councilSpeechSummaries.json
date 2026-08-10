@@ -2546,12 +2546,19 @@
                   "type": "question",
                   "speakerId": "m01",
                   "summary": "津波発生後の二次避難の整備状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "指定避難所での生活が長期化する場合の応急仮設住宅整備方針と、候補地249カ所の追加選定状況を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "現状確認"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
             },
             {
               "id": "q4",
@@ -2567,12 +2574,19 @@
                   "type": "question",
                   "speakerId": "m01",
                   "summary": "脱炭素先行地域の導入設備に対するメンテナンス補助の考えを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "太陽光発電・蓄電池等の導入は初期費用ゼロで、契約期間15年間のメンテナンスを事業者が担う仕組みであることを説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "拡充の要望"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "実施中"
             },
             {
               "id": "q5",
@@ -2617,12 +2631,25 @@
                   "type": "question",
                   "speakerId": "m01",
                   "summary": "新たな道の駅整備、九州中央自動車道の事業化、国道10号4車線化について所見・見通しを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "新たな道の駅整備に必要な要件と、既存3道の駅の先行整備との調整の必要性を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "九州中央自動車道の計画段階評価着手に向けた準備状況と、国道10号4車線化に向けた要望継続の考えを説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "整備見通しの確認"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "整備見通しの確認",
+              "answerStatus": "関係機関と協議"
             }
           ],
           "summarySources": [
@@ -18087,12 +18114,19 @@
                   "type": "question",
                   "speakerId": "m05",
                   "summary": "星山ダム放水量等の防災無線での放送時間・回数を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "北方総合支所長",
+                  "summary": "台風14号接近時の防災無線での情報発信状況と、星山ダム放流量に関する計4回の放送実績を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "現状確認"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施済み"
             },
             {
               "id": "q3",
@@ -18288,12 +18322,19 @@
                   "type": "question",
                   "speakerId": "m05",
                   "summary": "市道舟戸東原線の旧TRガードの撤去について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "北方総合支所長",
+                  "summary": "構造物撤去による見通し改善効果と交通量増加への懸念を踏まえ、関係者協議の中で検討する考えを示した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "拡充の要望"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
             }
           ],
           "summarySources": [
@@ -31297,11 +31338,41 @@
                   "type": "question",
                   "speakerId": "m08",
                   "summary": "マイナンバーカード発行状況、ライトハウス建て替え検討、放置自転車、企業防災対策、選挙運動の街宣規制について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "マイナンバーカードの申請率・交付率実績と、来庁困難な方への出張申請対応を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "延岡ライトハウスは令和6年度までに大規模改修・建て替え等の方向性を決定する予定であることを説明した。"
+                },
+                {
+                  "order": 4,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "延岡駅・南延岡駅の放置自転車の実態と、市帰属後の再利用検討を説明した。"
+                },
+                {
+                  "order": 5,
+                  "type": "answer",
+                  "speakerName": "消防長",
+                  "summary": "危険物流出時は各事業所の予防規定に基づき対応していることを説明した。"
+                },
+                {
+                  "order": 6,
+                  "type": "answer",
+                  "speakerName": "選挙管理委員会委員長",
+                  "summary": "街宣活動の音量・時間制限は公職選挙法上の学校・病院周辺規定のみで、市独自の追加制限は考えていないとした。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "現状確認"
             }
           ],
@@ -41986,12 +42057,19 @@
                   "type": "question",
                   "speakerId": "m13",
                   "summary": "令和4年度ふるさと納税の充当事業を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "商工観光文化部長",
+                  "summary": "個人版ふるさと納税の使途区分ごとの活用実績と、企業版ふるさと納税の活用事例を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "検証の要望"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "実施中"
             },
             {
               "id": "q7",
@@ -51339,11 +51417,35 @@
                   "type": "question",
                   "speakerId": "m15",
                   "summary": "有害鳥獣捕獲活動費の増額、消防団員確保・装備品支給、防災教育の充実、西階運動公園西側の駐車場不足について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "農林水産部長",
+                  "summary": "有害鳥獣捕獲活動費を本年10月から増額する補正予算案を上程していることを説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "消防長",
+                  "summary": "消防団員確保に向けた処遇改善や機能別団員制度の準備状況、装備品の機能向上を説明した。"
+                },
+                {
+                  "order": 4,
+                  "type": "answer",
+                  "speakerName": "教育長",
+                  "summary": "地域実態に応じた避難訓練やモデル地域での取り組みなど、防災教育の実施状況を説明した。"
+                },
+                {
+                  "order": 5,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "西階公園西側駐車場は既に整備済みで、アリーナ・野球場完成後は台数増を見込むことを説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "拡充の要望"
             }
           ],
@@ -53545,12 +53647,19 @@
                   "type": "question",
                   "speakerId": "m16",
                   "summary": "遊休農地対策のその後の改善状況を農業委員会会長に尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "農業委員会会長",
+                  "summary": "令和4年度の遊休農地は180ヘクタールで増加傾向にあるとしつつ、担い手への集積やあっせん等の取り組みを説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "検証の要望"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "検証の要望",
+              "answerStatus": "継続対応"
             },
             {
               "id": "q5",
@@ -53566,12 +53675,19 @@
                   "type": "question",
                   "speakerId": "m16",
                   "summary": "学校給食における有機農産物の活用状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "教育部長",
+                  "summary": "学校給食は延岡産を優先しているとしつつ、有機農産物の本格活用には生産量・価格面の課題があるため今後協議するとした。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "拡充の要望"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
             }
           ],
           "summarySources": [
@@ -61695,11 +61811,29 @@
                   "type": "question",
                   "speakerId": "m19",
                   "summary": "医療用ウイッグ等の購入費助成、子宮頸がんワクチンの接種状況・対象拡大、市営住宅（建て替え・年齢制限・ペット特例）について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "ウィッグ等購入費助成の県内動向と、子宮頸がん予防ワクチンの個別勧奨による接種率上昇・9価ワクチン対応を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "一ケ岡団地の集約建て替えに向けた基本構想策定状況と、入居年齢制限緩和の検討方針を説明した。"
+                },
+                {
+                  "order": 4,
+                  "type": "answer",
+                  "speakerName": "教育長",
+                  "summary": "学校でのがん教育や産婦人科医会講演等を通じた子宮頸がん予防の啓発状況を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "拡充の要望"
             }
           ],
@@ -66784,11 +66918,17 @@
                   "type": "question",
                   "speakerId": "m20",
                   "summary": "救急車の出動・搬送の遅延に関する苦情の有無を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "消防長",
+                  "summary": "救急出動件数の増加傾向とコロナ禍での対応の実情、迅速・安全な搬送への取り組みを説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "現状確認"
             },
             {
@@ -68580,11 +68720,23 @@
                   "type": "question",
                   "speakerId": "m21",
                   "summary": "まちづくりミーティングの事業検証、児童手当の市独自増額、保育利用料減額率の格差是正、放課後児童クラブの学年別需給把握について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長",
+                  "summary": "若者が描く魅力あるまちづくりミーティング事業の実施状況と、意見を踏まえた改善検討を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "国の児童手当拡充方針への対応方針、保育利用料軽減の実績、放課後児童クラブの受入れ拡大状況を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "拡充の要望"
             },
             {
@@ -73710,12 +73862,19 @@
                   "type": "question",
                   "speakerId": "m23",
                   "summary": "消防車両の浸水時退避の実施実績と指揮系統を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "消防長",
+                  "summary": "大雨・津波時の消防車両退避の実績と、退避時の指揮系統・避難先での対応体制を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "現状確認"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
             },
             {
               "id": "q10",
@@ -78286,11 +78445,29 @@
                   "type": "question",
                   "speakerId": "m24",
                   "summary": "マイナ保険証一本化の影響、県の少子化対策新規事業の導入、南部地区の公園整備、空き家対策・NPO活用の仲介制度について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市民環境部長",
+                  "summary": "マイナ保険証利用時の資格確認の仕組みと窓口負担軽減の考え方を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "おむつのサブスクリプション試験導入等、少子化対策の新規事業の実施・検討状況を説明した。"
+                },
+                {
+                  "order": 4,
+                  "type": "answer",
+                  "speakerName": "都市建設部長",
+                  "summary": "南部地区の公園整備の取り組みと、改正空家対策特別措置法を踏まえた計画改定方針を説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "拡充の要望"
             }
           ],
@@ -86042,11 +86219,23 @@
                   "type": "question",
                   "speakerId": "m26",
                   "summary": "社会福祉協議会との連携状況と、義援金のボランティア活動費への充当可能性を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "総務部長",
+                  "summary": "社会福祉協議会との連携状況と、台風十四号を踏まえた検証委員会での検討状況を説明した。"
+                },
+                {
+                  "order": 3,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "義援金の配分方針と、地元ボランティアのみへの移動費支給が難しいとの考えを説明した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
+              "questionAnswerLinkStatus": "confirmed",
               "questionApproach": "拡充の要望"
             },
             {
@@ -86091,12 +86280,19 @@
                   "type": "question",
                   "speakerId": "m26",
                   "summary": "こども食堂支援としてみらいチケット方式の導入について尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "健康福祉部長",
+                  "summary": "市内こども食堂の運営状況と、みらいチケットに関する今後の検討の考えを示した。"
                 }
               ],
               "relatedBills": [],
               "relatedDocuments": [],
-              "questionAnswerLinkStatus": "pending",
-              "questionApproach": "拡充の要望"
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "拡充の要望",
+              "answerStatus": "検討中"
             },
             {
               "id": "q6",
