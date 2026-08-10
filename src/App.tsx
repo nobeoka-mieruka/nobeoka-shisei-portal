@@ -182,9 +182,17 @@ function App() {
     initGoogleAnalytics();
   }, []);
 
+  // 依存配列はlocationオブジェクトそのものではなく、実際に使う文字列（pathname+search）
+  // にする。react-router-domのsetSearchParams({ replace: true })は、URL文字列が
+  // 実質的に変化しない場合でも新しいlocationオブジェクト参照を生成することがあり、
+  // locationオブジェクト全体を依存にすると、フィルター状態をURLへ同期するページ
+  // （BillVotesPage・GeneralQuestionsPage等）でinitial mount時にpage_viewが
+  // 二重送信されてしまう不具合があったため、文字列依存に変更して二重送信を防ぐ。
+  const currentPath = location.pathname + location.search;
   useEffect(() => {
-    trackPageView(location.pathname + location.search);
-  }, [location]);
+    trackPageView(currentPath);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPath]);
 
   // ページ（パス）が変わったときだけ、本文の先頭へスクロールしフォーカスを移す。
   // 初回表示時（ブラウザの初期フォーカス）と、検索・絞り込みなどクエリ文字列だけが
