@@ -4,6 +4,7 @@ import billVotesData from "../data/billVotes.json";
 import type { BillCategory, BillProposerType, BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { SortIcon } from "../components/icons";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
@@ -324,6 +325,17 @@ export function BillVotesPage() {
       <p className="mb-4 rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         本サイトでは、公式資料で確認できた議案を掲載しています。資料の表現が複雑な案件については、非掲載にせず「確認待ち」として公開しています。確認待ちの情報は、公式資料との照合作業後に更新します。
       </p>
+
+      <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <GlossaryNote
+          term="議案"
+          definition="市長や議員が議会に提出し、議決（可決・否決）を求める提案です。予算や条例の制定・改廃、契約の締結などが含まれます。"
+        />
+        <GlossaryNote
+          term="賛否"
+          definition="議案に対して、議員一人ひとりが賛成・反対の意思を示した記録です。賛否の数のみで議員の能力や政策の是非を評価するものではありません。"
+        />
+      </div>
 
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={query} onChange={setQuery} placeholder="議案番号、議案名、概要で検索" />

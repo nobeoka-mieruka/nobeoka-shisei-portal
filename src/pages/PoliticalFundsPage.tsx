@@ -4,6 +4,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { StatCard } from "../components/StatCard";
 import { EmptyState } from "../components/EmptyState";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
@@ -42,6 +43,11 @@ export function PoliticalFundsPage() {
           政治資金規正法に基づき、政治団体が総務省または都道府県選挙管理委員会へ提出し、公表された収支報告書の内容を、確認できた範囲で整理しています。当サイトは公式サイトではありません。金額の多い・少ないについての評価や、団体・個人ごとの順位付けは行っていません。
         </p>
       </div>
+
+      <GlossaryNote
+        term="政治資金収支報告書"
+        definition="政治団体が、政治資金規正法に基づき毎年届け出る、1年間の収入・支出をまとめた報告書です。都道府県選挙管理委員会または総務省へ提出され、その後公表されます。"
+      />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard label="登録済み政治団体数" value={organizations.length} unit="団体" />

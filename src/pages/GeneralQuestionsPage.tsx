@@ -17,6 +17,7 @@ import type {
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { StatCard } from "../components/StatCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
@@ -318,6 +319,12 @@ export function GeneralQuestionsPage() {
           延岡市議会の一般質問・代表質問を、議員別、テーマ別、年度別に整理しています。質問回数や質問項目数のみで議員活動を評価するものではありません。このページには2種類のデータがあります。（1）直近会期の「質問通告書」に基づく予定質問項目（会議録公開前の暫定情報）、（2）公式会議録本文で実際の質問・答弁まで確認できた過去会期のアーカイブです。
         </p>
       </div>
+
+      <GlossaryNote
+        term="一般質問"
+        definition="議員が、市の施策や取り組みについて市長・執行部に質問し、答弁を求める本会議での発言です。個別の議案への賛否を問うものではなく、市政全般について広く尋ねる場です。「代表質問」は会派を代表して行う一般質問の一種です。"
+        className="mb-5"
+      />
 
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         <p className="font-medium text-on-surface">このデータベースの一次資料</p>

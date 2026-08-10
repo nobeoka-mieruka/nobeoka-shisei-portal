@@ -14,6 +14,7 @@ import { StatCard } from "../components/StatCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { DocumentIcon } from "../components/icons";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
@@ -54,6 +55,13 @@ function proposerTypeLabel(type?: string): string {
   if (!type) return "確認中";
   return PROPOSER_TYPE_LABELS[type] ?? type;
 }
+
+const DOCUMENT_TYPE_GLOSSARY: Record<ArchiveCouncilDocumentType, string> = {
+  bill: "市長や議員が議会に提出し、議決（可決・否決）を求める提案です。予算や条例の制定・改廃、契約の締結などが含まれます。",
+  ordinance: "議会の議決を経て制定される、市の独自ルール（法律の範囲内で市が定める規則）です。制定・改正・廃止のたびに議案として審議されます。",
+  petition: "市民が議会に対し、地域の課題や要望を伝える制度です。議員の紹介（紹介議員）が必要な点で、紹介議員なしで提出できる陳情と区別されます。",
+  request: "市民が議会に対し、地域の課題や要望を伝える制度です。請願と異なり、紹介議員なしで提出できます。",
+};
 
 interface ListPageConfig {
   documentType: ArchiveCouncilDocumentType;
@@ -112,6 +120,12 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">{heroDescription}</p>
       </div>
+
+      <GlossaryNote
+        term={documentTypeLabel(documentType)}
+        definition={DOCUMENT_TYPE_GLOSSARY[documentType]}
+        className="mb-4"
+      />
 
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="登録件数" value={docs.length} unit="件" />
