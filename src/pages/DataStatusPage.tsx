@@ -72,18 +72,50 @@ interface DataDomain {
   fullyCovered?: boolean;
 }
 
+/**
+ * 市民向けの一言ステータス（確認済み／一部収録／未収録）を、既存の集計値（count・
+ * fullyCovered）だけから導く。新しい判定ロジックや推測は追加せず、既存フィールドの
+ * 言い換え表示のみを行う。fullyCoveredが未設定（true/false判定に馴染まない分野）の
+ * 場合はバッジを表示しない。
+ */
+function statusBadge(domain: DataDomain): { label: string; className: string } | null {
+  if (domain.count === 0) {
+    return { label: "未収録", className: "bg-surface-container-highest text-on-surface-variant" };
+  }
+  if (domain.fullyCovered === true) {
+    return { label: "確認済み", className: "bg-primary-container text-on-primary-container" };
+  }
+  if (domain.fullyCovered === false) {
+    return { label: "一部収録", className: "bg-secondary-container text-on-secondary-container" };
+  }
+  return null;
+}
+
 function DomainRow({ domain }: { domain: DataDomain }) {
+  const badge = statusBadge(domain);
   return (
     <li className="rounded-lg border border-outline-variant p-3">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <p className="text-sm font-semibold text-on-surface">{domain.label}</p>
+        <p className="flex flex-wrap items-center gap-1.5 text-sm font-semibold text-on-surface">
+          {domain.label}
+          {badge && (
+            <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${badge.className}`}>{badge.label}</span>
+          )}
+        </p>
         <p className="text-sm font-bold text-on-surface">
           {domain.count.toLocaleString()}
           <span className="ml-0.5 text-xs font-medium text-on-surface-variant">{domain.unit}</span>
         </p>
       </div>
       {domain.scope && <p className="mt-1 text-xs text-on-surface-variant">収録範囲：{domain.scope}</p>}
-      {domain.detail && <p className="mt-0.5 text-xs text-on-surface-variant">{domain.detail}</p>}
+      {domain.detail && (
+        <details className="mt-1">
+          <summary className="cursor-pointer text-xs font-medium text-on-surface-variant hover:text-on-surface">
+            詳しい内訳を見る
+          </summary>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{domain.detail}</p>
+        </details>
+      )}
       {domain.linkTo && (
         <Link to={domain.linkTo} className={`mt-1.5 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
           {domain.linkLabel ?? "詳しく見る"} →
