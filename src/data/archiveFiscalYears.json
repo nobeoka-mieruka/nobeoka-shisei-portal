@@ -8,13 +8,13 @@
       "referenceDate": "2021-01-01",
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
           "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
           "sourceOrganization": "延岡市",
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "既存 src/data/financeDashboard.json の populationTrend.trend（各年1月1日現在）から移行。会計年度（4月始まり）ではなく暦年1月1日時点の値のため、年度末人口とは一致しない。",
-          "accessedAt": "2026-08-08"
+          "accessedAt": "2026-08-10"
         }
       ]
     },
@@ -79,13 +79,13 @@
       "referenceDate": "2022-01-01",
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
           "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
           "sourceOrganization": "延岡市",
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。",
-          "accessedAt": "2026-08-08"
+          "accessedAt": "2026-08-10"
         }
       ]
     },
@@ -150,13 +150,13 @@
       "referenceDate": "2023-01-01",
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
           "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
           "sourceOrganization": "延岡市",
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。",
-          "accessedAt": "2026-08-08"
+          "accessedAt": "2026-08-10"
         }
       ]
     },
@@ -221,13 +221,13 @@
       "referenceDate": "2024-01-01",
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
           "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
           "sourceOrganization": "延岡市",
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。",
-          "accessedAt": "2026-08-08"
+          "accessedAt": "2026-08-10"
         }
       ]
     },
@@ -324,13 +324,13 @@
       "referenceDate": "2025-01-01",
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
           "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
           "sourceOrganization": "延岡市",
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "既存financeDashboard.jsonのpopulationTrend.trendから移行。暦年1月1日時点の値。",
-          "accessedAt": "2026-08-08"
+          "accessedAt": "2026-08-10"
         }
       ]
     },
@@ -367,19 +367,19 @@
     "mayorTermId": "mayor-01-term-01",
     "population": {
       "fiscalYear": 2026,
-      "population": 108044,
+      "population": 107905,
       "households": null,
-      "referenceDate": "2026-07-01",
+      "referenceDate": "2026-08-01",
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
           "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
           "sourceOrganization": "延岡市",
-          "sourcePublishedDate": "2026-07-01",
-          "accessedAt": "2026-07-14",
+          "sourcePublishedDate": "2026-08-01",
+          "accessedAt": "2026-08-10",
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
-          "notes": "既存financeDashboard.jsonのpopulationTrend.latestから移行。令和8年1月1日時点のトレンド値（109,266人）より新しい令和8年7月1日時点の最新値を採用。"
+          "notes": "既存financeDashboard.jsonのpopulationTrend.latestから移行。令和8年1月1日時点のトレンド値（109,266人）より新しい令和8年8月1日時点の最新値を採用（2026-08-10、ファイルURL更新に伴い再確認、107,905人に更新）。"
         }
       ]
     },

@@ -67,9 +67,9 @@
     "id": "population",
     "category": "population",
     "categoryLabel": "人口・世帯数",
-    "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+    "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
     "existingImplementation": null,
-    "notes": "現住人口及び世帯数の推移（xls）。archiveFiscalYears.jsonのpopulation出典と同一。自動巡回は未実装。"
+    "notes": "現住人口及び世帯数の推移（xls）。archiveFiscalYears.jsonのpopulation出典と同一。自動巡回は未実装。添付ファイルIDは市サイト側の更新のたびに変わるため、クローラーが404（possiblyRemoved）を検知した場合は本URLを起点に延岡市の統計ページ（/soshiki/1/1364.html）で最新のファイルIDを確認し、ここを更新する（2026-08-10、27980→28569へ更新、令和8年8月1日時点データに一致することを確認済み）。"
   },
   {
     "id": "fund",
