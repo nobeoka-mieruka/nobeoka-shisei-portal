@@ -185,6 +185,7 @@ export function BillVotesPage() {
   const [result, setResult] = useState(searchParams.get("result") ?? "all");
   const [committee, setCommittee] = useState(searchParams.get("committee") ?? "all");
   const [proposerType, setProposerType] = useState(searchParams.get("proposer") ?? "all");
+  const [voteMethod, setVoteMethod] = useState(searchParams.get("method") ?? "all");
   const [unanimity, setUnanimity] = useState("all");
   const [sort, setSort] = useState<SortKey>("newest");
   const [page, setPage] = useState(1);
@@ -200,9 +201,10 @@ export function BillVotesPage() {
     if (result !== "all") next.set("result", result);
     if (committee !== "all") next.set("committee", committee);
     if (proposerType !== "all") next.set("proposer", proposerType);
+    if (voteMethod !== "all") next.set("method", voteMethod);
     setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, fiscalYear, session, category, verification, result, committee, proposerType]);
+  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, voteMethod]);
 
   const fiscalYearOptions = useMemo(
     () =>
@@ -228,6 +230,14 @@ export function BillVotesPage() {
     [],
   );
 
+  const voteMethodOptions = useMemo(
+    () =>
+      Array.from(new Set(billVotes.map((b) => b.voteMethod).filter((v): v is NonNullable<typeof v> => !!v)))
+        .sort((a, b) => a.localeCompare(b, "ja"))
+        .map((v) => ({ value: v as string, label: v as string })),
+    [],
+  );
+
   const hasActiveFilter =
     query !== "" ||
     fiscalYear !== "all" ||
@@ -237,6 +247,7 @@ export function BillVotesPage() {
     result !== "all" ||
     committee !== "all" ||
     proposerType !== "all" ||
+    voteMethod !== "all" ||
     unanimity !== "all";
 
   const clearFilters = () => {
@@ -248,6 +259,7 @@ export function BillVotesPage() {
     setResult("all");
     setCommittee("all");
     setProposerType("all");
+    setVoteMethod("all");
     setUnanimity("all");
   };
 
@@ -263,6 +275,7 @@ export function BillVotesPage() {
       const matchesResult = result === "all" || b.result === result;
       const matchesCommittee = committee === "all" || b.committee === committee;
       const matchesProposerType = proposerType === "all" || b.proposerType === proposerType;
+      const matchesVoteMethod = voteMethod === "all" || b.voteMethod === voteMethod;
       const matchesUnanimity =
         unanimity === "all" ||
         (unanimity === "unanimous" ? isUnanimous(b) === true : isUnanimous(b) === false);
@@ -275,18 +288,19 @@ export function BillVotesPage() {
         matchesResult &&
         matchesCommittee &&
         matchesProposerType &&
+        matchesVoteMethod &&
         matchesUnanimity
       );
     });
     return sortBills(matched, sort);
-  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, unanimity, sort]);
+  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, voteMethod, unanimity, sort]);
 
   // 検索条件が変わったら1ページ目に戻す（前の絞り込みでの途中ページのまま次の検索結果を
   // 見せてしまい、0件や範囲外ページに見えてしまう事故を防ぐ）。
   useEffect(() => {
     setPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, unanimity, sort]);
+  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, voteMethod, unanimity, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filteredBills.length / BILLS_PAGE_SIZE));
   const pagedBills = useMemo(
@@ -321,6 +335,7 @@ export function BillVotesPage() {
           <FilterSelect label="委員会" value={committee} onChange={setCommittee} options={committeeOptions} />
           <FilterSelect label="議決結果" value={result} onChange={setResult} options={resultOptions} />
           <FilterSelect label="提出者" value={proposerType} onChange={setProposerType} options={proposerTypeOptions} />
+          <FilterSelect label="採決方法" value={voteMethod} onChange={setVoteMethod} options={voteMethodOptions} />
           <FilterSelect label="採決の傾向" value={unanimity} onChange={setUnanimity} options={unanimityOptions} />
           <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
             <SortIcon className="h-4 w-4 shrink-0" />
