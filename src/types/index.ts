@@ -700,7 +700,15 @@ export interface MayorPromisesData {
 }
 
 /** サイト更新履歴の種別。 */
-export type UpdateHistoryCategory = "新規追加" | "データ更新" | "表示改善" | "出典追加" | "修正";
+export type UpdateHistoryCategory =
+  | "新規追加"
+  | "データ更新"
+  | "表示改善"
+  | "出典追加"
+  | "修正"
+  | "議案・表決"
+  | "品質改善"
+  | "新機能";
 
 /** サイトの更新履歴1件分。 */
 export interface UpdateHistoryEntry {

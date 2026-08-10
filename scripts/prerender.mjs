@@ -100,20 +100,6 @@ function buildHtml(seo, appHtml, extraHeadHtml = "") {
     .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 }
 
-/**
- * /bills は /bills/votes への統合により残ったリダイレクト専用URL。
- * <Navigate>はクライアント側のuseEffectで遷移するため、SSR出力（appHtml）はほぼ空になる。
- * JavaScriptなしでも移動先が分かるよう、meta refreshとフォールバックリンクを補う。
- */
-function billsRedirectStubHtml() {
-  return (
-    '<div class="mx-auto max-w-3xl space-y-3 px-4 py-10 text-center">' +
-    "<h1>ページを移動しました</h1>" +
-    '<p><a href="/bills/votes">議案ごとの賛否</a>へ移動してください。</p>' +
-    "</div>"
-  );
-}
-
 function outputPathFor(routePath) {
   if (routePath === "/") return join(distDir, "index.html");
   const dir = join(distDir, routePath.replace(/^\//, ""));
@@ -128,12 +114,8 @@ const failures = [];
 for (const route of routes) {
   try {
     const seo = getSeoForPath(route.path, { lastmod: route.lastmod });
-    const isBillsRedirectStub = route.path === "/bills";
-    const appHtml = isBillsRedirectStub ? billsRedirectStubHtml() : await renderApp(route.path);
-    const extraHeadHtml = isBillsRedirectStub
-      ? '\n    <meta http-equiv="refresh" content="0; url=/bills/votes" />'
-      : "";
-    const html = buildHtml(seo, appHtml, extraHeadHtml);
+    const appHtml = await renderApp(route.path);
+    const html = buildHtml(seo, appHtml);
     const outPath = outputPathFor(route.path);
     mkdirSync(dirname(outPath), { recursive: true });
     writeFileSync(outPath, html, "utf8");

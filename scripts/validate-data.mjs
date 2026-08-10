@@ -2686,6 +2686,50 @@ try {
   }
 }
 
+// --- updateHistory.json（更新履歴） ---
+// src/types/index.tsのUpdateHistoryCategory・src/pages/UpdatesPage.tsxのcategoryClassの
+// 両方に無いcategory値がデータ側にだけ存在すると、バッジのCSSクラスがundefinedになり
+// 表示が崩れる（2026-08-10、UX監査で発見・修正した実バグ）。同種の再発を防ぐための検証。
+try {
+  const updateHistory = readJson("src/data/updateHistory.json");
+  if (!Array.isArray(updateHistory)) {
+    err("updateHistory.json", "配列ではありません");
+  } else {
+    const VALID_UPDATE_HISTORY_CATEGORIES = new Set([
+      "新規追加",
+      "データ更新",
+      "表示改善",
+      "出典追加",
+      "修正",
+      "議案・表決",
+      "品質改善",
+      "新機能",
+    ]);
+    const seenIds = new Set();
+    for (const entry of updateHistory) {
+      const tag = `updateHistory.json (${entry.id ?? "id不明"})`;
+      if (isBlank(entry.id)) err(tag, "idが空です");
+      else if (seenIds.has(entry.id)) err(tag, `idが重複しています: ${entry.id}`);
+      else seenIds.add(entry.id);
+
+      if (!VALID_UPDATE_HISTORY_CATEGORIES.has(entry.category)) {
+        err(
+          tag,
+          `未定義のcategoryです（src/types/index.tsのUpdateHistoryCategory・` +
+            `src/pages/UpdatesPage.tsxのcategoryClassの両方へ追加してください）: ${entry.category}`,
+        );
+      }
+      if (entry.date != null && Number.isNaN(Date.parse(entry.date))) err(tag, `dateの形式が不正です: ${entry.date}`);
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") {
+    warn("updateHistory.json", "読み込めませんでした（存在しない場合はスキップ）");
+  } else {
+    throw e;
+  }
+}
+
 // --- memberSpeechAnalysis.json（AIによる質問内容の分析） ---
 const VALID_MEMBER_ANALYSIS_STATUSES = new Set(["verified", "partially-verified", "pending", "insufficient-data", "not-analyzed"]);
 
