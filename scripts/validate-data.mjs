@@ -1168,7 +1168,7 @@ try {
   const NON_COMMITTEE_STATUS_VALUES = new Set(["付託なし（本会議で即日議決）"]);
   const billCommitteeNames = new Set(billVotes.map((b) => b.committee).filter(Boolean));
   for (const name of billCommitteeNames) {
-    if (!committeeNames.has(name) && !/審査特別委員会$/.test(name) && !NON_COMMITTEE_STATUS_VALUES.has(name)) {
+    if (!committeeNames.has(name) && !/(審査|調査)特別委員会$/.test(name) && !NON_COMMITTEE_STATUS_VALUES.has(name)) {
       warn("committees.json", `billVotes.jsonのcommitteeで参照されているが委員会名簿に無い委員会名です: ${name}`);
     }
   }
