@@ -1,4 +1,71 @@
-# セッション引き継ぎメモ（2026-08-10更新・Phase 13：市民目線UX・検索性・分かりやすさ総改善）
+# セッション引き継ぎメモ（2026-08-10更新・Phase 14：アクセス解析・実利用データに基づく継続改善基盤）
+
+## 2026-08-10（同日5回目）：Phase 14「アクセス解析・実利用データに基づく継続改善基盤」実施
+
+Phase 13完了後、ユーザーから「実際の利用状況を把握し、事実ベースで改善判断できる運用基盤」
+整備の指示（21セクション）を受けた。新規大量データ・大型機能追加ではなく、既存Analytics
+実装の監査と、必要最小限の計測・運用基盤の追加に限定して着手した。
+
+### 監査結果の要旨
+GA4（`src/lib/analytics.ts`）・Cloudflare Web Analytics（エッジ自動注入）・Search Console
+（メタタグ検証済み）・CSPの整合性はすべて既存実装で正常に機能していることを確認した。
+
+### 発見・修正した問題（1件、Critical相当）
+**GA4 page_view二重送信バグ**：`App.tsx`のpage_view送信用`useEffect`が
+`react-router-dom`の`location`オブジェクト参照を依存配列にしていたため、
+`setSearchParams(next, { replace: true })`でURL文字列が実質的に変化しない場合でも
+新しいlocationオブジェクトが生成され、フィルター状態をURLへ同期する初回描画時の
+ページ（`/bills/votes`・`/questions`等）でpage_viewが2回送信されていた。依存配列を
+`location.pathname + location.search`（文字列値）へ変更して解消。隔離プレビュー環境
+（test-ga-dedup）で`window.dataLayer`を直接検証し、修正前後の挙動を比較確認した
+（詳細はコミット`b6f0791`参照）。
+
+### 実施内容（3コミット）
+1. `b6f0791`：GA4 page_view二重送信バグの修正
+2. `dd6613c`：最小限のイベント計測を追加（`site_search`／`search_result_click`／
+   `official_source_click`（SourceLink共通コンポーネント経由で7ページに波及）／
+   `city_guide_result`）。個人を特定できる値（検索語本文等）は送信しない
+3. `08788e0`：/searchの0件検索時に「絞り込みを解除して検索語のみで探す」の実行可能な
+   ボタンを追加。運用者向け・非公開のデータ鮮度レポート（`scripts/generate-freshness-report.mjs`
+   → `reports/freshness-report.json`）を新設し、既存データが持つ確認日・レビュー待ち
+   ステータスを機械集計できるようにした（新しい判定ロジックの追加なし）
+
+### 監査のみで変更不要と判断した項目
+- SPA page_view自体の送信タイミング・トリガーは正しく実装済み（初回ロード・
+  Linkクリック・ブラウザ戻る/進むいずれも重複なく送信されることをdataLayerで確認）
+- `/updates`（updateHistory.json）：ビルド自動処理からは書き込まれない、完全に
+  手動キュレーションされたファイルであることを確認（意味のない自動更新の混入なし）
+- `LastUpdated`コンポーネント：ビルド日時とデータ確認日を区別する仕組みは既に
+  存在するが、採用しているページは3ページのみ（36ページ中）。今回は大規模な
+  横展開はリスクに見合わないと判断し見送った（次回候補、下記参照）
+- GitHub Actions 3ワークフロー：schedule・concurrency・timeout・commit条件（実差分が
+  ある場合のみcommit）はすべて健全。直近15件の実行はすべてsuccess。変更なし
+
+### 検証結果
+各コミットごとに`validate:data`（errors=0）/`typecheck`/`lint`/`test`（26/26）/
+`build`（prerender 1904/1904、`validate:seo`失敗0、`validate:content`エラー0）を実行、
+すべて成功。最終コミット後に`release-check`（failures=0、既存の助言的warning 2件のみ）も実行。
+
+### 本番確認
+主要10ページすべてHTTP 200・console error 0・pageerror 0・390px幅で横スクロール無し。
+GA4 page_view重複修正・4新規イベントは、隔離プレビュー環境で`window.dataLayer`を
+直接検証したうえで本番へ反映し、本番でも重複解消を再確認済み。
+
+### コミット・デプロイ
+`b6f0791`→`dd6613c`→`08788e0`、すべて`origin/main`へpush済み。Cloudflare Pages
+Production最新デプロイ（`08788e0`、Active）まで確認済み。
+
+### 次回セッションへの引き継ぎ
+- `LastUpdated`の`dataAsOf`（データ確認日）表示を、まだ採用していない33ページへ
+  横展開するかどうか。各ページの基礎データに信頼できる「最終確認日」フィールドが
+  実在するか個別確認が必要（無い場合は推測で埋めない）
+- サイト内検索のフィルター利用状況（filter_used/filter_clear）計測は、対象ページが
+  多く実装コストに見合う効果が不明なため見送った。実際のGA4データで検索機能の
+  利用状況を確認したうえで、必要性を再判断すること
+- `reports/freshness-report.json`は現時点で90日超のエントリ0件（サイトが継続的に
+  更新されているため）。今後、実際に古いエントリが蓄積してきたら、定期実行への
+  組み込み（GitHub Actionsワークフローへの追加）を検討すること
+
 
 ## 2026-08-10（同日4回目）：TASK-054完了後、Phase 13「市民目線UX・検索性・分かりやすさ総改善」実施
 
