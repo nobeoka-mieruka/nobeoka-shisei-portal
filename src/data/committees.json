@@ -3,17 +3,53 @@
     "id": "committee-somu-seisaku",
     "name": "総務政策委員会",
     "type": "常任委員会",
-    "jurisdiction": null,
+    "jurisdiction": "総合政策部の所管に属する事項、総務部の所管に属する事項、危機管理部の所管に属する事項、消防本部・消防署及び消防団の所管に属する事項、議会事務局・監査委員・選挙管理委員会及び公平委員会の所管に属する事項、他の常任委員会の所管に属しない事項（延岡市議会委員会条例第2条第2項第1号）",
     "members": [
-      { "memberId": "m10", "memberName": "河野 治満", "role": "委員長" },
-      { "memberId": "m15", "memberName": "中島 誠治", "role": "副委員長" },
-      { "memberId": "m24", "memberName": "宮田 博徳", "role": "委員" },
-      { "memberId": "m12", "memberName": "後藤 司光", "role": "委員" },
-      { "memberId": "m05", "memberName": "小野 挙", "role": "委員" },
-      { "memberId": "m07", "memberName": "甲斐 忠篤", "role": "委員" },
-      { "memberId": "m19", "memberName": "比江島 久美子", "role": "委員" },
-      { "memberId": "m23", "memberName": "峯田 克明", "role": "委員" },
-      { "memberId": "m06", "memberName": "甲斐 行雄", "role": "委員" }
+      {
+        "memberId": "m10",
+        "memberName": "河野 治満",
+        "role": "委員長"
+      },
+      {
+        "memberId": "m15",
+        "memberName": "中島 誠治",
+        "role": "副委員長"
+      },
+      {
+        "memberId": "m24",
+        "memberName": "宮田 博徳",
+        "role": "委員"
+      },
+      {
+        "memberId": "m12",
+        "memberName": "後藤 司光",
+        "role": "委員"
+      },
+      {
+        "memberId": "m05",
+        "memberName": "小野 挙",
+        "role": "委員"
+      },
+      {
+        "memberId": "m07",
+        "memberName": "甲斐 忠篤",
+        "role": "委員"
+      },
+      {
+        "memberId": "m19",
+        "memberName": "比江島 久美子",
+        "role": "委員"
+      },
+      {
+        "memberId": "m23",
+        "memberName": "峯田 克明",
+        "role": "委員"
+      },
+      {
+        "memberId": "m06",
+        "memberName": "甲斐 行雄",
+        "role": "委員"
+      }
     ],
     "memberCount": 9,
     "termStart": "2026-05-16",
@@ -30,27 +66,59 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html"
       },
       {
-        "label": "延岡市例規集（延岡市議会委員会条例本文の検索ページ。条例名で検索してください）",
-        "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD"
+        "label": "延岡市例規集「延岡市議会委員会条例」（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）",
+        "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj"
       }
     ],
-    "notes": "所管事項・根拠条例は延岡市議会委員会条例の該当条文を確認できていないため未確認。延岡市例規集の検索システムはフォーム入力が必要で、自動取得ツールでは接続できなかった（2026-08-06・2026-08-07に再試行、いずれも接続失敗）。審査した議案の一覧は「議案ごとの賛否」ページで本委員会が付託先として確認できたものを参照。",
-    "lastVerifiedAt": "2026-08-07"
+    "notes": "所管事項は、延岡市議会委員会条例（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）第2条第2項の規定に基づく（延岡市例規集で本文を直接確認）。審査した議案の一覧は「議案ごとの賛否」ページで本委員会が付託先として確認できたものを参照。",
+    "lastVerifiedAt": "2026-08-10"
   },
   {
     "id": "committee-sangyo-kensetsu",
     "name": "産業建設委員会",
     "type": "常任委員会",
-    "jurisdiction": null,
+    "jurisdiction": "農林水産部の所管に属する事項、商工観光文化部の所管に属する事項、都市建設部の所管に属する事項、上下水道局の所管に属する事項、農業委員会の所管に属する事項（延岡市議会委員会条例第2条第2項第2号）",
     "members": [
-      { "memberId": "m09", "memberName": "梶本 英一", "role": "委員長" },
-      { "memberId": "m21", "memberName": "前田 遼", "role": "副委員長" },
-      { "memberId": "m14", "memberName": "柴 浩信", "role": "委員" },
-      { "memberId": "m11", "memberName": "北林 幹雄", "role": "委員" },
-      { "memberId": "m20", "memberName": "平田 信広", "role": "委員" },
-      { "memberId": "m17", "memberName": "長友 幸子", "role": "委員" },
-      { "memberId": "m04", "memberName": "小野 正二", "role": "委員" },
-      { "memberId": "m08", "memberName": "甲斐 正幸", "role": "委員" }
+      {
+        "memberId": "m09",
+        "memberName": "梶本 英一",
+        "role": "委員長"
+      },
+      {
+        "memberId": "m21",
+        "memberName": "前田 遼",
+        "role": "副委員長"
+      },
+      {
+        "memberId": "m14",
+        "memberName": "柴 浩信",
+        "role": "委員"
+      },
+      {
+        "memberId": "m11",
+        "memberName": "北林 幹雄",
+        "role": "委員"
+      },
+      {
+        "memberId": "m20",
+        "memberName": "平田 信広",
+        "role": "委員"
+      },
+      {
+        "memberId": "m17",
+        "memberName": "長友 幸子",
+        "role": "委員"
+      },
+      {
+        "memberId": "m04",
+        "memberName": "小野 正二",
+        "role": "委員"
+      },
+      {
+        "memberId": "m08",
+        "memberName": "甲斐 正幸",
+        "role": "委員"
+      }
     ],
     "memberCount": 8,
     "termStart": "2026-05-16",
@@ -67,27 +135,59 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html"
       },
       {
-        "label": "延岡市例規集（延岡市議会委員会条例本文の検索ページ。条例名で検索してください）",
-        "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD"
+        "label": "延岡市例規集「延岡市議会委員会条例」（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）",
+        "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj"
       }
     ],
-    "notes": "所管事項・根拠条例は延岡市議会委員会条例の該当条文を確認できていないため未確認。延岡市例規集の検索システムはフォーム入力が必要で、自動取得ツールでは接続できなかった（2026-08-06・2026-08-07に再試行、いずれも接続失敗）。審査した議案の一覧は「議案ごとの賛否」ページで本委員会が付託先として確認できたものを参照。",
-    "lastVerifiedAt": "2026-08-07"
+    "notes": "所管事項は、延岡市議会委員会条例（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）第2条第2項の規定に基づく（延岡市例規集で本文を直接確認）。審査した議案の一覧は「議案ごとの賛否」ページで本委員会が付託先として確認できたものを参照。",
+    "lastVerifiedAt": "2026-08-10"
   },
   {
     "id": "committee-kosei-kyoiku",
     "name": "厚生教育委員会",
     "type": "常任委員会",
-    "jurisdiction": null,
+    "jurisdiction": "市民環境部の所管に属する事項、健康福祉部の所管に属する事項、教育委員会の所管に属する事項（延岡市議会委員会条例第2条第2項第3号）",
     "members": [
-      { "memberId": "m02", "memberName": "猪之鼻 哲", "role": "委員長" },
-      { "memberId": "m25", "memberName": "山本 珠美", "role": "副委員長" },
-      { "memberId": "m26", "memberName": "吉田 茂仁", "role": "委員" },
-      { "memberId": "m13", "memberName": "小御門 綾", "role": "委員" },
-      { "memberId": "m01", "memberName": "稲田 雅之", "role": "委員" },
-      { "memberId": "m22", "memberName": "松田 満男", "role": "委員" },
-      { "memberId": "m16", "memberName": "中城 あかね", "role": "委員" },
-      { "memberId": "m03", "memberName": "上杉 泰洋", "role": "委員" }
+      {
+        "memberId": "m02",
+        "memberName": "猪之鼻 哲",
+        "role": "委員長"
+      },
+      {
+        "memberId": "m25",
+        "memberName": "山本 珠美",
+        "role": "副委員長"
+      },
+      {
+        "memberId": "m26",
+        "memberName": "吉田 茂仁",
+        "role": "委員"
+      },
+      {
+        "memberId": "m13",
+        "memberName": "小御門 綾",
+        "role": "委員"
+      },
+      {
+        "memberId": "m01",
+        "memberName": "稲田 雅之",
+        "role": "委員"
+      },
+      {
+        "memberId": "m22",
+        "memberName": "松田 満男",
+        "role": "委員"
+      },
+      {
+        "memberId": "m16",
+        "memberName": "中城 あかね",
+        "role": "委員"
+      },
+      {
+        "memberId": "m03",
+        "memberName": "上杉 泰洋",
+        "role": "委員"
+      }
     ],
     "memberCount": 8,
     "termStart": "2026-05-16",
@@ -104,12 +204,12 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html"
       },
       {
-        "label": "延岡市例規集（延岡市議会委員会条例本文の検索ページ。条例名で検索してください）",
-        "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD"
+        "label": "延岡市例規集「延岡市議会委員会条例」（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）",
+        "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj"
       }
     ],
-    "notes": "所管事項・根拠条例は延岡市議会委員会条例の該当条文を確認できていないため未確認。延岡市例規集の検索システムはフォーム入力が必要で、自動取得ツールでは接続できなかった（2026-08-06・2026-08-07に再試行、いずれも接続失敗）。審査した議案の一覧は「議案ごとの賛否」ページで本委員会が付託先として確認できたものを参照。",
-    "lastVerifiedAt": "2026-08-07"
+    "notes": "所管事項は、延岡市議会委員会条例（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）第2条第2項の規定に基づく（延岡市例規集で本文を直接確認）。審査した議案の一覧は「議案ごとの賛否」ページで本委員会が付託先として確認できたものを参照。",
+    "lastVerifiedAt": "2026-08-10"
   },
   {
     "id": "committee-gikai-unei",
@@ -117,12 +217,36 @@
     "type": "議会運営委員会",
     "jurisdiction": null,
     "members": [
-      { "memberId": "m06", "memberName": "甲斐 行雄", "role": "委員長" },
-      { "memberId": "m09", "memberName": "梶本 英一", "role": "副委員長" },
-      { "memberId": "m25", "memberName": "山本 珠美", "role": "委員" },
-      { "memberId": "m24", "memberName": "宮田 博徳", "role": "委員" },
-      { "memberId": "m02", "memberName": "猪之鼻 哲", "role": "委員" },
-      { "memberId": "m10", "memberName": "河野 治満", "role": "委員" }
+      {
+        "memberId": "m06",
+        "memberName": "甲斐 行雄",
+        "role": "委員長"
+      },
+      {
+        "memberId": "m09",
+        "memberName": "梶本 英一",
+        "role": "副委員長"
+      },
+      {
+        "memberId": "m25",
+        "memberName": "山本 珠美",
+        "role": "委員"
+      },
+      {
+        "memberId": "m24",
+        "memberName": "宮田 博徳",
+        "role": "委員"
+      },
+      {
+        "memberId": "m02",
+        "memberName": "猪之鼻 哲",
+        "role": "委員"
+      },
+      {
+        "memberId": "m10",
+        "memberName": "河野 治満",
+        "role": "委員"
+      }
     ],
     "memberCount": 6,
     "termStart": "2026-05-16",
@@ -139,12 +263,12 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html"
       },
       {
-        "label": "延岡市例規集（延岡市議会委員会条例本文の検索ページ。条例名で検索してください）",
-        "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD"
+        "label": "延岡市例規集「延岡市議会委員会条例」（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）",
+        "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj"
       }
     ],
-    "notes": "所管事項・根拠条例は延岡市議会委員会条例の該当条文を確認できていないため未確認。延岡市例規集の検索システムはフォーム入力が必要で、自動取得ツールでは接続できなかった（2026-08-06・2026-08-07に再試行、いずれも接続失敗）。本委員会は主に意見書案の提出者・会議運営に関する議案の提出者となることが多い（審査を担当する常任委員会とは役割が異なる）。",
-    "lastVerifiedAt": "2026-08-07"
+    "notes": "延岡市議会委員会条例（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）第3条の2は議会運営委員会の設置と委員定数（6人）のみを定めており、常任委員会（第2条第2項）のような所管事項の明文列挙はない（条文本文を延岡市例規集で確認済み）。本委員会は主に意見書案の提出者・会議運営に関する議案の提出者となることが多い（審査を担当する常任委員会とは役割が異なる）。",
+    "lastVerifiedAt": "2026-08-10"
   },
   {
     "id": "committee-gikai-kasseika",
@@ -152,13 +276,45 @@
     "type": "特別委員会",
     "jurisdiction": null,
     "members": [
-      { "memberId": "m14", "memberName": "柴 浩信", "role": "委員長", "appointedNote": "令和7年5月9日委員長就任" },
-      { "memberId": "m13", "memberName": "小御門 綾", "role": "副委員長", "appointedNote": "令和7年5月9日副委員長就任" },
-      { "memberId": "m15", "memberName": "中島 誠治", "role": "委員", "appointedNote": "令和7年5月9日選任" },
-      { "memberId": "m25", "memberName": "山本 珠美", "role": "委員", "appointedNote": "令和7年5月9日選任" },
-      { "memberId": "m23", "memberName": "峯田 克明", "role": "委員" },
-      { "memberId": "m20", "memberName": "平田 信広", "role": "委員" },
-      { "memberId": "m17", "memberName": "長友 幸子", "role": "委員" }
+      {
+        "memberId": "m14",
+        "memberName": "柴 浩信",
+        "role": "委員長",
+        "appointedNote": "令和7年5月9日委員長就任"
+      },
+      {
+        "memberId": "m13",
+        "memberName": "小御門 綾",
+        "role": "副委員長",
+        "appointedNote": "令和7年5月9日副委員長就任"
+      },
+      {
+        "memberId": "m15",
+        "memberName": "中島 誠治",
+        "role": "委員",
+        "appointedNote": "令和7年5月9日選任"
+      },
+      {
+        "memberId": "m25",
+        "memberName": "山本 珠美",
+        "role": "委員",
+        "appointedNote": "令和7年5月9日選任"
+      },
+      {
+        "memberId": "m23",
+        "memberName": "峯田 克明",
+        "role": "委員"
+      },
+      {
+        "memberId": "m20",
+        "memberName": "平田 信広",
+        "role": "委員"
+      },
+      {
+        "memberId": "m17",
+        "memberName": "長友 幸子",
+        "role": "委員"
+      }
     ],
     "memberCount": 7,
     "termStart": null,
@@ -175,12 +331,12 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html"
       },
       {
-        "label": "延岡市例規集（延岡市議会委員会条例本文の検索ページ。条例名で検索してください）",
-        "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD"
+        "label": "延岡市例規集「延岡市議会委員会条例」（昭和45年3月31日条例第26号、最終改正：令和8年3月26日条例第21号）",
+        "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj"
       }
     ],
-    "notes": "令和5年6月29日に設置された特別委員会。任期の定めは名簿上に記載がなく未確認（目的達成まで存続する形式の可能性がある）。委員の一部は令和7年5月9日に交代・追加選任されている。所管事項・根拠条例は延岡市議会委員会条例の該当条文を確認できていないため未確認。延岡市例規集の検索システムはフォーム入力が必要で、自動取得ツールでは接続できなかった（2026-08-06・2026-08-07に再試行、いずれも接続失敗）。",
-    "lastVerifiedAt": "2026-08-07"
+    "notes": "令和5年6月29日に設置された特別委員会。任期の定めは名簿上に記載がなく未確認（目的達成まで存続する形式の可能性がある）。委員の一部は令和7年5月9日に交代・追加選任されている。延岡市議会委員会条例第4条により、特別委員会は常任委員会のような条例上の所管列挙を持たず、設置の都度、議会の議決（設置時の提案理由）で所管・目的が定まる（条文本文を延岡市例規集で確認済み）。本委員会自体の設置時提案理由は未確認のため、所管は引き続き「確認できず」として扱う。",
+    "lastVerifiedAt": "2026-08-10"
   },
   {
     "id": "committee-gikai-arikata",
@@ -188,13 +344,41 @@
     "type": "特別委員会",
     "jurisdiction": "本市議会における議員定数や議員報酬など、今後の議会の在り方を総合的に検討する（設置時の提案理由による）。",
     "members": [
-      { "memberId": "m01", "memberName": "稲田 雅之", "role": "委員長" },
-      { "memberId": "m03", "memberName": "上杉 泰洋", "role": "副委員長" },
-      { "memberId": "m24", "memberName": "宮田 博徳", "role": "委員" },
-      { "memberId": "m07", "memberName": "甲斐 忠篤", "role": "委員" },
-      { "memberId": "m19", "memberName": "比江島 久美子", "role": "委員" },
-      { "memberId": "m06", "memberName": "甲斐 行雄", "role": "委員" },
-      { "memberId": "m20", "memberName": "平田 信広", "role": "委員" }
+      {
+        "memberId": "m01",
+        "memberName": "稲田 雅之",
+        "role": "委員長"
+      },
+      {
+        "memberId": "m03",
+        "memberName": "上杉 泰洋",
+        "role": "副委員長"
+      },
+      {
+        "memberId": "m24",
+        "memberName": "宮田 博徳",
+        "role": "委員"
+      },
+      {
+        "memberId": "m07",
+        "memberName": "甲斐 忠篤",
+        "role": "委員"
+      },
+      {
+        "memberId": "m19",
+        "memberName": "比江島 久美子",
+        "role": "委員"
+      },
+      {
+        "memberId": "m06",
+        "memberName": "甲斐 行雄",
+        "role": "委員"
+      },
+      {
+        "memberId": "m20",
+        "memberName": "平田 信広",
+        "role": "委員"
+      }
     ],
     "memberCount": 7,
     "termStart": null,
