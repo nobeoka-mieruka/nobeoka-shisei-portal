@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "既定では、リクエストパスに一致する静的ファイル（例：dist/people/index.html）が存在する場合、Cloudflare PagesはFunctionsを呼び出さず直接その静的ファイルを返す。これにより、functions/people/[[slug]].tsが/people/（type別のバリアント差し替え）で一切呼び出されない問題があったため、/people系統だけを明示的にFunctions優先に切り替える。該当しないパスは通常どおり静的ファイルが優先される（includeに無いため）。",
-  "include": ["/people", "/people/*"],
+  "description": "既定では、リクエストパスに一致する静的ファイル（例：dist/people/index.html）が存在する場合、Cloudflare PagesはFunctionsを呼び出さず直接その静的ファイルを返す。functions/people/[[slug]].tsが/people/（type別のバリアント差し替え）で呼び出されるようにするには、Functionsを優先させる必要がある。前バージョンではincludeを[\"/people\",\"/people/*\"]に絞っていたが、_routes.jsonのincludeはCloudflareの既定のルーティング表を完全に置き換えるため、結果としてfunctions/api/site-stats.ts（/api/site-stats）がFunctionsから呼び出されなくなり、本番で404になる重大な回帰を引き起こした（2026-08-10発見・即日修正）。すべてのリクエストをFunctions経由にすることで、登録済みの全Function（/api/site-stats・/people/*）を正しく機能させつつ、該当しないパスは通常どおり静的ファイルへフォールバックする。",
+  "include": ["/*"],
   "exclude": []
 }
