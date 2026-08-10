@@ -40,6 +40,7 @@ import { getSeoForPath } from "../lib/seo";
 import { allPublicSpeeches, questionLikeSpeeches } from "../lib/councilSpeeches";
 import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
+import { simpleCompleteness, formatCoverageRate, type CompletenessMetric } from "../lib/completeness";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -121,6 +122,54 @@ function DomainRow({ domain }: { domain: DataDomain }) {
           {domain.linkLabel ?? "詳しく見る"} →
         </Link>
       )}
+    </li>
+  );
+}
+
+/**
+ * 収録率を市民が一目で把握できるよう、パーセンテージだけでなく文字・記号も併用して表示する
+ * （色だけに依存しない）。100%は「公式母数と照合して完全収録」の場合のみ表示される
+ * （simpleCompleteness()が母数と一致した場合のみcompleteを返すため、推測で100%と
+ * 表示することはない）。
+ */
+function coverageTier(metric: CompletenessMetric): { icon: string; label: string; className: string } {
+  if (metric.coverageRate === null) {
+    return { icon: "？", label: "母数未確認", className: "bg-surface-container-highest text-on-surface-variant" };
+  }
+  if (metric.status === "confirmed_zero") {
+    return { icon: "✓", label: "確認済み0件", className: "bg-primary-container text-on-primary-container" };
+  }
+  if (metric.coverageRate >= 100) {
+    return { icon: "✓", label: "完全収録", className: "bg-primary-container text-on-primary-container" };
+  }
+  if (metric.coverageRate >= 80) {
+    return { icon: "△", label: "一部不足", className: "bg-secondary-container text-on-secondary-container" };
+  }
+  return { icon: "…", label: "収集中", className: "bg-tertiary-container text-on-tertiary-container" };
+}
+
+function CompletenessRow({ label, metric, note }: { label: string; metric: CompletenessMetric; note?: string }) {
+  const tier = coverageTier(metric);
+  return (
+    <li className="rounded-lg border border-outline-variant p-3">
+      <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
+        <p className="text-sm font-semibold text-on-surface">{label}</p>
+        <span className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${tier.className}`}>
+          <span aria-hidden>{tier.icon}</span>
+          {tier.label}
+        </span>
+      </div>
+      <p className="mt-1 text-sm text-on-surface-variant">
+        {metric.totalKnown === null ? (
+          <>収録{metric.collected.toLocaleString()}件／収録率：{formatCoverageRate(metric)}</>
+        ) : (
+          <>
+            収録{metric.collected.toLocaleString()}件／確認済み母数{metric.totalKnown.toLocaleString()}件／収録率：
+            <span className="font-semibold text-on-surface">{formatCoverageRate(metric)}</span>
+          </>
+        )}
+      </p>
+      {note && <p className="mt-0.5 text-xs text-on-surface-variant">{note}</p>}
     </li>
   );
 }
@@ -336,6 +385,52 @@ export function DataStatusPage() {
     },
   ];
 
+  // --- データ完全性ダッシュボード（Phase 17） ---
+  // 「件数」と「収録率」を分離するため、母数（totalKnown）が一次資料から確認できている
+  // 項目についてのみ収録率を算出する。新しい集計ロジックは追加せず、このページで既に
+  // 計算済みの分子・分母（billVotesProposerTypeKnown等）をそのままsimpleCompleteness()へ渡す。
+  const completenessRows: { label: string; metric: CompletenessMetric; note?: string }[] = [
+    {
+      label: "一般質問：現任期の対象定例会のうち会議録収録済み",
+      metric: simpleCompleteness(questionStats.collectedSessionCount, questionStats.targetSessionCount),
+      note: "母数は現議員任期の対象会期数（questionCollectionStatus.jsonで確認済み）",
+    },
+    {
+      label: "議案：提出者区分の確認",
+      metric: simpleCompleteness(billVotesProposerTypeKnown, billVotes.length),
+    },
+    {
+      label: "議案：採決方法の確認",
+      metric: simpleCompleteness(billVotesVoteMethodKnown, billVotes.length),
+    },
+    {
+      label: "議案：付託委員会の確認",
+      metric: simpleCompleteness(billVotesCommitteeKnown, billVotes.length),
+      note: "人事案件・意見書・決議等、委員会付託を省略する案件を含むため、必ずしも100%が正しい状態とは限らない",
+    },
+    {
+      label: "政治資金団体：代表者・会計責任者・当該年分収支の完全確認",
+      metric: simpleCompleteness(pfFullyConfirmed, politicalFundOrganizations.length),
+    },
+    {
+      label: "委員会：所管事項の確認",
+      metric: simpleCompleteness(committeesWithJurisdiction, committees.length),
+    },
+    {
+      label: "歴代市長：任期の日単位での確認",
+      metric: simpleCompleteness(dayPreciseTerms.length, archiveMayorTerms.length),
+      note: `未確認の任期空白：${mayorGapCount}件（主に戦前・戦時中の記録）`,
+    },
+    {
+      label: "現職議員：公式プロフィール文の確認",
+      metric: simpleCompleteness(memberProfileCount, members.length),
+    },
+    {
+      label: "現職議員：公式サイトの確認",
+      metric: simpleCompleteness(memberProfileUrlCount, members.length),
+    },
+  ];
+
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
       {seo.jsonLd.map((entry) => (
@@ -352,6 +447,17 @@ export function DataStatusPage() {
           当サイトが登録している各データの件数・収録範囲・確認状況を、既存データから自動集計して表示しています。件数は手入力ではなく、公開中のJSONデータから常に再計算しています。「登録済み」は「対象がすべて確認済み」を意味しません。分野ごとに、氏名・件名などの基本情報の収録状況と、経歴・政策・議決結果などの詳細項目の確認状況は別に扱っています。
         </p>
       </div>
+
+      <SectionCard title="データ完全性ダッシュボード">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          「収録件数」だけでなく、一次資料で確認できた母数（対象会期数・議案件数・団体数など）に対する収録率を示します。母数が一次資料で確認できていない項目は「母数未確認」とし、100%と表示することはありません。
+        </p>
+        <ul className="space-y-2">
+          {completenessRows.map((row) => (
+            <CompletenessRow key={row.label} label={row.label} metric={row.metric} note={row.note} />
+          ))}
+        </ul>
+      </SectionCard>
 
       <SectionCard title="人物">
         <ul className="space-y-2">
