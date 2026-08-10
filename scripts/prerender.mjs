@@ -125,6 +125,31 @@ for (const route of routes) {
   }
 }
 
+// --- 3.5. /people?type=X のクエリバリアント ---
+// 静的ホスティング（Cloudflare Pages）はクエリ文字列を無視して同一ファイルを配信するため、
+// 通常のprerender対象（/people、クエリなし）だけでは/people/?type=member等へアクセスした際も
+// サーバー生成HTMLは常に絞り込みなし版になり、検索エンジン・OGPプレビュー等JavaScriptを
+// 実行しない閲覧者に絞り込み後の内容が伝わらない。既知のtype値（src/pages/PeoplePage.tsxの
+// PERSON_TYPE_OPTIONSと同じ集合）ごとに、通常のルート一覧・サイトマップとは別に
+// dist/_people-variants/ 配下へ専用HTMLを生成し、functions/people/index.tsが
+// リクエストのtypeパラメータに応じてこちらへ差し替えて配信する。
+// canonical・title等のSEO情報は/people本体と同一のものを使う（クエリ付きURLを別ページとして
+// 索引させない、という既存のSEO方針を維持するため）。
+const PEOPLE_TYPE_VARIANTS = ["member", "former-member", "mayor"];
+try {
+  const peopleSeo = getSeoForPath("/people");
+  for (const type of PEOPLE_TYPE_VARIANTS) {
+    const appHtml = await renderApp(`/people?type=${type}`);
+    const html = buildHtml(peopleSeo, appHtml);
+    const outPath = join(distDir, "_people-variants", `type-${type}.html`);
+    mkdirSync(dirname(outPath), { recursive: true });
+    writeFileSync(outPath, html, "utf8");
+  }
+  console.log(`[prerender] generated ${PEOPLE_TYPE_VARIANTS.length} /people type variant(s)`);
+} catch (err) {
+  failures.push({ path: "/people (type variants)", message: err instanceof Error ? err.message : String(err) });
+}
+
 // --- 4. 404.html ---
 try {
   const appHtml = await renderApp(NOT_FOUND_SENTINEL_PATH);

@@ -92,13 +92,18 @@ export function PeoplePage() {
   usePageTitle();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // このページは/peopleとして絞り込みなし（クエリ文字列なし）でのみ事前生成（prerender）される。
-  // 静的ホスティング（Cloudflare Pages）はクエリ文字列を無視してファイルを配信するため、
-  // /people/?type=member等でアクセスされた場合もサーバー生成HTMLの中身は常に絞り込みなし版になる。
-  // hydrateRoot（初回クライアント描画）でいきなりクエリ文字列を反映すると、サーバーHTMLと
-  // 内容が食い違い、Reactのhydrationエラー（テキスト不一致）が発生してしまう。
-  // これを避けるため、マウント前（＝hydration中）はサーバーと同じ「絞り込みなし」を返し、
-  // マウント後（＝通常のクライアント側再描画）にのみURLのクエリ文字列を反映する。
+  // 静的ホスティング（Cloudflare Pages）はクエリ文字列を無視して同一ファイルを配信するため、
+  // 本来は/people/?type=member等でアクセスされた場合もサーバー生成HTMLの中身は常に
+  // 絞り込みなし版になってしまう。それでは検索エンジン・OGPプレビュー等JavaScriptを実行しない
+  // 閲覧者に絞り込み後の内容（例：現職議員26名）が伝わらないため、type（現職／元議員／市長の
+  // 種別）については、scripts/prerender.mjsが既知の値ごとにバリアントHTMLを事前生成し、
+  // functions/people/[[slug]].tsがリクエストのtypeパラメータに応じて配信を出し分けている。
+  // そのため、サーバー側で実際に処理されたtype値と、クライアント側でhydration時に
+  // 読み取るtype値は常に一致し、hydrationの不整合は発生しない。
+  // 一方、status・faction・yearはバリアントを持たない（組み合わせが膨大なため）。
+  // これらをtypeと同様に即座に反映すると、サーバーHTML（常に絞り込みなし相当）と
+  // 食い違いhydrationエラーになるため、マウント後（＝通常のクライアント側再描画）に
+  // のみ反映する。
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     setHasMounted(true);
@@ -106,7 +111,12 @@ export function PeoplePage() {
 
   const people = buildPersonIndex();
 
-  const typeFilter = hasMounted ? (searchParams.get("type") ?? "") : "";
+  // 既知のtype値（PERSON_TYPE_OPTIONS＝バリアントを事前生成済み）だけをそのまま使う。
+  // 未指定・未知の値（例："type=bogus"）は、既定のバリアント（絞り込みなし）と一致するよう、
+  // 常に「絞り込みなし」へ安全にフォールバックする（サーバー側が返すのも常にこの既定
+  // バリアントであるため、クライアント側だけ異なる値で絞り込もうとする食い違いを防ぐ）。
+  const rawTypeParam = searchParams.get("type");
+  const typeFilter = rawTypeParam && (PERSON_TYPE_OPTIONS as readonly string[]).includes(rawTypeParam) ? rawTypeParam : "";
   const statusFilter = hasMounted ? (searchParams.get("status") ?? "") : "";
   const factionFilter = hasMounted ? (searchParams.get("faction") ?? "") : "";
   const yearFilter = hasMounted ? (searchParams.get("year") ?? "") : "";

@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "description": "既定では、リクエストパスに一致する静的ファイル（例：dist/people/index.html）が存在する場合、Cloudflare PagesはFunctionsを呼び出さず直接その静的ファイルを返す。これにより、functions/people/[[slug]].tsが/people/（type別のバリアント差し替え）で一切呼び出されない問題があったため、/people系統だけを明示的にFunctions優先に切り替える。該当しないパスは通常どおり静的ファイルが優先される（includeに無いため）。",
+  "include": ["/people", "/people/*"],
+  "exclude": []
+}
