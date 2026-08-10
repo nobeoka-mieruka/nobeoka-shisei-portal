@@ -1,0 +1,997 @@
+{
+  "generatedAt": "2026-08-10T10:48:27.208Z",
+  "staleThresholdDays": 90,
+  "note": "既存データが持つ確認日・ステータス値をそのまま集計した運用者向けレポート。公開ページからはリンクしない。staleCountは確認日から90日以上経過した件数（内容が誤っているという意味ではなく、再確認の優先度づけ用）。",
+  "filesWithStaleEntries": 0,
+  "totalStaleEntries": 0,
+  "files": [
+    {
+      "file": "archiveAiJobs.json",
+      "dateFieldCount": 0,
+      "staleCount": 0,
+      "oldestEntries": [],
+      "reviewStatusCounts": {
+        "needsReview": 19
+      }
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "dateFieldCount": 13,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "archiveCrawlerState.json",
+      "dateFieldCount": 17,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T04:28:42.446Z",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T04:28:42.446Z",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T04:28:42.446Z",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T04:28:42.446Z",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T04:28:42.446Z",
+          "ageDays": 0
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "archiveFiscalYears.json",
+      "dateFieldCount": 18,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-07-14",
+          "ageDays": 27
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 18
+      }
+    },
+    {
+      "file": "archiveMayors.json",
+      "dateFieldCount": 46,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 6
+      }
+    },
+    {
+      "file": "archiveMayorTerms.json",
+      "dateFieldCount": 58,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 14
+      }
+    },
+    {
+      "file": "archiveMemberProfiles.json",
+      "dateFieldCount": 53,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 4
+      }
+    },
+    {
+      "file": "archivePolicies.json",
+      "dateFieldCount": 6,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 6
+      }
+    },
+    {
+      "file": "archivePolicyQuestionRelations.json",
+      "dateFieldCount": 2,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 4
+      }
+    },
+    {
+      "file": "billVotes.json",
+      "dateFieldCount": 1177,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        }
+      ],
+      "reviewStatusCounts": {
+        "unconfirmed": 655
+      }
+    },
+    {
+      "file": "blockedTaskWatch.json",
+      "dateFieldCount": 4,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T07:20:00+09:00",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T07:20:00+09:00",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T07:40:00+09:00",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10T07:40:00+09:00",
+          "ageDays": 0
+        }
+      ],
+      "reviewStatusCounts": {
+        "blocked": 7
+      }
+    },
+    {
+      "file": "citySpecialPosts.json",
+      "dateFieldCount": 34,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "civicTimelineEvents.json",
+      "dateFieldCount": 60,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "committeeActivityReports.json",
+      "dateFieldCount": 15,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "committees.json",
+      "dateFieldCount": 6,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-07",
+          "ageDays": 3
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-07",
+          "ageDays": 3
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-07",
+          "ageDays": 3
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-07",
+          "ageDays": 3
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "councilDocumentSources.json",
+      "dateFieldCount": 26,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-09",
+          "ageDays": 1
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-09",
+          "ageDays": 1
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-09",
+          "ageDays": 1
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-09",
+          "ageDays": 1
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-09",
+          "ageDays": 1
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "councilSessions.json",
+      "dateFieldCount": 126,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "summaryVerifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-02",
+          "ageDays": 8
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "dateFieldCount": 398,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-02",
+          "ageDays": 8
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "councilWatchedDocuments.json",
+      "dateFieldCount": 65,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10",
+          "ageDays": 0
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-10",
+          "ageDays": 0
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "financeDashboard.json",
+      "dateFieldCount": 12,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "confirmedDate",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "confirmedDate",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "confirmedDate",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "confirmedDate",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "confirmedDate",
+          "value": "2026-07-14",
+          "ageDays": 27
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "formerMembers.json",
+      "dateFieldCount": 10,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "generalQuestions.json",
+      "dateFieldCount": 14,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "mayorEntertainmentExpenses.json",
+      "dateFieldCount": 22,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "mayorPromises.json",
+      "dateFieldCount": 13,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        },
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "members.json",
+      "dateFieldCount": 26,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-03",
+          "ageDays": 7
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-03",
+          "ageDays": 7
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-03",
+          "ageDays": 7
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-03",
+          "ageDays": 7
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-03",
+          "ageDays": 7
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "memberSpeechAnalysis.json",
+      "dateFieldCount": 0,
+      "staleCount": 0,
+      "oldestEntries": [],
+      "reviewStatusCounts": {
+        "pending": 26
+      }
+    },
+    {
+      "file": "miyazakiCompensationComparison.json",
+      "dateFieldCount": 1,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-07-14",
+          "ageDays": 27
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "municipalityComparison.json",
+      "dateFieldCount": 7,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        },
+        {
+          "field": "lastVerifiedAt",
+          "value": "2026-08-06",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "nationalCompensationRanking.json",
+      "dateFieldCount": 1,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-07-20",
+          "ageDays": 21
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "politicalFundOrganizations.json",
+      "dateFieldCount": 21,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {
+        "pending": 1
+      }
+    },
+    {
+      "file": "politicalFundReports.json",
+      "dateFieldCount": 20,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        },
+        {
+          "field": "verifiedAt",
+          "value": "2026-08-08",
+          "ageDays": 2
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "dateFieldCount": 13,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-05",
+          "ageDays": 5
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "searchIndex.json",
+      "dateFieldCount": 0,
+      "staleCount": 0,
+      "oldestEntries": [],
+      "reviewStatusCounts": {
+        "needsReview": 6
+      }
+    },
+    {
+      "file": "similarMunicipalityComparison.json",
+      "dateFieldCount": 1,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastVerified",
+          "value": "2026-07-20",
+          "ageDays": 21
+        }
+      ],
+      "reviewStatusCounts": {}
+    }
+  ]
+}

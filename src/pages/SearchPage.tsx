@@ -418,6 +418,19 @@ export function SearchPage() {
           {sortedResults.length === 0 ? (
             <div className="mt-6 space-y-4 rounded-xl bg-surface-container-low p-6 text-center sm:p-8">
               <p className="text-sm text-on-surface-variant">該当する情報が見つかりませんでした。</p>
+              {(typeFilter !== "all" || fiscalYearFilter !== "" || verificationStatusFilter !== "") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTypeFilter("all");
+                    setFiscalYearFilter("");
+                    setVerificationStatusFilter("");
+                  }}
+                  className={`inline-flex min-h-11 items-center rounded-full border border-outline-variant px-4 text-sm font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+                >
+                  絞り込みを解除して検索語のみで探す
+                </button>
+              )}
               <ul className="mx-auto max-w-sm space-y-1 text-left text-xs text-on-surface-variant">
                 <li>・検索語を短くする</li>
                 <li>・別の表現で検索する</li>
