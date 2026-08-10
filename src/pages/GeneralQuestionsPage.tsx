@@ -203,6 +203,7 @@ export function GeneralQuestionsPage() {
   const [vTheme, setVTheme] = useState("all");
   const [vYear, setVYear] = useState("all");
   const [vSessionId, setVSessionId] = useState("all");
+  const [vAnswerer, setVAnswerer] = useState("all");
   const [vPage, setVPage] = useState(1);
 
   const verifiedMemberOptions = useMemo(() => {
@@ -236,13 +237,25 @@ export function GeneralQuestionsPage() {
       .sort((a, b) => b.value.localeCompare(a.value));
   }, []);
 
-  const hasVerifiedFilter = vQuery !== "" || vMemberId !== "all" || vTheme !== "all" || vYear !== "all" || vSessionId !== "all";
+  const verifiedAnswererOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(verifiedSpeeches.flatMap((s) => s.questionItems.flatMap((qi) => qi.answerers ?? []))),
+      )
+        .sort((a, b) => a.localeCompare(b, "ja"))
+        .map((a) => ({ value: a, label: a })),
+    [],
+  );
+
+  const hasVerifiedFilter =
+    vQuery !== "" || vMemberId !== "all" || vTheme !== "all" || vYear !== "all" || vSessionId !== "all" || vAnswerer !== "all";
   const clearVerifiedFilters = () => {
     setVQuery("");
     setVMemberId("all");
     setVTheme("all");
     setVYear("all");
     setVSessionId("all");
+    setVAnswerer("all");
   };
 
   const filteredVerifiedSpeeches = useMemo(() => {
@@ -259,15 +272,17 @@ export function GeneralQuestionsPage() {
       const matchesTheme = vTheme === "all" || s.topics.includes(vTheme);
       const matchesYear = vYear === "all" || s.sessionId.startsWith(vYear);
       const matchesSession = vSessionId === "all" || s.sessionId === vSessionId;
-      return matchesQuery && matchesMember && matchesTheme && matchesYear && matchesSession;
+      const matchesAnswerer =
+        vAnswerer === "all" || s.questionItems.some((qi) => (qi.answerers ?? []).includes(vAnswerer));
+      return matchesQuery && matchesMember && matchesTheme && matchesYear && matchesSession && matchesAnswerer;
     });
-  }, [vQuery, vMemberId, vTheme, vYear, vSessionId]);
+  }, [vQuery, vMemberId, vTheme, vYear, vSessionId, vAnswerer]);
 
   // 検索条件が変わったら1ページ目に戻す（前の絞り込みでの途中ページのまま次の検索結果を
   // 見せてしまい、0件や範囲外ページに見えてしまう事故を防ぐ）。
   useEffect(() => {
     setVPage(1);
-  }, [vQuery, vMemberId, vTheme, vYear, vSessionId]);
+  }, [vQuery, vMemberId, vTheme, vYear, vSessionId, vAnswerer]);
 
   const verifiedTotalPages = Math.max(1, Math.ceil(filteredVerifiedSpeeches.length / VERIFIED_PAGE_SIZE));
   const pagedVerifiedSpeeches = useMemo(
@@ -450,6 +465,7 @@ export function GeneralQuestionsPage() {
           <FilterSelect label="テーマ" value={vTheme} onChange={setVTheme} options={verifiedThemeOptions} />
           <FilterSelect label="年" value={vYear} onChange={setVYear} options={verifiedYearOptions} />
           <FilterSelect label="会議" value={vSessionId} onChange={setVSessionId} options={verifiedSessionOptions} />
+          <FilterSelect label="答弁者" value={vAnswerer} onChange={setVAnswerer} options={verifiedAnswererOptions} />
           {hasVerifiedFilter && (
             <button
               type="button"

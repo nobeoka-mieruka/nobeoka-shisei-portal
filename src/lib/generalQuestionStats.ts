@@ -20,6 +20,12 @@ import questionCollectionStatusData from "../data/questionCollectionStatus.json"
 export interface GeneralQuestionStats {
   /** 会議録本文で内容を確認済みの一般質問・代表質問・関連質問・総括質疑の累計件数。 */
   confirmedCount: number;
+  /**
+   * 確認済み一般質問（confirmedCount）の中で扱われた個別テーマ・質問項目（questionItems）の
+   * 累計件数。1件の一般質問に複数の質問項目が含まれることが多いため、confirmedCountより
+   * 大きい値になる。
+   */
+  totalQuestionItemCount: number;
   /** 質問通告書に基づく、開催後だが会議録未公開の最新会期の予定質問件数。 */
   scheduledCount: number;
   /** 予定質問の対象会期名（例："令和8年6月定例会"）。予定質問が0件の場合はnull。 */
@@ -40,7 +46,9 @@ export function calculateGeneralQuestionStats(
   speechRecords: CouncilMemberSpeechRecord[],
   generalQuestions: GeneralQuestionItem[],
 ): GeneralQuestionStats {
-  const confirmedCount = questionLikeSpeeches(allPublicSpeeches(speechRecords)).length;
+  const confirmedSpeeches = questionLikeSpeeches(allPublicSpeeches(speechRecords));
+  const confirmedCount = confirmedSpeeches.length;
+  const totalQuestionItemCount = confirmedSpeeches.reduce((sum, speech) => sum + speech.questionItems.length, 0);
 
   const status = questionCollectionStatusData as {
     generatedAt: string;
@@ -51,6 +59,7 @@ export function calculateGeneralQuestionStats(
 
   return {
     confirmedCount,
+    totalQuestionItemCount,
     scheduledCount: generalQuestions.length,
     scheduledSessionName: generalQuestions[0]?.sessionName ?? null,
     targetSessionCount,

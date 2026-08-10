@@ -21,7 +21,7 @@ export const dataCoverage = {
   },
   billVotes: {
     label: "議案・採決結果",
-    scope: "現在整備中",
+    scope: "令和元年6月〜令和8年7月の会期分（収録は順次拡大中）",
     zeroCountNote: "現在、公式資料を確認しながらデータを整備しています。登録が完了した情報から順次公開します。",
   },
 } as const satisfies Record<string, DataCoverageEntry>;

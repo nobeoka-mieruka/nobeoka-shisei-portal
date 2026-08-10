@@ -332,6 +332,12 @@ export function HomePage() {
             unit="件"
             hint={`現任期対象会期：収録済み${questionStats.collectedSessionCount}／${questionStats.targetSessionCount}会期（現任期＋旧任期の全期間の会期数は一般質問データベースに別掲）`}
           />
+          <StatCard
+            label="質問項目"
+            value={questionStats.totalQuestionItemCount}
+            unit="件"
+            hint="一般質問の中で扱われた個別テーマ・質問項目の件数（1件の一般質問に複数の項目を含む）"
+          />
           {questionStats.scheduledCount > 0 && (
             <StatCard
               label="最新会期の予定質問"
