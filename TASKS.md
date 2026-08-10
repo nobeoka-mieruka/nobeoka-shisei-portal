@@ -3910,11 +3910,18 @@ CDNなし、Brotli非圧縮、ローカルディスクI/O）を測定対象に�
   発見済みのもの）
 
 残課題（次回以降）：
-- `scripts/sync-council-data.mjs`のHTML本文ハッシュ判定（indexBodyHash・detailBodyHash・
-  question-notice等）も、監視対象ページがCloudflareのメールアドレス難読化機能を使っている
-  場合は同様の誤検知リスクを理論上抱えている。実行履歴上は誤検知が顕在化していないため
-  今回は変更していないが、対象ページを確認し、必要であれば同じく`sha256OfBufferForDiff()`へ
-  切り替えることを推奨する
+- 【2026-08-10追記・調査完了、修正不要と判明】`scripts/sync-council-data.mjs`のHTML本文
+  ハッシュ判定（indexBodyHash・detailBodyHash・question-notice・member-roster-watch等）に
+  ついて、実際に再現するかを検証した。同スクリプトが監視する5ページ全て
+  （site/gikai/1455.html・1416.html・6758.html・19435.html・43039.html）で、生の
+  HTML全体は確かにCloudflareのメールアドレス難読化機能により毎回異なる
+  （2回連続フェッチで100%不一致）ことを実機で確認した。しかし、同スクリプトの
+  `extractMainBody()`（`id="main_body"`から`id="section_footer"`の直前までを抽出する
+  既存ロジック）が、難読化されたメール・Fax情報を含むフッターを構造的に除外して
+  いるため、実際にハッシュ化される範囲（本文）は5ページとも2回連続フェッチで
+  完全に一致する（安定）ことも実機で確認した。理論上のリスクは実際には
+  **再現しない**（既存の実装が偶然にも安全に設計されていた）と結論づけ、修正は
+  行わなかった（「既に正常な部分を改善のためだけに書き換えない」方針に従った）
 - `review_required`になったエントリの一覧を、`data-status`ページ等で市民向けにも
   分かりやすく表示するかどうかは今回スコープ外とした（現状は`reports/blocked-resume-check-report.json`
   と`blockedTaskWatch.json`のみで確認可能）
