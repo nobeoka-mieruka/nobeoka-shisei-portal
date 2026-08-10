@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "既定では、リクエストパスに一致する静的ファイル（例：dist/people/index.html）が存在する場合、Cloudflare PagesはFunctionsを呼び出さず直接その静的ファイルを返す。functions/people/[[slug]].tsが/people/（type別のバリアント差し替え）で呼び出されるようにするには、Functionsを優先させる必要がある。前バージョンではincludeを[\"/people\",\"/people/*\"]に絞っていたが、_routes.jsonのincludeはCloudflareの既定のルーティング表を完全に置き換えるため、結果としてfunctions/api/site-stats.ts（/api/site-stats）がFunctionsから呼び出されなくなり、本番で404になる重大な回帰を引き起こした（2026-08-10発見・即日修正）。すべてのリクエストをFunctions経由にすることで、登録済みの全Function（/api/site-stats・/people/*）を正しく機能させつつ、該当しないパスは通常どおり静的ファイルへフォールバックする。",
-  "include": ["/*"],
+  "description": "登録済みのFunction（functions/api/site-stats.ts→/api/site-stats、functions/people/[[slug]].ts→/people・/people/*）だけをFunctions経由にする。以前はinclude:[\"/*\"]で全リクエストをFunctions経由にしていたが、sitemap.xml・robots.txt等の静的ファイルまでFunctionsのルーティング層を経由させる必要は無く、リスクを最小化するため、実在するFunctionのパスだけを明示的に列挙する方式へ変更した（2026-08-10）。該当しないパス（sitemap.xml・robots.txt・_headers・_redirects対象・assets等）は本ファイルの影響を受けず、常に通常の静的ファイル配信のみが行われる。",
+  "include": ["/api/*", "/people", "/people/*"],
   "exclude": []
 }
