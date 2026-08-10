@@ -1,4 +1,57 @@
-# セッション引き継ぎメモ（2026-08-10更新・Phase 14：アクセス解析・実利用データに基づく継続改善基盤）
+# セッション引き継ぎメモ（2026-08-10更新・Phase 15：最終更新日・データ基準日表示の完成）
+
+## 2026-08-10（同日6回目）：Phase 15「LastUpdated / dataAsOf表示の完成」実施
+
+Phase 14完了後、ユーザーから「サイト全体のLastUpdated/dataAsOf表示を完成させる」指示
+（17セクション）を受けた。全62ページを再走査し、A（表示済み）/B（基準日データはあるが
+未表示）/C（基準日データ不足）/D（不適切）/E（不要）に分類したうえで、Bに該当した
+ページへ既存データのみを根拠に追加した。
+
+### 分類結果
+- A（既に表示済み）：計8ページ（CityOfficialsPage・DataStatusPage・MayorsPage・
+  FinancePage・MayorPolicyProgressPage・MayorEntertainmentExpensesPage・
+  CouncilSessionDetailPage・MemberSpeechDetailPage）
+- B→A（今回追加）：7ページ（下記コミット参照）
+- E（表示不要と判断）：比較ツールページ群（Compare*・PolicyComparePage・
+  BillComparePage、各行が個別に年度を表示するため単一基準日が馴染まない）、
+  SearchPage（各結果が個別に日付を保持）、CityGuidePage（静的参照情報で
+  確認日の概念が無い）、NotFoundPage（404）、UpdatesPage（各項目が個別に日付を保持）
+- C（基準日データ不足）：該当なし（今回の調査範囲では発見せず）
+- D（不適切な表示）：該当なし（誤解を招く表示は発見できず。ただしHomePage.tsxの
+  「最終更新日」ラベルがビルド日時であることが不明瞭だった点はDに近く、
+  「サイトの最終更新（ビルド日時）」へ修正済み）
+
+### 実施内容（2コミット）
+1. `de0b989`：BillVoteDetailPage（1,177件）・GeneralQuestionDetailPage（14件）・
+   MayorPromiseDetailPage（12件）・CommitteesPage・MayorPressConferencesPage・
+   PoliticalFundsPage・HistoryPageへ、既存の`LastUpdated`コンポーネントで
+   dataAsOfを追加。HomePage.tsxのビルド日時ラベルを明確化。新規
+   `scripts/validate-freshness.mjs`（`npm run validate:freshness`）を追加し、
+   確認日フィールドの形式不正・未来日をerror、365日超の未確認をwarningとして
+   検出できるようにした（対象期間を表すreferenceDateは対象外）
+2. `8281c90`：BLOCKED 7件の再判定（状態変化なし、監視状態ファイルのみ更新）
+
+### 検証結果
+`validate:data`（errors=0）/`typecheck`/`lint`/`test`（26/26）/`build`
+（prerender 1904/1904、`validate:seo`失敗0、`validate:content`エラー0）/
+`validate:freshness`（errors=0、warnings=0）/`release-check`（failures=0、
+既存の助言的warning 2件のみ）すべて成功。Phase 14のGA4 page_view重複防止修正が
+今回の変更後も引き続き機能していることを、新規追加したページを含め本番で
+`window.dataLayer`により再確認した（重複なし）。
+
+### 本番確認
+主要ページすべてHTTP 200、追加した全dataAsOf表示（議案詳細・委員会一覧・
+市政年表・記者会見一覧・政治資金団体一覧）を本番で直接確認。
+
+### コミット・デプロイ
+`de0b989`→`8281c90`、すべて`origin/main`へpush済み。Cloudflare Pages Production
+最新デプロイ（`8281c90`）まで確認済み。
+
+### 次回セッションへの引き継ぎ（Phase 16候補）
+ユーザーから、次フェーズ候補として「全ページの一次資料・出典・根拠URL監査」
+（画面表示→内部データ→出典→一次資料URLの追跡可能性を各カテゴリで確認する）の
+準備指示があった。本セッションでは着手していない。
+
 
 ## 2026-08-10（同日5回目）：Phase 14「アクセス解析・実利用データに基づく継続改善基盤」実施
 
