@@ -688,7 +688,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -696,7 +696,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-05-extraordinary-gian-2",
@@ -837,7 +838,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -845,7 +846,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-06-gian-9",
@@ -1477,7 +1479,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -1485,7 +1487,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-06-seigan-1",
@@ -1698,7 +1701,7 @@
     "extractionConfidence": 0.4,
     "extractionNotes": "「再議」のページのため通常の一覧表と構成が異なり自動抽出の精度が保証できなかった。2026-08-06に会議録原文（R050711A）を精読し、件名・提出者・議決日・記名投票の個人別結果を確認して手動で修正した。",
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "verificationNote": "会議録原文（令和5年7月臨時会、R050711A）を精読し、再議の経緯・記名投票結果（個人別内訳を含む）を確認済み。",
@@ -1709,7 +1712,8 @@
     "proposer": "市長",
     "votingDate": "2023-07-11",
     "individualVoteDisclosureStatus": "disclosed",
-    "voteMethod": "記名投票"
+    "voteMethod": "記名投票",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-07-extraordinary-02-gian-28",
@@ -1730,7 +1734,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -1738,7 +1742,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-07-extraordinary-03-gian-29",
@@ -1759,7 +1764,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -1767,7 +1772,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "起立多数"
+    "voteMethod": "起立多数",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-07-extraordinary-03-chinjo-1",
@@ -1788,14 +1794,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
     "proposerType": "other",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "採決なし"
+    "voteMethod": "採決なし",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-07-extraordinary-03-chinjo-2",
@@ -1816,14 +1823,15 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-08",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-02",
     "summarySource": "template",
     "proposerType": "other",
     "individualVoteDisclosureStatus": "notDisclosed",
-    "voteMethod": "採決なし"
+    "voteMethod": "採決なし",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-09-gian-30",
@@ -2988,7 +2996,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-08",
@@ -2997,7 +3005,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "voteMethod": "簡易採決",
-    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0"
+    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-09-gian-66",
@@ -3018,7 +3027,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-08",
@@ -3027,7 +3036,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "voteMethod": "簡易採決",
-    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0"
+    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-09-gian-67",
@@ -3048,7 +3058,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-08",
@@ -3057,7 +3067,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "voteMethod": "簡易採決",
-    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0"
+    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-09-ikensho-2",
@@ -3078,7 +3089,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -3086,7 +3097,8 @@
     "proposerType": "committee",
     "individualVoteDisclosureStatus": "notDisclosed",
     "voteMethod": "簡易採決",
-    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0"
+    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=0",
+    "committee": "議会運営委員会"
   },
   {
     "id": "2023-09-ketsugi-1",
@@ -3107,7 +3119,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-05",
@@ -3115,7 +3127,8 @@
     "proposerType": "member",
     "individualVoteDisclosureStatus": "notDisclosed",
     "voteMethod": "起立多数",
-    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050929A&startPos=0"
+    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050929A&startPos=0",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-12-gian-68",
@@ -4415,7 +4428,7 @@
     "extractionSource": "automatic",
     "extractionConfidence": 0.95,
     "extractedAt": "2026-08-02",
-    "lastVerified": "2026-08-02",
+    "lastVerified": "2026-08-11",
     "publicationStatus": "published",
     "verificationStatus": "verified",
     "summaryGeneratedAt": "2026-08-07",
@@ -4424,7 +4437,8 @@
     "proposerType": "mayor",
     "proposer": "市長",
     "voteMethod": "簡易採決",
-    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051215A&startPos=0"
+    "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051215A&startPos=0",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2023-12-chinjo-3",
