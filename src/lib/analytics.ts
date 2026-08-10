@@ -50,3 +50,13 @@ export function trackPageView(path: string): void {
     page_location: window.location.href,
   });
 }
+
+/**
+ * 「市民が情報へ到達できているか」の把握に必要な最小限のイベントだけを送信する。
+ * 個人を特定する値（氏名・メールアドレス・自由記述全文等）は絶対に渡さないこと。
+ * paramsはGA4の標準的なイベントパラメータ（文字列・数値・真偽値）のみを想定する。
+ */
+export function trackEvent(eventName: string, params: Record<string, string | number | boolean> = {}): void {
+  if (!isAnalyticsEnabled() || typeof window.gtag !== "function") return;
+  window.gtag("event", eventName, params);
+}

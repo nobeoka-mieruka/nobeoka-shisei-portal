@@ -10,6 +10,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { useSearchHistory } from "../hooks/useSearchHistory";
 import { formatJapaneseDate } from "../config/site";
 import { getSuggestions, searchEntries, sortResults, type SearchResult, type SearchSortKey } from "../lib/search";
+import { trackEvent } from "../lib/analytics";
 
 const searchIndex = searchIndexData as SearchIndexEntry[];
 
@@ -138,6 +139,17 @@ export function SearchPage() {
 
   const sortedResults = useMemo(() => sortResults(filteredResults, sort), [filteredResults, sort]);
   const visibleResults = sortedResults.slice(0, visibleCount);
+
+  // 検索語の入力が落ち着いてから（連続キー入力のたびに送信しないよう）、0件率・
+  // 検索回数を把握するための最小限のイベントを送信する。検索語そのものは送らない。
+  useEffect(() => {
+    if (!query.trim()) return;
+    const timer = setTimeout(() => {
+      trackEvent("site_search", { result_count: sortedResults.length, has_results: sortedResults.length > 0 });
+    }, URL_SYNC_DELAY_MS);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   const suggestions = useMemo(() => (hasQuery ? getSuggestions(searchIndex, query, 8) : []), [query, hasQuery]);
 
@@ -438,9 +450,13 @@ export function SearchPage() {
           ) : (
             <>
               <ul className="mt-3 space-y-3">
-                {visibleResults.map(({ entry, matchedKeywords, matchedAiCandidateKeywords }) => (
+                {visibleResults.map(({ entry, matchedKeywords, matchedAiCandidateKeywords }, index) => (
                   <li key={entry.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1">
-                    <Link to={entry.url} className={`block rounded ${linkClass}`}>
+                    <Link
+                      to={entry.url}
+                      onClick={() => trackEvent("search_result_click", { result_type: entry.type, result_position: index + 1 })}
+                      className={`block rounded ${linkClass}`}
+                    >
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="inline-flex items-center rounded-full bg-secondary-container px-2.5 py-0.5 text-xs font-medium text-on-secondary-container">
                           {typeLabels[entry.type]}

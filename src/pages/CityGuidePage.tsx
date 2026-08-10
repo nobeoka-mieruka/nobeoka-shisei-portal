@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { trackEvent } from "../lib/analytics";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -89,6 +90,16 @@ export function CityGuidePage() {
   const selectedCategory = selectedCategoryId ? getCategory(selectedCategoryId) : undefined;
   const resultEntry = resultEntryId ? getEntry(resultEntryId) : undefined;
   const resultCategory = resultEntry ? getCategory(resultEntry.category) : undefined;
+
+  // 診断結果に到達した経路（カテゴリ直結／質問への回答／一般案内）を問わず、
+  // 結果entryが確定するたびに1回だけ送信する（各遷移関数へ個別に埋め込むより、
+  // 呼び出し漏れが起きにくい）。
+  useEffect(() => {
+    if (step === "result" && resultEntry) {
+      trackEvent("city_guide_result", { department_entry_id: resultEntry.id });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, resultEntryId]);
 
   const showFloatingButton = mode === "diagnosis" && (step === "category" || step === "question");
 
