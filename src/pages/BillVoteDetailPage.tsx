@@ -8,6 +8,7 @@ import type { BillMemberVoteStatus, BillVoteItem, CouncilSession, GeneralQuestio
 import { SectionCard } from "../components/SectionCard";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
 import { billVoteLabels, memberVotesUnavailableReason, publicBills, verificationStatusOf } from "../lib/billVotes";
 import { getCommitteeByName } from "../lib/committees";
@@ -546,6 +547,10 @@ export function BillVoteDetailPage() {
             <span className="flex-1" />
           )}
         </div>
+      )}
+
+      {bill.lastVerified && (
+        <LastUpdated dataAsOfLabel="この議案データの最終確認日" dataAsOf={formatJapaneseDate(bill.lastVerified)} />
       )}
 
       <div className="print:hidden">

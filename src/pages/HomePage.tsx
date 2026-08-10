@@ -348,7 +348,12 @@ export function HomePage() {
             />
           )}
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
-          <StatCard label="最終更新日" value={getLastUpdatedText()} compact />
+          <StatCard
+            label="サイトの最終更新（ビルド日時）"
+            value={getLastUpdatedText()}
+            compact
+            hint="各データの確認日は、それぞれの詳細ページでご確認ください"
+          />
         </div>
         <Link
           to="/dashboard"

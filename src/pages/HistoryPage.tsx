@@ -9,8 +9,10 @@ import { SourceLink } from "../components/SourceLink";
 import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
+import { formatJapaneseDate } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
 import type { CivicTimelineEvent } from "../types";
 
@@ -38,6 +40,11 @@ export function HistoryPage() {
 
   const allEvents = sortedCivicTimelineEvents();
   const decades = civicTimelineDecades();
+  const latestVerifiedAt = allEvents
+    .map((e) => e.lastVerifiedAt)
+    .filter((d): d is string => !!d)
+    .sort()
+    .at(-1);
 
   const decadeOptions = [
     { value: "all", label: "すべての年代" },
@@ -129,6 +136,10 @@ export function HistoryPage() {
             </li>
           ))}
         </ul>
+      )}
+
+      {latestVerifiedAt && (
+        <LastUpdated dataAsOfLabel="年表データの最終確認日（最新値）" dataAsOf={formatJapaneseDate(latestVerifiedAt)} />
       )}
 
       <CorrectionRequestButton pageName="市政年表" />

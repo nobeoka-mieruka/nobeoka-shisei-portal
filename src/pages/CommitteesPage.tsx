@@ -5,11 +5,12 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import type { Committee, CommitteeActivityReport } from "../types";
 import type { CsvColumn } from "../lib/csv";
-import { SITE_URL } from "../config/site";
+import { SITE_URL, formatJapaneseDate } from "../config/site";
 
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 
@@ -52,6 +53,11 @@ export function CommitteesPage() {
   usePageTitle();
 
   const committees = sortedCommittees();
+  const latestVerifiedAt = committees
+    .map((c) => c.lastVerifiedAt)
+    .filter((d): d is string => !!d)
+    .sort()
+    .at(-1);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -119,6 +125,10 @@ export function CommitteesPage() {
           </section>
         );
       })}
+
+      {latestVerifiedAt && (
+        <LastUpdated dataAsOfLabel="委員名簿の最終確認日（最新値）" dataAsOf={formatJapaneseDate(latestVerifiedAt)} />
+      )}
 
       <CorrectionRequestButton pageName="委員会一覧" />
     </div>

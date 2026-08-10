@@ -6,6 +6,7 @@ import { StatCard } from "../components/StatCard";
 import { EmptyState } from "../components/EmptyState";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -25,6 +26,11 @@ export function PoliticalFundsPage() {
   const organizations = sortedPoliticalFundOrganizations();
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
+  const latestVerifiedAt = organizations
+    .map((o) => o.verifiedAt)
+    .filter((d): d is string => !!d && ISO_DATE.test(d))
+    .sort()
+    .at(-1);
 
   usePageTitle();
 
@@ -87,6 +93,10 @@ export function PoliticalFundsPage() {
 
       {organizations.length > 0 && hasOrganizationsWithoutReports && (
         <EmptyState message="収支の金額データは、多くの団体でデータベース化準備中です（公表元の収支報告書PDFが画像形式のため、当サイトの環境では自動的な読み取りができていません）。各団体のページから、公式資料のPDFを直接ご覧いただけます。" />
+      )}
+
+      {latestVerifiedAt && (
+        <LastUpdated dataAsOfLabel="団体情報の最終確認日（最新値）" dataAsOf={formatJapaneseDate(latestVerifiedAt)} />
       )}
 
       <CorrectionRequestButton pageName="政治資金収支報告書" />

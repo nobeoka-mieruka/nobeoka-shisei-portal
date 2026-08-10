@@ -17,6 +17,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -385,6 +386,10 @@ export function MayorPromiseDetailPage() {
             <span className="flex-1" />
           )}
         </div>
+      )}
+
+      {promise.lastVerified && (
+        <LastUpdated dataAsOfLabel="この公約データの最終確認日" dataAsOf={formatJapaneseDate(promise.lastVerified)} />
       )}
 
       <CorrectionRequestButton pageName={promise.promiseText} />

@@ -4,6 +4,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { StatCard } from "../components/StatCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -62,6 +63,10 @@ export function MayorPressConferencesPage() {
             </li>
           ))}
         </ul>
+      )}
+
+      {conferences.length > 0 && (
+        <LastUpdated dataAsOfLabel="掲載している最新の記者会見日" dataAsOf={formatJapaneseDate(conferences[0].date)} />
       )}
 
       <CorrectionRequestButton pageName="市長定例記者会見" />

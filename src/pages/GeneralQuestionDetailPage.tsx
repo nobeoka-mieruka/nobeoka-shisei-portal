@@ -10,6 +10,7 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FactionChip } from "../components/FactionChip";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { LastUpdated } from "../components/LastUpdated";
 import { GlobeIcon, PlayIcon } from "../components/icons";
 import { getFaction } from "../lib/factions";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -279,6 +280,10 @@ export function GeneralQuestionDetailPage() {
             <span className="flex-1" />
           )}
         </div>
+      )}
+
+      {item.lastVerified && (
+        <LastUpdated dataAsOfLabel="この予定質問データの最終確認日" dataAsOf={formatJapaneseDate(item.lastVerified)} />
       )}
 
       <CorrectionRequestButton pageName={`${item.memberName}議員の一般質問「${item.title}」`} />
