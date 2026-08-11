@@ -5924,5 +5924,59 @@ FY2018〜2020が全て決算確認済みとなったため、同ファイルか�
 
 完了記録：
 - 完了日：2026-08-11
-- コミットID：（本追記時点でコミット予定）
+- コミットID：7445f0c
 - 変更概要：上記のとおり。
+
+---
+
+### TASK-080 市長公約・政策進捗の完全監査（Phase43）
+
+状態：DONE（2026-08-12、監査のみ・データ変更なし）
+優先度：A（ユーザー指示「Phase43〜47を連続実行」の第1弾）
+対象：`src/data/archivePolicies.json`・`src/data/mayorPolicyProgress.json`・
+`src/data/mayorPromises.json`・`src/data/mayor.json`（監査のみ）
+
+目的：`/mayor`・`/mayor/policy-progress`の公約データを、公約名／政策分野／
+公約本文／出典／発表時期／現在ステータス／実施内容／関連予算／関連議案／
+関連条例／記者会見／公式資料／dataAsOf／checkedAtの観点で監査する。独自の
+達成率・進捗％の算定は行わない。
+
+監査結果：
+- `mayor.json`のpledges（4件、p1-p4）と`mayorPolicyProgress.json`
+  （4政策、referenceDate 2026-07-14、referenceUrl・documents3件）は
+  対応関係が一致していることを再確認した
+- `mayorPromises.json`（12件のサブ公約、id 1-1〜4-3、categoryIdでp1-p4と
+  リンク）の`status`/`statusLabel`は進行中×10・検討中×2で、
+  `MayorPolicyProgressPage.tsx`の`STATUS_DISPLAY_ORDER`
+  （達成/実施済み/進行中/一部実施/方針変更/検討中/未着手/確認中）の
+  正規の選択肢内であり、独自評価語彙の混入は無いことを確認した
+- 12件全ての`relatedBudget`/`relatedBill`が文字列`"確認中"`（未確定）だが、
+  各`notes`を全件読み直し、これが調査不足ではなく「施政方針で言及された
+  該当事業を6月補正予算・関連議案まで具体的に確認したが、個別予算項目・
+  議案としては特定できなかった」という調査済みの結論であることを再確認した
+- referenceDate（2026-07-14）以降に新たな一次資料が無いか、直近の市長定例
+  記者会見（`mayorPressConferences.ts`、最新2026-07-16開催分）を確認したが、
+  同会見の発表事項（スポーツ大会誘致・公園実証実験事業者募集・自衛隊防災
+  演習）はいずれも12件の公約カテゴリと直接の関連が無く、relatedBudget/
+  relatedBillを新たに確定できる材料は無かった
+- `MayorPolicyProgressPage.tsx`・`MayorPromiseDetailPage.tsx`双方に
+  「サイト独自の採点や達成率の算定は行っていません」等の明示的な免責文言が
+  現在も表示されていることを確認した
+- 公約原文・概要・進捗・根拠資料・出典・確認日が分けて管理されている既存の
+  データ構造（`mayorPromises.json`の`evidenceItems`/`sources`/`notes`分離）
+  を再確認し、変更不要と判断した
+
+受入条件：
+- 独自の達成率・採点を使用していない（達成、既存データ・UIとも変更不要）
+- 情報が見つからないだけの場合を「未着手」にしていない（達成、未確認は
+  "確認中"のまま維持）
+- 公約原文・概要・進捗・根拠資料・出典・確認日を分けて管理している（達成）
+
+検証結果：
+- データ変更なしのため`validate:data`（errors=0、warnings=14＝既存基準）のみ
+  再実行して正常性を確認した
+
+完了記録：
+- 完了日：2026-08-12
+- コミットID：（本フェーズはデータ変更なしのため、TASKS.md更新コミットのみ）
+- 変更概要：上記のとおり（監査のみ、データ・コード変更なし）。
