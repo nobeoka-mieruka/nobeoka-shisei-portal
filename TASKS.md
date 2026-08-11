@@ -5341,3 +5341,82 @@ BLOCKED理由・再開条件：
 - 完了日：2026-08-11
 - コミットID：900cb1d（本体）、522254b（自動生成ファイル同期）
 - 変更概要：上記のとおり。
+
+---
+
+### TASK-072 0件・未収録・未確認・partial・BLOCKED総監査（Phase37）
+
+状態：DONE（2026-08-11）
+優先度：A（ユーザー指示「Phase 33〜37を連続実行」の最終フェーズ）
+対象：サイト全体（監査のみ、コード変更なし）
+
+目的：サイト全体を対象に、確認済み0件・未収録・一次資料未公開・調査中・
+一部収録を全件検索し、市民から見て「本当に0件なのか」「データがない
+だけなのか」判断できない表示をなくす。
+
+監査結果：
+- `src/lib/completeness.ts`のCompletenessStatus型（confirmed_zero/
+  partial/not_collected/not_available/unknown/under_review/complete）の
+  内部enum値がJSXへ直接（ラベル変換なしで）出力されている箇所がないかを
+  全ページ検索したところ、`DataStatusPage.tsx`の1箇所（`===`比較のみ）を
+  除いて該当なし。実際の表示は全てCOMPLETENESS_STATUS_LABELS・
+  coverageTier()等のラベル変換関数を経由しており、内部ステータス名が
+  そのまま画面に出ることはないことを確認した
+- 同様に、`archiveVerificationStatusLabel`・`SpeechSummaryStatusBadge`・
+  `MemberSpeechAnalysisStatusBadge`・`BillVoteBadge`等、他の確認状況を
+  示すバッジ類も全て日本語ラベルへ変換した上で表示していることを
+  再確認した
+- `EmptyState`コンポーネント（0件表示の共通部品）のデフォルトメッセージ
+  「現在、掲載情報はありません」は、0件確定・未収集のいずれとも解釈でき
+  る中立的な文言であり、かつサイト内の大半の呼び出し箇所は個別に具体的な
+  説明文（例：「延岡市議会の公式資料で、この議員の個人別表決を確認できた
+  案件は現在ありません」）を渡していることを確認した
+- 政策の進捗状況（`mayorPolicyProgress.json`の`currentStatus`）は、
+  内部enumではなく市長公式サイト公表の実績報告に基づく具体的な日本語
+  説明文そのものであり、問題がないことを確認した
+- `DataStatusPage.tsx`の完全性ダッシュボード（14項目、simpleCompleteness
+  ベース）を再計算し、complete=3件・partial=11件・not_collected/
+  confirmed_zero/not_available/unknown/under_review=0件であることを
+  Phase27と同じ手法で確認した（Phase33〜36の変更はこの14項目には
+  影響していないため、Phase27時点と同じ内訳）
+- 「A：確認済み0件／B：未収録／C：一次資料未公開／D：調査中／E：一部収録」
+  という5区分について、既存のUI文言が既にこれに相当する自然な日本語
+  区分（「確認済み0件」「未収録」「一次資料未公開」「確認中」「一部収録」
+  等）を使っていることを確認した（コード変更は不要と判断）
+
+全Phase共通の最終検証：
+- `validate:data`（errors=0、billVotes=1177不変、warnings=14＝既存基準）
+- `validate:freshness`（errors=0）／`validate:sources`（errors=0、
+  info=40）／`validate:completeness`（errors=0）／`validate:finance`
+  （errors=0、info=6）／`validate:political-funds`（errors=0、info=2）
+- `typecheck`／`lint`／`test`（26/26成功）
+- `build`（prerender 1905/1905ルート、`validate:seo`・`validate:content`
+  ともにerrors=0）
+- `release-check`（failures=0、warnings=2、既存の軽微な表記のみ）
+- 1905ページ全ての静的prerender出力を再走査し、undefined/NaN/裸のnull/
+  TODO/TBDの混入が0件、内部リンク切れも0件であることを確認した
+- 外部リンク監査（326件）を再実行し、リンク切れの新規発生が無いことを
+  確認した（not_found_404は既存の3件のみ）
+- GitHub Actions 3本の直近実行履歴を確認し、全て成功していることを
+  確認した（変更不要、no-changeコミットもしていない）
+- `check-blocked-resume.mjs`を再実行し、BLOCKED監視対象7件全てで状態
+  変化なしを確認した
+- 本番環境で主要16ルート・動的詳細ページをPC UA・モバイルUA・
+  クエリ文字列付きURLで確認し、全てHTTP 200、存在しないルートは404で
+  あることを確認した
+
+受入条件：
+- サイト全体で確認済み0件・未収録・未確認・partial・BLOCKEDを検索した
+  （達成）
+- 「本当に0件なのか」「データがないだけなのか」判断できない表示を
+  なくした（達成。既存の実装が既にこの区別を満たしていることを確認し、
+  新たな不備は見つからなかった）
+- UIで内部ステータス名をそのまま見せず、自然な日本語で表示した（達成、
+  既存実装で確認）
+- data-statusに集計を反映した（達成、既存実装で確認）
+
+完了記録：
+- 完了日：2026-08-11
+- コミットID：1927f97（レポート再生成）
+- 変更概要：監査のみ。新たな不備は見つからなかったため、コード・データの
+  変更は行っていない。
