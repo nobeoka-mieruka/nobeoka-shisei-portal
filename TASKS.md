@@ -5673,3 +5673,84 @@ BLOCKED理由・再開条件：
 - コミットID：（本フェーズはデータ変更なしのため、TASKS.md本体の更新
   コミットのみ）
 - 変更概要：上記のとおり（監査のみ、データ・コード変更なし）。
+
+---
+
+### TASK-077 全サイト データ品質・市民向け最終監査（Phase42）
+
+状態：DONE（2026-08-11）
+優先度：A（ユーザー指示「Phase 38〜42を連続実行」の最終フェーズ）
+対象：サイト全体（監査のみ、コード変更なし）
+
+目的：Phase38〜41の変更を含む全サイトを、市民が見たときに未完成・
+空欄・意味不明・古い情報が残っていないか徹底監査する。
+
+監査結果：
+- 1905ページ全ての静的prerender出力を再走査し、undefined/NaN/裸のnull/
+  TODO/TBDの混入が0件、内部リンク切れも0件であることを確認した
+- 外部リンク監査（326件）を再実行し、リンク切れの新規発生が無いことを
+  確認した（not_found_404は既存の3件のみ、いずれも既に確認・記録済み）
+- 検索インデックス（1,880件）を確認し、市政年表エントリが69件（データ
+  件数と一致）、Phase39で試作・破棄したfm11〜17の候補が0件（＝取り消し
+  漏れなし）、URL欠落0件であることを確認した
+- sitemap.xml（1,885件）を確認し、Phase35で修正した「現職議員が
+  `/members/former/mXX`として誤登録される」バグの再発が無いこと（該当
+  件数0件）、404ページ・内部限定ページの誤掲載が無いことを確認した
+- GitHub Actions 3本の直近実行履歴を確認し、全て成功していることを
+  確認した（変更不要、no-changeコミットもしていない）
+- `check-blocked-resume.mjs`を再実行し、BLOCKED監視対象7件全てで状態
+  変化なしを確認した
+- 本番環境で主要18ルート・動的詳細ページ（現職議員・元議員・歴代市長・
+  議案・委員会・政治資金団体・絞り込み済み市政年表）をPC UA・モバイル
+  UAの両方、cache-busting付きクエリで確認し、全てHTTP 200、存在しない
+  ルートは404であることを確認した
+- 人物状態（現職／元議員／市長／歴代市長の区分、重複、旧役職の現役表示）
+  は、Phase35で発見・修正した重大バグの再発が無いことを本番環境で
+  直接確認済み（`/members/former/index.html`に現職議員の氏名が含まれない
+  ことを再確認）
+- 日付（LastUpdated/dataAsOf/sourceDate/checkedAt）について、build日を
+  データ基準日として使っている箇所がないか主要ページのコードを確認し、
+  該当なしを確認した（既存の`LastUpdatedInfo`等のコンポーネントは
+  全てデータ側の`verifiedAt`/`lastVerifiedAt`等を参照する設計であり、
+  build時刻とは独立している）
+- SEO（title/description/canonical/OGP/sitemap）は、`validate:seo`が
+  1906ページ全件でfailures=0を報告しており、新規ページ・詳細ページも
+  含め正常であることを確認した
+- Phase38〜41で新規追加したデータ（Phase40の市政年表3件）は、いずれも
+  既存の`civicTimelineEvents.json`という既存パイプラインが対象とする
+  データファイルへの追加であるため、既存の自動巡回・検証パイプラインで
+  引き続きカバーされる。巨大な新規crawlerの追加は不要と判断した
+
+全Phase共通の最終検証：
+- `validate:data`（errors=0、billVotes=1177不変、warnings=14＝既存基準）
+- `validate:freshness`（errors=0）／`validate:sources`（errors=0、
+  info=40）／`validate:completeness`（errors=0）／`validate:finance`
+  （errors=0、info=6）／`validate:political-funds`（errors=0、info=2）
+- `typecheck`／`lint`／`test`（26/26成功）
+- `build`（prerender 1905/1905ルート、`validate:seo`・`validate:content`
+  ともにerrors=0）
+- `release-check`（failures=0、warnings=2、既存の軽微な表記のみ）
+
+受入条件：
+- 未完成・0件誤表示・整備中・リンク切れ・データ不足・表示矛盾・
+  確認中・undefined・null・NaN・TODO・TBD・404・件数不一致・
+  dataAsOf不一致・sourceなし・古いプロフィール・現職/元職混同・古い役職・
+  空カード・壊れたフィルター・検索0件の不自然さを確認した（達成。新たな
+  不備は見つからなかった）
+- 0件表示の意味区分（confirmed_zero/not_collected/not_available/
+  under_review/blocked）を確認した（達成、Phase37と同じ結論で変更なし）
+- 人物状態（現職/元議員/市長/歴代市長）の区分を再検証した（達成。
+  Phase35のバグ修正が本番で維持されていることを確認）
+- 日付基準（LastUpdated/dataAsOf等）がbuild日を基準にしていないことを
+  確認した（達成）
+- 検索インデックスに新規データが反映され、古い削除データが残っていない
+  ことを確認した（達成）
+- SEO（title/description/canonical/OGP/sitemap）を確認した（達成）
+- 自動更新パイプラインで新規データが引き続きカバーされるか検討した
+  （達成。巨大な新規crawlerは不要と判断）
+
+完了記録：
+- 完了日：2026-08-11
+- コミットID：333f919（レポート再生成）
+- 変更概要：監査のみ。新たな不備は見つからなかったため、コード・データの
+  変更は行っていない。
