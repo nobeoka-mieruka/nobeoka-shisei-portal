@@ -53,7 +53,7 @@
         "ordinaryAccountLocalBondBalanceYen": 55428571000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": 465145,
+        "perCapitaYen": null,
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。perCapitaYenは当該年度population（119,164人）で除して当サイトが計算した参考値。",
         "sourceRefs": [
           {
@@ -74,13 +74,13 @@
       "fiscalYear": 2020,
       "isEstimate": false,
       "balance": {
-        "perCapitaYen": 42236,
+        "perCapitaYen": null,
         "fiscalAdjustmentFundYen": null,
         "fiscalReserveFundYen": 5032997000,
         "bondRedemptionFundYen": 2384088000,
         "otherSpecificPurposeFundsYen": 11779648000,
         "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、いずれも延岡市「財政状況資料集」総括表の区分（総務省統一様式）。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）とは別の一次資料・別の分類基準のため、この年度はfiscalAdjustmentFundYenを登録しない。基金全体の合計（totalYen）は総括表に合計行が無いため算出しない。perCapitaYenはfiscalReserveFundYenを当該年度population（119,164人）で除して当サイトが計算した参考値。",
+        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、いずれも延岡市「財政状況資料集」総括表の区分（総務省統一様式）。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）とは別の一次資料・別の分類基準のため、この年度はfiscalAdjustmentFundYenを登録しない。基金全体の合計（totalYen）は総括表に合計行が無いため算出しない。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -141,7 +141,7 @@
       "fiscalYear": 2021,
       "isEstimate": false,
       "balance": {
-        "perCapitaYen": 42603,
+        "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 13447525000,
         "bondRedemptionFundYen": 2844428000,
         "otherSpecificPurposeFundsYen": 10686318000,
@@ -182,8 +182,8 @@
         "ordinaryAccountLocalBondBalanceYen": 56172738000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": 475484,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。 perCapitaYenは当該年度populationで除して当サイトが計算した参考値。",
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -271,7 +271,7 @@
       "fiscalYear": 2022,
       "isEstimate": false,
       "balance": {
-        "perCapitaYen": 43177,
+        "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 13143179000,
         "bondRedemptionFundYen": 2752946000,
         "otherSpecificPurposeFundsYen": 9284472000,
@@ -312,8 +312,8 @@
         "ordinaryAccountLocalBondBalanceYen": 54689691000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": 469174,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。 perCapitaYenは当該年度populationで除して当サイトが計算した参考値。",
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -401,7 +401,7 @@
       "fiscalYear": 2023,
       "isEstimate": false,
       "balance": {
-        "perCapitaYen": 43850,
+        "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 12262706000,
         "bondRedemptionFundYen": 2606827000,
         "otherSpecificPurposeFundsYen": 8118706000,
@@ -442,8 +442,8 @@
         "ordinaryAccountLocalBondBalanceYen": 54021888000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": 470668,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。 perCapitaYenは当該年度populationで除して当サイトが計算した参考値。",
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -531,7 +531,7 @@
       "fiscalYear": 2024,
       "isEstimate": false,
       "balance": {
-        "perCapitaYen": 44516,
+        "perCapitaYen": null,
         "fiscalAdjustmentFundYen": 10508279000,
         "bondRedemptionFundYen": 2404530000,
         "otherSpecificPurposeFundsYen": 10446448000,
@@ -614,8 +614,8 @@
         "ordinaryAccountLocalBondBalanceYen": 53950273000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": 477178,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。 perCapitaYenは当該年度populationで除して当サイトが計算した参考値。",
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",

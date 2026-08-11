@@ -10,6 +10,7 @@ import { CompareTable } from "../components/compare/CompareTable";
 import { CompareItemPicker } from "../components/compare/CompareItemPicker";
 import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
 import { ChartBarIcon } from "../components/icons";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, formatPercentOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
@@ -58,6 +59,25 @@ export function CompareFinancePage() {
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           人口・予算・市債・基金・財政健全化判断比率を、最大4年度まで選んで一覧で比較できます。市の公式評価がない指標について独自の順位づけ・優劣判定は行っていません。当初予算・補正後予算・決算、市債発行額・残高、基金総額・財源調整用基金は、それぞれ定義が異なるため単純比較できません。
         </p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <GlossaryNote
+          term="財政力指数"
+          definition="自治体の財政力を示す指数です。1に近い、または1を超えるほど自主財源の割合が高いことを意味しますが、地方交付税制度の性質上、多くの自治体で1未満です。"
+        />
+        <GlossaryNote
+          term="経常収支比率"
+          definition="人件費や扶助費など毎年度必ず必要な経費に、税収等の経常的な収入がどれだけ使われているかを示す比率です。高いほど、新規事業に使える財源の余裕が少ないとされます。"
+        />
+        <GlossaryNote
+          term="実質公債費比率"
+          definition="収入に対する借金返済額の割合を示す指標で、一定の基準を超えると起債（借金）に国・県の許可が必要になります。"
+        />
+        <GlossaryNote
+          term="将来負担比率"
+          definition="将来的に自治体が負担する可能性のある負債の大きさを、財政規模と比べて示す指標です。数値が高いほど将来の負担が大きいことを意味します。"
+        />
       </div>
 
       <SectionCard title="比較する年度を選ぶ">
@@ -175,6 +195,32 @@ export function CompareFinancePage() {
                   },
                 },
                 {
+                  header: "一人当たり市債残高",
+                  align: "right",
+                  render: (y) => {
+                    const r = computePerCapitaYen(
+                      y.debt?.balance.ordinaryAccountLocalBondBalanceYen,
+                      "市債残高（普通会計地方債）",
+                      y.debt?.balance.sourceRefs ?? [],
+                      y,
+                    );
+                    return r ? formatPerCapitaYen(r.value) : "確認中";
+                  },
+                },
+                {
+                  header: "一人当たり財政調整基金",
+                  align: "right",
+                  render: (y) => {
+                    const r = computePerCapitaYen(
+                      y.fund?.balance.fiscalReserveFundYen,
+                      "財政調整基金残高",
+                      y.fund?.balance.sourceRefs ?? [],
+                      y,
+                    );
+                    return r ? formatPerCapitaYen(r.value) : "確認中";
+                  },
+                },
+                {
                   header: "分母（人口・年度）",
                   align: "right",
                   render: (y) =>
@@ -187,8 +233,17 @@ export function CompareFinancePage() {
                 const items: string[] = [];
                 const initial = computePerCapitaYen(y.budget?.generalAccountInitialBudgetYen, "一般会計当初予算", y.budget?.sourceRefs ?? [], y);
                 const settlement = computePerCapitaYen(y.budget?.generalAccountSettlementYen, "一般会計決算", y.budget?.sourceRefs ?? [], y);
+                const debt = computePerCapitaYen(
+                  y.debt?.balance.ordinaryAccountLocalBondBalanceYen,
+                  "市債残高（普通会計地方債）",
+                  y.debt?.balance.sourceRefs ?? [],
+                  y,
+                );
+                const fund = computePerCapitaYen(y.fund?.balance.fiscalReserveFundYen, "財政調整基金残高", y.fund?.balance.sourceRefs ?? [], y);
                 if (initial) items.push(`${fiscalYearLabel(y.fiscalYear)}の${describePerCapita(initial, "一人当たり当初予算")}`);
                 if (settlement) items.push(`${fiscalYearLabel(y.fiscalYear)}の${describePerCapita(settlement, "一人当たり決算額")}`);
+                if (debt) items.push(`${fiscalYearLabel(y.fiscalYear)}の${describePerCapita(debt, "一人当たり市債残高")}`);
+                if (fund) items.push(`${fiscalYearLabel(y.fiscalYear)}の${describePerCapita(fund, "一人当たり財政調整基金")}`);
                 return items;
               }).map((text, i) => <li key={i}>{text}</li>)}
             </ul>
