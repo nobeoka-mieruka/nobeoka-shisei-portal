@@ -33154,7 +33154,7 @@
     "extractionConfidence": 0.4,
     "extractionNotes": "このページには「再議」に関する記述が含まれており、通常の一覧表と構成が異なるため自動抽出の精度が保証できません",
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-09",
+    "lastVerified": "2026-08-11",
     "verificationStatus": "verified",
     "verificationNote": "延岡市議会公式ホームページ公表の「議案等審議結果」PDF原文を目視で確認し、件名・審議結果・議決日が自動抽出結果と一致することを確認した（自動抽出は同一PDF内に含まれる【再議の件】欄の存在により、件名抽出の信頼度が機械的に引き下げられ確認待ちとなっていたが、本項目自体の内容には誤りがなかった）。 会議録原文（令和元年9月定例会、R010913A＝9月13日／R010930A＝9月30日）の委員長報告・議長の採決宣言を精読し確認した。 委員会付託省略（本会議で直接、御異議なく選任に同意）。",
     "unresolvedFields": [
@@ -33164,7 +33164,8 @@
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2019-09-ketsugi-1",
@@ -33186,7 +33187,7 @@
     "extractionConfidence": 0.4,
     "extractionNotes": "結果を示すキーワードが見つかりませんでした; 件名を特定できませんでした; このページには「再議」に関する記述が含まれており、通常の一覧表と構成が異なるため自動抽出の精度が保証できません",
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-09",
+    "lastVerified": "2026-08-11",
     "verificationStatus": "verified",
     "verificationNote": "延岡市議会公式ホームページ公表の「議案等審議結果」PDF原文（出典PDF該当ページ）を目視で確認し、件名・審議結果・議決日を手動で補完した（自動抽出は決議の件名が複合的な記載形式のため件名を特定できず、確認待ちとなっていた）。 会議録原文（令和元年9月定例会、R010913A＝9月13日／R010930A＝9月30日）の委員長報告・議長の採決宣言を精読し確認した。 提出者（佐藤誠議員ほか2名）、委員会付託省略で本会議へ直接提出。異議ありのため起立採決。",
     "unresolvedFields": [],
@@ -33195,7 +33196,8 @@
     "summarySource": "template",
     "publicationStatus": "published",
     "votingDate": "2019-09-13",
-    "voteMethod": "起立多数"
+    "voteMethod": "起立多数",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2019-09-seigan-1",
@@ -38408,14 +38410,15 @@
     "extractionSource": "manual",
     "extractionConfidence": 1,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-09",
+    "lastVerified": "2026-08-11",
     "verificationStatus": "verified",
     "verificationNote": "延岡市議会公式会議録検索システム（令和元年6月定例会・令和元年6月17日本会議、fileName:R010617A）の議事日程を直接確認し、議案番号を特定した。件名・審議結果・議決日はPDFから、議案番号は公式会議録の議事日程から補完した（推測による割り当てではなく、会議録原文に明記された番号のみを採用）。 会議録原文（令和元年6月定例会、R010617A＝6月17日／R010705A＝7月5日）の委員長報告・議長の採決宣言を精読し確認した。 委員会付託省略（本会議で直接、御異議なく選任に同意）。",
     "summary": "令和元年6月定例会に提出された議案「固定資産評価審査委員会委員の選任（長谷川明氏）」です。議決結果は「同意」です。市長提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "付託なし（本会議で即日議決）"
   },
   {
     "id": "2019-06-gian-26",
@@ -38437,14 +38440,15 @@
     "extractionSource": "manual",
     "extractionConfidence": 1,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-09",
+    "lastVerified": "2026-08-11",
     "verificationStatus": "verified",
     "verificationNote": "延岡市議会公式会議録検索システム（令和元年6月定例会・令和元年6月17日本会議、fileName:R010617A）の議事日程を直接確認し、議案番号を特定した。件名・審議結果・議決日はPDFから、議案番号は公式会議録の議事日程から補完した（推測による割り当てではなく、会議録原文に明記された番号のみを採用）。 会議録原文（令和元年6月定例会、R010617A＝6月17日／R010705A＝7月5日）の委員長報告・議長の採決宣言を精読し確認した。 議会運営委員会からの提案（proposerType=committee相当）、委員会付託省略で本会議へ直接提出、御異議なく可決。",
     "summary": "令和元年6月定例会に提出された議案「延岡市議会会議規則の一部を改正する規則の制定」です。議決結果は「原案可決」です。委員会提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "議会運営委員会"
   },
   {
     "id": "2019-06-ikensho-1",
@@ -38466,14 +38470,15 @@
     "extractionSource": "manual",
     "extractionConfidence": 1,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-09",
+    "lastVerified": "2026-08-11",
     "verificationStatus": "verified",
     "verificationNote": "延岡市議会公式会議録検索システム（令和元年6月定例会・令和元年7月5日本会議、fileName:R010705A）の議事日程（本会議冒頭のGetText3.exeテキスト）を直接確認し、議案番号を特定した。議案等審議結果PDF（1597.pdf）には「議案番号等」列が存在しない古い様式のため、件名・審議結果・議決日はPDFから、議案番号は公式会議録の議事日程から補完した（推測による割り当てではなく、会議録原文に明記された番号のみを採用）。 会議録原文（令和元年6月定例会、R010617A＝6月17日／R010705A＝7月5日）の委員長報告・議長の採決宣言を精読し確認した。 議会運営委員会からの提案理由説明、本会議で直接一括採決（委員会付託省略）。",
     "summary": "令和元年6月定例会に提出された意見書「過疎地域自立促進特別措置法の失効に伴う新たな法律の制定を求める意見書（案）」です。議決結果は「原案可決」です。委員会提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "議会運営委員会"
   },
   {
     "id": "2019-06-ikensho-2",
@@ -38495,14 +38500,15 @@
     "extractionSource": "manual",
     "extractionConfidence": 1,
     "extractedAt": "2026-08-08",
-    "lastVerified": "2026-08-09",
+    "lastVerified": "2026-08-11",
     "verificationStatus": "verified",
     "verificationNote": "延岡市議会公式会議録検索システム（令和元年6月定例会・令和元年7月5日本会議、fileName:R010705A）の議事日程（本会議冒頭のGetText3.exeテキスト）を直接確認し、議案番号を特定した。議案等審議結果PDF（1597.pdf）には「議案番号等」列が存在しない古い様式のため、件名・審議結果・議決日はPDFから、議案番号は公式会議録の議事日程から補完した（推測による割り当てではなく、会議録原文に明記された番号のみを採用）。 会議録原文（令和元年6月定例会、R010617A＝6月17日／R010705A＝7月5日）の委員長報告・議長の採決宣言を精読し確認した。 議会運営委員会からの提案理由説明、本会議で直接一括採決（委員会付託省略）。",
     "summary": "令和元年6月定例会に提出された意見書「地方財政の充実・強化を求める意見書（案）」です。議決結果は「原案可決」です。委員会提出の案件です。詳細な内容は出典PDFでご確認ください。",
     "summaryGeneratedAt": "2026-08-08",
     "summarySource": "template",
     "publicationStatus": "published",
-    "voteMethod": "簡易採決"
+    "voteMethod": "簡易採決",
+    "committee": "議会運営委員会"
   },
   {
     "id": "2019-06-chinjo-1",
