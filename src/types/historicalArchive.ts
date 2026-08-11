@@ -188,7 +188,13 @@ export interface ArchiveMunicipalBondBalance {
 export interface ArchiveFundBalance {
   totalYen: number | null;
   fiscalAdjustmentFundYen: number | null;
-  /** 減債基金。財源調整用基金の定義に含まれ単独では確認できない場合はnullのまま、definitionNoteで補足する。 */
+  /**
+   * 財政調整基金単体（総務省統一様式「財政状況資料集」の区分）。上記fiscalAdjustmentFundYen
+   * （財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の広義合計、
+   * financeDashboard.jsonの定義）とは別の数値であり、混同しないこと。
+   */
+  fiscalReserveFundYen: number | null;
+  /** 減債基金。延岡市公表の財政状況資料集で単独確認できる年度はこの値を用いる。確認できない年度はnullのまま、definitionNoteで補足する。 */
   bondRedemptionFundYen: number | null;
   otherSpecificPurposeFundsYen: number | null;
   perCapitaYen: number | null;

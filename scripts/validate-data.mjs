@@ -1496,6 +1496,7 @@ try {
   const FUND_BALANCE_FIELDS = [
     "totalYen",
     "fiscalAdjustmentFundYen",
+    "fiscalReserveFundYen",
     "bondRedemptionFundYen",
     "otherSpecificPurposeFundsYen",
     "perCapitaYen",
