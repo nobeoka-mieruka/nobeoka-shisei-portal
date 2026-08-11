@@ -218,6 +218,21 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     }),
   },
   {
+    key: "fiscalReserveFund",
+    label: "財政調整基金",
+    unit: "円（億円表示）",
+    group: "fund",
+    chartKind: "line",
+    definitionNote:
+      "財政調整基金単独の残高（総務省統一様式「財政状況資料集」の区分）。上記の財源調整用基金（財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計）とは定義が異なるため単純比較できません。",
+    formatValue: formatOkuYenOrConfirming,
+    getPoint: (y) => ({
+      value: y.fund?.balance.fiscalReserveFundYen ?? null,
+      sourceRefs: y.fund?.balance.sourceRefs ?? [],
+      definitionNoteOverride: y.fund?.balance.definitionNote,
+    }),
+  },
+  {
     key: "financialStrengthIndex",
     label: "財政力指数",
     unit: "（指数）",
