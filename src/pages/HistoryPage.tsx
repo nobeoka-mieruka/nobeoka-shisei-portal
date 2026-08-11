@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { sortedCivicTimelineEvents, civicTimelineCategories, civicTimelineDecades } from "../lib/civicTimeline";
 import archiveMayorsData from "../data/archiveMayors.json";
@@ -39,9 +39,15 @@ export function HistoryPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [decade, setDecade] = useState("all");
   const [category, setCategory] = useState("all");
+  // 歴代市長ページ（/mayors/:slug）から「この市長の在任期間の出来事だけ見る」形で遷移してきた場合の
+  // 絞り込み。relatedPersonIdsは根拠が確認できた場合のみ設定されるため、この絞り込みも
+  // 一次資料で確認できた対応関係の範囲に限られる（「在任中に発生した」であり「市長の実績」ではない）。
+  const personFilter = searchParams.get("person") ?? "";
+  const filterMayor = personFilter ? archiveMayors.find((m) => m.id === personFilter) : undefined;
 
   const allEvents = sortedCivicTimelineEvents();
   const decades = civicTimelineDecades();
@@ -60,13 +66,20 @@ export function HistoryPage() {
     ...civicTimelineCategories.map((c) => ({ value: c, label: c })),
   ];
 
+  const clearPersonFilter = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("person");
+    setSearchParams(next, { replace: true });
+  };
+
   const filtered = useMemo(() => {
     return allEvents.filter((e) => {
       const matchesDecade = decade === "all" || Math.floor(e.year / 10) * 10 === Number(decade);
       const matchesCategory = category === "all" || e.category === category;
-      return matchesDecade && matchesCategory;
+      const matchesPerson = !personFilter || e.relatedPersonIds?.includes(personFilter);
+      return matchesDecade && matchesCategory && matchesPerson;
     });
-  }, [allEvents, decade, category]);
+  }, [allEvents, decade, category, personFilter]);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -89,6 +102,22 @@ export function HistoryPage() {
         </Link>
         で別途確認できます。延岡市公式資料で確認できる範囲のみを掲載しており、日付が月までしか判明していない出来事は「〇〇年〇月」と表示しています。
       </p>
+
+      {personFilter && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-primary-container p-3 text-sm text-on-primary-container">
+          <p>
+            {filterMayor ? `${filterMayor.name}市長の在任期間中に発生したことが確認できた出来事のみ表示中` : "指定した人物の在任期間中に発生したことが確認できた出来事のみ表示中"}
+            （在任中の出来事であり、その市長が実施した政策・実績を示すものではありません）
+          </p>
+          <button
+            type="button"
+            onClick={clearPersonFilter}
+            className={`shrink-0 rounded-full bg-surface-container-lowest px-3 py-1.5 text-xs font-medium text-on-surface hover:opacity-90 ${linkClass}`}
+          >
+            絞り込みを解除
+          </button>
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center gap-2">
         <FilterSelect label="年代" value={decade} onChange={setDecade} options={decadeOptions} />

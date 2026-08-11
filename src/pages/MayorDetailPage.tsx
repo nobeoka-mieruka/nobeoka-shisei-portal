@@ -207,10 +207,10 @@ export function MayorDetailPage() {
           <>
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
               延岡市公式ホームページの年表・資料をもとにした「
-              <Link to="/history" className={`text-primary hover:underline ${linkClass}`}>
+              <Link to={`/history?person=${mayor.id}`} className={`text-primary hover:underline ${linkClass}`}>
                 市政年表
               </Link>
-              」のうち、この市長の在任期間（確認できた任期）に含まれることが一次資料から確認できた出来事です。市庁舎・行政組織・災害・公共事業・教育福祉産業等を対象としており、網羅を保証するものではありません。
+              」のうち、この市長の在任期間（確認できた任期）に含まれることが一次資料から確認できた出来事です（在任中に発生した出来事であり、この市長が実施した政策・実績を示すものではありません）。市庁舎・行政組織・災害・公共事業・教育福祉産業等を対象としており、網羅を保証するものではありません。
             </p>
             <ul className="mt-3 space-y-2">
               {relatedEvents.map((ev) => (
@@ -226,6 +226,12 @@ export function MayorDetailPage() {
                 </li>
               ))}
             </ul>
+            <Link
+              to={`/history?person=${mayor.id}`}
+              className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+            >
+              市政年表でこの市長の在任期間の出来事だけを見る
+            </Link>
           </>
         ) : (
           <p className="mt-2 text-sm text-on-surface-variant">
