@@ -1,12 +1,13 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-11（Phase19「議案の付託委員会・審査経路の残件完全処理」・Phase20
-「議案・委員会・請願・陳情の審査フロー統合・可視化」（TASK-055）完了。committee確認率
-98.0%に到達し、議案詳細ページへ提出→委員会付託→本会議採決の時系列フロー表示を追加）
+最終更新日：2026-08-11（Phase21「延岡市の財政・予算・決算データの年度横断完全化」
+（TASK-056）完了。archiveFiscalYears.jsonに令和2〜6年度（FY2020-2024）の予算・
+財政健全化判断比率・基金内訳を新規登録し、budgetの確認率が6年中1年→6年中5年、
+finance（比率）が6年中1年→6年中5年に到達。validate:financeを新設）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-11時点）：
-DONE 57／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計66
+DONE 58／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計67
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 7件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」参照）。
@@ -4186,4 +4187,114 @@ BLOCKED理由・再開条件：
 完了記録：
 - 完了日：2026-08-11
 - コミットID：d06cb97
+- 変更概要：上記のとおり。
+
+---
+
+### TASK-056 延岡市の財政・予算・決算データの年度横断完全化（Phase21）
+
+状態：DONE（2026-08-11）
+優先度：A（ユーザー指示「Phase 21」を最優先で着手）
+対象：`src/types/historicalArchive.ts`、`scripts/validate-data.mjs`、
+`src/data/archiveFiscalYears.json`、`src/lib/archiveFinanceMetrics.ts`、
+`scripts/validate-finance.mjs`（新設）、`package.json`、`src/pages/DataStatusPage.tsx`、
+`src/pages/CompareFinancePage.tsx`、`src/pages/FinanceFundsPage.tsx`、
+`src/pages/FinanceDebtPage.tsx`
+
+目的：「延岡市の財政状況を年度ごとに比較できる状態」を完成させる。
+
+事前調査（着手前に実施）：
+- `src/data/archiveFiscalYears.json`（年度別財政アーカイブ）・`src/lib/archiveFinanceMetrics.ts`
+  （18指標のメトリクスレジストリ）・`FinanceBudgetPage.tsx`/`FinanceDebtPage.tsx`/
+  `FinanceFundsPage.tsx`/`CompareFinancePage.tsx`等のUI基盤は**既にほぼ完成していた**ことを
+  確認（グラフ・年度比較ピッカー・年度別テーブルは実装済み）。真のボトルネックは
+  archiveFiscalYears.jsonの**データ完全性**のみで、budgetサブオブジェクトは6年中1年
+  （令和8年度のみ）、finance（財政健全化判断比率）は6年中1年（しかも一部null）しか
+  埋まっていなかった
+- 延岡市公式サイト「財政状況資料集」（総務省統一様式Excel、令和3年度版〜令和6年度版、
+  `https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html`からリンク）を新たに発見・
+  ダウンロードし、「総括表」シートを解析。隣接年度版ファイル間（例：令和6年度版のR5列と
+  令和5年度版のR5列）で全項目が完全一致することを確認し、令和2〜6年度（FY2020〜2024）
+  5年分の歳入総額・歳出総額・実質収支・財政力指数・経常収支比率・実質公債費比率・
+  将来負担比率・公債費負担比率・地方債現在高・財政調整基金・減債基金・その他特定目的基金を
+  取得した
+- 当初予算額（4月議決時点）の複数年度推移を示す資料（`25836.pdf`「令和8年度予算編成概要」等）
+  も発見したが、WebFetch・pdftotextともに日本語ラベルが文字化けし、ラベルと数値の対応付けが
+  安全にできなかったため、この資料からのデータ登録は見送った（BLOCKED、推測での確定はしない）
+
+実装内容：
+- `ArchiveFundBalance`型に`fiscalReserveFundYen`（財政調整基金単体、総務省統一様式の区分）を
+  新設。既存の`fiscalAdjustmentFundYen`（財政調整積立基金・地域づくり推進事業基金・退職手当
+  基金・減債基金の広義合計、financeDashboard.jsonの定義）とは別のフィールドとして明確に区別。
+  `validate-data.mjs`の`FUND_BALANCE_FIELDS`定数にも追加
+- `archiveFiscalYears.json`：FY2020を新規レコードとして追加。FY2021〜2024へbudget
+  （歳入総額・歳出総額）・finance（財政力指数・経常収支比率・実質公債費比率・将来負担比率・
+  公債費負担比率）・fund.balance（財政調整基金・減債基金）を新規登録した。将来負担比率が
+  FY2020のみ資料上「-」（算定なし）だったため、0でも未確認でもなく「算定なし」として
+  notesで明記した。FY2024の既存`otherSpecificPurposeFundsYen`／`totalYen`（決算審査意見書
+  ベース、別の分類基準）は上書きせず、財政状況資料集の別集計値は参考情報としてnotesに記載
+  するに留めた（一次資料ごとの定義の違いを混同しない）。FY2026のbudgetへ市税・地方交付税・
+  国庫支出金を追加（既存financeDashboard.jsonのrevenue配列から千円→円換算）
+- `src/lib/archiveFinanceMetrics.ts`に`fiscalReserveFund`（財政調整基金）メトリクスを追加
+- **1人当たり指標の誤り修正**：当初、`debt.balance.perCapitaYen`／`fund.balance.perCapitaYen`
+  へ当サイトの計算値（残高÷人口）を直接登録したが、これらのフィールドは
+  `src/lib/archivePerCapita.ts`のコメントが明記するとおり「元資料に既に1人当たり値として
+  掲載されている場合のみ」使う設計であり、`CompareFinancePage.tsx`の「市民1人当たりの市債
+  残高・基金残高（元資料掲載値）」表がそのまま「元資料掲載値」として表示してしまうことに
+  気づいた。該当値をnullへ戻し、代わりに既存の`computePerCapitaYen()`ヘルパー（当初予算・
+  決算で既に使われている、算出式を明示するメカニズム）を市債残高・財政調整基金にも拡張して
+  「当サイトによる算出値」表に追加した。事実の混同を未然に防いだ修正
+- `scripts/validate-finance.mjs`（新設）：年度をまたいだ・フィールド間の論理矛盾のみを検証
+  （validate-data.mjsで既にカバー済みのチェックは再実装しない）。人口の桁異常・未来年度の
+  決算・金額の桁異常（千円取り違えの疑い）をerror/warning、基金内訳と総額の不一致・財政力
+  指数の非現実的な値をwarning、財政調整基金の複数年度同額・financeDashboard.jsonとの市債
+  残高クロスチェックをinfo（同額は延岡市の実態のためwarnにすると恒久的な誤検知になる）で
+  分類。`npm run validate:finance`で実行
+- `DataStatusPage.tsx`：財政（予算・市債・基金・財政健全化判断比率・人口）の年度確認率を、
+  既存の`CompletenessMetric`ダッシュボード（confirmed/partial/not_collected等の語彙）へ
+  新規に5行追加（従来はプレーンな件数表示のみで、収録率表示の対象外だった）
+- `FinanceFundsPage.tsx`（基金・財政調整基金）・`FinanceDebtPage.tsx`（市債）・
+  `CompareFinancePage.tsx`（財政力指数・経常収支比率・実質公債費比率・将来負担比率）に
+  用語解説（GlossaryNote）を追加（財政系ページでは今回が初、6用語を3ページに分散）
+
+自治体比較との整合確認（Section19）：
+- `municipalityComparison.json`（TASK-013、令和5年度決算ベース）の延岡市の実質公債費比率
+  (8.1%)・将来負担比率(2.1%)が、今回の財政状況資料集抽出値（FY2023）と完全一致することを
+  確認した。財政力指数は0.515 vs 0.52で軽微な差（別資料の丸め桁差）だが、双方とも正当な
+  一次資料のため変更しなかった
+
+検証結果：
+- `validate:data`（errors=0、billVotes=1177不変、warnings=14=ベースライン）
+- `validate:finance`（errors=0、warnings=0、info=6：市債残高5年度分の他ファイルとの一致、
+  財政調整基金5年同額の検知）
+- `typecheck`／`lint`／`test`（26/26成功）
+- `build`（prerender 1904/1904ルート、`validate:seo` failures=0、`validate:content` errors=0）
+- `validate:freshness`（errors=0）／`validate:sources`（errors=0、info=40=既存の二次資料
+  利用明示のみ）／`validate:completeness`（errors=0）／`release:check`（failures=0、
+  既存の軽微なwarning2件のみ、本タスクとは無関係）
+- ベースライン再確認：billVotes=1,177／一般質問=397（`QUESTION_LIKE_SPEECH_TYPES`基準）／
+  質問項目=1,470／現職議員=26／政治資金団体=21、すべて不変
+- 本番確認：Cloudflare Pagesの最新デプロイ（commit `b0f6880`）がProductionでActiveになった
+  ことを`wrangler pages deployment list`で確認。キャッシュ回避クエリ付きで`/finance`・
+  `/finance/budget`・`/finance/debt`・`/finance/funds`・`/compare/finance`・
+  `/compare/budget`・`/compare/debt`・`/compare/funds`・`/compare/population`・
+  `/compare/municipalities`・`/data-status`・`/sitemap.xml`・`/robots.txt`を直接アクセスし、
+  全てHTTP 200、ビルド日時フッターがcommit `b0f6880`のコミット日時と一致することを確認した。
+  FinanceBudgetPageに令和2〜6年度・令和8年度の6年度分が表示されることも確認済み
+- 本セッションではChromeブラウザ拡張が未接続だったため、実機ブラウザでのconsole error・
+  hydration error・390px表示確認は今回未実施（curlベースの構造検証のみで代替）。次回、
+  拡張が接続できるセッションで改めて実施することを推奨する
+
+残作業・既知の限界：
+- 当初予算額（4月議決時点）の複数年度推移：一次資料PDFが文字化けにより安全に抽出できず
+  未登録のまま（2026年度以外はnull）。将来、別の資料形式（HTML等）が見つかれば追加可能
+- 令和7年度（FY2025）：財政状況資料集がR6版までしか公表されておらず、財政指標・予算・
+  市債残高は一次資料なし。公表され次第、追加すること
+- 財政調整基金以外の基金内訳（財政状況資料集の総括表由来の値）は令和2〜4年度が新規追加、
+  基金全体（totalYen）は総括表に合計行がないため未算出のまま
+
+完了記録：
+- 完了日：2026-08-11
+- コミットID：46422cf〜b0f6880（6コミット：型追加、データ本体、validate:finance新設、
+  1人当たり指標修正、GlossaryNote・完全性ダッシュボード追加、自動生成ファイル同期）
 - 変更概要：上記のとおり。
