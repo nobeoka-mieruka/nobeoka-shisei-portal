@@ -3021,6 +3021,51 @@ try {
   else throw e;
 }
 
+// --- kohoNobeokaIssues.json（「広報のべおか」バックナンバー索引：号とPDF URLのカタログ） ---
+try {
+  const kohoIssues = readJson("src/data/kohoNobeokaIssues.json");
+  if (!Array.isArray(kohoIssues)) throw new Error("配列ではありません");
+
+  checkDuplicateIds({ err, warn }, kohoIssues, "id", "kohoNobeokaIssues.json");
+
+  const ISSUE_YEAR_MONTH_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
+  const seenYearMonths = new Map();
+
+  for (const i of kohoIssues) {
+    const tag = `kohoNobeokaIssues.json (${i.id ?? "id不明"})`;
+    if (isBlank(i.id)) err(tag, "idが空です");
+    if (isBlank(i.issueYearMonth) || !ISSUE_YEAR_MONTH_RE.test(i.issueYearMonth)) {
+      err(tag, `issueYearMonthの形式が不正です（YYYY-MM形式にしてください）: ${i.issueYearMonth}`);
+    } else {
+      // 同一年月の号が複数登録されている場合、増刊号等の可能性もあるため誤りとは限らないが、
+      // スクレイピング時の重複取得の疑いもあるため要確認としてwarnにする（errにはしない）。
+      const count = (seenYearMonths.get(i.issueYearMonth) ?? 0) + 1;
+      seenYearMonths.set(i.issueYearMonth, count);
+    }
+    if (isBlank(i.title)) err(tag, "titleが空です");
+    if (isBlank(i.pdfUrl) || !URL_RE.test(i.pdfUrl)) err(tag, `pdfUrlの形式が不正です: ${i.pdfUrl}`);
+    if (i.sourceOrganization !== "延岡市") err(tag, `sourceOrganizationは"延岡市"にしてください: ${i.sourceOrganization}`);
+    if (i.fileSizeApproxMb != null && (typeof i.fileSizeApproxMb !== "number" || i.fileSizeApproxMb <= 0)) {
+      err(tag, `fileSizeApproxMbが不正です: ${i.fileSizeApproxMb}`);
+    }
+    if (isBlank(i.checkedAt) || Number.isNaN(Date.parse(i.checkedAt))) err(tag, `checkedAtの形式が不正です: ${i.checkedAt}`);
+  }
+  for (const [ym, count] of seenYearMonths) {
+    if (count > 1) warn("kohoNobeokaIssues.json", `同一年月の号が${count}件登録されています（増刊号等でなければ重複取得の疑いがあります）: ${ym}`);
+  }
+
+  // PDF取得元URLが公式ドメイン（city.nobeoka.miyazaki.jp）であることを確認する
+  // （推測でURLを組み立てて登録していないかの簡易チェック）。
+  for (const i of kohoIssues) {
+    if (typeof i.pdfUrl === "string" && !i.pdfUrl.startsWith("https://www.city.nobeoka.miyazaki.jp/")) {
+      err(`kohoNobeokaIssues.json (${i.id ?? "id不明"})`, `pdfUrlが延岡市公式ドメイン以外です: ${i.pdfUrl}`);
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("kohoNobeokaIssues.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- archiveAiJobs.json / archiveEntityExtractionCandidates.json（フェーズ10C：AI処理ジョブキュー） ---
 try {
   const archiveAiJobs = readJson("src/data/archiveAiJobs.json");
