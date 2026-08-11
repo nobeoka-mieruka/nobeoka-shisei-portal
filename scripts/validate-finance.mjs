@@ -16,6 +16,20 @@
  *     一致しない（fiscalReserveFundYen・bondRedemptionFundYenはfiscalAdjustmentFundYenの
  *     内数のため合計に含めない）
  *   - 財政力指数が0または2.0超（延岡市規模の自治体として非現実的な値）
+ *   - 当初予算額・補正後予算額・決算額のうち2つ以上が非nullかつ完全に同一の値
+ *     （当初予算と決算の取り違えの疑い。年度途中の暫定値がたまたま同額という可能性もあるため
+ *     errorではなくwarning）
+ *   - perCapitaYen（1人当たり残高、元資料に直接掲載されている値専用のフィールド）が設定されて
+ *     いるのに、対応するsourceRefsのどこにも「1人当たり」「人当たり」という語が無い
+ *     （当サイトの計算値を誤って直接保存した疑い。src/lib/archivePerCapita.tsの
+ *     computePerCapitaYen()を使うべき値をperCapitaYenへ直接書いてしまうミスをPhase21で
+ *     一度実際に起こしたため、再発防止のチェック）
+ *
+ * 検討したが採用しなかったチェック：
+ *   - sourceRefsのsourceTitle・notesに含まれる「令和N年度」表記とfiscalYearの一致検証
+ *     （試作したところ、資料タイトルが正当に「令和3年度版〜令和6年度版」等の範囲表記や、
+ *     別年度の資料から遡及的にこの年度の値を採用した旨の説明を含む場合が多く、
+ *     既存の正しいデータに対して26件の誤検知が発生したため不採用とした）
  *
  * info（参考情報、誤りではない）：
  *   - financeDashboard.jsonのdebtBalanceTrendとarchiveFiscalYears.jsonの
@@ -102,6 +116,45 @@ for (const y of archiveFiscalYears) {
       warnings.push(`${tag}: 財政力指数（${fsi}）が延岡市規模の自治体として非現実的な値です。算定不能の場合はnullを検討してください`);
     }
   }
+
+  // --- 当初予算・補正後予算・決算の取り違えチェック ---
+  {
+    const b = y.budget;
+    if (b) {
+      const stages = [
+        ["当初予算", b.generalAccountInitialBudgetYen],
+        ["補正後予算", b.generalAccountFinalBudgetYen],
+        ["決算", b.generalAccountSettlementYen],
+      ].filter(([, v]) => typeof v === "number");
+      for (let i = 0; i < stages.length; i++) {
+        for (let j = i + 1; j < stages.length; j++) {
+          if (stages[i][1] === stages[j][1]) {
+            warnings.push(
+              `${tag}: budget.${stages[i][0]}とbudget.${stages[j][0]}が完全に同一の値（${stages[i][1]}円）です。取り違えて登録していないか確認してください`,
+            );
+          }
+        }
+      }
+    }
+  }
+
+  // --- perCapitaYenの直接保存チェック（元資料に明示掲載されている値専用のフィールド） ---
+  for (const [fieldLabel, balance] of [
+    ["debt.balance", y.debt?.balance],
+    ["fund.balance", y.fund?.balance],
+  ]) {
+    if (typeof balance?.perCapitaYen === "number") {
+      const mentionsPerCapita = (balance.sourceRefs ?? []).some(
+        (s) => (s.sourceTitle ?? "").includes("人当たり") || (s.notes ?? "").includes("人当たり"),
+      );
+      if (!mentionsPerCapita) {
+        warnings.push(
+          `${tag}: ${fieldLabel}.perCapitaYenが設定されていますが、出典に「1人当たり」の記載が見当たりません。当サイトの計算値を直接保存していないか確認してください（算出値はcomputePerCapitaYen()を使い、専用フィールドには保存しない）`,
+        );
+      }
+    }
+  }
+
 }
 
 // --- 財政調整基金の値が複数年度で同一（infoのみ、警告にしない） ---
