@@ -17,23 +17,6 @@
     "notes": "この対象は本ファイルの巡回対象（crawlerTargetId）を新設していない。理由：`.github/workflows/update-council-documents.yml`が毎日、議案審議結果PDF全件を実際に再取得・再抽出（scripts/fetch-nobeoka-council-documents.mjs・scripts/extract-council-pdf-data.mjs）しており、新しい一次資料が公開されればbillVotes.jsonへ自動的に反映される（ハッシュ監視より精度の高い、既存の実データ再取得の仕組みが既に対象をカバーしている）。本エントリはBLOCKED 7件の網羅性のためだけに登録し、check-blocked-resume.mjsの処理対象からは除外する（crawlerTargetId=nullのエントリは同スクリプトがスキップする設計）。"
   },
   {
-    "taskId": "TASK-011",
-    "title": "全国報酬比較データの投入（全国市議会議長会調査結果の最新年度版待ち）",
-    "status": "blocked",
-    "autoResumeClass": "conditional",
-    "detectionMode": "hash",
-    "resumeCondition": "OCR環境（Tesseract等）の導入、または全国市議会議長会が新しい年度版（テキスト検索可能な形式、または前年と異なる形式）を公表すること。",
-    "sourceUrl": "https://www.si-gichokai.jp/research/teisu/",
-    "expectedSourceType": "official-page",
-    "crawlerTargetId": "gichokai-compensation-survey",
-    "matchConfidence": "indirect",
-    "lastAcknowledgedHash": "a25a27ef7e479858b9b2b82148407efc963cfd5db966631ac3225342c5d92f7a",
-    "lastAcknowledgedAt": "2026-08-10T07:20:00+09:00",
-    "lastTransitionAt": null,
-    "lastCheckedAt": "2026-08-10T07:20:00+09:00",
-    "notes": "一覧ページのハッシュ変更を検知するのみで、掲載PDFが実際にテキスト層を持つか（=OCR不要で処理できるか）は人が確認する必要がある。新しい年度版が公表されても、既存版（令和6年12月31日現在版）と同じ画像スキャン形式である可能性が高いため、conditional（弱いシグナル）に分類する。2026-08-10、初回巡回でベースラインハッシュを設定。"
-  },
-  {
     "taskId": "TASK-012",
     "title": "類似団体報酬比較データの投入（人事行政の運営状況の個別実額掲載待ち）",
     "status": "blocked",

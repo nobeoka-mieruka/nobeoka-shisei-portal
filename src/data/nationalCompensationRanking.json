@@ -1,17 +1,17 @@
 {
-  "sourceTitle": "総務省「令和7年地方公共団体別給与等の比較」",
-  "sourceOrganization": "総務省",
-  "sourceUrl": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/teiin-kyuuyo02.html",
-  "publishedDate": "2026-03-30",
-  "referenceDate": "2025-04-01",
-  "calculationMethod": "総務省「地方公務員給与実態調査」の公表資料（e-Stat「地方公共団体別給与等の比較」）を確認したところ、該当統計表は表題自体が「特別職の定数及び平均給料（報酬）月額」であり、都道府県別・団体区分別などの平均値の公表であることが確認できた。全国792市＋東京23特別区（計815市区、町村を除く）について、市長・議長・副議長・議員それぞれの月額を市区ごとの個別実数として横断比較できる一次資料は確認できていない。",
+  "sourceTitle": "全国市議会議長会「市議会議員報酬に関する調査結果」（令和7年12月31日現在）",
+  "sourceOrganization": "全国市議会議長会",
+  "sourceUrl": "https://www.si-gichokai.jp/research/teisu/1208461_1954.html",
+  "publishedDate": "2026-06-04",
+  "referenceDate": "2025-12-31",
+  "calculationMethod": "全国市議会議長会が公表するExcel形式の調査結果（20260604_housyu_tyousa.xlsx、全国815市区の議長・副議長・議員の報酬月額を個別実数で収録）をダウンロードし、xlsxパッケージで解析した。延岡市の行（宮崎県／延岡市／人口段階C／人口111,831人）を特定し、議長516,000円・副議長471,000円・議員435,000円を確認した。順位は、815市区全件を各役職の報酬月額で降順に並べた場合の延岡市の順位（同額の場合は資料内の並び順を維持）。市長の報酬はこの調査の対象外（市議会議員報酬の調査のため）のため未確認のままとした。",
   "targetCount": 815,
-  "lastVerified": "2026-07-20",
-  "notes": "全国の市区を同一条件で比較できる公式の個別データを確認できていないため、推定順位は掲載していません。全国統一の基準で815市区すべてを個別比較できる一次資料を確認でき次第、実数に置き換えます。推定値・部分順位は掲載しません。",
+  "lastVerified": "2026-08-11",
+  "notes": "従来、総務省「地方公共団体別給与等の比較」（都道府県別・団体区分別の平均値のみで市区ごとの個別実数ではない）しか確認できなかったが、全国市議会議長会が公表する調査結果（令和7年12月31日現在版）がExcel形式（画像スキャンではなくテキストデータ）で公開されていることを新たに確認し、市区ごとの個別実数を取得できた。市長の報酬月額は本調査の対象外のため未確認のまま。推定値・按分値は使用していない。",
   "roles": [
     { "role": "mayor", "monthly": null, "rank": null },
-    { "role": "chair", "monthly": null, "rank": null },
-    { "role": "viceChair", "monthly": null, "rank": null },
-    { "role": "member", "monthly": null, "rank": null }
+    { "role": "chair", "monthly": 516000, "rank": 319 },
+    { "role": "viceChair", "monthly": 471000, "rank": 284 },
+    { "role": "member", "monthly": 435000, "rank": 297 }
   ]
 }
