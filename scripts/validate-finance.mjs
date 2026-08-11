@@ -24,12 +24,39 @@
  *     （当サイトの計算値を誤って直接保存した疑い。src/lib/archivePerCapita.tsの
  *     computePerCapitaYen()を使うべき値をperCapitaYenへ直接書いてしまうミスをPhase21で
  *     一度実際に起こしたため、再発防止のチェック）
+ *   - debt自体が特定の年度だけ欠落している（前後の年度にdebtがあるのに、その年度だけ丸ごと
+ *     無い場合。/finance/debtのUIはarchiveFiscalYears.filter((y) => y.debt)で絞り込むため、
+ *     debtが無いと年度自体が一覧・グラフから消える。市債発行額が未確認の年度でも、
+ *     municipalBondIssuanceStatus: "unconfirmed"としてdebtオブジェクト自体は残すこと）
+ *
+ * error（市債発行額まわり、TASK-XXX 市債発行額・残高の混同修正で追加）：
+ *   - municipalBondIssuanceYenが、同一年度のdebt.balance内のいずれかの残高フィールドと
+ *     完全に一致する（発行額＝フローと残高＝ストックを取り違えて登録した疑い。
+ *     年度末残高をそのまま発行額として登録することは禁止）
+ *   - municipalBondIssuanceStatusが未確定系（unconfirmed／sourcePendingPublication／
+ *     sourceFoundValueUnextracted）なのに、municipalBondIssuanceYenが0（未確認値を
+ *     0円として保存することは禁止。nullのまま残すこと）
+ *   - municipalBondIssuanceValueTypeが"settlement"（決算）なのに、fiscalYearが本日時点の
+ *     会計年度以上（年度が終わっていない＝決算が存在し得ない年度を決算扱いにしている）
+ *   - municipalBondIssuanceStatusが"settlementConfirmed"または"budgetOnly"（値を確認済みと
+ *     主張している）のに、municipalBondIssuanceSourceRefsが空（出典なしの確定値）
+ *
+ * warning（市債発行額まわり）：
+ *   - municipalBondIssuanceYenが100万円未満（千円のまま円として登録した疑い。既存の
+ *     yenFieldsToCheckに含めて検出）
+ *
+ * 「同年度重複」について：archiveFiscalYears.json配下の年度重複自体は
+ * scripts/validate-data.mjsのcheckDuplicateYears()が既にfiscalYear単位でカバーしている
+ * ため、このファイルでは再実装しない。
  *
  * 検討したが採用しなかったチェック：
  *   - sourceRefsのsourceTitle・notesに含まれる「令和N年度」表記とfiscalYearの一致検証
  *     （試作したところ、資料タイトルが正当に「令和3年度版〜令和6年度版」等の範囲表記や、
  *     別年度の資料から遡及的にこの年度の値を採用した旨の説明を含む場合が多く、
  *     既存の正しいデータに対して26件の誤検知が発生したため不採用とした）
+ *   - municipalBondIssuanceYen < 残高であることをもって正しいと判定する（発行額が残高を
+ *     下回っていること自体は正しさの証明にならないため、単独の判定条件としては採用しない。
+ *     フィールド混同チェックは「完全一致」のみを見る）
  *
  * info（参考情報、誤りではない）：
  *   - financeDashboard.jsonのdebtBalanceTrendとarchiveFiscalYears.jsonの
@@ -87,6 +114,7 @@ for (const y of archiveFiscalYears) {
     ["budget.totalRevenueYen", y.budget?.totalRevenueYen],
     ["budget.totalExpenditureYen", y.budget?.totalExpenditureYen],
     ["budget.generalAccountFinalBudgetYen", y.budget?.generalAccountFinalBudgetYen],
+    ["debt.municipalBondIssuanceYen", y.debt?.municipalBondIssuanceYen],
     ["debt.balance.ordinaryAccountLocalBondBalanceYen", y.debt?.balance?.ordinaryAccountLocalBondBalanceYen],
     ["fund.balance.fiscalReserveFundYen", y.fund?.balance?.fiscalReserveFundYen],
     ["fund.balance.totalYen", y.fund?.balance?.totalYen],
@@ -155,6 +183,63 @@ for (const y of archiveFiscalYears) {
     }
   }
 
+  // --- 市債発行額（フロー）と市債残高（ストック）のフィールド混同チェック ---
+  if (y.debt) {
+    const issuance = y.debt.municipalBondIssuanceYen;
+    if (typeof issuance === "number") {
+      const balanceFields = [
+        ["balance.generalAccountBondBalanceYen", y.debt.balance?.generalAccountBondBalanceYen],
+        ["balance.ordinaryAccountLocalBondBalanceYen", y.debt.balance?.ordinaryAccountLocalBondBalanceYen],
+        ["balance.includingSpecialAccountsYen", y.debt.balance?.includingSpecialAccountsYen],
+        ["balance.includingEnterpriseAccountsYen", y.debt.balance?.includingEnterpriseAccountsYen],
+      ];
+      for (const [balanceLabel, balanceValue] of balanceFields) {
+        if (typeof balanceValue === "number" && balanceValue === issuance) {
+          errors.push(
+            `${tag}: debt.municipalBondIssuanceYen（発行額・フロー）とdebt.${balanceLabel}（残高・ストック）が同一の値（${issuance}円）です。年度末残高を発行額として誤登録していないか確認してください`,
+          );
+        }
+      }
+    }
+
+    // --- 未確認値を0円として保存していないか ---
+    const unconfirmedStatuses = ["unconfirmed", "sourcePendingPublication", "sourceFoundValueUnextracted"];
+    if (unconfirmedStatuses.includes(y.debt.municipalBondIssuanceStatus) && issuance === 0) {
+      errors.push(
+        `${tag}: municipalBondIssuanceStatusが「${y.debt.municipalBondIssuanceStatus}」（未確認系）なのに、municipalBondIssuanceYenが0円として保存されています。未確認はnullのまま残してください`,
+      );
+    }
+
+    // --- 決算未確定年度を決算扱いにしていないか ---
+    if (y.debt.municipalBondIssuanceValueType === "settlement" && y.fiscalYear >= currentFiscalYear) {
+      errors.push(
+        `${tag}: 年度（${y.fiscalYear}）が本日時点の会計年度（${currentFiscalYear}）以上なのに、municipalBondIssuanceValueTypeが「決算」（settlement）になっています。年度が終わっていない決算は存在し得ません`,
+      );
+    }
+
+    // --- 確定値を主張しているのに出典が無い ---
+    const confirmedStatuses = ["settlementConfirmed", "budgetOnly"];
+    if (confirmedStatuses.includes(y.debt.municipalBondIssuanceStatus) && (y.debt.municipalBondIssuanceSourceRefs ?? []).length === 0) {
+      errors.push(
+        `${tag}: municipalBondIssuanceStatusが「${y.debt.municipalBondIssuanceStatus}」（確認済み系）なのに、municipalBondIssuanceSourceRefsが空です。出典のない確定値は登録しないでください`,
+      );
+    }
+  }
+}
+
+// --- debtオブジェクト自体が特定の年度だけ欠落していないか（前後の年度にdebtがある場合） ---
+{
+  const sorted = [...archiveFiscalYears].sort((a, b) => a.fiscalYear - b.fiscalYear);
+  for (let i = 1; i < sorted.length - 1; i++) {
+    const prev = sorted[i - 1];
+    const cur = sorted[i];
+    const next = sorted[i + 1];
+    if (!cur.debt && prev.debt && next.debt) {
+      warnings.push(
+        `archiveFiscalYears.json (FY${cur.fiscalYear}): 前後の年度（FY${prev.fiscalYear}, FY${next.fiscalYear}）にはdebtがありますが、この年度だけdebtが丸ごと欠落しています。/finance/debtの一覧・グラフからこの年度が消えます。市債発行額が未確認でも、municipalBondIssuanceStatus: "unconfirmed"としてdebtオブジェクト自体は登録してください`,
+      );
+    }
+  }
 }
 
 // --- 財政調整基金の値が複数年度で同一（infoのみ、警告にしない） ---

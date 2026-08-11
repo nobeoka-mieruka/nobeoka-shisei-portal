@@ -23,6 +23,7 @@ export function FinanceMetricSection({ metric, years }: FinanceMetricSectionProp
   const points = years.map((y) => ({ year: y.fiscalYear, ...metric.getPoint(y) }));
   const nonNullPoints = points.filter((p) => p.value != null);
   const omittedYears = points.filter((p) => p.value == null).map((p) => p.year);
+  const showValueTypeColumn = points.some((p) => p.valueTypeLabel != null);
 
   return (
     <div>
@@ -66,15 +67,19 @@ export function FinanceMetricSection({ metric, years }: FinanceMetricSectionProp
           { header: "年度", render: (p) => fiscalYearLabel(p.year) },
           { header: "値", align: "right", render: (p) => metric.formatValue(p.value) },
           { header: "単位", render: () => metric.unit },
+          ...(showValueTypeColumn
+            ? [{ header: "値の種類", render: (p: (typeof points)[number]) => p.valueTypeLabel ?? "-" }]
+            : []),
           { header: "定義", render: (p) => p.definitionNoteOverride ?? metric.definitionNote },
           {
             header: "確認状況",
             render: (p) =>
-              p.sourceRefs[0]
+              p.statusLabelOverride ??
+              (p.sourceRefs[0]
                 ? archiveVerificationStatusLabel(p.sourceRefs[0].verificationStatus)
                 : p.value == null
                   ? "確認中"
-                  : "出典未登録",
+                  : "出典未登録"),
           },
           {
             header: "出典",

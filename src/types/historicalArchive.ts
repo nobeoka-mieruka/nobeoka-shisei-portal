@@ -242,14 +242,38 @@ export interface ArchiveBudget {
   notes?: string;
 }
 
+/** municipalBondIssuanceYenが決算額・当初予算額・補正後予算額のいずれかを明示する（区分不明な予算額は"budget"）。 */
+export type MunicipalBondIssuanceValueType = "settlement" | "initialBudget" | "revisedBudget" | "budget";
+
+/**
+ * municipalBondIssuanceYenの確認状況。値がnullの場合も含め、なぜnull／確定なのかを必ず区別する
+ * （「未確認」を「0件」や「決算確認済み」と混同しないため）。
+ * - settlementConfirmed: 決算額が一次資料で確認できた
+ * - budgetOnly: 予算額（当初・補正後・区分未特定）のみ確認できた。決算額ではない
+ * - sourcePendingPublication: 決算資料等の一次資料自体がまだ公表されていない
+ * - sourceFoundValueUnextracted: 一次資料（PDF等）は所在を確認できたが、値を安全に抽出できていない
+ * - unconfirmed: 一次資料の所在すら確認できていない
+ */
+export type MunicipalBondIssuanceStatus =
+  | "settlementConfirmed"
+  | "budgetOnly"
+  | "sourcePendingPublication"
+  | "sourceFoundValueUnextracted"
+  | "unconfirmed";
+
 /**
  * 市債（Debt型）。年度単位で、発行額（フロー）と残高（ストック、5区分）を分離する。
  * 残高の5区分は同一グラフで直接比較しないこと（ArchiveMunicipalBondBalance参照）。
  */
 export interface ArchiveDebt {
   fiscalYear: number;
-  /** 当該年度の市債発行額（予算計上額・決算額のいずれかはnotesで明記する）。残高ではない。 */
+  /** 当該年度の市債発行額（フロー）。残高（ストック）ではない。値の性質はmunicipalBondIssuanceValueTypeで、確認状況はmunicipalBondIssuanceStatusで区別する。 */
   municipalBondIssuanceYen: number | null;
+  /** municipalBondIssuanceYenが非nullの場合のみ設定する。 */
+  municipalBondIssuanceValueType?: MunicipalBondIssuanceValueType;
+  municipalBondIssuanceStatus: MunicipalBondIssuanceStatus;
+  /** municipalBondIssuanceYenの根拠資料。balance.sourceRefs（残高の根拠資料）とは別に管理する（発行額と残高で出典資料が異なることが多いため）。 */
+  municipalBondIssuanceSourceRefs: ArchiveSourceRef[];
   balance: ArchiveMunicipalBondBalance;
   notes?: string;
 }

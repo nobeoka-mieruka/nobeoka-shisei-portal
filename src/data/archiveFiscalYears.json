@@ -41,7 +41,9 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー）は今回、延岡市公式ホームページの「財政状況資料集」（令和3年度版〜令和6年度版のみ公表、それ以前の版は未公表）、「延岡市の財政事情」シリーズ、総務省・宮崎県の地方財政状況調査関連ページを調査したが、この年度の発行額を確認できる一次資料の所在を特定できなかった。0円や残高からの推定値として登録することはせず、未確認のまま残す。",
+      "municipalBondIssuanceStatus": "unconfirmed",
+      "municipalBondIssuanceSourceRefs": []
     },
     "fund": {
       "fiscalYear": 2018,
@@ -112,7 +114,9 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー）は今回、延岡市公式ホームページの「財政状況資料集」（令和3年度版〜令和6年度版のみ公表、それ以前の版は未公表）、「延岡市の財政事情」シリーズ、総務省・宮崎県の地方財政状況調査関連ページを調査したが、この年度の発行額を確認できる一次資料の所在を特定できなかった。0円や残高からの推定値として登録することはせず、未確認のまま残す。",
+      "municipalBondIssuanceStatus": "unconfirmed",
+      "municipalBondIssuanceSourceRefs": []
     },
     "fund": {
       "fiscalYear": 2019,
@@ -210,7 +214,9 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー）は今回、延岡市公式ホームページの「財政状況資料集」（令和3年度版〜令和6年度版のみ公表、それ以前の版は未公表）、「延岡市の財政事情」シリーズ、総務省・宮崎県の地方財政状況調査関連ページを調査したが、この年度の発行額を確認できる一次資料の所在を特定できなかった。0円や残高からの推定値として登録することはせず、未確認のまま残す。",
+      "municipalBondIssuanceStatus": "unconfirmed",
+      "municipalBondIssuanceSourceRefs": []
     },
     "fund": {
       "fiscalYear": 2020,
@@ -318,7 +324,7 @@
     },
     "debt": {
       "fiscalYear": 2021,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 7038061000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 56172738000,
@@ -339,7 +345,20 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+          "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版、普通会計の状況シート「地方債」行）",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）7,038,061千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（71,960,873千円）が、既に登録済みのbudget.totalExpenditureYen（FY2021）と完全一致することで、この資料がFY2021のデータであることをクロスチェック済み。"
+        }
+      ]
     },
     "budget": {
       "fiscalYear": 2021,
@@ -448,7 +467,7 @@
     },
     "debt": {
       "fiscalYear": 2022,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 4724117000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 54689691000,
@@ -469,7 +488,20 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+          "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和4年度版、普通会計の状況シート「地方債」行）",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）4,724,117千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（69,471,701千円）が、既に登録済みのbudget.totalExpenditureYen（FY2022）と完全一致することで、この資料がFY2022のデータであることをクロスチェック済み。"
+        }
+      ]
     },
     "budget": {
       "fiscalYear": 2022,
@@ -578,7 +610,7 @@
     },
     "debt": {
       "fiscalYear": 2023,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 5463242000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 54021888000,
@@ -599,7 +631,20 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+          "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和5年度版、普通会計の状況シート「地方債」行）",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）5,463,242千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（69,891,005千円）が、既に登録済みのbudget.totalExpenditureYen（FY2023）と完全一致することで、この資料がFY2023のデータであることをクロスチェック済み。"
+        }
+      ]
     },
     "budget": {
       "fiscalYear": 2023,
@@ -750,7 +795,7 @@
     },
     "debt": {
       "fiscalYear": 2024,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 5953987000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 53950273000,
@@ -771,7 +816,20 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。"
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+          "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和6年度版、普通会計の状況シート「地方債」行）",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）5,953,987千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（70,924,122千円）が、既に登録済みのbudget.totalExpenditureYen（FY2024）と完全一致することで、この資料がFY2024のデータであることをクロスチェック済み。"
+        }
+      ]
     },
     "budget": {
       "fiscalYear": 2024,
@@ -846,7 +904,44 @@
       },
       "notes": "決算未確定の見込額。決算確定後に更新が必要。"
     },
-    "notes": "令和7年度（FY2025）決算・財政健全化判断比率・地方債現在高は、2026-08-11時点で延岡市「財政状況資料集」「健全化判断比率等の公表」ともに令和6年度版（R6版）が最新で、令和7年度版は未公表（延岡市公式サイトの財政課ページ・健全化判断比率索引ページで確認済み）。「延岡市の財政事情（令和7年度後期）」（2026-05-01公表）に市債残高PDF（27146.pdf）が含まれているが、PDFのテキスト抽出でラベルと数値の対応付けが安全にできず、確定登録は見送った（一次資料は存在するが未確認のまま）。決算未確定・年度途中のデータを推測で補完していない。財政状況資料集の公表後、既存の同一手法（Excelの総括表シート解析）で再調査すること。"
+    "notes": "令和7年度（FY2025）決算・財政健全化判断比率・地方債現在高は、2026-08-11時点で延岡市「財政状況資料集」「健全化判断比率等の公表」ともに令和6年度版（R6版）が最新で、令和7年度版は未公表（延岡市公式サイトの財政課ページ・健全化判断比率索引ページで確認済み）。「延岡市の財政事情（令和7年度後期）」（2026-05-01公表）に市債残高PDF（27146.pdf）が含まれているが、PDFのテキスト抽出でラベルと数値の対応付けが安全にできず、確定登録は見送った（一次資料は存在するが未確認のまま）。決算未確定・年度途中のデータを推測で補完していない。財政状況資料集の公表後、既存の同一手法（Excelの総括表シート解析）で再調査すること。",
+    "debt": {
+      "fiscalYear": 2025,
+      "municipalBondIssuanceYen": 6882300000,
+      "municipalBondIssuanceValueType": "budget",
+      "municipalBondIssuanceStatus": "budgetOnly",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27138.pdf",
+          "sourceTitle": "延岡市の財政事情（令和7年度後期）令和7年度予算に対する収入支出状況",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "歳入の「市債」科目の予算額6,882,300千円を確認（当初予算か補正後の現計予算かは資料上の区分表記がなく今回未特定のため、区分未特定の「予算」として登録）。同科目の収入済額は112,200千円（予算に対する割合1.6%）のみで、令和8年3月31日時点は出納整理期間中のため決算額として未確定と判断し、収入済額は登録しなかった。"
+        }
+      ],
+      "balance": {
+        "generalAccountBondBalanceYen": 52157491000,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": 82192655000,
+        "perCapitaYen": null,
+        "definitionNote": "延岡市公表資料「令和7年度　市債残高」（令和8年3月31日現在）に基づく一般会計（普通債・災害復旧債・特例地方債の合計、52,157,491千円）及び総計（一般会計＋企業会計の水道事業債・下水道事業債、82,192,655千円）の残高。FY2020〜2024で用いた「財政状況資料集」は残高を「普通会計」区分で公表しているが、本資料は「一般会計」ラベルのため、定義が異なる可能性を考慮しordinaryAccountLocalBondBalanceYen（普通会計）には登録せずgeneralAccountBondBalanceYen（一般会計）に登録した。人口の基準日（2025-01-01）と本残高の基準日（2026-03-31）が約15か月ずれているため、perCapitaYenは今回計算しなかった。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27146.pdf",
+            "sourceTitle": "延岡市の財政事情（令和7年度後期）市債残高",
+            "sourceOrganization": "延岡市",
+            "accessedAt": "2026-08-11",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFをダウンロードし、Readツールで直接読み取り。一般会計52,157,491千円・企業会計30,035,164千円・総計82,192,655千円を確認。"
+          }
+        ]
+      },
+      "notes": "残高（ストック）は令和8年3月31日現在の確定値として登録。発行額（フロー）は令和7年度の予算額のみ確認でき、決算額は出納整理期間中のため未確定（財政状況資料集の令和7年度版は本日時点で未公表）。"
+    }
   },
   {
     "fiscalYear": 2026,
@@ -921,7 +1016,22 @@
         "definitionNote": "年度末市債残高（普通会計・一般会計等の区分別）は、延岡市決算書・財政状況資料集で確認中。municipalBondIssuanceYenは令和8年度予算に計上された発行額（歳入の「市債」科目）であり、残高ではない。",
         "sourceRefs": []
       },
-      "notes": "残高（ストック）データは今回未登録。発行額（フロー）のみ既存financeDashboard.jsonのrevenue「市債」科目から移行。"
+      "notes": "残高（ストック）データは今回未登録。発行額（フロー）は令和8年度6月補正後予算の歳入「市債」科目の計上額（予算値）であり、決算額ではない。",
+      "municipalBondIssuanceValueType": "revisedBudget",
+      "municipalBondIssuanceStatus": "budgetOnly",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+          "sourceTitle": "令和8年度6月補正予算の概要（歳入「市債」科目）",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-06-05",
+          "accessedAt": "2026-07-14",
+          "pageNumber": 2,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "6月補正後予算の歳入「市債」科目の計上額であり、決算額ではない。令和8年度（FY2026）は年度途中のため決算は存在しない。"
+        }
+      ]
     }
   }
 ]

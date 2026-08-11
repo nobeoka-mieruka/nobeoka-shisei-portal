@@ -5,7 +5,12 @@
  * ページごとに同じnullチェック・フォーマットを重複実装しないようにする。
  */
 import type { ArchiveFiscalYear, ArchiveSourceRef } from "../types/historicalArchive";
-import { formatOkuYenOrConfirming, formatPercentOrConfirming } from "./archiveFinance";
+import {
+  formatOkuYenOrConfirming,
+  formatPercentOrConfirming,
+  municipalBondIssuanceStatusLabel,
+  municipalBondIssuanceValueTypeLabel,
+} from "./archiveFinance";
 
 export type FinanceMetricGroup = "population" | "budget" | "debt" | "fund" | "ratio";
 
@@ -14,6 +19,13 @@ export interface FinanceMetricPoint {
   sourceRefs: ArchiveSourceRef[];
   /** その年度固有の定義注記（元資料の記載が年度により異なる場合）。無ければmetric.definitionNoteを使う。 */
   definitionNoteOverride?: string;
+  /**
+   * 「確認状況」列の表示を上書きする（例：決算確認済み／予算値のみ／一次資料公開待ち等の5区分）。
+   * 未指定時は従来通りsourceRefs[0].verificationStatusから導出する。
+   */
+  statusLabelOverride?: string;
+  /** 値の性質（決算／当初予算／補正後予算等）。指定した指標のみ「値の種類」列を表示する。 */
+  valueTypeLabel?: string;
 }
 
 export interface FinanceMetricDefinition {
@@ -154,8 +166,10 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     formatValue: formatOkuYenOrConfirming,
     getPoint: (y) => ({
       value: y.debt?.municipalBondIssuanceYen ?? null,
-      sourceRefs: y.debt?.balance.sourceRefs ?? [],
+      sourceRefs: y.debt?.municipalBondIssuanceSourceRefs ?? [],
       definitionNoteOverride: y.debt?.notes,
+      statusLabelOverride: municipalBondIssuanceStatusLabel(y.debt?.municipalBondIssuanceStatus),
+      valueTypeLabel: municipalBondIssuanceValueTypeLabel(y.debt?.municipalBondIssuanceValueType),
     }),
   },
   {

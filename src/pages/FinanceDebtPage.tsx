@@ -12,7 +12,12 @@ import { ChartBarIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import {
+  formatOkuYenOrConfirming,
+  fiscalYearLabel,
+  sortedFiscalYears,
+  municipalBondIssuanceValueTypeLabel,
+} from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 
 const debtIssuanceMetric = financeMetricByKey("debtIssuance")!;
@@ -71,7 +76,15 @@ export function FinanceDebtPage() {
             rowKey={(y) => String(y.fiscalYear)}
             columns={[
               { header: "年度", render: (y) => fiscalYearLabel(y.fiscalYear) },
-              { header: "発行額", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.municipalBondIssuanceYen) },
+              {
+                header: "発行額（値の種類）",
+                align: "right",
+                render: (y) => {
+                  const label = municipalBondIssuanceValueTypeLabel(y.debt?.municipalBondIssuanceValueType);
+                  const formatted = formatOkuYenOrConfirming(y.debt?.municipalBondIssuanceYen);
+                  return label ? `${formatted}（${label}）` : formatted;
+                },
+              },
               { header: "一般会計残高", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.balance.generalAccountBondBalanceYen) },
               { header: "普通会計残高", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.balance.ordinaryAccountLocalBondBalanceYen) },
               { header: "一人当たり", align: "right", render: (y) => (y.debt?.balance.perCapitaYen != null ? `${y.debt.balance.perCapitaYen.toLocaleString("ja-JP")}円` : "確認中") },
