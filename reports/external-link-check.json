@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-11T08:04:55.944Z",
-  "targetCount": 325,
+  "generatedAt": "2026-08-11T09:19:28.080Z",
+  "targetCount": 326,
   "cacheReused": 325,
-  "newlyChecked": 0,
+  "newlyChecked": 1,
   "summary": {
-    "ok": 313,
+    "ok": 314,
     "not_found_404": 3,
     "redirect": 9
   },
@@ -570,6 +570,17 @@
         "municipalityComparison.json"
       ],
       "checkedAt": "2026-08-11T07:38:01.247Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/disaster/28171.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-11T09:19:27.715Z",
       "status": 200,
       "location": null,
       "category": "ok",

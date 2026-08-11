@@ -595,8 +595,12 @@
     "title": "市制施行80周年記念式典",
     "summary": "延岡市制施行80周年記念式典が開催され、延岡市歌の追詞等が発表された。",
     "relatedPersonIds": ["mayor-02"],
-    "sourceRefs": [{ "label": "延岡市年表（PDF）", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf" }],
-    "lastVerifiedAt": "2026-08-06",
+    "sourceRefs": [
+      { "label": "延岡市年表（PDF）", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf" },
+      { "label": "近代の年表（2011年〜）", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1687.html" }
+    ],
+    "notes": "Phase31（2026-08-11）で「近代の年表（2011年〜）」を独立に確認したところ、同一の出来事（2013年2月、市制施行80周年記念式典）が記載されていることを確認し、既存のsourceRefsへ追加した（既存の延岡市年表PDFの記載と一致）。",
+    "lastVerifiedAt": "2026-08-11",
     "verificationStatus": "verified"
   },
   {
@@ -729,18 +733,6 @@
     "relatedPersonIds": ["mayor-03"],
     "sourceRefs": [{ "label": "近代の年表（2011年〜）", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1687.html" }],
     "lastVerifiedAt": "2026-08-06",
-    "verificationStatus": "verified"
-  },
-  {
-    "id": "civic-061",
-    "year": 2013,
-    "dateLabel": "2013年2月",
-    "category": "市制施行・合併",
-    "title": "市制施行80周年記念式典",
-    "summary": "延岡市の市制施行80周年を記念する式典が開催された。",
-    "relatedPersonIds": ["mayor-02"],
-    "sourceRefs": [{ "label": "近代の年表（2011年〜）", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1687.html" }],
-    "lastVerifiedAt": "2026-08-11",
     "verificationStatus": "verified"
   },
   {
