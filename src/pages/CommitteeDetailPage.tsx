@@ -63,6 +63,7 @@ export function CommitteeDetailPage() {
   const distinctSessionCount = new Set(reviewedBills.map((b) => b.sessionId).filter(Boolean)).size;
   const seiganCount = reviewedBills.filter((b) => b.category === "請願").length;
   const chinjoCount = reviewedBills.filter((b) => b.category === "陳情").length;
+  const joreiCount = reviewedBills.filter((b) => b.category === "条例").length;
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -164,8 +165,13 @@ export function CommitteeDetailPage() {
           <>
             <p className="mb-3 text-xs text-on-surface-variant">
               合計{reviewedBills.length}件（{distinctSessionCount}会期分）
-              {(seiganCount > 0 || chinjoCount > 0) &&
-                `、うち請願${seiganCount}件・陳情${chinjoCount}件を含む`}
+              {(() => {
+                const parts: string[] = [];
+                if (joreiCount > 0) parts.push(`条例${joreiCount}件`);
+                if (seiganCount > 0) parts.push(`請願${seiganCount}件`);
+                if (chinjoCount > 0) parts.push(`陳情${chinjoCount}件`);
+                return parts.length > 0 ? `、うち${parts.join("・")}を含む` : "";
+              })()}
               。委員会単独の開催日・開催回数は
               公式資料で公表されていないため、ここでは議案が審査された定例会・臨時会の会期数で示しています。
             </p>
