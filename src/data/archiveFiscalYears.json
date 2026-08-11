@@ -20,7 +20,7 @@
     },
     "debt": {
       "fiscalYear": 2018,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 4612651000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 57157000000,
@@ -41,9 +41,30 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー）は今回、延岡市公式ホームページの「財政状況資料集」（令和3年度版〜令和6年度版のみ公表、それ以前の版は未公表）、「延岡市の財政事情」シリーズ、総務省・宮崎県の地方財政状況調査関連ページを調査したが、この年度の発行額を確認できる一次資料の所在を特定できなかった。0円や残高からの推定値として登録することはせず、未確認のまま残す。",
-      "municipalBondIssuanceStatus": "unconfirmed",
-      "municipalBondIssuanceSourceRefs": []
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（平成30年度、宮崎県・延岡市）で確認した。",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/card-19.html",
+          "sourceTitle": "総務省「市町村決算状況調」決算カード（宮崎県・延岡市、平成30年度）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「歳入の状況」表の「地方債」行（決算額）4,612,651千円を確認。同カードの「地方債現在高」57,157,004千円が、既に登録済みのdebt.balance.ordinaryAccountLocalBondBalanceYen（57,157,000千円）とほぼ一致（千円未満・端数レベルの差のみ）することで、延岡市・平成30年度のデータであることをクロスチェック済み。所在地（面積868.02k㎡）・人口も一致を確認。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2588.pdf",
+          "sourceTitle": "広報のべおか2019年11月号「延岡市の財政状況（平成30年度決算）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2019-11-01",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "歳入決算の内訳円グラフに「市債 46億1,265万円（7.7%）」の記載を確認。総務省決算カードの数値（4,612,651千円）とほぼ一致（千円未満の端数差のみ）することを確認済み。異なる2つの公的資料（延岡市発行の広報誌／総務省の決算状況調）が独立に近い値を示していることから、信頼度が高いと判断した。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2018,
@@ -93,7 +114,7 @@
     },
     "debt": {
       "fiscalYear": 2019,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 5347613000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 56152000000,
@@ -114,9 +135,20 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー）は今回、延岡市公式ホームページの「財政状況資料集」（令和3年度版〜令和6年度版のみ公表、それ以前の版は未公表）、「延岡市の財政事情」シリーズ、総務省・宮崎県の地方財政状況調査関連ページを調査したが、この年度の発行額を確認できる一次資料の所在を特定できなかった。0円や残高からの推定値として登録することはせず、未確認のまま残す。",
-      "municipalBondIssuanceStatus": "unconfirmed",
-      "municipalBondIssuanceSourceRefs": []
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（令和元年度、宮崎県・延岡市）で確認した。",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/card-20.html",
+          "sourceTitle": "総務省「市町村決算状況調」決算カード（宮崎県・延岡市、令和元年度）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「歳入の状況」表の「地方債」行（決算額）5,347,613千円を確認。同カードの「地方債現在高」56,152,458千円が、既に登録済みのdebt.balance.ordinaryAccountLocalBondBalanceYen（56,152,000千円）とほぼ一致（千円未満・端数レベルの差のみ）することで、延岡市・令和元年度のデータであることをクロスチェック済み。所在地（面積868.02k㎡）・人口も一致を確認。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2019,
@@ -193,7 +225,7 @@
     },
     "debt": {
       "fiscalYear": 2020,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 5577391000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 55428571000,
@@ -214,9 +246,20 @@
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー）は今回、延岡市公式ホームページの「財政状況資料集」（令和3年度版〜令和6年度版のみ公表、それ以前の版は未公表）、「延岡市の財政事情」シリーズ、総務省・宮崎県の地方財政状況調査関連ページを調査したが、この年度の発行額を確認できる一次資料の所在を特定できなかった。0円や残高からの推定値として登録することはせず、未確認のまま残す。",
-      "municipalBondIssuanceStatus": "unconfirmed",
-      "municipalBondIssuanceSourceRefs": []
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（令和2年度、宮崎県・延岡市）で確認した。",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/card-21.html",
+          "sourceTitle": "総務省「市町村決算状況調」決算カード（宮崎県・延岡市、令和2年度）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-11",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「歳入の状況」表の「地方債」行（決算額）5,577,391千円を確認。同カードの「地方債現在高」55,428,571千円が、既に登録済みのdebt.balance.ordinaryAccountLocalBondBalanceYen（55,428,571千円）と完全一致することで、延岡市・令和2年度のデータであることをクロスチェック済み。所在地（面積868.02k㎡）・人口も一致を確認。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2020,
