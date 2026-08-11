@@ -4656,3 +4656,86 @@ BLOCKED理由・再開条件：
 - 完了日：2026-08-11
 - コミットID：cd2f6d1（本体）、d64a305（自動生成ファイル同期）
 - 変更概要：上記のとおり。
+
+---
+
+### TASK-062 全サイト最終完全性監査＋自動更新強化（Phase27）
+
+状態：DONE（2026-08-11）
+優先度：A（ユーザー指示「Phase 23〜27を連続実行」の第5弾・最終フェーズ）
+対象：`src/data/municipalityComparison.json`、`src/data/members.json`、
+`reports/external-link-check.json`（監査のみ、他は変更なし）
+
+目的：Phase23〜26の変更を含む全サイトを対象に、404・リンク切れ・
+undefined/null/NaN混入・件数不一致・SEO不整合等を最終監査し、自動更新
+パイプラインの健全性を確認する。
+
+監査結果：
+- `scripts/check-external-links.mjs --force`で327件全URLを再検査し、既に
+  別フェーズで確認・記録済みの3件（Wikipedia「仲田又次郎」・Yahoo!ニュース・
+  宮崎日日新聞、いずれも掲載期間終了によるものでverificationStatus/notesに
+  詳細記録済み）に加え、未対応だった新規2件を発見・修正した：
+  `municipalityComparison.json`の人口Excel URL（attachment/27980.xls→
+  28569.xls、既存の他ファイルで使用中の生存URLへ統一）と、`members.json`
+  （m23 峯田克明）のsns配列にあった到達不能な個人サイト（SSL証明書エラー＋
+  HTTP 503）の削除
+- 1905ページ全ての静的prerender出力（`dist/**/index.html`）を走査し、
+  undefined・NaN・裸のnull・TODO・TBDの混入が0件であることを確認した
+- 1905ページ全ての内部リンク（`href="/..."`）を抽出し、既知の1905ルート
+  集合と突合したところ、内部リンク切れは0件であることを確認した
+- GitHub Actions 3本（civic-archive-sync/sync-council-data/
+  update-council-documents）の直近実行履歴（`gh run list`）を確認し、
+  全て`success`で完了していることを確認した（変更不要、no-changeコミット
+  もしていない）
+- `check-blocked-resume.mjs`を再実行し、BLOCKED監視対象7件全てで状態変化
+  なしを確認した
+- `release-check.mjs`（build込み）を実行し、failures=0（既存の軽微な
+  warning「試験公開」表記2件のみ、本タスクと無関係）を確認した
+- サイト全体の件数整合性を確認：ホームページ・ダッシュボード・データ
+  収録状況ページが共通の`src/lib/generalQuestionStats.ts`（単一情報源）
+  を参照しており、質問項目数（1,470件）等の表示が全ページで一致すること
+  を確認した
+- `src/lib/completeness.ts`のCompletenessStatus型を用いる
+  `DataStatusPage.tsx`の完全性ダッシュボード（14〜15項目）を実際に
+  再計算し、complete=3件・partial=11件・not_collected/confirmed_zero/
+  not_available/unknown/under_review=0件であることを確認した（サイト
+  全体の網羅的な分類ではなく、この型を明示的に使う項目に限った内訳）
+- 本セッションの実行環境にはブラウザ拡張（Chrome）が接続できず、実機での
+  console error・pageerror・hydration errorの直接確認は今回も未実施。
+  静的HTML走査・validate:seo/validate:content・prerender成功件数で代替した
+  （Phase19〜26と同じ制約、毎回同様に報告している）
+
+受入条件：
+- 新たに発見した一次資料の重複確認→取得→検証→登録→出典→dataAsOf→
+  completeness更新のプロセスを踏んだ（達成。今回発見した2件のリンク切れは、
+  いずれも既存の他データとの重複確認を経て安全に修正した）
+- GitHub Actionsが既に正常な場合は変更しなかった（達成、no-changeコミット
+  もしていない）
+- BLOCKED 0件を目標にせず、正確性を優先した（達成。既存BLOCKED7件は
+  新しい一次資料が見つからなかったため維持し、無理な解消を行っていない）
+
+検証結果：
+- `validate:data`（errors=0、billVotes=1177不変）
+- `validate:freshness`（errors=0、warnings=0）
+- `validate:sources`（errors=0、warnings=0、info=40）
+- `validate:completeness`（errors=0、warnings=0、info=0）
+- `validate:finance`（errors=0、warnings=0、info=6）
+- `typecheck`／`lint`／`test`（26/26成功）
+- `build`（prerender 1905/1905ルート、`validate:seo`・`validate:content`
+  ともにerrors=0、1906ページ）
+- `release-check`（failures=0、warnings=2、いずれも既存の軽微な表記）
+- 本番確認：デプロイ`2d14a00b`（commit `0bff475`）がActiveであることを
+  確認。約20秒のCDN反映待ちの後、`/compare/municipalities`で新URL
+  （28569.xls）の反映を確認。PC UA・モバイル（iPhone Safari）UAの双方で
+  15ルート（トップ/質問/議員/議案/委員会/政治資金/市長/歴代市長/公約進捗/
+  記者会見/データ状況/更新履歴/市役所案内診断/財政/自治体比較）を
+  cache-busting付きで直接アクセスし、全てHTTP 200を確認。動的詳細ページ
+  （議員詳細・元議員詳細・歴代市長詳細・議案詳細・委員会詳細・財政個別・
+  クエリ文字列付き一般質問/議案検索）11ルートも全てHTTP 200・存在しない
+  ルートは正しく404を確認した
+
+完了記録：
+- 完了日：2026-08-11
+- コミットID：f73720a（データ修正本体）、0bff475（自動生成ファイル同期）、
+  55b71ab（外部リンク監査レポート再生成）
+- 変更概要：上記のとおり。
