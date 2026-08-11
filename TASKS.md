@@ -4564,6 +4564,11 @@ BLOCKED理由・再開条件：
   `validate:completeness`／`validate:finance`／`typecheck`／`lint`／`test`／
   `build`（`validate:seo`・`validate:content`含め）すべて成功
 - ベースライン確認：billVotes=1,177／現職議員=26／元議員=10（すべて不変）
+- 本番確認：デプロイ`1ca403a6`（commit `546bed9`）がActiveであることを確認。
+  CDNエッジの反映遅延（約20秒）を観測後、`/members/former/fm01`・
+  `/members/former/fm03`・`/members/former/fm10`をcache-busting付きで
+  直接アクセスし、全てHTTP 200・新規登録した委員会履歴／議長・副議長等の
+  役職履歴が実データ表示（「資料未確認」から変化）になっていることを確認した
 
 BLOCKED理由・再開条件：
 - fm06の委員長就任日：延岡市議会会議録検索システムで「令和5年3月定例会」の
