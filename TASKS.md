@@ -4639,6 +4639,10 @@ BLOCKED理由・再開条件：
 - `typecheck`／`lint`／`test`（26/26成功）
 - `build`（prerender 1905/1905ルート、`validate:seo`・`validate:content`
   ともにerrors=0）
+- 本番確認：デプロイ`aad5a251`（commit `606e499`）がActiveであることを確認。
+  約20秒のCDN反映待ちの後、`/committees/committee-somu-seisaku`で
+  「うち条例123件」の表示を確認、`/`・`/committees`・`/bills/votes`・
+  `/data-status`もcache-busting付きで全てHTTP 200を確認した
 
 BLOCKED理由・再開条件：
 - 議会活性化特別委員会の設置時提案理由（所管・目的）：延岡市議会会議録
