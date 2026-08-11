@@ -620,5 +620,789 @@
       }
     ],
     "notes": "当選者のうち26名はarchiveMemberProfiles.json／archiveMemberTerms.jsonの現職議員データと得票数の完全一致で本人特定済み（linkedProfileId）。「吉本やすし」氏（1,753票、現職当選）は、formerMembers.json fm01（吉本靖）が同一人物と判断した：fm01のnoteに令和5年6月・12月定例会等での在職事実、および令和7年7月20日執行の延岡市長選挙に立候補し15,196票（27.5%）で落選した事実が明記されており、本サイトのelection-mayor-2025エントリの「吉本やすし」候補（15,196票）と得票数が完全一致するため、高い確度で同一人物と判断しfm01へリンクした。落選者「おだ忠良」氏（74歳、日本維新の会、元）は、平成27年執行選挙の当選者名簿にある「小田忠良」氏、平成26年執行の延岡市長選挙候補者「おだ忠良」氏と氏名が類似するが、本人特定の確証がないため紐付けを行っていない。"
+  },
+  {
+    "id": "election-council-2019",
+    "electionName": "延岡市議会議員選挙",
+    "electionType": "councilMember",
+    "electionDate": "2019-04-21",
+    "announcementDate": null,
+    "seats": 27,
+    "candidateCount": 38,
+    "eligibleVoters": 101839,
+    "votersCount": null,
+    "turnoutPercent": 52.22,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "松田 みつお",
+        "nameKana": "マツダ ミツオ",
+        "age": 63,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 2391.494,
+        "elected": true,
+        "linkedProfileId": "m22"
+      },
+      {
+        "name": "上杉 やすひろ",
+        "nameKana": "ウエスギ ヤスヒロ",
+        "age": 68,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 2130,
+        "elected": true,
+        "linkedProfileId": "m03"
+      },
+      {
+        "name": "松本 てつや",
+        "nameKana": "マツモト テツヤ",
+        "age": 52,
+        "party": "社会民主党",
+        "incumbencyStatus": null,
+        "votes": 2105,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "甲斐 ただあつ",
+        "nameKana": "カイ タダアツ",
+        "age": 61,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1783.459,
+        "elected": true,
+        "linkedProfileId": "m07"
+      },
+      {
+        "name": "おの 正二",
+        "nameKana": "オノ ショウジ",
+        "age": 62,
+        "party": "公明党",
+        "incumbencyStatus": null,
+        "votes": 1775.446,
+        "elected": true,
+        "linkedProfileId": "m04"
+      },
+      {
+        "name": "下田 えいじゅ",
+        "nameKana": "シモダ エイジュ",
+        "age": 56,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1683,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "長友 さちこ",
+        "nameKana": "ナガトモ サチコ",
+        "age": 63,
+        "party": "社会民主党",
+        "incumbencyStatus": null,
+        "votes": 1656,
+        "elected": true,
+        "linkedProfileId": "m17"
+      },
+      {
+        "name": "はやせ けんいち",
+        "nameKana": "ハヤセ ケンイチ",
+        "age": 53,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1653,
+        "elected": true,
+        "linkedProfileId": "m18"
+      },
+      {
+        "name": "河野 はるみつ",
+        "nameKana": "カワノ ハルミツ",
+        "age": 67,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1651,
+        "elected": true,
+        "linkedProfileId": "m10"
+      },
+      {
+        "name": "ひえじま くみこ",
+        "nameKana": "ヒエジマ クミコ",
+        "age": 59,
+        "party": "公明党",
+        "incumbencyStatus": null,
+        "votes": 1630,
+        "elected": true,
+        "linkedProfileId": "m19"
+      },
+      {
+        "name": "さとう 誠",
+        "nameKana": "サトウ マコト",
+        "age": 63,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1622,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "平田 信広",
+        "nameKana": "ヒラタ ノブヒロ",
+        "age": 67,
+        "party": "日本共産党",
+        "incumbencyStatus": null,
+        "votes": 1607,
+        "elected": true,
+        "linkedProfileId": "m20"
+      },
+      {
+        "name": "北林 みきお",
+        "nameKana": "キタバヤシ ミキオ",
+        "age": 63,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1606,
+        "elected": true,
+        "linkedProfileId": "m11"
+      },
+      {
+        "name": "みねだ 克明",
+        "nameKana": "ミネダ カツアキ",
+        "age": 52,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1581,
+        "elected": true,
+        "linkedProfileId": "m23"
+      },
+      {
+        "name": "しば 浩信",
+        "nameKana": "シバ ヒロノブ",
+        "age": 50,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1541,
+        "elected": true,
+        "linkedProfileId": "m14"
+      },
+      {
+        "name": "甲斐 いくお",
+        "nameKana": "カイ イクオ",
+        "age": 63,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1534.977,
+        "elected": true,
+        "linkedProfileId": "m06"
+      },
+      {
+        "name": "三上 たけし",
+        "nameKana": "ミカミ タケシ",
+        "age": 59,
+        "party": "公明党",
+        "incumbencyStatus": null,
+        "votes": 1511,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "本部 やすとし",
+        "nameKana": "ホンブ ヤストシ",
+        "age": 59,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1501,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "中城 あかね",
+        "nameKana": "ナカジョウ アカネ",
+        "age": 54,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1449,
+        "elected": true,
+        "linkedProfileId": "m16"
+      },
+      {
+        "name": "松田 かつのり",
+        "nameKana": "マツダ カツノリ",
+        "age": 53,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1418.758,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "松田 かずみ",
+        "nameKana": "マツダ カズミ",
+        "age": null,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1413.745,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "白石 よしもり",
+        "nameKana": "シライシ ヨシモリ",
+        "age": 64,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1385,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "吉本 やすし",
+        "nameKana": "ヨシモト ヤスシ",
+        "age": 61,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1375,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "いなだ まさゆき",
+        "nameKana": "イナダ マサユキ",
+        "age": 51,
+        "party": "自由民主党",
+        "incumbencyStatus": null,
+        "votes": 1364,
+        "elected": true,
+        "linkedProfileId": "m01"
+      },
+      {
+        "name": "田村 よしひろ",
+        "nameKana": "タムラ ヨシヒロ",
+        "age": 65,
+        "party": "国民民主党",
+        "incumbencyStatus": null,
+        "votes": 1286,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "いのはな 哲",
+        "nameKana": "イノハナ サトシ",
+        "age": 43,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1265,
+        "elected": true,
+        "linkedProfileId": "m02"
+      },
+      {
+        "name": "かい 正幸",
+        "nameKana": "カイ マサユキ",
+        "age": 63,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1246.417,
+        "elected": true,
+        "linkedProfileId": "m08"
+      },
+      {
+        "name": "小西 たかひで",
+        "nameKana": "コニシ タカヒデ",
+        "age": 33,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1234,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "かじもと 英一",
+        "nameKana": "カジモト エイイチ",
+        "age": 58,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1229,
+        "elected": false,
+        "linkedProfileId": "m09"
+      },
+      {
+        "name": "吉田 しげひと",
+        "nameKana": "ヨシダ シゲヒト",
+        "age": 29,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1114,
+        "elected": false,
+        "linkedProfileId": "m26"
+      },
+      {
+        "name": "後藤 もりみつ",
+        "nameKana": "ゴトウ モリミツ",
+        "age": 37,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1103,
+        "elected": false,
+        "linkedProfileId": "m12"
+      },
+      {
+        "name": "小野 たかし",
+        "nameKana": "オノ タカシ",
+        "age": 52,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1019.553,
+        "elected": false,
+        "linkedProfileId": "m05"
+      },
+      {
+        "name": "おだ 忠良",
+        "nameKana": "オダ タダヨシ",
+        "age": 70,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 931,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "よしたま 誠",
+        "nameKana": "ヨシタマ マコト",
+        "age": 40,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 911,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "あわの 和彦",
+        "nameKana": "アワノ カズヒコ",
+        "age": 66,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 812,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "山内 としかつ",
+        "nameKana": "ヤマウチ トシカツ",
+        "age": 62,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 607,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "とさだ 秀文",
+        "nameKana": "トサダ ヒデフミ",
+        "age": 59,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 564,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "かい ひかる",
+        "nameKana": "カイ ヒカル",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 75.145,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/18472",
+        "sourceTitle": "延岡市議会議員選挙 - 2019年04月21日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選27名・落選11名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。有権者数・投票率はページ記載値。投票者数・無効票数はページに記載が無く未確認。候補者のlinkedProfileIdは、members.jsonのnameKana完全一致（現職）またはformerMembers.jsonの氏名完全一致（既存登録済み元議員）の場合のみ設定し、一致しない候補は未リンクのまま残した（新規の元議員登録は今回行っていない。servedSessionsの会期単位確認が必要なため）。"
+      }
+    ],
+    "notes": "定数27・候補38名。現職多数が再選。"
+  },
+  {
+    "id": "election-council-2015",
+    "electionName": "延岡市議会議員選挙",
+    "electionType": "councilMember",
+    "electionDate": "2015-04-26",
+    "announcementDate": "2015-04-19",
+    "seats": 29,
+    "candidateCount": 35,
+    "eligibleVoters": null,
+    "votersCount": null,
+    "turnoutPercent": 54.09,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "松本 てつや",
+        "nameKana": "マツモト テツヤ",
+        "age": null,
+        "party": "社会民主党",
+        "incumbencyStatus": null,
+        "votes": 2677,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "松田 みつお",
+        "nameKana": "マツダ ミツオ",
+        "age": 59,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 2624.88,
+        "elected": true,
+        "linkedProfileId": "m22"
+      },
+      {
+        "name": "上杉 やすひろ",
+        "nameKana": "ウエスギ ヤスヒロ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 2612,
+        "elected": true,
+        "linkedProfileId": "m03"
+      },
+      {
+        "name": "平田 信広",
+        "nameKana": "ヒラタ ノブヒロ",
+        "age": 63,
+        "party": "日本共産党",
+        "incumbencyStatus": null,
+        "votes": 2167,
+        "elected": true,
+        "linkedProfileId": "m20"
+      },
+      {
+        "name": "北林 みきお",
+        "nameKana": "キタバヤシ ミキオ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 2160,
+        "elected": true,
+        "linkedProfileId": "m11"
+      },
+      {
+        "name": "小野 たかし",
+        "nameKana": "オノ タカシ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1972.54,
+        "elected": true,
+        "linkedProfileId": "m05"
+      },
+      {
+        "name": "おの 正二",
+        "nameKana": "オノ ショウジ",
+        "age": null,
+        "party": "公明党",
+        "incumbencyStatus": null,
+        "votes": 1952.46,
+        "elected": true,
+        "linkedProfileId": "m04"
+      },
+      {
+        "name": "甲斐 いくお",
+        "nameKana": "カイ イクオ",
+        "age": null,
+        "party": "民主党",
+        "incumbencyStatus": null,
+        "votes": 1940.45,
+        "elected": true,
+        "linkedProfileId": "m06"
+      },
+      {
+        "name": "太田 龍",
+        "nameKana": "オオタ リュウ",
+        "age": 62,
+        "party": "社会民主党",
+        "incumbencyStatus": null,
+        "votes": 1900,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "三上 たけし",
+        "nameKana": "ミカミ タケシ",
+        "age": 55,
+        "party": "公明党",
+        "incumbencyStatus": null,
+        "votes": 1748,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "吉本 やすし",
+        "nameKana": "ヨシモト ヤスシ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1722,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "松田 和己",
+        "nameKana": "マツダ カズミ",
+        "age": 62,
+        "party": "民主党",
+        "incumbencyStatus": null,
+        "votes": 1718.12,
+        "elected": true,
+        "linkedProfileId": "fm03"
+      },
+      {
+        "name": "佐藤 裕臣",
+        "nameKana": "サトウ ヒロオミ",
+        "age": 66,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1705.89,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "うちだ りさ",
+        "nameKana": "ウチダ リサ",
+        "age": 41,
+        "party": "自由民主党",
+        "incumbencyStatus": null,
+        "votes": 1704,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "西原 茂樹",
+        "nameKana": "ニシハラ シゲキ",
+        "age": 62,
+        "party": "公明党",
+        "incumbencyStatus": null,
+        "votes": 1662,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "稲田 雅之",
+        "nameKana": "イナダ マサユキ",
+        "age": 47,
+        "party": "自由民主党",
+        "incumbencyStatus": null,
+        "votes": 1633.71,
+        "elected": true,
+        "linkedProfileId": "m01"
+      },
+      {
+        "name": "さとう 誠",
+        "nameKana": "サトウ マコト",
+        "age": 59,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1626.71,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "上田 みとし",
+        "nameKana": "ウエダ ミトシ",
+        "age": 62,
+        "party": "自由民主党",
+        "incumbencyStatus": null,
+        "votes": 1625,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "はやせ けんいち",
+        "nameKana": "ハヤセ ケンイチ",
+        "age": 49,
+        "party": "民主党",
+        "incumbencyStatus": null,
+        "votes": 1573,
+        "elected": true,
+        "linkedProfileId": "m18"
+      },
+      {
+        "name": "下田 えいじゅ",
+        "nameKana": "シモダ エイジュ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1560,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "中城 あかね",
+        "nameKana": "ナカジョウ アカネ",
+        "age": 50,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1536,
+        "elected": true,
+        "linkedProfileId": "m16"
+      },
+      {
+        "name": "佐藤 つとむ",
+        "nameKana": "サトウ ツトム",
+        "age": 68,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1491.4,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "小田 忠良",
+        "nameKana": "オダ タダヨシ",
+        "age": 66,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1484,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "かじもと 英一",
+        "nameKana": "カジモト エイイチ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1469,
+        "elected": true,
+        "linkedProfileId": "m09"
+      },
+      {
+        "name": "長友 さちこ",
+        "nameKana": "ナガトモ サチコ",
+        "age": null,
+        "party": "社会民主党",
+        "incumbencyStatus": null,
+        "votes": 1467,
+        "elected": true,
+        "linkedProfileId": "m17"
+      },
+      {
+        "name": "本部 やすとし",
+        "nameKana": "ホンブ ヤストシ",
+        "age": 55,
+        "party": "民主党",
+        "incumbencyStatus": null,
+        "votes": 1464,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "白石 よしもり",
+        "nameKana": "シライシ ヨシモリ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1463,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "河野 はるみつ",
+        "nameKana": "カワノ ハルミツ",
+        "age": 63,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1384,
+        "elected": true,
+        "linkedProfileId": "m10"
+      },
+      {
+        "name": "田村 よしひろ",
+        "nameKana": "タムラ ヨシヒロ",
+        "age": null,
+        "party": "民主党",
+        "incumbencyStatus": null,
+        "votes": 1373,
+        "elected": true,
+        "linkedProfileId": null
+      },
+      {
+        "name": "かい 正幸",
+        "nameKana": "カイ マサユキ",
+        "age": 59,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 1230.84,
+        "elected": false,
+        "linkedProfileId": "m08"
+      },
+      {
+        "name": "大西 幸二",
+        "nameKana": "オオニシ コウジ",
+        "age": 49,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 972,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "吉岡 こう",
+        "nameKana": "ヨシオカ コウ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 922,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "ばば 和久",
+        "nameKana": "ババ カズヒサ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 769,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "大山 和也",
+        "nameKana": "オオヤマ カズヤ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 348,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "しんまち よしろう",
+        "nameKana": "シンマチ ヨシロウ",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 85,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/14432",
+        "sourceTitle": "延岡市議会議員選挙 - 2015年04月26日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選29名・落選6名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。投票率はページ記載値。有権者数・投票者数・無効票数はページに記載が無く未確認。候補者のlinkedProfileIdは、members.jsonのnameKana完全一致（現職）またはformerMembers.jsonの氏名完全一致（既存登録済み元議員）の場合のみ設定した。"
+      }
+    ],
+    "notes": "定数29・候補35名（2015年時点、市議定数は現行27より多い29議席）。太田龍・佐藤裕臣・内田リサ・西原茂樹・上田みとし・佐藤つとむの各氏が当選しているが、現職・既存元議員（fm01〜fm10）のいずれにも該当せず、TASK-XXX（Phase39）で一次資料不足のため新規登録を見送った候補と一致する。今回もservedSessions（会期単位の在職確認）ができないため、新規のformerMembers.json登録は行わず、未リンクのまま構造化データとして保持する。"
   }
 ]
