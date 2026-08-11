@@ -23,3 +23,12 @@ export function civicTimelineDecades(): number[] {
 export function getCivicTimelineEvent(id: string): CivicTimelineEvent | undefined {
   return civicTimelineEvents.find((e) => e.id === id);
 }
+
+/**
+ * 指定した人物（歴代市長id等）が関連付けられている市政年表の出来事を、年の新しい順で返す。
+ * relatedPersonIdsが一次資料で確認できた場合のみ設定されているため、ここで独自に
+ * 期間から逆算して補完することはしない（推測による関連付けを避ける）。
+ */
+export function civicTimelineEventsForPerson(personId: string): CivicTimelineEvent[] {
+  return sortedCivicTimelineEvents().filter((e) => e.relatedPersonIds?.includes(personId));
+}

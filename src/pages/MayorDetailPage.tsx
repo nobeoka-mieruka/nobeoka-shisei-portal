@@ -21,6 +21,7 @@ import {
 } from "../lib/archiveMayors";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
+import { civicTimelineEventsForPerson } from "../lib/civicTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -51,6 +52,7 @@ export function MayorDetailPage() {
   const terms = termsForMayor(archiveMayorTerms, mayor.id);
   const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
   const relatedPolicies = archivePolicies.filter((p) => p.ownerType === "mayor" && p.ownerId === mayor.id);
+  const relatedEvents = civicTimelineEventsForPerson(mayor.id);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -197,6 +199,43 @@ export function MayorDetailPage() {
           )}
           ）で、同じ時期の議案・一般質問・財政データを横断的に確認できます。
         </p>
+      </section>
+
+      <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 className="text-base font-semibold text-on-surface">市政上の主な出来事（在任中）</h2>
+        {relatedEvents.length > 0 ? (
+          <>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              延岡市公式ホームページの年表・資料をもとにした「
+              <Link to="/history" className={`text-primary hover:underline ${linkClass}`}>
+                市政年表
+              </Link>
+              」のうち、この市長の在任期間（確認できた任期）に含まれることが一次資料から確認できた出来事です。市庁舎・行政組織・災害・公共事業・教育福祉産業等を対象としており、網羅を保証するものではありません。
+            </p>
+            <ul className="mt-3 space-y-2">
+              {relatedEvents.map((ev) => (
+                <li key={ev.id} className="rounded-lg border border-outline-variant p-3">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                    <span className="font-medium text-on-surface">{ev.dateLabel}</span>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-semibold text-on-surface-variant">
+                      {ev.category}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm font-medium text-on-surface">{ev.title}</p>
+                  <p className="mt-1 text-sm text-on-surface-variant">{ev.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="mt-2 text-sm text-on-surface-variant">
+            当サイトの
+            <Link to="/history" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+              市政年表
+            </Link>
+            のうち、この市長の在任期間に一次資料で明確に紐づけられた出来事は現在ありません（市政年表自体に出来事が掲載されていない、または在任期間との対応が資料から確定できないためで、在任中に何も無かったという意味ではありません）。
+          </p>
+        )}
       </section>
 
       {mayor.sourceRefs.length > 0 && (

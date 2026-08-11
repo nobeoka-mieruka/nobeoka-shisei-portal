@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { sortedCivicTimelineEvents, civicTimelineCategories, civicTimelineDecades } from "../lib/civicTimeline";
+import archiveMayorsData from "../data/archiveMayors.json";
+import type { ArchiveMayor } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -15,6 +17,9 @@ import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
 import type { CivicTimelineEvent } from "../types";
+
+const archiveMayors = archiveMayorsData as ArchiveMayor[];
+const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -114,9 +119,23 @@ export function HistoryPage() {
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-on-surface">{event.summary}</p>
                 {event.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{event.notes}</p>}
-                {event.relatedPages && event.relatedPages.length > 0 && (
+                {((event.relatedPersonIds && event.relatedPersonIds.length > 0) ||
+                  (event.relatedPages && event.relatedPages.length > 0)) && (
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {event.relatedPages.map((p) => (
+                    {event.relatedPersonIds?.map((id) => {
+                      const mayor = mayorById.get(id);
+                      if (!mayor) return null;
+                      return (
+                        <Link
+                          key={id}
+                          to={`/mayors/${mayor.slug}`}
+                          className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                        >
+                          {mayor.name}市長の在任中
+                        </Link>
+                      );
+                    })}
+                    {event.relatedPages?.map((p) => (
                       <Link
                         key={p.to}
                         to={p.to}
