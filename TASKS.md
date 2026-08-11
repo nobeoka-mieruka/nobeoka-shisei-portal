@@ -5005,3 +5005,75 @@ BLOCKED理由・再開条件：
 - 完了日：2026-08-11
 - コミットID：b195fe7（本体）、12a7ddf（自動生成ファイル同期）
 - 変更概要：上記のとおり。
+
+---
+
+### TASK-067 公開版リリース候補・全サイト総仕上げ監査（Phase32）
+
+状態：DONE（2026-08-11）
+優先度：A（ユーザー指示「Phase 28〜32を連続実行」の第5弾・最終フェーズ）
+対象：`src/data/civicTimelineEvents.json`（重複修正のみ、他は監査）
+
+目的：Phase28〜31の変更を含む全サイトをRelease Candidateとして最終監査する。
+
+監査結果：
+- `validate:data`実行時に、Phase31で追加したcivic-061（市制施行80周年
+  記念式典）が、既存のcivic-049（同一の出来事、既に別の一次資料PDFを
+  出典として登録済み）と重複していることをsearchIndex.jsonの重複検出
+  警告で発見した。civic-061を削除し、civic-049のsourceRefsへ「近代の
+  年表（2011年〜）」を追加（2つの独立した公式資料で同一事実を確認できた
+  旨を記録）して解消した。修正後、`validate:data`のwarnings件数は既存の
+  基準（14件）に復帰した
+- 1905ページ全ての静的prerender出力を再走査し、undefined/NaN/裸のnull/
+  TODO/TBDの混入が0件であることを確認した
+- 1905ページ全ての内部リンクを既知のルート集合と突合し、リンク切れ0件を
+  確認した
+- 外部リンク監査（326件、Phase31で追加した2URLを含む）を再実行し、
+  新規のリンク切れが無いことを確認した（not_found_404は既存の3件のみ、
+  いずれも別フェーズで確認・記録済み）
+- `release-check`（build込み）を実行し、failures=0（既存の軽微な
+  warning「試験公開」表記2件のみ、本フェーズと無関係）を確認した
+- GitHub Actions 3本の直近実行履歴を確認し、全て`success`で完了して
+  いることを確認した（変更不要、no-changeコミットもしていない）
+- `check-blocked-resume.mjs`を再実行し、BLOCKED監視対象7件全てで状態変化
+  なしを確認した
+- 本番環境（Cloudflare Pages）で、PC UA・モバイル（iPhone Safari）UAの
+  両方、直接URL・クエリ文字列付きURLの両方で、主要24ルート（トップ/
+  質問/議員/議案/委員会/政治資金/市長/歴代市長/公約進捗/記者会見/データ
+  状況/更新履歴/市役所案内診断/財政/自治体比較/市政年表/条例/請願/陳情/
+  検索/元議員/年表/議員詳細/市長詳細/議案詳細/委員会詳細/財政個別）を
+  cache-busting付きで確認し、全てHTTP 200、存在しないルートは正しく404
+  であることを確認した
+- Chromeブラウザ拡張は本セッション全体を通じて接続できず、実機での
+  console error・pageerror・hydration errorの直接確認は今回も未実施。
+  静的HTML走査・validate:seo/validate:content・build成功で代替した
+  （Phase19〜27と同じ制約）
+
+受入条件：
+- サイト全体をRelease Candidateとして監査した（達成）
+- 静的・動的ページを列挙し自動検証した（達成。1905プリレンダーページ
+  全件の静的走査＋主要24ルートの本番実機HTTP確認）
+- 404/console error/hydration error/importエラーを確認した（達成、
+  ただしconsole error/hydration errorはブラウザ未接続のため静的手法で
+  代替）
+- 各主要データの件数を確認した（達成、下記「データ集計」参照）
+- 見つかった重複は放置せず修正した（達成。civic-061の重複を発見・修正）
+
+検証結果：
+- `validate:data`（errors=0、warnings=14＝既存基準に復帰、billVotes=1177
+  不変）
+- `validate:freshness`（errors=0）／`validate:sources`（errors=0、
+  info=40）／`validate:completeness`（errors=0）／`validate:finance`
+  （errors=0、info=6）／`validate:political-funds`（errors=0、info=2）
+- `typecheck`／`lint`／`test`（26/26成功）
+- `build`（prerender 1905/1905ルート、`validate:seo`・`validate:content`
+  ともにerrors=0）
+- `release-check`（failures=0、warnings=2、既存の軽微な表記のみ）
+- 本番確認：デプロイ`a6d678fe`（commit `009cdc4`）がActiveであることを
+  確認。主要24ルートでPC UA・モバイルUA・直接URL・クエリ文字列URLの
+  全パターンでHTTP 200、存在しないルートは404を確認した
+
+完了記録：
+- 完了日：2026-08-11
+- コミットID：d2ddfd4（重複修正本体）、009cdc4（自動生成ファイル同期）
+- 変更概要：上記のとおり。
