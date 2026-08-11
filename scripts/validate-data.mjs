@@ -3066,6 +3066,61 @@ try {
   else throw e;
 }
 
+// --- cityOrganizationDivisions.json / cityOrganizationSections.json（延岡市行政組織） ---
+try {
+  const divisions = readJson("src/data/cityOrganizationDivisions.json");
+  const sections = readJson("src/data/cityOrganizationSections.json");
+  if (!Array.isArray(divisions)) throw new Error("cityOrganizationDivisions.jsonが配列ではありません");
+  if (!Array.isArray(sections)) throw new Error("cityOrganizationSections.jsonが配列ではありません");
+
+  checkDuplicateIds({ err, warn }, divisions, "id", "cityOrganizationDivisions.json");
+  checkDuplicateIds({ err, warn }, sections, "id", "cityOrganizationSections.json");
+
+  const divisionIds = new Set(divisions.map((d) => d.id));
+  const OFFICIAL_DOMAIN = "https://www.city.nobeoka.miyazaki.jp/";
+  const PHONE_RE = /^0\d{1,4}-\d{1,4}-\d{3,4}$/;
+
+  for (const d of divisions) {
+    const tag = `cityOrganizationDivisions.json (${d.id ?? "id不明"})`;
+    if (isBlank(d.name)) err(tag, "nameが空です");
+    if (isBlank(d.officialUrl) || !d.officialUrl.startsWith(OFFICIAL_DOMAIN)) {
+      err(tag, `officialUrlが延岡市公式ドメイン以外です: ${d.officialUrl}`);
+    }
+    if (isBlank(d.dataAsOf) || Number.isNaN(Date.parse(d.dataAsOf))) err(tag, `dataAsOfの形式が不正です: ${d.dataAsOf}`);
+    const actualCount = sections.filter((s) => s.parentDivisionId === d.id).length;
+    if (d.sectionCount !== actualCount) {
+      err(tag, `sectionCount（${d.sectionCount}）が実際の所属課数（${actualCount}）と一致しません`);
+    }
+  }
+
+  for (const s of sections) {
+    const tag = `cityOrganizationSections.json (${s.id ?? "id不明"})`;
+    if (isBlank(s.name)) err(tag, "nameが空です");
+    if (s.parentDivisionId != null && !divisionIds.has(s.parentDivisionId)) {
+      err(tag, `cityOrganizationDivisions.jsonに存在しない上位組織IDを参照しています: ${s.parentDivisionId}`);
+    }
+    if (isBlank(s.phone) || !PHONE_RE.test(s.phone)) err(tag, `phoneの形式が不正です: ${s.phone}`);
+    // faxは公式サイトに記載が無い課があるため、nullは許容する（未公表を0や空文字ではなくnullで表す）。
+    if (s.fax != null && !PHONE_RE.test(s.fax)) err(tag, `faxの形式が不正です: ${s.fax}`);
+    if (isBlank(s.officialUrl) || !s.officialUrl.startsWith(OFFICIAL_DOMAIN)) {
+      err(tag, `officialUrlが延岡市公式ドメイン以外です: ${s.officialUrl}`);
+    }
+    if (isBlank(s.businessHours)) err(tag, "businessHoursが空です");
+    if (isBlank(s.dataAsOf) || Number.isNaN(Date.parse(s.dataAsOf))) err(tag, `dataAsOfの形式が不正です: ${s.dataAsOf}`);
+    if (s.subSectionPhones != null) {
+      if (!Array.isArray(s.subSectionPhones)) err(tag, "subSectionPhonesが配列ではありません");
+      else {
+        for (const sub of s.subSectionPhones) {
+          if (sub.tel != null && !PHONE_RE.test(sub.tel)) err(tag, `subSectionPhones内のtel形式が不正です: ${sub.tel}`);
+        }
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("cityOrganizationDivisions.json/cityOrganizationSections.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- archiveAiJobs.json / archiveEntityExtractionCandidates.json（フェーズ10C：AI処理ジョブキュー） ---
 try {
   const archiveAiJobs = readJson("src/data/archiveAiJobs.json");

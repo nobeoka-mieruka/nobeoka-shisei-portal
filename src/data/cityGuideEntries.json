@@ -55,6 +55,17 @@
     "lastChecked": "2026-07-22"
   },
   {
+    "id": "tax-4",
+    "category": "tax",
+    "question": "国民健康保険や後期高齢者医療についてですか？",
+    "department": "国民健康保険課",
+    "phone": "0982-22-7013",
+    "location": "",
+    "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/22/",
+    "description": "国民健康保険の加入・脱退、保険税、後期高齢者医療の資格管理・給付・保険料に関する窓口です。",
+    "lastChecked": "2026-08-11"
+  },
+  {
     "id": "childcare-1",
     "category": "childcare",
     "question": "保育園、認定こども園、入園についての相談ですか？",
@@ -264,6 +275,17 @@
     "lastChecked": "2026-07-22"
   },
   {
+    "id": "work-5",
+    "category": "work",
+    "question": "観光、観光施設、イベント誘致についての相談ですか？",
+    "department": "観光戦略課",
+    "phone": "0982-34-7833",
+    "location": "",
+    "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/41/",
+    "description": "観光振興、観光施設、観光イベントに関する窓口です。",
+    "lastChecked": "2026-08-11"
+  },
+  {
     "id": "disaster-1",
     "category": "disaster",
     "question": "災害、防災、避難などについての相談ですか？",
@@ -273,6 +295,50 @@
     "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/15/",
     "description": "地域防災計画、防災対策、災害応急対策に関する窓口です。",
     "lastChecked": "2026-07-22"
+  },
+  {
+    "id": "disaster-2",
+    "category": "disaster",
+    "question": "火災予防、消防設備、救急についての相談ですか？",
+    "department": "予防課（消防本部）",
+    "phone": "0982-22-7101",
+    "location": "消防庁舎3階",
+    "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/71/",
+    "description": "火災予防、防火対象物の指導、消防設備、危険物に関する窓口です。",
+    "lastChecked": "2026-08-11"
+  },
+  {
+    "id": "consultation-1",
+    "category": "consultation",
+    "question": "何に相談すればよいか分からない困りごとの相談ですか？",
+    "department": "なんでも総合相談センター",
+    "phone": "0982-20-7105",
+    "location": "",
+    "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/34/",
+    "description": "どの窓口に相談すればよいか分からない困りごとについて、内容を整理し担当窓口へつなぐ総合相談窓口です。",
+    "lastChecked": "2026-08-11"
+  },
+  {
+    "id": "election-1",
+    "category": "election",
+    "question": "選挙、投票、選挙人名簿についての相談ですか？",
+    "department": "選挙管理委員会事務局",
+    "phone": "0982-22-7026",
+    "location": "本庁舎3階",
+    "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/79/",
+    "description": "選挙の執行、投票、期日前投票、選挙人名簿に関する窓口です。",
+    "lastChecked": "2026-08-11"
+  },
+  {
+    "id": "council-1",
+    "category": "council",
+    "question": "市議会、議案、請願・陳情についての相談ですか？",
+    "department": "議会事務局",
+    "phone": "0982-22-7029",
+    "location": "",
+    "officialUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/",
+    "description": "市議会の本会議・委員会、議案、請願・陳情、会議録に関する窓口です。",
+    "lastChecked": "2026-08-11"
   },
   {
     "id": "general-info",

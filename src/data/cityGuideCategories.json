@@ -64,16 +64,37 @@
   },
   {
     "id": "disaster",
-    "name": "防災・災害",
-    "description": "災害、防災、避難のことなど",
+    "name": "防災・災害・消防",
+    "description": "災害、防災、避難、火災予防、消防のことなど",
     "icon": "alert",
     "order": 10
+  },
+  {
+    "id": "election",
+    "name": "選挙",
+    "description": "選挙、投票、選挙人名簿のことなど",
+    "icon": "document",
+    "order": 11
+  },
+  {
+    "id": "council",
+    "name": "市議会",
+    "description": "議案、請願・陳情、会議録のことなど",
+    "icon": "document",
+    "order": 12
+  },
+  {
+    "id": "consultation",
+    "name": "総合相談・困りごと",
+    "description": "どこに相談すればよいか分からない困りごとなど",
+    "icon": "support",
+    "order": 13
   },
   {
     "id": "unknown",
     "name": "どれに当てはまるか分からない",
     "description": "相談内容がはっきりしない場合はこちら",
     "icon": "question",
-    "order": 11
+    "order": 14
   }
 ]
