@@ -61,6 +61,8 @@ export function CommitteeDetailPage() {
     (a, b) => eraYearNumber(b[0]) - eraYearNumber(a[0]),
   );
   const distinctSessionCount = new Set(reviewedBills.map((b) => b.sessionId).filter(Boolean)).size;
+  const seiganCount = reviewedBills.filter((b) => b.category === "請願").length;
+  const chinjoCount = reviewedBills.filter((b) => b.category === "陳情").length;
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -98,8 +100,17 @@ export function CommitteeDetailPage() {
             <div className="py-1.5">
               <dt className="text-on-surface-variant">所管事項</dt>
               <dd className="mt-1 text-xs leading-relaxed text-on-surface-variant">
-                延岡市議会委員会条例の該当条文を確認できておらず、確定できていません（最終確認日：
-                {formatDateOrRaw(committee.lastVerifiedAt)}）。新たな一次資料を確認でき次第、更新します。
+                {committee.type === "常任委員会" ? (
+                  <>
+                    延岡市議会委員会条例の該当条文を確認できておらず、確定できていません（最終確認日：
+                    {formatDateOrRaw(committee.lastVerifiedAt)}）。新たな一次資料を確認でき次第、更新します。
+                  </>
+                ) : (
+                  <>
+                    常任委員会（延岡市議会委員会条例第2条第2項）とは異なり、条例上、所管事項が個別に列挙されていません（延岡市例規集で条文本文を確認済み・最終確認日：
+                    {formatDateOrRaw(committee.lastVerifiedAt)}）。詳しい理由は下記の説明を参照してください。
+                  </>
+                )}
               </dd>
             </div>
           )}
@@ -152,7 +163,10 @@ export function CommitteeDetailPage() {
         ) : (
           <>
             <p className="mb-3 text-xs text-on-surface-variant">
-              議案{reviewedBills.length}件（{distinctSessionCount}会期分）。委員会単独の開催日・開催回数は
+              合計{reviewedBills.length}件（{distinctSessionCount}会期分）
+              {(seiganCount > 0 || chinjoCount > 0) &&
+                `、うち請願${seiganCount}件・陳情${chinjoCount}件を含む`}
+              。委員会単独の開催日・開催回数は
               公式資料で公表されていないため、ここでは議案が審査された定例会・臨時会の会期数で示しています。
             </p>
             <div className="space-y-4">
@@ -170,6 +184,11 @@ export function CommitteeDetailPage() {
                         >
                           <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
                             <p className="text-xs text-on-surface-variant">
+                              {(bill.category === "請願" || bill.category === "陳情") && (
+                                <span className="mr-1.5 rounded bg-secondary-container px-1.5 py-0.5 text-[11px] font-semibold text-on-secondary-container">
+                                  {bill.category}
+                                </span>
+                              )}
                               {bill.billNumber}
                               {bill.votingDate ? `（${formatDateOrRaw(bill.votingDate)}）` : ""}
                             </p>

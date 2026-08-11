@@ -14,7 +14,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { dataCoverage } from "../data/dataCoverage";
-import { publicBills, verificationStatusOf, verificationStatusLabels } from "../lib/billVotes";
+import { publicBills, reviewFlowSummaryLabel, verificationStatusOf, verificationStatusLabels } from "../lib/billVotes";
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import { Pagination } from "../components/Pagination";
@@ -421,6 +421,7 @@ export function BillVotesPage() {
                           {bill.submittingDepartment && `／担当課：${bill.submittingDepartment}`}
                         </p>
                         <p className="mt-1 text-sm font-medium text-on-surface">議決結果：{bill.result}</p>
+                        <p className="mt-0.5 text-xs text-on-surface-variant">審査：{reviewFlowSummaryLabel(bill, billVotes)}</p>
                         {bill.memberVotes.length > 0 && (
                           <p className="mt-1 text-xs text-on-surface-variant">
                             賛成{approve}人／反対{oppose}人／退席{departed}人／欠席{absent}人

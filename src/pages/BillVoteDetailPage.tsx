@@ -10,7 +10,13 @@ import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { BillVoteBadge } from "../components/bills/BillVoteBadge";
-import { billVoteLabels, memberVotesUnavailableReason, publicBills, verificationStatusOf } from "../lib/billVotes";
+import {
+  billVoteLabels,
+  committeeFlowStatus,
+  memberVotesUnavailableReason,
+  publicBills,
+  verificationStatusOf,
+} from "../lib/billVotes";
 import { getCommitteeByName } from "../lib/committees";
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -19,6 +25,8 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
+import { ReviewFlowTimeline } from "../components/bills/ReviewFlowTimeline";
+import { GlossaryNote } from "../components/GlossaryNote";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -118,6 +126,8 @@ export function BillVoteDetailPage() {
   const documents = collectDocuments(bill);
   const councilDocumentLink = resolveCouncilDocumentLink(bill);
   const committeeForBill = bill.committee ? getCommitteeByName(bill.committee) : undefined;
+  const flowStatus = committeeFlowStatus(bill, billVotes);
+  const isPetitionLike = bill.category === "請願" || bill.category === "陳情";
   const relatedQuestions = (bill.relatedQuestionIds ?? [])
     .map((qId) => generalQuestions.find((q) => q.id === qId))
     .filter((q): q is GeneralQuestionItem => !!q);
@@ -276,6 +286,39 @@ export function BillVoteDetailPage() {
           )}
         </dl>
       </div>
+
+      {/* 審査の流れ */}
+      <SectionCard title="審査の流れ">
+        <ReviewFlowTimeline bill={bill} allBills={billVotes} />
+        <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <GlossaryNote
+            term="委員会付託"
+            definition="議案を本会議で全議員が審議する前に、専門的に扱う委員会（総務政策・産業建設・厚生教育など）へ審査を委ねることです。"
+          />
+          <GlossaryNote
+            term="付託省略"
+            definition="人事案件や専決処分の承認など、内容が明確な議案について、委員会での審査を経ずに本会議で直接採決することです。議長の提案に議員から異議がない場合に決定します。"
+          />
+          {flowStatus === "confirmed" && (
+            <GlossaryNote
+              term="委員長報告"
+              definition="委員会での審査が終わった後、本会議で委員長が審査の経過と結果を全議員に報告することです。この報告の後に、本会議での採決が行われます。"
+            />
+          )}
+          {bill.result === "継続審査" && (
+            <GlossaryNote
+              term="継続審査"
+              definition="今の会期中に結論を出さず、次の会期以降も審査を続けることです。否決ではなく、審査が完了していない状態を示します。"
+            />
+          )}
+          {isPetitionLike && (
+            <GlossaryNote
+              term="採択・不採択"
+              definition="請願・陳情に対する議会の判断です。「採択」は内容に賛成し実現を求めること、「不採択」は実現を求めないことを意味します。「一部採択」「趣旨採択」は、内容の一部または趣旨のみに賛成する判断です。"
+            />
+          )}
+        </div>
+      </SectionCard>
 
       {/* 議案の概要 */}
       <SectionCard title="議案の概要">

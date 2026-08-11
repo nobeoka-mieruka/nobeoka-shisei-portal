@@ -284,7 +284,7 @@ export function DataStatusPage() {
     label: "議案ごとの議決結果（既存機能）",
     count: billVotes.length,
     unit: "件",
-    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳：公開あり${billVotesWithMemberVotes}件（記名投票等）／会議録で非公開と確認済み${billVotesNotDisclosed}件（起立採決等で個人名が記録されていないことを会議録で確認）／未確認${billVotesUnconfirmed}件（会議録を未確認）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会は、人事案件・意見書・決議等の委員会付託を省略する案件を含むため、必ずしも全件一致が正しい状態とは限りません）。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
+    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳：公開あり${billVotesWithMemberVotes}件（記名投票等）／会議録で非公開と確認済み${billVotesNotDisclosed}件（起立採決等で個人名が記録されていないことを会議録で確認）／未確認${billVotesUnconfirmed}件（会議録を未確認）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
     linkTo: "/bills/votes",
     linkLabel: "議案ごとの賛否を見る",
   };
@@ -406,7 +406,7 @@ export function DataStatusPage() {
     {
       label: "議案：付託委員会の確認",
       metric: simpleCompleteness(billVotesCommitteeKnown, billVotes.length),
-      note: "人事案件・意見書・決議等、委員会付託を省略する案件を含むため、必ずしも100%が正しい状態とは限らない",
+      note: "未確認分は会議録未公開の会期のみ（委員会付託省略案件は「付託なし」として確認済みに計上）",
     },
     {
       label: "政治資金団体：代表者・会計責任者・当該年分収支の完全確認",
@@ -415,6 +415,7 @@ export function DataStatusPage() {
     {
       label: "委員会：所管事項の確認",
       metric: simpleCompleteness(committeesWithJurisdiction, committees.length),
+      note: "常任委員会3件と、設置時提案理由で目的が確認できた特別委員会1件は確認済み。議会運営委員会・他の特別委員会は、条例上、所管事項の個別列挙を持たない構造のため、この項目には該当しない",
     },
     {
       label: "歴代市長：任期の日単位での確認",
