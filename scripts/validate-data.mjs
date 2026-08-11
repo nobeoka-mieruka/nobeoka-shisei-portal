@@ -1641,7 +1641,7 @@ try {
   else throw e;
 }
 
-// --- archiveMemberProfiles.json / archiveMemberTerms.json / archiveMemberAffiliations.json（延岡市政アーカイブ：過去議員） ---
+// --- archiveMemberProfiles.json / archiveMemberTerms.json / archiveMemberAffiliations.json（延岡市政アーカイブ：現職・元議員） ---
 let archiveMemberProfileIds = new Set();
 try {
   const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");

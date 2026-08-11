@@ -35,8 +35,11 @@ for (const m of members) {
 }
 
 // --- archive: former members ---
+// archiveMemberProfiles.jsonは現職・元議員の両方を収録する（Phase35で現職分を追加）。
+// legacyMemberId（現職）が設定されたプロフィールは、ここでは元議員として索引化しない
+// （現職議員が検索結果で「元議員」と誤表示されるのを防ぐ）。
 try {
-  const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json");
+  const archiveMemberProfiles = readJson("src/data/archiveMemberProfiles.json").filter((p) => !p.legacyMemberId);
   for (const p of archiveMemberProfiles) {
     entries.push({
       id: `former-member-${p.id}`,

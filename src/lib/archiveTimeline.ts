@@ -86,7 +86,12 @@ export function buildMemberTermEvents(profiles: ArchiveMemberProfile[], terms: A
   for (const term of terms) {
     const profile = profiles.find((p) => p.id === term.memberProfileId);
     if (!profile) continue;
-    const relatedPath = `/people/${profile.slug}`;
+    // 現職は/members/:id、元議員は/members/former/:slugへ誘導する（既存のfindMemberOrFormerLinkと
+    // 同じ経路。/people/:slugはpersonSlug()でtype別プレフィックスを付けたslugを要求するため、
+    // ArchiveMemberProfile.slug（プレフィックス無し）をそのまま渡すと不整合になる）。
+    const relatedPath = profile.legacyMemberId
+      ? `/members/${profile.legacyMemberId}`
+      : `/members/former/${profile.slug}`;
 
     events.push({
       id: `${term.id}-start`,

@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
+import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
+import archiveMemberTermsData from "../data/archiveMemberTerms.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
@@ -19,6 +21,7 @@ import type {
   CouncilSession,
   CitySpecialPost,
 } from "../types";
+import type { ArchiveMemberProfile, ArchiveMemberTerm } from "../types/historicalArchive";
 import { getFaction } from "../lib/factions";
 import { getCommitteeByName } from "../lib/committees";
 import {
@@ -80,6 +83,8 @@ interface MemberTimelineEvent {
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
+const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+const archiveMemberTerms = archiveMemberTermsData as ArchiveMemberTerm[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
@@ -298,6 +303,12 @@ export function MemberDetailPage() {
 
   const faction = getFaction(member.factionId);
   const isProfileConfirmed = member.profile !== PLACEHOLDER_PROFILE;
+  const memberArchiveProfile = archiveMemberProfiles.find((p) => p.legacyMemberId === member.id);
+  const memberArchiveTerms = memberArchiveProfile
+    ? archiveMemberTerms
+        .filter((t) => t.memberProfileId === memberArchiveProfile.id)
+        .sort((a, b) => b.termStart.localeCompare(a.termStart))
+    : [];
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
 
@@ -474,6 +485,27 @@ export function MemberDetailPage() {
           </>
         )}
       </SectionCard>
+
+      {memberArchiveTerms.length > 0 && (
+        <SectionCard title="選挙結果・在籍期間">
+          <p className="text-xs leading-relaxed text-on-surface-variant">
+            延岡市選挙管理委員会が公表する選挙結果に基づく、現在の任期の当選記録です。委員会・会派の変遷等、任期途中の履歴は今後のフェーズで拡充予定です。
+          </p>
+          <ul className="mt-2 space-y-2">
+            {memberArchiveTerms.map((t) => (
+              <li key={t.id} className="rounded-lg border border-outline-variant p-3 text-sm">
+                <p className="flex items-center gap-1.5 font-medium text-on-surface">
+                  {t.termNumber ? `当選${t.termNumber}回目　` : ""}
+                  {formatJapaneseDate(t.termStart)}〜{t.termEnd ? formatJapaneseDate(t.termEnd) : "現在"}
+                </p>
+                {t.sourceRefs[0]?.notes && (
+                  <p className="mt-1 text-xs text-on-surface-variant">{t.sourceRefs[0].notes}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
 
       {member.career && member.career.length > 0 && (
         <SectionCard title="経歴">

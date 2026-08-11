@@ -503,7 +503,10 @@ export function getIndexableRoutes() {
       ),
     });
   }
-  for (const p of data.archiveMemberProfiles) {
+  // archiveMemberProfiles.jsonは現職・元議員の両方を収録する（Phase35で現職分を追加）。
+  // /members/former/:slugは元議員専用ページのため、legacyMemberId（現職）が設定された
+  // プロフィールは対象外とする（現職議員を誤って「元議員」としてURL生成・sitemap掲載しない）。
+  for (const p of data.archiveMemberProfiles.filter((p) => !p.legacyMemberId)) {
     const path = `/members/former/${p.slug}`;
     urls.push({
       path,

@@ -21,7 +21,10 @@ import {
   termsForMemberProfile,
 } from "../lib/archiveMembers";
 
-const profiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+// archiveMemberProfiles.jsonは現職・元議員の両方を収録する（Phase35で現職分を追加）。
+// このページは元議員一覧専用のため、legacyMemberId（現職）が設定されたプロフィールは除外する
+// （現職議員をこのページに掲載しない）。
+const profiles = (archiveMemberProfilesData as ArchiveMemberProfile[]).filter((p) => !p.legacyMemberId);
 const terms = archiveMemberTermsData as ArchiveMemberTerm[];
 const affiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;

@@ -56,7 +56,11 @@ export function MemberFormerDetailPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
-  const profile = profiles.find((p) => p.slug === slug);
+  // legacyMemberId（現職）が設定されたプロフィールは対象外とする。archiveMemberProfiles.jsonは
+  // 現職・元議員の両方を収録するため、slugの一致だけで検索すると、Phase35で追加した現職議員の
+  // プロフィールが「元議員」として誤表示されてしまう（実在の現職議員を誤って元議員扱いする
+  // 重大な誤情報になるため、二重にガードする）。
+  const profile = profiles.find((p) => p.slug === slug && !p.legacyMemberId);
 
   if (!profile) {
     return (

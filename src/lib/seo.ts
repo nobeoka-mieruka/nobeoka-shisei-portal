@@ -1460,7 +1460,10 @@ function personDetailSeo(slug: string, options?: SeoOptions): SeoResult {
 
 /** /members/former/:slug */
 function memberFormerDetailSeo(slug: string, options?: SeoOptions): SeoResult {
-  const profile = archiveMemberProfiles.find((p) => p.slug === slug);
+  // archiveMemberProfiles.jsonは現職・元議員の両方を収録する（Phase35で現職分を追加）。
+  // legacyMemberId（現職）が設定されたプロフィールは、このページのSEOメタデータ生成対象外とする
+  // （現職議員がGoogle検索結果等で「元議員」と表示されるのを防ぐ）。
+  const profile = archiveMemberProfiles.find((p) => p.slug === slug && !p.legacyMemberId);
   if (!profile) return notFound(`/members/former/${slug}`, "元議員情報");
 
   const url = `${SITE_URL}/members/former/${slug}`;

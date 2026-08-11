@@ -44,7 +44,11 @@ import { simpleCompleteness, formatCoverageRate, type CompletenessMetric } from 
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
-const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+// archiveMemberProfiles.jsonは現職・元議員の両方を収録する（Phase35で現職分を追加）。
+// このページの「元議員（詳細プロフィール）」件数には元議員分のみを数える。
+const archiveFormerMemberProfiles = (archiveMemberProfilesData as ArchiveMemberProfile[]).filter(
+  (p) => !p.legacyMemberId,
+);
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
@@ -235,10 +239,10 @@ export function DataStatusPage() {
     },
     {
       label: "元議員（詳細プロフィール）",
-      count: archiveMemberProfiles.length,
+      count: archiveFormerMemberProfiles.length,
       unit: "名",
       detail:
-        formerMembers.length > archiveMemberProfiles.length
+        formerMembers.length > archiveFormerMemberProfiles.length
           ? `簡易記録のみのformerMembers.json登録は${formerMembers.length}名。詳細プロフィール整備は開始段階です。`
           : undefined,
       linkTo: "/members/former",

@@ -17,7 +17,10 @@ import { sessionMembershipStatus } from "../lib/archiveMembers";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
-const profiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+// archiveMemberProfiles.jsonは現職・元議員の両方を収録する（Phase35で現職分を追加）。
+// このページは元議員の会期別在籍履歴専用のため、legacyMemberId（現職）が設定された
+// プロフィールは除外する（現職議員の任期が「元議員の在籍確認」として誤表示されるのを防ぐ）。
+const profiles = (archiveMemberProfilesData as ArchiveMemberProfile[]).filter((p) => !p.legacyMemberId);
 const terms = archiveMemberTermsData as ArchiveMemberTerm[];
 const councilSessions = [...(councilSessionsData as CouncilSession[])].sort((a, b) => a.id.localeCompare(b.id));
 
