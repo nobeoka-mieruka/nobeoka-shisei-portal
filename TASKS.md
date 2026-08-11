@@ -1,11 +1,12 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-10（継続運用・残タスク完全処理モード：TASK-054（一般質問17項目の
-答弁補完）を一次資料に基づき完了。質問項目1,470件の答弁概要・答弁者確認率が100%に到達）
+最終更新日：2026-08-11（Phase19「議案の付託委員会・審査経路の残件完全処理」・Phase20
+「議案・委員会・請願・陳情の審査フロー統合・可視化」（TASK-055）完了。committee確認率
+98.0%に到達し、議案詳細ページへ提出→委員会付託→本会議採決の時系列フロー表示を追加）
 
-現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-10時点）：
-DONE 56／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計65
+現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-11時点）：
+DONE 57／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計66
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 7件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」参照）。
@@ -4088,3 +4089,101 @@ BLOCKED理由・再開条件：
   `npm run validate:data`／`typecheck`／`lint`／`test`／`build`
   （prerender・validate:seo・validate:content含む）はすべてエラー0で通過。
   billVotes=1177（不変）を確認済み。
+
+---
+
+### TASK-055 議案・委員会・請願・陳情の審査フロー統合・可視化（Phase20）
+
+状態：DONE（2026-08-11）
+優先度：A（ユーザー指示「Phase 20」を最優先で着手）
+対象：`src/lib/billVotes.ts`、`src/components/bills/ReviewFlowTimeline.tsx`（新設）、
+`src/pages/BillVoteDetailPage.tsx`、`src/pages/BillVotesPage.tsx`、
+`src/pages/CommitteeDetailPage.tsx`、`src/pages/DataStatusPage.tsx`
+
+目的：Phase19で大幅に進んだcommittee（付託委員会）情報を活用し、「議案が提出された後、
+どの委員会で審査され、どのような経路を通って、最終的にどう決まったのか」を、市民が
+議案詳細ページ1つで理解できるようにする。新しい巨大DBは作らず、既存のbillVotes.json／
+committees.jsonのみを結合して表示する（二重管理データを持たない）。
+
+事前調査：
+- `CommitteeDetailPage.tsx`はTASK-037/038で既に「委員会→議案」の逆引き表示（審査した
+  議案の年度別一覧、本会議結果バッジ、活動報告書、根拠資料）を実装済みであることを確認した。
+  今回はこれを土台に、請願・陳情の内訳表示と、所管事項未確認の理由の書き分けを強化した
+- `BillVoteItem`型にはsubmittedDate／votingDate／committeeはあるが、委員会の個別開催日・
+  委員長報告日・委員会単独の審査結果を表す独立フィールドは存在しないことを確認した。
+  一次資料（延岡市議会公式サイト・会議録検索システム）にもこれらは日付単位で公表されて
+  いないため、新しいフィールドを追加して推測で埋めることはせず、「提出」「委員会付託・
+  審査」「本会議採決」の3ステップ（付託省略の場合は2ステップ）で、確認できる事実のみを
+  時系列表示する設計とした
+- `/petitions`・`/requests`・`/ordinances`ルートは`CouncilDocumentsArchivePage.tsx`が
+  提供する別系統の歴史的公文書アーカイブ（`archiveCouncilDocuments.json`）であり、
+  billVotes.jsonの請願・陳情（category="請願"/"陳情"）とは別管理であることを確認した。
+  ユーザー指示どおり、請願・陳情はbillVotes.jsonへの統合設計を維持し、新規ページは
+  作成していない
+- `validate-data.mjs`には既に日付順序チェック（submittedDate<=votingDate）と
+  committee参照先チェック（committees.json名簿との突合）が実装済みであることを確認した。
+  ユーザー指示にあった「付託なし＋committeeあり矛盾」「審査結果あり＋committee不明」
+  「本会議結果との矛盾」は、対応する独立フィールドがスキーマ上存在しないため、
+  チェックを追加すると存在しない前提のルールになってしまう。新しいフィールドを
+  機械的に追加しない方針を優先し、これらのチェックは追加していない
+
+実装内容：
+- `src/lib/billVotes.ts`：`NO_COMMITTEE_REFERRAL`定数（Phase19のセンチネル値を単一情報源化）、
+  `committeeFlowStatus(bill, allBills)`を新設。committeeフィールドを
+  "confirmed"（実委員会名確認）／"no-referral"（付託省略・確認済み）／"pending"（同一会期の
+  他議案は確認済みだがこの議案だけ未確認）／"source-unavailable"（同一会期の全議案が
+  未確認＝会議録未公開と判断できる）の4状態に分類する。特定の会期ID（令和8年5月臨時会・
+  6月定例会等）をハードコードせず、会期単位のデータから自動判定するため、新しい会議録が
+  公開されて既存の自動抽出パイプラインがcommitteeを埋めればstatusも自動的に追従する
+  （Section22の自動監視連携の要件を満たす）。`reviewFlowSummaryLabel()`も追加
+- `src/components/bills/ReviewFlowTimeline.tsx`（新設）：議案提出→委員会付託・審査→
+  本会議採決を縦型タイムライン（スマホで横スクロールしないflex-col構造）で表示。
+  委員会の個別開催日・審査結果は一次資料に日付単位の記載がないため、日付を推測で
+  補うことはせず、「付託先の委員会」の事実のみを示す。付託省略・会議録未公開の場合は
+  それぞれ専用の文言で表示し、「未確認」と混同しない
+- `BillVoteDetailPage.tsx`：「審査の流れ」セクションを追加。委員会付託・付託省略の用語解説
+  （GlossaryNote）を常時表示し、委員会確認済みの場合のみ「委員長報告」、result="継続審査"の
+  場合のみ「継続審査」、category="請願"/"陳情"の場合のみ「採択・不採択」を条件表示（長文を
+  避け、該当する議案にのみ関連する用語を出す）
+- `BillVotesPage.tsx`：一覧の各行に`reviewFlowSummaryLabel()`による審査状況の一言表示を追加。
+  既存の委員会絞り込み（`FilterSelect`、`committeeOptions`はbillVotes.jsonから動的生成、
+  現在11種類）は変更せずそのまま機能することを確認した
+- `CommitteeDetailPage.tsx`：所管事項が未確認の場合の説明文を、常任委員会（一次資料未確認、
+  最終確認日を表示）と、議会運営委員会・特別委員会（条例上、常任委員会のような所管事項の
+  個別列挙を持たない構造であることを条文で確認済み）とで書き分けた（従来は両者とも同じ
+  「確認できていません」という表示で、ユーザー指示Section16が指摘する「未確認」と
+  「構造が異なる」の混同状態だった）。「審査した議案」の合計件数表示に「うち請願○件・
+  陳情○件を含む」の内訳を追加し、一覧の各行に請願／陳情のカテゴリバッジ（色分け）を追加した
+- `DataStatusPage.tsx`：付託委員会・委員会所管事項の確認率の説明文を、Phase19終了時点の
+  正確な状態（未確認24件は会議録未公開の2会期のみに限定されており、付託省略案件は
+  「付託なし」として確認済みに計上済み）に更新。件数（billVotes=1,177等）は変更していない
+
+検証結果：
+- `validate:data`（errors=0、billVotes=1177不変、warnings=14=ベースライン）
+- `typecheck`／`lint`（既存warningのみ、fast-refresh警告は関数を`lib/`側へ移設して解消）／
+  `test`（26/26成功）
+- `build`（prerender 1904/1904ルート生成、`validate:seo` failures=0、`validate:content`
+  errors=0）
+- `validate:freshness`（errors=0）／`validate:sources`（errors=0、info=40=既存の二次資料
+  利用明示のみ）／`validate:completeness`（errors=0）／`release:check`（failures=0、
+  既存の軽微なwarning2件のみ、本タスクとは無関係）
+- ベースライン再確認：billVotes=1,177／一般質問=397（`QUESTION_LIKE_SPEECH_TYPES`基準で
+  再集計）／質問項目=1,470／現職議員=26／政治資金団体=21、すべて不変
+- 本番確認：Cloudflare Pagesの最新デプロイ（commit `d06cb97`）がProductionでActiveに
+  なったことを`wrangler pages deployment list`で確認。キャッシュ回避クエリ付きで
+  `/`・`/bills`・`/bills/votes`・委員会確認済み議案・付託省略議案・会議録未公開議案・
+  `/committees`・委員会詳細2件・`/data-status`・`/sitemap.xml`・`/robots.txt`を直接
+  アクセスし、全てHTTP 200、ビルド日時フッター（2026年8月11日11:19）がcommit `d06cb97`の
+  コミット日時と一致することを確認した
+- 本セッションではChromeブラウザ拡張が未接続だったため、実機ブラウザでのconsole error・
+  hydration error・390px表示・戻る/進む/リロード確認は今回未実施（curlベースの構造検証の
+  みで代替）。次回、拡張が接続できるセッションで改めて実施することを推奨する
+
+BLOCKED理由・再開条件：
+- 該当なし（DONE）。ただし上記のとおりブラウザ実機確認は未実施のため、次回セッションで
+  可能であれば実施する
+
+完了記録：
+- 完了日：2026-08-11
+- コミットID：d06cb97
+- 変更概要：上記のとおり。
