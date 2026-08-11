@@ -325,10 +325,24 @@ export interface MunicipalityComparisonEntry {
   fiscalStrengthIndex: DatedMetric;
   realDebtServiceRatioPercent: DatedMetric;
   futureBurdenRatioPercent: DatedMetric;
+  /** 経常収支比率（％）。宮崎県「指標でみる宮崎県」市町村編財政より。 */
+  currentAccountRatioPercent?: DatedMetric;
+  /** 自主財源比率（％）。歳入総額に占める自主財源（市町村税等）の割合。 */
+  independentFinancialResourceRatioPercent?: DatedMetric;
   /** 基金残高（百万円、基金全体）。 */
   fundBalanceMillionYen: DatedMetric;
   /** 地方債現在高（千円）。 */
   municipalBondBalanceThousandYen: DatedMetric;
+  /** 歳入総額（千円）。 */
+  totalRevenueThousandYen?: DatedMetric;
+  /** 市町村税収入済額（千円）。 */
+  localTaxRevenueThousandYen?: DatedMetric;
+  /** 住民1人当たり歳入（千円）。出典が直接公表している値（当サイトの算出値ではない）。 */
+  perCapitaRevenueThousandYen?: DatedMetric;
+  /** 住民1人当たり市町村税（円）。出典が直接公表している値（当サイトの算出値ではない）。 */
+  perCapitaLocalTaxYen?: DatedMetric;
+  /** 住民1人当たり地方債現在高（千円）。出典が直接公表している値（当サイトの算出値ではない）。 */
+  perCapitaBondBalanceThousandYen?: DatedMetric;
   sourceRefs: SourceEntry[];
   notes?: string;
   lastVerifiedAt: string;

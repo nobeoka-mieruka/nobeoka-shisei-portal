@@ -19,6 +19,12 @@ function metricCell(metric: DatedMetric, formatValue: (v: number) => string): st
   return formatValue(metric.value);
 }
 
+/** Phase23で追加した任意項目（型ではoptional）向け。フィールド自体が無い場合も「確認中」として扱う。 */
+function optionalMetricCell(metric: DatedMetric | undefined, formatValue: (v: number) => string): string {
+  if (!metric) return "確認中";
+  return metricCell(metric, formatValue);
+}
+
 function metricCsvValue(metric: DatedMetric): string | number | null {
   return metric.value;
 }
@@ -40,12 +46,19 @@ const MUNICIPALITY_CSV_COLUMNS: CsvColumn<MunicipalityComparisonEntry>[] = [
   { header: "教育長給料月額(円)", value: (m) => metricCsvValue(m.superintendentMonthlyYen) },
   { header: "財政力指数", value: (m) => metricCsvValue(m.fiscalStrengthIndex) },
   { header: "財政指標基準年度", value: (m) => m.fiscalStrengthIndex.referenceDate },
+  { header: "経常収支比率(%)", value: (m) => (m.currentAccountRatioPercent ? metricCsvValue(m.currentAccountRatioPercent) : null) },
   { header: "実質公債費比率(%)", value: (m) => metricCsvValue(m.realDebtServiceRatioPercent) },
   { header: "将来負担比率(%)", value: (m) => metricCsvValue(m.futureBurdenRatioPercent) },
+  { header: "自主財源比率(%)", value: (m) => (m.independentFinancialResourceRatioPercent ? metricCsvValue(m.independentFinancialResourceRatioPercent) : null) },
   { header: "基金残高(百万円)", value: (m) => metricCsvValue(m.fundBalanceMillionYen) },
   { header: "基金残高基準日", value: (m) => m.fundBalanceMillionYen.referenceDate },
   { header: "地方債現在高(千円)", value: (m) => metricCsvValue(m.municipalBondBalanceThousandYen) },
   { header: "地方債現在高基準日", value: (m) => m.municipalBondBalanceThousandYen.referenceDate },
+  { header: "歳入総額(千円)", value: (m) => (m.totalRevenueThousandYen ? metricCsvValue(m.totalRevenueThousandYen) : null) },
+  { header: "市町村税(千円)", value: (m) => (m.localTaxRevenueThousandYen ? metricCsvValue(m.localTaxRevenueThousandYen) : null) },
+  { header: "1人当たり歳入(千円)", value: (m) => (m.perCapitaRevenueThousandYen ? metricCsvValue(m.perCapitaRevenueThousandYen) : null) },
+  { header: "1人当たり市税(円)", value: (m) => (m.perCapitaLocalTaxYen ? metricCsvValue(m.perCapitaLocalTaxYen) : null) },
+  { header: "1人当たり地方債現在高(千円)", value: (m) => (m.perCapitaBondBalanceThousandYen ? metricCsvValue(m.perCapitaBondBalanceThousandYen) : null) },
   { header: "出典URL", value: (m) => m.sourceRefs.map((s) => s.url) },
   { header: "最終確認日", value: (m) => m.lastVerifiedAt },
 ];
@@ -118,16 +131,39 @@ export function CompareMunicipalitiesPage() {
 
       <SectionCard title="財政指標（令和5年度決算ベース）">
         <CompareTable
-          caption="延岡市と比較対象5市の財政力指数・実質公債費比率・将来負担比率"
+          caption="延岡市と比較対象5市の財政力指数・経常収支比率・実質公債費比率・将来負担比率・自主財源比率"
           rows={municipalities}
           rowKey={(m) => m.id}
           columns={[
             { header: "自治体", render: (m) => m.municipality },
             { header: "財政力指数", align: "right", render: (m) => metricCell(m.fiscalStrengthIndex, (v) => v.toFixed(3)) },
+            { header: "経常収支比率", align: "right", render: (m) => optionalMetricCell(m.currentAccountRatioPercent, percent) },
             { header: "実質公債費比率", align: "right", render: (m) => metricCell(m.realDebtServiceRatioPercent, percent) },
             { header: "将来負担比率", align: "right", render: (m) => metricCell(m.futureBurdenRatioPercent, percent) },
+            { header: "自主財源比率", align: "right", render: (m) => optionalMetricCell(m.independentFinancialResourceRatioPercent, percent) },
           ]}
         />
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          出典：宮崎県「指標でみる宮崎県」市町村編財政。6市とも令和5年度決算・同一資料で年度がそろっています。
+        </p>
+      </SectionCard>
+
+      <SectionCard title="歳入総額・市町村税（令和5年度決算ベース）">
+        <CompareTable
+          caption="延岡市と比較対象5市の歳入総額・市町村税収入済額と、それぞれの住民1人当たり額"
+          rows={municipalities}
+          rowKey={(m) => m.id}
+          columns={[
+            { header: "自治体", render: (m) => m.municipality },
+            { header: "歳入総額", align: "right", render: (m) => optionalMetricCell(m.totalRevenueThousandYen, thousand) },
+            { header: "1人当たり歳入", align: "right", render: (m) => optionalMetricCell(m.perCapitaRevenueThousandYen, thousand) },
+            { header: "市町村税", align: "right", render: (m) => optionalMetricCell(m.localTaxRevenueThousandYen, thousand) },
+            { header: "1人当たり市税", align: "right", render: (m) => optionalMetricCell(m.perCapitaLocalTaxYen, yen) },
+          ]}
+        />
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          1人当たり額は当サイトの算出値ではなく、出典資料が直接公表している値です（令和5年1月1日現在の住民基本台帳人口を用いて算定されており、上表の「人口」欄の基準日とは異なります）。歳出・財政調整基金単体・標準財政規模は、この出典資料には掲載が無く、当サイトでは未確認です。
+        </p>
       </SectionCard>
 
       <SectionCard title="基金残高・地方債現在高">
@@ -141,6 +177,7 @@ export function CompareMunicipalitiesPage() {
             { header: "基金残高基準日", render: (m) => m.fundBalanceMillionYen.referenceDate ?? "確認中" },
             { header: "地方債現在高", align: "right", render: (m) => metricCell(m.municipalBondBalanceThousandYen, thousand) },
             { header: "地方債基準日", render: (m) => m.municipalBondBalanceThousandYen.referenceDate ?? "確認中" },
+            { header: "1人当たり地方債現在高", align: "right", render: (m) => optionalMetricCell(m.perCapitaBondBalanceThousandYen, thousand) },
           ]}
         />
       </SectionCard>

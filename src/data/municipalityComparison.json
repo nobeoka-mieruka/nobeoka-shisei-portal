@@ -20,10 +20,18 @@
       { "label": "延岡市の概要（面積）", "url": "https://www.city.nobeoka.miyazaki.jp/site/kigyorichi/24122.html" },
       { "label": "延岡市の人事行政の運営状況", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.45か月分、令和6年度実績）を含まない月額。財政指標（財政力指数・実質公債費比率・将来負担比率・地方債現在高）は令和5年度決算ベースで、比較対象6市と同一の宮崎県資料から取得しており年度がそろっている。基金残高（令和6年度末）は市債残高（令和5年度末）と年度が1年ずれている点に留意。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.45か月分、令和6年度実績）を含まない月額。財政指標（財政力指数・実質公債費比率・将来負担比率・地方債現在高）は令和5年度決算ベースで、比較対象6市と同一の宮崎県資料から取得しており年度がそろっている。基金残高（令和6年度末）は市債残高（令和5年度末）と年度が1年ずれている点に留意。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 96.9, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 39.1, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 72565693, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 15937351, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 617, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 135564, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 460, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   },
   {
     "id": "muni-miyazaki",
@@ -46,10 +54,18 @@
       { "label": "宮崎市に移住をお考えの皆さまへ（面積）", "url": "https://www.city.miyazaki.miyazaki.jp/city/city_life/388316.html" },
       { "label": "議員名簿／宮崎市議会", "url": "https://www.city.miyazaki.miyazaki.jp/parliament/list/300461.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.45か月分）を含まない月額。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.45か月分）を含まない月額。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 94.3, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 43, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 202966368, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 56587480, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 508, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 141619, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 414, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   },
   {
     "id": "muni-miyakonojo",
@@ -74,10 +90,18 @@
       { "label": "市議会の組織を紹介します（都城市議会、議員定数29人と明記）", "url": "https://www.city.miyakonojo.miyazaki.jp/site/gikai/2861.html" },
       { "label": "都城市教育委員会教育長の給与、勤務時間その他の勤務条件に関する条例", "url": "https://www1.g-reiki.net/mkj/reiki/reiki_int/reiki_honbun/r322RG00000186.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.40か月分）を含まない月額。副市長は2名制で、総括担当755,000円・事業担当675,000円。ここには筆頭（総括担当）の額を掲載。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.40か月分）を含まない月額。副市長は2名制で、総括担当755,000円・事業担当675,000円。ここには筆頭（総括担当）の額を掲載。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 95.9, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 55.8, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 133140300, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 20736561, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 824, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 128316, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 402, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   },
   {
     "id": "muni-hyuga",
@@ -100,10 +124,18 @@
       { "label": "日向市議会公式サイト", "url": "https://www.hyugacity.jp/shigikai/" },
       { "label": "日向市教育長の給与、勤務時間その他の勤務条件に関する条例", "url": "https://www.hyugacity.jp/reiki_new/reiki_honbun/q607RG00000163.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.40か月分）を含まない月額。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.40か月分）を含まない月額。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 89.7, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 40.3, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 34566893, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 8898314, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 582, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 149828, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 494, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   },
   {
     "id": "muni-nichinan",
@@ -125,10 +157,18 @@
       { "label": "日南市の給与・定員管理等について", "url": "https://www.city.nichinan.lg.jp/material/files/group/20/nichinanR7.pdf" },
       { "label": "日南市の概要（第2章 市の概要）", "url": "https://www.city.nichinan.lg.jp/material/files/group/8/586b4aa27993a8297ae348e9d5760bd5_1.pdf" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.45か月分）を含まない月額。議員定数・教育長給料月額は公式資料に到達できず未確認。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.45か月分）を含まない月額。議員定数・教育長給料月額は公式資料に到達できず未確認。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 91.6, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 37.5, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 35564732, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 5573967, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 711, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 111504, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 571, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   },
   {
     "id": "muni-kobayashi",
@@ -152,10 +192,18 @@
       { "label": "位置・地勢・気候／小林市公式ホームページ", "url": "https://www.city.kobayashi.lg.jp/soshikikarasagasu/sogoseisakubukikakuseisakuka/shinogaiyo/2/1659.html" },
       { "label": "市議会の役割／小林市公式ホームページ", "url": "https://www.city.kobayashi.lg.jp/soshikikarasagasu/gikaijimukyoku/gikai/2/1143.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.40か月分）を含まない月額。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.40か月分）を含まない月額。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 95.7, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 33, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 32838468, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 5140251, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 754, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 118020, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 594, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   },
   {
     "id": "muni-saito",
@@ -178,9 +226,17 @@
       { "label": "西都市公式サイト公表資料（面積）", "url": "https://www.city.saito.lg.jp/493c767c9a50af2b2c5a6fd70af41749.pdf" },
       { "label": "西都市議会議員定数条例", "url": "https://www1.g-reiki.net/saito/reiki_honbun/q609RG00000018.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
-      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" }
+      { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
+      { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.45か月分）を含まない月額。教育長給料月額は公式資料で確認できず未確認。",
-    "lastVerifiedAt": "2026-08-06"
+    "notes": "議員報酬・特別職給料は期末手当（3.45か月分）を含まない月額。教育長給料月額は公式資料で確認できず未確認。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "lastVerifiedAt": "2026-08-11",
+    "currentAccountRatioPercent": { "value": 90.9, "referenceDate": "令和5年度決算" },
+    "independentFinancialResourceRatioPercent": { "value": 43.7, "referenceDate": "令和5年度決算" },
+    "totalRevenueThousandYen": { "value": 24692494, "referenceDate": "令和5年度決算" },
+    "localTaxRevenueThousandYen": { "value": 3306731, "referenceDate": "令和5年度決算" },
+    "perCapitaRevenueThousandYen": { "value": 855, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaLocalTaxYen": { "value": 114551, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" },
+    "perCapitaBondBalanceThousandYen": { "value": 401, "referenceDate": "令和5年度決算（令和5年1月1日現在住民基本台帳人口により算定）" }
   }
 ]

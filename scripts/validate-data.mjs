@@ -1272,6 +1272,17 @@ try {
     "fundBalanceMillionYen",
     "municipalBondBalanceThousandYen",
   ];
+  // Phase23で追加した任意項目（型ではoptional。存在する場合のみ同じ検証を行い、
+  // 未設定でもerrにしない）。
+  const optionalMetricFields = [
+    "currentAccountRatioPercent",
+    "independentFinancialResourceRatioPercent",
+    "totalRevenueThousandYen",
+    "localTaxRevenueThousandYen",
+    "perCapitaRevenueThousandYen",
+    "perCapitaLocalTaxYen",
+    "perCapitaBondBalanceThousandYen",
+  ];
 
   const nobeokaCount = munis.filter((m) => m.isNobeoka).length;
   if (nobeokaCount !== 1) err("municipalityComparison.json", `isNobeoka:trueは1件である必要があります（実際: ${nobeokaCount}件）`);
@@ -1289,6 +1300,20 @@ try {
       const metric = m[field];
       if (!metric || typeof metric !== "object") {
         err(tag, `${field}が未設定です`);
+        continue;
+      }
+      if (metric.value !== null && typeof metric.value !== "number") {
+        err(tag, `${field}.valueが数値でもnullでもありません: ${metric.value}`);
+      }
+      if (metric.value === null && !metric.notApplicableReason) {
+        warn(tag, `${field}.valueがnullですがnotApplicableReasonが未設定です（未確認の理由を明記してください）`);
+      }
+    }
+    for (const field of optionalMetricFields) {
+      const metric = m[field];
+      if (metric === undefined) continue;
+      if (!metric || typeof metric !== "object") {
+        err(tag, `${field}が数値情報を持つオブジェクトではありません`);
         continue;
       }
       if (metric.value !== null && typeof metric.value !== "number") {
