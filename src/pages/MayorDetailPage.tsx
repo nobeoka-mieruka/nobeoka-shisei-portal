@@ -1,7 +1,8 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
-import type { ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
+import archivePoliciesData from "../data/archivePolicies.json";
+import type { ArchiveMayor, ArchiveMayorTerm, ArchivePolicy } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
@@ -23,6 +24,7 @@ import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
+const archivePolicies = archivePoliciesData as ArchivePolicy[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -48,6 +50,7 @@ export function MayorDetailPage() {
 
   const terms = termsForMayor(archiveMayorTerms, mayor.id);
   const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
+  const relatedPolicies = archivePolicies.filter((p) => p.ownerType === "mayor" && p.ownerId === mayor.id);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -162,6 +165,38 @@ export function MayorDetailPage() {
             })}
           </ul>
         )}
+      </section>
+
+      <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 className="text-base font-semibold text-on-surface">関連政策（公約）</h2>
+        {relatedPolicies.length > 0 ? (
+          <ul className="mt-2 space-y-2">
+            {relatedPolicies.map((p) => (
+              <li key={p.id}>
+                <Link to={`/policies/${p.slug}`} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                  {p.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : mayor.isCurrentMayor ? (
+          <p className="mt-2 text-sm text-on-surface-variant">現時点で登録済みの公約はありません（0件）。</p>
+        ) : (
+          <p className="mt-2 text-sm text-on-surface-variant">
+            当サイトの公約データベースは現職市長の任期のみを対象としており、歴代の市長の選挙公約・政策原文は収集していません（未収集）。0件確認済みという意味ではありません。
+          </p>
+        )}
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+          関連議案・関連条例・大型事業・災害対応等の詳細な出来事は、当サイトのデータ構造では市長単位に紐づけて管理する仕組みが今回のフェーズではまだ整備できていません（BLOCKED）。市政年表（
+          {terms[0] ? (
+            <Link to={`/timeline/${fiscalYearOfIsoDate(terms[0].termStart)}`} className={`text-primary hover:underline ${linkClass}`}>
+              この市長の任期の年度
+            </Link>
+          ) : (
+            "任期年度不明"
+          )}
+          ）で、同じ時期の議案・一般質問・財政データを横断的に確認できます。
+        </p>
       </section>
 
       {mayor.sourceRefs.length > 0 && (
