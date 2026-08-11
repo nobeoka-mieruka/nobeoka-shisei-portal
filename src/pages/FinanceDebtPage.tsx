@@ -9,6 +9,7 @@ import { FinanceMetricSection } from "../components/finance/FinanceMetricSection
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { ChartBarIcon } from "../components/icons";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
@@ -46,6 +47,11 @@ export function FinanceDebtPage() {
       <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         市債の増減は市長個人だけの成果・責任ではなく、国の制度・大型事業・災害復旧など複数の要因が影響します。市長・議員の評価目的での単純な比較には利用しないでください。
       </div>
+
+      <GlossaryNote
+        term="市債"
+        definition="自治体が公共施設整備等のために借り入れる、いわば「借金」です。道路や学校などの整備費用を複数年度に分散して負担する仕組みで、市債があること自体が問題というわけではありません。"
+      />
 
       <SectionCard title="市債発行額の年度推移">
         <FinanceMetricSection metric={debtIssuanceMetric} years={rows} />

@@ -10,6 +10,7 @@ import { FinanceMetricSection } from "../components/finance/FinanceMetricSection
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LandmarkIcon } from "../components/icons";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
@@ -41,6 +42,17 @@ export function FinanceFundsPage() {
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           年度末の基金残高を年度ごとに整理しています。決算未確定の年度は「見込額」と明記し、決算額と区別しています。
         </p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <GlossaryNote
+          term="基金"
+          definition="将来の支出や年度間の財源変動に備えて自治体が積み立てている貯金のようなものです。目的別に複数の種類があり、定義が資料によって異なる場合があります。"
+        />
+        <GlossaryNote
+          term="財政調整基金"
+          definition="年度間の財源の過不足を調整するための基金です。基金全体の一部で、災害対応や急な財政需要への備えとしても使われます。"
+        />
       </div>
 
       {rows.length === 0 ? (

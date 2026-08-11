@@ -217,6 +217,7 @@ export function DataStatusPage() {
   const fiscalYearsWithPopulation = archiveFiscalYears.filter((f) => !!f.population).length;
   const fiscalYearsWithDebt = archiveFiscalYears.filter((f) => !!f.debt).length;
   const fiscalYearsWithFund = archiveFiscalYears.filter((f) => !!f.fund).length;
+  const fiscalYearsWithFinance = archiveFiscalYears.filter((f) => !!f.finance).length;
   const fiscalYearRange =
     archiveFiscalYears.length > 0
       ? `${Math.min(...archiveFiscalYears.map((f) => f.fiscalYear))}年度〜${Math.max(...archiveFiscalYears.map((f) => f.fiscalYear))}年度`
@@ -361,7 +362,7 @@ export function DataStatusPage() {
       count: archiveFiscalYears.length,
       unit: "年度分",
       scope: fiscalYearRange,
-      detail: `予算確認済み${fiscalYearsWithBudget}年度／人口確認済み${fiscalYearsWithPopulation}年度／市債確認済み${fiscalYearsWithDebt}年度／基金確認済み${fiscalYearsWithFund}年度`,
+      detail: `予算確認済み${fiscalYearsWithBudget}年度／人口確認済み${fiscalYearsWithPopulation}年度／市債確認済み${fiscalYearsWithDebt}年度／基金確認済み${fiscalYearsWithFund}年度／財政健全化判断比率確認済み${fiscalYearsWithFinance}年度`,
       linkTo: "/finance",
       linkLabel: "財政ページを見る",
     },
@@ -416,6 +417,26 @@ export function DataStatusPage() {
       label: "委員会：所管事項の確認",
       metric: simpleCompleteness(committeesWithJurisdiction, committees.length),
       note: "常任委員会3件と、設置時提案理由で目的が確認できた特別委員会1件は確認済み。議会運営委員会・他の特別委員会は、条例上、所管事項の個別列挙を持たない構造のため、この項目には該当しない",
+    },
+    {
+      label: "財政：予算・決算（歳入歳出総額）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithBudget, archiveFiscalYears.length),
+    },
+    {
+      label: "財政：市債残高の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithDebt, archiveFiscalYears.length),
+    },
+    {
+      label: "財政：基金残高の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithFund, archiveFiscalYears.length),
+    },
+    {
+      label: "財政：財政健全化判断比率の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithFinance, archiveFiscalYears.length),
+    },
+    {
+      label: "財政：人口の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithPopulation, archiveFiscalYears.length),
     },
     {
       label: "歴代市長：任期の日単位での確認",
