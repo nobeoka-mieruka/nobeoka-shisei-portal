@@ -1,13 +1,12 @@
 {
-  "generatedAt": "2026-08-11T07:40:25.182Z",
-  "targetCount": 327,
-  "cacheReused": 0,
-  "newlyChecked": 327,
+  "generatedAt": "2026-08-11T08:04:55.944Z",
+  "targetCount": 325,
+  "cacheReused": 325,
+  "newlyChecked": 0,
   "summary": {
     "ok": 313,
-    "not_found_404": 4,
-    "redirect": 9,
-    "error": 1
+    "not_found_404": 3,
+    "redirect": 9
   },
   "results": [
     {
@@ -2888,7 +2887,8 @@
       "files": [
         "archiveCrawlerTargets.json",
         "archiveFiscalYears.json",
-        "financeDashboard.json"
+        "financeDashboard.json",
+        "municipalityComparison.json"
       ],
       "checkedAt": "2026-08-11T07:38:09.488Z",
       "status": 200,
