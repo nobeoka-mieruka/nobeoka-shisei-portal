@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "id": "archive-fm01-aff-01",
+    "memberProfileId": "archive-fm01",
+    "affiliationType": "committee",
+    "affiliationId": "産業建設委員会",
+    "role": "委員長",
+    "startDate": "2023-09-15",
+    "endDate": "2023-12-15",
+    "sourceRef": {
+      "sourceTitle": "延岡市議会会議録検索システム（令和5年9月定例会・12月定例会、各最終日の委員長報告）",
+      "sourceOrganization": "延岡市議会",
+      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/",
+      "accessedAt": "2026-08-08",
+      "extractionMethod": "manual",
+      "verificationStatus": "needsReview",
+      "notes": "令和5年9月15日・同年12月15日の本会議で産業建設委員会委員長として委員長報告を行ったことを会議録本文で直接確認した。startDate・endDateは委員長として在職を直接確認できた最初と最後の日付であり、実際の就任日・退任日はこれより前後に及ぶ可能性がある（正確な就任日・退任日を示す資料は確認できていない）。"
+    }
+  },
+  {
+    "id": "archive-fm01-aff-02",
+    "memberProfileId": "archive-fm01",
+    "affiliationType": "committee",
+    "affiliationId": "議会運営委員会",
+    "role": "委員長",
+    "startDate": "2025-03-21",
+    "endDate": "2025-03-21",
+    "sourceRef": {
+      "sourceTitle": "延岡市議会会議録検索システム（令和7年3月定例会、議案第147号委員長報告）",
+      "sourceOrganization": "延岡市議会",
+      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/",
+      "accessedAt": "2026-08-08",
+      "extractionMethod": "manual",
+      "verificationStatus": "needsReview",
+      "notes": "令和7年3月21日の本会議（議案第147号延岡市議会委員会条例の一部を改正する条例の制定に関する委員長報告）で議会運営委員会委員長として登壇したことを会議録本文で直接確認した。この日1日分のみの確認であり、就任日・退任日を示す資料は確認できていない。"
+    }
+  },
+  {
+    "id": "archive-fm03-aff-01",
+    "memberProfileId": "archive-fm03",
+    "affiliationType": "councilRole",
+    "affiliationId": "議長",
+    "role": "議長",
+    "startDate": "2021-02-24",
+    "endDate": "2021-02-24",
+    "sourceRef": {
+      "sourceTitle": "延岡市議会会議録検索システム（令和3年3月定例会、第1号 令和3年2月24日、本会議）",
+      "sourceOrganization": "延岡市議会",
+      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/",
+      "accessedAt": "2026-08-08",
+      "extractionMethod": "manual",
+      "verificationStatus": "needsReview",
+      "notes": "令和3年3月定例会初日（令和3年2月24日）の本会議録冒頭の議事進行者表記「議長（松田和己君）」で、同日時点で議長を務めていたことを直接確認した。この日1日分のみの確認であり、就任日・退任日を示す資料は確認できていない。"
+    }
+  },
+  {
+    "id": "archive-fm10-aff-01",
+    "memberProfileId": "archive-fm10",
+    "affiliationType": "councilRole",
+    "affiliationId": "議長",
+    "role": "議長",
+    "startDate": "2021-11-30",
+    "endDate": "2023-03-24",
+    "sourceRef": {
+      "sourceTitle": "延岡市議会会議録検索システム（令和3年12月定例会・令和4年12月定例会・令和5年3月定例会、各該当日の本会議）",
+      "sourceOrganization": "延岡市議会",
+      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/",
+      "accessedAt": "2026-08-08",
+      "extractionMethod": "manual",
+      "verificationStatus": "needsReview",
+      "notes": "令和3年11月30日（R031130A、令和3年12月定例会初日）、令和4年12月16日（R041216A）、令和5年3月24日（R050324A）の各本会議録冒頭に「議長（本部仁俊君）」の記載があることを直接確認した。startDate・endDateはこの3時点の確認範囲であり、実際の就任日はこれより前、退任日はこれより後の可能性がある（正確な就任日・退任日を示す資料は確認できていない）。"
+    }
+  }
+]

@@ -1,9 +1,10 @@
 /**
- * 「延岡市政アーカイブ」拡張（フェーズ1設計）の型定義案。
+ * 「延岡市政アーカイブ」拡張の型定義。
  *
- * このファイルはフェーズ1（調査・設計）の成果物であり、現時点ではどの画面・データからも
- * 使用していない（wiringしない）。既存の src/types/index.ts・src/data/*.json・
- * 既存コンポーネントは一切変更していない。実データ登録・画面実装はフェーズ2以降で行う。
+ * 歴代市長（MayorDetailPage等）・元議員プロフィール（MemberFormerDetailPage等）で
+ * 実データ・実画面から使用している。既存の src/types/index.ts・既存の
+ * members.json/formerMembers.json 等とは legacyMemberId/legacyFormerMemberId 等の
+ * 参照フィールドで対応付け、実データを複製しない。
  * 設計の背景・各フィールドの根拠は docs/historical-civic-data-plan.md を参照。
  */
 
