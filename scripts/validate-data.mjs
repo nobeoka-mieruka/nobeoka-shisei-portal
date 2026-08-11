@@ -3223,6 +3223,67 @@ try {
   );
 }
 
+// --- electionResults.json（選挙結果：市長選・市議選） ---
+try {
+  const elections = readJson("src/data/electionResults.json");
+  if (!Array.isArray(elections)) throw new Error("配列ではありません");
+
+  checkDuplicateIds({ err, warn }, elections, "id", "electionResults.json");
+
+  const VALID_ELECTION_TYPES = new Set(["mayor", "councilMember"]);
+  const allPersonIds = new Set([...memberIds, ...formerMemberIds, ...archiveMayorIds]);
+
+  for (const e of elections) {
+    const tag = `electionResults.json (${e.id ?? "id不明"})`;
+    if (isBlank(e.electionName)) err(tag, "electionNameが空です");
+    if (!VALID_ELECTION_TYPES.has(e.electionType)) err(tag, `未定義のelectionTypeです: ${e.electionType}`);
+    if (isBlank(e.electionDate) || Number.isNaN(Date.parse(e.electionDate))) err(tag, `electionDateの形式が不正です: ${e.electionDate}`);
+    if (e.announcementDate != null && Number.isNaN(Date.parse(e.announcementDate))) err(tag, `announcementDateの形式が不正です: ${e.announcementDate}`);
+    if (e.announcementDate != null && e.electionDate != null && e.announcementDate > e.electionDate) {
+      err(tag, `announcementDate（${e.announcementDate}）がelectionDate（${e.electionDate}）より後になっています`);
+    }
+    if (!Array.isArray(e.candidates) || e.candidates.length === 0) err(tag, "candidatesが空です");
+    if (e.candidateCount != null && Array.isArray(e.candidates) && e.candidateCount !== e.candidates.length) {
+      err(tag, `candidateCount（${e.candidateCount}）がcandidates配列の件数（${e.candidates.length}）と一致しません`);
+    }
+    if (!Array.isArray(e.sourceRefs) || e.sourceRefs.length === 0) err(tag, "sourceRefsが空です（出典なしの選挙結果は登録しないでください）");
+
+    const electedCount = Array.isArray(e.candidates) ? e.candidates.filter((c) => c.elected).length : 0;
+    if (e.seats != null && electedCount !== e.seats) {
+      err(tag, `当選者数（${electedCount}）がseats（定数、${e.seats}）と一致しません`);
+    }
+    for (const [field, value] of [
+      ["eligibleVoters", e.eligibleVoters],
+      ["votersCount", e.votersCount],
+      ["invalidVotes", e.invalidVotes],
+    ]) {
+      if (value != null && (typeof value !== "number" || value < 0)) err(tag, `${field}が不正です（非負の数値にしてください）: ${value}`);
+    }
+    if (e.turnoutPercent != null && (typeof e.turnoutPercent !== "number" || e.turnoutPercent < 0 || e.turnoutPercent > 100)) {
+      err(tag, `turnoutPercentが0〜100の範囲外です: ${e.turnoutPercent}`);
+    }
+
+    const seenVotes = new Map();
+    for (const c of e.candidates ?? []) {
+      const ctag = `${tag} candidate=${c.name ?? "氏名不明"}`;
+      if (isBlank(c.name)) err(tag, "候補者名が空のcandidateがあります");
+      if (typeof c.votes === "number" && c.votes < 0) err(ctag, `votesが負の値です: ${c.votes}`);
+      if (typeof c.elected !== "boolean") err(ctag, `electedがboolean型ではありません: ${c.elected}`);
+      // 同一選挙内で同じ得票数の候補が複数いる場合、按分票（同数）でない限り取り違えの疑いがある
+      if (typeof c.votes === "number") {
+        const key = c.votes;
+        seenVotes.set(key, (seenVotes.get(key) ?? 0) + 1);
+      }
+      if (c.linkedProfileId != null && !allPersonIds.has(c.linkedProfileId)) {
+        err(ctag, `linkedProfileIdが現職議員・元議員・歴代市長のいずれのIDにも一致しません（推測でリンクしていないか確認してください）: ${c.linkedProfileId}`);
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("electionResults.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);

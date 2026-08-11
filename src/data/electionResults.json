@@ -1,0 +1,624 @@
+[
+  {
+    "id": "election-mayor-2010",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2010-01-24",
+    "announcementDate": "2010-01-17",
+    "seats": 1,
+    "candidateCount": 2,
+    "eligibleVoters": 108161,
+    "votersCount": null,
+    "turnoutPercent": 60.26,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "首藤正治",
+        "nameKana": "すどうまさはる",
+        "age": 54,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 41738,
+        "elected": true,
+        "linkedProfileId": "mayor-02"
+      },
+      {
+        "name": "井本英雄",
+        "nameKana": "いもとひでお",
+        "age": 63,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 23029,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/644",
+        "sourceTitle": "延岡市長選挙 - 2010年01月24日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-02-term-02のsourceRefsと同一資料。今回、候補者2名の内訳・有権者数・投票率を構造化した。"
+      }
+    ],
+    "notes": "任期満了に伴う選挙。首藤正治（現職）が再選。"
+  },
+  {
+    "id": "election-mayor-2014",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2014-01-26",
+    "announcementDate": "2014-01-19",
+    "seats": 1,
+    "candidateCount": 3,
+    "eligibleVoters": null,
+    "votersCount": null,
+    "turnoutPercent": 44.68,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "首藤正治",
+        "nameKana": "すどうまさはる",
+        "age": 58,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 33479,
+        "elected": true,
+        "linkedProfileId": "mayor-02"
+      },
+      {
+        "name": "おだ忠良",
+        "nameKana": "おだただよし",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 11403,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "岩崎信",
+        "nameKana": "いわさきまこと",
+        "age": null,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 2014,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/6024",
+        "sourceTitle": "延岡市長選挙 - 2014年01月26日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-02-term-03のsourceRefsと同一資料。候補者「おだ忠良」氏は、令和元年・令和5年の延岡市議会議員選挙候補者名簿にある「小田忠良」氏と氏名が類似するが、本人特定の確証がないため紐付けは行っていない（同姓同名の誤結合を避けるため）。"
+      }
+    ],
+    "notes": "任期満了に伴う選挙。首藤正治（現職）が3選。"
+  },
+  {
+    "id": "election-mayor-2018",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2018-01-28",
+    "announcementDate": "2018-01-21",
+    "seats": 1,
+    "candidateCount": 2,
+    "eligibleVoters": 104500,
+    "votersCount": null,
+    "turnoutPercent": 49.68,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "読谷山洋司",
+        "nameKana": "よみやまようじ",
+        "age": 53,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 26094,
+        "elected": true,
+        "linkedProfileId": "mayor-03"
+      },
+      {
+        "name": "永山英也",
+        "nameKana": "ながやまひでなり",
+        "age": 60,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 25527,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/17033",
+        "sourceTitle": "延岡市長選挙 - 2018年01月28日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-03-term-01のsourceRefsと同一資料。前市長・首藤正治の後継指名を受けた永山英也氏が新人同士の一騎打ちで敗れた選挙。"
+      }
+    ],
+    "notes": "任期満了に伴う選挙。新人2名の争い、読谷山洋司が初当選。"
+  },
+  {
+    "id": "election-mayor-2022",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2022-01-23",
+    "announcementDate": "2022-01-16",
+    "seats": 1,
+    "candidateCount": 2,
+    "eligibleVoters": 100444,
+    "votersCount": null,
+    "turnoutPercent": 55.98,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "読谷山洋司",
+        "nameKana": "よみやまようじ",
+        "age": 57,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 31760,
+        "elected": true,
+        "linkedProfileId": "mayor-03"
+      },
+      {
+        "name": "うちだりさ",
+        "nameKana": "うちだりさ",
+        "age": 47,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 24088,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/22481",
+        "sourceTitle": "延岡市長選挙 - 2022年01月23日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-03-term-02のsourceRefsと同一資料。候補者「うちだりさ」氏は、延岡市議会議員選挙の候補者名簿にある「内田リサ」氏と氏名が類似するが、本人特定の確証がないため紐付けは行っていない。"
+      }
+    ],
+    "notes": "任期満了に伴う選挙。読谷山洋司（現職）が再選（後に2025年6月30日付で辞職）。"
+  },
+  {
+    "id": "election-mayor-2025",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2025-07-20",
+    "announcementDate": "2025-07-13",
+    "seats": 1,
+    "candidateCount": 3,
+    "eligibleVoters": 94757,
+    "votersCount": null,
+    "turnoutPercent": 59.27,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "三浦久知",
+        "nameKana": "みうらひさとも",
+        "age": 42,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 20052,
+        "elected": true,
+        "linkedProfileId": "mayor-01"
+      },
+      {
+        "name": "ごとう哲朗",
+        "nameKana": "ごとうてつろう",
+        "age": 69,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 20016,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "吉本やすし",
+        "nameKana": "よしもとやすし",
+        "age": 67,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 15196,
+        "elected": false,
+        "linkedProfileId": "fm01"
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/26032",
+        "sourceTitle": "延岡市長選挙 - 2025年07月20日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-01-term-01のsourceRefsと同一資料。読谷山洋司前市長の辞職（2025-06-30付）に伴う選挙。36票差の接戦。"
+      }
+    ],
+    "notes": "読谷山洋司の辞職（病気療養）に伴う選挙。新人3名による争い、三浦久知が僅差で初当選。候補者「吉本やすし」氏は、得票数（15,196票、27.5%）がformerMembers.json fm01（吉本靖、元延岡市議会議員）のnoteに記載の得票数と完全一致するためfm01としてリンクした。"
+  },
+  {
+    "id": "election-council-2023",
+    "electionName": "延岡市議会議員選挙",
+    "electionType": "councilMember",
+    "electionDate": "2023-04-23",
+    "announcementDate": null,
+    "seats": 27,
+    "candidateCount": 34,
+    "eligibleVoters": 97613,
+    "votersCount": 47343,
+    "turnoutPercent": 48.5,
+    "invalidVotes": 377,
+    "candidates": [
+      {
+        "name": "上杉やすひろ",
+        "nameKana": null,
+        "age": 72,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 2393,
+        "elected": true,
+        "linkedProfileId": "m03"
+      },
+      {
+        "name": "松田みつお",
+        "nameKana": null,
+        "age": 67,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 2104,
+        "elected": true,
+        "linkedProfileId": "m22"
+      },
+      {
+        "name": "みやた博徳",
+        "nameKana": null,
+        "age": 46,
+        "party": "立憲民主党",
+        "incumbencyStatus": "新人",
+        "votes": 2061,
+        "elected": true,
+        "linkedProfileId": "m24"
+      },
+      {
+        "name": "中島よしはる",
+        "nameKana": null,
+        "age": 41,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 1962,
+        "elected": true,
+        "linkedProfileId": "m15"
+      },
+      {
+        "name": "まえだりょう",
+        "nameKana": null,
+        "age": 28,
+        "party": "国民民主党",
+        "incumbencyStatus": "新人",
+        "votes": 1918,
+        "elected": true,
+        "linkedProfileId": "m21"
+      },
+      {
+        "name": "山本あけみ",
+        "nameKana": null,
+        "age": 54,
+        "party": "公明党",
+        "incumbencyStatus": "新人",
+        "votes": 1755,
+        "elected": true,
+        "linkedProfileId": "m25"
+      },
+      {
+        "name": "吉本やすし",
+        "nameKana": null,
+        "age": 65,
+        "party": "国民民主党",
+        "incumbencyStatus": "現職",
+        "votes": 1753,
+        "elected": true,
+        "linkedProfileId": "fm01"
+      },
+      {
+        "name": "おの正二",
+        "nameKana": null,
+        "age": 66,
+        "party": "公明党",
+        "incumbencyStatus": "現職",
+        "votes": 1683.744,
+        "elected": true,
+        "linkedProfileId": "m04"
+      },
+      {
+        "name": "河野はるみつ",
+        "nameKana": null,
+        "age": 71,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1611,
+        "elected": true,
+        "linkedProfileId": "m10"
+      },
+      {
+        "name": "北林みきお",
+        "nameKana": null,
+        "age": 67,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1610,
+        "elected": true,
+        "linkedProfileId": "m11"
+      },
+      {
+        "name": "かじもと英一",
+        "nameKana": null,
+        "age": 62,
+        "party": "無所属",
+        "incumbencyStatus": "元職",
+        "votes": 1548,
+        "elected": true,
+        "linkedProfileId": "m09"
+      },
+      {
+        "name": "こみかど綾",
+        "nameKana": null,
+        "age": 52,
+        "party": "国民民主党",
+        "incumbencyStatus": "新人",
+        "votes": 1502.193,
+        "elected": true,
+        "linkedProfileId": "m13"
+      },
+      {
+        "name": "いなだまさゆき",
+        "nameKana": null,
+        "age": 55,
+        "party": "自由民主党",
+        "incumbencyStatus": "現職",
+        "votes": 1485,
+        "elected": true,
+        "linkedProfileId": "m01"
+      },
+      {
+        "name": "甲斐ただあつ",
+        "nameKana": null,
+        "age": 65,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1464.876,
+        "elected": true,
+        "linkedProfileId": "m07"
+      },
+      {
+        "name": "ひえじまくみこ",
+        "nameKana": null,
+        "age": 63,
+        "party": "公明党",
+        "incumbencyStatus": "現職",
+        "votes": 1452,
+        "elected": true,
+        "linkedProfileId": "m19"
+      },
+      {
+        "name": "はやせけんいち",
+        "nameKana": null,
+        "age": 57,
+        "party": "国民民主党",
+        "incumbencyStatus": "現職",
+        "votes": 1438,
+        "elected": true,
+        "linkedProfileId": "m18"
+      },
+      {
+        "name": "平田信広",
+        "nameKana": null,
+        "age": 71,
+        "party": "日本共産党",
+        "incumbencyStatus": "現職",
+        "votes": 1385,
+        "elected": true,
+        "linkedProfileId": "m20"
+      },
+      {
+        "name": "甲斐いくお",
+        "nameKana": null,
+        "age": 67,
+        "party": "国民民主党",
+        "incumbencyStatus": "現職",
+        "votes": 1384.773,
+        "elected": true,
+        "linkedProfileId": "m06"
+      },
+      {
+        "name": "小野たかし",
+        "nameKana": null,
+        "age": 56,
+        "party": "無所属",
+        "incumbencyStatus": "元職",
+        "votes": 1383.255,
+        "elected": true,
+        "linkedProfileId": "m05"
+      },
+      {
+        "name": "中城あかね",
+        "nameKana": null,
+        "age": 58,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1365,
+        "elected": true,
+        "linkedProfileId": "m16"
+      },
+      {
+        "name": "いのはなさとし",
+        "nameKana": null,
+        "age": 47,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1314,
+        "elected": true,
+        "linkedProfileId": "m02"
+      },
+      {
+        "name": "吉田しげひと",
+        "nameKana": null,
+        "age": 33,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 1300,
+        "elected": true,
+        "linkedProfileId": "m26"
+      },
+      {
+        "name": "みねだ克明",
+        "nameKana": null,
+        "age": 56,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1277,
+        "elected": true,
+        "linkedProfileId": "m23"
+      },
+      {
+        "name": "長友さちこ",
+        "nameKana": null,
+        "age": 67,
+        "party": "立憲民主党",
+        "incumbencyStatus": "現職",
+        "votes": 1236.806,
+        "elected": true,
+        "linkedProfileId": "m17"
+      },
+      {
+        "name": "しば浩信",
+        "nameKana": null,
+        "age": 54,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1089,
+        "elected": true,
+        "linkedProfileId": "m14"
+      },
+      {
+        "name": "後藤もりみつ",
+        "nameKana": null,
+        "age": 41,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 1065,
+        "elected": true,
+        "linkedProfileId": "m12"
+      },
+      {
+        "name": "かい正幸",
+        "nameKana": null,
+        "age": 67,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 1053.349,
+        "elected": true,
+        "linkedProfileId": "m08"
+      },
+      {
+        "name": "はらだいくみ",
+        "nameKana": null,
+        "age": 44,
+        "party": "立憲民主党",
+        "incumbencyStatus": "新人",
+        "votes": 1014,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "日髙しょういち",
+        "nameKana": null,
+        "age": 44,
+        "party": "国民民主党",
+        "incumbencyStatus": "新人",
+        "votes": 950,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "あわの和彦",
+        "nameKana": null,
+        "age": 70,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 844,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "おだ忠良",
+        "nameKana": null,
+        "age": 74,
+        "party": "日本維新の会",
+        "incumbencyStatus": "元職",
+        "votes": 819,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "松本幸三",
+        "nameKana": null,
+        "age": 73,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 747,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "大西幸二",
+        "nameKana": null,
+        "age": 57,
+        "party": "無所属",
+        "incumbencyStatus": "元職",
+        "votes": 633,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "永谷としひさ",
+        "nameKana": null,
+        "age": 44,
+        "party": "L.I.P",
+        "incumbencyStatus": "新人",
+        "votes": 362,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14188.pdf",
+        "sourceTitle": "選挙結果について（令和5年4月23日執行の延岡市議会議員選挙）",
+        "sourceOrganization": "延岡市選挙管理委員会",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "延岡市公式ホームページ公表の選挙結果PDFをダウンロードし、Readツールで直接読み取り。当選27名・落選7名の全候補者、得票数、投票結果（有権者数97,613人、投票者数47,343人、投票率48.50%、有効投票数46,963票、無効投票数377票）を確認した。"
+      }
+    ],
+    "notes": "当選者のうち26名はarchiveMemberProfiles.json／archiveMemberTerms.jsonの現職議員データと得票数の完全一致で本人特定済み（linkedProfileId）。「吉本やすし」氏（1,753票、現職当選）は、formerMembers.json fm01（吉本靖）が同一人物と判断した：fm01のnoteに令和5年6月・12月定例会等での在職事実、および令和7年7月20日執行の延岡市長選挙に立候補し15,196票（27.5%）で落選した事実が明記されており、本サイトのelection-mayor-2025エントリの「吉本やすし」候補（15,196票）と得票数が完全一致するため、高い確度で同一人物と判断しfm01へリンクした。落選者「おだ忠良」氏（74歳、日本維新の会、元）は、平成27年執行選挙の当選者名簿にある「小田忠良」氏、平成26年執行の延岡市長選挙候補者「おだ忠良」氏と氏名が類似するが、本人特定の確証がないため紐付けを行っていない。"
+  }
+]
