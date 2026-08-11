@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-10T03:15:29.017Z",
-  "targetCount": 323,
-  "cacheReused": 313,
-  "newlyChecked": 10,
+  "generatedAt": "2026-08-11T07:40:25.182Z",
+  "targetCount": 327,
+  "cacheReused": 0,
+  "newlyChecked": 327,
   "summary": {
-    "ok": 311,
-    "not_found_404": 3,
-    "redirect": 8,
+    "ok": 313,
+    "not_found_404": 4,
+    "redirect": 9,
     "error": 1
   },
   "results": [
@@ -26,7 +26,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-10T03:15:27.206Z",
+      "checkedAt": "2026-08-11T07:37:59.313Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -37,7 +37,18 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-10T03:15:28.652Z",
+      "checkedAt": "2026-08-11T07:38:00.728Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx",
+      "files": [
+        "municipalityComparison.json"
+      ],
+      "checkedAt": "2026-08-11T07:38:00.934Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -48,7 +59,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.063Z",
+      "checkedAt": "2026-08-11T07:38:00.292Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -59,7 +70,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:43.250Z",
+      "checkedAt": "2026-08-11T07:38:05.954Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -71,7 +82,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.622Z",
+      "checkedAt": "2026-08-11T07:37:58.751Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -82,7 +93,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:41.301Z",
+      "checkedAt": "2026-08-11T07:38:04.116Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -93,7 +104,7 @@
       "files": [
         "archiveMemberProfiles.json"
       ],
-      "checkedAt": "2026-08-08T21:19:36.503Z",
+      "checkedAt": "2026-08-11T07:38:07.747Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -104,7 +115,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:42.362Z",
+      "checkedAt": "2026-08-11T07:38:04.957Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -116,7 +127,7 @@
         "archiveMayorTerms.json",
         "archiveMemberProfiles.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.532Z",
+      "checkedAt": "2026-08-11T07:38:01.159Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -127,7 +138,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.448Z",
+      "checkedAt": "2026-08-11T07:38:03.018Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -138,7 +149,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.377Z",
+      "checkedAt": "2026-08-11T07:38:02.003Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -155,7 +166,7 @@
         "mayorPolicyProgress.json",
         "mayorPromises.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.745Z",
+      "checkedAt": "2026-08-11T07:37:59.703Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -166,7 +177,7 @@
       "files": [
         "politicalFundOrganizations.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.574Z",
+      "checkedAt": "2026-08-11T07:38:01.519Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -177,7 +188,7 @@
       "files": [
         "mayorPolicyProgress.json"
       ],
-      "checkedAt": "2026-08-10T03:15:27.263Z",
+      "checkedAt": "2026-08-11T07:38:00.639Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -189,7 +200,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:44.005Z",
+      "checkedAt": "2026-08-11T07:38:04.916Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -200,7 +211,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.548Z",
+      "checkedAt": "2026-08-11T07:38:07.231Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -212,7 +223,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.439Z",
+      "checkedAt": "2026-08-11T07:37:58.567Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -224,7 +235,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.920Z",
+      "checkedAt": "2026-08-11T07:38:03.293Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -236,7 +247,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:42.128Z",
+      "checkedAt": "2026-08-11T07:38:04.110Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -248,7 +259,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.072Z",
+      "checkedAt": "2026-08-11T07:38:02.468Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -259,7 +270,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:45.417Z",
+      "checkedAt": "2026-08-11T07:38:06.099Z",
       "status": 404,
       "location": null,
       "category": "not_found_404",
@@ -271,7 +282,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.404Z",
+      "checkedAt": "2026-08-11T07:38:00.842Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -283,7 +294,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.247Z",
+      "checkedAt": "2026-08-11T07:38:01.658Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -294,7 +305,7 @@
       "files": [
         "archiveMayors.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.185Z",
+      "checkedAt": "2026-08-11T07:38:00.658Z",
       "status": 301,
       "location": "/word/%E4%B8%89%E6%B5%A6%E8%99%8E%E9%9B%84-1678003",
       "category": "redirect",
@@ -305,7 +316,7 @@
       "files": [
         "archiveMayors.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.372Z",
+      "checkedAt": "2026-08-11T07:37:58.481Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -316,7 +327,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.721Z",
+      "checkedAt": "2026-08-11T07:37:59.033Z",
       "status": 301,
       "location": "https://line.me/R/ti/p/@674sqgtj",
       "category": "redirect",
@@ -327,7 +338,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.741Z",
+      "checkedAt": "2026-08-11T07:37:59.028Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -338,7 +349,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-10T03:15:27.147Z",
+      "checkedAt": "2026-08-11T07:38:00.737Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -349,7 +360,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-10T03:15:26.439Z",
+      "checkedAt": "2026-08-11T07:37:59.141Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -361,10 +372,21 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.567Z",
+      "checkedAt": "2026-08-11T07:37:58.613Z",
       "status": 404,
       "location": null,
       "category": "not_found_404",
+      "error": null
+    },
+    {
+      "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj",
+      "files": [
+        "committees.json"
+      ],
+      "checkedAt": "2026-08-11T07:38:09.215Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
       "error": null
     },
     {
@@ -394,7 +416,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.004Z",
+      "checkedAt": "2026-08-11T07:38:02.476Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -405,7 +427,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.262Z",
+      "checkedAt": "2026-08-11T07:38:00.601Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -416,7 +438,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.286Z",
+      "checkedAt": "2026-08-11T07:38:03.775Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -427,7 +449,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.658Z",
+      "checkedAt": "2026-08-11T07:38:03.139Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -438,7 +460,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T21:19:36.122Z",
+      "checkedAt": "2026-08-11T07:38:02.801Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -449,7 +471,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.814Z",
+      "checkedAt": "2026-08-11T07:38:01.336Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -460,7 +482,7 @@
       "files": [
         "compensationComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.448Z",
+      "checkedAt": "2026-08-11T07:37:58.730Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -471,7 +493,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.452Z",
+      "checkedAt": "2026-08-11T07:38:02.106Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -482,7 +504,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.192Z",
+      "checkedAt": "2026-08-11T07:38:00.687Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -493,7 +515,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.809Z",
+      "checkedAt": "2026-08-11T07:38:01.871Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -504,7 +526,7 @@
       "files": [
         "compensationComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.499Z",
+      "checkedAt": "2026-08-11T07:37:58.645Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -515,7 +537,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.180Z",
+      "checkedAt": "2026-08-11T07:38:01.197Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -526,7 +548,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.456Z",
+      "checkedAt": "2026-08-11T07:38:02.526Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -537,7 +559,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.478Z",
+      "checkedAt": "2026-08-11T07:38:00.525Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -548,7 +570,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.730Z",
+      "checkedAt": "2026-08-11T07:38:01.247Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -559,7 +581,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:48.413Z",
+      "checkedAt": "2026-08-11T07:40:23.138Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -570,7 +592,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:43.346Z",
+      "checkedAt": "2026-08-11T07:40:17.344Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -581,7 +603,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:46.102Z",
+      "checkedAt": "2026-08-11T07:40:20.161Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -592,7 +614,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:31.684Z",
+      "checkedAt": "2026-08-11T07:40:05.356Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -603,7 +625,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:39.681Z",
+      "checkedAt": "2026-08-11T07:40:13.705Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -614,7 +636,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:35.042Z",
+      "checkedAt": "2026-08-11T07:40:09.021Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -625,7 +647,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:35.670Z",
+      "checkedAt": "2026-08-11T07:40:09.673Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -636,7 +658,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:17.321Z",
+      "checkedAt": "2026-08-11T07:39:49.987Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -647,7 +669,7 @@
       "files": [
         "committees.json"
       ],
-      "checkedAt": "2026-08-08T07:10:43.821Z",
+      "checkedAt": "2026-08-11T07:39:17.641Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -659,7 +681,7 @@
         "archiveCrawlerTargets.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:09:43.053Z",
+      "checkedAt": "2026-08-11T07:38:06.289Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -670,7 +692,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:37.598Z",
+      "checkedAt": "2026-08-11T07:40:11.587Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -681,7 +703,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:38.859Z",
+      "checkedAt": "2026-08-11T07:40:12.867Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -692,7 +714,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:34.419Z",
+      "checkedAt": "2026-08-11T07:40:08.359Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -703,7 +725,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:40.345Z",
+      "checkedAt": "2026-08-11T07:40:14.364Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -714,7 +736,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:31.063Z",
+      "checkedAt": "2026-08-11T07:40:04.749Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -725,7 +747,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:41.247Z",
+      "checkedAt": "2026-08-11T07:40:15.213Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -736,7 +758,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:44.802Z",
+      "checkedAt": "2026-08-11T07:40:18.872Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -747,7 +769,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:36.945Z",
+      "checkedAt": "2026-08-11T07:40:10.948Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -758,7 +780,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:43.966Z",
+      "checkedAt": "2026-08-11T07:40:18.006Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -769,7 +791,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:45.480Z",
+      "checkedAt": "2026-08-11T07:40:19.535Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -780,7 +802,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:33.578Z",
+      "checkedAt": "2026-08-11T07:40:07.459Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -791,7 +813,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:32.322Z",
+      "checkedAt": "2026-08-11T07:40:06.151Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -802,7 +824,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:46.949Z",
+      "checkedAt": "2026-08-11T07:40:21.638Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -813,7 +835,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:36.307Z",
+      "checkedAt": "2026-08-11T07:40:10.317Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -824,7 +846,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:32.956Z",
+      "checkedAt": "2026-08-11T07:40:06.770Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -835,7 +857,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:47.791Z",
+      "checkedAt": "2026-08-11T07:40:22.497Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -846,7 +868,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:38.233Z",
+      "checkedAt": "2026-08-11T07:40:12.238Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -857,7 +879,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:42.719Z",
+      "checkedAt": "2026-08-11T07:40:16.679Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -868,7 +890,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:11:41.879Z",
+      "checkedAt": "2026-08-11T07:40:15.853Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -880,7 +902,7 @@
         "archiveCrawlerTargets.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:09:44.254Z",
+      "checkedAt": "2026-08-11T07:38:07.781Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -893,7 +915,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:43.671Z",
+      "checkedAt": "2026-08-11T07:38:06.935Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -904,7 +926,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:47.930Z",
+      "checkedAt": "2026-08-11T07:39:21.529Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -915,7 +937,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:39.790Z",
+      "checkedAt": "2026-08-11T07:39:14.327Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -926,7 +948,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:35.349Z",
+      "checkedAt": "2026-08-11T07:39:10.036Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -938,7 +960,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:29.545Z",
+      "checkedAt": "2026-08-11T07:39:04.822Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -949,7 +971,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:45.832Z",
+      "checkedAt": "2026-08-11T07:39:18.919Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -960,7 +982,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:11:49.270Z",
+      "checkedAt": "2026-08-11T07:40:24.828Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -972,7 +994,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:48.013Z",
+      "checkedAt": "2026-08-11T07:38:14.767Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -983,7 +1005,7 @@
       "files": [
         "mayorEntertainmentExpenses.json"
       ],
-      "checkedAt": "2026-08-08T07:11:28.279Z",
+      "checkedAt": "2026-08-11T07:40:01.934Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -994,7 +1016,7 @@
       "files": [
         "citySpecialPosts.json"
       ],
-      "checkedAt": "2026-08-08T07:10:25.477Z",
+      "checkedAt": "2026-08-11T07:39:00.730Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1006,7 +1028,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:50.181Z",
+      "checkedAt": "2026-08-11T07:38:16.912Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1018,7 +1040,7 @@
         "archiveCrawlerTargets.json",
         "blockedTaskWatch.json"
       ],
-      "checkedAt": "2026-08-10T03:15:26.401Z",
+      "checkedAt": "2026-08-11T07:38:11.580Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1029,7 +1051,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:24.837Z",
+      "checkedAt": "2026-08-11T07:39:00.087Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1044,7 +1066,7 @@
         "municipalityComparison.json",
         "similarMunicipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:10:44.491Z",
+      "checkedAt": "2026-08-11T07:38:10.743Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1056,7 +1078,7 @@
         "archiveCrawlerTargets.json",
         "archiveFiscalYears.json"
       ],
-      "checkedAt": "2026-08-08T07:09:44.875Z",
+      "checkedAt": "2026-08-11T07:38:08.430Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1068,7 +1090,7 @@
         "archiveFiscalYears.json",
         "financeDashboard.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.796Z",
+      "checkedAt": "2026-08-11T07:38:13.491Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1079,7 +1101,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:08.784Z",
+      "checkedAt": "2026-08-11T07:38:46.879Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1090,7 +1112,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:09.400Z",
+      "checkedAt": "2026-08-11T07:38:47.515Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1101,7 +1123,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:10.060Z",
+      "checkedAt": "2026-08-11T07:38:48.143Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1112,7 +1134,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:08.037Z",
+      "checkedAt": "2026-08-11T07:38:46.244Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1123,7 +1145,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:17.895Z",
+      "checkedAt": "2026-08-11T07:38:54.292Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1134,7 +1156,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:17.223Z",
+      "checkedAt": "2026-08-11T07:38:53.678Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1145,7 +1167,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:14.661Z",
+      "checkedAt": "2026-08-11T07:38:51.261Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1156,7 +1178,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:16.607Z",
+      "checkedAt": "2026-08-11T07:38:53.073Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1167,7 +1189,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:10.707Z",
+      "checkedAt": "2026-08-11T07:38:48.777Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1178,7 +1200,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:15.959Z",
+      "checkedAt": "2026-08-11T07:38:52.455Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1189,7 +1211,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:11.335Z",
+      "checkedAt": "2026-08-11T07:38:49.409Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1200,7 +1222,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:15.319Z",
+      "checkedAt": "2026-08-11T07:38:51.870Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1211,7 +1233,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:22.367Z",
+      "checkedAt": "2026-08-11T07:38:58.237Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1222,7 +1244,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:23.703Z",
+      "checkedAt": "2026-08-11T07:38:59.476Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1233,7 +1255,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:22.985Z",
+      "checkedAt": "2026-08-11T07:38:58.857Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1244,7 +1266,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:21.183Z",
+      "checkedAt": "2026-08-11T07:38:57.488Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1255,7 +1277,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:19.838Z",
+      "checkedAt": "2026-08-11T07:38:56.209Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1266,7 +1288,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:18.537Z",
+      "checkedAt": "2026-08-11T07:38:54.904Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1277,7 +1299,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:13.201Z",
+      "checkedAt": "2026-08-11T07:38:50.643Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1290,7 +1312,7 @@
         "archiveMayorTerms.json",
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:09:49.528Z",
+      "checkedAt": "2026-08-11T07:38:16.238Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1303,7 +1325,7 @@
         "archiveMayorTerms.json",
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:09:51.035Z",
+      "checkedAt": "2026-08-11T07:38:17.745Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1316,7 +1338,7 @@
         "archiveMayorTerms.json",
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:09:51.669Z",
+      "checkedAt": "2026-08-11T07:38:18.412Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1329,7 +1351,7 @@
         "archiveMayorTerms.json",
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:09:48.859Z",
+      "checkedAt": "2026-08-11T07:38:15.592Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1340,7 +1362,7 @@
       "files": [
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:10:28.060Z",
+      "checkedAt": "2026-08-11T07:39:03.338Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1351,7 +1373,7 @@
       "files": [
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:10:26.763Z",
+      "checkedAt": "2026-08-11T07:39:02.059Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1363,7 +1385,7 @@
         "cityGuideConfig.json",
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:07.391Z",
+      "checkedAt": "2026-08-11T07:38:45.598Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1374,7 +1396,7 @@
       "files": [
         "citySpecialPosts.json"
       ],
-      "checkedAt": "2026-08-08T07:10:26.139Z",
+      "checkedAt": "2026-08-11T07:39:01.410Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1385,7 +1407,7 @@
       "files": [
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:52.321Z",
+      "checkedAt": "2026-08-11T07:38:19.050Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1396,7 +1418,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:20.532Z",
+      "checkedAt": "2026-08-11T07:38:56.856Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1407,7 +1429,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:12.550Z",
+      "checkedAt": "2026-08-11T07:38:50.040Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1418,7 +1440,7 @@
       "files": [
         "cityGuideEntries.json"
       ],
-      "checkedAt": "2026-08-08T07:10:19.189Z",
+      "checkedAt": "2026-08-11T07:38:55.518Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1430,7 +1452,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:37.836Z",
+      "checkedAt": "2026-08-11T07:38:35.913Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1441,7 +1463,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:03.188Z",
+      "checkedAt": "2026-08-11T07:39:35.939Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1452,7 +1474,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:04.034Z",
+      "checkedAt": "2026-08-11T07:39:36.805Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1463,7 +1485,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:02.525Z",
+      "checkedAt": "2026-08-11T07:39:35.344Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1474,7 +1496,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:00.980Z",
+      "checkedAt": "2026-08-11T07:39:33.888Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1485,7 +1507,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:01.634Z",
+      "checkedAt": "2026-08-11T07:39:34.512Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1496,7 +1518,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:59.265Z",
+      "checkedAt": "2026-08-11T07:39:32.193Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1507,7 +1529,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:58.014Z",
+      "checkedAt": "2026-08-11T07:39:30.934Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1518,7 +1540,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:58.639Z",
+      "checkedAt": "2026-08-11T07:39:31.572Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1529,7 +1551,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:00.132Z",
+      "checkedAt": "2026-08-11T07:39:33.065Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1540,7 +1562,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:04.697Z",
+      "checkedAt": "2026-08-11T07:39:37.405Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1551,7 +1573,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:05.368Z",
+      "checkedAt": "2026-08-11T07:39:38.023Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1562,7 +1584,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:06.055Z",
+      "checkedAt": "2026-08-11T07:39:38.654Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1573,7 +1595,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:13.159Z",
+      "checkedAt": "2026-08-11T07:39:45.421Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1584,7 +1606,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:13.845Z",
+      "checkedAt": "2026-08-11T07:39:46.113Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1595,7 +1617,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:14.732Z",
+      "checkedAt": "2026-08-11T07:39:46.967Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1606,7 +1628,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:15.374Z",
+      "checkedAt": "2026-08-11T07:39:47.612Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1617,7 +1639,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:16.041Z",
+      "checkedAt": "2026-08-11T07:39:48.263Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1628,7 +1650,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:57.054Z",
+      "checkedAt": "2026-08-11T07:39:30.132Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1639,7 +1661,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:56.412Z",
+      "checkedAt": "2026-08-11T07:39:29.512Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1650,7 +1672,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:55.715Z",
+      "checkedAt": "2026-08-11T07:39:28.866Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1661,7 +1683,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:54.828Z",
+      "checkedAt": "2026-08-11T07:39:28.035Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1673,7 +1695,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:37.391Z",
+      "checkedAt": "2026-08-11T07:38:35.297Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1684,7 +1706,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:54.180Z",
+      "checkedAt": "2026-08-11T07:39:27.412Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1696,7 +1718,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:36.949Z",
+      "checkedAt": "2026-08-11T07:38:34.676Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1708,7 +1730,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:36.510Z",
+      "checkedAt": "2026-08-11T07:38:34.010Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1719,7 +1741,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:53.468Z",
+      "checkedAt": "2026-08-11T07:39:26.772Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1730,7 +1752,7 @@
       "files": [
         "archiveMemberProfiles.json"
       ],
-      "checkedAt": "2026-08-08T21:19:36.063Z",
+      "checkedAt": "2026-08-11T07:38:20.363Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1743,7 +1765,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:55.473Z",
+      "checkedAt": "2026-08-11T07:38:22.320Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1756,7 +1778,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:54.198Z",
+      "checkedAt": "2026-08-11T07:38:21.675Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1771,7 +1793,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.235Z",
+      "checkedAt": "2026-08-11T07:37:58.214Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1782,7 +1804,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:52.806Z",
+      "checkedAt": "2026-08-11T07:39:26.138Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1795,7 +1817,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:56.185Z",
+      "checkedAt": "2026-08-11T07:38:23.595Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1808,7 +1830,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:56.831Z",
+      "checkedAt": "2026-08-11T07:38:24.232Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1822,7 +1844,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.672Z",
+      "checkedAt": "2026-08-11T07:38:03.516Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1834,7 +1856,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:43.746Z",
+      "checkedAt": "2026-08-11T07:38:44.048Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1848,7 +1870,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.801Z",
+      "checkedAt": "2026-08-11T07:38:01.322Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1859,7 +1881,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:52.159Z",
+      "checkedAt": "2026-08-11T07:39:25.503Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1870,7 +1892,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:12.271Z",
+      "checkedAt": "2026-08-11T07:39:44.569Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1882,7 +1904,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:42.854Z",
+      "checkedAt": "2026-08-11T07:38:42.753Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1894,7 +1916,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:43.297Z",
+      "checkedAt": "2026-08-11T07:38:43.399Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1906,7 +1928,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:41.763Z",
+      "checkedAt": "2026-08-11T07:38:41.285Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1918,7 +1940,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:41.108Z",
+      "checkedAt": "2026-08-11T07:38:40.409Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1930,7 +1952,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:40.456Z",
+      "checkedAt": "2026-08-11T07:38:39.563Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1942,7 +1964,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:39.809Z",
+      "checkedAt": "2026-08-11T07:38:38.712Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1954,7 +1976,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:42.416Z",
+      "checkedAt": "2026-08-11T07:38:42.113Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1966,7 +1988,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:44.191Z",
+      "checkedAt": "2026-08-11T07:38:44.714Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1980,7 +2002,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:41.283Z",
+      "checkedAt": "2026-08-11T07:38:04.146Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -1991,7 +2013,7 @@
       "files": [
         "archiveMemberProfiles.json"
       ],
-      "checkedAt": "2026-08-08T07:09:52.942Z",
+      "checkedAt": "2026-08-11T07:38:19.704Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2004,7 +2026,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:57.500Z",
+      "checkedAt": "2026-08-11T07:38:24.879Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2015,7 +2037,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:39.140Z",
+      "checkedAt": "2026-08-11T07:39:13.721Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2026,7 +2048,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:40.450Z",
+      "checkedAt": "2026-08-11T07:39:14.938Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2037,7 +2059,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:41.130Z",
+      "checkedAt": "2026-08-11T07:39:15.551Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2048,7 +2070,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:41.807Z",
+      "checkedAt": "2026-08-11T07:39:16.195Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2059,7 +2081,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:11.508Z",
+      "checkedAt": "2026-08-11T07:39:43.922Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2072,7 +2094,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:59.005Z",
+      "checkedAt": "2026-08-11T07:38:26.389Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2085,7 +2107,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:58.148Z",
+      "checkedAt": "2026-08-11T07:38:25.513Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2099,7 +2121,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:41.879Z",
+      "checkedAt": "2026-08-11T07:38:04.989Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2110,7 +2132,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:51.471Z",
+      "checkedAt": "2026-08-11T07:39:24.876Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2121,7 +2143,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:10.635Z",
+      "checkedAt": "2026-08-11T07:39:43.077Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2132,7 +2154,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:09.960Z",
+      "checkedAt": "2026-08-11T07:39:42.465Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2143,7 +2165,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:16.681Z",
+      "checkedAt": "2026-08-11T07:39:48.907Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2158,7 +2180,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.429Z",
+      "checkedAt": "2026-08-11T07:38:02.002Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2169,7 +2191,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:50.802Z",
+      "checkedAt": "2026-08-11T07:39:24.264Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2180,7 +2202,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:09.297Z",
+      "checkedAt": "2026-08-11T07:39:41.839Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2193,7 +2215,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:59.646Z",
+      "checkedAt": "2026-08-11T07:38:27.018Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2204,7 +2226,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:08.641Z",
+      "checkedAt": "2026-08-11T07:39:41.201Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2217,7 +2239,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:00.502Z",
+      "checkedAt": "2026-08-11T07:38:27.836Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2231,7 +2253,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:42.472Z",
+      "checkedAt": "2026-08-11T07:38:05.649Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2242,7 +2264,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:07.985Z",
+      "checkedAt": "2026-08-11T07:39:40.575Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2253,7 +2275,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:34.159Z",
+      "checkedAt": "2026-08-11T07:39:09.400Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2264,7 +2286,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:35.965Z",
+      "checkedAt": "2026-08-11T07:39:10.672Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2275,7 +2297,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:36.627Z",
+      "checkedAt": "2026-08-11T07:39:11.345Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2286,7 +2308,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:37.527Z",
+      "checkedAt": "2026-08-11T07:39:12.225Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2299,7 +2321,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:01.138Z",
+      "checkedAt": "2026-08-11T07:38:28.464Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2310,7 +2332,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:07.357Z",
+      "checkedAt": "2026-08-11T07:39:39.940Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2321,7 +2343,7 @@
       "files": [
         "committeeActivityReports.json"
       ],
-      "checkedAt": "2026-08-08T07:10:38.244Z",
+      "checkedAt": "2026-08-11T07:39:12.882Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2332,7 +2354,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:50.151Z",
+      "checkedAt": "2026-08-11T07:39:23.643Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2344,7 +2366,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:33.536Z",
+      "checkedAt": "2026-08-11T07:39:08.248Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2357,7 +2379,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:01.998Z",
+      "checkedAt": "2026-08-11T07:38:29.299Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2370,7 +2392,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:02.635Z",
+      "checkedAt": "2026-08-11T07:38:29.942Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2384,7 +2406,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:03.284Z",
+      "checkedAt": "2026-08-11T07:38:30.586Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2395,7 +2417,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:49.503Z",
+      "checkedAt": "2026-08-11T07:39:23.008Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2406,7 +2428,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:11:06.700Z",
+      "checkedAt": "2026-08-11T07:39:39.270Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2418,7 +2440,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:32.694Z",
+      "checkedAt": "2026-08-11T07:39:07.407Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2431,7 +2453,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:03.913Z",
+      "checkedAt": "2026-08-11T07:38:31.245Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2443,7 +2465,7 @@
         "archiveFiscalYears.json",
         "financeDashboard.json"
       ],
-      "checkedAt": "2026-08-08T07:09:47.408Z",
+      "checkedAt": "2026-08-11T07:38:14.136Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2454,7 +2476,7 @@
       "files": [
         "financeDashboard.json"
       ],
-      "checkedAt": "2026-08-08T07:11:27.081Z",
+      "checkedAt": "2026-08-11T07:40:01.277Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2467,7 +2489,7 @@
         "archiveFiscalYears.json",
         "financeDashboard.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.176Z",
+      "checkedAt": "2026-08-11T07:38:10.115Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2481,7 +2503,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:04.757Z",
+      "checkedAt": "2026-08-11T07:38:32.100Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2494,7 +2516,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:06.002Z",
+      "checkedAt": "2026-08-11T07:38:32.745Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2509,7 +2531,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.048Z",
+      "checkedAt": "2026-08-11T07:38:02.688Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2521,7 +2543,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:28.922Z",
+      "checkedAt": "2026-08-11T07:39:04.179Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2533,7 +2555,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:30.201Z",
+      "checkedAt": "2026-08-11T07:39:05.478Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2545,7 +2567,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:31.399Z",
+      "checkedAt": "2026-08-11T07:39:06.148Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2557,7 +2579,7 @@
         "committeeActivityReports.json",
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:32.037Z",
+      "checkedAt": "2026-08-11T07:39:06.767Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2571,7 +2593,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:10:06.673Z",
+      "checkedAt": "2026-08-11T07:38:33.353Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2582,7 +2604,7 @@
       "files": [
         "mayorEntertainmentExpenses.json"
       ],
-      "checkedAt": "2026-08-08T07:11:29.147Z",
+      "checkedAt": "2026-08-11T07:40:02.789Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2593,7 +2615,7 @@
       "files": [
         "committees.json"
       ],
-      "checkedAt": "2026-08-08T07:10:43.153Z",
+      "checkedAt": "2026-08-11T07:39:17.049Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2604,7 +2626,7 @@
       "files": [
         "mayorEntertainmentExpenses.json"
       ],
-      "checkedAt": "2026-08-08T07:11:29.771Z",
+      "checkedAt": "2026-08-11T07:40:03.436Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2618,7 +2640,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:53.567Z",
+      "checkedAt": "2026-08-11T07:38:21.050Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2630,7 +2652,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:17.998Z",
+      "checkedAt": "2026-08-11T07:39:50.671Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2642,7 +2664,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:18.870Z",
+      "checkedAt": "2026-08-11T07:39:51.528Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2654,7 +2676,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:19.521Z",
+      "checkedAt": "2026-08-11T07:39:52.169Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2666,7 +2688,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:20.385Z",
+      "checkedAt": "2026-08-11T07:39:53.050Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2678,7 +2700,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:21.016Z",
+      "checkedAt": "2026-08-11T07:39:53.719Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2690,7 +2712,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:21.659Z",
+      "checkedAt": "2026-08-11T07:39:54.838Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2702,7 +2724,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:22.319Z",
+      "checkedAt": "2026-08-11T07:39:55.487Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2714,7 +2736,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:22.994Z",
+      "checkedAt": "2026-08-11T07:39:56.172Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2726,7 +2748,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:23.643Z",
+      "checkedAt": "2026-08-11T07:39:56.826Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2738,7 +2760,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:24.274Z",
+      "checkedAt": "2026-08-11T07:39:57.458Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2750,7 +2772,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:24.952Z",
+      "checkedAt": "2026-08-11T07:39:58.234Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2762,7 +2784,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:25.805Z",
+      "checkedAt": "2026-08-11T07:39:59.411Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2774,7 +2796,7 @@
         "councilWatchedDocuments.json",
         "generalQuestions.json"
       ],
-      "checkedAt": "2026-08-08T07:11:26.442Z",
+      "checkedAt": "2026-08-11T07:40:00.071Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2785,7 +2807,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:45.146Z",
+      "checkedAt": "2026-08-11T07:39:18.287Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2800,7 +2822,7 @@
         "councilDocumentSources.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.183Z",
+      "checkedAt": "2026-08-11T07:38:00.686Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2811,7 +2833,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:47.263Z",
+      "checkedAt": "2026-08-11T07:39:20.221Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2822,7 +2844,7 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:48.621Z",
+      "checkedAt": "2026-08-11T07:39:22.184Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2831,15 +2853,12 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
       "files": [
-        "archiveCrawlerTargets.json",
-        "archiveFiscalYears.json",
-        "financeDashboard.json",
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:45.458Z",
-      "status": 200,
+      "checkedAt": "2026-08-11T07:40:23.982Z",
+      "status": 404,
       "location": null,
-      "category": "ok",
+      "category": "not_found_404",
       "error": null
     },
     {
@@ -2847,7 +2866,7 @@
       "files": [
         "mayorEntertainmentExpenses.json"
       ],
-      "checkedAt": "2026-08-08T07:11:30.422Z",
+      "checkedAt": "2026-08-11T07:40:04.094Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2858,7 +2877,42 @@
       "files": [
         "councilWatchedDocuments.json"
       ],
-      "checkedAt": "2026-08-08T07:10:46.554Z",
+      "checkedAt": "2026-08-11T07:39:19.571Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+      "files": [
+        "archiveCrawlerTargets.json",
+        "archiveFiscalYears.json",
+        "financeDashboard.json"
+      ],
+      "checkedAt": "2026-08-11T07:38:09.488Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3544.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-11T07:38:12.847Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3564.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-11T07:38:12.228Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2869,7 +2923,7 @@
       "files": [
         "civicTimelineEvents.json"
       ],
-      "checkedAt": "2026-08-08T07:10:27.429Z",
+      "checkedAt": "2026-08-11T07:39:02.697Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2881,7 +2935,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:39.375Z",
+      "checkedAt": "2026-08-11T07:38:38.064Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2893,7 +2947,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:38.717Z",
+      "checkedAt": "2026-08-11T07:38:37.215Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2905,7 +2959,7 @@
         "billVotes.json",
         "councilSessions.json"
       ],
-      "checkedAt": "2026-08-08T21:19:38.281Z",
+      "checkedAt": "2026-08-11T07:38:36.570Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2916,7 +2970,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.104Z",
+      "checkedAt": "2026-08-11T07:38:00.726Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2927,7 +2981,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.728Z",
+      "checkedAt": "2026-08-11T07:38:01.339Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2938,7 +2992,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.844Z",
+      "checkedAt": "2026-08-11T07:37:59.403Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2949,7 +3003,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:15.495Z",
+      "checkedAt": "2026-08-11T07:38:04.652Z",
       "status": 301,
       "location": "https://www.facebook.com/people/%E5%8C%97%E6%9E%97%E3%81%BF%E3%81%8D%E3%81%8A%E5%BE%8C%E6%8F%B4%E4%BC%9A/100080664301633/",
       "category": "redirect",
@@ -2960,9 +3014,9 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:18.422Z",
+      "checkedAt": "2026-08-11T07:38:07.728Z",
       "status": 301,
-      "location": "https://www.facebook.com/people/%E4%B8%AD%E5%B3%B6-%E3%82%88%E3%81%97%E3%81%AF%E3%82%8B/pfbid0sPQPyAp6u3cX2FUhWWvugJ6jAJaUmDZQCGdPrUZ4fbyNBxp14DpGuzmy2K5DdST5l/",
+      "location": "https://www.facebook.com/people/%E4%B8%AD%E5%B3%B6-%E3%82%88%E3%81%97%E3%81%AF%E3%82%8B/pfbid0sX3uwXqq5WnN6od4aTDhdXJvEWwwVrY86o4fa99S2wGTLa7vJ4xbB7GCj8KPScuHl/",
       "category": "redirect",
       "error": null
     },
@@ -2971,7 +3025,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:21.262Z",
+      "checkedAt": "2026-08-11T07:38:10.346Z",
       "status": 301,
       "location": "https://www.facebook.com/100027116246393/",
       "category": "redirect",
@@ -2982,7 +3036,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:17.650Z",
+      "checkedAt": "2026-08-11T07:38:07.000Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -2993,7 +3047,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:33.084Z",
+      "checkedAt": "2026-08-11T07:38:11.192Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3004,7 +3058,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:13.901Z",
+      "checkedAt": "2026-08-11T07:38:03.182Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3015,7 +3069,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:19.590Z",
+      "checkedAt": "2026-08-11T07:38:08.720Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3026,7 +3080,7 @@
       "files": [
         "mayor.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.482Z",
+      "checkedAt": "2026-08-11T07:37:59.253Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3037,7 +3091,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:16.826Z",
+      "checkedAt": "2026-08-11T07:38:06.095Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3345,7 +3399,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:14.702Z",
+      "checkedAt": "2026-08-11T07:38:03.919Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3356,9 +3410,9 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:13.129Z",
+      "checkedAt": "2026-08-11T07:38:02.420Z",
       "status": 301,
-      "location": "https://www.facebook.com/people/%E5%B0%8F%E9%87%8E-%E6%AD%A3%E4%BA%8C/pfbid0hNxCMzPxcWFqmfS5nD1DvNgqz3xksRqU7zCME6NYFXeHCUCEu9ne5Lpb7eyCb46Ml/",
+      "location": "https://www.facebook.com/people/%E5%B0%8F%E9%87%8E-%E6%AD%A3%E4%BA%8C/pfbid02m4EuFX43eTJXXfbGFpGHvC3dguHk7rLJpPkdtNjkHm7RXdYJ5BfEBLHsQcsTQ3qAl/",
       "category": "redirect",
       "error": null
     },
@@ -3367,7 +3421,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:12.346Z",
+      "checkedAt": "2026-08-11T07:38:01.676Z",
       "status": 301,
       "location": "https://www.facebook.com/people/%E6%B3%B0%E6%B4%8B%E4%B8%8A%E6%9D%89/100039255065122/",
       "category": "redirect",
@@ -3378,7 +3432,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:20.377Z",
+      "checkedAt": "2026-08-11T07:38:09.444Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3389,7 +3443,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:11.560Z",
+      "checkedAt": "2026-08-11T07:38:00.934Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3400,7 +3454,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:33.978Z",
+      "checkedAt": "2026-08-11T07:38:12.319Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3411,7 +3465,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.222Z",
+      "checkedAt": "2026-08-11T07:38:03.111Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3422,7 +3476,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.514Z",
+      "checkedAt": "2026-08-11T07:38:02.515Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3433,7 +3487,7 @@
       "files": [
         "compensationComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.185Z",
+      "checkedAt": "2026-08-11T07:38:00.697Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3444,7 +3498,7 @@
       "files": [
         "compensationComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.533Z",
+      "checkedAt": "2026-08-11T07:37:58.817Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3455,7 +3509,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.883Z",
+      "checkedAt": "2026-08-11T07:38:01.371Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3466,7 +3520,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:51.342Z",
+      "checkedAt": "2026-08-11T07:38:06.286Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3477,7 +3531,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.290Z",
+      "checkedAt": "2026-08-11T07:38:00.833Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3488,7 +3542,7 @@
       "files": [
         "mayor.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.658Z",
+      "checkedAt": "2026-08-11T07:37:58.974Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3499,7 +3553,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:53.102Z",
+      "checkedAt": "2026-08-11T07:38:07.888Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3510,7 +3564,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:48.746Z",
+      "checkedAt": "2026-08-11T07:38:03.233Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3609,7 +3663,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:47.855Z",
+      "checkedAt": "2026-08-11T07:38:02.420Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3620,7 +3674,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:52.155Z",
+      "checkedAt": "2026-08-11T07:38:07.089Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3631,7 +3685,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:47.090Z",
+      "checkedAt": "2026-08-11T07:38:01.627Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3642,7 +3696,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:49.549Z",
+      "checkedAt": "2026-08-11T07:38:04.034Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3653,7 +3707,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:53.927Z",
+      "checkedAt": "2026-08-11T07:38:08.723Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -3664,7 +3718,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:50.477Z",
+      "checkedAt": "2026-08-11T07:38:05.428Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4115,10 +4169,10 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.045Z",
-      "status": 200,
-      "location": null,
-      "category": "ok",
+      "checkedAt": "2026-08-11T07:37:59.145Z",
+      "status": 302,
+      "location": "/km/nobeoka-ono-syoji/?doing_wp_cron=1786433879.0936429500579833984375",
+      "category": "redirect",
       "error": null
     },
     {
@@ -4126,10 +4180,10 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.124Z",
-      "status": 200,
-      "location": null,
-      "category": "ok",
+      "checkedAt": "2026-08-11T07:38:01.650Z",
+      "status": 302,
+      "location": "/km/nobeoka-yamamoto-akemi/?doing_wp_cron=1786433881.5978209972381591796875",
+      "category": "redirect",
       "error": null
     },
     {
@@ -4137,7 +4191,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-10T03:15:26.632Z",
+      "checkedAt": "2026-08-11T07:38:00.832Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4149,7 +4203,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:47.328Z",
+      "checkedAt": "2026-08-11T07:38:10.053Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4161,7 +4215,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.918Z",
+      "checkedAt": "2026-08-11T07:38:03.824Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4172,7 +4226,7 @@
       "files": [
         "miyazakiCompensationComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.833Z",
+      "checkedAt": "2026-08-11T07:38:01.241Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4184,7 +4238,7 @@
         "archiveCrawlerTargets.json",
         "blockedTaskWatch.json"
       ],
-      "checkedAt": "2026-08-10T03:15:26.174Z",
+      "checkedAt": "2026-08-11T07:37:58.372Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4196,7 +4250,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.988Z",
+      "checkedAt": "2026-08-11T07:38:01.886Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4208,7 +4262,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.628Z",
+      "checkedAt": "2026-08-11T07:38:02.549Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4220,7 +4274,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:40.237Z",
+      "checkedAt": "2026-08-11T07:38:03.150Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4232,7 +4286,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:41.551Z",
+      "checkedAt": "2026-08-11T07:38:04.441Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4244,7 +4298,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:42.200Z",
+      "checkedAt": "2026-08-11T07:38:05.079Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4256,7 +4310,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:42.818Z",
+      "checkedAt": "2026-08-11T07:38:05.734Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4268,7 +4322,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:43.500Z",
+      "checkedAt": "2026-08-11T07:38:06.386Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4280,7 +4334,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:44.123Z",
+      "checkedAt": "2026-08-11T07:38:07.006Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4292,7 +4346,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:44.806Z",
+      "checkedAt": "2026-08-11T07:38:07.608Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4304,7 +4358,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:45.424Z",
+      "checkedAt": "2026-08-11T07:38:08.229Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4316,7 +4370,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.068Z",
+      "checkedAt": "2026-08-11T07:38:08.835Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4328,7 +4382,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.712Z",
+      "checkedAt": "2026-08-11T07:38:09.427Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4340,7 +4394,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:47.943Z",
+      "checkedAt": "2026-08-11T07:38:10.671Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4352,7 +4406,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:48.546Z",
+      "checkedAt": "2026-08-11T07:38:11.279Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4364,7 +4418,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:49.151Z",
+      "checkedAt": "2026-08-11T07:38:11.886Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4376,7 +4430,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:49.746Z",
+      "checkedAt": "2026-08-11T07:38:12.481Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4388,7 +4442,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:50.351Z",
+      "checkedAt": "2026-08-11T07:38:13.086Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4400,7 +4454,7 @@
         "politicalFundOrganizations.json",
         "politicalFundReports.json"
       ],
-      "checkedAt": "2026-08-08T07:09:50.984Z",
+      "checkedAt": "2026-08-11T07:38:13.675Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4411,7 +4465,7 @@
       "files": [
         "prefectureCompensationRanking.json"
       ],
-      "checkedAt": "2026-08-08T07:09:51.631Z",
+      "checkedAt": "2026-08-11T07:38:14.278Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4422,7 +4476,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.861Z",
+      "checkedAt": "2026-08-11T07:37:59.728Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4434,7 +4488,7 @@
         "archiveCrawlerTargets.json",
         "blockedTaskWatch.json"
       ],
-      "checkedAt": "2026-08-10T03:15:26.262Z",
+      "checkedAt": "2026-08-11T07:37:58.307Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4445,7 +4499,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.902Z",
+      "checkedAt": "2026-08-11T07:38:00.193Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4456,7 +4510,7 @@
       "files": [
         "nationalCompensationRanking.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.135Z",
+      "checkedAt": "2026-08-11T07:38:00.786Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4468,7 +4522,7 @@
         "archiveMayors.json",
         "archiveMayorTerms.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.383Z",
+      "checkedAt": "2026-08-11T07:37:58.479Z",
       "status": 404,
       "location": null,
       "category": "not_found_404",
@@ -4479,7 +4533,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:09:37.894Z",
+      "checkedAt": "2026-08-11T07:38:00.237Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4501,7 +4555,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:44.776Z",
+      "checkedAt": "2026-08-11T07:38:02.432Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -4512,7 +4566,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:43.939Z",
+      "checkedAt": "2026-08-11T07:38:01.650Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -5403,7 +5457,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-10T03:15:27.199Z",
+      "checkedAt": "2026-08-11T07:38:00.909Z",
       "status": null,
       "location": null,
       "category": "error",
@@ -5414,7 +5468,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.234Z",
+      "checkedAt": "2026-08-11T07:38:00.354Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -5425,7 +5479,7 @@
       "files": [
         "municipalityComparison.json"
       ],
-      "checkedAt": "2026-08-08T07:09:38.883Z",
+      "checkedAt": "2026-08-11T07:38:00.996Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -5436,7 +5490,7 @@
       "files": [
         "mayor.json"
       ],
-      "checkedAt": "2026-08-08T07:09:39.751Z",
+      "checkedAt": "2026-08-11T07:37:59.898Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -5447,7 +5501,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:13.771Z",
+      "checkedAt": "2026-08-11T07:38:05.139Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -5458,7 +5512,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:10.630Z",
+      "checkedAt": "2026-08-11T07:38:01.478Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -5766,7 +5820,7 @@
       "files": [
         "members.json"
       ],
-      "checkedAt": "2026-08-08T07:10:12.295Z",
+      "checkedAt": "2026-08-11T07:38:03.290Z",
       "status": 200,
       "location": null,
       "category": "ok",

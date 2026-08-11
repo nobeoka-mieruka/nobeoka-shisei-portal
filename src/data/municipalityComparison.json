@@ -16,14 +16,14 @@
     "fundBalanceMillionYen": { "value": 13781, "referenceDate": "令和6年度末" },
     "municipalBondBalanceThousandYen": { "value": 54021888, "referenceDate": "令和5年度末" },
     "sourceRefs": [
-      { "label": "延岡市「現住人口及び世帯数の推移」", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls" },
+      { "label": "延岡市「現住人口及び世帯数の推移」", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls" },
       { "label": "延岡市の概要（面積）", "url": "https://www.city.nobeoka.miyazaki.jp/site/kigyorichi/24122.html" },
       { "label": "延岡市の人事行政の運営状況", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/sihyou-43" },
       { "label": "総務省「基金残高等一覧」令和6年度・市区町村別", "url": "https://www.soumu.go.jp/iken/kikinzandaka.html" },
       { "label": "宮崎県「指標でみる宮崎県（令和6年度版）市町村編10財政」Excelファイル（p157-158）", "url": "https://data.stat.pref.miyazaki.lg.jp/dataset/e58af3cd-165a-4f26-83eb-1ab2f25eb5ff/resource/c9e99a1a-3d9f-4902-bee6-fb5db755787d/download/p157-158%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%91%EF%BC%90%E8%B2%A1%E6%94%BF2025.xlsx" }
     ],
-    "notes": "議員報酬・特別職給料は期末手当（3.45か月分、令和6年度実績）を含まない月額。財政指標（財政力指数・実質公債費比率・将来負担比率・地方債現在高）は令和5年度決算ベースで、比較対象6市と同一の宮崎県資料から取得しており年度がそろっている。基金残高（令和6年度末）は市債残高（令和5年度末）と年度が1年ずれている点に留意。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。",
+    "notes": "議員報酬・特別職給料は期末手当（3.45か月分、令和6年度実績）を含まない月額。財政指標（財政力指数・実質公債費比率・将来負担比率・地方債現在高）は令和5年度決算ベースで、比較対象6市と同一の宮崎県資料から取得しており年度がそろっている。基金残高（令和6年度末）は市債残高（令和5年度末）と年度が1年ずれている点に留意。 経常収支比率・自主財源比率・歳入総額・市町村税収入済額・1人当たり歳入/市税/地方債現在高は、既存の財政力指数・実質公債費比率・将来負担比率・地方債現在高と同一の宮崎県資料（令和5年度決算、同一Excelファイル）から新規追加した（2026-08-11、Phase23）。1人当たり指標は当サイトの算出値ではなく、資料が直接公表している値（令和5年1月1日現在住民基本台帳人口による算定、既存のpopulationフィールドの基準日とは異なる）。歳出・財政調整基金（単体）・標準財政規模は、この資料には掲載がなく未確認。 「現住人口及び世帯数の推移」のURLは、外部リンク監査（2026-08-11、Phase27）でattachment/27980.xlsが404になっていることを検出したため、同一ファイルの最新版（attachment/28569.xls、archiveFiscalYears.json等で既に使用中のURLと同一）へ更新した（population値自体は変更していない）。",
     "lastVerifiedAt": "2026-08-11",
     "currentAccountRatioPercent": { "value": 96.9, "referenceDate": "令和5年度決算" },
     "independentFinancialResourceRatioPercent": { "value": 39.1, "referenceDate": "令和5年度決算" },
