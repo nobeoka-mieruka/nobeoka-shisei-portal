@@ -18,6 +18,7 @@ interface CompareLink {
 
 const compareLinks: CompareLink[] = [
   { to: "/compare/municipalities", title: "延岡市と宮崎県内5市の比較", description: "人口・議員報酬・財政指標等を、宮崎市・都城市・日向市・日南市・小林市・西都市と比較します。" },
+  { to: "/compare/similar-municipalities", title: "類似団体（Ⅲ－３）財政比較", description: "総務省の類似団体区分「Ⅲ－３」に属する全国59自治体と、財政力指数等を同一年度・同一定義で比較します。" },
   { to: "/compare/mayors", title: "歴代市長の比較", description: "任期・就任回数・出典を最大4名まで並べて比較します。" },
   { to: "/compare/members", title: "議員の比較", description: "現職議員・元議員を横断して最大4名まで並べて比較します。" },
   { to: "/compare/finance", title: "年度別財政の比較", description: "人口・予算・市債・基金・財政健全化判断比率をまとめて比較します。" },

@@ -815,6 +815,43 @@ function validateRoleRankingFile(relPath) {
 validateRoleRankingFile("src/data/nationalCompensationRanking.json");
 validateRoleRankingFile("src/data/similarMunicipalityComparison.json");
 
+// --- similarMunicipalityFinanceComparison.json（類似団体Ⅲ－３財政比較データ） ---
+try {
+  const simFin = readJson("src/data/similarMunicipalityFinanceComparison.json");
+  const tag = "similarMunicipalityFinanceComparison.json";
+  if (!Array.isArray(simFin.municipalities)) throw new Error("municipalitiesが配列ではありません");
+  checkDuplicateIds({ err, warn }, simFin.municipalities, "municipalityCode", tag);
+
+  const nobeokaRows = simFin.municipalities.filter((m) => m.isNobeoka);
+  if (nobeokaRows.length !== 1) err(tag, `isNobeoka=trueの行が1件ではありません: ${nobeokaRows.length}件`);
+
+  const PERCENT_FIELDS = ["ordinaryBalanceRatioPercent", "realDebtServiceRatioPercent"];
+  for (const m of simFin.municipalities) {
+    const mtag = `${tag} (${m.municipalityName ?? m.municipalityCode ?? "不明"})`;
+    if (isBlank(m.municipalityCode)) err(mtag, "municipalityCodeが空です");
+    if (isBlank(m.municipalityName)) err(mtag, "municipalityNameが空です");
+    if (m.population != null && (typeof m.population !== "number" || m.population <= 0)) {
+      err(mtag, `populationが不正です: ${m.population}`);
+    }
+    if (m.financialStrengthIndex != null && (typeof m.financialStrengthIndex !== "number" || m.financialStrengthIndex < 0)) {
+      err(mtag, `financialStrengthIndexが不正です: ${m.financialStrengthIndex}`);
+    }
+    for (const f of PERCENT_FIELDS) {
+      if (m[f] != null && (typeof m[f] !== "number" || m[f] < 0)) err(mtag, `${f}が不正です: ${m[f]}`);
+    }
+    // 将来負担比率は財政再生基準が350%であり100%を超える実例があるため上限を緩和する。
+    if (m.futureBurdenRatioPercent != null && (typeof m.futureBurdenRatioPercent !== "number" || m.futureBurdenRatioPercent < 0)) {
+      err(mtag, `futureBurdenRatioPercentが不正です: ${m.futureBurdenRatioPercent}`);
+    }
+  }
+  if (!Array.isArray(simFin.sourceRefs) || simFin.sourceRefs.length === 0) {
+    err(tag, "sourceRefsが空です（出典なしのデータは登録しないでください）");
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("similarMunicipalityFinanceComparison.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- councilWatchedDocuments.json（5日ごと自動巡回の差分取得結果） ---
 try {
   const watched = readJson("src/data/councilWatchedDocuments.json");

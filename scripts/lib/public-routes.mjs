@@ -102,6 +102,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/committees",
   "/history",
   "/compare/municipalities",
+  "/compare/similar-municipalities",
   "/elections",
   "/city-organization",
 ];
@@ -158,6 +159,7 @@ function loadData() {
   const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
   const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
   const municipalityComparisons = readJson("src/data/municipalityComparison.json");
+  const similarMunicipalityFinanceComparison = readJson("src/data/similarMunicipalityFinanceComparison.json");
   const electionResults = readJson("src/data/electionResults.json");
   const cityOrganizationSections = readJson("src/data/cityOrganizationSections.json");
   return {
@@ -190,6 +192,7 @@ function loadData() {
     committeeActivityReports,
     civicTimelineEvents,
     municipalityComparisons,
+    similarMunicipalityFinanceComparison,
     electionResults,
     cityOrganizationSections,
   };
@@ -426,6 +429,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.municipalityComparisons.map((m) => m.lastVerifiedAt))],
         ["src/data/municipalityComparison.json"],
+      );
+    case "/compare/similar-municipalities":
+      return resolveLastmod(
+        path,
+        [data.similarMunicipalityFinanceComparison.generatedAt?.slice(0, 10)],
+        ["src/data/similarMunicipalityFinanceComparison.json"],
       );
     case "/elections":
       return resolveLastmod(

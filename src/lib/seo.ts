@@ -860,6 +860,17 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/compare/similar-municipalities":
+      return makeResult(
+        {
+          path: "/compare/similar-municipalities",
+          pageTitle: "類似団体（Ⅲ－３）財政比較",
+          description: "延岡市が属する総務省の類似団体区分「Ⅲ－３」（人口・産業構造が近い全国59自治体）と、財政力指数・経常収支比率・実質公債費比率・将来負担比率等を同一年度・同一定義で比較します。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政アーカイブの比較", to: "/compare" }, { label: "類似団体（Ⅲ－３）財政比較" }],
+        },
+        options,
+      );
+
     case "/timeline":
       return makeResult(
         {

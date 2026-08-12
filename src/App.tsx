@@ -89,6 +89,9 @@ const CompareFundsPage = lazy(() =>
 const CompareMunicipalitiesPage = lazy(() =>
   import("./pages/CompareMunicipalitiesPage").then((m) => ({ default: m.CompareMunicipalitiesPage })),
 );
+const CompareSimilarMunicipalitiesPage = lazy(() =>
+  import("./pages/CompareSimilarMunicipalitiesPage").then((m) => ({ default: m.CompareSimilarMunicipalitiesPage })),
+);
 const TimelinePage = lazy(() => import("./pages/TimelinePage").then((m) => ({ default: m.TimelinePage })));
 const TimelineYearPage = lazy(() => import("./pages/TimelineYearPage").then((m) => ({ default: m.TimelineYearPage })));
 const HistoryPage = lazy(() => import("./pages/HistoryPage").then((m) => ({ default: m.HistoryPage })));
@@ -269,6 +272,7 @@ function App() {
               <Route path="/compare/debt" element={<CompareDebtPage />} />
               <Route path="/compare/funds" element={<CompareFundsPage />} />
               <Route path="/compare/municipalities" element={<CompareMunicipalitiesPage />} />
+              <Route path="/compare/similar-municipalities" element={<CompareSimilarMunicipalitiesPage />} />
               <Route path="/timeline" element={<TimelinePage />} />
               <Route path="/history" element={<HistoryPage />} />
               <Route path="/timeline/:year" element={<TimelineYearPage />} />
