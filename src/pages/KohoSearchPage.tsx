@@ -7,13 +7,20 @@ import { EmptyState } from "../components/EmptyState";
 import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { kohoOcrSearchIndex, searchKohoOcrIndex, KOHO_SEARCH_CATEGORY_LABEL } from "../lib/kohoSearch";
+import {
+  kohoOcrSearchIndex,
+  searchKohoOcrIndex,
+  kohoSearchAvailableYears,
+  KOHO_SEARCH_CATEGORY_LABEL,
+} from "../lib/kohoSearch";
 import type { KohoOcrSearchEntry } from "../types/kohoSearch";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 const EXAMPLE_KEYWORDS = ["市長選", "実質公債費比率", "新庁舎", "合併", "決算", "市議会議員"];
+
+type CategoryFilter = "all" | KohoOcrSearchEntry["category"];
 
 function formatIssueDate(issueDate: string | null): string {
   if (!issueDate) return "発行年月確認中";
@@ -26,9 +33,23 @@ export function KohoSearchPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<CategoryFilter>("all");
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [yearFilter, setYearFilter] = useState<string>("all");
 
-  const results = useMemo(() => searchKohoOcrIndex(query), [query]);
+  const availableYears = useMemo(() => kohoSearchAvailableYears(), []);
   const issueCount = useMemo(() => new Set(kohoOcrSearchIndex.map((e) => e.issueId)).size, []);
+
+  const results = useMemo(
+    () =>
+      searchKohoOcrIndex(query, {
+        category: category === "all" ? undefined : category,
+        verifiedOnly,
+        yearFrom: yearFilter === "all" ? undefined : Number(yearFilter),
+        yearTo: yearFilter === "all" ? undefined : Number(yearFilter),
+      }),
+    [query, category, verifiedOnly, yearFilter],
+  );
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -40,7 +61,7 @@ export function KohoSearchPage() {
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">広報のべおか　文字起こし検索（試験版）</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          広報のべおかバックナンバーのPDFを、当サイトがWindowsのOCR機能で文字起こしした結果から、あらかじめ定めたキーワードに一致した箇所を検索できます。対象：{issueCount}号分。
+          広報のべおかバックナンバーのPDFを、当サイトがWindowsのOCR機能・PDF内蔵テキストの抽出で文字起こしした結果から、あらかじめ定めたキーワードに一致した箇所を検索できます。対象：{issueCount}号分。
         </p>
       </div>
 
@@ -56,7 +77,7 @@ export function KohoSearchPage() {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="例：市長選、実質公債費比率、新庁舎"
+          placeholder="例：市長選、実質公債費比率、新庁舎、令和6年"
           aria-label="広報のべおか文字起こし検索"
           className={`w-full rounded-full border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface placeholder:text-on-surface-variant ${linkClass}`}
         />
@@ -71,6 +92,48 @@ export function KohoSearchPage() {
               {k}
             </button>
           ))}
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <label className="flex flex-col gap-1 text-xs text-on-surface-variant">
+            カテゴリ
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value as CategoryFilter)}
+              className={`rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1.5 text-sm text-on-surface ${linkClass}`}
+            >
+              <option value="all">すべて</option>
+              {(Object.keys(KOHO_SEARCH_CATEGORY_LABEL) as KohoOcrSearchEntry["category"][]).map((c) => (
+                <option key={c} value={c}>
+                  {KOHO_SEARCH_CATEGORY_LABEL[c]}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex flex-col gap-1 text-xs text-on-surface-variant">
+            発行年
+            <select
+              value={yearFilter}
+              onChange={(e) => setYearFilter(e.target.value)}
+              className={`rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1.5 text-sm text-on-surface ${linkClass}`}
+            >
+              <option value="all">すべて</option>
+              {availableYears.map((y) => (
+                <option key={y} value={y}>
+                  {y}年
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex items-end gap-2 pb-1.5 text-sm text-on-surface">
+            <input
+              type="checkbox"
+              checked={verifiedOnly}
+              onChange={(e) => setVerifiedOnly(e.target.checked)}
+              className={`h-4 w-4 ${linkClass}`}
+            />
+            確認済みのみ
+          </label>
         </div>
       </SectionCard>
 
@@ -103,6 +166,11 @@ export function KohoSearchPage() {
                 <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">
                   …{r.context}…
                 </p>
+                {r.verificationStatus !== "verified" && (
+                  <p className="mt-1 text-xs text-on-surface-variant/80">
+                    OCRによる文字起こしのため誤認識を含む可能性があります。
+                  </p>
+                )}
                 {r.sourcePdf && (
                   <a
                     href={r.sourcePdf}
