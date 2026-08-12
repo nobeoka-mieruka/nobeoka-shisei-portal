@@ -19,13 +19,35 @@
       "label": "三浦久知公式サイト",
       "url": "https://hisatomo-m.jp/",
       "sourceType": "市長本人の進捗公表"
+    },
+    {
+      "key": "koho_2025_09",
+      "label": "広報のべおか2025年9月号「第四代延岡市長に三浦久知氏が就任」特集記事",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24619.pdf",
+      "sourceType": "延岡市公式資料（広報誌、就任特集）"
     }
   ],
   "categories": [
-    { "id": "p1", "title": "全ての子どもたちの可能性を伸ばします", "anchor": "children" },
-    { "id": "p2", "title": "地域経済を活性化させます", "anchor": "economy" },
-    { "id": "p3", "title": "シニア世代が輝き、安心して暮らせるまちにします", "anchor": "senior" },
-    { "id": "p4", "title": "市役所をもっと前向きな組織にします", "anchor": "city-hall" }
+    {
+      "id": "p1",
+      "title": "全ての子どもたちの可能性を伸ばします",
+      "anchor": "children"
+    },
+    {
+      "id": "p2",
+      "title": "地域経済を活性化させます",
+      "anchor": "economy"
+    },
+    {
+      "id": "p3",
+      "title": "シニア世代が輝き、安心して暮らせるまちにします",
+      "anchor": "senior"
+    },
+    {
+      "id": "p4",
+      "title": "市役所をもっと前向きな組織にします",
+      "anchor": "city-hall"
+    }
   ],
   "promises": [
     {
@@ -42,15 +64,27 @@
         "新たな自然体験事業の検討"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.2" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.2"
+        },
+        {
+          "documentKey": "official_site"
+        },
+        {
+          "documentKey": "koho_2025_09",
+          "page": "p.3"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
-      "lastVerified": "2026-07-14",
-      "notes": "施政方針（p.2）で「はらはらわくわくふるさと体験事業」の充実とふるさと教育の推進について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
+      "lastVerified": "2026-08-12",
+      "notes": "施政方針（p.2）で「はらはらわくわくふるさと体験事業」の充実とふるさと教育の推進について言及があることを確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。 ①子育て支援や教育環境の充実の一環として、自然体験の支援に言及。（広報のべおか2025年9月号p.3、Windows OCR基盤による調査で発見、元PDF画像を目視確認済み。2026-08-12追記）"
     },
     {
       "id": "1-2",
@@ -67,10 +101,18 @@
         "学校教育上の課題解決プロジェクトチーム"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.3" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.3"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -89,15 +131,27 @@
         "令和9年度のこども未来部設置に向けた具体的検討"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.3" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.3"
+        },
+        {
+          "documentKey": "official_site"
+        },
+        {
+          "documentKey": "koho_2025_09",
+          "page": "p.3"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
-      "lastVerified": "2026-07-14",
-      "notes": "施政方針（p.3）で「こども未来部」設置に向けて準備を進める旨の記載を確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
+      "lastVerified": "2026-08-12",
+      "notes": "施政方針（p.3）で「こども未来部」設置に向けて準備を進める旨の記載を確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。 「（仮称）こども未来部」設置による子育て支援に関する部署・政策の集約に言及（市役所組織改編）。（広報のべおか2025年9月号p.3、Windows OCR基盤による調査で発見、元PDF画像を目視確認済み。2026-08-12追記）"
     },
     {
       "id": "2-1",
@@ -113,15 +167,27 @@
         "地域商社に必要な役割、機能の検討"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.3" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.3"
+        },
+        {
+          "documentKey": "official_site"
+        },
+        {
+          "documentKey": "koho_2025_09",
+          "page": "p.3"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
-      "lastVerified": "2026-07-14",
-      "notes": "施政方針（p.3）で地域商社設立に向け庁内関係課によるワーキンググループで協議を進めている旨の記載を確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。"
+      "lastVerified": "2026-08-12",
+      "notes": "施政方針（p.3）で地域商社設立に向け庁内関係課によるワーキンググループで協議を進めている旨の記載を確認。6月補正予算には本事業に該当する個別予算項目は確認できなかった。 ②地域経済の活性化の一環として、市役所の外に「地域商社」を設立し農林水産物の販路開拓・外貨獲得を図る方針に言及。（広報のべおか2025年9月号p.3、Windows OCR基盤による調査で発見、元PDF画像を目視確認済み。2026-08-12追記）"
     },
     {
       "id": "2-2",
@@ -138,10 +204,18 @@
         "実証事業の検討"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.3" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.3"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -163,10 +237,18 @@
         "プロリーグチーム創設に向けた活動"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.3" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.3"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -185,10 +267,18 @@
         "医療機関事業承継支援制度の運用"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.3〜4" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.3〜4"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -211,10 +301,18 @@
         "福祉的なケアを必要とする避難者支援の協議"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.4" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.4"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -236,10 +334,18 @@
         "就職支援セミナー"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.4" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.4"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -258,9 +364,13 @@
         "若手職員による政策課題研究"
       ],
       "evidenceItems": [
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["市長本人の公表資料"],
+      "sources": [
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -280,10 +390,18 @@
         "地域課題を題材にした施策立案・研究"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.4" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.4"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
@@ -304,10 +422,18 @@
         "児童生徒との意見交換会"
       ],
       "evidenceItems": [
-        { "documentKey": "policy_budget", "page": "p.6" },
-        { "documentKey": "official_site" }
+        {
+          "documentKey": "policy_budget",
+          "page": "p.6"
+        },
+        {
+          "documentKey": "official_site"
+        }
       ],
-      "sources": ["延岡市公式資料", "市長本人の公表資料"],
+      "sources": [
+        "延岡市公式資料",
+        "市長本人の公表資料"
+      ],
       "relatedBudget": "確認中",
       "relatedBill": "確認中",
       "referenceDate": "2026-07-14",
