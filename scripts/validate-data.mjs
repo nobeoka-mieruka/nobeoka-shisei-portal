@@ -825,7 +825,8 @@ try {
   const nobeokaRows = simFin.municipalities.filter((m) => m.isNobeoka);
   if (nobeokaRows.length !== 1) err(tag, `isNobeoka=trueの行が1件ではありません: ${nobeokaRows.length}件`);
 
-  const PERCENT_FIELDS = ["ordinaryBalanceRatioPercent", "realDebtServiceRatioPercent"];
+  // 経常収支比率は0以上に限定されるが、実質公債費比率・将来負担比率は算定方法上
+  // マイナス値（起債制限上有利な状態を示す）を取りうる実例があるため、下限は設けない。
   for (const m of simFin.municipalities) {
     const mtag = `${tag} (${m.municipalityName ?? m.municipalityCode ?? "不明"})`;
     if (isBlank(m.municipalityCode)) err(mtag, "municipalityCodeが空です");
@@ -836,12 +837,14 @@ try {
     if (m.financialStrengthIndex != null && (typeof m.financialStrengthIndex !== "number" || m.financialStrengthIndex < 0)) {
       err(mtag, `financialStrengthIndexが不正です: ${m.financialStrengthIndex}`);
     }
-    for (const f of PERCENT_FIELDS) {
-      if (m[f] != null && (typeof m[f] !== "number" || m[f] < 0)) err(mtag, `${f}が不正です: ${m[f]}`);
+    if (m.ordinaryBalanceRatioPercent != null && (typeof m.ordinaryBalanceRatioPercent !== "number" || m.ordinaryBalanceRatioPercent < 0)) {
+      err(mtag, `ordinaryBalanceRatioPercentが不正です: ${m.ordinaryBalanceRatioPercent}`);
     }
-    // 将来負担比率は財政再生基準が350%であり100%を超える実例があるため上限を緩和する。
-    if (m.futureBurdenRatioPercent != null && (typeof m.futureBurdenRatioPercent !== "number" || m.futureBurdenRatioPercent < 0)) {
-      err(mtag, `futureBurdenRatioPercentが不正です: ${m.futureBurdenRatioPercent}`);
+    if (m.realDebtServiceRatioPercent != null && typeof m.realDebtServiceRatioPercent !== "number") {
+      err(mtag, `realDebtServiceRatioPercentが数値ではありません: ${m.realDebtServiceRatioPercent}`);
+    }
+    if (m.futureBurdenRatioPercent != null && typeof m.futureBurdenRatioPercent !== "number") {
+      err(mtag, `futureBurdenRatioPercentが数値ではありません: ${m.futureBurdenRatioPercent}`);
     }
   }
   if (!Array.isArray(simFin.sourceRefs) || simFin.sourceRefs.length === 0) {

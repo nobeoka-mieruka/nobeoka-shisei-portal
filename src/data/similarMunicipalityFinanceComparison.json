@@ -12,7 +12,7 @@
       "accessedAt": "2026-08-12",
       "extractionMethod": "manual",
       "verificationStatus": "needsReview",
-      "notes": "財政力指数・経常収支比率・実質公債費比率・将来負担比率・ラスパイレス指数を全市町村同一定義・同一年度（令和6年度決算）で収録した総務省公式Excel（001044529.xlsx）から抽出。延岡市の値（財政力指数0.53・経常収支比率97.2%・実質公債費比率8.6%・将来負担比率15.9%）が、既存archiveFiscalYears.json（延岡市公表の財政状況資料集ベース）の確定値と完全一致することを確認済み。"
+      "notes": "財政力指数・経常収支比率・実質公債費比率・将来負担比率・ラスパイレス指数を全市町村同一定義・同一年度（令和6年度決算）で収録した総務省公式Excel（001044529.xlsx）から抽出。延岡市の値（財政力指数0.53・経常収支比率97.2%・実質公債費比率8.6%・将来負担比率15.9%）が、既存archiveFiscalYears.json（延岡市公表の財政状況資料集ベース）の確定値と完全一致することを確認済み。 なお実質公債費比率がマイナス値（起債制限上有利な状態を示す）の自治体が3件あり、原本の「▲」表記を負の数値として正しく変換して登録した（多治見市▲2.3→-2.3等）。"
     },
     {
       "sourceUrl": "https://www.soumu.go.jp/menu_news/s-news/01gyosei02_02000316.html",
@@ -666,7 +666,7 @@
       "population": 106181,
       "financialStrengthIndex": 0.68,
       "ordinaryBalanceRatioPercent": 89.4,
-      "realDebtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": -2.3,
       "futureBurdenRatioPercent": null,
       "laspeyresIndex": 96.1,
       "debtBalanceYen": null,
@@ -918,7 +918,7 @@
       "population": 107342,
       "financialStrengthIndex": 0.6,
       "ordinaryBalanceRatioPercent": 96.4,
-      "realDebtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": -0.4,
       "futureBurdenRatioPercent": null,
       "laspeyresIndex": 99.7,
       "debtBalanceYen": null,
@@ -936,7 +936,7 @@
       "population": 147809,
       "financialStrengthIndex": 1.57,
       "ordinaryBalanceRatioPercent": 79.2,
-      "realDebtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": -0.9,
       "futureBurdenRatioPercent": null,
       "laspeyresIndex": 99.9,
       "debtBalanceYen": null,
