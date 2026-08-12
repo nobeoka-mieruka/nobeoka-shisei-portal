@@ -34,6 +34,8 @@ export interface BlockedTaskClassificationEntry {
   lastCheckedAt: string;
   /** ISO形式。次回見直しの目安（未定の場合はnull）。 */
   nextCheckAt: string | null;
+  /** status="WAITING_EXTERNAL"の場合、公式資料の想定公開時期（例：「令和8年11月頃」）。未定の場合はnull。 */
+  expectedPublicationPeriod: string | null;
   attemptCount: number;
   /** 既存の自動巡回基盤（blockedTaskWatch.json等）で再確認できる対象かどうか。 */
   autoRecheck: boolean;

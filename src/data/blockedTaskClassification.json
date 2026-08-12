@@ -10,7 +10,8 @@
     "attemptCount": 4,
     "autoRecheck": true,
     "autoRecheckMechanism": ".github/workflows/update-council-documents.yml（既存の日次自動更新。会議録が公開され次第、次回の自動巡回で反映される）",
-    "notes": "推測での分類はしない。billVotes総数（1,177件）は既に登録済みで、この24件のみ会議録公開待ち。"
+    "notes": "推測での分類はしない。billVotes総数（1,177件）は既に登録済みで、この24件のみ会議録公開待ち。",
+    "expectedPublicationPeriod": "令和8年5月臨時会分は近日中、6月定例会分は令和8年内（会議録公開スケジュールは公式サイトで個別公表されていないため目安）"
   },
   {
     "taskId": "TASK-011",
@@ -23,20 +24,22 @@
     "attemptCount": 4,
     "autoRecheck": false,
     "autoRecheckMechanism": null,
-    "notes": "解決済み。今後は年次更新（次年版の確認）のみ必要。"
+    "notes": "解決済み。今後は年次更新（次年版の確認）のみ必要。",
+    "expectedPublicationPeriod": null
   },
   {
     "taskId": "TASK-012",
     "title": "類似団体報酬比較データの投入",
     "status": "MANUAL_REVIEW",
     "blockedReasonCode": "MANUAL_REVIEW_REQUIRED",
-    "reasonSummary": "総務省「類似団体別市町村財政指数表」に区分別Excelファイル一覧を発見したが、ファイル名（数字のみ）からは延岡市の区分・構成自治体名を判別できず、複数ファイルを人が個別に開いて内容確認する追加調査が必要。",
+    "reasonSummary": "延岡市の類似団体区分コード「Ⅲ－３」は延岡市公表の財政状況資料集（総括表シート）から確認できたが、当該区分の構成自治体名一覧・各自治体の報酬個別実額はまだ確認できていない。総務省「類似団体別市町村財政指数表」の区分別Excelファイルはファイル名（数字のみ）から区分を判別できず、複数ファイルを人が個別に開いて内容確認する必要がある。",
     "lastCheckedAt": "2026-08-12",
     "nextCheckAt": null,
-    "attemptCount": 2,
+    "attemptCount": 3,
     "autoRecheck": false,
     "autoRecheckMechanism": null,
-    "notes": "TASK-011で入手済みの全国815市区報酬個別実数と組み合わせれば、区分・構成自治体さえ特定できれば解決見込みが高い。次回セッションの優先候補。"
+    "notes": "Phase63で区分コード「Ⅲ－３」を確定（延岡市公式・財政状況資料集より）。TASK-011で入手済みの全国815市区報酬個別実数と組み合わせれば、Ⅲ－３区分の構成自治体さえ特定できれば解決見込みが高い。次回セッションの優先候補。",
+    "expectedPublicationPeriod": null
   },
   {
     "taskId": "TASK-016B",
@@ -49,7 +52,8 @@
     "attemptCount": 3,
     "autoRecheck": true,
     "autoRecheckMechanism": "blockedTaskWatch.json（crawlerTargetId: election-fund-report、既存のhash監視）",
-    "notes": "pf-org-016（比江島久美子後援会）は既に解消済み（confirmed）。"
+    "notes": "pf-org-016（比江島久美子後援会）は既に解消済み（confirmed）。",
+    "expectedPublicationPeriod": "令和8年11月頃（宮崎県選挙管理委員会の例年の公表時期に基づく見込み）"
   },
   {
     "taskId": "TASK-023",
@@ -62,7 +66,8 @@
     "attemptCount": 1,
     "autoRecheck": false,
     "autoRecheckMechanism": null,
-    "notes": "サイト構成の設計判断待ち。外部資料の探索を継続しても解決しない性質のタスク。"
+    "notes": "サイト構成の設計判断待ち。外部資料の探索を継続しても解決しない性質のタスク。",
+    "expectedPublicationPeriod": null
   },
   {
     "taskId": "TASK-032",
@@ -72,10 +77,11 @@
     "reasonSummary": "対象17名（自民党きずなの会8名・無所属市民の会5名・無会派3名）について、所属政党（自由民主党宮崎県支部連合会・日本共産党・新・国民民主党等）の公式サイトに個別議員紹介ページが無く、本人公式サイト・SNSも本文取得がブロックされるため、経歴を確認できる一次資料のURL自体が現時点で存在しない。",
     "lastCheckedAt": "2026-08-12",
     "nextCheckAt": null,
-    "attemptCount": 3,
+    "attemptCount": 4,
     "autoRecheck": false,
     "autoRecheckMechanism": null,
-    "notes": "存在しないURLをハッシュ監視することはできない。次回の議員名簿点検（member-roster）や手動調査での偶発的な発見を待つ。"
+    "notes": "存在しないURLをハッシュ監視することはできない。次回の議員名簿点検（member-roster）や手動調査での偶発的な発見を待つ。 Phase63で改めて別政党（日本共産党全国サイト等）を再確認したが新規発見なし。3回連続で同じ結論（該当URL不存在）に達しているため、次に確認する価値があるのは「対象議員のいずれかが新たに公式サイト・SNSを開設した場合」のみに限定し、通常の定期再検索は今後行わない方針とする。",
+    "expectedPublicationPeriod": null
   },
   {
     "taskId": "TASK-045",
@@ -88,6 +94,7 @@
     "attemptCount": 3,
     "autoRecheck": true,
     "autoRecheckMechanism": "blockedTaskWatch.json（crawlerTargetId: nobeoka-history-publications、既存のhash監視）",
-    "notes": "新刊行物の発見自体は前進だが、対象期間外だったため本タスクは未解決のまま。"
+    "notes": "新刊行物の発見自体は前進だが、対象期間外だったため本タスクは未解決のまま。",
+    "expectedPublicationPeriod": "未定（延岡市史本編の刊行計画自体が公表されていないため見込みなし）"
   }
 ]

@@ -3093,6 +3093,9 @@ try {
     if (typeof c.autoRecheck !== "boolean") err(tag, `autoRecheckがboolean型ではありません: ${c.autoRecheck}`);
     if (c.autoRecheck && isBlank(c.autoRecheckMechanism)) err(tag, "autoRecheck=trueですがautoRecheckMechanismが空です");
     if (!c.autoRecheck && c.autoRecheckMechanism != null) warn(tag, "autoRecheck=falseですがautoRecheckMechanismが設定されています");
+    if (c.status === "WAITING_EXTERNAL" && c.expectedPublicationPeriod === undefined) {
+      err(tag, "status=WAITING_EXTERNALにはexpectedPublicationPeriodフィールド自体が必須です（不明な場合はnullを明示してください）");
+    }
   }
 
   // TASKS.mdの状態：BLOCKED件数との整合性チェック（雑な二重管理を防ぐ、簡易チェックのみ）。

@@ -15,13 +15,20 @@
  * 掲載号を絞り込んだうえで、都度PDFを取得して該当記事を確認する運用とする）。
  *
  * Phase59（2026-08-12）で、検索可能性インベントリ（テキスト抽出可否）を追加した。
- * 実行環境にはpdftotext（xpdf版）はあるがCJK CMapの一部が読めず、tesseract等の
- * OCRエンジンは導入されていない。優先テーマの月（1・2・6・7・8・11月）×主要年
- * （2010・2014・2018・2019・2022・2025・2026年）から39号を抽出しpdftotextで
- * 試験実行した結果、非空白抽出文字数は549〜15,614字（平均2,874字）と、いずれも
- * 実質的な本文とは言えない少量であり、39号全てが画像PDF（本文の大半が画像スキャン）
- * と判定された。残り158号は同一の発行形式が続いている可能性が高いが未検証であり、
- * researchStatus: "not_yet_tested"のまま推測で埋めていない。
+ * 実行環境にはpdftotext（xpdf版）はあるがCJK CMapの一部が読めない。優先テーマの月
+ * （1・2・6・7・8・11月）×主要年から39号を抽出しpdftotextで試験実行した結果、
+ * 39号全てが画像PDF（本文の大半が画像スキャン）と判定された。
+ *
+ * Phase64（2026-08-12）で、残り158号すべてを同じ方式で検証し、全197号の判定を
+ * 完了した（researchStatus: "not_yet_tested"は0件）。結果、197号全てが画像PDF
+ * （imagePdf: true）で、テキスト抽出可能な号は0件だった。URL切れ・取得失敗も0件。
+ *
+ * Phase65（2026-08-12）で、Windows標準搭載のWinRT API（Windows.Data.Pdf＋
+ * Windows.Media.Ocr、tesseract等の追加インストール不要・管理者権限不要）による
+ * OCRパイプラインの実現可能性を確認した（詳細はTASKS.md TASK-087参照）。1ページ
+ * あたり日本語で数千文字規模の実用的なテキスト抽出に成功したが、197号×平均20ページ
+ * 規模の全文OCR処理は本セッションの残り時間では完了できず、次回セッションの
+ * 優先候補として記録するに留めた（indexed: falseのまま）。
  */
 export interface KohoNobeokaIssue {
   /** 例: "koho-2020-06" */
@@ -55,4 +62,6 @@ export interface KohoNobeokaIssue {
   researchStatus: "tested_pdftotext_sample" | "not_yet_tested";
   /** ISO形式。fileType等の検証状況を最後に確認した日。未検証の号はcheckedAtと同じ値。 */
   lastCheckedAt: string;
+  /** PDF取得時のHTTPステータスコード。検証済みの号のみ設定（Phase64）。未検証の号は省略可。 */
+  httpStatus?: number;
 }

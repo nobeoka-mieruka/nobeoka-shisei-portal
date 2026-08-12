@@ -15,6 +15,7 @@ const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 type TypeFilter = "all" | "mayor" | "councilMember";
+type SortOrder = "newest" | "oldest";
 
 const TYPE_LABEL: Record<"mayor" | "councilMember", string> = {
   mayor: "市長選挙",
@@ -26,13 +27,19 @@ export function ElectionsPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
+  const [nameQuery, setNameQuery] = useState("");
 
-  const sorted = useMemo(() => [...electionResults].sort((a, b) => b.electionDate.localeCompare(a.electionDate)), []);
-  const filtered = typeFilter === "all" ? sorted : sorted.filter((e) => e.electionType === typeFilter);
+  const sortedAll = useMemo(() => [...electionResults].sort((a, b) => b.electionDate.localeCompare(a.electionDate)), []);
+  const sorted = sortOrder === "newest" ? sortedAll : [...sortedAll].reverse();
+  const normalizedQuery = nameQuery.trim();
+  const filtered = sorted
+    .filter((e) => typeFilter === "all" || e.electionType === typeFilter)
+    .filter((e) => !normalizedQuery || e.candidates.some((c) => c.name.includes(normalizedQuery) || (c.nameKana ?? "").includes(normalizedQuery)));
 
-  const mayorCount = sorted.filter((e) => e.electionType === "mayor").length;
-  const councilCount = sorted.filter((e) => e.electionType === "councilMember").length;
-  const totalCandidates = sorted.reduce((n, e) => n + e.candidates.length, 0);
+  const mayorCount = sortedAll.filter((e) => e.electionType === "mayor").length;
+  const councilCount = sortedAll.filter((e) => e.electionType === "councilMember").length;
+  const totalCandidates = sortedAll.reduce((n, e) => n + e.candidates.length, 0);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -82,6 +89,27 @@ export function ElectionsPage() {
             {label}
           </button>
         ))}
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        <label htmlFor="election-name-search" className="sr-only">
+          候補者名で検索
+        </label>
+        <input
+          id="election-name-search"
+          type="search"
+          value={nameQuery}
+          onChange={(e) => setNameQuery(e.target.value)}
+          placeholder="候補者名で検索（例：稲田）"
+          className={`min-w-0 flex-1 rounded-full border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface placeholder:text-on-surface-variant ${linkClass}`}
+        />
+        <button
+          type="button"
+          onClick={() => setSortOrder((s) => (s === "newest" ? "oldest" : "newest"))}
+          className={`shrink-0 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container ${linkClass}`}
+        >
+          {sortOrder === "newest" ? "新しい順" : "古い順"}（切替）
+        </button>
       </div>
 
       {filtered.length === 0 ? (
