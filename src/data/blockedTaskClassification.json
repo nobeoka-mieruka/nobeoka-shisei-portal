@@ -96,5 +96,33 @@
     "autoRecheckMechanism": "blockedTaskWatch.json（crawlerTargetId: nobeoka-history-publications、既存のhash監視）",
     "notes": "新刊行物の発見自体は前進だが、対象期間外だったため本タスクは未解決のまま。",
     "expectedPublicationPeriod": "未定（延岡市史本編の刊行計画自体が公表されていないため見込みなし）"
+  },
+  {
+    "taskId": "TASK-046",
+    "title": "1999年より前の延岡市議会議員選挙（候補者別得票結果）の一次資料調査",
+    "status": "RESEARCH_EXHAUSTED",
+    "blockedReasonCode": "SOURCE_NOT_FOUND",
+    "reasonSummary": "electionResults.jsonの市議会議員選挙は1999年4月25日執行分が最古（選挙ドットコムのjichitai索引ページ由来、Phase60・66で確認済み）。1999年より前の候補者別得票結果を確認できる一次資料が見つからない。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 3,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "Phase66で延岡市議会公式サイト・Wikipediaを確認済み（発見できず）。Phase91で新たに、延岡市議会史（国立国会図書館サーチで書誌自体が確認できず）、宮崎県統計年鑑（該当資料への直接リンクを確認できず）、延岡市選挙管理委員会事務局公式ページ（soshiki/79/2712.html・life/3/25/204/、いずれも直近選挙の結果のみ掲載、過去分の掲載やアーカイブへのリンクなし）、国立国会図書館デジタルコレクション（「延岡市議会史」検索でヒット0件）を追加で確認したが、いずれもオンラインでは確認できなかった。新聞縮刷版・図書館所蔵資料の現物確認・選挙管理委員会への直接照会は、オンラインで完結する手段ではないため今回は未実施（次に前進させる場合はこれらの人手による手段が候補）。3回連続で同じ結論（一次資料をオンラインでは確認できない）に達したためRESEARCH_EXHAUSTEDとした。「選挙が無かった」という意味ではなく「候補者別結果の一次資料をオンラインでは確認できていない」という意味であり、市民向け画面（/data-status）でもその旨を明記している。件数を減らす目的でこの状態へ変更したものではない。",
+    "expectedPublicationPeriod": null
+  },
+  {
+    "taskId": "TASK-047",
+    "title": "koho-2010-04（広報のべおか2010年4月号）PDFの構造破損対応",
+    "status": "RESEARCH_EXHAUSTED",
+    "blockedReasonCode": "SOURCE_UNAVAILABLE",
+    "reasonSummary": "配信元PDF（延岡市公式サイト、attachment/2703.pdf）自体が構造レベルで破損しており、独立した3種類のパーサー（pdftotext/xpdf、WinRT、pdfjs-dist）全てが読み込みに失敗する。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 2,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "Phase83〜87で同一パーサーでの再試行はせず、代わりに3つの独立パーサーで診断済み（reports/koho-ocr-recovery-report.json参照）。Phase91で追加の代替経路を確認：延岡市公式サイトのバックナンバー一覧に同一URL以外の代替リンク・HTML版は無い。Internet Archive Wayback Machine（2025年1月時点の第三者クローラーによる取得）でも同一サイズ（1,048,576バイト、本来の1.46MBより小さい＝取得当時から既に破損していたことを裏付け）・同一エラーで破損していることを確認し、配信元の長期破損を裏付けた。国立国会図書館デジタルコレクション・宮崎県立図書館のオンライン蔵書検索でも代替資料は確認できなかった。src/data/kohoNobeokaIssues.jsonのkoho-2010-04にsourceStatus（code: SOURCE_DAMAGED）を設定し、/data-statusで市民向けに「原資料PDFの構造破損により閲覧・文字起こしができません（号自体が存在しないという意味ではありません）」と明記した。",
+    "expectedPublicationPeriod": null
   }
 ]

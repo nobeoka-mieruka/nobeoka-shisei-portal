@@ -36,6 +36,17 @@
  * reports/koho-ocr-keyword-candidates.json（キーワード候補、verificationStatus=raw/candidate/verified）
  * に分離して保存している。indexed（全文検索インデックス）は、OCR結果の量・精度がまだ
  * 不十分なため、この段階ではまだtrueにしていない。
+ *
+ * Phase83〜91（2026-08-12）で、koho-2010-04（2010年4月号）のみ、独立した3つのPDF
+ * パーサー（pdftotext/xpdf、WinRT、pdfjs-dist）すべてがPDF構造レベルで読み込みに失敗
+ * することを確認した。市公式サイトから複数回再取得しても同一の破損状態であり、さらに
+ * Internet Archive Wayback Machineの2025年1月時点のアーカイブ（当サイトの取得より前、
+ * 独立した第三者クローラーによる取得）でも同一サイズ・同一エラーで破損していることを
+ * 確認した（配信元のPDF自体が長期間破損している）。延岡市公式サイト上に代替URL・HTML版は
+ * 存在せず、国立国会図書館デジタルコレクション・宮崎県立図書館のオンライン蔵書検索でも
+ * 該当資料は確認できなかった（オンラインで確認できる手段は尽くした。国立国会図書館・
+ * 宮崎県立図書館への直接照会や、延岡市への原本提供依頼などオンライン外の手段は今回未実施）。
+ * sourceStatusフィールドで機械可読に記録する。
  */
 export interface KohoNobeokaIssue {
   /** 例: "koho-2020-06" */
@@ -82,4 +93,18 @@ export interface KohoNobeokaIssue {
    * WinRTが「非標準PDF形式」等で読み込めない号（Phase83で16号発見）はpdfjs-textを使用した。
    * いずれの方式でも結果は未検証（raw）として扱う。 */
   ocrMethod?: "winrt" | "pdfjs-text";
+  /**
+   * 設定されている場合、配信元PDF自体が構造的に破損しており現時点では文字起こし・
+   * 目視確認のいずれもできないことを示す（Phase91で追加）。件数を減らす目的で
+   * 安易に付与しない。複数の独立した経路で確認できなかった場合のみ設定する。
+   */
+  sourceStatus?: {
+    code: "SOURCE_DAMAGED";
+    /** 市民向け表示用の短い説明文。 */
+    note: string;
+    /** ISO形式。この判定を行った日。 */
+    investigatedAt: string;
+    /** 確認を試みた経路の一覧（見つからなかったものを含む）。 */
+    investigatedPaths: string[];
+  };
 }

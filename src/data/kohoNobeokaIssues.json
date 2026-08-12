@@ -16,7 +16,22 @@
     "indexed": false,
     "researchStatus": "tested_pdftotext_sample",
     "lastCheckedAt": "2026-08-12",
-    "httpStatus": 200
+    "httpStatus": 200,
+    "sourceStatus": {
+      "code": "SOURCE_DAMAGED",
+      "note": "原資料PDFの構造破損により閲覧・文字起こしができません。号自体が存在しないという意味ではありません。",
+      "investigatedAt": "2026-08-12",
+      "investigatedPaths": [
+        "延岡市公式サイトからの再取得（複数回、バイト単位で同一の破損状態を確認）",
+        "pdftotext（xpdf）でのテキスト抽出（xrefテーブル破損エラー）",
+        "WinRT（Windows.Data.Pdf）でのOCR（COMException 0x80004005で読み込み自体に失敗）",
+        "pdfjs-dist（PDF内蔵テキスト抽出）での抽出（Invalid Root referenceで読み込み自体に失敗）",
+        "延岡市公式サイトのバックナンバー一覧（同一URL・attachment/2703.pdf以外の代替リンクなし、HTML版なし）",
+        "Internet Archive Wayback Machine（2025年1月時点のアーカイブでも同一サイズ・同一破損を確認、当サイトの取得より前の独立したクローラーによる取得のため配信元自体の長期破損を裏付け）",
+        "国立国会図書館デジタルコレクション（オンライン検索では該当資料を確認できず）",
+        "宮崎県立図書館（オンライン蔵書検索では所蔵確認できず、電話・来館照会は今回未実施）"
+      ]
+    }
   },
   {
     "id": "koho-2010-05",

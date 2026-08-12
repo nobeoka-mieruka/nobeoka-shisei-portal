@@ -197,6 +197,7 @@ export function DataStatusPage() {
   const kohoTotalIssues = kohoNobeokaIssues.length;
   const kohoOcrCompletedIssues = kohoNobeokaIssues.filter((k) => k.ocrCompleted).length;
   const kohoOcrCompletedPages = kohoNobeokaIssues.reduce((sum, k) => sum + (k.ocrPageCount ?? 0), 0);
+  const kohoDamagedIssues = kohoNobeokaIssues.filter((k) => k.sourceStatus?.code === "SOURCE_DAMAGED");
   const electionYears = electionResults.map((e) => Number(e.electionDate.slice(0, 4))).filter((y) => !Number.isNaN(y));
   const oldestElectionYear = electionYears.length > 0 ? Math.min(...electionYears) : null;
   const newestElectionYear = electionYears.length > 0 ? Math.max(...electionYears) : null;
@@ -599,6 +600,13 @@ export function DataStatusPage() {
           </Link>
           ）を公開していますが、検索結果の多くは未確認のOCR結果である点にご注意ください。
         </p>
+        {kohoDamagedIssues.length > 0 && (
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+            {kohoDamagedIssues.map((k) => `${k.issueYearMonth}号`).join("、")}
+            について：{kohoDamagedIssues[0].sourceStatus?.note}
+            （延岡市公式サイト・Webアーカイブ・国立国会図書館デジタルコレクション・宮崎県立図書館のオンライン蔵書検索など、オンラインで確認できる経路は確認しましたが、代替の資料は見つかりませんでした）。
+          </p>
+        )}
         <dl className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">文字起こし検索の対象件数</dt>
