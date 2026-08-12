@@ -72,7 +72,11 @@ export function ActivityRadarSection({
     return (
       <SectionCard title="議会活動データ">
         <p className="text-xs leading-relaxed text-on-surface-variant">
-          公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません。
+          公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません（
+          <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+            算定方法
+          </Link>
+          ）。
         </p>
         <p className="mt-3 rounded-lg bg-surface-container-high p-3 text-sm text-on-surface-variant">
           現在、この議員のレーダーチャートを作成できるだけの公開データがそろっていません。データは順次整備しています。
@@ -84,7 +88,11 @@ export function ActivityRadarSection({
   return (
     <SectionCard title="議会活動データ">
       <p className="text-xs leading-relaxed text-on-surface-variant">
-        公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません。
+        公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません（
+        <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+          算定方法
+        </Link>
+        ）。
       </p>
 
       <div className="mt-4">

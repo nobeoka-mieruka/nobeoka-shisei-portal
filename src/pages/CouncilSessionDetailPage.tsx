@@ -209,6 +209,24 @@ export function CouncilSessionDetailPage() {
         <p className="text-sm leading-relaxed text-on-surface-variant">
           この定例会で審議された個別の議案・採決結果は「議案ごとの賛否」ページで確認できます。
         </p>
+        {sessionBills.length > 0 && (
+          <ul className="mt-3 space-y-1.5">
+            {sessionBills.map((bill) => (
+              <li key={bill.id}>
+                <Link
+                  to={`/bills/votes/${bill.id}`}
+                  className={`block rounded-lg bg-surface-container-low px-3 py-2 text-sm text-on-surface transition hover:bg-surface-container ${linkClass}`}
+                >
+                  <span className="font-medium">{bill.billNumber}</span>
+                  <span className="ml-1.5">{bill.billTitle}</span>
+                  {bill.result && bill.result !== "確認中" && (
+                    <span className="ml-2 text-xs text-on-surface-variant">（{bill.result}）</span>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
         <Link
           to={`/bills/votes?session=${encodeURIComponent(session.title)}`}
           className={`mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}

@@ -1,15 +1,14 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-12（Phase89でmayorPromises候補2件を施政方針の一次資料で「公約との
-対応関係」を確認しrelatedBudgetへ転記。Phase91でTASK-046（1999年より前の市議選）・
-TASK-047（koho-2010-04のPDF構造破損）を新規にBLOCKED登録し、`blockedTaskClassification.json`
-へ機械可読に記録した）
+最終更新日：2026-08-12（Phase93-1でTASK-023「FAQ構造化データの実装」を、Google側の
+FAQPageリッチリザルト機能廃止〔2026年5月7日付〕の確認をもってDONEへ変更。BLOCKED
+7→6）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-12時点）：
-DONE 91／BLOCKED 7／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+DONE 92／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
 分割済みでこれ自体は集計対象外）2／合計101
 
-READY・IN_PROGRESSともに0件。残るBLOCKED 7件はいずれも一次資料の不存在・未公表・環境制約が
+READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
 `src/data/blockedTaskClassification.json`の機械可読な分類を参照）。
 
@@ -2008,7 +2007,7 @@ pf-org-001は解散団体ではないため対象外）。総務省の全国的�
 
 ### TASK-023 FAQ構造化データの実装
 
-状態：BLOCKED
+状態：DONE（2026-08-12、Phase93-1で実装しないことを確定。詳細は下記）
 優先度：C
 対象：`src/pages/CityGuidePage.tsx`、`src/pages/EditorialPolicyPage.tsx`等
 依存関係：なし
@@ -2019,21 +2018,27 @@ pf-org-001は解散団体ではないため対象外）。総務省の全国的�
 - `EditorialPolicyPage.tsx`・`AboutPage.tsx`・`TermsPage.tsx`等を確認したが、「Q.」「質問」「回答」形式の固定コンテンツは見つからなかった
 - ユーザー指示「構造化データは内容に適合する範囲のみ使用し、誤解を招くOrganizationやGovernmentOrganization設定は避ける」に基づき、実態に合わないFAQPage構造化データの追加は見送った
 
+【2026-08-12追記・Phase93-1で最終確定】
+- Google Search Central公式ドキュメント（`developers.google.com/search/docs/appearance/structured-data/faqpage`）を確認したところ、FAQPageのリッチリザルト機能自体が**2026年5月7日付で廃止**されていることが判明した。実装してもGoogle検索結果上のメリットは無い
+- 改めて全ページ（`src/pages/*.tsx`）をFAQ的な固定Q&Aコンテンツの有無で再検索したが、該当コンテンツは依然として存在しない
+- 以上より、「データ不足で保留」ではなく「実装する意義が無いため実装しない」という結論に確定したため、BLOCKEDのままにせずDONEへ変更した（`blockedTaskClassification.json`のTASK-023もCOMPLETEDへ変更済み）
+- 既存の構造化データ（WebSite/BreadcrumbList/Organization/Person/Dataset/Article、`src/lib/seo.ts`に実装済み）で必要な範囲は既にカバーされている
+
 作業内容：
 - FAQ形式のコンテンツを洗い出す（実施済み、該当なし）
-- `FAQPage`のJSON-LDを追加する（該当コンテンツが無いため未実施）
+- `FAQPage`のJSON-LDを追加する（Google側の機能廃止・該当コンテンツ不在の両方の理由により実装しないことを確定）
 
 受入条件：
 - 構造化データテストで検証エラーがない
 - 実際のページ内容と一致する
 
 公式資料：
-- 該当なし
+- Google Search Central「FAQ (FAQPage) structured data」ドキュメント（機能廃止の告知）
 
 完了記録：
-- 完了日：
-- コミットID：
-- 変更概要：サイト内にFAQPage構造化データを適用できる静的なQ&Aコンテンツが存在しないため、BLOCKEDとした。将来、市役所案内診断とは別に固定のFAQコンテンツ（例：「よくある質問」ページ）を新設する場合に再検討する。
+- 完了日：2026-08-12
+- コミットID：（後述）
+- 変更概要：サイト内にFAQPage構造化データを適用できる静的なQ&Aコンテンツが存在しないこと、かつGoogle側がFAQPageリッチリザルト機能自体を廃止したことの両方を確認し、実装しないことを確定した。データ変更なし（判断の確定のみ）。
 
 ---
 

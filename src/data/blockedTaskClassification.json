@@ -58,15 +58,15 @@
   {
     "taskId": "TASK-023",
     "title": "FAQ構造化データの実装",
-    "status": "NOT_APPLICABLE",
-    "blockedReasonCode": "OUTSIDE_SCOPE",
-    "reasonSummary": "外部の公式一次資料の公開待ちではなく、本サイト自身のコンテンツ構成（FAQ的な固定Q&Aページを新設するかどうか）に依存する課題のため、「新しい一次資料の検知」という自動再確認の枠組みの対象外。",
+    "status": "COMPLETED",
+    "blockedReasonCode": null,
+    "reasonSummary": "Google Search Central公式ドキュメント（developers.google.com/search/docs/appearance/structured-data/faqpage）で、FAQPageのリッチリザルト機能自体が2026年5月7日付で廃止されたことを確認した。実装してもGoogle検索結果上のメリットは無い。加えて、本サイトには固定的なQ&Aコンテンツ（よくある質問ページ等）自体が現状存在しないことも確認した。「データ不足」ではなく「実装する意義が無い」という結論に達したため、実装を見送ることとしCOMPLETEDへ変更した。",
     "lastCheckedAt": "2026-08-12",
     "nextCheckAt": null,
-    "attemptCount": 1,
+    "attemptCount": 2,
     "autoRecheck": false,
     "autoRecheckMechanism": null,
-    "notes": "サイト構成の設計判断待ち。外部資料の探索を継続しても解決しない性質のタスク。",
+    "notes": "Phase93-1で実施。従来「サイト構成の設計判断待ち」としてNOT_APPLICABLEだったが、Google側の仕様変更（FAQリッチリザルト機能の廃止）という客観的な一次情報が得られたため、判断を確定させCOMPLETEDへ格上げした。将来的に固定Q&Aページを新設する場合でも、FAQPage schemaはリッチリザルトに寄与しないため、実装する場合は別の目的（サイト内検索性・アクセシビリティ等）に限定して検討すること。WebSite/BreadcrumbList/Organization/Person/Dataset/Article等、既に実装済みの構造化データ（src/lib/seo.ts）で十分カバーされていることを確認済み。",
     "expectedPublicationPeriod": null
   },
   {
