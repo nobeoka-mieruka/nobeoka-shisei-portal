@@ -1,5 +1,293 @@
 [
   {
+    "fiscalYear": 2009,
+    "budget": {
+      "fiscalYear": 2009,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 57776440000,
+      "totalExpenditureYen": 56358180000,
+      "localTaxRevenueYen": 13986850000,
+      "localAllocationTaxYen": 15558450000,
+      "nationalSubsidiesYen": 14353140000,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2696.pdf",
+          "sourceTitle": "広報のべおか2010年11月号「平成21年度決算の状況」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2010-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 6,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額577億7,644万円・歳出総額563億5,818万円。実質収支は「約12億円」（本文中の概数表記、円グラフの差引額14億1,826万円とは定義が異なる可能性があるため数値フィールドには未登録）。国・県支出金143億5,314万円は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        }
+      ],
+      "notes": "国・県支出金143億5,314万円は資料上「国・県支出金」として一体表記されており、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが、按分不明のため今後修正の可能性あり。実質収支は本文で「約12億円」とのみ記載され正確な値は未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2009,
+      "municipalBondIssuanceYen": 4400184000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2696.pdf",
+          "sourceTitle": "広報のべおか2010年11月号「平成21年度決算の状況」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2010-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 6,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "歳入決算の内訳円グラフに「市債 44億184万円」の記載を確認（施設をつくる時などに借りるお金＝当該年度の発行額）。"
+        }
+      ],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": 113508130000,
+        "perCapitaYen": null,
+        "definitionNote": "「市債の残高」グラフの平成21年度末値1,135億813万円（一般・特別・企業会計の合計、本文に明記）。他年度のordinaryAccountLocalBondBalanceYen（普通会計）とは集計範囲が異なるため単純比較しないこと。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2696.pdf",
+            "sourceTitle": "広報のべおか2010年11月号「平成21年度決算の状況」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2010-11-01",
+            "accessedAt": "2026-08-12",
+            "pageNumber": 6,
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「市債の残高」棒グラフ（19〜21年度末、一般・特別・企業会計の合計、本文に明記）の21年度末値。"
+          }
+        ]
+      },
+      "notes": "残高は一般・特別・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+    },
+    "finance": {
+      "fiscalYear": 2009,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 13.5,
+      "futureBurdenRatioPercent": 116.3,
+      "currentAccountRatioPercent": null,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2696.pdf",
+          "sourceTitle": "広報のべおか2010年11月号「平成21年度決算の状況」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2010-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 6,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。資金不足比率（食肉センター特別会計、水道事業会計、下水道事業会計）はいずれも「資金不足なし」の記載あり。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        }
+      ],
+      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+    },
+    "notes": "広報のべおか2010年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金残高153億4,299万円（平成21年度末、推移グラフ、一般・特別・企業会計の合計）も同記事に記載があるが、財政調整基金等の内訳が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
+    "verifiedAt": "2026-08-12"
+  },
+  {
+    "fiscalYear": 2013,
+    "budget": {
+      "fiscalYear": 2013,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 59456480000,
+      "totalExpenditureYen": 58164430000,
+      "localTaxRevenueYen": 13653060000,
+      "localAllocationTaxYen": 16656240000,
+      "nationalSubsidiesYen": 14416870000,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
+          "sourceTitle": "広報のべおか2014年11月号「平成25年度延岡市の財政状況」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2014-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 7,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額594億5,648万円・歳出総額581億6,443万円。実質収支10億2,312万円（黒字決算）。国・県支出金144億1,687万円は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        }
+      ],
+      "notes": "国・県支出金144億1,687万円は資料上「国・県支出金」として一体表記されており、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが、按分不明のため今後修正の可能性あり。"
+    },
+    "debt": {
+      "fiscalYear": 2013,
+      "municipalBondIssuanceYen": 6075800000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
+          "sourceTitle": "広報のべおか2014年11月号「平成25年度延岡市の財政状況」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2014-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 7,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "歳入決算の内訳円グラフに「市債 60億7,580万円」の記載を確認（施設をつくる時などに借りるお金＝当該年度の発行額）。"
+        }
+      ],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": 105268930000,
+        "perCapitaYen": null,
+        "definitionNote": "「市債残高の推移」グラフの平成25年度末値1,052億6,893万円（一般・特別・企業会計を合わせた残高、と本文に明記）。他年度のordinaryAccountLocalBondBalanceYen（普通会計）とは集計範囲が異なるため単純比較しないこと。地方交付税措置ありの割合54.4%・措置なし45.6%も資料に記載あり（本データには未反映）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
+            "sourceTitle": "広報のべおか2014年11月号「平成25年度延岡市の財政状況」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2014-11-01",
+            "accessedAt": "2026-08-12",
+            "pageNumber": 7,
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「市債残高の推移」棒グラフ（22〜25年度末、一般・特別・企業会計の合計、本文に明記）の25年度末値。"
+          }
+        ]
+      },
+      "notes": "残高は一般・特別・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+    },
+    "finance": {
+      "fiscalYear": 2013,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 10.1,
+      "futureBurdenRatioPercent": 55.1,
+      "currentAccountRatioPercent": null,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
+          "sourceTitle": "広報のべおか2014年11月号「平成25年度延岡市の財政状況」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2014-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 7,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。資金不足比率（食肉センター特別会計、水道事業会計、下水道事業会計）はいずれも「資金不足なし」の記載あり。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        }
+      ],
+      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+    },
+    "notes": "広報のべおか2014年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金額206億8,517万円（平成25年度末、推移グラフ）も同記事に記載があるが、財政調整基金等の内訳・会計区分の明記が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
+    "verifiedAt": "2026-08-12"
+  },
+  {
+    "fiscalYear": 2017,
+    "budget": {
+      "fiscalYear": 2017,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 63414870000,
+      "totalExpenditureYen": 61751800000,
+      "localTaxRevenueYen": 14260730000,
+      "localAllocationTaxYen": 15312700000,
+      "nationalSubsidiesYen": 16214910000,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2600.pdf",
+          "sourceTitle": "広報のべおか2018年11月号「延岡市の財政状況（平成29年度決算）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2018-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 5,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額634億1,487万円・歳出総額617億5,180万円。歳入内訳のうち地方交付税153億1,270万円・市税142億6,073万円・国県支出金（国・県支出金162億1,491万円のうち内訳不明のため国庫補助金相当としてnationalSubsidiesYenへ計上、県支出金分との按分は未確認）。会計区分（一般会計単独か否か）は資料に明記が無いため、他年度との厳密な比較は要注意。"
+        }
+      ],
+      "notes": "国・県支出金162億1,491万円は資料上「国・県支出金」として一体表記されており、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが、按分不明のため今後修正の可能性あり。"
+    },
+    "debt": {
+      "fiscalYear": 2017,
+      "municipalBondIssuanceYen": 5800219000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2600.pdf",
+          "sourceTitle": "広報のべおか2018年11月号「延岡市の財政状況（平成29年度決算）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2018-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 5,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "歳入決算の内訳円グラフに「市債 58億219万円」の記載を確認（施設等をつくるための借入金＝当該年度の発行額）。"
+        }
+      ],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": null,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": 96502880000,
+        "perCapitaYen": null,
+        "definitionNote": "「市債残高の推移」グラフの平成29年度末値965億288万円（注記：一般・企業会計の合計）。他年度のordinaryAccountLocalBondBalanceYen（普通会計）とは集計範囲が異なるため単純比較しないこと。交付税措置ありの割合58.1%・措置なし41.9%も資料に記載あり（本データには未反映）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2600.pdf",
+            "sourceTitle": "広報のべおか2018年11月号「延岡市の財政状況（平成29年度決算）」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2018-11-01",
+            "accessedAt": "2026-08-12",
+            "pageNumber": 5,
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「市債残高の推移」棒グラフ（26〜29年度末、一般・企業会計の合計）の29年度末値。"
+          }
+        ]
+      },
+      "notes": "残高は一般・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+    },
+    "finance": {
+      "fiscalYear": 2017,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 10.2,
+      "futureBurdenRatioPercent": 9.3,
+      "currentAccountRatioPercent": null,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2600.pdf",
+          "sourceTitle": "広報のべおか2018年11月号「延岡市の財政状況（平成29年度決算）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2018-11-01",
+          "accessedAt": "2026-08-12",
+          "pageNumber": 5,
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        }
+      ],
+      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+    },
+    "notes": "広報のべおか2018年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金残高234億3,090万円（一般・特別・企業会計の合計、平成29年度末）も同記事に記載があるが、財政調整基金等の内訳が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
+    "verifiedAt": "2026-08-12"
+  },
+  {
     "fiscalYear": 2018,
     "population": {
       "fiscalYear": 2018,

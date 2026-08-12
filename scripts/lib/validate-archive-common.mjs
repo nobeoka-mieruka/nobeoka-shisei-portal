@@ -127,12 +127,12 @@ export function checkNonNegative({ err }, value, fieldName, tag) {
 }
 
 /** null以外の比率が0〜100の範囲内かを確認する。 */
-export function checkPercentRange({ err }, value, fieldName, tag) {
+export function checkPercentRange({ err }, value, fieldName, tag, { max = 100 } = {}) {
   if (value === null || value === undefined) return;
   if (typeof value !== "number" || !Number.isFinite(value)) {
     err(tag, `${fieldName}が数値ではありません: ${value}`);
-  } else if (value < 0 || value > 100) {
-    err(tag, `${fieldName}が0〜100の範囲外です: ${value}`);
+  } else if (value < 0 || value > max) {
+    err(tag, `${fieldName}が0〜${max}の範囲外です: ${value}`);
   }
 }
 

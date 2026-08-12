@@ -1,0 +1,200 @@
+{
+  "generatedAt": "2026-08-12T00:00:00+09:00",
+  "note": "広報のべおかアーカイブ（全197号）のうち14号を対象に実施した最初のOCRバッチの性能記録。全197号への適用はこの回では実施していない（推定値のみ）。",
+  "batch1": {
+    "issuesProcessed": 14,
+    "pagesProcessed": 176,
+    "successPages": 176,
+    "failPages": 0,
+    "totalProcessingMs": 246713,
+    "avgSecPerPage": 1.4,
+    "excludedIssues": [
+      {
+        "issueId": "koho-2025-07",
+        "reason": "PdfDocument.LoadFromFileAsyncが失敗（原因未特定、WinRTパーサーがこのPDFの何らかの特徴に非対応の可能性）"
+      },
+      {
+        "issueId": "koho-2025-08",
+        "reason": "PdfDocument.LoadFromFileAsyncが失敗（原因未特定、koho-2025-07と同様）"
+      }
+    ]
+  },
+  "fullArchiveEstimate": {
+    "totalIssues": 197,
+    "avgPagesPerIssueSample": 12.6,
+    "estimatedTotalPages": 2477,
+    "estimatedTotalSeconds": 3472,
+    "estimatedTotalMinutes": 57.9,
+    "caveat": "サンプル14号（2010・2014・2018・2022年の1,2,6,7,8,11月号中心）の平均から単純外挿した概算値。号によってページ数・レイアウトが異なるため実際の所要時間は変動する。今回はこの推定のみで、全197号への実行はしていない。"
+  },
+  "perIssue": [
+    {
+      "issueId": "koho-2010-06",
+      "issueDate": "2010-06",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2701.pdf",
+      "status": "OK",
+      "pageCount": 11,
+      "successPages": 11,
+      "failPages": 0,
+      "totalMs": 18359,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2010-07",
+      "issueDate": "2010-07",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2700.pdf",
+      "status": "OK",
+      "pageCount": 13,
+      "successPages": 13,
+      "failPages": 0,
+      "totalMs": 21901,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2010-08",
+      "issueDate": "2010-08",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2699.pdf",
+      "status": "OK",
+      "pageCount": 13,
+      "successPages": 13,
+      "failPages": 0,
+      "totalMs": 18465,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2010-11",
+      "issueDate": "2010-11",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2696.pdf",
+      "status": "OK",
+      "pageCount": 15,
+      "successPages": 15,
+      "failPages": 0,
+      "totalMs": 18844,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2014-01",
+      "issueDate": "2014-01",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2658.pdf",
+      "status": "OK",
+      "pageCount": 11,
+      "successPages": 11,
+      "failPages": 0,
+      "totalMs": 15371,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2014-02",
+      "issueDate": "2014-02",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2657.pdf",
+      "status": "OK",
+      "pageCount": 11,
+      "successPages": 11,
+      "failPages": 0,
+      "totalMs": 13365,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2014-06",
+      "issueDate": "2014-06",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2653.pdf",
+      "status": "OK",
+      "pageCount": 15,
+      "successPages": 15,
+      "failPages": 0,
+      "totalMs": 18205,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2014-11",
+      "issueDate": "2014-11",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
+      "status": "OK",
+      "pageCount": 15,
+      "successPages": 15,
+      "failPages": 0,
+      "totalMs": 22809,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2018-01",
+      "issueDate": "2018-01",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2610.pdf",
+      "status": "OK",
+      "pageCount": 13,
+      "successPages": 13,
+      "failPages": 0,
+      "totalMs": 18609,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2018-02",
+      "issueDate": "2018-02",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2609.pdf",
+      "status": "OK",
+      "pageCount": 11,
+      "successPages": 11,
+      "failPages": 0,
+      "totalMs": 15527,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2018-06",
+      "issueDate": "2018-06",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2605.pdf",
+      "status": "OK",
+      "pageCount": 13,
+      "successPages": 13,
+      "failPages": 0,
+      "totalMs": 17021,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2018-11",
+      "issueDate": "2018-11",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2600.pdf",
+      "status": "OK",
+      "pageCount": 11,
+      "successPages": 11,
+      "failPages": 0,
+      "totalMs": 10537,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2022-01",
+      "issueDate": "2022-01",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/7901.pdf",
+      "status": "OK",
+      "pageCount": 13,
+      "successPages": 13,
+      "failPages": 0,
+      "totalMs": 23570,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    },
+    {
+      "issueId": "koho-2022-02",
+      "issueDate": "2022-02",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/8181.pdf",
+      "status": "OK",
+      "pageCount": 11,
+      "successPages": 11,
+      "failPages": 0,
+      "totalMs": 14130,
+      "ocrEngine": "Windows.Media.Ocr (WinRT, ja)",
+      "ocrDate": "2026-08-12"
+    }
+  ]
+}
