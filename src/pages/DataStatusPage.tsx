@@ -16,6 +16,8 @@ import committeesData from "../data/committees.json";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
 import politicalFundOrganizationsData from "../data/politicalFundOrganizations.json";
 import politicalFundReportsData from "../data/politicalFundReports.json";
+import kohoNobeokaIssuesData from "../data/kohoNobeokaIssues.json";
+import electionResultsData from "../data/electionResults.json";
 import type {
   CouncilMember,
   FormerMember,
@@ -30,6 +32,8 @@ import type {
 } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm, ArchiveCouncilDocument, ArchivePolicy, ArchiveFiscalYear } from "../types/historicalArchive";
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
+import type { KohoNobeokaIssue } from "../types/kohoNobeoka";
+import type { ElectionResult } from "../types/election";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { LastUpdated } from "../components/LastUpdated";
@@ -63,6 +67,8 @@ const committees = committeesData as Committee[];
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFundOrganization[];
 const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
+const kohoNobeokaIssues = kohoNobeokaIssuesData as KohoNobeokaIssue[];
+const electionResults = electionResultsData as ElectionResult[];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -184,6 +190,15 @@ export function DataStatusPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const taskStatusCounts = blockedTaskStatusCounts();
+
+  // --- 広報のべおかOCR・選挙アーカイブ（Phase68〜70で追加） ---
+  const kohoTotalIssues = kohoNobeokaIssues.length;
+  const kohoOcrCompletedIssues = kohoNobeokaIssues.filter((k) => k.ocrCompleted).length;
+  const kohoOcrCompletedPages = kohoNobeokaIssues.reduce((sum, k) => sum + (k.ocrPageCount ?? 0), 0);
+  const electionYears = electionResults.map((e) => Number(e.electionDate.slice(0, 4))).filter((y) => !Number.isNaN(y));
+  const oldestElectionYear = electionYears.length > 0 ? Math.min(...electionYears) : null;
+  const newestElectionYear = electionYears.length > 0 ? Math.max(...electionYears) : null;
+  const electionPartialCount = electionResults.filter((e) => e.dataCompleteness?.candidateListConfirmed === false).length;
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -541,6 +556,7 @@ export function DataStatusPage() {
             [
               ["WAITING_EXTERNAL", "公式資料の公開待ち"],
               ["MANUAL_REVIEW", "人手による追加調査が必要"],
+              ["RESEARCH_EXHAUSTED", "調査を尽くしたが未確認（資料不存在の確定ではない）"],
               ["NOT_APPLICABLE", "対象外（サイト構成側の判断待ち等）"],
               ["BLOCKED_TECHNICAL", "技術的制約（OCR環境等）"],
               ["COMPLETED", "解決済み"],
@@ -552,6 +568,44 @@ export function DataStatusPage() {
             </div>
           ))}
         </dl>
+      </SectionCard>
+
+      <SectionCard title="広報のべおか・選挙アーカイブの調査状況">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          「広報のべおか」バックナンバー（PDF）は市の公式ホームページで確認できる範囲（2010年4月号〜最新号）を対象としています。文字を含む画像のため、そのままでは全文検索ができず、当サイトで少しずつ文字起こし（OCR）を進めています。
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">広報のべおか　対象号数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{kohoTotalIssues}号</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">うち文字起こし（OCR）着手済み</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{kohoOcrCompletedIssues}号</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">文字起こし済みページ数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{kohoOcrCompletedPages}ページ</dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          文字起こし結果は下書き（未確認）の状態であり、元のPDF画像と照合できたものだけを本番データ（財政・市政年表等の各ページ）へ反映しています。文字起こし結果そのものを検索できる画面は、量・精度が十分になるまで公開を見合わせています。
+        </p>
+        <dl className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">選挙結果の収録年代</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {oldestElectionYear != null && newestElectionYear != null ? `${oldestElectionYear}〜${newestElectionYear}年` : "確認中"}
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">うち候補者一覧が未確認の選挙</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{electionPartialCount}件</dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          1999年より前の市長選挙は、就任年月までは市公式の年表で確認できていますが、候補者一覧・得票数・投票率は確認中です。市議会議員選挙は1999年より前の一次資料を確認できておらず、未収録のままです。
+        </p>
       </SectionCard>
 
       <p className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">

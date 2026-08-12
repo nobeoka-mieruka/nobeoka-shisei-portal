@@ -29,6 +29,13 @@
  * あたり日本語で数千文字規模の実用的なテキスト抽出に成功したが、197号×平均20ページ
  * 規模の全文OCR処理は本セッションの残り時間では完了できず、次回セッションの
  * 優先候補として記録するに留めた（indexed: falseのまま）。
+ *
+ * Phase68（2026-08-12）で、上記OCRパイプラインを使い最初のバッチ（14号・176ページ）を
+ * 実行した（ocrCompleted: true）。OCR結果は生データのため src/data には含めず、
+ * reports/koho-ocr-batch1-performance.json（性能記録）・
+ * reports/koho-ocr-keyword-candidates.json（キーワード候補、verificationStatus=raw/candidate/verified）
+ * に分離して保存している。indexed（全文検索インデックス）は、OCR結果の量・精度がまだ
+ * 不十分なため、この段階ではまだtrueにしていない。
  */
 export interface KohoNobeokaIssue {
   /** 例: "koho-2020-06" */
@@ -64,4 +71,10 @@ export interface KohoNobeokaIssue {
   lastCheckedAt: string;
   /** PDF取得時のHTTPステータスコード。検証済みの号のみ設定（Phase64）。未検証の号は省略可。 */
   httpStatus?: number;
+  /** trueの場合、Windows OCR基盤（WinRT）で全ページのOCRを実行済み（Phase68〜）。
+   * OCR結果自体（生テキスト・キーワード候補）はreports/koho-ocr-*.jsonで別管理する。
+   * 省略時はfalse相当（未実施）として扱う。 */
+  ocrCompleted?: boolean;
+  /** ocrCompleted=trueの場合の、OCR済みページ数。 */
+  ocrPageCount?: number;
 }

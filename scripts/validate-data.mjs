@@ -3063,7 +3063,14 @@ try {
 
   checkDuplicateIds({ err, warn }, classification, "taskId", "blockedTaskClassification.json");
 
-  const VALID_STATUSES = new Set(["WAITING_EXTERNAL", "BLOCKED_TECHNICAL", "MANUAL_REVIEW", "NOT_APPLICABLE", "COMPLETED"]);
+  const VALID_STATUSES = new Set([
+    "WAITING_EXTERNAL",
+    "BLOCKED_TECHNICAL",
+    "MANUAL_REVIEW",
+    "RESEARCH_EXHAUSTED",
+    "NOT_APPLICABLE",
+    "COMPLETED",
+  ]);
   const VALID_REASON_CODES = new Set([
     "SOURCE_NOT_PUBLISHED",
     "SOURCE_NOT_FOUND",
@@ -3099,6 +3106,14 @@ try {
     if (!c.autoRecheck && c.autoRecheckMechanism != null) warn(tag, "autoRecheck=falseですがautoRecheckMechanismが設定されています");
     if (c.status === "WAITING_EXTERNAL" && c.expectedPublicationPeriod === undefined) {
       err(tag, "status=WAITING_EXTERNALにはexpectedPublicationPeriodフィールド自体が必須です（不明な場合はnullを明示してください）");
+    }
+    if (c.status === "RESEARCH_EXHAUSTED") {
+      if (typeof c.attemptCount === "number" && c.attemptCount < 2) {
+        err(tag, "status=RESEARCH_EXHAUSTEDは複数回の調査を尽くした場合のみ使用してください（attemptCountが2未満です）");
+      }
+      if (c.autoRecheck) {
+        warn(tag, "status=RESEARCH_EXHAUSTEDなのにautoRecheck=trueです（自動再確認の対象外であることを想定した状態です）");
+      }
     }
   }
 
@@ -3170,6 +3185,11 @@ try {
       err(tag, "indexed=trueですがfileTypeがtextExtractableではありません（画像PDF・未検証のPDFは全文索引化できません）");
     }
     if (isBlank(i.lastCheckedAt) || Number.isNaN(Date.parse(i.lastCheckedAt))) err(tag, `lastCheckedAtの形式が不正です: ${i.lastCheckedAt}`);
+    if (i.ocrCompleted != null && typeof i.ocrCompleted !== "boolean") err(tag, `ocrCompletedがboolean型ではありません: ${i.ocrCompleted}`);
+    if (i.ocrCompleted && (typeof i.ocrPageCount !== "number" || i.ocrPageCount <= 0)) {
+      err(tag, `ocrCompleted=trueですがocrPageCountが正の数値ではありません: ${i.ocrPageCount}`);
+    }
+    if (!i.ocrCompleted && i.ocrPageCount != null) warn(tag, "ocrCompleted=falseですがocrPageCountが設定されています");
   }
   for (const [ym, count] of seenYearMonths) {
     if (count > 1) warn("kohoNobeokaIssues.json", `同一年月の号が${count}件登録されています（増刊号等でなければ重複取得の疑いがあります）: ${ym}`);
