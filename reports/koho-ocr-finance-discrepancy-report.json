@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-08-12T00:00:00+09:00",
+  "note": "OCR/pdfjs-textで新たに読めるようになった広報のべおか記事の数値が、既存の確定データ（財政状況資料集ベース）と異なる場合の記録。上書きはせず、両方の値と出典を併記する。",
+  "discrepancies": [
+    {
+      "fiscalYear": 2024,
+      "field": "totalRevenueYen / totalExpenditureYen",
+      "existingValue": {
+        "totalRevenueYen": 74004811000,
+        "totalExpenditureYen": 70924122000,
+        "source": "延岡市「財政状況資料集」（令和6年度版、総括表シート）"
+      },
+      "alternateValue": {
+        "totalRevenueYen": 74007702000,
+        "totalExpenditureYen": 70996330000,
+        "source": "広報のべおか2025年11月号「延岡市の財政状況（令和6年度決算）」p.5",
+        "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24796.pdf",
+        "extractionMethod": "pdfjs-dist（PDF内蔵テキストレイヤー直接抽出、画像照合は技術的制約により未実施）"
+      },
+      "differenceYen": {
+        "revenue": 2891000,
+        "expenditure": 72208000
+      },
+      "differencePercent": {
+        "revenue": "0.0039",
+        "expenditure": "0.1018"
+      },
+      "possibleExplanation": "差異は僅少（歳入0.004%・歳出0.1%）だが原因未特定。総括表と広報記事で会計区分の定義がわずかに異なる可能性、またはpdfjs-textのフォント抽出誤り（元PDF画像との照合が技術的制約によりできていない）の可能性がある。",
+      "resolution": "既存値（財政状況資料集ベース）を確定データとして維持し、上書きしていない。広報のべおか側の値はこの差異レポートにのみ記録し、archiveFiscalYears.jsonへは反映していない。"
+    }
+  ]
+}

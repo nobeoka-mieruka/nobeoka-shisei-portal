@@ -71,10 +71,15 @@ export interface KohoNobeokaIssue {
   lastCheckedAt: string;
   /** PDF取得時のHTTPステータスコード。検証済みの号のみ設定（Phase64）。未検証の号は省略可。 */
   httpStatus?: number;
-  /** trueの場合、Windows OCR基盤（WinRT）で全ページのOCRを実行済み（Phase68〜）。
-   * OCR結果自体（生テキスト・キーワード候補）はreports/koho-ocr-*.jsonで別管理する。
-   * 省略時はfalse相当（未実施）として扱う。 */
+  /** trueの場合、いずれかの方式（ocrMethod参照）で全ページの文字起こしを実行済み（Phase68〜）。
+   * 結果自体（生テキスト・キーワード候補）はsrc/data/kohoOcrSearchIndex.json・
+   * reports/koho-ocr-*.jsonで別管理する。省略時はfalse相当（未実施）として扱う。 */
   ocrCompleted?: boolean;
-  /** ocrCompleted=trueの場合の、OCR済みページ数。 */
+  /** ocrCompleted=trueの場合の、処理済みページ数。 */
   ocrPageCount?: number;
+  /** "winrt" = Windows.Data.Pdf + Windows.Media.Ocr（画像認識）。
+   * "pdfjs-text" = pdfjs-dist（PDF内蔵テキストレイヤーの直接抽出、画像認識ではない）。
+   * WinRTが「非標準PDF形式」等で読み込めない号（Phase83で16号発見）はpdfjs-textを使用した。
+   * いずれの方式でも結果は未検証（raw）として扱う。 */
+  ocrMethod?: "winrt" | "pdfjs-text";
 }
