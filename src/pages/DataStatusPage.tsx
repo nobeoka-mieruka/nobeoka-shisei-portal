@@ -20,6 +20,7 @@ import kohoNobeokaIssuesData from "../data/kohoNobeokaIssues.json";
 import electionResultsData from "../data/electionResults.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
+import { getAllCurrentMemberActivity, metricByKey } from "../lib/councilActivityBarometer";
 import type {
   CouncilMember,
   FormerMember,
@@ -204,6 +205,18 @@ export function DataStatusPage() {
   const electionPartialCount = electionResults.filter((e) => e.dataCompleteness?.candidateListConfirmed === false).length;
   const kohoSearchIndexCount = kohoOcrSearchIndex.length;
   const kohoSearchVerifiedCount = kohoOcrSearchIndex.filter((e) => e.verificationStatus === "verified").length;
+
+  // --- 議員活動バロメーター（Phase99）：レーダーチャート等の見た目だけでは伝わらない
+  // 「どこまでデータが揃っているか」を機械集計する。市民が「全部揃っている」と誤解しないための表示。
+  const activityEntries = getAllCurrentMemberActivity();
+  const activityTargetCount = activityEntries.length;
+  const countWithCompleteMetric = (key: string) =>
+    activityEntries.filter((e) => metricByKey(e.metrics, key)?.dataStatus === "complete").length;
+  const activityQuestionConfirmed = countWithCompleteMetric("question");
+  const activitySpeechConfirmed = countWithCompleteMetric("speech");
+  const activityVotingConfirmed = countWithCompleteMetric("voting");
+  const activityCommitteeAffiliationConfirmed = activityEntries.filter((e) => e.member.committees.length > 0).length;
+  const activityAllMissingCount = activityEntries.filter((e) => e.metrics.every((m) => m.dataStatus !== "complete")).length;
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -647,6 +660,48 @@ export function DataStatusPage() {
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           類似団体（人口・産業構造が近い全国の自治体グループ）は、延岡市を含め59自治体を総務省公式資料から特定し、財政指標の比較データを掲載しています。市長公約は、公約本文と名称が完全一致する予算事業の候補は複数見つかっていますが、「確定（confirmed）」に必要な原本資料との照合がまだ済んでいないため、確定件数は0件のままです。0件は「根拠が無い」のではなく「照合作業が完了していない」という意味です。
+        </p>
+      </SectionCard>
+
+      <SectionCard title="議員活動バロメーターの収録状況">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          <Link to="/council-activity" className="font-medium text-primary hover:underline">
+            議員活動バロメーター
+          </Link>
+          のレーダーチャートは、指標によって収録状況が異なります。このグラフだけを見て「全データが揃っている」と誤解しないよう、確認できている人数を集計しています。
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">対象議員</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityTargetCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">一般質問：算定可能</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityQuestionConfirmed}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">議会内発言：算定可能</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activitySpeechConfirmed}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">議案等の意思表示：算定可能</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityVotingConfirmed}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">所属委員会：確認済み</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityCommitteeAffiliationConfirmed}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">6指標とも対象記録なしの議員</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityAllMissingCount}名</dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          「出席状況」「請願・提案等」は本サイトが一次資料を未収録のため、現時点で全{activityTargetCount}名が「対象記録なし」です。委員会活動（発言・質疑件数）は委員会議事録の収録が進んでいないため、活動指標スコアには含めず所属・役職のみを参考情報として掲載しています。詳しい算定方法は
+          <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
+            こちら
+          </Link>
+          。
         </p>
       </SectionCard>
 

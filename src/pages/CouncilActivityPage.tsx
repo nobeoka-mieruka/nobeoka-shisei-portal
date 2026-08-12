@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -7,7 +7,9 @@ import { LastUpdated } from "../components/LastUpdated";
 import { FactionChip } from "../components/FactionChip";
 import { Avatar } from "../components/Avatar";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
-import { getFaction } from "../lib/factions";
+import { SearchBar } from "../components/SearchBar";
+import { FilterSelect } from "../components/FilterSelect";
+import { getFaction, allFactions } from "../lib/factions";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import {
@@ -18,6 +20,7 @@ import {
   type MemberActivityEntry,
 } from "../lib/councilActivityBarometer";
 import { ActivityRadarChart } from "../components/council/ActivityRadarChart";
+import { sortedCommittees, committeesForMember } from "../lib/committees";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -73,13 +76,42 @@ export function CouncilActivityPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const [sortKey, setSortKey] = useState<SortKey>("name");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
-  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [nameQuery, setNameQuery] = useState("");
+  const [factionFilter, setFactionFilter] = useState("all");
+  const [committeeFilter, setCommitteeFilter] = useState("all");
+  // 比較状態はURLクエリ（?compare=m01,m02,m03）と同期し、URLを共有すれば同じ比較結果を再現できる。
+  // 新規ルート・prerender対象は増やさず、既存の/council-activityへのクエリ文字列のみで表現する。
+  const [compareIds, setCompareIds] = useState<string[]>(() => {
+    const raw = searchParams.get("compare");
+    return raw ? raw.split(",").filter(Boolean).slice(0, 3) : [];
+  });
+
+  useEffect(() => {
+    const next = new URLSearchParams(searchParams);
+    if (compareIds.length > 0) next.set("compare", compareIds.join(","));
+    else next.delete("compare");
+    setSearchParams(next, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [compareIds]);
 
   const allEntries = useMemo(() => getAllCurrentMemberActivity(), []);
   const targetPeriod = useMemo(() => activityTargetPeriodLabel(), []);
-  const sorted = useMemo(() => sortEntries(allEntries, sortKey, sortDir), [allEntries, sortKey, sortDir]);
+
+  const filteredEntries = useMemo(() => {
+    return allEntries.filter((e) => {
+      if (factionFilter !== "all" && e.member.factionId !== factionFilter) return false;
+      if (committeeFilter !== "all" && !committeesForMember(e.member.id).some((c) => c.id === committeeFilter)) return false;
+      if (nameQuery.trim() && !e.member.name.includes(nameQuery.trim()) && !e.member.nameKana.includes(nameQuery.trim())) {
+        return false;
+      }
+      return true;
+    });
+  }, [allEntries, factionFilter, committeeFilter, nameQuery]);
+
+  const sorted = useMemo(() => sortEntries(filteredEntries, sortKey, sortDir), [filteredEntries, sortKey, sortDir]);
 
   const speechTop3 = useMemo(() => topByMetric(allEntries, "speech", 3), [allEntries]);
   const questionFull = useMemo(
@@ -106,6 +138,8 @@ export function CouncilActivityPage() {
   }
 
   const compareEntries = allEntries.filter((e) => compareIds.includes(e.member.id));
+  const committeeOptions = sortedCommittees().map((c) => ({ value: c.id, label: c.name }));
+  const factionOptions = allFactions.map((f) => ({ value: f.id, label: f.name }));
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -209,10 +243,37 @@ export function CouncilActivityPage() {
         </SectionCard>
       </div>
 
-      <SectionCard title={`全議員比較（${allEntries.length}名）`}>
+      <SectionCard title={`全議員比較（${sorted.length}／${allEntries.length}名）`}>
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          列見出しをクリックすると並べ替えできます。「出席状況」「請願・提案等」は、本サイトが議員別の一次資料をまだ収録できていないため、全議員「評価対象外」として区別表示しています（0点ではありません）。合算した「総合順位」は、単一の数値だけで議員の活動全体を評価してしまう誤解を避けるため、掲載していません。
+          列見出しをクリックすると並べ替えできます。「出席状況」「請願・提案等」は、本サイトが議員別の一次資料をまだ収録できていないため、全議員「評価対象外」として区別表示しています（0点ではありません）。合算した「総合順位」は、単一の数値だけで議員の活動全体を評価してしまう誤解を避けるため、掲載していません。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
         </p>
+
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <div className="sm:w-56">
+            <SearchBar value={nameQuery} onChange={setNameQuery} placeholder="氏名で検索" />
+          </div>
+          <FilterSelect label="会派" value={factionFilter} onChange={setFactionFilter} options={factionOptions} />
+          <FilterSelect label="委員会" value={committeeFilter} onChange={setCommitteeFilter} options={committeeOptions} />
+          {(nameQuery || factionFilter !== "all" || committeeFilter !== "all") && (
+            <button
+              type="button"
+              onClick={() => {
+                setNameQuery("");
+                setFactionFilter("all");
+                setCommitteeFilter("all");
+              }}
+              className={`self-start rounded-full px-3 py-2 text-xs text-on-surface-variant underline ${linkClass}`}
+            >
+              絞り込みをクリア
+            </button>
+          )}
+        </div>
+
+        {sorted.length === 0 && (
+          <p className="rounded-lg bg-surface-container-high p-4 text-sm text-on-surface-variant">
+            条件に一致する議員が見つかりませんでした。検索語や絞り込み条件をご確認ください。
+          </p>
+        )}
 
         {/* PC: 表形式 */}
         <div className="hidden overflow-x-auto sm:block">
