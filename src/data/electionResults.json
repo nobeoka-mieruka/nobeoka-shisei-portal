@@ -1404,5 +1404,129 @@
       }
     ],
     "notes": "定数29・候補35名（2015年時点、市議定数は現行27より多い29議席）。太田龍・佐藤裕臣・内田リサ・西原茂樹・上田みとし・佐藤つとむの各氏が当選しているが、現職・既存元議員（fm01〜fm10）のいずれにも該当せず、TASK-XXX（Phase39）で一次資料不足のため新規登録を見送った候補と一致する。今回もservedSessions（会期単位の在職確認）ができないため、新規のformerMembers.json登録は行わず、未リンクのまま構造化データとして保持する。"
+  },
+  {
+    "id": "election-mayor-2002",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2002-01-27",
+    "announcementDate": "2002-01-20",
+    "seats": 1,
+    "candidateCount": 2,
+    "eligibleVoters": 98935,
+    "votersCount": null,
+    "turnoutPercent": 46.46,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "桜井哲雄",
+        "nameKana": "さくらいてつお",
+        "age": 66,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 33737,
+        "elected": true,
+        "linkedProfileId": "mayor-13"
+      },
+      {
+        "name": "小田忠良",
+        "nameKana": "おだただよし",
+        "age": 52,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 11776,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/1166",
+        "sourceTitle": "延岡市長選挙 - 2002年01月27日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-13-term-03のsourceRefsで既に使用済みの資料（当選者の得票数のみ確認済み）。今回、対立候補を含む全候補者・投票率・有権者数まで構造化した。候補者「小田忠良」氏は、後年（2014年市長選・2019年及び2023年市議選）にも同名の候補者が登場するが、本人特定の確証がないため紐付けを行っていない。"
+      }
+    ],
+    "notes": "桜井哲雄（現職）の3選。既存archiveMayorTerms.json（mayor-13-term-03）の当選事実と整合。"
+  },
+  {
+    "id": "election-mayor-2006",
+    "electionName": "延岡市長選挙",
+    "electionType": "mayor",
+    "electionDate": "2006-01-29",
+    "announcementDate": "2006-01-22",
+    "seats": 1,
+    "candidateCount": 5,
+    "eligibleVoters": 98635,
+    "votersCount": null,
+    "turnoutPercent": 60.21,
+    "invalidVotes": null,
+    "candidates": [
+      {
+        "name": "首藤正治",
+        "nameKana": "すどうまさはる",
+        "age": 50,
+        "party": "無所属",
+        "incumbencyStatus": "新人",
+        "votes": 23749,
+        "elected": true,
+        "linkedProfileId": "mayor-02"
+      },
+      {
+        "name": "桜井哲雄",
+        "nameKana": "さくらいてつお",
+        "age": 70,
+        "party": "無所属",
+        "incumbencyStatus": "現職",
+        "votes": 14965,
+        "elected": false,
+        "linkedProfileId": "mayor-13"
+      },
+      {
+        "name": "戸田行徳",
+        "nameKana": "とだゆきのり",
+        "age": 61,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 10646,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "小田忠良",
+        "nameKana": "おだただよし",
+        "age": 56,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 8998,
+        "elected": false,
+        "linkedProfileId": null
+      },
+      {
+        "name": "清水光",
+        "nameKana": "しみずあきら",
+        "age": 71,
+        "party": "無所属",
+        "incumbencyStatus": null,
+        "votes": 629,
+        "elected": false,
+        "linkedProfileId": null
+      }
+    ],
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://go2senkyo.com/local/senkyo/1321",
+        "sourceTitle": "延岡市長選挙 - 2006年01月29日投票 | 選挙ドットコム",
+        "sourceOrganization": "選挙ドットコム",
+        "accessedAt": "2026-08-11",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "既存archiveMayorTerms.json mayor-02-term-01のsourceRefsで既に使用済みの資料（当選者・次点の得票数のみ確認済み）。今回、5名全候補者・投票率・有権者数まで構造化した。投票率（60.21%）が、既存登録済みの2010年選挙ページの「前回投票率」記載（60.21%）と完全一致することでクロスチェック済み。"
+      }
+    ],
+    "notes": "首藤正治の初当選（現職・桜井哲雄を破る）。5名による争い。既存archiveMayorTerms.json（mayor-02-term-01）の当選事実と整合。"
   }
 ]

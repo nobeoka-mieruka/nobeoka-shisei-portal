@@ -657,6 +657,35 @@ try {
     if (isBlank(p.id) || isBlank(p.promiseText) || !VALID_PROMISE_STATUS_LABELS.has(p.statusLabel)) {
       err(tag, "詳細ページの生成に必要な項目（id / promiseText / statusLabel）が不足しています");
     }
+
+    // 関連事業候補（relatedBudgetCandidates / relatedBillCandidates、Phase57で追加）
+    const VALID_EVIDENCE_STATUSES = new Set(["confirmed", "candidate", "under_review", "not_found", "unavailable"]);
+    const VALID_SOURCE_TYPES = new Set(["primary", "news"]);
+    const seenCandidateIds = new Set();
+    for (const [field, candidates] of [
+      ["relatedBudgetCandidates", p.relatedBudgetCandidates],
+      ["relatedBillCandidates", p.relatedBillCandidates],
+    ]) {
+      for (const c of candidates ?? []) {
+        const cTag = `${tag} ${field}=${c.id ?? "id不明"}`;
+        if (isBlank(c.id)) err(cTag, "idが空です");
+        else if (seenCandidateIds.has(c.id)) err(cTag, "同じ公約内でcandidate idが重複しています");
+        else seenCandidateIds.add(c.id);
+        if (!VALID_EVIDENCE_STATUSES.has(c.status)) err(cTag, `未定義のstatusです: ${c.status}`);
+        if (isBlank(c.label)) err(cTag, "labelが空です");
+        if (isBlank(c.candidateReason)) err(cTag, "candidateReason（候補と判断した理由）が空です");
+        if (isBlank(c.source)) err(cTag, "sourceが空です");
+        if (!VALID_SOURCE_TYPES.has(c.sourceType)) err(cTag, `未定義のsourceTypeです: ${c.sourceType}`);
+        if (isBlank(c.sourceDate) || !DATE_RE.test(c.sourceDate)) err(cTag, `sourceDateの形式が不正です: ${c.sourceDate}`);
+        if (isBlank(c.sourceUrl) || !URL_RE.test(c.sourceUrl)) err(cTag, `sourceUrlの形式が不正です: ${c.sourceUrl}`);
+        if (isBlank(c.checkedAt) || !DATE_RE.test(c.checkedAt)) err(cTag, `checkedAtの形式が不正です: ${c.checkedAt}`);
+        // "confirmed"はrelatedBudget/relatedBill（既存の単一文字列フィールド）側で表現する運用のため、
+        // このcandidates配列内でconfirmedを使うと二重管理になり矛盾の温床になる。使用を禁止する。
+        if (c.status === "confirmed") {
+          err(cTag, "candidates配列内でstatus=\"confirmed\"は使用しないでください（確定情報は既存のrelatedBudget/relatedBillフィールドへ記載してください）");
+        }
+      }
+    }
   }
 
   const docUrls = new Set();
@@ -2293,6 +2322,7 @@ const VALID_SEARCH_TYPES = new Set([
   "council-document",
   "political-fund",
   "committee",
+  "election",
   "page",
 ]);
 // 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。
@@ -2320,6 +2350,7 @@ const VALID_URL_PREFIXES = [
   "/updates",
   "/political-funds",
   "/committees",
+  "/elections",
 ];
 
 try {

@@ -102,6 +102,8 @@ export const STATIC_INDEXABLE_PAGES = [
   "/committees",
   "/history",
   "/compare/municipalities",
+  "/elections",
+  "/city-organization",
 ];
 
 /**
@@ -155,6 +157,8 @@ function loadData() {
   const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
   const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
   const municipalityComparisons = readJson("src/data/municipalityComparison.json");
+  const electionResults = readJson("src/data/electionResults.json");
+  const cityOrganizationSections = readJson("src/data/cityOrganizationSections.json");
   return {
     members,
     formerMembers,
@@ -185,6 +189,8 @@ function loadData() {
     committeeActivityReports,
     civicTimelineEvents,
     municipalityComparisons,
+    electionResults,
+    cityOrganizationSections,
   };
 }
 
@@ -420,6 +426,18 @@ function staticPageLastmod(path, data) {
         [maxValidDate(data.municipalityComparisons.map((m) => m.lastVerifiedAt))],
         ["src/data/municipalityComparison.json"],
       );
+    case "/elections":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.electionResults.flatMap((e) => e.sourceRefs.map((s) => s.accessedAt)))],
+        ["src/data/electionResults.json"],
+      );
+    case "/city-organization":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.cityOrganizationSections.map((s) => s.dataAsOf))],
+        ["src/data/cityOrganizationDivisions.json", "src/data/cityOrganizationSections.json"],
+      );
     default:
       return undefined;
   }
@@ -462,6 +480,13 @@ export function getIndexableRoutes() {
     urls.push({
       path: `/mayor/press-conferences/${c.date}`,
       lastmod: resolveLastmod(`/mayor/press-conferences/${c.date}`, [c.verifiedAt, c.date], ["src/data/mayorPressConferences.ts"]),
+    });
+  }
+  for (const e of data.electionResults) {
+    const path = `/elections/${e.id}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(path, [maxValidDate(e.sourceRefs.map((s) => s.accessedAt))], ["src/data/electionResults.json"]),
     });
   }
   for (const o of data.politicalFundOrganizations) {

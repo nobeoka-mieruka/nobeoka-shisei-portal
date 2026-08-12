@@ -31,6 +31,7 @@ const typeLabels: Record<SearchEntryType, string> = {
   update: "更新履歴",
   guide: "市役所案内",
   "press-conference": "市長記者会見",
+  election: "選挙結果",
   page: "固定ページ",
 };
 

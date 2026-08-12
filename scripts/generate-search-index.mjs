@@ -526,6 +526,20 @@ for (const org of politicalFundOrganizations) {
   });
 }
 
+// --- election results（選挙結果。Phase55で新規登録） ---
+const electionResults = readJson("src/data/electionResults.json");
+for (const e of electionResults) {
+  entries.push({
+    id: `election-${e.id}`,
+    type: "election",
+    title: `${e.electionName}（${e.electionDate}）`,
+    description: `${e.electionName}（${e.electionDate}投票、定数${e.seats ?? "確認中"}、候補者${e.candidateCount ?? e.candidates.length}名）の結果です。`,
+    url: `/elections/${e.id}`,
+    keywords: [e.electionName, e.electionDate, ...e.candidates.map((c) => c.name)].filter(Boolean),
+    sourceId: e.id,
+  });
+}
+
 // --- committees（委員会。TASK-037で新規登録） ---
 const committees = readJson("src/data/committees.json");
 const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
@@ -658,6 +672,20 @@ const staticPages = [
     description: "政治資金規正法に基づき政治団体が公表した収支報告書の内容を、総務省・宮崎県選挙管理委員会等の公式資料に基づいて整理しています。",
     url: "/political-funds",
     keywords: ["政治資金収支報告書", "政治団体", "収支報告書", "政治資金"],
+  },
+  {
+    id: "page-elections",
+    title: "選挙結果一覧",
+    description: "延岡市長選挙・延岡市議会議員選挙の候補者名・党派・得票数・当落・投票率を、延岡市選挙管理委員会等の公表資料に基づいて整理しています。",
+    url: "/elections",
+    keywords: ["選挙", "選挙結果", "市長選挙", "市議会議員選挙", "得票数", "投票率"],
+  },
+  {
+    id: "page-city-organization",
+    title: "延岡市役所の組織一覧",
+    description: "延岡市役所の部・課・室・センターの所管・電話番号・所在地を、延岡市公式ホームページ「組織でさがす」の公表内容に基づいて整理しています。",
+    url: "/city-organization",
+    keywords: ["組織", "組織図", "部課", "電話番号", "所在地", "行政組織"],
   },
 ];
 for (const p of staticPages) {

@@ -652,6 +652,39 @@ export interface MayorPromiseHistoryEntry {
 }
 
 /** 個別公約1件分のデータ。 */
+/**
+ * 「確認中」（relatedBudget/relatedBillの現行値）と「確定」の間にある中間状態を表す。
+ * confirmed（確定）は既存のrelatedBudget/relatedBill文字列そのものに一次資料の記載を
+ * そのまま転記する運用を維持し、この型はそれ以外の状態（候補・調査中・見つからなかった・
+ * 対象外）を安全に区別するために追加した。市民向け表示では"candidate"のみ「関連事業候補」
+ * として明示し、絶対に「公約達成」とは表示しないこと（PromiseCandidateEvidenceLink自体は
+ * 達成・未達成の判定を一切含まない）。
+ */
+export type PromiseEvidenceStatus = "confirmed" | "candidate" | "under_review" | "not_found" | "unavailable";
+
+/**
+ * 公約と関連しうる事業・予算・議案の候補1件分。名称が公約本文と完全一致しなくても、
+ * 一次資料（または信頼できる報道）で関連性が示唆される場合に登録する。ただし
+ * candidateReason・source・sourceType・sourceUrlを必ず伴い、根拠のない登録は禁止する。
+ */
+export interface MayorPromiseCandidateEvidence {
+  id: string;
+  status: PromiseEvidenceStatus;
+  /** 候補となる事業・予算項目・議案の名称。 */
+  label: string;
+  /** なぜこれを候補と判断したか（例：「施政方針で名称が言及」「同一事業名が予算資料に記載」）。 */
+  candidateReason: string;
+  source: string;
+  /** "primary" = 延岡市・延岡市議会等の一次資料。"news" = 信頼できる報道（一次資料が無い場合のみ）。 */
+  sourceType: "primary" | "news";
+  /** ISO形式。資料の日付（公表日・報道日等）。 */
+  sourceDate: string;
+  sourceUrl: string;
+  /** ISO形式。サイト運営者がこの候補をいつ確認したか。 */
+  checkedAt: string;
+  notes?: string;
+}
+
 export interface MayorPromiseItem {
   id: string;
   categoryId: string;
@@ -700,6 +733,13 @@ export interface MayorPromiseItem {
   relatedQuestionIds?: string[];
   /** 関連する市長定例記者会見（mayorPressConferences.tsのdate、ISO形式）。公式資料で関連が確認できた場合のみ設定する。 */
   relatedPressConferenceDates?: string[];
+  /**
+   * relatedBudgetが「確認中」のままの公約について、名称完全一致は無いが関連しうる候補が
+   * 見つかった場合に設定する（未設定＝候補も無し）。既存のrelatedBudget文字列は変更しない。
+   */
+  relatedBudgetCandidates?: MayorPromiseCandidateEvidence[];
+  /** relatedBillと同様の候補（議案版）。 */
+  relatedBillCandidates?: MayorPromiseCandidateEvidence[];
 }
 
 /** 市長公約の進捗状況ページ（個別公約12項目）全体のデータ。 */
@@ -1910,6 +1950,7 @@ export type SearchEntryType =
   | "update"
   | "guide"
   | "press-conference"
+  | "election"
   | "page";
 
 /**

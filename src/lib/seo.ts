@@ -30,6 +30,7 @@ import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
+import electionResultsData from "../data/electionResults.json";
 import { buildPersonIndex, parsePersonSlug, personTypeLabel } from "./people";
 import type {
   BillVoteItem,
@@ -55,6 +56,7 @@ import type {
   ArchiveMemberProfile,
   ArchivePolicy,
 } from "../types/historicalArchive";
+import type { ElectionResult } from "../types/election";
 import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
@@ -110,6 +112,7 @@ const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDoc
 const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFundOrganization[];
 const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
 const committees = committeesData as Committee[];
+const electionResults = electionResultsData as ElectionResult[];
 
 export type Robots = "index, follow" | "noindex, follow" | "noindex, nofollow";
 
@@ -614,6 +617,30 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
           description:
             "延岡市議会の常任委員会・議会運営委員会・特別委員会の委員名簿を、延岡市議会公式ホームページの公表資料に基づいて整理しています。",
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "委員会一覧" }],
+        },
+        options,
+      );
+
+    case "/elections":
+      return makeResult(
+        {
+          path: "/elections",
+          pageTitle: "選挙結果一覧",
+          description:
+            "延岡市長選挙・延岡市議会議員選挙の候補者名・党派・得票数・当落・投票率を、延岡市選挙管理委員会等の公表資料に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "選挙結果一覧" }],
+        },
+        options,
+      );
+
+    case "/city-organization":
+      return makeResult(
+        {
+          path: "/city-organization",
+          pageTitle: "延岡市役所の組織一覧",
+          description:
+            "延岡市役所の部・課・室・センターの所管・電話番号・所在地を、延岡市公式ホームページ「組織でさがす」の公表内容に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市役所の組織一覧" }],
         },
         options,
       );
@@ -1637,6 +1664,28 @@ function politicalFundOrganizationSeo(id: string, options?: SeoOptions): SeoResu
   );
 }
 
+/** /elections/:id */
+function electionDetailSeo(id: string, options?: SeoOptions): SeoResult {
+  const election = electionResults.find((e) => e.id === id);
+  if (!election) return notFound(`/elections/${id}`, "選挙結果が見つかりません");
+
+  const description = `${election.electionName}（${election.electionDate}投票）の候補者名・党派・得票数・当落を、${election.sourceRefs[0]?.sourceOrganization ?? "公式資料"}の公表資料に基づいて整理しています。`;
+
+  return makeResult(
+    {
+      path: `/elections/${id}`,
+      pageTitle: `${election.electionName}（${election.electionDate}）の結果`,
+      description,
+      breadcrumbs: [
+        { label: "ホーム", to: "/" },
+        { label: "選挙結果一覧", to: "/elections" },
+        { label: `${election.electionName}（${election.electionDate}）` },
+      ],
+    },
+    options,
+  );
+}
+
 /** /committees/:id */
 function committeeDetailSeo(id: string, options?: SeoOptions): SeoResult {
   const committee = committees.find((c) => c.id === id);
@@ -1669,6 +1718,7 @@ const COUNCIL_SESSION_RE = /^\/council-documents\/([^/]+)$/;
 const PRESS_CONFERENCE_RE = /^\/mayor\/press-conferences\/([^/]+)$/;
 const POLITICAL_FUND_ORGANIZATION_RE = /^\/political-funds\/([^/]+)$/;
 const COMMITTEE_DETAIL_RE = /^\/committees\/([^/]+)$/;
+const ELECTION_DETAIL_RE = /^\/elections\/([^/]+)$/;
 const MAYOR_DETAIL_RE = /^\/mayors\/([^/]+)$/;
 const TIMELINE_YEAR_RE = /^\/timeline\/(\d{4})$/;
 const MEMBER_FORMER_DETAIL_RE = /^\/members\/former\/([^/]+)$/;
@@ -1734,6 +1784,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const committeeDetailMatch = path.match(COMMITTEE_DETAIL_RE);
   if (committeeDetailMatch) return committeeDetailSeo(safeDecodeURIComponent(committeeDetailMatch[1]), options);
+
+  const electionDetailMatch = path.match(ELECTION_DETAIL_RE);
+  if (electionDetailMatch) return electionDetailSeo(safeDecodeURIComponent(electionDetailMatch[1]), options);
 
   const mayorDetailMatch = path.match(MAYOR_DETAIL_RE);
   if (mayorDetailMatch) return mayorDetailSeo(safeDecodeURIComponent(mayorDetailMatch[1]), options);
