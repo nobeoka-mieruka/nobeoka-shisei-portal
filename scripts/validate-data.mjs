@@ -3138,6 +3138,31 @@ try {
       err(tag, `fileSizeApproxMbが不正です: ${i.fileSizeApproxMb}`);
     }
     if (isBlank(i.checkedAt) || Number.isNaN(Date.parse(i.checkedAt))) err(tag, `checkedAtの形式が不正です: ${i.checkedAt}`);
+
+    // Phase59（検索可能性インベントリ）の検証。
+    const VALID_FILE_TYPES = new Set(["textExtractable", "imagePdf", "untested"]);
+    const VALID_RESEARCH_STATUSES = new Set(["tested_pdftotext_sample", "not_yet_tested"]);
+    if (!VALID_FILE_TYPES.has(i.fileType)) err(tag, `未定義のfileTypeです: ${i.fileType}`);
+    if (!VALID_RESEARCH_STATUSES.has(i.researchStatus)) err(tag, `未定義のresearchStatusです: ${i.researchStatus}`);
+    if (i.researchStatus === "not_yet_tested") {
+      if (i.fileType !== "untested") err(tag, `researchStatus="not_yet_tested"なのにfileTypeが"untested"ではありません: ${i.fileType}`);
+      if (i.textExtractable !== null || i.imagePdf !== null || i.ocrRequired !== null || i.extractedNonWhitespaceChars !== null) {
+        err(tag, "researchStatus=\"not_yet_tested\"なのに検証済みフィールドがnull以外に設定されています（未検証を推測で埋めていないか確認してください）");
+      }
+    } else if (i.researchStatus === "tested_pdftotext_sample") {
+      if (i.fileType === "untested") err(tag, "researchStatus=\"tested_pdftotext_sample\"なのにfileTypeが\"untested\"のままです");
+      if (typeof i.textExtractable !== "boolean") err(tag, `検証済みのtextExtractableはboolean型である必要があります: ${i.textExtractable}`);
+      if (typeof i.imagePdf !== "boolean") err(tag, `検証済みのimagePdfはboolean型である必要があります: ${i.imagePdf}`);
+      if (i.textExtractable === i.imagePdf) err(tag, "textExtractableとimagePdfが矛盾しています（両方true/falseになっています）");
+      if (typeof i.extractedNonWhitespaceChars !== "number" || i.extractedNonWhitespaceChars < 0) {
+        err(tag, `extractedNonWhitespaceCharsが不正です: ${i.extractedNonWhitespaceChars}`);
+      }
+    }
+    if (typeof i.indexed !== "boolean") err(tag, `indexedがboolean型ではありません: ${i.indexed}`);
+    if (i.indexed && i.fileType !== "textExtractable") {
+      err(tag, "indexed=trueですがfileTypeがtextExtractableではありません（画像PDF・未検証のPDFは全文索引化できません）");
+    }
+    if (isBlank(i.lastCheckedAt) || Number.isNaN(Date.parse(i.lastCheckedAt))) err(tag, `lastCheckedAtの形式が不正です: ${i.lastCheckedAt}`);
   }
   for (const [ym, count] of seenYearMonths) {
     if (count > 1) warn("kohoNobeokaIssues.json", `同一年月の号が${count}件登録されています（増刊号等でなければ重複取得の疑いがあります）: ${ym}`);
