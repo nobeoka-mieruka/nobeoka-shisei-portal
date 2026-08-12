@@ -18,6 +18,8 @@ import politicalFundOrganizationsData from "../data/politicalFundOrganizations.j
 import politicalFundReportsData from "../data/politicalFundReports.json";
 import kohoNobeokaIssuesData from "../data/kohoNobeokaIssues.json";
 import electionResultsData from "../data/electionResults.json";
+import { kohoOcrSearchIndex } from "../lib/kohoSearch";
+import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import type {
   CouncilMember,
   FormerMember,
@@ -199,6 +201,8 @@ export function DataStatusPage() {
   const oldestElectionYear = electionYears.length > 0 ? Math.min(...electionYears) : null;
   const newestElectionYear = electionYears.length > 0 ? Math.max(...electionYears) : null;
   const electionPartialCount = electionResults.filter((e) => e.dataCompleteness?.candidateListConfirmed === false).length;
+  const kohoSearchIndexCount = kohoOcrSearchIndex.length;
+  const kohoSearchVerifiedCount = kohoOcrSearchIndex.filter((e) => e.verificationStatus === "verified").length;
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -589,12 +593,22 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          文字起こし結果は下書き（未確認）の状態であり、元のPDF画像と照合できたものだけを本番データ（財政・市政年表等の各ページ）へ反映しています。文字起こし対象の号数が増えたため、キーワード検索できる試験版画面（
+          文字起こし結果は下書き（未確認）の状態であり、元のPDF画像・PDF内蔵テキストと照合できたものだけを本番データ（財政・市政年表等の各ページ）へ反映しています。文字起こし対象の号数が増えたため、キーワード検索できる試験版画面（
           <Link to="/koho-search" className={`text-primary hover:underline ${linkClass}`}>
             広報のべおか文字起こし検索
           </Link>
           ）を公開していますが、検索結果の多くは未確認のOCR結果である点にご注意ください。
         </p>
+        <dl className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">文字起こし検索の対象件数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{kohoSearchIndexCount.toLocaleString("ja-JP")}件</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">うち元資料で確認済み</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{kohoSearchVerifiedCount}件</dd>
+          </div>
+        </dl>
         <dl className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">選挙結果の収録年代</dt>
@@ -608,7 +622,23 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          1999年より前の市長選挙は、就任年月までは市公式の年表で確認できていますが、候補者一覧・得票数・投票率は確認中です。市議会議員選挙は1999年より前の一次資料を確認できておらず、未収録のままです。
+          1999年より前の市長選挙は、就任年月までは市公式の年表で確認できていますが、候補者一覧・得票数・投票率は確認中です。市議会議員選挙は1999年より前の候補者別結果の一次資料を確認できておらず、未収録のままです（選挙自体が無かったという意味ではありません）。延岡市公式資料・選挙管理委員会資料・広報のべおかOCR・宮崎県資料・国立国会図書館等を確認しましたが、これ以上進める手がかりが得られておらず、上記「調査を尽くしたが未確認」の状態として扱っています。
+        </p>
+      </SectionCard>
+
+      <SectionCard title="類似団体比較・市長公約の調査状況">
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">類似団体（Ⅲ－３）</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{similarMunicipalityFinance.municipalities.length}自治体確認済み</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">市長公約</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">根拠資料調査中</dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          類似団体（人口・産業構造が近い全国の自治体グループ）は、延岡市を含め59自治体を総務省公式資料から特定し、財政指標の比較データを掲載しています。市長公約は、公約本文と名称が完全一致する予算事業の候補は複数見つかっていますが、「確定（confirmed）」に必要な原本資料との照合がまだ済んでいないため、確定件数は0件のままです。0件は「根拠が無い」のではなく「照合作業が完了していない」という意味です。
         </p>
       </SectionCard>
 
