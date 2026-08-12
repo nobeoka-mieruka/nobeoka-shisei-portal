@@ -225,7 +225,9 @@ export function MayorPromiseDetailPage() {
       </SectionCard>
 
       {/* 関連事業候補：名称完全一致は無いが関連しうる候補（confirmedではなくcandidate等）。
-          候補が1件も無い場合はセクション自体を表示しない。「公約達成」等の評価は絶対に表示しない。 */}
+          confirmedはこの配列では使用しない運用（validate-data.mjsで禁止）。確定情報は
+          relatedBudget/relatedBillフィールドへ転記する。候補が1件も無い場合はセクション自体を
+          表示しない。「公約達成」等の評価は絶対に表示しない。 */}
       {((promise.relatedBudgetCandidates?.length ?? 0) > 0 || (promise.relatedBillCandidates?.length ?? 0) > 0) && (
         <SectionCard title="関連事業候補（確定ではありません）">
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
