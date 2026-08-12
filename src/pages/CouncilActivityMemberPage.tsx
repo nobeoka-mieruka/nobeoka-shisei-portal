@@ -11,10 +11,20 @@ import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
 import { SnsLinks } from "../components/SnsLinks";
 import { ActivityRadarChart } from "../components/council/ActivityRadarChart";
+import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { getFaction } from "../lib/factions";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { activityTargetPeriodLabel, getAllCurrentMemberActivity, metricByKey } from "../lib/councilActivityBarometer";
+import {
+  activityTargetPeriodLabel,
+  getAllCurrentMemberActivity,
+  getMemberQuestionEvidence,
+  getMemberVoteEvidence,
+  metricByKey,
+} from "../lib/councilActivityBarometer";
+import { billVoteLabels, billVoteSymbols } from "../lib/billVotes";
+import { committeesForMember, reportsForCommittee, billsForCommittee } from "../lib/committees";
+import { formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
 
@@ -67,6 +77,10 @@ export function CouncilActivityMemberPage() {
   const faction = getFaction(member.factionId);
   const targetPeriod = activityTargetPeriodLabel();
   const verifiedSns = member.sns.filter((s) => s.verificationStatus === "verified");
+  const evidence = getMemberQuestionEvidence(member);
+  const voteEvidence = getMemberVoteEvidence(member);
+  const undisclosedBillCount = voteEvidence.totalBillCountSitewide - voteEvidence.disclosedBillCount;
+  const memberCommittees = committeesForMember(member.id);
 
   const factsSummary = [
     (() => {
@@ -143,6 +157,151 @@ export function CouncilActivityMemberPage() {
           <p className="text-sm leading-relaxed text-on-surface">{factsSummary.join("、")}が公開資料から確認されています。</p>
         ) : (
           <p className="text-sm text-on-surface-variant">現在、確認できる活動データがまだ十分にそろっていません。</p>
+        )}
+      </SectionCard>
+
+      <SectionCard title="一般質問・議会内発言の詳細">
+        <p className="text-xs leading-relaxed text-on-surface-variant">
+          対象期間（{targetPeriod}）中の記録です。「登壇回数」「質問項目数」は異なる数え方のため区別しています。
+        </p>
+        <dl className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="rounded-lg bg-surface-container-high p-3">
+            <dt className="text-xs text-on-surface-variant">
+              登壇回数
+              <span className="ml-1 text-[11px]">（本会議で一般質問・代表質問等のために発言した回数）</span>
+            </dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{evidence.appearanceCount}回</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high p-3">
+            <dt className="text-xs text-on-surface-variant">
+              質問項目数
+              <span className="ml-1 text-[11px]">（全登壇を通じた個別質問項目の合計）</span>
+            </dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{evidence.questionItemCount}件</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high p-3">
+            <dt className="text-xs text-on-surface-variant">
+              会期別実施状況
+              <span className="ml-1 text-[11px]">（一般質問を行ったことが確認できた会期）</span>
+            </dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {evidence.sessionIdsWithQuestion.length}／{evidence.targetSessionCount}会期
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high p-3">
+            <dt className="text-xs text-on-surface-variant">答弁者の内訳（質問項目単位、重複あり）</dt>
+            <dd className="mt-0.5 text-sm text-on-surface">
+              市長答弁：{evidence.mayorAnsweredItemCount}件／執行部（市長以外）答弁：{evidence.executiveAnsweredItemCount}件
+            </dd>
+          </div>
+        </dl>
+
+        {evidence.yearlyTrend.length > 0 && (
+          <div className="mt-4">
+            <p className="text-sm font-semibold text-on-surface">年度別推移</p>
+            <YearlySpeechTrendChart counts={evidence.yearlyTrend} />
+          </div>
+        )}
+
+        {evidence.topTopics.length > 0 && (
+          <div className="mt-4">
+            <p className="text-sm font-semibold text-on-surface">主な質問テーマ</p>
+            <p className="mt-1 text-xs text-on-surface-variant">この期間に取り上げた回数（会期単位）を事実として示すものです。特定分野への強さを評価するものではありません。</p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {evidence.topTopics.map((t) => (
+                <li key={t.topic} className="rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface">
+                  {t.topic}：{t.sessionCount}会期で確認
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <Link
+          to={`/members/${member.id}#questions`}
+          className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        >
+          個別の一般質問・答弁の全件を見る →
+        </Link>
+      </SectionCard>
+
+      <SectionCard title="議案への賛否（個人別に確認できたもの）">
+        {voteEvidence.disclosedBillCount === 0 ? (
+          <p className="text-sm text-on-surface-variant">
+            この議員について、個人別賛否資料が公開されていないため確認できません（0件という意味ではありません）。
+          </p>
+        ) : (
+          <>
+            <p className="text-sm text-on-surface">
+              個人別の賛否が確認できた議案：{voteEvidence.disclosedBillCount}件
+              （内訳：
+              {(Object.keys(billVoteLabels) as (keyof typeof billVoteLabels)[])
+                .filter((k) => voteEvidence.breakdown[k])
+                .map((k) => `${billVoteLabels[k]}${voteEvidence.breakdown[k]}件`)
+                .join("、")}
+              ）
+            </p>
+            <ul className="mt-2 space-y-1.5">
+              {voteEvidence.recentBills.map((b) => (
+                <li key={b.id} className="rounded-lg bg-surface-container-high px-3 py-2 text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <Link to={`/bills/votes/${b.id}`} className={`min-w-0 truncate text-on-surface hover:underline ${linkClass}`}>
+                      {b.billNumber}　{b.billTitle}
+                    </Link>
+                    <span className="shrink-0 text-xs text-on-surface-variant">
+                      <span aria-hidden="true">{billVoteSymbols[b.vote]}</span> {billVoteLabels[b.vote]}
+                    </span>
+                  </div>
+                  {b.votingDate && <p className="mt-0.5 text-xs text-on-surface-variant">{formatJapaneseDate(b.votingDate)}</p>}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+        {undisclosedBillCount > 0 && (
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+            上記以外の議案（サイト全体で登録済みの{voteEvidence.totalBillCountSitewide}件中{undisclosedBillCount}件）は、個人別の賛否記録がまだ公開されていないため、この議員についても確認できません。「反対0件」等の意味ではありません。
+          </p>
+        )}
+        <Link
+          to={`/members/${member.id}#votes`}
+          className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        >
+          議案賛否の全件を見る →
+        </Link>
+      </SectionCard>
+
+      <SectionCard title="所属委員会（参考情報）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          委員会ごとの議員個人の発言・質疑件数は、本サイトが現時点で委員会議事録を十分収録できていないため、活動指標スコアには含めていません。ここでは所属・役職・関連議案・所管事務調査報告書のみを参考情報として掲載します。
+        </p>
+        {memberCommittees.length === 0 ? (
+          <p className="text-sm text-on-surface-variant">現在の委員会名簿では、所属委員会を確認できていません。</p>
+        ) : (
+          <ul className="space-y-3">
+            {memberCommittees.map((c) => {
+              const role = c.members.find((m) => m.memberId === member.id)?.role ?? "委員";
+              const reports = reportsForCommittee(c.id);
+              const bills = billsForCommittee(c.name);
+              return (
+                <li key={c.id} className="rounded-lg border border-outline-variant p-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <Link to={`/committees/${c.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
+                      {c.name}
+                    </Link>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">{role}</span>
+                  </div>
+                  <p className="mt-1 text-xs text-on-surface-variant">{c.type}</p>
+                  <p className="mt-1 text-xs text-on-surface-variant">
+                    所属期間：{c.termStart ? formatJapaneseDate(c.termStart) : "確認中"}〜{c.termEnd ? formatJapaneseDate(c.termEnd) : "現在"}
+                  </p>
+                  <p className="mt-1 text-xs text-on-surface-variant">
+                    この委員会が付託先の議案：{bills.length}件／所管事務調査報告書：{reports.length}件
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
         )}
       </SectionCard>
 

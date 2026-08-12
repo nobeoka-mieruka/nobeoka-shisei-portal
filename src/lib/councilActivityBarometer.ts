@@ -3,9 +3,25 @@ import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
-import type { CouncilMember, GeneralQuestionItem, BillVoteItem, CouncilSpeechSummaryData, CouncilSession } from "../types";
+import type {
+  CouncilMember,
+  GeneralQuestionItem,
+  BillVoteItem,
+  BillMemberVoteStatus,
+  CouncilSpeechSummaryData,
+  CouncilSession,
+} from "../types";
 import { publicBills } from "./billVotes";
-import { findMemberSpeechRecord, publicSpeeches, currentTermPublicSpeeches } from "./councilSpeeches";
+import {
+  findMemberSpeechRecord,
+  publicSpeeches,
+  currentTermPublicSpeeches,
+  aggregateMemberTopics,
+  aggregateYearlySpeechCounts,
+  classifyAnswererRole,
+  type TopicAggregate,
+  type YearlySpeechCount,
+} from "./councilSpeeches";
 import {
   calculateAttendanceIndex,
   calculateInformationDisclosureIndex,
@@ -43,6 +59,9 @@ const PLACEHOLDER_PROFILE = "情報確認中";
 
 /** 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数（サイト全体での分母）。 */
 const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
+
+/** councilSessions.jsonが収録している全会期ID（現議員任期以降のみ、既存データの構造上の前提）。 */
+const allSessionIdsInPeriod = councilSessions.map((s) => s.id);
 
 const radarEligibleSessions = eligibleSessionIdsFor({ isFormerMember: false });
 
@@ -134,4 +153,106 @@ export function topByMetric(entries: MemberActivityEntry[], key: string, n: numb
     .filter((e) => metricByKey(e.metrics, key)?.value !== null && metricByKey(e.metrics, key)?.value !== undefined)
     .sort((a, b) => (metricByKey(b.metrics, key)!.value! as number) - (metricByKey(a.metrics, key)!.value! as number))
     .slice(0, n);
+}
+
+/**
+ * Phase96：一般質問・議会内発言の詳細エビデンス（/council-activity/:memberId用）。
+ *
+ * 【用語の混同防止】
+ * - 登壇回数（appearanceCount）＝本会議で一般質問・代表質問等のために発言した「回数」
+ *   （＝currentTermSpeechesForRadarの件数。1回の登壇で複数の項目を質問することが多いため、
+ *   質問項目数より小さい値になるのが通常）。
+ * - 質問項目数（questionItemCount）＝全登壇を通じて確認できた個別の質問項目の合計数。
+ * - 発言件数という表現は、議会内発言指数（speech指標）の「確認できた質問項目数」と同じ値を
+ *   指すため、画面側では「質問項目数」に統一し、別の呼び方をしない。
+ */
+export interface MemberQuestionEvidence {
+  /** 登壇回数：本会議で一般質問・代表質問等のために発言した回数（会期単位ではなく発言記録単位）。 */
+  appearanceCount: number;
+  /** 質問項目数：全登壇の質問項目（questionItems）の合計数。 */
+  questionItemCount: number;
+  /** 市長が答弁した質問項目の数（項目単位、questionItem.answerersまたはexchangesから判定）。 */
+  mayorAnsweredItemCount: number;
+  /** 市長以外の執行部（副市長・教育長・部長級等）が答弁した質問項目の数。 */
+  executiveAnsweredItemCount: number;
+  /** 年度別推移（既存のaggregateYearlySpeechCountsをそのまま利用、新規計算式は追加しない）。 */
+  yearlyTrend: YearlySpeechCount[];
+  /** 主な質問テーマ（既存のaggregateMemberTopicsをそのまま利用）。上位5件。 */
+  topTopics: TopicAggregate[];
+  /** 対象期間中の全会期のうち、この議員が一般質問・代表質問等を行った会期のID一覧。 */
+  sessionIdsWithQuestion: string[];
+  /** 対象期間（在職・会議録取得済みの全会期）の会期数。 */
+  targetSessionCount: number;
+}
+
+export function getMemberQuestionEvidence(member: CouncilMember): MemberQuestionEvidence {
+  const speechRecord = findMemberSpeechRecord(speechSummaryData.members, member.id);
+  const speeches = currentTermPublicSpeeches(speechRecord);
+
+  let questionItemCount = 0;
+  let mayorAnsweredItemCount = 0;
+  let executiveAnsweredItemCount = 0;
+  for (const speech of speeches) {
+    for (const item of speech.questionItems) {
+      questionItemCount++;
+      const roles = (item.answerers ?? []).map((name) => classifyAnswererRole(name));
+      if (roles.includes("mayor")) mayorAnsweredItemCount++;
+      if (roles.some((r) => r !== "mayor" && r !== "unknown")) executiveAnsweredItemCount++;
+    }
+  }
+
+  return {
+    appearanceCount: speeches.length,
+    questionItemCount,
+    mayorAnsweredItemCount,
+    executiveAnsweredItemCount,
+    yearlyTrend: aggregateYearlySpeechCounts(speeches, allSessionIdsInPeriod),
+    topTopics: aggregateMemberTopics(speeches).slice(0, 5),
+    sessionIdsWithQuestion: [...new Set(speeches.map((s) => s.sessionId))].sort(),
+    targetSessionCount: radarEligibleSessions.length,
+  };
+}
+
+/**
+ * Phase97：個人別賛否データ（/council-activity/:memberId用）。
+ *
+ * 既存の`BillMemberVoteStatus`（approve/oppose/departed/absent/recused/notVoting/abstained/
+ * unconfirmed）をそのまま利用し、新しい状態区分は作らない。議案によっては個人別の賛否が
+ * 公開されていない場合があるため、その場合は「0件」ではなく「確認できない」ことが分かる形で返す
+ * （呼び出し側で`disclosedBillCount`と`totalBillCountSitewide`の差分を必ず文言化すること）。
+ */
+export interface MemberVoteEvidence {
+  /** この議員個人の賛否（memberVotes）が確認できた議案数。 */
+  disclosedBillCount: number;
+  /** 賛否の内訳（disclosedBillCountの内数、vote種別ごとの件数）。 */
+  breakdown: Partial<Record<BillMemberVoteStatus, number>>;
+  /** 直近5件（新しい順）。全件は/members/:idで確認できるため一覧化はしない。 */
+  recentBills: { id: string; billNumber: string; billTitle: string; votingDate: string | null; vote: BillMemberVoteStatus }[];
+  /** サイト全体の登録議案数（この議員に限らない、比較の分母の参考値）。 */
+  totalBillCountSitewide: number;
+}
+
+export function getMemberVoteEvidence(member: CouncilMember): MemberVoteEvidence {
+  const disclosed = billVotes
+    .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
+    .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""));
+
+  const breakdown: Partial<Record<BillMemberVoteStatus, number>> = {};
+  for (const b of disclosed) {
+    const vote = b.memberVotes.find((v) => v.memberId === member.id)!.vote;
+    breakdown[vote] = (breakdown[vote] ?? 0) + 1;
+  }
+
+  return {
+    disclosedBillCount: disclosed.length,
+    breakdown,
+    recentBills: disclosed.slice(0, 5).map((b) => ({
+      id: b.id,
+      billNumber: b.billNumber,
+      billTitle: b.billTitle,
+      votingDate: b.votingDate ?? null,
+      vote: b.memberVotes.find((v) => v.memberId === member.id)!.vote,
+    })),
+    totalBillCountSitewide: billVotes.length,
+  };
 }
