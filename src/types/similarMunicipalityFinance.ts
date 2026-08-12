@@ -7,10 +7,55 @@
  * という単一の全国統一資料から取得、人口は「住民基本台帳に基づく人口」という
  * 別の単一の全国統一資料から取得。両資料の基準時点は完全には一致しない）。
  *
- * 地方債現在高・基金残高・歳入・歳出は自治体ごとに個別の決算資料が必要なため、
- * 今回は延岡市以外はnull（未取得）。順位・中央値・平均値の算出はsrc/lib側で
- * 行い、「良い/悪い」等の価値判断は一切表示しない（事実としての数値・順位のみ）。
+ * 基金残高（Phase88で追加）は総務省「基金の積立状況等の一覧化」から全団体同一定義で
+ * 取得できた。地方債現在高は、財政指標・人口のような単一の全国統一Excelを今回の調査
+ * 時間内では発見できなかったため、全団体debtBalance.dataStatus="NOT_FOUND"のまま
+ * （延岡市を含め未収集。個別自治体ごとに探すのは次回以降の課題）。
+ * 総額／一般会計／全会計の区別が資料上明確でない値は登録していない（fundBalanceの
+ * accountTypeに明記）。順位・中央値・平均値の算出はsrc/lib側で行い、「良い/悪い」等の
+ * 価値判断は一切表示しない（事実としての数値・順位のみ）。
  */
+
+/** 個別データ項目の取得状況。未取得の理由を区別する（推測で埋めない）。 */
+export type SimilarMunicipalityDataStatus =
+  /** 一次資料で確認済み。 */
+  | "CONFIRMED"
+  /** 該当資料がまだ公表されていない。 */
+  | "NOT_PUBLISHED"
+  /** この団体・年度には該当しない（算定なし等）。 */
+  | "NOT_APPLICABLE"
+  /** 全国統一の資料を今回の調査では発見できなかった。 */
+  | "NOT_FOUND"
+  /** 調査継続中。 */
+  | "UNDER_RESEARCH";
+
+/** 基金残高（円）。総務省「基金の積立状況等の一覧化」による全団体同一定義。 */
+export interface SimilarMunicipalityFundBalance {
+  fiscalYear: number;
+  /** 集計範囲（例："全会計（基金）"）。一般会計・普通会計・全会計を混同しないため必ず明記する。 */
+  accountType: string;
+  totalFundBalanceYen: number | null;
+  fiscalReserveFundYen: number | null;
+  bondRedemptionFundYen: number | null;
+  otherSpecificPurposeFundsYen: number | null;
+  perCapitaTotalFundBalanceYen: number | null;
+  definition: string;
+  dataStatus: SimilarMunicipalityDataStatus;
+}
+
+/** 地方債現在高（円）。今回は全国統一の単一資料を発見できなかったため、全団体NOT_FOUND。 */
+export interface SimilarMunicipalityDebtBalance {
+  fiscalYear: number;
+  accountType: string;
+  totalDebtBalanceYen: number | null;
+  perCapitaDebtBalanceYen: number | null;
+  definition: string;
+  sourceRef: string | null;
+  sourceUrl: string | null;
+  checkedAt: string;
+  dataStatus: SimilarMunicipalityDataStatus;
+}
+
 export interface SimilarMunicipalityFinanceEntry {
   /** 全国地方公共団体コード（6桁）。 */
   municipalityCode: string;
@@ -31,10 +76,10 @@ export interface SimilarMunicipalityFinanceEntry {
   futureBurdenRatioPercent: number | null;
   /** ラスパイレス指数（職員給与水準の指標、参考値）。 */
   laspeyresIndex: number | null;
-  /** 地方債現在高（円）。個別資料未収集のためnull（延岡市を除く）。 */
-  debtBalanceYen: number | null;
-  /** 基金残高（円）。個別資料未収集のためnull（延岡市を除く）。 */
-  fundBalanceYen: number | null;
+  /** 基金残高の内訳（Phase88追加、全団体同一定義）。 */
+  fundBalance?: SimilarMunicipalityFundBalance;
+  /** 地方債現在高（Phase88時点では全団体NOT_FOUND、将来のための型のみ用意）。 */
+  debtBalance?: SimilarMunicipalityDebtBalance;
   totalRevenueYen: number | null;
   totalExpenditureYen: number | null;
 }

@@ -23,6 +23,16 @@
       "extractionMethod": "manual",
       "verificationStatus": "needsReview",
       "notes": "人口（総計＝日本人住民＋外国人住民、令和6年1月1日時点の住民基本台帳人口）。財政指標（令和6年度＝2024年4月〜2025年3月）とは基準時点が完全には一致しない（人口は年度開始時点に近い1月1日時点の値）ことに注意。"
+    },
+    {
+      "sourceUrl": "https://www.soumu.go.jp/iken/kikinzandaka.html",
+      "sourceTitle": "総務省「基金の積立状況等の一覧化（令和6年度）」市区町村",
+      "sourceOrganization": "総務省",
+      "sourcePublishedDate": null,
+      "accessedAt": "2026-08-12",
+      "extractionMethod": "manual",
+      "verificationStatus": "needsReview",
+      "notes": "基金全体・財政調整基金・減債基金・特定目的基金の令和6年度末残高（百万円単位、全会計）を全市区町村同一定義で収録した総務省公式Excel（001066238.xlsx）から抽出。延岡市の財政調整基金(50.33億円)・減債基金(24.05億円)は既存archiveFiscalYears.json（財政状況資料集ベース）と一致するが、基金全体・特定目的基金は既存データ（決算審査意見書ベース、分類基準が異なる）とは一致しない。この不一致は資料の誤りではなく集計範囲の定義差であり、reports/similar-municipality-fund-discrepancy-report.jsonに記録した。地方債現在高（市区町村別の単一集約ファイル）は今回の調査時間内では発見できなかったため、地方債現在高は全団体とも未取得（NOT_FOUND）として扱う。"
     }
   ],
   "municipalities": [
@@ -42,7 +52,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 13927000000,
+        "fiscalReserveFundYen": 4173000000,
+        "bondRedemptionFundYen": 4314000000,
+        "otherSpecificPurposeFundsYen": 5440000000,
+        "perCapitaTotalFundBalanceYen": 110082,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112453",
@@ -60,7 +81,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 14892000000,
+        "fiscalReserveFundYen": 3639000000,
+        "bondRedemptionFundYen": 3773000000,
+        "otherSpecificPurposeFundsYen": 7480000000,
+        "perCapitaTotalFundBalanceYen": 130217,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "142140",
@@ -78,7 +110,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 2078000000,
+        "fiscalReserveFundYen": 763000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 1314000000,
+        "perCapitaTotalFundBalanceYen": 20748,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "242039",
@@ -96,7 +139,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 13887000000,
+        "fiscalReserveFundYen": 9309000000,
+        "bondRedemptionFundYen": 1397000000,
+        "otherSpecificPurposeFundsYen": 3181000000,
+        "perCapitaTotalFundBalanceYen": 115431,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "122319",
@@ -114,7 +168,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 21273000000,
+        "fiscalReserveFundYen": 9241000000,
+        "bondRedemptionFundYen": 54000000,
+        "otherSpecificPurposeFundsYen": 11978000000,
+        "perCapitaTotalFundBalanceYen": 191177,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272221",
@@ -132,7 +197,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 7537000000,
+        "fiscalReserveFundYen": 4543000000,
+        "bondRedemptionFundYen": 23000000,
+        "otherSpecificPurposeFundsYen": 2971000000,
+        "perCapitaTotalFundBalanceYen": 69650,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "472085",
@@ -150,7 +226,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9195000000,
+        "fiscalReserveFundYen": 3290000000,
+        "bondRedemptionFundYen": 718000000,
+        "otherSpecificPurposeFundsYen": 5187000000,
+        "perCapitaTotalFundBalanceYen": 79579,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "472115",
@@ -168,7 +255,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 11182000000,
+        "fiscalReserveFundYen": 3935000000,
+        "bondRedemptionFundYen": 683000000,
+        "otherSpecificPurposeFundsYen": 6564000000,
+        "perCapitaTotalFundBalanceYen": 78590,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "122220",
@@ -186,7 +284,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 8339000000,
+        "fiscalReserveFundYen": 3663000000,
+        "bondRedemptionFundYen": 1365000000,
+        "otherSpecificPurposeFundsYen": 3312000000,
+        "perCapitaTotalFundBalanceYen": 63518,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "072028",
@@ -204,7 +313,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 7823000000,
+        "fiscalReserveFundYen": 1858000000,
+        "bondRedemptionFundYen": 621000000,
+        "otherSpecificPurposeFundsYen": 5344000000,
+        "perCapitaTotalFundBalanceYen": 69572,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "142158",
@@ -222,7 +342,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9034000000,
+        "fiscalReserveFundYen": 2966000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 6068000000,
+        "perCapitaTotalFundBalanceYen": 64712,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "292052",
@@ -240,7 +371,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9300000000,
+        "fiscalReserveFundYen": 4563000000,
+        "bondRedemptionFundYen": 211000000,
+        "otherSpecificPurposeFundsYen": 4526000000,
+        "perCapitaTotalFundBalanceYen": 77987,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "122246",
@@ -258,7 +400,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 2835000000,
+        "fiscalReserveFundYen": 1509000000,
+        "bondRedemptionFundYen": 830000000,
+        "otherSpecificPurposeFundsYen": 495000000,
+        "perCapitaTotalFundBalanceYen": 25877,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "352080",
@@ -276,7 +429,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 29712000000,
+        "fiscalReserveFundYen": 9663000000,
+        "bondRedemptionFundYen": 4016000000,
+        "otherSpecificPurposeFundsYen": 16033000000,
+        "perCapitaTotalFundBalanceYen": 234300,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "472051",
@@ -294,7 +458,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9989000000,
+        "fiscalReserveFundYen": 5308000000,
+        "bondRedemptionFundYen": 747000000,
+        "otherSpecificPurposeFundsYen": 3934000000,
+        "perCapitaTotalFundBalanceYen": 99569,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112151",
@@ -312,7 +487,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 7725000000,
+        "fiscalReserveFundYen": 4584000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 3141000000,
+        "perCapitaTotalFundBalanceYen": 51890,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112241",
@@ -330,7 +516,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 16390000000,
+        "fiscalReserveFundYen": 8274000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 8116000000,
+        "perCapitaTotalFundBalanceYen": 115290,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "012173",
@@ -348,7 +545,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9230000000,
+        "fiscalReserveFundYen": 3776000000,
+        "bondRedemptionFundYen": 1802000000,
+        "otherSpecificPurposeFundsYen": 3653000000,
+        "perCapitaTotalFundBalanceYen": 77768,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112178",
@@ -366,7 +574,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9703000000,
+        "fiscalReserveFundYen": 3208000000,
+        "bondRedemptionFundYen": 648000000,
+        "otherSpecificPurposeFundsYen": 5847000000,
+        "perCapitaTotalFundBalanceYen": 82521,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132144",
@@ -384,7 +603,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 10044000000,
+        "fiscalReserveFundYen": 3130000000,
+        "bondRedemptionFundYen": 3000000,
+        "otherSpecificPurposeFundsYen": 6912000000,
+        "perCapitaTotalFundBalanceYen": 78004,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "142166",
@@ -402,7 +632,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 4521000000,
+        "fiscalReserveFundYen": 3789000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 732000000,
+        "perCapitaTotalFundBalanceYen": 34418,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112372",
@@ -420,7 +661,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 5525000000,
+        "fiscalReserveFundYen": 3881000000,
+        "bondRedemptionFundYen": 1155000000,
+        "otherSpecificPurposeFundsYen": 488000000,
+        "perCapitaTotalFundBalanceYen": 38924,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "282197",
@@ -438,7 +690,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 11399000000,
+        "fiscalReserveFundYen": 4914000000,
+        "bondRedemptionFundYen": 1551000000,
+        "otherSpecificPurposeFundsYen": 4934000000,
+        "perCapitaTotalFundBalanceYen": 106326,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "222062",
@@ -456,7 +719,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 4645000000,
+        "fiscalReserveFundYen": 2328000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 2316000000,
+        "perCapitaTotalFundBalanceYen": 43748,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "082171",
@@ -474,7 +748,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9960000000,
+        "fiscalReserveFundYen": 2863000000,
+        "bondRedemptionFundYen": 1534000000,
+        "otherSpecificPurposeFundsYen": 5563000000,
+        "perCapitaTotalFundBalanceYen": 93955,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272094",
@@ -492,7 +777,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 19993000000,
+        "fiscalReserveFundYen": 6398000000,
+        "bondRedemptionFundYen": 3095000000,
+        "otherSpecificPurposeFundsYen": 10500000000,
+        "perCapitaTotalFundBalanceYen": 141550,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "402184",
@@ -510,7 +806,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 18648000000,
+        "fiscalReserveFundYen": 2914000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 15734000000,
+        "perCapitaTotalFundBalanceYen": 166142,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132101",
@@ -528,7 +835,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 14316000000,
+        "fiscalReserveFundYen": 7937000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 6379000000,
+        "perCapitaTotalFundBalanceYen": 114883,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "012033",
@@ -546,7 +864,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 7700000000,
+        "fiscalReserveFundYen": 4330000000,
+        "bondRedemptionFundYen": 736000000,
+        "otherSpecificPurposeFundsYen": 2634000000,
+        "perCapitaTotalFundBalanceYen": 72296,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132071",
@@ -564,7 +893,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 19571000000,
+        "fiscalReserveFundYen": 9202000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 10369000000,
+        "perCapitaTotalFundBalanceYen": 170902,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272175",
@@ -582,7 +922,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9438000000,
+        "fiscalReserveFundYen": 6620000000,
+        "bondRedemptionFundYen": 667000000,
+        "otherSpecificPurposeFundsYen": 2150000000,
+        "perCapitaTotalFundBalanceYen": 80896,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "122114",
@@ -600,7 +951,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 4669000000,
+        "fiscalReserveFundYen": 3571000000,
+        "bondRedemptionFundYen": 1000000,
+        "otherSpecificPurposeFundsYen": 1097000000,
+        "perCapitaTotalFundBalanceYen": 35365,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "292095",
@@ -618,7 +980,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 13012000000,
+        "fiscalReserveFundYen": 2660000000,
+        "bondRedemptionFundYen": 1822000000,
+        "otherSpecificPurposeFundsYen": 8529000000,
+        "perCapitaTotalFundBalanceYen": 110899,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132055",
@@ -636,7 +1009,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 16452000000,
+        "fiscalReserveFundYen": 9477000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 6975000000,
+        "perCapitaTotalFundBalanceYen": 127074,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "252069",
@@ -654,7 +1038,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 20109000000,
+        "fiscalReserveFundYen": 7017000000,
+        "bondRedemptionFundYen": 4985000000,
+        "otherSpecificPurposeFundsYen": 8108000000,
+        "perCapitaTotalFundBalanceYen": 143698,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "212041",
@@ -672,7 +1067,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 23160000000,
+        "fiscalReserveFundYen": 7712000000,
+        "bondRedemptionFundYen": 3547000000,
+        "otherSpecificPurposeFundsYen": 11901000000,
+        "perCapitaTotalFundBalanceYen": 218118,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132241",
@@ -690,7 +1096,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 19642000000,
+        "fiscalReserveFundYen": 5338000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 14304000000,
+        "perCapitaTotalFundBalanceYen": 132917,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272183",
@@ -708,7 +1125,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 21485000000,
+        "fiscalReserveFundYen": 5186000000,
+        "bondRedemptionFundYen": 259000000,
+        "otherSpecificPurposeFundsYen": 16041000000,
+        "perCapitaTotalFundBalanceYen": 184617,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "402028",
@@ -726,7 +1154,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9819000000,
+        "fiscalReserveFundYen": 2788000000,
+        "bondRedemptionFundYen": 597000000,
+        "otherSpecificPurposeFundsYen": 6435000000,
+        "perCapitaTotalFundBalanceYen": 92113,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "402192",
@@ -744,7 +1183,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 16940000000,
+        "fiscalReserveFundYen": 5034000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 11906000000,
+        "perCapitaTotalFundBalanceYen": 164281,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272043",
@@ -762,7 +1212,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 5646000000,
+        "fiscalReserveFundYen": 3092000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 2554000000,
+        "perCapitaTotalFundBalanceYen": 54832,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "402176",
@@ -780,7 +1241,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 20173000000,
+        "fiscalReserveFundYen": 5124000000,
+        "bondRedemptionFundYen": 302000000,
+        "otherSpecificPurposeFundsYen": 14747000000,
+        "perCapitaTotalFundBalanceYen": 189295,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112275",
@@ -798,7 +1270,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 4020000000,
+        "fiscalReserveFundYen": 2354000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 1666000000,
+        "perCapitaTotalFundBalanceYen": 27731,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "082031",
@@ -816,7 +1299,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 14772000000,
+        "fiscalReserveFundYen": 6405000000,
+        "bondRedemptionFundYen": 2810000000,
+        "otherSpecificPurposeFundsYen": 5556000000,
+        "perCapitaTotalFundBalanceYen": 104312,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132225",
@@ -834,7 +1328,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 11285000000,
+        "fiscalReserveFundYen": 5033000000,
+        "bondRedemptionFundYen": 167000000,
+        "otherSpecificPurposeFundsYen": 6085000000,
+        "perCapitaTotalFundBalanceYen": 96857,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "342131",
@@ -852,7 +1357,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 14569000000,
+        "fiscalReserveFundYen": 6066000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 8503000000,
+        "perCapitaTotalFundBalanceYen": 125568,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112259",
@@ -870,7 +1386,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 5186000000,
+        "fiscalReserveFundYen": 3504000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 1681000000,
+        "perCapitaTotalFundBalanceYen": 35834,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "402052",
@@ -888,7 +1415,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 29035000000,
+        "fiscalReserveFundYen": 7314000000,
+        "bondRedemptionFundYen": 7965000000,
+        "otherSpecificPurposeFundsYen": 13756000000,
+        "perCapitaTotalFundBalanceYen": 232351,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "112356",
@@ -906,7 +1444,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 9575000000,
+        "fiscalReserveFundYen": 4457000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 5118000000,
+        "perCapitaTotalFundBalanceYen": 84626,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272141",
@@ -924,7 +1473,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 12050000000,
+        "fiscalReserveFundYen": 4960000000,
+        "bondRedemptionFundYen": 0,
+        "otherSpecificPurposeFundsYen": 7089000000,
+        "perCapitaTotalFundBalanceYen": 112258,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "132039",
@@ -942,7 +1502,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 60840000000,
+        "fiscalReserveFundYen": 8018000000,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": 52822000000,
+        "perCapitaTotalFundBalanceYen": 411612,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "312029",
@@ -960,7 +1531,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 12248000000,
+        "fiscalReserveFundYen": 2823000000,
+        "bondRedemptionFundYen": 1445000000,
+        "otherSpecificPurposeFundsYen": 7979000000,
+        "perCapitaTotalFundBalanceYen": 84374,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "442020",
@@ -978,7 +1560,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 11887000000,
+        "fiscalReserveFundYen": 6188000000,
+        "bondRedemptionFundYen": 585000000,
+        "otherSpecificPurposeFundsYen": 5114000000,
+        "perCapitaTotalFundBalanceYen": 105264,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272205",
@@ -996,7 +1589,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 24813000000,
+        "fiscalReserveFundYen": 5527000000,
+        "bondRedemptionFundYen": 2731000000,
+        "otherSpecificPurposeFundsYen": 16555000000,
+        "perCapitaTotalFundBalanceYen": 178103,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "462187",
@@ -1014,7 +1618,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 25710000000,
+        "fiscalReserveFundYen": 7915000000,
+        "bondRedemptionFundYen": 3441000000,
+        "otherSpecificPurposeFundsYen": 14354000000,
+        "perCapitaTotalFundBalanceYen": 207374,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "122068",
@@ -1032,7 +1647,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 11720000000,
+        "fiscalReserveFundYen": 6556000000,
+        "bondRedemptionFundYen": 495000000,
+        "otherSpecificPurposeFundsYen": 4669000000,
+        "perCapitaTotalFundBalanceYen": 85791,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "272230",
@@ -1050,7 +1676,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 11115000000,
+        "fiscalReserveFundYen": 3012000000,
+        "bondRedemptionFundYen": 1031000000,
+        "otherSpecificPurposeFundsYen": 7072000000,
+        "perCapitaTotalFundBalanceYen": 94887,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "422045",
@@ -1068,7 +1705,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 18444000000,
+        "fiscalReserveFundYen": 5010000000,
+        "bondRedemptionFundYen": 959000000,
+        "otherSpecificPurposeFundsYen": 12474000000,
+        "perCapitaTotalFundBalanceYen": 137706,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     },
     {
       "municipalityCode": "452033",
@@ -1086,7 +1734,18 @@
       "debtBalanceYen": null,
       "fundBalanceYen": null,
       "totalRevenueYen": null,
-      "totalExpenditureYen": null
+      "totalExpenditureYen": null,
+      "fundBalance": {
+        "fiscalYear": 2024,
+        "accountType": "全会計（基金）",
+        "totalFundBalanceYen": 13781000000,
+        "fiscalReserveFundYen": 5033000000,
+        "bondRedemptionFundYen": 2405000000,
+        "otherSpecificPurposeFundsYen": 6344000000,
+        "perCapitaTotalFundBalanceYen": 118959,
+        "definition": "総務省「基金の積立状況等の一覧化（令和6年度）」による、令和6年度末（令和7年3月31日時点）の基金残高（全会計）。基金全体＝財政調整基金＋減債基金＋特定目的基金（積立状況一覧の定義）。",
+        "dataStatus": "CONFIRMED"
+      }
     }
   ]
 }

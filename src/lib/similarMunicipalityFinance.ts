@@ -26,12 +26,17 @@ export interface FieldStats {
  * 「順位が高い/低いことが良い/悪い」という価値判断は一切行わない（事実の算出のみ）。
  */
 export function computeFieldStats(field: NumericField): FieldStats {
+  return computeStatsByAccessor((m) => m[field] as number | null);
+}
+
+/** フィールド名ではなく任意の抽出関数で統計値を算出する（基金残高等のネストしたフィールド用）。 */
+export function computeStatsByAccessor(accessor: (m: SimilarMunicipalityFinanceEntry) => number | null | undefined): FieldStats {
   const values = similarMunicipalityFinance.municipalities
-    .map((m) => m[field])
+    .map((m) => accessor(m))
     .filter((v): v is number => typeof v === "number");
   const sorted = [...values].sort((a, b) => a - b);
   const nobeoka = similarMunicipalityFinance.municipalities.find((m) => m.isNobeoka);
-  const nobeokaValue = nobeoka ? (nobeoka[field] as number | null) : null;
+  const nobeokaValue = nobeoka ? (accessor(nobeoka) ?? null) : null;
 
   const median =
     sorted.length === 0

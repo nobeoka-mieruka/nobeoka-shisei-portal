@@ -846,6 +846,18 @@ try {
     if (m.futureBurdenRatioPercent != null && typeof m.futureBurdenRatioPercent !== "number") {
       err(mtag, `futureBurdenRatioPercentが数値ではありません: ${m.futureBurdenRatioPercent}`);
     }
+    if (m.fundBalance != null) {
+      const ftag = `${mtag} / fundBalance`;
+      if (isBlank(m.fundBalance.accountType)) err(ftag, "accountTypeが空です（総額／一般会計／全会計等の区分を明記してください）");
+      if (isBlank(m.fundBalance.definition)) err(ftag, "definitionが空です");
+      for (const f of ["totalFundBalanceYen", "fiscalReserveFundYen", "bondRedemptionFundYen", "otherSpecificPurposeFundsYen", "perCapitaTotalFundBalanceYen"]) {
+        if (m.fundBalance[f] != null && (typeof m.fundBalance[f] !== "number" || m.fundBalance[f] < 0)) {
+          err(ftag, `${f}が不正です: ${m.fundBalance[f]}`);
+        }
+      }
+      const VALID_STATUS = new Set(["CONFIRMED", "NOT_PUBLISHED", "NOT_APPLICABLE", "NOT_FOUND", "UNDER_RESEARCH"]);
+      if (!VALID_STATUS.has(m.fundBalance.dataStatus)) err(ftag, `dataStatusが不正です: ${m.fundBalance.dataStatus}`);
+    }
   }
   if (!Array.isArray(simFin.sourceRefs) || simFin.sourceRefs.length === 0) {
     err(tag, "sourceRefsが空です（出典なしのデータは登録しないでください）");
