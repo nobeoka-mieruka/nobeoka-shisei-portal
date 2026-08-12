@@ -1,0 +1,93 @@
+[
+  {
+    "taskId": "TASK-004",
+    "title": "議案賛否データの投入・品質向上（voteMethod/committee残り24件）",
+    "status": "WAITING_EXTERNAL",
+    "blockedReasonCode": "SOURCE_NOT_PUBLISHED",
+    "reasonSummary": "令和8年5月臨時会・6月定例会の会議録が本日時点でも未公開のため、voteMethod・committeeを確認できない（billVotes24件）。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 4,
+    "autoRecheck": true,
+    "autoRecheckMechanism": ".github/workflows/update-council-documents.yml（既存の日次自動更新。会議録が公開され次第、次回の自動巡回で反映される）",
+    "notes": "推測での分類はしない。billVotes総数（1,177件）は既に登録済みで、この24件のみ会議録公開待ち。"
+  },
+  {
+    "taskId": "TASK-011",
+    "title": "全国報酬比較データの投入",
+    "status": "COMPLETED",
+    "blockedReasonCode": null,
+    "reasonSummary": "全国市議会議長会のExcel版（令和7年12月31日現在）を発見し、全国815市区の個別実数を登録済み（Phase53、2026-08-12）。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 4,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "解決済み。今後は年次更新（次年版の確認）のみ必要。"
+  },
+  {
+    "taskId": "TASK-012",
+    "title": "類似団体報酬比較データの投入",
+    "status": "MANUAL_REVIEW",
+    "blockedReasonCode": "MANUAL_REVIEW_REQUIRED",
+    "reasonSummary": "総務省「類似団体別市町村財政指数表」に区分別Excelファイル一覧を発見したが、ファイル名（数字のみ）からは延岡市の区分・構成自治体名を判別できず、複数ファイルを人が個別に開いて内容確認する追加調査が必要。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 2,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "TASK-011で入手済みの全国815市区報酬個別実数と組み合わせれば、区分・構成自治体さえ特定できれば解決見込みが高い。次回セッションの優先候補。"
+  },
+  {
+    "taskId": "TASK-016B",
+    "title": "年度別収支報告書データ登録（pf-org-001＝市長の後援会、令和7年分）",
+    "status": "WAITING_EXTERNAL",
+    "blockedReasonCode": "SOURCE_NOT_PUBLISHED",
+    "reasonSummary": "宮崎県選挙管理委員会の政治資金収支報告書公表ページで、令和7年分（三浦市長在任分）が本日時点でも未公表（令和8年11月頃公表見込み）。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": "2026-11-01",
+    "attemptCount": 3,
+    "autoRecheck": true,
+    "autoRecheckMechanism": "blockedTaskWatch.json（crawlerTargetId: election-fund-report、既存のhash監視）",
+    "notes": "pf-org-016（比江島久美子後援会）は既に解消済み（confirmed）。"
+  },
+  {
+    "taskId": "TASK-023",
+    "title": "FAQ構造化データの実装",
+    "status": "NOT_APPLICABLE",
+    "blockedReasonCode": "OUTSIDE_SCOPE",
+    "reasonSummary": "外部の公式一次資料の公開待ちではなく、本サイト自身のコンテンツ構成（FAQ的な固定Q&Aページを新設するかどうか）に依存する課題のため、「新しい一次資料の検知」という自動再確認の枠組みの対象外。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 1,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "サイト構成の設計判断待ち。外部資料の探索を継続しても解決しない性質のタスク。"
+  },
+  {
+    "taskId": "TASK-032",
+    "title": "現職議員の経歴（学歴・職歴）データ拡充（残り17名）",
+    "status": "MANUAL_REVIEW",
+    "blockedReasonCode": "SOURCE_NOT_FOUND",
+    "reasonSummary": "対象17名（自民党きずなの会8名・無所属市民の会5名・無会派3名）について、所属政党（自由民主党宮崎県支部連合会・日本共産党・新・国民民主党等）の公式サイトに個別議員紹介ページが無く、本人公式サイト・SNSも本文取得がブロックされるため、経歴を確認できる一次資料のURL自体が現時点で存在しない。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 3,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "存在しないURLをハッシュ監視することはできない。次回の議員名簿点検（member-roster）や手動調査での偶発的な発見を待つ。"
+  },
+  {
+    "taskId": "TASK-045",
+    "title": "歴代市長の任期空白（13件、1937〜1994年）の一次資料調査",
+    "status": "WAITING_EXTERNAL",
+    "blockedReasonCode": "WAITING_OFFICIAL_RELEASE",
+    "reasonSummary": "延岡市が新たに発刊した「延岡市史 市制八十周年記念十年史」は対象期間が平成15〜25年（2003〜2013年）であり、必要な1937〜1994年の日単位の市長交代日を扱っていないと確認済み（対象期間外）。本編『延岡市史』（1937年からの通史）の公開を継続して待つ。",
+    "lastCheckedAt": "2026-08-12",
+    "nextCheckAt": null,
+    "attemptCount": 3,
+    "autoRecheck": true,
+    "autoRecheckMechanism": "blockedTaskWatch.json（crawlerTargetId: nobeoka-history-publications、既存のhash監視）",
+    "notes": "新刊行物の発見自体は前進だが、対象期間外だったため本タスクは未解決のまま。"
+  }
+]

@@ -3052,6 +3052,64 @@ try {
   else throw e;
 }
 
+// --- blockedTaskClassification.json（BLOCKEDタスクの細分化ステータス。TASKS.mdの5状態を置き換えない） ---
+try {
+  const classification = readJson("src/data/blockedTaskClassification.json");
+  if (!Array.isArray(classification)) throw new Error("配列ではありません");
+
+  checkDuplicateIds({ err, warn }, classification, "taskId", "blockedTaskClassification.json");
+
+  const VALID_STATUSES = new Set(["WAITING_EXTERNAL", "BLOCKED_TECHNICAL", "MANUAL_REVIEW", "NOT_APPLICABLE", "COMPLETED"]);
+  const VALID_REASON_CODES = new Set([
+    "SOURCE_NOT_PUBLISHED",
+    "SOURCE_NOT_FOUND",
+    "SOURCE_UNAVAILABLE",
+    "IMAGE_PDF",
+    "OCR_REQUIRED",
+    "IDENTITY_UNCERTAIN",
+    "OUTSIDE_SCOPE",
+    "WAITING_OFFICIAL_RELEASE",
+    "DATA_MODEL_LIMITATION",
+    "MANUAL_REVIEW_REQUIRED",
+  ]);
+
+  for (const c of classification) {
+    const tag = `blockedTaskClassification.json (${c.taskId ?? "taskId不明"})`;
+    if (isBlank(c.taskId)) err(tag, "taskIdが空です");
+    if (isBlank(c.title)) err(tag, "titleが空です");
+    if (!VALID_STATUSES.has(c.status)) err(tag, `未定義のstatusです: ${c.status}`);
+    // COMPLETED以外はblockedReasonCodeが必須（「なぜ未解決か」を必ず機械可読に残すため）。
+    if (c.status !== "COMPLETED") {
+      if (c.blockedReasonCode == null || !VALID_REASON_CODES.has(c.blockedReasonCode)) {
+        err(tag, `status="${c.status}"にはblockedReasonCodeが必須です（未定義または未設定）: ${c.blockedReasonCode}`);
+      }
+    } else if (c.blockedReasonCode != null) {
+      warn(tag, "status=COMPLETEDなのにblockedReasonCodeが設定されたままです");
+    }
+    if (isBlank(c.reasonSummary)) err(tag, "reasonSummaryが空です");
+    if (isBlank(c.lastCheckedAt) || Number.isNaN(Date.parse(c.lastCheckedAt))) err(tag, `lastCheckedAtの形式が不正です: ${c.lastCheckedAt}`);
+    if (c.nextCheckAt != null && Number.isNaN(Date.parse(c.nextCheckAt))) err(tag, `nextCheckAtの形式が不正です: ${c.nextCheckAt}`);
+    if (typeof c.attemptCount !== "number" || c.attemptCount < 1) err(tag, `attemptCountが不正です: ${c.attemptCount}`);
+    if (typeof c.autoRecheck !== "boolean") err(tag, `autoRecheckがboolean型ではありません: ${c.autoRecheck}`);
+    if (c.autoRecheck && isBlank(c.autoRecheckMechanism)) err(tag, "autoRecheck=trueですがautoRecheckMechanismが空です");
+    if (!c.autoRecheck && c.autoRecheckMechanism != null) warn(tag, "autoRecheck=falseですがautoRecheckMechanismが設定されています");
+  }
+
+  // TASKS.mdの状態：BLOCKED件数との整合性チェック（雑な二重管理を防ぐ、簡易チェックのみ）。
+  const tasksmd = readFileSync(join(root, "TASKS.md"), "utf8");
+  const blockedInTasksMd = (tasksmd.match(/状態：BLOCKED/g) ?? []).length;
+  const nonCompletedInClassification = classification.filter((c) => c.status !== "COMPLETED").length;
+  if (blockedInTasksMd !== nonCompletedInClassification) {
+    warn(
+      "blockedTaskClassification.json",
+      `TASKS.mdの「状態：BLOCKED」件数（${blockedInTasksMd}）と、本ファイルの未解決件数（${nonCompletedInClassification}）が一致しません。両方を更新してください`,
+    );
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("blockedTaskClassification.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- kohoNobeokaIssues.json（「広報のべおか」バックナンバー索引：号とPDF URLのカタログ） ---
 try {
   const kohoIssues = readJson("src/data/kohoNobeokaIssues.json");

@@ -39,6 +39,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { allPublicSpeeches, questionLikeSpeeches } from "../lib/councilSpeeches";
 import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
+import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { simpleCompleteness, formatCoverageRate, type CompletenessMetric } from "../lib/completeness";
 
@@ -182,6 +183,7 @@ export function DataStatusPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
+  const taskStatusCounts = blockedTaskStatusCounts();
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -528,6 +530,28 @@ export function DataStatusPage() {
             <DomainRow key={d.label} domain={d} />
           ))}
         </ul>
+      </SectionCard>
+
+      <SectionCard title="調査継続中の項目（未解決タスクの状況）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          「0件」と「まだ資料が公開されていない」を混同しないよう、当サイト運営上の未解決タスクを状況別に集計しています。市民向けデータの収録件数とは別の、編集作業の進行状況です。
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {(
+            [
+              ["WAITING_EXTERNAL", "公式資料の公開待ち"],
+              ["MANUAL_REVIEW", "人手による追加調査が必要"],
+              ["NOT_APPLICABLE", "対象外（サイト構成側の判断待ち等）"],
+              ["BLOCKED_TECHNICAL", "技術的制約（OCR環境等）"],
+              ["COMPLETED", "解決済み"],
+            ] as [keyof ReturnType<typeof blockedTaskStatusCounts>, string][]
+          ).map(([key, label]) => (
+            <div key={key} className="rounded-lg bg-surface-container-low p-3">
+              <dt className="text-xs text-on-surface-variant">{label}</dt>
+              <dd className="mt-0.5 text-lg font-semibold text-on-surface">{taskStatusCounts[key]}件</dd>
+            </div>
+          ))}
+        </dl>
       </SectionCard>
 
       <p className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
