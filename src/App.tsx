@@ -157,6 +157,7 @@ const ExecutiveAnswersPage = lazy(() =>
   import("./pages/ExecutiveAnswersPage").then((m) => ({ default: m.ExecutiveAnswersPage })),
 );
 const SearchPage = lazy(() => import("./pages/SearchPage").then((m) => ({ default: m.SearchPage })));
+const KohoSearchPage = lazy(() => import("./pages/KohoSearchPage").then((m) => ({ default: m.KohoSearchPage })));
 const UpdatesPage = lazy(() => import("./pages/UpdatesPage").then((m) => ({ default: m.UpdatesPage })));
 const DataStatusPage = lazy(() => import("./pages/DataStatusPage").then((m) => ({ default: m.DataStatusPage })));
 const MethodologyActivityRadarPage = lazy(() =>
@@ -303,6 +304,7 @@ function App() {
               <Route path="/themes/:themeSlug" element={<ThemeDetailPage />} />
               <Route path="/executive-answers" element={<ExecutiveAnswersPage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/koho-search" element={<KohoSearchPage />} />
               <Route path="/updates" element={<UpdatesPage />} />
               <Route path="/data-status" element={<DataStatusPage />} />
               <Route path="/methodology/activity-radar" element={<MethodologyActivityRadarPage />} />

@@ -589,7 +589,11 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          文字起こし結果は下書き（未確認）の状態であり、元のPDF画像と照合できたものだけを本番データ（財政・市政年表等の各ページ）へ反映しています。文字起こし結果そのものを検索できる画面は、量・精度が十分になるまで公開を見合わせています。
+          文字起こし結果は下書き（未確認）の状態であり、元のPDF画像と照合できたものだけを本番データ（財政・市政年表等の各ページ）へ反映しています。文字起こし対象の号数が増えたため、キーワード検索できる試験版画面（
+          <Link to="/koho-search" className={`text-primary hover:underline ${linkClass}`}>
+            広報のべおか文字起こし検索
+          </Link>
+          ）を公開していますが、検索結果の多くは未確認のOCR結果である点にご注意ください。
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg bg-surface-container-low p-3">

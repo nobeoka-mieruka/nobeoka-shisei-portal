@@ -1223,6 +1223,20 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/koho-search":
+      // 検索結果はクエリごとに内容が変わり続けるため、常にnoindexにする。OCR結果を含む試験版。
+      return makeResult(
+        {
+          path: "/koho-search",
+          pageTitle: "広報のべおか文字起こし検索（試験版）",
+          description: "広報のべおかバックナンバーをOCR（文字認識）した結果をキーワード検索できます。OCR結果は未確認の場合があります。",
+          robots: "noindex, follow",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "広報のべおか文字起こし検索" }],
+          skipWebPage: true,
+        },
+        options,
+      );
+
     case "/bills/compare":
       // 選択した2議案によって内容が変わり続けるページのため、常にnoindexにする。
       return makeResult(

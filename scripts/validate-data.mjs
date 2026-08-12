@@ -3207,6 +3207,34 @@ try {
   else throw e;
 }
 
+// --- kohoOcrSearchIndex.json（広報のべおかOCR全文検索の索引：/koho-searchページ用） ---
+try {
+  const kohoSearchIndex = readJson("src/data/kohoOcrSearchIndex.json");
+  if (!Array.isArray(kohoSearchIndex)) throw new Error("配列ではありません");
+
+  const VALID_CATEGORIES = new Set(["mayorPolitics", "councilElection", "finance", "cityAdmin"]);
+  const VALID_CONFIDENCE = new Set(["HIGH", "MEDIUM"]);
+  const VALID_VERIFICATION = new Set(["verified", "raw"]);
+
+  for (const e of kohoSearchIndex) {
+    const tag = `kohoOcrSearchIndex.json (${e.issueId ?? "id不明"} p${e.page ?? "?"} ${e.keyword ?? ""})`;
+    if (isBlank(e.issueId)) err(tag, "issueIdが空です");
+    if (typeof e.page !== "number" || e.page < 1) err(tag, `pageが不正です: ${e.page}`);
+    if (isBlank(e.keyword)) err(tag, "keywordが空です");
+    if (!VALID_CATEGORIES.has(e.category)) err(tag, `未定義のcategoryです: ${e.category}`);
+    if (isBlank(e.context)) err(tag, "contextが空です");
+    if (typeof e.occurrences !== "number" || e.occurrences < 1) err(tag, `occurrencesが不正です: ${e.occurrences}`);
+    if (!VALID_CONFIDENCE.has(e.confidence)) err(tag, `未定義のconfidenceです: ${e.confidence}`);
+    if (!VALID_VERIFICATION.has(e.verificationStatus)) err(tag, `未定義のverificationStatusです: ${e.verificationStatus}`);
+    if (e.sourcePdf != null && !e.sourcePdf.startsWith("https://www.city.nobeoka.miyazaki.jp/")) {
+      err(tag, `sourcePdfが延岡市公式ドメイン以外です: ${e.sourcePdf}`);
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("kohoOcrSearchIndex.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- cityOrganizationDivisions.json / cityOrganizationSections.json（延岡市行政組織） ---
 try {
   const divisions = readJson("src/data/cityOrganizationDivisions.json");

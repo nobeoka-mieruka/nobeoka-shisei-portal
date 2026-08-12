@@ -112,6 +112,7 @@ export const STATIC_INDEXABLE_PAGES = [
  */
 export const STATIC_NOINDEX_PAGES = [
   "/search",
+  "/koho-search",
   "/bills/compare",
   "/compare/mayors",
   "/compare/members",
