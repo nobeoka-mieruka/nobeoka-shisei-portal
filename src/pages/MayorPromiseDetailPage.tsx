@@ -11,6 +11,7 @@ import type {
   MayorPromiseDocument,
   MayorPromiseItem,
   MayorPromisesData,
+  PromiseEvidenceStatus,
 } from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -24,6 +25,14 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
+
+const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
+  confirmed: "確定",
+  candidate: "関連候補",
+  under_review: "調査中",
+  not_found: "見つからず",
+  unavailable: "資料未公開",
+};
 
 const promisesData = mayorPromisesData as MayorPromisesData;
 const policyData = policyProgressData as MayorPolicyProgressData;
@@ -214,6 +223,37 @@ export function MayorPromiseDetailPage() {
           </div>
         </dl>
       </SectionCard>
+
+      {/* 関連事業候補：名称完全一致は無いが関連しうる候補（confirmedではなくcandidate等）。
+          候補が1件も無い場合はセクション自体を表示しない。「公約達成」等の評価は絶対に表示しない。 */}
+      {((promise.relatedBudgetCandidates?.length ?? 0) > 0 || (promise.relatedBillCandidates?.length ?? 0) > 0) && (
+        <SectionCard title="関連事業候補（確定ではありません）">
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            公約本文と名称が完全に一致する予算・議案は確認できていませんが、関連する可能性がある事業・議案の候補です。サイト独自の判定であり、公約の達成・未達成を示すものではありません。
+          </p>
+          <ul className="space-y-3">
+            {[...(promise.relatedBudgetCandidates ?? []), ...(promise.relatedBillCandidates ?? [])].map((c) => (
+              <li key={c.id} className="rounded-lg bg-surface-container-high p-3 text-sm">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-medium text-on-surface">{c.label}</span>
+                  <span className="rounded-full bg-tertiary-container px-2 py-0.5 text-xs font-semibold text-on-tertiary-container">
+                    {CANDIDATE_STATUS_LABEL[c.status]}
+                  </span>
+                  {c.sourceType === "news" && (
+                    <span className="rounded-full bg-surface-container-highest px-2 py-0.5 text-xs text-on-surface-variant">
+                      報道（一次資料ではありません）
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 text-xs text-on-surface-variant">候補と判断した理由：{c.candidateReason}</p>
+                <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs text-primary hover:underline">
+                  出典：{c.source}（{c.sourceDate}）
+                </a>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
 
       {/* 関連議案・関連一般質問・関連記者会見（ID参照で確認できたもののみ表示） */}
       <SectionCard title="関連する議案・一般質問・記者会見">
