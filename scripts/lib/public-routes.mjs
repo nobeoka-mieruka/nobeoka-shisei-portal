@@ -98,6 +98,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/updates",
   "/data-status",
   "/methodology/activity-radar",
+  "/council-activity",
   "/political-funds",
   "/committees",
   "/history",
@@ -406,6 +407,12 @@ function staticPageLastmod(path, data) {
       );
     case "/methodology/activity-radar":
       return resolveLastmod(path, [], ["src/lib/activityRadar.ts", "src/pages/MethodologyActivityRadarPage.tsx"]);
+    case "/council-activity":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.members.map((m) => m.updatedAt ?? m.verifiedAt))],
+        ["src/data/members.json", "src/lib/activityRadar.ts", "src/lib/councilActivityBarometer.ts", "src/pages/CouncilActivityPage.tsx"],
+      );
     case "/political-funds":
       return resolveLastmod(
         path,
@@ -464,6 +471,14 @@ export function getIndexableRoutes() {
   }
   for (const m of members) {
     urls.push({ path: `/members/${m.id}`, lastmod: resolveLastmod(`/members/${m.id}`, [m.updatedAt, m.verifiedAt], ["src/data/members.json"]) });
+    urls.push({
+      path: `/council-activity/${m.id}`,
+      lastmod: resolveLastmod(
+        `/council-activity/${m.id}`,
+        [m.updatedAt, m.verifiedAt],
+        ["src/data/members.json", "src/lib/activityRadar.ts", "src/lib/councilActivityBarometer.ts"],
+      ),
+    });
   }
   for (const b of billVotes) {
     urls.push({ path: `/bills/votes/${b.id}`, lastmod: resolveLastmod(`/bills/votes/${b.id}`, [b.lastVerified], ["src/data/billVotes.json"]) });

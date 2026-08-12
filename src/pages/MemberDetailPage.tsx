@@ -46,6 +46,7 @@ import {
   calculateVotingDisclosureIndex,
   eligibleSessionIdsFor,
 } from "../lib/activityRadar";
+import { activityTargetPeriodLabel } from "../lib/councilActivityBarometer";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -88,9 +89,10 @@ const archiveMemberTerms = archiveMemberTermsData as ArchiveMemberTerm[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
-// 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数。現時点では全議案で0件のため、
-// レーダーチャートの「議案等の意思表示」は全議員で対象記録なし（missing）として扱われる
-// （議員個人が非公開なのではなく、サイト側にこのデータがまだ収録されていないため）。
+// 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数。2026-08時点で記名投票1件
+// （27名分）のみ登録済みのため、その27名はレーダーチャートの「議案等の意思表示」に実値が入り、
+// それ以外の議員は対象記録なし（missing）として扱われる（議員個人が非公開なのではなく、
+// サイト側にこのデータをまだ十分収録できていないため）。
 const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const memberSpeechAnalysisList = (memberSpeechAnalysisData as MemberSpeechAnalysisData).members;
@@ -413,9 +415,15 @@ export function MemberDetailPage() {
 
       <ActivityRadarSection
         metrics={radarMetrics}
-        targetPeriodLabel="令和5年6月〜令和8年3月定例会（会議録取得済みの会期）"
+        targetPeriodLabel={activityTargetPeriodLabel()}
         updatedAt={member.updatedAt ?? member.verifiedAt}
       />
+      <Link
+        to={`/council-activity/${member.id}`}
+        className={`inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+      >
+        議員活動バロメーターで詳しく見る（他の議員と比較する） →
+      </Link>
 
       <SectionCard title={`議員活動年表（${timelineEvents.length}件）`}>
         <p className="text-xs leading-relaxed text-on-surface-variant">

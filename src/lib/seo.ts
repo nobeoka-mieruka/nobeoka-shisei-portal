@@ -1198,6 +1198,18 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/council-activity":
+      return makeResult(
+        {
+          path: "/council-activity",
+          pageTitle: "延岡市議会 議員活動バロメーター",
+          description:
+            "延岡市議会議員の一般質問、議会内発言、請願・提案等、情報発信、出席状況を公開資料から可視化しています。議員の能力や政策の質を評価するものではありません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議員活動バロメーター" }],
+        },
+        options,
+      );
+
     case "/terms":
       return makeResult(
         {
@@ -1268,6 +1280,29 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
 }
 
 /** /members/:id */
+/** /council-activity/:memberId */
+function councilActivityMemberSeo(id: string, options?: SeoOptions): SeoResult {
+  const member = members.find((m) => m.id === id);
+  if (!member) return notFound(`/council-activity/${id}`, "議員活動バロメーター");
+
+  const verifiedSns = member.sns.filter((s) => s.verificationStatus === "verified").map((s) => s.url);
+  const sameAs = [...(member.profileUrl ? [member.profileUrl] : []), ...verifiedSns];
+  const url = `${SITE_URL}/council-activity/${id}`;
+
+  return makeResult(
+    {
+      path: `/council-activity/${id}`,
+      pageTitle: `${member.name}議員｜議員活動バロメーター`,
+      description: `延岡市議会議員${member.name}氏の一般質問、議会内発言、議案等の意思表示、情報発信を公開資料から可視化しています。議員の能力や政策の質を評価するものではありません。`,
+      image: memberOgImage(member.id),
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議員活動バロメーター", to: "/council-activity" }, { label: member.name }],
+      extraJsonLd: [personJsonLd("person-jsonld", member.name, url, sameAs, "延岡市議会", member.photoUrl)],
+      mainEntity: { "@type": "Person", name: member.name, url },
+    },
+    options,
+  );
+}
+
 function memberSeo(id: string, options?: SeoOptions): SeoResult {
   const member = members.find((m) => m.id === id);
   if (!member) return notFound(`/members/${id}`, "議員情報");
@@ -1738,6 +1773,7 @@ function committeeDetailSeo(id: string, options?: SeoOptions): SeoResult {
 }
 
 const MEMBER_RE = /^\/members\/([^/]+)$/;
+const COUNCIL_ACTIVITY_MEMBER_RE = /^\/council-activity\/([^/]+)$/;
 const SPEECH_DETAIL_RE = /^\/members\/([^/]+)\/questions\/([^/]+)$/;
 const QUESTION_RE = /^\/questions\/([^/]+)$/;
 const THEME_DETAIL_RE = /^\/themes\/([^/]+)$/;
@@ -1787,6 +1823,9 @@ export function getSeoForPath(pathname: string, options?: SeoOptions): SeoResult
 
   const memberMatch = path.match(MEMBER_RE);
   if (memberMatch) return memberSeo(safeDecodeURIComponent(memberMatch[1]), options);
+
+  const councilActivityMemberMatch = path.match(COUNCIL_ACTIVITY_MEMBER_RE);
+  if (councilActivityMemberMatch) return councilActivityMemberSeo(safeDecodeURIComponent(councilActivityMemberMatch[1]), options);
 
   const questionMatch = path.match(QUESTION_RE);
   if (questionMatch) return questionSeo(safeDecodeURIComponent(questionMatch[1]), options);

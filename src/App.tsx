@@ -166,6 +166,10 @@ const DataStatusPage = lazy(() => import("./pages/DataStatusPage").then((m) => (
 const MethodologyActivityRadarPage = lazy(() =>
   import("./pages/MethodologyActivityRadarPage").then((m) => ({ default: m.MethodologyActivityRadarPage })),
 );
+const CouncilActivityPage = lazy(() => import("./pages/CouncilActivityPage").then((m) => ({ default: m.CouncilActivityPage })));
+const CouncilActivityMemberPage = lazy(() =>
+  import("./pages/CouncilActivityMemberPage").then((m) => ({ default: m.CouncilActivityMemberPage })),
+);
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
 function RouteLoadingFallback() {
@@ -312,6 +316,8 @@ function App() {
               <Route path="/updates" element={<UpdatesPage />} />
               <Route path="/data-status" element={<DataStatusPage />} />
               <Route path="/methodology/activity-radar" element={<MethodologyActivityRadarPage />} />
+              <Route path="/council-activity" element={<CouncilActivityPage />} />
+              <Route path="/council-activity/:memberId" element={<CouncilActivityMemberPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

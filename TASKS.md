@@ -1,12 +1,12 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-12（Phase93-1でTASK-023「FAQ構造化データの実装」を、Google側の
-FAQPageリッチリザルト機能廃止〔2026年5月7日付〕の確認をもってDONEへ変更。BLOCKED
-7→6）
+最終更新日：2026-08-13（Phase94でTASK-062「延岡市議会 議員活動バロメーター」を新規実装。
+既存のActivityRadarSection基盤を再利用し、`/council-activity`一覧・比較ページと
+`/council-activity/:memberId`個人ページ27件を追加）
 
-現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-12時点）：
-DONE 92／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計101
+現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
+DONE 93／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計102
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -6803,3 +6803,77 @@ BLOCKED理由・再開条件：
 - 完了日：（BLOCKED、未完了）
 - コミットID：（後述）
 - 変更概要：`blockedTaskClassification.json`へTASK-047として機械可読に記録した。
+
+---
+
+### TASK-062 延岡市議会 議員活動バロメーター（Phase94）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示による新規機能）
+対象：`src/lib/councilActivityBarometer.ts`（新規）、`src/pages/CouncilActivityPage.tsx`（新規）、
+`src/pages/CouncilActivityMemberPage.tsx`（新規）、`src/pages/MemberDetailPage.tsx`、
+`src/pages/MethodologyActivityRadarPage.tsx`、`src/lib/seo.ts`、`scripts/lib/public-routes.mjs`、
+`src/App.tsx`
+依存関係：Phase68台で実装済みの議員詳細ページ「議会活動データ」レーダーチャート
+（`src/lib/activityRadar.ts`・`ActivityRadarSection.tsx`・`ActivityRadarChart.tsx`・
+`/methodology/activity-radar`）の存在を確認したうえで、その計算ロジックをそのまま再利用
+
+#### 実施内容
+
+- **重複実装の確認を最優先で実施**：ユーザー要求の「5指標レーダーチャート」「算定方法の
+  透明化」「対象記録なし≠0点」等は、既存の`src/lib/activityRadar.ts`（6指標：一般質問・
+  議会発言・出席状況・議案等の意思表示・提案討論等・情報公開）と`ActivityRadarSection.tsx`
+  （項目ごとの「算定方法を見る」展開）が既にほぼ同等の機能を実装済みであることを確認した。
+  このため、計算式を新規に作らず既存関数をそのまま再利用する方針とした（数値の二重管理・
+  食い違いを防ぐ）
+- 新規`src/lib/councilActivityBarometer.ts`：`MemberDetailPage.tsx`が個別に組み立てていた
+  6指標の入力ロジックを`getMemberActivityMetrics(member)`として抽出し、対象議員数を
+  `members.json`の配列長からそのまま導出（人数をコードへ固定しない）。対象期間ラベルも
+  `councilSessions.json`×会議録取得済み会期一覧から動的に算出する
+  `activityTargetPeriodLabel()`を新設し、`MemberDetailPage.tsx`側のハードコード文字列を
+  置き換えた
+- 新規`/council-activity`（一覧・比較ページ）：大見出し・サブ見出し・対象期間・注意書き、
+  サマリーカード3枚（議会内発言TOP3・一般質問実施率100%の議員・情報発信TOP3）、全26名の
+  比較表（列見出しクリックでソート、PC=表形式／390px=カード形式）、2〜3名選択して
+  レーダーチャートを並べる比較機能を実装。「請願・提案等」「出席状況」は一次資料が
+  無いため常に「評価対象外」と明示し、単一指標の順位は表示するが複数指標を合算した
+  「総合順位」は実装しない（ユーザー指示どおり）
+- 新規`/council-activity/:memberId`（個人版）：5〜6指標のレーダーチャート、実数付き
+  カード（1〜5段階の星表示＋実数・算定方法・出典・最終確認日）、各指標から元データ
+  （`/members/:id#questions`・`#votes`等）への直接リンク、AIによる人物評価は行わず
+  事実要約のみを表示
+- `MemberDetailPage.tsx`のレーダーチャートセクション直下に「議員活動バロメーターで
+  詳しく見る」の相互リンクを追加
+- ドキュメントの正確性修正：`MemberDetailPage.tsx`・`MethodologyActivityRadarPage.tsx`の
+  「議案等の意思表示は現時点で全議員が対象記録なし」という記述が、実際には記名投票1件
+  （27名分）で既に実値が入っていることを確認し、古い記述を訂正した
+- SEO：`/council-activity`・`/council-activity/:memberId`をcanonical・OGP・BreadcrumbList・
+  WebPage・Person（個人ページ）付きで実装し、`scripts/lib/public-routes.mjs`の
+  サイトマップ・プリレンダー対象へ追加（現職26名分の個人ページ＋一覧ページ、計27ページ）
+
+#### 対応しなかった項目（正直に記録）
+
+- 期間切替UI（現任期／年度別／全期間の切り替えボタン）は、データ設計面では
+  `councilSpeechPeriod`・`TRANSCRIPT_AVAILABLE_SESSION_IDS`を単一情報源として既に対応可能な
+  構造にしたが、UI側の実際の切り替え機能（複数任期分のデータが無いと意味を持たないため）は
+  今回実装していない。次に議員任期が切り替わった際に優先実装する
+- 「請願・提案等」「出席状況」は、議員別の一次資料（個別の出席記録、議員別の提案者情報）が
+  サイトに未収録のため、既存の`activityRadar.ts`と同じく常にdataStatus:"missing"のまま。
+  推測での補完は行っていない
+
+#### 検証結果
+
+- `validate:data`／`validate:freshness`／`validate:sources`／`validate:completeness`／
+  `validate:political-funds`／`typecheck`／`lint`／`test`（26/26）／`build`（prerender
+  1967/1967）／`validate:seo`（1968ページ、failures=0）／`validate:content`（1968ページ、
+  errors=0）／`release:check`（failures=0、既存warning2件のみ・無関係）すべて成功
+- 内部リンクグラフ監査（BFS）で新規27ページすべてがトップページから到達可能であることを
+  確認（孤立ページ0件、リンク切れ0件）
+- 既存データ件数（billVotes=1,177／現職議員=26／元議員=10／歴代市長=14／
+  政治資金団体=21／一般質問397・質問項目1,470）に変更なし
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：（後述）
+- 変更概要：上記のとおり。既存の議会活動データ基盤を再利用し、新規に一覧比較ページ・
+  個人詳細ページ・比較機能を追加した。
