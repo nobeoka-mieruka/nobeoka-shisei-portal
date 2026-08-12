@@ -3358,13 +3358,33 @@ try {
     const tag = `electionResults.json (${e.id ?? "id不明"})`;
     if (isBlank(e.electionName)) err(tag, "electionNameが空です");
     if (!VALID_ELECTION_TYPES.has(e.electionType)) err(tag, `未定義のelectionTypeです: ${e.electionType}`);
-    if (isBlank(e.electionDate) || Number.isNaN(Date.parse(e.electionDate))) err(tag, `electionDateの形式が不正です: ${e.electionDate}`);
+
+    const dc = e.dataCompleteness;
+    if (dc != null) {
+      for (const f of ["electionConfirmed", "candidateListConfirmed", "voteCountConfirmed", "turnoutConfirmed"]) {
+        if (typeof dc[f] !== "boolean") err(tag, `dataCompleteness.${f}がboolean型ではありません: ${dc[f]}`);
+      }
+    }
+    const candidateListConfirmed = dc == null || dc.candidateListConfirmed !== false;
+
+    const datePrecision = e.electionDatePrecision ?? "day";
+    if (datePrecision === "month") {
+      if (isBlank(e.electionDate) || !/^\d{4}-\d{2}$/.test(e.electionDate) || Number.isNaN(Date.parse(`${e.electionDate}-01`))) {
+        err(tag, `electionDate（月精度）の形式が不正です（YYYY-MM形式が必要）: ${e.electionDate}`);
+      }
+    } else if (isBlank(e.electionDate) || Number.isNaN(Date.parse(e.electionDate))) {
+      err(tag, `electionDateの形式が不正です: ${e.electionDate}`);
+    }
     if (e.announcementDate != null && Number.isNaN(Date.parse(e.announcementDate))) err(tag, `announcementDateの形式が不正です: ${e.announcementDate}`);
-    if (e.announcementDate != null && e.electionDate != null && e.announcementDate > e.electionDate) {
+    if (e.announcementDate != null && e.electionDate != null && datePrecision === "day" && e.announcementDate > e.electionDate) {
       err(tag, `announcementDate（${e.announcementDate}）がelectionDate（${e.electionDate}）より後になっています`);
     }
-    if (!Array.isArray(e.candidates) || e.candidates.length === 0) err(tag, "candidatesが空です");
-    if (e.candidateCount != null && Array.isArray(e.candidates) && e.candidateCount !== e.candidates.length) {
+    if (!Array.isArray(e.candidates)) {
+      err(tag, "candidatesが配列ではありません");
+    } else if (e.candidates.length === 0 && candidateListConfirmed) {
+      err(tag, "candidatesが空です（候補者一覧が未確認の場合はdataCompleteness.candidateListConfirmed=falseを設定してください）");
+    }
+    if (e.candidateCount != null && Array.isArray(e.candidates) && candidateListConfirmed && e.candidateCount !== e.candidates.length) {
       err(tag, `candidateCount（${e.candidateCount}）がcandidates配列の件数（${e.candidates.length}）と一致しません`);
     }
     if (!Array.isArray(e.sourceRefs) || e.sourceRefs.length === 0) err(tag, "sourceRefsが空です（出典なしの選挙結果は登録しないでください）");

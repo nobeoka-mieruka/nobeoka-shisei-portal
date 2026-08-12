@@ -35,6 +35,20 @@ export function electionResultById(id: string): ElectionResult | undefined {
   return electionResults.find((e) => e.id === id);
 }
 
+/** electionDate（"day"精度はYYYY-MM-DD、"month"精度はYYYY-MM）を表示用文字列に整形する。 */
+export function formatElectionDate(e: Pick<ElectionResult, "electionDate" | "electionDatePrecision">): string {
+  if (e.electionDatePrecision === "month") {
+    const [y, m] = e.electionDate.split("-");
+    return `${y}年${Number(m)}月（日は未確認）`;
+  }
+  return e.electionDate;
+}
+
+/** dataCompleteness未設定（従来データ）は全項目確認済みとして扱う。 */
+export function electionCandidateListConfirmed(e: Pick<ElectionResult, "dataCompleteness">): boolean {
+  return e.dataCompleteness == null || e.dataCompleteness.candidateListConfirmed !== false;
+}
+
 export function electionResultsByType(electionType: "mayor" | "councilMember"): ElectionResult[] {
   return electionResults.filter((e) => e.electionType === electionType).sort((a, b) => a.electionDate.localeCompare(b.electionDate));
 }

@@ -28,15 +28,37 @@ export interface ElectionCandidate {
   linkedProfileId: string | null;
 }
 
+/**
+ * 選挙結果の各項目がどこまで確認できているかを示すフラグ。
+ * 1999年より前の選挙など、実施年月までは公式資料（延岡市公式年表等）で確認できても、
+ * 候補者一覧・得票数・投票率までは確認できていない場合に使う。
+ * このフィールド自体が無い（undefined）場合は、従来どおり全項目確認済みの選挙として扱う
+ * （既存データの後方互換性のため）。
+ */
+export interface ElectionDataCompleteness {
+  /** 選挙が実施されたこと自体（実施年月・当選者名など）が一次資料で確認できているか。 */
+  electionConfirmed: boolean;
+  /** candidates配列が完全な候補者一覧か（一部のみ・未確認ならfalse）。 */
+  candidateListConfirmed: boolean;
+  /** 候補者ごとの得票数が確認できているか。 */
+  voteCountConfirmed: boolean;
+  /** turnoutPercent等の投票率関連項目が確認できているか。 */
+  turnoutConfirmed: boolean;
+}
+
 export interface ElectionResult {
   id: string;
   /** "延岡市長選挙" | "延岡市議会議員選挙" 等。 */
   electionName: string;
   electionType: "mayor" | "councilMember";
-  /** ISO形式。投票日。 */
+  /** ISO形式（electionDatePrecision="day"）または年月形式YYYY-MM（"month"）。投票日。 */
   electionDate: string;
+  /** electionDateの精度。省略時は"day"（従来どおりの完全な日付）として扱う。 */
+  electionDatePrecision?: "day" | "month";
   /** ISO形式。告示日。確認できない場合はnull。 */
   announcementDate: string | null;
+  /** 一部項目が未確認の選挙（1999年より前等）でのみ設定する。省略時は全項目確認済み扱い。 */
+  dataCompleteness?: ElectionDataCompleteness;
   /** 定数。確認できない場合はnull。 */
   seats: number | null;
   candidateCount: number | null;

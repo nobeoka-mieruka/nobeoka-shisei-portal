@@ -9,7 +9,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { electionResults } from "../lib/elections";
+import { electionResults, formatElectionDate, electionCandidateListConfirmed } from "../lib/elections";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -117,6 +117,7 @@ export function ElectionsPage() {
       ) : (
         <ul className="space-y-3">
           {filtered.map((e) => {
+            const candidateListConfirmed = electionCandidateListConfirmed(e);
             const electedCount = e.candidates.filter((c) => c.elected).length;
             return (
               <li key={e.id}>
@@ -130,14 +131,23 @@ export function ElectionsPage() {
                       {TYPE_LABEL[e.electionType]}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-on-surface-variant">投票日：{e.electionDate}</p>
-                  <p className="mt-1 text-xs text-on-surface-variant">
-                    定数：{e.seats ?? "確認中"}／候補者数：{e.candidateCount ?? e.candidates.length}／当選者数：{electedCount}
-                  </p>
-                  <p className="mt-1 text-xs text-on-surface-variant">
-                    投票率：{e.turnoutPercent != null ? `${e.turnoutPercent}%` : "確認中"}
-                  </p>
-                  <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">候補者一覧・得票数を見る</p>
+                  <p className="mt-1 text-xs text-on-surface-variant">投票日：{formatElectionDate(e)}</p>
+                  {candidateListConfirmed ? (
+                    <>
+                      <p className="mt-1 text-xs text-on-surface-variant">
+                        定数：{e.seats ?? "確認中"}／候補者数：{e.candidateCount ?? e.candidates.length}／当選者数：{electedCount}
+                      </p>
+                      <p className="mt-1 text-xs text-on-surface-variant">
+                        投票率：{e.turnoutPercent != null ? `${e.turnoutPercent}%` : "確認中"}
+                      </p>
+                      <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">候補者一覧・得票数を見る</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="mt-1 text-xs text-on-surface-variant">候補者一覧・得票数：未確認</p>
+                      <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">詳細を見る</p>
+                    </>
+                  )}
                 </Link>
               </li>
             );

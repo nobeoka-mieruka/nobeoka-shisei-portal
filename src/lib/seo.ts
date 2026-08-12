@@ -1669,17 +1669,21 @@ function electionDetailSeo(id: string, options?: SeoOptions): SeoResult {
   const election = electionResults.find((e) => e.id === id);
   if (!election) return notFound(`/elections/${id}`, "選挙結果が見つかりません");
 
-  const description = `${election.electionName}（${election.electionDate}投票）の候補者名・党派・得票数・当落を、${election.sourceRefs[0]?.sourceOrganization ?? "公式資料"}の公表資料に基づいて整理しています。`;
+  const dateLabel =
+    election.electionDatePrecision === "month"
+      ? `${election.electionDate.split("-")[0]}年${Number(election.electionDate.split("-")[1])}月`
+      : election.electionDate;
+  const description = `${election.electionName}（${dateLabel}投票）の候補者名・党派・得票数・当落を、${election.sourceRefs[0]?.sourceOrganization ?? "公式資料"}の公表資料に基づいて整理しています。`;
 
   return makeResult(
     {
       path: `/elections/${id}`,
-      pageTitle: `${election.electionName}（${election.electionDate}）の結果`,
+      pageTitle: `${election.electionName}（${dateLabel}）の結果`,
       description,
       breadcrumbs: [
         { label: "ホーム", to: "/" },
         { label: "選挙結果一覧", to: "/elections" },
-        { label: `${election.electionName}（${election.electionDate}）` },
+        { label: `${election.electionName}（${dateLabel}）` },
       ],
     },
     options,

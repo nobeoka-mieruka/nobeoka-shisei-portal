@@ -9,7 +9,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { BackLink } from "../components/BackLink";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { electionResultById, personLinkForCandidate } from "../lib/elections";
+import { electionResultById, personLinkForCandidate, formatElectionDate, electionCandidateListConfirmed } from "../lib/elections";
 import type { ElectionCandidate } from "../types/election";
 
 const TYPE_LABEL: Record<"mayor" | "councilMember", string> = {
@@ -46,6 +46,7 @@ export function ElectionDetailPage() {
 
   const candidates = sortedCandidates(election.candidates);
   const electedCount = candidates.filter((c) => c.elected).length;
+  const candidateListConfirmed = electionCandidateListConfirmed(election);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -62,7 +63,7 @@ export function ElectionDetailPage() {
           </span>
         </div>
         <p className="mt-2 text-sm text-on-primary-container/80">
-          投票日：{election.electionDate}
+          投票日：{formatElectionDate(election)}
           {election.announcementDate && `（告示日：${election.announcementDate}）`}
         </p>
       </div>
@@ -71,56 +72,68 @@ export function ElectionDetailPage() {
         <p className="rounded-xl bg-surface-container-low p-4 text-sm leading-relaxed text-on-surface">{election.notes}</p>
       )}
 
+      {!candidateListConfirmed && (
+        <p className="rounded-xl bg-surface-container-low p-4 text-sm leading-relaxed text-on-surface">
+          この選挙は実施年月までは公式資料で確認できていますが、候補者一覧・得票数・投票率はまだ確認できていません。確認でき次第、追記します。
+        </p>
+      )}
+
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard label="定数" value={election.seats ?? "確認中"} unit={election.seats != null ? "名" : ""} />
-        <StatCard label="候補者数" value={election.candidateCount ?? candidates.length} unit="名" />
-        <StatCard label="当選者数" value={electedCount} unit="名" />
+        <StatCard label="候補者数" value={candidateListConfirmed ? (election.candidateCount ?? candidates.length) : "確認中"} unit={candidateListConfirmed ? "名" : ""} />
+        <StatCard label="当選者数" value={candidateListConfirmed ? electedCount : "確認中"} unit={candidateListConfirmed ? "名" : ""} />
         <StatCard label="投票率" value={election.turnoutPercent != null ? election.turnoutPercent : "確認中"} unit={election.turnoutPercent != null ? "%" : ""} />
         <StatCard label="有権者数" value={election.eligibleVoters != null ? election.eligibleVoters.toLocaleString("ja-JP") : "確認中"} unit={election.eligibleVoters != null ? "人" : ""} />
         <StatCard label="無効票数" value={election.invalidVotes != null ? election.invalidVotes.toLocaleString("ja-JP") : "確認中"} unit={election.invalidVotes != null ? "票" : ""} />
       </div>
 
-      <SectionCard title="候補者一覧（得票数順）">
-        <FinanceTable
-          caption={`${election.electionName}（${election.electionDate}）の候補者一覧`}
-          rows={candidates}
-          rowKey={(c, i) => `${c.name}-${i}`}
-          columns={[
-            {
-              header: "当落",
-              render: (c) => (
-                <span
-                  className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    c.elected ? "bg-primary-container text-on-primary-container" : "bg-surface-container-high text-on-surface-variant"
-                  }`}
-                >
-                  {c.elected ? "当選" : "落選"}
-                </span>
-              ),
-            },
-            {
-              header: "候補者名",
-              render: (c) => {
-                const link = personLinkForCandidate(c.linkedProfileId);
-                return (
-                  <span>
-                    {c.name}
-                    {c.age != null && <span className="ml-1 text-xs text-on-surface-variant">（{c.age}歳）</span>}
-                    {link && (
-                      <a href={link.href} className="ml-2 text-xs text-primary hover:underline">
-                        {link.label}
-                      </a>
-                    )}
+      {candidateListConfirmed ? (
+        <SectionCard title="候補者一覧（得票数順）">
+          <FinanceTable
+            caption={`${election.electionName}（${formatElectionDate(election)}）の候補者一覧`}
+            rows={candidates}
+            rowKey={(c, i) => `${c.name}-${i}`}
+            columns={[
+              {
+                header: "当落",
+                render: (c) => (
+                  <span
+                    className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
+                      c.elected ? "bg-primary-container text-on-primary-container" : "bg-surface-container-high text-on-surface-variant"
+                    }`}
+                  >
+                    {c.elected ? "当選" : "落選"}
                   </span>
-                );
+                ),
               },
-            },
-            { header: "党派", render: (c) => c.party ?? "確認中" },
-            { header: "新現元", render: (c) => c.incumbencyStatus ?? "確認中" },
-            { header: "得票数", align: "right", render: (c) => (c.votes != null ? `${c.votes.toLocaleString("ja-JP")}票` : "確認中") },
-          ]}
-        />
-      </SectionCard>
+              {
+                header: "候補者名",
+                render: (c) => {
+                  const link = personLinkForCandidate(c.linkedProfileId);
+                  return (
+                    <span>
+                      {c.name}
+                      {c.age != null && <span className="ml-1 text-xs text-on-surface-variant">（{c.age}歳）</span>}
+                      {link && (
+                        <a href={link.href} className="ml-2 text-xs text-primary hover:underline">
+                          {link.label}
+                        </a>
+                      )}
+                    </span>
+                  );
+                },
+              },
+              { header: "党派", render: (c) => c.party ?? "確認中" },
+              { header: "新現元", render: (c) => c.incumbencyStatus ?? "確認中" },
+              { header: "得票数", align: "right", render: (c) => (c.votes != null ? `${c.votes.toLocaleString("ja-JP")}票` : "確認中") },
+            ]}
+          />
+        </SectionCard>
+      ) : (
+        <SectionCard title="候補者一覧">
+          <p className="p-4 text-sm text-on-surface-variant">候補者一覧はまだ確認できていません。</p>
+        </SectionCard>
+      )}
 
       <SectionCard title="出典">
         <ul className="space-y-2 text-xs leading-relaxed text-on-surface-variant">
@@ -137,7 +150,7 @@ export function ElectionDetailPage() {
       </SectionCard>
 
       <LastUpdated className="mt-4" />
-      <CorrectionRequestButton pageName={`${election.electionName}（${election.electionDate}）`} />
+      <CorrectionRequestButton pageName={`${election.electionName}（${formatElectionDate(election)}）`} />
     </div>
   );
 }
