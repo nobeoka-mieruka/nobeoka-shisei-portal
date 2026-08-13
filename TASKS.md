@@ -1,13 +1,13 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase105〜109でTASK-064「build安定性監査＋一次資料最終探索＋
-評価語彙整理」を実施。build失敗の定量的な原因調査、出席状況・委員会内部発言の追加探索
-（新規データ発見なし）、個人別賛否データ1件27名分の新規登録、TASK-004再確認、
-research_exhausted等の評価語彙をpresentation層に導入しUIをcivilian化した）
+最終更新日：2026-08-13（Phase110〜114でTASK-065「Evidence Availability統一・データ充足UI・
+採決分類整理・元議員拡張準備」を実施。9区分の評価語彙を共通化し、156セル可視化・
+指標別内訳を実装、採決方式と個人別公開状況を別軸へ整理（aggregate/not_disclosedの重複を
+解消）、元議員10名分のID整合性確認と試験実装、WAITING_EXTERNAL自動再確認の仕組み化を行った）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 95／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計104
+DONE 96／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計105
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -7047,3 +7047,83 @@ waiting_external）を追加し、実データ（disclosed件数・会議録公�
   （27名分）の新規登録、TASK-004の再確認、評価語彙（research_exhausted等）の
   presentation層への導入とUI civilian化を実施した。既存の議会活動データ計算式・
   RadarMetric.dataStatusの3区分は一切変更していない。
+
+### TASK-065 Evidence Availability統一・データ充足UI・採決分類整理・元議員拡張準備（Phase110〜114）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示による語彙統一・UI改善・データモデル整理・拡張準備）
+対象：`src/lib/evidenceAvailability.ts`（新規）、`src/lib/councilActivityBarometer.ts`、
+`src/lib/billVotes.ts`、`src/lib/formerMemberActivity.ts`（新規）、`src/types/index.ts`、
+`src/data/billVotes.json`、`src/data/blockedTaskClassification.json`、
+`scripts/validate-data.mjs`、`scripts/check-pending-council-minutes.mjs`（新規）、
+`.github/workflows/update-council-documents.yml`、`src/pages/CouncilActivityPage.tsx`、
+`src/pages/CouncilActivityMemberPage.tsx`、`src/pages/DataStatusPage.tsx`、
+`src/pages/MemberDetailPage.tsx`、`src/pages/BillVoteDetailPage.tsx`
+
+既存のactivityRadar.tsの計算関数・RadarMetric.dataStatusの3区分・既存の議員活動データ
+計算ロジックは一切変更していない。総合ランキングは作成していない。
+
+**Phase110（Evidence Availability状態体系の統一）**：`confirmed/confirmed_zero/partial/
+not_collected/waiting_external/source_not_published/research_exhausted/not_applicable/
+unknown`の9区分＋市民向け日本語ラベル・説明文・記号（○△―…）を`src/lib/
+evidenceAvailability.ts`へ新設。`councilActivityBarometer.ts`の従来の4区分ローカル型を
+この共通語彙へ寄せた（`getEvidenceAvailabilitySummary()`の表示文言が共通ラベルから
+自動生成されるようになった）。大規模な全面書き換えは行わず、既存の議員活動バロメーター系
+ページのみへ適用。財政・政治資金・歴代市長・選挙・一般質問・委員会への展開候補は
+設計メモとして`evidenceAvailability.ts`末尾に記録（実装は今回行わない）。
+
+**Phase111（データ充足状況画面の完成＋156セル可視化）**：`getIndicatorCoverageDetail()`
+（指標ごとの確認人数・会議録確認済み会期数・根拠一次資料件数・不足内容の説明）と
+`get156CellMatrix()`（26名×6指標の記号一覧）を新設。`/council-activity`に「指標別の
+詳しい内訳」パネルと、折りたたみ式の156セル一覧（PC：表形式／スマホ：議員ごとのカード）を
+追加。「データ充足率」と「議員活動点（レーダーチャートの実数）」が別物であることを明記する
+注意書きを追加。「0点」という表現は使用していない。
+
+**Phase112（個人別賛否データモデル整理）**：Phase108報告の「aggregate_only」（1,151件）と
+「not_disclosed」（521件）が概念的に重複していた問題を解消。`classifyVoteMethod()`
+（unanimous/standing_vote/voice_vote/recorded_vote/no_vote/unknown、既存の日本語
+voteMethodフィールドから導出、データ移行なし）と`classifyVoteDisclosure()`
+（individual/aggregate/not_disclosed/unknown、重複のない4区分：individual=2、
+aggregate=630、not_disclosed=521、unknown=24、合計1,177）を`billVotes.ts`へ新設し
+`/data-status`の文言を精緻化。個人別確認可能2件を最終再検証した結果、
+2019-09-gian-47の`memberVotes`が実際には9/13の`votingDate`ではなく9/30の再議
+（地方自治法176条）の記名投票結果であるという日付の不整合を発見し、新規フィールド
+`memberVoteRecordedDate`を追加して是正（3ページの表示を修正）。個人ページの
+「0件」誤解表示は、既存のガード（Phase96/97時点で実装済み）により問題なしと確認。
+
+**Phase113（元議員・歴代議員への活動DB拡張準備）**：`formerMembers.json`10名の
+ID・氏名（異体字含む）が`councilSpeechSummaries.json`・`billVotes.json`と全件
+一致することを確認（既存の異体字正規化スキームで0件不一致）。`src/lib/
+formerMemberActivity.ts`を新設し、本番ページには一切組み込まない試験実装として
+`getFormerMemberActivityTrial()`を作成（一般質問・議会内発言・議案等の意思表示の
+3指標のみ、出席状況・請願提案等・情報発信はFormerMember型のデータ構造上、
+今回は対象外＝not_applicable）。servedSessions件数上位5名（fm01/fm07/fm06/fm09/fm02）で
+実際に試験実行し、任期外を欠席・0点扱いしていないこと、総合順位を作っていないことを
+確認した。`/council-activity/history`等への将来拡張時の設計メモとして記録。
+
+**Phase114（自動更新・最終UX監査）**：`scripts/check-pending-council-minutes.mjs`を新設し、
+`.github/workflows/update-council-documents.yml`（既存の日次自動更新）へ追加。
+`scripts/lib/minutes-source.mjs`の`listSessionsForYear()`を使い、令和8年5月臨時会・
+6月定例会が会議録検索システムに現れたかを毎日自動確認する（新資料が見つかった場合も
+自動抽出はせず、事実の記録とlastCheckedAt/attemptCount更新のみ行う）。市民向け文言監査：
+`/council-activity`・`/data-status`の主要面には生の英語コードが露出していないことを確認、
+`/methodology/activity-radar`のコード併記は透明性目的として妥当と判断。「能力・優劣を
+評価するものではない」旨の注記が2〜3名比較カード内にも表示されるよう追加。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ）／`validate:freshness`
+（errors=0）／`validate:sources`（errors=0 info=40）／`validate:completeness`
+（errors=0）／`validate:political-funds`（errors=0 info=2）／`typecheck`／`lint`／
+`test`（26/26）／`build`を2回連続実行しいずれも成功（prerender 1967/1967、各回約56秒、
+ピークメモリ約859MB、Phase105時点の約854〜861MBと同水準で悪化なし）／`validate:seo`
+（1968ページ、failures=0）／`validate:content`（1968ページ、errors=0）／`release:check`
+（failures=0、既存warning2件のみ）すべて成功。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：e4aaf51／15ca96c／0758a98／0b17929／c4fcf36
+- 変更概要：上記のとおり。Evidence Availability語彙統一、データ充足状況の
+  可視化強化、採決方式と個人別公開状況の分離、元議員への拡張準備（試験実装のみ）、
+  WAITING_EXTERNAL自動再確認の仕組み化を実施した。既存の議会活動データ計算式・
+  RadarMetric.dataStatusは一切変更していない。総合ランキングは作成していない。
