@@ -21,6 +21,7 @@ import electionResultsData from "../data/electionResults.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
+import { summarizeVoteClassification } from "../lib/billVotes";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import type {
   CouncilMember,
@@ -321,9 +322,7 @@ export function DataStatusPage() {
     linkTo: `/${type === "bill" ? "bills" : type === "ordinance" ? "ordinances" : type === "petition" ? "petitions" : "requests"}`,
   }));
 
-  const billVotesWithMemberVotes = billVotes.filter((b) => b.memberVotes && b.memberVotes.length > 0).length;
-  const billVotesNotDisclosed = billVotes.filter((b) => b.individualVoteDisclosureStatus === "notDisclosed").length;
-  const billVotesUnconfirmed = billVotes.length - billVotesWithMemberVotes - billVotesNotDisclosed;
+  const voteClassification = summarizeVoteClassification(billVotes);
   const billVotesVoteMethodKnown = billVotes.filter((b) => b.voteMethod).length;
   const billVotesCommitteeKnown = billVotes.filter((b) => b.committee).length;
   const billVotesProposerTypeKnown = billVotes.filter((b) => b.proposerType).length;
@@ -331,7 +330,7 @@ export function DataStatusPage() {
     label: "議案ごとの議決結果（既存機能）",
     count: billVotes.length,
     unit: "件",
-    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳：公開あり${billVotesWithMemberVotes}件（記名投票等）／会議録で非公開と確認済み${billVotesNotDisclosed}件（起立採決等で個人名が記録されていないことを会議録で確認）／未確認${billVotesUnconfirmed}件（会議録を未確認）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
+    detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳（Phase112で採決方式と公開状況を別軸に整理）：個人別に公開${voteClassification.byDisclosure.individual}件（記名投票等）／採決方式は判明しているが個人別は未確認${voteClassification.byDisclosure.aggregate}件（起立採決・簡易採決等で、会議録には方式の記載はあるが個人別の内訳までは未調査）／個人別は非公開と確認済み${voteClassification.byDisclosure.not_disclosed}件（会議録で非公開と確認済み）／採決方式・公開状況とも不明${voteClassification.byDisclosure.unknown}件（会議録自体が未公開）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
     linkTo: "/bills/votes",
     linkLabel: "議案ごとの賛否を見る",
   };

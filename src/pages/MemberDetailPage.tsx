@@ -959,6 +959,11 @@ export function MemberDetailPage() {
                         <BillVoteBadge vote={vote.vote} />
                       </div>
                       <p className="mt-1 text-xs text-on-surface-variant">議会全体の結果：{bill.result}</p>
+                      {bill.memberVoteRecordedDate && bill.memberVoteRecordedDate !== bill.votingDate && (
+                        <p className="mt-1 text-xs text-on-surface-variant">
+                          ※個人別の賛否は{formatJapaneseDate(bill.memberVoteRecordedDate)}の採決（再議等）の記録です。
+                        </p>
+                      )}
                     </li>
                   );
                 })}

@@ -274,6 +274,10 @@ for (const b of billVotes) {
   }
   if (b.submittedDate && !DATE_RE.test(b.submittedDate)) err(tag, `submittedDateの形式が不正です: ${b.submittedDate}`);
   if (b.votingDate && !DATE_RE.test(b.votingDate)) err(tag, `votingDateの形式が不正です: ${b.votingDate}`);
+  if (b.memberVoteRecordedDate) {
+    if (!DATE_RE.test(b.memberVoteRecordedDate)) err(tag, `memberVoteRecordedDateの形式が不正です: ${b.memberVoteRecordedDate}`);
+    if ((b.memberVotes ?? []).length === 0) err(tag, "memberVoteRecordedDateが設定されていますがmemberVotesが空です");
+  }
   if (!VALID_BILL_VOTE_RESULTS.has(b.result)) err(tag, `未定義の議決結果です: ${b.result}`);
 
   const seenVoters = new Set();

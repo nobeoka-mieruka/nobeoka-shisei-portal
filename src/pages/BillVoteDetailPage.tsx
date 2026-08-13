@@ -405,6 +405,12 @@ export function BillVoteDetailPage() {
 
       {/* 議員別賛否 */}
       <SectionCard title="議員別の賛否">
+        {bill.memberVoteRecordedDate && bill.memberVoteRecordedDate !== bill.votingDate && (
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            ※上記の議決日（{bill.votingDate && formatJapaneseDate(bill.votingDate)}）は議案の主たる議決日です。以下の議員別の賛否は、
+            {formatJapaneseDate(bill.memberVoteRecordedDate)}に実施された採決（再議等）の記録です。
+          </p>
+        )}
         {bill.memberVotes.length > 0 ? (
           <ul className="space-y-2">
             {bill.memberVotes.map((v) => (

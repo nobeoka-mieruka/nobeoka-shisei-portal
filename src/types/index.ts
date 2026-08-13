@@ -1223,6 +1223,15 @@ export interface BillVoteItem {
   /** 個人別賛否の公開状況。未設定はunconfirmedと同義に扱う（可決/否決の結果だけから推測しないこと）。 */
   individualVoteDisclosureStatus?: IndividualVoteDisclosureStatus;
   /**
+   * memberVotesが実際に記録された採決の年月日（Phase112）。
+   * 通常はvotingDateと同一だが、再議（地方自治法176条等）のように、議案の主たる議決日
+   * （votingDate）と、個人別に賛否が記録された採決の実施日が異なる場合にのみ設定する。
+   * 例：議案が9/13に修正可決（votingDate）された後、市長の再議により9/30に記名投票で
+   * 「さきの議決のとおり決定」された場合、memberVotesは9/30の記名投票結果のため、
+   * memberVoteRecordedDate=9/30とする。未設定の場合はvotingDateと同一とみなす。
+   */
+  memberVoteRecordedDate?: string;
+  /**
    * 施行日（条例の制定・改正議案等で、公式資料に明記がある場合のみ設定する）。
    * 単一の施行日に整理できない場合（複数の規定でそれぞれ異なる日から施行される等）は、
    * 自由記述の文字列として登録する（例："令和6年4月1日（給料表）・令和6年12月1日（期末勤勉手当）、

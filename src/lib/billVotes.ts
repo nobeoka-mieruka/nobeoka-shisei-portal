@@ -1,4 +1,4 @@
-import type { BillPublicationStatus, BillVerificationStatus, BillMemberVoteStatus, BillVoteItem } from "../types";
+import type { BillPublicationStatus, BillVerificationStatus, BillMemberVoteStatus, BillVoteItem, BillVoteMethod } from "../types";
 
 /**
  * 一般公開ページに表示してよい議案かどうか。
@@ -112,3 +112,90 @@ export const billVoteSymbols: Record<BillMemberVoteStatus, string> = {
   abstained: "△",
   unconfirmed: "？",
 };
+
+/**
+ * Phase112：採決方式（voteMethod）と個人別結果の公開状態（disclosureStatus）を、
+ * 混同しない別軸として整理するための分類。
+ *
+ * 【背景】Phase108までの報告で使っていた「aggregate_only」（1,151件）と
+ * 「not_disclosed」（521件、既存individualVoteDisclosureStatusの値をそのまま集計したもの）は、
+ * 実際には概念が重なっていた（aggregate_onlyの内訳は「not_disclosed（521件、個人別非公開と
+ * 確認済み）」＋「未調査だが採決方式は判明している630件」の合算だった）。本モジュールは
+ * 既存フィールド（voteMethod・individualVoteDisclosureStatus・memberVotes）から、
+ * 重複のない4区分（individual/aggregate/not_disclosed/unknown）を導出する。
+ * 既存データへの書き込みは行わない（表示・集計専用の派生ロジック）。
+ */
+export type VoteMethodCategory = "unanimous" | "standing_vote" | "voice_vote" | "recorded_vote" | "no_vote" | "unknown";
+
+/** 個人別結果の公開状態。「aggregate」は採決方式は判明しているが個人別の内訳は確認できていない
+ * （＝unconfirmed）状態、「not_disclosed」は個人別に非公開であることを一次資料で確認済みの状態。
+ * この2つを混同しないために別の値として区別する。 */
+export type VoteDisclosureCategory = "individual" | "aggregate" | "not_disclosed" | "unknown";
+
+const VOTE_METHOD_CATEGORY_MAP: Partial<Record<BillVoteMethod, VoteMethodCategory>> = {
+  全会一致: "unanimous",
+  起立多数: "standing_vote",
+  起立少数: "standing_vote",
+  簡易採決: "voice_vote",
+  記名投票: "recorded_vote",
+  // 無記名投票（秘密投票）は「記名投票」とは正反対の性質（氏名が残らない）のため、
+  // recorded_voteへ分類すると事実と逆になる。専用区分は設けず、現時点でデータが0件のため
+  // unknownとして扱う（将来該当議案が現れた場合は要見直し）。
+  無記名投票: "unknown",
+  採決なし: "no_vote",
+  確認できず: "unknown",
+};
+
+export const VOTE_METHOD_CATEGORY_LABELS_JA: Record<VoteMethodCategory, string> = {
+  unanimous: "全会一致",
+  standing_vote: "起立採決",
+  voice_vote: "簡易採決（異議なし採決）",
+  recorded_vote: "記名投票",
+  no_vote: "採決なし",
+  unknown: "不明",
+};
+
+export const VOTE_DISCLOSURE_CATEGORY_LABELS_JA: Record<VoteDisclosureCategory, string> = {
+  individual: "個人別に公開",
+  aggregate: "採決方式は判明（個人別は未確認）",
+  not_disclosed: "個人別は非公開と確認済み",
+  unknown: "採決方式・公開状況とも不明",
+};
+
+export function classifyVoteMethod(bill: BillVoteItem): VoteMethodCategory {
+  if (!bill.voteMethod) return "unknown";
+  return VOTE_METHOD_CATEGORY_MAP[bill.voteMethod] ?? "unknown";
+}
+
+/**
+ * 個人別結果の公開状態を判定する。
+ * 優先順位：①memberVotesが実在すれば"individual"（最も確実な事実）
+ * ②individualVoteDisclosureStatus==="notDisclosed"なら"not_disclosed"（非公開と確認済み）
+ * ③voteMethodが判明していれば"aggregate"（採決方式は分かるが個人別は未調査）
+ * ④それ以外は"unknown"
+ */
+export function classifyVoteDisclosure(bill: BillVoteItem): VoteDisclosureCategory {
+  if (bill.memberVotes.length > 0) return "individual";
+  if (bill.individualVoteDisclosureStatus === "notDisclosed") return "not_disclosed";
+  if (bill.voteMethod) return "aggregate";
+  return "unknown";
+}
+
+export interface VoteClassificationSummary {
+  totalBillCount: number;
+  byMethod: Record<VoteMethodCategory, number>;
+  byDisclosure: Record<VoteDisclosureCategory, number>;
+}
+
+export function summarizeVoteClassification(bills: BillVoteItem[]): VoteClassificationSummary {
+  const byMethod = { unanimous: 0, standing_vote: 0, voice_vote: 0, recorded_vote: 0, no_vote: 0, unknown: 0 } as Record<
+    VoteMethodCategory,
+    number
+  >;
+  const byDisclosure = { individual: 0, aggregate: 0, not_disclosed: 0, unknown: 0 } as Record<VoteDisclosureCategory, number>;
+  for (const b of bills) {
+    byMethod[classifyVoteMethod(b)]++;
+    byDisclosure[classifyVoteDisclosure(b)]++;
+  }
+  return { totalBillCount: bills.length, byMethod, byDisclosure };
+}

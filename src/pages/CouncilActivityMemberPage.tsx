@@ -253,7 +253,7 @@ export function CouncilActivityMemberPage() {
                       <span aria-hidden="true">{billVoteSymbols[b.vote]}</span> {billVoteLabels[b.vote]}
                     </span>
                   </div>
-                  {b.votingDate && <p className="mt-0.5 text-xs text-on-surface-variant">{formatJapaneseDate(b.votingDate)}</p>}
+                  {b.recordedVoteDate && <p className="mt-0.5 text-xs text-on-surface-variant">{formatJapaneseDate(b.recordedVoteDate)}</p>}
                 </li>
               ))}
             </ul>
