@@ -52,6 +52,22 @@ const formerMemberServedSessions = new Map();
 try {
   const formerMembers = readJson("src/data/formerMembers.json");
   if (!Array.isArray(formerMembers)) throw new Error("配列ではありません");
+
+  // Phase121：servedSessions（会期単位の在職確認）が無くても、electionResults.jsonに
+  // 当選記録（linkedProfileId）がある人物は「A. 選挙当選記録」という別の根拠区分として
+  // 有効なため、servedSessions必須ルールの例外として認める。
+  let personIdsWithElectionWin = new Set();
+  try {
+    const electionResultsForCheck = readJson("src/data/electionResults.json");
+    for (const e of electionResultsForCheck) {
+      for (const c of e.candidates ?? []) {
+        if (c.elected && c.linkedProfileId) personIdsWithElectionWin.add(c.linkedProfileId);
+      }
+    }
+  } catch {
+    // electionResults.jsonが読めない場合は例外を適用しない（従来どおりservedSessions必須）。
+  }
+
   for (const fm of formerMembers) {
     formerMemberServedSessions.set(fm.id, new Set(Array.isArray(fm.servedSessions) ? fm.servedSessions : []));
     const tag = `formerMembers.json (${fm.id ?? "id不明"})`;
@@ -60,7 +76,12 @@ try {
     else formerMemberIds.add(fm.id);
     if (isBlank(fm.name)) err(tag, "nameが空です");
     if (!Array.isArray(fm.servedSessions) || fm.servedSessions.length === 0) {
-      err(tag, "servedSessionsが空です（在職を確認できた会期を1件以上指定してください）");
+      if (!personIdsWithElectionWin.has(fm.id)) {
+        err(
+          tag,
+          "servedSessionsが空です（在職を確認できた会期、またはelectionResults.jsonの当選記録リンクのいずれかが必要です）",
+        );
+      }
     }
     if (fm.lastVerified && !DATE_RE.test(fm.lastVerified)) err(tag, `lastVerifiedの形式が不正です: ${fm.lastVerified}`);
   }

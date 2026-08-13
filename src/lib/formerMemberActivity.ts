@@ -8,7 +8,6 @@ import {
   calculateQuestionActivityIndex,
   calculateSpeechActivityIndex,
   calculateVotingDisclosureIndex,
-  eligibleSessionIdsFor,
   type RadarMetric,
 } from "./activityRadar";
 
@@ -26,11 +25,18 @@ import {
  * 【現職向けgetMemberActivityMetrics()との違い】
  * - `currentTermPublicSpeeches()`ではなく`publicSpeeches()`を使う。前者は
  *   `record.isFormerMember`を明示的に除外する設計のため、元議員には使えない。
- * - `eligibleSessionIdsFor({isFormerMember: true, servedSessions})`を使うことで、
- *   在職していなかった会期を分母からも分子からも除外する（missingでも0でもなく、
- *   「対象外（not_applicable）」として扱う。既存のeligibleSessionIdsFor自体は
- *   Phase94以前から存在する設計で、今回は「実際に元議員に対して正しく動くか」を
- *   検証しただけで、ロジックの変更は行っていない）。
+ * - 在職していなかった会期は、分母からも分子からも除外する（missingでも0でもなく、
+ *   「対象外（not_applicable）」として扱う）。
+ * - 【Phase122の発見】`activityRadar.ts`の`TRANSCRIPT_AVAILABLE_SESSION_IDS`は
+ *   `questionCollectionStatus.json`（現議員任期＝2023-04-23以降のみを対象に機械集計した
+ *   ファイル、そのnote欄に明記）由来のため、2019-06〜2023-03の16会期は「取得済み」の
+ *   対象外になっている。ところが`councilSpeechSummaries.json`自体には、別の一次資料調査
+ *   （旧任期一般質問アーカイブ拡張）により、この16会期分の発言データが既に登録されている。
+ *   現職議員側の`eligibleSessionIdsFor()`・`TRANSCRIPT_AVAILABLE_SESSION_IDS`は
+ *   一切変更していない（現職の対象期間は「現在の任期」に統一する設計そのものが正しいため）。
+ *   元議員側だけ、`councilSpeechSummaries.json`に実際に発言データが存在する会期IDの集合
+ *   （`historicalSpeechAvailableSessionIds`、下記で動的に算出）を対象会期として使う。
+ *   計算式（`calculateQuestionActivityIndex`等）自体は一切変更していない。
  * - 出席状況・請願提案等・情報発信の3指標は、元議員側のデータ構造
  *   （FormerMember型：id/name/nameKana/servedSessions/note/sourceNoteのみで、
  *   現職のfactionId/committees/profileUrl/sns等に相当する構造化フィールドが無い）
@@ -42,6 +48,22 @@ const formerMembers = formerMembersData as FormerMember[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
+
+/**
+ * councilSpeechSummaries.jsonに実際に公開発言データが存在する会期IDの集合（動的算出、
+ * ハードコードしない）。`TRANSCRIPT_AVAILABLE_SESSION_IDS`（現議員任期のみを対象に集計した
+ * questionCollectionStatus.json由来）より広い範囲をカバーする。元議員の対象会期判定にのみ使う。
+ */
+const historicalSpeechAvailableSessionIds: string[] = [
+  ...new Set(
+    speechSummaryData.members.flatMap((m) => (m.speeches ?? []).filter((s) => s.isPublished).map((s) => s.sessionId)),
+  ),
+];
+
+/** 元議員のservedSessionsのうち、実際に発言データが存在する会期のみを対象とする（在職確認会期の絞り込み）。 */
+function eligibleSessionIdsForFormerMember(servedSessions: string[]): string[] {
+  return servedSessions.filter((id) => historicalSpeechAvailableSessionIds.includes(id));
+}
 
 export interface FormerMemberActivity {
   formerMemberId: string;
@@ -81,7 +103,7 @@ function servedPeriodLabelOf(fm: FormerMember): string {
 }
 
 export function getFormerMemberActivity(fm: FormerMember): FormerMemberActivity {
-  const eligibleSessions = eligibleSessionIdsFor({ isFormerMember: true, servedSessions: fm.servedSessions });
+  const eligibleSessions = eligibleSessionIdsForFormerMember(fm.servedSessions);
   const speechRecord = findMemberSpeechRecord(speechSummaryData.members, fm.id);
   const speeches = publicSpeeches(speechRecord);
   const memberAllBillVotes = billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === fm.id));
