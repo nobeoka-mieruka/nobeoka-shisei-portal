@@ -33,6 +33,12 @@ import {
   TRANSCRIPT_AVAILABLE_SESSION_IDS,
   type RadarMetric,
 } from "./activityRadar";
+import {
+  evidenceAvailabilityLabel,
+  evidenceAvailabilitySymbol,
+  type EvidenceAvailabilityCode,
+  type EvidenceAvailabilityEntry,
+} from "./evidenceAvailability";
 
 /**
  * 「延岡市議会 議員活動バロメーター」（/council-activity、/council-activity/:memberId）用の
@@ -247,15 +253,23 @@ export interface MemberVoteEvidence {
   /** 賛否の内訳（disclosedBillCountの内数、vote種別ごとの件数）。 */
   breakdown: Partial<Record<BillMemberVoteStatus, number>>;
   /** 直近5件（新しい順）。全件は/members/:idで確認できるため一覧化はしない。 */
-  recentBills: { id: string; billNumber: string; billTitle: string; votingDate: string | null; vote: BillMemberVoteStatus }[];
+  recentBills: {
+    id: string;
+    billNumber: string;
+    billTitle: string;
+    /** 個人別の賛否が実際に記録された採決日（再議等でvotingDateと異なる場合はmemberVoteRecordedDateを優先）。 */
+    recordedVoteDate: string | null;
+    vote: BillMemberVoteStatus;
+  }[];
   /** サイト全体の登録議案数（この議員に限らない、比較の分母の参考値）。 */
   totalBillCountSitewide: number;
 }
 
 export function getMemberVoteEvidence(member: CouncilMember): MemberVoteEvidence {
+  const recordedDateOf = (b: BillVoteItem) => b.memberVoteRecordedDate ?? b.votingDate;
   const disclosed = billVotes
     .filter((b) => b.memberVotes.some((v) => v.memberId === member.id))
-    .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""));
+    .sort((a, b) => (recordedDateOf(b) ?? "").localeCompare(recordedDateOf(a) ?? ""));
 
   const breakdown: Partial<Record<BillMemberVoteStatus, number>> = {};
   for (const b of disclosed) {
@@ -270,7 +284,7 @@ export function getMemberVoteEvidence(member: CouncilMember): MemberVoteEvidence
       id: b.id,
       billNumber: b.billNumber,
       billTitle: b.billTitle,
-      votingDate: b.votingDate ?? null,
+      recordedVoteDate: recordedDateOf(b) ?? null,
       vote: b.memberVotes.find((v) => v.memberId === member.id)!.vote,
     })),
     totalBillCountSitewide: billVotes.length,
@@ -323,27 +337,153 @@ export function getIndicatorCoverage(): IndicatorCoverage[] {
 }
 
 /**
- * Phase109：市民向けの「何が、どこまで確認できているか」サマリー。
+ * Phase111：指標ごとの「データ充足状況」詳細（人数だけでなく、会期数・一次資料件数・
+ * 不足している内容を明示する）。「活動評価値」（レーダーチャートの点数）とは別物であり、
+ * この詳細は資料の網羅度の説明にとどめる（充足率が高い＝活動が優れている、ではない）。
+ */
+export interface IndicatorCoverageDetail {
+  indicatorKey: string;
+  indicatorLabel: string;
+  confirmedMemberCount: number;
+  totalMemberCount: number;
+  /** 会議録を確認できた会期数（会期の概念がない指標はnull）。 */
+  confirmedSessionCount: number | null;
+  /** この指標の根拠となる一次資料の件数と、その単位の説明。 */
+  sourceRecordCount: number;
+  sourceRecordUnit: string;
+  /** 何が不足しているかの市民向け説明。 */
+  missingDescription: string;
+}
+
+export function getIndicatorCoverageDetail(): IndicatorCoverageDetail[] {
+  const coverage = getIndicatorCoverage();
+  const byKey = new Map(coverage.map((c) => [c.indicatorKey, c]));
+  const confirmedSessionCount = TRANSCRIPT_AVAILABLE_SESSION_IDS.length;
+  const speechRecordCount = speechSummaryData.members.reduce((sum, m) => sum + (m.speeches?.length ?? 0), 0);
+  const questionItemCount = speechSummaryData.members.reduce(
+    (sum, m) => sum + (m.speeches ?? []).reduce((s2, sp) => s2 + (sp.questionItems?.length ?? 0), 0),
+    0,
+  );
+  const disclosedBillCount = billVotes.filter((b) => b.memberVotes.length > 0).length;
+
+  const defs: Omit<IndicatorCoverageDetail, "confirmedMemberCount" | "totalMemberCount">[] = [
+    {
+      indicatorKey: "question",
+      indicatorLabel: "一般質問",
+      confirmedSessionCount,
+      sourceRecordCount: speechRecordCount,
+      sourceRecordUnit: `発言記録${speechRecordCount}件（質問項目計${questionItemCount}件）`,
+      missingDescription: "会議録が未公開の会期は対象から除外しています（「質問しなかった」とはみなしません）。",
+    },
+    {
+      indicatorKey: "speech",
+      indicatorLabel: "議会内発言",
+      confirmedSessionCount,
+      sourceRecordCount: speechRecordCount,
+      sourceRecordUnit: `発言記録${speechRecordCount}件（質問項目計${questionItemCount}件）`,
+      missingDescription: "一般質問と同じ会議録本文が根拠です。会議録が未公開の会期は対象から除外しています。",
+    },
+    {
+      indicatorKey: "attendance",
+      indicatorLabel: "出席状況",
+      confirmedSessionCount: 0,
+      sourceRecordCount: 0,
+      sourceRecordUnit: "出席記録0件",
+      missingDescription: "複数の公開資料経路を調査しましたが、議員別の出席・欠席名簿を確認できていません（公開資料から確認できず）。",
+    },
+    {
+      indicatorKey: "voting",
+      indicatorLabel: "議案等の意思表示",
+      confirmedSessionCount: null,
+      sourceRecordCount: disclosedBillCount,
+      sourceRecordUnit: `個人別賛否が公開されている議案${disclosedBillCount}件（全${billVotes.length}件中）`,
+      missingDescription: "起立採決・簡易採決等、個人別の内訳が公開されていない議案は対象に含めていません（集計結果のみの議案は「公開資料から確認できず」）。",
+    },
+    {
+      indicatorKey: "proposal",
+      indicatorLabel: "請願・提案等",
+      confirmedSessionCount: null,
+      sourceRecordCount: 0,
+      sourceRecordUnit: "議員別の提案者・紹介議員情報0件",
+      missingDescription:
+        "議員別の提案者・紹介議員情報は未収録です。本会議での委員長・副委員長報告（68件）は参考情報として個人ページに別途掲載していますが、この指標の算定には含めていません。",
+    },
+    {
+      indicatorKey: "disclosure",
+      indicatorLabel: "情報発信・プロフィール充足度",
+      confirmedSessionCount: null,
+      sourceRecordCount: members.length,
+      sourceRecordUnit: `対象議員${members.length}名のプロフィール項目`,
+      missingDescription: "SNS等を利用していないこと自体は低評価にしていません。確認できた項目数をそのまま示しています。",
+    },
+  ];
+
+  return defs.map((d) => {
+    const c = byKey.get(d.indicatorKey);
+    return {
+      ...d,
+      confirmedMemberCount: c?.completeCount ?? 0,
+      totalMemberCount: c?.totalCount ?? members.length,
+    };
+  });
+}
+
+/**
+ * Phase111：26名×6指標＝156セルの市民向け簡易マトリクス。
+ * `RadarMetric.dataStatus`（complete/partial/missing）を、Evidence Availability共通語彙の
+ * 記号・ラベルへそのままマッピングする（新しい判定ロジックは追加しない）。missingは
+ * 一律「research_exhausted」表記とする（出席状況・請願提案等いずれも、複数の資料経路を
+ * 調査したうえで確認できていない状態のため）。「0点」という表現は使わない。
+ */
+export interface MatrixCell {
+  indicatorKey: string;
+  symbol: string;
+  label: string;
+}
+
+export interface MemberMatrixRow {
+  memberId: string;
+  memberName: string;
+  cells: MatrixCell[];
+}
+
+function dataStatusToEvidenceCode(dataStatus: RadarMetric["dataStatus"]): EvidenceAvailabilityCode {
+  if (dataStatus === "complete") return "confirmed";
+  if (dataStatus === "partial") return "partial";
+  return "research_exhausted";
+}
+
+export function get156CellMatrix(): MemberMatrixRow[] {
+  const entries = getAllCurrentMemberActivity();
+  return entries.map((e) => ({
+    memberId: e.member.id,
+    memberName: e.member.name,
+    cells: e.metrics.map((m) => {
+      const code = dataStatusToEvidenceCode(m.dataStatus);
+      return {
+        indicatorKey: m.key,
+        symbol: evidenceAvailabilitySymbol(code),
+        label: evidenceAvailabilityLabel(code),
+      };
+    }),
+  }));
+}
+
+/**
+ * Phase109〜110：市民向けの「何が、どこまで確認できているか」サマリー。
  *
  * 【設計方針】`RadarMetric.dataStatus`（complete/partial/missing）はactivityRadar.tsの
  * 既存3区分のまま変更しない。本関数はその上に「なぜmissingなのか」を市民向けに説明する
  * 表示専用のレイヤーであり、新しい採点・順位付けロジックではない。
- * - confirmed：一次資料で確認済み
- * - partial：一部の記録のみ公開・確認できている
- * - research_exhausted：複数の公開資料経路を調査したが確認できなかった
- *   （「今後も確認できない」「存在しない」と断定するものではない）
- * - waiting_external：具体的な資料（会議録等）が近く公開される見込みで、公開待ちの状態
+ * Phase110で、状態コード・日本語ラベルはサイト共通の`src/lib/evidenceAvailability.ts`
+ * （9区分）へ寄せた。このファイルはその共通語彙を議員活動バロメーター向けに適用する
+ * 呼び出し側という位置づけ。
  */
-export type EvidenceAvailabilityCode = "confirmed" | "partial" | "research_exhausted" | "waiting_external";
+export type { EvidenceAvailabilityCode } from "./evidenceAvailability";
 
-export interface EvidenceAvailabilityItem {
-  key: string;
-  label: string;
-  code: EvidenceAvailabilityCode;
-  /** 市民向けの短い状態文言（例：「確認済み」「一部公開」「公開資料未確認」）。 */
+export interface EvidenceAvailabilityItem extends EvidenceAvailabilityEntry {
+  /** 既定は状態コードの共通ラベル（evidenceAvailabilityLabel）。件数等を具体的に示したい場合のみ上書きする。 */
   statusText: string;
-  /** 状態の根拠・補足説明。 */
-  detail: string;
 }
 
 export function getEvidenceAvailabilitySummary(): EvidenceAvailabilityItem[] {
@@ -352,26 +492,23 @@ export function getEvidenceAvailabilitySummary(): EvidenceAvailabilityItem[] {
   const petitionLikeCount = billVotes.filter((b) => b.category === "請願" || b.category === "陳情").length;
   const pendingMinutesCount = billVotes.filter((b) => !b.voteMethod || !b.committee).length;
 
-  return [
+  const entries: EvidenceAvailabilityEntry[] = [
     {
       key: "question",
       label: "一般質問",
       code: "confirmed",
-      statusText: "確認済み",
       detail: "会議録取得済みの会期について、本会議での一般質問・代表質問の実施状況を公開会議録から確認しています。",
     },
     {
       key: "voting",
       label: "個人別賛否",
       code: "partial",
-      statusText: "一部公開",
       detail: `全${totalBillCount}件の議案等のうち、議員個人別の賛否が公開資料で確認できたのは${disclosedBillCount}件のみです（残りは公表結果が賛成・反対等の集計のみ、または未確認）。`,
     },
     {
       key: "committeeInternalSpeech",
       label: "委員会内部発言",
       code: "research_exhausted",
-      statusText: "公開資料未確認",
       detail:
         "委員会そのものの会議録・発言記録が公開されているかを複数の資料経路（委員会活動報告書PDF等）で調査しましたが、確認できていません。本会議での委員長・副委員長報告は別に収録しています。",
     },
@@ -379,7 +516,6 @@ export function getEvidenceAvailabilitySummary(): EvidenceAvailabilityItem[] {
       key: "attendance",
       label: "出席状況",
       code: "research_exhausted",
-      statusText: "公開資料未確認",
       detail:
         "会議録・議会だより・会議日程表等、複数の資料経路を調査しましたが、議員別の出席・欠席名簿を確認できていません。「資料が見つからない」ことは「全員出席」を意味しません。",
     },
@@ -387,15 +523,18 @@ export function getEvidenceAvailabilitySummary(): EvidenceAvailabilityItem[] {
       key: "petition",
       label: "請願・陳情等",
       code: "partial",
-      statusText: "一部収録",
       detail: `件名・審議結果は請願・陳情あわせて${petitionLikeCount}件を収録していますが、紹介議員（請願者ではなく、議会に取り次いだ議員）の氏名は公開会議録に記載がなく確認できていません。`,
     },
     {
       key: "pendingMinutes",
       label: "会議録公開待ち",
       code: "waiting_external",
-      statusText: `${pendingMinutesCount}件`,
       detail: `直近の会期の会議録が本日時点で未公開のため、採決方法・付託委員会等が未確認の議案が${pendingMinutesCount}件あります（公開され次第、自動更新で反映されます）。`,
     },
   ];
+
+  return entries.map((e) => ({
+    ...e,
+    statusText: e.key === "pendingMinutes" ? `${pendingMinutesCount}件` : evidenceAvailabilityLabel(e.code),
+  }));
 }

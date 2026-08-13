@@ -16,7 +16,9 @@ import {
   activityTargetPeriodLabel,
   getAllCurrentMemberActivity,
   getIndicatorCoverage,
+  getIndicatorCoverageDetail,
   getEvidenceAvailabilitySummary,
+  get156CellMatrix,
   metricByKey,
   topByMetric,
   type MemberActivityEntry,
@@ -40,6 +42,18 @@ const SORTABLE_COLUMNS: { key: SortKey; label: string; metricKey?: string }[] = 
 const NOT_SCORED_COLUMNS: { key: string; label: string }[] = [
   { key: "attendance", label: "出席状況" },
   { key: "proposal", label: "請願・提案等" },
+];
+
+/** 156セル一覧の列順。`getMemberActivityMetrics`が返すmetrics配列の実際の並び順と一致させる
+ * （question/speech/attendance/voting/proposal/disclosure）。SORTABLE_COLUMNSはソートUI用の
+ * 別の並び順のため、ここでは流用しない。 */
+const MATRIX_INDICATOR_LABELS: { key: string; label: string }[] = [
+  { key: "question", label: "一般質問" },
+  { key: "speech", label: "議会内発言" },
+  { key: "attendance", label: "出席状況" },
+  { key: "voting", label: "議案等の意思表示" },
+  { key: "proposal", label: "請願・提案等" },
+  { key: "disclosure", label: "情報発信" },
 ];
 
 function sortEntries(entries: MemberActivityEntry[], sortKey: SortKey, dir: "asc" | "desc"): MemberActivityEntry[] {
@@ -102,7 +116,10 @@ export function CouncilActivityPage() {
   const allEntries = useMemo(() => getAllCurrentMemberActivity(), []);
   const targetPeriod = useMemo(() => activityTargetPeriodLabel(), []);
   const coverage = useMemo(() => getIndicatorCoverage(), []);
+  const coverageDetail = useMemo(() => getIndicatorCoverageDetail(), []);
   const evidenceSummary = useMemo(() => getEvidenceAvailabilitySummary(), []);
+  const matrix = useMemo(() => get156CellMatrix(), []);
+  const [matrixExpanded, setMatrixExpanded] = useState(false);
 
   const filteredEntries = useMemo(() => {
     return allEntries.filter((e) => {
@@ -194,6 +211,37 @@ export function CouncilActivityPage() {
             </li>
           ))}
         </ul>
+        <p className="mt-3 rounded-lg bg-tertiary-container px-3 py-2 text-xs leading-relaxed text-on-tertiary-container">
+          注意：ここでの「データ充足率」は資料の網羅度（何人分・何件確認できたか）を示すものであり、右側の「議員活動点」（レーダーチャート・実数）とは別の指標です。充足率が高いこと自体を「活動が優れている」という評価として読まないでください。
+        </p>
+
+        <p className="mb-2 mt-4 text-xs font-medium text-on-surface-variant">指標別の詳しい内訳</p>
+        <ul className="space-y-3">
+          {coverageDetail.map((d) => (
+            <li key={d.indicatorKey} className="rounded-lg border border-outline-variant p-3">
+              <p className="text-sm font-semibold text-on-surface">{d.indicatorLabel}</p>
+              <dl className="mt-1.5 grid grid-cols-1 gap-x-4 gap-y-1 text-xs text-on-surface-variant sm:grid-cols-2">
+                <div>
+                  <dt className="inline font-medium text-on-surface">確認できた人数：</dt>
+                  <dd className="inline">
+                    {d.confirmedMemberCount}／{d.totalMemberCount}名
+                  </dd>
+                </div>
+                {d.confirmedSessionCount !== null && (
+                  <div>
+                    <dt className="inline font-medium text-on-surface">会議録を確認できた会期数：</dt>
+                    <dd className="inline">{d.confirmedSessionCount}会期</dd>
+                  </div>
+                )}
+                <div className="sm:col-span-2">
+                  <dt className="inline font-medium text-on-surface">根拠となる一次資料：</dt>
+                  <dd className="inline">{d.sourceRecordUnit}</dd>
+                </div>
+              </dl>
+              <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{d.missingDescription}</p>
+            </li>
+          ))}
+        </ul>
       </SectionCard>
 
       <SectionCard title="確認状況（何が公開資料から分かるか）">
@@ -221,6 +269,92 @@ export function CouncilActivityPage() {
             </div>
           ))}
         </dl>
+      </SectionCard>
+
+      <SectionCard title="26名×6指標の確認状況一覧">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          対象議員{matrix.length}名それぞれについて、6指標が確認できたかどうかを一覧化したものです。○△―は活動の「点数」ではなく、公開資料からの確認状況を示す記号です（凡例参照）。「0点」という意味の表示はありません。
+        </p>
+        <ul className="mb-3 flex flex-wrap gap-3 text-xs text-on-surface-variant">
+          <li>
+            <span aria-hidden="true">○</span> 確認済み
+          </li>
+          <li>
+            <span aria-hidden="true">△</span> 一部確認
+          </li>
+          <li>
+            <span aria-hidden="true">―</span> 公開資料から確認できず
+          </li>
+        </ul>
+        <button
+          type="button"
+          onClick={() => setMatrixExpanded((v) => !v)}
+          className={`mb-3 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-surface-container-high ${linkClass}`}
+          aria-expanded={matrixExpanded}
+        >
+          {matrixExpanded ? "一覧を閉じる" : `一覧を開く（${matrix.length}名）`}
+        </button>
+        {matrixExpanded && (
+          <>
+            {/* PC・タブレット：表形式 */}
+            <div className="hidden overflow-x-auto sm:block">
+              <table className="w-full min-w-[640px] border-collapse text-left text-xs">
+                <caption className="sr-only">議員別・指標別のデータ確認状況一覧</caption>
+                <thead>
+                  <tr className="border-b border-outline-variant text-on-surface-variant">
+                    <th scope="col" className="py-1.5 pr-2 font-medium">
+                      氏名
+                    </th>
+                    {MATRIX_INDICATOR_LABELS.map((c) => (
+                      <th key={c.key} scope="col" className="py-1.5 pr-2 font-medium">
+                        {c.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {matrix.map((row) => (
+                    <tr key={row.memberId} className="border-b border-outline-variant/60">
+                      <th scope="row" className="py-1.5 pr-2 font-normal text-on-surface">
+                        <Link to={`/council-activity/${row.memberId}`} className={`hover:underline ${linkClass}`}>
+                          {row.memberName}
+                        </Link>
+                      </th>
+                      {row.cells.map((cell) => (
+                        <td key={cell.indicatorKey} className="py-1.5 pr-2 text-on-surface" aria-label={cell.label}>
+                          <span aria-hidden="true">{cell.symbol}</span>
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* スマホ：議員ごとのカード */}
+            <ul className="space-y-2 sm:hidden">
+              {matrix.map((row) => (
+                <li key={row.memberId} className="rounded-lg border border-outline-variant p-3">
+                  <Link
+                    to={`/council-activity/${row.memberId}`}
+                    className={`text-sm font-medium text-on-surface hover:underline ${linkClass}`}
+                  >
+                    {row.memberName}
+                  </Link>
+                  <ul className="mt-1.5 grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-on-surface-variant">
+                    {row.cells.map((cell) => (
+                      <li key={cell.indicatorKey} className="flex items-center justify-between gap-1">
+                        <span>{MATRIX_INDICATOR_LABELS.find((c) => c.key === cell.indicatorKey)?.label ?? cell.indicatorKey}</span>
+                        <span aria-hidden="true">{cell.symbol}</span>
+                        <span className="sr-only">{cell.label}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </SectionCard>
 
       <SectionCard title="5つの指標について">
@@ -482,6 +616,9 @@ export function CouncilActivityPage() {
 
       {compareEntries.length > 0 && (
         <SectionCard title={`比較（${compareEntries.length}名選択中）`}>
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            このページは公開資料から確認できた活動記録を整理したものです。議員の能力・成果・優劣を評価するものではありません。形の大小・面積を「優れている／劣っている」の意味で読まないでください。
+          </p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {compareEntries.map((e) => (
               <div key={e.member.id} className="rounded-lg border border-outline-variant p-3 text-center">
