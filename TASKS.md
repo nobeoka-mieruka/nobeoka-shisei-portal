@@ -1,14 +1,13 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase120〜124でTASK-067「人物中心の市政アーカイブ化」を実施。
-人物単位の統合活動タイムラインを新設、元議員登録数を10名→58名へ拡張（読み仮名ベースの
-同一人物判定で重複0件を確認しつつ）、過去会議録の会期対象範囲を拡大して一般質問確認済み
-元議員数を1名→10名に改善、人物ID監査（全項目0件）、data-statusへ人物データ収録状況を
-追加した）
+最終更新日：2026-08-13（Phase125〜129でTASK-068「元議員58名の人物履歴を政治家アーカイブへ
+育てる」を実施。党派履歴69件・委員会履歴1件を構造化、決議提出者5名をタイムラインへ追加、
+1999年以前の選挙再調査は新規資料なし（重複タスクを発見しTASK-046へ統合）、人物ハブへ
+選挙年代フィルターを追加、data-statusを拡張した）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 98／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計107
+DONE 99／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計108
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -7296,3 +7295,73 @@ archiveMayors/electionResults/billVotes/councilSpeechSummaries/committeeReportAc
   data-statusの人物データ収録状況表示を実施した。既存の議会活動データ計算式・
   Evidence Availability 9状態・既存/people基盤は一切変更していない。
   総合ランキングは作成していない。
+
+### TASK-068 元議員58名の人物履歴を政治家アーカイブへ育てる（Phase125〜129）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示：元議員の人数を増やすことではなく、既存58名の人物履歴を
+一次資料に基づいて育てること）
+対象：`src/data/archiveMemberAffiliations.json`、`src/pages/MemberFormerDetailPage.tsx`、
+`src/data/blockedTaskClassification.json`、`src/lib/personTimeline.ts`、
+`src/components/council/PersonTimeline.tsx`、`src/data/billProposalRoles.json`（新規）、
+`scripts/validate-data.mjs`、`src/lib/formerMemberActivity.ts`、`src/lib/people.ts`、
+`src/pages/DataStatusPage.tsx`、`src/pages/PeoplePage.tsx`
+
+既存のEvidence Availability 9状態・ActivityRadar計算式・voteMethod/disclosureStatus分類・
+人物ID・既存/people基盤は変更せず継続。総合ランキング・現職と元議員の単純比較は
+作成していない。
+
+**Phase125（元議員58名の任期・会派・委員会履歴の構造化）**：`archiveMemberAffiliations.json`
+（従来は現職委員会のみ）へ、electionResults.jsonの党派情報から58名分の党派履歴69件を
+構造化（同一党派が連続する当選は1レコードへ統合、党派変更があった場合のみ区切る）。
+「会派」（議会内会派、factions.json）とは別概念であることを明記し混同を避けた。
+fm06の既存note内に埋もれていた委員長就任の具体的日付（2023-03-09、厚生教育委員会）を
+新たに構造化。**選挙日を任期開始日とみなさない方針を厳守**し、48名の新規元議員への
+archiveMemberTerms登録は一切行わなかった（任期確認人数は正直に0名のまま）。
+
+**Phase126（1999年以前の市議選・歴代議員再調査）**：宮崎県統計年鑑・延岡市選挙管理委員会
+公式ページ・NDLデジタルコレクション等、新しい情報源クラスで1995年以前の候補者別選挙結果を
+調査したが新規資料は見つからなかった。作業中、既存のTASK-046（同一スコープ）と重複する
+新規タスク（TASK-048）を誤って作成してしまったことに気づき、削除してTASK-046へ統合した
+（重複実装の回避）。新規の元議員登録は行っていない（確定した当選者のみを登録する方針）。
+
+**Phase127（過去会議録と元議員58名の再照合第2弾）**：58名体制での再監査の結果、
+councilSpeechSummaries.json・generalQuestions.jsonともorphan（未知の人物IDを参照する
+レコード）は0件で、Phase122の修正により既存データは既に活用し尽くされていることを確認した。
+「議案質疑」（1件）が一般質問と混同されず「議会内発言」として正しく分類されていることも
+確認した。
+
+**Phase128（請願・陳情・意見書・議員提出議案の人物関係構造化）**：`billProposalRoles.json`を
+新設。proposerType="member"の決議8件について、発言者ラベルだけでなく実際の発言テキスト
+（「ただいま議題となっております決議案につきまして、提案理由の説明を申し上げます」等の
+パターン）を読み取ることで、5件の提出者個人（北林幹雄2件・宮田博徳3件）を特定した
+（残り3件は会議録から特定できず、または会議録リンク自体が無く未登録）。請願の紹介議員は、
+同じ新しい全文検索手法で改めて確認したが、今回も本会議録に個人名の記載が無いことを
+再確認した（0件ではなくresearch_exhausted）。
+
+**Phase129（人物ハブ・年代検索・歴史UX総仕上げ）**：`getFormerMemberDataTier()`
+（A：選挙のみ／B：+任期／C：+議会活動／D：任期+議会活動、内部集計専用・人物評価には
+不使用）を新設し、48名がA・10名がCであることを確認（B・Dは0名、任期確認レコードが
+存在しないため）。`/people`の年代フィルターへ「選挙年代」（electionYears）を追加し、
+「在職年代」（tenureYears）とは別概念として明示（選挙年から在職期間を自動推定しない）。
+`/data-status`に元議員の任期/党派/委員会/一般質問/発言/賛否確認人数・選挙記録のみの人数を
+追加。全体のID・URL監査を再実施（0件、監査スクリプル自体の誤検知1件を発見・修正）。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ）／`validate:freshness`
+（errors=0）／`validate:sources`（errors=0 info=40）／`validate:completeness`
+（errors=0）／`validate:political-funds`（errors=0 info=2）／`typecheck`／`lint`／
+`test`（26/26）／`build`を2回連続実行しいずれも成功（prerender 2112/2112、各回約66〜67秒）／
+`validate:seo`（2113ページ、failures=0）／`validate:content`（2113ページ、errors=0）／
+`release:check`（failures=0、既存warning2件のみ）すべて成功。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：029ca7b／3c5cef0／7bc5685／8e0a3b6
+- 変更概要：上記のとおり。元議員58名の党派履歴・一部委員会履歴の構造化、
+  1999年以前選挙の再調査（新規資料なし、重複タスク統合）、過去会議録再監査
+  （新規orphanなし）、決議提出者5名の特定・タイムライン統合、人物ハブの
+  選挙年代フィルター追加、data-status拡張を実施した。既存の議会活動データ計算式・
+  Evidence Availability 9状態・人物IDは一切変更していない。総合ランキングは
+  作成していない。選挙日を任期開始日として代用していない。
