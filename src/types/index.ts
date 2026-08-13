@@ -261,6 +261,30 @@ export interface CommitteeActivityReport {
   lastVerifiedAt: string;
 }
 
+/**
+ * 委員長・副委員長が本会議で行った審査結果報告1件分（src/data/committeeReportActivity.json、Phase101）。
+ * 委員会単独の会議録（開催日・出席委員・個別発言全文）は現時点で公表されていないため収録できない
+ * （CommitteeActivityReportのコメント参照）。この型は、本会議の会議録から「◯◯委員会委員長
+ * （氏名）」「◯◯委員会副委員長（氏名）」という発言者ラベルを機械的に抽出し、現職議員の氏名と
+ * 完全一致（異体字正規化後）した場合のみ登録したものであり、委員会内部の個別発言・質疑ではない。
+ * 議会活動データ（レーダーチャート）の「提案・討論等」指標には反映しない（計算式を変更しないため）。
+ */
+export interface CommitteeReportActivityEvent {
+  id: string;
+  memberId: string;
+  memberName: string;
+  committeeId: string | null;
+  committeeName: string;
+  role: "chair" | "viceChair";
+  /** ISO形式。本会議で報告を行った日。 */
+  meetingDate: string | undefined;
+  fileName: string;
+  activityType: "committeeReport";
+  sourceUrl: string;
+  verificationStatus: "verified";
+  checkedAt: string;
+}
+
 /** 市政年表1件分の分類。 */
 export type CivicTimelineCategory =
   | "市制施行・合併"

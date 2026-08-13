@@ -23,7 +23,7 @@ import {
   metricByKey,
 } from "../lib/councilActivityBarometer";
 import { billVoteLabels, billVoteSymbols } from "../lib/billVotes";
-import { committeesForMember, reportsForCommittee, billsForCommittee } from "../lib/committees";
+import { committeesForMember, reportsForCommittee, billsForCommittee, committeeReportActivityForMember } from "../lib/committees";
 import { formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
@@ -81,6 +81,7 @@ export function CouncilActivityMemberPage() {
   const voteEvidence = getMemberVoteEvidence(member);
   const undisclosedBillCount = voteEvidence.totalBillCountSitewide - voteEvidence.disclosedBillCount;
   const memberCommittees = committeesForMember(member.id);
+  const committeeReports = committeeReportActivityForMember(member.id);
 
   const factsSummary = [
     (() => {
@@ -273,7 +274,7 @@ export function CouncilActivityMemberPage() {
 
       <SectionCard title="所属委員会（参考情報）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          委員会ごとの議員個人の発言・質疑件数は、本サイトが現時点で委員会議事録を十分収録できていないため、活動指標スコアには含めていません。ここでは所属・役職・関連議案・所管事務調査報告書のみを参考情報として掲載します。
+          委員会そのものの会議録（開催日・出席委員・個別の発言全文）は、延岡市議会がまだ公表していないため収録できていません。活動指標スコアには含めず、所属・役職・関連議案・所管事務調査報告書のみを参考情報として掲載します。下記の「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録です（会議録から氏名を機械的に確認・登録）。
         </p>
         {memberCommittees.length === 0 ? (
           <p className="text-sm text-on-surface-variant">現在の委員会名簿では、所属委員会を確認できていません。</p>
@@ -302,6 +303,22 @@ export function CouncilActivityMemberPage() {
               );
             })}
           </ul>
+        )}
+        {committeeReports.length > 0 && (
+          <div className="mt-4">
+            <p className="text-sm font-semibold text-on-surface">本会議での委員長・副委員長報告（{committeeReports.length}件、会議録で確認済み）</p>
+            <ul className="mt-2 space-y-1.5">
+              {committeeReports.map((r) => (
+                <li key={r.id} className="rounded-lg bg-surface-container-high px-3 py-2 text-xs text-on-surface">
+                  {r.meetingDate ? formatJapaneseDate(r.meetingDate) : "日付確認中"}　{r.committeeName}
+                  {r.role === "chair" ? "委員長" : "副委員長"}として報告
+                  <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer" className={`ml-2 text-primary hover:underline ${linkClass}`}>
+                    会議録を見る
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </SectionCard>
 

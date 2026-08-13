@@ -1,7 +1,8 @@
 import committeesData from "../data/committees.json";
 import billVotesData from "../data/billVotes.json";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
-import type { Committee, BillVoteItem, CommitteeActivityReport } from "../types";
+import committeeReportActivityData from "../data/committeeReportActivity.json";
+import type { Committee, BillVoteItem, CommitteeActivityReport, CommitteeReportActivityEvent } from "../types";
 
 /**
  * 委員会（常任委員会・議会運営委員会・特別委員会）関連のデータアクセスヘルパー。
@@ -15,6 +16,7 @@ import type { Committee, BillVoteItem, CommitteeActivityReport } from "../types"
 export const committees = committeesData as Committee[];
 const billVotes = billVotesData as BillVoteItem[];
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
+const committeeReportActivity = (committeeReportActivityData as { events: CommitteeReportActivityEvent[] }).events;
 
 export function sortedCommittees(): Committee[] {
   const order = { 常任委員会: 0, 議会運営委員会: 1, 特別委員会: 2 } as const;
@@ -51,4 +53,11 @@ export function reportsForCommittee(committeeId: string): CommitteeActivityRepor
   return committeeActivityReports
     .filter((r) => r.committeeId === committeeId)
     .sort((a, b) => b.fiscalYear - a.fiscalYear);
+}
+
+/** 指定した議員が本会議で行った委員長・副委員長報告の記録（Phase101、会議録から機械抽出・氏名完全一致確認済み）。 */
+export function committeeReportActivityForMember(memberId: string): CommitteeReportActivityEvent[] {
+  return committeeReportActivity
+    .filter((e) => e.memberId === memberId)
+    .sort((a, b) => (b.meetingDate ?? "").localeCompare(a.meetingDate ?? ""));
 }

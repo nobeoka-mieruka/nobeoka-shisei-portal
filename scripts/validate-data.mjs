@@ -1290,6 +1290,40 @@ try {
   }
 }
 
+// --- committeeReportActivity.json（本会議での委員長・副委員長報告、Phase101） ---
+try {
+  const data = readJson("src/data/committeeReportActivity.json");
+  const events = data.events ?? data;
+  const membersForCra = readJson("src/data/members.json");
+  const knownMemberIds = new Set((membersForCra.items ?? membersForCra).map((m) => m.id));
+  const committeesForCra = readJson("src/data/committees.json");
+  const knownCommitteeIdsForCra = new Set(committeesForCra.map((c) => c.id));
+  const craIds = new Set();
+
+  for (const e of events) {
+    const tag = `committeeReportActivity.json (${e.id ?? "id不明"})`;
+    if (isBlank(e.id)) err(tag, "idが空です");
+    else if (craIds.has(e.id)) err(tag, `idが重複しています: ${e.id}`);
+    else craIds.add(e.id);
+
+    if (isBlank(e.memberId) || !knownMemberIds.has(e.memberId)) {
+      err(tag, `存在しない現職議員IDを参照しています: ${e.memberId}`);
+    }
+    if (e.committeeId !== null && !knownCommitteeIdsForCra.has(e.committeeId)) {
+      err(tag, `存在しない委員会IDを参照しています: ${e.committeeId}`);
+    }
+    if (isBlank(e.committeeName)) err(tag, "committeeNameが空です");
+    if (e.role !== "chair" && e.role !== "viceChair") err(tag, `roleが不正です: ${e.role}`);
+    if (e.meetingDate && !DATE_RE.test(e.meetingDate)) err(tag, `meetingDateの形式が不正です: ${e.meetingDate}`);
+    if (isBlank(e.sourceUrl) || !URL_RE.test(e.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${e.sourceUrl}`);
+    if (e.verificationStatus !== "verified") err(tag, `verificationStatusが不正です: ${e.verificationStatus}`);
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("committeeReportActivity.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- municipalityComparison.json（宮崎県内自治体比較） ---
 try {
   const munis = readJson("src/data/municipalityComparison.json");
