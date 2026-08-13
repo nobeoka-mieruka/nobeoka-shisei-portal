@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
 import { QUESTION_LIKE_SPEECH_TYPES } from "../src/lib/questionLikeSpeechTypes.ts";
+import { summarizeVoteClassification } from "../src/lib/billVotes.ts";
 import {
   ARCHIVE_VERIFICATION_STATUSES,
   checkAnyNonNullRequiresField,
@@ -361,6 +362,31 @@ for (const b of billVotes) {
   ).length;
   if (billVotes.length > 0 && publiclyVisibleCount === 0) {
     err("billVotes.json", `議案データが${billVotes.length}件存在するのに、一般公開対象の集計が0件になっています`);
+  }
+}
+
+// Phase117：voteMethod分類（recorded_vote/standing_vote/voice_vote/unanimous/no_vote/unknown）と
+// disclosureStatus分類（individual/aggregate/not_disclosed/unknown）の2軸それぞれについて、
+// 合計が議案総数と必ず一致することを保証する（分類ロジックの回帰・二重計上・漏れを検知する保険）。
+// 2軸を混同しないよう、それぞれ独立に集計・検証する。
+{
+  const summary = summarizeVoteClassification(billVotes);
+  const methodTotal = Object.values(summary.byMethod).reduce((a, b) => a + b, 0);
+  const disclosureTotal = Object.values(summary.byDisclosure).reduce((a, b) => a + b, 0);
+  if (methodTotal !== billVotes.length) {
+    err(
+      "billVotes.json",
+      `voteMethod分類の合計（${methodTotal}）が議案総数（${billVotes.length}）と一致しません: ${JSON.stringify(summary.byMethod)}`,
+    );
+  }
+  if (disclosureTotal !== billVotes.length) {
+    err(
+      "billVotes.json",
+      `disclosureStatus分類の合計（${disclosureTotal}）が議案総数（${billVotes.length}）と一致しません: ${JSON.stringify(summary.byDisclosure)}`,
+    );
+  }
+  if (summary.byDisclosure.individual !== billVotes.filter((b) => b.memberVotes.length > 0).length) {
+    err("billVotes.json", "disclosureStatus=individualの件数が、実際にmemberVotesが存在する議案数と一致しません");
   }
 }
 
