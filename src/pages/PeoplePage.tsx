@@ -288,7 +288,9 @@ export function PeoplePage() {
                 {p.factionId ? `／${factionName(p.factionId) ?? p.factionId}` : ""}
               </p>
               <p className="mt-2 text-xs text-on-surface-variant">
-                関連資料：{p.relatedDocumentCount}件／確認状況：{archiveVerificationStatusLabel(p.verificationStatus)}
+                関連資料：{p.relatedDocumentCount}件
+                {p.personType === "mayor" && !p.isCurrent && p.relatedDocumentCount === 0 && "（歴代市長の公約・関連議案データは未収集のため）"}
+                ／確認状況：{archiveVerificationStatusLabel(p.verificationStatus)}
               </p>
             </Link>
           </li>

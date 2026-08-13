@@ -555,7 +555,7 @@ export function CouncilActivityPage() {
         </dl>
       </SectionCard>
 
-      <SectionCard title="26名×6指標の確認状況一覧">
+      <SectionCard title={`${matrix.length}名×6指標の確認状況一覧`}>
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           対象議員{matrix.length}名それぞれについて、6指標が確認できたかどうかを一覧化したものです。○△―は活動の「点数」ではなく、公開資料からの確認状況を示す記号です（凡例参照）。「0点」という意味の表示はありません。
         </p>

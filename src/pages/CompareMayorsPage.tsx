@@ -160,7 +160,9 @@ export function CompareMayorsPage() {
                   render: (m) => {
                     const { count, hasDataCoverage } = mayorSubmittedBillCount(m.id);
                     if (!hasDataCoverage) return "収録期間外（未収録）";
-                    return `${count}件`;
+                    // count===0はデータ収録期間内であることを確認済みの実数（confirmed zero）。
+                    // 「未収録」の0件と混同されないよう明示する。
+                    return count > 0 ? `${count}件` : "0件（収録期間内で確認済み）";
                   },
                 },
                 {
