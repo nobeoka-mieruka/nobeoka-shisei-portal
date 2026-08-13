@@ -1238,7 +1238,7 @@
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -1248,7 +1248,7 @@
             "accessedAt": "2026-08-07",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
           }
         ]
       },
@@ -1381,7 +1381,7 @@
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -1391,7 +1391,7 @@
             "accessedAt": "2026-08-07",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
           }
         ]
       },
@@ -1524,7 +1524,7 @@
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -1534,7 +1534,7 @@
             "accessedAt": "2026-08-07",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
           }
         ]
       },
@@ -1709,7 +1709,7 @@
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
-        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（TASK-014で令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
+        "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -1719,7 +1719,7 @@
             "accessedAt": "2026-08-07",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み（TASK-014）。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
           }
         ]
       },

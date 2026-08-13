@@ -166,5 +166,270 @@
       "gq2026-06-m24"
     ],
     "notes": "一般質問で扱われたテーマの登録であり、市の公式政策として確定した事実ではない。"
+  },
+  {
+    "id": "policy-mayor03-01",
+    "slug": "mayor-yomiyama-covid",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "コロナを乗り越える",
+    "summary": "新型コロナウイルス感染症を乗り越えることを掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "コロナを乗り越える",
+    "categoryIds": [
+      "healthcare"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない（見出し以上の内容はnotesに記載なし）。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-02",
+    "slug": "mayor-yomiyama-economy",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "経済の底上げ・所得アップを実現",
+    "summary": "経済の底上げと所得アップの実現を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "経済の底上げ・所得アップを実現",
+    "categoryIds": [
+      "employment",
+      "industry-promotion"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-03",
+    "slug": "mayor-yomiyama-smart-city",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "スマートシティ政策で都会との「3つの格差」をなくす",
+    "summary": "スマートシティ政策により都会との格差解消を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "スマートシティ政策で都会との「3つの格差」をなくす",
+    "categoryIds": [
+      "digitalization"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-04",
+    "slug": "mayor-yomiyama-transport",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "地球と暮らしにやさしい新たな交通システム「楽に暮らせる延岡」を実現",
+    "summary": "新たな交通システムの実現を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "地球と暮らしにやさしい新たな交通システム「楽に暮らせる延岡」を実現",
+    "categoryIds": [
+      "public-transport",
+      "decarbonization"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-05",
+    "slug": "mayor-yomiyama-noone-left-behind",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "誰一人取り残さない、安心と温もりの延岡づくり",
+    "summary": "誰一人取り残さない福祉施策を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "誰一人取り残さない、安心と温もりの延岡づくり",
+    "categoryIds": [
+      "welfare"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-06",
+    "slug": "mayor-yomiyama-future",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "延岡の未来をひらく",
+    "summary": "延岡の未来をひらくことを掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "延岡の未来をひらく",
+    "categoryIds": [
+      "other"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-07",
+    "slug": "mayor-yomiyama-community-bonds",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "にぎわいづくり・絆づくり",
+    "summary": "にぎわいづくり・絆づくりを掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "にぎわいづくり・絆づくり",
+    "categoryIds": [
+      "community",
+      "downtown-revitalization"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-08",
+    "slug": "mayor-yomiyama-new-cooperative",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "各地域の特性を活かした「新合衆国づくり」～「複業協同組合」の設立～",
+    "summary": "各地域の特性を活かした地域づくりと「複業協同組合」設立を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "各地域の特性を活かした「新合衆国づくり」～「複業協同組合」の設立～",
+    "categoryIds": [
+      "community",
+      "industry-promotion"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-09",
+    "slug": "mayor-yomiyama-regional-hub",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "県北・東九州の中心都市として",
+    "summary": "県北・東九州の中心都市としての役割を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "県北・東九州の中心都市として",
+    "categoryIds": [
+      "other"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
+  },
+  {
+    "id": "policy-mayor03-10",
+    "slug": "mayor-yomiyama-administrative-reform",
+    "ownerType": "mayor",
+    "ownerId": "mayor-03",
+    "title": "「市民目線」の行政改革",
+    "summary": "市民目線での行政改革を掲げた項目（本人公式サイト「10の提言」のうちの1項目）。個別ページの詳細本文は今回未取得のため、見出しのみを登録している。",
+    "sourceOriginalText": "「市民目線」の行政改革",
+    "categoryIds": [
+      "administrative-reform",
+      "city-hall-reform"
+    ],
+    "sourceType": "electionManifesto",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.yomiyama-yoji.jp/page-509",
+        "sourceTitle": "よみやま洋司の政策（10の提言）",
+        "sourceOrganization": "本人（後援会・公式サイト）",
+        "extractionMethod": "manual",
+        "verificationStatus": "needsReview",
+        "notes": "一覧ページに掲載されている「～10の提言～」の見出し10項目のみを取得した。各項目は個別ページにリンクされているが、今回は個別ページ本文までは取得していない。掲載時点（2018年または2022年のいずれの選挙時のものか）はページ上に明記がなく未確認。",
+        "accessedAt": "2026-08-14"
+      }
+    ],
+    "status": "proposed",
+    "notes": "読谷山洋司（mayor-03）は2025-06-30付で辞職しているため、これらの公約の達成・未達成の最終的な判定はしていない。"
   }
 ]

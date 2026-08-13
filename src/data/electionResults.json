@@ -3264,7 +3264,7 @@
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選27名・落選11名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。有権者数・投票率はページ記載値。投票者数・無効票数はページに記載が無く未確認。候補者のlinkedProfileIdは、members.jsonのnameKana完全一致（現職）またはformerMembers.jsonの氏名完全一致（既存登録済み元議員）の場合のみ設定し、一致しない候補は未リンクのまま残した（新規の元議員登録は今回行っていない。servedSessionsの会期単位確認が必要なため）。 【Phase115追記】formerMembers.json（元議員）10名のうち、当選済みでlinkedProfileId未設定だった候補者10名分を、姓の一意性・改選前後の在職記録（servedSessions）・電子投票所名簿上のかな表記との整合で照合し、linkedProfileIdを追加した（fm01〜fm10全員）。読み仮名（nameKana）は本ファイルの候補者nameKanaフィールド（選挙ドットコムの投票結果ページから抽出済み）をそのまま転記するのみで、新たな推測は行っていない。"
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選27名・落選11名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。有権者数・投票率はページ記載値。投票者数・無効票数はページに記載が無く未確認。候補者のlinkedProfileIdは、members.jsonのnameKana完全一致（現職）またはformerMembers.jsonの氏名完全一致（既存登録済み元議員）の場合のみ設定し、一致しない候補は未リンクのまま残した（新規の元議員登録は今回行っていない。servedSessionsの会期単位確認が必要なため）。 formerMembers.json（元議員）10名のうち、当選済みでlinkedProfileId未設定だった候補者10名分を、姓の一意性・改選前後の在職記録（servedSessions）・電子投票所名簿上のかな表記との整合で照合し、linkedProfileIdを追加した（fm01〜fm10全員）。読み仮名（nameKana）は本ファイルの候補者nameKanaフィールド（選挙ドットコムの投票結果ページから抽出済み）をそのまま転記するのみで、新たな推測は行っていない。"
       }
     ],
     "notes": "定数27・候補38名。現職多数が再選。"

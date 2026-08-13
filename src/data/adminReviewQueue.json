@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-13T22:15:01.689Z",
-  "totalItems": 109,
+  "generatedAt": "2026-08-13T23:30:19.090Z",
+  "totalItems": 122,
   "byCategory": {
     "aiCategoryCandidate": 8,
-    "lowConfidenceCandidate": 10,
-    "relationCandidate": 4,
-    "sourceInsufficient": 66,
+    "lowConfidenceCandidate": 11,
+    "relationCandidate": 6,
+    "sourceInsufficient": 76,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -140,6 +140,13 @@
     {
       "category": "relationCandidate",
       "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-02",
+      "detail": "policy（policy-mayor03-01）との関連候補「sameTheme」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
       "sourceEntityId": "doc-petition-03",
       "detail": "policy（policy-mayor01-01）との関連候補「sameTheme」（確信度0.3）が未確認です",
       "confidence": 0.3
@@ -148,6 +155,20 @@
       "category": "lowConfidenceCandidate",
       "sourceEntityType": "petition",
       "sourceEntityId": "doc-petition-03",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
+      "detail": "policy（policy-mayor03-03）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-01",
       "detail": "関連候補の確信度が低いです（0.3）",
       "confidence": 0.3
     },
@@ -200,6 +221,66 @@
       "sourceEntityType": "policy",
       "sourceEntityId": "policy-q-gq2026-06-m24-02",
       "detail": "出典「総括質疑及び一般質問通告書（宮田 博徳、令和8年6月定例会）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-01",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-02",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-03",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-04",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-05",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-06",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-07",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-08",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-09",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "policy",
+      "sourceEntityId": "policy-mayor03-10",
+      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",

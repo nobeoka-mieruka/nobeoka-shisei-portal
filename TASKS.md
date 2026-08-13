@@ -7625,3 +7625,102 @@ broken 0件。外部リンク616件チェック（うち291件新規）、生き
   推測によるデータ補完・根拠のない順位や点数の追加は一切行っていない。歴代市長の政策・
   議案データが少ないのはデータベースの収集範囲の限界（未収録）であり、既存データに
   紐付け漏れは無かった。ブラウザでの実機目視確認は次回へ持ち越し。
+
+### TASK-072 ブラウザ実機確認・外部リンク再確認・公開UI内部表記監査・歴代市長データ収集フェーズ1（Phase137〜138）
+
+状態：DONE（2026-08-14、Phase137〜138分のみ。歴代市長データ収集は13名中1名〔mayor-03〕
+のみ着手のため、残り12名分はTASK-073以降で継続する）
+優先度：B
+対象：`src/data/archivePolicies.json`、`src/data/similarMunicipalityComparison.json`、
+`src/data/archiveFiscalYears.json`、`src/data/municipalityComparison.json`、
+`src/data/electionResults.json`、`src/data/formerMembers.json`、
+`src/data/civicTimelineEvents.json`、`src/pages/DataStatusPage.tsx`、
+`docs/session-handoff.md`
+
+**Phase137（ブラウザ実機視覚確認、TASK-070回帰）**：Claude in Chrome拡張を接続し、本番URL
+（nobeoka-shisei-portal.pages.dev）に対して実機ブラウザで確認した。`/council-activity`
+一覧を375px・768px・1280pxで、現職議員26名全員の個人ページを390pxで巡回、代表2名
+（比江島久美子＝最長氏名、宮田博徳＝データ最多）は4段階すべてで詳細確認。横スクロール・
+文字切れ・カード/表のはみ出し・レーダーチャート崩れ・undefined/null/NaN・長い氏名による
+崩れはいずれも0件。サイト本体由来のコンソールエラーも0件。`/compare/mayors`・
+`/people?type=mayor`でPhase136の2件の表示修正（「0件（収録期間内で確認済み）」「関連資料：
+0件（歴代市長の公約・関連議案データは未収集のため）」）が実機で正しく表示されることも
+直接確認した。修正が必要な問題が見つからなかったため、この回自体によるコード変更は無い。
+
+**Phase138-1（外部リンク8件の再確認）**：Phase136で保留していたlin.ee／facebook.com／
+komei.or.jp計8件を、HEAD/GET・リダイレクト追跡・最終到達URL確認で再検査した。
+lin.ee→line.meは200到達（正常リダイレクト）。komei.or.jp2件はWordPressのwp-cron起動
+タイミングにより一時的な302が発生することがあるが最終的に200到達（正常）。facebook.com
+5件は、自動化リクエストに対しFacebook側が返す定型エラーページ（「Sorry, something went
+wrong」、`noindex,nofollow`付き）が返り、実際のプロフィール有無を機械的に判別できないため
+「自動確認不能（ボット対策）」と判定し、「リンク切れ」とは断定しなかった。サイト側の
+修正は無し（実害のあるリンク切れは今回も0件）。
+
+**Phase138-2（公開UI内部表記全件監査）**：全2112ページ（後に2122ページ、下記政策追加後）
+を再度機械巡回し、市民向け公開UIに残っていた開発者向け内部参照を、事実関係を変えずに
+文言のみ是正した：`similarMunicipalityComparison.json`の「TASK-012（2026-08-12、
+Phase76で解決）」、`archiveFiscalYears.json`の「TASK-014」×8箇所、
+`municipalityComparison.json`の「Phase23」×7箇所・「Phase27」×1箇所、
+`electionResults.json`・`formerMembers.json`の「【Phase115追記】」×11箇所、
+`civicTimelineEvents.json`の「Phase31（2026-08-11）で」、`DataStatusPage.tsx`の
+「（TASK-046）」「（Phase112で...）」「（Phase130）」。TASKS.md・PROJECT_PLAN.md・docs
+配下・コードコメント等の開発者向け領域は変更していない。再監査の結果、公開UI残存0件を
+確認した。
+
+**Phase138-3（歴代市長データ収集フェーズ1）**：現職以外の歴代市長13名について、
+`archiveMayors.json`・`archiveMayorTerms.json`・`archivePolicies.json`・
+`archiveCouncilDocuments.json`・`civicTimelineEvents.json`から在任期間・登録済み政策数・
+関連議案数（`billVotes.json`のproposerType="mayor"＋在任期間の突合、`mayorSubmittedBillCount()`
+と同一ロジック）・市政年表件数・出典数を一覧化した。billVotes.jsonの収録範囲（2019-06-17〜
+2026-07-03）に在任期間が重なるのはmayor-03（読谷山洋司）とmayor-14（山本一丸）のみで、
+他11名（mayor-02, 04〜13）は構造的に「収録期間外」であり、議案レベルのデータ収集は
+現実的な追加調査対象ではないと判断した（個別議案を遡って収集する場合は別タスクとして
+扱う）。政策（公約）データは13名全員が0件だったため、直近の元市長から着手した。
+- mayor-03（読谷山洋司、2018-2025）：本人公式サイト（yomiyama-yoji.jp/page-509）に
+  掲載されている「～10の提言～」の見出し10項目を確認し、`archivePolicies.json`へ
+  policy-mayor03-01〜10として新規登録した（sourceType: electionManifesto、
+  verificationStatus: needsReview）。各項目は見出しのみの取得で、個別サブページの
+  詳細本文までは未取得である旨・どの選挙時（2018年/2022年）の掲載かは未確認である旨を
+  notesに明記した。市政年表（civicTimelineEvents.json）は既存4件のまま変更していない
+  （台風8号・市街地竜巻・エンクロス開館・台風14号、既に出典付きで確認済み）。
+- mayor-02（首藤正治、2006-2018）：Wikipedia・大正大学研究者ページ等で経歴（3期、
+  2006年に現職櫻井哲雄を破り初当選、2017年に不出馬表明）を確認したが、2006〜2014年の
+  各選挙時の公約・マニフェスト原文を掲載する一次資料はウェブ検索の範囲では発見できな
+  かった（2014年3期目のマニフェストに内藤記念館・城山公園再整備が含まれるという言及が
+  検索結果にあったが、出典として提示されたPDF（広報のべおか2014年3月号）が画像スキャン
+  でテキスト抽出できず、独立に原文を確認できなかったため、根拠不十分として登録は
+  見送った）。市政年表は既に33件と充実しており（北方町・北浦町・北川町編入、口蹄疫、
+  新庁舎建設等、いずれも延岡市公式年表を出典として確認済み）、追加の収集は行わなかった。
+  政策データはnot_collectedのまま。
+- mayor-04〜mayor-13（1933年〜2006年在任）：今回は未着手。1990年代以前の市長は
+  デジタル化された一次資料がウェブ検索の範囲でほぼ存在しないと想定され、TASK-046
+  （1999年以前選挙調査）と同様に図書館現物確認・『延岡市史』確認等の物理資料調査が
+  必要になる可能性が高い。次回セッションでの継続候補。
+
+**残課題（次回セッションへの引き継ぎ）**：
+1. mayor-03の10政策について、個別サブページ本文の追加取得（現在は見出しのみ）
+2. mayor-02の2006〜2014年マニフェスト原文の追加調査（可能であれば広報のべおか2014年3月号
+   PDFのOCR処理、または図書館等での現物確認）
+3. mayor-04〜13（12名）の政策・大型事業・市政上の主要出来事の調査（物理資料調査が
+   必要になる可能性が高い）
+4. 上記いずれも、確認できない場合は0件にせずconfirmed/not_collected/unavailable/
+   under_reviewの既存語彙で区別すること
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存と同一）／`typecheck`／`lint`（oxlint、0件）／
+`test`（26/26）／`build`（prerender 2112→2122/2122、新規政策10ページ分の増加を確認）／
+`validate:seo`（2123ページ、failures=0 warnings=0）／`validate:content`（2123ページ、
+errors=0 warnings=0）／`validate:freshness`／`validate:sources`／`validate:completeness`／
+`validate:finance`／`validate:political-funds`すべて成功、既存ベースラインと同一。
+
+完了記録：
+- 完了日：2026-08-14
+- コミットID：（本コミット、次回コミット時に確定）
+- 変更概要：上記のとおり。ブラウザ実機確認（26議員全員、TASK-070回帰0件）、外部リンク8件
+  再確認（生きたリンク切れ0件、Facebook 5件はボット対策により自動確認不能と判定）、
+  公開UI内部表記監査（TASK-/Phase##参照を計21箇所是正、公開UI残存0件）、歴代市長データ
+  収集フェーズ1（mayor-03の政策10件を公式サイトから追加、mayor-02は資料不足のため
+  not_collected維持、mayor-04〜13は次回継続）を実施した。推測によるデータ補完・根拠のない
+  政策紐付けは行っていない（首藤正治の内藤記念館再整備の言及は原典PDFを独立確認できな
+  かったため登録を見送った）。

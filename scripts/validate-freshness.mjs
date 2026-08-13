@@ -44,7 +44,12 @@ const DATE_FIELD_NAMES = new Set([...CONFIRMATION_DATE_FIELDS, ...REFERENCE_PERI
 
 const STALE_WARNING_DAYS = 365;
 const now = new Date();
-const todayIso = now.toISOString().slice(0, 10);
+// データ内の確認日系フィールドは日本標準時（JST、UTC+9）の暦日で記録されているため、
+// 「今日」もJSTで判定する。toISOString()（UTC）のままだと、UTCで日付が変わる前の
+// JST 00:00〜08:59の間、JSTでの「今日」の日付が一律で未来日と誤判定される
+// （Cloudflare PagesビルドサーバーがUTCで動作する場合は特に発生しやすい）。
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+const todayIso = new Date(now.getTime() + JST_OFFSET_MS).toISOString().slice(0, 10);
 
 const errors = [];
 const warnings = [];
