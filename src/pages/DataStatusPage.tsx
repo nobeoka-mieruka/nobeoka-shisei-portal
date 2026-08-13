@@ -833,6 +833,43 @@ export function DataStatusPage() {
           </Link>
           からご覧いただけます。
         </p>
+
+        <p className="mb-2 mt-4 text-xs font-medium text-on-surface-variant">
+          現在データベースに収録している元議員{peopleStatus.formerMemberCount}名の内訳（延岡市議会に実際に在職した歴代議員の総数ではありません）
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">任期確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberTermConfirmedCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">党派履歴確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberPartyConfirmedCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">委員会確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberCommitteeConfirmedCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">一般質問確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberGeneralQuestionConfirmedCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">議会発言確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberSpeechConfirmedCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">賛否確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberVoteConfirmedCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">選挙記録のみ確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberElectionOnlyCount}名</dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          「任期確認」は選挙当選日ではなく、就任日を示す独立した公式資料で確認できた場合のみカウントしています（選挙当選日を任期開始日として代用していません）。「選挙記録のみ確認人数」は、当選の事実は確認できているものの、正式な任期・議会活動の記録がまだ確認できていない人数であり、その方の議会活動が少なかったことを意味するものではありません。
+        </p>
       </SectionCard>
 
       <SectionCard title="議会事務局への確認候補（本サイトからの問い合わせは行っていません）">

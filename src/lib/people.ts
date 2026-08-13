@@ -9,6 +9,7 @@ import electionResultsData from "../data/electionResults.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archiveMemberAffiliationsData from "../data/archiveMemberAffiliations.json";
+import archiveMemberTermsData from "../data/archiveMemberTerms.json";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import type { BillVoteItem, CouncilMember, CouncilSpeechSummaryData, FormerMember } from "../types";
 import type { ElectionResult } from "../types/election";
@@ -18,6 +19,7 @@ import type {
   ArchiveMayorTerm,
   ArchiveMemberAffiliation,
   ArchiveMemberProfile,
+  ArchiveMemberTerm,
   ArchivePolicy,
 } from "../types/historicalArchive";
 import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
@@ -33,6 +35,7 @@ const electionResults = electionResultsData as ElectionResult[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const archiveMemberAffiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[];
+const archiveMemberTerms = archiveMemberTermsData as ArchiveMemberTerm[];
 
 export type PersonType = "member" | "former-member" | "mayor";
 
@@ -49,6 +52,9 @@ export interface PersonSummary {
   tenureLabel: string;
   /** 絞り込み用の在籍年度（西暦、確認できる範囲のみ）。 */
   tenureYears: number[];
+  /** Phase129：選挙で当選した年（西暦、electionResults.json由来）。在職年代（tenureYears）とは
+   * 別概念のため区別する（選挙年から在職期間を自動推定しない）。 */
+  electionYears: number[];
   verificationStatus: "verified" | "partiallyVerified" | "needsReview" | "sourceUnavailable";
   relatedDocumentCount: number;
 }
@@ -105,6 +111,20 @@ function yearRangeFromTerm(termStart?: string, termEnd?: string | null): number[
 export function buildPersonIndex(): PersonSummary[] {
   const people: PersonSummary[] = [];
 
+  // Phase129：electionResults.jsonのlinkedProfileIdから、人物ごとの当選年（西暦）を求める。
+  // 在職年代（tenureYears）とは別概念として管理し、選挙年から在職期間を自動推定しない。
+  const electionYearsByPersonId = new Map<string, number[]>();
+  for (const e of electionResults) {
+    const year = Number.parseInt(e.electionDate.slice(0, 4), 10);
+    if (!Number.isInteger(year)) continue;
+    for (const c of e.candidates ?? []) {
+      if (!c.elected || !c.linkedProfileId) continue;
+      const list = electionYearsByPersonId.get(c.linkedProfileId) ?? [];
+      list.push(year);
+      electionYearsByPersonId.set(c.linkedProfileId, list);
+    }
+  }
+
   for (const m of members) {
     people.push({
       personType: "member",
@@ -116,12 +136,20 @@ export function buildPersonIndex(): PersonSummary[] {
       factionId: m.factionId,
       tenureLabel: m.termCount ? `現職（当選${m.termCount}回）` : "現職",
       tenureYears: [CURRENT_YEAR],
+      electionYears: [...new Set(electionYearsByPersonId.get(m.id) ?? [])],
       verificationStatus: m.profileUrl ? "verified" : "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("member", m.id),
     });
   }
 
   for (const fm of formerMembers) {
+    const electionYears = [...new Set(electionYearsByPersonId.get(fm.id) ?? [])];
+    const tenureLabel =
+      fm.servedSessions.length > 0
+        ? `元議員（在職確認済み会期：${fm.servedSessions.join("、")}）`
+        : electionYears.length > 0
+          ? `元議員（選挙記録：${electionYears.join("、")}年当選。正式な任期は未確認）`
+          : "元議員（在職期間は確認中）";
     people.push({
       personType: "former-member",
       id: fm.id,
@@ -129,8 +157,9 @@ export function buildPersonIndex(): PersonSummary[] {
       name: fm.name,
       nameKana: fm.nameKana ?? undefined,
       isCurrent: false,
-      tenureLabel: fm.servedSessions.length > 0 ? `元議員（在職確認済み会期：${fm.servedSessions.join("、")}）` : "元議員（在職期間は確認中）",
+      tenureLabel,
       tenureYears: yearsFromSessionIds(fm.servedSessions),
+      electionYears,
       verificationStatus: fm.lastVerified ? "partiallyVerified" : "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("former-member", fm.id),
     });
@@ -151,6 +180,7 @@ export function buildPersonIndex(): PersonSummary[] {
       isCurrent: mayor.isCurrentMayor,
       tenureLabel: terms.length > 0 ? `${roleLabel}（${terms.length}期）` : roleLabel,
       tenureYears: [...new Set(tenureYears)],
+      electionYears: [...new Set(electionYearsByPersonId.get(mayor.id) ?? [])],
       verificationStatus: mayor.sourceRefs[0]?.verificationStatus ?? "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("mayor", mayor.id),
     });
@@ -240,6 +270,17 @@ export interface PeopleDataStatus {
   committeeLinkedCount: number;
   /** 選挙・一般質問・議会発言・議案賛否・委員会のいずれの根拠も無い人物ID数。 */
   unconfirmedPersonCount: number;
+  /** Phase129：元議員（formerMembers.json）限定の内訳。選挙日を任期開始日とみなさない方針のため、
+   * 「任期確認」は`archiveMemberTerms.json`に独立したレコードがある場合のみカウントする。 */
+  formerMemberTermConfirmedCount: number;
+  /** 会派（factions.json、議会内の会派）ではなく、選挙時点の届出党派（party）の履歴が確認できた人数。 */
+  formerMemberPartyConfirmedCount: number;
+  formerMemberCommitteeConfirmedCount: number;
+  formerMemberGeneralQuestionConfirmedCount: number;
+  formerMemberSpeechConfirmedCount: number;
+  formerMemberVoteConfirmedCount: number;
+  /** 選挙記録のみ確認できている（任期・議会活動のいずれも未確認）元議員数。データ充足レベルA。 */
+  formerMemberElectionOnlyCount: number;
 }
 
 export function getPeopleDataStatus(): PeopleDataStatus {
@@ -282,6 +323,37 @@ export function getPeopleDataStatus(): PeopleDataStatus {
     (id) => !electionLinked.has(id) && !speechLinked.has(id) && !voteLinked.has(id) && !committeeLinked.has(id),
   ).length;
 
+  // Phase129：元議員限定の内訳（archiveMemberTerms／archiveMemberAffiliationsの"party"型を活用）。
+  const termConfirmedProfileIds = new Set(archiveMemberTerms.map((t) => t.memberProfileId));
+  const partyConfirmedProfileIds = new Set(
+    archiveMemberAffiliations.filter((a) => a.affiliationType === "party").map((a) => a.memberProfileId),
+  );
+  const formerIds = formerMembers.map((m) => m.id);
+  const formerMemberTermConfirmedCount = formerIds.filter((id) => {
+    const profile = archiveMemberProfiles.find((p) => p.legacyFormerMemberId === id);
+    return profile && termConfirmedProfileIds.has(profile.id);
+  }).length;
+  const formerMemberPartyConfirmedCount = formerIds.filter((id) => {
+    const profile = archiveMemberProfiles.find((p) => p.legacyFormerMemberId === id);
+    return profile && partyConfirmedProfileIds.has(profile.id);
+  }).length;
+  const formerMemberCommitteeConfirmedCount = formerIds.filter((id) => committeeLinked.has(id)).length;
+  const formerMemberGeneralQuestionConfirmedCount = formerIds.filter((id) => questionLinked.has(id)).length;
+  const formerMemberSpeechConfirmedCount = formerIds.filter((id) => speechLinked.has(id)).length;
+  const formerMemberVoteConfirmedCount = formerIds.filter((id) => voteLinked.has(id)).length;
+  const formerMemberElectionOnlyCount = formerIds.filter(
+    (id) =>
+      electionLinked.has(id) &&
+      !questionLinked.has(id) &&
+      !speechLinked.has(id) &&
+      !voteLinked.has(id) &&
+      !committeeLinked.has(id) &&
+      !(() => {
+        const profile = archiveMemberProfiles.find((p) => p.legacyFormerMemberId === id);
+        return profile && termConfirmedProfileIds.has(profile.id);
+      })(),
+  ).length;
+
   return {
     currentMemberCount: members.length,
     formerMemberCount: formerMembers.length,
@@ -293,5 +365,12 @@ export function getPeopleDataStatus(): PeopleDataStatus {
     voteLinkedCount: allIds.filter((id) => voteLinked.has(id)).length,
     committeeLinkedCount: allIds.filter((id) => committeeLinked.has(id)).length,
     unconfirmedPersonCount,
+    formerMemberTermConfirmedCount,
+    formerMemberPartyConfirmedCount,
+    formerMemberCommitteeConfirmedCount,
+    formerMemberGeneralQuestionConfirmedCount,
+    formerMemberSpeechConfirmedCount,
+    formerMemberVoteConfirmedCount,
+    formerMemberElectionOnlyCount,
   };
 }

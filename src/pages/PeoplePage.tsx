@@ -122,14 +122,16 @@ export function PeoplePage() {
   const yearFilter = hasMounted ? (searchParams.get("year") ?? "") : "";
 
   const factionIds = [...new Set(members.map((m) => m.factionId))];
-  const yearOptions = [...new Set(people.flatMap((p) => p.tenureYears))].sort((a, b) => b - a);
+  // 在職年代（tenureYears）と選挙年代（electionYears）の両方を選択肢に含める（別概念だが、
+  // 絞り込みの利便性のため一覧としては合算する。選挙年から在職期間を自動推定するものではない）。
+  const yearOptions = [...new Set(people.flatMap((p) => [...p.tenureYears, ...p.electionYears]))].sort((a, b) => b - a);
 
   const filtered = people.filter((p) => {
     if (typeFilter && p.personType !== typeFilter) return false;
     if (statusFilter === "current" && !p.isCurrent) return false;
     if (statusFilter === "former" && p.isCurrent) return false;
     if (factionFilter && p.factionId !== factionFilter) return false;
-    if (yearFilter && !p.tenureYears.includes(Number(yearFilter))) return false;
+    if (yearFilter && !p.tenureYears.includes(Number(yearFilter)) && !p.electionYears.includes(Number(yearFilter))) return false;
     return true;
   });
 
@@ -202,7 +204,7 @@ export function PeoplePage() {
             </select>
           </label>
           <label className="flex flex-col gap-1 text-sm">
-            <span className="text-xs font-medium text-on-surface-variant">在籍年度</span>
+            <span className="text-xs font-medium text-on-surface-variant">在職年代・選挙年代</span>
             <select
               className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={yearFilter}
@@ -211,14 +213,14 @@ export function PeoplePage() {
               <option value="">すべて</option>
               {yearOptions.map((y) => (
                 <option key={y} value={y}>
-                  {y}年度
+                  {y}年
                 </option>
               ))}
             </select>
           </label>
         </div>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-          現職議員の在籍年度は、在籍履歴データが未整備のため今年度のみを表示しています（過去の在籍年度を推測していません）。
+          「在職年代・選挙年代」は、公式資料で確認できた在職期間（在職年代）または選挙の当選年（選挙年代）のいずれかに一致する人物を表示します。選挙年から在職期間を自動的に推定してはいません（当選の翌年もそのまま在職していたとは限りません）。現職議員の在職年代は、在籍履歴データが未整備のため今年度のみを表示しています。
         </p>
       </SectionCard>
 

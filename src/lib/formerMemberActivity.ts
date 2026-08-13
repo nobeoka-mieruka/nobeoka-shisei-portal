@@ -142,3 +142,22 @@ export function getFormerMemberActivity(fm: FormerMember): FormerMemberActivity 
 export function getAllFormerMemberActivity(): FormerMemberActivity[] {
   return formerMembers.map((fm) => getFormerMemberActivity(fm));
 }
+
+/**
+ * Phase129：元議員のデータ充足レベル（内部集計専用。人物評価には使用しない）。
+ * A：選挙記録のみ確認できている
+ * B：選挙＋正式任期（archiveMemberTerms）まで確認できている
+ * C：選挙＋議会活動（一般質問・議会内発言・賛否・委員会・議案提出等）を確認できている
+ * D：選挙・任期・議会活動を複数領域で確認できている
+ */
+export type FormerMemberDataTier = "A" | "B" | "C" | "D";
+
+export function getFormerMemberDataTier(timelineEventTypes: Set<string>): FormerMemberDataTier {
+  const hasTerm = timelineEventTypes.has("term_start");
+  const activityTypes = ["general_question", "speech", "vote", "committee", "role", "proposal"];
+  const hasActivity = activityTypes.some((t) => timelineEventTypes.has(t));
+  if (hasActivity && hasTerm) return "D";
+  if (hasActivity) return "C";
+  if (hasTerm) return "B";
+  return "A";
+}
