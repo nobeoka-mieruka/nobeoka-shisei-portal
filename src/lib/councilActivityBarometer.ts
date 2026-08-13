@@ -3,6 +3,7 @@ import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
+import billProposalRolesData from "../data/billProposalRoles.json";
 import type {
   CouncilMember,
   GeneralQuestionItem,
@@ -12,6 +13,7 @@ import type {
   CouncilSession,
 } from "../types";
 import { publicBills } from "./billVotes";
+import { electionResultsForPerson, formatElectionDate } from "./elections";
 import {
   findMemberSpeechRecord,
   publicSpeeches,
@@ -537,4 +539,108 @@ export function getEvidenceAvailabilitySummary(): EvidenceAvailabilityItem[] {
     ...e,
     statusText: e.key === "pendingMinutes" ? `${pendingMinutesCount}件` : evidenceAvailabilityLabel(e.code),
   }));
+}
+
+/**
+ * Phase135：「延岡市議会 議員活動バロメーター」一覧・個人ページの再デザイン用の追加集計。
+ *
+ * 【方針】ここに新しい採点・順位ロジックは追加しない。既存の一次資料（billProposalRoles.json・
+ * members.json・electionResults.json）から確認できる「実数」をそのまま集計するだけであり、
+ * activityRadar.tsの各指標（value・dataStatus）は一切変更しない。
+ */
+
+interface BillProposalRoleRecord {
+  recordId: string;
+  billId: string;
+  recordType: string;
+  personId: string | null;
+  personName: string;
+  role: string;
+  date: string | null;
+  sourceRefs: { label: string; url?: string }[];
+  verificationStatus: string;
+}
+
+const billProposalRoles = (billProposalRolesData as { roles: BillProposalRoleRecord[] }).roles;
+
+/**
+ * 決議提出者としての件数（現職議員のみ）。
+ *
+ * 【重要な限定】billProposalRoles.jsonは、会議録で個人名を確認できた議員提出「決議」の
+ * 提出者のみを収録している（請願・陳情の紹介議員、条例案等の一般的な議案の提出者は対象外。
+ * ファイル内noteのとおり、これらは複数回の一次資料調査でも氏名を確認できていない）。
+ * 議員提出決議は延岡市議会全体で計8件あり、うち1件（2021-06-ketsugi-2）のみ提出者を
+ * 特定できなかった（research_exhausted）。したがって、決議提出者が0件の議員については、
+ * 「決議8件のうち提出者として確認できたものが無かった」という確認済みの0件（confirmed_zero）
+ * であり、missing（未調査）ではない。呼び出し側は必ず「決議の提出者に限る」旨を明記すること。
+ */
+export interface DecisionSubmitterEntry {
+  member: CouncilMember;
+  count: number;
+}
+
+export function decisionSubmitterCountFor(memberId: string): number {
+  return billProposalRoles.filter((r) => r.role === "submitter" && r.personId === memberId).length;
+}
+
+export function decisionSubmitterTop(entries: MemberActivityEntry[], n: number): DecisionSubmitterEntry[] {
+  return entries
+    .map((e) => ({ member: e.member, count: decisionSubmitterCountFor(e.member.id) }))
+    .filter((e) => e.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, n);
+}
+
+/**
+ * 議席番号：members.jsonに構造化フィールドが無いため、既に確認済みの`profile`本文
+ * （延岡市議会公式プロフィールページ由来、「議席番号◯番。」の記載）から抽出する。
+ * 新しい値を推測で作らず、既存テキストの機械的な読み取りのみを行う。
+ */
+export function seatNumberFromProfile(member: CouncilMember): string | null {
+  const matched = member.profile.match(/議席番号(\d+)番/);
+  return matched ? matched[1] : null;
+}
+
+/**
+ * 情報発信媒体数：本人確認済み（verificationStatus: "verified"）のSNS・Web媒体数に、
+ * 議会公式プロフィールページ（profileUrl）を加えた実数。未確認（unverified）のSNSは
+ * 本人のものと断定できないため含めない。
+ */
+export function informationChannelCount(member: CouncilMember): number {
+  const verifiedSns = member.sns.filter((s) => s.verificationStatus === "verified").length;
+  return verifiedSns + (member.profileUrl ? 1 : 0);
+}
+
+/**
+ * rawValue（例：speechの「確認できた質問項目数」）でのTOP N。metricByKeyのvalue（0〜100の
+ * 指数）と異なり、指数化していない件数そのものを「発言量」として順位付けしたい場合に使う。
+ */
+export function topByRawValue(entries: MemberActivityEntry[], key: string, n: number): MemberActivityEntry[] {
+  return entries
+    .filter((e) => (metricByKey(e.metrics, key)?.rawValue ?? 0) > 0)
+    .sort((a, b) => (metricByKey(b.metrics, key)!.rawValue ?? 0) - (metricByKey(a.metrics, key)!.rawValue ?? 0))
+    .slice(0, n);
+}
+
+/**
+ * 選挙時得票（参考情報）。現行任期の選挙（令和5年4月23日執行）でこの議員が候補者として
+ * 記録されている場合のみ返す。活動指標スコアには一切含めない、参考表示専用の値。
+ */
+export interface ElectionVoteReference {
+  electionName: string;
+  electionDateLabel: string;
+  votes: number;
+}
+
+export function electionVoteReferenceFor(memberId: string): ElectionVoteReference | null {
+  const results = electionResultsForPerson(memberId);
+  const latest = results[0];
+  if (!latest) return null;
+  const candidate = latest.candidates.find((c) => c.linkedProfileId === memberId);
+  if (!candidate || candidate.votes == null) return null;
+  return {
+    electionName: latest.electionName,
+    electionDateLabel: formatElectionDate(latest),
+    votes: candidate.votes,
+  };
 }

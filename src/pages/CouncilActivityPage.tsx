@@ -20,7 +20,10 @@ import {
   getEvidenceAvailabilitySummary,
   get156CellMatrix,
   metricByKey,
-  topByMetric,
+  topByRawValue,
+  decisionSubmitterTop,
+  decisionSubmitterCountFor,
+  informationChannelCount,
   type MemberActivityEntry,
 } from "../lib/councilActivityBarometer";
 import { ActivityRadarChart } from "../components/council/ActivityRadarChart";
@@ -29,60 +32,71 @@ import { sortedCommittees, committeesForMember } from "../lib/committees";
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
-type SortKey = "name" | "question" | "speech" | "voting" | "disclosure";
+/** 「白背景・薄いグレー罫線・グラデーション無し」で統一するための、この2ページ専用のカードスタイル。 */
+const flatCardClass = "border border-gray-200 bg-white shadow-none dark:border-outline-variant dark:bg-surface-container-low";
 
-const SORTABLE_COLUMNS: { key: SortKey; label: string; metricKey?: string }[] = [
+type SortKey = "name" | "speechCount" | "questionRate" | "submitterCount" | "channelCount";
+
+interface BarometerRow {
+  entry: MemberActivityEntry;
+  /** 発言件数（確認できた質問項目数の実数、指数化前）。 */
+  speechCount: number;
+  /** 一般質問実施率（0〜100、未収録はnull）。 */
+  questionRate: number | null;
+  /** 決議の提出者として確認できた件数（限定あり、confirmed_zeroを含む実数）。 */
+  submitterCount: number;
+  /** 情報発信媒体数（本人確認済みSNS＋公式プロフィールページの実数）。 */
+  channelCount: number;
+}
+
+const TABLE_COLUMNS: { key: SortKey; label: string }[] = [
   { key: "name", label: "氏名" },
-  { key: "question", label: "一般質問実施率", metricKey: "question" },
-  { key: "speech", label: "議会内発言", metricKey: "speech" },
-  { key: "voting", label: "議案等の意思表示", metricKey: "voting" },
-  { key: "disclosure", label: "情報発信・プロフィール充足度", metricKey: "disclosure" },
+  { key: "speechCount", label: "発言件数" },
+  { key: "questionRate", label: "実施率" },
+  { key: "submitterCount", label: "提出者件数" },
+  { key: "channelCount", label: "情報発信媒体数" },
 ];
 
-const NOT_SCORED_COLUMNS: { key: string; label: string }[] = [
-  { key: "attendance", label: "出席状況" },
-  { key: "proposal", label: "請願・提案等" },
-];
-
-/** 156セル一覧の列順。`getMemberActivityMetrics`が返すmetrics配列の実際の並び順と一致させる
- * （question/speech/attendance/voting/proposal/disclosure）。SORTABLE_COLUMNSはソートUI用の
- * 別の並び順のため、ここでは流用しない。 */
-const MATRIX_INDICATOR_LABELS: { key: string; label: string }[] = [
-  { key: "question", label: "一般質問" },
-  { key: "speech", label: "議会内発言" },
-  { key: "attendance", label: "出席状況" },
-  { key: "voting", label: "議案等の意思表示" },
-  { key: "proposal", label: "請願・提案等" },
-  { key: "disclosure", label: "情報発信" },
-];
-
-function sortEntries(entries: MemberActivityEntry[], sortKey: SortKey, dir: "asc" | "desc"): MemberActivityEntry[] {
-  const sorted = [...entries];
+function sortRows(rows: BarometerRow[], sortKey: SortKey, dir: "asc" | "desc"): BarometerRow[] {
+  const sorted = [...rows];
   if (sortKey === "name") {
-    sorted.sort((a, b) => a.member.nameKana.localeCompare(b.member.nameKana, "ja"));
+    sorted.sort((a, b) => a.entry.member.nameKana.localeCompare(b.entry.member.nameKana, "ja"));
   } else {
     sorted.sort((a, b) => {
-      const av = metricByKey(a.metrics, sortKey)?.value;
-      const bv = metricByKey(b.metrics, sortKey)?.value;
+      const av = sortKey === "questionRate" ? a.questionRate : a[sortKey];
+      const bv = sortKey === "questionRate" ? b.questionRate : b[sortKey];
       if (av === null || av === undefined) return 1;
       if (bv === null || bv === undefined) return -1;
-      return bv - av;
+      return (bv as number) - (av as number);
     });
   }
   if (dir === "asc") sorted.reverse();
   return sorted;
 }
 
-function MetricBar({ value }: { value: number | null }) {
+/** 列内最大値を基準にバー長を正規化した横棒グラフ（強調色は呼び出し側で指定）。 */
+function ValueBar({ value, max, colorClass }: { value: number; max: number; colorClass: string }) {
+  const pct = max > 0 ? Math.round((value / max) * 100) : 0;
+  return (
+    <div className="flex items-center gap-2">
+      <div className="h-2 w-16 overflow-hidden rounded-full bg-gray-100 dark:bg-surface-container-high sm:w-24">
+        <div className={`h-full rounded-full ${colorClass}`} style={{ width: `${Math.max(pct, value > 0 ? 4 : 0)}%` }} />
+      </div>
+      <span className="tabular-nums text-xs text-on-surface-variant">{value}</span>
+    </div>
+  );
+}
+
+function RateBar({ value }: { value: number | null }) {
   if (value === null) {
-    return <span className="text-xs text-on-surface-variant">評価対象外</span>;
+    return <span className="text-xs text-on-surface-variant">確認中</span>;
   }
   return (
     <div className="flex items-center gap-2">
-      <div className="h-2 w-16 overflow-hidden rounded-full bg-surface-container-high sm:w-24">
+      <div className="h-2 w-16 overflow-hidden rounded-full bg-gray-100 dark:bg-surface-container-high sm:w-24">
         <div className="h-full rounded-full bg-secondary" style={{ width: `${Math.round(value)}%` }} />
       </div>
-      <span className="tabular-nums text-xs text-on-surface-variant">{Math.round(value)}</span>
+      <span className="tabular-nums text-xs text-on-surface-variant">{Math.round(value)}%</span>
     </div>
   );
 }
@@ -99,7 +113,6 @@ export function CouncilActivityPage() {
   const [factionFilter, setFactionFilter] = useState("all");
   const [committeeFilter, setCommitteeFilter] = useState("all");
   // 比較状態はURLクエリ（?compare=m01,m02,m03）と同期し、URLを共有すれば同じ比較結果を再現できる。
-  // 新規ルート・prerender対象は増やさず、既存の/council-activityへのクエリ文字列のみで表現する。
   const [compareIds, setCompareIds] = useState<string[]>(() => {
     const raw = searchParams.get("compare");
     return raw ? raw.split(",").filter(Boolean).slice(0, 3) : [];
@@ -113,6 +126,8 @@ export function CouncilActivityPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [compareIds]);
 
+  // 対象議員は members.json の件数をそのまま使う（人数を固定値へ書き換えない。任期交代等で
+  // 人数が変わってもコード変更は不要）。
   const allEntries = useMemo(() => getAllCurrentMemberActivity(), []);
   const targetPeriod = useMemo(() => activityTargetPeriodLabel(), []);
   const coverage = useMemo(() => getIndicatorCoverage(), []);
@@ -121,25 +136,41 @@ export function CouncilActivityPage() {
   const matrix = useMemo(() => get156CellMatrix(), []);
   const [matrixExpanded, setMatrixExpanded] = useState(false);
 
-  const filteredEntries = useMemo(() => {
-    return allEntries.filter((e) => {
-      if (factionFilter !== "all" && e.member.factionId !== factionFilter) return false;
-      if (committeeFilter !== "all" && !committeesForMember(e.member.id).some((c) => c.id === committeeFilter)) return false;
-      if (nameQuery.trim() && !e.member.name.includes(nameQuery.trim()) && !e.member.nameKana.includes(nameQuery.trim())) {
-        return false;
-      }
+  const allRows: BarometerRow[] = useMemo(
+    () =>
+      allEntries.map((entry) => ({
+        entry,
+        speechCount: metricByKey(entry.metrics, "speech")?.rawValue ?? 0,
+        questionRate: metricByKey(entry.metrics, "question")?.value ?? null,
+        submitterCount: decisionSubmitterCountFor(entry.member.id),
+        channelCount: informationChannelCount(entry.member),
+      })),
+    [allEntries],
+  );
+
+  const filteredRows = useMemo(() => {
+    return allRows.filter((row) => {
+      const m = row.entry.member;
+      if (factionFilter !== "all" && m.factionId !== factionFilter) return false;
+      if (committeeFilter !== "all" && !committeesForMember(m.id).some((c) => c.id === committeeFilter)) return false;
+      if (nameQuery.trim() && !m.name.includes(nameQuery.trim()) && !m.nameKana.includes(nameQuery.trim())) return false;
       return true;
     });
-  }, [allEntries, factionFilter, committeeFilter, nameQuery]);
+  }, [allRows, factionFilter, committeeFilter, nameQuery]);
 
-  const sorted = useMemo(() => sortEntries(filteredEntries, sortKey, sortDir), [filteredEntries, sortKey, sortDir]);
+  const sortedRows = useMemo(() => sortRows(filteredRows, sortKey, sortDir), [filteredRows, sortKey, sortDir]);
 
-  const speechTop3 = useMemo(() => topByMetric(allEntries, "speech", 3), [allEntries]);
+  // 横棒グラフは「表示中の列内最大値」を基準に正規化する（絞り込み・並べ替えても列内の相対比較を保つ）。
+  const maxSpeech = Math.max(1, ...filteredRows.map((r) => r.speechCount));
+  const maxSubmitter = Math.max(1, ...filteredRows.map((r) => r.submitterCount));
+  const maxChannel = Math.max(1, ...filteredRows.map((r) => r.channelCount));
+
+  const speechTop3 = useMemo(() => topByRawValue(allEntries, "speech", 3), [allEntries]);
   const questionFull = useMemo(
     () => allEntries.filter((e) => metricByKey(e.metrics, "question")?.value === 100),
     [allEntries],
   );
-  const disclosureTop3 = useMemo(() => topByMetric(allEntries, "disclosure", 3), [allEntries]);
+  const submitterTop3 = useMemo(() => decisionSubmitterTop(allEntries, 3), [allEntries]);
 
   function toggleCompare(id: string) {
     setCompareIds((prev) => {
@@ -169,25 +200,278 @@ export function CouncilActivityPage() {
       ))}
       <Breadcrumbs items={seo.breadcrumbs} />
 
-      <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
-        <h1 className="text-xl font-semibold leading-snug text-on-primary-container sm:text-2xl">
+      {/* ページ上部：大見出し・サブ見出し・対象期間・注意書き（白背景・薄いグレー罫線） */}
+      <div className={`rounded-2xl p-5 sm:p-6 ${flatCardClass}`}>
+        <h1 className="text-xl font-semibold leading-snug text-on-surface sm:text-2xl">
           延岡市議会 議員活動バロメーター
         </h1>
-        <p className="mt-2 text-sm text-on-primary-container/80">公開資料から見える5つの指標</p>
-        <p className="mt-1 text-xs text-on-primary-container/70">対象期間：{targetPeriod}</p>
+        <p className="mt-2 text-sm text-on-surface-variant">公開資料から見える5つの指標</p>
+        <p className="mt-1 text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
+        <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-on-surface-variant dark:border-outline-variant">
+          件数や実施率は活動の「量」を示すものであり、政策の内容や「質」を評価するものではありません。議員の能力、政治的立場、人物評価を示すものでもありません。資料の公開状況によって確認可能な情報量に差があります。詳しい算定方法は
+          <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+            こちら
+          </Link>
+          、出典は各項目のリンク先でご確認いただけます。
+        </p>
       </div>
 
-      <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-        本ページは、公開資料から確認できる活動を一定の基準で整理したものです。議員の能力、政策の質、政治的立場、人物評価を示すものではありません。発言数が多いこと自体を政策成果として評価するものではありません。資料の公開状況によって確認可能な情報量に差があります。詳しい算定方法は
-        <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
-          こちら
-        </Link>
-        、出典は各項目のリンク先でご確認いただけます。
-      </p>
+      {/* 上位ランキングカード：A発言量TOP3／B一般質問実施率／C請願・議案等への関与 */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <SectionCard title="A. 発言量TOP3" className={flatCardClass}>
+          {speechTop3.length === 0 ? (
+            <p className="text-sm text-on-surface-variant">確認できるデータがまだありません。</p>
+          ) : (
+            <ol className="space-y-1.5 text-sm text-on-surface">
+              {speechTop3.map((e, i) => (
+                <li key={e.member.id} className="flex items-center justify-between gap-2">
+                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
+                    {i + 1}位　{e.member.name}
+                  </Link>
+                  <span className="tabular-nums text-xs font-semibold text-orange-600 dark:text-orange-400">
+                    {metricByKey(e.metrics, "speech")!.rawValue}件
+                  </span>
+                </li>
+              ))}
+            </ol>
+          )}
+          <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+            発言件数＝会議録から確認できた質問項目数（一般質問・代表質問等）。
+          </p>
+        </SectionCard>
+
+        <SectionCard title="B. 一般質問実施率" className={flatCardClass}>
+          <p className="text-sm text-on-surface">実施率100%：{questionFull.length}名</p>
+          {questionFull.length > 0 && (
+            <ul className="mt-1.5 flex flex-wrap gap-x-2 gap-y-1 text-xs text-on-surface-variant">
+              {questionFull.map((e) => (
+                <li key={e.member.id}>
+                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
+                    {e.member.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+            実施率＝会議録取得済みの定例会のうち、一般質問等を行ったことが確認できた会期の割合。
+          </p>
+        </SectionCard>
+
+        <SectionCard title="C. 請願・議案等への関与" className={flatCardClass}>
+          <p className="text-xs font-medium text-on-surface">提出者件数TOP3</p>
+          {submitterTop3.length === 0 ? (
+            <p className="mt-1 text-sm text-on-surface-variant">確認できるデータがまだありません。</p>
+          ) : (
+            <ol className="mt-1 space-y-1.5 text-sm text-on-surface">
+              {submitterTop3.map((e, i) => (
+                <li key={e.member.id} className="flex items-center justify-between gap-2">
+                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
+                    {i + 1}位　{e.member.name}
+                  </Link>
+                  <span className="tabular-nums text-xs font-semibold text-orange-600 dark:text-orange-400">{e.count}件</span>
+                </li>
+              ))}
+            </ol>
+          )}
+          <p className="mt-1 text-[11px] leading-relaxed text-on-surface-variant">
+            本会議での決議（決議案）の提出者として会議録で確認できた件数のみです。条例案・請願・意見書等の提出者は含みません。
+          </p>
+          <p className="mt-3 text-xs font-medium text-on-surface">紹介議員件数TOP3</p>
+          <p className="mt-1 text-sm text-on-surface-variant">
+            請願・陳情の紹介議員（紹介した議員）の氏名は、複数回の会議録調査でも確認できていません（0件という意味ではなく、公開資料からは未確認です）。
+          </p>
+        </SectionCard>
+      </div>
+
+      {/* 全議員比較表 */}
+      <SectionCard title={`全議員比較（${sortedRows.length}／${allEntries.length}名）`} className={flatCardClass}>
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          列見出しをクリックすると並べ替えできます。「紹介議員件数」「出席状況」は、本サイトが議員別の一次資料をまだ収録できていないため「確認中」と表示しています（0件ではありません）。複数指標を合算した「総合順位」は掲載していません。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
+        </p>
+
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <div className="sm:w-56">
+            <SearchBar value={nameQuery} onChange={setNameQuery} placeholder="氏名で検索" />
+          </div>
+          <FilterSelect label="会派" value={factionFilter} onChange={setFactionFilter} options={factionOptions} />
+          <FilterSelect label="委員会" value={committeeFilter} onChange={setCommitteeFilter} options={committeeOptions} />
+          {(nameQuery || factionFilter !== "all" || committeeFilter !== "all") && (
+            <button
+              type="button"
+              onClick={() => {
+                setNameQuery("");
+                setFactionFilter("all");
+                setCommitteeFilter("all");
+              }}
+              className={`self-start rounded-full px-3 py-2 text-xs text-on-surface-variant underline ${linkClass}`}
+            >
+              絞り込みをクリア
+            </button>
+          )}
+        </div>
+
+        {sortedRows.length === 0 && (
+          <p className="rounded-lg bg-gray-50 p-4 text-sm text-on-surface-variant dark:bg-surface-container-high">
+            条件に一致する議員が見つかりませんでした。検索語や絞り込み条件をご確認ください。
+          </p>
+        )}
+
+        {/* PC: 表形式 */}
+        <div className="hidden overflow-x-auto sm:block">
+          <table className="w-full min-w-[820px] border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-gray-200 text-left text-xs text-on-surface-variant dark:border-outline-variant">
+                <th className="w-8 py-2 pr-2">比較</th>
+                <th className="py-2 pr-3">順位</th>
+                {TABLE_COLUMNS.map((col) => (
+                  <th key={col.key} className="py-2 pr-3">
+                    <button
+                      type="button"
+                      onClick={() => handleSort(col.key)}
+                      className={`inline-flex items-center gap-1 font-semibold hover:underline ${linkClass}`}
+                      aria-label={`${col.label}で並べ替え`}
+                    >
+                      {col.label}
+                      {sortKey === col.key && <span aria-hidden="true">{sortDir === "asc" ? "▲" : "▼"}</span>}
+                    </button>
+                  </th>
+                ))}
+                <th className="py-2 pr-3 font-semibold">紹介議員件数</th>
+                <th className="py-2 pr-3 font-semibold">出席状況</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedRows.map((row, i) => {
+                const m = row.entry.member;
+                const faction = getFaction(m.factionId);
+                return (
+                  <tr key={m.id} className="border-b border-gray-100 align-middle dark:border-outline-variant/60">
+                    <td className="py-2 pr-2">
+                      <input
+                        type="checkbox"
+                        checked={compareIds.includes(m.id)}
+                        onChange={() => toggleCompare(m.id)}
+                        disabled={!compareIds.includes(m.id) && compareIds.length >= 3}
+                        aria-label={`${m.name}を比較対象に選ぶ`}
+                        className="h-4 w-4"
+                      />
+                    </td>
+                    <td className="py-2 pr-3 text-xs text-on-surface-variant">{i + 1}</td>
+                    <td className="py-2 pr-3">
+                      <Link to={`/council-activity/${m.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
+                        {m.name}
+                      </Link>
+                      {faction && <FactionChip faction={faction} className="ml-2" />}
+                    </td>
+                    <td className="py-2 pr-3">
+                      <ValueBar value={row.speechCount} max={maxSpeech} colorClass="bg-orange-500" />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <RateBar value={row.questionRate} />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <ValueBar value={row.submitterCount} max={maxSubmitter} colorClass="bg-orange-500" />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <ValueBar value={row.channelCount} max={maxChannel} colorClass="bg-secondary" />
+                    </td>
+                    <td className="py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
+                    <td className="py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* スマホ：議員ごとのカード形式 */}
+        <div className="space-y-3 sm:hidden">
+          <div className="flex flex-wrap gap-2 text-xs">
+            {TABLE_COLUMNS.map((col) => (
+              <button
+                key={col.key}
+                type="button"
+                onClick={() => handleSort(col.key)}
+                className={`rounded-full border px-2.5 py-1 ${
+                  sortKey === col.key
+                    ? "border-orange-500 bg-orange-50 text-orange-700 dark:border-orange-400 dark:bg-orange-950/30 dark:text-orange-300"
+                    : "border-gray-200 text-on-surface-variant dark:border-outline-variant"
+                } ${linkClass}`}
+              >
+                {col.label}
+                {sortKey === col.key && (sortDir === "asc" ? "▲" : "▼")}
+              </button>
+            ))}
+          </div>
+          <ul className="space-y-2">
+            {sortedRows.map((row, i) => {
+              const m = row.entry.member;
+              const faction = getFaction(m.factionId);
+              return (
+                <li key={m.id} className={`rounded-lg p-3 ${flatCardClass}`}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs text-on-surface-variant">順位 {i + 1}</span>
+                    <label className="flex items-center gap-1.5 text-xs text-on-surface-variant">
+                      <input
+                        type="checkbox"
+                        checked={compareIds.includes(m.id)}
+                        onChange={() => toggleCompare(m.id)}
+                        disabled={!compareIds.includes(m.id) && compareIds.length >= 3}
+                        aria-label={`${m.name}を比較対象に選ぶ`}
+                        className="h-4 w-4"
+                      />
+                      比較
+                    </label>
+                  </div>
+                  <Link to={`/council-activity/${m.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
+                    {m.name}
+                  </Link>
+                  {faction && <FactionChip faction={faction} className="ml-2" />}
+                  <dl className="mt-2 space-y-1.5 text-xs">
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-on-surface-variant">発言件数</dt>
+                      <dd>
+                        <ValueBar value={row.speechCount} max={maxSpeech} colorClass="bg-orange-500" />
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-on-surface-variant">実施率</dt>
+                      <dd>
+                        <RateBar value={row.questionRate} />
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-on-surface-variant">紹介議員件数</dt>
+                      <dd className="text-on-surface-variant">確認中</dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-on-surface-variant">提出者件数</dt>
+                      <dd>
+                        <ValueBar value={row.submitterCount} max={maxSubmitter} colorClass="bg-orange-500" />
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-on-surface-variant">情報発信媒体数</dt>
+                      <dd>
+                        <ValueBar value={row.channelCount} max={maxChannel} colorClass="bg-secondary" />
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-on-surface-variant">出席状況</dt>
+                      <dd className="text-on-surface-variant">確認中</dd>
+                    </div>
+                  </dl>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </SectionCard>
 
       <SectionCard title="データ充足状況">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          「データ充足率」は、対象議員{coverage[0]?.totalCount ?? 26}名のうち何名分の指標を算定できたかの割合です。「議員活動点」（右側のレーダーチャート・実数）とは別物であり、充足率が低い指標は議員の活動が少ないという意味ではなく、本サイトがまだ一次資料を収録できていないことを示します。
+          「データ充足率」は、対象議員{coverage[0]?.totalCount ?? allEntries.length}名のうち何名分の指標を算定できたかの割合です。「議員活動点」（個人ページのレーダーチャート・実数）とは別物であり、充足率が低い指標は議員の活動が少ないという意味ではなく、本サイトがまだ一次資料を収録できていないことを示します。
         </p>
         <ul className="space-y-2">
           {coverage.map((c) => (
@@ -212,7 +496,7 @@ export function CouncilActivityPage() {
           ))}
         </ul>
         <p className="mt-3 rounded-lg bg-tertiary-container px-3 py-2 text-xs leading-relaxed text-on-tertiary-container">
-          注意：ここでの「データ充足率」は資料の網羅度（何人分・何件確認できたか）を示すものであり、右側の「議員活動点」（レーダーチャート・実数）とは別の指標です。充足率が高いこと自体を「活動が優れている」という評価として読まないでください。
+          注意：ここでの「データ充足率」は資料の網羅度（何人分・何件確認できたか）を示すものであり、「議員活動点」（レーダーチャート・実数）とは別の指標です。充足率が高いこと自体を「活動が優れている」という評価として読まないでください。
         </p>
 
         <p className="mb-2 mt-4 text-xs font-medium text-on-surface-variant">指標別の詳しい内訳</p>
@@ -363,16 +647,16 @@ export function CouncilActivityPage() {
             <span className="font-medium">一般質問</span>：定例会で一般質問を実施した割合。
           </li>
           <li>
-            <span className="font-medium">議会内発言</span>：公開会議録から確認できた発言。
+            <span className="font-medium">議会内発言</span>：公開会議録から確認できた発言（発言件数＝確認できた質問項目数）。
           </li>
           <li>
-            <span className="font-medium">請願・提案等</span>：公開資料から確認できる紹介議員・提出等への関与（現在、議員別に確認できる一次資料が未収録のため全議員「評価対象外」）。
+            <span className="font-medium">請願・提案等</span>：本会議での決議提出者として確認できた件数（限定あり）。請願・陳情の紹介議員は公開資料から確認できていません。
           </li>
           <li>
-            <span className="font-medium">情報発信</span>：本人公式と確認できたWeb/SNS媒体を含む、プロフィール情報の充足状況。
+            <span className="font-medium">情報発信</span>：本人公式と確認できたWeb/SNS媒体数を含む、プロフィール情報の充足状況。
           </li>
           <li>
-            <span className="font-medium">出席状況</span>：公開資料から確認可能な本会議・委員会等の出席状況（現在、個別の出席記録が未収録のため全議員「評価対象外」）。
+            <span className="font-medium">出席状況</span>：公開資料から確認可能な本会議・委員会等の出席状況（現在、個別の出席記録が未収録のため全議員「確認中」）。
           </li>
         </ul>
         <Link
@@ -381,237 +665,6 @@ export function CouncilActivityPage() {
         >
           算定方法・計算式・出典を見る →
         </Link>
-      </SectionCard>
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SectionCard title="議会内発言 TOP3">
-          {speechTop3.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">確認できるデータがまだありません。</p>
-          ) : (
-            <ol className="space-y-1.5 text-sm text-on-surface">
-              {speechTop3.map((e, i) => (
-                <li key={e.member.id} className="flex items-center justify-between gap-2">
-                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
-                    {i + 1}位　{e.member.name}
-                  </Link>
-                  <span className="tabular-nums text-xs text-on-surface-variant">
-                    {Math.round(metricByKey(e.metrics, "speech")!.value!)}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          )}
-        </SectionCard>
-        <SectionCard title="一般質問実施率100%">
-          <p className="text-sm text-on-surface">{questionFull.length}名</p>
-          {questionFull.length > 0 && (
-            <ul className="mt-1.5 flex flex-wrap gap-x-2 gap-y-1 text-xs text-on-surface-variant">
-              {questionFull.map((e) => (
-                <li key={e.member.id}>
-                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
-                    {e.member.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </SectionCard>
-        <SectionCard title="情報発信・プロフィール充足度 TOP3">
-          {disclosureTop3.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">確認できるデータがまだありません。</p>
-          ) : (
-            <ol className="space-y-1.5 text-sm text-on-surface">
-              {disclosureTop3.map((e, i) => (
-                <li key={e.member.id} className="flex items-center justify-between gap-2">
-                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
-                    {i + 1}位　{e.member.name}
-                  </Link>
-                  <span className="tabular-nums text-xs text-on-surface-variant">
-                    {Math.round(metricByKey(e.metrics, "disclosure")!.value!)}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          )}
-        </SectionCard>
-      </div>
-
-      <SectionCard title={`全議員比較（${sorted.length}／${allEntries.length}名）`}>
-        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          列見出しをクリックすると並べ替えできます。「出席状況」「請願・提案等」は、本サイトが議員別の一次資料をまだ収録できていないため、全議員「評価対象外」として区別表示しています（0点ではありません）。合算した「総合順位」は、単一の数値だけで議員の活動全体を評価してしまう誤解を避けるため、掲載していません。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
-        </p>
-
-        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          <div className="sm:w-56">
-            <SearchBar value={nameQuery} onChange={setNameQuery} placeholder="氏名で検索" />
-          </div>
-          <FilterSelect label="会派" value={factionFilter} onChange={setFactionFilter} options={factionOptions} />
-          <FilterSelect label="委員会" value={committeeFilter} onChange={setCommitteeFilter} options={committeeOptions} />
-          {(nameQuery || factionFilter !== "all" || committeeFilter !== "all") && (
-            <button
-              type="button"
-              onClick={() => {
-                setNameQuery("");
-                setFactionFilter("all");
-                setCommitteeFilter("all");
-              }}
-              className={`self-start rounded-full px-3 py-2 text-xs text-on-surface-variant underline ${linkClass}`}
-            >
-              絞り込みをクリア
-            </button>
-          )}
-        </div>
-
-        {sorted.length === 0 && (
-          <p className="rounded-lg bg-surface-container-high p-4 text-sm text-on-surface-variant">
-            条件に一致する議員が見つかりませんでした。検索語や絞り込み条件をご確認ください。
-          </p>
-        )}
-
-        {/* PC: 表形式 */}
-        <div className="hidden overflow-x-auto sm:block">
-          <table className="w-full min-w-[720px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-outline-variant text-left text-xs text-on-surface-variant">
-                <th className="w-8 py-2 pr-2">比較</th>
-                {SORTABLE_COLUMNS.map((col) => (
-                  <th key={col.key} className="py-2 pr-3">
-                    <button
-                      type="button"
-                      onClick={() => handleSort(col.key)}
-                      className={`inline-flex items-center gap-1 font-semibold hover:underline ${linkClass}`}
-                      aria-label={`${col.label}で並べ替え`}
-                    >
-                      {col.label}
-                      {sortKey === col.key && <span aria-hidden="true">{sortDir === "asc" ? "▲" : "▼"}</span>}
-                    </button>
-                  </th>
-                ))}
-                {NOT_SCORED_COLUMNS.map((col) => (
-                  <th key={col.key} className="py-2 pr-3 font-semibold">
-                    {col.label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sorted.map((e) => {
-                const faction = getFaction(e.member.factionId);
-                return (
-                  <tr key={e.member.id} className="border-b border-outline-variant/60 align-middle">
-                    <td className="py-2 pr-2">
-                      <input
-                        type="checkbox"
-                        checked={compareIds.includes(e.member.id)}
-                        onChange={() => toggleCompare(e.member.id)}
-                        disabled={!compareIds.includes(e.member.id) && compareIds.length >= 3}
-                        aria-label={`${e.member.name}を比較対象に選ぶ`}
-                        className="h-4 w-4"
-                      />
-                    </td>
-                    <td className="py-2 pr-3">
-                      <Link
-                        to={`/council-activity/${e.member.id}`}
-                        className={`font-medium text-on-surface hover:underline ${linkClass}`}
-                      >
-                        {e.member.name}
-                      </Link>
-                      {faction && <FactionChip faction={faction} className="ml-2" />}
-                    </td>
-                    <td className="py-2 pr-3">
-                      <MetricBar value={metricByKey(e.metrics, "question")!.value} />
-                    </td>
-                    <td className="py-2 pr-3">
-                      <MetricBar value={metricByKey(e.metrics, "speech")!.value} />
-                    </td>
-                    <td className="py-2 pr-3">
-                      <MetricBar value={metricByKey(e.metrics, "voting")!.value} />
-                    </td>
-                    <td className="py-2 pr-3">
-                      <MetricBar value={metricByKey(e.metrics, "disclosure")!.value} />
-                    </td>
-                    <td className="py-2 pr-3 text-xs text-on-surface-variant">評価対象外</td>
-                    <td className="py-2 pr-3 text-xs text-on-surface-variant">評価対象外</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        {/* スマホ：カード形式 */}
-        <div className="space-y-3 sm:hidden">
-          <div className="flex flex-wrap gap-2 text-xs">
-            {(["name", "question", "speech", "voting", "disclosure"] as SortKey[]).map((k) => {
-              const col = SORTABLE_COLUMNS.find((c) => c.key === k)!;
-              return (
-                <button
-                  key={k}
-                  type="button"
-                  onClick={() => handleSort(k)}
-                  className={`rounded-full border px-2.5 py-1 ${
-                    sortKey === k ? "border-primary bg-primary-container text-on-primary-container" : "border-outline-variant text-on-surface-variant"
-                  } ${linkClass}`}
-                >
-                  {col.label}
-                  {sortKey === k && (sortDir === "asc" ? "▲" : "▼")}
-                </button>
-              );
-            })}
-          </div>
-          <ul className="space-y-2">
-            {sorted.map((e) => {
-              const faction = getFaction(e.member.factionId);
-              return (
-                <li key={e.member.id} className="rounded-lg border border-outline-variant p-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <Link to={`/council-activity/${e.member.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
-                      {e.member.name}
-                    </Link>
-                    <label className="flex items-center gap-1.5 text-xs text-on-surface-variant">
-                      <input
-                        type="checkbox"
-                        checked={compareIds.includes(e.member.id)}
-                        onChange={() => toggleCompare(e.member.id)}
-                        disabled={!compareIds.includes(e.member.id) && compareIds.length >= 3}
-                        aria-label={`${e.member.name}を比較対象に選ぶ`}
-                        className="h-4 w-4"
-                      />
-                      比較
-                    </label>
-                  </div>
-                  {faction && <FactionChip faction={faction} className="mt-1" />}
-                  <dl className="mt-2 space-y-1.5 text-xs">
-                    <div className="flex items-center justify-between gap-2">
-                      <dt className="text-on-surface-variant">一般質問</dt>
-                      <dd>
-                        <MetricBar value={metricByKey(e.metrics, "question")!.value} />
-                      </dd>
-                    </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <dt className="text-on-surface-variant">議会内発言</dt>
-                      <dd>
-                        <MetricBar value={metricByKey(e.metrics, "speech")!.value} />
-                      </dd>
-                    </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <dt className="text-on-surface-variant">議案等の意思表示</dt>
-                      <dd>
-                        <MetricBar value={metricByKey(e.metrics, "voting")!.value} />
-                      </dd>
-                    </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <dt className="text-on-surface-variant">情報発信</dt>
-                      <dd>
-                        <MetricBar value={metricByKey(e.metrics, "disclosure")!.value} />
-                      </dd>
-                    </div>
-                  </dl>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
       </SectionCard>
 
       {compareEntries.length > 0 && (
@@ -648,3 +701,14 @@ export function CouncilActivityPage() {
     </div>
   );
 }
+
+/** 156セル一覧の列順。`getMemberActivityMetrics`が返すmetrics配列の実際の並び順と一致させる
+ * （question/speech/attendance/voting/proposal/disclosure）。 */
+const MATRIX_INDICATOR_LABELS: { key: string; label: string }[] = [
+  { key: "question", label: "一般質問" },
+  { key: "speech", label: "議会内発言" },
+  { key: "attendance", label: "出席状況" },
+  { key: "voting", label: "議案等の意思表示" },
+  { key: "proposal", label: "請願・提案等" },
+  { key: "disclosure", label: "情報発信" },
+];

@@ -251,6 +251,38 @@ export function MethodologyActivityRadarPage() {
         </p>
       </SectionCard>
 
+      <SectionCard title="一覧・個人ページに表示している「実数」の補足">
+        <p className="text-sm leading-relaxed text-on-surface">
+          議員活動バロメーターの一覧・個人ページには、上記6指標の0〜100点の指数とは別に、次の「実数」も表示しています。いずれも新しい採点・順位ロジックではなく、既存の一次資料をそのまま数え上げたものです。
+        </p>
+        <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">発言件数</dt>
+            <dd>
+              「議会内発言」指数の算定に使っている、確認できた質問項目数（rawValue）そのものです。指数化する前の件数を、順位や比較に使いたい場合の実数として表示しています。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">提出者件数（決議）</dt>
+            <dd>
+              本会議での決議（決議案）の提出者として会議録で確認できた件数です。延岡市議会全体の議員提出決議は計8件あり、うち7件は提出者を特定できましたが、1件（2021年6月定例会）は会議録から個人名を確認できませんでした。条例案・請願・意見書等の提出者、請願・陳情の紹介議員は対象に含みません（別途「紹介議員件数」として「確認中」と表示しています）。0件はこの決議8件の範囲で提出者として確認できなかったことを示す確定値（confirmed_zero）であり、活動が無いという意味ではありません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">情報発信媒体数</dt>
+            <dd>本人確認済み（verified）のSNS・Web媒体数に、議会公式プロフィールページを加えた実数です。「情報発信・プロフィール充足度」指数（0〜100点）の分子とは項目の数え方が異なります。</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">議席番号</dt>
+            <dd>議員詳細ページ（members.json）の確認済みプロフィール本文に記載されている議席番号をそのまま表示しています。新しい調査は行っていません。</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">選挙時得票（参考情報）</dt>
+            <dd>令和5年4月23日執行の延岡市議会議員選挙における得票数（electionResults.json）です。活動指標スコアには一切含めていません。</dd>
+          </div>
+        </dl>
+      </SectionCard>
+
       <SectionCard title="市議会全体の平均値（参考線）">
         <p className="text-sm leading-relaxed text-on-surface">
           将来的に平均値を参考線として表示する場合も、同一在職期間ではなく各議員の対象可能期間を考慮し、欠損者を0として平均へ含めず、「優秀な基準」として提示しません。表示・非表示は利用者が切り替えられるようにします。

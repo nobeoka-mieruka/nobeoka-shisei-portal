@@ -7448,3 +7448,80 @@ namespace衝突0件・タイムライン重複eventId 0件。
   既存の議会活動データ計算式・Evidence Availability 9状態・人物IDは一切変更していない。
   総合ランキングは作成していない。選挙日から任期を推測していない。データ量を人物評価に
   使用していない。
+
+### TASK-070 議員活動バロメーター（一覧・個人ページ）のデザイン刷新（Phase135）
+
+状態：DONE（2026-08-14）
+優先度：B（ユーザー指示：文章仕様〔参考画像は非表示・テキストのみ〕どおりに一覧・個人ページを再構成）
+対象：`src/lib/councilActivityBarometer.ts`、`src/pages/CouncilActivityPage.tsx`、
+`src/pages/CouncilActivityMemberPage.tsx`、`src/pages/MethodologyActivityRadarPage.tsx`
+
+ユーザーから断片的なテキストで届いたデザイン仕様（大見出し「延岡市議会 議員活動バロメーター」、
+5指標、A発言量TOP3／B一般質問実施率／C請願・議案等への関与のランキングカード、全議員比較表
+〔順位・氏名・発言件数・実施率・紹介議員件数・提出者件数・情報発信媒体数・出席状況、列内最大値
+基準の横棒グラフ、白背景・薄いグレー罫線・オレンジ強調・グラデーション禁止、PC表形式／スマホ
+カード形式〕、個人ページ〔氏名・ふりがな・議席番号・会派・写真・公式SNS/サイト、5指標レーダー
+チャート1〜5段階・活動指標スコア・選挙時得票参考、5つの実数カード＋算定方法リンク、AI評価禁止・
+事実要約のみ、禁止表現リスト、総合順位は原則非表示〕を再現した。既存の`src/lib/activityRadar.ts`
+（6指標の計算式・dataStatus判定）は一切変更せず、`councilActivityBarometer.ts`に実数系の
+補助関数のみ追加した（既存ロジックの重複実装・数値の食い違いを避けるため）。
+
+**画像内の数字は使用していない**：ユーザー指示どおり、全ての数値は現在の`members.json`・
+`councilSpeechSummaries.json`・`billProposalRoles.json`・`electionResults.json`から
+このページを開くたびに再計算しており、対象人数も25名等へ固定せず`members`配列の長さを
+そのまま使用している（現在26名）。
+
+**データが存在しない指標の扱い（重要）**：仕様書は「紹介議員件数TOP3」「出席状況」を実数列と
+して求めていたが、既存の一次資料調査（Phase103・108・128・132で複数回実施済み）の結果、
+延岡市議会では請願・陳情の紹介議員の氏名も、議員別の出席・欠席記録も、公開資料から一切
+確認できていない（0件ではなく「未確認」）。本サイトの編集方針（「未確認データを0として
+扱わない」「推測・架空データ・根拠のない順位を掲載しない」）に従い、この2項目は数値化・
+TOP3化をせず、一覧表・個人ページとも「確認中」と明記した（表側の脚注にも0件ではない旨を記載）。
+一方「提出者件数（決議）」は、議員提出決議8件のうち7件の提出者を会議録で特定済み
+（`billProposalRoles.json`）という確定した実数のため、現職2名（北林幹雄m11・宮田博徳m24）の
+件数をそのまま表示し、他24名は「決議8件の範囲で確認できた提出者が0件」という確定値
+（confirmed_zero）として0件表示とした（決議以外の議案・請願等の提出者は対象外である旨を
+併記）。この判断はユーザーへの追加確認をせず、CLAUDE.mdの既存データ方針を優先して実装し、
+本記録で経緯を明示する。
+
+**新規追加した実数系ヘルパー（`councilActivityBarometer.ts`）**：`decisionSubmitterCountFor`・
+`decisionSubmitterTop`（決議提出者件数）、`seatNumberFromProfile`（members.jsonのprofile
+本文から議席番号を機械的に抽出、新しい調査はしていない）、`informationChannelCount`（本人
+確認済みSNS＋公式プロフィールURLの実数）、`topByRawValue`（指数化前のrawValueでのTOP N、
+発言量TOP3に使用）、`electionVoteReferenceFor`（令和5年4月23日執行選挙の得票数を参考情報
+として返す、活動指標スコアには含めない）。
+
+**個人ページのレーダーチャート**：既存の`ActivityRadarChart`コンポーネント（6指標対応）は
+変更せず、呼び出し側で「議案等の意思表示」を除いた5指標（一般質問・議会内発言・請願・提案等・
+情報発信・出席状況）のみを渡す`pickTopMetrics()`をページ側に追加した。「議案等の意思表示」は
+既存の「議案への賛否」セクションで別途詳しく扱っているため除外しても情報は失われない。
+ページ下部には既存の6指標詳細セクション（`STAR_METRICS`）をそのまま残しており
+（総合順位は引き続き作成していない）、削除・置換はしていない。
+
+**色・レイアウト**：この2ページに限り、既存のグラデーション背景（`bg-gradient-to-br`）を
+やめ、白背景＋薄いグレー罫線（ライトモード：`bg-white`/`border-gray-200`、ダークモードは
+既存の`surface-container-low`/`outline-variant`へフォールバック）へ統一し、発言量・
+請願提案の強調値のみオレンジ（`text-orange-600`/`bg-orange-500`、ダークは`orange-400`）を
+使用した。他ページの配色・グラデーションは変更していない。PC＝表形式／スマホ＝カード形式は
+既存パターン（`hidden sm:block` / `sm:hidden`）をそのまま踏襲した。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ）／`typecheck`／`lint`（oxlint、
+0件）／`test`（activityRadar計算式26/26、未変更のため全件成功）／`build`（prerender
+2112/2112）／`validate:seo`（2113ページ、failures=0 warnings=0）／`validate:content`
+（2113ページ、errors=0 warnings=0）／`validate:freshness`（errors=0 warnings=0）／
+`validate:sources`（errors=0 warnings=0 info=40、既存と同一）／`validate:completeness`
+（errors=0 warnings=0 info=0）／`validate:finance`（errors=0 warnings=0 info=6、既存と
+同一）／`validate:political-funds`（errors=0 warnings=0 info=2、既存と同一）すべて成功。
+プリレンダリング済みHTMLで、決議提出者を持つ議員（m11：3件）・持たない議員（m01：0件）の
+双方で事実要約文が実データどおりに出し分けられていることを確認した。
+
+完了記録：
+- 完了日：2026-08-14
+- コミットID：（本コミット）
+- 変更概要：上記のとおり。議員活動バロメーター一覧・個人ページのデザインをユーザー仕様へ
+  刷新した。既存の議会活動データ計算式（activityRadar.ts）・Evidence Availability・
+  データ充足状況セクション・26名×6指標マトリクスは変更・削除していない。紹介議員件数・
+  出席状況は未収録のため数値化せず「確認中」と表示し、0件として扱っていない。総合順位は
+  作成していない。画像内の数字は使用せず、全て現在のデータから再計算した。
