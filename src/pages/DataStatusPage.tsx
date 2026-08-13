@@ -53,6 +53,11 @@ import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
 import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { simpleCompleteness, formatCoverageRate, type CompletenessMetric } from "../lib/completeness";
+import {
+  FORMER_MEMBER_DATA_TIER_LABELS,
+  FORMER_MEMBER_DATA_TIER_DESCRIPTIONS,
+  FORMER_MEMBER_DATA_TIER_DISCLAIMER,
+} from "../lib/formerMemberActivity";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -655,6 +660,9 @@ export function DataStatusPage() {
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           1999年より前の市長選挙は、就任年月までは市公式の年表で確認できていますが、候補者一覧・得票数・投票率は確認中です。市議会議員選挙は1999年より前の候補者別結果の一次資料を確認できておらず、未収録のままです（選挙自体が無かったという意味ではありません）。延岡市公式資料・選挙管理委員会資料・広報のべおかOCR・宮崎県資料・国立国会図書館等を確認しましたが、これ以上進める手がかりが得られておらず、上記「調査を尽くしたが未確認」の状態として扱っています。
         </p>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          この調査（TASK-046）は、当サイトからの追加の問い合わせは行っていませんが、市民の方が次に確認先を検討される際の参考として、再開条件を記録しています：延岡市立図書館・宮崎県立図書館の郷土資料コーナーでの現物確認／国立国会図書館個人送信サービスでの『延岡市史』（1949・1963・1983・1993年版）内の確認／延岡市選挙管理委員会事務局（Tel: 0982-22-7026）への照会／延岡市議会事務局（Tel: 0982-22-7029）への照会。同じオンライン検索を理由なく繰り返さないよう、既に確認済みの情報源（延岡市公式サイト・選挙管理委員会公式ページ・宮崎県統計年鑑・国立国会図書館デジタルコレクション・地域報道アーカイブ）はいずれも見つからなかったことを記録済みです。
+        </p>
       </SectionCard>
 
       <SectionCard title="類似団体比較・市長公約の調査状況">
@@ -870,6 +878,26 @@ export function DataStatusPage() {
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           「任期確認」は選挙当選日ではなく、就任日を示す独立した公式資料で確認できた場合のみカウントしています（選挙当選日を任期開始日として代用していません）。「選挙記録のみ確認人数」は、当選の事実は確認できているものの、正式な任期・議会活動の記録がまだ確認できていない人数であり、その方の議会活動が少なかったことを意味するものではありません。
         </p>
+
+        <p className="mb-2 mt-4 text-xs font-medium text-on-surface-variant">元議員のデータ充足レベル別人数（Phase130）</p>
+        <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">{FORMER_MEMBER_DATA_TIER_DISCLAIMER}</p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {(["A", "B", "C", "D"] as const).map((tier) => (
+            <div key={tier} className="rounded-lg bg-surface-container-low p-3" title={FORMER_MEMBER_DATA_TIER_DESCRIPTIONS[tier]}>
+              <dt className="text-xs text-on-surface-variant">{FORMER_MEMBER_DATA_TIER_LABELS[tier]}</dt>
+              <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+                {tier === "A"
+                  ? peopleStatus.formerMemberTierACount
+                  : tier === "B"
+                    ? peopleStatus.formerMemberTierBCount
+                    : tier === "C"
+                      ? peopleStatus.formerMemberTierCCount
+                      : peopleStatus.formerMemberTierDCount}
+                名
+              </dd>
+            </div>
+          ))}
+        </dl>
       </SectionCard>
 
       <SectionCard title="議会事務局への確認候補（本サイトからの問い合わせは行っていません）">

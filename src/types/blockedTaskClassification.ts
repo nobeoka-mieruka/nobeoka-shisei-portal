@@ -51,4 +51,18 @@ export interface BlockedTaskClassificationEntry {
   autoRecheck: boolean;
   autoRecheckMechanism: string | null;
   notes: string;
+  /** Phase133：status="RESEARCH_EXHAUSTED"のタスクで、これまでに確認した情報源の種類を
+   * 一覧化する（同じオンライン検索を理由なく繰り返さないための記録）。任意項目。 */
+  sourceInventory?: {
+    sourceClass: string;
+    /** online_checked：オンラインで確認済み（見つからなかった）／library_login_required：
+     * 所在は判明しているがログイン・現物閲覧が必須／library_required：図書館等での現物確認が必要／
+     * inquiry_required：関係機関への直接照会が必要／location_unknown：資料の所在自体が未確認。 */
+    status: "online_checked" | "library_login_required" | "library_required" | "inquiry_required" | "location_unknown";
+    description: string;
+  }[];
+  /** Phase133：このタスクを次に前進させるための具体的な条件（人手による調査を含む）。
+   * 「今回は問い合わせを実施しない」方針のタスクでも、将来ユーザーが問い合わせを行う際に
+   * どの資料を確認すればよいか分かるよう明文化する。任意項目。 */
+  reopenConditions?: string[];
 }
