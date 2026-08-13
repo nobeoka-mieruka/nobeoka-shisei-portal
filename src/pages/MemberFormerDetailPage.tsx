@@ -5,8 +5,10 @@ import archiveMemberAffiliationsData from "../data/archiveMemberAffiliations.jso
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
 import formerMembersData from "../data/formerMembers.json";
+import billVotesData from "../data/billVotes.json";
+import { publicBills, billVoteLabels } from "../lib/billVotes";
 import type { ArchiveMemberAffiliation, ArchiveMemberProfile, ArchiveMemberTerm } from "../types/historicalArchive";
-import type { CouncilSession, CouncilSpeechSummaryData, FormerMember } from "../types";
+import type { BillVoteItem, CouncilSession, CouncilSpeechSummaryData, FormerMember } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
@@ -30,6 +32,8 @@ import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { personSlug } from "../lib/people";
 import { ActivityRadarSection } from "../components/council/ActivityRadarSection";
+import { PersonTimeline } from "../components/council/PersonTimeline";
+import { getPersonTimeline } from "../lib/personTimeline";
 import {
   calculateAttendanceIndex,
   calculateInformationDisclosureIndex,
@@ -46,6 +50,8 @@ const affiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[]
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const councilSessions = councilSessionsData as CouncilSession[];
 const formerMembers = formerMembersData as FormerMember[];
+const billVotes = publicBills(billVotesData as BillVoteItem[]);
+const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -83,6 +89,12 @@ export function MemberFormerDetailPage() {
     ? formerMembers.find((m) => m.id === profile.legacyFormerMemberId)
     : undefined;
 
+  // Phase120で修正：以前はvoteMethod/disclosureStatusの整備前だったため常に(0, 0)で
+  // 「議案賛否履歴：収録していません」固定表示だったが、Phase108以降、記名投票の再議2件から
+  // 元議員10名全員に個人別賛否データが登録されている。実データを反映する。
+  const disclosedVotes = legacyId ? billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === legacyId)) : [];
+  const timeline = legacyId ? getPersonTimeline(legacyId) : [];
+
   // 議会活動データ（レーダーチャート）。在職確認済み会期（formerMembers.jsonのservedSessions）
   // のみを対象期間とする（在職期間全体を保証する記録ではない旨は算定方法ページで説明する）。
   const radarEligibleSessions = eligibleSessionIdsFor({
@@ -93,7 +105,7 @@ export function MemberFormerDetailPage() {
     calculateQuestionActivityIndex(speeches, radarEligibleSessions, profile.lastVerifiedAt),
     calculateSpeechActivityIndex(speeches, radarEligibleSessions, profile.lastVerifiedAt),
     calculateAttendanceIndex(),
-    calculateVotingDisclosureIndex(0, 0),
+    calculateVotingDisclosureIndex(disclosedVotes.length, billsWithAnyMemberVoteDisclosed),
     calculateProposalActivityIndex(),
     calculateInformationDisclosureIndex(
       [
@@ -104,7 +116,7 @@ export function MemberFormerDetailPage() {
         { label: "委員会履歴", filled: committeeHistory.length > 0 },
         { label: "一般質問履歴", filled: speeches.length > 0 },
         { label: "出典", filled: profile.sourceRefs.length > 0 },
-        { label: "議案賛否履歴", filled: false },
+        { label: "議案賛否履歴", filled: disclosedVotes.length > 0 },
       ],
       profile.lastVerifiedAt,
     ),
@@ -157,6 +169,17 @@ export function MemberFormerDetailPage() {
         targetPeriodLabel="在職を確認できた会期（公式会議録で在職・発言を確認できた範囲）"
         updatedAt={profile.lastVerifiedAt}
       />
+
+      <SectionCard title="活動タイムライン">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          選挙・任期・委員会所属・一般質問・議案への賛否を、公開資料から確認できた範囲で時系列にまとめたものです。イベントが無い期間を「活動なし」の意味では表示していません。下記の各項目別セクションにも、同じ内容をカテゴリごとに掲載しています。
+        </p>
+        {timeline.length > 0 ? (
+          <PersonTimeline events={timeline} />
+        ) : (
+          <p className="text-sm text-on-surface-variant">この元議員について、タイムラインの元になる公開資料をまだ確認できていません。</p>
+        )}
+      </SectionCard>
 
       <SectionCard title="在籍期間・選挙・任期履歴">
         {own.length === 0 ? (
@@ -250,7 +273,30 @@ export function MemberFormerDetailPage() {
       </SectionCard>
 
       <SectionCard title="議案賛否履歴">
-        <EmptyState message="元議員の議案賛否は現行データでは収録していません（資料未確認）。" />
+        {disclosedVotes.length === 0 ? (
+          <EmptyState message="この元議員について、個人別の議案賛否が公開資料で確認できたものはありません（0件という意味ではなく、公開されている記名投票等の対象に含まれていないためです）。" />
+        ) : (
+          <ul className="space-y-2">
+            {disclosedVotes.map((b) => {
+              const vote = b.memberVotes.find((v) => v.memberId === legacyId)!;
+              return (
+                <li key={b.id} className="rounded-lg bg-surface-container-high p-3 text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <Link to={`/bills/votes/${b.id}`} className={`min-w-0 truncate text-on-surface hover:underline ${linkClass}`}>
+                      {b.billNumber}　{b.billTitle}
+                    </Link>
+                    <span className="shrink-0 text-xs text-on-surface-variant">{billVoteLabels[vote.vote]}</span>
+                  </div>
+                  {(b.memberVoteRecordedDate ?? b.votingDate) && (
+                    <p className="mt-0.5 text-xs text-on-surface-variant">
+                      {formatJapaneseDate(b.memberVoteRecordedDate ?? b.votingDate!)}
+                    </p>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </SectionCard>
 
       <SectionCard title="政策テーマ">

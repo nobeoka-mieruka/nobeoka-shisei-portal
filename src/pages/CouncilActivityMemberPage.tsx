@@ -12,6 +12,8 @@ import { FactionChip } from "../components/FactionChip";
 import { SnsLinks } from "../components/SnsLinks";
 import { ActivityRadarChart } from "../components/council/ActivityRadarChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
+import { PersonTimeline } from "../components/council/PersonTimeline";
+import { getPersonTimeline } from "../lib/personTimeline";
 import { getFaction } from "../lib/factions";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
@@ -82,6 +84,7 @@ export function CouncilActivityMemberPage() {
   const undisclosedBillCount = voteEvidence.totalBillCountSitewide - voteEvidence.disclosedBillCount;
   const memberCommittees = committeesForMember(member.id);
   const committeeReports = committeeReportActivityForMember(member.id);
+  const timeline = getPersonTimeline(member.id);
 
   const factsSummary = [
     (() => {
@@ -319,6 +322,17 @@ export function CouncilActivityMemberPage() {
               ))}
             </ul>
           </div>
+        )}
+      </SectionCard>
+
+      <SectionCard title="活動タイムライン">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          選挙・任期・委員会所属・一般質問・議会内発言・議案への賛否を、公開資料から確認できた範囲で時系列にまとめたものです。イベントが無い期間を「活動なし」の意味では表示していません（単に該当する公開資料が確認できていない期間です）。
+        </p>
+        {timeline.length > 0 ? (
+          <PersonTimeline events={timeline} />
+        ) : (
+          <p className="text-sm text-on-surface-variant">この議員について、タイムラインの元になる公開資料をまだ確認できていません。</p>
         )}
       </SectionCard>
 
