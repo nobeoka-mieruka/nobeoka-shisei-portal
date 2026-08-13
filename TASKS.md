@@ -1,14 +1,14 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase115〜119でTASK-066「元議員マスター整備・活動履歴公開・
-採決分類保証・自動遷移完成」を実施。元議員10名のnameKana・選挙履歴を選挙結果データから
-確認・登録、`/council-activity/history`を実装・公開、voteMethod/disclosureStatus集計の
-恒久的な整合性保証を追加、WAITING_EXTERNAL自動再確認の状態遷移を完成、財政・人口グラフの
-「0件」誤表示バグを発見・修正した）
+最終更新日：2026-08-13（Phase120〜124でTASK-067「人物中心の市政アーカイブ化」を実施。
+人物単位の統合活動タイムラインを新設、元議員登録数を10名→58名へ拡張（読み仮名ベースの
+同一人物判定で重複0件を確認しつつ）、過去会議録の会期対象範囲を拡大して一般質問確認済み
+元議員数を1名→10名に改善、人物ID監査（全項目0件）、data-statusへ人物データ収録状況を
+追加した）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 97／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計106
+DONE 98／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計107
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -7209,3 +7209,90 @@ CI実行のたびに握りつぶされていた。ファイルを追加し、WAI
   WAITING_EXTERNAL自動遷移の完成とワークフローのバグ修正、財政・人口グラフの
   「0件」誤表示バグ修正を実施した。既存の議会活動データ計算式・
   Evidence Availability 9状態は一切変更していない。総合ランキングは作成していない。
+
+### TASK-067 人物中心の市政アーカイブ化：統合タイムライン・元議員大幅拡張・人物ハブ整備（Phase120〜124）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示による人物中心アーカイブへの発展）
+対象：`src/lib/personTimeline.ts`（新規）、`src/components/council/PersonTimeline.tsx`（新規）、
+`src/pages/CouncilActivityMemberPage.tsx`、`src/pages/MemberFormerDetailPage.tsx`、
+`src/data/formerMembers.json`、`src/data/electionResults.json`、
+`src/data/archiveMemberProfiles.json`、`src/lib/formerMemberActivity.ts`、
+`scripts/validate-data.mjs`、`src/pages/PeoplePage.tsx`、`src/lib/people.ts`、
+`src/pages/DataStatusPage.tsx`
+
+既存のEvidence Availability 9状態・ActivityRadar計算式・voteMethod/disclosureStatus分類・
+既存の`/people`基盤は変更せず継続。総合ランキング・現職と元議員の単純比較は作成していない。
+
+**Phase120（政治家・議員統合タイムライン基盤）**：`personTimeline.ts`を新設し、
+electionResults.json（選挙）・archiveMemberTerms/archiveMemberAffiliations.json（任期・
+委員会・役職、現職のみ）・committeeReportActivity.json（委員長・副委員長報告）・
+councilSpeechSummaries.json（一般質問・議会内発言）・billVotes.json（賛否）から
+TimelineEventを動的生成（新規イベント専用JSONは作らない）。日付は精度不明な場合は
+推測でYYYY-MM-DDを作らず、datePrecisionで管理。`/council-activity/:memberId`・
+元議員詳細ページへ「活動タイムライン」を追加。この過程で、元議員詳細ページの
+議案賛否表示がPhase108以前の古い実装のまま`calculateVotingDisclosureIndex(0, 0)`に
+固定されていたバグ（実際は全元議員に賛否データが存在するのに「収録していません」と
+表示され続けていた）を発見・修正した。
+
+**Phase121（元議員・歴代議員データの本格拡張）**：electionResults.jsonの全10回の
+市議選（1999〜2023年）から、既存36名（現職26＋元議員10）に含まれない当選者を、
+読み仮名（nameKana）でグルーピングして抽出。氏名の漢字表記だけでグルーピングした
+1回目の試行では、投票用紙の表記ゆれ（例：「松田 満男」と「松田 みつお」）により
+既存人物19名分の重複エントリを誤って作成してしまったため、これを検知した時点で
+完全に取り消し、読み仮名ベースのグルーピングでやり直した（検証の結果、重複0件）。
+条件A（選挙当選記録）を満たす新規元議員48名（fm11〜fm58）を登録。servedSessionsは
+会期単位の活動記録が無い（2019年以前は既存データ収録範囲外）ため意図的に空配列とし、
+「0件」ではなく「未収録」として扱われるよう、既存の算定関数の空配列時の挙動
+（missing、0点にしない）をそのまま活用した。あわせて、既存8名（元議員4名＋現職4名）の
+古い当選記録34件のlinkedProfileIdも補完。`archiveMemberProfiles.json`にも対応する
+48件を追加し、既存の`/members/former/:slug`ページがそのまま使えるようにした。
+`validate-data.mjs`のservedSessions必須ルールを、選挙当選記録（electionResults.json
+のlinkedProfileId）による代替根拠も認めるよう更新。
+
+**Phase122（過去一般質問・会議録の人物再紐付け）**：historical一般質問が「1名・1件」
+だった原因を調査した結果、`TRANSCRIPT_AVAILABLE_SESSION_IDS`が
+`questionCollectionStatus.json`（そのnote欄に明記のとおり、現議員任期＝2023-04-23
+以降のみを対象に機械集計したファイル）由来のため、意図的に現在の任期のみに
+限定されていることを確認した（バグではない、activityRadar.tsは変更していない）。
+しかし`councilSpeechSummaries.json`自体には、別の一次資料調査（旧任期一般質問
+アーカイブ拡張）により2019-06〜2023-03の16会期分の発言データが既に登録されていた。
+`formerMemberActivity.ts`限定で、実際に発言データが存在する会期IDの集合を動的算出し
+元議員の対象会期として使うよう修正（現職側のロジック・`eligibleSessionIdsFor()`自体は
+無変更）。結果、一般質問・議会内発言の確認済み元議員数が1名→10名（旧10名分）に改善。
+
+**Phase123（人物横断検索・人物ハブ拡張＋ID監査）**：`/people`・`/people/:slug`は
+既に現職・元議員・市長を横断する包括的な人物ハブとして実装済みであることを確認し
+（検索・絞り込み・CSV出力込み）、重複実装を避けて活用した。人物詳細ページから
+新設の活動タイムラインへの導線を追加。members/formerMembers/archiveMemberProfiles/
+archiveMayors/electionResults/billVotes/councilSpeechSummaries/committeeReportActivityを
+横断するID監査を実施し、重複ID・orphan参照・不正リンク・同姓同名衝突が
+いずれも0件であることを確認した。Person JSON-LDの二重出力も無いことを確認。
+
+**Phase124（最終UX監査＋data-status拡張）**：`people.ts`に`getPeopleDataStatus()`を
+新設し、`/data-status`へ「人物データ収録状況」を追加（現職議員人数・元議員収録人数・
+歴代市長人数・人物ID総数・選挙履歴/一般質問/議会発言/個人別賛否/委員会履歴の
+紐付け人数・未確認人物ID数）。「収録人数」と「実際に存在した歴代議員総数」を
+混同しない旨を明記。新規48名分の元議員ページ・人物ページ生成によりprerender対象が
+1968→2112ルートに増加したことを確認し、内部リンク切れ（`/members/former/fmXX`の
+未生成）を検知・修正した。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ）／`validate:freshness`
+（errors=0）／`validate:sources`（errors=0 info=40）／`validate:completeness`
+（errors=0）／`validate:political-funds`（errors=0 info=2）／`typecheck`／`lint`／
+`test`（26/26）／`build`を2回連続実行しいずれも成功（prerender 2112/2112、各回約65〜67秒、
+ピークメモリ約893MB、Phase110-114時点の約859MBから新規144ページ分相応の増加のみ）／
+`validate:seo`（2113ページ、failures=0）／`validate:content`（2113ページ、errors=0）／
+`release:check`（failures=0、既存warning2件のみ）すべて成功。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：71018d6／a2c2949／25664cd／b0ed8cf
+- 変更概要：上記のとおり。人物統合タイムラインの実装、元議員登録数10→58名への
+  大幅拡張（読み仮名ベースの同一人物判定で重複0件を確認）、過去会議録データの
+  活用範囲拡大（一般質問確認済み元議員1→10名）、人物ID監査（全項目0件）、
+  data-statusの人物データ収録状況表示を実施した。既存の議会活動データ計算式・
+  Evidence Availability 9状態・既存/people基盤は一切変更していない。
+  総合ランキングは作成していない。
