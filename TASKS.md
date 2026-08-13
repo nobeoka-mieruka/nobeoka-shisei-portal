@@ -1,13 +1,14 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase110〜114でTASK-065「Evidence Availability統一・データ充足UI・
-採決分類整理・元議員拡張準備」を実施。9区分の評価語彙を共通化し、156セル可視化・
-指標別内訳を実装、採決方式と個人別公開状況を別軸へ整理（aggregate/not_disclosedの重複を
-解消）、元議員10名分のID整合性確認と試験実装、WAITING_EXTERNAL自動再確認の仕組み化を行った）
+最終更新日：2026-08-13（Phase115〜119でTASK-066「元議員マスター整備・活動履歴公開・
+採決分類保証・自動遷移完成」を実施。元議員10名のnameKana・選挙履歴を選挙結果データから
+確認・登録、`/council-activity/history`を実装・公開、voteMethod/disclosureStatus集計の
+恒久的な整合性保証を追加、WAITING_EXTERNAL自動再確認の状態遷移を完成、財政・人口グラフの
+「0件」誤表示バグを発見・修正した）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 96／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計105
+DONE 97／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計106
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -7127,3 +7128,84 @@ formerMemberActivity.ts`を新設し、本番ページには一切組み込ま�
   可視化強化、採決方式と個人別公開状況の分離、元議員への拡張準備（試験実装のみ）、
   WAITING_EXTERNAL自動再確認の仕組み化を実施した。既存の議会活動データ計算式・
   RadarMetric.dataStatusは一切変更していない。総合ランキングは作成していない。
+
+### TASK-066 元議員マスター整備・活動履歴公開・採決分類保証・自動遷移完成（Phase115〜119）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示による元議員データ整備・履歴ページ公開・自動化完成・0件誤解修正）
+対象：`src/data/electionResults.json`、`src/data/formerMembers.json`、
+`src/pages/CouncilActivityHistoryPage.tsx`（新規）、`src/lib/formerMemberActivity.ts`、
+`src/App.tsx`、`src/lib/seo.ts`、`scripts/lib/public-routes.mjs`、`scripts/validate-data.mjs`、
+`scripts/check-pending-council-minutes.mjs`、`.github/workflows/update-council-documents.yml`、
+`src/components/finance/FinanceLineChart.tsx`、`src/pages/FinanceFundsPage.tsx`、
+`src/pages/ComparePopulationPage.tsx`、`src/pages/DataStatusPage.tsx`
+
+既存のEvidence Availability 9状態・ActivityRadar計算式・voteMethod/disclosureStatus分類は
+変更せず継続。総合ランキング・現職と元議員の単純比較は作成していない。
+
+**Phase115（元議員人物マスター整備）**：`electionResults.json`の2019年4月21日投票・
+延岡市議会議員選挙（出典：選挙ドットコム）に元議員10名全員の当選記録があることを発見。
+姓の一意性・在職期間（servedSessions）のタイミング整合で照合し、10名分の
+`linkedProfileId`を追加（fm01は既存の2023/2025分に加え2019分が未設定だったため追加）。
+各候補者の既存nameKanaフィールド（選挙結果ページ由来、新たな読みの推測ではない）を
+そのまま転記し、サイト既存の表記（現職議員26名と同じひらがな＋スペース区切り）へ
+機械的にカタカナ→ひらがな変換した。fm03（松田和己）は既存の1999〜2015年5回分の
+選挙記録から既にnameKanaが判明していたため再確認のうえ書式統一のみ実施。
+
+**Phase116（/council-activity/history実装）**：Phase113の試験実装を正式ページ化。
+10名全員（人数固定なし）について、一般質問・議会内発言・議案等の意思表示の3指標のみ、
+在職を確認できた会期（`eligibleSessionIdsFor`が既に絞り込み済み）に限定して表示。
+現職の比較表・ソート機能とは完全に別画面とし、レーダーチャートも使用しない
+（`ActivityRadarChart`は5軸未満だと何も描画しない設計のため、3指標では現職との視覚的な
+類似性を生まない）。SEO・sitemap・prerender lastmod・`/members/former/:slug`への
+リンクを実装。市民向け文言監査で「not_applicable」という生のコードが本文へ露出していた
+箇所を発見・修正した。
+
+**Phase117（voteMethod/disclosureStatus再検証・恒久保証）**：既存の
+`summarizeVoteClassification()`（Phase112）の集計結果が議案総数と一致することを、
+一回限りのスクリプト確認ではなく`validate:data`の恒久チェックとして追加した
+（今後の回帰・二重計上・分類漏れを自動検知する）。個人別確認可能2件を
+memberId不正0件・重複0件・出典あり・verificationStatus=verifiedまで再確認。
+
+**Phase118（WAITING_EXTERNAL自動再確認の完成）**：`check-pending-council-minutes.mjs`に
+状態遷移ロジックを追加（WAITING_EXTERNAL→MANUAL_REVIEW、新しい会期を検出した場合のみ）。
+COMPLETEDへは実際の抽出作業完了後にのみ人手（AI含む）が進める設計を維持。
+重大なバグを発見・修正：日次ワークフローの「Commit and push」ステップが
+`blockedTaskClassification.json`をgit addの対象に含めておらず、このファイルへの変更が
+CI実行のたびに握りつぶされていた。ファイルを追加し、WAITING_EXTERNAL解消を検知した際の
+`$GITHUB_STEP_SUMMARY`通知も追加した。TASK-016B（政治資金収支報告書）は
+`blockedTaskWatch.json`のハッシュ監視による独立した既存の自動再確認機構が
+既に機能していることを確認した（新規実装は不要）。
+
+**Phase119（Evidence Availability適用領域監査＋data-status更新）**：歴代市長・財政・選挙・
+政治資金ページを「0件」と「未確認」の混同パターンで監査し、実際に影響のある重大なバグを
+発見・修正した：`FinanceLineChart.tsx`の`value`型が`number`のみだったため、
+`FinanceFundsPage.tsx`（財源調整用基金の推移）と`ComparePopulationPage.tsx`
+（人口推移比較）が未収録年度（財源調整用基金：2009〜2018年度の9年分、
+人口：2009〜2017年度の9年分）を`?? 0`で強制的に0埋めしてグラフへ描画していた
+（延岡市の人口が0人だったかのような誤った折れ線を表示）。コンポーネント側で
+`value: number | null`に変更し、欠損年度をまたいで直線補間しない・マーカーを打たない・
+凡例に「確認中」と表示する設計へ修正（`ActivityRadarChart.tsx`と同じ欠損データの扱い）。
+`FinancePage.tsx`の3箇所は元データが欠損年度を配列から除外する設計のため問題なしと確認。
+`/data-status`に「現職議員と元議員の収録範囲」ブロックを追加し、
+`/council-activity/history`への導線を明記。既存の語彙drift（「公開資料未確認」→
+「公開資料から確認できず」）も追加で1箇所是正した。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ、Phase117の恒久チェックも合格）／
+`validate:freshness`（errors=0）／`validate:sources`（errors=0 info=40）／
+`validate:completeness`（errors=0）／`validate:political-funds`（errors=0 info=2）／
+`typecheck`／`lint`／`test`（26/26）／`build`を2回連続実行しいずれも成功
+（prerender 1968/1968、新規ルート`/council-activity/history`含む）／`validate:seo`
+（1969ページ、failures=0）／`validate:content`（1969ページ、errors=0）／`release:check`
+（failures=0、既存warning2件のみ）すべて成功。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：d32b7da／9567682／e1fc98b／0179074／e17bd27
+- 変更概要：上記のとおり。元議員10名のnameKana登録・選挙履歴紐付け、
+  `/council-activity/history`の実装公開、voteMethod/disclosureStatus集計の恒久保証、
+  WAITING_EXTERNAL自動遷移の完成とワークフローのバグ修正、財政・人口グラフの
+  「0件」誤表示バグ修正を実施した。既存の議会活動データ計算式・
+  Evidence Availability 9状態は一切変更していない。総合ランキングは作成していない。
