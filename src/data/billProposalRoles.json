@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-08-13T00:00:00+09:00",
+  "note": "議員提出議案（決議等）の提出者を、本会議録の提案理由説明の発言者ラベルから機械的に特定したもの（Phase128）。billVotes.jsonのproposerType（member/committee/mayor/other）は議案全体の提出者区分のみを示し、個人名までは含まないため、本ファイルで個人名を別途構造化する。氏名から人物IDへの照合は、既存の異体字正規化スキームでmembers.json/formerMembers.jsonと完全一致した場合のみ登録し、氏名のみでの推測統合は行っていない。請願・陳情の紹介議員（請願者とは別概念）は、複数回の一次資料調査（Phase103・108・128）で会議録に個人名の記載を確認できていないため、本ファイルには含めない（0件ではなく確認できていない、という状態）。",
+  "roles": [
+    {
+      "recordId": "role-2023-09-ketsugi-1-submitter",
+      "billId": "2023-09-ketsugi-1",
+      "recordType": "決議",
+      "personId": "m11",
+      "personName": "北林幹雄",
+      "role": "submitter",
+      "date": "2023-09-29",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会会議録検索システム（令和5年9月定例会、令和5年9月29日、決議第一号提案理由説明）",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050929A&startPos=0"
+        }
+      ],
+      "verificationStatus": "verified",
+      "notes": "会議録の発言者ラベル「北林幹雄君」の発言内容が「ただいま議題となっております決議案につきまして、提案理由の説明を申し上げます。決議第一号は、市職員の不適正な事務処理等に関する調査に関する決議（案）であります。」で始まることを確認した。"
+    },
+    {
+      "recordId": "role-2024-03-ketsugi-2-submitter",
+      "billId": "2024-03-ketsugi-2",
+      "recordType": "決議",
+      "personId": "m11",
+      "personName": "北林幹雄",
+      "role": "submitter",
+      "date": "2024-03-22",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会会議録検索システム（令和6年3月定例会、令和6年3月22日、決議第二号提案理由説明）",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=0"
+        }
+      ],
+      "verificationStatus": "verified",
+      "notes": "発言者ラベルは「市職員の不適正な事務処理等に関する調査特別委員会委員長（北林幹雄君）」。特別委員会委員長という立場での提案理由説明であり、委員会としての提案という性格も併せ持つ（billVotes.json側のproposerType=\"member\"の分類自体は変更していない）。"
+    },
+    {
+      "recordId": "role-2024-06-ketsugi-4-submitter",
+      "billId": "2024-06-ketsugi-4",
+      "recordType": "決議",
+      "personId": "m24",
+      "personName": "宮田博徳",
+      "role": "submitter",
+      "date": "2024-07-08",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会会議録検索システム（令和6年6月定例会、令和6年7月8日、決議第四号提案理由説明）",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=0"
+        }
+      ],
+      "verificationStatus": "verified",
+      "notes": "発言者ラベル「宮田博徳君」の発言内容が「延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議（案）」の提案理由説明であることを確認した。"
+    },
+    {
+      "recordId": "role-2024-09-ketsugi-5-submitter",
+      "billId": "2024-09-ketsugi-5",
+      "recordType": "決議",
+      "personId": "m24",
+      "personName": "宮田博徳",
+      "role": "submitter",
+      "date": "2024-10-04",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会会議録検索システム（令和6年9月定例会、令和6年10月4日、決議第五号提案理由説明）",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061004A&startPos=0"
+        }
+      ],
+      "verificationStatus": "verified",
+      "notes": "発言者ラベル「宮田博徳君」の発言内容が決議第五号（市職員の不適正な事務処理等に関する調査特別委員会の調査事項追加）の提案理由説明であることを確認した。"
+    },
+    {
+      "recordId": "role-2025-09-ketsugi-9-submitter",
+      "billId": "2025-09-ketsugi-9",
+      "recordType": "決議",
+      "personId": "m24",
+      "personName": "宮田博徳",
+      "role": "submitter",
+      "date": "2025-10-03",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会会議録検索システム（令和7年9月定例会、令和7年10月3日、決議第九号提案理由説明）",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071003A&startPos=0"
+        }
+      ],
+      "verificationStatus": "verified",
+      "notes": "発言者ラベル「宮田博徳君」の発言内容が決議第九号（中城あかね議員に対する議員辞職勧告決議案）の提案理由説明であることを確認した。"
+    }
+  ]
+}

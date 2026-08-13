@@ -7,6 +7,7 @@ import archiveMemberAffiliationsData from "../data/archiveMemberAffiliations.jso
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import billVotesData from "../data/billVotes.json";
+import billProposalRolesData from "../data/billProposalRoles.json";
 import type { CouncilMember, FormerMember, CouncilSpeechSummaryData, BillVoteItem } from "../types";
 import type { ElectionResult } from "../types/election";
 import type { ArchiveMemberProfile, ArchiveMemberTerm, ArchiveMemberAffiliation } from "../types/historicalArchive";
@@ -43,11 +44,13 @@ export type TimelineEventType =
   | "election"
   | "term_start"
   | "term_end"
+  | "party"
   | "committee"
   | "role"
   | "general_question"
   | "speech"
-  | "vote";
+  | "vote"
+  | "proposal";
 
 export type DatePrecision = "day" | "month" | "year" | "term" | "unknown";
 
@@ -148,19 +151,27 @@ function affiliationEvents(personId: string): TimelineEvent[] {
   if (!profile) return [];
   return archiveMemberAffiliations
     .filter((a) => a.memberProfileId === profile.id)
-    .map((a) => ({
-      personId,
-      eventId: a.id,
-      eventType: (a.affiliationType === "committee" ? "committee" : "role") as TimelineEventType,
-      date: a.startDate,
-      datePrecision: "day" as DatePrecision,
-      displayDate: formatDayDate(a.startDate),
-      title: `${a.affiliationId}${a.role ? `　${a.role}` : ""}${a.endDate ? "" : "（継続中）"}`,
-      summary: a.endDate
-        ? `${formatDayDate(a.startDate)}〜${formatDayDate(a.endDate)}に在任を確認`
-        : `${formatDayDate(a.startDate)}以降、在任を確認`,
-      sourceRefs: [{ label: a.sourceRef.sourceTitle ?? "出典資料", url: a.sourceRef.sourceUrl }],
-    }));
+    .map((a) => {
+      const eventType: TimelineEventType =
+        a.affiliationType === "committee" ? "committee" : a.affiliationType === "party" ? "party" : "role";
+      const title =
+        a.affiliationType === "party"
+          ? `党派：${a.affiliationId}${a.endDate ? "" : "（当選時点。以降の異動は未確認）"}`
+          : `${a.affiliationId}${a.role ? `　${a.role}` : ""}${a.endDate ? "" : "（継続中）"}`;
+      return {
+        personId,
+        eventId: a.id,
+        eventType,
+        date: a.startDate,
+        datePrecision: "day" as DatePrecision,
+        displayDate: formatDayDate(a.startDate),
+        title,
+        summary: a.endDate
+          ? `${formatDayDate(a.startDate)}〜${formatDayDate(a.endDate)}に確認`
+          : `${formatDayDate(a.startDate)}以降、確認`,
+        sourceRefs: [{ label: a.sourceRef.sourceTitle ?? "出典資料", url: a.sourceRef.sourceUrl }],
+      };
+    });
 }
 
 function committeeReportEvents(personId: string): TimelineEvent[] {
@@ -224,6 +235,43 @@ function voteEvents(personId: string): TimelineEvent[] {
   return events;
 }
 
+const PROPOSAL_ROLE_LABELS_JA: Record<string, string> = {
+  submitter: "提出者",
+  co_submitter: "共同提出者",
+  introducing_member: "紹介議員",
+  proposer: "提案者",
+  co_proposer: "共同提案者",
+  signatory: "賛成者",
+  other: "関係者",
+};
+
+/**
+ * Phase128：議員提出議案（決議等）の提出者（会議録の提案理由説明の発言者ラベルから
+ * 個別に確認できたもののみ）。請願・陳情の紹介議員は一次資料で確認できていないため
+ * ここには含まれない（billProposalRoles.json自体に登録していない）。
+ */
+function proposalEvents(personId: string): TimelineEvent[] {
+  const roles = (billProposalRolesData as { roles: { recordId: string; billId: string; personId: string; role: string; date: string | null; sourceRefs: { label: string; url?: string }[] }[] }).roles;
+  const billsById = new Map(billVotes.map((b) => [b.id, b]));
+  return roles
+    .filter((r) => r.personId === personId)
+    .map((r) => {
+      const bill = billsById.get(r.billId);
+      const label = PROPOSAL_ROLE_LABELS_JA[r.role] ?? r.role;
+      return {
+        personId,
+        eventId: r.recordId,
+        eventType: "proposal" as TimelineEventType,
+        date: r.date,
+        datePrecision: (r.date ? "day" : "unknown") as DatePrecision,
+        displayDate: r.date ? formatDayDate(r.date) : "日付確認中",
+        title: `${bill ? `${bill.billNumber}　${bill.billTitle}` : r.billId}　（${label}）`,
+        relatedId: r.billId,
+        sourceRefs: r.sourceRefs,
+      };
+    });
+}
+
 /** 日付の並べ替え用キー。day精度は実日付、それ以外は末尾へ寄せつつsessionId等でおおまかに並べる。 */
 function sortKeyOf(e: TimelineEvent): string {
   if (e.date) return e.date;
@@ -246,6 +294,7 @@ export function getPersonTimeline(personId: string): TimelineEvent[] {
     ...committeeReportEvents(personId),
     ...speechEvents(personId),
     ...voteEvents(personId),
+    ...proposalEvents(personId),
   ];
 
   return events.sort((a, b) => sortKeyOf(b).localeCompare(sortKeyOf(a)));
@@ -262,9 +311,11 @@ export const TIMELINE_EVENT_TYPE_LABELS: Record<TimelineEventType, string> = {
   election: "選挙",
   term_start: "任期開始",
   term_end: "任期終了",
+  party: "党派",
   committee: "委員会所属",
   role: "役職・委員長報告",
   general_question: "一般質問",
   speech: "議会内発言",
   vote: "議案への賛否",
+  proposal: "議案提出",
 };

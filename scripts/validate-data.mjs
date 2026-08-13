@@ -1378,6 +1378,44 @@ try {
   }
 }
 
+// --- billProposalRoles.json（議員提出議案の提出者、Phase128） ---
+try {
+  const data = readJson("src/data/billProposalRoles.json");
+  const roles = data.roles ?? data;
+  const membersForRoles = readJson("src/data/members.json");
+  const formerForRoles = readJson("src/data/formerMembers.json");
+  const knownPersonIdsForRoles = new Set([
+    ...(membersForRoles.items ?? membersForRoles).map((m) => m.id),
+    ...(formerForRoles.items ?? formerForRoles).map((m) => m.id),
+  ]);
+  const billVotesForRoles = readJson("src/data/billVotes.json");
+  const knownBillIds = new Set(billVotesForRoles.map((b) => b.id));
+  const VALID_PROPOSAL_ROLES = new Set(["submitter", "co_submitter", "introducing_member", "proposer", "co_proposer", "signatory", "other"]);
+  const roleIds = new Set();
+
+  for (const r of roles) {
+    const tag = `billProposalRoles.json (${r.recordId ?? "recordId不明"})`;
+    if (isBlank(r.recordId)) err(tag, "recordIdが空です");
+    else if (roleIds.has(r.recordId)) err(tag, `recordIdが重複しています: ${r.recordId}`);
+    else roleIds.add(r.recordId);
+
+    if (isBlank(r.billId) || !knownBillIds.has(r.billId)) err(tag, `存在しない議案IDを参照しています: ${r.billId}`);
+    if (isBlank(r.personId) || !knownPersonIdsForRoles.has(r.personId)) {
+      err(tag, `存在しない人物ID（現職・元議員）を参照しています: ${r.personId}`);
+    }
+    if (!VALID_PROPOSAL_ROLES.has(r.role)) err(tag, `未定義のroleです: ${r.role}`);
+    if (r.date && !DATE_RE.test(r.date)) err(tag, `dateの形式が不正です: ${r.date}`);
+    if (r.verificationStatus !== "verified" && r.verificationStatus !== "needsReview") {
+      err(tag, `verificationStatusが不正です: ${r.verificationStatus}`);
+    }
+    if (!Array.isArray(r.sourceRefs) || r.sourceRefs.length === 0) err(tag, "sourceRefsが空です");
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("billProposalRoles.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
 // --- municipalityComparison.json（宮崎県内自治体比較） ---
 try {
   const munis = readJson("src/data/municipalityComparison.json");

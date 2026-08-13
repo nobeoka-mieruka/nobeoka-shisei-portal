@@ -8,11 +8,13 @@ const EVENT_TYPE_BADGE_CLASS: Record<string, string> = {
   election: "bg-tertiary-container text-on-tertiary-container",
   term_start: "bg-primary-container text-on-primary-container",
   term_end: "bg-surface-container-high text-on-surface-variant",
+  party: "bg-surface-container-high text-on-surface-variant",
   committee: "bg-secondary-container text-on-secondary-container",
   role: "bg-secondary-container text-on-secondary-container",
   general_question: "bg-primary-container text-on-primary-container",
   speech: "bg-surface-container-high text-on-surface-variant",
   vote: "bg-tertiary-container text-on-tertiary-container",
+  proposal: "bg-primary-container text-on-primary-container",
 };
 
 const DEFAULT_VISIBLE = 15;
