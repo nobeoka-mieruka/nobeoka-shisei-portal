@@ -20,7 +20,7 @@ import kohoNobeokaIssuesData from "../data/kohoNobeokaIssues.json";
 import electionResultsData from "../data/electionResults.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
-import { getAllCurrentMemberActivity, metricByKey } from "../lib/councilActivityBarometer";
+import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import type {
   CouncilMember,
@@ -221,8 +221,9 @@ export function DataStatusPage() {
   const activityFullCompleteCount = activityEntries.filter((e) => e.metrics.every((m) => m.dataStatus === "complete")).length;
   const activityPartialCount = activityTargetCount - activityAllMissingCount - activityFullCompleteCount;
   const committeeReportMemberIds = new Set(committeeReportActivityData.events.map((e) => e.memberId));
-  const committeeReportSpeechConfirmed = committeeReportMemberIds.size;
-  const committeeReportTotalEvents = committeeReportActivityData.events.length;
+  const committeeReportToPlenaryConfirmedMembers = committeeReportMemberIds.size;
+  const committeeReportToPlenaryTotalEvents = committeeReportActivityData.events.length;
+  const evidenceSummary = getEvidenceAvailabilitySummary();
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -676,6 +677,22 @@ export function DataStatusPage() {
           </Link>
           のレーダーチャートは、指標によって収録状況が異なります。このグラフだけを見て「全データが揃っている」と誤解しないよう、確認できている人数を集計しています。
         </p>
+        <dl className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {evidenceSummary.map((item) => (
+            <div key={item.key} className="flex items-center justify-between gap-2 rounded-lg bg-surface-container-low px-3 py-2">
+              <dt className="text-sm text-on-surface">{item.label}</dt>
+              <dd className="shrink-0 text-sm font-semibold text-on-surface-variant">{item.statusText}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mb-4 text-xs leading-relaxed text-on-surface-variant">
+          「公開資料未確認」は0件・未着手という意味ではなく、複数の公開資料経路を調査したうえで確認できていないことを示します（詳細は各項目の説明・
+          <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
+            算定方法ページ
+          </Link>
+          をご覧ください）。
+        </p>
+        <p className="mb-2 text-xs font-medium text-on-surface-variant">指標別の詳しい内訳（人数ベース）</p>
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">対象議員</dt>
@@ -699,7 +716,7 @@ export function DataStatusPage() {
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">本会議での委員長・副委員長報告：確認人数</dt>
-            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{committeeReportSpeechConfirmed}名（計{committeeReportTotalEvents}件）</dd>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{committeeReportToPlenaryConfirmedMembers}名（計{committeeReportToPlenaryTotalEvents}件）</dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">6指標すべて算定可能</dt>
@@ -715,12 +732,26 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          「出席状況」「請願・提案等」は本サイトが一次資料を未収録のため、現時点で全{activityTargetCount}名が「対象記録なし」です。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会がまだ公表していないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しい算定方法は
+          「出席状況」「請願・提案等」は複数の公開資料経路を調査しましたが一次資料を確認できていないため、現時点で全{activityTargetCount}名が「対象記録なし」です（0点として扱ってはいません）。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会が一般公開していることを確認できていないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しい算定方法は
           <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
             こちら
           </Link>
           。
         </p>
+      </SectionCard>
+
+      <SectionCard title="議会事務局への確認候補（本サイトからの問い合わせは行っていません）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          本サイトが複数の公開資料経路を調査しても確認できなかった項目の一覧です。市民の方が延岡市議会事務局（Tel: 0982-22-7029）へ直接確認・情報公開請求等を検討される際の参考としてまとめています。本サイトから議会事務局への問い合わせは行っていません。
+        </p>
+        <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-on-surface">
+          <li>本会議の議員別の出席・欠席状況（一次資料での名簿の有無）</li>
+          <li>委員会内部（常任・特別・議会運営委員会）の会議録・個別発言記録の一般公開の有無</li>
+          <li>議案に対する個人別の採決記録（記名投票以外の採決方法での議員別内訳）</li>
+          <li>過去年度分の会議録（PDF等、会議録検索システム未収録分）の公開状況</li>
+          <li>請願・陳情の紹介議員の氏名（請願者本人ではなく、議会へ取り次いだ議員）</li>
+          <li>令和8年5月臨時会・6月定例会の会議録の公開時期（公式資料の公開待ちとして分類中の項目、計{taskStatusCounts.WAITING_EXTERNAL ?? 0}件）</li>
+        </ul>
       </SectionCard>
 
       <p className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">

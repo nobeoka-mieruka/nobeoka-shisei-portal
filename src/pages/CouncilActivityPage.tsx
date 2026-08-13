@@ -16,6 +16,7 @@ import {
   activityTargetPeriodLabel,
   getAllCurrentMemberActivity,
   getIndicatorCoverage,
+  getEvidenceAvailabilitySummary,
   metricByKey,
   topByMetric,
   type MemberActivityEntry,
@@ -101,6 +102,7 @@ export function CouncilActivityPage() {
   const allEntries = useMemo(() => getAllCurrentMemberActivity(), []);
   const targetPeriod = useMemo(() => activityTargetPeriodLabel(), []);
   const coverage = useMemo(() => getIndicatorCoverage(), []);
+  const evidenceSummary = useMemo(() => getEvidenceAvailabilitySummary(), []);
 
   const filteredEntries = useMemo(() => {
     return allEntries.filter((e) => {
@@ -192,6 +194,33 @@ export function CouncilActivityPage() {
             </li>
           ))}
         </ul>
+      </SectionCard>
+
+      <SectionCard title="確認状況（何が公開資料から分かるか）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          6指標のスコアとは別に、活動データベース全体で「何を、どこまで確認できているか」をまとめたものです。「公開資料未確認」は0件・存在しないという意味ではなく、複数の資料経路を調査しても確認できていないことを示します。
+        </p>
+        <dl className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {evidenceSummary.map((item) => (
+            <div key={item.key} className="rounded-lg bg-surface-container-low p-3">
+              <div className="flex items-center justify-between gap-2">
+                <dt className="text-sm font-medium text-on-surface">{item.label}</dt>
+                <dd
+                  className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                    item.code === "confirmed"
+                      ? "bg-primary-container text-on-primary-container"
+                      : item.code === "waiting_external"
+                        ? "bg-tertiary-container text-on-tertiary-container"
+                        : "bg-surface-container-high text-on-surface-variant"
+                  }`}
+                >
+                  {item.statusText}
+                </dd>
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{item.detail}</p>
+            </div>
+          ))}
+        </dl>
       </SectionCard>
 
       <SectionCard title="5つの指標について">

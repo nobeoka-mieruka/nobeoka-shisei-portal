@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { activityTargetPeriodLabel, getAllCurrentMemberActivity } from "../lib/councilActivityBarometer";
+import { activityTargetPeriodLabel, getAllCurrentMemberActivity, getEvidenceAvailabilitySummary } from "../lib/councilActivityBarometer";
 
 /**
  * 議会活動データ（レーダーチャート）の算定方法ページ。
@@ -110,6 +110,7 @@ export function MethodologyActivityRadarPage() {
     const missing = entries.filter((e) => e.metrics.find((m) => m.key === axis.indicatorId)?.dataStatus === "missing").length;
     return { ...axis, complete, partial, missing, total: entries.length };
   });
+  const evidenceSummary = getEvidenceAvailabilitySummary();
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -151,6 +152,46 @@ export function MethodologyActivityRadarPage() {
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           レーダーチャート上でも、資料が確認できない指標は0点の位置に描画せず、外周に破線のマーカーのみを表示します（塗りつぶし多角形には含めません）。数値表示部分も「0」ではなく「対象記録なし」と明記します。
         </p>
+      </SectionCard>
+
+      <SectionCard title="「確認済み」「一部公開」「公開資料未確認」「公開待ち」の意味">
+        <p className="text-sm leading-relaxed text-on-surface">
+          <Link to="/council-activity" className="font-medium text-primary hover:underline">
+            議員活動バロメーター
+          </Link>
+          や
+          <Link to="/data-status" className="font-medium text-primary hover:underline">
+            データ収録状況
+          </Link>
+          ページでは、指標が「対象記録なし」になっている理由を、次の4つの状態文言で市民向けに説明しています。これらはスコアではなく、資料の収録状況の説明です。資料が公開されていない項目を0点として扱うことはありません。
+        </p>
+        <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">確認済み</dt>
+            <dd>一次資料（公開会議録等）で内容を確認できている状態です。</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">一部公開</dt>
+            <dd>資料の一部（一部の議案・一部の年度等）のみ公開・確認できている状態です。</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">公開資料未確認（research_exhausted）</dt>
+            <dd>
+              会議録・議会だより・活動報告書など、複数の公開資料の経路を調査しましたが、該当する記録を確認できませんでした。「資料が存在しない」「今後も確認できない」と断定するものではなく、「現時点の調査で確認できていない」ことを示します。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">公開待ち（waiting_external）</dt>
+            <dd>具体的な資料（直近会期の会議録等）が近く公開される見込みで、公開され次第、自動更新の仕組みで反映します。</dd>
+          </div>
+        </dl>
+        <ul className="mt-3 grid grid-cols-1 gap-1.5 text-xs text-on-surface-variant sm:grid-cols-2">
+          {evidenceSummary.map((item) => (
+            <li key={item.key} className="rounded-lg border border-outline-variant px-2.5 py-1.5">
+              <span className="font-medium text-on-surface">{item.label}</span>：{item.statusText}
+            </li>
+          ))}
+        </ul>
       </SectionCard>
 
       <SectionCard title="6つの指標の定義・計算式・出典・データ収録状況">

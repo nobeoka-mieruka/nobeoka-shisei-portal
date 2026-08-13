@@ -115,6 +115,18 @@ export function getMemberActivityMetrics(member: CouncilMember): RadarMetric[] {
 // プリレンダリングでは26議員分の個人ページ・一覧ページ・data-statusページ等、
 // 複数のページから呼び出されるため、モジュールレベルで一度だけ計算してキャッシュする
 // （議員数・指標数は変わらないビルド単位の静的データのため、キャッシュして問題ない）。
+//
+// 【Phase105調査メモ】commit b40d098（本メモイズ導入前）はCloudflare Pagesビルドが
+// Failureとなった（`wrangler pages deployment list`で確認）。このメモイズ導入前は
+// 本関数が26個人ページ＋一覧＋data-status等から未キャッシュのまま計29回前後呼ばれ、
+// 26議員×6指標の再計算が毎回発生していた。ローカルでの定量比較（Node peak working
+// set、`npm run build`を複数回実行）：メモイズ前 約910〜920MB → メモイズ後 約854〜
+// 861MB（いずれも2回連続で再現、差は約60MB=約7%）。ローカルbuildは両条件とも
+// 1GB未満・約60秒で完走しており、Cloudflareの実ビルドログ（メモリ超過等の具体的な
+// 失敗メッセージ）は未確認（ブラウザ拡張未接続のため直接参照できず）。したがって
+// 「メモリ不足が原因」と断定はできない一方、無駄な重複計算を除去したこと自体は
+// 実装として正しい改善であり、以後のビルド（例：commit 003d1f4以降）は継続して
+// 成功している。
 let cachedAllCurrentMemberActivity: MemberActivityEntry[] | undefined;
 
 /** 対象議員全員（現職、人数をコードへ固定しない）分のエントリ一覧。 */
@@ -308,4 +320,82 @@ export function getIndicatorCoverage(): IndicatorCoverage[] {
       coveragePercent: entries.length > 0 ? Math.round((completeCount / entries.length) * 100) : 0,
     };
   });
+}
+
+/**
+ * Phase109：市民向けの「何が、どこまで確認できているか」サマリー。
+ *
+ * 【設計方針】`RadarMetric.dataStatus`（complete/partial/missing）はactivityRadar.tsの
+ * 既存3区分のまま変更しない。本関数はその上に「なぜmissingなのか」を市民向けに説明する
+ * 表示専用のレイヤーであり、新しい採点・順位付けロジックではない。
+ * - confirmed：一次資料で確認済み
+ * - partial：一部の記録のみ公開・確認できている
+ * - research_exhausted：複数の公開資料経路を調査したが確認できなかった
+ *   （「今後も確認できない」「存在しない」と断定するものではない）
+ * - waiting_external：具体的な資料（会議録等）が近く公開される見込みで、公開待ちの状態
+ */
+export type EvidenceAvailabilityCode = "confirmed" | "partial" | "research_exhausted" | "waiting_external";
+
+export interface EvidenceAvailabilityItem {
+  key: string;
+  label: string;
+  code: EvidenceAvailabilityCode;
+  /** 市民向けの短い状態文言（例：「確認済み」「一部公開」「公開資料未確認」）。 */
+  statusText: string;
+  /** 状態の根拠・補足説明。 */
+  detail: string;
+}
+
+export function getEvidenceAvailabilitySummary(): EvidenceAvailabilityItem[] {
+  const disclosedBillCount = billVotes.filter((b) => b.memberVotes.length > 0).length;
+  const totalBillCount = billVotes.length;
+  const petitionLikeCount = billVotes.filter((b) => b.category === "請願" || b.category === "陳情").length;
+  const pendingMinutesCount = billVotes.filter((b) => !b.voteMethod || !b.committee).length;
+
+  return [
+    {
+      key: "question",
+      label: "一般質問",
+      code: "confirmed",
+      statusText: "確認済み",
+      detail: "会議録取得済みの会期について、本会議での一般質問・代表質問の実施状況を公開会議録から確認しています。",
+    },
+    {
+      key: "voting",
+      label: "個人別賛否",
+      code: "partial",
+      statusText: "一部公開",
+      detail: `全${totalBillCount}件の議案等のうち、議員個人別の賛否が公開資料で確認できたのは${disclosedBillCount}件のみです（残りは公表結果が賛成・反対等の集計のみ、または未確認）。`,
+    },
+    {
+      key: "committeeInternalSpeech",
+      label: "委員会内部発言",
+      code: "research_exhausted",
+      statusText: "公開資料未確認",
+      detail:
+        "委員会そのものの会議録・発言記録が公開されているかを複数の資料経路（委員会活動報告書PDF等）で調査しましたが、確認できていません。本会議での委員長・副委員長報告は別に収録しています。",
+    },
+    {
+      key: "attendance",
+      label: "出席状況",
+      code: "research_exhausted",
+      statusText: "公開資料未確認",
+      detail:
+        "会議録・議会だより・会議日程表等、複数の資料経路を調査しましたが、議員別の出席・欠席名簿を確認できていません。「資料が見つからない」ことは「全員出席」を意味しません。",
+    },
+    {
+      key: "petition",
+      label: "請願・陳情等",
+      code: "partial",
+      statusText: "一部収録",
+      detail: `件名・審議結果は請願・陳情あわせて${petitionLikeCount}件を収録していますが、紹介議員（請願者ではなく、議会に取り次いだ議員）の氏名は公開会議録に記載がなく確認できていません。`,
+    },
+    {
+      key: "pendingMinutes",
+      label: "会議録公開待ち",
+      code: "waiting_external",
+      statusText: `${pendingMinutesCount}件`,
+      detail: `直近の会期の会議録が本日時点で未公開のため、採決方法・付託委員会等が未確認の議案が${pendingMinutesCount}件あります（公開され次第、自動更新で反映されます）。`,
+    },
+  ];
 }
