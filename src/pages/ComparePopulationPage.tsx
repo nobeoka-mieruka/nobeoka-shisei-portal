@@ -68,7 +68,7 @@ export function ComparePopulationPage() {
           <FinanceLineChart
             points={selectedRows.map((y) => ({
               label: fiscalYearLabel(y.fiscalYear),
-              value: y.population?.population ?? 0,
+              value: y.population?.population ?? null,
             }))}
             formatValue={(v) => `${v.toLocaleString("ja-JP")}人`}
             ariaLabel="選択した年度の人口の推移グラフ。詳細は直後の表を参照してください。"

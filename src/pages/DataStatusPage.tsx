@@ -22,6 +22,7 @@ import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import { summarizeVoteClassification } from "../lib/billVotes";
+import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import type {
   CouncilMember,
@@ -211,6 +212,7 @@ export function DataStatusPage() {
   // --- 議員活動バロメーター（Phase99）：レーダーチャート等の見た目だけでは伝わらない
   // 「どこまでデータが揃っているか」を機械集計する。市民が「全部揃っている」と誤解しないための表示。
   const activityEntries = getAllCurrentMemberActivity();
+  const formerMemberCount = getAllFormerMembers().length;
   const activityTargetCount = activityEntries.length;
   const countWithCompleteMetric = (key: string) =>
     activityEntries.filter((e) => metricByKey(e.metrics, key)?.dataStatus === "complete").length;
@@ -685,12 +687,39 @@ export function DataStatusPage() {
           ))}
         </dl>
         <p className="mb-4 text-xs leading-relaxed text-on-surface-variant">
-          「公開資料未確認」は0件・未着手という意味ではなく、複数の公開資料経路を調査したうえで確認できていないことを示します（詳細は各項目の説明・
+          「公開資料から確認できず」は0件・未着手という意味ではなく、複数の公開資料経路を調査したうえで確認できていないことを示します（詳細は各項目の説明・
           <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
             算定方法ページ
           </Link>
           をご覧ください）。
         </p>
+
+        <div className="mb-4 rounded-lg bg-surface-container-low p-3">
+          <p className="text-sm font-medium text-on-surface">現職議員と元議員の収録範囲</p>
+          <dl className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div>
+              <dt className="text-xs text-on-surface-variant">現職議員</dt>
+              <dd className="text-sm text-on-surface">
+                {activityTargetCount}名（
+                <Link to="/council-activity" className="font-medium text-primary hover:underline">
+                  議員活動バロメーター
+                </Link>
+                で一覧・比較を掲載）
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs text-on-surface-variant">元議員（現職ではない）</dt>
+              <dd className="text-sm text-on-surface">
+                {formerMemberCount}名（
+                <Link to="/council-activity/history" className="font-medium text-primary hover:underline">
+                  元議員の活動履歴
+                </Link>
+                に在職期間内の記録のみ掲載。現職との総合順位・単純比較は行っていません）
+              </dd>
+            </div>
+          </dl>
+        </div>
+
         <p className="mb-2 text-xs font-medium text-on-surface-variant">指標別の詳しい内訳（人数ベース）</p>
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg bg-surface-container-low p-3">

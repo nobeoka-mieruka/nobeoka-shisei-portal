@@ -68,7 +68,7 @@ export function FinanceFundsPage() {
             <FinanceLineChart
               points={rows.map((y) => ({
                 label: fiscalYearLabel(y.fiscalYear),
-                value: y.fund?.balance.fiscalAdjustmentFundYen ?? 0,
+                value: y.fund?.balance.fiscalAdjustmentFundYen ?? null,
                 isEstimate: y.fund?.isEstimate,
               }))}
               formatValue={(v) => formatOkuYenOrConfirming(v)}
