@@ -141,6 +141,13 @@ export function calculateSpeechActivityIndex(
 /**
  * 3. 出席状況：本サイトは現時点で本会議・委員会の個別出席記録を収録していないため、
  * 常にdataStatus:"missing"を返す（0点として描画しない）。
+ *
+ * 【Phase106調査メモ】会議録検索システム（kensakusystem.jp）のHTML本文に加え、のべおか
+ * 市議会だより（複数号のPDF）、会議日程表、議会事務局公開資料一覧、会議録検索システム
+ * トップページの案内文を確認したが、いずれにも議員別の出席・欠席名簿は掲載されていない
+ * （公開資料の構成上、本会議の開会宣言部分に出席者数のみが述べられ個人名の名簿までは
+ * 含まれない）。「名簿が見つからない」ことは「全員出席」を意味しない点に注意し、
+ * 未収録（missing）のまま0点扱いにしないという既存方針を維持する。
  */
 export function calculateAttendanceIndex(): RadarMetric {
   return {
@@ -149,7 +156,7 @@ export function calculateAttendanceIndex(): RadarMetric {
     value: null,
     description: "本会議・委員会ごとの出席記録を確認できた割合を示す項目です。",
     methodNote: "出席回数 ÷ 出席対象会議数 × 100（公務・病気・議長職等の公式な欠席理由が確認できる場合は注記します）。",
-    sourceLabel: "出席記録（未収録）",
+    sourceLabel: "出席記録（複数の公開資料経路を調査しましたが、議員別の出席・欠席名簿を確認できていません）",
     dataStatus: "missing",
   };
 }
