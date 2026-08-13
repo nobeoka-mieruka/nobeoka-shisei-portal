@@ -6,6 +6,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { activityTargetPeriodLabel, getAllCurrentMemberActivity, getEvidenceAvailabilitySummary } from "../lib/councilActivityBarometer";
+import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 
 /**
  * 議会活動データ（レーダーチャート）の算定方法ページ。
@@ -166,24 +167,15 @@ export function MethodologyActivityRadarPage() {
           ページでは、指標が「対象記録なし」になっている理由を、次の4つの状態文言で市民向けに説明しています。これらはスコアではなく、資料の収録状況の説明です。資料が公開されていない項目を0点として扱うことはありません。
         </p>
         <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
-          <div className="rounded-lg bg-surface-container-high px-3 py-2">
-            <dt className="font-medium text-on-surface">確認済み</dt>
-            <dd>一次資料（公開会議録等）で内容を確認できている状態です。</dd>
-          </div>
-          <div className="rounded-lg bg-surface-container-high px-3 py-2">
-            <dt className="font-medium text-on-surface">一部公開</dt>
-            <dd>資料の一部（一部の議案・一部の年度等）のみ公開・確認できている状態です。</dd>
-          </div>
-          <div className="rounded-lg bg-surface-container-high px-3 py-2">
-            <dt className="font-medium text-on-surface">公開資料未確認（research_exhausted）</dt>
-            <dd>
-              会議録・議会だより・活動報告書など、複数の公開資料の経路を調査しましたが、該当する記録を確認できませんでした。「資料が存在しない」「今後も確認できない」と断定するものではなく、「現時点の調査で確認できていない」ことを示します。
-            </dd>
-          </div>
-          <div className="rounded-lg bg-surface-container-high px-3 py-2">
-            <dt className="font-medium text-on-surface">公開待ち（waiting_external）</dt>
-            <dd>具体的な資料（直近会期の会議録等）が近く公開される見込みで、公開され次第、自動更新の仕組みで反映します。</dd>
-          </div>
+          {(["confirmed", "partial", "research_exhausted", "waiting_external"] as const).map((code) => (
+            <div key={code} className="rounded-lg bg-surface-container-high px-3 py-2">
+              <dt className="font-medium text-on-surface">
+                {evidenceAvailabilityLabel(code)}
+                <span className="ml-1 font-normal text-on-surface-variant">（{code}）</span>
+              </dt>
+              <dd>{evidenceAvailabilityDescription(code)}</dd>
+            </div>
+          ))}
         </dl>
         <ul className="mt-3 grid grid-cols-1 gap-1.5 text-xs text-on-surface-variant sm:grid-cols-2">
           {evidenceSummary.map((item) => (
