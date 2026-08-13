@@ -263,10 +263,19 @@ export interface CommitteeActivityReport {
 
 /**
  * 委員長・副委員長が本会議で行った審査結果報告1件分（src/data/committeeReportActivity.json、Phase101）。
- * 委員会単独の会議録（開催日・出席委員・個別発言全文）は現時点で公表されていないため収録できない
- * （CommitteeActivityReportのコメント参照）。この型は、本会議の会議録から「◯◯委員会委員長
- * （氏名）」「◯◯委員会副委員長（氏名）」という発言者ラベルを機械的に抽出し、現職議員の氏名と
- * 完全一致（異体字正規化後）した場合のみ登録したものであり、委員会内部の個別発言・質疑ではない。
+ *
+ * 【重要：committee_internal_speechとの混同禁止】(Phase107で再確認・明確化)
+ * この記録は「本会議の会議録」から抽出した、委員長・副委員長が本会議の壇上で行う
+ * 審査結果報告（＝`committee_report_to_plenary`）であり、委員会そのものの内部で行われる
+ * 質疑・討論等の個別発言（＝委員会内部発言、committee_internal_speech）ではない。
+ * 延岡市議会では委員会単独の会議録（開催日・出席委員・個別発言全文）を一般公開している
+ * ことを確認できておらず（複数の資料経路・PDF委員会活動報告書を確認したが、いずれも
+ * 活動概要・調査結果のまとめのみで、個々の委員の発言記録・出席委員名簿は含まれていない。
+ * CommitteeActivityReportのコメント参照）、委員会内部発言記録は本サイトに存在しない
+ * （0件ではなく「確認できていない」＝research_exhausted）。
+ * この型は、本会議の会議録から「◯◯委員会委員長（氏名）」「◯◯委員会副委員長（氏名）」
+ * という発言者ラベルを機械的に抽出し、現職議員の氏名と完全一致（異体字正規化後）した
+ * 場合のみ登録したものである。
  * 議会活動データ（レーダーチャート）の「提案・討論等」指標には反映しない（計算式を変更しないため）。
  */
 export interface CommitteeReportActivityEvent {
@@ -279,7 +288,8 @@ export interface CommitteeReportActivityEvent {
   /** ISO形式。本会議で報告を行った日。 */
   meetingDate: string | undefined;
   fileName: string;
-  activityType: "committeeReport";
+  /** 本会議での委員長・副委員長報告。委員会内部発言（committee_internal_speech）とは明確に区別する。 */
+  activityType: "committee_report_to_plenary";
   sourceUrl: string;
   verificationStatus: "verified";
   checkedAt: string;

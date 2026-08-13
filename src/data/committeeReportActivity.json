@@ -1,6 +1,6 @@
 {
  "generatedAt": "2026-08-12T00:00:00+09:00",
- "note": "会議録検索システム（kensakusystem.jp）の本会議発言者ラベルから、「◯◯委員会委員長（氏名）」「◯◯委員会副委員長（氏名）」という形式で明示された委員長・副委員長報告の発言者を機械的に抽出し、members.jsonの氏名と完全一致（異体字正規化後）した場合のみ登録したもの。氏名が一致しない場合（元議員等）は登録していない。あくまで「委員長・副委員長として本会議で報告した記録」であり、委員会内での個別発言・質疑（未収録）とは別物。議会活動データ（レーダーチャート）の「提案・討論等」指標には未反映（計算式を変更しないため）。所属委員会の参考情報として個人ページに表示する。",
+ "note": "会議録検索システム（kensakusystem.jp）の本会議発言者ラベルから、「◯◯委員会委員長（氏名）」「◯◯委員会副委員長（氏名）」という形式で明示された委員長・副委員長報告の発言者を機械的に抽出し、members.jsonの氏名と完全一致（異体字正規化後）した場合のみ登録したもの。氏名が一致しない場合（元議員等）は登録していない。あくまで「委員長・副委員長として本会議で報告した記録」（activityType: committee_report_to_plenary）であり、委員会内部での個別発言・質疑（committee_internal_speech）ではない。延岡市議会が委員会内部の逐語記録を一般公開していることは複数の資料経路（Phase107）で調査したが確認できていない（0件ではなくresearch_exhausted）。議会活動データ（レーダーチャート）の「提案・討論等」指標には未反映（計算式を変更しないため）。所属委員会の参考情報として個人ページに表示する。",
  "sourceOrganization": "延岡市議会",
  "sourceSystem": "会議録検索システム（kensakusystem.jp）",
  "events": [
@@ -13,7 +13,7 @@
    "role": "chair",
    "meetingDate": "2023-08-25",
    "fileName": "R050825A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050825A&startPos=10096",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -27,7 +27,7 @@
    "role": "chair",
    "meetingDate": "2023-09-15",
    "fileName": "R050915A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=21336",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -41,7 +41,7 @@
    "role": "chair",
    "meetingDate": "2023-09-15",
    "fileName": "R050915A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=52622",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -55,7 +55,7 @@
    "role": "chair",
    "meetingDate": "2023-09-15",
    "fileName": "R050915A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=13930",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -69,7 +69,7 @@
    "role": "chair",
    "meetingDate": "2023-09-15",
    "fileName": "R050915A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050915A&startPos=33288",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -83,7 +83,7 @@
    "role": "chair",
    "meetingDate": "2023-09-29",
    "fileName": "R050929A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050929A&startPos=2866",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -97,7 +97,7 @@
    "role": "chair",
    "meetingDate": "2023-12-15",
    "fileName": "R051215A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051215A&startPos=27180",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -111,7 +111,7 @@
    "role": "chair",
    "meetingDate": "2023-12-15",
    "fileName": "R051215A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051215A&startPos=58036",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -125,7 +125,7 @@
    "role": "chair",
    "meetingDate": "2023-12-15",
    "fileName": "R051215A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051215A&startPos=13038",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -139,7 +139,7 @@
    "role": "chair",
    "meetingDate": "2023-12-15",
    "fileName": "R051215A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R051215A&startPos=45378",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -153,7 +153,7 @@
    "role": "chair",
    "meetingDate": "2024-03-08",
    "fileName": "R060308A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060308A&startPos=2228",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -167,7 +167,7 @@
    "role": "chair",
    "meetingDate": "2024-03-22",
    "fileName": "R060322A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=15566",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -181,7 +181,7 @@
    "role": "chair",
    "meetingDate": "2024-03-22",
    "fileName": "R060322A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=39984",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -195,7 +195,7 @@
    "role": "chair",
    "meetingDate": "2024-03-22",
    "fileName": "R060322A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=88472",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -209,7 +209,7 @@
    "role": "chair",
    "meetingDate": "2024-03-22",
    "fileName": "R060322A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=83834",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -223,7 +223,7 @@
    "role": "chair",
    "meetingDate": "2024-03-22",
    "fileName": "R060322A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=54244",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -237,7 +237,7 @@
    "role": "chair",
    "meetingDate": "2024-05-29",
    "fileName": "R060529A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060529A&startPos=5464",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -251,7 +251,7 @@
    "role": "chair",
    "meetingDate": "2024-06-14",
    "fileName": "R060614A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060614A&startPos=17750",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -265,7 +265,7 @@
    "role": "chair",
    "meetingDate": "2024-07-08",
    "fileName": "R060708A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=11770",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -279,7 +279,7 @@
    "role": "chair",
    "meetingDate": "2024-07-08",
    "fileName": "R060708A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=30486",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -293,7 +293,7 @@
    "role": "chair",
    "meetingDate": "2024-07-08",
    "fileName": "R060708A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=7842",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -307,7 +307,7 @@
    "role": "chair",
    "meetingDate": "2024-07-08",
    "fileName": "R060708A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=16428",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -321,7 +321,7 @@
    "role": "chair",
    "meetingDate": "2024-09-20",
    "fileName": "R060920A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060920A&startPos=43272",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -335,7 +335,7 @@
    "role": "chair",
    "meetingDate": "2024-09-20",
    "fileName": "R060920A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060920A&startPos=20608",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -349,7 +349,7 @@
    "role": "chair",
    "meetingDate": "2024-09-20",
    "fileName": "R060920A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060920A&startPos=38808",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -363,7 +363,7 @@
    "role": "chair",
    "meetingDate": "2024-10-04",
    "fileName": "R061004A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061004A&startPos=3072",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -377,7 +377,7 @@
    "role": "chair",
    "meetingDate": "2024-10-04",
    "fileName": "R061004A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061004A&startPos=21477",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -391,7 +391,7 @@
    "role": "chair",
    "meetingDate": "2024-12-13",
    "fileName": "R061213A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061213A&startPos=36228",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -405,7 +405,7 @@
    "role": "chair",
    "meetingDate": "2024-12-13",
    "fileName": "R061213A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061213A&startPos=42470",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -419,7 +419,7 @@
    "role": "chair",
    "meetingDate": "2024-12-13",
    "fileName": "R061213A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061213A&startPos=11496",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -433,7 +433,7 @@
    "role": "chair",
    "meetingDate": "2024-12-13",
    "fileName": "R061213A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061213A&startPos=53142",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -447,7 +447,7 @@
    "role": "chair",
    "meetingDate": "2024-12-13",
    "fileName": "R061213A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061213A&startPos=24530",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -461,7 +461,7 @@
    "role": "chair",
    "meetingDate": "2025-01-21",
    "fileName": "R070121A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070121A&startPos=6798",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -475,7 +475,7 @@
    "role": "chair",
    "meetingDate": "2025-01-21",
    "fileName": "R070121A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070121A&startPos=13156",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -489,7 +489,7 @@
    "role": "chair",
    "meetingDate": "2025-03-07",
    "fileName": "R070307A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070307A&startPos=1950",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -503,7 +503,7 @@
    "role": "chair",
    "meetingDate": "2025-03-21",
    "fileName": "R070321A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070321A&startPos=36638",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -517,7 +517,7 @@
    "role": "chair",
    "meetingDate": "2025-03-21",
    "fileName": "R070321A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070321A&startPos=28126",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -531,7 +531,7 @@
    "role": "chair",
    "meetingDate": "2025-03-21",
    "fileName": "R070321A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070321A&startPos=12608",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -545,7 +545,7 @@
    "role": "chair",
    "meetingDate": "2025-03-21",
    "fileName": "R070321A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070321A&startPos=74843",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -559,7 +559,7 @@
    "role": "chair",
    "meetingDate": "2025-03-21",
    "fileName": "R070321A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070321A&startPos=31048",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -573,7 +573,7 @@
    "role": "chair",
    "meetingDate": "2025-03-21",
    "fileName": "R070321A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070321A&startPos=72089",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -587,7 +587,7 @@
    "role": "chair",
    "meetingDate": "2025-06-27",
    "fileName": "R070627A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=16240",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -601,7 +601,7 @@
    "role": "chair",
    "meetingDate": "2025-06-27",
    "fileName": "R070627A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=43734",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -615,7 +615,7 @@
    "role": "chair",
    "meetingDate": "2025-06-27",
    "fileName": "R070627A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=25674",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -629,7 +629,7 @@
    "role": "chair",
    "meetingDate": "2025-06-27",
    "fileName": "R070627A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=9170",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -643,7 +643,7 @@
    "role": "chair",
    "meetingDate": "2025-06-27",
    "fileName": "R070627A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=46040",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -657,7 +657,7 @@
    "role": "chair",
    "meetingDate": "2025-06-27",
    "fileName": "R070627A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=31574",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -671,7 +671,7 @@
    "role": "chair",
    "meetingDate": "2025-09-19",
    "fileName": "R070919A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070919A&startPos=18600",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -685,7 +685,7 @@
    "role": "chair",
    "meetingDate": "2025-09-19",
    "fileName": "R070919A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070919A&startPos=43882",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -699,7 +699,7 @@
    "role": "chair",
    "meetingDate": "2025-09-19",
    "fileName": "R070919A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070919A&startPos=15676",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -713,7 +713,7 @@
    "role": "chair",
    "meetingDate": "2025-09-19",
    "fileName": "R070919A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070919A&startPos=7764",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -727,7 +727,7 @@
    "role": "chair",
    "meetingDate": "2025-09-19",
    "fileName": "R070919A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070919A&startPos=27048",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -741,7 +741,7 @@
    "role": "chair",
    "meetingDate": "2025-10-03",
    "fileName": "R071003A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071003A&startPos=4946",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -755,7 +755,7 @@
    "role": "chair",
    "meetingDate": "2025-10-03",
    "fileName": "R071003A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071003A&startPos=16114",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -769,7 +769,7 @@
    "role": "chair",
    "meetingDate": "2025-12-12",
    "fileName": "R071212A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071212A&startPos=26162",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -783,7 +783,7 @@
    "role": "chair",
    "meetingDate": "2025-12-12",
    "fileName": "R071212A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071212A&startPos=36246",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -797,7 +797,7 @@
    "role": "chair",
    "meetingDate": "2025-12-12",
    "fileName": "R071212A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071212A&startPos=16314",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -811,7 +811,7 @@
    "role": "chair",
    "meetingDate": "2025-12-12",
    "fileName": "R071212A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071212A&startPos=42736",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -825,7 +825,7 @@
    "role": "chair",
    "meetingDate": "2025-12-26",
    "fileName": "R071226A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071226A&startPos=3910",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -839,7 +839,7 @@
    "role": "chair",
    "meetingDate": "2026-03-02",
    "fileName": "R080302A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080302A&startPos=7210",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -853,7 +853,7 @@
    "role": "chair",
    "meetingDate": "2026-03-02",
    "fileName": "R080302A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080302A&startPos=13952",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -867,7 +867,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=42758",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -881,7 +881,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=65650",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -895,7 +895,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=52140",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -909,7 +909,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=19702",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -923,7 +923,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=34294",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -937,7 +937,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=84232",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
@@ -951,7 +951,7 @@
    "role": "chair",
    "meetingDate": "2026-03-19",
    "fileName": "R080319A",
-   "activityType": "committeeReport",
+   "activityType": "committee_report_to_plenary",
    "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=57460",
    "verificationStatus": "verified",
    "checkedAt": "2026-08-12"
