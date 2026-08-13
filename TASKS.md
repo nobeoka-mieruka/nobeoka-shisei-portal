@@ -1,13 +1,13 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase125〜129でTASK-068「元議員58名の人物履歴を政治家アーカイブへ
-育てる」を実施。党派履歴69件・委員会履歴1件を構造化、決議提出者5名をタイムラインへ追加、
-1999年以前の選挙再調査は新規資料なし（重複タスクを発見しTASK-046へ統合）、人物ハブへ
-選挙年代フィルターを追加、data-statusを拡張した）
+最終更新日：2026-08-13（Phase130〜134でTASK-069「元議員アーカイブのデータ充足レベル導入と
+最終仕上げ」を実施。データ充足レベルA〜D（人物評価ではない）を正式導入、任期情報を
+Evidence Availability語彙で表現、決議提出者2名を追加特定、TASK-046へ再開条件・情報源一覧を
+構造化、人物ID・タイムライン監査は異常0件を確認した）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 99／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計108
+DONE 100／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計109
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -7365,3 +7365,86 @@ councilSpeechSummaries.json・generalQuestions.jsonともorphan（未知の人�
   選挙年代フィルター追加、data-status拡張を実施した。既存の議会活動データ計算式・
   Evidence Availability 9状態・人物IDは一切変更していない。総合ランキングは
   作成していない。選挙日を任期開始日として代用していない。
+
+### TASK-069 元議員アーカイブのデータ充足レベル導入と最終仕上げ（Phase130〜134）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示：データ量を人物評価に使わせない設計へ仕上げること）
+対象：`src/lib/formerMemberActivity.ts`、`src/lib/people.ts`、`src/pages/PeoplePage.tsx`、
+`src/pages/MemberFormerDetailPage.tsx`、`src/data/billProposalRoles.json`、
+`src/types/blockedTaskClassification.ts`、`src/data/blockedTaskClassification.json`、
+`src/pages/DataStatusPage.tsx`
+
+既存のEvidence Availability 9状態・ActivityRadar計算式・voteMethod/disclosureStatus分類・
+人物ID・personTimeline.ts・既存/people基盤は変更せず継続。総合ランキング・現職と元議員の
+単純比較は作成していない。
+
+**Phase130（データ充足レベルA〜Dの正式導入）**：Phase129で内部集計専用として試験実装した
+`getFormerMemberDataTier()`は、A=選挙記録のみ（最も情報が少ない）〜D=任期+議会活動
+（最も情報が多い）という順序だった。これはユーザー指示（A=複数領域を確認できている、
+D=選挙記録のみ）と文字の割り当てが逆だったため、領域数ベース（選挙＋任期＋議会活動、
+議会活動は一般質問・議会内発言・賛否・委員会・議案提出等の複数種別を1領域として集約）で
+判定するロジックに差し替えた。このtierに呼び出し元は無かったため既存機能への影響はない。
+「資料充足レベルA〜D」という市民向けラベルとし、「この区分は人物への評価ではなく、
+当サイトで確認できている公開資料の充足状況を示します」という注記を、元議員詳細ページ・
+`/people`一覧・`/data-status`のすべてに表示した。現在のデータでは58名中48名がD（選挙記録
+のみ）、10名がB（選挙＋複数種別の議会活動）で、A・Cは0名（任期確認レコードが0件のため）。
+
+**Phase131（任期情報の状態整理）**：元議員詳細ページの「在籍期間・選挙・任期履歴」に、
+既存のEvidence Availability語彙（confirmed／not_collected）で「選挙：確認済み」
+「正式な任期開始・終了日：未収録」の2つのバッジを追加し、選挙イベントのタイトル
+（例：「令和5年4月23日執行 延岡市議会議員選挙　当選」）を明示した。新しい状態は追加して
+いない。会派（faction）／党派（party）／委員会（committee）／議会内役職（councilRole）の
+4概念分離を監査した結果、`ArchiveAffiliationType`は既に4値とも独立しており（party 69件・
+committee 3件・councilRole 2件、faction 0件＝会派は未確認のまま正直に0件）、同一人物・
+同一typeでの日付重複も0件であることを確認した。委員会履歴は引き続き確認済み2名のみで、
+新規の推測登録は行っていない。
+
+**Phase132（proposal/petition_role人物関係の再調査）**：Phase128で未確認だった議員提出
+決議3件を会議録全文検索で再調査。2025-03-ketsugi-7は北林幹雄（m11、委員長の立場での提案理由
+説明）、2019-09-ketsugi-1は佐藤誠（fm02、「提出者を代表して」の代表提出者）を新規確認し
+`billProposalRoles.json`へ追加（5件→7件）。2019-09-ketsugi-1の共同提出者「ほか2名」は
+会議録本文に氏名の記載が無く、推測での補完はしていない。2021-06-ketsugi-2は関連する会議録
+2日分の全発言セグメントを全文検索したが「決議」「附帯決議」の語自体が見当たらず、個人名を
+特定できなかったため未登録のまま維持し、同じ検索を繰り返さないよう調査結果をファイル内へ
+記録した。意見書32件は31件が委員会提出・1件が市長提出で、議員個人提出の意見書は0件である
+ことを確認し、対象外として整理した。請願・陳情の紹介議員は今回も確認できなかった
+（research_exhausted、資料不存在の確定ではない）。
+
+**Phase133（1999年以前資料の調査終端整理）**：`BlockedTaskClassificationEntry`型へ
+`sourceInventory`（確認済み情報源クラスと状態）・`reopenConditions`（再開条件）の任意
+フィールドを追加し、TASK-046へ9件の情報源クラス（延岡市公式サイト・選挙管理委員会公式
+ページ・宮崎県統計年鑑・NDLデジタルコレクション・地域報道アーカイブ＝いずれもonline_checked／
+『延岡市史』NDLデジタル化資料＝library_login_required／図書館郷土資料コーナー・選管事務局
+照会・議会事務局照会＝library_required/inquiry_required）と5件の具体的な再開条件を構造化
+した。今回は一覧化のみで、新たなオンライン検索・関係機関への問い合わせは行っていない。
+`/data-status`にも再開条件の要約を追記した。
+
+**Phase134（人物アーカイブUX・data-status最終仕上げ）**：personTimeline.tsのイベント総数は
+841→843件（Phase132の新規proposal 2件分）に増加。重複eventId・重複選挙イベント・orphan
+参照・スラッグ重複・namespace衝突・parsePersonSlugの往復不一致を横断監査した結果、全項目
+0件（異常なし）を確認した。`/people`へ「元議員の資料充足レベル」フィルターを追加し、
+CSV出力にも列を追加した。市民向け注記文言（データ量は評価ではない旨）を元議員詳細ページ・
+`/people`・`/data-status`の3箇所に配置した。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ）／`typecheck`／`lint`（oxlint）／
+`test`（26/26）／`build`を2回連続実行しいずれも成功（prerender 2112/2112、各回600ms台の
+vite build＋prerender含む）／`validate:seo`（2113ページ、failures=0 warnings=0）／
+`validate:content`（2113ページ、errors=0 warnings=0）／`validate:freshness`（errors=0
+warnings=0）／`validate:sources`（errors=0 warnings=0 info=40）／`validate:completeness`
+（errors=0 warnings=0 info=0）／`validate:finance`（errors=0 warnings=0 info=6、既存の
+財政データの整合確認のみ、本タスクでは変更していない）／`validate:political-funds`
+（errors=0 warnings=0 info=2）すべて成功。人物ID監査：orphan 0件・スラッグ重複0件・
+namespace衝突0件・タイムライン重複eventId 0件。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：d6b1442／2806069／4686654／f1dd9c9
+- 変更概要：上記のとおり。データ充足レベルA〜Dの正式導入（人物評価ではない旨を必ず表示）、
+  任期情報のEvidence Availability語彙での表現、決議提出者2名の追加特定、TASK-046の
+  情報源一覧・再開条件の構造化、人物ID・タイムラインの全項目監査（異常0件）を実施した。
+  既存の議会活動データ計算式・Evidence Availability 9状態・人物IDは一切変更していない。
+  総合ランキングは作成していない。選挙日から任期を推測していない。データ量を人物評価に
+  使用していない。
