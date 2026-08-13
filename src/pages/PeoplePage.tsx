@@ -399,7 +399,11 @@ export function PersonDetailPage() {
             <Link to={primaryDetailLink} className={`mx-1 text-primary hover:underline ${linkClass}`}>
               プロフィールページ
             </Link>
-            でご確認いただけます。
+            でご確認いただけます。選挙・任期・委員会所属・一般質問・議案への賛否を時系列でまとめた
+            <Link to={primaryDetailLink} className={`mx-1 text-primary hover:underline ${linkClass}`}>
+              活動タイムライン
+            </Link>
+            も同じページで確認できます。
           </p>
         )}
       </section>
