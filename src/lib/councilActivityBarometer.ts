@@ -112,18 +112,26 @@ export function getMemberActivityMetrics(member: CouncilMember): RadarMetric[] {
   ];
 }
 
+// プリレンダリングでは26議員分の個人ページ・一覧ページ・data-statusページ等、
+// 複数のページから呼び出されるため、モジュールレベルで一度だけ計算してキャッシュする
+// （議員数・指標数は変わらないビルド単位の静的データのため、キャッシュして問題ない）。
+let cachedAllCurrentMemberActivity: MemberActivityEntry[] | undefined;
+
 /** 対象議員全員（現職、人数をコードへ固定しない）分のエントリ一覧。 */
 export function getAllCurrentMemberActivity(): MemberActivityEntry[] {
-  return members.map((member) => ({
-    member,
-    metrics: getMemberActivityMetrics(member),
-    links: {
-      question: `/members/${member.id}#questions`,
-      speech: `/members/${member.id}#questions`,
-      voting: `/members/${member.id}#votes`,
-      disclosure: `/members/${member.id}`,
-    },
-  }));
+  if (!cachedAllCurrentMemberActivity) {
+    cachedAllCurrentMemberActivity = members.map((member) => ({
+      member,
+      metrics: getMemberActivityMetrics(member),
+      links: {
+        question: `/members/${member.id}#questions`,
+        speech: `/members/${member.id}#questions`,
+        voting: `/members/${member.id}#votes`,
+        disclosure: `/members/${member.id}`,
+      },
+    }));
+  }
+  return cachedAllCurrentMemberActivity;
 }
 
 /** RadarMetricの配列からkeyで1件取り出す（見つからない場合はundefined）。 */
