@@ -81,6 +81,7 @@ export function MemberFormerDetailPage() {
 
   const own = termsForMemberProfile(terms, profile.id);
   const factionHistory = affiliationsForMemberProfileByType(affiliations, profile.id, "faction");
+  const partyHistory = affiliationsForMemberProfileByType(affiliations, profile.id, "party");
   const committeeHistory = affiliationsForMemberProfileByType(affiliations, profile.id, "committee");
   const roleHistory = affiliationsForMemberProfileByType(affiliations, profile.id, "councilRole");
   const speeches = speechesForProfile(profile, speechSummaryData);
@@ -184,7 +185,7 @@ export function MemberFormerDetailPage() {
       <SectionCard title="在籍期間・選挙・任期履歴">
         {own.length === 0 ? (
           <p className="text-sm text-on-surface-variant">
-            在籍期間・選挙情報は確認中です（公式資料で在職が確認できている会期については下記「一般質問履歴」を参照してください）。
+            正式な任期開始日・終了日を示す公式資料は確認できていません（選挙当選日を任期開始日として代用することはしていません）。当選の事実そのものは上記「活動タイムライン」の選挙記録でご確認いただけます。
           </p>
         ) : (
           <ul className="space-y-2">
@@ -212,6 +213,23 @@ export function MemberFormerDetailPage() {
             {factionHistory.map((a) => (
               <li key={a.id}>
                 {a.affiliationId}（{formatJapaneseDate(a.startDate)}〜{a.endDate ? formatJapaneseDate(a.endDate) : "現在"}）
+              </li>
+            ))}
+          </ul>
+        )}
+      </SectionCard>
+
+      <SectionCard title="党派履歴（選挙時点）">
+        <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
+          議会内の会派（上記）とは別に、立候補時の届出党派を選挙結果資料から時系列で示したものです。実際の入党・離党時期とは異なる場合があります。
+        </p>
+        {partyHistory.length === 0 ? (
+          <EmptyState message="党派履歴は資料未確認です。" />
+        ) : (
+          <ul className="space-y-1 text-sm text-on-surface-variant">
+            {partyHistory.map((a) => (
+              <li key={a.id}>
+                {a.affiliationId}（{formatJapaneseDate(a.startDate)}〜{a.endDate ? formatJapaneseDate(a.endDate) : "現在も届出変更は未確認"}）
               </li>
             ))}
           </ul>
