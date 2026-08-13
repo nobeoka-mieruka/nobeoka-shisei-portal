@@ -99,6 +99,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/data-status",
   "/methodology/activity-radar",
   "/council-activity",
+  "/council-activity/history",
   "/political-funds",
   "/committees",
   "/history",
@@ -412,6 +413,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.members.map((m) => m.updatedAt ?? m.verifiedAt))],
         ["src/data/members.json", "src/lib/activityRadar.ts", "src/lib/councilActivityBarometer.ts", "src/pages/CouncilActivityPage.tsx"],
+      );
+    case "/council-activity/history":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.formerMembers.map((m) => m.lastVerified))],
+        ["src/data/formerMembers.json", "src/lib/activityRadar.ts", "src/lib/formerMemberActivity.ts", "src/pages/CouncilActivityHistoryPage.tsx"],
       );
     case "/political-funds":
       return resolveLastmod(

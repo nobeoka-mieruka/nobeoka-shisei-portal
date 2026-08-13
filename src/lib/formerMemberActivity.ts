@@ -13,12 +13,15 @@ import {
 } from "./activityRadar";
 
 /**
- * Phase113：元議員（formerMembers.json）へ議員活動データモデルを拡張できるかの試験実装。
+ * Phase113で試験実装、Phase116で `/council-activity/history` へ正式に組み込み。
+ * 元議員（formerMembers.json）向けの議員活動データ算定。
  *
- * 【重要】これは試験（プロトタイプ）であり、本番ページ（/council-activity等）へは
- * 組み込んでいない。ユーザー指示「今回は一気に全元議員をレーダーチャート評価しない」
- * 「今回は本番公開を必須としない」に基づく。将来 /council-activity/history や
- * /council-activity/:historicalMemberId へ拡張する場合の設計確認・動作確認が目的。
+ * 【重要な設計方針】
+ * - 現職議員との総合順位・単純な優劣比較は行わない（`/council-activity/history`は
+ *   現職の比較表・ソート機能とは完全に別画面とし、同一テーブルに混在させない）。
+ * - 在職していなかった会期は、分母からも分子からも除外する（欠席・0点として扱わない）。
+ * - 元議員間でも複数指標を合算した総合スコア・ランキングは算出しない
+ *   （既存のcalculate関数をそのまま使い、指標ごとの実数のみを提示する）。
  *
  * 【現職向けgetMemberActivityMetrics()との違い】
  * - `currentTermPublicSpeeches()`ではなく`publicSpeeches()`を使う。前者は
@@ -40,13 +43,16 @@ const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
 
-export interface FormerMemberActivityTrial {
+export interface FormerMemberActivity {
   formerMemberId: string;
   formerMemberName: string;
+  formerMemberNameKana: string | null;
   servedSessionCount: number;
   /** 会議録取得済みの会期のうち、実際に在職を確認できた会期数（eligibleSessionIdsForの結果）。 */
   eligibleSessionCount: number;
-  /** 試験対象の3指標（一般質問・議会内発言・議案等の意思表示）。既存のcalculate関数をそのまま再利用。 */
+  /** 在職期間の概算表示（servedSessionsの最初と最後の会期ID）。 */
+  servedPeriodLabel: string;
+  /** 対象の3指標（一般質問・議会内発言・議案等の意思表示）。既存のcalculate関数をそのまま再利用。 */
   metrics: RadarMetric[];
   /** 今回は算定していない指標とその理由（not_applicable）。 */
   notApplicableIndicators: { key: string; label: string; reason: string }[];
@@ -57,7 +63,24 @@ export function pickFormerMembersForTrial(n: number): FormerMember[] {
   return [...formerMembers].sort((a, b) => b.servedSessions.length - a.servedSessions.length).slice(0, n);
 }
 
-export function getFormerMemberActivityTrial(fm: FormerMember): FormerMemberActivityTrial {
+/** 全元議員（人数を固定しない、formerMembers.jsonの件数をそのまま使う）。 */
+export function getAllFormerMembers(): FormerMember[] {
+  return formerMembers;
+}
+
+export function findFormerMemberById(id: string): FormerMember | undefined {
+  return formerMembers.find((fm) => fm.id === id);
+}
+
+function servedPeriodLabelOf(fm: FormerMember): string {
+  if (fm.servedSessions.length === 0) return "確認中";
+  const sorted = [...fm.servedSessions].sort();
+  const first = sorted[0];
+  const last = sorted[sorted.length - 1];
+  return first === last ? first : `${first}〜${last}`;
+}
+
+export function getFormerMemberActivity(fm: FormerMember): FormerMemberActivity {
   const eligibleSessions = eligibleSessionIdsFor({ isFormerMember: true, servedSessions: fm.servedSessions });
   const speechRecord = findMemberSpeechRecord(speechSummaryData.members, fm.id);
   const speeches = publicSpeeches(speechRecord);
@@ -72,22 +95,28 @@ export function getFormerMemberActivityTrial(fm: FormerMember): FormerMemberActi
   return {
     formerMemberId: fm.id,
     formerMemberName: fm.name,
+    formerMemberNameKana: fm.nameKana ?? null,
     servedSessionCount: fm.servedSessions.length,
     eligibleSessionCount: eligibleSessions.length,
+    servedPeriodLabel: servedPeriodLabelOf(fm),
     metrics,
     notApplicableIndicators: [
-      { key: "attendance", label: "出席状況", reason: "現職と同様、一次資料未収録のため対象外（not_applicable、0点ではない）。" },
+      { key: "attendance", label: "出席状況", reason: "現職と同様、一次資料未収録のため対象外です（0点という意味ではありません）。" },
       {
         key: "proposal",
         label: "請願・提案等",
-        reason: "現職と同様、議員別の提案者情報が未収録のため対象外（not_applicable、0点ではない）。",
+        reason: "現職と同様、議員別の提案者情報が未収録のため対象外です（0点という意味ではありません）。",
       },
       {
         key: "disclosure",
         label: "情報発信・プロフィール充足度",
-        reason:
-          "FormerMember型には現職と同じプロフィール項目（所属会派・所属委員会・公式ページ・SNS等）が構造化されていないため、今回は試験対象に含めない（今後の拡張時に別途設計）。",
+        reason: "元議員のプロフィール情報は現職ほど構造化されていないため、今回は対象外としています（今後の拡張時に別途検討します）。",
       },
     ],
   };
+}
+
+/** 全元議員分の活動データ（人数を固定しない）。ページ側でループして表示する用途。 */
+export function getAllFormerMemberActivity(): FormerMemberActivity[] {
+  return formerMembers.map((fm) => getFormerMemberActivity(fm));
 }

@@ -1210,6 +1210,22 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/council-activity/history":
+      return makeResult(
+        {
+          path: "/council-activity/history",
+          pageTitle: "元議員の活動履歴（参考情報）",
+          description:
+            "現職ではない元延岡市議会議員について、在職期間内に確認できた一般質問・議会内発言・議案等の意思表示を公開資料から整理しています。現職議員との比較・総合順位付けは行っていません。",
+          breadcrumbs: [
+            { label: "ホーム", to: "/" },
+            { label: "議員活動バロメーター", to: "/council-activity" },
+            { label: "元議員の活動履歴" },
+          ],
+        },
+        options,
+      );
+
     case "/terms":
       return makeResult(
         {
