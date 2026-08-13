@@ -5,8 +5,22 @@ import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import billVotesData from "../data/billVotes.json";
-import type { BillVoteItem, CouncilMember, FormerMember } from "../types";
-import type { ArchiveCouncilDocument, ArchiveMayor, ArchiveMayorTerm, ArchivePolicy } from "../types/historicalArchive";
+import electionResultsData from "../data/electionResults.json";
+import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
+import archiveMemberAffiliationsData from "../data/archiveMemberAffiliations.json";
+import committeeReportActivityData from "../data/committeeReportActivity.json";
+import type { BillVoteItem, CouncilMember, CouncilSpeechSummaryData, FormerMember } from "../types";
+import type { ElectionResult } from "../types/election";
+import type {
+  ArchiveCouncilDocument,
+  ArchiveMayor,
+  ArchiveMayorTerm,
+  ArchiveMemberAffiliation,
+  ArchiveMemberProfile,
+  ArchivePolicy,
+} from "../types/historicalArchive";
+import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -15,6 +29,10 @@ const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const billVotes = billVotesData as BillVoteItem[];
+const electionResults = electionResultsData as ElectionResult[];
+const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
+const archiveMemberAffiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[];
 
 export type PersonType = "member" | "former-member" | "mayor";
 
@@ -203,4 +221,77 @@ export function mayorSubmittedBillCount(mayorId: string): { count: number; hasDa
 /** 既存billVotes.json（議員別賛否記録）で、この人物（議員）の賛否が確認できる議案件数。 */
 export function voteCountForPerson(id: string): number {
   return billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === id)).length;
+}
+
+/**
+ * Phase124：/data-status向けの人物データ収録状況サマリー。「収録人数」（本サイトが
+ * 登録済みの人数）と「実際に存在した歴代議員総数」は別概念であり混同しない
+ * （後者は本サイトが把握できていない人物を含みうるため、算出しない）。
+ */
+export interface PeopleDataStatus {
+  currentMemberCount: number;
+  formerMemberCount: number;
+  mayorCount: number;
+  totalPersonIdCount: number;
+  electionLinkedCount: number;
+  generalQuestionLinkedCount: number;
+  speechLinkedCount: number;
+  voteLinkedCount: number;
+  committeeLinkedCount: number;
+  /** 選挙・一般質問・議会発言・議案賛否・委員会のいずれの根拠も無い人物ID数。 */
+  unconfirmedPersonCount: number;
+}
+
+export function getPeopleDataStatus(): PeopleDataStatus {
+  const allIds = [...members.map((m) => m.id), ...formerMembers.map((m) => m.id)];
+
+  const electionLinked = new Set<string>();
+  for (const e of electionResults) {
+    for (const c of e.candidates ?? []) {
+      if (c.linkedProfileId) electionLinked.add(c.linkedProfileId);
+    }
+  }
+
+  const speechLinked = new Set<string>();
+  const questionLinked = new Set<string>();
+  for (const m of speechSummaryData.members) {
+    if ((m.speeches?.length ?? 0) > 0) speechLinked.add(m.memberId);
+    if ((m.speeches ?? []).some((s) => QUESTION_LIKE_SPEECH_TYPES.has(s.speechType))) questionLinked.add(m.memberId);
+  }
+
+  const voteLinked = new Set<string>();
+  for (const b of billVotes) {
+    for (const v of b.memberVotes ?? []) voteLinked.add(v.memberId);
+  }
+
+  const profileToLegacyId = new Map(archiveMemberProfiles.map((p) => [p.id, p.legacyMemberId ?? p.legacyFormerMemberId]));
+  const committeeLinked = new Set<string>();
+  for (const m of members) {
+    if ((m.committees?.length ?? 0) > 0) committeeLinked.add(m.id);
+  }
+  for (const a of archiveMemberAffiliations) {
+    if (a.affiliationType !== "committee") continue;
+    const legacyId = profileToLegacyId.get(a.memberProfileId);
+    if (legacyId) committeeLinked.add(legacyId);
+  }
+  for (const e of (committeeReportActivityData as { events: { memberId: string }[] }).events) {
+    committeeLinked.add(e.memberId);
+  }
+
+  const unconfirmedPersonCount = allIds.filter(
+    (id) => !electionLinked.has(id) && !speechLinked.has(id) && !voteLinked.has(id) && !committeeLinked.has(id),
+  ).length;
+
+  return {
+    currentMemberCount: members.length,
+    formerMemberCount: formerMembers.length,
+    mayorCount: archiveMayors.length,
+    totalPersonIdCount: members.length + formerMembers.length + archiveMayors.length,
+    electionLinkedCount: allIds.filter((id) => electionLinked.has(id)).length,
+    generalQuestionLinkedCount: allIds.filter((id) => questionLinked.has(id)).length,
+    speechLinkedCount: allIds.filter((id) => speechLinked.has(id)).length,
+    voteLinkedCount: allIds.filter((id) => voteLinked.has(id)).length,
+    committeeLinkedCount: allIds.filter((id) => committeeLinked.has(id)).length,
+    unconfirmedPersonCount,
+  };
 }

@@ -23,6 +23,7 @@ import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import { summarizeVoteClassification } from "../lib/billVotes";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
+import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import type {
   CouncilMember,
@@ -213,6 +214,7 @@ export function DataStatusPage() {
   // 「どこまでデータが揃っているか」を機械集計する。市民が「全部揃っている」と誤解しないための表示。
   const activityEntries = getAllCurrentMemberActivity();
   const formerMemberCount = getAllFormerMembers().length;
+  const peopleStatus = getPeopleDataStatus();
   const activityTargetCount = activityEntries.length;
   const countWithCompleteMetric = (key: string) =>
     activityEntries.filter((e) => metricByKey(e.metrics, key)?.dataStatus === "complete").length;
@@ -765,6 +767,71 @@ export function DataStatusPage() {
             こちら
           </Link>
           。
+        </p>
+      </SectionCard>
+
+      <SectionCard title="人物データ収録状況">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          現職議員・元議員・歴代市長を横断した、人物データの収録状況です。「収録人数」は本サイトが登録済みの人数であり、延岡市議会に実際に在職した歴代議員の総数（本サイトが未把握の人物を含みうる）とは異なります。
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">現職議員人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.currentMemberCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">元議員収録人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.formerMemberCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">歴代市長人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.mayorCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">人物ID総数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.totalPersonIdCount}件</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">選挙履歴紐付け人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {peopleStatus.electionLinkedCount}／{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">一般質問紐付け人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {peopleStatus.generalQuestionLinkedCount}／{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">議会発言紐付け人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {peopleStatus.speechLinkedCount}／{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">個人別賛否紐付け人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {peopleStatus.voteLinkedCount}／{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">委員会履歴紐付け人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {peopleStatus.committeeLinkedCount}／{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">未確認人物ID数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.unconfirmedPersonCount}件</dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          「未確認人物ID数」は、選挙・一般質問・議会発言・議案賛否・委員会のいずれの根拠も確認できていない人物IDの件数です（0件は、登録済みの全員について何らかの根拠を確認できていることを意味します）。人物の詳細は
+          <Link to="/people" className="font-medium text-primary hover:underline">
+            人物から探す
+          </Link>
+          からご覧いただけます。
         </p>
       </SectionCard>
 
