@@ -1,12 +1,13 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase100〜104でTASK-063「議員活動バロメーターのデータギャップ
-削減」を実施。委員長・副委員長報告68件を新規の一次資料調査で登録、出席状況・請願紹介
-議員・追加の個人別賛否は資料が確認できず登録を見送った）
+最終更新日：2026-08-13（Phase105〜109でTASK-064「build安定性監査＋一次資料最終探索＋
+評価語彙整理」を実施。build失敗の定量的な原因調査、出席状況・委員会内部発言の追加探索
+（新規データ発見なし）、個人別賛否データ1件27名分の新規登録、TASK-004再確認、
+research_exhausted等の評価語彙をpresentation層に導入しUIをcivilian化した）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 94／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計103
+DONE 95／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計104
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -6965,3 +6966,84 @@ errors=0）／`release:check`（failures=0、既存warning2件のみ）すべて
 - 変更概要：上記のとおり。委員長・副委員長報告68件を新規の一次資料調査で登録、
   出席状況・請願紹介議員・追加の個人別賛否は資料が確認できず登録を見送った。
   既存の議会活動データ計算式は一切変更していない。
+
+### TASK-064 build安定性監査＋一次資料最終探索＋評価語彙整理（Phase105〜109）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示によるbuild安定性・一次資料最終探索・評価語彙整理）
+対象：`src/lib/activityRadar.ts`（sourceLabel文言のみ）、`src/lib/councilActivityBarometer.ts`、
+`src/types/index.ts`、`src/data/committeeReportActivity.json`、`src/data/billVotes.json`、
+`src/data/blockedTaskClassification.json`、`scripts/validate-data.mjs`、
+`src/pages/CouncilActivityPage.tsx`、`src/pages/CouncilActivityMemberPage.tsx`、
+`src/pages/DataStatusPage.tsx`、`src/pages/MethodologyActivityRadarPage.tsx`
+
+既存のactivityRadar.tsの計算関数（calculateAttendanceIndex等）・RadarMetric.dataStatusの
+3区分（complete/partial/missing）・`/council-activity`系の既存算定ロジックは一切変更していない。
+
+**Phase105（build安定性監査）**：直前のcommit b40d098失敗の原因調査を継続。PowerShellで
+`Get-Process node`のWorkingSet64を500ms間隔で監視しながら`npm run build`を実行し、
+memoize前（commit b40d098時点のコード）とmemoize後（現行コード）の実際のピークメモリを
+それぞれ2回ずつ計測：memoize前 約910〜920MB、memoize後 約854〜861MB（差約7%）。
+いずれもローカルでは約60秒・1GB未満で完走しており、Cloudflare側の実際のビルドログ
+（ブラウザ拡張未接続のため直接参照不可）を確認できていないため、「メモリ不足が原因」と
+断定はしていない（重複計算の削減自体は正しい改善であり、以後のビルドは継続して成功）。
+`generalQuestions`/`billVotes`/`committee`集計についても同種の重複計算がないか監査したが、
+`getAllCurrentMemberActivity`ほどの重複（約29回）は見つからなかった（他は1議員1回ずつの
+計算、またはESMモジュール読み込み時の1回のみ）。Phase106〜109実施後、`npm run build`を
+2回連続実行し、いずれも成功（1967/1967ルートprerender）を確認した。
+
+**Phase106（出席状況の一次資料本格探索）**：会議録HTML本文（Phase102で確認済み）に加え、
+のべおか市議会だより3号分（PDF）、会議録検索システムのトップページ案内文、一般ウェブ検索を
+追加調査したが、いずれにも議員別の出席・欠席名簿は見つからなかった。「名簿が見つからない」
+ことを「全員出席」とは扱っていない（推測登録は一切していない）。sourceLabelの文言のみ、
+今回の調査範囲を反映するよう更新した。
+
+**Phase107（委員会内部発言資料の最終確認）**：延岡市議会の委員会活動報告書PDF（総務政策・
+産業建設・厚生教育・議会活性化特別委員会等）を個別に確認し、いずれも活動概要・調査結果の
+まとめのみで、委員会内部の個別発言記録・出席委員名簿を含まないことを再確認した。
+`CommitteeReportActivityEvent.activityType`を曖昧な`"committeeReport"`から明確な
+`"committee_report_to_plenary"`へ変更し（68件全件更新）、委員会内部発言
+（committee_internal_speech、未確認）と本会議での委員長・副委員長報告
+（committee_report_to_plenary、68件確認済み）を型定義・データ・検証スクリプトの
+すべてのレベルで明確に分離した。
+
+**Phase108（個人別賛否データの最終再監査）**：既存のverificationNoteに「再議の記名投票では
+個人別賛否がPDF上に明記されているが未登録」と記録されていた議案（2019-09-gian-47、
+延岡市水道事業給水条例改正の再議）について、出典PDF（resultDocumentUrl）を直接確認したところ、
+3ページ目に27名の記名投票結果表（議席番号・氏名・賛否）が実在することを確認した。
+既存の異体字正規化スキームでmembers.json・formerMembers.jsonと全27名を完全一致で照合
+（不一致0名、formerMembers.json登録済み10名全員がこの表に含まれることも確認）し、
+memberVotes・individualVoteDisclosureStatus="disclosed"として登録した。
+サイト全体の個人別賛否公開議案数：1件→2件（全1177件中）。ユーザー指示にあった
+「11件」という数値とは引き続き一致しないが、実データに基づき正直に報告する。
+採決方式の分類（voteMethod、全会一致／起立多数／起立少数／簡易採決／記名投票／
+無記名投置／採決なし／確認できず）は既存フィールドで既に運用されており、新規の
+判定ロジック追加は不要と判断した。
+
+**Phase109（公開待ち・調査終了状態の整理＋UI civilian化）**：`getEvidenceAvailabilitySummary()`
+を新設（councilActivityBarometer.ts）。RadarMetric.dataStatusは変更せず、その上に
+「なぜmissingなのか」を説明する表示専用の語彙（confirmed／partial／research_exhausted／
+waiting_external）を追加し、実データ（disclosed件数・会議録公開待ち件数等）から動的に
+算出するようにした。TASK-004は`minutes-source.mjs`の`listSessionsForYear`で令和8年の
+セッション一覧を直接確認し、5月臨時会・6月定例会がまだタブ自体に存在しないことを
+より直接的に確認した（attemptCount 7→8）。`/council-activity`に「確認状況」カード、
+`/data-status`に市民向けサマリー＋「議会事務局への確認候補」リスト（問い合わせ自体は
+未実施）、`/methodology/activity-radar`に語彙説明セクションを追加した。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=14、既存warningのみ）／`validate:freshness`
+（errors=0）／`validate:sources`（errors=0 info=40）／`validate:completeness`
+（errors=0）／`validate:political-funds`（errors=0 info=2）／`typecheck`／`lint`／
+`test`（26/26）／`build`を2回連続実行しいずれも成功（prerender 1967/1967）／
+`validate:seo`（1968ページ、failures=0）／`validate:content`（1968ページ、errors=0）／
+`release:check`（failures=0、既存warning2件のみ）すべて成功。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：9f3015c／193c409／8b80d01／ad70309／be516f2
+- 変更概要：上記のとおり。build安定性の定量調査、出席状況・委員会内部発言の
+  追加探索（いずれも新規データ発見なし、調査範囲の拡大のみ）、個人別賛否データ1件
+  （27名分）の新規登録、TASK-004の再確認、評価語彙（research_exhausted等）の
+  presentation層への導入とUI civilian化を実施した。既存の議会活動データ計算式・
+  RadarMetric.dataStatusの3区分は一切変更していない。
