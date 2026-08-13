@@ -1,12 +1,12 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase94でTASK-062「延岡市議会 議員活動バロメーター」を新規実装。
-既存のActivityRadarSection基盤を再利用し、`/council-activity`一覧・比較ページと
-`/council-activity/:memberId`個人ページ27件を追加）
+最終更新日：2026-08-13（Phase100〜104でTASK-063「議員活動バロメーターのデータギャップ
+削減」を実施。委員長・副委員長報告68件を新規の一次資料調査で登録、出席状況・請願紹介
+議員・追加の個人別賛否は資料が確認できず登録を見送った）
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 93／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計102
+DONE 94／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
+分割済みでこれ自体は集計対象外）2／合計103
 
 READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
 理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
@@ -6877,3 +6877,91 @@ BLOCKED理由・再開条件：
 - コミットID：（後述）
 - 変更概要：上記のとおり。既存の議会活動データ基盤を再利用し、新規に一覧比較ページ・
   個人詳細ページ・比較機能を追加した。
+
+---
+
+### TASK-063 議員活動バロメーターのデータギャップ削減（Phase100〜104）
+
+状態：DONE（2026-08-13）
+優先度：B（ユーザー指示による一次資料収集）
+対象：`src/data/committeeReportActivity.json`（新規）、`src/lib/committees.ts`、
+`src/lib/councilActivityBarometer.ts`、`src/pages/CouncilActivityPage.tsx`、
+`src/pages/CouncilActivityMemberPage.tsx`、`src/pages/DataStatusPage.tsx`、
+`scripts/validate-data.mjs`、`src/data/blockedTaskClassification.json`
+依存関係：TASK-062（Phase94〜99）
+
+#### 実施内容
+
+**Phase100（データギャップ棚卸し）**：26名×6指標＝156セルの充足状況を、既存の
+`RadarMetric.dataStatus`（complete/partial/missing）をそのまま集計する形で可視化する
+`getIndicatorCoverage()`を新設（新しい判定ロジックは追加せず、既存の3区分をそのまま
+集計）。「議員ごとの点数」ではなく「資料がどこまで揃っているか」を示す設計。
+
+**Phase101（委員会議事録・委員会発言の一次資料調査）**：延岡市議会の委員会単独の会議録
+（開催日・出席委員・個別発言全文）は現時点で公表されていないことを再確認した
+（`CommitteeActivityReport`型の既存コメント参照）。唯一確認できたのは、本会議の会議録で
+委員長・副委員長が審査結果を報告する場面。既存の会議録取得基盤
+（`scripts/lib/minutes-source.mjs`の`listSpeakerSegments`）を用いて、既にtranscriptUrlが
+登録済みの過去29会議日の発言者ラベルを機械的に走査し、「◯◯委員会委員長（氏名）」
+「◯◯委員会副委員長（氏名）」形式の発言者を抽出。氏名をmembers.jsonと完全一致（異体字
+正規化後）でのみ確定し、一致しない場合（元議員等）は登録しなかった。現職議員13名分・
+68件の委員長・副委員長報告記録を新規に`committeeReportActivity.json`へ登録し、
+`validate-data.mjs`にmemberId/committeeId参照整合性・重複ID検証を追加した。この記録は
+議会活動データ（レーダーチャート）の「提案・討論等」指標には反映していない（計算式を
+変更しないため）。個人ページに「本会議での委員長・副委員長報告」として参考情報表示。
+
+**Phase102（出席状況の一次資料探索）**：会議録冒頭の開会宣言部分を直接確認したが、
+出席議員・欠席議員の名簿は本文中に含まれていないことを確認した（例：R060920A会議録の
+開会宣言は「これより、本日の会議を開きます」のみで、出欠名簿の記載なし）。この
+会議録検索システム経由では出席状況データを抽出できないと判断し、新規登録は行って
+いない（推測での登録は一切していない）。
+
+**Phase103（請願・陳情・意見書・決議等の人物別関与データ拡張）**：`billVotes.json`の
+既存`category`フィールドで、請願14件・陳情19件・意見書24件・決議12件が既に区別
+できることを確認した。請願2件（transcriptUrl登録済み）について本会議録を確認したところ、
+請願の議題化・委員会報告の場面はあるが「紹介議員」の氏名は本会議録に現れないことを
+確認した（請願書原本を別途確認する必要があり、今回は未実施）。請願者と紹介議員を
+混同する登録は一切行っていない。
+
+**Phase104（個人別賛否資料の再調査・6指標再計算・カバレッジ表示・TASK-004確認）**：
+記名投票・議案審議結果PDF・議会だより等、複数の資料種別を再確認したが、個人別の賛否が
+確認できる議案は引き続き記名投票1件のみだった（新規発見なし。ユーザー指示にあった
+「disclosed 11件」という数値は、実際のデータ（1件）と一致せず、要因を確認したところ
+`billVotes.json`合計1,177件のうち`notDisclosed`（521件）＋`unconfirmed`（655件）＋
+`disclosed`（1件）＝1,177件と正確に一致するため、1件が正しい値と判断した）。既存の
+`activityRadar.ts`の計算式は変更していないため、6指標のcomplete/partial/missing集計は
+Phase99から変化なし（question/speech/voting/disclosureが26名complete、attendance/
+proposalが26名missing）。`/council-activity`に「データ充足状況」バー（指標ごとの
+算定可能人数／対象人数の割合、分母を明記）を追加し、`/data-status`にも委員長・
+副委員長報告確認人数等を追加した。TASK-004（令和8年5月臨時会・6月定例会の会議録）は
+再確認したが引き続き未公開（`lastCheckedAt`・`attemptCount`を更新、WAITING_EXTERNAL維持）。
+
+#### 過去議員への拡張準備（実装はしていない）
+
+`eligibleSessionIdsFor({isFormerMember, servedSessions})`は既に元議員にも対応した設計
+になっており（Phase95以前から存在）、`committeeReportActivityForMember`等の新規関数も
+memberIdを引数に取るだけの設計のため、将来`formerMembers.json`のIDを渡せば動作する
+構造的な互換性はある。ただし今回は資料不足の元議員を無理に活動比較へ追加していない
+（ユーザー指示どおり）。
+
+#### 公平性再監査
+
+任期外会議を欠席扱いにしていない（出席データ自体を追加していないため該当リスクなし）、
+資料未公開を0点にしていない、委員会未収録を発言0件にしていない（該当議員は表示欄自体を
+省略）、個人別賛否非公開を0票にしていない、請願紹介議員を請願者として扱っていない
+（そもそも紹介議員データを登録していない）、一般質問項目数と登壇数を区別済み、総合順位・
+優劣評価の自動生成なし、をすべて確認した。
+
+#### 検証結果
+
+`validate:data`／`validate:freshness`／`validate:sources`／`validate:completeness`／
+`validate:political-funds`／`typecheck`／`lint`／`test`（26/26）／`build`（prerender
+1967/1967）／`validate:seo`（1968ページ、failures=0）／`validate:content`（1968ページ、
+errors=0）／`release:check`（failures=0、既存warning2件のみ）すべて成功。
+
+完了記録：
+- 完了日：2026-08-13
+- コミットID：（後述）
+- 変更概要：上記のとおり。委員長・副委員長報告68件を新規の一次資料調査で登録、
+  出席状況・請願紹介議員・追加の個人別賛否は資料が確認できず登録を見送った。
+  既存の議会活動データ計算式は一切変更していない。

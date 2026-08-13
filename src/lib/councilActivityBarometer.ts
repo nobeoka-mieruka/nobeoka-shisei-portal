@@ -256,3 +256,48 @@ export function getMemberVoteEvidence(member: CouncilMember): MemberVoteEvidence
     totalBillCountSitewide: billVotes.length,
   };
 }
+
+/**
+ * Phase100：26名×6指標のデータ充足マトリクス集計（「データ充足状況」表示・data-status用）。
+ * 議員ごとの点数ではなく「資料がどこまで揃っているか」を示す。既存のdataStatus
+ * （complete/partial/missing）をそのまま集計するのみで、新しい判定ロジックは追加しない。
+ */
+export interface IndicatorCoverage {
+  indicatorKey: string;
+  indicatorLabel: string;
+  /** 算定可能（complete、confirmed_zeroを含む）な議員数。 */
+  completeCount: number;
+  /** 一部データのみ（partial）の議員数。 */
+  partialCount: number;
+  /** 対象記録なし（missing）の議員数。一次資料未収録・非公開・調査中等が含まれる。 */
+  missingCount: number;
+  totalCount: number;
+  /** completeCount / totalCount（0〜100）。分母は必ず対象議員数。 */
+  coveragePercent: number;
+}
+
+export function getIndicatorCoverage(): IndicatorCoverage[] {
+  const entries = getAllCurrentMemberActivity();
+  const indicatorDefs = [
+    { key: "question", label: "一般質問" },
+    { key: "speech", label: "議会内発言" },
+    { key: "attendance", label: "出席状況" },
+    { key: "voting", label: "議案等の意思表示" },
+    { key: "proposal", label: "請願・提案等" },
+    { key: "disclosure", label: "情報発信・プロフィール充足度" },
+  ];
+  return indicatorDefs.map((def) => {
+    const completeCount = entries.filter((e) => metricByKey(e.metrics, def.key)?.dataStatus === "complete").length;
+    const partialCount = entries.filter((e) => metricByKey(e.metrics, def.key)?.dataStatus === "partial").length;
+    const missingCount = entries.filter((e) => metricByKey(e.metrics, def.key)?.dataStatus === "missing").length;
+    return {
+      indicatorKey: def.key,
+      indicatorLabel: def.label,
+      completeCount,
+      partialCount,
+      missingCount,
+      totalCount: entries.length,
+      coveragePercent: entries.length > 0 ? Math.round((completeCount / entries.length) * 100) : 0,
+    };
+  });
+}

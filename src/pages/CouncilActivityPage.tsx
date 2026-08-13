@@ -15,6 +15,7 @@ import { getSeoForPath } from "../lib/seo";
 import {
   activityTargetPeriodLabel,
   getAllCurrentMemberActivity,
+  getIndicatorCoverage,
   metricByKey,
   topByMetric,
   type MemberActivityEntry,
@@ -99,6 +100,7 @@ export function CouncilActivityPage() {
 
   const allEntries = useMemo(() => getAllCurrentMemberActivity(), []);
   const targetPeriod = useMemo(() => activityTargetPeriodLabel(), []);
+  const coverage = useMemo(() => getIndicatorCoverage(), []);
 
   const filteredEntries = useMemo(() => {
     return allEntries.filter((e) => {
@@ -163,6 +165,34 @@ export function CouncilActivityPage() {
         </Link>
         、出典は各項目のリンク先でご確認いただけます。
       </p>
+
+      <SectionCard title="データ充足状況">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          「データ充足率」は、対象議員{coverage[0]?.totalCount ?? 26}名のうち何名分の指標を算定できたかの割合です。「議員活動点」（右側のレーダーチャート・実数）とは別物であり、充足率が低い指標は議員の活動が少ないという意味ではなく、本サイトがまだ一次資料を収録できていないことを示します。
+        </p>
+        <ul className="space-y-2">
+          {coverage.map((c) => (
+            <li key={c.indicatorKey}>
+              <div className="flex items-center justify-between gap-2 text-xs text-on-surface">
+                <span>{c.indicatorLabel}</span>
+                <span className="text-on-surface-variant">
+                  {c.coveragePercent === 0 ? "未収録" : `${c.completeCount}／${c.totalCount}名（${c.coveragePercent}%）`}
+                </span>
+              </div>
+              <div
+                className="mt-1 h-2.5 w-full overflow-hidden rounded-full bg-surface-container-high"
+                role="img"
+                aria-label={`${c.indicatorLabel}：対象${c.totalCount}名中${c.completeCount}名分のデータを収録済み（${c.coveragePercent}%）`}
+              >
+                <div
+                  className={`h-full rounded-full ${c.coveragePercent === 0 ? "bg-outline-variant" : "bg-primary"}`}
+                  style={{ width: `${Math.max(c.coveragePercent, c.coveragePercent === 0 ? 0 : 4)}%` }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </SectionCard>
 
       <SectionCard title="5つの指標について">
         <ul className="space-y-2 text-sm leading-relaxed text-on-surface">

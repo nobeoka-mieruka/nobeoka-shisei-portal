@@ -21,6 +21,7 @@ import electionResultsData from "../data/electionResults.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, metricByKey } from "../lib/councilActivityBarometer";
+import committeeReportActivityData from "../data/committeeReportActivity.json";
 import type {
   CouncilMember,
   FormerMember,
@@ -217,6 +218,11 @@ export function DataStatusPage() {
   const activityVotingConfirmed = countWithCompleteMetric("voting");
   const activityCommitteeAffiliationConfirmed = activityEntries.filter((e) => e.member.committees.length > 0).length;
   const activityAllMissingCount = activityEntries.filter((e) => e.metrics.every((m) => m.dataStatus !== "complete")).length;
+  const activityFullCompleteCount = activityEntries.filter((e) => e.metrics.every((m) => m.dataStatus === "complete")).length;
+  const activityPartialCount = activityTargetCount - activityAllMissingCount - activityFullCompleteCount;
+  const committeeReportMemberIds = new Set(committeeReportActivityData.events.map((e) => e.memberId));
+  const committeeReportSpeechConfirmed = committeeReportMemberIds.size;
+  const committeeReportTotalEvents = committeeReportActivityData.events.length;
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -692,12 +698,24 @@ export function DataStatusPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityCommitteeAffiliationConfirmed}名</dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">本会議での委員長・副委員長報告：確認人数</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{committeeReportSpeechConfirmed}名（計{committeeReportTotalEvents}件）</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">6指標すべて算定可能</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityFullCompleteCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">一部の指標のみ算定可能</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityPartialCount}名</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">6指標とも対象記録なしの議員</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityAllMissingCount}名</dd>
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          「出席状況」「請願・提案等」は本サイトが一次資料を未収録のため、現時点で全{activityTargetCount}名が「対象記録なし」です。委員会活動（発言・質疑件数）は委員会議事録の収録が進んでいないため、活動指標スコアには含めず所属・役職のみを参考情報として掲載しています。詳しい算定方法は
+          「出席状況」「請願・提案等」は本サイトが一次資料を未収録のため、現時点で全{activityTargetCount}名が「対象記録なし」です。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会がまだ公表していないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しい算定方法は
           <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
             こちら
           </Link>
