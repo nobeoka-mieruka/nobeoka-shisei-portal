@@ -21,6 +21,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
+import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 import {
   affiliationTypeLabel,
   affiliationsForMemberProfileByType,
@@ -34,6 +35,12 @@ import { personSlug } from "../lib/people";
 import { ActivityRadarSection } from "../components/council/ActivityRadarSection";
 import { PersonTimeline } from "../components/council/PersonTimeline";
 import { getPersonTimeline } from "../lib/personTimeline";
+import {
+  getFormerMemberDataTier,
+  FORMER_MEMBER_DATA_TIER_LABELS,
+  FORMER_MEMBER_DATA_TIER_DESCRIPTIONS,
+  FORMER_MEMBER_DATA_TIER_DISCLAIMER,
+} from "../lib/formerMemberActivity";
 import {
   calculateAttendanceIndex,
   calculateInformationDisclosureIndex,
@@ -95,6 +102,8 @@ export function MemberFormerDetailPage() {
   // 元議員10名全員に個人別賛否データが登録されている。実データを反映する。
   const disclosedVotes = legacyId ? billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === legacyId)) : [];
   const timeline = legacyId ? getPersonTimeline(legacyId) : [];
+  // Phase130：データ充足レベル（人物評価ではない。画面上に必ず注記を表示する）。
+  const dataTier = getFormerMemberDataTier(new Set(timeline.map((e) => e.eventType)));
 
   // 議会活動データ（レーダーチャート）。在職確認済み会期（formerMembers.jsonのservedSessions）
   // のみを対象期間とする（在職期間全体を保証する記録ではない旨は算定方法ページで説明する）。
@@ -137,9 +146,19 @@ export function MemberFormerDetailPage() {
           <span className="rounded-full bg-surface-container-lowest px-2.5 py-0.5 text-xs font-semibold text-on-surface-variant">
             {archiveMemberStatusLabel(profile.status)}（現職ではありません）
           </span>
+          <span
+            className="rounded-full bg-tertiary-container px-2.5 py-0.5 text-xs font-semibold text-on-tertiary-container"
+            title={FORMER_MEMBER_DATA_TIER_DESCRIPTIONS[dataTier]}
+          >
+            {FORMER_MEMBER_DATA_TIER_LABELS[dataTier]}
+          </span>
         </div>
         {profile.nameKana && <p className="mt-1 text-sm text-on-surface-variant">{profile.nameKana}</p>}
         {profile.notes && <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{profile.notes}</p>}
+        <p className="mt-3 rounded-lg bg-surface-container-lowest p-3 text-xs leading-relaxed text-on-surface-variant">
+          <strong className="font-semibold text-on-surface">{FORMER_MEMBER_DATA_TIER_LABELS[dataTier]}</strong>
+          ：{FORMER_MEMBER_DATA_TIER_DESCRIPTIONS[dataTier]}　{FORMER_MEMBER_DATA_TIER_DISCLAIMER}
+        </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {profile.legacyFormerMemberId && (
@@ -183,9 +202,33 @@ export function MemberFormerDetailPage() {
       </SectionCard>
 
       <SectionCard title="在籍期間・選挙・任期履歴">
+        <div className="mb-3 flex flex-wrap gap-2">
+          <span
+            className="rounded-full bg-primary-container px-2.5 py-0.5 text-xs font-medium text-on-primary-container"
+            title={evidenceAvailabilityDescription("confirmed")}
+          >
+            選挙：{evidenceAvailabilityLabel("confirmed")}
+          </span>
+          <span
+            className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+              own.length > 0 ? "bg-primary-container text-on-primary-container" : "bg-surface-container-high text-on-surface-variant"
+            }`}
+            title={evidenceAvailabilityDescription(own.length > 0 ? "confirmed" : "not_collected")}
+          >
+            正式な任期開始・終了日：{evidenceAvailabilityLabel(own.length > 0 ? "confirmed" : "not_collected")}
+          </span>
+        </div>
+        {timeline.filter((e) => e.eventType === "election").length > 0 && (
+          <p className="mb-2 text-sm text-on-surface">
+            {timeline
+              .filter((e) => e.eventType === "election")
+              .map((e) => e.title)
+              .join("／")}
+          </p>
+        )}
         {own.length === 0 ? (
           <p className="text-sm text-on-surface-variant">
-            正式な任期開始日・終了日を示す公式資料は確認できていません（選挙当選日を任期開始日として代用することはしていません）。当選の事実そのものは上記「活動タイムライン」の選挙記録でご確認いただけます。
+            正式な任期開始日・終了日を示す公式資料は確認できていません（選挙当選日を任期開始日として代用することはしていません）。当選の事実そのものは上記「活動タイムライン」の選挙記録でご確認いただけます。「未収録」は、当サイトがこの情報をまだ収集・登録していないことを示し、資料が存在しないと断定するものではありません。
           </p>
         ) : (
           <ul className="space-y-2">

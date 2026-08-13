@@ -36,6 +36,12 @@ import type { ArchivePolicyCategory } from "../types/historicalArchive";
 import type { PersonSummary } from "../lib/people";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import type { CsvColumn } from "../lib/csv";
+import {
+  FORMER_MEMBER_DATA_TIER_LABELS,
+  FORMER_MEMBER_DATA_TIER_DESCRIPTIONS,
+  FORMER_MEMBER_DATA_TIER_DISCLAIMER,
+  type FormerMemberDataTier,
+} from "../lib/formerMemberActivity";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -82,6 +88,7 @@ const PEOPLE_CSV_COLUMNS: CsvColumn<PersonSummary>[] = [
   { header: "会派", value: (p) => factionName(p.factionId) },
   { header: "在籍期間", value: (p) => p.tenureLabel },
   { header: "確認状況", value: (p) => archiveVerificationStatusLabel(p.verificationStatus) },
+  { header: "元議員データ充足レベル", value: (p) => (p.dataTier ? FORMER_MEMBER_DATA_TIER_LABELS[p.dataTier] : "") },
   { header: "関連資料件数", value: (p) => p.relatedDocumentCount },
   { header: "詳細ページURL", value: (p) => `${SITE_URL}/people/${p.slug}` },
 ];
@@ -120,6 +127,9 @@ export function PeoplePage() {
   const statusFilter = hasMounted ? (searchParams.get("status") ?? "") : "";
   const factionFilter = hasMounted ? (searchParams.get("faction") ?? "") : "";
   const yearFilter = hasMounted ? (searchParams.get("year") ?? "") : "";
+  // Phase134：データ充足レベル（元議員限定）での絞り込み。type等と同様、hydration不整合を
+  // 避けるためマウント後にのみ反映する。
+  const dataTierFilter = hasMounted ? (searchParams.get("dataTier") ?? "") : "";
 
   const factionIds = [...new Set(members.map((m) => m.factionId))];
   // 在職年代（tenureYears）と選挙年代（electionYears）の両方を選択肢に含める（別概念だが、
@@ -132,6 +142,7 @@ export function PeoplePage() {
     if (statusFilter === "former" && p.isCurrent) return false;
     if (factionFilter && p.factionId !== factionFilter) return false;
     if (yearFilter && !p.tenureYears.includes(Number(yearFilter)) && !p.electionYears.includes(Number(yearFilter))) return false;
+    if (dataTierFilter && p.dataTier !== dataTierFilter) return false;
     return true;
   });
 
@@ -218,9 +229,27 @@ export function PeoplePage() {
               ))}
             </select>
           </label>
+          <label className="flex flex-col gap-1 text-sm">
+            <span className="text-xs font-medium text-on-surface-variant">元議員の資料充足レベル</span>
+            <select
+              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              value={dataTierFilter}
+              onChange={(e) => updateParam("dataTier", e.target.value)}
+            >
+              <option value="">すべて</option>
+              {(["A", "B", "C", "D"] as FormerMemberDataTier[]).map((t) => (
+                <option key={t} value={t}>
+                  {FORMER_MEMBER_DATA_TIER_LABELS[t]}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           「在職年代・選挙年代」は、公式資料で確認できた在職期間（在職年代）または選挙の当選年（選挙年代）のいずれかに一致する人物を表示します。選挙年から在職期間を自動的に推定してはいません（当選の翌年もそのまま在職していたとは限りません）。現職議員の在職年代は、在籍履歴データが未整備のため今年度のみを表示しています。
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          「元議員の資料充足レベル」は元議員のみに設定されます（現職議員・市長は対象外）。{FORMER_MEMBER_DATA_TIER_DISCLAIMER}
         </p>
       </SectionCard>
 
@@ -245,6 +274,14 @@ export function PeoplePage() {
                 <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
                   {personTypeLabel(p.personType)}
                 </span>
+                {p.dataTier && (
+                  <span
+                    className="rounded-full bg-tertiary-container px-2 py-0.5 text-xs font-medium text-on-tertiary-container"
+                    title={FORMER_MEMBER_DATA_TIER_DESCRIPTIONS[p.dataTier]}
+                  >
+                    {FORMER_MEMBER_DATA_TIER_LABELS[p.dataTier]}
+                  </span>
+                )}
               </div>
               <p className="mt-1 text-xs text-on-surface-variant">
                 {p.tenureLabel}

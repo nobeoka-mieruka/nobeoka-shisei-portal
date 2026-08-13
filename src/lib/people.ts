@@ -23,6 +23,8 @@ import type {
   ArchivePolicy,
 } from "../types/historicalArchive";
 import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
+import { getPersonTimeline } from "./personTimeline";
+import { getFormerMemberDataTier, type FormerMemberDataTier } from "./formerMemberActivity";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -57,6 +59,15 @@ export interface PersonSummary {
   electionYears: number[];
   verificationStatus: "verified" | "partiallyVerified" | "needsReview" | "sourceUnavailable";
   relatedDocumentCount: number;
+  /** Phase130：元議員限定のデータ充足レベル（人物評価ではない。formerMemberActivity.ts参照）。
+   * 現職議員・市長には算出しない（対象データ構造が異なるため、今回は元議員限定で導入）。 */
+  dataTier?: FormerMemberDataTier;
+}
+
+/** 元議員1名分のデータ充足レベルを、統合タイムラインのイベント種別集合から算出する。 */
+function formerMemberDataTierOf(formerMemberId: string): FormerMemberDataTier {
+  const eventTypes = new Set(getPersonTimeline(formerMemberId).map((e) => e.eventType));
+  return getFormerMemberDataTier(eventTypes);
 }
 
 export function personSlug(personType: PersonType, id: string): string {
@@ -162,6 +173,7 @@ export function buildPersonIndex(): PersonSummary[] {
       electionYears,
       verificationStatus: fm.lastVerified ? "partiallyVerified" : "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("former-member", fm.id),
+      dataTier: formerMemberDataTierOf(fm.id),
     });
   }
 
@@ -279,8 +291,13 @@ export interface PeopleDataStatus {
   formerMemberGeneralQuestionConfirmedCount: number;
   formerMemberSpeechConfirmedCount: number;
   formerMemberVoteConfirmedCount: number;
-  /** 選挙記録のみ確認できている（任期・議会活動のいずれも未確認）元議員数。データ充足レベルA。 */
+  /** 選挙記録のみ確認できている（任期・議会活動のいずれも未確認）元議員数。データ充足レベルD相当。 */
   formerMemberElectionOnlyCount: number;
+  /** Phase130：データ充足レベル別の元議員数（人物評価ではない。formerMemberActivity.ts参照）。 */
+  formerMemberTierACount: number;
+  formerMemberTierBCount: number;
+  formerMemberTierCCount: number;
+  formerMemberTierDCount: number;
 }
 
 export function getPeopleDataStatus(): PeopleDataStatus {
@@ -354,6 +371,11 @@ export function getPeopleDataStatus(): PeopleDataStatus {
       })(),
   ).length;
 
+  const formerMemberTierCounts = { A: 0, B: 0, C: 0, D: 0 };
+  for (const fm of formerMembers) {
+    formerMemberTierCounts[formerMemberDataTierOf(fm.id)]++;
+  }
+
   return {
     currentMemberCount: members.length,
     formerMemberCount: formerMembers.length,
@@ -372,5 +394,9 @@ export function getPeopleDataStatus(): PeopleDataStatus {
     formerMemberSpeechConfirmedCount,
     formerMemberVoteConfirmedCount,
     formerMemberElectionOnlyCount,
+    formerMemberTierACount: formerMemberTierCounts.A,
+    formerMemberTierBCount: formerMemberTierCounts.B,
+    formerMemberTierCCount: formerMemberTierCounts.C,
+    formerMemberTierDCount: formerMemberTierCounts.D,
   };
 }

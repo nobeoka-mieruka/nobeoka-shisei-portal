@@ -144,20 +144,69 @@ export function getAllFormerMemberActivity(): FormerMemberActivity[] {
 }
 
 /**
- * Phase129：元議員のデータ充足レベル（内部集計専用。人物評価には使用しない）。
- * A：選挙記録のみ確認できている
- * B：選挙＋正式任期（archiveMemberTerms）まで確認できている
- * C：選挙＋議会活動（一般質問・議会内発言・賛否・委員会・議案提出等）を確認できている
- * D：選挙・任期・議会活動を複数領域で確認できている
+ * Phase130（Phase129の内部定義をユーザー指示に合わせて差し替え。呼び出し元は無かったため
+ * 既存consumerへの影響なし）：元議員・人物ページ向け「データ充足レベル」。
+ *
+ * 【重要】これは人物の評価・活動量の優劣を示すものではない。「当サイトが確認できている
+ * 公開資料がどの領域まで揃っているか」だけを示す（表示側で必ずその旨を明記すること。
+ * `FORMER_MEMBER_DATA_TIER_DISCLAIMER`参照）。古い年代の元議員ほど公開資料そのものが
+ * 少ないため、レベルが低いことは議員活動が少なかったことを意味しない。
+ *
+ * A：選挙＋任期＋議会活動（一般質問・議会内発言・賛否・委員会所属・議案提出等）を
+ *    一次資料で確認できている（全領域確認）。
+ * B：選挙に加え、任期、または複数種別の議会活動のいずれかを確認できている（2領域相当）。
+ * C：選挙記録を中心に、その他の資料は一部（議会活動のうち1種別のみ等）確認できている。
+ * D：人物の存在・当選等のみ確認でき、任期・議会活動の資料はまだ収録できていない。
+ *
+ * 単純な件数（イベント総数）ではなく、確認できた「領域数」を基準に判定する
+ * （同じ領域の記録が10件あっても1件でも同じ扱い。これにより、記録件数が多い人物ほど
+ * 高レベルになるという誤解を避ける）。
  */
 export type FormerMemberDataTier = "A" | "B" | "C" | "D";
 
+const FORMER_MEMBER_ACTIVITY_DOMAIN_TYPES = ["general_question", "speech", "vote", "committee", "role", "proposal"];
+
 export function getFormerMemberDataTier(timelineEventTypes: Set<string>): FormerMemberDataTier {
   const hasTerm = timelineEventTypes.has("term_start");
-  const activityTypes = ["general_question", "speech", "vote", "committee", "role", "proposal"];
-  const hasActivity = activityTypes.some((t) => timelineEventTypes.has(t));
-  if (hasActivity && hasTerm) return "D";
+  const confirmedActivityDomainCount = FORMER_MEMBER_ACTIVITY_DOMAIN_TYPES.filter((t) =>
+    timelineEventTypes.has(t),
+  ).length;
+  const hasActivity = confirmedActivityDomainCount > 0;
+  const hasBroadActivity = confirmedActivityDomainCount >= 2;
+
+  if (hasTerm && hasActivity) return "A";
+  if (hasTerm || hasBroadActivity) return "B";
   if (hasActivity) return "C";
-  if (hasTerm) return "B";
-  return "A";
+  return "D";
+}
+
+/** 市民向けの短いラベル。「評価ランク」と誤認されないよう「資料充足レベル」の語を用いる。 */
+export const FORMER_MEMBER_DATA_TIER_LABELS: Record<FormerMemberDataTier, string> = {
+  A: "資料充足レベルA",
+  B: "資料充足レベルB",
+  C: "資料充足レベルC",
+  D: "資料充足レベルD",
+};
+
+/** 各レベルの意味を説明する市民向けの1文。 */
+export const FORMER_MEMBER_DATA_TIER_DESCRIPTIONS: Record<FormerMemberDataTier, string> = {
+  A: "選挙・任期・議会活動（一般質問・議会内発言・賛否・委員会所属・議案提出等）を複数領域の一次資料で確認できています。",
+  B: "選挙に加え、正式な任期、または複数種別の議会活動のいずれかを一次資料で確認できています。",
+  C: "選挙記録を中心に、議会活動の記録は一部（1種別のみ）確認できています。",
+  D: "人物の存在・当選等のみ確認でき、任期・議会活動の資料はまだ収録できていません。",
+};
+
+/** 画面上に必ず表示する、評価ではない旨の注記文。 */
+export const FORMER_MEMBER_DATA_TIER_DISCLAIMER =
+  "この区分は人物への評価ではなく、当サイトで確認できている公開資料の充足状況を示します。年代が古い元議員ほど公開資料そのものが少ないため、レベルが低いことは議員活動が少なかったことを意味しません。";
+
+/** 全元議員分のデータ充足レベル（personId→tier）。`personTimeline.ts`のイベント種別集合から算出する。 */
+export function getFormerMemberDataTierMap(
+  getEventTypesFor: (formerMemberId: string) => Set<string>,
+): Map<string, FormerMemberDataTier> {
+  const map = new Map<string, FormerMemberDataTier>();
+  for (const fm of formerMembers) {
+    map.set(fm.id, getFormerMemberDataTier(getEventTypesFor(fm.id)));
+  }
+  return map;
 }
