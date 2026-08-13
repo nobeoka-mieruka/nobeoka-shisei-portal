@@ -2903,7 +2903,7 @@
         "incumbencyStatus": null,
         "votes": 2105,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm07"
       },
       {
         "name": "甲斐 ただあつ",
@@ -2933,7 +2933,7 @@
         "incumbencyStatus": null,
         "votes": 1683,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm08"
       },
       {
         "name": "長友 さちこ",
@@ -2983,7 +2983,7 @@
         "incumbencyStatus": null,
         "votes": 1622,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm02"
       },
       {
         "name": "平田 信広",
@@ -3043,7 +3043,7 @@
         "incumbencyStatus": null,
         "votes": 1511,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm04"
       },
       {
         "name": "本部 やすとし",
@@ -3053,7 +3053,7 @@
         "incumbencyStatus": null,
         "votes": 1501,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm10"
       },
       {
         "name": "中城 あかね",
@@ -3073,7 +3073,7 @@
         "incumbencyStatus": null,
         "votes": 1418.758,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm09"
       },
       {
         "name": "松田 かずみ",
@@ -3083,7 +3083,7 @@
         "incumbencyStatus": null,
         "votes": 1413.745,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm03"
       },
       {
         "name": "白石 よしもり",
@@ -3093,7 +3093,7 @@
         "incumbencyStatus": null,
         "votes": 1385,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm05"
       },
       {
         "name": "吉本 やすし",
@@ -3103,7 +3103,7 @@
         "incumbencyStatus": null,
         "votes": 1375,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm01"
       },
       {
         "name": "いなだ まさゆき",
@@ -3123,7 +3123,7 @@
         "incumbencyStatus": null,
         "votes": 1286,
         "elected": true,
-        "linkedProfileId": null
+        "linkedProfileId": "fm06"
       },
       {
         "name": "いのはな 哲",
@@ -3264,7 +3264,7 @@
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選27名・落選11名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。有権者数・投票率はページ記載値。投票者数・無効票数はページに記載が無く未確認。候補者のlinkedProfileIdは、members.jsonのnameKana完全一致（現職）またはformerMembers.jsonの氏名完全一致（既存登録済み元議員）の場合のみ設定し、一致しない候補は未リンクのまま残した（新規の元議員登録は今回行っていない。servedSessionsの会期単位確認が必要なため）。"
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選27名・落選11名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。有権者数・投票率はページ記載値。投票者数・無効票数はページに記載が無く未確認。候補者のlinkedProfileIdは、members.jsonのnameKana完全一致（現職）またはformerMembers.jsonの氏名完全一致（既存登録済み元議員）の場合のみ設定し、一致しない候補は未リンクのまま残した（新規の元議員登録は今回行っていない。servedSessionsの会期単位確認が必要なため）。 【Phase115追記】formerMembers.json（元議員）10名のうち、当選済みでlinkedProfileId未設定だった候補者10名分を、姓の一意性・改選前後の在職記録（servedSessions）・電子投票所名簿上のかな表記との整合で照合し、linkedProfileIdを追加した（fm01〜fm10全員）。読み仮名（nameKana）は本ファイルの候補者nameKanaフィールド（選挙ドットコムの投票結果ページから抽出済み）をそのまま転記するのみで、新たな推測は行っていない。"
       }
     ],
     "notes": "定数27・候補38名。現職多数が再選。"
