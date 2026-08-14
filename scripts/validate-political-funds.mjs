@@ -55,7 +55,9 @@ function fiscalYearToSeireki(label) {
   return Number(m[1]) + 2018;
 }
 
-const currentYear = new Date().getFullYear();
+// 年は日本標準時（JST）基準で判定する（実行環境がUTCの場合、getFullYear()はUTC年を返すため、
+// JST大晦日〜元日の約9時間、年が1つずれて誤って「未来」と判定されうる。他のvalidate系と同じ修正）。
+const currentYear = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCFullYear();
 const seenOrgYear = new Set();
 let consistentCount = 0;
 let allZeroCount = 0;

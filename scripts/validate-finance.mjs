@@ -85,7 +85,10 @@ function fiscalYearOfIsoDate(iso) {
 }
 
 const archiveFiscalYears = readJson("src/data/archiveFiscalYears.json");
-const currentFiscalYear = fiscalYearOfIsoDate(new Date().toISOString().slice(0, 10));
+// 年度は日本の会計年度（4月始まり、JST基準）のため、「今日」もJSTで判定する
+// （UTCのままだと、年度境界の3/31〜4/1深夜（JST）に前年度と誤判定しうる。
+// validate-freshness.mjsと同じ修正）。
+const currentFiscalYear = fiscalYearOfIsoDate(new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10));
 
 const MIN_REASONABLE_POPULATION = 10_000;
 const MAX_REASONABLE_POPULATION = 300_000;

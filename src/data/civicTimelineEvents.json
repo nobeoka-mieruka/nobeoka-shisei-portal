@@ -210,13 +210,13 @@
   },
   {
     "id": "civic-012",
-    "year": 1952,
-    "dateLabel": "1952年8月（日不明）",
+    "year": 1951,
+    "dateLabel": "1951年8月（日不明）",
     "category": "行政組織",
     "title": "人事委員会・農業委員会発足",
     "summary": "人事委員会・農業委員会が発足した。",
     "relatedPersonIds": [
-      "mayor-07"
+      "mayor-04"
     ],
     "sourceRefs": [
       {
@@ -224,8 +224,9 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
       }
     ],
-    "lastVerifiedAt": "2026-08-06",
-    "verificationStatus": "verified"
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "2026-08-14再調査：出典ページ原文を再確認したところ、年が1952年ではなく1951年8月であり、在任期間（archiveMayorTerms.json）に基づくとmayor-07（三浦虎雄、在任は1952-07-11〜）ではなくmayor-04（仲田又次郎、第2期1948-07-16〜1952-06-19）の在任中の出来事であることが判明したため訂正した（TASK-073調査で発見）。1952年8月の出来事は別途「延岡市公平委員会設置」であり、civic-072として新規登録した。"
   },
   {
     "id": "civic-013",
@@ -1356,5 +1357,1465 @@
     "notes": "Windows OCR基盤による広報のべおかアーカイブ調査（令和8年8月）で発見。新庁舎建設基本構想（civic-045、2011年3月）・1期工事起工式（civic-050、2013年5月）と新庁舎高層棟完成（civic-052、2015年2月）の間の期間を補う情報として登録。元PDFページを画像化し目視で日付・内容を確認済み。",
     "lastVerifiedAt": "2026-08-12",
     "verificationStatus": "verified"
+  },
+  {
+    "id": "civic-072",
+    "year": 1952,
+    "dateLabel": "1952年8月（日不明）",
+    "category": "行政組織",
+    "title": "延岡市公平委員会設置",
+    "summary": "延岡市公平委員会が設置された。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "TASK-073調査で新規登録。civic-012の訂正過程で、同じ出典ページの1952年8月の記載が「人事委員会・農業委員会発足」ではなく「延岡市公平委員会設置」であることが判明したため、別項目として追加した。"
+  },
+  {
+    "id": "civic-073",
+    "year": 1933,
+    "dateLabel": "1933年5月（日不明）",
+    "category": "公共事業",
+    "title": "延岡ガス(株)創業",
+    "summary": "延岡ガス株式会社が創業した（1934年9月からガス供給開始）。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-074",
+    "year": 1934,
+    "dateLabel": "1934年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡高等小学校創設・統合",
+    "summary": "延岡高等小学校が創設・統合された。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-075",
+    "year": 1934,
+    "dateLabel": "1934年9月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡商工会議所創立",
+    "summary": "延岡商工会議所が創立された。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-076",
+    "year": 1936,
+    "dateLabel": "1936年8月（日不明）",
+    "category": "公共事業",
+    "title": "塵芥焼却場完成",
+    "summary": "塵芥（じんかい）焼却場が完成した。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-077",
+    "year": 1948,
+    "dateLabel": "1948年8月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "国立水産試験場土々呂分場開設",
+    "summary": "国立水産試験場土々呂分場が開設された。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-078",
+    "year": 1948,
+    "dateLabel": "1948年9月（日不明）",
+    "category": "公共事業",
+    "title": "祝子橋完成",
+    "summary": "祝子橋（ほうりばし）が完成した。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-079",
+    "year": 1949,
+    "dateLabel": "1949年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡市国民健康保険創設",
+    "summary": "延岡市国民健康保険が創設された。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-080",
+    "year": 1950,
+    "dateLabel": "1950年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "失業対策事業開始",
+    "summary": "失業対策事業が開始された。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-081",
+    "year": 1950,
+    "dateLabel": "1950年12月（日不明）",
+    "category": "行政組織",
+    "title": "固定資産評価員を初めて任命",
+    "summary": "固定資産評価員が初めて任命された。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-082",
+    "year": 1938,
+    "dateLabel": "1938年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "東小学校新設（出北町）",
+    "summary": "出北町に東小学校が新設された。",
+    "relatedPersonIds": [
+      "mayor-06"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-083",
+    "year": 1938,
+    "dateLabel": "1938年4月（日不明）",
+    "category": "行政組織",
+    "title": "延岡市常備消防部を創設",
+    "summary": "延岡市常備消防部が創設された。",
+    "relatedPersonIds": [
+      "mayor-06"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-084",
+    "year": 1939,
+    "dateLabel": "1939年8月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "県立延岡図書館再建",
+    "summary": "県立延岡図書館が再建された。",
+    "relatedPersonIds": [
+      "mayor-06"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-085",
+    "year": 1943,
+    "dateLabel": "1943年10月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡商工会議所が宮崎商工経済会延岡支部となる",
+    "summary": "延岡商工会議所が宮崎商工経済会延岡支部となった。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-086",
+    "year": 1944,
+    "dateLabel": "1944年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "県立延岡工業学校が開校",
+    "summary": "県立延岡工業学校が開校した。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-087",
+    "year": 1945,
+    "dateLabel": "1945年8月15日",
+    "category": "行政組織",
+    "title": "終戦、市役所を岡富国民学校講堂に移転",
+    "summary": "終戦を迎え、8月17日から市役所が岡富国民学校講堂に移転した。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-088",
+    "year": 1953,
+    "dateLabel": "1953年5月（日不明）",
+    "category": "公共事業",
+    "title": "大瀬橋完成",
+    "summary": "大瀬橋が完成した。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-089",
+    "year": 1955,
+    "dateLabel": "1955年3月（日不明）",
+    "category": "公共事業",
+    "title": "小山橋完成",
+    "summary": "小山橋が完成した。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-090",
+    "year": 1955,
+    "dateLabel": "1955年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "県立延岡ろう学校設立",
+    "summary": "県立延岡ろう学校が設立された。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-091",
+    "year": 1955,
+    "dateLabel": "1955年8月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "野口記念館開館",
+    "summary": "野口記念館が開館した。",
+    "relatedPersonIds": [
+      "mayor-07"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-092",
+    "year": 1947,
+    "dateLabel": "1947年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "学制改革により新制中学校発足",
+    "summary": "学制改革により新制中学校が発足した。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。佐藤千吉郎氏個人の施策としての明示的な紐付け記載はない。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-093",
+    "year": 1947,
+    "dateLabel": "1947年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡市立図書館へ変更",
+    "summary": "県立から市立へ、延岡市立図書館へ変更された。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-094",
+    "year": 1947,
+    "dateLabel": "1947年4月（日不明）",
+    "category": "行政組織",
+    "title": "延岡市選挙管理委員会設置",
+    "summary": "延岡市選挙管理委員会が設置された。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-095",
+    "year": 1947,
+    "dateLabel": "1947年12月（日不明）",
+    "category": "行政組織",
+    "title": "延岡市議会事務局設置",
+    "summary": "延岡市議会事務局が設置された。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-096",
+    "year": 1948,
+    "dateLabel": "1948年3月（日不明）",
+    "category": "行政組織",
+    "title": "延岡市公安委員会・延岡市警察署設置",
+    "summary": "延岡市公安委員会、延岡市警察署（国家地方警察延岡地区警察署）が設置された。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-097",
+    "year": 1948,
+    "dateLabel": "1948年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "県立延岡恒富高等学校・延岡岡富高等学校設置",
+    "summary": "県立延岡恒富高等学校・県立延岡岡富高等学校が設置された。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-098",
+    "year": 1948,
+    "dateLabel": "1948年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "農業協同組合発足",
+    "summary": "農業協同組合が発足した。",
+    "relatedPersonIds": [
+      "mayor-08"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1930〜1950年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-099",
+    "year": 1957,
+    "dateLabel": "1957年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "青年会議所発足",
+    "summary": "延岡青年会議所が発足した。",
+    "relatedPersonIds": [
+      "mayor-09"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-100",
+    "year": 1957,
+    "dateLabel": "1957年7月（日不明）",
+    "category": "公共事業",
+    "title": "旭化成カシミロン工場完成",
+    "summary": "旭化成カシミロン工場が完成した。",
+    "relatedPersonIds": [
+      "mayor-09"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-101",
+    "year": 1958,
+    "dateLabel": "1958年3月（日不明）",
+    "category": "公共事業",
+    "title": "桜ヶ丘に住宅団地開設",
+    "summary": "桜ヶ丘に住宅団地が開設された。",
+    "relatedPersonIds": [
+      "mayor-09"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-102",
+    "year": 1958,
+    "dateLabel": "1958年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "県立延岡商業高等学校開校",
+    "summary": "県立延岡商業高等学校が開校した。",
+    "relatedPersonIds": [
+      "mayor-09"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-103",
+    "year": 1960,
+    "dateLabel": "1960年3月（日不明）",
+    "category": "公共事業",
+    "title": "し尿処理場完成",
+    "summary": "し尿処理場が完成した。",
+    "relatedPersonIds": [
+      "mayor-09"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-104",
+    "year": 1961,
+    "dateLabel": "1961年11月（日不明）",
+    "category": "公共事業",
+    "title": "西階総合開発事業開始",
+    "summary": "西階総合開発事業が開始された。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-105",
+    "year": 1962,
+    "dateLabel": "1962年3月（日不明）",
+    "category": "市制施行・合併",
+    "title": "日向延岡新産業都市指定促進期成同盟組織",
+    "summary": "日向延岡新産業都市指定促進期成同盟が組織された。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-106",
+    "year": 1963,
+    "dateLabel": "1963年2月（日不明）",
+    "category": "行政組織",
+    "title": "市民憲章・市歌制定",
+    "summary": "延岡市民憲章・市歌が制定された。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-107",
+    "year": 1963,
+    "dateLabel": "1963年10月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "市民会館内藤記念館開館",
+    "summary": "市民会館内藤記念館が開館した。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-108",
+    "year": 1964,
+    "dateLabel": "1964年1月（日不明）",
+    "category": "市制施行・合併",
+    "title": "日向延岡地区新産業都市に指定",
+    "summary": "日向延岡地区が新産業都市に指定された（2市1町5村）。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-109",
+    "year": 1964,
+    "dateLabel": "1964年2月（日不明）",
+    "category": "公共事業",
+    "title": "旭化成ナイロン工場完成",
+    "summary": "旭化成ナイロン工場が完成した。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-110",
+    "year": 1964,
+    "dateLabel": "1964年12月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "旭化成が市立図書館を新築寄贈",
+    "summary": "旭化成が市立図書館を新築し寄贈した。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-111",
+    "year": 1965,
+    "dateLabel": "1965年3月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "祖母山・傾山・大崩山山系が国定公園指定",
+    "summary": "祖母山・傾山・大崩山山系が国定公園に指定された。",
+    "relatedPersonIds": [
+      "mayor-10"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1951〜1970年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-112",
+    "year": 1971,
+    "dateLabel": "1971年10月（日不明）",
+    "category": "行政組織",
+    "title": "宮崎県北部広域市町村圏協議会発足",
+    "summary": "宮崎県北部広域市町村圏協議会が発足した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-113",
+    "year": 1972,
+    "dateLabel": "1972年5月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "特別養護老人ホーム「敬寿園」開園",
+    "summary": "特別養護老人ホーム「敬寿園」が開園した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-114",
+    "year": 1972,
+    "dateLabel": "1972年7月（日不明）",
+    "category": "公共事業",
+    "title": "国鉄高千穂線開通",
+    "summary": "国鉄高千穂線が開通した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-115",
+    "year": 1973,
+    "dateLabel": "1973年2月（日不明）",
+    "category": "行政組織",
+    "title": "市制40周年で緑化都市宣言",
+    "summary": "市制施行40周年を記念して緑化都市宣言が行われ、市の木・花・花木が選定された。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-116",
+    "year": 1973,
+    "dateLabel": "1973年2月（日不明）",
+    "category": "公共事業",
+    "title": "延岡新港建設開始",
+    "summary": "延岡新港の建設が開始された。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-117",
+    "year": 1974,
+    "dateLabel": "1974年2月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "日豊海岸が国定公園指定",
+    "summary": "日豊海岸が国定公園に指定された。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-118",
+    "year": 1974,
+    "dateLabel": "1974年4月（日不明）",
+    "category": "公共事業",
+    "title": "清掃工場完成、日豊本線電化",
+    "summary": "清掃工場が完成し、日豊本線が電化された。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-119",
+    "year": 1976,
+    "dateLabel": "1976年6月（日不明）",
+    "category": "公共事業",
+    "title": "旭化成第1火力発電所集合煙突完成",
+    "summary": "旭化成第1火力発電所の集合煙突が完成した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-120",
+    "year": 1977,
+    "dateLabel": "1977年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "木工団地操業開始、県立延岡東高校開校",
+    "summary": "木工団地が操業を開始し、県立延岡東高等学校が開校した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-121",
+    "year": 1979,
+    "dateLabel": "1979年4月（日不明）",
+    "category": "公共事業",
+    "title": "東九州自動車道路対策室設置",
+    "summary": "東九州自動車道路対策室が設置された。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-122",
+    "year": 1979,
+    "dateLabel": "1979年10月（日不明）",
+    "category": "行政組織",
+    "title": "国民体育大会秋季大会開催、丸岡町と姉妹都市提携",
+    "summary": "国民体育大会秋季大会が開催され、福井県丸岡町（当時）と姉妹都市提携を結んだ。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-123",
+    "year": 1980,
+    "dateLabel": "1980年8月（日不明）",
+    "category": "行政組織",
+    "title": "メドフォード市（米国）と姉妹都市提携",
+    "summary": "アメリカ・メドフォード市と姉妹都市提携を結んだ。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-124",
+    "year": 1980,
+    "dateLabel": "1980年12月（日不明）",
+    "category": "公共事業",
+    "title": "国道10号延岡大橋完成開通",
+    "summary": "国道10号延岡大橋が完成・開通した。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-125",
+    "year": 1983,
+    "dateLabel": "1983年2月（日不明）",
+    "category": "行政組織",
+    "title": "市制50周年で健康都市宣言",
+    "summary": "市制施行50周年を記念して健康都市宣言が行われた。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-126",
+    "year": 1985,
+    "dateLabel": "1985年6月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "須美江家族旅行村「サンビーチすみえ」オープン",
+    "summary": "須美江家族旅行村「サンビーチすみえ」がオープンした。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-127",
+    "year": 1985,
+    "dateLabel": "1985年11月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡総合文化センター完成",
+    "summary": "延岡総合文化センターが完成した。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-128",
+    "year": 1986,
+    "dateLabel": "1986年3月（日不明）",
+    "category": "行政組織",
+    "title": "「テレトピア構想」モデル都市指定",
+    "summary": "「テレトピア構想」のモデル都市に指定された。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-129",
+    "year": 1986,
+    "dateLabel": "1986年9月（日不明）",
+    "category": "行政組織",
+    "title": "市議会議員定数を32人に決定",
+    "summary": "市議会議員定数を32人とする条例が決定された。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-130",
+    "year": 1987,
+    "dateLabel": "1987年9月（日不明）",
+    "category": "公共事業",
+    "title": "東九州自動車道が国土開発幹線自動車道に組み入れ",
+    "summary": "東九州自動車道が国土開発幹線自動車道に組み入れられた。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1971〜1990年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-131",
+    "year": 1988,
+    "dateLabel": "1988年5月（日不明）",
+    "category": "行政組織",
+    "title": "「都市景観形成モデル都市」指定、出北土地区画整理事業完了",
+    "summary": "「都市景観形成モデル都市」に指定され、出北土地区画整理事業が完了した。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-132",
+    "year": 1989,
+    "dateLabel": "1989年1月（日不明）",
+    "category": "公共事業",
+    "title": "東九州自動車道延岡〜清武間が基本計画路線に決定",
+    "summary": "東九州自動車道の延岡〜清武間が基本計画路線に決定された。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-133",
+    "year": 1992,
+    "dateLabel": "1992年8月（日不明）",
+    "category": "公共事業",
+    "title": "日豊本線高速化事業完了",
+    "summary": "日豊本線の高速化事業が完了した。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-134",
+    "year": 1993,
+    "dateLabel": "1993年2月（日不明）",
+    "category": "行政組織",
+    "title": "市制60周年記念「ハートフル憲章」制定",
+    "summary": "市制施行60周年を記念して「ハートフル憲章」が制定された。",
+    "relatedPersonIds": [
+      "mayor-12"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-135",
+    "year": 1994,
+    "dateLabel": "1994年7月（日不明）",
+    "category": "行政組織",
+    "title": "空き缶等散乱防止条例がスタート",
+    "summary": "空き缶等散乱防止条例がスタートした。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-136",
+    "year": 1996,
+    "dateLabel": "1996年2月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "4年制大学誘致の基本協定調印",
+    "summary": "4年制大学（後の九州保健福祉大学）誘致に関する基本協定の調印式が行われた。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-137",
+    "year": 1998,
+    "dateLabel": "1998年10月（日不明）",
+    "category": "行政組織",
+    "title": "市議会議員定数を2人減の30人とする条例改正案を可決",
+    "summary": "市議会議員定数を2人減の30人とする議員定数条例の一部改正案が賛成多数で可決された。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-138",
+    "year": 1999,
+    "dateLabel": "1999年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "九州保健福祉大学が開学",
+    "summary": "九州保健福祉大学が開学した。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-139",
+    "year": 2002,
+    "dateLabel": "2002年3月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "九州保健福祉大学薬学部新設に20億円の財政支援予算可決",
+    "summary": "3月定例会で、九州保健福祉大学薬学部新設に対する20億円の財政支援予算が可決された。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-140",
+    "year": 2003,
+    "dateLabel": "2003年2月（日不明）",
+    "category": "行政組織",
+    "title": "市制施行70周年記念式典「未来をひらく人づくり都市宣言」",
+    "summary": "市制施行70周年記念式典が行われ、「未来をひらく人づくり都市宣言」が発表された。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-141",
+    "year": 2003,
+    "dateLabel": "2003年4月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "九州保健福祉大学に薬学部が新設",
+    "summary": "九州保健福祉大学に薬学部が新設された。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-142",
+    "year": 2004,
+    "dateLabel": "2004年12月（日不明）",
+    "category": "市制施行・合併",
+    "title": "北川町が1市3町合併からの離脱を表明",
+    "summary": "北川町が、1市3町合併からの離脱を表明した。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-143",
+    "year": 2005,
+    "dateLabel": "2005年1月（日不明）",
+    "category": "市制施行・合併",
+    "title": "1市2町合併について北浦町で住民投票、賛成多数",
+    "summary": "1市2町合併について北浦町で住民投票が行われ、賛成多数となった。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-144",
+    "year": 2005,
+    "dateLabel": "2005年2月（日不明）",
+    "category": "市制施行・合併",
+    "title": "延岡市・北方町・北浦町の合併協定調印式",
+    "summary": "延岡市・北方町・北浦町の合併協議会が合併協定調印式を行った。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "近代の年表（1991〜2010年）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-14",
+    "verificationStatus": "verified",
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
   }
 ]

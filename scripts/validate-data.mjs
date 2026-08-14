@@ -1677,7 +1677,10 @@ try {
       return d.toISOString().slice(0, 10);
     };
     const sortedByStart = [...archiveMayorTerms].sort((a, b) => String(a.termStart).localeCompare(String(b.termStart)));
-    const todayIso = new Date().toISOString().slice(0, 10);
+    // termStart/termEndは日本標準時（JST）の暦日のため、「今日」もJSTで判定する
+    // （UTCのままだとJST 00:00〜08:59の間、現職市長の任期がまだ始まっていないかのような
+    // 見せかけの空白を誤検出しうる。validate-freshness.mjsと同じ修正）。
+    const todayIso = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
     let coveredUntil = sortedByStart[0].termStart;
     const gaps = [];
     for (const t of sortedByStart) {
