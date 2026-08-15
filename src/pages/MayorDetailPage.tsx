@@ -71,7 +71,7 @@ export function MayorDetailPage() {
             </span>
           )}
         </div>
-        {mayor.nameKana && <p className="mt-1 text-sm text-on-surface-variant">{mayor.nameKana}</p>}
+        <p className="mt-1 text-sm text-on-surface-variant">{mayor.nameKana || "読み：未確認"}</p>
         {mayor.alternateNames && mayor.alternateNames.length > 0 && (
           <p className="mt-1 text-xs text-on-surface-variant">別表記：{mayor.alternateNames.join("、")}</p>
         )}
@@ -112,7 +112,18 @@ export function MayorDetailPage() {
       </section>
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
-        <h2 className="text-base font-semibold text-on-surface">任期</h2>
+        <h2 className="text-base font-semibold text-on-surface">
+          任期
+          {terms.length > 0 && (
+            <span className="ml-2 text-sm font-normal text-on-surface-variant">
+              （確認済み{terms.length}期
+              {terms.filter((t) => (t.termStartPrecision ?? "day") !== "day").length > 0
+                ? `、うち日付精度が年・月単位のもの${terms.filter((t) => (t.termStartPrecision ?? "day") !== "day").length}期`
+                : ""}
+              ）
+            </span>
+          )}
+        </h2>
         {terms.length === 0 ? (
           <p className="mt-2 text-sm text-on-surface-variant">任期情報は確認中です。</p>
         ) : (
@@ -134,6 +145,10 @@ export function MayorDetailPage() {
                     )}
                   </p>
                   <dl className="mt-2 grid grid-cols-1 gap-x-3 gap-y-1 text-xs text-on-surface-variant sm:grid-cols-2">
+                    <div>
+                      <dt className="inline">選挙日：</dt>
+                      <dd className="inline">{term.electionDate ? formatJapaneseDate(term.electionDate) : "確認中"}</dd>
+                    </div>
                     <div>
                       <dt className="inline">選挙区分：</dt>
                       <dd className="inline">{term.electionType ?? "確認中"}</dd>
