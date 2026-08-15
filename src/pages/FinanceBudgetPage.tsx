@@ -12,7 +12,14 @@ import { YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
-import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears, missingFiscalYears, formatMissingFiscalYearsNote } from "../lib/archiveFinance";
+import {
+  formatOkuYenOrConfirming,
+  fiscalYearLabel,
+  sortedFiscalYears,
+  missingFiscalYears,
+  formatMissingFiscalYearsNote,
+  hasBudgetData,
+} from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 
 const budgetInitialMetric = financeMetricByKey("budgetInitial")!;
@@ -28,11 +35,8 @@ export function FinanceBudgetPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
-  const rows = archiveFiscalYears.filter((y) => y.budget);
-  const missingYearsNote = formatMissingFiscalYearsNote(
-    missingFiscalYears(archiveFiscalYears, (y) => !!y.budget),
-    "予算・決算",
-  );
+  const rows = archiveFiscalYears.filter(hasBudgetData);
+  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasBudgetData), "予算・決算");
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

@@ -12,7 +12,14 @@ import { LandmarkIcon, ClockIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
-import { decadeLabel, earliestTermStart, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
+import {
+  countDayPreciseTerms,
+  decadeLabel,
+  earliestTermStart,
+  isActingMayorTerm,
+  mayorTermCountLabel,
+  termsForMayor,
+} from "../lib/archiveMayors";
 import archivePoliciesData from "../data/archivePolicies.json";
 import type { ArchivePolicy } from "../types/historicalArchive";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
@@ -65,7 +72,7 @@ export function MayorsPage() {
   // 収録状況スタット（自動集計。手入力値は使わない）。
   const termDates = archiveMayorTerms.map((t) => t.termStart).filter(Boolean).sort();
   const coveragePeriod = termDates.length > 0 ? `${termDates[0].slice(0, 4)}年〜現在` : "確認中";
-  const dayPreciseTermCount = archiveMayorTerms.filter((t) => (t.termStartPrecision ?? "day") === "day").length;
+  const dayPreciseTermCount = countDayPreciseTerms(archiveMayorTerms);
   const unknownStatusCount = archiveMayors.filter((m) => m.status === "unknown").length;
   const profileConfirmedCount = archiveMayors.filter((m) => m.profile && m.profile.length > 0).length;
   const policyConfirmedMayorIds = new Set(archivePolicies.filter((p) => p.ownerType === "mayor").map((p) => p.ownerId));

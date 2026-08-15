@@ -19,6 +19,12 @@ export function publicBills(bills: BillVoteItem[]): BillVoteItem[] {
   return bills.filter(isPubliclyVisibleBill);
 }
 
+/** TASK-085：提出者区分が確認済みの議案数。DataStatusPage・dataCompletenessSummaryで
+ * 個別に同じ式を実装していたため一本化した。 */
+export function countBillsWithKnownProposerType(bills: BillVoteItem[]): number {
+  return bills.filter((b) => b.proposerType).length;
+}
+
 /** 未設定（省略）の場合は"verified"として扱う。 */
 export function verificationStatusOf(bill: BillVoteItem): BillVerificationStatus {
   return bill.verificationStatus ?? "verified";

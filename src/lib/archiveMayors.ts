@@ -18,6 +18,20 @@ export function termsForMayor(terms: ArchiveMayorTerm[], mayorId: string): Archi
   return terms.filter((t) => t.mayorId === mayorId).sort((a, b) => a.termStart.localeCompare(b.termStart));
 }
 
+/**
+ * TASK-085：就任日が日単位まで確認済みの任期かどうか。未設定はday（既存データとの後方互換）。
+ * MayorsPage・DataStatusPage・dataCompletenessSummaryの3箇所で同じ判定式を
+ * 個別に実装していたため、この共通関数へ一本化した（将来ズレないようにするため）。
+ */
+export function isDayPreciseTerm(term: ArchiveMayorTerm): boolean {
+  return (term.termStartPrecision ?? "day") === "day";
+}
+
+/** 日単位で確認済みの任期数を数える。 */
+export function countDayPreciseTerms(terms: ArchiveMayorTerm[]): number {
+  return terms.filter(isDayPreciseTerm).length;
+}
+
 /** 就任回数の表示用テキスト。件数不明の場合はterms配列長を使わず「確認中」とする。 */
 export function mayorTermCountLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string {
   const own = termsForMayor(terms, mayor.id);

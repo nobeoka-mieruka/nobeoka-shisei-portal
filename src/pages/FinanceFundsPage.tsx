@@ -13,7 +13,14 @@ import { LandmarkIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears, missingFiscalYears, formatMissingFiscalYearsNote } from "../lib/archiveFinance";
+import {
+  formatOkuYenOrConfirming,
+  fiscalYearLabel,
+  sortedFiscalYears,
+  missingFiscalYears,
+  formatMissingFiscalYearsNote,
+  hasFundData,
+} from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 
 const fundTotalMetric = financeMetricByKey("fundTotal")!;
@@ -25,11 +32,8 @@ export function FinanceFundsPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
-  const rows = archiveFiscalYears.filter((y) => y.fund);
-  const missingYearsNote = formatMissingFiscalYearsNote(
-    missingFiscalYears(archiveFiscalYears, (y) => !!y.fund),
-    "基金残高",
-  );
+  const rows = archiveFiscalYears.filter(hasFundData);
+  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasFundData), "基金残高");
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

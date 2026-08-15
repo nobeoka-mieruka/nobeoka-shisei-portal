@@ -21,7 +21,7 @@ import electionResultsData from "../data/electionResults.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
-import { summarizeVoteClassification } from "../lib/billVotes";
+import { summarizeVoteClassification, countBillsWithKnownProposerType } from "../lib/billVotes";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
@@ -52,6 +52,8 @@ import { allPublicSpeeches, questionLikeSpeeches } from "../lib/councilSpeeches"
 import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
 import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
+import { isDayPreciseTerm } from "../lib/archiveMayors";
+import { hasBudgetData, hasPopulationData, hasDebtData, hasFundData, hasFinanceRatioData } from "../lib/archiveFinance";
 import { simpleCompleteness, formatCoverageRate, type CompletenessMetric } from "../lib/completeness";
 import {
   FORMER_MEMBER_DATA_TIER_LABELS,
@@ -250,7 +252,7 @@ export function DataStatusPage() {
 
   // --- 歴代市長 ---
   const electedMayorTerms = archiveMayorTerms.filter((t) => t.mayorRole !== "acting" && t.mayorRole !== "temporaryActing");
-  const dayPreciseTerms = archiveMayorTerms.filter((t) => (t.termStartPrecision ?? "day") === "day");
+  const dayPreciseTerms = archiveMayorTerms.filter(isDayPreciseTerm);
   // src/data/archiveMayorTerms.json：validate-data.mjsの空白検出（2026-08-05時点）と一致させる手集計値。空白が解消され次第、更新すること。
   const mayorGapCount: number = 13;
   const mayorProfileConfirmed = archiveMayors.filter((m) => m.profile && m.profile.length > 0).length;
@@ -273,11 +275,11 @@ export function DataStatusPage() {
   const membersWithoutConfirmedQuestion = members.filter((m) => !confirmedQuestionMemberIds.has(m.id));
 
   // --- 財政 ---
-  const fiscalYearsWithBudget = archiveFiscalYears.filter((f) => !!f.budget).length;
-  const fiscalYearsWithPopulation = archiveFiscalYears.filter((f) => !!f.population).length;
-  const fiscalYearsWithDebt = archiveFiscalYears.filter((f) => !!f.debt).length;
-  const fiscalYearsWithFund = archiveFiscalYears.filter((f) => !!f.fund).length;
-  const fiscalYearsWithFinance = archiveFiscalYears.filter((f) => !!f.finance).length;
+  const fiscalYearsWithBudget = archiveFiscalYears.filter(hasBudgetData).length;
+  const fiscalYearsWithPopulation = archiveFiscalYears.filter(hasPopulationData).length;
+  const fiscalYearsWithDebt = archiveFiscalYears.filter(hasDebtData).length;
+  const fiscalYearsWithFund = archiveFiscalYears.filter(hasFundData).length;
+  const fiscalYearsWithFinance = archiveFiscalYears.filter(hasFinanceRatioData).length;
   const fiscalYearRange =
     archiveFiscalYears.length > 0
       ? `${Math.min(...archiveFiscalYears.map((f) => f.fiscalYear))}年度〜${Math.max(...archiveFiscalYears.map((f) => f.fiscalYear))}年度`
@@ -342,7 +344,7 @@ export function DataStatusPage() {
   const voteClassification = summarizeVoteClassification(billVotes);
   const billVotesVoteMethodKnown = billVotes.filter((b) => b.voteMethod).length;
   const billVotesCommitteeKnown = billVotes.filter((b) => b.committee).length;
-  const billVotesProposerTypeKnown = billVotes.filter((b) => b.proposerType).length;
+  const billVotesProposerTypeKnown = countBillsWithKnownProposerType(billVotes);
   const councilExtra: DataDomain = {
     label: "議案・採決データベース",
     count: billVotes.length,

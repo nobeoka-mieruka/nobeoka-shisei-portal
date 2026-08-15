@@ -14,6 +14,9 @@ import type { BillVoteItem } from "../types";
 import type { ArchiveFiscalYear, ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
 import { simpleCompleteness, type CompletenessMetric } from "./completeness";
 import type { GeneralQuestionStats } from "./generalQuestionStats";
+import { countDayPreciseTerms } from "./archiveMayors";
+import { countBillsWithKnownProposerType } from "./billVotes";
+import { hasFundData, hasDebtData } from "./archiveFinance";
 
 const billVotes = billVotesData as BillVoteItem[];
 const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
@@ -27,10 +30,10 @@ export type HomeDataCoverageItem =
 /** questionStatsは呼び出し側（既にcalculateGeneralQuestionStatsを実行済みのページ）から受け取る
  * ことで、同じ集計を二重計算しない。 */
 export function homeDataCoverageItems(questionStats: GeneralQuestionStats): HomeDataCoverageItem[] {
-  const billVotesProposerTypeKnown = billVotes.filter((b) => b.proposerType).length;
-  const fiscalYearsWithFund = archiveFiscalYears.filter((f) => !!f.fund).length;
-  const fiscalYearsWithDebt = archiveFiscalYears.filter((f) => !!f.debt).length;
-  const dayPreciseTerms = archiveMayorTerms.filter((t) => (t.termStartPrecision ?? "day") === "day");
+  const billVotesProposerTypeKnown = countBillsWithKnownProposerType(billVotes);
+  const fiscalYearsWithFund = archiveFiscalYears.filter(hasFundData).length;
+  const fiscalYearsWithDebt = archiveFiscalYears.filter(hasDebtData).length;
+  const dayPreciseTermCount = countDayPreciseTerms(archiveMayorTerms);
 
   return [
     {
@@ -67,7 +70,7 @@ export function homeDataCoverageItems(questionStats: GeneralQuestionStats): Home
     {
       kind: "ratio",
       label: "歴代市長：任期の日単位確認",
-      metric: simpleCompleteness(dayPreciseTerms.length, archiveMayorTerms.length),
+      metric: simpleCompleteness(dayPreciseTermCount, archiveMayorTerms.length),
       linkTo: "/mayors",
     },
   ];

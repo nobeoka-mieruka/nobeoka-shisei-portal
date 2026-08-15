@@ -28,6 +28,27 @@ export function formatMissingFiscalYearsNote(missingYears: number[], itemLabel: 
   return `${itemLabel}が未収録の年度：${missingYears.map((y) => fiscalYearLabel(y)).join("、")}（データが存在しないという意味ではなく、当サイトでまだ確認できていません）`;
 }
 
+/**
+ * TASK-085：年度ごとのデータ有無判定。FinanceFundsPage・FinanceBudgetPage・
+ * FinanceDebtPage・DataStatusPage・dataCompletenessSummaryで同じ`!!y.fund`等の
+ * 判定式を個別に書いていたため、一本化した（将来、判定基準を変える際の修正漏れを防ぐ）。
+ */
+export function hasFundData(y: ArchiveFiscalYear): boolean {
+  return !!y.fund;
+}
+export function hasBudgetData(y: ArchiveFiscalYear): boolean {
+  return !!y.budget;
+}
+export function hasDebtData(y: ArchiveFiscalYear): boolean {
+  return !!y.debt;
+}
+export function hasFinanceRatioData(y: ArchiveFiscalYear): boolean {
+  return !!y.finance;
+}
+export function hasPopulationData(y: ArchiveFiscalYear): boolean {
+  return !!y.population;
+}
+
 /** 円単位の内部値を「約◯億円」表示に変換する。nullは「確認中」。 */
 export function formatOkuYenOrConfirming(value: number | null | undefined): string {
   if (value === null || value === undefined) return "確認中";

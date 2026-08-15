@@ -19,6 +19,7 @@ import {
   municipalBondIssuanceValueTypeLabel,
   missingFiscalYears,
   formatMissingFiscalYearsNote,
+  hasDebtData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 
@@ -32,11 +33,8 @@ export function FinanceDebtPage() {
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
-  const rows = archiveFiscalYears.filter((y) => y.debt);
-  const missingYearsNote = formatMissingFiscalYearsNote(
-    missingFiscalYears(archiveFiscalYears, (y) => !!y.debt),
-    "市債残高",
-  );
+  const rows = archiveFiscalYears.filter(hasDebtData);
+  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasDebtData), "市債残高");
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
