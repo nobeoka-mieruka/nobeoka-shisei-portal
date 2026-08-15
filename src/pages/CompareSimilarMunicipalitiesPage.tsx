@@ -180,6 +180,9 @@ export function CompareSimilarMunicipalitiesPage() {
             宮崎県内のみ
           </label>
         </div>
+        {/* TASK-083：このページはモバイル用カード表示を持たず、狭い画面でも表をそのまま
+            横スクロールで見せる設計のため、案内文を常時表示する（sm:hiddenにしない）。 */}
+        <p className="mb-2 text-xs text-on-surface-variant sm:hidden">表は横にスクロールできます</p>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead>

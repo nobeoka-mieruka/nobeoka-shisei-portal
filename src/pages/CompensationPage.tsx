@@ -345,7 +345,11 @@ export function CompensationPage() {
       </SectionCard>
 
       <SectionCard title="自治体比較表">
-        <p className="mb-2 text-xs text-on-surface-variant sm:hidden">表は横にスクロールできます</p>
+        {/* TASK-083：この案内文は表（640px以上でのみ表示）に対応するもの。640px未満では
+            下の縦積みカード表示になり横スクロールは発生しないため、sm以上でのみ表示する
+            （以前はsm:hiddenとなっており、カード表示のスマートフォン利用者に実際には
+            存在しない横スクロールを案内してしまっていた）。 */}
+        <p className="mb-2 hidden text-xs text-on-surface-variant sm:block">表は横にスクロールできます</p>
         <div
           className="hidden overflow-x-auto rounded-lg sm:block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           role="region"
