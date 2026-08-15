@@ -7878,3 +7878,128 @@ BLOCKED件数整合性チェックにより+1件、既存の14件警告は変化
   記録した。新しい事実（市長の経歴・政策等）は一切追加していない（ログインなしでは
   本文を確認できないため）。次回、ユーザー本人がNDLへログインして本文を確認できれば、
   このBLOCKED状態を解除して歴代市長データを追加できる。
+
+### TASK-075 表示矛盾解消・総合改善（ユーザー指示TASK-071〜090、Phase140）
+
+状態：DONE（2026-08-15）
+優先度：A（ユーザー指示：新規大型機能ではなく、既存データを市民が誤解せず信頼して
+利用できる状態に仕上げることを最優先）
+対象：`src/pages/DataStatusPage.tsx`・`src/pages/HomePage.tsx`・`src/pages/PeoplePage.tsx`・
+`src/pages/MayorDetailPage.tsx`・`src/pages/Finance*.tsx`・`src/pages/GeneralQuestions*.tsx`
+ほか多数、新規`src/lib/dataAvailabilityStatus.ts`・`src/lib/updateHistory.ts`・
+`src/lib/dataCompletenessSummary.ts`・`src/components/DataAvailabilityBadge.tsx`・
+`src/components/SourceRefList.tsx`
+
+**注記（番号の重複について）**：本エントリの番号はTASKS.md内部の連番（本ファイル直前の
+TASK-074の続き）。ユーザーからの今回の指示チャット・本セッションのコミットメッセージでは
+個別項目を「TASK-071」〜「TASK-090」（20項目）と呼称しており、これは本ファイル内の
+既存TASK-071〜074・TASK-071〜087（別フェーズ、上記参照）とは別の採番体系である
+（ユーザーがチャット上で独自に振った番号のため）。以下、ユーザー呼称のTASK-071〜090を
+括弧書きで併記する。
+
+ユーザーから「延岡市政見える化ポータル 総合改善・表示矛盾解消」の指示（20項目）を受け、
+上から順番に、都度validate:data／typecheck／lint／test／build／validate:seo／
+validate:contentを実行しながら1項目ずつコミット・pushした。
+
+1. **(TASK-071) 議案賛否「26/26名」表示の誤解解消**：DataStatusPageの「個人別賛否紐付け
+   人数」（議員への紐付け数）と「個人別賛否確認済み（議案）」（実際に確認できた議案件数）を
+   分離して両方表示し、前者だけでは「全議案の賛否が取得済み」と誤解されないよう説明文を追加。
+   コミット：`309555c`
+2. **(TASK-072) 「議案3件」と「議案1,177件」の表示矛盾解消**：DataStatusPageのアーカイブ
+   件数（議案3件等）を「詳細アーカイブ化済み議案」に改名し、議案・採決データベース
+   （1,177件）と別集計であることを明記。条例・請願・陳情も同様に確認（大型データセットとの
+   競合なし）。コミット：`5056fe5`
+3. **(TASK-073) 人物ページ「関連資料0件」問題を改善**：`personActivityBreakdownFor`を
+   新設し、一般質問・議案賛否・委員会・政策・議案等アーカイブ・選挙をカテゴリ別に集計。
+   「関連資料0件」表示時、他ページで活動が確認できる場合と全く確認できない場合を区別する
+   注記を追加。コミット：`21b6ab7`
+4. **(TASK-074) 0件・未確認・未収録のルールをサイト全体で統一**：
+   `confirmed/not_collected/under_review/unavailable/unknown`の5区分を共通語彙として
+   新設（`src/lib/dataAvailabilityStatus.ts`）、`DataAvailabilityBadge`コンポーネントを
+   `EmptyState`へ統合。MemberFormerDetailPage・MayorPage・
+   PoliticalFundOrganizationDetailPage・PeoplePageへ適用。コミット：`27df17b`
+5. **(TASK-075) 「ランキング」表現を中立的表現へ変更**：ダッシュボードの
+   「一般質問回数ランキング」を「議員別一般質問確認件数（上位10名・確認済み分）」に改名し、
+   評価目的ではない旨の注記を追加。会議録引用文中の「ランキング」（外部調査名等の事実）は
+   変更せず。コミット：`3506df6`
+6. **(TASK-076〜078) トップページの入口化・最近の更新・データ整備状況**：現職議員一覧は
+   既に`<details>`で折りたたみ済みだったため全員展開の問題はなかったが、「議員を探す」
+   簡易導線（名前で探す／五十音順で見る／議員一覧を見る）を新設。updateHistory.jsonから
+   最新4件を「最近の更新」として表示（`src/lib/updateHistory.ts`新設、UpdatesPageと共通化）。
+   新規`src/lib/dataCompletenessSummary.ts`で/data-statusと同じ計算式から6項目を算出し
+   「データ整備状況」として表示（単一の完成率スコアは作らない方針）。コミット：`ab1565d`
+7. **(TASK-079) 令和8年6月定例会一般質問の状態再確認**：延岡市公式サイトで「のべおか
+   市議会だより」第108号（令和8年8月1日発行）が同定例会の一般質問を収録して公開済みである
+   ことを確認し、`GeneralQuestionItem`へ`newsletterConfirmed`等を追加。「質問通告書確認済み
+   →市議会だよりで開催確認済み→公式会議録確認済み」の3段階を各ページへ反映。会議録は
+   自動更新パイプラインの直近チェック（2026-08-14）でも未公開のまま（未確認を確認済みに
+   していない）。コミット：`353b853`
+8. **(TASK-080) 歴代市長ページを重点改善**：任期の選挙日（electionDate、30任期中7任期で
+   確認済みだが画面に未表示だった）を新規表示、読み仮名未登録4名に「読み：未確認」を明示、
+   任期数の確認済み件数を明記。コミット：`7ee3d09`
+9. **(TASK-081) 財政データの欠損年度を整理**：`missingFiscalYears`/
+   `formatMissingFiscalYearsNote`ヘルパーを新設し、/finance/funds（基金、2009〜2017・2026
+   年度が未収録）・/finance/budget（予算決算、2018・2019・2025年度が未収録）・
+   /finance/debt（市債、18/18年度で確認済み）の欠損状況を明示。コミット：`d061d38`
+10. **(TASK-082) サイト全体のリンク・表示・件数監査**：validate:data／sources／
+    completeness／finance／political-funds／release-check／validate:content（2123ページ）／
+    check-external-links.mjs（618件）／generate-freshness-report.mjsを再実行し、新規の
+    問題が無いことを確認（既存の404 3件はいずれも既に注記済み、レポート内の古いURL残存は
+    現在のデータには実在しない履歴上の残骸と確認）。コミット：`7bf606f`
+11. **(TASK-083) スマートフォンUI重点チェック**：claude-in-chrome拡張が本セッション中
+    接続できなかったため、コード監査（overflow-x-auto・sm:hidden/hidden sm:blockの対応
+    関係）で代替。CompensationPageで横スクロール案内文の表示条件が実際の表と逆
+    （`sm:hidden`）になっていたバグを修正し、CompareSimilarMunicipalitiesPageに欠けていた
+    案内文を追加。コミット：`62d8cb8`
+12. **(TASK-084) アクセシビリティ改善**：/people・/questions（2箇所）・/bills/votesの
+    絞り込み結果件数へaria-live="polite"を追加。alt属性・スキップリンク・フォーカス表示・
+    色以外の区別は既存で対応済みと確認。コミット：`749ff1b`
+13. **(TASK-085) データ集計ロジックを共通化**：`isDayPreciseTerm`/`countDayPreciseTerms`
+    （lib/archiveMayors.ts）、`countBillsWithKnownProposerType`（lib/billVotes.ts）、
+    `hasFundData`等5関数（lib/archiveFinance.ts）を新設し、MayorsPage・DataStatusPage・
+    dataCompletenessSummary・Finance*Pageで重複していた同一集計ロジックを統合。
+    コミット：`c719476`
+14. **(TASK-086) 「397件」と「1,470項目」等の集計単位説明を維持・改善**：/questionsに
+    既にあった「登壇・確認済み件数」「質問項目数」の分かりやすい説明文をHomePage・
+    DashboardPage・DataStatusPageへ横展開（DashboardPageには質問項目数カードが無かった
+    ため新規追加）。単純な一方への統合はしていない。コミット：`7df8054`
+15. **(TASK-087) 出典・最終確認日の表示強化**：収集済みだが未表示だったaccessedAt
+    （確認日）を新規共通コンポーネント`SourceRefList`へ追加し、MayorDetailPage・
+    MemberFormerDetailPage・FinanceBudgetPage・PolicyDetailPageの重複マークアップを統合。
+    /finance/funds・/finance/debtには出典セクション自体が無かったため新規追加。
+    コミット：`baeafed`
+16. **(TASK-088) 調査中データを隠さない方針の徹底**：DataStatusPageの「調査継続中の項目」
+    セクションでBLOCKED分類（公式資料待ち・人手要調査・調査尽くし未確認・対象外・技術的
+    制約・解決済み）が既に公開UIへ集計表示済みであることを確認。TASK-071〜087の各修正で
+    既に方針が実装されているため、追加のコード変更は無し（監査のみ）。
+17. **(TASK-089) デザイン全体の統一**：SectionCard（50ファイル）・StatCard（17ファイル）が
+    既に単一の共有コンポーネントとして使われており、バッジのTailwindクラスも12ファイルで
+    共通のパターンに揃っていることを確認。TASK-074のDataAvailabilityBadge・TASK-087の
+    SourceRefListも同じ視覚的言語（rounded-full・文字ラベル併記）に準拠。無理な視覚統一は
+    行わず（性質の異なる概念を同一色に強制しない）、監査のみで追加変更は無し。
+18. **(TASK-090) 最終検証**：全項目のコミット後、validate:data／typecheck／lint／test
+    （26/26）／build（prerender 2122/2122）／validate:seo／validate:content／
+    validate:freshness／validate:sources／validate:completeness／validate:finance／
+    validate:political-funds／release-checkをすべて再実行し、エラー0・既存warningのみ
+    （billVotes=1177等の基準値も変化なし）であることを確認した。
+
+#### 検証結果（各項目コミットごと、および最終まとめて再実行）
+
+`validate:data`（errors=0 warnings=14、既存と同一）／`typecheck`／`lint`（oxlint、0件）／
+`test`（26/26）／`build`（prerender 2122/2122、`validate:seo` failures=0 warnings=0、
+`validate:content` errors=0 warnings=0）／`validate:freshness`（errors=0 warnings=0）／
+`validate:sources`（errors=0 warnings=0 info=40、既存と同一）／`validate:completeness`
+（errors=0 warnings=0 info=0）／`validate:finance`（errors=0 warnings=0 info=6、既存と
+同一）／`validate:political-funds`（errors=0 warnings=0 info=2、既存と同一）／
+`release-check.mjs`（failures=0、既存の助言的warning 2件のみ、対応不要と既に判断済み）
+すべて成功。claude-in-chrome拡張が本セッション中一貫して未接続だったため、
+375/390/430/768/1280pxでの実機目視確認は次回接続時に改めて実施することを推奨する。
+
+完了記録：
+- 完了日：2026-08-15
+- コミットID（新しい順）：`baeafed`→`7df8054`→`c719476`→`749ff1b`→`62d8cb8`→
+  `7bf606f`→`d061d38`→`7ee3d09`→`353b853`→`ab1565d`→`3506df6`→`27df17b`→`21b6ab7`→
+  `5056fe5`→`0a66eee`→`309555c`（すべて`origin/main`へpush済み）
+- 変更概要：上記1〜18のとおり。新規大型機能は追加せず、既存データの表示矛盾・誤解を
+  招く箇所を解消し、共通ヘルパー・コンポーネントの新設により将来の再発（トップページと
+  /data-statusの数字のズレ等）を防ぐ構造にした。既存データ・既存ページは削除していない。
