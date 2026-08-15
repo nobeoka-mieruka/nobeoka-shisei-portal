@@ -250,7 +250,7 @@ export function MemberFormerDetailPage() {
 
       <SectionCard title="会派履歴">
         {factionHistory.length === 0 ? (
-          <EmptyState message="会派履歴は資料未確認です。" />
+          <EmptyState message="会派履歴は資料未確認です。" status="under_review" />
         ) : (
           <ul className="space-y-1 text-sm text-on-surface-variant">
             {factionHistory.map((a) => (
@@ -267,7 +267,7 @@ export function MemberFormerDetailPage() {
           議会内の会派（上記）とは別に、立候補時の届出党派を選挙結果資料から時系列で示したものです。実際の入党・離党時期とは異なる場合があります。
         </p>
         {partyHistory.length === 0 ? (
-          <EmptyState message="党派履歴は資料未確認です。" />
+          <EmptyState message="党派履歴は資料未確認です。" status="under_review" />
         ) : (
           <ul className="space-y-1 text-sm text-on-surface-variant">
             {partyHistory.map((a) => (
@@ -281,7 +281,7 @@ export function MemberFormerDetailPage() {
 
       <SectionCard title="委員会履歴">
         {committeeHistory.length === 0 ? (
-          <EmptyState message="委員会所属履歴は資料未確認です。" />
+          <EmptyState message="委員会所属履歴は資料未確認です。" status="under_review" />
         ) : (
           <ul className="space-y-1 text-sm text-on-surface-variant">
             {committeeHistory.map((a) => (
@@ -297,7 +297,7 @@ export function MemberFormerDetailPage() {
 
       <SectionCard title="議長・副議長等の役職履歴">
         {roleHistory.length === 0 ? (
-          <EmptyState message="役職履歴は資料未確認です。" />
+          <EmptyState message="役職履歴は資料未確認です。" status="under_review" />
         ) : (
           <ul className="space-y-1 text-sm text-on-surface-variant">
             {roleHistory.map((a) => (
@@ -312,7 +312,7 @@ export function MemberFormerDetailPage() {
 
       <SectionCard title="一般質問履歴">
         {speeches.length === 0 ? (
-          <EmptyState message="公開している一般質問記録はまだありません。" />
+          <EmptyState message="公開している一般質問記録はまだありません。" status="not_collected" />
         ) : (
           <ul className="space-y-2">
             {speeches.map((s) => {
@@ -361,7 +361,7 @@ export function MemberFormerDetailPage() {
       </SectionCard>
 
       <SectionCard title="政策テーマ">
-        <EmptyState message="政策データは今後のフェーズで追加予定です（資料未確認）。" />
+        <EmptyState message="政策データは今後のフェーズで追加予定です（資料未確認）。" status="not_collected" />
       </SectionCard>
 
       {profile.sourceRefs.length > 0 && (

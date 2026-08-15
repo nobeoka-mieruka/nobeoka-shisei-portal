@@ -56,7 +56,7 @@ function BreakdownList({
   breakdown: Record<string, number | null> | null;
   labels: Record<string, string>;
 }) {
-  if (!breakdown) return <EmptyState message="内訳は情報未登録です。" />;
+  if (!breakdown) return <EmptyState message="内訳は情報未登録です。" status="not_collected" />;
   return (
     <dl className="divide-y divide-outline-variant text-sm">
       {Object.keys(labels).map((key) => (

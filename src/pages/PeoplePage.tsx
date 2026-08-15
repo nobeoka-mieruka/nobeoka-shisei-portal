@@ -13,6 +13,7 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
+import { DataAvailabilityBadge } from "../components/DataAvailabilityBadge";
 import { BriefcaseIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
@@ -303,10 +304,13 @@ export function PeoplePage() {
                     p.activityBreakdown.electionCount +
                     (p.activityBreakdown.committeeLinked ? 1 : 0);
                   return (
-                    <p className="mt-1 text-xs text-on-surface-variant">
-                      {otherActivityCount > 0
-                        ? `この人物自体の活動は他のページで確認できています（一般質問${p.activityBreakdown.generalQuestionCount}件・議案賛否${p.activityBreakdown.billVoteCount}件等）。政策・議案アーカイブへの個別の紐付けが未整備なだけで、「活動実績がない」という意味ではありません。`
-                        : "本サイトでは、この人物についての活動記録をまだ確認できていません（未確認。活動が無かったという意味ではありません）。"}
+                    <p className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-on-surface-variant">
+                      <DataAvailabilityBadge status={otherActivityCount > 0 ? "not_collected" : "under_review"} />
+                      <span>
+                        {otherActivityCount > 0
+                          ? `この人物自体の活動は他のページで確認できています（一般質問${p.activityBreakdown.generalQuestionCount}件・議案賛否${p.activityBreakdown.billVoteCount}件等）。政策・議案アーカイブへの個別の紐付けが未整備なだけで、「活動実績がない」という意味ではありません。`
+                          : "本サイトでは、この人物についての活動記録をまだ確認できていません（未確認。活動が無かったという意味ではありません）。"}
+                      </span>
                     </p>
                   );
                 })()}

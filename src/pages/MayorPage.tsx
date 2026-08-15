@@ -192,7 +192,7 @@ export function MayorPage() {
             )}
           </>
         ) : (
-          <EmptyState message="現在、公開資料を確認しながら順次追加しています。" />
+          <EmptyState message="現在、公開資料を確認しながら順次追加しています。" status="under_review" />
         )}
       </SectionCard>
 
