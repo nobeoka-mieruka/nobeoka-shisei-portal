@@ -71,6 +71,7 @@ export function GeneralQuestionDetailPage() {
 
   const sourceLinks = [
     item.noticeUrl && { label: "質問通告書", url: item.noticeUrl },
+    item.newsletterUrl && { label: item.newsletterTitle ?? "市議会だより", url: item.newsletterUrl },
     item.transcriptPdfUrl && { label: "会議録PDF", url: item.transcriptPdfUrl },
     item.transcriptUrl && { label: "会議録ページ", url: item.transcriptUrl },
     item.videoUrl && { label: "議会中継・録画", url: videoHref(item) },

@@ -38,6 +38,14 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
           <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${questionTypeStyle[item.questionType]}`}>
             {item.questionType}
           </span>
+          {!item.transcriptUrl && (
+            <span
+              className="rounded-full bg-secondary-container px-2 py-0.5 text-xs font-medium text-on-secondary-container"
+              title={item.newsletterConfirmed ? "会議録は未公開ですが、市議会だよりで開催・実施は確認済みです。" : "会議録・市議会だよりとも未確認です。"}
+            >
+              {item.newsletterConfirmed ? "市議会だよりで開催確認済み（会議録未公開）" : "質問通告書ベース（会議録未公開）"}
+            </span>
+          )}
         </div>
         <Link
           to={`/questions/${item.id}`}
@@ -77,7 +85,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
       <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{item.summary}</p>
       <p className="mt-1 text-xs text-on-surface-variant">質問項目 {item.questionItems.length}件</p>
 
-      {(item.noticeUrl || item.transcriptUrl || item.videoUrl) && (
+      {(item.noticeUrl || item.newsletterUrl || item.transcriptUrl || item.videoUrl) && (
         <div className="mt-3 flex flex-wrap gap-2">
           {item.noticeUrl && (
             <a
@@ -89,6 +97,18 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               質問通告書を見る
+            </a>
+          )}
+          {item.newsletterUrl && (
+            <a
+              href={item.newsletterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${item.newsletterTitle ?? "市議会だより"}を新しいタブで開く`}
+              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+            >
+              <GlobeIcon className="h-3.5 w-3.5" />
+              市議会だよりを見る
             </a>
           )}
           {item.transcriptUrl && (

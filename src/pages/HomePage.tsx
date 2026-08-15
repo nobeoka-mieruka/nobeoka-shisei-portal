@@ -358,7 +358,11 @@ export function HomePage() {
               label="最新会期の予定質問"
               value={questionStats.scheduledCount}
               unit="件"
-              hint={questionStats.scheduledSessionName ? `${questionStats.scheduledSessionName}／質問通告書ベース` : undefined}
+              hint={
+                questionStats.scheduledSessionName
+                  ? `${questionStats.scheduledSessionName}／質問通告書ベース${questionStats.scheduledNewsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`
+                  : undefined
+              }
             />
           )}
           <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />

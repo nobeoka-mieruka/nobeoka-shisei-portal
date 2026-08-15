@@ -1011,6 +1011,17 @@ export interface GeneralQuestionItem {
   /** 質問通告書PDFのURL（ある場合のみ）。 */
   noticePdf?: string;
 
+  // 市議会だより（TASK-079：質問通告書と会議録の間の中間確認段階）
+  /** 「のべおか市議会だより」に、この定例会の一般質問コーナーが掲載されていることを
+   * 確認できた場合のみtrue。個々の質問項目・答弁内容そのものの正誤までは確認していない
+   * （号の目次・見出しレベルでの確認）。会議録が公開されればtranscriptUrl等で上書きする。 */
+  newsletterConfirmed?: boolean;
+  /** 確認した市議会だよりの号数・発行日を含むタイトル（例："のべおか市議会だより第108号（令和8年8月1日発行）"）。 */
+  newsletterTitle?: string;
+  newsletterUrl?: string;
+  /** ISO形式。市議会だよりでの掲載を確認した日。 */
+  newsletterCheckedAt?: string;
+
   // 会議録（正式な発言記録）
   transcriptUrl?: string;
   /** 会議録PDFのURL（会議録ページ＝transcriptUrlとは別に、PDFが確認できた場合のみ）。 */

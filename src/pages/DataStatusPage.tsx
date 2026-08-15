@@ -379,7 +379,9 @@ export function DataStatusPage() {
       count: questionStats.scheduledCount,
       unit: "件",
       scope: questionStats.scheduledSessionName ?? "直近1会期",
-      detail: "会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。",
+      detail: questionStats.scheduledNewsletterConfirmed
+        ? "会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです（TASK-079、2026-08-15確認）。個々の質問項目・答弁内容は会議録公開後に確認します。"
+        : "会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。",
       linkTo: "/questions",
     },
   ];

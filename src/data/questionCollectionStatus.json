@@ -205,10 +205,14 @@
       "registeredQuestionCount": 0,
       "transcriptAvailable": false,
       "noticeAvailable": true,
-      "lastCheckedAt": "2026-08-05",
+      "newsletterAvailable": true,
+      "newsletterTitle": "のべおか市議会だより第108号（令和8年8月1日発行）",
+      "newsletterUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28427.pdf",
+      "newsletterCheckedAt": "2026-08-15",
+      "lastCheckedAt": "2026-08-15",
       "lastSuccessAt": null,
       "errors": [],
-      "notes": "公式会議録検索システム（kensakusystem.jp/nobeoka）で本会議録の公開状況を2026-08-05時点で確認できていない。「質問なし」ではなく「未確認」。"
+      "notes": "TASK-079（2026-08-15再確認）：延岡市公式サイトで「のべおか市議会だより」第108号（令和8年8月1日発行）が「6月定例議会・5月臨時議会で決まったこと」「市政を問う（一般質問）」を収録して既に公開されていることを確認した（延岡市公式サイトの目次表示で確認。号のPDF自体はテキスト抽出不能な形式のため、個々の質問項目・答弁内容までは未照合）。一方、公式会議録検索システム（kensakusystem.jp/nobeoka）での本会議録本文の公開は、自動更新パイプラインの直近チェック（2026-08-14）時点でも未確認のまま。3段階（質問通告書確認済み→市議会だよりで開催確認済み→公式会議録確認済み）のうち、現在は「市議会だよりで開催確認済み」の段階。"
     }
   ]
 }

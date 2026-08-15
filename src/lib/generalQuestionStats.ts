@@ -30,6 +30,9 @@ export interface GeneralQuestionStats {
   scheduledCount: number;
   /** 予定質問の対象会期名（例："令和8年6月定例会"）。予定質問が0件の場合はnull。 */
   scheduledSessionName: string | null;
+  /** TASK-079：予定質問（会議録未公開）について、「のべおか市議会だより」で開催・実施を
+   * 確認済みかどうか。全件がnewsletterConfirmed:trueの場合のみtrue（0件の場合はfalse）。 */
+  scheduledNewsletterConfirmed: boolean;
   /** 現議員任期以降の収録対象会期数（questionCollectionStatus.json全件）。 */
   targetSessionCount: number;
   /** 会議録取得済み（transcriptAvailable:true）会期数。 */
@@ -62,6 +65,7 @@ export function calculateGeneralQuestionStats(
     totalQuestionItemCount,
     scheduledCount: generalQuestions.length,
     scheduledSessionName: generalQuestions[0]?.sessionName ?? null,
+    scheduledNewsletterConfirmed: generalQuestions.length > 0 && generalQuestions.every((q) => q.newsletterConfirmed === true),
     targetSessionCount,
     collectedSessionCount: targetSessionCount - uncollectedSessions.length,
     uncollectedSessionCount: uncollectedSessions.length,

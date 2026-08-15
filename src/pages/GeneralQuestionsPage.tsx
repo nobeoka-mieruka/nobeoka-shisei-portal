@@ -350,8 +350,11 @@ export function GeneralQuestionsPage() {
       </div>
 
       <h2 className="mb-2 px-1 text-base font-semibold text-on-surface">
-        1. 最新会期の予定質問項目（質問通告書ベース・会議録公開前）
+        1. 最新会期の予定質問項目（質問通告書ベース、会議録公開前）
       </h2>
+      <p className="mb-4 px-1 text-xs leading-relaxed text-on-surface-variant">
+        質問通告書に基づく予定内容です。開催・実施の事実そのものは「のべおか市議会だより」で確認できている場合、その旨をカードに表示します（会議録は未公開のため、個々の答弁内容はまだ確認できていません）。会議録が公開でき次第、内容を確認のうえ更新します。
+      </p>
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="登録済み質問数" value={questions.length} unit="件" />
         <StatCard label="登録済み議員数" value={registeredMemberCount} unit="名" />
