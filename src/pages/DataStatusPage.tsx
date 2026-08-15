@@ -243,6 +243,10 @@ export function DataStatusPage() {
   const memberCommitteeCount = members.filter((m) => m.committees && m.committees.length > 0).length;
   const memberBillVoteMemberIds = new Set(billVotes.flatMap((b) => (b.memberVotes ?? []).map((v) => v.memberId)));
   const memberWithBillVoteCount = members.filter((m) => memberBillVoteMemberIds.has(m.id)).length;
+  // TASK-071：「議員との紐付け人数」（＝個人別賛否が1件以上記録されている議員数）と、
+  // 「個人別賛否が確認できた議案そのものの件数」は別の集計軸。前者だけを表示すると
+  // 「26/26名」＝「全議案の賛否が取得済み」と誤解されるため、必ず両方を併記する。
+  const individualVoteConfirmedBillCount = billVotes.filter((b) => (b.memberVotes ?? []).length > 0).length;
 
   // --- 歴代市長 ---
   const electedMayorTerms = archiveMayorTerms.filter((t) => t.mayorRole !== "acting" && t.mayorRole !== "temporaryActing");
@@ -285,7 +289,7 @@ export function DataStatusPage() {
       count: members.length,
       unit: "名",
       scope: "現在の任期",
-      detail: `顔写真：${memberPhotoCount}／${members.length}名／公式プロフィール：${memberProfileCount}／${members.length}名／公式サイト：${memberProfileUrlCount}／${members.length}名／SNS：${memberSnsCount}／${members.length}名／所属委員会登録：${memberCommitteeCount}／${members.length}名／一般質問（会議録確認済み）：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名／議案賛否（個人別）：${memberWithBillVoteCount}／${members.length}名`,
+      detail: `顔写真：${memberPhotoCount}／${members.length}名／公式プロフィール：${memberProfileCount}／${members.length}名／公式サイト：${memberProfileUrlCount}／${members.length}名／SNS：${memberSnsCount}／${members.length}名／所属委員会登録：${memberCommitteeCount}／${members.length}名／一般質問（会議録確認済み）：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名／議案賛否・議員との紐付け（1件以上の個人別賛否が記録されている議員数。全議案の賛否が取得済みという意味ではありません）：${memberWithBillVoteCount}／${members.length}名／個人別賛否が確認できた議案そのものの件数：${individualVoteConfirmedBillCount}／${billVotes.length}件`,
       linkTo: "/",
       linkLabel: "議員一覧を見る",
     },
@@ -818,9 +822,15 @@ export function DataStatusPage() {
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">個人別賛否紐付け人数</dt>
+            <dt className="text-xs text-on-surface-variant">個人別賛否紐付け人数（議員）</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {peopleStatus.voteLinkedCount}／{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">個人別賛否確認済み（議案）</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {individualVoteConfirmedBillCount}／{billVotes.length}件
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -834,6 +844,13 @@ export function DataStatusPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{peopleStatus.unconfirmedPersonCount}件</dd>
           </div>
         </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          「個人別賛否紐付け人数（議員）」は、1件以上の議案で個人別の賛否が記録されている議員の人数です。これが{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名中{peopleStatus.voteLinkedCount}名（26名全員等）になっていても、「全議案について全議員の賛否が取得済み」という意味ではありません。実際に個人別の賛否が確認できている議案の件数は「個人別賛否確認済み（議案）」（{individualVoteConfirmedBillCount}／{billVotes.length}件）の方をご覧ください。議案単位の内訳（個人別に公開・採決方式のみ判明・非公開と確認済み・不明）は
+          <Link to="/bills/votes" className="font-medium text-primary hover:underline">
+            議案ごとの賛否
+          </Link>
+          のページで確認できます。
+        </p>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           「未確認人物ID数」は、選挙・一般質問・議会発言・議案賛否・委員会のいずれの根拠も確認できていない人物IDの件数です（0件は、登録済みの全員について何らかの根拠を確認できていることを意味します）。人物の詳細は
           <Link to="/people" className="font-medium text-primary hover:underline">
