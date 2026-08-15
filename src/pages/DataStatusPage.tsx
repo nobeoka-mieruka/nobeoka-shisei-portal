@@ -327,11 +327,15 @@ export function DataStatusPage() {
     },
   ];
 
+  // TASK-072：documentTypeLabel(type)（「議案」「条例」等の裸の名称）をそのままラベルにすると、
+  // 下のcouncilExtra（1,177件の議案・採決データベース）と同じ「議案」という語で桁違いの件数が
+  // 並んでしまい、何を1件として数えているのか分からず矛盾に見える。「詳細アーカイブ化済み」を
+  // 明示して、どちらも同じ集計方法だと誤解されないようにする。
   const council: DataDomain[] = documentTypeCounts.map(({ type, count }) => ({
-    label: documentTypeLabel(type),
+    label: `詳細アーカイブ化済み${documentTypeLabel(type)}`,
     count,
     unit: "件",
-    detail: `議決・審査結果確認済み：${archiveCouncilDocuments.filter((d) => d.documentType === type && d.result).length}件`,
+    detail: `延岡市議会公式資料をもとに、提出から審査・議決までの経緯を1件ずつ詳しく調べて記録した件数です（延岡市議会に提出された${documentTypeLabel(type)}全件の一覧ではありません）。議決・審査結果確認済み：${archiveCouncilDocuments.filter((d) => d.documentType === type && d.result).length}件`,
     linkTo: `/${type === "bill" ? "bills" : type === "ordinance" ? "ordinances" : type === "petition" ? "petitions" : "requests"}`,
   }));
 
@@ -340,7 +344,7 @@ export function DataStatusPage() {
   const billVotesCommitteeKnown = billVotes.filter((b) => b.committee).length;
   const billVotesProposerTypeKnown = billVotes.filter((b) => b.proposerType).length;
   const councilExtra: DataDomain = {
-    label: "議案ごとの議決結果（既存機能）",
+    label: "議案・採決データベース",
     count: billVotes.length,
     unit: "件",
     detail: `議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳（採決方式と公開状況を別軸に整理）：個人別に公開${voteClassification.byDisclosure.individual}件（記名投票等）／採決方式は判明しているが個人別は未確認${voteClassification.byDisclosure.aggregate}件（起立採決・簡易採決等で、会議録には方式の記載はあるが個人別の内訳までは未調査）／個人別は非公開と確認済み${voteClassification.byDisclosure.not_disclosed}件（会議録で非公開と確認済み）／採決方式・公開状況とも不明${voteClassification.byDisclosure.unknown}件（会議録自体が未公開）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
@@ -548,15 +552,18 @@ export function DataStatusPage() {
       </SectionCard>
 
       <SectionCard title="議会（議案・条例・請願・陳情）">
+        <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
+          「議案・採決データベース」（{billVotes.length}件）と「詳細アーカイブ化済み議案」（{documentTypeCounts.find((d) => d.type === "bill")?.count ?? 0}件）は、同じ「議案」でも数え方が異なる別々の集計です。前者は議案ごとの議決結果を機械的に登録した一覧、後者はその中から提出経緯・審査過程まで人手で詳しく調べて記録したものです。条例・請願・陳情についても同様に、「詳細アーカイブ化済み」は全件一覧ではありません。
+        </p>
         <ul className="space-y-2">
+          <DomainRow domain={councilExtra} />
           {council.map((d) => (
             <DomainRow key={d.label} domain={d} />
           ))}
-          <DomainRow domain={councilExtra} />
           <DomainRow domain={councilCommittees} />
         </ul>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-          「議決・審査結果確認済み：{resultConfirmedCount}／{archiveCouncilDocuments.length}件」「出典確認済み（verified）：{verifiedDocumentCount}件」。議員個人の賛否記録は「議案ごとの議員別賛否（既存機能）」側で管理しており、混同していません。
+          「議決・審査結果確認済み：{resultConfirmedCount}／{archiveCouncilDocuments.length}件」「出典確認済み（verified）：{verifiedDocumentCount}件」（いずれも詳細アーカイブ側の内訳）。議員個人の賛否記録は「議案・採決データベース」側で管理しており、混同していません。
         </p>
       </SectionCard>
 

@@ -128,7 +128,7 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
       />
 
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="登録件数" value={docs.length} unit="件" />
+        <StatCard label="詳細アーカイブ登録件数" value={docs.length} unit="件" hint="全件一覧ではありません" />
         <StatCard label="議決・審査結果確認済み" value={resultConfirmedCount} unit="件" hint={`全${docs.length}件中`} />
         <StatCard label="個人別賛否確認済み" value={memberVoteConfirmedCount} unit="件" hint="0件と未収録は別（下記参照）" />
         <StatCard label="出典資料未公開" value={sourceUnavailableCount} unit="件" />
@@ -522,8 +522,8 @@ export function BillsArchivePage() {
     <DocumentsListPage
       documentType="bill"
       basePath="/bills"
-      heroTitle="議案アーカイブ"
-      heroDescription="議案を公式資料の原文と出典に基づいて整理しています。議員別の賛否は既存の議案賛否ページでご確認いただけます。達成・未達成の独自判定や優劣評価は行っていません。"
+      heroTitle="議案アーカイブ（詳細調査）"
+      heroDescription="議案を公式資料の原文と出典に基づいて整理しています。議決結果・議員別の賛否は、議案・採決データベース（登録1,177件、既存の議案賛否ページ）で確認できます。このページは、その中から提出経緯・審査過程まで人手で詳しく調べたものだけを少数ずつ掲載しており、全議案の一覧ではありません。達成・未達成の独自判定や優劣評価は行っていません。"
     />
   );
 }
