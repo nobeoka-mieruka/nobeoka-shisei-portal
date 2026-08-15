@@ -58,10 +58,69 @@ export interface PersonSummary {
    * 別概念のため区別する（選挙年から在職期間を自動推定しない）。 */
   electionYears: number[];
   verificationStatus: "verified" | "partiallyVerified" | "needsReview" | "sourceUnavailable";
+  /** 「政策（公約）」「議案・条例・請願・陳情アーカイブ」に個別に紐付けられている件数のみ。
+   * 一般質問・議案賛否（個人別）・委員会・選挙は含まない（TASK-073：activityBreakdown参照）。 */
   relatedDocumentCount: number;
+  /** TASK-073：関連資料0件が「この人物には活動実績がない」と誤解されないよう、
+   * 一般質問・議案賛否・委員会・政策・議案等アーカイブ・選挙をカテゴリ別に個別集計したもの。 */
+  activityBreakdown: PersonActivityBreakdown;
   /** Phase130：元議員限定のデータ充足レベル（人物評価ではない。formerMemberActivity.ts参照）。
    * 現職議員・市長には算出しない（対象データ構造が異なるため、今回は元議員限定で導入）。 */
   dataTier?: FormerMemberDataTier;
+}
+
+/** TASK-073：カテゴリ別の活動・関連資料件数。0件と「未確認」を区別するため、
+ * relatedDocumentCount（政策＋議案等アーカイブ）に含まれない項目も個別に保持する。 */
+export interface PersonActivityBreakdown {
+  generalQuestionCount: number;
+  billVoteCount: number;
+  committeeLinked: boolean;
+  policyCount: number;
+  councilDocumentCount: number;
+  electionCount: number;
+  totalCount: number;
+}
+
+/** 議員1名分の活動・関連資料をカテゴリ別に集計する（既存の各データセットを横断参照するのみで、
+ * 新しい判定ロジックや推測値は追加しない）。 */
+function personActivityBreakdownFor(personType: PersonType, id: string): PersonActivityBreakdown {
+  const speechRecord = speechSummaryData.members.find((m) => m.memberId === id);
+  const generalQuestionCount = speechRecord
+    ? speechRecord.speeches.filter((s) => QUESTION_LIKE_SPEECH_TYPES.has(s.speechType)).length
+    : 0;
+  const billVoteCount = billVotes.filter((b) => (b.memberVotes ?? []).some((v) => v.memberId === id)).length;
+  const committeeLinked =
+    (personType === "member" && (members.find((m) => m.id === id)?.committees?.length ?? 0) > 0) ||
+    archiveMemberAffiliations.some((a) => {
+      if (a.affiliationType !== "committee") return false;
+      const profile = archiveMemberProfiles.find((p) => p.id === a.memberProfileId);
+      return profile?.legacyMemberId === id || profile?.legacyFormerMemberId === id;
+    }) ||
+    (committeeReportActivityData as { events: { memberId: string }[] }).events.some((e) => e.memberId === id);
+  const policyCount = archivePolicies.filter((p) => {
+    if (p.ownerId !== id) return false;
+    if (personType === "member") return p.ownerType === "member";
+    if (personType === "former-member") return p.ownerType === "formerMember";
+    return p.ownerType === "mayor";
+  }).length;
+  const councilDocumentCount = archiveCouncilDocuments.filter((d) => {
+    const ids = [...(d.proposerIds ?? []), ...(d.relatedMemberIds ?? []), ...(d.relatedMayorIds ?? [])];
+    return ids.includes(id);
+  }).length;
+  const electionCount = electionResults.reduce(
+    (sum, e) => sum + (e.candidates ?? []).filter((c) => c.linkedProfileId === id).length,
+    0,
+  );
+  return {
+    generalQuestionCount,
+    billVoteCount,
+    committeeLinked,
+    policyCount,
+    councilDocumentCount,
+    electionCount,
+    totalCount:
+      generalQuestionCount + billVoteCount + policyCount + councilDocumentCount + (committeeLinked ? 1 : 0) + electionCount,
+  };
 }
 
 /** 元議員1名分のデータ充足レベルを、統合タイムラインのイベント種別集合から算出する。 */
@@ -150,6 +209,7 @@ export function buildPersonIndex(): PersonSummary[] {
       electionYears: [...new Set(electionYearsByPersonId.get(m.id) ?? [])],
       verificationStatus: m.profileUrl ? "verified" : "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("member", m.id),
+      activityBreakdown: personActivityBreakdownFor("member", m.id),
     });
   }
 
@@ -173,6 +233,7 @@ export function buildPersonIndex(): PersonSummary[] {
       electionYears,
       verificationStatus: fm.lastVerified ? "partiallyVerified" : "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("former-member", fm.id),
+      activityBreakdown: personActivityBreakdownFor("former-member", fm.id),
       dataTier: formerMemberDataTierOf(fm.id),
     });
   }
@@ -195,6 +256,7 @@ export function buildPersonIndex(): PersonSummary[] {
       electionYears: [...new Set(electionYearsByPersonId.get(mayor.id) ?? [])],
       verificationStatus: mayor.sourceRefs[0]?.verificationStatus ?? "needsReview",
       relatedDocumentCount: relatedDocumentCountFor("mayor", mayor.id),
+      activityBreakdown: personActivityBreakdownFor("mayor", mayor.id),
     });
   }
 

@@ -89,7 +89,10 @@ const PEOPLE_CSV_COLUMNS: CsvColumn<PersonSummary>[] = [
   { header: "在籍期間", value: (p) => p.tenureLabel },
   { header: "確認状況", value: (p) => archiveVerificationStatusLabel(p.verificationStatus) },
   { header: "元議員データ充足レベル", value: (p) => (p.dataTier ? FORMER_MEMBER_DATA_TIER_LABELS[p.dataTier] : "") },
-  { header: "関連資料件数", value: (p) => p.relatedDocumentCount },
+  { header: "政策・議案等アーカイブ紐付け件数", value: (p) => p.relatedDocumentCount },
+  { header: "一般質問（確認済み）件数", value: (p) => p.activityBreakdown.generalQuestionCount },
+  { header: "議案賛否（個人別確認済み）件数", value: (p) => p.activityBreakdown.billVoteCount },
+  { header: "委員会所属の確認", value: (p) => (p.activityBreakdown.committeeLinked ? "確認済み" : "未確認") },
   { header: "詳細ページURL", value: (p) => `${SITE_URL}/people/${p.slug}` },
 ];
 
@@ -288,10 +291,25 @@ export function PeoplePage() {
                 {p.factionId ? `／${factionName(p.factionId) ?? p.factionId}` : ""}
               </p>
               <p className="mt-2 text-xs text-on-surface-variant">
-                関連資料：{p.relatedDocumentCount}件
+                政策・議案等アーカイブへの紐付け：{p.relatedDocumentCount}件
                 {p.personType === "mayor" && !p.isCurrent && p.relatedDocumentCount === 0 && "（歴代市長の公約・関連議案データは未収集のため）"}
                 ／確認状況：{archiveVerificationStatusLabel(p.verificationStatus)}
               </p>
+              {p.relatedDocumentCount === 0 &&
+                (() => {
+                  const otherActivityCount =
+                    p.activityBreakdown.generalQuestionCount +
+                    p.activityBreakdown.billVoteCount +
+                    p.activityBreakdown.electionCount +
+                    (p.activityBreakdown.committeeLinked ? 1 : 0);
+                  return (
+                    <p className="mt-1 text-xs text-on-surface-variant">
+                      {otherActivityCount > 0
+                        ? `この人物自体の活動は他のページで確認できています（一般質問${p.activityBreakdown.generalQuestionCount}件・議案賛否${p.activityBreakdown.billVoteCount}件等）。政策・議案アーカイブへの個別の紐付けが未整備なだけで、「活動実績がない」という意味ではありません。`
+                        : "本サイトでは、この人物についての活動記録をまだ確認できていません（未確認。活動が無かったという意味ではありません）。"}
+                    </p>
+                  );
+                })()}
             </Link>
           </li>
         ))}
