@@ -73,4 +73,24 @@ export interface BlockedTaskClassificationEntry {
    * 「今回は問い合わせを実施しない」方針のタスクでも、将来ユーザーが問い合わせを行う際に
    * どの資料を確認すればよいか分かるよう明文化する。任意項目。 */
   reopenConditions?: string[];
+  /** Phase141：「次に何をすれば前進するか」をstatus（5状態）より細かく分類する補助フィールド。
+   * 既存のstatus・UIの表示ロジックは変更せず、追加の絞り込み・一覧化のためだけに使う。
+   * needs_ndl_login：国立国会図書館個人送信サービスへのログインが必要／
+   * needs_human_review：資料間の矛盾等、本人でなければ判断できない／
+   * needs_offline_library：図書館等での現物確認・複写が必要／
+   * source_not_published：一次資料自体がまだ存在しない／
+   * research_exhausted：現在利用可能な主要オンライン資料を調査したが確認できなかった
+   * （「一次資料が存在しない」と確定した意味ではない）／
+   * conflicting_sources：複数資料で内容が食い違い、一方を採用できない／
+   * waiting_for_publication：公表主体による定期公表を待っている（想定時期が分かる場合がある）／
+   * actionable_now：追加のWeb調査で前進できる可能性がまだ残っている。任意項目。 */
+  nextActionCategory?:
+    | "needs_ndl_login"
+    | "needs_human_review"
+    | "needs_offline_library"
+    | "source_not_published"
+    | "research_exhausted"
+    | "conflicting_sources"
+    | "waiting_for_publication"
+    | "actionable_now";
 }
