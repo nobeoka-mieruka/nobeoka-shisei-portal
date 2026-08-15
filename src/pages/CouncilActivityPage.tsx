@@ -216,7 +216,8 @@ export function CouncilActivityPage() {
         </p>
       </div>
 
-      {/* 上位ランキングカード：A発言量TOP3／B一般質問実施率／C請願・議案等への関与 */}
+      {/* TASK-075：評価・順位付けではなく確認件数の可視化であることを明確にするため
+          「ランキング」という語は使わない。A発言量TOP3／B一般質問実施率／C請願・議案等への関与 */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <SectionCard title="A. 発言量TOP3" className={flatCardClass}>
           {speechTop3.length === 0 ? (

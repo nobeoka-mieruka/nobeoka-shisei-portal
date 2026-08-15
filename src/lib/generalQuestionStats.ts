@@ -70,7 +70,7 @@ export function calculateGeneralQuestionStats(
   };
 }
 
-/** 議員別の確認済み一般質問件数ランキング用の集計1件分。 */
+/** 議員別の確認済み一般質問件数（上位表示用）の集計1件分。評価・順位付け目的ではない。 */
 export interface QuestionCountByKey {
   key: string;
   label: string;

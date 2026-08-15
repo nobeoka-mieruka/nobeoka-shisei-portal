@@ -334,9 +334,14 @@ export function DashboardPage() {
         会議録が未公開の最新会期の予定質問（{questionStats.scheduledCount}件）は含みません。
       </p>
 
-      <SectionCard title="一般質問回数ランキング（上位10名・確認済み分）">
+      <SectionCard title="議員別一般質問確認件数（上位10名・確認済み分）">
         {questionRankingItems.length > 0 ? (
-          <BarList items={questionRankingItems} unit="件" />
+          <>
+            <BarList items={questionRankingItems} unit="件" />
+            <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+              件数は会議録で確認できた一般質問の集計であり、議員の能力・評価を示すものではありません。
+            </p>
+          </>
         ) : (
           <p className="text-sm text-on-surface-variant">現在、公開資料を確認しながら順次追加しています。</p>
         )}
