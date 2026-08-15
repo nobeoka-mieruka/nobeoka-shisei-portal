@@ -57,8 +57,16 @@ export interface BlockedTaskClassificationEntry {
     sourceClass: string;
     /** online_checked：オンラインで確認済み（見つからなかった）／library_login_required：
      * 所在は判明しているがログイン・現物閲覧が必須／library_required：図書館等での現物確認が必要／
-     * inquiry_required：関係機関への直接照会が必要／location_unknown：資料の所在自体が未確認。 */
-    status: "online_checked" | "library_login_required" | "library_required" | "inquiry_required" | "location_unknown";
+     * inquiry_required：関係機関への直接照会が必要／location_unknown：資料の所在自体が未確認／
+     * server_unreachable：URL・所在は判明しているが、サーバー自体に接続できず内容を確認できない
+     * （閲覧制限とは異なり、資料へのアクセス権の問題ではない）。 */
+    status:
+      | "online_checked"
+      | "library_login_required"
+      | "library_required"
+      | "inquiry_required"
+      | "location_unknown"
+      | "server_unreachable";
     description: string;
   }[];
   /** Phase133：このタスクを次に前進させるための具体的な条件（人手による調査を含む）。
