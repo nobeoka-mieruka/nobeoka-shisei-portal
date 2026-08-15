@@ -406,7 +406,7 @@ export function GeneralQuestionsPage() {
       ) : (
         <>
           <div className="mb-3 mt-3 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm text-on-surface-variant">
+            <p className="text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
               {filteredQuestions.length > 0
                 ? `${filteredQuestions.length}件の質問が見つかりました`
                 : "条件に一致する一般質問は見つかりませんでした。"}
@@ -494,7 +494,7 @@ export function GeneralQuestionsPage() {
         </p>
       ) : (
         <>
-          <p className="mb-3 mt-3 text-sm text-on-surface-variant">
+          <p className="mb-3 mt-3 text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
             {filteredVerifiedSpeeches.length > 0
               ? `${filteredVerifiedSpeeches.length}件の質問が見つかりました（全${verifiedTotalPages}ページ中${vPage}ページ目）`
               : "条件に一致する一般質問は見つかりませんでした。"}

@@ -386,7 +386,7 @@ export function BillVotesPage() {
       ) : (
         <>
           <div className="mb-3 mt-3 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm text-on-surface-variant">
+            <p className="text-sm text-on-surface-variant" aria-live="polite" aria-atomic="true">
               {filteredBills.length > 0
                 ? `${filteredBills.length}件の議案が見つかりました（全${totalPages}ページ中${page}ページ目）`
                 : "条件に一致する議案は見つかりませんでした。"}

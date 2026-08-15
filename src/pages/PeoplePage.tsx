@@ -258,7 +258,9 @@ export function PeoplePage() {
       </SectionCard>
 
       <div className="flex items-center justify-between gap-2">
-        <p className="text-xs text-on-surface-variant">{filtered.length}件</p>
+        <p className="text-xs text-on-surface-variant" aria-live="polite" aria-atomic="true">
+          {filtered.length}件
+        </p>
         <CsvDownloadButton
           filename="nobeoka-people.csv"
           rows={filtered}
