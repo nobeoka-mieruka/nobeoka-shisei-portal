@@ -9,6 +9,25 @@ export function sortedFiscalYears(years: ArchiveFiscalYear[]): ArchiveFiscalYear
   return [...years].sort((a, b) => a.fiscalYear - b.fiscalYear);
 }
 
+/**
+ * TASK-081：財政データの欠損年度を整理する共通ヘルパー。
+ * 特定の項目（基金・当初予算等）でグラフ・表からフィルタして除外している年度を、
+ * 「未収録」として明示するための文字列を組み立てる（0円と未収録の混同を防ぐ）。
+ * 欠損理由が個別に分かっている場合は呼び出し側でnotesとして別途補足すること
+ * （このヘルパーは「登録されていない」という事実のみを扱い、理由を推測しない）。
+ */
+export function missingFiscalYears(allYears: ArchiveFiscalYear[], hasData: (y: ArchiveFiscalYear) => boolean): number[] {
+  return sortedFiscalYears(allYears)
+    .filter((y) => !hasData(y))
+    .map((y) => y.fiscalYear);
+}
+
+/** 欠損年度の一覧を、市民向けの短い文言にする。0件（欠損なし）ならnull。 */
+export function formatMissingFiscalYearsNote(missingYears: number[], itemLabel: string): string | null {
+  if (missingYears.length === 0) return null;
+  return `${itemLabel}が未収録の年度：${missingYears.map((y) => fiscalYearLabel(y)).join("、")}（データが存在しないという意味ではなく、当サイトでまだ確認できていません）`;
+}
+
 /** 円単位の内部値を「約◯億円」表示に変換する。nullは「確認中」。 */
 export function formatOkuYenOrConfirming(value: number | null | undefined): string {
   if (value === null || value === undefined) return "確認中";

@@ -13,7 +13,7 @@ import { LandmarkIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears, missingFiscalYears, formatMissingFiscalYearsNote } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 
 const fundTotalMetric = financeMetricByKey("fundTotal")!;
@@ -26,6 +26,10 @@ export function FinanceFundsPage() {
   usePageTitle();
 
   const rows = archiveFiscalYears.filter((y) => y.fund);
+  const missingYearsNote = formatMissingFiscalYearsNote(
+    missingFiscalYears(archiveFiscalYears, (y) => !!y.fund),
+    "基金残高",
+  );
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -54,6 +58,12 @@ export function FinanceFundsPage() {
           definition="年度間の財源の過不足を調整するための基金です。基金全体の一部で、災害対応や急な財政需要への備えとしても使われます。"
         />
       </div>
+
+      <p className="rounded-xl bg-surface-container-low p-3.5 text-xs leading-relaxed text-on-surface-variant">
+        収録年度：{rows.length}／{archiveFiscalYears.length}年度（{fiscalYearLabel(archiveFiscalYears[0]?.fiscalYear)}〜
+        {fiscalYearLabel(archiveFiscalYears[archiveFiscalYears.length - 1]?.fiscalYear)}）
+        {missingYearsNote && <span className="block mt-1">{missingYearsNote}</span>}
+      </p>
 
       {rows.length === 0 ? (
         <SectionCard title="年度別 基金残高">
