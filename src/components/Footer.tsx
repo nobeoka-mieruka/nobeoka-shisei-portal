@@ -4,7 +4,7 @@ import { LastUpdated } from "./LastUpdated";
 import { getOperatorField } from "../config/operator";
 
 const linkClass =
-  "block rounded py-2 text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "flex min-h-[44px] items-center rounded py-2 text-on-surface-variant hover:text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 interface FooterLinkGroup {
   heading: string;
