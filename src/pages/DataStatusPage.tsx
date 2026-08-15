@@ -368,11 +368,20 @@ export function DataStatusPage() {
 
   const questions: DataDomain[] = [
     {
-      label: "一般質問（会議録ベース・確認済み）",
+      label: "一般質問（会議録ベース・登壇件数）",
       count: questionStats.confirmedCount,
       unit: "件",
       scope: "現任期（令和5年5月15日〜）＋旧任期（令和元年6月〜令和5年3月）",
-      detail: `現任期の対象定例会${questionStats.targetSessionCount}会期中${questionStats.collectedSessionCount}会期を収録（旧任期分を含む件数は上記の${questionStats.confirmedCount}件）／確認済み質問がある現職議員：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名${membersWithoutConfirmedQuestion.length > 0 ? `（未確認：${membersWithoutConfirmedQuestion.map((m) => m.name).join("、")}）` : ""}`,
+      detail: `議員1名が1回の登壇で行った質問・答弁のやり取り1回分を1件と数えています。現任期の対象定例会${questionStats.targetSessionCount}会期中${questionStats.collectedSessionCount}会期を収録（旧任期分を含む件数は上記の${questionStats.confirmedCount}件）／確認済み質問がある現職議員：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名${membersWithoutConfirmedQuestion.length > 0 ? `（未確認：${membersWithoutConfirmedQuestion.map((m) => m.name).join("、")}）` : ""}`,
+      linkTo: "/questions",
+      linkLabel: "一般質問データベースを見る",
+    },
+    {
+      label: "一般質問（会議録ベース・質問項目数）",
+      count: questionStats.totalQuestionItemCount,
+      unit: "件",
+      scope: "現任期（令和5年5月15日〜）＋旧任期（令和元年6月〜令和5年3月）",
+      detail: `1回の登壇（上記「登壇件数」${questionStats.confirmedCount}件）で複数のテーマを質問することが多いため、内訳である質問項目数の方が多くなります。「登壇件数」と「質問項目数」は異なる集計単位であり、どちらか一方に統一していません。`,
       linkTo: "/questions",
       linkLabel: "一般質問データベースを見る",
     },

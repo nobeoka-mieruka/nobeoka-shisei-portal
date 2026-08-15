@@ -285,10 +285,16 @@ export function DashboardPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard
-          label="会議録確認済み一般質問"
+          label="一般質問（登壇・確認済み件数）"
           value={questionStats.confirmedCount}
           unit="件"
-          hint={`収録済み${questionStats.collectedSessionCount}／対象${questionStats.targetSessionCount}会期`}
+          hint={`議員1名が1回の登壇で行った質問・答弁のやり取り1回分を1件と数えています。収録済み${questionStats.collectedSessionCount}／対象${questionStats.targetSessionCount}会期`}
+        />
+        <StatCard
+          label="質問項目数"
+          value={questionStats.totalQuestionItemCount}
+          unit="件"
+          hint="1回の登壇（上記「登壇・確認済み件数」）で複数のテーマを質問することが多いため、内訳である質問項目数の方が多くなります。"
         />
         {questionStats.scheduledCount > 0 && (
           <StatCard

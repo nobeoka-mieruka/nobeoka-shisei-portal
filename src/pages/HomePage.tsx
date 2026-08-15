@@ -342,16 +342,16 @@ export function HomePage() {
             hint={coverageHint("billVotes", billVotes.length)}
           />
           <StatCard
-            label="会議録確認済み一般質問"
+            label="一般質問（登壇・確認済み件数）"
             value={questionStats.confirmedCount}
             unit="件"
-            hint={`現任期対象会期：収録済み${questionStats.collectedSessionCount}／${questionStats.targetSessionCount}会期（現任期＋旧任期の全期間の会期数は一般質問データベースに別掲）`}
+            hint={`議員1名が1回の登壇で行った質問・答弁のやり取り1回分を1件と数えています。現任期対象会期：収録済み${questionStats.collectedSessionCount}／${questionStats.targetSessionCount}会期（現任期＋旧任期の全期間の会期数は一般質問データベースに別掲）`}
           />
           <StatCard
-            label="質問項目"
+            label="質問項目数"
             value={questionStats.totalQuestionItemCount}
             unit="件"
-            hint="一般質問の中で扱われた個別テーマ・質問項目の件数（1件の一般質問に複数の項目を含む）"
+            hint="1回の登壇（上記「登壇・確認済み件数」）で複数のテーマを質問することが多いため、内訳である質問項目数の方が多くなります。"
           />
           {questionStats.scheduledCount > 0 && (
             <StatCard
