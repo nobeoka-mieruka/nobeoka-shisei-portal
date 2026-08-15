@@ -5,6 +5,7 @@ import billVotesData from "../data/billVotes.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import updateHistoryData from "../data/updateHistory.json";
 import type {
   CouncilMember,
   Gender,
@@ -12,6 +13,7 @@ import type {
   Mayor,
   GeneralQuestionItem,
   CouncilSpeechSummaryData,
+  UpdateHistoryEntry,
 } from "../types";
 import { allFactions, getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
@@ -31,6 +33,10 @@ import { getSeoForPath } from "../lib/seo";
 import { coverageHint } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
 import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
+import { UPDATE_HISTORY_CATEGORY_CLASS, sortUpdateHistoryByDateDesc } from "../lib/updateHistory";
+import { formatJapaneseDate } from "../config/site";
+import { homeDataCoverageItems } from "../lib/dataCompletenessSummary";
+import { formatCoverageRate, COMPLETENESS_STATUS_LABELS } from "../lib/completeness";
 
 const members = membersData as CouncilMember[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
@@ -39,6 +45,12 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);
 const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
+// TASK-077：更新履歴（updateHistory.json）は手動キュレーションされた既存データを
+// そのまま再利用する。トップページ専用の別データを新設しない（二重管理を避ける）。
+const recentUpdates = sortUpdateHistoryByDateDesc(updateHistoryData as UpdateHistoryEntry[]).slice(0, 4);
+// TASK-078：/data-statusと同じsimpleCompleteness()の式・同じ入力データで算出するため、
+// トップページと/data-statusの数字が食い違わない（単一の「完成率○%」スコアは作らない）。
+const dataCoverageItems = homeDataCoverageItems(questionStats);
 
 const genderLabels: Record<Gender, string> = {
   male: "男性",
@@ -365,13 +377,121 @@ export function HomePage() {
         </Link>
       </section>
 
+      {/* TASK-077：/updatesの更新履歴（既存データ）から最新分のみを抜粋表示する。
+          トップページ専用の別データは新設しない（二重管理の回避）。 */}
+      <section aria-labelledby="recent-updates-heading" className="mb-6">
+        <h2 id="recent-updates-heading" className="mb-2 text-base font-semibold text-on-surface">
+          最近の更新
+        </h2>
+        <ul className="space-y-2">
+          {recentUpdates.map((entry) => {
+            const content = (
+              <>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                  <span>{formatJapaneseDate(entry.date)}</span>
+                  <span
+                    className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${UPDATE_HISTORY_CATEGORY_CLASS[entry.category]}`}
+                  >
+                    {entry.category}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm font-medium text-on-surface">{entry.title}</p>
+              </>
+            );
+            return (
+              <li key={entry.id} className="rounded-xl bg-surface-container-low p-3.5 shadow-e1 sm:p-4">
+                {entry.linkUrl ? (
+                  <Link to={entry.linkUrl} className={`block rounded-lg ${focusRing}`}>
+                    {content}
+                  </Link>
+                ) : (
+                  content
+                )}
+              </li>
+            );
+          })}
+        </ul>
+        <Link
+          to="/updates"
+          className={`mt-3 flex min-h-[44px] items-center justify-center rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-high ${focusRing}`}
+        >
+          すべての更新を見る
+        </Link>
+      </section>
+
+      {/* TASK-078：単一の「完成率○%」のような曖昧なスコアは作らず、項目ごとの分子／分母を
+          個別に見せる。/data-statusと同じ計算式（simpleCompleteness）・同じ入力データを使う。 */}
+      <section aria-labelledby="data-coverage-heading" className="mb-6">
+        <h2 id="data-coverage-heading" className="mb-2 text-base font-semibold text-on-surface">
+          データ整備状況
+        </h2>
+        <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {dataCoverageItems.map((item) => (
+            <li key={item.label} className="rounded-xl bg-surface-container-low p-3.5 shadow-e1">
+              <p className="text-xs text-on-surface-variant">{item.label}</p>
+              {item.kind === "ratio" ? (
+                <p className="mt-0.5 text-sm font-semibold text-on-surface">
+                  {item.metric.collected}／{item.metric.totalKnown ?? "？"}
+                  <span className="ml-1 text-xs font-normal text-on-surface-variant">
+                    （{formatCoverageRate(item.metric)}・{COMPLETENESS_STATUS_LABELS[item.metric.status]}）
+                  </span>
+                </p>
+              ) : (
+                <p className="mt-0.5 text-sm font-semibold text-on-surface">
+                  {item.value}
+                  {item.unit}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+        <Link
+          to="/data-status"
+          className={`mt-3 flex min-h-[44px] items-center justify-center rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-high ${focusRing}`}
+        >
+          詳細を見る
+        </Link>
+      </section>
+
+      {/* TASK-076：トップページを「入口」にするための議員一覧への簡易導線。
+          特定の議員をおすすめとして目立たせず、名前検索・五十音順・一覧を見る、という
+          中立的な入口のみを提示する（絞り込みツール本体は下の折りたたみ、またはpeople側）。 */}
+      <section aria-labelledby="member-nav-heading" className="mb-6 rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 id="member-nav-heading" className="text-base font-semibold text-on-surface">
+          議員を探す
+        </h2>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          全{members.length}名を五十音順で掲載しています。特定の議員を優先表示することはありません。
+        </p>
+        <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
+          <Link
+            to="/search"
+            className={`flex min-h-[44px] items-center justify-center rounded-lg bg-surface-container-high px-3.5 py-2.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${focusRing}`}
+          >
+            名前で探す
+          </Link>
+          <Link
+            to="/people?type=member"
+            className={`flex min-h-[44px] items-center justify-center rounded-lg bg-surface-container-high px-3.5 py-2.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${focusRing}`}
+          >
+            五十音順で見る
+          </Link>
+          <Link
+            to="/people?type=member"
+            className={`flex min-h-[44px] items-center justify-center rounded-lg bg-primary-container px-3.5 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${focusRing}`}
+          >
+            議員一覧を見る
+          </Link>
+        </div>
+      </section>
+
       <details className="group mb-2 rounded-xl bg-surface-container-low shadow-e1">
         <summary
           className={`flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-4 py-3.5 text-lg font-semibold text-on-surface transition hover:bg-surface-container-high ${focusRing}`}
         >
           <span>
-            現職議員を探す
-            <span className="ml-2 text-sm font-normal text-on-surface-variant">（{members.length}名）</span>
+            議員を詳しく絞り込む
+            <span className="ml-2 text-sm font-normal text-on-surface-variant">（性別・委員会・当選回数等、{members.length}名）</span>
           </span>
           <span aria-hidden className="shrink-0 text-on-surface-variant transition group-open:rotate-180">
             ▼

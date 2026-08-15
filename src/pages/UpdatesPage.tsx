@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import updateHistoryData from "../data/updateHistory.json";
-import type { UpdateHistoryCategory, UpdateHistoryEntry } from "../types";
+import type { UpdateHistoryEntry } from "../types";
 import { SectionCard } from "../components/SectionCard";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -9,6 +9,7 @@ import { Pagination } from "../components/Pagination";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { UPDATE_HISTORY_CATEGORY_CLASS, sortUpdateHistoryByDateDesc } from "../lib/updateHistory";
 
 const history = updateHistoryData as UpdateHistoryEntry[];
 
@@ -16,26 +17,14 @@ const history = updateHistoryData as UpdateHistoryEntry[];
 // 極端に長くなるため、20件ずつページ分割して表示する。
 const UPDATES_PAGE_SIZE = 20;
 
-const categoryClass: Record<UpdateHistoryCategory, string> = {
-  新規追加: "bg-primary-container text-on-primary-container",
-  データ更新: "bg-secondary-container text-on-secondary-container",
-  表示改善: "bg-tertiary-container text-on-tertiary-container",
-  出典追加: "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]",
-  修正: "bg-surface-variant text-on-surface-variant",
-  "議案・表決": "bg-[#e3ddff] text-[#2c2470] dark:bg-[#221a5c] dark:text-[#c9beff]",
-  品質改善: "bg-[#ffe5c2] text-[#5c3d00] dark:bg-[#4a3200] dark:text-[#ffd699]",
-  新機能: "bg-[#d3f4ff] text-[#00374a] dark:bg-[#003547] dark:text-[#a6e8ff]",
-};
+const categoryClass = UPDATE_HISTORY_CATEGORY_CLASS;
 
 export function UpdatesPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
 
-  const sorted = useMemo(
-    () => [...history].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)),
-    [],
-  );
+  const sorted = useMemo(() => sortUpdateHistoryByDateDesc(history), []);
   const [page, setPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(sorted.length / UPDATES_PAGE_SIZE));
   const pagedEntries = sorted.slice((page - 1) * UPDATES_PAGE_SIZE, page * UPDATES_PAGE_SIZE);
