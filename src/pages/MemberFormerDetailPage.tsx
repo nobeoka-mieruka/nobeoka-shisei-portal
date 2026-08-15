@@ -16,11 +16,11 @@ import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SectionCard } from "../components/SectionCard";
 import { EmptyState } from "../components/EmptyState";
-import { GlobeIcon, ClockIcon } from "../components/icons";
+import { SourceRefList } from "../components/SourceRefList";
+import { ClockIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
-import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
 import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 import {
   affiliationTypeLabel,
@@ -366,32 +366,7 @@ export function MemberFormerDetailPage() {
 
       {profile.sourceRefs.length > 0 && (
         <SectionCard title="出典・確認状況">
-          <ul className="space-y-2">
-            {profile.sourceRefs.map((ref, i) => (
-              <li key={`${ref.sourceUrl ?? "source"}-${i}`} className="text-sm">
-                <div className="flex flex-wrap items-center gap-2">
-                  {ref.sourceUrl ? (
-                    <a
-                      href={ref.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${ref.sourceTitle ?? "出典"}を新しいタブで開く`}
-                      className={`inline-flex items-center gap-1.5 text-primary hover:underline ${linkClass}`}
-                    >
-                      <GlobeIcon className="h-4 w-4 shrink-0" aria-hidden />
-                      {ref.sourceTitle ?? ref.sourceUrl}
-                    </a>
-                  ) : (
-                    <span className="text-on-surface-variant">{ref.sourceTitle ?? "出典URL未確認"}</span>
-                  )}
-                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
-                    {archiveVerificationStatusLabel(ref.verificationStatus)}
-                  </span>
-                </div>
-                {ref.notes && <p className="mt-1 text-xs text-on-surface-variant">{ref.notes}</p>}
-              </li>
-            ))}
-          </ul>
+          <SourceRefList refs={profile.sourceRefs} />
         </SectionCard>
       )}
 

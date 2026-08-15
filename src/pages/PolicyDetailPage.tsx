@@ -21,7 +21,7 @@ import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
-import { GlobeIcon } from "../components/icons";
+import { SourceRefList } from "../components/SourceRefList";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import {
@@ -34,7 +34,6 @@ import {
   policyStatusLabel,
   questionRelationsForPolicy,
 } from "../lib/archivePolicies";
-import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 
@@ -189,32 +188,9 @@ export function PolicyDetailPage() {
         {policy.sourceRefs.length === 0 ? (
           <p className="mt-2 text-sm text-on-surface-variant">出典は登録されていません。</p>
         ) : (
-          <ul className="mt-2 space-y-2">
-            {policy.sourceRefs.map((ref, i) => (
-              <li key={`${ref.sourceUrl ?? "source"}-${i}`} className="text-sm">
-                <div className="flex flex-wrap items-center gap-2">
-                  {ref.sourceUrl ? (
-                    <a
-                      href={ref.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${ref.sourceTitle ?? "出典"}を新しいタブで開く`}
-                      className={`inline-flex items-center gap-1.5 text-primary hover:underline ${linkClass}`}
-                    >
-                      <GlobeIcon className="h-4 w-4 shrink-0" aria-hidden />
-                      {ref.sourceTitle ?? ref.sourceUrl}
-                    </a>
-                  ) : (
-                    <span className="text-on-surface-variant">出典URL未確認</span>
-                  )}
-                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
-                    {archiveVerificationStatusLabel(ref.verificationStatus)}
-                  </span>
-                </div>
-                {ref.notes && <p className="mt-1 text-xs text-on-surface-variant">{ref.notes}</p>}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-2">
+            <SourceRefList refs={policy.sourceRefs} />
+          </div>
         )}
       </section>
 

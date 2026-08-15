@@ -11,6 +11,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LandmarkIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
+import { SourceRefList } from "../components/SourceRefList";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import {
@@ -118,6 +119,9 @@ export function FinanceFundsPage() {
             >
               <p className="text-xs leading-relaxed text-on-surface-variant">{y.fund?.balance.definitionNote}</p>
               {y.fund?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.fund.notes}</p>}
+              <div className="mt-2">
+                <SourceRefList refs={y.fund?.balance.sourceRefs ?? []} />
+              </div>
             </SectionCard>
           ))}
         </>

@@ -10,6 +10,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { ChartBarIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
+import { SourceRefList } from "../components/SourceRefList";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import {
@@ -112,6 +113,10 @@ export function FinanceDebtPage() {
         >
           <p className="text-xs leading-relaxed text-on-surface-variant">{y.debt?.balance.definitionNote}</p>
           {y.debt?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.debt.notes}</p>}
+          <div className="mt-2 space-y-2">
+            <SourceRefList refs={y.debt?.balance.sourceRefs ?? []} />
+            <SourceRefList refs={y.debt?.municipalBondIssuanceSourceRefs ?? []} />
+          </div>
         </SectionCard>
       ))}
 
