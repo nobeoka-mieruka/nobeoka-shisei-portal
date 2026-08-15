@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-13T21:33:39.298Z",
-  "targetCount": 616,
-  "cacheReused": 325,
-  "newlyChecked": 291,
+  "generatedAt": "2026-08-15T09:22:38.360Z",
+  "targetCount": 618,
+  "cacheReused": 615,
+  "newlyChecked": 3,
   "summary": {
-    "ok": 604,
+    "ok": 607,
     "not_found_404": 3,
-    "redirect": 9
+    "redirect": 8
   },
   "results": [
     {
@@ -418,6 +418,17 @@
       "status": 301,
       "location": "/word/%E4%B8%89%E6%B5%A6%E8%99%8E%E9%9B%84-1678003",
       "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://kotobank.jp/word/%E4%B8%89%E6%B5%A6%E8%99%8E%E9%9B%84-1678003",
+      "files": [
+        "archiveMayors.json"
+      ],
+      "checkedAt": "2026-08-15T09:22:37.682Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
       "error": null
     },
     {
@@ -6013,6 +6024,18 @@
       "error": null
     },
     {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28427.pdf",
+      "files": [
+        "generalQuestions.json",
+        "questionCollectionStatus.json"
+      ],
+      "checkedAt": "2026-08-15T09:22:38.004Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28453.pdf",
       "files": [
         "kohoNobeokaIssues.json",
@@ -8005,6 +8028,17 @@
         "members.json"
       ],
       "checkedAt": "2026-08-11T07:38:00.237Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.yomiyama-yoji.jp/page-509",
+      "files": [
+        "archivePolicies.json"
+      ],
+      "checkedAt": "2026-08-15T09:22:37.799Z",
       "status": 200,
       "location": null,
       "category": "ok",

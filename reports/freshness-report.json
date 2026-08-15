@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-10T10:48:27.208Z",
+  "generatedAt": "2026-08-15T09:24:06.668Z",
   "staleThresholdDays": 90,
   "note": "既存データが持つ確認日・ステータス値をそのまま集計した運用者向けレポート。公開ページからはリンクしない。staleCountは確認日から90日以上経過した件数（内容が誤っているという意味ではなく、再確認の優先度づけ用）。",
   "filesWithStaleEntries": 0,
@@ -22,27 +22,27 @@
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         }
       ],
       "reviewStatusCounts": {}
@@ -55,64 +55,64 @@
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T04:28:42.446Z",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T04:28:42.446Z",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T04:28:42.446Z",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T04:28:42.446Z",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T04:28:42.446Z",
-          "ageDays": 0
+          "ageDays": 5
         }
       ],
       "reviewStatusCounts": {}
     },
     {
       "file": "archiveFiscalYears.json",
-      "dateFieldCount": 18,
+      "dateFieldCount": 98,
       "staleCount": 0,
       "oldestEntries": [
         {
           "field": "accessedAt",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "accessedAt",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "accessedAt",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "accessedAt",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "accessedAt",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         }
       ],
       "reviewStatusCounts": {
-        "needsReview": 18
+        "needsReview": 89
       }
     },
     {
@@ -123,27 +123,27 @@
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         }
       ],
       "reviewStatusCounts": {
@@ -158,27 +158,27 @@
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "accessedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         }
       ],
       "reviewStatusCounts": {
@@ -186,73 +186,141 @@
       }
     },
     {
-      "file": "archiveMemberProfiles.json",
-      "dateFieldCount": 53,
+      "file": "archiveMemberAffiliations.json",
+      "dateFieldCount": 74,
       "staleCount": 0,
       "oldestEntries": [
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 74
+      }
+    },
+    {
+      "file": "archiveMemberProfiles.json",
+      "dateFieldCount": 201,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 7
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 7
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 7
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-08",
+          "ageDays": 7
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         }
       ],
       "reviewStatusCounts": {
-        "needsReview": 4
+        "needsReview": 52
       }
     },
     {
+      "file": "archiveMemberTerms.json",
+      "dateFieldCount": 26,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
       "file": "archivePolicies.json",
-      "dateFieldCount": 6,
+      "dateFieldCount": 16,
       "staleCount": 0,
       "oldestEntries": [
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         }
       ],
       "reviewStatusCounts": {
-        "needsReview": 6
+        "needsReview": 16
       }
     },
     {
@@ -263,16 +331,25 @@
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "accessedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         }
       ],
       "reviewStatusCounts": {
         "needsReview": 4
+      }
+    },
+    {
+      "file": "billProposalRoles.json",
+      "dateFieldCount": 0,
+      "staleCount": 0,
+      "oldestEntries": [],
+      "reviewStatusCounts": {
+        "needsReview": 1
       }
     },
     {
@@ -283,61 +360,89 @@
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         }
       ],
       "reviewStatusCounts": {
-        "unconfirmed": 655
+        "unconfirmed": 654
       }
     },
     {
+      "file": "blockedTaskClassification.json",
+      "dateFieldCount": 10,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
       "file": "blockedTaskWatch.json",
-      "dateFieldCount": 4,
+      "dateFieldCount": 3,
       "staleCount": 0,
       "oldestEntries": [
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T07:20:00+09:00",
-          "ageDays": 0
-        },
-        {
-          "field": "lastCheckedAt",
-          "value": "2026-08-10T07:20:00+09:00",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T07:40:00+09:00",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10T07:40:00+09:00",
-          "ageDays": 0
+          "ageDays": 5
         }
       ],
       "reviewStatusCounts": {
-        "blocked": 7
+        "blocked": 6
       }
     },
     {
@@ -348,60 +453,60 @@
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         }
       ],
       "reviewStatusCounts": {}
     },
     {
       "file": "civicTimelineEvents.json",
-      "dateFieldCount": 60,
+      "dateFieldCount": 143,
       "staleCount": 0,
       "oldestEntries": [
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         }
       ],
       "reviewStatusCounts": {}
@@ -414,27 +519,27 @@
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         }
       ],
       "reviewStatusCounts": {}
@@ -447,27 +552,27 @@
         {
           "field": "lastVerifiedAt",
           "value": "2026-08-06",
-          "ageDays": 4
+          "ageDays": 9
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-07",
-          "ageDays": 3
+          "value": "2026-08-10",
+          "ageDays": 5
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-07",
-          "ageDays": 3
+          "value": "2026-08-10",
+          "ageDays": 5
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-07",
-          "ageDays": 3
+          "value": "2026-08-10",
+          "ageDays": 5
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-07",
-          "ageDays": 3
+          "value": "2026-08-10",
+          "ageDays": 5
         }
       ],
       "reviewStatusCounts": {}
@@ -479,27 +584,27 @@
       "oldestEntries": [
         {
           "field": "lastCheckedAt",
-          "value": "2026-08-09",
+          "value": "2026-08-14",
           "ageDays": 1
         },
         {
           "field": "lastCheckedAt",
-          "value": "2026-08-09",
+          "value": "2026-08-14",
           "ageDays": 1
         },
         {
           "field": "lastCheckedAt",
-          "value": "2026-08-09",
+          "value": "2026-08-14",
           "ageDays": 1
         },
         {
           "field": "lastCheckedAt",
-          "value": "2026-08-09",
+          "value": "2026-08-14",
           "ageDays": 1
         },
         {
           "field": "lastCheckedAt",
-          "value": "2026-08-09",
+          "value": "2026-08-14",
           "ageDays": 1
         }
       ],
@@ -513,27 +618,27 @@
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "summaryVerifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "lastVerified",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         }
       ],
       "reviewStatusCounts": {}
@@ -546,27 +651,27 @@
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-02",
-          "ageDays": 8
+          "ageDays": 13
         }
       ],
       "reviewStatusCounts": {}
@@ -579,30 +684,65 @@
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10",
-          "ageDays": 0
+          "ageDays": 5
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-10",
-          "ageDays": 0
+          "ageDays": 5
         }
       ],
       "reviewStatusCounts": {}
+    },
+    {
+      "file": "electionResults.json",
+      "dateFieldCount": 25,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-11",
+          "ageDays": 4
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 24
+      }
     },
     {
       "file": "financeDashboard.json",
@@ -612,59 +752,59 @@
         {
           "field": "confirmedDate",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "confirmedDate",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "confirmedDate",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "confirmedDate",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "confirmedDate",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         }
       ],
       "reviewStatusCounts": {}
     },
     {
       "file": "formerMembers.json",
-      "dateFieldCount": 10,
+      "dateFieldCount": 58,
       "staleCount": 0,
       "oldestEntries": [
         {
           "field": "lastVerified",
-          "value": "2026-08-08",
+          "value": "2026-08-13",
           "ageDays": 2
         },
         {
           "field": "lastVerified",
-          "value": "2026-08-08",
+          "value": "2026-08-13",
           "ageDays": 2
         },
         {
           "field": "lastVerified",
-          "value": "2026-08-08",
+          "value": "2026-08-13",
           "ageDays": 2
         },
         {
           "field": "lastVerified",
-          "value": "2026-08-08",
+          "value": "2026-08-13",
           "ageDays": 2
         },
         {
           "field": "lastVerified",
-          "value": "2026-08-08",
+          "value": "2026-08-13",
           "ageDays": 2
         }
       ],
@@ -678,27 +818,60 @@
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
+        }
+      ],
+      "reviewStatusCounts": {}
+    },
+    {
+      "file": "kohoNobeokaIssues.json",
+      "dateFieldCount": 197,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "lastCheckedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
         }
       ],
       "reviewStatusCounts": {}
@@ -711,27 +884,27 @@
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         }
       ],
       "reviewStatusCounts": {}
@@ -744,27 +917,27 @@
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         },
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         }
       ],
       "reviewStatusCounts": {}
@@ -777,27 +950,27 @@
         {
           "field": "verifiedAt",
           "value": "2026-08-03",
-          "ageDays": 7
+          "ageDays": 12
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-03",
-          "ageDays": 7
+          "ageDays": 12
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-03",
-          "ageDays": 7
+          "ageDays": 12
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-03",
-          "ageDays": 7
+          "ageDays": 12
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-03",
-          "ageDays": 7
+          "ageDays": 12
         }
       ],
       "reviewStatusCounts": {}
@@ -819,7 +992,7 @@
         {
           "field": "lastVerified",
           "value": "2026-07-14",
-          "ageDays": 27
+          "ageDays": 32
         }
       ],
       "reviewStatusCounts": {}
@@ -831,27 +1004,27 @@
       "oldestEntries": [
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-06",
+          "value": "2026-08-11",
           "ageDays": 4
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-06",
+          "value": "2026-08-11",
           "ageDays": 4
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-06",
+          "value": "2026-08-11",
           "ageDays": 4
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-06",
+          "value": "2026-08-11",
           "ageDays": 4
         },
         {
           "field": "lastVerifiedAt",
-          "value": "2026-08-06",
+          "value": "2026-08-11",
           "ageDays": 4
         }
       ],
@@ -864,8 +1037,8 @@
       "oldestEntries": [
         {
           "field": "lastVerified",
-          "value": "2026-07-20",
-          "ageDays": 21
+          "value": "2026-08-11",
+          "ageDays": 4
         }
       ],
       "reviewStatusCounts": {}
@@ -878,27 +1051,27 @@
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         }
       ],
       "reviewStatusCounts": {
@@ -913,27 +1086,27 @@
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         },
         {
           "field": "verifiedAt",
           "value": "2026-08-08",
-          "ageDays": 2
+          "ageDays": 7
         }
       ],
       "reviewStatusCounts": {}
@@ -946,27 +1119,27 @@
         {
           "field": "lastCheckedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         },
         {
           "field": "lastCheckedAt",
           "value": "2026-08-05",
-          "ageDays": 5
+          "ageDays": 10
         }
       ],
       "reviewStatusCounts": {}
@@ -977,7 +1150,7 @@
       "staleCount": 0,
       "oldestEntries": [],
       "reviewStatusCounts": {
-        "needsReview": 6
+        "needsReview": 16
       }
     },
     {
@@ -987,11 +1160,36 @@
       "oldestEntries": [
         {
           "field": "lastVerified",
-          "value": "2026-07-20",
-          "ageDays": 21
+          "value": "2026-08-12",
+          "ageDays": 3
         }
       ],
       "reviewStatusCounts": {}
+    },
+    {
+      "file": "similarMunicipalityFinanceComparison.json",
+      "dateFieldCount": 3,
+      "staleCount": 0,
+      "oldestEntries": [
+        {
+          "field": "accessedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        },
+        {
+          "field": "accessedAt",
+          "value": "2026-08-12",
+          "ageDays": 3
+        }
+      ],
+      "reviewStatusCounts": {
+        "needsReview": 3
+      }
     }
   ]
 }
