@@ -8341,3 +8341,19 @@ FY2019の同種資料（koho-2020-11、attachment/6498.pdf）はWinRTでのPDF�
 7件server_errorは進行中の既知障害、municipalityComparison.jsonのxls検出はnotes内テキストの
 誤検知）。`generate-quality-report.mjs`を再実行し`docs/quality-report.md`を最新化
 （errors=0, warnings=14、検索インデックス全カテゴリ100%一致）。推測でのデータ追加・変更は無し。
+
+【2026-08-17続き・優先度2：財政データの年度横断一貫性監査】`archiveFiscalYears.json`
+全18年度分（FY2009〜FY2026）について、budget/debt.balance/fund.balance/finance/
+populationの各サブオブジェクトを対象に、単位誤り（100万円未満の値の混入）・比率の範囲外値
+（0〜200%外、財政力指数0〜3外）・isEstimate未設定・sourceRefs欠落を機械的に監査した。
+初回スクリプトは`sourceRefs`が`debt`/`fund`直下ではなく`debt.balance`/`fund.balance`
+配下にネストされている構造を誤読し35件の疑似エラーを出したが、構造を修正して再実行した
+ところ、実際の不整合は**0件**であることを確認した（FY2026の`debt.balance.sourceRefs`が
+空配列である1件も、同年度が年度途中で残高データ自体が「確認中」として全項目null・
+`definitionNote`に明記済みのため、値が無い箇所にsourceRefsも無いという整合した状態であり
+問題ではないと判断）。財政データの構造的な品質は現時点で健全であることを検証した。
+
+これによりPriority 2（財政データの年度横断品質監査）は完了とする。次の未着手項目は
+Priority 3（Wayback非依存の欠落項目：市長単位に紐づく市政年表出来事の空白＝
+`archiveMayorTerms.json`の13件の任期空白期間、特にmayor-05鈴木憲太郎の在任期間に
+紐づく市政年表出来事が0件）およびPriority A（歴代市長の代替資料調査）。
