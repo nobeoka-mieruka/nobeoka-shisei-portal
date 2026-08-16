@@ -1,10 +1,11 @@
 {
-  "generatedAt": "2026-08-15T09:22:38.360Z",
-  "targetCount": 618,
-  "cacheReused": 615,
-  "newlyChecked": 3,
+  "generatedAt": "2026-08-16T23:25:10.204Z",
+  "targetCount": 630,
+  "cacheReused": 618,
+  "newlyChecked": 12,
   "summary": {
-    "ok": 607,
+    "ok": 612,
+    "server_error": 7,
     "not_found_404": 3,
     "redirect": 8
   },
@@ -265,6 +266,28 @@
       "error": null
     },
     {
+      "url": "https://go2senkyo.com/schedule/1994",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:30.636Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://go2senkyo.com/schedule/1998",
+      "files": [
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:31.611Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://hisatomo-m.jp/",
       "files": [
         "archiveCrawlerTargets.json",
@@ -443,6 +466,17 @@
       "error": null
     },
     {
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000067",
+      "files": [
+        "committees.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:28.605Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://lin.ee/HLXDNIS",
       "files": [
         "members.json"
@@ -518,6 +552,95 @@
       "status": 302,
       "location": "https://ops-jg.d1-law.com/opensearch/css/font.css",
       "category": "redirect",
+      "error": null
+    },
+    {
+      "url": "https://prod-cdn.go2senkyo.com/public/senkyo_koho/21947/%E5%BA%83%E5%A0%B193%E5%BB%B6%E5%B2%A1%E5%B8%82%E8%AD%B0%E4%BC%9A%E8%AD%B0%E5%93%A1%E9%81%B8%E6%8C%99_21947_42633.pdf",
+      "files": [
+        "members.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:28.641Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:33.696Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20140715095752/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140324102214",
+      "files": [
+        "archiveMayors.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:39.740Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20140715140122/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2006year.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:51.786Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-16T23:25:03.812Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-16T23:25:09.848Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:57.789Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
+      "error": null
+    },
+    {
+      "url": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
+      "files": [
+        "archiveMayors.json",
+        "archiveMayorTerms.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:45.756Z",
+      "status": 503,
+      "location": null,
+      "category": "server_error",
       "error": null
     },
     {
@@ -4111,6 +4234,7 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2582.pdf",
       "files": [
+        "archiveFiscalYears.json",
         "kohoNobeokaIssues.json",
         "kohoOcrSearchIndex.json"
       ],
@@ -4268,6 +4392,7 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2594.pdf",
       "files": [
+        "archiveFiscalYears.json",
         "kohoNobeokaIssues.json",
         "kohoOcrSearchIndex.json"
       ],
@@ -5502,6 +5627,7 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2690.pdf",
       "files": [
+        "archiveFiscalYears.json",
         "kohoNobeokaIssues.json",
         "kohoOcrSearchIndex.json"
       ],
@@ -5647,6 +5773,7 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2702.pdf",
       "files": [
+        "archiveFiscalYears.json",
         "kohoNobeokaIssues.json",
         "kohoOcrSearchIndex.json"
       ],
@@ -6078,6 +6205,17 @@
         "archiveFiscalYears.json"
       ],
       "checkedAt": "2026-08-11T07:38:12.228Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-16T23:24:28.411Z",
       "status": 200,
       "location": null,
       "category": "ok",
