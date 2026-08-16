@@ -172,7 +172,7 @@
     "id": "mayor-03-term-01",
     "mayorId": "mayor-03",
     "termStart": "2018-02-06",
-    "termStartPrecision": "month",
+    "termStartPrecision": "day",
     "termEnd": "2022-02-05",
     "termEndPrecision": "month",
     "termNumber": 1,
@@ -199,6 +199,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
         "notes": "就任日について、記事内で「2月6日」（infobox）と「2月26日」（本文）という内部矛盾があることを確認した。市長就任日が例年2月6日である実績パターン（他の代の任期から確認）とinfoboxの記載に基づき2018-02-06を採用したが、独立資料による日単位の確認はできていないため、精度をmonthとしている。"
+      },
+      {
+        "sourceUrl": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
+        "sourceTitle": "延岡市長 読谷山洋司（Internet Archive保存、当時の延岡市公式サイト市長プロフィールページ）",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-16",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "延岡市公式サイト本人プロフィールページ（Wayback Machine保存）に「平成30年2月6日　第27代延岡市長就任」と明記されていることを確認した。これにより就任日を月単位から日単位（2018-02-06）へ格上げした。Wikipedia記事内の内部矛盾（infobox「2月6日」・本文「2月26日」）は、この公式一次資料により「2月6日」が正しいと判断できる。"
       }
     ]
   },

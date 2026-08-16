@@ -349,6 +349,32 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2011年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
         }
       ]
+    },
+    "fund": {
+      "fiscalYear": 2011,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 18038500000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": null,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "definitionNote": "「基金（貯金）の残高の推移」棒グラフの平成23年度末値18,038,500,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2672.pdf",
+            "sourceTitle": "広報のべおか2012年11月号「平成23年度決算の状況」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2012-11-01",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「基金（貯金）の残高の推移」棒グラフ（20〜23年度末、一般・特別・企業会計の合計、本文に明記）の23年度末値。20年度末153億1,590万円・21年度末153億4,299万円・22年度末163億1,998万円という推移も確認したが、これらは既存データの他フィールドと重複するため登録しない。"
+          }
+        ]
+      },
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高（他年度と同一定義のfiscalReserveFundYen）は本資料からは特定できず未登録。"
     }
   },
   {
@@ -463,6 +489,32 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2012年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
         }
       ]
+    },
+    "fund": {
+      "fiscalYear": 2012,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 18528380000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": null,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "definitionNote": "「基金（貯金）の残高」棒グラフの平成24年度末値18,528,380,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2660.pdf",
+            "sourceTitle": "広報のべおか2013年11月号「平成24年度決算の状況」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2013-11-01",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「基金の残高」棒グラフ（21〜24年度末、一般・特別・企業会計の合計、本文に明記）の24年度末値。"
+          }
+        ]
+      },
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高は本資料からは特定できず未登録。"
     }
   },
   {
@@ -577,6 +629,32 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2013年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
         }
       ]
+    },
+    "fund": {
+      "fiscalYear": 2013,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 20685170000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": null,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "definitionNote": "「基金額の推移」棒グラフの平成25年度末値20,685,170,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
+            "sourceTitle": "広報のべおか2014年11月号「平成25年度延岡市の財政状況」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2014-11-01",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「基金額の推移」棒グラフ（22〜25年度末、一般・特別・企業会計の合計、本文に明記）の25年度末値。"
+          }
+        ]
+      },
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高は本資料からは特定できず未登録。"
     }
   },
   {
@@ -691,6 +769,32 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2014年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
         }
       ]
+    },
+    "fund": {
+      "fiscalYear": 2014,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 19670450000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": null,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "definitionNote": "「基金残高の推移」棒グラフの平成26年度末値19,670,450,000円（一般・特別・企業会計の合計、本文に明記）。25年度から24億7,472万円の取り崩し（新庁舎建設事業等の財源とするため）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2636.pdf",
+            "sourceTitle": "広報のべおか2015年11月号「平成26年度決算の状況」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2015-11-01",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「基金残高の推移」棒グラフ（23〜26年度末、一般・特別・企業会計の合計、本文に明記）の26年度末値。"
+          }
+        ]
+      },
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高は本資料からは特定できず未登録。"
     }
   },
   {
@@ -805,6 +909,32 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2015年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
         }
       ]
+    },
+    "fund": {
+      "fiscalYear": 2015,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 20934630000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": null,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "definitionNote": "「基金残高の推移」棒グラフの平成27年度末値20,934,630,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2624.pdf",
+            "sourceTitle": "広報のべおか2016年11月号「延岡市の財政状況（平成27年度決算）」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2016-11-01",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「基金残高の推移」棒グラフ（24〜27年度末、一般・特別・企業会計の合計、本文に明記）の27年度末値。"
+          }
+        ]
+      },
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高は本資料からは特定できず未登録。"
     }
   },
   {
@@ -919,6 +1049,32 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2016年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
         }
       ]
+    },
+    "fund": {
+      "fiscalYear": 2016,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 23356520000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": null,
+        "bondRedemptionFundYen": null,
+        "otherSpecificPurposeFundsYen": null,
+        "definitionNote": "「基金残高の推移」棒グラフの平成28年度末値23,356,520,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2612.pdf",
+            "sourceTitle": "広報のべおか2017年11月号「延岡市の財政状況（平成28年度決算）」",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2017-11-01",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「基金残高の推移」棒グラフ（25〜28年度末、一般・特別・企業会計の合計、本文に明記）の28年度末値。"
+          }
+        ]
+      },
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高は本資料からは特定できず未登録。"
     }
   },
   {

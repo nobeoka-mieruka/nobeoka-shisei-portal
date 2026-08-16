@@ -64,6 +64,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "「2006年1月 延岡市長に首藤正治氏が初当選した」「2006年2月 首藤正治延岡市長が就任した」「2010年1月 延岡市長に首藤正治氏が再選した」を確認（年月単位）。"
+      },
+      {
+        "sourceUrl": "https://web.archive.org/web/20140715095752/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140324102214",
+        "sourceTitle": "市長マニフェスト・前期の総括（Internet Archive保存、当時の延岡市公式サイト）",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-16",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "2期目（平成22年2月〜平成26年2月）のマニフェスト60項目について、本人（延岡市）が公式に総括を公表していたことを確認した（A：目標達成50項目、B：概ね順調4項目、C：進捗遅れ5項目、D：成果not表れず1項目）。個別60項目の内容はPDF（同ページにリンクあり）に記載されているが、今回は総括ページの存在と区分件数のみ確認し、個別項目のarchivePolicies.jsonへの取り込みは行っていない（follow_up_source、優先度high、として次回調査候補に残す）。本サイトの編集方針上、これは当サイト独自の採点ではなく、市長本人（延岡市）が公式に発表した自己評価である旨を明記する。"
       }
     ],
     "lastVerifiedAt": "2026-08-05"
@@ -94,9 +103,21 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "2025年6月2日の記者会見で、健康上の理由により2025年6月30日付で市長を辞職すると発表したことを報道で確認。複数の報道機関（UMK、琉球新報、宮崎日日新聞等）が同日程を報じている。（2026-08-10にリンク到達性を確認したところ、このURLは404（ページが見つかりません）でした。既存の確認内容自体は削除せず、リンク切れの事実のみを追記しています。）"
+      },
+      {
+        "sourceUrl": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
+        "sourceTitle": "延岡市長 読谷山洋司（Internet Archive保存、当時の延岡市公式サイト市長プロフィールページ）",
+        "sourceOrganization": "延岡市",
+        "sourcePublishedDate": null,
+        "accessedAt": "2026-08-16",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "延岡市公式サイトの市長プロフィールページ（Wayback Machine保存、2019年7月1日取得のスナップショット）で、生年月日（昭和39年2月20日）・出身（延岡市緑ケ丘）・詳細な経歴（東京大学経済学部卒業1986年、自治省入省1986年、愛媛県総務部長2005年4月、内閣府参事官2008年7月、岡山市副市長2010年7月、総務省退職2012年1月、株式会社アレーテライフイノベーション社長2013年3月、長崎県立大学経済学部教授2015年4月、同社会長2015年10月）・「平成30年2月6日 第27代延岡市長就任」を確認した。これにより既存のWikipedia記事内の内部矛盾（「2月6日」vs「2月26日」）を、公式一次資料で2018-02-06に確定できた。"
       }
     ],
-    "lastVerifiedAt": "2026-08-05"
+    "lastVerifiedAt": "2026-08-16",
+    "birthDate": "1964-02-20",
+    "notes": " （2026-08-16追記）延岡市公式サイト（Wayback Machine保存）の市長プロフィールページで、生年月日・詳細経歴・就任日（2018年2月6日、日単位）を確認した。詳細な経歴は上記sourceRefs参照。"
   },
   {
     "id": "mayor-04",
