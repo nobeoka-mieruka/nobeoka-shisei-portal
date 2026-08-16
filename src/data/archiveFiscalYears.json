@@ -93,7 +93,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2010年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金残高153億4,299万円（平成21年度末、推移グラフ、一般・特別・企業会計の合計）も同記事に記載があるが、財政調整基金等の内訳が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2009,
+      "population": 131365,
+      "households": null,
+      "referenceDate": "2009-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2009年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2010,
@@ -189,7 +207,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2011年11月号「平成22年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高163億1,998万円（平成22年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2010,
+      "population": 130680,
+      "households": null,
+      "referenceDate": "2010-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2010年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2011,
@@ -285,7 +321,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2012年11月号「平成23年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高180億3,850万円（平成23年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2011,
+      "population": 131148,
+      "households": null,
+      "referenceDate": "2011-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2011年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2012,
@@ -381,7 +435,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2013年11月号「平成24年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高185億2,838万円（平成24年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2012,
+      "population": 130308,
+      "households": null,
+      "referenceDate": "2012-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2012年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2013,
@@ -477,7 +549,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2014年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金額206億8,517万円（平成25年度末、推移グラフ）も同記事に記載があるが、財政調整基金等の内訳・会計区分の明記が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2013,
+      "population": 129146,
+      "households": null,
+      "referenceDate": "2013-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2013年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2014,
@@ -573,7 +663,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2015年11月号「平成26年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高196億7,045万円（平成26年度末、一般・特別・企業会計の合計、市債残高とは会計区分の注記が異なる点に注意）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2014,
+      "population": 128120,
+      "households": null,
+      "referenceDate": "2014-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2014年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2015,
@@ -669,7 +777,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2016年11月号「延岡市の財政状況（平成27年度決算）」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高209億3,463万円（平成27年度末、注記：一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2015,
+      "population": 126741,
+      "households": null,
+      "referenceDate": "2015-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2015年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2016,
@@ -765,7 +891,25 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2017年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。この登録によりFY2009〜FY2026のすべての年度が最低限（debt/finance）で連続収録された。基金残高233億5,652万円（平成28年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。主な事業として新庁舎建設事業・中心市街地プロジェクト推進事業・野口記念館建て替え（寄付金30億円）の記載あり。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "population": {
+      "fiscalYear": 2016,
+      "population": 124922,
+      "households": null,
+      "referenceDate": "2016-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2016年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2017,
@@ -861,7 +1005,51 @@
       "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
     },
     "notes": "広報のべおか2018年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金残高234億3,090万円（一般・特別・企業会計の合計、平成29年度末）も同記事に記載があるが、財政調整基金等の内訳が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
-    "verifiedAt": "2026-08-12"
+    "verifiedAt": "2026-08-12",
+    "fund": {
+      "fiscalYear": 2017,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 5296000000,
+        "bondRedemptionFundYen": 2456000000,
+        "otherSpecificPurposeFundsYen": 14320000000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録（FY2018・FY2019と同一の計算方法）。基金全体の合計（totalYen）は、この年度は明示的な合計行が資料に無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
+            "sourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表（平成29年度）",
+            "sourceOrganization": "延岡市",
+            "sourcePublishedDate": "2019-03-31",
+            "accessedAt": "2026-08-16",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円。固定資産側「基金」16,776百万円（うち減債基金2,456百万円）＋流動資産側「基金」5,296百万円（うち財政調整基金5,296百万円、減債基金0）から、財政調整基金5,296百万円・減債基金2,456百万円・その他特定目的基金（残差）14,320百万円を算出した（FY2018・FY2019の既存登録値と同一の計算式で導出、按分や推測は行っていない）。延岡市財政分析報告書ページ（/soshiki/18/40989.html）で平成29年度分のリンクを発見し取得した（平成28年度以前は同ページに個別ファイルリンクが無く、この基準の財務書類の公表自体がFY2017から始まっているとみられる）。"
+          }
+        ]
+      },
+      "notes": "延岡市「財務書類（統一的な基準）」貸借対照表（平成30年3月31日現在＝平成29年度末）の基金区分から新規登録。平成28年度以前は同種の資料自体が確認できていない（公表がFY2017からと見られるため）。"
+    },
+    "population": {
+      "fiscalYear": 2017,
+      "population": 123610,
+      "households": null,
+      "referenceDate": "2017-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2018以降の登録で使用済みの資料と同一ファイル）から、2017年1月1日時点の値を新規取得した（xlsxパッケージでシート「現住人口（H.９〜）」を解析）。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2018,
