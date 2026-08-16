@@ -1,10 +1,10 @@
 {
-  "runAt": "2026-08-10T00:06:09.944Z",
+  "runAt": "2026-08-16T18:52:49.630Z",
   "dryRun": false,
-  "forced": true,
-  "lastSuccessfulRunAt": null,
-  "hoursSinceLast": null,
-  "gateReason": "force",
+  "forced": false,
+  "lastSuccessfulRunAt": "2026-08-10T20:28:04.221Z",
+  "hoursSinceLast": 142.4126136111111,
+  "gateReason": "interval-elapsed",
   "ran": true,
   "allowedHosts": [
     "www.city.nobeoka.miyazaki.jp",
