@@ -650,7 +650,7 @@
   {
     "id": "civic-035",
     "year": 2006,
-    "dateLabel": "2006年9月（日不明）",
+    "dateLabel": "2006年9月17日",
     "category": "災害",
     "title": "台風13号による竜巻",
     "summary": "死者3人、重傷者3人、軽傷者140人、全壊120戸、大規模半壊85戸、半壊280戸、一部損壊1134戸。災害救助法が適用された。",
@@ -661,9 +661,13 @@
       {
         "label": "延岡市年表（PDF）",
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf"
+      },
+      {
+        "label": "広報のべおか「2006年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715140122/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2006year.html"
       }
     ],
-    "lastVerifiedAt": "2026-08-06",
+    "lastVerifiedAt": "2026-08-16",
     "verificationStatus": "verified"
   },
   {
@@ -736,7 +740,7 @@
   {
     "id": "civic-039",
     "year": 2007,
-    "dateLabel": "2007年8月（日不明）",
+    "dateLabel": "2007年8月2日",
     "category": "災害",
     "title": "台風5号",
     "summary": "北方町二股や曽木等の全域で土砂崩れや浸水被害が発生した。",
@@ -747,15 +751,19 @@
       {
         "label": "延岡市年表（PDF）",
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf"
+      },
+      {
+        "label": "広報のべおか「2007年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html"
       }
     ],
-    "lastVerifiedAt": "2026-08-06",
+    "lastVerifiedAt": "2026-08-16",
     "verificationStatus": "verified"
   },
   {
     "id": "civic-040",
     "year": 2008,
-    "dateLabel": "2008年4月",
+    "dateLabel": "2008年4月23日",
     "category": "市庁舎",
     "title": "新消防庁舎完成",
     "summary": "消防本庁舎・訓練塔・屋外付帯工事完了に伴い、消防本部・署が船倉町2丁目から野地町5丁目へ移転。4月に落成式が行われた。",
@@ -766,9 +774,13 @@
       {
         "label": "延岡市年表（PDF）",
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf"
+      },
+      {
+        "label": "広報のべおか「2008年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html"
       }
     ],
-    "lastVerifiedAt": "2026-08-06",
+    "lastVerifiedAt": "2026-08-16",
     "verificationStatus": "verified"
   },
   {
@@ -2817,5 +2829,81 @@
     "lastVerifiedAt": "2026-08-14",
     "verificationStatus": "verified",
     "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+  },
+  {
+    "id": "civic-145",
+    "year": 2007,
+    "dateLabel": "2007年7月15日",
+    "category": "災害",
+    "title": "台風4号",
+    "summary": "台風4号が最接近し、10棟が床上浸水、116棟が床下浸水したほか、富美山町の青葉台地区でのり面が崩落し公民館や住宅4棟が被害を受けた。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか「2007年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-16",
+    "verificationStatus": "verified"
+  },
+  {
+    "id": "civic-146",
+    "year": 2008,
+    "dateLabel": "2008年11月17日",
+    "category": "公共事業",
+    "title": "新大瀬橋完成",
+    "summary": "柳沢町－大瀬町間に架かる新しい大瀬橋（長さ243.5m、幅16m）が完成した。橋脚を旧橋の8本から3本に減らすなど耐震性を大幅に向上させた。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか「2008年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-16",
+    "verificationStatus": "verified"
+  },
+  {
+    "id": "civic-147",
+    "year": 2009,
+    "dateLabel": "2009年4月（日不明）",
+    "category": "公共事業",
+    "title": "新清掃工場「夢の杜」完成",
+    "summary": "延岡市と高千穂町・日之影町・五ヶ瀬町の広域ごみ処理施設として、長浜町に新清掃工場が完成した（処理能力1日当たり218t）。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか「2009年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-16",
+    "verificationStatus": "verified"
+  },
+  {
+    "id": "civic-148",
+    "year": 2009,
+    "dateLabel": "2009年9月（日不明）",
+    "category": "教育・福祉・産業",
+    "title": "延岡市地域医療を守る条例制定",
+    "summary": "県立延岡病院の医師退職問題を受けた市民の署名活動（約15万人分）等を背景に、地域医療を守る条例が制定された。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか「2009年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+        "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-16",
+    "verificationStatus": "verified"
   }
 ]

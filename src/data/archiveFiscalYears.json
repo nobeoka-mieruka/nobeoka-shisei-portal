@@ -118,7 +118,7 @@
     "budget": {
       "fiscalYear": 2010,
       "generalAccountInitialBudgetYen": null,
-      "generalAccountFinalBudgetYen": null,
+      "generalAccountFinalBudgetYen": 57239310000,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
       "enterpriseAccountBudgetYen": null,
@@ -139,9 +139,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額582.8294億円・歳出総額564.5813億円。国・県支出金は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+          "sourceTitle": "広報のべおか2011年5月号「平成22年度財政状況の公表」（Internet Archive保存）",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2011-05-01",
+          "accessedAt": "2026-08-16",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "「平成22年度一般会計現計予算」（歳出・歳入とも572億3,931万円）の円グラフから、補正後予算額として登録した。既存の決算額（歳入582億8,294万円・歳出564億5,813万円、2011年11月号の決算特集より）とは定義が異なる別の値のため、両方を保持する。"
         }
       ],
-      "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。"
+      "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。 平成22年度の補正後予算額（一般会計現計予算）572億3,931万円は、広報のべおか2011年5月号「財政状況の公表」（Internet Archive保存）から新規登録した。"
     },
     "debt": {
       "fiscalYear": 2010,

@@ -66,6 +66,16 @@ function hostOf(url) {
 }
 
 /**
+ * Wayback Machine（web.archive.org）のURLは "https://web.archive.org/web/<timestamp>/<元URL>"
+ * という形式で元URLをそのまま内包している。元の発行元ドメインが公式ドメインかどうかを
+ * 判定するため、この内包URLを抽出する。Wayback以外のURLはnullを返す。
+ */
+function unwrapWaybackUrl(url) {
+  const m = /^https?:\/\/web\.archive\.org\/web\/[^/]+\/(https?:\/\/.+)$/.exec(url);
+  return m ? m[1] : null;
+}
+
+/**
  * 1件分の出典参照（sourceUrl + タイトル候補 + 公式性の主張）を検証する。
  * @param {string} file
  * @param {string} label 対象を特定する短いラベル（例: "archiveMayors.json mayor-02"）
@@ -81,20 +91,30 @@ function checkRef(file, label, url, title, claimsOfficial) {
     errors.push(`${file} [${label}]: URLとして解釈できません（値: "${url}"）`);
     return;
   }
-  const isOfficial = OFFICIAL_DOMAINS.has(host);
-  const isOtherPublic = OTHER_PUBLIC_DOMAINS.has(host);
-  const isSecondary = SECONDARY_DOMAINS.has(host);
+
+  const isWayback = host === "web.archive.org";
+  const originalUrl = isWayback ? unwrapWaybackUrl(url) : null;
+  const checkHost = originalUrl ? hostOf(originalUrl) : host;
+
+  const isOfficial = checkHost != null && OFFICIAL_DOMAINS.has(checkHost);
+  const isOtherPublic = checkHost != null && OTHER_PUBLIC_DOMAINS.has(checkHost);
+  const isSecondary = checkHost != null && SECONDARY_DOMAINS.has(checkHost);
 
   if (claimsOfficial && !isOfficial && !isOtherPublic) {
-    errors.push(`${file} [${label}]: 公式資料として扱われていますが、ドメイン "${host}" は既知の公式ドメイン一覧にありません`);
+    errors.push(`${file} [${label}]: 公式資料として扱われていますが、ドメイン "${checkHost ?? host}" は既知の公式ドメイン一覧にありません`);
   } else if (claimsOfficial && isOtherPublic) {
-    warnings.push(`${file} [${label}]: 公式資料として扱われていますが、延岡市・延岡市議会・国の公式ドメインではありません（${host}、他の公的機関・政党公式サイトの可能性）`);
+    warnings.push(`${file} [${label}]: 公式資料として扱われていますが、延岡市・延岡市議会・国の公式ドメインではありません（${checkHost}、他の公的機関・政党公式サイトの可能性）`);
   }
   if (isOfficial && (!title || title.trim() === "")) {
     warnings.push(`${file} [${label}]: 公式ドメインの出典ですがタイトルが未設定です（${url}）`);
   }
   if (isSecondary) {
-    info.push(`${file} [${label}]: 二次資料ドメイン（${host}）を出典として使用`);
+    info.push(`${file} [${label}]: 二次資料ドメイン（${checkHost}）を出典として使用`);
+  }
+  if (isWayback && isOfficial) {
+    info.push(`${file} [${label}]: Internet Archive（Wayback Machine）に保存された公式資料（元ドメイン: ${checkHost}）を出典として使用`);
+  } else if (isWayback && !originalUrl) {
+    warnings.push(`${file} [${label}]: web.archive.orgのURLですが元URLの形式を認識できませんでした（値: "${url}"）`);
   }
 }
 

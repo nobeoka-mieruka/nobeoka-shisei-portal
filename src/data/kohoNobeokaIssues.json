@@ -15,7 +15,7 @@
     "pageCount": null,
     "indexed": false,
     "researchStatus": "tested_pdftotext_sample",
-    "lastCheckedAt": "2026-08-12",
+    "lastCheckedAt": "2026-08-16",
     "httpStatus": 200,
     "sourceStatus": {
       "code": "SOURCE_DAMAGED",
@@ -29,7 +29,8 @@
         "延岡市公式サイトのバックナンバー一覧（同一URL・attachment/2703.pdf以外の代替リンクなし、HTML版なし）",
         "Internet Archive Wayback Machine（2025年1月時点のアーカイブでも同一サイズ・同一破損を確認、当サイトの取得より前の独立したクローラーによる取得のため配信元自体の長期破損を裏付け）",
         "国立国会図書館デジタルコレクション（オンライン検索では該当資料を確認できず）",
-        "宮崎県立図書館（オンライン蔵書検索では所蔵確認できず、電話・来館照会は今回未実施）"
+        "宮崎県立図書館（オンライン蔵書検索では所蔵確認できず、電話・来館照会は今回未実施）",
+        "Internet Archive Wayback Machine 最古スナップショット（2011年11月14日取得、URLは旧構造の/contents/kikaku/keieiseisaku/kouhou/2010_04.pdf）を新たに確認したが、ファイルサイズ（1,535,940バイト、既存の1.46MBと一致）・pdfjs-distでの読み込みエラーとも、現行の延岡市公式サイト版・2025年1月時点のアーカイブ版と同一の破損状態であることを確認した（2026-08-16）。これにより、破損は少なくとも2011年11月の時点で既に生じていたことが裏付けられた。"
       ]
     }
   },
