@@ -8311,3 +8311,33 @@ P3=2,330件。
 `validate:completeness`（0/0/0）、`validate:freshness`（0/0）、`typecheck`、`lint`、
 `test`（26件成功）、`build`（2122/2122ルート、validate-seo 0/0、validate-content 0/0）、
 `release-check`（failures=0、既存の助言的warning 2件のみ）すべて成功。新規warning無し。
+
+【2026-08-17続き・WAYBACK-10：FY2018決算確定値・健全化判断比率】広報のべおか2019年11月号
+「延岡市の財政状況（平成30年度決算）」（現行サイトで取得可能）から、FY2018（平成30年度）の
+決算確定値を新規登録した（コミット`f7773c2`）。
+- 決算額：歳入597億1,614万円・歳出580億274万円（実質収支13億4,673万円の黒字）
+- 実質公債費比率：9.8%（前年度10.2%から改善）
+- 将来負担比率：「該当なし」（前年度9.3%から基準を下回り算定対象外になったとみられる。
+  0%と誤読されないようnullのまま維持し、notesに事実を明記）
+- 基金残高（決算確定値）：245億4,178万円（5月号の見込み値234億3,921万円から更新、
+  isEstimateもfalseへ変更）
+- 市債残高（一般・企業会計の合計）：933億3,317万円（新規）
+
+FY2019の同種資料（koho-2020-11、attachment/6498.pdf）はWinRTでのPDF読み込みに失敗し
+未登録のまま持ち越したが、**2026-08-17に現行サイトへ直接アクセスして再検証したところ、
+同URLはPDFではなくHTML（404相当）を返すことを確認した**。当初の失敗はWinRT側の不具合では
+なく、資源自体が現行URLから既に削除・移動されていることが原因と判明した。正しいURLの
+再特定が必要なため、これ以上リトライせず**BLOCKED**として記録する。
+
+検証：`validate:data`／`validate:finance`／`validate:sources`／`validate:completeness`／
+`validate:freshness`／`typecheck`／`lint`／`test`／`build`／`release-check`すべて成功
+（新規warning無し）。本番`/compare/finance/?years=2017,2018`でFY2018実質公債費比率9.8%の
+表示をclaude-in-chromeで実機確認済み。
+
+【2026-08-17続き・WAYBACK-11：サイト全体品質監査】Wayback非依存の品質監査（TASK-162 D相当）
+として実施（コミット`2d28296`）。`check-external-links.mjs`（630URL、キャッシュ再利用618・
+新規確認12）を実行し、404/server_errorとして検出された項目を精査した結果、新規に対応が
+必要な壊れたリンクは0件（仲田又次郎Wikipedia・宮崎日日新聞の404は対応済み、Wayback由来の
+7件server_errorは進行中の既知障害、municipalityComparison.jsonのxls検出はnotes内テキストの
+誤検知）。`generate-quality-report.mjs`を再実行し`docs/quality-report.md`を最新化
+（errors=0, warnings=14、検索インデックス全カテゴリ100%一致）。推測でのデータ追加・変更は無し。
