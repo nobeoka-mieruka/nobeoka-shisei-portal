@@ -478,7 +478,7 @@ export function DataStatusPage() {
       count: archiveFiscalYears.length,
       unit: "年度分",
       scope: fiscalYearRange,
-      detail: `予算確認済み${fiscalYearsWithBudget}年度／人口確認済み${fiscalYearsWithPopulation}年度／市債確認済み${fiscalYearsWithDebt}年度／基金確認済み${fiscalYearsWithFund}年度／財政健全化判断比率確認済み${fiscalYearsWithFinance}年度`,
+      detail: `予算確認済み${fiscalYearsWithBudget}年度／人口確認済み${fiscalYearsWithPopulation}年度／市債確認済み${fiscalYearsWithDebt}年度／基金確認済み${fiscalYearsWithFund}年度／財政健全化判断比率確認済み${fiscalYearsWithFinance}年度。平成12年度（2000年度、FY2000）以前は「資料なし」（総務省「決算カード」オンライン公開の最古年度が平成13年度＝FY2001であることを2026-08-17に確認済み、CD-ROM等の物理媒体調査は未実施）であり、「未調査」ではありません。`,
       linkTo: "/finance",
       linkLabel: "財政ページを見る",
     },

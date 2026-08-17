@@ -28,6 +28,9 @@
  *     無い場合。/finance/debtのUIはarchiveFiscalYears.filter((y) => y.debt)で絞り込むため、
  *     debtが無いと年度自体が一覧・グラフから消える。市債発行額が未確認の年度でも、
  *     municipalBondIssuanceStatus: "unconfirmed"としてdebtオブジェクト自体は残すこと）
+ *   - 人口・歳入歳出総額・市債残高・基金総額の代表フィールドが前年度比±50%以上変動
+ *     （TASK-082。単位ミス・桁ミス・取り違えの可能性を機械的に洗い出す。合併・制度改正等の
+ *     正当な急変もあるためerrorにはしない。2026-08-17時点で実データに該当は0件）
  *
  * error（市債発行額まわり、TASK-XXX 市債発行額・残高の混同修正で追加）：
  *   - municipalBondIssuanceYenが、同一年度のdebt.balance内のいずれかの残高フィールドと
@@ -286,6 +289,36 @@ try {
   }
 } catch (e) {
   warnings.push(`financeDashboard.jsonとのクロスチェック中にエラー: ${e.message}`);
+}
+
+// --- 前年度比±50%以上の急変（TASK-082）：金額・数値の取り違え、単位ミス、桁の混入等の
+// 可能性を機械的に洗い出す。異常値の自動修正はせず、警告として報告するのみ。
+// 対象は年度をまたいで直接比較できる代表フィールドに限定する（合併・制度改正等の
+// 正当な理由による急変も混じるため、error（自動失敗扱い）ではなくwarningに留める）。
+{
+  const YOY_FIELDS = [
+    ["population.population", (y) => y.population?.population],
+    ["budget.totalRevenueYen", (y) => y.budget?.totalRevenueYen],
+    ["budget.totalExpenditureYen", (y) => y.budget?.totalExpenditureYen],
+    ["debt.balance.ordinaryAccountLocalBondBalanceYen", (y) => y.debt?.balance?.ordinaryAccountLocalBondBalanceYen],
+    ["fund.balance.totalYen", (y) => y.fund?.balance?.totalYen],
+  ];
+  const sorted = [...archiveFiscalYears].sort((a, b) => a.fiscalYear - b.fiscalYear);
+  for (const [fieldLabel, getter] of YOY_FIELDS) {
+    let prev = null;
+    for (const y of sorted) {
+      const v = getter(y);
+      if (typeof v === "number" && prev !== null) {
+        const pct = ((v - prev.value) / prev.value) * 100;
+        if (Math.abs(pct) >= 50) {
+          warnings.push(
+            `${fieldLabel}: FY${prev.fiscalYear}（${prev.value}）→FY${y.fiscalYear}（${v}）で前年度比${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%の急変です。合併・制度改正等の正当な理由があるか確認してください（自動修正はしていません）`,
+          );
+        }
+      }
+      if (typeof v === "number") prev = { fiscalYear: y.fiscalYear, value: v };
+    }
+  }
 }
 
 for (const i of info) console.log(`[INFO] ${i}`);
