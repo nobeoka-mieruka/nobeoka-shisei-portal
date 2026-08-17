@@ -8456,6 +8456,37 @@ validate-content 0/0）すべて成功。`dist/timeline/2001/index.html`を
 目視確認し、経常収支比率85.3%が正しく表示されることを確認済み。
 
 残課題：FY2000（総務省側の別経路が必要、未解決）、FY2001-2006の財政力指数
-（3ヵ年平均か単年度かの定義確認が必要、要確認のまま）、FY2001-2008の
-budget/debt/fund/population区分（今回未着手）。次はPriority 3（歴代市長
-関連の空白項目）またはPriority Aへ進む。
+（3ヵ年平均か単年度かの定義確認が必要、要確認のまま）。
+
+【2026-08-17続き・FY2001-2008のbudget/debt/fundを追加（コミット`73ab6f5`）】
+直前に登録したFY2001-2008の`finance`区分に続き、同じ総務省決算カードPDFから
+以下を追加登録した。
+
+- `budget.totalRevenueYen`/`totalExpenditureYen`（歳入合計・歳出合計）
+- `debt.balance.ordinaryAccountLocalBondBalanceYen`（地方債現在高）
+- `fund.balance.fiscalReserveFundYen`/`bondRedemptionFundYen`/
+  `otherSpecificPurposeFundsYen`（財調・減債・特定目的の各基金）
+
+前年度比較列がある年度（FY2007→FY2008等）で隣接年度の値との完全一致を
+確認済み。FY2001-2004（歳入410-430億円台）からFY2005-2006（526-576億円台）
+にかけての明確な増加は、平成の大合併（延岡市・北方町・北浦町・北川町、
+2006年2月合併）による規模拡大と整合しており、データ誤りではないと判断した。
+
+**人口は登録を見送った**：決算カード冒頭の人口欄は直近国勢調査人口
+（5年ごとの固定値。FY2001-2004はいずれも平成12年国調124,761人で同一）で
+あり、既存年度の住民基本台帳ベース年度別推計人口とは定義が異なるため、
+混同を避けるため未登録のままとした。当初予算額・最終予算額・市債発行額
+（フロー）もこのカードには記載が無く引き続き未確認。
+
+検証：`validate:data`（errors=0, warnings=14=既存と同数）、`validate:finance`
+（errors=0, warnings=0, info=8＝FY2001-2004・FY2006-2008の財政調整基金
+据え置きINFO2件が新規追加、実データの転記どおりでありエラーではない）、
+`validate:sources`（0/0/52）、`validate:completeness`（0/0/0）、
+`validate:freshness`（0/0）、`typecheck`、`lint`、`test`（26件成功）、
+`build`（2128/2128ルート、validate-seo 0/0、validate-content 0/0）
+すべて成功。
+
+これによりFY2001-2008の総務省決算カード由来データ登録は一区切りとする。
+次はPriority 3（歴代市長関連の空白項目、ただし13件の任期空白は短期間の
+職務代理者期間の可能性が高く一次資料がNDLログイン必須でBLOCKED済みのため
+低優先）またはPriority A（Wayback P0高信頼度42件の代替資料調査）へ進む。
