@@ -75,8 +75,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 13.5,
       "futureBurdenRatioPercent": 116.3,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 91.8,
+      "financialStrengthIndex": 0.51,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2696.pdf",
@@ -88,9 +88,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。資金不足比率（食肉センター特別会計、水道事業会計、下水道事業会計）はいずれも「資金不足なし」の記載あり。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-10_45.pdf",
+          "sourceTitle": "総務省「平成21年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.51を新規登録。 経常収支比率91.8%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2010年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金残高153億4,299万円（平成21年度末、推移グラフ、一般・特別・企業会計の合計）も同記事に記載があるが、財政調整基金等の内訳が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -225,8 +235,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 12.4,
       "futureBurdenRatioPercent": 98.7,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 86.1,
+      "financialStrengthIndex": 0.48,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2684.pdf",
@@ -238,9 +248,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-11_45.pdf",
+          "sourceTitle": "総務省「平成22年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.48を新規登録。 経常収支比率86.1%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2011年11月号「平成22年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高163億1,998万円（平成22年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -365,8 +385,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 11.3,
       "futureBurdenRatioPercent": 83.7,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 86.3,
+      "financialStrengthIndex": 0.46,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2672.pdf",
@@ -378,9 +398,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-12_45.pdf",
+          "sourceTitle": "総務省「平成23年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.46を新規登録。 経常収支比率86.3%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2012年11月号「平成23年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高180億3,850万円（平成23年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -505,8 +535,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 10.4,
       "futureBurdenRatioPercent": 69.7,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 89.4,
+      "financialStrengthIndex": 0.45,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2660.pdf",
@@ -518,9 +548,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-13_45.pdf",
+          "sourceTitle": "総務省「平成24年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.45を新規登録。 経常収支比率89.4%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2013年11月号「平成24年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高185億2,838万円（平成24年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -645,8 +685,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 10.1,
       "futureBurdenRatioPercent": 55.1,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 87.9,
+      "financialStrengthIndex": 0.45,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2648.pdf",
@@ -658,9 +698,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。資金不足比率（食肉センター特別会計、水道事業会計、下水道事業会計）はいずれも「資金不足なし」の記載あり。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-14_45.pdf",
+          "sourceTitle": "総務省「平成25年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.45を新規登録。 経常収支比率87.9%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2014年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金額206億8,517万円（平成25年度末、推移グラフ）も同記事に記載があるが、財政調整基金等の内訳・会計区分の明記が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -785,8 +835,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 9.8,
       "futureBurdenRatioPercent": 51.4,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 90.6,
+      "financialStrengthIndex": 0.46,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2636.pdf",
@@ -798,9 +848,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-15_45.pdf",
+          "sourceTitle": "総務省「平成26年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.46を新規登録。 経常収支比率90.6%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2015年11月号「平成26年度決算の状況」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高196億7,045万円（平成26年度末、一般・特別・企業会計の合計、市債残高とは会計区分の注記が異なる点に注意）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -925,8 +985,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 9.9,
       "futureBurdenRatioPercent": 36.8,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 90.1,
+      "financialStrengthIndex": 0.46,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2624.pdf",
@@ -938,9 +998,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000473867.xlsx",
+          "sourceTitle": "総務省「平成27年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.46を新規登録。 経常収支比率90.1%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2016年11月号「延岡市の財政状況（平成27年度決算）」の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。基金残高209億3,463万円（平成27年度末、注記：一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -1065,8 +1135,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 10.2,
       "futureBurdenRatioPercent": 18.2,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 92.1,
+      "financialStrengthIndex": 0.47,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2612.pdf",
@@ -1078,9 +1148,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000538977.xlsx",
+          "sourceTitle": "総務省「平成28年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.47を新規登録。 経常収支比率92.1%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2017年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による第2次調査を契機に発見）。この登録によりFY2009〜FY2026のすべての年度が最低限（debt/finance）で連続収録された。基金残高233億5,652万円（平成28年度末、一般・特別・企業会計の合計）も記事に記載があるが、内訳が資料から特定できずfund（基金）の構造化データとしては登録を見送った。主な事業として新庁舎建設事業・中心市街地プロジェクト推進事業・野口記念館建て替え（寄付金30億円）の記載あり。",
     "verifiedAt": "2026-08-12",
@@ -1205,8 +1285,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 10.2,
       "futureBurdenRatioPercent": 9.3,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 93.4,
+      "financialStrengthIndex": 0.48,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2600.pdf",
@@ -1218,9 +1298,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より。実質赤字比率・連結実質赤字比率は「赤字なし」（定性表記のため数値フィールドは未登録）。経常収支比率・財政力指数はこのページに記載が無く未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000606541.xlsx",
+          "sourceTitle": "総務省「平成29年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
         }
       ],
-      "notes": "経常収支比率・財政力指数は当該号のこの記事には記載なし。別資料での確認が必要。"
+      "notes": "財政力指数0.48を新規登録。 経常収支比率93.4%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "notes": "広報のべおか2018年11月号の特集記事から新規登録（令和8年8月、Windows OCR基盤による1次調査を契機に発見）。基金残高234億3,090万円（一般・特別・企業会計の合計、平成29年度末）も同記事に記載があるが、財政調整基金等の内訳が資料から特定できず、fund（基金）の構造化データとしては登録を見送った。",
     "verifiedAt": "2026-08-12",
@@ -1434,8 +1524,8 @@
       "debtServiceRatioPercent": null,
       "realDebtServiceRatioPercent": 9.8,
       "futureBurdenRatioPercent": null,
-      "currentAccountRatioPercent": null,
-      "financialStrengthIndex": null,
+      "currentAccountRatioPercent": 92.2,
+      "financialStrengthIndex": 0.48,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2588.pdf",
@@ -1446,9 +1536,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "健全化判断比率表より、実質公債費比率9.8%（前年度10.2%から改善）を確認した。将来負担比率は表に「該当なし」と明記されており（前年度9.3%から基準を下回ったため算定対象外になったとみられる）、0%と誤読されないようnullのまま維持し、このnotesで「該当なし」の事実を明記する。経常収支比率・財政力指数はこのページに記載が無く引き続き未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000676980.xlsx",
+          "sourceTitle": "総務省「平成30年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
         }
       ],
-      "notes": "将来負担比率は当該号で「該当なし」と明記（前年度は9.3%だったため、基準を下回り算定対象外になったとみられる。0という意味ではない）。経常収支比率・財政力指数は当該号のこの記事には記載なし。"
+      "notes": "将来負担比率は当該号で「該当なし」と明記（前年度は9.3%だったため、基準を下回り算定対象外になったとみられる。0という意味ではない）。経常収支比率・財政力指数は当該号のこの記事には記載なし。 財政力指数0.48を新規登録。 経常収支比率92.2%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     }
   },
   {
@@ -1570,6 +1670,27 @@
         }
       ],
       "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。"
+    },
+    "finance": {
+      "fiscalYear": 2019,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 8.9,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 94.3,
+      "financialStrengthIndex": 0.49,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000740038.xlsx",
+          "sourceTitle": "総務省「令和元年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
+        }
+      ],
+      "notes": "財政力指数0.49を新規登録。 経常収支比率94.3%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。 実質公債費比率8.9%を新規登録（現行サイトのattachment/6498.pdfが2026-08-17時点でHTML404を返すため取得不能だったが、総務省決算カードにより判明）。 将来負担比率は総務省決算カード上「-」（該当なし。将来負担額が充当可能財源等を下回るため算定なし。0%ではない）。"
     }
   },
   {
