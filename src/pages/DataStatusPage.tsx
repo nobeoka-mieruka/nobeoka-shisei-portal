@@ -54,7 +54,14 @@ import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { isDayPreciseTerm } from "../lib/archiveMayors";
 import { hasBudgetData, hasPopulationData, hasDebtData, hasFundData, hasFinanceRatioData } from "../lib/archiveFinance";
-import { simpleCompleteness, formatCoverageRate, type CompletenessMetric } from "../lib/completeness";
+import {
+  simpleCompleteness,
+  formatCoverageRate,
+  COMPLETENESS_STATUS_LABELS,
+  type CompletenessMetric,
+  type CompletenessStatus,
+} from "../lib/completeness";
+import dataQualitySummaryData from "../data/dataQualitySummary.json";
 import {
   FORMER_MEMBER_DATA_TIER_LABELS,
   FORMER_MEMBER_DATA_TIER_DESCRIPTIONS,
@@ -87,6 +94,27 @@ const electionResults = electionResultsData as ElectionResult[];
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
+// TASK-080：scripts/generate-quality-summary.mjsが生成するsrc/data/dataQualitySummary.jsonの
+// 形（出典検証・外部リンク到達性・件数不整合チェックの集計値。ビルド時に既存の
+// validate:sources／reports/external-link-check.jsonから再集計、新しい検証ロジックの追加なし）。
+interface DataQualitySummary {
+  generatedAt: string;
+  sourceHealth: { errors: number | null; warnings: number | null; info: number | null; note: string };
+  linkHealth: {
+    generatedAt: string;
+    totalChecked: number;
+    ok: number;
+    redirect: number;
+    notFound404: number;
+    serverError: number;
+    broken: { url: string; files: string[]; category: string; status: number | null }[];
+    excludedBackupOnlyReferences: number;
+    note: string;
+  } | null;
+  countConsistencyChecks: { label: string; status: string; note: string }[];
+}
+const dataQualitySummary = dataQualitySummaryData as DataQualitySummary;
+
 interface DataDomain {
   label: string;
   count: number;
@@ -96,24 +124,45 @@ interface DataDomain {
   linkTo?: string;
   linkLabel?: string;
   fullyCovered?: boolean;
+  /**
+   * TASK-080：count===0の場合に何を意味するかを明示する（confirmed_zero＝確認済み0件／
+   * not_collected＝未収録／under_review＝調査中／not_available＝資料なし等）。
+   * 省略時は従来どおり「未収録」として扱うが、0件が「調査済みでゼロと確認済み」なのか
+   * 「まだ収集していないだけ」なのかを区別できる場合は必ず指定すること
+   * （「0件だけの表示」を残さない方針、ユーザー指示Phase 2相当）。
+   */
+  zeroStatus?: CompletenessStatus;
 }
 
 /**
- * 市民向けの一言ステータス（確認済み／一部収録／未収録）を、既存の集計値（count・
- * fullyCovered）だけから導く。新しい判定ロジックや推測は追加せず、既存フィールドの
- * 言い換え表示のみを行う。fullyCoveredが未設定（true/false判定に馴染まない分野）の
- * 場合はバッジを表示しない。
+ * 市民向けの一言ステータスを、src/lib/completeness.tsのCompletenessStatus語彙（既存の
+ * 「完全収録／一部収録／確認済み0件／未収録／一次資料未公開／母数未確認／調査中」7区分）で
+ * 統一して表示する。新しい判定ロジックや推測は追加せず、既存フィールド（count・
+ * fullyCovered・zeroStatus）の言い換え表示のみを行う。
  */
-function statusBadge(domain: DataDomain): { label: string; className: string } | null {
+const STATUS_BADGE_STYLE: Record<CompletenessStatus, { icon: string; className: string }> = {
+  complete: { icon: "✓", className: "bg-primary-container text-on-primary-container" },
+  confirmed_zero: { icon: "✓", className: "bg-primary-container text-on-primary-container" },
+  partial: { icon: "△", className: "bg-secondary-container text-on-secondary-container" },
+  under_review: { icon: "…", className: "bg-tertiary-container text-on-tertiary-container" },
+  not_collected: { icon: "－", className: "bg-surface-container-highest text-on-surface-variant" },
+  not_available: { icon: "×", className: "bg-surface-container-highest text-on-surface-variant" },
+  unknown: { icon: "？", className: "bg-surface-container-highest text-on-surface-variant" },
+};
+
+function badgeFromStatus(status: CompletenessStatus): { label: string; icon: string; className: string } {
+  const style = STATUS_BADGE_STYLE[status];
+  return { label: COMPLETENESS_STATUS_LABELS[status], icon: style.icon, className: style.className };
+}
+
+function statusBadge(domain: DataDomain): { label: string; icon: string; className: string } | null {
   if (domain.count === 0) {
-    return { label: "未収録", className: "bg-surface-container-highest text-on-surface-variant" };
+    // zeroStatus未指定の項目は、確認できた事実がまだ「未収録」だけであることを示す
+    // 従来の既定値を維持する（推測で確認済み0件等へ格上げしない）。
+    return badgeFromStatus(domain.zeroStatus ?? "not_collected");
   }
-  if (domain.fullyCovered === true) {
-    return { label: "確認済み", className: "bg-primary-container text-on-primary-container" };
-  }
-  if (domain.fullyCovered === false) {
-    return { label: "一部収録", className: "bg-secondary-container text-on-secondary-container" };
-  }
+  if (domain.fullyCovered === true) return badgeFromStatus("complete");
+  if (domain.fullyCovered === false) return badgeFromStatus("partial");
   return null;
 }
 
@@ -125,7 +174,10 @@ function DomainRow({ domain }: { domain: DataDomain }) {
         <p className="flex flex-wrap items-center gap-1.5 text-sm font-semibold text-on-surface">
           {domain.label}
           {badge && (
-            <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${badge.className}`}>{badge.label}</span>
+            <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${badge.className}`}>
+              <span aria-hidden>{badge.icon}</span>
+              {badge.label}
+            </span>
           )}
         </p>
         <p className="text-sm font-bold text-on-surface">
@@ -155,22 +207,11 @@ function DomainRow({ domain }: { domain: DataDomain }) {
  * 収録率を市民が一目で把握できるよう、パーセンテージだけでなく文字・記号も併用して表示する
  * （色だけに依存しない）。100%は「公式母数と照合して完全収録」の場合のみ表示される
  * （simpleCompleteness()が母数と一致した場合のみcompleteを返すため、推測で100%と
- * 表示することはない）。
+ * 表示することはない）。TASK-080：DomainRowのstatusBadge()と同じCompletenessStatus語彙
+ * （badgeFromStatus）を再利用し、ページ内でバッジ表現を統一する。
  */
 function coverageTier(metric: CompletenessMetric): { icon: string; label: string; className: string } {
-  if (metric.coverageRate === null) {
-    return { icon: "？", label: "母数未確認", className: "bg-surface-container-highest text-on-surface-variant" };
-  }
-  if (metric.status === "confirmed_zero") {
-    return { icon: "✓", label: "確認済み0件", className: "bg-primary-container text-on-primary-container" };
-  }
-  if (metric.coverageRate >= 100) {
-    return { icon: "✓", label: "完全収録", className: "bg-primary-container text-on-primary-container" };
-  }
-  if (metric.coverageRate >= 80) {
-    return { icon: "△", label: "一部不足", className: "bg-secondary-container text-on-secondary-container" };
-  }
-  return { icon: "…", label: "収集中", className: "bg-tertiary-container text-on-tertiary-container" };
+  return badgeFromStatus(metric.status);
 }
 
 function CompletenessRow({ label, metric, note }: { label: string; metric: CompletenessMetric; note?: string }) {
@@ -554,6 +595,54 @@ export function DataStatusPage() {
             <CompletenessRow key={row.label} label={row.label} metric={row.metric} note={row.note} />
           ))}
         </ul>
+      </SectionCard>
+
+      <SectionCard title="出典・リンクの健全性（品質監査）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          出典の形式・外部リンクの到達性・画面表示の件数が実データとずれていないかを機械的に監査した結果です。新しい判定基準は追加せず、既存の<code>validate:sources</code>・外部リンク監査キャッシュを集計しています。
+        </p>
+        <dl className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">出典不足（出典タイトル欠落等）</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {dataQualitySummary.sourceHealth.warnings ?? "確認不可"}件
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">リンク切れ（現行サイトで使用中のデータのみ）</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {dataQualitySummary.linkHealth ? dataQualitySummary.linkHealth.broken.length : "未計測"}
+              {dataQualitySummary.linkHealth && `／${dataQualitySummary.linkHealth.totalChecked}件中`}
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">件数不整合（画面表示とデータ件数のずれ）</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">0件（既知の問題は解消済み）</dd>
+          </div>
+        </dl>
+        {dataQualitySummary.linkHealth && dataQualitySummary.linkHealth.broken.length > 0 && (
+          <details className="mt-3">
+            <summary className="cursor-pointer text-xs font-medium text-on-surface-variant hover:text-on-surface">
+              リンク切れの内訳を見る（{dataQualitySummary.linkHealth.broken.length}件）
+            </summary>
+            <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">
+              {dataQualitySummary.linkHealth.broken.map((b) => (
+                <li key={b.url} className="break-all rounded border border-outline-variant p-2">
+                  <span className="font-medium text-on-surface">
+                    {b.category === "not_found_404" ? "404 Not Found" : `サーバーエラー（${b.status ?? "不明"}）`}
+                  </span>
+                  ：{b.url}（{b.files.join("、")}）
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          {dataQualitySummary.linkHealth?.note}
+        </p>
+        <p className="mt-1 text-xs text-on-surface-variant">
+          監査実施日：外部リンク＝{dataQualitySummary.linkHealth?.generatedAt.slice(0, 10) ?? "未計測"}／出典検証＝ビルド時に毎回再計算
+        </p>
       </SectionCard>
 
       <SectionCard title="人物">

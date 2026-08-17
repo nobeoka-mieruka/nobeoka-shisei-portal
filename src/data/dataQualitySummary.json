@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-08-17T03:59:19.168Z",
+  "sourceHealth": {
+    "errors": 0,
+    "warnings": 0,
+    "info": 52,
+    "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは出典タイトル欠落等の改善余地、infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
+  },
+  "linkHealth": {
+    "generatedAt": "2026-08-16T23:25:10.204Z",
+    "totalChecked": 677,
+    "ok": 653,
+    "redirect": 10,
+    "notFound404": 4,
+    "serverError": 7,
+    "broken": [
+      {
+        "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
+        "files": [
+          "archiveMayorTerms.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+        "files": [
+          "archiveMayors.json",
+          "archiveMayorTerms.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+        "files": [
+          "archiveFiscalYears.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://web.archive.org/web/20140715095752/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140324102214",
+        "files": [
+          "archiveMayors.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://web.archive.org/web/20140715140122/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2006year.html",
+        "files": [
+          "civicTimelineEvents.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html",
+        "files": [
+          "civicTimelineEvents.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
+        "files": [
+          "civicTimelineEvents.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html",
+        "files": [
+          "civicTimelineEvents.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
+        "files": [
+          "archiveMayors.json",
+          "archiveMayorTerms.json"
+        ],
+        "category": "server_error",
+        "status": 503
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+        "files": [
+          "municipalityComparison.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "files": [
+          "archiveMayors.json",
+          "archiveMayorTerms.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      }
+    ],
+    "excludedBackupOnlyReferences": 143,
+    "note": "*.backup.json（未使用のバックアップファイル）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
+  },
+  "countConsistencyChecks": [
+    {
+      "label": "CouncilDocumentsArchivePage.tsx（議案アーカイブ）heroDescriptionの「議案・採決データベース登録件数」表記",
+      "status": "fixed_2026-08-17",
+      "note": "従来「登録1,177件」が直書きされていたが、billVotes.jsonの実件数を動的に表示するよう修正済み（2026-08-17）。"
+    }
+  ]
+}
