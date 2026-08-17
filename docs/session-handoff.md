@@ -1,7 +1,57 @@
-# セッション引き継ぎメモ（2026-08-17更新・TASK-090〜092）
+# セッション引き継ぎメモ（2026-08-17更新・TASK-094〜099）
 
 このファイルは新しいセッションほど上に追記する運用です。2026-08-10（Phase 16/17）以前の
 記録は下に残したまま、最新の状態を以下に記載します。過去の記録を削除・改変してはいけません。
+
+## 2026-08-17（続き4）：NDL/Wayback非依存の全ページ横断監査（TASK-094〜099）
+
+ユーザーから「NDL・Wayback・未公開資料を必要としない改善を自動的に進めてほしい（NDL手動
+ログイン・物理資料確認はユーザー側で後ほど実施）」との指示（18優先度）を受けた。
+TASK-080〜092の成果を再監査・再実行せず、未解決部分だけを対象とした。
+
+### 実施内容
+
+- **Priority 1（全ページ未完成監査）**：前回セッション（TASK-085）の作業記録文が
+  `archiveMayors.json`5レコードの公開notesへ漏れていた実バグを発見・修正
+  （`d4cd1cd`）。`civicTimelineEvents.json`3レコードの内部ID裸参照も既存慣例に
+  合わせて修正。
+- **Priority 2〜7（過去議員・一般質問・議案・委員会・選挙・市政年表監査）**：
+  referential integrity・重複・orphanいずれも新規問題0件を確認（397件/1,470件の
+  集計ロジックが正しいことも再確認）。
+- **Priority 8-10（出典品質・孤立検出・重複検出）**：
+  `scripts/generate-final-quality-audit.mjs`を新規作成（`902a3cf`）。開発中に
+  スクリプト自身の誤検知（1,308件、sourceRefs配列以外の出典スキーマを未対応だった）を
+  発見・修正。最終結果：出典品質A=276/B=0/C=0/D=126/E=12（E=既知のリンク切れのみ）、
+  出典なしレコード0件、重複候補0件。
+- **Priority 11-15（検索・内部リンク・モバイル・a11y・SEO）**：新規問題0件
+  （市政年表の検索カテゴリ表記が汎用的な点は2026-08-14時点の既知の低優先度課題であり
+  新規ではない）。
+- **Priority 16（更新履歴）**：`/updates`へ市民向けの変更2件を追加（財政人口収録
+  26/26年度完了、データ収録状況ページの出典・リンク点検結果追加）。
+- **Priority 17（最終品質レポート）**：`reports/final-quality-audit.{json,md}`を
+  新規公開（`6edfbab`）。
+
+### 検証結果
+
+`validate:data`（errors=0, warnings=14=既存同数）・`validate:finance`（0/0/8）・
+`validate:sources`（0/0/52）・`validate:completeness`（0/0/0）・
+`validate:political-funds`（0/0/2）・`validate:freshness`（0/0）・`typecheck`・
+`lint`・`test`（26/26）・`build`（2128/2128ルート、validate-seo 0/0、
+validate-content 0/0）すべて成功。新規error・warning0件。
+
+### コミット・デプロイ
+
+`d4cd1cd`（TASK-094）→`902a3cf`（TASK-096）→`6edfbab`（TASK-099）、
+`origin/main`へpush予定。
+
+### 次回開始地点
+
+1. `git status`／`git log --oneline -10`／`origin/main`との差分
+2. Wayback Machine再生バックエンドの復旧を1回だけ確認
+3. ユーザーのNDLログイン・物理資料確認が完了していれば、
+   `reports/physical-source-candidates.md`の優先度「高」4件の結果を反映
+4. 上記が難しい場合は、外部資料不要な改善（今回のPriority 1〜18の再実施ではなく、
+   今回発見できなかった別の切り口の監査）を検討すること
 
 ## 2026-08-17（続き3）：歴代市長の一次・準一次資料による根拠強化（TASK-090〜092）
 

@@ -8595,3 +8595,23 @@ mayor-03以外ほぼ0件のまま（1990年代以前は物理資料調査が前�
 
 次回：Wayback復旧確認（代表1件のみ）→ユーザーへNDLログイン状況を確認し
 `reports/physical-source-candidates.md`優先度「高」4件を提示。
+
+【2026-08-17続き・TASK-094〜099（NDL/Wayback非依存の全ページ横断監査）】
+ユーザー指示18優先度で実施。詳細は`docs/session-handoff.md`「2026-08-17（続き4）」参照。
+TASK-080〜092の成果は再監査・再実行せず未解決部分のみ対象。
+
+- TASK-094（`d4cd1cd`）：前回セッション（TASK-085）の作業記録文がarchiveMayors.json
+  5レコードの公開notesへ漏れていた実バグを発見・修正。civicTimelineEvents.json 3レコード
+  の内部ID裸参照も修正。過去議員・一般質問・議案・委員会・選挙・市政年表は新規問題0件。
+- TASK-096（`902a3cf`）：出典品質監査スクリプト新規作成（A=276/B=0/C=0/D=126/E=12、
+  出典なし0件、重複0件）。開発中の誤検知（1,308件）を発見・修正。
+- TASK-099（`6edfbab`）：reports/final-quality-audit.{json,md}公開。/updatesへ市民向け
+  変更2件追加。
+
+検証：validate:data（0/14）・validate:finance（0/0/8）・validate:sources（0/0/52）・
+validate:completeness（0/0/0）・validate:political-funds（0/0/2）・validate:freshness
+（0/0）・typecheck・lint・test（26/26）・build（2128/2128）すべて成功。新規error・
+warning0件。
+
+次回：ユーザーのNDLログイン・物理資料確認の結果を反映。それまではWayback復旧確認
+（代表1件のみ）を継続。
