@@ -21,6 +21,87 @@
         }
       ],
       "notes": "経常収支比率85.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    },
+    "budget": {
+      "fiscalYear": 2001,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 42977780000,
+      "totalExpenditureYen": 42230027000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2001,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 48028775000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+            "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2001,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434111000,
+        "bondRedemptionFundYen": 1338268000,
+        "otherSpecificPurposeFundsYen": 5261613000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+            "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -45,6 +126,87 @@
         }
       ],
       "notes": "経常収支比率87.5%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    },
+    "budget": {
+      "fiscalYear": 2002,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 41372009000,
+      "totalExpenditureYen": 40796507000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2002,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 48537904000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+            "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2002,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434111000,
+        "bondRedemptionFundYen": 1296319000,
+        "otherSpecificPurposeFundsYen": 5223413000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+            "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -69,6 +231,87 @@
         }
       ],
       "notes": "経常収支比率86.9%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    },
+    "budget": {
+      "fiscalYear": 2003,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 41963736000,
+      "totalExpenditureYen": 41192424000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2003,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 49309931000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+            "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2003,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434111000,
+        "bondRedemptionFundYen": 1217599000,
+        "otherSpecificPurposeFundsYen": 4856700000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+            "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -93,6 +336,87 @@
         }
       ],
       "notes": "経常収支比率89.8%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    },
+    "budget": {
+      "fiscalYear": 2004,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 41660716000,
+      "totalExpenditureYen": 40820287000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2004,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 49264002000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+            "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2004,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434111000,
+        "bondRedemptionFundYen": 1031237000,
+        "otherSpecificPurposeFundsYen": 4421702000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+            "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -117,6 +441,87 @@
         }
       ],
       "notes": "経常収支比率90.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    },
+    "budget": {
+      "fiscalYear": 2005,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 52625050000,
+      "totalExpenditureYen": 51480995000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2005,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 60829651000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+            "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2005,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 2396939000,
+        "bondRedemptionFundYen": 892619000,
+        "otherSpecificPurposeFundsYen": 5389973000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+            "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -141,6 +546,87 @@
         }
       ],
       "notes": "経常収支比率92.2%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    },
+    "budget": {
+      "fiscalYear": 2006,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 57626494000,
+      "totalExpenditureYen": 56217081000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2006,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 70502189000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+            "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2006,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 2562208000,
+        "bondRedemptionFundYen": 1178676000,
+        "otherSpecificPurposeFundsYen": 8012156000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+            "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -165,6 +651,87 @@
         }
       ],
       "notes": "財政力指数0.51・実質公債費比率15.3%・将来負担比率142.5%・経常収支比率94.6%を総務省市町村決算カードより新規登録。予算・決算額・市債・基金等の他区分は今回未調査のため未登録（別バッチで対応）。"
+    },
+    "budget": {
+      "fiscalYear": 2007,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 58040377000,
+      "totalExpenditureYen": 56668465000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+          "sourceTitle": "総務省「平成19年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2007,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 70858341000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+            "sourceTitle": "総務省「平成19年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2007,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 2562208000,
+        "bondRedemptionFundYen": 1075192000,
+        "otherSpecificPurposeFundsYen": 7445845000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+            "sourceTitle": "総務省「平成19年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
@@ -189,6 +756,87 @@
         }
       ],
       "notes": "財政力指数0.53・実質公債費比率14.7%・将来負担比率137.4%・経常収支比率94.2%を総務省市町村決算カードより新規登録。予算・決算額・市債・基金等の他区分は今回未調査のため未登録（別バッチで対応）。"
+    },
+    "budget": {
+      "fiscalYear": 2008,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 58158783000,
+      "totalExpenditureYen": 56859095000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+          "sourceTitle": "総務省「平成20年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        }
+      ],
+      "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2008,
+      "municipalBondIssuanceYen": null,
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 71370425000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省市町村決算カードの「地方債現在高」（普通会計ベース、決算年度末時点）。企業会計（水道・下水道事業債等）は含まない可能性がある（カード上に明記が無く要確認）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+            "sourceTitle": "総務省「平成20年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
+      "municipalBondIssuanceStatus": null,
+      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceValueType": null
+    },
+    "fund": {
+      "fiscalYear": 2008,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 2562208000,
+        "bondRedemptionFundYen": 1088372000,
+        "otherSpecificPurposeFundsYen": 7565288000,
+        "totalYen": null,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+            "sourceTitle": "総務省「平成20年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-17",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          }
+        ]
+      },
+      "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     }
   },
   {
