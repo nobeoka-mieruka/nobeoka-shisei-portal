@@ -281,6 +281,37 @@
       "accessType": "public_metadata",
       "lastCheckedAt": "2026-08-17",
       "nextAction": "所蔵館（宮崎県立図書館・宮崎県公文書館等）を特定できないか追加調査する。"
+    },
+    {
+      "id": "finding-010",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-10",
+      "title": "日本の歴代市長第3巻（1985年）延岡市個人略歴 房野博（14〜16代）",
+      "publicationYear": 1985,
+      "publisher": "歴代知事編纂会",
+      "ndlBibUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772",
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11897508/1/361",
+      "komaNumber": 361,
+      "pageNumber": null,
+      "searchKeyword": "房野博",
+      "relevantMayor": [
+        "mayor-11"
+      ],
+      "relevantYears": [
+        1967,
+        1978
+      ],
+      "extractedFact": "房野博の在任期間（14〜16代通算）＝昭和42年1月23日〜昭和53年10月5日。退任日は既存データと完全一致。本市史上初の連続3期11年を務めたとの記述あり。",
+      "originalText": "任期 昭和四十二年一月二十三日〜五十三年十月五日",
+      "interpretation": "退任日（1978-10-05）は独立2資料（延岡市公式年表・本書）で一致し、confidence Aに昇格。就任日は1日差（1967-01-22 既存 / 01-23 本書）で未確定のまま。退任理由の具体的事情はこの略歴にも記載なし。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1951-1970年)"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "退任理由（辞職の具体的事情）は延岡市議会史・広報のべおか・新聞資料で追加調査する。"
     }
   ],
   "disputedFacts": [
