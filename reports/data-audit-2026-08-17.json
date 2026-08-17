@@ -1,0 +1,106 @@
+{
+  "auditDate": "2026-08-17",
+  "method": "既存のvalidate:*スクリプト群・blockedTaskClassification.json・TASKS.md/docs/session-handoff.mdの記録を集計する方式（重複実装を避けるため、Phase 1をゼロから再実施していない）",
+  "validatorResults": {
+    "validate:data": { "errors": 0, "warnings": 14, "note": "warningsは歴代市長の任期空白13件（1937-1994年、既知・BLOCKED TASK-045）とquestionApproach推奨語彙の軽微なゆらぎ1件、いずれも既存と同数" },
+    "validate:finance": { "errors": 0, "warnings": 0, "info": 8, "note": "infoはすべて据え置き値の確認推奨・年度間整合一致の通知（異常ではない）" },
+    "validate:sources": { "errors": 0, "warnings": 0, "info": 52, "note": "infoはWikipedia等の二次資料使用・Wayback Machine経由の公式資料使用の通知のみ" },
+    "validate:completeness": { "errors": 0, "warnings": 0, "info": 0 },
+    "validate:freshness": { "errors": 0, "warnings": 0 },
+    "validate:political-funds": { "errors": 0, "warnings": 0, "info": 2 }
+  },
+  "openBlockedItems": [
+    {
+      "taskId": "TASK-004",
+      "title": "議案賛否データの投入・品質向上（voteMethod/committee残り24件）",
+      "status": "WAITING_EXTERNAL",
+      "reasonCode": "SOURCE_NOT_PUBLISHED",
+      "detail": "令和8年5月臨時会・6月定例会の会議録が未公開のため確認不能。billVotes総数1,177件のうちこの24件のみ。",
+      "reopenCondition": "会議録公開後、既存の日次自動更新ワークフローが検知",
+      "priority": "P0（データそのものは登録済み、フィールド充実のみ残存）"
+    },
+    {
+      "taskId": "TASK-016B",
+      "title": "政治資金収支報告書（pf-org-001＝市長の後援会、令和7年分）",
+      "status": "WAITING_EXTERNAL",
+      "reasonCode": "SOURCE_NOT_PUBLISHED",
+      "detail": "宮崎県選挙管理委員会の公表が例年11月頃のため未公表",
+      "reopenCondition": "令和8年11月頃に再確認",
+      "priority": "P1"
+    },
+    {
+      "taskId": "TASK-032",
+      "title": "現職議員の経歴（学歴・職歴）データ拡充",
+      "status": "MANUAL_REVIEW（実質ほぼ解決）",
+      "reasonCode": "SOURCE_NOT_FOUND",
+      "detail": "2026-08-16に選挙公報PDFで17名全員を再調査済み。フル経歴5名・当選回数自己申告4名・年齢のみ2名・記載欄自体なし6名まで確定。残りは選挙公報という情報源自体に記載がない",
+      "reopenCondition": "新しい情報源（本人サイト新設等）が見つかった場合のみ",
+      "priority": "P2（実質的にresearch_exhausted）"
+    },
+    {
+      "taskId": "TASK-045",
+      "title": "歴代市長の任期空白（13件、1937〜1994年）",
+      "status": "MANUAL_REVIEW",
+      "reasonCode": "MANUAL_REVIEW_REQUIRED",
+      "detail": "NDL（国立国会図書館）個人送信サービスへのログインが必要な資料（延岡市史等）でのみ前進見込み",
+      "reopenCondition": "ユーザーによるNDLログイン後の資料本文確認",
+      "priority": "P1"
+    },
+    {
+      "taskId": "TASK-046",
+      "title": "1999年以前の市議選候補者別得票結果",
+      "status": "RESEARCH_EXHAUSTED",
+      "reasonCode": "SOURCE_NOT_FOUND",
+      "detail": "NDLサーチ全文検索で書誌的手がかり（延岡市史下巻等）を発見済みだが本文未確認",
+      "reopenCondition": "NDLログイン後の本文確認",
+      "priority": "P2"
+    },
+    {
+      "taskId": "TASK-047",
+      "title": "koho-2010-04（広報のべおか2010年4月号）PDF構造破損",
+      "status": "RESEARCH_EXHAUSTED",
+      "reasonCode": "SOURCE_UNAVAILABLE",
+      "detail": "現行サイト・Wayback最古スナップショット（2011年）いずれも同一破損状態。OCR環境なし",
+      "reopenCondition": "OCR環境の用意、または延岡市への情報公開請求",
+      "priority": "P3"
+    },
+    {
+      "taskId": "TASK-074",
+      "title": "歴代市長データ収集（mayor-04〜14）NDL一次資料調査",
+      "status": "MANUAL_REVIEW",
+      "reasonCode": "MANUAL_REVIEW_REQUIRED",
+      "detail": "『延岡市史』『延岡市勢要覧』等がNDL個人送信サービス対象と判明済み、本文未確認",
+      "reopenCondition": "ユーザーによるNDLログイン後の資料本文確認",
+      "priority": "P1"
+    }
+  ],
+  "waybackInvestigation": {
+    "catalogFile": "reports/wayback-display-php-catalog.json",
+    "totalCatalogued": 2966,
+    "priorityBreakdown": { "P0": 269, "P0_highConfidenceMayorTransition": 42, "P1_financeDisclosureCandidate": 361, "P3_unclassified": 2330 },
+    "playbackBackendStatus": "2026-08-17時点で引き続き503 Service Unavailable（2026-08-16から継続中、CDX APIは200で正常）",
+    "checkedAt": "2026-08-17T00:00:00+09:00note-jst-approx",
+    "action": "過剰アクセスを避けるため連続リトライはせず、次回セッション開始時に1回だけ再確認する運用を継続"
+  },
+  "newFindingsThisSession": [
+    {
+      "topic": "FY2000（平成12年度）財政データ",
+      "finding": "総務省の決算カードオンライン公開（soumu.go.jp/iken/zaisei/card.html）の最古年度は市町村別・市区町村別いずれも平成13年度（FY2001）であることを確認した。平成12年度以前はオンライン経路に存在しない（CD-ROM等の物理媒体のみの可能性）。",
+      "action": "FY2000をこの経路で取得する試みは終了。物理資料調査（図書館等）が必要な場合のみ再開",
+      "dataChange": "なし（推測データは追加していない）"
+    }
+  ],
+  "questionCountDefinitions": {
+    "note": "会議録確認済み一般質問397件と質問項目1,470件は既に別指標として画面上で区別済み（2026-08-10 TASK-054〜、2026-08-15 TASK-075で表示矛盾を解消）。今回の監査で新たな不整合は発見されなかった。"
+  },
+  "dataAvailabilityVocabulary": {
+    "note": "src/lib/dataAvailabilityStatus.ts（5区分：confirmed/not_collected/under_review/unavailable/unknown）とsrc/lib/evidenceAvailability.ts（9区分）が既に導入済み。ユーザー指示のPhase 2要件は既存実装で充足していることを確認した。"
+  },
+  "summary": {
+    "totalValidatorErrors": 0,
+    "openBlockedTasks": 7,
+    "allBlockedTasksHaveReopenConditions": true,
+    "newDataAddedThisAudit": 0,
+    "conclusion": "既存の自動検証・BLOCKED管理・出典管理・0件区分の仕組みが機械可読に整備されており、今回の監査で新規のデータ破損・矛盾・未分類の0件表示は発見されなかった。残存する未解決7件はいずれも外部要因（会議録未公開・NDLログイン・資料非公開）が理由であり、サイト側の実装不備ではない。"
+  }
+}

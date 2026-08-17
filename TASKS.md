@@ -8490,3 +8490,37 @@ validate-content 0/0）すべて成功。`dist/timeline/2001/index.html`を
 次はPriority 3（歴代市長関連の空白項目、ただし13件の任期空白は短期間の
 職務代理者期間の可能性が高く一次資料がNDLログイン必須でBLOCKED済みのため
 低優先）またはPriority A（Wayback P0高信頼度42件の代替資料調査）へ進む。
+
+【2026-08-17続き・全体監査＋Priority A/FY2000調査（コミット後述）】ユーザーから
+大規模改善指示（22フェーズ）を受け、まず`docs/session-handoff.md`・`TASKS.md`を確認した
+ところ、指示内容の大部分（0件の意味統一・Wayback台帳化・出典管理統一・一般質問件数整合・
+data-status強化等）が既存実装で充足済みであることを確認した。CLAUDE.mdの重複実装回避方針に
+従い、以下2点のみ本セッションで前進させた。
+
+- **Priority A（Wayback P0高信頼度42件）**：`web.archive.org/web/...`再生バックエンドを
+  再確認したが、2026-08-16から継続して503 Service Unavailableのままだった（CDX APIは200で
+  正常）。過剰アクセスを避けるため連続リトライはせず、次回セッション開始時に1回だけ再確認する
+  方針を継続する。内容確認（PHASE 8〜10）は今回も未着手。
+- **FY2000（平成12年度）財政データ**：総務省「決算カード」オンライン公開ページ
+  （`soumu.go.jp/iken/zaisei/card.html`）を確認し、市町村別・市区町村別いずれも最古年度が
+  平成13年度（FY2001）であることを確定した。平成12年度以前はオンライン経路に存在しない
+  （CD-ROM等の物理媒体のみの可能性）。これにより「FY2000は総務省側の別経路が必要」という
+  従来の未解決事項は、**この経路では取得不可能**という結論で一区切りとする（推測データの
+  追加なし。`archiveFiscalYears.json`への新規エントリ追加も無し＝存在しないデータを
+  nullで登録することによる誤解を避けた）。
+- **監査レポート**：`reports/data-audit-2026-08-17.json`・`.md`を新規作成し、全`validate:*`
+  結果（errors=0で統一）、BLOCKED 7件の理由・再開条件、Wayback障害状況、FY2000の結論を
+  機械可読・人間可読の両形式でまとめた。
+
+新規データ追加は無し（FY2000は「取得不可能」という否定的だが確定的な結論のみ、Wayback内容
+確認は障害により未着手）。
+
+検証：`validate:data`（errors=0, warnings=14=既存と同数）、`validate:finance`
+（errors=0, warnings=0, info=8）、`validate:sources`（0/0/52）、`validate:completeness`
+（0/0/0）、`validate:freshness`（0/0）、`validate:political-funds`（0/0/2）すべて成功
+（`reports/`はビルド対象外のため上記以外の検証への影響なし）。
+
+残課題：Wayback P0高信頼度42件の内容確認（Wayback復旧待ち）、Priority 3歴代市長任期空白
+13件・mayor-04〜14の政策データ（NDLログイン待ち）。次回セッション開始時、まずWayback
+再生バックエンドの復旧を1回確認してから、復旧していればPriority A、していなければ
+ユーザーへNDLログイン状況を確認したうえでPriority 3へ進む。

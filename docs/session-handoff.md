@@ -1,7 +1,61 @@
-# セッション引き継ぎメモ（2026-08-16更新・調査・データ充実フェーズ）
+# セッション引き継ぎメモ（2026-08-17更新・全体監査＋Priority A/FY2000調査）
 
 このファイルは新しいセッションほど上に追記する運用です。2026-08-10（Phase 16/17）以前の
 記録は下に残したまま、最新の状態を以下に記載します。過去の記録を削除・改変してはいけません。
+
+## 2026-08-17：ユーザー指示の大規模改善指示（22フェーズ）を受けた全体監査＋Priority A/FY2000調査
+
+ユーザーから「延岡市政見える化ポータル 次期改善フェーズ実行指示」（0件の意味統一・Wayback
+Machine完全調査・歴代市長データ再構築・財政データ完全化・一般質問件数整合・出典管理統一・
+data-status強化等、22フェーズ）を受けた。作業開始前に`git status`（クリーン、
+`.claude/settings.local.json`のみ変更でコミット対象外）・直近コミット（FY2001-2008財政データ
+追加が直前）・`TASKS.md`・`PROJECT_PLAN.md`・本メモを確認したところ、指示内容の大部分が
+既存実装（`src/lib/dataAvailabilityStatus.ts`・`evidenceAvailability.ts`の0件区分語彙、
+`reports/wayback-display-php-catalog.json`のWayback台帳2,966件、`sourceRefs`構造の出典管理、
+`/data-status`の品質ダッシュボード、397件/1,470件の一般質問件数分離表示等）で既に充足済み
+であることを確認した。CLAUDE.mdの重複実装回避方針に従い、ゼロからの再実装はせず、TASKS.md
+末尾が示す次の一手（Priority A＝Wayback P0高信頼度42件の内容確認、Priority 3＝歴代市長
+任期空白）から継続した。
+
+### 実施内容
+
+- **Priority A（Wayback P0高信頼度42件）**：`web.archive.org/web/...`再生バックエンドを
+  `curl`で複数回再確認したが、2026-08-16から継続して503 Service Unavailableのままだった
+  （CDX APIは200で正常、再生バックエンドのみ不調）。過剰アクセスを避けるため連続リトライは
+  せず、次回セッション開始時に1回だけ再確認する方針を継続した。内容確認は今回も未着手。
+- **FY2000（平成12年度）財政データ**：総務省「決算カード」オンライン公開ページ
+  （`soumu.go.jp/iken/zaisei/card.html`）をWebFetchで確認し、市町村別・市区町村別いずれも
+  最古年度が平成13年度（FY2001）であることを確定した。「FY2000は総務省側の別経路が必要」
+  という従来の未解決事項に対し、この経路では取得不可能という結論を得た（推測データの追加
+  なし、`archiveFiscalYears.json`への新規null値エントリも追加していない）。
+- **監査レポート新規作成**：`reports/data-audit-2026-08-17.json`・`.md`。全`validate:*`
+  結果（errors=0で統一）、BLOCKED 7件（TASK-004/016B/032/045/046/047/074）の理由・再開条件、
+  Wayback障害状況、FY2000の結論を集計した。新規のデータ破損・矛盾・未分類の0件表示は
+  発見されなかった。
+
+### 検証結果
+
+`validate:data`（errors=0, warnings=14=既存と同数）、`validate:finance`（errors=0,
+warnings=0, info=8）、`validate:sources`（0/0/52）、`validate:completeness`（0/0/0）、
+`validate:freshness`（0/0）、`validate:political-funds`（0/0/2）すべて成功。データファイルの
+変更は無いため`typecheck`/`lint`/`build`への影響は無いが、コミット前に再実行して確認する。
+
+### コミット・デプロイ
+
+`TASKS.md`・本メモ・`reports/data-audit-2026-08-17.{json,md}`の追加のみ（コード・データ
+ファイルの変更は無し）。コミットIDは次回追記。
+
+### 次回開始地点
+
+1. `git status`／`git log --oneline -10`／`origin/main`との差分
+2. Wayback Machine再生バックエンドの復旧を1回だけ確認
+   （`curl -o /dev/null -w "%{http_code}" https://web.archive.org/web/<timestamp>/<url>`）
+3. 復旧していればPriority A（`reports/wayback-display-php-catalog.json`の
+   `high-confidence-mayor-transition`42件、`reviewStatus`が`temporarily_unavailable`または
+   `not_reviewed`のもの）の内容確認（claude-in-chromeまたはWebFetch、本文取得→現在DBと照合）
+4. 復旧していなければユーザーへNDLログイン状況を確認し、可能であればPriority 3
+   （TASK-045・074の歴代市長任期空白・mayor-04〜14資料）へ進む
+5. 上記いずれも進められない場合は、TASK-004・016Bの外部資料公開状況を確認する
 
 ## 2026-08-16：残存調査タスク集中処理（TASK-096〜125、Phase141続き）
 
