@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-08-17T06:36:06.023Z",
+  "method": "既存のvalidate-sources.mjsドメイン分類を出典品質A〜Eへ拡張。リンク切れ判定は既存のexternal-link-check.jsonキャッシュを再利用（新規ネットワークアクセスなし）。",
+  "overallByGrade": {
+    "A": 276,
+    "B": 0,
+    "C": 0,
+    "D": 126,
+    "E": 12
+  },
+  "byCategory": {
+    "archiveMayors": {
+      "A": 17,
+      "B": 0,
+      "C": 0,
+      "D": 12,
+      "E": 5,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 14
+    },
+    "archiveMayorTerms": {
+      "A": 31,
+      "B": 0,
+      "C": 0,
+      "D": 26,
+      "E": 4,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 30
+    },
+    "members": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 26
+    },
+    "formerMembers": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 58
+    },
+    "archiveMemberProfiles": {
+      "A": 59,
+      "B": 0,
+      "C": 0,
+      "D": 58,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 84
+    },
+    "billVotes": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 1177
+    },
+    "archiveCouncilDocuments": {
+      "A": 13,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 13
+    },
+    "committees": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 6
+    },
+    "electionResults": {
+      "A": 9,
+      "B": 0,
+      "C": 0,
+      "D": 16,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 25
+    },
+    "civicTimelineEvents": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 147
+    },
+    "archiveFiscalYears": {
+      "A": 145,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 3,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 26
+    },
+    "politicalFundOrganizations": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 21
+    },
+    "archivePolicies": {
+      "A": 2,
+      "B": 0,
+      "C": 0,
+      "D": 14,
+      "E": 0,
+      "recordsWithoutOwnSourceRefs": 0,
+      "totalRecords": 16
+    }
+  },
+  "recordsWithoutOwnSourceRefsSample": [],
+  "recordsWithoutOwnSourceRefsTotal": 0
+}
