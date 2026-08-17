@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-17T22:11:01.271Z",
-  "totalItems": 123,
+  "generatedAt": "2026-08-17T22:15:41.711Z",
+  "totalItems": 124,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 11,
     "relationCandidate": 6,
-    "sourceInsufficient": 77,
+    "sourceInsufficient": 78,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -317,6 +317,12 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-10",
       "detail": "出典「折小野良一 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-12",
+      "detail": "出典「日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年）延岡市 個人略歴（17・18代）」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",
