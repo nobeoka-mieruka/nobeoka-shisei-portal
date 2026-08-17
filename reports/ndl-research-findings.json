@@ -312,6 +312,39 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-18",
       "nextAction": "退任理由（辞職の具体的事情）は延岡市議会史・広報のべおか・新聞資料で追加調査する。"
+    },
+    {
+      "id": "finding-011",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-10",
+      "title": "日本の歴代市長第3巻（1985年）延岡市個人略歴 大島文彦（4代）・三浦虎雄（5・6代）",
+      "publicationYear": 1985,
+      "publisher": "歴代知事編纂会",
+      "ndlBibUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772",
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11897508/1/359",
+      "komaNumber": 359,
+      "pageNumber": null,
+      "searchKeyword": "大島文彦",
+      "relevantMayor": [
+        "mayor-06",
+        "mayor-07"
+      ],
+      "relevantYears": [
+        1937,
+        1941,
+        1946
+      ],
+      "extractedFact": "大島文彦（4代）の就任日＝昭和12年9月26日。三浦虎雄（5・6代通算）の任期＝昭和16年10月22日〜昭和21年3月6日。",
+      "originalText": "大島文彦：任期 昭和十二年九月二十六日〜／三浦虎雄：任期 昭和十六年十月二十二日〜二十一年三月六日",
+      "interpretation": "両名とも既存archiveMayorTermsの日付（1937-09-26、1941-10-22、1946-03-06）と月日単位で完全一致。独立2資料一致によりconfidence Aへ昇格。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1930-1950年)"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "なし（当該日付は確定扱いとする）。"
     }
   ],
   "disputedFacts": [
