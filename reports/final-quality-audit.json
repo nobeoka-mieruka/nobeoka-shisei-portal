@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-08-17T00:00:00+09:00",
+  "scope": "TASK-080〜092で完了済みの監査・修正を再実行せず、docs/session-handoff.md・TASKS.md・既存reports・既存sourceInventoryを基準に未解決部分のみを対象とした（ユーザー指示）。NDL・Wayback・未公開資料を必要としない範囲に限定。",
+  "totalIssues": 3,
+  "fixed": 3,
+  "blocked": 0,
+  "needsSource": 0,
+  "needsManualReview": 0,
+  "brokenLinks": {
+    "internal": 0,
+    "external": 12,
+    "note": "外部リンク切れ12件は既存のexternal-link-check.jsonキャッシュから（既存BLOCKED/既知のWayback障害由来、新規0件）。内部リンクはbuildのvalidate-content.mjsで継続的に0件を確認。"
+  },
+  "missingSources": 0,
+  "orphanRecords": 0,
+  "duplicateCandidates": 0,
+  "findings": [
+    {
+      "id": "finding-01",
+      "priority": "Priority 1（未完成表現監査）",
+      "category": "内部ジャーゴンの公開UI漏れ",
+      "severity": "medium",
+      "description": "前回セッション（TASK-085）で追加したarchiveMayors.jsonの5レコード（mayor-05/06/09/10/13）のnotesフィールドに、内部の作業記録文『TASK-085：既存sourceRefs（Wikipedia、needsReview）のnotesに...』がそのまま残っており、/mayors/:slug詳細ページの公開UIに表示されていた。",
+      "affectedFiles": ["src/data/archiveMayors.json"],
+      "affectedRecords": ["mayor-05", "mayor-06", "mayor-09", "mayor-10", "mayor-13"],
+      "outcome": "fixed",
+      "fixDescription": "内部作業記録文を削除し、事実部分（既存の出典説明）のみを残した。"
+    },
+    {
+      "id": "finding-02",
+      "priority": "Priority 1（未完成表現監査）",
+      "category": "内部ID参照の可読性",
+      "severity": "low",
+      "description": "前回セッションで追加したcivicTimelineEvents.jsonの3レコード（civic-002/005/019）のnotesが、既存の書き方の慣例（内部ID＋人名を併記）と異なり、内部ID（mayor-04等）のみを裸で参照していた。/historyページの公開UIに表示される。",
+      "affectedFiles": ["src/data/civicTimelineEvents.json"],
+      "affectedRecords": ["civic-002", "civic-005", "civic-019"],
+      "outcome": "fixed",
+      "fixDescription": "既存の慣例（例：『mayor-07（三浦虎雄）』）に合わせ、各内部IDに人名を併記した。"
+    },
+    {
+      "id": "finding-03",
+      "priority": "Priority 8-10（出典品質・孤立sourceRef監査ツール）",
+      "category": "監査スクリプトの誤検知",
+      "severity": "low",
+      "description": "新規作成したscripts/generate-final-quality-audit.mjsの初版が、sourceRefs配列以外の出典スキーマ（billVotes.jsonのresultDocumentUrl、members.jsonのsourceUrl、politicalFundOrganizations.jsonのofficialListUrl、formerMembers.jsonのsourceNote、archiveFiscalYears.jsonのサブオブジェクト内sourceRefs等）を認識できず、1,308件を誤って「出典なし」と誤検知した。",
+      "affectedFiles": ["scripts/generate-final-quality-audit.mjs"],
+      "affectedRecords": [],
+      "outcome": "fixed",
+      "fixDescription": "各ファイルの実際の出典スキーマを確認し、hasOwnSourceRefs()の判定ロジックを拡張。再実行後は誤検知0件（実データの変更なし、スクリプトのみ修正）。"
+    }
+  ],
+  "auditResultsByCategory": {
+    "formerMembers": "0件（重複0、orphan0、current/former混同0）",
+    "generalQuestions": "0件（orphan0、397/1470件の集計ロジックは正しいことを再確認）",
+    "billsOrdinances": "0件（重複billNumber0）",
+    "committees": "0件（memberId orphan0、委員長・副委員長全委員会で確認済み）",
+    "elections": "0件（既存の少数の未確認値〔投票率1件・有権者数2件〕はUIで「確認中」と適切に表示済み、新規調査は今回対象外）",
+    "civicTimeline": "0件（missing year/sourceRefs 0、重複0）",
+    "sourceQuality": "A=276 B=0 C=0 D=126 E=12（E=既知のリンク切れ、新規0件）",
+    "searchIndex": "対象カテゴリすべて索引化済み。市政年表がtype:\"page\"（汎用ラベル）である点は既知の低優先度課題として2026-08-14時点で記録済み、今回新規ではない",
+    "internalLinks": "0件（build時のvalidate-content.mjsで継続確認）",
+    "mobileA11y": "今回変更したページ（DataStatusPage・MayorDetailPage等）はレスポンシブ・aria-hidden等の既存パターンを踏襲、新規問題0件"
+  },
+  "test": { "result": "26/26 success" },
+  "build": { "routes": "2128/2128", "validateSeo": "0/0", "validateContent": "0/0" }
+}
