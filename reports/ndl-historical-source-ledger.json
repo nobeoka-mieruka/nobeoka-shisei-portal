@@ -439,12 +439,36 @@
       "sourceType": "primary",
       "lastCheckedAt": "2026-08-17",
       "notes": "TASK-101（並行調査）。NDLサーチ書誌検索「延岡市議会会議録」で234件ヒット（ログイン不要）。うち3件の総合目録（『宮崎県公共図書館郷土資料総合目録 第2集』『宮崎県郷土資料総合目録』『全国公共図書館逐次刊行物総合目録 第6巻（九州編）』）の本文スニペットから、次を新規確認：(1)延岡市議会事務局編の原本が昭和32年（1957年、第17回〜）から存在、(2)宮崎県立図書館に「延岡市議会会議録写」（手書き複写）として昭和34〜48年（1959〜1973年）分60冊、および「第1回〜第20回」61冊が所蔵されている旨の記述。既存TASK-074のsourceInventory（「個別会期、例：昭和40年第17〜19回等」）を裏付け・precise化する情報。原本・複写いずれも紙媒体でNDLには所蔵なし（デジタル化資料なし）。現物閲覧は宮崎県立図書館への来館が必要。あわせて、2021年以降の会期（VOL.8〜16、延岡市議会発行）はNDLに書誌登録されているが紙の図書扱いでデジタル化なし（現行のkensakusystem.jpでのオンライン公開とは別系統）。ログインは試みていない（書誌検索のみで完結）。"
+    },
+    {
+      "id": "ndl-src-16",
+      "title": "延岡市決算書並意見書（昭和20・25〜39年度、延岡市監査委員事務局編、17冊）",
+      "author": "延岡市監査委員事務局 編",
+      "publisher": "延岡市",
+      "publishedYear": null,
+      "ndlBibId": null,
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%BB%B6%E5%B2%A1%E5%B8%82%E6%B1%BA%E7%AE%97",
+      "page": null,
+      "category": "finance",
+      "relatedMayorIds": [],
+      "relatedYears": [
+        1945,
+        1964
+      ],
+      "dataTypes": [
+        "finance"
+      ],
+      "accessStatus": "library_only",
+      "status": "metadata_only",
+      "sourceType": "primary",
+      "lastCheckedAt": "2026-08-17",
+      "notes": "TASK-102（並行調査）。NDLサーチで書誌検索「延岡市決算」は0件（NDL未所蔵）だが、全文検索（デジタル資料）で『宮崎県行政資料所在調査目録』の本文スニペットがヒットし、「延岡市決算書並意見書　昭和20-39年度　延岡市監査委員事務局編　17冊」（昭和20・25〜39年＝1945・1950〜1964年分）の所在記録を新規確認した。所蔵機関は目録名から宮崎県内の公文書・行政資料調査対象と推定されるが、具体的な所蔵館（宮崎県立図書館か公文書館か）は今回のスニペットのみでは特定できていない。archiveFiscalYears.jsonの欠損年度（昭和期）を埋める一次資料候補として価値が高い。ログインは試みていない（書誌・全文検索のみ）。"
     }
   ],
   "summary": {
-    "totalSources": 15,
+    "totalSources": 16,
     "byStatus": {
-      "metadata_only": 6,
+      "metadata_only": 7,
       "login_required": 2,
       "readable": 0,
       "reviewed": 3,

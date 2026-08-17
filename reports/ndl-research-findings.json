@@ -15,8 +15,12 @@
       "komaNumber": 103,
       "pageNumber": "74",
       "searchKeyword": "歴代市長",
-      "relevantMayor": ["mayor-08"],
-      "relevantYears": [1947],
+      "relevantMayor": [
+        "mayor-08"
+      ],
+      "relevantYears": [
+        1947
+      ],
       "extractedFact": "第8代市長（佐藤千吉郎）から、それまでの市会による間接選出に代わり、市長の直接公選制が採られた。",
       "originalText": "第七代…氏、第五、第六代市長氏（三浦虎雄氏）の後は、市会に基く条例規則の変遷を経て、（中略）第八代市長には佐藤千吉郎氏が選ばれて、（中略）市長の直接公選制が採られ、そのうち他第一、第二…",
       "interpretation": "地方自治法（1947年4月17日公布・施行）による全国的な首長公選制導入と時期が一致する。延岡市固有の記述として一次資料で直接確認した。",
@@ -39,14 +43,32 @@
       "komaNumber": 103,
       "pageNumber": "74",
       "searchKeyword": "歴代市長",
-      "relevantMayor": ["mayor-04", "mayor-05", "mayor-06", "mayor-07", "mayor-08"],
-      "relevantYears": [1933, 1937, 1941, 1942, 1946, 1947, 1948, 1952, 1956],
+      "relevantMayor": [
+        "mayor-04",
+        "mayor-05",
+        "mayor-06",
+        "mayor-07",
+        "mayor-08"
+      ],
+      "relevantYears": [
+        1933,
+        1937,
+        1941,
+        1942,
+        1946,
+        1947,
+        1948,
+        1952,
+        1956
+      ],
       "extractedFact": "初代〜十代の市長氏名・順序：初代仲田又次郎／二代鈴木憲太郎／三代鈴木憲太郎（再任）／四代大島文彦／五代三浦虎雄／六代三浦虎雄（再任）／七代鈴木憲太郎（三任）／八代佐藤千吉郎／九代仲田又次郎（再任）／十代三浦虎雄（三任）。",
       "originalText": "（表形式、コマ番号103の目視確認。氏名・代数の列のみ。自・至年月日は本findingでは未転記、finding-003参照）",
       "interpretation": "既存 archiveMayorTerms.json の10任期（mayor-04-term-01/02、mayor-05-term-01/02/03、mayor-06-term-01、mayor-07-term-01/02/03、mayor-08-term-01）と、順序・人物とも完全に一致する。氏名面ではA相当の裏付けが得られた。",
       "confidence": "A",
       "verificationStatus": "verified",
-      "crossVerifiedSources": ["既存archiveMayorTerms.json（Wikipedia等、TASK-045/074で個別確認済み）"],
+      "crossVerifiedSources": [
+        "既存archiveMayorTerms.json（Wikipedia等、TASK-045/074で個別確認済み）"
+      ],
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-17",
       "nextAction": "十一代〜十四代（1956年以降）の氏名・順序も同様に確認する。"
@@ -63,8 +85,13 @@
       "komaNumber": 103,
       "pageNumber": "74",
       "searchKeyword": "歴代市長（表内の目視確認、全文検索は使用せず）",
-      "relevantMayor": ["mayor-07"],
-      "relevantYears": [1941, 1942],
+      "relevantMayor": [
+        "mayor-07"
+      ],
+      "relevantYears": [
+        1941,
+        1942
+      ],
       "extractedFact": "候補値（未確定）：生年月日＝明治16年(1883)5月19日／自昭和16年(1941)10月23日／至昭和17年(1942)4月5日。",
       "originalText": "明治一六年五月一九日生／自昭和一六年一〇月二三日／至昭和一七年四月五日（コマ103、ビューア84%ズームでの目視読み取り）",
       "interpretation": "既存 mayor-07-term-01（1941-10-22〜1942-04-25）と月は一致するが日が不一致（23日/5日 vs 22日/25日）。列の代数（第五代と推定）自体も見出し行との対応をズレなく確認できていない。1文字誤読の可能性が高いため既存データの上書きは行わない。",
@@ -87,8 +114,15 @@
       "komaNumber": 8,
       "pageNumber": null,
       "searchKeyword": "市長",
-      "relevantMayor": ["mayor-04", "mayor-06"],
-      "relevantYears": [1937, 1941, 1949],
+      "relevantMayor": [
+        "mayor-04",
+        "mayor-06"
+      ],
+      "relevantYears": [
+        1937,
+        1941,
+        1949
+      ],
       "extractedFact": "本書の編纂は大島文彦市長（第4代・在任1937〜1941年）の代に計画され、仲田又次郎市長（第4代・第2期、当時在任中）の下で1949年に刊行された。",
       "originalText": "「最初之が編纂を計画した市長大島［文彦］」（コマ8）／末尾署名「延岡市長　仲田又次郎」（コマ8）",
       "interpretation": "civic-149として登録済み。",
@@ -112,13 +146,20 @@
       "pageNumber": null,
       "searchKeyword": "延岡市議会会議録",
       "relevantMayor": [],
-      "relevantYears": [1957, 1973],
+      "relevantYears": [
+        1957,
+        1973
+      ],
       "extractedFact": "延岡市議会事務局編の会議録原本が昭和32年（1957年、第17回〜）から存在。宮崎県立図書館に手書き複写（昭和34〜48年＝1959〜1973年分60冊）および第1回〜第20回分61冊が所蔵。全て紙媒体・NDL未所蔵・デジタル化なし。",
       "originalText": "『宮崎県公共図書館郷土資料総合目録 第2集』本文スニペット：「延岡市議会会議録写M3184昭和34～48年60冊…延岡市議会々議録第1回～第20回61冊」／『全国公共図書館逐次刊行物総合目録 第6巻（九州編）』：「〔延岡市議会〕会議録延岡昭32-延岡市議会会議録写宮崎昭34-」",
       "interpretation": "総合目録3件の書誌スニペットからの間接確認であり、現物そのものは未閲覧（来館必須）。既存TASK-074のsourceInventory記載を年代・冊数の面でprecise化した。",
       "confidence": "C",
       "verificationStatus": "verified",
-      "crossVerifiedSources": ["宮崎県公共図書館郷土資料総合目録 第2集", "宮崎県郷土資料総合目録", "全国公共図書館逐次刊行物総合目録 第6巻（九州編）"],
+      "crossVerifiedSources": [
+        "宮崎県公共図書館郷土資料総合目録 第2集",
+        "宮崎県郷土資料総合目録",
+        "全国公共図書館逐次刊行物総合目録 第6巻（九州編）"
+      ],
       "accessType": "public_metadata",
       "lastCheckedAt": "2026-08-17",
       "nextAction": "宮崎県立図書館OPACで所蔵詳細（請求記号・配架場所）を確認できないか調査する。現物閲覧は来館が必要なためこれ以上は前進しない。"
@@ -135,14 +176,20 @@
       "komaNumber": 103,
       "pageNumber": "74",
       "searchKeyword": "歴代市長（表内目視）",
-      "relevantMayor": ["mayor-04"],
-      "relevantYears": [1893],
+      "relevantMayor": [
+        "mayor-04"
+      ],
+      "relevantYears": [
+        1893
+      ],
       "extractedFact": "仲田又次郎の生年月日＝明治26年(1893)7月25日。",
       "originalText": "明治二六年七月二五日生（コマ103、ビューア60〜148%ズームでの目視読み取り）",
       "interpretation": "既存birthDate（1893-07-25、コトバンク経由でpartiallyVerifiedだった値）と完全一致。独立した一次資料での裏付けが得られた。",
       "confidence": "A",
       "verificationStatus": "verified",
-      "crossVerifiedSources": ["コトバンク（20世紀日本人名事典・日本人名大辞典+Plus）"],
+      "crossVerifiedSources": [
+        "コトバンク（20世紀日本人名事典・日本人名大辞典+Plus）"
+      ],
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-17",
       "nextAction": "同列の就任・退任年月日（初代1933年・第9代1948〜1952年）も再読を試みる。"
@@ -159,14 +206,21 @@
       "komaNumber": 103,
       "pageNumber": "74",
       "searchKeyword": "歴代市長（表内目視）",
-      "relevantMayor": ["mayor-09"],
-      "relevantYears": [1892, 1956],
+      "relevantMayor": [
+        "mayor-09"
+      ],
+      "relevantYears": [
+        1892,
+        1956
+      ],
       "extractedFact": "青木善祐の生年月日＝明治25年(1892)11月1日。第11代として1956年に就任（表内で確認、初めて第10代＝三浦虎雄term3の次に位置することを確認し、1956年以降＝第2優先の調査対象へ到達）。",
       "originalText": "明治二五年一一月一日生（コマ103、ビューア60〜148%ズームでの目視読み取り）",
       "interpretation": "既存birthDate（1892-11-01、WikipediaでneedsReviewだった値）と完全一致。当該Wikipedia記事自体が脚注で『延岡市史』（NDLデジタルコレクション）を引用していることも確認済みで、今回その引用元原本を直接確認できたことになる。",
       "confidence": "A",
       "verificationStatus": "verified",
-      "crossVerifiedSources": ["Wikipedia（青木善祐、脚注で延岡市史を引用）"],
+      "crossVerifiedSources": [
+        "Wikipedia（青木善祐、脚注で延岡市史を引用）"
+      ],
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-17",
       "nextAction": "退任日（1960年）・第12代以降の列も継続して確認する。"
@@ -183,8 +237,12 @@
       "komaNumber": 103,
       "pageNumber": "74",
       "searchKeyword": "歴代市長（表内目視）",
-      "relevantMayor": ["mayor-09"],
-      "relevantYears": [1956],
+      "relevantMayor": [
+        "mayor-09"
+      ],
+      "relevantYears": [
+        1956
+      ],
       "extractedFact": "候補値（未確定）：青木善祐の就任日＝自昭和三一年(1956)四月一〇日。",
       "originalText": "自昭和三一年四月一〇日（コマ103）",
       "interpretation": "既存 mayor-09-term-01.termStart（1956-04-21、Wikipedia由来、needsReview）と一致しない（10日 vs 21日）。年・月は一致。生年月日の読み取り精度（finding-007で完全一致）を踏まえると誤読の可能性は低いと考えられるが、確定には至らないため既存値は上書きしない。",
@@ -194,6 +252,35 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-17",
       "nextAction": "延岡市史1983年版・1993年版、または日本の歴代市長第3巻で同じ日付を確認し、2資料一致すればarchiveMayorTerms.jsonのtermStartをconfirmedとして更新する。"
+    },
+    {
+      "id": "finding-009",
+      "taskId": "TASK-102",
+      "sourceId": "ndl-src-16",
+      "title": "延岡市決算書並意見書（昭和20・25〜39年度、17冊）— 宮崎県行政資料所在調査目録からの間接確認",
+      "publicationYear": null,
+      "publisher": "延岡市",
+      "ndlBibUrl": null,
+      "bodyUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%BB%B6%E5%B2%A1%E5%B8%82%E6%B1%BA%E7%AE%97",
+      "komaNumber": null,
+      "pageNumber": null,
+      "searchKeyword": "延岡市決算",
+      "relevantMayor": [],
+      "relevantYears": [
+        1945,
+        1964
+      ],
+      "extractedFact": "延岡市監査委員事務局編の決算書並意見書が昭和20年度・25〜39年度分（1945年・1950〜1964年）で17冊存在する。",
+      "originalText": "『宮崎県行政資料所在調査目録』本文スニペット：「145延岡市決算書並意見書昭和20-39年度延岡市監査委員事務局編17冊昭和20,25-39」",
+      "interpretation": "NDL単体書誌検索では0件（未所蔵）だが、全文検索経由で行政資料所在調査目録から間接的に存在を確認した。具体的な所蔵館は未特定。archiveFiscalYears.jsonの昭和期欠損年度を埋める候補として価値が高い。",
+      "confidence": "C",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "宮崎県行政資料所在調査目録"
+      ],
+      "accessType": "public_metadata",
+      "lastCheckedAt": "2026-08-17",
+      "nextAction": "所蔵館（宮崎県立図書館・宮崎県公文書館等）を特定できないか追加調査する。"
     }
   ]
 }
