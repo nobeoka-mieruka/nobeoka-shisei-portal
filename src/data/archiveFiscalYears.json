@@ -1,5 +1,197 @@
 [
   {
+    "fiscalYear": 2001,
+    "finance": {
+      "fiscalYear": 2001,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": null,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 85.3,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "経常収支比率85.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    }
+  },
+  {
+    "fiscalYear": 2002,
+    "finance": {
+      "fiscalYear": 2002,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": null,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 87.5,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "経常収支比率87.5%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    }
+  },
+  {
+    "fiscalYear": 2003,
+    "finance": {
+      "fiscalYear": 2003,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": null,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 86.9,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "経常収支比率86.9%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    }
+  },
+  {
+    "fiscalYear": 2004,
+    "finance": {
+      "fiscalYear": 2004,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": null,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 89.8,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "経常収支比率89.8%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    }
+  },
+  {
+    "fiscalYear": 2005,
+    "finance": {
+      "fiscalYear": 2005,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": null,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 90.3,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "経常収支比率90.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    }
+  },
+  {
+    "fiscalYear": 2006,
+    "finance": {
+      "fiscalYear": 2006,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": null,
+      "futureBurdenRatioPercent": null,
+      "currentAccountRatioPercent": 92.2,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "経常収支比率92.2%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+    }
+  },
+  {
+    "fiscalYear": 2007,
+    "finance": {
+      "fiscalYear": 2007,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 15.3,
+      "futureBurdenRatioPercent": 142.5,
+      "currentAccountRatioPercent": 94.6,
+      "financialStrengthIndex": 0.51,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+          "sourceTitle": "総務省「平成19年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "財政力指数0.51・実質公債費比率15.3%・将来負担比率142.5%・経常収支比率94.6%を総務省市町村決算カードより新規登録。予算・決算額・市債・基金等の他区分は今回未調査のため未登録（別バッチで対応）。"
+    }
+  },
+  {
+    "fiscalYear": 2008,
+    "finance": {
+      "fiscalYear": 2008,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 14.7,
+      "futureBurdenRatioPercent": 137.4,
+      "currentAccountRatioPercent": 94.2,
+      "financialStrengthIndex": 0.53,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+          "sourceTitle": "総務省「平成20年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        }
+      ],
+      "notes": "財政力指数0.53・実質公債費比率14.7%・将来負担比率137.4%・経常収支比率94.2%を総務省市町村決算カードより新規登録。予算・決算額・市債・基金等の他区分は今回未調査のため未登録（別バッチで対応）。"
+    }
+  },
+  {
     "fiscalYear": 2009,
     "budget": {
       "fiscalYear": 2009,
