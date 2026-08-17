@@ -407,9 +407,13 @@ export function DataStatusPage() {
     fullyCovered: committeesWithJurisdiction === committees.length,
   };
 
+  // TASK-083：用語をトップページ・ダッシュボード（HomePage.tsx／DashboardPage.tsx）の
+  // StatCard labelと完全一致させる（「一般質問（登壇・確認済み件数）」「質問項目数」
+  // 「最新会期の予定質問」）。ページごとに別の言い回し（登壇件数／確認済み発言数等）を
+  // 使わないことで、同じ数値が別の名称に見えないようにする。
   const questions: DataDomain[] = [
     {
-      label: "一般質問（会議録ベース・登壇件数）",
+      label: "一般質問（登壇・確認済み件数）",
       count: questionStats.confirmedCount,
       unit: "件",
       scope: "現任期（令和5年5月15日〜）＋旧任期（令和元年6月〜令和5年3月）",
@@ -418,16 +422,16 @@ export function DataStatusPage() {
       linkLabel: "一般質問データベースを見る",
     },
     {
-      label: "一般質問（会議録ベース・質問項目数）",
+      label: "質問項目数",
       count: questionStats.totalQuestionItemCount,
       unit: "件",
       scope: "現任期（令和5年5月15日〜）＋旧任期（令和元年6月〜令和5年3月）",
-      detail: `1回の登壇（上記「登壇件数」${questionStats.confirmedCount}件）で複数のテーマを質問することが多いため、内訳である質問項目数の方が多くなります。「登壇件数」と「質問項目数」は異なる集計単位であり、どちらか一方に統一していません。`,
+      detail: `1回の登壇（上記「一般質問（登壇・確認済み件数）」${questionStats.confirmedCount}件）で複数のテーマを質問することが多いため、内訳である質問項目数の方が多くなります。両者は異なる集計単位であり、どちらか一方に統一していません。`,
       linkTo: "/questions",
       linkLabel: "一般質問データベースを見る",
     },
     {
-      label: "一般質問（質問通告書ベース・予定項目）",
+      label: "最新会期の予定質問",
       count: questionStats.scheduledCount,
       unit: "件",
       scope: questionStats.scheduledSessionName ?? "直近1会期",
