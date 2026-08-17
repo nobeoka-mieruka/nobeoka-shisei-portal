@@ -256,12 +256,31 @@
       "sourceType": "primary",
       "lastCheckedAt": "2026-08-17",
       "notes": "NDLサーチで書誌自体を検索したがヒットしなかった（他自治体の統計書と混在した結果のみ）。タイトルが異なる可能性がある（例：「延岡市勢要覧」に統計データが統合されている可能性）ため、これ以上の追跡は見送る。"
+    },
+    {
+      "id": "ndl-src-15",
+      "title": "延岡市議会会議録（旧会期、宮崎県立図書館所蔵の手書き複写等）",
+      "author": "延岡市議会 編",
+      "publisher": "延岡市議会",
+      "publishedYear": null,
+      "ndlBibId": null,
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%BB%B6%E5%B2%A1%E5%B8%82%E8%AD%B0%E4%BC%9A%E4%BC%9A%E8%AD%B0%E9%8C%B2",
+      "page": null,
+      "category": "council",
+      "relatedMayorIds": [],
+      "relatedYears": [1957, 1973],
+      "dataTypes": ["civicEvent"],
+      "accessStatus": "library_only",
+      "status": "metadata_only",
+      "sourceType": "primary",
+      "lastCheckedAt": "2026-08-17",
+      "notes": "TASK-101（並行調査）。NDLサーチ書誌検索「延岡市議会会議録」で234件ヒット（ログイン不要）。うち3件の総合目録（『宮崎県公共図書館郷土資料総合目録 第2集』『宮崎県郷土資料総合目録』『全国公共図書館逐次刊行物総合目録 第6巻（九州編）』）の本文スニペットから、次を新規確認：(1)延岡市議会事務局編の原本が昭和32年（1957年、第17回〜）から存在、(2)宮崎県立図書館に「延岡市議会会議録写」（手書き複写）として昭和34〜48年（1959〜1973年）分60冊、および「第1回〜第20回」61冊が所蔵されている旨の記述。既存TASK-074のsourceInventory（「個別会期、例：昭和40年第17〜19回等」）を裏付け・precise化する情報。原本・複写いずれも紙媒体でNDLには所蔵なし（デジタル化資料なし）。現物閲覧は宮崎県立図書館への来館が必要。あわせて、2021年以降の会期（VOL.8〜16、延岡市議会発行）はNDLに書誌登録されているが紙の図書扱いでデジタル化なし（現行のkensakusystem.jpでのオンライン公開とは別系統）。ログインは試みていない（書誌検索のみで完結）。"
     }
   ],
   "summary": {
-    "totalSources": 14,
+    "totalSources": 15,
     "byStatus": {
-      "metadata_only": 5,
+      "metadata_only": 6,
       "login_required": 2,
       "readable": 0,
       "reviewed": 3,

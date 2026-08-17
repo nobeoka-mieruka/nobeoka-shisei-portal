@@ -271,15 +271,15 @@
     "title": "過去の市議会 NDL調査（会議録・議会だより・歴代議長副議長）",
     "status": "MANUAL_REVIEW",
     "blockedReasonCode": "MANUAL_REVIEW_REQUIRED",
-    "reasonSummary": "claude-in-chrome拡張機能が未接続（2026-08-17時点でlist_connected_browsers=0件）のため、ユーザー本人のNDLログイン確認自体ができず着手不可。",
+    "reasonSummary": "書誌検索（ログイン不要）で宮崎県立図書館所蔵の旧会期会議録（1957〜1973年分、60〜61冊）の存在は確認できたが、いずれも紙媒体でNDL未所蔵・デジタル化なしのため、現物閲覧には宮崎県立図書館への来館が必要。",
     "lastCheckedAt": "2026-08-17",
     "nextCheckAt": null,
-    "attemptCount": 1,
+    "attemptCount": 2,
     "autoRecheck": false,
     "autoRecheckMechanism": null,
-    "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。TASK-045・074（歴代市長分）とは対象範囲が異なる（議会史・会議録・議会だより・歴代議長副議長・議員選挙）。",
+    "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。TASK-045・074（歴代市長分）とは対象範囲が異なる（議会史・会議録・議会だより・歴代議長副議長・議員選挙）。【2026-08-17追記】NDLサーチ書誌検索「延岡市議会会議録」（234件、ログイン不要）を実施し、reports/ndl-historical-source-ledger.json（ndl-src-15）へ記録。「延岡市議会史」（単体書誌）は0件、既存TASK-046の確認と一致。",
     "expectedPublicationPeriod": null,
-    "nextActionCategory": "needs_ndl_login"
+    "nextActionCategory": "needs_offline_library"
   },
   {
     "taskId": "TASK-102",
