@@ -220,12 +220,13 @@
         "candidateEndDate": "1966-12-01",
         "primarySourceEndDate": "1966-12-01",
         "matches": true,
-        "confidence": "B",
+        "confidence": "A",
         "sourceIds": [
-          "existing:city-official-chronology"
+          "existing:city-official-chronology",
+          "ndl-src-10"
         ],
         "verificationStatus": "verified",
-        "note": "retirementReason='辞職'、既存notesで『衆議院議員選挙立候補のための辞職』と延岡市公式資料により確認済み（既に解決済み、再調査不要）。"
+        "note": "retirementReason='辞職'、既存notesで『衆議院議員選挙立候補のための辞職』と延岡市公式資料により確認済み（既に解決済み、再調査不要）。 生年月日（1919-01-25）とtermEnd（1966-12-01）がNDL『日本の歴代市長第3巻』（コマ361）の個人略歴と完全一致。独立2資料一致によりconfidenceをAへ昇格（termStart 1964-04-19は本資料単独では再確認できていない）。"
       },
       {
         "ordinal": 14,

@@ -345,6 +345,40 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-18",
       "nextAction": "なし（当該日付は確定扱いとする）。"
+    },
+    {
+      "id": "finding-012",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-10",
+      "title": "日本の歴代市長第3巻（1985年）延岡市個人略歴 折小野良一（12・13代）",
+      "publicationYear": 1985,
+      "publisher": "歴代知事編纂会",
+      "ndlBibUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772",
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11897508/1/361",
+      "komaNumber": 361,
+      "pageNumber": null,
+      "searchKeyword": "折小野良一",
+      "relevantMayor": [
+        "mayor-10"
+      ],
+      "relevantYears": [
+        1919,
+        1960,
+        1964,
+        1966
+      ],
+      "extractedFact": "折小野良一（12・13代）の生年月日＝大正8年1月25日（1919-01-25）。任期終点＝昭和41年12月1日（1966-12-01）。京都大学卒、延岡市議会事務局書記(昭23)→事務局長(昭37.5)→助役を経て市長就任。主要事業として昭和39年1月の日向・延岡地区新産業都市建設に本人が主導的に関与した旨の記述、五ヶ瀬川直轄河川整備事業への言及。",
+      "originalText": "折小野良一は、大正八年一月二十五日に生まれた。（中略）任期　昭和三十五年〜昭和四十一年十二月一日。（中略）昭和三十九年一月「日向・延岡地区新産業都市建設」にあたっては、政治力を結集して...重点を置いた。",
+      "interpretation": "生年月日は既存データ（archiveMayors.json mayor-10.birthDate、Wikipedia由来・needsReview）と完全一致。独立資料（NDL）による確認のためconfidence A相当に格上げ。任期終点（1966-12-01）も既存archiveMayorTerms（mayor-10-term-02.termEnd）と完全一致。任期起点（既存1960-04-19）は年（昭和35年＝1960年）のみ確認でき、月日精度までは本資料単独では再確認できなかった（矛盾は確認されていない）。新産業都市建設事業は既存civicTimelineEvents civic-108（1964年1月、mayor-10に既に紐付け済み）と一致し、本人の直接主導が本文で確認できたためcivic-108のsourceRefsにdirectly_attributedとして追記した。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1951〜1970年)",
+        "Wikipedia（折小野良一）"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "任期起点（1960年）の月日精度での確認は、延岡市議会会議録・広報のべおか等の追加資料で機会があれば試みる。五ヶ瀬川直轄河川整備事業は年が確認できていないため、civicTimelineEvents未登録のまま保留。"
     }
   ],
   "disputedFacts": [
