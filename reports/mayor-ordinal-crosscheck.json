@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-08-18T00:00:00+09:00",
+  "purpose": "ユーザー提供資料（写真、延岡市「歴代市長」一覧表と見られるが原資料名は本ファイル作成時点で未特定）による第29代までの候補値と、既存archiveMayors.json / archiveMayorTerms.jsonとの突合記録。この一覧単独ではconfidence Aにしない。延岡市史・選挙の記録・市議会資料・広報のべおか・公式市長プロフィール・市政年表でのクロスチェックを経て確定させる。",
+  "existingDataFinding": {
+    "summary": "「歴代市長14名」という既存カウントと、ユーザー提供資料の「13名（重複除外後）」は矛盾しない。archiveMayors.json（14件）には、公選市長13名に加え、mayor-14（山本一丸）が含まれているが、これは2025年7月1日〜19日の間、読谷山洋司市長辞職から三浦久知市長就任までの市長職務代理者（副市長、地方自治法に基づく代理）であり、公選市長ではない（既存profile・sourceRefsに明記済み、2026-08-05時点で調査済み）。",
+    "codeLocations": [
+      "src/lib/people.ts:338,444（mayorCount: archiveMayors.length＝14件のperson-record数。elected/非electedを区別していない）",
+      "src/pages/DataStatusPage.tsx:913（「歴代市長人数」として上記mayorCountをそのまま表示）",
+      "src/pages/ElectionsPage.tsx:40,65（mayorCountは選挙データ側の別集計〈市長選挙の回数〉で、上記と名前が同じだが意味が異なる。混同注意）"
+    ],
+    "recommendation": "UI修正は今回行わない（ユーザー指示により調査確定を優先）。将来対応する場合は、archiveMayors.jsonへmayorRole（'elected' | 'actingProxy' 等）のようなフィールドを追加し、mayorPersonCount（公選市長数）とtotalMayorRecordCount（代理等を含む全人物記録数）を分離して表示することを推奨する。"
+  },
+  "candidateOrdinalTable": {
+    "source": "ユーザー提供資料（写真、原資料タイトル未確認）",
+    "confidence": "D（原資料未特定・一次資料での個別照合前）",
+    "note": "既存archiveMayorTerms.json（mayor-04〜mayor-13、mayor-02、mayor-03、mayor-01の全29任期）と突合した結果、28/29任期の自・至年月日が完全一致した（重要な発見：ユーザー提供資料は既存データベースの正確性を強く裏付けている）。不一致は2件のみ：(1) 第11代・青木善祐の就任日（本表1956-04-21＝既存値と一致するが、NDLサーチで見つけた延岡市史1963年版の候補値1956-04-10とは不一致のまま、disputed、reports/ndl-research-findings.json disputed-001参照）、(2) 第29代・三浦久知の就任日（本表2025-07-22、既存値2025-07-20で2日差、matchesExisting: partial）。",
+    "entries": [
+      { "ordinal": 1, "name": "仲田又次郎", "termStart": "1933-04-15", "termEnd": "1937-01-06", "mayorId": "mayor-04", "matchesExisting": true },
+      { "ordinal": 2, "name": "鈴木憲太郎", "termStart": "1937-03-06", "termEnd": "1937-04-14", "mayorId": "mayor-05", "matchesExisting": true },
+      { "ordinal": 3, "name": "鈴木憲太郎", "termStart": "1937-05-16", "termEnd": "1937-06-15", "mayorId": "mayor-05", "matchesExisting": true },
+      { "ordinal": 4, "name": "大島文彦", "termStart": "1937-09-26", "termEnd": "1941-09-25", "mayorId": "mayor-06", "matchesExisting": true },
+      { "ordinal": 5, "name": "三浦虎雄", "termStart": "1941-10-22", "termEnd": "1942-04-25", "mayorId": "mayor-07", "matchesExisting": true },
+      { "ordinal": 6, "name": "三浦虎雄", "termStart": "1942-05-19", "termEnd": "1946-03-06", "mayorId": "mayor-07", "matchesExisting": true },
+      { "ordinal": 7, "name": "鈴木憲太郎", "termStart": "1946-03-29", "termEnd": "1947-03-22", "mayorId": "mayor-05", "matchesExisting": true },
+      { "ordinal": 8, "name": "佐藤千吉郎", "termStart": "1947-04-16", "termEnd": "1948-06-06", "mayorId": "mayor-08", "matchesExisting": true },
+      { "ordinal": 9, "name": "仲田又次郎", "termStart": "1948-07-16", "termEnd": "1952-06-19", "mayorId": "mayor-04", "matchesExisting": true },
+      { "ordinal": 10, "name": "三浦虎雄", "termStart": "1952-07-11", "termEnd": "1956-03-27", "mayorId": "mayor-07", "matchesExisting": true },
+      { "ordinal": 11, "name": "青木善祐", "termStart": "1956-04-21", "termEnd": "1960-04-18", "mayorId": "mayor-09", "matchesExisting": true, "note": "termStartはNDL延岡市史1963年版の候補値（1956-04-10）とdisputed。本表は既存値（1956-04-21）と同じ。" },
+      { "ordinal": 12, "name": "折小野良一", "termStart": "1960-04-19", "termEnd": "1964-04-18", "mayorId": "mayor-10", "matchesExisting": true },
+      { "ordinal": 13, "name": "折小野良一", "termStart": "1964-04-19", "termEnd": "1966-12-01", "mayorId": "mayor-10", "matchesExisting": true },
+      { "ordinal": 14, "name": "房野博", "termStart": "1967-01-22", "termEnd": "1971-01-21", "mayorId": "mayor-11", "matchesExisting": true },
+      { "ordinal": 15, "name": "房野博", "termStart": "1971-01-22", "termEnd": "1975-01-21", "mayorId": "mayor-11", "matchesExisting": true },
+      { "ordinal": 16, "name": "房野博", "termStart": "1975-01-22", "termEnd": "1978-10-05", "mayorId": "mayor-11", "matchesExisting": true },
+      { "ordinal": 17, "name": "早生隆彦", "termStart": "1978-11-05", "termEnd": "1982-11-04", "mayorId": "mayor-12", "matchesExisting": true },
+      { "ordinal": 18, "name": "早生隆彦", "termStart": "1982-11-05", "termEnd": "1986-11-04", "mayorId": "mayor-12", "matchesExisting": true },
+      { "ordinal": 19, "name": "早生隆彦", "termStart": "1986-11-05", "termEnd": "1990-11-04", "mayorId": "mayor-12", "matchesExisting": true },
+      { "ordinal": 20, "name": "早生隆彦", "termStart": "1990-11-05", "termEnd": "1994-01-11", "mayorId": "mayor-12", "matchesExisting": true },
+      { "ordinal": 21, "name": "櫻井哲雄", "termStart": "1994-02-06", "termEnd": "1998-02-05", "mayorId": "mayor-13", "matchesExisting": true },
+      { "ordinal": 22, "name": "櫻井哲雄", "termStart": "1998-02-06", "termEnd": "2002-02-05", "mayorId": "mayor-13", "matchesExisting": true },
+      { "ordinal": 23, "name": "櫻井哲雄", "termStart": "2002-02-06", "termEnd": "2006-02-05", "mayorId": "mayor-13", "matchesExisting": true },
+      { "ordinal": 24, "name": "首藤正治", "termStart": "2006-02-06", "termEnd": "2010-02-05", "mayorId": "mayor-02", "matchesExisting": true },
+      { "ordinal": 25, "name": "首藤正治", "termStart": "2010-02-06", "termEnd": "2014-02-05", "mayorId": "mayor-02", "matchesExisting": true },
+      { "ordinal": 26, "name": "首藤正治", "termStart": "2014-02-06", "termEnd": "2018-02-05", "mayorId": "mayor-02", "matchesExisting": true },
+      { "ordinal": 27, "name": "読谷山洋司", "termStart": "2018-02-06", "termEnd": "2022-02-05", "mayorId": "mayor-03", "matchesExisting": true },
+      { "ordinal": 28, "name": "読谷山洋司", "termStart": "2022-02-06", "termEnd": "2025-06-30", "mayorId": "mayor-03", "matchesExisting": true, "note": "任期途中辞職（病気療養、既存データで確認済み）。" },
+      { "ordinal": 29, "name": "三浦久知", "termStart": "2025-07-22", "termEnd": null, "mayorId": "mayor-01", "matchesExisting": "partial", "note": "現職。既存archiveMayorTerms.jsonのmayor-01-term-01ではtermStartが2025-07-20（本表は07-22）で2日差あり。既存mayor-14（山本一丸）が2025-07-01〜07-19の市長職務代理者としてその前を埋めており、山本氏の代理終了日（07-19）の翌々日が07-22なので、07-22の方が代理→就任の空白（07-20〜07-21）と整合する可能性がある。上書きせずdisputedとして記録。" }
+    ]
+  },
+  "candidateSummaryCounts": {
+    "mayorPersonCount": { "value": 13, "status": "candidate", "definition": "公選（または官選期含む）市長として在任した実人数。市長職務代理者・助役等は含まない。" },
+    "totalArchiveMayorRecords": { "value": 14, "status": "confirmed", "definition": "src/data/archiveMayors.jsonの総レコード数（公選市長13名＋市長職務代理者1名＝山本一丸）。既存データで確認済み、矛盾なし。" },
+    "mayoralTermCount": { "value": 29, "status": "candidate", "definition": "同一人物の再選・再任を1期ずつ数えた任期の総数。" },
+    "currentOrdinal": { "value": 29, "status": "candidate", "definition": "現職三浦久知市長が「第何代」に当たるか。" }
+  },
+  "gapInvestigationTargets": [
+    {
+      "gap": "1966-12-02 〜 1967-01-21",
+      "between": "折小野良一（第13代終了）→ 房野博（第14代開始）",
+      "investigate": ["市長職務代理者", "市長職務執行者", "助役による職務代理", "折小野良一の退任理由（衆議院議員転出との時系列）", "1967年1月の市長選挙告示日・投票日"],
+      "status": "not_collected"
+    },
+    {
+      "gap": "任期途中終了の事例",
+      "cases": [
+        { "person": "折小野良一", "date": "1966-12-01", "hypothesis": "衆議院議員選挙立候補による辞職と推定されるが未確認" },
+        { "person": "房野博", "date": "1978-10-05", "hypothesis": "退任理由未確認" },
+        { "person": "早生隆彦", "date": "1994-01-11", "hypothesis": "退任理由未確認（既存archiveMayorTerms.jsonのnotes参照）" },
+        { "person": "読谷山洋司", "date": "2025-06-30", "hypothesis": "病気療養による辞職（既存mayor-14 sourceRefsで確認済み）" }
+      ],
+      "status": "not_collected（読谷山洋司分のみconfirmed_zero除外＝確認済み）"
+    }
+  ],
+  "nextActions": [
+    "既存archiveMayorTerms.jsonにmayor-10（折小野良一）〜mayor-03（読谷山洋司）の各任期が何件登録済みか確認する",
+    "1967年1月の市長職務代理者の氏名を延岡市史・広報のべおか・市議会資料で確認する",
+    "折小野良一の衆議院議員転出時期と市長辞職日の前後関係を確認する",
+    "櫻井哲雄・首藤正治・読谷山洋司の各期について、公式資料・広報のべおかで裏付けを追加する"
+  ]
+}
