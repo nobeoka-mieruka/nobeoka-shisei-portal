@@ -1,7 +1,58 @@
-# セッション引き継ぎメモ（2026-08-17更新・TASK-085〜086）
+# セッション引き継ぎメモ（2026-08-17更新・TASK-090〜092）
 
 このファイルは新しいセッションほど上に追記する運用です。2026-08-10（Phase 16/17）以前の
 記録は下に残したまま、最新の状態を以下に記載します。過去の記録を削除・改変してはいけません。
+
+## 2026-08-17（続き3）：歴代市長の一次・準一次資料による根拠強化（TASK-090〜092）
+
+ユーザーから「歴代市長の一次・準一次資料による根拠強化」の指示（10優先度）を受けた。
+NDLログイン状態はclaude-in-chrome拡張が未接続のため確認できず（Priority 1：
+「ユーザーによるNDLログインが必要」として即Priority 2へ）、ログイン不要の範囲
+（NDLサーチの書誌検索のみ）で作業した。
+
+### 実施内容
+
+- **Priority 1**：claude-in-chrome未接続を確認。ログイン試行はせず即Priority 2へ。
+- **Priority 2〜4（NDL書誌調査）**：『日本の歴代市長 第3巻』の目次項目数（1502件・839p）を
+  確認したが宮崎県該当箇所はログイン無しでは特定不能。『延岡市史』を徹底検索し、
+  既存記録（TASK-045/074）に無かった1983年版上・下巻・1993年版の精緻な書誌ID、および
+  2003年版・2013年版（新規発見、対象期間外と判定）を確認。統一台帳
+  `reports/ndl-historical-source-ledger.json`（14件）を新規作成。
+- **Priority 3**：資料ごとにstatus（metadata_only/login_required/readable/reviewed/
+  adopted/rejected）・ndlBibId等を構造化。
+- **Priority 5〜6（新聞・報道）**：佐藤千吉郎（mayor-08）・早生隆彦（mayor-12）について
+  WebSearchを再試行したが新規情報は見つからず、既存のRESEARCH_EXHAUSTED水準の判定が
+  引き続き妥当であることを確認した。
+- **Priority 7**：`reports/historical-mayor-research-status.{json,md}`を新規作成し、
+  mayor-04〜12の9名についてカテゴリ別状態（人物情報・任期・選挙・政策・主要事業・
+  議案条例・財政）を実データから機械集計。議案条例・財政が9名全員not_applicableなのは
+  既存データ構造の収集範囲（2023年度以降・FY2001以降）が構造的に1994年以前を含まない
+  ためであり、新資料発見では解消しないことを明記した。
+- **Priority 8（財政）**：指示どおり追加クロールは行っていない。
+- **Priority 9（Wayback）**：セッション中に代表1件のみ再確認、503のまま（過剰アクセスなし）。
+- **Priority 10**：`reports/physical-source-candidates.md`を新規作成し、優先度別
+  （高・中・低）に整理。国立国会図書館個人送信サービス・延岡市立図書館・宮崎県立図書館の
+  確認窓口を明記。
+
+### 検証結果
+
+`validate:data`（errors=0, warnings=14=既存同数）、`validate:sources`（0/0/52）、
+`validate:completeness`（0/0/0）、`typecheck`、`lint`、`test`（26/26）、`build`
+（2128/2128ルート、validate-seo 0/0、validate-content 0/0）すべて成功。
+
+### コミット・デプロイ
+
+`2fd4a92`（TASK-090）→`472d191`（TASK-092）、`origin/main`へpush予定。
+
+### 次回開始地点
+
+1. `git status`／`git log --oneline -10`／`origin/main`との差分
+2. Wayback Machine再生バックエンドの復旧を1回だけ確認
+3. ユーザーへNDLログイン状況を確認し、可能であれば
+   `reports/physical-source-candidates.md`の優先度「高」4件
+   （延岡市史1983年版上・下巻／1993年版／日本の歴代市長第3巻）を最優先で確認
+4. 歴代市長の議案条例・財政データは、既存データ構造の設計上の制約（収集範囲が
+   1994年以前を含まない）により、新資料発見だけでは解消しない点に留意すること
 
 ## 2026-08-17（続き2）：Wayback 503継続下での代替資料調査（TASK-085〜086）
 

@@ -8576,3 +8576,22 @@ warning0件。
 次回：Wayback復旧確認→復旧していれば42件処理、していなければユーザーへNDLログイン
 状況を確認し『日本の歴代市長 第3巻』の確認を提示。歴代市長の政策・議案・条例データは
 mayor-03以外ほぼ0件のまま（1990年代以前は物理資料調査が前提、TASK-073参照）。
+
+【2026-08-17続き・TASK-090〜092（歴代市長の一次・準一次資料による根拠強化）】
+ユーザー指示10優先度で実施。詳細は`docs/session-handoff.md`「2026-08-17（続き3）」参照。
+
+- TASK-090（`2fd4a92`）：claude-in-chrome未接続でNDLログイン確認不能のため即Priority2へ。
+  NDLサーチ書誌検索のみで『延岡市史』1983年版上・下巻／1993年版の精緻な書誌ID、
+  2003・2013年版（新規発見・対象期間外）、『日本の歴代市長第3巻』の目次項目数（1502件）を
+  確認。`reports/ndl-historical-source-ledger.json`（14件）・
+  `reports/physical-source-candidates.md`を新規作成。ログイン試行なし。
+- TASK-092（`472d191`）：`reports/historical-mayor-research-status.{json,md}`で
+  mayor-04〜12の9名をカテゴリ別（人物情報／任期／選挙／政策／主要事業／議案条例／財政）に
+  機械集計。議案条例・財政は既存データ構造の収集範囲外（構造的制約）と明記。
+
+検証：`validate:data`（0/14=既存同数）・`validate:sources`（0/0/52）・
+`validate:completeness`（0/0/0）・typecheck・lint・test（26/26）・build（2128/2128）
+すべて成功。新規error・warning0件。
+
+次回：Wayback復旧確認（代表1件のみ）→ユーザーへNDLログイン状況を確認し
+`reports/physical-source-candidates.md`優先度「高」4件を提示。
