@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-17T21:59:29.685Z",
-  "totalItems": 122,
+  "generatedAt": "2026-08-17T22:11:01.271Z",
+  "totalItems": 123,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 11,
     "relationCandidate": 6,
-    "sourceInsufficient": 76,
+    "sourceInsufficient": 77,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -305,6 +305,12 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-09",
       "detail": "出典「青木善祐 - Wikipedia」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-09",
+      "detail": "出典「日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年）延岡市 個人略歴（11代）」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",
