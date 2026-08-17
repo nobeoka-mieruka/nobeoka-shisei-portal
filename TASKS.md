@@ -8524,3 +8524,34 @@ data-status強化等）が既存実装で充足済みであることを確認し
 13件・mayor-04〜14の政策データ（NDLログイン待ち）。次回セッション開始時、まずWayback
 再生バックエンドの復旧を1回確認してから、復旧していればPriority A、していなければ
 ユーザーへNDLログイン状況を確認したうえでPriority 3へ進む。
+
+【2026-08-17続き・TASK-080〜084（外部資料不要な作業を優先）】ユーザー指示により、
+外部要因でBLOCKED中の項目（Wayback 503・会議録未公開・NDLログイン必要等）を繰り返し
+試さず、外部資料を必要としない作業を優先して6項目実施した。詳細は
+`docs/session-handoff.md`「2026-08-17（続き）」を参照。
+
+- TASK-080（`fd142d7`）：`/data-status`のバッジをsrc/lib/completeness.tsの既存
+  CompletenessStatus語彙へ統一。「出典・リンクの健全性」セクション新規追加
+  （`scripts/generate-quality-summary.mjs`）。CouncilDocumentsArchivePage.tsxの
+  「登録1,177件」直書きを動的化。
+- TASK-081（`33ab331`）：Waybackを使わず、既存の一次資料確認済み日付だけで歴代市長と
+  既存記録（archiveFiscalYears.jsonのmayorId/mayorTermId 23/26年度、
+  archiveCouncilDocuments.jsonのrelatedMayorIds 13/13件）を機械的に関連付け。
+  MayorDetailPage.tsxの実態と合わなくなっていた「整備できていません（BLOCKED）」注記を
+  実データ表示へ置き換え。
+- TASK-082（`a45a9f9`）：validate-finance.mjsに前年度比±50%急変検出を追加（該当0件）。
+  FY2000は再調査せず「資料なし」であることを`/data-status`に明記。
+- TASK-084（`754c36b`）：一般質問397件相当の指標の表記ゆれ（「確認済み発言数」等）を
+  HomePage/DashboardPageの表記へ統一。
+- TASK-083（`ab1ffa5`）：Wayback再生バックエンドの503を最小限（1回）確認後、
+  `reports/wayback-recovery-queue.json/.md`を新規整備（42件、Waybackへの新規アクセス
+  0件）。42件は2005・2013・2017年度（首藤市長の就任・退任前後）に集中と判明。
+
+検証：各コミットで`validate:data`（errors=0, warnings=14=既存同数）／`typecheck`／`lint`／
+`build`成功、最終まとめて`validate:finance`（0/0/8）・`validate:sources`（0/0/52）・
+`validate:completeness`（0/0/0）・`validate:political-funds`（0/0/2）・
+`validate:freshness`（0/0）・`test`（26/26）・`build`（2128/2128ルート、validate-seo
+0/0、validate-content 0/0）すべて成功。新規error・warning0件。
+
+次回：Wayback復旧確認（`reports/wayback-recovery-queue.md`の手順）→復旧していれば42件を
+順に処理、していなければユーザーへNDLログイン状況を確認しPriority 3へ。

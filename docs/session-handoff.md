@@ -1,7 +1,71 @@
-# セッション引き継ぎメモ（2026-08-17更新・全体監査＋Priority A/FY2000調査）
+# セッション引き継ぎメモ（2026-08-17更新・TASK-080〜084）
 
 このファイルは新しいセッションほど上に追記する運用です。2026-08-10（Phase 16/17）以前の
 記録は下に残したまま、最新の状態を以下に記載します。過去の記録を削除・改変してはいけません。
+
+## 2026-08-17（続き）：前回監査の続き（TASK-080〜084、外部資料不要な作業を優先）
+
+前回（本メモ次項）の全体監査報告を受け、ユーザーから「外部要因でBLOCKEDの項目
+（Wayback 503・会議録未公開・政治資金R7未公表・NDLログイン必要・資料確認不能）を
+繰り返し試さず、外部資料を必要としない作業を優先して進めてほしい」との指示で、6項目
+（data-status UI完成／歴代市長の既存記録関連付け／財政データ内部整合性／一般質問用語統一／
+Wayback再開キュー整備／品質確認）を順に実施した。
+
+### 実施内容
+
+- **TASK-080（`fd142d7`）**：`/data-status`のバッジ表示を、`src/lib/completeness.ts`の
+  既存`CompletenessStatus`（完全収録／一部収録／確認済み0件／未収録／一次資料未公開／
+  母数未確認／調査中）へ統一。`DataDomain`に`zeroStatus`を追加し、count===0を無条件で
+  「未収録」と表示していた構造を修正（現時点で該当ドメインは無いが、将来の誤表示を防止）。
+  新規セクション「出典・リンクの健全性（品質監査）」を追加し、
+  `scripts/generate-quality-summary.mjs`で`validate:sources`・`external-link-check.json`
+  （`*.backup.json`除外）を集計。監査中に`CouncilDocumentsArchivePage.tsx`の
+  「登録1,177件」直書きを発見し動的表示化した。
+- **TASK-081（`33ab331`）**：Waybackを使わず、既存の一次資料確認済み日付（任期・決定日）
+  だけで歴代市長と既存記録を機械的に関連付けた。`archiveFiscalYears.json`のmayorId／
+  mayorTermId（26年度中23年度、年度途中の市長交代3年度は断定せず）、
+  `archiveCouncilDocuments.json`のrelatedMayorIds（13件全件）を新規スクリプトで設定。
+  `MayorDetailPage.tsx`の「市長単位に紐づける仕組みが整備できていません（BLOCKED）」という
+  実態と合わなくなっていた注記を、実データ表示（収集範囲外／確認済み0件を文言で区別）へ
+  置き換えた。
+- **TASK-082（`a45a9f9`）**：`validate-finance.mjs`に人口・歳入歳出・市債・基金の前年度比
+  ±50%急変検出を追加（該当0件）。単位・会計区分・重複年度等は既存スクリプトが網羅済みと
+  コード監査で確認。FY2000は前回確認済みのため再調査せず、`/data-status`の説明文へ
+  「資料なし（総務省オンライン公開の最古年度がFY2001）」と明記。
+- **TASK-084（`754c36b`）**：一般質問397件相当の指標が、HomePage/DashboardPageでは
+  「一般質問（登壇・確認済み件数）」、GeneralQuestionsPageでは「確認済み発言数」、
+  DataStatusPageでは「一般質問（会議録ベース・登壇件数）」と別の語で表示されていたのを
+  HomePage/DashboardPageの表記へ統一（数値・集計ロジックは無変更）。
+- **TASK-083（`ab1ffa5`）**：Wayback P0高信頼度42件について、`web.archive.org`の再生
+  バックエンドが本日も503のままであることを最小限（1回）確認したのち、Waybackへ
+  アクセスせず既存台帳＋`archiveMayorTerms.json`だけで復旧後即再開できるキュー
+  （`reports/wayback-recovery-queue.json/.md`）を整備した。42件は2005・2013・2017年度
+  （いずれも首藤市長関連の就任・退任前後）に集中していることを確認。
+
+### 検証結果
+
+各コミットごとに`validate:data`（errors=0, warnings=14=既存同数）／`typecheck`／`lint`／
+`build`を実行、すべて成功。最終まとめて`validate:finance`（0/0/8）・`validate:sources`
+（0/0/52）・`validate:completeness`（0/0/0）・`validate:political-funds`（0/0/2）・
+`validate:freshness`（0/0）・`test`（26/26）・`build`（2128/2128ルート、validate-seo
+0/0、validate-content 0/0）も再実行し成功を確認した。新規errorは0件、新規warningも
+検証系スクリプトの追加チェック（TASK-082のYoY急変検出）を含め0件。
+
+### コミット・デプロイ
+
+`c25d689`→`fd142d7`→`33ab331`→`a45a9f9`→`754c36b`→`ab1ffa5`、すべて`origin/main`へ
+push予定（本メモ更新後にまとめてpush）。
+
+### 次回開始地点
+
+1. `git status`／`git log --oneline -10`／`origin/main`との差分
+2. Wayback Machine再生バックエンドの復旧を1回だけ確認（`reports/wayback-recovery-queue.md`
+   の手順に従う）
+3. 復旧していれば42件を上から順に処理（本文取得→`crossReferenceTargets`との照合）
+4. 復旧していなければユーザーへNDLログイン状況を確認し、TASK-045・074（歴代市長任期空白・
+   mayor-04〜14）へ進む
+5. 上記いずれも進められない場合は、Phase19「UI改善」（本ターンでは対象外とされた大規模
+   リニューアル以外の細部）や、条例・委員会・請願・陳情の出典強化（Priority 3）を検討する
 
 ## 2026-08-17：ユーザー指示の大規模改善指示（22フェーズ）を受けた全体監査＋Priority A/FY2000調査
 
