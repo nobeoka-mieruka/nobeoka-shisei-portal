@@ -486,12 +486,36 @@
       "sourceType": "primary",
       "lastCheckedAt": "2026-08-17",
       "notes": "TASK-103（並行、青木善祐の就任日クロスチェック目的）。個人送信サービスで閲覧し、目次（コマ6〜8）を確認したところ、収録範囲は第一〜第五編（衆議院議員／参議院議員／知事・県議会議員／市教育委員会委員／海区漁業調整委員会委員の各選挙）と付録（選管沿革）のみで、市町村長選挙・市町村議会議員選挙は収録対象外と判明した。書籍内全文検索「延岡市長」「青木善祐」もいずれも0件で目次の判断と整合。この巻は歴代市長の就任日クロスチェックには使えないため対象外（rejected）とする。市町村長選挙の記録は別シリーズ（延岡市選挙管理委員会発行の資料等）にある可能性が高く、今回は特定に至っていない。"
+    },
+    {
+      "id": "ndl-src-18",
+      "title": "延岡市広報：広報のべおか（延岡市編集、NDL所蔵は1987年＝昭和62年分〜、年ごとの合本）",
+      "author": "延岡市 編集",
+      "publisher": "延岡市",
+      "publishedYear": null,
+      "ndlBibId": null,
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%BB%A3%E5%A0%B1%E3%81%AE%E3%81%B9%E3%81%8A%E3%81%8B",
+      "page": null,
+      "category": "publicRelations",
+      "relatedMayorIds": [],
+      "relatedYears": [
+        1987,
+        2024
+      ],
+      "dataTypes": [
+        "civicEvent"
+      ],
+      "accessStatus": "library_only",
+      "status": "metadata_only",
+      "sourceType": "primary",
+      "lastCheckedAt": "2026-08-17",
+      "notes": "TASK-104（並行調査）。NDLサーチ書誌検索「廣報のべおか」（ログイン不要、23件）で、延岡市発行の合本（1年分をまとめた紙媒体、いずれも国立国会図書館所蔵・デジタル化なし）を確認した。NDL所蔵の最古は昭和62年〜平成元年分（1987年）。全文検索ヒット（国民健康保険43(12)、宮崎県企画調整部「昭和51年の水難事故防止対策」）から、広報「のべおか」自体は昭和51年（1976年）6月時点で既に発行されていたことが間接的に確認できたが、この時期の号がNDLに個別所蔵されているかは未確認（合本の収録範囲外の可能性）。既存src/data/kohoNobeokaIssues.jsonは延岡市公式サイト配信のPDF版が中心と見られ、本ledgerはNDL所蔵の紙媒体合本という別経路の記録として整理した。デジタル化されていないため、内容確認には来館が必要。"
     }
   ],
   "summary": {
-    "totalSources": 17,
+    "totalSources": 18,
     "byStatus": {
-      "metadata_only": 7,
+      "metadata_only": 8,
       "login_required": 2,
       "readable": 0,
       "reviewed": 3,
