@@ -47,6 +47,10 @@ const OTHER_PUBLIC_DOMAINS = new Set([
   "www.city.miyakonojo.miyazaki.jp", "www.hyugacity.jp", "www.city.miyazaki.miyazaki.jp",
   "www.city.kobayashi.lg.jp", "www.city.nichinan.lg.jp", "www.city.saito.lg.jp",
   "www.komei.or.jp", "new-kokumin.jp", "cdp-japan.jp",
+  // 国立国会図書館（NDL）。国の公的機関だが「延岡市の公式資料」ではないため、
+  // OFFICIAL_DOMAINSではなくここに置く（NDL掲載だから自動的に最高信頼度になるわけではない、
+  // という docs/ndl-search-research-plan.md の方針と整合させる）。
+  "dl.ndl.go.jp", "ndlsearch.ndl.go.jp",
 ]);
 
 const SECONDARY_DOMAINS = new Set([
