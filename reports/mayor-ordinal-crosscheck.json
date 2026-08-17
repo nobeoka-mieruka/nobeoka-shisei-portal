@@ -129,7 +129,8 @@
         "sourceIds": [
           "existing:city-official-chronology"
         ],
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "note": "死没日（1953-01-17）はNDL『日本の歴代市長第3巻』（コマ360）でWikipedia値と完全一致確認（findings-013）。ただし本ordinalの任期日付自体（1946-03-29〜1947-03-22）は同コマでは再確認できていない。"
       },
       {
         "ordinal": 8,
@@ -140,12 +141,13 @@
         "candidateEndDate": "1948-06-06",
         "primarySourceEndDate": "1948-06-06",
         "matches": true,
-        "confidence": "B",
+        "confidence": "A",
         "sourceIds": [
-          "existing:city-official-chronology"
+          "existing:city-official-chronology",
+          "ndl-src-10"
         ],
         "verificationStatus": "verified",
-        "note": "termEndはWikipediaにのみ記載があり他資料未確認（既存notes）。"
+        "note": "termEnd（1948-06-06）がNDL『日本の歴代市長第3巻』（コマ360）の個人略歴と完全一致。生年月日（1885-08-01）も同資料で新規確認。独立2資料一致によりconfidenceをAへ昇格。termStartは月まで一致、日精度は未確認。"
       },
       {
         "ordinal": 9,

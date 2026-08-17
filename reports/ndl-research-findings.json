@@ -379,6 +379,70 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-18",
       "nextAction": "任期起点（1960年）の月日精度での確認は、延岡市議会会議録・広報のべおか等の追加資料で機会があれば試みる。五ヶ瀬川直轄河川整備事業は年が確認できていないため、civicTimelineEvents未登録のまま保留。"
+    },
+    {
+      "id": "finding-013",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-10",
+      "title": "日本の歴代市長第3巻（1985年）延岡市個人略歴 鈴木憲太郎（7代）",
+      "publicationYear": 1985,
+      "publisher": "歴代知事編纂会",
+      "ndlBibUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772",
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11897508/1/360",
+      "komaNumber": 360,
+      "pageNumber": null,
+      "searchKeyword": "鈴木憲太郎",
+      "relevantMayor": [
+        "mayor-05"
+      ],
+      "relevantYears": [
+        1952,
+        1953
+      ],
+      "extractedFact": "鈴木憲太郎（7代）の没年月日＝昭和28年1月17日（1953-01-17）。市長退任後、宮崎県知事選挙に立候補し落選、延岡を離れ東京へ移り、翌年病気のため死去。",
+      "originalText": "鈴木市長は県知事選挙に立候補したが落選し、（昭和）二十七年延岡を去って東京（へ移り）…翌（昭和）二十八年一月十七日病気のため世を去った。",
+      "interpretation": "既存データ（archiveMayors.json mayor-05.deathDate、Wikipedia由来・needsReview）の1953-01-17と完全一致。独立資料（NDL）による確認のためこの事実についてはconfidence A相当。ただし7代任期の日付自体（1946-03-29〜1947-03-22）はこのコマでは再確認できておらず、ordinal-level confidenceはBのまま据え置き。生年月日は本コマでは特定できなかった。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "Wikipedia（鈴木憲太郎）"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "生年月日・7代任期の月日精度での確認は、隣接する仲田又次郎(9代)・三浦虎雄(10代)欄との文字の混在があり、時間を区切って保留（同コマの佐藤千吉郎欄を優先して読み取り完了）。機会があれば再訪する。"
+    },
+    {
+      "id": "finding-014",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-10",
+      "title": "日本の歴代市長第3巻（1985年）延岡市個人略歴 佐藤千吉郎（8代）",
+      "publicationYear": 1985,
+      "publisher": "歴代知事編纂会",
+      "ndlBibUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772",
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11897508/1/360",
+      "komaNumber": 360,
+      "pageNumber": null,
+      "searchKeyword": "佐藤千吉郎",
+      "relevantMayor": [
+        "mayor-08"
+      ],
+      "relevantYears": [
+        1885,
+        1945,
+        1947,
+        1948
+      ],
+      "extractedFact": "佐藤千吉郎（8代）の生年月日＝明治18年8月1日（1885-08-01、新規確認）。昭和20年12月本市助役就任。昭和22年4月の市長選挙で734票を得て当選、同月15日に戦後初の公選市長として就任。任期終点＝昭和23年6月6日（1948-06-06、既存データと完全一致）。",
+      "originalText": "佐藤千吉郎は、明治十八年八月一日に生まれた。早稲田（大学カ）…昭和二十年十二月本市助役に就任。（中略）七三四票で首位得票者となり…同十五日初の公選市長が誕生した。（中略）任期　昭和二十二年四月…昭和二十三年六月六日",
+      "interpretation": "生年月日は本調査で初めて確認された新規事実（既存データは10名中唯一生年月日が未確認だった）。termEndは既存archiveMayorTerms（mayor-08-term-01.termEnd=1948-06-06）と完全一致し独立確認によりconfidence A相当に格上げ。termStartは月（1947年4月）まで一致、日精度（既存16日）は本コマ単独では再確認できなかった。得票数734票・直接公選制移行の経緯は既存civic-150の内容と整合。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1930-1950年)"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "早稲田大学（カ）の学部・卒業有無、ふりがな、出身地、死没年、退任理由は依然未確認。機会があれば延岡市議会会議録・広報のべおか等で追加調査する。"
     }
   ],
   "disputedFacts": [
