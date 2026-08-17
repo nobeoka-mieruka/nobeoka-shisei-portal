@@ -14,6 +14,7 @@
     "generate:photo-dimensions": "node scripts/generate-photo-dimensions.mjs",
     "generate:council-documents": "node scripts/generate-council-documents.mjs",
     "generate:quality-summary": "node scripts/generate-quality-summary.mjs",
+    "wayback:prepare-recovery-queue": "node scripts/prepare-wayback-recovery-queue.mjs",
     "fetch:council-documents": "node scripts/fetch-nobeoka-council-documents.mjs",
     "extract:council-data": "node scripts/extract-council-pdf-data.mjs",
     "generate:bill-summaries": "node scripts/generate-bill-summaries.mjs",
