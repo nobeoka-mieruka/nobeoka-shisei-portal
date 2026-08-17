@@ -1,24 +1,30 @@
 {
   "generatedAt": "2026-08-18T00:00:00+09:00",
-  "method": "既存データ（archiveMayors.json/archiveMayorTerms.json/electionResults.json/archiveFiscalYears.json/kohoNobeokaIssues.json/billVotes.json/civicTimelineEvents.json/reports/ndl-historical-source-ledger.json）のみを使い、機械的に算出した。目視でのNDL資料読み取りは含まない（reports/ndl-research-findings.json・ndl-historical-source-ledger.json側で別管理）。",
+  "method": "既存データ（archiveMayors.json/archiveMayorTerms.json/electionResults.json/archiveFiscalYears.json/kohoNobeokaIssues.json/billVotes.json/civicTimelineEvents.json/reports/ndl-historical-source-ledger.json/reports/wayback-mayor-candidate-links.json）のみを使い、機械的に算出した。",
   "legend": {
     "○": "確認済み・十分な情報がある",
-    "△": "一部確認済み（件数はあるが得票数等の詳細が不足、または退任の事実のみで理由不明等）",
+    "△": "一部確認済み（件数はあるが詳細不足、または日付近接候補のみで本文未確認等）",
     "□": "未着手・未収集（0件だが調査を尽くしたわけではない）",
-    "×": "データの収集範囲外（該当カテゴリのデータセット自体が対象期間をカバーしていないため、0件は「不存在の確認」ではなく「対象外」）",
+    "out_of_dataset_range": "対象カテゴリのデータセット自体が在任期間をカバーしていないため判定不能（0件は『不存在の確認』ではなく『対象外』）。datasetRanges参照。",
     "－": "該当なし（現職等）"
+  },
+  "datasetRanges": {
+    "council": "billVotes.json 収録範囲: 2019-06-17〜現在",
+    "finance": "archiveFiscalYears.json 収録範囲: FY2001〜現在",
+    "koho": "kohoNobeokaIssues.json 収録範囲: 2010-04〜現在"
   },
   "columnNotes": {
     "biography": "birthDateフィールドの有無、なければprofile文章の充実度で判定",
     "election": "electionResults.jsonでlinkedProfileId一致する記録の有無・得票数の有無",
     "inaugurationRetirementDates": "archiveMayorTerms.jsonに任期が1件以上登録されているか",
     "retirementReason": "全任期のretirementReasonが具体的理由まで判明しているか（事実のみ確認は△）",
-    "policies": "政策・大型事業の構造化データは今回未整備（□固定、次回課題）",
-    "council": "billVotes.json（2019年6月〜現在収録）と在任期間の日付重複件数。歴史的市長は収録範囲外のため×",
-    "finance": "archiveFiscalYears.json（FY2001〜現在収録）のmayorId一致件数。同上の理由で歴史的市長は×",
-    "koho": "kohoNobeokaIssues.json（2010年4月〜現在収録）の発行月が在任期間内にある号数。同上の理由で2010年以前の市長は×",
+    "policies": "civicTimelineEvents.json（relatedPersonIds経由、一次資料sourceRefs付き＝directly_attributed相当）の政策系カテゴリ件数で判定。在任期間中というだけの機械紐付け（during_term相当）はkoho/councilで別途カウントしており、ここには含めない",
+    "majorProjects": "civicTimelineEvents.jsonの「公共事業」「市庁舎」カテゴリ件数",
+    "council": "billVotes.json（2019年6月〜現在収録）と在任期間の日付重複件数（during_term相当、本人が直接関与した確認ではない）",
+    "finance": "archiveFiscalYears.json（FY2001〜現在収録）のmayorId一致件数",
+    "koho": "kohoNobeokaIssues.json（2010年4月〜現在収録）の発行月が在任期間内にある号数（during_term相当、内容未確認）",
     "ndl": "reports/ndl-historical-source-ledger.jsonのrelatedMayorIds経由。status=reviewed/adoptedがあれば○、それ以外の関連資料のみなら△",
-    "wayback": "本文取得前のURLカタログ段階のため、人物別の紐付けは現状すべて未着手（□固定、次回課題）"
+    "wayback": "reports/wayback-mayor-candidate-links.json（日付近接候補、本文未確認）の有無。本文確認済みは今後○に昇格予定"
   },
   "rows": [
     {
@@ -30,11 +36,22 @@
       "inaugurationRetirementDates": "○",
       "retirementReason": "□",
       "policies": "□",
+      "majorProjects": "□",
       "council": "△",
       "finance": "○",
       "koho": "○",
       "ndl": "□",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 1,
+        "linkedFiscalYearsCount": 1,
+        "kohoDuringTermCount": 13,
+        "billsDuringTermCount": 181,
+        "linkedCivicEventsCount": 0,
+        "policyEventsCount": 0,
+        "majorProjectsCount": 0,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-02",
@@ -44,12 +61,23 @@
       "election": "○",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
-      "council": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
       "finance": "○",
       "koho": "○",
       "ndl": "□",
-      "wayback": "□"
+      "wayback": "△",
+      "_detail": {
+        "linkedElectionsCount": 3,
+        "linkedFiscalYearsCount": 11,
+        "kohoDuringTermCount": 95,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 37,
+        "policyEventsCount": 24,
+        "majorProjectsCount": 13,
+        "waybackCandidateUrlCount": 154
+      }
     },
     {
       "mayorId": "mayor-03",
@@ -59,12 +87,23 @@
       "election": "○",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
+      "policies": "△",
+      "majorProjects": "△",
       "council": "△",
       "finance": "○",
       "koho": "○",
       "ndl": "□",
-      "wayback": "□"
+      "wayback": "△",
+      "_detail": {
+        "linkedElectionsCount": 2,
+        "linkedFiscalYearsCount": 7,
+        "kohoDuringTermCount": 88,
+        "billsDuringTermCount": 985,
+        "linkedCivicEventsCount": 4,
+        "policyEventsCount": 1,
+        "majorProjectsCount": 1,
+        "waybackCandidateUrlCount": 34
+      }
     },
     {
       "mayorId": "mayor-04",
@@ -74,12 +113,23 @@
       "election": "□",
       "inaugurationRetirementDates": "○",
       "retirementReason": "□",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 16,
+        "policyEventsCount": 14,
+        "majorProjectsCount": 5,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-05",
@@ -90,11 +140,22 @@
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
       "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "majorProjects": "□",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 0,
+        "policyEventsCount": 0,
+        "majorProjectsCount": 0,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-06",
@@ -104,12 +165,23 @@
       "election": "□",
       "inaugurationRetirementDates": "○",
       "retirementReason": "□",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "□",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 5,
+        "policyEventsCount": 4,
+        "majorProjectsCount": 0,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-07",
@@ -119,12 +191,23 @@
       "election": "□",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 15,
+        "policyEventsCount": 12,
+        "majorProjectsCount": 4,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-08",
@@ -134,12 +217,23 @@
       "election": "□",
       "inaugurationRetirementDates": "○",
       "retirementReason": "□",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "□",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 8,
+        "policyEventsCount": 8,
+        "majorProjectsCount": 0,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-09",
@@ -149,12 +243,23 @@
       "election": "□",
       "inaugurationRetirementDates": "○",
       "retirementReason": "□",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 6,
+        "policyEventsCount": 6,
+        "majorProjectsCount": 3,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-10",
@@ -164,12 +269,23 @@
       "election": "□",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 9,
+        "policyEventsCount": 7,
+        "majorProjectsCount": 2,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-11",
@@ -179,12 +295,23 @@
       "election": "△",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 2,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 13,
+        "policyEventsCount": 12,
+        "majorProjectsCount": 6,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-12",
@@ -194,12 +321,23 @@
       "election": "△",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
-      "council": "×",
-      "finance": "×",
-      "koho": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
+      "finance": "out_of_dataset_range",
+      "koho": "out_of_dataset_range",
       "ndl": "○",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 4,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 17,
+        "policyEventsCount": 16,
+        "majorProjectsCount": 6,
+        "waybackCandidateUrlCount": 0
+      }
     },
     {
       "mayorId": "mayor-13",
@@ -209,12 +347,23 @@
       "election": "○",
       "inaugurationRetirementDates": "○",
       "retirementReason": "△",
-      "policies": "□",
-      "council": "×",
+      "policies": "○",
+      "majorProjects": "○",
+      "council": "out_of_dataset_range",
       "finance": "○",
-      "koho": "×",
+      "koho": "out_of_dataset_range",
       "ndl": "△",
-      "wayback": "□"
+      "wayback": "△",
+      "_detail": {
+        "linkedElectionsCount": 4,
+        "linkedFiscalYearsCount": 4,
+        "kohoDuringTermCount": 0,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 16,
+        "policyEventsCount": 9,
+        "majorProjectsCount": 2,
+        "waybackCandidateUrlCount": 18
+      }
     },
     {
       "mayorId": "mayor-14",
@@ -225,11 +374,22 @@
       "inaugurationRetirementDates": "○",
       "retirementReason": "○",
       "policies": "□",
-      "council": "×",
-      "finance": "×",
+      "majorProjects": "□",
+      "council": "□",
+      "finance": "□",
       "koho": "△",
       "ndl": "□",
-      "wayback": "□"
+      "wayback": "□",
+      "_detail": {
+        "linkedElectionsCount": 0,
+        "linkedFiscalYearsCount": 0,
+        "kohoDuringTermCount": 1,
+        "billsDuringTermCount": 0,
+        "linkedCivicEventsCount": 0,
+        "policyEventsCount": 0,
+        "majorProjectsCount": 0,
+        "waybackCandidateUrlCount": 0
+      }
     }
   ]
 }

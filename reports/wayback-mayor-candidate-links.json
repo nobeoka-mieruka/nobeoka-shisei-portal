@@ -1,0 +1,608 @@
+{
+  "generatedAt": "2026-08-18T00:00:00+09:00",
+  "method": "reports/wayback-display-php-catalog.json（machine-guessed category='mayor-or-election-candidate'、269件、本文未取得）のestimatedDateと、src/data/archiveMayorTerms.jsonの任期境界日（termStart/termEnd）との日付近接性（90日以内）のみで機械的に紐付けた。本文は未確認のため、実際にその市長を扱ったページである保証はない（bodyConfirmed: false固定）。既存の重複取得はしていない（新規リクエストなし、既存カタログの再利用のみ）。",
+  "disclaimer": "この紐付けは『日付が近い』という間接的な手がかりに過ぎず、確認済み事実ではない。本文取得・確認が今後の課題（reviewStatus参照、多くはtemporarily_unavailable＝Wayback再生バックエンド503のため未確認）。",
+  "mayorLinks": [
+    {
+      "mayorId": "mayor-13",
+      "name": "櫻井 哲雄",
+      "candidateUrlCount": 18,
+      "urls": [
+        {
+          "contId": "060203131824",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp:80/display.php?cont=060203131824",
+          "archiveUrl": "https://web.archive.org/web/20110614222021/http://www.city.nobeoka.miyazaki.jp:80/display.php?cont=060203131824",
+          "estimatedDate": "2006-02-03",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060203145742",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060203145742",
+          "archiveUrl": "https://web.archive.org/web/20140715141250/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060203145742",
+          "estimatedDate": "2006-02-03",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060203210336",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060203210336",
+          "archiveUrl": "https://web.archive.org/web/20120510191927/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060203210336",
+          "estimatedDate": "2006-02-03",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202095440",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202095440",
+          "archiveUrl": "https://web.archive.org/web/20140715192816/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202095440",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202103626",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202103626",
+          "archiveUrl": "https://web.archive.org/web/20190720175856/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202103626",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202103859",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202103859",
+          "archiveUrl": "https://web.archive.org/web/20140716022254/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202103859",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202111255",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202111255",
+          "archiveUrl": "https://web.archive.org/web/20140715133701/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202111255",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202112959",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202112959",
+          "archiveUrl": "https://web.archive.org/web/20200922140345/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202112959",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202113749",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202113749",
+          "archiveUrl": "https://web.archive.org/web/20140715154352/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202113749",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202114637",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202114637",
+          "archiveUrl": "https://web.archive.org/web/20140715155838/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202114637",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060202140921",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202140921",
+          "archiveUrl": "https://web.archive.org/web/20140715121119/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060202140921",
+          "estimatedDate": "2006-02-02",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060201141837",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201141837",
+          "archiveUrl": "https://web.archive.org/web/20140715200310/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201141837",
+          "estimatedDate": "2006-02-01",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060201154300",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201154300",
+          "archiveUrl": "https://web.archive.org/web/20140715154612/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201154300",
+          "estimatedDate": "2006-02-01",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060201155448",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201155448",
+          "archiveUrl": "https://web.archive.org/web/20140715154407/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201155448",
+          "estimatedDate": "2006-02-01",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060201161210",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201161210",
+          "archiveUrl": "https://web.archive.org/web/20140716103358/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201161210",
+          "estimatedDate": "2006-02-01",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060201161714",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201161714",
+          "archiveUrl": "https://web.archive.org/web/20140716094944/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201161714",
+          "estimatedDate": "2006-02-01",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060201162305",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201162305",
+          "archiveUrl": "https://web.archive.org/web/20140716094841/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060201162305",
+          "estimatedDate": "2006-02-01",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "060131140925",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=060131140925",
+          "archiveUrl": "https://web.archive.org/web/20140715222748/http://www.city.nobeoka.miyazaki.jp/display.php?cont=060131140925",
+          "estimatedDate": "2006-01-31",
+          "nearestBoundary": "termEnd(2006-02-05)",
+          "diffDays": 5,
+          "reviewStatus": "temporarily_unavailable",
+          "bodyConfirmed": false
+        }
+      ]
+    },
+    {
+      "mayorId": "mayor-02",
+      "name": "首藤 正治",
+      "candidateUrlCount": 154,
+      "urls": [
+        {
+          "contId": "140205100918",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140205100918",
+          "archiveUrl": "https://web.archive.org/web/20140716111502/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140205100918",
+          "estimatedDate": "2014-02-05",
+          "nearestBoundary": "termEnd(2014-02-05)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140205102953",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140205102953",
+          "archiveUrl": "https://web.archive.org/web/20140716100531/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140205102953",
+          "estimatedDate": "2014-02-05",
+          "nearestBoundary": "termEnd(2014-02-05)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140206164018",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140206164018",
+          "archiveUrl": "https://web.archive.org/web/20140715132012/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140206164018",
+          "estimatedDate": "2014-02-06",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140206180046",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140206180046",
+          "archiveUrl": "https://web.archive.org/web/20140716010058/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140206180046",
+          "estimatedDate": "2014-02-06",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180205103203",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180205103203",
+          "archiveUrl": "https://web.archive.org/web/20200812044227/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180205103203",
+          "estimatedDate": "2018-02-05",
+          "nearestBoundary": "termEnd(2018-02-05)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180205160744",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180205160744",
+          "archiveUrl": "https://web.archive.org/web/20211130075800/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180205160744",
+          "estimatedDate": "2018-02-05",
+          "nearestBoundary": "termEnd(2018-02-05)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180205161234",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180205161234",
+          "archiveUrl": "https://web.archive.org/web/20210117164057/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180205161234",
+          "estimatedDate": "2018-02-05",
+          "nearestBoundary": "termEnd(2018-02-05)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140204131600",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140204131600",
+          "archiveUrl": "https://web.archive.org/web/20211130044312/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140204131600",
+          "estimatedDate": "2014-02-04",
+          "nearestBoundary": "termEnd(2014-02-05)",
+          "diffDays": 1,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140203165457",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140203165457",
+          "archiveUrl": "https://web.archive.org/web/20140716010246/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140203165457",
+          "estimatedDate": "2014-02-03",
+          "nearestBoundary": "termEnd(2014-02-05)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140203165821",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140203165821",
+          "archiveUrl": "https://web.archive.org/web/20140716014610/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140203165821",
+          "estimatedDate": "2014-02-03",
+          "nearestBoundary": "termEnd(2014-02-05)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140203170051",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140203170051",
+          "archiveUrl": "https://web.archive.org/web/20140716011205/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140203170051",
+          "estimatedDate": "2014-02-03",
+          "nearestBoundary": "termEnd(2014-02-05)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180202093807",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180202093807",
+          "archiveUrl": "https://web.archive.org/web/20211130042224/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180202093807",
+          "estimatedDate": "2018-02-02",
+          "nearestBoundary": "termEnd(2018-02-05)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "100201105948",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=100201105948",
+          "archiveUrl": "https://web.archive.org/web/20120504094207/http://www.city.nobeoka.miyazaki.jp/display.php?cont=100201105948",
+          "estimatedDate": "2010-02-01",
+          "nearestBoundary": "termEnd(2010-02-05)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210092526",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210092526",
+          "archiveUrl": "https://web.archive.org/web/20140715184229/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210092526",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210095005",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210095005",
+          "archiveUrl": "https://web.archive.org/web/20140716104716/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210095005",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210100020",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210100020",
+          "archiveUrl": "https://web.archive.org/web/20140716102303/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210100020",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210100449",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210100449",
+          "archiveUrl": "https://web.archive.org/web/20140716113230/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210100449",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210110028",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210110028",
+          "archiveUrl": "https://web.archive.org/web/20140715144220/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210110028",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210154909",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210154909",
+          "archiveUrl": "https://web.archive.org/web/20140716012429/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210154909",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "140210155035",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210155035",
+          "archiveUrl": "https://web.archive.org/web/20140716010803/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140210155035",
+          "estimatedDate": "2014-02-10",
+          "nearestBoundary": "termStart(2014-02-06)",
+          "diffDays": 4,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        }
+      ]
+    },
+    {
+      "mayorId": "mayor-03",
+      "name": "読谷山 洋司",
+      "candidateUrlCount": 34,
+      "urls": [
+        {
+          "contId": "180206092515",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180206092515",
+          "archiveUrl": "https://web.archive.org/web/20211130042144/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180206092515",
+          "estimatedDate": "2018-02-06",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 0,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180208144540",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180208144540",
+          "archiveUrl": "https://web.archive.org/web/20211130091652/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180208144540",
+          "estimatedDate": "2018-02-08",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 2,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180209160013",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180209160013",
+          "archiveUrl": "https://web.archive.org/web/20211022070115/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180209160013",
+          "estimatedDate": "2018-02-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180209161113",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180209161113",
+          "archiveUrl": "https://web.archive.org/web/20211022081331/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180209161113",
+          "estimatedDate": "2018-02-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 3,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180211155448",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180211155448",
+          "archiveUrl": "https://web.archive.org/web/20180212075448/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180211155448",
+          "estimatedDate": "2018-02-11",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 5,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180216144300",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180216144300",
+          "archiveUrl": "https://web.archive.org/web/20210122085056/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180216144300",
+          "estimatedDate": "2018-02-16",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 10,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180216153746",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180216153746",
+          "archiveUrl": "https://web.archive.org/web/20211022233252/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180216153746",
+          "estimatedDate": "2018-02-16",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 10,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180221110017",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180221110017",
+          "archiveUrl": "https://web.archive.org/web/20190716164403/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180221110017",
+          "estimatedDate": "2018-02-21",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 15,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180223154058",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180223154058",
+          "archiveUrl": "https://web.archive.org/web/20210127191656/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180223154058",
+          "estimatedDate": "2018-02-23",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 17,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180223155601",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180223155601",
+          "archiveUrl": "https://web.archive.org/web/20190720185013/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180223155601",
+          "estimatedDate": "2018-02-23",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 17,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180226111503",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180226111503",
+          "archiveUrl": "https://web.archive.org/web/20190720181225/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180226111503",
+          "estimatedDate": "2018-02-26",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 20,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309135224",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309135224",
+          "archiveUrl": "https://web.archive.org/web/20190716162453/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309135224",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309144317",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp:80/display.php?cont=180309144317",
+          "archiveUrl": "https://web.archive.org/web/20180628005738/http://www.city.nobeoka.miyazaki.jp:80/display.php?cont=180309144317",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309151849",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309151849",
+          "archiveUrl": "https://web.archive.org/web/20211130051034/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309151849",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309153000",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309153000",
+          "archiveUrl": "https://web.archive.org/web/20211130040730/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309153000",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309153156",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309153156",
+          "archiveUrl": "https://web.archive.org/web/20211130040510/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309153156",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309153410",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309153410",
+          "archiveUrl": "https://web.archive.org/web/20211130041538/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309153410",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309154233",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309154233",
+          "archiveUrl": "https://web.archive.org/web/20211130042732/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309154233",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309155122",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309155122",
+          "archiveUrl": "https://web.archive.org/web/20211130034526/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309155122",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        },
+        {
+          "contId": "180309155604",
+          "originalUrl": "http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309155604",
+          "archiveUrl": "https://web.archive.org/web/20211130034506/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180309155604",
+          "estimatedDate": "2018-03-09",
+          "nearestBoundary": "termStart(2018-02-06)",
+          "diffDays": 31,
+          "reviewStatus": "not_reviewed",
+          "bodyConfirmed": false
+        }
+      ]
+    }
+  ]
+}
