@@ -103,7 +103,24 @@
       },
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
-    "mayorId": "mayor-13"
+    "mayorId": "mayor-13",
+    "population": {
+      "fiscalYear": 2001,
+      "population": 124773,
+      "households": null,
+      "referenceDate": "2001-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2001年1月1日時点の値（124,773人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2002,
@@ -210,7 +227,24 @@
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
     "mayorId": "mayor-13",
-    "mayorTermId": "mayor-13-term-03"
+    "mayorTermId": "mayor-13-term-03",
+    "population": {
+      "fiscalYear": 2002,
+      "population": 124563,
+      "households": null,
+      "referenceDate": "2002-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2002年1月1日時点の値（124,563人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2003,
@@ -317,7 +351,24 @@
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
     "mayorId": "mayor-13",
-    "mayorTermId": "mayor-13-term-03"
+    "mayorTermId": "mayor-13-term-03",
+    "population": {
+      "fiscalYear": 2003,
+      "population": 123770,
+      "households": null,
+      "referenceDate": "2003-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2003年1月1日時点の値（123,770人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2004,
@@ -424,7 +475,24 @@
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
     "mayorId": "mayor-13",
-    "mayorTermId": "mayor-13-term-03"
+    "mayorTermId": "mayor-13-term-03",
+    "population": {
+      "fiscalYear": 2004,
+      "population": 123076,
+      "households": null,
+      "referenceDate": "2004-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2004年1月1日時点の値（123,076人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2005,
@@ -530,7 +598,24 @@
       },
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
-    "notes": "年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-02-term-01、mayor-13-term-03）。"
+    "notes": "年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-02-term-01、mayor-13-term-03）。",
+    "population": {
+      "fiscalYear": 2005,
+      "population": 122568,
+      "households": null,
+      "referenceDate": "2005-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、平成17年（2005年）1月1日時点の値（122,568人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2006,
@@ -637,7 +722,24 @@
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
     "mayorId": "mayor-02",
-    "mayorTermId": "mayor-02-term-01"
+    "mayorTermId": "mayor-02-term-01",
+    "population": {
+      "fiscalYear": 2006,
+      "population": 121517,
+      "households": null,
+      "referenceDate": "2006-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2006年1月1日時点の値（121,517人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2007,
@@ -744,7 +846,24 @@
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
     "mayorId": "mayor-02",
-    "mayorTermId": "mayor-02-term-01"
+    "mayorTermId": "mayor-02-term-01",
+    "population": {
+      "fiscalYear": 2007,
+      "population": 129217,
+      "households": null,
+      "referenceDate": "2007-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2007年1月1日時点の値（129,217人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2008,
@@ -851,7 +970,24 @@
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
     "mayorId": "mayor-02",
-    "mayorTermId": "mayor-02-term-01"
+    "mayorTermId": "mayor-02-term-01",
+    "population": {
+      "fiscalYear": 2008,
+      "population": 132480,
+      "households": null,
+      "referenceDate": "2008-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-17",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2008年1月1日時点の値（132,480人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
+        }
+      ]
+    }
   },
   {
     "fiscalYear": 2009,
