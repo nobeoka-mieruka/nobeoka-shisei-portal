@@ -2,7 +2,10 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import archivePoliciesData from "../data/archivePolicies.json";
-import type { ArchiveMayor, ArchiveMayorTerm, ArchivePolicy } from "../types/historicalArchive";
+import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
+import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
+import type { ArchiveMayor, ArchiveMayorTerm, ArchivePolicy, ArchiveCouncilDocument, ArchiveFiscalYear } from "../types/historicalArchive";
+import { documentPath, documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { BackLink } from "../components/BackLink";
@@ -21,6 +24,27 @@ import { civicTimelineEventsForPerson } from "../lib/civicTimeline";
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
+const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
+const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
+
+// TASK-081：詳細アーカイブ（archiveCouncilDocuments.json）自体の収集範囲（年度）。
+// 「この市長の在任期間が収集範囲外だから0件」なのか「収集範囲内だが確認できた分が
+// 実際に0件」なのかを区別するために使う（推測で母数を作らない、既存データの実際の
+// 最小・最大年度をそのまま使う）。
+const archiveDocFiscalYears = archiveCouncilDocuments.map((d) => d.fiscalYear);
+const archiveDocMinFy = archiveDocFiscalYears.length > 0 ? Math.min(...archiveDocFiscalYears) : null;
+const archiveDocMaxFy = archiveDocFiscalYears.length > 0 ? Math.max(...archiveDocFiscalYears) : null;
+
+function termsOverlapFiscalYearRange(termList: ArchiveMayorTerm[], minFy: number | null, maxFy: number | null): boolean {
+  if (minFy === null || maxFy === null) return false;
+  const rangeStart = new Date(`${minFy}-04-01`);
+  const rangeEnd = new Date(`${maxFy + 1}-03-31`);
+  return termList.some((t) => {
+    const ts = new Date(t.termStart);
+    const te = t.termEnd ? new Date(t.termEnd) : new Date("2100-01-01");
+    return ts <= rangeEnd && te >= rangeStart;
+  });
+}
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -48,6 +72,14 @@ export function MayorDetailPage() {
   const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
   const relatedPolicies = archivePolicies.filter((p) => p.ownerType === "mayor" && p.ownerId === mayor.id);
   const relatedEvents = civicTimelineEventsForPerson(mayor.id);
+  // TASK-081：日付重複による機械的な紐付け（scripts/link-council-documents-to-mayors.mjs・
+  // scripts/link-fiscal-years-to-mayors.mjs）。推測ではなく、確認済みの決定日・任期日付の
+  // 重複のみで判定している（年度途中の市長交代年度はいずれの市長にも紐付けていない）。
+  const relatedDocuments = archiveCouncilDocuments.filter((d) => (d.relatedMayorIds ?? []).includes(mayor.id));
+  const inDocumentCollectionScope = termsOverlapFiscalYearRange(terms, archiveDocMinFy, archiveDocMaxFy);
+  const relatedFiscalYears = archiveFiscalYears
+    .filter((f) => f.mayorId === mayor.id)
+    .sort((a, b) => a.fiscalYear - b.fiscalYear);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -198,17 +230,66 @@ export function MayorDetailPage() {
             当サイトの公約データベースは現職市長の任期のみを対象としており、歴代の市長の選挙公約・政策原文は収集していません（未収集）。0件確認済みという意味ではありません。
           </p>
         )}
-        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-          関連議案・関連条例・大型事業・災害対応等の詳細な出来事は、当サイトのデータ構造では市長単位に紐づけて管理する仕組みが今回のフェーズではまだ整備できていません（BLOCKED）。市政年表（
-          {terms[0] ? (
-            <Link to={`/timeline/${fiscalYearOfIsoDate(terms[0].termStart)}`} className={`text-primary hover:underline ${linkClass}`}>
-              この市長の任期の年度
+      </section>
+
+      <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 className="text-base font-semibold text-on-surface">関連議案・条例・請願・陳情（詳細アーカイブ）</h2>
+        {relatedDocuments.length > 0 ? (
+          <>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              この市長の在任期間中に決定・提出されたことが確認できた件です（決定日等と任期日付の機械的な照合による紐付け）。詳細アーカイブは
+              {archiveDocMinFy}〜{archiveDocMaxFy}年度分のみを対象とした一部収録であり、この市長の在任期間中の全件ではありません。
+            </p>
+            <ul className="mt-2 space-y-2">
+              {relatedDocuments.map((d) => (
+                <li key={d.id}>
+                  <Link to={documentPath(d)} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                    [{documentTypeLabel(d.documentType)}] {d.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : inDocumentCollectionScope ? (
+          <p className="mt-2 text-sm text-on-surface-variant">
+            この市長の在任期間は詳細アーカイブの収集範囲（{archiveDocMinFy}〜{archiveDocMaxFy}年度）と重なりますが、該当する議案・条例・請願・陳情は確認されていません（確認済み0件）。
+          </p>
+        ) : (
+          <p className="mt-2 text-sm text-on-surface-variant">
+            当サイトの詳細アーカイブは{archiveDocMinFy}〜{archiveDocMaxFy}年度分のみを対象としており、この市長の在任期間はその収集範囲外のため未収集です（0件確認済みという意味ではありません）。
+          </p>
+        )}
+      </section>
+
+      <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 className="text-base font-semibold text-on-surface">財政データとの関連</h2>
+        {relatedFiscalYears.length > 0 ? (
+          <>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              この市長単独の任期にあたることが確認できた年度です（年度途中で市長が交代した年度は、いずれの市長にも単独では紐付けていません）。
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {relatedFiscalYears.map((f) => (
+                <li key={f.fiscalYear}>
+                  <Link
+                    to={`/timeline/${f.fiscalYear}`}
+                    className={`inline-block rounded-full bg-surface-container-high px-3 py-1 text-xs font-medium text-on-surface hover:underline ${linkClass}`}
+                  >
+                    {f.fiscalYear}年度
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="mt-2 text-sm text-on-surface-variant">
+            財政年度別アーカイブ（
+            <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
+              財政ページ
             </Link>
-          ) : (
-            "任期年度不明"
-          )}
-          ）で、同じ時期の議案・一般質問・財政データを横断的に確認できます。
-        </p>
+            ）はFY2001〜2026年度分を収録していますが、この市長の任期に単独で対応する年度は確認されていません（在任期間が収集範囲外、または在任期間が年度途中の市長交代のみに該当するためで、財政データが存在しないという意味ではありません）。
+          </p>
+        )}
       </section>
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">

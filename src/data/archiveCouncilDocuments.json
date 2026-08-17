@@ -27,7 +27,10 @@
       "revisionType": "enactment",
       "effectStatus": "unknown",
       "revisionHistory": []
-    }
+    },
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-ordinance-02",
@@ -57,7 +60,10 @@
       "revisionType": "partialRevision",
       "effectStatus": "unknown",
       "revisionHistory": []
-    }
+    },
+    "relatedMayorIds": [
+      "mayor-01"
+    ]
   },
   {
     "id": "doc-ordinance-03",
@@ -87,7 +93,10 @@
       "revisionType": "repeal",
       "effectStatus": "unknown",
       "revisionHistory": []
-    }
+    },
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-petition-01",
@@ -114,7 +123,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2023-06-seigan-1",
     "notes": "既存billVotes.jsonのカテゴリ「請願」レコードをアーカイブ層へインデックスしたもの。請願者名等の個人情報は既存データ・出典PDFのいずれにも記載がないため登録していない。",
-    "petitionDetail": {}
+    "petitionDetail": {},
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-petition-02",
@@ -141,7 +153,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2024-09-seigan-2",
     "notes": "既存billVotes.jsonのカテゴリ「請願」レコードをアーカイブ層へインデックスしたもの。",
-    "petitionDetail": {}
+    "petitionDetail": {},
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-petition-03",
@@ -167,7 +182,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2026-03-seigan-3",
     "notes": "既存billVotes.jsonのカテゴリ「請願」レコードをアーカイブ層へインデックスしたもの。決議日（votingDate）は既存データに記載がないため未設定。",
-    "petitionDetail": {}
+    "petitionDetail": {},
+    "relatedMayorIds": [
+      "mayor-01"
+    ]
   },
   {
     "id": "doc-request-01",
@@ -194,7 +212,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2023-07-extraordinary-03-chinjo-1",
     "notes": "既存billVotes.jsonのカテゴリ「陳情」レコードをアーカイブ層へインデックスしたもの。",
-    "requestDetail": {}
+    "requestDetail": {},
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-request-02",
@@ -221,7 +242,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2023-12-chinjo-3",
     "notes": "既存billVotes.jsonのカテゴリ「陳情」レコードをアーカイブ層へインデックスしたもの。",
-    "requestDetail": {}
+    "requestDetail": {},
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-request-03",
@@ -248,7 +272,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2024-06-chinjo-5",
     "notes": "既存billVotes.jsonのカテゴリ「陳情」レコードをアーカイブ層へインデックスしたもの。",
-    "requestDetail": {}
+    "requestDetail": {},
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-request-04",
@@ -275,7 +302,10 @@
     "verificationStatus": "verified",
     "existingBillVoteId": "2025-03-chinjo-6",
     "notes": "既存billVotes.jsonのカテゴリ「陳情」レコードをアーカイブ層へインデックスしたもの。同一議題が令和7年6月・9月定例会でも継続審査・撤回として扱われているが（2025-06-chinjo-6・2025-09-chinjo-6）、初期データでは重複を避けるため最初の登録分のみをアーカイブ対象とした。",
-    "requestDetail": {}
+    "requestDetail": {},
+    "relatedMayorIds": [
+      "mayor-03"
+    ]
   },
   {
     "id": "doc-bill-01",
@@ -306,7 +336,10 @@
     "notes": "既存議案賛否から代表的な議案としてカテゴリ「予算」を1件、アーカイブ層へインデックスしたもの。",
     "billDetail": {
       "billCategory": "予算"
-    }
+    },
+    "relatedMayorIds": [
+      "mayor-01"
+    ]
   },
   {
     "id": "doc-bill-02",
@@ -334,7 +367,10 @@
     "notes": "既存議案賛否から代表的な議案としてカテゴリ「人事」を1件、アーカイブ層へインデックスしたもの。",
     "billDetail": {
       "billCategory": "人事"
-    }
+    },
+    "relatedMayorIds": [
+      "mayor-01"
+    ]
   },
   {
     "id": "doc-bill-03",
@@ -362,6 +398,9 @@
     "notes": "既存議案賛否から代表的な議案としてカテゴリ「契約」を1件、アーカイブ層へインデックスしたもの。",
     "billDetail": {
       "billCategory": "契約"
-    }
+    },
+    "relatedMayorIds": [
+      "mayor-01"
+    ]
   }
 ]
