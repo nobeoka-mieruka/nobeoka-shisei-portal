@@ -1,17 +1,20 @@
 # 延岡市政見える化ポータル 実行タスク
 
-最終更新日：2026-08-13（Phase130〜134でTASK-069「元議員アーカイブのデータ充足レベル導入と
-最終仕上げ」を実施。データ充足レベルA〜D（人物評価ではない）を正式導入、任期情報を
-Evidence Availability語彙で表現、決議提出者2名を追加特定、TASK-046へ再開条件・情報源一覧を
-構造化、人物ID・タイムライン監査は異常0件を確認した）
+最終更新日：2026-08-17（TASK-100でNDLサーチ手動ログイン後の自動調査・資料収集の設計書
+〔docs/ndl-search-research-plan.md〕を新規作成し、TASK-101〜105として実調査タスクを
+分割登録した。claude-in-chrome未接続〔list_connected_browsers=0件〕のため、いずれも
+接続・ユーザー本人のNDLログイン確認待ちのBLOCKED。歴代市長分は新規番号を起こさず
+既存TASK-045・TASK-074を再開する扱いとした）
 
-現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-13時点）：
-DONE 100／BLOCKED 6／READY 0／IN_PROGRESS 0／分割管理のみ（TASK-005・016、実体は子タスクへ
-分割済みでこれ自体は集計対象外）2／合計109
+現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-17時点）：
+DONE 106／BLOCKED 12／READY 0／IN_PROGRESS 0（残差は分割管理のみの親タスク等、集計対象外）
+／`### TASK-`見出し総数121
 
-READY・IN_PROGRESSともに0件。残るBLOCKED 6件はいずれも一次資料の不存在・未公表・環境制約が
-理由であり、推測での解消はしない（各タスクの「BLOCKED理由・再開条件」、および
-`src/data/blockedTaskClassification.json`の機械可読な分類を参照）。
+READY・IN_PROGRESSともに0件。BLOCKED 12件のうち7件は一次資料の不存在・未公表・環境制約が
+理由（各タスクの「BLOCKED理由・再開条件」、および`src/data/blockedTaskClassification.json`
+の機械可読な分類を参照）、残る5件（TASK-101〜105）はclaude-in-chrome接続とユーザー本人の
+NDLログイン確認が再開条件（`docs/ndl-search-research-plan.md`参照）。いずれも推測での
+解消はしない。
 
 ---
 
@@ -8615,3 +8618,113 @@ warning0件。
 
 次回：ユーザーのNDLログイン・物理資料確認の結果を反映。それまではWayback復旧確認
 （代表1件のみ）を継続。
+
+---
+
+### TASK-100 NDLサーチ調査体制の設計（設計書作成・台帳スキーマ拡張方針・TASKS.md分割登録）
+
+状態：DONE（2026-08-17）
+優先度：A
+対象：`docs/ndl-search-research-plan.md`（新規）、`TASKS.md`
+依存関係：TASK-090（`reports/ndl-historical-source-ledger.json`基盤）、TASK-092
+目的：ユーザー指示「NDLサーチ手動ログイン後の自動調査・資料収集」を受け、実際の検索・
+資料確認に着手する前に、安全に自動化できる範囲・データスキーマ・優先順位・禁止事項を
+設計書として明文化する。
+
+実施内容：
+- `list_connected_browsers`でclaude-in-chrome接続を確認 → 0件（TASK-090時点と同じ
+  未接続）。接続確認以前の状態のため、今回は実際のNDL検索・ログイン確認は行わず、
+  設計とタスク登録までを実施
+- `docs/ndl-search-research-plan.md`を新規作成：禁止事項12項目、接続・実行方式
+  （claude-in-chrome、Edge専用プロファイルやPlaywrightは今回不採用）、人間待機機構
+  （ログインが必要になったら停止しユーザーへ依頼、ログイン操作自体は自動化しない）、
+  既存資産（Wayback調査・広報調査・会議録調査・歴代市長・財政・選挙・年表データ）との
+  重複回避方法（URL／NDL書誌ID／ISBN／全国書誌番号／DOI等での突合）、データスキーマ
+  拡張案（新規`data/research/ndl/`ディレクトリは作らず、既存
+  `reports/ndl-historical-source-ledger.json`へ`category`／`accessStatus`（8区分）／
+  `reliabilityGrade`（A〜E、既存`scripts/generate-final-quality-audit.mjs`の基準と
+  整合）を追加する方針）、調査優先順位（歴代市長→議会→財政→選挙→統計→広報→新聞→
+  特別職→旧町村）、年代別優先度（1930年代優先、10年区切り）、表記揺れ対応、検索ログ
+  フォーマット（`docs/research/ndl-search-log.md`）、最終報告フォーマットを整理
+- `TASKS.md`へTASK-101〜105（カテゴリ別の実調査タスク）を分割登録。いずれもBLOCKED
+  （claude-in-chrome接続＋ユーザー本人のNDLログインが再開条件のため）
+
+検証：`validate:data`（0/14=既存同数）・typecheck・lint成功（`docs/`はビルド・型
+チェック対象外）。
+
+完了記録：
+- 完了日：2026-08-17
+- コミットID：（コミット時に記載）
+- 変更概要：`docs/ndl-search-research-plan.md`新規作成、`TASKS.md`へTASK-100〜105登録
+
+歴代市長のNDL資料（ユーザーのNDLログイン後の個人送信サービス確認）については、
+新規タスク番号を起こさず、**既存のTASK-045・TASK-074を再開する**。両タスクの
+`src/data/blockedTaskClassification.json`エントリに、`physical-source-candidates.md`
+優先度「高」4件（延岡市史1983年版上・下巻／1993年版／日本の歴代市長第3巻）を含む
+reopenConditionsが既に構造化済みのため重複しない。TASK-101〜105は、TASK-045・074が
+対象としていない範囲（議会・財政・選挙・広報・新聞・特別職・旧町村）のみを新規登録する。
+
+---
+
+### TASK-101 過去の市議会 NDL調査（会議録・議会だより・歴代議長副議長）
+
+状態：BLOCKED（claude-in-chrome未接続かつユーザーのNDLログイン未確認のため着手不可。
+2026-08-17時点で`list_connected_browsers`＝0件）
+優先度：B
+対象：`reports/ndl-historical-source-ledger.json`、`docs/nobeoka-minutes-fetch-investigation.md`
+依存関係：`docs/ndl-search-research-plan.md`（設計、TASK-100）
+目的：延岡市議会史・市議会会議録（個別会期）・議会だより・歴代議長副議長・議員選挙・
+議員経歴をNDLサーチで調査し、Web上で確認できない古い年代（特に1994年以前）を
+優先的に埋める。
+再開条件：(1) claude-in-chrome拡張機能が接続されること (2) ユーザーがNDLへログイン
+済みであることを確認できること（設計書3章の接続確認手順に従う）。
+
+---
+
+### TASK-102 財政資料 NDL調査（予算書・決算書・統計書、昭和期まで遡及）
+
+状態：BLOCKED（TASK-101と同じ再開条件）
+優先度：B
+対象：`reports/ndl-historical-source-ledger.json`、`src/data/archiveFiscalYears.json`
+依存関係：`docs/ndl-search-research-plan.md`（設計、TASK-100）
+目的：延岡市の予算・決算・財政状況・公債・市債・基金・地方交付税・普通会計・
+財政力指数・経常収支比率・実質公債費比率・将来負担比率をNDLサーチで調査し、
+可能なら昭和期まで遡って`archiveFiscalYears.json`の欠損年度を埋める。
+
+---
+
+### TASK-103 選挙資料・人口統計 NDL調査
+
+状態：BLOCKED（TASK-101と同じ再開条件）
+優先度：C
+対象：`reports/ndl-historical-source-ledger.json`
+依存関係：`docs/ndl-search-research-plan.md`（設計、TASK-100）
+目的：延岡市長選挙・延岡市議会議員選挙の候補者名簿・得票数・投票率・無投票の記録
+（宮崎県選挙管理委員会資料・選挙公報含む）、延岡市統計書・国勢調査等の人口・産業
+（商業・工業・農業・観光・社会福祉・教育）統計資料をNDLサーチで年代別に調査する。
+
+---
+
+### TASK-104 広報のべおか NDL調査（創刊号からの号別台帳化）
+
+状態：BLOCKED（TASK-101と同じ再開条件）
+優先度：C
+対象：`reports/ndl-historical-source-ledger.json`
+依存関係：`docs/ndl-search-research-plan.md`（設計、TASK-100）
+目的：「広報のべおか」「市報のべおか」「延岡市広報」「広報延岡」等の名称揺れを含め、
+創刊号から可能な限り号ごとに発行年月・号数・タイトル・NDL URL・デジタル閲覧可否・
+内容概要（市長関連／議会関連／財政関連／災害関連／大型事業関連記事の有無）を台帳化する。
+
+---
+
+### TASK-105 新聞・特別職・旧町村合併資料 NDL調査
+
+状態：BLOCKED（TASK-101と同じ再開条件）
+優先度：D
+対象：`reports/ndl-historical-source-ledger.json`
+依存関係：`docs/ndl-search-research-plan.md`（設計、TASK-100）
+目的：新聞・雑誌記事（延岡／延岡市長／延岡市議会／延岡市長選挙／延岡市議選／延岡市財政／
+延岡市合併／延岡災害／延岡旭化成等の検索語、全文不可なら書誌情報のみ記録）、
+副市長・助役・収入役・教育長・教育委員・監査委員・水道事業管理者・病院事業管理者・
+議長・副議長の歴代整理、北方町・北浦町・北川町等の旧町村・合併資料
+（合併年月日・旧自治体首長・議会・人口・財政）をNDLサーチで調査する。
