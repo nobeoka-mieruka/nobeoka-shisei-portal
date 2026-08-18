@@ -1,5 +1,37 @@
 [
   {
+    "fiscalYear": 1965,
+    "mayorId": "mayor-10",
+    "mayorTermId": "mayor-10-term-02",
+    "budget": {
+      "fiscalYear": 1965,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 2048583000,
+      "totalExpenditureYen": 2047046000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/9526960",
+          "sourceTitle": "宮崎県統計年鑑 昭和40年（表255「市町村歳入・歳出決算額（昭和36年〜40年度）」）",
+          "sourceOrganization": "宮崎県総務部統計課",
+          "accessedAt": "2026-08-19",
+          "pageNumber": 192,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "国立国会図書館デジタルコレクション（送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=1,000円、普通会計。市部計(歳入10,693,150千円)+郡部計(歳入8,406,492千円)=19,099,642千円が、同じ表内の昭和40年度県全体歳入合計(19,099,642千円)と完全一致することを確認済み（読み取り誤りに対する内部検証）。歳入2,048,583千円・歳出2,047,046千円を円換算（×1000）して登録。他市の同時確認値：宮崎市(歳入2,496,315/歳出2,519,312)、都城市(歳入2,053,178/歳出2,036,670)、日南市(歳入1,016,252/歳出1,084,114)（千円）。出版年は1967年（書誌情報に記載）だが月日は不明のためsourcePublishedDateは省略。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（昭和40年版）の市町村別決算表（普通会計）より歳入総額・歳出総額のみ登録（Phase9 Lane B発見・確認・統合）。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。archiveFiscalYears.json中で最も古い年度（1988年度より23年早い）。"
+    }
+  },
+  {
     "fiscalYear": 1988,
     "mayorId": "mayor-12",
     "mayorTermId": "mayor-12-term-03",
