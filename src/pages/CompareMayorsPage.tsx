@@ -17,7 +17,13 @@ import { LandmarkIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
-import { archiveVerificationStatusLabel, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
+import {
+  archiveVerificationStatusLabel,
+  formatArchiveDateWithPrecision,
+  isActingMayorTerm,
+  mayorTermCountLabel,
+  termsForMayor,
+} from "../lib/archiveMayors";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
 import { buildPersonIndex, mayorSubmittedBillCount, policiesForPerson } from "../lib/people";
 import { civicTimelineEventsForPerson } from "../lib/civicTimeline";
@@ -43,7 +49,10 @@ function latestTermLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string
   const own = termsForMayor(terms, mayor.id);
   if (own.length === 0) return "確認中";
   return own
-    .map((t) => `${formatJapaneseDate(t.termStart)}〜${t.termEnd ? formatJapaneseDate(t.termEnd) : "現在"}`)
+    .map(
+      (t) =>
+        `${formatArchiveDateWithPrecision(t.termStart, t.termStartPrecision, formatJapaneseDate)}〜${formatArchiveDateWithPrecision(t.termEnd, t.termEndPrecision, formatJapaneseDate)}`,
+    )
     .join(" / ");
 }
 

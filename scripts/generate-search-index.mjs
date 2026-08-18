@@ -14,6 +14,18 @@ function truncate(text, max) {
   return text.length > max ? `${text.slice(0, max)}…` : text;
 }
 
+/**
+ * 日付を検索インデックス用に整形する。precisionがday未満の場合は「ごろ」を付け、
+ * 日付そのものが確定した事実ではないことを明示する（src/lib/archiveMayors.ts の
+ * formatArchiveDateWithPrecision と同じ方針。このスクリプトはビルド時のプレーンJSで
+ * TypeScriptを直接importできないため、同等のロジックをここに複製している）。
+ */
+function formatDateWithPrecisionForIndex(date, precision) {
+  if (date === null || date === undefined) return "現在";
+  if (precision === undefined || precision === "day") return date;
+  return `${date}ごろ（${precision === "month" ? "月まで確認・日は未確定" : "年のみ確認・月日は未確定"}）`;
+}
+
 const entries = [];
 
 // --- members ---
@@ -66,7 +78,10 @@ try {
       .filter((t) => t.mayorId === m.id)
       .sort((a, b) => a.termStart.localeCompare(b.termStart));
     const tenure = terms
-      .map((t) => `${t.termStart}〜${t.termEnd ?? "現在"}`)
+      .map(
+        (t) =>
+          `${formatDateWithPrecisionForIndex(t.termStart, t.termStartPrecision)}〜${formatDateWithPrecisionForIndex(t.termEnd, t.termEndPrecision)}`,
+      )
       .join("、");
     const fiscalYearsInvolved = [
       ...new Set(

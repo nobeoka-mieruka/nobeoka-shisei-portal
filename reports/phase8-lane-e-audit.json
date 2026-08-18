@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-08-18T23:59:00+09:00",
+  "lane": "E",
+  "purpose": "Phase 8 Lane E: 歴代市長アーカイブ関連データ（archiveMayors/archiveMayorTerms/electionResults/civicTimelineEvents/archiveFiscalYears/nobeokaCensusPopulation及び関連reports）の読み取り専用ローカル監査。重複・孤立参照・参照切れ・日付矛盾・出典欠落・disputed値の確定表示・一次資料未確認等を機械的＋目視で確認する。",
+  "validateDataResult": {
+    "errors": 0,
+    "warnings": 14,
+    "rawOutput要約": "npm run validate:data は errors=0 warnings=14 で終了。warningsの内訳は (1) archiveMayorTerms.json: 空白期間（在任者不明の期間）13件（1937年×3、1941、1942、1946、1947、1948、1952、1956、1966、1978、1994） — これらは戦前・戦後混乱期の資料未発見によるもので、既存notesで『未確認』として明示されており新規問題ではない。(2) councilSpeechSummaries.json: questionApproachが推奨語彙にない項目が複数（m01/m09/m17/m21/m22/fm01の発言） — Lane Eの対象データ範囲外（一般質問の分類語彙の話であり、歴代市長アーカイブとは無関係）。件数の内訳: 1（任期空白）+13が実際は1メッセージにまとまっているため、行数ベースでは概ね13行のquestionApproach警告＋1行の任期空白警告で14件。"
+  },
+  "findings": [
+    {
+      "category": "election_term_mismatch",
+      "file": "src/data/electionResults.json / src/data/archiveMayorTerms.json",
+      "recordId": "election-mayor-1967-01 / mayor-11-term-01",
+      "description": "election-mayor-1967-01（房野博、無投票当選）のelectionDateは「1967-01-23」（electionDatePrecision: day、延岡市公式年表＋延岡商工会議所四十年史の独立2一次資料でverified）。一方、対応するarchiveMayorTerms.jsonのmayor-11-term-01のtermStartは「1967-01-22」であり、確定済みの当選日より1日早い。市長が当選が確定する前日に就任していることになり、日付の前後関係が不可能（就任は当選以降でなければならない）。termStartPrecisionは\"month\"（日単位未確認）であり、\"22\"という日の値がどの資料に由来するか記録が無い（房野博個人のWikipedia記事は存在しないと既存notesに明記されている）。",
+      "severity": "high",
+      "fixable": "needs_human_review",
+      "proposedFix": "mayor-11-term-01のtermStartの日（22日）の出典を再調査し、確定済みのelectionDate（1967-01-23、無投票当選）以降の日付に修正するか、日の出典が確認できない場合はtermStartを月初アンカー（1967-01-01等、既存の他レコードのprecision=month運用に合わせる）に置き換えてprecisionをmonthのまま維持する。どちらを採るかは一次資料の追加確認が必要なため自動修正はしない。"
+    },
+    {
+      "category": "disputed_shown_as_confirmed",
+      "file": "src/data/archiveMayorTerms.json",
+      "recordId": "mayor-09-term-01",
+      "description": "青木善祐（mayor-09）の就任日。archiveMayorTerms.jsonのmayor-09-term-01.termStartは既存値\"1956-04-21\"（Wikipedia由来、termStartPrecision: month）。一方、archiveMayors.json（mayor-09）のsourceRefs（延岡市史、NDL個人送信サービスで2026-08-17に本文確認）では「自昭和三一年四月一〇日」（1956-04-10）と読み取れる旨がnotesに記録されており、既存値と10日ずれている（1文字誤読の可能性を排除できないため上書きしていない、との記載）。この不一致（disputed状態）はarchiveMayors.json側のnotes文中にのみ記述されており、archiveMayorTerms.json側のtermStartフィールド自体にはdisputedである旨のマシンリーダブルな痕跡がない。civicTimelineEvents.jsonのcivic-151は\"dateLabel\": \"1956年4月（日不明、就任日disputed）\"と正しく明示しているが、archiveMayorTerms.jsonのレコード自体にはこの注記が欠けている。",
+      "severity": "high",
+      "fixable": "auto",
+      "proposedFix": "mayor-09-term-01に、civic-151と同様の注記をnotesフィールドとして追加する。例: \"notes\": \"就任日（日）は資料間で不一致（Wikipedia由来の既存値=4月21日 vs 延岡市史(NDL)のnotes記載=4月10日、1文字誤読の可能性を排除できず未確定）。civicTimelineEvents.json civic-151の表記（disputed）と整合させること。\" データそのもの（termStart値）は書き換えず、disputed状態を明示する注記の追加のみ。"
+    },
+    {
+      "category": "disputed_shown_as_confirmed",
+      "file": "src/pages/MayorsPage.tsx",
+      "recordId": "MayorsPage (line 44-48, 186-190)",
+      "description": "/mayors 一覧ページの「任期」表示（186-190行目）およびCSVダウンロード列「直近任期開始」「直近任期終了」（37-53行目）は、term.termStart / term.termEnd を formatJapaneseDate() に直接渡して \"YYYY年M月D日\" 形式で表示している。formatJapaneseDate()自体はprecisionを考慮しない単純フォーマッタであり、termStartPrecision/termEndPrecisionの値（\"month\"や\"year\"）を無視している。src/types/historicalArchive.tsのArchiveMayorTermの型コメントには「精度がday未満の場合、termStartは月初・年初日を並び替え用の暫定アンカーとして保持する（架空の就任日ではない）」と明記されており、この暫定アンカー値をそのまま確定日付として表示するのは編集方針（推測値を確定表示しない）に反する。全30任期中27任期がday未満のprecisionであり、影響範囲は広い（青木善祐の就任日disputedケースを含む）。同じデータを扱うsrc/pages/MayorDetailPage.tsxは既にformatArchiveDateWithPrecision()（lib/archiveMayors.ts）を使ってprecision未満の場合に「ごろ」を付与しており、正しい実装が既に存在する。",
+      "severity": "high",
+      "fixable": "auto",
+      "proposedFix": "MayorsPage.tsxのformatJapaneseDate(term.termStart)/(term.termEnd)呼び出しを、既存のformatArchiveDateWithPrecision(term.termStart, term.termStartPrecision, formatJapaneseDate)（MayorDetailPage.tsxで使用中の既存ヘルパー）に置き換える。CSV列（MAYORS_CSV_COLUMNS）についても同様に precision を考慮した文字列、または termStart 生値とは別に termStartPrecision 列を追加して利用者が判別できるようにする。"
+    },
+    {
+      "category": "disputed_shown_as_confirmed",
+      "file": "src/pages/CompareMayorsPage.tsx",
+      "recordId": "CompareMayorsPage (latestTermLabel, line 42-48)",
+      "description": "市長比較ページのlatestTermLabel()関数が、formatJapaneseDate(t.termStart)/(t.termEnd)を直接呼び出しており、MayorsPage.tsxと同様にtermStartPrecision/termEndPrecisionを無視して日単位の確定日付として表示している。",
+      "severity": "high",
+      "fixable": "auto",
+      "proposedFix": "latestTermLabel()内のformatJapaneseDate呼び出しをformatArchiveDateWithPrecision(t.termStart, t.termStartPrecision, formatJapaneseDate) / formatArchiveDateWithPrecision(t.termEnd, t.termEndPrecision, formatJapaneseDate)に置き換える。"
+    },
+    {
+      "category": "disputed_shown_as_confirmed",
+      "file": "src/data/searchIndex.json (scripts/generate-search-index.mjs内のtenure生成ロジックが原因)",
+      "recordId": "mayor-mayor-09 他、非day precisionの全市長エントリ",
+      "description": "scripts/generate-search-index.mjsの64-70行目付近で、`${t.termStart}〜${t.termEnd ?? \"現在\"}`という生の文字列結合でtenureを生成しており、precisionを考慮していない。この結果、src/data/searchIndex.jsonのmayor-mayor-09エントリのdescriptionが\"在任期間：1956-04-21〜1960-04-18\"となっており、上記の通りdisputedな日（4月21日）がサイト内検索結果の説明文に確定値として表示されている。",
+      "severity": "medium",
+      "fixable": "auto",
+      "proposedFix": "generate-search-index.mjsのtenure生成部分を、termStartPrecision/termEndPrecisionが\"day\"でない場合は年月まで（または「ごろ」を付与した表記）に丸めるロジックに変更する。TypeScript側のformatArchiveDateWithPrecisionと同等のロジックをこのビルドスクリプト（.mjs）内に複製するか、共通関数化する。"
+    },
+    {
+      "category": "missing_source",
+      "file": "src/data/archiveMayorTerms.json",
+      "recordId": "mayor-11-term-01",
+      "description": "termStart(1967-01-22)の日単位の値そのものの出典が、sourceRefs内のいずれのエントリにも直接明記されていない（sourceRefsは『1967年1月 房野博氏が市長に就任した』という月単位の記述のみで、日=22という数字の根拠が不明）。上記election_term_mismatchの根本原因の一つ。",
+      "severity": "medium",
+      "fixable": "needs_human_review",
+      "proposedFix": "日の値（22）の出典を追加調査し、判明すればsourceRefsに追記、判明しなければtermStartPrecision=monthの月初アンカーへ置き換えることを検討。"
+    }
+  ],
+  "summary": {
+    "totalFindings": 6,
+    "autoFixableCount": 4,
+    "needsHumanReviewCount": 2,
+    "bySeverity": { "high": 4, "medium": 2, "low": 0 }
+  },
+  "auditScopeNotes": {
+    "checksPerformedProgrammatically": [
+      "archiveMayors.json: 重複id/slug",
+      "archiveMayorTerms.json: 重複id、unknown mayorId、previousMayorId/nextMayorId参照切れ、termStart>termEnd、birthDate>=termStart、就任時年齢20-90歳範囲外、deathDate<termStart、同一市長内の任期重複、異なる市長間の任期重複、前後市長ID連鎖の時系列整合性、sourceRefs空、sourceRefs内verificationStatus欠落・sourceUrl欠落、mayor毎のtermNumber連番の欠落確認",
+      "electionResults.json: 重複id、candidates.linkedProfileIdの参照整合性（archiveMayors/members/formerMembers全体）、当選市長のelectionDateとarchiveMayorTerms.jsonの対応任期との整合性、当選者0件/複数当選の異常検知、sourceRefs空チェック、同一electionDate+electionTypeの重複登録チェック",
+      "civicTimelineEvents.json: 重複id、relatedPersonIdsの参照整合性（歴代市長・現職議員・元議員全体）、relatedPersonIds=歴代市長の年とarchiveMayorTerms.jsonの在任期間との整合性（±1年の許容）、sourceRefs空・url欠落チェック、同一year+titleの重複登録チェック",
+      "archiveFiscalYears.json: mayorId/mayorTermIdの参照整合性、mayorIdとmayorTermId.mayorIdの矛盾チェック、fiscalYear重複チェック、finance比率フィールドの0値混入チェック（0 vs null/確認中の混同）",
+      "nobeokaCensusPopulation.json: population系フィールドの0値混入チェック",
+      "reports/ndl-historical-source-ledger.json: ndlUrl/ndlDigitalPid/ndlBibId/(title+publishedYear)の重複登録チェック（26件、重複なし）",
+      "reports/mayor-population-finance-connection.json, reports/nobeoka-fiscal-history-1933-2000-source-survey.json, reports/nobeoka-fiscal-history-coverage-report.json: mayorId/mayorTermId参照の妥当性チェック",
+      "reports/wayback-mayor-candidate-links.json: bodyConfirmed=trueかつreviewStatusが未確認系のままになっている矛盾チェック（該当0件。逆にbodyConfirmed=trueの2件はいずれもcheckNoteで「市長・選挙とは無関係」と正しく除外されており、false positiveとして機能した好例）"
+    ],
+    "checksPerformedManually": [
+      "archiveMayors.json/archiveMayorTerms.json全14名・30任期の目視レビュー（sourceRefs・notes・verificationStatusの一貫性、needsReview/partiallyVerified/verified/sourceUnavailableの4値のみが使われていることを確認、typoなし）",
+      "verificationStatus=\"verified\"がWikipedia由来のsourceRefsに誤って付与されていないかの確認（0件、Wikipedia由来は一貫してneedsReview/partiallyVerifiedとして扱われている）",
+      "青木善祐（mayor-09）の就任日disputedケースの追跡（archiveMayors.json→archiveMayorTerms.json→civicTimelineEvents.json→searchIndex.json→MayorsPage.tsx/CompareMayorsPage.tsxの各表示層を横断確認）",
+      "civicTimelineEvents.json civic-149/civic-151のrelatedPersonIds（在任期間外の年に紐付いているように見える2件）を目視確認した結果、いずれも『元市長として言及されている（候補者・編纂計画時の市長等）』ことがsummary本文で明示されており、誤紐付けではなく仕様通りと判断（false positiveとして除外）"
+    ],
+    "cleanResults": "以下は明確な問題が見つからなかった（既に十分にクリーンであることを確認済み）: mayorId/mayorTermId/electionId等の基本的な参照整合性、重複ID・重複レコード、日付の前後不可能性（1967年ケースを除く）、0とnullの混同、NDL資料の重複登録、Wayback候補リンクのfalse positive（既にセルフチェック済み）。これはTASK-090〜099等の既存の集中監査タスクにより、これらの観点は既に多く手当てされていたためと考えられる。"
+  }
+}

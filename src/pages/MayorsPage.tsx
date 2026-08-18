@@ -16,6 +16,7 @@ import {
   countDayPreciseTerms,
   decadeLabel,
   earliestTermStart,
+  formatArchiveDateWithPrecision,
   isActingMayorTerm,
   mayorTermCountLabel,
   termsForMayor,
@@ -41,11 +42,17 @@ const MAYORS_CSV_COLUMNS: CsvColumn<ArchiveMayor>[] = [
   { header: "在任状況", value: (m) => m.status },
   {
     header: "直近任期開始",
-    value: (m) => termsForMayor(archiveMayorTerms, m.id).at(-1)?.termStart,
+    value: (m) => {
+      const t = termsForMayor(archiveMayorTerms, m.id).at(-1);
+      return t ? formatArchiveDateWithPrecision(t.termStart, t.termStartPrecision, formatJapaneseDate) : undefined;
+    },
   },
   {
     header: "直近任期終了",
-    value: (m) => termsForMayor(archiveMayorTerms, m.id).at(-1)?.termEnd,
+    value: (m) => {
+      const t = termsForMayor(archiveMayorTerms, m.id).at(-1);
+      return t ? formatArchiveDateWithPrecision(t.termEnd, t.termEndPrecision, formatJapaneseDate) : undefined;
+    },
   },
   { header: "通算任期", value: (m) => mayorTermCountLabel(m, archiveMayorTerms) },
   { header: "最終確認日", value: (m) => m.lastVerifiedAt },
@@ -184,9 +191,11 @@ export function MayorsPage() {
                     <p className="mt-2 flex items-center gap-1 text-xs text-on-surface-variant">
                       <ClockIcon className="h-3.5 w-3.5 shrink-0" aria-hidden />
                       {latestTerm
-                        ? `任期 ${formatJapaneseDate(latestTerm.termStart)}〜${
-                            latestTerm.termEnd ? formatJapaneseDate(latestTerm.termEnd) : "現在"
-                          }（${mayorTermCountLabel(mayor, archiveMayorTerms)}）`
+                        ? `任期 ${formatArchiveDateWithPrecision(latestTerm.termStart, latestTerm.termStartPrecision, formatJapaneseDate)}〜${formatArchiveDateWithPrecision(
+                            latestTerm.termEnd,
+                            latestTerm.termEndPrecision,
+                            formatJapaneseDate,
+                          )}（${mayorTermCountLabel(mayor, archiveMayorTerms)}）`
                         : "任期情報：確認中"}
                     </p>
                   </Link>
