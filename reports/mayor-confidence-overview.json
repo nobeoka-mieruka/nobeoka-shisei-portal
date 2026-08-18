@@ -28,11 +28,11 @@
         "note": "延岡市公式サイトで2025年7月当選を確認"
       },
       "career": {
-        "status": "B",
-        "note": "本人後援会サイト由来（needsReview）、独立確認は未実施"
+        "status": "A",
+        "note": "延岡市公式サイト（https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html）が学歴・経歴を独立に記載していることをPhase8で確認し、archiveMayors.jsonのsourceRefsに追記済み（Phase9 Lane Dで反映漏れを検出、本ファイルへ反映）。本人後援会サイトの記述内容が政府一次資料で裏付けられた。"
       },
-      "overallGrade": "B",
-      "note": "就任・選挙は一次資料確認済み。経歴はneedsReviewのまま、生年月日は方針上非掲載。"
+      "overallGrade": "A",
+      "note": "就任・選挙・経歴とも一次資料確認済み。生年月日は現職市長のプライバシー配慮方針により編集方針上非掲載（未確認とは別扱い、総合評価には影響させない）。"
     },
     {
       "mayorId": "mayor-02",

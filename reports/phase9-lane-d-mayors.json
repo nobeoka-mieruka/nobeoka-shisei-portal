@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-08-19T00:00:00+09:00",
+  "lane": "D",
+  "purpose": "Phase 9 Lane D: reports/mayor-confidence-overview.json でB評価とされた8名（mayor-01, mayor-05, mayor-06, mayor-09, mayor-11, mayor-12, mayor-13, mayor-14）を対象に、広報のべおか・延岡市公式市長表・延岡市勢要覧・延岡市史（書誌調査のみ）・宮崎県資料・官報・全国市長会資料・選挙公報等の公的資料をWebSearch/WebFetchのみで再調査した。claude-in-chrome（NDLデジタルコレクション本文閲覧等のブラウザ自動化）は一切使用していない。NDL本文閲覧が必要な資料はndlViewingQueueAdditionsに記録し、自分では閲覧していない。src/data/archiveMayors.json・archiveMayorTerms.jsonの本体は編集していない（読み取りのみ）。",
+  "mayorFindings": [
+    {
+      "mayorId": "mayor-01",
+      "name": "三浦 久知",
+      "currentGrade": "B",
+      "unconfirmedFields": ["経歴（Phase8で延岡市公式サイトによる独立裏付けを確認済みだが、mayor-confidence-overview.jsonの評価はB career据え置きのまま更新されていない）"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": true,
+      "notes": "Phase8 Lane D（reports/phase8-lane-d-mayors.json）で、経歴（学歴・宮崎県庁/延岡市役所勤務歴）が延岡市公式サイト（https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html）という独立の一次資料で裏付けられ、archiveMayors.json本体のsourceRefsにもその旨のnotesが既に追記済みであることを確認した。しかし本レーン開始時点のreports/mayor-confidence-overview.json（2026-08-18T12:00:00生成）はcareer評価をB（「本人後援会サイト由来、独立確認は未実施」）のまま据え置いており、Phase8の成果が反映されていない。本レーンでは新規の一次資料調査（広報のべおか特集記事の検索等）を追加で試みたが、令和7年7月の就任特集記事等の新規情報源は発見できなかった。gradeUpgradeCandidateはPhase8の成果の再確認であり、本レーンの新規発見ではない点に注意。生年月日は現職市長のプライバシー配慮方針により本サイトでは非掲載を維持すべきという既存方針を再確認した。"
+    },
+    {
+      "mayorId": "mayor-05",
+      "name": "鈴木 憲太郎",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日", "7代任期（1946-03-29〜1947-03-22）の日単位精度", "衆議院議員としての詳細経歴"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "官報検索サイト（search.kanpoo.jp）で叙位叙勲記録を調査しようとしたが、当該サイトが本レーン実施中一貫してHTTP 522（サーバー到達不能）を返し、閲覧できなかった。WebSearchで「鈴木憲太郎 衆議院議員 延岡 生年月日」等を検索したが、同姓同名の現職政治家（鈴木憲和・鈴木憲・鈴木宗男）の情報に埋もれ、対象人物の新規の一次資料は発見できなかった。生年月日はWikipedia経由（1882-09-21）のまま未確認。"
+    },
+    {
+      "mayorId": "mayor-06",
+      "name": "大島 文彦",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日の独立資料での裏付け", "出身地・学歴・県庁時代の詳細経歴"],
+      "newFindings": [
+        {
+          "field": "経歴（大分県庁・宮崎県庁時代を含む詳細な職歴）",
+          "value": "Wikipedia記事（青木善祐等と同様にWikipedia自体は二次資料）に、大分県大分郡竹中村（現・大分市竹中）出身、1909年（明治42年）10月裁判所書記試験及第、1911年（明治44年）3月大分県属、1920年（大正9年）7月宮崎県属に転任、1923年宮崎郡長、1924年児湯郡長、1926年地方事務官に任官、同年10月より大分市助役を3期、1937年4月延岡市助役に転じ同年9月に延岡市長に就任、という詳細な経歴が記述されていることを確認した。これは既存archiveMayors.jsonの profile（「延岡市助役を経て市長に就任したとされる」という簡略な記述）を大幅に補完する情報である。同記事は出典として帝国自治協会『全国市長銘鑑：自治制実施五十周年記念』（1938年）および日外アソシエーツ編『全国歴代知事・市長総覧』（2022年）を明記している。",
+          "sourceUrl": "https://ja.wikipedia.org/wiki/大島文彦",
+          "confidence": "needsReview（Wikipedia経由、原本未確認）"
+        },
+        {
+          "field": "独立確認候補資料の発見（全国市長銘鑑）",
+          "value": "上記Wikipedia記事が出典として明記する『全国市長銘鑑：自治制実施五十周年記念』（帝国自治協会編、1938年）が、国立国会図書館デジタルコレクションに書誌登録されていることを確認した（NDL永続ID: info:ndljp/pid/1458365）。1938年発行というのは大島文彦の延岡市長在任期間（1937年9月〜1941年9月ごろ）と同時代の一次資料であり、既存の裏付け資料（延岡市史1963年・日本の歴代市長第3巻1985年）とは独立した第3の資料となる可能性がある。本レーンではNDL本文閲覧は行わず、書誌の実在確認のみにとどめた（ndlViewingQueueAdditions参照）。",
+          "sourceUrl": "https://dl.ndl.go.jp/info:ndljp/pid/1458365",
+          "confidence": "書誌確認のみ（本文未確認）"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "生年月日（1886-11-10）そのものの独立資料での裏付けはまだ得られていないが、『全国市長銘鑑』（1938年）というPhase8までに使われていなかった新資料の存在を特定できた。Lane B等でのNDL本文閲覧により生年月日・経歴が確認できれば、career・birthDate両方でB→A昇格の可能性が高い（gradeUpgradeCandidatesSummary参照）。"
+    },
+    {
+      "mayorId": "mayor-09",
+      "name": "青木 善祐",
+      "currentGrade": "B",
+      "unconfirmedFields": ["第11代延岡市長就任日（disputed-001）"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "指示に従い、就任日disputed状態は維持した（aokiZenyuDisputedStatus参照）。宮崎県公報・官報での1956年4月の延岡市長選挙関連公示を探索したが、WebSearchでは宮崎県公報のデジタルアーカイブ自体を発見できず、新資料には到達できなかった。官報検索サイト（search.kanpoo.jp）も本レーン実施中は終始HTTP 522で利用不能だった。延岡市史1983年版・1993年版であれば11代列の再確認によりdisputed-001解消の可能性があるため、ndlViewingQueueAdditionsに追加した（他レーンとの重複がないか要確認）。"
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日", "ふりがな", "出身地", "学歴", "前職", "死没日", "第16代退任（辞職）の具体的事情"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "WebSearchの自動要約に「令和8年春の叙勲で房野博・元延岡市長（70歳、東京都新宿区）が受章した」という記述が一度出現したが、これは年齢的に矛盾する（房野博は1967年に第14代延岡市長に就任しており、令和8年〈2026年〉に70歳なら1956年前後生まれとなり、就任時11歳という計算になり成立しない）。該当PDF（総務省 令和8年春の叙勲 勲章受章者名簿）を直接WebFetchで確認しようとしたが、PDFがバイナリ形式でテキスト抽出できず、記述の真偽を検証できなかった。年齢の不整合から見て同姓同名の別人、またはWebSearch要約の生成誤りである可能性が高いと判断し、本findingは採用しない（誤情報として記録し、他レーンが同じ誤りを追わないよう明記する）。延岡市公式PDF「延岡市年表」（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf）は本レーンでも改めてWebFetchを試みたが、依然として画像スキャンPDFでテキスト抽出できず（Phase8と同じ結果）、加えて本環境のReadツールでもpdftoppm（poppler-utils）未インストールのためページ画像化もできず、内容確認は引き続き不可能だった。"
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日", "ふりがな", "出身地", "死没日", "延岡市長選出馬の経緯"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "官報・訃報記事の検索を試みたが新規の一次資料は発見できなかった。既存のPhase8成果（日本道路公団在職の独立確認、finding-017）以上の進展はなかった。「延岡市年表」PDFの閲覧不能という制約は房野博と同様。"
+    },
+    {
+      "mayorId": "mayor-13",
+      "name": "櫻井 哲雄",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日・出身地・学歴の独立資料での裏付け", "1994年・1998年市長選挙の投票日・得票数"],
+      "newFindings": [
+        {
+          "field": "死去の詳細（死亡時刻・死因・場所）と新たな業績（九州保健福祉大学誘致）",
+          "value": "宮崎日日新聞（Miyanichi e-press）の記事「桜井哲雄氏 死去　元延岡市長、九保大を誘致」（URL: https://www.the-miyanichi.co.jp/kennai/_58518.html）が過去に存在したことをWebSearchのインデックス経由で確認した。同記事の要約によれば、桜井哲雄氏は2021年12月3日午後1時23分、間質性肺炎のため宮崎市内の病院で死去（享年86歳）。見出しに「九保大（九州保健福祉大学）を誘致」とあり、これは既存archiveMayors.jsonのprofileに記載のない新規の業績情報である。ただし記事原文URLは本レーンでのWebFetch時点でHTTP 404（既に他の宮崎日日新聞記事と同様、掲載期間終了とみられる）であり、原文への直接到達はできていない。",
+          "sourceUrl": "https://www.the-miyanichi.co.jp/kennai/_58518.html",
+          "confidence": "unconfirmed（検索エンジンのインデックス経由のみ、原文404で直接確認不可。既存データの他の宮崎日日新聞sourceRefsと同じsourceUnavailableパターン）"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "死去の時刻・死因という新規の詳細情報と、九州保健福祉大学誘致という新規の業績情報を発見したが、いずれも記事原文への到達ができておらず、本サイトの編集方針上verifiedへの引き上げはできない。将来、Internet Archive等で同URLの保存が見つかれば裏付けが可能になる。生年月日・学歴（九州大学経済学部卒等）は引き続きWikipedia止まり。1994年・1998年選挙の投票日は本レーンでも特定できなかった（選挙ドットコムのカバー範囲外という既存の知見を再確認）。官報検索サイトが利用不能だったため、Wikipediaが出典として明記する『官報』第652号（令和4年1月12日）原文の確認も本レーンでは実施できなかった。"
+    },
+    {
+      "mayorId": "mayor-14",
+      "name": "山本 一丸",
+      "currentGrade": "B",
+      "unconfirmedFields": ["ふりがな", "生年月日", "出身地", "詳細経歴", "副市長としての正式な退任日"],
+      "newFindings": [
+        {
+          "field": "副市長選任（後任・赤木繁男氏）に関する延岡市議会公式資料",
+          "value": "延岡市議会公式サイト掲載のPDF「第20回延岡市議会（臨時会）での議案審議等結果」（会期：令和7年8月12日）を直接WebFetch・Readで内容確認した。「議案第39号　副市長の選任（赤木繁男氏）　審議結果：原案同意　議決日：8月12日」との記載を確認した。これは延岡市議会公式サイトが現時点でも到達可能な一次資料であり（Phase8で404だった読売新聞・宮崎日日新聞のニュース記事URLとは異なる）、山本一丸氏の後任として通常の副市長職に赤木繁男氏が2025年8月12日付で議会同意されたという事実を、公式議会資料で独立に確認できた。あわせてWebSearchで、報道（読売新聞オンライン配信記事の検索スニペット経由、原文URLは既存Phase8記載の通り404）が「山本一丸副市長の後任に赤木繁男・市議会事務局長（58）を充てる選任案に全会一致で同意した」「赤木氏の任期は28日から4年間」と伝えていたことも重ねて確認した（議決日8/12・新任期開始8/28という2段階の日程は、公式資料と報道内容が整合している）。",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23791.pdf",
+          "confidence": "confirmed_official（延岡市議会公式資料、議案審議結果）"
+        },
+        {
+          "field": "ふりがな・詳細経歴（延岡市副市長就任時の記事）",
+          "value": "宮崎日日新聞（Miyanichi e-press）の「延岡市副市長に就任した　山本一丸（やまもと・かずまる）さん」という記事が過去に存在したことをWebSearchのインデックス経由で確認した。見出しから氏名の読み方「やまもと・かずまる」が得られる。要約によれば、当時の年齢は58歳、延岡高等学校を1978年に卒業、1979年に市役所入庁、地域医療対策室長・市民課長等を歴任、市職員労働組合の委員長・書記長を務めた、同市三須町に両親・妻と4人暮らし、との記述があった。これは2025年の職務代理者就任時（65歳）とは別の、通常の副市長への当初就任時の記事とみられ、2つの記事間の年齢差（58歳→65歳、約7年）は経歴上矛盾しない。ただし記事原文URL（https://www.the-miyanichi.co.jp/hito/_31790.html）は本レーンでのWebFetch時点でHTTP 404であり、原文への直接到達はできていない。後任・赤木繁男氏の同種記事（the-miyanichi.co.jp/hito/_87015.html）も同様に404だった。",
+          "sourceUrl": "https://www.the-miyanichi.co.jp/hito/_31790.html",
+          "confidence": "unconfirmed（検索エンジンのインデックス経由のみ、原文404で直接確認不可）"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "延岡市議会公式PDF（confirmed_official）により、赤木繁男氏への副市長交代という事実系列の信頼性が向上した。ただし山本一丸氏自身の生年月日・出身地・詳細経歴・正式な退任日（職務代理者としてではなく通常の副市長としての退任日）は依然未確認。ふりがな候補「やまもと・かずまる」は新規に得られたが、原典未到達のためarchiveMayors.jsonへの反映は次回以降、原文またはInternet Archive保存が見つかった時点での確認を推奨する。"
+    }
+  ],
+  "aokiZenyuDisputedStatus": {
+    "maintained": true,
+    "note": "指示に従い、青木善祐（mayor-09）第11代延岡市長就任日のdisputed状態（reports/ndl-research-findings.json disputed-001: 候補A=1956-04-10〈延岡市史1963年、confidence D〉 vs 候補B=1956-04-21〈既存値、Wikipedia由来〉）を維持した。本レーンではWebSearch/WebFetchで宮崎県公報・官報等の追加の一次資料を探索したが、投票日・就任日を直接特定できる新資料は発見できなかった（官報検索サイトsearch.kanpoo.jpは本レーン実施中終始HTTP 522で利用不能だった）。archiveMayorTerms.jsonのmayor-09-term-01.termStartは上書きしていない。延岡市史1983年版・1993年版の閲覧により解消できる可能性があるためndlViewingQueueAdditionsに候補として記録した。"
+  },
+  "hobanoHiroshiTermStartInvestigation": {
+    "resolved": false,
+    "note": "房野博（mayor-11）のmayor-11-term-01.termStart（1967-01-22、市公式年表由来、精度month表記だが値は日単位）が、独立確認済みの当選日（1967-01-23、無投票当選、reports/ndl-research-findings.json finding-019）より1日早いという既知の齟齬について、本レーンでは新たな一次資料を発見できなかった。WebSearch/WebFetchの範囲（官報・宮崎県公報・広報のべおか・延岡市年表PDF）では追加の手がかりは得られず、既存のfinding-019の解釈（無投票当選の場合、投票日相当の日と就任日が近接するのは制度上自然であり、必ずしも矛盾ではない）を覆す新情報も、逆に矛盾を確定させる新情報も見つからなかった。推測での解消は行わず、unconfirmedのまま維持することを推奨する。「延岡市年表」PDF（uploaded/attachment/4392.pdf）が画像スキャンで内容確認できない点が引き続き最大のボトルネックである。"
+  },
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "high",
+      "purpose": "大島文彦（mayor-06）の生年月日（1886-11-10）・経歴（大分県庁・宮崎県庁時代の職歴、延岡市助役就任経緯）を、既存の裏付け資料（延岡市史1963年・日本の歴代市長第3巻1985年）とは独立した第3の一次資料で確認する。1938年発行で大島の延岡市長在任期間（1937-1941）と同時代の資料である点が価値が高い。",
+      "title": "全国市長銘鑑：自治制実施五十周年記念",
+      "bibliographicId": "info:ndljp/pid/1458365（帝国自治協会編、1938年）",
+      "page": "延岡市の項（コマ番号未特定、目次または索引から大分・宮崎県関連自治体を辿って特定する必要あり）",
+      "relatedMayor": "mayor-06",
+      "discoveredByLane": "D"
+    },
+    {
+      "priority": "medium",
+      "purpose": "青木善祐（mayor-09）の第11代延岡市長就任日disputed-001（1956-04-10 vs 1956-04-21）の解消、房野博（mayor-11）のtermStart矛盾（1967-01-22 vs 1967-01-23）の確認、鈴木憲太郎（mayor-05）の生年月日・7代任期日付の確認。延岡市史1963年版（既存ndl-src-02）とは別版（1983年版・1993年版）が存在する可能性があり、Amazon.co.jp等で1983年版の実在は確認できたが、本レーンではNDLデジタルコレクションでの当該版の書誌ID（別pid）を特定できなかった。Lane Bまたは他レーンでNDLサーチにて「延岡市史」の全版（1963/1983/1993等）を横断的に確認し、1963年版以外が存在すれば優先的に11代・14代列を再確認してほしい。",
+      "title": "延岡市史（1983年版・1993年版、版違いの可能性のある続編）",
+      "bibliographicId": "未特定（本レーンでは1963年版のbib ID R100000002-I000001063952 以外を発見できなかった）",
+      "page": "歴代市長一覧表（1963年版ではコマ103相当）",
+      "relatedMayor": "mayor-09",
+      "discoveredByLane": "D"
+    }
+  ],
+  "gradeUpgradeCandidatesSummary": [
+    {
+      "mayorId": "mayor-01",
+      "field": "career",
+      "recommendedNewGrade": "A",
+      "evidence": "Phase8 Lane D（reports/phase8-lane-d-mayors.json）で確認済み。延岡市公式サイト（https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html）が学歴・経歴（中央大学商学部卒業、早稲田大学大学院公共経営研究科修了、宮崎県庁・延岡市役所勤務歴）を独立に記載しており、既存archiveMayors.jsonのsourceRefsにもその旨のnotesが既に追記済み。reports/mayor-confidence-overview.jsonの評価がこの成果を反映しておらずB career据え置きのままなので、次回の評価更新時にA相当への引き上げを検討されたい（本レーンの新規発見ではなく、既存データの再確認）。"
+    }
+  ],
+  "futureGradeUpgradeCandidatesIfNdlConfirmed": [
+    {
+      "mayorId": "mayor-06",
+      "field": "birthDate / career",
+      "conditionalNewGrade": "A（NDL『全国市長銘鑑』1938年で生年月日・経歴が確認できた場合）",
+      "evidence": "ndlViewingQueueAdditionsの1938年資料が閲覧・確認され、既存値（1886-11-10）と一致すれば、独立3資料目としてconfidence Aに値する。"
+    }
+  ],
+  "summary": {
+    "mayorsResearched": 8,
+    "newFieldsConfirmed": 5,
+    "gradeUpgradeCandidates": 1,
+    "queueItemsAdded": 2
+  }
+}
