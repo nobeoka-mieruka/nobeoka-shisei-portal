@@ -7,7 +7,7 @@
     "termEnd": null,
     "termNumber": 1,
     "electionDate": "2025-07-20",
-    "populationAtStart": null,
+    "populationAtStart": 111150,
     "previousMayorId": "mayor-14",
     "nextMayorId": null,
     "sourceRefs": [
@@ -46,6 +46,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "投票日2025-07-20（告示2025-07-13）、三浦久知が20,052票（36.3%）で当選、次点ごとう哲朗20,016票（36.2%）、吉本やすし15,196票（27.5%）、36票差の接戦だったことを確認。前任市長を読谷山洋司（mayor-03、2025-06-30付辞職）と特定。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2025、基準日2025-01-01）の現住人口111,150人を、就任日（2025-07-20）に最も近い実測値として計上した（基準日と就任日の差は200日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ]
   },
@@ -58,7 +67,7 @@
     "termEndPrecision": "month",
     "termNumber": 1,
     "electionDate": "2006-01-29",
-    "populationAtStart": null,
+    "populationAtStart": 121517,
     "previousMayorId": "mayor-13",
     "nextMayorId": null,
     "sourceRefs": [
@@ -88,6 +97,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "投票日2006-01-29（告示2006-01-22）、首藤正治23,749票で当選、現職櫻井哲雄14,965票で落選したことを確認。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2006、基準日2006-01-01）の現住人口121,517人を、就任日（2006-02-06）に最も近い実測値として計上した（基準日と就任日の差は36日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ]
   },
@@ -100,7 +118,7 @@
     "termEndPrecision": "month",
     "termNumber": 2,
     "electionDate": "2010-01-24",
-    "populationAtStart": null,
+    "populationAtStart": 130680,
     "previousMayorId": null,
     "nextMayorId": null,
     "sourceRefs": [
@@ -130,6 +148,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "投票日2010-01-24（告示2010-01-17）、首藤正治41,738票で再選（対立候補23,029票）を確認。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2010、基準日2010-01-01）の現住人口130,680人を、就任日（2010-02-06）に最も近い実測値として計上した（基準日と就任日の差は36日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ]
   },
@@ -143,7 +170,7 @@
     "termNumber": 3,
     "electionDate": "2014-01-26",
     "retirementReason": "任期満了",
-    "populationAtStart": null,
+    "populationAtStart": 128120,
     "previousMayorId": null,
     "nextMayorId": "mayor-03",
     "sourceRefs": [
@@ -164,6 +191,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "投票日2014-01-26（告示2014-01-19）、首藤正治33,479票で3選（対立候補2名）を確認。2018年選挙には出馬せず、後継指名した永山英也氏は落選（読谷山洋司氏が初当選）。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2014、基準日2014-01-01）の現住人口128,120人を、就任日（2014-02-06）に最も近い実測値として計上した（基準日と就任日の差は36日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ],
     "notes": "3期12年を経て2018年市長選には出馬せず勇退したため、退任理由は「任期満了」とした（選挙での落選ではない）。"
@@ -178,7 +214,7 @@
     "termNumber": 1,
     "electionDate": "2018-01-28",
     "electionType": "通常選挙",
-    "populationAtStart": null,
+    "populationAtStart": 122242,
     "previousMayorId": "mayor-02",
     "nextMayorId": null,
     "sourceRefs": [
@@ -208,6 +244,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "延岡市公式サイト本人プロフィールページ（Wayback Machine保存）に「平成30年2月6日　第27代延岡市長就任」と明記されていることを確認した。これにより就任日を月単位から日単位（2018-02-06）へ格上げした。Wikipedia記事内の内部矛盾（infobox「2月6日」・本文「2月26日」）は、この公式一次資料により「2月6日」が正しいと判断できる。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2018、基準日2018-01-01）の現住人口122,242人を、就任日（2018-02-06）に最も近い実測値として計上した（基準日と就任日の差は36日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ]
   },
@@ -220,7 +265,7 @@
     "electionDate": "2022-01-23",
     "electionType": "通常選挙",
     "retirementReason": "辞職",
-    "populationAtStart": null,
+    "populationAtStart": 116566,
     "previousMayorId": null,
     "nextMayorId": "mayor-14",
     "sourceRefs": [
@@ -241,6 +286,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "2025年6月30日付での辞職（退任）を報道で確認。理由は肺・膵臓の腫瘍発見による健康上の理由。リンク切れ確認済み：2026-08-08の外部リンク監査でURLが404（掲載期間終了）であることを確認したが、退任事実自体は当時アクセス時に確認済みであり、他の複数報道とも整合するためverifiedを維持する（Internet Archive等への自動置換は行っていない）。（2026-08-10にリンク到達性を確認したところ、このURLは404（ページが見つかりません）でした。既存の確認内容自体は削除せず、リンク切れの事実のみを追記しています。）"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2022、基準日2022-01-01）の現住人口116,566人を、就任日（2022-02-06）に最も近い実測値として計上した（基準日と就任日の差は36日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ]
   },
@@ -938,7 +992,7 @@
     "termNumber": 3,
     "electionDate": "2002-01-27",
     "retirementReason": "選挙落選",
-    "populationAtStart": null,
+    "populationAtStart": 124563,
     "previousMayorId": null,
     "nextMayorId": "mayor-02",
     "sourceRefs": [
@@ -968,6 +1022,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "投票日2006-01-29、首藤正治23,749票で当選、現職櫻井哲雄14,965票で落選したことを確認。第23代の退任理由が選挙落選であることの根拠。"
+      },
+      {
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+        "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-18",
+        "extractionMethod": "manual",
+        "verificationStatus": "partiallyVerified",
+        "notes": "archiveFiscalYears.json（FY2002、基準日2002-01-01）の現住人口124,563人を、就任日（2002-02-06）に最も近い実測値として計上した（基準日と就任日の差は36日）。国勢調査人口とは定義・基準日が異なる点、および2006-2007年の市町村合併（北方町・北浦町・北川町編入）前後は行政区域が異なり単純比較できない点に留意（reports/mayor-population-finance-connection.json参照）。"
       }
     ],
     "notes": "2006年市長選挙で首藤正治氏に敗れて退任したため、退任理由は「選挙落選」とした。"
