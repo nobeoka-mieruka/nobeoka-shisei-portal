@@ -3,7 +3,7 @@
   "purpose": "歴代市長14名（現職除く三浦久知は別途term1件で対応、山本一丸は職務代理者のため対象外）の任期と、人口・財政データとの接続状況を棚卸しした。新規データファイルは作らず、既存のarchiveFiscalYears.json（mayorId/mayorTermId/populationフィールドで既に接続済み）を参照する形をとる。",
   "existingDataInventory": {
     "archiveMayors.json": "市長14名の基本プロフィール（既存）",
-    "archiveMayorTerms.json": "29任期の期間・退任理由等（既存）",
+    "archiveMayorTerms.json": "29任期（公選市長のみ）の期間・退任理由等（既存）。mayor-14職務代理者分を含む全体件数は30件（Phase9で確認、reports/phase9-lane-e-audit.json参照）。",
     "electionResults.json": "29件の選挙結果、electionMethodで間接選出/直接公選を区別（Phase3で拡充済み）",
     "civicTimelineEvents.json": "152件の市政史イベント、relatedPersonIdsで市長と接続（既存）",
     "archiveFiscalYears.json": "FY2001-2026の26年度分、歳入歳出・市債・基金・財政指標・人口（現住人口ベース）を収録し、mayorId・mayorTermIdで市長任期と既に接続済み（既存、新規接続実装は不要と確認）",

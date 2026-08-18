@@ -47,6 +47,13 @@ const archiveDocFiscalYears = archiveCouncilDocuments.map((d) => d.fiscalYear);
 const archiveDocMinFy = archiveDocFiscalYears.length > 0 ? Math.min(...archiveDocFiscalYears) : null;
 const archiveDocMaxFy = archiveDocFiscalYears.length > 0 ? Math.max(...archiveDocFiscalYears) : null;
 
+// 財政データ（archiveFiscalYears.json）の実際の最小収録年度。表示文言をハードコードすると
+// データ追加のたびにズレるため、実データから動的に算出する。
+const archiveFiscalYearMinFy =
+  archiveFiscalYears.length > 0 ? Math.min(...archiveFiscalYears.map((f) => f.fiscalYear)) : null;
+const archiveFiscalYearMaxFy =
+  archiveFiscalYears.length > 0 ? Math.max(...archiveFiscalYears.map((f) => f.fiscalYear)) : null;
+
 function termsOverlapFiscalYearRange(termList: ArchiveMayorTerm[], minFy: number | null, maxFy: number | null): boolean {
   if (minFy === null || maxFy === null) return false;
   const rangeStart = new Date(`${minFy}-04-01`);
@@ -207,7 +214,9 @@ export function MayorDetailPage() {
           <div className="rounded-lg border border-outline-variant p-3">
             <dt className="text-xs font-medium text-on-surface-variant">財政データ</dt>
             <dd className="mt-1 text-sm text-on-surface">
-              {relatedFiscalYears.length > 0 ? `${relatedFiscalYears[0].fiscalYear}〜${relatedFiscalYears[relatedFiscalYears.length - 1].fiscalYear}年度分を確認可能` : "対応年度なし（財政データはFY2001年度以降のみ収録）"}
+              {relatedFiscalYears.length > 0
+                ? `${relatedFiscalYears[0].fiscalYear}〜${relatedFiscalYears[relatedFiscalYears.length - 1].fiscalYear}年度分を確認可能`
+                : `対応年度なし（財政データは${archiveFiscalYearMinFy != null ? `FY${archiveFiscalYearMinFy}年度` : ""}以降のみ収録）`}
             </dd>
           </div>
         </dl>
@@ -365,7 +374,8 @@ export function MayorDetailPage() {
             <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
               財政ページ
             </Link>
-            ）はFY2001〜2026年度分を収録していますが、この市長の任期に単独で対応する年度は確認されていません（在任期間が収集範囲外、または在任期間が年度途中の市長交代のみに該当するためで、財政データが存在しないという意味ではありません）。
+            ）は{archiveFiscalYearMinFy != null && archiveFiscalYearMaxFy != null ? `FY${archiveFiscalYearMinFy}〜${archiveFiscalYearMaxFy}年度分` : "一部年度分"}
+            を収録していますが、この市長の任期に単独で対応する年度は確認されていません（在任期間が収集範囲外、または在任期間が年度途中の市長交代のみに該当するためで、財政データが存在しないという意味ではありません）。
           </p>
         )}
       </section>

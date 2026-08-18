@@ -1,0 +1,176 @@
+{
+  "generatedAt": "2026-08-19T12:00:00+09:00",
+  "lane": "E",
+  "purpose": "Phase 9 Lane E: 29任期/30任期の差異調査、歴代市長アーカイブ・財政アーカイブ関連データの読み取り専用ローカル監査、新規追加された1988-2000年度財政データの表示ロジック監査。読み取り専用を原則としつつ、明確に安全なコード（表示ロジック・文言）のバグ修正のみ適用した。データファイル（src/data/*.json）の数値・事実は書き換えていない。",
+
+  "termCountInvestigation": {
+    "currentTotal": 30,
+    "priorPhaseValue": 29,
+    "explanation": "git logで src/data/archiveMayorTerms.json の変更履歴を追跡した結果、コミットe1b2f8d（『歴代市長アーカイブ完成（1933年以降）』）時点でarchiveMayorTerms.jsonは29件だった。その後コミットdc29171（2026-08-05、『2025年市長空白期間を職務代理者記録で解消』）で、読谷山洋司市長の辞職（2025-06-30）〜三浦久知市長の就任（2025-07-20）の間、山本一丸副市長（当時）が地方自治法に基づき市長職務代理者を務めた事実を報道2件（読売新聞オンライン・宮崎日日新聞、いずれも原文URLは404のため検索結果スニペット経由、verificationStatus: needsReview）で確認し、mayor-14-term-01（termStart 2025-07-01, termEnd 2025-07-19, mayorRole: 'acting'）として新規登録した。これにより29件→30件に増加した。この追加は重複でも仮任期でもなく、実在する行政上の空白期間を埋める、出典付きの正当なレコードである。 また『29』という数字には別の正当な用法も存在する：mayor-01（三浦久知）のプロフィール文には延岡市公式ホームページ由来の静的テキストとして『第29代延岡市長』という記載があり、reports/mayor-ordinal-crosscheck.json（2026-08-18生成）でも『全29任期（13人＋市長職務代理者1名）』のうち山本一丸を除く公選市長29任期を『ordinal 1〜29』として棚卸ししている。これは日本の地方自治体で職務代理者に公式の代数（〇代）を付与しない慣行と整合しており、30（archiveMayorTerms.json全レコード数）と29（公選市長のみの代数・任期数）は矛盾するデータではなく、定義の異なる2つの正しい数値である。 このことはコード側（src/pages/DataStatusPage.tsx:355）で既に正しく可視化されており、動的に算出した文言『任期30件（うち公選29件・職務代理1件）』として両方の数値を並記している。src/pages/MayorsPage.tsx（archiveMayorTerms.lengthを直接表示）、CompareMayorsPage.tsx、DataStatusPage.tsxを含め、UIコード内の件数表示はすべて配列.lengthベースの動的生成であり、ハードコードされた29/30という数値表示は見つからなかった。",
+    "conclusion": "29は『古い（誤った）数値』ではなく、(1) mayor-14追加前の過去のarchiveMayorTerms.jsonの件数として当時は正しかった値、かつ(2) 現在でも『公選市長のみの任期数・代数』という別定義では今なお正しい値、という二重の意味を持つ。30は現在のarchiveMayorTerms.json全レコード数（公選29＋職務代理1）として正しい。UIコードは両方を区別して正しく表示しており、データ不整合や表示バグは存在しない。",
+    "staleReferencesFound": [
+      {
+        "file": "reports/mayor-ordinal-crosscheck.json",
+        "location": "purpose, ordinalCrossCheckTable.note (2026-08-18生成)",
+        "status": "stale ではない。『29任期＝公選市長のみ』という定義を明示した上で使用しており、mayor-14（職務代理）を意図的に除外した独立した棚卸し。矛盾なし。"
+      },
+      {
+        "file": "reports/mayor-population-finance-connection.json",
+        "location": "existingDataInventory.archiveMayorTerms.json (『29任期の期間・退任理由等（既存）』), existingDataInventory.electionResults.json (『29件の選挙結果』) (2026-08-18生成)",
+        "status": "生成日(2026-08-18)はmayor-14追加(2026-08-05)より後だが、このレポート自身のpurposeで『三浦久知は別途term1件で対応、山本一丸は職務代理者のため対象外』と明記しており、意図的に29（公選市長の任期・選挙のみ）を使っている。ただしarchiveMayorTerms.jsonの実件数は30件であり、このインベントリ表の『29任期』という短い説明だけを読むと『全体が29件』と誤解しかねない書き方ではある。修正候補（needs_human_review・低優先度）：『29任期（公選市長のみ、mayor-14職務代理を除く。全体は30件）』のように注記を補うと誤解を防げる。",
+        "fixable": "needs_human_review",
+        "note": "reports/以下のファイルであり、本レーンの方針（コードのみ安全修正、データ・レポートは書き換えない）に従い未修正。"
+      },
+      {
+        "file": "docs/session-handoff.md",
+        "location": "2920, 2924, 3009, 3035行目付近（2026-08-05のセッションログ）",
+        "status": "mayor-14追加前のセッション経過を記録した日付付きログであり、append-only の履歴記録として妥当。修正不要（過去の状態の正しい記録）。"
+      },
+      {
+        "file": "src/pages/MayorsPage.tsx / CompareMayorsPage.tsx / DataStatusPage.tsx 等UIコード",
+        "location": "-",
+        "status": "ハードコードされた29/30という数値は見つからなかった。すべてarchiveMayorTerms.length等の動的算出。問題なし。"
+      }
+    ]
+  },
+
+  "validateDataResult": {
+    "errors": 0,
+    "warnings": 14,
+    "note": "Phase8 Lane E実行時と完全に同一の結果（archiveMayorTerms.jsonの空白期間13件＋councilSpeechSummaries.jsonのquestionApproach語彙警告13件、実際の出力行数は14行）。本監査対象範囲（歴代市長・財政アーカイブ）に新規のerrors/warningsは発生していない。"
+  },
+
+  "fiscalDataDisplayAudit": {
+    "scope": "src/data/archiveFiscalYears.json に新規追加された1988-2000年度分（13件、budget.totalRevenueYen/totalExpenditureYenのみ確認済み、population/debt/fund/finance の各トップレベルキー自体が存在しない＝type定義上optionalな設計）が、既存の全消費側コードで安全に扱われているかをコードリーディングで確認した。",
+    "pagesChecked": [
+      "src/pages/MayorDetailPage.tsx",
+      "src/pages/FinancePage.tsx",
+      "src/pages/FinanceBudgetPage.tsx",
+      "src/pages/FinanceDebtPage.tsx",
+      "src/pages/FinanceFundsPage.tsx",
+      "src/pages/CompareFinancePage.tsx",
+      "src/pages/CompareBudgetPage.tsx",
+      "src/pages/CompareDebtPage.tsx",
+      "src/pages/CompareFundsPage.tsx",
+      "src/pages/CompareMayorsPage.tsx（archiveFiscalYearsを参照していないことを確認、対象外）",
+      "src/pages/HistoryPage.tsx（archiveFiscalYearsを参照せず、FinanceLineChartは国勢調査人口専用に再利用されているのみと確認、対象外）",
+      "src/pages/TimelineYearPage.tsx",
+      "src/pages/TimelinePage.tsx",
+      "src/pages/DataStatusPage.tsx",
+      "src/lib/archiveFinance.ts",
+      "src/lib/archiveFinanceMetrics.ts",
+      "src/lib/archivePerCapita.ts",
+      "src/components/finance/FinanceLineChart.tsx",
+      "src/components/finance/FinanceBarChart.tsx",
+      "src/components/finance/FinanceMetricSection.tsx",
+      "src/types/historicalArchive.ts"
+    ],
+    "designAssessment": "ArchiveFiscalYear型定義（historicalArchive.ts）はpopulation/budget/debt/fund/financeを全てoptional（?）として宣言しており、『各サブ型が確認できていない年度はundefinedのまま欠落させ、0や架空値で埋めない』という設計意図がコメントに明記されている。FINANCE_METRICSレジストリ（archiveFinanceMetrics.ts）の全getPoint関数はoptional chaining（y.debt?.balance...等）と`?? null`フォールバックで統一されており、1988-2000年度のようにdebt/fund/finance/populationキー自体が存在しないレコードでもTypeErrorやNaNは発生しない設計であることをコードリーディングで確認した。FinanceLineChart/FinanceBarChartは value===null を0として描画せず、折れ線は欠損区間をまたいで補間しない（コメントで明記・実装とも一致）。0とnullの混同は起きない。computePerCapitaYen()は人口0以下・null・undefinedをすべて算出対象外としており0除算・NaNのリスクなし。年度の並び順はsortedFiscalYears()（fiscalYear昇順）を使うページで正しく1988年が先頭に来ることを確認、かつ元データ（archiveFiscalYears.json）自体も既に1988→2026の昇順で格納されていることを確認した。",
+    "issuesFound": [
+      {
+        "file": "src/pages/MayorDetailPage.tsx",
+        "description": "『財政データ』欄・『財政年度別アーカイブ』欄の2箇所で、relatedFiscalYears.length===0のフォールバック文言が『財政データはFY2001年度以降のみ収録』『FY2001〜2026年度分を収録』とハードコードされていた。今回1988-2000年度が新規追加されたことで、この文言は事実と矛盾する古い記述になっていた（実際の収録範囲はFY1988〜2026）。",
+        "severity": "medium",
+        "fixed": true,
+        "fixDetail": "archiveFiscalYearMinFy/archiveFiscalYearMaxFyをarchiveFiscalYears配列から動的算出する定数を追加し、両箇所のハードコード文言をこれらの動的値を使う形に置き換えた（『FY${archiveFiscalYearMinFy}年度以降』『FY${archiveFiscalYearMinFy}〜${archiveFiscalYearMaxFy}年度分』）。今後データ範囲が変わっても自動的に追従する。"
+      },
+      {
+        "file": "src/pages/DataStatusPage.tsx",
+        "description": "『財政・人口・基金・市債（年度データ）』のdetail文言が『平成12年度（2000年度、FY2000）以前は「資料なし」...であり、「未調査」ではありません』とハードコードされていた。総務省「決算カード」オンライン公開の最古年度がFY2001であるという事実自体は正しいが、今回e-Stat「地方財政状況調査」からFY1988-2000の歳入総額・歳出総額を新規に確認・登録したため、『2000年度以前は資料なし』という結論部分が事実と矛盾していた。",
+        "severity": "medium",
+        "fixed": true,
+        "fixDetail": "文言を『総務省「決算カード」オンライン公開の最古年度は平成13年度＝FY2001（2026-08-17確認）ですが、昭和63年度（1988年度）〜平成12年度（2000年度）分は総務省「地方財政状況調査」（e-Stat）から歳入総額・歳出総額のみ別途確認済みです（この期間の市債・基金・財政健全化判断比率・当初予算等は未確認、CD-ROM等の物理媒体調査は未実施）』に修正し、新しい実態（部分的にFY1988まで遡れている）を正しく反映した。"
+      },
+      {
+        "file": "src/pages/CompareBudgetPage.tsx",
+        "description": "hasBudgetData()（!!y.budget）でフィルタしているため、1988-2000年度もピッカーの選択対象に含まれる。しかし当該13年度はgeneralAccountInitialBudgetYen等（当初予算・補正後予算・決算額）がすべてnullで、totalRevenueYen/totalExpenditureYen（歳入総額・歳出総額）のみ確認済みという状態のため、これらの年度を選んで表示すると『確認中』ばかりが並ぶ体験になる。ただし正確性上の問題はなく（0を表示しているわけではない、架空値もない）、既存の設計方針（未確認は「確認中」と明示）通りの挙動。",
+        "severity": "low",
+        "fixed": false,
+        "note": "バグではなくUXの改善余地として記録。修正は今回見送り（human判断が必要：歳入・歳出のみのデータをこのページに独自に表示するか、別枠にするかは編集方針次第）。"
+      }
+    ]
+  },
+
+  "findings": [
+    {
+      "category": "stale_display_text",
+      "file": "src/pages/MayorDetailPage.tsx",
+      "recordId": "-",
+      "description": "『財政データ』ステータス欄と『財政年度別アーカイブ』見出し下の文言が、1988-2000年度追加前の収録範囲（FY2001〜）をハードコードしていた。",
+      "severity": "medium",
+      "fixable": "auto",
+      "proposedFix": "archiveFiscalYears配列から実際の最小・最大年度を算出する定数を追加し、文言をその値で動的生成する。",
+      "applied": true
+    },
+    {
+      "category": "stale_display_text",
+      "file": "src/pages/DataStatusPage.tsx",
+      "recordId": "-",
+      "description": "データ完全性ダッシュボードの財政データ行の説明文が『平成12年度以前は資料なし』と記載しており、今回のFY1988-2000追加と矛盾していた。",
+      "severity": "medium",
+      "fixable": "auto",
+      "proposedFix": "決算カードのオンライン公開最古年度＝FY2001という事実は残しつつ、e-Stat経由でFY1988-2000の歳入・歳出総額のみ別途確認済みである旨を追記する。",
+      "applied": true
+    },
+    {
+      "category": "unresolved_carryover_from_phase8",
+      "file": "src/data/archiveMayorTerms.json",
+      "recordId": "mayor-11-term-01",
+      "description": "Phase8 Lane Eで指摘された、房野博氏の任期開始日（termStart: 1967-01-22, precision: month）が、対応する選挙のelectionDate（1967-01-23、無投票当選、precision: day、2独立一次資料でverified）より1日早いという矛盾は、本監査時点でも未解消のまま残っている（データ変更なし）。日=22の出典は依然としてsourceRefsに明記されていない。",
+      "severity": "high",
+      "fixable": "needs_human_review",
+      "proposedFix": "Phase8時点の提案を踏襲：日の値（22）の出典を追加調査し、判明すればsourceRefsに追記、判明しなければtermStartPrecision=monthのまま月初アンカー（1967-02-01等、慣例に合わせる）へ置き換えることを検討。今回のレーンは読み取り専用のため未着手。",
+      "applied": false
+    },
+    {
+      "category": "resolved_carryover_from_phase8_verified",
+      "file": "src/data/archiveMayorTerms.json / src/pages/MayorsPage.tsx / src/pages/CompareMayorsPage.tsx / scripts/generate-search-index.mjs",
+      "recordId": "mayor-09-term-01 他",
+      "description": "Phase8 Lane Eで自動修正済みとされた4件（mayor-09-term-01のdisputed注記追加、MayorsPage.tsx/CompareMayorsPage.tsxのformatArchiveDateWithPrecision採用、generate-search-index.mjsのprecision考慮）が、本監査時点でもすべて正しく適用済みであることをコード・データの両方で再確認した。回帰なし。",
+      "severity": "low",
+      "fixable": "auto",
+      "proposedFix": "対応不要（既に正しく適用済みであることの確認のみ）。",
+      "applied": false
+    },
+    {
+      "category": "referential_integrity",
+      "file": "src/data/archiveFiscalYears.json",
+      "recordId": "FY1988〜FY2000（13件）",
+      "description": "新規追加13件について、mayorId/mayorTermIdの参照整合性（存在チェック・mayorTermId.mayorIdとの一致・任期期間との年度重複判定）、fiscalYearの重複、sourceRefs（verificationStatus/sourceUrl/accessedAt）の欠落、totalRevenueYen/totalExpenditureYenの非数値・非正値混入を機械チェックした。issue該当0件。",
+      "severity": "low",
+      "fixable": "auto",
+      "proposedFix": "対応不要（クリーン）。",
+      "applied": false
+    },
+    {
+      "category": "wording_precision_note",
+      "file": "reports/mayor-population-finance-connection.json",
+      "recordId": "existingDataInventory",
+      "description": "『archiveMayorTerms.json: 29任期の期間・退任理由等（既存）』という説明が、mayor-14（職務代理、30件目）を除外した定義であることを本文中で説明してはいるものの、データ辞書の短い1行だけを読むと全体件数と誤解されうる。",
+      "severity": "low",
+      "fixable": "needs_human_review",
+      "proposedFix": "『29任期（公選市長のみ。mayor-14職務代理者を含む全体は30件）』のように明記すると誤解を防げる。reports/はデータファイルに準じる扱いとして本レーンでは書き換えていない。",
+      "applied": false
+    }
+  ],
+
+  "summary": {
+    "totalFindings": 6,
+    "autoFixedCount": 2,
+    "needsHumanReviewCount": 2,
+    "cleanOrNoActionCount": 2,
+    "bySeverity": { "high": 1, "medium": 2, "low": 3 }
+  },
+
+  "verification": {
+    "typecheck": "npm run typecheck → 成功（エラー0）",
+    "lint": "npm run lint（oxlint）→ 成功（エラー0）",
+    "validateData": "npm run validate:data → errors=0, warnings=14（Phase8時点と同一）",
+    "buildNote": "npm run build はレーン方針により未実行（統合担当が最後に1回実行する想定）。"
+  },
+
+  "filesModified": [
+    "E:\\nobeoka-gikai\\src\\pages\\MayorDetailPage.tsx",
+    "E:\\nobeoka-gikai\\src\\pages\\DataStatusPage.tsx"
+  ]
+}
