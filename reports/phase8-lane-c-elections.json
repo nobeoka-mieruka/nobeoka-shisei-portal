@@ -1,0 +1,288 @@
+{
+  "generatedAt": "2026-08-18T00:00:00+09:00",
+  "lane": "C",
+  "purpose": "Phase 8 Lane C: src/data/electionResults.json 内の1971・1975・1978・1982・1986・1990・1994・1998年 延岡市長選挙レコード（既存8件）について、未確認項目（得票数・投票率・対立候補・有権者数・無効票数・無投票有無）をWeb検索（WebSearch/WebFetch限定、claude-in-chrome不使用）で補完調査する。新規レコード追加ではなく既存レコードの精度向上が目的。",
+  "priorWorkNote": "作業開始時点で、同一データファイルに『TASK-045』（本日2026-08-18付コミット34bf792）による既存の集中調査記録が既に反映されていることを確認した。TASK-045はNDLデジタルコレクション（claude-in-chrome経由、reports/ndl-research-findings.json参照）で1956年（青木善祐、finding-018）・1967年（房野博、finding-019）の市長選挙の得票数・無投票事実を新規確認済みだが、本Lane Cの対象年（1971・1975・1978・1982・1986・1990・1994・1998）とは重複しない年であり、これら8年分については同レポート内でも『2006年以前の市長選挙の得票数（一次資料未確認）』が未解消課題として明記されていた（reports/mayor-confidence-overview.json所見）。本調査はその8年分を対象に、Web検索のみで独自に補完を試みた結果である。",
+  "elections": [
+    {
+      "year": 1971,
+      "existingRecordId": "election-mayor-1971",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch（延岡市長選挙 1971年 房野博 得票 等）・延岡市公式サイト『延岡市長選挙の結果』ページ（https://www.city.nobeoka.miyazaki.jp/soshiki/79/2721.html、WebFetchで確認）・選挙ドットコム（go2senkyo.com/local/jichitai/3791、WebFetchで確認）のいずれからも新規情報を得られなかった。延岡市公式ページは2025年執行分のPDFリンクのみで過去データなし。選挙ドットコムの延岡市長選挙一覧の最古は2002-01-27で、1971年は掲載なし（既存notesの記載と一致・再確認）。房野博氏個人のWikipedia記事は存在しない（検索で該当なし）。第2期（再選）であるため、対立候補なしの可能性はあるが確証はなく、unopposedはnullのまま。"
+    },
+    {
+      "year": 1975,
+      "existingRecordId": "election-mayor-1975",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch（延岡市長選挙 1975年 房野博 対立候補）・延岡市公式サイト・選挙ドットコムいずれからも新規情報なし。reports/mayor-confidence-overview.json（Lane A作成）でも『延岡商工会議所四十年史（1975年）年表』からの引用が複数の1971〜1977年civic-timeline項目に使われているが、いずれも道路・施設整備等の事業記録であり選挙結果の記載は確認されていない（同書は1975年発行のため、1975年市長選そのものの記載があるかは同書の詳細な年表末尾部分に依存し、本Lane Cの権限外＝NDLビューア閲覧が必要な範囲）。房野博氏第3期（三たび就任）で、前2期がいずれも詳細不明のため今回も確証得られず。"
+    },
+    {
+      "year": 1978,
+      "existingRecordId": "election-mayor-1978",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認",
+        "選挙事由（房野博氏の1978年10月辞職に伴う選挙であることは既存notesで判明済みだが、辞職の具体的経緯は未確認）"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch（英語・日本語両方で早生隆彦の1978年11月当選を検索）で新規情報なし。早生隆彦氏個人のWikipedia記事は存在しない（検索で該当なし。Category:延岡市長ページには掲載があるはずだが個別記事は未作成の可能性）。1978年10月の房野博市長辞職→同年11月の早生隆彦当選という順序は既存市公式年表で確認済みだが、辞職を受けた選挙のため、辞職経緯（体調・政治的事情等）は本調査でも未確認のまま。"
+    },
+    {
+      "year": 1982,
+      "existingRecordId": "election-mayor-1982",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch（延岡市長選挙 1982年 早生隆彦 無投票、複数年横断クエリ含む）で新規情報なし。早生隆彦氏第2期（再び就任）。無投票か否かの示唆となる資料は見つからなかった。"
+    },
+    {
+      "year": 1986,
+      "existingRecordId": "election-mayor-1986",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch横断クエリで新規情報なし。早生隆彦氏第3期。NDL書誌検索（cs=bibのみ、閲覧はせず）で『延岡市統計書 昭和61年版（1987年3月刊）』の存在を確認したが、いずれもR100000001（NDL-OPAC・物理所蔵目録）扱いでデジタル化はされておらず（『紙図書として所蔵』の記載を確認）、NDLデジタルコレクションのビューアでは閲覧できない資料であるため、ndlViewingQueueAdditionsには『物理来館が必要（デジタル化なし）』の注記付きで参考記録のみ追加した。"
+    },
+    {
+      "year": 1990,
+      "existingRecordId": "election-mayor-1990",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch横断クエリで新規情報なし。早生隆彦氏第4期（四たび就任）。NDL書誌検索で『延岡市勢要覧 '89版（1989年刊）』『延岡市統計書 昭和63年版（1989年3月刊）』の存在を確認したが、いずれも同様に物理所蔵のみ（デジタル化なし）で閲覧不可。"
+    },
+    {
+      "year": 1994,
+      "existingRecordId": "election-mayor-1994",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認",
+        "選挙事由（早生隆彦氏の1994年1月辞職に伴う選挙であることは既存notesで判明済みだが辞職の具体的経緯は未確認）"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch（延岡市長選挙 1994年2月 桜井哲雄 得票数）・櫻井哲雄氏Wikipedia記事本文（WebFetchで確認）のいずれからも新規情報なし。Wikipedia記事は『1994年2月 第21代延岡市長に当選』『1998年2月 第22代延岡市長に当選』の在任事実のみのスタブ記事で、得票数・投票率・対立候補の記載は一切なし。NDL書誌検索で『延岡市勢要覧 市制60周年記念（1993年刊）』『延岡市勢要覧 '96版（1996年刊）』の存在を確認したが、いずれも物理所蔵のみでデジタル化なし。"
+    },
+    {
+      "year": 1998,
+      "existingRecordId": "election-mayor-1998",
+      "currentDataGaps": [
+        "投票日（日単位）未確認",
+        "対立候補の有無・氏名未確認",
+        "候補者得票数未確認",
+        "投票率未確認",
+        "有権者数未確認",
+        "投票者数未確認",
+        "無効票数未確認",
+        "無投票当選かどうか未確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "WebSearch（延岡市長選挙 1998年 桜井哲雄 無投票 OR 得票）で新規情報なし。桜井哲雄氏第2期（再び就任）。選挙ドットコムの延岡市長選挙一覧（go2senkyo.com/local/jichitai/3791）の最古掲載は2002-01-27であり、1998年は掲載なし（既存notesの記載と再確認一致）。NDL書誌検索で『延岡市勢要覧 '98版（1998年刊）』『延岡市統計書 平成8年度版（1997年3月刊）・平成10年度版（1999年3月刊）』の存在を確認したが、いずれも物理所蔵のみでデジタル化なし。'98版市勢要覧は1998年2月の市長選挙結果を収録している可能性が最も高い候補資料だが、デジタル化されていないため本Lane・Lane Aとも閲覧不可（物理来館が必要）。"
+    }
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "low",
+      "purpose": "1986年市長選挙（早生隆彦第3期）の投票率・得票数確認",
+      "title": "延岡市統計書 昭和61年版",
+      "bibliographicId": "R100000001-I45111100035627",
+      "expectedPage": "不明（選挙関連統計表の章）",
+      "expectedContent": "1986年11月執行の延岡市長選挙の投票率・有権者数・得票数等の統計表が含まれている可能性がある。ただし『紙図書』としてのみ所蔵されており、NDLデジタルコレクションでのデジタル化・オンライン閲覧は確認できていない（2026-08-18時点の書誌検索結果に基づく）。閲覧には物理来館が必要な可能性が高い。",
+      "relatedElection": 1986,
+      "discoveredByLane": "C"
+    },
+    {
+      "priority": "low",
+      "purpose": "1986・1990年市長選挙の投票率・得票数確認",
+      "title": "延岡市勢要覧 '89版",
+      "bibliographicId": "R100000001-I45111101105742",
+      "expectedPage": "不明（選挙・行政章）",
+      "expectedContent": "1986年市長選挙結果（1989年発行のため直近の選挙として収録の可能性）。物理所蔵のみでデジタル化未確認。",
+      "relatedElection": 1986,
+      "discoveredByLane": "C"
+    },
+    {
+      "priority": "low",
+      "purpose": "1990年市長選挙（早生隆彦第4期）の投票率・得票数確認",
+      "title": "延岡市統計書 昭和63年版",
+      "bibliographicId": "R100000001-I45111100035627",
+      "expectedPage": "不明",
+      "expectedContent": "1990年11月執行の延岡市長選挙の統計データを収録している可能性。物理所蔵のみでデジタル化未確認（書誌検索でR100000001と表示、'紙図書として所蔵'の記載あり）。",
+      "relatedElection": 1990,
+      "discoveredByLane": "C"
+    },
+    {
+      "priority": "medium",
+      "purpose": "1990・1994年市長選挙の投票率・得票数確認",
+      "title": "延岡市勢要覧 市制60周年記念（1993年版）",
+      "bibliographicId": "R100000001-I45111100672996",
+      "expectedPage": "不明（市制60周年記念版のため沿革・選挙史のまとまった記載がある可能性が他版より高い）",
+      "expectedContent": "1990年市長選挙結果、および市制施行以来の歴代市長・選挙沿革のまとめ記載がある可能性。物理所蔵のみでデジタル化未確認。",
+      "relatedElection": 1990,
+      "discoveredByLane": "C"
+    },
+    {
+      "priority": "medium",
+      "purpose": "1994年市長選挙（桜井哲雄第1期）の投票率・得票数確認",
+      "title": "延岡市勢要覧 '96版",
+      "bibliographicId": "R100000001-I45111100792505",
+      "expectedPage": "不明",
+      "expectedContent": "1994年2月執行の延岡市長選挙結果を収録している可能性。物理所蔵のみでデジタル化未確認。",
+      "relatedElection": 1994,
+      "discoveredByLane": "C"
+    },
+    {
+      "priority": "medium",
+      "purpose": "1998年市長選挙（桜井哲雄第2期）の投票率・得票数確認",
+      "title": "延岡市勢要覧 '98版",
+      "bibliographicId": "R100000001-I45111100637942",
+      "expectedPage": "不明",
+      "expectedContent": "1998年2月執行の延岡市長選挙結果（対立候補の有無・得票数・投票率）を収録している可能性が最も高い候補資料。同年発行のため直近選挙の記載が期待できる。物理所蔵のみでデジタル化未確認。",
+      "relatedElection": 1998,
+      "discoveredByLane": "C"
+    },
+    {
+      "priority": "low",
+      "purpose": "1998年市長選挙の統計的確認",
+      "title": "延岡市統計書 平成10年度版",
+      "bibliographicId": "R100000001-I45111101334072",
+      "expectedPage": "不明",
+      "expectedContent": "1998年市長選挙の投票率等の統計データを収録している可能性。物理所蔵のみでデジタル化未確認。",
+      "relatedElection": 1998,
+      "discoveredByLane": "C"
+    }
+  ],
+  "summary": {
+    "electionsResearched": 8,
+    "newVoteCountsConfirmed": 0,
+    "newTurnoutConfirmed": 0,
+    "methodologyNote": "WebSearch/WebFetchのみを使用（claude-in-chrome不使用、電子データファイルの直接編集も不実施）。延岡市公式サイト『延岡市長選挙の結果』ページ、選挙ドットコム、桜井哲雄氏Wikipedia記事、房野博・早生隆彦氏に関する検索、NDLサーチ書誌検索（cs=bib、閲覧はせず）を実施。1971〜1998年の8選挙いずれについても、オンラインで確認可能な一次資料（得票数・投票率・対立候補名等）は新規に発見できなかった。この結果は、既存electionResults.jsonのnotesおよびreports/mayor-confidence-overview.jsonの既存所見（『2006年以前の市長選挙の得票数は一次資料未確認』）と整合する。新たに発見した唯一の具体的成果は、7件のNDL書誌情報（延岡市勢要覧・延岡市統計書の各年版）であり、これらは1986〜1998年選挙のデータを収録している可能性があるが、いずれも国立国会図書館デジタルコレクションには未収録（紙媒体としてのみ所蔵）であることを確認した。したがって、Lane A（NDLデジタルコレクションのブラウザ閲覧）によるアプローチでも直接は閲覧できず、物理来館調査が必要になる可能性が高いことが今回の主要な新知見である。"
+  }
+}
