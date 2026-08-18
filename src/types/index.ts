@@ -328,6 +328,34 @@ export interface CivicTimelineEvent {
   verificationStatus: "verified" | "partiallyVerified";
 }
 
+/**
+ * 延岡市の国勢調査人口1時点分（src/data/nobeokaCensusPopulation.json）。
+ * 延岡市統計書（一次資料）の「現在の市域の境界に基づき組み替えた数値」を主系列とする。
+ * 2006-2007年の合併（北方町・北浦町・北川町編入）前は、当時の行政区域での実測値
+ * （observedPopulation）が別途判明している年のみ併記する。
+ */
+export interface NobeokaCensusPopulationPoint {
+  /** ISO形式（10月1日、国勢調査基準日）。 */
+  referenceDate: string;
+  /** 和暦表記（例："昭和55年"）。 */
+  eraLabel: string;
+  /** 現行市域（2007年3月時点）に遡及的に組み替えた人口。資料に明記された定義。 */
+  reconstructedCurrentBoundaryPopulation: number;
+  /** 当時の行政区域（合併前）での実測人口。判明している年のみ。 */
+  observedPopulation: number | null;
+  observedPopulationSource: string | null;
+  /** Phase4-5で矛盾として保留していた値がある場合の解決経緯。 */
+  disputedNoteResolved: string | null;
+}
+
+/** src/data/nobeokaCensusPopulation.json 全体の型。 */
+export interface NobeokaCensusPopulationData {
+  primarySource: { title: string; url: string; organization: string; accessedAt: string; note: string };
+  definitionNote: string;
+  mergerEvents: { date: string; annexedMunicipalities: string[]; method: string; civicTimelineEventId: string }[];
+  series: NobeokaCensusPopulationPoint[];
+}
+
 /** 数値と、その数値の基準日・出典を1組にしたもの。自治体比較のように項目ごとに基準日が異なりうる場合に使う。 */
 export interface DatedMetric {
   /** 未確認、または値が定義されない（例：将来負担比率が算定されない）場合はnull。 */

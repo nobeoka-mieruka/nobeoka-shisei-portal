@@ -1,0 +1,199 @@
+{
+  "primarySource": {
+    "title": "延岡市統計書 3.国勢調査",
+    "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17464.pdf",
+    "organization": "延岡市企画課",
+    "accessedAt": "2026-08-19",
+    "note": "表3-1に「現在の市域の境界に基づき組み替えた数値」との明記があり、2006-2007年の北方町・北浦町・北川町編入合併前の年についても現行市域基準で遡及的に再集計された人口であることが分かる。"
+  },
+  "definitionNote": "reconstructedCurrentBoundaryPopulation＝現行市域（2007年3月時点）に遡及的に組み替えた人口（延岡市自身が公式に公表）。observedPopulation＝当時実際に公表されていた行政区域（合併前）での人口。両者は特に2006年以前で大きく異なる場合があり（1980年で約1.8万人の差）、単純な経年比較には reconstructedCurrentBoundaryPopulation を用いるのが適切。市町村合併の影響を可視化する場合は両者を併記する。",
+  "mergerEvents": [
+    {
+      "date": "2006-02-20",
+      "annexedMunicipalities": [
+        "北方町",
+        "北浦町"
+      ],
+      "method": "編入合併（延岡市が存続）",
+      "civicTimelineEventId": "civic-034"
+    },
+    {
+      "date": "2007-03-31",
+      "annexedMunicipalities": [
+        "北川町"
+      ],
+      "method": "編入合併（延岡市が存続）",
+      "civicTimelineEventId": "civic-036"
+    }
+  ],
+  "series": [
+    {
+      "referenceDate": "1920-10-01",
+      "eraLabel": "大正9年",
+      "reconstructedCurrentBoundaryPopulation": 69114,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1925-10-01",
+      "eraLabel": "大正14年",
+      "reconstructedCurrentBoundaryPopulation": 72886,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1930-10-01",
+      "eraLabel": "昭和5年",
+      "reconstructedCurrentBoundaryPopulation": 80121,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1935-10-01",
+      "eraLabel": "昭和10年",
+      "reconstructedCurrentBoundaryPopulation": 114251,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1940-10-01",
+      "eraLabel": "昭和15年",
+      "reconstructedCurrentBoundaryPopulation": 117271,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1947-10-01",
+      "eraLabel": "昭和22年",
+      "reconstructedCurrentBoundaryPopulation": 116196,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1950-10-01",
+      "eraLabel": "昭和25年",
+      "reconstructedCurrentBoundaryPopulation": 132859,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1955-10-01",
+      "eraLabel": "昭和30年",
+      "reconstructedCurrentBoundaryPopulation": 146716,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1960-10-01",
+      "eraLabel": "昭和35年",
+      "reconstructedCurrentBoundaryPopulation": 151800,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1965-10-01",
+      "eraLabel": "昭和40年",
+      "reconstructedCurrentBoundaryPopulation": 148662,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1970-10-01",
+      "eraLabel": "昭和45年",
+      "reconstructedCurrentBoundaryPopulation": 149567,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1975-10-01",
+      "eraLabel": "昭和50年",
+      "reconstructedCurrentBoundaryPopulation": 153432,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1980-10-01",
+      "eraLabel": "昭和55年",
+      "reconstructedCurrentBoundaryPopulation": 154881,
+      "observedPopulation": 136598,
+      "observedPopulationSource": "総務省統計ダッシュボード経由（graphtochart.com、2026-08-18アクセス、二次資料）。当時の行政区域（合併前の旧延岡市域）ベースの実測値と推定される。",
+      "disputedNoteResolved": "Phase4で1980年人口として154,881人（ecitizen.jp等）と136,598人（graphtochart.com/統計ダッシュボード経由）の2値が見つかり矛盾として保留していたが、Phase5で延岡市統計書（一次資料、企画課『国勢調査』）を確認した結果、154,881人は『現在の市域の境界に基づき組み替えた数値』（reconstructedCurrentBoundaryPopulation）であることが判明し、解決した。136,598人は当時の行政区域（2006-2007年合併前の旧市域）での実測値（observedPopulation）である可能性が高いが、この値自体の一次資料（昭和55年国勢調査当時の公表資料）までは未確認のため、こちらはconfidence Bのまま維持する。"
+    },
+    {
+      "referenceDate": "1985-10-01",
+      "eraLabel": "昭和60年",
+      "reconstructedCurrentBoundaryPopulation": 153835,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1990-10-01",
+      "eraLabel": "平成2年",
+      "reconstructedCurrentBoundaryPopulation": 146989,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "1995-10-01",
+      "eraLabel": "平成7年",
+      "reconstructedCurrentBoundaryPopulation": 141751,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "2000-10-01",
+      "eraLabel": "平成12年",
+      "reconstructedCurrentBoundaryPopulation": 139176,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "2005-10-01",
+      "eraLabel": "平成17年",
+      "reconstructedCurrentBoundaryPopulation": 135182,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "2010-10-01",
+      "eraLabel": "平成22年",
+      "reconstructedCurrentBoundaryPopulation": 131182,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "2015-10-01",
+      "eraLabel": "平成27年",
+      "reconstructedCurrentBoundaryPopulation": 125159,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    },
+    {
+      "referenceDate": "2020-10-01",
+      "eraLabel": "令和2年",
+      "reconstructedCurrentBoundaryPopulation": 118394,
+      "observedPopulation": null,
+      "observedPopulationSource": null,
+      "disputedNoteResolved": null
+    }
+  ]
+}
