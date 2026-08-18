@@ -202,8 +202,10 @@
           "estimatedDate": "2014-02-05",
           "nearestBoundary": "termEnd(2014-02-05)",
           "diffDays": 0,
-          "reviewStatus": "not_reviewed",
-          "bodyConfirmed": false
+          "reviewStatus": "checked_not_relevant",
+          "bodyConfirmed": true,
+          "relevantToMayor": false,
+          "checkNote": "本文確認：「第14回若山牧水青春短歌大賞 入賞作品」。市長・選挙とは無関係（日付近接のみによる誤リンク）。"
         },
         {
           "contId": "140205102953",
@@ -222,8 +224,10 @@
           "estimatedDate": "2014-02-06",
           "nearestBoundary": "termStart(2014-02-06)",
           "diffDays": 0,
-          "reviewStatus": "not_reviewed",
-          "bodyConfirmed": false
+          "reviewStatus": "checked_not_relevant",
+          "bodyConfirmed": true,
+          "relevantToMayor": false,
+          "checkNote": "本文確認：「麻しん（はしか）に注意しましょう！」（保健所からの注意喚起）。市長・選挙とは無関係（日付近接のみによる誤リンク）。"
         },
         {
           "contId": "140206180046",
@@ -604,5 +608,6 @@
         }
       ]
     }
-  ]
+  ],
+  "limitationNote": "2026-08-18: mayor-02の上位候補2件を本文確認したところ、いずれも市長・選挙とは無関係な一般記事だった（日付近接のみに基づく機械的リンクのため誤検出率が高いことが判明）。残り候補の網羅的な本文確認は費用対効果が低いと判断し、個別確認は必要に応じて行う方針に変更する。category=mayor-or-election-candidateという分類自体がタイトル文言等からの機械推定であり、確定的な分類ではない点に留意。"
 }
