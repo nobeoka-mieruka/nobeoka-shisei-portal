@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-18T23:59:00+09:00",
+  "generatedAt": "2026-08-19T00:40:00+09:00",
   "purpose": "Phase7指示13：延岡市の財政資料について、年度別・年代別のカバレッジ（充足率）を集計した。1933-2000年は代表年度（およそ5年おき）のみを対象とし、全年度の網羅は今回のスコープ外とした。数値そのものが確認できていない年度も『0』ではなく状態語彙で明示する。",
   "statusVocabulary": {
-    "confirmed_primary": "一次資料で数値を確認済み",
+    "confirmed_primary": "一次資料で、表題・対象年度・項目（行見出し）・単位・数値の5点すべてを確認済み。Phase7Cより、この5点セットが揃わない限り年度単位のステータスをconfirmed_primaryへ格上げしない運用とした（1項目のみ確認できた場合はitemLevelConfirmedPrimaryとして別記し、年度全体のステータスはlocated_partial_read等のまま維持する）。",
     "confirmed_official": "公式資料（総務省決算カード等）で数値を確認済み",
     "secondary_only": "二次資料でのみ確認",
     "library_only": "資料の所在は特定できたが、現地閲覧・個人送信ログイン等の追加手続が必要で本文数値は未確認",
@@ -17,13 +17,22 @@
       "year": 1933,
       "label": "市制施行年",
       "status": "located_partial_read",
-      "note": "延岡市史(1963年版)第五章内の別表3・別表4（昭和10年度＝1935年度〜の一般会計・公益質庫特別会計決算表、komma135・137）を実際に開き、表題・対象年度・一部数値を目視確認した（Phase7B）。1933-1934年分の数値そのものは今回未確認。詳細はreports/nobeoka-fiscal-history-1933-2000-source-survey.json参照。"
+      "itemLevelConfirmedPrimary": [
+        {
+          "item": "教育費（歳出・経常部・予算）",
+          "value": 139201,
+          "unit": "円",
+          "source": "延岡市史(1963年版)別表2「昭和8年度歳出経常部予算調（其の一）」komma135",
+          "note": "この1科目についてのみ、表題・年度・行見出し・単位・数値の5点をすべて確認しconfirmed_primaryとした（Phase7C）。市全体の歳入・歳出総額・差引は未確認のため、年度全体としてのステータスはlocated_partial_readのまま維持する（成果の過大表示を避けるため）。"
+        }
+      ],
+      "note": "延岡市史(1963年版)第五章内の別表2「昭和8年度歳出経常部予算調（其の一）」（komma135）を実際に開き、表題・年度・行見出し・単位を確認した（Phase7C。Phase7Bでは別表3・一般会計歳入歳出決算と誤認していたが訂正）。教育費（歳出）の予算額は1933〜1936年度分がconfirmed_primaryとなったが、市全体の歳入・歳出総額・差引は未確認。詳細はreports/nobeoka-fiscal-history-1933-2000-source-survey.json参照。"
     },
     {
       "year": 1940,
       "label": "1940年前後",
-      "status": "located_partial_read",
-      "note": "同上の別表3・別表4は昭和10・11年度（1935-1936）の列を確認しており、1940年に近い時期の同一表内の追加列（12年度以降）が存在する可能性が高いが、今回はkomma137で確認できた範囲（10・11年度）にとどまる。"
+      "status": "not_digitized",
+      "note": "Phase7Cで確認できた別表2（komma135）は昭和8〜11年度（1933-1936）の列のみで、1940年（昭和15年度）分は範囲外。同表の続き「其の二」または別の表に1940年前後の数値がある可能性があるが、今回は確認できなかった。Phase5時点のnot_digitizedへ実質的に据え置き。"
     },
     {
       "year": 1946,
@@ -103,11 +112,12 @@
       "band": "1933-1949",
       "representativeYearsInBand": 3,
       "statusBreakdown": {
-        "located_partial_read": 2,
+        "located_partial_read": 1,
+        "not_digitized": 1,
         "library_only": 1
       },
       "coverageRatePercent": 0,
-      "note": "確認済み数値（confirmed_primary）0/2代表年度。ただし2年度ともlocated_partial_read（一次資料の該当表を開いて一部数値を目視確認済みだが、行列対応が未確定）へ前進した（Phase7B）。"
+      "note": "確認済み数値（confirmed_primary、年度単位）は0/3代表年度のまま。ただし1933年度は教育費（歳出・経常部予算）という1科目についてitemLevelConfirmedPrimaryを達成した（Phase7C）。年度全体（歳入・歳出総額・差引）としての確定はまだ0件。"
     },
     {
       "band": "1950-1969",
@@ -158,9 +168,9 @@
     "representativeYearsTotal": 14,
     "representativeYearsWithConfirmedNumbers": 0,
     "representativeYearsWithIdentifiedSource": 5,
-    "representativeYearsWithNoLead": 6,
+    "representativeYearsWithNoLead": 7,
     "fiscalYearsWithConfirmedNumbers": 26,
-    "note": "1933-2000年の代表年度14件について、confirmed_primary（一次資料で行・列対応まで確定した数値）は本セッションでも0件のまま（推測による補完はしていない）。Phase7Bで延岡市史(1963年版)の実際の財政表3件（別表3・別表4・別表7其の四）を開き、3代表年度（1933・1940・1955）をlocated_partial_read（表題・年度・一部数値は目視確認済みだが行列対応が未確定）へ前進させた。5件（1946・1950・1960・1995・2000）はlibrary_only（所在特定済み・本文未確認）。残り6件（1965・1970・1975・1980・1985・1990）は所在未確認（not_found）。2001年以降26年度分は既存データのまま変化なし。",
-    "representativeYearsWithLocatedPartialRead": 3
+    "note": "1933-2000年の代表年度14件について、年度単位のconfirmed_primary（歳入・歳出総額・差引まで確定）は引き続き0件（推測による水増しはしていない）。ただしPhase7Cで、1933年度（昭和8年度）の教育費（歳出・経常部予算）という1科目について、表題・年度・行見出し・単位・数値の5点すべてを一次資料（延岡市史1963年版）で確認し、itemLevelConfirmedPrimaryを達成した（139,201円。1934-1936年度分＝138,321円・142,135円・196,829円も同一表内で確認済みだが代表年度リスト外）。年度全体としてのステータスはlocated_partial_read（2件）のまま維持し、library_only（5件）・not_found/not_digitized（7件）は前フェーズからほぼ変化なし。2001年以降26年度分は既存データのまま変化なし。",
+    "representativeYearsWithItemLevelConfirmedPrimary": 1
   }
 }
