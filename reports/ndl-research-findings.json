@@ -543,6 +543,67 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-18",
       "nextAction": "生年月日・出身地・延岡との接点（なぜ延岡市長選に出馬したか）は、延岡市議会会議録（1978年以降）や当時の広報のべおか（1978年、本サイトのkohoNobeokaIssues.jsonは2010年以降のみ収録のため対象外）で追加調査が必要。宮崎県立図書館所蔵の郷土資料・新聞縮刷版へのアクセスも将来的な選択肢。"
+    },
+    {
+      "id": "finding-018",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-24",
+      "title": "延岡商工会議所四十年史 年表 1956年市長選挙（青木善祐当選）",
+      "publicationYear": 1975,
+      "publisher": "延岡商工会議所",
+      "ndlBibUrl": null,
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11917124/1/175",
+      "komaNumber": 175,
+      "pageNumber": null,
+      "searchKeyword": "延岡市長選挙",
+      "relevantMayor": [
+        "mayor-09",
+        "mayor-04"
+      ],
+      "relevantYears": [
+        1956
+      ],
+      "extractedFact": "1956年（昭和31年）の延岡市長選挙で、青木善祐が23,264票、仲田又次郎（元市長）が19,528票を獲得し、青木善祐が当選（第11代市長）。元市長佐藤千吉郎ほかも候補として名前が挙がるが得票数は特定できず。青木善祐は県内初の日本社会党系市長として就任。",
+      "originalText": "青木当選　市長選挙は会議所前会頭、元市長仲田又次郎、元市長佐藤千吉郎、元宮崎…を破り、青木二万三千二百六十四票、仲田一万九千五百二十八票…青木（氏が）十一代市長に就任、県下で初の社会党市長。",
+      "interpretation": "既存データ（archiveMayors.json mayor-09、電岡市公式年表由来）の「1956年市長選で社会党延岡支部の支援を受け初当選」という記述と整合する。得票数（青木23,264票、仲田19,528票）は本調査で新規発見の一次資料的情報。ページ内で他の話題（花火大会、大師銅像起工式等）と隣接して組版されており、句読点の対応関係は目視解釈のためconfidence Bとする（複数回の読み取りで同一の数字を確認）。投票日そのもの（disputed-001の1956-04-10 vs 04-21）はこの資料からは特定できなかった。",
+      "confidence": "B",
+      "verificationStatus": "needsReview",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1951-1970年)"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "投票日（4月10日 vs 4月21日）の特定には至らなかったため、選挙管理委員会資料・新聞資料等での追加確認が引き続き必要。3人目以降の候補者（佐藤千吉郎ほか）の得票数も未確認。"
+    },
+    {
+      "id": "finding-019",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-24",
+      "title": "延岡商工会議所四十年史 年表 1967年市長選挙（房野博・無投票当選）",
+      "publicationYear": 1975,
+      "publisher": "延岡商工会議所",
+      "ndlBibUrl": null,
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11917124/1/410",
+      "komaNumber": 410,
+      "pageNumber": null,
+      "searchKeyword": "延岡市長選挙",
+      "relevantMayor": [
+        "mayor-11"
+      ],
+      "relevantYears": [
+        1967
+      ],
+      "extractedFact": "1967年1月23日の延岡市長選挙で房野博が無投票当選（第14代市長）。対立候補なし。",
+      "originalText": "第14代市長房野博延岡市長選挙に当選（1.23）（無投票当選）",
+      "interpretation": "既存データ（archiveMayorTerms.json mayor-11-term-01.termStart=1967-01-22、市公式年表由来）とは1日差（1.22 vs 1.23）だが、就任日と投票日は別概念（無投票当選の場合、告示期間終了と同時に当選確定するため、投票日相当の日と就任日が近接するのは自然）であり矛盾ではないと判断。投票日を新規に日単位（1967-01-23）で確認し、かつ無投票（対立候補なし）だったことを確認した。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1951-1970年)"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "なし（無投票当選のため得票数・投票率は制度上存在しない）。"
     }
   ],
   "disputedFacts": [
@@ -580,6 +641,11 @@
           "sourceId": "ndl-src-02",
           "title": "延岡市史（1963年）歴代市長一覧表（コマ103、印刷p73-75付近）",
           "result": "同一覧表で7代鈴木憲太郎・8代佐藤千吉郎・9代仲田又次郎・10代三浦虎雄の氏名・生年月日列を確認できたが、その並びで10代（三浦虎雄）の直後の列が12代（折小野良一）となっており、11代（青木善祐）に該当する列を今回は特定できなかった（表の欄構成・列幅の対応関係を確実に追えなかったため。青木善祐が表から欠落しているのか、単に列の対応を見誤っているのかは不明）。ビューアのパン操作が不安定で、狭い列同士の対応（氏名列と自至年月日列のペアリング）を確実に追跡できなかった。"
+        },
+        {
+          "sourceId": "ndl-src-24",
+          "title": "延岡商工会議所四十年史（1975年）年表 コマ175",
+          "result": "1956年市長選挙の候補者・得票数（青木善祐23,264票、仲田又次郎19,528票ほか）を新規に発見できたが（finding-018）、投票日・就任日そのものの記載はこの資料からは確認できず、disputed-001の解消には至らなかった。得票数の発見は選挙結果データとしては有用なため別途electionResults.jsonへ反映した。"
         }
       ],
       "status": "disputed",

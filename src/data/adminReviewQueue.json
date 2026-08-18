@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-18T08:47:19.749Z",
-  "totalItems": 124,
+  "generatedAt": "2026-08-18T09:32:59.839Z",
+  "totalItems": 125,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 11,
     "relationCandidate": 6,
-    "sourceInsufficient": 78,
+    "sourceInsufficient": 79,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -287,6 +287,12 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-01",
       "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-04",
+      "detail": "出典「延岡商工会議所四十年史（延岡商工会議所編、1975年）年表」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",

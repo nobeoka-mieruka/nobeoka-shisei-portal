@@ -55,6 +55,13 @@ export interface ElectionResult {
   electionDate: string;
   /** electionDateの精度。省略時は"day"（従来どおりの完全な日付）として扱う。 */
   electionDatePrecision?: "day" | "month";
+  /**
+   * 選任方式。市長選挙のみ意味を持つ（councilMemberは常に直接選挙のため省略可）。
+   * "direct_public_vote"＝住民による直接公選（1947年の地方自治法施行後）。
+   * "city_council_indirect"＝市議会による間接選出（1933〜1946年、直接公選制導入前）。
+   * 省略時は従来どおり直接公選として扱う（既存データとの後方互換性のため）。
+   */
+  electionMethod?: "direct_public_vote" | "city_council_indirect";
   /** ISO形式。告示日。確認できない場合はnull。 */
   announcementDate: string | null;
   /** 一部項目が未確認の選挙（1999年より前等）でのみ設定する。省略時は全項目確認済み扱い。 */
