@@ -567,6 +567,40 @@
       "evidenceType": "career_history_primary",
       "confidence": "A",
       "notes": "早生隆彦（第17-20代延岡市長）が延岡市長就任(1978年)以前、1960-70年代に日本道路公団総裁室企画課に勤務し、インド・タイ等での業務に従事していたことを示す本人執筆記事群。「道路建設」167号(1961-11)47コマの目次に「日本道路公団総裁室企画課勤務早生隆彦氏は」との記述があり、他の複数誌（国土、高速道路と自動車、開発往来）にも寄稿していることを確認した。Wikipedia等に存在した「元日本道路公団」との未確認記述を、独立の一次資料（当時の業界誌）で裏付けた。生年月日・出身地はこれらの記事からは確認できていない。"
+    },
+    {
+      "id": "ndl-src-22",
+      "title": "延岡市公式サイト旧ページ（Wayback Machine, cont=140205100918）「第14回若山牧水青春短歌大賞 入賞作品」",
+      "author": "延岡市",
+      "publisher": "延岡市",
+      "publicationYear": 2014,
+      "sourceType": "website",
+      "url": "https://web.archive.org/web/20140716111502/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140205100918",
+      "ndlBibId": null,
+      "accessStatus": "readable",
+      "status": "rejected",
+      "checkedAt": "2026-08-18",
+      "relatedMayorIds": [],
+      "evidenceType": "false_positive",
+      "confidence": null,
+      "notes": "mayor-02(首藤正治)の任期境界日(2014-02-05)に日付が近接していたため機械的にcategory=mayor-or-election-candidateと分類されたが、本文確認の結果、短歌大賞の入賞作品発表という市長・選挙とは無関係な記事だった。日付近接のみに基づく誤検出の実例として台帳に残し、再探索を防止する。"
+    },
+    {
+      "id": "ndl-src-23",
+      "title": "延岡市公式サイト旧ページ（Wayback Machine, cont=140206164018）「麻しん（はしか）に注意しましょう！」",
+      "author": "延岡市",
+      "publisher": "延岡市",
+      "publicationYear": 2014,
+      "sourceType": "website",
+      "url": "https://web.archive.org/web/20140715132012/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140206164018",
+      "ndlBibId": null,
+      "accessStatus": "readable",
+      "status": "rejected",
+      "checkedAt": "2026-08-18",
+      "relatedMayorIds": [],
+      "evidenceType": "false_positive",
+      "confidence": null,
+      "notes": "mayor-02(首藤正治)の任期境界日(2014-02-06)に日付が近接していたため機械的にcategory=mayor-or-election-candidateと分類されたが、本文確認の結果、保健所からの感染症注意喚起という市長・選挙とは無関係な記事だった。日付近接のみに基づく誤検出の実例として台帳に残し、再探索を防止する。"
     }
   ],
   "summary": {

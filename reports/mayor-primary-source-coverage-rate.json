@@ -16,8 +16,8 @@
       "confirmed_official": 1
     },
     "inaugurationDate": {
-      "confirmed_primary": 8,
-      "confirmed_official": 5,
+      "confirmed_primary": 9,
+      "confirmed_official": 4,
       "disputed": 1
     },
     "retirementDate": {
@@ -71,7 +71,7 @@
       "name": "読谷山 洋司",
       "fields": {
         "birthDate": "confirmed_primary",
-        "inaugurationDate": "confirmed_official",
+        "inaugurationDate": "confirmed_primary",
         "retirementDate": "confirmed_primary",
         "election": "confirmed_official",
         "career": "confirmed_primary",
@@ -214,10 +214,10 @@
   "coverageSummary": {
     "applicableCells": 82,
     "confirmedCells": 65,
-    "primaryOnlyCells": 46,
+    "primaryOnlyCells": 47,
     "coverageRatePercent": 79.3,
-    "primaryOnlyRatePercent": 56.1,
-    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 79.3%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 56.1%）"
+    "primaryOnlyRatePercent": 57.3,
+    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 79.3%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 57.3%）"
   },
   "electionResultsCoverage": {
     "totalOrdinals": 29,
