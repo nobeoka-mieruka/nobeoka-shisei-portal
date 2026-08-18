@@ -1,0 +1,353 @@
+{
+  "generatedAt": "2026-08-19T00:00:00+09:00",
+  "purpose": "civicTimelineEvents.json 152件を年代別に監査し、薄い年代・出典品質・市長紐付け状況を数値化した。新規重複ファイルではなく既存構造の品質監査。",
+  "totalEvents": 152,
+  "bandStats": [
+    {
+      "band": "1933-1939",
+      "totalEvents": 12,
+      "mayorLinkedCount": 10,
+      "officialOrPrimarySourceCount": 12,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 11,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "市制施行・合併": 2,
+        "公共事業": 3,
+        "市庁舎": 1,
+        "災害": 1,
+        "教育・福祉・産業": 4,
+        "行政組織": 1
+      },
+      "eventIds": [
+        "civic-002",
+        "civic-003",
+        "civic-004",
+        "civic-005",
+        "civic-006",
+        "civic-073",
+        "civic-074",
+        "civic-075",
+        "civic-076",
+        "civic-082",
+        "civic-083",
+        "civic-084"
+      ]
+    },
+    {
+      "band": "1940-1949",
+      "totalEvents": 17,
+      "mayorLinkedCount": 17,
+      "officialOrPrimarySourceCount": 17,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 12,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "災害": 2,
+        "教育・福祉・産業": 9,
+        "公共事業": 1,
+        "行政組織": 5
+      },
+      "eventIds": [
+        "civic-007",
+        "civic-008",
+        "civic-077",
+        "civic-078",
+        "civic-079",
+        "civic-085",
+        "civic-086",
+        "civic-087",
+        "civic-092",
+        "civic-093",
+        "civic-094",
+        "civic-095",
+        "civic-096",
+        "civic-097",
+        "civic-098",
+        "civic-149",
+        "civic-150"
+      ]
+    },
+    {
+      "band": "1950-1959",
+      "totalEvents": 22,
+      "mayorLinkedCount": 22,
+      "officialOrPrimarySourceCount": 22,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 22,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "公共事業": 6,
+        "災害": 1,
+        "教育・福祉・産業": 7,
+        "行政組織": 6,
+        "市制施行・合併": 1,
+        "市庁舎": 1
+      },
+      "eventIds": [
+        "civic-009",
+        "civic-010",
+        "civic-011",
+        "civic-012",
+        "civic-013",
+        "civic-014",
+        "civic-015",
+        "civic-016",
+        "civic-017",
+        "civic-018",
+        "civic-072",
+        "civic-080",
+        "civic-081",
+        "civic-088",
+        "civic-089",
+        "civic-090",
+        "civic-091",
+        "civic-099",
+        "civic-100",
+        "civic-101",
+        "civic-102",
+        "civic-151"
+      ]
+    },
+    {
+      "band": "1960-1969",
+      "totalEvents": 14,
+      "mayorLinkedCount": 13,
+      "officialOrPrimarySourceCount": 14,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 12,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "公共事業": 4,
+        "教育・福祉・産業": 4,
+        "災害": 1,
+        "市制施行・合併": 2,
+        "行政組織": 3
+      },
+      "eventIds": [
+        "civic-019",
+        "civic-020",
+        "civic-021",
+        "civic-103",
+        "civic-104",
+        "civic-105",
+        "civic-106",
+        "civic-107",
+        "civic-108",
+        "civic-109",
+        "civic-110",
+        "civic-111",
+        "civic-152",
+        "civic-153"
+      ]
+    },
+    {
+      "band": "1970-1979",
+      "totalEvents": 14,
+      "mayorLinkedCount": 14,
+      "officialOrPrimarySourceCount": 14,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 14,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "教育・福祉・産業": 4,
+        "公共事業": 7,
+        "行政組織": 3
+      },
+      "eventIds": [
+        "civic-022",
+        "civic-023",
+        "civic-024",
+        "civic-112",
+        "civic-113",
+        "civic-114",
+        "civic-115",
+        "civic-116",
+        "civic-117",
+        "civic-118",
+        "civic-119",
+        "civic-120",
+        "civic-121",
+        "civic-122"
+      ]
+    },
+    {
+      "band": "1980-1989",
+      "totalEvents": 12,
+      "mayorLinkedCount": 12,
+      "officialOrPrimarySourceCount": 12,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 12,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "教育・福祉・産業": 3,
+        "災害": 1,
+        "行政組織": 5,
+        "公共事業": 3
+      },
+      "eventIds": [
+        "civic-025",
+        "civic-026",
+        "civic-123",
+        "civic-124",
+        "civic-125",
+        "civic-126",
+        "civic-127",
+        "civic-128",
+        "civic-129",
+        "civic-130",
+        "civic-131",
+        "civic-132"
+      ]
+    },
+    {
+      "band": "1990-1999",
+      "totalEvents": 9,
+      "mayorLinkedCount": 9,
+      "officialOrPrimarySourceCount": 9,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 9,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "公共事業": 3,
+        "災害": 1,
+        "行政組織": 3,
+        "教育・福祉・産業": 2
+      },
+      "eventIds": [
+        "civic-027",
+        "civic-028",
+        "civic-029",
+        "civic-133",
+        "civic-134",
+        "civic-135",
+        "civic-136",
+        "civic-137",
+        "civic-138"
+      ]
+    },
+    {
+      "band": "2000-2009",
+      "totalEvents": 22,
+      "mayorLinkedCount": 22,
+      "officialOrPrimarySourceCount": 22,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 12,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "災害": 6,
+        "公共事業": 3,
+        "市制施行・合併": 5,
+        "行政組織": 4,
+        "市庁舎": 1,
+        "教育・福祉・産業": 3
+      },
+      "eventIds": [
+        "civic-030",
+        "civic-031",
+        "civic-032",
+        "civic-033",
+        "civic-034",
+        "civic-035",
+        "civic-036",
+        "civic-037",
+        "civic-038",
+        "civic-039",
+        "civic-040",
+        "civic-041",
+        "civic-139",
+        "civic-140",
+        "civic-141",
+        "civic-142",
+        "civic-143",
+        "civic-144",
+        "civic-145",
+        "civic-146",
+        "civic-147",
+        "civic-148"
+      ]
+    },
+    {
+      "band": "2010-2019",
+      "totalEvents": 28,
+      "mayorLinkedCount": 28,
+      "officialOrPrimarySourceCount": 28,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 3,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "災害": 9,
+        "市庁舎": 6,
+        "行政組織": 4,
+        "公共事業": 5,
+        "市制施行・合併": 1,
+        "教育・福祉・産業": 3
+      },
+      "eventIds": [
+        "civic-042",
+        "civic-043",
+        "civic-044",
+        "civic-045",
+        "civic-046",
+        "civic-047",
+        "civic-048",
+        "civic-049",
+        "civic-050",
+        "civic-051",
+        "civic-052",
+        "civic-053",
+        "civic-054",
+        "civic-055",
+        "civic-056",
+        "civic-057",
+        "civic-058",
+        "civic-059",
+        "civic-060",
+        "civic-062",
+        "civic-063",
+        "civic-064",
+        "civic-065",
+        "civic-066",
+        "civic-068",
+        "civic-069",
+        "civic-070",
+        "civic-071"
+      ]
+    },
+    {
+      "band": "2020-現在",
+      "totalEvents": 1,
+      "mayorLinkedCount": 1,
+      "officialOrPrimarySourceCount": 1,
+      "sourceWeakCount": 0,
+      "dateUnknownCount": 1,
+      "needsReviewCount": 0,
+      "categoryCounts": {
+        "災害": 1
+      },
+      "eventIds": [
+        "civic-067"
+      ]
+    }
+  ],
+  "mayorLinkRate": {
+    "totalMayors": 14,
+    "linkedMayors": 11,
+    "unlinkedMayorIds": [
+      "mayor-01",
+      "mayor-05",
+      "mayor-14"
+    ]
+  },
+  "termLinkRate": {
+    "totalTerms": 29,
+    "termsWithAtLeastOneEvent": 24,
+    "termsWithoutEvent": [
+      "mayor-01-term-01",
+      "mayor-05-term-01",
+      "mayor-05-term-02",
+      "mayor-07-term-01",
+      "mayor-05-term-03"
+    ]
+  }
+}

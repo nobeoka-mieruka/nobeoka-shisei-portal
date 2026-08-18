@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T23:00:00+09:00",
+  "generatedAt": "2026-08-19T01:30:00+09:00",
   "purpose": "将来的に「○○市長時代」の市長別タイムライン・時代サマリーをUIで表示する際の基礎データ構造。既存のarchiveMayors.json/archiveMayorTerms.json/electionResults.json/archiveFiscalYears.json/civicTimelineEvents.jsonを機械的に結合しただけであり、新規の重複データファイルは作成していない。UI実装は今回のスコープ外。",
   "dataSourceFiles": [
     "src/data/archiveMayors.json",
@@ -60,7 +60,8 @@
         "note": "archiveFiscalYears.json（FY2026〜FY2026、mayorIdで紐付け）の人口データより算出。",
         "censusDataStatus": "not_researched",
         "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "confirmed_official"
+        "status": "confirmed_official",
+        "censusDataPoints": []
       },
       "finance": {
         "dataAvailable": true,
@@ -168,9 +169,23 @@
         "populationChange": 3405,
         "populationChangeRatePercent": 2.8,
         "note": "archiveFiscalYears.json（FY2006〜FY2016、mayorIdで紐付け）の人口データより算出。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "confirmed_official"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "confirmed_official",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-02-term-02",
+            "referenceDate": "2010-10-01",
+            "eraLabel": "平成22年",
+            "population": 131182
+          },
+          {
+            "termId": "mayor-02-term-03",
+            "referenceDate": "2015-10-01",
+            "eraLabel": "平成27年",
+            "population": 125159
+          }
+        ]
       },
       "finance": {
         "dataAvailable": true,
@@ -567,9 +582,17 @@
         "populationChange": -9181,
         "populationChangeRatePercent": -7.5,
         "note": "archiveFiscalYears.json（FY2018〜FY2024、mayorIdで紐付け）の人口データより算出。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "confirmed_official"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "confirmed_official",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-03-term-01",
+            "referenceDate": "2020-10-01",
+            "eraLabel": "令和2年",
+            "population": 118394
+          }
+        ]
       },
       "finance": {
         "dataAvailable": true,
@@ -699,9 +722,23 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-04-term-01",
+            "referenceDate": "1935-10-01",
+            "eraLabel": "昭和10年",
+            "population": 114251
+          },
+          {
+            "termId": "mayor-04-term-02",
+            "referenceDate": "1950-10-01",
+            "eraLabel": "昭和25年",
+            "population": 132859
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -944,9 +981,10 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "no_census_during_term",
+        "censusDataNote": "この市長の在任期間中に国勢調査（5年に1度、10月1日基準）が実施されていないため、国勢調査ベースの人口データは存在しない（未収集ではなく該当なし）。",
+        "status": "not_collected",
+        "censusDataPoints": []
       },
       "finance": {
         "dataAvailable": false,
@@ -1006,9 +1044,17 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-06-term-01",
+            "referenceDate": "1940-10-01",
+            "eraLabel": "昭和15年",
+            "population": 117271
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -1155,9 +1201,17 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-07-term-03",
+            "referenceDate": "1955-10-01",
+            "eraLabel": "昭和30年",
+            "population": 146716
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -1338,9 +1392,17 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-08-term-01",
+            "referenceDate": "1947-10-01",
+            "eraLabel": "昭和22年",
+            "population": 116196
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -1465,9 +1527,10 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "no_census_during_term",
+        "censusDataNote": "この市長の在任期間中に国勢調査（5年に1度、10月1日基準）が実施されていないため、国勢調査ベースの人口データは存在しない（未収集ではなく該当なし）。",
+        "status": "not_collected",
+        "censusDataPoints": []
       },
       "finance": {
         "dataAvailable": false,
@@ -1615,9 +1678,23 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-10-term-01",
+            "referenceDate": "1960-10-01",
+            "eraLabel": "昭和35年",
+            "population": 151800
+          },
+          {
+            "termId": "mayor-10-term-02",
+            "referenceDate": "1965-10-01",
+            "eraLabel": "昭和40年",
+            "population": 148662
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -1804,9 +1881,23 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-11-term-01",
+            "referenceDate": "1970-10-01",
+            "eraLabel": "昭和45年",
+            "population": 149567
+          },
+          {
+            "termId": "mayor-11-term-03",
+            "referenceDate": "1975-10-01",
+            "eraLabel": "昭和50年",
+            "population": 153432
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -2048,9 +2139,29 @@
         "populationChange": null,
         "populationChangeRatePercent": null,
         "note": "archiveFiscalYears.jsonの収録範囲（FY2001〜）外のため人口データなし。国勢調査等の公的統計資料が今後の調査対象。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "not_collected"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "not_collected",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-12-term-01",
+            "referenceDate": "1980-10-01",
+            "eraLabel": "昭和55年",
+            "population": 154881
+          },
+          {
+            "termId": "mayor-12-term-02",
+            "referenceDate": "1985-10-01",
+            "eraLabel": "昭和60年",
+            "population": 153835
+          },
+          {
+            "termId": "mayor-12-term-03",
+            "referenceDate": "1990-10-01",
+            "eraLabel": "平成2年",
+            "population": 146989
+          }
+        ]
       },
       "finance": {
         "dataAvailable": false,
@@ -2293,9 +2404,29 @@
         "populationChange": -1697,
         "populationChangeRatePercent": -1.4,
         "note": "archiveFiscalYears.json（FY2001〜FY2004、mayorIdで紐付け）の人口データより算出。",
-        "censusDataStatus": "not_researched",
-        "censusDataNote": "国勢調査ベースの長期人口系列は、延岡市『人口ビジョン』PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1419.pdf 等）に掲載されていると特定できたが、画像ベースPDFのため本セッションのツールでは本文抽出ができなかった。Web上の二次資料（ecitizen.jp、統計ダッシュボード経由のgraphtochart.com）では1980年の人口が154,881人と136,598人という食い違う数値が見つかり、2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。 境界の取り扱いの違いによる食い違いの可能性が高いが確証はないため、いずれの数値も採用せず、次回e-Stat原典またはPDF直接閲覧での確認を推奨する（推測による統一は行わない）。",
-        "status": "confirmed_official"
+        "censusDataStatus": "confirmed_primary",
+        "censusDataNote": "延岡市統計書（一次資料）の国勢調査人口系列より、在任期間中の国勢調査年（10月1日基準）の人口を新規接続した。現行市域に組み替えられた数値（reconstructedCurrentBoundaryPopulation）であり、当時実際に公表されていた行政区域ベースの人口とは異なる場合がある点に留意。",
+        "status": "confirmed_official",
+        "censusDataPoints": [
+          {
+            "termId": "mayor-13-term-01",
+            "referenceDate": "1995-10-01",
+            "eraLabel": "平成7年",
+            "population": 141751
+          },
+          {
+            "termId": "mayor-13-term-02",
+            "referenceDate": "2000-10-01",
+            "eraLabel": "平成12年",
+            "population": 139176
+          },
+          {
+            "termId": "mayor-13-term-03",
+            "referenceDate": "2005-10-01",
+            "eraLabel": "平成17年",
+            "population": 135182
+          }
+        ]
       },
       "finance": {
         "dataAvailable": true,
@@ -2487,5 +2618,6 @@
       "majorEventsCount": 0
     }
   ],
-  "mergerNote": "2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。"
+  "mergerNote": "2006年3月に北方町・北浦町、2007年3月に北川町が延岡市へ編入合併しており、2007年より前の「延岡市」人口と2007年以降の人口は行政区域が異なるため単純比較できない（not_comparable）。",
+  "censusResolutionNote": "Phase5で延岡市統計書（一次資料）を確認し、1980年人口の食い違い（154,881人 vs 136,598人）を解決した。詳細はreports/nobeoka-census-population-series.json参照。"
 }
