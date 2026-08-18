@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { sortedCivicTimelineEvents, civicTimelineCategories, civicTimelineDecades } from "../lib/civicTimeline";
+import { sortedCivicTimelineEvents, civicTimelineCategories, civicTimelineDecades, getCivicTimelineEvent } from "../lib/civicTimeline";
 import archiveMayorsData from "../data/archiveMayors.json";
+import nobeokaCensusPopulationData from "../data/nobeokaCensusPopulation.json";
 import type { ArchiveMayor } from "../types/historicalArchive";
+import type { NobeokaCensusPopulationData } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -12,6 +14,7 @@ import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import { LastUpdated } from "../components/LastUpdated";
+import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
@@ -20,6 +23,36 @@ import type { CivicTimelineEvent } from "../types";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
+const nobeokaCensusPopulation = nobeokaCensusPopulationData as NobeokaCensusPopulationData;
+
+/**
+ * 「延岡の大きな転換点」。既存civicTimelineEvents.jsonの中から、市政史上の位置づけが
+ * 一次・公的資料で説明できるものだけを厳選した（恣意的なランキングではない）。
+ * 選定理由はTURNING_POINT_REASONSに記載し、UI側にも表示する。
+ */
+const TURNING_POINT_IDS = ["civic-002", "civic-008", "civic-150", "civic-108", "civic-034", "civic-036", "civic-048"] as const;
+const TURNING_POINT_REASONS: Record<string, string> = {
+  "civic-002": "延岡市の始まり（市制施行）。",
+  "civic-008": "太平洋戦争末期の空襲。戦後復興の出発点。",
+  "civic-150": "市長が住民の直接選挙で選ばれる制度への転換点。",
+  "civic-108": "旭化成の工業都市としての発展を後押しした国の指定。",
+  "civic-034": "平成の大合併の第一段階（北方町・北浦町編入）。",
+  "civic-036": "平成の大合併の完了（北川町編入）、現在の市域が確定。",
+  "civic-048": "県北の交通事情を大きく変えた高速道路網の整備。",
+};
+
+const DECADE_LABELS: { value: number; label: string }[] = [
+  { value: 1930, label: "1930年代" },
+  { value: 1940, label: "1940年代" },
+  { value: 1950, label: "1950年代" },
+  { value: 1960, label: "1960年代" },
+  { value: 1970, label: "1970年代" },
+  { value: 1980, label: "1980年代" },
+  { value: 1990, label: "1990年代" },
+  { value: 2000, label: "2000年代" },
+  { value: 2010, label: "2010年代" },
+  { value: 2020, label: "2020年代" },
+];
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -89,9 +122,9 @@ export function HistoryPage() {
       <Breadcrumbs items={seo.breadcrumbs} />
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
-        <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市政年表</h1>
+        <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市政年表（延岡市政90年）</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市公式ホームページが公表する年表・資料をもとに、市制施行、合併、市庁舎、行政組織、災害、公共事業、教育・福祉・産業に関する主な出来事を年代順に整理しています。当サイトは公式サイトではありません。
+          1933年に市となってから、延岡はどのように変わってきたのでしょうか。歴代市長、人口、選挙、産業、合併、道路、災害などの記録を、延岡市公式ホームページ等の公的資料からたどります。当サイトは公式サイトではありません。
         </p>
       </div>
 
@@ -100,8 +133,92 @@ export function HistoryPage() {
         <Link to="/mayors" className={`mx-1 text-primary hover:underline ${linkClass}`}>
           歴代市長アーカイブ
         </Link>
-        で別途確認できます。延岡市公式資料で確認できる範囲のみを掲載しており、日付が月までしか判明していない出来事は「〇〇年〇月」と表示しています。
+        で、市長ごとの選挙結果・出来事の比較は
+        <Link to="/compare/mayors" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+          歴代市長の比較
+        </Link>
+        で確認できます。延岡市公式資料等で確認できる範囲のみを掲載しており、日付が月までしか判明していない出来事は「〇〇年〇月」と表示しています。確認できていない事項は空欄にせず「確認中」「未収集」等で示しています。
       </p>
+
+      <nav aria-label="年代へ移動">
+        <p className="mb-2 text-xs font-medium text-on-surface-variant">年代から探す</p>
+        <div className="flex gap-2 overflow-x-auto pb-1" role="group">
+          {DECADE_LABELS.map((d) => (
+            <button
+              key={d.value}
+              type="button"
+              onClick={() => setDecade(decade === String(d.value) ? "all" : String(d.value))}
+              aria-pressed={decade === String(d.value)}
+              className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-medium transition ${linkClass} ${
+                decade === String(d.value)
+                  ? "bg-primary text-on-primary"
+                  : "bg-surface-container-high text-on-surface hover:bg-surface-container-highest"
+              }`}
+            >
+              {d.label}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <SectionCard title="延岡の大きな転換点">
+        <p className="text-xs leading-relaxed text-on-surface-variant">
+          152件の記録すべてを読む前に、市政史の大きな流れをつかめるよう、一次・公的資料で重要性が説明できる出来事を{TURNING_POINT_IDS.length}件選びました（当サイト独自の順位付け・評価ではありません）。
+        </p>
+        <ol className="mt-3 space-y-2 border-l-2 border-primary-container pl-3">
+          {TURNING_POINT_IDS.map((id) => {
+            const ev = getCivicTimelineEvent(id);
+            if (!ev) return null;
+            return (
+              <li key={id} className="relative">
+                <p className="text-xs font-medium text-on-surface-variant">{ev.dateLabel}</p>
+                <p className="text-sm font-semibold text-on-surface">{ev.title}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">{TURNING_POINT_REASONS[id]}</p>
+              </li>
+            );
+          })}
+        </ol>
+      </SectionCard>
+
+      <SectionCard title="延岡市の人口の変化（国勢調査、1920〜2020年）">
+        <p className="text-xs leading-relaxed text-on-surface-variant">
+          国勢調査とは、総務省が5年ごとに実施する全国一斉の人口調査です。延岡市統計書（延岡市公式資料）が公表する、
+          <strong className="font-semibold text-on-surface">現在の市域（2007年3月時点）に組み替えた人口</strong>
+          を表示しています。
+        </p>
+        <div className="mt-3">
+          <FinanceLineChart
+            points={nobeokaCensusPopulation.series.map((p) => ({
+              label: p.eraLabel.replace("年", ""),
+              value: p.reconstructedCurrentBoundaryPopulation,
+            }))}
+            formatValue={(v) => `${v.toLocaleString("ja-JP")}人`}
+            ariaLabel="延岡市の国勢調査人口の推移グラフ（1920年〜2020年、現在の市域に組み替えた数値）。詳細は直後の一覧を参照してください。"
+          />
+        </div>
+        <div className="mt-3 space-y-2 rounded-lg bg-surface-container p-3 text-xs leading-relaxed text-on-surface-variant">
+          <p>
+            <strong className="font-semibold text-on-surface">1980年（昭和55年）の人口について：</strong>
+            上のグラフは154,881人（現在の市域に組み替えた人口）です。当時の実際の行政区域（合併前の旧市域）では136,598人でした。市域が異なるため、単純にどちらが「正しい」ということではありません。
+          </p>
+          <p>
+            <strong className="font-semibold text-on-surface">市町村合併について：</strong>
+            延岡市は2006年2月20日に北方町・北浦町を、2007年3月31日に北川町を編入しました。合併前後で市域・人口の集計範囲が変わるため、年ごとの単純な人口比較には注意が必要です。人口の増減を特定の市長個人の成果・責任として説明するものではありません。
+          </p>
+          <p>
+            出典：
+            <a
+              href={nobeokaCensusPopulation.primarySource.url}
+              target="_blank"
+              rel="noreferrer"
+              className={`ml-1 text-primary hover:underline ${linkClass}`}
+            >
+              {nobeokaCensusPopulation.primarySource.title}
+            </a>
+            （{nobeokaCensusPopulation.primarySource.organization}、{formatJapaneseDate(nobeokaCensusPopulation.primarySource.accessedAt)}確認）
+          </p>
+        </div>
+      </SectionCard>
 
       {personFilter && (
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-primary-container p-3 text-sm text-on-primary-container">
