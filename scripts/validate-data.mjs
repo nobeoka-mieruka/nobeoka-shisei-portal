@@ -1748,7 +1748,8 @@ try {
 
   for (const entry of archiveFiscalYears) {
     const tag = `archiveFiscalYears.json (${entry.fiscalYear ?? "年度不明"})`;
-    checkYearRange({ err }, entry.fiscalYear, tag);
+    // 延岡市の市制施行は1933年（昭和8年）のため、これより古い年度の財政データは制度上存在し得ない。
+    checkYearRange({ err }, entry.fiscalYear, tag, { min: 1933, max: 2100 });
     checkReferenceExists(
       { err, warn },
       entry.mayorId,

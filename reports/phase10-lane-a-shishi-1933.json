@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-08-19T15:00:00+09:00",
+  "lane": "A",
+  "purpose": "Phase10 Lane A（最優先）：Phase9で『次回最優先』とされた延岡市史（1963年版）komma137の本文（『三、二、〇〇〇倍以上に膨脹した市財政』見出し直後）に記載された数値を実地確認し、正確な桁を確定する。",
+  "browserStatus": "セッション再開直後、ビューアのズーム状態がリセットされ一時的に空白ページが表示される不具合が発生したが、拡大ボタン（+）を複数回クリックし直すことで回復した（タブの作り直しは不要だった）。それ以外の不具合は発生しなかった。",
+  "confirmedThisSession": [
+    {
+      "finding": "延岡市発足初年度（昭和8年度＝1933年度）の当初予算議決額を確定",
+      "detail": "延岡市史（1963年版、NDL pid 3027323）komma137左ページ、別表4（延岡市土々呂公益質庫特別会計）の直前にある本文を、拡大率60〜171%の範囲でズーム・パンを繰り返しながら精読した。本文は『本市が市制を施行した昭和八年（一九三三）において、その年度最初の（一般会計）予算案は市長職務管掌によって市会に提出し次の通り議決されている。』と明記しており、年号は漢数字（昭和八年）と算用数字（一九三三）の両方で確認できた。続く箇条書きには以下の3項目と合計注記があった：（1）歳入予算額：金参拾四万五百九拾五円＝340,595円、（2）経常部予算額（歳出）：金弐拾弐万五千七百参拾五円＝225,735円、（3）臨時部予算額（歳出）：金拾壱万四千八百六拾円＝114,860円、（4）『歳入歳出差引残金ナシ』。内部整合性チェックとして225,735＋114,860＝340,595円を計算したところ歳入予算額と完全に一致し、読み取り誤りがないことを確認した（Phase9のFY1965確認で用いたのと同じ手法）。",
+      "confidence": "confirmed_primary",
+      "importantCaveat": "これは決算（実績値）ではなく、市会に提出され議決された当初予算（議決額）である。決算額とは異なる可能性がある点をarchiveFiscalYears.jsonのnotesに明記した。",
+      "sourceTitle": "延岡市史（1963年版）第二編第五章「市政および財政の発展」本文",
+      "sourceUrl": "https://dl.ndl.go.jp/pid/3027323/1/137",
+      "page": "komma137（左ページ、別表4直前の本文）",
+      "publisher": "延岡市（延岡市史編さん委員会編）",
+      "publishedYear": 1963
+    }
+  ],
+  "productionDataChanges": {
+    "file": "src/data/archiveFiscalYears.json",
+    "change": "fiscalYear=1933の新規レコードを追加（総数40→41件）。mayorId=mayor-04（仲田又次郎）、mayorTermId=mayor-04-term-01。ただし、この年度最初の予算提出者は仲田氏本人ではなく、1933-04-15の同氏就任前を担当した氏名不詳の『市長職務管掌』である旨をnotesに明記した（仲田氏の在任期間がFY1933のほぼ全体を占めるためmayorId自体は仲田氏に接続）。budget.generalAccountInitialBudgetYen=340595を登録し、totalRevenueYen/totalExpenditureYenはnull（決算ではないため既存の1965年度レコードとの意味の混同を避けた）。経常部225,735円・臨時部114,860円の内訳はArchiveBudget型に対応フィールドがないためnotes内に文章として保持した。",
+    "validatorChange": "scripts/validate-data.mjs の archiveFiscalYears.json 用 checkYearRange の下限を1947→1933に変更した（延岡市の市制施行年=1933年より古い年度データは制度上存在し得ないため、恣意的な拡張ではなく市の設立年に合わせた変更）。他のcheckYearRange呼び出し（councilDocuments等）は変更していない。",
+    "existingDataConflict": "既存のarchiveFiscalYears.jsonに1933年度レコードは存在しなかったため、上書き・disputed化は発生していない。"
+  },
+  "otherObservationsThisSession": [
+    {
+      "finding": "『三、二、〇〇〇倍以上に膨脹した市財政』という節見出しの正確な読みを確認",
+      "detail": "見出しは『三千二百倍以上に膨脹した市財政』（漢数字の『三』『二』『〇〇〇』が縦書きで別々の行に配置されているため、Phase9では『3,200』とだけ推測されていたが、正しくは『三千二百倍』であることを確認した。この見出しは1933年度予算（340,595円）と、本書刊行時点（1963年）または見出し記述時点でのより大きな財政規模とを比較する文脈と推定されるが、比較対象年度・金額そのものは本セッションでは特定できなかった（次回優先候補）。",
+      "confidence": "confirmed_primary（見出しの字句のみ）",
+      "priority": "medium"
+    }
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "high",
+      "purpose": "『三千二百倍』という比較表現の比較対象（何年度の・いくらの財政規模と比較しているか）を本文の前後（komma136-138付近）でさらに追う。1933年度予算340,595円の3,200倍は約10億9千万円に相当し、1963年前後の延岡市の一般会計規模と近い可能性がある。",
+      "title": "延岡市史（1963年版）",
+      "bibliographicId": "pid 3027323",
+      "page": "komma136-138付近",
+      "relatedFiscalYear": [1933, 1963],
+      "discoveredByLane": "A"
+    },
+    {
+      "priority": "high",
+      "purpose": "1933年度（昭和8年度）予算提出者『市長職務管掌』の氏名を特定する（仲田又次郎氏の1933-04-15就任前を担当した人物）。延岡市公式サイトの年表や延岡市史の別の箇所に記載がある可能性がある。",
+      "title": "延岡市史（1963年版）または延岡市公式サイト近代年表",
+      "bibliographicId": "pid 3027323",
+      "page": "未特定",
+      "relatedFiscalYear": [1933],
+      "discoveredByLane": "A"
+    },
+    {
+      "priority": "medium",
+      "purpose": "1933年度（昭和8年度）の決算額（実績）が別表2〜4のいずれかに記載されていないか確認する。今回確認したのは議決時点の予算額のみで、決算額は別データの可能性がある。",
+      "title": "延岡市史（1963年版）",
+      "bibliographicId": "pid 3027323",
+      "page": "komma135-145（既知の別表2〜7範囲）",
+      "relatedFiscalYear": [1933],
+      "discoveredByLane": "A"
+    }
+  ],
+  "summary": {
+    "kommaPagesChecked": ["137"],
+    "newConfirmedPrimaryThisSession": 1,
+    "productionRecordsAdded": 1,
+    "highValueFindingNote": "archiveFiscalYears.json史上最古の年度（1933年度、延岡市発足初年度）を追加した。市全体の歳入・歳出総額（予算ベース）が確認できたのは今回が初めてで、従来確認済みだった1933-1936年度の『教育費』単独科目（phase7cFindings）とは異なり、市財政全体の規模を示す点で価値が高い。"
+  }
+}

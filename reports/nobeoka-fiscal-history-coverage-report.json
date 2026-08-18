@@ -16,7 +16,7 @@
     {
       "year": 1933,
       "label": "市制施行年",
-      "status": "located_partial_read",
+      "status": "confirmed_primary",
       "itemLevelConfirmedPrimary": [
         {
           "item": "教育費（歳出・経常部・予算）",
@@ -24,9 +24,16 @@
           "unit": "円",
           "source": "延岡市史(1963年版)別表2「昭和8年度歳出経常部予算調（其の一）」komma135",
           "note": "この1科目についてのみ、表題・年度・行見出し・単位・数値の5点をすべて確認しconfirmed_primaryとした（Phase7C）。市全体の歳入・歳出総額・差引は未確認のため、年度全体としてのステータスはlocated_partial_readのまま維持する（成果の過大表示を避けるため）。"
+        },
+        {
+          "item": "歳入予算額・経常部予算額（歳出）・臨時部予算額（歳出）",
+          "value": "歳入340,595円／経常部225,735円／臨時部114,860円（歳出合計340,595円）",
+          "unit": "円",
+          "source": "延岡市史(1963年版)第二編第五章 本文（別表4直前、komma137）",
+          "note": "延岡市発足初年度の当初予算議決額。市全体の歳入・歳出総額（予算ベース）が確認できたのは今回が初めて。決算額ではなく議決時点の予算額である点に注意（Phase10 Lane A）。225,735+114,860=340,595円で歳入予算額と完全一致することを内部整合性チェックで確認済み。archiveFiscalYears.jsonに反映済み。"
         }
       ],
-      "note": "延岡市史(1963年版)第五章内の別表2「昭和8年度歳出経常部予算調（其の一）」（komma135）を実際に開き、表題・年度・行見出し・単位を確認した（Phase7C。Phase7Bでは別表3・一般会計歳入歳出決算と誤認していたが訂正）。教育費（歳出）の予算額は1933〜1936年度分がconfirmed_primaryとなったが、市全体の歳入・歳出総額・差引は未確認。詳細はreports/nobeoka-fiscal-history-1933-2000-source-survey.json参照。"
+      "note": "延岡市史(1963年版)第五章内の別表2「昭和8年度歳出経常部予算調（其の一）」（komma135）を実際に開き、表題・年度・行見出し・単位を確認した（Phase7C。Phase7Bでは別表3・一般会計歳入歳出決算と誤認していたが訂正）。教育費（歳出）の予算額は1933〜1936年度分がconfirmed_primaryとなったが、市全体の歳入・歳出総額・差引は未確認。詳細はreports/nobeoka-fiscal-history-1933-2000-source-survey.json参照。【2026-08-19追記（Phase10 Lane A）】komma137の本文（別表4直前）を精読し、市全体の歳入・歳出総額（予算ベース、340,595円）を確認したため、年度全体のstatusをconfirmed_primaryへ昇格した。詳細はreports/phase10-lane-a-shishi-1933.json参照。"
     },
     {
       "year": 1940,
@@ -112,12 +119,12 @@
       "band": "1933-1949",
       "representativeYearsInBand": 3,
       "statusBreakdown": {
-        "located_partial_read": 1,
+        "confirmed_primary": 1,
         "not_digitized": 1,
         "library_only": 1
       },
-      "coverageRatePercent": 0,
-      "note": "確認済み数値（confirmed_primary、年度単位）は0/3代表年度のまま。ただし1933年度は教育費（歳出・経常部予算）という1科目についてitemLevelConfirmedPrimaryを達成した（Phase7C）。年度全体（歳入・歳出総額・差引）としての確定はまだ0件。"
+      "coverageRatePercent": 33,
+      "note": "Phase10で前進。1933年度（市制施行年）がconfirmed_primaryへ昇格し（延岡市史1963年版komma137本文、当初予算：歳入340,595円・歳出340,595円）、1/3代表年度（約33%）が確定した。従来の教育費のみの部分確認（Phase7C）から、市全体の予算総額の確認へ発展した。決算額ではなく当初予算額である点に注意。1940・1946年度は引き続き未確認。"
     },
     {
       "band": "1950-1969",
@@ -163,14 +170,14 @@
   ],
   "overallSummary": {
     "representativeYearsTotal": 14,
-    "representativeYearsWithConfirmedNumbers": 1,
+    "representativeYearsWithConfirmedNumbers": 2,
     "representativeYearsWithIdentifiedSource": 3,
     "representativeYearsWithNoLead": 5,
-    "fiscalYearsWithConfirmedNumbers": 40,
-    "note": "Phase9で、1965年度（昭和40年度）がconfirmed_primary（宮崎県統計年鑑 昭和40年版、NDL本文確認、6点確認済み）へ新規に加わった。代表年度14件の内訳：confirmed_primary=1件（1965）、confirmed_official=3件（1990・1995・2000）、located_partial_read=2件（1933は教育費のみ・1955）、library_only=3件（1946・1950・1960）、所在未確認（not_digitized/not_found）=5件（1940・1970・1975・1980・1985）。archiveFiscalYears.jsonは1965年度・1988-2026年度の合計40年度分を収録（1966-1987年度は依然欠落）。1933-1964年度（32年間）は代表年度単位の調査にとどまる。",
-    "representativeYearsWithItemLevelConfirmedPrimary": 1,
+    "fiscalYearsWithConfirmedNumbers": 41,
+    "note": "Phase10で、1933年度（昭和8年度、市制施行年）がconfirmed_primary（延岡市史1963年版、komma137本文、当初予算：歳入340,595円・歳出340,595円＝経常部225,735円+臨時部114,860円）へ新規に加わった（従来は教育費という単一科目のみのlocated_partial_readだったが、市全体の予算総額が確認できたため昇格）。代表年度14件の内訳：confirmed_primary=2件（1933・1965）、confirmed_official=3件（1990・1995・2000）、located_partial_read=1件（1955）、library_only=3件（1946・1950・1960）、所在未確認（not_digitized/not_found）=5件（1940・1970・1975・1980・1985）。archiveFiscalYears.jsonは1933年度・1965年度・1988-2026年度の合計41年度分を収録（1934-1964年度・1966-1987年度は依然欠落）。",
+    "representativeYearsWithItemLevelConfirmedPrimary": 2,
     "representativeYearsWithConfirmedOfficial": 3,
-    "representativeYearsWithLocatedPartialRead": 2,
+    "representativeYearsWithLocatedPartialRead": 1,
     "additionalFiscalYearsConfirmedOutsideRepresentativeList": [
       "1988",
       "1989",

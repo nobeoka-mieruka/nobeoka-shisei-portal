@@ -1,5 +1,36 @@
 [
   {
+    "fiscalYear": 1933,
+    "mayorId": "mayor-04",
+    "mayorTermId": "mayor-04-term-01",
+    "budget": {
+      "fiscalYear": 1933,
+      "generalAccountInitialBudgetYen": 340595,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": null,
+      "totalExpenditureYen": null,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/3027323/1/137",
+          "sourceTitle": "延岡市史（1963年版）第二編第五章「市政および財政の発展」本文（別表4直前の記述、komma137）",
+          "sourceOrganization": "延岡市（延岡市史編さん委員会編）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "本市が市制を施行した昭和八年（一九三三）において、その年度最初の（一般会計）予算案は市長職務管掌（仲田又次郎氏の1933-04-15就任前の期間を担当した職務管掌者。氏名は本文中に確認できず）によって市会に提出され次の通り議決されている、という本文記述に続く箇条書きの数値を確認した。歳入予算額340,595円、歳出・経常部予算額225,735円、歳出・臨時部予算額114,860円（225,735+114,860=340,595円で歳入予算額と完全一致）、「歳入歳出差引残金ナシ」との記載も確認（内部整合性チェック済み）。これは決算（実績）ではなく当初予算（議決額）である点に注意。市全体の歳入歳出総額としては、archiveFiscalYears.json中で最も古い年度（1965年度より32年早い、延岡市発足初年度）。件名・年度・金額・単位（円）・会計区分（一般会計・経常部/臨時部の内訳）の5点をすべて本文で確認済み。"
+        }
+      ],
+      "notes": "延岡市発足初年度（昭和8年度＝1933年度）の当初予算議決額。歳入予算額と歳出予算額（経常部＋臨時部）が一致する均衡予算。経常部・臨時部の内訳はArchiveBudget型に対応フィールドがないためnotesにのみ記録（経常部225,735円／臨時部114,860円）。決算額（実績）ではなく議決時点の予算額である点に注意。歳入・歳出の内訳（市税・地方債・補助金等）は本文からは未確認。（Phase10 Lane A発見・確認・統合）"
+    }
+  },
+  {
     "fiscalYear": 1965,
     "mayorId": "mayor-10",
     "mayorTermId": "mayor-10-term-02",
