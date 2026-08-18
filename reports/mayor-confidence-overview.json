@@ -1,222 +1,403 @@
 {
-  "generatedAt": "2026-08-18T00:00:00+09:00",
-  "method": "src/data/archiveMayors.json（birthDate・sourceRefsの出典organization/verificationStatus）、reports/mayor-primary-source-matrix.json（policies/majorProjects列）、reports/mayor-ordinal-crosscheck.json（confidence=Aの任期数）を機械的に組み合わせて判定した。",
+  "generatedAt": "2026-08-18T12:00:00+09:00",
+  "method": "src/data/archiveMayors.json のsourceRefs（出典organization・verificationStatus・notes本文の内容精査）を人手で項目別（生年月日・就任日・退任日・選挙・経歴）に評価し、最も慎重な項目の水準を総合confidenceとした。機械的な自動判定ではなく、本セッションの調査記録（reports/ndl-research-findings.json findings-001〜017）を踏まえた人手評価。",
   "legend": {
-    "A": "一次資料確認済み：生年月日等の主要事実が、Wikipedia等の二次資料に頼らず、延岡市公式資料・NDL資料など独立した一次資料で確認されている。",
-    "B": "公的・準一次資料確認済み：就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日・経歴・政策等の一部がWikipedia等二次資料のみ、または未確認のまま残っている。",
-    "C": "要追加調査：生年月日を含む主要な経歴情報がほぼ未確認、または出典がWikipedia等二次資料に限られる。"
+    "A": "独立した一次資料（延岡市公式資料・NDL資料・本人所属機関公式サイト等）で確認済み",
+    "B": "公式資料はあるが単一資料のみ、または一部がWikipedia等二次資料に依存",
+    "C": "未確認、またはWikipedia等二次資料のみに依拠",
+    "-": "該当なし（現職・在任中・非公選職等）"
   },
-  "caveat": "この評価はあくまで現時点（2026-08-18）で確認できた範囲に基づく機械的な目安であり、独自の採点・順位付けを意図したものではない。未確認項目は各人物のsourceRefs/notesを参照すること。就任退任日そのものは全員、延岡市公式サイトの年表という一次資料で年月単位以上の精度で既に確認済みである点に留意（このA/B/C評価は生年月日・経歴・政策情報の充実度を主眼とする）。",
   "rows": [
     {
       "mayorId": "mayor-01",
       "name": "三浦 久知",
-      "ordinals": 1,
-      "grade": "B",
-      "reason": "現職市長。就任日は延岡市公式資料で確認済み（ordinal29）。生年月日は現職者への配慮から本サイトでは意図的に非掲載（プライバシー方針）であり、『未確認』とは性質が異なる。",
-      "detail": {
-        "birthDateStatus": "missing",
-        "birthDate": null,
-        "policiesColumn": "□",
-        "majorProjectsColumn": "□",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 1
-      }
+      "birthDate": {
+        "status": "C",
+        "note": "現職市長のためプライバシー配慮により生年月日は編集方針上非掲載（未確認とは別扱い）"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "延岡市公式サイトで「令和7年7月20日 第29代延岡市長就任」を確認"
+      },
+      "retirementDate": {
+        "status": "-",
+        "note": "在職中"
+      },
+      "election": {
+        "status": "A",
+        "note": "延岡市公式サイトで2025年7月当選を確認"
+      },
+      "career": {
+        "status": "B",
+        "note": "本人後援会サイト由来（needsReview）、独立確認は未実施"
+      },
+      "overallGrade": "B",
+      "note": "就任・選挙は一次資料確認済み。経歴はneedsReviewのまま、生年月日は方針上非掲載。"
     },
     {
       "mayorId": "mayor-02",
       "name": "首藤 正治",
-      "ordinals": 3,
-      "grade": "C",
-      "reason": "生年月日を含む主要な経歴情報が未確認、またはほぼ情報がない。追加調査が必要。",
-      "detail": {
-        "birthDateStatus": "missing",
-        "birthDate": null,
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 0,
-        "ordinalTotal": 3
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "大正大学地域構想研究所の公式プロフィール（本人所属機関）で生年(1956年)を独立確認。全国歴代知事・市長総覧(2022)の書誌実在もNDLサーチで確認"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "延岡市公式年表(年月)＋大正大学プロフィール(ordinal24-26)で独立2資料一致"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "延岡市公式年表(年月)で確認、任期満了"
+      },
+      "election": {
+        "status": "A",
+        "note": "選挙ドットコムで得票数（23,749票等）まで確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "大正大学公式プロフィールで学歴・職歴を独立確認"
+      },
+      "overallGrade": "A",
+      "note": "今回A昇格。月日（1月2日）はWikipedia経由の全国歴代知事・市長総覧のみで、この資料自体は書誌確認止まり。"
     },
     {
       "mayorId": "mayor-03",
       "name": "読谷山 洋司",
-      "ordinals": 2,
-      "grade": "A",
-      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1964-02-20",
-        "policiesColumn": "△",
-        "majorProjectsColumn": "△",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 2
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "延岡市公式サイト市長プロフィール（Wayback保存）で生年月日(1964-02-20)を確認"
+      },
+      "inaugurationDate": {
+        "status": "B",
+        "note": "Wikipediaのinfoboxと本文で「2月6日」「2月26日」の内部矛盾あり、日単位未確定"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "宮崎日日新聞等複数報道で2025-06-30辞職を確認"
+      },
+      "election": {
+        "status": "B",
+        "note": "Wikipedia経由、得票数等の一次資料未確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "延岡市公式サイト（Wayback保存）で学歴・職歴を確認（東京大学経済学部、自治省入省等）"
+      },
+      "overallGrade": "A",
+      "note": "就任日の日単位（2/6 vs 2/26）が既存資料間で矛盾。無理に統一せず両論併記中。"
     },
     {
       "mayorId": "mayor-04",
       "name": "仲田 又次郎",
-      "ordinals": 2,
-      "grade": "A",
-      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1893-07-25",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 2
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "NDL延岡市史(1963)歴代市長一覧表で「明治二六年七月二五日生」を確認、既存値と完全一致"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "9代任期(1948-07-16)がNDL『日本の歴代市長第3巻』と完全一致"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "9代任期(1952-06-19)がNDL『日本の歴代市長第3巻』と完全一致"
+      },
+      "election": {
+        "status": "C",
+        "note": "選挙結果（得票数等）の一次資料未確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "延岡市名誉市民ページ・NDL歴代市長第3巻で経歴確認"
+      },
+      "overallGrade": "A",
+      "note": "初代任期(1933-1937)は市公式年表のみ、9代任期は複数独立資料で確認。"
     },
     {
       "mayorId": "mayor-05",
       "name": "鈴木 憲太郎",
-      "ordinals": 3,
-      "grade": "B",
-      "reason": "生年月日等は独立確認済みだが、政策・大型事業の記述が不足している。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1882-09-21",
-        "policiesColumn": "□",
-        "majorProjectsColumn": "□",
-        "ordinalConfidenceACount": 0,
-        "ordinalTotal": 3
-      }
+      "birthDate": {
+        "status": "C",
+        "note": "Wikipediaのみ（生年月日）、NDL資料では該当箇所を特定できず"
+      },
+      "inaugurationDate": {
+        "status": "B",
+        "note": "延岡市公式年表(年月)のみ、複数任期(2・3・7代)ともNDL個別確認は未達成"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "没年月日(1953-01-17)をNDL『日本の歴代市長第3巻』で独立確認（ただし退任日そのものではなく死没日）"
+      },
+      "election": {
+        "status": "C",
+        "note": "衆議院議員歴等はWikipediaのみ"
+      },
+      "career": {
+        "status": "B",
+        "note": "NDLで延岡商工会議所会頭・宮崎県知事選落選・上京・病没の経緯を確認したが生年月日は特定できず"
+      },
+      "overallGrade": "B",
+      "note": "没年月日は独立確認済みだが、生年月日・詳細経歴はなお二次資料頼り。"
     },
     {
       "mayorId": "mayor-06",
       "name": "大島 文彦",
-      "ordinals": 1,
-      "grade": "B",
-      "reason": "就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日等の詳細経歴が未確認、またはWikipedia等二次資料に依存している。",
-      "detail": {
-        "birthDateStatus": "official_only",
-        "birthDate": "1886-11-10",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "□",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 1
-      }
+      "birthDate": {
+        "status": "C",
+        "note": "Wikipediaのみ。NDL延岡市史・歴代市長第3巻いずれでも本人の生年月日欄を特定できていない"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "NDL『日本の歴代市長第3巻』で「昭和十二年九月二十六日」を確認、既存値と完全一致"
+      },
+      "retirementDate": {
+        "status": "B",
+        "note": "延岡市公式年表のみ"
+      },
+      "election": {
+        "status": "C",
+        "note": "選挙結果の一次資料未確認"
+      },
+      "career": {
+        "status": "B",
+        "note": "NDLで時局後援会事業・戦時建設事業等の記述を確認したが詳細未転記"
+      },
+      "overallGrade": "B",
+      "note": "就任日は独立確認済みだが生年月日は依然未確認。"
     },
     {
       "mayorId": "mayor-07",
       "name": "三浦 虎雄",
-      "ordinals": 3,
-      "grade": "A",
-      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1883-05-19",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 2,
-        "ordinalTotal": 3
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "NDL延岡市史で「明治十六年五月十九日生」を確認、既存値と完全一致"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "5・6代任期をNDL『日本の歴代市長第3巻』で確認、既存値と完全一致"
+      },
+      "retirementDate": {
+        "status": "B",
+        "note": "10代(3期目)の任期はNDLで日付候補を読み取ったが1日差があり未反映（candidate扱い）"
+      },
+      "election": {
+        "status": "C",
+        "note": "選挙結果の一次資料未確認"
+      },
+      "career": {
+        "status": "B",
+        "note": "NDLで概要確認したが詳細未転記"
+      },
+      "overallGrade": "A",
+      "note": "5・6代は独立確認済み。10代の自至日付は既存値と1日差の候補があり反映見送り中。"
     },
     {
       "mayorId": "mayor-08",
       "name": "佐藤 千吉郎",
-      "ordinals": 1,
-      "grade": "A",
-      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1885-08-01",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "□",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 1
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "NDL『日本の歴代市長第3巻』で「明治十八年八月一日生」を新規確認（本調査以前は10名中唯一未確認）"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "NDLで「昭和二十二年四月」の記述を確認、既存値(1947-04-16)と月まで一致"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "NDLで「昭和二十三年六月六日」を確認、既存値(1948-06-06)と完全一致"
+      },
+      "election": {
+        "status": "A",
+        "note": "NDLで「734票で首位得票、4月15日初の公選市長」を確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "NDLで早稲田(大学カ)進学・市助役就任等の経歴を新規確認"
+      },
+      "overallGrade": "A",
+      "note": "本調査で最も情報が充実した人物の一人。ふりがな・出身地・死没年は依然未確認。"
     },
     {
       "mayorId": "mayor-09",
       "name": "青木 善祐",
-      "ordinals": 1,
-      "grade": "A",
-      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1892-11-01",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 0,
-        "ordinalTotal": 1
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "NDL延岡市史で「明治二五年一一月一日生」を確認、既存値と完全一致"
+      },
+      "inaugurationDate": {
+        "status": "C",
+        "note": "disputed：1956-04-10（NDL歴代市長第3巻候補、confidence D）と1956-04-21（既存値、Wikipedia由来）が併存。延岡市史コマ103の一覧表でも11代列を特定できず未解消"
+      },
+      "retirementDate": {
+        "status": "B",
+        "note": "延岡市公式年表(年月)のみ"
+      },
+      "election": {
+        "status": "C",
+        "note": "1956年市長選挙の得票数等は未確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "NDL歴代市長第3巻で名誉市民条例・敬老年金制度等の主要政策を確認、長崎市長・宮崎市長歴任も本人の経歴と確認（同姓同名ではない）"
+      },
+      "overallGrade": "B",
+      "note": "就任日disputedのため総合confidenceはBに据え置き。生年月日・主要政策はA級で確認済み。"
     },
     {
       "mayorId": "mayor-10",
       "name": "折小野 良一",
-      "ordinals": 2,
-      "grade": "A",
-      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
-      "detail": {
-        "birthDateStatus": "independent",
-        "birthDate": "1919-01-25",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 2
-      }
+      "birthDate": {
+        "status": "A",
+        "note": "NDL『日本の歴代市長第3巻』で「大正八年一月二十五日生」を確認、既存値と完全一致"
+      },
+      "inaugurationDate": {
+        "status": "B",
+        "note": "任期起点(1960年)は年のみNDLで確認、月日精度は市公式資料のみ"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "NDLで「昭和四十一年十二月一日」を確認、既存値と完全一致"
+      },
+      "election": {
+        "status": "B",
+        "note": "Wikipediaで1,139票差での初当選の記述、一次資料未確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "NDLで京都大学卒・市議会事務局書記→事務局長→助役の経歴、新産業都市建設事業への主導的関与を確認"
+      },
+      "overallGrade": "A",
+      "note": "生年月日・退任日・主要事業がいずれも独立確認済み。"
     },
     {
       "mayorId": "mayor-11",
       "name": "房野 博",
-      "ordinals": 3,
-      "grade": "B",
-      "reason": "就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日等の詳細経歴が未確認、またはWikipedia等二次資料に依存している。",
-      "detail": {
-        "birthDateStatus": "missing",
-        "birthDate": null,
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 1,
-        "ordinalTotal": 3
-      }
+      "birthDate": {
+        "status": "C",
+        "note": "生年月日の記述自体が見つからず未確認（Wikipedia個人記事も存在しない）"
+      },
+      "inaugurationDate": {
+        "status": "B",
+        "note": "14代任期はNDLで1日差の候補あり（22日/23日、未確定）"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "16代任期終了(1978-10-05)をNDL『日本の歴代市長第3巻』で確認、既存値と完全一致"
+      },
+      "election": {
+        "status": "C",
+        "note": "選挙結果の一次資料未確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "NDLで西臼杵総合開発事業・岡地区開発計画・新総合庁舎建設・延岡港新港建設等の主要事業を確認"
+      },
+      "overallGrade": "B",
+      "note": "主要事業は充実したが生年月日が完全に未確認のまま。"
     },
     {
       "mayorId": "mayor-12",
       "name": "早生 隆彦",
-      "ordinals": 4,
-      "grade": "C",
-      "reason": "生年月日を含む主要な経歴情報が未確認、またはほぼ情報がない。追加調査が必要。",
-      "detail": {
-        "birthDateStatus": "missing",
-        "birthDate": null,
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 0,
-        "ordinalTotal": 4
-      }
+      "birthDate": {
+        "status": "C",
+        "note": "生年月日・出身地とも未確認（Wikipedia個人記事も存在しない）"
+      },
+      "inaugurationDate": {
+        "status": "B",
+        "note": "市公式年表(年月)のみ、日単位未確認"
+      },
+      "retirementDate": {
+        "status": "B",
+        "note": "辞職の事実は市公式資料で確認済みだが具体的理由不明"
+      },
+      "election": {
+        "status": "C",
+        "note": "選挙結果の一次資料未確認"
+      },
+      "career": {
+        "status": "A",
+        "note": "NDL雑誌記事索引で1961年当時の日本道路公団総裁室企画課勤務・インド出張等を新規確認"
+      },
+      "overallGrade": "B",
+      "note": "元日本道路公団の経歴を新規に独立確認したが、生年月日は依然未確認（NDL資料の収録期間外という構造的制約）。"
     },
     {
       "mayorId": "mayor-13",
       "name": "櫻井 哲雄",
-      "ordinals": 3,
-      "grade": "B",
-      "reason": "就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日等の詳細経歴が未確認、またはWikipedia等二次資料に依存している。",
-      "detail": {
-        "birthDateStatus": "official_only",
-        "birthDate": "1935-08-07",
-        "policiesColumn": "○",
-        "majorProjectsColumn": "○",
-        "ordinalConfidenceACount": 0,
-        "ordinalTotal": 3
-      }
+      "birthDate": {
+        "status": "B",
+        "note": "Wikipediaで生没年(1935-08-07〜2021-12-03)、出典に官報・宮崎日日新聞が明記されているが本サイトでは原文未確認"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "延岡市公式年表(年月)で確認"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "選挙ドットコムで2006年落選（首藤正治23,749票 対 櫻井哲雄14,965票）を確認"
+      },
+      "election": {
+        "status": "A",
+        "note": "同上、得票数まで確認"
+      },
+      "career": {
+        "status": "B",
+        "note": "Wikipedia経由（九州大学経済学部卒、宮崎県庁入庁等）、独立資料未確認"
+      },
+      "overallGrade": "B",
+      "note": "就任・落選は一次資料確認済み。生年月日・経歴はWikipedia止まり（出典は官報等だが原文未到達）。"
     },
     {
       "mayorId": "mayor-14",
       "name": "山本 一丸",
-      "ordinals": 1,
-      "grade": "B",
-      "reason": "職務代理者（公選市長ではない）。就任・終了の事実は延岡市公式資料で確認済みだが、詳細経歴は限定的。",
-      "detail": {
-        "birthDateStatus": "missing",
-        "birthDate": null,
-        "policiesColumn": "□",
-        "majorProjectsColumn": "□",
-        "ordinalConfidenceACount": 0,
-        "ordinalTotal": 0
-      }
+      "birthDate": {
+        "status": "C",
+        "note": "未確認（報道で「65歳」との年齢言及のみ）"
+      },
+      "inaugurationDate": {
+        "status": "A",
+        "note": "地方自治法に基づく職務代理開始(2025-07-01)を確認"
+      },
+      "retirementDate": {
+        "status": "A",
+        "note": "三浦久知氏就任(2025-07-20)により職務代理終了を確認"
+      },
+      "election": {
+        "status": "-",
+        "note": "公選市長ではないため該当なし"
+      },
+      "career": {
+        "status": "B",
+        "note": "延岡市副市長であったことは確認済みだが詳細経歴は未確認、参照した報道リンクは2件とも現在リンク切れ"
+      },
+      "overallGrade": "B",
+      "note": "職務代理者であり公選市長とは性質が異なる。就任・終了は確認済みだが生年月日・詳細経歴は未確認。"
     }
-  ]
+  ],
+  "summary": {
+    "gradeA": 6,
+    "gradeB": 8,
+    "gradeC": 0,
+    "disputedCount": 1,
+    "upgradedThisSession": [
+      "mayor-02",
+      "mayor-04",
+      "mayor-08",
+      "mayor-10"
+    ],
+    "newPrimaryOrQuasiPrimarySources": 4,
+    "newFindings": [
+      "finding-012",
+      "finding-013",
+      "finding-014",
+      "finding-015",
+      "finding-016",
+      "finding-017"
+    ],
+    "unresolvedItems": [
+      "青木善祐の就任日disputed（1956-04-10 vs 1956-04-21）",
+      "早生隆彦・房野博・大島文彦・鈴木憲太郎の生年月日",
+      "早生隆彦の19・20代（1990年以降）の主要事業",
+      "2006年以前の市長選挙の得票数（一次資料未確認）"
+    ]
+  }
 }
