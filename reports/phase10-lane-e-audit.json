@@ -1,0 +1,133 @@
+{
+  "generatedAt": "2026-08-19T18:00:00+09:00",
+  "lane": "E",
+  "purpose": "Phase 10 Lane E: (1) Phase9統合分（1965年度財政データ・MayorDetailPage.tsx/DataStatusPage.tsxの表示ロジック）の回帰確認、(2) mayor-confidence-overview.json（三浦久知career B→A昇格）と関連レポート（mayor-primary-source-coverage-rate.json/mayor-primary-source-matrix.json）の整合性再確認、(3) duplicate/orphan/broken relation/日付前後不可能性/出典欠落/confidence欠落/0と未確認の混同/disputedの確定表示化についての通常監査、(4) npm run validate:dataの実行。読み取り専用を原則としつつ、明確に安全な表示ロジック・文言のコード修正のみ適用した。データファイル（src/data/*.json）とreports/配下のレポートファイルは数値・事実を書き換えていない。",
+
+  "phase9RegressionCheck": {
+    "fy1965DisplayCorrect": true,
+    "note": "archiveFiscalYears.json（40件）はfiscalYear昇順で格納されており（1965, 1988, 1989, ..., 2026）、Math.min/Math.maxベースの動的算出ロジック（MayorDetailPage.tsx: archiveFiscalYearMinFy/MaxFy、DataStatusPage.tsx: fiscalYearRange）は1965年度を正しく最小値として扱うことをコードとデータの両方で確認した。1965年度のレコード（mayorId: 'mayor-10', mayorTermId: 'mayor-10-term-02'）はmayor-10（折小野良一）の第2期（1964-04-19〜1966-12-01、termStartPrecision: month）と日付範囲上正しく重なっており、referential integrityチェック（機械検証）でも不整合0件だった。MayorDetailPage.tsxのrelatedFiscalYears（mayor.idでのフィルタ）経由で、折小野良一の詳細ページに1965年度が正しく一覧表示されるロジックであることをコードリーディングで確認した（実ブラウザでの表示確認はLane Eの方針上未実施、コードロジックの確認のみ）。 グラフ・比較ページの空白表示については、FinanceLineChart.tsx（折れ線）はvalue===nullの区間をまたいで直線補間しない設計であり、かつ財政指標レジストリ（archiveFinanceMetrics.ts）でtotalRevenue/totalExpenditure（1965年度が持つ唯一の値）はchartKind:'bar'（棒グラフ、年度ごとに独立した行として表示）に分類されているため、1965年度と1988年度が1本の線で直接つながって23年の空白が視覚的に隠れる、という具体的な表示バグは発生しない設計であることを確認した。一方で、FinanceBudgetPage.tsx/FinanceDebtPage.tsx/FinanceFundsPage.tsx/DataStatusPage.tsxの『収録年度：X／Y年度（最古〜最新）』という要約文言は、1965年度追加前は『Y＝(最新-最古+1)』が常に成立していた（1988〜2026年度が歯抜けなく連続していたため）のに対し、1965年度追加後はY(40)が実際の年数レンジ(1965〜2026＝62年)と一致しなくなり、『1965年度〜2026年度』という範囲表記だけでは1966〜1987年度の22年間が丸ごと未収録（該当レコード自体が存在しない）であることが伝わらない、という新しいクラスの誤解リスクを見つけた（下記findings参照、本レーンで修正済み）。また、npm run validate:dataが今回新たに『archiveFiscalYears.json: 登録済み年度の範囲内(1965〜2026)に欠番があります: 1966〜1987』という警告を出すようになっており（Phase9時点の14件から15件に増加）、この空白自体はデータ検証層で正しく検知されていることも確認した。"
+  },
+
+  "confidenceOverviewConsistencyCheck": {
+    "consistent": false,
+    "issuesFound": [
+      {
+        "file": "reports/mayor-primary-source-coverage-rate.json",
+        "location": "perMayor[mayorId='mayor-01'].fields.career、fieldStatusCounts.career",
+        "description": "reports/mayor-confidence-overview.json（最終更新2026-08-19 07:19、commit 4ba4a4a）ではmayor-01（三浦久知）のcareerが『A』（Phase9 Lane Dで確認・反映済み）になっているが、reports/mayor-primary-source-coverage-rate.json（最終更新2026-08-18 18:50、confidence-overview.jsonの更新より前）はcareerを『confirmed_official』（このファイルの凡例ではB相当）のまま保持しており、A=confirmed_primaryへの反映が漏れている。fieldStatusCounts.careerの集計（confirmed_official: 6, confirmed_primary: 8）もこの1件分ずれている可能性がある。",
+        "severity": "low",
+        "note": "生成日時から見て、coverage-rate.jsonがconfidence-overview.jsonの更新より先に生成されているため、当時の反映漏れというより『後から片方だけ更新され、もう片方が追従していない』という単純な派生ファイル間の同期漏れ。市民向け画面（archiveMayors.json由来）には影響しないレポート間の内部的な不整合。"
+      },
+      {
+        "file": "reports/mayor-primary-source-matrix.json",
+        "location": "datasetRanges.finance、rows[mayorId='mayor-10'].finance、_detail.linkedFiscalYearsCount",
+        "description": "datasetRanges.finance が『archiveFiscalYears.json 収録範囲: FY2001〜現在』と記載されているが、これはPhase8/9でFY1988-2000・FY1965が追加された結果、現在は事実と異なる（実際の収録範囲はFY1965およびFY1988〜2026）。この古い前提に基づき、mayor-10（折小野良一）の行では finance: 'out_of_dataset_range'、_detail.linkedFiscalYearsCount: 0 と判定されているが、Phase9でFY1965（mayorId: mayor-10）が追加されたことで、実際にはlinkedFiscalYearsCount=1（対象年度内）に変わっているはずであり、このマトリクスは現在の実データと矛盾している。",
+        "severity": "medium",
+        "note": "本ファイルの生成日時（2026-08-18 17:43）はFY1988-2000追加（2026-08-19 06:12）・FY1965追加（2026-08-19 07:19）のいずれよりも前であり、生成当時としては正しかった。財政データアーカイブの拡張に伴い機械的な再生成が必要な派生レポートである。"
+      }
+    ],
+    "note": "reports/配下は本レーンの方針（コードのみ安全修正、データ・レポートファイルの大規模書き換えはしない）に従い、上記2件とも書き換えていない。再生成（特にmayor-primary-source-matrix.jsonの機械的な再計算）を今後のレーンでの対応候補として記録するにとどめる。"
+  },
+
+  "validateDataResult": {
+    "errors": 0,
+    "warnings": 15,
+    "note": "Phase9時点（14件）から1件増加。新規追加はarchiveFiscalYears.json欠番警告（1966〜1987年度の22年間、1965年度追加に伴い新たに検出されるようになった）。これはバグではなく、実際に記録が存在しない期間を正しく検知した警告であり、本レーンで追加したUI側の注記（fiscalYearGapNote）と整合する。他の14件（archiveMayorTerms.json空白期間13件＋councilSpeechSummaries.json語彙警告）はPhase8/9と同一内容で変化なし。"
+  },
+
+  "findings": [
+    {
+      "category": "misleading_range_display",
+      "file": "src/pages/DataStatusPage.tsx",
+      "recordId": "-",
+      "description": "『財政・人口・基金・市債（年度データ）』の説明文が、Phase9 Lane Eで『1988〜2000年度』分の追加には対応済みだったが、同じPhase9内でLane A/Bが並行して追加した1965年度分については一切言及していなかった（Lane Eのスコープが1988-2000年度追加のレビューに限定されていたため、並行レーンの成果を見落としていた）。1965年度と1988年度の間に22年度分の完全な空白があることも説明されていなかった。",
+      "severity": "medium",
+      "fixable": "auto",
+      "proposedFix": "1965年度（宮崎県統計年鑑から歳入・歳出総額のみ確認）の存在と、1966〜1987年度が未確認である旨を明記する文言を追記する。",
+      "applied": true
+    },
+    {
+      "category": "misleading_range_display",
+      "file": "src/pages/FinanceBudgetPage.tsx, src/pages/FinanceDebtPage.tsx, src/pages/FinanceFundsPage.tsx",
+      "recordId": "-",
+      "description": "『収録年度：X／Y年度（最古年度〜最新年度）』という要約表示が、1965年度追加前は『Y＝(最新-最古+1)』が常に成立し『最古〜最新の全年度が記録として存在する』ことを暗黙に保証していたが、1965年度追加後はこの前提が崩れた（Y=40だが実際の暦年レンジは62年）。この結果、範囲表記だけを見ると1966〜1987年度も収録されているかのように誤解されうる。missingYearsNote（項目別の未収録年度リスト）は配列内の既存レコードが特定フィールドを欠くケースのみを扱うため、『レコード自体が存在しない22年間』は従来どこにも明示されていなかった。",
+      "severity": "medium",
+      "fixable": "auto",
+      "proposedFix": "src/lib/archiveFinance.tsに年度レンジ内の『歯抜け区間』（連続する収録年度の差が1より大きい箇所）を検出するfiscalYearGapNote()ヘルパーを追加し、3ページの要約表示直後に条件付きで注記を出す（区間が0件ならnullで何も表示しない、将来データが埋まれば自動的に注記が消える設計）。",
+      "applied": true
+    },
+    {
+      "category": "unresolved_carryover_from_phase8_and_9",
+      "file": "src/data/archiveMayorTerms.json",
+      "recordId": "mayor-11-term-01",
+      "description": "房野博氏の任期開始日（termStart: 1967-01-22, termStartPrecision: month）の『日=22』の出典がsourceRefsに明記されていない問題は、本監査時点でも未解消（データ変更なし）。ただし、termStartPrecisionがdayではなくmonthのままであるため、MayorsPage.tsx/MayorDetailPage.tsx/CompareMayorsPage.tsxのいずれもformatArchiveDateWithPrecision()経由で『1967年1月ごろ（月まで確認・日は未確定）』と表示しており、日付を確定情報として誤表示する回帰は発生していないことを再確認した。",
+      "severity": "high",
+      "fixable": "needs_human_review",
+      "proposedFix": "Phase8/9からの継続提案：日の値（22）の出典を追加調査するか、判明しなければtermStartPrecision=monthのまま月初アンカーへ置き換えることを検討。読み取り専用方針のため本レーンでは未着手。",
+      "applied": false
+    },
+    {
+      "category": "disputed_display_verified_no_regression",
+      "file": "src/data/archiveMayorTerms.json / src/pages/MayorsPage.tsx / src/pages/MayorDetailPage.tsx / src/pages/CompareMayorsPage.tsx",
+      "recordId": "mayor-09-term-01",
+      "description": "青木善祐氏の就任日disputed（Wikipedia由来1956-04-21 vs 延岡市史由来1956-04-10の可能性、notesで明記）について、termStartPrecision='month'のまま維持されており、3ページとも引き続きformatArchiveDateWithPrecision()経由で年月のみの表示（『ごろ』付き）となることを確認した。確定表示化の回帰はなかった。",
+      "severity": "low",
+      "fixable": "auto",
+      "proposedFix": "対応不要（既に正しい状態が維持されていることの確認のみ）。",
+      "applied": false
+    },
+    {
+      "category": "referential_integrity",
+      "file": "src/data/archiveMayors.json / archiveMayorTerms.json / archiveFiscalYears.json",
+      "recordId": "-",
+      "description": "mayorId/mayorTermIdの重複ID・orphan参照（存在しないmayorId/mayorTermIdへの参照）・previousMayorId/nextMayorIdの参照整合性・fiscalYearの重複・termEnd<termStartとなる日付前後不可能性・fiscalYearとmayorTermId日付範囲の重複判定を機械チェックした。該当0件（クリーン）。",
+      "severity": "low",
+      "fixable": "auto",
+      "proposedFix": "対応不要（クリーン）。",
+      "applied": false
+    },
+    {
+      "category": "source_and_confidence_completeness",
+      "file": "src/data/archiveFiscalYears.json",
+      "recordId": "-",
+      "description": "budget.totalRevenueYen/totalExpenditureYenが確認済み（非null）の全レコードについて、sourceRefsの欠落・verificationStatusの欠落を機械チェックした。該当0件。円建て金額フィールド（*Yen）における不審な0値（未確認をnullではなく0として登録している疑いのあるケース）も0件だった。",
+      "severity": "low",
+      "fixable": "auto",
+      "proposedFix": "対応不要（クリーン）。",
+      "applied": false
+    },
+    {
+      "category": "stale_report_wording",
+      "file": "reports/mayor-population-finance-connection.json",
+      "recordId": "existingDataInventory",
+      "description": "Phase9 Lane Eの前回監査（reports/phase9-lane-e-audit.json）で指摘済みの『29任期（公選市長のみ）』表記のあいまいさが、本監査時点でも未修正のまま残っている（新規指摘ではなく、未解消の繰り越し）。",
+      "severity": "low",
+      "fixable": "needs_human_review",
+      "proposedFix": "Phase9時点の提案を踏襲：『29任期（公選市長のみ。mayor-14職務代理者を含む全体は30件）』のように明記。reports/は本レーンでは書き換えていない。",
+      "applied": false
+    }
+  ],
+
+  "summary": {
+    "totalFindings": 7,
+    "autoFixedCount": 2,
+    "needsHumanReviewCount": 2,
+    "cleanOrNoActionCount": 3,
+    "bySeverity": { "high": 1, "medium": 3, "low": 3 }
+  },
+
+  "verification": {
+    "typecheck": "npx tsc --noEmit -p . → 成功（エラー0）",
+    "lint": "npm run lint（oxlint）→ 成功（エラー0）",
+    "validateData": "npm run validate:data → errors=0, warnings=15（Phase9時点14件から1件増加。archiveFiscalYears.json欠番警告の新規検出、想定通り）",
+    "buildNote": "npm run build はレーン方針により未実行（統合担当が最後に1回実行する想定）。"
+  },
+
+  "filesModified": [
+    "E:\\nobeoka-gikai\\src\\lib\\archiveFinance.ts",
+    "E:\\nobeoka-gikai\\src\\pages\\DataStatusPage.tsx",
+    "E:\\nobeoka-gikai\\src\\pages\\FinanceBudgetPage.tsx",
+    "E:\\nobeoka-gikai\\src\\pages\\FinanceDebtPage.tsx",
+    "E:\\nobeoka-gikai\\src\\pages\\FinanceFundsPage.tsx"
+  ]
+}

@@ -20,6 +20,7 @@ import {
   municipalBondIssuanceValueTypeLabel,
   missingFiscalYears,
   formatMissingFiscalYearsNote,
+  fiscalYearGapNote,
   hasDebtData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
@@ -28,6 +29,7 @@ const debtIssuanceMetric = financeMetricByKey("debtIssuance")!;
 const debtBalanceGeneralMetric = financeMetricByKey("debtBalanceGeneral")!;
 
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
+const yearGapNote = fiscalYearGapNote(archiveFiscalYears);
 
 export function FinanceDebtPage() {
   const location = useLocation();
@@ -59,6 +61,7 @@ export function FinanceDebtPage() {
         {fiscalYearLabel(archiveFiscalYears[archiveFiscalYears.length - 1]?.fiscalYear)}）。
         {missingYearsNote ?? "対象期間の全年度で市債残高を確認済みです。"}
         市債の増減は市長個人だけの成果・責任ではなく、国の制度・大型事業・災害復旧など複数の要因が影響します。市長・議員の評価目的での単純な比較には利用しないでください。
+        {yearGapNote && <span className="mt-1 block">{yearGapNote}</span>}
       </div>
 
       <GlossaryNote

@@ -18,6 +18,7 @@ import {
   sortedFiscalYears,
   missingFiscalYears,
   formatMissingFiscalYearsNote,
+  fiscalYearGapNote,
   hasBudgetData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
@@ -27,6 +28,7 @@ const budgetFinalMetric = financeMetricByKey("budgetFinal")!;
 const settlementMetric = financeMetricByKey("settlement")!;
 
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
+const yearGapNote = fiscalYearGapNote(archiveFiscalYears);
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
@@ -63,6 +65,7 @@ export function FinanceBudgetPage() {
         収録年度：{rows.length}／{archiveFiscalYears.length}年度（{fiscalYearLabel(archiveFiscalYears[0]?.fiscalYear)}〜
         {fiscalYearLabel(archiveFiscalYears[archiveFiscalYears.length - 1]?.fiscalYear)}）。{missingYearsNote}
         現在登録している年度は限られています。過去年度への遡及調査は今後、公式資料（予算書・決算書）を確認しながら段階的に進めます。「確認中」は資料が未確認であることを示し、0（ゼロ）とは異なります。人口・物価・国庫支出金・大型事業等の影響により予算規模は変動するため、金額の増減だけで単純に評価することは避けてください。
+        {yearGapNote && <span className="mt-1 block">{yearGapNote}</span>}
       </div>
 
       <SectionCard title="当初予算の年度推移">

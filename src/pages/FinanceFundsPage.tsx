@@ -20,6 +20,7 @@ import {
   sortedFiscalYears,
   missingFiscalYears,
   formatMissingFiscalYearsNote,
+  fiscalYearGapNote,
   hasFundData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
@@ -27,6 +28,7 @@ import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 const fundTotalMetric = financeMetricByKey("fundTotal")!;
 
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
+const yearGapNote = fiscalYearGapNote(archiveFiscalYears);
 
 export function FinanceFundsPage() {
   const location = useLocation();
@@ -68,6 +70,7 @@ export function FinanceFundsPage() {
         収録年度：{rows.length}／{archiveFiscalYears.length}年度（{fiscalYearLabel(archiveFiscalYears[0]?.fiscalYear)}〜
         {fiscalYearLabel(archiveFiscalYears[archiveFiscalYears.length - 1]?.fiscalYear)}）
         {missingYearsNote && <span className="block mt-1">{missingYearsNote}</span>}
+        {yearGapNote && <span className="block mt-1">{yearGapNote}</span>}
       </p>
 
       {rows.length === 0 ? (

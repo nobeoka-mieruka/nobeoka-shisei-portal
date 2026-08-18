@@ -53,7 +53,14 @@ import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
 import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { isDayPreciseTerm } from "../lib/archiveMayors";
-import { hasBudgetData, hasPopulationData, hasDebtData, hasFundData, hasFinanceRatioData } from "../lib/archiveFinance";
+import {
+  hasBudgetData,
+  hasPopulationData,
+  hasDebtData,
+  hasFundData,
+  hasFinanceRatioData,
+  fiscalYearGapNote,
+} from "../lib/archiveFinance";
 import {
   simpleCompleteness,
   formatCoverageRate,
@@ -482,7 +489,7 @@ export function DataStatusPage() {
       count: archiveFiscalYears.length,
       unit: "年度分",
       scope: fiscalYearRange,
-      detail: `予算確認済み${fiscalYearsWithBudget}年度／人口確認済み${fiscalYearsWithPopulation}年度／市債確認済み${fiscalYearsWithDebt}年度／基金確認済み${fiscalYearsWithFund}年度／財政健全化判断比率確認済み${fiscalYearsWithFinance}年度。総務省「決算カード」オンライン公開の最古年度は平成13年度＝FY2001（2026-08-17確認）ですが、昭和63年度（1988年度）〜平成12年度（2000年度）分は総務省「地方財政状況調査」（e-Stat）から歳入総額・歳出総額のみ別途確認済みです（この期間の市債・基金・財政健全化判断比率・当初予算等は未確認、CD-ROM等の物理媒体調査は未実施）。`,
+      detail: `予算確認済み${fiscalYearsWithBudget}年度／人口確認済み${fiscalYearsWithPopulation}年度／市債確認済み${fiscalYearsWithDebt}年度／基金確認済み${fiscalYearsWithFund}年度／財政健全化判断比率確認済み${fiscalYearsWithFinance}年度。総務省「決算カード」オンライン公開の最古年度は平成13年度＝FY2001（2026-08-17確認）ですが、昭和63年度（1988年度）〜平成12年度（2000年度）分は総務省「地方財政状況調査」（e-Stat）から歳入総額・歳出総額のみ別途確認済みです（この期間の市債・基金・財政健全化判断比率・当初予算等は未確認、CD-ROM等の物理媒体調査は未実施）。それ以前の年度は、延岡市史・宮崎県統計年鑑等の一次資料で確認できた単年度のみ個別に登録しています（未収録の年度は0ではなく「未確認」です）。${fiscalYearGapNote(archiveFiscalYears) ?? ""}`,
       linkTo: "/finance",
       linkLabel: "財政ページを見る",
     },

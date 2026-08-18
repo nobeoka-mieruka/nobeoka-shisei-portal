@@ -29,6 +29,27 @@ export function formatMissingFiscalYearsNote(missingYears: number[], itemLabel: 
 }
 
 /**
+ * TASK-097（Phase10 Lane E）：archiveFiscalYears.jsonには1965年度のように、他の収録年度
+ * （1988〜2026年度）から大きく離れた単独の年度が混在している。「収録年度：X／Y年度（最古〜最新）」
+ * という表示だけでは、最古年度〜最新年度の間が連続して収録されているかのように誤解されるおそれが
+ * あるため、実際に記録が存在しない年度区間（歯抜け区間）を明示する注記を組み立てる。
+ * 区間が1つもなければnull（＝表示中の年度がすべて連続している）。
+ */
+export function fiscalYearGapNote(allYears: ArchiveFiscalYear[]): string | null {
+  const sorted = sortedFiscalYears(allYears);
+  const gapDescriptions: string[] = [];
+  for (let i = 1; i < sorted.length; i++) {
+    const prevFy = sorted[i - 1].fiscalYear;
+    const currFy = sorted[i].fiscalYear;
+    if (currFy - prevFy > 1) {
+      gapDescriptions.push(`${fiscalYearLabel(prevFy)}〜${fiscalYearLabel(currFy)}の間（${currFy - prevFy - 1}年度分）`);
+    }
+  }
+  if (gapDescriptions.length === 0) return null;
+  return `上記の年度範囲は最古年度〜最新年度を示しているだけで、その間の全年度を収録しているという意味ではありません。${gapDescriptions.join("、")}は当サイトに記録がなく、推移として連続的に比較できません。`;
+}
+
+/**
  * TASK-085：年度ごとのデータ有無判定。FinanceFundsPage・FinanceBudgetPage・
  * FinanceDebtPage・DataStatusPage・dataCompletenessSummaryで同じ`!!y.fund`等の
  * 判定式を個別に書いていたため、一本化した（将来、判定基準を変える際の修正漏れを防ぐ）。
