@@ -1,5 +1,408 @@
 [
   {
+    "fiscalYear": 1988,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-03",
+    "budget": {
+      "fiscalYear": 1988,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 28543413000,
+      "totalExpenditureYen": 28000835000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1989,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-03",
+    "budget": {
+      "fiscalYear": 1989,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 30865569000,
+      "totalExpenditureYen": 30400140000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1990,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-03",
+    "budget": {
+      "fiscalYear": 1990,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 33026518000,
+      "totalExpenditureYen": 32353645000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1991,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-04",
+    "budget": {
+      "fiscalYear": 1991,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 35147947000,
+      "totalExpenditureYen": 34592758000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1992,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-04",
+    "budget": {
+      "fiscalYear": 1992,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 36725144000,
+      "totalExpenditureYen": 36128750000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1993,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-04",
+    "budget": {
+      "fiscalYear": 1993,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 39650052000,
+      "totalExpenditureYen": 38775931000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1994,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-01",
+    "budget": {
+      "fiscalYear": 1994,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 39647375000,
+      "totalExpenditureYen": 38583538000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1995,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-01",
+    "budget": {
+      "fiscalYear": 1995,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 42100068000,
+      "totalExpenditureYen": 40793647000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1996,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-01",
+    "budget": {
+      "fiscalYear": 1996,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 45909130000,
+      "totalExpenditureYen": 45062918000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1997,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-01",
+    "budget": {
+      "fiscalYear": 1997,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 42864525000,
+      "totalExpenditureYen": 41952098000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1998,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-02",
+    "budget": {
+      "fiscalYear": 1998,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 46457053000,
+      "totalExpenditureYen": 44947357000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1999,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-02",
+    "budget": {
+      "fiscalYear": 1999,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 48127768000,
+      "totalExpenditureYen": 47241971000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 2000,
+    "mayorId": "mayor-13",
+    "mayorTermId": "mayor-13-term-02",
+    "budget": {
+      "fiscalYear": 2000,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 43877025000,
+      "totalExpenditureYen": 42922664000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+          "sourceTitle": "地方財政状況調査 市町村分 調査表02「決算収支の状況」（延岡市、団体コード45203）",
+          "sourceOrganization": "総務省（e-Stat 政府統計の総合窓口）",
+          "accessedAt": "2026-08-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        }
+      ],
+      "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
     "fiscalYear": 2001,
     "finance": {
       "fiscalYear": 2001,

@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2026-08-19T01:30:00+09:00",
+  "lane": "A",
+  "purpose": "Phase7B/7Cから継続し、延岡市史(1963年版)の財政表（第五章 市政および財政の発展）の年度・項目・単位・数値の完全対応を進めた。新規資料探索は行わず、既知の表（別表2〜4、7）とその周辺（komma133-137）のみを対象とした。",
+  "documentContext": {
+    "title": "延岡市史（1963年版、延岡市史編さん委員会編、延岡市）",
+    "ndlPid": "3027323",
+    "chapter": "第二編 行政・財政／第五章 市政および財政の発展（p73〜p249、komma68〜約254）"
+  },
+  "confirmedPrimary": {
+    "note": "本セッションで新規にconfirmed_primaryへ昇格した項目はなし。Phase7Cで確定済みの以下4件を維持（変更なし、再掲）。",
+    "items": [
+      {
+        "fiscalYear": 1933,
+        "eraLabel": "昭和8年度",
+        "item": "教育費",
+        "expenditure": 139201,
+        "unit": "円",
+        "accountingScope": "歳出・経常部・予算",
+        "sourceTitle": "延岡市史(1963年版)別表2「昭和8年度歳出経常部予算調（其の一）」",
+        "sourcePage": "komma135",
+        "mayorId": "mayor-04",
+        "mayorTermId": "mayor-04-term-01"
+      },
+      {
+        "fiscalYear": 1934,
+        "eraLabel": "昭和9年度",
+        "item": "教育費",
+        "expenditure": 138321,
+        "unit": "円",
+        "accountingScope": "歳出・経常部・予算",
+        "sourceTitle": "延岡市史(1963年版)別表2「昭和8年度歳出経常部予算調（其の一）」",
+        "sourcePage": "komma135",
+        "mayorId": "mayor-04",
+        "mayorTermId": "mayor-04-term-01"
+      },
+      {
+        "fiscalYear": 1935,
+        "eraLabel": "昭和10年度",
+        "item": "教育費",
+        "expenditure": 142135,
+        "unit": "円",
+        "accountingScope": "歳出・経常部・予算",
+        "sourceTitle": "延岡市史(1963年版)別表2「昭和8年度歳出経常部予算調（其の一）」",
+        "sourcePage": "komma135",
+        "mayorId": "mayor-04",
+        "mayorTermId": "mayor-04-term-01"
+      },
+      {
+        "fiscalYear": 1936,
+        "eraLabel": "昭和11年度",
+        "item": "教育費",
+        "expenditure": 196829,
+        "unit": "円",
+        "accountingScope": "歳出・経常部・予算",
+        "sourceTitle": "延岡市史(1963年版)別表2「昭和8年度歳出経常部予算調（其の一）」",
+        "sourcePage": "komma135",
+        "mayorId": "mayor-04",
+        "mayorTermId": "mayor-04-term-01"
+      }
+    ]
+  },
+  "newFindingsThisSession": [
+    {
+      "table": "別表2其の二（別表2の続き、komma136左ページ）",
+      "title": "昭和8年度歳出経常部予算調（其の二）",
+      "confirmedYearColumns": [
+        "昭和12年度（1937）",
+        "昭和13年度（1938）",
+        "昭和14年度（1939）",
+        "昭和15年度（推定、未確認）"
+      ],
+      "unit": "円",
+      "status": "located_partial_read",
+      "note": "別表2其の一（komma135、昭和8〜11年度）の直接の続き。同一カテゴリの行が並んでいると推定されるが、教育費行の値候補（213,067／230,659／236,838）は、其の一の教育費の推移（139,201→138,321→142,135→196,829）と連続性がある数値として有力候補だが、行ラベルとの完全な対応確認には至らず、confirmed_primaryへは昇格していない。次回、其の一と同じ「zoom→drag→drag」手順で行ラベルと数値を同時に視野に収めて確認することを推奨。"
+    },
+    {
+      "table": "別表3（新規発見、komma136右ページから開始）",
+      "confirmedYearColumns": [
+        "昭和8年度（1933）〜"
+      ],
+      "unit": "円",
+      "rowLabelsPartiallyConfirmed": [
+        "土木費",
+        "教育費（営繕）",
+        "公債費（利子、推定）",
+        "組合脱退費（推定）",
+        "記念事業費（推定、北勢記念事業費等）"
+      ],
+      "status": "located_partial_read",
+      "note": "別表2（経常部予算）とは別の新規テーブル。行ラベルに「営繕」「記念事業費」等の一時的・臨時的性質の費目が含まれることから、歳出臨時部（経常部に対する臨時支出）の予算表である可能性が高いが、表題そのもの（横書きタイトル行）は複数回のパン操作でも視野に収められず、未確認。次回優先確認事項。"
+    }
+  ],
+  "generalFundTotalStatus": "延岡市全体の歳入総額・歳出総額・差引を一括で示す表は、本セッションでも特定できなかった。別表2（歳出経常部予算）・別表3（歳出、臨時部の可能性）はいずれも歳出側の内訳表であり、歳入側の対応表（別表1に相当する可能性）は未確認。komma133-134周辺は町内会・自治会等の行政組織に関する記述であり、財政表ではなかった。",
+  "browserSessionNote": "本セッションを通じてNDLデジタルコレクションのビューアは安定動作した（CDPタイムアウト等の不具合は発生しなかった）。komma133・135・136を確認した。",
+  "summary": {
+    "documentsOpened": 1,
+    "kommaPagesChecked": [
+      "133",
+      "135",
+      "136"
+    ],
+    "confirmedFiscalYears": 4,
+    "newConfirmedPrimaryThisSession": 0,
+    "oldestConfirmedFiscalYear": 1933,
+    "newLocatedPartialReadTables": 2,
+    "newConfirmedOfficialThisSession": 13,
+    "oldestConfirmedOfficialFiscalYear": 1988
+  },
+  "majorBreakthroughThisSession": {
+    "title": "e-Stat「地方財政状況調査」で1988-2000年度の歳入総額・歳出総額を確定",
+    "detail": "Lane Bが発見したe-Stat（総務省、政府統計の総合窓口）の「地方財政状況調査 市町村分 調査表02 決算収支の状況」データベース（dbview画面、ログイン不要）を、Lane A（本セッション）で実際に開いた。時間軸を1988〜2000年度、団体名（市町村分）を延岡市（団体コード45203）に絞り込み、各年度の歳入総額(A)・歳出総額(B)・歳入歳出差引(C=A-B)・翌年度繰越財源(D)・実質収支(E=C-D)を取得した。全13年度でA-B=C、C-D=Eの算術整合を確認済み（読み取り誤りに対する内部検証）。単位は千円のため円へ換算（×1000）してsrc/data/archiveFiscalYears.jsonへ統合した（mayorId/mayorTermIdも接続済み）。これによりarchiveFiscalYears.jsonは1988-2026年度の39年度連続収録となった。NDLデジタルコレクションは使用していない（e-Statは別サイトのため、Lane Aの『NDL専用ブラウザレーン』制約とは独立に処理した）。",
+    "fiscalYearsConfirmed": [
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000
+    ],
+    "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
+    "integratedIntoProductionData": true
+  }
+}

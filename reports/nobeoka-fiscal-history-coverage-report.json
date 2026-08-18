@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-19T00:40:00+09:00",
+  "generatedAt": "2026-08-19T02:00:00+09:00",
   "purpose": "Phase7指示13：延岡市の財政資料について、年度別・年代別のカバレッジ（充足率）を集計した。1933-2000年は代表年度（およそ5年おき）のみを対象とし、全年度の網羅は今回のスコープ外とした。数値そのものが確認できていない年度も『0』ではなく状態語彙で明示する。",
   "statusVocabulary": {
     "confirmed_primary": "一次資料で、表題・対象年度・項目（行見出し）・単位・数値の5点すべてを確認済み。Phase7Cより、この5点セットが揃わない限り年度単位のステータスをconfirmed_primaryへ格上げしない運用とした（1項目のみ確認できた場合はitemLevelConfirmedPrimaryとして別記し、年度全体のステータスはlocated_partial_read等のまま維持する）。",
-    "confirmed_official": "公式資料（総務省決算カード等）で数値を確認済み",
+    "confirmed_official": "公式資料（総務省決算カード、総務省e-Stat地方財政状況調査等）で歳入・歳出等の数値を確認済み",
     "secondary_only": "二次資料でのみ確認",
     "library_only": "資料の所在は特定できたが、現地閲覧・個人送信ログイン等の追加手続が必要で本文数値は未確認",
     "not_digitized": "資料の所在情報すら特定できていない",
@@ -91,20 +91,20 @@
     {
       "year": 1990,
       "label": "1990年前後",
-      "status": "not_found",
-      "note": "延岡市史(1993年版、ndl-src-05、metadata_only)が候補。"
+      "status": "confirmed_official",
+      "note": "Phase8 Lane B（Web調査）が発見したe-Stat「地方財政状況調査」市町村分・調査表02「決算収支の状況」を、Lane A（本セッション）が実際に開き、延岡市（団体コード45203）・1990年度の歳入総額33,026,518千円・歳出総額32,353,645千円を確認した。A-B=歳入歳出差引(672,873千円)、C-D=実質収支(179,086千円)の算術整合も確認済み。src/data/archiveFiscalYears.jsonへ統合済み。"
     },
     {
       "year": 1995,
       "label": "1995年前後",
-      "status": "library_only",
-      "note": "今回、NDLサーチで『延岡市歳入歳出決算書 平成7年度（1995年度相当、刊行1996年）』の書誌を新規確認。本文未確認。"
+      "status": "confirmed_official",
+      "note": "同上（e-Stat地方財政状況調査）。1995年度：歳入総額42,100,068千円・歳出総額40,793,647千円。archiveFiscalYears.jsonへ統合済み。"
     },
     {
       "year": 2000,
       "label": "2000年前後",
-      "status": "library_only",
-      "note": "今回、NDLサーチで『延岡市歳入歳出決算書 平成11・12年度（1999・2000年度）』の書誌を新規確認。本文未確認。archiveFiscalYears.jsonのFY2001開始の直前にあたる。"
+      "status": "confirmed_official",
+      "note": "同上（e-Stat地方財政状況調査）。2000年度：歳入総額43,877,025千円・歳出総額42,922,664千円。archiveFiscalYears.jsonへ統合済み。archiveFiscalYears.jsonのFY2001開始の直前年度が確定したことになる。"
     }
   ],
   "eraBands": [
@@ -128,7 +128,7 @@
         "not_found": 1
       },
       "coverageRatePercent": 0,
-      "note": "確認済み数値（confirmed_primary）0/4代表年度。1955年度分がlocated_partial_readへ前進（Phase7B、別表7其の四）。残り3年度はlibrary_only。"
+      "note": "確認済み数値（confirmed_official）1/4代表年度（1990年度）。地方財政状況調査（e-Stat）は1988年度以前には遡れないため、1950・1955・1960・1965年度分はこの資料ではカバーできない。1955年度分はlocated_partial_read（延岡市史別表7其の四）のまま。残り2年度はlibrary_only。"
     },
     {
       "band": "1970-1989",
@@ -144,15 +144,12 @@
     },
     {
       "band": "1990-2000",
-      "representativeYearsInBand": 2,
+      "representativeYearsInBand": 3,
       "statusBreakdown": {
-        "not_digitized": 0,
-        "library_only": 2,
-        "not_found": 0,
-        "confirmed_official": 0
+        "confirmed_official": 3
       },
-      "coverageRatePercent": 0,
-      "note": "確認済み数値0/2代表年度。ただし今回のセッションで両年度とも資料所在（NDL書誌）を新規に特定した。"
+      "coverageRatePercent": 100,
+      "note": "Phase8で大幅前進。1990・1995・2000年度の3代表年度全てがconfirmed_official（総務省e-Stat「地方財政状況調査」、歳入総額・歳出総額を確認）となった。あわせて代表年度リスト外だが1988・1989・1991-1994・1996-1999の10年度分も同時に確認・登録し、1988年度から2000年度まで13年度連続で歳入総額・歳出総額が確定した（archiveFiscalYears.jsonのFY2001開始と接続し、1988-2026年度の39年度が連続してカバーされることになった）。"
     },
     {
       "band": "2001-現在",
@@ -167,10 +164,24 @@
   "overallSummary": {
     "representativeYearsTotal": 14,
     "representativeYearsWithConfirmedNumbers": 0,
-    "representativeYearsWithIdentifiedSource": 5,
-    "representativeYearsWithNoLead": 7,
-    "fiscalYearsWithConfirmedNumbers": 26,
-    "note": "1933-2000年の代表年度14件について、年度単位のconfirmed_primary（歳入・歳出総額・差引まで確定）は引き続き0件（推測による水増しはしていない）。ただしPhase7Cで、1933年度（昭和8年度）の教育費（歳出・経常部予算）という1科目について、表題・年度・行見出し・単位・数値の5点すべてを一次資料（延岡市史1963年版）で確認し、itemLevelConfirmedPrimaryを達成した（139,201円。1934-1936年度分＝138,321円・142,135円・196,829円も同一表内で確認済みだが代表年度リスト外）。年度全体としてのステータスはlocated_partial_read（2件）のまま維持し、library_only（5件）・not_found/not_digitized（7件）は前フェーズからほぼ変化なし。2001年以降26年度分は既存データのまま変化なし。",
-    "representativeYearsWithItemLevelConfirmedPrimary": 1
+    "representativeYearsWithIdentifiedSource": 3,
+    "representativeYearsWithNoLead": 6,
+    "fiscalYearsWithConfirmedNumbers": 39,
+    "note": "Phase8で、総務省e-Stat「地方財政状況調査」市町村分・調査表02「決算収支の状況」（1988年度〜、ログイン不要）をLane B（発見）・Lane A（本文確認・登録）で確認した。代表年度のうち1990・1995・2000の3件がconfirmed_officialへ格上げされ、あわせて代表年度リスト外の1988・1989・1991-1994・1996-1999の10年度分も同時に確定し、1988年度から2000年度まで13年度連続で歳入総額・歳出総額が確定した。archiveFiscalYears.jsonの既存FY2001-2026（26年度）と接続し、1988-2026年度の合計39年度が連続してカバーされる状態になった（欠落なし）。1933-1987年度（54年間）は依然として代表年度単位の調査にとどまる。",
+    "representativeYearsWithItemLevelConfirmedPrimary": 1,
+    "representativeYearsWithConfirmedOfficial": 3,
+    "representativeYearsWithLocatedPartialRead": 2,
+    "additionalFiscalYearsConfirmedOutsideRepresentativeList": [
+      "1988",
+      "1989",
+      "1991",
+      "1992",
+      "1993",
+      "1994",
+      "1996",
+      "1997",
+      "1998",
+      "1999"
+    ]
   }
 }
