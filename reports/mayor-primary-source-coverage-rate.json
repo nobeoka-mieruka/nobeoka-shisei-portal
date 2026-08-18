@@ -26,9 +26,9 @@
       "confirmed_official": 4
     },
     "election": {
-      "confirmed_primary": 4,
+      "confirmed_primary": 6,
       "confirmed_official": 2,
-      "secondary_only": 7,
+      "secondary_only": 5,
       "not_applicable": 1
     },
     "career": {
@@ -145,7 +145,7 @@
         "birthDate": "confirmed_primary",
         "inaugurationDate": "disputed",
         "retirementDate": "confirmed_official",
-        "election": "secondary_only",
+        "election": "confirmed_official",
         "career": "confirmed_primary",
         "majorPolicies": "confirmed_primary"
       }
@@ -157,7 +157,7 @@
         "birthDate": "confirmed_primary",
         "inaugurationDate": "confirmed_official",
         "retirementDate": "confirmed_primary",
-        "election": "confirmed_official",
+        "election": "confirmed_primary",
         "career": "confirmed_primary",
         "majorPolicies": "confirmed_primary"
       }
@@ -169,7 +169,7 @@
         "birthDate": "secondary_only",
         "inaugurationDate": "confirmed_official",
         "retirementDate": "confirmed_primary",
-        "election": "secondary_only",
+        "election": "confirmed_primary",
         "career": "confirmed_primary",
         "majorPolicies": "confirmed_primary"
       }
@@ -213,11 +213,11 @@
   ],
   "coverageSummary": {
     "applicableCells": 82,
-    "confirmedCells": 65,
-    "primaryOnlyCells": 47,
-    "coverageRatePercent": 79.3,
-    "primaryOnlyRatePercent": 57.3,
-    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 79.3%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 57.3%）"
+    "confirmedCells": 67,
+    "primaryOnlyCells": 49,
+    "coverageRatePercent": 81.7,
+    "primaryOnlyRatePercent": 59.8,
+    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 81.7%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 59.8%）"
   },
   "electionResultsCoverage": {
     "totalOrdinals": 29,

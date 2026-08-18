@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-08-18T21:00:00+09:00",
+  "purpose": "歴代市長データベースの一次資料充足状況を俯瞰するダッシュボード用集計データ。",
+  "headline": {
+    "uniqueMayorPersons": 13,
+    "totalElectedTerms": 29,
+    "totalElectionRecords": 29,
+    "indirectSelectionElections": 7,
+    "directPublicVoteElections": 22,
+    "voteCountConfirmedElections": 8,
+    "turnoutConfirmedElections": 7,
+    "unopposedElectionsConfirmed": 1,
+    "overallCoverageRatePercent": 81.7,
+    "primaryOnlyCoverageRatePercent": 59.8
+  },
+  "fieldStatusCounts": {
+    "birthDate": {
+      "secondary_only": 6,
+      "confirmed_primary": 7,
+      "confirmed_official": 1
+    },
+    "inaugurationDate": {
+      "confirmed_primary": 9,
+      "confirmed_official": 4,
+      "disputed": 1
+    },
+    "retirementDate": {
+      "not_applicable": 1,
+      "confirmed_primary": 9,
+      "confirmed_official": 4
+    },
+    "election": {
+      "confirmed_primary": 6,
+      "confirmed_official": 2,
+      "secondary_only": 5,
+      "not_applicable": 1
+    },
+    "career": {
+      "confirmed_official": 6,
+      "confirmed_primary": 8
+    },
+    "majorPolicies": {
+      "not_researched": 3,
+      "confirmed_primary": 10,
+      "confirmed_official": 1
+    }
+  },
+  "electionCoverageByEra": [
+    {
+      "band": "1933-1946",
+      "electionsTotal": 7,
+      "voteCountConfirmed": 0,
+      "turnoutConfirmed": 0,
+      "voteCountConfirmedRatePercent": 0
+    },
+    {
+      "band": "1947-1969",
+      "electionsTotal": 7,
+      "voteCountConfirmed": 1,
+      "turnoutConfirmed": 0,
+      "voteCountConfirmedRatePercent": 14.3
+    },
+    {
+      "band": "1970-1989",
+      "electionsTotal": 5,
+      "voteCountConfirmed": 0,
+      "turnoutConfirmed": 0,
+      "voteCountConfirmedRatePercent": 0
+    },
+    {
+      "band": "1990-2001",
+      "electionsTotal": 3,
+      "voteCountConfirmed": 0,
+      "turnoutConfirmed": 0,
+      "voteCountConfirmedRatePercent": 0
+    },
+    {
+      "band": "2002-現在",
+      "electionsTotal": 7,
+      "voteCountConfirmed": 7,
+      "turnoutConfirmed": 7,
+      "voteCountConfirmedRatePercent": 100
+    }
+  ],
+  "disputedFactsCount": 1,
+  "totalFindings": 19,
+  "newPrimarySourcesThisPhase": [
+    "ndl-src-24（延岡商工会議所四十年史）"
+  ],
+  "notes": "1933-1946年(間接選出7件)は制度上、候補者・得票数という概念自体が存在しないためnot_applicable扱い。1947-1969年帯は1967年の無投票当選1件のみ得票数概念が存在せず確定扱い、他は引き続きnot_researched。2002年以降は選挙ドットコム等により全件、得票数・投票率とも確認済み。"
+}
