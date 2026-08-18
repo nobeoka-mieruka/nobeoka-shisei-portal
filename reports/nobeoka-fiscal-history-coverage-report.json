@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T23:20:00+09:00",
+  "generatedAt": "2026-08-18T23:59:00+09:00",
   "purpose": "Phase7指示13：延岡市の財政資料について、年度別・年代別のカバレッジ（充足率）を集計した。1933-2000年は代表年度（およそ5年おき）のみを対象とし、全年度の網羅は今回のスコープ外とした。数値そのものが確認できていない年度も『0』ではなく状態語彙で明示する。",
   "statusVocabulary": {
     "confirmed_primary": "一次資料で数値を確認済み",
@@ -9,57 +9,147 @@
     "not_digitized": "資料の所在情報すら特定できていない",
     "not_found": "本セッションでの調査では所在情報に到達できなかった",
     "not_researched": "今回のセッションでは調査対象にしなかった",
-    "not_applicable": "その年代・年度には該当する制度・資料区分が存在しない"
+    "not_applicable": "その年代・年度には該当する制度・資料区分が存在しない",
+    "located_partial_read": "Phase7B新設。一次資料本文の該当ページ（表そのもの）を実際に開き、表題・対象年度・一部の数値を目視確認したが、全ての行・列の対応関係を確信を持って確定するには至っていない状態。confirmed_primaryへは未昇格。"
   },
   "representativeYears": [
-    { "year": 1933, "label": "市制施行年", "status": "not_digitized", "note": "財政資料の所在未確認。延岡市史(1963年版)第五章に記述の可能性あり（次フェーズ課題）。" },
-    { "year": 1940, "label": "1940年前後", "status": "not_digitized", "note": "同上。" },
-    { "year": 1946, "label": "1945-47（終戦直後）", "status": "library_only", "note": "『延岡市歳入歳出決算書』（雑誌扱い）が昭和21年度（1946年度）分から刊行されている書誌記録を確認。本文未確認。" },
-    { "year": 1950, "label": "1950年前後", "status": "library_only", "note": "『延岡市決算書並意見書』（ndl-src-16、Phase5確認済み）に昭和25年度（1950年度）分を含む17冊が所在確認済み。本文未確認。" },
-    { "year": 1955, "label": "1955年前後", "status": "library_only", "note": "同上シリーズに昭和25〜39年度（1950-1964年）分を含む。本文未確認。" },
-    { "year": 1960, "label": "1960年前後", "status": "library_only", "note": "同上。延岡市史(1963年版)第五章が同時代を扱う可能性が高い。" },
-    { "year": 1965, "label": "1965年前後", "status": "not_found", "note": "ndl-src-16の収録範囲（〜1964年度）をわずかに超える。所在未確認。" },
-    { "year": 1970, "label": "1970年前後", "status": "not_found", "note": "所在未確認。延岡市史(1983年版上巻、ndl-src-03、metadata_only)が候補。" },
-    { "year": 1975, "label": "1975年前後", "status": "not_found", "note": "同上。" },
-    { "year": 1980, "label": "1980年前後", "status": "not_found", "note": "同上。人口（reconstructedCurrentBoundaryPopulation=154,881人、observedPopulation=136,598人）は既にnobeokaCensusPopulation.jsonで確認済みだが、財政数値は未確認。" },
-    { "year": 1985, "label": "1985年前後", "status": "not_found", "note": "延岡市史(1983年版、対象は〜1983年のため範囲外)。所在未確認。" },
-    { "year": 1990, "label": "1990年前後", "status": "not_found", "note": "延岡市史(1993年版、ndl-src-05、metadata_only)が候補。" },
-    { "year": 1995, "label": "1995年前後", "status": "library_only", "note": "今回、NDLサーチで『延岡市歳入歳出決算書 平成7年度（1995年度相当、刊行1996年）』の書誌を新規確認。本文未確認。" },
-    { "year": 2000, "label": "2000年前後", "status": "library_only", "note": "今回、NDLサーチで『延岡市歳入歳出決算書 平成11・12年度（1999・2000年度）』の書誌を新規確認。本文未確認。archiveFiscalYears.jsonのFY2001開始の直前にあたる。" }
+    {
+      "year": 1933,
+      "label": "市制施行年",
+      "status": "located_partial_read",
+      "note": "延岡市史(1963年版)第五章内の別表3・別表4（昭和10年度＝1935年度〜の一般会計・公益質庫特別会計決算表、komma135・137）を実際に開き、表題・対象年度・一部数値を目視確認した（Phase7B）。1933-1934年分の数値そのものは今回未確認。詳細はreports/nobeoka-fiscal-history-1933-2000-source-survey.json参照。"
+    },
+    {
+      "year": 1940,
+      "label": "1940年前後",
+      "status": "located_partial_read",
+      "note": "同上の別表3・別表4は昭和10・11年度（1935-1936）の列を確認しており、1940年に近い時期の同一表内の追加列（12年度以降）が存在する可能性が高いが、今回はkomma137で確認できた範囲（10・11年度）にとどまる。"
+    },
+    {
+      "year": 1946,
+      "label": "1945-47（終戦直後）",
+      "status": "library_only",
+      "note": "『延岡市歳入歳出決算書』（雑誌扱い）が昭和21年度（1946年度）分から刊行されている書誌記録を確認。本文未確認。"
+    },
+    {
+      "year": 1950,
+      "label": "1950年前後",
+      "status": "library_only",
+      "note": "『延岡市決算書並意見書』（ndl-src-16、Phase5確認済み）に昭和25年度（1950年度）分を含む17冊が所在確認済み。本文未確認。"
+    },
+    {
+      "year": 1955,
+      "label": "1955年前後",
+      "status": "located_partial_read",
+      "note": "延岡市史(1963年版)第五章内の別表7其の四（と畜場・宅地造成事業等の特別会計一覧、昭和28〜33年度＝1953-1958、komma144-145）を実際に開き、表題・対象年度・一部数値（歳入歳出差引額の算術的整合を確認）を目視確認した（Phase7B）。どの特別会計の数値かの行対応は未確定。"
+    },
+    {
+      "year": 1960,
+      "label": "1960年前後",
+      "status": "library_only",
+      "note": "同上。延岡市史(1963年版)第五章が同時代を扱う可能性が高い。"
+    },
+    {
+      "year": 1965,
+      "label": "1965年前後",
+      "status": "not_found",
+      "note": "ndl-src-16の収録範囲（〜1964年度）をわずかに超える。所在未確認。"
+    },
+    {
+      "year": 1970,
+      "label": "1970年前後",
+      "status": "not_found",
+      "note": "所在未確認。延岡市史(1983年版上巻、ndl-src-03、metadata_only)が候補。"
+    },
+    {
+      "year": 1975,
+      "label": "1975年前後",
+      "status": "not_found",
+      "note": "同上。"
+    },
+    {
+      "year": 1980,
+      "label": "1980年前後",
+      "status": "not_found",
+      "note": "同上。人口（reconstructedCurrentBoundaryPopulation=154,881人、observedPopulation=136,598人）は既にnobeokaCensusPopulation.jsonで確認済みだが、財政数値は未確認。"
+    },
+    {
+      "year": 1985,
+      "label": "1985年前後",
+      "status": "not_found",
+      "note": "延岡市史(1983年版、対象は〜1983年のため範囲外)。所在未確認。"
+    },
+    {
+      "year": 1990,
+      "label": "1990年前後",
+      "status": "not_found",
+      "note": "延岡市史(1993年版、ndl-src-05、metadata_only)が候補。"
+    },
+    {
+      "year": 1995,
+      "label": "1995年前後",
+      "status": "library_only",
+      "note": "今回、NDLサーチで『延岡市歳入歳出決算書 平成7年度（1995年度相当、刊行1996年）』の書誌を新規確認。本文未確認。"
+    },
+    {
+      "year": 2000,
+      "label": "2000年前後",
+      "status": "library_only",
+      "note": "今回、NDLサーチで『延岡市歳入歳出決算書 平成11・12年度（1999・2000年度）』の書誌を新規確認。本文未確認。archiveFiscalYears.jsonのFY2001開始の直前にあたる。"
+    }
   ],
   "eraBands": [
     {
       "band": "1933-1949",
-      "representativeYearsInBand": 2,
-      "statusBreakdown": { "not_digitized": 2, "library_only": 0, "not_found": 0, "confirmed_official": 0 },
+      "representativeYearsInBand": 3,
+      "statusBreakdown": {
+        "located_partial_read": 2,
+        "library_only": 1
+      },
       "coverageRatePercent": 0,
-      "note": "確認済み数値0/2代表年度。ただし1946年分は資料所在は特定済み（library_only未満のnot_digitizedとは区別）。"
+      "note": "確認済み数値（confirmed_primary）0/2代表年度。ただし2年度ともlocated_partial_read（一次資料の該当表を開いて一部数値を目視確認済みだが、行列対応が未確定）へ前進した（Phase7B）。"
     },
     {
       "band": "1950-1969",
       "representativeYearsInBand": 4,
-      "statusBreakdown": { "not_digitized": 0, "library_only": 3, "not_found": 1, "confirmed_official": 0 },
+      "statusBreakdown": {
+        "library_only": 2,
+        "located_partial_read": 1,
+        "not_found": 1
+      },
       "coverageRatePercent": 0,
-      "note": "確認済み数値0/4代表年度。ただし4年度中3年度は資料所在を特定済み（library_only）であり、Phase5時点より前進している。"
+      "note": "確認済み数値（confirmed_primary）0/4代表年度。1955年度分がlocated_partial_readへ前進（Phase7B、別表7其の四）。残り3年度はlibrary_only。"
     },
     {
       "band": "1970-1989",
       "representativeYearsInBand": 4,
-      "statusBreakdown": { "not_digitized": 0, "library_only": 0, "not_found": 4, "confirmed_official": 0 },
+      "statusBreakdown": {
+        "not_digitized": 0,
+        "library_only": 0,
+        "not_found": 4,
+        "confirmed_official": 0
+      },
       "coverageRatePercent": 0,
       "note": "確認済み数値0/4代表年度。資料所在も特定できていない。次フェーズで延岡市史(1983年版)の確認を優先。"
     },
     {
       "band": "1990-2000",
       "representativeYearsInBand": 2,
-      "statusBreakdown": { "not_digitized": 0, "library_only": 2, "not_found": 0, "confirmed_official": 0 },
+      "statusBreakdown": {
+        "not_digitized": 0,
+        "library_only": 2,
+        "not_found": 0,
+        "confirmed_official": 0
+      },
       "coverageRatePercent": 0,
       "note": "確認済み数値0/2代表年度。ただし今回のセッションで両年度とも資料所在（NDL書誌）を新規に特定した。"
     },
     {
       "band": "2001-現在",
       "fiscalYearsInBand": 26,
-      "statusBreakdown": { "confirmed_official": 26 },
+      "statusBreakdown": {
+        "confirmed_official": 26
+      },
       "coverageRatePercent": 100,
       "note": "既存archiveFiscalYears.json（production data）。歳入歳出は26年度全てで確認済み。市債残高・基金残高・財政指標は年度により収録項目が異なる（nullで明示、0扱いはしていない）。"
     }
@@ -67,9 +157,10 @@
   "overallSummary": {
     "representativeYearsTotal": 14,
     "representativeYearsWithConfirmedNumbers": 0,
-    "representativeYearsWithIdentifiedSource": 6,
-    "representativeYearsWithNoLead": 8,
+    "representativeYearsWithIdentifiedSource": 5,
+    "representativeYearsWithNoLead": 6,
     "fiscalYearsWithConfirmedNumbers": 26,
-    "note": "1933-2000年の代表年度14件について、本セッションでは財政の具体的数値を1件も新規確認できなかった（推測による補完はしていない）。一方で14件中6件（1946・1950・1955・1960・1995・2000）について、資料の所在（書誌情報）をlibrary_only（所在特定済み・本文未確認）として新規に特定または精緻化した。残り8件（1933・1940・1965・1970・1975・1980・1985・1990）は所在未確認（not_digitized 2件、not_found 6件）。2001年以降26年度分は既存データのまま変化なし。"
+    "note": "1933-2000年の代表年度14件について、confirmed_primary（一次資料で行・列対応まで確定した数値）は本セッションでも0件のまま（推測による補完はしていない）。Phase7Bで延岡市史(1963年版)の実際の財政表3件（別表3・別表4・別表7其の四）を開き、3代表年度（1933・1940・1955）をlocated_partial_read（表題・年度・一部数値は目視確認済みだが行列対応が未確定）へ前進させた。5件（1946・1950・1960・1995・2000）はlibrary_only（所在特定済み・本文未確認）。残り6件（1965・1970・1975・1980・1985・1990）は所在未確認（not_found）。2001年以降26年度分は既存データのまま変化なし。",
+    "representativeYearsWithLocatedPartialRead": 3
   }
 }
