@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2026-08-18T00:00:00+09:00",
+  "lane": "D",
+  "purpose": "Phase 8 Lane D: 歴代市長14名（archiveMayors.json/archiveMayorTerms.json）のうち、未確認・二次資料のみの項目（生年月日・出身地・学歴・前職・就任日・退任日・選挙歴・経歴）をWebSearch/WebFetch（NDLデジタルコレクション本文閲覧を除く）で補完調査し、B評価人物を優先して深掘りした。claude-in-chrome（NDLデジタルコレクション本文閲覧）はLane Aに委譲し、本レーンでは一切使用していない。src/data/archiveMayors.json・archiveMayorTerms.jsonの本体は編集していない（読み取りのみ）。",
+  "mayorFindings": [
+    {
+      "mayorId": "mayor-01",
+      "name": "三浦 久知",
+      "currentGrade": "B",
+      "unconfirmedFields": ["経歴（従来は本人後援会サイトのみが根拠でneedsReview）"],
+      "newFindings": [
+        {
+          "field": "経歴・学歴（独立資料での裏付け）",
+          "value": "延岡市公式サイト（本人プロフィールページ）で、中央大学商学部卒業（平成17年）・早稲田大学大学院公共経営研究科修了（平成19年）・宮崎県庁入庁（平成19年）・延岡市役所入庁（平成25年）・市役所退職（令和7年6月）という経歴を独立に確認した。既存sourceRefsに登録済みの同URL（https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html）に、就任日だけでなく学歴・経歴の記述も含まれていることを本調査で再確認した（既存sourceRefsのnotesは就任日の確認のみに言及していたため、経歴部分の独立確認価値を明示的に記録する）。これにより、従来は本人後援会サイト（hisatomo-m.jp、needsReview）のみに依拠していた学歴・経歴が、延岡市公式サイト（政府一次資料）とも独立に一致することを確認できた。",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html",
+          "confidence": "confirmed_official"
+        },
+        {
+          "field": "生年月日（参考情報・非掲載を推奨）",
+          "value": "延岡市公式サイト本人プロフィールページに「昭和57年8月24日生まれ」、ja.wikipedia.org/wiki/三浦久知にも同内容（1982年8月24日、宮崎県日向市出身）の記載があることを確認した。ただし reports/mayor-confidence-overview.md に『現職市長のためプライバシー配慮により生年月日は編集方針上非掲載（未確認とは別扱い）』と明記された既存の編集方針があるため、本レーンではarchiveMayors.jsonへのbirthDate追加は提案しない。情報の存在自体を将来の参照用に記録するにとどめる。",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html",
+          "confidence": "confirmed_official",
+          "publicationNote": "現職市長のプライバシー配慮方針（mayor-confidence-overview.md記載）により、本サイトでは非掲載を維持することを推奨する。"
+        }
+      ],
+      "gradeUpgradeCandidate": "経歴フィールドについてはB→A候補（延岡市公式サイトという独立の一次資料で本人後援会サイトの記述内容が裏付けられたため）。ただし生年月日は編集方針上非掲載のため、総合confidenceの引き上げは見送りを推奨する。",
+      "notes": "生年月日については、既存の編集方針（sitting mayorのプライバシー配慮）を尊重し、本レーンからは掲載を提案しない。"
+    },
+    {
+      "mayorId": "mayor-09",
+      "name": "青木 善祐",
+      "currentGrade": "B",
+      "unconfirmedFields": ["第11代延岡市長就任日（disputed）"],
+      "newFindings": [
+        {
+          "field": "経歴（長崎市長在任期間の独立裏付け）",
+          "value": "長崎市公式サイト（歴代市長等ページ）の歴代市長一覧に「青木善祐」が第13代市長として掲載されており、在任期間「昭和13年8月29日〜昭和15年3月11日」（1938-08-29〜1940-03-11）が、既存archiveMayors.jsonのnotes・sourceRefs（Wikipedia由来「長崎市長（官選、1938年8月29日〜1940年3月11日）」）と完全一致することを確認した。これは延岡市長就任前の経歴について、Wikipedia以外の独立した公式資料（長崎市公式サイト）で初めて裏付けが得られたものである。",
+          "sourceUrl": "https://www.city.nagasaki.lg.jp/page/6033.html",
+          "confidence": "confirmed_official"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "第11代延岡市長としての就任日（disputed-001: 1956-04-10候補 vs 既存値1956-04-21）を裏付ける新たな強い一次資料は本レーンでは発見できなかった。長崎市長在任期間の独立確認は、青木善祐という人物の経歴全体の信頼性を補強するものであり、disputed-001の解消には直接寄与しない。"
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日", "ふりがな（読み方）", "出身地", "学歴", "前職", "死没日"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "延岡市公式「名誉市民」ページに房野博氏は掲載されていないことを確認した（掲載5名：三浦虎雄・仲田又次郎・宮崎輝・内藤政道・吉野彰のいずれにも該当しない）。Wikipedia個人記事が存在せず、叙勲者名簿検索でも該当なし。WebSearch/WebFetchの範囲では新規の一次資料は発見できなかった（15分の目安で探索を終了）。延岡市公式PDF「延岡市年表」（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf）は画像スキャンPDFのためWebFetchでのテキスト抽出ができず、本レーンのツールでは内容確認不可（OCR・目視確認が可能な他レーンでの再調査候補として記録）。"
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "currentGrade": "B",
+      "unconfirmedFields": ["生年月日", "ふりがな（読み方）", "出身地", "学歴", "死没日", "延岡市長選出馬の経緯"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "延岡市公式「名誉市民」ページに早生隆彦氏は掲載されていないことを確認した。叙勲者名簿検索でも該当なし。Wikipedia個人記事が存在せず、WebSearch/WebFetchの範囲では新規の一次資料は発見できなかった（既存のNDL業界誌調査＝日本道路公団在職の裏付けは既にreports/ndl-research-findings.json finding-017で確認済みのものを再確認したのみ）。「延岡市年表」PDF（房野博の項参照）は同様に本レーンのツールでは内容確認不可。"
+    },
+    {
+      "mayorId": "mayor-13",
+      "name": "櫻井 哲雄",
+      "currentGrade": "B",
+      "unconfirmedFields": ["1994年市長選挙の投票日・得票数・対立候補", "1998年市長選挙の投票日・得票数・対立候補", "生年月日・出身地・学歴の独立資料での裏付け"],
+      "newFindings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "1994年・1998年の延岡市長選挙について、選挙ドットコム・WebSearchいずれでも投票日を特定できる新資料は見つからなかった（同サイトのカバー範囲は2002年以降が中心という既存の知見を再確認）。生年月日・経歴もWikipedia止まりのままで、独立資料は発見できなかった。"
+    },
+    {
+      "mayorId": "mayor-14",
+      "name": "山本 一丸",
+      "currentGrade": "B",
+      "unconfirmedFields": ["ふりがな（読み方）", "生年月日", "出身地", "経歴", "副市長としての正式な退任日・後任者"],
+      "newFindings": [
+        {
+          "field": "副市長としての退任（職務代理者とは別の、通常の副市長職からの退任）",
+          "value": "WebSearchの結果スニペット（読売新聞オンライン・宮崎日日新聞の記事タイトルおよびAI要約経由）で、山本一丸副市長が2025年8月12日付で（通常の）副市長を退任し、後任として延岡市議会事務局長の赤木繁男氏（58）が同年8月28日から4年の任期で就任したことが報じられていることを確認した。ただし該当記事URL（news.yahoo.co.jp/articles/9733eadfe73ae255736d0a43f00d657abef1a8ca、news.yahoo.co.jp/articles/3be2695291940087a4b5cc40a9c01a3c6414da23）はいずれもWebFetchで404となり、記事原文への直接アクセスでの確認はできていない。延岡市公式サイトの体制ページ（https://www.city.nobeoka.miyazaki.jp/soshiki/5/1760.html）も現時点でWebFetch経由では404となり確認できなかった（JavaScript描画等の可能性、または本レーンのツールでは到達不能）。この情報は既存のmayor-14（職務代理者としての在任、2025-07-01〜2025-07-19）とは別の役職期間（通常の副市長としての在任、職務代理終了後も継続）に関するものであり、既存データの訂正を要するものではないが、山本一丸氏の経歴を補完する新情報として記録する。",
+          "sourceUrl": "https://news.yahoo.co.jp/articles/9733eadfe73ae255736d0a43f00d657abef1a8ca",
+          "confidence": "unconfirmed"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "氏名の読み方（ふりがな）は本レーンでも確認できなかった。既存sourceRefsの2件（読売新聞オンライン、宮崎日日新聞）に加え、副市長退任を報じた新たな2記事も同様にURLが404となっており、本サイトの編集方針上、記事原文への到達なしにはverificationStatusをverifiedへ引き上げられない。次回調査では、延岡市議会の人事案件（議案書・会議録）で赤木繁男氏就任議案を確認できれば、山本一丸氏の副市長退任日を公式資料で裏付けられる可能性がある。"
+    }
+  ],
+  "aokiZenyuDisputedStatus": {
+    "maintained": true,
+    "note": "指示に従い、青木善祐（mayor-09）の第11代延岡市長就任日について、reports/ndl-research-findings.json disputed-001（候補A: 1956-04-10、延岡市史1963年・confidence D／候補B: 1956-04-21、既存データ・Wikipedia由来）のdisputed状態を維持した。本レーンではWebSearch/WebFetchで1956年4月の延岡市長選挙・就任式に関する追加の一次資料（新聞記事、選挙管理委員会資料等）を探索したが、投票日・就任日を直接特定できる新資料は発見できなかった。長崎市公式サイトで青木善祐氏の長崎市長在任期間（1938-08-29〜1940-03-11）を独立確認できたが、これは延岡市長就任前の別の経歴事実であり、disputed-001（延岡市長就任日）の解消には寄与しない。archiveMayorTerms.jsonのmayor-09-term-01.termStartは上書きしていない。"
+  },
+  "ndlViewingQueueAdditions": [],
+  "otherFindingsNotAddedToQueue": [
+    {
+      "reason": "NDLデジタルコレクション以外の資料のため、ndlViewingQueueAdditions（NDL専用）には含めていない。他レーンでの調査候補として記録する。",
+      "title": "延岡市年表（延岡市公式サイト掲載PDF、画像スキャン）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf",
+      "purpose": "房野博氏・早生隆彦氏の生年月日・ふりがな・出身地等が掲載されている可能性がある延岡市公式の年表資料。画像スキャンPDFのためWebFetchでのテキスト抽出ができず、OCR環境またはブラウザでの目視確認が可能なレーン・タスクでの再調査を推奨する。"
+    }
+  ],
+  "summary": {
+    "mayorsResearched": 6,
+    "newFieldsConfirmed": 3,
+    "gradeUpgradeCandidates": 1
+  }
+}
