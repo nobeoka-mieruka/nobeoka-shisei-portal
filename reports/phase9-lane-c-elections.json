@@ -1,0 +1,171 @@
+{
+  "generatedAt": "2026-08-19T06:30:00+09:00",
+  "lane": "C",
+  "purpose": "Phase 9 Lane C: src/data/electionResults.json 内の1971・1975・1978・1982・1986・1990・1994・1998年 延岡市長選挙レコード（既存8件）について、Phase 8 Lane C（reports/phase8-lane-c-elections.json）で未使用だった情報源（延岡市選管の深掘り、宮崎県選管、宮崎県統計年鑑、延岡市勢要覧、延岡市史書誌、広報のべおか、新聞記事索引、NDLサーチ書誌検索の別キーワード）で一次資料突破を試みる。新規レコード追加ではなく既存レコードの精度向上が目的。WebSearch/WebFetchのみ使用（claude-in-chrome不使用）。",
+  "newSourcesAttempted": [
+    "延岡市選挙管理委員会事務局ページ（https://www.city.nobeoka.miyazaki.jp/soshiki/79/）の深掘り（過去の選挙結果一覧・PDFアーカイブの有無を確認）",
+    "延岡市『選挙』ページ（https://www.city.nobeoka.miyazaki.jp/life/3/25/）の全リンク調査",
+    "延岡市長選挙候補者等一覧及び選挙公報ページ",
+    "宮崎県選挙管理委員会公式サイト（pref.miyazaki.lg.jp/senkyo）",
+    "宮崎県：市町村別二役・議長・副議長等名簿ページ",
+    "みやざき統計BOX／統計年鑑（stat.pref.miyazaki.lg.jp/006_3）およびデータカタログ（data.stat.pref.miyazaki.lg.jp/group/nenkan）",
+    "宮崎県立図書館 貴重書デジタルアーカイブ（www2.lib.pref.miyazaki.lg.jp/?page_id=625）",
+    "広報のべおかPDF版バックナンバーページ（city.nobeoka.miyazaki.jp/site/koho/1714.html）",
+    "宮崎日日新聞『宮崎県市町村長・議会議員一覧』延岡市ページ（the-miyanichi.co.jp）",
+    "NDLサーチ書誌検索（cs=bib）：『延岡市議会史』『延岡市選挙管理委員会』『延岡市政史』『地方選挙結果調』『選挙時報』",
+    "レファレンス協同データベース（crd.ndl.go.jp）関連ワード検索",
+    "延岡市立図書館デジタルアーカイブ／のべおか電子図書館の有無確認",
+    "ADEAC（デジタルアーカイブシステム）『宮崎県立図書館／デジタル宮崎県史』の存在確認と全文検索可否の調査"
+  ],
+  "elections": [
+    {
+      "year": 1971,
+      "existingRecordId": "election-mayor-1971",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規の得票数・投票率・候補者情報は確認できなかった。延岡市選管公式ページ（soshiki/79/、life/3/25/、soshiki/79/2721.html）はいずれも直近選挙（2022年・2025年）の投票率・PDFのみで過去の選挙結果アーカイブなし。宮崎県選管サイトも現行の選挙人名簿・県知事選等が中心で、過去の市町村長選挙記録の公表は確認できなかった。有望な新規リードとして、ADEAC『宮崎県立図書館／デジタル宮崎県史』（https://adeac.jp/miyazaki-pref-lib/top/）の存在を確認した。同アーカイブは『宮崎県史 通史編 近・現代2（昭和初期〜高度成長期）』『宮崎県史 別編 年表』を含み、全文検索機能（詳細検索ページ）を備えるが、実際の検索実行・結果取得にはJavaScript操作を伴う対話的な検索フォーム送信が必要で、WebFetchでは検索結果を取得できなかった（クエリパラメータのURLパターンが特定できず、直接URLアクセスは404）。claude-in-chrome不使用の制約のため本Laneでは検索を完遂できず、下記ndlViewingQueueAdditionsに参考記録として追加した。"
+    },
+    {
+      "year": 1975,
+      "existingRecordId": "election-mayor-1975",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。総務省・自治省編『地方選挙結果調（統一地方選挙結果調）』シリーズがNDLサーチ書誌検索で268件ヒットすることを確認したが、同シリーズは4年ごとの統一地方選挙（4月執行分）のみを収録する資料であることが判明した。延岡市長選挙（1975年は1月執行、既存レコードのelectionDate=\"1975-01\"）は統一地方選挙のサイクル（4月執行）に該当しないため、同シリーズに収録されている可能性は構造的に低いと判断した（負の知見として記録）。"
+    },
+    {
+      "year": 1978,
+      "existingRecordId": "election-mayor-1978",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。1978年11月執行（房野博氏の同年10月辞職に伴う選挙）であり、統一地方選挙サイクルにも該当しない。NDLサーチで雑誌『選挙時報』（全国市区選挙管理委員会連合会編、1952年創刊、インターネット公開版ありと表示）の存在を確認したが、個別巻号（1978年前後号）の書誌ID・デジタル化範囲までは書誌検索結果に表示されず特定できなかった。"
+    },
+    {
+      "year": 1982,
+      "existingRecordId": "election-mayor-1982",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。早生隆彦氏第2期（1982年11月執行）。宮崎県統計年鑑のデジタル公開版は第139回〜第142回（令和5〜8年刊）のみで、1980年代版はオンライン非公開であることを確認（Phase 8時点のNDL書誌調査『物理所蔵のみ』という結論と整合）。"
+    },
+    {
+      "year": 1986,
+      "existingRecordId": "election-mayor-1986",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。早生隆彦氏第3期。広報のべおかPDF版バックナンバーは2010年4月号が最古であり、1986年当時の号は市公式サイト上で確認不可（新規に判明した明確な負の結果）。"
+    },
+    {
+      "year": 1990,
+      "existingRecordId": "election-mayor-1990",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。早生隆彦氏第4期。宮崎日日新聞『宮崎県市町村長・議会議員一覧』延岡市ページは現職市長（三浦久知氏）の情報のみを掲載しており、歴代市長・過去の選挙結果データは含まれていないことを確認した。"
+    },
+    {
+      "year": 1994,
+      "existingRecordId": "election-mayor-1994",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。桜井哲雄氏第1期（1994年2月執行、早生隆彦氏の同年1月辞職に伴う選挙）。ADEAC『デジタル宮崎県史 通史編 近・現代2』が『昭和初期〜高度成長期』を対象範囲とする旨の記載があり、1994年が同巻の対象年代に含まれるかは目次未確認のため不明（高度成長期＝概ね1950〜1970年代を指す場合、1994年は対象外の可能性が高い）。"
+    },
+    {
+      "year": 1998,
+      "existingRecordId": "election-mayor-1998",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。桜井哲雄氏第2期（1998年2月執行）。NDLサーチ全文検索モード（cs=all）はJavaScriptレンダリングに依存しておりWebFetchでは検索結果を取得できなかった（書誌検索モードcs=bibのみ利用可能で、こちらはタイトル・著者等のメタデータ検索に限られ、本文中の候補者名等では資料を発見できない）。"
+    }
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "medium",
+      "purpose": "1971〜1998年の延岡市長選挙（房野博・早生隆彦・桜井哲雄各氏）について、全文検索で得票数・投票率・対立候補等の記載を探す。",
+      "title": "デジタル宮崎県史（ADEAC／宮崎県立図書館） 通史編 近・現代2、別編 年表",
+      "bibliographicId": "adeac.jp/miyazaki-pref-lib（機関トップ）／通史編近・現代2・別編年表の個別ht-IDは本Laneでは特定できず",
+      "page": "不明（全文検索フォームでのキーワード検索が必要。候補キーワード：延岡市長選挙、房野博、早生隆彦、桜井哲雄）",
+      "relatedElection": 1971,
+      "discoveredByLane": "C",
+      "notes": "厳密には国立国会図書館（NDL）の資料ではなくADEACデジタルアーカイブだが、本文検索にJavaScript操作を伴う対話的フォーム送信が必要でWebFetch/WebSearchでは完遂できなかったため、ブラウザ操作が可能なレーンでの追跡調査候補としてここに記録する。『近・現代2』が『昭和初期〜高度成長期』を範囲とする旨の説明があり、1971年（および場合により1975〜1982年頃）は対象範囲に含まれる可能性があるが、1990年代（1990・1994・1998年選挙）は対象範囲外の可能性が高い。『別編 年表』は昭和末〜平成まで年表形式で市町村の出来事を収録している可能性があり、対象年代を問わず確認価値がある。"
+    },
+    {
+      "priority": "low",
+      "purpose": "1978・1982・1986・1990年前後の延岡市長選挙について、雑誌『選挙時報』の該当号に選挙結果の短報が掲載されていないか確認する。",
+      "title": "選挙時報（全国市区選挙管理委員会連合会編、1952年創刊）",
+      "bibliographicId": "NDLサーチ書誌検索でシリーズの存在を確認（雑誌全体の請求記号Z1-10）。個別号（1978年11月・1982年11月・1986年11月・1990年11月前後の号）の書誌IDは本Laneでは特定できず（NDLサーチのcs=bib検索は雑誌シリーズ単位でのみヒットし、個別号一覧は表示されなかった）。",
+      "page": "不明",
+      "relatedElection": 1978,
+      "discoveredByLane": "C",
+      "notes": "『インターネット公開版あり』との説明があったため、デジタル化・公開されている可能性がある点でPhase 8で確認済みの『延岡市統計書』『延岡市勢要覧』（いずれも物理所蔵のみ）より有望。ただし該当月号の特定・閲覧可否の確認にはNDLデジタルコレクションでの個別号検索（ブラウザ操作）が必要。"
+    }
+  ],
+  "summary": {
+    "electionsResearched": 8,
+    "newVoteCountsConfirmed": 0,
+    "newTurnoutConfirmed": 0,
+    "queueItemsAdded": 2,
+    "methodologyNote": "Phase 8 Lane Cとは異なる情報源（延岡市選管ページの深掘り、宮崎県選管、宮崎県統計年鑑オンライン版、宮崎県立図書館貴重書デジタルアーカイブ、広報のべおかバックナンバー、宮崎日日新聞の首長一覧、NDLサーチの別検索語『延岡市議会史』『延岡市政史』『地方選挙結果調』『選挙時報』、レファレンス協同データベース、ADEACデジタル宮崎県史）を試したが、1971〜1998年の8選挙いずれについても、候補者一覧・得票数・投票率・有権者数・無効票数・無投票有無のいずれも新規に一次資料で確認することはできなかった。主要な新知見は次の3点。(1) 延岡市公式選挙管理委員会サイト・広報のべおかPDFバックナンバーは、いずれも直近数年分（広報は2010年4月号以降）しかオンライン公開されておらず、構造的に1970〜1990年代の情報を含まない。(2) 総務省・自治省編『地方選挙結果調（統一地方選挙結果調）』シリーズは4月執行の統一地方選挙のみを収録するため、延岡市長選挙（すべて1月・2月・11月執行）は対象外であり、この資料系統は今後追っても新情報が出ない可能性が高い。(3) ADEAC『デジタル宮崎県史』（宮崎県立図書館）という、Phase 8までに調査対象になっていなかった全文検索可能なデジタルアーカイブの存在を新たに確認した。同アーカイブはNDLとは別のプラットフォームで、既にデジタル化・オンライン公開済みの本文を全文検索できる点でNDLデジタルコレクション（物理所蔵のみで未デジタル化の資料が多い）より条件が良いが、検索実行にJavaScript対応の対話操作が必要でWebFetch単独では検索結果を取得できなかった。ブラウザ操作が可能な次のレーンでの追跡調査を推奨する。"
+  }
+}
