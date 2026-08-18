@@ -886,14 +886,15 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
       return makeResult(
         {
           path: "/history",
-          pageTitle: "延岡市 市政年表",
-          description: "市制施行、合併、市庁舎、行政組織、災害、公共事業等、延岡市公式資料で確認できる主な出来事を年代順に整理しています。",
+          pageTitle: "延岡市政90年の歴史年表（市制施行〜現在）",
+          description:
+            "1933年の市制施行から現在までの延岡市政の歩みを、市制施行、合併、市庁舎、災害、公共事業等の出来事と歴代市長、人口の推移とあわせて年代順に整理しています。延岡市公式資料で確認できる範囲のみ掲載。",
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政年表" }],
           extraJsonLd: [
             datasetJsonLd({
               id: "dataset-civic-timeline-jsonld",
-              name: "延岡市 市政年表データ",
-              description: "延岡市公式資料で確認できる、市制施行・合併・市庁舎・行政組織・災害・公共事業等の主な出来事のデータです。",
+              name: "延岡市政90年 市政年表データ",
+              description: "延岡市公式資料で確認できる、市制施行・合併・市庁舎・行政組織・災害・公共事業等の主な出来事と、歴代市長・人口推移のデータです。",
               url: `${SITE_URL}/history`,
               dateModified: options?.lastmod,
             }),
