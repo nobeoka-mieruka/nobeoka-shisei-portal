@@ -96,21 +96,33 @@
     },
     "tablesLocatedAndPartiallyRead": [
       {
-        "label": "別表3：昭和10年度以降の一般会計歳入歳出決算",
-        "komma": "134〜136付近（135で確認）",
-        "confirmedYearColumns": ["昭和10年度（1935）", "昭和11年度（1936）"],
+        "label": "【Phase7Cで訂正】別表2：昭和8年度歳出経常部予算調（其の一）",
+        "correctionNote": "Phase7Bでは本表を『別表3：一般会計歳入歳出決算』と誤認し、行ラベルも『借入金収入』等の歳入項目と誤って推測していた。Phase7Cで表題を直接確認した結果、正しくは【別表2】であり、内容は『歳入歳出決算』ではなく【歳出（経常部）の予算】（決算ではない）である。Phase7Bで読み取った数値そのもの（1,111／1,935／3,946／4,501等）は誤読ではなく、本表の別の行（ラベル未確定の歳出科目）の値だったことが判明した。",
+        "komma": "135",
+        "confirmedTitle": "（別表2）昭和8年度歳出経常部予算調（其の一）",
+        "accountingScope": "歳出・経常部（臨時部は別表と推定、未確認）・予算（決算ではない）",
+        "confirmedYearColumns": ["昭和8年度（1933）", "昭和9年度（1934）", "昭和10年度（1935）", "昭和11年度（1936）"],
         "unit": "円",
-        "partiallyReadRowLabelsAndValues": [
-          { "rowLabel": "借入金収入", "value_S10": 1111, "value_S11": 1935, "readConfidence": "medium" },
-          { "rowLabel": "（未確定の項目名）", "value_S10": 3946, "value_S11": 4501, "readConfidence": "low" },
-          { "rowLabel": "益金（公益質庫等の）事業収入", "value_S10": 50754, "value_S11": 88018, "readConfidence": "medium" },
-          { "rowLabel": "諸収入", "value_S10": 12704, "value_S11": 15918, "readConfidence": "medium" },
-          { "rowLabel": "前年度繰越金", "value_S10": 12135, "value_S11": 196829, "readConfidence": "low" },
-          { "rowLabel": "県支出金", "value_S10": 4005, "value_S11": 28836, "readConfidence": "medium" },
-          { "rowLabel": "（未確定の項目名）", "value_S10": 6674, "value_S11": 7868, "readConfidence": "low" }
+        "confirmedPrimaryRows": [
+          {
+            "rowLabel": "教育費",
+            "values": { "S8_1933": 139201, "S9_1934": 138321, "S10_1935": 142135, "S11_1936": 196829 },
+            "unit": "円",
+            "accountingScope": "歳出・経常部・予算",
+            "sourceTitle": "延岡市史（1963年版）別表2「昭和8年度歳出経常部予算調（其の一）」",
+            "sourcePage": "コマ135",
+            "sourceType": "primary",
+            "confidence": "confirmed_primary",
+            "comparability": "unknown",
+            "note": "表題・対象年度・行見出し（教育費）・単位（円）・数値のいずれも、複数回の独立したビューア表示で一致して確認できた。ただし本表は『歳出のうち教育費という1科目』の予算額であり、市全体の歳入・歳出・差引ではない点に注意。"
+          }
         ],
-        "status": "located_partial_read",
-        "note": "表題・対象年度（10・11＝昭和10・11年度）・「円」単位表記は高い確信度で確認した。個別の行ラベルと数値の対応は、パン操作の繰り返しにより一部で確信度が下がる（特に前年度繰越金の196,829円は他の値と比べて突出しており、誤読または特殊事情〔市制施行直後の繰越等〕の可能性がありconfirmed化を見送った）。歳出側・決算総額（歳入合計）は次回未確認。"
+        "unresolvedRows": [
+          { "note": "教育費より上にある3行（各行ラベルの末尾『費』のみ視認でき、先頭1〜2文字が未確定）：値は col8=3,108/58,101/108,131、col9=3,881/57,636/11,085、col10=1,111/3,946/60,754/12,704（複数候補が混在し行の対応が不確実）、col11=1,935/4,501/88,018/15,918。ラベル未確定のため登録は見送った。" },
+          { "note": "教育費より下の行群（衛生費、伝染病予防費、汚物掃除費、公園墓地市場費、火葬場費等と推定）に『計』（小計）行が複数存在することを確認したが、経常部全体の合計（歳出経常部合計）行は本セッションでは特定できなかった。" }
+        ],
+        "status": "confirmed_primary（教育費行のみ）／located_partial_read（他の行・経常部合計）",
+        "note": "本表は歳出（経常部）予算のみを収録しており、歳入・歳出差引は別表（未特定）を要する。市全体の歳出総額ではなく、教育費という1科目の予算額である点を明示して利用すること。"
       },
       {
         "label": "別表4：昭和10年度以降の延岡市公益質庫特別会計",
@@ -139,12 +151,107 @@
         "note": "行見出し（と畜場／宅地造成事業等、複数の特別会計名が並ぶ）と、上記の値が属する行との対応関係は、パン操作の制約により今回のセッション内で完全には一致確認できなかった。差引額の算術的整合性は確認済みだが、『どの特別会計の数値か』が未確定のため、confirmed_primaryへは昇格せず、located_partial_readのまま維持する。次回、行と列を同時に視野に収めた状態で再確認することを推奨する。"
       }
     ],
-    "generalFundTotalNotYetLocated": "延岡市全体の歳入歳出決算総額（普通会計または一般会計ベース、市全体の規模を示す単一の総額）を明示的にタイトルとする表は、今回のセッションでは確実には特定できなかった。別表3（一般会計歳入歳出決算、komma135）がその候補であるが、歳入合計・歳出合計の行は今回読み取れていない。",
-    "productionDataImpact": "本セッションで発見・部分読み取りしたいずれの数値も、archiveFiscalYears.json等の本番データへは追加していない（confirmed_primaryの基準を満たさないため）。次回、komma135（別表3）・komma137（別表4）・komma144-145（別表7其の四）を対象に、行と列を同時に視野に収める形で再確認し、確信度が十分に高まった時点でconfirmed_primaryへ昇格・本番データへの統合を検討する。"
+    "generalFundTotalNotYetLocated": "延岡市全体の歳入歳出決算総額（普通会計または一般会計ベース、市全体の規模を示す単一の総額）を明示的にタイトルとする表は、Phase7Cでも確実には特定できなかった。komma135の表（別表2）は歳出（経常部）の予算のみを収録しており、歳入・歳出差引・市全体の合計は別の表（未特定）を要する。"
+  },
+  "phase7cFindings": {
+    "purpose": "Phase7Bで所在特定・部分読み取り済みだった延岡市史（1963年版）内の財政表について、新しい資料探索は行わず、表題・対象年度・行見出し・列見出し・単位の5点セットを完全確認できた項目のみをconfirmed_primaryへ昇格させることを目的とした。",
+    "methodNote": "『左上：表題・単位』『上部：列見出し』『左側：行見出し』『中央：数値』の順で分割確認する方法を実施した。ビューアのズームボタン（2〜4回クリック）とマウスドラッグによる画面内パンを組み合わせ、同一の操作系列（zoom→drag→drag）を再現することで、同じ範囲を独立に複数回確認し、読み取りの一致を確認した。",
+    "keyCorrection": "Phase7Bで『別表3：一般会計歳入歳出決算（komma135）』としていた識別は誤りだった。正しくは『別表2：昭和8年度歳出経常部予算調（其の一）』であり、歳入歳出決算ではなく歳出（経常部）の予算表である。Phase7Bで読み取った数値自体（1,111／1,935等）は誤読ではなかったが、行ラベルの推測（借入金収入等）が誤りだった。今回、表題を直接確認したことで訂正した。",
+    "confirmedPrimaryAchieved": {
+      "count": 4,
+      "items": [
+        {
+          "fiscalYear": 1933,
+          "eraLabel": "昭和8年度",
+          "item": "教育費",
+          "revenue": null,
+          "expenditure": 139201,
+          "balance": null,
+          "debt": null,
+          "funds": null,
+          "unit": "円",
+          "accountingScope": "歳出・経常部・予算（決算ではない、教育費という1科目のみ。市全体の歳出総額ではない）",
+          "sourceTitle": "延岡市史（1963年版）別表2「昭和8年度歳出経常部予算調（其の一）」",
+          "sourcePage": "komma135",
+          "sourceType": "primary",
+          "confidence": "confirmed_primary",
+          "comparability": "unknown",
+          "mayorId": "mayor-04",
+          "mayorTermId": "mayor-04-term-01",
+          "mayorConnectionLabel": "仲田又次郎市長在任中の教育費予算（1933-04-15〜1937-01-06の任期内）"
+        },
+        {
+          "fiscalYear": 1934,
+          "eraLabel": "昭和9年度",
+          "item": "教育費",
+          "revenue": null,
+          "expenditure": 138321,
+          "balance": null,
+          "debt": null,
+          "funds": null,
+          "unit": "円",
+          "accountingScope": "歳出・経常部・予算（決算ではない、教育費という1科目のみ）",
+          "sourceTitle": "延岡市史（1963年版）別表2「昭和8年度歳出経常部予算調（其の一）」",
+          "sourcePage": "komma135",
+          "sourceType": "primary",
+          "confidence": "confirmed_primary",
+          "comparability": "unknown",
+          "mayorId": "mayor-04",
+          "mayorTermId": "mayor-04-term-01",
+          "mayorConnectionLabel": "仲田又次郎市長在任中の教育費予算"
+        },
+        {
+          "fiscalYear": 1935,
+          "eraLabel": "昭和10年度",
+          "item": "教育費",
+          "revenue": null,
+          "expenditure": 142135,
+          "balance": null,
+          "debt": null,
+          "funds": null,
+          "unit": "円",
+          "accountingScope": "歳出・経常部・予算（決算ではない、教育費という1科目のみ）",
+          "sourceTitle": "延岡市史（1963年版）別表2「昭和8年度歳出経常部予算調（其の一）」",
+          "sourcePage": "komma135",
+          "sourceType": "primary",
+          "confidence": "confirmed_primary",
+          "comparability": "unknown",
+          "mayorId": "mayor-04",
+          "mayorTermId": "mayor-04-term-01",
+          "mayorConnectionLabel": "仲田又次郎市長在任中の教育費予算"
+        },
+        {
+          "fiscalYear": 1936,
+          "eraLabel": "昭和11年度",
+          "item": "教育費",
+          "revenue": null,
+          "expenditure": 196829,
+          "balance": null,
+          "debt": null,
+          "funds": null,
+          "unit": "円",
+          "accountingScope": "歳出・経常部・予算（決算ではない、教育費という1科目のみ）",
+          "sourceTitle": "延岡市史（1963年版）別表2「昭和8年度歳出経常部予算調（其の一）」",
+          "sourcePage": "komma135",
+          "sourceType": "primary",
+          "confidence": "confirmed_primary",
+          "comparability": "unknown",
+          "mayorId": "mayor-04",
+          "mayorTermId": "mayor-04-term-01",
+          "mayorConnectionLabel": "仲田又次郎市長在任中の教育費予算"
+        }
+      ],
+      "limitationNote": "これは市全体の歳入・歳出・差引ではなく、『教育費』という単一の歳出科目（経常部予算）の4年度分である。archiveFiscalYears.jsonが前提とする『年度ごとの歳入総額・歳出総額』の構造には対応しないため、production dataへは統合していない（存在しない歳入・差引・市債・基金の値を0や推測で埋めることを避けるため）。revenue/balance/debt/fundsはnullのまま保持し、0や推測で埋めていない。"
+    },
+    "mayorTermConnection": {
+      "note": "1933年度（昭和8年度）〜1936年度（昭和11年度）はいずれもmayor-04-term-01（仲田又次郎、1933-04-15〜1937-01-06）の在任期間内に収まる。『仲田又次郎市長在任中の教育費予算』として接続した（上記confirmedPrimaryAchieved.items各要素のmayorId/mayorTermId参照）。教育費予算の増減を市長個人の成果・方針として説明する記述は行わない。"
+    },
+    "browserStabilityNote": "本セッションはビューアのズーム・ドラッグ・スクリーンショット操作を通じて安定して動作した。CDPタイムアウトの再発はなかった。1操作＝1目的（表題のみ、列見出しのみ等）の方針に従い、大量連続スクリーンショットは行わなかった。"
   },
   "recommendationForNextPhase": [
-    "最優先：延岡市史（1963年版、pid 3027323）のkomma135（別表3：一般会計歳入歳出決算、昭和10年度〜）・komma137（別表4：公益質庫特別会計、昭和10年度〜）・komma144-145（別表7其の四：と畜場・宅地造成事業等の特別会計一覧、昭和28-33年度）を、行と列を同時に視野に収める形（ビューアズーム2〜3クリック＋小刻みなドラッグ）で再確認し、located_partial_readの各数値をconfirmed_primaryへ昇格させる。",
-    "延岡市全体の歳入歳出決算総額（一般会計/普通会計ベースの単一総額）を示す表を、別表3（komma135）の歳入合計・歳出合計行、または同章内の別の箇所から特定する。",
+    "最優先：komma135（別表2：昭和8年度歳出経常部予算調・其の一）の教育費より上の3行のラベルを確定し（現状『◯◯費』の末尾1文字のみ判明）、経常部合計（歳出経常部の総計）行を特定する。「其の二」（続き、komma136以降と推定）で歳出臨時部を確認する。",
+    "延岡市全体の歳入・歳出・差引を示す表（歳入側の予算表、および経常部予算とは別の決算表）を、第五章内の別の箇所（別表1、別表5・6等）から特定する。",
+    "komma137（別表4：公益質庫特別会計）・komma144-145（別表7其の四：と畜場・宅地造成事業等）を、今回確立した『zoom→drag→drag』の再現手順で再確認し、行列対応を確定してconfirmed_primaryへ昇格させる。",
     "地方財政統計年報（NDLデジタルコレクション、昭和31〜58年度分がデジタル化済み）を、今回確立したjavascript_tool経由の全文検索技術を使って開き、宮崎県・延岡市の該当ページを探索する。",
     "延岡市史 1983年版上巻（ndl-src-03、metadata_only）・1993年版（ndl-src-05、metadata_only）の財政関連章を確認し、1963〜1994年の空白を埋める。",
     "『延岡市歳入歳出決算書』（NDLサーチで確認した平成6〜12年度分の書誌、および雑誌扱いの昭和21年度〜の連続刊行記録）について、具体的な所蔵館（宮崎県立図書館・延岡市立図書館が有力候補）を特定する。"
