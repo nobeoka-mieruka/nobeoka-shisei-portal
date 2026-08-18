@@ -1,0 +1,229 @@
+{
+  "generatedAt": "2026-08-18T18:00:00+09:00",
+  "method": "reports/mayor-confidence-overview.json（項目別A/B/C評価）とreports/mayor-primary-source-matrix.json（policies列）を、confirmed_primary/confirmed_official/secondary_only/disputed/not_found/not_applicable/not_researchedの状態語彙にマッピングして集計した。A=confirmed_primary、B=confirmed_official、C=secondary_only（実質未確認含む）、-=not_applicable。青木善祐の就任日のみ特別にdisputedとして扱う。",
+  "statusVocabulary": {
+    "confirmed_primary": "独立した一次資料（延岡市公式資料・NDL資料・本人所属機関公式サイト等）で確認済み",
+    "confirmed_official": "公式資料等はあるが単一資料のみ、または一部二次資料に依存",
+    "secondary_only": "Wikipedia等二次資料のみ、または実質未確認",
+    "disputed": "複数資料が異なる値を示し確定していない（青木善祐の就任日のみ該当）",
+    "not_applicable": "制度上・性質上該当しない（現職市長の生年月日非掲載方針、在職中のため退任日なし等）",
+    "not_researched": "今回のセッションで調査を試みたが一次資料に到達できなかった"
+  },
+  "fieldStatusCounts": {
+    "birthDate": {
+      "secondary_only": 6,
+      "confirmed_primary": 7,
+      "confirmed_official": 1
+    },
+    "inaugurationDate": {
+      "confirmed_primary": 8,
+      "confirmed_official": 5,
+      "disputed": 1
+    },
+    "retirementDate": {
+      "not_applicable": 1,
+      "confirmed_primary": 9,
+      "confirmed_official": 4
+    },
+    "election": {
+      "confirmed_primary": 4,
+      "confirmed_official": 2,
+      "secondary_only": 7,
+      "not_applicable": 1
+    },
+    "career": {
+      "confirmed_official": 6,
+      "confirmed_primary": 8
+    },
+    "majorPolicies": {
+      "not_researched": 3,
+      "confirmed_primary": 10,
+      "confirmed_official": 1
+    }
+  },
+  "perMayor": [
+    {
+      "mayorId": "mayor-01",
+      "name": "三浦 久知",
+      "fields": {
+        "birthDate": "secondary_only",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "not_applicable",
+        "election": "confirmed_primary",
+        "career": "confirmed_official",
+        "majorPolicies": "not_researched"
+      }
+    },
+    {
+      "mayorId": "mayor-02",
+      "name": "首藤 正治",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_primary",
+        "election": "confirmed_primary",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-03",
+      "name": "読谷山 洋司",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "confirmed_official",
+        "retirementDate": "confirmed_primary",
+        "election": "confirmed_official",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_official"
+      }
+    },
+    {
+      "mayorId": "mayor-04",
+      "name": "仲田 又次郎",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_primary",
+        "election": "secondary_only",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-05",
+      "name": "鈴木 憲太郎",
+      "fields": {
+        "birthDate": "secondary_only",
+        "inaugurationDate": "confirmed_official",
+        "retirementDate": "confirmed_primary",
+        "election": "secondary_only",
+        "career": "confirmed_official",
+        "majorPolicies": "not_researched"
+      }
+    },
+    {
+      "mayorId": "mayor-06",
+      "name": "大島 文彦",
+      "fields": {
+        "birthDate": "secondary_only",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_official",
+        "election": "secondary_only",
+        "career": "confirmed_official",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-07",
+      "name": "三浦 虎雄",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_official",
+        "election": "secondary_only",
+        "career": "confirmed_official",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-08",
+      "name": "佐藤 千吉郎",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_primary",
+        "election": "confirmed_primary",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-09",
+      "name": "青木 善祐",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "disputed",
+        "retirementDate": "confirmed_official",
+        "election": "secondary_only",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-10",
+      "name": "折小野 良一",
+      "fields": {
+        "birthDate": "confirmed_primary",
+        "inaugurationDate": "confirmed_official",
+        "retirementDate": "confirmed_primary",
+        "election": "confirmed_official",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "fields": {
+        "birthDate": "secondary_only",
+        "inaugurationDate": "confirmed_official",
+        "retirementDate": "confirmed_primary",
+        "election": "secondary_only",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "fields": {
+        "birthDate": "secondary_only",
+        "inaugurationDate": "confirmed_official",
+        "retirementDate": "confirmed_official",
+        "election": "secondary_only",
+        "career": "confirmed_primary",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-13",
+      "name": "櫻井 哲雄",
+      "fields": {
+        "birthDate": "confirmed_official",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_primary",
+        "election": "confirmed_primary",
+        "career": "confirmed_official",
+        "majorPolicies": "confirmed_primary"
+      }
+    },
+    {
+      "mayorId": "mayor-14",
+      "name": "山本 一丸",
+      "fields": {
+        "birthDate": "secondary_only",
+        "inaugurationDate": "confirmed_primary",
+        "retirementDate": "confirmed_primary",
+        "election": "not_applicable",
+        "career": "confirmed_official",
+        "majorPolicies": "not_researched"
+      }
+    }
+  ],
+  "coverageSummary": {
+    "applicableCells": 82,
+    "confirmedCells": 65,
+    "primaryOnlyCells": 46,
+    "coverageRatePercent": 79.3,
+    "primaryOnlyRatePercent": 56.1,
+    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 79.3%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 56.1%）"
+  },
+  "electionResultsCoverage": {
+    "totalOrdinals": 29,
+    "totalElectionEntries": 29,
+    "voteCountConfirmedEntries": 15,
+    "voteCountNotResearchedOrNA": 14,
+    "note": "1933-1946年(ordinal1-7)は市議会による間接選出のため得票数等は制度上存在しない（not_applicable相当）。1947-1998年(ordinal8-23の一部)は直接公選制だが得票数等が一次資料未到達（not_researched）。2002年以降(ordinal23後半-29)は選挙ドットコム等で得票数まで確認済み。"
+  }
+}
