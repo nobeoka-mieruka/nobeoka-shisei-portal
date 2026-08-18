@@ -1,0 +1,267 @@
+{
+  "generatedAt": "2026-08-18T22:30:00+09:00",
+  "purpose": "将来的な/compare/mayors強化を想定した客観的事実の比較用データセット。在任期間・選挙結果・データ充足度のみを扱い、独自の採点・ランキング・優劣評価は一切行わない（本サイトの編集方針に基づく）。",
+  "disclaimer": "本データはいずれも『在任期間の長さ』『確認できた選挙・出来事の件数』等の客観的な集計であり、市長としての功績・評価を意味しない。特に確認件数の少なさは、その市長の活動が少なかったことではなく、古い時代ほど一次資料の digitization が進んでいないことに起因する場合が大半である（reports/mayor-primary-source-coverage-rate.json参照）。",
+  "rows": [
+    {
+      "mayorId": "mayor-01",
+      "name": "三浦 久知",
+      "factualMetrics": {
+        "termCount": 1,
+        "tenureDaysApprox": 394,
+        "tenureYearsApprox": 1.1,
+        "electionsContested": 1,
+        "electionsWithKnownVotes": 1,
+        "electionsWithKnownTurnout": 1,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 0,
+        "primarySourceRefCount": 2
+      },
+      "dataAvailability": {
+        "population": "confirmed_official",
+        "finance": "confirmed_official",
+        "overallConfidenceGrade": "B"
+      }
+    },
+    {
+      "mayorId": "mayor-02",
+      "name": "首藤 正治",
+      "factualMetrics": {
+        "termCount": 3,
+        "tenureDaysApprox": 4380,
+        "tenureYearsApprox": 12,
+        "electionsContested": 3,
+        "electionsWithKnownVotes": 3,
+        "electionsWithKnownTurnout": 3,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 37,
+        "primarySourceRefCount": 4
+      },
+      "dataAvailability": {
+        "population": "confirmed_official",
+        "finance": "confirmed_official",
+        "overallConfidenceGrade": "A"
+      }
+    },
+    {
+      "mayorId": "mayor-03",
+      "name": "読谷山 洋司",
+      "factualMetrics": {
+        "termCount": 2,
+        "tenureDaysApprox": 2700,
+        "tenureYearsApprox": 7.4,
+        "electionsContested": 2,
+        "electionsWithKnownVotes": 2,
+        "electionsWithKnownTurnout": 2,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 4,
+        "primarySourceRefCount": 2
+      },
+      "dataAvailability": {
+        "population": "confirmed_official",
+        "finance": "confirmed_official",
+        "overallConfidenceGrade": "A"
+      }
+    },
+    {
+      "mayorId": "mayor-04",
+      "name": "仲田 又次郎",
+      "factualMetrics": {
+        "termCount": 2,
+        "tenureDaysApprox": 2796,
+        "tenureYearsApprox": 7.7,
+        "electionsContested": 3,
+        "electionsWithKnownVotes": 1,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 17,
+        "primarySourceRefCount": 6
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "A"
+      }
+    },
+    {
+      "mayorId": "mayor-05",
+      "name": "鈴木 憲太郎",
+      "factualMetrics": {
+        "termCount": 3,
+        "tenureDaysApprox": 427,
+        "tenureYearsApprox": 1.2,
+        "electionsContested": 3,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 0,
+        "primarySourceRefCount": 2
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "B"
+      }
+    },
+    {
+      "mayorId": "mayor-06",
+      "name": "大島 文彦",
+      "factualMetrics": {
+        "termCount": 1,
+        "tenureDaysApprox": 1460,
+        "tenureYearsApprox": 4,
+        "electionsContested": 1,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 5,
+        "primarySourceRefCount": 3
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "B"
+      }
+    },
+    {
+      "mayorId": "mayor-07",
+      "name": "三浦 虎雄",
+      "factualMetrics": {
+        "termCount": 3,
+        "tenureDaysApprox": 2927,
+        "tenureYearsApprox": 8,
+        "electionsContested": 3,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 15,
+        "primarySourceRefCount": 6
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "A"
+      }
+    },
+    {
+      "mayorId": "mayor-08",
+      "name": "佐藤 千吉郎",
+      "factualMetrics": {
+        "termCount": 1,
+        "tenureDaysApprox": 417,
+        "tenureYearsApprox": 1.1,
+        "electionsContested": 1,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 8,
+        "primarySourceRefCount": 3
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "A"
+      }
+    },
+    {
+      "mayorId": "mayor-09",
+      "name": "青木 善祐",
+      "factualMetrics": {
+        "termCount": 1,
+        "tenureDaysApprox": 1458,
+        "tenureYearsApprox": 4,
+        "electionsContested": 1,
+        "electionsWithKnownVotes": 1,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 8,
+        "primarySourceRefCount": 3
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "B"
+      }
+    },
+    {
+      "mayorId": "mayor-10",
+      "name": "折小野 良一",
+      "factualMetrics": {
+        "termCount": 2,
+        "tenureDaysApprox": 2416,
+        "tenureYearsApprox": 6.6,
+        "electionsContested": 2,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 10,
+        "primarySourceRefCount": 3
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "A"
+      }
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "factualMetrics": {
+        "termCount": 3,
+        "tenureDaysApprox": 4272,
+        "tenureYearsApprox": 11.7,
+        "electionsContested": 3,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 1,
+        "civicTimelineEventsLinked": 14,
+        "primarySourceRefCount": 3
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "B"
+      }
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "factualMetrics": {
+        "termCount": 4,
+        "tenureDaysApprox": 5543,
+        "tenureYearsApprox": 15.2,
+        "electionsContested": 4,
+        "electionsWithKnownVotes": 0,
+        "electionsWithKnownTurnout": 0,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 17,
+        "primarySourceRefCount": 4
+      },
+      "dataAvailability": {
+        "population": "not_collected",
+        "finance": "not_collected",
+        "overallConfidenceGrade": "B"
+      }
+    },
+    {
+      "mayorId": "mayor-13",
+      "name": "櫻井 哲雄",
+      "factualMetrics": {
+        "termCount": 3,
+        "tenureDaysApprox": 4380,
+        "tenureYearsApprox": 12,
+        "electionsContested": 4,
+        "electionsWithKnownVotes": 2,
+        "electionsWithKnownTurnout": 2,
+        "unopposedWinsConfirmed": 0,
+        "civicTimelineEventsLinked": 16,
+        "primarySourceRefCount": 3
+      },
+      "dataAvailability": {
+        "population": "confirmed_official",
+        "finance": "confirmed_official",
+        "overallConfidenceGrade": "B"
+      }
+    }
+  ]
+}
