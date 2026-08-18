@@ -1,0 +1,2836 @@
+{
+  "generatedAt": "2026-08-19T02:30:00+09:00",
+  "purpose": "1933年の市制施行から現在までの延岡市政約90年を、市長・人口・選挙・市政イベントを束ねた年代別データセットとして整備した。/history ページ等で年代フィルター表示を実装する際の基礎データを想定。既存データの新規重複ファイルではなく、既存のcivicTimelineEvents.json/archiveMayorTerms.json/electionResults.json/nobeoka-census-population-series.jsonを結合しただけの参照用ビュー。",
+  "categoryTaxonomyNote": "既存civicTimelineEvents.jsonのcategoryフィールド（6種類）は変更していない（既存UIとの互換性を壊さないため）。統一カテゴリ（unifiedCategory）は本データセット内でのみ付与した参考情報であり、'教育・福祉・産業'のように複数分野が混在する既存カテゴリは単純に1対1変換できないため、今回は暫定的な代表カテゴリを付与するにとどめた。将来的にcivicTimelineEvents.json自体のカテゴリを細分化する場合は、既存ページ（HistoryPage.tsx等）のフィルターUIとの整合を別途確認する必要がある。",
+  "attributionTypeRecommendation": {
+    "status": "designed_not_retrofitted",
+    "note": "mayor_initiated/mayor_supported/occurred_during_term/national_project/prefectural_project/private_sectorという区分を設計したが、既存152件全件への遡及的な分類付けはPhase5のスコープでは行っていない（確証のない分類を機械的に付与することは推測にあたるため）。デフォルトはoccurred_during_term（在任中に発生した事実であり、当該市長の政策的成果と断定しない）として扱う既存の運用方針（各ページのnotes文言）は既に踏襲されている。新規追加イベント（civic-151〜153等）についても同様にoccurred_during_term相当の慎重な文言を用いている。",
+    "values": [
+      "mayor_initiated",
+      "mayor_supported",
+      "occurred_during_term",
+      "national_project",
+      "prefectural_project",
+      "private_sector"
+    ]
+  },
+  "sourceConfidenceRecommendation": {
+    "status": "designed_not_retrofitted",
+    "note": "A(一次資料)/B(公的二次資料)/C(信頼できる二次資料)/D(出典弱い)/E(未確認)の5段階を設計。reports/civic-timeline-decade-audit.jsonの監査結果、既存152件は全てWikipedia以外の出典（延岡市公式資料・NDL資料等）を持つことを確認済みであり、A〜Bに相当すると推定されるが、件ごとの正式なconfidence値の付与はPhase5では行っていない（sourceRefs.labelの記述から機械的に推定可能だが、確実性を期すため今回は見送った）。",
+    "values": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ]
+  },
+  "decadeCoverageSummary": [
+    {
+      "band": "1933-1939",
+      "totalEvents": 12,
+      "mayorLinkedCount": 10,
+      "officialOrPrimarySourceCount": 12
+    },
+    {
+      "band": "1940-1949",
+      "totalEvents": 17,
+      "mayorLinkedCount": 17,
+      "officialOrPrimarySourceCount": 17
+    },
+    {
+      "band": "1950-1959",
+      "totalEvents": 22,
+      "mayorLinkedCount": 22,
+      "officialOrPrimarySourceCount": 22
+    },
+    {
+      "band": "1960-1969",
+      "totalEvents": 14,
+      "mayorLinkedCount": 13,
+      "officialOrPrimarySourceCount": 14
+    },
+    {
+      "band": "1970-1979",
+      "totalEvents": 14,
+      "mayorLinkedCount": 14,
+      "officialOrPrimarySourceCount": 14
+    },
+    {
+      "band": "1980-1989",
+      "totalEvents": 12,
+      "mayorLinkedCount": 12,
+      "officialOrPrimarySourceCount": 12
+    },
+    {
+      "band": "1990-1999",
+      "totalEvents": 9,
+      "mayorLinkedCount": 9,
+      "officialOrPrimarySourceCount": 9
+    },
+    {
+      "band": "2000-2009",
+      "totalEvents": 22,
+      "mayorLinkedCount": 22,
+      "officialOrPrimarySourceCount": 22
+    },
+    {
+      "band": "2010-2019",
+      "totalEvents": 28,
+      "mayorLinkedCount": 28,
+      "officialOrPrimarySourceCount": 28
+    },
+    {
+      "band": "2020-現在",
+      "totalEvents": 1,
+      "mayorLinkedCount": 1,
+      "officialOrPrimarySourceCount": 1
+    }
+  ],
+  "decadeRows": [
+    {
+      "band": "1933-1939",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-04",
+          "name": "仲田 又次郎"
+        },
+        {
+          "mayorId": "mayor-05",
+          "name": "鈴木 憲太郎"
+        },
+        {
+          "mayorId": "mayor-06",
+          "name": "大島 文彦"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-002",
+          "date": "1933年2月（日不明）",
+          "title": "延岡市 市制施行",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [],
+          "mayorNames": [],
+          "source": "近代の年表（1930〜1950年）; 延岡市の歴史; 延岡市年表（PDF）",
+          "verificationStatus": "partiallyVerified"
+        },
+        {
+          "id": "civic-073",
+          "date": "1933年5月（日不明）",
+          "title": "延岡ガス(株)創業",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-003",
+          "date": "1934年4月（日不明）",
+          "title": "須崎橋・五ヶ瀬橋架設",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-074",
+          "date": "1934年4月（日不明）",
+          "title": "延岡高等小学校創設・統合",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-075",
+          "date": "1934年9月（日不明）",
+          "title": "延岡商工会議所創立",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-004",
+          "date": "1936年10月（日不明）",
+          "title": "東海村・伊形村編入",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-076",
+          "date": "1936年8月（日不明）",
+          "title": "塵芥焼却場完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-005",
+          "date": "1937年2月19日",
+          "title": "旧市庁舎全焼",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [],
+          "mayorNames": [],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-082",
+          "date": "1938年4月（日不明）",
+          "title": "東小学校新設（出北町）",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-06"
+          ],
+          "mayorNames": [
+            "大島 文彦"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-083",
+          "date": "1938年4月（日不明）",
+          "title": "延岡市常備消防部を創設",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-06"
+          ],
+          "mayorNames": [
+            "大島 文彦"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-006",
+          "date": "1939年9月（日不明）",
+          "title": "大洪水（大瀬橋流失）",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-06"
+          ],
+          "mayorNames": [
+            "大島 文彦"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-084",
+          "date": "1939年8月（日不明）",
+          "title": "県立延岡図書館再建",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-06"
+          ],
+          "mayorNames": [
+            "大島 文彦"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1933-04-council-selection",
+          "date": "1933-04",
+          "electionMethod": "city_council_indirect",
+          "winner": "仲田 又次郎",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1937-03-council-selection",
+          "date": "1937-03",
+          "electionMethod": "city_council_indirect",
+          "winner": "鈴木 憲太郎",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1937-05-council-selection",
+          "date": "1937-05",
+          "electionMethod": "city_council_indirect",
+          "winner": "鈴木 憲太郎",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1937-09-council-selection",
+          "date": "1937-09",
+          "electionMethod": "city_council_indirect",
+          "winner": "大島 文彦",
+          "votesKnown": false
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1935-10-01",
+          "population": 114251
+        }
+      ]
+    },
+    {
+      "band": "1940-1949",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-06",
+          "name": "大島 文彦"
+        },
+        {
+          "mayorId": "mayor-07",
+          "name": "三浦 虎雄"
+        },
+        {
+          "mayorId": "mayor-05",
+          "name": "鈴木 憲太郎"
+        },
+        {
+          "mayorId": "mayor-08",
+          "name": "佐藤 千吉郎"
+        },
+        {
+          "mayorId": "mayor-04",
+          "name": "仲田 又次郎"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-007",
+          "date": "1943年9月20日",
+          "title": "大洪水",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-085",
+          "date": "1943年10月（日不明）",
+          "title": "延岡商工会議所が宮崎商工経済会延岡支部となる",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-086",
+          "date": "1944年4月（日不明）",
+          "title": "県立延岡工業学校が開校",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-008",
+          "date": "1945年6月29日",
+          "title": "延岡空襲",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1930〜1950年）; 延岡市史 第1巻（石川恒太郎編、延岡郷土研究會、1949年）序文",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-087",
+          "date": "1945年8月15日",
+          "title": "終戦、市役所を岡富国民学校講堂に移転",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-092",
+          "date": "1947年4月（日不明）",
+          "title": "学制改革により新制中学校発足",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-093",
+          "date": "1947年4月（日不明）",
+          "title": "延岡市立図書館へ変更",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-094",
+          "date": "1947年4月（日不明）",
+          "title": "延岡市選挙管理委員会設置",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-095",
+          "date": "1947年12月（日不明）",
+          "title": "延岡市議会事務局設置",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-150",
+          "date": "1947年4月15日",
+          "title": "延岡市長の直接公選制開始（第8代佐藤千吉郎氏から）",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "延岡市史（延岡市史編さん委員会編、延岡市、1963年）第五章「市政および財政の発展」歴代市長一覧・解説; 日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年）延岡市 個人略歴（佐藤千吉郎）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-077",
+          "date": "1948年8月（日不明）",
+          "title": "国立水産試験場土々呂分場開設",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-078",
+          "date": "1948年9月（日不明）",
+          "title": "祝子橋完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-096",
+          "date": "1948年3月（日不明）",
+          "title": "延岡市公安委員会・延岡市警察署設置",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-097",
+          "date": "1948年4月（日不明）",
+          "title": "県立延岡恒富高等学校・延岡岡富高等学校設置",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-098",
+          "date": "1948年4月（日不明）",
+          "title": "農業協同組合発足",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-08"
+          ],
+          "mayorNames": [
+            "佐藤 千吉郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-079",
+          "date": "1949年4月（日不明）",
+          "title": "延岡市国民健康保険創設",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-149",
+          "date": "1949年5月（序文の日付。刊行日そのものは未確認）",
+          "title": "『延岡市史 第1巻』刊行",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04",
+            "mayor-06"
+          ],
+          "mayorNames": [
+            "仲田 又次郎",
+            "大島 文彦"
+          ],
+          "source": "延岡市史 第1巻（石川恒太郎編、延岡郷土研究會、1949年）序文",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1941-10-council-selection",
+          "date": "1941-10",
+          "electionMethod": "city_council_indirect",
+          "winner": "三浦 虎雄",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1942-05-council-selection",
+          "date": "1942-05",
+          "electionMethod": "city_council_indirect",
+          "winner": "三浦 虎雄",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1946-03-council-selection",
+          "date": "1946-03",
+          "electionMethod": "city_council_indirect",
+          "winner": "鈴木 憲太郎",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1947-04",
+          "date": "1947-04",
+          "electionMethod": "direct_public_vote",
+          "winner": "佐藤 千吉郎",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1948-07",
+          "date": "1948-07",
+          "electionMethod": "direct_public_vote",
+          "winner": "仲田 又次郎",
+          "votesKnown": false
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1940-10-01",
+          "population": 117271
+        },
+        {
+          "referenceDate": "1947-10-01",
+          "population": 116196
+        }
+      ]
+    },
+    {
+      "band": "1950-1959",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-04",
+          "name": "仲田 又次郎"
+        },
+        {
+          "mayorId": "mayor-07",
+          "name": "三浦 虎雄"
+        },
+        {
+          "mayorId": "mayor-09",
+          "name": "青木 善祐"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-009",
+          "date": "1950年1月（日不明）",
+          "title": "五ヶ瀬橋（近代化）",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-010",
+          "date": "1950年9月（日不明）",
+          "title": "キジア台風",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-080",
+          "date": "1950年4月（日不明）",
+          "title": "失業対策事業開始",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-081",
+          "date": "1950年12月（日不明）",
+          "title": "固定資産評価員を初めて任命",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1930〜1950年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-012",
+          "date": "1951年8月（日不明）",
+          "title": "人事委員会・農業委員会発足",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-011",
+          "date": "1952年3月（日不明）",
+          "title": "最初の公立保育所開設",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "仲田 又次郎"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-013",
+          "date": "1952年11月（日不明）",
+          "title": "延岡市教育委員会発足",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-072",
+          "date": "1952年8月（日不明）",
+          "title": "延岡市公平委員会設置",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-014",
+          "date": "1953年4月（日不明）",
+          "title": "北延岡駅開業",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-088",
+          "date": "1953年5月（日不明）",
+          "title": "大瀬橋完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-015",
+          "date": "1954年7月（日不明）",
+          "title": "市警察廃止・県警察署発足",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-016",
+          "date": "1955年4月（日不明）",
+          "title": "南方村・南浦村編入",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-017",
+          "date": "1955年9月（日不明）",
+          "title": "市庁舎新築落成",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-089",
+          "date": "1955年3月（日不明）",
+          "title": "小山橋完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-090",
+          "date": "1955年4月（日不明）",
+          "title": "県立延岡ろう学校設立",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-091",
+          "date": "1955年8月（日不明）",
+          "title": "野口記念館開館",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-07"
+          ],
+          "mayorNames": [
+            "三浦 虎雄"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-018",
+          "date": "1956年7月（日不明）",
+          "title": "敬老年金制度創設",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "青木 善祐"
+          ],
+          "source": "近代の年表（1951〜1970年）; 日本の歴代市長 第3巻（歴代知事編纂会編、1985年）延岡市 青木善祐（11代）略歴",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-151",
+          "date": "1956年4月（日不明、就任日disputed）",
+          "title": "延岡市長選挙で青木善祐氏が初当選（県内初の社会党系市長）",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-09",
+            "mayor-04"
+          ],
+          "mayorNames": [
+            "青木 善祐",
+            "仲田 又次郎"
+          ],
+          "source": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
+          "verificationStatus": "partiallyVerified"
+        },
+        {
+          "id": "civic-099",
+          "date": "1957年4月（日不明）",
+          "title": "青年会議所発足",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "青木 善祐"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-100",
+          "date": "1957年7月（日不明）",
+          "title": "旭化成カシミロン工場完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "青木 善祐"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-101",
+          "date": "1958年3月（日不明）",
+          "title": "桜ヶ丘に住宅団地開設",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "青木 善祐"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-102",
+          "date": "1958年4月（日不明）",
+          "title": "県立延岡商業高等学校開校",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "青木 善祐"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1952-07",
+          "date": "1952-07",
+          "electionMethod": "direct_public_vote",
+          "winner": "三浦 虎雄",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1956-04",
+          "date": "1956-04",
+          "electionMethod": "direct_public_vote",
+          "winner": "青木 善祐",
+          "votesKnown": true
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1950-10-01",
+          "population": 132859
+        },
+        {
+          "referenceDate": "1955-10-01",
+          "population": 146716
+        }
+      ]
+    },
+    {
+      "band": "1960-1969",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-09",
+          "name": "青木 善祐"
+        },
+        {
+          "mayorId": "mayor-10",
+          "name": "折小野 良一"
+        },
+        {
+          "mayorId": "mayor-11",
+          "name": "房野 博"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-019",
+          "date": "1960年4月（日不明）",
+          "title": "上水道事業落成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [],
+          "mayorNames": [],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-103",
+          "date": "1960年3月（日不明）",
+          "title": "し尿処理場完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "青木 善祐"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-153",
+          "date": "1960年4月",
+          "title": "延岡市長選挙で折小野良一氏が現職の青木善祐氏を破り初当選",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-10",
+            "mayor-09"
+          ],
+          "mayorNames": [
+            "折小野 良一",
+            "青木 善祐"
+          ],
+          "source": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-104",
+          "date": "1961年11月（日不明）",
+          "title": "西階総合開発事業開始",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-105",
+          "date": "1962年3月（日不明）",
+          "title": "日向延岡新産業都市指定促進期成同盟組織",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-106",
+          "date": "1963年2月（日不明）",
+          "title": "市民憲章・市歌制定",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-107",
+          "date": "1963年10月（日不明）",
+          "title": "市民会館内藤記念館開館",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-108",
+          "date": "1964年1月（日不明）",
+          "title": "日向延岡地区新産業都市に指定",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）; 日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年）延岡市 個人略歴（折小野良一）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-109",
+          "date": "1964年2月（日不明）",
+          "title": "旭化成ナイロン工場完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-110",
+          "date": "1964年12月（日不明）",
+          "title": "旭化成が市立図書館を新築寄贈",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-020",
+          "date": "1965年7月（日不明）",
+          "title": "市内農協合併",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-111",
+          "date": "1965年3月（日不明）",
+          "title": "祖母山・傾山・大崩山山系が国定公園指定",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-10"
+          ],
+          "mayorNames": [
+            "折小野 良一"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-152",
+          "date": "1967年1月23日",
+          "title": "延岡市長選挙で房野博氏が無投票当選",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-021",
+          "date": "1968年4月（日不明）",
+          "title": "日向灘大地震",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1951〜1970年）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1960-04",
+          "date": "1960-04",
+          "electionMethod": "direct_public_vote",
+          "winner": "折小野 良一",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1964-04",
+          "date": "1964-04",
+          "electionMethod": "direct_public_vote",
+          "winner": "折小野 良一",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1967-01",
+          "date": "1967-01-23",
+          "electionMethod": "direct_public_vote",
+          "winner": "房野 博",
+          "votesKnown": false
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1960-10-01",
+          "population": 151800
+        },
+        {
+          "referenceDate": "1965-10-01",
+          "population": 148662
+        }
+      ]
+    },
+    {
+      "band": "1970-1979",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-11",
+          "name": "房野 博"
+        },
+        {
+          "mayorId": "mayor-12",
+          "name": "早生 隆彦"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-112",
+          "date": "1971年10月（日不明）",
+          "title": "宮崎県北部広域市町村圏協議会発足",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-113",
+          "date": "1972年5月（日不明）",
+          "title": "特別養護老人ホーム「敬寿園」開園",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-114",
+          "date": "1972年7月（日不明）",
+          "title": "国鉄高千穂線開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-022",
+          "date": "1973年9月（日不明）",
+          "title": "周辺農協合併",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-115",
+          "date": "1973年2月（日不明）",
+          "title": "市制40周年で緑化都市宣言",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-116",
+          "date": "1973年2月（日不明）",
+          "title": "延岡新港建設開始",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-117",
+          "date": "1974年2月（日不明）",
+          "title": "日豊海岸が国定公園指定",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-118",
+          "date": "1974年4月（日不明）",
+          "title": "清掃工場完成、日豊本線電化",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-023",
+          "date": "1975年10月（日不明）",
+          "title": "延岡大橋開通・延岡バイパス全通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-119",
+          "date": "1976年6月（日不明）",
+          "title": "旭化成第1火力発電所集合煙突完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-024",
+          "date": "1977年7月（日不明）",
+          "title": "延岡新港使用開始",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-120",
+          "date": "1977年4月（日不明）",
+          "title": "木工団地操業開始、県立延岡東高校開校",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-11"
+          ],
+          "mayorNames": [
+            "房野 博"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-121",
+          "date": "1979年4月（日不明）",
+          "title": "東九州自動車道路対策室設置",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-122",
+          "date": "1979年10月（日不明）",
+          "title": "国民体育大会秋季大会開催、丸岡町と姉妹都市提携",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1971",
+          "date": "1971-01",
+          "electionMethod": "direct_public_vote",
+          "winner": "房野 博",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1975",
+          "date": "1975-01",
+          "electionMethod": "direct_public_vote",
+          "winner": "房野 博",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1978",
+          "date": "1978-11",
+          "electionMethod": "direct_public_vote",
+          "winner": "早生 隆彦",
+          "votesKnown": false
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1970-10-01",
+          "population": 149567
+        },
+        {
+          "referenceDate": "1975-10-01",
+          "population": 153432
+        }
+      ]
+    },
+    {
+      "band": "1980-1989",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-12",
+          "name": "早生 隆彦"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-025",
+          "date": "1980年4月（日不明）",
+          "title": "「障害者福祉都市」指定",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-123",
+          "date": "1980年8月（日不明）",
+          "title": "メドフォード市（米国）と姉妹都市提携",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-124",
+          "date": "1980年12月（日不明）",
+          "title": "国道10号延岡大橋完成開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-125",
+          "date": "1983年2月（日不明）",
+          "title": "市制50周年で健康都市宣言",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-026",
+          "date": "1984年2月（日不明）",
+          "title": "愛宕山山林火災",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-126",
+          "date": "1985年6月（日不明）",
+          "title": "須美江家族旅行村「サンビーチすみえ」オープン",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-127",
+          "date": "1985年11月（日不明）",
+          "title": "延岡総合文化センター完成",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-128",
+          "date": "1986年3月（日不明）",
+          "title": "「テレトピア構想」モデル都市指定",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-129",
+          "date": "1986年9月（日不明）",
+          "title": "市議会議員定数を32人に決定",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-130",
+          "date": "1987年9月（日不明）",
+          "title": "東九州自動車道が国土開発幹線自動車道に組み入れ",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-131",
+          "date": "1988年5月（日不明）",
+          "title": "「都市景観形成モデル都市」指定、出北土地区画整理事業完了",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-132",
+          "date": "1989年1月（日不明）",
+          "title": "東九州自動車道延岡〜清武間が基本計画路線に決定",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1982",
+          "date": "1982-11",
+          "electionMethod": "direct_public_vote",
+          "winner": "早生 隆彦",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1986",
+          "date": "1986-11",
+          "electionMethod": "direct_public_vote",
+          "winner": "早生 隆彦",
+          "votesKnown": false
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1980-10-01",
+          "population": 154881
+        },
+        {
+          "referenceDate": "1985-10-01",
+          "population": 153835
+        }
+      ]
+    },
+    {
+      "band": "1990-1999",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-12",
+          "name": "早生 隆彦"
+        },
+        {
+          "mayorId": "mayor-13",
+          "name": "櫻井 哲雄"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-027",
+          "date": "1990年2月（日不明）",
+          "title": "延岡南道路開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1971〜1990年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-133",
+          "date": "1992年8月（日不明）",
+          "title": "日豊本線高速化事業完了",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-134",
+          "date": "1993年2月（日不明）",
+          "title": "市制60周年記念「ハートフル憲章」制定",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-12"
+          ],
+          "mayorNames": [
+            "早生 隆彦"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-135",
+          "date": "1994年7月（日不明）",
+          "title": "空き缶等散乱防止条例がスタート",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-136",
+          "date": "1996年2月（日不明）",
+          "title": "4年制大学誘致の基本協定調印",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-028",
+          "date": "1997年9月（日不明）",
+          "title": "台風19号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-029",
+          "date": "1998年12月（日不明）",
+          "title": "国道10号延岡道路着工",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-137",
+          "date": "1998年10月（日不明）",
+          "title": "市議会議員定数を2人減の30人とする条例改正案を可決",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-138",
+          "date": "1999年4月（日不明）",
+          "title": "九州保健福祉大学が開学",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-1990",
+          "date": "1990-11",
+          "electionMethod": "direct_public_vote",
+          "winner": "早生 隆彦",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1994",
+          "date": "1994-02",
+          "electionMethod": "direct_public_vote",
+          "winner": "櫻井 哲雄",
+          "votesKnown": false
+        },
+        {
+          "electionId": "election-mayor-1998",
+          "date": "1998-02",
+          "electionMethod": "direct_public_vote",
+          "winner": "櫻井 哲雄",
+          "votesKnown": false
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "1990-10-01",
+          "population": 146989
+        },
+        {
+          "referenceDate": "1995-10-01",
+          "population": 141751
+        }
+      ]
+    },
+    {
+      "band": "2000-2009",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-02",
+          "name": "首藤 正治"
+        },
+        {
+          "mayorId": "mayor-13",
+          "name": "櫻井 哲雄"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-139",
+          "date": "2002年3月（日不明）",
+          "title": "九州保健福祉大学薬学部新設に20億円の財政支援予算可決",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-140",
+          "date": "2003年2月（日不明）",
+          "title": "市制施行70周年記念式典「未来をひらく人づくり都市宣言」",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-141",
+          "date": "2003年4月（日不明）",
+          "title": "九州保健福祉大学に薬学部が新設",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-030",
+          "date": "2004年9月（日不明）",
+          "title": "台風18号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-031",
+          "date": "2004年10月（日不明）",
+          "title": "台風23号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-142",
+          "date": "2004年12月（日不明）",
+          "title": "北川町が1市3町合併からの離脱を表明",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-032",
+          "date": "2005年4月（日不明）",
+          "title": "国道10号延岡道路一部開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-033",
+          "date": "2005年9月（日不明）",
+          "title": "台風14号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-143",
+          "date": "2005年1月（日不明）",
+          "title": "1市2町合併について北浦町で住民投票、賛成多数",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-144",
+          "date": "2005年2月（日不明）",
+          "title": "延岡市・北方町・北浦町の合併協定調印式",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-13"
+          ],
+          "mayorNames": [
+            "櫻井 哲雄"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-034",
+          "date": "2006年2月20日",
+          "title": "北方町・北浦町編入",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）; 近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-035",
+          "date": "2006年9月17日",
+          "title": "台風13号による竜巻",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）; 広報のべおか「2006年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-036",
+          "date": "2007年3月31日",
+          "title": "北川町編入",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）; 近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-037",
+          "date": "2007年4月",
+          "title": "助役制・収入役制廃止、副市長制導入",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-038",
+          "date": "2007年4月",
+          "title": "上下水道局発足",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-039",
+          "date": "2007年8月2日",
+          "title": "台風5号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）; 広報のべおか「2007年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-145",
+          "date": "2007年7月15日",
+          "title": "台風4号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "広報のべおか「2007年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-040",
+          "date": "2008年4月23日",
+          "title": "新消防庁舎完成",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）; 広報のべおか「2008年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-146",
+          "date": "2008年11月17日",
+          "title": "新大瀬橋完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "広報のべおか「2008年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-041",
+          "date": "2009年3月",
+          "title": "定住自立圏中心市宣言",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（1991〜2010年）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-147",
+          "date": "2009年4月（日不明）",
+          "title": "新清掃工場「夢の杜」完成",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "広報のべおか「2009年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-148",
+          "date": "2009年9月（日不明）",
+          "title": "延岡市地域医療を守る条例制定",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "広報のべおか「2009年を振り返る」（Internet Archive保存、当時の延岡市公式サイト）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-2002",
+          "date": "2002-01-27",
+          "electionMethod": "direct_public_vote",
+          "winner": "桜井哲雄",
+          "votesKnown": true
+        },
+        {
+          "electionId": "election-mayor-2006",
+          "date": "2006-01-29",
+          "electionMethod": "direct_public_vote",
+          "winner": "首藤正治",
+          "votesKnown": true
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "2000-10-01",
+          "population": 139176
+        },
+        {
+          "referenceDate": "2005-10-01",
+          "population": 135182
+        }
+      ]
+    },
+    {
+      "band": "2010-2019",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-02",
+          "name": "首藤 正治"
+        },
+        {
+          "mayorId": "mayor-03",
+          "name": "読谷山 洋司"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-042",
+          "date": "2010年4月20日",
+          "title": "口蹄疫発生・延岡市対策本部設置",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-043",
+          "date": "2011年1月",
+          "title": "北川町 高病原性鳥インフルエンザ",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-044",
+          "date": "2011年2月",
+          "title": "北浦町 高病原性鳥インフルエンザ",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-045",
+          "date": "2011年3月",
+          "title": "新庁舎建設基本構想・基本計画策定",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-046",
+          "date": "2011年3月",
+          "title": "東日本大震災への対応",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）; 延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-047",
+          "date": "2011年4月",
+          "title": "副市長2人制開始",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-048",
+          "date": "2012年12月（日不明）",
+          "title": "東九州自動車道・国道10号延岡道路 同時供用",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-068",
+          "date": "2012年4月",
+          "title": "ドクターヘリの運航開始",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-049",
+          "date": "2013年2月",
+          "title": "市制施行80周年記念式典",
+          "category": "市制施行・合併",
+          "unifiedCategory": "merger",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）; 近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-050",
+          "date": "2013年5月",
+          "title": "新庁舎建設1期工事起工式",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-051",
+          "date": "2013年9月〜",
+          "title": "旧市庁舎解体工事着手",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "延岡市年表（PDF）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-062",
+          "date": "2013年3月",
+          "title": "延岡市議会基本条例が成立・施行",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-069",
+          "date": "2013年3月",
+          "title": "県立延岡病院に新救命救急センターが完成",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-070",
+          "date": "2014年4月",
+          "title": "南浦中学校が誕生、小中一貫教育がスタート",
+          "category": "教育・福祉・産業",
+          "unifiedCategory": "education_welfare_industry",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-071",
+          "date": "2014年1月11日",
+          "title": "新庁舎免震装置の見学会を開催",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "広報のべおか2014年2月号「新庁舎について理解を深める　新庁舎免震装置の概要説明及び見学会」(p.10)",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-052",
+          "date": "2015年2月",
+          "title": "新庁舎高層棟完成",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-053",
+          "date": "2015年4月（日不明）",
+          "title": "国道218号北方延岡道路全線開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-063",
+          "date": "2015年3月",
+          "title": "東九州自動車道 佐伯－蒲江間が開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-054",
+          "date": "2016年4月",
+          "title": "熊本地震への対応",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-055",
+          "date": "2016年9月",
+          "title": "台風16号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-056",
+          "date": "2016年11月",
+          "title": "新庁舎グランドオープン",
+          "category": "市庁舎",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-064",
+          "date": "2016年4月",
+          "title": "北浦・北川・北方の商工会が合併、延岡市三北商工会が発足",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-057",
+          "date": "2017年3月（日不明）",
+          "title": "門川南スマートIC開通",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-058",
+          "date": "2017年9月",
+          "title": "台風18号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-065",
+          "date": "2017年12月",
+          "title": "市議会議員定数を27人とする条例改正案を可決",
+          "category": "行政組織",
+          "unifiedCategory": "administration",
+          "mayorIds": [
+            "mayor-02"
+          ],
+          "mayorNames": [
+            "首藤 正治"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-066",
+          "date": "2018年4月",
+          "title": "延岡駅前複合施設エンクロス・かわまち広場が開館",
+          "category": "公共事業",
+          "unifiedCategory": "major_project",
+          "mayorIds": [
+            "mayor-03"
+          ],
+          "mayorNames": [
+            "読谷山 洋司"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-059",
+          "date": "2019年8月",
+          "title": "台風8号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-03"
+          ],
+          "mayorNames": [
+            "読谷山 洋司"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        },
+        {
+          "id": "civic-060",
+          "date": "2019年9月",
+          "title": "市街地竜巻",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-03"
+          ],
+          "mayorNames": [
+            "読谷山 洋司"
+          ],
+          "source": "近代の年表（2011年〜）",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-2010",
+          "date": "2010-01-24",
+          "electionMethod": "direct_public_vote",
+          "winner": "首藤正治",
+          "votesKnown": true
+        },
+        {
+          "electionId": "election-mayor-2014",
+          "date": "2014-01-26",
+          "electionMethod": "direct_public_vote",
+          "winner": "首藤正治",
+          "votesKnown": true
+        },
+        {
+          "electionId": "election-mayor-2018",
+          "date": "2018-01-28",
+          "electionMethod": "direct_public_vote",
+          "winner": "読谷山洋司",
+          "votesKnown": true
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "2010-10-01",
+          "population": 131182
+        },
+        {
+          "referenceDate": "2015-10-01",
+          "population": 125159
+        }
+      ]
+    },
+    {
+      "band": "2020-現在",
+      "mayorsInOffice": [
+        {
+          "mayorId": "mayor-01",
+          "name": "三浦 久知"
+        },
+        {
+          "mayorId": "mayor-03",
+          "name": "読谷山 洋司"
+        }
+      ],
+      "events": [
+        {
+          "id": "civic-067",
+          "date": "2022年9月（日不明）",
+          "title": "台風14号",
+          "category": "災害",
+          "unifiedCategory": "disaster",
+          "mayorIds": [
+            "mayor-03"
+          ],
+          "mayorNames": [
+            "読谷山 洋司"
+          ],
+          "source": "台風14号における災害対応等に関する検証について",
+          "verificationStatus": "verified"
+        }
+      ],
+      "elections": [
+        {
+          "electionId": "election-mayor-2022",
+          "date": "2022-01-23",
+          "electionMethod": "direct_public_vote",
+          "winner": "読谷山洋司",
+          "votesKnown": true
+        },
+        {
+          "electionId": "election-mayor-2025",
+          "date": "2025-07-20",
+          "electionMethod": "direct_public_vote",
+          "winner": "三浦久知",
+          "votesKnown": true
+        }
+      ],
+      "censusPopulation": [
+        {
+          "referenceDate": "2020-10-01",
+          "population": 118394
+        }
+      ]
+    }
+  ]
+}
