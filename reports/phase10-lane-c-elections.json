@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-08-19T12:00:00+09:00",
+  "lane": "C",
+  "purpose": "Phase 10 Lane C: src/data/electionResults.json 内の1971・1975・1978・1982・1986・1990・1994・1998年 延岡市長選挙レコード（既存8件）について、Phase8/Phase9 Lane Cで未使用だった情報源（ADEAC『デジタル宮崎県史』への直接WebFetchアクセス、国立公文書館デジタルアーカイブ、宮崎県立図書館OPAC、延岡市立図書館郷土資料デジタル化状況、CiNii等学術論文データベース）で一次資料突破を試みる。新規レコード追加ではなく既存レコードの精度向上が目的。WebSearch/WebFetchのみ使用（claude-in-chrome不使用）。",
+  "adeacInvestigation": {
+    "accessAttempted": true,
+    "staticAccessPossible": false,
+    "findings": "ADEAC『宮崎県立図書館／デジタル宮崎県史』（https://adeac.jp/miyazaki-pref-lib/top/）の構造をWebFetchで詳細に確認した。収録資料は全11冊：通史編7巻（原始・古代1、古代2、中世、近世上、近世下、近・現代1、近・現代2）、資料編2巻（民俗1、民俗2）、別編2巻（民俗、年表）。各巻の目次ページURLパターンは https://adeac.jp/miyazaki-pref-lib/text-list/d1000XX/ht0000XX の形式で規則的に存在することを確認したが、実際にWebFetchで取得すると『ナビゲーション枠のみでOCR本文テキストが含まれない』（画像ビューア上にJavaScriptでテキストを重畳表示する方式）ことが判明した。詳細検索ページ（/miyazaki-pref-lib/detailed-search）のフォームはASP.NET WebFormsの`__doPostBack()`によるPOST送信方式であり、GETクエリパラメータでの静的検索URL（例：?keyword=延岡市長選挙）は一切機能しない（404）ことを確認した。したがって全文検索の実行にはJavaScript対応のブラウザ操作が必須であり、WebFetch単独では検索結果を取得できないというPhase 9の結論を再確認・強化した。 一方、新たに次の周辺情報を確認できた：(1) ADEACのトップページ掲載の参加機関一覧に延岡市・延岡市立図書館は含まれておらず、延岡市独自のADEACアーカイブは存在しない（武豊町立図書館、清須市立図書館等の他自治体は独自インスタンスを持つが延岡市は該当なし）。(2) 宮崎県立図書館の報道発表（2025年3月28日公開開始、https://www.pref.miyazaki.lg.jp/ky-shogaigakushu/press/2025/04/20250319150428.html ）により、全31巻32冊中デジタル化済み11冊すべてで『各ページの閲覧・検索・印刷』が可能であることを確認した（＝全文検索機能自体は実装されている）。(3) NDLサーチ経由の外部スニペット（Google検索結果のキャッシュ的情報）から、『近・現代2』（2000年5月刊）の目次に第6章『恐慌と県政の対応』（昭和初期・政党知事・普通選挙・郷田事件等）、第9章『講和から高度成長へ』（戦後県政と地域開発政策の展開等）が含まれることを確認したが、いずれも県政（知事・県議会）レベルの記述であり、市町村長選挙に特化した章立ては目次レベルでは確認できなかった。(4) 宮崎県公式サイトの別編各巻概要ページ（https://www.pref.miyazaki.lg.jp/somu/kanko/bunka/kenshi_02_02.html ）により、『別編 年表』は『原始・古代から現代まで』を網羅し、近世以降は『全国事項』と『県内事項』を『政治・経済・社会』『教育・文化』に区分して見開き対照する構成であることを確認した。2000年刊行のため現代部分は1990年代後半までの記載が期待できるが、県内事項が県レベルか市町村レベルかは目次記述からは判別できない。",
+    "note": "全文検索の実行には引き続きブラウザ操作（JavaScript対応、ASP.NET WebFormsのPOSTBACK）が必須であり、本Lane（WebFetch/WebSearch限定）では検索結果そのものは取得できなかった。ただし今回、検索対象の巻構成・章立て・検索機能の存在自体は具体的に確認できたため、Lane Aへの引き継ぎ精度が向上した。特に『通史編 近・現代2』の第9章『講和から高度成長へ』（1971・1975・1978・1982・1986年選挙の時期をカバー）と『別編 年表』（政治・経済・社会区分、県内事項）の2点を優先的な検索対象として下記キューに記録した。"
+  },
+  "elections": [
+    {
+      "year": 1971,
+      "existingRecordId": "election-mayor-1971",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規の得票数・投票率・候補者情報は確認できなかった。ADEAC『宮崎県史 通史編 近・現代2』第9章『講和から高度成長へ』が時代的に1971年（房野博氏第2期）を含む可能性が高いことを確認したが、本文はJavaScript経由でのみ閲覧可能で、本Laneでは内容を確認できなかった。国立公文書館デジタルアーカイブ（digital.archives.go.jp）は内閣・省庁レベルの行政文書が中心で、延岡市長選挙に関する資料は検索でヒットしなかった（負の知見）。CiNii Researchでも該当論文なし。"
+    },
+    {
+      "year": 1975,
+      "existingRecordId": "election-mayor-1975",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。政治山（seijiyama.jp/lgov/45/452033/、延岡市の人口・財政・選挙・議員報酬を集約する新規サイト）を確認したが、掲載選挙データは2014年1月26日執行分以降のみで、1975年を含む1970〜1990年代のデータは一切含まれていなかった（新規に確認した明確な負の結果）。"
+    },
+    {
+      "year": 1978,
+      "existingRecordId": "election-mayor-1978",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。宮崎県立図書館OPAC（www2.lib.pref.miyazaki.lg.jp）は館内設置のタッチパネル式検索機の説明のみで、外部からWeb経由でキーワード検索可能な蔵書検索システムのURLは確認できなかった（宮崎県立図書館の蔵書検索自体がADEAC上の『詳細検索（mode=catalog）』に統合されている可能性が高いが、これも同じくJavaScript依存で本Laneでは実行不可）。"
+    },
+    {
+      "year": 1982,
+      "existingRecordId": "election-mayor-1982",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。延岡市立図書館の電子図書館サービス『のべおか電子図書館』（web.d-library.jp/nobeoka/g0101/top/）を新規に確認したが、商業電子書籍・電子雑誌の貸出サービスであり、延岡市史・郷土資料・選挙関連資料のデジタル化収録は確認できなかった（負の知見）。"
+    },
+    {
+      "year": 1986,
+      "existingRecordId": "election-mayor-1986",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。早生隆彦氏第3期。ADEAC『別編 年表』（2000年刊、原始・古代〜現代を網羅、政治・経済・社会区分で全国事項と県内事項を対照する構成）が本選挙の時期をカバーする可能性が高いことを確認したが、県内事項が県レベルか市町村レベルまで含むかは目次記述からは判別できず、本文はJavaScript経由でのみ閲覧可能なため未確認。"
+    },
+    {
+      "year": 1990,
+      "existingRecordId": "election-mayor-1990",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。早生隆彦氏第4期。CiNii Research全文横断検索（cir.nii.ac.jp）で『延岡市長』を検索した結果、唯一ヒットした論文は2017年発行『川とわがまち 市町村長リレーインタビュー（河川73巻3号）』で首藤正治市長（2006年以降在任）へのインタビュー記事であり、1990年当時の選挙とは無関係（対象外）であることを確認した。"
+    },
+    {
+      "year": 1994,
+      "existingRecordId": "election-mayor-1994",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。桜井哲雄氏第1期。ADEAC『通史編 近・現代2』（2000年5月刊）は目次レベルで確認できた最終章が第9章『講和から高度成長へ』（戦後〜高度成長期の県政）であり、高度成長期は一般に1950年代後半〜1973年頃までを指すため、1994年（バブル崩壊後）はこの通史編の対象範囲外である可能性が高いと判断した（負の知見として記録）。"
+    },
+    {
+      "year": 1998,
+      "existingRecordId": "election-mayor-1998",
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "新規情報なし。桜井哲雄氏第2期。同様に通史編の対象範囲外の可能性が高い。ただし『別編 年表』（2000年刊、現代まで網羅）であれば1998年時点の記載が期待できるため、県内事項に市町村長選挙の記載が含まれるかどうかがLane Aでの確認ポイントとなる。"
+    }
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "high",
+      "purpose": "1971・1975・1978・1982年（房野博・早生隆彦各氏）の延岡市長選挙について、ADEAC全文検索（JavaScript対応ブラウザ操作が必須）で得票数・投票率・対立候補等の記載を探す。Phase9で発見されたADEAC調査対象を、具体的な章タイトル・巻構成の特定によりさらに絞り込んだもの。",
+      "title": "デジタル宮崎県史（ADEAC／宮崎県立図書館） 通史編 近・現代2 第9章『講和から高度成長へ』",
+      "bibliographicId": "adeac.jp/miyazaki-pref-lib/text-list/d100070/ht000070（巻トップ）／目録ページ ct00000007／2000年5月刊",
+      "page": "第9章『講和から高度成長へ』（戦後県政と地域開発政策の展開）付近。検索フォームは https://adeac.jp/miyazaki-pref-lib/detailed-search （ASP.NET WebForms、__doPostBack方式、GETパラメータでの静的検索不可）。候補キーワード：延岡市長選挙、房野博、早生隆彦、延岡市",
+      "relatedElection": 1971,
+      "discoveredByLane": "C",
+      "notes": "県政（知事・県議会）レベルの記述が中心の章であり、市町村長選挙が個別に扱われている保証はないが、Phase9時点より対象章を具体的に絞り込めた点で優先度を medium から high に引き上げた。"
+    },
+    {
+      "priority": "high",
+      "purpose": "1971〜1998年の延岡市長選挙全8件について、県史年表の『政治・経済・社会』区分・県内事項欄に市町村長選挙の当選事実や得票数の短報が掲載されていないか確認する。",
+      "title": "デジタル宮崎県史（ADEAC／宮崎県立図書館） 別編 年表",
+      "bibliographicId": "adeac.jp/miyazaki-pref-lib/text-list/d100110/ht000110（巻トップ）／目録ページ ct00000011（推定）／2000年刊",
+      "page": "近世以降パート、政治・経済・社会区分、県内事項欄。1971・1975・1978・1982・1986・1990・1994・1998年の各年項目。検索フォームは通史編と同一（ASP.NET WebForms、ブラウザ操作必須）。",
+      "relatedElection": 1971,
+      "discoveredByLane": "C",
+      "notes": "宮崎県公式サイトの巻概要（https://www.pref.miyazaki.lg.jp/somu/kanko/bunka/kenshi_02_02.html）により『原始・古代から現代まで』を網羅し、全国事項と県内事項を対照する年表形式であることを確認した。全8選挙年を一括で確認できる可能性がある点で、通史編より効率的な調査対象になり得る。ただし『県内事項』が県レベルのみか市町村レベルまで含むかは未確認。"
+    }
+  ],
+  "summary": {
+    "electionsResearched": 8,
+    "newVoteCountsConfirmed": 0,
+    "newTurnoutConfirmed": 0,
+    "queueItemsAdded": 2,
+    "methodologyNote": "Phase 8・Phase 9 Lane Cとは異なる情報源（ADEACの構造詳細調査（巻構成・目次・検索フォーム方式の特定）、国立公文書館デジタルアーカイブ、CiNii Research全文検索、宮崎県立図書館OPAC案内ページ、のべおか電子図書館、政治山（seijiyama.jp）、宮崎県公式サイトの県史各巻概要ページ、宮崎県立図書館の2025年3月報道発表）を試したが、1971〜1998年の8選挙いずれについても、候補者一覧・得票数・投票率・有権者数・無効票数・無投票有無のいずれも新規に一次資料で確認することはできなかった。主要な新知見は次の4点。(1) ADEACの詳細検索フォームはASP.NET WebFormsの__doPostBack方式であり、GETクエリパラメータでの静的URL検索は構造的に不可能であることを技術的に確定した（Phase9では未検証実施の推測だったが今回で確定）。(2) ADEACには延岡市独自のアーカイブ（他の一部自治体が持つような）は存在せず、延岡市関連資料は宮崎県立図書館の『デジタル宮崎県史』経由でのみアクセス可能である。(3) 『通史編 近・現代2』は目次レベルで確認する限り県政（知事・県議会）中心の記述で、対象時代も高度成長期まで（1994・1998年は対象外の可能性が高い）だが、『別編 年表』は現代（2000年刊行時点）まで、かつ全8選挙年をカバーする形式のため、Lane Aでの優先調査対象として最も有望と判断した。(4) 国立公文書館デジタルアーカイブ・CiNii Research（学術論文）・のべおか電子図書館・政治山（政治山は2014年以降のみ）は、いずれも延岡市長選挙（1971〜1998年）に関する情報を含んでおらず、今後の調査対象としての優先度は低いと判断した。次のLane（ブラウザ操作可能なLane A）には、ADEAC『別編 年表』（全8選挙年を一括確認できる可能性）を最優先の調査対象として引き継ぐことを推奨する。"
+  }
+}
