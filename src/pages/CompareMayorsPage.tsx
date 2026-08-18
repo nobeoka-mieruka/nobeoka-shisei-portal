@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
+import electionResultsData from "../data/electionResults.json";
 import type { ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
+import type { ElectionResult } from "../types/election";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
 import { JsonLd } from "../components/JsonLd";
@@ -18,11 +20,18 @@ import { formatJapaneseDate } from "../config/site";
 import { archiveVerificationStatusLabel, isActingMayorTerm, mayorTermCountLabel, termsForMayor } from "../lib/archiveMayors";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
 import { buildPersonIndex, mayorSubmittedBillCount, policiesForPerson } from "../lib/people";
+import { civicTimelineEventsForPerson } from "../lib/civicTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
+const electionResults = electionResultsData as ElectionResult[];
 const mayorIds = archiveMayors.map((m) => m.id);
 const personIndex = buildPersonIndex();
+
+/** この人物が当選人として確認できた選挙の件数（electionResults.json、linkedProfileIdで確認できたもののみ）。 */
+function electionWinCount(mayorId: string): number {
+  return electionResults.filter((e) => e.candidates.some((c) => c.linkedProfileId === mayorId && c.elected)).length;
+}
 
 /** 全任期が職務代理（acting/temporaryActing）のみの人物か。公選の市長と混同しないよう表記を分けるために使う。 */
 function isActingOnlyMayor(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): boolean {
@@ -45,10 +54,12 @@ function tenureYearsOrNull(mayor: ArchiveMayor): number | null {
   return person.tenureYears.length;
 }
 
-type CountMetricKey = "tenureYears" | "policyCount" | "documentCount";
+type CountMetricKey = "tenureYears" | "policyCount" | "documentCount" | "electionWinCount" | "civicEventCount";
 
 const countMetrics: { key: CountMetricKey; label: string; unit: string }[] = [
   { key: "tenureYears", label: "在籍年数（概算）", unit: "年" },
+  { key: "electionWinCount", label: "市長就任回数（選挙・選任、確認できた分）", unit: "回" },
+  { key: "civicEventCount", label: "在任中の市政イベント件数", unit: "件" },
   { key: "policyCount", label: "関連政策件数", unit: "件" },
   { key: "documentCount", label: "関連議案・条例・請願・陳情件数", unit: "件" },
 ];
@@ -59,6 +70,10 @@ function countMetricValue(mayor: ArchiveMayor, key: CountMetricKey): number | nu
       return tenureYearsOrNull(mayor);
     case "policyCount":
       return policiesForPerson("mayor", mayor.id).length;
+    case "electionWinCount":
+      return electionWinCount(mayor.id);
+    case "civicEventCount":
+      return civicTimelineEventsForPerson(mayor.id).length;
     case "documentCount": {
       const { count, hasDataCoverage } = mayorSubmittedBillCount(mayor.id);
       return hasDataCoverage ? count : null;
@@ -143,6 +158,19 @@ export function CompareMayorsPage() {
                   render: (m) => {
                     const v = tenureYearsOrNull(m);
                     return v != null ? `約${v}年` : "確認中";
+                  },
+                },
+                {
+                  header: "市長就任回数（選挙・選任）",
+                  align: "right",
+                  render: (m) => `${electionWinCount(m.id)}回`,
+                },
+                {
+                  header: "在任中の市政イベント件数",
+                  align: "right",
+                  render: (m) => {
+                    const n = civicTimelineEventsForPerson(m.id).length;
+                    return n > 0 ? `${n}件` : "0件（未収集の可能性があります）";
                   },
                 },
                 {

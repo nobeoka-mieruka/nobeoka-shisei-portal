@@ -4,7 +4,11 @@ import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
+import electionResultsData from "../data/electionResults.json";
+import nobeokaCensusPopulationData from "../data/nobeokaCensusPopulation.json";
 import type { ArchiveMayor, ArchiveMayorTerm, ArchivePolicy, ArchiveCouncilDocument, ArchiveFiscalYear } from "../types/historicalArchive";
+import type { ElectionResult } from "../types/election";
+import type { NobeokaCensusPopulationData } from "../types";
 import { documentPath, documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -26,6 +30,14 @@ const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
+const electionResults = electionResultsData as ElectionResult[];
+const nobeokaCensusPopulation = nobeokaCensusPopulationData as NobeokaCensusPopulationData;
+
+/** 指定した任期に最も近い（開始日以前で最も近い）国勢調査人口を返す。将来の日付は対象外。 */
+function nearestCensusPopulationBefore(dateIso: string) {
+  const candidates = nobeokaCensusPopulation.series.filter((p) => p.referenceDate <= dateIso);
+  return candidates.at(-1) ?? null;
+}
 
 // TASK-081：詳細アーカイブ（archiveCouncilDocuments.json）自体の収集範囲（年度）。
 // 「この市長の在任期間が収集範囲外だから0件」なのか「収集範囲内だが確認できた分が
@@ -80,6 +92,16 @@ export function MayorDetailPage() {
   const relatedFiscalYears = archiveFiscalYears
     .filter((f) => f.mayorId === mayor.id)
     .sort((a, b) => a.fiscalYear - b.fiscalYear);
+
+  // この市長が当選した選挙（electionResults.json、候補者にlinkedProfileIdで確認できたもののみ）。
+  const relatedElections = electionResults.filter((e) => e.candidates.some((c) => c.linkedProfileId === mayor.id));
+
+  // 在任期間の始まり・終わりに最も近い国勢調査人口（延岡市統計書、現在の市域に組み替えた数値）。
+  // 任期の途中の増減を市長個人の成果・責任として示すものではない。
+  const firstTermStart = terms[0]?.termStart;
+  const lastTermEnd = terms.length > 0 ? terms[terms.length - 1].termEnd : undefined;
+  const censusNearStart = firstTermStart ? nearestCensusPopulationBefore(firstTermStart) : null;
+  const censusNearEnd = lastTermEnd ? nearestCensusPopulationBefore(lastTermEnd) : null;
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -136,6 +158,62 @@ export function MayorDetailPage() {
             </Link>
           )}
         </div>
+      </section>
+
+      <section className="rounded-xl bg-primary-container/40 p-4 shadow-e1 sm:p-5">
+        <h2 className="text-base font-semibold text-on-surface">この市長の時代の延岡</h2>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          人口・出来事は在任期間との時期的な重なりを示すものであり、この市長の成果・責任を意味するものではありません（「在任中」という表現に統一しています）。
+        </p>
+        <dl className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="rounded-lg border border-outline-variant p-3">
+            <dt className="text-xs font-medium text-on-surface-variant">選挙</dt>
+            <dd className="mt-1 text-sm text-on-surface">
+              {relatedElections.length === 0
+                ? mayor.isCurrentMayor || terms.some((t) => isActingMayorTerm(t))
+                  ? "確認中"
+                  : "確認できた選挙結果なし（未収集の可能性があります）"
+                : relatedElections
+                    .map((e) => {
+                      const own = e.candidates.find((c) => c.linkedProfileId === mayor.id);
+                      const unopposed = e.candidateCount === 1;
+                      return `${e.electionDate.slice(0, 4)}年：${unopposed ? "無投票当選" : own?.votes != null ? `${own.votes.toLocaleString("ja-JP")}票で当選` : "当選（得票数は確認中）"}`;
+                    })
+                    .join("／")}
+            </dd>
+          </div>
+          <div className="rounded-lg border border-outline-variant p-3">
+            <dt className="text-xs font-medium text-on-surface-variant">人口（国勢調査、現在の市域に組み替え）</dt>
+            <dd className="mt-1 text-sm text-on-surface">
+              {censusNearStart ? (
+                <>
+                  就任時期に近い調査（{censusNearStart.eraLabel}）：{censusNearStart.reconstructedCurrentBoundaryPopulation.toLocaleString("ja-JP")}人
+                  {censusNearEnd && censusNearEnd.referenceDate !== censusNearStart.referenceDate && (
+                    <>
+                      <br />
+                      退任時期に近い調査（{censusNearEnd.eraLabel}）：{censusNearEnd.reconstructedCurrentBoundaryPopulation.toLocaleString("ja-JP")}人
+                    </>
+                  )}
+                </>
+              ) : (
+                "確認中（国勢調査は5年ごとのため、在任期間中に調査年が含まれない場合があります）"
+              )}
+            </dd>
+          </div>
+          <div className="rounded-lg border border-outline-variant p-3">
+            <dt className="text-xs font-medium text-on-surface-variant">在任中の主な出来事</dt>
+            <dd className="mt-1 text-sm text-on-surface">{relatedEvents.length > 0 ? `${relatedEvents.length}件確認` : "確認できた出来事なし（未収集の可能性があります）"}</dd>
+          </div>
+          <div className="rounded-lg border border-outline-variant p-3">
+            <dt className="text-xs font-medium text-on-surface-variant">財政データ</dt>
+            <dd className="mt-1 text-sm text-on-surface">
+              {relatedFiscalYears.length > 0 ? `${relatedFiscalYears[0].fiscalYear}〜${relatedFiscalYears[relatedFiscalYears.length - 1].fiscalYear}年度分を確認可能` : "対応年度なし（財政データはFY2001年度以降のみ収録）"}
+            </dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs text-on-surface-variant">
+          一次資料件数：{mayor.sourceRefs.filter((r) => r.sourceOrganization !== "Wikipedia").length}件（Wikipedia等の二次資料を除く）
+        </p>
       </section>
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
