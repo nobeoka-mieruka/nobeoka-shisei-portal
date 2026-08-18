@@ -510,6 +510,63 @@
       "sourceType": "primary",
       "lastCheckedAt": "2026-08-17",
       "notes": "TASK-104（並行調査）。NDLサーチ書誌検索「廣報のべおか」（ログイン不要、23件）で、延岡市発行の合本（1年分をまとめた紙媒体、いずれも国立国会図書館所蔵・デジタル化なし）を確認した。NDL所蔵の最古は昭和62年〜平成元年分（1987年）。全文検索ヒット（国民健康保険43(12)、宮崎県企画調整部「昭和51年の水難事故防止対策」）から、広報「のべおか」自体は昭和51年（1976年）6月時点で既に発行されていたことが間接的に確認できたが、この時期の号がNDLに個別所蔵されているかは未確認（合本の収録範囲外の可能性）。既存src/data/kohoNobeokaIssues.jsonは延岡市公式サイト配信のPDF版が中心と見られ、本ledgerはNDL所蔵の紙媒体合本という別経路の記録として整理した。デジタル化されていないため、内容確認には来館が必要。"
+    },
+    {
+      "id": "ndl-src-19",
+      "title": "全国歴代知事・市長総覧",
+      "author": "日外アソシエーツ株式会社編集",
+      "publisher": "日外アソシエーツ",
+      "publicationYear": 2022,
+      "sourceType": "book",
+      "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%85%A8%E5%9B%BD%E6%AD%B4%E4%BB%A3%E7%9F%A5%E4%BA%8B%E3%83%BB%E5%B8%82%E9%95%B7%E7%B7%8F%E8%A6%A7",
+      "ndlBibId": null,
+      "accessStatus": "metadata_only",
+      "status": "metadata_only",
+      "checkedAt": "2026-08-18",
+      "relatedMayorIds": [
+        "mayor-02"
+      ],
+      "evidenceType": "biographical_directory",
+      "confidence": "B",
+      "notes": "首藤正治のWikipedia記事が生年月日等の出典として明記する書籍（433頁に記載）。NDLサーチで書誌情報（国立国会図書館・全国の図書館所蔵、請求記号A112-M203、紙媒体のみ）を確認したが、2022年発行のためデジタルコレクション非収録・個人送信サービス対象外であり、本文（掲載頁の実際の記述）はこの調査では直接確認できていない。書誌の実在確認にとどまる。"
+    },
+    {
+      "id": "ndl-src-20",
+      "title": "首藤正治 - 大正大学地域構想研究所（研究員プロフィール）",
+      "author": "大正大学地域構想研究所",
+      "publisher": "大正大学",
+      "publicationYear": null,
+      "sourceType": "website",
+      "url": "https://chikouken.org/researcher/9315/",
+      "ndlBibId": null,
+      "accessStatus": "readable",
+      "status": "reviewed",
+      "checkedAt": "2026-08-18",
+      "relatedMayorIds": [
+        "mayor-02"
+      ],
+      "evidenceType": "institutional_profile",
+      "confidence": "B",
+      "notes": "首藤正治の現所属機関（大正大学地域構想研究所）が公式に公表しているプロフィールページ。生年（1956年）・出身地（宮崎県延岡市）・学歴（1979年京都大学工学部物理工学科卒業）・職歴（小西六写真工業、株式会社スドー専務取締役→代表取締役社長）・延岡市長在任（第24〜26代、2006/2010/2014年）を記載。Wikipediaとは独立した情報源であり、内容が一致することを確認した（findings参照）。国立国会図書館の資料ではないが、本人所属機関の公式発表という点で信頼性が高いため準一次資料として台帳に登録する。"
+    },
+    {
+      "id": "ndl-src-21",
+      "title": "早生隆彦執筆記事群（『道路建設』167号1961-11、『国土』11(4)1962-03、『高速道路と自動車』7(6)1964-06、『開発往来』18(6)(188)1974-06）",
+      "author": "早生隆彦",
+      "publisher": "日本道路建設業協会／国土計画協会／高速道路調査会／開発行政懇話会",
+      "publicationYear": 1961,
+      "sourceType": "journal_article_index",
+      "url": "https://dl.ndl.go.jp/search/searchResult?keyword=%E6%97%A9%E7%94%9F%E9%9A%86%E5%BD%A6",
+      "ndlBibId": null,
+      "accessStatus": "readable",
+      "status": "reviewed",
+      "checkedAt": "2026-08-18",
+      "relatedMayorIds": [
+        "mayor-12"
+      ],
+      "evidenceType": "career_history_primary",
+      "confidence": "A",
+      "notes": "早生隆彦（第17-20代延岡市長）が延岡市長就任(1978年)以前、1960-70年代に日本道路公団総裁室企画課に勤務し、インド・タイ等での業務に従事していたことを示す本人執筆記事群。「道路建設」167号(1961-11)47コマの目次に「日本道路公団総裁室企画課勤務早生隆彦氏は」との記述があり、他の複数誌（国土、高速道路と自動車、開発往来）にも寄稿していることを確認した。Wikipedia等に存在した「元日本道路公団」との未確認記述を、独立の一次資料（当時の業界誌）で裏付けた。生年月日・出身地はこれらの記事からは確認できていない。"
     }
   ],
   "summary": {

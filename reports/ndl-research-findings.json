@@ -474,6 +474,75 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-18",
       "nextAction": "なし（当該日付は確定扱いとする）。"
+    },
+    {
+      "id": "finding-016",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-20",
+      "title": "首藤正治（第24〜26代）大正大学地域構想研究所プロフィール",
+      "publicationYear": null,
+      "publisher": "大正大学",
+      "ndlBibUrl": null,
+      "bodyUrl": "https://chikouken.org/researcher/9315/",
+      "komaNumber": null,
+      "pageNumber": null,
+      "searchKeyword": "首藤正治",
+      "relevantMayor": [
+        "mayor-02"
+      ],
+      "relevantYears": [
+        1956,
+        1979,
+        1983,
+        1993,
+        2006,
+        2010,
+        2014,
+        2018
+      ],
+      "extractedFact": "首藤正治の生年（1956年）・出身地（宮崎県延岡市）・学歴（1979年京都大学工学部物理工学科卒業）・職歴（小西六写真工業→株式会社スドー専務取締役→代表取締役社長）・延岡市長在任（第24代2006年、第25代2010年、第26代2014年）を確認。",
+      "originalText": "1956年 宮崎県延岡市生まれ／1979年 京都大学工学部物理工学科卒業／1979年 小西六写真工業(現コニカミノルタ)入社 開発研究所配属／1983年 株式会社スドー専務取締役／1993年 同社代表取締役社長／2006年 同社退社／2006年 第24代延岡市長／2010年 第25代延岡市長／2014年 第26代延岡市長",
+      "interpretation": "Wikipedia記事（既存sourceRef、出典は全国歴代知事・市長総覧2022年）とは独立した情報源。生年・出身地・学歴・職歴・市長在任年・ordinal番号のすべてが一致した。生年月日の月日（1月2日）はこの資料単独では確認できないが、年単位以上での独立確認によりconfidence Aとする。ordinal24-26のconfidenceをB→Aへ格上げ。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "Wikipedia（首藤正治）",
+        "延岡市公式ホームページ 近代の年表(1991-2010年)"
+      ],
+      "accessType": "public_web",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "生年月日の月日（1月2日）を裏付ける独立資料、および前職以前の詳細経歴・在任中の主要政策は、市議会会議録（kensakusystem.jp/nobeoka）や広報のべおかで追加確認の余地がある。"
+    },
+    {
+      "id": "finding-017",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-21",
+      "title": "早生隆彦（17-20代）の市長就任前経歴（日本道路公団）",
+      "publicationYear": 1961,
+      "publisher": "日本道路建設業協会ほか",
+      "ndlBibUrl": null,
+      "bodyUrl": "https://dl.ndl.go.jp/search/searchResult?keyword=%E6%97%A9%E7%94%9F%E9%9A%86%E5%BD%A6",
+      "komaNumber": 47,
+      "pageNumber": null,
+      "searchKeyword": "早生隆彦",
+      "relevantMayor": [
+        "mayor-12"
+      ],
+      "relevantYears": [
+        1961,
+        1962,
+        1964,
+        1974
+      ],
+      "extractedFact": "早生隆彦は1961年時点で日本道路公団総裁室企画課に勤務し、インド出張していた。1962年『国土』誌に「観光道路について」、1964年・1974年に「バンコック便り」を寄稿しており、1960-70年代に道路行政・海外業務に携わっていたことが分かる。",
+      "originalText": "早生隆彦氏の「インド」だより(第1信)　日本道路公団総裁室企画課勤務早生隆彦氏は，インド，ウエス（ト・パキスタン）…",
+      "interpretation": "Wikipedia等に存在した「元日本道路公団」との未確認記述を、独立の一次資料（1961年当時の業界誌『道路建設』の目次記述）で初めて裏付けた。1978年の市長就任までの直接的な経緯（退職時期・延岡との接点等）は不明のまま。生年月日・出身地はこれらの記事からは確認できなかった。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "生年月日・出身地・延岡との接点（なぜ延岡市長選に出馬したか）は、延岡市議会会議録（1978年以降）や当時の広報のべおか（1978年、本サイトのkohoNobeokaIssues.jsonは2010年以降のみ収録のため対象外）で追加調査が必要。宮崎県立図書館所蔵の郷土資料・新聞縮刷版へのアクセスも将来的な選択肢。"
     }
   ],
   "disputedFacts": [
