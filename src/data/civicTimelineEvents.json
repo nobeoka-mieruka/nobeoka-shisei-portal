@@ -2966,5 +2966,67 @@
     "lastVerifiedAt": "2026-08-17",
     "verificationStatus": "verified",
     "notes": "TASK-045再開（NDLサーチ個人送信サービス）で新規発見。地方自治法（1947年4月17日公布・施行）による全国的な首長公選制導入と時期が一致するが、延岡市固有の記述として一次資料（延岡市史）で直接確認した。歴代市長一覧表の自・至年月日そのものは解像度の都合で確実に判読できず、今回は登録を見送った。 【2026-08-18追記】NDL『日本の歴代市長第3巻』佐藤千吉郎個人略歴に「七三四票で首位得票者となり…同（4月）十五日初の公選市長が誕生した」との記述があり、日付を1947年4月15日まで特定できた（findings-014）。得票数734票も本人主導の直接的事実として確認。"
+  },
+  {
+    "id": "civic-151",
+    "year": 1956,
+    "dateLabel": "1956年4月（日不明、就任日disputed）",
+    "category": "行政組織",
+    "title": "延岡市長選挙で青木善祐氏が初当選（県内初の社会党系市長）",
+    "summary": "青木善祐が23,264票を獲得し、19,528票の仲田又次郎（元市長）ほかを破って第11代延岡市長に初当選した。宮崎県内で初めての日本社会党系市長だった。",
+    "relatedPersonIds": [
+      "mayor-09",
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
+        "url": "https://dl.ndl.go.jp/pid/11917124/1/175"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-18",
+    "verificationStatus": "partiallyVerified",
+    "notes": "TASK-045で新規発見（finding-018）。得票数は独立の一次資料で確認したが、投票日そのもの（就任日disputed、reports/ndl-research-findings.json disputed-001参照）は依然未確定のため、日付欄は「日不明」とし、就任日そのものの確定は行わない。ページ内の他話題と隣接する組版のため句読点の対応はneedsReview。"
+  },
+  {
+    "id": "civic-152",
+    "year": 1967,
+    "dateLabel": "1967年1月23日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で房野博氏が無投票当選",
+    "summary": "房野博が対立候補なしの無投票で第14代延岡市長に当選した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
+        "url": "https://dl.ndl.go.jp/pid/11917124/1/410"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-18",
+    "verificationStatus": "verified",
+    "notes": "TASK-045で新規発見（finding-019）。「第14代市長房野博延岡市長選挙に当選（1.23）（無投票当選）」の記述を独立の一次資料で確認。既存archiveMayorTerms.json（mayor-11-term-01.termStart=1967-01-22）とは1日差だが、投票日相当日と就任日は別概念であり矛盾ではない。"
+  },
+  {
+    "id": "civic-153",
+    "year": 1960,
+    "dateLabel": "1960年4月",
+    "category": "行政組織",
+    "title": "延岡市長選挙で折小野良一氏が現職の青木善祐氏を破り初当選",
+    "summary": "折小野良一が第12代延岡市長に初当選した。",
+    "relatedPersonIds": [
+      "mayor-10",
+      "mayor-09"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
+        "url": "https://dl.ndl.go.jp/pid/11917124/1/408"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-18",
+    "verificationStatus": "verified",
+    "notes": "TASK-045で新規発見。「延岡市長選挙　折小野良一当選（第12代）」（4月）の記述を独立の一次資料で確認、既存archiveMayorTerms.json（mayor-10-term-01.termStart=1960-04-19）と月単位で一致。得票数・対立候補（青木善祐氏を破ったとするWikipedia由来の既存記述）はこの資料からは確認できず。"
   }
 ]
