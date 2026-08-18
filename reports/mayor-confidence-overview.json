@@ -1,0 +1,222 @@
+{
+  "generatedAt": "2026-08-18T00:00:00+09:00",
+  "method": "src/data/archiveMayors.json（birthDate・sourceRefsの出典organization/verificationStatus）、reports/mayor-primary-source-matrix.json（policies/majorProjects列）、reports/mayor-ordinal-crosscheck.json（confidence=Aの任期数）を機械的に組み合わせて判定した。",
+  "legend": {
+    "A": "一次資料確認済み：生年月日等の主要事実が、Wikipedia等の二次資料に頼らず、延岡市公式資料・NDL資料など独立した一次資料で確認されている。",
+    "B": "公的・準一次資料確認済み：就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日・経歴・政策等の一部がWikipedia等二次資料のみ、または未確認のまま残っている。",
+    "C": "要追加調査：生年月日を含む主要な経歴情報がほぼ未確認、または出典がWikipedia等二次資料に限られる。"
+  },
+  "caveat": "この評価はあくまで現時点（2026-08-18）で確認できた範囲に基づく機械的な目安であり、独自の採点・順位付けを意図したものではない。未確認項目は各人物のsourceRefs/notesを参照すること。就任退任日そのものは全員、延岡市公式サイトの年表という一次資料で年月単位以上の精度で既に確認済みである点に留意（このA/B/C評価は生年月日・経歴・政策情報の充実度を主眼とする）。",
+  "rows": [
+    {
+      "mayorId": "mayor-01",
+      "name": "三浦 久知",
+      "ordinals": 1,
+      "grade": "B",
+      "reason": "現職市長。就任日は延岡市公式資料で確認済み（ordinal29）。生年月日は現職者への配慮から本サイトでは意図的に非掲載（プライバシー方針）であり、『未確認』とは性質が異なる。",
+      "detail": {
+        "birthDateStatus": "missing",
+        "birthDate": null,
+        "policiesColumn": "□",
+        "majorProjectsColumn": "□",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 1
+      }
+    },
+    {
+      "mayorId": "mayor-02",
+      "name": "首藤 正治",
+      "ordinals": 3,
+      "grade": "C",
+      "reason": "生年月日を含む主要な経歴情報が未確認、またはほぼ情報がない。追加調査が必要。",
+      "detail": {
+        "birthDateStatus": "missing",
+        "birthDate": null,
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 0,
+        "ordinalTotal": 3
+      }
+    },
+    {
+      "mayorId": "mayor-03",
+      "name": "読谷山 洋司",
+      "ordinals": 2,
+      "grade": "A",
+      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1964-02-20",
+        "policiesColumn": "△",
+        "majorProjectsColumn": "△",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 2
+      }
+    },
+    {
+      "mayorId": "mayor-04",
+      "name": "仲田 又次郎",
+      "ordinals": 2,
+      "grade": "A",
+      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1893-07-25",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 2
+      }
+    },
+    {
+      "mayorId": "mayor-05",
+      "name": "鈴木 憲太郎",
+      "ordinals": 3,
+      "grade": "B",
+      "reason": "生年月日等は独立確認済みだが、政策・大型事業の記述が不足している。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1882-09-21",
+        "policiesColumn": "□",
+        "majorProjectsColumn": "□",
+        "ordinalConfidenceACount": 0,
+        "ordinalTotal": 3
+      }
+    },
+    {
+      "mayorId": "mayor-06",
+      "name": "大島 文彦",
+      "ordinals": 1,
+      "grade": "B",
+      "reason": "就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日等の詳細経歴が未確認、またはWikipedia等二次資料に依存している。",
+      "detail": {
+        "birthDateStatus": "official_only",
+        "birthDate": "1886-11-10",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "□",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 1
+      }
+    },
+    {
+      "mayorId": "mayor-07",
+      "name": "三浦 虎雄",
+      "ordinals": 3,
+      "grade": "A",
+      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1883-05-19",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 2,
+        "ordinalTotal": 3
+      }
+    },
+    {
+      "mayorId": "mayor-08",
+      "name": "佐藤 千吉郎",
+      "ordinals": 1,
+      "grade": "A",
+      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1885-08-01",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "□",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 1
+      }
+    },
+    {
+      "mayorId": "mayor-09",
+      "name": "青木 善祐",
+      "ordinals": 1,
+      "grade": "A",
+      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1892-11-01",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 0,
+        "ordinalTotal": 1
+      }
+    },
+    {
+      "mayorId": "mayor-10",
+      "name": "折小野 良一",
+      "ordinals": 2,
+      "grade": "A",
+      "reason": "生年月日等の主要事実が独立した一次資料（NDL等）で確認され、政策・経歴情報も一定程度整理されている。",
+      "detail": {
+        "birthDateStatus": "independent",
+        "birthDate": "1919-01-25",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 2
+      }
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "ordinals": 3,
+      "grade": "B",
+      "reason": "就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日等の詳細経歴が未確認、またはWikipedia等二次資料に依存している。",
+      "detail": {
+        "birthDateStatus": "missing",
+        "birthDate": null,
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 1,
+        "ordinalTotal": 3
+      }
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "ordinals": 4,
+      "grade": "C",
+      "reason": "生年月日を含む主要な経歴情報が未確認、またはほぼ情報がない。追加調査が必要。",
+      "detail": {
+        "birthDateStatus": "missing",
+        "birthDate": null,
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 0,
+        "ordinalTotal": 4
+      }
+    },
+    {
+      "mayorId": "mayor-13",
+      "name": "櫻井 哲雄",
+      "ordinals": 3,
+      "grade": "B",
+      "reason": "就任退任日は延岡市公式資料（一次資料）で確認済みだが、生年月日等の詳細経歴が未確認、またはWikipedia等二次資料に依存している。",
+      "detail": {
+        "birthDateStatus": "official_only",
+        "birthDate": "1935-08-07",
+        "policiesColumn": "○",
+        "majorProjectsColumn": "○",
+        "ordinalConfidenceACount": 0,
+        "ordinalTotal": 3
+      }
+    },
+    {
+      "mayorId": "mayor-14",
+      "name": "山本 一丸",
+      "ordinals": 1,
+      "grade": "B",
+      "reason": "職務代理者（公選市長ではない）。就任・終了の事実は延岡市公式資料で確認済みだが、詳細経歴は限定的。",
+      "detail": {
+        "birthDateStatus": "missing",
+        "birthDate": null,
+        "policiesColumn": "□",
+        "majorProjectsColumn": "□",
+        "ordinalConfidenceACount": 0,
+        "ordinalTotal": 0
+      }
+    }
+  ]
+}
