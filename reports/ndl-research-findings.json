@@ -443,6 +443,37 @@
       "accessType": "personal_transmission",
       "lastCheckedAt": "2026-08-18",
       "nextAction": "早稲田大学（カ）の学部・卒業有無、ふりがな、出身地、死没年、退任理由は依然未確認。機会があれば延岡市議会会議録・広報のべおか等で追加調査する。"
+    },
+    {
+      "id": "finding-015",
+      "taskId": "TASK-045",
+      "sourceId": "ndl-src-10",
+      "title": "日本の歴代市長第3巻（1985年）延岡市個人略歴 仲田又次郎（9代）",
+      "publicationYear": 1985,
+      "publisher": "歴代知事編纂会",
+      "ndlBibUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772",
+      "bodyUrl": "https://dl.ndl.go.jp/pid/11897508/1/360",
+      "komaNumber": 360,
+      "pageNumber": null,
+      "searchKeyword": "仲田又次郎",
+      "relevantMayor": [
+        "mayor-04"
+      ],
+      "relevantYears": [
+        1948,
+        1952
+      ],
+      "extractedFact": "仲田又次郎（9代）の任期＝昭和23年7月16日〜昭和27年6月19日（1948-07-16〜1952-06-19）。",
+      "originalText": "任期　昭和二十三年七月十六日〜（昭和）二十七年六月十九日",
+      "interpretation": "既存archiveMayorTerms（mayor-04-term-02）のtermStart(1948-07-16)・termEnd(1952-06-19)と月日単位で完全一致。独立資料（NDL）による確認のためconfidence Aへ昇格。",
+      "confidence": "A",
+      "verificationStatus": "verified",
+      "crossVerifiedSources": [
+        "延岡市公式ホームページ 近代の年表(1930-1950年)"
+      ],
+      "accessType": "personal_transmission",
+      "lastCheckedAt": "2026-08-18",
+      "nextAction": "なし（当該日付は確定扱いとする）。"
     }
   ],
   "disputedFacts": [

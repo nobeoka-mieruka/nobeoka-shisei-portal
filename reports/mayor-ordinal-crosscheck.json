@@ -158,11 +158,13 @@
         "candidateEndDate": "1952-06-19",
         "primarySourceEndDate": "1952-06-19",
         "matches": true,
-        "confidence": "B",
+        "confidence": "A",
         "sourceIds": [
-          "existing:city-official-chronology"
+          "existing:city-official-chronology",
+          "ndl-src-10"
         ],
-        "verificationStatus": "verified"
+        "verificationStatus": "verified",
+        "note": "termStart・termEnd双方がNDL『日本の歴代市長第3巻』（コマ360）の個人略歴と月日単位で完全一致。独立2資料一致によりconfidenceをAへ昇格。"
       },
       {
         "ordinal": 10,
