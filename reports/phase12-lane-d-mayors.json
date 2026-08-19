@@ -1,0 +1,253 @@
+{
+  "generatedAt": "2026-08-19T00:00:00+09:00",
+  "lane": "D",
+  "purpose": "Phase 12 Lane D: (1) 青木善祐（mayor-09）第11代延岡市長就任日disputed-001の再検証（選挙日/当選日/就任日/前市長退任日/任期開始日を別々に探索）、(2) 鈴木憲太郎（mayor-05）・房野博（mayor-11）・早生隆彦（mayor-12）の項目単位（生年月日/出身地/学歴/前職/経歴/就任日/退任日/選挙/死去年）での一次資料化。claude-in-chrome（ブラウザ自動化）は一切使用していない。src/data/archiveMayors.json・archiveMayorTerms.json、reports/mayor-confidence-overview.json、reports/ndl-historical-source-ledger.json、reports/ndl-research-findings.jsonの本体は編集していない（読み取りのみ）。npm run buildは実行していない。",
+  "priorWorkReviewed": [
+    "src/data/archiveMayors.json（mayor-05, mayor-09, mayor-11, mayor-12）",
+    "src/data/archiveMayorTerms.json（該当任期レコード）",
+    "reports/mayor-confidence-overview.json",
+    "reports/ndl-research-findings.json（disputedFacts disputed-001）",
+    "reports/phase10-lane-d-mayors.json",
+    "reports/phase11-lane-d-mayors.json"
+  ],
+  "method": {
+    "toolsUsed": ["WebFetch", "Bash(curl — Yahoo!検索HTML・Bing検索HTML・NDLサーチ・go2senkyo.com・poliele.blog.jp等への直接アクセス、node.jsでのHTMLパース)"],
+    "toolsNotUsed": ["claude-in-chrome（禁止指示に従い不使用）", "WebSearch（本セッション開始時点で既に200/200枠を使い切っており、最初の4回の呼び出しすべてがエラーで即座に不可と判明。以降は代替手段のみで調査した）"],
+    "newTechniqueDiscovered": "Phase10・11ではDuckDuckGo（ボット検知でブロック）・Mojeek（常時403）・Bing（curlでは200が返るがクエリを無視した汎用結果に固定される傾向を本レーンで新規確認）がいずれも実用的な代替検索経路にならなかった。本レーンでは代わりにYahoo!検索（search.yahoo.co.jp）へのBash curlアクセスが実クエリに対応した実際の検索結果（sw-Card__title要素）を返すことを新規に発見し、これを本レーンの主要な検索代替手段として利用した。ボット検知やCAPTCHAは本レーン実施中には発生しなかった。ただし過度な連続アクセスでブロックされる可能性があるため、他レーンが利用する場合はリクエスト間隔に留意すべきである。",
+    "pdfExtractionAttempt": "日外アソシエーツ社サイトの『全国歴代知事・市長総覧』サンプルPDF（https://www.nichigai.co.jp/uploads/pdf/ex2930-4.pdf）をWebFetchで取得しpdftotextで解析を試みたが、画像のみでテキストレイヤーが存在せず（pdftotext出力0行）、また本環境にはpdftoppm（PDF→画像変換）が未インストールのためRead toolでの視覚的な閲覧もできず、内容確認は断念した。"
+  },
+  "aokiZenyuDisputedInvestigation": {
+    "instructionCompliance": "候補A(1956-04-10)・候補Bを含め、推測による決着は行っていない。disputed状態を維持する。",
+    "categoriesInvestigatedSeparately": {
+      "electionVotingDate_選挙日投票日": {
+        "found": false,
+        "notes": "1956年（昭和31年）4月の延岡市長選挙の告示日・投票日を直接記載する一次資料は本レーンでも発見できなかった。延岡市公式サイトの選挙結果ページ（https://www.city.nobeoka.miyazaki.jp/soshiki/79/2721.html、Phase10で確認済み）・延岡市長選挙ページ（https://www.city.nobeoka.miyazaki.jp/life/3/25/203/、本レーンで新規確認）のいずれにも1956年の記録はなく、2022年以降の投票率・2025年以降の結果のみが掲載されていることを確認した。"
+      },
+      "winCertificationDate_当選日": {
+        "found": "partial（既存knowledge）",
+        "value": "既存reports/ndl-research-findings.json finding-018（延岡商工会議所四十年史、1975年）で得票数（青木善祐23,264票、仲田又次郎19,528票ほか）は既に新規確認済みだが、当選日そのものの日付記載はこの資料にない。本レーンではこれを上回る新資料は発見できなかった。"
+      },
+      "inaugurationDate_就任日": {
+        "status": "disputed（未解消・maintained）",
+        "candidateA": "1956-04-10（延岡市史1963年版、コマ103の歴代市長一覧表、confidence D＝判読曖昧）",
+        "candidateB": "1956-04-21（既存archiveMayorTerms.json値、Wikipedia由来）",
+        "newMetaFinding": "青木善祐Wikipedia記事本文の「4月21日に就任した」という一文に付された脚注[7]の内容を確認したところ、出典は『日本の歴代市長：市制施行百年の歩み 第3巻』コマ361（国立国会図書館デジタルコレクション）であることが判明した。これは既存archiveMayors.json mayor-09のsourceRefs（ndl-src-10、TASK-045再開時にPhase内メンバーがフル解像度ビューアで確認した資料）と全く同一のページであり、そのsourceRefsのnotesには『政策・実績の記述は確認できたが、就任日を明記する一文を安定して再現・確認できなかった』と明記されている。すなわち候補B（1956-04-21）の唯一の典拠は、当サイトの過去の調査で本文中の該当一文を直接確認できなかったのと同一資料であり、Wikipedia側がこの一文をどのように読み取ったかは検証できていない。これは新事実の確定ではなく、次回NDL資料を実閲覧できるレーンが優先的に再確認すべき箇所を『コマ361の「4月21日」に該当する具体的な一文の有無』に絞り込めたという、調査の効率化に資するメタ情報である。",
+        "alsoChecked": "Wikipedia脚注[6]（延岡市史コマ81）は『1956年当選』の事実、脚注[8]（延岡市史コマ82）は『1960年落選』の事実にそれぞれ対応しており、いずれも就任日（4月21日）の直接の典拠ではないことを確認した。既存ndl-src-02（延岡市史コマ103、歴代市長一覧表）とは異なるコマ（81・82）であり、延岡市史内に候補A（コマ103の表）とは別の、就任経緯を叙述した本文箇所（コマ81・82付近）が存在する可能性を新たに把握した。ただしdl.ndl.go.jpのJavaScript SPA制約により本レーンでは内容を直接確認できていない（閲覧候補としてsourceLedgerAdditions参照）。"
+      },
+      "previousMayorRetirementDate_前市長退任日": {
+        "person": "三浦虎雄（mayor-07、第10代）",
+        "found": false,
+        "notes": "日本語版Wikipedia「三浦虎雄」記事をWebFetchで確認したが、在任期間は『1952.7-1956.3』とのみ記載され、日単位の退任日は記載がなかった。記事の一般的な出典（衆議院要覧・人事興信録・政治家人名事典）にも延岡市長関連の個別脚注は付いていない。既存reports/mayor-confidence-overview.jsonでも三浦虎雄10代目の自至日付は『月日の数字は判読に自信が持てず未転記』（finding-006）とされており、本レーンでも前進はなかった。"
+      },
+      "legalTermStartDate_法的任期開始日": {
+        "found": false,
+        "notes": "地方自治法上の任期起算日（前任者の任期満了日の翌日、または選挙による場合は当選人が定まった日から起算するケースがある）を直接特定する一次資料（選挙管理委員会告示等）は本レーンでは発見できなかった。この概念と『就任日（実際の就任式・登庁日）』は理論上別物だが、延岡市の歴史的資料はいずれも『就任した』という表現にとどまり、両者を区別して記載する資料は見つかっていない。"
+      }
+    },
+    "searchAttemptsLog": [
+      "Yahoo!検索: 青木善祐 昭和31年4月10日",
+      "Yahoo!検索: 青木善祐 昭和31年4月21日",
+      "Yahoo!検索: 延岡市長選挙 昭和31年4月 投票日",
+      "Yahoo!検索: 延岡市長 三浦虎雄 退任 昭和31年",
+      "Yahoo!検索: 青木善祐 社会党 市長 当選",
+      "Yahoo!検索: 延岡市長選挙 1956年4月 当選",
+      "Yahoo!検索: 青木善祐 宮崎市長 延岡市長",
+      "Yahoo!検索: 延岡市 号外 市長選挙 昭和31年",
+      "Yahoo!検索: 延岡市史 1983年",
+      "Yahoo!検索: 宮崎日日新聞 1956年4月 延岡市長",
+      "Yahoo!検索: 延岡市 選挙管理委員会 昭和31年 市長選挙",
+      "WebFetch: 延岡市公式サイト『延岡市史(市政80周年記念10年史)』ページ・付属の延岡市年表PDF（スキャン画像PDFでOCRテキスト層なし、内容確認不可）",
+      "WebFetch: 延岡市公式サイト『延岡市長選挙』ページ（1956年の記録なし）",
+      "Bash curl: 帝国議会会議録検索システム（teikokugikai-i.ndl.go.jp）— JavaScript SPAでAPI推測も失敗（301/403）"
+    ],
+    "stopConditionApplied": "同一種類の資料（dl.ndl.go.jp系JavaScript SPA）への到達失敗が3回（延岡市年表PDFのOCR不可、dl.ndl.go.jp直接WebFetch、帝国議会会議録検索システム）に達し、かつ検索語のバリエーションも11パターンに達したため、指示の停止条件に従い本レーンでの深追いを終了した。",
+    "conclusion": "disputed状態を維持。archiveMayorTerms.jsonのtermStartは上書きしていない。次回の優先閲覧対象は『日本の歴代市長第3巻』コマ361の「四月二十一日」該当箇所の有無、および延岡市史コマ81-82（候補Aのコマ103とは別箇所）に絞り込めた。"
+  },
+  "mayorFieldFindings": [
+    {
+      "mayorId": "mayor-05",
+      "name": "鈴木 憲太郎",
+      "fieldsInvestigated": ["生年月日", "経歴（衆議院議員歴の詳細）", "死去年（既存確認済みのため対象外）"],
+      "searchTermsUsed": ["鈴木憲太郎 延岡", "鈴木憲太郎 衆議院議員 宮崎", "鈴木憲太郎 死去 昭和28年", "鈴木憲太郎 略歴 延岡市長", "鈴木憲太郎 宮崎県知事選挙 落選"],
+      "homonymCaution": "検索結果には『鈴木憲和』（現職衆議院議員）・『鈴木喜三郎』・『鈴木憲一』・『鈴木善幸』・『鈴木安蔵』・『鈴木憲久』など複数の同姓・類似名の人物がヒットしたが、いずれも生没年代・活動分野が明らかに異なるため、本レーンの新規知見（下記）には一切採用していない。",
+      "findings": [
+        {
+          "field": "経歴（衆議院議員としての当落履歴・所属政党）",
+          "newFinding": true,
+          "description": "go2senkyo.com（選挙ドットコム、本サイトが他の市長・選挙データで既に『verified』水準の出典として採用している独立の選挙データベース）で、宮崎区（旧中選挙区）の戦前衆議院議員選挙結果を第17回（1930年）から第20回（1937年）まで遡って確認したところ、鈴木憲太郎の当落履歴が下記の通り判明した。いずれも既存archiveMayors.jsonには一切記載のなかった新規情報である：\n・第17回（1930-02-20）：当選、12,802票、立憲民政党（同選挙で三浦虎雄＝mayor-07も同時当選しており、三浦虎雄の既存経歴『衆議院議員を5期務めた』と独立に整合）\n・第18回（1932-02-20）：落選、5,634票、立憲民政党、前職\n・第19回（1936-02-20）：落選、8,262票、立憲民政党（同選挙も三浦虎雄が当選しており独立に整合）\n・第20回（1937-04-30）：当選、12,669票、立憲民政党、元職（同選挙も三浦虎雄が当選）\n第20回（1937年4月30日）当選は、既存データの『1937年3月に市長就任、衆議院議員選挙立候補のため4月に退職』（延岡市公式年表）と時系列上完全に整合する（市長辞職→同年4月30日の総選挙に立候補・当選、という流れが独立資料で裏付けられた）。",
+          "sourceUrl": "https://go2senkyo.com/shugiin/17809/senkyoku/31692 （1937年）／ https://go2senkyo.com/shugiin/17810/senkyoku/31814 （1936年）／ https://go2senkyo.com/shugiin/17811/senkyoku/31936 （1932年）／ https://go2senkyo.com/shugiin/17812/senkyoku/32058 （1930年）",
+          "sourceOrganization": "選挙ドットコム（go2senkyo.com）",
+          "sourceType": "独立した選挙データ集成サイト（一次資料の選挙管理委員会告示そのものではないが、本サイトの既存データで同種のデータが繰り返しverified水準として採用されている）",
+          "confidence": "unconfirmed_but_crossValidated",
+          "confidenceNote": "検索結果・書誌情報のみではなく実際の得票数データだが、go2senkyo.com自体が一次資料ではないためconfirmed_primaryへの昇格はしない。ただし同一選挙区の同時代人物（三浦虎雄）の当落と独立に整合したこと、既存の市長辞職の時系列と整合したことから、単なる書誌確認以上の信頼性があると判断し、経歴（career）フィールドの新規知見として記録する。政党所属（立憲民政党）は既存データに一切なかった新情報。"
+        },
+        {
+          "field": "生年月日",
+          "newFinding": false,
+          "description": "本レーンでも独立資料での確認には至らなかった（既存Wikipedia由来の1882-09-21のまま）。国立印刷局『官報情報検索サービス』（ログイン必須）・NDLデジタルコレクション官報全文検索（JavaScript SPA）はPhase10・11で構造的制約が確定済みのため本レーンでは重複調査していない。"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "生年月日・没年月日周辺の官報記録には引き続き到達できていないが、衆議院議員としての当落履歴・所属政党（立憲民政党）という経歴フィールドの新規知見を独立データベースで得られた。"
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "fieldsInvestigated": ["生年月日", "選挙（各任期の投票日）", "termStart矛盾の解消", "死去年"],
+      "searchTermsUsed": ["房野博 延岡市長 死去", "房野博 延岡 叙勲", "延岡市長 房野博 生年月日", "房野博 大正7年 延岡", "延岡商工会議所四十年史 経由の既存finding-019との突合"],
+      "findings": [
+        {
+          "field": "生年月日（範囲への絞り込み）",
+          "newFinding": true,
+          "description": "poliele.blog.jp（政治データのブログ、運営者が『参考資料』ページで総務省・自治省・内務省・選挙管理委員会編『地方選挙結果調』、歴代知事編纂会『日本の歴代市長』等の公的資料集成を明記している選挙データ集成ブログ）に掲載されている延岡市長選挙結果一覧から、房野博の各当選時の年齢が下記の通り確認できた：\n・1967-01-22（無投票、第14代・新人）：年齢48\n・1971-01-17（当選、38,083票、第15代・現職）：年齢52\n・1975-01-19（当選、33,350票、第16代・現職）：年齢56\n3時点の年齢が4年ごとに正確に+4ずつ増加しており内部整合性が高い（改竄・誤記の可能性が低い）。満年齢の定義から逆算すると、房野博の生年月日は1918-01-23〜1919-01-17の範囲に絞り込める。既存データは生年月日が完全に未確認（Wikipedia個人記事も存在せず、confidence C）だったため、範囲への絞り込みは意味のある前進だが、正確な生年月日そのものではないため、本サイトのbirthDateフィールドへの登録は見送るべきである。",
+          "sourceUrl": "https://poliele.blog.jp/archives/35052443.html",
+          "sourceOrganization": "個人運営ブログ「政治データのブログ」（poliele.blog.jp、参考資料に総務省・自治省・内務省・選挙管理委員会『地方選挙結果調』等を明記）",
+          "sourceType": "非公式の個人ブログによる公的資料の再集成（一次資料そのものではない）",
+          "confidence": "unconfirmed",
+          "confidenceNote": "運営者不明の個人ブログであり、単独では確認済み事実として採用できない（指示の『書誌情報だけでconfirmed_primaryに昇格させない』原則を厳守）。ただし年齢の内部整合性・出典として明記された資料の性質（総務省等の公的統計）から、今後『地方選挙結果調』または『日本の歴代市長』該当箇所を直接確認できれば独立確認に格上げできる有望なリードとして記録する。"
+        },
+        {
+          "field": "選挙（各任期の投票日、termStartとの関係整理）",
+          "newFinding": true,
+          "description": "同ブログから、房野博の第15代（1971年）・第16代（1975年）就任に対応する投票日が判明した：\n・第15代：投票日1971-01-17、得票38,083票（既存archiveMayorTerms.json mayor-11-term-02のtermStartは1971-01-22、月精度）\n・第16代：投票日1975-01-19、得票33,350票（既存mayor-11-term-03のtermStartは1975-01-22、月精度）\nいずれも投票日がtermStart（就任日）より数日早く、これは投票日と就任日が別の事象であるという指示の観点から見て矛盾ではなく整合的なパターンである（房野博は現職として再選しているため、投票から数日後に新任期の就任式典を行ったと解釈できる）。既存データにelectionDateフィールドがなかった第15代・第16代について、新たな電候補値として記録する。",
+          "sourceUrl": "https://poliele.blog.jp/archives/35052443.html",
+          "confidence": "unconfirmed",
+          "confidenceNote": "同上の理由でconfirmed_primaryとはしない。electionDateフィールドの新規候補として次回検証を推奨。"
+        },
+        {
+          "field": "termStart矛盾（1967-01-22 vs 商工会議所四十年史の1967-01-23）の状況整理",
+          "newFinding": "partial",
+          "description": "第14代（1967年）については同ブログで『1967-01-22、無投票、新人、年齢48』と記載されており、これは既存archiveMayorTerms.jsonのtermStart（1967-01-22）と一致する一方、既存reports/mayor-confidence-overview.jsonが記録する延岡商工会議所四十年史の当選日（1967-01-23、finding-019）とは1日食い違う。したがって現時点で『1967-01-22』を支持する情報源（既存Wikipedia由来値＋本ブログ）が2件、『1967-01-23』を支持する情報源（商工会議所四十年史）が1件となり、多数決的にはやや1967-01-22側に傾く材料が増えたが、本ブログが個人運営で一次資料未確認であるため、これのみをもって矛盾を解消したとは判断しない。矛盾は依然unresolvedのまま維持する。",
+          "sourceUrl": "https://poliele.blog.jp/archives/35052443.html",
+          "confidence": "unconfirmed"
+        },
+        {
+          "field": "生年月日・死去年・出身地・学歴・前職",
+          "newFinding": false,
+          "description": "上記の年齢からの範囲絞り込み以外、正確な生年月日・死去年・出身地・学歴・前職について新規の一次資料または独立資料は本レーンでは発見できなかった。延岡市名誉市民ではないこと（Phase11で確認済み）・延岡市議会会議録検索システムが2000年8月以降のみ収録であること（Phase11で確認済み）は再確認していない（既に構造的制約として確定済みのため重複調査を避けた）。"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "生年月日そのものは依然未確認だが、独立データ集成（poliele.blog、年齢の内部整合性あり）により生年の絞り込み（1918-01-23〜1919-01-17）と、第15・16代の投票日候補が得られた。いずれも一次資料ではないため、次フェーズでの一次資料（地方選挙結果調・NDL歴代市長第3巻の該当個所）での裏付けを推奨する。"
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "fieldsInvestigated": ["生年月日", "選挙（各任期の投票日）", "出身地", "死去年"],
+      "searchTermsUsed": ["早生隆彦 延岡市長 死去", "早生隆彦 日本道路公団 略歴", "早生隆彦 大正10年 延岡"],
+      "findings": [
+        {
+          "field": "生年月日（範囲への絞り込み）",
+          "newFinding": true,
+          "description": "同じpoliele.blog.jpの延岡市長選挙結果一覧に、早生隆彦の全4期分の年齢が記載されていた：\n・1978-11-05（新人、第17代）：年齢56、41,044票\n・1982-10-24（現職、第18代）：年齢60、38,594票\n・1986-10-19（現職、第19代）：年齢64、33,426票\n・1990-10-21（現職、第20代）：年齢68、30,220票\n4時点とも4年ごとに正確に+4ずつ増加しており内部整合性が高い。満年齢の定義から逆算すると、早生隆彦の生年月日は1921-11-06〜1922-10-19の範囲に絞り込める。既存データは生年月日が完全に未確認（Wikipedia個人記事も存在せず、confidence C）だったため、範囲への絞り込みは意味のある前進。房野博と同様の理由で正確な生年月日としての登録は見送るべきである。",
+          "sourceUrl": "https://poliele.blog.jp/archives/35052443.html",
+          "sourceOrganization": "個人運営ブログ「政治データのブログ」（poliele.blog.jp、参考資料に総務省・自治省・内務省・選挙管理委員会『地方選挙結果調』等を明記）",
+          "confidence": "unconfirmed",
+          "confidenceNote": "房野博の項と同一理由でconfirmed_primaryとしない。今後の一次資料での裏付けが必要な有望なリードとして記録する。"
+        },
+        {
+          "field": "選挙（各任期の投票日）",
+          "newFinding": true,
+          "description": "早生隆彦の第17〜20代の投票日候補が判明した：第17代1978-11-05（既存termStartと同日）、第18代1982-10-24（既存termStart 1982-11-05の約12日前）、第19代1986-10-19（既存termStart 1986-11-05の約17日前）、第20代1990-10-21（既存termStart 1990-11-05の約15日前）。第17代のみ投票日とtermStartが完全一致しているが、これは既存termStartPrecisionが『month』とされ元々Wikipedia由来の日付である可能性が高いため、本ブログが同一の値を単に踏襲しているだけの可能性があり、独立確認とは見なさない。第18〜20代については投票日とtermStartの間に12〜17日の間隔があり、投票日と就任日が別事象であることと整合する新規のelectionDate候補として記録する。",
+          "sourceUrl": "https://poliele.blog.jp/archives/35052443.html",
+          "confidence": "unconfirmed"
+        },
+        {
+          "field": "出身地・死去年・学歴",
+          "newFinding": false,
+          "description": "本レーンでは新規の一次資料・独立資料を発見できなかった。Phase8で確認済みの『元日本道路公団（1961年時点で総裁室企画課勤務、インド・タイ等の海外業務歴）』を超える経歴情報は本レーンでは得られなかった（既に確認済みのため重複調査を避けた）。"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "生年月日そのものは依然未確認だが、独立データ集成（poliele.blog、年齢の内部整合性あり）により生年の絞り込み（1921-11-06〜1922-10-19）と、第18〜20代の投票日候補が得られた。"
+    }
+  ],
+  "sourceLedgerAdditions": {
+    "note": "reports/ndl-historical-source-ledger.jsonは編集していない（読み取り専用）。既存27件（ndl-src-01〜27）を確認し重複がないことを確認した上で、以下を追加候補として記録する。Phase11のsourceLedgerAdditions（ndl-src-27〜31として提案）は、その後別レーン（Phase11 Lane C）がndl-src-27を別内容で先に登録したため、そのままではID衝突する。本レーンでは衝突を避けるため独自の一時プレフィックス（phase12-src-）を用いる。最終的なID割当ては本体ledgerへのマージ担当者が行うこと。",
+    "candidates": [
+      {
+        "candidateId": "phase12-src-01",
+        "title": "衆議院議員選挙 宮崎区（第17回1930年・第18回1932年・第19回1936年・第20回1937年）",
+        "publisher": "選挙ドットコム（go2senkyo.com）",
+        "urls": [
+          "https://go2senkyo.com/shugiin/17809/senkyoku/31692",
+          "https://go2senkyo.com/shugiin/17810/senkyoku/31814",
+          "https://go2senkyo.com/shugiin/17811/senkyoku/31936",
+          "https://go2senkyo.com/shugiin/17812/senkyoku/32058"
+        ],
+        "relatedMayorIds": ["mayor-05", "mayor-07"],
+        "relatedYears": [1930, 1932, 1936, 1937],
+        "dataTypes": ["career", "election"],
+        "accessStatus": "public_accessible_via_curl",
+        "notes": "鈴木憲太郎（mayor-05）の衆議院議員当落履歴・所属政党（立憲民政党）を新規確認。三浦虎雄（mayor-07）の当選歴とも独立に整合。一次資料ではないため今後、衆議院事務局編『衆議院議員総選挙一覧』等での直接裏付けが望ましい。"
+      },
+      {
+        "candidateId": "phase12-src-02",
+        "title": "延岡市・市長選（宮崎県）- 政治データのブログ",
+        "author": "不明（個人運営、参考資料ページに総務省・自治省・内務省・選挙管理委員会『地方選挙結果調』、歴代知事編纂会『日本の歴代市長』等の公的資料集成を明記）",
+        "publisher": "poliele.blog.jp",
+        "ndlUrl": null,
+        "url": "https://poliele.blog.jp/archives/35052443.html",
+        "relatedMayorIds": ["mayor-08", "mayor-09", "mayor-11", "mayor-12"],
+        "relatedYears": [1947, 1956, 1967, 1971, 1975, 1978, 1982, 1986, 1990],
+        "dataTypes": ["election", "birthDateRange"],
+        "accessStatus": "public_accessible_via_curl",
+        "notes": "1947年以降の延岡市長選挙結果一覧（投票日・得票数・当選時年齢）を掲載。房野博・早生隆彦の生年月日範囲への絞り込み、および複数任期の投票日候補を得た。1937年以前の戦前選挙は非収録。個人ブログのため単独ではconfirmed_primaryとしない。参考資料ページ：https://poliele.blog.jp/archives/26290523.html"
+      }
+    ]
+  },
+  "rejectedOrDeadEndFindings": [
+    {
+      "attempt": "日外アソシエーツ『全国歴代知事・市長総覧』サンプルPDF（nichigai.co.jp）の内容確認",
+      "result": "画像のみのPDFでOCRテキスト層なし、pdftoppm未インストールのため視覚的確認も不可。内容未確認のため不採用。"
+    },
+    {
+      "attempt": "Bing検索（curl経由）",
+      "result": "実際のクエリ文字列は正しくサーバーに渡っていた（<title>で確認）が、返される検索結果が『AOKI（スーツ量販店）』等の無関係な汎用結果に固定される現象を複数回確認した。ボット判定により実クエリでのランキングが行われず、フォールバック的な人気結果が返っている可能性が高い。今後のレーンはBingのcurl経由アクセスに時間を割かないことを推奨する。"
+    },
+    {
+      "attempt": "DuckDuckGo（curl経由）",
+      "result": "Phase11と同様、初回リクエストからボット検知（anomaly.js）が発生し利用不可。"
+    },
+    {
+      "attempt": "帝国議会会議録検索システム（teikokugikai-i.ndl.go.jp）のAPI直接呼び出し推測",
+      "result": "トップページ自体がJavaScript SPAで、推測したAPIエンドポイント（/api/1.0/anken/getMeisai、/api/search）はいずれも301/403となり到達できなかった。"
+    },
+    {
+      "attempt": "次世代デジタルライブラリー（lab.ndl.go.jp/dl）のAPI直接呼び出し推測",
+      "result": "同じくJavaScript SPAで、複数の推測APIパスがいずれもSPAシェルのHTMLを返すのみで内容取得に失敗した。"
+    },
+    {
+      "attempt": "延岡市公式サイト『延岡市史(市政80周年記念10年史)』の延岡市年表PDF（uploaded/attachment/4392.pdf）",
+      "result": "取得はできたがpdftotextの出力がほぼ空白（フォントのToUnicode CMapが欠落した古いスキャンPDFと推定）で、1956年関連の記述の有無を確認できなかった。"
+    }
+  ],
+  "summary": {
+    "aokiZenyuDisputedStatus": "維持（未解消）。ただし就任日候補Bの典拠が具体的にコマ361のどの一文かという調査対象を絞り込めた（メタ情報として記録）。",
+    "fieldsNewlyConfirmed": 0,
+    "fieldsNewlyNarrowedOrLeadIdentified": 6,
+    "fieldsNewlyNarrowedOrLeadIdentifiedDetail": [
+      "鈴木憲太郎：衆議院議員当落履歴（1930当選・1932落選・1936落選・1937当選）と所属政党（立憲民政党）＝career項目、独立データベース(go2senkyo)によるクロスバリデーション済み",
+      "房野博：生年月日を1918-01-23〜1919-01-17の範囲に絞り込み（未確定、要一次資料確認）",
+      "房野博：第15代・第16代の投票日候補（1971-01-17、1975-01-19）",
+      "早生隆彦：生年月日を1921-11-06〜1922-10-19の範囲に絞り込み（未確定、要一次資料確認）",
+      "早生隆彦：第18〜20代の投票日候補（1982-10-24、1986-10-19、1990-10-21）",
+      "青木善祐：disputed-001の候補B典拠がNDL『日本の歴代市長第3巻』コマ361の特定の一文であることを明確化（未解消だが調査対象を絞り込み）"
+    ],
+    "gradeUpgradeCandidates": 0,
+    "gradeUpgradeCandidatesNote": "本レーンの新規知見はいずれも一次資料またはconfirmed_primary水準に達していないため（独立データベース・個人ブログ経由）、grade自動昇格の候補としては記録しない。次フェーズで一次資料（衆議院議員総選挙一覧、地方選挙結果調、NDL歴代市長第3巻の該当コマ）による直接裏付けが得られれば昇格候補となる。",
+    "personsResearched": ["mayor-09（disputed再検証）", "mayor-05", "mayor-11", "mayor-12"],
+    "stopConditionsApplied": [
+      "青木善祐：検索語バリエーション11パターン超・同種資料（dl.ndl.go.jp系SPA）閲覧失敗3回で終了",
+      "鈴木憲太郎：検索語バリエーション5パターンで終了（go2senkyoでの新規発見によりcareer項目は前進したが、生年月日は前進せず）",
+      "房野博：検索語バリエーション5パターン＋poliele.blogでの新規発見で終了",
+      "早生隆彦：検索語バリエーション3パターン＋poliele.blogでの新規発見で終了（新資料が既に見つかったため追加探索を打ち切り）"
+    ],
+    "recommendationsForNextLane": [
+      "NDL『日本の歴代市長第3巻』コマ361の実閲覧（ブラウザ自動化またはNDLログイン経由）で、青木善祐の就任日『4月21日』の一文が実在するか確認する。",
+      "延岡市史（1963年版）コマ81・82（歴代市長一覧表があるコマ103とは別箇所）の実閲覧で、青木善祐の就任・当選・落選に関する叙述の有無を確認する。",
+      "poliele.blog.jpが参考資料として明記する『地方選挙結果調』（総務省・自治省・内務省・選挙管理委員会編）または『日本の歴代市長』（歴代知事編纂会）の該当箇所をNDLで直接確認し、房野博・早生隆彦の生年月日絞り込み値・投票日候補を一次資料で裏付ける。",
+      "鈴木憲太郎の衆議院議員当落履歴（go2senkyo経由）を、衆議院事務局編『衆議院議員総選挙一覧』等の一次資料で裏付ける。"
+    ]
+  }
+}

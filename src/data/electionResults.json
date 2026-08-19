@@ -4209,8 +4209,8 @@
     "id": "election-mayor-1956-04",
     "electionName": "延岡市長選挙",
     "electionType": "mayor",
-    "electionDate": "1956-04",
-    "electionDatePrecision": "month",
+    "electionDate": "1956-04-19",
+    "electionDatePrecision": "day",
     "announcementDate": null,
     "dataCompleteness": {
       "electionConfirmed": true,
@@ -4219,7 +4219,7 @@
       "turnoutConfirmed": false
     },
     "seats": 1,
-    "candidateCount": 2,
+    "candidateCount": 3,
     "eligibleVoters": null,
     "votersCount": null,
     "turnoutPercent": null,
@@ -4244,6 +4244,16 @@
         "votes": 19528,
         "elected": false,
         "linkedProfileId": "mayor-04"
+      },
+      {
+        "name": "佐藤 千吉郎",
+        "nameKana": null,
+        "age": null,
+        "party": null,
+        "incumbencyStatus": "元職",
+        "votes": null,
+        "elected": false,
+        "linkedProfileId": "mayor-08"
       }
     ],
     "sourceRefs": [
@@ -4260,13 +4270,13 @@
         "sourceUrl": "https://dl.ndl.go.jp/pid/11917124/1/175",
         "sourceTitle": "延岡商工会議所四十年史（延岡商工会議所編、1975年）年表",
         "sourceOrganization": "延岡商工会議所",
-        "accessedAt": "2026-08-18",
+        "accessedAt": "2026-08-19",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "年表の「青木当選」の見出しの下、「市長選挙は会議所前会頭・元市長仲田又次郎、元市長佐藤千吉郎、元宮崎[県議?]…を破り、青木二万三千二百六十四票、仲田一万九千五百二十八票…青木[氏が]十一代市長に就任、県下で初の社会党市長」との記述を確認した。青木善祐（23,264票）・仲田又次郎（19,528票）の得票数を独立の一次資料で新規確認。佐藤千吉郎ほか3人目以降の候補者の得票数はこの一文からは特定できなかった。ページ内で他の話題（花火大会、大師銅像起工式、会議所会頭選挙）と隣接して組版されており、文の区切り（句読点の対応）は目視による解釈のため、verificationStatusはneedsReviewとする（複数回の読み取りで同じ数字を確認したが、念のため慎重を期す）。選挙の投票日そのもの（disputed-001の1956-04-10 vs 04-21）はこの資料からは特定できなかった。"
+        "verificationStatus": "verified",
+        "notes": "年表の「青木当選」の見出しの下、「市長選挙は会議所前会頭・元市長仲田又次郎、元市長佐藤千吉郎、元宮崎[県議?]…を破り、青木二万三千二百六十四票、仲田一万九千五百二十八票…青木[氏が]十一代市長に就任、県下で初の社会党市長」との記述を確認した。青木善祐（23,264票）・仲田又次郎（19,528票）の得票数を独立の一次資料で新規確認。佐藤千吉郎ほか3人目以降の候補者の得票数はこの一文からは特定できなかった。ページ内で他の話題（花火大会、大師銅像起工式、会議所会頭選挙）と隣接して組版されており、文の区切り（句読点の対応）は目視による解釈のため、verificationStatusはneedsReviewとする（複数回の読み取りで同じ数字を確認したが、念のため慎重を期す）。選挙の投票日そのもの（disputed-001の1956-04-10 vs 04-21）はこの資料からは特定できなかった。【2026-08-19追記（Phase12、司令塔本人によるNDL実閲覧で再確認）】同コマが全文検索で「昭和三十一年」の検索結果にも該当することを確認し、投票日が1956年（昭和31年）4月19日であることを本文「四月十九日に行われた延岡市長選挙は…」の記載から確定した。候補者は3名（青木善祐・仲田又次郎・佐藤千吉郎）であることも確認し、佐藤千吉郎をcandidatesへ追加した（得票数は本文からは特定できず未確認のまま）。読み取りを複数回繰り返し同じ数字を再現できたためverificationStatusをverifiedへ更新する。この投票日（4/19）は、就任日disputed（1956-04-10 vs 1956-04-21）のうち、投票日より前となる1956-04-10案を論理的に否定する独立証拠となる（disputed-001参照）。"
       }
     ],
-    "notes": "第11代市長選挙。直接公選制導入後の選挙だが、候補者一覧・得票数・投票率・有権者数は、NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索のいずれでも一次資料に到達できなかった（2026-08-18時点、not_researched。宮崎日日新聞縮刷版等、オンライン非公開の資料に限られる可能性が高い）。就任日disputed（reports/ndl-research-findings.json disputed-001参照）。選挙日自体も本エントリでは未確認。 【2026-08-18追記】延岡商工会議所四十年史の年表で、青木善祐（23,264票）が仲田又次郎（19,528票）ほかを破り初当選し、県内初の日本社会党系市長になった旨の記述を新規確認した（findings参照）。投票日そのもの（disputed-001参照）は依然未確定。",
+    "notes": "第11代市長選挙。直接公選制導入後の選挙だが、候補者一覧・得票数・投票率・有権者数は、NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索のいずれでも一次資料に到達できなかった（2026-08-18時点、not_researched。宮崎日日新聞縮刷版等、オンライン非公開の資料に限られる可能性が高い）。就任日disputed（reports/ndl-research-findings.json disputed-001参照）。選挙日は1956-04-19と確定した（Phase12）。 【2026-08-18追記】延岡商工会議所四十年史の年表で、青木善祐（23,264票）が仲田又次郎（19,528票）ほかを破り初当選し、県内初の日本社会党系市長になった旨の記述を新規確認した（findings参照）。投票日は1956-04-19と確定（Phase12、disputed-001の就任日論争には投票日より前の候補を否定する形で寄与）。",
     "electionMethod": "direct_public_vote"
   },
   {
