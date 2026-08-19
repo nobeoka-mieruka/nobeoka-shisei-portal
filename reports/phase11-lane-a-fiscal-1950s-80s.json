@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-08-19T18:00:00+09:00",
+  "lane": "A/B統合（司令塔本人によるNDL実閲覧）",
+  "purpose": "Phase11「実閲覧突破・数値抽出フェーズ」。Phase9/10でpid特定済みだった宮崎県統計年鑑の個別巻を実際にNDLで閲覧し、延岡市の市町村別歳入・歳出決算額を数値として確定・登録した。「1950〜1969財政充足率を25%→50%以上」「1970〜1989財政で最低1年度以上」の2目標を達成した。",
+  "browserStatus": "安定動作。CDPタイムアウト等の不具合は発生しなかったが、宮崎県統計年鑑 昭和35年版（pid 9526955）はページ読み込みが他資料より遅く、毎回2〜4秒程度の待機が必要だった。",
+  "confirmedThisSession": [
+    {
+      "fiscalYear": 1970,
+      "eraLabel": "昭和45年度",
+      "source": {
+        "title": "宮崎県統計年鑑 第89回(昭和45年)",
+        "ndlPid": "9528114",
+        "ndlUrl": "https://dl.ndl.go.jp/pid/9528114/1/145",
+        "publishedYear": 1972,
+        "tableTitle": "237. 市町村歳入歳出決算額（普通会計）",
+        "tablePage": "komma145（印刷p237付近）",
+        "unit": "1,000円"
+      },
+      "data": { "revenueYen": 4386683000, "expenditureYen": 4360794000 },
+      "verificationMethod": "市部計(25,922,010)+郡計(17,038,314)=42,960,324千円が、同表の昭和45年度県全体歳入合計と完全一致。歳出側も25,668,303+16,631,405=42,299,708千円で一致。",
+      "confidence": "confirmed_primary",
+      "mayorId": "mayor-11",
+      "mayorTermId": "mayor-11-term-01"
+    },
+    {
+      "fiscalYear": 1980,
+      "eraLabel": "昭和55年度",
+      "source": {
+        "title": "宮崎県統計年鑑 第99回(昭和55〜56年)",
+        "ndlPid": "10262718",
+        "ndlUrl": "https://dl.ndl.go.jp/pid/10262718/1/167",
+        "publishedYear": 1983,
+        "tableTitle": "245. 市町村普通会計歳入歳出決算額",
+        "tablePage": "komma167（印刷p282〜283）",
+        "unit": "1,000円"
+      },
+      "data": { "revenueYen": 22882037000, "expenditureYen": 22586432000 },
+      "verificationMethod": "市計(152,892,252)+郡計(97,923,180)=250,815,432千円が、同表の昭和55年度県全体歳入合計と完全一致。歳出側も150,410,551+95,415,854=245,826,405千円で一致。市計の内訳9市の合計も市計と完全一致。",
+      "confidence": "confirmed_primary",
+      "mayorId": "mayor-12",
+      "mayorTermId": "mayor-12-term-01"
+    },
+    {
+      "fiscalYear": 1960,
+      "eraLabel": "昭和35年度",
+      "source": {
+        "title": "宮崎県統計年鑑 昭和35年",
+        "ndlPid": "9526955",
+        "ndlUrl": "https://dl.ndl.go.jp/pid/9526955/1/158",
+        "publishedYear": 1962,
+        "tableTitle": "6. 市町村歳入、歳出決算見込額（一般会計）",
+        "tablePage": "komma158（印刷p263）",
+        "unit": "1,000円"
+      },
+      "data": { "revenueYen": 967797000, "expenditureYen": 951488000 },
+      "verificationMethod": "市部(4,989,392)+郡部(3,960,508)=8,949,900千円が、同表の昭和35年度県全体歳入合計と完全一致。歳出側も市部内訳8市の合計が市部歳出(4,948,481)と完全一致。歳入側は市部合計との差異が22千円のみ（原資料の四捨五入等による可能性、延岡市自身の数値には影響しない）。",
+      "confidence": "confirmed_primary",
+      "mayorId": "mayor-10",
+      "mayorTermId": "mayor-10-term-01",
+      "caveat": "表題が「決算見込額」であり、確定決算額ではなく見込値である可能性がある。"
+    }
+  ],
+  "productionDataChanges": {
+    "file": "src/data/archiveFiscalYears.json",
+    "change": "fiscalYear=1960・1970・1980の3件を新規追加（総数41→44件）。いずれもtotalRevenueYen/totalExpenditureYenのみ登録し、当初予算額・市税・市債・基金・財政指標は今回未確認のためnullのまま。"
+  },
+  "otherObservations": [
+    "宮崎県統計年鑑は年によって財政章の章番号・表番号が変動する（1960年版は12.財政、1970年版は17.財政、1980年版は18.財政）ため、目次の「財政」リンクから開始し、表題に「市町村」を含む表を探す方式が最も確実だった。",
+    "1970年版・1980年版は「歳入歳出決算額」（確定決算）だが、1960年版のみ「決算見込額」という表題であり、決算の確定前の見込値である可能性がある。将来的に同年度の確定決算額が別資料で見つかった場合は、両者を区別して記録する必要がある。",
+    "1960年時点の宮崎県の市は8市（宮崎・都城・延岡・日南・小林・日向・串間・西都）で、えびの市（1970年設置）を含まないことを確認した（既存の市町村沿革データと整合）。"
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "medium",
+      "purpose": "1955年度（昭和30年度）・1950年度（昭和25年度）の宮崎県統計年鑑個別巻を同じ手法で確認する（1950-1969年度帯をさらに充足させるため）。書誌は確認済み（宮崎県統計年鑑 昭和24-41年、bibId R100000002-I000000867246）だが、個別巻のpidは今回未特定。",
+      "title": "宮崎県統計年鑑 昭和25年・30年",
+      "bibliographicId": "R100000002-I000000867246（個別pid未特定）",
+      "relatedFiscalYear": [1950, 1955],
+      "discoveredByLane": "A"
+    },
+    {
+      "priority": "medium",
+      "purpose": "1975年度（昭和50年度）・1985年度（昭和60年度）の宮崎県統計年鑑個別巻（Phase10 Lane Bでpid特定済み：第93回=pid 10262712、1985年度は第101回=pid 10262720が候補）を同じ手法で確認する。",
+      "title": "宮崎県統計年鑑 第93回・第101回",
+      "bibliographicId": "pid 10262712 / pid 10262720",
+      "relatedFiscalYear": [1975, 1985],
+      "discoveredByLane": "A"
+    }
+  ],
+  "summary": {
+    "newConfirmedPrimaryFiscalYears": 3,
+    "fiscalYearsTotal": 44,
+    "band1950to1969CoverageBefore": "25%",
+    "band1950to1969CoverageAfter": "50%",
+    "band1970to1989CoverageBefore": "0%",
+    "band1970to1989CoverageAfter": "50%",
+    "targetsAchieved": ["1950〜1969財政充足率50%以上", "1970〜1989財政で最低1年度以上（1970年代・1980年代それぞれ1件で計2件）"]
+  }
+}
