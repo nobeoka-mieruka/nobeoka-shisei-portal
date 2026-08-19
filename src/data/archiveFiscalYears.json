@@ -95,6 +95,38 @@
     }
   },
   {
+    "fiscalYear": 1957,
+    "mayorId": "mayor-09",
+    "mayorTermId": "mayor-09-term-01",
+    "budget": {
+      "fiscalYear": 1957,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 830829000,
+      "totalExpenditureYen": 808697000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/9526953/1/156",
+          "sourceTitle": "宮崎県統計年鑑 昭和33年（表6「市町村才入才出決算（一般会計）」昭和32年度分、印刷p256-257）",
+          "sourceOrganization": "宮崎県総務部統計課（資料：地方課）",
+          "accessedAt": "2026-08-19",
+          "pageNumber": 256,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円（表内に明記「単位=千円」）。対象年度は表の副題「（昭和32年度分）」で確認済み。同一表（表6「市町村才入才出決算（一般会計）」、期間注記「昭和32〜33年度」）には昭和33年度分の内訳も別掲されており、そちらはfiscalYear1958として別途登録済み。延岡市：才入（歳入）830,829千円・才出（歳出）808,697千円。算術検証：市部（7市の小計、当時は西都市未設置のため宮崎・都城・延岡・日南・小林・日向・串間の7市）歳入＝宮崎市845,704+都城市698,970+延岡市830,829+日南市439,011+小林市206,596+日向市235,613+串間市279,303＝3,536,026千円が、表内の「市部」歳入欄の値3,536,026千円と完全一致。歳出＝815,086+687,526+808,697+417,938+203,288+227,739+279,185＝3,439,459千円が、表内の「市部」歳出欄の値3,439,459千円と完全一致。歳入・歳出とも市部小計と完全一致し、FY1958登録時に残った10,000千円差異（歳出側）は本年度データには存在しない。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（昭和33年版）表6「市町村才入才出決算（一般会計）」昭和32年度分より、延岡市の歳入総額・歳出総額を登録。FY1958（昭和33年度）を登録した際に同じ表内で発見した昭和32年度分を追加確認し、歳入・歳出とも市部小計と完全一致することを確認したうえで正式登録した。会計区分は一般会計。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
     "fiscalYear": 1958,
     "mayorId": "mayor-09",
     "mayorTermId": "mayor-09-term-01",
