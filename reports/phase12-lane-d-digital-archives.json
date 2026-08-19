@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-08-19T23:00:00+09:00",
+  "lane": "D（司令塔本人によるJS SPA実閲覧）",
+  "purpose": "Phase11/12 Lane Dが候補として発見した「おおいたデジタル資料室」「デジタル宮崎県史」（いずれもJavaScript SPAでサブエージェントのcurl/WebFetchでは検索実行不可）を、司令塔本人がブラウザで実際に検索した。",
+  "results": [
+    {
+      "resource": "おおいたデジタル資料室（大分県公文書館・先哲史料館・県立図書館統合検索）",
+      "url": "https://wwwa6.musetheque.jp/oita-digital/",
+      "searchTerm": "大島文彦",
+      "hits": 1,
+      "finding": "「大分縣官民職員録注文書」（先哲史料館所蔵、大分縣官民職員録刊行會代表・大島文彦から木下哲宛の葉書、大分市電車通り商工会議所2階を発信地とする）を発見した。大島文彦が大分県官民職員録の刊行会代表を務めていたことを示す新情報だが、生年月日・経歴等の伝記的事実は含まれておらず、画像も未公開（NO IMAGE）のため、archiveMayors.jsonへの反映は見送った。",
+      "confidence": "confirmed_primary（文書の存在と内容のみ。伝記情報としての価値は限定的）"
+    },
+    {
+      "resource": "デジタル宮崎県史",
+      "url": "https://adeac.jp/miyazaki-pref-lib/top/",
+      "searchTerm": "青木善祐",
+      "hits": 0,
+      "finding": "目録検索・全文検索（テキストモード）いずれも0件。"
+    },
+    {
+      "resource": "デジタル宮崎県史",
+      "url": "https://adeac.jp/miyazaki-pref-lib/top/",
+      "searchTerm": "大島文彦",
+      "hits": 0,
+      "finding": "全文検索（テキストモード）0件。"
+    }
+  ],
+  "summary": {
+    "newConfirmedBiographicalFacts": 0,
+    "note": "Phase10/11から持ち越されていた2つのJS SPA資料候補を実際に検索したが、青木善祐disputed・大島文彦の未確認項目（学歴・前職の詳細等）を解消する伝記的事実は得られなかった。デジタル宮崎県史は0件が続いたため、これ以上の検索語バリエーションは停止条件（同一人物5パターン程度）に従い打ち切った。"
+  }
+}
