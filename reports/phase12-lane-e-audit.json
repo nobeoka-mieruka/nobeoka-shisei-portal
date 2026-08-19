@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-08-19T00:00:00+09:00",
+  "lane": "Phase12 Lane E（品質・接続強化）",
+  "scope": "civicTimelineEvents.jsonとarchiveMayors.json/archiveFiscalYears.json/archiveMayorTerms.jsonの接続強化、reports/mayor-confidence-overview.jsonの項目単位評価の棚卸し、reports/mayor-primary-source-matrix.jsonのdatasetRanges.finance同期。新しい事実の推測・登録は行っていない。",
+  "civicTimelineStrengthening": {
+    "reviewedItems": [
+      {
+        "topic": "1933年度（延岡市発足初年度）の当初予算議決",
+        "existingEventFound": false,
+        "action": "add",
+        "civicId": "civic-154",
+        "addedSourceRef": {
+          "label": "延岡市史（延岡市史編さん委員会編、延岡市、1963年）第二編第五章「市政および財政の発展」本文（別表4直前の記述、komma137）",
+          "url": "https://dl.ndl.go.jp/pid/3027323/1/137"
+        },
+        "reason": "既存civic-002（延岡市 市制施行）は市制施行そのものの出来事であり、市会による当初予算議決という別の出来事は既存イベントでは扱われていなかった。archiveFiscalYears.json（fiscalYear=1933）で確認済みの一次資料をそのまま転用し、市政史上の意義（延岡市発足初年度の予算という基礎的事実）が高いため新規追加した。重複なし。"
+      },
+      {
+        "topic": "1971年市長選挙（房野博氏再選、第15代）",
+        "existingEventFound": false,
+        "action": "add",
+        "civicId": "civic-155",
+        "addedSourceRef": {
+          "label": "延岡商工会議所四十年史（延岡商工会議所編、1975年3月刊）年表「昭和46年（1971）」",
+          "url": "https://dl.ndl.go.jp/pid/11917124/1/412"
+        },
+        "reason": "civic-150〜153（1947・1956・1960・1967年の市長選挙）と同一シリーズの欠落年を埋めるもの。archiveMayorTerms.json（mayor-11-term-02）に既に登録済みの出典をそのまま転用し、既存の選挙イベント群と整合する形で新規追加した。重複なし。"
+      },
+      {
+        "topic": "大島文彦(mayor-06)の生年月日確認、延岡市助役からの市長就任経緯",
+        "existingEventFound": true,
+        "existingCivicIds": [
+          "civic-006",
+          "civic-082",
+          "civic-083",
+          "civic-084",
+          "civic-149"
+        ],
+        "action": "none",
+        "reason": "既存のmayor-06関連civicイベント（civic-006, civic-082〜084, civic-149）はいずれも在任中の公共インフラ・災害・市史編纂に関する『市の出来事』であり、大島文彦氏個人の生年月日・助役からの就任経緯という伝記的事実とは主題が異なるため、自然な強化先が存在しなかった。civicTimelineEvents.jsonはこれまで一貫して『市の出来事』を扱い、個人の伝記的事実（生年月日・前職経緯）を独立イベントとして登録した前例がない（既存の市長選挙イベント civic-150〜155 は『選挙という公的行為』であり伝記情報とは異なる）。当該事実は既にarchiveMayors.json（mayor-06、Phase10 Lane A/Eで全国市長銘鑑1938年により生年月日・助役歴を独立確認済み）に構造化データとして格納されており、civicTimelineEventsへの追加は情報アーキテクチャ上の重複になると判断し、新規追加を見送った。"
+      },
+      {
+        "topic": "山本一丸(mayor-14)の2018年副市長就任",
+        "existingEventFound": false,
+        "action": "add",
+        "civicId": "civic-156",
+        "addedSourceRef": {
+          "label": "延岡市副市長に就任した　山本一丸（やまもと・かずまる）さん - 宮崎日日新聞（Miyanichi e-press、2018年4月19日掲載、Internet Archive保存）",
+          "url": "https://web.archive.org/web/20250227015255/https://www.the-miyanichi.co.jp/hito/_31790.html"
+        },
+        "reason": "civic-037（2007年、副市長制導入）・civic-047（2011年、副市長2人制開始・原田幸二氏就任）と同種の『副市長人事』カテゴリの前例があり、civicTimelineEvents.jsonに副市長就任イベントを登録すること自体には明確な先例がある。mayor-14に関する既存civicイベントは0件だったため強化対象がなく、archiveMayors.json（Phase10 Lane D）で既に一次資料確認済みの2018年4月1日付就任の事実をそのまま転用して新規追加した。重複なし。"
+      },
+      {
+        "topic": "櫻井哲雄(mayor-13)の死去",
+        "existingEventFound": false,
+        "action": "none",
+        "reason": "civicTimelineEvents.jsonには個人の死去・栄典（名誉市民表彰等）を独立イベントとして登録した前例が一件も存在しない（例：三浦虎雄氏の名誉市民表彰(1957年)もarchiveMayorTerms.jsonのsourceRefsのみに留まりcivicイベント化されていない）。死去の事実は既にarchiveMayors.json（mayor-13、Phase10 Lane Dで宮崎日日新聞のInternet Archive保存記事本文により死没日・死因等を独立確認済み）に構造化データとして格納されている。市政史上の重要性は認めつつも、本データセットの一貫した情報アーキテクチャ（civicTimelineEvents=市の出来事、archiveMayors=市長個人の経歴）を踏まえ、新規追加は見送った。"
+      }
+    ],
+    "addedEventsCount": 3,
+    "strengthenedExistingEventsCount": 0,
+    "noActionCount": 2,
+    "note": "強化（既存イベントのsourceRefs追記）に該当する事例は今回はなかった。5件のレビュー対象のうち3件は既存イベントが存在せず、かつ確立されたイベントパターン（市長選挙シリーズ／副市長人事シリーズ）に合致し重要度も高いと判断し慎重に新規追加した。残り2件（生年月日・死去という個人の伝記的事実）は、civicTimelineEvents.jsonの一貫した『市の出来事』という情報アーキテクチャに合致せず、既にarchiveMayors.jsonで構造化済みであるため追加を見送った。"
+  },
+  "confidenceOverviewReview": {
+    "file": "reports/mayor-confidence-overview.json",
+    "existingStructure": "rows[]は既にmayorId単位のoverallGradeに加え、項目単位（birthDate/inaugurationDate/retirementDate/election/career、各status A/B/C/-）で評価できる構造になっていることを確認した。型定義・既存データの作り変えは行っていない。",
+    "changeApplied": "summaryに itemLevelSchemaNote と extensionCandidates（birthplace/education/previousOccupation/deathYearの4項目）を追記した。",
+    "extensionCandidatesAdded": [
+      "birthplace（出身地）",
+      "education（学歴）",
+      "previousOccupation（前職）",
+      "deathYear（死去年）"
+    ]
+  },
+  "matrixSyncResult": {
+    "file": "reports/mayor-primary-source-matrix.json",
+    "before": "datasetRanges.finance = \"FY1933、FY1965、FY1970、FY1988〜現在\"（FY1960・FY1980が抜け落ちていた）",
+    "after": "datasetRanges.finance = \"FY1933、FY1960、FY1965、FY1970、FY1980、FY1988〜現在（計44年度）\"",
+    "additionalFixes": [
+      {
+        "mayorId": "mayor-10",
+        "field": "_detail.linkedFiscalYearsCount",
+        "before": 1,
+        "after": 2,
+        "reason": "FY1960（mayor-10-term-01対応）とFY1965（mayor-10-term-02対応）の2件が実際にはmayor-10に紐づいているが、旧データはFY1965の1件のみカウントしていた。"
+      },
+      {
+        "mayorId": "mayor-12",
+        "field": "finance / _detail.linkedFiscalYearsCount",
+        "before": "out_of_dataset_range / 0",
+        "after": "△ / 1",
+        "reason": "FY1980がmayor-12-term-01（1978-11-05〜1982-11-04）在任中に対応するが、旧データはFY1980追加を未反映のままout_of_dataset_rangeとしていた。"
+      }
+    ],
+    "verified": "archiveFiscalYears.json内の全fiscalYearレコード（1933,1960,1965,1970,1980,1988-2026の計44件）をgrepで確認し、44件という記述と一致することを確認した。"
+  },
+  "validateResult": {
+    "command": "npm run validate:data",
+    "errors": 0,
+    "warnings": 15,
+    "matchesPhase11Baseline": true,
+    "note": "warning内訳はPhase11終了時点と同一（archiveMayorTerms.jsonの任期空白13件、archiveFiscalYears.jsonの欠番、councilSpeechSummaries.jsonのquestionApproach語彙推奨13件相当）。新規warningの増加なし。"
+  },
+  "typecheckResult": {
+    "command": "npm run typecheck",
+    "result": "success",
+    "errors": 0
+  },
+  "lintResult": {
+    "command": "npm run lint",
+    "result": "success",
+    "errors": 0,
+    "warnings": 0
+  },
+  "buildResult": {
+    "note": "指示によりnpm run buildは実行していない。"
+  },
+  "filesModified": [
+    "src/data/civicTimelineEvents.json",
+    "reports/mayor-confidence-overview.json",
+    "reports/mayor-primary-source-matrix.json"
+  ],
+  "filesCreated": [
+    "reports/phase12-lane-e-audit.json"
+  ],
+  "remainingIssues": [
+    "青木善祐の就任日disputed（1956-04-10 vs 1956-04-21）は依然未解消（reports/mayor-confidence-overview.json参照）。",
+    "早生隆彦・房野博・鈴木憲太郎の生年月日は依然未確認。",
+    "mayor-confidence-overview.jsonのextensionCandidates（出身地・学歴・前職・死去年の項目別評価軸）は今回は提案のみで、実装は次フェーズ以降の判断に委ねる。"
+  ]
+}

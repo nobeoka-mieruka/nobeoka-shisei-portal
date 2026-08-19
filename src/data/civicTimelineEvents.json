@@ -3028,5 +3028,72 @@
     "lastVerifiedAt": "2026-08-18",
     "verificationStatus": "verified",
     "notes": "TASK-045で新規発見。「延岡市長選挙　折小野良一当選（第12代）」（4月）の記述を独立の一次資料で確認、既存archiveMayorTerms.json（mayor-10-term-01.termStart=1960-04-19）と月単位で一致。得票数・対立候補（青木善祐氏を破ったとするWikipedia由来の既存記述）はこの資料からは確認できず。"
+  },
+  {
+    "id": "civic-154",
+    "year": 1933,
+    "dateLabel": "1933年（月日不明、市制施行年度の当初予算）",
+    "category": "行政組織",
+    "title": "延岡市発足初年度（昭和8年度）の当初予算議決",
+    "summary": "延岡市発足初年度（昭和8年度）の一般会計当初予算が市会で議決された。歳入予算額340,595円、歳出予算額は経常部225,735円・臨時部114,860円の合計340,595円（歳入歳出差引残金ナシ）。",
+    "relatedPersonIds": [
+      "mayor-04"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市史（延岡市史編さん委員会編、延岡市、1963年）第二編第五章「市政および財政の発展」本文（別表4直前の記述、komma137）",
+        "url": "https://dl.ndl.go.jp/pid/3027323/1/137"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-19",
+    "verificationStatus": "verified",
+    "notes": "Phase10 Lane Aが延岡市史(1963年版)komma137の本文を精読し確認した当初予算議決額（archiveFiscalYears.json fiscalYear=1933・reports/nobeoka-fiscal-history-coverage-report.json 1933年度参照）。同資料の本文は「本市が市制を施行した昭和八年（一九三三）において、その年度最初の（一般会計）予算案は市長職務管掌によって市会に提出され…議決されている」と記しており、初代市長仲田又次郎（mayor-04、就任1933-04-15）の就任前、職務管掌者（氏名は本文中に確認できず）の下で提出・議決された予算である可能性がある。市制施行そのもの（civic-002）とは別の出来事（予算の市会議決）のため新規登録した。決算額ではなく議決時点の当初予算額である点に注意。市会での議決日（月日）は本資料からは特定できていない。"
+  },
+  {
+    "id": "civic-155",
+    "year": 1971,
+    "dateLabel": "1971年1月（日不明）",
+    "category": "行政組織",
+    "title": "延岡市長選挙で房野博氏が再選（第15代）",
+    "summary": "房野博が延岡市長選挙で再選し、第15代延岡市長に就任した。",
+    "relatedPersonIds": [
+      "mayor-11"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡商工会議所四十年史（延岡商工会議所編、1975年3月刊）年表「昭和46年（1971）」",
+        "url": "https://dl.ndl.go.jp/pid/11917124/1/412"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-19",
+    "verificationStatus": "verified",
+    "notes": "Phase11 Lane C（司令塔本人によるNDL実閲覧）で新規発見。年表の昭和46年（1971）欄に「1. 延岡市長選挙　房野氏　第15代市長当選」との記載を確認した。既存archiveMayorTerms.json（mayor-11-term-02.termStart=1971-01-22、延岡市公式年表による）と独立に整合する。得票数・投票率・対立候補の記載は同年表項目にはなく未確認。civic-152（1967年、第14代房野博氏無投票当選）・civic-151（1956年）・civic-153（1960年）と同じ延岡商工会議所四十年史を出典とする市長選挙記録として登録した。"
+  },
+  {
+    "id": "civic-156",
+    "year": 2018,
+    "dateLabel": "2018年4月1日",
+    "category": "行政組織",
+    "title": "山本一丸氏が総括担当副市長に就任",
+    "summary": "山本一丸氏（当時58歳、市民環境部長）が議会全会一致の同意を経て延岡市総括担当副市長に就任した。",
+    "relatedPersonIds": [
+      "mayor-14",
+      "mayor-03"
+    ],
+    "relatedPages": [
+      {
+        "label": "副市長・教育長・行政委員会委員",
+        "to": "/city-officials"
+      }
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市副市長に就任した　山本一丸（やまもと・かずまる）さん - 宮崎日日新聞（Miyanichi e-press、2018年4月19日掲載、Internet Archive保存）",
+        "url": "https://web.archive.org/web/20250227015255/https://www.the-miyanichi.co.jp/hito/_31790.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-19",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase10 Lane Dが発見・archiveMayors.json（mayor-14）に反映済みの事実をcivicTimelineEventsへも接続した。2018年2月に就任した読谷山洋司市長（mayor-03）の下での人事。山本一丸氏は後に読谷山市長の辞職（2025年6月30日付）を受け、2025年7月1日〜19日の間、市長職務代理者を務めた（mayor-14-term-01、既存データ）。副市長人事という点でcivic-037（2007年、副市長制導入）・civic-047（2011年、副市長2人制開始・原田幸二氏就任）と同種の行政組織カテゴリの出来事として登録した。就任日（2018年4月1日）は宮崎日日新聞記事本文に明記されている。（出典が宮崎日日新聞という非公式・二次的な報道機関のため、verificationStatusをpartiallyVerifiedとした。事実自体は本人の副市長就任当時の同時代一次報道により高い確度で確認済み。）"
   }
 ]

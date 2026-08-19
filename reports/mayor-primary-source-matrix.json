@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-08-18T00:00:00+09:00",
   "lastSyncedAt": "2026-08-19T00:00:00+09:00",
-  "syncNote": "Phase11 Lane E：Phase9/10のarchiveFiscalYears.json拡張（FY1988〜2000、FY1965、FY1933の追加）にdatasetRanges.financeの記述が追随していなかった問題を解消。datasetRanges.financeを実際の収録年度（FY1933・FY1965・FY1988〜現在、連続ではない）に合わせて修正し、mayor-04（FY1933が対応する第1期在任中に確認済み）・mayor-10（FY1965が対応する第2期在任中に確認済み）のfinance/_detail.linkedFiscalYearsCountを実データと一致させた（out_of_dataset_range/0件 → △/1件。ともに当初予算または歳入歳出総額のみの部分確認のため○ではなく△）。本レーン作業中にPhase11 Lane Aが並行してFY1970（mayor-11在任中）を追加したため、これも同時に反映しmayor-11のfinance/_detail.linkedFiscalYearsCountを更新した（out_of_dataset_range/0件 → △/1件）。他の行（mayor-05〜09,12）は在任期間がarchiveFiscalYears.jsonの空白区間に完全に収まり対応レコードが存在しないため、out_of_dataset_rangeのまま変更していない。新しい事実の推測・追加調査は行っていない。",
+  "syncNote": "Phase11 Lane E：Phase9/10のarchiveFiscalYears.json拡張（FY1988〜2000、FY1965、FY1933の追加）にdatasetRanges.financeの記述が追随していなかった問題を解消。datasetRanges.financeを実際の収録年度（FY1933・FY1965・FY1988〜現在、連続ではない）に合わせて修正し、mayor-04（FY1933が対応する第1期在任中に確認済み）・mayor-10（FY1965が対応する第2期在任中に確認済み）のfinance/_detail.linkedFiscalYearsCountを実データと一致させた（out_of_dataset_range/0件 → △/1件。ともに当初予算または歳入歳出総額のみの部分確認のため○ではなく△）。本レーン作業中にPhase11 Lane Aが並行してFY1970（mayor-11在任中）を追加したため、これも同時に反映しmayor-11のfinance/_detail.linkedFiscalYearsCountを更新した（out_of_dataset_range/0件 → △/1件）。他の行（mayor-05〜09,12）は在任期間がarchiveFiscalYears.jsonの空白区間に完全に収まり対応レコードが存在しないため、out_of_dataset_rangeのまま変更していない。新しい事実の推測・追加調査は行っていない。 【2026-08-19追記（Phase12 Lane E）】Phase11 Lane Aが同時にFY1960（mayor-10-term-01対応）・FY1980（mayor-12-term-01対応）も新規追加していたが、本マトリクスへの反映が漏れていたことを検出し修正した。datasetRanges.financeを「FY1933・FY1960・FY1965・FY1970・FY1980・FY1988〜現在（計44年度）」に更新し、mayor-10のfinance/_detail.linkedFiscalYearsCountを1→2（FY1960＋FY1965の2件）へ、mayor-12のfinance/_detail.linkedFiscalYearsCountを0→1（FY1980の1件）・financeステータスをout_of_dataset_range→△へ修正した。新しい事実の推測・追加調査は行っていない。",
   "method": "既存データ（archiveMayors.json/archiveMayorTerms.json/electionResults.json/archiveFiscalYears.json/kohoNobeokaIssues.json/billVotes.json/civicTimelineEvents.json/reports/ndl-historical-source-ledger.json/reports/wayback-mayor-candidate-links.json）のみを使い、機械的に算出した。",
   "legend": {
     "○": "確認済み・十分な情報がある",
@@ -12,7 +12,7 @@
   },
   "datasetRanges": {
     "council": "billVotes.json 収録範囲: 2019-06-17〜現在",
-    "finance": "archiveFiscalYears.json 収録範囲: FY1933、FY1965、FY1970、FY1988〜現在（連続収録ではなく、上記以外の年度（FY1934〜1964、FY1966〜1969、FY1971〜1987）はレコード自体が存在しない。Phase9/10でFY1965・FY1988〜2000を、Phase10でFY1933を、Phase11 Lane AでFY1970を追加）",
+    "finance": "archiveFiscalYears.json 収録範囲: FY1933、FY1960、FY1965、FY1970、FY1980、FY1988〜現在（連続収録ではなく、上記以外の年度（FY1934〜1959、FY1961〜1964、FY1966〜1969、FY1971〜1979、FY1981〜1987）はレコード自体が存在しない。合計44年度分。Phase9/10でFY1965・FY1988〜2000を、Phase10でFY1933を、Phase11 Lane AでFY1970・FY1960・FY1980を追加）",
     "koho": "kohoNobeokaIssues.json 収録範囲: 2010-04〜現在"
   },
   "columnNotes": {
@@ -280,7 +280,7 @@
       "wayback": "□",
       "_detail": {
         "linkedElectionsCount": 2,
-        "linkedFiscalYearsCount": 1,
+        "linkedFiscalYearsCount": 2,
         "kohoDuringTermCount": 0,
         "billsDuringTermCount": 0,
         "linkedCivicEventsCount": 9,
@@ -326,13 +326,13 @@
       "policies": "○",
       "majorProjects": "○",
       "council": "out_of_dataset_range",
-      "finance": "out_of_dataset_range",
+      "finance": "△",
       "koho": "out_of_dataset_range",
       "ndl": "○",
       "wayback": "□",
       "_detail": {
         "linkedElectionsCount": 4,
-        "linkedFiscalYearsCount": 0,
+        "linkedFiscalYearsCount": 1,
         "kohoDuringTermCount": 0,
         "billsDuringTermCount": 0,
         "linkedCivicEventsCount": 17,

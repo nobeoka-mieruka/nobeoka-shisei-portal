@@ -399,6 +399,25 @@
       "早生隆彦・房野博・鈴木憲太郎の生年月日（大島文彦はPhase10で独立確認済み）",
       "早生隆彦の19・20代（1990年以降）の主要事業",
       "2006年以前の市長選挙の得票数（一次資料未確認）"
+    ],
+    "itemLevelSchemaNote": "Phase12 Lane Eで棚卸し。本レポートのrows[]は既にmayorId単位のoverallGradeだけでなく、項目単位（birthDate/inaugurationDate/retirementDate/election/career、各status A/B/C/-）で評価できる構造になっている。今回はこの既存構造を維持し、型定義・既存データの作り変えは行っていない。",
+    "extensionCandidates": [
+      {
+        "field": "birthplace（出身地）",
+        "note": "archiveMayors.jsonには一部の人物（mayor-02, mayor-05, mayor-06, mayor-10, mayor-13, mayor-14等）でbirthplaceフィールドが存在するが、本レポートのrows[]には出身地専用の項目別ステータス欄がなく、career等のnoteに埋め込まれる場合がある。将来的に独立した項目（例：birthplace.status）として追加する余地がある。"
+      },
+      {
+        "field": "education（学歴）",
+        "note": "mayor-02（京都大学工学部）・mayor-03（東京大学経済学部）・mayor-08（早稲田大学カ）等、archiveMayors.jsonのprofile/sourceRefs内に学歴の記述はあるが、本レポートではcareer項目に暗黙的に含まれるのみで独立した評価軸がない。生年月日と同様の確度評価（A/B/C）を学歴について別立てできると、経歴確認の粒度が上がる。"
+      },
+      {
+        "field": "previousOccupation（前職）",
+        "note": "現行career項目は『就任前後の経歴全般』を包括しており、市長就任直前の前職（例：mayor-01の宮崎県庁・延岡市役所、mayor-06の延岡市助役）を独立して確度評価する項目には分離されていない。"
+      },
+      {
+        "field": "deathYear（死去年）",
+        "note": "archiveMayors.jsonのdeathDateフィールド（mayor-04, mayor-05, mayor-07, mayor-09, mayor-10, mayor-13で登録済み）に対応する項目別ステータス欄が本レポートには存在しない。生年月日（birthDate行）とは別に死去年の確度を独立評価できると、物故者の情報充実度が可視化しやすくなる。"
+      }
     ]
   }
 }
