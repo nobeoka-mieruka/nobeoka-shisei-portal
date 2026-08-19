@@ -31,6 +31,38 @@
     }
   },
   {
+    "fiscalYear": 1949,
+    "mayorId": "mayor-04",
+    "mayorTermId": "mayor-04-term-02",
+    "budget": {
+      "fiscalYear": 1949,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 222952388.91,
+      "totalExpenditureYen": null,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/9526947/1/287",
+          "sourceTitle": "宮崎県統計年鑑 昭和25年（表179「市町村歳入」歳入合計列、印刷p484-485）",
+          "sourceOrganization": "宮崎県総務部統計課",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 485,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=円、対象年度は表の注記「昭和24年度」で確認済み（表題は「昭和25年」版だが実際の対象年度は昭和24年度=1949年度であることを本文の年度注記で確認。自動推測せず）。表179「市町村歳入」は市町村税・公債企業及び財産収入・分擔金及負擔金・夫役及現品・使用料及手数料・国庫支出金・雑収入・繰越金・雑収入(2)・市町村債の各科目別収入額を列挙した上で、最終列に「歳入合計」を掲載している。延岡市の歳入合計＝222,952,388.91円を確認した。算術検証：市計（5市の小計、宮崎市249,788,011.68+都城市203,313,529.14+延岡市222,952,388.91+日南市120,959,126.33+小林市68,791,594.93）の合計が、表内の「市計」歳入合計欄の値865,804,650.99円と完全一致することを確認した（実際に計算：249,788,011.68+203,313,529.14+222,952,388.91+120,959,126.33+68,791,594.93=865,804,650.99）。この算術検証により延岡市個別値の読み取り誤りがないことを確認済み。歳出決算（歳出合計）は同じ表の一部かどうか本セッションでは確定できず、未確認のまま。決算額か予算額かの区別も明記されていないが、表題「市町村歳入」（歳出決算ではなく歳入のみ）であることから、確定した実績値（決算）である可能性が高いと推定されるが、断定はしていない。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（昭和25年版）表179「市町村歳入」より、延岡市の歳入合計のみ登録（Phase13発見・確認・統合）。Phase12では『宮崎県統計年鑑の1950年代前半の巻には市町村別歳入歳出決算表が構造的に存在しない』と結論づけていたが、これは閲覧範囲不足（komma269-280のみ確認、komma286-294を見落とし）によるものであり、実際にはkomma286-287に表179「市町村歳入」（および歳出決算に関連すると見られる表）が存在することをPhase13で確認した。この点についてPhase12の結論を訂正する（詳細はreports/phase13-lane-a-showa25-fiscal-correction.jsonおよびnobeoka-fiscal-history-1933-2000-source-survey.json参照）。歳出総額（totalExpenditureYen）はこのセッションでは確認できずnullのまま。当初予算額等の内訳も未確認。archiveFiscalYears.json史上最古の年度（1933年度に次ぐ2番目に古い実績、かつ全体の歳入総額データとしては最古）。"
+    }
+  },
+  {
     "fiscalYear": 1954,
     "mayorId": "mayor-07",
     "mayorTermId": "mayor-07-term-03",
