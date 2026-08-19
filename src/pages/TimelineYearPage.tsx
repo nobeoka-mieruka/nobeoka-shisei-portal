@@ -179,7 +179,6 @@ export function TimelineYearPage() {
                   columns={[
                     { header: "指標", render: (m) => m.label },
                     { header: "値", align: "right", render: (m) => m.formatValue(m.getPoint(fiscalYearEntry).value) },
-                    { header: "単位", render: (m) => m.unit },
                     {
                       header: "確認状況",
                       render: (m) => {

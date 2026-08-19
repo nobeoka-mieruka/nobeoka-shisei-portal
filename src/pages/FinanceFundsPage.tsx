@@ -5,8 +5,8 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { FinanceLineChart } from "../components/finance/FinanceLineChart";
-import { FinanceTable } from "../components/finance/FinanceTable";
 import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
+import { FinanceYearCards } from "../components/finance/FinanceYearCards";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LandmarkIcon } from "../components/icons";
@@ -92,22 +92,27 @@ export function FinanceFundsPage() {
               formatValue={(v) => formatOkuYenOrConfirming(v)}
               ariaLabel="財源調整用基金の年度末残高の推移グラフ。詳細は直後の表を参照してください。"
             />
-            <FinanceTable
+            <FinanceYearCards
               caption="年度別の基金残高（財源調整用基金・その他特定目的基金・全体）"
-              rows={rows}
+              years={rows}
+              getYear={(y) => y.fiscalYear}
               rowKey={(y) => String(y.fiscalYear)}
-              columns={[
-                { header: "年度末", render: (y) => fiscalYearLabel(y.fiscalYear) },
-                { header: "財源調整用基金", align: "right", render: (y) => formatOkuYenOrConfirming(y.fund?.balance.fiscalAdjustmentFundYen) },
-                { header: "その他特定目的基金", align: "right", render: (y) => formatOkuYenOrConfirming(y.fund?.balance.otherSpecificPurposeFundsYen) },
-                { header: "基金全体", align: "right", render: (y) => formatOkuYenOrConfirming(y.fund?.balance.totalYen) },
-                { header: "区分", render: (y) => (y.fund?.isEstimate ? "見込額" : "決算額") },
+              detailHref={(y) => `/timeline/${y.fiscalYear}`}
+              fields={[
+                {
+                  label: "基金全体",
+                  value: (y) => y.fund?.balance.totalYen ?? null,
+                  format: (v) => formatOkuYenOrConfirming(v),
+                  note: (y) => (y.fund?.isEstimate ? "見込額" : null),
+                },
+                { label: "財源調整用基金", value: (y) => y.fund?.balance.fiscalAdjustmentFundYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
+                { label: "その他特定目的基金", value: (y) => y.fund?.balance.otherSpecificPurposeFundsYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
               ]}
             />
           </SectionCard>
 
           <SectionCard title="基金総額の年度推移">
-            <FinanceMetricSection metric={fundTotalMetric} years={rows} />
+            <FinanceMetricSection metric={fundTotalMetric} years={rows} showTable={false} />
           </SectionCard>
 
           {rows.map((y) => (

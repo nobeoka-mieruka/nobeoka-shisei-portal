@@ -4,8 +4,8 @@ import type { ArchiveFiscalYear } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
-import { FinanceTable } from "../components/finance/FinanceTable";
 import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
+import { FinanceYearCards } from "../components/finance/FinanceYearCards";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { YenIcon } from "../components/icons";
@@ -69,30 +69,31 @@ export function FinanceBudgetPage() {
       </div>
 
       <SectionCard title="当初予算の年度推移">
-        <FinanceMetricSection metric={budgetInitialMetric} years={rows} />
+        <FinanceMetricSection metric={budgetInitialMetric} years={rows} showTable={false} />
       </SectionCard>
 
       <SectionCard title="補正後予算の年度推移">
-        <FinanceMetricSection metric={budgetFinalMetric} years={rows} />
+        <FinanceMetricSection metric={budgetFinalMetric} years={rows} showTable={false} />
       </SectionCard>
 
       <SectionCard title="決算額の年度推移">
-        <FinanceMetricSection metric={settlementMetric} years={rows} />
+        <FinanceMetricSection metric={settlementMetric} years={rows} showTable={false} />
       </SectionCard>
 
       <SectionCard title="年度別 予算・決算（一覧）">
         {rows.length === 0 ? (
           <p className="text-sm text-on-surface-variant">登録済みの年度データはまだありません。</p>
         ) : (
-          <FinanceTable
+          <FinanceYearCards
             caption="年度別の一般会計当初予算・補正後予算・決算額"
-            rows={rows}
+            years={rows}
+            getYear={(y) => y.fiscalYear}
             rowKey={(y) => String(y.fiscalYear)}
-            columns={[
-              { header: "年度", render: (y) => fiscalYearLabel(y.fiscalYear) },
-              { header: "当初予算", align: "right", render: (y) => formatOkuYenOrConfirming(y.budget?.generalAccountInitialBudgetYen) },
-              { header: "補正後予算", align: "right", render: (y) => formatOkuYenOrConfirming(y.budget?.generalAccountFinalBudgetYen) },
-              { header: "決算額", align: "right", render: (y) => formatOkuYenOrConfirming(y.budget?.generalAccountSettlementYen) },
+            detailHref={(y) => `/timeline/${y.fiscalYear}`}
+            fields={[
+              { label: "当初予算", value: (y) => y.budget?.generalAccountInitialBudgetYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
+              { label: "補正後予算", value: (y) => y.budget?.generalAccountFinalBudgetYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
+              { label: "決算額", value: (y) => y.budget?.generalAccountSettlementYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
             ]}
           />
         )}

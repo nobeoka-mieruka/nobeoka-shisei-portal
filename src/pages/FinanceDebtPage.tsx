@@ -4,8 +4,8 @@ import type { ArchiveFiscalYear } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
-import { FinanceTable } from "../components/finance/FinanceTable";
 import { FinanceMetricSection } from "../components/finance/FinanceMetricSection";
+import { FinanceYearCards } from "../components/finance/FinanceYearCards";
 import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { ChartBarIcon } from "../components/icons";
@@ -70,35 +70,33 @@ export function FinanceDebtPage() {
       />
 
       <SectionCard title="市債発行額の年度推移">
-        <FinanceMetricSection metric={debtIssuanceMetric} years={rows} />
+        <FinanceMetricSection metric={debtIssuanceMetric} years={rows} showTable={false} />
       </SectionCard>
 
       <SectionCard title="年度末市債残高（一般会計）の年度推移">
-        <FinanceMetricSection metric={debtBalanceGeneralMetric} years={rows} />
+        <FinanceMetricSection metric={debtBalanceGeneralMetric} years={rows} showTable={false} />
       </SectionCard>
 
       <SectionCard title="年度別 市債発行額・残高（一覧）">
         {rows.length === 0 ? (
           <p className="text-sm text-on-surface-variant">登録済みの年度データはまだありません。</p>
         ) : (
-          <FinanceTable
+          <FinanceYearCards
             caption="年度別の市債発行額・残高（区分別）"
-            rows={rows}
+            years={rows}
+            getYear={(y) => y.fiscalYear}
             rowKey={(y) => String(y.fiscalYear)}
-            columns={[
-              { header: "年度", render: (y) => fiscalYearLabel(y.fiscalYear) },
+            detailHref={(y) => `/timeline/${y.fiscalYear}`}
+            fields={[
               {
-                header: "発行額（値の種類）",
-                align: "right",
-                render: (y) => {
-                  const label = municipalBondIssuanceValueTypeLabel(y.debt?.municipalBondIssuanceValueType);
-                  const formatted = formatOkuYenOrConfirming(y.debt?.municipalBondIssuanceYen);
-                  return label ? `${formatted}（${label}）` : formatted;
-                },
+                label: "市債発行額",
+                value: (y) => y.debt?.municipalBondIssuanceYen ?? null,
+                format: (v) => formatOkuYenOrConfirming(v),
+                note: (y) => municipalBondIssuanceValueTypeLabel(y.debt?.municipalBondIssuanceValueType),
               },
-              { header: "一般会計残高", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.balance.generalAccountBondBalanceYen) },
-              { header: "普通会計残高", align: "right", render: (y) => formatOkuYenOrConfirming(y.debt?.balance.ordinaryAccountLocalBondBalanceYen) },
-              { header: "一人当たり", align: "right", render: (y) => (y.debt?.balance.perCapitaYen != null ? `${y.debt.balance.perCapitaYen.toLocaleString("ja-JP")}円` : "確認中") },
+              { label: "地方債現在高（一般会計）", value: (y) => y.debt?.balance.generalAccountBondBalanceYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
+              { label: "地方債現在高（普通会計）", value: (y) => y.debt?.balance.ordinaryAccountLocalBondBalanceYen ?? null, format: (v) => formatOkuYenOrConfirming(v) },
+              { label: "市民1人当たり残高", value: (y) => y.debt?.balance.perCapitaYen ?? null, format: (v) => `${v.toLocaleString("ja-JP")}円` },
             ]}
           />
         )}
