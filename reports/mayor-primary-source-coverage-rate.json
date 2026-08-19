@@ -1,5 +1,7 @@
 {
   "generatedAt": "2026-08-18T18:00:00+09:00",
+  "lastSyncedAt": "2026-08-19T00:00:00+09:00",
+  "syncNote": "Phase11 Lane E：reports/mayor-confidence-overview.json（generatedAt 2026-08-18T12:00、Phase10で本文が追記されnotesがA/Bへ変化していた3件）との同期漏れを解消。mayor-01（career: confirmed_official→confirmed_primary、市公式サイトで学歴・経歴を独立確認済みのため）、mayor-06（birthDate: secondary_only→confirmed_primary、Phase10で全国市長銘鑑1938年版により生年月日を独立確認済みのため）、mayor-14（career: confirmed_official→confirmed_primary、Phase10で宮崎日日新聞本人プロフィール記事全文により経歴を独立確認済みのため）の3セルを修正し、fieldStatusCounts・coverageSummaryを再集計した。mayor-13は該当項目（career/birthDate）ともPhase10でも据え置き（B）のため変更なし。新しい事実の推測・追加調査は行っていない。",
   "method": "reports/mayor-confidence-overview.json（項目別A/B/C評価）とreports/mayor-primary-source-matrix.json（policies列）を、confirmed_primary/confirmed_official/secondary_only/disputed/not_found/not_applicable/not_researchedの状態語彙にマッピングして集計した。A=confirmed_primary、B=confirmed_official、C=secondary_only（実質未確認含む）、-=not_applicable。青木善祐の就任日のみ特別にdisputedとして扱う。",
   "statusVocabulary": {
     "confirmed_primary": "独立した一次資料（延岡市公式資料・NDL資料・本人所属機関公式サイト等）で確認済み",
@@ -11,8 +13,8 @@
   },
   "fieldStatusCounts": {
     "birthDate": {
-      "secondary_only": 6,
-      "confirmed_primary": 7,
+      "secondary_only": 5,
+      "confirmed_primary": 8,
       "confirmed_official": 1
     },
     "inaugurationDate": {
@@ -32,8 +34,8 @@
       "not_applicable": 1
     },
     "career": {
-      "confirmed_official": 6,
-      "confirmed_primary": 8
+      "confirmed_official": 4,
+      "confirmed_primary": 10
     },
     "majorPolicies": {
       "not_researched": 3,
@@ -50,7 +52,7 @@
         "inaugurationDate": "confirmed_primary",
         "retirementDate": "not_applicable",
         "election": "confirmed_primary",
-        "career": "confirmed_official",
+        "career": "confirmed_primary",
         "majorPolicies": "not_researched"
       }
     },
@@ -106,7 +108,7 @@
       "mayorId": "mayor-06",
       "name": "大島 文彦",
       "fields": {
-        "birthDate": "secondary_only",
+        "birthDate": "confirmed_primary",
         "inaugurationDate": "confirmed_primary",
         "retirementDate": "confirmed_official",
         "election": "secondary_only",
@@ -206,18 +208,18 @@
         "inaugurationDate": "confirmed_primary",
         "retirementDate": "confirmed_primary",
         "election": "not_applicable",
-        "career": "confirmed_official",
+        "career": "confirmed_primary",
         "majorPolicies": "not_researched"
       }
     }
   ],
   "coverageSummary": {
     "applicableCells": 82,
-    "confirmedCells": 67,
-    "primaryOnlyCells": 49,
-    "coverageRatePercent": 81.7,
-    "primaryOnlyRatePercent": 59.8,
-    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 81.7%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 59.8%）"
+    "confirmedCells": 68,
+    "primaryOnlyCells": 52,
+    "coverageRatePercent": 82.9,
+    "primaryOnlyRatePercent": 63.4,
+    "headline": "歴代市長DB一次資料充足率（confirmed_primary + confirmed_official基準） 82.9%（うちWikipedia等に頼らない完全一次資料confirmed_primaryのみの基準では 63.4%）"
   },
   "electionResultsCoverage": {
     "totalOrdinals": 29,

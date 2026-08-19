@@ -1,0 +1,118 @@
+{
+  "generatedAt": "2026-08-19T12:00:00+09:00",
+  "lane": "E",
+  "purpose": "Phase 11 Lane E（品質・反映）：Phase10 Lane Eで指摘済みだった派生レポート間の同期漏れ（mayor-01のcareer A昇格がcoverage-rate.jsonに未反映／archiveFiscalYears.jsonのFY1988-2000・FY1965・FY1933拡張がmayor-primary-source-matrix.jsonのdatasetRanges.financeとmayor-04/mayor-10のfinance判定に未反映）を解消し、fiscalYearGapNote()の呼び出しとMayorDetailPage.tsx/FinancePage.tsx等のハードコード文言の有無を再確認し、reports/ndl-historical-source-ledger.jsonの重複エントリ有無を確認した。新しい事実の推測・登録は行わず、既存の確認済み記述との矛盾解消と古いレポートのsrc/data再同期のみを行った。作業中に他レーン（Phase11 Lane A）がsrc/data/archiveFiscalYears.jsonへFY1970（mayor-11在任期間）を並行して追加したため、この最新状態も踏まえて同期した。",
+
+  "findings": [
+    {
+      "file": "reports/mayor-primary-source-coverage-rate.json",
+      "issue": "perMayor[mayor-01].fields.career が 'confirmed_official' のままで、reports/mayor-confidence-overview.json（mayor-01.career=A、延岡市公式サイトで学歴・経歴を独立確認済み）と食い違っていた（Phase10 Lane Eで既に指摘され未修正のまま繰り越されていた）。",
+      "fix": "'confirmed_official' → 'confirmed_primary' に修正。fieldStatusCounts.career（confirmed_official 6→4、confirmed_primary 8→10）とcoverageSummary（confirmedCells/primaryOnlyCells/coverageRatePercent/primaryOnlyRatePercent/headline）を再集計して同期した。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "reports/mayor-primary-source-coverage-rate.json",
+      "issue": "perMayor[mayor-06].fields.birthDate が 'secondary_only' のままで、reports/mayor-confidence-overview.json（mayor-06.birthDate=A、Phase10で全国市長銘鑑1938年版により独立確認済み）と食い違っていた。",
+      "fix": "'secondary_only' → 'confirmed_primary' に修正。fieldStatusCounts.birthDate（secondary_only 6→5、confirmed_primary 7→8）を再集計して同期した。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "reports/mayor-primary-source-coverage-rate.json",
+      "issue": "perMayor[mayor-14].fields.career が 'confirmed_official' のままで、reports/mayor-confidence-overview.json（mayor-14.career=A、Phase10で宮崎日日新聞本人プロフィール記事全文により独立確認済み）と食い違っていた。",
+      "fix": "'confirmed_official' → 'confirmed_primary' に修正（career再集計は上記mayor-01の修正と合算済み）。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "reports/mayor-primary-source-coverage-rate.json",
+      "issue": "mayor-13のcareer/birthDateがconfidence-overview.jsonと一致しているか確認（Phase10ではdeathDate等の追記のみでcareer/birthDateのA/B評価自体は変わっていない）。",
+      "fix": "確認の結果、mayor-13.birthDate（B/confirmed_official）・mayor-13.career（B/confirmed_official）ともconfidence-overview.jsonの現状（依然Bのまま）と一致しており、修正不要と判断した。",
+      "outcome": "no_change_needed"
+    },
+    {
+      "file": "reports/mayor-primary-source-matrix.json",
+      "issue": "datasetRanges.finance が『archiveFiscalYears.json 収録範囲: FY2001〜現在』のままで、Phase8〜11で追加されたFY1988〜2000・FY1965・FY1933・FY1970（本レーン作業中にLane Aが追加）を反映しておらず、実データと矛盾していた。",
+      "fix": "『FY1933、FY1965、FY1970、FY1988〜現在（連続収録ではなく、上記以外の年度はレコード自体が存在しない）』に修正した。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "reports/mayor-primary-source-matrix.json",
+      "issue": "rows[mayor-04].finance が 'out_of_dataset_range'／_detail.linkedFiscalYearsCount=0 のままだったが、archiveFiscalYears.jsonのFY1933レコード（mayorId: mayor-04、mayor-04-term-01の在任期間1933-04-15〜1937-01-06と日付重複）が存在するため実態と矛盾していた。",
+      "fix": "finance を '△'（当初予算額のみの部分確認のため○ではなく△）、_detail.linkedFiscalYearsCount を 1 に修正した。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "reports/mayor-primary-source-matrix.json",
+      "issue": "rows[mayor-10].finance が 'out_of_dataset_range'／_detail.linkedFiscalYearsCount=0 のままだったが、archiveFiscalYears.jsonのFY1965レコード（mayorId: mayor-10、mayor-10-term-02の在任期間1964-04-19〜1966-12-01と日付重複）が存在するため実態と矛盾していた（Phase10 Lane Eで既に指摘され未修正のまま繰り越されていた）。",
+      "fix": "finance を '△'（歳入・歳出総額のみの部分確認のため○ではなく△）、_detail.linkedFiscalYearsCount を 1 に修正した。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "reports/mayor-primary-source-matrix.json",
+      "issue": "本レーン作業中にPhase11 Lane Aがsrc/data/archiveFiscalYears.jsonへFY1970（mayorId: mayor-11、mayor-11-term-01の在任期間1967-01-22〜1971-01-21と日付重複）を並行追加したため、rows[mayor-11].finance='out_of_dataset_range'／_detail.linkedFiscalYearsCount=0 が新たに実態と食い違った。",
+      "fix": "finance を '△'、_detail.linkedFiscalYearsCount を 1 に修正した。他のmayor-05〜09,12（在任期間がFY1934〜1964・FY1966〜1969・FY1971〜1987のいずれかの空白区間に完全に収まる）は対応レコードが存在しないため 'out_of_dataset_range' のまま変更していない（archiveMayorTerms.jsonの日付とFY1933/1965/1970の重複判定を機械チェックし確認済み）。",
+      "outcome": "fixed"
+    },
+    {
+      "file": "src/pages/FinanceBudgetPage.tsx / FinanceDebtPage.tsx / FinanceFundsPage.tsx",
+      "issue": "fiscalYearGapNote() が実際に正しく呼び出され、『収録年度：X／Y年度（最古〜最新）』の直後に条件付きで注記表示されているか確認。",
+      "fix": "3ページとも archiveFiscalYears をそのまま渡して呼び出しており（ハードコード年度なし）、archiveFiscalYears[0]/​[length-1]で最古・最新年度も動的取得済み。現在のデータ（FY1933・FY1965・FY1970・FY1988〜2026）でも歯抜け区間を正しく検出・表示する設計であることを確認した。修正不要。",
+      "outcome": "no_change_needed"
+    },
+    {
+      "file": "src/pages/DataStatusPage.tsx",
+      "issue": "fiscalYearRange・fiscalYearGapNote()呼び出し・『財政・人口・基金・市債（年度データ）』の説明文が最新の年度構成と整合しているか確認。",
+      "fix": "fiscalYearRangeはMath.min/Math.maxで動的算出、detail文言内の『総務省「決算カード」オンライン公開の最古年度は平成13年度＝FY2001』という記述は特定データソース（決算カード）の最古年度についての記述であり、それ以前（1988〜2000年度・単発年度）は別途『延岡市史・宮崎県統計年鑑等の一次資料で確認できた単年度のみ個別に登録』と明記されていて矛盾しない。fiscalYearGapNote()も呼び出し済み。修正不要。",
+      "outcome": "no_change_needed"
+    },
+    {
+      "file": "src/pages/MayorDetailPage.tsx",
+      "issue": "『財政データはFYxxxx年度以降のみ収録』『財政年度別アーカイブはFYxxxx〜xxxx年度分を収録』等の文言が、archiveFiscalYears.jsonの最古年度（1933年度）を反映した動的取得になっているか確認。",
+      "fix": "archiveFiscalYearMinFy/archiveFiscalYearMaxFyはMath.min/Math.maxで実データから動的算出しており、ハードコードされた年度文言は見つからなかった。現状のままFY1933が自動的に反映される。修正不要。",
+      "outcome": "no_change_needed"
+    },
+    {
+      "file": "src/pages/FinancePage.tsx",
+      "issue": "年度範囲や最古年度に関するハードコード文言の有無を確認。",
+      "fix": "『1988』『最古』『最新』『2001』『FY2001』『収録範囲』のいずれの文字列も含まれておらず、年度範囲に関するハードコード表示は見つからなかった。修正不要。",
+      "outcome": "no_change_needed"
+    },
+    {
+      "file": "reports/ndl-historical-source-ledger.json",
+      "issue": "sources配列（26件）でndlBibId／ndlUrlの重複登録がないか確認。",
+      "fix": "ndlBibId・ndlUrl・idのいずれについても重複エントリは0件だった（機械チェック済み）。統合不要。",
+      "outcome": "no_change_needed"
+    }
+  ],
+
+  "outOfScopeObservation": {
+    "note": "src/data/archiveFiscalYears.json に、本レーンの作業中、他レーン（Phase11 Lane A）によってFY1970（mayorId: mayor-11、宮崎県統計年鑑第89回・昭和45年版が出典）が追加される未コミットの差分が発生していた。本レーンではこのファイル自体は編集していないが、reports/mayor-primary-source-matrix.jsonの同期対象にこの最新状態を含めた（findings参照）。.claude/settings.local.json の変更も本レーンの作業対象外（ローカル専用設定、既存の未コミット差分）であり、変更していない。"
+  },
+
+  "validateResult": {
+    "command": "npm run validate:data",
+    "errors": 0,
+    "warnings": 15,
+    "note": "Phase10 Lane E時点と同じ件数（archiveMayorTerms.json空白期間13件＋archiveFiscalYears.json欠番警告1件＋councilSpeechSummaries.json語彙警告等）。回帰なし。欠番警告の対象年度リストは、Lane Aによる並行FY1970追加を反映して自動的に更新されていることを確認した（1970が欠番リストから外れている）。"
+  },
+  "typecheckResult": {
+    "command": "npx tsc --noEmit -p .",
+    "errors": 0,
+    "note": "出力なし＝成功。"
+  },
+  "lintResult": {
+    "command": "npm run lint",
+    "errors": 0,
+    "note": "oxlint、警告・エラーなし（exit code 0）。"
+  },
+
+  "filesModified": [
+    "E:\\nobeoka-gikai\\reports\\mayor-primary-source-coverage-rate.json",
+    "E:\\nobeoka-gikai\\reports\\mayor-primary-source-matrix.json"
+  ],
+
+  "remainingInconsistencies": [
+    "reports/mayor-population-finance-connection.json の『29任期（公選市長のみ）』表記のあいまいさ（Phase9/10から繰り越し、本レーンのスコープ外のため未着手）。",
+    "src/data/archiveMayorTerms.json（mayor-11-term-01の日付=22の出典未記載）は本レーンの読み取り専用方針の対象外データであり未着手（Phase8〜10からの継続課題）。",
+    "src/data/archiveFiscalYears.json は他レーンが継続して年度を追加中であるため、reports/mayor-primary-source-matrix.jsonとreports/mayor-primary-source-coverage-rate.jsonは今後さらに追加される年度・確認項目に応じて再同期が必要になる可能性がある。"
+  ]
+}

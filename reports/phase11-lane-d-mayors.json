@@ -1,0 +1,294 @@
+{
+  "generatedAt": "2026-08-19T00:00:00+09:00",
+  "lane": "D",
+  "purpose": "Phase 11 Lane D: reports/mayor-confidence-overview.json でB評価の残る4名（鈴木憲太郎mayor-05、青木善祐mayor-09、房野博mayor-11、早生隆彦mayor-12）を対象に、Phase10 Lane Dが確立したWayback Machine CDX API経由でのアーカイブ本文取得技法を再試行しつつ、WebSearch/WebFetch/Bash(curl)のみで再調査した。claude-in-chrome（ブラウザ自動化）は一切使用していない。src/data/archiveMayors.json・archiveMayorTerms.json、reports/mayor-confidence-overview.json、reports/mayor-confidence-overview.md、reports/ndl-research-findings.jsonの本体は編集していない（読み取りのみ）。",
+  "method": {
+    "toolsUsed": ["WebSearch（セッション早期に200/200枠を使い切ったため主要調査は途中からWebFetch/Bashへ移行）", "WebFetch", "Bash(curl — NDLサーチOpenSearch API、Wayback Machine CDX API、代替検索エンジンの試行)"],
+    "toolsNotUsed": ["claude-in-chrome（禁止指示に従い不使用）"],
+    "keyTechniqueRetried": "Phase10で有効だったBashのcurl経由Wayback Machine CDX API（http://web.archive.org/cdx/search/cdx）を、宮崎日日新聞（the-miyanichi.co.jp）記事に対して再試行した。ただし本レーンの対象4名（鈴木憲太郎・青木善祐・房野博・早生隆彦）はいずれも在任時期が1930〜1990年代で、宮崎日日新聞デジタル版（Miyanichi e-press、hito/okuyami等のセクション）がカバーする時期（おおむね2000年代以降）と重ならないため、WebSearch/site内検索でそもそも該当記事URLを発見できず、CDX APIを適用する具体的なURLが得られなかった（Phase10のmayor-13・14は死没・記事掲載が2018〜2025年だったため成功したのに対し、本レーンの対象は死没時期自体が未確認、または存命なら記事化されていない可能性が高い）。",
+    "newTechniqueAttempted": "NDLサーチのOpenSearch API（https://ndlsearch.ndl.go.jp/api/opensearch）が、通常のtitle検索に加えany=パラメータでのキーワード検索（書誌横断の全文的マッチング）に対応していることを新たに確認し、Bashのcurlのみでアクセスできることを検証した（JSレンダリング不要、静的XMLを返す）。ただしトークン分割によるOR的マッチングと見られ、無関係語のヒットが多数混入すること（例：早生隆彦での検索がシロアリ防除・木材保存関連の学術誌を多数ヒットする）を確認したため、ヒット結果は書誌レベルの新規発見資料候補としてのみ採用し、内容の事実確認には使用していない。",
+    "webSearchQuotaNote": "本セッションではWebSearchツールが調査の比較的早い段階で200/200回の上限に達し、以降のWebSearchはすべて実行不可（エラーメッセージで明示）となった。代替として、DuckDuckGo（html.duckduckgo.com / lite.duckduckgo.com）およびMojeekへのBash curlアクセスを試みたが、DuckDuckGoは2回目以降のリクエストでボット検知（\"anomaly\"）によりブロックされ、Mojeekは常時HTTP 403を返したため、いずれも実用的な代替経路にならなかった。この制約により、本レーンの実質的な調査時間の後半はWebFetchとNDLサーチAPI・Wayback CDX APIのみに依存した。",
+    "dlNdlGoJpConstraintReconfirmed": "dl.ndl.go.jp（NDLデジタルコレクション本体）が、著作権保護期間満了により本来ログイン不要のはずの資料（1868〜1952年の官報等）を含め、依然としてJavaScriptクライアントレンダリングのSPAでありcurl/WebFetchでは静的HTMLに本文が含まれないことを、Wayback Machine CDX API経由の過去スナップショット（2023〜2026年にアーカイブされた同一SPAシェル）でも重ねて確認した。この制約はPhase10から変化しておらず、ブラウザ自動化が可能なレーンでの閲覧が引き続き必須である。"
+  },
+  "mayorFindings": [
+    {
+      "mayorId": "mayor-05",
+      "name": "鈴木 憲太郎",
+      "currentGrade": "B",
+      "unconfirmedFieldsAtStart": ["生年月日", "7代任期（1946-03-29〜1947-03-22）の日単位精度", "衆議院議員としての詳細経歴"],
+      "findings": [
+        {
+          "field": "生年月日・経歴の出典書誌の特定（内容そのものは未確認）",
+          "description": "日本語版Wikipedia「鈴木憲太郎」記事をWebFetchで再取得し、脚注・参考文献リストを精査した結果、生年月日の典拠として衆議院『第五十五回帝国議会衆議院議員名簿』（衆議院公報附録、1928年、33頁）、経歴・親族関係の典拠として『人事興信録』第10版 上（人事興信所編、1934年、ス72頁）が明記されていることを確認した。これは既存archiveMayors.jsonのsourceRefs（Wikipediaの記述内容のみを記録し、脚注の書誌詳細までは記録していなかった）よりも精度の高い書誌特定である。NDLサーチOpenSearch APIで両資料の実在を確認：(1)人事興信録第10版上＝NDL書誌ID R100000001-I38111101013903（人事興信所、1934年）、ただしNDLサーチのメタデータにdl.ndl.go.jpへのデジタル化リンクが見当たらず、紙媒体所蔵のみの可能性が高い。(2)帝国議会衆議院議員名簿は「帝国議会衆議院議員名簿 第49-60回」（衆議院、[1924-1931]、15冊、NDL PID 1443455）としてデジタル化済み（「資料形態：テキストデータ　プレーンテキスト」と明記）で、第55回（1928年前後）はこの範囲に含まれると推定される。ただしdl.ndl.go.jpは依然JavaScript SPAのため、curl・WebFetchでは実際のページ内容（第55回分・鈴木憲太郎の記載箇所）を取得できなかった。",
+          "sourceUrl": "https://ja.wikipedia.org/wiki/鈴木憲太郎",
+          "sourceTitle": "鈴木憲太郎 - Wikipedia（脚注に衆議院『第五十五回帝国議会衆議院議員名簿』1928年p33、『人事興信録』第10版上1934年p.ス72を明記）",
+          "publishedDate": "未確認（Wikipedia記事の最終更新日は本セッションでは確認していない）",
+          "confidence": "unconfirmed",
+          "note": "生年月日・経歴そのものを裏付ける一次資料の書誌情報は特定できたが、本文内容そのものは未到達。事実の新規確認ではなく、今後の閲覧候補の精度向上（ndlViewingQueueAdditions参照）にとどまる。"
+        },
+        {
+          "field": "官報1939年の該当可能性（不採用）",
+          "description": "NDLサーチOpenSearch APIのany=キーワード検索で「鈴木憲太郎」を検索したところ、官報1939年11月9日号（PID 2960348）・1939年12月14日号（PID 2960377）がヒットしたが、同じ検索方式で「早生隆彦」を検索した際にシロアリ防除・木材保存関連の無関係な学術誌が大量にヒットしたことから、この検索はキーワードをトークン分割したOR的マッチングであり、フレーズ一致を保証しないと判断した。したがってこの2件の官報ヒットは鈴木憲太郎本人に関する記述である確証がなく、採用しない（内容確認もできていない）。",
+          "sourceUrl": "https://ndlsearch.ndl.go.jp/api/opensearch?any=鈴木憲太郎",
+          "sourceTitle": "官報 1939年11月09日／1939年12月14日（NDLサーチ全文検索ヒット、内容未確認）",
+          "publishedDate": "1939-11-09 / 1939-12-14",
+          "confidence": "unconfirmed",
+          "note": "トークン分割によるノイズの可能性が高いため不採用。ndlViewingQueueAdditionsには含めない。"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "生年月日そのものは依然未確認のまま。ただし、その事実を裏付けうる具体的な一次資料（衆議院議員名簿1928年・人事興信録1934年、いずれも書誌実在確認済み）を新たに特定できたことは、次フェーズ（ブラウザ自動化可能なレーン）での閲覧優先度を明確化する成果として記録する。"
+    },
+    {
+      "mayorId": "mayor-09",
+      "name": "青木 善祐",
+      "currentGrade": "B",
+      "unconfirmedFieldsAtStart": ["第11代延岡市長就任日（disputed-001：1956-04-10 vs 1956-04-21）"],
+      "findings": [
+        {
+          "field": "延岡市議会会議録検索システムの収録範囲確認（disputed-001解消には使えないことの構造的確認）",
+          "description": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）のトップページをWebFetch・curlで確認した結果、「ここにない本会議録は平成12年8月定例会以降の本会議録です」との記載があり、同システムの収録範囲が2000年8月以降の本会議録に限定されることを確認した。1956年（昭和31年）の青木善祐氏就任時期は収録範囲外であり、このシステムではdisputed-001の解消に一切寄与しないことが構造的に確定した。",
+          "sourceUrl": "http://www.kensakusystem.jp/nobeoka/index.html",
+          "sourceTitle": "延岡市議会/会議録検索システム トップページ",
+          "publishedDate": "確認日2026-08-19（システムの収録範囲に関する記載自体の日付は不明）",
+          "confidence": "confirmed_official",
+          "note": "「収録範囲外」という否定的事実として確定的に確認できた（延岡市議会が運営する公式システム自体の記載）。"
+        },
+        {
+          "field": "「市政」誌（全国市長会館）1957年10月号の存在確認（内容未確認）",
+          "description": "NDLサーチOpenSearch APIのany=キーワード検索で「青木善祐」を検索したところ、全国市長会機関誌『市政』6巻10号(63号)（全国市長会館、1957年10月、NDL PID 2711364）がヒットした。青木善祐氏の延岡市長就任（1956年4月）から約1年半後の号であり、新任市長紹介記事等が掲載されている可能性がある。デジタル化済み（PID確認）だが、1952年以降の資料のため個人送信サービス（ログイン必須）の対象と推定され、本レーンでは内容を確認できなかった。",
+          "sourceUrl": "https://dl.ndl.go.jp/pid/2711364",
+          "sourceTitle": "市政 6(10)(63) - 全国市長会館",
+          "publishedDate": "1957-10",
+          "confidence": "unconfirmed",
+          "note": "内容未確認のため事実としては採用せず、閲覧候補として記録する。"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "disputed-001（就任日1956-04-10 vs 1956-04-21）は本レーンでも解消できなかった。延岡市議会会議録検索システムが構造的に対象期間を含まないことを新たに確定できたのは、今後の他レーンが同じ探索を繰り返さないための有益な負の確認である。"
+    },
+    {
+      "mayorId": "mayor-11",
+      "name": "房野 博",
+      "currentGrade": "B",
+      "unconfirmedFieldsAtStart": ["生年月日", "ふりがな", "出身地", "学歴", "前職", "死没日", "第16代退任（辞職）の具体的事情", "termStart矛盾（1967-01-22 vs 当選日1967-01-23）"],
+      "findings": [
+        {
+          "field": "延岡市名誉市民ではないことの確認（否定的事実）",
+          "description": "延岡市公式ホームページ「名誉市民」ページ（https://www.city.nobeoka.miyazaki.jp/soshiki/13/1690.html）をWebFetchで確認した結果、掲載されている名誉市民は三浦虎雄・仲田又次郎・宮崎輝・内藤政道・吉野彰の5名のみであり、房野博氏（および早生隆彦・青木善祐・鈴木憲太郎の各氏）は名誉市民に含まれていないことを確認した。",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/13/1690.html",
+          "sourceTitle": "名誉市民 - 延岡市公式ホームページ",
+          "publishedDate": "確認日2026-08-19",
+          "confidence": "confirmed_official",
+          "note": "名誉市民経由での経歴確認という調査経路が閉じていることを確定した（負の確認）。"
+        },
+        {
+          "field": "「市政」誌（全国市長会館）1968年10月号・1973年12月号の存在確認（内容未確認）",
+          "description": "NDLサーチOpenSearch APIのany=キーワード検索で「房野博」を検索したところ、『市政』17巻10号(195号)（1968年10月、NDL PID 2711496）と22巻12号(257号)（1973年12月、NDL PID 2711558）がヒットした。1968年10月号は房野博氏の第14代市長就任（1967年1月）から約1年9か月後であり、全国市長会機関誌が慣例的に掲載する新任市長紹介記事に該当する可能性が高い。いずれもデジタル化済みだが1952年以降のためログイン必須と推定され、本レーンでは内容を確認できなかった。",
+          "sourceUrl": "https://dl.ndl.go.jp/pid/2711496 ／ https://dl.ndl.go.jp/pid/2711558",
+          "sourceTitle": "市政 17(10)(195) ／ 市政 22(12)(257) - 全国市長会館",
+          "publishedDate": "1968-10 / 1973-12",
+          "confidence": "unconfirmed",
+          "note": "内容未確認のため事実としては採用せず、閲覧候補として記録する。特に1968年10月号は生年月日・出身地・学歴等のプロフィール確認に有望。"
+        },
+        {
+          "field": "自著「きずな一筆」（1997年）の製作経緯の補足確認",
+          "description": "既存ledger（ndl-src-13、status: rejected、「小説の可能性もある」との留保付き）を踏まえ、NDLサーチ書誌ページをWebFetchで再確認したところ、本資料はサピエ図書館所蔵の音声（カセットテープ）資料で、製作担当が「延岡ライトハウス点字図書館」（延岡市内の点字図書館、製作年2001年9月19日）であることを新たに確認した。地元延岡の点字図書館が製作した点から、房野博氏本人の回想録である可能性が既存の留保よりも高いと考えられるが、NDC分類（913.6＝小説）自体は変わっておらず、内容そのものは依然未確認（サピエ図書館は視覚障害者等の会員制サービスで一般アクセス不可）。",
+          "sourceUrl": "https://ndlsearch.ndl.go.jp/books/R100000038-I943378",
+          "sourceTitle": "きずな一筆（房野博著、きずな一筆発行発起人会、1997年）",
+          "publishedDate": "1997",
+          "confidence": "unconfirmed",
+          "note": "アクセス不能なため新規事実としては採用しない。ndl-src-13の既存rejected判定は変更しない（本レーンはledgerを編集していない）。"
+        }
+      ],
+      "gradeUpgradeCandidate": false,
+      "notes": "termStart矛盾・死没日・生年月日・ふりがな・出身地・学歴・前職・退任の具体的事情はいずれも本レーンでは解消できなかった。名誉市民ではないという否定的事実の確定と、『市政』誌2号（1968-10、1973-12）という新規閲覧候補の発見が本レーンの成果。"
+    },
+    {
+      "mayorId": "mayor-12",
+      "name": "早生 隆彦",
+      "currentGrade": "B",
+      "unconfirmedFieldsAtStart": ["生年月日", "ふりがな", "出身地", "死没日", "延岡市長選出馬の経緯"],
+      "findings": [],
+      "gradeUpgradeCandidate": false,
+      "notes": "本レーンでは新規の一次資料・準一次資料をまったく発見できなかった。WebSearchは早期に枠を使い切ったため十分な検索ができなかった。NDLサーチany=キーワード検索は「早生隆彦」で30件以上ヒットしたが、その大半（浅川実験林・イエシロアリ・木材腐朽・アセチル化処理等）は明らかに無関係な学術誌記事であり、トークン分割によるノイズと判断した（Phase10で既に発見済みの道路建設業界誌4件はこの検索でも再ヒットしたが新規性なし）。ja.wikipedia.org/wiki/早生隆彦は本レーンでもHTTP 404で個人記事が存在しないことを再確認した。延岡市公式サイトの近代の年表・Wikipedia「延岡市」記事も再確認したが、既存データ（在任期間・「元日本道路公団」）を超える情報はなかった。衆議院・官報関連の代替アクセス経路（官報情報検索サービス＝ログイン必須、NDLデジタルコレクション官報全文検索＝JS SPA）はPhase10で構造的制約が確定済みのため本レーンでは重複調査していない。"
+    }
+  ],
+  "sourceLedgerAdditions": [
+    {
+      "candidateId": "ndl-src-27",
+      "title": "帝国議会衆議院議員名簿 第49-60回",
+      "author": "衆議院",
+      "publisher": "[衆議院]",
+      "publishedYear": "1924-1931（第49-60回、15冊）",
+      "ndlBibId": "R100000039-I1443455",
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/books/R100000039-I1443455",
+      "ndlDigitalPid": "https://dl.ndl.go.jp/pid/1443455",
+      "relatedMayorIds": ["mayor-05"],
+      "relatedYears": [1928],
+      "dataTypes": ["profile"],
+      "accessStatus": "unknown_possibly_public_domain_but_spa_blocked",
+      "notes": "鈴木憲太郎（mayor-05）のWikipedia記事が生年月日の典拠として引用する『第五十五回帝国議会衆議院議員名簿』（1928年、衆議院公報附録、33頁）を含むと推定される合本デジタル化資料。「資料形態：テキストデータ プレーンテキスト」と明記されデジタル化済みだが、dl.ndl.go.jpのJavaScript SPA制約により本レーンでは内容確認不可。1868〜1952年の範囲内でログイン不要のはずだが、SPA自体がcurl/WebFetchでは動作しないため実質的にアクセス不能（Wayback Machine CDX経由の過去スナップショットでも同じSPAシェルのみ確認）。既存ledgerに重複エントリなし（新規）。"
+    },
+    {
+      "candidateId": "ndl-src-28",
+      "title": "人事興信録 第10版 上",
+      "author": "人事興信所 編",
+      "publisher": "人事興信所",
+      "publishedYear": 1934,
+      "ndlBibId": "R100000001-I38111101013903",
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/books/R100000001-I38111101013903",
+      "ndlDigitalPid": null,
+      "relatedMayorIds": ["mayor-05"],
+      "relatedYears": [1934],
+      "dataTypes": ["profile"],
+      "accessStatus": "physical_only_no_digital_pid_found",
+      "notes": "鈴木憲太郎（mayor-05）のWikipedia記事が経歴・親族関係の典拠として引用する資料（ス72頁）。NDLサーチのメタデータにdl.ndl.go.jpへのデジタル化リンクが見当たらず、紙媒体所蔵のみの可能性が高い（他のNDL所蔵館・公共図書館での閲覧が必要な可能性）。既存ledgerに重複エントリなし（新規）。"
+    },
+    {
+      "candidateId": "ndl-src-29",
+      "title": "市政（全国市長会機関誌）6(10)(63)号",
+      "author": "全国市長会 [編]",
+      "publisher": "全国市長会館",
+      "publishedYear": "1957-10",
+      "ndlBibId": "R100000002-I000000009936-d2711364",
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000009936-d2711364",
+      "ndlDigitalPid": "https://dl.ndl.go.jp/pid/2711364",
+      "relatedMayorIds": ["mayor-09"],
+      "relatedYears": [1957],
+      "dataTypes": ["profile"],
+      "accessStatus": "login_required",
+      "notes": "青木善祐（mayor-09）就任（1956年4月）の約1年半後の号。NDLサーチのany=全文的キーワード検索で「青木善祐」がヒットした。デジタル化済み（PID確認）だが1952年以降のため個人送信サービスのログインが必要と推定。既存ledgerに重複エントリなし（新規）。"
+    },
+    {
+      "candidateId": "ndl-src-30",
+      "title": "市政（全国市長会機関誌）17(10)(195)号",
+      "author": "全国市長会 [編]",
+      "publisher": "全国市長会館",
+      "publishedYear": "1968-10",
+      "ndlBibId": "R100000002-I000000009936-d2711496",
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000009936-d2711496",
+      "ndlDigitalPid": "https://dl.ndl.go.jp/pid/2711496",
+      "relatedMayorIds": ["mayor-11"],
+      "relatedYears": [1968],
+      "dataTypes": ["profile"],
+      "accessStatus": "login_required",
+      "notes": "房野博（mayor-11）第14代市長就任（1967年1月）の約1年9か月後の号。NDLサーチのany=全文的キーワード検索で「房野博」がヒットした。新任市長紹介記事の可能性があり、生年月日・ふりがな・出身地・学歴等のプロフィール確認に有望。既存ledgerに重複エントリなし（新規）。"
+    },
+    {
+      "candidateId": "ndl-src-31",
+      "title": "市政（全国市長会機関誌）22(12)(257)号",
+      "author": "全国市長会 [編]",
+      "publisher": "全国市長会館",
+      "publishedYear": "1973-12",
+      "ndlBibId": "R100000002-I000000009936-d2711558",
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000009936-d2711558",
+      "ndlDigitalPid": "https://dl.ndl.go.jp/pid/2711558",
+      "relatedMayorIds": ["mayor-11"],
+      "relatedYears": [1973],
+      "dataTypes": ["profile"],
+      "accessStatus": "login_required",
+      "notes": "房野博（mayor-11）在任中（第15代、1971-1975年）の号。NDLサーチのany=全文的キーワード検索で「房野博」がヒットした。既存ledgerに重複エントリなし（新規）。"
+    }
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "medium",
+      "purpose": "鈴木憲太郎（mayor-05）の生年月日・衆議院議員としての詳細経歴を独立確認する。Wikipedia記事の脚注が明記する一次資料そのものへの到達を試みる。",
+      "title": "帝国議会衆議院議員名簿 第49-60回（第55回相当分、1928年頃）",
+      "bibliographicId": "R100000039-I1443455（ndl-src-27）",
+      "page": "第55回分の該当ページ（未特定、Wikipedia注記ではp.33）",
+      "relatedMayorId": "mayor-05",
+      "discoveredByLane": "D"
+    },
+    {
+      "priority": "medium",
+      "purpose": "鈴木憲太郎（mayor-05）の経歴・親族関係を独立確認する。ただしデジタル化未確認のため、まず所蔵館（NDL本館等）での閲覧可否確認が必要。",
+      "title": "人事興信録 第10版 上",
+      "bibliographicId": "R100000001-I38111101013903（ndl-src-28）",
+      "page": "ス72頁",
+      "relatedMayorId": "mayor-05",
+      "discoveredByLane": "D"
+    },
+    {
+      "priority": "low",
+      "purpose": "青木善祐（mayor-09）第11代延岡市長就任時（1956年）前後のプロフィール記事の有無を確認し、disputed-001（就任日）解消の手がかりを探す。",
+      "title": "市政 6(10)(63)号（1957年10月）",
+      "bibliographicId": "R100000002-I000000009936-d2711364（ndl-src-29）",
+      "page": "未特定（号内の目次確認が必要）",
+      "relatedMayorId": "mayor-09",
+      "discoveredByLane": "D"
+    },
+    {
+      "priority": "high",
+      "purpose": "房野博（mayor-11）の生年月日・ふりがな・出身地・学歴等、現在完全に未確認のプロフィール項目を、就任直後の全国市長会機関誌の新任市長紹介記事から確認する。",
+      "title": "市政 17(10)(195)号（1968年10月）",
+      "bibliographicId": "R100000002-I000000009936-d2711496（ndl-src-30）",
+      "page": "未特定（号内の目次確認が必要）",
+      "relatedMayorId": "mayor-11",
+      "discoveredByLane": "D"
+    },
+    {
+      "priority": "low",
+      "purpose": "房野博（mayor-11）在任中（第15代）の主要事業・経歴に関する追加情報を確認する。",
+      "title": "市政 22(12)(257)号（1973年12月）",
+      "bibliographicId": "R100000002-I000000009936-d2711558（ndl-src-31）",
+      "page": "未特定（号内の目次確認が必要）",
+      "relatedMayorId": "mayor-11",
+      "discoveredByLane": "D"
+    }
+  ],
+  "structuralConstraintsReconfirmed": [
+    {
+      "constraint": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）は2000年8月以降の本会議録のみ収録",
+      "impact": "青木善祐（1956年）・房野博（1967-1978年）・早生隆彦（1978-1994年）・鈴木憲太郎（1937-1947年）のいずれの在任期間もこのシステムの収録範囲外であり、就任日・退任理由等の一次資料として一切使用できないことが確定した。",
+      "recommendation": "他レーンはこのシステムでの探索を今後省略してよい。"
+    },
+    {
+      "constraint": "dl.ndl.go.jp（NDLデジタルコレクション）はJavaScriptクライアントレンダリングのSPAであり、著作権保護期間満了資料（1868-1952年の官報等、ログイン不要のはず）を含め、curl・WebFetchでは本文取得不可",
+      "impact": "本レーンで新規発見した候補資料（ndl-src-27〜31）はいずれも書誌情報の特定にとどまり、内容確認はできなかった。Wayback Machine CDX API経由の過去スナップショットも同一のSPAシェルのみで内容を含まない。",
+      "recommendation": "ブラウザ自動化（claude-in-chrome等）が使用可能なレーン、またはユーザー本人によるNDLログイン後の個人送信サービス閲覧が必要。Phase10・11で同一の制約が確認されたため、今後のPhase 12以降で自動的にリトライせず、まず閲覧手段の確保を優先すべき。"
+    },
+    {
+      "constraint": "本セッションはWebSearchツールの200回/セッション上限に早期に到達し、以降のWebSearchが完全に利用不可になった",
+      "impact": "早生隆彦（mayor-12）を含む後半の調査でWebSearchによる新規手がかり探索ができなかった。代替の検索エンジン（DuckDuckGo、Mojeek）へのBash curlアクセスも、ボット検知・403エラーにより実用的な代替にならなかった。",
+      "recommendation": "WebSearchに強く依存する探索を行うレーンでは、セッション枠の消費ペースに留意する必要がある。"
+    }
+  ],
+  "rejectedOrUnreliableLeads": [
+    {
+      "claim": "WebSearchの自動要約が鈴木憲太郎の経歴として「陸軍三等主計、岡富村議、宮崎県議、県農会長等」を挙げた",
+      "source": "WebSearch自動生成要約（Wikipedia記事の要約と推定）",
+      "assessment": "Wikipedia記事本文の直接引用の可能性が高く虚偽ではないと考えられるが、本レーンでは独立資料での裏付けを得ておらず、Wikipedia経由の情報の域を出ない。新規事実としては採用しない。"
+    },
+    {
+      "claim": "NDLサーチany=キーワード検索での官報1939年11月・12月号ヒット（鈴木憲太郎）",
+      "source": "NDLサーチOpenSearch API（any=パラメータ）",
+      "assessment": "同方式が早生隆彦検索で大量の無関係学術誌をヒットさせたことから、トークン分割によるノイズと判断し不採用。"
+    }
+  ],
+  "summary": {
+    "researchedCount": 4,
+    "mayorsResearched": ["mayor-05", "mayor-09", "mayor-11", "mayor-12"],
+    "newFieldsConfirmed": 0,
+    "newConfirmedOfficialFacts": 2,
+    "newConfirmedOfficialFactsDetail": [
+      "延岡市議会会議録検索システムの収録範囲が2000年8月以降のみであること（青木善祐disputed-001解消には使用不可と確定）",
+      "房野博が延岡市名誉市民に含まれていないこと"
+    ],
+    "newBibliographicLeadsIdentified": 5,
+    "sourceLedgerAdditionsCount": 5,
+    "ndlViewingQueueAdditionsCount": 5,
+    "gradeUpgradeCandidates": 0,
+    "unresolvedDisputes": [
+      "青木善祐（mayor-09）第11代延岡市長就任日disputed-001（1956-04-10 vs 1956-04-21）は本レーンでも未解決",
+      "房野博（mayor-11）termStart矛盾（1967-01-22 vs 当選日1967-01-23）は本レーンでも未解決"
+    ],
+    "stillFullyUnconfirmed": [
+      "鈴木憲太郎の生年月日そのもの（典拠書誌は特定できたが内容未確認）",
+      "房野博の生年月日・ふりがな・出身地・学歴・前職・死没日",
+      "早生隆彦の生年月日・ふりがな・出身地・死没日・市長選出馬の経緯"
+    ],
+    "sessionConstraintsNote": "WebSearchツールが早期に枠を使い切ったこと、および代替検索エンジンへのcurlアクセスがボット検知・403で使えなかったことにより、特に早生隆彦（mayor-12）に対する調査は他の3名に比べて手薄になった。次フェーズでWebSearch枠がリセットされた状態で早生隆彦を優先的に再調査することを推奨する。"
+  }
+}

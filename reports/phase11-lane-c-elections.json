@@ -1,0 +1,274 @@
+{
+  "generatedAt": "2026-08-19T18:00:00+09:00",
+  "lane": "C",
+  "purpose": "Phase 11 Lane C（実閲覧突破・数値抽出フェーズ）: 1971〜1998年の延岡市長選挙8回（election-mayor-1971/1975/1978/1982/1986/1990/1994/1998）について、Phase10 Lane Dで確立した『Wayback Machine CDX API（curl経由）で検索エンジン404の記事原文に到達する』技法を選挙関連資料に応用し、得票数・投票率・候補者名の一次資料突破を試みた。ADEAC（adeac.jp）には一切アクセスしていない（Lane Aの担当領域のため対象外）。WebSearch・WebFetch・Bash(curl)のみ使用（claude-in-chrome不使用）。WebSearchは調査序盤で1日の利用上限に到達したため、中盤以降はBash curl経由でBing検索結果ページを直接取得する代替手段、および対象サイト自身のWordPress検索フォーム（?s=キーワード）への直接curlアクセスで代替した。src/data配下・reports/ndl-historical-source-ledger.json・reports/ndl-research-findings.jsonはいずれも読み取りのみで編集していない。",
+  "method": {
+    "toolsUsed": [
+      "WebSearch（セッション上限到達まで）",
+      "WebFetch",
+      "Bash(curl, iconv, sed, grep — Wayback Machine CDX API、Bing検索結果ページ直接取得、対象サイトのWordPress検索フォーム直接アクセス用)"
+    ],
+    "toolsNotUsed": ["claude-in-chrome（禁止指示に従い不使用）"],
+    "keyTechniques": [
+      "Wayback Machine CDX API（http://web.archive.org/cdx/search/cdx?url=...&output=json）でドメイン単位のスナップショット一覧を取得し、既知記事URLの404を回避してhttps://web.archive.org/web/{timestamp}/{url}形式で本文を直接取得した。",
+      "取得したHTMLの文字コードがEUC-JP（夕刊デイリーWeb旧CMS）であることを確認し、curl | iconv -f EUC-JP -t UTF-8//IGNORE | sed 's/<[^>]*>//g' で本文をプレーンテキスト化した（Shift-JISと誤認して最初は文字化けしたため、EUC-JPへの変換に修正した）。",
+      "WebSearchの利用上限到達後は、Bash curlでBing検索結果ページ（www.bing.com/search?q=...、UTF-8 URLエンコード済みクエリ）を直接取得し、b_algo要素・cite要素から手動で結果を抽出する代替手段を用いた。ただしBingのorganicリンクはck/a形式のbase64エンコードされたリダイレクトURLであり、機械的な復号を試みたが対象クエリでは実質0件（画像/動画/ニュース検索への誘導のみ）だった。",
+      "対象サイト（yukan-daily.co.jp、the-miyanichi.co.jp）自身のサイト内検索フォームを、curl -G --data-urlencodeでのGETクエリとして直接叩き、WordPress検索結果ページのarticle/リンクを抽出した。"
+    ]
+  },
+  "newDomainDiscovery": {
+    "domain": "yukan-daily.co.jp（夕刊デイリー新聞社、延岡市に本社を置く地域紙、1963年創刊）",
+    "significance": "Phase8〜10ではthe-miyanichi.co.jp（宮崎日日新聞）のみを対象としていたが、本Laneで新たに夕刊デイリー新聞社の公式ドメインyukan-daily.co.jpを特定した。同社は延岡市曽田町2丁目1302番地に本社を置き、1963年（延岡市長選挙の対象期間の直前）に創刊した地域紙で、延岡市政・延岡市長選挙の報道密度が宮崎日日新聞より高い可能性がある。ただし今回の調査で確認した限り、同サイトのオンライン記事アーカイブ（新CMS＝/article/連番、旧CMS＝/news.php?id=連番のいずれも）は近年（おおむね2018年以降）の記事のみを収録しており、1971〜1998年当時の記事がデジタル化されている形跡はなかった（該当年のWayback CDXスナップショットも存在しない＝そもそもオンライン公開されたことがない記事のため）。",
+    "cdxEarliestCapture": "2005-08-04（http://www.yukan-daily.co.jp/、ドメイントップページの最古スナップショット）"
+  },
+  "electionFindings": [
+    {
+      "year": 1971,
+      "existingRecordId": "election-mayor-1971",
+      "searchesPerformed": [
+        "site:the-miyanichi.co.jp 延岡市長選挙（WebSearch）",
+        "延岡市長選挙 1971年 房野博 対立候補 得票（WebSearch）",
+        "site:yukan-daily.co.jp 房野博（WebSearch）",
+        "夕刊デイリー新聞社サイト内検索『房野博』（curl直接）",
+        "Wayback CDX: yukan-daily.co.jp全体スナップショット確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。既存資料（延岡市公式年表）の『1971年1月 房野博氏が再び市長に就任』（第2期＝通算では第15代）以上の情報は本Laneでは得られなかった。ndl-src-24（延岡商工会議所四十年史、1975年刊）はfinding-019で1967年（第14代・房野博初当選、無投票）までの選挙年表しか確認されておらず、1971年（第2期）を含むかは既存記録からは未確定。夕刊デイリーの公式ドメインはyukan-daily.co.jpと特定できたが、同社のオンライン記事アーカイブは近年分のみで1971年当時の記事はWayback上にも存在しなかった（Wayback Machineは当時のインターネット上に存在しなかったページはアーカイブできないという構造的限界）。"
+    },
+    {
+      "year": 1975,
+      "existingRecordId": "election-mayor-1975",
+      "searchesPerformed": [
+        "延岡市長選挙 昭和50年 房野博 三選（Bing代替検索）",
+        "夕刊デイリー新聞社サイト内検索『房野博』（curl直接）"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。既存資料以上の情報は本Laneでは得られなかった。NDL『延岡商工会議所80年のあゆみ：創立80周年記念誌』（2014年刊、下記sourceLedgerAdditions参照）が四十年史（1975年刊）の年表を継承・延長している可能性が高く、1975年を含む可能性のある最有力の未閲覧資料として次フェーズへ引き継ぐ。"
+    },
+    {
+      "year": 1978,
+      "existingRecordId": "election-mayor-1978",
+      "searchesPerformed": [
+        "延岡市長選挙 1978年 早生隆彦 当選 得票数（WebSearch）",
+        "site:yukan-daily.co.jp 早生隆彦（WebSearch）",
+        "夕刊デイリー新聞社サイト内検索『早生隆彦』（curl直接）"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。1978年10月に房野博市長が辞職し、同年11月に早生隆彦氏が就任（既存archiveMayorTerms.jsonで確認済み）という経緯は変わらず。この選挙が辞職に伴う補欠的な性格を持つか、通常選挙と同時期だったかは本Laneでは判別できなかった。"
+    },
+    {
+      "year": 1982,
+      "existingRecordId": "election-mayor-1982",
+      "searchesPerformed": [
+        "夕刊デイリー新聞社サイト内検索『早生隆彦』（curl直接）",
+        "延岡商工会議所80年のあゆみ 書誌調査（NDLサーチ、WebFetch）"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。新聞社サイトのアーカイブ・NDL書誌検索いずれも本年に特化した新規情報は得られなかった。"
+    },
+    {
+      "year": 1986,
+      "existingRecordId": "election-mayor-1986",
+      "searchesPerformed": [
+        "夕刊デイリー新聞社サイト内検索『早生隆彦』（curl直接）",
+        "延岡市議会会議録検索システム（kensakusystem.jp）収録範囲確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。延岡市議会会議録検索システム（kensakusystem.jp/nobeoka/）を新規に確認したところ、公開範囲は『平成12年（2000年）第8回臨時会以降』のみであり、1986年当時の会議録はオンライン未公開と判明した（負の知見、新規確認）。既存reports/ndl-historical-source-ledger.json ndl-src-15（宮崎県立図書館所蔵の手書き複写、昭和34〜48年＝1959〜1973年分）ともカバー範囲が重ならず、1974〜1999年の会議録がオンライン・NDLいずれからもアクセスできない空白期間であることが明確になった。"
+    },
+    {
+      "year": 1990,
+      "existingRecordId": "election-mayor-1990",
+      "searchesPerformed": [
+        "夕刊デイリー新聞社サイト内検索『早生隆彦』（curl直接）",
+        "宮崎県選挙管理委員会 選挙データライブラリー Wayback CDX調査"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": null,
+        "confidence": "unconfirmed"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。宮崎県選挙管理委員会公式サイトの過去ページ（Wayback、2007年時点の『選挙データライブラリー』senkyodatalibrary.htm）を新規に確認したところ、同ライブラリーが収録するのは衆議院議員小選挙区選挙・参議院議員通常選挙・宮崎県知事選挙・宮崎県議会議員選挙の4種のみで、市区町村長選挙（延岡市長選挙を含む）は対象外であることが判明した（負の知見、新規確認）。宮崎県選挙管理委員会は市町村長選挙のデータを一元的にオンライン公開していないと結論できる。"
+    },
+    {
+      "year": 1994,
+      "existingRecordId": "election-mayor-1994",
+      "searchesPerformed": [
+        "site:yukan-daily.co.jp 桜井哲雄（WebSearch）",
+        "Wayback CDX: yukan-daily.co.jp/news.php?id=97728（桜井哲雄死亡叙位記事）取得・EUC-JP変換"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": "https://web.archive.org/web/20250124190528/http://www.yukan-daily.co.jp/news.php?id=97728",
+        "confidence": "secondary_only"
+      },
+      "notes": "夕刊デイリーWeb『元延岡市長、故桜井哲雄さんに死亡叙位』（本紙掲載日2022-02-22、3面）のWaybackアーカイブ本文に到達し（Internet Archive経由、Phase10 Lane Dと同一手法）、『桜井さんは１９９４年の市長選で初当選し、連続３期１２年務めた』との記述を確認した。これはPhase10 Lane Dで宮崎日日新聞（the-miyanichi.co.jp）から確認済みの死亡記事とは別の、夕刊デイリー独自の記事による独立クロスチェックであり、1994年当選という既存データ（electionDate=1994-02、mayor-13初当選）を裏付ける準一次資料（secondary_only）として記録する。ただし投票日・得票数・投票率・対立候補者名は本記事にも記載がなく新規情報は得られなかった。得票数等を一次資料へ昇格させるには至らない。"
+    },
+    {
+      "year": 1998,
+      "existingRecordId": "election-mayor-1998",
+      "searchesPerformed": [
+        "夕刊デイリー新聞社サイト内検索『桜井哲雄』（curl直接、id=97728以外の記事を探索）",
+        "夕刊デイリーWeb『延岡市制施行９０周年特集』（news.php?id=101608）取得・歴代市長代数リストの確認"
+      ],
+      "newFindings": {
+        "electionDate": null,
+        "candidates": null,
+        "turnoutPercent": null,
+        "eligibleVoters": null,
+        "invalidVotes": null,
+        "unopposed": null,
+        "sourceUrl": "http://www.yukan-daily.co.jp/news.php?id=101608",
+        "confidence": "secondary_only"
+      },
+      "notes": "得票数・投票率・対立候補者名は新規に確認できなかった（0件）。ただし夕刊デイリーWeb『延岡市制施行９０周年特集』（本紙掲載日2023-02-09、7面）の『歴代の市長』リストで『桜井哲雄氏（第21、22、23代）』との記述を確認し、桜井哲雄氏が計3期（1994年・2002年・2006年落選までの通算3期＝第21〜23代）務めたという既存データの代数構成と矛盾しないことを独立に確認できた（1998年再選＝第22代に相当すると推定されるが、本記事は代数の列挙のみで各代の年月日には言及していない）。詳細は下記sourceLedgerAdditions参照。"
+    }
+  ],
+  "sourceLedgerAdditions": [
+    {
+      "candidateId": "yukan-daily-01",
+      "title": "夕刊デイリーWeb『延岡市制施行９０周年特集』（延岡市90年のあゆみ・歴代の市長一覧）",
+      "author": "夕刊デイリー新聞社",
+      "publisher": "夕刊デイリー新聞社",
+      "publicationYear": 2023,
+      "sourceType": "website_newspaper_archive",
+      "url": "https://web.archive.org/web/*/http://www.yukan-daily.co.jp/news.php?id=101608",
+      "liveUrl": "http://www.yukan-daily.co.jp/news.php?id=101608",
+      "accessStatus": "readable",
+      "status": "reviewed",
+      "checkedAt": "2026-08-19",
+      "relatedMayorIds": ["mayor-04", "mayor-05", "mayor-06", "mayor-07", "mayor-08", "mayor-09", "mayor-10", "mayor-11", "mayor-12", "mayor-13"],
+      "relatedYears": [1933, 2023],
+      "dataTypes": ["profile", "term", "civicEvent"],
+      "evidenceType": "chronology_and_succession_list",
+      "confidence": "B",
+      "notes": "延岡市制施行1933〜2023年の90年間の市政年表（インフラ・行事中心、選挙結果の記載なし）と、歴代市長28代を初代仲田又次郎氏〜現職読谷山洋司氏まで代数付きで列挙するリストの2部構成。房野博氏（第14・15・16代）、早生隆彦氏（第17〜20代）、桜井哲雄氏（第21〜23代）という代数構成が既存archiveMayors.jsonのtermNumberと矛盾しないことを確認した独立の傍証資料。ただし得票数・投票率・投票日等の選挙結果データは一切含まれない。既存ledgerに同種資料（yukan-daily.co.jp発）がないため新規追加する。"
+    },
+    {
+      "candidateId": "yukan-daily-02",
+      "title": "夕刊デイリーWeb『元延岡市長、故桜井哲雄さんに死亡叙位』",
+      "author": "夕刊デイリー新聞社",
+      "publisher": "夕刊デイリー新聞社",
+      "publicationYear": 2022,
+      "sourceType": "website_newspaper_archive",
+      "url": "https://web.archive.org/web/20250124190528/http://www.yukan-daily.co.jp/news.php?id=97728",
+      "liveUrl": "http://www.yukan-daily.co.jp/news.php?id=97728",
+      "accessStatus": "readable",
+      "status": "reviewed",
+      "checkedAt": "2026-08-19",
+      "relatedMayorIds": ["mayor-13"],
+      "relatedYears": [1994, 2022],
+      "dataTypes": ["profile", "term", "civicEvent"],
+      "evidenceType": "obituary_article",
+      "confidence": "B",
+      "notes": "宮崎日日新聞（Phase10 Lane D既発見）とは独立の、夕刊デイリー新聞による桜井哲雄氏（mayor-13）死亡叙位記事。『1994年の市長選で初当選し、連続3期12年務めた』を確認。九州保健福祉大学誘致・クレアパーク延岡建設・小児科救急医療充実等の業績記述あり。得票数・投票率は含まれない。"
+    },
+    {
+      "candidateId": "ndl-src-27-candidate",
+      "title": "延岡商工会議所80年のあゆみ：創立80周年記念誌",
+      "author": "延岡商工会議所",
+      "publisher": "延岡商工会議所",
+      "publishedYear": 2014,
+      "publishedYearNote": "2014年12月刊、136ページ、非売品",
+      "ndlBibId": "R100000002-I034006891",
+      "ndlUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I034006891",
+      "page": null,
+      "category": "election_candidate",
+      "relatedMayorIds": ["mayor-11", "mayor-12", "mayor-13"],
+      "relatedYears": [1971, 1998],
+      "dataTypes": ["civicEvent", "election"],
+      "accessStatus": "metadata_only",
+      "status": "metadata_only",
+      "sourceType": "primary",
+      "lastCheckedAt": "2026-08-19",
+      "notes": "本Laneの最重要発見。既存reports/ndl-historical-source-ledger.json ndl-src-24（延岡商工会議所四十年史、1975年刊、finding-019で1956・1960・1964・1967年の市長選挙を年表形式で発見済み＝1956年は得票数まで、1967年は無投票の事実まで確認できた実績あり）の後継・拡張版にあたる資料。1934年頃の商工会議所創立から80周年（2014年）までを対象とするため、四十年史がカバーしなかった1971・1975・1978・1982・1986・1990・1994・1998年の延岡市長選挙8回すべてを、同一の年表形式で収録している可能性が高い。ただしNDLサーチの書誌ページにはデジタル化資料（dl.ndl.go.jp pid）へのリンクが確認できず、個人送信サービス対象かどうかも明記されていなかったため、本Lane（ログイン不可）では本文を一切確認できていない。国立国会図書館本館および神奈川県立川崎図書館に所蔵。次フェーズでのユーザー本人NDLログイン閲覧（個人送信サービス）を強く推奨する。既存ledgerとの重複なし（新規ID候補：ndl-src-27）。"
+    }
+  ],
+  "ndlViewingQueueAdditions": [
+    {
+      "priority": "high",
+      "purpose": "1971・1975・1978・1982・1986・1990・1994・1998年の延岡市長選挙8回について、既存ndl-src-24（延岡商工会議所四十年史）と同じ年表形式（『第◯代市長◯◯氏延岡市長選挙に当選（月.日）（無投票当選／得票数明記のいずれか）』の書式）で記載されている可能性が高い。四十年史では1956年選挙の得票数（青木善祐23,264票・仲田又次郎19,528票）・1967年選挙の無投票当選という記述が確認できた実績があり、後継版である本書でも同水準の情報（本Laneが探している得票数・投票率・対立候補者名）が期待できる。",
+      "title": "延岡商工会議所80年のあゆみ：創立80周年記念誌",
+      "bibliographicId": "R100000002-I034006891",
+      "page": "沿革年表部分（四十年史ではコマ175・コマ408-411付近に相当する箇所。本書でのコマ番号は未確認）",
+      "relatedElection": 1971,
+      "discoveredByLane": "C",
+      "notes": "1971・1975・1978・1982・1986・1990・1994・1998年すべてに関連する横断的資料のため、relatedElectionは代表して1971を設定したが、実際には8選挙すべてが対象。136ページと四十年史（コマ数不明だが同程度と推定）よりやや薄いため、年表部分の分量は四十年史と同程度かそれ以下の可能性がある点に留意。"
+    }
+  ],
+  "negativeFindingsSummary": [
+    "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka/）は『平成12年（2000年）第8回臨時会以降』のみを収録し、1971〜1998年の会議録は一切含まれない（新規確認）。既存ledgerのndl-src-15（宮崎県立図書館所蔵、1959〜1973年の手書き複写、library_only）と合わせても、1974〜1999年の会議録はオンライン・NDLいずれからもアクセス不可能な空白期間であることが判明した。",
+    "宮崎県選挙管理委員会公式サイト（Wayback経由の過去ページ含む）の『選挙データライブラリー』は衆議院・参議院・知事・県議会選挙のみを収録し、市区町村長選挙（延岡市長選挙）のデータは一切公開していない（新規確認）。",
+    "夕刊デイリー新聞社（yukan-daily.co.jp）・宮崎日日新聞（the-miyanichi.co.jp）いずれのオンライン記事アーカイブも、1971〜1998年当時の記事そのものは一切デジタル化・Web公開されておらず、Wayback Machineにもスナップショットが存在しない（当時Web上に存在しなかったコンテンツはアーカイブ不可能という構造的限界）。両紙のサイト内検索・WordPress検索フォームで房野博・早生隆彦・折小野良一の各氏名を検索しても、後年の周年特集・死亡記事以外の該当記事は0件だった。",
+    "延岡市公式サイトの現行『近代の年表』ページ（10722.html／10723.html）にはWayback上でも2023年以降のスナップショットしか存在せず、より詳細な情報を含む旧バージョンのページは発見できなかった。",
+    "NDLサーチで『延岡商工会議所年史』を検索した結果、四十年史（1975年、既知）と80年のあゆみ（2014年、新規発見）以外の周年記念誌（五十年史・六十年史・七十年史等）はNDL所蔵資料として存在しないことを確認した。"
+  ],
+  "summary": {
+    "electionsResearched": 8,
+    "newPrimarySourcesCount": 0,
+    "newVoteCountsCount": 0,
+    "newTurnoutCount": 0,
+    "newCandidateNamesCount": 0,
+    "secondaryLeadsRecorded": 2,
+    "newDomainsDiscovered": 1,
+    "newSourceLedgerCandidates": 3,
+    "queueItemsAdded": 1,
+    "negativeFindingsRecorded": 5,
+    "methodologyNote": "Phase10 Lane Dで確立したWayback CDX API技法（curl経由でweb.archive.orgの実際のアーカイブ本文を取得する手法）を選挙関連記事に応用したが、根本的な制約として、1971〜1998年当時はWorld Wide Webそのものが存在しない（一般公開は1991年以降、日本の地方紙のオンライン化は2000年代以降）ため、この技法で到達できるのは『後年（2000年代以降）に過去の選挙を回顧・言及した記事』に限られ、当時の選挙結果を報じた同時代記事そのものには原理的に到達できないことが判明した。この制約下で、本Laneでは新聞社2社（宮崎日日新聞・夕刊デイリー）のオンラインアーカイブの構造・カバー範囲を確定させ、夕刊デイリーの死亡記事・周年特集記事から桜井哲雄氏の1994年当選・歴代市長代数構成という準一次資料（secondary_only）2件を独立に確認した。また、得票数・投票率という核心データについては、NDL所蔵の『延岡商工会議所80年のあゆみ』（2014年刊）という新規資料を発見した。これは既存ndl-src-24（四十年史）が1956・1967年の選挙で実際に得票数・無投票の事実を記載していたことが確認済みの、同一機関による後継・拡張版であり、1971〜1998年の8選挙すべてをカバーする可能性がある本調査全体で最も有望な未読資料として次フェーズ（NDLログイン可能なレーン）に引き継ぐ。得票数・投票率・投票日・対立候補者名について、本Laneで新たに一次資料化できたものは0件であり、8年すべてが引き続き『確認中』のままである（推測による埋め合わせは一切行っていない）。"
+  }
+}
