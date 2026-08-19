@@ -162,7 +162,7 @@
         "confirmed_primary": 2
       },
       "coverageRatePercent": 50,
-      "note": "Phase11で前進。1960年度がconfirmed_primaryへ新規昇格し（宮崎県統計年鑑 昭和35年版、NDL本文確認）、2/4代表年度（50%）が確定した（目標50%以上を達成）。1955年度分はlocated_partial_read（延岡市史別表7其の四）のまま。1950年度はlibrary_only。【Phase12追記】1950年度データは宮崎県統計年鑑では構造的に取得不能と判明（3巻確認済み）。1955年度も同様。代表年度の充足率は50%のまま変化なし。"
+      "note": "Phase11で前進。1960年度がconfirmed_primaryへ新規昇格し（宮崎県統計年鑑 昭和35年版、NDL本文確認）、2/4代表年度（50%）が確定した（目標50%以上を達成）。1955年度分はlocated_partial_read（延岡市史別表7其の四）のまま。1950年度はlibrary_only。【Phase12追記】1950年度データは宮崎県統計年鑑では構造的に取得不能と判明（3巻確認済み）。1955年度も同様。代表年度の充足率は50%のまま変化なし。【Phase13追記】1958年度（歳入・歳出とも）を新規confirmed_primary化。ただし代表年度リスト（1950,1955,1960,1965）そのものではないため充足率50%は変化なし。1950年代のデータ密度は大きく向上した。"
     },
     {
       "band": "1970-1989",
@@ -198,12 +198,13 @@
     "representativeYearsWithConfirmedNumbers": 4,
     "representativeYearsWithIdentifiedSource": 3,
     "representativeYearsWithNoLead": 5,
-    "fiscalYearsWithConfirmedNumbers": 48,
-    "note": "Phase11で、1960・1970・1980年度がいずれもconfirmed_primaryへ新規昇格した（宮崎県統計年鑑の個別巻をNDLで実地閲覧）。代表年度14件の内訳：confirmed_primary=4件（1933・1960・1965・1970・1980の5件、うち代表年度リストは14件中の重複整理により実質5件）、confirmed_official=3件（1990・1995・2000）、located_partial_read=1件（1955）、library_only=2件（1946・1950）、所在未確認（not_digitized/not_found）=3件（1940・1975・1985）。archiveFiscalYears.jsonは1933・1960・1965・1970・1980・1988-2026年度の合計44年度分を収録。【Phase12追記】1950・1955年度（宮崎県統計年鑑 昭和25年・29-30年・33年の3巻を実地確認）は、市町村別歳入歳出決算額表がこれらの巻には構造的に存在しない（昭和35年版以降に新設された可能性が高い）ことを確認した。1975・1985年度そのものは確定できなかったが、近接する1974年度・1982年度をconfirmed_primaryとして新規追加した（代表年度リスト外、1970-1989年度帯のデータ密度向上に寄与）。【Phase13追記】1949年度（歳入合計、Phase12結論の訂正）・1954年度（市町村税、localTaxRevenueYen）を新規追加。archiveFiscalYears.json総数48件。",
+    "fiscalYearsWithConfirmedNumbers": 49,
+    "note": "Phase11で、1960・1970・1980年度がいずれもconfirmed_primaryへ新規昇格した（宮崎県統計年鑑の個別巻をNDLで実地閲覧）。代表年度14件の内訳：confirmed_primary=4件（1933・1960・1965・1970・1980の5件、うち代表年度リストは14件中の重複整理により実質5件）、confirmed_official=3件（1990・1995・2000）、located_partial_read=1件（1955）、library_only=2件（1946・1950）、所在未確認（not_digitized/not_found）=3件（1940・1975・1985）。archiveFiscalYears.jsonは1933・1960・1965・1970・1980・1988-2026年度の合計44年度分を収録。【Phase12追記】1950・1955年度（宮崎県統計年鑑 昭和25年・29-30年・33年の3巻を実地確認）は、市町村別歳入歳出決算額表がこれらの巻には構造的に存在しない（昭和35年版以降に新設された可能性が高い）ことを確認した。1975・1985年度そのものは確定できなかったが、近接する1974年度・1982年度をconfirmed_primaryとして新規追加した（代表年度リスト外、1970-1989年度帯のデータ密度向上に寄与）。【Phase13追記】1949年度（歳入合計、Phase12結論の訂正）・1954年度（市町村税、localTaxRevenueYen）を新規追加。archiveFiscalYears.json総数48件。【Phase13追記2】1958年度（歳入778,800千円・歳出798,405千円、宮崎県統計年鑑昭和33年版komma156の見落とし表を発見）も新規確認。archiveFiscalYears.json総数49件。",
     "representativeYearsWithItemLevelConfirmedPrimary": 4,
     "representativeYearsWithConfirmedOfficial": 3,
     "representativeYearsWithLocatedPartialRead": 1,
     "additionalFiscalYearsConfirmedOutsideRepresentativeList": [
+      "1958",
       "1954（市町村税のみ）",
       "1949",
       "1988",
