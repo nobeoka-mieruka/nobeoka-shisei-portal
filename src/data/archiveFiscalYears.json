@@ -351,6 +351,102 @@
     }
   },
   {
+    "fiscalYear": 1971,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-02",
+    "budget": {
+      "fiscalYear": 1971,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 5314347000,
+      "totalExpenditureYen": 5307906000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262709/1/147",
+          "sourceTitle": "宮崎県統計年鑑 第90回（昭和46年）（表237「市町村普通会計歳入歳出決算額」昭和46年度分、印刷p258-259）",
+          "sourceOrganization": "宮崎県総務部統計課ほか",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 258,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和42〜46年度）のうち最新かつ太字強調の「46」年度分で確認済み。延岡市：歳入5,314,347千円・歳出5,307,906千円。算術検証：市計（9市の小計、当時はえびの市（1970年設置）を含む9市）歳入＝宮崎市7,663,372+都城市6,675,881+延岡市5,314,347+日南市2,288,864+小林市2,060,101+日向市2,166,132+串間市1,740,184+西都市2,282,973+えびの市1,683,556＝31,875,410千円が、表内「市計」歳入欄の値31,875,410千円と完全一致。歳出＝7,532,377+6,662,588+5,307,906+2,250,490+1,994,588+2,146,665+1,697,050+2,254,302+1,594,781＝31,440,747千円が、表内「市計」歳出欄の値31,440,747千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第90回・昭和46年版）表237「市町村普通会計歳入歳出決算額」昭和46年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1970年度（既登録）と1972年度（本Phaseで新規登録）の間をつなぐ。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1972,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-02",
+    "budget": {
+      "fiscalYear": 1972,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 6436821000,
+      "totalExpenditureYen": 6425979000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262710/1/147",
+          "sourceTitle": "宮崎県統計年鑑 第91回（昭和47年）（表236「市町村普通会計歳入歳出決算額」昭和47年度分、印刷p258-259）",
+          "sourceOrganization": "宮崎県総務部統計課ほか",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 258,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和43〜47年度）のうち最新かつ太字強調の「47」年度分で確認済み。延岡市：歳入6,436,821千円・歳出6,425,979千円。算術検証：市計（9市）歳入＝宮崎市10,251,843+都城市8,112,478+延岡市6,436,821+日南市2,965,128+小林市2,816,512+日向市2,980,202+串間市2,405,503+西都市2,825,984+えびの市2,470,090＝41,264,561千円が、表内「市計」歳入欄の値41,264,561千円と完全一致。歳出＝9,919,724+8,085,208+6,425,979+2,916,371+2,754,988+2,938,393+2,366,491+2,757,538+2,416,822＝40,581,514千円が、表内「市計」歳出欄の値40,581,514千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第91回・昭和47年版）表236「市町村普通会計歳入歳出決算額」昭和47年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1971年度・1973年度（いずれも本Phaseで新規登録）の間をつなぐ。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1973,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-02",
+    "budget": {
+      "fiscalYear": 1973,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 8878963000,
+      "totalExpenditureYen": 8767195000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262711/1/149",
+          "sourceTitle": "宮崎県統計年鑑 第92回（昭和48-49年）（表236「市町村普通会計歳入歳出決算額」昭和48年度分、印刷p262-263）",
+          "sourceOrganization": "宮崎県総務部統計課ほか",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 262,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和44〜48年度）のうち最新かつ太字強調の「48」年度分で確認済み。延岡市：歳入8,878,963千円・歳出8,767,195千円。算術検証：市計（9市）歳入＝宮崎市14,921,582+都城市9,100,093+延岡市8,878,963+日南市3,529,268+小林市3,554,468+日向市3,601,413+串間市2,894,014+西都市3,542,210+えびの市3,463,560＝53,485,571千円が、表内「市計」歳入欄の値53,485,571千円と完全一致。歳出＝14,286,659+9,015,069+8,767,195+3,546,160+3,408,794+3,491,771+2,862,391+3,460,395+3,402,707＝52,241,141千円が、表内「市計」歳出欄の値52,241,141千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。標題冊子は「第92回（昭和48-49年）」の合本だが、本表に掲載されているのは昭和48年度分のみ（49年度分は別表を要確認）。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第92回・昭和48-49年版）表236「市町村普通会計歳入歳出決算額」昭和48年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1972年度（本Phaseで新規登録）と1974年度（既登録）の間をつなぐ。これにより1970〜1974年度が連続して確認済みとなった（1975〜1979年度は本Phase時点でまだ未登録）。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
     "fiscalYear": 1974,
     "mayorId": "mayor-11",
     "mayorTermId": "mayor-11-term-02",
@@ -380,6 +476,166 @@
         }
       ],
       "notes": "宮崎県統計年鑑（第93回・昭和50年版）の市町村別決算表（普通会計）より歳入総額・歳出総額のみ登録（Phase12発見・確認・統合）。表題の刊行年（昭和50年）と収録データの対象年度（昭和49年度=1974年度）が異なる点に注意（当該巻の最新データ年度）。当初予算額・最終予算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1975,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-03",
+    "budget": {
+      "fiscalYear": 1975,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 11883216000,
+      "totalExpenditureYen": 11943220000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262713/1/147",
+          "sourceTitle": "宮崎県統計年鑑 第94回（昭和50-51年度）（表235「市町村普通会計歳入歳出決算額」昭和50年度分、印刷p254-255）",
+          "sourceOrganization": "宮崎県企画調整部統計課",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 254,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和46〜50年度）のうち最新かつ太字強調の「50」年度分で確認済み（表題の刊行年「昭和50-51年度」を自動採用せず、時系列データの突合で確認）。延岡市：歳入11,883,216千円・歳出11,943,220千円（歳出が歳入を上回る）。算術検証：市計（9市）歳入＝宮崎市19,546,692+都城市13,839,066+延岡市11,883,216+日南市5,247,489+小林市4,635,390+日向市5,685,684+串間市4,600,717+西都市4,970,323+えびの市3,916,001＝74,324,578千円が、表内「市計」歳入欄の値74,324,578千円と完全一致。歳出＝19,659,790+13,660,388+11,943,220+5,313,356+4,614,894+5,636,982+4,666,562+4,906,222+3,870,592＝74,272,006千円が、表内「市計」歳出欄の値74,272,006千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第94回・昭和50-51年度版）表235「市町村普通会計歳入歳出決算額」昭和50年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1974年度（既登録）に続く年度で、1970〜1975年度が連続して確認済みとなった。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1976,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-03",
+    "budget": {
+      "fiscalYear": 1976,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 12807050000,
+      "totalExpenditureYen": 12731333000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262714/1/152",
+          "sourceTitle": "宮崎県統計年鑑 第95回（表237「市町村普通会計歳入歳出決算額」昭和51年度分、印刷p268-269）",
+          "sourceOrganization": "宮崎県企画調整部統計課",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 268,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和47〜51年度）のうち最新かつ太字強調の「51」年度分で確認済み（書誌情報には年版表記がないため、時系列データの突合で対象年度を確認した）。延岡市：歳入12,807,050千円・歳出12,731,333千円。算術検証：市計（9市）歳入＝宮崎市22,955,404+都城市14,867,950+延岡市12,807,050+日南市6,272,597+小林市5,641,735+日向市6,372,770+串間市5,004,880+西都市5,678,893+えびの市4,796,609＝84,397,888千円が、表内「市計」歳入欄の値84,397,888千円と完全一致。歳出＝22,410,022+14,578,965+12,731,333+6,134,402+5,564,650+6,350,078+4,880,538+5,532,869+4,779,313＝82,962,170千円が、表内「市計」歳出欄の値82,962,170千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第95回）表237「市町村普通会計歳入歳出決算額」昭和51年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1975年度（既登録）に続く年度で、1970〜1976年度が連続して確認済みとなった。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1977,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-03",
+    "budget": {
+      "fiscalYear": 1977,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 15485560000,
+      "totalExpenditureYen": 15337885000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262715/1/153",
+          "sourceTitle": "宮崎県統計年鑑 第96回[昭和52〜53年]（表237「市町村普通会計歳入歳出決算額」昭和52年度分、印刷p270-271）",
+          "sourceOrganization": "宮崎県企画調整部統計課",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 270,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和48〜52年度）のうち最新かつ太字強調の「52」年度分で確認済み（標題の刊行年範囲「昭和52〜53年」を自動採用せず、時系列データの突合で確認）。延岡市：歳入15,485,560千円・歳出15,337,885千円。算術検証：市計（9市）歳入＝宮崎市29,120,966+都城市18,029,432+延岡市15,485,560+日南市6,904,801+小林市6,796,137+日向市7,872,953+串間市5,940,659+西都市6,664,684+えびの市5,698,400＝102,513,592千円が、表内「市計」歳入欄の値102,513,592千円と完全一致。歳出＝28,757,420+17,776,402+15,337,885+6,702,799+6,710,320+7,808,183+5,821,991+6,564,831+5,684,056＝101,163,887千円が、表内「市計」歳出欄の値101,163,887千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第96回[昭和52〜53年]）表237「市町村普通会計歳入歳出決算額」昭和52年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1976年度（既登録）に続く年度で、1970〜1977年度が連続して確認済みとなった。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1978,
+    "mayorId": "mayor-11",
+    "mayorTermId": "mayor-11-term-03",
+    "budget": {
+      "fiscalYear": 1978,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 18957194000,
+      "totalExpenditureYen": 18846633000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262716/1/152",
+          "sourceTitle": "宮崎県統計年鑑 第97回[昭和53〜54年]（表237「市町村普通会計歳入歳出決算額」昭和53年度分、印刷p274-275）",
+          "sourceOrganization": "宮崎県企画調整部統計課",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 274,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和49〜53年度）のうち最新かつ太字強調の「53」年度分で確認済み（標題の刊行年範囲「昭和53〜54年」を自動採用せず、時系列データの突合で確認）。延岡市：歳入18,957,194千円・歳出18,846,633千円。算術検証：市計（9市）歳入＝宮崎市38,576,219+都城市20,451,255+延岡市18,957,194+日南市9,100,973+小林市7,967,168+日向市10,101,317+串間市6,961,539+西都市7,858,428+えびの市6,122,725＝126,096,818千円が、表内「市計」歳入欄の値126,096,818千円と完全一致。歳出＝37,908,909+20,119,061+18,846,633+8,936,996+7,743,466+10,008,006+7,035,011+7,752,871+6,004,068＝124,355,021千円が、表内「市計」歳出欄の値124,355,021千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第97回[昭和53〜54年]）表237「市町村普通会計歳入歳出決算額」昭和53年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1977年度（既登録）に続く年度で、1970〜1978年度が連続して確認済みとなった。当初予算額等の内訳は未確認。"
+    }
+  },
+  {
+    "fiscalYear": 1979,
+    "mayorId": "mayor-12",
+    "mayorTermId": "mayor-12-term-01",
+    "budget": {
+      "fiscalYear": 1979,
+      "generalAccountInitialBudgetYen": null,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": 21527897000,
+      "totalExpenditureYen": 20977516000,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://dl.ndl.go.jp/pid/10262717/1/160",
+          "sourceTitle": "宮崎県統計年鑑 第98回[昭和54〜55年]（表246「市町村普通会計歳入歳出決算額」昭和54年度分、印刷p286-287）",
+          "sourceOrganization": "宮崎県企画調整部統計課",
+          "accessedAt": "2026-08-20",
+          "pageNumber": 286,
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "NDLデジタルコレクション（個人送信サービス、要NDLログイン）で本文を実際に閲覧し確認した。単位=千円、普通会計。対象年度は表内の年次系列（昭和50〜54年度）のうち最新かつ太字強調の「54」年度分で確認済み（標題の刊行年範囲「昭和54〜55年」を自動採用せず、時系列データの突合で確認）。延岡市：歳入21,527,897千円・歳出20,977,516千円。算術検証：市計（9市）歳入＝宮崎市41,657,885+都城市22,279,959+延岡市21,527,897+日南市10,034,377+小林市9,687,383+日向市10,590,941+串間市6,912,282+西都市8,859,219+えびの市7,214,564＝138,764,507千円が、表内「市計」歳入欄の値138,764,507千円と完全一致。歳出＝40,709,605+21,968,940+20,977,516+9,851,951+9,441,958+10,261,381+6,959,038+8,754,493+7,154,172＝136,079,054千円が、表内「市計」歳出欄の値136,079,054千円と完全一致。歳入・歳出とも9市の合計が市計と完全一致した。"
+        }
+      ],
+      "notes": "宮崎県統計年鑑（第98回[昭和54〜55年]）表246「市町村普通会計歳入歳出決算額」昭和54年度分より、延岡市の歳入総額・歳出総額を登録（Phase15発見・確認）。1978年度（既登録）と1980年度（既登録）の間を埋め、1970〜1980年度が連続して確認済みとなった。市長交代（房野博氏の辞職・mayor-12早生隆彦氏の就任、1978年11月5日）により、1979年度（1979年4月〜1980年3月）は全期間がmayor-12-term-01に該当するためmayorId/mayorTermIdを修正した。当初予算額等の内訳は未確認。"
     }
   },
   {
