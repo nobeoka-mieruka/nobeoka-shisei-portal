@@ -187,25 +187,25 @@ export function CompareSimilarMunicipalitiesPage() {
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead>
               <tr className="border-b border-outline-variant text-xs text-on-surface-variant">
-                <th className="py-2 pr-2">自治体名</th>
-                <th className="py-2 pr-2 text-right">人口</th>
-                <th className="py-2 pr-2 text-right">財政力指数</th>
-                <th className="py-2 pr-2 text-right">経常収支比率</th>
-                <th className="py-2 pr-2 text-right">実質公債費比率</th>
-                <th className="py-2 pr-2 text-right">将来負担比率</th>
-                <th className="py-2 pr-2 text-right">基金残高</th>
+                <th className="whitespace-nowrap py-2 pr-2">自治体名</th>
+                <th className="whitespace-nowrap py-2 pr-2 text-right">人口</th>
+                <th className="whitespace-nowrap py-2 pr-2 text-right">財政力指数</th>
+                <th className="whitespace-nowrap py-2 pr-2 text-right">経常収支比率</th>
+                <th className="whitespace-nowrap py-2 pr-2 text-right">実質公債費比率</th>
+                <th className="whitespace-nowrap py-2 pr-2 text-right">将来負担比率</th>
+                <th className="whitespace-nowrap py-2 pr-2 text-right">基金残高</th>
               </tr>
             </thead>
             <tbody>
               {nobeoka && (!miyazakiOnly || nobeoka.prefecture === "宮崎県") && (
                 <tr className="border-b border-outline-variant bg-primary-container/30 font-semibold">
-                  <td className="py-2 pr-2">{nobeoka.municipalityName}（当市）</td>
-                  <td className="py-2 pr-2 text-right">{fmt(nobeoka.population, "人")}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(nobeoka.financialStrengthIndex)}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(nobeoka.ordinaryBalanceRatioPercent, "%")}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(nobeoka.realDebtServiceRatioPercent, "%")}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(nobeoka.futureBurdenRatioPercent, "%")}</td>
-                  <td className="py-2 pr-2 text-right">
+                  <td className="whitespace-nowrap py-2 pr-2">{nobeoka.municipalityName}（当市）</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.population, "人")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.financialStrengthIndex)}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.ordinaryBalanceRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.realDebtServiceRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.futureBurdenRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">
                     {nobeoka.fundBalance?.totalFundBalanceYen != null
                       ? `${Math.round(nobeoka.fundBalance.totalFundBalanceYen / 1e8).toLocaleString("ja-JP")}億円`
                       : "確認中"}
@@ -214,16 +214,16 @@ export function CompareSimilarMunicipalitiesPage() {
               )}
               {others.map((m) => (
                 <tr key={m.municipalityCode} className="border-b border-outline-variant text-on-surface-variant">
-                  <td className="py-2 pr-2">
+                  <td className="whitespace-nowrap py-2 pr-2">
                     {m.municipalityName}
                     <span className="ml-1 text-xs">（{m.prefecture}）</span>
                   </td>
-                  <td className="py-2 pr-2 text-right">{fmt(m.population, "人")}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(m.financialStrengthIndex)}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(m.ordinaryBalanceRatioPercent, "%")}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(m.realDebtServiceRatioPercent, "%")}</td>
-                  <td className="py-2 pr-2 text-right">{fmt(m.futureBurdenRatioPercent, "%")}</td>
-                  <td className="py-2 pr-2 text-right">
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.population, "人")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.financialStrengthIndex)}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.ordinaryBalanceRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.realDebtServiceRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.futureBurdenRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">
                     {m.fundBalance?.totalFundBalanceYen != null
                       ? `${Math.round(m.fundBalance.totalFundBalanceYen / 1e8).toLocaleString("ja-JP")}億円`
                       : "確認中"}

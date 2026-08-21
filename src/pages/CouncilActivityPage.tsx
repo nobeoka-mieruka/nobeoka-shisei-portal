@@ -323,10 +323,10 @@ export function CouncilActivityPage() {
           <table className="w-full min-w-[820px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left text-xs text-on-surface-variant dark:border-outline-variant">
-                <th className="w-8 py-2 pr-2">比較</th>
-                <th className="py-2 pr-3">順位</th>
+                <th className="w-8 whitespace-nowrap py-2 pr-2">比較</th>
+                <th className="whitespace-nowrap py-2 pr-3">順位</th>
                 {TABLE_COLUMNS.map((col) => (
-                  <th key={col.key} className="py-2 pr-3">
+                  <th key={col.key} className="whitespace-nowrap py-2 pr-3">
                     <button
                       type="button"
                       onClick={() => handleSort(col.key)}
@@ -338,8 +338,8 @@ export function CouncilActivityPage() {
                     </button>
                   </th>
                 ))}
-                <th className="py-2 pr-3 font-semibold">紹介議員件数</th>
-                <th className="py-2 pr-3 font-semibold">出席状況</th>
+                <th className="whitespace-nowrap py-2 pr-3 font-semibold">紹介議員件数</th>
+                <th className="whitespace-nowrap py-2 pr-3 font-semibold">出席状況</th>
               </tr>
             </thead>
             <tbody>
@@ -348,7 +348,7 @@ export function CouncilActivityPage() {
                 const faction = getFaction(m.factionId);
                 return (
                   <tr key={m.id} className="border-b border-gray-100 align-middle dark:border-outline-variant/60">
-                    <td className="py-2 pr-2">
+                    <td className="whitespace-nowrap py-2 pr-2">
                       <input
                         type="checkbox"
                         checked={compareIds.includes(m.id)}
@@ -358,27 +358,27 @@ export function CouncilActivityPage() {
                         className="h-4 w-4"
                       />
                     </td>
-                    <td className="py-2 pr-3 text-xs text-on-surface-variant">{i + 1}</td>
-                    <td className="py-2 pr-3">
+                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">{i + 1}</td>
+                    <td className="whitespace-nowrap py-2 pr-3">
                       <Link to={`/council-activity/${m.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
                         {m.name}
                       </Link>
                       {faction && <FactionChip faction={faction} className="ml-2" />}
                     </td>
-                    <td className="py-2 pr-3">
+                    <td className="whitespace-nowrap py-2 pr-3">
                       <ValueBar value={row.speechCount} max={maxSpeech} colorClass="bg-orange-500" />
                     </td>
-                    <td className="py-2 pr-3">
+                    <td className="whitespace-nowrap py-2 pr-3">
                       <RateBar value={row.questionRate} />
                     </td>
-                    <td className="py-2 pr-3">
+                    <td className="whitespace-nowrap py-2 pr-3">
                       <ValueBar value={row.submitterCount} max={maxSubmitter} colorClass="bg-orange-500" />
                     </td>
-                    <td className="py-2 pr-3">
+                    <td className="whitespace-nowrap py-2 pr-3">
                       <ValueBar value={row.channelCount} max={maxChannel} colorClass="bg-secondary" />
                     </td>
-                    <td className="py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
-                    <td className="py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
+                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
+                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
                   </tr>
                 );
               })}
@@ -587,11 +587,11 @@ export function CouncilActivityPage() {
                 <caption className="sr-only">議員別・指標別のデータ確認状況一覧</caption>
                 <thead>
                   <tr className="border-b border-outline-variant text-on-surface-variant">
-                    <th scope="col" className="py-1.5 pr-2 font-medium">
+                    <th scope="col" className="whitespace-nowrap py-1.5 pr-2 font-medium">
                       氏名
                     </th>
                     {MATRIX_INDICATOR_LABELS.map((c) => (
-                      <th key={c.key} scope="col" className="py-1.5 pr-2 font-medium">
+                      <th key={c.key} scope="col" className="whitespace-nowrap py-1.5 pr-2 font-medium">
                         {c.label}
                       </th>
                     ))}
@@ -600,7 +600,7 @@ export function CouncilActivityPage() {
                 <tbody>
                   {matrix.map((row) => (
                     <tr key={row.memberId} className="border-b border-outline-variant/60">
-                      <th scope="row" className="py-1.5 pr-2 font-normal text-on-surface">
+                      <th scope="row" className="whitespace-nowrap py-1.5 pr-2 font-normal text-on-surface">
                         <Link to={`/council-activity/${row.memberId}`} className={`hover:underline ${linkClass}`}>
                           {row.memberName}
                         </Link>
