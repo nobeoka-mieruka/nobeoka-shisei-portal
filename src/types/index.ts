@@ -150,7 +150,9 @@ export type CitySpecialPostRole =
   | "auditor"
   | "agricultural-committee-member"
   | "election-commission-member"
-  | "election-commission-alternate";
+  | "election-commission-alternate"
+  | "assistant-mayor"
+  | "treasurer";
 
 /**
  * 副市長・教育長・監査委員・農業委員会委員等（src/data/citySpecialPosts.json）。
@@ -160,6 +162,10 @@ export type CitySpecialPostRole =
  * 議選委員か識見委員かの区別や在任期間の境界を推測せずに確定させることが難しいため対象外とし、
  * 単一後任への交代が明確に確認できたもの（副市長等）のみを登録する。市長（mayor.json）・
  * 歴代市長アーカイブ（archiveMayors.json）とは別管理。
+ *
+ * assistant-mayor（助役）・treasurer（収入役）は、2007年4月の地方自治法改正で副市長制度・
+ * 会計管理者制度に移行する以前の役職名（2026年8月Phase26に追加）。deputy-mayorへ現代化
+ * せず、史料上の正式名称をそのまま保持する。
  */
 export interface CitySpecialPost {
   id: string;

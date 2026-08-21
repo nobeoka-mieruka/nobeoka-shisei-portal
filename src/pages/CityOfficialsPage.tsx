@@ -49,6 +49,10 @@ const ROLE_DESCRIPTIONS: Record<CitySpecialPostRole, string> = {
     "選挙の管理執行に関する事務を担う行政委員会（選挙管理委員会）の委員です（地方自治法第182条）。市議会が指名推選により選挙します。委員長・職務代理者は委員の互選によるため、本ページでは委員長を特定していません。",
   "election-commission-alternate":
     "選挙管理委員に欠員が生じた場合に、あらかじめ議会が定めた順序で補欠する候補者です（地方自治法第182条）。",
+  "assistant-mayor":
+    "2007年3月31日以前に存在した役職で、現在の副市長に相当します（地方自治法改正により副市長制度へ移行）。市議会の同意を得て市長が選任していました。",
+  treasurer:
+    "2007年3月31日以前に存在した役職で、市の会計事務を担当しました（地方自治法改正により廃止、事務は会計管理者へ移行）。市議会の同意を得て市長が選任していました。",
 };
 
 export function CityOfficialsPage() {
@@ -153,7 +157,7 @@ export function CityOfficialsPage() {
       {formerPosts.length > 0 && (
         <SectionCard title={`歴代（元職、${formerPosts.length}名）`} className="mb-4">
           <p className="text-xs leading-relaxed text-on-surface-variant">
-            既存データベース（議案ごとの賛否）に登録済みの人事同意議案から、現職者の先代にあたることが確認できた方のみ掲載しています。退任日は、退任自体に議会同意を要しないため公式資料で確認できない場合があります。
+既存データベース（議案ごとの賛否）に登録済みの人事同意議案や、延岡市史等の一次資料から在任が確認できた方のみ掲載しています。助役・収入役は2007年4月の制度廃止により現職者がいません。退任日は、退任自体に議会同意を要しないため公式資料で確認できない場合があります。
           </p>
           <ul className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {formerPosts.map((p) => (

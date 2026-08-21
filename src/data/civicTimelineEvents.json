@@ -2540,11 +2540,15 @@
       {
         "label": "近代の年表（1971〜1990年）",
         "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html"
+      },
+      {
+        "label": "延岡市史（延岡市史編さん委員会編、延岡市、1993年2月発行、市制60周年記念十年史、836p）年表、昭和61年（1986年）9月の項",
+        "url": "https://dl.ndl.go.jp/pid/13200958/1/430"
       }
     ],
-    "lastVerifiedAt": "2026-08-14",
+    "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "verified",
-    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。【2026-08-21追記（Phase26）】延岡市史（1993年版）の年表でも同じ出来事（議員定数を減少する条例の制定）を独立確認し、出典を補強した（重複登録は避け、既存レコードへの出典追加のみ行った）。"
   },
   {
     "id": "civic-130",
@@ -3773,5 +3777,59 @@
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "verified",
     "notes": "Phase24で新規発見。既存civic-030（台風18号）・civic-031（台風23号）と同じ2004年の別の台風。延岡市公式「近代の年表」に記載されている。"
+  },
+  {
+    "id": "civic-195",
+    "year": 1985,
+    "dateLabel": "1985年2月（昭和60年2月）",
+    "category": "行政組織",
+    "title": "黒木道男氏、助役に就任",
+    "summary": "延岡市史（1993年版）の年表に、黒木道男氏が市助役に就任したとの記載がある（昭和60年〈1985年〉2月）。日単位の就任日は同資料では確認できなかった。",
+    "relatedPersonIds": ["mayor-12"],
+    "sourceRefs": [
+      {
+        "label": "延岡市史（延岡市史編さん委員会編、延岡市、1993年2月発行、市制60周年記念十年史、836p）年表、昭和60年2月の項",
+        "url": "https://dl.ndl.go.jp/pid/13200958/1/427"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase26（Block5：1980〜1989年度監査）で新規発見。国立国会図書館デジタルコレクション（個人送信サービス、pid 13200958、コマ427）を実閲覧して確認した。citySpecialPosts.json csp-44と対応する。当時の正式役職名「助役」のまま記録している。"
+  },
+  {
+    "id": "civic-196",
+    "year": 1985,
+    "dateLabel": "1985年（月日不明）",
+    "category": "行政組織",
+    "title": "伊東義男氏、助役に就任",
+    "summary": "延岡市史（1993年版）の年表に、前任の助役が退任し、後任に伊東義男氏が就任したとの記載がある。前任者氏名・正確な就任年月日は資料の解像度の制約により確実に判読できなかった。",
+    "relatedPersonIds": ["mayor-12"],
+    "sourceRefs": [
+      {
+        "label": "延岡市史（延岡市史編さん委員会編、延岡市、1993年2月発行、市制60周年記念十年史、836p）年表、昭和60年中の項",
+        "url": "https://dl.ndl.go.jp/pid/13200958/1/428"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase26で新規発見。citySpecialPosts.json csp-45と対応する。前任者・正確な日付が未確認のためverificationStatusはpartiallyVerifiedとした。誤読のリスクを避けるため、確実に読み取れた「伊東義男が就任した」という事実のみを登録している。"
+  },
+  {
+    "id": "civic-197",
+    "year": 1986,
+    "dateLabel": "1986年10月20日",
+    "category": "行政組織",
+    "title": "折小野良一元市長が死去",
+    "summary": "延岡市長を2期務めた折小野良一元市長（既存archiveMayors.jsonでは第12代・第13代）が死去した。遺徳を偲び多くの市民が葬儀に参列した。",
+    "relatedPersonIds": ["mayor-10"],
+    "sourceRefs": [
+      {
+        "label": "延岡市史（延岡市史編さん委員会編、延岡市、1993年2月発行、市制60周年記念十年史、836p）年表、昭和61年（1986年）の項",
+        "url": "https://dl.ndl.go.jp/pid/13200958/1/430"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase26で新規発見。既存archiveMayors.json（mayor-10）のdeathDate（1986-10-20、従来はWikipedia由来）を、延岡市編さんの市史という一次資料で独立に裏付けた。同資料は折小野氏を「第十一・十二代」と表記しており、既存の代数表記（第12代・第13代）と1代のずれがある点をarchiveMayors.json mayor-10のnotesに記録した（自動的な上書きはしていない）。"
   }
 ]
