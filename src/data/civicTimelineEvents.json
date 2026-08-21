@@ -3422,5 +3422,41 @@
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "partiallyVerified",
     "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-council-2019）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。定数は2015年の29から27へ削減されている（civic-065、2017年12月定例会での定数改正条例可決と対応）。"
+  },
+  {
+    "id": "civic-174",
+    "year": 2013,
+    "dateLabel": "2013年12月3日",
+    "category": "行政組織",
+    "title": "太田龍氏、副議長に当選",
+    "summary": "平成25年第17回定例会（12月3日）で副議長選挙が行われ、太田龍議員が副議長に当選した。同年5月8日にも副議長選挙が行われており、年度途中での交代とみられる（前任者・交代理由は今回未確認）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成25年第17回定例会（第1号 12月3日、副議長選挙、太田龍議員の就任挨拶）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H251203A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23 Block2後半（FY2014〜2010）で新規発見。太田龍議員本人の就任挨拶（会議録全文）で確認した。同年5月8日の副議長選挙の当選者・12月交代の理由は今回未確認（gap-vice-chair-names-block2）。"
+  },
+  {
+    "id": "civic-175",
+    "year": 2014,
+    "dateLabel": "2014年9月22日",
+    "category": "行政組織",
+    "title": "教育委員会委員に伊東忠俊氏を選任",
+    "summary": "平成26年第22回定例会（9月22日、議案第53号）で、教育委員会委員の北林嘉晃氏が同年11月17日をもって任期満了となるため、後任として伊東忠俊氏を選任する議案が可決された。伊東氏は宮崎大学教育学部卒業後、延岡小学校・南小学校等で教壇に立ち、恒富小学校長等を歴任した後、平成22年3月に延岡小学校長を最後に定年退職。その後、市教育委員会の学校支援アドバイザー、教育推進指導員等を務めていた。伊東氏は2018年11月17日の任期満了で退任し、久世由美子氏が後任となった（既存civic-167）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成26年第22回定例会（第5号 9月22日、議案第53号教育委員会委員の選任、市長・首藤正治氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H260922A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23 Block2後半で新規発見。既存civic-167（2018年、伊東忠俊氏の退任・久世由美子氏の就任）と対になる、伊東氏自身の就任記録。4年任期（2014-11-18〜2018-11-17）が civic-167 の任期満了日と整合することを確認した。"
   }
 ]
