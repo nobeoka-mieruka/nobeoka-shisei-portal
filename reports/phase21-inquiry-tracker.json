@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-08-21T00:00:00+09:00",
+  "purpose": "Phase21：外部機関への照会を追跡管理するファイル。実際の送信はまだ行っていない。送信・回答が発生するたびに、このファイルの該当レコードを更新する運用とする。",
+  "statusDefinitions": {
+    "draft": "文面はあるが、送付先・送付タイミングが確定していない（条件分岐待ち等）",
+    "ready_to_send": "宛先・件名・本文・確認対象資料・対象年度・質問事項がすべて確定し、運営者が送信するだけの状態",
+    "sent": "運営者が実際に送付した（このステータスへの変更は、実際の送付が完了した後にのみ行う）",
+    "waiting_response": "送付済みで、相手機関からの回答を待っている状態",
+    "answered": "回答を受け取り、内容をこのファイルに記録済み",
+    "closed": "回答内容の反映（登録／登録見送りの判断）まで完了し、この照会に関する対応が終わった状態"
+  },
+  "importantNote": "本ファイルの全レコードは、Phase21終了時点でsent以降のステータスに変更されていない。実際の送信はサイト運営者（人間）が行うため、このファイル単体の更新だけでは送信済みとはみなさない。",
+  "inquiries": [
+    {
+      "inquiry_id": "INQ-001",
+      "recipient": "宮崎県立図書館（情報提供課・郷土情報担当）",
+      "recipientContact": "soudan@lib.pref.miyazaki.lg.jp（電話：郷土情報担当0985-29-2954／レファレンス担当0985-29-2972）",
+      "targetResources": [
+        "延岡市決算書",
+        "延岡市歳入歳出決算書",
+        "延岡市決算審査意見書",
+        "延岡市統計書",
+        "延岡市統計月報",
+        "延岡市勢要覧",
+        "延岡市政要覧",
+        "宮崎県統計年鑑 第102回〜第106回"
+      ],
+      "targetFiscalYears": [1951, 1952, 1953, 1959, 1983, 1984, 1985, 1986, 1987],
+      "targetFiscalYearsEraLabel": "昭和26・27・28・34・58・59・60・61・62年度",
+      "letterFile": "reports/phase21-inquiry-ready-to-send.md（照会文1）",
+      "inquiryDate": null,
+      "sendStatus": "ready_to_send",
+      "responseStatus": "not_applicable",
+      "responseDate": null,
+      "responseContent": null,
+      "nextAction": "運営者が本文の空欄（氏名・連絡先）を埋めたうえで、soudan@lib.pref.miyazaki.lg.jpへ送信する。送信後はsendStatusをsentへ、responseStatusをwaiting_responseへ更新すること。",
+      "priority": "第1照会",
+      "branchCondition": "この照会の回答で『所蔵なし』と分かった資料がある場合、INQ-003（延岡市立図書館）を送付する。"
+    },
+    {
+      "inquiry_id": "INQ-002",
+      "recipient": "宮崎県総合政策部統計調査課",
+      "recipientContact": "tokeichosa@pref.miyazaki.lg.jp（電話：0985-26-7042）",
+      "targetResources": [
+        "宮崎県統計年鑑 第102回",
+        "宮崎県統計年鑑 第103回",
+        "宮崎県統計年鑑 第104回",
+        "宮崎県統計年鑑 第105回",
+        "宮崎県統計年鑑 第106回"
+      ],
+      "targetFiscalYears": [1983, 1984, 1985, 1986, 1987],
+      "targetFiscalYearsEraLabel": "昭和58〜62年度",
+      "letterFile": "reports/phase21-inquiry-ready-to-send.md（照会文2）",
+      "inquiryDate": null,
+      "sendStatus": "ready_to_send",
+      "responseStatus": "not_applicable",
+      "responseDate": null,
+      "responseContent": null,
+      "nextAction": "運営者が本文の空欄を埋めたうえで、tokeichosa@pref.miyazaki.lg.jpへ送信する。INQ-001と同時並行で送付してよい（対象資料の役割が異なるため重複照会にならない）。",
+      "priority": "第2照会（第1照会と並行可）",
+      "branchCondition": "この照会で『宮崎県立図書館へ移管済み』と回答があった場合は、INQ-001の回答と突き合わせて確認する。"
+    },
+    {
+      "inquiry_id": "INQ-003",
+      "recipient": "延岡市立図書館（郷土資料担当）",
+      "recipientContact": "toshokan@city.nobeoka.miyazaki.jp（電話：0982-32-3058）",
+      "targetResources": [
+        "延岡市決算書",
+        "延岡市決算審査意見書",
+        "延岡市統計書",
+        "延岡市勢要覧",
+        "延岡市政要覧"
+      ],
+      "targetFiscalYears": [1951, 1952, 1953, 1959],
+      "targetFiscalYearsEraLabel": "昭和26・27・28・34年度",
+      "letterFile": "reports/phase21-inquiry-ready-to-send.md（照会文3）",
+      "inquiryDate": null,
+      "sendStatus": "draft",
+      "responseStatus": "not_applicable",
+      "responseDate": null,
+      "responseContent": null,
+      "nextAction": "INQ-001（宮崎県立図書館）の回答を待ち、1950年代分の資料が『所蔵なし』と判明した場合にのみ、ready_to_sendへ変更して送付する。",
+      "priority": "第3照会（条件付き）",
+      "branchCondition": "INQ-001で1950年代分の資料がすべて『所蔵あり』と回答された場合、この照会は送付不要（closedへ変更）。"
+    },
+    {
+      "inquiry_id": "INQ-004",
+      "recipient": "延岡市役所（財政課／総務課・情報公開担当）",
+      "recipientContact": "財政課：電話0982-22-7005／総務課（情報公開）：電話0982-22-7006／市民の声フォーム：https://www.city.nobeoka.miyazaki.jp/ques/questionnaire.php?openid=5",
+      "targetResources": [
+        "延岡市決算書並意見書",
+        "その他、市役所内に残る決算関係資料一般"
+      ],
+      "targetFiscalYears": [1951, 1952, 1953, 1959, 1983, 1984, 1985, 1986, 1987],
+      "targetFiscalYearsEraLabel": "昭和26・27・28・34・58〜62年度",
+      "letterFile": "reports/phase19-library-inquiry.md（3. 延岡市役所向け照会文）",
+      "inquiryDate": null,
+      "sendStatus": "draft",
+      "responseStatus": "not_applicable",
+      "responseDate": null,
+      "responseContent": null,
+      "nextAction": "INQ-001・INQ-002・INQ-003のいずれでも決算資料の所在が確認できなかった場合の最終手段。情報公開請求の前段階としての照会に位置づける。",
+      "priority": "第4照会（条件付き・最終手段）",
+      "branchCondition": "INQ-001〜003のいずれかで資料の所在が確認できた場合、この照会は不要（closedへ変更）。"
+    }
+  ],
+  "summary": {
+    "totalInquiries": 4,
+    "byStatus": {
+      "draft": 2,
+      "ready_to_send": 2,
+      "sent": 0,
+      "waiting_response": 0,
+      "answered": 0,
+      "closed": 0
+    }
+  },
+  "archiveFiscalYearsPolicy": "回答が得られ、一次資料で年度・延岡市・歳入・歳出・会計区分・単位・出典のすべてを確認できるまで、archiveFiscalYears.jsonのFY1951・1952・1953・1959・1983・1984・1985・1986・1987はreference_pending（reports/phase20-missing-years-status.json参照）のまま維持する。推測値・補間値は登録しない。"
+}
