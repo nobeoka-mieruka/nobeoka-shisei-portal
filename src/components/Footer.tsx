@@ -84,7 +84,10 @@ export function Footer() {
           {footerGroups.map((group) => (
             <div key={group.heading}>
               <h3 className="mb-1 text-xs font-semibold text-on-surface-variant">{group.heading}</h3>
-              <nav aria-label={group.heading} className="grid grid-cols-2 gap-x-3 sm:grid-cols-1 sm:gap-x-0">
+              {/* Phase31：スマホ幅でgrid-cols-2にすると「副市長・教育長・行政委員会委員」等の
+                  長いラベルが1列あたり数文字ずつの窮屈な折り返しになり読みにくかったため、
+                  全幅で1列に統一した（情報量は変えず、読みやすさを優先）。 */}
+              <nav aria-label={group.heading} className="grid grid-cols-1 gap-x-0">
                 {group.links.map((link, i) => (
                   <Link key={`${link.to}-${i}`} to={link.to} className={`${linkClass} text-sm`}>
                     {link.label}

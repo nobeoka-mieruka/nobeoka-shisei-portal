@@ -1,0 +1,80 @@
+{
+ "phase": 31,
+ "purpose": "延岡市政見える化ポータル 全ページUI総点検・修正フェーズ。2174ルートの機械検査＋代表画面の実ブラウザ確認により、レイアウト崩れ・可読性の問題を洗い出し、共通コンポーネントを優先して修正する。",
+ "generatedAt": "2026-08-21",
+ "statusDefinitions": {
+  "detected": "問題を発見したが未修正",
+  "fixed": "共通コンポーネント／該当ファイルを修正済み",
+  "verified": "修正後、実ブラウザまたは機械検査で解消を確認済み",
+  "wont_fix": "検討したが対応しない（理由をnoteに記載）"
+ },
+ "methodologyNote": "本フェーズの実ブラウザ確認には重要な制約があった：ブラウザ自動化ツールのresize_window（ウィンドウリサイズ）が本サンドボックス環境では効果を持たず（要求サイズに関わらずwindow.innerWidthが実ディスプレイ解像度＝約1568pxに固定された）、Tailwindのレスポンシブブレークポイント（sm:/md:/lg:）はwindow.innerWidthを見るmatchMediaで判定されるため、真のモバイル幅（390px等）でのブレークポイント切り替えを実ブラウザで再現できなかった。CSS zoomやhtml/body要素への幅の強制指定でも、window.innerWidthやmatchMediaの結果は変化しないことを確認済み（本ファイルのnotesに実測値を記録）。 対応として、ユーザーが実際に報告した財政ページの表の不具合（FinanceTable共通コンポーネント）はブレークポイントに依存しない「コンテナ幅そのものが原因の文字折り返しバグ」であったため、html/body要素の幅をCSSで390pxへ強制する手法で実Chrome上に再現・修正確認ができた（この手法はブレークポイントに依存しないレイアウトには有効で、実機のブラウザレンダリングエンジンによる検証として妥当）。一方、grid-cols-2等ブレークポイント切り替えに依存するレイアウトについては、真のモバイル実機・実ビューポートでの目視確認ができておらず、ソースコードレビューと既存の広範な使用実績（同一パターンが数十ページで使われ、これまで指摘がないこと）に基づく判断にとどまる。この制約と今後の再検証方法はPhase32推奨事項に記載する。",
+ "automatedScanSummary": {
+  "totalRoutesChecked": 2174,
+  "totalFilesChecked": 2175,
+  "scans": [
+   { "script": "scripts/validate-content.mjs", "checks": "undefined/null/NaNの直接表示、空href・#リンク、内部リンク切れ", "errors": 0, "warnings": 0 },
+   { "script": "scripts/validate-seo.mjs", "checks": "title/meta description/canonical/OGP/JSON-LD等", "failures": 0, "warnings": 0 },
+   { "script": "scripts/ui-audit-scan.mjs（Phase31新設）", "checks": "[object Object]表示、画像src切れ、仮データ・デバッグ文字列、ページ種別ごとのルート件数集計", "errors": 0, "warnings": 0 }
+  ],
+  "note": "文字コード・リンク切れ等の機械検出可能な項目は全ルートで0件だった。表の1文字縦折り返し等、CSSレンダリング結果に依存する問題は静的HTML走査では検出できないため、別途実ブラウザで確認した。"
+ },
+ "findings": [
+  {
+   "route": "/compare/debt, /compare/budget, /compare/funds, /compare/finance, /finance, /timeline/:year 等",
+   "pageType": "finance-sub / compare-sub（FinanceTable・CompareTable共通コンポーネントを使う全ページ）",
+   "viewport": "390px（html/body幅強制によるコンテナ幅再現、実Chromeレンダリング）",
+   "severity": "high",
+   "category": "table-layout",
+   "description": "財政関連の数値表で、「確認中」「発行額」「確認状況」等の短い日本語が列幅不足により1文字ずつ縦に折り返され、著しく読みにくい状態だった（ユーザー報告と一致・実ブラウザで再現確認済み）。",
+   "cause": "共通コンポーネントsrc/components/finance/FinanceTable.tsx（src/components/compare/CompareTable.tsxはこれの再エクスポート）が<th>/<td>にwhitespace-nowrapを指定しておらず、table-layout:autoの列幅計算で日本語テキストの改行可能位置（文字間どこでも改行可）がそのまま採用され、列幅が1文字分まで収縮していた。",
+   "fix": "FinanceTable.tsxの全セルに既定でwhitespace-nowrapを適用（列は中身の全角文字列分の幅を必ず確保し、収まらない場合は表全体を横スクロールさせる。既存のoverflow-x-autoラッパーを活用）。定義・出典等の長文セルのみ列単位のwrap:trueオプションを新設し、min-width（9rem）を確保したうえで通常改行を許可（1文字改行は発生しない）。あわせて1列目（年度）にsticky指定を追加し、横スクロール時も年度が常に見えるようにした。ヘッダー・セルのpaddingもpy-2→py-2.5へ微増し視認性を上げた。",
+   "status": "verified"
+  },
+  {
+   "route": "/council-activity",
+   "pageType": "council-activity",
+   "viewport": "768px相当（min-w-[820px]のPC/タブレット表、sm:block以上でのみ表示）",
+   "severity": "medium",
+   "category": "table-layout",
+   "description": "議員活動バロメーターのPC/タブレット表（発言件数・実施率・確認中等）が、FinanceTableと同じtable-layout:autoの仕組みでwhitespace-nowrapを持たず、列幅が狭くなった場合に同種の文字折り返しが発生し得る状態だった。",
+   "cause": "このページの<table>はFinanceTableを使わず個別にマークアップされており、th/tdにwhitespace-nowrapの指定が無かった。",
+   "fix": "順位・氏名・各指標列・「紹介議員件数」「出席状況」（確認中を含む）の全th/tdにwhitespace-nowrapを追加。表下部の議員別・指標別マトリクス表（氏名列・指標記号列）にも同様に適用。",
+   "status": "fixed"
+  },
+  {
+   "route": "/compare/similar-municipalities",
+   "pageType": "compare-sub",
+   "viewport": "390px〜768px（横スクロール前提の設計、案内文あり）",
+   "severity": "medium",
+   "category": "table-layout",
+   "description": "類似団体比較表（財政力指数・経常収支比率等、「確認中」表示を含む）が、他の生テーブルと同じくwhitespace-nowrap未指定で文字折り返しのリスクがあった。",
+   "cause": "同上（FinanceTableを使わない個別マークアップで、nowrap未指定）。",
+   "fix": "自治体名・人口・財政力指数・経常収支比率・実質公債費比率・将来負担比率・基金残高の全th/tdにwhitespace-nowrapを追加。",
+   "status": "fixed"
+  },
+  {
+   "route": "全ページ共通（Footerコンポーネント）",
+   "pageType": "全pageType（フッターは共通コンポーネント）",
+   "viewport": "390px（ブレークポイント切り替えを伴うため、本フェーズでは真のモバイル実機での目視確認はできていない。ソースコードレビューによる判断）",
+   "severity": "low",
+   "category": "readability",
+   "description": "フッター内リンク一覧が、グループ内でgrid-cols-2（2列）表示になっており、「副市長・教育長・行政委員会委員」（14文字）「一般質問データベース」（10文字）等の長いリンクラベルが、列幅次第では窮屈な複数行折り返しになり得る構成だった。",
+   "cause": "src/components/Footer.tsxのnav要素がgrid-cols-2 sm:grid-cols-1という、狭い画面ほど2列にする設計になっていたが、リンクラベルが単語ではなく日本語の文（最大14文字）であるため、2列表示は文字数に対して余裕がない。",
+   "fix": "予防的な可読性改善として、全ブレークポイントでgrid-cols-1（1列）に統一した（情報量は変えず、各リンクを確実に読みやすい幅で表示する）。フッターの縦方向の高さは増えるが、タップ領域（min-h-[44px]は既存維持）・可読性を優先した。",
+   "status": "fixed"
+  }
+ ],
+ "noIssueCategories": {
+  "note": "以下は自動検査（全2174ルート）で0件だったカテゴリ。",
+  "categories": [
+   "React runtime error（prerender失敗による欠落ページ。build時点で全2174ルートprerender成功のため無し）",
+   "undefined / null / NaN の直接表示",
+   "[object Object] の直接表示",
+   "内部リンク切れ",
+   "画像src切れ（相対パス）",
+   "仮データ・デバッグ文字列（lorem ipsum、TODO、FIXME等）",
+   "title/meta description/canonical/OGP/JSON-LD等のSEO必須項目欠落"
+  ]
+ }
+}
