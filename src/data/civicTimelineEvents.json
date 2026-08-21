@@ -3095,5 +3095,89 @@
     "lastVerifiedAt": "2026-08-19",
     "verificationStatus": "partiallyVerified",
     "notes": "Phase10 Lane Dが発見・archiveMayors.json（mayor-14）に反映済みの事実をcivicTimelineEventsへも接続した。2018年2月に就任した読谷山洋司市長（mayor-03）の下での人事。山本一丸氏は後に読谷山市長の辞職（2025年6月30日付）を受け、2025年7月1日〜19日の間、市長職務代理者を務めた（mayor-14-term-01、既存データ）。副市長人事という点でcivic-037（2007年、副市長制導入）・civic-047（2011年、副市長2人制開始・原田幸二氏就任）と同種の行政組織カテゴリの出来事として登録した。就任日（2018年4月1日）は宮崎日日新聞記事本文に明記されている。（出典が宮崎日日新聞という非公式・二次的な報道機関のため、verificationStatusをpartiallyVerifiedとした。事実自体は本人の副市長就任当時の同時代一次報道により高い確度で確認済み。）"
+  },
+  {
+    "id": "civic-157",
+    "year": 2022,
+    "dateLabel": "2022年1月23日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で読谷山洋司氏が再選",
+    "summary": "任期満了に伴う延岡市長選挙が行われ、現職の読谷山洋司氏（当時57歳）が31,760票を獲得し、新人うちだりさ氏（24,088票）を破り再選した（投票率55.98%）。",
+    "relatedPersonIds": [
+      "mayor-03"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市長選挙 - 2022年01月23日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/22481"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase22（最新→過去の年次監査）で、既存src/data/electionResults.json（election-mayor-2022）・archiveMayorTerms.json（mayor-03-term-02）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典（選挙ドットコム）が二次資料ドメインのため、verificationStatusはpartiallyVerifiedとした（scripts/validate-sources.mjsの公式ドメイン判定基準に整合）。"
+  },
+  {
+    "id": "civic-158",
+    "year": 2023,
+    "dateLabel": "2023年4月23日",
+    "category": "行政組織",
+    "title": "延岡市議会議員選挙（定数27）",
+    "summary": "延岡市議会議員選挙が執行され、定数27に対し34名が立候補した。投票率48.50%（有権者97,613人、投票者47,343人、無効票377票）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "選挙結果について（令和5年4月23日執行の延岡市議会議員選挙）- 延岡市選挙管理委員会",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14188.pdf"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase22で、既存src/data/electionResults.json（election-council-2023）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。当選者27名の個別対応はelectionResults.jsonのcandidates配列（linkedProfileId）を参照。"
+  },
+  {
+    "id": "civic-159",
+    "year": 2025,
+    "dateLabel": "2025年6月30日",
+    "category": "行政組織",
+    "title": "読谷山洋司市長が辞職（健康上の理由）",
+    "summary": "読谷山洋司市長が、肺・膵臓の腫瘍発見による健康上の理由のため、2025年6月30日付で辞職した。7月1日〜19日は山本一丸副市長が市長職務代理者を務めた。",
+    "relatedPersonIds": [
+      "mayor-03",
+      "mayor-14"
+    ],
+    "sourceRefs": [
+      {
+        "label": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため - 宮崎日日新聞（Miyanichi e-press）",
+        "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase22で、既存src/data/archiveMayorTerms.json（mayor-03-term-02のnotes・sourceRefs、2026-08-08確認済み）に既に確認済みの辞職の事実を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典URLは2026-08-08時点の外部リンク監査で404（掲載期間終了）であることが確認済みだが、事実自体はarchiveMayorTerms.json側で複数報道と整合すると記録されているため、同ファイルの評価（verified→接続時はpartiallyVerified）を踏襲した。市長職務代理者（山本一丸副市長、mayor-14-term-01）は既存civic-156の記述と対応する。"
+  },
+  {
+    "id": "civic-160",
+    "year": 2025,
+    "dateLabel": "2025年7月20日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で三浦久知氏が初当選、第29代市長就任",
+    "summary": "読谷山洋司前市長の辞職（2025年6月30日付）に伴う延岡市長選挙が行われ、新人3名による争いとなり、三浦久知氏（当時42歳）が20,052票を獲得し、次点のごとう哲朗氏（20,016票、36票差）を破り初当選した。投票率59.27%。",
+    "relatedPersonIds": [
+      "mayor-01",
+      "mayor-03"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市長選挙 - 2025年07月20日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/26032"
+      },
+      {
+        "label": "延岡市長 三浦 久知(みうら ひさとも) - 延岡市公式ホームページ",
+        "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase22で、既存src/data/electionResults.json（election-mayor-2025）・archiveMayorTerms.json（mayor-01-term-01）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典に選挙ドットコム（二次資料ドメイン）を含むため、verificationStatusはpartiallyVerifiedとした（延岡市公式ホームページのsourceRefも併記しているが、scripts/validate-sources.mjsはsourceRefs内の全件が公式ドメインであることを要求するため）。"
   }
 ]

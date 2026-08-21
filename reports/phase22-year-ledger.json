@@ -1,0 +1,213 @@
+{
+  "generatedAt": "2026-08-21T15:00:00+09:00",
+  "purpose": "Phase22「最新→過去」年次調査の中核台帳。2026年度から過去へ1年ずつ遡って、人物・議会・財政・選挙・市政年表・出典の充足状況を年度単位で監査し、完全収録/一部収録/未収録/未確認を記録する。既存データ（archiveMayors.json / archiveMayorTerms.json / citySpecialPosts.json / members.json / formerMembers.json / committees.json / councilSessions.json / billVotes.json / generalQuestions.json / councilSpeechSummaries.json / electionResults.json / civicTimelineEvents.json / archiveFiscalYears.json）を機械的に参照・集計したものであり、個々の生データを複製していない。既存reports/配下の各種監査ファイル（mayor-era-timeline-summary.json、data-audit-2026-08-17.json、final-quality-audit.json、civic-timeline-decade-audit.json等）はいずれも「市長代（era）単位」または「サイト全体」の粒度であり、本ファイルが対象とする「年度（fiscalYear）単位×人物/議会/財政/選挙/市政年表」の縦断台帳の役割を果たしていないことを確認したため、新規ファイルとして作成した。",
+  "scope": "Block 1（Phase22）：FY2026〜FY2020の7年度。今回はこの範囲のみを対象とする。Block 2（FY2019〜FY2010）以降はPhase23以降で扱う。",
+  "gradingRubric": {
+    "A": "主要項目（市長/議会/財政/選挙/市政年表/出典）のほぼ全てが一次資料で確認済み",
+    "B": "主要項目の大半は確認済みだが、一部欠落がある",
+    "C": "複数の主要項目に大きな欠落がある",
+    "D": "ほぼ未調査"
+  },
+  "knownSystemicGaps": {
+    "note": "以下は特定の年度固有の欠落ではなく、Block1全体（場合によってはサイト全体）に共通する既知の構造的ギャップ。年度ごとのmissingItemsで重複記載する代わりに、ここに一括で記録する。",
+    "items": [
+      {
+        "id": "gap-member-vote-disclosure",
+        "description": "billVotes.jsonのindividualVoteDisclosureStatusは2019〜2026年度のほぼ全件が'unconfirmed'（議員別の賛否個別記録はほぼ未確認）。推測での補完は行っていない。延岡市議会の採決が記名・起立採決中心で、賛否結果は公式PDFに議員別内訳として掲載されないケースが多いためと推定されるが未確認。",
+        "affectedYears": [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+      },
+      {
+        "id": "gap-general-questions-coverage",
+        "description": "generalQuestions.json（一般質問データベース）は2026年度分14件のみ収録。2020〜2025年度分は未収録（0件）。councilSpeechSummaries.json（議員別発言トピック分析、分析期間2023-06-27〜2025-12-02）が部分的に代替情報を提供するが、質問日・答弁内容を構造化した一般質問データベースとしては2025年度以前は未整備。",
+        "affectedYears": [2020, 2021, 2022, 2023, 2024, 2025]
+      },
+      {
+        "id": "gap-deputy-mayor-superintendent-history",
+        "description": "citySpecialPosts.json（副市長・教育長等）は現職者のみを収録する構造で、archiveMayorTerms.jsonのような「任期履歴」テーブルが存在しない。副市長：小泉智明（2023-06-27〜）、赤木繁男（2025-08-12〜）、上猶真美（2026-03-19〜）は確認済みだが、それ以前（2020年度〜2023年6月26日）の副市長構成、および教育長・髙森賢一（2024-09-20〜）の前任者は未確認。civicTimelineEvents.json civic-156により山本一丸氏が2018-04-01に副市長就任し、2025年7月に市長職務代理者を務めたことは確認済みだが、正確な離任日は未確認。",
+        "affectedYears": [2020, 2021, 2022, 2023, 2024, 2025]
+      },
+      {
+        "id": "gap-historical-council-chair",
+        "description": "committees.json（議長・副議長を含む委員会構成）は現行任期（2026-05-16〜）のみを収録し、過去の任期（〜2026年5月まで）の議長・副議長は構造化データとして存在しない。議長交代は通常1年ごとに行われる慣行があるため、2020〜2025年度は年度ごとに異なる議長・副議長だった可能性が高いが未確認。",
+        "affectedYears": [2020, 2021, 2022, 2023, 2024, 2025]
+      },
+      {
+        "id": "gap-pre-2023-council-roster-snapshot",
+        "description": "members.json・formerMembers.jsonは現行議員（2023年4月選挙後）と元議員を区別して収録しているが、2019年4月〜2023年4月の任期（旧council）の議席構成を年度単位でスナップショットした専用データは存在しない。再選議員はmembers.json、非再選・引退議員はformerMembers.jsonから部分的に再構成可能だが、専用の年度別名簿としては未整備。",
+        "affectedYears": [2020, 2021, 2022]
+      },
+      {
+        "id": "gap-education-commission-members",
+        "description": "教育委員会委員（教育長を除く委員本人）はcitySpecialPosts.jsonに収録されていない（教育長＝superintendentロールのみ収録）。",
+        "affectedYears": [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+      }
+    ]
+  },
+  "years": [
+    {
+      "year": 2026,
+      "eraYear": "令和8年度",
+      "mayor": { "name": "三浦 久知", "mayorId": "mayor-01", "mayorTermId": "mayor-01-term-01", "status": "confirmed_primary", "note": "2025-07-20就任、第29代市長。FY2026は全期間mayor-01-term-01に含まれる。" },
+      "deputyMayor": { "names": ["赤木 繁男（2025-08-12〜）", "上猶 真美（2026-03-19〜）"], "status": "confirmed_primary" },
+      "superintendent": { "name": "髙森 賢一", "appointedDate": "2024-09-20", "status": "confirmed_primary" },
+      "councilChair": { "name": "早瀬 賢一", "status": "confirmed_primary", "note": "committees.json（令和8年5月8日現在名簿PDF出典）より。任期2026-05-16〜2027-05-01。" },
+      "councilViceChair": { "name": "小野 挙", "status": "confirmed_primary" },
+      "councilMembers": { "count": 26, "status": "confirmed_primary", "note": "members.json（2023年4月選挙で選出、定数27のうち現有26名）。" },
+      "auditors": { "names": ["後藤 博文", "服部 俊明", "甲斐 正幸"], "status": "confirmed_primary" },
+      "electionCommission": { "status": "confirmed_primary", "note": "委員4名・補充員4名、選任日2023-12-07（citySpecialPosts.json）。" },
+      "elections": { "count": 0, "note": "FY2026中の実施なし（次回市議選2027年、市長任期満了2029年7月19日）。" },
+      "councilSessions": { "count": 3, "status": "confirmed_primary", "note": "年度途中（2026年8月時点）のため今後増加見込み。" },
+      "bills": { "total": 24, "byCategory": { "条例": 8, "人事": 3, "予算": 4, "財産取得": 3, "契約": 1, "意見書": 2, "陳情": 1, "専決処分": 2 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 14, "status": "confirmed_primary" },
+      "majorEvents": { "count": 0, "status": "unconfirmed", "note": "civicTimelineEvents.jsonに2026年度分の新規イベントは未登録（今回未調査）。" },
+      "financeStatus": "confirmed_primary（budget収録済み、sourceRefs 2件）",
+      "sourceCount": "多数（citySpecialPosts/councilSessions/billVotes/generalQuestions各所にsourceRefs/sourceUrlあり）",
+      "verificationStatus": "largely_verified",
+      "missingItems": ["市政年表イベント未登録", "gap-member-vote-disclosure", "gap-education-commission-members"],
+      "completionGrade": "A",
+      "gradeRationale": "市長・副市長・教育長・議長副議長・監査委員・選管委員・議員名簿・議案・一般質問のいずれも一次資料で確認済み。年度途中のため件数は今後増加するが、既存データの空白ではなく進行中年度の性質による。"
+    },
+    {
+      "year": 2025,
+      "eraYear": "令和7年度",
+      "mayor": { "status": "confirmed_primary_split", "note": "年度途中で市長交代のため単一mayorId未設定（既存archiveFiscalYears.json FY2025のnotesで明記）。読谷山洋司（mayor-03-term-02、〜2025-06-30辞職）→三浦久知（mayor-01-term-01、2025-07-20就任）。空白期間（2025-07-01〜07-19）は山本一丸副市長が職務代理者（既存civic-156）。" },
+      "deputyMayor": { "names": ["小泉 智明（2023-06-27〜）", "山本 一丸（2018-04-01〜、離任日未確認）", "赤木 繁男（2025-08-12〜）"], "status": "partially_confirmed", "note": "山本一丸氏の正確な離任日は未確認（gap-deputy-mayor-superintendent-history）。" },
+      "superintendent": { "name": "髙森 賢一", "appointedDate": "2024-09-20", "status": "confirmed_primary", "note": "FY2025は全期間髙森氏が在任。" },
+      "councilChair": { "status": "unconfirmed", "note": "gap-historical-council-chair。2026年5月改選前の議長・副議長は未確認。" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "27（2023年4月選挙、定数27）", "status": "confirmed_primary", "note": "electionResults.json election-council-2023より。" },
+      "electionsInYear": { "count": 1, "items": ["延岡市長選挙（2025-07-20、三浦久知氏当選）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 9, "status": "confirmed_primary" },
+      "bills": { "total": 200, "byCategory": { "人事": 27, "専決処分": 2, "条例": 55, "決議": 2, "予算": 37, "財産取得": 6, "その他": 56, "契約": 3, "意見書": 2, "陳情": 2, "決算": 7, "請願": 1 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage。councilSpeechSummaries.jsonに部分的な発言トピック分析あり（分析期間の一部が2025年を含む）。" },
+      "majorEvents": { "count": 2, "items": ["読谷山洋司市長辞職（2025-06-30）", "延岡市長選挙・三浦久知氏初当選（2025-07-20）"], "status": "partially_confirmed", "note": "Phase22で新規にcivicTimelineEventsへ接続（既存データの再利用、新規オンライン調査なし）。出典が宮崎日日新聞・選挙ドットコム（いずれも二次資料ドメイン）のため、verificationStatusはpartiallyVerified。" },
+      "financeStatus": "partially_confirmed（決算未確定。県・市の『財政状況資料集』『健全化判断比率』令和7年度版が2026-08-11時点で未公表のため、市債残高等の一部指標のみ確定値、決算総額は未登録。既存archiveFiscalYears.json FY2025のnotesに詳細記録済み。推測による補完は行っていない）",
+      "sourceCount": "多数（選挙・辞職は複数紙・公式サイトで確認済み、財政は一次資料到達済みだが公表待ち）",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-deputy-mayor-superintendent-history（山本一丸離任日）", "gap-historical-council-chair", "gap-general-questions-coverage", "財政：決算確定額（外部公表待ち）"],
+      "completionGrade": "B",
+      "gradeRationale": "市長交代という重要な政治的出来事は正確な日付まで確認済み。財政の未確定は外部（県・市）の公表待ちであり当サイト側の欠落ではない。ただし議長・副議長・一般質問・副市長離任日が未確認。"
+    },
+    {
+      "year": 2024,
+      "eraYear": "令和6年度",
+      "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-02", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["小泉 智明（2023-06-27〜）", "山本 一丸（2018-04-01〜、離任日未確認）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "partially_confirmed", "note": "2024-09-20以降は髙森賢一。それ以前（FY2024前半）の教育長は未確認（gap-deputy-mayor-superintendent-history）。" },
+      "councilChair": { "status": "unconfirmed" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "27（2023年4月選挙）", "status": "confirmed_primary" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 6, "status": "confirmed_primary" },
+      "bills": { "total": 157, "byCategory": { "予算": 39, "専決処分": 3, "人事": 8, "条例": 35, "その他": 44, "財産取得": 9, "意見書": 2, "決議": 5, "陳情": 2, "決算": 7, "契約": 2, "請願": 1 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage" },
+      "majorEvents": { "count": 0, "status": "unconfirmed", "note": "civicTimelineEvents.jsonに2024年度分イベント未登録（今回未調査）。" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2024、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議案は多数、市政年表は0件",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-general-questions-coverage", "gap-historical-council-chair", "教育長前任者", "市政年表イベント未登録"],
+      "completionGrade": "C",
+      "gradeRationale": "市長・議員名簿・議案・財政は確認済みだが、教育長交代の正確な経緯（前任者・離任日）、議長・副議長、一般質問、市政年表イベントのいずれも未確認・未収録であり、複数の主要項目に欠落がある。"
+    },
+    {
+      "year": 2023,
+      "eraYear": "令和5年度",
+      "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-02", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["山本 一丸（2018-04-01〜、離任日未確認）", "小泉 智明（2023-06-27〜）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "unconfirmed", "note": "髙森賢一就任（2024-09-20）以前のためFY2023の教育長は未確認。" },
+      "councilChair": { "status": "unconfirmed" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "旧任期（〜2023-04-22）27名＋新任期（2023-04-23〜）27名", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot。新旧いずれも選挙結果自体はelectionResults.jsonで確認済みだが、旧任期の年度内スナップショット名簿は未整備。" },
+      "electionsInYear": { "count": 1, "items": ["延岡市議会議員選挙（2023-04-23、定数27）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 9, "status": "confirmed_primary" },
+      "bills": { "total": 165, "byCategory": { "予算": 40, "その他": 49, "人事": 5, "専決処分": 6, "条例": 44, "財産取得": 2, "請願": 1, "陳情": 4, "決算": 7, "契約": 4, "意見書": 1, "決議": 2 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage" },
+      "majorEvents": { "count": 1, "items": ["延岡市議会議員選挙（2023-04-23）"], "status": "confirmed_primary", "note": "Phase22で新規にcivicTimelineEventsへ接続。" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2023、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議案・選挙は充実、一般質問・教育長・議長は0",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-general-questions-coverage", "gap-historical-council-chair", "教育長", "gap-pre-2023-council-roster-snapshot"],
+      "completionGrade": "C",
+      "gradeRationale": "市議選という重要イベントは日付・結果とも確認済みで市政年表にも新規反映したが、教育長・議長副議長・一般質問・旧任期名簿スナップショットが未確認であり、大きな欠落が複数残る。"
+    },
+    {
+      "year": 2022,
+      "eraYear": "令和4年度",
+      "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-02", "status": "confirmed_primary", "note": "2022-01-23再選（election-mayor-2022）、2022-02-06就任。FY2022（2022-04-01〜）は全期間term-02。" },
+      "deputyMayor": { "names": ["山本 一丸（2018-04-01〜、離任日未確認）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "status": "unconfirmed" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "旧任期（2019年4月選挙〜2023年4月）", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot" },
+      "electionsInYear": { "count": 1, "items": ["延岡市長選挙（2022-01-23、読谷山洋司氏再選）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 4, "status": "confirmed_primary" },
+      "bills": { "total": 165, "byCategory": { "予算": 40, "条例": 45, "その他": 31, "専決処分": 3, "人事": 23, "意見書": 5, "陳情": 1, "決算": 7, "契約": 4, "請願": 3, "財産取得": 3 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 2, "items": ["延岡市長選挙・読谷山洋司氏再選（2022-01-23）", "台風14号（2022年9月、死者1名・住家被害710棟）"], "status": "partially_confirmed", "note": "台風14号（civic-067）は延岡市公式ページ出典でconfirmed_primary相当。市長選挙（civic-157）はPhase22で新規接続したが出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2022、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "選挙・災害は確認済み、一般質問・教育長・議長は0",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-general-questions-coverage", "gap-historical-council-chair", "教育長", "gap-pre-2023-council-roster-snapshot"],
+      "completionGrade": "C",
+      "gradeRationale": "市長選挙・台風災害という主要な市政年表イベントは確認済みだが、教育長・議長副議長・一般質問・議員名簿スナップショットの欠落は他年度と同様に残る。"
+    },
+    {
+      "year": 2021,
+      "eraYear": "令和3年度",
+      "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-01", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["山本 一丸（2018-04-01〜）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "status": "unconfirmed" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "旧任期（2019年4月選挙〜）", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 4, "status": "confirmed_primary" },
+      "bills": { "total": 140, "byCategory": { "予算": 33, "条例": 49, "その他": 32, "専決処分": 6, "人事": 5, "決議": 2, "財産取得": 4, "決算": 7, "意見書": 2 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 0, "status": "unconfirmed", "note": "civicTimelineEvents.jsonに2021年度分イベント未登録。新型コロナウイルス対応等、確認すべき事項がある可能性が高いが今回未調査。" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2021、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議案・財政は確認済み、市政年表・一般質問・教育長・議長は0",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-general-questions-coverage", "gap-historical-council-chair", "教育長", "gap-pre-2023-council-roster-snapshot", "市政年表イベント（新型コロナ対応等が未調査）"],
+      "completionGrade": "C",
+      "gradeRationale": "議案・財政の基礎データは揃っているが、市政年表イベントが完全に空白（新型コロナウイルス対応など、当時の重要事項が未収録の可能性が高い）で、他の欠落項目も残る。"
+    },
+    {
+      "year": 2020,
+      "eraYear": "令和2年度",
+      "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-01", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["山本 一丸（2018-04-01〜）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "status": "unconfirmed" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "旧任期（2019年4月選挙〜）", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 4, "status": "confirmed_primary" },
+      "bills": { "total": 154, "byCategory": { "条例": 41, "予算": 33, "その他": 43, "契約": 3, "人事": 5, "陳情": 5, "決算": 7, "専決処分": 2, "財産取得": 6, "意見書": 7, "請願": 2 }, "status": "confirmed_primary" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 0, "status": "unconfirmed", "note": "civicTimelineEvents.jsonに2020年度分イベント未登録。新型コロナウイルス対応等、確認すべき事項がある可能性が高いが今回未調査。" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2020、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議案・財政は確認済み、市政年表・一般質問・教育長・議長は0",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-general-questions-coverage", "gap-historical-council-chair", "教育長", "gap-pre-2023-council-roster-snapshot", "市政年表イベント（新型コロナ対応等が未調査）"],
+      "completionGrade": "C",
+      "gradeRationale": "2021年度と同様、議案・財政は確認済みだが市政年表が空白で、他の欠落項目も残る。"
+    }
+  ],
+  "auditResults": {
+    "mayorIdReferentialIntegrity": { "checked": 67, "bad": 0, "note": "archiveMayorTerms.json全件のmayorIdがarchiveMayors.jsonに実在することを確認。archiveFiscalYears.jsonのmayorId/mayorTermIdも全件、対応するarchiveMayorTerms.jsonレコードのmayorIdと一致することを確認（不一致0件）。" },
+    "mayorTermOverlapCheck": { "withinSameMayor": 0, "crossMayor": 0, "note": "同一市長内・市長間ともに任期の重複は検出されなかった。" },
+    "fiscalYearBoundaryCrossCheck": { "note": "厳密な『年度が任期に完全包含されるか』の機械チェックでは17件が『年度境界が任期をまたぐ』として検出されたが、いずれも既存のscripts/link-fiscal-years-to-mayors.mjs（多数月ルール：年度の過半を占める市長へ割当）による意図的な仕様と整合しており、誤割当は0件だった（例：FY2021はmayor-03-term-01に割当済みだが、term-01は2022-02-05終了＝年度の310日/365日を占め、多数月ルール通りの正しい割当）。" },
+    "memberIdReferentialIntegrity": { "membersJsonIds": 26, "formerMembersJsonIds": 58, "duplicateIds": 0, "badCommitteeMemberIdRefs": 0, "badBillVoteMemberIdRefs": 0, "note": "members.json・formerMembers.json間のID重複、committees.json・billVotes.jsonからの参照切れはいずれも0件。" }
+  },
+  "nextYearsToInvestigate": {
+    "block2": "FY2019〜FY2010（Phase23）",
+    "priorityGapsForBlock1Followup": [
+      "gap-general-questions-coverage の解消（2020〜2025年度分の一般質問の収集）",
+      "2020・2021年度の市政年表イベント（新型コロナウイルス対応等）の調査",
+      "副市長・教育長の任期履歴（citySpecialPostsに相当するarchiveMayorTerms.json的な『任期』構造の追加検討）",
+      "歴代議長・副議長（2020〜2025年度分）の調査",
+      "2019年4月〜2023年4月の旧任期議員名簿スナップショットの整備"
+    ]
+  }
+}
