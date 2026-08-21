@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-08-21T15:00:00+09:00",
   "purpose": "Phase22「最新→過去」年次調査の中核台帳。2026年度から過去へ1年ずつ遡って、人物・議会・財政・選挙・市政年表・出典の充足状況を年度単位で監査し、完全収録/一部収録/未収録/未確認を記録する。既存データ（archiveMayors.json / archiveMayorTerms.json / citySpecialPosts.json / members.json / formerMembers.json / committees.json / councilSessions.json / billVotes.json / generalQuestions.json / councilSpeechSummaries.json / electionResults.json / civicTimelineEvents.json / archiveFiscalYears.json）を機械的に参照・集計したものであり、個々の生データを複製していない。既存reports/配下の各種監査ファイル（mayor-era-timeline-summary.json、data-audit-2026-08-17.json、final-quality-audit.json、civic-timeline-decade-audit.json等）はいずれも「市長代（era）単位」または「サイト全体」の粒度であり、本ファイルが対象とする「年度（fiscalYear）単位×人物/議会/財政/選挙/市政年表」の縦断台帳の役割を果たしていないことを確認したため、新規ファイルとして作成した。",
-  "scope": "Block 1（Phase22）：FY2026〜FY2020の7年度（完了）。Block 2（Phase23）：FY2019〜FY2010の10年度（完了。前半FY2019-2015・後半FY2014-2010の2コミットに分割）。Block 3（FY2009〜FY2000）以降は今後のフェーズで扱う。",
+  "scope": "Block 1（Phase22）：FY2026〜FY2020の7年度（完了）。Block 2（Phase23）：FY2019〜FY2010の10年度（完了。前半FY2019-2015・後半FY2014-2010の2コミットに分割）。Block 3（Phase24）：FY2009〜FY2000の10年度（進行中。チェックポイント1：FY2009-2005）。Block 4（FY1999以前）は今後のフェーズで扱う。",
   "gradingRubric": {
     "A": "主要項目（市長/議会/財政/選挙/市政年表/出典）のほぼ全てが一次資料で確認済み",
     "B": "主要項目の大半は確認済みだが、一部欠落がある",
@@ -43,20 +43,64 @@
       },
       {
         "id": "gap-council-sessions-bills-pre-2019",
-        "description": "councilSessions.json・billVotes.jsonは、いずれもFY2019（令和元年度）が最古のデータで、FY2018以前は0件（Phase23で確認）。会議録検索システム自体は平成12年第8回臨時会以降を収録しており、資料としては存在するが、本サイトのこれら2ファイルへの構造化登録がFY2019以前に及んでいない。Block2で判明した最大の構造的ギャップ。",
-        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+        "description": "councilSessions.json・billVotes.jsonは、いずれもFY2019（令和元年度）が最古のデータで、FY2018以前は0件（Phase23で確認、Phase24でFY2009〜2000も同様に0件と確認）。会議録検索システム自体は平成12年（2000年）第8回臨時会（2000-05-09）以降を収録しており、資料としては存在するが、本サイトのこれら2ファイルへの構造化登録がFY2019以前に及んでいない。Block2・Block3を通じて判明した最大の構造的ギャップ。",
+        "affectedYears": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
       },
       {
         "id": "gap-general-questions-coverage-block2",
-        "description": "一般質問データベース（generalQuestions.json）は、Phase23（Block2）でFY2019分を1件（gq2019-06-m01、稲田雅之議員）新規登録したが、FY2019の他の登壇者7名分の内容、およびFY2010〜2018の一般質問は未収録（councilSessions.json/billVotes.jsonと同様、会議録自体は存在するが未転記）。",
-        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+        "description": "一般質問データベース（generalQuestions.json）は、Phase23（Block2）でFY2019分を1件（gq2019-06-m01、稲田雅之議員）新規登録したが、FY2019の他の登壇者7名分の内容、およびFY2000〜2018の一般質問は未収録（councilSessions.json/billVotes.jsonと同様、会議録自体は存在するが未転記）。Phase24（Block3）で、FY2000〜2009についてもキーワード「一般質問」で1573件のテキストヒットを確認し、資料が毎年度存在することを追加確認した。",
+        "affectedYears": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
       },
       {
         "id": "gap-vice-chair-names-block2",
-        "description": "歴代副議長は、2019年5月16日選出の松田満男氏のみ会議録全文で開票結果を確認した。2011〜2018年度の各年次改選（毎年5月頃の臨時会）で副議長選挙が行われたことは会議録検索システムで日付を特定済みだが、当選者氏名は個別に確認していない。",
-        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+        "description": "歴代副議長は、2019年5月16日選出の松田満男氏のみ会議録全文で開票結果を確認した。2000〜2018年度の各年次改選（毎年5月頃の臨時会）で副議長選挙が行われたことは会議録検索システムで日付を特定済みだが、当選者氏名は個別に確認していない（例外：2009年時点で松田和己氏が副議長だったことは確認済み）。",
+        "affectedYears": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+      },
+      {
+        "id": "gap-superintendent-pre-2018",
+        "description": "教育長は、2010年に町田訓允氏の在任を1点確認したのみで、FY2000〜2009・FY2011〜2018は未確認。2015年の地方教育行政法改正前は教育委員会の委員による互選で教育長を選出する制度のため、市長提案の選任議決という形の会議録が存在せず、副市長（助役）と同じ手法では追跡できない。",
+        "affectedYears": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
       }
     ]
+  },
+  "schemaProposals": {
+    "note": "Phase24（Block3）で、既存citySpecialPosts.jsonのCitySpecialPostRole型（deputy-mayor / superintendent / auditor / agricultural-committee-member / election-commission-member / election-commission-alternate）に該当しない、2007年以前の役職（助役・収入役）が判明した。ユーザー指示（既存スキーマを壊す変更は行わず、必要なら設計案を先に記録する）に従い、今回は実装せず設計案のみ記録する。",
+    "proposedRoles": [
+      {
+        "proposedValue": "assistant-mayor",
+        "roleLabelJa": "助役",
+        "description": "2007年3月31日以前の副市長に相当する役職（地方自治法改正により副市長へ移行、既存civicTimelineEvents civic-037）。現在は市政年表イベント（civic-176・177）として記録している柳田喜継氏・杉本隆晴氏の助役在任が該当。",
+        "migrationNote": "追加する場合、citySpecialPosts.jsonのroleLabelは「助役」、deputy-mayorとは別ロールとして区別する（同一人物が助役→副市長と継続する場合は2レコードに分けるか、statusHistory的な構造を検討する必要がある）。"
+      },
+      {
+        "proposedValue": "treasurer",
+        "roleLabelJa": "収入役",
+        "description": "2007年3月31日以前に存在した会計事務の責任者。副市長と同様に2007年の地方自治法改正で廃止され、事務は会計管理者（現行citySpecialPostsには未収録）に引き継がれた。2006年2月28日、平成18年第19回定例会（議案第273号）で選任されたことをPhase24で確認したが、被選任者名は未確認。",
+        "migrationNote": "収入役の氏名・在任期間が確認でき次第、treasurerロールとして追加を検討する。"
+      }
+    ],
+    "currentWorkaround": "Phase24時点では、助役の人事（柳田喜継氏・杉本隆晴氏）はcivicTimelineEvents.jsonへ行政組織カテゴリのイベントとして記録し（civic-176・177）、citySpecialPosts.jsonのスキーマ変更は行っていない。"
+  },
+  "block3FindingsSummary": {
+    "mergerAudit": "北方町・北浦町編入（2006-02-20）・北川町編入（2007-03-31）はいずれも既存civicTimelineEvents（civic-034・036・142・143・144）で一次資料に基づき確認済みであり、Phase24では新規のオンライン調査を行わず監査のみとした。合併前の北方町・北浦町・北川町単独の財政・人口・議会データはarchiveFiscalYears.json等に混入していないことを確認した（延岡市のデータは合併後の新市域ベースで一貫）。",
+    "councilChairContinuity": "歴代議長を2000年5月9日（システム最古記録、佐藤道男氏在任確認）から2019年5月16日（松田和己氏当選）まで連続して確認した：佐藤道男（〜2001-05-08推定）→戸田行徳（2001-05-09〜2003-05-11推定）→甲斐勝吉（2003-05-12〜2005-05-09推定）→稲田和利1期目（2005-05-10〜2007-05-08推定）→新名種歳（2007-05-09〜2009-05-06推定）→後藤哲朗（2009-05-07〜2010-11-29）→稲田和利2期目（2010-11-30〜2011年4月改選前）→佐藤勉（2011-05-12〜）。",
+    "fy2000BoundaryAudit": {
+      "oldestRecord": "平成12年第8回臨時会（第1号）、2000年5月9日、臨時会",
+      "systemDescription": "延岡市議会会議録検索システムのトップページに「ご覧になれるのは平成12年第8回臨時会以降の本会議録です」と明記されている。",
+      "conclusion": "2000年5月9日より前の会議録はこのシステム上に存在しない（別URL・旧システムの存在は今回確認できなかった）。1999年以前の資料は会議録検索システム以外のルートに切り替える必要がある（下記fy1999PreResearchRoutes参照）。"
+    },
+    "fy1999PreResearchRoutes": {
+      "note": "Phase25準備として、1999年以前に利用可能な資料ルートを特定した。本格的なデータ収集はPhase25以降で行う。",
+      "candidateRoutes": [
+        "延岡市史（既存reports/phase17-fiscal-1950-1981-source-discovery.json等で扱った延岡市史上巻・関連資料。1999年以前の市政記録が含まれる可能性が高い）",
+        "延岡市統計書・市勢要覧・市政要覧（既存phase19-resource-dossier.md等で言及済みの資料群）",
+        "広報のべおか（1999年以前のバックナンバーが延岡市立図書館等に所蔵されている可能性。オンライン公開範囲は今回未確認）",
+        "宮崎県立図書館・延岡市立図書館の郷土資料コーナー（Phase19-21で確立した照会ルート）",
+        "NDLサーチ・NDLデジタルコレクション（既存ndl-historical-source-ledger.jsonの31件の情報源を再利用可能）",
+        "Wayback Machine（1999年以前の延岡市公式サイト自体が存在した可能性は低いが、後年のPDF化資料の遡及確認に有用）"
+      ],
+      "notResearchedYet": "上記ルートの実際の到達可能性・収録範囲の検証はPhase25で行う。今回は候補の特定のみ。"
+    }
   },
   "years": [
     {
@@ -414,9 +458,115 @@
       "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2010、budget収録済み、sourceRefs 2件）",
       "sourceCount": "市長選挙・副市長就任・教育長在任・議長交代・専決処分事件・口蹄疫対応は確認済み、議会運営（議案・一般質問）はゼロ",
       "verificationStatus": "partially_verified",
-      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "後藤哲朗氏の議長在任開始日・交代理由", "河野治満氏の副議長在任期間"],
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "後藤哲朗氏の議長交代理由（辞職か等は未確認、就任日はPhase24で2009-05-07と確定）", "河野治満氏の副議長在任期間"],
       "completionGrade": "B",
       "gradeRationale": "市長選挙・副市長就任・教育長在任・議長の年度途中交代・専決処分事件・口蹄疫対応など、Block2で新規発見した情報も含め人物・市政年表が充実している。議案・一般質問の構造化データがない点でAには届かないが、他年度より情報量は多い。"
+    },
+    {
+      "year": 2009,
+      "eraYear": "平成21年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-01", "status": "confirmed_primary" },
+      "deputyMayor": { "name": "杉本 隆晴（助役→副市長、2006-02-28〜継続）", "status": "confirmed_primary", "note": "Phase24でappointedDateを2006-02-28へ修正（citySpecialPosts.json csp-35）。" },
+      "assistantMayorNote": "この年度は既に「副市長」制度（2007年4月導入、既存civic-037）。助役制度はFY2006以前のみ該当。",
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "names": ["新名種歳（〜2009-05-06）", "後藤哲朗（2009-05-07〜、civic-183）"], "status": "confirmed_primary", "note": "年度途中で交代。Phase24で新規発見。" },
+      "councilViceChair": { "name": "松田 和己", "status": "confirmed_primary", "note": "2009-05-07に副議長として議長選挙を執行していたことを確認（civic-183）。後年2019年に自身が議長に当選（既存civic-166）。就任日・退任日は未確認。" },
+      "councilMembers": { "count": "33（2007年4月選挙、定数33）", "status": "confirmed_primary" },
+      "electionsInYear": { "count": 2, "items": ["延岡市長選挙（2010-01-24、FY2009内執行、既存civic-168）", "延岡市議会議員補欠選挙（2010-01-24、同日執行）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage-block2（FY2000〜2009合計で「一般質問」1573件ヒット、資料は存在するが未構造化）" },
+      "majorEvents": { "count": 2, "items": ["後藤哲朗氏、議長に当選（2009-05-07、civic-183）", "延岡市長選挙・首藤正治氏再選（2010-01-24、既存civic-168、FY2009内執行）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2009、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議長交代・副市長継続・市長選挙は確認済み、議会運営（議案・一般質問）・教育長はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "教育長", "後藤哲朗氏の交代理由（次年度11月）"],
+      "completionGrade": "B",
+      "gradeRationale": "議長の年度途中交代を新規に日付確定でき、副市長の継続在任も確認できた。教育長・議会運営データは未確認。"
+    },
+    {
+      "year": 2008,
+      "eraYear": "平成20年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-01", "status": "confirmed_primary" },
+      "deputyMayor": { "name": "杉本 隆晴", "status": "confirmed_primary" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "name": "新名種歳", "status": "confirmed_primary", "note": "2007-05-09選出、2008-05-02の会議録で在任継続を確認（civic-182）。" },
+      "councilViceChair": { "status": "unconfirmed", "note": "2008-05-02に副議長選挙が行われたことを確認済みだが当選者名は未確認。" },
+      "councilMembers": { "count": "33（2007年4月選挙、定数33）", "status": "confirmed_primary" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage-block2" },
+      "majorEvents": { "count": 1, "items": ["新消防庁舎完成（2008年、既存civic-040）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2008、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議長（留任）・市長・副市長は確認済み、副議長氏名・教育長・議会運営はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "教育長", "副議長氏名"],
+      "completionGrade": "C",
+      "gradeRationale": "市長・副市長・議長は確認済みだが、他の主要項目が未確認で新規発見も限定的。"
+    },
+    {
+      "year": 2007,
+      "eraYear": "平成19年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-01", "status": "confirmed_primary" },
+      "deputyMayor": { "name": "杉本 隆晴", "status": "confirmed_primary", "note": "2007年4月の副市長制導入（既存civic-037）後も、助役から継続して副市長を務めた。" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "names": ["稲田 和利（1期目、〜2007-05-08）", "新名種歳（2007-05-09〜、civic-182）"], "status": "confirmed_primary", "note": "2007年4月の市議選（北川町編入後の定数33）に伴い年度途中で交代。" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "58（在任特例、〜2007年4月改選前）→33（2007年4月選挙、定数33）", "status": "confirmed_primary", "note": "electionResults.json election-council-2007。北方町・北浦町編入（2006年2月）に伴う在任特例で58人となっていた議員が、2007年4月の改選で33人に確定した（既存civic-034参照）。" },
+      "electionsInYear": { "count": 1, "items": ["延岡市議会議員選挙（2007-04-22、定数33）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage-block2" },
+      "majorEvents": { "count": 5, "items": ["北川町編入（2007-03-31、既存civic-036、FY2006最終日執行だがFY2007の行政体制変更の起点）", "助役制・収入役制廃止、副市長制導入（2007年4月、既存civic-037）", "上下水道局発足（2007年4月、既存civic-038）", "延岡市議会議員選挙（2007-04-22）", "新名種歳氏、議長に当選（2007-05-09、civic-182）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2007、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "合併後の行政体制再編・議会改選・議長交代は充実、議会運営（議案・一般質問）・教育長はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "教育長", "副議長氏名"],
+      "completionGrade": "B",
+      "gradeRationale": "北川町編入後の議会改選（58→33議席）・助役制廃止/副市長制導入・議長交代など、合併後の行政再編に関する情報が非常に充実している。"
+    },
+    {
+      "year": 2006,
+      "eraYear": "平成18年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-01", "status": "confirmed_primary", "note": "2006-02-06就任（FY2005内）。FY2006は全期間首藤市政。" },
+      "deputyMayor": { "name": "杉本 隆晴（助役）", "status": "confirmed_primary", "note": "2006-02-28選任（civic-177）。FY2006は全期間在任。" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "name": "稲田 和利（1期目）", "status": "confirmed_primary", "note": "2005-05-10選出、2006-05-09の会議録で在任継続を確認（civic-181）。" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "58（北方町・北浦町編入に伴う在任特例、2006-02-20〜2007年4月改選前）", "status": "confirmed_primary", "note": "既存civic-034に明記。北川町編入（2007-03-31、FY2006最終日）はFY2006内の出来事。" },
+      "electionsInYear": { "count": 0, "note": "選挙はないが、2006-02-20の北方町・北浦町編入に伴う議員の在任特例（定数一時58）はFY2005内の出来事。" },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage-block2" },
+      "majorEvents": { "count": 2, "items": ["北川町編入（2007-03-31、既存civic-036、FY2006最終日）", "台風13号による竜巻（2006年、既存civic-035）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2006、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "市長・副市長・議長・北川町編入は確認済み、議会運営（議案・一般質問）・教育長・副議長氏名はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "教育長", "副議長氏名"],
+      "completionGrade": "B",
+      "gradeRationale": "新市長・新助役（後の副市長）の在任開始、議長継続、北川町編入という合併完結の重要イベントを確認できた。"
+    },
+    {
+      "year": 2005,
+      "eraYear": "平成17年度",
+      "mayor": { "status": "confirmed_primary_split", "note": "年度途中で市長交代（既存archiveFiscalYears.json FY2005のnotesに明記）。櫻井哲雄（mayor-13-term-03、〜2006-02-05）→首藤正治（mayor-02-term-01、2006-02-06〜）。" },
+      "deputyMayor": { "names": ["柳田 喜継（助役、〜2006-02-03辞職、civic-176）", "杉本 隆晴（助役、2006-02-28〜、civic-177）"], "status": "confirmed_primary", "note": "年度途中で交代。Phase24で新規発見。" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "name": "稲田 和利（1期目）", "status": "confirmed_primary", "note": "2005-05-10選出（civic-181）。" },
+      "councilViceChair": { "name": "佐藤 正人", "status": "confirmed_primary", "note": "2005-05-10の議長選挙で選挙事務を執行しており、当時の副議長であったことを確認（civic-181）。就任日・退任日は未確認。" },
+      "councilMembers": { "count": "30（2003年4月選挙、定数30）→58（北方町・北浦町編入の在任特例、2006-02-20〜）", "status": "confirmed_primary", "note": "electionResults.json election-council-2003。年度途中で北方町・北浦町の旧議員が在任特例で加わり定数一時58に拡大（既存civic-034）。" },
+      "electionsInYear": { "count": 1, "items": ["延岡市長選挙（2006-01-29、首藤正治氏初当選、既存civic-034関連。electionResults.json election-mayor-2006はFY2005内執行）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed", "note": "gap-general-questions-coverage-block2" },
+      "majorEvents": { "count": 6, "items": ["1市2町合併について北浦町で住民投票、賛成多数（2005年1月、既存civic-143）", "延岡市・北方町・北浦町の合併協定調印式（2005年2月、既存civic-144）", "国道10号延岡道路一部開通（2005年、既存civic-032）", "台風14号（2005年、既存civic-033）", "延岡市長選挙・首藤正治氏初当選（2006-01-29）", "北方町・北浦町編入（2006-02-20、既存civic-034）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2005、budget収録済み、sourceRefs 1件、実質公債費比率等は制度上非該当と既に整理済み）",
+      "sourceCount": "合併協議・市長交代・助役交代・市政年表は非常に充実、議会運営（議案・一般質問）・教育長・副議長退任日はゼロ",
+      "verificationStatus": "largely_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "gap-general-questions-coverage-block2", "教育長", "佐藤正人氏の副議長在任期間"],
+      "completionGrade": "A",
+      "gradeRationale": "市町村合併（北方町・北浦町編入）という延岡市史上最重要級の出来事が、住民投票・合併協定調印・編入まで一次資料で連続確認できた。市長交代・助役交代も年月日単位で確定しており、Block3の中で最も情報量が多い年度。議会運営データの欠落のみがA評価からの唯一の減点要素。"
     }
   ],
   "auditResults": {
@@ -444,10 +594,10 @@
       "河野治満氏（2010年度の副議長）の在任期間"
     ],
     "generalQuestionsBackfillTask": {
-      "description": "一般質問データベース（generalQuestions.json）のFY2010〜2018分（およびFY2019の残り7名分）は、会議録検索システム上に資料自体は存在するが、本サイトへの構造化登録が未実施（『資料なし』ではなく『未構造化』）。Phase23では、usage消費を抑えるため大量登録を行わず、存在確認のみにとどめた。",
-      "evidenceOfExistence": "キーワード「一般質問」で平成22年（2010）〜平成26年（2014）の範囲を全文検索したところ、847件のテキストヒットを確認（会議日程・議長発言・各議員の発言冒頭部分を含む合計で、質問件数そのものではない）。FY2015〜2019についても同様に、6月・9月・12月定例会等で毎年一般質問が行われていたことをPhase23前半で確認済み。",
-      "recommendedMethod": "延岡市議会会議録検索システム（https://www.kensakusystem.jp/nobeoka/index.html）で、fromYear/tillYearを対象年度に設定し、キーワード「一般質問」で検索→議事日程該当エントリから定例会・臨時会ごとの一般質問実施日を特定→各日の発言者一覧（左サイドバー、該当発言者表示）から質問者名を洗い出し→個別の全文表示（全文表示ボタン）で質問項目・要約を確認、という手順が有効（Phase23で確立した手法）。1定例会あたり5〜8名程度の登壇者がいるため、10年度分では100件以上の新規レコードが見込まれる規模。",
-      "recommendedScope": "年度単位（例：まずFY2018）で区切り、1回のセッションで1〜2年度分ずつ進めることを推奨する。"
+      "description": "一般質問データベース（generalQuestions.json）のFY2000〜2018分（およびFY2019の残り7名分）は、会議録検索システム上に資料自体は存在するが、本サイトへの構造化登録が未実施（『資料なし』ではなく『未構造化』）。Phase23・Phase24では、usage消費を抑えるため大量登録を行わず、存在確認のみにとどめた。",
+      "evidenceOfExistence": "キーワード「一般質問」で平成22年（2010）〜平成26年（2014）の範囲を全文検索したところ、847件のテキストヒットを確認（会議日程・議長発言・各議員の発言冒頭部分を含む合計で、質問件数そのものではない）。FY2015〜2019についても同様に、6月・9月・12月定例会等で毎年一般質問が行われていたことをPhase23前半で確認済み。Phase24（Block3）で、平成12年（2000）〜平成21年（2009）の範囲でも同キーワードで1573件のテキストヒットを確認し、FY2000〜2009も毎年度一般質問が行われていたことを追加確認した。",
+      "recommendedMethod": "延岡市議会会議録検索システム（https://www.kensakusystem.jp/nobeoka/index.html）で、fromYear/tillYearを対象年度に設定し、キーワード「一般質問」で検索→議事日程該当エントリから定例会・臨時会ごとの一般質問実施日を特定→各日の発言者一覧（左サイドバー、該当発言者表示）から質問者名を洗い出し→個別の全文表示（全文表示ボタン）で質問項目・要約を確認、という手順が有効（Phase23で確立した手法）。1定例会あたり5〜8名程度の登壇者がいるため、FY2000〜2018の19年度分では200件以上の新規レコードが見込まれる規模。",
+      "recommendedScope": "年度単位（例：まずFY2018）で区切り、1回のセッションで1〜2年度分ずつ進めることを推奨する。一般質問バックフィルは独立したPhaseとして実施することを推奨する（Phase23・24の年次監査本体には組み込まない）。"
     }
   }
 }

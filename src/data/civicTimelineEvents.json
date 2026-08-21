@@ -3458,5 +3458,153 @@
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "verified",
     "notes": "Phase23 Block2後半で新規発見。既存civic-167（2018年、伊東忠俊氏の退任・久世由美子氏の就任）と対になる、伊東氏自身の就任記録。4年任期（2014-11-18〜2018-11-17）が civic-167 の任期満了日と整合することを確認した。"
+  },
+  {
+    "id": "civic-176",
+    "year": 2003,
+    "dateLabel": "2003年2月13日",
+    "category": "行政組織",
+    "title": "柳田喜継氏、助役に再任（4期目）",
+    "summary": "平成15年第26回臨時会（1月28日）で、助役の柳田喜継氏が同年2月13日をもって任期満了となるため、引き続き同氏を選任する議案が可決された。柳田氏は昭和8年生まれ、昭和34年熊本大学法文学部法学科卒業後に延岡市役所入庁、教育委員会学校教育課長・市民課長・税務課長・経済部長等を歴任し、平成3年に総務部長を最後に退職。助役としては平成3年（1991年）から在任しており、この選任で4期目となる。2006年2月3日付で退職し、後任に杉本隆晴氏（後の副市長、citySpecialPosts.json csp-35）が就任した。",
+    "relatedPersonIds": [
+      "mayor-13"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成15年第26回臨時会（第1号 1月28日、議案第74号助役の選任、市長・櫻井哲雄氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H150128A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24（Block3：2000〜2009年度監査）で新規発見。「助役」は2007年4月の地方自治法改正で副市長制に移行する前の役職名（既存civic-037参照）。役職区分がcitySpecialPosts.jsonのCitySpecialPostRole型（deputy-mayor等）に存在しないため、市政年表イベントとして記録した。柳田氏の助役在任期間（平成3年〜平成18年2月3日）はFY2000〜2005（本Phase対象）を通じて継続していたことを確認した。1991年の最初の就任時期日単位の記録は未確認。"
+  },
+  {
+    "id": "civic-177",
+    "year": 2006,
+    "dateLabel": "2006年2月28日",
+    "category": "行政組織",
+    "title": "杉本隆晴氏、助役に選任（前助役・柳田喜継氏の後任）",
+    "summary": "平成18年第19回定例会（2月28日）で、前助役の柳田喜継氏が同年2月3日付で退職したため、後任に杉本隆晴氏を選任する議案（議案第272号）が可決された。杉本氏は昭和22年生まれ、昭和45年延岡市役所入庁、衛生保健課衛生係長・大学立地推進室長・企画課長等を歴任後、平成14年4月から教育部長を務めていた。同日、収入役の選任（議案第273号）も行われた。杉本氏は2007年4月の副市長制導入後も継続して副市長を務めた（citySpecialPosts.json csp-35）。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成18年第19回定例会（第1号 2月28日、議案第272号助役の選任、市長・首藤正治氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H180228A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。既存civicTimelineEvents.json civic-037（2007年4月、助役制・収入役制廃止）の前段にあたる人事。杉本隆晴氏は2010年・2014年にも「副市長」として選任議決を受けているが（citySpecialPosts.json csp-35）、実際の在任は本件（2006年）から連続していたことが判明したため、csp-35のappointedDateを2006-02-28へ修正した。同日可決された収入役の選任（議案第273号）の被選任者名は今回未確認。"
+  },
+  {
+    "id": "civic-178",
+    "year": 2000,
+    "dateLabel": "2000年5月9日時点",
+    "category": "行政組織",
+    "title": "佐藤道男氏、議長として在任（延岡市議会会議録検索システムの最古記録）",
+    "summary": "平成12年第8回臨時会（5月9日）の会議録で、佐藤道男議員が議長として副議長選挙を執行していたことを確認した。この会議録は延岡市議会会議録検索システムに収録されている最古の記録である。就任日は不明（本会議録より前の記録がシステム上にないため確認不能）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成12年第8回臨時会（第1号 5月9日、副議長選挙、議長・佐藤道男氏執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H120509A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24（Block3：2000〜2009年度監査）で新規発見。延岡市議会会議録検索システムのトップページに明記された「平成12年第8回臨時会以降の本会議録」という収録範囲の最古端に該当する記録（Phase24 §15の境界監査）。就任開始日・前任者は本システムの収録範囲外のため確認不能。"
+  },
+  {
+    "id": "civic-179",
+    "year": 2001,
+    "dateLabel": "2001年5月9日",
+    "category": "行政組織",
+    "title": "戸田行徳氏、議長に当選",
+    "summary": "平成13年第15回臨時会（5月9日）で議長選挙が行われ、副議長・下清水一正氏の執行のもと、戸田行徳議員が議長に当選した。2003年5月11日頃まで在任し、後任は甲斐勝吉氏（civic-180）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成13年第15回臨時会（第1号 5月9日、議長選挙、副議長・下清水一正氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H130509A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。2002年5月8日の会議録でも戸田氏が議長として副議長選挙を執行していたことを確認し、在任継続を裏付けた。得票内訳は今回未確認。"
+  },
+  {
+    "id": "civic-180",
+    "year": 2003,
+    "dateLabel": "2003年5月12日",
+    "category": "行政組織",
+    "title": "甲斐勝吉氏、議長に当選（統一地方選挙後の改選）",
+    "summary": "2003年4月の市議会議員選挙後、平成15年第1回臨時会（5月12日）で議長選挙が行われ、臨時議長・佐藤正人氏の執行のもと、甲斐勝吉議員が議長に当選した。2005年5月9日頃まで在任し、後任は稲田和利氏（civic-181）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成15年第1回臨時会（第1号 5月12日、議長選挙、臨時議長・佐藤正人氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H150512A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。electionResults.json election-council-2003（2003-04-27執行）に伴う改選後の議長選挙。得票内訳は今回未確認。"
+  },
+  {
+    "id": "civic-181",
+    "year": 2005,
+    "dateLabel": "2005年5月10日",
+    "category": "行政組織",
+    "title": "稲田和利氏、議長に当選（1期目）",
+    "summary": "平成17年第14回臨時会（5月10日）で議長選挙が行われ、副議長・佐藤正人氏の執行のもと、稲田和利議員が議長に当選した（1期目）。2007年5月8日頃まで在任し、後任は新名種歳氏（civic-182）。稲田氏は後年（2010年11月30日、既存civic-162）に2期目の議長にも当選している。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成17年第14回臨時会（第1号 5月10日、議長選挙、副議長・佐藤正人氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H170510A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。既存civic-162（2010年、稲田和利氏の2期目当選）と対になる1期目の記録。2006年5月9日の会議録でも稲田氏が議長として副議長選挙を執行していたことを確認し、市町村合併（2006年2月・2007年3月）をまたいで在任していたことを裏付けた。得票内訳は今回未確認。"
+  },
+  {
+    "id": "civic-182",
+    "year": 2007,
+    "dateLabel": "2007年5月9日",
+    "category": "行政組織",
+    "title": "新名種歳氏、議長に当選（統一地方選挙後の改選）",
+    "summary": "2007年4月の市議会議員選挙（北川町編入合併後、定数33）後、平成19年第1回臨時会（5月9日）で議長選挙が行われ、臨時議長・内田喜基氏の執行のもと、新名種歳議員が議長に当選した。2009年5月6日頃まで在任し、後任は後藤哲朗氏（civic-183）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成19年第1回臨時会（第1号 5月9日、議長選挙、臨時議長・内田喜基氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H190509A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。electionResults.json election-council-2007（2007-04-22執行、北川町編入後の定数33）に伴う改選後の議長選挙。2008年5月2日の会議録でも新名氏が議長として副議長選挙を執行していたことを確認し、在任継続を裏付けた。得票内訳は今回未確認。"
+  },
+  {
+    "id": "civic-183",
+    "year": 2009,
+    "dateLabel": "2009年5月7日",
+    "category": "行政組織",
+    "title": "後藤哲朗氏、議長に当選",
+    "summary": "平成21年第12回臨時会（5月7日）で議長選挙が行われ、副議長・松田和己氏の執行のもと、後藤哲朗議員が議長に当選した。既存civicTimelineEvents.json civic-162（2010年11月30日、稲田和利氏の当選）で交代するまで在任した。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成21年第12回臨時会（第1号 5月7日、議長選挙、副議長・松田和己氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H210507A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。既存civic-162（2010年、後藤氏から稲田和利氏への交代）に対応する就任記録。Phase23（Block2）では後藤氏の在任開始日が未確認だったが、本件で2009-05-07と確定した。得票内訳・交代理由は今回未確認。松田和己氏が2009年時点で既に副議長だったことも判明（後年2019年に議長に就任、既存civic-166）。"
   }
 ]
