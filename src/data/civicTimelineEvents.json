@@ -3606,5 +3606,172 @@
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "verified",
     "notes": "Phase24で新規発見。既存civic-162（2010年、後藤氏から稲田和利氏への交代）に対応する就任記録。Phase23（Block2）では後藤氏の在任開始日が未確認だったが、本件で2009-05-07と確定した。得票内訳・交代理由は今回未確認。松田和己氏が2009年時点で既に副議長だったことも判明（後年2019年に議長に就任、既存civic-166）。"
+  },
+  {
+    "id": "civic-184",
+    "year": 2000,
+    "dateLabel": "2000年1月",
+    "category": "行政組織",
+    "title": "県内初の「男女共同参画都市」を宣言",
+    "summary": "延岡市が宮崎県内で初めて「男女共同参画都市」を宣言した。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24（Block3：2000〜2009年度監査）で新規発見。既存civic-034等と同じ延岡市公式「近代の年表」を出典とする。FY2000の市政年表が空白だったため優先的に確認した。"
+  },
+  {
+    "id": "civic-185",
+    "year": 2000,
+    "dateLabel": "2000年7月",
+    "category": "行政組織",
+    "title": "情報公開条例の施行、延岡市情報公開センター開所",
+    "summary": "情報公開条例の施行に伴い「延岡市情報公開センター」の開所式が行われた。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。"
+  },
+  {
+    "id": "civic-186",
+    "year": 2001,
+    "dateLabel": "2001年9月",
+    "category": "教育・福祉・産業",
+    "title": "旭化成レーヨン工場が停止、77年の歴史に幕",
+    "summary": "旭化成レーヨン工場の停止式が行われ、77年の歴史に幕を下ろした。延岡市の基幹産業である旭化成グループの地域的に重要な出来事。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。FY2001の市政年表が空白だったため優先的に確認した。"
+  },
+  {
+    "id": "civic-187",
+    "year": 2001,
+    "dateLabel": "2001年10月",
+    "category": "災害",
+    "title": "台風21号",
+    "summary": "台風21号の影響で浦城町など県北部で浸水や土砂崩れの被害が相次いだ。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。"
+  },
+  {
+    "id": "civic-188",
+    "year": 2001,
+    "dateLabel": "2001年11月",
+    "category": "公共事業",
+    "title": "国道218号北方延岡道路の起工式",
+    "summary": "九州横断自動車道延岡線の一部となる国道218号北方延岡道路の起工式が行われた。同道路は2015年に全線開通した（既存civic-053）。",
+    "relatedPersonIds": ["mayor-13"],
+    "relatedPages": [{ "label": "国道218号北方延岡道路全線開通（2015年）", "to": "/timeline/2015" }],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。既存civic-053（2015年、全線開通）の起点となる出来事。"
+  },
+  {
+    "id": "civic-189",
+    "year": 2002,
+    "dateLabel": "2002年1月27日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で櫻井哲雄氏が3選",
+    "summary": "任期満了に伴う延岡市長選挙が行われ、現職の櫻井哲雄氏が33,737票を獲得し3選した。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "延岡市長選挙 - 2002年01月27日投票 | 選挙ドットコム", "url": "https://go2senkyo.com/local/senkyo/1166" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase24で、既存src/data/electionResults.json（election-mayor-2002）・archiveMayorTerms.json（mayor-13-term-03）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。"
+  },
+  {
+    "id": "civic-190",
+    "year": 2002,
+    "dateLabel": "2002年3月",
+    "category": "災害",
+    "title": "旭化成レオナ工場で火災、避難勧告",
+    "summary": "旭化成レオナ工場で火災が発生し避難勧告が出された。これを教訓に、同年7月に延岡地域防災計画を修正した。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。"
+  },
+  {
+    "id": "civic-191",
+    "year": 2003,
+    "dateLabel": "2003年1月",
+    "category": "市制施行・合併",
+    "title": "延岡市・北方町・北川町・北浦町任意合併協議会が設立",
+    "summary": "延岡市・北方町・北川町・北浦町による任意合併協議会が設立された。この後、北川町は2004年12月に離脱を表明（既存civic-142）し、2007年に単独で編入合併（既存civic-036）、延岡市・北方町・北浦町は2005年に合併協定調印（既存civic-144）を経て2006年に編入合併した（既存civic-034）。",
+    "relatedPersonIds": ["mayor-13"],
+    "relatedPages": [{ "label": "北方町・北浦町編入（2006年）", "to": "/timeline/2006" }],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。1市3町合併協議の起点となる出来事。既存civic-142（2004年、北川町離脱表明）・civic-143（2005年、北浦町住民投票）・civic-144（2005年、合併協定調印）・civic-034（2006年、編入）・civic-036（2007年、北川町編入）と合わせ、合併の全過程を一次資料で連続確認した。"
+  },
+  {
+    "id": "civic-192",
+    "year": 2003,
+    "dateLabel": "2003年12月",
+    "category": "行政組織",
+    "title": "東南海・南海地震の防災対策推進地域に指定",
+    "summary": "延岡市が東南海・南海地震防災対策推進地域に指定された。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。"
+  },
+  {
+    "id": "civic-193",
+    "year": 2004,
+    "dateLabel": "2004年1月",
+    "category": "市制施行・合併",
+    "title": "延岡市・北方町・北浦町法定合併協議会が設立",
+    "summary": "延岡市・北方町・北浦町による法定合併協議会が設立された。同年12月に北川町が1市3町合併から離脱を表明（既存civic-142）した後も、この3市町での協議は継続し、2006年の編入合併（既存civic-034）に至った。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。既存civic-191（2003年、1市3町任意合併協議会設立）の後継にあたる法定協議会。"
+  },
+  {
+    "id": "civic-194",
+    "year": 2004,
+    "dateLabel": "2004年8月",
+    "category": "災害",
+    "title": "台風16号、大規模避難勧告",
+    "summary": "台風16号が接近し、85地区18,180世帯43,771人に避難勧告が出された。",
+    "relatedPersonIds": ["mayor-13"],
+    "sourceRefs": [
+      { "label": "近代の年表（1991〜2010年） - 延岡市公式ホームページ", "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html" }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase24で新規発見。既存civic-030（台風18号）・civic-031（台風23号）と同じ2004年の別の台風。延岡市公式「近代の年表」に記載されている。"
   }
 ]
