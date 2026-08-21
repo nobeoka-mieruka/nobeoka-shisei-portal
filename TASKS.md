@@ -8892,3 +8892,66 @@ onsite_required/bibliographic_only/not_found）と物理調査候補リスト6�
 
 【残存欠落年度】FY1951・1952・1953・1959・1983・1984・1985・1986・1987（9年度、
 変化なし。今回はデータ埋めではなく現地調査準備が目的のため想定どおり）。
+
+---
+
+### TASK-166 Phase20：照会資料の実送信版完成、オンライン最終探索、UI確認（新規データ0件）
+
+状態：DONE（2026-08-21）
+優先度：A
+対象：`reports/phase20-inquiry-final.md`（新規）、`reports/phase20-online-last-mile.md`（新規）、
+`reports/phase20-missing-years-status.json`（新規）、`reports/phase19-research-checklist.md`（誤字修正）
+目的：Phase19成果物を監査し、実際に送信できる照会文へ完成させる（A）と、現地調査に入る前の
+最後のオンライン探索（B）を行う（ユーザー指示）。対象は引き続きFY1951-1953・1959・1983-1987。
+
+【A. Phase19成果物監査】`phase19-resource-dossier.md`・`phase19-missing-years-matrix.json`・
+`phase19-library-inquiry.md`・`phase19-research-checklist.md`を相互突合し、年度・資料名・
+発行年・所蔵候補・優先度・確認したい表/数値の一致を確認した。実質的な矛盾は無し。
+チェックシートの誤字（「5次に」→「5. 次に」）を1件修正した。
+
+【公式連絡先確認】WebFetchで3機関の公式サイトを確認し、実在する連絡先のみを記録した：
+宮崎県立図書館（レファレンス専用メール soudan@lib.pref.miyazaki.lg.jp、郷土情報担当
+0985-29-2954等）、延岡市立図書館（toshokan@city.nobeoka.miyazaki.jp、0982-32-3058）、
+延岡市役所財政課（0982-22-7005）・総務課情報公開担当（0982-22-7006）。存在しない
+サービス（郵送複写の可否等、公式サイトに明記のないもの）は「未確認」のまま記載し、
+推測では埋めていない。あわせて宮崎県統計年鑑の発行元である宮崎県統計調査課
+（tokeichosa@pref.miyazaki.lg.jp）を新規発見し、第4の照会先として追加した。
+
+【実送信用照会文】`phase20-inquiry-final.md`に、確認済み連絡先での詳細版（Phase19の
+文面を流用）に加え、短縮版（電話・簡易メール用）を新規作成。第1〜第4照会の優先順位と、
+「A機関で所蔵なしならB機関へ」の分岐条件を明記した（同一資料の複数機関への同時
+重複照会を避ける設計）。
+
+【B. オンライン最終探索】Phase16-19で「対象年度なし」と確定済みの検索は繰り返さず、
+未着手だった経路のみ確認した：宮崎県デジタルアーカイブ（デジタル宮崎県史／ADEAC、
+歴史・民俗中心で財政統計は含まない可能性が高い）、延岡市独自デジタルアーカイブ
+（存在自体を確認できず）、財務省統計表19（国レベル集計のみ、市町村別データなし）、
+e-Statの地方財政状況調査市町村分（別の切り口で1990年開始を再確認、確定済み境界と
+矛盾なし）、みやざき統計BOX（宮崎県公式、直近4版のみ公開、第102-106回は非公開だが
+発行元の連絡先を新規発見）、総務省財政状況資料集（最古が平成26年度と再確認）。
+いずれも新規のconfirmed_primaryデータは発見できず、`archiveFiscalYears.json`への
+変更は0件（推測値での代替は行っていない）。詳細は`phase20-online-last-mile.md`参照。
+
+【1954年度市町村税の誤混同防止（再確認）】`archiveFiscalYears.json`のFY1954
+（totalRevenueYen=762,402,000円／localTaxRevenueYen=349,792,071円）が別フィールドの
+まま変更されていないことを確認。`src/lib/archiveFinanceMetrics.ts`のメトリック定義
+（「歳入総額」と「市税」が別ラベル・別getPointで実装済み）を確認し、表示コードレベルでも
+混同経路がないことを確認した（コード変更なし）。
+
+【UI可読性確認】`FinanceBudgetPage.tsx`・`FinanceYearCards.tsx`・`FinanceMetricSection.tsx`の
+実装を確認したところ、ユーザーが懸念した症状（列幅が狭すぎる、定義欄が長すぎる、
+出典未登録が大量に並ぶ等）は、既存の設計（`FinanceYearCards`のカード型グリッド表示、
+`FinanceMetricSection`の`showTable=false`によるグラフのみ表示で長い数値表を年度一覧
+ページには出さない設計）により対応済みであることをコードレベルで確認した。ローカル
+ビルドの実機確認（デスクトップ幅）でも折り返し崩れ等は確認されなかった。モバイル幅
+（390px等）でのresize_windowによる実機確認はツールの不具合で今回実施できなかったが、
+Tailwindのレスポンシブクラス（`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`、`flex-wrap`、
+`min-h-[44px]`のタップ領域確保）をコードで確認済み。**コード変更は行っていない**
+（既存実装が既に要件を満たしているため、重複実装を避けた）。
+
+【検証】`validate:data`（errors=0, warnings=15＝変更なし）、`typecheck`・`lint`・`build`
+いずれも成功。archiveFiscalYears.json・ルート数に変更なし。
+
+【残存欠落年度】FY1951・1952・1953・1959・1983・1984・1985・1986・1987（9年度、
+変化なし。オンライン調査は今回で実質的に打ち止めとし、現地調査・照会結果待ちの
+段階へ移行したことを`phase20-missing-years-status.json`に明記）。

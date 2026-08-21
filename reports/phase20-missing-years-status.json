@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-08-20T22:30:00+09:00",
+  "purpose": "Phase20：財政欠落9年度について、各年度が『次に何をすべき状態か』を明確に区別する進捗ステータス。『0件』と『未確認』を混同しない。",
+  "statusCategories": {
+    "online_confirmed": "資料をオンラインで発見し、内容（歳入・歳出・年度・会計区分・単位）を直接確認済み。confirmed_primaryとして登録可能な状態。",
+    "onsite_required": "資料の所蔵館・請求記号が判明しており、現地閲覧または複写取り寄せのみが残っている状態。",
+    "reference_pending": "所蔵館候補への照会文は完成しているが、まだ送付していない、または送付済みで回答待ちの状態。",
+    "holding_unconfirmed": "資料そのものの存在は判明しているが、どの機関が所蔵しているか（所蔵館）がまだ特定できていない状態。",
+    "resource_unidentified": "対象年度をカバーする資料そのものが何であるか、まだ特定できていない状態（『0件』ではなく、探索が及んでいないという意味）。"
+  },
+  "overallNote": "2026-08-20時点で、9年度すべてについて『オンラインでは一次資料を発見できなかった』という調査結果自体は確定している（Phase16-20で反復確認済み）。Phase20で照会文（reports/phase20-inquiry-final.md）を完成させたが、本セッションでは実際の送付は行っていない（送付はサイト運営者〔人間〕が行う）。したがって、現時点の各年度のマスターステータスは『reference_pending（照会文完成・送付前）』である。以下は年度ごとに、どの資料が最有力候補か、送付後にどう進むかを示す。",
+  "years": [
+    {
+      "fiscalYear": 1951,
+      "eraLabel": "昭和26年度",
+      "status": "reference_pending",
+      "primaryResource": "延岡市決算書並意見書（R1）",
+      "secondaryResource": "〔延岡市〕市政二十年史（R2）",
+      "note": "R1は所蔵館未確定（holding_unconfirmed）。第1照会（宮崎県立図書館）で所蔵が確認できれば次はonsite_requiredへ進む。所蔵が確認できなければ延岡市立図書館・延岡市役所へ照会を続ける。"
+    },
+    {
+      "fiscalYear": 1952,
+      "eraLabel": "昭和27年度",
+      "status": "reference_pending",
+      "primaryResource": "延岡市決算書並意見書（R1）",
+      "secondaryResource": "〔延岡市〕市政二十年史（R2）",
+      "note": "1951年度と同様。R1が確認できれば同一資料で一括対応できる可能性が高い。"
+    },
+    {
+      "fiscalYear": 1953,
+      "eraLabel": "昭和28年度",
+      "status": "reference_pending",
+      "primaryResource": "延岡市決算書並意見書（R1）",
+      "secondaryResource": "なし（市政二十年史は発行時期の関係で対象外の可能性が高い）",
+      "note": "R2（市政二十年史）は当該年度の確定決算を含まない可能性が高いため、実質的にR1のみが頼り。R1が所蔵されていない場合は resource_unidentified に近い状態になる。"
+    },
+    {
+      "fiscalYear": 1959,
+      "eraLabel": "昭和34年度",
+      "status": "reference_pending",
+      "primaryResource": "延岡市決算書並意見書（R1）",
+      "secondaryResource": "地方財政統計年報（R5、国立国会図書館）、延岡市議会会議録旧会期（R6、補助）",
+      "note": "9年度の中で唯一、代替経路（R5・R6）が2つ存在する。R1が見つからなくても、R5（国立国会図書館での閲覧）という別ルートが残っている点で他の年度より状況が良い。"
+    },
+    {
+      "fiscalYear": 1983,
+      "eraLabel": "昭和58年度",
+      "status": "reference_pending",
+      "primaryResource": "宮崎県統計年鑑 第102回（R4）",
+      "secondaryResource": "地方財政統計年報 昭和58年度版（R5、国立国会図書館）",
+      "note": "R4は所蔵館未確定（holding_unconfirmed）。第1照会（宮崎県立図書館）と第2照会（宮崎県統計調査課）を並行して進める。"
+    },
+    {
+      "fiscalYear": 1984,
+      "eraLabel": "昭和59年度",
+      "status": "reference_pending",
+      "primaryResource": "宮崎県統計年鑑 第102回または第103回（R4）",
+      "secondaryResource": "地方財政統計年報 昭和59年度版（R5）",
+      "note": "第102回・第103回のどちらに昭和59年度分が収録されるか未確定。両方の所蔵確認が必要。"
+    },
+    {
+      "fiscalYear": 1985,
+      "eraLabel": "昭和60年度",
+      "status": "reference_pending",
+      "primaryResource": "宮崎県統計年鑑 第103回前後（R4）",
+      "secondaryResource": "地方財政統計年報 昭和60年度版（R5）",
+      "note": "同上。"
+    },
+    {
+      "fiscalYear": 1986,
+      "eraLabel": "昭和61年度",
+      "status": "reference_pending",
+      "primaryResource": "宮崎県統計年鑑 第104回または第105回（R4）",
+      "secondaryResource": "地方財政統計年報 昭和61年度版（R5）",
+      "note": "第104回はそもそも書誌が未確認（resource_unidentifiedに近い）。第105回（昭和63年度刊行）の方が確実な候補。"
+    },
+    {
+      "fiscalYear": 1987,
+      "eraLabel": "昭和62年度",
+      "status": "reference_pending",
+      "primaryResource": "宮崎県統計年鑑 第105回または第106回（R4）",
+      "secondaryResource": "地方財政統計年報 昭和62年度版（R5）",
+      "note": "第106回はそもそも書誌が未確認（resource_unidentifiedに近い）。"
+    }
+  ],
+  "summaryByStatus": {
+    "online_confirmed": 0,
+    "onsite_required": 0,
+    "reference_pending": 9,
+    "holding_unconfirmed": 0,
+    "resource_unidentified": 0
+  },
+  "summaryNote": "現時点では『reference_pending』（照会文完成・送付前）が9件すべてを占める。これは推測値・楽観的な繰り上げを避けた正直な分類である。実際に照会を送付し回答を得た後、Phase21以降でこのファイルを更新し、resourceごとの所蔵有無に応じて各年度をonsite_required・holding_unconfirmed・resource_unidentifiedへ再分類する想定。"
+}
