@@ -1,0 +1,128 @@
+{
+  "phase": 28,
+  "generatedAt": "2026-08-21",
+  "purpose": "1970年代（FY1970〜FY1979）の市長選挙・特別職について、一次資料で確定できなかった項目を機械可読な形で記録する。件数を増やすことではなく、確定／未確定の境界を明確にすることを目的とする。",
+  "resolvedThisPhase": [
+    {
+      "category": "mayorElection",
+      "year": 1971,
+      "electionId": "election-mayor-1971",
+      "item": "対立候補氏名",
+      "value": "山口 哲臣",
+      "status": "confirmed_primary",
+      "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/214",
+      "notes": "延岡市史上巻コマ214、通し番号(9)「昭和四十六年一月十七日の選挙」の項に候補者数(2)と氏名の人数が完全一致した。"
+    }
+  ],
+  "unresolved": [
+    {
+      "category": "mayorElection",
+      "year": 1975,
+      "electionId": "election-mayor-1975",
+      "item": "対立候補氏名（候補者数3名のうち房野博以外の2名）",
+      "candidateHints": ["山口 哲臣", "丸山 正喜"],
+      "status": "disputed",
+      "reason": "コマ214上でこのクラスターが1971年選挙欄と1975年選挙欄のどちらに帰属するか、欄の境界を確実に判別できなかった。",
+      "recommendedNextStep": "原本現物確認（宮崎県立図書館等）、または高解像度スキャン画像での再照合。"
+    },
+    {
+      "category": "mayorElection",
+      "year": 1978,
+      "electionId": "election-mayor-1978",
+      "item": "候補者数および対立候補氏名",
+      "candidateHints": [
+        "河野 孔明（塩月盈・早生隆彦との3名クラスター、または池田某・河野敏進・早生隆彦との4名クラスターのいずれか）",
+        "塩月 盈",
+        "池田 某（姓のみ判読、下の名は不確実）",
+        "河野 敏進"
+      ],
+      "status": "disputed",
+      "reason": "候補者数の資料上の桁（一覧表）と氏名クラスターの人数（3名または4名）が一致せず、1978年と1982年のどちらの選挙に対応するかを確定できなかった。",
+      "recommendedNextStep": "原本現物確認、または各クラスターに付随する投票率・有権者数等の数値をより高精度に読み取り、Phase27で確定済みの1978年数値（有権者91,287人・投票者57,900人・投票率63.43%）と突合する。"
+    },
+    {
+      "category": "mayorElection",
+      "year": 1982,
+      "electionId": "election-mayor-1982",
+      "item": "候補者数および対立候補氏名",
+      "candidateHints": ["河野 孔明", "池田 某", "河野 敏進"],
+      "status": "disputed",
+      "reason": "1978年分と同様、候補者数の桁と氏名クラスターの対応が確定できなかった。",
+      "recommendedNextStep": "1978年分と同時に原本で確認する必要がある。"
+    },
+    {
+      "category": "mayorElection",
+      "year": [1971, 1975, 1978, 1982],
+      "item": "候補者別得票数・無効票数",
+      "status": "unconfirmed",
+      "reason": "延岡市史上巻の市長選挙一覧表には候補者別の得票数が記載されておらず、確認不能。",
+      "recommendedNextStep": "選挙管理委員会資料または新聞縮刷版等、別の一次資料が必要。"
+    },
+    {
+      "category": "assistantMayor",
+      "personName": "後藤 梅雄",
+      "cityRoleId": "csp-46",
+      "item": "初回就任日・最終退任日",
+      "candidateHints": [
+        "自1971-02-20〜至1975-02-10",
+        "自1979ごろ〜至1983-02-10ごろ",
+        "自1983-02-10〜至現在（1983年刊行時点）"
+      ],
+      "status": "disputed",
+      "reason": "延岡市史上巻コマ125〜127の一覧表を複数回・複数倍率で再読したが、列と日付の対応関係がPhase27・Phase28で一致しなかった。3つの読みは相互に矛盾する。",
+      "recommendedNextStep": "原本現物確認。可能であれば延岡市議会の人事同意議案記録（会議録検索システム、ただし収録範囲が2000年5月以降のため1970年代分は対象外の可能性が高い）で就任議決日を探す。"
+    },
+    {
+      "category": "councilViceChair",
+      "years": "1970-1979",
+      "item": "副議長氏名",
+      "status": "unconfirmed",
+      "reason": "延岡市史上巻コマ209〜210に「歴代市議会副議長」一覧表の所在は確認したが、姓の行と自/至日付列の対応関係を確実に判読できなかった。",
+      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。"
+    },
+    {
+      "category": "superintendent",
+      "years": "1970-1979",
+      "item": "教育長氏名",
+      "status": "unconfirmed",
+      "reason": "延岡市史上巻の目次・索引の範囲では教育長個人の氏名・在任期間を記載した一覧箇所を発見できなかった。",
+      "recommendedNextStep": "延岡市教育委員会の沿革資料、または延岡市議会史（未入手）の確認。"
+    },
+    {
+      "category": "treasurer",
+      "years": "1970-1979",
+      "item": "収入役氏名",
+      "status": "unconfirmed",
+      "reason": "延岡市史上巻コマ125の「助役、収入役および固定資産評価員」一覧表は複数役職が並列掲載されており、1970年代の収入役氏名を高い確度で特定できなかった。",
+      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。"
+    },
+    {
+      "category": "mayorProfile",
+      "personName": "早生 隆彦",
+      "mayorId": "mayor-12",
+      "item": "生年月日",
+      "candidateValue": "1921-01-03（大正十年一月三日）",
+      "status": "unconfirmed",
+      "reason": "延岡市史上巻コマ125の固定資産評価員一覧表に候補となる記載を発見したが、本人が同表に掲載されている理由（充て職か）および列対応の確実性に欠ける。",
+      "recommendedNextStep": "同一覧表の再読、または別の伝記的資料（人名事典等）での裏付け。"
+    }
+  ],
+  "civicTimelineEventsAudit": {
+    "method": "machine-computed via node script counting x.year field in src/data/civicTimelineEvents.json",
+    "byYear": {
+      "1970": 0,
+      "1971": 3,
+      "1972": 2,
+      "1973": 5,
+      "1974": 3,
+      "1975": 2,
+      "1976": 1,
+      "1977": 2,
+      "1978": 1,
+      "1979": 3
+    },
+    "total1970s": 22,
+    "totalFileRecords": 203,
+    "note": "Phase28では新規イベント追加を行っていない。この数値はPhase27末時点のベースライン（Phase27で発見した集計バグ修正後の正しい値）と同一。"
+  }
+}

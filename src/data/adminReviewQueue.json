@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-21T11:43:20.425Z",
-  "totalItems": 125,
+  "generatedAt": "2026-08-21T12:31:39.987Z",
+  "totalItems": 126,
   "byCategory": {
     "aiCategoryCandidate": 8,
     "lowConfidenceCandidate": 11,
     "relationCandidate": 6,
-    "sourceInsufficient": 79,
+    "sourceInsufficient": 80,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 1,
     "aiSummaryPending": 19
@@ -329,6 +329,12 @@
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-12",
       "detail": "出典「日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年）延岡市 個人略歴（17・18代）」の確認状況が「needsReview」です"
+    },
+    {
+      "category": "sourceInsufficient",
+      "sourceEntityType": "mayor",
+      "sourceEntityId": "mayor-12",
+      "detail": "出典「延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行）第二編第五章「歴代市長、助役および収入役等」中の「助役、収入役および固定資産評価員」一覧表」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",
