@@ -77,7 +77,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
               ...(showValueTypeColumn
                 ? [{ header: "値の種類", render: (p: (typeof points)[number]) => p.valueTypeLabel ?? "-" }]
                 : []),
-              { header: "定義", render: (p) => p.definitionNoteOverride ?? metric.definitionNote },
+              { header: "定義", wrap: true, render: (p) => p.definitionNoteOverride ?? metric.definitionNote },
               {
                 header: "確認状況",
                 render: (p) =>
@@ -90,6 +90,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
               },
               {
                 header: "出典",
+                wrap: true,
                 render: (p) =>
                   p.sourceRefs.length === 0 ? (
                     "出典未登録"
