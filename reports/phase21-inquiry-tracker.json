@@ -1,6 +1,6 @@
 {
  "generatedAt": "2026-08-21T00:00:00+09:00",
- "lastUpdatedAt": "2026-08-21T18:00:00+09:00",
+ "lastUpdatedAt": "2026-08-21T20:00:00+09:00",
  "purpose": "Phase21：外部機関への照会を追跡管理するファイル。送信・回答が発生するたびに、このファイルの該当レコードを更新する運用とする。",
  "statusDefinitions": {
   "draft": "文面はあるが、送付先・送付タイミングが確定していない（条件分岐待ち等）",
@@ -46,7 +46,10 @@
    "responseContent": null,
    "nextAction": "回答を待つ。回答が届いたらresponseStatusをansweredへ更新し、responseContent・responseDateを記録する。1950年代分の資料が『所蔵なし』と分かった場合はINQ-003をready_to_send→送付へ進める。",
    "priority": "第1照会",
-   "branchCondition": "この照会の回答で『所蔵なし』と分かった資料がある場合、INQ-003（延岡市立図書館）を送付する。"
+   "branchCondition": "この照会の回答で『所蔵なし』と分かった資料がある場合、INQ-003（延岡市立図書館）を送付する。",
+   "status": "waiting",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-002",
@@ -75,7 +78,10 @@
    "responseContent": null,
    "nextAction": "回答を待つ。回答が届いたらresponseStatusをansweredへ更新し、responseContent・responseDateを記録する。『宮崎県立図書館へ移管済み』等の回答があればINQ-001の回答と突き合わせる。",
    "priority": "第2照会（第1照会と並行可）",
-   "branchCondition": "この照会で『宮崎県立図書館へ移管済み』と回答があった場合は、INQ-001の回答と突き合わせて確認する。"
+   "branchCondition": "この照会で『宮崎県立図書館へ移管済み』と回答があった場合は、INQ-001の回答と突き合わせて確認する。",
+   "status": "waiting",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-003",
@@ -103,7 +109,10 @@
    "responseContent": null,
    "nextAction": "文面は完成済み（送信可能な状態）。ただしINQ-001（宮崎県立図書館）の回答を待ち、1950年代分の資料が『所蔵なし』と判明した場合にのみ実際に送付する。INQ-001ですべて『所蔵あり』と回答された場合はclosedへ変更する。",
    "priority": "第3照会（条件付き）",
-   "branchCondition": "INQ-001で1950年代分の資料がすべて『所蔵あり』と回答された場合、この照会は送付不要（closedへ変更）。"
+   "branchCondition": "INQ-001で1950年代分の資料がすべて『所蔵あり』と回答された場合、この照会は送付不要（closedへ変更）。",
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-004",
@@ -133,7 +142,10 @@
    "responseContent": null,
    "nextAction": "INQ-001・INQ-002・INQ-003のいずれでも決算資料の所在が確認できなかった場合の最終手段。情報公開請求の前段階としての照会に位置づける。",
    "priority": "第4照会（条件付き・最終手段）",
-   "branchCondition": "INQ-001〜003のいずれかで資料の所在が確認できた場合、この照会は不要（closedへ変更）。"
+   "branchCondition": "INQ-001〜003のいずれかで資料の所在が確認できた場合、この照会は不要（closedへ変更）。",
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-005",
@@ -165,7 +177,10 @@
    "responseContent": null,
    "nextAction": "助役（後藤梅雄）の在任期間、収入役氏名、副議長氏名の3点を照会する。延岡市議会史の存在確認もあわせて依頼する。",
    "priority": "Phase29 第1照会（助役・収入役・副議長）",
-   "branchCondition": null
+   "branchCondition": null,
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-006",
@@ -188,7 +203,10 @@
    "responseContent": null,
    "nextAction": "1975・1978・1982年市長選挙の対立候補氏名・候補者別得票数を照会する。選挙管理委員会事務局の直接連絡先が未確認のため、まず延岡市役所代表窓口経由での取次を依頼する必要がある。",
    "priority": "Phase29 第2照会（市長選挙候補者・得票数）",
-   "branchCondition": null
+   "branchCondition": null,
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-007",
@@ -218,7 +236,10 @@
    "responseContent": null,
    "nextAction": "1970年代の教育長氏名・在任期間を照会する。教育委員会事務局の直接連絡先が未確認のため、まず延岡市役所代表窓口経由での取次を依頼する必要がある。",
    "priority": "Phase29 第3照会（教育長）",
-   "branchCondition": null
+   "branchCondition": null,
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   },
   {
    "inquiry_id": "INQ-008",
@@ -253,7 +274,48 @@
    "responseContent": null,
    "nextAction": "早生隆彦氏の生年月日候補（1921-01-03）を人事興信録等で裏付けられるか確認する。あわせて1970年代の延岡市議会・行政関係資料の所蔵を確認する。INQ-001と同一機関のため、既存のやり取りがあれば統合して送付することも検討する。",
    "priority": "Phase29 第4照会（人物確認・郷土資料所蔵）",
-   "branchCondition": null
+   "branchCondition": null,
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
+  },
+  {
+   "inquiry_id": "INQ-009",
+   "recipient": "延岡市立図書館（郷土資料担当）",
+   "recipientContact": "toshokan@city.nobeoka.miyazaki.jp（電話：0982-32-3058）",
+   "targetResources": [
+    "延岡市史（上巻・下巻、1983年）",
+    "延岡市議会史（存在未確認）",
+    "延岡市勢要覧（昭和40〜50年代版）",
+    "延岡市統計書（延岡市統計月報等）",
+    "地方財政関係資料一般",
+    "選挙関係資料一般"
+   ],
+   "targetFiscalYears": [
+    1970,
+    1971,
+    1972,
+    1973,
+    1974,
+    1975,
+    1976,
+    1977,
+    1978,
+    1979
+   ],
+   "targetFiscalYearsEraLabel": "昭和45〜54年度",
+   "letterFile": "reports/phase29-inquiry-templates.md（4. 延岡市立図書館向け照会文）",
+   "inquiryDate": null,
+   "sendStatus": "draft",
+   "responseStatus": "not_applicable",
+   "responseDate": null,
+   "responseContent": null,
+   "nextAction": "延岡市史の現物（紙版）を含む郷土資料の所蔵・請求記号・複写可否を確認する。INQ-003（延岡市立図書館、財政資料）とは対象資料が異なるため別レコードとした。",
+   "priority": "Phase30 第5照会（郷土資料の所蔵確認）",
+   "branchCondition": null,
+   "status": "draft",
+   "respondentDepartment": null,
+   "confirmedFacts": []
   }
  ],
  "summary": {
@@ -268,5 +330,16 @@
   },
   "note": "byStatusはsendStatus（送信状態）を集計。responseStatus（回答状態）は別軸で各レコードに記録している。2026-08-21時点：INQ-001・INQ-002は送信済み（sendStatus=sent／responseStatus=waiting_response）、INQ-003は送信可能な状態で待機（sendStatus=ready_to_send、INQ-001の回答待ち）、INQ-004は未着手（draft）。"
  },
- "archiveFiscalYearsPolicy": "回答が得られ、一次資料で年度・延岡市・歳入・歳出・会計区分・単位・出典のすべてを確認できるまで、archiveFiscalYears.jsonのFY1951・1952・1953・1959・1983・1984・1985・1986・1987はreference_pending（reports/phase20-missing-years-status.json参照）のまま維持する。推測値・補間値は登録しない。"
+ "archiveFiscalYearsPolicy": "回答が得られ、一次資料で年度・延岡市・歳入・歳出・会計区分・単位・出典のすべてを確認できるまで、archiveFiscalYears.jsonのFY1951・1952・1953・1959・1983・1984・1985・1986・1987はreference_pending（reports/phase20-missing-years-status.json参照）のまま維持する。推測値・補間値は登録しない。",
+ "statusDefinitionsV2": {
+  "draft": "文面は完成しているが、まだ送付していない状態。",
+  "sent": "運営者（人間）が実際に送付した状態。Claude Codeが自動送信することはない。",
+  "waiting": "送付済みで、相手機関からの回答を待っている状態。",
+  "answered": "回答を受け取り、内容をこのファイルに記録済みの状態（全項目に回答があった場合）。",
+  "partially_answered": "回答を受け取ったが、一部の質問にのみ回答があった状態（残りはno_recordまたは再照会が必要）。",
+  "no_record": "照会の結果、該当する記録・資料が存在しない、または確認できないと回答された状態。",
+  "onsite_required": "回答により所在は判明したが、内容確認には現地閲覧が必要と判明した状態。",
+  "closed": "回答内容の反映（登録／登録見送りの判断）まで完了し、この照会に関する対応が終わった状態。"
+ },
+ "importantNoteV2": "statusフィールドは上記statusDefinitionsV2の語彙を使用する（旧sendStatus/responseStatusは履歴として残す）。Phase30終了時点で、全レコードのstatusはdraft・waiting・answered等の既存の実態を反映したものであり、Claude Codeが新たに\"sent\"へ変更した記録は存在しない（新規追加したINQ-005〜INQ-009はいずれも\"draft\"のまま）。"
 }
