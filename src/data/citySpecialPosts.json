@@ -779,5 +779,190 @@
     ],
     "notes": "選挙管理委員（csp-27〜30）と同一の本会議で、補充員4名の指名推選・当選が決定した。補欠順序は指名順（本項目が第4順位）。",
     "lastVerifiedAt": "2026-08-09"
+  },
+  {
+    "id": "csp-35",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "杉本 隆晴",
+    "status": "former",
+    "appointedDate": "2010-02-09",
+    "retiredDate": null,
+    "termNote": "2010年2月9日、平成22年第17回臨時会（議案第88号）で副市長に選任（本会議録で確認）。2014年2月25日、平成26年第19回定例会（議案第86号）で「引き続き」再任されたことを確認（本会議録の市長発言）。退任日は未確認（Phase23時点）。2011年3月に原田幸二氏が副市長として追加選任され、2人制となった後も、杉本氏は継続して在任していたとみられる。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成22年第17回臨時会（第1号 2月9日、議案第88号副市長の選任、市長・首藤正治氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H220209A&startPos=0"
+      },
+      {
+        "label": "延岡市議会会議録検索システム 平成26年第19回定例会（第1号 2月25日、議案第86号副市長の選任、市長・首藤正治氏「引き続き選任」発言）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H260225A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2：2010〜2019年度監査）で新規発見。既存データに副市長の歴代在任者情報がなかったため、会議録検索システムで新規確認した。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-36",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "原田 幸二",
+    "status": "former",
+    "appointedDate": "2011-03-25",
+    "retiredDate": "2013-03-31",
+    "termNote": "2011年3月25日、平成23年第25回定例会（議案第139号）で副市長に新規選任（本会議録の市長発言）。既存civicTimelineEvents.json civic-047「2011年、副市長2人制開始」の当事者と一致。2013年3月21日、平成25年第11回定例会（議案第118号、後任選任）で、原田氏が同年3月31日をもって辞職する旨の市長発言を確認。",
+    "relatedLinks": [
+      { "label": "civicTimelineEvents civic-047（2011年、副市長2人制開始）", "to": "/timeline/2011" }
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成23年第25回定例会（第6号 3月25日、議案第139号副市長の選任）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H230325A&startPos=0"
+      },
+      {
+        "label": "延岡市議会会議録検索システム 平成25年第11回定例会（第7号 3月21日、議案第118号副市長の選任、市長「原田幸二氏から、本年三月三十一日をもって辞職」発言）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H250321A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。後任者名は2013年3月21日の会議録本文（全文）で確認できる可能性があるが、今回は提案理由説明の該当部分のみを確認した。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-37",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "野口 和彦",
+    "status": "former",
+    "appointedDate": null,
+    "retiredDate": "2015-03-31",
+    "termNote": "就任日は未確認（Phase23時点。原田幸二氏の後任として2013年4月頃に就任した可能性があるが確証なし）。2015年3月26日、平成27年第24回定例会（議案第126号、後任選任）で、野口氏が同年3月31日をもって辞職する旨の市長発言を確認。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成27年第24回定例会（第7号 3月26日、議案第126号副市長の選任、市長「野口和彦氏から、本年三月三十一日をもって辞職」発言）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H270326A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。就任日・後任者名は今回未確認（今後の調査課題）。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-38",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "岩本 真一",
+    "status": "former",
+    "appointedDate": null,
+    "retiredDate": "2017-03-31",
+    "termNote": "就任日は未確認（Phase23時点。野口和彦氏の後任として2015年4月頃に就任した可能性があるが確証なし）。2017年3月24日、平成29年第10回定例会（議案第131号、後任選任）で、岩本氏が同年3月31日をもって辞職する旨の市長発言を確認。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成29年第10回定例会（第6号 3月24日、議案第131号副市長の選任、市長「岩本真一氏から、本年三月三十一日をもって辞職」発言）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H290324A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。就任日・後任者名は今回未確認（今後の調査課題）。読谷山洋司市長就任（2018年2月6日）後の2018年3月26日の副市長選任時、市長は「現在、空席となっております総括担当」と発言しており、岩本氏の退任（2017年3月末）から山本一丸氏就任（2018年4月1日）までの約1年間、この枠が空席だった可能性がある。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-39",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "山本 一丸",
+    "status": "former",
+    "appointedDate": "2018-04-01",
+    "retiredDate": null,
+    "termNote": "総括担当副市長。2018年3月26日、平成30年第16回定例会（議案第123号）で選任議決（本会議録で確認）。既存civicTimelineEvents.json civic-156（就任日2018-04-01、宮崎日日新聞出典）と対応する事実を、会議録で追加確認した。2025年7月1日〜19日は市長職務代理者（既存データ）。退任日は未確認（Phase23時点。2025年8月12日就任の赤木繁男氏（csp-01）が後任とみられるが、直接の交代を示す資料は今回確認していない）。",
+    "relatedLinks": [
+      { "label": "civicTimelineEvents civic-156（2018年、副市長就任）", "to": "/timeline/2018" }
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成30年第16回定例会（第7号 3月26日、議案第123号副市長の選任、市長・読谷山洋司氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300326A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で会議録による選任議決の日付を追加確認した（civicTimelineEvents civic-156は宮崎日日新聞のみを出典としていたため、一次資料である会議録を追加した）。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-40",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "荒井 崇",
+    "status": "former",
+    "appointedDate": "2018-09-14",
+    "retiredDate": null,
+    "termNote": "特命担当副市長。2018年9月14日、平成30年第19回定例会（議案第46号）で選任議決（空席だった特命担当枠への選任）。経歴（市長発言）：平成2年自治省入省、仙台市教育長、参議院法制局第四部第一課長、内閣官房内閣参事官、東北大学大学院法学研究科教授等を歴任。退任日・後任者は未確認（Phase23時点。2023年6月27日就任の小泉智明氏（csp-26）が同一枠の後任かどうかは今回確認していない）。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成30年第19回定例会（第5号 9月14日、議案第46号副市長の選任、市長・読谷山洋司氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300914A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-41",
+    "role": "superintendent",
+    "roleLabel": "教育長",
+    "name": "澤野 幸司",
+    "status": "former",
+    "appointedDate": "2018-09-14",
+    "retiredDate": null,
+    "termNote": "2018年9月14日、平成30年第19回定例会（議案第47号）で選任議決。前任・笠江孝一氏が同年10月8日に任期満了となるための後任選任（発令日は2018年10月9日頃と推定されるが未確認）。経歴（市長発言）：昭和61年から小学校教諭、宮崎県教育研修センター総務課主幹、延岡市立南小学校長等を歴任後、選任当時（2018年4月〜）は延岡市学校教育課長。退任日は未確認（Phase23時点。2024年9月20日就任の髙森賢一氏（csp-03）が後任とみられる）。",
+    "relatedLinks": [
+      { "label": "教育長 髙森賢一氏（csp-03、後任）", "to": "/city-officials" }
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成30年第19回定例会（第5号 9月14日、議案第47号教育長の選任、市長・読谷山洋司氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300914A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。既存citySpecialPosts.jsonには教育長の現職（髙森賢一氏、csp-03）のみが登録されていたため、前々任者を追加した。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-42",
+    "role": "superintendent",
+    "roleLabel": "教育長",
+    "name": "笠江 孝一",
+    "status": "former",
+    "appointedDate": null,
+    "retiredDate": "2018-10-08",
+    "termNote": "就任日は未確認（Phase23時点）。2018年10月8日、任期満了により退任（後任・澤野幸司氏の選任議決時の市長発言で確認）。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成30年第19回定例会（第5号 9月14日、議案第47号教育長の選任、市長「教育長の笠江孝一氏が、本年十月八日をもって任期満了」発言）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300914A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。就任日は今回未確認（今後の調査課題。任期4年とすれば2014年10月頃就任と推定されるが、推定値は登録しない）。",
+    "lastVerifiedAt": "2026-08-21"
+  },
+  {
+    "id": "csp-43",
+    "role": "superintendent",
+    "roleLabel": "教育長",
+    "name": "町田 訓允",
+    "status": "former",
+    "appointedDate": null,
+    "retiredDate": null,
+    "termNote": "2010年9月7日時点で教育長として本会議に出席していたことを会議録で確認（在任確認のみ）。就任日・退任日とも未確認（Phase23時点）。笠江孝一氏（csp-42）より前の教育長とみられるが、両者の間に他の教育長がいた可能性を排除できない。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成22年第22回定例会（第2号 9月7日、出席者名簿に教育長・町田訓允氏）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H220907A&startPos=0"
+      }
+    ],
+    "notes": "Phase23（Block2）で新規発見。2010年度（FY2010）の教育長を特定する目的で、副市長選任の検索過程で偶然確認した。",
+    "lastVerifiedAt": "2026-08-21"
   }
 ]

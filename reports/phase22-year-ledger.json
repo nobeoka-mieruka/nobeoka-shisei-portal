@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-08-21T15:00:00+09:00",
   "purpose": "Phase22「最新→過去」年次調査の中核台帳。2026年度から過去へ1年ずつ遡って、人物・議会・財政・選挙・市政年表・出典の充足状況を年度単位で監査し、完全収録/一部収録/未収録/未確認を記録する。既存データ（archiveMayors.json / archiveMayorTerms.json / citySpecialPosts.json / members.json / formerMembers.json / committees.json / councilSessions.json / billVotes.json / generalQuestions.json / councilSpeechSummaries.json / electionResults.json / civicTimelineEvents.json / archiveFiscalYears.json）を機械的に参照・集計したものであり、個々の生データを複製していない。既存reports/配下の各種監査ファイル（mayor-era-timeline-summary.json、data-audit-2026-08-17.json、final-quality-audit.json、civic-timeline-decade-audit.json等）はいずれも「市長代（era）単位」または「サイト全体」の粒度であり、本ファイルが対象とする「年度（fiscalYear）単位×人物/議会/財政/選挙/市政年表」の縦断台帳の役割を果たしていないことを確認したため、新規ファイルとして作成した。",
-  "scope": "Block 1（Phase22）：FY2026〜FY2020の7年度。今回はこの範囲のみを対象とする。Block 2（FY2019〜FY2010）以降はPhase23以降で扱う。",
+  "scope": "Block 1（Phase22）：FY2026〜FY2020の7年度（完了）。Block 2（Phase23）：FY2019〜FY2010の10年度。本ファイルはBlock1完了後、Block2として拡張した（新規ファイルは作成せず、既存構造を継続利用）。Block 3（FY2009〜FY2000）以降は今後のフェーズで扱う。",
   "gradingRubric": {
     "A": "主要項目（市長/議会/財政/選挙/市政年表/出典）のほぼ全てが一次資料で確認済み",
     "B": "主要項目の大半は確認済みだが、一部欠落がある",
@@ -38,8 +38,23 @@
       },
       {
         "id": "gap-education-commission-members",
-        "description": "教育委員会委員（教育長を除く委員本人）はcitySpecialPosts.jsonに収録されていない（教育長＝superintendentロールのみ収録）。",
-        "affectedYears": [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+        "description": "教育委員会委員（教育長を除く委員本人）はcitySpecialPosts.jsonに収録されていない（教育長＝superintendentロールのみ収録）。Phase23（Block2）で2018年9月の交代事例（伊東忠俊→久世由美子）1件をcivicTimelineEventsへ個別登録したが、現在の委員構成・網羅的な歴代整理は未着手。",
+        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
+      },
+      {
+        "id": "gap-council-sessions-bills-pre-2019",
+        "description": "councilSessions.json・billVotes.jsonは、いずれもFY2019（令和元年度）が最古のデータで、FY2018以前は0件（Phase23で確認）。会議録検索システム自体は平成12年第8回臨時会以降を収録しており、資料としては存在するが、本サイトのこれら2ファイルへの構造化登録がFY2019以前に及んでいない。Block2で判明した最大の構造的ギャップ。",
+        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+      },
+      {
+        "id": "gap-general-questions-coverage-block2",
+        "description": "一般質問データベース（generalQuestions.json）は、Phase23（Block2）でFY2019分を1件（gq2019-06-m01、稲田雅之議員）新規登録したが、FY2019の他の登壇者7名分の内容、およびFY2010〜2018の一般質問は未収録（councilSessions.json/billVotes.jsonと同様、会議録自体は存在するが未転記）。",
+        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+      },
+      {
+        "id": "gap-vice-chair-names-block2",
+        "description": "歴代副議長は、2019年5月16日選出の松田満男氏のみ会議録全文で開票結果を確認した。2011〜2018年度の各年次改選（毎年5月頃の臨時会）で副議長選挙が行われたことは会議録検索システムで日付を特定済みだが、当選者氏名は個別に確認していない。",
+        "affectedYears": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
       }
     ]
   },
@@ -93,7 +108,7 @@
       "eraYear": "令和6年度",
       "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-02", "status": "confirmed_primary" },
       "deputyMayor": { "names": ["小泉 智明（2023-06-27〜）", "山本 一丸（2018-04-01〜、離任日未確認）"], "status": "partially_confirmed" },
-      "superintendent": { "status": "partially_confirmed", "note": "2024-09-20以降は髙森賢一。それ以前（FY2024前半）の教育長は未確認（gap-deputy-mayor-superintendent-history）。" },
+      "superintendent": { "name": "澤野 幸司", "status": "partially_confirmed", "note": "2024-09-20以降は髙森賢一。FY2024前半は、Phase23（Block2）で確認した澤野幸司氏（2018-09-14選任、citySpecialPosts.json csp-41）が在任していたとみられるが、2024年9月まで継続して在任していたことを直接示す資料までは確認していない（間に別人の交代がなかったと確認したわけではない）。" },
       "councilChair": { "status": "unconfirmed" },
       "councilViceChair": { "status": "unconfirmed" },
       "councilMembers": { "count": "27（2023年4月選挙）", "status": "confirmed_primary" },
@@ -114,7 +129,7 @@
       "eraYear": "令和5年度",
       "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-02", "status": "confirmed_primary" },
       "deputyMayor": { "names": ["山本 一丸（2018-04-01〜、離任日未確認）", "小泉 智明（2023-06-27〜）"], "status": "partially_confirmed" },
-      "superintendent": { "status": "unconfirmed", "note": "髙森賢一就任（2024-09-20）以前のためFY2023の教育長は未確認。" },
+      "superintendent": { "name": "澤野 幸司", "status": "partially_confirmed", "note": "Phase23（Block2）で確認した澤野幸司氏（2018-09-14選任、citySpecialPosts.json csp-41）が在任していたとみられる（2019-06-25の本会議録で在任確認済み）。FY2023時点まで継続在任していたことを直接示す資料は未確認。" },
       "councilChair": { "status": "unconfirmed" },
       "councilViceChair": { "status": "unconfirmed" },
       "councilMembers": { "count": "旧任期（〜2023-04-22）27名＋新任期（2023-04-23〜）27名", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot。新旧いずれも選挙結果自体はelectionResults.jsonで確認済みだが、旧任期の年度内スナップショット名簿は未整備。" },
@@ -135,7 +150,7 @@
       "eraYear": "令和4年度",
       "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-02", "status": "confirmed_primary", "note": "2022-01-23再選（election-mayor-2022）、2022-02-06就任。FY2022（2022-04-01〜）は全期間term-02。" },
       "deputyMayor": { "names": ["山本 一丸（2018-04-01〜、離任日未確認）"], "status": "partially_confirmed" },
-      "superintendent": { "status": "unconfirmed" },
+      "superintendent": { "name": "澤野 幸司", "status": "partially_confirmed", "note": "Phase23（Block2）で確認した澤野幸司氏（2018-09-14選任、citySpecialPosts.json csp-41）が在任していたとみられる（2019-06-25の本会議録で在任確認済み）。当該年度時点まで継続在任していたことを直接示す資料は未確認。" },
       "councilChair": { "status": "unconfirmed" },
       "councilViceChair": { "status": "unconfirmed" },
       "councilMembers": { "count": "旧任期（2019年4月選挙〜2023年4月）", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot" },
@@ -156,7 +171,7 @@
       "eraYear": "令和3年度",
       "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-01", "status": "confirmed_primary" },
       "deputyMayor": { "names": ["山本 一丸（2018-04-01〜）"], "status": "partially_confirmed" },
-      "superintendent": { "status": "unconfirmed" },
+      "superintendent": { "name": "澤野 幸司", "status": "partially_confirmed", "note": "Phase23（Block2）で確認した澤野幸司氏（2018-09-14選任、citySpecialPosts.json csp-41）が在任していたとみられる（2019-06-25の本会議録で在任確認済み）。当該年度時点まで継続在任していたことを直接示す資料は未確認。" },
       "councilChair": { "status": "unconfirmed" },
       "councilViceChair": { "status": "unconfirmed" },
       "councilMembers": { "count": "旧任期（2019年4月選挙〜）", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot" },
@@ -177,7 +192,7 @@
       "eraYear": "令和2年度",
       "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-01", "status": "confirmed_primary" },
       "deputyMayor": { "names": ["山本 一丸（2018-04-01〜）"], "status": "partially_confirmed" },
-      "superintendent": { "status": "unconfirmed" },
+      "superintendent": { "name": "澤野 幸司", "status": "partially_confirmed", "note": "Phase23（Block2）で確認した澤野幸司氏（2018-09-14選任、citySpecialPosts.json csp-41）が在任していたとみられる（2019-06-25の本会議録で在任確認済み）。当該年度時点まで継続在任していたことを直接示す資料は未確認。" },
       "councilChair": { "status": "unconfirmed" },
       "councilViceChair": { "status": "unconfirmed" },
       "councilMembers": { "count": "旧任期（2019年4月選挙〜）", "status": "partially_confirmed", "note": "gap-pre-2023-council-roster-snapshot" },
@@ -192,6 +207,111 @@
       "missingItems": ["gap-general-questions-coverage", "gap-historical-council-chair", "教育長", "gap-pre-2023-council-roster-snapshot", "市政年表イベント（新型コロナ対応等が未調査）"],
       "completionGrade": "C",
       "gradeRationale": "2021年度と同様、議案・財政は確認済みだが市政年表が空白で、他の欠落項目も残る。"
+    },
+    {
+      "year": 2019,
+      "eraYear": "令和元年度（平成31年度）",
+      "mayor": { "name": "読谷山 洋司", "mayorId": "mayor-03", "mayorTermId": "mayor-03-term-01", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["山本 一丸（総括担当、2018-04-01〜）", "荒井 崇（特命担当、2018-09-14〜）"], "status": "confirmed_primary", "note": "Phase23（Block2）でcitySpecialPosts.json csp-39・csp-40として新規登録。2019-06-25の本会議録で両者ともFY2019中の在任を確認。" },
+      "superintendent": { "name": "澤野 幸司", "appointedDate": "2018-09-14", "status": "confirmed_primary", "note": "2019-06-25の本会議録で在任確認（citySpecialPosts.json csp-41）。" },
+      "councilChair": { "name": "松田 和己", "status": "confirmed_primary", "note": "2019-05-16（第1回臨時会）選出。会議録で確認（civicTimelineEvents civic-166）。" },
+      "councilViceChair": { "name": "松田 満男", "status": "confirmed_primary", "note": "2019-05-16選出。得票25/27票を会議録全文で確認。" },
+      "councilMembers": { "count": "27（2019年4月選挙、定数27）", "status": "confirmed_primary", "note": "electionResults.json election-council-2019。" },
+      "electionsInYear": { "count": 1, "items": ["延岡市議会議員選挙（2019-04-21、定数27）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 4, "status": "confirmed_primary", "note": "councilSessions.json（2019-06/09/12月定例会、2020-03月定例会）。councilSessions.jsonの最古データがFY2019であることをPhase23で確認した（FY2018以前は0件）。" },
+      "bills": { "total": 172, "byCategory": { "決算": 7, "予算": 35, "条例": 50, "その他": 33, "契約": 5, "人事": 21, "決議": 1, "請願": 6, "財産取得": 5, "専決処分": 2, "意見書": 3, "陳情": 4 }, "status": "confirmed_primary", "note": "billVotes.jsonの最古データがFY2019であることをPhase23で確認した（FY2018以前は0件、Block2最大の構造的ギャップ）。" },
+      "generalQuestions": { "count": 1, "status": "partially_confirmed", "note": "会議録で6月定例会（6/25・26・27）の一般質問登壇者8名（稲田雅之・河野治満・松本哲也・甲斐正幸・本部仁俊・平田信広・長友幸子・吉本靖）を確認し、うち稲田雅之議員1名分の質問内容を全文確認・登録した（gq2019-06-m01）。9月・12月定例会にも一般質問が行われたことを確認済みだが、登壇者名・内容の個別確認は今回実施していない。" },
+      "majorEvents": { "count": 3, "items": ["延岡市議会議員選挙（2019-04-21）", "松田和己氏、議長に当選（2019-05-16）", "松田満男氏、副議長に当選（2019-05-16、civic-166に統合）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2019、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "会議録検索システムを新規に活用し、人物・議会・選挙とも大幅に充実",
+      "verificationStatus": "largely_verified",
+      "missingItems": ["一般質問（9月・12月定例会分の個別内容）", "gap-education-commission-members", "gap-member-vote-disclosure"],
+      "completionGrade": "B",
+      "gradeRationale": "Block2で会議録検索システムを新規活用した結果、市長・副市長・教育長・議長・副議長・議員名簿・選挙・財政・議案（172件）が確認できた。一般質問は登壇者名は確認できたが内容の個別確認が一部（1/8名程度）にとどまるため、AではなくB評価とした。"
+    },
+    {
+      "year": 2018,
+      "eraYear": "平成30年度",
+      "mayor": { "status": "confirmed_primary_split", "note": "年度途中で市長交代。首藤正治（mayor-02-term-03、〜2018-02-05）→読谷山洋司（mayor-03-term-01、2018-02-06〜）。既存archiveFiscalYears.json FY2018のmayorId/mayorTermIdは未設定（複数任期にまたがるため）。" },
+      "deputyMayor": { "names": ["山本 一丸（総括担当、2018-04-01〜）", "荒井 崇（特命担当、2018-09-14〜）", "岩本 真一（〜2017-03-31、FY2018開始時点では既に空席）"], "status": "confirmed_primary", "note": "2018年3月26日（総括担当）・9月14日（特命担当）の2回に分けて選任議決。それまでの空白期間（2017年4月〜2018年3月）は両枠とも空席だった可能性がある（citySpecialPosts.json csp-38の notes参照）。" },
+      "superintendent": { "names": ["笠江 孝一（〜2018-10-08任期満了）", "澤野 幸司（2018-09-14選任、10月9日頃発令）"], "status": "confirmed_primary", "note": "citySpecialPosts.json csp-41・csp-42。" },
+      "councilChair": { "name": "佐藤 裕臣", "status": "confirmed_primary", "note": "2017-05-09選出、2019-05-15頃まで在任（civicTimelineEvents civic-165）。" },
+      "councilViceChair": { "status": "unconfirmed", "note": "2018-05-09（第17回臨時会）に副議長選挙が行われたことは会議録検索システムで確認済みだが、当選者名は今回未確認。" },
+      "councilMembers": { "count": "29（2015年4月選挙、定数29。2019年4月改選前）", "status": "confirmed_primary", "note": "electionResults.json election-council-2015。" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "councilSessions.jsonにFY2018のデータは存在しない（Block2最大の構造的ギャップ、councilSessions.json/billVotes.jsonともFY2019が最古）。" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "billVotes.jsonにFY2018のデータは存在しない。ただし、会議録検索システムでの個別議案の存在自体は本Phaseで複数確認済み（議案第123号副市長の選任、議案第46〜49号副市長・教育長・教育委員会委員・公平委員会委員の選任等）。billVotes.json形式での構造化登録は今後の課題。" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 4, "items": ["山本一丸氏、総括担当副市長に就任（2018-04-01、既存civic-156）", "荒井崇氏、特命担当副市長に選任（2018-09-14）", "澤野幸司氏、教育長に選任（2018-09-14）", "久世由美子氏、教育委員会委員に選任（2018-09-14、civic-167）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2018、budget収録済み、sourceRefs 2件）",
+      "sourceCount": "人事関連は充実、議会運営（議案・一般質問）はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019（councilSessions/billVotes未整備）", "副議長氏名（2018年5月）", "一般質問", "gap-historical-council-chair（副議長分）"],
+      "completionGrade": "C",
+      "gradeRationale": "市長交代・副市長2名選任・教育長交代・教育委員選任など人事面は非常に充実した年度だったことが判明したが、councilSessions.json/billVotes.jsonにFY2018のデータが一切なく、議会運営の実態（議案・一般質問）を構造化データとして確認できない点が大きな欠落。"
+    },
+    {
+      "year": 2017,
+      "eraYear": "平成29年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-03", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["岩本 真一（〜2017-03-31辞職）"], "status": "partially_confirmed", "note": "岩本氏の就任日は未確認。FY2017開始直後（4月）に辞職しており、後任の選任は今回確認できていない（2018年3月まで空席だった可能性）。" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "name": "佐藤 裕臣", "status": "confirmed_primary", "note": "2017-05-09選出（civic-165）。前任・上田美利氏からの任期途中交代。" },
+      "councilViceChair": { "status": "unconfirmed", "note": "2017-05-09に副議長選挙も行われたことを確認済みだが当選者名は未確認。" },
+      "councilMembers": { "count": "29（2015年4月選挙、定数29）", "status": "confirmed_primary" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 2, "items": ["佐藤裕臣氏、議長に当選（2017-05-09）", "延岡市議会議員定数を27人とする条例改正案を可決（2017年12月、既存civic-065）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2017、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "議長交代・定数改正は確認済み、議会運営の議案・一般質問はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "副市長後任", "教育長", "副議長氏名", "一般質問"],
+      "completionGrade": "C",
+      "gradeRationale": "議長交代と定数改正という重要な行政組織上の出来事は確認できたが、副市長の後任・教育長・副議長氏名・議案・一般質問が未確認で、複数の主要項目に欠落がある。"
+    },
+    {
+      "year": 2016,
+      "eraYear": "平成28年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-03", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["岩本 真一（〜2017-03-31辞職）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "name": "上田 美利", "status": "confirmed_primary", "note": "2016-05-09（第6回臨時会）で副議長選挙のみ実施（議長選挙なし）＝上田氏が留任と推定。" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "29（2015年4月選挙、定数29）", "status": "confirmed_primary" },
+      "electionsInYear": { "count": 0 },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 4, "items": ["熊本地震への対応（2016年4月、既存civic-054）", "台風16号（2016年9月、既存civic-055）", "新庁舎グランドオープン（2016年11月、既存civic-056）", "北浦・北川・北方の商工会が合併、三北商工会発足（2016年4月、既存civic-064）"], "status": "confirmed_primary", "note": "いずれも既存civicTimelineEventsデータ（Phase以前に登録済み）。" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2016、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "市政年表は既存データで充実、議会運営（議案・一般質問）はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "副市長詳細", "教育長", "副議長氏名", "一般質問"],
+      "completionGrade": "C",
+      "gradeRationale": "市政年表（熊本地震対応・新庁舎完成等）は既に充実しているが、議会運営の議案・一般質問データが皆無で、教育長・副議長も未確認。"
+    },
+    {
+      "year": 2015,
+      "eraYear": "平成27年度",
+      "mayor": { "name": "首藤 正治", "mayorId": "mayor-02", "mayorTermId": "mayor-02-term-03", "status": "confirmed_primary" },
+      "deputyMayor": { "names": ["野口 和彦（〜2015-03-31辞職）", "岩本 真一（就任日未確認、2015年4月頃か）"], "status": "partially_confirmed" },
+      "superintendent": { "status": "unconfirmed" },
+      "councilChair": { "name": "上田 美利", "status": "confirmed_primary", "note": "2015-05-19（第1回臨時会、統一地方選後）選出（civic-164）。" },
+      "councilViceChair": { "status": "unconfirmed" },
+      "councilMembers": { "count": "29（2015年4月選挙、定数29）", "status": "confirmed_primary", "note": "electionResults.json election-council-2015。" },
+      "electionsInYear": { "count": 1, "items": ["延岡市議会議員選挙（2015-04-26、定数29）"], "status": "confirmed_primary" },
+      "councilSessions": { "count": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "bills": { "total": 0, "status": "unconfirmed", "note": "gap-council-sessions-bills-pre-2019" },
+      "generalQuestions": { "count": 0, "status": "unconfirmed" },
+      "majorEvents": { "count": 3, "items": ["延岡市議会議員選挙（2015-04-26）", "上田美利氏、議長に当選（2015-05-19）", "国道218号北方延岡道路全線開通（2015年4月、既存civic-053）"], "status": "confirmed_primary" },
+      "financeStatus": "confirmed_primary（archiveFiscalYears.json FY2015、budget収録済み、sourceRefs 1件）",
+      "sourceCount": "選挙・議長交代・道路開通は確認済み、議会運営（議案・一般質問）はゼロ",
+      "verificationStatus": "partially_verified",
+      "missingItems": ["gap-council-sessions-bills-pre-2019", "副市長就任日", "教育長", "副議長氏名", "一般質問"],
+      "completionGrade": "C",
+      "gradeRationale": "統一地方選挙・議長交代・大型道路開通という主要イベントは確認できたが、他年度と同様に議案・一般質問データが皆無で、教育長・副議長も未確認。"
     }
   ],
   "auditResults": {
@@ -201,13 +321,22 @@
     "memberIdReferentialIntegrity": { "membersJsonIds": 26, "formerMembersJsonIds": 58, "duplicateIds": 0, "badCommitteeMemberIdRefs": 0, "badBillVoteMemberIdRefs": 0, "note": "members.json・formerMembers.json間のID重複、committees.json・billVotes.jsonからの参照切れはいずれも0件。" }
   },
   "nextYearsToInvestigate": {
-    "block2": "FY2019〜FY2010（Phase23）",
+    "block2Progress": "Phase23でFY2019〜FY2015の5年度を完了。FY2014〜FY2010はチェックポイント後に継続する（ユーザー指示の『2019〜2015まで安全に一区切り』に従った）。",
+    "block2Remaining": "FY2014〜FY2010（Phase23続き）",
+    "block3": "FY2009〜FY2000（Phase24以降）",
     "priorityGapsForBlock1Followup": [
       "gap-general-questions-coverage の解消（2020〜2025年度分の一般質問の収集）",
       "2020・2021年度の市政年表イベント（新型コロナウイルス対応等）の調査",
       "副市長・教育長の任期履歴（citySpecialPostsに相当するarchiveMayorTerms.json的な『任期』構造の追加検討）",
       "歴代議長・副議長（2020〜2025年度分）の調査",
       "2019年4月〜2023年4月の旧任期議員名簿スナップショットの整備"
+    ],
+    "priorityGapsForBlock2Followup": [
+      "gap-council-sessions-bills-pre-2019の解消（FY2010〜2018のcouncilSessions.json/billVotes.json構造化登録。会議録検索システム自体には資料が存在することを確認済み）",
+      "gap-general-questions-coverage-block2の解消（FY2019の残り7名分、FY2010〜2018全体の一般質問収集）",
+      "gap-vice-chair-names-block2の解消（2011〜2018年度の副議長氏名の個別確認）",
+      "副市長（原田幸二の後任〜野口和彦、野口和彦の後任〜岩本真一）の正確な就任日確認",
+      "教育長（笠江孝一以前の教育長。町田訓允氏を2010年時点で確認済みだが、笠江孝一氏との間に他の教育長がいた可能性を排除できていない）"
     ]
   }
 }

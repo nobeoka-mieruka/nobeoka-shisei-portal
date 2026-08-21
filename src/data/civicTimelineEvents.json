@@ -3179,5 +3179,248 @@
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "partiallyVerified",
     "notes": "Phase22で、既存src/data/electionResults.json（election-mayor-2025）・archiveMayorTerms.json（mayor-01-term-01）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典に選挙ドットコム（二次資料ドメイン）を含むため、verificationStatusはpartiallyVerifiedとした（延岡市公式ホームページのsourceRefも併記しているが、scripts/validate-sources.mjsはsourceRefs内の全件が公式ドメインであることを要求するため）。"
+  },
+  {
+    "id": "civic-161",
+    "year": 2010,
+    "dateLabel": "2010年（専決処分の時期は未確認）",
+    "category": "行政組織",
+    "title": "市長が副市長選任等19件の議案を専決処分",
+    "summary": "首藤正治市長が、副市長の選任を含む19件の議案を専決処分（地方自治法第179条に基づく市長の単独決定）とした。2010年9月定例会で複数の議員がこの専決処分について「市政を混乱のきわみに」陥れたと批判する発言を行った。専決処分自体の正確な実施日は今回未確認。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成22年第22回定例会（第2号 9月7日、太田龍議員発言「専決処分で副市長の選任、職員や議員のボーナスを半減するなど、市政を混乱のきわみに」）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H220907A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2：2010〜2019年度監査）で新規発見。会議録検索システムで「副市長の選任」を全期間検索した際に議員の批判発言として発見した。専決処分の対象19件の内訳・実施日・専決処分に至った経緯（議会との対立の詳細）は今回未確認のため、今後の追加調査が必要。verificationStatusは、発言内容の要約であり専決処分そのものの一次資料（専決処分書等）を直接確認していないためpartiallyVerifiedとした。"
+  },
+  {
+    "id": "civic-162",
+    "year": 2010,
+    "dateLabel": "2010年11月30日",
+    "category": "行政組織",
+    "title": "稲田和利氏、議長に当選",
+    "summary": "平成22年第23回定例会（11月30日）で議長選挙が行われ、稲田和利議員が投票総数31票中25票を得て議長に当選した。前議長・後藤哲朗氏の後任。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成22年第23回定例会（第1号 11月30日、議長選挙、副議長・河野治満氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H221130A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23（Block2）で新規発見。会議録全文で開票結果（有効投票25票、稲田和利議員25票）を確認した。前議長・後藤哲朗氏の在任期間の始期・退任理由は今回未確認。"
+  },
+  {
+    "id": "civic-163",
+    "year": 2011,
+    "dateLabel": "2011年5月12日",
+    "category": "行政組織",
+    "title": "佐藤勉氏、議長に当選（統一地方選挙後の改選）",
+    "summary": "2011年4月の市議会議員選挙後、平成23年第1回臨時会（5月12日）で議長選挙が行われ、臨時議長・熊本貞司氏の執行のもと、佐藤勉議員が議長に当選した。2013年5月8日の第13回臨時会でも再選され、2015年5月18日頃まで在任した。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成23年第1回臨時会（第1号 5月12日、議長選挙、臨時議長・熊本貞司氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H230512A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23（Block2）で新規発見。会議録検索システムで「議長の選挙を行います」を平成22〜令和元年度で検索し（17件）、年ごとの議長交代パターンを確認した。2013年5月8日（第13回臨時会）に副議長・小田忠良氏の執行で議長選挙が行われ佐藤勉氏が再選されたことも確認済み。得票内訳・退任日（次期上田美利氏就任の前日と推定されるが未確認）は今回未確認。"
+  },
+  {
+    "id": "civic-164",
+    "year": 2015,
+    "dateLabel": "2015年5月19日",
+    "category": "行政組織",
+    "title": "上田美利氏、議長に当選（統一地方選挙後の改選）",
+    "summary": "2015年4月の市議会議員選挙後、平成27年第1回臨時会（5月19日）で議長選挙が行われ、臨時議長・佐藤勉氏（前議長）の執行のもと、上田美利議員が議長に当選した。2016年5月9日の第6回臨時会でも再選（副議長選挙のみ実施、議長選挙なしのため留任と推定）され、2017年5月8日頃まで在任した。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成27年第1回臨時会（第1号 5月19日、議長選挙、臨時議長・佐藤勉氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H270519A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23（Block2）で新規発見。得票内訳・退任理由は今回未確認。"
+  },
+  {
+    "id": "civic-165",
+    "year": 2017,
+    "dateLabel": "2017年5月9日",
+    "category": "行政組織",
+    "title": "佐藤裕臣氏、議長に当選",
+    "summary": "平成29年第11回臨時会（5月9日）で議長選挙が行われ、副議長・佐藤誠氏の執行のもと、佐藤裕臣議員が議長に当選した。前任・上田美利氏の任期途中での交代（次の市議選は2019年4月のため、統一地方選挙に伴う改選ではない）。2018年5月9日の第17回臨時会でも留任（副議長選挙のみ実施）し、2019年5月15日頃まで在任した。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成29年第11回臨時会（第1号 5月9日、議長選挙、副議長・佐藤誠氏が選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H290509A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23（Block2）で新規発見。2017年は市議選のない年であるため、任期途中の議長交代（慣例による年次改選、または上田美利氏の何らかの事情による交代）と考えられるが、交代理由は今回未確認。"
+  },
+  {
+    "id": "civic-166",
+    "year": 2019,
+    "dateLabel": "2019年5月16日",
+    "category": "行政組織",
+    "title": "松田和己氏、議長に当選（統一地方選挙後の改選）",
+    "summary": "2019年4月の市議会議員選挙後、平成31年・令和元年第1回臨時会（5月16日）で議長選挙が行われ、臨時議長・上杉泰洋氏の執行のもと、松田和己議員が議長に当選した。同日、副議長選挙も行われ、松田満男議員が投票総数27票中25票を得て副議長に当選した。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 令和元年第1回臨時会（第1号 5月16日、議長選挙・副議長選挙、臨時議長・上杉泰洋氏が議長選挙を執行）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R010516A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23（Block2）で新規発見。副議長選挙の開票結果（有効投票25票、松田満男議員25票）は会議録全文で確認済み。議長選挙の開票内訳は今回未確認。"
+  },
+  {
+    "id": "civic-167",
+    "year": 2018,
+    "dateLabel": "2018年9月14日",
+    "category": "行政組織",
+    "title": "教育委員会委員に久世由美子氏を選任",
+    "summary": "平成30年第19回定例会（9月14日、議案第48号）で、教育委員会委員の伊東忠俊氏が同年11月17日をもって任期満了となるため、後任として久世由美子氏を選任する議案が可決された。久世氏は昭和40年から52年まで旭化成工業株式会社に勤務した後、オリンピック日本代表コーチや日本水泳連盟強化スタッフ等を歴任し、選任当時は宮崎県水泳連盟評議員・延岡市水泳協会副会長を務めていた。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会会議録検索システム 平成30年第19回定例会（第5号 9月14日、議案第48号教育委員会委員の選任、市長・読谷山洋司氏の提案理由説明）",
+        "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300914A&startPos=0"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "verified",
+    "notes": "Phase23（Block2）で新規発見。同日、副市長（特命担当・荒井崇氏）と教育長（澤野幸司氏）の選任も可決されている（citySpecialPosts.json csp-40・csp-41参照）。教育委員会委員は現在citySpecialPosts.jsonのCitySpecialPostRole型に区分がないため、市政年表イベントとして記録した。"
+  },
+  {
+    "id": "civic-168",
+    "year": 2010,
+    "dateLabel": "2010年1月24日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で首藤正治氏が再選、市議補欠選挙も同日執行",
+    "summary": "任期満了に伴う延岡市長選挙が行われ、現職の首藤正治氏が41,738票を獲得し、新人井本英雄氏（23,029票）を破り再選した（投票率60.26%）。同日、市議会議員補欠選挙（欠員1）も執行され、大西幸二氏が当選した。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市長選挙 - 2010年01月24日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/644"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-mayor-2010、election-council-byelection-2010）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。"
+  },
+  {
+    "id": "civic-169",
+    "year": 2011,
+    "dateLabel": "2011年4月24日",
+    "category": "行政組織",
+    "title": "延岡市議会議員選挙（定数29）",
+    "summary": "統一地方選挙にあわせて延岡市議会議員選挙が執行され、定数29に対し33名が立候補した。投票率55.66%。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会議員選挙 - 2011年04月24日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/14433"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-council-2011）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。"
+  },
+  {
+    "id": "civic-170",
+    "year": 2014,
+    "dateLabel": "2014年1月26日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で首藤正治氏が3選",
+    "summary": "任期満了に伴う延岡市長選挙が行われ、現職の首藤正治氏が33,479票を獲得し、新人2名（おだ忠良氏11,403票、岩崎信氏2,014票）を破り3選した（投票率44.68%）。",
+    "relatedPersonIds": [
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市長選挙 - 2014年01月26日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/6024"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-mayor-2014）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。"
+  },
+  {
+    "id": "civic-171",
+    "year": 2015,
+    "dateLabel": "2015年4月26日",
+    "category": "行政組織",
+    "title": "延岡市議会議員選挙（定数29）",
+    "summary": "統一地方選挙にあわせて延岡市議会議員選挙が執行され、定数29に対し35名が立候補した。投票率54.09%。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会議員選挙 - 2015年04月26日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/14432"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-council-2015）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。"
+  },
+  {
+    "id": "civic-172",
+    "year": 2018,
+    "dateLabel": "2018年1月28日",
+    "category": "行政組織",
+    "title": "延岡市長選挙で読谷山洋司氏が初当選",
+    "summary": "任期満了に伴う延岡市長選挙が行われ、新人2名の一騎打ちとなり、読谷山洋司氏が26,094票を獲得し、前市長・首藤正治氏の後継指名を受けた永山英也氏（25,527票）を破り初当選した（投票率49.68%）。",
+    "relatedPersonIds": [
+      "mayor-03",
+      "mayor-02"
+    ],
+    "sourceRefs": [
+      {
+        "label": "延岡市長選挙 - 2018年01月28日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/17033"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-mayor-2018）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。"
+  },
+  {
+    "id": "civic-173",
+    "year": 2019,
+    "dateLabel": "2019年4月21日",
+    "category": "行政組織",
+    "title": "延岡市議会議員選挙（定数27）",
+    "summary": "統一地方選挙にあわせて延岡市議会議員選挙が執行され、定数27に対し38名が立候補した。投票率52.22%。現職多数が再選。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会議員選挙 - 2019年04月21日投票 | 選挙ドットコム",
+        "url": "https://go2senkyo.com/local/senkyo/18472"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase23（Block2）で、既存src/data/electionResults.json（election-council-2019）に既に確認済みの選挙結果を、civicTimelineEventsへ新規に接続した。出典が選挙ドットコム（二次資料ドメイン）のためpartiallyVerified。定数は2015年の29から27へ削減されている（civic-065、2017年12月定例会での定数改正条例可決と対応）。"
   }
 ]
