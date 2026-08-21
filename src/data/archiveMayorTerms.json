@@ -793,9 +793,18 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "Phase11 Lane C（司令塔本人によるNDL実閲覧）。年表の昭和46年（1971）欄に「1. 延岡市長選挙　房野氏　第15代市長当選」との記載を確認した。公式の選挙管理委員会資料ではなく商工会議所（経済団体）の記念誌年表だが、出来事のあった年に近い時期（同年を含む期間をカバーする1975年3月刊）に編纂された準一次資料であり、既存のtermStart(1971-01-22、延岡市公式年表による)と独立に整合する。得票数・投票率・対立候補の記載はこの年表項目にはない。「第15代」という市長代数の記載は、市長個人の期数（term-02）とは別の、延岡市長職の通算代数を示すものと考えられる。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774712/1/496",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）年表、昭和46年（1971年）の項",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。年表に「市長（第一五代）に房野博が再選された」「市助役（第一五代）に後藤梅雄が再任された」との記載を確認し、第15代（term-02）再選を独立資料で裏付けた。同じ項に投票日（1971年1月17日、選挙結果一覧表＝上巻コマ215で別途確認）とは異なる日付は記載されていない。"
       }
     ],
-    "notes": "退任日1975-01-21はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+    "notes": "退任日1975-01-21はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。投票日（1971-01-17）は延岡市史1983年版の選挙一覧表（コマ215）で確認済み（electionResults.json election-mayor-1971参照）。termStart（1971-01-22）は就任日であり投票日とは別。"
   },
   {
     "id": "mayor-11-term-03",
@@ -818,9 +827,18 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "「1975年1月 房野博氏が三たび市長に就任した」「1978年10月 房野博市長が辞職した」を確認。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。市長選挙一覧表に「50年1月19日」の投票日を確認した（electionResults.json election-mayor-1975参照）。termStart（1975-01-22）とは別の投票日。"
       }
     ],
-    "notes": "辞職の事実は延岡市公式資料で確認できるが、具体的な理由の記載はなく不明。"
+    "notes": "辞職の事実は延岡市公式資料で確認できるが、具体的な理由の記載はなく不明。投票日（1975-01-19）は延岡市史1983年版の選挙一覧表（コマ215）で確認済み。"
   },
   {
     "id": "mayor-12-term-01",
@@ -842,9 +860,18 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "「1978年11月 早生隆彦氏が市長に就任した」を確認。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。市長選挙一覧表に「53年11月5日」の投票日を確認し、既存termStart（1978-11-05）と同日であることを独立に確認した（electionResults.json election-mayor-1978参照。有権者数91,287人・投票者数57,900人・投票率63.43%も同時に確認）。"
       }
     ],
-    "notes": "退任日1982-11-04はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"
+    "notes": "退任日1982-11-04はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。投票日（1978-11-05）は延岡市史1983年版の選挙一覧表（コマ215）でtermStartと同日と確認済み。"
   },
   {
     "id": "mayor-12-term-02",
@@ -865,7 +892,16 @@
         "accessedAt": "2026-08-05",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "「1982年11月 早生隆彦氏が再び市長に就任した」を確認。"
+        "notes": "「1982年11月 早生隆彦氏が再び市長に就任した」を確認。就任月であり投票日ではない。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。市長選挙一覧表に「57年10月24日」の投票日を確認した（electionResults.json election-mayor-1982参照。有権者数94,327人・投票者数46,865人・投票率49.68%も同時に確認）。投票日はtermStart（1982-11-05）の12日前で、1978年選挙と同様に投票から就任まで期間があったとみられる。"
       }
     ],
     "notes": "退任日1986-11-04はWikipediaの表にのみ記載があり、それ以外の情報源では日単位の確認ができていない。"

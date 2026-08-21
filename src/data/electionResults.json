@@ -3,20 +3,20 @@
     "id": "election-mayor-1971",
     "electionName": "延岡市長選挙",
     "electionType": "mayor",
-    "electionDate": "1971-01",
-    "electionDatePrecision": "month",
+    "electionDate": "1971-01-17",
+    "electionDatePrecision": "day",
     "announcementDate": null,
     "dataCompleteness": {
       "electionConfirmed": true,
       "candidateListConfirmed": false,
       "voteCountConfirmed": false,
-      "turnoutConfirmed": false
+      "turnoutConfirmed": true
     },
     "seats": null,
-    "candidateCount": null,
-    "eligibleVoters": null,
-    "votersCount": null,
-    "turnoutPercent": null,
+    "candidateCount": 2,
+    "eligibleVoters": 83632,
+    "votersCount": 47769,
+    "turnoutPercent": 57.12,
     "invalidVotes": null,
     "candidates": [
       {
@@ -39,29 +39,38 @@
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
         "notes": "「1971年1月 房野博氏が再び市長に就任した」の記載を確認（第2期）。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。一覧表に「46年1月17日」の行を確認し、候補者数2・有権者数83,632人（男38,527／女45,105）・投票者数47,769人（男21,981／女25,788）・投票率57.12%（男57.05／女57.17）を独立資料で確認した（男女別内訳の合計が総数と完全一致することを検算済み）。候補者数2に対し対立候補の氏名は今回確認できていない（候補者名の資料箇所は今後の再確認課題）。"
       }
     ],
-    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、投票日・候補者一覧（対立候補の有無を含む）・得票数・投票率は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched、構造的にオンライン未公開の可能性が高い）。",
+    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、対立候補の氏名・得票数は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched）。 【2026-08-21追記（Phase27）】延岡市史1983年版上巻の市長選挙一覧表（コマ215）で投票日（1971年1月17日、日単位）・候補者数・有権者数・投票者数・投票率を新規確認し、electionDateを月精度から日精度へ格上げした。",
     "electionMethod": "direct_public_vote"
   },
   {
     "id": "election-mayor-1975",
     "electionName": "延岡市長選挙",
     "electionType": "mayor",
-    "electionDate": "1975-01",
-    "electionDatePrecision": "month",
+    "electionDate": "1975-01-19",
+    "electionDatePrecision": "day",
     "announcementDate": null,
     "dataCompleteness": {
       "electionConfirmed": true,
       "candidateListConfirmed": false,
       "voteCountConfirmed": false,
-      "turnoutConfirmed": false
+      "turnoutConfirmed": true
     },
     "seats": null,
-    "candidateCount": null,
-    "eligibleVoters": null,
-    "votersCount": null,
-    "turnoutPercent": null,
+    "candidateCount": 3,
+    "eligibleVoters": 88598,
+    "votersCount": 68605,
+    "turnoutPercent": 77.43,
     "invalidVotes": null,
     "candidates": [
       {
@@ -84,29 +93,38 @@
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
         "notes": "「1975年1月 房野博氏が三たび市長に就任した」の記載を確認（第3期）。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。一覧表に「50年1月19日」の行を確認し、候補者数3・有権者数88,598人（男40,973／女47,625）・投票者数68,605人（男31,628／女36,977）・投票率77.43%（男77.19／女77.64）を独立資料で確認した（男女別内訳の合計が総数と完全一致することを検算済み）。コマ214に候補者名と思われる氏名クラスター（山口哲臣・丸山正喜・房野博の3名）を確認したが、本選挙の年月日と直接対応付けた記載を今回は特定できず、確定登録は見送った（要再確認）。"
       }
     ],
-    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、投票日・候補者一覧（対立候補の有無を含む）・得票数・投票率は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched、構造的にオンライン未公開の可能性が高い）。",
+    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、対立候補の氏名・得票数は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched）。 【2026-08-21追記（Phase27）】延岡市史1983年版上巻の市長選挙一覧表（コマ215）で投票日（1975年1月19日、日単位）・候補者数・有権者数・投票者数・投票率を新規確認し、electionDateを月精度から日精度へ格上げした。",
     "electionMethod": "direct_public_vote"
   },
   {
     "id": "election-mayor-1978",
     "electionName": "延岡市長選挙",
     "electionType": "mayor",
-    "electionDate": "1978-11",
-    "electionDatePrecision": "month",
+    "electionDate": "1978-11-05",
+    "electionDatePrecision": "day",
     "announcementDate": null,
     "dataCompleteness": {
       "electionConfirmed": true,
       "candidateListConfirmed": false,
       "voteCountConfirmed": false,
-      "turnoutConfirmed": false
+      "turnoutConfirmed": true
     },
     "seats": null,
     "candidateCount": null,
-    "eligibleVoters": null,
-    "votersCount": null,
-    "turnoutPercent": null,
+    "eligibleVoters": 91287,
+    "votersCount": 57900,
+    "turnoutPercent": 63.43,
     "invalidVotes": null,
     "candidates": [
       {
@@ -129,29 +147,38 @@
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
         "notes": "「1978年11月 早生隆彦氏が市長に就任した」の記載を確認（第1期）。同年10月に房野博市長が辞職したことに伴う選挙。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。国立国会図書館デジタルコレクション（個人送信サービス）を実閲覧。市長選挙の執行年月日別一覧表に「53年11月5日」の行を確認し、有権者数91,287人（男42,155／女49,132）・投票者数57,900人（男26,327／女31,573）・投票率63.43%（男62.45／女64.26）を独立資料で確認した（男女別内訳の合計が総数と完全一致することを検算済み）。投票日（11月5日）は既存のtermStart（1978-11-05）と同日。"
       }
     ],
-    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、投票日・候補者一覧（対立候補の有無を含む）・得票数・投票率は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched、構造的にオンライン未公開の可能性が高い）。",
+    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、候補者一覧（対立候補の有無を含む）・得票数は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched、構造的にオンライン未公開の可能性が高い）。 【2026-08-21追記（Phase27）】延岡市史1983年版上巻の市長選挙一覧表（コマ215）で投票日（1978年11月5日、日単位）・有権者数・投票者数・投票率を新規確認し、electionDateを月精度から日精度へ格上げした。同じ一覧表の隣接ページ（コマ214）に候補者名と思われる氏名クラスターを2組確認したが（河野孔明・塩月盈・早生隆彦の3名の組、および河野孔明・池田某・河野敏進・早生隆彦の4名の組）、どちらが1978年選挙のものかを資料上の候補者数の数字と高い確度で対応付けられなかった（読み取り解像度の制約により、候補者数の桁と氏名クラスターの人数が一致しない矛盾が生じている）。誤登録を避けるため、candidatesには当選者（早生隆彦）のみを登録し、対立候補の氏名は登録していない。候補者数・氏名の確定はPhase28以降の高解像度再読課題とする。",
     "electionMethod": "direct_public_vote"
   },
   {
     "id": "election-mayor-1982",
     "electionName": "延岡市長選挙",
     "electionType": "mayor",
-    "electionDate": "1982-11",
-    "electionDatePrecision": "month",
+    "electionDate": "1982-10-24",
+    "electionDatePrecision": "day",
     "announcementDate": null,
     "dataCompleteness": {
       "electionConfirmed": true,
       "candidateListConfirmed": false,
       "voteCountConfirmed": false,
-      "turnoutConfirmed": false
+      "turnoutConfirmed": true
     },
     "seats": null,
     "candidateCount": null,
-    "eligibleVoters": null,
-    "votersCount": null,
-    "turnoutPercent": null,
+    "eligibleVoters": 94327,
+    "votersCount": 46865,
+    "turnoutPercent": 49.68,
     "invalidVotes": null,
     "candidates": [
       {
@@ -173,10 +200,19 @@
         "accessedAt": "2026-08-12",
         "extractionMethod": "manual",
         "verificationStatus": "needsReview",
-        "notes": "「1982年11月 早生隆彦氏が再び市長に就任した」の記載を確認（第2期）。"
+        "notes": "「1982年11月 早生隆彦氏が再び市長に就任した」の記載を確認（第2期）。就任月であり投票日ではない。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。一覧表に「57年10月24日」の行を確認し、有権者数94,327人（男43,560／女50,767）・投票者数46,865人（男21,032／女25,833）・投票率49.68%（男48.28／女50.89）を独立資料で確認した（男女別内訳の合計が総数と完全一致することを検算済み）。投票日（10月24日）は既存のtermStart（1982-11-05）より12日早く、1978年選挙同様に投票から就任までの期間があったとみられる（矛盾ではない）。候補者数はコマ214の氏名クラスター（河野孔明・池田某・河野敏進・早生隆彦の4名、またはそれ以外の組み合わせ）と一覧表の桁の対応関係を確定できず、今回は登録を見送った（1978年分election-mayor-1978の同様の注記を参照、要再確認）。"
       }
     ],
-    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、投票日・候補者一覧（対立候補の有無を含む）・得票数・投票率は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched、構造的にオンライン未公開の可能性が高い）。",
+    "notes": "延岡市公式サイトの年表から、市長就任（就任年月）を確認できたが、投票日・候補者一覧（対立候補の有無を含む）・得票数は未確認。src/data/archiveMayorTerms.jsonの対応する任期データ（termStartPrecision=\"month\"）とも整合する。 【2026-08-18追記】NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索（選挙ドットコム含む）で候補者一覧・得票数の追加調査を試みたが、選挙ドットコムの延岡市長選挙データは2002年分が最古であり、それ以前はいずれの情報源でも一次資料に到達できなかった（not_researched）。 【2026-08-21追記（Phase27）】延岡市史1983年版上巻の市長選挙一覧表（コマ215）で投票日（1982年10月24日、日単位）・有権者数・投票者数・投票率を新規確認し、electionDateを月精度から日精度へ格上げした（既存の「1982-11」は就任月を示す延岡市公式年表の記載に基づく推定で、投票日そのものではなかった）。",
     "electionMethod": "direct_public_vote"
   },
   {
@@ -4436,6 +4472,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "年表の「第14代市長房野博延岡市長選挙に当選（1.23）（無投票当選）」の記述を確認した。投票日（1967年1月23日）・無投票当選（対立候補なし）を独立の一次資料（延岡商工会議所発行の年史）で新規確認した。"
+      },
+      {
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774711/1/215",
+        "sourceTitle": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）第二編第八章第二節「各種選挙」市長選挙の執行状況一覧表",
+        "sourceOrganization": "延岡市",
+        "accessedAt": "2026-08-21",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "Phase27（Block6：1970年代調査）で新規発見。一覧表に「42年1月22日（無投票）候補者数1」の行を確認し、無投票当選（対立候補なし）を独立に裏付けた。ただし日付は「1月22日」であり、既存のelectionDate（1967-01-23、延岡商工会議所年史による）と1日の差がある。既存のarchiveMayorTerms.json mayor-11-term-01のtermStart（1967-01-22）とはこの一覧表の日付が一致する。1日差の原因（投票日と告示日の混同等）は未特定のため、既存値は上書きせず併記する。"
       }
     ],
     "notes": "第14代市長選挙。直接公選制導入後の選挙だが、候補者一覧・得票数・投票率・有権者数は、NDLデジタルコレクション全文検索・NDLサーチ書誌検索・Web検索のいずれでも一次資料に到達できなかった（2026-08-18時点、not_researched。宮崎日日新聞縮刷版等、オンライン非公開の資料に限られる可能性が高い）。 【2026-08-18更新】延岡商工会議所四十年史の年表で「1.23（無投票当選）」の記述を発見し、投票日を日単位（1967-01-23）まで特定、かつ対立候補のいない無投票当選だったことを確認した（得票数・投票率が『存在しない』こと自体が確定事実であり、not_researchedではなくconfirmed_primary相当）。",

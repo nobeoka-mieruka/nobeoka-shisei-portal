@@ -3831,5 +3831,23 @@
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "verified",
     "notes": "Phase26で新規発見。既存archiveMayors.json（mayor-10）のdeathDate（1986-10-20、従来はWikipedia由来）を、延岡市編さんの市史という一次資料で独立に裏付けた。同資料は折小野氏を「第十一・十二代」と表記しており、既存の代数表記（第12代・第13代）と1代のずれがある点をarchiveMayors.json mayor-10のnotesに記録した（自動的な上書きはしていない）。"
+  },
+  {
+    "id": "civic-198",
+    "year": 1971,
+    "dateLabel": "1971年（昭和46年）",
+    "category": "行政組織",
+    "title": "宮崎県・延岡市・旭化成の三者で公害防止協定を締結",
+    "summary": "延岡市史（1983年版上巻）の年表に、県・市・旭化成の三者で公害防止協定を締結したとの記載がある（房野博市長〈第15代〉再選と同じ年の項）。月日単位の確認はできなかった。",
+    "relatedPersonIds": ["mayor-11"],
+    "sourceRefs": [
+      {
+        "label": "延岡市史 上巻（延岡市史編さん委員会編、延岡市、1983年発行、市制五十周年記念）年表、昭和46年（1971年）の項",
+        "url": "https://dl.ndl.go.jp/pid/9774712/1/496"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-21",
+    "verificationStatus": "partiallyVerified",
+    "notes": "Phase27（Block6：1970年代調査）で新規発見。国立国会図書館デジタルコレクション（個人送信サービス、pid 9774712、コマ496）を実閲覧して確認した。月日は同資料の当該箇所からは確認できなかったため年のみを登録する。既存civicTimelineEvents.jsonに同種の記載がないことを確認済み（重複なし）。"
   }
 ]
