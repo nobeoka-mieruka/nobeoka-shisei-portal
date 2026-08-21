@@ -20,10 +20,37 @@
       "year": 1975,
       "electionId": "election-mayor-1975",
       "item": "対立候補氏名（候補者数3名のうち房野博以外の2名）",
-      "candidateHints": ["山口 哲臣", "丸山 正喜"],
+      "candidateHints": [
+        "山口 哲臣",
+        "丸山 正喜"
+      ],
       "status": "disputed",
       "reason": "コマ214上でこのクラスターが1971年選挙欄と1975年選挙欄のどちらに帰属するか、欄の境界を確実に判別できなかった。",
-      "recommendedNextStep": "原本現物確認（宮崎県立図書館等）、または高解像度スキャン画像での再照合。"
+      "recommendedNextStep": "原本現物確認（宮崎県立図書館等）、または高解像度スキャン画像での再照合。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市選挙管理委員会 選挙結果資料（開票録・選挙録）",
+          "institution": "延岡市選挙管理委員会（延岡市役所内）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "可能性あり（保存期間次第、要確認）"
+        },
+        "secondary": {
+          "name": "宮崎県立図書館所蔵 延岡市議会会議録写（昭和34〜48年＝1959〜1973年分60冊）",
+          "institution": "宮崎県立図書館",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "高い（既存INQ-001で接点あり）",
+          "note": "1975年選挙は昭和50年のため、この手書き複写コレクション（〜昭和48年）の対象範囲外。原本（延岡市議会事務局保管分）の方を確認する必要がある。"
+        },
+        "tertiary": {
+          "name": "宮崎日日新聞縮刷版（1975年1月）",
+          "institution": "宮崎県立図書館（新聞縮刷版コーナー）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中（存在は一般的だが延岡市政ポータルとして所蔵確認未実施）"
+        }
+      }
     },
     {
       "category": "mayorElection",
@@ -38,25 +65,103 @@
       ],
       "status": "disputed",
       "reason": "候補者数の資料上の桁（一覧表）と氏名クラスターの人数（3名または4名）が一致せず、1978年と1982年のどちらの選挙に対応するかを確定できなかった。",
-      "recommendedNextStep": "原本現物確認、または各クラスターに付随する投票率・有権者数等の数値をより高精度に読み取り、Phase27で確定済みの1978年数値（有権者91,287人・投票者57,900人・投票率63.43%）と突合する。"
+      "recommendedNextStep": "原本現物確認、または各クラスターに付随する投票率・有権者数等の数値をより高精度に読み取り、Phase27で確定済みの1978年数値（有権者91,287人・投票者57,900人・投票率63.43%）と突合する。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市選挙管理委員会 選挙結果資料（開票録・選挙録、1978年11月分）",
+          "institution": "延岡市選挙管理委員会（延岡市役所内）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "可能性あり（要確認）"
+        },
+        "secondary": {
+          "name": "延岡市議会会議録（1978年11月定例会・臨時会、当選証書付与関連の記載があれば）",
+          "institution": "延岡市議会事務局",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中（原本保管先の確認が必要）"
+        },
+        "tertiary": {
+          "name": "宮崎日日新聞縮刷版（1978年11月）",
+          "institution": "宮崎県立図書館",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        }
+      }
     },
     {
       "category": "mayorElection",
       "year": 1982,
       "electionId": "election-mayor-1982",
       "item": "候補者数および対立候補氏名",
-      "candidateHints": ["河野 孔明", "池田 某", "河野 敏進"],
+      "candidateHints": [
+        "河野 孔明",
+        "池田 某",
+        "河野 敏進"
+      ],
       "status": "disputed",
       "reason": "1978年分と同様、候補者数の桁と氏名クラスターの対応が確定できなかった。",
-      "recommendedNextStep": "1978年分と同時に原本で確認する必要がある。"
+      "recommendedNextStep": "1978年分と同時に原本で確認する必要がある。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市選挙管理委員会 選挙結果資料（開票録・選挙録、1982年10月分）",
+          "institution": "延岡市選挙管理委員会（延岡市役所内）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "可能性あり（要確認）"
+        },
+        "secondary": {
+          "name": "延岡市議会会議録（1982年10〜11月定例会）",
+          "institution": "延岡市議会事務局",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        },
+        "tertiary": {
+          "name": "宮崎日日新聞縮刷版（1982年10月）",
+          "institution": "宮崎県立図書館",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        }
+      }
     },
     {
       "category": "mayorElection",
-      "year": [1971, 1975, 1978, 1982],
+      "year": [
+        1971,
+        1975,
+        1978,
+        1982
+      ],
       "item": "候補者別得票数・無効票数",
       "status": "unconfirmed",
       "reason": "延岡市史上巻の市長選挙一覧表には候補者別の得票数が記載されておらず、確認不能。",
-      "recommendedNextStep": "選挙管理委員会資料または新聞縮刷版等、別の一次資料が必要。"
+      "recommendedNextStep": "選挙管理委員会資料または新聞縮刷版等、別の一次資料が必要。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市選挙管理委員会 選挙結果資料（開票録、候補者別得票数を含む）",
+          "institution": "延岡市選挙管理委員会（延岡市役所内）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "可能性あり（要確認、保存期間次第）"
+        },
+        "secondary": {
+          "name": "宮崎県選挙管理委員会「選挙の記録」等の統計資料",
+          "institution": "宮崎県選挙管理委員会",
+          "onlineAccess": false,
+          "onsiteRequired": "要確認",
+          "referenceFeasible": "中（県レベルの統計は市長選挙まで収録しているか未確認）"
+        },
+        "tertiary": {
+          "name": "宮崎日日新聞縮刷版（各選挙翌日付、開票結果報道）",
+          "institution": "宮崎県立図書館",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        }
+      }
     },
     {
       "category": "assistantMayor",
@@ -70,7 +175,30 @@
       ],
       "status": "disputed",
       "reason": "延岡市史上巻コマ125〜127の一覧表を複数回・複数倍率で再読したが、列と日付の対応関係がPhase27・Phase28で一致しなかった。3つの読みは相互に矛盾する。",
-      "recommendedNextStep": "原本現物確認。可能であれば延岡市議会の人事同意議案記録（会議録検索システム、ただし収録範囲が2000年5月以降のため1970年代分は対象外の可能性が高い）で就任議決日を探す。"
+      "recommendedNextStep": "原本現物確認。可能であれば延岡市議会の人事同意議案記録（会議録検索システム、ただし収録範囲が2000年5月以降のため1970年代分は対象外の可能性が高い）で就任議決日を探す。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市議会会議録（助役選任同意議案・退職に関する議案の審議部分）",
+          "institution": "延岡市議会事務局（原本）／宮崎県立図書館（一部複写、〜昭和48年）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "高い（議事日程・議案書に選任同意の記載が期待できる）"
+        },
+        "secondary": {
+          "name": "延岡市議会関係例規集または議員名簿（人事同意議案の記録を含む可能性）",
+          "institution": "宮崎県立図書館（郷土資料総合目録に書名記載を確認済み、現物未確認）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        },
+        "tertiary": {
+          "name": "延岡市職員録（存在未確認）",
+          "institution": "未確認（延岡市役所人事課または延岡市立図書館の可能性）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "低〜中（資料の存在自体が未確認）"
+        }
+      }
     },
     {
       "category": "councilViceChair",
@@ -78,7 +206,30 @@
       "item": "副議長氏名",
       "status": "unconfirmed",
       "reason": "延岡市史上巻コマ209〜210に「歴代市議会副議長」一覧表の所在は確認したが、姓の行と自/至日付列の対応関係を確実に判読できなかった。",
-      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。"
+      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市議会会議録（議長・副議長選挙の議事部分）",
+          "institution": "延岡市議会事務局（原本）／宮崎県立図書館（一部複写、〜昭和48年）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "高い"
+        },
+        "secondary": {
+          "name": "延岡市議会史（存在未確認）",
+          "institution": "未確認",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "低（存在そのものが未確認、延岡市議会事務局へ確認要）"
+        },
+        "tertiary": {
+          "name": "延岡市史1983年版上巻コマ209〜210の一覧表（高解像度再読）",
+          "institution": "NDLデジタルコレクション（オンライン、既に閲覧済み）",
+          "onlineAccess": true,
+          "onsiteRequired": false,
+          "referenceFeasible": "既にオンラインで到達済みだが読み取り精度が不足。原本現物確認で解決する可能性が高い（延岡市立図書館または宮崎県立図書館所蔵の紙版）。"
+        }
+      }
     },
     {
       "category": "superintendent",
@@ -86,7 +237,30 @@
       "item": "教育長氏名",
       "status": "unconfirmed",
       "reason": "延岡市史上巻の目次・索引の範囲では教育長個人の氏名・在任期間を記載した一覧箇所を発見できなかった。",
-      "recommendedNextStep": "延岡市教育委員会の沿革資料、または延岡市議会史（未入手）の確認。"
+      "recommendedNextStep": "延岡市教育委員会の沿革資料、または延岡市議会史（未入手）の確認。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市教育委員会 会議録または沿革資料",
+          "institution": "延岡市教育委員会事務局",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中〜高（教育委員会自身が保管している可能性）"
+        },
+        "secondary": {
+          "name": "延岡市議会会議録（教育長任命の議案審議、地方教育行政法改正〈1956年〉以降は教育委員会の互選のため議会同意を要しない点に注意）",
+          "institution": "延岡市議会事務局",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中（1970年代は互選制のため会議録に直接的な記載がない可能性がある）"
+        },
+        "tertiary": {
+          "name": "延岡市勢要覧・延岡市統計書（各年版、役職者名簿を含む場合）",
+          "institution": "宮崎県立図書館（郷土資料総合目録に書名記載を確認済み、1970年代版の所蔵は未確認）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        }
+      }
     },
     {
       "category": "treasurer",
@@ -94,7 +268,30 @@
       "item": "収入役氏名",
       "status": "unconfirmed",
       "reason": "延岡市史上巻コマ125の「助役、収入役および固定資産評価員」一覧表は複数役職が並列掲載されており、1970年代の収入役氏名を高い確度で特定できなかった。",
-      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。"
+      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。",
+      "candidateSources": {
+        "primary": {
+          "name": "延岡市議会会議録（収入役選任同意議案の審議部分）",
+          "institution": "延岡市議会事務局（原本）／宮崎県立図書館（一部複写、〜昭和48年）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "高い"
+        },
+        "secondary": {
+          "name": "延岡市史1983年版上巻コマ125の一覧表（高解像度再読）",
+          "institution": "NDLデジタルコレクション（オンライン、既に閲覧済み）",
+          "onlineAccess": true,
+          "onsiteRequired": false,
+          "referenceFeasible": "既にオンラインで到達済みだが読み取り精度が不足。"
+        },
+        "tertiary": {
+          "name": "延岡市統計月報・延岡市税務要覧（存在は宮崎県郷土資料総合目録で確認済み、内容未確認）",
+          "institution": "宮崎県立図書館",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        }
+      }
     },
     {
       "category": "mayorProfile",
@@ -104,7 +301,30 @@
       "candidateValue": "1921-01-03（大正十年一月三日）",
       "status": "unconfirmed",
       "reason": "延岡市史上巻コマ125の固定資産評価員一覧表に候補となる記載を発見したが、本人が同表に掲載されている理由（充て職か）および列対応の確実性に欠ける。",
-      "recommendedNextStep": "同一覧表の再読、または別の伝記的資料（人名事典等）での裏付け。"
+      "recommendedNextStep": "同一覧表の再読、または別の伝記的資料（人名事典等）での裏付け。",
+      "candidateSources": {
+        "primary": {
+          "name": "人事興信録（該当版、早生隆彦氏が延岡市長在任中〈1978-1994〉の版）",
+          "institution": "国立国会図書館（デジタル化状況は個別に要確認）／宮崎県立図書館",
+          "onlineAccess": "要確認",
+          "onsiteRequired": "要確認",
+          "referenceFeasible": "中（掲載慣行として現職市長クラスは収録されやすいが、収録の有無自体は未確認）"
+        },
+        "secondary": {
+          "name": "日本の歴代市長：市制施行百年の歩み 第3巻（既存sourceRefs記載、1985年発行のため17・18代分のみ収録済み、個人略歴欄を再確認）",
+          "institution": "NDLデジタルコレクション（既に一部閲覧済み、pid 11897508）",
+          "onlineAccess": true,
+          "onsiteRequired": false,
+          "referenceFeasible": "既存資料の再確認のみで到達可能。生年月日欄の有無を再チェックする価値がある。"
+        },
+        "tertiary": {
+          "name": "宮崎日日新聞の人物紹介記事（市長就任時等）",
+          "institution": "宮崎県立図書館（新聞縮刷版）",
+          "onlineAccess": false,
+          "onsiteRequired": true,
+          "referenceFeasible": "中"
+        }
+      }
     }
   ],
   "civicTimelineEventsAudit": {
@@ -124,5 +344,13 @@
     "total1970s": 22,
     "totalFileRecords": 203,
     "note": "Phase28では新規イベント追加を行っていない。この数値はPhase27末時点のベースライン（Phase27で発見した集計バグ修正後の正しい値）と同一。"
+  },
+  "phase29": {
+    "generatedAt": "2026-08-21",
+    "purpose": "未解決9項目それぞれについて、どの原本・所蔵機関・照会方法なら確定できるかを一次資料ベースで特定する。Phase29では新たなオンライン推測読み取りによる人物確定は行っていない。",
+    "startingUnresolvedCount": 9,
+    "endingUnresolvedCount": 9,
+    "newlyResolvedCount": 0,
+    "note": "各unresolved項目のcandidateSourcesフィールドに、最有力／第2候補／第3候補の資料と所蔵機関・オンライン可否・現地要否・照会可能性を追記した。詳細な整理はreports/phase29-physical-source-plan.md、機関別マトリックスはreports/phase29-unresolved-source-matrix.jsonを参照。"
   }
 }
