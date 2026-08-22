@@ -1,0 +1,196 @@
+{
+  "generatedAt": "2026-08-22",
+  "purpose": "Phase35: 基金残高（財政調整基金／減債基金／その他特定目的基金）・財政力指数・経常収支比率・その他財政指標の年度別収録状況調査。src/data/archiveFiscalYears.jsonのfund/financeフィールドを対象。src/dataは編集対象外のため、新規確定値はここに記録し、次フェーズでの反映を想定する。",
+  "baselineCoverage": {
+    "totalFiscalYearRecords": 70,
+    "fiscalYearRange": [1933, 2026],
+    "fundBalancePopulatedYears": 25,
+    "fundBalanceRange": [2001, 2025],
+    "financeObjectPopulatedYears": 24,
+    "financeObjectRange": [2001, 2024],
+    "currentAccountRatioPercentPopulatedYears": 24,
+    "financialStrengthIndexPopulatedYears": 18,
+    "financialStrengthIndexRange": [2007, 2024],
+    "financialStrengthIndexGapYears": [2001, 2002, 2003, 2004, 2005, 2006],
+    "realDebtServiceRatioPercentPopulatedYears": 18,
+    "realDebtServiceRatioPercentRange": [2007, 2024],
+    "futureBurdenRatioPercentPopulatedYears": 15,
+    "futureBurdenRatioPercentNotApplicableYears": [2018, 2019, 2020],
+    "debtServiceRatioPercentOldStylePopulatedYears": 5,
+    "debtServiceRatioPercentOldStyleRange": [2020, 2024]
+  },
+  "newConfirmedValues": [
+    {
+      "fiscalYear": 2001,
+      "field": "financialStrengthIndex",
+      "value": 0.55,
+      "unit": "index (unitless, 3-year average H11-H13)",
+      "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+      "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県",
+      "sourcePage": 4,
+      "municipalityCode": "2033",
+      "cardLabel": "財政力指数11～13",
+      "extractionMethod": "pdfjs-dist（cMap/標準フォント指定、テキスト座標抽出）",
+      "verificationStatus": "needsReview",
+      "crossCheck": "同ページの財政調整基金1,434,111千円が既存archiveFiscalYears.jsonのFY2001 fund.balance.fiscalReserveFundYenと完全一致",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2002,
+      "field": "financialStrengthIndex",
+      "value": 0.56,
+      "unit": "index (unitless, 3-year average H12-H14)",
+      "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+      "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県",
+      "sourcePage": 4,
+      "municipalityCode": "2033",
+      "cardLabel": "財政力指数12～14",
+      "extractionMethod": "pdfjs-dist（cMap/標準フォント指定、テキスト座標抽出）",
+      "verificationStatus": "needsReview",
+      "crossCheck": "同ページの財政調整基金1,434,111千円が既存archiveFiscalYears.jsonのFY2002 fund.balance.fiscalReserveFundYenと完全一致",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2003,
+      "field": "financialStrengthIndex",
+      "value": 0.55,
+      "unit": "index (unitless, 3-year average H13-H15)",
+      "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+      "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県",
+      "sourcePage": 4,
+      "municipalityCode": "2033",
+      "cardLabel": "財政力指数13～15",
+      "extractionMethod": "pdfjs-dist（cMap/標準フォント指定、テキスト座標抽出）",
+      "verificationStatus": "needsReview",
+      "crossCheck": "同ページの財政調整基金1,434,111千円が既存archiveFiscalYears.jsonのFY2003 fund.balance.fiscalReserveFundYenと完全一致",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2004,
+      "field": "financialStrengthIndex",
+      "value": 0.55,
+      "unit": "index (unitless, 3-year average, no range label printed)",
+      "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+      "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県",
+      "sourcePage": 4,
+      "municipalityCode": "2033",
+      "cardLabel": "財政力指数",
+      "extractionMethod": "pdfjs-dist（cMap/標準フォント指定、テキスト座標抽出）",
+      "verificationStatus": "needsReview",
+      "crossCheck": "同ページの財政調整基金1,434,111千円が既存archiveFiscalYears.jsonのFY2004 fund.balance.fiscalReserveFundYenと完全一致",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2005,
+      "field": "financialStrengthIndex",
+      "value": 0.48,
+      "unit": "index (unitless, 3-year average, no range label printed)",
+      "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+      "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県",
+      "sourcePage": 4,
+      "municipalityCode": "2033",
+      "cardLabel": "財政力指数",
+      "extractionMethod": "pdfjs-dist（cMap/標準フォント指定、テキスト座標抽出）",
+      "verificationStatus": "needsReview",
+      "crossCheck": "同ページの財政調整基金2,396,939千円が既存archiveFiscalYears.jsonのFY2005 fund.balance.fiscalReserveFundYenと完全一致",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2006,
+      "field": "financialStrengthIndex",
+      "value": 0.49,
+      "unit": "index (unitless, 3-year average, no range label printed)",
+      "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+      "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県",
+      "sourcePage": 4,
+      "municipalityCode": "2033",
+      "cardLabel": "財政力指数",
+      "extractionMethod": "pdfjs-dist（cMap/標準フォント指定、テキスト座標抽出）",
+      "verificationStatus": "needsReview",
+      "crossCheck": "同ページの財政調整基金2,562,208千円が既存archiveFiscalYears.jsonのFY2006 fund.balance.fiscalReserveFundYenと完全一致。加えてFY2007決算カード（1018-15-8_45.pdf）内の『平成18年度』比較列にも同一値0.49が独立して現れ、二重に裏付けられた。",
+      "accessedAt": "2026-08-22"
+    }
+  ],
+  "definitionConsistencyCheck": {
+    "question": "FY2001-2006のfinancialStrengthIndexは、FY2007以降の登録値と同一定義（過去3年平均）か？",
+    "answer": "同一定義であることを確認した。制度の断絶は無い。",
+    "evidenceSourceUrl": "https://www.soumu.go.jp/main_content/000264701.pdf",
+    "evidenceSourceTitle": "総務省「指標の説明」",
+    "evidenceQuote": "財政力指数：地方公共団体の財政力を示す指数で、基準財政収入額を基準財政需要額で除して得た数値の過去３年間の平均値。",
+    "note": "財政力指数は健全化判断比率制度（実質公債費比率・将来負担比率、FY2006/2007新設）とは無関係の、より古くからある恒常的な指標であり、3ヵ年平均という定義自体は年度によって変化していない。"
+  },
+  "confirmedNonGaps": [
+    {
+      "field": "futureBurdenRatioPercent",
+      "fiscalYears": [2018, 2019, 2020],
+      "status": "not_applicable_not_missing",
+      "note": "既存notesに『該当なし』『算定なし』と明記済み。延岡市の将来負担額が充当可能財源等を下回ったための制度上の非算定であり、未確認データではない。"
+    },
+    {
+      "field": "realDebtServiceRatioPercent",
+      "fiscalYears": [2006],
+      "status": "primary_source_confirms_dash",
+      "note": "FY2006（平成18年度）決算カードの『実質公債費比率』欄はすべて『－』（未算定）。FY2007からの収録開始は正しい。"
+    },
+    {
+      "field": "fund.balance / finance",
+      "fiscalYears": "1933-2000 (all recorded years in this range)",
+      "status": "confirmed_zero_coverage_no_new_source_found",
+      "note": "reports/finance-source-availability-by-era.jsonの既存調査結果（library_only／not_found）と一致。本Phaseでの新規オンライン一次資料は発見できなかった。"
+    }
+  ],
+  "unresolvedItems": [
+    {
+      "topic": "基金残高・財政指標のFY1933-2000",
+      "status": "unresolved",
+      "reason": "オンライン一次資料が本調査では見当たらない。現地閲覧または追加のNDL調査が必要。",
+      "relatedLedgerItems": ["UNR-014", "UNR-015"]
+    },
+    {
+      "topic": "debtServiceRatioPercent（公債費比率、旧指標）FY2001-2019",
+      "status": "not_started_this_phase",
+      "reason": "依頼スコープの中心指標ではなく参考指標のため優先度を下げた。FY2001-2006分の数値は本調査で偶然確認済み（財政力指数と同じPDF・同じページ）だが、今回はfinancialStrengthIndexの解決を優先し登録は見送った。",
+      "incidentallyObservedValues": [
+        { "fiscalYear": 2001, "value": 16.9 },
+        { "fiscalYear": 2002, "value": 17.8 },
+        { "fiscalYear": 2003, "value": 17.7 },
+        { "fiscalYear": 2004, "value": 17.4 },
+        { "fiscalYear": 2005, "value": 17.3 },
+        { "fiscalYear": 2006, "value": 16.9 }
+      ],
+      "note": "これらの値は今回verificationStatus未確定・needsReview段階の副産物であり、正式な新規確定値としては未登録（推測防止のため、本フェーズの主題外はJSON『newConfirmedValues』に含めていない）。次フェーズで正式に扱うことを推奨。"
+    },
+    {
+      "topic": "null と『該当なし』のスキーマ上の区別",
+      "status": "schema_issue",
+      "reason": "ArchiveFinancialIndicators型に、financeDashboard.jsonのnotApplicableIndicatorsに相当するフィールドがない。src/types・src/dataは本Phaseの編集対象外。"
+    },
+    {
+      "topic": "FY2025決算の財政指標",
+      "status": "pending_publication_likely",
+      "reason": "fund.balanceはFY2025まで収録済みだが、financeは未収録。令和7年度決算に基づく指標がまだ公表されていない可能性が高い。"
+    }
+  ],
+  "summary": {
+    "newlyConfirmedCount": 6,
+    "updatedInSrcDataCount": 0,
+    "resolvedFlagCount": 1,
+    "resolvedFlagDescription": "FY2001-2006 financialStrengthIndexの『定義不一致の懸念（要確認）』を一次資料で解消（実データ反映は次フェーズ）",
+    "remainingUnresolvedCount": 4,
+    "newSourceRefs": [
+      "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+      "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+      "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+      "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+      "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+      "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+      "https://www.soumu.go.jp/main_content/000264701.pdf"
+    ],
+    "warnings": [
+      "新規確定値6件はsrc/data/archiveFiscalYears.jsonへ未反映（本レポートに記録のみ、src/dataは編集対象外のため）。",
+      "抽出方法は座標ベースのpdfjs-dist読み取りのため、反映時はverificationStatus: needsReviewとして登録することを推奨。",
+      "単位混同なし（財政力指数は無単位、基金残高は円単位）。年度表記はすべて会計年度。",
+      "制度改正（実質公債費比率2006年度制度化・将来負担比率2007年度〜）による断絶点は、既存データが既に正しく処理していることを確認した。無理な遡及・単純連結は行っていない。"
+    ]
+  }
+}

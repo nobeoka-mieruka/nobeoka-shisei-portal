@@ -403,6 +403,9 @@ export function DataStatusPage() {
   };
 
   const committeesWithJurisdiction = committees.filter((c) => c.jurisdiction !== null).length;
+  const countConsistencyUnresolved = dataQualitySummary.countConsistencyChecks.filter(
+    (c) => !c.status.startsWith("fixed"),
+  ).length;
   const councilCommittees: DataDomain = {
     label: "委員会（常任・議会運営・特別）",
     count: committees.length,
@@ -543,7 +546,7 @@ export function DataStatusPage() {
     {
       label: "委員会：所管事項の確認",
       metric: simpleCompleteness(committeesWithJurisdiction, committees.length),
-      note: "常任委員会3件と、設置時提案理由で目的が確認できた特別委員会1件は確認済み。議会運営委員会・他の特別委員会は、条例上、所管事項の個別列挙を持たない構造のため、この項目には該当しない",
+      note: "常任委員会3件は延岡市議会委員会条例の個別列挙、議会運営委員会1件は地方自治法第109条第3項の一般規定、特別委員会2件は設置時の提案理由により、所管事項をそれぞれ確認済み（6／6件。Phase44で表記を実態に合わせて修正）",
     },
     {
       label: "財政：予算・決算（歳入歳出総額）の年度確認",
@@ -628,7 +631,11 @@ export function DataStatusPage() {
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">件数不整合（画面表示とデータ件数のずれ）</dt>
-            <dd className="mt-0.5 text-lg font-semibold text-on-surface">0件（既知の問題は解消済み）</dd>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {countConsistencyUnresolved}件
+              {dataQualitySummary.countConsistencyChecks.length > 0 &&
+                `（把握済み${dataQualitySummary.countConsistencyChecks.length}件のうち解消済み${dataQualitySummary.countConsistencyChecks.length - countConsistencyUnresolved}件）`}
+            </dd>
           </div>
         </dl>
         {dataQualitySummary.linkHealth && dataQualitySummary.linkHealth.broken.length > 0 && (

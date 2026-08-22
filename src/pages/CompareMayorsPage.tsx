@@ -188,7 +188,7 @@ export function CompareMayorsPage() {
                   render: (m) => {
                     const n = policiesForPerson("mayor", m.id).length;
                     if (n > 0) return `${n}件`;
-                    return m.isCurrentMayor ? "0件" : "0件（歴代市長の公約データは未収集）";
+                    return m.isCurrentMayor ? "0件（公約データ未登録）" : "0件（歴代市長の公約データは未収集）";
                   },
                 },
                 {

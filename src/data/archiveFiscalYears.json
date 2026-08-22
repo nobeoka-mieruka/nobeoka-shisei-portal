@@ -1441,7 +1441,7 @@
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 85.3,
-      "financialStrengthIndex": null,
+      "financialStrengthIndex": 0.55,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
@@ -1452,9 +1452,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "カード表記「財政力指数11～13」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
         }
       ],
-      "notes": "経常収支比率85.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率85.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.55を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2001,
@@ -1565,7 +1575,7 @@
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 87.5,
-      "financialStrengthIndex": null,
+      "financialStrengthIndex": 0.56,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
@@ -1576,9 +1586,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "カード表記「財政力指数12～14」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
         }
       ],
-      "notes": "経常収支比率87.5%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率87.5%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.56を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2002,
@@ -1689,7 +1709,7 @@
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 86.9,
-      "financialStrengthIndex": null,
+      "financialStrengthIndex": 0.55,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
@@ -1700,9 +1720,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "カード表記「財政力指数13～15」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
         }
       ],
-      "notes": "経常収支比率86.9%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率86.9%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.55を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2003,
@@ -1813,7 +1843,7 @@
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 89.8,
-      "financialStrengthIndex": null,
+      "financialStrengthIndex": 0.55,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
@@ -1824,9 +1854,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "カード表記「財政力指数（範囲表記なし）」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
         }
       ],
-      "notes": "経常収支比率89.8%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率89.8%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.55を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2004,
@@ -1937,7 +1977,7 @@
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 90.3,
-      "financialStrengthIndex": null,
+      "financialStrengthIndex": 0.48,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
@@ -1948,9 +1988,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "カード表記「財政力指数（範囲表記なし）」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
         }
       ],
-      "notes": "経常収支比率90.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率90.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.48を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2005,
@@ -2060,7 +2110,7 @@
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 92.2,
-      "financialStrengthIndex": null,
+      "financialStrengthIndex": 0.49,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
@@ -2071,9 +2121,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "カード表記「財政力指数（範囲表記なし、FY2007カード内の前年度比較列でも同値0.49を確認・二重裏付け済み）」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
         }
       ],
-      "notes": "経常収支比率92.2%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数はこの年度の決算カード上の表記が「N〜N+2年度の3ヵ年平均」形式である可能性があり、FY2007以降に登録した単年度値と定義が異なるおそれがあるため、今回は登録を見送り「要確認」とした。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率92.2%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.49を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2006,
@@ -2474,7 +2534,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 68428838000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 113508130000,
         "perCapitaYen": null,
@@ -2490,10 +2550,21 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債の残高」棒グラフ（19〜21年度末、一般・特別・企業会計の合計、本文に明記）の21年度末値。"
+          },
+          {
+            "sourceUrl": "https://www.pref.miyazaki.lg.jp/documents/7692/000187931.pdf",
+            "sourceTitle": "総務省「平成22年度財政状況資料集」宮崎県延岡市（平成21年度末の比較列）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "pageNumber": 3,
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "平成22年度財政状況資料集の経年比較欄（平成21年度末値）より。同一資料内で平成22年度末値（67,343,886千円）と並記されている。既存のFY2007・FY2008値（総務省市町村決算カード出典）と別ルートで整合することを確認済み（Phase34調査）。"
           }
         ]
       },
-      "notes": "残高は一般・特別・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は一般・特別・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase34調査により一般会計等ベースの地方債現在高（普通会計相当）を新規登録（68,428,838,000円）。"
     },
     "finance": {
       "fiscalYear": 2009,
@@ -2636,7 +2707,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 67343886000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 111479550000,
         "perCapitaYen": null,
@@ -2652,10 +2723,21 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」グラフの当該年度末値。"
+          },
+          {
+            "sourceUrl": "https://www.pref.miyazaki.lg.jp/documents/7692/000187931.pdf",
+            "sourceTitle": "総務省「平成22年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "pageNumber": 3,
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "「（2）各会計、関係団体の財政状況及び健全化判断比率」内「一般会計等に係る地方債の現在高」欄より。p.1総括表の同数値と完全一致することを確認済み（Phase34調査）。"
           }
         ]
       },
-      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase34調査により一般会計等ベースの地方債現在高（普通会計相当）を新規登録（67,343,886,000円）。"
     },
     "finance": {
       "fiscalYear": 2010,
