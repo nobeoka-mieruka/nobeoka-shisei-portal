@@ -1,0 +1,431 @@
+{
+  "generatedAt": "2026-08-23",
+  "note": "Phase57+58統合ワーカーによる一般質問2010年代・2000年代の実投入パイロット。src/data・scripts配下は読み取り専用のため一切変更していない。本ファイルはcouncilSpeechSummaries.jsonへ実際にマージする際の完全準拠フォーマットとして作成した『提案データ』であり、まだマージされていない。重要：本ファイルのspeech.sessionId（2013-06 / 2005-09 / 2014-03）はいずれも現行src/data/councilSessions.json（収録範囲は2019-06以降のみ）に存在しないため、このままマージするとscripts/validate-data.mjsが『存在しない会期IDです』というエラーを出す。マージ前に councilSessions.json へ該当する旧会期のエントリ（id/title/sessionType/sessionNumber等、councilSessions.jsonの実スキーマに準拠したもの）を追加する別タスクが必須（詳細はreports/phase57-58-general-questions-implementation-findings.md 3節参照）。そのため本ファイル内の全speechは isPublished:false としている。",
+  "status": "candidate_ready_pending_councilSessions_dependency",
+  "blockingDependency": {
+    "issue": "councilSessions.jsonに2019-06より前の会期エントリが1件も存在しない（機械確認済み：src/data/councilSessions.jsonの全42件のidはすべて2019-06以降）。scripts/validate-data.mjsのcouncilSpeechSummaries.json検証は『speech.sessionIdがcouncilSessions.jsonのidに存在するか』を無条件（isPublishedの真偽に関係なく）でerr()判定するため、sessionId: 2013-06 / 2005-09 / 2014-03 のいずれも現状ではvalidate-data.mjsでエラーになる。",
+    "requiredFollowUp": "councilSessions.jsonへ、平成25年第14回定例会（2013-06相当）・平成17年第16回定例会（2005-09相当）・平成26年第19回定例会（2014-03相当）の最低限のエントリを追加する別タスクが必要。councilSessions.jsonの実スキーマはdocuments/summarySources等の一次資料リンクを要求する重い構造のため、本ワーカーの読み取り専用制約内では実施できなかった（提案のみ）。",
+    "verifiedBy": "node -e で src/data/councilSessions.json の全idを列挙し、'2013'/'2005'/'2000'/'2014'/'2018'始まりのidが0件であることを確認済み（本findings.md 3節）。"
+  },
+  "resolvedCandidates": [
+    {
+      "candidateId": "fm49-2013-06-11-ippan-shitsumon",
+      "originSource": "reports/phase45-47-general-questions-findings.json の candidate-legacy-h250611-yano",
+      "memberIdResolution": {
+        "memberId": "fm49",
+        "confidence": "high",
+        "resolvedBy": "reports/phase59-member-matching-findings.md 2.2節（かな一致『やのせんいちろう』・在籍期間の重なり・同姓同名候補なしを確認。fm49側の既存name『矢野 せんいちろう』は漢字未確定のため、漢字同士の完全一致までは確認できずexactではなくhigh）",
+        "additionalProposal": "formerMembers.json fm49のnameフィールドを『矢野 せんいちろう』→『矢野 戦一郎』へ更新する候補（Phase59提案）。本ワーカーはformerMembers.jsonを編集していない（読み取り専用）。"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm49",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2013-06-11", "to": "2013-06-11" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "市長の政治姿勢", "sessionCount": 1 },
+          { "topic": "第三セクターへの職員関与", "sessionCount": 1 },
+          { "topic": "行政運営", "sessionCount": 1 },
+          { "topic": "健康福祉", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（formerMembers.json fm49、令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは、fm49の在職期間全体（2011年当選〜2015年次期選挙まで）で行われた他会期の一般質問件数が不明のため、0と断定せずフィールド自体を省略した（推測で埋めない）。"
+      },
+      "speech": {
+        "id": "fm49-2013-06-11-ippan-shitsumon",
+        "memberId": "fm49",
+        "sessionId": "2013-06",
+        "date": "2013-06-11",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["市長の政治姿勢", "第三セクターへの職員関与", "行政運営", "健康福祉"],
+        "shortSummary": "平成25年6月定例会（第14回定例会、第2号）で矢野戦一郎議員（友愛クラブ・民主党）が行った一般質問（壇上、全12項目通告）のうち、市長マニフェストの自己評価・次期市長選挙への対応、第三セクター等公益的法人の職員採用における公募制導入（一般職員採用への拡大・平成23年9月以降の新規導入団体・未導入団体対応）、外郭団体との随意契約の状況、総合支所のあり方検討・地域自治会の再編、新型インフルエンザ対策協議会の設置、の6項目を市長・総務部長・企画部長の答弁とあわせて要約したもの。壇上質問全文は他に小型家電リサイクル法対応、鮎やなオーナー制度、北川流域浸水対策・河川堆積土砂撤去、総合支所機能と消防団見直し、文化財の一元管理、食物アレルギー対策の6項目を含むが、対応する答弁セグメント（市民環境部長・健康福祉部長・商工観光部長・消防長・教育長・教育部長・北川町総合支所長）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "市長マニフェストの自己評価と次期市長選挙への対応",
+            "questionSummary": "前回市長選挙のマニフェスト（9政策・60項目）について、平成24年度末時点の進捗状況の自己評価と、次期市長選挙に向けたマニフェストの骨格・公表時期を質問した。",
+            "answerSummary": "ドクターヘリ導入、こども家庭課設置、新火葬場整備、行財政改革推進など多くの項目で目標を達成、またはほぼ計画どおり進捗していると説明。次期市長選挙に向けては、高速道路時代を見据えた魅力ある都市づくりを念頭にマニフェストを検討中であり、時期を見て公表する考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm49", "summary": "前回マニフェスト（9政策・60項目）の平成24年度末時点の自己評価と、次期市長選挙に向けたマニフェストの骨格・公表時期を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "多くの項目で目標達成・計画どおり進捗していると説明。次期マニフェストは検討中で時期を見て公表する考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "第三セクター等公益的法人の一般職員採用における公募制導入",
+            "questionSummary": "役職ポスト（事務局長級）は公募制導入が進んだ一方、一般職員採用についても同様に公募制を導入すべきではないかと質問した。",
+            "answerSummary": "各法人の業種（福祉・環境・観光等）に応じ専門的スキルが求められることから、新聞広告やハローワーク活用等、各団体が独自に十分検討し採用方法を決定しているものと考えている旨を説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm49", "summary": "一般職員採用についても公募制を導入すべきではないかと質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "各団体の業種特性に応じ、独自の判断で採用方法を決定しているものと考えている旨を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "公募制導入の進捗状況（平成23年9月以降の新規導入団体・未導入団体への対応）",
+            "questionSummary": "平成23年9月議会以降に新たに公募制を導入した団体数、及びいまだ未導入の団体への今後の対応方針を質問した。",
+            "answerSummary": "平成23年9月以降、リサイクルプラザ「ゲン丸館」、社会福祉協議会北浦支所、南老人福祉センターの3団体が新たに公募制を導入し、対象12団体のうち7団体で導入済みとなったこと、未導入団体も前向きな回答があり今後増える見込みであることを説明した。",
+            "answerers": ["総務部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm49", "summary": "平成23年9月以降の公募制新規導入団体数と未導入団体への対応方針を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "総務部長", "summary": "3団体が新規導入し計7団体（対象12団体中）で導入済み、未導入団体も前向きとの回答があることを説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q4",
+            "title": "外郭団体（第三セクター）との随意契約の状況と今後の対応",
+            "questionSummary": "総務省が随意契約の見直しを求める中、延岡市が出資・支援する外郭団体との随意契約の団体名・件数・金額・契約件数、及び今後の対応を質問した。",
+            "answerSummary": "出資比率25％以上の第三セクター11団体のうち、平成24年度は4団体・契約件数13件・契約金額約7,696万円が随意契約に該当し、いずれも地方自治法施行令上の随意契約理由に該当する契約であり長期契約・再委託の事例はないこと、随意契約ガイドラインの厳正な運用に努める考えを説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm49", "summary": "外郭団体との随意契約の団体名・件数・金額・今後の対応を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "第三セクター11団体中4団体・13件・約7,696万円が随意契約に該当し、長期契約や再委託の事例はないことを説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q5",
+            "title": "総合支所のあり方の検討・地域自治会（区）組織の再編",
+            "questionSummary": "総合支所の今後のあり方について有識者等による検討委員会設置の考えを問うとともに、地域住民から合併・統合の提起があった場合の区長会等との協議の場設定について質問した。",
+            "answerSummary": "県の調査報告を参考に総合支所と本庁関係課で協議を行い平成26年度までに一定の方針を決定したい考えであり、地域協議会の意見も踏まえ検討するとした。自治会の合併・統合については、区長連絡協議会が策定した「区のあり方に関する指針」に基づき該当地区区長会長が相談に応じる仕組みがあり、区長連絡協議会と協議しながら取り組む考えを示した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm49", "summary": "総合支所のあり方検討委員会設置の考えと、区の合併・統合における協議の場設定を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "平成26年度までに総合支所のあり方の方針を決定したい考え、区長連絡協議会の指針に基づき協議していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q6",
+            "title": "新型インフルエンザ対策協議会の設置",
+            "questionSummary": "新型インフルエンザ等対策特別措置法の施行を踏まえ、医師会や電力・ガス等の公共団体、学校、保育所などとの対策協議会の立ち上げについて質問した。",
+            "answerSummary": "対策協議会の設置は関係団体の共通認識を深める効果が期待できるため、現地対策本部機能を担う延岡保健所に今後提案していく考えを示した。",
+            "answerers": ["総務部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm49", "summary": "医師会・電力・ガス等関係団体による新型インフルエンザ対策協議会の設置について質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "総務部長", "summary": "延岡保健所に協議会設置を今後提案していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成25年第14回定例会（第2号 6月11日） 矢野戦一郎君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250611A/3524/10/1//0/0", "speakerSection": "pos=3524" },
+          { "title": "平成25年第14回定例会（第2号 6月11日） 市長（首藤正治君）（答弁：マニフェスト・公募制）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250611A/12992/10/1//0/0", "speakerSection": "pos=12992" },
+          { "title": "平成25年第14回定例会（第2号 6月11日） 企画部長（黒木清君）（答弁：随意契約・総合支所・自治会再編）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250611A/14956/10/1//0/0", "speakerSection": "pos=14956" },
+          { "title": "平成25年第14回定例会（第2号 6月11日） 総務部長（青井雄二君）（答弁：公募制進捗・新型インフル対策協議会）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250611A/17274/10/1//0/0", "speakerSection": "pos=17274" },
+          { "title": "平成25年第14回定例会（第2号 6月11日）発言者一覧（r_Speakers.exe、204発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H250611A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=3524）・答弁原文（pos=12992, 14956, 17274）をscripts/lib/minutes-source.mjsの実関数（fetchSegmentText等）経由で取得・精読し、内容・発言者・質問と答弁の対応関係を確認した。壇上質問には他に小型家電リサイクル法対応、鮎やなオーナー制度、北川流域浸水対策・河川堆積土砂撤去、総合支所機能と消防団見直し、文化財の一元管理、食物アレルギー対策の6項目が含まれるが、対応する答弁セグメント（市民環境部長=pos18916、健康福祉部長=pos19800、商工観光部長=pos21294、消防長=pos22236、教育長=pos22858、教育部長=pos23936、北川町総合支所長=pos24688）は今回未取得（時間・アクセス回数の制約により、確実に構造化できた6項目にとどめた）。再質問ラウンド（order16以降、pos=26558〜）も未取得。matchSpeakerToMember相当の照合はreports/phase59-member-matching-findings.mdの結果（fm49、confidence: high）を採用した。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonのmembers配列へ、上記proposedMemberRecordWrapperをベースにspeeches:[speech]を追加した新規メンバーオブジェクトとして挿入する（既存の並び順はmemberId順ではないため任意の位置でよい）。ただしsessionId:2013-06がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること（本ファイル冒頭blockingDependency参照）。"
+    },
+    {
+      "candidateId": "fm14-2005-09-14-ippan-shitsumon",
+      "originSource": "reports/phase45-47-general-questions-findings.json の candidate-legacy-h170914-goto",
+      "memberIdResolution": {
+        "memberId": "fm14",
+        "confidence": "exact",
+        "resolvedBy": "reports/phase59-member-matching-findings.md 2.1節（氏名漢字・かな完全一致、在籍期間の重なり、同姓同名候補なしを確認）"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm14",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2005-09-14", "to": "2005-09-14" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "防災", "sessionCount": 1 },
+          { "topic": "水道", "sessionCount": 1 },
+          { "topic": "国政・政治", "sessionCount": 1 },
+          { "topic": "指定管理者", "sessionCount": 1 },
+          { "topic": "地域振興", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（formerMembers.json fm14、令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは在職期間全体（1999年当選〜2007年次期選挙まで）の他会期件数が不明のためフィールド自体を省略した。"
+      },
+      "speech": {
+        "id": "fm14-2005-09-14-ippan-shitsumon",
+        "memberId": "fm14",
+        "sessionId": "2005-09",
+        "date": "2005-09-14",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["防災", "水道", "国政・政治", "指定管理者", "地域振興"],
+        "shortSummary": "平成17年9月定例会（第16回定例会、第2号）で後藤哲朗議員が行った一般質問（台風14号災害を受け「十八項目の質問」と本人が述べた壇上質問）のうち、堤防溢水対策・新消防庁舎建設の冠水対策・水道施設の災害対応・停電対策・総選挙（郵政民営化）の総括・指定管理者制度導入における公募判断根拠と経過・市町村合併支援道路整備事業の進捗・大学（九州保健福祉大学等）を活かしたまちづくりのPR強化、の8項目を市長・助役・企画部長の答弁とあわせて要約したもの。18項目中の残り10項目は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "台風14号による堤防溢水箇所の視察と再発防止対策",
+            "questionSummary": "はんらんした堤防箇所や古川・岡富・桜ヶ丘など浸水地区の視察を踏まえ、堤防溢水への所見と再発防止対策を質問した。",
+            "answerSummary": "国道218号の低い箇所のかさ上げを区画整理事業に合わせて計画中であること、桜ヶ丘地区は県の祝子川広域基幹河川改修事業で排水機場を設置予定であることを説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "堤防溢水箇所の視察を踏まえた所見と再発防止対策を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "国道218号のかさ上げ計画、桜ヶ丘地区の排水機場設置予定を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "新消防庁舎建設計画と周辺の冠水対策",
+            "questionSummary": "建設予定地周辺が今回も大冠水したことを踏まえ、計画どおり建設を進めるか、冠水対策を講じられるかを質問した。",
+            "answerSummary": "実施設計は終了し潜水訓練施設に着工済み、18年度の本体着工に向け計画どおり進める考えを示した。冠水対策として来年度に下水道事業による浸水軽減対策事業を実施し、国の排水機場能力アップも要望していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "新消防庁舎建設周辺の冠水対策と計画どおりの建設継続を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "計画どおり進める考え、浸水軽減対策事業の実施を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "水道施設の災害対応（ライフライン強化）",
+            "questionSummary": "水源の受電設備冠水による断水を踏まえ、災害に強いライフラインとしての水道施設の今後の対応を質問した。",
+            "answerSummary": "平成18年度からの次期5カ年計画見直しの中で、電気機械設備を守る擁壁工事等の冠水対策を早急に実施する考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "水道施設の災害対応（ライフライン強化）を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "次期5カ年計画で擁壁工事等の冠水対策を実施する考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q4",
+            "title": "長時間停電を踏まえた九州電力との停電対策協議",
+            "questionSummary": "延岡発電所の冠水により市内3分の2で長時間停電が発生したことを踏まえ、九州電力との停電対策協議の可否を質問した。",
+            "answerSummary": "九州電力も前向きな検討を行うとのことであり、市としても再発防止の早急な対策を要望していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "九州電力との停電対策協議の可否を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "九州電力も前向きに検討中であり、市も再発防止を要望していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q5",
+            "title": "総選挙（郵政民営化）の総括",
+            "questionSummary": "郵政民営化を争点とした総選挙結果を踏まえた総括的な所見を質問した。",
+            "answerSummary": "総選挙は郵政民営化を国民に問い直したものであり、民意は改革推進を選択したとの認識を示し、今後も構造改革の推移を見きわめていく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "郵政民営化を争点とした総選挙結果を踏まえた総括を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "民意は改革推進を選択したとの認識、構造改革の推移を見きわめる考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q6",
+            "title": "指定管理者制度導入における公募の判断根拠・経過、今後の制度導入の考え方",
+            "questionSummary": "指定管理者制度導入について、各施設での公募をする・しないの決定方法の根拠・経過、及び今後の制度導入の考え方を質問した（あわせて、指定期間の設定（3年・5年・10年）の根拠についても質問した）。",
+            "answerSummary": "今回指定する9施設はいずれも公募の形で決定したこと、現在委託中の施設（30数か所）については来年9月までに指定の可否を検証する予定であり、検証は住民サービスの内容・管理運営の違い・行政関与の必要性・コスト等を総合的に勘案して行ったこと、市が直営で抱える200数十か所の施設について今後可能な限り指定管理者制度を活用していく考えを示した。指定期間の設定根拠についての直接の言及は、この答弁セグメント内では確認できなかった。",
+            "answerers": ["助役"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "指定管理者制度の公募判断根拠・経過、今後の考え方、指定期間設定の根拠を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "助役", "summary": "9施設とも公募で決定、今後可能な限り制度を活用していく考えを示した。指定期間設定根拠への言及は確認できず。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "partially-confirmed"
+          },
+          {
+            "id": "q7",
+            "title": "市町村合併支援道路等整備プロジェクトの進捗・スケジュール",
+            "questionSummary": "県の市町村合併支援道路等整備プロジェクトについて、現在の状況・進め方・今後のスケジュールを企画部長に質問した。",
+            "answerSummary": "県が対象道路の選定作業を行っており、10月頃に対象道路案が示された後、関係省庁等との調整を経て来年3月に計画決定される見込みであることを説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "市町村合併支援道路等整備プロジェクトの進捗・スケジュールを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "10月頃に対象道路案、来年3月に計画決定見込みと説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q8",
+            "title": "大学（九州保健福祉大学・聖心ウルスラ短期大学）を活かしたまちづくり・PR強化",
+            "questionSummary": "両大学の持つ知的・技術的財産を活かすための市民へのPR強化について企画部長に質問した。",
+            "answerSummary": "両大学をまちづくりの核と位置づけ、交流人口の増大やまちのにぎわい、生涯学習の充実、産学官連携等の取り組みを進めていること、地域貢献の取り組みについて今後とも積極的にPRしていく考えを示した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "大学の知的・技術的財産を活かした市民へのPR強化を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "地域貢献の取り組みを今後とも積極的にPRしていく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成17年第16回定例会（第2号 9月14日） 後藤哲朗君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H170914A/17749/10/1//0/0", "speakerSection": "pos=17749" },
+          { "title": "平成17年第16回定例会（第2号 9月14日） 市長（櫻井哲雄君）（答弁：堤防溢水・消防庁舎・水道・停電・総選挙総括）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H170914A/31943/10/1//0/0", "speakerSection": "pos=31943" },
+          { "title": "平成17年第16回定例会（第2号 9月14日） 助役（柳田喜継君）（答弁：指定管理者制度）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H170914A/38543/10/1//0/0", "speakerSection": "pos=38543" },
+          { "title": "平成17年第16回定例会（第2号 9月14日） 企画部長（楠葉秀三君）（答弁：合併支援道路・大学連携）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H170914A/40037/10/1//0/0", "speakerSection": "pos=40037" },
+          { "title": "平成17年第16回定例会（第2号 9月14日）発言者一覧（r_Speakers.exe、58発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H170914A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=17749、本人が「十八項目の質問をさせていただきます」と冒頭で述べていることを確認）・答弁原文（pos=31943, 38543, 40037）をscripts/lib/minutes-source.mjsの実関数経由で取得・精読し、内容・発言者・質問と答弁の対応関係を確認した。q1-q5はPhase45-47（curl+iconv-lite）で既に検証済みの内容をそのまま踏襲（本ワーカーで再取得はしていない）。q6-q8は本ワーカーが新規に取得・要約した。18項目中、市長答弁（5項目）＋助役答弁（指定管理者、1項目、期間設定根拠部分は未確認）＋企画部長答弁（2項目）の合計8項目を今回構造化した。残り10項目（総務部長=駐輪場整備・第五次行政改革・自治会加入促進等、市民環境部長=環境行政2点、商工部長=観光振興2点、都市建設部長=駐輪場整備、教育部長=備品整備率、および後藤議員自身の再質問ラウンド=order14以降）は今回未取得。市長は櫻井哲雄氏、助役は柳田喜継氏（副市長制導入以前の役職、Phase56でclassifySpeakerLabelに追加済みのofficialTitles『助役』区分が実データで正しくofficial/助役と分類されることも確認した）。matchSpeakerToMember相当の照合はreports/phase59-member-matching-findings.mdの結果（fm14、confidence: exact）を採用した。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonのmembers配列へ、上記proposedMemberRecordWrapperをベースにspeeches:[speech]を追加した新規メンバーオブジェクトとして挿入する。sessionId:2005-09がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること（本ファイル冒頭blockingDependency参照）。"
+    },
+    {
+      "candidateId": "m08-2014-03-04-soukatsu-shitsugi-ippan-shitsumon",
+      "originSource": "本ワーカーが新規に実施したパイロット（Phase56確認済み年度=2014年、平成26年第19回定例会）",
+      "memberIdResolution": {
+        "memberId": "m08",
+        "confidence": "exact",
+        "resolvedBy": "本ワーカーによる機械照合：発言者ラベル『甲斐正幸君』が、現職議員 src/data/members.json m08『甲斐 正幸』と氏名完全一致。members.json上の同姓（甲斐 行雄=m06、甲斐 忠篤=m07、甲斐 武=fm16、甲斐 英孝=fm30、甲斐 勝吉=fm33）はいずれも下の名前が異なる別人であり同姓同名リスクなし。m08は現職継続議員（termCount=4）で、councilSpeechSummaries.jsonに2019-06以降の一般質問が既に14件登録済み（在職の事実が現行データで裏付けられている）。2014年3月時点の在職は、当選から継続して現職であるという既存プロフィール情報と矛盾しない。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingMemberId": "m08",
+      "proposedAggregateUpdateNote": "councilSpeechSummaries.json内の既存m08レコード（analyzedSessionCount=9, sessionsWithSpeechCount=9, unfetchedSessionCount=20）へこの1件を追加する場合、analyzedSessionCount/sessionsWithSpeechCountをそれぞれ+1する程度の単純な更新にとどめ、unfetchedSessionCount（2014年以前の他会期の件数）は今回調査していないため本ワーカーからは変更値を提案しない（推測で埋めない）。",
+      "speech": {
+        "id": "m08-2014-03-04-soukatsu-shitsugi-ippan-shitsumon",
+        "memberId": "m08",
+        "sessionId": "2014-03",
+        "date": "2014-03-04",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "総括質疑・一般質問",
+        "term": "previous",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["予算編成", "市長選挙", "選挙・投票率"],
+        "shortSummary": "平成26年3月定例会（第19回定例会、第2号）で甲斐正幸議員（のべおか市民派クラブを代表して質問、現職継続）が行った総括質疑・一般質問（市長の政治姿勢8点、企業誘致5点、観光振興3点、協働・共汗事業、消防団活性化4点、アスリートタウンのべおか3点の計約24項目を通告）のうち、市長の政治姿勢に関する冒頭3項目（平成26年度当初予算編成の重点方針、市長選挙〔三期目当選〕の振り返りと過去最低投票率、多選禁止の考え方）を市長の答弁とあわせて要約したもの。残り約21項目は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "平成26年度当初予算編成の重点方針",
+            "questionSummary": "平成26年度当初予算編成にあたり最も苦心・重視した点を質問した。",
+            "answerSummary": "「つながる延岡 創造延岡新時代」をキーワードに、高速道路開通効果を最大限に生かすため観光・産業振興を最優先としつつ、駅周辺整備・市庁舎建設・教育環境整備・防災機能充実・雇用創出・一次産業振興等、幅広い分野に配慮した予算編成を行ったことを説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m08", "summary": "平成26年度当初予算編成で最も苦心した点を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "高速道路開通効果を生かす観光・産業振興を最優先に、幅広い分野に配慮した予算編成を行ったと説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "市長選挙（三期目当選）の振り返りと過去最低投票率について",
+            "questionSummary": "平成26年1月26日執行の市長選挙（三期目当選）を振り返っての所感、及び過去最低となった投票率（44.68％）についての受け止めを質問した。",
+            "answerSummary": "市内全域を回り2期8年の実績と今後4年間の考え方を市民に伝える中で、高速道路時代への期待感と危機感、雇用の場確保への強い願いを感じたこと、投票率については同時期の宮崎市長選挙も過去最低となるなど全国的な低下傾向がある中、政治への関心を高めてもらえるよう取り組みを進めたい考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m08", "summary": "市長選挙（三期目当選）の振り返りと過去最低投票率についての受け止めを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "選挙戦での市民の期待感・危機感を紹介し、投票率低下は全国的傾向であり関心向上に取り組む考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "多選禁止に関する市長の考え方（三期目時点）",
+            "questionSummary": "初当選時から多選禁止を掲げてきたことについて、三期目に入った時点でも考えに変わりはないか質問した。",
+            "answerSummary": "多選は行政運営の硬直化・マンネリ化を招く弊害が指摘されており、多選は望ましくないという従来の考えに変わりはないと述べた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m08", "summary": "三期目時点でも多選禁止の考えに変わりはないか質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "多選は望ましくないという従来の考えに変わりはないと述べた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成26年第19回定例会（第2号 3月4日） 甲斐正幸君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H260304A/9352/10/1//0/0", "speakerSection": "pos=9352" },
+          { "title": "平成26年第19回定例会（第2号 3月4日） 市長（首藤正治君）（答弁：予算編成・市長選挙・投票率・多選・三期目の抱負等）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H260304A/24246/10/1//0/0", "speakerSection": "pos=24246" },
+          { "title": "平成26年第19回定例会（第2号 3月4日）発言者一覧（r_Speakers.exe、150発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H260304A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "resolveYearTreedepth({year:2014})→listSessionsForYear→listMeetingDays→listSpeakerSegments→fetchSegmentTextのフルパイプラインを実際に実行して発見・取得した新規パイロット会期。壇上質問全文（pos=9352）は『のべおか市民派クラブを代表して』通告された総括質疑・一般質問で、市長の政治姿勢8点・企業誘致5点・高速道路時代を見据えた観光振興3点・協働共汗事業の充実・消防団の活性化4点・アスリートタウンのべおか3点の計約24項目を含む大部な質問だった。市長の答弁（pos=24246）冒頭で直接対応が確認できた3項目（予算編成の重点方針、市長選挙振り返りと投票率、多選禁止の考え方）のみを今回要約対象とした。同じ答弁セグモント内には他に『三期目の抱負（マニフェスト・内藤記念館等再整備）』『市内経済の状況と対策（消費増税）』『特命担当副市長の企業誘致活動評価』の3項目も含まれていたが、今回は時間の制約により要約を見送った（推測で埋めていない）。残りの項目（副市長・企画部長・総務部長・商工観光部長・都市建設部長・消防長・教育部長・北浦町総合支所長の答弁、order8以降）は未取得。speechType『総括質疑・一般質問』はsrc/lib/questionLikeSpeechTypes.tsのコメントで甲斐正幸議員の令和8年3月分の実例として明記されている値と同一区分。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonの既存m08レコード（memberId:'m08'）のspeeches配列へこのspeechオブジェクトを追加する（新規メンバーオブジェクトの作成は不要）。sessionId:2014-03がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること（本ファイル冒頭blockingDependency参照）。"
+    }
+  ],
+  "networkAccessLog": {
+    "totalRealRequests": 13,
+    "breakdown": [
+      { "step": "listSpeakerSegments(H250611A)", "requests": 1 },
+      { "step": "listSpeakerSegments(H170914A)", "requests": 1 },
+      { "step": "fetchSegmentText(H250611A, pos=3524) 矢野戦一郎 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H170914A, pos=17749) 後藤哲朗 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H250611A, pos=12992) 市長答弁", "requests": 1 },
+      { "step": "fetchSegmentText(H250611A, pos=14956) 企画部長答弁", "requests": 1 },
+      { "step": "fetchSegmentText(H250611A, pos=17274) 総務部長答弁", "requests": 1 },
+      { "step": "fetchSegmentText(H170914A, pos=38543) 助役答弁", "requests": 1 },
+      { "step": "fetchSegmentText(H170914A, pos=40037) 企画部長答弁", "requests": 1 },
+      { "step": "resolveYearTreedepth(2014) + listSessionsForYear(2014)", "requests": 0, "note": "Phase56のキャッシュ（scripts/.cache/minutes/）にヒットしたため新規アクセス0回" },
+      { "step": "listMeetingDays(平成26年 第19回定例会)", "requests": 1 },
+      { "step": "listSpeakerSegments(H260304A)", "requests": 1 },
+      { "step": "fetchSegmentText(H260304A, pos=9352) 甲斐正幸 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H260304A, pos=24246) 市長答弁", "requests": 1 }
+    ],
+    "budgetLimit": 25,
+    "consumed": 13,
+    "note": "getFetchStats()で実測（各ステップ実行前後のcompleted差分）。429/403/5xxは0件。同一ページの再取得は行っていない。"
+  },
+  "summary": {
+    "count2010sAdded": 1,
+    "count2000sAdded": 1,
+    "note2010sAdded": "矢野戦一郎（2013-06-11、6項目）が2010年代1件。甲斐正幸（2014-03-04、3項目、m08既存レコードへの追加候補）も2010年代だが『新規パイロット会期』として別カウント。",
+    "note2000sAdded": "後藤哲朗（2005-09-14、8項目）が2000年代1件。",
+    "memberMappingResolvedCount": 3,
+    "memberMappingPendingCount": 0,
+    "duplicateExcludedCount": 0,
+    "parserRegressionCount": 0,
+    "warnings": [
+      "councilSessions.jsonに2019-06以前の会期エントリが存在しないため、本ファイルの3件はいずれもisPublished:falseとし、sessionIdの追加が別タスクとして必須であることをblockingDependencyに明記した。",
+      "矢野戦一郎（6/約10項目）・後藤哲朗（8/18項目）・甲斐正幸（3/約24項目）とも、壇上質問の全項目に対する答弁を網羅できていない。無理に埋めず、取得できた範囲のみを構造化した。",
+      "甲斐正幸の2014-03-04分は、既に会議録収録範囲（2019-06以降）で14件のspeechesが登録済みのm08（現職継続議員）に対する『旧任期（term:previous）』の追加である点で、fm14/fm49（元議員の新規メンバー行追加）とは性質が異なる。councilSpeechSummaries.json全体で見ると、term:previousの前例（152件）は全てcouncilSessions.json収録範囲内（2019-06以降）のみであり、2019年より前の日付にterm:previousを使う前例は今回が初めてとなる。"
+    ]
+  }
+}

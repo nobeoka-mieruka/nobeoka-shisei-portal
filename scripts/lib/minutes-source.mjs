@@ -430,23 +430,58 @@ function parseYearTabs(html) {
   return tabs;
 }
 
-/** "令和 8年" → 2026、"令和 5年～令和 7年" → {fromYear: 2023, toYear: 2025}。令和のみ対応（平成以前は今回対象外）。 */
+// Phase56（2026-08）で平成対応を追加。令和のロジック・定数値は一切変更していない
+// （REIWA_START_YEAR=2018はPhase45-47以前から変わらず、令和分岐の計算式・返り値も従来どおり）。
+// 元号の判定は常に「元号の文字列そのもの」（令和／平成という文字、または西暦年からどちらの
+// 元号レンジに属するか）で行い、年の数値だけでは判定しない（同じ数値が令和にも平成にも
+// なり得るため）。
+const REIWA_START_YEAR = 2018; // 令和1年 = 2019年（西暦 = 2018 + 元号年）
+const HEISEI_START_YEAR = 1988; // 平成1年 = 1989年（西暦 = 1988 + 元号年）
+
+// See.exeのタブ表示は元号ごとに書式が異なることを実データで確認済み（Phase56、curl検証）：
+// - 令和：個別年は全角スペース入り「令和 8年」（「令和元年」のみ例外でスペースなし）
+// - 平成：個別年は常にスペースなし「平成26年」「平成31年」（「平成元年」も同形式と推定。
+//   実データ確認は「平成24年」以降のみ。root See.exeの最古タブが「平成12年～平成14年」の
+//   ため、平成元年〜平成11年の個別タブは今回の調査では存在確認できていない）
+const ERA_CONFIG = {
+  令和: {
+    startYear: REIWA_START_YEAR,
+    label: (eraNum) => (eraNum === 1 ? "令和元年" : `令和 ${eraNum}年`),
+  },
+  平成: {
+    startYear: HEISEI_START_YEAR,
+    label: (eraNum) => (eraNum === 1 ? "平成元年" : `平成${eraNum}年`),
+  },
+};
+
+/**
+ * "令和 8年" → {fromYear: 2026, toYear: 2026}、"令和 5年～令和 7年" → {fromYear: 2023, toYear: 2025}、
+ * "平成27年～平成29年" → {fromYear: 2015, toYear: 2017}、"平成30年～令和元年" → {fromYear: 2018, toYear: 2019}
+ * （元号をまたぐグループタブにも対応。実データで確認済み＝Phase56）。
+ */
 function parseYearRange(altLabel) {
-  const nums = [...altLabel.matchAll(/令和\s*(元|\d+)年/g)].map((m) => (m[1] === "元" ? 1 : Number(m[1])));
-  if (nums.length === 0) return null;
-  const toCalendarYear = (eraNum) => eraNum + 2018;
-  const years = nums.map(toCalendarYear);
+  const matches = [...altLabel.matchAll(/(令和|平成)\s*(元|\d+)年/g)];
+  if (matches.length === 0) return null;
+  const years = matches.map((m) => {
+    const eraNum = m[2] === "元" ? 1 : Number(m[2]);
+    return ERA_CONFIG[m[1]].startYear + eraNum;
+  });
   return { fromYear: Math.min(...years), toYear: Math.max(...years) };
 }
 
 /**
  * 指定した西暦年に対応する、See.exeの「年」treedepth値を解決する（サイドバーのタブを実際に
- * 解析して求める。値を推測で組み立てない）。令和5年〜令和8年の範囲で動作確認済み。
+ * 解析して求める。値を推測で組み立てない）。
+ * 令和5年〜令和8年の範囲で動作確認済み（既存）。平成12年（2000年）〜平成29年（2017年）の範囲は
+ * Phase56で追加実データ確認済み（平成25年・平成17年を実際にcurlで解決）。元号の判定は西暦年が
+ * 2019年以上か否かで行う（2019年は令和元年として扱う。既存の令和ロジックの挙動を変更していない）。
  * @param {{code: string, year: number}} params
  */
 export async function resolveYearTreedepth({ code, year }) {
-  const eraNum = year - 2018;
-  const targetLabel = eraNum === 1 ? "令和元年" : `令和 ${eraNum}年`;
+  const eraName = year >= REIWA_START_YEAR + 1 ? "令和" : "平成";
+  const config = ERA_CONFIG[eraName];
+  const eraNum = year - config.startYear;
+  const targetLabel = config.label(eraNum);
 
   const rootHtml = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe?Code=${code}`, {}).then(({ buf }) => decodeSjis(buf));
   let tabs = parseYearTabs(rootHtml);
@@ -464,7 +499,7 @@ export async function resolveYearTreedepth({ code, year }) {
       if (t.treedepth === targetLabel) return t.treedepth;
     }
   }
-  throw new Error(`年 ${year} に対応するタブが見つかりませんでした（令和5年〜令和8年の範囲で確認済み）`);
+  throw new Error(`年 ${year} に対応するタブが見つかりませんでした（令和5年〜令和8年、平成12年〜平成29年の範囲で確認済み）`);
 }
 
 /** 会期ラベル（例: "令和 7年 第15回臨時会"）から、回次・区分を抽出する。 */
@@ -473,15 +508,25 @@ function parseSessionLabel(label) {
   return m ? { sessionNumber: `第${m[1]}回`, sessionType: m[2] } : { sessionNumber: undefined, sessionType: undefined };
 }
 
-const REIWA_START_YEAR = 2018; // 令和1年 = 2019年（西暦 = 2018 + 元号年）
-
-/** 会議ファイル名（例: "R080216A" → 令和8年2月16日）をISO形式の日付へ変換する。令和のみ対応。 */
+/**
+ * 会議ファイル名（例: "R080216A" → 令和8年2月16日、"H250611A" → 平成25年6月11日）を
+ * ISO形式の日付へ変換する。令和（Rプレフィックス）・平成（Hプレフィックス）に対応
+ * （平成対応はPhase56で追加。令和の分岐・返り値は変更していない）。
+ */
 export function fileNameToIsoDate(fileName) {
-  const m = fileName.match(/^R(\d{2})(\d{2})(\d{2})[A-Z]$/);
-  if (!m) return undefined;
-  const [, eraYearStr, monthStr, dayStr] = m;
-  const year = REIWA_START_YEAR + Number(eraYearStr);
-  return `${year}-${monthStr}-${dayStr}`;
+  const reiwaMatch = fileName.match(/^R(\d{2})(\d{2})(\d{2})[A-Z]$/);
+  if (reiwaMatch) {
+    const [, eraYearStr, monthStr, dayStr] = reiwaMatch;
+    const year = REIWA_START_YEAR + Number(eraYearStr);
+    return `${year}-${monthStr}-${dayStr}`;
+  }
+  const heiseiMatch = fileName.match(/^H(\d{2})(\d{2})(\d{2})[A-Z]$/);
+  if (heiseiMatch) {
+    const [, eraYearStr, monthStr, dayStr] = heiseiMatch;
+    const year = HEISEI_START_YEAR + Number(eraYearStr);
+    return `${year}-${monthStr}-${dayStr}`;
+  }
+  return undefined;
 }
 
 /**
@@ -580,7 +625,9 @@ export async function fetchSegmentText({ code, fileName, pos }) {
  * 議員かどうかの確定にはmembers.jsonとの突き合わせが必要（このモジュールでは行わない）。
  */
 export function classifySpeakerLabel(label) {
-  const officialTitles = ["市長", "副市長", "教育長", "選挙管理委員会委員長", "監査委員"];
+  // "助役"はPhase56で追加（平成期の会議録で副市長制導入以前に使われていた役職名。
+  // Phase45-47で平成17年＝2005年の会議録に実例を確認済み。"official"区分として扱う）。
+  const officialTitles = ["市長", "副市長", "教育長", "選挙管理委員会委員長", "監査委員", "助役"];
   for (const title of officialTitles) {
     if (label.startsWith(title)) return { speakerType: title === "市長" ? "mayor" : "official", title };
   }

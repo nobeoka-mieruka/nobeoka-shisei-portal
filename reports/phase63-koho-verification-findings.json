@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-08-23",
+  "purpose": "Phase63：広報のべおかOCR候補D・E（Phase42/52で未照合だった2件）を実PDF画像照合により確定し、その過程で発見したcitySpecialPosts.json追記候補2件と合わせて、マージ可能な形式で記録する。本JSON自体はsrc/dataではなくreports配下の別ファイルであり、実データへの反映は行っていない。未照合・未確認の事項は一切含めていない。",
+  "newTimelineEvents": [
+    {
+      "id": "civic-209",
+      "year": 2018,
+      "dateLabel": "2018年4月1日",
+      "category": "行政組織",
+      "title": "市役所組織改編（健康長寿のまちづくり課・林務課の新設ほか）",
+      "summary": "2018年4月1日付で市役所の組織体制が改正された。健康福祉部では高齢福祉課に「地域福祉係」を新設、「健康長寿推進室」を「健康長寿のまちづくり課」に改組。農林水産部では「林務課」を新設、「農林畜産課」を「農業畜産課」に改称し「農産物振興係」を新設、「農山村整備課」を廃止し事務を総合農政課・林務課へ移管した。このほか、上下水道局収納対策課「営業係」の「地域連携係」への改称、資源対策課「業務係」廃止・「地域企画係」新設、教育委員会への「野口遵記念館建設室」「県体育館整備準備室」の新設も行われた。",
+      "relatedPersonIds": [],
+      "sourceRefs": [
+        {
+          "label": "広報のべおか2018年4月号 p.8（「4月1日から市役所の組織体制が変わります」記事全文）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2607.pdf"
+        }
+      ],
+      "lastVerifiedAt": "2026-08-23",
+      "verificationStatus": "verified",
+      "notes": "Phase42（OCR検索）で目次記載のみ発見・候補D（確信度低）としていたものを、Phase63でPDF実画像により本文全文を確認し確定した。"
+    }
+  ],
+  "newSpecialPosts": [
+    {
+      "id": "csp-55",
+      "role": "deputy-mayor",
+      "roleLabel": "副市長",
+      "name": "中間 弘",
+      "nameKana": "なかま ひろし",
+      "status": "former",
+      "appointedDate": "2020-06-25",
+      "retiredDate": null,
+      "termNote": "2020年6月25日、令和2年6月定例会（議案第28号）で副市長に選任（同意）。広報のべおか2020年8月号の記事（2020年7月11日、市内海水浴場開き合同セレモニーでの挨拶）で、同時期に「中間副市長」として在職していたことを確認した。前任者・後任者は未確認（荒井崇氏〈csp-40〉が前任、小泉智明氏〈csp-26、2023-06-27就任〉が後任である可能性が時期的にはあるが、直接の交代を示す資料は確認できていない）。退任日も未確認。",
+      "relatedLinks": [],
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 第8回定例会（令和2年6月9日〜25日）議案審査等結果 議案第28号「副市長の選任（中間弘氏）」原案同意（6月25日）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1558.pdf"
+        },
+        {
+          "label": "広報のべおか2020年8月号 p.2-3（2020年7月11日、市内海水浴場開き合同セレモニーで「中間副市長」が挨拶した旨の記載）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2579.pdf"
+        }
+      ],
+      "notes": "Phase42（広報のべおかOCR、候補E「中間副市長」の姓のみ確認）→Phase63で、既存billVotes.json（2020-06-gian-28）のフルネーム記載を発見し、その根拠PDF（議案審査等結果）を実際にcurl取得・画像照合してフルネームおよび選任日を確定した。",
+      "lastVerifiedAt": "2026-08-23"
+    }
+  ],
+  "specialPostUpdateCandidates": [
+    {
+      "targetId": "csp-39",
+      "name": "山本 一丸",
+      "currentRole": "deputy-mayor",
+      "proposedAddition": {
+        "field": "termNote / sourceRefs",
+        "description": "2018年4月1日の初回就任（appointedDateは変更しない）に加え、2022年3月25日に副市長として再任（2期目）されたことを示す議決記録を追加する。",
+        "reappointedDate": "2022-03-25"
+      },
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 第14回定例会（令和4年3月）議案審査等結果 議案第143号「副市長の選任（山本一丸氏）」原案同意（3月25日）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/8530.pdf"
+        }
+      ],
+      "confidence": "high",
+      "notes": "billVotes.json（2022-03-gian-143、verificationStatus: verified）に既存記載があったが、citySpecialPosts.jsonのcsp-39には未反映。Phase63でresultDocumentUrlを実際にcurl取得・画像照合し、議案タイトル・議決日・結果を直接確認した。",
+      "verifiedAt": "2026-08-23"
+    },
+    {
+      "targetId": "csp-41",
+      "name": "澤野 幸司",
+      "currentRole": "superintendent",
+      "proposedAddition": {
+        "field": "termNote / sourceRefs",
+        "description": "2018年9月14日の初回就任（appointedDateは変更しない）に加え、2021年9月17日に教育長として再任（2期目）されたことを示す議決記録を追加する。3年任期のため、次代・髙森賢一氏（csp-03、2024-09-20就任）就任の直前（2024年9月19日ごろ）に任期満了で退任したとみられるが、退任日自体は確定情報ではないためretiredDateへは反映しない。",
+        "reappointedDate": "2021-09-17"
+      },
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 第9回定例会（令和3年9月）議案審査等結果 議案第59号「教育長の選任（澤野幸司氏）」原案同意（9月17日）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6051.pdf"
+        }
+      ],
+      "confidence": "high",
+      "notes": "billVotes.json（2021-09-gian-59、verificationStatus: verified）に既存記載があったが、citySpecialPosts.jsonのcsp-41には未反映。Phase63でresultDocumentUrlを実際にcurl取得・画像照合し、議案タイトル・議決日・結果を直接確認した。",
+      "verifiedAt": "2026-08-23"
+    }
+  ]
+}

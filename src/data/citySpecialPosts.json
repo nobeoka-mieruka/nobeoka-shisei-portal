@@ -887,7 +887,7 @@
     "status": "former",
     "appointedDate": "2018-04-01",
     "retiredDate": null,
-    "termNote": "総括担当副市長。2018年3月26日、平成30年第16回定例会（議案第123号）で選任議決（本会議録で確認）。既存civicTimelineEvents.json civic-156（就任日2018-04-01、宮崎日日新聞出典）と対応する事実を、会議録で追加確認した。2025年7月1日〜19日は市長職務代理者（既存データ）。退任日は未確認（Phase23時点。2025年8月12日就任の赤木繁男氏（csp-01）が後任とみられるが、直接の交代を示す資料は今回確認していない）。",
+    "termNote": "総括担当副市長。2018年3月26日、平成30年第16回定例会（議案第123号）で選任議決（本会議録で確認）。既存civicTimelineEvents.json civic-156（就任日2018-04-01、宮崎日日新聞出典）と対応する事実を、会議録で追加確認した。2025年7月1日〜19日は市長職務代理者（既存データ）。退任日は未確認（Phase23時点。2025年8月12日就任の赤木繁男氏（csp-01）が後任とみられるが、直接の交代を示す資料は今回確認していない）。 2022-03-25、再任（2期目）。",
     "relatedLinks": [
       {
         "label": "civicTimelineEvents civic-156（2018年、副市長就任）",
@@ -898,10 +898,14 @@
       {
         "label": "延岡市議会会議録検索システム 平成30年第16回定例会（第7号 3月26日、議案第123号副市長の選任、市長・読谷山洋司氏の提案理由説明）",
         "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300326A&startPos=0"
+      },
+      {
+        "label": "延岡市議会 第14回定例会（令和4年3月）議案審査等結果 議案第143号「副市長の選任（山本一丸氏）」原案同意（3月25日）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/8530.pdf"
       }
     ],
-    "notes": "Phase23（Block2）で会議録による選任議決の日付を追加確認した（civicTimelineEvents civic-156は宮崎日日新聞のみを出典としていたため、一次資料である会議録を追加した）。",
-    "lastVerifiedAt": "2026-08-21"
+    "notes": "Phase23（Block2）で会議録による選任議決の日付を追加確認した（civicTimelineEvents civic-156は宮崎日日新聞のみを出典としていたため、一次資料である会議録を追加した）。 Phase63で再任記録を追記（billVotes.json（2022-03-gian-143、verificationStatus: verified）に既存記載があったが、citySpecialPosts.jsonのcsp-39には未反映。Phase63でresultDocumentUrlを実際にcurl取得・画像照合し、議案タイトル・議決日・結果を直接確認した。）",
+    "lastVerifiedAt": "2026-08-23"
   },
   {
     "id": "csp-40",
@@ -930,7 +934,7 @@
     "status": "former",
     "appointedDate": "2018-09-14",
     "retiredDate": null,
-    "termNote": "2018年9月14日、平成30年第19回定例会（議案第47号）で選任議決。前任・笠江孝一氏が同年10月8日に任期満了となるための後任選任（発令日は2018年10月9日頃と推定されるが未確認）。経歴（市長発言）：昭和61年から小学校教諭、宮崎県教育研修センター総務課主幹、延岡市立南小学校長等を歴任後、選任当時（2018年4月〜）は延岡市学校教育課長。退任日は未確認（Phase23時点。2024年9月20日就任の髙森賢一氏（csp-03）が後任とみられる）。",
+    "termNote": "2018年9月14日、平成30年第19回定例会（議案第47号）で選任議決。前任・笠江孝一氏が同年10月8日に任期満了となるための後任選任（発令日は2018年10月9日頃と推定されるが未確認）。経歴（市長発言）：昭和61年から小学校教諭、宮崎県教育研修センター総務課主幹、延岡市立南小学校長等を歴任後、選任当時（2018年4月〜）は延岡市学校教育課長。退任日は未確認（Phase23時点。2024年9月20日就任の髙森賢一氏（csp-03）が後任とみられる）。 2021-09-17、再任（2期目）。",
     "relatedLinks": [
       {
         "label": "教育長 髙森賢一氏（csp-03、後任）",
@@ -941,10 +945,14 @@
       {
         "label": "延岡市議会会議録検索システム 平成30年第19回定例会（第5号 9月14日、議案第47号教育長の選任、市長・読谷山洋司氏の提案理由説明）",
         "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300914A&startPos=0"
+      },
+      {
+        "label": "延岡市議会 第9回定例会（令和3年9月）議案審査等結果 議案第59号「教育長の選任（澤野幸司氏）」原案同意（9月17日）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6051.pdf"
       }
     ],
-    "notes": "Phase23（Block2）で新規発見。既存citySpecialPosts.jsonには教育長の現職（髙森賢一氏、csp-03）のみが登録されていたため、前々任者を追加した。",
-    "lastVerifiedAt": "2026-08-21"
+    "notes": "Phase23（Block2）で新規発見。既存citySpecialPosts.jsonには教育長の現職（髙森賢一氏、csp-03）のみが登録されていたため、前々任者を追加した。 Phase63で再任記録を追記（billVotes.json（2021-09-gian-59、verificationStatus: verified）に既存記載があったが、citySpecialPosts.jsonのcsp-41には未反映。Phase63でresultDocumentUrlを実際にcurl取得・画像照合し、議案タイトル・議決日・結果を直接確認した。）",
+    "lastVerifiedAt": "2026-08-23"
   },
   {
     "id": "csp-42",
@@ -1211,5 +1219,29 @@
     ],
     "notes": "Phase29〜31（1933〜1959年度調査）で新規発見。下の名・退任日ともに今回未確認。終戦直後の在任。",
     "lastVerifiedAt": "2026-08-22"
+  },
+  {
+    "id": "csp-55",
+    "role": "deputy-mayor",
+    "roleLabel": "副市長",
+    "name": "中間 弘",
+    "nameKana": "なかま ひろし",
+    "status": "former",
+    "appointedDate": "2020-06-25",
+    "retiredDate": null,
+    "termNote": "2020年6月25日、令和2年6月定例会（議案第28号）で副市長に選任（同意）。広報のべおか2020年8月号の記事（2020年7月11日、市内海水浴場開き合同セレモニーでの挨拶）で、同時期に「中間副市長」として在職していたことを確認した。前任者・後任者は未確認（荒井崇氏〈csp-40〉が前任、小泉智明氏〈csp-26、2023-06-27就任〉が後任である可能性が時期的にはあるが、直接の交代を示す資料は確認できていない）。退任日も未確認。",
+    "relatedLinks": [],
+    "sourceRefs": [
+      {
+        "label": "延岡市議会 第8回定例会（令和2年6月9日〜25日）議案審査等結果 議案第28号「副市長の選任（中間弘氏）」原案同意（6月25日）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1558.pdf"
+      },
+      {
+        "label": "広報のべおか2020年8月号 p.2-3（2020年7月11日、市内海水浴場開き合同セレモニーで「中間副市長」が挨拶した旨の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2579.pdf"
+      }
+    ],
+    "notes": "Phase42（広報のべおかOCR、候補E「中間副市長」の姓のみ確認）→Phase63で、既存billVotes.json（2020-06-gian-28）のフルネーム記載を発見し、その根拠PDF（議案審査等結果）を実際にcurl取得・画像照合してフルネームおよび選任日を確定した。",
+    "lastVerifiedAt": "2026-08-23"
   }
 ]

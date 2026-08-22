@@ -1,0 +1,276 @@
+{
+  "generatedAt": "2026-08-23",
+  "purpose": "Phase62：UNR-019（FY1990-2000市債データ欠落）について、Phase53で実証済みのe-Stat file-download静的URL経路（表33-1〜33-4）を用い、表33-4の「合計」行から延岡市の地方債現在高（普通会計ベース想定）をFY1990-2000の11年度すべてで新規確定した。src/data/archiveFiscalYears.jsonへマージ可能な形式で本JSONに記録する（本phase自体はsrc/dataを一切編集していない）。",
+  "route": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&year=YYYYY （年度別ファイル一覧、静的URL・JavaScript不要）→ 表33-4（地方債現在高の状況4）のfile-download静的URL（fileKind=1でCSV/Shift_JIS、fileKind=0でXLSX）。表33-1〜33-3の個別区分を手動で横断集計する必要はなく、表33-4内に表33全体の「合計」行（各区分の小計＋特定資金公共事業債の合算値）が既に存在することを新規確認した。",
+  "yearParamToSettlementFiscalYearMapping": {
+    "rule": "e-Stat UI上の year パラメータ末尾0の年（例：year=19910）は、決算年度としては1年前（FY1990）に対応する。Phase53で year=19900→FY1989 の1件のみ実証されていたが、本phaseでy=19910〜20010の11件全てについて、CSV内『決算年度』列の値と、前年度合計（col001）↔当年度差引現在高（col009）の連続性チェックの両方で機械的に再確認・裏付けした。",
+    "examples": [
+      { "yearParam": "19910", "settlementFiscalYear": 1990 },
+      { "yearParam": "20010", "settlementFiscalYear": 2000 }
+    ]
+  },
+  "extractionMethod": {
+    "description": "各年度の表33-4ファイル（CSV、Shift_JIS）をNode.js（iconv-liteでデコード）で解析し、団体コード452033（延岡市）の行のうち、行名称が完全一致で『合計』である行の『009:差引現在高』列（決算年度末の地方債現在高）を採用した。『小計』『合計・うち減収補てん債』等の類似ラベルは除外した。",
+    "unit": "千円（他都市の規模との比較、および隣接年度・FY2001の既存登録値との連続性から千円単位と判断。円への変換は×1000で実施）",
+    "crossValidation": "FY1990〜FY1999の10組すべてで、当年度『合計』行の差引現在高（col009）が、翌年度『合計』行の期首残高（col001＝『前年度末現在高』）と完全一致することを確認した（10/10一致）。さらにFY2000の確定値（47,488,221千円）は、既存src/data登録済みのFY2001値（48,028,775,000円＝48,028,775千円、総務省市町村決算カード由来・別資料）と滑らかに連続する（+1.1%）ことも確認した。",
+    "specialCaseFY2000": "year=20010（FY2000）のみ表33-4内に『合計』ラベルの行が2件存在した（行39：差引現在高47,488,221、行41-42：特定資金公共事業債0→合計0の付随行）。行39が前年度末残高（col001=46,594,418）と整合するため、行39を採用し、全ゼロの行42は不採用とした。他の10年度はいずれも『合計』行は1件のみだった。"
+  },
+  "confirmedValues": [
+    {
+      "fiscalYear": 1990,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 26540191000,
+      "unit": "円（26,540,191千円）",
+      "confidence": "confirmed",
+      "notes": "既存レコードにdebtフィールド自体が存在しないため新規追加。表33-4「合計」行（行番号37）の差引現在高。翌年度（FY1991）ファイルの期首残高と完全一致で裏付け済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447133&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19910、決算年度1990）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview",
+          "notes": "団体コード452033（延岡市）、表番号33、行番号37『合計』、差引現在高列。"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1991,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 26870153000,
+      "unit": "円（26,870,153千円）",
+      "confidence": "confirmed",
+      "notes": "期首残高がFY1990確定値と完全一致、期末残高が翌年度ファイルの期首残高と完全一致（チェーン検証済み）。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446944&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19920、決算年度1991）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1992,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 27753734000,
+      "unit": "円（27,753,734千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446110&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19930、決算年度1992）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1993,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 28765642000,
+      "unit": "円（28,765,642千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445976&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19940、決算年度1993）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1994,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 30503663000,
+      "unit": "円（30,503,663千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445819&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19950、決算年度1994）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1995,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 34040979000,
+      "unit": "円（34,040,979千円）",
+      "confidence": "confirmed",
+      "notes": "この年度以降、表構造上『小計』ラベルが『合計』に統合される（特定資金公共事業債が0のため）。チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443704&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19960、決算年度1995）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1996,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 40081326000,
+      "unit": "円（40,081,326千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443056&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19970、決算年度1996）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1997,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 42773153000,
+      "unit": "円（42,773,153千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442816&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19980、決算年度1997）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1998,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 45346059000,
+      "unit": "円（45,346,059千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443996&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19990、決算年度1998）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1999,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 46594418000,
+      "unit": "円（46,594,418千円）",
+      "confidence": "confirmed",
+      "notes": "チェーン検証済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444198&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=20000、決算年度1999）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2000,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 47488221000,
+      "unit": "円（47,488,221千円）",
+      "confidence": "confirmed",
+      "notes": "同ファイル内に『合計』ラベル行が2件あるうち、期首残高がFY1999確定値と一致する行（行39）を採用（詳細はextractionMethod.specialCaseFY2000参照）。既存登録済みFY2001値（48,028,775,000円、決算カード由来）と連続性あり（+1.1%）。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443033&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=20010、決算年度2000）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行（行39、期首残高がFY1999値と一致するもの）を抽出",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    }
+  ],
+  "definitionNoteProposal": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+  "unr020PopulationHouseholdTimeseries": {
+    "toolConstraintStatus": "resolved",
+    "notes": "UNR-020で『.xls解析ツールが本環境に存在しない』とされていたが、本phaseで既存依存パッケージ`xlsx`（package.json記載、追加インストール不要）が対象の.xls（BIFF/CFBF形式、Excel 97-2003形式）を問題なく読み込めることを実証した。28569.xls（現住人口及び世帯数の推移、平成9年〜令和8年、月次693行）・26961.xls（町丁目別人口、平成19年〜令和8年、20シート）のいずれもXLSX.readFile()で正常にパース可能だった。",
+    "sampleExtractedJanuary1Series": [
+      { "date": "1997-01-01", "population": 126297, "households": 45645 },
+      { "date": "1998-01-01", "population": 125738, "households": 46008 },
+      { "date": "1999-01-01", "population": 125205, "households": 46357 },
+      { "date": "2000-01-01", "population": 124931, "households": 47001 },
+      { "date": "2001-01-01", "population": 124773, "households": 46947 },
+      { "date": "2010-01-01", "population": 130680, "households": 53507 },
+      { "date": "2020-01-01", "population": 119164, "households": 52042 },
+      { "date": "2026-01-01", "population": 109266, "households": 50224 }
+    ],
+    "areaTimeseries": "面積（土地面積）の年次時系列は、既知の2ファイル（28569.xls・26961.xls）のいずれにも列として存在しないことを再確認した（人口・世帯数・人口動態のみで面積列なし）。面積データの別ソース特定は本phase未着手。",
+    "scopeNote": "本phaseはツール制約の解消確認とサンプル抽出のみを目的とし、nobeokaCensusPopulation.jsonへの実データ統合・スキーマ拡張（世帯数・面積フィールド追加）は行っていない（編集許可範囲外、かつ大量backfillのため次phaseでの対応を推奨）。上記sampleExtractedJanuary1Seriesは1997年（H9）〜2026年（R8）の毎年1月1日時点データの一部抜粋（全30年度分が同ファイルから取得可能）。"
+  },
+  "unr021Reiwa7CensusStatus": {
+    "status": "unchanged",
+    "notes": "令和7年国勢調査の確報（基本集計）は本phase時点（2026-08-23）でまだ未公表。総務省統計局の公表予定によれば、速報集計（2026-05-29公表済み、既存登録済み）に続き、基本集計は「令和8年9月まで」に公表予定（e-Stat上も現時点で速報集計3ファイルのみ掲載を確認、基本集計・確報の掲載は無し）。UNR-021のステータスはreference_pendingのまま変化なし。",
+    "sourceRefs": [
+      {
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2025/kekka.html",
+        "sourceTitle": "総務省統計局 令和7年国勢調査 調査の結果",
+        "accessedAt": "2026-08-23"
+      },
+      {
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tstat=000001230925",
+        "sourceTitle": "e-Stat 令和7年国勢調査 統計表ファイル一覧",
+        "accessedAt": "2026-08-23"
+      }
+    ]
+  },
+  "otherNullFieldsCheck": {
+    "scope": "FY2000年以前（financialStrengthIndex・currentAccountRatioPercent等）",
+    "result": "変化なし。既存確認（総務省市町村決算カードの最古掲載年度がFY2001）のとおり、FY2000以前についてはオンラインで取得可能な同種資料を新規発見できなかった。今回は同じ探索を繰り返していない。",
+    "additionalObservation": "スコープ外の参考情報として、debtServiceRatioPercent（公債費負担比率）がFY2001-2011の11年度・FY2018-2019・FY2025-2026で依然nullであることを確認した（本phaseの指示範囲＝FY2000以前ではないため今回は追跡・取得作業を行っていない）。次フェーズでの調査候補として記録するのみ。"
+  },
+  "summary": {
+    "unr019": {
+      "newFiscalYearsConfirmed": 11,
+      "fiscalYearsRange": "FY1990-2000",
+      "debtBalanceCoverageBefore": "24/70レコード（34.3%）",
+      "debtBalanceCoverageAfter": "35/70レコード（50.0%）※本phaseのJSON出力がsrc/dataへ統合された場合の想定値。本phase自体はsrc/data未編集。",
+      "sourceRefsAdded": 11
+    },
+    "unr020": "ツール制約は解消（xlsxパッケージで.xls解析可能と実証）。実データ統合は未実施（スキーマ拡張が必要、次phase推奨）。",
+    "unr021": "変化なし（確報未公表）。",
+    "otherNullFields": "変化なし（FY2000以前は対象外の既存判断を維持）。",
+    "warnings": [
+      "FY1990-2000の値は市町村決算カードではなく『地方財政状況調査 表33』由来のため、定義（普通会計ベースかどうか等）の完全一致は公式文書で明記確認できていない。ただしFY2000→FY2001の数値連続性（+1.1%）から同一スコープの可能性が高いと判断。",
+      "FY2000のみ『合計』ラベル行が2件存在し、期首残高の整合性チェックで正しい行を選別した（詳細はextractionMethod.specialCaseFY2000）。",
+      "本phaseはreports/phase62-finance-backfill-round2-findings.md・.json以外のファイルを一切編集していない。git commit/pushも行っていない。",
+      "UNR-020の実データ統合・UNR-019のsrc/data反映は、いずれも次フェーズ（データ担当）での対応が必要。"
+    ]
+  }
+}

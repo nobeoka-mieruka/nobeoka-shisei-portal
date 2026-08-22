@@ -1121,6 +1121,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1990,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 26540191000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447133&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19910、決算年度1990）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。団体コード452033（延岡市）、表番号33、行番号37『合計』、差引現在高列。 既存レコードにdebtフィールド自体が存在しないため新規追加。表33-4「合計」行（行番号37）の差引現在高。翌年度（FY1991）ファイルの期首残高と完全一致で裏付け済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（26,540,191,000円）。"
     }
   },
   {
@@ -1152,6 +1180,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1991,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 26870153000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446944&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19920、決算年度1991）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 期首残高がFY1990確定値と完全一致、期末残高が翌年度ファイルの期首残高と完全一致（チェーン検証済み）。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（26,870,153,000円）。"
     }
   },
   {
@@ -1183,6 +1239,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1992,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 27753734000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446110&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19930、決算年度1992）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（27,753,734,000円）。"
     }
   },
   {
@@ -1214,6 +1298,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1993,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 28765642000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445976&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19940、決算年度1993）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（28,765,642,000円）。"
     }
   },
   {
@@ -1245,6 +1357,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1994,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 30503663000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445819&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19950、決算年度1994）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（30,503,663,000円）。"
     }
   },
   {
@@ -1276,6 +1416,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1995,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 34040979000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443704&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19960、決算年度1995）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 この年度以降、表構造上『小計』ラベルが『合計』に統合される（特定資金公共事業債が0のため）。チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（34,040,979,000円）。"
     }
   },
   {
@@ -1307,6 +1475,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1996,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 40081326000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443056&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19970、決算年度1996）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（40,081,326,000円）。"
     }
   },
   {
@@ -1338,6 +1534,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1997,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 42773153000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442816&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19980、決算年度1997）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（42,773,153,000円）。"
     }
   },
   {
@@ -1369,6 +1593,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1998,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 45346059000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443996&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19990、決算年度1998）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（45,346,059,000円）。"
     }
   },
   {
@@ -1400,6 +1652,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1999,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 46594418000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444198&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=20000、決算年度1999）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 チェーン検証済み。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（46,594,418,000円）。"
     }
   },
   {
@@ -1431,6 +1711,34 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 2000,
+      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceValueType": null,
+      "municipalBondIssuanceStatus": "notCollected",
+      "municipalBondIssuanceSourceRefs": [],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 47488221000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33（地方債現在高の状況）表33-4内の『合計』行（差引現在高列、決算年度末時点）。FY2001以降の既存登録値（市町村決算カード由来）と同一の一次調査（地方財政状況調査）を基礎とすると推定されるが、決算カードとの完全な定義一致（普通会計ベースか、企業会計を含むか等）は本phaseでは公式文書での明記を確認できていない。FY2000確定値とFY2001既存値の連続性（+1.1%の滑らかな変化）から、同一スコープである可能性が高いと判断した。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443033&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=20010、決算年度2000）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase62調査（総務省「地方財政状況調査」表33-4）。 同ファイル内に『合計』ラベル行が2件あるうち、期首残高がFY1999確定値と一致する行（行39）を採用（詳細はextractionMethod.specialCaseFY2000参照）。既存登録済みFY2001値（48,028,775,000円、決算カード由来）と連続性あり（+1.1%）。"
+          }
+        ]
+      },
+      "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（47,488,221,000円）。"
     }
   },
   {
