@@ -168,36 +168,13 @@
       "personName": "後藤 梅雄",
       "cityRoleId": "csp-46",
       "item": "初回就任日・最終退任日",
-      "candidateHints": [
-        "自1971-02-20〜至1975-02-10",
-        "自1979ごろ〜至1983-02-10ごろ",
-        "自1983-02-10〜至現在（1983年刊行時点）"
-      ],
-      "status": "disputed",
-      "reason": "延岡市史上巻コマ125〜127の一覧表を複数回・複数倍率で再読したが、列と日付の対応関係がPhase27・Phase28で一致しなかった。3つの読みは相互に矛盾する。",
-      "recommendedNextStep": "原本現物確認。可能であれば延岡市議会の人事同意議案記録（会議録検索システム、ただし収録範囲が2000年5月以降のため1970年代分は対象外の可能性が高い）で就任議決日を探す。",
-      "candidateSources": {
-        "primary": {
-          "name": "延岡市議会会議録（助役選任同意議案・退職に関する議案の審議部分）",
-          "institution": "延岡市議会事務局（原本）／宮崎県立図書館（一部複写、〜昭和48年）",
-          "onlineAccess": false,
-          "onsiteRequired": true,
-          "referenceFeasible": "高い（議事日程・議案書に選任同意の記載が期待できる）"
-        },
-        "secondary": {
-          "name": "延岡市議会関係例規集または議員名簿（人事同意議案の記録を含む可能性）",
-          "institution": "宮崎県立図書館（郷土資料総合目録に書名記載を確認済み、現物未確認）",
-          "onlineAccess": false,
-          "onsiteRequired": true,
-          "referenceFeasible": "中"
-        },
-        "tertiary": {
-          "name": "延岡市職員録（存在未確認）",
-          "institution": "未確認（延岡市役所人事課または延岡市立図書館の可能性）",
-          "onlineAccess": false,
-          "onsiteRequired": true,
-          "referenceFeasible": "低〜中（資料の存在自体が未確認）"
-        }
+      "status": "resolved",
+      "resolvedAt": "2026-08-22",
+      "resolution": "延岡市史上巻コマ126の一覧表を40%ズーム・単一クリック方式で再閲覧し、14代（自1971-02-20〜至1979-02-19）・15代（自1979-02-20〜至1983-02-19）の2期連続と確定した（csp-46へ反映済み）。直前13代・房野博の助役在任終了日（1971-02-19）との連続性で読み取りの整合性を確認。ただし次代16代「（後藤）三樹博」の開始日（1983-02-10）との9日間の重複は原本自体の記載であり未解消（csp-46 termNote参照）。",
+      "remainingSubIssue": {
+        "item": "16代「（後藤）三樹博」の姓の確認、および15代との9日間の日付重複の理由",
+        "status": "unconfirmed",
+        "note": "姓が「後藤」であることは本コマでは確実に確認できず（1993年版コマ425の手がかりからの推定にとどまる）。日付重複は原本の記載どおりで、当サイト側の転記ミスではない。"
       }
     },
     {
@@ -266,25 +243,24 @@
       "category": "treasurer",
       "years": "1970-1979",
       "item": "収入役氏名",
-      "status": "unconfirmed",
-      "reason": "延岡市史上巻コマ125の「助役、収入役および固定資産評価員」一覧表は複数役職が並列掲載されており、1970年代の収入役氏名を高い確度で特定できなかった。",
-      "recommendedNextStep": "同一覧表の高解像度再読、または原本現物確認。",
+      "status": "partially_resolved",
+      "resolvedAt": "2026-08-22",
+      "resolution": "延岡市史上巻コマ126「歴代市長、助役および収入役等」一覧表「2 収入役」を再閲覧し、10代・11代（吉田厚、〜1972年ごろ）・12代・13代（高橋重行、1972年ごろ〜1978-01-04辞職）を新規確認し、citySpecialPosts.json csp-47（高橋重行）・csp-48（吉田厚）・csp-49（高島安三郎、7〜9代）として登録した。",
+      "remainingSubIssue": {
+        "item": "1978年1月4日（高橋重行辞職）以降の後任者氏名",
+        "status": "unconfirmed",
+        "reason": "延岡市史上巻の同一覧表は13代（高橋重行）で終わっており、次のコマ127以降は「固定資産評価員」「市役所事務機構」という別テーマに移っていた。14代以降の記載は本資料からは発見できなかった。",
+        "recommendedNextStep": "延岡市議会会議録（収入役選任同意議案、1978年以降分）または延岡市史下巻・1993年版等、別資料での確認が必要。"
+      },
       "candidateSources": {
         "primary": {
-          "name": "延岡市議会会議録（収入役選任同意議案の審議部分）",
-          "institution": "延岡市議会事務局（原本）／宮崎県立図書館（一部複写、〜昭和48年）",
+          "name": "延岡市議会会議録（収入役選任同意議案の審議部分、1978年以降分）",
+          "institution": "延岡市議会事務局（原本）",
           "onlineAccess": false,
           "onsiteRequired": true,
           "referenceFeasible": "高い"
         },
         "secondary": {
-          "name": "延岡市史1983年版上巻コマ125の一覧表（高解像度再読）",
-          "institution": "NDLデジタルコレクション（オンライン、既に閲覧済み）",
-          "onlineAccess": true,
-          "onsiteRequired": false,
-          "referenceFeasible": "既にオンラインで到達済みだが読み取り精度が不足。"
-        },
-        "tertiary": {
           "name": "延岡市統計月報・延岡市税務要覧（存在は宮崎県郷土資料総合目録で確認済み、内容未確認）",
           "institution": "宮崎県立図書館",
           "onlineAccess": false,
@@ -352,5 +328,14 @@
     "endingUnresolvedCount": 9,
     "newlyResolvedCount": 0,
     "note": "各unresolved項目のcandidateSourcesフィールドに、最有力／第2候補／第3候補の資料と所蔵機関・オンライン可否・現地要否・照会可能性を追記した。詳細な整理はreports/phase29-physical-source-plan.md、機関別マトリックスはreports/phase29-unresolved-source-matrix.jsonを参照。"
+  },
+  "phase27Resume": {
+    "generatedAt": "2026-08-22",
+    "purpose": "延岡市史上巻コマ126「歴代市長、助役および収入役等」一覧表を再閲覧し、助役・収入役の任期を可能な限り確定する。",
+    "startingUnresolvedCount": 9,
+    "resolvedCount": 1,
+    "partiallyResolvedCount": 1,
+    "endingUnresolvedCount": 7,
+    "note": "assistantMayor（後藤梅雄の助役任期）をresolvedへ、treasurer（収入役氏名）をpartially_resolvedへ更新した。resolved/partially_resolvedの2項目は本ファイルのunresolved配列に残しているが、statusフィールドで区別している（配列からの削除は行っていない。監査の連続性を優先）。新規に確定した助役・収入役の詳細はreports/phase27-fy1970s-checkpoint-raw.md、およびsrc/data/citySpecialPosts.json（csp-46更新、csp-47〜49新規）を参照。"
   }
 }
