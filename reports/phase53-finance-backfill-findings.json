@@ -1,0 +1,535 @@
+{
+  "generatedAt": "2026-08-22",
+  "purpose": "Phase53：src/data/archiveFiscalYears.jsonへマージ可能な形式で、FY2011-2017のordinaryAccountLocalBondBalanceYen新規確定値と、同ファイルから発見した既存null項目への候補値を記録する。既存登録済みの値は一切上書きしない（本JSON自体もsrc/dataではなくreports配下の別ファイルであり、統合はデータ担当フェーズの判断に委ねる）。",
+  "route": "総務省財政状況資料集 年度別index → 宮崎県ページ → 延岡市個別ファイル（3ホップ、Phase34で確立済み）。H25年度版(FY2013)以降は.xlsx非暗号化、H23-H24年度版(FY2011-2012)は.xls暗号化のため未解析。",
+  "confirmedValues": [
+    {
+      "fiscalYear": 2011,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 66135098000,
+      "unit": "円（66,135,098千円）",
+      "confidence": "confirmed_indirect",
+      "notes": "H23年度版ファイル自体は暗号化(.xls)のため未解析。H25年度版(FY2013決算)ファイルの「将来負担比率（分子）の構造」表に掲載された経年比較列（平成23・24・25年度の3年度分）から間接的に取得した唯一の出典であり、他ファイルでの重複確認はできていない。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+          "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "sheetName": "各会計、関係団体の財政状況及び健全化判断比率",
+          "tableName": "将来負担比率（分子）の構造",
+          "rowLabel": "一般会計等に係る地方債の現在高（平成23年度列）",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2012,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 64993297000,
+      "unit": "円（64,993,297千円）",
+      "confidence": "confirmed",
+      "notes": "H25年度版・H26年度版ファイルの経年比較列で値が完全一致することを確認済み。H24年度版ファイル自体は暗号化(.xls)のため未解析。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+          "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "sheetName": "各会計、関係団体の財政状況及び健全化判断比率",
+          "tableName": "将来負担比率（分子）の構造",
+          "rowLabel": "一般会計等に係る地方債の現在高（平成24年度列）",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+          "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "sheetName": "各会計、関係団体の財政状況及び健全化判断比率",
+          "tableName": "将来負担比率（分子）の構造",
+          "rowLabel": "一般会計等に係る地方債の現在高（平成24年度列）",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2013,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 64134976000,
+      "unit": "円（64,134,976千円）",
+      "confidence": "confirmed",
+      "notes": "H25・H26・H27年度版ファイルの経年比較列で完全一致。同一H25年度版ファイル内「総括表」シートの地方債現在高（同一値）とも一致。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+          "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "sheetName": "各会計、関係団体の財政状況及び健全化判断比率／総括表",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+          "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+          "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2014,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 66500529000,
+      "unit": "円（66,500,529千円）",
+      "confidence": "confirmed",
+      "notes": "H26・H27・H28年度版ファイルの経年比較列で完全一致。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+          "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+          "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+          "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2015,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 63626908000,
+      "unit": "円（63,626,908千円）",
+      "confidence": "confirmed",
+      "notes": "H27・H28・H29年度版ファイルの経年比較列で完全一致。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+          "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+          "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+          "sourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2016,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 60983566000,
+      "unit": "円（60,983,566千円）",
+      "confidence": "confirmed",
+      "notes": "H28・H29年度版ファイルの経年比較列で完全一致。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+          "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+          "sourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 2017,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 59353963000,
+      "unit": "円（59,353,963千円）",
+      "confidence": "confirmed_single_source",
+      "notes": "H29年度版ファイルのみで確認（次年度H30年度版は本phaseで未取得のため重複確認はできていない）。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+          "sourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-22",
+          "sheetName": "各会計、関係団体の財政状況及び健全化判断比率／総括表",
+          "extractionMethod": "xlsx package (node) cell parse",
+          "verificationStatus": "needsReview"
+        }
+      ]
+    }
+  ],
+  "candidateValuesForExistingNullFields": [
+    {
+      "fiscalYear": 2012,
+      "targetPath": "finance.debtServiceRatioPercent",
+      "value": 20.1,
+      "unit": "%",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2012,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "value": 4483107000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列・財政調整基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2012,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "value": 1715920000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列・減債基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2012,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "value": 9476474000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列・その他特定目的基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2013,
+      "targetPath": "finance.debtServiceRatioPercent",
+      "value": 19.7,
+      "unit": "%",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2013,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "value": 5373558000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2013,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "value": 2718364000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2013,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "value": 9582942000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+      "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2014,
+      "targetPath": "finance.debtServiceRatioPercent",
+      "value": 20.3,
+      "unit": "%",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+      "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2014,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "value": 5388159000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+      "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2014,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "value": 2723054000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+      "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2014,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "value": 8846877000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+      "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2015,
+      "targetPath": "finance.debtServiceRatioPercent",
+      "value": 19.6,
+      "unit": "%",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+      "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2015,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "value": 5497467000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+      "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2015,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "value": 3232120000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+      "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2015,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "value": 9175683000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+      "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2016,
+      "targetPath": "finance.debtServiceRatioPercent",
+      "value": 21.1,
+      "unit": "%",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+      "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2016,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "value": 5484105000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+      "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2016,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "value": 2744969000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+      "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2016,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "value": 12042780000,
+      "unit": "円",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+      "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+      "accessedAt": "2026-08-22"
+    },
+    {
+      "fiscalYear": 2017,
+      "targetPath": "finance.debtServiceRatioPercent",
+      "value": 20.1,
+      "unit": "%",
+      "existingValue": null,
+      "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+      "sourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市（総括表シート）",
+      "accessedAt": "2026-08-22",
+      "notes": "既存fund系3項目とは異なり、debtServiceRatioPercentはFY2017も既存null。上書きではなく新規候補として扱ってよい。"
+    }
+  ],
+  "existingValueDiscrepancyNotes": [
+    {
+      "fiscalYear": 2017,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "existingValue": 5296000000,
+      "existingSourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
+      "existingSourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表（平成29年度）",
+      "newlyFoundValue": 5295641000,
+      "newSourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+      "newSourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+      "diffYen": 359000,
+      "diffPercent": 0.007,
+      "action": "do_not_overwrite",
+      "notes": "差は0.007%で丸め誤差の範囲内（既存値は百万円単位の貸借対照表由来、新規値は千円単位の財政状況資料集由来）。上書きしない。"
+    },
+    {
+      "fiscalYear": 2017,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "existingValue": 2456000000,
+      "existingSourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
+      "existingSourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表（平成29年度）",
+      "newlyFoundValue": 2455755000,
+      "newSourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+      "newSourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+      "diffYen": 245000,
+      "diffPercent": 0.01,
+      "action": "do_not_overwrite",
+      "notes": "差は0.01%で丸め誤差の範囲内。上書きしない。"
+    },
+    {
+      "fiscalYear": 2017,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "existingValue": 14320000000,
+      "existingSourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
+      "existingSourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表（平成29年度）",
+      "newlyFoundValue": 12146384000,
+      "newSourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+      "newSourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+      "diffYen": 2173616000,
+      "diffPercent": 15.18,
+      "action": "do_not_overwrite_flag_for_review",
+      "notes": "約21.7億円（約15%）の乖離があり丸め誤差では説明できない。会計区分（貸借対照表の「基金」区分 vs 財政状況資料集の「積立金現在高」区分）の分類基準差の可能性があるが、本phaseでは原因未特定。両方の値と出典を記録し、既存値は上書きしない。次フェーズでの原因精査を推奨。"
+    }
+  ],
+  "supplementaryFindingsNotYetMappedToSchema": [
+    {
+      "description": "総括表シートに「土地開発基金現在高」という別項目があり、既存のArchiveFundBalance型（財政調整基金・減債基金・その他特定目的基金・totalYenの4分類）に対応するフィールドが存在しない。",
+      "values": {
+        "fiscalYear2012": 2278055000,
+        "fiscalYear2013": 2278055000,
+        "fiscalYear2014": 2211153000,
+        "fiscalYear2015": 2209552000,
+        "fiscalYear2016": 2209552000,
+        "fiscalYear2017": 2209552000
+      },
+      "unit": "円",
+      "action": "schema_extension_candidate_not_applied",
+      "notes": "スキーマ拡張が必要なため、本phaseではJSON化・統合は行わない。次フェーズでスキーマ担当が検討する際の参考値として記録。"
+    }
+  ],
+  "unr019Reassessment": {
+    "unresolvedId": "UNR-019",
+    "priorStatus": "unconfirmed",
+    "recommendedStatus": "reference_pending",
+    "recommendedStatusReason": "取得方法は解決した（JavaScript非依存の静的URLで直接ダウンロード可能なCSV/EXCEL/DBファイルが存在することを実証済み）。ただし、複数ファイル（表33-1〜33-4）の区分横断集計と、yearパラメータ↔決算年度の対応関係の確認が未実施のため、FY1990-2000の実数値は本phaseではまだ0件確定。UNR-018がPhase34→Phase53で辿った『経路確立→実行』と同型の中間状態。",
+    "newRouteConfirmed": {
+      "entryUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&year=YYYYY",
+      "downloadUrlPattern": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=XXXXXXXX&fileKind=N",
+      "fileKindNote": "fileKind=1がCSV（Shift_JIS）、fileKind=0がXLSX（.xlsx）。いずれも認証・APIキー不要の静的URL。",
+      "verifiedExample": {
+        "yearParam": "19900",
+        "statInfId": "000031447273",
+        "tableLabel": "表33-1（地方債現在高の状況1）",
+        "settlementFiscalYearInData": 1989,
+        "note": "e-Stat UI上は「年度：1990年」と表示されるが、CSV内『決算年度』列は1989（平成元年度）だった。yearパラメータは調査実施年であり決算年度そのものではない可能性がある（1年のズレ、要各年度での確認）。"
+      },
+      "verifiedNobeokaRowExists": true,
+      "nobeokaOrgCode": "452033",
+      "categoriesFoundInTable33_1Only": [
+        "一般公共事業債",
+        "一般単独事業債",
+        "うち地域総合整備事業債",
+        "うち臨時地方道整備事業債",
+        "うち臨時河川等整備事業債",
+        "うち臨時高等学校整備事業債",
+        "公営住宅建設事業債",
+        "義務教育施設整備事業債",
+        "辺地対策事業債",
+        "公共用地先行取得等事業債",
+        "災害復旧事業債"
+      ],
+      "unresolvedQuestion": "表33-2〜33-4に残りの地方債区分（および「合計」行の有無）が含まれているか未確認。延岡市の地方債現在高「合計」を得るには33-1〜33-4を横断集計する必要がある可能性が高い。"
+    },
+    "nextAction": "次フェーズで、(1) yearパラメータと決算年度の対応関係をFY1990-2000の11年度分について確認し、(2) 表33-1〜33-4の区分一覧・合計行の有無を突合した上で、延岡市の地方債現在高（合計）を体系的に抽出する。"
+  },
+  "summary": {
+    "newFiscalYearsWithConfirmedBondBalance": 7,
+    "candidateValueEntriesForNullFields": 21,
+    "existingValueDiscrepancyEntries": 3,
+    "sourceRefsAdded": 6,
+    "unresolvedRemaining": {
+      "UNR-014": "変化なし（本phase対象外）",
+      "UNR-015": "変化なし（本phase対象外）",
+      "UNR-018": "本phaseで解決（src/dataへの統合はデータ担当フェーズに委ねる）",
+      "UNR-019": "unconfirmedからreference_pending相当へ前進を提案（実数値は未確定のまま次フェーズへ持ち越し）"
+    },
+    "warnings": [
+      "FY2011・FY2012の値は当該年度自身の原資料（暗号化.xls）ではなく、後続年度版ファイルの経年比較列からの間接取得である。",
+      "FY2017のotherSpecificPurposeFundsYenは既存値と約21.7億円（15%）の乖離があり、原因未特定。上書きしていない。",
+      "UNR-019は新ルート（静的直接ダウンロードURL）を実証したが、実際のFY1990-2000各年度の延岡市数値はまだ1件も確定していない。",
+      "本JSON・reports/phase53-finance-backfill-findings.md以外のファイルは一切編集していない。git commit/pushも行っていない。"
+    ]
+  }
+}

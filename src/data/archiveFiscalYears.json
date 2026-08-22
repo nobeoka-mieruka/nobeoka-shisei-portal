@@ -2870,7 +2870,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 66135098000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 109246980000,
         "perCapitaYen": null,
@@ -2886,10 +2886,20 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」グラフの当該年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H23年度版ファイル自体は暗号化(.xls)のため未解析。H25年度版(FY2013決算)ファイルの「将来負担比率（分子）の構造」表に掲載された経年比較列（平成23・24・25年度の3年度分）から間接的に取得した唯一の出典であり、他ファイルでの重複確認はできていない。"
           }
         ]
       },
-      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（66,135,098,000円、confidence=confirmed_indirect）。"
     },
     "finance": {
       "fiscalYear": 2011,
@@ -3022,7 +3032,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 64993297000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 106982700000,
         "perCapitaYen": null,
@@ -3038,14 +3048,24 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」グラフの当該年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H25年度版・H26年度版ファイルの経年比較列で値が完全一致することを確認済み。H24年度版ファイル自体は暗号化(.xls)のため未解析。"
           }
         ]
       },
-      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（64,993,297,000円、confidence=confirmed）。"
     },
     "finance": {
       "fiscalYear": 2012,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 20.1,
       "realDebtServiceRatioPercent": 10.4,
       "futureBurdenRatioPercent": 69.7,
       "currentAccountRatioPercent": 89.4,
@@ -3071,6 +3091,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+          "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase53調査で新規登録（finance.debtServiceRatioPercent=20.1%）。"
         }
       ],
       "notes": "財政力指数0.45を新規登録。 経常収支比率89.4%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3102,9 +3132,9 @@
         "perCapitaYen": null,
         "totalYen": 18528380000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
+        "fiscalReserveFundYen": 4483107000,
+        "bondRedemptionFundYen": 1715920000,
+        "otherSpecificPurposeFundsYen": 9476474000,
         "definitionNote": "「基金（貯金）の残高」棒グラフの平成24年度末値18,528,380,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
         "sourceRefs": [
           {
@@ -3116,6 +3146,36 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「基金の残高」棒グラフ（21〜24年度末、一般・特別・企業会計の合計、本文に明記）の24年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列・財政調整基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.fiscalReserveFundYen=4483107000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列・減債基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.bondRedemptionFundYen=1715920000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート、前年度比較列・その他特定目的基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.otherSpecificPurposeFundsYen=9476474000円）。"
           }
         ]
       },
@@ -3174,7 +3234,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 64134976000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 105268930000,
         "perCapitaYen": null,
@@ -3190,14 +3250,24 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」棒グラフ（22〜25年度末、一般・特別・企業会計の合計、本文に明記）の25年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H25・H26・H27年度版ファイルの経年比較列で完全一致。同一H25年度版ファイル内「総括表」シートの地方債現在高（同一値）とも一致。"
           }
         ]
       },
-      "notes": "残高は一般・特別・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は一般・特別・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（64,134,976,000円、confidence=confirmed）。"
     },
     "finance": {
       "fiscalYear": 2013,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 19.7,
       "realDebtServiceRatioPercent": 10.1,
       "futureBurdenRatioPercent": 55.1,
       "currentAccountRatioPercent": 87.9,
@@ -3223,6 +3293,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+          "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase53調査で新規登録（finance.debtServiceRatioPercent=19.7%）。"
         }
       ],
       "notes": "財政力指数0.45を新規登録。 経常収支比率87.9%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3254,9 +3334,9 @@
         "perCapitaYen": null,
         "totalYen": 20685170000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
+        "fiscalReserveFundYen": 5373558000,
+        "bondRedemptionFundYen": 2718364000,
+        "otherSpecificPurposeFundsYen": 9582942000,
         "definitionNote": "「基金額の推移」棒グラフの平成25年度末値20,685,170,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
         "sourceRefs": [
           {
@@ -3268,6 +3348,36 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「基金額の推移」棒グラフ（22〜25年度末、一般・特別・企業会計の合計、本文に明記）の25年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.fiscalReserveFundYen=5373558000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.bondRedemptionFundYen=2718364000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/16567/16567_20150515140540-1.xlsx",
+            "sourceTitle": "総務省「平成25年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.otherSpecificPurposeFundsYen=9582942000円）。"
           }
         ]
       },
@@ -3326,7 +3436,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 66500529000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 106783800000,
         "perCapitaYen": null,
@@ -3342,14 +3452,24 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」グラフの当該年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+            "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H26・H27・H28年度版ファイルの経年比較列で完全一致。"
           }
         ]
       },
-      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（66,500,529,000円、confidence=confirmed）。"
     },
     "finance": {
       "fiscalYear": 2014,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 20.3,
       "realDebtServiceRatioPercent": 9.8,
       "futureBurdenRatioPercent": 51.4,
       "currentAccountRatioPercent": 90.6,
@@ -3375,6 +3495,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+          "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase53調査で新規登録（finance.debtServiceRatioPercent=20.3%）。"
         }
       ],
       "notes": "財政力指数0.46を新規登録。 経常収支比率90.6%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3406,9 +3536,9 @@
         "perCapitaYen": null,
         "totalYen": 19670450000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
+        "fiscalReserveFundYen": 5388159000,
+        "bondRedemptionFundYen": 2723054000,
+        "otherSpecificPurposeFundsYen": 8846877000,
         "definitionNote": "「基金残高の推移」棒グラフの平成26年度末値19,670,450,000円（一般・特別・企業会計の合計、本文に明記）。25年度から24億7,472万円の取り崩し（新庁舎建設事業等の財源とするため）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
         "sourceRefs": [
           {
@@ -3420,6 +3550,36 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「基金残高の推移」棒グラフ（23〜26年度末、一般・特別・企業会計の合計、本文に明記）の26年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+            "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.fiscalReserveFundYen=5388159000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+            "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.bondRedemptionFundYen=2723054000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/22923/22923_20160428172552-1.xlsx",
+            "sourceTitle": "総務省「平成26年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.otherSpecificPurposeFundsYen=8846877000円）。"
           }
         ]
       },
@@ -3478,7 +3638,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 63626908000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 102910660000,
         "perCapitaYen": null,
@@ -3494,14 +3654,24 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」グラフの当該年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+            "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H27・H28・H29年度版ファイルの経年比較列で完全一致。"
           }
         ]
       },
-      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は資料に明記された会計区分のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（63,626,908,000円、confidence=confirmed）。"
     },
     "finance": {
       "fiscalYear": 2015,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 19.6,
       "realDebtServiceRatioPercent": 9.9,
       "futureBurdenRatioPercent": 36.8,
       "currentAccountRatioPercent": 90.1,
@@ -3527,6 +3697,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+          "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase53調査で新規登録（finance.debtServiceRatioPercent=19.6%）。"
         }
       ],
       "notes": "財政力指数0.46を新規登録。 経常収支比率90.1%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3558,9 +3738,9 @@
         "perCapitaYen": null,
         "totalYen": 20934630000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
+        "fiscalReserveFundYen": 5497467000,
+        "bondRedemptionFundYen": 3232120000,
+        "otherSpecificPurposeFundsYen": 9175683000,
         "definitionNote": "「基金残高の推移」棒グラフの平成27年度末値20,934,630,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
         "sourceRefs": [
           {
@@ -3572,6 +3752,36 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「基金残高の推移」棒グラフ（24〜27年度末、一般・特別・企業会計の合計、本文に明記）の27年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+            "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.fiscalReserveFundYen=5497467000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+            "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.bondRedemptionFundYen=3232120000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/28929/28929_20170518180345-1.xlsx",
+            "sourceTitle": "総務省「平成27年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.otherSpecificPurposeFundsYen=9175683000円）。"
           }
         ]
       },
@@ -3630,7 +3840,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 60983566000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 99310170000,
         "perCapitaYen": null,
@@ -3646,14 +3856,24 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」グラフの平成28年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+            "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H28・H29年度版ファイルの経年比較列で完全一致。"
           }
         ]
       },
-      "notes": "残高は一般・企業会計合計のみ確認。普通会計単独の残高は本資料からは特定できず未登録。"
+      "notes": "残高は一般・企業会計合計のみ確認。普通会計単独の残高は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（60,983,566,000円、confidence=confirmed）。"
     },
     "finance": {
       "fiscalYear": 2016,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 21.1,
       "realDebtServiceRatioPercent": 10.2,
       "futureBurdenRatioPercent": 18.2,
       "currentAccountRatioPercent": 92.1,
@@ -3679,6 +3899,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+          "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase53調査で新規登録（finance.debtServiceRatioPercent=21.1%）。"
         }
       ],
       "notes": "財政力指数0.47を新規登録。 経常収支比率92.1%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3710,9 +3940,9 @@
         "perCapitaYen": null,
         "totalYen": 23356520000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
+        "fiscalReserveFundYen": 5484105000,
+        "bondRedemptionFundYen": 2744969000,
+        "otherSpecificPurposeFundsYen": 12042780000,
         "definitionNote": "「基金残高の推移」棒グラフの平成28年度末値23,356,520,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
         "sourceRefs": [
           {
@@ -3724,6 +3954,36 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「基金残高の推移」棒グラフ（25〜28年度末、一般・特別・企業会計の合計、本文に明記）の28年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+            "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート・財政調整基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.fiscalReserveFundYen=5484105000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+            "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート・減債基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.bondRedemptionFundYen=2744969000円）。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/39956/39956_20181109165537-1.xlsx",
+            "sourceTitle": "総務省「平成28年度財政状況資料集」宮崎県延岡市（総括表シート・その他特定目的基金）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査で新規登録（fund.balance.otherSpecificPurposeFundsYen=12042780000円）。"
           }
         ]
       },
@@ -3782,7 +4042,7 @@
       ],
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 59353963000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 96502880000,
         "perCapitaYen": null,
@@ -3798,14 +4058,24 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債残高の推移」棒グラフ（26〜29年度末、一般・企業会計の合計）の29年度末値。"
+          },
+          {
+            "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+            "sourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-22",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase53調査（総務省財政状況資料集3ホップ経路）。H29年度版ファイルのみで確認（次年度H30年度版は本phaseで未取得のため重複確認はできていない）。"
           }
         ]
       },
-      "notes": "残高は一般・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。"
+      "notes": "残高は一般・企業会計合計のみ確認。普通会計単独の残高（他年度と同一定義のordinaryAccountLocalBondBalanceYen）は本資料からは特定できず未登録。 Phase53調査により一般会計等ベースの地方債現在高を新規登録（59,353,963,000円、confidence=confirmed_single_source）。"
     },
     "finance": {
       "fiscalYear": 2017,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 20.1,
       "realDebtServiceRatioPercent": 10.2,
       "futureBurdenRatioPercent": 9.3,
       "currentAccountRatioPercent": 93.4,
@@ -3831,6 +4101,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
+        },
+        {
+          "sourceUrl": "http://www.pref.miyazaki.lg.jp/documents/43024/43024_20191101134234-1.xlsx",
+          "sourceTitle": "総務省「平成29年度財政状況資料集」宮崎県延岡市（総括表シート）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-22",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase53調査で新規登録（finance.debtServiceRatioPercent=20.1%）。"
         }
       ],
       "notes": "財政力指数0.48を新規登録。 経常収支比率93.4%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"

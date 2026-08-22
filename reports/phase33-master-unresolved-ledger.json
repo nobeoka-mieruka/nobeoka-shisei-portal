@@ -552,9 +552,9 @@
       "targetFiscalYear": null,
       "targetPeriod": "FY2011-2017",
       "description": "一般会計等ベースの地方債現在高（ordinaryAccountLocalBondBalanceYen）がFY2011-2017の7年度でnull。Phase34でFY2009・2010分は総務省財政状況資料集（3ホップ経路）から確定済み、同じ経路で残り7年度も取得可能な見込み。",
-      "currentStatus": "reference_pending",
+      "currentStatus": "resolved",
       "priority": "B",
-      "evidenceLevel": "Level4（経路確立済み、未実行）",
+      "evidenceLevel": "Level5（確定・src/data反映済み）",
       "sourceRefs": [
         {
           "label": "総務省 財政状況資料集 年度別indexページ",
@@ -568,15 +568,15 @@
         "総務省index→宮崎県ページ→延岡市個別PDFの3ホップ経路をFY2010分で実証済み"
       ],
       "unresolvedReason": "B（未実行、次フェーズで同一経路を反復すれば取得可能）",
-      "nextAction": "同じ3ホップ経路でFY2011-2017の各年度版PDFを取得し、一般会計等に係る地方債現在高を抽出する",
+      "nextAction": "なし（解決済み）",
       "nextSourceCandidate": "総務省 財政状況資料集 各年度版（宮崎県ページ経由）",
       "primaryRoute": "B",
       "secondaryRoute": null,
       "requiresOnsite": false,
       "requiresInquiry": false,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "Phase34新規発見。優先9年度（UNR-014/015）とは別枠。"
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase34新規発見。優先9年度（UNR-014/015）とは別枠。 Phase53で7年度すべて確定、Phase55でarchiveFiscalYears.jsonへ反映済み。FY2011/2012は間接値（後続年度版ファイルの経年比較列より）である点に留意。"
     },
     {
       "unresolvedId": "UNR-019",
@@ -586,9 +586,9 @@
       "targetFiscalYear": null,
       "targetPeriod": "FY1990-2000",
       "description": "市債・地方債データ（debtフィールド自体）がFY1990-2000の11年度で未収録。e-Stat「地方財政状況調査 表33 地方債現在高の状況」が該当年度をカバーする可能性を確認したが、JavaScript依存の年度選択UIのためWebFetchでは値を取得できなかった。",
-      "currentStatus": "unconfirmed",
+      "currentStatus": "reference_pending",
       "priority": "B",
-      "evidenceLevel": "Level2（データベースの存在確認済み、値未取得）",
+      "evidenceLevel": "Level3（JS非依存の直接ダウンロードURLを実証済み、値抽出は未実施）",
       "sourceRefs": [
         {
           "label": "e-Stat 地方財政状況調査 表33 地方債現在高の状況",
@@ -599,18 +599,19 @@
         "reports/phase34-bonds-findings.md"
       ],
       "alreadyTriedMethods": [
-        "WebFetchでの静的取得（JavaScript依存UIのため失敗）"
+        "WebFetchでの静的取得（JavaScript依存UIのため失敗）",
+        "Phase53で静的file-download URL（fileKind=0/1、認証不要）を発見・延岡市の行の存在を確認（表33-1のみ）"
       ],
-      "unresolvedReason": "F（判読困難：ツール制約。ブラウザ操作ツールまたはe-Stat API（appId）が必要）",
-      "nextAction": "ブラウザ操作ツール、またはe-Stat APIキー（appId）取得の上でのAPI直接アクセスを次フェーズで試みる",
-      "nextSourceCandidate": "e-Stat API（要appId）、またはブラウザ操作ツールでの実操作",
+      "unresolvedReason": "B（経路確立済み、区分横断集計の実行が未着手）",
+      "nextAction": "表33-1〜33-4のyearパラメータ↔決算年度対応関係の確認、区分横断集計による延岡市の地方債現在高（合計）の体系的抽出",
+      "nextSourceCandidate": "e-Stat file-download URL（https://www.e-stat.go.jp/stat-search/file-download?statInfId=...&fileKind=0、認証不要）",
       "primaryRoute": "C",
       "secondaryRoute": null,
       "requiresOnsite": false,
       "requiresInquiry": false,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "Phase34新規発見。"
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase34新規発見。 Phase53で新ルート実証（詳細はreports/phase53-finance-backfill-findings.json参照）。"
     },
     {
       "unresolvedId": "UNR-020",
@@ -681,34 +682,154 @@
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-08-22",
       "notes": "Phase36新規発見。速報値を確定値として登録しない方針を維持。"
+    },
+    {
+      "unresolvedId": "UNR-022",
+      "category": "bills",
+      "subcategory": "billNumber-missing-H27-30",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "平成27〜30年度（22会期）",
+      "description": "議案等審議結果PDF（H27-30年度、22会期）には議案番号（議案第◯号）が一切印字されておらず、既存billVotes.jsonのスキーマに適合する候補レコードを機械的に作成できない。billNumberの復元には、会議録検索システムでの委員長報告等との個別照合が必要（2019-06セッションで同じ問題を手動照合で解決した前例あり）。",
+      "currentStatus": "not_collected",
+      "priority": "B",
+      "evidenceLevel": "Level3（原因特定済み、22会期分のPDF取得・テキスト化は完了、番号復元は未着手）",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 議案等審議結果一覧（H27-30年度）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "reports/phase50-bills-findings.md"
+      ],
+      "alreadyTriedMethods": [
+        "22PDF全件のpdfjs-distテキスト抽出（議案第の文字列0件を確認）",
+        "既存council-bill-extraction.mjsでの機械抽出（0件、根本原因はデータ形式）"
+      ],
+      "unresolvedReason": "F（会議録検索システムの平成年代対応拡張＋22会期分の個別照合が必要な大規模タスク）",
+      "nextAction": "scripts/lib/minutes-source.mjsの平成年代対応拡張後、22会期分の委員長報告を個別に照合してbillNumberを復元する（TASK-049-scale×22の専用タスクとして切り出す）",
+      "nextSourceCandidate": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）の委員長報告テキスト",
+      "primaryRoute": "F",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase50新規発見。billNumberを推測・省略で作らない方針を維持し、今回は新規候補ゼロとした。"
+    },
+    {
+      "unresolvedId": "UNR-023",
+      "category": "generalQuestions",
+      "subcategory": "minutes-source-heisei-era-support",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "2000-2019年（平成12〜31年度）",
+      "description": "scripts/lib/minutes-source.mjsのparseYearRange/resolveYearTreedepth/fileNameToIsoDateが令和表記の日付のみに対応しており、2000-2019年（平成年代）の一般質問backfill（TASK-BACKFILL-001）には実装拡張が必要。Phase45-47のパイロットで、curl+iconv-lite手法自体は平成年代のページに対しても正しく機能することを実証済み（2013年度・2005年度の2会期で質問・答弁本文を実際に取得・要約）。",
+      "currentStatus": "reference_pending",
+      "priority": "B",
+      "evidenceLevel": "Level4（パイロット実証済み、コード拡張とmemberId照合が未実施）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "reports/phase45-47-general-questions-findings.md",
+        "reports/phase39-question-backfill-findings.md"
+      ],
+      "alreadyTriedMethods": [
+        "curl+iconv-liteによる2013年度・2005年度会期の実データ取得（各1件、成功）"
+      ],
+      "unresolvedReason": "B（parserコード拡張が必要、実装は本フェーズでは行っていない）",
+      "nextAction": "scripts/lib/minutes-source.mjsへ平成対応パッチを実装し、TASK-BACKFILL-001の対象年度（2000-2019年）で段階的backfillを再開する。あわせてclassifySpeakerLabel()への「助役」区分追加も検討する。",
+      "nextSourceCandidate": null,
+      "primaryRoute": "F",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase45-47新規発見。矢野戦一郎議員・後藤哲朗議員の質問候補2件はmemberId未解決（formerMembers.jsonに一致エントリなし）のためsrc/dataへ未反映。"
+    },
+    {
+      "unresolvedId": "UNR-024",
+      "category": "schema",
+      "subcategory": "formerMembers-structured-fields",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "N/A",
+      "description": "formerMembers.json（58名）は氏名・ふりがな・note（自由記述）のみのスキーマで、members.json（現職26名）が持つphotoUrl・career・committees等の構造化フィールドが存在しない。体系的な補完（Phase49の目標）を進める上での制約となっている。",
+      "currentStatus": "not_collected",
+      "priority": "C",
+      "evidenceLevel": "N/A（スキーマ課題）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "reports/phase49-former-members-findings.md"
+      ],
+      "alreadyTriedMethods": [],
+      "unresolvedReason": "C（schema改善対象）",
+      "nextAction": "UNR-012・UNR-017と同様、実データが十分揃った段階でスキーマ拡張を検討する",
+      "nextSourceCandidate": null,
+      "primaryRoute": "F",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase49新規発見。fm11〜fm58中29名は今回未着手（次フェーズへ持ち越し）。"
+    },
+    {
+      "unresolvedId": "UNR-025",
+      "category": "dataQuality",
+      "subcategory": "generalQuestions-councilSpeechSummaries-duplicate",
+      "targetPerson": "m01",
+      "targetFiscalYear": null,
+      "targetPeriod": "2019-06-25",
+      "description": "generalQuestions.jsonのgq2019-06-m01が、councilSpeechSummaries.jsonのm01-2019-06-25-ippan-shitsumonと実質的に重複している（同一議員・同一日・同一会期・同一内容）。",
+      "currentStatus": "under_review",
+      "priority": "C",
+      "evidenceLevel": "Level5（重複を直接確認済み）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "reports/phase45-47-general-questions-findings.json"
+      ],
+      "alreadyTriedMethods": [],
+      "unresolvedReason": "A（人手判断が必要：どちらを正・どちらを削除または統合するか）",
+      "nextAction": "両ファイルの役割分担（generalQuestions.jsonはキュレーション済み紹介用、councilSpeechSummaries.jsonは構造化データという位置づけの違い）を踏まえ、重複解消方針を人手で決定する",
+      "nextSourceCandidate": null,
+      "primaryRoute": "F",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase45-47新規発見。データ破壊を避けるため今回は削除・統合いずれも実施していない。"
     }
   ],
   "summary": {
-    "totalItems": 21,
+    "totalItems": 25,
     "byRoute": {
       "A": 0,
       "B": 7,
       "C": 4,
       "D": 1,
       "E": 6,
-      "F": 3
+      "F": 7
     },
     "byPriority": {
       "A": 13,
-      "B": 5,
-      "C": 3
+      "B": 7,
+      "C": 5
     },
     "byStatus": {
       "disputed": 3,
-      "unconfirmed": 7,
+      "unconfirmed": 6,
       "partially_resolved": 1,
-      "not_collected": 6,
-      "under_review": 1,
-      "reference_pending": 3
+      "not_collected": 8,
+      "under_review": 2,
+      "reference_pending": 4,
+      "resolved": 1
     },
     "requiresOnsite": 9,
     "requiresInquiry": 8,
-    "requiresBulkBackfill": 7,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。"
+    "requiresBulkBackfill": 9,
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。"
   }
 }

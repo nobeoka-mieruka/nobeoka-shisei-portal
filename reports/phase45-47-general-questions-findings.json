@@ -1,0 +1,213 @@
+{
+  "generatedAt": "2026-08-22",
+  "note": "Phase45-47統合ワーカーによる一般質問バックフィル検証パイロットの候補レコード集。src/data配下へは未マージ（本ワーカーはsrc/data・scripts配下を読み取り専用としている）。マージする場合はcouncilSpeechSummaries.jsonの各memberオブジェクト配下speeches配列への追加を想定した構造にしているが、memberIdが現行members.json/formerMembers.jsonに存在しない（未解決）ため、そのままではマージできない。scripts/lib/minutes-source.mjsの平成対応パッチ（本findings.md記載の提案パッチ）を実装した上で、議員名の正式な照合（新規formerMembers.jsonエントリ追加が必要な可能性がある）を行ってからマージすること。",
+  "status": "candidate_not_merged",
+  "requiredCodeChanges": [
+    "scripts/lib/minutes-source.mjs の parseYearRange() に平成対応の正規表現分岐を追加（未実装、提案のみ）",
+    "scripts/lib/minutes-source.mjs の resolveYearTreedepth() に元号分岐ロジックを追加（未実装、提案のみ）",
+    "scripts/lib/minutes-source.mjs の fileNameToIsoDate() に H プレフィックス対応を追加（未実装、提案のみ）"
+  ],
+  "candidateRecords": [
+    {
+      "id": "candidate-legacy-h250611-yano",
+      "status": "candidate_pending_member_id_resolution",
+      "memberId": null,
+      "memberIdResolutionNote": "「矢野戦一郎」は現行 src/data/members.json・formerMembers.json のいずれにも一致するエントリが見つからなかった（本ワーカーの検索範囲内。grep結果0件）。推測でIDを付与していない。マージ前にformerMembers.jsonへの新規追加要否を確認すること。",
+      "memberNameRaw": "矢野戦一郎君",
+      "sessionId": "2013-06",
+      "sessionLabel": "平成25年第14回定例会",
+      "meetingNumber": "第2号",
+      "date": "2013-06-11",
+      "meetingType": "本会議",
+      "speechType": "一般質問",
+      "isPublished": false,
+      "summaryStatus": "verified-pilot-partial",
+      "term": "legacy-pilot-2010s",
+      "topics": [
+        "行政運営",
+        "職員採用"
+      ],
+      "shortSummary": "平成25年6月定例会（第14回定例会、第2号）で矢野戦一郎議員が行った一般質問のうち、市長マニフェストの自己評価・次期市長選挙に向けた方針、および第三セクター等公益的法人における一般職員採用の公募制導入に関する部分と市長の答弁を要約したもの（本会議全体では他にも質問項目がある可能性があるが、今回のパイロット取得範囲＝質問セグメント1件・答弁セグメント1件のみを対象とした）。",
+      "questionItems": [
+        {
+          "id": "q1",
+          "title": "市長マニフェストの自己評価と次期市長選挙への対応",
+          "questionSummary": "前回市長選挙のマニフェスト（9政策・60項目）について、平成24年度末時点の進捗状況の自己評価と、次期市長選挙に向けたマニフェストの骨格・公表時期を質問した。",
+          "answerSummary": "ドクターヘリ導入、こども家庭課設置、新火葬場整備、行財政改革推進など多くの項目で目標達成・計画どおり進捗していると説明。次期市長選挙に向けては、高速道路時代を見据えた都市づくりを念頭にマニフェストを検討中であり、時期を見て公表する考えを示した。",
+          "answerers": ["市長"],
+          "exchanges": [
+            {
+              "order": 1,
+              "type": "question",
+              "speakerName": "矢野戦一郎",
+              "summary": "前回市長選挙のマニフェスト（9政策・60項目）について、平成24年度末時点の進捗状況の自己評価と、次期市長選挙に向けたマニフェストの骨格・公表時期を質問した。"
+            },
+            {
+              "order": 2,
+              "type": "answer",
+              "speakerName": "市長（首藤正治）",
+              "summary": "ドクターヘリ導入、こども家庭課設置、新火葬場整備、行財政改革推進など多くの項目で目標達成・計画どおり進捗していると説明。次期市長選挙に向けては、高速道路時代を見据えた都市づくりを念頭にマニフェストを検討中であり、時期を見て公表する考えを示した。"
+            }
+          ],
+          "questionAnswerLinkStatus": "confirmed"
+        },
+        {
+          "id": "q2",
+          "title": "第三セクター等公益的法人の一般職員採用における公募制導入",
+          "questionSummary": "役職ポスト（事務局長級）は公募制導入が進んだ一方、一般職員採用についても同様に公募制を導入すべきではないかと質問した。",
+          "answerSummary": "各法人の業種（福祉・環境・観光等）に応じ専門的スキルが求められることから、新聞広告やハローワーク活用等、各団体が独自に十分検討し採用方法を決定しているものと考えている旨を説明した。",
+          "answerers": ["市長"],
+          "exchanges": [
+            {
+              "order": 1,
+              "type": "question",
+              "speakerName": "矢野戦一郎",
+              "summary": "役職ポスト（事務局長級）は公募制導入が進んだ一方、一般職員採用についても同様に公募制を導入すべきではないかと質問した。"
+            },
+            {
+              "order": 2,
+              "type": "answer",
+              "speakerName": "市長（首藤正治）",
+              "summary": "各法人の業種（福祉・環境・観光等）に応じ専門的スキルが求められることから、新聞広告やハローワーク活用等、各団体が独自に十分検討し採用方法を決定しているものと考えている旨を説明した。"
+            }
+          ],
+          "questionAnswerLinkStatus": "confirmed"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "title": "平成25年第14回定例会（第2号 6月11日） 矢野戦一郎君（質問）",
+          "sourceType": "official-minutes-html",
+          "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250611A/3524/10/1//0/0",
+          "speakerSection": "pos=3524",
+          "fetchedAt": "2026-08-22",
+          "fetchMethod": "curl + iconv-lite(Shift_JIS→UTF-8)"
+        },
+        {
+          "title": "平成25年第14回定例会（第2号 6月11日） 市長（首藤正治君）（答弁）",
+          "sourceType": "official-minutes-html",
+          "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250611A/12992/10/1//0/0",
+          "speakerSection": "pos=12992",
+          "fetchedAt": "2026-08-22",
+          "fetchMethod": "curl + iconv-lite(Shift_JIS→UTF-8)"
+        },
+        {
+          "title": "平成25年第14回定例会（第2号 6月11日）発言者一覧（r_Speakers.exe、204発言セグメント確認）",
+          "sourceType": "official-minutes-html-index",
+          "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H250611A/0/0//10/1/3:0/654/1//0/0/0",
+          "fetchedAt": "2026-08-22",
+          "fetchMethod": "curl（Shift_JIS、未デコードの索引参照用）"
+        }
+      ],
+      "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）をcurl+iconv-liteで実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。矢野戦一郎議員の質問全文にはこの他にも項目が含まれる可能性が高い（r_Speakers.exeの発言セグメント一覧で本人の発言がpos=3524の1回のみだったため、質問はこの1セグメントに全項目が含まれていると推定されるが、今回は最初の答弁2件分のみを個別要約した。残りの質問項目・答弁の要約は未実施）。matchSpeakerToMember相当の照合は行っていない（member-identification-pending）。",
+      "requiresBeforeMerge": [
+        "scripts/lib/minutes-source.mjsへの平成対応パッチ実装",
+        "「矢野戦一郎」のformerMembers.json照合または新規追加の要否確認",
+        "質問全文の残り項目（マニフェスト・公募制以外の項目があれば）の追加確認"
+      ]
+    },
+    {
+      "id": "candidate-legacy-h170914-goto",
+      "status": "candidate_pending_member_id_resolution",
+      "memberId": null,
+      "memberIdResolutionNote": "「後藤哲朗」は現行 src/data/members.json・formerMembers.json のいずれにも一致するエントリが見つからなかった（本ワーカーの検索範囲内。grep結果0件）。推測でIDを付与していない。マージ前にformerMembers.jsonへの新規追加要否を確認すること。",
+      "memberNameRaw": "後藤哲朗君",
+      "sessionId": "2005-09",
+      "sessionLabel": "平成17年第16回定例会",
+      "meetingNumber": "第2号",
+      "date": "2005-09-14",
+      "meetingType": "本会議",
+      "speechType": "一般質問",
+      "isPublished": false,
+      "summaryStatus": "verified-pilot-partial",
+      "term": "legacy-pilot-2000s",
+      "topics": [
+        "防災",
+        "水道",
+        "国政・政治"
+      ],
+      "shortSummary": "平成17年9月定例会（第16回定例会、第2号）で後藤哲朗議員が行った一般質問（台風14号災害を受けた18項目の質問のうち冒頭部分）のうち、堤防溢水対策・新消防庁舎建設の冠水対策・水道施設の災害対応・停電対策・総選挙の総括に関する部分と市長の答弁を要約したもの。質問通告は「十八項目」とされており、今回のパイロット取得範囲（質問セグメント1件・答弁セグメント1件）はその冒頭部分のみ。",
+      "questionItems": [
+        {
+          "id": "q1",
+          "title": "台風14号による堤防溢水箇所の視察と再発防止対策",
+          "questionSummary": "はんらんした堤防箇所や古川・岡富・桜ヶ丘など浸水地区の視察を踏まえ、堤防溢水への所見と再発防止対策を質問した。",
+          "answerSummary": "国道218号の低い箇所のかさ上げを区画整理事業に合わせて計画中であること、桜ヶ丘地区は県の祝子川広域基幹河川改修事業で排水機場を設置予定であることを説明した。",
+          "answerers": ["市長"],
+          "questionAnswerLinkStatus": "confirmed"
+        },
+        {
+          "id": "q2",
+          "title": "新消防庁舎建設計画と周辺の冠水対策",
+          "questionSummary": "建設予定地周辺が今回も大冠水したことを踏まえ、計画どおり建設を進めるか、冠水対策を講じられるかを質問した。",
+          "answerSummary": "実施設計は終了し潜水訓練施設に着工済み、18年度の本体着工に向け計画どおり進める考えを示した。冠水対策として来年度に下水道事業による浸水軽減対策事業を実施し、国の排水機場能力アップも要望していく考えを示した。",
+          "answerers": ["市長"],
+          "questionAnswerLinkStatus": "confirmed"
+        },
+        {
+          "id": "q3",
+          "title": "水道施設の災害対応（ライフライン強化）",
+          "questionSummary": "水源の受電設備冠水による断水を踏まえ、災害に強いライフラインとしての水道施設の今後の対応を質問した。",
+          "answerSummary": "平成18年度からの次期5カ年計画見直しの中で、電気機械設備を守る擁壁工事等の冠水対策を早急に実施する考えを示した。",
+          "answerers": ["市長"],
+          "questionAnswerLinkStatus": "confirmed"
+        },
+        {
+          "id": "q4",
+          "title": "長時間停電を踏まえた九州電力との停電対策協議",
+          "questionSummary": "延岡発電所の冠水により市内3分の2で長時間停電が発生したことを踏まえ、九州電力との停電対策協議の可否を質問した。",
+          "answerSummary": "九州電力も前向きな検討を行うとのことであり、市としても再発防止の早急な対策を要望していく考えを示した。",
+          "answerers": ["市長"],
+          "questionAnswerLinkStatus": "confirmed"
+        },
+        {
+          "id": "q5",
+          "title": "総選挙（郵政民営化）の総括",
+          "questionSummary": "郵政民営化を争点とした総選挙結果を踏まえた総括的な所見を質問した。",
+          "answerSummary": "総選挙は郵政民営化を国民に問い直したものであり、民意は改革推進を選択したとの認識を示し、今後も構造改革の推移を見きわめていく考えを示した。",
+          "answerers": ["市長"],
+          "questionAnswerLinkStatus": "confirmed"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "title": "平成17年第16回定例会（第2号 9月14日） 後藤哲朗君（質問）",
+          "sourceType": "official-minutes-html",
+          "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H170914A/17749/10/1//0/0",
+          "speakerSection": "pos=17749",
+          "fetchedAt": "2026-08-22",
+          "fetchMethod": "curl + iconv-lite(Shift_JIS→UTF-8)"
+        },
+        {
+          "title": "平成17年第16回定例会（第2号 9月14日） 市長（櫻井哲雄君）（答弁）",
+          "sourceType": "official-minutes-html",
+          "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H170914A/31943/10/1//0/0",
+          "speakerSection": "pos=31943",
+          "fetchedAt": "2026-08-22",
+          "fetchMethod": "curl + iconv-lite(Shift_JIS→UTF-8)"
+        },
+        {
+          "title": "平成17年第16回定例会（第2号 9月14日）発言者一覧（r_Speakers.exe、58発言セグメント確認）",
+          "sourceType": "official-minutes-html-index",
+          "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H170914A/0/0//10/1/3:0/654/1//0/0/0",
+          "fetchedAt": "2026-08-22",
+          "fetchMethod": "curl（Shift_JIS、未デコードの索引参照用）"
+        }
+      ],
+      "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）をcurl+iconv-liteで実際に取得・精読し、内容・発言者・質問と答弁の対応関係を確認済み。質問原文冒頭で「十八項目の質問をさせていただきます」と本人が述べており、今回要約した5項目（q1〜q5）はそのうちの一部（台風14号関連3点＋総選挙総括）のみ。残り13項目超の要約は未実施。matchSpeakerToMember相当の照合は行っていない（member-identification-pending）。市長は櫻井哲雄氏、助役制（副市長制ではない）であり、classifySpeakerLabel()のofficialTitlesリストに「助役」が含まれていない点も要拡張候補として付記する。",
+      "requiresBeforeMerge": [
+        "scripts/lib/minutes-source.mjsへの平成対応パッチ実装",
+        "「後藤哲朗」のformerMembers.json照合または新規追加の要否確認",
+        "質問全文の残り13項目超の要約",
+        "classifySpeakerLabel()への「助役」区分追加（提案、未実装）"
+      ]
+    }
+  ],
+  "duplicatesFound": [
+    {
+      "description": "generalQuestions.jsonのgq2019-06-m01と、councilSpeechSummaries.jsonのm01-2019-06-25-ippan-shitsumonが実質的に重複している（同一議員=稲田雅之、同一日=2019-06-25、同一会期=令和元年6月定例会、内容も一致：地域振興基金・地域電力会社・過疎法失効・森林環境税・観光資源調査）。",
+      "action": "本ワーカーでは新規登録・削除いずれも行っていない（指示によりsrc/data変更禁止のため）。統合要否の判断・実施は別タスクとして人手で検討することを推奨する。",
+      "excludedCount": 0
+    }
+  ]
+}

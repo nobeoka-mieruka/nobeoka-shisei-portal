@@ -3437,17 +3437,21 @@
     "dateLabel": "2013年12月3日",
     "category": "行政組織",
     "title": "太田龍氏、副議長に当選",
-    "summary": "平成25年第17回定例会（12月3日）で副議長選挙が行われ、太田龍議員が副議長に当選した。同年5月8日にも副議長選挙が行われており、年度途中での交代とみられる（前任者・交代理由は今回未確認）。",
+    "summary": "平成25年第17回定例会（12月3日）で副議長選挙が行われ、太田龍議員が副議長に当選した。同年5月8日にも副議長選挙が行われ小田忠良議員が再選されていたため、年度途中での交代である（Phase52で前任者が小田忠良議員だったことを確認。12月交代の具体的理由〈辞職等〉は今回も未確認）。",
     "relatedPersonIds": [],
     "sourceRefs": [
       {
         "label": "延岡市議会会議録検索システム 平成25年第17回定例会（第1号 12月3日、副議長選挙、太田龍議員の就任挨拶）",
         "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H251203A&startPos=0"
+      },
+      {
+        "label": "広報のべおか2013年6月号 p.9（2013年5月8-9日臨時会、議長・副議長再選、監査委員新任の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2665.pdf"
       }
     ],
-    "lastVerifiedAt": "2026-08-21",
+    "lastVerifiedAt": "2026-08-23",
     "verificationStatus": "verified",
-    "notes": "Phase23 Block2後半（FY2014〜2010）で新規発見。太田龍議員本人の就任挨拶（会議録全文）で確認した。同年5月8日の副議長選挙の当選者・12月交代の理由は今回未確認（gap-vice-chair-names-block2）。"
+    "notes": "Phase23 Block2後半（FY2014〜2010）で新規発見。太田龍議員本人の就任挨拶（会議録全文）で確認した。Phase52（広報のべおかOCR構造化）で、広報のべおか2013年6月号・2014年6月号の記載から、前任者が小田忠良議員（2013年5月8日再選、同年12月に太田龍議員へ交代）であることを確認した（gap-vice-chair-names-block2を部分解消）。12月交代の具体的理由は今回も未確認。"
   },
   {
     "id": "civic-175",
@@ -4059,5 +4063,59 @@
     "lastVerifiedAt": "2026-08-22",
     "verificationStatus": "verified",
     "notes": "Phase31追加調査で新規登録。1933年（延岡市制施行）以前の江戸時代（近世）を対象とする巻のため、本サイトの歴代市長・特別職データとは直接関連しないが、延岡市の公式な市史編さん事業の一環として市政年表に記録する。reports/ndl-historical-source-ledger.json のndl-src-08（2026-08-17に既発見・登録済み、mayorId等の観点からは対象外＝rejectedと判定済み）と同一資料。本記者発表資料により、頒布金額・ページ数・頒布方法・担当課（延岡市教育委員会 文化財・市史編さん課 市史編さん係、TEL 0982-22-7047）等の追加情報を独立した公式一次資料で確認できた。なお同発表資料には、令和9年3月末に西南戦争関連の『延岡市史 史資料編 近現代1』を刊行予定との記載があり、こちらは1933年以降の本サイト対象範囲に直接関連する可能性が高いため、刊行後の確認を次フェーズの課題とする。"
+  },
+  {
+    "id": "civic-206",
+    "year": 2010,
+    "dateLabel": "2010年5月11日",
+    "category": "行政組織",
+    "title": "河野治満氏、副議長に当選",
+    "summary": "平成22年5月11日の臨時会で正副議長・監査委員選挙が行われ、副議長に河野治満議員、監査委員に太田龍議員が選出された。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか2010年6月号 p.7（2010年5月11日臨時会、副議長・監査委員選出の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2701.pdf"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-23",
+    "verificationStatus": "verified",
+    "notes": "Phase52（広報のべおかOCR構造化）で新規発見。広報のべおか本文の記載のみに基づく（会議録での再確認は未実施）。"
+  },
+  {
+    "id": "civic-207",
+    "year": 2013,
+    "dateLabel": "2013年5月8-9日",
+    "category": "行政組織",
+    "title": "佐藤勉議長・小田忠良副議長、再選",
+    "summary": "平成25年第14回定例会（5月8-9日）で正副議長選挙が行われ、議長に佐藤勉議員、副議長に小田忠良議員がいずれも再選された。監査委員には本部仁俊議員が新たに選出された。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか2013年6月号 p.9（2013年5月8-9日臨時会、正副議長再選・監査委員新任の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2665.pdf"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-23",
+    "verificationStatus": "verified",
+    "notes": "Phase52（広報のべおかOCR構造化）で新規発見。同年12月に副議長が太田龍議員へ交代しており（civic-174参照）、小田忠良議員はこの再選後、約7ヶ月で交代したことになる。"
+  },
+  {
+    "id": "civic-208",
+    "year": 2014,
+    "dateLabel": "2014年5月8日",
+    "category": "行政組織",
+    "title": "太田龍副議長、再選",
+    "summary": "平成26年5月8日の臨時会で正副議長・監査委員選挙が行われ、副議長に太田龍議員（2013年12月就任）が再選された。監査委員には上田美利議員が新たに選出された。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか2014年6月号 p.10（2014年5月8日臨時会、副議長再選・監査委員新任の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2653.pdf"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-23",
+    "verificationStatus": "verified",
+    "notes": "Phase52（広報のべおかOCR構造化）で新規発見。"
   }
 ]

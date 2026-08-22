@@ -11,7 +11,7 @@
     "reason": "政策側の確定テーマ分類（education）と、議案等の本文キーワード一致による候補分類が一致",
     "evidenceText": "学校",
     "status": "candidate",
-    "createdAt": "2026-08-22T14:29:41.356Z"
+    "createdAt": "2026-08-22T15:06:19.860Z"
   },
   {
     "id": "relcand-002",
@@ -25,7 +25,7 @@
     "reason": "政策側の確定テーマ分類（healthcare）と、議案等の本文キーワード一致による候補分類が一致",
     "evidenceText": "感染症、予防接種",
     "status": "candidate",
-    "createdAt": "2026-08-22T14:29:41.356Z"
+    "createdAt": "2026-08-22T15:06:19.860Z"
   },
   {
     "id": "relcand-003",
@@ -39,7 +39,7 @@
     "reason": "政策側の確定テーマ分類（healthcare）と、議案等の本文キーワード一致による候補分類が一致",
     "evidenceText": "感染症、予防接種",
     "status": "candidate",
-    "createdAt": "2026-08-22T14:29:41.356Z"
+    "createdAt": "2026-08-22T15:06:19.860Z"
   },
   {
     "id": "relcand-004",
@@ -53,7 +53,7 @@
     "reason": "政策側の確定テーマ分類（childcare）と、議案等の本文キーワード一致による候補分類が一致",
     "evidenceText": "児童",
     "status": "candidate",
-    "createdAt": "2026-08-22T14:29:41.356Z"
+    "createdAt": "2026-08-22T15:06:19.860Z"
   },
   {
     "id": "relcand-005",
@@ -67,7 +67,7 @@
     "reason": "政策側の確定テーマ分類（digitalization）と、議案等の本文キーワード一致による候補分類が一致",
     "evidenceText": "デジタル",
     "status": "candidate",
-    "createdAt": "2026-08-22T14:29:41.356Z"
+    "createdAt": "2026-08-22T15:06:19.860Z"
   },
   {
     "id": "relcand-006",
@@ -81,6 +81,132 @@
     "reason": "政策側の確定テーマ分類（disaster-prevention）と、議案等の本文キーワード一致による候補分類が一致",
     "evidenceText": "避難",
     "status": "candidate",
-    "createdAt": "2026-08-22T14:29:41.356Z"
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-007",
+    "sourceEntityType": "petition",
+    "sourceEntityId": "doc-petition-05",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor03-04",
+    "relationType": "sameTheme",
+    "confidence": 0.3,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（public-transport）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "駅",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-008",
+    "sourceEntityType": "petition",
+    "sourceEntityId": "doc-petition-07",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor03-05",
+    "relationType": "sameTheme",
+    "confidence": 0.4,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（welfare）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "介護",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-009",
+    "sourceEntityType": "petition",
+    "sourceEntityId": "doc-petition-10",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor03-05",
+    "relationType": "sameTheme",
+    "confidence": 0.4,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（welfare）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "介護",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-010",
+    "sourceEntityType": "petition",
+    "sourceEntityId": "doc-petition-12",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor03-05",
+    "relationType": "sameTheme",
+    "confidence": 0.4,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（welfare）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "介護",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-011",
+    "sourceEntityType": "request",
+    "sourceEntityId": "doc-request-06",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor03-03",
+    "relationType": "sameTheme",
+    "confidence": 0.3,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（digitalization）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "デジタル",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-012",
+    "sourceEntityType": "request",
+    "sourceEntityId": "doc-request-08",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor01-03",
+    "relationType": "sameTheme",
+    "confidence": 0.3,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（disaster-prevention）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "避難",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-013",
+    "sourceEntityType": "request",
+    "sourceEntityId": "doc-request-09",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor01-03",
+    "relationType": "sameTheme",
+    "confidence": 0.3,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（disaster-prevention）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "避難",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-014",
+    "sourceEntityType": "request",
+    "sourceEntityId": "doc-request-12",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-q-gq2026-06-m24-01",
+    "relationType": "sameTheme",
+    "confidence": 0.6,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（employment）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "雇用、雇用",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
+  },
+  {
+    "id": "relcand-015",
+    "sourceEntityType": "request",
+    "sourceEntityId": "doc-request-12",
+    "targetEntityType": "policy",
+    "targetEntityId": "policy-mayor03-02",
+    "relationType": "sameTheme",
+    "confidence": 0.6,
+    "method": "keywordMatch",
+    "reason": "政策側の確定テーマ分類（employment）と、議案等の本文キーワード一致による候補分類が一致",
+    "evidenceText": "雇用、雇用",
+    "status": "candidate",
+    "createdAt": "2026-08-22T15:06:19.860Z"
   }
 ]

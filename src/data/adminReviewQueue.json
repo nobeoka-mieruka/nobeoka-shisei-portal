@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-22T14:29:41.434Z",
-  "totalItems": 126,
+  "generatedAt": "2026-08-22T15:06:19.919Z",
+  "totalItems": 162,
   "byCategory": {
-    "aiCategoryCandidate": 8,
-    "lowConfidenceCandidate": 11,
-    "relationCandidate": 6,
+    "aiCategoryCandidate": 19,
+    "lowConfidenceCandidate": 26,
+    "relationCandidate": 15,
     "sourceInsufficient": 80,
     "committeeIdMissing": 1,
-    "possibleDuplicateCandidate": 1,
+    "possibleDuplicateCandidate": 2,
     "aiSummaryPending": 19
   },
   "items": [
@@ -117,6 +117,139 @@
       "confidence": 0.35
     },
     {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-05",
+      "detail": "テーマ分類候補「public-transport」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-05",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-07",
+      "detail": "テーマ分類候補「welfare」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-07",
+      "detail": "分類候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-10",
+      "detail": "テーマ分類候補「welfare」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-10",
+      "detail": "分類候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-12",
+      "detail": "テーマ分類候補「welfare」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-12",
+      "detail": "分類候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
+      "detail": "テーマ分類候補「digitalization」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
+      "detail": "テーマ分類候補「finance」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-08",
+      "detail": "テーマ分類候補「disaster-prevention」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-08",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-09",
+      "detail": "テーマ分類候補「disaster-prevention」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-09",
+      "detail": "分類候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-12",
+      "detail": "テーマ分類候補「employment」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-13",
+      "detail": "テーマ分類候補「environment」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
+      "category": "aiCategoryCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-19",
+      "detail": "テーマ分類候補「environment」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
       "category": "relationCandidate",
       "sourceEntityType": "petition",
       "sourceEntityId": "doc-petition-01",
@@ -185,6 +318,118 @@
       "sourceEntityId": "doc-request-04",
       "detail": "関連候補の確信度が低いです（0.3）",
       "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-05",
+      "detail": "policy（policy-mayor03-04）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-05",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-07",
+      "detail": "policy（policy-mayor03-05）との関連候補「sameTheme」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-07",
+      "detail": "関連候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-10",
+      "detail": "policy（policy-mayor03-05）との関連候補「sameTheme」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-10",
+      "detail": "関連候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-12",
+      "detail": "policy（policy-mayor03-05）との関連候補「sameTheme」（確信度0.4）が未確認です",
+      "confidence": 0.4
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "petition",
+      "sourceEntityId": "doc-petition-12",
+      "detail": "関連候補の確信度が低いです（0.4）",
+      "confidence": 0.4
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
+      "detail": "policy（policy-mayor03-03）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-08",
+      "detail": "policy（policy-mayor01-03）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-08",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-09",
+      "detail": "policy（policy-mayor01-03）との関連候補「sameTheme」（確信度0.3）が未確認です",
+      "confidence": 0.3
+    },
+    {
+      "category": "lowConfidenceCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-09",
+      "detail": "関連候補の確信度が低いです（0.3）",
+      "confidence": 0.3
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-12",
+      "detail": "policy（policy-q-gq2026-06-m24-01）との関連候補「sameTheme」（確信度0.6）が未確認です",
+      "confidence": 0.6
+    },
+    {
+      "category": "relationCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-12",
+      "detail": "policy（policy-mayor03-02）との関連候補「sameTheme」（確信度0.6）が未確認です",
+      "confidence": 0.6
     },
     {
       "category": "sourceInsufficient",
@@ -670,12 +915,18 @@
       "category": "committeeIdMissing",
       "sourceEntityType": "councilDocument",
       "sourceEntityId": "(全件)",
-      "detail": "委員会マスタが未整備のため、13件すべてでcommitteeIdが未設定です"
+      "detail": "委員会マスタが未整備のため、39件すべてでcommitteeIdが未設定です"
     },
     {
       "category": "possibleDuplicateCandidate",
       "sourceEntityType": "request",
       "sourceEntityId": "doc-request-01",
+      "detail": "同一資料に対して2件のテーマ分類候補があります（digitalization、finance）"
+    },
+    {
+      "category": "possibleDuplicateCandidate",
+      "sourceEntityType": "request",
+      "sourceEntityId": "doc-request-06",
       "detail": "同一資料に対して2件のテーマ分類候補があります（digitalization、finance）"
     },
     {

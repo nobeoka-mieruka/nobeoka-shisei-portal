@@ -1,0 +1,107 @@
+{
+  "phase": "Phase49",
+  "title": "元議員58名プロフィール・活動履歴補完 調査結果（マージ候補）",
+  "generatedAt": "2026-08-21",
+  "scope": {
+    "target": "src/data/formerMembers.json 全58名（fm01〜fm58）",
+    "readOnlyReference": "src/data/members.json（現職26名、参照専用・編集なし）",
+    "note": "本ファイルはsrc/data/formerMembers.json・src/data/archiveMemberProfiles.json等へマージ可能な形式の「候補」であり、それら本体は本タスクでは未編集（読み取り専用ルール厳守）。マージ作業者による最終判断・反映が必要。"
+  },
+  "mergeCandidates": [
+    {
+      "legacyFormerMemberId": "fm47",
+      "targetArchiveProfileId": "archive-fm47",
+      "currentName": "うちだ りさ",
+      "currentNameKana": "うちだ りさ",
+      "proposedKanjiName": "内田 理佐",
+      "proposedKanjiNameStatus": "verified",
+      "proposedKanjiNameSource": "宮崎県議会公式サイト「内田 理佐」プロフィールページ",
+      "proposedAdditions": {
+        "careerNote": "延岡市議会議員を3期12年（33歳頃初当選、45歳頃まで）務めた。在職中、商工建設常任委員会委員長、都市計画審議会委員を歴任し、延岡市バレーボール協会会長も務めた（就任日・退任日は資料に記載なく未確認）。最終学歴は熊本保健科学大学（旧・銀杏学園）衛生技術科。延岡市内の医療機関で臨床検査技師として10年間勤務した経歴を持つ。",
+        "laterCareerNote": "令和元年（2019年）4月21日執行の延岡市議会議員選挙には立候補せず、同年、宮崎県議会議員（延岡市選挙区）に新人として初当選した。本人公式サイト確認時点で県議2期目。formerMembers.json（fm47）既存noteの『令和元年4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任理由の詳細を示す公式資料は確認できておらず未確認』の退任理由を裏付ける具体的事実（市議引退＝県議転身）。",
+        "birthDate": "昭和49年（1974年）2月24日",
+        "birthDateSource": "本人公式サイト uchidalisa.info プロフィールページ（年齢の自己申告記載から逆算・本人明記の生年月日）"
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "内田 理佐（宮崎県議会公式サイト議員紹介ページ）",
+          "sourceOrganization": "宮崎県議会",
+          "sourceUrl": "https://www.pref.miyazaki.lg.jp/gikai/about/members/50on/uchida_risa.html",
+          "accessedAt": "2026-08-21",
+          "extractionMethod": "WebFetch",
+          "verificationStatus": "verified",
+          "notes": "漢字氏名「内田 理佐」、宮崎県議会議員としての当選回数2回（延岡市選挙区）、延岡市議会在職中の役職（前商工建設常任委員会委員長、前都市計画審議会委員、延岡市バレーボール協会会長）を直接確認した。就任日・退任日の記載はなし。"
+        },
+        {
+          "sourceTitle": "プロフィール｜うちだりさ公式ウェブサイト",
+          "sourceOrganization": "内田理佐 本人公式サイト",
+          "sourceUrl": "https://www.uchidalisa.info/profile-lisa-uchida",
+          "accessedAt": "2026-08-21",
+          "extractionMethod": "WebFetch",
+          "verificationStatus": "verified",
+          "notes": "生年月日「昭和49年2月24日」、学歴（延岡市立東小学校・延岡市立延岡中学校・宮崎県立延岡東高等学校・熊本保健科学大学衛生技術科卒）、延岡市内医療機関での臨床検査技師10年間勤務、延岡市議会議員を3期12年（33歳より）務めた後、45歳で宮崎県議会議員に新人として初当選した経歴を本人記載で直接確認した。市議退任の正確な年月日の直接記載はなし（『3期12年』という期間表現のみ）。"
+        }
+      ],
+      "status": "confirmed_new_facts_pending_merge"
+    },
+    {
+      "legacyFormerMemberId": "fm55",
+      "targetArchiveProfileId": "archive-fm55",
+      "currentName": "上田 みとし",
+      "currentNameKana": "うえだ みとし",
+      "proposedKanjiName": "上田 美利",
+      "proposedKanjiNameStatus": "needsReview",
+      "proposedKanjiNameSource": "政治山（seijiyama.jp）候補者情報ページ（外部集約サイトのため既存運用に倣いneedsReview）",
+      "proposedAdditions": {
+        "occupation": "農業",
+        "occupationSource": "政治山（seijiyama.jp）候補者情報ページ",
+        "ageAtElection": {
+          "electionDate": "2011-04-24",
+          "age": 58
+        }
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "延岡市議会議員選挙（2011年4月24日投票）候補者情報 上田美利",
+          "sourceOrganization": "政治山（seijiyama.jp）",
+          "sourceUrl": "https://seijiyama.jp/area/card/14040/dEWgB7/M?S=qenel5ldogt",
+          "accessedAt": "2026-08-21",
+          "extractionMethod": "WebFetch",
+          "verificationStatus": "needsReview",
+          "notes": "漢字氏名「上田 美利」、ふりがな「うえだみとし」、年齢58歳、党派「無所属」、職業「農業」、2011年4月24日執行選挙で得票数2,104票・現職として当選、の記載を直接確認した。政治山は候補者届出情報等をもとにした外部集約サイトであり、既存データがgo2senkyo.com（選挙ドットコム）をneedsReview付きで採用しているのと同種の性質のため、同基準でneedsReviewとした。当選回数・議長経験の有無等はページに記載なし。"
+        }
+      ],
+      "status": "confirmed_new_facts_pending_merge"
+    }
+  ],
+  "unresolved": [
+    {
+      "legacyFormerMemberId": "fm58",
+      "currentName": "佐藤 裕臣",
+      "issue": "宮崎日日新聞（Miyanichi e-press）の人物紹介記事「延岡市議会議長に就任した 佐藤 裕臣（さとう・ひろおみ）さん」の存在をWebSearchの検索結果タイトルおよびAI要約で把握した（1964年生まれ・北浦町三川内出身・大阪での勤務を経て1975年帰郷・農林業従事・旧北浦町議会1999年初当選・町議会議長経験・延岡市議3期目、という要約内容）。しかし該当URL（https://www.the-miyanichi.co.jp/hito/_26582.html）へのWebFetchは404 Not Foundとなり、Wayback Machineでの確認もツール制約（web.archive.orgへの直接フェッチ不可）で果たせなかった。",
+      "reason": "検索エンジンのAI要約のみを根拠とした事実追加は行わない方針のため不採用。加えて、同姓の別人（例：北浦町の別の佐藤氏）を指している可能性も排除できていない。",
+      "recommendedNextStep": "原本記事への別ルートでのアクセス（別URL・紙面魚拓・宮崎日日新聞への直接照会等）が確保できた時点で再検証すること。",
+      "status": "unresolved"
+    }
+  ],
+  "summary": {
+    "profilesEnriched": 2,
+    "newSourceRefsCount": 3,
+    "unresolvedCount": 1,
+    "namesSearchedWithNoNewInfo": [
+      "fm12", "fm16", "fm17", "fm18", "fm22", "fm23", "fm35", "fm39", "fm40",
+      "fm45", "fm49", "fm51", "fm52", "fm53", "fm54", "fm56", "fm57"
+    ],
+    "namesNotYetSearched": [
+      "fm11", "fm13", "fm14", "fm15", "fm19", "fm20", "fm21",
+      "fm24", "fm25", "fm26", "fm27", "fm28", "fm29", "fm30", "fm31", "fm32", "fm33", "fm34",
+      "fm36", "fm37", "fm38", "fm41", "fm42", "fm43", "fm44", "fm46", "fm48", "fm50"
+    ],
+    "warnings": [
+      "fm58に関するWeb検索結果の要約とWebFetch結果（404）に齟齬があった。検索エンジンのAI要約のみに基づく事実追加は行っていないが、今後の作業者は一次資料への直接アクセスで裏付けを取ること。",
+      "formerMembers.json（58件）はmembers.json（26件）とスキーマが異なり、photoUrl・profileUrl・career・committees等の構造化フィールドが存在しない。将来的な体系的補完にはスキーマ設計の検討が必要。",
+      "fm11〜fm58の48名は会議録検索システムの収録範囲（令和元年6月定例会以降）外のため、一般質問・議案賛否・委員会役職の実証には紙媒体資料や現物調査（Phase29計画と連携）が必要。",
+      "coordinatorの指示により、fm47・fm55の新規sourceRefs計3件およびfm58のunresolvedフラグの判断内容は妥当と確認済み・変更不要。本JSONはその内容をそのまま反映したもの。"
+    ]
+  }
+}

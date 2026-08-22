@@ -636,10 +636,16 @@
     "retiredDate": null,
     "termNote": "現職の赤木繁男氏（2025年8月12日同意）・上猶真美氏（2026年3月19日同意）に先立って副市長を務めた。退任日は公式資料で確認できていない。",
     "relatedLinks": [
-      { "label": "就任時の同意議案（副市長の選任（小泉智明氏））", "to": "/bills/votes/2023-06-gian-27" }
+      {
+        "label": "就任時の同意議案（副市長の選任（小泉智明氏））",
+        "to": "/bills/votes/2023-06-gian-27"
+      }
     ],
     "sourceRefs": [
-      { "label": "令和5年6月定例会 議案等審議結果（副市長の選任（小泉智明氏））", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14665.pdf" }
+      {
+        "label": "令和5年6月定例会 議案等審議結果（副市長の選任（小泉智明氏））",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14665.pdf"
+      }
     ],
     "notes": "既存データベース（billVotes.json、令和5年6月定例会の人事同意議案）に基づき登録。退任に関する議決記録は存在しない（副市長の退任は議会同意を要しないため）ため、退任日は未確認のまま。",
     "lastVerifiedAt": "2026-08-06"
@@ -817,7 +823,10 @@
     "retiredDate": "2013-03-31",
     "termNote": "2011年3月25日、平成23年第25回定例会（議案第139号）で副市長に新規選任（本会議録の市長発言）。既存civicTimelineEvents.json civic-047「2011年、副市長2人制開始」の当事者と一致。2013年3月21日、平成25年第11回定例会（議案第118号、後任選任）で、原田氏が同年3月31日をもって辞職する旨の市長発言を確認。",
     "relatedLinks": [
-      { "label": "civicTimelineEvents civic-047（2011年、副市長2人制開始）", "to": "/timeline/2011" }
+      {
+        "label": "civicTimelineEvents civic-047（2011年、副市長2人制開始）",
+        "to": "/timeline/2011"
+      }
     ],
     "sourceRefs": [
       {
@@ -880,7 +889,10 @@
     "retiredDate": null,
     "termNote": "総括担当副市長。2018年3月26日、平成30年第16回定例会（議案第123号）で選任議決（本会議録で確認）。既存civicTimelineEvents.json civic-156（就任日2018-04-01、宮崎日日新聞出典）と対応する事実を、会議録で追加確認した。2025年7月1日〜19日は市長職務代理者（既存データ）。退任日は未確認（Phase23時点。2025年8月12日就任の赤木繁男氏（csp-01）が後任とみられるが、直接の交代を示す資料は今回確認していない）。",
     "relatedLinks": [
-      { "label": "civicTimelineEvents civic-156（2018年、副市長就任）", "to": "/timeline/2018" }
+      {
+        "label": "civicTimelineEvents civic-156（2018年、副市長就任）",
+        "to": "/timeline/2018"
+      }
     ],
     "sourceRefs": [
       {
@@ -920,7 +932,10 @@
     "retiredDate": null,
     "termNote": "2018年9月14日、平成30年第19回定例会（議案第47号）で選任議決。前任・笠江孝一氏が同年10月8日に任期満了となるための後任選任（発令日は2018年10月9日頃と推定されるが未確認）。経歴（市長発言）：昭和61年から小学校教諭、宮崎県教育研修センター総務課主幹、延岡市立南小学校長等を歴任後、選任当時（2018年4月〜）は延岡市学校教育課長。退任日は未確認（Phase23時点。2024年9月20日就任の髙森賢一氏（csp-03）が後任とみられる）。",
     "relatedLinks": [
-      { "label": "教育長 髙森賢一氏（csp-03、後任）", "to": "/city-officials" }
+      {
+        "label": "教育長 髙森賢一氏（csp-03、後任）",
+        "to": "/city-officials"
+      }
     ],
     "sourceRefs": [
       {
@@ -937,18 +952,22 @@
     "roleLabel": "教育長",
     "name": "笠江 孝一",
     "status": "former",
-    "appointedDate": null,
+    "appointedDate": "2015-10-09",
     "retiredDate": "2018-10-08",
-    "termNote": "就任日は未確認（Phase23時点）。2018年10月8日、任期満了により退任（後任・澤野幸司氏の選任議決時の市長発言で確認）。",
+    "termNote": "2015年10月9日就任、2018年10月8日、任期満了により退任（広報のべおか2015年11月号・後任選任議決時の市長発言の双方で確認）。",
     "relatedLinks": [],
     "sourceRefs": [
       {
         "label": "延岡市議会会議録検索システム 平成30年第19回定例会（第5号 9月14日、議案第47号教育長の選任、市長「教育長の笠江孝一氏が、本年十月八日をもって任期満了」発言）",
         "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H300914A&startPos=0"
+      },
+      {
+        "label": "広報のべおか2015年11月号 p.9（笠江孝一氏、2015年10月9日付教育長就任の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2636.pdf"
       }
     ],
-    "notes": "Phase23（Block2）で新規発見。就任日は今回未確認（今後の調査課題。任期4年とすれば2014年10月頃就任と推定されるが、推定値は登録しない）。",
-    "lastVerifiedAt": "2026-08-21"
+    "notes": "Phase23（Block2）で新規発見、Phase52（広報のべおかOCR構造化）で就任日を確定。",
+    "lastVerifiedAt": "2026-08-23"
   },
   {
     "id": "csp-43",
