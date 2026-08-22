@@ -49,6 +49,33 @@
 
 **実際に送信していないものをsentへ誤って変更している事例は無かった。** 送信済み2件（INQ-001・002）は既に前フェーズで実際に送付されたもので、今回新たに送信したものはない。
 
+## 6. Priority B（一般質問・議案・条例・請願・陳情・委員会・人物経歴）
+
+Priority Aと異なり、この領域はすでに専用の追跡インフラが整備されていることを確認した。
+
+- **一般質問**：`src/data/councilSpeechSummaries.json`に36名分・398件の発言データが構造化済み。会議録は存在するがDB化されていない案件は、`src/data/blockedTaskClassification.json`で個別追跡されている（後述）。
+- **議案・条例・請願・陳情・委員会**、その他の「会議録公開待ち」案件は、`src/data/blockedTaskClassification.json`（15件）で以下のように分類済み：
+
+  | ステータス | 件数 | 意味 |
+  |---|---|---|
+  | MANUAL_REVIEW | 8 | 人手による追加調査が必要 |
+  | WAITING_EXTERNAL | 2 | 公式資料の公開待ち（GitHub Actionsの日次自動巡回で会議録公開時に自動反映） |
+  | RESEARCH_EXHAUSTED | 2 | 調査を尽くしたが未確認（資料不存在の確定ではない） |
+  | COMPLETED | 3 | 解決済み |
+
+  各タスクにはblockedReasonCode（例：SOURCE_NOT_PUBLISHED）・lastCheckedAt・attemptCount・autoRecheckMechanismが付与されており、推測での分類がないことをnotesで明示する設計が既に確立されている。**Priority Bとして新たに整理すべき「未構造化の一般質問」は、この既存インフラの外に漏れているものは今回発見しなかった。**
+- 「0件」と「未収録」の区別：`src/lib/completeness.ts`のCompletenessStatus語彙（confirmed_zero／not_collected／under_review／unavailable等7区分）が既にDataStatusPage.tsx等で一貫して使われていることをPhase31（UI総点検）で確認済み。今回のPhase32範囲では、この語彙から漏れて「0件」とだけ表示されている箇所は新たに発見しなかった。
+
+## 7. Priority C（出典メタデータ・リンク切れ・ページ／コマ不足）
+
+こちらも既存の自動監査インフラ（`scripts/generate-quality-summary.mjs`、`validate:sources`）がビルドのたびに実行されており、`src/data/dataQualitySummary.json`として常時最新化されている。
+
+- 出典不足（sourceHealth）：errors=0、warnings=15（出典タイトル欠落等の改善余地）、info=65（二次資料・Wayback経由公式資料の使用通知、異常ではない）
+- リンク切れ（linkHealth）：677件中11件が404等（現行サイトで使用中のデータのみ対象）。個別のURL・該当ファイルは`dataQualitySummary.json`のlinkHealth.brokenに既に記録されている
+- 件数不整合チェック：1件（2026-08-17に修正済み、既知の問題は解消済み）
+
+これらは既に自動化された継続監査であり、Phase32として新たに手作業で洗い出す必要のある項目は、今回の範囲では発見しなかった。**Priority Cの主要な成果は「既存の自動監査が正しく機能していることの再確認」である。**
+
 ## 5. Priority A checkpoint
 
 以上の監査結果に基づき、以下をsrc/dataへ反映するかどうかを検討したが、**新たなsrc/dataの変更は行っていない**（今回のPriority A監査は「発見・可視化」が中心であり、推測に基づく新規登録は行わないため）。上記の発見事項（助役・副市長間の空白、収入役スキーマの欠落、教育長の大規模空白、議長／副議長の構造化データ不在、FY1934〜1948の無追跡状態）は、いずれも本レポートに記録し、次フェーズの優先候補とする。
