@@ -1,0 +1,119 @@
+{
+ "purpose": "延岡市議会公式「延岡市議会の日程をお知らせします」ページ（現行の議会資料ハブページ）と、延岡市長定例記者会見ページを、公式一次資料としてsource ledgerへ登録・監査する。Phase27（FY1979→FY1970、1970年代歴史調査）とは別管理とし、こちらは現行（2026年時点）の議会・市長記者会見資料ルートの発見・監査を目的とする。",
+ "generatedAt": "2026-08-22",
+ "scopeNote": "reports/ndl-historical-source-ledger.json（NDL歴史資料・Phase27系）とは別ファイル。現行の公式サイト構造・PDFリンクの健全性・データ収集ルートの発見を対象とする。",
+ "sources": [
+  {
+   "id": "cur-src-01",
+   "pageTitle": "延岡市議会の日程をお知らせします",
+   "sourceType": "primary_hub",
+   "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+   "publisher": "延岡市議会（延岡市）",
+   "updatedAt": "2026-08-21",
+   "lastVerifiedAt": "2026-08-22",
+   "verificationStatus": "verified",
+   "notes": "単なる日程告知ページではなく、延岡市議会の主要データ（議長・副議長、議員名簿、会議日程、質問通告書、審議結果、意見書・決議、委員会活動報告書、会議録検索、YouTube配信、市議会だより、請願・陳情、議会改革関連ページ等）への入口となる公式ハブページと判断した。取得時点（2026-08-22）では会議日程PDFが第27回（令和8年9月定例会）に更新されており、ユーザーが当初想定していた「第26回」の会議日程PDFは既に本ハブからは直接リンクされていなかった（下記findings.session26Vs27参照）。",
+   "linkedResources": [
+    { "label": "第27回延岡市議会（定例会）会議日程（案）PDF", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28674.pdf", "type": "pdf" },
+    { "label": "令和8年度常任委員会・特別委員会開催予定表PDF", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28682.pdf", "type": "pdf" },
+    { "label": "議長・副議長", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/7133.html", "type": "page" },
+    { "label": "議員名簿", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html", "type": "page" },
+    { "label": "市議会の構成", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1415.html", "type": "page" },
+    { "label": "会議日程（このページ自体）", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html", "type": "page" },
+    { "label": "質問通告書", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html", "type": "page" },
+    { "label": "審議結果", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html", "type": "page", "note": "既存councilSessions.jsonのofficialSessionUrlと一致（2026-06セッション）" },
+    { "label": "意見書・決議", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/19435.html", "type": "page" },
+    { "label": "委員会活動報告書", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/43039.html", "type": "page" },
+    { "label": "本会議・委員会の一覧", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/list27.html", "type": "page", "note": "取得確認したところ実際は「議員の紹介」ランディングページであり、URL末尾の連番はセッション番号と一致しない（別ナンバリング体系）。list26.htmlは第26回の一覧ではなかった（推測でURLを生成して確認するアプローチは以後行っていない）。" },
+    { "label": "市議会の傍聴", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1413.html", "type": "page" },
+    { "label": "会議録検索（外部システム）", "url": "http://www.kensakusystem.jp/nobeoka/index.html", "type": "external_system" },
+    { "label": "YouTubeによる本会議等の配信", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/28033.html", "type": "page" },
+    { "label": "のべおか市議会だより", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1457.html", "type": "page" },
+    { "label": "請願・陳情", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1429.html", "type": "page" },
+    { "label": "議会改革の主な取り組み", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1417.html", "type": "page" },
+    { "label": "議会基本条例", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1435.html", "type": "page" },
+    { "label": "政策提言協議会", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1412.html", "type": "page" },
+    { "label": "議会活動報告会等", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1408.html", "type": "page" },
+    { "label": "行政視察受入", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1432.html", "type": "page" },
+    { "label": "議場見学", "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1439.html", "type": "page" }
+   ]
+  },
+  {
+   "id": "cur-src-02",
+   "pageTitle": "令和8年8月21日市長定例記者会見",
+   "sourceType": "primary",
+   "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/51618.html",
+   "publisher": "延岡市",
+   "updatedAt": "2026-08-21",
+   "lastVerifiedAt": "2026-08-22",
+   "verificationStatus": "verified",
+   "notes": "発表事項6件を全件確認し、src/data/mayorPressConferences.tsへ2026-08-21分として新規登録した。うち『延岡市史 史資料編 近世1』の刊行（発表事項5）はreports/ndl-historical-source-ledger.json ndl-src-08と同一資料であり、civicTimelineEvents.json civic-205として市政年表にも登録した。",
+   "linkedResources": [
+    { "label": "第1回延岡市車中泊避難体制整備検討会議の開催について", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28690.pdf", "type": "pdf" },
+    { "label": "はらはらわくわくふるさと体験隊〜番外編〜", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28691.pdf", "type": "pdf" },
+    { "label": "医療的ケア児（者）支援に関する啓発活動", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28693.pdf", "type": "pdf" },
+    { "label": "令和8年度職員採用試験（後期日程）", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28695.pdf", "type": "pdf" },
+    { "label": "『延岡市史 史資料編 近世1』の刊行について", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28696.pdf", "type": "pdf" },
+    { "label": "新たな学びの多様化学校の学校名について", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28697.pdf", "type": "pdf" }
+   ]
+  }
+ ],
+ "resourceInventory": {
+  "note": "「どのページに何年度から何年度まで存在するか」の予備調査。今回は大量取得を避け、ハブページ本体とその直接リンク先の存在確認にとどめた（各ページの年度別アーカイブ構造の網羅調査は次フェーズ課題）。",
+  "confirmedCoverage": [
+   { "resource": "審議結果（/site/gikai/1456.html）", "coverage": "少なくとも2026-06セッション（第26回）がofficialSessionUrlとして既存councilSessions.jsonに登録済み。過去年度分の一覧構造は未確認。" },
+   { "resource": "会議日程（本ハブページ自体）", "coverage": "取得時点の最新1会期分（第27回、令和8年9月定例会）のPDFのみ。過去会期分への遡及リンクは本ページ上には見当たらなかった。" }
+  ],
+  "pastYearEntryPoints": {
+   "investigated": [
+    "list27.html（本会議・委員会の一覧、と推定してURLパターンを類推） → 実際は「議員の紹介」ページであり、セッション番号別の一覧ではなかった。list26.html等の連番推測でのURL生成・アクセスはこの1回のみで打ち切った（不明事項を推測で補完しない方針のため）。"
+   ],
+   "conclusion": "本ハブページおよびその直接リンク先だけでは、過去年度の会議日程・質問通告書・審議結果・委員会活動報告書・市議会だよりへ体系的に遡れる構造（年度別アーカイブ一覧等）を確認できなかった。会議録検索（外部システム kensakusystem.jp/nobeoka）は既存ドキュメント（docs/nobeoka-minutes-fetch-investigation.md等）で2000年5月以降を収録すると既に確認済み。「のべおか市議会だより」（/site/gikai/1457.html）等、個別ページ内にバックナンバー一覧がある可能性は残るため、次フェーズで各ページを個別に確認することを推奨する。"
+  }
+ },
+ "brokenLinkAudit": {
+  "target": "令和8年度 常任委員会・特別委員会開催予定表（2026年8月20日更新、PDF: uploaded/attachment/28682.pdf）",
+  "httpCheck": { "status": 200, "contentType": "application/pdf", "checkedAt": "2026-08-22" },
+  "browserCheck": { "result": "正常にレンダリングされ、内容（令和8年度 常任委員会・特別委員会開催予定表、令和8年8月21日現在）を実際に確認した。リンク切れではない。", "checkedAt": "2026-08-22" },
+  "verdict": "not_broken",
+  "additionalFindings": [
+   {
+    "target": "第27回延岡市議会（定例会）会議日程（案）PDF（28674.pdf）",
+    "httpCheck": { "status": 200 },
+    "browserCheck": "正常にレンダリングされ内容を確認した。ただしPDF内部のドキュメントプロパティ（Titleメタデータ／ブラウザタブタイトル）が「第１３回延岡市議会（定例会）会議日程（案）」という、実際の表示内容（第27回、令和8年9月）と一致しない古いテンプレート由来と見られる値になっていた。",
+    "verdict": "not_broken_but_metadata_mismatch",
+    "impact": "PDF自体はリンク切れではないが、PDFのメタデータタイトルだけを見て内容を判断する自動処理（クローラー等）は誤判定するおそれがある。今後PDF内容を自動的に扱う仕組みを作る場合は、メタデータではなく本文テキスト抽出結果を正とすること。"
+   }
+  ]
+ },
+ "findings": {
+  "session26Vs27": {
+   "summary": "ユーザーの当初の指示は「第26回延岡市議会（定例会）会議日程」PDFの精読を前提としていたが、2026-08-22時点で議会公式ハブページからリンクされている会議日程PDFは既に第27回（令和8年9月定例会、会期39日間、8月28日開会）に更新されていた。第26回（令和8年6月定例会）は既にsrc/data/councilSessions.jsonに「2026-06」として登録済み・完了済みのセッションであり、本ハブページからは会議日程PDFへの直接リンクがもう存在しない。",
+   "action": "推測でURLを生成して第26回の会議日程PDFを探すことはせず（不明事項を推測で補完しない方針）、確認できた事実のみを報告する。第26回の会議日程の詳細（開会日・閉会日・一般質問日等）を追加で確認したい場合は、延岡市議会事務局への直接照会、または過去のキャッシュ・Webアーカイブでの確認が必要。"
+  },
+  "billCrossCheck": {
+   "userClaim": "ユーザーの指示では、第26回の会議日程PDFにおいて議案第14号・議案第21号が「令和8年度一般会計補正予算（二次補正）」等として記載されている、との前提だった。",
+   "existingData": "src/data/billVotes.json（sessionId: 2026-06、出典: uploaded/attachment/27929.pdf「議案等審議結果」、抽出日2026-08-02、抽出信頼度0.95、verificationStatus: verified）では、議案第14号＝「延岡市印鑑の登録及び証明に関する条例の一部を改正する条例の制定」（条例）、議案第21号も同様に条例・その他区分で登録されており、「一般会計補正予算」に該当する記載は確認できなかった。",
+   "discrepancy": "会議日程PDF（第26回分）そのものへ今回アクセスできなかったため、ユーザーの前提とbillVotes.jsonの既存登録内容のどちらが正しいかを本調査だけでは判定できない。billVotes.jsonの既存データは既に「原案可決」の審議結果PDFという一次資料に基づき検証済み（verified）のものであり、今回この既存データを推測や外部情報で上書きすることはしていない。",
+   "recommendation": "第26回の議案第14号・21号の内容について、ユーザーの手元情報（会議日程PDF等）と本サイトの既存登録内容に食い違いがある可能性があるため、可能であれば元にした資料（ファイル名・URL・取得日）をご教示いただけると、原資料同士の突合ができる。"
+  },
+  "generalQuestionCrossCheck": {
+   "userClaim": "第26回の会議日程では2026年6月23日・24日・25日に「議案に対する総括質疑及び一般質問」が設定されている、との前提だった。",
+   "existingData": "src/data/generalQuestions.jsonおよびsrc/data/councilSpeechSummaries.jsonを確認したところ、2026-06セッションに関する一般質問データは現時点で0件（登録なし）だった。",
+   "conclusion": "「予定された一般質問」と「実施済み一般質問（会議録確認済み）」を区別する仕組み自体は既存スキーマ上存在する（generalQuestions.json・councilSpeechSummariesは会議録から確認済みのものだけを登録する運用）が、2026-06セッション分はまだ会議録が反映されておらず、予定・実施のいずれの形でも未登録という状態だった。誤って「実施済み」と数えている問題は無かった（そもそも登録されていない）。次回の一般質問データベース更新作業の対象として記録する。"
+  },
+  "committeeAssignment": {
+   "userClaim": "総務政策・産業建設・厚生教育・予算審査特別委員会・議会活性化特別委員会への付託情報の確認。",
+   "note": "第26回（2026-06）分の会議日程PDFへアクセスできなかったため、この会期の委員会付託情報を新たに確認することはできなかった。billVotes.jsonの各議案データにcommittee相当のフィールドが無い場合、既存のCLAUDE.md方針（一次資料で確定できるものだけ補完）に従い、今回は補完を行っていない（データの欠落を推測で埋めていない）。"
+  }
+ },
+ "schemaProposal": {
+  "title": "会議日程→質問通告書→一般質問→会議録→議案→審議結果→委員会→市議会だより の相互参照を将来自動化する場合の設計メモ（次フェーズ候補、大型実装は今回未実施）",
+  "ideas": [
+   "councilSessions.jsonの各セッションに、公式サイトの「会議日程PDF」「質問通告書PDF」「審議結果PDF」「委員会活動報告書PDF」への直接リンクを保持するofficialDocumentUrlsのようなフィールドを追加すると、セッション単位で一次資料を横断参照しやすくなる。",
+   "generalQuestions.jsonの各エントリに、scheduledDate（質問通告書に基づく予定日）とactualDate（会議録で確認できた実施日）を分離して持たせ、会議録未反映のセッションでも「予定のみ登録・実施未確認」という中間状態を機械的に表現できるようにする（誤って実施済みとカウントしないためのスキーマ的な担保）。",
+   "billVotes.jsonにcommittee（付託委員会）フィールドが無い議案について、会議日程PDF等の一次資料から付託先が確認できた場合にのみ追記できるよう、既存のverificationStatus/extractionSource運用を踏襲した拡張を検討する。",
+   "議会公式ハブページ（gikai/6758.html）を起点に、リンク先ページ・PDFのURLパターン（attachment番号の連番性等）を定期的に機械チェックし、リンク切れ・メタデータ不整合（本監査で発見したPDF Title不一致等）を検知する軽量スクリプトの追加は、既存のscripts/validate-content.mjs・ui-audit-scan.mjsと同じ設計思想で実装可能と考えられる。ただし本フェーズでは大型実装を行わず、アイデアの記録にとどめる。"
+  ]
+ }
+}
