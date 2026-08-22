@@ -387,23 +387,48 @@
    "requiresBulkBackfill": false,
    "lastCheckedAt": "2026-08-22",
    "notes": "詳細はreports/phase20-missing-years-status.jsonおよび本Phase33レポートの「財政9年度調査表」セクションを参照。"
+  },
+  {
+   "unresolvedId": "UNR-016",
+   "category": "election",
+   "subcategory": "councilMemberElection-preDigital",
+   "targetPerson": null,
+   "targetFiscalYear": null,
+   "targetPeriod": "1933〜1998年（延岡市議会議員選挙）",
+   "description": "electionResults.jsonの「延岡市議会議員選挙」「延岡市議会議員補欠選挙」レコードは1999年分からしか存在せず、1933〜1998年の約65年間・複数十回分の市議選が未収録（電子化以前の膨大な件数のため、通常の1件ずつの精読では対応しきれない）。",
+   "currentStatus": "not_collected",
+   "priority": "C",
+   "evidenceLevel": "N/A",
+   "sourceRefs": [],
+   "alreadyCheckedSources": ["electionResults.jsonの既存レコード分布確認"],
+   "alreadyTriedMethods": [],
+   "unresolvedReason": "H（大規模構造化未着手。1回の選挙あたり定数20〜30名規模のため、単純な逐次精読では非現実的）",
+   "nextAction": "大量バックフィル候補として別タスク化する（本Phase33レポートの「大量バックフィル候補一覧」参照）。市長選挙のような1レコード/選挙ではなく、1レコード/候補者となるため件数規模が大きく異なる点に注意。",
+   "nextSourceCandidate": "延岡市選挙管理委員会の選挙結果調、延岡市史",
+   "primaryRoute": "F",
+   "secondaryRoute": "D",
+   "requiresOnsite": true,
+   "requiresInquiry": false,
+   "requiresBulkBackfill": true,
+   "lastCheckedAt": "2026-08-22",
+   "notes": "Phase33 STEP3で新規発見。市長選挙（1933年から連続して収録済み）とは異なり、市議選は候補者数が多いため優先度は市長選より低いCとした。"
   }
  ],
  "summary": {
-  "totalItems": 15,
-  "byRoute": { "A": 0, "B": 4, "C": 3, "D": 1, "E": 6, "F": 1 },
-  "byPriority": { "A": 12, "B": 3, "C": 0 },
+  "totalItems": 16,
+  "byRoute": { "A": 0, "B": 4, "C": 3, "D": 1, "E": 6, "F": 2 },
+  "byPriority": { "A": 13, "B": 2, "C": 1 },
   "byStatus": {
    "disputed": 3,
-   "unconfirmed": 4,
+   "unconfirmed": 5,
    "partially_resolved": 1,
    "not_collected": 5,
    "under_review": 1,
    "reference_pending": 1
   },
-  "requiresOnsite": 8,
+  "requiresOnsite": 9,
   "requiresInquiry": 8,
-  "requiresBulkBackfill": 5,
-  "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。"
+  "requiresBulkBackfill": 6,
+  "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。"
  }
 }
