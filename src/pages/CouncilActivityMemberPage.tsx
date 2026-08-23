@@ -62,15 +62,22 @@ const STAR_METRICS = [
   { key: "proposal", label: "請願・提案等", unit: "" },
 ] as const;
 
-function StarRating({ value }: { value: number | null }) {
+/**
+ * 星（★）による5段階評価は「議員の能力や政策の質を評価するものではありません」という
+ * このページ自体の方針（CLAUDE.mdの「独自採点を掲載しない」方針）と矛盾するため、
+ * 数値の大小を示すだけの中立な充填バーに変更した（Phase89-98横断監査で発見・修正）。
+ * 優劣を連想させる星アイコンは使わず、実数（下段に別途表示済み）を補助する視覚要素に留める。
+ */
+function ValueBar({ value }: { value: number | null }) {
   if (value === null) {
-    return <span className="text-xs text-on-surface-variant">評価対象外（データ未収録）</span>;
+    return <span className="text-xs text-on-surface-variant">データ未収録</span>;
   }
-  const stars = Math.max(1, Math.min(5, Math.round(value / 20) || 1));
+  const percent = Math.max(0, Math.min(100, Math.round(value)));
   return (
-    <span aria-hidden="true" className="text-secondary">
-      {"★".repeat(stars)}
-      <span className="text-outline-variant">{"☆".repeat(5 - stars)}</span>
+    <span className="inline-flex w-24 items-center gap-1" aria-hidden="true">
+      <span className="h-2 flex-1 overflow-hidden rounded-full bg-surface-container-high">
+        <span className="block h-full rounded-full bg-secondary" style={{ width: `${percent}%` }} />
+      </span>
     </span>
   );
 }
@@ -434,7 +441,7 @@ export function CouncilActivityMemberPage() {
               <li key={def.key} className="rounded-lg border border-outline-variant p-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="text-sm font-semibold text-on-surface">{def.label}</span>
-                  <StarRating value={m.value} />
+                  <ValueBar value={m.value} />
                 </div>
                 <p className="mt-1 text-sm text-on-surface">
                   {m.value !== null

@@ -1,0 +1,187 @@
+{
+  "generatedAt": "2026-08-23T00:00:00+09:00",
+  "phase": "Phase93",
+  "subject": "折小野良一（mayor-10）歴代市長代数表記の最終整理",
+  "priorFindingsReviewed": [
+    {
+      "file": "reports/mayor-ordinal-crosscheck.json",
+      "summary": "ordinal 12（折小野良一・第1期、1960-04-19〜1964-04-18）・ordinal 13（同・第2期、1964-04-19〜1966-12-01）とも既存archiveMayorTermsと日付が一致（confidence B/A）。代数表記そのもののずれ問題はこのファイルの対象外。"
+    },
+    {
+      "file": "reports/mayor-confidence-overview.json",
+      "summary": "mayor-10の総合confidenceはA。生年月日・退任日・主要事業（新産業都市建設）は独立資料（NDL『日本の歴代市長第3巻』）で確認済み。election.noteに『延岡商工会議所四十年史で「延岡市長選挙　折小野良一当選(第12代)」(4月)を独立資料で確認』とあり、延岡市公式資料以外の独立資料でも『第12代』表記が既に確認されていた。"
+    },
+    {
+      "file": "src/data/archiveMayors.json（mayor-10）",
+      "summary": "profileフィールドは『第12代：1960年4月〜1964年4月ごろ、第13代：1964年4月〜1966年12月ごろ』と記載。sourceRefsに4件（延岡市公式『近代の年表』／Wikipedia／NDL『日本の歴代市長第3巻』1985年＝第12・13代表記／NDL『延岡市史』1993年版コマ430の年表＝『第十一・十二代』表記）。notesフィールドで1993年版との1代ずれを既に開示済み（『要因未特定』と明記）。"
+    },
+    {
+      "file": "reports/phase82-person-term-audit-findings.json（ordinalDiscrepancies配列）",
+      "summary": "『延岡市史（1993年版）の年表は折小野氏を「第十一・十二代」と表記するが、archiveMayors.json本体・archiveMayorTerms.json・civicTimelineEvents.json・electionResults.json・reports/mayor-ordinal-crosscheck.json・searchIndex.jsonは一貫して「第12代・第13代」としており、1代分のずれが未解消のまま残っている』『MayorDetailPage.tsx（142行目、mayor.notesを描画）を通じてサイト上でも開示されており、隠蔽はされていない』『原因（助役期間の数え方の違い等）は特定されていない』と既に明記されていた（既知・再確認のみ）。"
+    },
+    {
+      "file": "reports/phase33-master-unresolved-ledger.json（items[12], unresolvedId: UNR-013）",
+      "summary": "『第十一・十二代』という具体的表記の一次資料はPhase33時点ではまだ特定できていなかった（後にPhase26で延岡市史1993年版コマ430の年表記述として特定された）。nextActionとして『延岡市史上巻（1983年版、ndl-src-03）コマ124-125の歴代市長一覧表で折小野良一氏の欄の代数表記を直接確認する』が挙げられているが、本Phase93時点でも未実施（NDL個人送信サービスへのユーザー本人ログインが必要で、本タスクの範囲外）。また、archiveMayorTerms.jsonのtermNumber（1・2）は『折小野良一個人の期数』であり、profileの『第12代・第13代』は『延岡市長職の通算代数』という別の数え方であることをPhase33 STEP2で整理済み（この2つの併存は矛盾ではなく設計上の使い分け）。"
+    }
+  ],
+  "sourcesChecked": [
+    {
+      "sourceType": "市史",
+      "sourceName": "延岡市史（延岡市史編さん委員会編、延岡市、1993年2月発行、市制60周年記念十年史、836p）年表・昭和61年（1986年）の項",
+      "publicationYear": 1993,
+      "page": "コマ430（NDL、https://dl.ndl.go.jp/pid/13200958/1/430）",
+      "ordinalNotation": "第十一・十二代",
+      "countingMethodNote": "資料に数え方の説明は記載されていない（『折小野良一元市長（第十一・十二代）が死去した』という死亡記事の一文のみ）。",
+      "checkedPreviously": true,
+      "note": "Phase26で新規発見・既に確認済み。今回は再検索していない。"
+    },
+    {
+      "sourceType": "市史",
+      "sourceName": "延岡市史（延岡市史編さん委員会編、延岡市、1963年）第五章「市政および財政の発展」歴代市長一覧・解説（初代〜十四代の表）",
+      "publicationYear": 1963,
+      "page": "コマ103（NDL、https://dl.ndl.go.jp/pid/3027323/1/103、印刷p74付近）",
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": "一部（表の存在とmayor-04〜08列の内容はreports/ndl-research-findings.jsonで確認済みだが、折小野良一（mayor-10）に対応する列・代数表記は今回の既存reports検索でも見つからなかった）",
+      "note": "表のタイトル自体が『初代〜十四代』となっており、1963年発行時点で折小野氏（当時在任中）の代数がどう記載されているか未確認のまま残っている。今回は新規のNDLアクセス（要ユーザー本人ログイン）を行っていないため、代数表記そのものは未確認。"
+    },
+    {
+      "sourceType": "市史",
+      "sourceName": "延岡市史 上（延岡市、1983年、ndl-src-03）歴代市長一覧表",
+      "publicationYear": 1983,
+      "page": "コマ124-125（reports/phase33-master-unresolved-ledger.json UNR-013のnextActionで指定）",
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "Phase33で『次に確認すべき資料』として特定されたが、本Phase93時点でも未実施。NDL個人送信サービスへのユーザー本人ログインが必要であり、本タスク（reports整理のみ・データ編集禁止）の範囲では実施しなかった。"
+    },
+    {
+      "sourceType": "全国資料（市史ではないが歴代市長を網羅する専門資料）",
+      "sourceName": "日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年）延岡市 個人略歴",
+      "publicationYear": 1985,
+      "page": "コマ361（NDL、https://dl.ndl.go.jp/pid/11897508/1/361）",
+      "ordinalNotation": "第12代・第13代（本文表記は「（12・13代）」）",
+      "countingMethodNote": "資料に数え方の説明は記載されていない。",
+      "checkedPreviously": true,
+      "note": "reports/ndl-research-findings.json finding-012で既に確認済み。今回は再検索していない。"
+    },
+    {
+      "sourceType": "市勢要覧",
+      "sourceName": "延岡市勢要覧 各年版（延岡市、1933〜2004年、NDLサーチで計12版確認済み）",
+      "publicationYear": "複数（未特定）",
+      "page": null,
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "src/data/blockedTaskClassification.jsonに『NDL個人送信サービス対象、library_login_required』として資料自体は既にリスト化されているが、内容（折小野氏の代数表記の有無を含む）はこれまで一度も読まれていない。本タスクではNDL新規ログインアクセスは実施しなかった。"
+    },
+    {
+      "sourceType": "市政要覧",
+      "sourceName": "（該当する独立資料が特定できていない）",
+      "publicationYear": null,
+      "page": null,
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "reports配下・src/data配下を横断検索したが『市政要覧』という名称の資料自体がこれまでの調査で特定・書誌登録されていない。延岡市が『市政要覧』という名称の刊行物を発行しているか自体が未確認。"
+    },
+    {
+      "sourceType": "市長名簿",
+      "sourceName": "（該当する独立資料が特定できていない）",
+      "publicationYear": null,
+      "page": null,
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "延岡市議会公式サイトは歴代議長一覧は保持しているが、歴代市長の名簿ページ・PDFは今回のWeb検索では新規に特定できなかった。延岡市公式サイト『ようこそ市長室へ』(https://www.city.nobeoka.miyazaki.jp/site/mayor/)は現職市長のプロフィールが中心で、歴代市長一覧・代数表記は含まれていない模様（今回のWebSearch結果からの判断であり、ページ全文は確認していない）。"
+    },
+    {
+      "sourceType": "市長名簿／年表候補（新規発見）",
+      "sourceName": "延岡市年表（PDF、延岡市公式サイト、https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf）",
+      "publicationYear": "未確認",
+      "page": null,
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "今回のWebSearchで新規に発見。WebFetchで内容取得を試みたが、画像ベースのPDFのためテキスト抽出に失敗し（『圧縮・エンコードされた状態』でパース不可）、ローカルにも保存したがpdftoppm未導入のためRead toolでも本文を確認できなかった。折小野氏の代数表記が含まれるかは未確認のまま。次フェーズでのOCR環境を用いた確認候補として記録する。"
+    },
+    {
+      "sourceType": "市勢要覧候補（新規発見）",
+      "sourceName": "市民力・地域力・都市力が躍動するまち（PDF、延岡市公式サイト、https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2656.pdf）",
+      "publicationYear": "未確認",
+      "page": null,
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "今回のWebSearchで新規に発見。市勢要覧的な内容の可能性があるタイトルだが、上記同様に画像ベースPDFでテキスト抽出に失敗し、内容（歴代市長一覧の有無・折小野氏の代数表記）を確認できなかった。文書の性質（市勢要覧か否か）自体も未確認。"
+    },
+    {
+      "sourceType": "選挙資料",
+      "sourceName": "src/data/electionResults.json（延岡市長選挙 折小野良一関連2件）",
+      "publicationYear": null,
+      "page": null,
+      "ordinalNotation": "第12代・第13代",
+      "countingMethodNote": "資料に数え方の説明は記載されていない。",
+      "checkedPreviously": true,
+      "note": "延岡市公式『近代の年表』の原文『延岡市長選挙　折小野良一当選（第12代）』『同再選（第13代）』を典拠として登録済み。今回は再検索していない。"
+    },
+    {
+      "sourceType": "選挙資料（独立資料）",
+      "sourceName": "延岡商工会議所四十年史（1975年）",
+      "publicationYear": 1975,
+      "page": null,
+      "ordinalNotation": "第12代",
+      "countingMethodNote": "資料に数え方の説明は記載されていない。",
+      "checkedPreviously": true,
+      "note": "reports/mayor-confidence-overview.json mayor-10.election.noteに既に記載済み。延岡市公式資料以外の独立資料でも『第12代』表記が確認されている点が重要（1993年版延岡市史の『第十一・十二代』表記が孤立した例外であることの傍証）。今回は再検索していない。"
+    },
+    {
+      "sourceType": "議会資料",
+      "sourceName": "延岡市議会会議録 個別会期（昭和40年第17〜19回＝1965年、折小野良一期）",
+      "publicationYear": 1965,
+      "page": null,
+      "ordinalNotation": "未確認",
+      "countingMethodNote": null,
+      "checkedPreviously": false,
+      "note": "src/data/blockedTaskClassification.jsonにNDLサーチ書誌登録済みと記録されているが、宮崎県立図書館での現物閲覧が必要（library_required）であり、代数表記の有無は未確認。本タスクの範囲（現地調査不可）では確認できなかった。"
+    },
+    {
+      "sourceType": "広報のべおか",
+      "sourceName": "広報のべおか バックナンバー（src/data/kohoOcrSearchIndex.json）",
+      "publicationYear": null,
+      "page": null,
+      "ordinalNotation": "対象外",
+      "countingMethodNote": null,
+      "checkedPreviously": true,
+      "note": "kohoOcrSearchIndex.jsonをキーワード『折小野』で検索したが0件。同インデックスがOCR化しているバックナンバーは2010年5月号以降のみで、折小野氏の在任期間（1960〜1966年）の号はそもそもデジタル化・OCR化されておらず、確認自体が不可能な状態である。"
+    },
+    {
+      "sourceType": "公的年表",
+      "sourceName": "src/data/civicTimelineEvents.json（civic-020, civic-198等）",
+      "publicationYear": null,
+      "page": null,
+      "ordinalNotation": "第12代",
+      "countingMethodNote": "資料に数え方の説明は記載されていない。civic-198のnotesでは1993年版延岡市史との1代ずれを明記している。",
+      "checkedPreviously": true,
+      "note": "延岡市公式『近代の年表』を典拠として『第12代』表記が既に登録済み。civic-198（1986年死去記事）のnotesで1993年版延岡市史との矛盾を明示的に記録済み。今回は再検索していない。"
+    },
+    {
+      "sourceType": "サイト内二次資料",
+      "sourceName": "Wikipedia「折小野良一」",
+      "publicationYear": null,
+      "page": null,
+      "ordinalNotation": "言及なし（既存sourceRefsのnotesに代数表記の引用は記録されていない）",
+      "countingMethodNote": null,
+      "checkedPreviously": true,
+      "note": "archiveMayors.json mayor-10のWikipediaソースrefのnotesには生没年・学歴・選挙結果等の記述はあるが、『第◯代』という代数表記への言及は記録されていない。confidenceもneedsReviewのまま。今回は再検索していない。"
+    }
+  ],
+  "causeAnalysis": "不明（推測での断定はしていません）。延岡市史（1993年版）のみが『第十一・十二代』と表記し、それ以外の一次・独立資料（延岡市公式『近代の年表』、NDL『日本の歴代市長第3巻』1985年、延岡商工会議所四十年史1975年）はいずれも『第12代・第13代』で一致している。助役在任期間の扱いの違い等が原因として過去phaseで『考えられるが未確認』と記録されたことはあるが、これはあくまで仮説の一つとして触れられたに過ぎず、1993年版延岡市史の編纂方針・数え方の根拠を直接説明した記述は、今回確認した範囲のいずれの資料にも見当たらなかった。延岡市史1963年版（初代〜十四代の表）・1983年版上巻（コマ124-125の歴代市長一覧表）は、折小野氏の代数表記を含め未確認のまま残っており、これらを確認できれば『1993年版のみが例外なのか、それとも1963・1983年版も十一・十二代寄りの数え方をしていたのか』を絞り込める可能性があるが、本タスクの範囲（NDL個人送信サービスへの新規ログインを伴わない reports/公開Web資料の整理）では確認できなかった。",
+  "currentDisclosureStatus": "src/data/archiveMayors.json のmayor-10.notesフィールドに『【2026-08-21追記（Phase26）】延岡市史（1993年版）の年表でも死去（1986年10月20日、既存値と一致）を独立確認したが、同資料は折小野氏を「第十一・十二代」と表記しており、既存の「第12代・第13代」と1代のずれがある（要因未特定、詳細は当該sourceRefsのnotes参照）』という一文が既に記載されている。この文はsrc/pages/MayorDetailPage.tsx 142行目（{mayor.notes && <p>...}）でサイト上に描画されており、市民が折小野良一氏の詳細ページを開いた際に閲覧可能な状態になっている。また同ページのsourceRefs配列内、1993年版延岡市史に対応する項目のnotesにも同旨のより詳細な説明（『既存の代数表記は延岡市公式「近代の年表」を主たる根拠としているため、矛盾を記録した上で今回は変更していない』）が記載されているが、sourceRefsの個別notesはMayorDetailPage.tsxの現在の実装では画面に描画されていない（mayor.notesのみ描画、sourceRefs配列内のnotesは描画対象外）。",
+  "uiImprovementProposal": {
+    "file": "src/data/archiveMayors.json（mayor-10.profileフィールド、データファイルにつき本workerでは編集不可。修正案として記録するのみ）",
+    "currentText": "延岡市長を2期務めた（第12代：1960年4月〜1964年4月ごろ、第13代：1964年4月〜1966年12月ごろ）。延岡市総務課長・助役を経て市長に就任。退任後、衆議院議員（宮崎1区）を務めた。",
+    "proposedText": "延岡市長を2期務めた（第12代：1960年4月〜1964年4月ごろ、第13代：1964年4月〜1966年12月ごろ。※延岡市史1993年版は「第十一・十二代」と表記しており1代のずれがある。詳細は下記の注記を参照）。延岡市総務課長・助役を経て市長に就任。退任後、衆議院議員（宮崎1区）を務めた。",
+    "rationale": "現状はmayor.notesフィールド（142行目）に詳細な説明が既に開示されているが、profileフィールド（141行目）を読んだだけの利用者は代数のずれに気づかない可能性がある。profile冒頭の代数表記の直後に一言『※延岡市史1993年版は異なる表記』と付記することで、profileだけを読んだ利用者にも注記の存在が伝わり、下のnotes段落へ誘導できる。数値そのものは変更せず、既存の『第12代・第13代』表記（延岡市公式資料・NDL資料・延岡商工会議所資料という複数の独立資料で裏付け済み）を維持したまま、例外的な1993年版の存在を早期に知らせるのみの追記であり、既存データを壊さない。"
+  }
+}

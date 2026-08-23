@@ -1,0 +1,185 @@
+{
+  "generatedAt": "2026-08-23",
+  "totalWarnings": 21,
+  "warnings": [
+    {
+      "file": "councilSessions.json",
+      "recordId": "2000-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2004-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2005-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2006-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2007-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2008-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2009-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2010-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2011-03",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2012-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2013-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2013-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2014-03",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2014-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2015-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2016-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2017-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2018-12",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2019-03",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 510行目「if (s.status === \"要確認\") warn(...)」は設計通りに機能しており誤検知ではない（false positiveではない＝G非該当）。src/data/councilSessions.jsonの該当レコードを直接確認したところ、title・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定のまま status:\"要確認\" が残っている。reports/phase33-master-unresolved-ledger.jsonのUNR-023（councilSessions.jsonへ平成年代の会期メタデータを追加する専用タスク、currentStatus: reference_pending、primaryRoute: F=大量構造化・バックフィル、requiresBulkBackfill: true）に対応する。UNR-026（同じ19件のレコード追加に関連するタスク）はcurrentStatus: \"resolved\"だが、その解決内容は「一般質問21件をisPublished:trueで公開したこと」であり、会期メタデータ自体の個別確認（開閉会日・公式URL）はUNR-023として引き続き未解決のまま残っている。ledgerのstatus表記と本警告の対応関係を誤読しないよう注意が必要。会議録検索システム（kensakusystem.jp/nobeoka）または議会公式サイトで19件×複数フィールドを個別に確認する必要があり、単発の修正では終わらない大規模な追加データ収集作業である。",
+      "comparedToPhase85": "Phase85時点（分類F＝大量バックフィル待ち、UNR-026対応）から実データに変化なし。19件全件についてsrc/data/councilSessions.jsonを再確認したが、startDate・endDate・officialSessionUrlはいずれも今回も未設定のまま（status: \"要確認\"のまま）。lastVerifiedフィールドの日付だけは2026-08-23（本日）に更新されているが、これは一括タイムスタンプ更新等の可能性があり、実際に会期日程・公式URLの確認作業が行われた形跡はない。UNR-026がcurrentStatus: \"resolved\"に変わった点はPhase85からの変化だが、これは一般質問backfillタスクの解決であり、本警告（会期メタデータの要確認フラグ）とは別のマイルストーンである。分類は据え置きでF相当（本タスクの分類記号ではE：大量backfill待ち）。"
+    },
+    {
+      "file": "archiveMayorTerms.json",
+      "recordId": null,
+      "message": "任期が登録されていない空白期間があります（13件）: 1937-01-06〜1937-03-06、1937-04-14〜1937-05-16、1937-06-15〜1937-09-26、1941-09-25〜1941-10-22、1942-04-25〜1942-05-19、1946-03-06〜1946-03-29、1947-03-22〜1947-04-16、1948-06-06〜1948-07-16、1952-06-19〜1952-07-11、1956-03-27〜1956-04-21、1966-12-01〜1967-01-22、1978-10-05〜1978-11-05、1994-01-11〜1994-02-06",
+      "classification": "E",
+      "reason": "scripts/validate-data.mjs 1673-1697行目のgap検出ロジックを実際に読んで検証した。sortedByStartで就任日順に並べ、前任者のtermEnd（または現職なら当日）から次の就任日までの間に1日を超える空白があるかを判定しており、退任日と就任日が連続する（1日差）ケースは誤検出しないよう既に配慮されている（コード内コメントにもその旨明記）。src/data/archiveMayorTerms.json（登録済み30任期）にはrole/type等の「職務代理」を示すフィールドが存在せず、13区間について実際に空白（後任未定・助役職務代理等）なのかデータ未収録なのかを判別する情報が無い。ロジック側の誤検知（G）ではなく、データが真に不足している状態を正しく警告している。reports/phase33-master-unresolved-ledger.jsonのUNR-029（category: mayor、subcategory: mayorTerm-dateGaps）が本警告と1対1で対応する専用項目として存在し、currentStatus: \"partially_resolved\"、primaryRoute: B（既存source ledgerの再確認）、secondaryRoute: C（NDL等追加調査）、requiresBulkBackfill: trueと記録されている。13区間は1937・1941・1942・1946・1947・1948・1952・1956・1966-67・1978・1994年の戦前〜平成初期に分散しており、延岡市史・官報等の一次資料を区間ごとに個別照合しないと日単位の就任・退任日を確定できない、大規模な追加データ収集が必要な状態。",
+      "comparedToPhase85": "Phase85時点では「本警告に1対1で対応する専用UNR項目が存在しない」と指摘し、専用UNR起票を推奨していた。これを受けて reports/phase33-master-unresolved-ledger.json にUNR-029（mayorTerm-dateGaps）が新規起票され、notesにも「Phase82・Phase85が同一問題をF＝大量バックフィル待ちに分類し、専用UNR起票を推奨」と明記されている点が確認できた＝台帳整備は前進した。ただし、これはUNR管理台帳上の追跡精度が上がっただけであり、13区間の実データ（就任・退任日の日単位確定）そのものは1件も追加されておらず、validate:dataの警告文言・件数（13件）もPhase85から完全に一致し変化なし。UNR-029のnotesは「UI表示は既に精度注記付きで正確なため、市民向け表示上の緊急性は低い」とも記しており、緊急対応不要だが未解決である点はPhase85の判断と同じ。"
+    },
+    {
+      "file": "archiveFiscalYears.json",
+      "recordId": null,
+      "message": "登録済み年度の範囲内(1933〜2026)に欠番があります: 1934、1935、1936、1937、1938、1939、1940、1941、1942、1943、1944、1945、1946、1947、1948、1951、1952、1953、1959、1983、1984、1985、1986、1987",
+      "classification": "E",
+      "reason": "scripts/lib/validate-archive-common.mjs 160-170行目のcheckYearGapsは、登録済みfiscalYearの最小値〜最大値の範囲内で欠けている年度を機械的に列挙するだけの汎用関数であり、ロジック上の誤検知は見当たらない（G非該当）。欠番24年度は reports/phase33-master-unresolved-ledger.json のUNR-014（1934〜1948年度、15年度、currentStatus: not_collected、対象資料候補の調査自体が未着手、primaryRoute: B/secondaryRoute: D）とUNR-015（1951・1952・1953・1959・1983-1987年度、9年度、currentStatus: reference_pending、primaryRoute: E=外部機関への問い合わせが必要/secondaryRoute: D=現地閲覧）に完全一致する（15+9=24年度）。UNR-015の9年度分については reports/phase21-inquiry-tracker.json でINQ-001（宮崎県立図書館向け、対象年度1951・1952・1953・1959・1983-1987の9年度）とINQ-002（宮崎県統計調査課向け、対象年度1983-1987の5年度）がsendStatus: \"sent\"（inquiryDate: 2026-08-21）・status: \"waiting\"（responseStatus: \"waiting_response\"）であることを確認した＝運営者により実際に照会が送付済みで回答待ちの段階まで進んでいる（本タスクの分類ではD：外部照会待ちに相当する部分を含む）。一方UNR-014の15年度分は対象資料の候補調査自体が未着手（not_collected）のままで、こちらは大規模な追加データ収集（E）が必要。1件の警告に進捗段階の異なる24年度分（E相当15年度＋D相当9年度）が混在しているため、全体としては大規模な追加データ収集が必要なE（過半数の15年度が未着手）を代表分類とし、D進捗中の9年度分の内訳を本reasonおよびmarkdownレポートに明記する。",
+      "comparedToPhase85": "Phase85時点では「UNR-015分は照会文が作成済み・未送付（reports/phase29-inquiry-templates.md）」と記録されていたが、reports/phase21-inquiry-tracker.jsonを再確認した結果、INQ-001（宮崎県立図書館、対象年度1951・1952・1953・1959・1983-1987）とINQ-002（宮崎県統計調査課、対象年度1983-1987）の2件が2026-08-21付でsendStatus: \"sent\"へ進み、現在waiting_response（回答待ち）の状態にあることを確認した＝Phase85からの実質的な進展（D：外部照会待ちの段階へ前進）。ただしarchiveFiscalYears.json側にはまだ回答が反映されておらず、reports/phase21-inquiry-tracker.jsonのarchiveFiscalYearsPolicyにも「回答が得られ一次資料で年度・歳入・歳出・会計区分・単位・出典のすべてを確認できるまでreference_pendingのまま維持する」と明記されているため、validate:dataの欠番年度リスト・警告文言はPhase85と完全に一致し変化なし。UNR-014側（15年度、投資調査未着手）はPhase85から状況変化なし。"
+    }
+  ],
+  "summaryByClassification": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "E": 21,
+    "F": 0,
+    "G": 0,
+    "H": 0
+  },
+  "codeFixesApplied": []
+}

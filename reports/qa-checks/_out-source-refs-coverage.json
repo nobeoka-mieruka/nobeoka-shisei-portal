@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T04:36:55.958Z",
+  "generatedAt": "2026-08-23T13:28:52.248Z",
   "filesScanned": 71,
   "arraysAnalyzed": 46,
   "lowCoverageCount": 22,
@@ -339,9 +339,9 @@
     {
       "file": "searchIndex.json",
       "arrayPath": "$",
-      "totalRecords": 2191,
+      "totalRecords": 2196,
       "recordsWithSource": 0,
-      "recordsWithoutSource": 2191,
+      "recordsWithoutSource": 2196,
       "coveragePercent": 0,
       "sampleMissingIds": [
         "member-m01",
@@ -399,9 +399,9 @@
     {
       "file": "updateHistory.json",
       "arrayPath": "$",
-      "totalRecords": 115,
+      "totalRecords": 120,
       "recordsWithSource": 0,
-      "recordsWithoutSource": 115,
+      "recordsWithoutSource": 120,
       "coveragePercent": 0,
       "sampleMissingIds": [
         "u97",
@@ -980,9 +980,9 @@
     {
       "file": "searchIndex.json",
       "arrayPath": "$",
-      "totalRecords": 2191,
+      "totalRecords": 2196,
       "recordsWithSource": 0,
-      "recordsWithoutSource": 2191,
+      "recordsWithoutSource": 2196,
       "coveragePercent": 0,
       "sampleMissingIds": [
         "member-m01",
@@ -1040,9 +1040,9 @@
     {
       "file": "updateHistory.json",
       "arrayPath": "$",
-      "totalRecords": 115,
+      "totalRecords": 120,
       "recordsWithSource": 0,
-      "recordsWithoutSource": 115,
+      "recordsWithoutSource": 120,
       "coveragePercent": 0,
       "sampleMissingIds": [
         "u97",

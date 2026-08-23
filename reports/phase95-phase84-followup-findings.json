@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-08-23",
+  "phase": "Phase95",
+  "followUpTo": "reports/phase84-elections-bills-audit-findings.json",
+  "scope": {
+    "instruction": "Phase84で残った未修正2件（billIssues.voteCountMismatches / petitionIssues.zeroVsNotCollectedConfusion）の解消調査。src/data/*.jsonの直接編集は禁止。表示ロジック（UI側のstatus判定コード）の安全な修正のみ許可。",
+    "filesRead": [
+      "reports/phase84-elections-bills-audit-findings.json",
+      "src/data/billVotes.json",
+      "src/data/councilSessions.json",
+      "src/types/index.ts",
+      "src/pages/BillVoteDetailPage.tsx",
+      "src/pages/BillVotesPage.tsx",
+      "src/lib/councilActivityBarometer.ts",
+      "scripts/lib/session-summary.mjs",
+      "public/council-documents/2021/2021-06/2021-06.pdf",
+      "public/council-documents/2021/2021-09/2021-09.pdf",
+      "public/council-documents/2021/2021-12/2021-12.pdf",
+      "public/council-documents/2022/2022-03/2022-03.pdf",
+      "public/council-documents/2020/2020-09/2020-09.pdf（比較対照用）"
+    ],
+    "codeChangesMade": false,
+    "dataChangesMade": false
+  },
+
+  "voteCountMismatch": {
+    "taskPremise": "billVotes.jsonの議案について賛成+反対+退席+欠席+棄権等の合計が議員定数と一致しない具体的原因を調査する、という指示だったが、実際にPhase84が『voteCountMismatches』として記録していた項目群を精読した結果、そのうち数値上の不一致は1件も存在しなかった（後述）。指示文と実データの前提にズレがあったため、実データに基づいて忠実に報告する。",
+    "memberVotesFullyRecordedBills": [
+      {
+        "billId": "2019-09-gian-47",
+        "session": "令和元年9月定例会（9月30日、再議の記名投票）",
+        "expectedTotal": 27,
+        "expectedTotalBasis": "electionResults.json election-council-2019のseats=27（当時の議員定数）",
+        "actualTotal": 27,
+        "actualBreakdown": "approve 20 / oppose 7 = 27（memberVotes配列を機械集計し、verificationNote記載の『出席議員27名中、賛成20名・反対7名』と完全一致することを確認）",
+        "investigationResult": "match_confirmed（不一致なし）",
+        "cause": "該当なし（不一致が発生していないため原因調査の対象外）",
+        "note": "verificationNoteによれば、会議録原文（R010930A）を精読したうえで、この記名投票では議長を含む出席議員27名全員の氏名・賛否がPDF上に明記されており、議長も投票者に含まれていた（fm03＝松田和己氏、当時の議長、approveで記録）。これは『議長は採決に加わらない』という一般的な慣例とは異なる記録だが、一次資料（会議録・審議結果PDF）の記載どおりに登録されているものであり、データ側の誤りではない。"
+      },
+      {
+        "billId": "2023-07-extraordinary-01-gian-9",
+        "session": "令和5年7月臨時会（1）（7月11日、再議の記名投票）",
+        "expectedTotal": 27,
+        "expectedTotalBasis": "electionResults.json election-council-2023のseats=27（当時の議員定数）",
+        "actualTotal": 27,
+        "actualBreakdown": "approve 16 / oppose 11 = 27（memberVotes配列を機械集計）",
+        "investigationResult": "match_confirmed（不一致なし）",
+        "cause": "該当なし",
+        "note": "この記録もmemberVotesの先頭にm22（松田満男氏、当時の議長）がapproveで含まれており、2019-09-gian-47と同様に議長を含む27名全員の記名投票結果として登録されている。"
+      }
+    ],
+    "unresolvedFieldsInconsistency": {
+      "description": "Phase84のvoteCountMismatches配列内でBILL-VOTE-01として記録されていた項目。件数の不一致ではなく、verificationStatus=\"verified\"かつverificationNoteで内容確認済みと明記されているのに、unresolvedFields配列に\"result\"が残存したままという内部的な矛盾。",
+      "affectedIds": [
+        "2019-09-gian-52",
+        "2019-09-gian-53",
+        "2019-09-gian-54",
+        "2019-09-gian-55",
+        "2019-09-gian-56",
+        "2019-09-gian-57",
+        "2019-09-seigan-1"
+      ],
+      "verifiedFieldValues": "7件全てでverificationStatus=\"verified\"、unresolvedFields=[\"result\"]、verificationNoteに『会議録原文（R010913A／R010930A）の委員長報告・議長の採決宣言を精読し確認した』（自動抽出時の件名抽出信頼度低下による確認待ちだったが、内容自体に誤りはなかった）旨が明記されていることを再確認した。",
+      "investigationResult": "特定済み（データ登録プロセス上のクリーンアップ漏れ）",
+      "cause": "verificationStatusをverifiedへ更新した際、unresolvedFields配列のクリア処理が行われなかった（人手または自動化スクリプトの更新漏れ）と推定される。verificationNote自体の内容は7件とも一貫しており、確認プロセスの実施自体には疑義がない。",
+      "uiImpact": "src/pages/BillVoteDetailPage.tsx L384-390で `!isVerified` によりガードされているため、verificationStatus=\"verified\"の現状ではこの警告文言はユーザーへ表示されない（実害なし）。isVerified = (verification === \"verified\") をL154で定義済み。",
+      "proposedFix": {
+        "file": "src/data/billVotes.json",
+        "action": "上記7件のunresolvedFieldsを空配列[]に更新する。",
+        "basis": "各レコード自身のverificationNote（一次資料である会議録原文R010913A・R010930Aを精読し確認済みと明記）に基づく。新規の推測・書き換えは行わず、既存フィールド間の矛盾（verificationStatus=verifiedなのにunresolvedFieldsが未クリア）を解消するだけの機械的修正。",
+        "appliedInThisPhase": false,
+        "reasonNotApplied": "src/data/*.jsonの直接編集はPhase95の作業ルールで禁止されているため、修正候補としてのみ記録する。"
+      }
+    }
+  },
+
+  "fy2021PetitionZeroCase": {
+    "period": "令和3年度（FY2021）: 令和3年6月定例会（第15回）・令和3年9月定例会（第16回）・令和3年12月定例会（第17回）・令和4年3月定例会（第21回）",
+    "investigationMethod": "billVotes.json / councilSessions.jsonの該当4会期の`resultDocumentUrl`と一致するPDF原本（public/council-documents/配下にサイトが既に保管している『議案等審議結果』PDF、延岡市議会公式サイト掲載のものと同一）をReadツールで直接読み取り、【請願】【陳情】の見出しセクションの有無を確認した。比較対照として、請願・陳情が実在することが既にbillVotes.jsonで確認できている隣接年度（令和2年9月定例会＝2020-09.pdf）の同種PDFも読み、そちらには【陳情】セクション（陳情第5号・第6号、審議結果『採択』）が実在することを確認した。加えて、延岡市議会公式サイトの『請願・陳情』ページ（https://www.city.nobeoka.miyazaki.jp/site/gikai/1429.html）をWebFetchで確認したが、これは提出手続きの説明ページであり、過去の請願・陳情の一覧・件数を掲載したページではなかった（延岡市議会公式サイトには請願・陳情の累積アーカイブ一覧ページ自体が存在しないと考えられる）。",
+    "primarySourceChecked": true,
+    "primarySourceDetail": [
+      { "session": "2021-06（第15回）", "pdf": "/council-documents/2021/2021-06/2021-06.pdf", "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1528.pdf", "sections": ["市長提出議案", "議員提出議案", "市長報告"], "petitionSectionPresent": false },
+      { "session": "2021-09（第16回）", "pdf": "/council-documents/2021/2021-09/2021-09.pdf", "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6051.pdf", "sections": ["市長提出議案", "委員会提出議案", "市長報告"], "petitionSectionPresent": false },
+      { "session": "2021-12（第17回）", "pdf": "/council-documents/2021/2021-12/2021-12.pdf", "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/7290.pdf", "sections": ["市長提出議案", "市長報告"], "petitionSectionPresent": false },
+      { "session": "2022-03（第21回）", "pdf": "/council-documents/2022/2022-03/2022-03.pdf", "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/8530.pdf", "sections": ["市長提出議案", "委員会提出議案", "市長報告"], "petitionSectionPresent": false },
+      { "session": "2020-09（第9回、比較対照）", "pdf": "/council-documents/2020/2020-09/2020-09.pdf", "sections": ["市長提出議案", "委員会提出議案", "陳情", "市長報告"], "petitionSectionPresent": true, "detail": "陳情第5号（地方たばこ税を活用した分煙環境整備に関する陳情書、採択）、陳情第6号（長浜・方財海岸の侵食対策について、採択）の2件を含む【陳情】の見出しセクションが実在。billVotes.jsonの2020-09-chinjo-5/6と一致。" }
+    ],
+    "findingResult": "confirmed_zero",
+    "evidence": "billVotes.jsonの請願・陳情データは、councilSessions.json側のsourceDocumentId経由で参照される『議案等審議結果』PDF（延岡市議会公式サイト掲載）のみを情報源としている（scripts/lib/session-summary.mjsのhasDocumentCategory(..,'petitions')判定に対応する専用の請願・陳情カテゴリ文書は、councilSessions.json全61会期のいずれにも1件も登録されていないことを機械確認済み＝この判定は現状常にcategories.includes('請願'/'陳情')側でのみ真になる設計）。すなわちbillVotes.jsonのカテゴリ分類とPDF本文は同一情報源であり、令和3年度4会期分のPDF原本を直接確認した結果、いずれにも【請願】【陳情】の見出しセクション自体が存在しなかった。一方、請願・陳情が実在した隣接年度のPDF（2020-09等）には同様の見出しセクションが明確に存在する。したがって『その他』分類（32件）に請願・陳情が誤って混入した可能性（Phase84が示唆していた仮説）は否定でき、令和3年度の4会期については『市議会公式資料に基づき審議結果として公表された請願・陳情が0件だった』という事実を一次資料で確認できた。",
+    "caveat": "この確認は『議案等審議結果PDFに掲載された（＝何らかの結果が確定した）請願・陳情が0件』であることの確認であり、『市民から請願・陳情の提出自体が一切無かった』ことまでを証明するものではない（例えば、要件不備で正式受理されなかった文書や、年度末時点で継続審査のまま次年度に持ち越された案件がPDFに現れない可能性は理論上排除できない）。ただし、他の全7年度（令和1〜8年度）はいずれも『継続審査』を含め何らかの請願・陳情の審議結果が最低1件はPDLに掲載されており、令和3年度の4会期だけが完全に0件だった。また、この調査は延岡市議会公式サイトのWeb検索・WebFetchによる限定的な確認であり、会議録検索システム（kensakusystem.jp/nobeoka）内の全文検索や、議会事務局への直接照会までは行っていない。",
+    "schemaGapNote": "src/types/index.ts のBillVoteItem・CouncilSession型を確認した結果、『ある年度・会期において請願・陳情が確認済みで0件だった（confirmed_zero）』と『単に未収集・未確認である（not_collected）』を区別できるフィールドは、現状のスキーマに存在しない。BillVoteItemは1件の議案・請願・陳情ごとのレコード型であり、『0件だったこと自体』を表現する主体（会期・年度単位の集計スロット）が存在しない。CouncilSession型にも同種のフィールドはない。scripts/lib/session-summary.mjsのhasPetitions判定も、billVotesレコードの存在の有無だけを見ており、0件が確認済みかどうかを区別する情報を持たない。",
+    "schemaExtensionProposal": "実装は行っていないが、拡張案として、CouncilSession型（councilSessions.json）に任意フィールド `petitionReviewStatus?: \"has_records\" | \"confirmed_zero\" | \"not_collected\"` のようなものを追加し、審議結果PDFを人が確認して請願・陳情セクションの有無を判定した会期にのみ\"confirmed_zero\"または\"has_records\"を設定する（未設定は従来どおりnot_collected相当として扱う）方法が考えられる。これによりscripts/lib/session-summary.mjsのhasPetitions判定やDataStatusPage.tsxのstatusBadge()ロジックが、0件を『未確認』と混同せずに明示できるようになる。ただし本Phaseではsrc/data/*.jsonへの直接編集が禁止されているため、スキーマ変更自体は行わず提案に留める。",
+    "uiFixApplied": false,
+    "uiFixDetail": "調査の結果、令和3年度4会期については一次資料（審議結果PDF原本）に基づき『請願・陳情0件』が事実として確認できたため、現在のUI挙動（BillVotesPage.tsxで年度=令和3年度・分類=請願または陳情を選択した場合に表示される『条件に一致する議案は見つかりませんでした。』という中立的な文言、およびscripts/lib/session-summary.mjsが当該4会期の会期概要文で『請願・陳情の審査も行われました。』の一文を単に省略する挙動）は、いずれも事実に反する表示ではなく、修正の必要はないと判断した。もし0件が『未確認』のままであれば『令和3年度分は確認中です』等への文言修正が必要だったが、本調査で確認済みの事実（confirmed_zero）と判明したため、あえて『確認中』という後退した表現に書き換えることはしていない。DataStatusPage.tsx等の集計ロジックについてもPhase84時点で既に『count===0の場合はzeroStatus未指定ならnot_collected扱い』という安全側の設計になっており、請願・陳情関連のDataDomainエントリでzeroStatusを明示指定している箇所も無い（Phase84のreviewed_no_issue_foundを再確認、変更なし）。"
+  },
+
+  "qualityChecks": {
+    "codeChangesMade": false,
+    "typecheckRun": false,
+    "lintRun": false,
+    "reason": "本Phaseではsrc/pages・src/lib等のコードを一切変更していない（調査の結果、安全な文言修正が必要な誤表示箇所が見つからなかったため）。タスク指示の『コード修正後は必ずtypecheck/lintを実行する』はコード修正を行った場合の条件付き手順であり、修正が発生しなかったため未実施。"
+  },
+
+  "openItemsForFutureFollowUp": [
+    "unresolvedFieldsInconsistency.proposedFix（7件のunresolvedFieldsクリア）をsrc/data/billVotes.jsonへ適用するタスク（他workerとのコンフリクトを避けデータ編集専任フェーズで実施）。",
+    "schemaExtensionProposal（CouncilSession型へのpetitionReviewStatus等の追加）の要否検討。",
+    "令和3年度4会期について、可能であれば延岡市議会事務局・会議録検索システムの全文検索で『請願』『陳情』の語を直接検索し、confirmed_zeroの確度をさらに高める（本Phaseはネットワーク経由のWeb検索・WebFetchのみで確認、会議録検索システム内の全文検索UIまでは操作していない）。"
+  ]
+}

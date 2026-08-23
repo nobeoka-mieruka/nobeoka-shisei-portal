@@ -1933,8 +1933,8 @@
             "sourcePublishedDate": null,
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "verificationStatus": "verified",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
           }
         ]
       },
@@ -2067,8 +2067,8 @@
             "sourcePublishedDate": null,
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "verificationStatus": "verified",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
           }
         ]
       },
@@ -2202,7 +2202,7 @@
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、直接の目視確認は実施していないが、前年度（FY2002）・翌年度（FY2004）の原本PDFをいずれも目視確認し、両方とも同一値（1,434,111千円）であることを確認したため、FY2003も同一値である可能性が極めて高いと判断した（ただし本レコード自体の原本は未確認のため、精度としてはneedsReviewからverifiedへは格上げしない）。"
           }
         ]
       },
@@ -2335,8 +2335,8 @@
             "sourcePublishedDate": null,
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "verificationStatus": "verified",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
           }
         ]
       },
@@ -2602,8 +2602,8 @@
             "sourcePublishedDate": null,
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "verificationStatus": "verified",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
           }
         ]
       },
@@ -2726,8 +2726,8 @@
             "sourcePublishedDate": null,
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "verificationStatus": "verified",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、FY2008の原本PDF（平成20年度決算カード）に前年度（平成19年度＝FY2007）比較列が掲載されており、そこに記載された財調欄の数値（2,562,208千円）が現行DB値と完全一致することを確認した。"
           }
         ]
       },
@@ -2850,8 +2850,8 @@
             "sourcePublishedDate": null,
             "accessedAt": "2026-08-17",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+            "verificationStatus": "verified",
+            "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
           }
         ]
       },
@@ -5065,8 +5065,8 @@
             "sourcePublishedDate": "2026-03-31",
             "accessedAt": "2026-07-14",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和3年度末）から移行。"
+            "verificationStatus": "verified",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和3年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5210,8 +5210,8 @@
             "sourcePublishedDate": "2026-03-31",
             "accessedAt": "2026-07-14",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和4年度末）から移行。"
+            "verificationStatus": "verified",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和4年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5355,8 +5355,8 @@
             "sourcePublishedDate": "2026-03-31",
             "accessedAt": "2026-07-14",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和5年度末）から移行。"
+            "verificationStatus": "verified",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和5年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5500,8 +5500,8 @@
             "sourcePublishedDate": "2026-03-31",
             "accessedAt": "2026-07-14",
             "extractionMethod": "manual",
-            "verificationStatus": "needsReview",
-            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和6年度末）から移行。"
+            "verificationStatus": "verified",
+            "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和6年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",

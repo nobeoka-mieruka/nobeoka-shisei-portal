@@ -1,0 +1,418 @@
+{
+  "generatedAt": "2026-08-23T00:00:00+09:00",
+  "scopeNote": "対象16区間の内訳を実際に読んで確定したところ、reports/phase82-person-term-audit-findings.json の newTermGaps配列（3件）＋ reports/phase33-master-unresolved-ledger.json UNR-029が指す archiveMayorTerms.json 内の日単位空白13区間 の合計がちょうど16件となり、これが指示文の『16区間（Phase82新規3件＋既知13区間）』の実体であると判断した（archiveMayorTerms.jsonの全遷移点を機械的に洗い出し、13件で一致することを本フェーズで確認した）。一方、指示文が例示したphase82-person-term-audit-findings.jsonのnameConfirmedButTermUnconfirmed配列には、教育長csp-43・助役csp-44/45/54・収入役csp-47/48/49という『個人の在任期間そのものが未確定』な7件が別途存在する。これらはnewTermGapsの3件とは性質が異なる（前任者⇔後任者の間の空白ではなく、単独人物の始期・終期が未確定）が、指示文が『特に教育長・助役の新規3件を優先』と明記しているため、水増し・削減せず対象に含めて調査した。結果として本レポートは合計23区間（newTermGaps 3 + nameConfirmedButTermUnconfirmed 7 + archiveMayorTerms.json日単位空白13）を対象とする。監査委員（csp-23/24/25、同時3名体制の是非）はphase82のnameConfirmedButTermUnconfirmedに含まれるが『前任者→後任者の空白』でも『個人任期の空白』でもなく並存人数の論点のため、本フェーズのスコープ（任期空白の再調査）からは除外した。",
+  "totalGapsInvestigated": 23,
+  "totalGapsInvestigatedBreakdown": {
+    "phase82NewTermGaps": 3,
+    "phase82NameConfirmedButTermUnconfirmed": 7,
+    "unr029MayorDayPrecisionGaps": 13
+  },
+  "gaps": [
+    {
+      "gapId": "G1",
+      "sourceRef": "phase82-newTermGaps[0] / UNR-010",
+      "role": "assistant-mayor（助役、2007年4月以降は副市長に相当）",
+      "prevPerson": "csp-46 後藤梅雄（15代、退任1983-02-19）",
+      "nextPerson": "csp-35 杉本隆晴（副市長、就任2006-02-28）",
+      "gapStart": "1983-02-20",
+      "gapEnd": "2006-02-27",
+      "existingSources": [
+        "延岡市史上巻コマ126（csp-46 termNoteの16代『（後藤）三樹博』1983-02-10就任という手がかり、姓は延岡市史1993年版コマ425の断片「梅雄→三樹博」から推定、確定はしていない）",
+        "reports/phase27-fy1970s-checkpoint-raw.md（16代三樹博の発見記録）",
+        "reports/phase37-mayors-specialposts-findings.md（UNR-010を『blocked、今回は着手せず』と記録）"
+      ],
+      "newSourcesChecked": [
+        "src/data/civicTimelineEvents.json civic-176・civic-177を新たに突合した結果、柳田喜継氏が助役として平成3年（1991年）から在任し、平成15年（2003年）2月13日に4期目の再任議決（延岡市議会会議録検索システム H150128A、議案第74号）を受け、平成18年（2006年）2月3日付で退職、後任が杉本隆晴氏（2006-02-28選任、議案第272号）であったことを、既にsrc/data内に構造化データとして登録済みであることを確認した（citySpecialPosts.jsonへは未反映）。",
+        "src/data/searchIndex.json（柳田喜継関連2件、civicTimelineEventsと同内容が転記されていることを確認）",
+        "src/data/kohoOcrSearchIndex.json（柳田喜継・三樹博いずれもヒットなし）"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "新規一次資料の発見ではないが、既存civicTimelineEvents.json（civic-176/177、Phase24で会議録から確認済み・lastVerifiedAt 2026-08-21）を突合したことで、23年間とされてきた空白の実質的な未確認区間は『1983年2月（後藤梅雄退任/三樹博就任、姓未確定）〜1991年（柳田喜継の初回就任、日付未確認）』の約8年間に大きく縮小することが判明した（1991〜2006年は柳田喜継氏の在任で埋まっている）。citySpecialPosts.jsonへ柳田喜継氏・三樹博氏を新規登録すればUNR-010の空白期間の記述自体を大幅に短縮できるため、proposedFixとして記録する（データ書き込みは行っていない）。残る1983-1991年の空白と柳田喜継氏の初回就任日（月日）は、延岡市史1993年版（ndl-src-05、pid 13200958）のコマ420-426・429-439（Phase25/26で未読と明記されている残り部分）に記載がある可能性が高く、NDL個人送信サービス（要ログイン、本ワーカーはアクセス不可）での追加精読が次の一歩。"
+    },
+    {
+      "gapId": "G2",
+      "sourceRef": "phase82-newTermGaps[1]",
+      "role": "assistant-mayor（助役）",
+      "prevPerson": "csp-52 進藤林蔵（3代、就任1937-11-05）",
+      "nextPerson": "csp-53 江藤千吉郎（4代、就任1942-01-10）",
+      "gapStart": "1937-11-05（進藤林蔵就任）",
+      "gapEnd": "1942-01-10（江藤千吉郎就任）",
+      "existingSources": [
+        "延岡市史上巻コマ126「歴代市長、助役および収入役等」一覧表（1 助役）（csp-52 termNoteに『至昭和16年（1941年）12月ごろ』の月精度候補あり、日は判読不確実のため未反映）"
+      ],
+      "newSourcesChecked": [
+        "src/data/civicTimelineEvents.json・searchIndex.json・kohoOcrSearchIndex.jsonを『進藤林蔵』『江藤千吉郎』で検索したが、citySpecialPosts.json以外に記載なし。",
+        "reports/phase33-master-unresolved-ledger.json UNR-009（助役6〜10代の同じ一覧表の再読試行記録）を確認したが、対象は6〜10代でありこの3〜4代の遷移とは別列。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "csp-52のtermNoteに既に『至昭和16年（1941年）12月ごろ』という月精度の候補値が存在する（1941年12月退任・1942年1月就任なら1ヶ月弱の空白で自然に接続する）。日精度化にはNDL個人送信サービスでの延岡市史上巻コマ126の再読（高倍率）が必要。UNR-009と同じ列・同じ資料であり、単独タスクとしてではなくUNR-009の再読作業と合わせて実施するのが効率的。"
+    },
+    {
+      "gapId": "G3",
+      "sourceRef": "phase82-newTermGaps[2]",
+      "role": "deputy-mayor（副市長）",
+      "prevPerson": "csp-35 杉本隆晴（就任2006-02-28）",
+      "nextPerson": "csp-36 原田幸二（就任2011-03-25）",
+      "gapStart": "2006-02-28",
+      "gapEnd": "2011-03-25",
+      "existingSources": [
+        "citySpecialPosts.json csp-35 termNote（2010-02-09・2014-02-25の再任選任議決を確認済み）",
+        "citySpecialPosts.json csp-36 termNote（2011年新規選任、civic-047『副市長2人制開始』と対応）"
+      ],
+      "newSourcesChecked": [
+        "civicTimelineEvents.json civic-047（副市長2人制開始）を再確認したところ、原田幸二氏の2011年選任は杉本隆晴氏の『後任』ではなく『追加』選任（2人制導入）であることが、既存csp-35 termNote自体に『2011年3月に原田幸二氏が副市長として追加選任され、2人制となった後も、杉本氏は継続して在任していたとみられる』と明記されていることを確認した。"
+      ],
+      "resolved": true,
+      "resolvedValue": "この区間は『前任者退任〜後任者就任』という空白ではない。原田幸二氏（csp-36）は杉本隆晴氏（csp-35）の後任ではなく、2011年の副市長2人制導入に伴う追加選任であり、杉本氏は2010-02-09・2014-02-25の再任選任議決を経て継続して在任していた（citySpecialPosts.json csp-35 termNoteに既記載）。したがって『2006-2011年に副市長が空席だった可能性』というphase82の懸念は既存データの精読により解消できる。ただし杉本隆晴氏本人の最終的な退任日は依然未確認（別課題として残る）。",
+      "unresolvedClassification": null
+    },
+    {
+      "gapId": "P1",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[0] / UNR-006",
+      "role": "superintendent（教育長）",
+      "prevPerson": "不明（csp-43より前の教育長は未特定）",
+      "nextPerson": "csp-42 笠江孝一（就任2015-10-09、csp-43との間に他の教育長がいた可能性を排除できず）",
+      "gapStart": "2010-09-07（町田訓允氏の在任確認日、就任日ではない）",
+      "gapEnd": "2015-10-09（笠江孝一氏就任、csp-43との連続性は未確認）",
+      "existingSources": [
+        "延岡市議会会議録検索システム（2010-09-07の本会議出席記録のみ）"
+      ],
+      "newSourcesChecked": [
+        "src/data/civicTimelineEvents.json・searchIndex.json・kohoOcrSearchIndex.jsonを『町田訓允』で検索したが該当なし。",
+        "reports/phase22-year-ledger.jsonの既存注記（『2015年の地方教育行政法改正前は教育委員会の互選のため、市議会同意議決の記録からは追いにくい』）を再確認し、追跡手法自体に構造的制約があることを確認した。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "source_not_located",
+      "note": "2015年の地方教育行政法改正前は教育委員会委員の互選で教育長を選出する制度のため、市長提案の選任議決という会議録の型（他の役職で使っている追跡手法）が存在しない。町田訓允氏の就任日・退任日を記録した資料の所在自体がまだ特定できていない。延岡市教育委員会の会議録・広報のべおかバックナンバー（2010年前後）が次の候補だが、いずれも本ワーカーからは実閲覧できていない。"
+    },
+    {
+      "gapId": "P2",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[1]",
+      "role": "assistant-mayor（助役）",
+      "prevPerson": "不明（csp-46後藤梅雄15代の後、csp-43三樹博16代を挟むとみられるが未確定）",
+      "nextPerson": "csp-45 伊東義男（前任者氏名は判読不確実のため黒木道男氏と同一人物かも未確定）",
+      "gapStart": "未登録（延岡市史1993年版年表コマ427に『昭和60年〈1985年〉2月』の月精度候補あり）",
+      "gapEnd": "未登録",
+      "existingSources": [
+        "延岡市史1993年版（ndl-src-05、pid 13200958）コマ427（Phase26で精読、月精度『昭和60年2月』を確認）",
+        "civicTimelineEvents.json civic-195（同内容を構造化済み）"
+      ],
+      "newSourcesChecked": [
+        "reports/phase22-year-ledger.jsonの残作業メモ（『1985年の助役交代（黒木道男→伊東義男）の正確な交代日・前任者の氏名の確認（延岡市史コマ428の再読）』）を確認し、日精度化がまだ未着手であることを再確認した。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "月精度（1985年2月）までは既存データ内に既に存在するが、日精度化にはNDL個人送信サービスでの延岡市史1993年版コマ427の再読（高倍率）が必要。本ワーカーはNDLログインアクセスを持たない。"
+    },
+    {
+      "gapId": "P3",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[2]",
+      "role": "assistant-mayor（助役）",
+      "prevPerson": "csp-44 黒木道男（同一人物かどうか未確定な『男』を含む前任者の氏名断片のみ判読）",
+      "nextPerson": "不明",
+      "gapStart": "未登録",
+      "gapEnd": "未登録",
+      "existingSources": [
+        "延岡市史1993年版コマ428（Phase26で精読、前任者氏名『末尾に「男」を含む』との断片のみ判読）",
+        "civicTimelineEvents.json civic-196"
+      ],
+      "newSourcesChecked": [
+        "src/data/civicTimelineEvents.json・searchIndex.json・kohoOcrSearchIndex.jsonを『伊東義男』で検索したが、既存civic-196・searchIndex転記以外に新規情報なし。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "前任者が黒木道男氏（csp-44）と同一人物かどうかも含め、コマ428の再読（高倍率）が必要。P2と同一資料・同一制約。"
+    },
+    {
+      "gapId": "P4",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[3]",
+      "role": "treasurer（収入役）",
+      "prevPerson": "csp-48 吉田厚（11代、〜1972-05ごろ）",
+      "nextPerson": "退任確定（1978-01-04辞職）、後任者はUNR-008により未確認",
+      "gapStart": "appointedDateが未登録（null）",
+      "gapEnd": "1978-01-04（retiredDateは確認済み）",
+      "existingSources": [
+        "延岡市史上巻コマ126「2 収入役」一覧表（12代・13代として登録）"
+      ],
+      "newSourcesChecked": [
+        "citySpecialPosts.json csp-47のtermNote全文を再読したところ、『13代：自昭和51年（1976年）5月18日〜至昭和53年（1978年）1月4日（辞職退任）』という日精度の就任日候補が、termNoteのテキスト内には既に存在するがappointedDateフィールドには反映されていないことを確認した。"
+      ],
+      "resolved": true,
+      "resolvedValue": "csp-47のtermNoteに既に記載されている1976-05-18（13代就任日、延岡市史上巻コマ126）を、retiredDate=1978-01-04に対応するappointedDateとして構造化フィールドへ反映することを提案する（12代の開始1972年5月ごろは月精度のみで別途未確定のまま）。新規の一次資料調査ではなく、既存termNoteの記載を構造化フィールドへ反映すれば解決する『見落とし』であるため、データ書き込みは行わずproposedFixとして記録する。",
+      "unresolvedClassification": null
+    },
+    {
+      "gapId": "P5",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[4]",
+      "role": "treasurer（収入役）",
+      "prevPerson": "不明（10代の前任者は未確認）",
+      "nextPerson": "csp-47 高橋重行（12代、〜1972-05ごろ就任とみられる）",
+      "gapStart": "未登録（termNoteの月精度候補：10代 自1964-05ごろ）",
+      "gapEnd": "未登録（termNoteの月精度候補：11代 至1972-05ごろ）",
+      "existingSources": [
+        "延岡市史上巻コマ126「2 収入役」一覧表（10代・11代として登録）"
+      ],
+      "newSourcesChecked": [
+        "citySpecialPosts.json csp-48のtermNoteを再読したが、日精度の記載は無く『日単位の判読精度が不十分なためappointedDate／retiredDateへは反映しない』と明記されている月精度のみであることを確認した。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "月精度（10代:1964-05ごろ〜11代:1972-05ごろ）までは既存データに存在するが、日精度化には同一コマの再読が必要。"
+    },
+    {
+      "gapId": "P6",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[5]",
+      "role": "treasurer（収入役）／assistant-mayor（助役、転任後）",
+      "prevPerson": "不明（7代の前任者は未確認）",
+      "nextPerson": "csp-47 高橋重行（12代、時期からみて8〜11代を挟む）",
+      "gapStart": "1951-01-28（7代就任、termNoteに日精度で記載済み）",
+      "gapEnd": "未登録（9代の期間は『本フェーズでは未確認（要再読）』とtermNoteに明記）",
+      "existingSources": [
+        "延岡市史上巻コマ126「2 収入役」一覧表（7代・8代・9代として登録）、同コマ「1 助役」一覧表（11代・12代、収入役から助役への転任先として相互裏付け）"
+      ],
+      "newSourcesChecked": [
+        "citySpecialPosts.json csp-49のtermNoteを再読し、7代（1951-01-28〜1955-02-18）は既に日精度で判読済みだが、8代の退任月（『四』と『五』の判読に幅あり、1959年か1960年か未確定）と9代の期間全体が今回（Phase33 STEP2時点）も未確認のまま残っていることを確認した。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "7代（1951-01-28〜1955-02-18）は既に日精度で確定済みだが、appointedDate/retiredDateフィールドには依然未反映（複数期をまとめた1レコードのため、どの期の日付を採用するか設計判断が必要、proposedFixとして別途記録）。8代の年（昭和34/35年）表記ゆれと9代の完全空白は、同コマの再読でのみ解消可能。"
+    },
+    {
+      "gapId": "P7",
+      "sourceRef": "phase82-nameConfirmedButTermUnconfirmed[6]",
+      "role": "assistant-mayor（助役）",
+      "prevPerson": "csp-53 江藤千吉郎（4代、退任1945-12-01）",
+      "nextPerson": "不明（次の確認済み助役はcsp-44黒木道男1985年まで約37年間空白、UNR-009の6〜10代『長谷川渡・日高一・折小野良吉・折小野某・早瀬某』が未登録のまま存在）",
+      "gapStart": "1945-12-03（5代就任、termNoteに日精度で記載済み、前代退任の2日後）",
+      "gapEnd": "未登録（termNoteの月精度候補：至昭和23年〈1948年〉3月ごろ）",
+      "existingSources": [
+        "延岡市史上巻コマ126「1 助役」一覧表（5代として登録、姓のみ判読『佐藤』）"
+      ],
+      "newSourcesChecked": [
+        "reports/phase33-master-unresolved-ledger.json UNR-009を確認し、csp-54の後任にあたる助役6〜10代（長谷川渡・日高一・折小野良吉・折小野某・早瀬某）が氏名のみ判読済みで citySpecialPosts.json に未登録のまま残っていることを確認した（本レポートの23区間には含めていないが、csp-54の『後任者不明』の実態を説明する関連未解決事項として記録する）。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "退任日（1948年3月ごろ）の日精度化、および下の名前の判読には同一コマの再読が必要。後任（6代以降）の氏名・日付はUNR-009として既に別建てで管理されており、本フェーズでは重複調査を避けるため深追いしていない。"
+    },
+    {
+      "gapId": "M1",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-04-term-01→mayor-05-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-04 仲田又次郎（初代、退任1937-01、月精度）",
+      "nextPerson": "mayor-05 鈴木憲太郎（2代1期目、就任1937-03、月精度）",
+      "gapStart": "1937-01-06",
+      "gapEnd": "1937-03-06",
+      "existingSources": [
+        "延岡市公式サイト「近代の年表(1930～1950年)」（月精度のみ）",
+        "Wikipedia各人物記事（日精度記載はあるが独立資料未確認、needsReview）"
+      ],
+      "newSourcesChecked": [
+        "src/data/archiveMayorTerms.jsonの全遷移点を機械的に洗い出し、termStartPrecision/termEndPrecisionがともにmonthとなる境界を確認した（本区間を含む13区間がUNR-029の指す区間と一致することを検証）。"
+      ],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "延岡市史上巻コマ124-127「歴代市長、助役および収入役等」一覧表は助役・収入役欄の精読は進んでいるが、市長本体の代替わり日精度の確認は今回未実施（次の一歩）。"
+    },
+    {
+      "gapId": "M2",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-05-term-01→mayor-05-term-02",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-05 鈴木憲太郎（2代1期目、退任1937-04、衆院選出馬のため辞職、月精度）",
+      "nextPerson": "mayor-05 鈴木憲太郎（2代2期目、再任1937-05、月精度）",
+      "gapStart": "1937-04-14",
+      "gapEnd": "1937-05-16",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "約1ヶ月の空白期間中に職務代理者が置かれたかどうかも未確認。延岡市史での再読が必要。"
+    },
+    {
+      "gapId": "M3",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-05-term-02→mayor-06-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-05 鈴木憲太郎（2代2期目、退任1937-06、月精度）",
+      "nextPerson": "mayor-06 大島文彦（3代、就任1937-09、月精度）",
+      "gapStart": "1937-06-15",
+      "gapEnd": "1937-09-26",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "約3ヶ月の空白。この間の市政運営体制（助役代行等）は未確認。"
+    },
+    {
+      "gapId": "M4",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-06-term-01→mayor-07-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-06 大島文彦（3代、退任1941-09、月精度）",
+      "nextPerson": "mayor-07 三浦虎雄（4代1期目、就任1941-10、月精度）",
+      "gapStart": "1941-09-25",
+      "gapEnd": "1941-10-22",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": null
+    },
+    {
+      "gapId": "M5",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-07-term-01→mayor-07-term-02",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-07 三浦虎雄（4代1期目、退任1942-04、衆院選出馬のため辞職、月精度）",
+      "nextPerson": "mayor-07 三浦虎雄（4代2期目、再任1942-05、月精度）",
+      "gapStart": "1942-04-25",
+      "gapEnd": "1942-05-19",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": null
+    },
+    {
+      "gapId": "M6",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-07-term-02→mayor-05-term-03",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-07 三浦虎雄（4代2期目、退任1946-03、公職追放により辞職、月精度）",
+      "nextPerson": "mayor-05 鈴木憲太郎（2代3期目、就任1946-03、月精度）",
+      "gapStart": "1946-03-06",
+      "gapEnd": "1946-03-29",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "同月内の交代のため空白は短い可能性が高いが、日精度は未確認。"
+    },
+    {
+      "gapId": "M7",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-05-term-03→mayor-08-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-05 鈴木憲太郎（2代3期目、退任1947-03、月精度）",
+      "nextPerson": "mayor-08 佐藤千吉郎（5代、就任1947-04、月精度）",
+      "gapStart": "1947-03-22",
+      "gapEnd": "1947-04-16",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": null
+    },
+    {
+      "gapId": "M8",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-08-term-01→mayor-04-term-02",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-08 佐藤千吉郎（5代、退任1948-06、Wikipedia由来のみ）",
+      "nextPerson": "mayor-04 仲田又次郎（6代=本人2期目、就任1948-07、月精度）",
+      "gapStart": "1948-06-06",
+      "gapEnd": "1948-07-16",
+      "existingSources": ["延岡市公式サイト「近代の年表(1930～1950年)」", "延岡市公式サイト「名誉市民」ページ（第9代の表記）"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "佐藤千吉郎の退任日（1948-06-06）はWikipediaのみが情報源で独立確認できていない点が他の区間より脆弱。"
+    },
+    {
+      "gapId": "M9",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-04-term-02→mayor-07-term-03",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-04 仲田又次郎（6代、退任1952-06、月精度）",
+      "nextPerson": "mayor-07 三浦虎雄（7代=本人3期目、就任1952-07、月精度）",
+      "gapStart": "1952-06-19",
+      "gapEnd": "1952-07-11",
+      "existingSources": ["延岡市公式サイト「近代の年表(1951～1970年)」"],
+      "newSourcesChecked": ["archiveMayorTerms.json遷移点の機械洗い出し"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": null
+    },
+    {
+      "gapId": "M10",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-07-term-03→mayor-09-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-07 三浦虎雄（7代=本人3期目、退任1956-03、月精度）",
+      "nextPerson": "mayor-09 青木善祐（8代、就任1956-04、選挙日1956-04-19は確定済み、就任日自体はdisputed：候補1956-04-10 vs 1956-04-21）",
+      "gapStart": "1956-03-27",
+      "gapEnd": "1956-04-21",
+      "existingSources": [
+        "延岡商工会議所四十年史（Phase12でNDL実閲覧、選挙日1956-04-19を確定）",
+        "延岡市史1963年版notes記載（『自昭和三一年四月一〇日』の可能性、1文字誤読リスクあり）"
+      ],
+      "newSourcesChecked": ["archiveMayorTerms.json mayor-09-term-01のnotesを再確認し、既にdisputed状態で複数資料による絞り込みが行われていることを確認した（本フェーズでの新規絞り込みなし）。"],
+      "resolved": false,
+      "unresolvedClassification": "online_exhausted",
+      "note": "この区間はUNR-029の13区間の中で唯一、複数のオンライン一次資料（延岡商工会議所四十年史・延岡市史1963年版）による絞り込みが既に複数回試行されており、これ以上の同一手法でのオンライン再読は費用対効果が低いと判断されている（既存notesの記載を踏襲）。就任日そのものを直接記載した独立資料の発見が必要。"
+    },
+    {
+      "gapId": "M11",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-10-term-02→mayor-11-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-10 折小野良一（10代=本人2期目、退任1966-12、衆院選出馬のため辞職、月精度）",
+      "nextPerson": "mayor-11 房野博（11代、就任1967-01、月精度。延岡商工会議所四十年史で当選日1.23を確認済みだが就任日との1日差は未解消）",
+      "gapStart": "1966-12-01",
+      "gapEnd": "1967-01-22",
+      "existingSources": [
+        "延岡市公式サイト「近代の年表(1951～1970年)」",
+        "延岡商工会議所四十年史（Phase12、当選日1967-01-23を確認）"
+      ],
+      "newSourcesChecked": ["archiveMayorTerms.json mayor-11-term-01のnotesを再確認（既存の1日差の未解消状態を確認）。"],
+      "resolved": false,
+      "unresolvedClassification": "online_exhausted",
+      "note": "当選日（1.23）と既存termStart（1.22）の1日差は、当選日と就任日を区別する資料が必要で、延岡商工会議所四十年史では解消できないことが既に確認済み。"
+    },
+    {
+      "gapId": "M12",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-11-term-03→mayor-12-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-11 房野博（13代=本人3期目、退任1978-10、辞職、月精度）",
+      "nextPerson": "mayor-12 早生隆彦（14代、就任1978-11、投票日1978-11-05はtermStartと同日と確認済み）",
+      "gapStart": "1978-10-05",
+      "gapEnd": "1978-11-05",
+      "existingSources": ["延岡市史上巻コマ215市長選挙一覧表（Phase27で投票日確認済み）"],
+      "newSourcesChecked": ["archiveMayorTerms.json mayor-12-term-01のnotesを再確認（投票日=termStartの整合は既確認、房野氏の辞職日〈10月5日〉の日精度確認が引き続き課題であることを確認）。"],
+      "resolved": false,
+      "unresolvedClassification": "library_required",
+      "note": "就任日側（1978-11-05）は投票日と一致し確度が高いが、退任側（房野氏の辞職日1978-10-05）は延岡市公式年表のみが情報源で独立確認が未了。"
+    },
+    {
+      "gapId": "M13",
+      "sourceRef": "UNR-029 / archiveMayorTerms.json mayor-12-term-04→mayor-13-term-01",
+      "role": "mayor（市長）",
+      "prevPerson": "mayor-12 早生隆彦（17代=本人4期目、退任1994-01、辞職、月精度）",
+      "nextPerson": "mayor-13 櫻井哲雄（18代、就任1994-02、月精度、投票日を直接記載した一次資料は未発見）",
+      "gapStart": "1994-01-11",
+      "gapEnd": "1994-02-06",
+      "existingSources": ["延岡市公式サイト「近代の年表(1991～2010年)」"],
+      "newSourcesChecked": ["go2senkyo.comの1994年選挙一覧を再確認したが延岡市長選の掲載なし（既存notesの通り）。archiveMayorTerms.json mayor-13-term-01のsourceRefsを再確認。"],
+      "resolved": false,
+      "unresolvedClassification": "online_exhausted",
+      "note": "選挙ドットコムの1994年選挙一覧に延岡市長選の掲載が無いことは既に確認済み（同サイトのカバー範囲は2002年以降が中心）。別の一次資料（宮崎日日新聞縮刷版等）が必要。"
+    }
+  ],
+  "resolvedCount": 2,
+  "unresolvedByClassification": {
+    "online_exhausted": 3,
+    "library_required": 17,
+    "inquiry_required": 0,
+    "source_not_located": 1
+  },
+  "proposedFixesForOtherWorker": [
+    {
+      "target": "src/data/citySpecialPosts.json",
+      "issue": "csp-47（高橋重行）のtermNoteに既に日精度の就任日候補『1976-05-18』が記載されているが、appointedDateフィールドはnullのまま。",
+      "proposedAction": "appointedDate: 1976-05-18 を反映する（12代の開始1972年5月ごろは月精度のみのため反映しない）。データ書き込みは本フェーズでは行っていない。"
+    },
+    {
+      "target": "src/data/citySpecialPosts.json",
+      "issue": "csp-49（高島安三郎）の7代（収入役）はtermNoteに日精度『1951-01-28〜1955-02-18』が既に記載されているが、appointedDate/retiredDateはnullのまま（8代・9代の期間が未確定のため1レコードにまとめて未反映と判断される）。",
+      "proposedAction": "複数期をまとめた1レコード設計の限界（csp-46・csp-47と同型の課題）。7代分だけでも別レコードとして分割し日精度を反映するか、8代・9代の再読完了後にまとめて反映するかの方針判断が必要。"
+    },
+    {
+      "target": "src/data/citySpecialPosts.json",
+      "issue": "柳田喜継氏（助役、平成3年〜2006-02-03在任、4期目再任2003-02-13）と、後藤三樹博氏（16代助役、1983-02-10就任、姓は未確定）が、civicTimelineEvents.json（civic-176・177）・reports/phase27系レポートに既に一次資料付きで記録されているにもかかわらず、citySpecialPosts.jsonへのレコードが1件も存在しない。",
+      "proposedAction": "両名をcitySpecialPosts.jsonへ新規登録すれば、UNR-010（助役/副市長の1983-2006年の空白）の記述範囲を『1983年2月〜1991年ごろ（柳田喜継の初回就任日不明期間）』へ大幅に短縮できる。三樹博氏は姓が未確定のため、csp-54（佐藤某）と同様『姓のみ／敬称』での暫定登録も検討可（要方針判断）。"
+    }
+  ]
+}

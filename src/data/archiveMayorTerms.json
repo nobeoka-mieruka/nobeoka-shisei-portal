@@ -279,13 +279,13 @@
         "notes": "投票日2022-01-23（告示2022-01-16、事由「任期満了」）、現職読谷山洋司が31,760票（56.9%）で再選、新人うちだりさ24,088票を確認。"
       },
       {
-        "sourceUrl": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
-        "sourceTitle": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため",
+        "sourceUrl": "https://web.archive.org/web/20250613112338/https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "sourceTitle": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため（宮崎日日新聞、Internet Archive保存）",
         "sourceOrganization": "宮崎日日新聞（Miyanichi e-press）",
-        "accessedAt": "2026-08-08",
+        "accessedAt": "2026-08-23",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "2025年6月30日付での辞職（退任）を報道で確認。理由は肺・膵臓の腫瘍発見による健康上の理由。リンク切れ確認済み：2026-08-08の外部リンク監査でURLが404（掲載期間終了）であることを確認したが、退任事実自体は当時アクセス時に確認済みであり、他の複数報道とも整合するためverifiedを維持する（Internet Archive等への自動置換は行っていない）。（2026-08-10にリンク到達性を確認したところ、このURLは404（ページが見つかりません）でした。既存の確認内容自体は削除せず、リンク切れの事実のみを追記しています。）"
+        "notes": "2025年6月30日付での辞職（退任）を報道で確認。理由は肺・膵臓の腫瘍発見による健康上の理由。元URL（https://www.the-miyanichi.co.jp/kennai/_84868.html）は2026-08-08・10・23の3回にわたり404を確認済み（掲載期間終了）。Phase96（2026-08-23）でInternet Archiveの2025-06-13スナップショットへ差し替えた（archiveMayors.json・civicTimelineEvents.json側と同一対応）。"
       },
       {
         "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
@@ -1114,13 +1114,13 @@
     "nextMayorId": "mayor-01",
     "sourceRefs": [
       {
-        "sourceUrl": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
-        "sourceTitle": "宮崎県延岡市長、肺と膵臓に腫瘍が見つかり辞職へ「公約全てを実現できておらず大変申し訳ない」",
+        "sourceUrl": "https://web.archive.org/web/20250605023234/https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+        "sourceTitle": "宮崎県延岡市長、肺と膵臓に腫瘍が見つかり辞職へ「公約全てを実現できておらず大変申し訳ない」（読売新聞オンライン、Internet Archive保存）",
         "sourceOrganization": "読売新聞オンライン（Yahoo!ニュース配信）",
-        "accessedAt": "2026-08-05",
+        "accessedAt": "2026-08-23",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "2026-08-05時点でURLは404（掲載期間終了）。検索結果のスニペットで「来月1日以降は山本一丸副市長（65）が市長職務代理者に就く予定」との記述を確認したが、原文への直接アクセスでの再確認はできていない。（2026-08-10にリンク到達性を確認したところ、このURLは404（ページが見つかりません）でした。既存の確認内容自体は削除せず、リンク切れの事実のみを追記しています。）"
+        "verificationStatus": "verified",
+        "notes": "元URL（https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba）は2026-08-05・10・23の3回にわたり404を確認済み（掲載期間終了）。Phase96（2026-08-23）でInternet Archiveの2025-06-05スナップショットへ差し替えた（archiveMayors.json側と同一対応）。「来月1日以降は山本一丸副市長（65）が市長職務代理者に就く予定」との記述を確認。"
       },
       {
         "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html",

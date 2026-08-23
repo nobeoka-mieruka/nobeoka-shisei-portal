@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-08-23T00:00:00+09:00",
+  "phase": "Phase89",
+  "scope": "src/pages, src/components, src/lib, dist（ビルド済みHTML）横断での「100%」「完全収録」「全件収録」「完全確認」等の断定的完全性表示の監査",
+  "totalOccurrencesFound": 12,
+  "occurrences": [
+    {
+      "location": "src/pages/CouncilActivityPage.tsx:245",
+      "context": "「実施率100%：{questionFull.length}名」（一般質問実施率が100%の議員数を集計表示）",
+      "verifiedDenominator": true,
+      "issue": "questionRateはsrc/lib/activityRadar.tsのcalculateQuestionActivityIndex()で算出され、分母はTRANSCRIPT_AVAILABLE_SESSION_IDS（questionCollectionStatus.jsonのtranscriptAvailable:trueな会期のみ）という一次資料に基づく確定リスト。母数が推測で作られている箇所はなし。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/DataStatusPage.tsx:150-222 (STATUS_BADGE_STYLE / coverageTier / badgeFromStatus)",
+      "context": "「完全収録」バッジ（CompletenessStatus.complete）の表示ロジック",
+      "verifiedDenominator": true,
+      "issue": "src/lib/completeness.tsのCompletenessStatus型（complete/partial/not_collected/not_available/unknown/under_review/confirmed_zero）をそのまま使用。simpleCompleteness()はtotalKnownがcollected以下の場合のみcompleteを返す設計で、母数不明時は必ずunknown（母数未確認）になる。DataStatusPageのcompletenessRows（14項目）は全てbillVotes.length、archiveFiscalYears.length、archiveMayorTerms.length、committees.length、members.length、politicalFundOrganizations.lengthという実データ配列長を母数に使っており、決め打ちの数値は無い。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/DataStatusPage.tsx:605",
+      "context": "「母数が一次資料で確認できていない項目は『母数未確認』とし、100%と表示することはありません。」という明示的な注記",
+      "verifiedDenominator": "n/a",
+      "issue": "注記文そのものであり、実装（simpleCompleteness+formatCoverageRate）と整合していることをコードで確認済み。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/lib/dataCompletenessSummary.ts（HomePage.tsxのトップページ抜粋で使用）",
+      "context": "一般質問・議案提出者区分・財政（基金／市債）・歴代市長任期のsimpleCompleteness()呼び出し6件",
+      "verifiedDenominator": true,
+      "issue": "全てDataStatusPageと同じ実データ配列長（billVotes.length等）を母数に使用。DataStatusPageとの数値不一致が起きない設計（コメントにも明記）。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/components/bills/ReviewFlowTimeline.tsx:121（dist/bills/votes/*/index.html 1253ファイルに出現）",
+      "context": "CSSの`calc(100%-1.25rem)`（審査フロー図のタイムライン縦線の高さ計算）",
+      "verifiedDenominator": "n/a",
+      "issue": "データの完全性表示ではなくレイアウト用CSS。除外対象。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/components/council/QuestionTopicChart.tsx:15,31",
+      "context": "議員1名の質問テーマ横棒グラフ。棒の長さは「この議員の最大会期数を100%とした相対値」",
+      "verifiedDenominator": "n/a",
+      "issue": "母集団全体に対する収録率ではなく、同一議員内でのテーマ別件数の相対比較（chart normalization）。件数は必ず文字でも併記されており、完全性の断定表示ではない。",
+      "action": "no_issue"
+    },
+    {
+      "location": "dist/council-activity/m01/index.html ほか（CouncilActivityMemberPage.tsx由来）「議案等の意思表示：100%（2／2）」",
+      "context": "議員個人ページの指標カード。分子=memberAllBillVotes.length、分母=billsWithAnyMemberVoteDisclosed",
+      "verifiedDenominator": true,
+      "issue": "src/lib/councilActivityBarometer.ts:69で`billVotes.filter(b => b.memberVotes.length > 0).length`として算出。実データで検証した結果、現在サイト全体でmemberVotesが1件以上入っている議案は2件のみ（billVotes.json 1177件中2件）。分母が小さいのは母数自体の性質（記名投票で個人別内訳が公開されている議案がまだ2件しかない）であり、母数を推測で埋めているわけではない。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/FinanceDebtPage.tsx:62",
+      "context": "「対象期間の全年度で市債残高を確認済みです。」（missingYearsNoteがnullの場合のフォールバック文言）",
+      "verifiedDenominator": true,
+      "issue": "src/lib/archiveFinance.tsのmissingFiscalYears()がhasDebtData()で実際に全年度を走査し、1件でも未収録年度があればnon-nullの注記を返す設計。nullになるのは本当に全年度確認済みの場合のみ。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/ElectionDetailPage.tsx:49,75,83-90",
+      "context": "候補者数・当選者数の表示。candidateListConfirmedがfalseの場合は「確認中」表示に切り替え",
+      "verifiedDenominator": true,
+      "issue": "electionCandidateListConfirmed(election)がデータ側のdataCompleteness.candidateListConfirmedフィールドを直接参照しており、コード側で推測補完していない。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/DataStatusPage.tsx:305（mayorGapCount = 13、手集計値）",
+      "context": "「歴代市長」ドメインのfullyCovered判定（mayorGapCount === 0）に使うハードコード定数",
+      "verifiedDenominator": "partially",
+      "issue": "npm run validate:dataを実際に実行し、archiveMayorTerms.jsonの空白期間検出結果と照合した結果、現時点では一致（13件）を確認。ただし、この値はコード内コメントにも明記の通り『空白が解消され次第、更新すること』という手動同期が前提の値であり、今後データが更新されて空白件数が変化した場合にコード側の更新を忘れると、fullyCoveredの判定（＝『完全収録』バッジ表示）が実態とずれるリスクが残る。現時点では実害なし（値は一致）。",
+      "action": "flagged_for_data_collection"
+    },
+    {
+      "location": "src/lib/activityRadar.ts:164-168（calculateVotingDisclosureIndex直前のJSDocコメント）",
+      "context": "コメント文言「既存データ（billVotes.json）は議案ごとの議決結果のみで、議員個人の賛否内訳（memberVotes）は現時点で全件未登録のため、常にdataStatus:\"missing\"を返す。」",
+      "verifiedDenominator": "n/a",
+      "issue": "コメントは実装と乖離（Phase97でmemberVotesの個人別データが一部登録され、この関数はnumerator>0のとき実際にはdataStatus:\"complete\"を返すようになっている）。ユーザーへの表示には影響しない（コードの実処理は正しく、この監査で検証した通り母数・分子とも実データに基づく）が、将来の保守者が誤読するリスクがあるドキュメント上の齟齬。コードは変更していない（挙動を変える修正ではなく、コメント文言のみの修正はスコープ外と判断し、findingsへの記録のみに留めた）。",
+      "action": "flagged_for_data_collection"
+    },
+    {
+      "location": "src/pages/CouncilActivityMemberPage.tsx:56-76（STAR_METRICS / StarRating）",
+      "context": "議員個人ページで各指標（一般質問・議会内発言・議案等の意思表示・情報発信充足度等）を★1〜5個で視覚化する独自コンポーネント",
+      "verifiedDenominator": true,
+      "issue": "本監査の対象（『100%』『完全収録』等の完全性の断定表示）そのものではないが、隣接する懸念として記録する。星の数はvalue（0〜100、既にsrc/lib/activityRadar.tsで実データに基づき算出済み）をMath.round(value/20)で1〜5段階に変換しただけで、新たな採点ロジックの追加はない。ただしCLAUDE.mdの『推測、架空データ、根拠のない順位、独自採点を掲載しない』という方針や、同ファイル内の別コンポーネント（CouncilActivityPage.tsx TASK-075コメント）が明示的に『ランキングという語は使わない』としている方針との整合性は要検討。星表示は視覚的に『評価・優劣』を連想させやすく、値がnullの場合は『評価対象外（データ未収録）』と正しく表示されるものの、5段階の視覚表現自体が既存の「順位付けしない」方針とどこまで整合するかは、データ完全性の問題ではなく製品方針の判断が必要なため、コード変更は行わず記録のみとした。",
+      "action": "flagged_for_data_collection"
+    }
+  ],
+  "codeFixesApplied": [],
+  "flaggedForFutureDataCollection": [
+    {
+      "item": "src/pages/DataStatusPage.tsx:305 mayorGapCount（手動集計の空白期間数13件）",
+      "recommendation": "scripts/validate-data.mjsの空白検出ロジック（1668-1695行付近）と同じ計算をsrc/lib配下の共有関数として切り出し、DataStatusPage.tsxからハードコード定数ではなくビルド時に実データから動的算出する形に変更することを推奨。現時点ではズレはないため緊急性は低い。データ自体の書き換えは不要（既存のarchiveMayorTerms.jsonは変更不要）。"
+    },
+    {
+      "item": "src/lib/activityRadar.ts:164-168 のJSDocコメント",
+      "recommendation": "「常にdataStatus:\"missing\"を返す」という記述を、Phase97時点の実装（numerator>0でcompleteを返す）に合わせて更新することを推奨。コードの実処理自体は正しいため緊急性は低い。"
+    },
+    {
+      "item": "src/pages/CouncilActivityMemberPage.tsx のStarRating（★表示）",
+      "recommendation": "サイト運営方針（CLAUDE.md「独自採点を掲載しない」）との整合性について、プロダクトオーナー判断で継続要否を検討することを推奨。データの正確性自体には問題がないため、このPhase89の監査スコープ（100%/完全収録等の完全性表示の正確性）としては対象外と判断し、コード変更は行っていない。"
+    }
+  ],
+  "qualityChecks": {
+    "typecheckResult": "pass（npm run typecheck、tsc -b、エラー0件。今回コード変更なしのためベースライン確認のみ）",
+    "lintResult": "pass（npm run lint、oxlint、エラー・警告0件。今回コード変更なしのためベースライン確認のみ）",
+    "note": "本監査ではsrc/data/*.jsonおよびsrc配下のコードへの変更を一切行っていない（既存ロジックが既に堅牢だったため、安全な修正の必要が生じなかった）。"
+  },
+  "summary": "src/pages・src/components・src/lib、およびビルド済みdist配下のHTMLを横断的に検索した結果、「100%」表示は主に (1) CSSのwidth/calc計算、(2) 議員個人ごとのグラフ正規化（同一議員内の相対値）、(3) src/lib/completeness.tsのCompletenessStatus語彙を正しく通した収録率表示、の3種類に限られていた。全ての『100%』『完全収録』『完全確認』『全期間確認済み』等の断定的表示について、対応する母数（totalKnown等）が実データ配列長・確定済み会期リスト・データ側のdataCompletenessフィールド等、一次資料に基づく実在の値であることをコードとデータの両方で確認した。母数を推測で埋めて100%を作り出している箇所、またはsimpleCompleteness()等の既存ロジックを迂回して独自に100%を決め打ちしている箇所は発見されなかった。そのため、コード修正は行っていない。ただし、(a) 歴代市長の任期空白件数（mayorGapCount=13）が手動同期のハードコード値であるためのドリフトリスク、(b) src/lib/activityRadar.tsのJSDocコメントが実装と乖離している点、(c) 議員個人ページの★（星）評価表示が完全性表示とは別の『独自採点』方針との整合性を要検討である点、の3点を将来対応候補としてflaggedFor...に記録した。"
+}

@@ -3155,13 +3155,13 @@
     ],
     "sourceRefs": [
       {
-        "label": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため - 宮崎日日新聞（Miyanichi e-press）",
-        "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html"
+        "label": "【速報】読谷山洋司延岡市長は６月末で辞職、病気療養のため - 宮崎日日新聞（Miyanichi e-press、Internet Archive保存）",
+        "url": "https://web.archive.org/web/20250613112338/https://www.the-miyanichi.co.jp/kennai/_84868.html"
       }
     ],
-    "lastVerifiedAt": "2026-08-21",
+    "lastVerifiedAt": "2026-08-23",
     "verificationStatus": "partiallyVerified",
-    "notes": "Phase22で、既存src/data/archiveMayorTerms.json（mayor-03-term-02のnotes・sourceRefs、2026-08-08確認済み）に既に確認済みの辞職の事実を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典URLは2026-08-08時点の外部リンク監査で404（掲載期間終了）であることが確認済みだが、事実自体はarchiveMayorTerms.json側で複数報道と整合すると記録されているため、同ファイルの評価（verified→接続時はpartiallyVerified）を踏襲した。市長職務代理者（山本一丸副市長、mayor-14-term-01）は既存civic-156の記述と対応する。"
+    "notes": "Phase22で、既存src/data/archiveMayorTerms.json（mayor-03-term-02のnotes・sourceRefs、2026-08-08確認済み）に既に確認済みの辞職の事実を、civicTimelineEventsへ新規に接続した（新規のオンライン調査は行っていない）。出典URLは2026-08-08時点の外部リンク監査で404（掲載期間終了）であることが確認済みだったが、Phase96（2026-08-23）でInternet Archiveの2025-06-13スナップショットへ差し替えた（archiveMayors.json mayor-03/mayor-14側と同一対応）。事実自体はarchiveMayorTerms.json側で複数報道と整合すると記録されているため、同ファイルの評価（partiallyVerified）を踏襲した。市長職務代理者（山本一丸副市長、mayor-14-term-01）は既存civic-156の記述と対応する。"
   },
   {
     "id": "civic-160",
