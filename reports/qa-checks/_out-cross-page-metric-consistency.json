@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-08-23T14:03:53.189Z",
+  "pagesCompared": [
+    "top",
+    "dataStatus"
+  ],
+  "summary": {
+    "pass": 5,
+    "error": 0,
+    "skip": 1
+  },
+  "results": [
+    {
+      "metric": "一般質問（登壇・確認済み件数）",
+      "status": "PASS",
+      "values": {
+        "top": "418",
+        "dataStatus": "418"
+      }
+    },
+    {
+      "metric": "質問項目数",
+      "status": "PASS",
+      "values": {
+        "top": "1567",
+        "dataStatus": "1567"
+      }
+    },
+    {
+      "metric": "最新会期の予定質問",
+      "status": "PASS",
+      "values": {
+        "top": "15",
+        "dataStatus": "15"
+      }
+    },
+    {
+      "metric": "財政：基金残高の年度確認",
+      "status": "PASS",
+      "values": {
+        "top": "26",
+        "dataStatus": "26"
+      }
+    },
+    {
+      "metric": "財政：市債残高の年度確認",
+      "status": "PASS",
+      "values": {
+        "top": "38",
+        "dataStatus": "38"
+      }
+    },
+    {
+      "metric": "財政：人口の年度確認",
+      "status": "SKIP_NOT_ON_BOTH_PAGES",
+      "values": {
+        "top": null,
+        "dataStatus": "26"
+      }
+    }
+  ],
+  "note": "PASSは両ページ（および同一ページ内の複数出現箇所すべて）で値が完全一致したことを示す。ERRORは同じラベル文言なのに異なる数値が見つかったことを示し、キャッシュ／デプロイ差の可能性と、ソースコード側で計算ロジックが分岐している可能性の両方を疑うこと。SKIP_NOT_ON_BOTH_PAGESは、そのラベルが比較対象の一方のページにしか無かったことを示す（指標の追加・削除自体は問題ではないが、意図した変更か確認すること）。"
+}

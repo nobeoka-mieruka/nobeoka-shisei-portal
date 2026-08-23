@@ -365,7 +365,12 @@ export function HomePage() {
               }
             />
           )}
-          <StatCard label="登録済み市長公約数" value={mayor.pledges.length} unit="件" />
+          <StatCard
+            label="登録済み市長公約数"
+            value={mayor.pledges.length}
+            unit="件"
+            hint={`現職市長（${mayor.name}）の公約のみの件数です。歴代の政策・公約アーカイブ全体の件数はデータ収録状況ページに別掲しています。`}
+          />
           <StatCard
             label="サイトの最終更新（ビルド日時）"
             value={getLastUpdatedText()}

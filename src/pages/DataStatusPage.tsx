@@ -411,7 +411,15 @@ export function DataStatusPage() {
     count: committees.length,
     unit: "件",
     scope: "現行の委員名簿（令和8年5月8日現在）",
-    detail: `委員名簿・任期を登録済み。所管事項が確認できたもの：${committeesWithJurisdiction}／${committees.length}件（延岡市議会委員会条例の条文が未確認のため残りは「確認できず」と表示）。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。`,
+    // 「所管事項が確認できたもの：n／m件」の括弧内説明は、未確認の委員会が実際に残っている
+    // 場合のみ表示する。かつては延岡市議会委員会条例の条文が未確認で一部委員会の所管事項を
+    // 特定できていなかったが、その後全件確認できたため、旧来の説明文が「6/6件確認済み」表示と
+    // 矛盾したまま残っていた（DataStatusPage監査で発見）。
+    detail: `委員名簿・任期を登録済み。所管事項が確認できたもの：${committeesWithJurisdiction}／${committees.length}件${
+      committeesWithJurisdiction < committees.length
+        ? "（延岡市議会委員会条例の条文が未確認のため残りは「確認できず」と表示）"
+        : "（延岡市議会委員会条例の条文と照合し、全委員会の所管事項を確認済み）"
+    }。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。`,
     linkTo: "/committees",
     linkLabel: "委員会一覧を見る",
     fullyCovered: committeesWithJurisdiction === committees.length,
@@ -454,9 +462,14 @@ export function DataStatusPage() {
 
   const policy: DataDomain[] = [
     {
-      label: "政策・公約",
+      // トップページの「登録済み市長公約数」は現職市長（三浦市長）の公約のみを数えており
+      // （mayor.pledges.length）、こちらは歴代の政策・公約アーカイブ全体の件数のため、
+      // 単純に「政策・公約」とだけ表示すると同じ言葉で桁の違う数字に見えてしまう。
+      // 集計対象が異なることを明示する（DataStatusPage監査で発見）。
+      label: "政策・公約データ（歴代分を含む総数）",
       count: archivePolicies.length,
       unit: "件",
+      scope: "歴代の市長・市政の政策・公約アーカイブ全体。現職市長の公約のみの件数はトップページ「登録済み市長公約数」を参照",
       linkTo: "/policies",
     },
   ];

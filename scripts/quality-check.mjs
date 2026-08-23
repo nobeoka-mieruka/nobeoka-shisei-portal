@@ -88,6 +88,12 @@ const STEPS = [
     severity: "warn",
     requiresDist: true,
   },
+  {
+    name: "check-cross-page-metric-consistency",
+    cmd: ["node", "scripts/qa-checks/check-cross-page-metric-consistency.mjs"],
+    severity: "warn",
+    requiresDist: true,
+  },
 ];
 
 const results = [];
