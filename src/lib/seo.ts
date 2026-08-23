@@ -1639,8 +1639,15 @@ function councilSessionSeo(sessionId: string, options?: SeoOptions): SeoResult {
   const session = councilSessions.find((s) => s.id === sessionId);
   if (!session) return notFound(`/council-documents/${sessionId}`, "定例会情報");
   const visibleDocumentCount = publicDocuments(session.documents).length;
+  // documentsが0件でも、資料自体が存在しないと確認できたわけではなく、単に本サイトが
+  // まだPDF資料を収集・登録していないだけの会期（status:"要確認"の自動生成会期）がある。
+  // 「（0件）を掲載しています」は「確認済みゼロ件」に読めてしまうため、未収集の場合は
+  // 別の文言にする（CLAUDE.mdの「未確認データを0として扱わない」方針に沿う）。
+  const documentsNotYetCollected = visibleDocumentCount === 0 && session.status === "要確認";
 
-  const baseDescription = `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${visibleDocumentCount}件）を掲載しています。`;
+  const baseDescription = documentsNotYetCollected
+    ? `${session.title}の会期情報です。議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料は、本サイトでは現在未収集です（資料が存在しないという意味ではありません）。`
+    : `${session.title}の議案、審議結果、請願・陳情、会議録、市議会だよりなどの公式PDF資料（${visibleDocumentCount}件）を掲載しています。`;
   const description =
     session.summaryStatus === "verified"
       ? `${session.title}で審議された議案、審議結果および関連する公式資料を掲載しています。${baseDescription}`

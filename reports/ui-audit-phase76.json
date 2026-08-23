@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-08-23T00:08:40.468Z",
+  "totalRoutesAudited": 2245,
+  "summary": {
+    "totalRoutesAudited": 2245,
+    "emptyPageCount": 0,
+    "missingTitleCount": 0,
+    "missingDescriptionCount": 0,
+    "literalBadStringCount": 0,
+    "missingAltCount": 0,
+    "brokenInternalLinkCount": 0,
+    "duplicateH1Count": 0,
+    "longUnbrokenStringCount": 0,
+    "tableNoWrapCount": 1
+  },
+  "issues": [],
+  "samples": {
+    "badStrings": [],
+    "missingAlt": [],
+    "brokenLinks": [],
+    "longStrings": [],
+    "tablesWithoutWrapProtection": [
+      {
+        "route": "/compensation/"
+      }
+    ]
+  }
+}

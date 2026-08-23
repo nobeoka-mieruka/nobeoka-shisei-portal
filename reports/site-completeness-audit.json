@@ -1,0 +1,239 @@
+{
+  "generatedAt": "2026-08-23T00:15:14.290Z",
+  "routesScanned": 2245,
+  "dataFilesScanned": 71,
+  "displayKeywordFindings": {
+    "未完成": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "整備中": {
+      "count": 113,
+      "sampleRoutes": [
+        "E:/nobeoka-gikai/dist/council-activity/m01/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m02/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m03/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m04/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m05/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m06/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m07/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m08/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m09/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/m10/index.html"
+      ]
+    },
+    "TBD": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "TODO": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "FIXME": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "placeholder": {
+      "count": 28,
+      "sampleRoutes": [
+        "E:/nobeoka-gikai/dist/bills/votes/index.html",
+        "E:/nobeoka-gikai/dist/compare/similar-municipalities/index.html",
+        "E:/nobeoka-gikai/dist/council-activity/index.html",
+        "E:/nobeoka-gikai/dist/elections/index.html",
+        "E:/nobeoka-gikai/dist/executive-answers/index.html",
+        "E:/nobeoka-gikai/dist/index.html",
+        "E:/nobeoka-gikai/dist/koho-search/index.html",
+        "E:/nobeoka-gikai/dist/mayor/entertainment-expenses/index.html",
+        "E:/nobeoka-gikai/dist/mayor/policy-progress/index.html",
+        "E:/nobeoka-gikai/dist/questions/index.html"
+      ]
+    },
+    "coming soon": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "Coming Soon": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "undefined": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "NaN": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "[object Object]": {
+      "count": 0,
+      "sampleRoutes": []
+    },
+    "Lorem ipsum": {
+      "count": 0,
+      "sampleRoutes": []
+    }
+  },
+  "statusWordDisplayCounts": {
+    "確認中": {
+      "occurrences": 3272,
+      "routeCount": 323
+    },
+    "未確認": {
+      "occurrences": 1768,
+      "routeCount": 354
+    },
+    "調査中": {
+      "occurrences": 8,
+      "routeCount": 7
+    },
+    "未収録": {
+      "occurrences": 1082,
+      "routeCount": 194
+    },
+    "出典未登録": {
+      "occurrences": 15,
+      "routeCount": 1
+    },
+    "データなし": {
+      "occurrences": 0,
+      "routeCount": 0
+    },
+    "情報なし": {
+      "occurrences": 0,
+      "routeCount": 0
+    }
+  },
+  "zeroKenLiteral": {
+    "occurrences": 689,
+    "routeCount": 210
+  },
+  "dataFileNullAndKeywordCounts": {
+    "未完成": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "整備中": {
+      "count": 12,
+      "sampleFiles": [
+        {
+          "file": "councilSpeechSummaries.json",
+          "count": 6
+        },
+        {
+          "file": "kohoOcrSearchIndex.json",
+          "count": 1
+        },
+        {
+          "file": "searchIndex.json",
+          "count": 5
+        }
+      ]
+    },
+    "TBD": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "TODO": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "FIXME": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "placeholder": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "coming soon": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "Coming Soon": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "undefined": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "NaN": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "[object Object]": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "Lorem ipsum": {
+      "count": 0,
+      "sampleFiles": []
+    },
+    "null": {
+      "count": 3151,
+      "sampleFiles": [
+        {
+          "file": "archiveCrawlerState.json",
+          "count": 21
+        },
+        {
+          "file": "archiveCrawlerTargets.json",
+          "count": 14
+        },
+        {
+          "file": "archiveFiscalYears.json",
+          "count": 1004
+        },
+        {
+          "file": "archiveMayors.json",
+          "count": 1
+        },
+        {
+          "file": "archiveMayorTerms.json",
+          "count": 52
+        },
+        {
+          "file": "archiveMemberAffiliations.json",
+          "count": 58
+        },
+        {
+          "file": "archiveMemberProfiles.json",
+          "count": 52
+        },
+        {
+          "file": "archiveMemberTerms.json",
+          "count": 26
+        },
+        {
+          "file": "blockedTaskClassification.json",
+          "count": 43
+        },
+        {
+          "file": "blockedTaskWatch.json",
+          "count": 21
+        },
+        {
+          "file": "cityGuideEntries.json",
+          "count": 1
+        },
+        {
+          "file": "cityOrganizationSections.json",
+          "count": 182
+        },
+        {
+          "file": "citySpecialPosts.json",
+          "count": 28
+        },
+        {
+          "file": "committeeActivityReports.json",
+          "count": 3
+        },
+        {
+          "file": "committeeReportActivity.json",
+          "count": 27
+        }
+      ]
+    }
+  }
+}

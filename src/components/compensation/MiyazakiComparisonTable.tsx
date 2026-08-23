@@ -87,7 +87,7 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
                     {m.municipality}
                     {isNobeoka && (
                       <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-on-primary">
-                        延岡市
+                        当市
                       </span>
                     )}
                   </td>
@@ -134,7 +134,7 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
                 {m.municipality}
                 {isNobeoka && (
                   <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-on-primary">
-                    延岡市
+                    当市
                   </span>
                 )}
               </p>
