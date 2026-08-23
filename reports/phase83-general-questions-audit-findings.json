@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-08-23",
+  "phase": "Phase83",
+  "scope": {
+    "files": [
+      "src/data/generalQuestions.json",
+      "src/data/councilSpeechSummaries.json",
+      "src/data/councilSessions.json",
+      "src/data/billVotes.json",
+      "src/data/members.json",
+      "src/data/formerMembers.json"
+    ],
+    "note": "本監査は読み取り専用で実施。src/data・scripts等の共有ファイルは一切変更していない。"
+  },
+  "totalGeneralQuestions": 15,
+  "totalSpeechSummaryRecords": 419,
+  "totalSpeechSummaryMemberBuckets": 44,
+  "totalCouncilSessions": 61,
+  "totalCouncilSessionsFlagged要確認": 19,
+  "totalBillVotes": 1177,
+  "duplicates": [],
+  "orphanMemberIds": [],
+  "memberMismatchSuspects": [],
+  "sessionInconsistencies": [],
+  "dateInconsistencies": [
+    {
+      "recordId": "m04-2026-02-25-daihyo-shitsumon ほか計21件（2026-03セッションのspeechType=代表質問/一般質問/関連質問/総括質疑・一般質問、日付2026-02-25〜2026-02-27）",
+      "initialFlag": "questionDate/dateがsessionId(2026-03=令和8年3月定例会)の年月より1か月早い（2月）ため、機械的な年月整合チェックでは異常として検出された",
+      "verification": "各レコードのsummarySources[].titleに「令和8年第24回定例会（第2号 2月25日）」等、公式会議録（会議録検索システム）の原文見出しが2月25日〜27日である旨が明記されており、公式会議録に基づく正しい日付であることを確認した。councilSessions.json側の当該会期（第24回、id=2026-03）は令和8年3月定例会という名称だが、実際の開会・代表質問/一般質問の登壇日は2月25日〜27日である（他年度の3月定例会は3月上旬〜中旬に開会しており命名と開会月のずれはこの会期に限られる）。",
+      "conclusion": "false_positive - データ不整合ではない。会期名称（3月定例会）と実際の登壇日（2月下旬）が異なるのは事実であり、誤りではなく公式資料どおり。参考情報として記録するのみで修正提案はしない。",
+      "severity": "info"
+    }
+  ],
+  "plannedVsConfirmedConfusion": [
+    {
+      "recordIds": [
+        "gq2026-06-m24", "gq2026-06-m17", "gq2026-06-m14", "gq2026-06-m08", "gq2026-06-m26",
+        "gq2026-06-m13", "gq2026-06-m03", "gq2026-06-m10", "gq2026-06-m23", "gq2026-06-m01",
+        "gq2026-06-m19", "gq2026-06-m06", "gq2026-06-m20", "gq2026-06-m02"
+      ],
+      "file": "generalQuestions.json",
+      "observation": "上記14件は令和8年6月定例会の質問通告書に基づく「予定質問」レコードで、notesに「実際の発言内容の確認ができておらず、質問項目は『予定された質問項目』として掲載」と明記されている。一方newsletterConfirmed:trueで「のべおか市議会だより第108号」により開催・登壇の事実は確認済み。",
+      "conclusion": "混同ではない。newsletterConfirmedは「登壇の事実」の確認、notesの『予定』表記は「質問項目・答弁内容の詳細」が未確認という別軸の情報であり、両者は矛盾しない。UI側（GeneralQuestionCard.tsx）も「会議録は未公開ですが、市議会だよりで開催・実施は確認済みです。」とバッジで正しく区別して表示していることをコード確認済み。",
+      "severity": "info",
+      "note": "念のため、会議録公開後にnotes文言（『予定された質問項目』表記）を実施確認済みへ更新する運用を継続すること。"
+    },
+    {
+      "recordIds": ["speeches: isPublished:true かつ summaryStatus not in {verified, partially-verified}"],
+      "file": "councilSpeechSummaries.json",
+      "observation": "councilSpeechSummaries.json全419件のspeechType別isPublished×summaryStatusの分布は {isPublished:true,status:verified}=398件、{isPublished:true,status:partially-verified}=21件のみで、pending/minutes-not-fetched/source-unavailable等の未確認ステータスがisPublished:trueのまま公開されている記録は0件だった。",
+      "conclusion": "問題なし。「予定」と「実施確認済み」の混同は検出されなかった。",
+      "severity": "info"
+    }
+  ],
+  "unstructuredRecords": [],
+  "zeroCountMisdisplaySuspects": [
+    {
+      "page": "src/components/GeneralQuestionsSection.tsx",
+      "detail": "questions.length===0の分岐は「0件」ではなく「現在、公開資料を確認しながら一般質問データを整理しています。未掲載であっても、一般質問や議員活動がなかったことを示すものではありません。」という非確定文言（EMPTY_MESSAGE）を表示している。確認済み0件と未収録の混同なし。",
+      "status": "ok"
+    },
+    {
+      "page": "src/pages/GeneralQuestionsPage.tsx",
+      "detail": "questions.length===0（予定質問セクション）は「一般質問データを準備中です。公開資料を確認しながら順次追加します。」、verifiedSpeeches.length===0（確認済みセクション）は「確認済みの会議録ベース一般質問データを準備中です。」と表示。件数バッジも「◯件の質問が見つかりました」／「条件に一致する一般質問は見つかりませんでした。」でフィルタ絞り込み時のゼロ件と、データ未収録時のゼロ件を区別して文言化しており、確認済み0件との混同はない。",
+      "status": "ok"
+    },
+    {
+      "page": "src/pages/MemberDetailPage.tsx",
+      "detail": "formerSpeeches.length===0は「公開している発言記録はまだありません。」、displayedSpeeches.length===0（テーマ絞り込み時）は「『{selectedTopic}』に該当する会期別の質問・答弁は見つかりませんでした。」と表示。publishedMemberSpeeches.length===0の場合はSpeechSummaryStatusBadge status=\"minutes-not-fetched\"（会議録本文未取得）バッジを出しており、「0件＝未取得」であることを明示している。",
+      "status": "ok"
+    },
+    {
+      "page": "src/pages/DataStatusPage.tsx",
+      "detail": "TASK-080として、count===0時に「確認済み0件（confirmed_zero）」と「未収録・未確認」を区別するdomain単位の実装コメントが存在し、membersWithoutConfirmedQuestion（確認済み質問がない現職議員）は『未確認』ラベルで一覧表示され、単なる0件表示になっていない。",
+      "status": "ok"
+    },
+    {
+      "page": "src/lib/generalQuestionStats.ts",
+      "detail": "confirmedCount（councilSpeechSummaries.json由来）とscheduledCount（generalQuestions.json由来）を意図的に合算しない設計になっており、コード冒頭のコメントで「予定質問は、実際に登壇するか・内容が変わるかを会議録で未確認のため」合算しない理由を明記。単一の情報源（calculateGeneralQuestionStats）に一本化されているため、ページごとに件数が食い違う古典的な0件誤表示バグは発生しにくい構造になっている。",
+      "status": "ok"
+    }
+  ],
+  "billVoteLinkIssues": [
+    {
+      "issue": "billVotes.json（1177件）のrelatedQuestionIdsフィールドは全件で空配列または未設定であり、一般質問（generalQuestions.json）との相互リンクは1件も設定されていない（0/1177件）。",
+      "impact": "BillVoteDetailPage.tsxのrelatedQuestions表示（bill.relatedQuestionIdsからgeneralQuestions.jsonを参照する処理）自体は正しく実装されているが、データが空のため常に「関連する一般質問なし」の表示になる。データ破損ではなく未整備（未着手）。",
+      "severity": "info（データ完全性のギャップであり、リンク破損ではない）"
+    },
+    {
+      "issue": "councilSpeechSummaries.json（419件のspeech×questionItems）のquestionItems[].relatedBillsフィールドも全件で空配列であり、議案賛否との相互リンクは1件も設定されていない（0件）。",
+      "impact": "一般質問の答弁内容と実際の議案賛否（billVotes.json）を紐付けて閲覧できる機能は現状データ上機能していない。",
+      "severity": "info（データ完全性のギャップであり、リンク破損ではない）"
+    },
+    {
+      "issue": "billVotes.jsonのsessionId（全1177件）はcouncilSessions.json（61件）のidと全て整合しており、孤立参照（orphan sessionId）は0件。billVotes.session（テキスト表記の会期名）とcouncilSessions.json該当titleの不一致も0件。",
+      "impact": "会期単位の紐付け自体は健全。",
+      "severity": "info"
+    },
+    {
+      "issue": "billVotes.jsonのsessionIdの最古は2019-06であり、councilSessions.jsonでstatus:『要確認』の19会期（2000-09〜2019-03、いずれも2019-06より前）に対応するbillVotesレコードは0件存在しない。",
+      "impact": "議案賛否データの収集対象期間が2019年6月以降に限定されているためであり、Phase77で追加した19会期（2000-2019年度）については設計上、議案賛否との突合対象外。データ不整合ではない。",
+      "severity": "info"
+    },
+    {
+      "issue": "billVotes.jsonのmemberVotes（個人別記名投票）が populated なのは1177件中2件のみ（54名分の投票記録）。全メンバーIDはmembers.json/formerMembers.jsonの範囲内で、孤立memberIdは0件。",
+      "impact": "健全だが、個人別賛否の収録範囲自体が非常に限定的（記名投票が行われたケースのみ）である点は既存の制約であり、本監査の対象外。",
+      "severity": "info"
+    }
+  ],
+  "proposedFixes": [],
+  "additionalObservations": [
+    {
+      "topic": "councilSpeechSummaries.jsonのspeechType『議案質疑』",
+      "detail": "fm06（元議員）の1件（fm06-2022-06-23-gian-shitsugi、2022-06-23、令和4年6月定例会）のspeechTypeが『議案質疑』であり、QUESTION_LIKE_SPEECH_TYPES（src/lib/questionLikeSpeechTypes.ts）に含まれる集合｛一般質問, 代表質問, 関連質問, 総括質疑, 総括質疑・一般質問｝には含まれていないため、一般質問データベース（questionLikeSpeeches）の集計・一覧からは除外される。",
+      "assessment": "『議案質疑』は個別議案の内容に関する質疑であり、市政全般を問う『一般質問』とは性質が異なるため、意図的な除外である可能性が高い（questionLikeSpeechTypes.tsのコメントも「討論・動議・議事進行等の議事系区分は含めない」と明記）。ただし『議案質疑』を含めるべきかどうかは方針判断であり、本監査では事実の指摘に留め、修正提案はしない。",
+      "recordCount": 1
+    },
+    {
+      "topic": "旧任期（term:previous）発言の現任期カットオフとの整合性",
+      "detail": "councilSpeechPeriod.json（from:2023-04-23、選挙日）を基準に、record.isFormerMember=false（現職）かつspeech.term!=='previous'のレコードで日付が2023-04-23より前のもの（＝カットオフにより一般公開から静かに除外されてしまう可能性があるレコード）が存在するか確認したが、該当は0件だった。",
+      "assessment": "現職議員の旧任期発言は正しくterm:'previous'として明示登録されており、意図しないデータの非表示（サイレントドロップ）は検出されなかった。",
+      "recordCount": 0
+    },
+    {
+      "topic": "formerMembers.jsonのservedSessions整合性",
+      "detail": "servedSessionsフィールドが設定されている18名の元議員について、councilSpeechSummaries.json上の当該memberIdの全speech.sessionIdがservedSessionsに含まれているか照合したが、不一致は0件だった。",
+      "assessment": "健全。",
+      "recordCount": 0
+    }
+  ],
+  "methodology": "generalQuestions.json（15件）とcouncilSpeechSummaries.json（44議員バケット・419発言）を全件Node.jsスクリプトで読み込み、(1) memberId×sessionId(またはsessionName)×dateのキー一致による重複検出、(2) memberIdのmembers.json/formerMembers.json双方への存在確認、(3) isFormerMemberフラグ・speech.term・formerMembers.servedSessionsとの突合による誤紐付け検出、(4) councilSessions.json（61件）とのsessionId外部キー整合性確認、(5) questionDate/dateとsessionIdの年月整合性確認（3月定例会が2月開会だった1会期については公式会議録の原文見出しで裏付け確認し誤検出と判定）、(6) notes/summaryStatus/newsletterConfirmedフィールドの組み合わせによる予定/確認済み混同検出、(7) questionItems/topicsの空配列検出、(8) billVotes.json（1177件）とのrelatedQuestionIds/relatedBills相互参照確認、(9) 対象UI（src/pages配下の一般質問関連9ページ、src/components配下2コンポーネント）のソースコードを直接読み、0件表示分岐の文言を確認、という手順で実施した。修正は一切行っていない。"
+}

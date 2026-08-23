@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-08-23T04:36:56.683Z",
+  "distFound": true,
+  "results": [
+    {
+      "label": "現職議員 (/members/*)",
+      "distDir": "members",
+      "dataCount": 26,
+      "distPageCount": 26,
+      "missingDetailPageCount": 0,
+      "missingDetailPages": [],
+      "orphanDetailPageCount": 0,
+      "orphanDetailPages": []
+    },
+    {
+      "label": "元議員 (/members/former/*)",
+      "distDir": "members/former",
+      "dataCount": 58,
+      "distPageCount": 58,
+      "missingDetailPageCount": 0,
+      "missingDetailPages": [],
+      "orphanDetailPageCount": 0,
+      "orphanDetailPages": []
+    },
+    {
+      "label": "議案・採決 (/bills/votes/*)",
+      "distDir": "bills/votes",
+      "dataCount": 1177,
+      "distPageCount": 1177,
+      "missingDetailPageCount": 0,
+      "missingDetailPages": [],
+      "orphanDetailPageCount": 0,
+      "orphanDetailPages": []
+    },
+    {
+      "label": "一般質問 (/questions/*)",
+      "distDir": "questions",
+      "dataCount": 15,
+      "distPageCount": 15,
+      "missingDetailPageCount": 0,
+      "missingDetailPages": [],
+      "orphanDetailPageCount": 0,
+      "orphanDetailPages": []
+    },
+    {
+      "label": "歴代市長 (/mayors/*)",
+      "distDir": "mayors",
+      "dataCount": 14,
+      "distPageCount": 14,
+      "missingDetailPageCount": 0,
+      "missingDetailPages": [],
+      "orphanDetailPageCount": 0,
+      "orphanDetailPages": []
+    }
+  ],
+  "note": "missingDetailPagesは『データはあるがdist/に対応する詳細ページディレクトリが生成されていない』候補、orphanDetailPagesは逆に『詳細ページはあるがデータ側にidが見当たらない』候補。本チェックはビルド時点のdist/スナップショットに依存するため、最新の状態を見るには npm run build 実行直後に再実行すること。"
+}

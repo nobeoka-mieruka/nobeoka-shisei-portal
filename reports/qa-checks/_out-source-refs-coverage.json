@@ -1,0 +1,1062 @@
+{
+  "generatedAt": "2026-08-23T04:36:55.958Z",
+  "filesScanned": 71,
+  "arraysAnalyzed": 46,
+  "lowCoverageCount": 22,
+  "perFile": [
+    {
+      "file": "archiveAiCategoryCandidates.json",
+      "arrayPath": "$",
+      "totalRecords": 19,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 19,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "catcand-001",
+        "catcand-002",
+        "catcand-003",
+        "catcand-004",
+        "catcand-005",
+        "catcand-006",
+        "catcand-007",
+        "catcand-008",
+        "catcand-009",
+        "catcand-010"
+      ]
+    },
+    {
+      "file": "archiveAiJobs.json",
+      "arrayPath": "$",
+      "totalRecords": 76,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 76,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "aijob-20260804135126-0001",
+        "aijob-20260804135126-0002",
+        "aijob-20260804135126-0003",
+        "aijob-20260804135126-0004",
+        "aijob-20260804135126-0005",
+        "aijob-20260804135126-0006",
+        "aijob-20260804135126-0007",
+        "aijob-20260804135126-0008",
+        "aijob-20260804135126-0009",
+        "aijob-20260804135126-0010"
+      ]
+    },
+    {
+      "file": "archiveCrawlerTargets.json",
+      "arrayPath": "$",
+      "totalRecords": 17,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 17,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "general-question",
+        "bill",
+        "ordinance",
+        "petition",
+        "request",
+        "member-roster",
+        "mayor",
+        "finance",
+        "population",
+        "fund"
+      ]
+    },
+    {
+      "file": "archivePolicyCategories.json",
+      "arrayPath": "$",
+      "totalRecords": 29,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 29,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "childcare",
+        "education",
+        "welfare",
+        "healthcare",
+        "senior",
+        "disability",
+        "disaster-prevention",
+        "fire-service",
+        "industry-promotion",
+        "commerce"
+      ]
+    },
+    {
+      "file": "archiveRelationCandidates.json",
+      "arrayPath": "$",
+      "totalRecords": 15,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 15,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "relcand-001",
+        "relcand-002",
+        "relcand-003",
+        "relcand-004",
+        "relcand-005",
+        "relcand-006",
+        "relcand-007",
+        "relcand-008",
+        "relcand-009",
+        "relcand-010"
+      ]
+    },
+    {
+      "file": "cityGuideCategories.json",
+      "arrayPath": "$",
+      "totalRecords": 14,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 14,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "address",
+        "tax",
+        "childcare",
+        "elderly",
+        "disability",
+        "garbage",
+        "housing",
+        "water",
+        "work",
+        "disaster"
+      ]
+    },
+    {
+      "file": "cityGuideEntries.json",
+      "arrayPath": "$",
+      "totalRecords": 32,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 32,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "address-1",
+        "address-2",
+        "tax-1",
+        "tax-2",
+        "tax-3",
+        "tax-4",
+        "childcare-1",
+        "childcare-2",
+        "childcare-3",
+        "childcare-4"
+      ]
+    },
+    {
+      "file": "cityOrganizationDivisions.json",
+      "arrayPath": "$",
+      "totalRecords": 16,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 16,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "div-01",
+        "div-02",
+        "div-03",
+        "div-04",
+        "div-05",
+        "div-06",
+        "div-07",
+        "div-08",
+        "div-09",
+        "div-10"
+      ]
+    },
+    {
+      "file": "cityOrganizationSections.json",
+      "arrayPath": "$",
+      "totalRecords": 83,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 83,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "sec-1",
+        "sec-2",
+        "sec-4",
+        "sec-6",
+        "sec-8",
+        "sec-9",
+        "sec-10",
+        "sec-11",
+        "sec-12",
+        "sec-13"
+      ]
+    },
+    {
+      "file": "factions.json",
+      "arrayPath": "$",
+      "totalRecords": 7,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 7,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "komei",
+        "jimin-kizuna",
+        "riltuken",
+        "yuuai-club",
+        "mukaiha(NK)",
+        "mushouzoku",
+        "mukaiha(MS)"
+      ]
+    },
+    {
+      "file": "formerMembers.json",
+      "arrayPath": "$",
+      "totalRecords": 58,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 58,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "fm01",
+        "fm02",
+        "fm03",
+        "fm04",
+        "fm05",
+        "fm06",
+        "fm07",
+        "fm08",
+        "fm09",
+        "fm10"
+      ]
+    },
+    {
+      "file": "kohoNobeokaIssues.json",
+      "arrayPath": "$",
+      "totalRecords": 197,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 197,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "koho-2010-04",
+        "koho-2010-05",
+        "koho-2010-06",
+        "koho-2010-07",
+        "koho-2010-08",
+        "koho-2010-09",
+        "koho-2010-10",
+        "koho-2010-11",
+        "koho-2010-12",
+        "koho-2011-01"
+      ]
+    },
+    {
+      "file": "mayor.json",
+      "arrayPath": "$.career",
+      "totalRecords": 3,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 3,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    {
+      "file": "mayor.json",
+      "arrayPath": "$.pledges",
+      "totalRecords": 4,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 4,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    {
+      "file": "mayorPolicyProgress.json",
+      "arrayPath": "$.policies",
+      "totalRecords": 4,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 4,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    {
+      "file": "mayorPromises.json",
+      "arrayPath": "$.categories",
+      "totalRecords": 4,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 4,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    {
+      "file": "politicalFundOrganizations.json",
+      "arrayPath": "$",
+      "totalRecords": 21,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 21,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "pf-org-001",
+        "pf-org-002",
+        "pf-org-003",
+        "pf-org-004",
+        "pf-org-005",
+        "pf-org-006",
+        "pf-org-007",
+        "pf-org-008",
+        "pf-org-009",
+        "pf-org-010"
+      ]
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "arrayPath": "$.sessions",
+      "totalRecords": 13,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 13,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        2023,
+        2023,
+        2023,
+        2023,
+        2024,
+        2024,
+        2024,
+        2024,
+        2025,
+        2025
+      ]
+    },
+    {
+      "file": "searchIndex.json",
+      "arrayPath": "$",
+      "totalRecords": 2191,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 2191,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "member-m01",
+        "member-m02",
+        "member-m03",
+        "member-m04",
+        "member-m05",
+        "member-m06",
+        "member-m07",
+        "member-m08",
+        "member-m09",
+        "member-m10"
+      ]
+    },
+    {
+      "file": "similarMunicipalityFinanceComparison.json",
+      "arrayPath": "$.municipalities",
+      "totalRecords": 59,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 59,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024
+      ]
+    },
+    {
+      "file": "themes.json",
+      "arrayPath": "$",
+      "totalRecords": 17,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 17,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "theme-education",
+        "theme-welfare",
+        "theme-health",
+        "theme-disaster",
+        "theme-population",
+        "theme-industry",
+        "theme-tourism",
+        "theme-primary-industry",
+        "theme-transportation",
+        "theme-urban-development"
+      ]
+    },
+    {
+      "file": "updateHistory.json",
+      "arrayPath": "$",
+      "totalRecords": 115,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 115,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "u97",
+        "u96",
+        "u95",
+        "u94",
+        "u93",
+        "u92",
+        "u91",
+        "u90",
+        "u89",
+        "u88"
+      ]
+    },
+    {
+      "file": "councilSessions.json",
+      "arrayPath": "$",
+      "totalRecords": 61,
+      "recordsWithSource": 42,
+      "recordsWithoutSource": 19,
+      "coveragePercent": 68.9,
+      "sampleMissingIds": [
+        "2000-09",
+        "2004-06",
+        "2005-09",
+        "2006-06",
+        "2007-06",
+        "2008-09",
+        "2009-09",
+        "2010-06",
+        "2011-03",
+        "2012-09"
+      ]
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "arrayPath": "$",
+      "totalRecords": 39,
+      "recordsWithSource": 39,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archiveFiscalYears.json",
+      "arrayPath": "$",
+      "totalRecords": 70,
+      "recordsWithSource": 70,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archiveMayorTerms.json",
+      "arrayPath": "$",
+      "totalRecords": 30,
+      "recordsWithSource": 30,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archiveMayors.json",
+      "arrayPath": "$",
+      "totalRecords": 14,
+      "recordsWithSource": 14,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archiveMemberAffiliations.json",
+      "arrayPath": "$",
+      "totalRecords": 74,
+      "recordsWithSource": 74,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archiveMemberProfiles.json",
+      "arrayPath": "$",
+      "totalRecords": 84,
+      "recordsWithSource": 84,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archiveMemberTerms.json",
+      "arrayPath": "$",
+      "totalRecords": 26,
+      "recordsWithSource": 26,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archivePolicies.json",
+      "arrayPath": "$",
+      "totalRecords": 16,
+      "recordsWithSource": 16,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "archivePolicyQuestionRelations.json",
+      "arrayPath": "$",
+      "totalRecords": 2,
+      "recordsWithSource": 2,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "billVotes.json",
+      "arrayPath": "$",
+      "totalRecords": 1177,
+      "recordsWithSource": 1177,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "citySpecialPosts.json",
+      "arrayPath": "$",
+      "totalRecords": 55,
+      "recordsWithSource": 55,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "civicTimelineEvents.json",
+      "arrayPath": "$",
+      "totalRecords": 209,
+      "recordsWithSource": 209,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "committeeActivityReports.json",
+      "arrayPath": "$",
+      "totalRecords": 15,
+      "recordsWithSource": 15,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "committeeReportActivity.json",
+      "arrayPath": "$.events",
+      "totalRecords": 68,
+      "recordsWithSource": 68,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "committees.json",
+      "arrayPath": "$",
+      "totalRecords": 6,
+      "recordsWithSource": 6,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "compensationComparison.json",
+      "arrayPath": "$",
+      "totalRecords": 4,
+      "recordsWithSource": 4,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "councilWatchedDocuments.json",
+      "arrayPath": "$",
+      "totalRecords": 65,
+      "recordsWithSource": 65,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "electionResults.json",
+      "arrayPath": "$",
+      "totalRecords": 39,
+      "recordsWithSource": 39,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "generalQuestions.json",
+      "arrayPath": "$",
+      "totalRecords": 15,
+      "recordsWithSource": 15,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "mayorPromises.json",
+      "arrayPath": "$.promises",
+      "totalRecords": 12,
+      "recordsWithSource": 12,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "members.json",
+      "arrayPath": "$",
+      "totalRecords": 26,
+      "recordsWithSource": 26,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "municipalityComparison.json",
+      "arrayPath": "$",
+      "totalRecords": 7,
+      "recordsWithSource": 7,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    },
+    {
+      "file": "politicalFundReports.json",
+      "arrayPath": "$",
+      "totalRecords": 20,
+      "recordsWithSource": 20,
+      "recordsWithoutSource": 0,
+      "coveragePercent": 100,
+      "sampleMissingIds": []
+    }
+  ],
+  "lowCoverageHighlight": [
+    {
+      "file": "archiveAiCategoryCandidates.json",
+      "arrayPath": "$",
+      "totalRecords": 19,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 19,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "catcand-001",
+        "catcand-002",
+        "catcand-003",
+        "catcand-004",
+        "catcand-005",
+        "catcand-006",
+        "catcand-007",
+        "catcand-008",
+        "catcand-009",
+        "catcand-010"
+      ]
+    },
+    {
+      "file": "archiveAiJobs.json",
+      "arrayPath": "$",
+      "totalRecords": 76,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 76,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "aijob-20260804135126-0001",
+        "aijob-20260804135126-0002",
+        "aijob-20260804135126-0003",
+        "aijob-20260804135126-0004",
+        "aijob-20260804135126-0005",
+        "aijob-20260804135126-0006",
+        "aijob-20260804135126-0007",
+        "aijob-20260804135126-0008",
+        "aijob-20260804135126-0009",
+        "aijob-20260804135126-0010"
+      ]
+    },
+    {
+      "file": "archiveCrawlerTargets.json",
+      "arrayPath": "$",
+      "totalRecords": 17,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 17,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "general-question",
+        "bill",
+        "ordinance",
+        "petition",
+        "request",
+        "member-roster",
+        "mayor",
+        "finance",
+        "population",
+        "fund"
+      ]
+    },
+    {
+      "file": "archivePolicyCategories.json",
+      "arrayPath": "$",
+      "totalRecords": 29,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 29,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "childcare",
+        "education",
+        "welfare",
+        "healthcare",
+        "senior",
+        "disability",
+        "disaster-prevention",
+        "fire-service",
+        "industry-promotion",
+        "commerce"
+      ]
+    },
+    {
+      "file": "archiveRelationCandidates.json",
+      "arrayPath": "$",
+      "totalRecords": 15,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 15,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "relcand-001",
+        "relcand-002",
+        "relcand-003",
+        "relcand-004",
+        "relcand-005",
+        "relcand-006",
+        "relcand-007",
+        "relcand-008",
+        "relcand-009",
+        "relcand-010"
+      ]
+    },
+    {
+      "file": "cityGuideCategories.json",
+      "arrayPath": "$",
+      "totalRecords": 14,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 14,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "address",
+        "tax",
+        "childcare",
+        "elderly",
+        "disability",
+        "garbage",
+        "housing",
+        "water",
+        "work",
+        "disaster"
+      ]
+    },
+    {
+      "file": "cityGuideEntries.json",
+      "arrayPath": "$",
+      "totalRecords": 32,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 32,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "address-1",
+        "address-2",
+        "tax-1",
+        "tax-2",
+        "tax-3",
+        "tax-4",
+        "childcare-1",
+        "childcare-2",
+        "childcare-3",
+        "childcare-4"
+      ]
+    },
+    {
+      "file": "cityOrganizationDivisions.json",
+      "arrayPath": "$",
+      "totalRecords": 16,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 16,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "div-01",
+        "div-02",
+        "div-03",
+        "div-04",
+        "div-05",
+        "div-06",
+        "div-07",
+        "div-08",
+        "div-09",
+        "div-10"
+      ]
+    },
+    {
+      "file": "cityOrganizationSections.json",
+      "arrayPath": "$",
+      "totalRecords": 83,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 83,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "sec-1",
+        "sec-2",
+        "sec-4",
+        "sec-6",
+        "sec-8",
+        "sec-9",
+        "sec-10",
+        "sec-11",
+        "sec-12",
+        "sec-13"
+      ]
+    },
+    {
+      "file": "factions.json",
+      "arrayPath": "$",
+      "totalRecords": 7,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 7,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "komei",
+        "jimin-kizuna",
+        "riltuken",
+        "yuuai-club",
+        "mukaiha(NK)",
+        "mushouzoku",
+        "mukaiha(MS)"
+      ]
+    },
+    {
+      "file": "formerMembers.json",
+      "arrayPath": "$",
+      "totalRecords": 58,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 58,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "fm01",
+        "fm02",
+        "fm03",
+        "fm04",
+        "fm05",
+        "fm06",
+        "fm07",
+        "fm08",
+        "fm09",
+        "fm10"
+      ]
+    },
+    {
+      "file": "kohoNobeokaIssues.json",
+      "arrayPath": "$",
+      "totalRecords": 197,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 197,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "koho-2010-04",
+        "koho-2010-05",
+        "koho-2010-06",
+        "koho-2010-07",
+        "koho-2010-08",
+        "koho-2010-09",
+        "koho-2010-10",
+        "koho-2010-11",
+        "koho-2010-12",
+        "koho-2011-01"
+      ]
+    },
+    {
+      "file": "mayor.json",
+      "arrayPath": "$.career",
+      "totalRecords": 3,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 3,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    {
+      "file": "mayor.json",
+      "arrayPath": "$.pledges",
+      "totalRecords": 4,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 4,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    {
+      "file": "mayorPolicyProgress.json",
+      "arrayPath": "$.policies",
+      "totalRecords": 4,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 4,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    {
+      "file": "mayorPromises.json",
+      "arrayPath": "$.categories",
+      "totalRecords": 4,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 4,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    {
+      "file": "politicalFundOrganizations.json",
+      "arrayPath": "$",
+      "totalRecords": 21,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 21,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "pf-org-001",
+        "pf-org-002",
+        "pf-org-003",
+        "pf-org-004",
+        "pf-org-005",
+        "pf-org-006",
+        "pf-org-007",
+        "pf-org-008",
+        "pf-org-009",
+        "pf-org-010"
+      ]
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "arrayPath": "$.sessions",
+      "totalRecords": 13,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 13,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        2023,
+        2023,
+        2023,
+        2023,
+        2024,
+        2024,
+        2024,
+        2024,
+        2025,
+        2025
+      ]
+    },
+    {
+      "file": "searchIndex.json",
+      "arrayPath": "$",
+      "totalRecords": 2191,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 2191,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "member-m01",
+        "member-m02",
+        "member-m03",
+        "member-m04",
+        "member-m05",
+        "member-m06",
+        "member-m07",
+        "member-m08",
+        "member-m09",
+        "member-m10"
+      ]
+    },
+    {
+      "file": "similarMunicipalityFinanceComparison.json",
+      "arrayPath": "$.municipalities",
+      "totalRecords": 59,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 59,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024,
+        2024
+      ]
+    },
+    {
+      "file": "themes.json",
+      "arrayPath": "$",
+      "totalRecords": 17,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 17,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "theme-education",
+        "theme-welfare",
+        "theme-health",
+        "theme-disaster",
+        "theme-population",
+        "theme-industry",
+        "theme-tourism",
+        "theme-primary-industry",
+        "theme-transportation",
+        "theme-urban-development"
+      ]
+    },
+    {
+      "file": "updateHistory.json",
+      "arrayPath": "$",
+      "totalRecords": 115,
+      "recordsWithSource": 0,
+      "recordsWithoutSource": 115,
+      "coveragePercent": 0,
+      "sampleMissingIds": [
+        "u97",
+        "u96",
+        "u95",
+        "u94",
+        "u93",
+        "u92",
+        "u91",
+        "u90",
+        "u89",
+        "u88"
+      ]
+    }
+  ],
+  "note": "coveragePercentは『sourceRefs等の出典情報らしきフィールドを1件以上持つレコードの割合』の機械集計。出典を持たない設計のマスターデータ（分類・カテゴリ等）も含まれるため、lowCoverageHighlightは『出典が必要なはずなのに欠けている』ことの確定情報ではなく、人手レビューの優先順位付けに使うこと。"
+}

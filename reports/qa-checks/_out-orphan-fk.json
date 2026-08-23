@@ -1,0 +1,108 @@
+{
+  "generatedAt": "2026-08-23T04:36:55.771Z",
+  "registrySize": 13,
+  "registryUnavailable": [],
+  "orphanCount": 0,
+  "orphans": [],
+  "unresolvedFieldNames": {
+    "sourceEntityId": [
+      "adminReviewQueue.json",
+      "archiveAiCategoryCandidates.json",
+      "archiveAiJobs.json",
+      "archiveRelationCandidates.json"
+    ],
+    "resultId": [
+      "archiveAiJobs.json"
+    ],
+    "existingBillVoteId": [
+      "archiveCouncilDocuments.json"
+    ],
+    "relatedMayorIds": [
+      "archiveCouncilDocuments.json"
+    ],
+    "targetId": [
+      "archiveCrawlerState.json"
+    ],
+    "affiliationId": [
+      "archiveMemberAffiliations.json"
+    ],
+    "legacyFormerMemberId": [
+      "archiveMemberProfiles.json"
+    ],
+    "legacyMemberId": [
+      "archiveMemberProfiles.json"
+    ],
+    "ownerId": [
+      "archivePolicies.json"
+    ],
+    "categoryIds": [
+      "archivePolicies.json"
+    ],
+    "relatedQuestionIds": [
+      "archivePolicies.json"
+    ],
+    "policyId": [
+      "archivePolicyQuestionRelations.json"
+    ],
+    "targetEntityId": [
+      "archiveRelationCandidates.json"
+    ],
+    "recordId": [
+      "billProposalRoles.json"
+    ],
+    "personId": [
+      "billProposalRoles.json"
+    ],
+    "sourceDocumentId": [
+      "billVotes.json"
+    ],
+    "relatedBillIds": [
+      "billVotes.json"
+    ],
+    "revisionOfBillId": [
+      "billVotes.json"
+    ],
+    "taskId": [
+      "blockedTaskClassification.json",
+      "blockedTaskWatch.json"
+    ],
+    "crawlerTargetId": [
+      "blockedTaskWatch.json"
+    ],
+    "parentDivisionId": [
+      "cityOrganizationSections.json"
+    ],
+    "relatedMemberId": [
+      "citySpecialPosts.json",
+      "politicalFundOrganizations.json"
+    ],
+    "relatedPersonIds": [
+      "civicTimelineEvents.json"
+    ],
+    "documentId": [
+      "councilSessions.json"
+    ],
+    "speakerId": [
+      "councilSpeechSummaries.json"
+    ],
+    "linkedProfileId": [
+      "electionResults.json"
+    ],
+    "issueId": [
+      "kohoOcrSearchIndex.json"
+    ],
+    "evidenceSpeechIds": [
+      "memberSpeechAnalysis.json"
+    ],
+    "civicTimelineEventId": [
+      "nobeokaCensusPopulation.json"
+    ],
+    "organizationId": [
+      "politicalFundReports.json"
+    ],
+    "sourceId": [
+      "searchIndex.json"
+    ]
+  },
+  "note": "unresolvedFieldNamesは、命名規則上は外部キーらしいが本スクリプトのレジストリに未登録のフィールド一覧。誤検出防止のため自動チェックはしていない。将来レジストリへ追加するか、既にvalidate-data.mjs側で個別チェック済みかを人手で確認すること。"
+}

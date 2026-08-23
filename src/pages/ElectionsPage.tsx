@@ -39,7 +39,13 @@ export function ElectionsPage() {
 
   const mayorCount = sortedAll.filter((e) => e.electionType === "mayor").length;
   const councilCount = sortedAll.filter((e) => e.electionType === "councilMember").length;
-  const totalCandidates = sortedAll.reduce((n, e) => n + e.candidates.length, 0);
+  // 候補者名簿が未確認の選挙（electionCandidateListConfirmed===false）はcandidates配列に
+  // 当選者のみ等の暫定データしか入っていない場合があり、そのまま合算すると実際の延べ候補者数を
+  // 下回る値を注記なしで表示してしまう（Phase84 UI監査で発見）。確認済みの選挙のみを合算し、
+  // 未確認の選挙数をhintで明示する。
+  const confirmedElections = sortedAll.filter((e) => electionCandidateListConfirmed(e));
+  const totalCandidates = confirmedElections.reduce((n, e) => n + e.candidates.length, 0);
+  const unconfirmedCandidateListCount = sortedAll.length - confirmedElections.length;
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -64,7 +70,16 @@ export function ElectionsPage() {
         <StatCard label="収録選挙数" value={sorted.length} unit="回" />
         <StatCard label="市長選挙" value={mayorCount} unit="回" />
         <StatCard label="市議会議員選挙" value={councilCount} unit="回" />
-        <StatCard label="候補者延べ数" value={totalCandidates} unit="名" />
+        <StatCard
+          label="候補者延べ数"
+          value={totalCandidates}
+          unit="名"
+          hint={
+            unconfirmedCandidateListCount > 0
+              ? `候補者名簿確認済みの${confirmedElections.length}回分の合計（候補者名簿未確認の${unconfirmedCandidateListCount}回分は含みません）`
+              : undefined
+          }
+        />
       </div>
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="選挙種別で絞り込み">

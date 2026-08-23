@@ -1,0 +1,316 @@
+{
+  "generatedAt": "2026-08-23T04:36:55.497Z",
+  "filesScanned": 71,
+  "withinFileDuplicateCount": 0,
+  "crossFileCollisionCount": 10,
+  "withinFileDuplicates": [],
+  "crossFileCollisions": [
+    {
+      "id": "c1",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[0].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[1].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[3].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[4].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[5].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[7].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[9].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[11].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[12].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[13].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[16].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[17].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[18].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[19].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[20].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[22].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[23].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[24].career"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[1].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[3].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[5].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[9].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[11].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[12].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[13].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[16].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[17].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[20].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[22].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[23].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[24].career"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[1].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[3].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[5].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[9].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[11].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[12].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[13].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[16].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[20].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[22].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[23].career"
+        },
+        {
+          "file": "members.json",
+          "arrayPath": "$[24].career"
+        }
+      ]
+    },
+    {
+      "id": "childcare",
+      "occurrences": [
+        {
+          "file": "archivePolicyCategories.json",
+          "arrayPath": "$"
+        },
+        {
+          "file": "cityGuideCategories.json",
+          "arrayPath": "$"
+        }
+      ]
+    },
+    {
+      "id": "disability",
+      "occurrences": [
+        {
+          "file": "archivePolicyCategories.json",
+          "arrayPath": "$"
+        },
+        {
+          "file": "cityGuideCategories.json",
+          "arrayPath": "$"
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "occurrences": [
+        {
+          "file": "archiveCrawlerTargets.json",
+          "arrayPath": "$"
+        },
+        {
+          "file": "archivePolicyCategories.json",
+          "arrayPath": "$"
+        }
+      ]
+    },
+    {
+      "id": "p1",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.pledges"
+        },
+        {
+          "file": "mayorPolicyProgress.json",
+          "arrayPath": "$.policies"
+        },
+        {
+          "file": "mayorPromises.json",
+          "arrayPath": "$.categories"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.pledges"
+        },
+        {
+          "file": "mayorPolicyProgress.json",
+          "arrayPath": "$.policies"
+        },
+        {
+          "file": "mayorPromises.json",
+          "arrayPath": "$.categories"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.pledges"
+        },
+        {
+          "file": "mayorPolicyProgress.json",
+          "arrayPath": "$.policies"
+        },
+        {
+          "file": "mayorPromises.json",
+          "arrayPath": "$.categories"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "occurrences": [
+        {
+          "file": "mayor.json",
+          "arrayPath": "$.pledges"
+        },
+        {
+          "file": "mayorPolicyProgress.json",
+          "arrayPath": "$.policies"
+        },
+        {
+          "file": "mayorPromises.json",
+          "arrayPath": "$.categories"
+        }
+      ]
+    }
+  ],
+  "note": "crossFileCollisionsは「同じid文字列が複数ファイルの配列で使われている」事実の一覧であり、設計上意図的な共有命名（例：略称の偶然一致）を含みうるため、全件を即エラー扱いにはしない。人手で「本来は別idにすべきか」をレビューすること。withinFileDuplicatesは原則すべて要修正。"
+}

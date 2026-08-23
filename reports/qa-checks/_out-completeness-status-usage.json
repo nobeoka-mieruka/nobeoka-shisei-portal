@@ -1,0 +1,1012 @@
+{
+  "generatedAt": "2026-08-23T04:36:56.196Z",
+  "filesScanned": 71,
+  "statusLikeFieldCount": 60,
+  "completenessStatusVocabulary": [
+    "complete",
+    "partial",
+    "not_collected",
+    "not_available",
+    "unknown",
+    "under_review",
+    "confirmed_zero"
+  ],
+  "suspiciousCompletenessStatusHitCount": 22,
+  "suspiciousCompletenessStatusHits": [
+    {
+      "file": "archiveCouncilDocuments.json",
+      "path": "$[0].ordinanceDetail.effectStatus",
+      "field": "effectStatus",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "path": "$[1].ordinanceDetail.effectStatus",
+      "field": "effectStatus",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "path": "$[2].ordinanceDetail.effectStatus",
+      "field": "effectStatus",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[5].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[7].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[8].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[10].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[11].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[12].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "archiveMayors.json",
+      "path": "$[13].status",
+      "field": "status",
+      "value": "unknown"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[0].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[1].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[2].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[3].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[4].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[5].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[6].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[7].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[8].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[9].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[10].status",
+      "field": "status",
+      "value": "partial"
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "path": "$.sessions[11].status",
+      "field": "status",
+      "value": "partial"
+    }
+  ],
+  "inventory": [
+    {
+      "file": "archiveAiCategoryCandidates.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "candidate",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "file": "archiveAiJobs.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 19
+        },
+        {
+          "value": "completed",
+          "count": 57
+        }
+      ]
+    },
+    {
+      "file": "archiveAiJobs.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "candidate",
+          "count": 57
+        }
+      ]
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "field": "effectStatus",
+      "distinctValues": [
+        {
+          "value": "unknown",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "decided",
+          "count": 21
+        },
+        {
+          "value": "withdrawn",
+          "count": 3
+        },
+        {
+          "value": "continuedReview",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "file": "archiveCouncilDocuments.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 78
+        }
+      ]
+    },
+    {
+      "file": "archiveCrawlerState.json",
+      "field": "lastStatus",
+      "distinctValues": [
+        {
+          "value": "unchanged",
+          "count": 12
+        },
+        {
+          "value": "skipped",
+          "count": 4
+        },
+        {
+          "value": "possiblyRemoved",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "archiveFiscalYears.json",
+      "field": "municipalBondIssuanceStatus",
+      "distinctValues": [
+        {
+          "value": "settlementConfirmed",
+          "count": 17
+        },
+        {
+          "value": "notCollected",
+          "count": 11
+        },
+        {
+          "value": "budgetOnly",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "archiveFiscalYears.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 48
+        },
+        {
+          "value": "needsReview",
+          "count": 219
+        }
+      ]
+    },
+    {
+      "file": "archiveMayors.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "current",
+          "count": 1
+        },
+        {
+          "value": "former",
+          "count": 2
+        },
+        {
+          "value": "deceased",
+          "count": 4
+        },
+        {
+          "value": "unknown",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "file": "archiveMayors.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 10
+        },
+        {
+          "value": "verified",
+          "count": 38
+        },
+        {
+          "value": "partiallyVerified",
+          "count": 5
+        },
+        {
+          "value": "sourceUnavailable",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "archiveMayorTerms.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 14
+        },
+        {
+          "value": "verified",
+          "count": 48
+        },
+        {
+          "value": "partiallyVerified",
+          "count": 10
+        },
+        {
+          "value": "sourceUnavailable",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "archiveMemberAffiliations.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 74
+        }
+      ]
+    },
+    {
+      "file": "archiveMemberProfiles.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "former",
+          "count": 58
+        },
+        {
+          "value": "current",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "file": "archiveMemberProfiles.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 65
+        },
+        {
+          "value": "needsReview",
+          "count": 52
+        }
+      ]
+    },
+    {
+      "file": "archiveMemberTerms.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "elected",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "file": "archiveMemberTerms.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "file": "archivePolicies.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "proposed",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "file": "archivePolicies.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "file": "archivePolicyQuestionRelations.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "archiveRelationCandidates.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "candidate",
+          "count": 15
+        }
+      ]
+    },
+    {
+      "file": "billProposalRoles.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 6
+        },
+        {
+          "value": "needsReview",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "billVotes.json",
+      "field": "individualVoteDisclosureStatus",
+      "distinctValues": [
+        {
+          "value": "unconfirmed",
+          "count": 654
+        },
+        {
+          "value": "notDisclosed",
+          "count": 521
+        },
+        {
+          "value": "disclosed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "billVotes.json",
+      "field": "publicationStatus",
+      "distinctValues": [
+        {
+          "value": "published",
+          "count": 1177
+        }
+      ]
+    },
+    {
+      "file": "billVotes.json",
+      "field": "relationStatus",
+      "distinctValues": [
+        {
+          "value": "suggested",
+          "count": 225
+        }
+      ]
+    },
+    {
+      "file": "billVotes.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 1177
+        }
+      ]
+    },
+    {
+      "file": "blockedTaskClassification.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "WAITING_EXTERNAL",
+          "count": 2
+        },
+        {
+          "value": "COMPLETED",
+          "count": 3
+        },
+        {
+          "value": "MANUAL_REVIEW",
+          "count": 8
+        },
+        {
+          "value": "RESEARCH_EXHAUSTED",
+          "count": 2
+        },
+        {
+          "value": "online_checked",
+          "count": 7
+        },
+        {
+          "value": "library_login_required",
+          "count": 6
+        },
+        {
+          "value": "library_required",
+          "count": 3
+        },
+        {
+          "value": "inquiry_required",
+          "count": 2
+        },
+        {
+          "value": "server_unreachable",
+          "count": 1
+        },
+        {
+          "value": "unavailable_not_text",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "blockedTaskWatch.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "blocked",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "file": "citySpecialPosts.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "former",
+          "count": 22
+        },
+        {
+          "value": "current",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "file": "civicTimelineEvents.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 187
+        },
+        {
+          "value": "partiallyVerified",
+          "count": 22
+        }
+      ]
+    },
+    {
+      "file": "committeeReportActivity.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 68
+        }
+      ]
+    },
+    {
+      "file": "compensationPendingMunicipalities.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "official_data_pending",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "file": "councilDocumentSources.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "unchanged",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "file": "councilSessions.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "要確認",
+          "count": 19
+        },
+        {
+          "value": "確認済み",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "councilSessions.json",
+      "field": "summaryStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 42
+        }
+      ]
+    },
+    {
+      "file": "councilSessions.json",
+      "field": "textExtractionStatus",
+      "distinctValues": [
+        {
+          "value": "extracted",
+          "count": 42
+        }
+      ]
+    },
+    {
+      "file": "councilSessions.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "確認済み",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "field": "answerStatus",
+      "distinctValues": [
+        {
+          "value": "現時点では予定なし",
+          "count": 21
+        },
+        {
+          "value": "継続対応",
+          "count": 155
+        },
+        {
+          "value": "実施予定",
+          "count": 90
+        },
+        {
+          "value": "課題あり",
+          "count": 77
+        },
+        {
+          "value": "実施中",
+          "count": 544
+        },
+        {
+          "value": "検討中",
+          "count": 414
+        },
+        {
+          "value": "実施予定なし",
+          "count": 49
+        },
+        {
+          "value": "関係機関と協議",
+          "count": 16
+        },
+        {
+          "value": "実施済み",
+          "count": 24
+        },
+        {
+          "value": "回答のみで方針不明",
+          "count": 59
+        },
+        {
+          "value": "調査・研究",
+          "count": 21
+        },
+        {
+          "value": "見解の相違",
+          "count": 18
+        },
+        {
+          "value": "制度上対応困難",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "field": "questionAnswerLinkStatus",
+      "distinctValues": [
+        {
+          "value": "confirmed",
+          "count": 1564
+        },
+        {
+          "value": "partially-confirmed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "field": "summaryStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 398
+        },
+        {
+          "value": "partially-verified",
+          "count": 21
+        }
+      ]
+    },
+    {
+      "file": "councilWatchedDocuments.json",
+      "field": "ocrStatus",
+      "distinctValues": [
+        {
+          "value": "text-extracted",
+          "count": 63
+        }
+      ]
+    },
+    {
+      "file": "councilWatchedDocuments.json",
+      "field": "speakerIdentificationStatus",
+      "distinctValues": [
+        {
+          "value": "confirmed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "file": "councilWatchedDocuments.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "published",
+          "count": 63
+        },
+        {
+          "value": "baseline",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "dataQualitySummary.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "fixed_2026-08-17",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "electionResults.json",
+      "field": "incumbencyStatus",
+      "distinctValues": [
+        {
+          "value": "現職",
+          "count": 23
+        },
+        {
+          "value": "新人",
+          "count": 24
+        },
+        {
+          "value": "元職",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "file": "electionResults.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 24
+        },
+        {
+          "value": "verified",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "file": "formerMembers.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "former",
+          "count": 58
+        }
+      ]
+    },
+    {
+      "file": "kohoNobeokaIssues.json",
+      "field": "researchStatus",
+      "distinctValues": [
+        {
+          "value": "tested_pdftotext_sample",
+          "count": 197
+        }
+      ]
+    },
+    {
+      "file": "kohoOcrSearchIndex.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "raw",
+          "count": 2125
+        },
+        {
+          "value": "verified",
+          "count": 62
+        }
+      ]
+    },
+    {
+      "file": "mayorPolicyProgress.json",
+      "field": "currentStatus",
+      "distinctValues": [
+        {
+          "value": "「こども未来創造機構」での自然体験事業の拡充、AI型学習教材の活用検討、「こども未来部設置準備室」の設置など、複数の取り組みが実施中・検討中（令和8年度、市長公式サイト公表の1年間の実績報告に基づく）",
+          "count": 1
+        },
+        {
+          "value": "地域商社設立準備事業、愛宕山笠沙の御碕公園賑わい創出検討事業、スポーツ合宿・大会誘致（のべおかスポーツ応援協議会）など、複数の取り組みが実施中（令和8年度、市長公式サイト公表の1年間の実績報告に基づく）",
+          "count": 1
+        },
+        {
+          "value": "医療機関事業承継支援補助金制度の運用開始、大規模災害時の相互支援体制の確立、シニア世代向け就職支援等が実施中（令和8年度、市長公式サイト公表の1年間の実績報告に基づく）",
+          "count": 1
+        },
+        {
+          "value": "官民連携の次世代リーダー研修、出張なんでも総合相談センター、タウンミーティング等が実施中・実施予定（令和8年度、市長公式サイト公表の1年間の実績報告に基づく）",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "mayorPromises.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "in_progress",
+          "count": 10
+        },
+        {
+          "value": "candidate",
+          "count": 1
+        },
+        {
+          "value": "considering",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "mayorPromises.json",
+      "field": "statusLabel",
+      "distinctValues": [
+        {
+          "value": "進行中",
+          "count": 10
+        },
+        {
+          "value": "検討中",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "members.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "verified",
+          "count": 4
+        },
+        {
+          "value": "unverified",
+          "count": 34
+        }
+      ]
+    },
+    {
+      "file": "memberSpeechAnalysis.json",
+      "field": "analysisStatus",
+      "distinctValues": [
+        {
+          "value": "pending",
+          "count": 26
+        },
+        {
+          "value": "not-analyzed",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "file": "politicalFundOrganizations.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "pending",
+          "count": 1
+        },
+        {
+          "value": "confirmed",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "file": "politicalFundReports.json",
+      "field": "reportStatus",
+      "distinctValues": [
+        {
+          "value": "確認済み",
+          "count": 19
+        },
+        {
+          "value": "確認中",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "questionCollectionStatus.json",
+      "field": "status",
+      "distinctValues": [
+        {
+          "value": "partial",
+          "count": 12
+        },
+        {
+          "value": "transcriptUnavailable",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "searchIndex.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 16
+        },
+        {
+          "value": "verified",
+          "count": 39
+        }
+      ]
+    },
+    {
+      "file": "similarMunicipalityFinanceComparison.json",
+      "field": "dataStatus",
+      "distinctValues": [
+        {
+          "value": "CONFIRMED",
+          "count": 59
+        }
+      ]
+    },
+    {
+      "file": "similarMunicipalityFinanceComparison.json",
+      "field": "verificationStatus",
+      "distinctValues": [
+        {
+          "value": "needsReview",
+          "count": 3
+        }
+      ]
+    }
+  ],
+  "note": "suspiciousCompletenessStatusHitsは『CompletenessStatusの語彙と完全一致する値がsrc/data JSON内のstatusフィールドに存在する』という事実のみを示す。CompletenessStatus自体は本来JSONへ保存されない設計のため、ヒットが0件でも問題ない。ヒットがある場合は、そのフィールドが本当にCompletenessMetric由来か、単なる語の偶然一致（例：billVotesのverificationStatusに\"pending\"はあるが\"unknown\"等はない想定）かを人手で確認すること。inventoryは全statusフィールドの値台帳であり、新規フィールド追加時のvalidate-data.mjs側チェック漏れをレビューする資料として使う。"
+}

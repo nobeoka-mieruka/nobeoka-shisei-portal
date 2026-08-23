@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-08-23T04:36:56.544Z",
+  "searchIndexCoverage": [
+    {
+      "type": "member",
+      "file": "src/data/members.json",
+      "masterCount": 26,
+      "indexedCount": 26,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    },
+    {
+      "type": "former-member",
+      "file": "src/data/archiveMemberProfiles.json",
+      "masterCount": 58,
+      "indexedCount": 58,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    },
+    {
+      "type": "bill",
+      "file": "src/data/billVotes.json",
+      "masterCount": 1177,
+      "indexedCount": 1177,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    },
+    {
+      "type": "question",
+      "file": "src/data/generalQuestions.json",
+      "masterCount": 15,
+      "indexedCount": 15,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    },
+    {
+      "type": "promise",
+      "file": "src/data/mayorPromises.json",
+      "masterCount": 12,
+      "indexedCount": 12,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    },
+    {
+      "type": "committee",
+      "file": "src/data/committees.json",
+      "masterCount": 6,
+      "indexedCount": 6,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    },
+    {
+      "type": "election",
+      "file": "src/data/electionResults.json",
+      "masterCount": 39,
+      "indexedCount": 39,
+      "missingCount": 0,
+      "sampleMissingIds": []
+    }
+  ],
+  "updateHistoryOrder": {
+    "totalEntries": 115,
+    "isDescending": false,
+    "outOfOrderCount": 5,
+    "outOfOrderSamples": [
+      {
+        "index": 98,
+        "prevId": "u1",
+        "prevDate": "2026-07-14",
+        "curId": "u98",
+        "curDate": "2026-08-22"
+      },
+      {
+        "index": 101,
+        "prevId": "u100",
+        "prevDate": "2026-08-22",
+        "curId": "u101",
+        "curDate": "2026-08-23"
+      },
+      {
+        "index": 110,
+        "prevId": "u109",
+        "prevDate": "2026-08-19",
+        "curId": "u110",
+        "curDate": "2026-08-20"
+      },
+      {
+        "index": 112,
+        "prevId": "u111",
+        "prevDate": "2026-08-20",
+        "curId": "u112",
+        "curDate": "2026-08-21"
+      },
+      {
+        "index": 114,
+        "prevId": "u113",
+        "prevDate": "2026-08-21",
+        "curId": "u114",
+        "curDate": "2026-08-22"
+      }
+    ]
+  },
+  "note": "searchIndexCoverageのmissingCountは『検索インデックスに未登録の可能性があるレコード』の候補数。検索対象外とする意図的な設計（下書き・非公開等）を含みうるため、要人手確認。updateHistoryOrderは配列の並び順（表示順）そのものが降順かを見ている。"
+}

@@ -337,8 +337,8 @@
       "requiresOnsite": false,
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "Phase32新規発見。ndl-historical-source-ledger.jsonに延岡市史1993/2003/2013年版が既に書誌登録されており、Route B（既存source ledgerの再確認）から着手可能。"
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase32新規発見。ndl-historical-source-ledger.jsonに延岡市史1993/2003/2013年版が既に書誌登録されており、Route B（既存source ledgerの再確認）から着手可能。 Phase82（人物・任期整合性監査）で独立に再検出・再確認済み（新規調査ではなく既存UNRの追認）。"
     },
     {
       "unresolvedId": "UNR-011",
@@ -893,35 +893,118 @@
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-08-23",
       "notes": "Phase68新規発見、Phase72で全10選挙への拡大再確認済み（結論変わらず）。質問本文は未取得（member-id不明のまま内容を要約しない方針）。"
+    },
+    {
+      "unresolvedId": "UNR-029",
+      "category": "mayor",
+      "subcategory": "mayorTerm-dateGaps",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "1937-01-06〜1994-02-06の間に分散する13区間（archiveMayorTerms.json全30任期中27任期でtermStart/End Precisionがmonth単位）",
+      "description": "archiveMayorTerms.jsonのvalidate:data警告（13件の日単位空白期間）に対応する専用UNRが未起票だったため新規記録。市長任期そのものの就任・退任日が日単位で確定していない13区間（1937/1941/1942/1946/1947/1948/1952/1956/1966-67/1978/1994）。氏名・在任事実は確認済みだが、正確な日付は未確定（UI側は「月まで確認・日は未確定」と正しく注記しており、誤表示ではない）。Phase85（warnings完全分類）が同一問題を「F：大量バックフィル待ち」に分類し、専用UNR起票を推奨。",
+      "currentStatus": "partially_resolved",
+      "priority": "C",
+      "evidenceLevel": "Level1（氏名・在任事実は確認済み、日単位の就任退任日のみ未確定）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "src/data/archiveMayorTerms.json（termStartPrecision/termEndPrecisionフィールドで機械集計）"
+      ],
+      "alreadyTriedMethods": [],
+      "unresolvedReason": "F（既存資料の再精読による日付特定が必要、大量区間のため一括バックフィル向き）",
+      "nextAction": "延岡市史・官報等で該当13区間の就任・退任日（日単位）を個別に確認する",
+      "nextSourceCandidate": "延岡市史各版、国立公文書館・官報情報検索サービス",
+      "primaryRoute": "B",
+      "secondaryRoute": "C",
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase82・Phase85（Phase78-88横断監査）で発見・分類。UI表示は既に精度注記付きで正確なため、市民向け表示上の緊急性は低い（データの精緻化タスク）。"
+    },
+    {
+      "unresolvedId": "UNR-030",
+      "category": "finance",
+      "subcategory": "fiscalReserveFund-frozenValue-suspicion",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "FY2001-2004、FY2006-2008、FY2020-2024（3クラスター、登録済み22年度中12年度＝55%）",
+      "description": "archiveFiscalYears.jsonのfund.balance.fiscalReserveFundYen（財政調整基金残高）が、出典PDF/xlsxが年度ごとに異なるにもかかわらず、3つのクラスターでそれぞれ完全に同一値を示している（FY2001-04: 1,434,111,000円、FY2006-08: 2,562,208,000円、FY2020-24: 5,032,997,000円）。同じ資料・同じ抽出手法で取得された隣接フィールド（bondRedemptionFundYen等）は年度ごとに正しく変動しており、fiscalReserveFundYenのみが不自然に固定されている。データ抽出時に誤って同一セル位置を参照した可能性が疑われるが、原資料を再確認するまでは実際に同一値だった可能性も排除できないため、推測による値の書き換えは行っていない。",
+      "currentStatus": "unconfirmed",
+      "priority": "A",
+      "evidenceLevel": "Level1（既存登録値はあるが、抽出過程の誤りが疑われ内容の信頼性が未確認）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "src/data/archiveFiscalYears.json（内部整合性の機械監査のみ、原資料の再確認は未実施）"
+      ],
+      "alreadyTriedMethods": [
+        "隣接フィールドとの変動パターン比較による統計的異常検知"
+      ],
+      "unresolvedReason": "A（総務省市町村決算カード・財政状況資料集はいずれもオンライン一次資料として既に到達済みの経路のため、再確認自体は速やかに可能）",
+      "nextAction": "総務省「市町村決算カード」平成13〜16年度版・平成18〜20年度版、延岡市「財政状況資料集」令和3〜6年度版の財政調整基金欄を個別に再抽出し、現行値と照合する。一致すればverifiedへ格上げ、不一致なら訂正する。",
+      "nextSourceCandidate": "既存sourceRefs記載のURL（3クラスターとも登録済み）",
+      "primaryRoute": "A",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase81（財政データ完全整合性監査）で新規発見。3クラスター中もっとも新しく長いFY2020-24（5年連続）が財政ダッシュボードの直近トレンド表示に直接影響するため優先度A。"
+    },
+    {
+      "unresolvedId": "UNR-031",
+      "category": "bills",
+      "subcategory": "memberVotes-coverage-gap",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "全期間（billVotes.json 1177件）",
+      "description": "議案・請願・陳情等1177件について、議案自体の採決結果（可決・否決等）の出典は1177/1177で確認済みだが、議員個人ごとの賛否内訳（memberVotes）が実際に確認できているのはわずか2件のみ。654件は\"unconfirmed\"、521件は\"notDisclosed\"（公式資料に個人別記録が無いことを確認済み）。CLAUDE.mdの優先機能「2. 議案ごとの賛否」の根幹に関わる、収録件数に対して構造的に大きなギャップ。",
+      "currentStatus": "not_collected",
+      "priority": "A",
+      "evidenceLevel": "Level0（案件全体の結果は確認済みだが、個人別内訳はほぼ未着手）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "src/data/billVotes.json（verificationStatus/memberVotes/unresolvedFieldsの機械集計）"
+      ],
+      "alreadyTriedMethods": [],
+      "unresolvedReason": "F（延岡市議会は本会議での議員別記名投票結果を採決一覧としては公開しておらず、会議録本文からの個別抽出が必要な大規模構造化タスク）",
+      "nextAction": "延岡市議会会議録検索システムの採決結果部分（起立採決・記名投票の記載がある会議録）を議案単位で精読し、個人別賛否が実際に公開されている議案から優先的に構造化する",
+      "nextSourceCandidate": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）の各定例会・臨時会採決結果部分",
+      "primaryRoute": "F",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase79（29項目出典網羅率監査）で新規発見。521件の\"notDisclosed\"は「未収集」ではなく「公式資料上そもそも個人別記録が存在しないことを確認済み」の状態であり、654件の\"unconfirmed\"とは区別して扱う必要がある。"
     }
   ],
   "summary": {
-    "totalItems": 28,
+    "totalItems": 31,
     "byRoute": {
-      "A": 0,
-      "B": 8,
-      "C": 4,
-      "D": 2,
       "E": 7,
-      "F": 7
+      "C": 4,
+      "B": 9,
+      "D": 2,
+      "F": 8,
+      "A": 1
     },
     "byPriority": {
-      "A": 13,
+      "A": 15,
       "B": 8,
-      "C": 7
+      "C": 8
     },
     "byStatus": {
       "disputed": 3,
-      "unconfirmed": 6,
-      "partially_resolved": 1,
-      "not_collected": 8,
+      "unconfirmed": 7,
+      "partially_resolved": 2,
+      "not_collected": 9,
       "under_review": 2,
       "reference_pending": 5,
       "resolved": 3
     },
     "requiresOnsite": 10,
     "requiresInquiry": 9,
-    "requiresBulkBackfill": 10,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。"
+    "requiresBulkBackfill": 12,
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。"
   }
 }

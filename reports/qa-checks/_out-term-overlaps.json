@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-08-23T04:36:56.466Z",
+  "filesScanned": 71,
+  "reversalCount": 0,
+  "overlapCount": 11,
+  "results": [
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm11::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm11-party-01",
+      "prevEnd": "2003-04-27",
+      "curId": "archive-fm11-party-02",
+      "curStart": "2003-04-27"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm14::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm14-party-01",
+      "prevEnd": "2003-04-27",
+      "curId": "archive-fm14-party-02",
+      "curStart": "2003-04-27"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm03::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm03-party-01",
+      "prevEnd": "2019-04-21",
+      "curId": "archive-fm03-party-02",
+      "curStart": "2019-04-21"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm31::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm31-party-01",
+      "prevEnd": "2003-04-27",
+      "curId": "archive-fm31-party-02",
+      "curStart": "2003-04-27"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm36::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm36-party-01",
+      "prevEnd": "2003-04-27",
+      "curId": "archive-fm36-party-02",
+      "curStart": "2003-04-27"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm47::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm47-party-01",
+      "prevEnd": "2015-04-26",
+      "curId": "archive-fm47-party-02",
+      "curStart": "2015-04-26"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm55::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm55-party-01",
+      "prevEnd": "2015-04-26",
+      "curId": "archive-fm55-party-02",
+      "curStart": "2015-04-26"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm10::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm10-party-01",
+      "prevEnd": "2019-04-21",
+      "curId": "archive-fm10-party-02",
+      "curStart": "2019-04-21"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm08::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm08-party-01",
+      "prevEnd": "2019-04-21",
+      "curId": "archive-fm08-party-02",
+      "curStart": "2019-04-21"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm01::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm01-party-01",
+      "prevEnd": "2019-04-21",
+      "curId": "archive-fm01-party-02",
+      "curStart": "2019-04-21"
+    },
+    {
+      "type": "overlap",
+      "file": "archiveMemberAffiliations.json$",
+      "group": "archive-fm06::party",
+      "groupField": "memberProfileId+affiliationType",
+      "prevId": "archive-fm06-party-01",
+      "prevEnd": "2019-04-21",
+      "curId": "archive-fm06-party-02",
+      "curStart": "2019-04-21"
+    }
+  ],
+  "note": "既にscripts/validate-data.mjsでcheckNoOverlappingPeriods等が適用済みのファイル（archiveMayorTerms.json等）は本スクリプトでも重複検出されるが、既存検証と同一の結果である可能性が高い（二重報告）。本スクリプトの価値は、既存検証が及んでいない期間データファイルまで横断的に対象を広げている点にある。endDate=nullの継続中レコードは、後続レコードとの比較で機械的にoverlap扱いになりうるため、『現職の任期継続中に次の記録が誤って追加されていないか』という観点で読むこと。"
+}

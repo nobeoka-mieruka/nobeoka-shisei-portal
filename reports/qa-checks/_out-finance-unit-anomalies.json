@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-08-23T04:36:56.287Z",
+  "fieldsAnalyzed": 16,
+  "anomalyCount": 1,
+  "anomalies": [
+    {
+      "fieldPath": "budget.localTaxRevenueYen",
+      "prevFiscalYear": 1954,
+      "prevValue": 349792071,
+      "curFiscalYear": 2009,
+      "curValue": 13986850000,
+      "ratio": 39.986,
+      "yearGap": 55,
+      "suspectedUnitMixupRatio1000": null
+    }
+  ],
+  "financeDashboardInternalConsistency": [
+    {
+      "label": "歳入内訳合計 vs totalThousandYen",
+      "sum": 63715361,
+      "total": 69988095,
+      "diffPercent": 9,
+      "flagged": true
+    }
+  ],
+  "thresholds": {
+    "ratioHigh": 5,
+    "ratioLow": 0.2,
+    "minAbsValueYen": 100000
+  },
+  "note": "anomaliesは前年比5倍以上/5分の1以下の変動を機械的に抽出したもの。制度改正・大規模事業等による正当な変動を含みうるため、即エラーではなく要確認候補として扱う。suspectedUnitMixupRatio1000がup/downの場合、比率が概ね1000倍/1000分の1に近く、円/千円の桁違い入力を特に疑う価値が高い。yearGapが大きい（間の年度が未収集で比較が数十年離れている）場合は、単純な経済成長・インフレでも大きな比率になりうるため、yearGapが5年を超えるanomalyは優先度を下げてよい。"
+}

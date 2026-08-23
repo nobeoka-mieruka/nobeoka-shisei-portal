@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-08-23T00:00:00+09:00",
+  "newScriptsCreated": [
+    {
+      "name": "check-duplicate-ids-global.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-duplicate-ids-global.mjs",
+      "purpose": "src/data全体を横断し、(A)同一配列内でのid重複、(B)異なるファイル間で同じidが偶然衝突していないかを検出する。",
+      "testRunResult": "実行成功。filesScanned=71, withinFileDuplicates=0, crossFileCollisions=10。crossFileCollisionsのうちc1/c2/c3・p1〜p4はmembers.json各要素のcareer配列・mayor.json/mayorPolicyProgress.json/mayorPromises.jsonのカテゴリIDなど『配列ごとにローカルスコープで採番されているid』の想定内の再利用と判断（要目視確認だが実害なし）。一方 childcare/disability（archivePolicyCategories.json と cityGuideCategories.json）、finance（archiveCrawlerTargets.json と archivePolicyCategories.json）の3件は、異なるドメインのカテゴリ分類で同じidが使われており、意図的な命名一致か要レビュー対象として報告した。",
+      "overlapCheckedAgainst": "scripts/validate-data.mjs（members.json/billVotes.json/councilSessions.json/mayorPromises.json/searchIndex.json/updateHistory.json等でファイル単位のid重複チェックを個別実装済み）。本スクリプトはそれらを置き換えず、(1)未対応ファイルの保険的カバー、(2)ファイル横断でのid衝突検出、の2点のみを追加する設計。"
+    },
+    {
+      "name": "check-orphan-foreign-keys.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-orphan-foreign-keys.mjs",
+      "purpose": "memberId/billId/sessionId/factionId/committeeId/mayorId等、命名規則から外部キーと推測できるフィールドをレジストリ化し、参照先idが実在するかを横断チェックする。レジストリ未登録の*Id/*Idsフィールドも『未解決候補』として一覧化する。",
+      "testRunResult": "実行成功。registryFields=13, orphans=0（既存のvalidate-data.mjs側の個別チェックと矛盾する結果は出なかった）。unresolvedFieldNames=31件を検出し、将来のレジストリ拡張候補として出力した（例: sourceEntityId, ownerId, relatedMemberId, personId等）。",
+      "overlapCheckedAgainst": "scripts/validate-data.mjs（generalQuestions.memberId、billVotes.relatedMayorPromiseIds等、多数のフィールドについて個別に参照整合性チェック済み）。本スクリプトは置き換えではなく、命名規則ベースの横断的な保険として設計。"
+    },
+    {
+      "name": "check-source-refs-coverage.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-source-refs-coverage.mjs",
+      "purpose": "src/data配下の各ファイル・配列について、レコードがsourceRefs等の出典情報（ネストした階層も含めて再帰的に）を持つ割合を集計し、出典カバレッジの低いファイルを可視化する。",
+      "testRunResult": "実行成功（1回目はarchiveFiscalYears.jsonが0%と誤検出したため、トップレベルキーだけでなくwalk()による再帰探索に修正して再実行。修正後はarchiveFiscalYears.jsonが低カバレッジ一覧から外れ、正しくbudget/debt配下のsourceRefsを検出できることを確認）。arraysAnalyzed=46, lowCoverageCount=22（分類マスター等、設計上出典を持たないファイルを含むため、全件が問題というわけではない）。",
+      "overlapCheckedAgainst": "scripts/lib/validate-archive-common.mjsのcheckValuesHaveSource/checkSourceRefs（特定フィールド単位のピンポイント検証）。本スクリプトはピンポイント検証ではなく、ファイル横断のカバレッジ集計・可視化に特化。Phase79の出典網羅性調査手法を参考にしたが、phase79-source-coverage-findings.jsonの生成を待たず独自設計した（存在すれば参考表示するのみ）。"
+    },
+    {
+      "name": "check-completeness-status-usage.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-completeness-status-usage.mjs",
+      "purpose": "src/lib/completeness.tsのCompletenessStatus語彙（7値）を確認した上で、src/data全体の“status”系フィールドの値をファイル別に棚卸しし、CompletenessStatus語彙と完全一致する値が（本来ランタイム計算専用のはずの）静的データ側に紛れ込んでいないかを検出する。",
+      "testRunResult": "実行成功。statusLikeFields=60種類、suspiciousCompletenessStatusHits=22件（すべて \"unknown\" という語の偶然一致で、archiveCouncilDocuments.ordinanceDetail.effectStatusやarchiveMayors.statusなど、CompletenessStatusとは無関係な独自語彙のフィールドと判明。誤検出ではなく、設計どおり『要目視確認』の一覧として機能することを確認）。",
+      "overlapCheckedAgainst": "調査の結果、CompletenessStatus型はJSONへ直接保存される設計ではなく（simpleCompleteness()等でランタイム算出）、既存スクリプトに同種のチェックは存在しないことを確認した。validate-data.mjs側の個別status語彙チェック（VALID_VOTE_STATUS等）とは目的が異なるため重複なし。"
+    },
+    {
+      "name": "check-finance-unit-anomalies.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-finance-unit-anomalies.mjs",
+      "purpose": "archiveFiscalYears.jsonの\"...Yen\"命名フィールドを年度別に時系列比較し、前年比5倍以上/5分の1以下の変動（円/千円等の桁ズレ入力の疑い）を検出する。あわせてfinanceDashboard.jsonの歳入・歳出内訳合計と総額の整合性も確認する。",
+      "testRunResult": "実行成功。fieldsAnalyzed=16, anomalies=1（budget.localTaxRevenueYen 1954→2009年度、比率x39.986。ただし年度間ギャップが55年と大きく、経済成長による正当な増加の可能性が高いことをyearGapフィールドで注記）。financeDashboard.jsonの内部整合性チェックでは、歳入内訳合計とtotalThousandYenの差が9%あることを検出（内訳項目が『その他』等で一部省略されている可能性があり、要人手確認として報告）。",
+      "overlapCheckedAgainst": "scripts/validate-data.mjsは個々の数値の型・非負性チェックのみで、年度間の時系列比較・桁ズレ検出ロジックは存在しないことを確認。新規機能。"
+    },
+    {
+      "name": "check-term-overlaps.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-term-overlaps.mjs",
+      "purpose": "src/data全体から期間（start/end日付）フィールドとグループ化キー（人物ID等）を機械的に検出し、同一人物内での任期重複・逆転（開始日>終了日）を横断チェックする。",
+      "testRunResult": "実行成功。reversal=0, overlap=15（初回）。archiveMemberAffiliations.jsonのaffiliationType（party/committee等）を考慮せずグループ化していたため、性質の異なるトラック同士を誤って重複判定していたことが判明し、affiliationType等の判別フィールドをグループキーに合成するよう修正。再実行後はoverlap=11に減少し、残りはすべて『同日付での党派切替』という境界一致（prevEnd===curStart）で、scripts/lib/validate-archive-common.mjsのcheckNoOverlappingPeriodsと同じ判定基準（既存プロジェクトの慣習）であることを確認した。",
+      "overlapCheckedAgainst": "scripts/lib/validate-archive-common.mjsのcheckNoOverlappingPeriods/checkPeriodConsistency（archiveMayorTerms.json等、一部ファイルで適用済み）。本スクリプトはそれらが未適用のファイル（electionResults.json、archiveMemberAffiliations.json等）まで対象を広げる横断版として設計し、既存チェック済みファイルでは重複報告になりうる点をnoteに明記した。"
+    },
+    {
+      "name": "check-search-index-and-updates-order.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-search-index-and-updates-order.mjs",
+      "purpose": "(a) searchIndex.jsonが主要マスター（members/formerMembers/billVotes/generalQuestions/mayorPromises/committees/electionResults）の各レコードを漏れなく索引化しているかのカバレッジ集計、(b) updateHistory.jsonが日付の降順（新しい順）で並んでいるかのチェック。",
+      "testRunResult": "実行成功（1回目はformer-memberの母数ファイルをformerMembers.jsonと誤設定しており、missing=58と誤検出。searchIndex.jsonのsourceIdがarchiveMemberProfiles.json側のid（status=\"former\"のもの）を指していることを実データで確認し、対応するファイル・フィルタ条件に修正。再実行後、全7種でmissing=0を確認）。updateHistory.jsonについては実データで**日付降順の乱れを実際に検出**：u1〜u4（2026-07-14、初期エントリ）の直後にu98〜u104（2026-08-22/23、最新エントリ）が続いており、配列末尾付近が正しく降順になっていない（2箇所）。これは机上のテストデータではなく本番データ上の実際の並び順の乱れであり、Phase88または別途の人手確認・修正候補として報告する。",
+      "overlapCheckedAgainst": "scripts/validate-data.mjsはsearchIndex.jsonのid重複・type語彙・『存在する参照の妥当性』およびupdateHistory.jsonのid重複・category語彙・date形式は検証済み。本スクリプトはその逆方向（マスター→索引の網羅性）と、配列の並び順（表示順）という、既存スクリプトが検証していない2点のみを追加。"
+    },
+    {
+      "name": "check-list-vs-detail-count.mjs",
+      "path": "reports/phase78-88-staging/phase87-draft-scripts/check-list-vs-detail-count.mjs",
+      "purpose": "npm run build 後のdist/配下に生成された詳細ページディレクトリ数（現職議員/元議員/議案・採決/一般質問/歴代市長）と、対応するsrc/data JSONの母数（id集合）を突き合わせ、『データはあるのに詳細ページが無い』『詳細ページはあるのにデータが無い』を検出する。",
+      "testRunResult": "実行成功（既存のdist/ビルド成果物を使用）。5ルートすべてでdata件数とdistページ数が完全一致（現職議員26/26、元議員58/58、議案・採決1177/1177、一般質問15/15、歴代市長14/14）。missing=0, orphan=0 を確認。dist/が存在しない場合はスキップする分岐も実装・動作確認済み。",
+      "overlapCheckedAgainst": "scripts/ui-audit-phase76.mjsはdist内HTMLのリンク切れ・空ページ等をHTML単位で監査しているが、『一覧側の母数』と『詳細ページ生成数』の突き合わせは行っていないことを確認。新規機能。"
+    }
+  ],
+  "qualityCheckDraftPath": "reports/phase78-88-staging/phase87-draft-scripts/quality-check-draft.mjs",
+  "docsDraftPath": "reports/phase78-88-staging/phase87-docs-draft.md",
+  "recommendationsForExistingScriptExtension": [
+    {
+      "existingScript": "scripts/site-completeness-audit.mjs",
+      "proposedExtension": "現状は生成HTML内の「0件」という文字列の出現数を集計するのみで、その0件表示がsrc/lib/completeness.tsのconfirmed_zeroに基づく正当な表示か、単に未収集・未確認の状態を誤って0件と表示しているかまでは判定していない。拡張案：0件が出現したルートについて、周辺テキスト（前後100文字程度）を抽出し、「未収集」「整備中」等の説明文が併記されているかを機械的にヒューリスティック判定するか、最低限サンプルとして人手レビュー用に一覧化する（完全自動化はページごとのデータソース対応表が必要なため、Phase88以降で段階的に検討）。"
+    },
+    {
+      "existingScript": "scripts/ui-audit-phase76.mjs",
+      "proposedExtension": "broken internal link・blank page検出のロジックは既に十分整備されている（dist内HTML解析、allRoutesとhrefの突合）。追加提案としては、本Phase87で作成したcheck-list-vs-detail-count.mjsの結果（データ側の母数とdist生成数の差分）をui-audit-phase76.mjs側のfindings.summaryにも合算できるよう、出力JSONのキー名を揃えておくと、将来1本の統合レポートにまとめやすい（現時点では実装不要、設計メモとして提案のみ）。"
+    },
+    {
+      "existingScript": "scripts/validate-data.mjs",
+      "proposedExtension": "Phase87のcheck-orphan-foreign-keys.mjsで検出したunresolvedFieldNames（31件、例：sourceEntityId, ownerId, relatedMemberId, personId, taskId等）について、各フィールドが本当に外部キーとして参照整合性チェックが必要かを棚卸しし、必要なものはvalidate-data.mjs側に個別のcheckReferenceExists呼び出しとして追加することを推奨する（本スクリプトのレジストリ拡張よりも、既存の実績あるバリデータへ統合する方が保守性が高い）。"
+    },
+    {
+      "existingScript": "（新設提案）updateHistory.jsonの並び順維持",
+      "proposedExtension": "check-search-index-and-updates-order.mjsの実行で、updateHistory.jsonの末尾付近（u1〜u4の直後にu98〜u104が続く）で日付降順が崩れていることを実データで確認した。scripts/validate-data.mjsのupdateHistory.jsonチェック箇所（3939行目付近）に、配列の並び順が日付降順であることを検証する数行を追加することを推奨する（今回はscripts/への直接編集を行わない方針のため、提案のみに留めた）。"
+    }
+  ]
+}

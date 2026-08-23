@@ -1,0 +1,285 @@
+{
+  "generatedAt": "2026-08-23T01:29:25.977Z",
+  "totalUniqueUrls": 5340,
+  "byCategory": {
+    "宮崎県": 31,
+    "その他": 90,
+    "NDL": 54,
+    "PDF": 25,
+    "その他公的資料": 34,
+    "Wayback": 9,
+    "延岡市公式": 488,
+    "延岡市議会": 4609
+  },
+  "byStatus": {
+    "200": 1368,
+    "403": 0,
+    "404": 6,
+    "429": 0,
+    "3xx_redirect": 8,
+    "5xx": 0,
+    "timeout": 0,
+    "wayback_known_issue": 0,
+    "other": 0
+  },
+  "checkMethodology": {
+    "note": "src/data配下の全JSONファイルからURLを抽出。延岡市議会の会議録個別発言リンク(kensakusystem.jp GetText3.exe)は同一システム・同一URLパターンで4470件と大量にあり、全件を短時間に直列/少数並列でリクエストすると対象サーバーに過度な負荷をかけるため、101会議(セッション)ごとに層化サンプリング（10件以下のセッションは全件、11件以上のセッションは先頭・中央・末尾の3件）を行い512件を実チェックした。それ以外のURL(870件: 延岡市公式488件、宮崎県31件、NDL54件、PDF25件、その他公的資料34件、その他90件、kensakusystem.jpの会議単位ページ139件、Wayback9件)は全件を実チェックした。",
+    "totalUniqueUrls": 5340,
+    "actuallyCheckedCount": 1382,
+    "sampledOutGetText3Count": 3958,
+    "sampledOutNote": "サンプリング対象外とした4470件中の3958件(サンプルに含まれなかった残り)は個別チェックを行っていない。同一会議・同一システムの発言リンクであり、サンプルチェックで異常が見つかった会議についてはPhase81以降で当該会議の全リンクを追加調査することを推奨する。"
+  },
+  "brokenUrls": [
+    {
+      "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
+      "status": 404,
+      "bucket": "404",
+      "error": null,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "archiveMayorTerms.json",
+          "recordId": "mayor-04-term-01",
+          "field": "sourceUrl"
+        },
+        {
+          "file": "dataQualitySummary.json",
+          "recordId": null,
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+      "status": 404,
+      "bucket": "404",
+      "error": null,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "archiveMayors.json",
+          "recordId": "mayor-14",
+          "field": "sourceUrl"
+        },
+        {
+          "file": "archiveMayorTerms.json",
+          "recordId": "mayor-14-term-01",
+          "field": "sourceUrl"
+        },
+        {
+          "file": "dataQualitySummary.json",
+          "recordId": null,
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
+      "status": 404,
+      "bucket": "404",
+      "error": null,
+      "category": "延岡市公式",
+      "referencedIn": [
+        {
+          "file": "councilWatchedDocuments.json",
+          "recordId": "session-schedule-5774a79eedad",
+          "field": "sourceUrl"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+      "status": 404,
+      "bucket": "404",
+      "error": null,
+      "category": "延岡市公式",
+      "referencedIn": [
+        {
+          "file": "dataQualitySummary.json",
+          "recordId": null,
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
+      "status": 404,
+      "bucket": "404",
+      "error": null,
+      "category": "延岡市公式",
+      "referencedIn": [
+        {
+          "file": "councilWatchedDocuments.json",
+          "recordId": "session-schedule-a392dabc3484",
+          "field": "sourceUrl"
+        }
+      ]
+    },
+    {
+      "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+      "status": 404,
+      "bucket": "404",
+      "error": null,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "archiveMayors.json",
+          "recordId": "mayor-03",
+          "field": "sourceUrl"
+        },
+        {
+          "file": "archiveMayors.json",
+          "recordId": "mayor-14",
+          "field": "sourceUrl"
+        },
+        {
+          "file": "archiveMayorTerms.json",
+          "recordId": "mayor-03-term-02",
+          "field": "sourceUrl"
+        },
+        {
+          "file": "civicTimelineEvents.json",
+          "recordId": "civic-159",
+          "field": "url"
+        },
+        {
+          "file": "dataQualitySummary.json",
+          "recordId": null,
+          "field": "url"
+        }
+      ]
+    }
+  ],
+  "redirectedUrls": [
+    {
+      "oldUrl": "https://lin.ee/HLXDNIS",
+      "newUrl": "https://line.me/R/ti/p/@674sqgtj",
+      "status": 301,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "members.json",
+          "recordId": "m13",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A91AC49CD&houcd=H345901010026&no=1&totalCount=1&fromJsp=SrMj",
+      "newUrl": "https://ops-jg.d1-law.com/opensearch/css/font.css",
+      "status": 302,
+      "category": "その他公的資料",
+      "referencedIn": [
+        {
+          "file": "committees.json",
+          "recordId": "committee-somu-seisaku",
+          "field": "url"
+        },
+        {
+          "file": "committees.json",
+          "recordId": "committee-sangyo-kensetsu",
+          "field": "url"
+        },
+        {
+          "file": "committees.json",
+          "recordId": "committee-kosei-kyoiku",
+          "field": "url"
+        },
+        {
+          "file": "committees.json",
+          "recordId": "committee-gikai-unei",
+          "field": "url"
+        },
+        {
+          "file": "committees.json",
+          "recordId": "committee-gikai-kasseika",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+      "newUrl": "https://web.archive.org/web/20140715111156/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+      "status": 302,
+      "category": "Wayback",
+      "referencedIn": [
+        {
+          "file": "archiveFiscalYears.json",
+          "recordId": null,
+          "field": "sourceUrl"
+        },
+        {
+          "file": "dataQualitySummary.json",
+          "recordId": null,
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://www.facebook.com/100080664301633/",
+      "newUrl": "https://www.facebook.com/people/%E5%8C%97%E6%9E%97%E3%81%BF%E3%81%8D%E3%81%8A%E5%BE%8C%E6%8F%B4%E4%BC%9A/100080664301633/",
+      "status": 301,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "members.json",
+          "recordId": "m11",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://www.facebook.com/100083679123855/",
+      "newUrl": "https://www.facebook.com/people/%E4%B8%AD%E5%B3%B6-%E3%82%88%E3%81%97%E3%81%AF%E3%82%8B/pfbid02vyg8D8zAf1KQk76cz6EYSDKNVxhRHWHoiCti7jZrBMbeGxTfwSkRnSUtgYxMeHXWl/",
+      "status": 301,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "members.json",
+          "recordId": "m15",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://www.facebook.com/579107342584087/",
+      "newUrl": "https://www.facebook.com/100027116246393/",
+      "status": 301,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "members.json",
+          "recordId": "m23",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://www.facebook.com/profile.php?id=100007160117141",
+      "newUrl": "https://www.facebook.com/people/%E5%B0%8F%E9%87%8E-%E6%AD%A3%E4%BA%8C/pfbid02kyDvbxa2Nbm9Rz6TkkaeN3xDbPQNvveC79oohdBEMn3k2EkMLgWzUZ6FsTazkNiUl/",
+      "status": 301,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "members.json",
+          "recordId": "m04",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "oldUrl": "https://www.facebook.com/profile.php?id=100039255065122",
+      "newUrl": "https://www.facebook.com/people/%E6%B3%B0%E6%B4%8B%E4%B8%8A%E6%9D%89/100039255065122/",
+      "status": 301,
+      "category": "その他",
+      "referencedIn": [
+        {
+          "file": "members.json",
+          "recordId": "m03",
+          "field": "url"
+        }
+      ]
+    }
+  ],
+  "waybackKnownIssues": []
+}

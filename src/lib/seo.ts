@@ -1322,7 +1322,32 @@ function councilActivityMemberSeo(id: string, options?: SeoOptions): SeoResult {
 
 function memberSeo(id: string, options?: SeoOptions): SeoResult {
   const member = members.find((m) => m.id === id);
-  if (!member) return notFound(`/members/${id}`, "議員情報");
+  if (!member) {
+    // MemberDetailPage.tsx（本文側）は id が現職議員に見つからない場合、formerMembers.json へ
+    // フォールバックして本文を表示する（/members/former/:slug と同じ内容を /members/:id でも
+    // 閲覧できる設計）。以前はこの分岐がSEOメタデータ側に無く、本文は正しく表示されるのに
+    // title/descriptionが汎用文言・robotsがnoindexのままになっていた（Phase78 UI監査で発見）。
+    // canonicalは重複コンテンツを避けるため /members/former/:slug 側に寄せる。
+    const formerMember = formerMembers.find((m) => m.id === id);
+    if (formerMember) {
+      const profile = archiveMemberProfiles.find((p) => p.legacyFormerMemberId === id);
+      const url = `${SITE_URL}/members/${id}`;
+      const sameAs = profile?.sourceRefs.map((r) => r.sourceUrl).filter((u): u is string => Boolean(u)) ?? [];
+      return makeResult(
+        {
+          path: `/members/${id}`,
+          canonicalPath: profile ? `/members/former/${profile.slug}` : undefined,
+          pageTitle: `${formerMember.name}｜元議員`,
+          description: `延岡市議会の元議員${formerMember.name}氏について、公式資料で確認できた在職・活動の記録を掲載しています。`,
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "元議員", to: "/members/former" }, { label: formerMember.name }],
+          extraJsonLd: [personJsonLd("person-jsonld", formerMember.name, url, sameAs)],
+          mainEntity: { "@type": "Person", name: formerMember.name, url },
+        },
+        options,
+      );
+    }
+    return notFound(`/members/${id}`, "議員情報");
+  }
 
   const memberQuestions = generalQuestions.filter((q) => q.memberId === member.id);
   const memberHasBillVotes = billVotes.some((b) => b.memberVotes.some((v) => v.memberId === member.id));

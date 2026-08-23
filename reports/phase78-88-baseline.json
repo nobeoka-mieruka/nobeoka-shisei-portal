@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-08-23T00:30:00+09:00",
+  "purpose": "Phase78-88（全サイト品質・出典・データ整合性 10並列総監査）開始前ベースライン。Phase88終了時に同項目を再測定し、before/afterを最終報告する。",
+  "baseCommit": "40f1169",
+  "gitStatus": "clean（.claude/settings.local.json のみ変更、常時除外対象）",
+  "originSync": "origin/main と同一（git fetch確認済み、divergenceなし）",
+  "buildRoutes": {
+    "prerenderedRoutes": 2241,
+    "plus404": 1,
+    "peopleTypeVariants": 3,
+    "totalHtmlFiles": 2245
+  },
+  "validateData": {
+    "errors": 0,
+    "warningsTotal": 34,
+    "warningsByFile": {
+      "councilSessions.json": 19,
+      "councilSpeechSummaries.json": 13,
+      "archiveMayorTerms.json": 1,
+      "archiveFiscalYears.json": 1
+    },
+    "note": "19件のcouncilSessions.json警告は全てPhase77で新規追加した「要確認」暫定会期（自動生成データである旨の意図的な警告）。13件のcouncilSpeechSummaries.json警告はquestionApproach推奨語彙外（値は誤りではない）。archiveMayorTerms/archiveFiscalYearsの各1件は既知の空白期間・欠番の通知。Phase85で1件ずつ分類する。"
+  },
+  "unresolvedLedger": {
+    "totalItems": 28,
+    "byStatus": {
+      "disputed": 3,
+      "unconfirmed": 6,
+      "partially_resolved": 1,
+      "not_collected": 8,
+      "under_review": 2,
+      "reference_pending": 5,
+      "resolved": 3
+    },
+    "byPriority": { "A": 13, "B": 8, "C": 7 },
+    "requiresOnsite": 10,
+    "requiresInquiry": 9,
+    "requiresBulkBackfill": 10
+  },
+  "uiAudit_phase76": {
+    "totalRoutesAudited": 2245,
+    "emptyPageCount": 0,
+    "missingTitleCount": 0,
+    "missingDescriptionCount": 0,
+    "literalBadStringCount": 0,
+    "missingAltCount": 0,
+    "brokenInternalLinkCount": 0,
+    "duplicateH1Count": 0,
+    "tableNoWrapCount": 1
+  },
+  "displayTextAudit_siteCompleteness": {
+    "zeroKenLiteral": { "occurrences": 689, "routeCount": 210 },
+    "statusWordDisplayCounts": {
+      "確認中": { "occurrences": 3272, "routeCount": 323 },
+      "未確認": { "occurrences": 1768, "routeCount": 354 },
+      "調査中": { "occurrences": 8, "routeCount": 7 },
+      "未収録": { "occurrences": 1082, "routeCount": 194 },
+      "出典未登録": { "occurrences": 15, "routeCount": 1 }
+    },
+    "displayRiskKeywords": {
+      "未完成": 0, "整備中": 113, "TBD": 0, "TODO": 0, "FIXME": 0,
+      "placeholder": 28, "coming soon": 0, "undefined": 0, "NaN": 0,
+      "[object Object]": 0, "Lorem ipsum": 0
+    },
+    "note": "整備中113件・placeholder28件は前回サンプル調査で正当な用法（「データ整備中」表記／input placeholder属性）と確認済み。1件だけ修正済みの「（0件）を掲載しています」誤表示（council-documents新規19会期）はcommit 40f1169で解消済みだが、他の689件-1件=688件は未分類のまま。Phase79/Phase83/Phase84で分類・監査する。"
+  },
+  "sourceRefsCoverage": {
+    "note": "src/data配下のスキーマはファイルごとにsource系フィールド名が異なる（sourceRefs配列／sourceUrl+sourceTitle／budget内ネスト等）ため、単純なフィールド有無チェックでは誤った数値になることを確認済み（試行し、破棄した）。正確なカテゴリ別sourceRefs充足率はPhase79で計算する。ここでは『後で比較可能な基準』として、代表4ファイルの総レコード数のみ記録する。",
+    "recordCountsForReference": {
+      "electionResults.json": 39,
+      "archiveFiscalYears.json": 70,
+      "generalQuestions.json": 15
+    }
+  },
+  "referencePendingStatusInDataFiles": {
+    "literalStringOccurrences": 0,
+    "note": "src/data配下でstatus文字列 \"reference_pending\" を直接持つレコードは0件（unresolvedLedgerの5件はreports/配下の別管理台帳であり、src/data本体のstatusフィールドとは別）。"
+  },
+  "searchIndex": { "totalEntries": 2185 },
+  "updateHistory": { "totalEntries": 109 },
+  "warnings34PriorComparison": {
+    "priorCount15_atPhase56": true,
+    "assessment": "15件→34件は単純悪化ではない。内訳：19件はPhase77で新規追加した councilSessions.json の意図的な「要確認」フラグ（自動生成データである旨を明示する設計上の警告であり、隠蔽よりも正しい状態）。残り15件は元々の警告と同数。Phase85で1件ずつ最終分類する。"
+  }
+}

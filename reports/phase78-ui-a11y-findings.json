@@ -1,0 +1,1616 @@
+{
+  "generatedAt": "2026-08-23T04:35:17.774Z",
+  "routesScanned": 2245,
+  "summary": {
+    "routesScanned": 2245,
+    "h1MissingOrMultipleCount": 0,
+    "headingSkipCount": 0,
+    "missingAltCount": 0,
+    "iconOnlyButtonNoLabelCount": 0,
+    "iconOnlyLinkNoLabelCount": 0,
+    "missingCanonicalCount": 1,
+    "missingOgTitleCount": 0,
+    "missingOgDescriptionCount": 0,
+    "missingOgImageCount": 0,
+    "tableNoWrapCount": 1,
+    "largeFixedWidthCount": 0,
+    "duplicateTitleGroups": 93,
+    "duplicateTitleRoutesInvolved": 250,
+    "duplicateDescriptionGroups": 91,
+    "duplicateDescriptionRoutesInvolved": 184,
+    "duplicateOgTitleGroups": 93,
+    "duplicateOgDescriptionGroups": 91
+  },
+  "issuesByPriority": {
+    "P0": [],
+    "P1": [
+      {
+        "route": "/members/fm01/",
+        "category": "former_member_seo_metadata_generic_and_noindex",
+        "detail": "/members/{元議員ID}/ ルート（58件、例: /members/fm01/, /members/fm02/, /members/fm03/, /members/fm04/, /members/fm05/ ...）は、本文（h1・在職当時の一般質問等）は正しく該当の元議員名で表示されるにもかかわらず、<title>・meta descriptionが汎用文言「議員情報｜延岡市政見える化ポータル」のまま、かつ<meta name=\"robots\" content=\"noindex, nofollow\">が付与されている。原因はsrc/lib/seo.tsのmemberSeo()がmembers（現職）のみを検索し、formerMembers（元議員）を考慮していないため、notFound()の汎用値にフォールバックしていること。姉妹ルートの /members/former/{slug}/ は同じ人物について正しく個別化されたtitle・description・robots:index,followを返しており、動作が矛盾している。実際に /members/former/{slug}/ の本文（議員活動年表・議案表決履歴など）や、一部の議案採決詳細ページ（例: /bills/votes/2019-09-gian-47/, /bills/votes/2023-07-extraordinary-01-gian-9/）から実在するリンクとして/members/{id}/へ遷移できるため、市民が実際にこの汎用title/description/noindexのページへ到達しうる（サイトマップには含まれていないため検索結果には出にくいが、ブラウザタブ・SNSシェア・ブックマーク上は誰のページか分からない）。",
+        "suggestedFix": "src/lib/seo.ts の memberSeo(id) 内で member が見つからない場合、formerMembers.find((m) => m.id === id) にフォールバックし、見つかった場合は memberFormerSeo 相当の個別化されたtitle/description/canonical/og/robots:index,followを返すよう修正する（speechDetailSeo()で既に使われているformerMembers.find(...)と同じパターン）。データ変更は不要、seo.ts内のロジック追加のみ。ただしarchiveMemberProfilesとのマッピングや既存の/members/former/{slug}/との重複コンテンツ関係（canonicalをどちらに寄せるか）の設計判断を伴うため、Phase88適用前にコードレビューを推奨。"
+      }
+    ],
+    "P2": [
+      {
+        "route": "/404",
+        "category": "missing_canonical",
+        "detail": "canonical linkが無い",
+        "suggestedFix": null
+      },
+      {
+        "route": "/people/",
+        "category": "duplicate_title",
+        "detail": "title「人物から探す｜延岡市政見える化ポータル」が非トップページで4件重複（例: /people/, /_people-variants/type-former-member, /_people-variants/type-mayor, /_people-variants/type-member）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-12-seigan-2/",
+        "category": "duplicate_title",
+        "detail": "title「請願第2号「介護保険利用料原則2割負担化、ケアプラン有料化などの制度見直しの中止、介護従事者の処遇改善など、介護保険制度の改善を求める意見書提出に関する請願」｜採決結果・議員別賛否｜延岡市政見える化ポータル」が非トップページで3件重複（例: /bills/votes/2019-12-seigan-2/, /bills/votes/2020-03-seigan-2/, /bills/votes/2020-06-seigan-2/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2025-03-chinjo-6/",
+        "category": "duplicate_title",
+        "detail": "title「陳情第6号「津波避難困難地区の解消に向けた取り組みについての陳情」｜採決結果・議員別賛否｜延岡市政見える化ポータル」が非トップページで3件重複（例: /bills/votes/2025-03-chinjo-6/, /bills/votes/2025-06-chinjo-6/, /bills/votes/2025-09-chinjo-6/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm01/",
+        "category": "duplicate_title",
+        "detail": "title「吉本 靖｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm01/, /members/former/fm01/, /people/former-member-fm01/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm02/",
+        "category": "duplicate_title",
+        "detail": "title「佐藤 誠｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm02/, /members/former/fm02/, /people/former-member-fm02/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm03/",
+        "category": "duplicate_title",
+        "detail": "title「松田 和己｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm03/, /members/former/fm03/, /people/former-member-fm03/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm04/",
+        "category": "duplicate_title",
+        "detail": "title「三上 毅｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm04/, /members/former/fm04/, /people/former-member-fm04/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm05/",
+        "category": "duplicate_title",
+        "detail": "title「白石 良盛｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm05/, /members/former/fm05/, /people/former-member-fm05/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm06/",
+        "category": "duplicate_title",
+        "detail": "title「田村 吉宏｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm06/, /members/former/fm06/, /people/former-member-fm06/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm07/",
+        "category": "duplicate_title",
+        "detail": "title「松本 哲也｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm07/, /members/former/fm07/, /people/former-member-fm07/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm08/",
+        "category": "duplicate_title",
+        "detail": "title「下田 英樹｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm08/, /members/former/fm08/, /people/former-member-fm08/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm09/",
+        "category": "duplicate_title",
+        "detail": "title「松田 勝則｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm09/, /members/former/fm09/, /people/former-member-fm09/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm10/",
+        "category": "duplicate_title",
+        "detail": "title「本部 仁俊｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm10/, /members/former/fm10/, /people/former-member-fm10/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm11/",
+        "category": "duplicate_title",
+        "detail": "title「佐藤 正人｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm11/, /members/former/fm11/, /people/former-member-fm11/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm12/",
+        "category": "duplicate_title",
+        "detail": "title「猪股 秀明｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm12/, /members/former/fm12/, /people/former-member-fm12/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm13/",
+        "category": "duplicate_title",
+        "detail": "title「坂本 純一｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm13/, /members/former/fm13/, /people/former-member-fm13/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm14/",
+        "category": "duplicate_title",
+        "detail": "title「後藤 哲朗｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm14/, /members/former/fm14/, /people/former-member-fm14/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm15/",
+        "category": "duplicate_title",
+        "detail": "title「福良 博｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm15/, /members/former/fm15/, /people/former-member-fm15/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm16/",
+        "category": "duplicate_title",
+        "detail": "title「甲斐 武｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm16/, /members/former/fm16/, /people/former-member-fm16/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm17/",
+        "category": "duplicate_title",
+        "detail": "title「湯浅 啓祐｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm17/, /members/former/fm17/, /people/former-member-fm17/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm18/",
+        "category": "duplicate_title",
+        "detail": "title「西原 茂樹｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm18/, /members/former/fm18/, /people/former-member-fm18/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm19/",
+        "category": "duplicate_title",
+        "detail": "title「高橋 匠｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm19/, /members/former/fm19/, /people/former-member-fm19/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm20/",
+        "category": "duplicate_title",
+        "detail": "title「牧 定七｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm20/, /members/former/fm20/, /people/former-member-fm20/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm21/",
+        "category": "duplicate_title",
+        "detail": "title「高橋 勝｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm21/, /members/former/fm21/, /people/former-member-fm21/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm22/",
+        "category": "duplicate_title",
+        "detail": "title「稲田 和利｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm22/, /members/former/fm22/, /people/former-member-fm22/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm23/",
+        "category": "duplicate_title",
+        "detail": "title「新名 種歳｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm23/, /members/former/fm23/, /people/former-member-fm23/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm24/",
+        "category": "duplicate_title",
+        "detail": "title「山田 良市｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm24/, /members/former/fm24/, /people/former-member-fm24/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm25/",
+        "category": "duplicate_title",
+        "detail": "title「下清水 一正｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm25/, /members/former/fm25/, /people/former-member-fm25/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm26/",
+        "category": "duplicate_title",
+        "detail": "title「佐藤 道男｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm26/, /members/former/fm26/, /people/former-member-fm26/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm27/",
+        "category": "duplicate_title",
+        "detail": "title「大西 幸二｜元議員｜延岡市政見える化ポータル」が非トップページで3件重複（例: /members/fm27/, /members/former/fm27/, /people/former-member-fm27/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/people/",
+        "category": "duplicate_description",
+        "detail": "description「現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。」が非トップページで4件重複（例: /people/, /_people-variants/type-former-member, /_people-variants/type-mayor, /_people-variants/type-member）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-06-gian-12/",
+        "category": "duplicate_description",
+        "detail": "description「議案第12号「延岡市山村定住住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2019-06-gian-12/, /bills/votes/2020-06-gian-12/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-06-gian-14/",
+        "category": "duplicate_description",
+        "detail": "description「議案第14号「延岡市国民健康保険税条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2019-06-gian-14/, /bills/votes/2020-06-gian-14/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-06-gian-8/",
+        "category": "duplicate_description",
+        "detail": "description「議案第8号「延岡市税条例等の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2019-06-gian-8/, /bills/votes/2021-06-gian-8/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-06-ikensho-2/",
+        "category": "duplicate_description",
+        "detail": "description「意見書第2号「地方財政の充実・強化を求める意見書（案）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2019-06-ikensho-2/, /bills/votes/2023-09-ikensho-2/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-09-gian-41/",
+        "category": "duplicate_description",
+        "detail": "description「議案第41号「延岡市個人番号の利用等に関する条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2019-09-gian-41/, /bills/votes/2021-09-gian-41/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2019-12-seigan-2/",
+        "category": "duplicate_description",
+        "detail": "description「請願第2号「介護保険利用料原則2割負担化、ケアプラン有料化などの制度見直しの中止、介護従事者の処遇改善など、介護保険制度の改善を求める意見書提出に関する請願」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2019-12-seigan-2/, /bills/votes/2020-03-seigan-2/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-03-chinjo-4/",
+        "category": "duplicate_description",
+        "detail": "description「陳情第4号「長浜・方財海岸の浸食対策について」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-03-chinjo-4/, /bills/votes/2020-06-chinjo-4/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-03-gian-151/",
+        "category": "duplicate_description",
+        "detail": "description「議案第151号「農業委員会委員の選任（菊池光雄氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-03-gian-151/, /bills/votes/2023-03-gian-151/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-03-gian-162/",
+        "category": "duplicate_description",
+        "detail": "description「議案第162号「農業委員会委員の選任（松田宗史氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-03-gian-162/, /bills/votes/2023-03-gian-162/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-03-gian-163/",
+        "category": "duplicate_description",
+        "detail": "description「議案第163号「農業委員会委員の選任（矢野光一氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-03-gian-163/, /bills/votes/2023-03-gian-163/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-06-gian-11/",
+        "category": "duplicate_description",
+        "detail": "description「議案第11号「延岡市税条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-06-gian-11/, /bills/votes/2026-06-gian-11/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-06-gian-21/",
+        "category": "duplicate_description",
+        "detail": "description「議案第21号「財産の取得（小型動力ポンプ付積載車の購入）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-06-gian-21/, /bills/votes/2023-06-gian-21/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2020-06-ikensho-4/",
+        "category": "duplicate_description",
+        "detail": "description「意見書第4号「地方財政の充実・強化を求める意見書（案）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2020-06-ikensho-4/, /bills/votes/2024-09-ikensho-4/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-03-gian-120/",
+        "category": "duplicate_description",
+        "detail": "description「議案第120号「延岡市一般職職員給与条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-03-gian-120/, /bills/votes/2025-03-gian-120/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-03-gian-122/",
+        "category": "duplicate_description",
+        "detail": "description「議案第122号「延岡市消防団条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-03-gian-122/, /bills/votes/2025-03-gian-122/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-03-gian-124/",
+        "category": "duplicate_description",
+        "detail": "description「議案第124号「延岡市道路の構造の技術的基準を定める条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-03-gian-124/, /bills/votes/2025-03-gian-124/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-03-gian-151/",
+        "category": "duplicate_description",
+        "detail": "description「議案第151号「人権擁護委員候補者の推薦（秋吉ますみ氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-03-gian-151/, /bills/votes/2024-03-gian-151/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-06-gian-12/",
+        "category": "duplicate_description",
+        "detail": "description「議案第12号「延岡市家庭的保育事業等の設備及び運営に関する基準を定める条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-06-gian-12/, /bills/votes/2024-06-gian-12/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-09-gian-49/",
+        "category": "duplicate_description",
+        "detail": "description「議案第49号「下塚辺地に係る総合整備計画の変更」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-09-gian-49/, /bills/votes/2024-09-gian-49/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-09-gian-61/",
+        "category": "duplicate_description",
+        "detail": "description「議案第61号「人権擁護委員候補者の推薦（伊東忠俊氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-09-gian-61/, /bills/votes/2024-09-gian-61/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2021-09-gian-63/",
+        "category": "duplicate_description",
+        "detail": "description「議案第63号「人権擁護委員候補者の推薦（猪股さよみ氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2021-09-gian-63/, /bills/votes/2024-09-gian-63/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2022-03-gian-144/",
+        "category": "duplicate_description",
+        "detail": "description「議案第144号「人権擁護委員候補者の推薦（林田玲子氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2022-03-gian-144/, /bills/votes/2025-03-gian-144/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2022-12-gian-102/",
+        "category": "duplicate_description",
+        "detail": "description「議案第102号「延岡市特別職職員給与条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2022-12-gian-102/, /bills/votes/2023-12-gian-102/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2022-12-gian-103/",
+        "category": "duplicate_description",
+        "detail": "description「議案第103号「延岡市一般職の任期付職員の採用等に関する条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2022-12-gian-103/, /bills/votes/2023-12-gian-103/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2023-03-gian-120/",
+        "category": "duplicate_description",
+        "detail": "description「議案第120号「延岡市営住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2023-03-gian-120/, /bills/votes/2024-03-gian-120/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2023-03-gian-121/",
+        "category": "duplicate_description",
+        "detail": "description「議案第121号「延岡市山村定住住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2023-03-gian-121/, /bills/votes/2024-03-gian-121/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2025-03-chinjo-6/",
+        "category": "duplicate_description",
+        "detail": "description「陳情第6号「津波避難困難地区の解消に向けた取り組みについての陳情」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2025-03-chinjo-6/, /bills/votes/2025-06-chinjo-6/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/bills/votes/2025-05-extraordinary-gian-2/",
+        "category": "duplicate_description",
+        "detail": "description「議案第2号「専決処分の承認（延岡市税条例の一部を改正する条例の制定）」の概要、議決結果（承認）、議員別の賛否を掲載しています。」が非トップページで2件重複（例: /bills/votes/2025-05-extraordinary-gian-2/, /bills/votes/2026-05-extraordinary-gian-2/）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/members/fm01/",
+        "category": "duplicate_description",
+        "detail": "description「延岡市議会の元議員吉本 靖氏について、公式資料で確認できた在職・活動の記録を掲載しています。」が非トップページで2件重複（例: /members/fm01/, /members/former/fm01/）",
+        "suggestedFix": null
+      }
+    ],
+    "P3": [
+      {
+        "route": "/compensation/",
+        "category": "table_no_wrap_protection",
+        "detail": "tableにwhitespace-nowrap/break-words系クラスは無いが、role=\"region\"+tabindex=\"0\"+overflow-x-autoの アクセシブルなスクロールコンテナで既に包まれておりページ全体の横スクロールは発生しない（低リスク、要目視確認）",
+        "suggestedFix": null
+      },
+      {
+        "route": "/mayors/aoki-yoshisuke/",
+        "category": "ambiguous_date_wording_in_body_text",
+        "detail": "本文中「生年月日は2026-08-17、延岡市史（1963年、NDL個人送信サービス）で独立した一次資料の裏付けを得た」という一文が、生年月日そのもの（別途上部に1892年11月1日と記載済み）ではなく確認日を指しているため、初見では日付の意味を誤読しやすい。データの誤りではなく文言表現のみの改善余地（Phase78代表ページ確認で発見）。",
+        "suggestedFix": null
+      }
+    ]
+  },
+  "representativePageChecks": [
+    {
+      "pageType": "top",
+      "url": "/",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。文字切れなし。ボトムナビのタップ領域は十分。問題なし。"
+      ]
+    },
+    {
+      "pageType": "member-detail（議員詳細）",
+      "url": "/members/m01",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。プロフィールカード・議会活動データとも崩れなし。",
+        "「一般質問 58」等の数値には直下に「7／12（対象のうち確認できた件数）」という母数表記があり、母数不明の裸のパーセンテージ表示は見当たらなかった。"
+      ]
+    },
+    {
+      "pageType": "former-member-detail（元議員詳細）",
+      "url": "/members/former/fm01",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。「元職（現職ではありません）」「資料充足レベルB」の状態バッジも視認性良好。"
+      ]
+    },
+    {
+      "pageType": "mayor-detail（歴代市長詳細）",
+      "url": "/mayors/aoki-yoshisuke",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし、文字切れなし。",
+        "P3所見: 本文中「生年月日は2026-08-17、延岡市史（1963年）で独立した一次資料の裏付けを得た」という一文が、生年月日そのもの（1892年11月1日、別途上部に記載）ではなく確認日を指しているため、初見では日付の意味を誤読しやすい表現になっている。データの誤りではなく文言のみの改善余地。"
+      ]
+    },
+    {
+      "pageType": "questions-list（一般質問一覧）",
+      "url": "/questions",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。導入文・アコーディオンとも問題なし。"
+      ]
+    },
+    {
+      "pageType": "question-detail（一般質問詳細）",
+      "url": "/questions/gq2026-06-m01",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。バッジ・タグとも折り返し良好。"
+      ]
+    },
+    {
+      "pageType": "finance-top（財政）",
+      "url": "/finance",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。基準日（2026年6月5日）が明示されている。"
+      ]
+    },
+    {
+      "pageType": "finance-year-detail（財政年度詳細）",
+      "url": "/finance/budget",
+      "method": "browser",
+      "findings": [
+        "注記: このコードベースには年度単体の財政詳細に特化した独立ルートが無く、/financeが単年度、/finance/budget・/finance/debt・/finance/fundsが複数年度推移の役割を担う構成だったため、最も近いページとして/finance/budgetを確認した。",
+        "「確認中」表示と0（ゼロ）を明確に区別しており、CLAUDE.mdの方針（未確認データを0として扱わない）に沿っている。単位（億円）も明記。",
+        "P3所見（低確度）: スクロール直後の1回のスクリーンショットで一瞬コンテンツが空白になる現象を観測したが、1秒待って再撮影すると正常表示に復帰した。ツール側のタイミングの問題である可能性が高く、サイト側の再現性は未確認。"
+      ]
+    },
+    {
+      "pageType": "timeline（市政年表）",
+      "url": "/timeline",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。カテゴリ絞り込みチップの折り返し良好。"
+      ]
+    },
+    {
+      "pageType": "bill-vote-detail（議案詳細）",
+      "url": "/bills/votes/2019-06-gian-10",
+      "method": "browser",
+      "findings": [
+        "get_page_textで本文確認（画面下部のスクリーンショットはツール不安定化のため一部断念、noteを参照）。",
+        "個人別の賛否が公式資料で確認できない場合に推測で埋めていない（「推測で議員個人の賛否を割り当てることはしていません」の注記あり）。CLAUDE.mdの方針に合致。"
+      ],
+      "note": "この議案は個人別投票テーブルを含まない案件だったため、テーブルの横スクロール確認は他ページ（/compensation/等）の静的解析结果で代替した。"
+    },
+    {
+      "pageType": "search（検索）",
+      "url": "/search",
+      "method": "browser",
+      "findings": [
+        "390px幅で横スクロールなし。検索キーワードチップの折り返し良好。"
+      ]
+    },
+    {
+      "pageType": "compare（比較）",
+      "url": "/compare",
+      "method": "browser",
+      "findings": [
+        "get_page_textで確認（この時点でスクリーンショットのCDPタイムアウトが頻発したため画像確認は断念）。",
+        "「点数化や優劣・勝敗の判定は行いません」「データが少ない項目は資料未確認と表示」等、CLAUDE.mdの方針に沿った注記を確認。"
+      ]
+    },
+    {
+      "pageType": "data-status（データ収録状況）",
+      "url": "/data-status",
+      "method": "browser",
+      "findings": [
+        "get_page_textで確認。0件・未確認・母数未確認を一貫して区別しており、パーセンテージには必ず分子/分母が併記されている（例:「収録12件／確認済み母数13件／収録率：92%」）。CLAUDE.mdの方針を最も丁寧に反映しているページの一つ。"
+      ]
+    },
+    {
+      "pageType": "updates（更新履歴）",
+      "url": "/updates",
+      "method": "browser",
+      "findings": [
+        "get_page_textで確認。109件・全6ページのページネーションが正しく機能。各項目に出典・使用資料の記載あり。"
+      ]
+    },
+    {
+      "pageType": "committee-detail（委員会）",
+      "url": "/committees/committee-gikai-arikata",
+      "method": "static",
+      "findings": [
+        "このセッションのブラウザツールが不安定化し（CDPスクリーンショットのタイムアウト、当該ルート用JSチャンクのfetchが発生しない状態）、複数回再読み込みしても実機確認ができなかったため、dist/内の静的HTMLを直接確認した。",
+        "curlでの直接取得ではtitle・本文とも正しく生成されていることを確認済み（<title>議会のあり方検討特別委員会の委員名簿｜延岡市政見える化ポータル</title>）。該当JSチャンク（CommitteeDetailPage-*.js）もHTTP 200で正常配信を確認。",
+        "静的HTML上、table要素なし、390px幅超の固定幅指定なし、h1にbreak-wordsクラスあり。横崩れリスクは低いと判断。"
+      ],
+      "note": "ブラウザでの実機確認（フォーカス可視性・実際のレンダリング）は今回未実施。要実機確認。"
+    },
+    {
+      "pageType": "council-session-detail（定例会資料）",
+      "url": "/council-documents/2000-09",
+      "method": "static",
+      "findings": [
+        "同上の理由でブラウザ実機確認ができず、静的HTMLで代替。",
+        "資料未整理の会期について「会期：確認中」「登録資料数：0件」を明確に区別して表示しており、CLAUDE.mdの方針に合致。",
+        "静的HTML上、table要素なし、390px幅超の固定幅指定なし。横崩れリスクは低いと判断。"
+      ],
+      "note": "ブラウザでの実機確認は今回未実施。要実機確認。"
+    }
+  ],
+  "safeFixCandidates": [
+    {
+      "file": "src/lib/seo.ts",
+      "location": "memberSeo(id, options) 関数（/members/:id のSEO生成、約1323〜1354行目）",
+      "currentCode": "function memberSeo(id: string, options?: SeoOptions): SeoResult {\n  const member = members.find((m) => m.id === id);\n  if (!member) return notFound(`/members/${id}`, \"議員情報\");\n  // ...（現職議員向けのtitle/description/OGPを生成）\n}",
+      "proposedCode": "function memberSeo(id: string, options?: SeoOptions): SeoResult {\n  const member = members.find((m) => m.id === id);\n  if (!member) {\n    const formerMember = formerMembers.find((m) => m.id === id);\n    if (formerMember) {\n      // formerMember.name 等を使って個別化したtitle/description/canonical/og/robots:\"index, follow\"を返す\n      // （/members/former/:slug のSEO生成関数と同様のロジック、または同関数への委譲）\n    }\n    return notFound(`/members/${id}`, \"議員情報\");\n  }\n  // ...（既存の現職議員向け処理はそのまま）\n}",
+      "risk": "中（コード変更のみでデータ変更は無いが、単純な属性追加ではなくロジック分岐の追加。/members/former/{slug}/とのcanonical・重複コンテンツの扱いを設計する必要があり、Phase88適用前にレビュー・目視確認を推奨。安全性ほぼゼロの「aria-label追加」等とは異なるカテゴリの修正として扱うこと。"
+    }
+  ],
+  "samples": {
+    "missingAlt": [],
+    "iconOnlyButtons": [],
+    "iconOnlyLinks": [],
+    "headingSkips": [],
+    "tablesWithoutWrapProtection": [
+      {
+        "route": "/compensation/",
+        "wrappedInAccessibleScrollRegion": true
+      }
+    ],
+    "largeFixedWidth": [],
+    "duplicateTitles": [
+      {
+        "text": "人物から探す｜延岡市政見える化ポータル",
+        "count": 4,
+        "sampleRoutes": [
+          "/people/",
+          "/_people-variants/type-former-member",
+          "/_people-variants/type-mayor",
+          "/_people-variants/type-member"
+        ]
+      },
+      {
+        "text": "請願第2号「介護保険利用料原則2割負担化、ケアプラン有料化などの制度見直しの中止、介護従事者の処遇改善など、介護保険制度の改善を求める意見書提出に関する請願」｜採決結果・議員別賛否｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/bills/votes/2019-12-seigan-2/",
+          "/bills/votes/2020-03-seigan-2/",
+          "/bills/votes/2020-06-seigan-2/"
+        ]
+      },
+      {
+        "text": "陳情第6号「津波避難困難地区の解消に向けた取り組みについての陳情」｜採決結果・議員別賛否｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/bills/votes/2025-03-chinjo-6/",
+          "/bills/votes/2025-06-chinjo-6/",
+          "/bills/votes/2025-09-chinjo-6/"
+        ]
+      },
+      {
+        "text": "吉本 靖｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm01/",
+          "/members/former/fm01/",
+          "/people/former-member-fm01/"
+        ]
+      },
+      {
+        "text": "佐藤 誠｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm02/",
+          "/members/former/fm02/",
+          "/people/former-member-fm02/"
+        ]
+      },
+      {
+        "text": "松田 和己｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm03/",
+          "/members/former/fm03/",
+          "/people/former-member-fm03/"
+        ]
+      },
+      {
+        "text": "三上 毅｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm04/",
+          "/members/former/fm04/",
+          "/people/former-member-fm04/"
+        ]
+      },
+      {
+        "text": "白石 良盛｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm05/",
+          "/members/former/fm05/",
+          "/people/former-member-fm05/"
+        ]
+      },
+      {
+        "text": "田村 吉宏｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm06/",
+          "/members/former/fm06/",
+          "/people/former-member-fm06/"
+        ]
+      },
+      {
+        "text": "松本 哲也｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm07/",
+          "/members/former/fm07/",
+          "/people/former-member-fm07/"
+        ]
+      },
+      {
+        "text": "下田 英樹｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm08/",
+          "/members/former/fm08/",
+          "/people/former-member-fm08/"
+        ]
+      },
+      {
+        "text": "松田 勝則｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm09/",
+          "/members/former/fm09/",
+          "/people/former-member-fm09/"
+        ]
+      },
+      {
+        "text": "本部 仁俊｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm10/",
+          "/members/former/fm10/",
+          "/people/former-member-fm10/"
+        ]
+      },
+      {
+        "text": "佐藤 正人｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm11/",
+          "/members/former/fm11/",
+          "/people/former-member-fm11/"
+        ]
+      },
+      {
+        "text": "猪股 秀明｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm12/",
+          "/members/former/fm12/",
+          "/people/former-member-fm12/"
+        ]
+      },
+      {
+        "text": "坂本 純一｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm13/",
+          "/members/former/fm13/",
+          "/people/former-member-fm13/"
+        ]
+      },
+      {
+        "text": "後藤 哲朗｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm14/",
+          "/members/former/fm14/",
+          "/people/former-member-fm14/"
+        ]
+      },
+      {
+        "text": "福良 博｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm15/",
+          "/members/former/fm15/",
+          "/people/former-member-fm15/"
+        ]
+      },
+      {
+        "text": "甲斐 武｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm16/",
+          "/members/former/fm16/",
+          "/people/former-member-fm16/"
+        ]
+      },
+      {
+        "text": "湯浅 啓祐｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm17/",
+          "/members/former/fm17/",
+          "/people/former-member-fm17/"
+        ]
+      },
+      {
+        "text": "西原 茂樹｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm18/",
+          "/members/former/fm18/",
+          "/people/former-member-fm18/"
+        ]
+      },
+      {
+        "text": "高橋 匠｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm19/",
+          "/members/former/fm19/",
+          "/people/former-member-fm19/"
+        ]
+      },
+      {
+        "text": "牧 定七｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm20/",
+          "/members/former/fm20/",
+          "/people/former-member-fm20/"
+        ]
+      },
+      {
+        "text": "高橋 勝｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm21/",
+          "/members/former/fm21/",
+          "/people/former-member-fm21/"
+        ]
+      },
+      {
+        "text": "稲田 和利｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm22/",
+          "/members/former/fm22/",
+          "/people/former-member-fm22/"
+        ]
+      },
+      {
+        "text": "新名 種歳｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm23/",
+          "/members/former/fm23/",
+          "/people/former-member-fm23/"
+        ]
+      },
+      {
+        "text": "山田 良市｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm24/",
+          "/members/former/fm24/",
+          "/people/former-member-fm24/"
+        ]
+      },
+      {
+        "text": "下清水 一正｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm25/",
+          "/members/former/fm25/",
+          "/people/former-member-fm25/"
+        ]
+      },
+      {
+        "text": "佐藤 道男｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm26/",
+          "/members/former/fm26/",
+          "/people/former-member-fm26/"
+        ]
+      },
+      {
+        "text": "大西 幸二｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm27/",
+          "/members/former/fm27/",
+          "/people/former-member-fm27/"
+        ]
+      }
+    ],
+    "duplicateDescriptions": [
+      {
+        "text": "現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。",
+        "count": 4,
+        "sampleRoutes": [
+          "/people/",
+          "/_people-variants/type-former-member",
+          "/_people-variants/type-mayor",
+          "/_people-variants/type-member"
+        ]
+      },
+      {
+        "text": "議案第12号「延岡市山村定住住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-gian-12/",
+          "/bills/votes/2020-06-gian-12/"
+        ]
+      },
+      {
+        "text": "議案第14号「延岡市国民健康保険税条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-gian-14/",
+          "/bills/votes/2020-06-gian-14/"
+        ]
+      },
+      {
+        "text": "議案第8号「延岡市税条例等の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-gian-8/",
+          "/bills/votes/2021-06-gian-8/"
+        ]
+      },
+      {
+        "text": "意見書第2号「地方財政の充実・強化を求める意見書（案）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-ikensho-2/",
+          "/bills/votes/2023-09-ikensho-2/"
+        ]
+      },
+      {
+        "text": "議案第41号「延岡市個人番号の利用等に関する条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-09-gian-41/",
+          "/bills/votes/2021-09-gian-41/"
+        ]
+      },
+      {
+        "text": "請願第2号「介護保険利用料原則2割負担化、ケアプラン有料化などの制度見直しの中止、介護従事者の処遇改善など、介護保険制度の改善を求める意見書提出に関する請願」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-12-seigan-2/",
+          "/bills/votes/2020-03-seigan-2/"
+        ]
+      },
+      {
+        "text": "陳情第4号「長浜・方財海岸の浸食対策について」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-chinjo-4/",
+          "/bills/votes/2020-06-chinjo-4/"
+        ]
+      },
+      {
+        "text": "議案第151号「農業委員会委員の選任（菊池光雄氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-gian-151/",
+          "/bills/votes/2023-03-gian-151/"
+        ]
+      },
+      {
+        "text": "議案第162号「農業委員会委員の選任（松田宗史氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-gian-162/",
+          "/bills/votes/2023-03-gian-162/"
+        ]
+      },
+      {
+        "text": "議案第163号「農業委員会委員の選任（矢野光一氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-gian-163/",
+          "/bills/votes/2023-03-gian-163/"
+        ]
+      },
+      {
+        "text": "議案第11号「延岡市税条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-06-gian-11/",
+          "/bills/votes/2026-06-gian-11/"
+        ]
+      },
+      {
+        "text": "議案第21号「財産の取得（小型動力ポンプ付積載車の購入）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-06-gian-21/",
+          "/bills/votes/2023-06-gian-21/"
+        ]
+      },
+      {
+        "text": "意見書第4号「地方財政の充実・強化を求める意見書（案）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-06-ikensho-4/",
+          "/bills/votes/2024-09-ikensho-4/"
+        ]
+      },
+      {
+        "text": "議案第120号「延岡市一般職職員給与条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-120/",
+          "/bills/votes/2025-03-gian-120/"
+        ]
+      },
+      {
+        "text": "議案第122号「延岡市消防団条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-122/",
+          "/bills/votes/2025-03-gian-122/"
+        ]
+      },
+      {
+        "text": "議案第124号「延岡市道路の構造の技術的基準を定める条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-124/",
+          "/bills/votes/2025-03-gian-124/"
+        ]
+      },
+      {
+        "text": "議案第151号「人権擁護委員候補者の推薦（秋吉ますみ氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-151/",
+          "/bills/votes/2024-03-gian-151/"
+        ]
+      },
+      {
+        "text": "議案第12号「延岡市家庭的保育事業等の設備及び運営に関する基準を定める条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-06-gian-12/",
+          "/bills/votes/2024-06-gian-12/"
+        ]
+      },
+      {
+        "text": "議案第49号「下塚辺地に係る総合整備計画の変更」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-09-gian-49/",
+          "/bills/votes/2024-09-gian-49/"
+        ]
+      },
+      {
+        "text": "議案第61号「人権擁護委員候補者の推薦（伊東忠俊氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-09-gian-61/",
+          "/bills/votes/2024-09-gian-61/"
+        ]
+      },
+      {
+        "text": "議案第63号「人権擁護委員候補者の推薦（猪股さよみ氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-09-gian-63/",
+          "/bills/votes/2024-09-gian-63/"
+        ]
+      },
+      {
+        "text": "議案第144号「人権擁護委員候補者の推薦（林田玲子氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2022-03-gian-144/",
+          "/bills/votes/2025-03-gian-144/"
+        ]
+      },
+      {
+        "text": "議案第102号「延岡市特別職職員給与条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2022-12-gian-102/",
+          "/bills/votes/2023-12-gian-102/"
+        ]
+      },
+      {
+        "text": "議案第103号「延岡市一般職の任期付職員の採用等に関する条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2022-12-gian-103/",
+          "/bills/votes/2023-12-gian-103/"
+        ]
+      },
+      {
+        "text": "議案第120号「延岡市営住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2023-03-gian-120/",
+          "/bills/votes/2024-03-gian-120/"
+        ]
+      },
+      {
+        "text": "議案第121号「延岡市山村定住住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2023-03-gian-121/",
+          "/bills/votes/2024-03-gian-121/"
+        ]
+      },
+      {
+        "text": "陳情第6号「津波避難困難地区の解消に向けた取り組みについての陳情」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2025-03-chinjo-6/",
+          "/bills/votes/2025-06-chinjo-6/"
+        ]
+      },
+      {
+        "text": "議案第2号「専決処分の承認（延岡市税条例の一部を改正する条例の制定）」の概要、議決結果（承認）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2025-05-extraordinary-gian-2/",
+          "/bills/votes/2026-05-extraordinary-gian-2/"
+        ]
+      },
+      {
+        "text": "延岡市議会の元議員吉本 靖氏について、公式資料で確認できた在職・活動の記録を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/members/fm01/",
+          "/members/former/fm01/"
+        ]
+      }
+    ],
+    "duplicateOgTitles": [
+      {
+        "text": "人物から探す｜延岡市政見える化ポータル",
+        "count": 4,
+        "sampleRoutes": [
+          "/people/",
+          "/_people-variants/type-former-member",
+          "/_people-variants/type-mayor",
+          "/_people-variants/type-member"
+        ]
+      },
+      {
+        "text": "請願第2号「介護保険利用料原則2割負担化、ケアプラン有料化などの制度見直しの中止、介護従事者の処遇改善など、介護保険制度の改善を求める意見書提出に関する請願」｜採決結果・議員別賛否｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/bills/votes/2019-12-seigan-2/",
+          "/bills/votes/2020-03-seigan-2/",
+          "/bills/votes/2020-06-seigan-2/"
+        ]
+      },
+      {
+        "text": "陳情第6号「津波避難困難地区の解消に向けた取り組みについての陳情」｜採決結果・議員別賛否｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/bills/votes/2025-03-chinjo-6/",
+          "/bills/votes/2025-06-chinjo-6/",
+          "/bills/votes/2025-09-chinjo-6/"
+        ]
+      },
+      {
+        "text": "吉本 靖｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm01/",
+          "/members/former/fm01/",
+          "/people/former-member-fm01/"
+        ]
+      },
+      {
+        "text": "佐藤 誠｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm02/",
+          "/members/former/fm02/",
+          "/people/former-member-fm02/"
+        ]
+      },
+      {
+        "text": "松田 和己｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm03/",
+          "/members/former/fm03/",
+          "/people/former-member-fm03/"
+        ]
+      },
+      {
+        "text": "三上 毅｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm04/",
+          "/members/former/fm04/",
+          "/people/former-member-fm04/"
+        ]
+      },
+      {
+        "text": "白石 良盛｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm05/",
+          "/members/former/fm05/",
+          "/people/former-member-fm05/"
+        ]
+      },
+      {
+        "text": "田村 吉宏｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm06/",
+          "/members/former/fm06/",
+          "/people/former-member-fm06/"
+        ]
+      },
+      {
+        "text": "松本 哲也｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm07/",
+          "/members/former/fm07/",
+          "/people/former-member-fm07/"
+        ]
+      },
+      {
+        "text": "下田 英樹｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm08/",
+          "/members/former/fm08/",
+          "/people/former-member-fm08/"
+        ]
+      },
+      {
+        "text": "松田 勝則｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm09/",
+          "/members/former/fm09/",
+          "/people/former-member-fm09/"
+        ]
+      },
+      {
+        "text": "本部 仁俊｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm10/",
+          "/members/former/fm10/",
+          "/people/former-member-fm10/"
+        ]
+      },
+      {
+        "text": "佐藤 正人｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm11/",
+          "/members/former/fm11/",
+          "/people/former-member-fm11/"
+        ]
+      },
+      {
+        "text": "猪股 秀明｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm12/",
+          "/members/former/fm12/",
+          "/people/former-member-fm12/"
+        ]
+      },
+      {
+        "text": "坂本 純一｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm13/",
+          "/members/former/fm13/",
+          "/people/former-member-fm13/"
+        ]
+      },
+      {
+        "text": "後藤 哲朗｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm14/",
+          "/members/former/fm14/",
+          "/people/former-member-fm14/"
+        ]
+      },
+      {
+        "text": "福良 博｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm15/",
+          "/members/former/fm15/",
+          "/people/former-member-fm15/"
+        ]
+      },
+      {
+        "text": "甲斐 武｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm16/",
+          "/members/former/fm16/",
+          "/people/former-member-fm16/"
+        ]
+      },
+      {
+        "text": "湯浅 啓祐｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm17/",
+          "/members/former/fm17/",
+          "/people/former-member-fm17/"
+        ]
+      },
+      {
+        "text": "西原 茂樹｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm18/",
+          "/members/former/fm18/",
+          "/people/former-member-fm18/"
+        ]
+      },
+      {
+        "text": "高橋 匠｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm19/",
+          "/members/former/fm19/",
+          "/people/former-member-fm19/"
+        ]
+      },
+      {
+        "text": "牧 定七｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm20/",
+          "/members/former/fm20/",
+          "/people/former-member-fm20/"
+        ]
+      },
+      {
+        "text": "高橋 勝｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm21/",
+          "/members/former/fm21/",
+          "/people/former-member-fm21/"
+        ]
+      },
+      {
+        "text": "稲田 和利｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm22/",
+          "/members/former/fm22/",
+          "/people/former-member-fm22/"
+        ]
+      },
+      {
+        "text": "新名 種歳｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm23/",
+          "/members/former/fm23/",
+          "/people/former-member-fm23/"
+        ]
+      },
+      {
+        "text": "山田 良市｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm24/",
+          "/members/former/fm24/",
+          "/people/former-member-fm24/"
+        ]
+      },
+      {
+        "text": "下清水 一正｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm25/",
+          "/members/former/fm25/",
+          "/people/former-member-fm25/"
+        ]
+      },
+      {
+        "text": "佐藤 道男｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm26/",
+          "/members/former/fm26/",
+          "/people/former-member-fm26/"
+        ]
+      },
+      {
+        "text": "大西 幸二｜元議員｜延岡市政見える化ポータル",
+        "count": 3,
+        "sampleRoutes": [
+          "/members/fm27/",
+          "/members/former/fm27/",
+          "/people/former-member-fm27/"
+        ]
+      }
+    ],
+    "duplicateOgDescriptions": [
+      {
+        "text": "現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。",
+        "count": 4,
+        "sampleRoutes": [
+          "/people/",
+          "/_people-variants/type-former-member",
+          "/_people-variants/type-mayor",
+          "/_people-variants/type-member"
+        ]
+      },
+      {
+        "text": "議案第12号「延岡市山村定住住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-gian-12/",
+          "/bills/votes/2020-06-gian-12/"
+        ]
+      },
+      {
+        "text": "議案第14号「延岡市国民健康保険税条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-gian-14/",
+          "/bills/votes/2020-06-gian-14/"
+        ]
+      },
+      {
+        "text": "議案第8号「延岡市税条例等の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-gian-8/",
+          "/bills/votes/2021-06-gian-8/"
+        ]
+      },
+      {
+        "text": "意見書第2号「地方財政の充実・強化を求める意見書（案）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-06-ikensho-2/",
+          "/bills/votes/2023-09-ikensho-2/"
+        ]
+      },
+      {
+        "text": "議案第41号「延岡市個人番号の利用等に関する条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-09-gian-41/",
+          "/bills/votes/2021-09-gian-41/"
+        ]
+      },
+      {
+        "text": "請願第2号「介護保険利用料原則2割負担化、ケアプラン有料化などの制度見直しの中止、介護従事者の処遇改善など、介護保険制度の改善を求める意見書提出に関する請願」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2019-12-seigan-2/",
+          "/bills/votes/2020-03-seigan-2/"
+        ]
+      },
+      {
+        "text": "陳情第4号「長浜・方財海岸の浸食対策について」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-chinjo-4/",
+          "/bills/votes/2020-06-chinjo-4/"
+        ]
+      },
+      {
+        "text": "議案第151号「農業委員会委員の選任（菊池光雄氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-gian-151/",
+          "/bills/votes/2023-03-gian-151/"
+        ]
+      },
+      {
+        "text": "議案第162号「農業委員会委員の選任（松田宗史氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-gian-162/",
+          "/bills/votes/2023-03-gian-162/"
+        ]
+      },
+      {
+        "text": "議案第163号「農業委員会委員の選任（矢野光一氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-03-gian-163/",
+          "/bills/votes/2023-03-gian-163/"
+        ]
+      },
+      {
+        "text": "議案第11号「延岡市税条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-06-gian-11/",
+          "/bills/votes/2026-06-gian-11/"
+        ]
+      },
+      {
+        "text": "議案第21号「財産の取得（小型動力ポンプ付積載車の購入）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-06-gian-21/",
+          "/bills/votes/2023-06-gian-21/"
+        ]
+      },
+      {
+        "text": "意見書第4号「地方財政の充実・強化を求める意見書（案）」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2020-06-ikensho-4/",
+          "/bills/votes/2024-09-ikensho-4/"
+        ]
+      },
+      {
+        "text": "議案第120号「延岡市一般職職員給与条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-120/",
+          "/bills/votes/2025-03-gian-120/"
+        ]
+      },
+      {
+        "text": "議案第122号「延岡市消防団条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-122/",
+          "/bills/votes/2025-03-gian-122/"
+        ]
+      },
+      {
+        "text": "議案第124号「延岡市道路の構造の技術的基準を定める条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-124/",
+          "/bills/votes/2025-03-gian-124/"
+        ]
+      },
+      {
+        "text": "議案第151号「人権擁護委員候補者の推薦（秋吉ますみ氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-03-gian-151/",
+          "/bills/votes/2024-03-gian-151/"
+        ]
+      },
+      {
+        "text": "議案第12号「延岡市家庭的保育事業等の設備及び運営に関する基準を定める条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-06-gian-12/",
+          "/bills/votes/2024-06-gian-12/"
+        ]
+      },
+      {
+        "text": "議案第49号「下塚辺地に係る総合整備計画の変更」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-09-gian-49/",
+          "/bills/votes/2024-09-gian-49/"
+        ]
+      },
+      {
+        "text": "議案第61号「人権擁護委員候補者の推薦（伊東忠俊氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-09-gian-61/",
+          "/bills/votes/2024-09-gian-61/"
+        ]
+      },
+      {
+        "text": "議案第63号「人権擁護委員候補者の推薦（猪股さよみ氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2021-09-gian-63/",
+          "/bills/votes/2024-09-gian-63/"
+        ]
+      },
+      {
+        "text": "議案第144号「人権擁護委員候補者の推薦（林田玲子氏）」の概要、議決結果（同意）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2022-03-gian-144/",
+          "/bills/votes/2025-03-gian-144/"
+        ]
+      },
+      {
+        "text": "議案第102号「延岡市特別職職員給与条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2022-12-gian-102/",
+          "/bills/votes/2023-12-gian-102/"
+        ]
+      },
+      {
+        "text": "議案第103号「延岡市一般職の任期付職員の採用等に関する条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2022-12-gian-103/",
+          "/bills/votes/2023-12-gian-103/"
+        ]
+      },
+      {
+        "text": "議案第120号「延岡市営住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2023-03-gian-120/",
+          "/bills/votes/2024-03-gian-120/"
+        ]
+      },
+      {
+        "text": "議案第121号「延岡市山村定住住宅条例の一部を改正する条例の制定」の概要、議決結果（原案可決）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2023-03-gian-121/",
+          "/bills/votes/2024-03-gian-121/"
+        ]
+      },
+      {
+        "text": "陳情第6号「津波避難困難地区の解消に向けた取り組みについての陳情」の概要、議決結果（継続審査）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2025-03-chinjo-6/",
+          "/bills/votes/2025-06-chinjo-6/"
+        ]
+      },
+      {
+        "text": "議案第2号「専決処分の承認（延岡市税条例の一部を改正する条例の制定）」の概要、議決結果（承認）、議員別の賛否を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/bills/votes/2025-05-extraordinary-gian-2/",
+          "/bills/votes/2026-05-extraordinary-gian-2/"
+        ]
+      },
+      {
+        "text": "延岡市議会の元議員吉本 靖氏について、公式資料で確認できた在職・活動の記録を掲載しています。",
+        "count": 2,
+        "sampleRoutes": [
+          "/members/fm01/",
+          "/members/former/fm01/"
+        ]
+      }
+    ]
+  }
+}

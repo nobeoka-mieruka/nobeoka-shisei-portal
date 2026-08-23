@@ -1,0 +1,156 @@
+{
+  "generatedAt": "2026-08-23T00:00:00+09:00",
+  "scope": "src/data/archiveMayors.json, archiveMayorTerms.json, mayor.json, members.json, formerMembers.json, archiveMemberProfiles.json, archiveMemberTerms.json, archiveMemberAffiliations.json, citySpecialPosts.json, electionResults.json, civicTimelineEvents.json, searchIndex.json, mayorPromises.json, kohoOcrSearchIndex.json を人手＋Nodeスクリプトで機械監査。既存reports/mayor-confidence-overview.json・reports/mayor-ordinal-crosscheck.json・reports/historical-mayor-research-status.jsonの到達点を踏まえ、重複調査を避けた。",
+  "priorReportsReviewed": [
+    "reports/mayor-confidence-overview.json（項目別confidence A/B/C。折小野良一=mayor-10は総合A、就任日のみB）",
+    "reports/mayor-ordinal-crosscheck.json（全29任期の自至日付をWikipedia等候補値と照合済み。折小野良一は ordinal12・13＝mayor-10で既存値と一致。disputedはordinal11の青木善祐就任日のみ）",
+    "reports/historical-mayor-research-status.json（人物情報/任期/選挙/政策/主要事業を項目別にconfirmed/partial/not_collectedで管理する既存の軸分けを確認）"
+  ],
+  "idDuplicates": [],
+  "danglingForeignKeys": [],
+  "termOverlaps": [
+    {
+      "role": "superintendent（教育長）",
+      "personA": "csp-42 笠江孝一",
+      "personB": "csp-41 澤野幸司",
+      "overlapPeriod": "2018-09-14〜2018-10-08（見かけ上25日間）",
+      "note": "csp-42のretiredDate（2018-10-08、任期満了）とcsp-41のappointedDate（2018-09-14）が重なって見えるが、csp-41のtermNote自身が『2018年9月14日は議会の選任議決日であり、実際の発令・着任は前任者の任期満了翌日（2018-10-09頃）と推定される』と明記しており、真の重複ではない可能性が高い。ただしappointedDateフィールドが『選任議決日』と『発令日・着任日』のどちらを表すかがレコードによって一貫していないため、機械的な期間計算では見かけ上の重複として検出されてしまう構造的リスクとして記録する。"
+    }
+  ],
+  "newTermGaps": [
+    {
+      "role": "assistant-mayor（助役）",
+      "gapPeriod": "1983-02-20〜2006-02-27（約23年間）",
+      "note": "csp-46 後藤梅雄（1971-02-20〜1983-02-19）の退任後、citySpecialPosts.jsonには次の助役／副市長レコードがcsp-35 杉本隆晴（副市長、2006-02-28就任）まで存在しない。地方自治法改正で助役が副市長に改称されたのは2007年（施行）だが、それ以前の1983〜2006年についても助役職は制度上存続していたはずで、この間の助役が未収集であることを示す空白。既存の『市長13件の空白期間』とは別軸（役職が異なる）のため新規記録。"
+    },
+    {
+      "role": "assistant-mayor（助役）",
+      "gapPeriod": "1937-11-05（csp-52進藤林蔵 就任）〜1942-01-10（csp-53江藤千吉郎 就任）",
+      "note": "csp-52 進藤林蔵のretiredDateが未登録（null、status: former）のため、江藤千吉郎の就任日との間に重複がないか、あるいは進藤氏の退任から江藤氏の就任までに空白があるか、いずれも確認できない。"
+    },
+    {
+      "role": "deputy-mayor（副市長）",
+      "gapPeriod": "2006-02-28（csp-35 杉本隆晴 就任）〜2011-03-25（csp-36 原田幸二 就任、副市長2人制開始）",
+      "note": "杉本隆晴のretiredDateが未登録（status: former、日付なし）のため、2011年の2人制開始までの約5年間、杉本氏本人が継続して在任していたのか、途中で交代があったのか確認できない。"
+    }
+  ],
+  "dateContradictions": [],
+  "ordinalDiscrepancies": [
+    {
+      "mayorId": "mayor-10",
+      "name": "折小野 良一",
+      "type": "既知（Phase26で発見済み、今回は再確認のみ）",
+      "detail": "延岡市史（1993年版）の年表は折小野氏を『第十一・十二代』と表記するが、archiveMayors.json本体・archiveMayorTerms.json・civicTimelineEvents.json・electionResults.json・reports/mayor-ordinal-crosscheck.json・searchIndex.jsonは一貫して『第12代・第13代』としており、1代分のずれが未解消のまま残っている。archiveMayors.json mayor-10.notesに明記済みで、MayorDetailPage.tsx（142行目、mayor.notesを描画）を通じてサイト上でも開示されており、隠蔽はされていない。原因（助役期間の数え方の違い等）は特定されていない。"
+    },
+    {
+      "mayorId": "mayor-01",
+      "name": "三浦 久知",
+      "type": "新規発見",
+      "detail": "mayor.json（career）・archiveMayors.json（sourceRefs、延岡市公式サイト由来）・archiveMayorTerms.json（mayor-01-term-01のsourceRefs）はいずれも『令和7年7月20日 第29代延岡市長就任』と一致して記録している。一方、src/data/mayorPromises.json（documents.koho_2025_09.label）・src/data/searchIndex.json（3箇所）・src/data/kohoOcrSearchIndex.json（広報のべおか2025年9月号のOCR抽出本文）は『第四代延岡市長に三浦久知氏が就任』という表記になっており、『第29代』と矛盾する。mayorPromises.jsonのnotesには『Windows OCR基盤による調査で発見、元PDF画像を目視確認済み』とあり、単純なOCR誤読と即断できない。mayorPromises.json側のdoc.labelはMayorPromiseDetailPage.tsx（177行目）で実際に画面表示・aria-labelにも使用されており、サイト訪問者に矛盾する代数表記が見える状態になっている。原本PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24619.pdf）該当箇所の人手での再確認が必要。"
+    }
+  ],
+  "nameVariantSuspects": [],
+  "currentFormerMixups": [],
+  "nameConfirmedButTermUnconfirmed": [
+    {
+      "personId": "csp-43",
+      "name": "町田 訓允（教育長）",
+      "note": "2010年9月7日の本会議出席のみ確認。appointedDate・retiredDateとも未登録（null）。氏名・在任の事実のみ確認済みで、任期の始期・終期は完全に未確定。"
+    },
+    {
+      "personId": "csp-44",
+      "name": "黒木 道男（助役）",
+      "note": "appointedDate・retiredDateとも未登録。氏名のみ確認済み。"
+    },
+    {
+      "personId": "csp-45",
+      "name": "伊東 義男（助役）",
+      "note": "appointedDate・retiredDateとも未登録。氏名のみ確認済み。"
+    },
+    {
+      "personId": "csp-47",
+      "name": "高橋 重行（収入役）",
+      "note": "appointedDateが未登録（null）、retiredDateのみ1978-01-04で確認済み。就任日不明のため任期の全体像は未確定。"
+    },
+    {
+      "personId": "csp-48",
+      "name": "吉田 厚（収入役）",
+      "note": "appointedDate・retiredDateとも未登録。氏名のみ確認済み。"
+    },
+    {
+      "personId": "csp-49",
+      "name": "高島 安三郎（収入役）",
+      "note": "appointedDate・retiredDateとも未登録。氏名のみ確認済み。"
+    },
+    {
+      "personId": "csp-54",
+      "name": "佐藤（助役、下の名前未確認）",
+      "note": "延岡市史上巻コマ126の一覧表で姓のみ判読でき、下の名前・退任日とも未確認。氏名自体が『佐藤』の姓しか確定していない点に留意（このレコード自体は既に正直に記録済みで、問題はない）。"
+    },
+    {
+      "personId": "archiveMayorTerms.json 全体",
+      "name": "（複数の市長任期）",
+      "note": "30任期のうち27任期（90%）でtermStartPrecisionまたはtermEndPrecisionが『day』ではなく『month』（一部mayor-04-term-01等は『年月まで確認・日は未確定』）。氏名（誰が市長だったか）はconfirmedでも、就任・退任の正確な日付は未確定というケースが大半を占める。ただし本件はUI側（src/lib/archiveMayors.ts のformatArchiveDateWithPrecision）が『（月まで確認・日は未確定）』等の注記を自動付与しており、あたかも日単位で確定しているかのような表示にはなっていないことを確認した（是正不要、既存実装が適切）。"
+    },
+    {
+      "personId": "csp-24 / csp-25 / csp-23",
+      "name": "服部俊明・甲斐正幸・後藤博文（監査委員）",
+      "note": "監査委員は通常2名体制（識見委員1名＋議選委員1名）だが、citySpecialPosts.jsonには3名が全員retiredDateなしで登録されている。氏名・就任日はいずれも確認済みだが、3名が実際に同時に3名体制なのか、服部俊明氏が既に退任済み（未登録）で実質2名なのかは確認できておらず、任期の並存関係が未確定。"
+    }
+  ],
+  "orikonoRyoichiFindings": {
+    "status": "既存データ内で矛盾を確認・追加の外部一次資料調査は実施せず",
+    "detail": "折小野良一（mayor-10）は延岡市長として2期（第12代:1960-04-19〜1964-04-18、第13代:1964-04-19〜1966-12-01）在任したという代数が、archiveMayors.json・archiveMayorTerms.json・civicTimelineEvents.json・electionResults.json・reports/mayor-ordinal-crosscheck.json・searchIndex.jsonで一貫して採用されている。唯一の例外は、Phase26で新規発見された延岡市史（1993年版）の年表記述で、同資料は折小野氏を『第十一・十二代』と表記しており、1代分のずれがある。この矛盾はarchiveMayors.json mayor-10のnotesフィールドに既に明記されており、サイトのMayorDetailPageでも公開情報として開示されている（隠蔽なし）。今回の監査で新たに確認したのは、(1)この矛盾がPhase26以降のどのデータファイルにも波及・伝播していないこと（『第12代・第13代』表記が一貫して維持されている）、(2)ordinal（代数）を検証可能な構造化フィールドとして保持しているのはarchiveMayorTerms.jsonにはordinalフィールド自体が存在せず、代数はもっぱら自由記述のnotes・title・summary等のテキスト内にのみ現れる、という設計上の弱点（構造化されていないため、今回のような矛盾がスキーマレベルのバリデーションでは検出できない）。原因（助役在任期間の数え方の違い、職務代理者期間の扱いの違い等）は今回も特定できず、無理な断定は行っていない。",
+    "sourcesChecked": [
+      "src/data/archiveMayors.json（mayor-10レコード本体・notes・sourceRefs）",
+      "src/data/archiveMayorTerms.json（mayor-10-term-01, mayor-10-term-02）",
+      "src/data/civicTimelineEvents.json（civic-XXX 折小野良一当選・死去関連イベント）",
+      "src/data/electionResults.json（election-mayor-1960相当、election-mayor-1964相当）",
+      "src/data/searchIndex.json（折小野良一関連エントリ）",
+      "reports/mayor-ordinal-crosscheck.json（ordinal 12・13の自至日付照合テーブル）",
+      "reports/mayor-confidence-overview.json（mayor-10行のconfidence評価）"
+    ]
+  },
+  "proposedFixes": [
+    {
+      "file": "src/data/mayorPromises.json",
+      "recordId": "documents.koho_2025_09",
+      "field": "label",
+      "issue": "『第四代延岡市長に三浦久知氏が就任』という表記が『第29代』（mayor.json・archiveMayors.json・archiveMayorTerms.jsonの確定値）と矛盾し、MayorPromiseDetailPage.tsxで実際に画面表示される。",
+      "proposedAction": "延岡市公式サイト掲載の原本PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24619.pdf）該当ページを人手で再確認し、『第29代』の誤植（OCRまたは転記ミス）であれば訂正する。原本自体が『第四代』表記であれば、別の意味（例：合併後の代数等）である可能性を含めて追加調査・注記を検討する。",
+      "risk": "low（表記1件の訂正のみ。ただし原本未再確認のまま断定的に書き換えると誤りを埋め込む可能性があるため、必ず原本確認後に行うこと）"
+    },
+    {
+      "file": "src/data/searchIndex.json",
+      "recordId": "（『第四代延岡市長に三浦久知氏が就任』を含む3レコード）",
+      "field": "content / title等",
+      "issue": "mayorPromises.jsonのkoho_2025_09ラベルが検索インデックスへ転記されており、同じ『第四代』表記が3箇所に伝播している。",
+      "proposedAction": "mayorPromises.jsonの訂正後、検索インデックス生成スクリプトを再実行して同期する（手動編集ではなく生成元の修正→再生成を推奨）。",
+      "risk": "low（生成物の再同期のみ）"
+    },
+    {
+      "file": "src/data/kohoOcrSearchIndex.json",
+      "recordId": "（該当する広報のべおか2025年9月号のOCRレコード）",
+      "field": "context",
+      "issue": "OCR抽出本文に『第四代延岡市長に三浦久知氏が就任しました』とあり、他の一次資料と矛盾する数字を含む。",
+      "proposedAction": "このファイルはOCR原文の保存が目的であるため、本文自体は書き換えず、該当箇所にOCR誤読の可能性を示す注記（needsReviewフラグ等）を追加することを検討する。原本PDFの当該箇所を目視確認したうえで判断する。",
+      "risk": "low〜medium（OCR原文を安易に書き換えると、他の正しい情報との整合確認ができなくなるため、注記追加に留めるのが望ましい）"
+    },
+    {
+      "file": "src/data/citySpecialPosts.json",
+      "recordId": "csp-41",
+      "field": "appointedDate",
+      "issue": "appointedDate（2018-09-14）が議会の選任議決日であり、実際の着任日（発令日、2018-10-09頃と推定）と異なる可能性がtermNoteに明記されているが、フィールド自体は単一の日付のみを保持しており、他のレコード（appointedDate=着任日として扱われているもの）との意味的な一貫性がない。",
+      "proposedAction": "将来的に、citySpecialPosts.jsonへ『選任議決日（resolutionDate）』と『着任日（startDate）』を分離したフィールドを追加することを検討する（今回はデータ追加を行わない、方針提案のみ）。",
+      "risk": "medium（スキーマ変更を伴うため、型定義・全レコードの見直しが必要）"
+    },
+    {
+      "file": "src/data/citySpecialPosts.json",
+      "recordId": "csp-52 / csp-35",
+      "field": "retiredDate",
+      "issue": "進藤林蔵（助役、csp-52）・杉本隆晴（副市長、csp-35）ともretiredDateが未登録で、次の在任者との間に重複または長期空白がないか確認できない。",
+      "proposedAction": "延岡市議会会議録検索システム・延岡市史等で両氏の退任日を追加調査する（人手調査、今回は実施せず提案のみ）。",
+      "risk": "low（追加調査のみ、既存データの書き換えは伴わない）"
+    }
+  ]
+}

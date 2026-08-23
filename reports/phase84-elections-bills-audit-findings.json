@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-08-23",
+  "scope": {
+    "filesAudited": [
+      "src/data/electionResults.json",
+      "src/data/billVotes.json",
+      "src/data/committees.json",
+      "src/data/committeeReportActivity.json",
+      "src/data/committeeActivityReports.json",
+      "src/data/archiveCouncilDocuments.json",
+      "src/data/councilSessions.json"
+    ],
+    "codeReviewed": [
+      "src/lib/completeness.ts",
+      "src/lib/elections.ts",
+      "src/lib/committees.ts",
+      "src/lib/councilActivityBarometer.ts",
+      "src/lib/evidenceAvailability.ts",
+      "src/pages/ElectionsPage.tsx",
+      "src/pages/ElectionDetailPage.tsx",
+      "src/pages/MayorDetailPage.tsx",
+      "src/pages/DataStatusPage.tsx",
+      "src/pages/CommitteesPage.tsx",
+      "src/pages/CouncilDocumentsArchivePage.tsx",
+      "src/components/bills/ReviewFlowTimeline.tsx",
+      "scripts/generate-search-index.mjs",
+      "scripts/lib/session-summary.mjs",
+      "scripts/validate-data.mjs"
+    ],
+    "method": "Node (--experimental-strip-types不使用の素のnode -e)によるJSON全件の機械的突合と、ripgrep/Readによるコードレビューを併用。新規の一次資料調査は行わず、既存reports/配下のPhase調査結果を参照した。"
+  },
+  "electionIssues": {
+    "candidateCountMismatches": [
+      {
+        "result": "no_issues_found",
+        "note": "electionResults.json全39件について、dataCompleteness.candidateListConfirmedがtrue（またはdataCompleteness自体が省略＝全項目確認済み扱い）のレコードでは、candidateCountとcandidates配列の件数が全件一致していることを機械的に確認した（不一致0件）。同様に、seatsが判明している全レコードでelected===trueの件数がseatsと完全一致し（不一致0件）、votesが記録されているのにelectedがboolean以外（null等）になっているcandidateエントリも0件だった。scripts/validate-data.mjs（L3617-3618）に同種のcandidateCount整合性チェックが既に存在しており、本監査の結果と整合する。"
+      }
+    ],
+    "statusMisdisplaySuspects": [
+      {
+        "id": "ELEC-STAT-01",
+        "severity": "P1",
+        "file": "src/pages/ElectionsPage.tsx",
+        "lines": "L42, L67",
+        "issue": "「候補者延べ数」StatCard（`totalCandidates = sortedAll.reduce((n, e) => n + e.candidates.length, 0)`）が、dataCompleteness.candidateListConfirmed===falseの19選挙（1975年市長選〜1998年市長選、戦前の市長選出等）についてもcandidates配列の件数（多くは当選者1名のみを登録した暫定値）をそのまま合計している。これらの選挙は候補者一覧が未確認であり、真の候補者数はcandidateCountがnull（不明）か、判明している場合でも配列より大きい値（例：election-mayor-1975はcandidateCount=3だがcandidates.length=1）。そのため画面の「候補者延べ数」は実際の延べ候補者数を下回る値を、下限値である旨の説明なしに一つの確定値として表示している。",
+        "comparisonToPhase76": "Phase76で修正されたscripts/generate-search-index.mjs（L545-556、`electionCandidateListConfirmedForIndex`によるガード）と同種の問題だが、こちらは検索インデックスではなくUI（選挙結果一覧ページの集計StatCard）に残存している。",
+        "verifiedNotBuggy": [
+          "src/pages/ElectionDetailPage.tsx L83（候補者数StatCard）：candidateListConfirmed ? (candidateCount ?? candidates.length) : \"確認中\" で正しくガード済み。",
+          "src/pages/ElectionsPage.tsx L135-150（一覧の各カード内、定数／候補者数／当選者数の行）：candidateListConfirmedがtrueの場合のみ表示するブロック内にあり、正しくガード済み。",
+          "src/pages/MayorDetailPage.tsx L186（unopposed = e.candidateCount === 1）：配列長ではなくcandidateCountフィールドを直接参照しており問題なし。",
+          "scripts/generate-search-index.mjs L545-563：Phase76修正済み、candidateListConfirmed===falseの場合は「候補者未確認」ラベルを使用し件数を出さない。"
+        ]
+      }
+    ],
+    "primarySourceExistsButZeroInDb": [
+      {
+        "election": "延岡市議会議員選挙（統一地方選挙年、1933〜1998年のうち1955・1959・1963・1967・1971・1975(4月)・1979・1982-83(セット)・1987・1991・1995年の合計11回分）",
+        "note": "electionResults.jsonにはcouncilMember（市議選）のレコードが1999年以降（election-council-1999〜）しか存在せず、上記11回分は電子データとして0件（未登録）。一方、reports/phase73-election-backfill-findings.md（2-2節の表）によれば、宮崎県選挙管理委員会が刊行した「選挙結果記録」「選挙の記録」シリーズおよび「宮崎県選挙管理委員会二十五年誌／委員会誌」の該当巻（宮崎県立図書館所蔵、一部は大分県立図書館・福岡県立図書館にも所蔵、7件はNDLデジタルコレクションのpidまで特定済み）が、書誌の一般注記レベルで「市町村選挙編」「市町村長・市町村議会議員選挙」を収録範囲に含むことをNDLサーチSRU APIの書誌データから確認済みである。ただし同レポートは『延岡市の個別データが実際に記載されているかは本文未確認』と明記しており、運用ルール上（NDL個人送信サービス不使用）本文には到達していない。したがって『一次資料（の候補）の所在は判明しているが、延岡市データの実在・内容はまだ未確認』というreference_pending相当の状態であり、confirmed（確定登録可能）と誤解しないよう注意が必要。",
+        "sourceRef": "reports/phase73-election-backfill-findings.md（2-2節の対応表、および5節の終了時報告）",
+        "detail": [
+          { "year": 1955, "volume": "選挙結果記録 昭和29-30年", "holding": "宮崎県立図書館（bibid=1101335794）。NDLデジタル化未確認" },
+          { "year": 1959, "volume": "選挙結果記録 昭和34年", "holding": "宮崎県立図書館（bibid=1100467223）。NDLデジタル化未確認" },
+          { "year": 1963, "volume": "選挙結果記録 昭和38年（一般注記「統一地方選挙、その他」）", "holding": "宮崎県立図書館（帯出不可）／大分県立図書館（帯出可、ILL候補）／福岡県立図書館" },
+          { "year": 1967, "volume": "選挙結果記録 昭和42年（一般注記「市町村選挙編」明記）", "holding": "宮崎県立図書館（bibid=1100787851）" },
+          { "year": 1971, "volume": "選挙の記録 昭和46年", "holding": "NDLデジタルコレクション pid=12250925（個人送信限定の可能性、未確定）" },
+          { "year": "1975(4月)", "volume": "〔選挙の記録〕．昭和50年", "holding": "NDLデジタルコレクション pid=12247133" },
+          { "year": 1979, "volume": "〔選挙の記録〕．昭和54年度", "holding": "巻の存在のみ確認。bibid未確認" },
+          { "year": "1982-83", "volume": "選挙の記録．昭和57・58年 地方選挙編", "holding": "NDLデジタルコレクション pid=12249250" },
+          { "year": 1987, "volume": "選挙の記録．昭和62年", "holding": "巻の存在のみ確認" },
+          { "year": 1991, "volume": "選挙の記録．平成3年", "holding": "NDLデジタルコレクション pid=12673840" },
+          { "year": 1995, "volume": "選挙の記録．平成7年", "holding": "NDLデジタルコレクション pid=13900787" }
+        ],
+        "recommendedStatus": "reference_pending（一次資料の所在候補は特定済みだが本文未確認）。electionResults.jsonへ新規レコードを追加する場合も、これらのpid/請求記号の本文を実際に確認するまではcandidateListConfirmed=false・electionConfirmed=falseのまま扱うこと。"
+      },
+      {
+        "election": "延岡市長選挙 1975年1月・1978年11月・1982年10月（対立候補氏名・得票数）",
+        "note": "これは『DBが0件』ではなく、既存electionResults.jsonにdisputed/unconfirmedとして既に部分登録済み（candidateCount判明・candidates配列は当選者のみ）のレコードであり、本チェック項目（1c：DB上0件のもの）には該当しない。参考情報として記載する。reports/phase73-election-backfill-findings.md（2-2節）は、1975年4月分・1982-83年セット分について上記と同じNDL pidを、1978年11月単独分については次点候補として「宮崎県選挙管理委員会誌 昭和47年〜56年」（NDL pid=11933938）を提示しているが、いずれも本文未確認。"
+      }
+    ]
+  },
+  "billIssues": {
+    "voteCountMismatches": [
+      {
+        "result": "no_hard_mismatches_found_but_coverage_extremely_limited",
+        "note": "billVotes.json（1,177件）のうちmemberVotes配列に実データが入っているのは2件のみ（2023-07-extraordinary-01-gian-9＝27票、2019-09-gian-47＝27票）。いずれも投票総数27が、該当年度の議員定数（election-council-2019/2023のseats=27）と完全一致し、memberId重複も0件だった。したがって『内部整合性の破綻』は今回の監査範囲では検出されなかったが、これは母数（1,175件）のほぼ全てで個人別内訳自体が非公開・未収集のためであり、『整合性を確認した件数が極めて少ない（2/1177件）』という限定付きの結果である点に注意。"
+      },
+      {
+        "id": "BILL-VOTE-01",
+        "severity": "P3",
+        "recordIds": ["2019-09-gian-52", "2019-09-gian-53", "2019-09-gian-54", "2019-09-gian-55", "2019-09-gian-56", "2019-09-gian-57", "2019-09-seigan-1"],
+        "issue": "上記7件は verificationStatus=\"verified\" かつ verificationNote に『（自動抽出時の確認待ちだったが）本項目自体の内容には誤りがなかった』と明記されているにもかかわらず、unresolvedFields配列に\"result\"が残存したまま（未クリア）になっている。src/pages/BillVoteDetailPage.tsx（L384-390）ではこの警告文言が`!isVerified`でガードされているため、verificationStatus=\"verified\"の現状では実際にはユーザーへ表示されず、UI上の実害はない。ただしデータの内部整合性としては、検証済みなのにunresolvedFieldsが未確認扱いのまま、という矛盾した状態が残っている。"
+      }
+    ],
+    "committeeReferralMismatches": [
+      {
+        "id": "BILL-COMMITTEE-01",
+        "severity": "info_by_design",
+        "issue": "billVotes.jsonのcommitteeフィールドには「予算審査特別委員会」（249件）「決算審査特別委員会」（49件）「長期総合計画審査特別委員会」（4件）が使われているが、committees.json（現行委員名簿マスタ、6件）にはこれらのエントリが存在しない。",
+        "verifiedNotBuggy": true,
+        "explanation": "src/pages/CommitteesPage.tsx（L77）に『予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会など、定例会・臨時会ごとに議長を除く全議員で構成・設置される委員会は、委員名簿に個別掲載されないため、ここには含めていません』と明記されており、意図的な設計。src/components/bills/ReviewFlowTimeline.tsx（L30, L57-62）でも`getCommitteeByName`がundefinedを返す場合はリンクなしのプレーンテキスト表示にフォールバックしており、UIが破綻することもない。"
+      },
+      {
+        "id": "BILL-COMMITTEE-02",
+        "severity": "P2",
+        "issue": "billVotes.jsonのcommitteeフィールドに「市職員の不適正な事務処理等に関する調査特別委員会」（2024-03-ketsugi-2、1件）と「市職員の不適正な事務処理及び市長の不適切発言等に関する調査特別委員会」（2024-12-ketsugi-6、2025-03-ketsugi-7、計2件）の2種類の地方自治法100条型調査特別委員会名が使われているが、いずれもcommittees.jsonに存在しない。",
+        "reasonNotCoveredByExistingException": "CommitteesPage.tsxのL77の除外理由は『議長を除く全議員で構成される』委員会（予算審査・決算審査・長期総合計画審査）を前提としている。地方自治法100条に基づく調査特別委員会は一般に全議員構成ではなく特定の委員で構成される性質の委員会であり、既存の除外理由がそのまま当てはまるかは本監査だけでは確認できなかった（committees.jsonにこの2委員会の委員名簿があるかどうかは未調査）。",
+        "recommendedAction": "この2委員会が実際に全議員構成なのか、特定委員による構成なのかを一次資料（設置時の会議録）で確認し、(a) 特定委員構成であればcommittees.jsonへ委員名簿を追加する、(b) 全議員構成であればCommitteesPage.tsxのL77の除外理由の列挙に本委員会名も明記して『予算審査特別委員会など』の『など』に含まれることを明示する、のいずれかを検討する。なお2つの委員会名は範囲が『市長の不適切発言等』の有無で異なっており、同一委員会の名称変更か別の委員会かの確認も必要。"
+      },
+      {
+        "id": "BILL-COMMITTEE-03",
+        "severity": "info",
+        "issue": "committees.jsonに存在する「議会のあり方検討特別委員会」（committee-gikai-arikata、設置日2026-03-19）は、billVotes.jsonのcommitteeフィールドとして一度も参照されていない（0件）。",
+        "verifiedNotBuggy": true,
+        "explanation": "設置が2026年3月と最近であるため、まだ本委員会へ付託された議案の議決が発生していない可能性が高い。データ不整合ではなく、単に付託事例がまだ無いだけと考えられる。"
+      },
+      {
+        "id": "BILL-COMMITTEE-04",
+        "severity": "info",
+        "issue": "billVotes.jsonの24件（令和8年6月定例会20件、令和8年5月臨時会4件）でcommitteeフィールド自体が未設定（undefined）。",
+        "verifiedNotBuggy": true,
+        "explanation": "src/pages/DataStatusPage.tsx（L400付近の説明文）に『付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます』と明記されており、直近会期（2026年5〜6月）の会議録未公開によるものと確認できた。confirmed_zeroではなくnot_collected/under_review相当として扱われており問題なし。"
+      }
+    ]
+  },
+  "petitionIssues": {
+    "zeroVsNotCollectedConfusion": [
+      {
+        "recordOrPeriod": "billVotes.json：令和3年度（FY2021、令和3年6月・9月・12月定例会＋令和4年3月定例会の4会期、計140件）",
+        "currentStatus": "category===\"請願\" または \"陳情\" のレコードが0件。同じ4会期には条例49件・予算33件・決算7件・その他32件など他カテゴリは通常どおり存在する。",
+        "shouldBe": "under_review（要確認）または confirmed_zero のいずれかを明示すべきだが、現在のデータモデルにはfiscalYear単位で請願・陳情の有無を区別する専用ステータスフィールドが存在しない。",
+        "note": "令和1〜8年度の他の7年度は、全てcategory=\"請願\"/\"陳情\"のレコードが1件以上存在する中で、令和3年度のみ0件という突出したパターンが機械的に確認できた（詳細は下表）。billVotesは延岡市議会公式サイトの「議案等審議結果」PDFから自動抽出されており、令和3年度の4会期のPDF自体に請願・陳情の審議記録が本当に無かったのか、あるいは自動抽出時にカテゴリが誤分類（『その他』32件の中に請願・陳情が紛れ込んでいる可能性）されたのかは、本監査（既存データの読み合わせのみ）では判別できない。scripts/lib/session-summary.mjs（L100, L138-140）のhasPetitions判定もこのcategoryフィールドをそのまま参照しているため、councilSessions.jsonの令和3年度4会期のsummaryも一貫して『請願・陳情の審査も行われました』の一文を欠いている（データが一貫している分、誤分類だった場合は複数箇所に影響が及ぶ）。",
+        "yearlyBreakdown": [
+          { "fiscalYear": "令和1年度", "totalBills": 172, "petitionOrRequest": 10, "other": 33 },
+          { "fiscalYear": "令和2年度", "totalBills": 154, "petitionOrRequest": 7, "other": 43 },
+          { "fiscalYear": "令和3年度", "totalBills": 140, "petitionOrRequest": 0, "other": 32, "flag": "唯一のゼロ" },
+          { "fiscalYear": "令和4年度", "totalBills": 165, "petitionOrRequest": 4, "other": 31 },
+          { "fiscalYear": "令和5年度", "totalBills": 165, "petitionOrRequest": 5, "other": 49 },
+          { "fiscalYear": "令和6年度", "totalBills": 157, "petitionOrRequest": 3, "other": 44 },
+          { "fiscalYear": "令和7年度", "totalBills": 200, "petitionOrRequest": 3, "other": 56 },
+          { "fiscalYear": "令和8年度", "totalBills": 24, "petitionOrRequest": 1, "other": 0 }
+        ],
+        "recommendedAction": "令和3年度4会期分の「議案等審議結果」PDF原文（会期：令和3年6月・9月・12月定例会、令和4年3月定例会）を目視で再確認し、(a) 本当に請願・陳情が0件だった場合はその旨をrecordの近傍（例えばcouncilSessions.jsonの当該会期エントリ）に明示する一言注記を追加する、(b) 『その他』分類に請願・陳情が誤って含まれていた場合はcategoryを訂正する、のいずれかを行うことを推奨する。データ本体（billVotes.json）は直接編集していない。"
+      },
+      {
+        "recordOrPeriod": "全般（DataStatusPage.tsx等の集計ロジック）",
+        "currentStatus": "reviewed_no_issue_found",
+        "shouldBe": "n/a",
+        "note": "src/pages/DataStatusPage.tsx のstatusBadge()（L165-174）はcount===0の場合、zeroStatus未指定なら既定でnot_collectedを返す設計（推測でconfirmed_zeroへ格上げしない）ことをコードで確認した。現在、請願・陳情関連のDataDomainエントリで明示的にzeroStatus:を指定している箇所はなく（grep結果0件）、count>0のためそもそもこの分岐は発火していない。src/lib/councilActivityBarometer.ts（L524-529, L566-575）の請願関連指標（「請願・陳情等」「決議提出者」等）もconfirmed_zero／research_exhaustedを明確に書き分けたコメント・ロジックが既に存在し、0件を安易に確認済み扱いにしている箇所は見つからなかった。scripts/lib/session-summary.mjs（L100, L138-140）の「請願・陳情の審査も行われました」の一文も、実際にcategory=\"請願\"/\"陳情\"のbillVotesが存在する会期でのみ生成される条件付きロジックであり、令和3年度以外は正しく機能している。"
+      }
+    ]
+  },
+  "proposedFixes": [
+    {
+      "file": "src/pages/ElectionsPage.tsx",
+      "recordId": "N/A（コード側の集計ロジック）",
+      "issue": "L42/L67「候補者延べ数」StatCardが、candidateListConfirmed===falseの選挙もcandidates.length（多くは1名のみの暫定登録）でそのまま合算しており、真の延べ候補者数を下回る値を注記なしに表示している。",
+      "proposedAction": "candidateListConfirmedがtrueの選挙のみを合算対象にし、注記（例：『候補者一覧が未確認の◯回を除く』）を添える、またはcandidateCount ?? candidates.lengthで合算したうえで『一部未確認のため下限値』である旨をStatCardのdetailに明記する。いずれの場合も既存のsrc/lib/elections.tsのelectionCandidateListConfirmed()ヘルパーを再利用できる。",
+      "risk": "低。表示ロジックのみの変更で、データ本体（electionResults.json）には影響しない。既存のStatCard表示形式・他の集計値には影響しない。"
+    },
+    {
+      "file": "src/data/electionResults.json",
+      "recordId": "councilMember（1933〜1998年、統一地方選挙年11回分）",
+      "issue": "reports/phase73-election-backfill-findings.mdで所在候補（宮崎県選挙管理委員会「選挙結果記録」「選挙の記録」シリーズ、請求記号・一部pid判明済み）が特定されているが、本文未確認のためDBには未登録（0件）のまま。",
+      "proposedAction": "新規タスクとして、上記シリーズの現地閲覧（宮崎県立図書館）またはNDL個人送信サービスでの本文確認を計画する（本Phaseでは新規調査は行わない）。確認できた場合のみ、candidateListConfirmed等を適切に設定して新規レコードを追加する。",
+      "risk": "中（現地調査・外部機関対応が必要な中長期タスク）。データ自体への変更は本Phaseでは行っていない。"
+    },
+    {
+      "file": "src/data/billVotes.json",
+      "recordId": "2019-09-gian-52, 2019-09-gian-53, 2019-09-gian-54, 2019-09-gian-55, 2019-09-gian-56, 2019-09-gian-57, 2019-09-seigan-1",
+      "issue": "verificationStatus=\"verified\"かつverificationNoteで内容確認済みと明記されているのに、unresolvedFields:[\"result\"]が残存している。",
+      "proposedAction": "該当7件のunresolvedFieldsを空配列へ更新する（UI上は既にisVerifiedガードにより実害が出ていないため、優先度は低いデータクリーンアップとして扱う）。",
+      "risk": "低。表示上のガード（BillVoteDetailPage.tsx L384）が既にあるため、修正してもしなくてもユーザー向け表示は変化しない。"
+    },
+    {
+      "file": "src/data/committees.json / src/pages/CommitteesPage.tsx",
+      "recordId": "市職員の不適正な事務処理等に関する調査特別委員会 / 市職員の不適正な事務処理及び市長の不適切発言等に関する調査特別委員会",
+      "issue": "billVotes.jsonのcommitteeフィールドに登場する2つの地方自治法100条型調査特別委員会が、committees.jsonにも、CommitteesPage.tsxの除外理由の明示列挙にも含まれていない。",
+      "proposedAction": "設置時の会議録（会議録検索システム）で構成員（全議員か特定委員か）を確認したうえで、(a) 特定委員構成であれば委員名簿を新規追加する、(b) 全議員構成であればCommitteesPage.tsxの除外理由の列挙文にこの委員会名も追記する。",
+      "risk": "低〜中。一次資料確認が前提のため、確認作業自体は別タスクとして計画する必要がある。"
+    },
+    {
+      "file": "src/data/billVotes.json（令和3年度4会期分）",
+      "recordId": "2021-06, 2021-09, 2021-12, 2022-03（各session配下の全レコード、特にcategory=\"その他\"の32件）",
+      "issue": "令和3年度（FY2021）のみ、他の全7年度と異なりcategory=\"請願\"/\"陳情\"のレコードが0件。confirmed_zeroかnot_collected（誤分類含む）かが未判定。",
+      "proposedAction": "令和3年6月・9月・12月定例会、令和4年3月定例会の「議案等審議結果」PDF原文を目視で再確認し、請願・陳情の有無とカテゴリ分類の正確性を検証する。",
+      "risk": "低（確認作業のみ）。修正が必要と判明した場合はcategory値の訂正のみで、他フィールドへの影響は限定的と見込まれる。"
+    }
+  ]
+}

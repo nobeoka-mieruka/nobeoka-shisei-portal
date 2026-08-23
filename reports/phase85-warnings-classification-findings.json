@@ -1,0 +1,326 @@
+{
+  "generatedAt": "2026-08-23",
+  "totalWarnings": 34,
+  "warnings": [
+    {
+      "file": "councilSessions.json",
+      "recordId": "2000-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2004-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2005-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2006-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2007-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2008-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2009-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2010-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2011-03",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2012-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2013-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2013-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2014-03",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2014-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2015-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2016-09",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2017-06",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2018-12",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "councilSessions.json",
+      "recordId": "2019-03",
+      "message": "自動生成された定例会データです。正式名称・会期などを人の目で確認してください。",
+      "classification": "F",
+      "reason": "Phase67-77で延岡市議会会議録検索システム由来の定例会レコード19件（2000年度〜令和元年度分）をcouncilSessions.jsonへ一括投入した際、status:\"要確認\"のまま登録されたプレースホルダー。実際にsrc/data/councilSessions.jsonを確認したところ、当該レコードはtitle・sessionNumber・folderPath・descriptionは埋まっているが、startDate・endDate・officialSessionUrl・documentsが未設定であり、正式な会期日程・公式URLを延岡市議会公式サイトまたは会議録検索システム（kensakusystem.jp/nobeoka）で1件ずつ確認しない限りstatusを\"verified\"へ更新できない。19件の個別確認作業が必要なため、単一のデータ誤りではなく大量バックフィル待ちの正常警告。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-026"
+    },
+    {
+      "file": "archiveMayorTerms.json",
+      "recordId": null,
+      "message": "任期が登録されていない空白期間があります（13件）: 1937-01-06〜1937-03-06、1937-04-14〜1937-05-16、1937-06-15〜1937-09-26、1941-09-25〜1941-10-22、1942-04-25〜1942-05-19、1946-03-06〜1946-03-29、1947-03-22〜1947-04-16、1948-06-06〜1948-07-16、1952-06-19〜1952-07-11、1956-03-27〜1956-04-21、1966-12-01〜1967-01-22、1978-10-05〜1978-11-05、1994-01-11〜1994-02-06",
+      "classification": "F",
+      "reason": "src/data/archiveMayorTerms.jsonを確認したところ、登録済み30件の任期を就任日順に並べると、記載の13箇所に数日〜数か月の空白（前市長の退任日と次の市長の就任日が連続していない期間）がある。いずれも戦前〜平成初期（1937・1941・1942・1946・1947・1948・1952・1956・1966-67・1978・1994年）の市長交代期に集中しており、選挙と就任の間の助役職務代理期間や、資料上まだ特定できていない移行期の可能性が高い。reports/phase33-master-unresolved-ledger.jsonには本警告と1対1で対応する専用UNR項目が現時点で存在しないが、同時期の市長・助役・収入役データを対象とするUNR-007（早生隆彦市長生年月日）、UNR-009（助役6〜10代 1946年ごろ〜1960年ごろ）、UNR-011（収入役1〜6代 1933〜1951年ごろ）、UNR-013（折小野良一市長代数）と同じ「戦前〜昭和中期の市政アーカイブ」領域に属する。13の空白期間はいずれも延岡市史・市政二十年史等の一次資料を個別に確認しないと「本当に空白（職務代理期間）だったのか」「単なるデータ未収録なのか」を判別できず、13件分の追加調査が必要な大規模バックフィル対象である。",
+      "proposedFix": null,
+      "relatedUnrId": null
+    },
+    {
+      "file": "archiveFiscalYears.json",
+      "recordId": null,
+      "message": "登録済み年度の範囲内(1933〜2026)に欠番があります: 1934、1935、1936、1937、1938、1939、1940、1941、1942、1943、1944、1945、1946、1947、1948、1951、1952、1953、1959、1983、1984、1985、1986、1987",
+      "classification": "F",
+      "reason": "欠番24年度は reports/phase33-master-unresolved-ledger.json の UNR-014（昭和9〜23年度＝1934〜1948年、15年度、対象資料候補の調査自体が未着手、primaryRoute:B＝大量バックフィル）と UNR-015（昭和26・27・28・34・58・59・60・61・62年度＝1951,1952,1953,1959,1983,1984,1985,1986,1987、9年度、既に調査は整理済みで現地閲覧・外部照会段階、primaryRoute:E＝外部回答待ち／secondaryRoute:D＝現地閲覧待ち）に完全一致する（15+9=24年度）。UNR-015分は照会文が作成済み・未送付（reports/phase29-inquiry-templates.md）、UNR-014分は候補資料調査自体が未着手であり、いずれも延岡市が保有していないか、市立図書館・県立図書館等の現地資料または外部照会でしか確認できない年度。1件の警告に24年度分の異なる進捗状況の欠落がまとまっているため、全体としては大量バックフィル待ち（F）に区分し、UNR-015部分は外部回答・現地閲覧待ちの性質も併せ持つ。",
+      "proposedFix": null,
+      "relatedUnrId": "UNR-014, UNR-015"
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m01 / m01-2023-06-27-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 事業プロセス・実施方法の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（スマートシティ推進事業の維持管理費公表・交付決定後の事業プロセス確認について尋ねた質問。summaryStatus=\"verified\"で内容確認済み。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "「制度内容の確認」「現状確認」では『事業の進め方・手続きプロセス』という論点を表現しきれない。RECOMMENDED_QUESTION_APPROACHES（validate-data.mjs 2619-2638行目）へ「事業プロセス・実施方法の確認」を新規語彙として追加することを提案する（m01・fm01で計2回使用されており再現性のある表現）。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m01 / m01-2023-06-27-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 整備見通しの確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（道の駅整備・道路事業化見込みについて尋ねた質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「実施時期の確認」は確定済み時期を問う場合向けで、本件のような『事業化の見通し・整備計画の展望』を問う質問とはニュアンスが異なる。RECOMMENDED_QUESTION_APPROACHESへ「整備見通しの確認」の追加を提案する。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m09 / m09-2023-06-27-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 現状認識・今後の方針確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（エンクロス指定管理見直し後のにぎわい減少に対する認識と今後の施設本来の目的達成に向けた方針を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「現状認識の確認」と「今後の方針の確認」の複合表現。質問が一問の中で両方の論点を含むケースを表す複合カテゴリとしてRECOMMENDED_QUESTION_APPROACHESに追加するか、単一値のみを許容する現行スキーマ設計を見直すかは要検討（データの誤りではない）。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m09 / m09-2023-06-27-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 進捗状況の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（林道高平山線の用地測量・工事発注等の工程と開通目標を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「進捗の確認」とほぼ同義。表記ゆれ（「進捗状況の確認」⇔「進捗の確認」）のため、RECOMMENDED_QUESTION_APPROACHESに同義語として追加するか、データ側を既存の「進捗の確認」に統一するかのいずれかで解消できる。内容自体に誤りはない。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m09 / m09-2023-06-27-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 進捗状況の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（市道下祝子稲葉崎線の改良工事進捗状況と整備計画を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "上記と同一の表記ゆれ。既存語彙「進捗の確認」との統一、またはRECOMMENDED_QUESTION_APPROACHESへの追加で解消可能。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m17 / m17-2024-03-05-daihyo-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 運用方法の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（スポーツパークの利用料無料化・管理者常駐なし方針の妥当性・安全性を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙に『運用（運営の実務的な進め方）』を確認する趣旨の項目がない。RECOMMENDED_QUESTION_APPROACHESへ「運用方法の確認」の追加を提案する（m17内で計2回使用）。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m17 / m17-2024-03-05-daihyo-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 運用方法の見直し提案",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（パブリックコメントの対象事業を精査すべきという見直し提案。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「改善提案」と近いが、対象が『運用方法』であることを明示した表現。RECOMMENDED_QUESTION_APPROACHESへの追加、または「改善提案」への統一のいずれかで解消可能。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m17 / m17-2024-03-05-daihyo-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 運用方法の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（免許返納者ポイント付与がのべおかCOINに限られる問題への対応を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "上記「運用方法の確認」と同一表現の再出現。RECOMMENDED_QUESTION_APPROACHESへの追加で解消可能。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m21 / m21-2023-06-27-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 所見の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（こども未来戦略方針を踏まえた保育利用料の地方自治体負担の考え方について市長に尋ねた質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「所感の確認」「所信の確認」とほぼ同義の表記ゆれ。RECOMMENDED_QUESTION_APPROACHESへ同義語として追加するか、データ側を既存語彙（文脈上は「所見」＝見解を問う質問のため「所信の確認」に近い）へ統一することで解消できる。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m22 / m22-2025-12-03-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 実施状況の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（百条委員会最終報告書のうち非公表部分（前市長のハラスメント調査結果）の状況を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「現状の確認」「進捗の確認」と近いが対象が『（調査・対応の）実施状況』である点を明示した表現。RECOMMENDED_QUESTION_APPROACHESへの追加を提案する。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m22 / m22-2025-12-03-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 予算計上方針の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（「空飛ぶ救急車」関連事業経費の令和8年度当初予算計上に関する所見を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "既存語彙「予算・数値の確認」は確定済み予算額・数値を問う場合向けで、本件は『予算に計上するかどうかの方針』を問う質問でありニュアンスが異なる。RECOMMENDED_QUESTION_APPROACHESへの追加を提案する。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "m22 / m22-2025-12-03-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 現状認識・今後の方針確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（エンクロス市民活動支援業務削除後の市民活動件数減少への受け止めと今後の対応を問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "m09と同一表現の再出現（「現状認識の確認」＋「今後の方針の確認」の複合）。RECOMMENDED_QUESTION_APPROACHESへの複合カテゴリ追加、またはスキーマ側で複数approach値を許容する設計への変更を検討。",
+      "relatedUnrId": null
+    },
+    {
+      "file": "councilSpeechSummaries.json",
+      "recordId": "fm01 / fm01-2023-12-05-ippan-shitsumon",
+      "message": "questionApproachが推奨語彙にありません（誤りではないが確認推奨）: 事業プロセス・実施方法の確認",
+      "classification": "I",
+      "reason": "scripts/validate-data.mjs 2780-2782行目のチェックは、questionItems[].questionApproachの値がRECOMMENDED_QUESTION_APPROACHES（同2619-2638行目の固定18語彙セット）に含まれるかを照合し、含まれない場合はerr()ではなくwarn()で「誤りではないが確認推奨」と明示した上で警告する設計。実際に対象レコード（）を読むと summaryStatus=\"verified\"（会議録に基づき確認済み）であり、questionSummary本文の内容（有料道路料金の引下げ見通し・事業プロセスを問う質問。summaryStatus=\"verified\"。）とquestionApproach値は整合しており、値そのものに誤りや矛盾はない。警告が消えない根本原因は、validate-data.mjs側の固定語彙リストが、実際に使われている正当な自由記述表現を網羅しきれていないことにあり、データ側の問題ではない。",
+      "proposedFix": "m01と同一表現の再出現。RECOMMENDED_QUESTION_APPROACHESへの追加で解消可能。",
+      "relatedUnrId": null
+    }
+  ],
+  "summaryByClassification": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "E": 0,
+    "F": 21,
+    "G": 0,
+    "H": 0,
+    "I": 13,
+    "J": 0
+  },
+  "fixableCount": 13,
+  "legitimateCount": 21
+}

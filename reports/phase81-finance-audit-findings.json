@@ -1,0 +1,167 @@
+{
+  "generatedAt": "2026-08-23",
+  "purpose": "Phase81：延岡市政見える化ポータルのsrc/data/archiveFiscalYears.json（財政アーカイブ、1933-2026年度・70レコード）を対象に、既存の未解決年度・欠損調査結果（reports/phase33-master-unresolved-ledger.json、reports/nobeoka-fiscal-history-coverage-report.json、reports/finance-source-availability-by-era.json）を前提として、内部整合性（単位・年度表記・フィールド欠損・前年度比異常・指標レンジ・出典年度整合）のみを監査した。オンライン一次資料の再検索は行っていない。データの直接修正・src/dataへの書き込みは行っていない。",
+  "inputFile": "src/data/archiveFiscalYears.json",
+  "totalYearsAudited": 70,
+  "yearRange": { "min": 1933, "max": 2026 },
+  "priorContextReviewed": [
+    "reports/phase33-master-unresolved-ledger.json（既知の未解決28項目、うちUNR-014/015/019/027が財政関連）",
+    "reports/nobeoka-fiscal-history-coverage-report.json（代表年度カバレッジ・located_partial_read等のステータス）",
+    "reports/finance-source-availability-by-era.json（年代別の資料取得可能性、既に古い版でsupersededと明記されているが年代区分の参考として使用）"
+  ],
+  "unitConsistencyIssues": [
+    {
+      "fiscalYear": 1949,
+      "field": "budget.totalRevenueYen",
+      "detail": "値222952388.91が小数点以下（.91＝銭）を含む唯一の数値。宮崎県統計年鑑昭和25年版の原資料が円未満の銭単位を含んでいたためで、資料内の県内5市合計との突合算術検証も一致することがsourceRefs.notesに記載済み。単位混同ではなく、1953年の銭・厘廃止以前の通貨単位に由来する正当な値と判断される。",
+      "severity": "P3"
+    },
+    {
+      "fiscalYear": null,
+      "field": "debt.balance.ordinaryAccountLocalBondBalanceYen → generalAccountBondBalanceYen（FY2025で切替）",
+      "detail": "FY1989-2024は「普通会計」ベースのordinaryAccountLocalBondBalanceYenで統一されているが、FY2025のみ「一般会計」ベースのgeneralAccountBondBalanceYenに切り替わっている（definitionNoteに定義差の注記あり、意図的な区別）。値の単位（円）自体は一貫しているが、単一フィールド名を前提にグラフ化・比較する下流コードがあれば、FY2025で系列が途切れる、または異なる会計区分の値が誤って接続される恐れがある。",
+      "severity": "P2"
+    }
+  ],
+  "yearTypeConfusionIssues": [
+    {
+      "fiscalYear": "2001-2025（25年度分）",
+      "field": "population.referenceDate",
+      "detail": "population.referenceDateがfiscalYearと同じ西暦のn年1月1日（例：fiscalYear=2001 → referenceDate=2001-01-01）で統一登録されている。日本の会計年度は4月開始のため、暦年1月1日時点の住民基本台帳人口は、厳密には前年度（fiscalYear-1、4月〜翌3月）の期間内の値であり、fiscalYearのラベルと実際の基準日が最大3か月ずれる。ただし「1月1日時点人口を当該暦年と同じ番号の年度に対応付ける」運用は総務省・自治体資料でもしばしば採用される慣行であり、それ自体が誤りとは断定できない。歳出・歳入等の4月始まり指標とperCapita計算等で組み合わせる際に、対応する会計年度の定義（暦年1月1日基準か、年度末3月31日基準か）を明示しておくことを推奨する。",
+      "severity": "P2"
+    },
+    {
+      "fiscalYear": 2026,
+      "field": "population.referenceDate",
+      "detail": "FY2026のみreferenceDateが2026-08-01（他の全年度はn年1月1日）。同一フィールド内で基準日の月が年度により異なり、人口推移グラフのYoY比較精度に約7か月分のずれが生じる。sourceNotesには「令和8年8月1日時点の最新値を採用」と明記されており値自体は正しいが、系列全体としての基準日の統一性に欠ける。",
+      "severity": "P3"
+    }
+  ],
+  "fieldLevelGaps": [
+    {
+      "fiscalYear": "2018-2024（7年度、FY2025は該当なし）",
+      "missingField": "budget.localTaxRevenueYen / budget.localAllocationTaxYen / budget.nationalSubsidiesYen",
+      "note": "FY2009-2017の9年度、およびFY2026では同3フィールドが登録済みだが、FY2018-2024の7年度は3フィールドとも一貫してnull。FY2018-2020は「広報のべおか」の円グラフ（歳入歳出総額のみ掲載、内訳科目は掲載なし）を出典としているため未確認と説明できるが、FY2020以降はfund.balance等で既に「財政状況資料集」総括表（総務省統一様式）をxlsxパース済みであり、同資料には歳入内訳科目が含まれる可能性が高い。既に到達済みの同一資料からの追加抽出で埋まる可能性が高い欠損。"
+    },
+    {
+      "fiscalYear": 2025,
+      "missingField": "budget（オブジェクト自体が不存在）",
+      "note": "他の69年度は全てbudgetオブジェクトを持つ（値がnullの場合を含む）が、FY2025のみbudgetキー自体が存在しない。debt・fund・populationは登録済み。notesには「決算未確定」「財政状況資料集の令和7年度版は未公表」等の理由説明があり、意図的な未登録と推測されるが、スキーマ上は他年度と形が異なる（nullで埋めるか、キー自体を省略するかの一貫性がない）。"
+    },
+    {
+      "fiscalYear": "1990-2000（11年度）",
+      "missingField": "population（フィールド自体が不存在）",
+      "note": "population系列はFY2001から開始しており、FY1990-2000（archiveFiscalYears.json上は歳入歳出が確認済みの連続年度）はpopulationフィールドが存在しない。UNR-027（FY1960-1988のdebt/fund/財政指標/人口のオンライン経路が尽きたことの確認）とは対象年度が重ならず、本監査で新たに識別した範囲。既存nobeokaCensusPopulation.jsonに同年代の値がある可能性があるため、そちらとの突合を推奨（今回はarchiveFiscalYears.json単体の監査のためnobeokaCensusPopulation.jsonの中身までは検証していない）。"
+    },
+    {
+      "fiscalYear": "1990-2000（11年度）＋1988",
+      "missingField": "finance（financialStrengthIndex等5指標が全てフィールド自体不存在）",
+      "note": "financeオブジェクトはFY2001から開始。FY1988-2000は歳入歳出が確認済みの連続年度であるにもかかわらず財政指標が一切登録されていない。健全化判断比率（実質公債費比率・将来負担比率）は制度上FY2007開始のため2001-2006年度分がnullなのは制度的欠落として妥当だが、財政力指数・経常収支比率は制度上はより古くから存在する指標であり、FY1988-2000分の追加確認余地がある。"
+    },
+    {
+      "fiscalYear": "2018,2019",
+      "missingField": "finance.debtServiceRatioPercent",
+      "note": "FY2012-2017・FY2020-2024は登録済みだがFY2018-2019のみnull。既存sourceRefs.notesには明示的な『該当なし』等の理由記載がなく（futureBurdenRatioPercentのFY2018-2020分とは異なり、この2年度は単純に未確認と見られる）、追加確認の余地がある軽微なギャップ。"
+    }
+  ],
+  "abnormalYoYChanges": [
+    {
+      "fiscalYear": 2024,
+      "field": "finance.futureBurdenRatioPercent",
+      "prevValue": 2.1,
+      "currentValue": 15.9,
+      "ratio": 7.57,
+      "note": "FY2015(36.8%)→2016(18.2%)→2017(9.3%)→[2018-2020はnull・「該当なし」注記あり]→2021(4.0%)→2022(2.7%)→2023(2.1%)という一貫した右肩下がりの後、FY2024だけ15.9%へ急反転している。出典（財政状況資料集）は他年度と同一形式で取得されており抽出ミスの明確な痕跡はないが、トレンドの急反転自体は要確認（新規大型債務・企業会計繰入等の実際の財政事象による可能性もあり、自動修正はしていない）。"
+    },
+    {
+      "fiscalYear": "2001-2004（4年度連続で完全同一値）",
+      "field": "fund.balance.fiscalReserveFundYen",
+      "prevValue": null,
+      "currentValue": 1434111000,
+      "ratio": 1.0,
+      "note": "FY2001・2002・2003・2004の4年度で財政調整基金残高が1,434,111,000円と完全に一致。出典は総務省市町村決算カードの平成13〜16年度版（4つの異なるPDF、URLも別）であるにもかかわらず値が不変。同じ資料・同じ抽出手法で取得された隣接フィールド（bondRedemptionFundYen・otherSpecificPurposeFundsYen）は年度ごとに正しく変動しており、fiscalReserveFundYenだけが不自然に固定されている。詳細はproposedFixes参照。"
+    },
+    {
+      "fiscalYear": "2006-2008（3年度連続で完全同一値）",
+      "field": "fund.balance.fiscalReserveFundYen",
+      "prevValue": 2396939000,
+      "currentValue": 2562208000,
+      "ratio": 1.0,
+      "note": "FY2006・2007・2008の3年度で2,562,208,000円が完全一致。FY2001-2004と同一パターン（出典は平成18〜20年度の異なる決算カードPDF3点、他フィールドは年度ごとに変動）。"
+    },
+    {
+      "fiscalYear": "2020-2024（5年度連続で完全同一値）",
+      "field": "fund.balance.fiscalReserveFundYen",
+      "prevValue": 5122000000,
+      "currentValue": 5032997000,
+      "ratio": 1.0,
+      "note": "FY2020・2021・2022・2023・2024の5年度で5,032,997,000円が完全一致。出典は「財政状況資料集」総括表（令和3年度版〜令和6年度版）のxlsxパースで、隣接フィールドのbondRedemptionFundYen（2,384,088,000→2,844,428,000→2,752,946,000→2,606,827,000→2,404,530,000）・otherSpecificPurposeFundsYen（各年度で変動）は正しく年度ごとに異なる値を示しており、fiscalReserveFundYenのみが5年連続で不変という、統計的に強く不自然なパターン。3つのクラスター（2001-04・2006-08・2020-24）を合計すると、fiscalReserveFundYenの登録済み22年度中12年度（55%）がこの『複数年度完全同一値』パターンに該当する。"
+    }
+  ],
+  "outOfRangeIndicators": [],
+  "outOfRangeIndicatorsNote": "financialStrengthIndex（0〜2想定）、currentAccountRatioPercent（0〜150%想定）、debtServiceRatioPercent／realDebtServiceRatioPercent（0〜50%想定）、futureBurdenRatioPercent（0〜400%想定）の4系列・全登録値を機械チェックしたが、レンジ外の値は0件だった。",
+  "sourceYearMismatchSuspects": [
+    {
+      "fiscalYear": "2021,2022,2023",
+      "field": "fund.balance（fiscalAdjustmentFundYen等の一部sourceRefs）",
+      "sourceNote": "sourceRefsの1件目に『延岡市「令和8年度当初予算編成方針」（本市の財政状況について）』（sourcePublishedDate 2026-03-31）が、FY2021・2022・2023の3レコードいずれにも共通で引用されている。notesには『既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和X年度末）から移行』と年度別の注記があり、単一の令和8年度資料に掲載された複数年度分のトレンド表から個別年度の数値を引用したこと自体は資料の性質上妥当と考えられる。ただし出典タイトルの年度（令和8年度）と対象年度（令和3〜5年度）が3年以上乖離しているため、実際に該当年度の数値が正しく転記されているか（トレンド表内の列を年度ごとに正しく参照できているか）の再確認を推奨する。"
+    }
+  ],
+  "proposedFixes": [
+    {
+      "fiscalYear": "2001,2002,2003,2004",
+      "field": "fund.balance.fiscalReserveFundYen",
+      "issue": "4年度連続で完全同一値（1,434,111,000円）。出典PDFは年度ごとに異なるにもかかわらず値が不変であり、pdfjs-distによる座標ベース抽出時に誤って同一セル位置（前年度比較列や別年度のキャッシュ結果等）を参照した可能性が疑われる。",
+      "proposedAction": "総務省「市町村決算カード」平成13〜16年度版（宮崎県、URLはsourceRefsに既存登録済み）を再度個別に開き、各年度の財政調整基金（「財調」）欄の数値を再抽出して照合する。数値が実際に同一であることが確認できた場合はverificationStatusを'verified'へ格上げしてnotesにその旨を明記し、異なっていた場合は正しい値へ修正する。",
+      "risk": "現状のまま放置すると、財政調整基金の推移グラフ・ダッシュボードで2001-2004年度が横ばい（実際には変動していた可能性がある）と誤表示され続けるリスクがある。修正には原資料の再確認が必須で、推測による書き換えは行わない。"
+    },
+    {
+      "fiscalYear": "2006,2007,2008",
+      "field": "fund.balance.fiscalReserveFundYen",
+      "issue": "3年度連続で完全同一値（2,562,208,000円）。2001-2004クラスターと同一パターン・同一原因が疑われる。",
+      "proposedAction": "総務省「市町村決算カード」平成18〜20年度版を再度個別に開き、財政調整基金欄を再抽出・照合する。",
+      "risk": "上記2001-2004と同様。"
+    },
+    {
+      "fiscalYear": "2020,2021,2022,2023,2024",
+      "field": "fund.balance.fiscalReserveFundYen",
+      "issue": "5年度連続で完全同一値（5,032,997,000円）。同じ資料から抽出した隣接フィールド（bondRedemptionFundYen等）は正しく年度ごとに変動しているため、fiscalReserveFundYenのセル参照だけが固定されている可能性が高い。",
+      "proposedAction": "延岡市「財政状況資料集」（令和3年度版〜令和6年度版）の総括表を、財政調整基金の行について年度版ごとに個別に再確認する（既存の実装ノートにある『xlsxパッケージでの隣接年度版間の突合』を財政調整基金の行についても実施する）。",
+      "risk": "3クラスター中で最も新しく、かつ最も長い連続期間（5年度）。財政ダッシュボードの直近トレンド表示に直接影響するため、優先度は3クラスター中で最も高い。"
+    },
+    {
+      "fiscalYear": "2018-2024",
+      "field": "budget.localTaxRevenueYen / localAllocationTaxYen / nationalSubsidiesYen",
+      "issue": "FY2009-2017・FY2026では登録済みの歳入内訳3科目が、FY2018-2024の7年度で一貫して未登録。",
+      "proposedAction": "同じ年度範囲で既にfund.balance等の抽出に使われている「財政状況資料集」総括表（総務省統一様式）に、歳入内訳（市町村税・地方交付税・国庫支出金相当科目）が含まれていないか確認し、含まれていれば同一手法で追加登録する。",
+      "risk": "低リスク（既存の同一資料への追加読み取りであり、新規経路探索は不要）。"
+    },
+    {
+      "fiscalYear": 2025,
+      "field": "budget（オブジェクト自体）",
+      "issue": "他69年度はbudgetオブジェクトが必ず存在する（値がnullの場合を含む）が、FY2025のみキー自体が欠落しており、スキーマの形が他年度と異なる。",
+      "proposedAction": "決算未確定という状態を示すため、budgetオブジェクト自体を省略するのではなく、他年度と同様にtotalRevenueYen等をnullで明示した空のbudgetオブジェクトを追加し、notesに『決算未確定のため全項目未登録』と明記する統一フォーマットへ揃えることを検討する（値の推測補完はしない）。",
+      "risk": "低リスク（表示ロジック側でbudgetオブジェクトの不存在を考慮していない場合にランタイムエラーやカード非表示が起きる可能性があるため、フロントエンド側の当該箇所の防御的コーディング状況も併せて確認することを推奨）。"
+    },
+    {
+      "fiscalYear": "FY2025のみ",
+      "field": "debt.balance.generalAccountBondBalanceYen（従来のordinaryAccountLocalBondBalanceYenからの切替）",
+      "issue": "FY1989-2024は普通会計ベース、FY2025のみ一般会計ベースのフィールドを使用しており、単一フィールドを前提とした時系列表示が途切れる可能性がある。",
+      "proposedAction": "既存のordinaryAccountLocalBondBalanceYen（普通会計ベース）に相当する令和7年度の値が別途『財政状況資料集』の公表後に取得可能になった時点で、両方のフィールドを登録し、フロントエンド側でどちらの系列を主系列として使うかを明示する。現時点では推測による変換（一般会計→普通会計の換算）は行わない。",
+      "risk": "低リスク（データの追加登録のみで既存値の変更を伴わない）。"
+    }
+  ],
+  "checksPerformedWithNoFindings": [
+    "全70年度のfiscalYearの重複なしを確認（一意性OK）",
+    "各レコード内のネストされたfiscalYearフィールド（budget/debt/fund/finance/population）と、トップレベルfiscalYearとの不一致は0件",
+    "全数値フィールドを走査し、負の値は0件",
+    "財政指標4系列（財政力指数・経常収支比率・実質公債費比率・将来負担比率）は全て一般的なレンジ内（レンジ外0件）",
+    "年度間ギャップ（yearGap>1）を考慮した上でのYoY比率3倍超／1/3未満の変動は、既知の長期ギャップ（複数十年の未登録期間をまたぐもの）のみで、いずれも資料的に説明可能",
+    "municipalBondIssuanceValueType／Statusの組み合わせ（settlement/budget/revisedBudget × settlementConfirmed/budgetOnly）はsrc/types/historicalArchive.tsの型定義と整合"
+  ],
+  "generalObservations": [
+    "budget.prefecturalSubsidiesYen・specialAccountBudgetYen・enterpriseAccountBudgetYen・generalAccountSettlementYenの4フィールドは、全70年度を通じて1件も値が登録されていない（スキーマ全体の恒常的な空白であり、特定年度の異常ではない）。",
+    "debt.balance.perCapitaYen・fund.balance.perCapitaYenも全70年度で1件も登録されていない。",
+    "トップレベルのverifiedAtフィールドはFY2009-2017の9年度のみに存在し、他61年度には存在しない。データ品質そのものの問題ではなく、メタデータ運用が一部の年度でのみ行われている状態と見られる。"
+  ]
+}
