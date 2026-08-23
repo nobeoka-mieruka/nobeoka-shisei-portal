@@ -542,13 +542,23 @@ for (const org of politicalFundOrganizations) {
 }
 
 // --- election results（選挙結果。Phase55で新規登録） ---
+// dataCompleteness.candidateListConfirmed が false の選挙は、候補者一覧・得票数が
+// 未確認（＝当選者のみ登録された状態）であり、candidates.length（通常1）を候補者数として
+// 出すと「候補者1名（単独当選）」という誤った確定情報になる（Phase65で発見）。
+// src/lib/elections.ts の electionCandidateListConfirmed() と同じ判定をここに複製する
+// （このスクリプトはビルド時のプレーンJSでTypeScriptを直接importできないため）。
+function electionCandidateListConfirmedForIndex(e) {
+  return e.dataCompleteness == null || e.dataCompleteness.candidateListConfirmed !== false;
+}
 const electionResults = readJson("src/data/electionResults.json");
 for (const e of electionResults) {
+  const candidateListConfirmed = electionCandidateListConfirmedForIndex(e);
+  const candidateCountLabel = candidateListConfirmed ? `候補者${e.candidateCount ?? e.candidates.length}名` : "候補者未確認";
   entries.push({
     id: `election-${e.id}`,
     type: "election",
     title: `${e.electionName}（${e.electionDate}）`,
-    description: `${e.electionName}（${e.electionDate}投票、定数${e.seats ?? "確認中"}、候補者${e.candidateCount ?? e.candidates.length}名）の結果です。`,
+    description: `${e.electionName}（${e.electionDate}投票、定数${e.seats ?? "確認中"}、${candidateCountLabel}）の結果です。`,
     url: `/elections/${e.id}`,
     keywords: [e.electionName, e.electionDate, ...e.candidates.map((c) => c.name)].filter(Boolean),
     sourceId: e.id,

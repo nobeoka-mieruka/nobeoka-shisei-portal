@@ -1,0 +1,528 @@
+{
+  "generatedAt": "2026-08-23",
+  "phase": "Phase70",
+  "scope": "2014-2016年度（平成26-28年度）一般質問の実投入パイロット",
+  "note": "Phase57-58統合ワーカーと同一schemaを踏襲。src/data・scripts配下は読み取り専用のため一切変更していない。councilSessions.jsonの追加案・councilSpeechSummaries.jsonへのマージ用speechはすべて『提案データ』であり、まだマージされていない。git commit / git push は行っていない。ブラウザツールは使用していない。",
+  "status": "candidate_ready_pending_councilSessions_dependency",
+  "blockingDependency": {
+    "issue": "Phase57-58で確認された構造的欠落が依然として未解消：src/data/councilSessions.jsonの全idは2019-06以降のみで、2014-2016年度（平成26-28年度）の会期は1件も存在しない（本ワーカーが機械確認：node -eでid一覧を列挙し、'2014'/'2015'/'2016'始まりのidが0件であることを再確認済み）。scripts/validate-data.mjsのcouncilSpeechSummaries.json検証は、speech.sessionIdがcouncilSessions.jsonのidに存在するかをisPublishedの真偽に関係なく無条件でerr()判定するため、本ファイルのsessionId（2014-09 / 2015-09 / 2016-09）はいずれも現状ではvalidate-data.mjsでエラーになる。",
+    "requiredFollowUp": "本ファイルのproposedCouncilSessions（3件）をsrc/data/councilSessions.jsonへ追加するマージ作業が、councilSpeechSummaries.json側のspeechをisPublished:trueへ切り替える前提として必須。",
+    "verifiedBy": "node -e で src/data/councilSessions.json の全idを列挙し、'2014'/'2015'/'2016'始まりのidが0件であることを確認（2026-08-23時点、42件すべて2019-06以降）。"
+  },
+  "proposedCouncilSessions": [
+    {
+      "id": "2014-09",
+      "year": 2014,
+      "fiscalYear": 2014,
+      "eraYear": "平成26年",
+      "title": "平成26年9月定例会",
+      "sessionType": "定例会",
+      "sessionNumber": "第22回",
+      "folderPath": "/council-documents/2014/2014-09",
+      "description": "延岡市議会 第22回定例会（平成26年9月）。会議録検索システム（https://www.kensakusystem.jp/nobeoka/）のSee.exe木構造ナビゲーションで実在確認済み（treedepth=\"平成26年 第22回定例会 \"）。本会議日程は第1号(9/2)〜第5号(9/22)の5日程（listMeetingDaysで実データ確認）。",
+      "documents": [],
+      "status": "要確認",
+      "lastVerified": "2026-08-23",
+      "note": "議案等審議結果PDF等の一次資料リンクは本ワーカー（読み取り専用）では収集していない。マージ時に別途、延岡市議会公式サイトの資料ページを確認しdocumentsを充実させることを推奨する（Phase57-58と同じ制約）。"
+    },
+    {
+      "id": "2015-09",
+      "year": 2015,
+      "fiscalYear": 2015,
+      "eraYear": "平成27年",
+      "title": "平成27年9月定例会",
+      "sessionType": "定例会",
+      "sessionNumber": "第3回",
+      "folderPath": "/council-documents/2015/2015-09",
+      "description": "延岡市議会 第3回定例会（平成27年9月）。平成27年4月の統一地方選挙後、会期番号が第1回から再スタートしている（See.exe実データで確認：平成27年は「第24回定例会」(3月)→「第1回臨時会」→「第2回定例会」→「第3回定例会」→「第4回定例会」の順）。本会議日程は第1号(9/1)〜第5号(9/18)の5日程。",
+      "documents": [],
+      "status": "要確認",
+      "lastVerified": "2026-08-23",
+      "note": "sessionNumberの『第3回』は、See.exeの生ラベル『平成27年 第 3回定例会 』（第と数字の間に全角スペース）を本ワーカーが手動で正規化した値。scripts/lib/minutes-source.mjsのparseSessionLabel()はこの全角スペースを想定した正規表現になっていないため、機械的にはsessionNumber/sessionTypeがundefinedになるバグを確認した（4節parserIssues参照、修正はしていない）。"
+    },
+    {
+      "id": "2016-09",
+      "year": 2016,
+      "fiscalYear": 2016,
+      "eraYear": "平成28年",
+      "title": "平成28年9月定例会",
+      "sessionType": "定例会",
+      "sessionNumber": "第8回",
+      "folderPath": "/council-documents/2016/2016-09",
+      "description": "延岡市議会 第8回定例会（平成28年9月）。本会議日程は第1号(8/30)〜第5号(9/16)の5日程。第2号（9/6）は一問一答形式の一般質問が行われている（同時期・同時期近くの他の会期は壇上一括方式が主流だが、この会期の冒頭質問者は一問一答方式だった。会期全体が一問一答か壇上一括かは未確認、本ワーカーは冒頭質問者のみ確認）。",
+      "documents": [],
+      "status": "要確認",
+      "lastVerified": "2026-08-23",
+      "note": "sessionNumberの『第8回』もSee.exe生ラベル『平成28年 第 8回定例会 』からの手動正規化（2015-09と同じparserバグ）。"
+    }
+  ],
+  "resolvedCandidates": [
+    {
+      "candidateId": "m03-2014-09-09-ippan-shitsumon",
+      "category": "A_ready_for_merge",
+      "originSource": "本ワーカーが新規に実施したパイロット（2014年9月定例会、平成26年第22回定例会）",
+      "memberIdResolution": {
+        "memberId": "m03",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『上杉泰洋君』が現職議員 src/data/members.json m03『上杉 泰洋』と氏名完全一致。同姓同名候補なし。m03は現職継続議員（termCount=4）で、councilSpeechSummaries.jsonに2019-06以降の一般質問が既に20件登録済み（term:previousが12件含まれ、うち最古は2019-06-25）。本人が壇上で『市議会議員となり三年、十一回目の登壇になります』と述べており、初当選が平成23年（2011年）頃であることと矛盾しない（継続して現職であるという既存プロフィールと整合）。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingMemberId": "m03",
+      "speech": {
+        "id": "m03-2014-09-09-ippan-shitsumon",
+        "memberId": "m03",
+        "sessionId": "2014-09",
+        "date": "2014-09-09",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "term": "previous",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["市長の政治姿勢", "教育・大学連携", "文化施設", "防災・減災", "道路", "行政運営"],
+        "shortSummary": "平成26年9月定例会（第22回定例会、第2号）で上杉泰洋議員（無所属クラブ）が行った一般質問（壇上、全11項目通告）のうち、市民要望への対応、九州保健福祉大学の資産の現況・10年後の運営見通し（市長答弁）、新庁舎を活用した観光モニュメント設置、城山・内藤記念館の一体的整備（企画部長答弁）、土砂災害危険箇所の現状と対策、市道陥没の整備状況、側溝清掃による冠水防止対策（都市建設部長答弁）の8項目を答弁とあわせて要約したもの。壇上通告には他に副市長二人制の成果（企業誘致の成果）、南海トラフ基準外地域の津波対策、子ども・子育て支援新制度の基準・広報、難病法制定対策、西郷隆盛関連史跡の観光整備の5項目を含むが、対応する答弁セグメント（副市長・総務部長・健康福祉部長・商工観光部長）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "まちづくり懇談会・区長要望等への対応",
+            "questionSummary": "各地のまちづくり懇談会や年度当初の区長要望書で寄せられる、道路整備や冠水対策などの要望への対応状況を質問した。",
+            "answerSummary": "毎年度当初に地区区長会を通じ全区長から文書で要望を受け付けているほか、まちづくり懇談会や担当課での直接受付もあり、市道・河川整備や防災、交通安全対策の要望が多いこと、担当職員が現地確認等で実態把握し緊急性・危険性を勘案し計画的に整備を進め、対応状況は担当課室から各区へ文書回答していると説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "まちづくり懇談会・区長要望への対応状況を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "区長要望の受付方法、実態把握・優先順位づけ、対応状況の文書回答について説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "現状確認",
+            "answerStatus": "継続対応"
+          },
+          {
+            "id": "q2",
+            "title": "九州保健福祉大学の資産の現況",
+            "questionSummary": "延岡市が将来への投資として支援する九州保健福祉大学（学校法人順正学園）の資産の現況を質問した。",
+            "answerSummary": "大学ホームページ掲載の平成26年3月31日現在の財務目録によると資産総額約454億円・負債総額約46億円・正味財産約408億円であり、順正学園の経営は健全な状況で本市の投資パートナーとしてふさわしい安定的な経営と認識していると説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "九州保健福祉大学（順正学園）の資産の現況を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "資産総額約454億円・正味財産約408億円と説明し、健全経営と認識を示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "予算・数値の確認",
+            "answerStatus": "実施済み"
+          },
+          {
+            "id": "q3",
+            "title": "九州保健福祉大学の人口減少に伴う10年後の運営見通し",
+            "questionSummary": "全国的な人口減少・少子化を踏まえた、九州保健福祉大学の10年後の運営状況の見通しを一般論として質問した。",
+            "answerSummary": "人口減少・少子化は大学運営に影響を与える要因であり、10年後の経営状況の予測は困難だが、学校法人順正学園は将来にわたる健全経営を念頭に九州で初となる新学部（生命医科学部・がん細胞研究所）設置を決断したものと考えており、経済効果や若者流出の歯止め、研究拠点化などの効果が期待できることから支援を行うと説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "人口減少を踏まえた大学の10年後の運営見通しを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "予測は困難だが、新学部設置など健全経営に向けた大学側の取り組みを紹介し、支援の考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "今後の方針の確認",
+            "answerStatus": "検討中"
+          },
+          {
+            "id": "q4",
+            "title": "新庁舎を活用した観光モニュメント等の設置",
+            "questionSummary": "新庁舎の空間を活用した観光模型・モニュメント等の設置について質問した。",
+            "answerSummary": "新庁舎南広場に面する南市民スペースを行政・観光・物産・文化・歴史等の情報提供の場としたい考えで、季節ごとの展示入れ替え等、効果的な情報発信の仕組みづくりを関係各課と協議していくと説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "新庁舎を活用した観光モニュメント等の設置を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "南市民スペースでの情報発信の仕組みづくりを関係各課と協議していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "事業導入の提案",
+            "answerStatus": "検討中"
+          },
+          {
+            "id": "q5",
+            "title": "城山・内藤記念館再整備の一体的な考え方",
+            "questionSummary": "城山公園と内藤記念館の再整備が別々に進められているように見えることから、統一した考えのもとで開発すべきではないかと質問した。",
+            "answerSummary": "内藤記念館・城山公園の再整備は延岡新時代の魅力あるまちづくりの取り組みとして今年度から着手しており、事業の性質上、所管課・事業費は区分しているが『城山周辺整備の一環としての内藤記念館再整備』という基本的考えに基づき庁内会議等で随時連携しており、今後も文化施設・歴史公園の枠にとどまらない観光振興拠点として整備に努めると説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "城山・内藤記念館の統一的な整備方針を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "所管・事業費は区分しつつ庁内連携を図っていると説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "課題の指摘",
+            "answerStatus": "継続対応"
+          },
+          {
+            "id": "q6",
+            "title": "市内の土砂災害危険箇所の現状と対策",
+            "questionSummary": "広島の土砂災害を踏まえ、市内の土砂災害危険箇所の現況と対策を質問した。",
+            "answerSummary": "急傾斜箇所1,262・土石流渓流664・地すべり箇所19の計1,900カ所超（県内26市町村で最多）の危険箇所があり、県と連携し年次的に防止対策工事を実施しているが整備率は3割弱にとどまるため、警戒区域・特別警戒区域の指定促進による周知とソフト面（避難体制）の充実を図ると説明した。",
+            "answerers": ["都市建設部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "市内の土砂災害危険箇所の現状と対策を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "都市建設部長", "summary": "危険箇所数（1,900カ所超、県内最多）と整備率（3割弱）、警戒区域指定促進等の方針を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "現状認識の確認",
+            "answerStatus": "課題あり"
+          },
+          {
+            "id": "q7",
+            "title": "市道の陥没等の整備状況",
+            "questionSummary": "市道の陥没等インフラ整備の現況と対応について質問した。",
+            "answerSummary": "隣接3町との合併で市道延長約1,500km・市域は九州で2番目に広く、陥没・落石・倒木等が多いため、道路パトロールや広報・ホームページでの通報呼びかけ、職員の通勤・出張時の察知等により把握し、職員・請負業者による補修で安全確保に努めていると説明した。",
+            "answerers": ["都市建設部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "市道陥没等の整備状況を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "都市建設部長", "summary": "パトロール・通報体制と補修対応の現況を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "現状確認",
+            "answerStatus": "継続対応"
+          },
+          {
+            "id": "q8",
+            "title": "側溝清掃・整備による冠水防止対策",
+            "questionSummary": "道路側溝の清掃・整備状況と、市民協働による冠水防止対策の実施状況を質問した。",
+            "answerSummary": "側溝の排水能力低下が冠水の一因であることを認識し、年次的な側溝改良と日常点検・清掃に努めているほか、『延岡市クリーン大作戦』『ふれあいロード事業』等の市民協働清掃活動で大きな成果を上げており、地元協働の側溝清掃は各地区の実情を踏まえ今後の方針を検討すると説明した。",
+            "answerers": ["都市建設部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "側溝清掃・整備による冠水防止対策の実施状況を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "都市建設部長", "summary": "年次的な側溝改良と市民協働清掃活動の成果を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "検証の要望",
+            "answerStatus": "継続対応"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成26年第22回定例会（第2号 9月9日） 上杉泰洋君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H260909A/10635/10/1//0/0", "speakerSection": "pos=10635" },
+          { "title": "平成26年第22回定例会（第2号 9月9日） 市長（首藤正治君）（答弁：区長要望対応・大学資産・大学10年後運営）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H260909A/18783/10/1//0/0", "speakerSection": "pos=18783" },
+          { "title": "平成26年第22回定例会（第2号 9月9日） 企画部長（中村慎二君）（答弁：新庁舎観光モニュメント・城山内藤記念館整備）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H260909A/22381/10/1//0/0", "speakerSection": "pos=22381" },
+          { "title": "平成26年第22回定例会（第2号 9月9日） 都市建設部長（山本昌男君）（答弁：土砂災害危険箇所・市道陥没・側溝冠水対策）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H260909A/27665/10/1//0/0", "speakerSection": "pos=27665" },
+          { "title": "平成26年第22回定例会（第2号 9月9日）発言者一覧（r_Speakers.exe、124発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H260909A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=10635、壇上通告は約11項目）・答弁原文（市長=pos18783、企画部長=pos22381、都市建設部長=pos27665）をscripts/lib/minutes-source.mjsの実関数（fetchSegmentText等）経由で取得・精読し、内容・発言者・質問と答弁の対応関係を確認した。未取得：副市長答弁（pos=21387、副市長二人制・企業誘致成果）、総務部長答弁（pos=23969、子ども子育て支援・難病法対策）、健康福祉部長答弁（pos=24891）、商工観光部長答弁（pos=26697、観光資源整備）。再質問ラウンド（order14以降）も未取得。matchSpeakerToMember相当の照合は本ワーカーが機械照合（氏名完全一致、同姓同名なし）。"
+      },
+      "mergeInstructions": "src/data/councilSessions.jsonへproposedCouncilSessions[0]（id:2014-09）を追加した後、councilSpeechSummaries.jsonの既存m03レコード（memberId:'m03'）のspeeches配列へこのspeechオブジェクトを追加する（新規メンバーオブジェクトの作成は不要）。"
+    },
+    {
+      "candidateId": "m17-2015-09-08-ippan-shitsumon",
+      "category": "A_ready_for_merge",
+      "originSource": "本ワーカーが新規に実施したパイロット（2015年9月定例会、平成27年第3回定例会）",
+      "memberIdResolution": {
+        "memberId": "m17",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『長友幸子君』が現職議員 src/data/members.json m17『長友 幸子』と氏名完全一致。同姓同名候補なし。m17は現職継続議員（termCount=4）で、councilSpeechSummaries.jsonに2019-06以降の一般質問が既に23件登録済み（term:previousが13件含まれ、うち最古は2019-06-27）。本人が『社民党市議団』所属として発言しており、既存プロフィール（会派id: riltuken＝立憲民主党系）との整合は会派変遷を伴うため断定しないが、氏名・継続在職の事実自体は矛盾しない。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingMemberId": "m17",
+      "speech": {
+        "id": "m17-2015-09-08-ippan-shitsumon",
+        "memberId": "m17",
+        "sessionId": "2015-09",
+        "date": "2015-09-08",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "term": "previous",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["市長の政治姿勢", "国政・政治", "ふるさと納税", "公共交通", "教育"],
+        "shortSummary": "平成27年9月定例会（第3回定例会、第2号）で長友幸子議員（社民党市議団）が行った一般質問（壇上、全6項目通告）のうち、安全保障関連法案への反対運動と市長自身の考え方、ふるさと納税制度への所見（市長答弁）、ふるさと納税の実績推移・今後の取組・南部地域への乗り合いタクシー導入（企画部長答弁）、支援を要する児童生徒数・学校支援員の配置状況と今後の方針（教育長答弁）の8項目を答弁とあわせて要約したもの。壇上通告には他に小型家電リサイクルの回収状況、子供の貧困問題の実態把握・担当部署設置の2項目を含むが、対応する答弁セグメント（市民環境部長・健康福祉部長）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "安全保障関連法案への反対運動の広がりについての所見",
+            "questionSummary": "戦後70年の節目に、安全保障関連法案に対する全国的な反対運動の広がりについて市長の所見を質問した。",
+            "answerSummary": "法案は我が国の恒久平和の実現という観点から重要な問題であり、国民が十分納得するプロセスを踏むことが欠かせないと考えているとし、一部世論調査で『十分説明しているとは思わない』との回答が7割を超えるなど国民の受け止め方が反対運動として表れているのではないかと述べた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "安全保障関連法案への反対運動の広がりについて市長の所見を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "国民が納得するプロセスの必要性を述べ、反対運動の背景に対する見方を示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "所感の確認",
+            "answerStatus": "見解の相違"
+          },
+          {
+            "id": "q2",
+            "title": "安全保障関連法案に対する市長自身の考え方",
+            "questionSummary": "宮日新聞アンケートで法案賛成の立場と回答した市長に対し、改めて安全保障関連法案への考え方を質問した。",
+            "answerSummary": "国際情勢の変化に対しては憲法の範囲内で時代環境に応じた現実的・良識的対応が望ましいとし、政府の危機感と対応の意図は理解できるためアンケートにそう回答したが、法案採決は国会で十分議論を尽くし慎重に行うべきと考えていると説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "法案に対する市長自身の考え方を改めて質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "現実的・良識的対応が望ましいとの立場を示しつつ、国会での慎重な議論の必要性を述べた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "所信の確認",
+            "answerStatus": "見解の相違"
+          },
+          {
+            "id": "q3",
+            "title": "ふるさと納税制度（受益者負担原則との整合性）についての所見",
+            "questionSummary": "ふるさと納税が居住地の公共サービス費用を負担する受益者負担原則に反するのではないかとの懸念を示し、市長の所見を質問した。",
+            "answerSummary": "住民税は受益者負担が原則で自治体間の過度な競争は地方税制度を揺るがしかねないとしつつ、本市は高速道路開通を契機に観光・食を発信する時期であり、今年4月より特産品贈呈を開始し、今後もふるさと納税の本旨に基づき効果的な活用を図りたいと説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "受益者負担原則との整合性の観点からふるさと納税への所見を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "制度の課題を認識しつつ、本市の地場産品PR手段としての活用方針を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "所信の確認",
+            "answerStatus": "継続対応"
+          },
+          {
+            "id": "q4",
+            "title": "ふるさと納税の実績推移（寄附件数・金額）と特産品の希望品目",
+            "questionSummary": "ふるさと納税の昨年度からの納税額推移と、延岡特産品への希望品目を質問した。",
+            "answerSummary": "昨年度は寄附20件・140万2,695円だったのに対し、今年度は8月末時点で申込391件・795万3,000円と大幅増加しており、特産品27種類のうち『延岡育ちの宮崎牛』134件、『延岡どれの伊勢えび』105件など農畜産物・海産物への希望が多いと説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "ふるさと納税の納税額推移と特産品の希望品目を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "件数・金額の大幅増加と、人気特産品の内訳を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "予算・数値の確認",
+            "answerStatus": "実施中"
+          },
+          {
+            "id": "q5",
+            "title": "ふるさと納税の今後の取組（地場産業活性化）",
+            "questionSummary": "ふるさと納税の取組を今後どのように進め、地場産業の活性化につなげていくのか企画部長に質問した。",
+            "answerSummary": "返礼特産品の内容充実、『ふるさとチョイス』サイトでのPR等に努め特産品の発注をふやし、農林水産物の販路拡大や農林漁業者の所得向上につなげたいと説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "ふるさと納税の今後の取組と地場産業活性化への展望を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "特産品充実とPR強化による地場産業活性化の方針を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "今後の方針の確認",
+            "answerStatus": "実施中"
+          },
+          {
+            "id": "q6",
+            "title": "南部地域（土々呂・伊形地区）への乗り合いタクシー等導入",
+            "questionSummary": "延岡市南部地域（土々呂・伊形地区）に路線バス等の公共交通機関がなく、高齢者・体の不自由な方が移動に苦労している現状を踏まえ、乗り合いタクシー等の導入を質問した。",
+            "answerSummary": "公共交通のない交通空白地域では関係機関と連携し乗り合いタクシー等の導入を進めており、南部地域への導入は地域の意見・利用見込みを踏まえ検討するとし、既存の鯛名・赤水地区路線バスもバス停以外での乗降改善等、運行ダイヤ見直しをバス事業者と協議していくと説明した。",
+            "answerers": ["企画部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "南部地域への乗り合いタクシー等の導入を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "企画部長", "summary": "交通空白地域への導入検討状況と既存路線の改善状況を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "事業導入の提案",
+            "answerStatus": "検討中"
+          },
+          {
+            "id": "q7",
+            "title": "支援を要する児童生徒数と学校支援員の配置状況",
+            "questionSummary": "不登校児童生徒数、発達障がい等で特別な支援を要する児童生徒の割合、学校支援員の配置人数を質問した。",
+            "answerSummary": "平成26年度の不登校児童生徒は小学校8名・中学校110名の計118名。中学校3校に指導員各1名、オアシス教室に指導員5名を配置し、県派遣のスクールソーシャルワーカー2名・スクールカウンセラー4名も活用。特別な支援を要する児童生徒の割合は全国6.5％に対し本市は7月時点で4.5％。支援員は小学校20名・中学校5名を配置していると説明した。",
+            "answerers": ["教育長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "不登校児童生徒数・特別支援ニーズの割合・支援員配置人数を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "教育長", "summary": "不登校118名、特別支援ニーズ4.5％、支援員小25名の内訳を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "現状確認",
+            "answerStatus": "実施中"
+          },
+          {
+            "id": "q8",
+            "title": "学校支援員の今後の配置方針",
+            "questionSummary": "いじめ・不登校・障がいのある児童生徒への対応ニーズが増加する中、学校支援員の今後の増員・配置方針を教育長に質問した。",
+            "answerSummary": "インクルーシブ教育の理念のもと特別支援教育を着実に進める必要があり、支援員は児童生徒一人一人の教育的ニーズに応じた支援に不可欠であるとし、現場の声に耳を傾け支援体制のあり方を検討していくと説明した。",
+            "answerers": ["教育長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "学校支援員の今後の配置方針を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "教育長", "summary": "インクルーシブ教育の理念を踏まえた支援体制の検討方針を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "拡充の要望",
+            "answerStatus": "検討中"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成27年第3回定例会（第2号 9月8日） 長友幸子君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H270908A/6928/10/1//0/0", "speakerSection": "pos=6928" },
+          { "title": "平成27年第3回定例会（第2号 9月8日） 市長（首藤正治君）（答弁：安保法制・ふるさと納税所見）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H270908A/15338/10/1//0/0", "speakerSection": "pos=15338" },
+          { "title": "平成27年第3回定例会（第2号 9月8日） 企画部長（中村慎二君）（答弁：ふるさと納税実績・乗合タクシー）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H270908A/17932/10/1//0/0", "speakerSection": "pos=17932" },
+          { "title": "平成27年第3回定例会（第2号 9月8日） 教育長（町田訓久君）（答弁：不登校児童生徒・学校支援員）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H270908A/22440/10/1//0/0", "speakerSection": "pos=22440" },
+          { "title": "平成27年第3回定例会（第2号 9月8日）発言者一覧（r_Speakers.exe、156発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H270908A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=6928、壇上通告は6項目）・答弁原文（市長=pos15338、企画部長=pos17932、教育長=pos22440）をscripts/lib/minutes-source.mjsの実関数経由で取得・精読し、内容・発言者・質問と答弁の対応関係を確認した。未取得：市民環境部長答弁（pos=20082、小型家電リサイクル）、健康福祉部長答弁（pos=21056、子供の貧困問題）。再質問ラウンド（order10以降）も未取得。matchSpeakerToMember相当の照合は本ワーカーが機械照合（氏名完全一致、同姓同名なし）。"
+      },
+      "mergeInstructions": "src/data/councilSessions.jsonへproposedCouncilSessions[1]（id:2015-09）を追加した後、councilSpeechSummaries.jsonの既存m17レコード（memberId:'m17'）のspeeches配列へこのspeechオブジェクトを追加する（新規メンバーオブジェクトの作成は不要）。"
+    },
+    {
+      "candidateId": "m03-2016-09-06-ippan-shitsumon",
+      "category": "A_ready_for_merge",
+      "originSource": "本ワーカーが新規に実施したパイロット（2016年9月定例会、平成28年第8回定例会）",
+      "memberIdResolution": {
+        "memberId": "m03",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『上杉泰洋君』が現職議員m03『上杉 泰洋』と氏名完全一致（m03-2014-09-09-ippan-shitsumonと同一人物・同一根拠）。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingMemberId": "m03",
+      "speech": {
+        "id": "m03-2016-09-06-ippan-shitsumon",
+        "memberId": "m03",
+        "sessionId": "2016-09",
+        "date": "2016-09-06",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "term": "previous",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["観光・地域振興", "道路"],
+        "shortSummary": "平成28年9月定例会（第8回定例会、第2号）で上杉泰洋議員（のべおか市民派クラブ）が行った一般質問（この回は壇上一括ではなく一問一答形式）のうち、市内・南部地域を周遊させる人の流れをつくる具体的施策（東九州バスク化構想等）と、それに続く再質問で提案された遠見半島沿いの海岸線道路整備の2項目を市長答弁とあわせて要約したもの。一問一答形式のため、この2項目より後の再質問ラウンド（order9以降、企画部長・都市建設部長等への質問が続く）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "市内・南部地域を周遊させる人の流れをつくる具体的施策",
+            "questionSummary": "高速道路開通後の延岡市で、市長が施政方針で述べる『市内を周遊してもらう』人の流れをつくる具体的施策を質問した（南部地域の臨海パーク等の観光拠点整備の必要性にも言及）。",
+            "answerSummary": "地方創生の取り組みとして佐伯市と連携した東九州バスク化構想を推進しており、食を核とした人の流れづくりとその波及効果を市内各地域・農林水産業等の産業に及ぼすことを目標としているとし、南部地域でも評価の高い飲食店やイベント（ととろ浜まつり、日豊海岸岩ガキまつり等）を通じて食による地域活性化に期待していると説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "市内・南部地域を周遊させる人の流れをつくる具体的施策を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "東九州バスク化構想を核とした人の流れづくりの取り組みと南部地域への期待を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "今後の方針の確認",
+            "answerStatus": "実施中"
+          },
+          {
+            "id": "q2",
+            "title": "遠見半島沿いの海岸線道路整備によるバスク化構想の後押し",
+            "questionSummary": "壇上答弁への再質問として、観光客は食事・景勝地・交通利便性で行き先を判断するとの経験を踏まえ、門川に抜ける遠見半島沿いの海岸線道路の整備が市内周遊促進とバスク化構想の後押しになるとして、市長の所見を質問した（道路整備の提案を含む）。",
+            "answerSummary": "バスク化構想の推進や市民生活の利便性向上の観点からも道路整備は各地域で重要な市政上のテーマであり、高速道路・国道・地方道それぞれの利便性向上に取り組み、国・県への要望も継続してきたとし、今後も交通ネットワークの利便性確保に力を注ぐ考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m03", "summary": "遠見半島沿いの海岸線道路整備をバスク化構想の後押しとして提案し、市長の所見を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "道路整備の重要性を認め、国・県要望を含む継続的な取り組み方針を示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "事業導入の提案",
+            "answerStatus": "継続対応"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成28年第8回定例会（第2号 9月6日） 上杉泰洋君（質問：壇上）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H280906A/6850/10/1//0/0", "speakerSection": "pos=6850" },
+          { "title": "平成28年第8回定例会（第2号 9月6日） 市長（首藤正治君）（答弁：市内周遊施策）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H280906A/8178/10/1//0/0", "speakerSection": "pos=8178" },
+          { "title": "平成28年第8回定例会（第2号 9月6日） 上杉泰洋君（再質問：遠見半島沿岸道路整備）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H280906A/10182/10/1//0/0", "speakerSection": "pos=10182" },
+          { "title": "平成28年第8回定例会（第2号 9月6日） 市長（首藤正治君）（答弁：遠見半島沿岸道路整備）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H280906A/11002/10/1//0/0", "speakerSection": "pos=11002" },
+          { "title": "平成28年第8回定例会（第2号 9月6日）発言者一覧（r_Speakers.exe、292発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H280906A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "listSpeakerSegmentsで発言順を確認したところ、この会期・この登壇は市長ー議員が短い応答を繰り返す『一問一答』形式であり（他の2会期＝壇上一括で全項目を通告してから複数部長がまとめて答弁する形式とは構造が異なる）、order4(Q1)→order5(A1・市長)→order7(Q2・再質問)→order8(A2・市長)という発言順・pos対応をfetchSegmentTextで直接取得して確認した。292発言セグメント中、order9以降（pos=11560〜、企画部長・都市建設部長等への追加質問が続く）は今回未取得のため、この登壇全体の質問項目総数は不明（少なくとも2項目以上）。壇上部分は『壇上からの質問を終わります』という結語を含む短い1問のみで、以降は一問一答で続いていく構造だったことも確認した。"
+      },
+      "mergeInstructions": "src/data/councilSessions.jsonへproposedCouncilSessions[2]（id:2016-09）を追加した後、councilSpeechSummaries.jsonの既存m03レコード（memberId:'m03'）のspeeches配列へこのspeechオブジェクトを追加する（新規メンバーオブジェクトの作成は不要）。同一議員m03の2014-09-09分と合わせて2件追加になる。"
+    }
+  ],
+  "networkAccessLog": {
+    "totalRealRequests": 20,
+    "breakdown": [
+      { "step": "resolveYearTreedepth/listSessionsForYear 2014,2015,2016,2017年 一括確認", "requests": 2, "note": "2014年・2017年はPhase56/57-58等の既存キャッシュにヒットし新規0回。2015年・2016年はグループタブ探索でそれぞれ1回ずつ新規。" },
+      { "step": "listMeetingDays 平成26年第22回定例会 / 平成27年第3回定例会 / 平成28年第8回定例会", "requests": 3 },
+      { "step": "listSpeakerSegments H260909A / H270908A / H280906A", "requests": 3 },
+      { "step": "fetchSegmentText 質問全文（上杉2014-09-09 / 長友2015-09-08 / 上杉2016-09-06）", "requests": 3 },
+      { "step": "fetchSegmentText 答弁6件（2014-09-09: 市長・企画部長・都市建設部長／2015-09-08: 市長・企画部長・教育長）", "requests": 6 },
+      { "step": "fetchSegmentText 2016-09-06一問一答（A1市長・Q2再質問・A2市長）", "requests": 3 }
+    ],
+    "budgetLimit": 25,
+    "consumed": 20,
+    "note": "getFetchStats()の各ブロック実行前後のcompleted差分で実測。429/403/5xxは0件。同一ページの再取得は行っていない（同一URLは自動的にローカルキャッシュから返るため、二重取得しても新規アクセスにはカウントされない）。"
+  },
+  "duplicateCheck": {
+    "method": "src/data/councilSpeechSummaries.jsonの既存398件のspeech.id、および(memberId, date, speechType)の組み合わせを機械的に列挙し、本ファイルの3件（m03/2014-09-09、m17/2015-09-08、m03/2016-09-06）と突き合わせた。",
+    "result": "重複0件。m03の既存20件・m17の既存23件のいずれにも該当日付は含まれていない。"
+  },
+  "parserIssues": [
+    {
+      "id": "parser-issue-1",
+      "function": "parseSessionLabel (scripts/lib/minutes-source.mjs)",
+      "description": "See.exeが返す会期ラベルは、会期番号が1〜9の一桁の場合に桁揃えのため『第』と数字の間に全角スペースが入る（例：『平成27年 第 1回臨時会 』『平成28年 第 8回定例会 』）。一方、二桁の場合はスペースが入らない（例：『平成26年 第22回定例会 』）。parseSessionLabel()の正規表現は/第(\\d+)回(定例会|臨時会)/で、『第』の直後に数字が続くことを前提にしているため、一桁番号のスペース入りラベルにマッチせず、sessionNumber・sessionTypeが両方undefinedになる。",
+      "reproduced": "listSessionsForYear({year:2015})・listSessionsForYear({year:2016})で実データ確認済み（平成27年の第1〜4回、平成28年の第5〜9回のうち、二桁の第24回定例会以外すべてsessionNumber=undefined, sessionType=undefinedになった）。",
+      "impact": "この2会期分（2015-09、2016-09）のsessionNumberは本ワーカーがラベル文字列から手動で正規化した値（『第3回』『第8回』）を使用した。自動処理でこれらの年度のcouncilSessions.jsonを一括生成する場合は、この不具合を先に修正する必要がある。",
+      "fixed": false,
+      "note": "本ワーカーはscripts/lib/minutes-source.mjsを読み取り専用として扱っており、修正は行っていない（報告のみ）。"
+    }
+  ],
+  "summary": {
+    "登壇件数": 3,
+    "登壇件数の内訳": [
+      "m03（上杉泰洋）2014-09-09",
+      "m17（長友幸子）2015-09-08",
+      "m03（上杉泰洋）2016-09-06"
+    ],
+    "質問項目件数": 18,
+    "質問項目件数の内訳": {
+      "m03-2014-09-09": 8,
+      "m17-2015-09-08": 8,
+      "m03-2016-09-06": 2
+    },
+    "note_登壇と質問項目の区別": "1つの登壇（1回の一般質問の機会）の中に複数の質問項目が含まれる場合があるため、両者は別集計とした。2014-09-09と2015-09-08は壇上一括方式（1回の登壇で全項目を通告し、複数部長がまとめて答弁）で、それぞれ8項目を構造化。2016-09-06は一問一答方式（1問ごとに議員と市長が交互に発言）で、確認できた2往復のみを構造化した（会期全体の総質問項目数はこの2016-09-06登壇に限れば未確定・少なくとも2項目以上）。",
+    "新規追加候補件数（分類別）": {
+      "A_ready_for_merge": 3,
+      "B_member_mapping_pending": 0,
+      "C_source_verification_pending": 0,
+      "D_parser_error": 0,
+      "E_duplicate": 0,
+      "F_unavailable": 0
+    },
+    "councilSessions_json追加案件数": 3,
+    "duplicateExcludedCount": 0,
+    "parserIssueCount": 1,
+    "memberMappingResolvedCount": 3,
+    "memberMappingPendingCount": 0,
+    "実アクセス回数": 20,
+    "warnings": [
+      "councilSessions.jsonに2014-2016年度の会期エントリが依然として存在しないため（Phase57-58で確認済みの構造的欠落が未解消）、本ファイルの3件はいずれもisPublished:falseとした。マージにはproposedCouncilSessions（3件）をcouncilSessions.jsonへ先に追加する必要がある。",
+      "3件とも、壇上・一問一答を通じて確認できた範囲のみを構造化しており、登壇全体の質問項目を網羅していない（2014-09-09は8/約11項目、2015-09-08は8/6項目のうち大項目を全てカバーしたが小項目の副市長答弁1件は未取得、2016-09-06は一問一答の冒頭2往復のみで会期全体の総数は不明）。無理に埋めず、取得できた範囲を正直に記録した。",
+      "parseSessionLabel()に一桁会期番号（全角スペース区切り）を認識できないバグがあることを新規発見した（parserIssues参照、修正はしていない）。",
+      "m17（長友幸子）は2015年時点『社民党市議団』所属と発言しているが、現行members.jsonのfactionId（riltuken）が同一会派を指すかは会派の変遷（合併・改称等）を伴う可能性があり、本ワーカーでは断定していない（factionIdの変更提案はしていない）。",
+      "m03・m17とも現職継続議員のため、term:previousをspeechに付与した（councilSpeechPeriod.from=2023-04-23より前の日付であるため。m08の既存152件の前例、およびPhase57-58のm08-2014-03-04の前例と同じ扱い）。"
+    ]
+  }
+}

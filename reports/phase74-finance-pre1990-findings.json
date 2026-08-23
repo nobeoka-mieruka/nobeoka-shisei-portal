@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-08-23",
+  "purpose": "Phase74：財政1990年以前バックフィル。Phase62で確立したe-Stat「地方財政状況調査」表33-4・表29-1の静的URL経路を使い、FY1990より前へ遡れる範囲を実地確認した結果、下限がFY1989であることを確定し、FY1989の1年度分のみ新規に地方債現在高・市債発行額・基金残高（3区分）を確定した。FY1988以前（1980年代前半・1970年代・1960年代）はe-Stat静的ファイル配信の対象外であることを確認した。既にonsite_required/reference_pendingと確定済みの年度（FY1934-1948、FY1951-53、FY1959、FY1983-87、UNR-014/UNR-015）は本phaseの対象外とし、同じ検索は行っていない。本phase自体はsrc/dataを一切編集していない。",
+  "boundaryCheck": {
+    "method": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&year=YYYYY （Phase62と同一の静的URLパターン）でyearパラメータを段階的に下げ、各年で統計表ファイル一覧が存在するか（0件データか）を直接確認した。年度対応規則：year=(決算年度+1)×10。",
+    "results": [
+      { "yearParam": "19910-20010", "settlementFiscalYearRange": "1990-2000", "status": "existing (Phase62で確定済み)" },
+      { "yearParam": "19900", "settlementFiscalYear": 1989, "status": "existing (本phaseで新規確認・確定)" },
+      { "yearParam": "19890", "settlementFiscalYear": 1988, "status": "0件（ファイル無し）" },
+      { "yearParam": "19830", "settlementFiscalYear": 1982, "status": "0件（ファイル無し）" },
+      { "yearParam": "19800", "settlementFiscalYear": 1979, "status": "0件（ファイル無し）" }
+    ],
+    "corroboration": "e-Stat「地方財政状況調査 市町村分」ファイル一覧ページ（toukei=00200251&tstat=000001077755）の年度フィルタが『最も古い年＝1990年（調査年）』と明示しており、実地確認と一致した。",
+    "conclusion": "e-Stat地方財政状況調査の静的ファイル配信は決算年度FY1989が下限。1980年代前半・1970年代・1960年代（FY1988以前）はオンラインで遡れないことを確定した。"
+  },
+  "confirmedValues": [
+    {
+      "fiscalYear": 1989,
+      "targetPath": "debt.balance.ordinaryAccountLocalBondBalanceYen",
+      "value": 25655346000,
+      "unit": "円（25,655,346千円）",
+      "confidence": "confirmed",
+      "notes": "既存レコードにdebtフィールド自体が存在しないため新規追加。表33-4「合計」行（行番号37）の差引現在高（009列）。翌年度（FY1990、Phase62で確定済み）ファイルの期首残高（001列）と完全一致で裏付け済み（25,655,346千円＝25,655,346千円）。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447276&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19900、決算年度1989）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview",
+          "notes": "団体コード452033（延岡市）、表番号33、行番号37『合計』、009:差引現在高列。"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1989,
+      "targetPath": "debt.municipalBondIssuanceYen",
+      "value": 2190362000,
+      "unit": "円（2,190,362千円）",
+      "confidence": "confirmed",
+      "notes": "市債発行額（フロー）。既存FY2001以降のレコードでも未登録だったフィールドへの新規追加。表33-4「合計」行の002列『平成元年度発行額』。表04『歳入内訳』行番号2の対応列（043列、値2,190,362）とも一致し、クロスチェック済み。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447276&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19900、決算年度1989）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行名称『合計』行を抽出",
+          "verificationStatus": "needsReview",
+          "notes": "団体コード452033、表番号33、行番号37『合計』、002:平成元年度発行額列。"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1989,
+      "targetPath": "fund.balance.fiscalReserveFundYen",
+      "value": 980000000,
+      "unit": "円（980,000千円）",
+      "confidence": "confirmed",
+      "notes": "財政調整基金。既存レコードにfundフィールド自体が存在しないため新規追加。表29-1、行番号6『平成元年度末現在高』の001列。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447184&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表29-1 基金の状況（year=19900、決算年度1989）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行番号6『平成元年度末現在高』行を抽出",
+          "verificationStatus": "needsReview",
+          "notes": "団体コード452033、表番号29、行番号6、001:積立基金・財政調整基金列。既存FY2001登録値のfiscalReserveFundYenと同一区分（決算カード『財調』）に相当。"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1989,
+      "targetPath": "fund.balance.bondRedemptionFundYen",
+      "value": 1571540000,
+      "unit": "円（1,571,540千円）",
+      "confidence": "confirmed",
+      "notes": "減債基金。表29-1、行番号6『平成元年度末現在高』の002列。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447184&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表29-1 基金の状況（year=19900、決算年度1989）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行番号6『平成元年度末現在高』行を抽出",
+          "verificationStatus": "needsReview",
+          "notes": "団体コード452033、表番号29、行番号6、002:積立基金・減債基金列。"
+        }
+      ]
+    },
+    {
+      "fiscalYear": 1989,
+      "targetPath": "fund.balance.otherSpecificPurposeFundsYen",
+      "value": 1062526000,
+      "unit": "円（1,062,526千円）",
+      "confidence": "confirmed",
+      "notes": "その他特定目的基金。表29-1、行番号6『平成元年度末現在高』の003列。",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447184&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表29-1 基金の状況（year=19900、決算年度1989）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "iconv-lite(Shift_JIS)デコード後、団体コード452033・行番号6『平成元年度末現在高』行を抽出",
+          "verificationStatus": "needsReview",
+          "notes": "団体コード452033、表番号29、行番号6、003:積立基金・その他特定目的基金列。"
+        }
+      ]
+    }
+  ],
+  "definitionNoteProposal": {
+    "debt": "総務省「地方財政状況調査」表33-4内の『合計』行（差引現在高＝009列、決算年度末時点／平成元年度発行額＝002列、フロー）。FY1990-2000（Phase62確定）と同一資料体系。FY2001以降の決算カード値との完全な定義一致は未確認（Phase62と同様の留保）。",
+    "fund": "総務省「地方財政状況調査」表29-1『基金の状況』行番号6『平成元年度末現在高』（001:財政調整基金、002:減債基金、003:その他特定目的基金）。既存FY2001登録値（決算カード『財調』『減債』『特定目的』）と同一区分と判断されるが、決算カードとの完全一致は公式文書での明記未確認。"
+  },
+  "notPursued": {
+    "table04RevenueBreakdown": {
+      "status": "identified_but_unconfirmed",
+      "statInfId": "000031446966",
+      "tableName": "地方財政状況調査 表04 歳入内訳",
+      "reason": "延岡市の行が行番号1・2の2件存在し、同一ヘッダー（49列）を共有しているが、行番号2の列値の一部（043列・045列）が既に確定済みの他フィールド値（municipalBondIssuanceYen・totalRevenueYen）と一致するように見え、行番号1・2が実際には異なる列区分を表している可能性が高い。総務省『地方財政状況調査表作成要領』でセクション定義を確認しない限り、列と意味の対応関係を確信を持って特定できないため、今回は地方税・地方交付税・国庫支出金等の内訳を未登録とした。次フェーズでの精査を推奨。"
+    },
+    "financialStrengthIndex": {
+      "status": "unchanged",
+      "reason": "FY1989の地方財政状況調査ファイル一覧（表1〜70番台）を確認したが『財政力指数』『基準財政収入額』『基準財政需要額』を含む表は存在しない（該当なし）。既存境界（総務省市町村決算カードの最古掲載年度＝FY2001）はPhase62までに確定済みで、同じ探索は繰り返していない。"
+    },
+    "population": {
+      "status": "unchanged",
+      "reason": "延岡市公式Excel（28569.xls）は平成9年（1997年）以降のみ収録。地方財政状況調査のファイル一覧にも『人口』『世帯』を含む表は存在しない（該当なし）。国勢調査等の別資料はスキーマが異なる（nobeokaCensusPopulation.json）ため本phaseのスコープ外。"
+    },
+    "fy1983to1987AndEarlier": {
+      "status": "unchanged_no_repeat_search",
+      "reason": "UNR-014（FY1934-1948）・UNR-015（FY1951-53・59・83-87）として既にreference_pending/onsite_requiredと確定済みのため、本phaseでは同じ検索を行っていない。1960-1982年度・1988年度（archiveFiscalYears.jsonにレコードは存在するが市債・基金・財政力指数・人口が欠落）は、UNR-014/015のいずれにも含まれない『未追跡』の区分であり、e-Stat地方財政状況調査の境界（FY1989）確認により、これら年度もオンライン経路が尽きたことが本phaseで新たに判明した。次フェーズでの現地閲覧・外部照会の対象候補として記録する。"
+    }
+  },
+  "summary": {
+    "newFiscalYearsConfirmed": 1,
+    "fiscalYearsRange": "FY1989のみ",
+    "fieldsNewlyConfirmed": 5,
+    "sourceRefsAdded": 5,
+    "onlineRouteExhaustedForFY1988AndEarlier": true,
+    "warnings": [
+      "e-Stat地方財政状況調査の静的ファイル配信の下限はFY1989であることを実地確認した。FY1988以前（1980年代前半・1970年代・1960年代）は同ルートでは取得不可能。",
+      "表04『歳入内訳』の地方税・地方交付税等の内訳は列の意味に確証が持てないため今回は未登録。",
+      "FY1989の値は市町村決算カードではなく『地方財政状況調査 表33-4・表29-1』由来。FY1990-2000（Phase62）とは同一資料体系だが、FY2001以降の決算カード値との完全な定義一致は未確認（Phase62と同様の留保を継続）。",
+      "本phaseはreports/phase74-finance-pre1990-findings.md・.json以外のファイルを一切編集していない。git commit/pushも行っていない。",
+      "本phaseの確定値のsrc/data統合は次フェーズ（データ担当）での対応が必要。"
+    ]
+  }
+}

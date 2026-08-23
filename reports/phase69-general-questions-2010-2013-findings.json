@@ -1,0 +1,914 @@
+{
+  "phase": "Phase69",
+  "generatedAt": "2026-08-23",
+  "scope": "一般質問データベース 2010-2013年度 実投入（Phase67と同一条件）",
+  "filesEditedOrCreated": [
+    "reports/phase69-general-questions-2010-2013-findings.md",
+    "reports/phase69-general-questions-2010-2013-findings.json"
+  ],
+  "note": "scripts/lib/minutes-source.mjs、src/data配下は一切変更していない（読み取り専用として扱った）。git commit / git push は行っていない。ブラウザツールは使用していない。",
+  "networkAccessLog": {
+    "totalRequests": 19,
+    "budget": "20-25回程度",
+    "breakdown": [
+      {
+        "step": "resolveYearTreedepth/listSessionsForYear (2010-2013年、rootキャッシュヒット含む)",
+        "newRequests": 2
+      },
+      {
+        "step": "listMeetingDays (4会期)",
+        "newRequests": 4
+      },
+      {
+        "step": "listSpeakerSegments 初回 (4本会議日、先頭25件表示)",
+        "newRequests": 4
+      },
+      {
+        "step": "listSpeakerSegments 全件再取得 (4本会議日、全件キャッシュヒット)",
+        "newRequests": 0
+      },
+      {
+        "step": "fetchSegmentText (3候補 x 質問1+答弁2 = 9件)",
+        "newRequests": 9
+      }
+    ],
+    "rateLimitEvents": {
+      "count429": 0,
+      "count403": 0,
+      "count5xx": 0
+    }
+  },
+  "unr026_councilSessionsDraft": {
+    "description": "councilSessions.jsonに2010-2013年度分の会期エントリが1件も存在しない問題（Phase57-58で発見済みのUNR-026）への対応として、本Phaseで実際に発言者一覧・質問全文を取得した4会期分のドラフトを作成した。あくまでドラフトであり、documents（議案PDF等）・議案審議結果・請願陳情等は未調査（documents: []）。マージ担当者は、必要に応じて議案書等の一次資料調査を行った上でsummaryStatus等を見直すこと。",
+    "proposedEntries": [
+      {
+        "id": "2010-06",
+        "year": 2010,
+        "fiscalYear": 2010,
+        "eraYear": "平成22年",
+        "title": "平成22年6月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第20回",
+        "folderPath": "/council-documents/2010/2010-06",
+        "description": "延岡市議会 第20回定例会（平成22年6月）",
+        "documents": [],
+        "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "lastVerified": "2026-08-23",
+        "summaryStatus": "pending",
+        "shortSummary": "平成22年6月定例会（第20回定例会）。本ドラフトは一般質問の存在確認（会議録検索システムでの発言者一覧取得）のみに基づく暫定エントリであり、議案の審議結果・採決等は未調査。",
+        "summary": "平成22年6月定例会（第20回定例会、会期日程は本会議のみ確認：6月9日～24日の4日程）。会議録検索システム（r_Speakers.exe）で、第2号（6月16日）に佐藤誠議員ほか計5名（佐藤誠・大金賢二・大西幸二・上田美利・白石武仁の各議員）が一般質問に登壇したことを発言者一覧で確認した。本エントリは一般質問データベースのためのUNR-026対応ドラフトであり、議案・採決結果・請願陳情等は未調査（documentsは空配列）。",
+        "summaryGeneratedAt": "2026-08-23",
+        "summaryVerifiedAt": "2026-08-23",
+        "summarySources": [
+          {
+            "title": "延岡市議会会議録検索システム（平成22年第20回定例会 発言者一覧）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H220616A/0/0//10/1/3:0/654/1//0/0/0"
+          }
+        ],
+        "draftNote": "Phase69で新規作成したUNR-026対応ドラフト。本会議日程4日（H220609A～H220624A）のうち第2号（H220616A）のみ発言者一覧を確認済み。他の3日程・議案一覧・採決結果は未調査。"
+      },
+      {
+        "id": "2011-03",
+        "year": 2011,
+        "fiscalYear": 2010,
+        "eraYear": "平成23年",
+        "title": "平成23年3月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第25回",
+        "folderPath": "/council-documents/2011/2011-03",
+        "description": "延岡市議会 第25回定例会（平成23年3月）",
+        "documents": [],
+        "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "lastVerified": "2026-08-23",
+        "summaryStatus": "pending",
+        "shortSummary": "平成23年3月定例会（第25回定例会）。予算議会（6日程）。本ドラフトは代表質問の存在確認に基づく暫定エントリであり、議案の審議結果・採決等は未調査。",
+        "summary": "平成23年3月定例会（第25回定例会、本会議6日程：3月1日～25日）。2011年4月24日執行の市議会議員選挙前、最終任期の議会。会議録検索システムで、第2号（3月8日）に矢野仁祺議員（延岡きずな、会派代表質問）が登壇したことを発言者一覧・発言原文で確認した。本エントリは一般質問データベースのためのUNR-026対応ドラフトであり、予算議案・採決結果等は未調査（documentsは空配列）。",
+        "summaryGeneratedAt": "2026-08-23",
+        "summaryVerifiedAt": "2026-08-23",
+        "summarySources": [
+          {
+            "title": "延岡市議会会議録検索システム（平成23年第25回定例会 発言者一覧）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H230308A/0/0//10/1/3:0/654/1//0/0/0"
+          }
+        ],
+        "draftNote": "Phase69で新規作成したUNR-026対応ドラフト。本会議日程6日（H230301A～H230325A）のうち第2号（H230308A）のみ発言者一覧・質問全文を確認済み。他の5日程・予算議案一覧・採決結果は未調査。"
+      },
+      {
+        "id": "2012-09",
+        "year": 2012,
+        "fiscalYear": 2012,
+        "eraYear": "平成24年",
+        "title": "平成24年9月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第8回",
+        "folderPath": "/council-documents/2012/2012-09",
+        "description": "延岡市議会 第8回定例会（平成24年9月）",
+        "documents": [],
+        "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "lastVerified": "2026-08-23",
+        "summaryStatus": "pending",
+        "shortSummary": "平成24年9月定例会（第8回定例会、2011年4月選挙後の新任期）。本ドラフトは一般質問の存在確認に基づく暫定エントリであり、議案の審議結果・採決等は未調査。",
+        "summary": "平成24年9月定例会（第8回定例会、本会議5日程：9月4日～24日、仮議場での開催）。2011年4月24日執行の市議会議員選挙後の新任期。会議録検索システムで、第2号（9月11日）に西原茂樹議員（公明党市議団、仮議場で初の質問）が一般質問に登壇したことを発言者一覧・発言原文で確認した。本エントリは一般質問データベースのためのUNR-026対応ドラフトであり、議案・採決結果・請願陳情等は未調査（documentsは空配列）。",
+        "summaryGeneratedAt": "2026-08-23",
+        "summaryVerifiedAt": "2026-08-23",
+        "summarySources": [
+          {
+            "title": "延岡市議会会議録検索システム（平成24年第8回定例会 発言者一覧）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H240911A/0/0//10/1/3:0/654/1//0/0/0"
+          }
+        ],
+        "draftNote": "Phase69で新規作成したUNR-026対応ドラフト。本会議日程5日（H240904A～H240924A）のうち第2号（H240911A）のみ発言者一覧・質問全文を確認済み。他の4日程・議案一覧・採決結果は未調査。listSessionsForYearのparseSessionLabel正規表現が「第 5回定例会」等の1桁回次ラベル（全角スペース入り）を解釈できない不具合を実データで確認（parserIssues参照）。"
+      },
+      {
+        "id": "2013-09",
+        "year": 2013,
+        "fiscalYear": 2013,
+        "eraYear": "平成25年",
+        "title": "平成25年9月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第16回",
+        "folderPath": "/council-documents/2013/2013-09",
+        "description": "延岡市議会 第16回定例会（平成25年9月）",
+        "documents": [],
+        "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "lastVerified": "2026-08-23",
+        "summaryStatus": "pending",
+        "shortSummary": "平成25年9月定例会（第16回定例会）。本ドラフトは一般質問の存在確認に基づく暫定エントリであり、議案の審議結果・採決等は未調査。Phase57-58が扱った平成25年第14回定例会（2013-06）とは別会期。",
+        "summary": "平成25年9月定例会（第16回定例会、本会議6日程：9月3日～24日）。会議録検索システムで、第2号（9月10日）に甲斐正幸議員（のべおか市民派クラブ、現職m08の旧任期分）が一般質問に登壇したことを発言者一覧・発言原文で確認した。同日には他に太田龍・葛城隆信・下田英樹・白石良盛の各議員も一般質問に登壇している（今回は甲斐正幸議員分のみ構造化）。本エントリは一般質問データベースのためのUNR-026対応ドラフトであり、議案・採決結果・請願陳情等は未調査（documentsは空配列）。既存のPhase57-58ドラフト（2013-06、平成25年第14回定例会）とはIDが異なり重複しない。",
+        "summaryGeneratedAt": "2026-08-23",
+        "summaryVerifiedAt": "2026-08-23",
+        "summarySources": [
+          {
+            "title": "延岡市議会会議録検索システム（平成25年第16回定例会 発言者一覧）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H250910A/0/0//10/1/3:0/654/1//0/0/0"
+          }
+        ],
+        "draftNote": "Phase69で新規作成したUNR-026対応ドラフト。本会議日程6日（H250903A～H250924A）のうち第2号（H250910A）のみ発言者一覧・質問全文を確認済み。他の5日程・議案一覧・採決結果は未調査。"
+      }
+    ]
+  },
+  "classification": {
+    "A_ready_for_merge": [
+      {
+        "memberId": "fm54",
+        "isFormerMemberNewRecord": true,
+        "proposedMemberRecordWrapper": {
+          "memberId": "fm54",
+          "isFormerMember": true,
+          "scope": [
+            "plenary"
+          ],
+          "note": "fm54（矢野仁祺）はcouncilSpeechSummaries.jsonに未登録のため新規member行として提案。aggregateフィールド（analysisPeriod/analyzedSessionCount等）は今回の1件のみを前提とした暫定値であり、マージ時に他会期の状況とあわせて再計算が必要。",
+          "analysisPeriod": {
+            "from": "2011-03-08",
+            "to": "2011-03-08"
+          },
+          "analyzedSessionCount": 1,
+          "sessionsWithSpeechCount": 1,
+          "sessionsWithoutSpeechCount": 0,
+          "unavailableSessionCount": 0,
+          "unfetchedSessionCount": null,
+          "lastAnalyzedAt": "2026-08-23"
+        },
+        "speech": {
+          "id": "fm54-2011-03-08-daihyo-shitsumon",
+          "memberId": "fm54",
+          "sessionId": "2011-03",
+          "date": "2011-03-08",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "代表質問",
+          "isPublished": false,
+          "summaryStatus": "partially-verified",
+          "topics": [
+            "行政運営",
+            "農林水産",
+            "道路",
+            "防災・減災",
+            "行政・情報公開",
+            "健康福祉",
+            "環境",
+            "教育"
+          ],
+          "shortSummary": "平成23年3月定例会（第2号、2011年3月8日）で矢野仁祺議員（延岡きずな、当時。詳細はsrc/data/formerMembers.jsonのfm54を参照）が会派を代表して行った代表質問の要約です。国境・領土問題、TPP、高速道路整備促進、マニフェスト外部評価、道州制、三北総合支所再編、国・県とのパイプ構築、メディカルタウン構想、自治体クラウド、新庁舎建設、入札参加資格条例、太陽光発電など多岐にわたる質問について、市長・企画部長の答弁とあわせて整理しています（壇上質問は約24項目に及び、うち市長・企画部長の初回答弁で直接対応が確認できた12項目のみを構造化。再質問ラウンド及び他部局（総務部長・健康福祉部長・農林水産部長・商工観光部長・上下水道局長・教育長）の答弁は今回未取得）。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "国境と領土、国土防衛（尖閣諸島・北方領土・竹島・沖縄基地問題）に関する市長の所見",
+              "questionSummary": "矢野議員は、尖閣諸島をめぐる問題、北方四島・竹島の領有権問題、日米安保条約に基づく沖縄基地問題について、いかに認識し自覚すべきか、市長の所見を尋ねた。",
+              "answerSummary": "市長は、領土問題は日本固有の領土であるという確固たる信念のもと、基地問題は沖縄県の現状を踏まえつつ最善の策を見出しながら解決に当たるべきであり、平時にこそしっかりとした外交戦略が必要と述べ、国において毅然たる態度と的確な判断のもとで粘り強い交渉がなされる必要があると答えた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "尖閣・北方領土・竹島・沖縄基地問題への認識・自覚のあり方を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "国固有の領土との信念、平時の外交戦略の重要性、国による粘り強い交渉の必要性を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "所感の確認",
+              "answerStatus": "継続対応"
+            },
+            {
+              "id": "q2",
+              "title": "TPP参加における本市産業への影響",
+              "questionSummary": "TPP（環太平洋パートナーシップ協定）に我が国が参加した場合、商工業・農林水産業・観光・サービス業など多様な産業が集積する本市にどのような影響があると考えるか、市長の所見を尋ねた。",
+              "answerSummary": "市長は、TPPは関税撤廃だけでなくサービス・知的財産権・政府調達・人の移動等を含む包括的協定であり、農林水産業が最も大きな影響を受けると予測されるとし、関連する商業・観光など地域経済全体への影響も懸念されると答えた。政府の開国フォーラムでは農業以外の情報が十分示されていないとし、食の安全保障を含め十分な情報提供のもとで慎重に議論されるべきと述べた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "TPP参加が本市産業（商工業・農林水産業・観光・サービス業）に与える影響への所見を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "農林水産業への影響を中心に地域経済全体への懸念を述べ、慎重な議論の必要性を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "所感の確認",
+              "answerStatus": "回答のみで方針不明"
+            },
+            {
+              "id": "q3",
+              "title": "東九州自動車道など高速道路整備促進の取り組み",
+              "questionSummary": "東九州自動車道の県北関係区間（北浦～須美江間、佐伯～蒲江間）の開通見通しが平成28年度以降とされ事実上めどが立っていない状況の中、今後の整備促進に向けた取り組みについて所見を尋ねた。",
+              "answerSummary": "市長は、須美江～北川間の平成25年度供用開始が公表されたことを歓迎し、蒲江～北浦間・北川～延岡間とあわせ地域利便性が向上すると期待を示した。一方、北浦～須美江間・佐伯～蒲江間は平成28年度以降とされたため、2月14日・22日・3月4日と続けて国へ早期前倒しの申し入れを行ったと述べ、今後も提言活動等より効果的な手法を研究し運動を進める考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "東九州自動車道の県北未開通区間の整備促進に向けた今後の取り組みを尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "須美江～北川間の平成25年度供用開始を歓迎しつつ、未着手区間への国への申し入れ実績と今後の運動方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "進捗の確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q4",
+              "title": "マニフェスト・主要事業に対する外部評価制度の導入",
+              "questionSummary": "市長二期目のマニフェスト達成度等について新聞報道で論評された外部評価制度に着目し、主要な事業について年度ごとに外部からの点検・評価を実施することを具体的に検討する考えはないか尋ねた。",
+              "answerSummary": "市長は、平成19年度から導入している事務事業評価制度（内部評価）の3年間の実績・仕組み・スケジュールを検証・協議中であるとし、外部評価の導入は市民への説明責任・透明な市政運営の観点から重要な手法であるとして、内部評価の検討結果を踏まえ今後検討していく考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "主要事業への外部評価制度の具体的な導入検討の有無を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "内部評価制度の検証状況を説明し、外部評価導入は今後検討していく考えを答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q5",
+              "title": "地方分権と道州制（九州内の議論状況・本市広域施策との関連）",
+              "questionSummary": "将来の道州制を見据えた場合の九州圏の位置づけと、現在九州全体でどのような議論・取り組みがなされているかを尋ねた。また、定住自立圏構想・メディカルタウン構想・自治体クラウド等の本市の広域的取り組みが、道州制を目指す中でどう位置づけられるか、あわせて尋ねた。",
+              "answerSummary": "市長は、九州地方知事会による九州広域行政機構設立の検討、九州市長会の九州府推進機構準備検討委員会（市長も委員）、九州地域戦略会議の道州制検討委員会、九州経済フォーラムなど複数の枠組みで議論が進んでいることを紹介した。本市の広域的取り組みについては、定住自立圏共生ビジョン・メディカルタウン構想・自治体クラウド等を通じて圏域全体の発展を担うことが本市の役割であり、将来の道州制も見据えつつ足腰の強い都市形成に努めると答えた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "九州内の道州制議論の状況と、本市の広域的取り組みとの関連を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "九州内の複数の道州制検討枠組みを紹介し、本市の広域施策が将来の道州制を見据えた都市形成につながるとの考えを答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "調査・研究"
+            },
+            {
+              "id": "q6",
+              "title": "三北総合支所の組織再編と住民サービス",
+              "questionSummary": "総合支所の組織再編（税務・市民生活・福祉保健課の統合による市民サービス課設置等）による本庁との事務分担、職員の意識改革、市民サービスへの対応について、市長の考えを尋ねた。",
+              "answerSummary": "市長は、現行総合支所のサービス維持・向上を基本に柔軟かつ効率的な事務処理が可能となるよう課・係を統合したこと、市民サービス課設置で税・福祉等の窓口業務のワンストップ化を図ること、各総合支所へ看護職を配置し健康相談・指導を充実させることを説明した。平成28年度以降は支所へ移行予定であり、住民主体のまちづくりの中で職員の意識改革に引き続き取り組む考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "総合支所の組織再編に伴う事務分担・職員の意識改革・市民サービスへの対応を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "組織再編の内容（市民サービス課設置・看護職配置等）と、今後の職員の意識改革方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q7",
+              "title": "各種事業推進のための国・県との太いパイプ構築",
+              "questionSummary": "副市長二人制の決断など重要事業を遂行する体制の中、国会議員・県会議員・市議会議員はもとよりあらゆる人脈を通じ、官民挙げて国・県との太いパイプを構築していくことについて、市長の見解と方策を尋ねた。",
+              "answerSummary": "市長は、各部署の業務執行において国・県職員との密接な人間関係の構築を日ごろから指導し、毎年職員を国の省庁・県に派遣していること、自らも機会をとらえて国・県機関に出向いていることを説明した。メディカルタウン構想・企業誘致・地域医療充実・自治体クラウド等で県との連携が重要となる事業が多いことから副市長二人体制の条例案を提案したと述べ、あらゆる人脈を通じた連携強化に努める考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "国・県との太いパイプ構築に向けた見解と方策を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "職員派遣・自身の出向等の実績と、副市長二人体制条例案提案の趣旨を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q8",
+              "title": "メディカルタウン構想と健康長寿・地域医療施策の連動",
+              "questionSummary": "東九州メディカルバレー構想のメーンステージを目指す延岡市メディカルタウン構想を、今後、健康長寿・地域医療施策とどう位置づけ連動させていくのか、所見を尋ねた。",
+              "answerSummary": "市長は、メディカルタウン構想は活力ある地域づくりと住民の健康・福祉向上を目指すものであり、産業振興・人材育成に加え人の健康につながる施策の研究にも取り組むと説明した。延岡市健康長寿推進市民会議の行動計画書策定など市民意識の高まりとあわせ、構想の推進により医療関係者にとって魅力的なエリアとなることが期待され、健康長寿・地域医療施策も産業振興・人材育成と連動した成果を上げられると答えた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "メディカルタウン構想と健康長寿・地域医療施策の今後の連動方針を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "構想の狙いと、健康長寿・地域医療施策との連動による期待効果を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q9",
+              "title": "自治体クラウドの効果と課題（システム改善・活性化への波及効果・データ保守管理）",
+              "questionSummary": "自治体クラウド開発実証事業を平成23年度に本稼働させる方針の中、現在のシステムがどう改善されるか、本市の活性化への波及効果、運用上のデータ保守管理に問題はないか、3点を尋ねた。",
+              "answerSummary": "市長は、民間事業者提供のクラウドサービス活用により割り勘効果で経費削減が図れ、データの標準的な一元管理で処理時間が短縮し市民サービスが向上すると説明した。本市拠点企業のデータセンター活用により利用自治体増加に伴う関連企業・技術者の集積、雇用増大が見込めると答えた。データ保守管理については、活断層がない立地を生かした堅牢な建物・高いセキュリティ、LGWAN（総合行政ネットワーク）による外部侵入不可能な回線接続で万全の対策がとられていると答えた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "自治体クラウドのシステム改善内容・活性化への波及効果・データ保守管理の3点を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "経費削減・市民サービス向上・雇用波及効果・堅牢なデータセンター運用の3点を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q10",
+              "title": "新庁舎建設における基本構想・基本計画（デザイン・景観への配慮）",
+              "questionSummary": "新庁舎建設に当たり、庁舎としての機能はもとより、本市の持つ歴史・文化性や町並みとの調和、デザインにも十分配慮して取り組むよう求め、所見を尋ねた。",
+              "answerSummary": "企画部長は、3月末の基本構想・基本計画策定に向け作業中であり、市民にとって利便性が高く歴史・文化を尊重し周辺環境に配慮した庁舎を目指すと説明した。現庁舎敷地での建てかえを予定しており、延岡城跡に合ったデザイン・配色、景観や町並みとの調和にも配慮する考えを示した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "新庁舎のデザイン・景観への配慮を求めた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長（寿崎幸憲君）",
+                  "summary": "策定中の基本構想・基本計画の方針と、延岡城跡・町並みとの調和への配慮を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "対応の要望",
+              "answerStatus": "実施中"
+            },
+            {
+              "id": "q11",
+              "title": "入札参加資格に関する延岡市独自の条例制定提案",
+              "questionSummary": "舗装工事等を例に、専門技術の継承と雇用の確保の観点から、施工を自社で行う体制の確保等を盛り込んだ入札参加資格に関する延岡市独自の条例を制定してはどうか提案した。",
+              "answerSummary": "企画部長は、入札参加資格は地方自治法施行令に基づく要綱で全国的にも定められているとし、舗装工事業種については登録業者を対象に管理技術者・保有機械・各種技能者・施工実績などの実態調査を行い、その結果をもとに次回以降の登録要件の見直しを検討したいと答えた。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "施工体制確保等を盛り込んだ入札参加資格に関する独自条例の制定を提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長（寿崎幸憲君）",
+                  "summary": "条例制定ではなく、舗装工事業種の実態調査を行い登録要件見直しを検討する考えを答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "partially-confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q12",
+              "title": "太陽光発電等の普及状況",
+              "questionSummary": "太陽光発電の導入費用は多額とされる中、需要が進み国・県の補助金制度も継続される見込みの状況を踏まえ、本市における太陽光発電を中心とした新エネルギー活用普及の現状を尋ねた。",
+              "answerSummary": "企画部長は、消防庁舎・伊形小学校で太陽光発電システムを設置済み、清掃工場では余熱発電に取り組み、平成23年度は旭小学校改築時に設置予定と説明した。一般家庭向けは平成21年度末時点で延岡地区の設置件数が前年度比324件増の1,396件と高い伸びを示しており、今後も国・県補助制度の周知とあわせ、本市独自の補助についても検討していきたいと答えた。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm54",
+                  "summary": "本市における太陽光発電を中心とした新エネルギー活用普及の現状を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長（寿崎幸憲君）",
+                  "summary": "公共施設への設置実績と一般家庭の設置件数の伸び、今後の独自補助検討方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "現状確認",
+              "answerStatus": "検討中"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "平成23年第25回定例会（第2号 3月8日） 矢野仁祺君（質問：壇上、全項目）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H230308A/11622/10/1//0/0",
+              "speakerSection": "pos=11622"
+            },
+            {
+              "title": "平成23年第25回定例会（第2号 3月8日） 市長（首藤正治君）（答弁：国境・領土からメディカルタウン構想・自治体クラウドまで）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H230308A/34118/10/1//0/0",
+              "speakerSection": "pos=34118"
+            },
+            {
+              "title": "平成23年第25回定例会（第2号 3月8日） 企画部長（寿崎幸憲君）（答弁：新庁舎・入札参加資格・太陽光発電）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H230308A/44264/10/1//0/0",
+              "speakerSection": "pos=44264"
+            }
+          ],
+          "verifiedAt": "2026-08-23",
+          "verificationNote": "公式会議録の質問原文（pos=11622）、市長答弁（pos=34118）、企画部長答弁（pos=44264）を取得し、内容・発言者・質問と答弁の対応関係を確認した。壇上質問（約24項目）のうち、市長・企画部長の初回答弁で直接対応を確認できた12項目のみ構造化した。残り約12項目（三北総合支所再編以降の一部・法人市民税等税収状況・環境配慮まきストーブ・在宅ケア小規模多機能介護・子ども手当・農林水産業振興計画関連4点・外国人観光客受け入れ・過疎地域水道整備・社会教育充実）に対応する答弁（総務部長・健康福祉部長・農林水産部長・商工観光部長・上下水道局長・教育長、r_Speakers.exeのorder7-14）、および再質問ラウンド（order16以降、農林水産部長への追加質問等を含む）はアクセス回数の制約により今回未取得。矢野仁祺氏は本人が壇上で「私、今度の登壇で最後でございます」と述べており、2011年4月24日執行の市議会議員選挙には再出馬しなかったとみられる（formerMembers.jsonのfm54は2007年当選のみ確認、以降の当選記録なしと記載済み、本発言はその記載と整合する）。"
+        }
+      },
+      {
+        "memberId": "fm18",
+        "isFormerMemberNewRecord": true,
+        "proposedMemberRecordWrapper": {
+          "memberId": "fm18",
+          "isFormerMember": true,
+          "scope": [
+            "plenary"
+          ],
+          "note": "fm18（西原茂樹）はcouncilSpeechSummaries.jsonに未登録のため新規member行として提案。aggregateフィールドは今回の1件のみを前提とした暫定値であり、マージ時に再計算が必要。",
+          "analysisPeriod": {
+            "from": "2012-09-11",
+            "to": "2012-09-11"
+          },
+          "analyzedSessionCount": 1,
+          "sessionsWithSpeechCount": 1,
+          "sessionsWithoutSpeechCount": 0,
+          "unavailableSessionCount": 0,
+          "unfetchedSessionCount": null,
+          "lastAnalyzedAt": "2026-08-23"
+        },
+        "speech": {
+          "id": "fm18-2012-09-11-ippan-shitsumon",
+          "memberId": "fm18",
+          "sessionId": "2012-09",
+          "date": "2012-09-11",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": false,
+          "summaryStatus": "partially-verified",
+          "topics": [
+            "行政運営",
+            "防災・減災",
+            "行政・情報公開"
+          ],
+          "shortSummary": "平成24年9月定例会（第2号、2012年9月11日、仮議場）で西原茂樹議員（公明党市議団、当時。詳細はsrc/data/formerMembers.jsonのfm18を参照）が行った一般質問の要約です。市長マニフェスト進捗報告のあり方、防災・減災ニューディール、最低制限価格の公表状況について、市長・企画部長の答弁とあわせて整理しています（質問は他に地震・津波対策6点、動物病院当番制、木質バイオマス発電、学校耐震化、いじめ問題等に及ぶが、今回は市長・企画部長の初回答弁で直接対応が確認できた4項目のみを構造化）。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "市長マニフェスト進捗報告のあり方（結果への感想の明記）",
+              "questionSummary": "約2年間の市長マニフェスト進捗状況の報告書について、単なる進捗提示ではなく、その結果に対する市長の率直な感想も加えると、事業の成否がより見える報告書になるのではないか、所見を尋ねた。",
+              "answerSummary": "市長は、各年度末の達成状況を四段階でわかりやすく評価し議員に報告しており、進捗状況へのコメントも述べているとした上で、議員の助言を踏まえた報告のあり方についても検討したいと答えた。マニフェストの達成期間は平成26年2月までとし、その期間内の最大限の努力の上で最終的な結果報告をしたいと述べた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm18",
+                  "summary": "マニフェスト進捗報告に市長自身の率直な感想を加えることを提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "現行の四段階評価とコメント付与の説明、報告のあり方の検討方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "検討中"
+            },
+            {
+              "id": "q2",
+              "title": "市長マニフェスト進捗報告書の市ホームページ掲載",
+              "questionSummary": "マニフェスト進捗報告書は現在、議員と報道機関のみに配付されているが、市のホームページ等にも掲載すれば市民の市政への関心を高める意味で有効ではないか、所見を尋ねた。",
+              "answerSummary": "市長は、県知事や県内他市長でもマニフェスト進捗をホームページ公表する例は見受けられないとしつつ、マニフェストの主要課題を別の形で表現した「新生のべおかプロジェクト」の進捗は広報のべおか・市ホームページで公表しているとし、今年度が計画期間の中間点であることから成果と課題を取りまとめホームページでも公表し主要施策の進捗を市民にわかりやすく説明していく考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm18",
+                  "summary": "マニフェスト進捗報告書の市ホームページ掲載を提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "新生のべおかプロジェクトの進捗を中間点でホームページ公表する方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "partially-confirmed",
+              "questionApproach": "改善提案",
+              "answerStatus": "実施予定"
+            },
+            {
+              "id": "q3",
+              "title": "防災・減災ニューディールについての市長見解",
+              "questionSummary": "公明党が提案した社会保障と税の一体改革の中の防災・減災ニューディール（老朽化した公共インフラの補強による安全性確保・経済効果・雇用創出）について、市長の見解と、本市の橋・上下水道等社会的インフラの状況を尋ねた。",
+              "answerSummary": "市長は、公共施設の更新時期の集中や震災の教訓を踏まえ大きな自然災害に耐え得る構造での整備の必要性を認識しているとし、法案骨子の財源（建設国債・地方債・ニューディール債）については国民への新たな負担の懸念もあるとしつつ、防災という新たな内需への公共投資が経済回復・雇用創出につながる効果は間違いないとの考えを示した。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm18",
+                  "summary": "防災・減災ニューディールに関する市長の見解と本市インフラ状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "老朽インフラ整備の必要性認識と、財源への懸念・経済効果への期待の両面を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "partially-confirmed",
+              "questionApproach": "所感の確認",
+              "answerStatus": "回答のみで方針不明"
+            },
+            {
+              "id": "q4",
+              "title": "最低制限価格の公表状況（平成23年3月代表質問の再質問）",
+              "questionSummary": "平成23年3月の代表質問で尋ねた最低制限価格の事後公表について、当時は県内で県と九市中一市のみが事後公表していた状況を踏まえ、1年半経過後の調査研究の状況を再度尋ねた。",
+              "answerSummary": "企画部長は、県内では県と九市のうち二市が事後公表、本市を含む七市が非公表と説明した。本市は予定価格を事前公表しており、最低制限価格の公表は同種・同規模工事の価格類推を招き十分な積算を行わない入札の増加、競争性・品質確保への支障が懸念されるとし、予定価格の事後公表を試行した上でさらに研究していく考えを示した。",
+              "answerers": [
+                "企画部長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "fm18",
+                  "summary": "最低制限価格の事後公表に関する1年半後の調査研究状況を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "企画部長（黒木清君）",
+                  "summary": "県内の公表状況と、本市の懸念・今後の試行方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "進捗の確認",
+              "answerStatus": "調査・研究"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "平成24年第8回定例会（第2号 9月11日） 西原茂樹君（質問：壇上、全項目）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H240911A/5552/10/1//0/0",
+              "speakerSection": "pos=5552"
+            },
+            {
+              "title": "平成24年第8回定例会（第2号 9月11日） 市長（首藤正治君）（答弁：マニフェスト報告・防災減災ニューディール）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H240911A/13632/10/1//0/0",
+              "speakerSection": "pos=13632"
+            },
+            {
+              "title": "平成24年第8回定例会（第2号 9月11日） 企画部長（黒木清君）（答弁：最低制限価格公表）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H240911A/16098/10/1//0/0",
+              "speakerSection": "pos=16098"
+            }
+          ],
+          "verifiedAt": "2026-08-23",
+          "verificationNote": "公式会議録の質問原文（pos=5552）、市長答弁（pos=13632）、企画部長答弁（pos=16098）を取得し、内容・発言者・質問と答弁の対応関係を確認した。壇上質問は地震・津波対策（6点）、動物病院日曜当番制、木質バイオマス発電、学校施設耐震化、いじめ問題、教育委員長への質問等に及ぶが、今回はマニフェスト・防災減災・最低制限価格の4項目のみを構造化した。残り項目に対応する答弁（総務部長・危機管理担当・農林水産部長・教育長・教育委員長、r_Speakers.exeのorder7-16）はアクセス回数の制約により今回未取得。西原茂樹氏はformerMembers.jsonのfm18で1999年・2003年・2007年・2011年・2015年の5期連続当選が確認済みであり、2011年4月24日執行選挙で当選した任期（2011-2015年）内の発言として在職期間と矛盾しない。"
+        }
+      },
+      {
+        "memberId": "m08",
+        "isFormerMemberNewRecord": false,
+        "note": "m08は既存レコード。speechesへの追加分のみ提案（既存のanalysisPeriod等の集計値はcouncilSpeechPeriod.from以降の現任期分のみを対象としているため変更不要。unfetchedSessionCount等の再計算は本ワーカーでは行っていない）。",
+        "speech": {
+          "id": "m08-2013-09-10-ippan-shitsumon",
+          "memberId": "m08",
+          "sessionId": "2013-09",
+          "date": "2013-09-10",
+          "meetingNumber": "第2号",
+          "meetingType": "本会議",
+          "speechType": "一般質問",
+          "isPublished": false,
+          "term": "previous",
+          "summaryStatus": "partially-verified",
+          "topics": [
+            "行政運営",
+            "企業誘致"
+          ],
+          "shortSummary": "平成25年9月定例会（第2号、2013年9月10日）で甲斐正幸議員（現職m08、旧任期分）が行った一般質問の要約です。参議院議員選挙結果への評価、サテライトオフィス誘致について、市長・副市長の答弁とあわせて整理しています（質問は他に公共施設安全対策、災害対応型自動販売機、環境整備2点、本市ゆかりの偉人の胸像移転、消防団教育、エピペン、全国学力テスト、アスリートタウン整備等に及ぶが、今回は市長・副市長の初回答弁で直接対応が確認できた2項目のみを構造化）。Phase57-58で登録済みの2014-03-04分（同じくm08の旧任期分）とは別会期・別日の発言であり重複しない。",
+          "questionItems": [
+            {
+              "id": "q1",
+              "title": "参議院議員通常選挙の結果評価と安倍首相への期待",
+              "questionSummary": "2013年7月21日投開票の参議院議員通常選挙で自民党が圧勝しねじれ国会が解消した結果について、市長はどう受け止めるか、また安倍首相にどのような期待を持つか尋ねた。",
+              "answerSummary": "市長（答弁は副市長が代読・登壇）は、連立与党が全議席の過半数を獲得した結果は、安定した政治のもとで景気回復等の重要課題に腰を据えて取り組んでほしいという民意の表れであり、「アベノミクス」への期待が大きな要因とした上で、雇用確保・所得向上など国民が幸せを実感できる経済再生に向け全力で取り組んでほしいと答えた。",
+              "answerers": [
+                "市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m08",
+                  "summary": "参議院選挙結果の受け止めと安倍首相への期待を尋ねた。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "市長（首藤正治君）",
+                  "summary": "選挙結果を安定政治への民意と評価し、経済再生への期待を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "所感の確認",
+              "answerStatus": "回答のみで方針不明"
+            },
+            {
+              "id": "q2",
+              "title": "サテライトオフィス誘致の推進（徳島県神山町の事例を踏まえて）",
+              "questionSummary": "地方都市への企業誘致が難しい中、徳島県神山町の空き家を利用したサテライトオフィス誘致成功事例を挙げ、市内全域に光ファイバー網が整備されている本市でも同様の誘致に取り組んではどうか尋ねた。",
+              "answerSummary": "副市長は、サテライトオフィスは情報サービス産業に分類され通信環境が整っていれば地方でも事業展開可能であり多くの雇用創出につながるコールセンターやソフトウエア開発部門の進出も期待できることから重点誘致業種と位置づけ精力的に活動していると説明した。神山町の事例は過疎対策としての地域おこしの成功事例であり本市での可能性も研究できるとした上で、東京での展示会出展や企業訪問等の誘致活動を今後も継続する考えを示した。",
+              "answerers": [
+                "副市長"
+              ],
+              "exchanges": [
+                {
+                  "order": 1,
+                  "type": "question",
+                  "speakerId": "m08",
+                  "summary": "神山町のサテライトオフィス誘致成功事例を踏まえた本市での誘致推進を提案した。"
+                },
+                {
+                  "order": 2,
+                  "type": "answer",
+                  "speakerName": "副市長（野口和彦君）",
+                  "summary": "情報サービス産業を重点誘致業種と位置づける現状と、神山町事例の研究・今後の誘致活動継続方針を答えた。"
+                }
+              ],
+              "relatedBills": [],
+              "relatedDocuments": [],
+              "questionAnswerLinkStatus": "confirmed",
+              "questionApproach": "事業導入の提案",
+              "answerStatus": "継続対応"
+            }
+          ],
+          "summarySources": [
+            {
+              "title": "平成25年第16回定例会（第2号 9月10日） 甲斐正幸君（質問：壇上、全項目）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250910A/6844/10/1//0/0",
+              "speakerSection": "pos=6844"
+            },
+            {
+              "title": "平成25年第16回定例会（第2号 9月10日） 市長（首藤正治君）（答弁：参議院選挙結果）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250910A/19422/10/1//0/0",
+              "speakerSection": "pos=19422"
+            },
+            {
+              "title": "平成25年第16回定例会（第2号 9月10日） 副市長（野口和彦君）（答弁：サテライトオフィス誘致）",
+              "sourceType": "official-minutes-html",
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H250910A/20250/10/1//0/0",
+              "speakerSection": "pos=20250"
+            }
+          ],
+          "verifiedAt": "2026-08-23",
+          "verificationNote": "公式会議録の質問原文（pos=6844）、市長答弁（pos=19422）、副市長答弁（pos=20250）を取得し、内容・発言者・質問と答弁の対応関係を確認した。壇上質問は公共施設安全対策（岡富コミュニティセンター火災報知機の事例）、災害対応型自動販売機、環境整備（西小路通線桜並木・妙田川浄化）、小林乾一郎翁胸像移転、消防団教育（飲酒運転）、エピペン、全国学力テスト、アスリートタウン（グラウンドフェンス設置）等に及ぶが、今回は市長・副市長の初回答弁が確認できた2項目のみを構造化した。残り項目に対応する答弁（総務部長・市民環境部長・農林水産部長・都市建設部長・消防長・教育委員長・教育長・教育部長、r_Speakers.exeのorder6-14及びorder37-43）はアクセス回数の制約により今回未取得。甲斐正幸氏（m08）は現職議員かつ既にcouncilSpeechSummaries.jsonに2019-06以降の一般質問14件が登録済み（在職の事実は既存データで裏付け済み）であり、Phase57-58で登録した2014-03-04分（第19回定例会）とは異なる会期・日付のため重複しない。councilSpeechPeriod.from（現任期開始日）より前の日付のためterm:\"previous\"を付与した。"
+        }
+      }
+    ],
+    "B_member_mapping_pending": [
+      {
+        "candidateLabel": "佐藤誠君（発言者ラベルどおり）",
+        "date": "2010-06-16",
+        "fileName": "H220616A",
+        "pos": 4290,
+        "proposedSessionId": "2010-06",
+        "proposedMeetingNumber": "第2号",
+        "matchedCandidate": {
+          "memberId": "fm02",
+          "name": "佐藤 誠",
+          "matchType": "氏名完全一致（同姓同名の他候補なし）"
+        },
+        "reasonPending": "formerMembers.jsonのfm02は、当選記録がelectionResults.json上で2019年4月21日執行分の1回のみ確認されており（note欄に「当選回数は2019年の1回のみ確認、それ以前の当選歴は資料未確認」と明記）、2010年6月時点の在職を示す独立した証拠（2007年以前の当選記録・servedSessionsへの2010年会期の記載等）が存在しない。氏名は完全一致し同姓同名の他候補もいないため人物推定としては妥当性が高いが、約9年の空白期間をまたぐ同一人物であることを選挙結果等の独立証拠で確認できるまでは、A_ready_for_mergeとせずB_member_mapping_pendingとした（架空memberId使用回避・在職期間の推測拡張回避のため）。本文（fetchSegmentText）は今回未取得（budget節約のため、member mapping確定後に取得する方針）。",
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H220616A/4290/10/1//0/0",
+        "followUpNeeded": [
+          "electionResults.jsonまたは選挙管理委員会資料で、佐藤誠氏の2007年・2003年以前の延岡市議会議員選挙当選記録の有無を確認する。",
+          "確認できれば、formerMembers.json（fm02）のnote/servedSessionsの更新とあわせて質問全文を取得し構造化する。",
+          "確認できなければ、同姓同名の別人物として新規memberId（fm候補）を検討する。"
+        ]
+      }
+    ],
+    "C_source_verification_pending": [],
+    "D_parser_error": [],
+    "E_duplicate": [],
+    "F_unavailable": []
+  },
+  "plannedOnlyExcluded": {
+    "count": 0,
+    "note": "質問通告書（予定のみ）は今回の調査対象データソースに含まれていない（会議録検索システムのSee.exe/r_Speakers.exe/GetText3.exeはいずれも本会議で実際に記録された発言データであり、事前通告のみの情報は提供しない）。本Phaseで採用した候補は全て、r_Speakers.exeの発言者一覧（実際の登壇記録）およびGetText3.exeの発言原文取得により「実際に登壇・発言したこと」を直接確認済みである。したがって「予定のみ」を理由に除外した候補は0件（そもそも予定段階のデータに触れていない）。延岡市議会だより等の号外資料による質問予定と実施の突合はアクセス回数の制約により今回実施していない（warnings参照）。"
+  },
+  "duplicateCheck": {
+    "excludedCount": 0,
+    "method": "councilSpeechSummaries.json既存398件の(memberId, sessionId, date, speechType)およびspeech.idと、reports/phase57-58-general-questions-implementation-findings.jsonの未マージ候補3件（fm49-2013-06-11, fm14-2005-09-14, m08-2014-03-04）の両方に対して、本Phaseで採用した4候補（矢野仁祺2011-03-08, 西原茂樹2012-09-11, 甲斐正幸2013-09-10, 佐藤誠2010-06-16）の重複がないことを確認した。特に甲斐正幸（m08）は2010-2013年度に複数回登壇している可能性が高いため、Phase57-58が既に扱った2013-06-11（矢野戦一郎=fm49が登壇した第14回定例会）とは意図的に異なる会期（第16回定例会、2013-09-10）を選定し重複を回避した。"
+  },
+  "parserIssues": [
+    {
+      "function": "parseSessionLabel (scripts/lib/minutes-source.mjs)",
+      "issue": "正規表現 /第(\\d+)回(定例会|臨時会)/ が、1桁の回次に全角スペースが入るラベル（例:「第 1回臨時会」「第 5回定例会」「第 8回定例会」）にマッチせず、listSessionsForYear()の返り値でsessionNumber/sessionTypeがundefinedになる。",
+      "evidence": "listSessionsForYear({year:2011}) の結果、平成23年の後半4件（第 1回臨時会・第 2回定例会・第 3回定例会・第 4回定例会、統一地方選挙後の新任期分）でsessionNumber=undefined, sessionType=undefinedを確認。同年前半の第24回臨時会・第25回定例会（2桁、スペースなし）は正しくパースされた。平成24年（2012年）も第 5回定例会～第 9回臨時会の5件で同様の現象を確認、第10回定例会（2桁）のみ正しくパースされた。",
+      "impact": "listSessionsForYear()の返り値のsessionNumber/sessionTypeに依存する呼び出し側コードは、統一地方選挙直後（回次が1桁に戻る年）の会期を正しく識別できない。ただし、labelフィールド自体には全文（「平成23年 第 1回臨時会 」等）が含まれているため、treedepth文字列としての機能には影響しない（POSTボディの構築には使える）。",
+      "fixSuggestion": "正規表現を /第\\s*(\\d+)回(定例会|臨時会)/ （\\sを許容）に変更すれば解消すると推測されるが、本Phaseでは指示によりparser修正は行っていない。"
+    },
+    {
+      "function": "classifySpeakerLabel (scripts/lib/minutes-source.mjs)",
+      "issue": "officialTitles配列に「教育委員長」が含まれておらず、「教育委員長（○○君）」ラベルがspeakerType:\"member\"（一般議員扱い）に分類される。",
+      "evidence": "H240911A（平成24年9月定例会）order14「教育委員長（北林嘉晃君）」、H250910A（平成25年9月定例会）order52「教育委員長（北林嘉晃君）」がいずれもspeakerType:\"member\"と分類された。",
+      "impact": "教育委員長の答弁を答弁者一覧・統計等で「一般議員の発言」として誤集計する可能性がある（本Phaseでは教育委員長の発言を構造化対象にしなかったため実害なし）。",
+      "fixSuggestion": "officialTitles配列に「教育委員長」を追加することで解消すると推測されるが、本Phaseでは修正していない。"
+    }
+  ],
+  "warnings": [
+    "councilSessions.jsonに2010-2013年度の会期が1件も存在しない（UNR-026）ため、本Phaseで構造化した3件のA_ready_for_merge候補は全てisPublished:falseとした。マージには、proposedCouncilSessionsの4件をcouncilSessions.jsonへ実際に追加する別タスクが必須（Phase57-58と同様の制約）。",
+    "3件のA_ready_for_merge候補（矢野仁祺・西原茂樹・甲斐正幸）はいずれも、壇上質問の全項目（約10～24項目）のうち、初回答弁で直接対応が確認できた一部（2～12項目）のみを構造化した。無理に埋めず、確実に対応関係を確認できた範囲にとどめた。残りの項目・再質問ラウンドは今回未取得（各speechのverificationNoteに詳細を記載）。",
+    "fm54（矢野仁祺）・fm18（西原茂樹）はformerMembers.jsonのservedSessionsが空配列のため、マージ時にvalidate-dataがwarning（「元議員のservedSessionsが未設定のため、会期時点の在職を確認できません」）を出す想定（error ではない）。マージ担当者は、servedSessionsへ2011-03・2012-09を追加するか、noteの記述をもってwarning許容とするか判断すること。本ワーカーはformerMembers.jsonを編集していない。",
+    "fm02（佐藤誠）の2010-06-16分は、氏名完全一致にもかかわらずB_member_mapping_pendingとした。理由はelectionResults.json上でfm02の当選記録が2019年の1回のみ確認されており、2010年時点の在職を示す独立証拠（2007年以前の当選記録等）が存在しないため。同姓同名の可能性を排除できないまま架空の在職期間を推測で拡張しないよう、慎重側に倒した。",
+    "西原茂樹・甲斐正幸の質問には、消防団の飲酒運転事故、いじめ問題（岐阜県大津市の事件を引用）、公明党の政策的立場の説明など、政治的立場や個人・団体の評価に触れる可能性のある記述が壇上質問全文に含まれる。本findings.jsonのquestionSummary/answerSummaryは会議録原文の事実関係の要約にとどめ、独自の評価・論評は加えていない。",
+    "議会だより（のべおか市議会だより）による質問予定と実施の突合、および質問通告書PDFの参照は、アクセス回数の制約により本Phaseでは実施していない。将来的な二次検証の余地として記録する。",
+    "H220616A（2010-06-16）には佐藤誠のほか、大金賢二・大西幸二・上田美利・白石武仁の4議員も一般質問に登壇していることをr_Speakers.exeで確認した（未着手）。H250910A（2013-09-10）には甲斐正幸のほか、太田龍・葛城隆信・下田英樹・白石良盛の4議員も登壇している（未着手）。次フェーズでの追加候補として活用可能。"
+  ],
+  "summary": {
+    "newCandidatesByClassification": {
+      "A_ready_for_merge": 3,
+      "B_member_mapping_pending": 1,
+      "C_source_verification_pending": 0,
+      "D_parser_error": 0,
+      "E_duplicate": 0,
+      "F_unavailable": 0
+    },
+    "duplicateExcludedCount": 0,
+    "plannedOnlyExcludedCount": 0,
+    "parserIssueCount": 2,
+    "totalNetworkRequests": 19,
+    "proposedCouncilSessionsCount": 4,
+    "warningsCount": 7
+  }
+}

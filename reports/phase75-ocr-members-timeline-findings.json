@@ -1,0 +1,219 @@
+{
+  "phase": "Phase75",
+  "title": "広報OCR・元議員・市政年表 調査結果（マージ候補）",
+  "generatedAt": "2026-08-23",
+  "scope": {
+    "target": "src/data/kohoOcrSearchIndex.jsonの未確認候補（市長・副市長・教育長・議長/副議長・選挙・大型事業）を原紙PDF画像で照合、および src/data/formerMembers.json 手薄58名のうちnamesNotYetAttemptedRound2該当分を既存verified内部データと突合",
+    "readOnlyReference": "src/data/kohoOcrSearchIndex.json、src/data/civicTimelineEvents.json、src/data/citySpecialPosts.json、src/data/formerMembers.json、src/data/members.json、src/data/billVotes.json、src/data/electionResults.json、src/data/blockedTaskClassification.json（いずれも本タスクでは未編集・参照専用）",
+    "note": "本ファイルはsrc/data/civicTimelineEvents.json・src/data/formerMembers.json等へマージ可能な形式の「候補」であり、それら本体は本タスクでは未編集（読み取り専用ルール厳守）。マージ作業者による最終判断・反映が必要。"
+  },
+  "methodology": {
+    "ocrVerification": "kohoOcrSearchIndex.jsonのOCR文字列だけで氏名・日付を確定せず、対象PDFをcurlで取得し、powershell.exe（Windows PowerShell 5.1、pwshではない）+ WinRT Windows.Data.Pdf APIで該当ページをPNG画像として実レンダリングし、目視確認できたもののみ確定とした。",
+    "formerMemberVerification": "新規の外部Web検索は行わず、既にverificationStatus: verifiedのsrc/data/civicTimelineEvents.json（会議録検索システム・広報のべおか原典に基づく）とformerMembers.jsonの氏名（漢字完全一致）を突合し、未接続の一次資料済み事実を発見する内部横断調査を実施した。",
+    "toolingNote": "pwsh（PowerShell 7）からのWinRT相互運用リフレクション呼び出しは'Operation is not supported on this platform'で失敗するため、powershell.exe（5.1）を明示的に呼び出す必要があった。"
+  },
+  "ocrConfirmedCandidates": [
+    {
+      "candidateId": "phase75-candidate-F",
+      "title": "松田満男氏が議長、早瀬賢一氏が副議長に就任（2023年5月臨時市議会）",
+      "eventDateLabel": "2023年5月15日(月)〜16日(火)",
+      "issueId": "koho-2023-06",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14475.pdf",
+      "pdfPage": 5,
+      "verificationMethod": "curl取得 + powershell.exe 5.1 + WinRT Windows.Data.Pdf でPNG画像レンダリング + 目視確認",
+      "verifiedText": "議長に松田満男氏 副議長に早瀬賢一氏／5月15日(月)、16日(火)に行われた臨時市議会で、新しい議長に松田満男氏、副議長に早瀬賢一氏が選ばれました。また、議会選出監査委員に中城あかね氏が選ばれました。任期は令和9年5月1日までです。",
+      "confidence": "high",
+      "status": "confirmed",
+      "civicTimelineEventProposal": {
+        "category": "行政組織",
+        "year": 2023,
+        "dateLabel": "2023年5月15日〜16日",
+        "title": "松田満男氏、議長に当選／早瀬賢一氏、副議長に当選",
+        "summary": "2023年4月23日執行の延岡市議会議員選挙（定数27）後、5月15日〜16日の臨時市議会で議長選挙・副議長選挙が行われ、松田満男議員が議長、早瀬賢一議員が副議長に選ばれた。同時に議会選出監査委員に中城あかね議員が選ばれた。任期は令和9年5月1日まで。前任の議長は松田和己氏（civic-166、2019年就任）。",
+        "sourceRefs": [
+          {
+            "label": "広報のべおか2023年6月号 p.8-9（2023年5月15-16日臨時市議会、正副議長選挙・監査委員選任の記載）",
+            "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14475.pdf"
+          }
+        ],
+        "notes": "Phase75でkohoOcrSearchIndex.jsonの候補を原紙PDF画像照合して新規発見。既存civic-166（2019年、松田和己氏議長・松田満男氏副議長）の後継人事にあたる。5/15・5/16のいずれの日に正副議長選挙が実施されたかは広報本文からは一意に特定できず、会議録検索システムでの追加照合が望ましい。"
+      }
+    }
+  ],
+  "ocrUnresolvedCandidates": [
+    {
+      "candidateId": "phase75-candidate-G",
+      "title": "北林幹雄氏、副議長選出（2022年5月9日臨時市議会）",
+      "issueId": "koho-2022-06",
+      "sourcePdf": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/10090.pdf",
+      "pdfPage": 11,
+      "ocrContext": "い副議長が選出されました５月9日㈪に臨時市議会が開かれました。この議会では副議長の選挙が行われ、北きたばやし林幹みきお雄議員（",
+      "status": "unresolved_render_failure",
+      "reason": "対象PDF（10090.pdf、26,352,198バイト）はcurlでの取得自体は成功（Content-Lengthと一致）したが、Windows PowerShell 5.1 + WinRT Windows.Data.Pdf.PdfDocument.LoadFromFileAsyncでファイル全体のロード時にHRESULT 0x80048040の例外が発生し、ページ単位のレンダリング・目視照合ができなかった。",
+      "relatedPersonNote": "北林幹雄氏はsrc/data/members.json m11（現職議員、3期目）に該当。formerMembers.jsonの対象外。",
+      "recommendedNextStep": "別のPDFレンダリング手段（他マシンでの印刷、pdfium系ツールの導入等）での原紙照合を推奨。確認できれば市政年表候補として追加を検討。"
+    }
+  ],
+  "ocrCandidatesAlreadyCoveredByExistingData": [
+    {
+      "topic": "副市長・教育長の就任/再任（原田幸二・野口和彦・岩本真一・荒井崇・澤野幸司・山本一丸・中間弘の各氏）",
+      "existingDataRefs": ["src/data/citySpecialPosts.json csp-36〜csp-41, csp-55"],
+      "note": "OCR検索で候補として抽出されたが、appointedDate・sourceRefs付きで既に登録済みのため新規追加不要（Phase63等で反映済み）。"
+    },
+    {
+      "topic": "読谷山洋司市長の辞職（2025-06-30）・職務代理（山本一丸副市長）・後任市長選挙（三浦久知氏当選、2025-07-20）",
+      "existingDataRefs": ["src/data/civicTimelineEvents.json civic-159, civic-160"],
+      "note": "OCR検索で候補として抽出されたが、既にverified/partiallyVerifiedで登録済みのため新規追加不要。"
+    },
+    {
+      "topic": "佐藤裕臣氏の議長在任（2018年1月時点でも継続確認）",
+      "existingDataRefs": ["src/data/civicTimelineEvents.json civic-165"],
+      "note": "koho-2018-01のOCR文脈（「佐藤裕臣議長立会いのもと」）で発見したが、civic-165（2017-05-09就任、会議録検索システムでverified）に既に登録済み。fm58の未解決課題（生年・出身地等の伝記的事実）とは別の話題。"
+    },
+    {
+      "topic": "大型事業（新最終処分場・新庁舎建設・JR延岡駅周辺整備・内藤記念館再整備・西階運動公園整備・火葬場建設）",
+      "existingDataRefs": [],
+      "note": "13件全件を確認したが、いずれも既存の一般的言及にとどまり新規の未登録大型事業は見つからなかった（Phase63の結論と一致）。"
+    }
+  ],
+  "formerMemberProfileMergeCandidates": [
+    {
+      "legacyFormerMemberId": "fm11",
+      "currentName": "佐藤 正人",
+      "currentNameKana": "さとう まさと",
+      "proposedAdditions": {
+        "councilRoleNote": "2005年5月10日時点で副議長を務め、平成17年第14回臨時会（5月10日）の議長選挙を執行した。2003年5月12日時点では臨時議長（最年長議員による職務執行）を務めた。",
+        "councilRoleNoteStatus": "verified",
+        "councilRoleNoteVerificationBasis": "src/data/civicTimelineEvents.json civic-180・civic-181（延岡市議会会議録検索システム原典、verificationStatus: verified）との氏名完全一致・在任時期の整合性を確認。既存note記載の当選年（1999年・2003年）と矛盾しない。"
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "civic-180：甲斐勝吉氏、議長に当選（統一地方選挙後の改選）",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム 平成15年第1回臨時会 原典）",
+          "note": "佐藤正人氏が2003年5月12日、臨時議長として議長選挙を執行したことを記録。"
+        },
+        {
+          "sourceTitle": "civic-181：稲田和利氏、議長に当選（1期目）",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム 平成17年第14回臨時会 原典）",
+          "note": "佐藤正人氏が2005年5月10日、副議長として議長選挙を執行したことを記録。"
+        }
+      ],
+      "status": "confirmed_via_existing_verified_data_pending_merge"
+    },
+    {
+      "legacyFormerMemberId": "fm23",
+      "currentName": "新名 種歳",
+      "currentNameKana": "にいな たねとし",
+      "proposedAdditions": {
+        "councilRoleNote": "平成19年第1回臨時会（2007年5月9日）で議長に当選し、2009年5月頃まで在任した（後任は後藤哲朗氏）。",
+        "councilRoleNoteStatus": "verified",
+        "councilRoleNoteVerificationBasis": "src/data/civicTimelineEvents.json civic-182（延岡市議会会議録検索システム原典、verificationStatus: verified）との氏名完全一致・在任時期の整合性を確認。既存note記載の当選年（1999・2003・2007年）と矛盾しない（3期目在任中の議長就任）。"
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "civic-182：新名種歳氏、議長に当選（統一地方選挙後の改選）",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム 平成19年第1回臨時会 原典）"
+        }
+      ],
+      "status": "confirmed_via_existing_verified_data_pending_merge"
+    },
+    {
+      "legacyFormerMemberId": "fm26",
+      "currentName": "佐藤 道男",
+      "currentNameKana": "さとう みちお",
+      "proposedAdditions": {
+        "councilRoleNote": "平成12年第8回臨時会（2000年5月9日）の会議録で議長として在任していたことが確認できる（延岡市議会会議録検索システムの最古の記録。就任日・前任者は同システムの収録範囲外のため確認不能）。",
+        "councilRoleNoteStatus": "verified",
+        "councilRoleNoteVerificationBasis": "src/data/civicTimelineEvents.json civic-178（延岡市議会会議録検索システム原典、verificationStatus: verified）との氏名完全一致・在任時期の整合性を確認。既存note記載の当選年（1999年）と矛盾しない。"
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "civic-178：佐藤道男氏、議長として在任（延岡市議会会議録検索システムの最古記録）",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム 平成12年第8回臨時会 原典）"
+        }
+      ],
+      "status": "confirmed_via_existing_verified_data_pending_merge"
+    },
+    {
+      "legacyFormerMemberId": "fm32",
+      "currentName": "戸田 行徳",
+      "currentNameKana": "とだ ゆきのり",
+      "proposedAdditions": {
+        "councilRoleNote": "平成13年第15回臨時会（2001年5月9日）で議長に当選し、2003年5月頃まで在任した（後任は甲斐勝吉氏）。",
+        "councilRoleNoteStatus": "verified",
+        "councilRoleNoteVerificationBasis": "src/data/civicTimelineEvents.json civic-179（延岡市議会会議録検索システム原典、verificationStatus: verified）との氏名完全一致・在任時期の整合性を確認。既存note記載の当選年（1999・2003年）と矛盾しない。"
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "civic-179：戸田行徳氏、議長に当選",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム 平成13年第15回臨時会 原典）"
+        }
+      ],
+      "status": "confirmed_via_existing_verified_data_pending_merge"
+    },
+    {
+      "legacyFormerMemberId": "fm51",
+      "currentName": "小田 忠良",
+      "currentNameKana": "おだ ただよし",
+      "proposedAdditions": {
+        "councilRoleNote": "副議長を務め、2013年5月8日の臨時会で再選されたが、同年12月3日の定例会で太田龍議員へ交代した。",
+        "councilRoleNoteStatus": "verified",
+        "councilRoleNoteVerificationBasis": "src/data/civicTimelineEvents.json civic-163・civic-174・civic-207（延岡市議会会議録検索システムおよび広報のべおか2013年6月号原典、verificationStatus: verified）との氏名完全一致・在任時期の整合性を確認。既存note記載の当選年（2007・2011・2015年）と矛盾しない。"
+      },
+      "newSourceRefs": [
+        {
+          "sourceTitle": "civic-163：佐藤勉氏、議長に当選（統一地方選挙後の改選）",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム 平成23年第1回臨時会 原典）"
+        },
+        {
+          "sourceTitle": "civic-174：太田龍氏、副議長に当選",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（延岡市議会会議録検索システム・広報のべおか2013年6月号 原典）"
+        },
+        {
+          "sourceTitle": "civic-207：佐藤勉議長・小田忠良副議長、再選",
+          "sourceOrganization": "src/data/civicTimelineEvents.json（広報のべおか2013年6月号 原典）"
+        }
+      ],
+      "status": "confirmed_via_existing_verified_data_pending_merge"
+    }
+  ],
+  "formerMemberUnresolved": [
+    {
+      "legacyFormerMemberId": "fm58",
+      "currentName": "佐藤 裕臣",
+      "note": "指示により今回は深追いせず、既存judgment（unresolved）を維持した。参考：本人の議長在任（2017-2019年）自体はcivic-165で既にverified確認済みであり、koho-2018-01のOCR候補（本人が議長として立会った記事）もこれと整合する。ただしPhase49・64で課題となっていた生年・出身地・経歴の詳細（宮崎日日新聞記事の内容）は今回も未確認。",
+      "status": "unresolved_carried_over"
+    }
+  ],
+  "formerMemberNoNewInfo": {
+    "searchedInternalCrossReferenceNoNewInfo": [
+      "fm12", "fm13", "fm15", "fm16", "fm17", "fm24", "fm35", "fm38",
+      "fm45", "fm49", "fm53", "fm54", "fm56", "fm57"
+    ],
+    "falsePositiveExcluded": [
+      {
+        "id": "fm21",
+        "name": "高橋勝",
+        "note": "src/data/billVotes.jsonに「高橋勝栄氏」（2019年9月定例会、教育委員会委員選任議案）がヒットしたが、氏名が完全一致しない（「高橋勝」2文字 vs 「高橋勝栄」3文字）ため別人と判断し不採用。"
+      }
+    ],
+    "gikaidayoriRouteStatus": "src/data/blockedTaskClassification.json TASK-101で、1957〜1973年分の旧会期会議録・議会だよりは宮崎県立図書館所蔵の紙媒体でNDL未所蔵・デジタル化なしのため現物閲覧が必要、と既にBLOCKED登録されていることを確認した。本タスクではオンラインで新規に閲覧可能な議会だよりデータソースは発見できなかった。"
+  },
+  "summary": {
+    "ocrConfirmedCount": 1,
+    "ocrUnresolvedCount": 1,
+    "civicTimelineAdditionCandidateCount": 1,
+    "formerMemberProfilesEnrichedCount": 5,
+    "formerMemberNoNewInfoCount": 14,
+    "formerMemberFalsePositiveExcludedCount": 1,
+    "fm58Status": "unresolved_carried_over_not_pursued_per_instruction",
+    "warnings": [
+      "koho-2022-06（10090.pdf、26.3MB）はWindows PowerShell 5.1 + WinRT Windows.Data.Pdfでファイル全体のロードに失敗する（HRESULT 0x80048040）。ダウンロード自体は正常（Content-Lengthと一致）であり、PDFファイル自体の内部構造に起因すると推定される。次回、別のレンダリング手段での再挑戦が必要。",
+      "pwsh（PowerShell 7、本環境の既定シェル）からのWinRT相互運用リフレクション呼び出しは'Operation is not supported on this platform'で失敗する。原紙PDF画像照合を行う際は、必ずpowershell.exe（Windows PowerShell 5.1）を明示的に呼び出す必要がある。",
+      "候補F（松田満男氏・議長就任）の正副議長選挙の実施日は「5月15日・16日」のいずれかまでは広報のべおか本文から一意に特定できなかった。市政年表への反映時は日付表記の扱いに注意し、可能であれば会議録検索システムでの追加照合を推奨する。",
+      "fm11・fm23・fm26・fm32・fm51の5名の councilRoleNote は、いずれも新規の外部一次資料照合ではなく、既にverifiedな内部データ（civicTimelineEvents.json）との氏名突合によるものである。マージ作業者は、これらの内部データの検証水準（verificationStatus: verified、会議録検索システム原典）を踏まえた上で最終判断すること。",
+      "fm21（高橋勝）とbillVotes.jsonの「高橋勝栄氏」（教育委員会委員）は氏名が完全一致しないため別人と判断したが、次回作業者は追加確認が望ましい。",
+      "議会だよりルートは物理資料アクセスが必要（TASK-101、BLOCKED）であり、この制約は変わらない。Phase29の現物資料調査計画との連携が引き続き必要。"
+    ]
+  }
+}

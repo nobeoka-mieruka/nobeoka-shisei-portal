@@ -1,0 +1,499 @@
+{
+  "generatedAt": "2026-08-23",
+  "note": "Phase67ワーカーによる一般質問2000-2004年度実投入。src/data・scripts配下は読み取り専用のため一切変更していない。本ファイルは(A) councilSessions.jsonへマージ可能な会期レコード案、(B) councilSpeechSummaries.jsonへマージ可能な一般質問候補（分類付き）を収録した『提案データ』であり、まだマージされていない。UNR-026（councilSessions.jsonに2019-06より前の会期が1件も存在しない問題）は今回もそのまま残っている。今回は初めて、当該不足を埋めるためのcouncilSessions.json案そのものを作成した（2000-09・2004-06の2会期）。この2案がsrc/data/councilSessions.jsonへ実際にマージされて初めて、下記の一般質問候補4件をcouncilSpeechSummaries.jsonへ追加してもvalidate-dataがエラーにならない。",
+  "status": "candidate_ready_pending_councilSessions_merge",
+  "networkAccessLog": {
+    "totalRealRequests": 16,
+    "budgetLimit": 25,
+    "breakdown": [
+      { "step": "resolveYearTreedepth(2000)+listSessionsForYear(2000)", "requests": 0, "note": "Phase56のキャッシュにヒット" },
+      { "step": "resolveYearTreedepth(2001)+listSessionsForYear(2001)（平成12-14年グループ展開）", "requests": 1 },
+      { "step": "resolveYearTreedepth(2002)+listSessionsForYear(2002)", "requests": 0, "note": "同グループのキャッシュにヒット" },
+      { "step": "resolveYearTreedepth(2003)+listSessionsForYear(2003)（平成15-17年グループ展開）", "requests": 1 },
+      { "step": "resolveYearTreedepth(2004)+listSessionsForYear(2004)", "requests": 1 },
+      { "step": "listMeetingDays(平成12年 第11回定例会)", "requests": 1 },
+      { "step": "listSpeakerSegments(H120912A)", "requests": 1 },
+      { "step": "fetchSegmentText(H120912A, pos=48950) 猪股秀明 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H120912A, pos=67220) 市長答弁（猪股秀明分）", "requests": 1 },
+      { "step": "fetchSegmentText(H120912A, pos=89248) 西原茂樹 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H120912A, pos=104346) 市長答弁（西原茂樹分）", "requests": 1 },
+      { "step": "listMeetingDays(平成16年 第9回定例会)", "requests": 1 },
+      { "step": "listSpeakerSegments(H160614A)", "requests": 1 },
+      { "step": "fetchSegmentText(H160614A, pos=9924) 後藤哲朗 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H160614A, pos=24970) 市長答弁（後藤哲朗分）", "requests": 1 },
+      { "step": "fetchSegmentText(H160614A, pos=71566) 太田龍 質問全文", "requests": 1 },
+      { "step": "fetchSegmentText(H160614A, pos=87156) 市長答弁（太田龍分）", "requests": 1 }
+    ],
+    "consumed": 16,
+    "note2": "getFetchStats()のcompleted差分で実測。429/403/5xx=0件。同一ページの再取得・retryは発生していない（全リクエスト1回で成功）。"
+  },
+  "councilSessionsProposal": [
+    {
+      "id": "2000-09",
+      "year": 2000,
+      "fiscalYear": 2000,
+      "eraYear": "平成12年",
+      "title": "平成12年9月定例会",
+      "sessionType": "定例会",
+      "sessionNumber": "第11回",
+      "startDate": "2000-09-05",
+      "endDate": "2000-09-25",
+      "folderPath": "/council-documents/2000/2000-09",
+      "description": "延岡市議会 第11回定例会（平成12年9月）",
+      "documents": [],
+      "lastVerified": "2026-08-23",
+      "_proposalNote": "延岡市議会会議録検索システム（See.exe treedepth='平成12年 第11回定例会 '）で本会議日程5日（H120905A〜H120925A、第1号9月5日〜第5号9月25日）を実際に確認した上での提案。議案審議結果PDF等の一次資料は今回探索していないためdocumentsは空配列とした（無理に埋めていない）。startDate/endDateは実際に確認した本会議日程の初日・最終日をそのまま採用した（推測ではない）。officialSessionUrl（延岡市議会公式サイトの当該会期ページ）は2000年時点のアーカイブが公式サイト上に現存するか未確認のため、あえて設定していない。"
+    },
+    {
+      "id": "2004-06",
+      "year": 2004,
+      "fiscalYear": 2004,
+      "eraYear": "平成16年",
+      "title": "平成16年6月定例会",
+      "sessionType": "定例会",
+      "sessionNumber": "第9回",
+      "startDate": "2004-06-07",
+      "endDate": "2004-06-23",
+      "folderPath": "/council-documents/2004/2004-06",
+      "description": "延岡市議会 第9回定例会（平成16年6月）",
+      "documents": [],
+      "lastVerified": "2026-08-23",
+      "_proposalNote": "会議録検索システムで本会議日程6日（H160607A〜H160623A、第1号6月7日〜第6号6月23日）を実際に確認した。sessionNumberは会議録上の表記が『第 9回定例会』（第と数字の間に半角スペース、parseSessionLabel()の既知の不具合により自動抽出時はundefinedになる。本findings.mdの『parser不具合』節参照）だったため、本提案では人手でスペースを除去し『第9回』に正規化した（他の会期のsessionNumber表記＝スペースなしとの整合を優先。表記ゆれであり実質的な会期番号の変更ではない）。documentsは空配列（一次資料未探索のため）。officialSessionUrlは同様の理由で未設定。"
+    }
+  ],
+  "generalQuestionCandidates": [
+    {
+      "candidateId": "fm12-2000-09-12-ippan-shitsumon",
+      "classification": "A_ready_for_merge",
+      "classificationNote": "councilSessions.json案（id: 2000-09）とセットでマージ可能。ただし2000-09案自体が先にsrc/data/councilSessions.jsonへ実際にマージされるまでは、validate-data.mjsが『存在しない会期IDです』でエラーにするため、isPublishedはfalseのまま。",
+      "memberIdResolution": {
+        "memberId": "fm12",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『猪股秀明君』とformerMembers.json fm12『猪股 秀明』の氏名完全一致（matchSpeakerToMember、同姓同名候補なし）に加え、fm12のnoteに記載された選挙結果（1999-04-25執行延岡市議会議員選挙で当選、2003-04-27・2007-04-22も当選）で、2000年9月時点（1999年当選後の1期目）に在職していたことを二次確認した。"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm12",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2000-09-12", "to": "2000-09-12" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "歴史・文化施設", "sessionCount": 1 },
+          { "topic": "高齢福祉", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（formerMembers.json fm12、令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは在職期間全体（1999年当選〜2011年次期選挙まで3期在職）の他会期件数が不明のためフィールド自体を省略した（推測で埋めない）。"
+      },
+      "speech": {
+        "id": "fm12-2000-09-12-ippan-shitsumon",
+        "memberId": "fm12",
+        "sessionId": "2000-09",
+        "date": "2000-09-12",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["歴史・文化施設", "高齢福祉"],
+        "shortSummary": "平成12年9月定例会（第11回定例会、第2号）で猪股秀明議員が行った総括質疑並びに一般質問（壇上、市長の政治姿勢・高齢者施策・公共事業発注・道路維持管理・急傾斜地防災・教育問題・地域防災など多数の項目を通告）のうち、市長が直接答弁した（仮称）歴史民俗資料館の基本構想、高齢者の社会参加促進・健康づくりに対する基本姿勢の2項目を要約したもの。壇上通告には他に十数項目（高齢者の在宅生きがい対策=福祉保健部長、災害弱者対策=福祉保健部長、公共事業の前倒し発注=企画部長、旧道の維持管理・県道市道改良=建設部長、急傾斜地防災=建設部長、教育問題複数=教育長・教育部長、地域防災・ケーブルテレビ活用=総務部長、避難場所管理体制=福祉保健部長等）が含まれるが、対応する答弁セグメントは今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "（仮称）歴史民俗資料館建設に向けた基本構想",
+            "questionSummary": "「東九州の交流拠点都市・延岡」を目指す重点事業の一つである（仮称）歴史民俗資料館について、整備検討懇話会の設置を踏まえた市長の思いと基本構想を質問した。",
+            "answerSummary": "文化財・歴史資料を収集・保存・展示できる施設を整備することで、市民の郷土への愛着と誇りの醸成、市外からの交流拠点づくりを目指す考えを示した。懇話会には建設目的や関連施設との連携を説明し、広い視点での意見を求めたと説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm12", "summary": "（仮称）歴史民俗資料館の基本構想について市長の思いを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "郷土への愛着醸成と交流拠点づくりを目指す考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "高齢者の社会参加促進・健康づくりに対する基本姿勢",
+            "questionSummary": "高齢化率19.9％に達している状況を踏まえ、高齢者の社会参加の促進や健康づくりに対する市長の基本姿勢を質問した。",
+            "answerSummary": "高齢者の社会参加活動が生きる意欲や心身の健康増進につながるとの認識を示し、高齢者の生活を社会全体で支える相互連帯意識を醸成できるよう環境整備に努める考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm12", "summary": "高齢者の社会参加促進・健康づくりに対する基本姿勢を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "相互連帯意識の醸成に向けた環境整備に努める考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成12年第11回定例会（第2号 9月12日） 猪股秀明君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H120912A/48950/10/1//0/0", "speakerSection": "pos=48950" },
+          { "title": "平成12年第11回定例会（第2号 9月12日） 市長（櫻井哲雄君）（答弁：歴史民俗資料館・高齢者施策）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H120912A/67220/10/1//0/0", "speakerSection": "pos=67220" },
+          { "title": "平成12年第11回定例会（第2号 9月12日）発言者一覧（r_Speakers.exe、81発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H120912A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=48950）・市長答弁原文（pos=67220）をscripts/lib/minutes-source.mjsの実関数（fetchSegmentText等）経由で取得・精読し、内容・発言者・質問と答弁の対応関係を確認した。壇上質問は歴史民俗資料館、高齢者施策（2項目）、公共事業発注、旧道維持管理、県道市道改良（2路線）、急傾斜地防災（2点）、教育問題（高校再編・合同選抜・通信制課程・インターネット整備・学校評議員・外部講師制度・育英会奨学制度）、地域防災・ケーブルテレビ、避難場所管理体制など15項目超を含む大部な質問だったが、市長答弁セグメント（pos=67220）で直接対応が確認できた2項目のみを構造化した。福祉保健部長・企画部長・建設部長・市民環境部長・教育長・教育部長・総務部長の答弁（同一本会議日内、pos=68732〜199110の範囲）は今回未取得（アクセス回数の制約）。"
+      },
+      "mergeInstructions": "先にcouncilSessionsProposal[0]（id: 2000-09）をsrc/data/councilSessions.jsonへ追加する。その後、councilSpeechSummaries.jsonのmembers配列へ、proposedMemberRecordWrapperをベースにspeeches:[speech]を追加した新規メンバーオブジェクトとして挿入する。"
+    },
+    {
+      "candidateId": "fm18-2000-09-12-ippan-shitsumon",
+      "classification": "A_ready_for_merge",
+      "classificationNote": "councilSessions.json案（id: 2000-09）とセットでマージ可能。isPublishedはfalseのまま（理由はfm12候補と同様）。",
+      "memberIdResolution": {
+        "memberId": "fm18",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『西原茂樹君』とformerMembers.json fm18『西原 茂樹』の氏名完全一致（同姓同名候補なし）に加え、fm18のnoteに記載された選挙結果（1999-04-25執行で当選、2003・2007・2011・2015年執行分も当選、5期在職）で、2000年9月時点（1期目）に在職していたことを二次確認した。"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm18",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2000-09-12", "to": "2000-09-12" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "用地問題", "sessionCount": 1 },
+          { "topic": "環境政策", "sessionCount": 1 },
+          { "topic": "公共施設運営", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは在職期間全体（1999年当選〜2019年次期選挙まで5期在職）の他会期件数が不明のため省略した。"
+      },
+      "speech": {
+        "id": "fm18-2000-09-12-ippan-shitsumon",
+        "memberId": "fm18",
+        "sessionId": "2000-09",
+        "date": "2000-09-12",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["用地問題", "環境政策", "公共施設運営"],
+        "shortSummary": "平成12年9月定例会（第11回定例会、第2号）で西原茂樹議員が行った総括質疑及び一般質問（壇上、岡富山共有地問題・環境保全都市宣言と太陽光発電・職員ネームプレート着用・放置自動車対策・信号機設置・自転車無灯火・空き缶散乱防止条例・ごみ問題・ヘルストピア入館料・橋梁架替・公営住宅・青少年対策など多数の項目を通告）のうち、市長が直接答弁した岡富山共有地問題への対応、太陽光発電の推進、ヘルストピア延岡の入館料改定（分離方式は見送り）の3項目を要約したもの。他の項目（総務部長=ネームプレート・ケーブルテレビ周知、市民環境部長=信号機・自転車安全、建設部長=橋梁・公営住宅等）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "岡富山共有地問題に関する市の対応",
+            "questionSummary": "岡富山共有地の地権者3名が市を刑事告訴している問題について、市が同地を入会地と認識していたか等、経緯の説明を求めた。",
+            "answerSummary": "告訴状が提出され警察において調査中であるため答弁は差し控えるとし、市として警察の調査には全面的に協力する考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm18", "summary": "岡富山共有地問題について市の認識と経緯を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "警察調査中を理由に答弁を差し控え、調査への全面協力の考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "太陽光発電の推進・補助制度創設・公共施設への設置",
+            "questionSummary": "地球環境保全都市宣言を踏まえ、市民への太陽光発電推進、先進地のような補助金創設、市の各種施設への太陽光発電システム設置の考えについて質問した。",
+            "answerSummary": "国の助成制度の動向を踏まえながら普及促進に取り組むべきものと認識しているとし、公共施設への設置については市営住宅街灯での活用例を挙げ、費用対効果を勘案しながら取り組む必要があるとの考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm18", "summary": "太陽光発電の市民への推進・補助金創設・公共施設設置について質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "普及促進に取り組むべきとの認識を示し、公共施設設置は費用対効果を勘案し検討する考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "ヘルストピア延岡のプール・ふろ分離入館料の試験導入",
+            "questionSummary": "ヘルストピア延岡の入館料について、プールとふろを分離した料金制（各500円等）を1年間試験的に導入してはどうか質問した。",
+            "answerSummary": "分離方式では前年並みの入館料確保に約3万5千人の新規入館者増が必要との試算になり、近隣類似施設の開設による利用者減少の影響が続く中で大幅な増加は困難と見込まれることから、料金徴収方法等の問題もあり現時点では好ましくないと判断したと説明した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm18", "summary": "ヘルストピア延岡のプール・ふろ分離入館料の試験導入を提案し質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "試算上の課題を説明し、現時点では好ましくないと判断したことを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成12年第11回定例会（第2号 9月12日） 西原茂樹君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H120912A/89248/10/1//0/0", "speakerSection": "pos=89248" },
+          { "title": "平成12年第11回定例会（第2号 9月12日） 市長（櫻井哲雄君）（答弁：岡富山共有地・太陽光発電・ヘルストピア入館料）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H120912A/104346/10/1//0/0", "speakerSection": "pos=104346" },
+          { "title": "平成12年第11回定例会（第2号 9月12日）発言者一覧（r_Speakers.exe、81発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H120912A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=89248）・市長答弁原文（pos=104346）を実関数経由で取得・精読した。岡富山共有地問題は市長が刑事告訴を受けている案件（第三者からの告訴、係争中を理由に答弁を差し控えた事実をそのまま中立的に記録。本サイトの編集方針＝特定の当事者への批判・推測を含めない、に沿い、答弁内容をそのまま要約するにとどめた）。壇上通告のうち、市長答弁以外の項目（総務部長=ネームプレート着用・ケーブルテレビ周知、市民環境部長=放置自動車・信号機・自転車無灯火・空き缶条例・ごみ問題複数、建設部長=橋梁架替・公営住宅・滞納対策、教育長=青少年対策）は今回未取得（アクセス回数の制約）。"
+      },
+      "mergeInstructions": "先にcouncilSessionsProposal[0]（id: 2000-09）をsrc/data/councilSessions.jsonへ追加する。その後、councilSpeechSummaries.jsonのmembers配列へ新規メンバーオブジェクトとして追加する。"
+    },
+    {
+      "candidateId": "fm14-2004-06-14-ippan-shitsumon",
+      "classification": "A_ready_for_merge",
+      "classificationNote": "councilSessions.json案（id: 2004-06）とセットでマージ可能。isPublishedはfalseのまま。重要：fm14はreports/phase57-58-general-questions-implementation-findings.jsonで既に2005-09-14分の候補（memberId fm14、まだ未マージ）が提案済みである。本候補は同じfm14の『別の会期』の発言であり、マージ時は新規メンバーオブジェクトを二重に作らず、phase57-58提案分のspeeches配列へ本speechを追加する形にすること（本ファイルのproposedMemberRecordWrapperMergedは、phase57-58提案分と本候補を統合した最終形のwrapperを参考として掲載した）。",
+      "memberIdResolution": {
+        "memberId": "fm14",
+        "confidence": "exact",
+        "resolvedBy": "phase57-58で既にexact確認済み（氏名漢字・かな完全一致、在籍期間の重なり、同姓同名候補なし）。今回の発言者ラベル『後藤哲朗君』も同じくfm14『後藤 哲朗』と完全一致することを再確認した。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingProposal": "reports/phase57-58-general-questions-implementation-findings.json の resolvedCandidates[1]（fm14）",
+      "proposedMemberRecordWrapperMerged": {
+        "memberId": "fm14",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2004-06-14", "to": "2005-09-14" },
+        "analyzedSessionCount": 2,
+        "sessionsWithSpeechCount": 2,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "防災", "sessionCount": 1 },
+          { "topic": "水道", "sessionCount": 1 },
+          { "topic": "国政・政治", "sessionCount": 1 },
+          { "topic": "指定管理者", "sessionCount": 1 },
+          { "topic": "地域振興", "sessionCount": 2 },
+          { "topic": "自治会", "sessionCount": 1 },
+          { "topic": "市政懇談会", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "phase57-58提案分（2005-09-14、topics: 防災/水道/国政・政治/指定管理者/地域振興）と本候補（2004-06-14、topics: 自治会/地域振興/市政懇談会）を合算したtopicCountsを示した（地域振興は両会期に登場するためsessionCount:2）。servedSessions=[]は変更なし。"
+      },
+      "speech": {
+        "id": "fm14-2004-06-14-ippan-shitsumon",
+        "memberId": "fm14",
+        "sessionId": "2004-06",
+        "date": "2004-06-14",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["自治会", "地域振興", "市政懇談会"],
+        "shortSummary": "平成16年6月定例会（第9回定例会、第2号）で後藤哲朗議員が先陣（一番手）で行った一般質問（壇上、市長の政治姿勢＝自治会関連3点・「未来をひらく人づくり」都市宣言・里浜づくり事業・リフレッシュのべおか推進助成事業・歩きたくなるみち500選・新清掃工場焼却炉機種選定・交通安全対策・妙田川環境整備・児童虐待問題など多数の項目を通告）のうち、市長が直接答弁した自治会の役割・位置づけ、自治会活動の充実強化と区未加入対策、市政懇談会の意義・あり方の3項目を要約したもの。他の項目（企画部長=人づくり宣言・里浜づくり・助成事業・ウォーキング選定、市民環境部長=焼却炉選定・自転車安全、都市建設部長=交通安全対策・妙田川、教育長=児童虐待）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "住民自治会の市政への役割・位置づけ",
+            "questionSummary": "市内の住民自治会が市政において果たす役割・位置づけ及びその考え方について市長の所見を質問した。",
+            "answerSummary": "自治会は住民の意思に基づき組織された任意団体であり、災害時の相互扶助や防犯、環境美化など地域コミュニティの形成に大きく寄与しているとし、自治会と行政は住みよいまちづくりのためのパートナーとして協力し合う関係にあるとの考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "住民自治会の市政への役割・位置づけについて質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "自治会と行政はパートナーとして協力し合う関係にあるとの考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "自治会活動の充実強化・区への未加入世帯の加入促進策",
+            "questionSummary": "行政と住民の協働推進を目的とした自治会活動の充実・強化、及び区への未加入世帯の加入促進に向けた市の支援策について質問した。",
+            "answerSummary": "防犯灯設置補助、自治公民館建設費の一部助成、自主防災組織設立時の資機材交付等の支援を行っているとし、区への加入促進についても市民課・建築住宅課窓口でのチラシ配布や市営住宅入居説明会での勧誘等を行っており、今後も区長連絡協議会と連携しながら対応していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "自治会活動の充実強化・区の未加入世帯加入促進策について質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "既存の支援策を説明し、区長連絡協議会と連携し対応していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "市政懇談会の意義・あり方",
+            "questionSummary": "毎年7地区で開催される市政懇談会について、要望事項に土木行政関連の要望が偏りがちな現状を踏まえ、懇談会の意義・あり方についての所見を質問した。",
+            "answerSummary": "市政懇談会は住民と行政が市政全般について直接話し合う重要な機会であるとし、ごみ問題や地域福祉など共通する課題を懇談項目として取り上げている地区もあるとして、今後も懇談会のテーマや進め方について各地区役員と相談していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm14", "summary": "市政懇談会の意義・あり方について質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "各地区役員と相談しながら今後の進め方を検討する考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成16年第9回定例会（第2号 6月14日） 後藤哲朗君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H160614A/9924/10/1//0/0", "speakerSection": "pos=9924" },
+          { "title": "平成16年第9回定例会（第2号 6月14日） 市長（櫻井哲雄君）（答弁：自治会・市政懇談会）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H160614A/24970/10/1//0/0", "speakerSection": "pos=24970" },
+          { "title": "平成16年第9回定例会（第2号 6月14日）発言者一覧（r_Speakers.exe、82発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H160614A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=9924、『先陣を承りました後藤哲朗でございます』と冒頭で自認）・市長答弁原文（pos=24970）を実関数経由で取得・精読した。councilSpeechSummaries.jsonの既存398件・phase57-58提案分（sessionId=2005-09、date=2005-09-14）と日付・会期IDが異なることを確認済み（重複なし）。壇上通告のうち市長答弁以外の項目（企画部長=人づくり宣言・里浜づくり・助成事業・ウォーキング500選、市民環境部長=焼却炉機種選定・自転車安全利用、都市建設部長=交通安全対策3か所・妙田川、教育長=児童虐待防止）は今回未取得（アクセス回数の制約）。"
+      },
+      "mergeInstructions": "先にcouncilSessionsProposal[1]（id: 2004-06）をsrc/data/councilSessions.jsonへ追加する。その後、councilSpeechSummaries.jsonへfm14を追加する際は、phase57-58提案分（2005-09-14）と本speech（2004-06-14）の両方をspeeches配列に含めた単一のfm14メンバーオブジェクトとして挿入する（proposedMemberRecordWrapperMergedを参照）。新規メンバーオブジェクトを2つ作らないこと。"
+    },
+    {
+      "candidateId": "fm40-2004-06-14-ippan-shitsumon",
+      "classification": "A_ready_for_merge",
+      "classificationNote": "councilSessions.json案（id: 2004-06）とセットでマージ可能。isPublishedはfalseのまま。",
+      "memberIdResolution": {
+        "memberId": "fm40",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『太田龍君』とformerMembers.json fm40『太田 龍』の氏名完全一致（同姓同名候補なし）に加え、fm40のnoteに記載された選挙結果（2003-04-27執行延岡市議会議員選挙で初当選、2007・2011・2015年執行分も当選、4期在職）で、2004年6月時点（初当選から約1年、1期目在職中）に在職していたことを二次確認した。壇上質問本文でも本人が『社民党の太田龍でございます』と名乗っており、fm40のnoteの党派（社会民主党）とも一致する。"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm40",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2004-06-14", "to": "2004-06-14" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "平和・人権", "sessionCount": 1 },
+          { "topic": "国政・政治", "sessionCount": 1 },
+          { "topic": "歴史・文化施設", "sessionCount": 1 },
+          { "topic": "地域医療", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは在職期間全体（2003年当選〜2019年次期選挙まで4期在職）の他会期件数が不明のため省略した。"
+      },
+      "speech": {
+        "id": "fm40-2004-06-14-ippan-shitsumon",
+        "memberId": "fm40",
+        "sessionId": "2004-06",
+        "date": "2004-06-14",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["平和・人権", "国政・政治", "歴史・文化施設", "地域医療"],
+        "shortSummary": "平成16年6月定例会（第9回定例会、第2号）で太田龍議員（社会民主党）が行った個人質問（壇上、平和と人権・国民年金未納問題・一市三町合併と財政・（仮称）歴史民俗資料館・合併協議会分科会の進め方・JR九州ダイヤ改正・南浦診療所複合施設・小児医療・雇用対策・祝子川河川改修・県道整備・栄養教諭制度・児童虐待問題など多数の項目を通告）のうち、市長が直接答弁した平和と人権への考え方、国民年金未納・未加入問題の受け止め、新市建設計画における歴史民俗資料館の位置づけ、南浦診療所改築を含む複合施設のあり方の4項目を要約したもの。他の項目（総務部長=合併時財政影響、企画部長=合併協議会分科会・JR九州ダイヤ改正、福祉保健部長=小児医療、商工部長=雇用対策、都市建設部長=祝子川河川改修・県道整備、教育長=栄養教諭制度、教育委員長=児童虐待問題）は今回未取得。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "平和と人権に対する市長の考え方",
+            "questionSummary": "アメリカの核実験、イラク戦争における捕虜虐待等の国際情勢を踏まえ、延岡大空襲の被害を経験した本市の市長として、平和と人権に対する考えを質問した。",
+            "answerSummary": "延岡大空襲による被害に触れつつ、戦争においては罪のない市民が最大の犠牲者であるとの認識を示し、非核・平和を固く誓うことが重要であるとして、教育・福祉・人権・国際交流等の分野の施策を推進しながら世界平和の実現に努める考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm40", "summary": "国際情勢を踏まえた平和と人権に対する市長の考えを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "非核・平和を誓うことが重要であるとし、関連施策の推進に努める考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "国民年金未納・未加入問題に対する市政トップリーダーとしての受け止め",
+            "questionSummary": "政治家等の国民年金未納・未加入問題が相次いで発覚したことを踏まえ、市政のトップリーダーとしてこの問題の推移をどう考えるか質問した。",
+            "answerSummary": "自身の年金保険料は在職期間中すべて納付している旨を説明した上で、年金法改正の争点が未加入・未納問題の報道に集中し本質的な議論が国民に十分伝わらなかったことを残念に思うとし、高齢者・若年層双方の理解と信頼が得られる制度の確立を求める考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm40", "summary": "国民年金未納・未加入問題への市長自身の受け止めを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "自身は全期間納付済みであることを説明し、制度への理解・信頼確立を求める考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "新市建設計画における（仮称）歴史民俗資料館建設の位置づけ",
+            "questionSummary": "一市三町合併の新市建設計画に（仮称）歴史民俗資料館の建設を盛り込むべきとの提案を行い、市長の考えを質問した。",
+            "answerSummary": "任意協議会の地域将来構想において、地域の歴史的文化的財産を活用した交流拡大のため文化教養施設の整備充実に努めることとしており、新市建設計画の策定にあたっても地域将来構想を踏まえながら協議していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm40", "summary": "新市建設計画への歴史民俗資料館建設の位置づけを提案し質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "地域将来構想を踏まえながら新市建設計画の策定過程で協議していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q4",
+            "title": "南浦診療所改築を含む複合施設のあり方",
+            "questionSummary": "老朽化した南浦診療所・南浦支所の改築を含む複合施設の整備について、地域住民の要望を踏まえた市長の考えを質問した。",
+            "answerSummary": "南浦診療所が地域医療の確保の面で重要な役割を果たしてきたとの認識を示し、地域活性化に向け最も望ましい複合施設のあり方について住民の意見を聞きながら診療所の問題とあわせて検討していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm40", "summary": "南浦診療所改築を含む複合施設整備について市長の考えを質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "住民の意見を聞きながら診療所の問題とあわせて検討していく考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          { "title": "平成16年第9回定例会（第2号 6月14日） 太田龍君（質問：壇上、全項目）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H160614A/71566/10/1//0/0", "speakerSection": "pos=71566" },
+          { "title": "平成16年第9回定例会（第2号 6月14日） 市長（櫻井哲雄君）（答弁：平和と人権・年金問題・歴史民俗資料館・南浦診療所複合施設）", "sourceType": "official-minutes-html", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H160614A/87156/10/1//0/0", "speakerSection": "pos=87156" },
+          { "title": "平成16年第9回定例会（第2号 6月14日）発言者一覧（r_Speakers.exe、82発言セグメント確認）", "sourceType": "official-minutes-html-index", "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H160614A/0/0//10/1/3:0/654/1//0/0/0", "speakerSection": "n/a" }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の質問原文全文（pos=71566）・市長答弁原文（pos=87156）を実関数経由で取得・精読した。平和・人権及び国政（年金）に関する質問項目は、議員個人の見解表明と市長の応答をそのまま中立的に要約し、特定政党・政治団体への支持・批判は付加していない（編集方針に沿い、会議録に記録された事実の要約にとどめた）。壇上通告のうち市長答弁以外の項目（総務部長=合併時財政シミュレーション、企画部長=合併協議会分科会運営・JR九州ダイヤ改正対応、福祉保健部長=小児医療体制、商工部長=雇用対策、都市建設部長=祝子川河川改修・県道岩戸延岡線、教育長=栄養教諭制度、教育委員長=児童虐待問題）は今回未取得（アクセス回数の制約）。"
+      },
+      "mergeInstructions": "先にcouncilSessionsProposal[1]（id: 2004-06）をsrc/data/councilSessions.jsonへ追加する。その後、councilSpeechSummaries.jsonのmembers配列へ新規メンバーオブジェクトとして追加する。"
+    }
+  ],
+  "identifiedButNotProcessed": [
+    {
+      "note": "以下は同じ本会議日の発言者一覧で発言者ラベルの氏名照合（matchSpeakerToMember、選挙結果による二次確認込み）まで完了したが、アクセス回数の予算配分上、質問全文・答弁全文の取得を行わなかった人物。将来のワーカーが追加着手しやすいよう、fileName・pos・照合結果を記録する（架空データではなく、実在の発言セグメントの位置情報）。",
+      "items": [
+        { "fileName": "H120912A", "date": "2000-09-12", "sessionLabel": "平成12年 第11回定例会 ", "speakerLabel": "平田信広君", "questionPos": 12322, "answerPos": [27524, 45858, 48464], "memberId": "m20", "confidence": "exact", "resolvedBy": "現職議員m20『平田 信広』と氏名完全一致。本人の選挙公報（令和5年執行分、既存members.json記載）に『市議6期24年の実績』とあり、初当選が1999年頃と推定でき2000年在職と矛盾しない。" },
+        { "fileName": "H120912A", "date": "2000-09-12", "sessionLabel": "平成12年 第11回定例会 ", "speakerLabel": "宮原則秋君", "questionPos": 121370, "answerPos": [136770], "memberId": "fm28", "confidence": "exact", "resolvedBy": "formerMembers.json fm28『宮原 則秋』と氏名完全一致。1999-04-25執行選挙で当選の記録あり（2000年9月時点で在職1期目）。" },
+        { "fileName": "H120912A", "date": "2000-09-12", "sessionLabel": "平成12年 第11回定例会 ", "speakerLabel": "佐藤正人君", "questionPos": 160018, "answerPos": [176514], "memberId": "fm11", "confidence": "exact", "resolvedBy": "formerMembers.json fm11『佐藤 正人』と氏名完全一致。1999-04-25執行選挙で当選の記録あり（2000年9月時点で在職1期目）。会議録中の議長『佐藤道男君』（fm26）とは別人（下の名前が異なる）であることを確認済み。" },
+        { "fileName": "H160614A", "date": "2004-06-14", "sessionLabel": "平成16年 第 9回定例会 ", "speakerLabel": "西原茂樹君", "questionPos": 41216, "answerPos": [50338, 65152, 70696], "memberId": "fm18", "confidence": "exact", "resolvedBy": "本ファイルのfm18候補（2000-09-12分）と同一人物。2004-06-14にも別質問で登壇しており、既存fm18ラッパーへ追加する第3の会期候補となりうるが、今回は未処理（内容3ラウンド分あり、精読には追加アクセスが必要）。" },
+        { "fileName": "H160614A", "date": "2004-06-14", "sessionLabel": "平成16年 第 9回定例会 ", "speakerLabel": "平田信広君", "questionPos": 101674, "answerPos": [115926, 131550], "memberId": "m20", "confidence": "exact", "resolvedBy": "現職議員m20と氏名完全一致（上記と同一人物、2004年時点でも在職）。" },
+        { "fileName": "H160614A", "date": "2004-06-14", "sessionLabel": "平成16年 第 9回定例会 ", "speakerLabel": "山田良市君", "questionPos": 138404, "answerPos": [151966], "memberId": "fm24", "confidence": "exact", "resolvedBy": "formerMembers.json fm24『山田 良市』と氏名完全一致。1999-04-25執行選挙で当選、2003-04-27執行選挙でも再選の記録あり（2004年6月時点で在職2期目）。" }
+      ]
+    }
+  ],
+  "parserFindings": [
+    {
+      "severity": "D_parser_error",
+      "location": "scripts/lib/minutes-source.mjs の parseSessionLabel()（L506-509付近）",
+      "issue": "正規表現 /第(\\d+)回(定例会|臨時会)/ が『第』と数字の間の半角スペースに対応していない。実データで確認：平成12年『第 8回臨時会』『第 9回定例会』、平成15年『第 1回臨時会』『第 2回定例会』『第 3回定例会』『第 4回定例会』、平成16年『第 5回臨時会』『第 6回定例会』『第 7回臨時会』『第 8回臨時会』『第 9回定例会』のラベルで、sessionNumber・sessionTypeがともにundefinedになることをlistSessionsForYear(2000/2003/2004)の実行結果で確認した（本ファイルのcouncilSessionsProposalの『第9回』は、この不具合を回避するため人手でスペースを除去して正規化した値）。会議録検索システムは単一桁の会期番号（1〜9）を2桁幅に揃えるため半角スペースでパディングしていると見られ、10件以上該当し得る（西暦2000年代前半に集中）。",
+      "suggestedFix": "正規表現を /第\\s*(\\d+)回(定例会|臨時会)/ に変更する（未実装、修正はしていない）。",
+      "impact": "listSessionsForYear()の戻り値でsessionNumber/sessionTypeがundefinedになるだけで、treedepth・labelは正しく取得できるため、本文取得自体への実害はない。ただしcouncilSessions.json案の自動生成を将来行う場合は、この不具合を先に直さないとsessionNumberが欠落した会期データが量産される。"
+    },
+    {
+      "severity": "D_parser_error",
+      "location": "scripts/lib/minutes-source.mjs の classifySpeakerLabel()（L627-637付近）",
+      "issue": "officialTitles配列およびその後の正規表現 /部長|課長|局長|次長|事務局長/ が、2000年代の会議録に実在する以下の役職名に対応していない：『農業委員会会長』（例：H120912A order10『農業委員会会長（高本清君）』）、『建設部参事』（例：同order73『建設部参事（児玉太君）』）、『教育委員長』（教育長とは別の役職。例：H160614A order41『教育委員長（岩佐郁子君）』、order44『太田龍君』の質問への答弁でも教育委員長への答弁要請あり）。これらはいずれもspeakerType:\"member\"に分類され、本来\"official\"または議員以外の立場であるにもかかわらず一般議員と同じ扱いになる。",
+      "suggestedFix": "officialTitlesに『農業委員会会長』『教育委員長』を追加し、正規表現に『参事』を追加する案が考えられる（未実装、修正はしていない）。",
+      "impact": "本ワーカーは全候補についてmatchSpeakerToMember()の結果とformerMembers.json/members.jsonの選挙結果を個別に二次確認したため、実際の候補データに誤りは生じていない。ただし、classifySpeakerLabel()の結果だけで『member=一般質問の登壇者』と機械的に判定する将来の自動化処理を書く場合、農業委員会会長・教育委員長・部長級参事が誤って一般質問の登壇候補として拾われる恐れがある。"
+    }
+  ],
+  "summary": {
+    "yearsCovered": [2000, 2004],
+    "yearsWithSessionListConfirmedButNotDeepDived": [2001, 2002, 2003],
+    "councilSessionsProposalCount": 2,
+    "candidatesByClassification": {
+      "A_ready_for_merge": 4,
+      "B_member_mapping_pending": 0,
+      "C_source_verification_pending": 0,
+      "D_parser_error": 0,
+      "E_duplicate": 0,
+      "F_unavailable": 0
+    },
+    "newQuestionItemsCount": 12,
+    "duplicateExcludedCount": 0,
+    "duplicateCheckMethod": "councilSpeechSummaries.json全398件のspeeches[].date、及びgeneralQuestions.json全15件のdateと、本ファイルの新規候補4件のdate（2000-09-12×2、2004-06-14×2）を突合し、一致なしを確認した（node -eによる機械突合）。",
+    "parserIssueCount": 2,
+    "networkAccessCount": 16,
+    "warnings": [
+      "councilSessions.jsonに2019-06より前の会期エントリが依然として1件も存在しない（UNR-026）。本ファイルで初めて2000-09・2004-06の会期レコード案を作成したが、これらがsrc/data/councilSessions.jsonへ実際にマージされるまでは、本ファイルの一般質問候補4件をcouncilSpeechSummaries.jsonへ追加してもvalidate-data.mjsが『存在しない会期IDです』でエラーになる。",
+      "fm14（後藤哲朗）は本ファイルとreports/phase57-58-general-questions-implementation-findings.jsonの両方に候補が存在する。マージ時は同一メンバーオブジェクトのspeeches配列へ両方の発言をまとめること（本ファイルのfm14候補のmergeInstructions参照）。",
+      "4候補とも、壇上通告の全項目のうち市長答弁で直接確認できた範囲（2〜4項目）のみを構造化した。各候補の壇上質問は10項目超の場合が多く、部長級・教育長級の答弁は今回いずれも未取得（アクセス回数の制約、無理に埋めていない）。",
+      "identifiedButNotProcessedに、氏名照合まで完了しているが本文未取得の6件（平田信広m20×2会期分、宮原則秋fm28、佐藤正人fm11、西原茂樹fm18の別会期分、山田良市fm24）を記録した。次回ワーカーが追加調査する際の起点として利用可能。",
+      "parserFindingsに2件のD_parser_error（parseSessionLabel()の半角スペース非対応、classifySpeakerLabel()の農業委員会会長・教育委員長・部長級参事の非対応）を記録した。いずれもscripts/lib/minutes-source.mjsは読み取り専用のため未修正。",
+      "太田龍（fm40）の質問項目には、核実験・イラク戦争・国民年金未納問題等の国政に関する議員個人の見解が含まれるが、本サイトの編集方針（特定政党・政治団体・議員への支持推薦批判をしない）に沿い、会議録に記録された質問・答弁内容を中立的に要約するにとどめ、評価や意見は付加していない。",
+      "blocked件数：0件（3回失敗して打ち切ったページはなし。今回実行した全16リクエストがいずれも1回で成功した）。"
+    ]
+  }
+}

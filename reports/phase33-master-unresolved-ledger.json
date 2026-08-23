@@ -518,7 +518,7 @@
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
       "lastCheckedAt": "2026-08-23",
-      "notes": "Phase33 STEP3で新規発見。市長選挙（1933年から連続して収録済み）とは異なり、市議選は候補者数が多いため優先度は市長選より低いCとした。 Phase38でTASK-BACKFILL-002として正式定義（対象期間1933-1998年、推定15-17回の選挙・概算300-600候補者レコード、優先度C、reports/phase38-elections-findings.mdに詳細）。今回は定義のみで実行はしていない。 Phase60で新規リード発見：延岡市史下巻（1983年版）のNDL書誌情報に「延岡市年表:p911-977」の記載があり、市議選の実施記録を含む可能性がある（本文未確認、個人送信サービス限定とみられる）。次フェーズでのNDL閲覧・現地閲覧の優先確認対象として記録。オンラインで自由アクセス可能な資料18件を追加調査したが新規確定選挙は0件のまま。"
+      "notes": "Phase33 STEP3で新規発見。市長選挙（1933年から連続して収録済み）とは異なり、市議選は候補者数が多いため優先度は市長選より低いCとした。 Phase38でTASK-BACKFILL-002として正式定義（対象期間1933-1998年、推定15-17回の選挙・概算300-600候補者レコード、優先度C、reports/phase38-elections-findings.mdに詳細）。今回は定義のみで実行はしていない。 Phase60で新規リード発見：延岡市史下巻（1983年版）のNDL書誌情報に「延岡市年表:p911-977」の記載があり、市議選の実施記録を含む可能性がある（本文未確認、個人送信サービス限定とみられる）。次フェーズでのNDL閲覧・現地閲覧の優先確認対象として記録。オンラインで自由アクセス可能な資料18件を追加調査したが新規確定選挙は0件のまま。 Phase73で新規発見：宮崎県選挙管理委員会刊行「選挙結果記録」「選挙の記録」シリーズが1955-1995年の統一地方選挙11回分（市町村選挙編を含む）を収録していることをNDLサーチ書誌検索で確認。所蔵館・請求記号・NDL pidまで特定済み（うち1963年版は大分県立図書館で貸出可、ILL候補）。書誌レベルの確認にとどまり本文は未確認（NDL個人送信サービスまたは現地閲覧が必要）。1978年11月市長選挙（UNR-002）は単年度巻を特定できず、周年史を次点候補として記録。"
     },
     {
       "unresolvedId": "UNR-017",
@@ -816,16 +816,16 @@
       "targetFiscalYear": null,
       "targetPeriod": "2000-2019年（平成12年〜令和元年5月）",
       "description": "src/data/councilSessions.jsonに2019-06より前の会期レコードが1件も存在せず、scripts/validate-data.mjsがspeech.sessionIdの未登録を理由にエラーとするため、Phase56で平成対応が完了したparserで取得した過去会期の一般質問候補（矢野戦一郎・後藤哲朗・甲斐正幸）を正式に公開できない。",
-      "currentStatus": "not_collected",
+      "currentStatus": "resolved",
       "priority": "B",
-      "evidenceLevel": "Level4（原因特定済み、councilSessions.json拡張が未着手）",
+      "evidenceLevel": "Level5（確定・src/data反映済み）",
       "sourceRefs": [],
       "alreadyCheckedSources": [
         "reports/phase57-58-general-questions-implementation-findings.md"
       ],
       "alreadyTriedMethods": [],
       "unresolvedReason": "B（councilSessions.jsonへの平成年代会期メタデータ追加が必要）",
-      "nextAction": "councilSessions.jsonへ、Phase56-58で実データ確認済みの平成年代会期（2005-09、2013-06、2014-03等）から順に、会期名・会期種別・開閉会日・出典PDF情報を追加する専用タスクを起票する。",
+      "nextAction": "なし（解決済み）",
       "nextSourceCandidate": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）、延岡市議会公式サイトの議案審査等結果PDF",
       "primaryRoute": "B",
       "secondaryRoute": null,
@@ -833,36 +833,95 @@
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
       "lastCheckedAt": "2026-08-23",
-      "notes": "Phase57-58新規発見。一般質問backfillの最後のボトルネック。"
+      "notes": "Phase57-58新規発見。一般質問backfillの最後のボトルネック。 Phase67-77で19件の会期レコードをcouncilSessions.jsonへ追加し、一般質問21件（新規member8名＋既存member7名への追加）をisPublished:trueで公開した。councilSpeechSummaries.jsonの収録範囲が2019-06以降から2000年度まで拡大。"
+    },
+    {
+      "unresolvedId": "UNR-027",
+      "category": "finance",
+      "subcategory": "debtBalance-FY1960-1988-onlineExhausted",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "FY1960-1988（FY1989未満）",
+      "description": "Phase74でe-Stat「地方財政状況調査」の静的ファイル配信の下限がFY1989であることを確定した。これにより、archiveFiscalYears.jsonにレコードは存在するが市債・基金・財政力指数・人口が欠落しているFY1960-1982・FY1988（UNR-014/015に含まれない「未追跡」区分）も、オンライン経路が尽きたことが新たに判明した。",
+      "currentStatus": "reference_pending",
+      "priority": "C",
+      "evidenceLevel": "Level4（オンライン経路の限界を実証済み、現地閲覧・外部照会が必要）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "reports/phase74-finance-pre1990-findings.json"
+      ],
+      "alreadyTriedMethods": [
+        "e-Stat地方財政状況調査の静的URL境界確認（year=19890/19830/19800でいずれも0件を確認）"
+      ],
+      "unresolvedReason": "A（オンライン一次資料が存在しないことを確認済み、現地閲覧・外部照会が必要）",
+      "nextAction": "延岡市決算書並意見書・市政二十年史・宮崎県統計年鑑等、Phase20/29で既に整理済みの現地閲覧ルートを優先する（同じオンライン検索は繰り返さない）。",
+      "nextSourceCandidate": null,
+      "primaryRoute": "D",
+      "secondaryRoute": null,
+      "requiresOnsite": true,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase74新規発見。UNR-014/015とは別枠（FY1934-1948, 1951-53, 1959, 1983-87は既存項目でカバー済み）。"
+    },
+    {
+      "unresolvedId": "UNR-028",
+      "category": "generalQuestions",
+      "subcategory": "unmappedSpeaker-nakai-kazuma",
+      "targetPerson": "中井一萬",
+      "targetFiscalYear": null,
+      "targetPeriod": "1999-2003年任期（推定）",
+      "description": "2006年6月13日の会議録に一般質問を行った議員として「中井一萬君」が登場するが、electionResults.json（1999-2023年、一般・補欠選挙全10回）・formerMembers.json（58名）・members.json（26名）のいずれにも一致する候補が存在しない。1999年〜2003年任期のformerMembers.jsonカバレッジに欠落がある可能性を示す発見。",
+      "currentStatus": "unconfirmed",
+      "priority": "C",
+      "evidenceLevel": "Level2（発言記録は確認済み、人物特定は未了）",
+      "sourceRefs": [],
+      "alreadyCheckedSources": [
+        "reports/phase68-general-questions-2005-2009-findings.json",
+        "reports/phase72-member-matching-findings.json"
+      ],
+      "alreadyTriedMethods": [
+        "electionResults.json全10選挙・formerMembers.json 58名・members.json 26名との機械照合（Phase68・Phase72で2回実施、いずれも該当なし）"
+      ],
+      "unresolvedReason": "F（判読困難ではなく人物データベースの欠落）",
+      "nextAction": "1999年・2003年執行の延岡市議会議員選挙結果の現物資料（選挙管理委員会資料等）で「中井一萬」氏の当選記録を確認し、formerMembers.jsonへ新規追加する。",
+      "nextSourceCandidate": "延岡市選挙管理委員会 選挙結果資料（1999年・2003年執行分）",
+      "primaryRoute": "E",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": true,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-23",
+      "notes": "Phase68新規発見、Phase72で全10選挙への拡大再確認済み（結論変わらず）。質問本文は未取得（member-id不明のまま内容を要約しない方針）。"
     }
   ],
   "summary": {
-    "totalItems": 26,
+    "totalItems": 28,
     "byRoute": {
       "A": 0,
       "B": 8,
       "C": 4,
-      "D": 1,
-      "E": 6,
+      "D": 2,
+      "E": 7,
       "F": 7
     },
     "byPriority": {
       "A": 13,
       "B": 8,
-      "C": 5
+      "C": 7
     },
     "byStatus": {
       "disputed": 3,
-      "unconfirmed": 5,
+      "unconfirmed": 6,
       "partially_resolved": 1,
-      "not_collected": 9,
+      "not_collected": 8,
       "under_review": 2,
-      "reference_pending": 4,
-      "resolved": 2
+      "reference_pending": 5,
+      "resolved": 3
     },
-    "requiresOnsite": 9,
-    "requiresInquiry": 8,
+    "requiresOnsite": 10,
+    "requiresInquiry": 9,
     "requiresBulkBackfill": 10,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。"
   }
 }

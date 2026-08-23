@@ -4135,5 +4135,23 @@
     "lastVerifiedAt": "2026-08-23",
     "verificationStatus": "verified",
     "notes": "Phase42（OCR検索）で目次記載のみ発見・候補D（確信度低）としていたものを、Phase63でPDF実画像により本文全文を確認し確定した。"
+  },
+  {
+    "id": "civic-210",
+    "year": 2023,
+    "dateLabel": "2023年5月15日〜16日",
+    "category": "行政組織",
+    "title": "松田満男氏、議長に当選／早瀬賢一氏、副議長に当選",
+    "summary": "2023年4月23日執行の延岡市議会議員選挙（定数27）後、5月15日〜16日の臨時市議会で議長選挙・副議長選挙が行われ、松田満男議員が議長、早瀬賢一議員が副議長に選ばれた。同時に議会選出監査委員に中城あかね議員が選ばれた。任期は令和9年5月1日まで。前任の議長は松田和己氏（civic-166、2019年就任）。",
+    "relatedPersonIds": [],
+    "sourceRefs": [
+      {
+        "label": "広報のべおか2023年6月号 p.8-9（2023年5月15-16日臨時市議会、正副議長選挙・監査委員選任の記載）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14475.pdf"
+      }
+    ],
+    "lastVerifiedAt": "2026-08-23",
+    "verificationStatus": "verified",
+    "notes": "Phase75でkohoOcrSearchIndex.jsonの候補を原紙PDF画像照合して新規発見。既存civic-166（2019年、松田和己氏議長・松田満男氏副議長）の後継人事にあたる。5/15・5/16のいずれの日に正副議長選挙が実施されたかは広報本文からは一意に特定できず、会議録検索システムでの追加照合が望ましい。"
   }
 ]

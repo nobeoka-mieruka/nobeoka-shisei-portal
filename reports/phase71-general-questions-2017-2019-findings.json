@@ -1,0 +1,430 @@
+{
+  "phase": 71,
+  "title": "一般質問2017-2019年（2019年は1-5月のみ）実投入 調査結果",
+  "generatedAt": "2026-08-23",
+  "scopeNote": "対象：平成29年（2017年）・平成30年（2018年）・平成31年1-4月/令和元年1-4月相当（2019年1-5月）。2019年6月以降（令和元年6月定例会以降）は既存councilSpeechSummaries.jsonに398件収録済みのため対象外。",
+  "filesEditedByThisWorker": [
+    "reports/phase71-general-questions-2017-2019-findings.md",
+    "reports/phase71-general-questions-2017-2019-findings.json"
+  ],
+  "readOnlyFilesUsed": [
+    "scripts/lib/minutes-source.mjs",
+    "src/data/councilSessions.json",
+    "src/data/councilSpeechSummaries.json",
+    "src/data/members.json",
+    "src/data/formerMembers.json",
+    "src/data/electionResults.json",
+    "src/lib/questionLikeSpeechTypes.ts",
+    "scripts/validate-data.mjs",
+    "reports/phase56-parser-findings.md",
+    "reports/phase57-58-general-questions-implementation-findings.md"
+  ],
+  "gitCommitOrPush": "none (禁止指示どおり未実施)",
+  "networkAccessSummary": {
+    "totalRealHttpAccess": 19,
+    "budgetGuideline": "20-25回程度",
+    "breakdown": [
+      { "step": "listSessionsForYear(2017) + resolveYearTreedepth(2017)", "count": 1, "note": "phase56の既存ローカルキャッシュ(scripts/.cache/minutes)を再利用したため大半はキャッシュヒット。新規アクセスは1回のみ（getFetchStats()実測）" },
+      { "step": "listSessionsForYear(2018)相当", "count": 0, "note": "同上バッチ内。既存キャッシュヒットのみで新規アクセス0回" },
+      { "step": "2019年1-5月分（平成31年）のtreedepth手動探索（root See.exe + 境界グループ展開 + 平成31年展開）", "count": 3, "note": "minutes-source.mjsのresolveYearTreedepth()は令和元年のみを指すため、平成31年個別タブへは手動でSee.exeの木構造を辿った（fetchWithRetry経由ではなく直接fetchのためキャッシュ非対象）" },
+      { "step": "listMeetingDays × 3セッション（2017年6月/2018年12月/2019年3月）", "count": 3, "note": "getFetchStats()実測" },
+      { "step": "listSpeakerSegments × 3日程（各セッションの第2号）", "count": 3, "note": "getFetchStats()実測" },
+      { "step": "fetchSegmentText × 9（開会質問+答弁、flagship4名分）", "count": 9, "note": "getFetchStats()実測" }
+    ],
+    "rateLimitEvents": "429/403/5xx = 0件"
+  },
+  "existingDataDuplicateCrossCheck": {
+    "method": "src/data/councilSpeechSummaries.jsonの全398件speechesのdateフィールドを機械的に抽出し、2017-01-01〜2019-05-31の範囲でフィルタした。",
+    "result": "0件（既存398件の中に2017年〜2019年5月の日付を持つ発言は1件も存在しない）。councilSessions.jsonの42件のidも全て2019-06以降であることを確認済み（'2019-06'が最古）。",
+    "conclusion": "本Phaseで新規発見した候補は、既存データとの日付・sessionId・memberId重複のリスクがゼロであることを機械的に確認した上で構造化した。E_duplicate（重複除外）は0件。"
+  },
+  "sessionDiscovery": {
+    "code": "48o046ot0cia1xvtw7",
+    "2019JanMayStructuralNote": "phase56が発見した『平成30年～令和元年』境界グループタブを展開すると、令和元年・平成31年・平成30年の3個別年タブが現れる。既存のresolveYearTreedepth(2019)は令和元年のみを指すため、2019年1-5月分（平成31年）へは本Phaseで手動navigationを実装して到達した（scripts/lib/minutes-source.mjsは無改変）。平成31年には第22回定例会（2019年2月26日〜3月20日、7日程）の1会期のみが存在する。これは新体制（令和元年6月定例会=第2回）発足前、旧任期（2015年4月26日執行の市議会議員選挙で選出された任期）最後の定例会である。",
+    "sessionsIdentified": [
+      {
+        "eraLabel": "平成29年 第12回定例会",
+        "proposedSessionId": "2017-06",
+        "days": [
+          { "fileName": "H290605A", "label": "第1号 6月5日" },
+          { "fileName": "H290613A", "label": "第2号 6月13日", "checked": true, "note": "一般質問。5名の質問者を確認（河野治満・白石良盛・甲斐行雄・上杉泰洋・佐藤誠）" },
+          { "fileName": "H290614A", "label": "第3号 6月14日", "checked": false },
+          { "fileName": "H290615A", "label": "第4号 6月15日", "checked": false },
+          { "fileName": "H290623A", "label": "第5号 6月23日", "checked": false }
+        ]
+      },
+      {
+        "eraLabel": "平成30年 第20回定例会",
+        "proposedSessionId": "2018-12",
+        "days": [
+          { "fileName": "H301127A", "label": "第1号11月27日" },
+          { "fileName": "H301204A", "label": "第2号12月4日", "checked": true, "note": "一般質問。5名の質問者を確認（早瀬賢一・三上毅・梶本英一・佐藤誠・北林幹雄）" },
+          { "fileName": "H301205A", "label": "第3号12月5日", "checked": false },
+          { "fileName": "H301206A", "label": "第4号12月6日", "checked": false },
+          { "fileName": "H301214A", "label": "第5号12月14日", "checked": false }
+        ]
+      },
+      {
+        "eraLabel": "平成31年 第22回定例会",
+        "proposedSessionId": "2019-03",
+        "days": [
+          { "fileName": "H310226A", "label": "第1号2月26日" },
+          { "fileName": "H310305A", "label": "第2号3月5日", "checked": true, "note": "一般質問・代表質問。5名の質問者を確認（白石良盛・北林幹雄・上杉泰洋・太田龍〔社民党市議団代表質問〕・長友幸子）" },
+          { "fileName": "H310306A", "label": "第3号3月6日", "checked": false },
+          { "fileName": "H310307A", "label": "第4号3月7日", "checked": false },
+          { "fileName": "H310308A", "label": "第5号3月8日", "checked": false },
+          { "fileName": "H310313A", "label": "第6号3月13日", "checked": false },
+          { "fileName": "H310320A", "label": "第7号3月20日", "checked": false }
+        ],
+        "note": "旧任期最後の定例会（2019年4月21日執行の市議会議員選挙の直前）。既存収録範囲（令和元年6月定例会=第2回）と隣接するため、今回最重点で確認した。"
+      }
+    ],
+    "unexploredNote": "予算・時間の制約により各セッションとも第2号（一般質問が行われる典型日）のみを確認した。第3号以降に追加の一般質問が行われている可能性は未確認（特に2019年3月は7日程あり、一般質問が複数日にまたがっている可能性がある）。"
+  },
+  "electionCrossCheck": {
+    "source": "src/data/electionResults.json の election-council-2015（2015-04-26執行）・election-council-2019（2019-04-21執行）",
+    "method": "各質問者の会議録上の氏名（漢字）を、election-council-2015のcandidates[].name（多くがひらがな表記）とlinkedProfileId経由で突き合わせ、当選事実・現職/元議員IDの対応を二次確認した。",
+    "result": "本Phaseで発見した11名の質問者全員が2015-04-26執行の延岡市議会議員選挙で当選しており（elected: true）、linkedProfileIdが現職members.json/formerMembers.jsonのIDと一致することを確認した。太田龍（fm40）については、2019-04-21執行選挙の当選記録がないこと（=同選挙に立候補せず、2019年3月の第22回定例会が任期最後の定例会であったと推定できること）もformerMembers.json既存noteと整合する。"
+  },
+  "flagshipCandidates_fullyStructured": [
+    {
+      "classification": "A_ready_for_merge",
+      "blockedBy": "src/data/councilSessions.jsonに'2017-06' idの会期エントリが存在しない（Phase57-58と同一の構造的ブロッカー）。councilSessionsProposalsセクション参照。マージには別タスクでの会期エントリ追加が必須。",
+      "memberId": "m06",
+      "memberName": "甲斐 行雄",
+      "memberMappingConfidence": "exact",
+      "memberMappingEvidence": "会議録の発言者ラベル『甲斐行雄君』とmembers.jsonの氏名完全一致。加えて2015-04-26執行延岡市議会議員選挙（electionResults.json、候補者名『甲斐 いくお』、当選、linkedProfileId: m06）で当選事実を二次確認。現職継続議員（termCount:3）であり、既存councilSpeechSummaries.jsonにm06として2019-06以降の一般質問が登録済みのため、旧任期発言としてterm:\"previous\"を付与する（Phase57-58の甲斐正幸2014-03-04と同じ扱い）。",
+      "proposedSpeech": {
+        "id": "m06-2017-06-13-ippan-shitsumon",
+        "memberId": "m06",
+        "sessionId": "2017-06",
+        "date": "2017-06-13",
+        "term": "previous",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["スポーツ", "観光・地域振興"],
+        "shortSummary": "平成29年6月定例会（第2号）で甲斐行雄議員（友愛クラブ）が行った一般質問の要約です。アスリートタウン延岡における屋内（雨天）練習場施設の整備、少年少女・学生スポーツの大会・合宿誘致の重点的な取り組みについて、市長・教育部長の答弁とあわせて整理しています。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "アスリートタウン延岡における屋内（雨天）練習場施設の整備",
+            "questionSummary": "甲斐議員は、西階野球場の老朽化・雨天時練習場不備を理由に社会人野球の名門トヨタ自動車が平成28年からキャンプ地を変更した事例を挙げ、多くのプロ野球選手・社会人選手を輩出してきた延岡の実情に照らし、屋内練習場施設の整備について市長の英断を求めた。",
+            "answerSummary": "市長は、屋内練習場は市内関係団体からも建設を望む声があり整備の必要性は十分認識しているとした上で、単なる雨天時代替施設ではなく防災拠点施設としての位置づけも含めて整備できないか検討していると答弁した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m06", "summary": "屋内練習場施設の整備について市長の英断を求めた。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "整備の必要性を認識しており、防災拠点機能も含め検討中と答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "改善提案",
+            "answerStatus": "検討中"
+          },
+          {
+            "id": "q2",
+            "title": "少年少女・学生スポーツの大会・合宿誘致への重点的な取り組み",
+            "questionSummary": "甲斐議員は、延岡出身の著名アスリートの発信力を活用し、少年少女・学生スポーツの大会・合宿誘致に絞って重点的に活動してはどうかと提案した。",
+            "answerSummary": "教育部長は、天下一！のべおか中学駅伝競走大会等の県・九州規模の大会を既に開催し、東九州大会以上の大会を開催する競技団体へアスリートタウン延岡補助制度で事業費の一部を補助していることを説明し、今後も少年少女スポーツを含む大会・合宿誘致に積極的に取り組む考えを示した。",
+            "answerers": ["教育部長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m06", "summary": "少年少女・学生スポーツの大会・合宿誘致への重点的な取り組みを提案した。" },
+              { "order": 2, "type": "answer", "speakerName": "教育部長", "summary": "既存の大会開催・補助制度を説明し、今後も積極的に取り組むと答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "改善提案",
+            "answerStatus": "実施中"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成29年第12回定例会（第2号 6月13日） 甲斐行雄君（質問：壇上、屋内練習場・大会合宿誘致）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H290613A/64842/10/1//0/0",
+            "speakerSection": "pos=64842"
+          },
+          {
+            "title": "平成29年第12回定例会（第2号 6月13日） 市長（首藤正治君）（答弁：屋内練習場）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H290613A/70660/10/1//0/0",
+            "speakerSection": "pos=70660"
+          },
+          {
+            "title": "平成29年第12回定例会（第2号 6月13日） 教育部長（穴井誠二君）（答弁：合宿・大会誘致）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H290613A/71714/10/1//0/0",
+            "speakerSection": "pos=71714"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の壇上質問全文（pos=64842）と、市長・教育部長の答弁本文（pos=70660, 71714）を取得し、内容・発言者・質問と答弁の対応関係を確認した。壇上質問はこの2項目のみで、再質問（質問席からの追加質問）が行われたかは、本セグメント直後（pos=71714の教育部長答弁で本会議録の当該一連が終わっているように見えるが、次発言者を未確認のため）断定していない。甲斐行雄議員は2017年当時、現職議員名簿にはm06として登録されている継続議員（termCount:3）だが、本発言は現任期（councilSpeechPeriod.from）より前の旧任期分のため、term:\"previous\"として構造化した（Phase57-58の甲斐正幸2014-03-04と同型の扱い）。"
+      }
+    },
+    {
+      "classification": "A_ready_for_merge",
+      "blockedBy": "src/data/councilSessions.jsonに'2018-12' idの会期エントリが存在しない。councilSessionsProposalsセクション参照。",
+      "memberId": "m18",
+      "memberName": "早瀬 賢一",
+      "memberMappingConfidence": "high",
+      "memberMappingEvidence": "会議録の発言者ラベルは『早瀨賢一君』（瀨は異体字）。members.jsonの登録名は『早瀬 賢一』（瀬）。かな読み『はやせ けんいち』で一致し、同姓同名候補なし。2015-04-26執行選挙（electionResults.json、候補者名『はやせ けんいち』、当選、linkedProfileId: m18）で当選事実を二次確認。matchSpeakerToMember()は異体字非対応（未対応事項としてminutes-source.mjsのJSDocに記載あり）のため機械的にはexact判定されないが、読み・当選記録の一致により本ワーカーが手動でhigh confidenceと判定した。",
+      "proposedSpeech": {
+        "id": "m18-2018-12-04-ippan-shitsumon",
+        "memberId": "m18",
+        "sessionId": "2018-12",
+        "date": "2018-12-04",
+        "term": "previous",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["労働・雇用", "防犯"],
+        "shortSummary": "平成30年12月定例会（第2号）で早瀬賢一議員（友愛クラブ、一般質問トップバッター）が行った一般質問の要約です。外国人労働者の受け入れ拡大についての市長の考え、市職員による酒気帯び運転の再発防止対策について、市長の答弁とあわせて整理しています。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "外国人労働者の受け入れ拡大についての市長の考え",
+            "questionSummary": "早瀬議員は、延岡の有効求人倍率が平成29年6月以降1倍を超えて推移し人手不足が深刻化する中、国会で審議中の入管法改正案を踏まえ、外国人労働者の受け入れ拡大について読谷山市長の考えを尋ねた。",
+            "answerSummary": "市長は、ハローワーク延岡地区管内の外国人労働者数が前年より3割以上増加していること、市内事業所の考え方は様々であることを説明した上で、若者の市外流出対策（Uターン人材支援、雇用対策専門スタッフ設置等）を推進しつつ、国の政策動向を注視し地元企業の実情把握・相談対応に努める考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m18", "summary": "外国人労働者の受け入れ拡大について市長の考えを尋ねた。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "現状データを示した上で、国の動向注視と地元企業への支援継続を答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "所信の確認",
+            "answerStatus": "継続対応"
+          },
+          {
+            "id": "q2",
+            "title": "市職員による酒気帯び運転の再発防止対策",
+            "questionSummary": "早瀬議員は、市職員による酒気帯び運転が同年中に2件立て続けに発生したことを受け、講じられた再発防止対策について尋ねた。",
+            "answerSummary": "市長は、緊急部課長会議の招集による指導徹底の指示、2件目発生後の管理監督職員への戒告処分と処分厳罰化を含む訓示、延岡警察署協力による飲酒運転根絶研修会の開催を行ったことを説明し、市民の信頼回復に全力で取り組む考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m18", "summary": "酒気帯び運転の再発防止対策を尋ねた。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "指導教育・処分厳罰化・研修会開催の実施状況を答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "対応の要望",
+            "answerStatus": "実施済み"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成30年第20回定例会（第2号12月4日） 早瀨賢一君（質問：壇上、外国人労働者・酒気帯び運転）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H301204A/8062/10/1//0/0",
+            "speakerSection": "pos=8062"
+          },
+          {
+            "title": "平成30年第20回定例会（第2号12月4日） 市長（読谷山洋司君）（答弁：外国人労働者・酒気帯び運転）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H301204A/10988/10/1//0/0",
+            "speakerSection": "pos=10988"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "公式会議録の壇上質問全文（pos=8062）と市長答弁本文（pos=10988）を取得し確認した。この後（pos=13528以降）に早瀬議員の再質問が続いているが（listSpeakerSegmentsで確認済み、order=7 pos=13590）、本文は未取得（アクセス予算の制約）。発言者ラベルの異体字（瀨/瀬）はformerMembers.json/members.jsonの表記ゆれ対応リストに未登録の課題として別途報告する（このspeechレコード自体はmemberId:\"m18\"の正しい表記のまま登録し、会議録原文の異体字はsourceの引用としてのみ保持する）。"
+      }
+    },
+    {
+      "classification": "A_ready_for_merge",
+      "blockedBy": "src/data/councilSessions.jsonに'2019-03' idの会期エントリが存在しない。加えてformerMembers.json fm40のservedSessionsが空配列のため、マージ担当者は先にservedSessionsへ'2019-03'を追加する必要がある（本ワーカーはformerMembers.jsonを編集していない）。",
+      "memberId": "fm40",
+      "memberName": "太田 龍",
+      "memberMappingConfidence": "exact",
+      "memberMappingEvidence": "会議録の発言者ラベル『太田龍君』とformerMembers.jsonの氏名完全一致。2015-04-26執行選挙（electionResults.json、候補者名『太田 龍』、当選、linkedProfileId: fm40）で当選を確認。fm40の既存note（sourceNote含む）には『2003・2007・2011・2015年に連続当選、2019年4月選挙の当選記録なし＝それ以前に退任とみられるが詳細未確認』『在職中の一般質問記録は会議録収録範囲（令和元年6月以降）に含まれないため未収録（0件ではなく未収録）』と明記されており、本Phaseで発見した2019年3月5日の代表質問（旧任期最後の定例会）はこの既知ギャップと完全に整合する。",
+      "additionalFindingForFormerMembersJson": "fm40のservedSessionsは現状[]（空配列）。本Phaseの発見により、少なくとも'2019-03'を追加できる根拠資料が揃った（本ワーカーはformerMembers.jsonを編集していないため、マージ担当者への申し送り事項とする）。",
+      "proposedSpeech": {
+        "id": "fm40-2019-03-05-daihyo-shitsumon",
+        "memberId": "fm40",
+        "sessionId": "2019-03",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "date": "2019-03-05",
+        "speechType": "代表質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["市政運営", "地域振興", "公共交通", "教育・給食", "人権", "労働・雇用", "大学・高等教育", "防災", "農林水産", "上下水道", "消防"],
+        "shortSummary": "平成31年第22回定例会（第2号）で太田龍議員（社民党市議団、旧任期最後の定例会）が行った代表質問の要約です。市長就任1年間の総括、延岡合衆国づくり、地域公共交通網形成計画、こども未来創造機構構想、地域新電力会社、人権条例化、公契約条例、九州保健福祉大学を活かしたまちづくり、ライトハウス老朽化、漁業法・水道法改正の影響、消防職員充足率など多岐にわたる項目について、市長の答弁とあわせて整理しています（壇上質問は約20項目に及ぶ大部な代表質問であり、今回構造化したのは市長答弁で直接対応が確認できた範囲）。",
+        "questionItems": [
+          { "id": "q1", "title": "国と地方の協議のあり方（幼児教育無償化・学校エアコン設置事業を例に）", "questionSummary": "国が地方との事前協議を十分行わないまま政策を進める傾向（幼児教育無償化の財政負担、学校エアコン設置事業）について、総務省出身の市長の所見を尋ねた。", "answerSummary": "市長は、国民・市民への説明が不十分なまま政策が進められることは残念であるとし、政策立案段階での十分な審議と、地方分権の強力な推進を国に求めたいと答弁した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"国と地方の協議のあり方について市長の所見を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"国への地方分権推進の要望を述べた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所感の確認", "answerStatus": "見解の相違" },
+          { "id": "q2", "title": "市長就任1年間の市政運営の総括と今後の課題", "questionSummary": "移動市役所・出前市長室等を通じた市民対話の取り組みを踏まえ、就任1年間の総括と今後の課題について所見を尋ねた。", "answerSummary": "市長は、市民との対話を最も重ねてきたとの自負を述べ、所得・雇用拡大、教育・子育て支援の充実等、市民が幸せを実感できるまちづくりに全力で取り組む考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"就任1年間の総括と今後の課題を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"市民対話の実績と今後の重点方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所感の確認", "answerStatus": "実施中" },
+          { "id": "q3", "title": "延岡合衆国づくり推進の組織体制（総合支所の人員配置）", "questionSummary": "三北地域（北浦・北川・北方）の広大な面積・入り組んだ地形に対応するため、新年度の総合支所の組織改正・職員配置の方針を尋ねた。", "answerSummary": "市長は、平成31年度予算案で各支所の公共事業費予算を増額したことを説明し、人員体制強化よりもまず総合支所の権限強化（事務決裁の簡素化）を優先する考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"三北地域の総合支所の組織・人員体制を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"予算増額と権限強化を優先する方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "現状確認", "answerStatus": "実施中" },
+          { "id": "q4", "title": "延岡合衆国地域振興プラン策定事業（ユネスコエコパーク活用の提案）", "questionSummary": "北川・北方地域の地域振興プラン策定にあたり、祖母・傾・大崩ユネスコエコパーク登録を活用した具体的な取り組みを提案した。", "answerSummary": "市長は、北川地域では三重県大台町の取り組みを調査予定、北方地域では鹿川キャンプ場の充実や大崩山登山客向け施設整備を平成31年度事業で予定していると答弁した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"ユネスコエコパークを活用した地域振興プランを提案した。"},{"order":2,"type":"answer","speakerName":"市長","summary":"北川・北方それぞれの調査・整備予定を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "事業導入の提案", "answerStatus": "実施予定" },
+          { "id": "q5", "title": "延岡市地域公共交通網形成計画策定の意義と市民への啓発", "questionSummary": "パブリックコメント実施中の地域公共交通網形成計画について、策定の意義と市民への啓発の方策を尋ねた。", "answerSummary": "市長は、高齢化が進む中で交通弱者が安心して移動できる公共交通網を維持するための重要な計画であるとし、バスの乗り方教室やエリア別バスマップ等の利用促進策をさらに進める考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"計画策定の意義と市民啓発について尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"計画の位置づけと利用促進策を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所信の確認", "answerStatus": "実施中" },
+          { "id": "q6", "title": "（仮称）延岡こども未来創造機構の具体的なイメージ", "questionSummary": "市長が目指す（仮称）延岡こども未来創造機構の具体的なイメージ、箱物建設の有無を含めた方向性を尋ねた。", "answerSummary": "市長は、学校・地域・家庭の三者だけでは果たせない役割を担う『第四の存在』として構想していると説明し、平成31年度はSTEM教育・隠岐國学習センター型講演会・トップアスリート授業等を実施しながら、組織のあり方は今後有識者・市民の意見も聞きながら検討する考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"こども未来創造機構の具体像を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"『第四の存在』という位置づけと31年度事業内容を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "現状確認", "answerStatus": "検討中" },
+          { "id": "q7", "title": "地域新電力会社の事業化調査（3百万円の調査費用の使途）", "questionSummary": "地域新電力会社設立に向けた調査費用（約300万円）について、市民・議会へのわかりやすい説明を求めた。", "answerSummary": "市長は、平成30年度調査で他県先行事例の情報を収集したことを踏まえ、平成31年度調査では公募で選定した調査機関により詳細な収支シミュレーション・料金プラン案を作成し、なるべく早期に議会・市民へ公表する考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"新電力会社調査費用の使途説明を求めた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"31年度調査内容と早期公表方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "予算・数値の確認", "answerStatus": "実施中" },
+          { "id": "q8", "title": "世界人権宣言70周年記念講演会の開催意義", "questionSummary": "延岡市議会が平成8年9月に部落差別をはじめとした一切の差別をなくす決議を議決していることを踏まえ、世界人権宣言70周年記念講演会（組坂繁之氏講演）の開催意義を尋ねた。", "answerSummary": "市長は、300名を超える参加者のもと開催でき、部落差別問題のみならず世界的な人権問題への理解を深める有意義な研修になったと答弁した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"記念講演会の開催意義を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"開催実績と意義を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所感の確認", "answerStatus": "実施済み" },
+          { "id": "q9", "title": "部落差別解消推進法施行を受けた人権条例化の必要性", "questionSummary": "部落差別解消推進法等の人権関連法の施行を踏まえ、本市でも差別をなくすための条例化を早急に進めるべきと考えるが市長の所見を尋ねた。", "answerSummary": "市長は、平成31年度中の条例制定を目指し、人権問題有識者の意見やパブリックコメント等を通じて幅広く意見を聞きながら検討を進める考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"人権条例化の必要性について所見を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"31年度中の条例制定を目指す方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "事業導入の提案", "answerStatus": "実施予定" },
+          { "id": "q10", "title": "公契約条例の制定の必要性", "questionSummary": "官から民への業務委託が進む中、公共サービスを担う労働者の賃金確保のため公契約条例の制定が必要ではないかと市長に尋ねた（前市長時代から繰り返し質問している論点）。", "answerSummary": "市長は、労働条件は基本的に労働関係法令の遵守徹底や国の制度化で確保されるべきとした上で、最低制限価格の設定等の既存の取り組みを継続する中で公契約条例の必要性を見極めていく考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"公契約条例の制定の必要性を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"既存取り組みの継続と必要性の見極めを答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "事業導入の提案", "answerStatus": "現時点では予定なし" },
+          { "id": "q11", "title": "九州保健福祉大学を活かしたまちづくり（大学の存在意義）", "questionSummary": "開学20周年を迎える九州保健福祉大学について、大学の存在意義をどう捉え、今後のまちづくりにどう活かすか市長の所見を尋ねた。", "answerSummary": "市長は、経済効果（波及効果含め700億円超の試算）や地域貢献活動の実績を挙げつつ、延岡出身学生の割合が約11％にとどまる課題を踏まえ、地域連携プラットホームの構築に向けた大学・産業界との議論を深める考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"大学の存在意義とまちづくりへの活用を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"経済効果と延岡出身学生比率の課題、今後の方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所信の確認", "answerStatus": "継続対応" },
+          { "id": "q12", "title": "山下町ライトハウス（視覚障がい者福祉施設）の老朽化への対応", "questionSummary": "建設後47年が経過し外観の老朽化が顕著なライトハウスについて、耐震面を含む現状認識と今後の対応策を尋ねた。", "answerSummary": "市長は、視覚障がい者団体からの要望を受け建物を直接確認し、市の建築技師による簡易調査の結果、構造的なひび割れや傾斜はないが窓枠改修・エレベーター・耐震化対策の必要性は認識しているとし、今後の対応を検討する考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"ライトハウスの老朽化への対応を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"簡易調査結果と今後の検討方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "現状確認", "answerStatus": "検討中" },
+          { "id": "q13", "title": "漁業法改正による本市水産業への影響", "questionSummary": "70年ぶりの漁業法改正（漁業権の地元優先ルール撤廃等）が、本市沿岸漁業に与える影響への懸念について市長の所見を尋ねた。", "answerSummary": "市長は、水域を適切かつ有効に利活用している場合は現状どおり優先して免許される仕組みが維持されると説明し、国会附帯決議の内容（漁業者意見の反映等）を踏まえ今後の政省令の内容を注視していく考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"漁業法改正の本市水産業への影響への懸念を述べた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"制度の維持点と今後の注視方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所信の確認", "answerStatus": "継続対応" },
+          { "id": "q14", "title": "水道法改正（コンセッション方式導入等）による本市水道事業への影響", "questionSummary": "官民連携（コンセッション方式）を可能とする水道法改正が本市水道事業に与える影響について市長の所見を尋ねた。", "answerSummary": "市長は、本市は現時点でコンセッション方式を検討しておらず、水質・料金等への国・自治体・議会の関与も変わらないため、直ちに本市水道事業経営に影響を及ぼすものではないと答弁した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"水道法改正の本市水道事業への影響を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"コンセッション方式は検討していないと答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "所信の確認", "answerStatus": "現時点では予定なし" },
+          { "id": "q15", "title": "消防職員の充足率（条例定数170人に対し166人）", "questionSummary": "消防組織改正（指揮係新設）に伴う職員配置への懸念を踏まえ、消防職員の充足率向上について市長に所見を尋ねた。", "answerSummary": "市長は、条例定数170人に対し現在166名で警防体制を確保しているとした上で、退職者数に応じた単純採用ではなく中期的観点から計画的に採用を行い、必要な職員数確保に努めていく考えを示した。", "answerers": ["市長"], "exchanges": [{"order":1,"type":"question","speakerId":"fm40","summary":"消防職員の充足率向上を尋ねた。"},{"order":2,"type":"answer","speakerName":"市長","summary":"現在員数と計画的採用の方針を答えた。"}], "relatedBills": [], "relatedDocuments": [], "questionAnswerLinkStatus": "confirmed", "questionApproach": "現状確認", "answerStatus": "継続対応" }
+        ],
+        "summarySources": [
+          {
+            "title": "平成31年第22回定例会（第2号 3月5日） 太田龍君（質問：壇上、社民党市議団代表質問全文）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H310305A/149002/10/1//0/0",
+            "speakerSection": "pos=149002"
+          },
+          {
+            "title": "平成31年第22回定例会（第2号 3月5日） 市長（読谷山洋司君）（答弁：q1〜q15）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H310305A/172924/10/1//0/0",
+            "speakerSection": "pos=172924"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "壇上質問全文（pos=149002、約20項目を含む大部な代表質問）と、市長の一続きの答弁本文（pos=172924、q1〜q15の15項目に対応する内容を含む）を取得し、質問と答弁の対応関係を1項目ずつ確認した。市長答弁の直後（order=135以降、pos=191426〜206992）に副市長・企画部長・総務部長・健康福祉部長・消防長・教育長の答弁セグメントが続くが、アクセス予算の制約により未取得。これらには、地域公共交通網の現地説明会（企画部長）、特命担当副市長の担当事務・工業振興・メディカルタウン構想・一次産品販売・教育に関する事務（副市長）、災害対策・応援協定（総務部長）、重症心身障がい児支援（健康福祉部長）、学校現場の働き方改革・支援員配置・フッ化物洗口・島野浦小中一貫校（教育長）が含まれると壇上質問から推定されるが、答弁内容は未確認のため questionItems には含めていない（無理に埋めていない）。"
+      }
+    },
+    {
+      "classification": "A_ready_for_merge",
+      "blockedBy": "src/data/councilSessions.jsonに'2019-03' idの会期エントリが存在しない（fm40と同一会期）。",
+      "memberId": "m17",
+      "memberName": "長友 幸子",
+      "memberMappingConfidence": "exact",
+      "memberMappingEvidence": "会議録の発言者ラベル『長友幸子君』とmembers.jsonの氏名完全一致。2015-04-26執行選挙（electionResults.json、候補者名『長友 さちこ』、当選、linkedProfileId: m17）で当選事実を二次確認。現職継続議員（termCount:4）であり、既存councilSpeechSummaries.jsonにm17として2019-06以降の一般質問が登録済みのため、旧任期発言としてterm:\"previous\"を付与する。",
+      "proposedSpeech": {
+        "id": "m17-2019-03-05-ippan-shitsumon",
+        "memberId": "m17",
+        "sessionId": "2019-03",
+        "date": "2019-03-05",
+        "term": "previous",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["教育・給食"],
+        "shortSummary": "平成31年第22回定例会（第2号）で長友幸子議員が行った一般質問の要約です（同日最後の質問者として残り時間が限られる中での短時間の質問）。特別な支援を要する児童の就学（支援員配置）に対する保護者の不安への対応について、教育長の答弁とあわせて整理しています。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "特別支援が必要な児童の就学に伴う保護者の不安への対応（支援員配置）",
+            "questionSummary": "長友議員は、新たに支援が必要な子供が小学校に入学するにあたり、支援員配置について教育委員会に相談した保護者の不安が解消されなかった事例を挙げ、子供が入学する際に保護者が不安を抱くことがあってはならないとし、教育長の考えを尋ねた（同日、社民党市議団代表質問〔太田龍議員〕でも同種の支援員配置の質問がなされ、その答弁を踏まえた質問である）。",
+            "answerSummary": "教育長は、就学前の保護者の不安（特に小学1年生の学校生活への適応）について理解を示した上で、学校からの希望等の把握を進めており、子供たちの学校生活への適応を大事にしながら、ニーズに応えられるよう配置計画を進めていく考えを示した。",
+            "answerers": ["教育長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m17", "summary": "支援員配置についての保護者の不安解消を求めた。" },
+              { "order": 2, "type": "answer", "speakerName": "教育長", "summary": "保護者の不安への理解を示し、ニーズに応じた配置計画を進める考えを答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed",
+            "questionApproach": "対応の要望",
+            "answerStatus": "検討中"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成31年第22回定例会（第2号 3月5日） 長友幸子君（質問：壇上、支援員配置）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H310305A/210330/10/1//0/0",
+            "speakerSection": "pos=210330"
+          },
+          {
+            "title": "平成31年第22回定例会（第2号 3月5日） 教育長（澤野幸司君）（答弁：支援員配置）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H310305A/211286/10/1//0/0",
+            "speakerSection": "pos=211286"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "この日（2019年3月5日）152発言セグメント中の order=147（最後から6番目）に初めて登場する質問で、本人が『時間もございませんので』と述べていることから、一般質問の持ち時間終盤の短い質問であることを確認した（同トピックが同日の太田龍議員の代表質問でも扱われており、その答弁『先ほど答弁していただきましたが』を踏まえた発言）。壇上質問（pos=210330）と教育長の直接の答弁（pos=211286）を取得済み。この後（order=149, pos=211928）に長友議員自身の応答が続くが未取得。"
+      }
+    }
+  ],
+  "additionalIdentifiedQuestioners_notYetStructured": {
+    "classification": "C_source_verification_pending",
+    "note": "以下は、listSpeakerSegments()で質問者として発言者ラベルを確認し、members.json/formerMembers.json照合およびelection-council-2015での当選事実の二次確認まで完了しているが、壇上質問・答弁本文（fetchSegmentText）は本Phaseのアクセス予算制約により未取得のため、questionItemsを構造化していない候補。次Phaseで優先的に本文取得を行うことを推奨する。架空のquestionItemsは一切作成していない。",
+    "items": [
+      { "speakerLabel": "河野治満君", "sessionId": "2017-06", "date": "2017-06-13", "fileName": "H290613A", "firstPos": 6278, "memberId": "m10", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『河野 はるみつ』、linkedProfileId: m10）" },
+      { "speakerLabel": "白石良盛君", "sessionId": "2017-06", "date": "2017-06-13", "fileName": "H290613A", "firstPos": 38238, "memberId": "fm05", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『白石 よしもり』、linkedProfileId: fm05）。formerMembers.json fm05のservedSessionsは現状2019-06以降のみのため、'2017-06'追加の余地あり" },
+      { "speakerLabel": "上杉泰洋君", "sessionId": "2017-06", "date": "2017-06-13", "fileName": "H290613A", "firstPos": 94966, "memberId": "m03", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『上杉 やすひろ』、linkedProfileId: m03）" },
+      { "speakerLabel": "佐藤誠君", "sessionId": "2017-06", "date": "2017-06-13", "fileName": "H290613A", "firstPos": 127804, "memberId": "fm02", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『さとう 誠』、linkedProfileId: fm02）。formerMembers.json fm02のservedSessionsは現状2019-09以降のみのため、'2017-06'追加の余地あり" },
+      { "speakerLabel": "三上毅君", "sessionId": "2018-12", "date": "2018-12-04", "fileName": "H301204A", "firstPos": 41484, "memberId": "fm04", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『三上 たけし』、linkedProfileId: fm04）。formerMembers.json fm04のservedSessionsは現状2019-06以降のみのため、'2018-12'追加の余地あり" },
+      { "speakerLabel": "梶本英一君", "sessionId": "2018-12", "date": "2018-12-04", "fileName": "H301204A", "firstPos": 72350, "memberId": "m09", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『かじもと 英一』、linkedProfileId: m09）" },
+      { "speakerLabel": "佐藤誠君", "sessionId": "2018-12", "date": "2018-12-04", "fileName": "H301204A", "firstPos": 102286, "memberId": "fm02", "memberMappingConfidence": "exact", "note": "2017-06と同一人物・別会期" },
+      { "speakerLabel": "北林幹雄君", "sessionId": "2018-12", "date": "2018-12-04", "fileName": "H301204A", "firstPos": 132880, "memberId": "m11", "memberMappingConfidence": "exact", "note": "election-council-2015で当選確認済み（候補者名『北林 みきお』、linkedProfileId: m11）" },
+      { "speakerLabel": "白石良盛君", "sessionId": "2019-03", "date": "2019-03-05", "fileName": "H310305A", "firstPos": 15058, "memberId": "fm05", "memberMappingConfidence": "exact", "note": "2017-06と同一人物・別会期" },
+      { "speakerLabel": "北林幹雄君", "sessionId": "2019-03", "date": "2019-03-05", "fileName": "H310305A", "firstPos": 69370, "memberId": "m11", "memberMappingConfidence": "exact", "note": "2018-12と同一人物・別会期" },
+      { "speakerLabel": "上杉泰洋君", "sessionId": "2019-03", "date": "2019-03-05", "fileName": "H310305A", "firstPos": 81044, "memberId": "m03", "memberMappingConfidence": "exact", "note": "2017-06と同一人物・別会期" }
+    ]
+  },
+  "parserIssues_D": [],
+  "duplicates_E": [],
+  "unavailable_F": [],
+  "councilSessionsProposals": {
+    "note": "src/data/councilSessions.jsonへの追加案。documentsフィールド（議案等審議結果PDF等の一次資料リンク）は本ワーカーの読み取り専用制約・アクセス予算内では取得できなかったため空配列とし、別タスクでの補完が必須（Phase57-58と同一の構造的ブロッカー）。id・year・fiscalYear・eraYearは既存レコードの命名規則（例: 2020-03のfiscalYearは2019）に準拠して機械的に算出した。summary/shortSummary/summaryStatus等は根拠資料（議案審議結果PDF）未取得のため意図的に含めていない。",
+    "proposedEntries": [
+      {
+        "id": "2017-06",
+        "year": 2017,
+        "fiscalYear": 2017,
+        "eraYear": "平成29年",
+        "title": "平成29年6月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第12回",
+        "folderPath": "/council-documents/2017/2017-06",
+        "description": "延岡市議会 第12回定例会（平成29年6月）",
+        "documents": [],
+        "officialSessionUrl": null,
+        "lastVerified": "2026-08-23",
+        "unresolvedFields": ["documents（議案等審議結果PDF等）", "shortSummary", "summary", "summaryStatus", "summarySources"]
+      },
+      {
+        "id": "2018-12",
+        "year": 2018,
+        "fiscalYear": 2018,
+        "eraYear": "平成30年",
+        "title": "平成30年12月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第20回",
+        "folderPath": "/council-documents/2018/2018-12",
+        "description": "延岡市議会 第20回定例会（平成30年12月）",
+        "documents": [],
+        "officialSessionUrl": null,
+        "lastVerified": "2026-08-23",
+        "unresolvedFields": ["documents（議案等審議結果PDF等）", "shortSummary", "summary", "summaryStatus", "summarySources"]
+      },
+      {
+        "id": "2019-03",
+        "year": 2019,
+        "fiscalYear": 2018,
+        "eraYear": "平成31年",
+        "title": "平成31年3月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第22回",
+        "folderPath": "/council-documents/2019/2019-03",
+        "description": "延岡市議会 第22回定例会（平成31年3月）。2015年4月26日執行の市議会議員選挙で選出された任期（旧任期）最後の定例会。",
+        "documents": [],
+        "officialSessionUrl": null,
+        "lastVerified": "2026-08-23",
+        "unresolvedFields": ["documents（議案等審議結果PDF等）", "shortSummary", "summary", "summaryStatus", "summarySources"]
+      }
+    ]
+  },
+  "mergeChecklist_forDataOwner": [
+    "1. councilSessionsProposals.proposedEntries の3件について、議案等審議結果PDF等のdocumentsを別途調査の上、src/data/councilSessions.jsonへ追加する。",
+    "2. flagshipCandidates_fullyStructured の4件（m06, m18, fm40, m17）のproposedSpeechを、対応するmemberIdのcouncilSpeechSummaries.json レコードのspeeches配列へ追加する（fm40は現状councilSpeechSummaries.jsonにレコード自体が存在しないため、新規トップレベルmemberオブジェクトとして追加する必要がある。既存fm01〜fm10相当の構造に準拠すること）。",
+    "3. fm40のformerMembers.jsonエントリのservedSessionsへ'2019-03'を追加する（本ワーカーは未編集）。",
+    "4. additionalIdentifiedQuestioners_notYetStructured の11件は、次Phaseで壇上質問・答弁本文を取得しquestionItemsを構造化する候補として引き継ぐ。fm05・fm02・fm04のservedSessions拡張も同時に検討する。",
+    "5. 各セッションとも第2号のみ確認済みで、第3号以降（特に2019年3月は7日程）に追加の一般質問がある可能性を次Phaseで確認する。",
+    "6. 上記1〜4完了後、npm run validate:data / typecheck / lint / build を実行しエラー0件を確認してからisPublishedをtrueに切り替えるかを判断する。"
+  ]
+}

@@ -1,0 +1,541 @@
+{
+  "generatedAt": "2026-08-23",
+  "note": "Phase68ワーカーによる一般質問2005-2009年度バックフィル検証。src/data配下は読み取り専用（一切変更していない）。scripts/lib/minutes-source.mjsも読み取り専用（インポートして実行しただけで編集していない）。git commit / git push は行っていない。ブラウザツールは使用していない。本ファイルと同名.mdファイル以外は作成・編集していない。",
+  "status": "candidate_not_merged",
+  "assignedRange": "2005-2009年度（5年度）",
+  "blockingDependency": {
+    "issue": "UNR-026（reports/phase33-master-unresolved-ledger.json）：src/data/councilSessions.jsonに2019-06より前の会期エントリが1件も存在しない。scripts/validate-data.mjsのcouncilSpeechSummaries.json検証は、speech.sessionIdがcouncilSessions.jsonのidに存在するかをisPublishedの真偽に関係なく無条件でerr()判定するため、本ファイルのsessionId（2006-06/2007-06/2008-09/2009-09、および参考記載の2005-09）はいずれも現状のvalidate-data.mjsでエラーになる。",
+    "requiredFollowUp": "councilSessionsProposals（本ファイル下部）を、councilSessions.jsonへ人手でマージすること。documents/summarySources等の一次資料PDFリンクは今回取得できていないため、最低限の必須フィールドのみで構成した（optional項目は意図的に省略。推測で埋めていない）。",
+    "verifiedBy": "src/data/councilSessions.jsonの全idを機械列挙し、2019-06より前のidが0件であることを再確認済み（Phase57-58踏襲）。"
+  },
+  "memberMatchingMethodology": "Phase59（reports/phase59-member-matching-findings.md）のconfidence段階定義（exact/high/medium/low/unresolved）をそのまま踏襲した。氏名（漢字）完全一致かつ在籍期間（electionResults.jsonの当選日〜次回選挙日）に矛盾がなければexact、かな完全一致・在籍期間一致だが漢字表記がformerMembers.json側で未確定（ひらがな登録のみ）の場合はhighとした。現職議員（members.json）への旧任期speech追加は、Phase57-58のm08（甲斐正幸）前例に倣いterm:\"previous\"を付与した。formerMembers.jsonへの新規追加は一切行っていない（既存58名の中から一致するmemberIdのみを使用）。",
+  "resolvedCandidates": [
+    {
+      "candidateId": "m16-2006-06-13-ippan-shitsumon",
+      "originSource": "本ワーカーが新規に実施したパイロット（resolveYearTreedepth({year:2006})→listSessionsForYear→listMeetingDays→listSpeakerSegments→fetchSegmentTextのフルパイプラインを実行）",
+      "sessionLabel": "平成18年第21回定例会",
+      "memberIdResolution": {
+        "memberId": "m16",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『中城あかね君』が現職議員 src/data/members.json m16『中城 あかね』と氏名完全一致。electionResults.json（election-council-byelection-2006、2006-01-29執行）で『中城 あかね』が当選（linkedProfileId=m16）しており、2006-06-13の本会議はその約4カ月半後（在職期間内、初当選後最初期の一般質問）で矛盾しない。members.json上に同姓同名候補なし。m16は現職継続議員（termCount=6）で、councilSpeechSummaries.jsonに2023-06以降の一般質問が既に11件登録済み。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingMemberId": "m16",
+      "proposedAggregateUpdateNote": "既存m16レコード（analyzedSessionCount=11, sessionsWithSpeechCount=11）へこの1件を追加する場合、analyzedSessionCount/sessionsWithSpeechCountをそれぞれ+1する程度の単純な更新にとどめる。unfetchedSessionCount（2006年〜2023年の間の他会期件数）は今回調査していないため変更値を提案しない（推測で埋めない）。",
+      "speech": {
+        "id": "m16-2006-06-13-ippan-shitsumon",
+        "memberId": "m16",
+        "sessionId": "2006-06",
+        "date": "2006-06-13",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "term": "previous",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["行財政改革", "予算編成"],
+        "shortSummary": "平成18年6月定例会（第21回定例会、第2号）で中城あかね議員（初当選＝2006年1月29日執行補欠選挙後、最初期の一般質問）が行った一般質問のうち、合併後の肉づけ予算（補正予算）における行財政改革の反映と、民間経営感覚を活かした行財政改革への決意を市長に尋ねた部分を、市長の答弁とあわせて要約したもの。同じ質問の中には障害者自立支援法（学童児の日中預かり問題、福祉保健課長へ）と山下新天街アーケード跡地の駐車場問題（商工部長へ）の質問も含まれていたが、今回はアクセス回数の制約によりそれらの答弁セグメントは未取得のため要約対象外とした。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "合併後の肉づけ予算（補正予算）における行財政改革の反映",
+            "questionSummary": "今回提案された補正予算（合併後の肉づけ予算）において、行財政改革の思いや取り組みがどのように反映されているか、特徴的なものを質問した。",
+            "answerSummary": "災害に強いまちづくり関連事業・小地域コミュニティー再生事業に重点を置いたほか、広域関連事業も追加し旧二町にも配慮した予算編成としたこと、行財政改革推進委員会の条例化を今議会に提案するなど予算面以外でも取り組みを進める考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m16", "summary": "補正予算（合併後の肉づけ予算）における行財政改革の反映内容を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "災害に強いまちづくり・小地域コミュニティー再生に重点を置いた予算編成と、行財政改革推進委員会条例化の提案を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "民間経営感覚を活かした行財政改革への決意",
+            "questionSummary": "首藤市長（社長出身）が行政に経営感覚を導入することについて、行財政改革への決意・やる気を質問した。",
+            "answerSummary": "業務や組織を含めた行政のあり方を見直し、業務の成果や効率性を指標で評価して質の高いサービスを低コストで提供する取り組みが重要であり、新清掃工場や消防庁舎建設等の大型事業を控える中、積極的に行財政改革に取り組み財源確保を図る考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m16", "summary": "経営感覚を活かした行財政改革への決意を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "業務の成果・効率性を指標で評価し質の高いサービスを低コストで提供する取り組みを進め、財源確保を図る考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成18年第21回定例会（第2号 6月13日） 中城あかね君（質問：行財政改革・経営感覚）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H180613A/28080/10/1//0/0",
+            "speakerSection": "pos=28080"
+          },
+          {
+            "title": "平成18年第21回定例会（第2号 6月13日） 市長（首藤正治君）（答弁：補正予算・行財政改革）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H180613A/34458/10/1//0/0",
+            "speakerSection": "pos=34458"
+          },
+          {
+            "title": "平成18年第21回定例会（第2号 6月13日）発言者一覧（r_Speakers.exe、70発言セグメント確認）",
+            "sourceType": "official-minutes-html-index",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H180613A/0/0//10/1/3:0/654/1//0/0/0",
+            "speakerSection": "n/a"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "同一日程内に別の議員（order4『中井一萬君』pos=10160、order16『中城あかね君』pos=28080）が一般質問を行っていることをr_Speakers.exeの70発言セグメント全件で確認した。『中井一萬』はelectionResults.json（1999/2003年市議選）・formerMembers.json（58名）・members.json（26名）のいずれにも一致する候補が見つからず、推測でIDを付与せず、本findings.jsonでは候補化していない（下記unmappedSpeakerDiscoveries参照。将来の別タスクでの調査を推奨）。中城あかね議員の質問には障害者自立支援法（福祉保健課長への質問、この日程では未取得）・山下新天街アーケード跡地の駐車場問題（商工部長への質問、未取得）も含まれていたが、今回は市長答弁が直接対応する2項目のみを構造化した。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonの既存m16レコード（memberId:'m16'）のspeeches配列へこのspeechオブジェクトを追加する（新規メンバーオブジェクトの作成は不要）。sessionId:2006-06がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること（本ファイル冒頭blockingDependency、councilSessionsProposals参照）。"
+    },
+    {
+      "candidateId": "fm45-2007-06-12-ippan-shitsumon",
+      "originSource": "本ワーカーが新規に実施したパイロット（resolveYearTreedepth({year:2007})→listSessionsForYear→listMeetingDays→listSpeakerSegments→fetchSegmentTextのフルパイプラインを実行）",
+      "sessionLabel": "平成19年第2回定例会",
+      "memberIdResolution": {
+        "memberId": "fm45",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『白石武仁君』がformerMembers.json fm45『白石 武仁』と氏名完全一致。electionResults.json（election-council-2007、2007-04-22執行）でfm45が当選（得票1,242票、日本共産党、linkedProfileId=fm45）しており、2007-06-12は『改選され、新しくなりました第一回目の議会でトップバッター』という本人発言と完全に整合する（当選直後の初回定例会）。electionResults.json（2003年）でもfm45が当選しており、2003→2007継続当選が確認できる。formerMembers.jsonに同姓の別候補（fm05白石良盛）がいるが下の名前が異なる別人で混同リスクなし。"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm45",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2007-06-12", "to": "2007-06-12" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "国政・政治", "sessionCount": 1 },
+          { "topic": "公共交通", "sessionCount": 1 },
+          { "topic": "税・保険料", "sessionCount": 1 },
+          { "topic": "医療費助成", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（formerMembers.json fm45、令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは在職期間全体（2003年当選〜2019年頃まで、退任日未確認）の他会期件数が不明のためフィールド自体を省略した。"
+      },
+      "speech": {
+        "id": "fm45-2007-06-12-ippan-shitsumon",
+        "memberId": "fm45",
+        "sessionId": "2007-06",
+        "date": "2007-06-12",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["国政・政治", "公共交通", "税・保険料", "医療費助成"],
+        "shortSummary": "平成19年6月定例会（第2回定例会、第2号、2007年4月の市議選で改選後最初の議会でトップバッター）で白石武仁議員（日本共産党）が行った一般質問のうち、長崎市長銃撃事件への見解・市長自身の身辺警備、巡回バス実現に向けた取り組み、住民税増税に伴う国保税・介護保険料の減免、乳幼児医療費助成の拡充について市長に尋ねた部分を、市長の答弁とあわせて要約したもの。同じ質問の中には都市建設部長（塩浜町交差点改良）・選挙管理委員会委員長（期日前投票制度）・教育長（歴史教育DVD教材）への質問も含まれていたが、今回はアクセス回数の制約によりそれらの答弁セグメントは未取得のため要約対象外とした。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "長崎市長銃撃事件への見解と市長自身の身辺警備対策",
+            "questionSummary": "2007年4月17日の長崎市長銃撃事件を受け、同じ市長という立場からどう見ているか、また市長自身の身辺警備の対策について質問した。",
+            "answerSummary": "伊藤一長前市長とは個人的にも交流があり強いショックを受けたこと、民主主義に対する重大な挑戦であり断じて許されないとの認識を示し、警察等と連携し暴力追放の取り組みを進める考えを述べた。身辺警備は公務中の対策に加え、自宅でも民間警備会社と個人契約するなど公私ともに対策を講じていると答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm45", "summary": "長崎市長銃撃事件への見解と市長自身の身辺警備対策を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "事件への強い衝撃と暴力追放への決意を述べ、身辺警備は公私とも対策済みと答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "巡回バス実現に向けた取り組み（交通権保障の観点から）",
+            "questionSummary": "北川町合併後にバス路線が縮小し交通弱者が困難な状況にある中、巡回バスの早期実現を福祉の観点から市長に要求した。",
+            "answerSummary": "公共交通手段の確保を重要課題と認識しており、コミュニティバス12路線・乗り合いタクシー1路線・スクールバス10路線を運行中であるが、路線・運行時間・回数等を検討する庁内プロジェクトを立ち上げ、総合交通対策の研究を進めていると答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm45", "summary": "巡回バスの早期実現を福祉の観点から要求した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "既存のバス・タクシー・スクールバス運行状況を説明し、庁内プロジェクトで総合交通対策を研究中と答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "住民税増税（定率減税廃止）に伴う国保税・介護保険料の減免",
+            "questionSummary": "定率減税廃止による住民税増税で市民生活が圧迫される中、国保税・介護保険料の減免を図るべきと市長の見解を質問した。",
+            "answerSummary": "税源移譲前後で税負担額自体は変わらないが定率減税廃止により実際の負担は増えていること、高齢者には2カ年の経過措置、住民税では所得減少者への減額調整、介護保険料は低所得者軽減拡充、国保税は税率据え置き等の配慮をしていると答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm45", "summary": "定率減税廃止に伴う住民税増税を踏まえ、国保税・介護保険料の減免を求めた。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "経過措置・減額調整・軽減拡充等、既存の負担緩和措置の内容を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q4",
+            "title": "乳幼児医療費助成の拡充（通院対象年齢の引き上げ）",
+            "questionSummary": "本市の子供医療費助成が通院3歳未満と近隣自治体より遅れていると指摘し、就学前までの拡充を市長に求めた。",
+            "answerSummary": "県補助を受け通院3歳未満・入院就学前まで、自己負担月350円で実施していることを説明し、就学前までの通院拡充は有効な施策であるとして県内市長会等の場で県へ補助拡大を強く要望していると答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm45", "summary": "乳幼児医療費助成の就学前までの拡充を求めた。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "現行制度を説明し、県への補助拡大要望を続けていると答えた。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成19年第2回定例会（第2号 6月12日） 白石武仁君（質問：壇上、全項目）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H190612A/5314/10/1//0/0",
+            "speakerSection": "pos=5314"
+          },
+          {
+            "title": "平成19年第2回定例会（第2号 6月12日） 市長（首藤正治君）（答弁：長崎事件・巡回バス・税減免・医療費助成）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H190612A/17958/10/1//0/0",
+            "speakerSection": "pos=17958"
+          },
+          {
+            "title": "平成19年第2回定例会（第2号 6月12日）発言者一覧（r_Speakers.exe、89発言セグメント確認）",
+            "sourceType": "official-minutes-html-index",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H190612A/0/0//10/1/3:0/654/1//0/0/0",
+            "speakerSection": "n/a"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "市長答弁の中で『暴力行為根絶に向けた取り組みにつきましては、市民環境部長に答弁をさせます』と明言しており、その部分（市民環境部長答弁、この日程では未取得）は本要約に含めていない（q1は市長が直接答えた『事件への見解・身辺警備』のみに限定）。質問にはこの他、沖米田都市建設部長（塩浜町三丁目交差点改良・歩道設置・路面整備）、白羽根選挙管理委員会委員長（期日前投票の無効票問題・制度悪用防止）、牧野教育長（侵略戦争美化DVDアニメ教材の使用禁止要請）への質問も含まれていたが、いずれも答弁セグメントは未取得のため要約対象外とした（無理に埋めていない）。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonのmembers配列へ、proposedMemberRecordWrapperにspeechesを加えた新規トップレベルオブジェクトとして追加する（fm45は現状未登録）。sessionId:2007-06がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること。"
+    },
+    {
+      "candidateId": "fm57-2008-09-10-ippan-shitsumon",
+      "originSource": "本ワーカーが新規に実施したパイロット（resolveYearTreedepth({year:2008})→listSessionsForYear→listMeetingDays→listSpeakerSegments→fetchSegmentTextのフルパイプラインを実行）",
+      "sessionLabel": "平成20年第9回定例会",
+      "memberIdResolution": {
+        "memberId": "fm57",
+        "confidence": "high",
+        "resolvedBy": "発言者ラベル『髙木益夫君』のかな読み『たかぎ ますお』が、formerMembers.json fm57『高木 ますお』（かな：たかき ますお）と実質一致（髙/高は異体字、益夫はますおの漢字表記）。electionResults.json（election-council-2007、2007-04-22執行）でfm57が当選（得票1,286票、無所属、linkedProfileId=fm57）しており、2008-09-10はその在職期間内（2011年再選まで継続在職）。ただしformerMembers.json側の既存name登録が『高木 ますお』（ひらがな表記のみ、漢字未確定）であり、今回の会議録原文が漢字表記『髙木益夫』を新たに提示している点はPhase59のfm49（矢野せんいちろう→矢野戦一郎）と同型のケースであるため、confidenceはexactではなくhighとした。"
+      },
+      "isNewTopLevelMemberRecord": true,
+      "proposedMemberRecordWrapper": {
+        "memberId": "fm57",
+        "isFormerMember": true,
+        "scope": ["plenary"],
+        "analysisPeriod": { "from": "2008-09-10", "to": "2008-09-10" },
+        "analyzedSessionCount": 1,
+        "sessionsWithSpeechCount": 1,
+        "sessionsWithoutSpeechCount": 0,
+        "unavailableSessionCount": 0,
+        "lastAnalyzedAt": "2026-08-23",
+        "topicCounts": [
+          { "topic": "防災・治水", "sessionCount": 1 },
+          { "topic": "入札制度", "sessionCount": 1 },
+          { "topic": "医療", "sessionCount": 1 }
+        ],
+        "note_pilotScope": "servedSessions=[]（formerMembers.json fm57、令和元年6月以降の会議録収録範囲外のため未検証）。unfetchedSessionCountは在職期間全体（2007年当選〜2019年頃まで、退任日未確認）の他会期件数が不明のためフィールド自体を省略した。"
+      },
+      "speech": {
+        "id": "fm57-2008-09-10-ippan-shitsumon",
+        "memberId": "fm57",
+        "sessionId": "2008-09",
+        "date": "2008-09-10",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "一般質問",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["防災・治水", "入札制度", "医療"],
+        "shortSummary": "平成20年9月定例会（第9回定例会、第2号）で髙木益夫議員（無所属クラブ）が行った一般質問のうち、北川ダム対策検討委員会最終報告書の内容・今後の取り組み姿勢、入札制度の考え方、ドクターヘリ誘致活動の状況について市長に尋ねた部分を、市長の答弁とあわせて要約したもの。同じ質問の中には工事予定価格・落札率、単品スライド条項、ツーリズム観光、ごみ不法投棄・野焼き対策、南延岡駅前駐輪場についての質問（次の答弁者＝企画部長へ続く）も含まれていたが、今回はアクセス回数の制約によりそれらの答弁セグメントは未取得のため要約対象外とした。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "北川ダム対策検討委員会の最終報告書の内容とその後の取り組み状況",
+            "questionSummary": "北川ダムの契約更新を控え、北川ダム対策検討委員会からの最終報告書の内容・時期、市長の受け止めとその後の取り組み状況、現在の状況を質問した。",
+            "answerSummary": "最終報告（6月19日提出、次期水利権更新期間の短縮・選択取水設備設置・予備放流水位の明文化・洪水調節開始流入量の引き上げ・流域防災会議設立の5項目）を最大限尊重する考えを示し、7月に国土交通省九州地方整備局・県河川課と協議、8〜9月に大分県・宮崎県へ要望活動を行い、流域防災会議設立の準備を進めていると答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm57", "summary": "北川ダム対策検討委員会最終報告書の内容と現在の状況を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "報告書5項目の内容と、国・県への要望活動、流域防災会議設立準備の状況を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "北川ダム問題への今後の取り組み姿勢（水利権更新期限を見据えて）",
+            "questionSummary": "北川ダム問題への今後の取り組み姿勢を、流域住民にわかりやすく具体的に示すよう質問した。",
+            "answerSummary": "発電用水利権の更新期限（翌年3月）を一つの節目とし、設立準備中の流域防災会議を早期に立ち上げ、学識経験者も交えて洪水調整機能向上・濁水長期化防止について協議していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm57", "summary": "水利権更新期限を見据えた今後の取り組み姿勢を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "更新期限を節目とし、流域防災会議を早期に立ち上げる考えを示した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q3",
+            "title": "入札制度（総合評価方式・地元企業優先発注等）の考え方",
+            "questionSummary": "県内建設業者の経営破綻が相次ぐ中、入札制度をどう考え今後どうするか、市内業者が少ない工種での地元企業優先発注の考え方を質問した。",
+            "answerSummary": "条件つき一般競争入札を前年4月に導入し入札結果公表・談合ペナルティ強化に取り組んできたこと、今月から総合評価落札方式・郵便入札も予定していること、市内業者が少ない工種でも総合評価落札方式等で地元業者への優先発注を心がける考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm57", "summary": "入札制度の考え方と地元企業優先発注の方針を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "条件付き一般競争入札・総合評価落札方式の導入状況と、地元業者優先発注への配慮を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q4",
+            "title": "ドクターヘリの誘致活動状況",
+            "questionSummary": "県立延岡病院の医師不足・県北の医療格差を踏まえ、ドクターヘリ誘致に向けた市としての誘致活動状況を具体的に質問した。",
+            "answerSummary": "県内市町村長意見交換会や知事との膝づめトークの場等で直接要望を続けていること、県は受け皿となる病院の人的体制やヘリポート整備等の課題が多く検討に時間を要するとしているが、県立延岡病院への配備を引き続き要望していく考えを示した。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "fm57", "summary": "ドクターヘリ誘致活動の具体的状況を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "県への要望活動の場と内容、県側の検討課題を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成20年第9回定例会（第2号 9月10日） 髙木益夫君（質問：壇上、全項目）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H200910A/6372/10/1//0/0",
+            "speakerSection": "pos=6372"
+          },
+          {
+            "title": "平成20年第9回定例会（第2号 9月10日） 市長（首藤正治君）（答弁：北川ダム・入札制度・ドクターヘリ）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H200910A/16617/10/1//0/0",
+            "speakerSection": "pos=16617"
+          },
+          {
+            "title": "平成20年第9回定例会（第2号 9月10日）発言者一覧（r_Speakers.exe、144発言セグメント確認）",
+            "sourceType": "official-minutes-html-index",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H200910A/0/0//10/1/3:0/654/1//0/0/0",
+            "speakerSection": "n/a"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "市長答弁の末尾『〔企画部長（寿崎幸憲君）登壇〕』の表記から、工事予定価格・落札率・単品スライド条項・ツーリズム観光・ごみ不法投棄・野焼き・南延岡駅前駐輪場の各質問は次の答弁者（企画部長）へ続くことが確認できるが、この日程ではその答弁セグメントは未取得のため要約対象外とした（無理に埋めていない）。fm57の漢字表記『髙木益夫』はformerMembers.json側の既存登録（ひらがな表記）と異なるため、名前フィールド更新の要否は人手判断が必要（Phase59のfm49と同型の申し送り事項）。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonのmembers配列へ、proposedMemberRecordWrapperにspeechesを加えた新規トップレベルオブジェクトとして追加する（fm57は現状未登録）。sessionId:2008-09がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること。fm57のformerMembers.json上のname『高木 ますお』を『髙木 益夫』（または『高木 益夫』）へ更新するかは別途データ管理者判断とする（本ワーカーはformerMembers.jsonを編集していない）。"
+    },
+    {
+      "candidateId": "m20-2009-09-08-soukatsu-shitsugi-ippan-shitsumon",
+      "originSource": "本ワーカーが新規に実施したパイロット（resolveYearTreedepth({year:2009})→listSessionsForYear→listMeetingDays→listSpeakerSegments→fetchSegmentTextのフルパイプラインを実行）",
+      "sessionLabel": "平成21年第15回定例会",
+      "memberIdResolution": {
+        "memberId": "m20",
+        "confidence": "exact",
+        "resolvedBy": "発言者ラベル『平田信広君』が現職議員 src/data/members.json m20『平田 信広』と氏名完全一致。electionResults.json（election-council-2003、election-council-2007）でm20が両年とも当選（linkedProfileId=m20）しており、2009-09-08はその在職期間内で矛盾しない。members.json上に同姓同名候補なし。m20は現職継続議員（termCount=7）で、councilSpeechSummaries.jsonに2023-06以降の一般質問が既に18件登録済み。本人発言中の『日本共産党市議団の平田信広』『これまで六回のトップ登壇』という自己申告も既存の長期在職記録と矛盾しない。"
+      },
+      "isNewTopLevelMemberRecord": false,
+      "appendToExistingMemberId": "m20",
+      "proposedAggregateUpdateNote": "既存m20レコード（analyzedSessionCount=18, sessionsWithSpeechCount=18）へこの1件を追加する場合、analyzedSessionCount/sessionsWithSpeechCountをそれぞれ+1する程度の単純な更新にとどめる。unfetchedSessionCount（2003年〜2023年の間の他会期件数）は今回調査していないため変更値を提案しない（推測で埋めない）。",
+      "speech": {
+        "id": "m20-2009-09-08-soukatsu-shitsugi-ippan-shitsumon",
+        "memberId": "m20",
+        "sessionId": "2009-09",
+        "date": "2009-09-08",
+        "meetingNumber": "第2号",
+        "meetingType": "本会議",
+        "speechType": "総括質疑・一般質問",
+        "term": "previous",
+        "isPublished": false,
+        "summaryStatus": "partially-verified",
+        "topics": ["国政・政治", "予算・財政"],
+        "shortSummary": "平成21年9月定例会（第15回定例会、第2号、9月議会トップ登壇）で平田信広議員（日本共産党市議団、現職継続）が行った総括質疑並びに一般質問のうち、2009年8月30日衆院選（政権交代）結果への見解・市政への影響、民主党マニフェスト（高速道路無料化・子ども手当・日米FTA）への懸念点について市長の見解を尋ねた部分を、市長の答弁とあわせて要約したもの。同じ質問の中には新型インフルエンザ対策・後期高齢者医療制度のはり きゅう マッサージ券・市道整備進捗・市営住宅管理・学校給食調理業務民間委託についての質問（次の答弁者＝総務部長へ続く）も含まれていたが、今回はアクセス回数の制約によりそれらの答弁セグメントは未取得のため要約対象外とした。",
+        "questionItems": [
+          {
+            "id": "q1",
+            "title": "衆院選（政権交代）結果への見解と今後の市政への影響",
+            "questionSummary": "2009年8月30日執行の衆院選で自公政権が終わり民主党中心の政権が誕生したことへの受け止めと、今後の延岡市政（短期・長期）への影響についての見解を質問した。",
+            "answerSummary": "有権者が長引く経済不況や年金問題等への不安から現状からの変化を選択したものと認識していると述べ、政権交代による市政への影響は、子ども手当等の新制度や高速道路無料化など方向転換が見込まれるが財源等の課題も指摘されており、現時点では新政権発足前で詳細不明な点が多いため、地方の声を国へしっかり伝えていきたいと答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m20", "summary": "衆院選結果への見解と市政への影響を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "有権者心理の分析と、政権交代による市政への影響の見立て・地方の声を伝える姿勢を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          },
+          {
+            "id": "q2",
+            "title": "民主党マニフェストへの懸念点（高速道路無料化・子ども手当・日米FTA）についての見解",
+            "questionSummary": "民主党マニフェストのうち、高速道路無料化の予算規模、子ども手当と配偶者控除廃止の抱き合わせ、日米FTA促進による食料自給率低下・農業への影響について市長の見解を質問した。",
+            "answerSummary": "高速道路無料化は財源・渋滞助長・環境影響・公共交通への影響を理由に反対意見が多いとされ、東九州自動車道の早期完成等の社会資本整備にしわ寄せが来ないよう要望していくこと、子ども手当は財源としての負担増への調整が必要と考えていること、日米FTAは食の安全・食料自給率・国内農業振興を損なわないよう市長会を通じて国へ要望していると答えた。",
+            "answerers": ["市長"],
+            "exchanges": [
+              { "order": 1, "type": "question", "speakerId": "m20", "summary": "高速道路無料化・子ども手当・日米FTAへの懸念について市長の見解を質問した。" },
+              { "order": 2, "type": "answer", "speakerName": "市長", "summary": "3施策それぞれについて、懸念点への認識と国への要望内容を説明した。" }
+            ],
+            "relatedBills": [],
+            "relatedDocuments": [],
+            "questionAnswerLinkStatus": "confirmed"
+          }
+        ],
+        "summarySources": [
+          {
+            "title": "平成21年第15回定例会（第2号 9月8日） 平田信広君（質問：壇上、全項目）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H210908A/6399/10/1//0/0",
+            "speakerSection": "pos=6399"
+          },
+          {
+            "title": "平成21年第15回定例会（第2号 9月8日） 市長（首藤正治君）（答弁：衆院選結果・民主党マニフェスト）",
+            "sourceType": "official-minutes-html",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H210908A/13559/10/1//0/0",
+            "speakerSection": "pos=13559"
+          },
+          {
+            "title": "平成21年第15回定例会（第2号 9月8日）発言者一覧（r_Speakers.exe、169発言セグメント確認）",
+            "sourceType": "official-minutes-html-index",
+            "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H210908A/0/0//10/1/3:0/654/1//0/0/0",
+            "speakerSection": "n/a"
+          }
+        ],
+        "verifiedAt": "2026-08-23",
+        "verificationNote": "市長答弁の末尾『〔総務部長（尾前光三郎君）登壇〕』の表記から、新型インフルエンザ対策以降の質問は次の答弁者（総務部長）へ続くことが確認できるが、この日程ではその答弁セグメントは未取得のため要約対象外とした（無理に埋めていない）。speechType『総括質疑・一般質問』は本人発言冒頭『ただいまから総括質疑並びに一般質問を行います』と明言している点、およびsrc/lib/questionLikeSpeechTypes.tsのコメントに平田信広議員（令和7年6月／12月）の実例として明記されている区分と同一である点から採用した。"
+      },
+      "mergeInstructions": "councilSpeechSummaries.jsonの既存m20レコード（memberId:'m20'）のspeeches配列へこのspeechオブジェクトを追加する（新規メンバーオブジェクトの作成は不要）。sessionId:2009-09がcouncilSessions.jsonに存在しないため、先にcouncilSessions.jsonへ該当エントリを追加すること。"
+    }
+  ],
+  "unmappedSpeakerDiscoveries": [
+    {
+      "speakerLabelRaw": "中井一萬君",
+      "sessionLabel": "平成18年第21回定例会（第2号 6月13日）",
+      "fileName": "H180613A",
+      "order": 4,
+      "pos": 10160,
+      "note": "本会議で一般質問を行った議員（order4、市長答弁pos=18710へ続く）だが、electionResults.json（election-council-1999/2003全候補）・formerMembers.json（58名）・members.json（26名）のいずれにも一致する氏名・かな候補が見つからなかった。推測でIDを付与せず候補化していない。formerMembers.jsonの1999年〜2003年任期のカバレッジに欠落がある可能性を示す発見として記録する（質問本文・答弁本文は未取得）。将来のformerMembers.json拡充タスクでの追加調査を推奨する。"
+    }
+  ],
+  "councilSessionsProposals": {
+    "note": "src/data/councilSessions.jsonへマージ可能な最小限の会期エントリ案（UNR-026対応）。scripts/validate-data.mjsの必須項目（id/title/eraYear/year/fiscalYear/sessionType/folderPath）のみで構成し、documents/summarySources等の一次資料PDFリンクは今回取得できていないため意図的に省略した（optional項目のため省略してもvalidate-data.mjsはエラーにならないことを確認済み）。本ワーカーはsrc/data/councilSessions.jsonを一切編集していない（提案のみ）。2005-09のみ、本ワーカーが新規に取得したものではなく、既存のreports/phase45-47-general-questions-findings.json・phase57-58-general-questions-implementation-findings.mdで既に検証済みの情報（後藤哲朗fm14の候補データ、平成17年第16回定例会）を参考記載として追加した（参考記載である旨をnoteに明記）。",
+    "records": [
+      {
+        "id": "2006-06",
+        "year": 2006,
+        "fiscalYear": 2006,
+        "eraYear": "平成18年",
+        "title": "平成18年6月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第21回",
+        "folderPath": "/council-documents/2006/2006-06",
+        "description": "延岡市議会 第21回定例会（平成18年6月）",
+        "note_verification": "本ワーカーがlistSessionsForYear({year:2006})・listMeetingDays({sessionLabel:'平成18年 第21回定例会 '})で会期名・会議日程（H180605A〜H180626A、6日程）を実データ確認済み（2026-08-23）。"
+      },
+      {
+        "id": "2007-06",
+        "year": 2007,
+        "fiscalYear": 2007,
+        "eraYear": "平成19年",
+        "title": "平成19年6月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第2回",
+        "folderPath": "/council-documents/2007/2007-06",
+        "description": "延岡市議会 第2回定例会（平成19年6月、2007年4月市議選改選後最初の定例会）",
+        "note_verification": "本ワーカーがlistSessionsForYear({year:2007})・listMeetingDays({sessionLabel:'平成19年 第 2回定例会 '})で会期名・会議日程（H190605A〜H190622A、5日程）を実データ確認済み（2026-08-23）。2007年4月の市議選で改選され会期番号が第2回から再スタートしている点に注意（第26回定例会は改選前・旧任期の最後の定例会）。"
+      },
+      {
+        "id": "2008-09",
+        "year": 2008,
+        "fiscalYear": 2008,
+        "eraYear": "平成20年",
+        "title": "平成20年9月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第9回",
+        "folderPath": "/council-documents/2008/2008-09",
+        "description": "延岡市議会 第9回定例会（平成20年9月）",
+        "note_verification": "本ワーカーがlistSessionsForYear({year:2008})・listMeetingDays({sessionLabel:'平成20年 第 9回定例会 '})で会期名・会議日程（H200903A〜H200924A、5日程）を実データ確認済み（2026-08-23）。"
+      },
+      {
+        "id": "2009-09",
+        "year": 2009,
+        "fiscalYear": 2009,
+        "eraYear": "平成21年",
+        "title": "平成21年9月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第15回",
+        "folderPath": "/council-documents/2009/2009-09",
+        "description": "延岡市議会 第15回定例会（平成21年9月）",
+        "note_verification": "本ワーカーがlistSessionsForYear({year:2009})・listMeetingDays({sessionLabel:'平成21年 第15回定例会 '})で会期名・会議日程（H210901A〜H210918A、5日程）を実データ確認済み（2026-08-23）。"
+      },
+      {
+        "id": "2005-09",
+        "year": 2005,
+        "fiscalYear": 2005,
+        "eraYear": "平成17年",
+        "title": "平成17年9月定例会",
+        "sessionType": "定例会",
+        "sessionNumber": "第16回",
+        "folderPath": "/council-documents/2005/2005-09",
+        "description": "延岡市議会 第16回定例会（平成17年9月）",
+        "note_verification": "参考記載。本ワーカーが新規に取得したものではなく、reports/phase45-47-general-questions-findings.json（candidate-legacy-h170914-goto）・reports/phase57-58-general-questions-implementation-findings.md（fm14=後藤哲朗、exact confidence）で既に検証済みの情報を転記した。この会期エントリがcouncilSessions.jsonへ追加されれば、後藤哲朗（fm14）候補もあわせて公開可能になる。"
+      }
+    ]
+  },
+  "duplicatesExcludedNote": "2005-09-14（後藤哲朗、fm14、平成17年第16回定例会）は既にreports/phase45-47-general-questions-findings.json・phase57-58-general-questions-implementation-findings.mdで確定済み（isPublished:false、未マージ）のため、本ワーカーでは同一会期・同一議員の重複調査を行わなかった（duplicatesExcludedCount=1、新規ネットワークアクセスなし）。councilSpeechSummaries.json本体（398件）には2005-2009年度のレコードが1件も存在しないため、src/data上の重複は0件だった。",
+  "networkAccessLog": {
+    "totalRequests": 21,
+    "breakdown": [
+      { "step": "resolveYearTreedepth+listSessionsForYear（2006/2007/2008/2009の4年分、root See.exeはPhase56キャッシュ再利用のため0回）", "requests": 5 },
+      { "step": "listMeetingDays（2006-21/2007-02/2008-09/2009-15の4会期分）", "requests": 4 },
+      { "step": "listSpeakerSegments（H180613A/H190612A/H200910A/H210908Aの4日程分）", "requests": 4 },
+      { "step": "fetchSegmentText（4セッション×質問1件+答弁1件=8件）", "requests": 8 }
+    ],
+    "errors429": 0,
+    "errors403": 0,
+    "errors5xx": 0,
+    "duplicateFetches": 0,
+    "cacheHits": "root See.exe（年タブ一覧）はPhase56で既にキャッシュ済みのため、resolveYearTreedepthの初回GETは4年分とも新規アクセス0回だった（scripts/.cache/minutesを再利用）。"
+  },
+  "summary": {
+    "targetFiscalYears": "2005-2009年度（5年度）",
+    "fiscalYearsWithNewConfirmedData": [2006, 2007, 2008, 2009],
+    "fiscalYearsSkipped": [2005],
+    "fiscalYearsSkippedReason": "2005年度（平成17年9月定例会、後藤哲朗）は既にPhase45-47/57-58で確定済み（未マージ、E_duplicate相当）のため、本ワーカーでは同一会期の重複調査を避け、councilSessions.jsonマージ提案（参考記載）のみ追加した。",
+    "classification": {
+      "A_ready_for_merge": 4,
+      "B_member_mapping_pending": 1,
+      "C_source_verification_pending": 0,
+      "D_parser_error": 0,
+      "E_duplicate": 1,
+      "F_unavailable": 0
+    },
+    "A_ready_for_merge_detail": "m16-2006-06-13（既存m16へspeeches追加候補、questionItems2件）、fm45-2007-06-12（新規トップレベルmember、questionItems4件）、fm57-2008-09-10（新規トップレベルmember、confidence:high、questionItems4件）、m20-2009-09-08（既存m20へspeeches追加候補、questionItems2件）。4候補とも氏名・在籍期間照合済み、公式会議録の質問原文・答弁原文を実際に取得・精読済み、questionAnswerLinkStatus:confirmedのみを採用（無理に埋めていない）。ただしcouncilSessions.jsonにsessionIdが存在しないため、isPublished:falseのまま（UNR-026解消が前提）。",
+    "B_member_mapping_pending_detail": "中井一萬（2006-06-13、unmappedSpeakerDiscoveries参照）。質問本文は未取得（member-id不明のまま質問内容を要約することは行わない方針のため）。",
+    "E_duplicate_detail": "後藤哲朗（2005-09-14、fm14）。councilSpeechSummaries.json本体には未反映だが、既存reports（phase45-47/57-58）で確定済みのため重複調査を回避した。",
+    "newConfirmedQuestionItemsCount": 12,
+    "newConfirmedQuestionItemsBreakdown": "m16=2件、fm45=4件、fm57=4件、m20=2件（合計12件、いずれもquestionAnswerLinkStatus:confirmed）",
+    "memberMappingResolvedCount": 4,
+    "memberMappingResolvedDetail": "m16=exact、fm45=exact、fm57=high（漢字表記未確定のため）、m20=exact",
+    "memberMappingPendingCount": 1,
+    "duplicateExcludedCount": 1,
+    "parserIssueCount": 0,
+    "parserIssueDetail": "scripts/lib/minutes-source.mjsは一切編集していない。今回使用した関数（resolveYearTreedepth/listSessionsForYear/listMeetingDays/listSpeakerSegments/fetchSegmentText/classifySpeakerLabel）は2006〜2009年の4年分すべてで想定どおりの結果を返した（HTTPエラー0件、文字化け0件、classifySpeakerLabelの誤分類0件）。",
+    "warnings": [
+      "councilSessions.jsonに2019-06以前の会期エントリが存在しないため（UNR-026）、本ファイルの4件はいずれもisPublished:falseとした。councilSessionsProposals（5件、うち1件は参考記載）をマージすれば、5候補（m16/fm45/fm57/m20 + 既存のfm14）すべてが公開可能になる見込み。",
+      "各セッションとも、市長が直接答弁した項目のみを確定データとして構造化した（各セッションとも壇上質問には市長以外の答弁者（部長級・委員会委員長等）に向けた追加項目が複数含まれているが、それらの答弁セグメントは未取得のため意図的に対象外とした）。",
+      "fm57（髙木益夫）はformerMembers.json側の既存name登録（ひらがな『高木 ますお』）と、今回発見した会議録原文の漢字表記（『髙木益夫』）が異なる。fm49（矢野戦一郎）と同型のケースで、nameフィールド更新の要否は別途データ管理者判断が必要（本ワーカーはformerMembers.jsonを編集していない）。",
+      "中井一萬（2006-06-13、unmappedSpeakerDiscoveries）は、現行のelectionResults.json/formerMembers.json/members.jsonのいずれにも一致する候補が見つからなかった。1999年〜2003年任期のformerMembers.jsonカバレッジに欠落がある可能性を示す発見であり、将来のformerMembers.json拡充タスクでの追加調査を推奨する。",
+      "m16（中城あかね）・m20（平田信広）は現職継続議員であり、term:\"previous\"を付与した2019年より前の日付の追加である点は、Phase57-58のm08（甲斐正幸、2014-03-04）と同型の前例（旧任期一般質問アーカイブ拡張）である。"
+    ]
+  }
+}

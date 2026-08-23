@@ -1,0 +1,123 @@
+{
+  "phase": "Phase72",
+  "generatedAt": "2026-08-23",
+  "note": "src/data配下は読み取り専用。本ファイルとreports/phase72-member-matching-findings.md以外は編集・作成していない。git commit / git push / ブラウザ操作は行っていない。",
+  "role": "Phase67-71の各B_member_mapping_pending候補を専任で照合し、exact/highのみA_ready_for_merge格上げを提案する。medium以下は親エージェント確認対象として分離する。",
+  "engineDesign": {
+    "basedOn": "reports/phase59-member-matching-findings.md",
+    "confidenceLevels": ["exact", "high", "medium", "low", "unresolved"],
+    "upgradeRule": "exact/highのみA_ready_for_merge提案。medium/low/unresolvedはB_confirm_needed（親エージェント確認対象）。",
+    "keyRefinements": [
+      "旧字体・異体字の正規化テーブル（﨑→崎、髙→高、澤→沢等）",
+      "カタカナ→ひらがな正規化、敬称・空白除去",
+      "在籍期間ウィンドウの機械判定（当選日～次回『一般』選挙日、補欠選挙は任期終了境界に使わない）",
+      "同姓同名リスクの全件走査（electionResults.json内かな重複、profileIndex内かな重複）",
+      "姓一致・名の読み未確認フォールバック（surnameOnlyFallback、既存名がひらがな登録のみの場合）",
+      "姓一致・名の漢字不一致フォールバック（surnameKanjiMismatchFallback、fm04/fm10型のneedsReviewパターン）"
+    ],
+    "bugFound": {
+      "description": "nextElectionDateAfter()が補欠選挙日を任期終了境界に誤用し、在職期間内の会期を『ウィンドウ外』と誤判定するバグ。fm02（佐藤誠）2010-06-16の検証で発覚・修正。",
+      "fixed": true
+    },
+    "selfTest": {
+      "formerMembers58NameSelfMatch": "servedSessions実データを持つ10名（fm01-fm10）は全員exactで自己一致。servedSessions空の48名は会期情報なし条件下でlowにとどまり誤ってexact/highへ格上げされないことを確認。",
+      "knownVariantMismatchTest": "fm04の外部資料表記『三上武』を投入した場合、fm04を候補提示しつつlowにとどまりexactへ誤格上げしないことを確認。"
+    }
+  },
+  "sourcePhaseAvailability": {
+    "checkedAt": "2026-08-23（作業開始時）",
+    "phase67": "作業開始時点で未生成、後半に出現",
+    "phase68": "作業開始時点で未生成、後半に出現",
+    "phase69": "作業開始時点で未生成、後半に出現",
+    "phase70": "作業開始時点で未生成、後半に出現",
+    "phase71": "作業開始時点で未生成、後半に出現（Phase67-71全5ファイル出揃い、コーディネーター確認済み：4件A_ready_for_merge・11件C_source_verification_pending・0件duplicate）"
+  },
+  "results": [
+    {
+      "sourcePhase": "phase70",
+      "sourceFile": "reports/phase70-general-questions-2014-2016-findings.json",
+      "candidateId": null,
+      "note": "B_member_mapping_pending 0件（Phase70自身がm03上杉泰洋・m17長友幸子いずれもexact判定でA_ready_for_merge済み）。本ワーカーの追加照合対象なし。同姓同名リスクの独立再確認を行い、該当なしを確認した。",
+      "confidence": null,
+      "recommendation": "no_action_needed"
+    },
+    {
+      "sourcePhase": "phase67",
+      "sourceFile": "reports/phase67-general-questions-2000-2004-findings.json",
+      "candidateId": null,
+      "note": "B_member_mapping_pending 0件。本ワーカーの追加照合対象なし。",
+      "confidence": null,
+      "recommendation": "no_action_needed"
+    },
+    {
+      "sourcePhase": "phase68",
+      "sourceFile": "reports/phase68-general-questions-2005-2009-findings.json",
+      "candidateId": "unmapped-h180613-nakai",
+      "memberNameRaw": "中井一萬君",
+      "sessionId": "2006-06",
+      "date": "2006-06-13",
+      "matchedProfile": null,
+      "confidence": "unresolved",
+      "evidence": [
+        {
+          "key": "overall",
+          "matched": false,
+          "note": "electionResults.json（councilMember 10選挙全件、1999-2023年、一般選挙7回＋補欠選挙3回）を『中井』姓で全件走査したが該当候補0件（Phase68は1999/2003の2回のみ確認していたが、本ワーカーが全10回に拡大して再確認し結論は変わらないことを検証）。formerMembers.json（58名）・members.json（26名）にも『中井』姓のプロファイルなし。姓一致フォールバックも該当なし。"
+        }
+      ],
+      "recommendation": "B_confirm_needed",
+      "recommendationDetail": "新規formerMembers.jsonエントリ追加の要否を含め、親エージェントの確認・判断が必要。1999年〜2003年任期のformerMembers.jsonカバレッジに欠落がある可能性を示す発見（Phase68の指摘を追認）。"
+    },
+    {
+      "sourcePhase": "phase69",
+      "sourceFile": "reports/phase69-general-questions-2010-2013-findings.json",
+      "candidateId": "b-satomakoto-2010-06-16",
+      "memberNameRaw": "佐藤誠君",
+      "sessionId": "2010-06",
+      "date": "2010-06-16",
+      "matchedProfile": { "source": "formerMembers.json", "id": "fm02", "name": "佐藤 誠", "nameKana": "さとう まこと" },
+      "confidence": "exact",
+      "evidence": [
+        { "key": "nameKanji", "matched": true, "note": "漢字完全一致（正規化後）: formerMembers.json/fm02" },
+        { "key": "servedPeriodOverlap", "matched": true, "note": "2007-04-22当選〜2011-04-24（次回一般選挙）の在職期間内。electionResults.json上でfm02はlinkedProfileId=fm02・elected:trueの当選記録が2007-04-22/2011-04-24/2015-04-26/2019-04-21の4回連続で存在（年齢51→55→59→63歳と4年毎に正確に+4歳で単調増加、一貫性あり）。" },
+        { "key": "homophoneRisk", "matched": true, "note": "electionResults.jsonの『佐藤』姓候補全件（1999-2023年、一般選挙・補欠選挙とも）を再走査し、『さとうまこと』のかな読みを持つ候補はfm02以外に存在しないことを確認（佐藤正人=fm11まさと、佐藤道男=fm26みちお、佐藤大志=fm46ふとし、佐藤つとむ=fm56、佐藤裕臣=fm58ひろおみはいずれも別読み）。" }
+      ],
+      "recommendation": "A_ready_for_merge",
+      "recommendationDetail": "Phase69は『B_member_mapping_pending』としたが、その根拠はfm02のnote欄の古い記述（2019年選挙のみ確認、と記載）に基づくものであり、electionResults.jsonの現在の内容を直接再照会していなかった。本ワーカーが直接machine-readで確認した結果、2007/2011/2015年の当選記録が既にlinkedProfileId=fm02として存在しており、在職期間・同姓同名の両観点で独立した裏付けが得られたため、A_ready_for_mergeへの格上げを提案する。ただしfm02のnote/sourceNoteテキスト自体は未更新のままであり、マージ担当者はテキストの整合性確認を推奨。",
+      "requiresParentDecision": "A_ready_for_mergeへの格上げ提案そのものの採否、およびfm02のnote/sourceNoteテキスト更新要否は親エージェント判断とする（本ワーカーはsrc/data・phase69ファイルを編集していない）。"
+    },
+    {
+      "sourcePhase": "phase71",
+      "sourceFile": "reports/phase71-general-questions-2017-2019-findings.json",
+      "candidateId": null,
+      "note": "B_member_mapping_pending 0件。4件A_ready_for_merge・11件C_source_verification_pending（全件memberMappingConfidence:exact付与済み、未取得は本文のみ）はいずれも本ワーカーの担当範囲外。河野治満(m10)/梶本英一(m09)/北林幹雄(m11)の3例についてelectionResults.jsonで同姓同名リスクを独立再確認し、該当なしを確認した。",
+      "confidence": null,
+      "recommendation": "no_action_needed"
+    }
+  ],
+  "finalSummary": {
+    "allPhasesConfirmedComplete": true,
+    "confirmedBy": "coordinator message: Phase67-71すべて完了済み（4件A_ready_for_merge・11件C_source_verification_pending・0件duplicate in phase71）",
+    "bMemberMappingPendingByPhase": {
+      "phase67": 0,
+      "phase68": 1,
+      "phase69": 1,
+      "phase70": 0,
+      "phase71": 0,
+      "total": 2
+    },
+    "resolvedExactOrHigh": 1,
+    "resolvedExactOrHighDetail": "佐藤誠（fm02、2010-06-16）をB_member_mapping_pendingからA_ready_for_merge（exact）へ格上げ提案。格上げの最終採否は親エージェント判断。",
+    "parentConfirmNeeded_mediumOrBelow": 1,
+    "parentConfirmNeededDetail": "中井一萬（2006-06-13）：unresolved、新規formerMembers.jsonエントリ追加の要否含め要判断",
+    "unresolved": 1,
+    "unresolvedDetail": "中井一萬（上記と同一案件）",
+    "noActionNeededPhases": ["phase67", "phase70", "phase71"],
+    "warnings": [
+      "fm02（佐藤誠）のnote/sourceNoteテキストはelectionResults.jsonの現状（2007/2011/2015年当選記録の存在）と不整合であり、本ワーカーでは修正していない（src/data読み取り専用のため）。",
+      "照合エンジンの補欠選挙バグ修正（在職期間ウィンドウの終了境界に補欠選挙日を誤用していた）は、他フェーズが将来同様の在職期間判定を行う際にも影響し得るため、恒久的な実装（scripts配下等）へ反映する場合はこの知見を参照すること。",
+      "中井一萬は1999年〜2003年任期のformerMembers.jsonカバレッジに欠落がある可能性を示す発見であり、Phase29計画済みの現物資料調査との連携を推奨する。",
+      "本ワーカーはいずれのファイルへのマージ・編集も行っていない（src/dataは読み取り専用として扱った）。git commit / git push、ブラウザツールの使用も行っていない。"
+    ]
+  }
+}

@@ -1090,6 +1090,91 @@
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
+    },
+    "debt": {
+      "fiscalYear": 1989,
+      "municipalBondIssuanceYen": 2190362000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447276&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19900、決算年度1989）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-08-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase74調査（総務省「地方財政状況調査」）。団体コード452033、表番号33、行番号37『合計』、002:平成元年度発行額列。"
+        }
+      ],
+      "balance": {
+        "generalAccountBondBalanceYen": null,
+        "ordinaryAccountLocalBondBalanceYen": 25655346000,
+        "includingSpecialAccountsYen": null,
+        "includingEnterpriseAccountsYen": null,
+        "perCapitaYen": null,
+        "definitionNote": "総務省「地方財政状況調査」表33-4内の『合計』行（差引現在高＝009列、決算年度末時点／平成元年度発行額＝002列、フロー）。FY1990-2000（Phase62確定）と同一資料体系。FY2001以降の決算カード値との完全な定義一致は未確認（Phase62と同様の留保）。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447276&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表33-4 地方債現在高の状況（year=19900、決算年度1989）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase74調査（総務省「地方財政状況調査」）。団体コード452033（延岡市）、表番号33、行番号37『合計』、009:差引現在高列。"
+          }
+        ]
+      },
+      "notes": "Phase74調査により総務省「地方財政状況調査」表33-4から一般会計等ベースの地方債現在高・当該年度発行額を新規登録。e-Stat静的ファイル配信の下限年度（FY1989）にあたる。"
+    },
+    "fund": {
+      "fiscalYear": 1989,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 3614066000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 980000000,
+        "bondRedemptionFundYen": 1571540000,
+        "otherSpecificPurposeFundsYen": 1062526000,
+        "definitionNote": "総務省「地方財政状況調査」表29-1『基金の状況』行番号6『平成元年度末現在高』（001:財政調整基金、002:減債基金、003:その他特定目的基金）。既存FY2001登録値（決算カード『財調』『減債』『特定目的』）と同一区分と判断されるが、決算カードとの完全一致は公式文書での明記未確認。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表29-1 基金の状況（year=19900、決算年度1989）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase74調査（総務省「地方財政状況調査」）。団体コード452033、表番号29、行番号6、001:積立基金・財政調整基金列。既存FY2001登録値のfiscalReserveFundYenと同一区分（決算カード『財調』）に相当。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表29-1 基金の状況（year=19900、決算年度1989）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase74調査（総務省「地方財政状況調査」）。団体コード452033、表番号29、行番号6、002:積立基金・減債基金列。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」表29-1 基金の状況（year=19900、決算年度1989）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-08-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase74調査（総務省「地方財政状況調査」）。団体コード452033、表番号29、行番号6、003:積立基金・その他特定目的基金列。"
+          }
+        ]
+      },
+      "notes": "Phase74調査により総務省「地方財政状況調査」表29-1から財政調整基金・減債基金・その他特定目的基金を新規登録（合計値は3区分の単純合計、公式の「基金全体合計」欄との照合は今回未実施）。"
     }
   },
   {
