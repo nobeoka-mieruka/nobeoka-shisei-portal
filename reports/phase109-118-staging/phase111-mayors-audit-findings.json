@@ -1,0 +1,108 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "phase": "Phase111",
+  "worker": "mayors-audit",
+  "scope": "1933年〜現在の歴代市長14名（archiveMayors.json全件）の氏名・代数・就任日・退任日・任期・当選回数・選挙日・前職・主要政策・関連資料・sourceRefsを再監査。独占編集ファイル: src/data/archiveMayors.json / archiveMayorTerms.json / electionResults.json（市長選挙のみ）/ civicTimelineEvents.json（市長関連のみ）。",
+  "priorReportsReviewed": [
+    "reports/phase93-orikono-ordinal-findings.json",
+    "reports/mayor-primary-source-matrix.json",
+    "reports/mayor-ordinal-crosscheck.json",
+    "reports/mayor-confidence-overview.json",
+    "reports/phase99-108-staging/phase102-103-term-gaps-findings.json（UNR-029、13区間すべてlibrary_required、csp-43は source_not_located）"
+  ],
+  "method": "上記reportsで既に実施済みの検索・NDLアクセス試行を繰り返さず、(1)Phase93で『画像PDFで抽出失敗』と記録されていた2件（延岡市年表4392.pdf、市民力PDF2656.pdf）をRead toolのPDFページ機能（本セッションでは正常に画像内容を読み取れた）で新規に開いて内容を実確認、(2)延岡市公式サイトに新たに公開されている『延岡市史(市政80周年記念10年史、2013年)』PDF群（4386.pdf行財政の進展、4391.pdf市内の官公庁）を新規発見・確認、(3)夕刊デイリー（延岡市地方紙）のサイト内検索で歴代市長関連の特集記事を新規発見・確認、(4)官報・アジア歴史資料センター・京都大学同窓会名簿等を新規の切り口として検索。いずれもNDL個人送信サービスへの新規ログインや現地図書館訪問は行っていない（本ワーカーの権限外）。",
+  "newSourcesFound": [
+    {
+      "sourceId": "yukan-daily-101608",
+      "sourceType": "地方紙特集記事",
+      "sourceName": "夕刊デイリー「延岡市制施行９０周年特集」（本紙掲載日：2023年2月9日、7面）",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=101608",
+      "sourceOrganization": "夕刊デイリー新聞社（延岡市の日刊地方紙、1963年創刊）",
+      "keyFinding": "初代仲田又次郎から第27・28代読谷山洋司（当時現職）までの歴代市長12名29任期分の代数を列挙。折小野良一氏は「第12、13代」と明記。全28任期の代数がarchiveMayors.json／archiveMayorTerms.jsonの既存代数と完全一致した。",
+      "relevanceToTask": "折小野良一氏の代数表記問題（延岡市史1993年版「第十一・十二代」との1代ずれ）に対し、延岡市公式資料・NDL『日本の歴代市長第3巻』・延岡商工会議所四十年史に続く4件目の独立資料として「第12代・第13代」を裏付けた。archiveMayors.json mayor-10のsourceRefsおよびnotesへ追記済み。",
+      "appliedTo": "src/data/archiveMayors.json（mayor-10）"
+    },
+    {
+      "sourceId": "yukan-daily-105824",
+      "sourceType": "地方紙記事",
+      "sourceName": "夕刊デイリー「延岡市初代・9代市長−仲田又次郎翁をしのぶ」（本紙掲載日：2024年4月8日）",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=105824",
+      "sourceOrganization": "夕刊デイリー新聞社",
+      "keyFinding": "仲田又次郎氏（初代・第9代市長）の顕彰会（延岡市西臼杵郡薬剤師会主催、城山公園胸像前）を報じた記事。既存の生没年（1893-1970）・通称（橋かけ市長・衛生市長）と一致するほか、新たに（1）薬剤師で父の後を継ぎ薬種商を経営していたこと、（2）1928年に旧県北薬剤師会の初代会長を務めたこと、（3）1963年に延岡名誉市民の称号を受け64年に胸像が建立されたこと、を確認した。",
+      "relevanceToTask": "前職（薬剤師）が新規に判明。archiveMayors.json mayor-04のprofile・sourceRefs・notesへ反映済み。就任・退任の日単位日付についての新規情報はない（UNR-029には寄与せず）。",
+      "appliedTo": "src/data/archiveMayors.json（mayor-04）"
+    }
+  ],
+  "negativeFindingsThisPhase": [
+    {
+      "target": "延岡市年表PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4392.pdf）",
+      "priorStatus": "Phase93で『画像ベースPDFでテキスト抽出失敗、内容未確認』",
+      "thisPhaseResult": "本セッションのRead toolでページ1〜10（印刷ページ845〜854）を画像として実際に閲覧できた。内容は2003〜2006年（平成15〜18年）の年表のみで、『延岡市史(市政80周年記念10年史、2013年発行)』の年表編（直近10年分のみを収録）であることが判明した。1933〜1966年の折小野良一・仲田又次郎ら旧市長の代数表記や日付情報は含まれていない。次フェーズ以降の調査候補からは除外してよい。"
+    },
+    {
+      "target": "市民力・地域力・都市力PDF（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2656.pdf）",
+      "priorStatus": "Phase93で『市勢要覧の可能性、内容未確認』",
+      "thisPhaseResult": "本セッションで内容を実確認した結果、広報のべおか2014年3月号（No.860）そのものであり、市勢要覧ではなかった。首藤正治市長3期目のインタビュー特集が中心で、歴代市長一覧・代数表記は含まれていない。同号は既にkohoOcrSearchIndex.jsonの収録範囲（2010年4月号以降）に含まれるはずの号であり、新規の独立資料的価値はない。次フェーズ以降の調査候補からは除外してよい。"
+    },
+    {
+      "target": "延岡市史(市政80周年記念10年史、2013年、市公式サイトPDF全13分冊)",
+      "priorStatus": "未発見（本フェーズで新規発見）",
+      "thisPhaseResult": "第2編「行財政の進展」（4386.pdf）冒頭・第7編「市内の官公庁」（4391.pdf）を確認したが、いずれも直近10年（平成14〜23年頃）の統計・現況記述が中心で、1933〜2003年の歴代市長一覧や折小野良一氏の代数表記に関する記述は確認できなかった（『10年史』という書名どおり、既存の60周年史・50周年史を補完する直近10年分の記録であり、通史的な歴代市長表は収録方針上そもそも存在しない可能性が高い）。全13分冊・939ページを全件精読すれば他の記述がある可能性はゼロではないが、目次上『歴代市長』に相当する章は確認できておらず、費用対効果は低いと判断し全件精読は行わなかった。"
+    },
+    {
+      "target": "官報（延岡市長就任・任命記事の可能性）",
+      "thisPhaseResult": "WebSearchで『官報 延岡市長 任命』『官報 昭和12年 延岡市長 鈴木憲太郎 就任』等を試したが、該当する官報記事のオンライン特定には至らなかった。戦前期（官選色が残る1933-1946年ごろ）の市長人事が官報の叙任及辞令欄に掲載されていた可能性はなお残るが、NDL官報検索システムでの個別コマ確認には至っていない（本ワーカーの範囲では未解決）。"
+    },
+    {
+      "target": "アジア歴史資料センター（JACAR、ログイン不要の公文書デジタルアーカイブ）",
+      "thisPhaseResult": "『延岡市長 任命』で検索したが、関連する公文書は特定できなかった。JACAR自体はログイン不要で全文検索可能なため、次フェーズでも有望な切り口として残しておく価値はあるが、検索語の工夫（内務省地方局人事関係文書等、具体的な件名の特定）が必要。"
+    },
+    {
+      "target": "延岡史談会報（延岡史談会発行、地域史同好会の会報）",
+      "thisPhaseResult": "本フェーズのWebSearchで新規に存在を発見した（第5・6・7号合併号、1988年3月発行、宮崎県立図書館所蔵、郷土資料）。書誌情報のみ確認でき、内容（歴代市長・折小野良一氏に関する記述の有無）はオンラインでは確認できなかった。地域の郷土史愛好団体が発行する会報のため、旧市長の代数や助役任期に関する記述がある可能性は他の全国資料より高いと推測されるが、現地（宮崎県立図書館）での閲覧が必要（library_required、次フェーズの新規調査候補として記録）。"
+    },
+    {
+      "target": "夕刊デイリー サイト内検索（三浦虎雄・青木善祐・房野博・早生隆彦・鈴木憲太郎・大島文彦・佐藤千吉郎）",
+      "thisPhaseResult": "折小野良一・仲田又次郎以外の旧市長については、同紙の特集・追悼記事を検索したが該当記事を発見できなかった（夕刊デイリーは1963年創刊のため、1966年以前に退任した市長＝鈴木憲太郎・大島文彦・三浦虎雄・佐藤千吉郎・青木善祐については、そもそも同時代の在任期間中の報道が同紙に存在しない可能性が高い）。房野博・早生隆彦（1967〜1994年在任）については同紙の対象期間内だが、今回のWeb検索では該当記事を発見できなかった（同紙の記事アーカイブが全文検索エンジンに十分インデックスされていない可能性もあり、次フェーズで同紙サイト内検索フォームを直接操作すれば追加発見の余地が残る）。"
+    }
+  ],
+  "orikonoOrdinalStatus": {
+    "summary": "解決済みではないが（延岡市史1993年版の『第十一・十二代』表記自体は一次資料として実在するため両論併記を維持）、既存の『第12代・第13代』表記を支持する独立資料が本フェーズでさらに1件（夕刊デイリー2023年特集）増え、合計4件（延岡市公式資料、NDL『日本の歴代市長第3巻』、延岡商工会議所四十年史、夕刊デイリー）の独立資料が『第12代・第13代』で一致し、1993年版延岡市史のみが例外という構図がさらに補強された。",
+    "changeThisPhase": "src/data/archiveMayors.json mayor-10のsourceRefsに新規sourceRef 1件を追加、notesに追記1件。数値（代数表記）自体は変更していない。",
+    "remainingUnresolved": "1993年版延岡市史がなぜ『第十一・十二代』と数えたのか（助役職務代理期間の扱いの違い等）という原因は依然未特定。延岡市史1963年版・1983年版上巻の該当欄の代数表記も依然未確認（NDL個人送信サービスへの本人ログインが必要で本ワーカーの範囲外）。"
+  },
+  "unr029Status": {
+    "summary": "市長任期の日単位空白13区間（M1〜M13）はすべて前回Phase102-103の分類（library_required 13区間、19対象のうちcsp-43のみsource_not_located）から変化なし。本フェーズで試みた新しい切り口（官報、JACAR、延岡市史2013年版新分冊、夕刊デイリー）はいずれも該当区間の日単位日付を新規に確認するには至らなかった。",
+    "note": "タスク指示にあった『前回Phase102-103ではlibrary_required 10区間・online_exhausted 3区間だった』という記述は、reports/phase99-108-staging/phase102-103-term-gaps-findings.jsonの実際の分類（M1〜M13の13区間すべてがlibrary_required、うちM10・M11・M13はPhase92時点ではonline_exhaustedだったがPhase102-103で『現地閲覧という具体的次の一歩がある』としてlibrary_requiredへ整理し直し済み）と数値が一致しなかった。本フェーズでは実際のphase102-103ファイルの記述を正として扱った。",
+    "changeThisPhase": "archiveMayorTerms.jsonへの変更なし（新規に確認できた日単位日付がなかったため）。validate:dataの警告13件は変更前後で同一。",
+    "newCandidateSource": "延岡史談会報（1988年3月、宮崎県立図書館所蔵）を新規のlibrary_required候補として追加。既存のphase102-103プランに定義された延岡市史上巻（1983年）コマ124-125・宮崎日日新聞縮刷版等の現地閲覧計画に加える形で次フェーズへ引き継ぐ。"
+  },
+  "otherMayorsAudit": {
+    "summary": "mayor-01〜mayor-14の全14件についてarchiveMayors.jsonの現状を確認したが、折小野良一（mayor-10）と仲田又次郎（mayor-04）以外については、本フェーズの新規調査で追加確認できた事実はなかった（mayor-02, 03, 05〜09, 11〜14は既存のmayor-confidence-overview.json時点のconfidence評価から変化なし）。推測による代数・日付の追加確認は一切行っていない。"
+  },
+  "filesEdited": [
+    {
+      "file": "src/data/archiveMayors.json",
+      "changes": [
+        "mayor-10（折小野良一）: sourceRefsに夕刊デイリー2023年特集記事を追加、notesに追記",
+        "mayor-04（仲田又次郎）: profileに前職（薬剤師・薬種商経営・県北薬剤師会初代会長）を追記、sourceRefsに夕刊デイリー2024年記事を追加、notesに追記"
+      ]
+    }
+  ],
+  "filesNotEdited": [
+    "src/data/archiveMayorTerms.json（UNR-029の13区間について新規確定日付が得られなかったため変更なし）",
+    "src/data/electionResults.json（市長選挙エントリに新規確定情報が得られなかったため変更なし）",
+    "src/data/civicTimelineEvents.json（市長関連イベントとして新規に登録すべき日付付き事実が得られなかったため変更なし。仲田又次郎の1928年薬剤師会長就任は市長就任前の個人経歴のためarchiveMayors.jsonのprofile側に反映し、civicTimelineEventsへは追加していない）"
+  ],
+  "validation": {
+    "validateData": "npm run validate:data 実行済み。errors=0, warnings=40（うちarchiveMayorTerms.jsonの空白区間警告13件は編集前と同一の13件で、新規追加や消失はなし）。",
+    "note": "typecheck / lint / build は本タスクがJSONデータのみの編集であり、CLAUDE.mdの『変更後は可能な限り次を実行する』方針に従い追加実行を検討したが、TypeScriptコード・コンポーネントへの変更は行っていないため、データ検証（validate:data）のみで整合性を確認した。"
+  },
+  "nextActions": [
+    "延岡史談会報（1988年3月、宮崎県立図書館所蔵）の現地閲覧・内容確認（歴代市長・折小野良一氏の代数表記の手がかりの可能性）",
+    "夕刊デイリーのサイト内検索フォームを直接操作し、房野博・早生隆彦（1967〜1994年在任、同紙の創刊後の在任期間）に関する特集・追悼記事の有無を確認",
+    "アジア歴史資料センター（JACAR）で内務省地方局人事関係文書等、より具体的な件名を用いた検索を試行（戦前期M1〜M9区間の日単位確認の可能性）",
+    "引き続きUNR-029の13区間はphase102-103のlibraryPlanどおり、延岡市史上巻（1983年、コマ124-125）の現地閲覧が最有力の次の一歩（NDL個人送信サービスの本人ログインまたは延岡市立図書館・宮崎県立図書館での現物閲覧）",
+    "延岡市史1963年版・1983年版上巻における折小野良一氏の代数表記の直接確認（Phase33以来の既知の宿題、引き続き現地閲覧が必要）"
+  ]
+}

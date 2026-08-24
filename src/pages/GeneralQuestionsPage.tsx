@@ -45,7 +45,7 @@ const verifiedSpeeches: CouncilSpeech[] = questionLikeSpeeches(allPublicSpeeches
   (a, b) => (b.date ?? "").localeCompare(a.date ?? ""),
 );
 
-// 397件（2026-08時点）にのぼる確認済み一般質問を1ページに全件表示すると、スマートフォンで
+// 400件超（2026-08時点）にのぼる確認済み一般質問を1ページに全件表示すると、スマートフォンで
 // スクロールが極端に長くなる（実測で18万px超）ため、20件ずつページ分割して表示する。
 const VERIFIED_PAGE_SIZE = 20;
 

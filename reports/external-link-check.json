@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-24T03:54:04.694Z",
-  "targetCount": 793,
-  "cacheReused": 733,
-  "newlyChecked": 60,
+  "generatedAt": "2026-08-24T07:43:07.537Z",
+  "targetCount": 1133,
+  "cacheReused": 739,
+  "newlyChecked": 394,
   "summary": {
-    "ok": 777,
+    "ok": 1117,
     "redirect": 10,
     "not_found_404": 6
   },
@@ -1252,8 +1252,7 @@
     {
       "url": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
       "files": [
-        "archiveFiscalYears.json",
-        "dataQualitySummary.json"
+        "archiveFiscalYears.json"
       ],
       "checkedAt": "2026-08-24T03:39:05.052Z",
       "status": 302,
@@ -1264,8 +1263,7 @@
     {
       "url": "https://web.archive.org/web/20140715095752/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140324102214",
       "files": [
-        "archiveMayors.json",
-        "dataQualitySummary.json"
+        "archiveMayors.json"
       ],
       "checkedAt": "2026-08-24T03:39:06.779Z",
       "status": 200,
@@ -1276,8 +1274,7 @@
     {
       "url": "https://web.archive.org/web/20140715140122/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2006year.html",
       "files": [
-        "civicTimelineEvents.json",
-        "dataQualitySummary.json"
+        "civicTimelineEvents.json"
       ],
       "checkedAt": "2026-08-24T03:39:18.968Z",
       "status": 200,
@@ -1288,8 +1285,7 @@
     {
       "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html",
       "files": [
-        "civicTimelineEvents.json",
-        "dataQualitySummary.json"
+        "civicTimelineEvents.json"
       ],
       "checkedAt": "2026-08-24T03:39:21.649Z",
       "status": 200,
@@ -1300,8 +1296,7 @@
     {
       "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
       "files": [
-        "civicTimelineEvents.json",
-        "dataQualitySummary.json"
+        "civicTimelineEvents.json"
       ],
       "checkedAt": "2026-08-24T03:39:23.146Z",
       "status": 200,
@@ -1312,8 +1307,7 @@
     {
       "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html",
       "files": [
-        "civicTimelineEvents.json",
-        "dataQualitySummary.json"
+        "civicTimelineEvents.json"
       ],
       "checkedAt": "2026-08-24T03:39:20.439Z",
       "status": 200,
@@ -1325,8 +1319,7 @@
       "url": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
       "files": [
         "archiveMayors.json",
-        "archiveMayorTerms.json",
-        "dataQualitySummary.json"
+        "archiveMayorTerms.json"
       ],
       "checkedAt": "2026-08-24T03:39:11.509Z",
       "status": 200,
@@ -6869,7 +6862,8 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
       "files": [
-        "councilWatchedDocuments.json"
+        "councilWatchedDocuments.json",
+        "dataQualitySummary.json"
       ],
       "checkedAt": "2026-08-24T03:41:27.764Z",
       "status": 404,
@@ -6939,7 +6933,8 @@
     {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
       "files": [
-        "councilWatchedDocuments.json"
+        "councilWatchedDocuments.json",
+        "dataQualitySummary.json"
       ],
       "checkedAt": "2026-08-24T03:41:28.989Z",
       "status": 404,
@@ -8268,11 +8263,55 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/H280906A/6850/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:29.929Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010625A/113658/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:28.250Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010625A/153528/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:19.944Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010625A/157498/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:39.473Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010625A/22918/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:59.495Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8290,11 +8329,55 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010625A/52330/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:33.148Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010626A/113024/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:10:08.207Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010626A/143170/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:01.793Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010626A/24550/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:12.579Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010627A/107100/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:58.886Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8312,11 +8395,253 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010627A/33298/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:42.705Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010904A/45344/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:56.102Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010905A/112962/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:51.139Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R011205A/111260/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:42.087Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020616A/100728/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:13.223Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020914A/81514/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:39.772Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020915A/102350/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:29.193Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021208A/24820/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:39.991Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021208A/47492/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:27.612Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R021210A/145428/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:01.157Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030303A/65124/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:11.892Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030304A/20618/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:58.868Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030616A/39360/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:41.406Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030616A/70274/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:32.545Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030907A/99890/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:50.408Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R030908A/69172/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:19.280Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031207A/11424/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:58.233Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/109810/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:31.005Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031208A/46414/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:43.297Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R031209A/77538/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:12.556Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040310A/108628/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:09.340Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040310A/168540/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:28.559Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R040621A/78587/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:13.515Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8378,11 +8703,198 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R041208A/49954/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:00.451Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050307A/75868/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:26.937Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050308A/70164/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:39.388Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/106215/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:57.296Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/106567/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:52.586Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/119875/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:57.968Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/125942/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:58.651Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/155598/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:58.233Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/23347/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:21.360Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/33007/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:22.001Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/47207/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:03.735Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/58951/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:03.079Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/64297/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:40.680Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/79485/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:41.314Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/86257/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:41.941Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050627A/94993/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:56.635Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/107938/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:52.239Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/120596/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:52.946Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8400,6 +8912,39 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/153180/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:22.481Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/4750/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:07.176Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/56924/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:44.554Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/60932/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -8411,11 +8956,110 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/62666/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:45.198Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/66010/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:46.004Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/74282/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:59.349Z",
+      "checkedAt": "2026-08-24T07:41:58.510Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/83342/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:59.156Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050628A/88714/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:59.768Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/102620/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:16.167Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/120094/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:39.343Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/129062/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:40.015Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/140262/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:40.728Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/146944/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:25.065Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8427,6 +9071,94 @@
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:31.663Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/154890/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:25.646Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/163552/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:26.286Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/38506/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:30.391Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/67724/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:17.955Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/73230/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:18.622Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/84434/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:14.796Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050629A/95064/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:15.446Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/114334/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:17.490Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8455,6 +9187,50 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/122084/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:18.132Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/138898/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:08.506Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/147860/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:09.204Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/153654/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:09.930Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/157822/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -8466,11 +9242,88 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/160338/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:10.565Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/169326/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:11.228Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/181202/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:00.901Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/189048/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:01.544Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/190308/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:36.944Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/195734/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:02.169Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/24182/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:56.185Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/32678/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:56.868Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8499,6 +9352,116 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/43572/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:57.550Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/68636/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:15.891Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/76872/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:15.175Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050905A/96252/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:16.830Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/103400/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:35.214Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/111324/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:35.919Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/119890/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:36.577Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/128926/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:56.642Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/135578/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:57.278Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/143768/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:57.904Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/156236/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -8510,11 +9473,77 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/157042/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:43.910Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/166790/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:44.590Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/167292/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:54:00.276Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/174084/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:45.261Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/32576/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:45.176Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/39852/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:45.919Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/50574/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:37.421Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8543,11 +9572,66 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/61504/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:38.057Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/72960/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:38.714Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/86440/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:33.800Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/97316/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:34.577Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/111955/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:10:03.936Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/112017/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:31.068Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8565,11 +9649,121 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/120451/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:31.725Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/129634/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:32.346Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/133324/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:32.976Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/137704/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:33.624Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/164869/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:49.818Z",
+      "checkedAt": "2026-08-24T07:40:30.651Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/172129/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:31.312Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/179353/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:31.936Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/23660/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:41.189Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/43504/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:59.320Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/53792/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:59.959Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/59167/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:00.695Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8587,6 +9781,83 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/66113/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:01.348Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/72585/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:01.967Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050907A/80531/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:02.644Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/108205/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:47.535Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/127575/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:06.552Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/149416/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:42.575Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/158522/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:43.202Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/168768/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -8598,11 +9869,44 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/170314/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:43.805Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/174836/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:45.030Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/176656/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:44.428Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/26856/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:04.355Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8631,11 +9935,44 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/43140/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:05.005Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/62357/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:30.647Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/65643/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:32.269Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/71157/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:31.283Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8653,6 +9990,72 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/76145/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:31.905Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/82817/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:32.578Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/90883/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:46.167Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051205A/98859/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:46.828Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/108254/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:23.964Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/124130/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:53.606Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/135198/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -8664,11 +10067,66 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/144382/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:54.250Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/157028/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:54.919Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/18516/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:46.688Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/190686/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:15.948Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/196914/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:16.618Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/205944/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:48.461Z",
+      "checkedAt": "2026-08-24T07:40:17.305Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8686,11 +10144,44 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/33754/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:47.341Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/42436/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:56.295Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/64884/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:40.214Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/69680/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:56.955Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8708,11 +10199,176 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/78750/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:57.599Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/90755/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:22.664Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051206A/99851/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:23.323Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/105234/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:18.804Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/111884/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:19.492Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/121230/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:20.111Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/133914/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:20.846Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/152938/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:03.337Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/163820/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:04.055Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/166754/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:53.251Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/180920/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:04.717Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/21296/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:21.838Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/217436/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:34.276Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/223482/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:34.905Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/34174/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:22.480Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/41468/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:23.123Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8730,11 +10386,88 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/49222/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:23.777Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/54528/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:24.411Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/63030/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:23.086Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/82786/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:55.336Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/85014/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:23.759Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R051207A/89632/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:24.416Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/129539/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:36.811Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/158571/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:35.528Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8756,7 +10489,7 @@
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:50.475Z",
+      "checkedAt": "2026-08-24T07:40:37.216Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8774,11 +10507,110 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/220635/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:45.094Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/226949/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:45.788Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/62408/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:29.291Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/71742/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:29.929Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/82792/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:20.559Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/84336/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:31.056Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060305A/90862/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:21.196Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060306A/107324/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:54.783Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060306A/128858/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:55.457Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060306A/53820/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:46.612Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8796,11 +10628,88 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060306A/72412/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:33.190Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/104582/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:05.880Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/112812/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:06.532Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/119030/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:29.045Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/123050/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:07.186Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/132538/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:07.840Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/143752/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:55.205Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/154994/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:55.974Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8818,6 +10727,17 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/24798/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:16.538Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/31220/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -8829,11 +10749,55 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/38180/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:17.179Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/49458/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:02.794Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/60190/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:03.453Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/67564/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:46.984Z",
+      "checkedAt": "2026-08-24T07:40:04.108Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/71998/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:41.863Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8851,11 +10815,143 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060307A/86092/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:42.489Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/105890/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:49.854Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/118386/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:21.489Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/133980/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:22.127Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/141576/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:57.057Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/147138/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:22.769Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/151114/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:18.542Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/166962/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:19.199Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/187054/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:19.916Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/207494/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:47.234Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/222418/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:47.853Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/36528/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:14.623Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/41646/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:15.263Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8873,11 +10969,176 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/62134/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:05.918Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/80592/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:47.959Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/88680/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:48.603Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/96294/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:49.215Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/120754/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:46.406Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/127636/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:46.996Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/134736/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:47.633Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/154866/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:33.822Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/15870/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:53.861Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/168114/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:34.462Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/173426/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:32.918Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/31130/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:54.524Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/45464/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:35.456Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/58150/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:36.191Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/67614/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:55.670Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060626A/86290/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:56.319Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8895,11 +11156,110 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/108746/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:37.515Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/113432/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:38.154Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/119472/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:25.021Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/126856/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:25.726Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/132142/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:26.364Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/136722/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:26.981Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/142304/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:49.102Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/143752/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:27.621Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/151670/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:28.243Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/159630/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:05.402Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8917,11 +11277,220 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/16705/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:06.351Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/169474/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:06.099Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/178936/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:06.719Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/28188/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:06.978Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/34306/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:07.636Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/57432/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:54.252Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/64188/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:54.963Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/71154/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:55.622Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/7958/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:05.705Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/85938/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:36.233Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060627A/96636/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:36.864Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/108874/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:34.784Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/129670/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:48.172Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/137409/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:48.845Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/156099/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:23.463Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/163993/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:24.125Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/167789/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:10:03.275Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/172251/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:24.798Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/182727/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:25.424Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/196137/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:08.243Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8939,11 +11508,132 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/211289/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:08.903Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/217813/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:09.585Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/21932/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:11.573Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/30190/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:12.225Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/39458/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:12.854Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/53760/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:52.146Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/57398/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:35.696Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/60092/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:52.799Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/67488/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:53.465Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/74932/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:54.121Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/85162/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:33.510Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060911A/98760/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:34.175Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8961,11 +11651,77 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/109752/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:18.476Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/119052/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:19.129Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/130822/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:27.269Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/152414/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:27.950Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/158078/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:40.764Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/158364/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:28.599Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/165774/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:03.226Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -8983,11 +11739,66 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/178050/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:03.877Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/188012/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:04.506Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/200964/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:05.248Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/27556/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:50.486Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/27936/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:09:51.837Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/34914/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:51.175Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9005,11 +11816,55 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/43068/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:51.848Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/49126/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:15.288Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/55720/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:15.954Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/58382/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:30.331Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/63170/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:16.599Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9027,6 +11882,61 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/67758/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:17.237Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/75500/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:17.866Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060912A/96708/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:17.805Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/107353/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:39.419Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/118743/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:40.053Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/122665/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -9038,11 +11948,88 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/127243/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:07.339Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/138420/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:07.984Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/149274/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:08.602Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/160486/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:09.247Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/169241/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:09.865Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/176045/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:43.139Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/190765/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:51.214Z",
+      "checkedAt": "2026-08-24T07:40:43.831Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/22880/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:58.602Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9054,6 +12041,72 @@
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:54:02.343Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/33064/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:59.240Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/42610/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:59.877Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/59212/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:04.756Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/69810/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:05.415Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/7376/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:56.964Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/82764/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:06.097Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9082,6 +12135,28 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060913A/99225/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:38.807Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/102580/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:39.131Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/106370/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -9093,11 +12168,198 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/111092/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:48.273Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/121966/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:48.862Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/131890/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:49.514Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/140016/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:50.158Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/152582/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:35.095Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/162594/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:35.807Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/168230/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:36.438Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/30548/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:12.638Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/36156/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:13.290Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/41174/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:13.959Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/45178/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:58.676Z",
+      "checkedAt": "2026-08-24T07:41:51.790Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/53688/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:52.461Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/61622/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:53.136Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/69792/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:37.840Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061203A/96506/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:38.488Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/100052/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:48.481Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/106818/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:49.112Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/110816/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:49.745Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9115,11 +12377,121 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/137338/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:52.944Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/13980/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:40.084Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/147744/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:53.613Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/160964/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:52.519Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/169446/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:53.151Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/182642/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:53.789Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/21832/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:24.627Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/30360/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:25.277Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/38230/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:26.003Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/44106/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:26.643Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/56884/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:03.209Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9137,11 +12509,55 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/66326/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:03.875Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/71894/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:04.562Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/72306/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:10:07.451Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061204A/78368/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:05.205Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/102164/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:10.513Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9159,11 +12575,143 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/115100/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:11.277Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/124888/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:11.930Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/137722/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:00.546Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/153294/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:01.278Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/164220/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:01.941Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/29142/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:40.755Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/39716/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:41.391Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/49836/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:42.006Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/59962/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:26.108Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/66832/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:26.701Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/71432/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:57.735Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/74828/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:27.322Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061205A/87130/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:27.926Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9181,11 +12729,99 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/115972/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:49.501Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/118578/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:54:01.004Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/140680/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:50.147Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/154766/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:54.420Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/213342/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:55.216Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/61572/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:51.644Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070304A/87230/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:52.275Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/104934/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:32.258Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/124505/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:32.864Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9203,6 +12839,105 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/39276/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:13.934Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/62010/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:14.636Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/78050/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:43:02.565Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/112170/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:19.816Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/119882/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:20.460Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/134174/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:21.175Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/152494/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:00.260Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/157800/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:00.913Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/168518/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:01.962Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/174824/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
@@ -9214,11 +12949,77 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/177340/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:02.621Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/196930/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:44.529Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/27462/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:51.510Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/53350/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:06.757Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070306A/91944/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:30.295Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070617A/50136/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:43.910Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/114731/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
-      "checkedAt": "2026-08-08T07:09:47.711Z",
+      "checkedAt": "2026-08-24T07:40:10.704Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9236,11 +13037,99 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/119633/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:11.334Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/126639/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:11.987Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/16952/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:07.375Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/28844/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:07.986Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/34490/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:08.659Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/45820/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-08T07:10:05.990Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/46228/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:50.926Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/61138/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:51.593Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/86014/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:37.079Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9258,11 +13147,55 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/90382/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:37.717Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070909A/95426/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:38.751Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R071202A/109706/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:52.340Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R071203A/14038/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:02.456Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R071203A/70570/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:10.913Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9280,11 +13213,77 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R071204A/49502/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:14.138Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/111158/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:42.653Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/116012/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:29.781Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/133284/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:31.667Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/177586/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:33.583Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/189808/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:43.312Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080225A/45440/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:42:10.222Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9302,11 +13301,66 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080226A/116237/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:50.869Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080226A/133709/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:55.973Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080226A/135847/10/1//0/0",
       "files": [
         "councilSpeechSummaries.json"
       ],
       "checkedAt": "2026-08-24T03:53:44.581Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080226A/45334/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:13.258Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/138146/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:40.429Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/17514/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:13.877Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -9324,6 +13378,127 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/32802/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:14.501Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/44586/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:39:59.573Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/60450/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:00.218Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/81202/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:41:21.838Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080227A/92316/10/1//0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:10.000Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/r_Speakers.exe?48o046ot0cia1xvtw7/H260304A/0/0//10/1/3:0/654/1//0/0/0",
+      "files": [
+        "councilSpeechSummaries.json"
+      ],
+      "checkedAt": "2026-08-24T07:40:20.700Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H210507A&startPos=0",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:46.884Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H220209A&startPos=0",
+      "files": [
+        "citySpecialPosts.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:45.494Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H230512A&startPos=0",
+      "files": [
+        "civicTimelineEvents.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:46.175Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060222A&startPos=0",
+      "files": [
+        "billVotes.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:44.073Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060308A&startPos=2228",
+      "files": [
+        "committeeReportActivity.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:47.641Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060529A&startPos=0",
       "files": [
         "billVotes.json"
@@ -9335,11 +13510,77 @@
       "error": null
     },
     {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=16428",
+      "files": [
+        "committeeReportActivity.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:48.271Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=7842",
       "files": [
         "committeeReportActivity.json"
       ],
       "checkedAt": "2026-08-24T03:53:26.461Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070121A&startPos=6798",
+      "files": [
+        "committeeReportActivity.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:48.916Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=0",
+      "files": [
+        "billVotes.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:44.826Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070627A&startPos=25674",
+      "files": [
+        "committeeReportActivity.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:49.671Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R071212A&startPos=26162",
+      "files": [
+        "committeeReportActivity.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:50.315Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=34294",
+      "files": [
+        "committeeReportActivity.json"
+      ],
+      "checkedAt": "2026-08-24T07:38:50.995Z",
       "status": 200,
       "location": null,
       "category": "ok",

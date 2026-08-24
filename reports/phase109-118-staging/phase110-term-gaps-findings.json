@@ -1,0 +1,117 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "phase": "Phase110",
+  "scope": "src/data/citySpecialPosts.jsonのappointedDate/retiredDate未確定5件（csp-43町田訓允/教育長、csp-44黒木道男/助役、csp-45伊東義男/助役、csp-48吉田厚/収入役、csp-49高島安三郎/収入役）。前提資料reports/phase99-108-staging/phase102-103-term-gaps-findings.json（19対象中解決0件）を読み、同一検索の繰り返しを避けて新しい切り口で再調査した。",
+  "constraint": "citySpecialPosts.jsonのみ編集可（他ファイルは読み取りのみ）。確定できた対象のみ更新し、確定できないものはJSONを編集せず本ファイルに記録した。推測による日付補完は行っていない。",
+  "priorWorkReviewed": [
+    "reports/phase99-108-staging/phase102-103-term-gaps-findings.json（前回調査、19対象中解決0件、csp-43はsource_not_located、csp-44/45/48/49はlibrary_required）",
+    "src/data/citySpecialPosts.json（csp-42〜csp-49の現状を実読）"
+  ],
+  "newApproachSummary": "csp-43について、前回調査は氏名の完全一致検索『町田訓允』で会議録検索システム（kensakusystem.jp）を検索し0件だった。本フェーズでは、システム自身が明記する『漢字表記はJIS第2水準までのため人名が原本と異なる場合がある』という注記に着目し、まず検索語を人名の一部『町田』のみに緩めて全期間（平成12年〜）検索したところ1124件がヒットした。そのうち平成19年（2007年）以降の会議録で、原本では『允』ではなく『町田訓久』という表記でヒットすることを発見した。この表記でキーワード『教育委員会委員』『町田訓久』を組み合わせて全期間検索し、(1)平成19年9月25日の議案第90号（教育委員会委員の選任、前任・牧野哲久氏の任期満了日=2007-10-08を明記）、(2)平成27年9月18日の議案第45号（教育長の選任、町田訓久氏本人の任期満了日=2015-10-08を明記）という2件の一次資料を新規発見した。あわせて、同一人物が2002年に総務部長、2006年3月に収入役（収入役制度廃止直前の最後の収入役の一人）を務めていたという、citySpecialPosts.json未登録の経歴も判明した（本フェーズのスコープ外のため新規レコードとしては登録せず、次フェーズへの提案として記録）。csp-44/45/48/49については、NDLサーチ全文検索・人名個別Web検索・国立国会図書館デジタルコレクションの実閲覧（ログイン不要で画像自体は閲覧可能なことを新規確認）を試みたが、該当ページ（延岡市史コマ427/428/126）はいずれも日単位はおろか月単位の日付表示も原本に存在しないことを直接確認し、library_required（現地閲覧・原本確認が必要）の判定を維持した。"
+  ,
+  "targets": [
+    {
+      "targetId": "csp-43",
+      "person": "町田 訓允（会議録原本表記は『町田訓久』とみられる。JIS第2水準制約による表記差異の可能性、既存表記を維持）",
+      "role": "superintendent（教育長）",
+      "priorClassification": "source_not_located",
+      "newFindings": {
+        "appointedDate": "2007-10-09",
+        "retiredDate": "2015-10-08",
+        "evidence": [
+          {
+            "source": "延岡市議会会議録検索システム 平成19年第4回定例会（第5号 9月25日、議案第90号「教育委員会委員の選任」）",
+            "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H190925A&startPos=0",
+            "quote": "議案第九〇号は、教育委員会委員の選任でございます。本案は、教育委員会委員の牧野哲久氏が十月八日をもって任期満了となりますので、その後任に町田訓久氏を選任するものでございます。町田氏は、昭和四十八年に大学を卒業後、同年四月に延岡市役所に入庁され、総務部長を経て平成十八年三月に収入役に就任しておられます。"
+          },
+          {
+            "source": "延岡市議会会議録検索システム 平成27年第3回定例会（第5号 9月18日、議案第45号「教育長の選任」）",
+            "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H270918A&startPos=0",
+            "quote": "議案第四五号は、教育長の選任でございます。本案は、教育委員会委員及び教育長の町田訓久氏が本年十月八日をもって任期満了となりますので、その後任に、笠江孝一氏を選任するものであります。"
+          },
+          {
+            "source": "延岡市議会会議録検索システム 平成19年第26回定例会（第2号〜第5号、2007年3月）における前任者確認",
+            "note": "検索語『牧野哲久』で66件ヒット、すべて平成19年（2007年）のみ。『教育長（牧野哲久君）』として答弁しており、前任者が教育委員会委員かつ教育長であったことを独立に確認した。"
+          }
+        ],
+        "reasoning": "教育委員会委員の任期は4年で、前任者の任期満了日の翌日から新任期が開始するという運用が一貫している（同一系列で、次代の笠江孝一氏〈csp-42〉が『町田訓久氏が本年十月八日をもって任期満了』の翌日である2015-10-09付で就任したことが、広報のべおか2015年11月号という独立資料でも確認済み＝csp-42の既存sourceRefsを参照）。前任者・牧野哲久氏の任期満了日が2007-10-08と会議録に明記されているため、appointedDateを2007-10-09とした。2007年11月27日の本会議記録で既に『教育長（町田訓久君）』として答弁しており、教育委員就任とほぼ同時に教育長に就任したとみられる。retiredDateは2015-10-08で、これは市長本人の発言による直接記載（一次資料）。"
+      },
+      "classification": "confirmed",
+      "actionTaken": "src/data/citySpecialPosts.jsonのcsp-43を更新（appointedDate=2007-10-09、retiredDate=2015-10-08、termNote/sourceRefs/notes/lastVerifiedAtを更新）。",
+      "bonusFindingNotRegistered": {
+        "detail": "同一人物（町田訓久）が2002年4月〜総務部長、2006年3月〜収入役（前任・米田英人氏が2006-02-03付で退職）を務めていたことが平成18年第19回定例会（第1号 2月28日、議案第273号）で確認できた。citySpecialPosts.jsonには収入役としての町田氏のレコードが存在しない。",
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=H180228A&startPos=0",
+        "quote": "議案第二七三号は、収入役の選任であります。本案は、前収入役　米田英人氏が平成十八年二月三日付で退職されましたので、その後任に町田訓久氏を選任するものであります。町田氏は、昭和二十四年生まれの五十七歳であります。昭和四十八年に延岡市役所に入庁し、職員課人事係長、職員課長などを歴任の後、平成十四年四月から総務部長を務めているところであります。",
+        "recommendation": "次フェーズで新規レコード（収入役、2006年〜2007年ごろ、収入役制度廃止＝2007年4月に伴い退任とみられる）として登録するかどうかの検討を推奨する。本フェーズは優先対象（csp-43〜49）のスコープを優先し、新規ID追加は見送った。"
+      }
+    },
+    {
+      "targetId": "csp-44",
+      "person": "黒木 道男",
+      "role": "assistant-mayor（助役）",
+      "priorClassification": "library_required",
+      "newApproachTried": [
+        "NDLサーチ全文検索『黒木道男 延岡』（該当資料なし）",
+        "WebSearch『黒木道男 延岡市 助役』（新規資料なし）",
+        "国立国会図書館デジタルコレクション（pid 13200958、コマ427）を個人送信サービスへのログインなしで実際に閲覧できることを新規確認（前回調査メモの『個人送信サービス対象のため本ワーカーはアクセス不可』という前提は今回誤りと判明。画像自体はログインなしで閲覧可能）。ただし該当ページを実際にズームして精読した結果、『市助役に黒木道男が就任した。』という一文は昭和60年（1985年）の年内イベントを列挙する『事項』欄の一部として記載されているのみで、月・日を示す個別の日付ラベルが同一文に付随していないことを直接確認した（同じコマ内の別の年・別の事項群には『十二月』『一月』『二月』等の月ラベルが付く箇所もあるが、黒木道男の記載箇所には付いていない）。"
+      ],
+      "conclusion": "新規のオンライン一次資料は発見できず、原本自体に月・日精度の情報がないことを直接確認した。日単位はおろか月単位の確定も、この版（延岡市史1993年版）のこのページからは不可能である可能性が高い。前回調査が提案した『現物・高精細での再読』では解決しない可能性があり、原本に月日の記載がそもそも存在しないという、より踏み込んだ否定的知見を得た。",
+      "classification": "library_required",
+      "actionTaken": "citySpecialPosts.jsonは編集していない（appointedDate/retiredDateともnullを維持）。"
+    },
+    {
+      "targetId": "csp-45",
+      "person": "伊東 義男",
+      "role": "assistant-mayor（助役）",
+      "priorClassification": "library_required",
+      "newApproachTried": [
+        "NDLサーチ全文検索・WebSearch（新規資料なし）",
+        "csp-44と同じ資料（コマ428、隣接コマ）の性質上、同様に月日ラベルが原本に付随しない可能性が高いと推定される（本フェーズではコマ428自体の再閲覧は時間の制約で実施していない）。"
+      ],
+      "conclusion": "新規のオンライン一次資料は発見できず。",
+      "classification": "library_required",
+      "actionTaken": "citySpecialPosts.jsonは編集していない。"
+    },
+    {
+      "targetId": "csp-48",
+      "person": "吉田 厚",
+      "role": "treasurer（収入役）",
+      "priorClassification": "library_required",
+      "newApproachTried": [
+        "NDLサーチ全文検索『延岡市長 助役 収入役』（延岡市史1983年版のみヒット、既知資料）",
+        "WebSearch『吉田厚 延岡市 収入役』（新規資料なし）"
+      ],
+      "conclusion": "新規のオンライン一次資料は発見できず。延岡市史上巻（1983年版、コマ126、一覧表形式）の日単位判読には現物確認が必要という前回の結論は変わらない。",
+      "classification": "library_required",
+      "actionTaken": "citySpecialPosts.jsonは編集していない。"
+    },
+    {
+      "targetId": "csp-49",
+      "person": "高島 安三郎",
+      "role": "treasurer（収入役、7〜9代・助役11〜12代兼務）",
+      "priorClassification": "library_required",
+      "newApproachTried": [
+        "NDLサーチ全文検索・WebSearch『高島安三郎 延岡市』（新規資料なし）"
+      ],
+      "conclusion": "新規のオンライン一次資料は発見できず。8代退任年（昭和34年/35年）の表記ゆれ、9代の日付未確認は、同じくコマ126の現物確認が必要という前回の結論のまま。",
+      "classification": "library_required",
+      "actionTaken": "citySpecialPosts.jsonは編集していない。"
+    }
+  ],
+  "summary": {
+    "totalPriorityTargets": 5,
+    "resolvedByPhase110": 1,
+    "classificationCounts": {
+      "confirmed": 1,
+      "approximate": 0,
+      "library_required": 4,
+      "source_not_located": 0
+    },
+    "citySpecialPostsJsonEdits": [
+      "csp-43: appointedDate null→2007-10-09、retiredDate null→2015-10-08、termNote/sourceRefs（3件、うち2件新規）/notes/lastVerifiedAtを更新"
+    ],
+    "validateDataResult": "errors=0、warnings=40（既存の会議録自動生成警告・市長任期空白警告・財政年度欠番警告のみで、本フェーズの変更による新規警告・エラーは発生していない）",
+    "typecheckResult": "エラーなし（tsc -b成功）",
+    "notes": "csp-43の解決は、前回調査（Phase102-103）が『氏名の完全一致検索』に依存して0件と結論づけた地点から、会議録検索システム自身の免責事項（JIS第2水準制約による人名表記差異）に着目し、部分一致検索→表記差異の発見→正しい表記での全期間検索、という新しい切り口で突破できた。csp-44/45/48/49については、NDLデジタルコレクションが実は個人送信サービスへのログインなしで画像閲覧可能であることを新規確認できた点は前進だが、実際に精読した結果、原本（延岡市史1993年版コマ427）に月日レベルの日付情報がそもそも付随しない記載形式であることを直接確認し、library_requiredの判定を維持する結果となった。次フェーズでは、csp-44/45についてはコマ428も含めた原本の記載形式をより広く確認し、日付情報が『事項』欄以外の場所（別の一覧表等）にある可能性を探ることを推奨する。"
+  }
+}

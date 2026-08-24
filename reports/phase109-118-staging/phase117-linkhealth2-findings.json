@@ -1,0 +1,115 @@
+{
+  "task": "Phase117: linkHealth（外部リンク健全性）再実測2 — kensakusystem.jp未チェック分の拡大確認",
+  "prerequisiteReviewed": [
+    "reports/phase99-108-staging/phase99-linkhealth-report.md",
+    "reports/phase99-108-staging/phase99-linkhealth-findings.json"
+  ],
+  "method": "既存の scripts/check-external-links.mjs を再利用。非kensakusystem 733件は同日(2026-08-24 03:39-03:54)にPhase99でフレッシュ確認済みでキャッシュが14日以内のため、指示通り無意味な再チェックを避けて自動キャッシュ再利用（reused）とし、未チェック領域が大きいkensakusystem.jp（全4,609件中これまで99件のみ確認済み＝2.1%）を優先して拡大サンプリングした。`node scripts/check-external-links.mjs --sample-kensakusystem=400` を実行（決定論的間引きのstepが前回60件サンプル時と異なるため、新規に394件を追加確認、6件は前回サンプルと偶然重複しキャッシュ再利用）。累計kensakusystem.jp確認数は99件→485件（10.5%）に拡大。",
+  "networkNote": "本セッションの標準サンドボックスは外部ネットワークfetchを遮断していたため、dangerouslyDisableSandboxを有効にして実fetchを実行した（コード実行環境の制約であり、データやサイト側の問題ではない）。",
+  "runSummary": {
+    "command": "node scripts/check-external-links.mjs --sample-kensakusystem=400",
+    "generatedAt": "2026-08-24T07:43:07.537Z",
+    "targetCount": 1133,
+    "cacheReused": 739,
+    "newlyChecked": 394,
+    "newlyCheckedBreakdown": {
+      "kensakusystemJpNew": 394,
+      "nonKensakusystem": 0,
+      "note": "非kensakusystemは全733件が同日Phase99の確認結果をキャッシュ再利用（0件無意味な再確認）。新規確認は全てkensakusystem.jpサンプル。"
+    },
+    "classificationOfNewlyChecked394": {
+      "healthy_ok": 394,
+      "redirect": 0,
+      "notFound404": 0,
+      "serverError": 0,
+      "timeout": 0,
+      "blocked": 0,
+      "rateLimited": 0,
+      "note": "394件全てhealthy(200)。新規に発見されたリンク切れ・エラーは0件。"
+    },
+    "cumulativeKensakusystemJp": {
+      "totalUrlsInData": 4609,
+      "everChecked": 485,
+      "everCheckedPct": "10.5%",
+      "nonOkCount": 0
+    }
+  },
+  "classificationBreakdown_allActiveTargets": {
+    "description": "今回のtargets(1133件=非kensaku733+kensakuサンプル400)全体の分類（キャッシュ再利用分含む、現在アクティブな参照のみ）",
+    "healthy_ok": 1117,
+    "redirect": 10,
+    "notFound404": 6,
+    "serverError": 0,
+    "wayback_temporarily_unavailable": 0,
+    "blocked": 0,
+    "rateLimited": 0
+  },
+  "notFound404_activeVsStale": {
+    "note": "reports/external-link-check.json の全履歴には34件のnot_found_404が残るが、うち28件（x.com/nobeoka_giin01-27、youtube.com/@nobeoka-city、x.com/nobeoka_shicho）は現存しない*.backup.jsonファイル（members.backup.json, mayor.backup.json）参照の残骸で、現在のsrc/data配下には存在しない（grep確認済み、リンク自体が生きているかも実害無し）。generate-quality-summary.mjsも*.backup.json参照を除外して集計するため、実質的な問題ではない。",
+    "activeReal404Count": 6,
+    "activeReal404": [
+      {
+        "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
+        "files": ["archiveMayorTerms.json"],
+        "status": "アクティブ参照あり・継続404",
+        "detail": "Phase99から状態変化なし。Wikipedia内検索でも独立記事は見つからず、記事は現存しない。同一事実はkotobank.jp・延岡市公式資料で裏付け済み。",
+        "recommendation": "推測でURLを差し替えない。archiveMayorTerms.json担当（Phase110/111/113/115系）へ：当該sourceRefエントリの削除、またはkotobank.jp等の代替出典への統合を人手判断で検討されたい（実害小、緊急性は低い）。直接編集は行っていない。"
+      },
+      {
+        "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+        "files": ["dataQualitySummary.json（集計残骸のみ）"],
+        "status": "アクティブなsourceUrlとしては不使用",
+        "detail": "archiveMayors.json / archiveMayorTerms.jsonでは既にPhase96でWayback版へ差し替え済み（Phase99確認済み、変化なし）。",
+        "recommendation": "編集不要。次回generate:quality-summary実行で自動的に一覧から消える。"
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
+        "files": ["councilWatchedDocuments.json"],
+        "status": "アクティブ参照あり・継続404（id: session-schedule-5774a79eedad, missingStreak=0のまま未更新）",
+        "detail": "延岡市議会サイトの一覧ページ https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html を実際にfetchして確認したところ、「第26回延岡市議会（定例会）会議日程」PDFは同ページから既に削除されており、代わりに「第27回延岡市議会（定例会）会議日程」として新URL https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28674.pdf （HEAD確認=200）が掲載されていた。これは同一文書のURL移転ではなく、会期終了に伴う旧会期資料の撤去＋次回会期資料への差し替え（内容自体が第26回→第27回に変わっている）。",
+        "recommendation": "sync-council-data.mjs担当（councilWatchedDocuments.json管理）へ：(1) 27879.pdfをmissingStreak増分等の既存ロジックで「消失」として扱う、(2) 新規ドキュメントとして28674.pdf（第27回定例会 会議日程）を新しいidで追加登録することを推奨。単純なURL置換（同一idのsourceUrl書き換え）は文書の実体が異なる（第26回≠第27回）ため不適切と判断し、直接編集していない。"
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+        "files": ["dataQualitySummary.json（集計残骸のみ）"],
+        "status": "アクティブなsourceUrlとしては不使用",
+        "detail": "municipalityComparison.jsonでは既に28569.xlsへ差し替え済み（Phase99確認済み、変化なし）。",
+        "recommendation": "編集不要。"
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
+        "files": ["councilWatchedDocuments.json"],
+        "status": "アクティブ参照あり・継続404（id: session-schedule-a392dabc3484, missingStreak=0のまま未更新）",
+        "detail": "同じ一覧ページ https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html を確認したところ、「令和8年度　常任委員会・特別委員会開催予定表」というタイトルが完全一致のまま、新URL https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28682.pdf （HEAD確認=200）に差し替わっていた。タイトルが同一年度・同一名称のため、内容は同一文書の改訂版（スケジュール更新）である可能性が高い。",
+        "recommendation": "sync-council-data.mjs担当へ：タイトル完全一致（令和8年度 常任委員会・特別委員会開催予定表）のため、新URL 28682.pdf への差し替え候補として提案する。ただし内容が本当に同一文書の改訂かどうかは一次資料の本文比較で最終確認することを推奨（本タスクではPDF本文までは比較していない）。直接編集はしていない。"
+      },
+      {
+        "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "files": ["dataQualitySummary.json（集計残骸のみ）"],
+        "status": "アクティブなsourceUrlとしては不使用",
+        "detail": "既にWayback版へ差し替え済み（Phase99確認済み、変化なし）。",
+        "recommendation": "編集不要。"
+      }
+    ]
+  },
+  "redirectsReviewed_unchanged": {
+    "count": 10,
+    "note": "Phase99から状態変化なし。全て正常なリダイレクト挙動（LINE短縮URL、Facebook正規化、こまい.jpワードプレスcron、d1-lawセッション期限切れ、Wayback直近スナップショット誘導）。移転の事実なし、URLの書き換えは行っていない。"
+  },
+  "staleBackupResidueNote": {
+    "description": "reports/external-link-check.jsonのresults配列には*.backup.json（members.backup.json, mayor.backup.json）由来の残骸エントリが多数残存する（not_found_404が28件、error(fetch failed)が3件）。これらは現在src/data配下に存在しないファイルへの参照であり、grep確認で現行データに実害がないことを確認した。generate-quality-summary.mjsは*.backup.json参照を除外して集計するため、dataQualitySummary.jsonへの影響もない。",
+    "affectedStaleUrlCount": 31,
+    "action": "編集不要（現行データへの影響なし）。次回スクリプト側でstale entryを自動掃除する仕組みを追加すると将来のレポート可読性が向上する可能性があるが、本タスクの範囲外と判断し提案のみ記録。"
+  },
+  "filesDirectlyEdited": ["reports/external-link-check.json"],
+  "filesNotEditedReason": "src/data配下の編集は本タスクの権限外（Phase110/111/113/115が該当ファイルを編集中）。判明した提案は全てこのfindings.jsonに記録し、直接編集していない。",
+  "recommendationsForOtherWorkers": [
+    "councilWatchedDocuments.json担当（sync-council-data.mjs）へ: id=session-schedule-5774a79eedad（27879.pdf, 第26回定例会 会議日程）は延岡市サイトから撤去済み・404継続。後継の第27回定例会 会議日程 https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28674.pdf （200確認済み）を新規ドキュメントとして追加登録することを推奨。",
+    "councilWatchedDocuments.json担当（sync-council-data.mjs）へ: id=session-schedule-a392dabc3484（28156.pdf, 令和8年度 常任委員会・特別委員会開催予定表）は404継続。同一タイトルの後継URL https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28682.pdf （200確認済み）への差し替え候補あり。本文の同一性は一次資料で最終確認のうえ反映されたい。",
+    "archiveMayorTerms.json担当へ: 仲田又次郎のWikipedia出典（https://ja.wikipedia.org/wiki/仲田又次郎）はPhase99から状態変化なく継続404。実害は小さいが、削除または代替出典への統合を人手判断で検討されたい（Phase99から継続の申し送り事項）。"
+  ],
+  "cacheFileUpdated": {
+    "path": "reports/external-link-check.json",
+    "note": "kensakusystem.jpサンプルを400件へ拡大し累計485件確認済みに更新。非kensakusystem733件は同日Phase99の結果をそのまま保持（無意味な再チェックを回避）。"
+  }
+}

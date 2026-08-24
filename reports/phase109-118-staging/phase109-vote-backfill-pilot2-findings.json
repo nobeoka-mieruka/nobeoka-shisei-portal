@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "taskId": "TASK-BACKFILL-VOTES-001-PILOT2",
+    "generatedAt": "2026-08-24",
+    "parentTask": "reports/task-backfill-votes-001.md",
+    "priorPilot": "reports/phase99-108-staging/phase100-101-vote-backfill-pilot-findings.json（9会期・18議案、処理済み。今回は重複調査していない）",
+    "unresolvedLedgerEntry": "reports/phase33-master-unresolved-ledger.json のUNR-031",
+    "scope": "C分類（起立多数／起立少数、52件）のうち、前回パイロット処理済み18件を除く残り34件から、8会期・15議案を追加調査対象とした（令和3〜5年度、時系列で前回パイロットの直後＝令和5年6月から遡る形で選定）。",
+    "method": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）のSee.exe（会期・本会議日一覧）、r_Speakers.exe（発言セグメント一覧）、GetText3.exe（発言本文）を、既存の scripts/lib/minutes-source.mjs 経由で逐次アクセス（同時実行数1固定、リクエスト間隔約500ms、configureConcurrency({levels:[1], start:1, autoStepUp:false})で明示的に低負荷設定）により取得した。対象8本会議日ぶんの発言セグメント（合計433件）の本文を全件取得し、各議案の委員長報告・質疑・討論・採決宣告の該当箇所を突合した。",
+    "constraintsHonored": [
+      "billVotes.jsonへの直接書き込みは行ったが、独占編集ファイル（billVotes.json/billVotes.ts/types/index.ts/BillVoteDetailPage.tsx）以外は編集していない",
+      "延岡市議会サーバーへのアクセスは同時実行数1固定（逐次）、ディスパッチ間隔約500msで実施した",
+      "パイロット対象は残り34件中15件（8会期）にとどめ、無制限バックフィルは行っていない",
+      "議案全体の賛否を推測していない（討論で意見表明した議員以外の賛否はmemberVotesに追加せず、verificationNoteにも『不明』と明記した）",
+      "git commit・pushは行っていない"
+    ]
+  },
+  "schemaDecision": {
+    "question": "individualVoteDisclosureStatusの既存enum（disclosed/unconfirmed/notDisclosed）に新値（例: partiallyDisclosed）を追加すべきか",
+    "decision": "新enum値は追加しない。前回パイロット（Phase100-101）と同一方針を踏襲し、討論者のみの部分開示情報はverificationNoteへ自由記述として追記し、individualVoteDisclosureStatusはnotDisclosedのまま据え置いた。memberVotesは空配列のまま変更していない。",
+    "reasoning": [
+      "src/lib/billVotes.ts（Phase112で新設済み）のmemberVotesUnavailableReason()が、個人別賛否0件のnotDisclosed案件についてverificationNoteを補足情報として末尾に付記する仕組みを既に持っており、今回の『討論者のみ判明』情報もこの仕組みでそのままUI表示できる（追加改修不要）。",
+      "scripts/validate-data.mjs（273-284行目）が『memberVotesが非空ならindividualVoteDisclosureStatusはdisclosedでなければならない』という整合性検証を既に強制しており、新enum値を追加すると『memberVotesは空だがdisclosureStatusはpartiallyDisclosed』という第3の組み合わせに対するバリデーションルール・UI分岐（BillVoteDetailPage.tsx）・集計ロジック（summarizeVoteClassification等）を新たに設計する必要が生じ、影響範囲が大きい。",
+      "『討論者〇名の氏名・賛否のみが判明し、残り約20名の賛否は不明』という状態は、事実として『個人別の完全な公開ではない』という一点でnotDisclosedと同じ実質（＝一次資料上、全議員の個人別記録が存在しない）であり、区別する行政的必要性よりも、誤解を招く中間状態を増やすリスクの方が大きいと判断した。",
+      "reports/phase33-master-unresolved-ledger.jsonのUNR-031内の直近追記（Phase100-101分）で『既存のmemberVotes配列（完全な個人別記録専用）へは追加せず、確認できた部分情報はverificationNoteへ記載するに留めた（誤解を招く不完全表示を避けるため）』との方針が既に記録されており、今回新たにこの方針を覆す積極的理由がない。"
+    ],
+    "changedFiles": "なし（src/lib/billVotes.ts、src/types/index.ts、src/pages/BillVoteDetailPage.tsxはいずれも変更していない）"
+  },
+  "pilotScope": {
+    "sessionsSelected": [
+      "令和5年7月臨時会（3）",
+      "令和5年6月定例会",
+      "令和5年3月定例会",
+      "令和4年9月定例会",
+      "令和4年6月定例会",
+      "令和4年3月定例会",
+      "令和3年9月定例会",
+      "令和3年6月定例会"
+    ],
+    "sessionCount": 8,
+    "billCount": 15,
+    "meetingDaysFetched": [
+      { "fileName": "R050707A", "date": "2023-07-07", "session": "令和5年6月定例会", "segmentCount": 80 },
+      { "fileName": "R050731A", "date": "2023-07-31", "session": "令和5年7月臨時会（3）", "segmentCount": 52 },
+      { "fileName": "R050324A", "date": "2023-03-24", "session": "令和5年3月定例会", "segmentCount": 83 },
+      { "fileName": "R040930A", "date": "2022-09-30", "session": "令和4年9月定例会", "segmentCount": 15 },
+      { "fileName": "R040701A", "date": "2022-07-01", "session": "令和4年6月定例会", "segmentCount": 47 },
+      { "fileName": "R040325A", "date": "2022-03-25", "session": "令和4年3月定例会", "segmentCount": 81 },
+      { "fileName": "R031001A", "date": "2021-10-01", "session": "令和3年9月定例会", "segmentCount": 13 },
+      { "fileName": "R030625A", "date": "2021-06-25", "session": "令和3年6月定例会", "segmentCount": 62 }
+    ],
+    "billIdsInScope": [
+      "2023-06-gian-9",
+      "2023-06-gian-26",
+      "2023-07-extraordinary-03-gian-29",
+      "2023-03-gian-108",
+      "2023-03-gian-112",
+      "2022-09-gian-32",
+      "2022-06-gian-7",
+      "2022-06-gian-24",
+      "2022-06-seigan-6",
+      "2022-03-gian-117",
+      "2021-09-gian-30",
+      "2021-09-gian-32",
+      "2021-09-gian-33",
+      "2021-06-gian-6",
+      "2021-06-ketsugi-2"
+    ]
+  },
+  "findingsSummary": {
+    "billsWithNewIndividualVoteData": 7,
+    "billsConfirmedNotDisclosedNoDebate": 8,
+    "totalIndividualVoteDataPointsFound": 21,
+    "keyFinding": "前回パイロット（Phase100-101）と同一の運用実態を再確認した。延岡市議会の起立採決では議長が起立者数を数値公表せず定性的な宣告（起立多数／起立少数）のみを行う。個別議員の賛否が会議録から確認できるのは、当該議員が自ら討論に立ち氏名・賛否を明言した場合に限られ、討論に立たなかった議員の賛否は不明のまま。今回はさらに、令和3年9月定例会（決算認定7件、うち3件が本スコープ）のように『討論なし』の宣告のみで、討論者が1名も存在しない会期があることも確認した（この場合は部分開示データすら得られない）。また、修正案採決（委員会修正案の可否）が絡む議案では、討論者が『修正案に賛成／反対』のどちらの対象について発言しているかを一つずつ会議録原文で確認する必要があり（例：2023-06-gian-9とgian-26は同一の一括討論内で異なる議案を対象にしている）、機械的な抽出はできないことを実務的に確認した。"
+  },
+  "newMemberVotesProposals_NOTE": "前回パイロット（Phase100-101）の方針決定を踏襲し、討論者のみの部分開示情報はmemberVotes配列には追加せず、billVotes.jsonの該当レコードのverificationNoteへ直接追記済み（本findings.jsonでも重複して記録する）。individualVoteDisclosureStatusはnotDisclosedのまま変更していない。",
+  "billsWithDebateBasedPartialVoteInfo": [
+    {
+      "billId": "2023-06-gian-9",
+      "billTitle": "令和5年度延岡市一般会計補正予算",
+      "session": "令和5年6月定例会",
+      "fileName": "R050707A",
+      "voteMethod": "起立多数",
+      "result": "修正可決",
+      "voteSubject": "委員会修正案（デジタル田園都市国家構想関連2事業の歳出予算減額）の可否",
+      "evidence": [
+        { "order": 7, "pos": 24349, "speakerLabel": "猪之鼻哲君", "role": "討論（修正案賛成）", "quote": "ただいま議題となっています議案のうち、議案第九号について、修正案に賛成の立場で討論いたします。" },
+        { "order": 9, "pos": 28349, "speakerLabel": "吉田茂仁君", "role": "討論（修正案反対）", "quote": "今回の議案第九号のデジタル田園都市国家構想交付金を活用した事業が削除された修正案について、私は強く反対をいたします。" },
+        { "order": 11, "pos": 34520, "speakerLabel": "宮田博徳君", "role": "討論（修正案賛成、原案反対）", "quote": "私は、議案第九号令和五年度延岡市一般会計補正予算につきまして、修正案に賛成、原案に反対の立場から討論させていただきます。" },
+        { "order": 13, "pos": 38318, "speakerLabel": "河野治満君", "role": "討論（修正案反対、原案賛成）", "quote": "修正案反対、原案賛成の立場から討論を行います。" },
+        { "order": 17, "pos": 47944, "speakerLabel": "上杉泰洋君", "role": "討論（修正案反対、原案賛成）", "quote": "当初の予算案、すなわち市長提案の予算案に賛成、議会提出の修正案に反対の立場から討論したいと思います。" },
+        { "order": 24, "pos": 63626, "speakerLabel": "北林幹雄君", "role": "討論（修正案賛成）", "quote": "私がこの修正案に対して賛成をする理由であります。" },
+        { "order": 38, "pos": 67978, "speakerLabel": "吉本靖君", "role": "討論（修正案反対）", "quote": "議会の継続性も含めて、一言、私は修正案に反対する立場で発言をさせていただきたいと思っています。" },
+        { "order": 41, "pos": 73376, "speakerLabel": "議長（松田満男君）", "role": "採決宣告", "quote": "起立多数であります。よって、委員会の修正案は可決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "m02", "memberName": "猪之鼻哲", "vote": "approve" },
+        { "memberId": "m26", "memberName": "吉田茂仁", "vote": "oppose" },
+        { "memberId": "m24", "memberName": "宮田博徳", "vote": "approve" },
+        { "memberId": "m10", "memberName": "河野治満", "vote": "oppose" },
+        { "memberId": "m03", "memberName": "上杉泰洋", "vote": "oppose" },
+        { "memberId": "m11", "memberName": "北林幹雄", "vote": "approve" },
+        { "memberId": "fm01", "memberName": "吉本靖", "vote": "oppose" }
+      ],
+      "note": "討論した7名の賛否のみ判明（賛成3名・反対4名）。他の出席議員約20名の賛否は不明。起立採決の集計人数も非公表。billVotes.jsonにはmemberVotesを追加せず、verificationNoteへ記載済み（後述changesAppliedToBillVotesJson参照）。"
+    },
+    {
+      "billId": "2023-06-gian-26",
+      "billTitle": "令和5年度延岡市一般会計補正予算（2次分）",
+      "session": "令和5年6月定例会",
+      "fileName": "R050707A",
+      "voteMethod": "起立少数",
+      "result": "否決",
+      "voteSubject": "原案（歴史・文化ゾーン内駐車場管理システム等整備事業）の可否",
+      "evidence": [
+        { "order": 15, "pos": 46366, "speakerLabel": "甲斐忠篤君", "role": "討論（原案反対）", "quote": "私は、議案第二六号令和五年度延岡市一般会計補正予算六月補正二次分の歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場から、反対討論を行います。" },
+        { "order": 19, "pos": 57538, "speakerLabel": "稲田雅之君", "role": "討論（原案反対）", "quote": "ただいま議題に上がっております議案第二六号令和五年度六月補正予算二次分、すなわち、歴史・文化ゾーン内駐車場管理システム等整備事業につきまして、反対の立場から討論をいたします。" },
+        { "order": 21, "pos": 61512, "speakerLabel": "長友幸子君", "role": "討論（原案反対）", "quote": "議案第二六号、歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場で討論を行います。" },
+        { "order": 44, "pos": 74302, "speakerLabel": "議長（松田満男君）", "role": "採決宣告", "quote": "起立少数であります。よって、本案は否決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "m07", "memberName": "甲斐忠篤", "vote": "oppose" },
+        { "memberId": "m01", "memberName": "稲田雅之", "vote": "oppose" },
+        { "memberId": "m17", "memberName": "長友幸子", "vote": "oppose" }
+      ],
+      "note": "討論した3名全員が反対を明言（賛成討論者はいなかった）。他の出席議員の賛否は不明。討論の傾向（3名とも反対）と採決結果（起立少数で否決）は整合するが、討論しなかった議員の内訳は不明のまま。"
+    },
+    {
+      "billId": "2023-07-extraordinary-03-gian-29",
+      "billTitle": "令和5年度延岡市一般会計補正予算",
+      "session": "令和5年7月臨時会（3）",
+      "fileName": "R050731A",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "voteSubject": "原案の可否",
+      "evidence": [
+        { "order": 42, "pos": 22966, "speakerLabel": "北林幹雄君", "role": "討論（反対、会派代表）", "quote": "会派を代表して、議案第二九号に対する反対討論を行います。" },
+        { "order": 44, "pos": 26688, "speakerLabel": "河野治満君", "role": "討論（賛成）", "quote": "本日は、やむにやまれぬ思いを持って、議案第二九号に対する賛成討論を行います。" },
+        { "order": 46, "pos": 35234, "speakerLabel": "宮田博徳君", "role": "討論（賛成）", "quote": "議案第二九号令和五年度延岡市一般会計補正予算につきまして、賛成の討論をさせていただきます。" },
+        { "order": 48, "pos": 37788, "speakerLabel": "議長（松田満男君）", "role": "採決宣告", "quote": "起立多数であります。よって、本案は可決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "m11", "memberName": "北林幹雄", "vote": "oppose" },
+        { "memberId": "m10", "memberName": "河野治満", "vote": "approve" },
+        { "memberId": "m24", "memberName": "宮田博徳", "vote": "approve" }
+      ],
+      "note": "討論した3名の賛否のみ判明（賛成2名・反対1名、会派代表討論のためこの3名以外は個別討論なし）。他の出席議員の賛否は不明。"
+    },
+    {
+      "billId": "2023-03-gian-108",
+      "billTitle": "令和5年度延岡市一般会計予算",
+      "session": "令和5年3月定例会",
+      "fileName": "R050324A",
+      "voteMethod": "起立多数",
+      "result": "修正可決",
+      "voteSubject": "委員会修正案（歴史・文化ゾーン内駐車場管理システム等整備事業に係る予算の減額）の可否",
+      "evidence": [
+        { "order": 21, "pos": 29772, "speakerLabel": "田村吉宏君", "role": "討論（修正案賛成、原案反対）", "quote": "議案第一〇八号の一般会計について、原案反対、修正案賛成の討論を行います。" },
+        { "order": 26, "pos": 35988, "speakerLabel": "議長（本部仁俊君）", "role": "採決宣告", "quote": "起立多数であります。よって、委員会の修正案は可決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "fm06", "memberName": "田村吉宏", "vote": "approve" }
+      ],
+      "note": "討論したのは田村吉宏議員（元議員）1名のみ。他の出席議員の賛否は不明。"
+    },
+    {
+      "billId": "2022-06-gian-7",
+      "billTitle": "令和4年度延岡市一般会計補正予算",
+      "session": "令和4年6月定例会",
+      "fileName": "R040701A",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "voteSubject": "原案の可否",
+      "evidence": [
+        { "order": 7, "pos": 21780, "speakerLabel": "柴浩信君", "role": "討論（反対）", "quote": "ただいまの議案第七号六月補正予算についての反対討論をいたします。" },
+        { "order": 11, "pos": 25503, "speakerLabel": "議長（本部仁俊君）", "role": "採決宣告", "quote": "起立多数であります。よって、本案は原案のとおり可決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "m14", "memberName": "柴浩信", "vote": "oppose" }
+      ],
+      "note": "討論したのは柴浩信議員1名のみ。討論内容自体は同議案中の城山公園Park-PFI事業の手続（パブリックコメント条例の趣旨、費用負担決定過程の不透明さ）への異議で、当該事業自体には賛同する旨も述べているが、討論の結論としては本人が『私の反対討論とさせていただきます』と明言しているため、議案第7号への賛否としては反対と扱った。他の出席議員の賛否は不明。"
+    },
+    {
+      "billId": "2022-03-gian-117",
+      "billTitle": "令和4年度延岡市後期高齢者医療特別会計予算",
+      "session": "令和4年3月定例会",
+      "fileName": "R040325A",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "voteSubject": "原案の可否",
+      "evidence": [
+        { "order": 21, "pos": 25406, "speakerLabel": "平田信広君", "role": "討論（議案第114号・第116号・第117号の一括討論、第117号のみ反対）", "quote": "三つの特別会計予算では、議案第一一四号の国保会計予算、議案第一一六号の介護保険特別会計予算には賛成とし、議案第一一七号の後期高齢者特別会計予算には、さきの国の一部保険料の二割負担への引上げ導入に強く抗議する意味を含めて、反対したいと思います。" },
+        { "order": 26, "pos": 29428, "speakerLabel": "議長（本部仁俊君）", "role": "採決宣告", "quote": "起立多数であります。よって、本案は原案のとおり可決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "m20", "memberName": "平田信広", "vote": "oppose" }
+      ],
+      "note": "討論したのは平田信広議員1名のみ。同一討論内で議案第114号・第116号には賛成、第117号（本件）には反対と明言。他の出席議員の賛否は不明。"
+    },
+    {
+      "billId": "2021-06-gian-6",
+      "billTitle": "令和3年度延岡市一般会計補正予算（二次分）",
+      "session": "令和3年6月定例会",
+      "fileName": "R030625A",
+      "voteMethod": "起立多数",
+      "result": "修正可決",
+      "voteSubject": "委員会修正案（地域新電力会社設立関連事業費の減額）の可否",
+      "evidence": [
+        { "order": 14, "pos": 18342, "speakerLabel": "長友幸子君", "role": "討論（修正案賛成、原案反対、会派代表）", "quote": "社民フォーラムを代表して、議案第六号に対する修正案に賛成、原案に反対の立場で討論を行います。" },
+        { "order": 16, "pos": 20790, "speakerLabel": "峯田克明君", "role": "討論（原案賛成、修正案反対）", "quote": "議案第六号令和三年度延岡市一般会計補正予算について、原案に賛成、修正案に反対の立場から討論をさせていただきます。" },
+        { "order": 19, "pos": 24956, "speakerLabel": "河野治満君", "role": "討論（修正案反対、原案賛成）", "quote": "ただいまから議案第六号令和三年度延岡市一般会計補正予算の修正案に反対、原案賛成の討論を行います。" },
+        { "order": 22, "pos": 29320, "speakerLabel": "上杉泰洋君", "role": "討論（原案賛成）", "quote": "以上で、電力会社設立原案に賛成の立場からの討論といたします。" },
+        { "order": 26, "pos": 35634, "speakerLabel": "議長（本部仁俊君）", "role": "採決宣告", "quote": "起立多数であります。よって、委員会の修正案は可決されました。" }
+      ],
+      "debaterPositions": [
+        { "memberId": "m17", "memberName": "長友幸子", "vote": "approve" },
+        { "memberId": "m23", "memberName": "峯田克明", "vote": "oppose" },
+        { "memberId": "m10", "memberName": "河野治満", "vote": "oppose" },
+        { "memberId": "m03", "memberName": "上杉泰洋", "vote": "oppose" }
+      ],
+      "note": "討論した4名のうち3名（峯田・河野・上杉）は修正案に反対（原案＝地域新電力会社設立事業の存置に賛成）を明言。上杉議員は『修正案に反対』とは明示していないが『原案（電力会社設立）に賛成の立場』と明言しており、修正案・原案が二者択一の関係にあることから修正案反対の意思表示と判断した。長友議員のみ修正案に賛成（原案反対）。他の出席議員の賛否は不明。なお本件は後日、市長による再議（地方自治法第176条）で記名投票（賛成21票・反対6票）が行われたことがarchiveMemberProfiles.json等に別途記録されているが、それは6月25日の本会議討論とは別の議決（再議）であり、今回の追記対象ではない。"
+    }
+  ],
+  "billsConfirmedNotDisclosedNoDebate": [
+    {
+      "billId": "2023-03-gian-112",
+      "billTitle": "令和5年度延岡市後期高齢者医療特別会計予算",
+      "session": "令和5年3月定例会",
+      "fileName": "R050324A",
+      "evidence": "同日程内で討論に立った田村吉宏議員は議案第108号（一般会計予算）のみを対象とした討論であり、議案第112号への個別の言及はない。討論なしのまま起立採決。"
+    },
+    {
+      "billId": "2022-09-gian-32",
+      "billTitle": "令和3年度延岡市後期高齢者医療特別会計歳入歳出決算の認定",
+      "session": "令和4年9月定例会",
+      "fileName": "R040930A",
+      "evidence": "同日程内で討論に立った稲田雅之議員は議案第28号（一般会計決算）のみを対象とした討論であり、議案第32号への個別の言及はない。討論なしのまま起立採決。"
+    },
+    {
+      "billId": "2022-06-gian-24",
+      "billTitle": "令和4年度延岡市一般会計補正予算（2次分）",
+      "session": "令和4年6月定例会",
+      "fileName": "R040701A",
+      "evidence": "『討論なしと認めます』の宣告後、起立採決（委員会修正案）で可決。個別の討論なし。"
+    },
+    {
+      "billId": "2022-06-seigan-6",
+      "billTitle": "延岡市駅前複合施設「エンクロス」の管理運営等に関する見直し方針（案）に反対し、令和5年度以降も現在の管理運営内容の継続を求める請願書",
+      "session": "令和4年6月定例会",
+      "fileName": "R040701A",
+      "evidence": "『討論なしと認めます』の宣告後、起立採決で採択。個別の討論なし。"
+    },
+    {
+      "billId": "2021-09-gian-30",
+      "billTitle": "令和2年度延岡市国民健康保険特別会計歳入歳出決算の認定",
+      "session": "令和3年9月定例会",
+      "fileName": "R031001A",
+      "evidence": "この本会議日は決算認定7件（議案第29号〜第35号）を通じて『討論なしと認めます』の宣告のみで、討論者が1名も存在しなかった。"
+    },
+    {
+      "billId": "2021-09-gian-32",
+      "billTitle": "令和2年度延岡市介護保険特別会計歳入歳出決算の認定",
+      "session": "令和3年9月定例会",
+      "fileName": "R031001A",
+      "evidence": "同上（討論者が1名も存在しなかった本会議日）。"
+    },
+    {
+      "billId": "2021-09-gian-33",
+      "billTitle": "令和2年度延岡市後期高齢者医療特別会計歳入歳出決算の認定",
+      "session": "令和3年9月定例会",
+      "fileName": "R031001A",
+      "evidence": "同上（討論者が1名も存在しなかった本会議日）。"
+    },
+    {
+      "billId": "2021-06-ketsugi-2",
+      "billTitle": "議案第6号 令和3年度延岡市一般会計補正予算に対する附帯決議",
+      "session": "令和3年6月定例会",
+      "fileName": "R030625A",
+      "evidence": "決議提出者（北林幹雄議員）の提案説明のみで討論はなく（提出者は討論資格なしとする既存の運用方針＝Phase100-101の2024-09-ketsugi-5・2023-09-ketsugi-1と同様の扱い）、『討論なしと認めます』の宣告後、異議ありのため起立採決（起立多数で可決）。"
+    }
+  ],
+  "changesAppliedToBillVotesJson": {
+    "summary": "上記15議案すべてについて、既存のverificationNoteへ【2026-08-24 Phase109追記】として今回の会議録調査結果（討論者の氏名・賛否、または討論なしの確認）を追記した。7議案にはtranscriptUrl（会議録該当ページURL）も新規追加した（既存8議案は前回のPhase99-108フェーズで既にverificationNoteが設定済みだったため、追記のみでtranscriptUrlも新規追加）。individualVoteDisclosureStatus（全件notDisclosedのまま）・voteMethod・memberVotes（全件空配列のまま）はいずれも変更していない。lastVerifiedを2026-08-24へ更新した。",
+    "fieldsChanged": ["verificationNote", "transcriptUrl（未設定だった場合のみ新規追加）", "lastVerified"],
+    "fieldsNotChanged": ["individualVoteDisclosureStatus", "voteMethod", "memberVotes", "result", "publicationStatus", "verificationStatus"]
+  },
+  "remainingBacklogEstimate": {
+    "totalClassC": 52,
+    "pilotCovered": 33,
+    "remaining": 19,
+    "remainingSessions": [
+      "令和3年3月定例会(3)",
+      "令和2年12月定例会(1)",
+      "令和2年9月定例会(3)",
+      "令和2年3月定例会(4)",
+      "令和元年9月定例会(6)",
+      "令和元年6月定例会(2)"
+    ],
+    "estimateNote": "2回のパイロット（Phase100-101＝18件、Phase109＝15件）の合計33件処理実績（討論あり14/33＝約42%で部分開示データを確認）から粗く外挿すると、残り19議案のうち7〜8議案程度で部分開示データが得られる可能性がある。ただし2019〜2020年度の会期は会議録の傾向が未確認であり、この外挿は確定的ではない。次回は令和元年度・令和2年度（12議案、6会期）を優先着手することを推奨する（最も古い会期であり、時系列で最後に残る）。"
+  },
+  "openQuestionsForParent": []
+}

@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "gitHead": "dbdc53a80ce4146ecb15488caded45b9b92caa6a",
+  "note": "Phase109-118着手前の実データ再計算値。固定値として使わず着手前に再計算した。",
+  "unresolvedLedger": { "totalItems": 31 },
+  "validateData": { "errors": 0, "warnings": 40 },
+  "counts": {
+    "generalQuestions_records": 15,
+    "councilSpeechSummaries_members": 44,
+    "members_current": 26,
+    "formerMembers": 58,
+    "billVotes_total": 1177
+  },
+  "sourceRefsCoverage_stalePhase79Report": {
+    "note": "reports/phase79-source-coverage-findings.jsonは2026-08-23生成のまま未再生成。Phase107(2026-08-24)の123件upgradeを反映していない古い値。Phase112は実データから再計算すること。",
+    "fully": 2294, "partial": 299, "insufficientSource": 23
+  },
+  "linkHealth_asOfPhase99": {
+    "totalChecked": 838, "ok": 817, "redirect": 12, "notFound404": 6, "serverError": 0
+  }
+}

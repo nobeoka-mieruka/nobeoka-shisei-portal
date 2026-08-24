@@ -4849,12 +4849,12 @@
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
       "enterpriseAccountBudgetYen": null,
-      "totalRevenueYen": null,
-      "totalExpenditureYen": null,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "totalRevenueYen": 61593312000,
+      "totalExpenditureYen": 59696142000,
+      "localTaxRevenueYen": 14851532000,
+      "localAllocationTaxYen": 14740860000,
+      "nationalSubsidiesYen": 11247907000,
+      "prefecturalSubsidiesYen": 4439767000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2582.pdf",
@@ -4865,9 +4865,18 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "「令和元年度一般会計最終予算額」の円グラフから、補正後予算額（歳出・歳入とも609億7,384万円）を登録した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000740038.xlsx",
+          "sourceTitle": "総務省「令和元年度市町村決算カード」宮崎県（延岡市）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-24",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase113で新規登録。総務省が公開するXLSX形式の決算カード（宮崎県内27市町村の一括ファイル、シート「4延岡市」）をxlsxパッケージでセル単位で読み取った。歳入総額・歳出総額（従来は未登録）、および歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同カード内の他項目（財政力指数0.49、経常収支比率94.3%、実質公債費比率8.9%、財政調整基金5,121,878千円、減債基金2,476,092千円、地方債現在高56,152,458千円）は、既存登録値（financialStrengthIndex 0.49、currentAccountRatioPercent 94.3、realDebtServiceRatioPercent 8.9、fiscalReserveFundYen 5,122,000千円、bondRedemptionFundYen 2,476,000千円、ordinaryAccountLocalBondBalanceYen 56,152,000千円）とほぼ完全に一致（財政調整基金のみ千円未満の端数差122千円）することを確認し、既存値の妥当性を裏付けた（既存値は変更していない）。会計区分は決算カードの標準である「普通会計」ベース。"
         }
       ],
-      "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。"
+      "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。 Phase113: 総務省「令和元年度市町村決算カード」（普通会計ベース）により、歳入総額・歳出総額および歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2019,
@@ -4921,10 +4930,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 77776083000,
       "totalExpenditureYen": 75003441000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 14850237000,
+      "localAllocationTaxYen": 14399019000,
+      "nationalSubsidiesYen": 25639703000,
+      "prefecturalSubsidiesYen": 5899621000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -4935,9 +4944,18 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000804191.xlsx",
+          "sourceTitle": "総務省「令和2年度市町村決算カード」宮崎県（延岡市）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-24",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase113で新規登録。総務省が公開するXLSX形式の決算カード（宮崎県内27市町村の一括ファイル、シート「4延岡市」）をxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。国庫支出金が対前年度比+128%（25,639,703千円）と大幅増加しているが、これは新型コロナウイルス感染症対応の各種国庫交付金（特別定額給付金給付事業費補助金等）による全国的な傾向と整合し、異常値ではないと判断した。同カード内の既存登録値（歳入総額77,776,083千円・歳出総額75,003,441千円・財政力指数0.49・経常収支比率92.8%・実質公債費比率8.1%・財政調整基金5,032,997千円・減債基金2,384,088千円・地方債現在高55,428,571千円）とすべて完全一致することを確認し、既存値の妥当性を裏付けた（既存値は変更していない）。会計区分は決算カードの標準である「普通会計」ベース。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 総務省「令和2年度市町村決算カード」（普通会計ベース、既存の歳入総額・歳出総額と完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
     },
     "debt": {
       "fiscalYear": 2020,
@@ -5130,10 +5148,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 75934099000,
       "totalExpenditureYen": 71960873000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 14678648000,
+      "localAllocationTaxYen": 15369815000,
+      "nationalSubsidiesYen": 17918826000,
+      "prefecturalSubsidiesYen": 6631228000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5144,9 +5162,18 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceTitle": "延岡市「財政状況資料集」令和3年度版「(1)普通会計の状況」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-24",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2021,
@@ -5275,10 +5302,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 73095850000,
       "totalExpenditureYen": 69471701000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 16014983000,
+      "localAllocationTaxYen": 15028664000,
+      "nationalSubsidiesYen": 15217768000,
+      "prefecturalSubsidiesYen": 5367358000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5289,9 +5316,18 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+          "sourceTitle": "延岡市「財政状況資料集」令和4年度版「(1)普通会計の状況」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-24",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2022,
@@ -5420,10 +5456,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 72565693000,
       "totalExpenditureYen": 69891005000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 15937351000,
+      "localAllocationTaxYen": 14176144000,
+      "nationalSubsidiesYen": 15137467000,
+      "prefecturalSubsidiesYen": 5255149000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5434,9 +5470,18 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+          "sourceTitle": "延岡市「財政状況資料集」令和5年度版「(1)普通会計の状況」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-24",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2023,
@@ -5607,10 +5652,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 74004811000,
       "totalExpenditureYen": 70924122000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 15616152000,
+      "localAllocationTaxYen": 15058607000,
+      "nationalSubsidiesYen": 15285227000,
+      "prefecturalSubsidiesYen": 5438036000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5621,9 +5666,18 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+          "sourceTitle": "延岡市「財政状況資料集」令和6年度版「(1)普通会計の状況」",
+          "sourceOrganization": "延岡市",
+          "accessedAt": "2026-08-24",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
     },
     "mayorId": "mayor-03",
     "mayorTermId": "mayor-03-term-02"

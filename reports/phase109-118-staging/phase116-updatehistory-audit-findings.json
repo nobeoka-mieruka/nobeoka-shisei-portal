@@ -1,0 +1,167 @@
+{
+  "auditedAt": "2026-08-24",
+  "auditor": "Phase116 worker (investigation-only, no direct edits to updateHistory.json)",
+  "scope": {
+    "totalEntries": 124,
+    "gitLogRangeChecked": "3c3af0b..dbdc53a (approx. last 30 commits, plus spot checks further back)",
+    "primaryFocusCommits": [
+      "6c561dc (Phase89-98継続)",
+      "dbdc53a (Phase99-108)",
+      "c0434c7 (トップページ数値不一致の原因究明+恒久監視化)"
+    ]
+  },
+  "summary": {
+    "problemsFound": 5,
+    "proposedNewEntries": 1,
+    "proposedFixesToExistingEntries": 3
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "category": "主要更新の未掲載",
+      "severity": "medium",
+      "title": "commit c0434c7の市民向け表示修正2件がupdateHistory.jsonに未掲載",
+      "detail": "commit c0434c7（2026-08-23 23:06、『トップページ数値不一致の原因究明+恒久監視化、委員会/公約表示の矛盾解消...』）は、以下2件の市民向け表示修正を行ったが、src/data/updateHistory.jsonへのエントリ追加は行っていない（git show c0434c7 -- src/data/updateHistory.json で確認、差分なし）。\n1. データ収録状況ページ『委員会：所管事項の確認』で、実際は6/6件確認済み(fullyCovered:true)なのに『延岡市議会委員会条例の条文が未確認のため残りは確認できずと表示』という説明文が無条件表示され続けていたバグを修正（DataStatusPage.tsx）。\n2. トップページ『登録済み市長公約数（4件）』とデータ収録状況ページ『政策・公約（16件）』が、集計対象（現職市長の公約のみ vs 歴代政策・公約アーカイブ全体）が異なるにもかかわらず同じ『公約』という語で桁違いの数字が並んでいた表示矛盾に、集計対象を明示する説明を両ページへ追加（HomePage.tsx / DataStatusPage.tsx）。\nこの後に続くコミット6c561dc・dbdc53aはいずれもu120以降を追加しているが、c0434c7自体の変更は記録されないまま抜けている。",
+      "evidence": {
+        "commit": "c0434c7410834976c2f2d89f7d108e35c3d9a411",
+        "commitDate": "2026-08-23T23:06:53+09:00",
+        "filesChanged": ["src/pages/DataStatusPage.tsx", "src/pages/HomePage.tsx"],
+        "updateHistoryDiff": "none (0 insertions/deletions to src/data/updateHistory.json in this commit)"
+      },
+      "recommendation": "u119（2026-08-23）とu120（2026-08-24）の間の日付、または08-23付として新規エントリを追加する。案は「追加すべきエントリ案」参照。"
+    },
+    {
+      "id": "F2",
+      "category": "件数表記の誤り",
+      "severity": "high",
+      "title": "u84の件数「25件」が実際の追加件数と一致しない（実際は33件）",
+      "detail": "u84「令和元年9月定例会の議案審議結果を追加しました（25件）」は、当該エントリを追加したコミットe838a4c（2026-08-09、'data(bills): register 2019-06/2019-09/2019-12/2020-03/2021-06 results PDFs'）内でbillVotes.jsonへ新規追加された『令和元年9月定例会』のレコード数を確認したところ33件だった（同コミット直前は0件→直後33件）。現在のsrc/data/billVotes.jsonでも同セッションは33件のまま（議案番号付きのみでも31件、決議・請願を含めても33件）。25件という数字はこのコミットのどの部分集合とも一致しない。",
+      "evidence": {
+        "entryId": "u84",
+        "sessionKey": "令和元年9月定例会",
+        "claimedCount": 25,
+        "actualCountAtCreationCommit": 33,
+        "actualCountCurrent": 33,
+        "creationCommit": "e838a4c27cc1cf49b0a604a1c1279240317f1f63",
+        "creationCommitDate": "2026-08-09"
+      },
+      "recommendation": "タイトル・descriptionの件数を『25件』→『33件』へ修正する。"
+    },
+    {
+      "id": "F3",
+      "category": "件数表記の誤り",
+      "severity": "low",
+      "title": "u87の件数「24件」が実際の追加件数と1件ずれている（実際は25件）",
+      "detail": "u87「令和3年6月定例会の議案審議結果を追加しました（24件）」も同じコミットe838a4cで追加されたが、実際に追加されたレコード数は25件（現在のbillVotes.jsonでも同セッションは25件のまま）。",
+      "evidence": {
+        "entryId": "u87",
+        "sessionKey": "令和3年6月定例会",
+        "claimedCount": 24,
+        "actualCountAtCreationCommit": 25,
+        "actualCountCurrent": 25,
+        "creationCommit": "e838a4c27cc1cf49b0a604a1c1279240317f1f63",
+        "creationCommitDate": "2026-08-09"
+      },
+      "recommendation": "タイトル・descriptionの件数を『24件』→『25件』へ修正する。"
+    },
+    {
+      "id": "F4",
+      "category": "リンク先ページ名の不整合",
+      "severity": "medium",
+      "title": "u120のtargetPages/linkLabelが実際のページ名と食い違い、既存の同ページ参照エントリとも不整合",
+      "detail": "u120（2026-08-24、6c561dcで追加）のtargetPages・linkLabelは『歴代市役所特別職一覧』だが、linkUrl『/city-officials』の実際のページ（src/pages/CityOfficialsPage.tsx）のH1見出し・SEOタイトル（src/lib/seo.ts）はいずれも『副市長・教育長・行政委員会委員』であり、『歴代市役所特別職一覧』という文言はサイト内のどこにも存在しない。実際、同じ/city-officialsページを参照する他の6件のupdateHistoryエントリ（u46, u67, u68, u88, u98, u103）はすべて一貫して『副市長・教育長・行政委員会委員』を使っており、u120だけが異なる呼称になっている。なお、u120が説明しているcsp-56/csp-57（助役2名）のデータ自体は、同ページ内の『歴代（元職）』セクションに正しく表示される（status:\"former\"のためformerPosts配列に含まれる）ため、リンク先URL自体は正しい。問題は表示名の不一致のみ。",
+      "evidence": {
+        "entryId": "u120",
+        "claimedTargetPage": "歴代市役所特別職一覧",
+        "actualPageTitle": "副市長・教育長・行政委員会委員",
+        "actualPageTitleSource": "src/pages/CityOfficialsPage.tsx:100 (H1), src/lib/seo.ts:491 (pageTitle)",
+        "consistentPriorEntries": ["u46", "u67", "u68", "u88", "u98", "u103"]
+      },
+      "recommendation": "targetPagesとlinkLabelを『副市長・教育長・行政委員会委員』（または『副市長・教育長・行政委員会委員ページを見る』）へ修正し、既存エントリとの表記を統一する。"
+    },
+    {
+      "id": "F5",
+      "category": "日付順（既知の課題・悪化なし）",
+      "severity": "info-only",
+      "title": "配列の並び順は既知の非降順箇所があるが、今回のPhase（6c561dc, dbdc53a）で新規に悪化させていない",
+      "detail": "reports/qa-checks/_out-search-index-and-updates-order.json（2026-08-24T06:09:09.730Z生成）で、updateHistory.jsonの配列順序（表示順そのもの）はisDescending:false、outOfOrderCount:7と報告されている。内訳は、配列前半（u97→u1、日付降順、2026-08-17〜2026-07-14）の直後に、配列後半（u98→u123、日付昇順、2026-08-22〜2026-08-24）が単純に追記されているため。u120〜u123（6c561dc・dbdc53aで追加）は後半ブロックの既存の昇順パターンをそのまま踏襲しており、新たな乱れを追加してはいない。\n\n実害の有無：src/pages/HomePage.tsx・UpdatesPage.tsxはいずれもsortUpdateHistoryByDateDesc()（src/lib/updateHistory.ts、日付降順・同日は配列順を保つ安定ソート）を経由して表示しており、後半ブロックと前半ブロックの間で日付の重複が無いため、実際の画面表示（新しい順）には問題が生じていないことを確認した。",
+      "evidence": {
+        "outOfOrderCount": 7,
+        "reportFile": "reports/qa-checks/_out-search-index-and-updates-order.json",
+        "displayLogicFile": "src/lib/updateHistory.ts",
+        "displayUsage": ["src/pages/HomePage.tsx", "src/pages/UpdatesPage.tsx"]
+      },
+      "recommendation": "対応不要（既知の課題として追跡継続）。ただし将来的な保守性のため、配列自体を日付降順に並べ直す一括整理をPhase118以降の低優先度タスクとして検討してもよい（表示上の緊急性はない）。"
+    }
+  ],
+  "otherObservationsNotCountedAsProblems": [
+    {
+      "note": "u84のdateフィールドは2026-08-08だが、実際にupdateHistory.jsonへ追加されたコミットe838a4cの日付は2026-08-09。1日のずれがあるが、同時に追加されたu83等と揃えるための意図的な日付グルーピングの可能性があり、実害的な誤りではないため今回は指摘のみに留める。"
+    },
+    {
+      "note": "type UpdateHistoryCategory（src/types/index.ts）に定義されている『修正』カテゴリは、124件中0件で未使用。エラーではないが、類似の意味を持つ『品質改善』『表示改善』カテゴリとの使い分け基準が不明瞭。カテゴリ体系の整理を将来的に検討してもよい。"
+    },
+    {
+      "note": "src/pages/UpdatesPage.tsxのコメント「88件（2026-08時点）を1ページに全件表示すると...」は現在124件のため数字が古いが、コード上はsorted.lengthを動的計算しておりページネーション自体は正しく機能する。コードコメントのみの軽微な鮮度低下であり、updateHistory.json自体の問題ではない。"
+    },
+    {
+      "note": "linkUrl値（/, /bills/votes, /methodology/activity-radar, /themes, /council-documents, /city-guide, /petitions, /questions, /mayors, /finance, /mayor/press-conferences, /history, /elections, /council-activity, /city-officials, /compensation, /data-status）はすべてsrc/App.tsxの実在ルートと一致することを確認した。リンク切れは無し。"
+    },
+    {
+      "note": "重複ID・必須フィールド欠落・不正な日付形式・未来日付（2026-08-24より後）は0件だった（機械チェック済み）。"
+    },
+    {
+      "note": "u101『市議会の請願・陳情の記録を拡充しました』の『26件（請願11件・陳情15件）』は、追加当時（コミット3c3af0b）の新規追加分として正確（現在のarchiveCouncilDocuments.jsonの請願14件・陳情19件という累計とは一致しないが、これは元々ファイルに存在した7件＋新規26件＝33件という積み上げのため、記述としては正しい）。"
+    }
+  ],
+  "proposedNewEntries": [
+    {
+      "id": "u120b（暫定ID、Phase118統合時に採番調整可）",
+      "date": "2026-08-23",
+      "title": "委員会ページの説明文の誤り、公約件数の表示矛盾を修正しました",
+      "description": "データ収録状況ページの『委員会：所管事項の確認』で、実際には全委員会の所管事項確認が完了している（6/6件）にもかかわらず、一部未確認だった頃の説明文（『延岡市議会委員会条例の条文が未確認のため残りは確認できずと表示』）が更新されないまま表示され続けていたため、実際の確認状況に応じた説明文に修正しました。あわせて、トップページの『登録済み市長公約数（4件）』とデータ収録状況ページの『政策・公約（16件）』が、集計対象（現職市長の公約のみ／歴代の政策・公約アーカイブ全体）が異なるにもかかわらず同じ『公約』という言葉で桁違いの数字が並んでいたため、両ページに集計対象を明示する説明を追加しました。データそのものは変更していません。",
+      "targetPages": ["データ収録状況", "トップページ"],
+      "category": "品質改善",
+      "linkUrl": "/data-status",
+      "linkLabel": "データ収録状況ページを見る",
+      "sourceCommit": "c0434c7410834976c2f2d89f7d108e35c3d9a411",
+      "note": "F1への対応案。日付・IDはPhase118統合担当が既存エントリと整合するよう最終決定すること。"
+    }
+  ],
+  "proposedFixesToExistingEntries": [
+    {
+      "entryId": "u84",
+      "field": "title",
+      "from": "令和元年9月定例会の議案審議結果を追加しました（25件）",
+      "to": "令和元年9月定例会の議案審議結果を追加しました（33件）",
+      "relatedFinding": "F2"
+    },
+    {
+      "entryId": "u84",
+      "field": "description",
+      "note": "本文中に件数の明記はないため、descriptionの修正は不要（titleのみ修正すれば足りる）。",
+      "relatedFinding": "F2"
+    },
+    {
+      "entryId": "u87",
+      "field": "title",
+      "from": "令和3年6月定例会の議案審議結果を追加しました（24件）",
+      "to": "令和3年6月定例会の議案審議結果を追加しました（25件）",
+      "relatedFinding": "F3"
+    },
+    {
+      "entryId": "u120",
+      "field": "targetPages",
+      "from": ["歴代市役所特別職一覧"],
+      "to": ["副市長・教育長・行政委員会委員"],
+      "relatedFinding": "F4"
+    },
+    {
+      "entryId": "u120",
+      "field": "linkLabel",
+      "from": "歴代市役所特別職一覧を見る",
+      "to": "副市長・教育長・行政委員会委員ページを見る",
+      "relatedFinding": "F4"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "phase": "Phase114",
+  "scope": "src/pages/*.tsx, src/components/**/*.tsx, src/lib/seo.ts を対象に「0件」「0名」「100%」「完全収録」「確認済み」「全件」「すべて」「完全」を横断検索し、数字が正しくても『全資料を確認済み』とユーザーが誤解しかねない表現になっていないかを監査。reports/phase89-100percent-audit-findings.json（同種の先行監査、コード修正0件）を踏まえ、同じ検索の繰り返しを避け、(a) 完全性表示の分母が一次資料で裏取りされているか、(b) confirmed_zero/not_collected/under_review/unavailable等のステータスを母数から不当に除外して100%を作っていないか、(c) 表現上『当サイト収録範囲』であることが明示されているか、の3観点で確認した。",
+  "prerequisiteReportsReviewed": [
+    "reports/phase89-100percent-audit-findings.json",
+    "reports/phase89-100percent-audit-report.md"
+  ],
+  "totalOccurrencesReviewed": 60,
+  "misleadingDisplaysFound": 0,
+  "directFixesApplied": 0,
+  "proposalsOnly": 0,
+  "occurrences": [
+    {
+      "location": "src/lib/completeness.ts（CompletenessStatus型・simpleCompleteness()・formatCoverageRate()）",
+      "context": "サイト全体の『完全収録』『◯%』表示が経由する共通ロジック本体。",
+      "finding": "totalKnown（母数）はnull許容で、null時はcoverageRateも必ずnullになり『算出不可（母数未確認）』と表示される設計。simpleCompleteness()はcollected>=totalKnownの場合のみcompleteを返す。confirmed_zero（一次資料で確認した結果ゼロ）と、not_collected/unknown（未調査・未確認）を型レベルで区別しており、母数から特定ステータスを除外して100%を水増しする経路は無い。Phase89監査と同じ結論を再確認。",
+      "action": "no_issue"
+    },
+    {
+      "location": "simpleCompleteness()の全呼び出し元（src/lib/dataCompletenessSummary.ts、src/pages/DataStatusPage.tsx、計19箇所）",
+      "context": "一般質問・議案（提出者区分／採決方法／付託委員会）・政治資金団体・財政5項目・歴代市長・議員プロフィール2項目の完全性メトリクス。",
+      "finding": "全呼び出しでtotalKnownにbillVotes.length、archiveFiscalYears.length、archiveMayorTerms.length、committees.length、members.length、politicalFundOrganizations.length、questionCollectionStatus.jsonのsessions.length等、実データ配列の全長をそのまま渡している。confirmed_zero等のステータスを持つレコードを事前にフィルタして母数を小さくしている呼び出しは見つからなかった。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/lib/generalQuestionStats.ts:60（targetSessionCount = status.sessions.length）",
+      "context": "一般質問の『対象会期数』の算出。",
+      "finding": "questionCollectionStatus.jsonのsessions配列全件（transcriptAvailable:true/falseの両方を含む）をそのまま母数にしている。会議録未取得（transcriptAvailable:false）の会期を母数から除外して収録率を高く見せる操作は無い。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/DataStatusPage.tsx:605, 1075, 729, 844, 995 ほか（『0件』『未確認』の注記）",
+      "context": "『母数が一次資料で確認できていない項目は100%と表示しない』『収録件数は登録済みレコード数の事実集計であり、実際に存在するはずの全件数（分母）を把握しているとは限らない』等の明示的な注記群。",
+      "finding": "いずれも実装（simpleCompleteness+formatCoverageRate）と整合しており、母数の限界を文章でも明示している。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/MayorDetailPage.tsx:317,328,342,346",
+      "context": "現職市長のみを対象とした公約データベース、詳細アーカイブの収集範囲外年度に関する『0件確認済みという意味ではありません』『在任期間中の全件ではありません』等の注記。",
+      "finding": "『当サイトの公約データベースは現職市長の任期のみを対象』『収集範囲（年度）外のため未収集』と、収録範囲そのものを都度明示しており、母数の限定を隠していない。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/CouncilDocumentsArchivePage.tsx:131-142",
+      "context": "詳細アーカイブ登録件数の統計カード『全件一覧ではありません』『議決結果そのものは全件で確認済みです』。",
+      "finding": "後者の『全件』はこの一覧（docs.length件、既存の議案賛否データベースで公式資料を確認できたものから少数ずつ登録）の内部の話であることが直前の文章で明示されており、延岡市議会に提出された全議案の意味ではないことが分かる文脈になっている。カード自体にも『全件一覧ではありません』のhintが付いている。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/DataStatusPage.tsx:388,689（詳細アーカイブの『全件の一覧ではありません』）",
+      "context": "議案・条例・請願・陳情の詳細アーカイブ化件数に関する注記。",
+      "finding": "『延岡市議会に提出された{type}全件の一覧ではありません』と明示しており、誤解の余地は無い。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/DataStatusPage.tsx:495,556（政治資金団体『完全確認』）",
+      "context": "『完全確認（代表者・会計責任者・当該年分収支のすべて確認済み）：{pfFullyConfirmed}団体』",
+      "finding": "『完全確認』は個々の団体1件についての確認網羅度を指すラベルであり、隣接して『一部確認：◯団体／未確認：◯団体』も併記しているため、全団体が完全確認済みという意味には読めない。政治資金団体一覧の母数（politicalFundOrganizations.length）自体も『宮崎県選挙管理委員会公表分』とscopeで明示されている。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/lib/seo.ts:1663-1679（councilSessionSeo関数のdescription分岐）",
+      "context": "定例会詳細ページのmeta description。資料0件の会期について。",
+      "finding": "コメントで『（0件）を掲載していますは確認済みゼロ件に読めてしまうため、未収集の場合は別の文言にする』と明記されており、実装もdocumentsNotYetCollectedフラグで分岐し『本サイトでは現在未収集です（資料が存在しないという意味ではありません）』という文言に切り替える設計。CLAUDE.mdの『未確認データを0として扱わない』方針と整合している。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/CouncilActivityMemberPage.tsx:332,364／src/pages/MemberFormerDetailPage.tsx:338／src/pages/MayorDetailPage.tsx:314-346 の『0件という意味ではありません』系注記多数",
+      "context": "議員個人ページ・元議員ページでの議案賛否データの『0件』表示。",
+      "finding": "『個人別賛否資料が公開されていないため確認できません（0件という意味ではありません）』のように、未確認と確認済みゼロを常に区別して表示している。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/MethodologyActivityRadarPage.tsx:139-146,240,250",
+      "context": "議員活動バロメーターの算定方法説明。『0点』と『対象外』の区別、在職期間の扱い、現在データが不足している項目の説明。",
+      "finding": "『対象議案が0件の場合は「対象記録なし」とする。0点として扱わない』「現職議員{entries.length}名は全員この記名投票の対象だったため{entries.length}名とも算定可能ですが、対象議案が1件のみである点にご留意ください」のように、100%や全員という数字が出る箇所には必ず母数の限定（対象議案1件のみ等）が併記されている。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/components/finance/FinanceYearCards.tsx, src/components/bills/VerificationStatusBadge.tsx, src/components/council/SpeechSummaryStatusBadge.tsx, src/components/council/SessionSummaryStatusBadge.tsx, src/components/questions/GeneralQuestionCard.tsx, src/components/questions/VerifiedSpeechCard.tsx",
+      "context": "『確認済み』ラベルを持つ共通バッジ・カード類。",
+      "finding": "いずれも個別レコード1件単位の確認状況ラベルであり、サイト全体やドメイン全体の完全性を主張するものではない。集計値としての『確認済み◯件』は呼び出し元ページ側で母数と併記されていることを確認済み（DashboardPage.tsx:288-297ほか）。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/PolicyComparePage.tsx:151, src/pages/MayorPolicyProgressPage.tsx:162,168",
+      "context": "公約の『関連付け未整理は確認中とし0件とは区別』『サイト独自の採点や達成率の算定は行っていません』。",
+      "finding": "CLAUDE.mdの『独自採点・達成率を使わない』方針、および0件と確認中の区別が明示的に守られている。",
+      "action": "no_issue"
+    },
+    {
+      "location": "src/pages/AboutPage.tsx:234, src/pages/TermsPage.tsx:12, src/pages/ContactPage.tsx:38,87, src/pages/EditorialPolicyPage.tsx:124",
+      "context": "サイト全体の免責事項。『完全性、最新性または正確性を保証するものではありません』『すべての内容を掲載するとは限りません』。",
+      "finding": "いずれも完全性を主張する文言ではなく、逆に完全性を保証しないことを明示する免責文言であるため対象外。",
+      "action": "no_issue"
+    }
+  ],
+  "flaggedForFutureConsideration": [],
+  "qualityChecks": {
+    "note": "本監査ではコード変更・データ変更を一切行っていないため、typecheck/lint/buildは未実行（変更差分が無いため実施不要と判断）。"
+  },
+  "summary": "Phase89の先行監査（母数の正確性検証）を踏まえ、本Phase114では『数字は正しくても、ユーザーが全資料確認済みと誤解しない表現になっているか』という表現面を重点的に確認した。src/pages配下35ファイル・src/components配下12ファイル・src/lib/seo.tsを横断検索した結果、『100%』『完全収録』『確認済み』『全件』『すべて』等の表現が出現する全箇所で、(1) 分母がsrc/lib/completeness.tsの共通ロジックまたは実データ配列長に基づいており推測で母数を作っていないこと、(2) 母数が限定的な場合（現職市長のみ／収集範囲年度のみ／記名投票1件のみ等）はその限定を同じ文中または直後で明示していること、(3) confirmed_zero・not_collected・under_review・unavailable等のステータスを母数計算から不当に除外している箇所が無いこと、を確認した。誤解を招く表示は発見されなかったため、コード修正・提案とも0件である。"
+}

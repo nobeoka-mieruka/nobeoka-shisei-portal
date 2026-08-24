@@ -1,0 +1,1228 @@
+{
+  "generatedAt": "2026-08-24T07:43:55.099Z",
+  "method": "Phase79(reports/phase79-source-coverage-findings.json)の集計手法（src/data実ファイルをNode.jsで読み込み、レコード単位でsourceRefs/sourceRef/sourceNote/sourceUrl等の出典系フィールドの有無・件数・URLドメイン・verificationStatusを機械集計）を再利用し、現在のsrc/dataから実際に再計算した。5分類は本フェーズで新規に定義し、fully_documented=主要事実の大半を複数出典がカバーしvraifiedが揃っている、partially_documented=出典はあるが breadth or verification が不足（『URLが1本あるだけ』を含む）、reference_pending=照会送付済み・回答待ちを示す記述がある、source_not_located=出典系フィールドが一切無い、library_required=PDF/xlsx添付や書籍名のみでURL/一次デジタル資料が無くこの環境では内容照合不可（図書館等の現物確認が必要） と定義した。出典階層（tiers）は primary(一次資料：市/県/国等の公式ドメイン、kensakusystem.jp含む) > public_secondary(公的二次資料：dl.ndl.go.jp等) > reliable_secondary(信頼できる二次資料：go2senkyo.com等) > self_primary(本人・後援会公式) > unknown で判定した。",
+  "perFile": {
+    "archiveMemberProfiles.json": {
+      "totalRecords": 84,
+      "counts": {
+        "fully_documented": 6,
+        "partially_documented": 78,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "primary": 59,
+        "reliable_secondary": 58
+      },
+      "examples": {
+        "fully_documented": [
+          {
+            "id": "archive-fm01",
+            "name": "吉本 靖",
+            "category": "fully_documented",
+            "reason": "複数refs(4件)全件verified",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "reliable_secondary",
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm02",
+            "name": "佐藤 誠",
+            "category": "fully_documented",
+            "reason": "複数refs(4件)全件verified",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm06",
+            "name": "田村 吉宏",
+            "category": "fully_documented",
+            "reason": "複数refs(4件)全件verified",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm07",
+            "name": "松本 哲也",
+            "category": "fully_documented",
+            "reason": "複数refs(4件)全件verified",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm08",
+            "name": "下田 英樹",
+            "category": "fully_documented",
+            "reason": "複数refs(4件)全件verified",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm09",
+            "name": "松田 勝則",
+            "category": "fully_documented",
+            "reason": "複数refs(4件)全件verified",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          }
+        ],
+        "partially_documented": [
+          {
+            "id": "archive-fm03",
+            "name": "松田 和己",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=4/未完全検証(needsReview)=1 が混在",
+            "refCount": 5,
+            "tiers": [
+              "primary",
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm04",
+            "name": "三上 毅",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=3/未完全検証(needsReview)=1 が混在",
+            "refCount": 4,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm05",
+            "name": "白石 良盛",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=4/未完全検証(needsReview)=1 が混在",
+            "refCount": 5,
+            "tiers": [
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm10",
+            "name": "本部 仁俊",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=4/未完全検証(needsReview)=1 が混在",
+            "refCount": 5,
+            "tiers": [
+              "primary",
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-m03",
+            "name": "上杉 泰洋",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-m22",
+            "name": "松田 満男",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-m24",
+            "name": "宮田 博徳",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-m15",
+            "name": "中島 誠治",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "electionResults.json": {
+      "totalRecords": 39,
+      "counts": {
+        "fully_documented": 0,
+        "partially_documented": 39,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "primary": 16,
+        "public_secondary": 17,
+        "reliable_secondary": 16
+      },
+      "examples": {
+        "fully_documented": [],
+        "partially_documented": [
+          {
+            "id": "election-mayor-1971",
+            "name": "延岡市長選挙 1971-01-17",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=2/未完全検証(needsReview)=1 が混在",
+            "refCount": 3,
+            "tiers": [
+              "primary",
+              "public_secondary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "election-mayor-1975",
+            "name": "延岡市長選挙 1975-01-19",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=1/未完全検証(needsReview)=1 が混在",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "election-mayor-1978",
+            "name": "延岡市長選挙 1978-11-05",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=1/未完全検証(needsReview)=1 が混在",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "election-mayor-1982",
+            "name": "延岡市長選挙 1982-10-24",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=1/未完全検証(needsReview)=1 が混在",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "election-mayor-1986",
+            "name": "延岡市長選挙 1986-11",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "election-mayor-1990",
+            "name": "延岡市長選挙 1990-11",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "election-mayor-1994",
+            "name": "延岡市長選挙 1994-02",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "election-mayor-1998",
+            "name": "延岡市長選挙 1998-02",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "archiveMemberAffiliations.json": {
+      "totalRecords": 74,
+      "counts": {
+        "fully_documented": 0,
+        "partially_documented": 74,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "primary": 5,
+        "reliable_secondary": 69
+      },
+      "examples": {
+        "fully_documented": [],
+        "partially_documented": [
+          {
+            "id": "archive-fm01-aff-01",
+            "name": "archive-fm01 committee:産業建設委員会",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみでverificationStatus=needsReview（URLが1本あるだけ）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm01-aff-02",
+            "name": "archive-fm01 committee:議会運営委員会",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみでverificationStatus=needsReview（URLが1本あるだけ）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm03-aff-01",
+            "name": "archive-fm03 councilRole:議長",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみでverificationStatus=needsReview（URLが1本あるだけ）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm10-aff-01",
+            "name": "archive-fm10 councilRole:議長",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみでverificationStatus=needsReview（URLが1本あるだけ）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "archive-fm11-party-01",
+            "name": "archive-fm11 party:自由民主党",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "reliable_secondary"
+            ]
+          },
+          {
+            "id": "archive-fm11-party-02",
+            "name": "archive-fm11 party:無所属",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "reliable_secondary"
+            ]
+          },
+          {
+            "id": "archive-fm12-party-01",
+            "name": "archive-fm12 party:民主党",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "reliable_secondary"
+            ]
+          },
+          {
+            "id": "archive-fm13-party-01",
+            "name": "archive-fm13 party:民主党",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "reliable_secondary"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "formerMembers.json": {
+      "totalRecords": 58,
+      "counts": {
+        "fully_documented": 15,
+        "partially_documented": 43,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "unstructured_note": 58
+      },
+      "examples": {
+        "fully_documented": [
+          {
+            "id": "fm01",
+            "name": "吉本 靖",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(4種: election・activity・role・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm02",
+            "name": "佐藤 誠",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(3種: election・activity・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm03",
+            "name": "松田 和己",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(4種: election・activity・role・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm04",
+            "name": "三上 毅",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(3種: election・activity・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm05",
+            "name": "白石 良盛",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(3種: election・activity・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm06",
+            "name": "田村 吉宏",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(3種: election・activity・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm07",
+            "name": "松本 哲也",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(3種: election・activity・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm08",
+            "name": "下田 英樹",
+            "category": "fully_documented",
+            "reason": "sourceNote自由記述が複数のトピック(3種: election・activity・vote)を具体的な資料名・日付付きで記述",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          }
+        ],
+        "partially_documented": [
+          {
+            "id": "fm12",
+            "name": "猪股 秀明",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm13",
+            "name": "坂本 純一",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm14",
+            "name": "後藤 哲朗",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm15",
+            "name": "福良 博",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm16",
+            "name": "甲斐 武",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm17",
+            "name": "湯浅 啓祐",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm18",
+            "name": "西原 茂樹",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          },
+          {
+            "id": "fm19",
+            "name": "高橋 匠",
+            "category": "partially_documented",
+            "reason": "sourceNoteは1トピック(election)のみ（多くは選挙結果1件をelectionResults.json等の別ファイル参照に依拠するのみで、経歴・在職活動等の他の主要事実の直接出典が無い）",
+            "refCount": 0,
+            "tiers": [
+              "unstructured_note"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "citySpecialPosts.json": {
+      "totalRecords": 57,
+      "counts": {
+        "fully_documented": 33,
+        "partially_documented": 24,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "primary": 78,
+        "public_secondary": 13
+      },
+      "examples": {
+        "fully_documented": [
+          {
+            "id": "csp-01",
+            "name": "赤木 繁男(副市長)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-02",
+            "name": "上猶 真美(副市長)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-03",
+            "name": "髙森 賢一(教育長)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-04",
+            "name": "安藤 重德(農業委員会委員)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-05",
+            "name": "緒方 武彦(農業委員会委員)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-06",
+            "name": "小野 有紗(農業委員会委員)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-07",
+            "name": "甲斐 亜季(農業委員会委員)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-08",
+            "name": "甲斐 壽德(農業委員会委員)",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          }
+        ],
+        "partially_documented": [
+          {
+            "id": "csp-26",
+            "name": "小泉 智明(副市長)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-27",
+            "name": "木原 一成(選挙管理委員)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-28",
+            "name": "甲斐 克則(選挙管理委員)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-29",
+            "name": "竹原 哲郎(選挙管理委員)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-30",
+            "name": "奴田原 君枝(選挙管理委員)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-31",
+            "name": "猪俣 さよみ(選挙管理委員補充員（第1順位）)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-32",
+            "name": "高城 まり子(選挙管理委員補充員（第2順位）)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          },
+          {
+            "id": "csp-33",
+            "name": "安藤 俊則(選挙管理委員補充員（第3順位）)",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "archiveMayorTerms.json": {
+      "totalRecords": 30,
+      "counts": {
+        "fully_documented": 9,
+        "partially_documented": 21,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "self_primary": 1,
+        "primary": 39,
+        "reliable_secondary": 28,
+        "public_secondary": 7
+      },
+      "examples": {
+        "fully_documented": [
+          {
+            "id": "mayor-04-term-02",
+            "name": "mayor-04 term2",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-07-term-03",
+            "name": "mayor-07 term3",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-11-term-01",
+            "name": "mayor-11 term1",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "mayor-11-term-02",
+            "name": "mayor-11 term2",
+            "category": "fully_documented",
+            "reason": "複数refs(3件)全件verified",
+            "refCount": 3,
+            "tiers": [
+              "primary",
+              "public_secondary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "mayor-11-term-03",
+            "name": "mayor-11 term3",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "mayor-12-term-01",
+            "name": "mayor-12 term1",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "mayor-12-term-02",
+            "name": "mayor-12 term2",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "public_secondary"
+            ]
+          },
+          {
+            "id": "mayor-12-term-04",
+            "name": "mayor-12 term4",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)全件verified",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          }
+        ],
+        "partially_documented": [
+          {
+            "id": "mayor-01-term-01",
+            "name": "mayor-01 term1",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=3/未完全検証(needsReview・partiallyVerified)=2 が混在",
+            "refCount": 5,
+            "tiers": [
+              "self_primary",
+              "primary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-02-term-01",
+            "name": "mayor-02 term1",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=2/未完全検証(partiallyVerified)=2 が混在",
+            "refCount": 4,
+            "tiers": [
+              "reliable_secondary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-02-term-02",
+            "name": "mayor-02 term2",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=2/未完全検証(partiallyVerified)=2 が混在",
+            "refCount": 4,
+            "tiers": [
+              "reliable_secondary",
+              "primary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-02-term-03",
+            "name": "mayor-02 term3",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=1/未完全検証(partiallyVerified)=2 が混在",
+            "refCount": 3,
+            "tiers": [
+              "reliable_secondary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-03-term-01",
+            "name": "mayor-03 term1",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=2/未完全検証(needsReview・partiallyVerified)=2 が混在",
+            "refCount": 4,
+            "tiers": [
+              "reliable_secondary",
+              "reliable_secondary",
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-03-term-02",
+            "name": "mayor-03 term2",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=2/未完全検証(partiallyVerified)=1 が混在",
+            "refCount": 3,
+            "tiers": [
+              "reliable_secondary",
+              "reliable_secondary",
+              "primary"
+            ]
+          },
+          {
+            "id": "mayor-04-term-01",
+            "name": "mayor-04 term1",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=1/未完全検証(sourceUnavailable)=1 が混在",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "reliable_secondary"
+            ]
+          },
+          {
+            "id": "mayor-05-term-01",
+            "name": "mayor-05 term1",
+            "category": "partially_documented",
+            "reason": "複数refs中 verified=1/未完全検証(needsReview)=1 が混在",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "reliable_secondary"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "generalQuestions.json": {
+      "totalRecords": 15,
+      "counts": {
+        "fully_documented": 14,
+        "partially_documented": 1,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "primary": 29
+      },
+      "examples": {
+        "fully_documented": [
+          {
+            "id": "gq2026-06-m24",
+            "name": "宮田 博徳 2026-06-23",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m17",
+            "name": "長友 幸子 2026-06-23",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m14",
+            "name": "柴 浩信 2026-06-23",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m08",
+            "name": "甲斐 正幸 2026-06-23",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m26",
+            "name": "吉田 茂仁 2026-06-23",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m13",
+            "name": "小御門 綾 2026-06-24",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m03",
+            "name": "上杉 泰洋 2026-06-24",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          },
+          {
+            "id": "gq2026-06-m10",
+            "name": "河野 治満 2026-06-24",
+            "category": "fully_documented",
+            "reason": "複数refs(2件)がURL付きで一次資料を含む（このファイルはverificationStatus設計なし）",
+            "refCount": 2,
+            "tiers": [
+              "primary",
+              "primary"
+            ]
+          }
+        ],
+        "partially_documented": [
+          {
+            "id": "gq2019-06-m01",
+            "name": "稲田 雅之 2019-06-25",
+            "category": "partially_documented",
+            "reason": "sourceRefsが1件のみ（URLが1本あるだけ）で主要事実の複数フィールドをカバーしていない",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ]
+          }
+        ],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      }
+    },
+    "billVotes.json": {
+      "totalRecords": 1177,
+      "counts": {
+        "fully_documented": 1177,
+        "partially_documented": 0,
+        "reference_pending": 0,
+        "source_not_located": 0,
+        "library_required": 0
+      },
+      "tierCounts": {
+        "primary": 1177
+      },
+      "examples": {
+        "fully_documented": [
+          {
+            "id": "2026-06-gian-14",
+            "name": "議案第14号 延岡市印鑑の登録及び証明に関する条例の一部を改正する条例の制定",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-19",
+            "name": "議案第19号 監査委員の選任（後藤博文氏）",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-20",
+            "name": "議案第20号 令和8年度延岡市一般会計補正予算（二次分）",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-5",
+            "name": "議案第5号 令和8年度延岡市一般会計補正予算",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-6",
+            "name": "議案第6号 令和8年度延岡市水道事業会計補正予算",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-7",
+            "name": "議案第7号 令和8年度延岡市下水道事業会計補正予算",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-8",
+            "name": "議案第8号 延岡市一般職職員給与条例の一部を改正する条例の制定",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          },
+          {
+            "id": "2026-06-gian-9",
+            "name": "議案第9号 延岡市退職年金等の年額の改定に関する条例の制定",
+            "category": "fully_documented",
+            "reason": "resultDocumentUrl(延岡市公式PDF)1本だが、billTitle/votingDate/result等の主要事実が同一PDFから機械抽出されhuman-verifiedの位置づけ（publicationStatus=published, verificationStatus=verified）",
+            "refCount": 1,
+            "tiers": [
+              "primary"
+            ],
+            "note": "議員別個別賛否(memberVotes)は別軸で未公開/未確認"
+          }
+        ],
+        "partially_documented": [],
+        "reference_pending": [],
+        "source_not_located": [],
+        "library_required": []
+      },
+      "separateAxisNote": "billVotes.jsonの5分類は「議案の結果(billTitle/votingDate/result)」の出典充足度であり、fully_documented=1177件（全件）。ただし『議員ごとの個別賛否(memberVotes)』は別軸の指標であり、individualVoteDisclosureStatus内訳は {\"unconfirmed\":654,\"notDisclosed\":521,\"disclosed\":2}（disclosed=2件のみ、unconfirmed=654件・notDisclosed=521件）。議案結果の出典網羅性と、議員別賛否の公開状況は別問題として区別して報告する。"
+    }
+  }
+}

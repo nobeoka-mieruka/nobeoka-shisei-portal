@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T06:07:11.888Z",
+  "generatedAt": "2026-08-24T09:04:18.013Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 15,
@@ -7,9 +7,9 @@
     "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは出典タイトル欠落等の改善余地、infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
   },
   "linkHealth": {
-    "generatedAt": "2026-08-24T03:54:04.694Z",
-    "totalChecked": 838,
-    "ok": 817,
+    "generatedAt": "2026-08-24T07:43:07.537Z",
+    "totalChecked": 1224,
+    "ok": 1203,
     "redirect": 12,
     "notFound404": 6,
     "serverError": 0,
@@ -34,7 +34,8 @@
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
         "files": [
-          "councilWatchedDocuments.json"
+          "councilWatchedDocuments.json",
+          "dataQualitySummary.json"
         ],
         "category": "not_found_404",
         "status": 404
@@ -50,7 +51,8 @@
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
         "files": [
-          "councilWatchedDocuments.json"
+          "councilWatchedDocuments.json",
+          "dataQualitySummary.json"
         ],
         "category": "not_found_404",
         "status": 404

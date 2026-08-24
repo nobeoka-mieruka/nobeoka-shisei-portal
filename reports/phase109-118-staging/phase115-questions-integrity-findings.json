@@ -1,0 +1,176 @@
+{
+  "phase": "phase115",
+  "generatedAt": "2026-08-24",
+  "scope": [
+    "src/data/generalQuestions.json",
+    "src/data/councilSpeechSummaries.json",
+    "src/data/members.json",
+    "src/data/formerMembers.json",
+    "src/data/memberSpeechAnalysis.json",
+    "src/data/archiveMemberProfiles.json"
+  ],
+  "editsMade": false,
+  "editsMadeNote": "本フェーズでは一次資料で確認できる新規の誤りが検出されなかったため、独占編集ファイルへの変更は行っていない（データはそのまま維持）。",
+  "recountSummary": {
+    "purpose": "ユーザー提示の「一般質問397件」「質問項目1470件」について、src/lib/generalQuestionStats.ts（単一情報源、DashboardPage/DataStatusPage/HomePage/GeneralQuestionsPageが共通利用）と同一ロジックをNode上で再実装し、2026-08-24時点の実データから独立に再計算した。",
+    "asOf": "2026-08-24",
+    "method": "src/lib/generalQuestionStats.ts のcalculateGeneralQuestionStats()と同一ロジック（questionLikeSpeeches(allPublicSpeeches(...))）をNodeスクリプトで再実装し、councilSpeechSummaries.json（version=1, generatedAt=2026-08-23）とgeneralQuestions.json（15件）に対して直接実行した。",
+    "results": {
+      "confirmedCount": 418,
+      "confirmedCount_meaning": "councilSpeechSummaries.jsonに登録済みで、isPublished:trueかつ収録対象期間内（councilSpeechPeriod.json、2023-04-23以降）または明示的に旧任期扱いとされた「登壇・確認済み」件数。1件＝議員1名が1回の登壇で行った質問・答弁のやり取り1回分（一般質問／代表質問／関連質問／総括質疑／総括質疑・一般質問の合算）。",
+      "totalQuestionItemCount": 1567,
+      "totalQuestionItemCount_meaning": "confirmedCountの内訳である個別テーマ・質問項目（questionItems配列要素）の累計件数。1件の登壇に複数項目が含まれることが多いためconfirmedCountより大きい。",
+      "scheduledCount": 15,
+      "scheduledCount_meaning": "generalQuestions.jsonの全件数。会議録がまだ公開されていない最新会期（令和8年6月定例会）について、質問通告書のみに基づく「予定質問」。confirmedCount/totalQuestionItemCountとは対象範囲が重ならない別集合であり、単純合算しない（サイト側もconfirmedCount/totalQuestionItemCount/scheduledCountを常に別カードで表示し合算していないことを確認済み）。",
+      "scheduledSessionName": "令和8年6月定例会",
+      "generalQuestionsJsonArrayLength": 15,
+      "membersJsonLength": 26,
+      "formerMembersJsonLength": 58,
+      "archiveMemberProfilesJsonLength": 84,
+      "memberSpeechAnalysisJsonMembersLength": 44,
+      "councilSpeechSummariesJsonMembersLength": 44,
+      "councilSpeechSummariesBreakdownByCurrentVsFormerId": {
+        "currentMemberIdRecords": 26,
+        "formerMemberIdRecords": 18,
+        "note": "元議員58名中、councilSpeechSummaries.jsonに発言レコードが存在するのは18名のみ（残り40名は選挙結果・会議録検索システム等での在職確認のみで、質問要約はまだ未収録＝0件ではなく未収録として扱われている）。"
+      }
+    },
+    "conclusionOn397And1470": "「397件」「1470件」は鵜呑みにせず実データで再計算した結果、現時点（2026-08-24）の正しい値はconfirmedCount=418件、totalQuestionItemCount=1567件であり、ユーザー提示の397/1470とは一致しない。ただし、これは397/1470が『誤り』だったという意味ではない。reports/data-audit-2026-08-17.json、reports/final-quality-audit.md等の過去レポートを確認したところ、397件・1,470件は2026-08-15〜17時点の集計として実際に記録されており、当時は正しい値だった。その後、Phase89-98・99-108等でcouncilSpeechSummaries.jsonへ新規会期分（例：2026-02定例会、令和7年12月定例会等）の発言データが追加され続けたため、現在は418件・1567件まで増加している。サイト側の表示（HomePage/DashboardPage/DataStatusPage/GeneralQuestionsPage）はいずれもcalculateGeneralQuestionStats()による動的計算値を表示しており、397/1470のようなハードコード値は data-quality を左右するUIパスには存在しない（唯一の例外はsrc/pages/GeneralQuestionsPage.tsx 48行目の開発者向けコメント『397件（2026-08時点）にのぼる確認済み一般質問を...』で、これは表示ロジックの根拠説明コメントでありユーザー表示ではない。編集権限外のページファイルのため本フェーズでは修正していないが、更新推奨として記録する）。"
+  },
+  "unitDistinctionCheck": {
+    "checked": [
+      "src/pages/HomePage.tsx",
+      "src/pages/DashboardPage.tsx",
+      "src/pages/DataStatusPage.tsx",
+      "src/pages/GeneralQuestionsPage.tsx"
+    ],
+    "result": "pass",
+    "detail": "いずれのページも「一般質問（登壇・確認済み件数）」「質問項目数」「予定質問（質問通告書ベース）」を別々のStatCard・見出しで表示し、各カードに集計単位を説明するhint文（例：『議員1名が1回の登壇で行った質問・答弁のやり取り1回分を1件と数えています』『1回の登壇で複数のテーマを質問することが多いため、内訳である質問項目数の方が多くなります』）を付与している。GeneralQuestionsPageは見出し『1. 最新会期の予定質問項目（質問通告書ベース、会議録公開前）』と『2. 確認済み一般質問アーカイブ（公式会議録ベース）』でセクションを完全に分離しており、読者が集計単位を混同しない構成になっていることを確認した。"
+  },
+  "misattributionAudit": {
+    "scope": "現職26名（members.json）・元議員58名（formerMembers.json）・councilSpeechSummaries.json全44レコード・memberSpeechAnalysis.json全44レコード・archiveMemberProfiles.json全84件・generalQuestions.json全15件を対象に、ID解決・氏名重複・フラグ整合性・日付整合性を機械的に全件監査した。",
+    "checks": [
+      {
+        "check": "members.json と formerMembers.json のID重複",
+        "result": "0件（重複なし）"
+      },
+      {
+        "check": "members.json と formerMembers.json の氏名重複（同姓同名の現職・元議員ペア）",
+        "result": "0件（完全一致する氏名の重複なし）"
+      },
+      {
+        "check": "members.json内・formerMembers.json内それぞれの氏名重複",
+        "result": "0件"
+      },
+      {
+        "check": "councilSpeechSummaries.json各レコードのmemberIdが現職・元議員いずれのIDにも解決できるか",
+        "result": "44件中44件すべて解決（未解決0件）"
+      },
+      {
+        "check": "isFormerMemberフラグと参照先ID（m接頭辞／fm接頭辞）の整合性",
+        "result": "不整合0件（現職IDでisFormerMember:trueのレコード、元議員IDでisFormerMemberが立っていないレコードともに0件）"
+      },
+      {
+        "check": "councilSpeechSummaries.json内、各speechエントリのmemberIdフィールドと所属レコードのmemberIdの一致",
+        "result": "不一致0件（全419発言エントリを確認）"
+      },
+      {
+        "check": "generalQuestions.json（15件）のmemberId・memberNameとmembers.jsonの整合性",
+        "result": "不一致0件"
+      },
+      {
+        "check": "memberSpeechAnalysis.jsonの44件のmemberIdが現職・元議員いずれかに解決できるか、councilSpeechSummaries.jsonのmemberId集合と一致するか",
+        "result": "未解決0件。両ファイルのmemberId集合は完全一致（44件＝44件）"
+      },
+      {
+        "check": "memberSpeechAnalysis.jsonのevidenceSpeechIdsが対応するcouncilSpeechSummaries.jsonレコードの実在speech.idを指しているか",
+        "result": "無効な参照0件"
+      },
+      {
+        "check": "archiveMemberProfiles.jsonのlegacyMemberId／legacyFormerMemberIdの解決",
+        "result": "未解決0件。現職26名全員がarchiveMemberProfiles.jsonでカバーされている"
+      },
+      {
+        "check": "formerMembers.json 58名のうち、councilSpeechSummaries.json・archiveMemberProfiles.jsonのいずれにも一切リンクがない「孤立」元議員",
+        "result": "0件"
+      },
+      {
+        "check": "formerMembers.jsonのservedSessions配列と、対応するcouncilSpeechSummaries.jsonレコードの実際のsessionIdの整合性（記録済み会期がservedSessionsに漏れていないか）",
+        "result": "不整合0件（councilSpeechSummaries.jsonに存在する会期は必ずservedSessionsにも登録されている）"
+      },
+      {
+        "check": "現職members.jsonの継続議員が持つterm:\"previous\"（旧任期）発言について、同姓同名のformerMembers.json登録者が別途存在しないか（世代交代・別人混同リスク）",
+        "result": "該当なし。term:previousの旧任期発言を持つ現職17名（m01, m02, m03, m04, m06, m07, m08, m10, m11, m14, m16, m17, m18, m19, m20, m22, m23）について、formerMembers.json全58名と氏名の完全一致を機械照合したが、一致は0件だった"
+      },
+      {
+        "check": "現職メンバーの旧任期発言のうち、複数年の空白期間（3年以上）を挟む記録の抽出とsourceRefs/verificationNoteによる裏付け確認（同姓同名別人の混入リスクが最も高いケースの重点監査）",
+        "result": "m16（中城あかね、2006年→2019年、13年の空白）、m20（平田信広、2009年→2019年、10年の空白）、m08（甲斐正幸、2013/2014年→2019年、5年の空白）、m03（上杉泰洋、2014/2016年→2019年、3〜5年の空白）、m06（甲斐行雄、2017年→2019年、2年の空白）、m17（長友幸子、2015年→2019年、4年の空白）を個別に精読した。いずれも当該speechのverificationNoteに『氏名完全一致、同姓同名なし』（機械照合、electionResults.json等の候補者名簿全件走査）、または本会議録原文中の発言者見出し（例：『中城あかね君』）とr_Speakers.exe発言者一覧の突合による直接確認の記録があり、既存フェーズ（Phase57-72等）で同姓同名リスクの検証が完了済みであることを確認した。新たな誤りは検出されなかった。"
+      }
+    ],
+    "misattributionsFound": 0,
+    "misattributionsFixed": 0,
+    "conclusion": "現職・元議員間、または元議員同士の同姓同名・時期誤認による発言の誤紐付けは、本フェーズの全件監査（構造的整合性チェック＋高リスク記録の個別精読）では検出されなかった。既存データにはPhase49・57〜72等で実施済みの同姓同名リスク照合の記録（sourceRefs・verificationNote）が広く残っており、今回の監査でもその正当性が再確認された。"
+  },
+  "otherFindings": [
+    {
+      "id": "F1",
+      "severity": "medium",
+      "file": "src/data/councilSpeechSummaries.json",
+      "title": "各議員レコードの解析状況カウンタ（analyzedSessionCount / sessionsWithSpeechCount）が、同じレコード内のspeeches配列の実データと一致しない",
+      "detail": "MemberDetailPage.tsx（647〜659行目）は各議員のcouncilSpeechSummaries.jsonレコードから『解析済み：{analyzedSessionCount}会期』『質問・質疑を確認：{sessionsWithSpeechCount}会期』を直接表示している。この2フィールドは本来、同レコードのspeeches配列（現職は現任期分のみ、元議員isFormerMember:trueは全期間分）から機械的に算出できるはずだが、44レコード中20レコード（現職19名＋元議員では0名、以下に列挙）で、記録済みのanalyzedSessionCount/sessionsWithSpeechCountが、実際にspeeches配列へ登録されている一意会期数より多い（4〜7会期分、実データより多く『解析済み』と主張している）。sessionsWithoutSpeechCountは該当レコードすべてで0のため、『確認したが質問なしだった会期』としての差分でも説明がつかない。",
+      "affectedMemberIds": [
+        "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m10",
+        "m14", "m16", "m17", "m18", "m19", "m20", "m21", "m22", "m23", "m24", "m25"
+      ],
+      "affectedRecordsDetail": [
+        { "memberId": "m01", "name": "稲田 雅之", "speeches配列から求めた現任期の一意会期数": 7, "レコード上のanalyzedSessionCount": 11 },
+        { "memberId": "m02", "name": "猪之鼻 哲", "speeches配列から求めた現任期の一意会期数": 5, "レコード上のanalyzedSessionCount": 8 },
+        { "memberId": "m03", "name": "上杉 泰洋", "speeches配列から求めた現任期の一意会期数": 8, "レコード上のanalyzedSessionCount": 15 },
+        { "memberId": "m04", "name": "小野 正二", "speeches配列から求めた現任期の一意会期数": 6, "レコード上のanalyzedSessionCount": 10 },
+        { "memberId": "m05", "name": "小野 挙", "speeches配列から求めた現任期の一意会期数": 7, "レコード上のanalyzedSessionCount": 8 },
+        { "memberId": "m06", "name": "甲斐 行雄", "speeches配列から求めた現任期の一意会期数": 6, "レコード上のanalyzedSessionCount": 10 },
+        { "memberId": "m07", "name": "甲斐 忠篤", "speeches配列から求めた現任期の一意会期数": 6, "レコード上のanalyzedSessionCount": 9 },
+        { "memberId": "m08", "name": "甲斐 正幸", "speeches配列から求めた現任期の一意会期数": 6, "レコード上のanalyzedSessionCount": 11 },
+        { "memberId": "m10", "name": "河野 治満", "speeches配列から求めた現任期の一意会期数": 5, "レコード上のanalyzedSessionCount": 8 },
+        { "memberId": "m14", "name": "柴 浩信", "speeches配列から求めた現任期の一意会期数": 9, "レコード上のanalyzedSessionCount": 13 },
+        { "memberId": "m16", "name": "中城 あかね", "speeches配列から求めた現任期の一意会期数": 5, "レコード上のanalyzedSessionCount": 8 },
+        { "memberId": "m17", "name": "長友 幸子", "speeches配列から求めた現任期の一意会期数": 9, "レコード上のanalyzedSessionCount": 15 },
+        { "memberId": "m18", "name": "早瀬 賢一", "speeches配列から求めた現任期の一意会期数": 0, "レコード上のanalyzedSessionCount": 2, "備考": "m18のspeeches全6件はすべて term:previous（旧任期）で、現任期分の発言は現時点で0件。レコード上は『2会期解析済み』と表示されるが、現任期の実データは存在しない。" },
+        { "memberId": "m19", "name": "比江島 久美子", "speeches配列から求めた現任期の一意会期数": 7, "レコード上のanalyzedSessionCount": 9 },
+        { "memberId": "m20", "name": "平田 信広", "speeches配列から求めた現任期の一意会期数": 7, "レコード上のanalyzedSessionCount": 12 },
+        { "memberId": "m21", "name": "前田 遼", "speeches配列から求めた現任期の一意会期数": 7, "レコード上のanalyzedSessionCount": 8 },
+        { "memberId": "m22", "name": "松田 満男", "speeches配列から求めた現任期の一意会期数": 2, "レコード上のanalyzedSessionCount": 4 },
+        { "memberId": "m23", "name": "峯田 克明", "speeches配列から求めた現任期の一意会期数": 9, "レコード上のanalyzedSessionCount": 12 },
+        { "memberId": "m24", "name": "宮田 博徳", "speeches配列から求めた現任期の一意会期数": 12, "レコード上のanalyzedSessionCount": 13 },
+        { "memberId": "m25", "name": "山本 珠美", "speeches配列から求めた現任期の一意会期数": 6, "レコード上のanalyzedSessionCount": 9 }
+      ],
+      "rootCauseAssessment": "不明。m01のverificationNote全文を精読したところ、明示的に『追加した』と記録されている現任期会期は7件（令和5年6月・12月、令和6年6月・12月、令和7年3月・6月、＋最新の令和7年12月）で、これはspeeches配列の実データ（7会期）と一致する一方、analyzedSessionCount（11）とは一致しない。全期間（旧任期含む）の一意会期数（15）とも一致しない。どちらの解釈でも説明がつかないため、単純な集計範囲の取り違えではなく、過去のフェーズでこのフィールドが手動更新された際の入力ミス、または一時的な下書き値が確定されずに残った可能性が高いと考えられるが、一次資料での裏付けができないため推測で修正していない。",
+      "userFacingImpact": "MemberDetailPageの『収録・解析状況』カードで、実際にspeeches配列へ登録されているより多い会期数が『解析済み』『質問・質疑を確認』として表示される。特にm18（早瀬賢一）は現任期の実データが0件にもかかわらず『2会期解析済み』と表示される点が最も影響が大きい。ただし、この数値は一般質問の一覧・件数（confirmedCount/totalQuestionItemCount、questions/general-questionsページの主要表示）には使われておらず、影響範囲はMemberDetailPageの補助的な『収録・解析状況』カードに限定される。",
+      "actionTaken": "修正なし。一次資料（会議録・質問通告書）で正しい値を確認する必要があり、本フェーズの守備範囲（人物紐付け・件数整合性の確認）を超えるため、findings.jsonへの記録に留めた。",
+      "recommendation": "専用フェーズで、各レコードのspeeches配列（現職はterm!==\"previous\"のみ、元議員isFormerMember:trueは全件）から一意sessionId数を機械的に再計算し、analyzedSessionCount／sessionsWithSpeechCountへ反映する回収スクリプトの作成を推奨する。あわせてunfetchedSessionCount（対象会期総数からの差分）も、councilSessions.json・questionCollectionStatus.jsonの最新会期一覧と突き合わせて再計算する必要がある（questionCollectionStatus.json自体もgeneratedAt:2026-08-05のまま2026-02定例会等の新規会期を反映しておらず、本フェーズの独占編集ファイル外のため合わせて確認を推奨）。"
+    },
+    {
+      "id": "F2",
+      "severity": "low",
+      "file": "src/pages/GeneralQuestionsPage.tsx",
+      "title": "開発者向けコードコメントの件数（397件）が実データ（418件）より古い",
+      "detail": "48行目のコメント『397件（2026-08時点）にのぼる確認済み一般質問を1ページに全件表示すると...スクロールが極端に長くなる...20件ずつページ分割して表示する』は、VERIFIED_PAGE_SIZE=20の設計根拠を説明する開発者向けコメントであり、ユーザーには表示されない（実際の件数表示はverifiedSpeeches.length等の動的計算値を使用しており正しい）。ただし現在の実データは418件のため、コメント中の数値が古くなっている。",
+      "actionTaken": "修正なし（src/pages配下は本フェーズの独占編集ファイル対象外のため）。",
+      "recommendation": "次にsrc/pages/GeneralQuestionsPage.tsxを編集する機会に、コメント中の『397件（2026-08時点）』を最新の実件数（本フェーズ確認時点で418件）へ更新することを推奨する。機能への影響はない。"
+    },
+    {
+      "id": "F3",
+      "severity": "info",
+      "file": "src/data/questionCollectionStatus.json",
+      "title": "generalQuestionStats.tsが参照するquestionCollectionStatus.jsonのgeneratedAtが古い（2026-08-05）",
+      "detail": "targetSessionCount/collectedSessionCount/uncollectedSessionCount（HomePage・DataStatusPageで『収録済みX／Y会期』として表示）の元データであるquestionCollectionStatus.jsonは2026-08-05生成のまま、その後councilSpeechSummaries.jsonへ追加された新しい会期（例：2026-02定例会分）が反映されていない可能性がある。",
+      "actionTaken": "修正なし（questionCollectionStatus.jsonは本フェーズの独占編集ファイル対象外）。",
+      "recommendation": "questionCollectionStatus.jsonの担当フェーズで再生成（regenerateスクリプトの実行）を推奨する。"
+    }
+  ],
+  "validateDataResult": {
+    "ranBeforeEdits": true,
+    "ranAfterEdits": false,
+    "note": "本フェーズはデータ編集を行っていないため、npm run validate:dataは編集前の現状確認として1回のみ実行した。結果：errors=0、warnings=40（すべてcouncilSessions.json/archiveMayorTerms.json/archiveFiscalYears.jsonに関するもので、本フェーズの独占編集ファイルとは無関係）。"
+  }
+}

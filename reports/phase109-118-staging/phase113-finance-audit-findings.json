@@ -1,0 +1,173 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "phase": "Phase113",
+  "worker": "finance-audit",
+  "scope": "FY2018〜FY2024の歳入内訳（地方税・地方交付税・国庫支出金・都道府県支出金）・基金残高・市債残高・経常収支比率・実質公債費比率・将来負担比率・財政力指数・人口を原資料（総務省市町村決算カード、延岡市財政状況資料集）と照合。UNR-030（財政調整基金3クラスタの同一値疑義）は既にresolved済みのためUNR-030自体の再調査は行っていない。独占編集ファイル: src/data/archiveFiscalYears.json / src/data/financeDashboard.json。",
+  "priorReportsReviewed": [
+    "reports/phase33-master-unresolved-ledger.json（UNR-030、Phase90でresolved済みであることを確認）"
+  ],
+  "method": "総務省が公開する市町村決算カード（都道府県単位のxlsxファイル、延岡市シートを含む）と延岡市「財政状況資料集」（総務省統一様式xlsx、各年度版）を、node-xlsxパッケージでセル単位で読み取り、archiveFiscalYears.jsonの登録値と突合した。WebFetchツールは.xlsxバイナリを正しく解釈できないため、決算カードのURL特定はcurlで生HTMLを取得しhref属性を直接grepする方式に切り替え、財政状況資料集ファイルの本文抽出はWebFetchで取得したバイナリをローカル保存後にxlsxパッケージで解析した。",
+  "yearsReconciled": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+  "yearsReconciledCount": 7,
+  "primarySourcesAccessed": [
+    {
+      "label": "総務省「平成30年度市町村決算カード」宮崎県（延岡市シート）",
+      "url": "https://www.soumu.go.jp/main_content/000676980.xlsx",
+      "fiscalYear": 2018,
+      "note": "既存sourceRefsに既に登録済み。今回は既存値のクロスチェックのみに使用（新規登録なし）。"
+    },
+    {
+      "label": "総務省「令和元年度市町村決算カード」宮崎県（延岡市シート）",
+      "url": "https://www.soumu.go.jp/main_content/000740038.xlsx",
+      "fiscalYear": 2019,
+      "note": "新規登録に使用。歳入総額・歳出総額・歳入内訳4項目を新規登録。"
+    },
+    {
+      "label": "総務省「令和2年度市町村決算カード」宮崎県（延岡市シート）",
+      "url": "https://www.soumu.go.jp/main_content/000804191.xlsx",
+      "fiscalYear": 2020,
+      "note": "新規登録に使用。歳入内訳4項目を新規登録（歳入総額・歳出総額は既存値と完全一致を確認）。"
+    },
+    {
+      "label": "延岡市「財政状況資料集」令和3年度版〜令和6年度版（「(1)普通会計の状況」シート）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
+      "fiscalYear": "2021-2024",
+      "note": "新規登録に使用。歳入内訳4項目を各年度新規登録（歳入総額は既存値と完全一致を確認）。"
+    }
+  ],
+  "newValuesRegistered": {
+    "FY2019": {
+      "totalRevenueYen": 61593312000,
+      "totalExpenditureYen": 59696142000,
+      "localTaxRevenueYen": 14851532000,
+      "localAllocationTaxYen": 14740860000,
+      "nationalSubsidiesYen": 11247907000,
+      "prefecturalSubsidiesYen": 4439767000,
+      "previousState": "6項目すべてnull（完全欠損）",
+      "source": "総務省令和元年度市町村決算カード"
+    },
+    "FY2020": {
+      "localTaxRevenueYen": 14850237000,
+      "localAllocationTaxYen": 14399019000,
+      "nationalSubsidiesYen": 25639703000,
+      "prefecturalSubsidiesYen": 5899621000,
+      "previousState": "歳入内訳4項目がnull（歳入総額・歳出総額は既に登録済みで今回変更なし）",
+      "source": "総務省令和2年度市町村決算カード",
+      "note": "国庫支出金が前年度比+128%（新型コロナウイルス感染症対応の各種国庫交付金による全国的な増加傾向と整合。異常値ではないと判断）。"
+    },
+    "FY2021": {
+      "localTaxRevenueYen": 14678648000,
+      "localAllocationTaxYen": 15369815000,
+      "nationalSubsidiesYen": 17918826000,
+      "prefecturalSubsidiesYen": 6631228000,
+      "previousState": "歳入内訳4項目がnull",
+      "source": "延岡市財政状況資料集令和3年度版"
+    },
+    "FY2022": {
+      "localTaxRevenueYen": 16014983000,
+      "localAllocationTaxYen": 15028664000,
+      "nationalSubsidiesYen": 15217768000,
+      "prefecturalSubsidiesYen": 5367358000,
+      "previousState": "歳入内訳4項目がnull",
+      "source": "延岡市財政状況資料集令和4年度版"
+    },
+    "FY2023": {
+      "localTaxRevenueYen": 15937351000,
+      "localAllocationTaxYen": 14176144000,
+      "nationalSubsidiesYen": 15137467000,
+      "prefecturalSubsidiesYen": 5255149000,
+      "previousState": "歳入内訳4項目がnull",
+      "source": "延岡市財政状況資料集令和5年度版"
+    },
+    "FY2024": {
+      "localTaxRevenueYen": 15616152000,
+      "localAllocationTaxYen": 15058607000,
+      "nationalSubsidiesYen": 15285227000,
+      "prefecturalSubsidiesYen": 5438036000,
+      "previousState": "歳入内訳4項目がnull",
+      "source": "延岡市財政状況資料集令和6年度版"
+    }
+  },
+  "crossChecksConfirmedNoChange": [
+    "FY2018-2024: fund.balance.fiscalReserveFundYen（財政調整基金）が決算カード・財政状況資料集の該当年度値と一致（誤差は千円未満の丸めのみ）。UNR-030クラスタ（FY2020-2024が5,032,997千円で同一値）を追加の独立資料でも再確認し、据え置きが事実であることをさらに裏付けた。",
+    "FY2018-2024: fund.balance.bondRedemptionFundYen（減債基金）が全年度で一致。",
+    "FY2020-2024: debt.balance.ordinaryAccountLocalBondBalanceYen（市債残高）がarchiveFiscalYears.jsonとfinanceDashboard.jsonの両方で、かつ決算カード/財政状況資料集の値とも一致（validate-finance.mjsのINFOログでも既に確認済み）。",
+    "FY2019-2024: finance.realDebtServiceRatioPercent（実質公債費比率）・finance.currentAccountRatioPercent（経常収支比率）・finance.financialStrengthIndex（財政力指数）が決算カード/財政状況資料集の値と完全一致。",
+    "FY2024: fund.balance.fiscalAdjustmentFundYen（財源調整用基金の広義合計）とfinanceDashboard.jsonのfundBalance.fiscalAdjustmentFundsが一致。",
+    "population（人口）: FY2018-2024の各年1月1日時点人口は、archiveFiscalYears.jsonとfinanceDashboard.jsonのpopulationTrendで完全一致（照合済み、変更不要）。"
+  ],
+  "newFindingsForLedger": [
+    {
+      "candidateId": "FINDING-P113-01",
+      "category": "finance",
+      "severity": "low",
+      "targetFiscalYear": 2018,
+      "title": "FY2018のbudget.totalRevenueYen/totalExpenditureYenが会計区分の異なる2つの一次資料で約1%食い違う（一般会計ベース59,716,140千円 vs 普通会計ベース59,110,203千円）",
+      "description": "archiveFiscalYears.jsonのFY2018 budget.totalRevenueYen（59,716,140,000円）・totalExpenditureYen（58,002,740,000円）は、広報のべおか2019年11月号（一般会計ベースの決算数値）を出典として登録されている。一方、総務省「平成30年度市町村決算カード」（普通会計ベース、既存sourceRefsに登録済みの同一資料）を今回xlsxパッケージで実際に読み取ったところ、歳入総額59,110,203千円・歳出総額57,396,804千円という異なる値が確認された（差額はいずれも約1%、605,937千円および605,936千円）。これは一般会計と普通会計という会計区分の違いによる正当な差である可能性が高いが、FY2019以降（FY2019-2024）はすべて普通会計ベースの決算カード/財政状況資料集を出典として登録されているため、FY2018のみ会計区分が異なる系列内で混在している状態になっている。",
+      "evidence": {
+        "existingValue": {
+          "totalRevenueYen": 59716140000,
+          "totalExpenditureYen": 58002740000,
+          "source": "広報のべおか2019年11月号（一般会計ベース）"
+        },
+        "decisionCardValue": {
+          "totalRevenueYen": 59110203000,
+          "totalExpenditureYen": 57396804000,
+          "source": "総務省「平成30年度市町村決算カード」（普通会計ベース、https://www.soumu.go.jp/main_content/000676980.xlsx、シート「4延岡市」）"
+        }
+      },
+      "recommendedNextAction": "既存値は書き換えていない（会計区分が異なるため、どちらが『誤り』とは断定できない）。次フェーズで、(1) FY2018のtotalRevenueYen/totalExpenditureYenを他年度と同じ普通会計ベースに揃えるか、(2) 会計区分をnotesで明示した上で両方保持するかを判断し、あわせてFY2018のlocalTaxRevenueYen等4項目（決算カードでは地方税14,529,604千円・地方交付税15,070,887千円・国庫支出金10,363,231千円・都道府県支出金4,300,118千円が確認できる）を、totalRevenueYenの会計区分確定後に登録することを推奨する。",
+      "notAddedBecause": "budget.totalRevenueYenと同じ会計区分でないと歳入内訳4項目の合計が総額と整合しなくなり、利用者に誤解を与えるリスクがあるため、今回は保留した（推測での補完を避けるCLAUDE.mdの方針に従った）。"
+    }
+  ],
+  "warnInvestigation": {
+    "warn1": {
+      "field": "budget.totalRevenueYen / budget.totalExpenditureYen",
+      "transition": "FY1950（歳入278,630千円/歳出296,100千円）→FY1954（歳入762,402千円/歳出719,743千円）",
+      "changePercent": "+173.6%（歳入）/ +143.1%（歳出）",
+      "investigationResult": "既存データのbudget.notesに、2つの年度が異なる出典・異なる会計区分であることが既に明記されている。FY1950は延岡市史 上巻の別表「一般会計歳入決算状況／一般会計歳出決算状況」（一般会計のみ）が出典。FY1954は宮崎県統計年鑑（昭和29-30年版）表7「市町村歳入歳出決算(一般会計・特別会計)」（一般会計＋特別会計の合算）が出典であることが表題に明記されている。FY1951-1953は資料未発見のため欠番（validate-data.mjsのWARNでも既知）。延岡市の市町村合併史を確認したところ、南方村・南浦村の延岡市編入は昭和30年（1955年）4月1日であり、FY1950-1954の間には合併は発生していない（1930年の延岡町・恒富村・岡富村合併はさらに以前）。したがって今回の急変は合併ではなく、会計区分（一般会計単体 vs 一般会計+特別会計合算）の違いによるものであると判断した。",
+      "conclusion": "正当な理由あり（会計区分の相違、既存notesで説明済み）。データ修正は不要。",
+      "sourcesChecked": [
+        "延岡市公式サイト「延岡市の歴史」https://www.city.nobeoka.miyazaki.jp/soshiki/6/1689.html",
+        "宮崎県「市町村合併に伴う住居表示の変更について（延岡市）」https://www.pref.miyazaki.lg.jp/shichoson/kense/shichoson/gappeih180104.html"
+      ]
+    },
+    "warn2": {
+      "field": "fund.balance.totalYen",
+      "transition": "FY1989（3,614,066,000円）→FY2009（15,342,990,000円）",
+      "changePercent": "+324.5%",
+      "investigationResult": "既存データのfund.notesに、2つの年度が異なる集計範囲であることが既に明記されている。FY1989は総務省「地方財政状況調査」表29-1の財政調整基金・減債基金・その他特定目的基金の3区分の単純合計（普通会計ベースの狭い範囲、かつ『公式の基金全体合計欄との照合は今回未実施』と注記あり）。FY2009は『基金全体の合計（一般・特別・企業会計の合計、決算未確定時点の見込額）』であり、対象会計の範囲がFY1989よりはるかに広い。FY1990-2008の間は多くの年度でfund.balance.totalYenがnullまたは未登録であり、連続した経年比較ができない状態で、たまたま登録済みの隣接2年度を比較した結果、集計範囲の違いがそのまま急変として現れている。",
+      "conclusion": "正当な理由あり（集計範囲の相違、既存notesで説明済み）。データ修正は不要。",
+      "recommendationForValidator": "src/data側では対応不可（validate-finance.mjsのロジック改修が必要）。次フェーズでの検討事項として、fund.balance.totalYenの急変チェックにおいて、隣接年度間で集計範囲（3区分合計 vs 全会計合計）が異なることが既にnotesに明記されている場合はWARNをSKIPまたはINFOに格下げする、といった改善を提案する。"
+    }
+  },
+  "gapsRemainingConfirmedNotFillable": [
+    {
+      "field": "budget.localTaxRevenueYen等4項目",
+      "fiscalYear": 2018,
+      "reason": "既存totalRevenueYenと会計区分が異なる資料でしか確認できなかったため保留（newFindingsForLedger FINDING-P113-01参照）。"
+    },
+    {
+      "field": "fund.balance.totalYen",
+      "fiscalYears": [2020, 2021, 2022, 2023],
+      "reason": "決算カード・財政状況資料集は普通会計ベースの基金3区分＋土地開発基金までしか把握できず、FY2018/2024で使われている『一般・特別・企業会計合計』という広い集計範囲のtotalYenを算出する一次資料が見つからなかった。推測での合算は行っていない。"
+    },
+    {
+      "field": "finance.debtServiceRatioPercent（公債費負担比率）",
+      "fiscalYears": [2018, 2019],
+      "reason": "決算カードには『公債費負担比率』が別途記載されている（FY2018:18.6%、FY2019:17.5%）が、この値はarchiveFiscalYears.jsonのdebtServiceRatioPercentフィールドの定義（実質公債費比率とは別物）と一致するか未確認のため、今回は登録を見送った。次フェーズでフィールド定義を確認の上、登録を検討されたい。"
+    }
+  ],
+  "filesEdited": ["src/data/archiveFiscalYears.json"],
+  "filesNotEdited": ["src/data/financeDashboard.json（照合の結果、既存値がすべて一次資料と一致しており更新不要と判断）"],
+  "validation": {
+    "validateFinance": "実行済み。errors=0、warnings=3（すべて既知・既存notesで説明済み、上記warnInvestigation参照）、info=8。新規のerrors/warningsは発生していない。",
+    "validateData": "実行済み。errors=0、warnings=40（すべてarchiveFiscalYears.json以外の既存warning。archiveFiscalYears.jsonに起因する新規warningはなし）。",
+    "typecheck": "実行済み。エラーなし。"
+  },
+  "nextActions": [
+    "FY2018のbudget.totalRevenueYen/totalExpenditureYenの会計区分（一般会計 vs 普通会計）をどちらに統一するか方針決定し、決定後にlocalTaxRevenueYen等4項目を登録する。",
+    "fund.balance.totalYen（FY2020-2023）を『一般・特別・企業会計合計』ベースで確認できる一次資料（決算審査意見書等）を探索する。",
+    "validate-finance.mjsの急変検知ロジックに、既存notesで会計区分・集計範囲の相違が明記されている場合の緩和ルールを追加することを検討する（本フェーズでは提案のみ、スクリプト自体は編集していない）。"
+  ]
+}
