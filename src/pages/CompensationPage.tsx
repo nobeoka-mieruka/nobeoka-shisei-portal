@@ -483,10 +483,10 @@ export function CompensationPage() {
         {pendingMunicipalities.length > 0 && (
           <details className="mt-3 rounded-lg border border-outline-variant p-3">
             <summary className="cursor-pointer text-xs font-medium text-primary">
-              公式資料確認中の自治体（{pendingMunicipalities.length}件）
+              期末手当確認中の自治体（{pendingMunicipalities.length}件）
             </summary>
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-              宮崎県内の他の市についても掲載を検討していますが、次の自治体は基準日・月額・期末手当を公式資料で確認できていないため、正式には掲載していません。確認でき次第、追加します。
+              次の自治体は、市長・議長・副議長・議員の月額報酬は宮崎県公表資料で確認できており「宮崎県9市の比較（月額）」に掲載していますが、延岡市・宮崎市・都城市・日向市と同条件で比較するために必要な期末手当支給月数を公式資料で確認できていないため、上記の詳細比較（年間支給見込額を含む表）には掲載していません。確認でき次第、追加します。
             </p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {pendingMunicipalities.map((m) => (
@@ -494,7 +494,7 @@ export function CompensationPage() {
                   key={m.municipality}
                   className="rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant"
                 >
-                  {m.municipality}：公式資料確認中
+                  {m.municipality}：期末手当確認中
                 </li>
               ))}
             </ul>

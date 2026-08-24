@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22",
+  "generatedAt": "2026-08-24",
   "purpose": "Phase33 STEP1：Phase27〜32で残った未解決事項を1つのマスター台帳へ統合し、次に取るべき解決ルート（Route A〜F）を確定する。既存reports（phase20-missing-years-status.json、phase28-unresolved-personnel.json、phase32-unresolved-audit.md、ndl-historical-source-ledger.json、phase21-inquiry-tracker.json）を参照・統合し、重複登録は行っていない。財政9年度の年度別詳細は既存のphase20-missing-years-status.jsonをそのまま情報源として使い、本台帳では要約レベルの1レコードにまとめている（同じ内容の複製を避けるため）。",
   "routeDefinitions": {
     "A": "オンライン一次資料で再調査可能",
@@ -319,11 +319,11 @@
       "subcategory": "assistantMayor-deputyMayor-gap",
       "targetPerson": null,
       "targetFiscalYear": null,
-      "targetPeriod": "1983年（16代・三樹博、至現在＝1983年刊行時点）〜2006年（杉本隆晴、csp-35）",
+      "targetPeriod": "1983年2月（三樹博退任、時期未確認）〜1991年ごろ（柳田喜継の初回就任、日付未確認）",
       "description": "助役／副市長の在任者が、citySpecialPosts.jsonに1件も登録されていない約23年間の空白。",
-      "currentStatus": "not_collected",
+      "currentStatus": "partially_resolved",
       "priority": "A",
-      "evidenceLevel": "Level0",
+      "evidenceLevel": "Level2（civicTimelineEvents.json civic-176・civic-177の既存一次資料により、柳田喜継氏の在任1991年ごろ〜2006-02-03を確認）",
       "sourceRefs": [],
       "alreadyCheckedSources": [
         "citySpecialPosts.json（既存登録の年代分布を確認）"
@@ -338,7 +338,7 @@
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
       "lastCheckedAt": "2026-08-23",
-      "notes": "Phase32新規発見。ndl-historical-source-ledger.jsonに延岡市史1993/2003/2013年版が既に書誌登録されており、Route B（既存source ledgerの再確認）から着手可能。 Phase82（人物・任期整合性監査）で独立に再検出・再確認済み（新規調査ではなく既存UNRの追認）。"
+      "notes": "Phase32新規発見。ndl-historical-source-ledger.jsonに延岡市史1993/2003/2013年版が既に書誌登録されており、Route B（既存source ledgerの再確認）から着手可能。 Phase82（人物・任期整合性監査）で独立に再検出・再確認済み（新規調査ではなく既存UNRの追認）。 【2026-08-24追記（Phase92の指摘を反映）】citySpecialPosts.jsonに柳田喜継氏（csp-56、助役、平成3年ごろ〜2006-02-03）・（後藤）三樹博氏（csp-57、助役、1983-02-10〜退任日未確認）を新規登録した（civicTimelineEvents.json civic-176・civic-177、延岡市史上巻コマ126という既存の一次資料を再構造化したのみで、新規の一次資料調査は行っていない）。これにより約23年間とされていた空白は、「1983年2月（三樹博退任、時期未確認）〜1991年ごろ（柳田喜継の初回就任、日付未確認）」の約8年間へ縮小した。柳田喜継氏の初回就任日（1991年、日単位）、三樹博氏の退任日・後任者は依然未確認（library_required、延岡市史1993年版等の追加精読が必要）。"
     },
     {
       "unresolvedId": "UNR-011",
@@ -958,9 +958,9 @@
       "targetFiscalYear": null,
       "targetPeriod": "全期間（billVotes.json 1177件）",
       "description": "議案・請願・陳情等1177件について、議案自体の採決結果（可決・否決等）の出典は1177/1177で確認済みだが、議員個人ごとの賛否内訳（memberVotes）が実際に確認できているのはわずか2件のみ。654件は\"unconfirmed\"、521件は\"notDisclosed\"（公式資料に個人別記録が無いことを確認済み）。CLAUDE.mdの優先機能「2. 議案ごとの賛否」の根幹に関わる、収録件数に対して構造的に大きなギャップ。",
-      "currentStatus": "not_collected",
+      "currentStatus": "partially_resolved",
       "priority": "A",
-      "evidenceLevel": "Level0（案件全体の結果は確認済みだが、個人別内訳はほぼ未着手）",
+      "evidenceLevel": "Level1（既存フィールドの機械集計による定量化。C=52件の会議録個別確認は未実施）",
       "sourceRefs": [],
       "alreadyCheckedSources": [
         "src/data/billVotes.json（verificationStatus/memberVotes/unresolvedFieldsの機械集計）"
@@ -975,7 +975,7 @@
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
       "lastCheckedAt": "2026-08-23",
-      "notes": "Phase79（29項目出典網羅率監査）で新規発見。521件の\"notDisclosed\"は「未収集」ではなく「公式資料上そもそも個人別記録が存在しないことを確認済み」の状態であり、654件の\"unconfirmed\"とは区別して扱う必要がある。 Phase91（2026-08-23、パイロット調査）で構造的原因を特定：令和8年7月3日現在の第26回定例会「議案審査等結果」PDF（既に本サイトのsourceDocumentId=2026-06-results等で採決結果の一次資料として使用中のもの）を実際に画像確認したところ、この種の公式文書は議案番号・件名・審議結果（原案可決等）・議決日のみを収録し、個別議員の賛否は一切含まれていないことを確認した。個別賛否が判明する2件（2019-09-gian-47、2023-07-extraordinary-01-gian-9）はいずれも異例の起立採決・再議が行われたケースであり、通常の簡易採決（異議なし採決）では個別記録がそもそも作成されない可能性が高い。したがって、残り1175件の大半は『B: 採決結果のみあり（一次資料に個別記録が存在しない）』に該当する可能性が高く、真に個別記録が存在するのは会議録本文で起立採決・記名投票が明記された少数の議案に限られると推定される。バックフィルには「審議結果」PDFではなく各会期の会議録本文（討論・採決部分）を個別に精読する必要があり、1177件全件の網羅的取得は非現実的。次のアクションとして、まず起立採決・記名投票が明記された議案を会議録本文検索で特定し、その範囲に絞った小規模バックフィルから着手することを推奨する（無制限の全件取得は行わない）。"
+      "notes": "Phase79（29項目出典網羅率監査）で新規発見。521件の\"notDisclosed\"は「未収集」ではなく「公式資料上そもそも個人別記録が存在しないことを確認済み」の状態であり、654件の\"unconfirmed\"とは区別して扱う必要がある。 Phase91（2026-08-23、パイロット調査）で構造的原因を特定：令和8年7月3日現在の第26回定例会「議案審査等結果」PDF（既に本サイトのsourceDocumentId=2026-06-results等で採決結果の一次資料として使用中のもの）を実際に画像確認したところ、この種の公式文書は議案番号・件名・審議結果（原案可決等）・議決日のみを収録し、個別議員の賛否は一切含まれていないことを確認した。個別賛否が判明する2件（2019-09-gian-47、2023-07-extraordinary-01-gian-9）はいずれも異例の起立採決・再議が行われたケースであり、通常の簡易採決（異議なし採決）では個別記録がそもそも作成されない可能性が高い。したがって、残り1175件の大半は『B: 採決結果のみあり（一次資料に個別記録が存在しない）』に該当する可能性が高く、真に個別記録が存在するのは会議録本文で起立採決・記名投票が明記された少数の議案に限られると推定される。バックフィルには「審議結果」PDFではなく各会期の会議録本文（討論・採決部分）を個別に精読する必要があり、1177件全件の網羅的取得は非現実的。次のアクションとして、まず起立採決・記名投票が明記された議案を会議録本文検索で特定し、その範囲に絞った小規模バックフィルから着手することを推奨する（無制限の全件取得は行わない）。 【2026-08-24追記】billVotes.jsonの既存フィールド（voteMethod・individualVoteDisclosureStatus）を機械集計し、A〜Fの内訳を定量化した：A(記名投票・個人別記録あり)=2、B(簡易採決・全会一致＝原理的に個人別記録なし)=1,095、C(起立採決＝会議録本文の個別確認が必要)=52、E(採決なし)=4、F(直近2会期、パイプライン反映待ち)=24。専用バックフィル対象はCの52件のみと判断し、reports/task-backfill-votes-001.mdへタスク定義として切り出した（無制限の全件取得は引き続き行わない）。"
     }
   ],
   "summary": {
@@ -996,8 +996,8 @@
     "byStatus": {
       "disputed": 3,
       "unconfirmed": 6,
-      "partially_resolved": 2,
-      "not_collected": 9,
+      "partially_resolved": 4,
+      "not_collected": 7,
       "under_review": 2,
       "reference_pending": 5,
       "resolved": 4
@@ -1005,6 +1005,6 @@
     "requiresOnsite": 10,
     "requiresInquiry": 9,
     "requiresBulkBackfill": 12,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。"
   }
 }

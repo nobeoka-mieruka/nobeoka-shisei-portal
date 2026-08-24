@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T14:03:52.607Z",
+  "generatedAt": "2026-08-24T03:17:41.951Z",
   "filesScanned": 71,
   "statusLikeFieldCount": 60,
   "completenessStatusVocabulary": [
@@ -553,7 +553,7 @@
       "distinctValues": [
         {
           "value": "former",
-          "count": 22
+          "count": 24
         },
         {
           "value": "current",
@@ -623,6 +623,10 @@
       "file": "councilSessions.json",
       "field": "summaryStatus",
       "distinctValues": [
+        {
+          "value": "unavailable",
+          "count": 19
+        },
         {
           "value": "verified",
           "count": 42
