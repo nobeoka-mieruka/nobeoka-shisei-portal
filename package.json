@@ -54,6 +54,11 @@
     "lint": "oxlint",
     "check": "npm run validate:data && npm run typecheck && npm run lint && npm run build",
     "quality:check": "node scripts/quality-check.mjs",
+    "update:bills:dry-run": "node scripts/auto-update/bills/update-bills.mjs",
+    "update:questions:dry-run": "node scripts/auto-update/questions/update-questions.mjs",
+    "update:finance:dry-run": "node scripts/auto-update/finance/update-finance.mjs",
+    "update:population:dry-run": "node scripts/auto-update/population/update-population.mjs",
+    "update:all:dry-run": "npm run update:bills:dry-run && npm run update:questions:dry-run && npm run update:finance:dry-run && npm run update:population:dry-run",
     "release:check": "npm run build && node scripts/release-check.mjs",
     "preview": "vite preview",
     "deploy": "wrangler deploy"

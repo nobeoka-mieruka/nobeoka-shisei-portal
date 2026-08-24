@@ -1,10 +1,10 @@
 {
-  "runAt": "2026-08-10T00:06:09.944Z",
-  "dryRun": false,
-  "forced": true,
+  "runAt": "2026-08-23T23:33:25.978Z",
+  "dryRun": true,
+  "forced": false,
   "lastSuccessfulRunAt": null,
   "hoursSinceLast": null,
-  "gateReason": "force",
+  "gateReason": "no-previous-record",
   "ran": true,
   "allowedHosts": [
     "www.city.nobeoka.miyazaki.jp",
@@ -19,9 +19,9 @@
       "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
       "status": "ok",
       "detected": 2,
-      "new": 0,
+      "new": 2,
       "updated": 0,
-      "unchanged": 2,
+      "unchanged": 0,
       "removedSuspected": 0,
       "urlChangeSuspected": 0,
       "errors": 0
@@ -74,7 +74,8 @@
       "categoryLabel": "議員名簿（変更検知）",
       "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
       "status": "ok",
-      "changed": false
+      "changed": false,
+      "note": "dry-run: 未保存"
     }
   ],
   "unavailableCategories": [
@@ -98,7 +99,7 @@
     }
   ],
   "fetchStats": {
-    "checked": 55,
+    "checked": 6,
     "count429": 0,
     "count403": 0,
     "count5xx": 0,

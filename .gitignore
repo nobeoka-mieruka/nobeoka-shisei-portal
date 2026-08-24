@@ -34,6 +34,10 @@ scripts/.cache/
 scripts/_sync-state.json
 scripts/_archive-crawler-sync-state.json
 
+# scripts/auto-update/{finance,population}/update-*.mjs のクロス実行ハッシュ比較用ローカル状態
+# （前回取得時のcontent hash等）。上記と同じ理由でGit管理外とする。
+scripts/auto-update/*/state/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

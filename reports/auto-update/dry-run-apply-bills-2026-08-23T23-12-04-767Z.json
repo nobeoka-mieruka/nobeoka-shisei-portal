@@ -1,0 +1,174 @@
+{
+  "target": "bills",
+  "generatedAt": "2026-08-23T23:12:04.767Z",
+  "sourceReportPath": "reports/auto-update/run-bills-2026-08-23T22-45-30-426Z.json",
+  "autoApplyGreenFlag": true,
+  "isEligibleForAutoApply": true,
+  "statusSnapshot": {
+    "target": "bills",
+    "lastRunAt": "2026-08-23T22:45:30.426Z",
+    "lastSuccessfulRunAt": "2026-08-23T22:45:30.426Z",
+    "consecutiveSuccessfulRuns": 4,
+    "eligibleForAutoApply": true
+  },
+  "greenItemCount": 26,
+  "wouldApplyItems": [
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf",
+      "sessionId": "2026-06",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27188.pdf",
+      "sessionId": "2026-05-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26395.pdf",
+      "sessionId": "2026-03",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25396.pdf",
+      "sessionId": "2025-12-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25189.pdf",
+      "sessionId": "2025-12",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24487.pdf",
+      "sessionId": "2025-09",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23791.pdf",
+      "sessionId": "2025-08-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23654.pdf",
+      "sessionId": "2025-07-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23257.pdf",
+      "sessionId": "2025-06",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/22653.pdf",
+      "sessionId": "2025-05-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21853.pdf",
+      "sessionId": "2025-03",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/21047.pdf",
+      "sessionId": "2025-01-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20692.pdf",
+      "sessionId": "2024-12",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19844.pdf",
+      "sessionId": "2024-09",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19073.pdf",
+      "sessionId": "2024-06",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/18295.pdf",
+      "sessionId": "2024-05-extraordinary-01",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/18059.pdf",
+      "sessionId": "2024-05-extraordinary-02",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/17382.pdf",
+      "sessionId": "2024-03",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/16472.pdf",
+      "sessionId": "2023-12",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15532.pdf",
+      "sessionId": "2023-09",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14869.pdf",
+      "sessionId": "2023-07-extraordinary-03",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14730.pdf",
+      "sessionId": "2023-07-extraordinary-02",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14688.pdf",
+      "sessionId": "2023-07-extraordinary-01",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14665.pdf",
+      "sessionId": "2023-06",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14278.pdf",
+      "sessionId": "2023-05",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14277.pdf",
+      "sessionId": "2023-05-extraordinary",
+      "outcome": "unchanged",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    }
+  ],
+  "note": "このレコードはdry-run結果であり、本番データ（src/data/*.json）への書き込みは一切行っていない。実際の書き込みロジックは意図的に未実装（将来、人間承認プロセスとあわせて別途実装する）。"
+}

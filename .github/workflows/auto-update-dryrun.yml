@@ -1,0 +1,335 @@
+name: Auto-update pipeline (dry-run audit)
+
+# 自動更新パイプライン（Workstream E：定期実行・レポートPR化）。
+#
+# 【このworkflowが行うこと】
+# scripts/auto-update/配下の各Updater（bills=議案／questions=一般質問／finance=財政／
+# population=人口。それぞれWorkstream C・B・Dが実装するもので、このworkflow自身は
+# Updaterのロジックを持たない）を「存在するもののみ」dry-runモードで順次実行し、
+# 生成された reports/auto-update/run-*.json・status.json の差分を検出したら、
+# botブランチ経由でPull Requestを作成する（既存の.github/workflows/sync-council-data.yml・
+# civic-archive-sync.ymlと同じ方式）。
+#
+# 【このworkflowが行わないこと（重要）】
+# ・本番データ（src/data/*.json）への書き込み・commitは一切行わない
+#   （各Updaterはdry-runのみで、本番JSONを変更しない設計になっている。
+#   scripts/auto-update/bills/update-bills.mjsのコメント・reportのnoteフィールド参照）。
+# ・mainブランチへの直接push、auto-mergeは行わない（人が内容を確認してマージする）。
+# ・複数Updaterの並列実行はしない（同一の延岡市公式サイトへ負荷が集中するのを避けるため、
+#   1ジョブ内で順番に実行し、実際にHTTPアクセスを伴うUpdaterの実行後は待機を挟む）。
+#
+# 【cronの時間帯設計（UTC基準）】
+# 既存3workflowのcronは次の通り、いずれもJST深夜〜早朝に集中している：
+#   - update-council-documents.yml : UTC 21:00（JST  6:00ごろ）
+#   - sync-council-data.yml        : UTC 18:30（JST  3:30ごろ、翌日）
+#   - civic-archive-sync.yml       : UTC 19:00（JST  4:00ごろ、翌日）
+# このworkflowは重複実装防止の監査・レポート用途であり、既存3workflowと同時間帯に
+# 動くと（同一の公式サイトへのアクセス集中、GitHub Actionsランナーの取り合い、
+# artifact/PR作成のタイミング競合）が起きうるため、半日以上離れた
+# UTC 09:00（JST 18:00ごろ）に設定する。日中に完了させることで、レポート内容を
+# その日のうちに人が確認しやすくすることも意図している。
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "dry-run対象のUpdater"
+        type: choice
+        options:
+          - all
+          - bills
+          - questions
+          - finance
+          - population
+        default: all
+  schedule:
+    # 上記の理由により、既存3workflow（18:30/19:00/21:00 UTC）から離れたUTC 9:00に設定。
+    # 定期実行にはworkflow_dispatchの入力が無いため、target=all固定で実行する。
+    - cron: "0 9 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: auto-update-dryrun
+  cancel-in-progress: false
+
+jobs:
+  dryrun:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Resolve run parameters
+        id: params
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TARGET="${{ github.event.inputs.target }}"
+          else
+            TARGET="all"
+          fi
+          if [ "$TARGET" = "all" ]; then
+            echo "targets=,bills,questions,finance,population," >> "$GITHUB_OUTPUT"
+          else
+            echo "targets=,$TARGET," >> "$GITHUB_OUTPUT"
+          fi
+          echo "target_label=$TARGET" >> "$GITHUB_OUTPUT"
+
+      # 以下、Updaterごとに「選択対象か」「実装済みファイルが存在するか」を確認して実行する。
+      # 複数Updaterを同時実行しないよう、1ステップずつ順番に実行し、実際にHTTPアクセスを
+      # 行った場合のみ次のUpdaterまで待機を挟む（同一ホストへの負荷集中を避けるため）。
+      - name: "Dry-run: bills (議案・議決結果)"
+        id: run_bills
+        if: contains(steps.params.outputs.targets, ',bills,')
+        continue-on-error: true
+        run: |
+          if [ -f scripts/auto-update/bills/update-bills.mjs ]; then
+            echo "implemented=true" >> "$GITHUB_OUTPUT"
+            node scripts/auto-update/bills/update-bills.mjs
+            echo "同一ホストへの負荷集中を避けるため30秒待機します"
+            sleep 30
+          else
+            echo "implemented=false" >> "$GITHUB_OUTPUT"
+            echo "[skip] scripts/auto-update/bills/update-bills.mjs が見つかりません（未実装）"
+          fi
+
+      - name: "Dry-run: questions (一般質問)"
+        id: run_questions
+        if: contains(steps.params.outputs.targets, ',questions,')
+        continue-on-error: true
+        run: |
+          if [ -f scripts/auto-update/questions/update-questions.mjs ]; then
+            echo "implemented=true" >> "$GITHUB_OUTPUT"
+            node scripts/auto-update/questions/update-questions.mjs
+            echo "同一ホストへの負荷集中を避けるため30秒待機します"
+            sleep 30
+          else
+            echo "implemented=false" >> "$GITHUB_OUTPUT"
+            echo "[skip] scripts/auto-update/questions/update-questions.mjs が見つかりません（未実装）"
+          fi
+
+      - name: "Dry-run: finance (財政)"
+        id: run_finance
+        if: contains(steps.params.outputs.targets, ',finance,')
+        continue-on-error: true
+        run: |
+          if [ -f scripts/auto-update/finance/update-finance.mjs ]; then
+            echo "implemented=true" >> "$GITHUB_OUTPUT"
+            node scripts/auto-update/finance/update-finance.mjs
+            echo "同一ホストへの負荷集中を避けるため30秒待機します"
+            sleep 30
+          else
+            echo "implemented=false" >> "$GITHUB_OUTPUT"
+            echo "[skip] scripts/auto-update/finance/update-finance.mjs が見つかりません（未実装）"
+          fi
+
+      - name: "Dry-run: population (人口)"
+        id: run_population
+        if: contains(steps.params.outputs.targets, ',population,')
+        continue-on-error: true
+        run: |
+          if [ -f scripts/auto-update/population/update-population.mjs ]; then
+            echo "implemented=true" >> "$GITHUB_OUTPUT"
+            node scripts/auto-update/population/update-population.mjs
+            echo "同一ホストへの負荷集中を避けるため30秒待機します"
+            sleep 30
+          else
+            echo "implemented=false" >> "$GITHUB_OUTPUT"
+            echo "[skip] scripts/auto-update/population/update-population.mjs が見つかりません（未実装）"
+          fi
+
+      # 品質監査。実際に存在するnpm scriptsのみを対象にする（package.jsonに存在を確認済み：
+      # validate:data / typecheck / lint）。dry-run実行が本番データを書き換えていない前提のため、
+      # ここでのvalidate:dataは主に「このworkflow自体が誤って何かを壊していないか」の確認になる。
+      # 個々のステップはcontinue-on-error:trueとし、失敗してもレポート作成・PR作成は継続する
+      # （監査結果はPR本文に記載し、最後のステップでジョブ全体の成否に正しく反映する）。
+      - name: "Audit: validate:data"
+        id: audit_validate
+        continue-on-error: true
+        run: npm run validate:data
+
+      - name: "Audit: typecheck"
+        id: audit_typecheck
+        continue-on-error: true
+        run: npm run typecheck
+
+      - name: "Audit: lint"
+        id: audit_lint
+        continue-on-error: true
+        run: npm run lint
+
+      - name: Check for report changes
+        id: diff
+        run: |
+          if git status --porcelain -- reports/auto-update | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build PR summary from run reports
+        id: summary
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          VALIDATE_OUTCOME: ${{ steps.audit_validate.outcome }}
+          TYPECHECK_OUTCOME: ${{ steps.audit_typecheck.outcome }}
+          LINT_OUTCOME: ${{ steps.audit_lint.outcome }}
+          BILLS_IMPLEMENTED: ${{ steps.run_bills.outputs.implemented }}
+          QUESTIONS_IMPLEMENTED: ${{ steps.run_questions.outputs.implemented }}
+          FINANCE_IMPLEMENTED: ${{ steps.run_finance.outputs.implemented }}
+          POPULATION_IMPLEMENTED: ${{ steps.run_population.outputs.implemented }}
+          TARGET_LABEL: ${{ steps.params.outputs.target_label }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          git status --porcelain -- reports/auto-update \
+            | awk '{print $NF}' \
+            | grep -E 'run-.*\.json$' > /tmp/changed-reports.txt || true
+          cat > /tmp/aggregate.mjs << 'EOF'
+          import { readFileSync, existsSync, writeFileSync } from "node:fs";
+
+          const listPath = "/tmp/changed-reports.txt";
+          const files = existsSync(listPath)
+            ? readFileSync(listPath, "utf8").split("\n").map((s) => s.trim()).filter(Boolean)
+            : [];
+
+          const reports = [];
+          for (const f of files) {
+            try {
+              reports.push(JSON.parse(readFileSync(f, "utf8")));
+            } catch (e) {
+              reports.push({ target: f, parseError: e.message });
+            }
+          }
+
+          const sum = (key) => reports.reduce((s, r) => s + (r.summary?.[key] ?? 0), 0);
+          const countOutcome = (name) =>
+            reports.reduce((s, r) => s + (r.entries?.filter((e) => e.outcome === name).length ?? 0), 0);
+
+          const green = sum("green");
+          const yellow = sum("yellow");
+          const red = sum("red");
+          const error = sum("error");
+          const detected = sum("detected");
+          const newCount = countOutcome("new");
+          const updatedCount = countOutcome("updated") + countOutcome("reconciled");
+          const anyRed = red > 0 || reports.some((r) => r.overallLevel === "RED" || r.circuitBreakerTripped);
+
+          const implemented = {
+            bills: process.env.BILLS_IMPLEMENTED,
+            questions: process.env.QUESTIONS_IMPLEMENTED,
+            finance: process.env.FINANCE_IMPLEMENTED,
+            population: process.env.POPULATION_IMPLEMENTED,
+          };
+          const attempted = (t) => `,${process.env.TARGET_LABEL},`.includes(`,${t},`) || process.env.TARGET_LABEL === "all";
+
+          const lines = [];
+          lines.push("## 自動更新パイプライン dry-run監査レポート");
+          lines.push("");
+          lines.push(`- 実行日時: ${new Date().toISOString()}`);
+          lines.push(`- 実行対象（target入力）: ${process.env.TARGET_LABEL}`);
+          lines.push(`- ワークフロー実行ログ: ${process.env.RUN_URL}`);
+          lines.push("");
+          lines.push("### Updaterごとの実施状況");
+          lines.push("");
+          lines.push("| target | 選択対象 | 実装状況 |");
+          lines.push("|---|---|---|");
+          for (const t of ["bills", "questions", "finance", "population"]) {
+            const sel = attempted(t) ? "対象" : "対象外";
+            const impl = implemented[t] === "true" ? "実装済み・dry-run実行" : implemented[t] === "false" ? "未実装のためスキップ" : "未実行";
+            lines.push(`| ${t} | ${sel} | ${impl} |`);
+          }
+          lines.push("");
+          lines.push("### 検出件数（今回差分が出たレポートの合算）");
+          lines.push("");
+          lines.push(`- 検出合計: ${detected}`);
+          lines.push(`- 新規: ${newCount} / 更新: ${updatedCount}`);
+          lines.push(`- GREEN: ${green} / YELLOW: ${yellow} / RED: ${red} / ERROR: ${error}`);
+          lines.push("");
+          if (anyRed) {
+            lines.push("### ⚠️ RED判定あり");
+            lines.push("");
+            lines.push("RED判定の項目が含まれています。**このPRをauto-mergeの対象にしないでください。**人が内容を確認してください。");
+            lines.push("");
+          }
+          lines.push("### 品質監査結果");
+          lines.push("");
+          lines.push(`- validate:data: ${process.env.VALIDATE_OUTCOME}`);
+          lines.push(`- typecheck: ${process.env.TYPECHECK_OUTCOME}`);
+          lines.push(`- lint: ${process.env.LINT_OUTCOME}`);
+          if (["failure", "cancelled"].includes(process.env.VALIDATE_OUTCOME) ||
+              ["failure", "cancelled"].includes(process.env.TYPECHECK_OUTCOME) ||
+              ["failure", "cancelled"].includes(process.env.LINT_OUTCOME)) {
+            lines.push("");
+            lines.push("**品質監査のいずれかが失敗しています。マージ前に必ず内容を確認してください。**");
+          }
+          lines.push("");
+          lines.push("### このPRについて");
+          lines.push("");
+          lines.push("- 本番データ（src/data/*.json）の変更は含まれていません。すべてのUpdaterはdry-runモードで実行されています。");
+          lines.push("- 変更されているのは reports/auto-update/ 配下のレポートファイル（run-*.json・status.json）のみです。");
+          lines.push("- 本番ブランチへの自動push・自動デプロイは行っていません。人が内容を確認し、問題なければマージしてください。");
+          lines.push("");
+          lines.push("### 変更ファイル一覧");
+          for (const f of files) lines.push(`- ${f}`);
+          lines.push("- reports/auto-update/status.json（対象がある場合）");
+          lines.push("");
+
+          writeFileSync("/tmp/pr-body.md", lines.join("\n"));
+          writeFileSync(
+            "/tmp/pr-title-suffix.txt",
+            anyRed ? "RED判定あり・要確認" : `GREEN${green}/YELLOW${yellow}`,
+          );
+          EOF
+          node /tmp/aggregate.mjs
+
+      - name: Create branch, commit and open Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          BRANCH="bot/auto-update-dryrun-$(date -u +%Y%m%d%H%M%S)"
+          SUFFIX="$(cat /tmp/pr-title-suffix.txt 2>/dev/null || echo report)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add reports/auto-update
+          git commit -m "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）"
+          git push origin "$BRANCH"
+          gh pr create \
+            --title "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）" \
+            --body-file /tmp/pr-body.md \
+            --base main \
+            --head "$BRANCH"
+
+      - name: Upload dry-run reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auto-update-dryrun-reports
+          path: |
+            reports/auto-update/run-*.json
+            reports/auto-update/status.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+      # 監査（validate:data / typecheck / lint）のいずれかが失敗していた場合、レポート作成・
+      # PR作成が完了した後にジョブ全体を失敗として終了する（continue-on-error:trueにより
+      # ここまでの各ステップは実行され続けるが、GitHub Actions上でのジョブの成否は
+      # 監査結果を正しく反映させる）。
+      - name: Fail job if any audit step failed
+        if: steps.audit_validate.outcome == 'failure' || steps.audit_typecheck.outcome == 'failure' || steps.audit_lint.outcome == 'failure'
+        run: |
+          echo "品質監査（validate:data / typecheck / lint）のいずれかが失敗しました。詳細は各ステップのログを確認してください。" >&2
+          exit 1
