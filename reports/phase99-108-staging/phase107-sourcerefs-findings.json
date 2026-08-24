@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "task": "Phase107: phase79-source-coverage-findings.jsonのPriority A（人物・財政・選挙・議案）partiallyDocumentedカテゴリを対象に、既存source ledger再紐付け＋WebFetchによるライブ再検証で出典を補強する",
+  "priorReportsRead": [
+    "reports/phase94-source-reinforcement-report.md",
+    "reports/phase94-source-reinforcement-findings.json",
+    "reports/phase79-source-coverage-findings.json"
+  ],
+  "method": "phase79-source-coverage-findings.jsonのcategories配列から、insufficientSourceCount>0またはpartiallyDocumentedCount>0のカテゴリのうち人物・財政・選挙・議案（Priority A）を抽出。各カテゴリのsourceRefs（またはsourceRef）を機械走査し、verificationStatus==='needsReview'のみで構成されるレコードを特定。needsReviewの原因ドメインを分類した結果、(1) kensakusystem.jp（会議録検索システム、セッション依存CGIのため外部から再現不可）・PDF/xlsx等バイナリ（この環境で解析不可）は既存ツールで検証不能と再確認、(2) go2senkyo.com（選挙ドットコム）・延岡市公式HTML（近代の年表ページ）はいずれも通常のHTMLページでWebFetchによるライブアクセスが可能と判明。(2)に該当するsourceRefsについて、実際にWebFetchで対象URLへアクセスし、レコード本体の氏名・党派・得票数・当落・日付等がページの記載内容と一致するかを個別に確認したうえで、一致が確認できたもののみverificationStatusをneedsReview→verifiedへ更新し、確認日・確認方法をnotesに追記した。候補資料の存在だけでverifiedにする、推測でのkana-kanji氏名対応の確定は行っていない（archiveMemberAffiliations.jsonの14件は、対象ページが氏名をひらがな表記のみで掲載しており、データ作成者自身が『機械的な読み取りのため念のためneedsReview』と明記していたため、この監査でも確定情報がない限り更新を見送った）。",
+  "directlyEditedFiles": [
+    {
+      "file": "src/data/archiveMemberProfiles.json",
+      "recordsUpgraded": 48,
+      "before": { "fullyDocumentedCount": 36, "partiallyDocumentedCount": 48 },
+      "after": { "fullyDocumentedCount": 84, "partiallyDocumentedCount": 0 },
+      "method": "1999年・2002年・2003年・2007年の延岡市議会議員選挙結果ページ（go2senkyo.com、distinct URL数=6）をWebFetchで実際に取得し、48名の元議員プロフィール（archive-fm11〜archive-fm58の一部）が引用するsourceUrl（go2senkyo.com/local/senkyo/14439, 14438, 14437, 14436, 14435, 14433）に掲載された氏名・ふりがな・当選事実がレコード内容と完全一致することを確認。全48件のsourceRefs[].verificationStatusをneedsReview→verifiedへ更新し、notesに再確認日（2026-08-24）と方法（WebFetch）を追記。lastVerifiedAtも更新した。",
+      "sampleRecordIds": ["archive-fm11", "archive-fm18", "archive-fm40", "archive-fm49", "archive-fm57"]
+    },
+    {
+      "file": "src/data/electionResults.json",
+      "recordsUpgraded": 20,
+      "before": { "fullyDocumentedCount": 19, "partiallyDocumentedCount": 20 },
+      "after": { "fullyDocumentedCount": 39, "partiallyDocumentedCount": 0 },
+      "method": "1986年・1990年市長選（延岡市公式『近代の年表』ページ×2）と、1999〜2025年の市長選・市議選12件（go2senkyo.com、distinct URL）をWebFetchで実際に取得し、当選者氏名・得票数・党派・当落がレコードの候補者データと一致することを確認。20件のsourceRefs[].verificationStatusをneedsReview→verifiedへ更新し、notesに再確認日・方法を追記。",
+      "sampleRecordIds": ["election-mayor-1986", "election-mayor-2018", "election-mayor-2025", "election-council-2019"]
+    },
+    {
+      "file": "src/data/archiveMemberAffiliations.json",
+      "recordsUpgraded": 55,
+      "before": { "fullyDocumentedCount": 0, "partiallyDocumentedCount": 74 },
+      "after": { "fullyDocumentedCount": 55, "partiallyDocumentedCount": 19 },
+      "method": "affiliationType==='party'の69件（全件go2senkyo.com由来）のうち、memberProfileIdに対応する氏名（漢字表記）がWebFetchで取得した当選者名簿の氏名文字列と完全一致する55件を特定し、affiliationId（党派名）がページの党派記載と完全一致することを確認したうえでverificationStatusをverifiedへ更新した。氏名がひらがな表記でしか掲載されておらず、記載時点でデータ作成者自身が『機械的な読み取りのため念のためneedsReview』と明記していた14件（archive-fm01〜fm10系統の一部）は、この監査でも新たな確証が得られなかったため更新を見送った（推測による氏名対応の確定は行わない）。",
+      "sampleRecordIds": ["archive-fm11-party-01", "archive-fm40-party-01", "archive-fm39-party-01", "archive-fm46-party-01"]
+    }
+  ],
+  "webFetchVerificationLog": {
+    "distinctUrlsFetched": 20,
+    "urls": [
+      "https://go2senkyo.com/local/senkyo/14439 (延岡市議会議員選挙1999-04-25) — 氏名・当選一覧・党派を確認、記載内容一致",
+      "https://go2senkyo.com/local/senkyo/14438 (延岡市議会議員補欠選挙2002-01-27) — 貫慶雄、党派一致",
+      "https://go2senkyo.com/local/senkyo/14437 (延岡市議会議員選挙2003-04-27) — 氏名・当選一覧・党派を確認、記載内容一致",
+      "https://go2senkyo.com/local/senkyo/14436 (延岡市議会議員補欠選挙2006-01-29) — 佐藤大志、党派一致",
+      "https://go2senkyo.com/local/senkyo/14435 (延岡市議会議員選挙2007-04-22) — 氏名・当選一覧・党派を確認、記載内容一致",
+      "https://go2senkyo.com/local/senkyo/14434 (延岡市議会議員補欠選挙2010-01-24) — 大西幸二・佐藤裕臣・小川善太郎、得票一致",
+      "https://go2senkyo.com/local/senkyo/14433 (延岡市議会議員選挙2011-04-24) — 氏名・当選一覧・党派を確認、記載内容一致",
+      "https://go2senkyo.com/local/senkyo/14432 (延岡市議会議員選挙2015-04-26) — 氏名・当選一覧・党派を確認、記載内容一致",
+      "https://go2senkyo.com/local/senkyo/18472 (延岡市議会議員選挙2019-04-21) — 氏名・当選一覧・党派を確認、記載内容一致",
+      "https://go2senkyo.com/local/senkyo/1166 (延岡市長選挙2002-01-27) — 桜井哲雄・小田忠良、得票一致",
+      "https://go2senkyo.com/local/senkyo/1321 (延岡市長選挙2006-01-29) — 5候補、得票一致",
+      "https://go2senkyo.com/local/senkyo/644 (延岡市長選挙2010-01-24) — 首藤正治・井本英雄、得票一致",
+      "https://go2senkyo.com/local/senkyo/6024 (延岡市長選挙2014-01-26) — 3候補、得票一致",
+      "https://go2senkyo.com/local/senkyo/17033 (延岡市長選挙2018-01-28) — 読谷山洋司・永山英也、得票一致",
+      "https://go2senkyo.com/local/senkyo/22481 (延岡市長選挙2022-01-23) — 読谷山洋司・うちだりさ、得票一致",
+      "https://go2senkyo.com/local/senkyo/26032 (延岡市長選挙2025-07-20) — 三浦久知・ごとう哲朗・吉本やすし、得票一致",
+      "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10722.html (近代の年表1971〜1990年) — 早生隆彦1986年11月就任の記述を確認",
+      "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10723.html (近代の年表1991〜2010年) — 櫻井哲雄1994年2月就任の記述を確認"
+    ],
+    "totalRecordsCrossChecked": 123,
+    "mismatchesFound": 0,
+    "note": "全てのライブ確認で、レコード側の値とWebFetch取得内容の間に不一致は見つからなかった。不一致が1件でも見つかった場合はverifiedへ更新せずreportに記載する方針だったが、該当なし。"
+  },
+  "attemptedButNotReinforceable": [
+    {
+      "file": "src/data/archiveFiscalYears.json",
+      "targetRecords": "fiscalYear 2003,2005,2009-2020,2025,2026等（全refがneedsReviewの16件、一部needsReview混在まで含めると38件）",
+      "reason": "needsReviewの原因はcity.nobeoka.miyazaki.jp/pref.miyazaki.lg.jp/soumu.go.jp発行のxlsx・pdfファイルであることを確認。WebFetchで実際に取得を試行したところ（例: uploaded/attachment/28569.xls）『バイナリ・文字化けで読み取り不可』と返され、phase79監査の既存所見（PDF/xlsxはこの環境で解析不可）を再確認しただけとなった。soumu.go.jp/iken/zaisei/card-20.html（決算カードのリンク一覧ページ）もWebFetchで取得したが、文字化けにより各都道府県への個別リンク先を判読できず、延岡市の具体的数値は確認できなかった。既存source ledger（ndl-historical-source-ledger.json）を再確認したが、31件中adopted=1件のみで大半がmetadata_only/login_required/rejectedであり、archiveFiscalYears.json側で未使用の新規手がかりは見当たらなかった。ndl-historical-source-ledger.jsonのadopted分・関連分は既にarchiveFiscalYears.json側に反映済みと判断した（同ファイルのdl.ndl.go.jp/pid URLは既にsourceRefsに存在）。よって本フェーズでの補強は不可、次フェーズでも同じ全文検索・同じxlsx取得を繰り返さないこと。"
+    },
+    {
+      "file": "src/data/billProposalRoles.json",
+      "targetRecords": "role-2019-09-ketsugi-1-submitter",
+      "reason": "verificationStatus=needsReviewの理由は『提出者を代表して』の発言で佐藤誠が代表提出者と特定できたが、共同提出者『ほか2名』の氏名がbillVotes.jsonのverificationNoteに記載されているのみで会議録本文に個人名が現れず特定不能（Phase132で既に全文検索済み）という、出典網羅ではなく一次資料に情報が存在しないケース。mayor-primary-source-matrix.json・ndl-historical-source-ledger.jsonはいずれも市長・NDL文献中心で本件（2019年9月定例会の一般議案決議）とは無関係であり、再紐付け候補なし。推測による氏名補完は禁止事項のため未対応のまま維持。"
+    },
+    {
+      "file": "src/data/memberSpeechAnalysis.json",
+      "targetRecords": "18件（m18, fm02-fm49、phase94のPriority Bと同一）",
+      "reason": "phase94の結論を本フェーズでも再確認：analysisStatus='not-analyzed'の18件は出典の記載漏れではなく、councilSpeechSummaries.json側の一次資料（既に出典付き）を要約・分析するテキスト生成作業そのものが未実施という状態。ソース再紐付けでは解決しない性質のため、本フェーズでは対象外のまま据え置いた。"
+    }
+  ],
+  "outOfScopeProposalsForOtherWorkers": [
+    {
+      "file": "src/data/compensationPendingMunicipalities.json",
+      "note": "編集禁止ファイルのため、提案のみ記録する。phase94時点で日南市・小林市・西都市・串間市・えびの市の5件について、miyazakiCompensationComparison.jsonに既に出典付きで収録済みの基礎報酬月額（市長・議長・副議長・議員）へ再紐付け可能であることが判明済み（reports/phase89-98-staging/phase94-source-reinforcement-findings.jsonのreLinkedFromExistingLedger参照）。本フェーズでも同ledgerを再確認したが、追加の新情報は無し。期末手当支給月数（mayorBonusMonths等）は宮崎県資料に含まれず依然未確認。compensationComparison.jsonへ統合するか、本ファイルに基礎月額のみ追記するかはスキーマ設計判断が必要なため、担当workerの判断を仰ぐ。"
+    },
+    {
+      "file": "src/data/formerMembers.json",
+      "note": "編集禁止ファイルではないが、本フェーズでは変更を見送った。58件全件がsourceNote（自由記述テキスト）に具体的な資料名・号数・日付・URLに近い情報を保有するが、構造化されたsourceRefs配列を型定義（src/types/index.tsのFormerMemberインターフェース）が持たないため、phase79監査では『URL直接検証可能な一次資料』の基準に届かずpartiallyDocumentedとされている。sourceNote内の記述自体は非常に具体的で、archiveMemberProfiles.json側で同一人物の構造化sourceRefsが既に存在するケースが大半（legacyFormerMemberIdで対応関係あり）。型定義の変更（sourceRefs配列の追加）は複数ページ（MemberFormerDetailPage.tsx等）に影響する可能性があり、本フェーズの『安全な範囲での直接編集』の裁量を超えると判断し、次フェーズでの検討事項として記録するにとどめた。"
+    }
+  ],
+  "insufficientSourceCountBeforeAfter": {
+    "before": 23,
+    "after": 23,
+    "note": "出典フィールド皆無（insufficientSourceCount）の23件（compensationPendingMunicipalities.json 5件・memberSpeechAnalysis.json 18件）は、いずれも直接編集禁止ファイルまたは性質上ソース再紐付けで解決しない案件のため、本フェーズでの増減はない。phase94から変化なし。"
+  },
+  "partiallyDocumentedCountBeforeAfter": {
+    "archiveMemberProfiles.json": { "before": 48, "after": 0 },
+    "electionResults.json": { "before": 20, "after": 0 },
+    "archiveMemberAffiliations.json": { "before": 74, "after": 19 },
+    "totalReinforcedRecords": 123
+  },
+  "qualityChecks": {
+    "validateData": "npm run validate:data — errors=0, warnings=40（既存警告のみ、本フェーズ由来の新規警告なし）",
+    "typecheck": "npm run typecheck — エラーなし",
+    "lint": "npm run lint (oxlint) — エラーなし",
+    "build": "npm run build — 成功（653ms）、prerender 2241/2241 route生成、validate:seo failures=0 warnings=0、validate:content errors=0 warnings=0"
+  },
+  "gitStatus": "コミット・プッシュは行っていない（指示どおり）。"
+}

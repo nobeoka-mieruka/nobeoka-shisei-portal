@@ -49,10 +49,16 @@ export const verificationStatusLabels: Record<BillVerificationStatus, string> = 
  * ここでは扱わない。
  */
 export function memberVotesUnavailableReason(bill: BillVoteItem): string {
+  // verificationNoteは通常「確認作業中（isVerified===false）」の案件向けの注記だが、
+  // 個人別賛否が0件のnotDisclosed案件では、verificationStatus="verified"であっても
+  // 会議録の討論記録から一部議員の賛否が判明している場合があり、その内容はここでのみ
+  // 市民へ伝わる（Phase100-101、2026-08-24）。誤解を招かないよう、あくまで補足情報として
+  // 末尾に付記するに留め、個人別賛否の一覧（memberVotes）には追加しない。
+  const supplement = bill.verificationNote ? ` ${bill.verificationNote}` : "";
   if (bill.individualVoteDisclosureStatus === "notDisclosed") {
-    return `会議録で確認した結果、この議案は起立採決等（記名投票以外の方法）で議決されており、公式資料に議員個人の賛成・反対は記録されていません。${bill.lastVerified ? `（${bill.lastVerified}確認）` : ""}全会一致と記録されている場合でも、在席者・欠席者・議長・除斥者が確認できないため、推測で議員個人の賛否を割り当てることはしていません。`;
+    return `会議録で確認した結果、この議案は起立採決等（記名投票以外の方法）で議決されており、公式資料に議員個人の賛成・反対は記録されていません。${bill.lastVerified ? `（${bill.lastVerified}確認）` : ""}全会一致と記録されている場合でも、在席者・欠席者・議長・除斥者が確認できないため、推測で議員個人の賛否を割り当てることはしていません。${supplement}`;
   }
-  return "個人別の表決：現時点で確認できる公式資料には、各議員の賛成・反対・棄権等が明確に掲載されていません。全会一致と記録されている場合でも、在席者・欠席者・議長・除斥者が確認できないため、推測で議員個人の賛否を割り当てることはしていません。";
+  return `個人別の表決：現時点で確認できる公式資料には、各議員の賛成・反対・棄権等が明確に掲載されていません。全会一致と記録されている場合でも、在席者・欠席者・議長・除斥者が確認できないため、推測で議員個人の賛否を割り当てることはしていません。${supplement}`;
 }
 
 /**

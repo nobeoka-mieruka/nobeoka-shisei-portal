@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "gitHead": "6c561dc73f5cc46809d720e881b3da2ef67b732f",
+  "note": "Phase99-108着手前の実データ再計算値。前回報告のテキスト値を固定値として使わず、この時点で再計算した。",
+  "unresolvedLedger": {
+    "totalItems": 31,
+    "byStatus": {
+      "disputed": 3,
+      "unconfirmed": 6,
+      "partially_resolved": 4,
+      "not_collected": 7,
+      "under_review": 2,
+      "reference_pending": 5,
+      "resolved": 4
+    }
+  },
+  "validateData": {
+    "errors": 0,
+    "warnings": 40
+  },
+  "billVotes": {
+    "total": 1177,
+    "individualVotesRecorded": 2,
+    "voteMethodBreakdown": {
+      "unset": 24,
+      "簡易採決": 1093,
+      "起立多数": 43,
+      "起立少数": 9,
+      "記名投票": 2,
+      "採決なし": 4,
+      "全会一致": 2
+    },
+    "disclosureStatus": {
+      "unconfirmed": 654,
+      "notDisclosed": 521,
+      "disclosed": 2
+    }
+  },
+  "sourceRefsCoverage": {
+    "asOf": "phase79/phase94時点(2026-08-23)を再利用。全32カテゴリの悉皆再監査は未実施",
+    "fullyDocumented": 2294,
+    "partiallyDocumented": 299,
+    "insufficientSource": 23
+  },
+  "linkHealth": {
+    "generatedAt": "2026-08-16T23:25:10.204Z",
+    "note": "Phase99実行前の最終スナップショット。2026-08-16時点で停滞",
+    "totalChecked": 677,
+    "ok": 653,
+    "redirect": 10,
+    "notFound404": 4,
+    "serverError": 7
+  },
+  "personTermGaps": {
+    "citySpecialPosts_appointedDateNull": 6,
+    "citySpecialPosts_appointedDateNullIds": [
+      "csp-43",
+      "csp-44",
+      "csp-45",
+      "csp-48",
+      "csp-49",
+      "csp-56"
+    ],
+    "archiveMayorTerms_dateGaps": 13,
+    "note": "Phase92の23件(A3+B7+C13)から2件(G3,P4)が既に解決済み。ここではcitySpecialPosts.jsonのappointedDate=null実測値(6件)とarchiveMayorTerms.jsonの13区間を別集計とした。"
+  },
+  "afterPhase99to108": {
+    "generatedAt": "2026-08-24T00:00:00+09:00",
+    "unresolvedLedger": {
+      "totalItems": 31,
+      "note": "前後で件数・byStatus分布とも変化なし（新規のオンライン解決0件、水増しなし）"
+    },
+    "validateData": {
+      "errors": 0,
+      "warnings": 40,
+      "note": "変化なし（新規warning・false positiveなし）"
+    },
+    "linkHealth": {
+      "totalChecked": 838,
+      "ok": 817,
+      "redirect": 12,
+      "notFound404": 6,
+      "serverError": 0,
+      "brokenTotal": 6,
+      "note": "677/11broken(2026-08-16) から 838/6broken(2026-08-24) へ更新。7件のserverErrorはWayback一時障害と判明し解消、404は2件bot管理領域で新規検出のためhandoff"
+    },
+    "sourceRefsCoverage": {
+      "fullyDocumented": 2417,
+      "partiallyDocumented": 176,
+      "insufficientSource": 23,
+      "note": "Phase107で123件をneedsReview→verifiedへ実地再確認のうえ格上げ（archiveMemberProfiles 48/electionResults 20/archiveMemberAffiliations 55）。出典なし23件は対象外ファイル(compensationPendingMunicipalities/memberSpeechAnalysis)のため変化なし"
+    },
+    "billVotesPilot": {
+      "pilotSessions": 9,
+      "pilotBills": 18,
+      "confirmedNotDisclosed": 11,
+      "partialDiscloserInfoAdded": 7,
+      "remainingClassCBacklog": 34,
+      "individualVoteDisclosureStatusChange": 0,
+      "note": "18件とも既にindividualVoteDisclosureStatus=notDisclosedだったため状態遷移はなし。会議録本文での実地確認によりverificationNoteを追記し、UIのmemberVotesUnavailableReason()経由で市民にも表示されるよう改善"
+    },
+    "citySpecialPosts": {
+      "csp49": "unedited（前担当者の明示的な申し送りを尊重し反映保留）",
+      "csp56": "termNote文言修正（議決日と任期開始日の混同を解消）",
+      "csp57": "nameを「（後藤）三樹博」から「三樹博」へ変更しcsp-54と真に一致する表記へ統一、notes訂正",
+      "personTermGapsResolvedOnline": 0
+    }
+  }
+}

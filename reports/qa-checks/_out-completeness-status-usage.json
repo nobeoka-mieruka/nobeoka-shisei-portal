@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T03:17:41.951Z",
+  "generatedAt": "2026-08-24T06:09:09.374Z",
   "filesScanned": 71,
   "statusLikeFieldCount": 60,
   "completenessStatusVocabulary": [
@@ -337,7 +337,11 @@
       "distinctValues": [
         {
           "value": "needsReview",
-          "count": 74
+          "count": 19
+        },
+        {
+          "value": "verified",
+          "count": 55
         }
       ]
     },
@@ -361,11 +365,11 @@
       "distinctValues": [
         {
           "value": "verified",
-          "count": 65
+          "count": 113
         },
         {
           "value": "needsReview",
-          "count": 52
+          "count": 4
         }
       ]
     },
@@ -807,11 +811,11 @@
       "distinctValues": [
         {
           "value": "needsReview",
-          "count": 24
+          "count": 4
         },
         {
           "value": "verified",
-          "count": 25
+          "count": 45
         }
       ]
     },

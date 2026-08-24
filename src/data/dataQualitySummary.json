@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T03:23:53.293Z",
+  "generatedAt": "2026-08-24T06:07:11.888Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 15,
@@ -7,17 +7,18 @@
     "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは出典タイトル欠落等の改善余地、infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
   },
   "linkHealth": {
-    "generatedAt": "2026-08-16T23:25:10.204Z",
-    "totalChecked": 677,
-    "ok": 653,
-    "redirect": 10,
-    "notFound404": 4,
-    "serverError": 7,
+    "generatedAt": "2026-08-24T03:54:04.694Z",
+    "totalChecked": 838,
+    "ok": 817,
+    "redirect": 12,
+    "notFound404": 6,
+    "serverError": 0,
     "broken": [
       {
         "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
         "files": [
-          "archiveMayorTerms.json"
+          "archiveMayorTerms.json",
+          "dataQualitySummary.json"
         ],
         "category": "not_found_404",
         "status": 404
@@ -25,73 +26,31 @@
       {
         "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
         "files": [
-          "archiveMayors.json",
-          "archiveMayorTerms.json"
+          "dataQualitySummary.json"
         ],
         "category": "not_found_404",
         "status": 404
       },
       {
-        "url": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
         "files": [
-          "archiveFiscalYears.json"
+          "councilWatchedDocuments.json"
         ],
-        "category": "server_error",
-        "status": 503
-      },
-      {
-        "url": "https://web.archive.org/web/20140715095752/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140324102214",
-        "files": [
-          "archiveMayors.json"
-        ],
-        "category": "server_error",
-        "status": 503
-      },
-      {
-        "url": "https://web.archive.org/web/20140715140122/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2006year.html",
-        "files": [
-          "civicTimelineEvents.json"
-        ],
-        "category": "server_error",
-        "status": 503
-      },
-      {
-        "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html",
-        "files": [
-          "civicTimelineEvents.json"
-        ],
-        "category": "server_error",
-        "status": 503
-      },
-      {
-        "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
-        "files": [
-          "civicTimelineEvents.json"
-        ],
-        "category": "server_error",
-        "status": 503
-      },
-      {
-        "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html",
-        "files": [
-          "civicTimelineEvents.json"
-        ],
-        "category": "server_error",
-        "status": 503
-      },
-      {
-        "url": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
-        "files": [
-          "archiveMayors.json",
-          "archiveMayorTerms.json"
-        ],
-        "category": "server_error",
-        "status": 503
+        "category": "not_found_404",
+        "status": 404
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
         "files": [
-          "municipalityComparison.json"
+          "dataQualitySummary.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
+        "files": [
+          "councilWatchedDocuments.json"
         ],
         "category": "not_found_404",
         "status": 404
@@ -99,8 +58,7 @@
       {
         "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
         "files": [
-          "archiveMayors.json",
-          "archiveMayorTerms.json"
+          "dataQualitySummary.json"
         ],
         "category": "not_found_404",
         "status": 404

@@ -1,0 +1,160 @@
+{
+  "task": "Phase99: linkHealth（外部リンク健全性）再実測",
+  "method": "手動WebFetchではなく、既存の自動監査基盤 scripts/check-external-links.mjs（実fetch・HEAD優先→GETフォールバック・1回リトライ・ホスト毎に直列＋間隔制御）を --force で全件再実行し、reports/external-link-check.json（監査キャッシュ）を更新。加えて --sample-kensakusystem=60 で会議録検索システム（kensakusystem.jp、通常除外対象・約4,600件）から60件を無作為抽出して追加確認。個別に重要な11件（前回broken一覧）は結果を突合のうえ、Wikipedia・宮崎日日新聞（miyanichi）記事についてはnode fetchで直接再確認・検索確認も実施。",
+  "beforeState": {
+    "source": "src/data/dataQualitySummary.json (更新前)",
+    "generatedAt": "2026-08-16T23:25:10.204Z",
+    "totalChecked": 677,
+    "ok": 653,
+    "redirect": 10,
+    "notFound404": 4,
+    "serverError": 7,
+    "brokenCount": 11
+  },
+  "afterState": {
+    "source": "reports/external-link-check.json（今回更新、非kensakusystemは733件を全件フレッシュ再検証、kensakusystemは60件を追加サンプル確認）",
+    "generatedAt": "2026-08-24T03:54:04.694Z",
+    "checkedThisRun": {
+      "nonKensakusystemTargets": 733,
+      "nonKensakusystemFresh": 733,
+      "nonKensakusystemCacheReused": 0,
+      "kensakusystemSampleNewlyChecked": 60,
+      "kensakusystemCumulativeEverRecorded": 99,
+      "totalTargetsThisRun": 793
+    },
+    "projectedDataQualitySummaryLinkHealth": {
+      "note": "scripts/generate-quality-summary.mjsと同一ロジックで、reports/external-link-check.jsonから*.backup.json専用参照を除外して算出した予測値。npm run buildで実際にsrc/data/dataQualitySummary.jsonへ反映される想定値（本タスクでは直接編集していない）。",
+      "totalChecked": 838,
+      "ok": 817,
+      "redirect": 12,
+      "notFound404": 6,
+      "serverError": 0
+    }
+  },
+  "classificationBreakdown": {
+    "healthy_ok": 817,
+    "redirect_expected_behavior": 12,
+    "broken_404": 6,
+    "server_error": 0,
+    "timeout": 0,
+    "ssl_error_or_blocked": 0,
+    "note": "timeout/server_errorは今回0件。前回serverError=7件は全てWayback Machineの一時的な503障害で、今回は7件とも200または302→200へ回復（自然回復、当サイト側の問題ではなかったことを確認）。"
+  },
+  "previousBroken11Recheck": [
+    {
+      "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
+      "previousStatus": "not_found_404",
+      "currentStatus": "not_found_404",
+      "verifiedBy": "node fetch（直接） + Wikipedia内検索（WebFetch）",
+      "detail": "記事は現在も存在しない（Wikipedia内検索で「仲田又次郎」という独立記事は見つからず、延岡市ページ等に言及があるのみと確認）。同一事実は同ファイル内でkotobank.jp（生存）・延岡市公式ページで既に裏付け済みのため実害は小さいが、リンク自体は依然切れている。",
+      "action": "編集せず。推測でURLを差し替えられないため、findings記録のみ。"
+    },
+    {
+      "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
+      "previousStatus": "not_found_404",
+      "currentStatus": "not_found_404（アクティブなsourceUrlとしては既に不使用）",
+      "detail": "archiveMayors.json・archiveMayorTerms.jsonでは既にPhase96（2026-08-23、本タスク開始前）でWayback保存版（https://web.archive.org/web/20250605023234/https://news.yahoo.co.jp/articles/54bca0...）へ差し替え済みと確認。現在この元URLはdataQualitySummary.jsonの旧broken一覧テキストにのみ残存。",
+      "action": "編集不要（既に前フェーズで対応済み。次回generate-quality-summary実行で自動的に一覧から消える）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20111114185739/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2011_05.pdf",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "redirect(302)→200",
+      "detail": "Waybackが厳密なタイムスタンプの代わりに直近スナップショット(20140715111156)へ302リダイレクト、最終到達は200。",
+      "action": "編集不要（正常な状態に回復）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20140715095752/http://www.city.nobeoka.miyazaki.jp/display.php?cont=140324102214",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "ok(200)",
+      "action": "編集不要（回復）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20140715140122/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2006year.html",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "ok(200)",
+      "action": "編集不要（回復）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20140715141044/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2008year.html",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "ok(200)",
+      "action": "編集不要（回復）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "ok(200)",
+      "action": "編集不要（回復）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20140715144720/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2007year.html",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "ok(200)",
+      "action": "編集不要（回復）。"
+    },
+    {
+      "url": "https://web.archive.org/web/20190701010720/http://www.city.nobeoka.miyazaki.jp/display.php?cont=180131171602",
+      "previousStatus": "server_error(503)",
+      "currentStatus": "ok(200)",
+      "action": "編集不要（回復）。"
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
+      "previousStatus": "not_found_404",
+      "currentStatus": "not_found_404（アクティブなsourceUrlとしては既に不使用）",
+      "detail": "municipalityComparison.jsonでは既に2026-08-11時点でattachment/28569.xls（archiveFiscalYears.json等と同一の最新版）へ差し替え済みと確認（同ファイルのnotesにも記録あり）。現在この元URLはdataQualitySummary.jsonの旧broken一覧テキストにのみ残存。",
+      "action": "編集不要（既に前フェーズで対応済み）。"
+    },
+    {
+      "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
+      "previousStatus": "not_found_404",
+      "currentStatus": "not_found_404（アクティブなsourceUrlとしては既に不使用）",
+      "detail": "archiveMayors.json・archiveMayorTerms.json・municipalityComparison.jsonでは既にPhase96（2026-08-23、本タスク開始前）でWayback保存版（https://web.archive.org/web/20250613112338/https://www.the-miyanichi.co.jp/kennai/_84868.html）へ差し替え済みと確認。",
+      "action": "編集不要（既に前フェーズで対応済み）。"
+    }
+  ],
+  "newlyDiscoveredIssues": [
+    {
+      "urls": [
+        "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
+        "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf"
+      ],
+      "files": ["councilWatchedDocuments.json"],
+      "status": "not_found_404（新規検出、前回2026-08-16のbroken一覧には無かった）",
+      "detail": "第26回市議会定例会の会議日程PDF・令和8年度常任委員会等開催予定表PDF。いずれも特定会期の告知資料で、会期終了後に市サイト側でファイルが撤去された可能性が高い（一時的な会期告知PDFの典型的なライフサイクル）。このデータはfirstDetectedAt/lastCheckedAt/missingStreak等の追跡フィールドを持ち、scripts/sync-council-data.mjsが管理する自動監視データであることを確認した。",
+      "action": "本タスクの対象外と判断し編集しなかった。councilWatchedDocuments.jsonは他workerの予約ファイルではないが、専用の自動追跡パイプライン（sync-council-data.mjs、missingStreak管理）が別途この種の「資料消失」を検出・追跡する設計になっているため、手動でsourceUrlを書き換えるとそのパイプラインの整合性を崩す恐れがあると判断した。sync-council-data担当workerへの申し送り事項として記録する。"
+    }
+  ],
+  "redirectsReviewed": {
+    "count": 10,
+    "note": "全て公式サイト移転ではなく、想定内の正常なリダイレクト挙動と判断。URLの書き換えは行っていない。",
+    "items": [
+      { "url": "https://kotobank.jp/word/%E4%B8%89%E6%B5%A6%20%E8%99%8E%E9%9B%84-1678003", "finalUrl": "https://kotobank.jp/word/%E4%B8%89%E6%B5%A6%E8%99%8E%E9%9B%84-1678003", "reason": "URLエンコード上の空白除去のみ。内容は同一。", "files": ["archiveMayors.json"] },
+      { "url": "https://lin.ee/HLXDNIS", "finalUrl": "https://line.me/R/ti/p/@674sqgtj", "reason": "LINE公式の短縮URLは常にline.meへリダイレクトする仕様（正常動作）。", "files": ["members.json"] },
+      { "url": "https://ops-jg.d1-law.com/opensearch/SrMjF01/init?jctcd=8A91AC49CD", "finalUrl": "https://ops-jg.d1-law.com/opensearch/css/font.css", "reason": "会議規則検索システムのセッション依存URL。深いリンクが期限切れになるとCSSアセットへ302する既知の仕様。移転ではない。", "files": ["committees.json"] },
+      { "url": "https://www.facebook.com/100080664301633/", "finalUrl": "https://www.facebook.com/people/...", "reason": "Facebookの数値IDから正規化URLへの自動リダイレクト（正常動作）。", "files": ["members.json"] },
+      { "url": "https://www.facebook.com/100083679123855/", "finalUrl": "https://www.facebook.com/people/...", "reason": "同上。", "files": ["members.json"] },
+      { "url": "https://www.facebook.com/579107342584087/", "finalUrl": "https://www.facebook.com/100027116246393/", "reason": "同上。", "files": ["members.json"] },
+      { "url": "https://www.facebook.com/profile.php?id=100007160117141", "finalUrl": "https://www.facebook.com/people/...", "reason": "同上。", "files": ["members.json"] },
+      { "url": "https://www.facebook.com/profile.php?id=100039255065122", "finalUrl": "https://www.facebook.com/people/...", "reason": "同上。", "files": ["members.json"] },
+      { "url": "https://www.komei.or.jp/km/nobeoka-ono-syoji/", "finalUrl": "同一パス＋doing_wp_cronクエリ付与", "reason": "WordPressのcronトリガーによる一時的なクエリ付与（正常動作、内容は同一ページ）。", "files": ["members.json"] },
+      { "url": "https://www.komei.or.jp/km/nobeoka-yamamoto-akemi/", "finalUrl": "同一パス＋doing_wp_cronクエリ付与", "reason": "同上。", "files": ["members.json"] }
+    ]
+  },
+  "kensakusystemSample": {
+    "sampledCount": 60,
+    "result": "全件ok（200）",
+    "note": "kensakusystem.jp（会議録検索システム）は約4,600件の議案・発言リンクを保持するため通常監査から除外している対象。今回60件を無作為抽出（決定論的な間引き）で追加確認し、異常なし。累計でこれまでに確認済みのkensakusystem.jp URLは99件、すべてok。"
+  },
+  "filesDirectlyEdited": [],
+  "filesNotEditedReason": "前回broken一覧11件のうち7件（Wayback 503）は一時障害が自然回復しており編集不要。3件（yahoo news・miyanichi・27980.xls）は本タスク開始前のPhase96で既に置き換え済みで、現在アクティブなsourceUrlとしては使用されていない（dataQualitySummary.jsonの古い集計テキストに残っているだけ＝次回generate-quality-summary実行で自動的に消える）。残り1件（Wikipedia記事）は移転先を確実に確認できないため推測で書き換えなかった。新規検出の2件（councilWatchedDocuments.json）は他パイプライン（sync-council-data.mjs）が専用に管理するデータのため対象外とした。結果として本タスクでsrc/data配下を直接編集したファイルは0件。",
+  "cacheFileUpdated": {
+    "path": "reports/external-link-check.json",
+    "note": "実監査キャッシュを最新化した（--force全件再検証733件＋kensakusystemサンプル60件）。src/data/dataQualitySummary.jsonは意図的に未編集（npm run build時にnpm run generate:quality-summaryが自動反映する設計のため）。"
+  },
+  "recommendationsForOtherWorkers": [
+    "sync-council-data.mjs担当（または将来のPhase）へ：councilWatchedDocuments.jsonのid=session-schedule-5774a79eedad（27879.pdf）・id=session-schedule-a392dabc3484（28156.pdf）が404。会期終了に伴うファイル撤去の可能性が高いため、missingStreak増分等、既存の追跡ロジックでの処理を推奨。",
+    "archiveMayorTerms.jsonの仲田又次郎に関するWikipedia参照（https://ja.wikipedia.org/wiki/仲田又次郎）は記事自体が現存しない。同一事実はkotobank.jp・延岡市公式資料で既に裏付けられているため、機能的な支障は小さいが、将来的に当該sourceRefエントリの扱い（削除／代替出典への統合）を人手で判断することを推奨。"
+  ]
+}

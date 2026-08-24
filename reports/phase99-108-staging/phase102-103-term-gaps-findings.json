@@ -1,0 +1,410 @@
+{
+  "generatedAt": "2026-08-24T00:00:00+09:00",
+  "phase": "Phase102-103",
+  "scope": "src/data/citySpecialPosts.jsonでappointedDate===nullの6件（csp-43町田訓允/教育長、csp-44黒木道男/助役、csp-45伊東義男/助役、csp-48吉田厚/収入役、csp-49高島安三郎/収入役、csp-56柳田喜継/助役）＋src/data/archiveMayorTerms.jsonの市長任期日単位空白13区間（UNR-029、reports/phase92-term-gaps-findings.jsonのM1〜M13）、合計19対象。",
+  "constraint": "src/data/citySpecialPosts.json と src/data/archiveMayorTerms.json は直接編集していない。すべて親エージェントへの提案として本ファイルに記録する。推測による日付補完は一切行っていない。",
+  "priorWorkReviewed": [
+    "reports/phase92-term-gaps-report.md / phase92-term-gaps-findings.json（23区間の分類、library_required 17・online_exhausted 3・source_not_located 1・resolved 2）",
+    "reports/phase82-person-term-audit-findings.json（newTermGaps・nameConfirmedButTermUnconfirmed）",
+    "reports/phase33-master-unresolved-ledger.json UNR-029",
+    "reports/ndl-historical-source-ledger.json（全31件のsourceステータス）",
+    "reports/mayor-primary-source-matrix.json",
+    "reports/phase99-108-staging/phase104-105-csp-audit-findings.json（csp-49のappointedDate反映漏れ提案、本フェーズと重複しないよう参照のみ）",
+    "src/data/citySpecialPosts.json（csp-43/44/45/47/48/49/56の現状を実読、csp-47と56は既に反映済み・新規登録済みであることを確認）"
+  ],
+  "phase102Summary": {
+    "method": "各対象人物名・市長交代前後の氏名で新規WebSearchを実施し、延岡市公式サイトの「近代の年表」各ページ（1930-1950/1951-1970/1971-1990/1991-2010）をWebFetchで直接確認して日精度記載の有無を再検証、Wikipedia記事（青木善祐・鈴木憲太郎等）の出典脚注を確認、延岡市議会会議録検索システム（kensakusystem.jp）をブラウザで直接操作して収録範囲を確認、広報のべおかPDFバックナンバー（市公式サイト、ログイン不要）の収録範囲とkohoOcrSearchIndex.jsonのカバレッジを確認した。",
+    "newOnlineResolutions": 0,
+    "notableNegativeFindings": [
+      "延岡市議会会議録検索システム（kensakusystem.jp）は『平成12年第8回臨時会以降の本会議録』のみが検索対象であることをブラウザで直接確認した（ページ実文言：『ご覧になれるのは平成12年第8回臨時会以降の本会議録です。』）。これにより、csp-56（柳田喜継）の初回助役就任（平成3年＝1991年）はこのシステムの収録範囲外であることが確定した。以前の一部調査メモにあった『平成3年8月以降』という記載は誤りで、実際には平成12年（2000年）が下限。",
+      "延岡市公式サイトの「近代の年表」4ページ（1930-1950/1951-1970/1971-1990/1991-2010）を全件再確認したが、市長13区間（M1〜M13）に該当する記述はすべて『年月』までで、日単位の記載は一件もなかった（既存archiveMayorTerms.jsonの記載と完全に一致、新情報なし）。",
+      "Wikipedia「青木善祐」記事は就任日1956-04-21を『日本の歴代市長：市制施行百年の歩み 第3巻 361コマ』（ndl-src-10）を出典として明記しているが、この資料は既にPhase18・25等で個人送信サービスにより実閲覧済みで『当該一文を安定して再現・確認できなかった』と記録されている（同一資料・既知の壁であり、Wikipedia引用は新規の独立資料にはならない）。",
+      "6名（町田訓允・黒木道男・伊東義男・吉田厚・高島安三郎・柳田喜継）についてWeb検索を実施したが、citySpecialPosts.json以外にこれらの人物名を含むオンライン一次資料は一件も新規発見できなかった。",
+      "広報のべおかPDFバックナンバー（https://www.city.nobeoka.miyazaki.jp/site/koho/1714.html）は2010年4月号以降がログイン不要で公開されていることを確認した。既存kohoOcrSearchIndex.jsonには2010年9月号に『首藤市長と町田教育長が...』という在任確認の記述（keyword=市長/教育長のヒット）はあるが、町田氏本人の『就任』を報じる記述は同インデックス内に一件もない。ただしこのインデックスはキーワード起点の抽出であり全文index ではないため、2010年4-8月号（9月に在任確認済みのためこれ以前が候補）を対象に、既存のWindows OCR基盤で追加抽出すれば着任時期の記述が見つかる可能性が残る（未実施、次の一歩として記録）。"
+    ]
+  },
+  "targets": [
+    {
+      "targetId": "csp-43",
+      "person": "町田 訓允",
+      "role": "superintendent（教育長）",
+      "missingField": "appointedDate, retiredDate（ともにnull）",
+      "existingFact": "2010-09-07時点で本会議に出席（在任確認のみ）",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市 町田訓允 教育長』", "kohoOcrSearchIndex.json全件grep（『町田』3件・『教育長』33件を確認したが着任告知記述なし）", "civicTimelineEvents.json・searchIndex.json（既存reportで既にnil確認済みのため再実行はせず記載を確認）"],
+        "found": false,
+        "note": "2015年の地方教育行政法改正前は教育委員会委員の互選制のため、他役職で使う『市長提案の選任議決』という会議録の型が存在しない。町田氏の就任日・退任日を直接記載した資料の所在自体が特定できていない。"
+      },
+      "classification": "source_not_located",
+      "phase103LibraryPlan": {
+        "primaryCandidate": {
+          "material": "広報のべおか バックナンバー（2010年4月号〜8月号、市公式サイトPDF、ログイン不要）",
+          "publisher": "延岡市",
+          "holdingLocation": "オンライン公開済み（https://www.city.nobeoka.miyazaki.jp/site/koho/1714.html）",
+          "targetPerson": "町田訓允",
+          "targetPeriod": "2010年（平成22年）4月〜8月号",
+          "whatToCheck": "教育委員会人事異動・教育長就任を報じる記事の有無（既存kohoOcrSearchIndex.jsonはキーワード起点抽出のため町田氏の『就任』記述自体は未捕捉。同氏が2010-09-07に在任確認済みのため、それ以前の号を対象に既存Windows OCR基盤で追加抽出、または人手でPDFを目視確認する）",
+          "accessMethod": "オンラインPDF閲覧（ログイン不要）。次の一歩は複写ではなくOCR/目視での本文確認。",
+          "copyable": "該当なし（既にPDFとして公開済み、複写制限なし）"
+        },
+        "secondaryCandidate": {
+          "material": "延岡市教育委員会 定例会議事録・教育委員会だより（2009〜2010年分）",
+          "publisher": "延岡市教育委員会",
+          "holdingLocation": "延岡市教育委員会総務課（現地照会・情報公開請求が必要と見込まれる。オンライン公開の会議録アーカイブは市公式サイト上で2010年以前分を確認できなかった）",
+          "targetPerson": "町田訓允および前任の教育長（氏名未特定）",
+          "targetPeriod": "2008〜2010年ごろ（互選による教育長選任の時期）",
+          "whatToCheck": "教育委員会委員による教育長互選の議事録、選任年月日",
+          "accessMethod": "延岡市教育委員会総務課への情報公開請求または直接照会（要現地対応）",
+          "copyable": "公文書のため情報公開制度に基づく写しの交付が可能とみられる（要確認）"
+        }
+      }
+    },
+    {
+      "targetId": "csp-44",
+      "person": "黒木 道男",
+      "role": "assistant-mayor（助役）",
+      "missingField": "appointedDate, retiredDate（ともにnull）",
+      "existingFact": "延岡市史1993年版 年表コマ427（昭和60年＝1985年2月の項）に『市助役に黒木道男が就任した』と月精度で記載済み（termNoteに反映済み）",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市 黒木道男 助役 昭和60年』"],
+        "found": false,
+        "note": "citySpecialPosts.json以外にオンラインで独立資料は発見できず。日精度化には同一資料（pid 13200958）コマ427の高倍率再読が必要で、これは個人送信サービス（NDLログイン）対象のため本ワーカーはアクセス不可。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史（延岡市史編さん委員会編、延岡市発行、1993年2月、市制60周年記念十年史、836p、市政二十年史続編）",
+        "publishedYear": 1993,
+        "callNumber": "未確認（NDLデジタル化書誌ID：R100000002-I000002328209、NDLデジタルコレクションpid 13200958）",
+        "holdingLocation": ["延岡市立図書館（郷土資料コーナーに所蔵の可能性が高い、未確認）", "宮崎県立図書館", "国立国会図書館（本館・デジタルコレクション個人送信サービス、pid 13200958、コマ427）"],
+        "targetPerson": "黒木道男",
+        "targetPeriod": "昭和60年（1985年）2月前後",
+        "whatToCheck": "年表コマ427（昭和60年2月の項）の『市助役に黒木道男が就任した』の直前・直後の文脈に日単位の日付があるか。現在の個人送信サービスでの閲覧（低〜中解像度）では判読できなかったため、現物または高精細スキャンでの確認が必要。",
+        "accessMethod": "現地来館閲覧（延岡市立図書館または宮崎県立図書館所蔵の現物を直接確認するのが、NDLログイン制約を回避する最短ルート）。またはNDLログイン権限を持つ担当者による個人送信サービスの再読（コマ427を70%以上の高倍率で）。",
+        "copyable": "図書館の複写サービス規定に従い、著作権法31条の範囲内（著作物の一部・調査研究目的）でコピー可能とみられる（要各館規定確認）。"
+      }
+    },
+    {
+      "targetId": "csp-45",
+      "person": "伊東 義男",
+      "role": "assistant-mayor（助役）",
+      "missingField": "appointedDate, retiredDate（ともにnull）",
+      "existingFact": "延岡市史1993年版 年表コマ428（昭和60年中の項）に『（前任の）助役が退任し、後任に伊東義男が就任した』と記載済み。前任者氏名（『男』で終わる人名断片、黒木道男氏と同一人物かは未確定）・正確な月日は未判読。",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市 伊東義男 助役』"],
+        "found": false,
+        "note": "citySpecialPosts.json以外にオンラインで独立資料は発見できず。csp-44と同一資料・同一制約（コマ428）。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史（延岡市史編さん委員会編、延岡市発行、1993年2月、市制60周年記念十年史）",
+        "publishedYear": 1993,
+        "callNumber": "未確認（NDLデジタル化書誌ID：R100000002-I000002328209、NDLデジタルコレクションpid 13200958）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "国立国会図書館（デジタルコレクション個人送信サービス、pid 13200958、コマ428）"],
+        "targetPerson": "伊東義男（および前任者の氏名確定＝黒木道男と同一人物かどうか）",
+        "targetPeriod": "昭和60年（1985年）中",
+        "whatToCheck": "年表コマ428の前任者氏名（末尾『男』の判読）と月日。csp-44（黒木道男）の退任日と直接対応する可能性が高いため、コマ427・428を続けて確認することで両レコードを同時に前進させられる。",
+        "accessMethod": "現地来館閲覧（csp-44と同一資料のため、同一の来館調査で両方確認可能）。",
+        "copyable": "csp-44と同様、著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "csp-48",
+      "person": "吉田 厚",
+      "role": "treasurer（収入役）",
+      "missingField": "appointedDate, retiredDate（ともにnull）",
+      "existingFact": "延岡市史上巻コマ126『2 収入役』一覧表の10代・11代として月精度のみ登録済み（10代：昭和39年5月ごろ〜、11代：〜昭和47年5月ごろ）。日単位の判読精度が不十分なため未反映。",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市 吉田厚 収入役』"],
+        "found": false,
+        "note": "citySpecialPosts.json以外にオンラインで独立資料は発見できず。日精度化には延岡市史上巻（pid 9774711）コマ126の高倍率再読が必要（個人送信サービス対象、本ワーカーはアクセス不可）。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（延岡市編、延岡市発行、1983年、市制五十周年記念、第二編第五章第一節「歴代市長、助役および収入役等」一覧表）",
+        "publishedYear": 1983,
+        "callNumber": "未確認（NDLデジタル化書誌ID：R100000001-I14111100095159、NDLデジタルコレクションpid 9774711）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "国立国会図書館（デジタルコレクション個人送信サービス、pid 9774711、コマ126）"],
+        "targetPerson": "吉田厚（収入役10代・11代）",
+        "targetPeriod": "昭和39年（1964年）5月ごろ〜昭和47年（1972年）5月ごろ",
+        "whatToCheck": "コマ126『2 収入役』一覧表の10代・11代の自至日付欄（現状は月精度のみ判読）。同コマは既に複数回精読されているが多列・低解像度の構造的制約が残るため、現物での高精細確認が必要。",
+        "accessMethod": "現地来館閲覧。同コマにcsp-47（高橋重行、12代・13代）・csp-49（高島安三郎、7〜9代）も同居しているため、一度の来館でcsp-48・csp-49・M1〜M9（市長本体列）をまとめて確認できる。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "csp-49",
+      "person": "高島 安三郎",
+      "role": "treasurer（収入役、7〜9代・助役11〜12代兼務）",
+      "missingField": "appointedDate, retiredDate（ともにnull）",
+      "existingFact": "延岡市史上巻コマ126に7代（1951-01-28〜1955-02-18、日精度で複数回一致）・8代（〜昭和34年または35年5月18日、年の表記ゆれ未解消）・9代（未確認）が記載済み。Phase104-105（reports/phase99-108-staging/phase104-105-csp-audit-findings.json）が『appointedDate=1951-01-28（7代開始日）への反映』を既存termNoteの反映漏れとして別途提案済み（新規資料調査ではない）。",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市 高島安三郎 収入役』"],
+        "found": false,
+        "note": "citySpecialPosts.json以外にオンラインで独立資料は発見できず。8代の年表記ゆれ（昭和34年/35年）と9代の完全空白の解消には、csp-48と同じコマ126の高倍率再読が必要。Phase104-105のappointedDate反映提案とは独立に、8代・9代の未解決部分についてのみ本フェーズの対象として記録する。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（延岡市編、延岡市発行、1983年、第二編第五章第一節「歴代市長、助役および収入役等」一覧表）",
+        "publishedYear": 1983,
+        "callNumber": "未確認（NDLデジタル化書誌ID：R100000001-I14111100095159、NDLデジタルコレクションpid 9774711）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "国立国会図書館（デジタルコレクション個人送信サービス、pid 9774711、コマ126）"],
+        "targetPerson": "高島安三郎（収入役8代・9代、および助役11代・12代の期間）",
+        "targetPeriod": "昭和34年または35年（1959または1960年）5月〜昭和40年ごろ（1965年ごろ）",
+        "whatToCheck": "8代退任年の『四』『五』（昭和34年/35年）の判読確定、9代の自至日付。あわせて『1 助役』一覧表11代・12代（同一人物への転任）の自至日付も確認すればcsp-49レコードの助役期間も裏付けられる。",
+        "accessMethod": "現地来館閲覧（csp-48と同一コマ、同一来館で対応可能）。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "csp-56",
+      "person": "柳田 喜継",
+      "role": "assistant-mayor（助役）",
+      "missingField": "appointedDate（初回就任日）のみnull。retiredDate=2006-02-03は確定済み。",
+      "existingFact": "平成3年（1991年）に助役初回就任（civicTimelineEvents civic-176・177、Phase92でcitySpecialPosts.jsonへ新規登録済み）。平成15年（2003年）2月13日に4期目再任議決（会議録H150128A）を確認済み。",
+      "phase102OnlineCheck": {
+        "searched": [
+          "WebSearch『延岡市 柳田喜継 助役 平成3年 就任』",
+          "延岡市議会会議録検索システム（kensakusystem.jp）をブラウザで直接開き、収録範囲を確認"
+        ],
+        "found": false,
+        "note": "重要な新規確認：kensakusystem.jpのトップページ実文言は『ご覧になれるのは平成12年第8回臨時会以降の本会議録です。』であり、1991年（平成3年）の会議録はこのオンラインシステムの収録範囲外であることを直接確認した。したがって柳田氏の初回就任議決（1991年）はこのルートでは原理的に見つからない。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市議会会議録（平成3年＝1991年の本会議録、紙媒体・原本）",
+        "publishedYear": 1991,
+        "callNumber": "未確認",
+        "holdingLocation": ["延岡市議会事務局（原本保管の可能性が最も高い）", "宮崎県立図書館（『延岡市議会会議録写』手書き複写を所蔵しているが、確認済みの所蔵範囲は昭和34〜48年＝1959〜1973年分と『第1回〜第20回』分のみで、1991年〈平成3年〉分の所蔵は未確認）"],
+        "targetPerson": "柳田喜継",
+        "targetPeriod": "平成3年（1991年）の助役選任議案が審議された会期（具体的な回次は未特定）",
+        "whatToCheck": "助役選任議案の提案理由説明・採決結果、選任年月日",
+        "accessMethod": "延岡市議会事務局への照会・現地閲覧（オンライン検索システムの収録範囲外と確定したため、事務局保管の紙原本への直接アクセスが必須）。宮崎県立図書館は次善の候補だが1991年分の所蔵確認が先に必要。",
+        "copyable": "議会事務局が保管する公文書のため、情報公開制度または会議録閲覧規則に基づく写しの交付が可能とみられる（要各機関の規定確認）。"
+      }
+    },
+    {
+      "targetId": "M1",
+      "role": "mayor",
+      "gap": "mayor-04→mayor-05-term-01（仲田又次郎→鈴木憲太郎、1937-01-06〜1937-03-06）",
+      "phase102OnlineCheck": { "searched": ["延岡市公式サイト近代の年表(1930-1950)を再確認（404エラーでURL自体を再取得できず、既存sourceRefsのURLで確認済みの内容を踏襲）"], "found": false, "note": "新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（1983年、第五章第一節「歴代市長、助役および収入役等」一覧表の市長本体列、コマ124）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "国立国会図書館（pid 9774711、コマ124、個人送信サービス）"],
+        "targetPeriod": "1937年1月〜3月",
+        "whatToCheck": "市長列（助役・収入役欄は既に複数回精読済みだが、市長本体の代替わり日付欄は今回のPhase92・102いずれも未精読）の自至日付",
+        "accessMethod": "現地来館閲覧。M1〜M9は同一コマ（124-125付近）にまとまっているとみられるため、一度の来館で複数区間をまとめて確認できる。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M2",
+      "role": "mayor",
+      "gap": "mayor-05-term-01→term-02（鈴木憲太郎、衆院選出馬のため辞職後再任、1937-04-14〜1937-05-16）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "職務代理者の有無も含め新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1937年4月〜5月",
+        "whatToCheck": "市長列の自至日付、および約1ヶ月の空白期間中の職務代理者の有無",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M3",
+      "role": "mayor",
+      "gap": "mayor-05-term-02→mayor-06-term-01（鈴木憲太郎→大島文彦、1937-06-15〜1937-09-26）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1937年6月〜9月",
+        "whatToCheck": "市長列の自至日付、約3ヶ月の空白期間中の市政運営体制",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M4",
+      "role": "mayor",
+      "gap": "mayor-06-term-01→mayor-07-term-01（大島文彦→三浦虎雄、1941-09-25〜1941-10-22）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1941年9月〜10月",
+        "whatToCheck": "市長列の自至日付",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M5",
+      "role": "mayor",
+      "gap": "mayor-07-term-01→term-02（三浦虎雄、衆院選出馬のため辞職後再任、1942-04-25〜1942-05-19）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1942年4月〜5月",
+        "whatToCheck": "市長列の自至日付",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M6",
+      "role": "mayor",
+      "gap": "mayor-07-term-02→mayor-05-term-03（三浦虎雄、公職追放により辞職→鈴木憲太郎、1946-03-06〜1946-03-29）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "同月内交代のため空白は短いとみられるが新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1946年3月",
+        "whatToCheck": "市長列の自至日付",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M7",
+      "role": "mayor",
+      "gap": "mayor-05-term-03→mayor-08-term-01（鈴木憲太郎→佐藤千吉郎、1947-03-22〜1947-04-16）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1947年3月〜4月",
+        "whatToCheck": "市長列の自至日付",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M8",
+      "role": "mayor",
+      "gap": "mayor-08-term-01→mayor-04-term-02（佐藤千吉郎→仲田又次郎、1948-06-06〜1948-07-16）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "佐藤千吉郎の退任日はWikipediaのみが情報源で独立確認できていない点が既存記録どおり残る。新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）。あわせて〔延岡市〕市政二十年史（江川林蔵編、延岡市役所、1953年、ndl-src-28、library_only）も1933-1953年の市政史を収録しており、同時代資料としてクロスチェックに有用。",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（延岡市史はpid 9774711で個人送信対象。市政二十年史はNDLサーチ書誌検索のみでデジタル化情報なし＝紙のみ、library_only）"],
+        "targetPeriod": "1948年6月〜7月",
+        "whatToCheck": "佐藤千吉郎の退任日（独立資料での裏付け）、仲田又次郎の再就任日",
+        "accessMethod": "現地来館閲覧。市政二十年史は書誌検索のみで完了しており、現物確認には宮崎県立図書館等での閲覧が必要。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M9",
+      "role": "mayor",
+      "gap": "mayor-04-term-02→mayor-07-term-03（仲田又次郎→三浦虎雄、1952-06-19〜1952-07-11）",
+      "phase102OnlineCheck": { "searched": ["同上"], "found": false, "note": "新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ124-125）",
+        "holdingLocation": ["延岡市立図書館", "宮崎県立図書館", "NDL（pid 9774711）"],
+        "targetPeriod": "1952年6月〜7月",
+        "whatToCheck": "市長列の自至日付",
+        "accessMethod": "M1と同一来館調査でまとめて対応。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M10",
+      "role": "mayor",
+      "gap": "mayor-07-term-03→mayor-09-term-01（三浦虎雄→青木善祐、就任日disputed：候補1956-04-10 vs 1956-04-21）",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市長 青木善祐 就任日 昭和31年4月』", "Wikipedia『青木善祐』を直接確認（脚注が『日本の歴代市長：市制施行百年の歩み 第3巻 361コマ』＝ndl-src-10を出典として明記していることを確認）"],
+        "found": false,
+        "note": "Wikipediaの出典は既にPhase18・25で個人送信サービスにより実閲覧済みの同一資料・同一コマであり、『当該一文を安定して再現・確認できなかった』という既存の壁と同じ。新規の独立資料ではないため、online_exhausted判定を維持する。ただし、延岡商工会議所四十年史（既存資料）による選挙日1956-04-19の確定で候補A（1956-04-10、投票日より前で論理的に不成立）は既に排除されており、候補B（1956-04-21）のみが残っている状態であることを再確認した（既存archiveMayorTerms.json notesの記載どおり、これ以上の推測による確定は行わない）。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "日本の歴代市長：市制施行百年の歩み 第3巻（歴代知事編纂会編、1985年、コマ361＝青木善祐の個人略歴ページ）。あわせて宮崎日日新聞縮刷版（1956年4月分）。",
+        "holdingLocation": ["宮崎県立図書館（宮崎日日新聞縮刷版の所蔵可能性が高い）", "国立国会図書館（日本の歴代市長 第3巻、個人送信サービス対象、全国23館所蔵）"],
+        "targetPerson": "青木善祐",
+        "targetPeriod": "1956年4月19日（投票日）〜同月21日ごろ",
+        "whatToCheck": "コマ361の個人略歴中、就任日を直接記載した一文（既存調査では複数回のズーム位置合わせでも再現できなかった箇所）。宮崎日日新聞1956年4月20-22日の記事に就任式・辞令交付の報道があれば直接確認できる可能性が高い。",
+        "accessMethod": "現地来館閲覧（宮崎県立図書館での新聞縮刷版確認が最も確実な独立資料ルート）。",
+        "copyable": "新聞縮刷版は著作権法31条の範囲内でコピー可能とみられる（各図書館規定要確認）。"
+      }
+    },
+    {
+      "targetId": "M11",
+      "role": "mayor",
+      "gap": "mayor-10-term-02→mayor-11-term-01（折小野良一→房野博、当選日1967-01-23と既存termStart1967-01-22の1日差）",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市長 房野博 就任 昭和42年1月』"],
+        "found": false,
+        "note": "新規の独立資料は発見できず。延岡商工会議所四十年史では当選日（1.23）のみ確認済みで、就任日と当選日を区別する記載はない（既存の壁のまま）。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "宮崎日日新聞縮刷版（1967年1月分）、または延岡市選挙管理委員会の選挙録（告示・当選証書付与関連文書）",
+        "holdingLocation": ["宮崎県立図書館（新聞縮刷版）", "延岡市選挙管理委員会事務局（選挙録原本）"],
+        "targetPerson": "房野博",
+        "targetPeriod": "1967年1月22日〜23日",
+        "whatToCheck": "当選証書付与日と市長就任日（=前任者退任翌日から起算する地方自治法上の理論値）の関係。当選日と就任日は法的に区別されるため、どちらを『就任日』としてarchiveMayorTerms.jsonに採用すべきかの一次資料上の根拠。",
+        "accessMethod": "現地来館閲覧または延岡市選挙管理委員会への照会。",
+        "copyable": "新聞縮刷版は著作権法31条の範囲内。選挙録は公文書のため情報公開制度に基づく写し交付が可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M12",
+      "role": "mayor",
+      "gap": "mayor-11-term-03→mayor-12-term-01（房野博、辞職→早生隆彦、就任日側は投票日1978-11-05と一致確認済み。退任側の1978-10-05のみ未確認）",
+      "phase102OnlineCheck": { "searched": ["WebSearch『延岡市長 早生隆彦 辞職 昭和53年10月』"], "found": false, "note": "検索結果は2025年の別市長（読谷山洋司氏）辞職に関する記事のみで、1978年の房野博氏辞職に関する情報は得られなかった。新規情報なし。" },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "延岡市史 上巻（コマ215、市長選挙一覧表で投票日は既確認）に加え、宮崎日日新聞縮刷版（1978年10月分、房野博氏辞職の報道）",
+        "holdingLocation": ["宮崎県立図書館（新聞縮刷版）", "国立国会図書館（延岡市史上巻、pid 9774711、コマ215は既読）"],
+        "targetPerson": "房野博",
+        "targetPeriod": "1978年10月5日前後",
+        "whatToCheck": "房野氏の辞職日（延岡市公式年表のみが情報源で独立確認が未了）を直接記載した報道記事",
+        "accessMethod": "現地来館閲覧（宮崎県立図書館での新聞縮刷版確認）。",
+        "copyable": "著作権法31条の範囲内でコピー可能とみられる。"
+      }
+    },
+    {
+      "targetId": "M13",
+      "role": "mayor",
+      "gap": "mayor-12-term-04→mayor-13-term-01（早生隆彦、辞職→櫻井哲雄、1994-01-11〜1994-02-06）",
+      "phase102OnlineCheck": {
+        "searched": ["WebSearch『延岡市長選挙 1994年2月 櫻井哲雄 当選』"],
+        "found": false,
+        "note": "検索結果は『1994年2月に市長に就任した』という月精度の要約情報のみで、日単位の投票日を直接記載したオンライン資料は新規発見できなかった。go2senkyo.comの1994年選挙一覧に延岡市長選の掲載が無いことは既存調査で確認済み（再確認、変化なし）。"
+      },
+      "classification": "library_required",
+      "phase103LibraryPlan": {
+        "material": "宮崎日日新聞縮刷版（1994年1〜2月分）、または延岡市選挙管理委員会の選挙録",
+        "holdingLocation": ["宮崎県立図書館（新聞縮刷版）", "延岡市選挙管理委員会事務局（選挙録原本）"],
+        "targetPerson": "櫻井哲雄",
+        "targetPeriod": "1994年1月11日（早生氏辞職）〜2月6日（櫻井氏就任、既存termStart）",
+        "whatToCheck": "投票日を直接記載した一次資料。選挙ドットコムのカバー範囲は2002年以降が中心のため対象外と既に確定済み。",
+        "accessMethod": "現地来館閲覧または延岡市選挙管理委員会への照会。",
+        "copyable": "新聞縮刷版は著作権法31条の範囲内。選挙録は情報公開制度に基づく写し交付が可能とみられる。"
+      }
+    }
+  ],
+  "summary": {
+    "totalTargets": 19,
+    "resolvedByPhase102": 0,
+    "classificationCounts": {
+      "confirmed": 0,
+      "library_required": 18,
+      "inquiry_required": 0,
+      "not_digitized": 0,
+      "source_not_located": 1,
+      "illegible": 0
+    },
+    "notes": "source_not_located＝csp-43（町田訓允、教育長）のみ。他18件はすべて library_required（現地閲覧または延岡市議会事務局・選挙管理委員会等への現地照会が次の一歩）。市長13区間（M1〜M13）のうちM10・M11・M13はPhase92でonline_exhaustedと分類されていたが、本フェーズで具体的な次の一歩（新聞縮刷版・選挙録）を特定できたためlibrary_requiredへ整理し直した（オンライン一次資料としては手詰まりだが、現地閲覧という具体的なルートが存在するため）。"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "phase": "Phase104-105",
+  "scope": "src/data/citySpecialPosts.json の csp-49（高島安三郎、複数期一括レコード）と csp-56/csp-57（柳田喜継・三樹博、前回新規登録レコード）の完全性監査",
+  "constraint": "src/data/citySpecialPosts.json は直接編集していない。すべて親エージェントへの提案として記録する。",
+  "phase104_csp49": {
+    "id": "csp-49",
+    "person": "高島 安三郎",
+    "role": "treasurer（収入役）",
+    "question": "7〜9代の複数任期が1レコードにまとめられている。分割すべきか。",
+    "conclusion": "分割は提案しない。既存の csp-46（後藤梅雄、助役14・15代）・csp-47（高橋重行、収入役12・13代）と同じ「1レコード＋termNoteで複数期を記述」パターンを踏襲するのが妥当。",
+    "reasoning": [
+      "csp-46・csp-47は共に『同一役職・同一人物の連続する複数期』を1レコードにまとめており、これは既存の承認済みパターン。csp-49（7代・8代・9代、すべて同一人物・同一役職＝収入役）も同じ条件を満たす。",
+      "分割すると新規ID（例：csp-58, csp-59）の採番、sourceRefs（現状は7代・8代・9代・助役11代・12代を横断する単一の一覧表URLラベル）の複製、relatedLinksの再設計が必要になるが、そのメリットが乏しい。sourceRefsは元々『延岡市史 上巻コマ126の同一覧表』という単一の一次資料を指しており、分割しても実質的に同じURLを繰り返すだけで情報量は増えない。",
+      "8代の年（昭和34年か35年か）は判読に幅があり、9代は日付自体が未確認（『要再読』）。タスク指示通り『8代・9代は月精度以下のままなら分割を保留してよい』に該当し、現時点で分割する一次資料上の根拠が不十分。",
+      "『同一人物』と『同一任期』の混同を避ける観点でも、1レコード＋termNoteで各代の開始・終了を個別に文章化する現行方式は、代ごとの区別を保ったまま人物単位でまとめる既存方針と整合している。"
+    ],
+    "separate_finding_unreflected_date": {
+      "type": "反映漏れ（新規調査ではなく既存termNoteの構造化フィールドへの反映漏れ）",
+      "detail": "termNoteには7代の開始日1951-01-28・終了日1955-02-18が日精度で既に記載され『日単位の判読は複数回一致したためある程度の確度がある』と明記されているが、appointedDate/retiredDateは共にnullのまま。これはPhase92でcsp-47の13代就任日（1976-05-18）を『構造化フィールドへ未反映』として発見しappointedDateへ反映した事例と同種のパターン。",
+      "proposal": {
+        "appointedDate": "1951-01-28に更新することを提案（7代の開始日、日精度・複数回一致で確度が高く、これより前の代の記載もないため『収入役としての最初の確認できる着任日』として矛盾がない）。",
+        "retiredDate": "nullのまま据え置くことを提案（1955-02-18は7代の終了日＝8代への交代日であり、本人は収入役職を離れていない。termNote自身が『8代の退任理由欄に「助役就任（転任）」との記載があり…助役表の11代・12代の高島安三郎と同一人物』と記録しており、収入役としての最終退任日は8代終了時点＝昭和34年または35年5月18日で、まさに年の表記ゆれで未確定。ここにretiredDate=1955-02-18を入れると『収入役を1955年に退任した』という誤った事実を作ってしまうため入れるべきではない。)"
+      },
+      "caveat": "csp-49のtermNote末尾には『appointedDate／retiredDateへの反映は昭和34/35年の表記ゆれが解消してから行う』という編集者自身の申し送りがある。今回の提案（appointedDateのみ先行反映）はこの申し送りと部分的に矛盾するため、親エージェントの判断で保留・実施のいずれも選べるよう両論併記とする。実施する場合も8代側のretiredDateには一切触れないこと。"
+    },
+    "also_noted_out_of_scope": "csp-49のnotesに『助役側の高島安三郎（11代・12代、昭和35年頃〜昭和40年ごろ）はcitySpecialPosts.jsonへの個別登録は今回見送り』と明記されている。これは既存の意思決定であり、今回のPhase104では新規登録を提案しない（1970年代より前のため優先度が低いという既存判断を尊重）。"
+  },
+  "phase105_csp56_csp57": {
+    "csp56": {
+      "id": "csp-56",
+      "name": "柳田 喜継",
+      "role": "assistant-mayor（助役）",
+      "checks": {
+        "name_variant": "表記揺れなし。会議録・civicTimelineEvents（civic-176/177）とも「柳田喜継」で一致。",
+        "role_term": {
+          "appointedDate": null,
+          "retiredDate": "2006-02-03",
+          "assessment": "appointedDateがnullなのは妥当（初回就任1991年の日付が未確認のため）。retiredDate=2006-02-03はcsp-56自身のsourceRefsには含まれず、後任csp-35の会議録（H180228A、『前任の柳田喜継氏が同年2月3日付で退職した旨の記載』）という“他人の任命議案の中で言及された退任日”に基づく。一次資料内の記述ではあるが、柳田氏本人の退職議案そのものではない二次的な言及である点に留意（confidence: Level2相当＝公式資料内だが本人分の直接記録ではない、程度と評価）。"
+        },
+        "termNote_date_ambiguity": {
+          "issue": "termNoteの文『平成15年（2003年）2月13日、平成15年第26回臨時会（議案第74号）で4期目の再任議決を受けた。』は、あたかも議決自体が2月13日に行われたかのように読める。しかし同じsourceRefsのラベル（『第1号 1月28日』）およびcivicTimelineEvents civic-176の本文（『平成15年第26回臨時会（1月28日）で…同年2月13日をもって任期満了となるため、引き続き同氏を選任する議案が可決された』）によれば、臨時会での議決は1月28日に行われ、2月13日は『(3期目の)任期満了日＝4期目の開始日』である。",
+          "severity": "低（appointedDate/retiredDateといった構造化フィールドには影響していないが、termNoteの文章表現が議決日と任期開始日を混同しており読者に誤解を与えうる）",
+          "proposal": "termNoteを『平成15年第26回臨時会（2003年1月28日、議案第74号）で、同年2月13日の任期満了に伴う4期目の再任議決を受けた。』のように、議決日と任期開始日を明示的に分離する表現へ修正することを提案。"
+        },
+        "relatedLinks": [
+          { "to": "/timeline/2003", "valid_route": true, "note": "App.tsxに/timeline/:yearルートが存在し有効。civic-176（2003年）が該当年に存在することも確認済み。" },
+          { "to": "/city-officials", "valid_route": true, "note": "App.tsxに/city-officialsルートが存在し有効。" }
+        ],
+        "duplicate_check": "citySpecialPosts.json内に「柳田」を含む他レコードなし。重複登録なし。",
+        "predecessor_successor_consistency": {
+          "successor": "csp-35（杉本隆晴、appointedDate 2006-02-28）と接続。csp-56のretiredDate（2006-02-03）からcsp-35のappointedDate（2006-02-28）まで25日間の空白があるが、これは『前任者退職→後任者を議会に諮る→就任』という手続き上自然な空白であり、重複や矛盾ではない（csp-56のtermNote・civic-177双方に後任者名が明記されており、接続関係自体は整合している）。"
+        }
+      }
+    },
+    "csp57": {
+      "id": "csp-57",
+      "name": "（後藤）三樹博",
+      "role": "assistant-mayor（助役）",
+      "checks": {
+        "name_variant_and_bracket_convention": {
+          "issue": "nameフィールドが「（後藤）三樹博」という、既存のどのcsp-*レコードにも例のない独自表記（括弧で不確定な姓を囲む）になっている。citySpecialPosts.json全57件中、名前に括弧を使っているのはcsp-57のみ。",
+          "notes_field_inaccuracy": "csp-57のnotesは『姓が未確定のため、既存のcsp-54（姓のみ確定の助役レコード）と同様の表記方針とした』と説明しているが、実際にはcsp-54は不確定な部分（下の名）を単純に省略する方式（name: \"佐藤\"、括弧なし）であり、csp-57は不確定な部分（姓）を括弧付きで残す方式である。両者は『不確定要素の扱い方』が逆（省略 vs 残す）であり、『同様の表記方針』という記述は正確ではない。",
+          "severity": "中（データそのものの誤りではないが、(1)括弧を使った氏名表記はサイト内で前例がなく、CityOfficialsPageでは氏名がそのまま<p>タグに表示されるため利用者が『（後藤）』の意味を文脈なしに読み取れない、(2)notesの説明が実態と食い違っている）",
+          "proposal": [
+            "選択肢A（csp-54との整合を優先）：nameを「三樹博」のみとし、姓の手がかり（後藤である可能性が高いこと）はtermNote/notesの文章側でのみ説明する。これによりcsp-54と表記方針が真に一致する。",
+            "選択肢B（現状の括弧表記を維持する場合）：notesの『csp-54と同様の表記方針とした』という一文を削除し、『csp-54とは異なり、不確定要素（姓）を括弧付きで保持する表記とした』のように実態に即した説明へ修正する。",
+            "いずれを採るかは親エージェントの編集方針判断に委ねるが、少なくとも現状の『csp-54と同様』という記述はそのままでは不正確なため修正が必要。"
+          ]
+        },
+        "role_term": {
+          "appointedDate": "1983-02-10",
+          "retiredDate": null,
+          "assessment": "sourceRefs（延岡市史上巻コマ126、18代の列）に基づく日精度の就任日で、reasonable。retiredDateがnull（同一覧表の対象範囲では退任日を確認できず）という扱いも妥当（推測補完なし）。"
+        },
+        "relatedLinks": [
+          { "to": "/city-officials", "valid_route": true, "note": "App.tsxに/city-officialsルートが存在し有効。" }
+        ],
+        "duplicate_check": "citySpecialPosts.json内に「三樹博」を含む他レコードなし。csp-46『後藤梅雄』とは別人（姓が同じ可能性があるが名が異なる）で重複登録ではない。",
+        "predecessor_overlap": {
+          "detail": "前任csp-46（後藤梅雄、17代、retiredDate 1983-02-19）とcsp-57（18代、appointedDate 1983-02-10）の間で9日間（1983-02-10〜1983-02-19）の在任重複がある。",
+          "assessment": "csp-46・csp-57双方のtermNoteに『原本の記載自体にこの不整合があり、当サイト側での転記ミスではない』『unconfirmedとして扱う』と明記されており、一次資料の矛盾を推測で解消せず、そのまま両論併記している。CLAUDE.mdの『確認できない情報は「確認中」等で区別する』方針に沿った適切な扱いであり、追加の修正提案なし。"
+        }
+      }
+    },
+    "search_index": {
+      "finding": "citySpecialPosts.jsonの個別レコード（csp-1〜csp-57すべて）はsrc/data/searchIndex.jsonの生成対象（scripts/generate-search-index.mjs）に含まれていない。member/former-member/mayor/policy/council-document/bill/question/speech/compensation/finance/election/committee/civic-timeline/municipality-comparison/update-history等は個別エントリとして索引化されているが、citySpecialPostsに対応するセクションがgenerate-search-index.mjs内に存在しない。索引化されているのは固定の1件のみ（id: 'page-city-officials'、キーワードは『副市長』『教育長』『監査委員』『農業委員会』『行政委員会』『特別職』の役職名のみで、個々の氏名は含まれない）。",
+      "impact": "『柳田喜継』『三樹博』『高島安三郎』等の個人名でサイト内検索しても、citySpecialPosts.jsonのレコードは一切ヒットしない（/city-officialsページという固定URLしかヒットしない）。ただしこれはcsp-56/csp-57に限った問題ではなく、csp-1〜csp-57全57件に共通する既存の設計上の欠落であり、今回の2レコード追加によって新たに生まれた問題ではない。",
+      "proposal": "スコープ外（citySpecialPosts.jsonの直接編集ではなくscripts/generate-search-index.mjsの改修が必要）だが、将来的な改善候補として、member/committee等と同様に「--- city special posts ---」セクションを追加し、type: 'city-official' として氏名・役職・termNote等をkeywords/contentに含めることを提案する。"
+    },
+    "city_officials_page_render_check": {
+      "finding": "CityOfficialsPage.tsx（L64, L157-192）は status==='former' のレコードをcitySpecialPosts配列の元の並び順（＝id昇順、csp-1→csp-57）のままフラット表示しており、役職や年代でのグループ化・ソートを行っていない。",
+      "impact": "csp-56・csp-57はcsp-46・csp-47・csp-49（同じ助役／収入役という役職、かつ年代的にも関連が深い）から配列上遠く離れた末尾（id番号が大きいため）に表示される。前任・後任の関係（csp-46↔csp-57、csp-56↔csp-35）が画面上は隣接せず分かりにくい。",
+      "severity": "低（表示は技術的に正しく行われる。csp-56/csp-57固有の不具合ではなく、歴代レコードが57件に増えた現在のformerPosts表示全体に共通するUX上の改善余地）",
+      "proposal": "スコープ外の改善提案として、former区分を役職（role）または就任日（appointedDate）でソートする改修を検討候補として記録するのみに留める。"
+    }
+  },
+  "confidence_levels_used": {
+    "definition": "Level0=未確認/推測、Level1=間接的な言及や二次資料、Level2=公式資料内だが本人分の直接記録ではない言及（例：後任の議案での言及）、Level3=本人分を直接記録した公式一次資料（議決記録・史料原本の該当代の列）",
+    "csp49_termNote_dates": "Level3相当（延岡市史コマ126原本の該当代の列、複数回再読で一致）",
+    "csp56_retiredDate": "Level2相当（後任csp-35の議案提案理由説明内での言及）",
+    "csp56_appointedDate_1991": "Level0（未確認のためappointedDateはnullのまま、構造化フィールドへの反映提案なし）",
+    "csp57_appointedDate": "Level3相当（延岡市史コマ126原本の該当代の列）",
+    "csp57_surname": "Level1相当（前後の文脈・別コマの手がかりからの推定、原本内で姓の文字そのものは確認できていない）"
+  }
+}

@@ -1,0 +1,696 @@
+{
+  "meta": {
+    "taskId": "TASK-BACKFILL-VOTES-001-PILOT",
+    "generatedAt": "2026-08-24",
+    "parentTask": "reports/task-backfill-votes-001.md",
+    "scope": "C分類（起立多数／起立少数、52件）のうち、最新側9会期・18議案をパイロット対象として会議録原文を精読した。",
+    "method": "延岡市議会会議録検索システム（kensakusystem.jp/nobeoka）のSee.exe（会期・本会議日一覧）、r_Speakers.exe（発言セグメント一覧）、GetText3.exe（発言本文）を、既存の scripts/lib/minutes-source.mjs 経由で逐次アクセス（同時実行数1、リクエスト間隔約400ms）により取得した。対象9会期・10本会議日ぶんの発言セグメント（合計793件）の本文を全件取得し、各議案の委員長報告・質疑・討論・採決宣告の該当箇所を突合した。",
+    "constraintsHonored": [
+      "billVotes.jsonへの直接書き込みは行っていない（本findings.jsonに変更提案のみ記録）",
+      "延岡市議会サーバーへのアクセスは同時実行数1（逐次）、ディスパッチ間隔約400msで実施した",
+      "パイロット対象は52件中18件（9会期）にとどめ、無制限バックフィルは行っていない"
+    ]
+  },
+  "pilotScope": {
+    "sessionsSelected": [
+      "令和8年3月定例会",
+      "令和7年9月定例会",
+      "令和7年3月定例会",
+      "令和6年12月定例会",
+      "令和6年9月定例会",
+      "令和6年6月定例会",
+      "令和6年3月定例会",
+      "令和5年12月定例会",
+      "令和5年9月定例会"
+    ],
+    "sessionCount": 9,
+    "billCount": 18,
+    "meetingDaysFetched": [
+      {
+        "fileName": "R080319A",
+        "date": "2026-03-19",
+        "session": "令和8年3月定例会",
+        "segmentCount": 103
+      },
+      {
+        "fileName": "R071003A",
+        "date": "2025-10-03",
+        "session": "令和7年9月定例会",
+        "segmentCount": 36
+      },
+      {
+        "fileName": "R070321A",
+        "date": "2025-03-21",
+        "session": "令和7年3月定例会",
+        "segmentCount": 107
+      },
+      {
+        "fileName": "R061213A",
+        "date": "2024-12-13",
+        "session": "令和6年12月定例会",
+        "segmentCount": 89
+      },
+      {
+        "fileName": "R061004A",
+        "date": "2024-10-04",
+        "session": "令和6年9月定例会",
+        "segmentCount": 67
+      },
+      {
+        "fileName": "R060920A",
+        "date": "2024-09-20",
+        "session": "令和6年9月定例会",
+        "segmentCount": 85
+      },
+      {
+        "fileName": "R060708A",
+        "date": "2024-07-08",
+        "session": "令和6年6月定例会",
+        "segmentCount": 96
+      },
+      {
+        "fileName": "R060322A",
+        "date": "2024-03-22",
+        "session": "令和6年3月定例会",
+        "segmentCount": 89
+      },
+      {
+        "fileName": "R051215A",
+        "date": "2023-12-15",
+        "session": "令和5年12月定例会",
+        "segmentCount": 63
+      },
+      {
+        "fileName": "R050929A",
+        "date": "2023-09-29",
+        "session": "令和5年9月定例会",
+        "segmentCount": 58
+      }
+    ],
+    "billIdsInScope": [
+      "2026-03-gian-130",
+      "2026-03-gian-133",
+      "2026-03-gian-148",
+      "2025-09-gian-44",
+      "2025-03-gian-115",
+      "2025-03-ketsugi-7",
+      "2024-12-ketsugi-6",
+      "2024-09-gian-32",
+      "2024-09-ketsugi-5",
+      "2024-09-seigan-2",
+      "2024-06-ketsugi-4",
+      "2024-03-gian-108",
+      "2024-03-gian-112",
+      "2024-03-chinjo-4",
+      "2023-12-chinjo-3",
+      "2023-09-gian-34",
+      "2023-09-gian-36",
+      "2023-09-ketsugi-1"
+    ]
+  },
+  "findingsSummary": {
+    "billsWithNewIndividualVoteData": 7,
+    "billsConfirmedNotDisclosed": 11,
+    "totalIndividualVoteDataPointsFound": 19,
+    "keyFinding": "延岡市議会の起立採決（起立多数／起立少数）では、議長が起立者数を数値で公表せず「起立多数」「起立少数」の定性的な宣告のみを行う運用が一貫していた（会議録本文に賛成◯名・反対◯名という数値、または起立者個人名の一覧が記載された例は今回精読した10本会議日・18議案中1件もなかった）。個別議員の賛否が会議録から確認できるのは、当該議員が自ら討論（賛成討論・反対討論）に立って所属・氏名・賛否を明言した場合に限られ、その場合でも討論に立った議員の分のみが確認でき、討論に立たなかった議員（多数派）の個別賛否は会議録からは判明しない。したがって『全議員のmemberVotes』を起立採決から復元することは、記名投票（既存2件）とは異なり原理的に不可能であり、討論者の賛否のみを『部分開示』データとして扱うか否かの方針判断が必要。"
+  },
+  "newMemberVotesProposals": [
+    {
+      "billId": "2026-03-gian-130",
+      "billTitle": "令和八年度延岡市国民健康保険特別会計予算",
+      "session": "令和8年3月定例会",
+      "fileName": "R080319A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 28,
+          "pos": 28754,
+          "speakerLabel": "平田信広君",
+          "role": "討論（反対表明）",
+          "quote": "日本共産党を代表して、今、議題となっています議案のうち、議案第一三〇号令和八年度延岡市国民健康保険特別会計予算、議案第一三三号令和八年度延岡市後期高齢者医療特別会計予算の二つの特別会計予算に反対の立場から、一括して討論を行います。"
+        },
+        {
+          "order": 32,
+          "pos": null,
+          "speakerLabel": "議長（早瀨賢一君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり可決されました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m20",
+          "memberName": "平田信広",
+          "faction": "確認中",
+          "vote": "oppose"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "討論で反対を明言したのは平田信広議員（m20）1名のみ。他の起立者・反対者の氏名は会議録に記載がなく、賛成26名・反対1名等の内訳も不明（起立多数の集計人数自体が非公表）。よって「全議員の賛否」ではなく「討論者1名分の賛否のみ」が一次資料から確認できる状態。"
+    },
+    {
+      "billId": "2026-03-gian-133",
+      "billTitle": "令和八年度延岡市後期高齢者医療特別会計予算",
+      "session": "令和8年3月定例会",
+      "fileName": "R080319A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080319A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 28,
+          "pos": 28754,
+          "speakerLabel": "平田信広君",
+          "role": "討論（反対表明、議案第一三〇号と一括討論）",
+          "quote": "次に、後期高齢者医療特別会計ですが、これについては、昨年の決算審査特別委員会の全体会で問題点を述べて、反対討論を行いました。事情は、その後、何ら変わっていないため、改めて理由は述べずとも分かると思いますので、決算時と同じ理由から反対したいと思います。"
+        },
+        {
+          "order": 34,
+          "pos": null,
+          "speakerLabel": "議長（早瀨賢一君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり可決されました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m20",
+          "memberName": "平田信広",
+          "faction": "確認中",
+          "vote": "oppose"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "議案第一三〇号と同一の討論（一括討論）で平田信広議員（m20）が反対を明言。他の議員の個別賛否は会議録に記載なし。"
+    },
+    {
+      "billId": "2024-12-ketsugi-6",
+      "billTitle": "令和六年度における市職員の不適正な事務処理及び市長の不適切発言等に関する調査特別委員会の調査経費に関する決議（案）",
+      "session": "令和6年12月定例会",
+      "fileName": "R061213A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061213A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 80,
+          "pos": null,
+          "speakerLabel": "吉田茂仁君",
+          "role": "討論（反対表明）",
+          "quote": "まず初めに、私は、この百条委員会調査経費追加について、反対の立場で討論をさせていただきます。"
+        },
+        {
+          "order": 83,
+          "pos": null,
+          "speakerLabel": "宮田博徳君",
+          "role": "討論（賛成表明）",
+          "quote": "ただいま議題となっております決議第六号に、賛成の立場から討論いたします。"
+        },
+        {
+          "order": 86,
+          "pos": null,
+          "speakerLabel": "議長（早瀨賢一君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり決定いたしました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m26",
+          "memberName": "吉田茂仁",
+          "faction": "確認中",
+          "vote": "oppose"
+        },
+        {
+          "memberId": "m24",
+          "memberName": "宮田博徳",
+          "faction": "確認中",
+          "vote": "approve"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "討論者2名（吉田茂仁=反対、宮田博徳=賛成）の賛否のみ会議録上明記。他の議員の個別賛否は不明。"
+    },
+    {
+      "billId": "2024-09-ketsugi-5",
+      "billTitle": "市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）",
+      "session": "令和6年9月定例会",
+      "fileName": "R061004A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R061004A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 50,
+          "pos": null,
+          "speakerLabel": "猪之鼻哲君",
+          "role": "討論（賛成表明）",
+          "quote": "ただいま議題となっております市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）に、賛成する立場から討論を行います。"
+        },
+        {
+          "order": 52,
+          "pos": null,
+          "speakerLabel": "松田満男君",
+          "role": "討論（賛成表明）",
+          "quote": "市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）に、賛成する立場から討論を行います。"
+        },
+        {
+          "order": 55,
+          "pos": null,
+          "speakerLabel": "吉田茂仁君",
+          "role": "討論（反対表明）",
+          "quote": "私は、市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）に、反対の立場で討論をさせていただきます。"
+        },
+        {
+          "order": 65,
+          "pos": null,
+          "speakerLabel": "議長（早瀨賢一君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり決定いたしました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m02",
+          "memberName": "猪之鼻哲",
+          "faction": "確認中",
+          "vote": "approve"
+        },
+        {
+          "memberId": "m22",
+          "memberName": "松田満男",
+          "faction": "確認中",
+          "vote": "approve"
+        },
+        {
+          "memberId": "m26",
+          "memberName": "吉田茂仁",
+          "faction": "確認中",
+          "vote": "oppose"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "討論者3名（猪之鼻哲=賛成、松田満男=賛成、吉田茂仁=反対）の賛否のみ会議録上明記。決議提出者の宮田博徳議員（m24）は質疑応答のみで、議長より提出者は討論不可と案内されたため討論者に含めない。他の議員の個別賛否は不明。"
+    },
+    {
+      "billId": "2024-06-ketsugi-4",
+      "billTitle": "延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議（案）",
+      "session": "令和6年6月定例会",
+      "fileName": "R060708A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060708A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 82,
+          "pos": null,
+          "speakerLabel": "河野治満君",
+          "role": "討論（反対表明）",
+          "quote": "ただいま、議題となっています延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。"
+        },
+        {
+          "order": 84,
+          "pos": null,
+          "speakerLabel": "稲田雅之君",
+          "role": "討論（賛成表明）",
+          "quote": "延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に賛成する立場から討論を行います。"
+        },
+        {
+          "order": 86,
+          "pos": null,
+          "speakerLabel": "上杉泰洋君",
+          "role": "討論（反対表明）",
+          "quote": "ただいま議題となっています延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。"
+        },
+        {
+          "order": 88,
+          "pos": null,
+          "speakerLabel": "平田信広君",
+          "role": "討論（賛成表明）",
+          "quote": "提案されています第三者委員会設置の決議案に賛成の討論を行います。"
+        },
+        {
+          "order": 93,
+          "pos": null,
+          "speakerLabel": "議長（早瀨賢一君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり決定いたしました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m10",
+          "memberName": "河野治満",
+          "faction": "確認中",
+          "vote": "oppose"
+        },
+        {
+          "memberId": "m01",
+          "memberName": "稲田雅之",
+          "faction": "確認中",
+          "vote": "approve"
+        },
+        {
+          "memberId": "m03",
+          "memberName": "上杉泰洋",
+          "faction": "確認中",
+          "vote": "oppose"
+        },
+        {
+          "memberId": "m20",
+          "memberName": "平田信広",
+          "faction": "確認中",
+          "vote": "approve"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "討論者4名（河野治満=反対、稲田雅之=賛成、上杉泰洋=反対、平田信広=賛成）の賛否のみ会議録上明記。他の議員の個別賛否は不明。"
+    },
+    {
+      "billId": "2024-03-gian-108",
+      "billTitle": "令和六年度延岡市一般会計予算",
+      "session": "令和6年3月定例会",
+      "fileName": "R060322A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R060322A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 16,
+          "pos": null,
+          "speakerLabel": "吉田茂仁君",
+          "role": "討論（賛成表明）",
+          "quote": "私は、令和六年度一般会計当初予算案について、賛成の立場で討論をさせていただきます。"
+        },
+        {
+          "order": 18,
+          "pos": null,
+          "speakerLabel": "河野治満君",
+          "role": "討論（賛成表明）",
+          "quote": "議案第一〇八号令和六年度延岡市一般会計予算につきまして、賛成の立場から討論をさせていただきます。"
+        },
+        {
+          "order": 21,
+          "pos": null,
+          "speakerLabel": "副議長（早瀨賢一君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり可決されました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m26",
+          "memberName": "吉田茂仁",
+          "faction": "確認中",
+          "vote": "approve"
+        },
+        {
+          "memberId": "m10",
+          "memberName": "河野治満",
+          "faction": "確認中",
+          "vote": "approve"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "討論者2名（吉田茂仁、河野治満）とも賛成を明言（河野議員の討論内で「本案に対する反対討論は、今回はないようですので」との発言があり、当日の一括討論の中で反対討論者がいなかったことも会議録上確認できる）。ただし反対討論が無かったこと自体は『反対者ゼロ』を意味しない（起立採決である以上、討論なしで反対に回った議員がいた可能性は残る。起立多数＝可決だが全会一致ではない）。他の議員の個別賛否は不明。"
+    },
+    {
+      "billId": "2023-09-ketsugi-1",
+      "billTitle": "市職員の不適正な事務処理等に関する調査に関する決議（案）",
+      "session": "令和5年9月定例会",
+      "fileName": "R050929A",
+      "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050929A&startPos=0",
+      "voteMethod": "起立多数",
+      "result": "原案可決",
+      "evidence": [
+        {
+          "order": 26,
+          "pos": null,
+          "speakerLabel": "河野治満君",
+          "role": "討論（反対表明）",
+          "quote": "反対の立場で討論を行います。"
+        },
+        {
+          "order": 29,
+          "pos": null,
+          "speakerLabel": "宮田博徳君",
+          "role": "討論（賛成表明）",
+          "quote": "私は、今回の市職員の不適正な事務処理等に関する調査に関する決議案につきまして、賛成の立場で意見を述べさせていただきたい、討論に参加したいというふうに思います。"
+        },
+        {
+          "order": 32,
+          "pos": null,
+          "speakerLabel": "吉田茂仁君",
+          "role": "討論（反対表明）",
+          "quote": "私は、今回の百条委員会の設置に関して、反対の立場で討論をさせていただきます。"
+        },
+        {
+          "order": 35,
+          "pos": null,
+          "speakerLabel": "小御門綾君",
+          "role": "討論（賛成表明）",
+          "quote": "私は、賛成の立場から討論いたします。"
+        },
+        {
+          "order": 38,
+          "pos": null,
+          "speakerLabel": "上杉泰洋君",
+          "role": "討論（反対表明）",
+          "quote": "今回、審議になっています百条委員会の設置について、反対の立場から討論したいと思います。"
+        },
+        {
+          "order": 43,
+          "pos": null,
+          "speakerLabel": "柴浩信君",
+          "role": "討論（賛成表明）",
+          "quote": "私は、閉会日の決議に対しては賛成いたします。"
+        },
+        {
+          "order": 52,
+          "pos": null,
+          "speakerLabel": "議長（松田満男君）",
+          "role": "採決宣告",
+          "quote": "起立多数であります。よって、本案は原案のとおり可決いたしました。"
+        }
+      ],
+      "proposedMemberVotesAppend": [
+        {
+          "memberId": "m10",
+          "memberName": "河野治満",
+          "faction": "確認中",
+          "vote": "oppose"
+        },
+        {
+          "memberId": "m24",
+          "memberName": "宮田博徳",
+          "faction": "確認中",
+          "vote": "approve"
+        },
+        {
+          "memberId": "m26",
+          "memberName": "吉田茂仁",
+          "faction": "確認中",
+          "vote": "oppose"
+        },
+        {
+          "memberId": "m13",
+          "memberName": "小御門綾",
+          "faction": "確認中",
+          "vote": "approve"
+        },
+        {
+          "memberId": "m03",
+          "memberName": "上杉泰洋",
+          "faction": "確認中",
+          "vote": "oppose"
+        },
+        {
+          "memberId": "m14",
+          "memberName": "柴浩信",
+          "faction": "確認中",
+          "vote": "approve"
+        }
+      ],
+      "completeness": "partial-debate-only",
+      "note": "討論者6名（河野治満=反対、宮田博徳=賛成、吉田茂仁=反対、小御門綾=賛成、上杉泰洋=反対、柴浩信=賛成）の賛否が会議録上明記。決議提出者の北林幹雄議員（m11）は討論資格なしと議長より案内されたため討論者に含めない。他の議員（本特別委員会の設置対象議員18名前後）の個別賛否は不明。"
+    }
+  ],
+  "notDisclosedConfirmations": [
+    {
+      "billId": "2026-03-gian-148",
+      "billTitle": "延岡市国民健康保険税条例の一部を改正する条例の制定",
+      "session": "令和8年3月定例会",
+      "fileName": "R080319A",
+      "evidence": "厚生教育委員会一括審査。委員長報告後「討論はありませんか」「なし」で討論省略。採決時「議案第一四八号に異議あり」との発言のみ（発言者不明）で起立採決、起立多数で可決。討論・異議発言とも発言者名の記載なし。",
+      "orders": [
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    {
+      "billId": "2025-09-gian-44",
+      "billTitle": "令和六年度延岡市後期高齢者医療特別会計歳入歳出決算の認定",
+      "session": "令和7年9月定例会",
+      "fileName": "R071003A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ。個別氏名の記載なし。",
+      "orders": [
+        9,
+        10,
+        12,
+        13
+      ]
+    },
+    {
+      "billId": "2025-03-gian-115",
+      "billTitle": "令和七年度延岡市後期高齢者医療特別会計予算",
+      "session": "令和7年3月定例会",
+      "fileName": "R070321A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ。個別氏名の記載なし。",
+      "orders": [
+        13,
+        14,
+        16,
+        17
+      ]
+    },
+    {
+      "billId": "2025-03-ketsugi-7",
+      "billTitle": "令和七年度における市職員の不適正な事務処理及び市長の不適切発言等に関する調査特別委員会の調査経費に関する決議（案）",
+      "session": "令和7年3月定例会",
+      "fileName": "R070321A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ。個別氏名の記載なし。",
+      "orders": [
+        98,
+        99,
+        100,
+        101
+      ]
+    },
+    {
+      "billId": "2024-09-gian-32",
+      "billTitle": "令和五年度延岡市後期高齢者医療特別会計歳入歳出決算の認定",
+      "session": "令和6年9月定例会",
+      "fileName": "R061004A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ。個別氏名の記載なし。",
+      "orders": [
+        6,
+        7,
+        9,
+        10
+      ]
+    },
+    {
+      "billId": "2024-09-seigan-2",
+      "billTitle": "新型コロナウイルス感染症予防接種に導入されるレプリコンワクチンへの懸念の精査を求める請願",
+      "session": "令和6年9月定例会",
+      "fileName": "R060920A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ。個別氏名の記載なし。",
+      "orders": [
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "billId": "2024-03-gian-112",
+      "billTitle": "令和六年度延岡市後期高齢者医療特別会計予算",
+      "session": "令和6年3月定例会",
+      "fileName": "R060322A",
+      "evidence": "同日程内の議案第一〇八号（一般会計予算）に対する討論（吉田茂仁、河野治満、いずれも賛成表明）はあったが、両者とも議案第一〇八号のみを名指しして討論しており、議案第一一二号（後期高齢者医療特別会計予算）への言及はない。議案第一一二号は単独で起立採決され、採決前に個別の討論は行われていない。",
+      "orders": [
+        16,
+        18,
+        22,
+        23
+      ]
+    },
+    {
+      "billId": "2024-03-chinjo-4",
+      "billTitle": "国に対し、「再審法（刑事訴訟法の再審規定）の改正を求める意見書」の提出を求める陳情",
+      "session": "令和6年3月定例会",
+      "fileName": "R060322A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ（起立少数で不採択）。個別氏名の記載なし。",
+      "orders": [
+        83,
+        84,
+        85
+      ]
+    },
+    {
+      "billId": "2023-12-chinjo-3",
+      "billTitle": "議会改革についての陳情",
+      "session": "令和5年12月定例会",
+      "fileName": "R051215A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決。「起立者はありません」（0名起立、不採択）。個別氏名の記載なし（起立者ゼロという集計結果のみ判明）。",
+      "orders": [
+        59,
+        60,
+        61
+      ]
+    },
+    {
+      "billId": "2023-09-gian-34",
+      "billTitle": "令和四年度延岡市後期高齢者医療特別会計歳入歳出決算の認定",
+      "session": "令和5年9月定例会",
+      "fileName": "R050929A",
+      "evidence": "討論なしと認めます、討論を終わります。の後、起立採決のみ。個別氏名の記載なし。",
+      "orders": [
+        6,
+        7,
+        9,
+        10
+      ]
+    },
+    {
+      "billId": "2023-09-gian-36",
+      "billTitle": "令和四年度延岡市下水道事業会計剰余金の処分及び決算の認定",
+      "session": "令和5年9月定例会",
+      "fileName": "R050929A",
+      "evidence": "議案第三〇号〜三六号は同一の一括討論（「討論なしと認めます」）で処理されており、議案第三六号個別の討論はない。起立採決のみ（起立少数で否決及び不認定）。個別氏名の記載なし。",
+      "orders": [
+        6,
+        7,
+        11,
+        12
+      ]
+    }
+  ],
+  "remainingBacklogEstimate": {
+    "totalClassC": 52,
+    "pilotCovered": 18,
+    "remaining": 34,
+    "remainingSessions": [
+      "令和4年9月定例会(1)",
+      "令和4年6月定例会(3)",
+      "令和4年3月定例会(1)",
+      "令和3年9月定例会(3)",
+      "令和3年6月定例会(2)",
+      "令和3年3月定例会(3)",
+      "令和2年12月定例会(1)",
+      "令和2年9月定例会(3)",
+      "令和2年3月定例会(4)",
+      "令和元年9月定例会(6)",
+      "令和元年6月定例会(2)",
+      "令和5年3月定例会(2)"
+    ],
+    "estimateNote": "パイロット9会期・18議案の処理実績（討論あり議案7/18＝約39%で部分開示データを確認）をもとに単純外挿すると、残り34議案のうち13〜14議案程度で討論者の部分的な賛否データが得られる可能性がある。ただし2019〜2022年の会期は会議録の発言セグメント数や討論の有無の傾向が異なる可能性があり、この外挿はあくまで粗い目安（実際に精読しない限り確定しない）。次回バックフィルでは令和3年度・令和4年度（8議案）または令和元年度・令和2年度（12議案）を6〜8会期単位で追加着手することを推奨する。"
+  },
+  "openQuestionsForParent": [
+    {
+      "question": "討論者のみの『部分開示』memberVotesをどう表現するか",
+      "detail": "既存2件（記名投票）のmemberVotesは全議員を網羅した『完全な個別賛否』である。今回パイロットで見つかった7件は、討論に立った1〜6名分の賛否のみが会議録から確認でき、残り20名前後の賛否は不明という『部分開示』である。individualVoteDisclosureStatusの既存enum（disclosed/unconfirmed/notDisclosed）には該当する値がない。案として (a) 新しいenum値（例: partiallyDisclosed）を追加する (b) individualVoteDisclosureStatusは既存のnotDisclosedのまま据え置き、討論者の賛否はverificationNoteの自由記述のみで扱いmemberVotesには追加しない (c) memberVotesには追加するがindividualVoteDisclosureStatusはnotDisclosedのままとし、UI側で『討論者の賛否のみ判明、全議員の賛否は不明』を明示する、の3案が考えられる。データの真正性は確認済みだが、サイトの表示ポリシー（推測データを載せない、誤解を招く表示をしない）との整合を親エージェントで判断されたい。"
+    },
+    {
+      "question": "memberVotes配列内の各要素にevidence/根拠posを持たせるか",
+      "detail": "既存2件のmemberVotes要素はmemberId/memberName/faction/voteのみで、根拠URLは議案レコード全体のresultDocumentUrl/sourceFilePathに委ねている。今回の提案は議案レコード全体のtranscriptUrl（既存フィールド、変更なし）が根拠になるが、討論の発言セグメント（pos値）まで遡れる形でverificationNoteに記載した。この粒度で十分か、あるいはmemberVotes要素ごとに根拠posを持たせるスキーマ拡張が必要か、親エージェントの判断を仰ぐ。"
+    },
+    {
+      "question": "faction値の扱い",
+      "detail": "既存2件はfaction: '確認中'を全メンバーに一律使用している。今回もそれに倣ったが、members.jsonには現在のfactionIdが存在する（例: m20=mukaiha(NK), m24=riltuken等）。ただし投票当時の会派と現在の会派が同一とは限らないため、現在のfactionIdをそのまま転記するのは不正確な可能性がある。既存方針の踏襲（確認中のまま）を推奨するが、確定は親エージェントに委ねる。"
+    }
+  ]
+}

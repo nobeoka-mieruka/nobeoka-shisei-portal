@@ -1157,12 +1157,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,515.22票、自由民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,100票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm12",
@@ -1181,12 +1181,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,494票、民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,662票、民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数2,320票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm13",
@@ -1205,12 +1205,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,454票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm14",
@@ -1229,12 +1229,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,272票、無所属）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,155票、自由民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,757票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm15",
@@ -1253,12 +1253,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,269票、公明党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm16",
@@ -1277,12 +1277,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,108.01票、社会民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,292.95票、社会民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm17",
@@ -1301,12 +1301,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,033票、社会民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,104票、社会民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,841票、社会民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm18",
@@ -1325,12 +1325,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,031票、公明党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,134票、公明党）。2007-04-22執行延岡市議会議員選挙で当選（得票数2,151票、公明党）。2011-04-24執行延岡市議会議員選挙で当選（得票数2,032票、公明党）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,662票、公明党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm19",
@@ -1349,12 +1349,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数2,008.59票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm20",
@@ -1373,12 +1373,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,987票、公明党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,154票、公明党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm21",
@@ -1397,12 +1397,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,978.41票、無所属）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,770票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm22",
@@ -1421,12 +1421,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,967票、民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,447.44票、民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数2,304.39票、民主党）。2011-04-24執行延岡市議会議員選挙で当選（得票数2,222.41票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm23",
@@ -1445,12 +1445,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,934票、無所属）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,629票、無所属）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,202票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm24",
@@ -1469,12 +1469,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,870票、民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,909票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm25",
@@ -1493,12 +1493,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,857票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm26",
@@ -1517,12 +1517,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,851.78票、社会民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm27",
@@ -1541,12 +1541,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,846票、無所属）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,558票、無所属）。2010-01-24執行延岡市議会議員補欠選挙で当選（得票数25,869票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm28",
@@ -1565,12 +1565,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,803票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm29",
@@ -1589,12 +1589,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,797票、自由民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,502票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm30",
@@ -1613,12 +1613,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,780.54票、無所属）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,820.52票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm31",
@@ -1637,12 +1637,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,742票、無所属）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,514票、自由民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,344.92票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm32",
@@ -1661,12 +1661,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,718票、民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,193票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm33",
@@ -1685,12 +1685,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,711.44票、民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,827.54票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm34",
@@ -1709,12 +1709,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,695票、民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,593票、民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,403票、民主党）。2011-04-24執行延岡市議会議員選挙で当選（得票数1,490票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm35",
@@ -1733,12 +1733,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,667票、社会民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm36",
@@ -1757,12 +1757,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,554票、自由民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,844票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm37",
@@ -1781,12 +1781,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,532票、自由民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数1,668票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm38",
@@ -1805,12 +1805,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14439",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選8名（計38名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "1999-04-25執行延岡市議会議員選挙で当選（得票数1,502票、日本共産党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm39",
@@ -1829,12 +1829,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14438",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選1名・落選1名（計2名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。同日執行の延岡市長選挙（2002-01-27）と同時に行われた補欠選挙。欠員理由はページ上「その他」とのみ記載され、具体的な理由は確認できていない。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選1名・落選1名（計2名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。同日執行の延岡市長選挙（2002-01-27）と同時に行われた補欠選挙。欠員理由はページ上「その他」とのみ記載され、具体的な理由は確認できていない。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2002-01-27執行延岡市議会議員補欠選挙で当選（得票数23,972票、自由民主党）。2003-04-27執行延岡市議会議員選挙で当選（得票数2,345票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm40",
@@ -1853,12 +1853,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14437",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2003-04-27執行延岡市議会議員選挙で当選（得票数3,210票、社会民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数2,484票、社会民主党）。2011-04-24執行延岡市議会議員選挙で当選（得票数2,312票、社会民主党）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,900票、社会民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm41",
@@ -1877,12 +1877,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14437",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2003-04-27執行延岡市議会議員選挙で当選（得票数2,246票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm42",
@@ -1901,12 +1901,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14437",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2003-04-27執行延岡市議会議員選挙で当選（得票数2,209票、公明党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,861票、公明党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm43",
@@ -1925,12 +1925,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14437",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2003-04-27執行延岡市議会議員選挙で当選（得票数1,365票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm44",
@@ -1949,12 +1949,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14437",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2003-04-27執行延岡市議会議員選挙で当選（得票数1,274票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm45",
@@ -1973,12 +1973,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14437",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選30名・落選5名（計35名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2003-04-27執行延岡市議会議員選挙で当選（得票数1,189票、日本共産党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,242票、日本共産党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm46",
@@ -1997,12 +1997,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14436",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選2名・落選4名（計6名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。同日執行の延岡市長選挙（2006-01-29）と同時に行われた補欠選挙。欠員理由はページ上「その他」とのみ記載され、具体的な理由は確認できていない。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選2名・落選4名（計6名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。同日執行の延岡市長選挙（2006-01-29）と同時に行われた補欠選挙。欠員理由はページ上「その他」とのみ記載され、具体的な理由は確認できていない。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2006-01-29執行延岡市議会議員補欠選挙で当選（得票数12,456票、社会民主党）。2007-04-22執行延岡市議会議員選挙で当選（得票数1,828.55票、社会民主党）。2011-04-24執行延岡市議会議員選挙で当選（得票数1,514.41票、社会民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm47",
@@ -2021,12 +2021,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数2,723.08票、無所属）。2011-04-24執行延岡市議会議員選挙で当選（得票数2,380票、無所属）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,704票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm48",
@@ -2045,12 +2045,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数2,099票、公明党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm49",
@@ -2069,12 +2069,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,994.22票、民主党）。2011-04-24執行延岡市議会議員選挙で当選（得票数1,810票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm50",
@@ -2093,12 +2093,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,781票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm51",
@@ -2117,12 +2117,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,780票、無所属）。2011-04-24執行延岡市議会議員選挙で当選（得票数1,403票、無所属）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,484票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm52",
@@ -2141,12 +2141,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,627票、民主党）。2011-04-24執行延岡市議会議員選挙で当選（得票数1,456票、民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm53",
@@ -2165,12 +2165,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,602票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm54",
@@ -2189,12 +2189,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,529.78票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm55",
@@ -2213,12 +2213,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,437票、無所属）。2011-04-24執行延岡市議会議員選挙で当選（得票数2,104票、無所属）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,625票、自由民主党）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm56",
@@ -2237,12 +2237,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,433.13票、無所属）。2011-04-24執行延岡市議会議員選挙で当選（得票数1,659.93票、無所属）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,491.4票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm57",
@@ -2261,12 +2261,12 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14435",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選33名・落選17名（計50名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2007-04-22執行延岡市議会議員選挙で当選（得票数1,286票、無所属）。2011-04-24執行延岡市議会議員選挙で当選（得票数2,075票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   },
   {
     "id": "archive-fm58",
@@ -2285,11 +2285,11 @@
         "sourceUrl": "https://go2senkyo.com/local/senkyo/14433",
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
-        "verificationStatus": "needsReview",
-        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選29名・落選4名（計33名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。"
+        "verificationStatus": "verified",
+        "notes": "選挙結果ページのHTMLテーブルを直接解析し、当選29名・落選4名（計33名）の氏名・ふりがな・党派・年齢・得票・当落を取得した。 候補者のlinkedProfileIdは、members.json/formerMembers.jsonのnameKana・氏名との完全一致（カタカナ⇔ひらがな正規化込み）でのみ設定した。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、氏名・ふりがな・当選の事実がページ本体に掲載されていることを再確認した。）"
       }
     ],
     "notes": "2011-04-24執行延岡市議会議員選挙で当選（得票数2,206.88票、無所属）。2015-04-26執行延岡市議会議員選挙で当選（得票数1,705.89票、無所属）。令和元年（2019年）4月21日執行の延岡市議会議員選挙以降は当選記録が確認できないため、それ以前に議員を退任したとみられるが、退任日・退任理由の詳細を示す公式資料は確認できておらず未確認（推測では補わない）。在職中の一般質問・発言記録は、現行の会議録検索システム・councilSpeechSummaries.jsonの収録範囲（令和元年6月定例会以降）に含まれないため確認できていない（0件ではなく未収録）。",
-    "lastVerifiedAt": "2026-08-13"
+    "lastVerifiedAt": "2026-08-24"
   }
 ]

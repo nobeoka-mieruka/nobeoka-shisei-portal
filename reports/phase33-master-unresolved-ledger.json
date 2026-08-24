@@ -206,8 +206,8 @@
       "requiresOnsite": true,
       "requiresInquiry": true,
       "requiresBulkBackfill": true,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "INQ-007（延岡市教育委員会向け、draft）は1970年代限定の照会文。1933-1969年・2010年以降との接続部分は未対応。"
+      "lastCheckedAt": "2026-08-24",
+      "notes": "INQ-007（延岡市教育委員会向け、draft）は1970年代限定の照会文。1933-1969年・2010年以降との接続部分は未対応。 【2026-08-24追記（Phase102-103）】citySpecialPosts.jsonのappointedDate未確定レコード・archiveMayorTerms.jsonの市長13区間を含む計19対象を再調査したが、オンラインで新規に確定できた日付は0件だった（推測補完は行っていない）。本項目に関連する対象はlibrary_required（延岡市立図書館・宮崎県立図書館・NDL個人送信サービスでの延岡市史現物閲覧が必要）またはsource_not_located（教育長csp-43は資料の所在自体が未特定）に分類。現地閲覧計画の詳細はreports/phase99-108-staging/phase102-103-term-gaps-findings.jsonを参照。"
     },
     {
       "unresolvedId": "UNR-007",
@@ -275,8 +275,8 @@
       "requiresOnsite": true,
       "requiresInquiry": true,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "延岡市史1993年版（Phase26で一部閲覧済み）は未確認のためRoute Cの余地あり。"
+      "lastCheckedAt": "2026-08-24",
+      "notes": "延岡市史1993年版（Phase26で一部閲覧済み）は未確認のためRoute Cの余地あり。 【2026-08-24追記（Phase102-103）】citySpecialPosts.jsonのappointedDate未確定レコード・archiveMayorTerms.jsonの市長13区間を含む計19対象を再調査したが、オンラインで新規に確定できた日付は0件だった（推測補完は行っていない）。本項目に関連する対象はlibrary_required（延岡市立図書館・宮崎県立図書館・NDL個人送信サービスでの延岡市史現物閲覧が必要）またはsource_not_located（教育長csp-43は資料の所在自体が未特定）に分類。現地閲覧計画の詳細はreports/phase99-108-staging/phase102-103-term-gaps-findings.jsonを参照。"
     },
     {
       "unresolvedId": "UNR-009",
@@ -310,8 +310,8 @@
       "requiresOnsite": false,
       "requiresInquiry": false,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "Route Cで解決可能性が高い（既に資料に到達済み、精読の再挑戦のみで解決し得る）。"
+      "lastCheckedAt": "2026-08-24",
+      "notes": "Route Cで解決可能性が高い（既に資料に到達済み、精読の再挑戦のみで解決し得る）。 【2026-08-24追記（Phase102-103）】citySpecialPosts.jsonのappointedDate未確定レコード・archiveMayorTerms.jsonの市長13区間を含む計19対象を再調査したが、オンラインで新規に確定できた日付は0件だった（推測補完は行っていない）。本項目に関連する対象はlibrary_required（延岡市立図書館・宮崎県立図書館・NDL個人送信サービスでの延岡市史現物閲覧が必要）またはsource_not_located（教育長csp-43は資料の所在自体が未特定）に分類。現地閲覧計画の詳細はreports/phase99-108-staging/phase102-103-term-gaps-findings.jsonを参照。"
     },
     {
       "unresolvedId": "UNR-010",
@@ -362,8 +362,8 @@
       "requiresOnsite": false,
       "requiresInquiry": false,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "助役1-5代と同じ手法・同じコマで解決可能性が高い。"
+      "lastCheckedAt": "2026-08-24",
+      "notes": "助役1-5代と同じ手法・同じコマで解決可能性が高い。 【2026-08-24追記（Phase102-103）】citySpecialPosts.jsonのappointedDate未確定レコード・archiveMayorTerms.jsonの市長13区間を含む計19対象を再調査したが、オンラインで新規に確定できた日付は0件だった（推測補完は行っていない）。本項目に関連する対象はlibrary_required（延岡市立図書館・宮崎県立図書館・NDL個人送信サービスでの延岡市史現物閲覧が必要）またはsource_not_located（教育長csp-43は資料の所在自体が未特定）に分類。現地閲覧計画の詳細はreports/phase99-108-staging/phase102-103-term-gaps-findings.jsonを参照。"
     },
     {
       "unresolvedId": "UNR-012",
@@ -974,8 +974,8 @@
       "requiresOnsite": false,
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
-      "lastCheckedAt": "2026-08-23",
-      "notes": "Phase79（29項目出典網羅率監査）で新規発見。521件の\"notDisclosed\"は「未収集」ではなく「公式資料上そもそも個人別記録が存在しないことを確認済み」の状態であり、654件の\"unconfirmed\"とは区別して扱う必要がある。 Phase91（2026-08-23、パイロット調査）で構造的原因を特定：令和8年7月3日現在の第26回定例会「議案審査等結果」PDF（既に本サイトのsourceDocumentId=2026-06-results等で採決結果の一次資料として使用中のもの）を実際に画像確認したところ、この種の公式文書は議案番号・件名・審議結果（原案可決等）・議決日のみを収録し、個別議員の賛否は一切含まれていないことを確認した。個別賛否が判明する2件（2019-09-gian-47、2023-07-extraordinary-01-gian-9）はいずれも異例の起立採決・再議が行われたケースであり、通常の簡易採決（異議なし採決）では個別記録がそもそも作成されない可能性が高い。したがって、残り1175件の大半は『B: 採決結果のみあり（一次資料に個別記録が存在しない）』に該当する可能性が高く、真に個別記録が存在するのは会議録本文で起立採決・記名投票が明記された少数の議案に限られると推定される。バックフィルには「審議結果」PDFではなく各会期の会議録本文（討論・採決部分）を個別に精読する必要があり、1177件全件の網羅的取得は非現実的。次のアクションとして、まず起立採決・記名投票が明記された議案を会議録本文検索で特定し、その範囲に絞った小規模バックフィルから着手することを推奨する（無制限の全件取得は行わない）。 【2026-08-24追記】billVotes.jsonの既存フィールド（voteMethod・individualVoteDisclosureStatus）を機械集計し、A〜Fの内訳を定量化した：A(記名投票・個人別記録あり)=2、B(簡易採決・全会一致＝原理的に個人別記録なし)=1,095、C(起立採決＝会議録本文の個別確認が必要)=52、E(採決なし)=4、F(直近2会期、パイプライン反映待ち)=24。専用バックフィル対象はCの52件のみと判断し、reports/task-backfill-votes-001.mdへタスク定義として切り出した（無制限の全件取得は引き続き行わない）。"
+      "lastCheckedAt": "2026-08-24",
+      "notes": "Phase79（29項目出典網羅率監査）で新規発見。521件の\"notDisclosed\"は「未収集」ではなく「公式資料上そもそも個人別記録が存在しないことを確認済み」の状態であり、654件の\"unconfirmed\"とは区別して扱う必要がある。 Phase91（2026-08-23、パイロット調査）で構造的原因を特定：令和8年7月3日現在の第26回定例会「議案審査等結果」PDF（既に本サイトのsourceDocumentId=2026-06-results等で採決結果の一次資料として使用中のもの）を実際に画像確認したところ、この種の公式文書は議案番号・件名・審議結果（原案可決等）・議決日のみを収録し、個別議員の賛否は一切含まれていないことを確認した。個別賛否が判明する2件（2019-09-gian-47、2023-07-extraordinary-01-gian-9）はいずれも異例の起立採決・再議が行われたケースであり、通常の簡易採決（異議なし採決）では個別記録がそもそも作成されない可能性が高い。したがって、残り1175件の大半は『B: 採決結果のみあり（一次資料に個別記録が存在しない）』に該当する可能性が高く、真に個別記録が存在するのは会議録本文で起立採決・記名投票が明記された少数の議案に限られると推定される。バックフィルには「審議結果」PDFではなく各会期の会議録本文（討論・採決部分）を個別に精読する必要があり、1177件全件の網羅的取得は非現実的。次のアクションとして、まず起立採決・記名投票が明記された議案を会議録本文検索で特定し、その範囲に絞った小規模バックフィルから着手することを推奨する（無制限の全件取得は行わない）。 【2026-08-24追記】billVotes.jsonの既存フィールド（voteMethod・individualVoteDisclosureStatus）を機械集計し、A〜Fの内訳を定量化した：A(記名投票・個人別記録あり)=2、B(簡易採決・全会一致＝原理的に個人別記録なし)=1,095、C(起立採決＝会議録本文の個別確認が必要)=52、E(採決なし)=4、F(直近2会期、パイプライン反映待ち)=24。専用バックフィル対象はCの52件のみと判断し、reports/task-backfill-votes-001.mdへタスク定義として切り出した（無制限の全件取得は引き続き行わない）。 【2026-08-24追記（Phase100-101、パイロット実施）】分類C（起立採決52件）のうち最新9会期・18議案をパイロット対象とし、延岡市議会会議録検索システムの会議録本文（討論・採決部分）を実際に精読した。結果：(1) 11議案は討論なし/該当議案への言及なしのまま起立採決のみで、個別記録が原本に存在しないことを確認（既存のindividualVoteDisclosureStatus=notDisclosedを裏付け、verificationNoteへ確認内容を追記）。(2) 7議案は討論で意見表明した議員1〜6名分の氏名・賛否のみ会議録上確認できたが、起立者・反対者の全体人数は非公表のため『全議員の賛否』は依然再構成不能。既存のmemberVotes配列（完全な個人別記録専用）へは追加せず、確認できた部分情報はverificationNoteへ記載するに留めた（誤解を招く不完全表示を避けるため）。billVotes.jsonのindividualVoteDisclosureStatus enumには『討論者のみ部分開示』を表す値が無く、新設要否は次フェーズで検討する。残り34件（分類C全52件中、未処理分）は次回6〜8会期規模のパイロットへ持ち越し。詳細はreports/task-backfill-votes-001.mdおよびreports/phase99-108-staging/phase100-101-vote-backfill-pilot-findings.jsonを参照。"
     }
   ],
   "summary": {
@@ -1005,6 +1005,6 @@
     "requiresOnsite": 10,
     "requiresInquiry": 9,
     "requiresBulkBackfill": 12,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。"
   }
 }
