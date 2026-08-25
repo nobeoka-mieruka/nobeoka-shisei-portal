@@ -31,6 +31,27 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
   const omittedYears = points.filter((p) => p.value == null).map((p) => p.year);
   const showValueTypeColumn = points.some((p) => p.valueTypeLabel != null);
 
+  // 概要（最新値・表示期間中の最高値/最低値・前年度比）。2件以上の確認済みデータがある場合のみ表示する。
+  // 「最高値/最低値」はあくまで表示範囲内（全年度推移／2〜4件の選択比較の両方で使われるため）の値であり、
+  // 過去最高・過去最低（史上record）を意味しない旨を明記する。
+  const latestPoint = nonNullPoints.length > 0 ? nonNullPoints[nonNullPoints.length - 1] : null;
+  const numericPoints = nonNullPoints as Array<{ year: number; value: number }>;
+  const maxPoint =
+    numericPoints.length > 0 ? numericPoints.reduce((a, b) => (b.value > a.value ? b : a)) : null;
+  const minPoint =
+    numericPoints.length > 0 ? numericPoints.reduce((a, b) => (b.value < a.value ? b : a)) : null;
+  const prevPoint =
+    nonNullPoints.length >= 2 ? nonNullPoints[nonNullPoints.length - 2] : null;
+  const yoyChangePercent =
+    latestPoint &&
+    prevPoint &&
+    typeof latestPoint.value === "number" &&
+    typeof prevPoint.value === "number" &&
+    prevPoint.value !== 0 &&
+    latestPoint.year - prevPoint.year === 1
+      ? ((latestPoint.value - prevPoint.value) / Math.abs(prevPoint.value)) * 100
+      : null;
+
   return (
     <div>
       <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
@@ -61,6 +82,31 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
               {omittedYears.map((y) => fiscalYearLabel(y)).join("、")}
               は資料未確認のため、グラフには表示していません（0とは扱っていません。詳細は下の表を参照してください）。
             </p>
+          )}
+
+          {numericPoints.length >= 2 && latestPoint && maxPoint && minPoint && (
+            <dl className="mt-3 grid grid-cols-2 gap-2 rounded-lg bg-surface-container-high p-3 text-xs sm:grid-cols-4">
+              <div>
+                <dt className="text-on-surface-variant">最新値（{fiscalYearLabel(latestPoint.year)}）</dt>
+                <dd className="mt-0.5 font-semibold text-on-surface">{metric.formatValue(latestPoint.value)}</dd>
+              </div>
+              <div>
+                <dt className="text-on-surface-variant">前年度比</dt>
+                <dd className="mt-0.5 font-semibold text-on-surface">
+                  {yoyChangePercent == null
+                    ? "算出不可"
+                    : `${yoyChangePercent >= 0 ? "+" : ""}${yoyChangePercent.toFixed(1)}%`}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-on-surface-variant">表示期間中の最高値（{fiscalYearLabel(maxPoint.year)}）</dt>
+                <dd className="mt-0.5 font-semibold text-on-surface">{metric.formatValue(maxPoint.value)}</dd>
+              </div>
+              <div>
+                <dt className="text-on-surface-variant">表示期間中の最低値（{fiscalYearLabel(minPoint.year)}）</dt>
+                <dd className="mt-0.5 font-semibold text-on-surface">{metric.formatValue(minPoint.value)}</dd>
+              </div>
+            </dl>
           )}
         </>
       )}

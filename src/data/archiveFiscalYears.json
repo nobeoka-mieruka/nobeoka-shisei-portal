@@ -5004,8 +5004,8 @@
         "fiscalReserveFundYen": 5032997000,
         "bondRedemptionFundYen": 2384088000,
         "otherSpecificPurposeFundsYen": 11779648000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、いずれも延岡市「財政状況資料集」総括表の区分（総務省統一様式）。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）とは別の一次資料・別の分類基準のため、この年度はfiscalAdjustmentFundYenを登録しない。基金全体の合計（totalYen）は総括表に合計行が無いため算出しない。",
+        "totalYen": 24335835000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、いずれも延岡市「財政状況資料集」総括表の区分（総務省統一様式）。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）とは別の一次資料・別の分類基準のため、この年度はfiscalAdjustmentFundYenを登録しない。totalYen（基金全体、24,335,835千円）は、財政状況資料集とは分類基準が異なる「令和2年度延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」の「基金の増減状況表」合計行（一般会計・特別会計ベース）から新規登録した（FY2024で確立済みの手法を踏襲）。同資料内のfiscalReserveFundYen・bondRedemptionFundYenが本ファイルの既存値と完全一致することを確認済み（クロスチェック）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html",
@@ -5016,10 +5016,20 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf",
+            "sourceTitle": "延岡市監査委員「令和2年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」(5)基金の状況",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 4,
+            "accessedAt": "2026-08-25",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "延岡市公式サイトの現行ページ（/soshiki/78/1210.html）からは削除済み（直リンクは404）のため、Internet Archive Wayback Machine（2023-10-24取得スナップショット）経由でPDF本文を確認した。「基金の増減状況表」の合計行（一般会計・特別会計ベース）本年度末残高24,335,835千円を確認。財政調整積立基金5,032,997千円・減債基金2,384,088千円は本ファイルの既存fiscalReserveFundYen/bondRedemptionFundYenと完全一致（クロスチェック）。"
           }
         ]
       },
-      "notes": "財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を新規登録。"
+      "notes": "財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を新規登録。 Phase119でtotalYen（基金全体、決算審査意見書ベース）を新規登録。"
     },
     "finance": {
       "fiscalYear": 2020,
@@ -5072,8 +5082,8 @@
         "fiscalAdjustmentFundYen": 13447525000,
         "bondRedemptionFundYen": 2844428000,
         "otherSpecificPurposeFundsYen": 10686318000,
-        "totalYen": null,
-        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。このためbondRedemptionFundYen（減債基金単独）は財源調整用基金に含まれており、別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。 財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財政状況資料集」総括表の区分（総務省統一様式）から新規登録。fiscalAdjustmentFundYen（広義合計）とは別の一次資料・別の分類基準。perCapitaYenはfiscalReserveFundYenを当該年度populationで除した参考値。",
+        "totalYen": 24254090000,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。このためbondRedemptionFundYen（減債基金単独）は財源調整用基金に含まれており、別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。 財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財政状況資料集」総括表の区分（総務省統一様式）から新規登録。fiscalAdjustmentFundYen（広義合計）とは別の一次資料・別の分類基準。perCapitaYenはfiscalReserveFundYenを当該年度populationで除した参考値。totalYen（基金全体、24,254,090千円）は、財政状況資料集とは分類基準が異なる「令和3年度延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」の「基金の増減状況表」合計行（一般会計・特別会計ベース）から新規登録した（FY2024で確立済みの手法を踏襲）。同資料内の財政調整積立基金5,032,997千円・減債基金2,844,428千円が本ファイルの既存fiscalReserveFundYen/bondRedemptionFundYenと完全一致することを確認済み（クロスチェック）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
@@ -5095,11 +5105,21 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
+            "sourceTitle": "延岡市監査委員「令和3年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」(5)基金の状況",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 4,
+            "accessedAt": "2026-08-25",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "延岡市公式サイトの現行ページ（/soshiki/78/1210.html）からは削除済み（直リンクは404）のため、Internet Archive Wayback Machine（2023-10-24取得スナップショット）経由でPDF本文を確認した。「基金の増減状況表」の合計行（一般会計・特別会計ベース）本年度末残高24,254,090千円を確認。"
           }
         ],
         "fiscalReserveFundYen": 5032997000
       },
-      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。 財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を追加登録。"
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。 財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を追加登録。 Phase119でtotalYen（基金全体、決算審査意見書ベース）を新規登録。"
     },
     "debt": {
       "fiscalYear": 2021,
@@ -5226,8 +5246,8 @@
         "fiscalAdjustmentFundYen": 13143179000,
         "bondRedemptionFundYen": 2752946000,
         "otherSpecificPurposeFundsYen": 9284472000,
-        "totalYen": null,
-        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。 財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財政状況資料集」総括表の区分（総務省統一様式）から新規登録。fiscalAdjustmentFundYen（広義合計）とは別の一次資料・別の分類基準。perCapitaYenはfiscalReserveFundYenを当該年度populationで除した参考値。",
+        "totalYen": 23492710000,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。 財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財政状況資料集」総括表の区分（総務省統一様式）から新規登録。fiscalAdjustmentFundYen（広義合計）とは別の一次資料・別の分類基準。perCapitaYenはfiscalReserveFundYenを当該年度populationで除した参考値。totalYen（基金全体、23,492,710千円）は、財政状況資料集とは分類基準が異なる「令和4年度延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」の「基金の増減状況表」合計行（一般会計・特別会計ベース）から新規登録した（FY2024で確立済みの手法を踏襲）。同資料内の財政調整積立基金5,032,997千円・減債基金2,752,946千円・財源調整用基金計13,143,179千円が本ファイルの既存fiscalReserveFundYen/bondRedemptionFundYen/fiscalAdjustmentFundYenと完全一致することを確認済み（クロスチェック）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
@@ -5249,11 +5269,21 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
+            "sourceTitle": "延岡市監査委員「令和4年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」(5)基金の状況",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 4,
+            "accessedAt": "2026-08-25",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "延岡市公式サイト「決算審査意見書・基金運用状況審査意見書の公表について」（/soshiki/78/1210.html）に現在も掲載されている資料。「基金の増減状況表」の合計行（一般会計・特別会計ベース）本年度末残高23,492,710千円を確認。"
           }
         ],
         "fiscalReserveFundYen": 5032997000
       },
-      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。 財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を追加登録。"
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。 財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を追加登録。 Phase119でtotalYen（基金全体、決算審査意見書ベース）を新規登録。"
     },
     "debt": {
       "fiscalYear": 2022,
@@ -5380,8 +5410,8 @@
         "fiscalAdjustmentFundYen": 12262706000,
         "bondRedemptionFundYen": 2606827000,
         "otherSpecificPurposeFundsYen": 8118706000,
-        "totalYen": null,
-        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。 財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財政状況資料集」総括表の区分（総務省統一様式）から新規登録。fiscalAdjustmentFundYen（広義合計）とは別の一次資料・別の分類基準。perCapitaYenはfiscalReserveFundYenを当該年度populationで除した参考値。",
+        "totalYen": 22882729000,
+        "definitionNote": "財源調整用基金は、財政調整積立基金・地域づくり推進事業基金・退職手当基金・減債基金の合計（既存financeDashboard.jsonの定義）。bondRedemptionFundYenは財源調整用基金に含まれ別数値として切り出せない。その他特定目的基金・基金全体（total）はこの年度は未確認。 財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財政状況資料集」総括表の区分（総務省統一様式）から新規登録。fiscalAdjustmentFundYen（広義合計）とは別の一次資料・別の分類基準。perCapitaYenはfiscalReserveFundYenを当該年度populationで除した参考値。totalYen（基金全体、22,882,729千円）は、財政状況資料集とは分類基準が異なる「令和5年度延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」の「基金の増減状況表」合計行（一般会計・特別会計ベース）から新規登録した（FY2024で確立済みの手法を踏襲）。同資料内の財政調整積立基金5,032,997千円・減債基金2,606,827千円・財源調整用基金計12,262,706千円が本ファイルの既存fiscalReserveFundYen/bondRedemptionFundYen/fiscalAdjustmentFundYenと完全一致することを確認済み（クロスチェック）。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24913.pdf",
@@ -5403,11 +5433,21 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20032.pdf",
+            "sourceTitle": "延岡市監査委員「令和5年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」(5)基金の状況",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 4,
+            "accessedAt": "2026-08-25",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "延岡市公式サイト「決算審査意見書・基金運用状況審査意見書の公表について」（/soshiki/78/1210.html）に現在も掲載されている資料。「基金の増減状況表」の合計行（一般会計・特別会計ベース）本年度末残高22,882,729千円を確認。前年度末残高23,492,710千円がFY2022の新規登録値と完全一致することも確認済み（クロスチェック）。"
           }
         ],
         "fiscalReserveFundYen": 5032997000
       },
-      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。 財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を追加登録。"
+      "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFundsトレンドから移行（決算額）。 財政調整基金・減債基金・その他特定目的基金（財政状況資料集の区分）を追加登録。 Phase119でtotalYen（基金全体、決算審査意見書ベース）を新規登録。"
     },
     "debt": {
       "fiscalYear": 2023,
