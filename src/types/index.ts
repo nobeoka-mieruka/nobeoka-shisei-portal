@@ -1,3 +1,5 @@
+import type { ArchiveSourceTrustLevel } from "./sourceTrust";
+
 export type SNSPlatform =
   | "x"
   | "facebook"
@@ -56,6 +58,12 @@ export interface SourceMeta {
   /** ISO形式。サイト側でこの項目をいつ更新したか。 */
   updatedAt?: string;
   notes?: string;
+  /**
+   * 出典の信頼レベル（任意、Phase128でsrc/types/historicalArchive.tsのArchiveSourceRefから
+   * 主要データ型へ展開。区分の詳細はsrc/types/sourceTrust.tsを参照）。既存データへの
+   * 後方互換のため任意項目とし、全件への一括付与は行わない。
+   */
+  trustLevel?: ArchiveSourceTrustLevel;
 }
 
 /** 出典・参考資料の1件分（名称とURL）。 */
@@ -585,6 +593,11 @@ export interface CompensationSourceMeta {
   /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
   lastVerified?: string;
   notes: string;
+  /**
+   * 出典の信頼レベル（任意、Phase128で展開。区分の詳細はsrc/types/sourceTrust.tsを参照）。
+   * 既存データへの後方互換のため任意項目とし、全件への一括付与は行わない。
+   */
+  trustLevel?: ArchiveSourceTrustLevel;
 }
 
 /** 宮崎県内市の報酬月額（1市分）。第20-1表に掲載された数値をそのまま使用する。 */
@@ -999,6 +1012,11 @@ export interface FinanceSourceMeta {
   url: string;
   /** 該当ページ番号（PDF内）。 */
   page?: number;
+  /**
+   * 出典の信頼レベル（任意、Phase128で展開。区分の詳細はsrc/types/sourceTrust.tsを参照）。
+   * 既存データへの後方互換のため任意項目とし、全件への一括付与は行わない。
+   */
+  trustLevel?: ArchiveSourceTrustLevel;
 }
 
 /** 一般質問データベースの会議区分。 */
