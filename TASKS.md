@@ -9314,9 +9314,13 @@ Phase135〜139の新規成果物を統合し、`reports/field-research/field-res
 
 ### TASK-171 現地調査票・訪問順序最適化・照会文書最終化・結果入力基盤設計（Phase141〜145）
 
-状態：IN_PROGRESS（2026-08-25）
+状態：DONE（2026-08-25）
 優先度：A（ユーザー指示）
-対象：（本セッションで確定次第追記）
+対象：`reports/field-research/print/`（新規9ファイル）、`reports/field-research/field-visit-order.md`
+（新規）、`reports/field-research/inquiry-final/`（新規10ファイル）、
+`reports/field-research/inquiry-status.json`（新規）、`src/types/fieldResearch.ts`（新規）、
+`reports/field-research/templates/`（新規3ファイル）、
+`reports/field-research/field-research-integration-flow.md`（新規）
 注記：Phase番号「141〜145」もTASK-168/169/170と同じ方針（TASK単位のローカルPhase番号）で
 使用する。今回の目的は新規オンライン調査ではなく、現地調査を実行可能な形へ落とし込むこと・
 現地確認結果を安全にポータルへ反映する運用を作ることである。UNR件数（31件）は今回変更しない
@@ -9341,3 +9345,49 @@ Phase135〜139の新規成果物を統合し、`reports/field-research/field-res
 
 **Phase145（親セッション統合）**：Phase141〜144が全て完了した後にのみ着手する。
 Chrome UI監査（Phase135未実施分）はworkerを起動しない（今回は分離）。
+
+#### Phase141〜145 結果
+
+**Phase141（現地調査票・印刷パッケージ作成）**：UNR31件を21枚の詳細カード＋10件の内部作業用
+簡易表（外部照会不要な項目）で全件網羅（過不足なしを確認）。施設別に延岡市立図書館4／
+延岡市役所2／議会事務局3／選管5／宮崎県立図書館1／宮崎県文書センター1／NDL5、へ分割。
+`print/field-research-checksheet.md`・`.html`（印刷用CSS、ライト/ダーク両対応）と施設別7分割
+ファイルを作成。記載のない項目は「確認中」「要確認」のまま。
+
+**Phase142（現地調査順序最適化）**：INQ-001・002の回答確認を0番目に配置した上で、1日案
+（延岡市内4施設）・複数日案（延岡→宮崎→NDL）の2案を作成。宮崎県文書センター・NDL来館等、
+所在地・連絡先が既存資料に無い施設は「要確認」のまま推測しなかった。
+
+**Phase143（照会文書最終化）**：Phase138の8文案を送信可能な品質へ仕上げ、宮崎県文書センター
+向け新規文案（簿冊番号5043・107051対応）を追加し計9文書＋READMEを`inquiry-final/`へ作成。
+`inquiry-status.json`で全18照会（INQ-001〜018）を一元管理（送付済み2・WAITING_RESPONSE 2・
+ready_to_send 9・draft 7）。実送信は行っていない。
+
+**Phase144（現地調査結果入力フォーマット設計）**：`src/types/fieldResearch.ts`を新規作成し、
+既存の`ArchiveSourceTrustLevel`・`ArchiveDatePrecision`をそのまま再利用（独自定義なし、
+既存型は無変更）。`datePrecision`は3値で表現できない場合にフィールド自体を省略する設計とし、
+根拠を型コメントへ明記。JSON Schema・架空サンプル・READMEも作成。typecheck/lintともにクリーン。
+
+**Phase145（親セッション統合）**：4本のworktreeブランチ（`phase141-field-research-checksheets`／
+`phase142-field-visit-order`／`phase143-inquiry-final`／`phase144-field-research-schema`）を
+`--no-ff`で順次mainへマージ、コンフリクトなし。`src/types/fieldResearch.ts`が新規追加された
+ためtypecheck・lintを実行しクリーンを確認（build/testは他コードへの影響が無いため省略）。
+`reports/field-research/field-research-integration-flow.md`（20ステップの反映フロー・絶対
+ルール・将来スクリプト候補の設計・Phase145統合監査結果）を親セッションで新規作成した。
+統合監査の結果、UNR31件は変化なし（想定どおり、新規一次資料調査を行っていないため）、
+全worker成果物間で矛盾・重複は見つからなかった。
+
+#### 検証結果
+
+`typecheck`（clean）／`lint`（clean）を実行しすべて成功（新規TypeScriptファイル
+`src/types/fieldResearch.ts`のみが対象、既存コードへの影響なし）。build/testはコード変更が
+機能へ影響しないため今回省略。
+
+完了記録：
+- 完了日：2026-08-25
+- 変更概要：上記のとおり。UNR31件の印刷用調査票、現地訪問順序（1日案・複数日案）、
+  送信可能品質の照会文書9件＋管理台帳、現地調査結果入力スキーマ、20ステップの反映フロー
+  設計を新規作成した。既存UNR・BLOCKEDステータス・既存コード・既存データは一切変更して
+  いない。推測値・架空データは登録していない（サンプルJSONは架空データである旨を明記）。
+  実際の照会送信・現地訪問は行っていない。既存の正常なコード・自動更新基盤・Phase119〜140の
+  成果は変更していない。

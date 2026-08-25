@@ -5,7 +5,9 @@
 
 機能を追加・変更したら、必ず「完成済み」「実装中」「次に実装する」を更新してください。
 
-最終更新日：2026-08-25（TASKS.md TASK-170「実機UI最終監査・UNR優先順位整理・調査先別チェックリスト・照会文書準備（Phase135〜140）」完了。UNR31件（ユーザー提示の131件とは実データ不一致、実数を採用）へpriority/researchMethod等を付与、延岡市立図書館・延岡市役所8部署・宮崎県立図書館等4機関それぞれの現地調査用チェックリストと未送付の照会文案を新規作成、`reports/field-research/field-research-master-plan.md`（推奨訪問順・持ち物・現地記録フォーマット・次のアクションTOP10）を作成。実機UI確認はChrome拡張が3回連続（Phase126/130/135）未接続のためYELLOWのまま残存。詳細はTASKS.md TASK-170参照。
+最終更新日：2026-08-25（TASKS.md TASK-171「現地調査票・訪問順序最適化・照会文書最終化・結果入力基盤設計（Phase141〜145）」完了。UNR31件を1件=1カードとした印刷用調査票（Markdown/HTML、施設別分割）、現地訪問順序（1日案・複数日案）、送信可能品質の照会文書9件＋`inquiry-status.json`（全18照会を一元管理）、現地調査結果入力スキーマ（`src/types/fieldResearch.ts`、既存trustLevel/datePrecisionを再利用）、20ステップの反映フロー設計（`field-research-integration-flow.md`）を作成。UNR件数は31件のまま変化なし（新規一次資料調査は今回行っていないため想定どおり）。実際の照会送信・現地訪問はまだ行っていない。詳細はTASKS.md TASK-171参照。
+
+最終更新日（2026-08-25、TASK-170時点）：（TASKS.md TASK-170「実機UI最終監査・UNR優先順位整理・調査先別チェックリスト・照会文書準備（Phase135〜140）」完了。UNR31件（ユーザー提示の131件とは実データ不一致、実数を採用）へpriority/researchMethod等を付与、延岡市立図書館・延岡市役所8部署・宮崎県立図書館等4機関それぞれの現地調査用チェックリストと未送付の照会文案を新規作成、`reports/field-research/field-research-master-plan.md`（推奨訪問順・持ち物・現地記録フォーマット・次のアクションTOP10）を作成。実機UI確認はChrome拡張が3回連続（Phase126/130/135）未接続のためYELLOWのまま残存。詳細はTASKS.md TASK-170参照。
 
 最終更新日（2026-08-25、TASK-169時点）：（TASKS.md TASK-169「実機全ページUI監査・trustLevel大規模展開・件数定義総監査・現地調査チェックリスト生成（Phase130〜134）」完了。`billVotes.json`全1,177件へtrustLevel（OFFICIAL_ARCHIVE）を機械的ルールで一括付与、サイト全体の件数ハードコード監査（旧数値397/1,470の残存0件、サイト実表示値418件/1,567件が「一般質問区分限定」の正しい定義であることを確認）、現地調査用チェックリスト（`reports/field-research/`、9機関・UNR13件）を新規作成。実機UI監査はChrome拡張未接続のため静的監査のみで完了（次回接続可能な環境での再確認が必要）。詳細はTASKS.md TASK-169参照。
 
