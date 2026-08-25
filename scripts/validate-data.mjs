@@ -756,6 +756,39 @@ try {
   warn("mayorPromises.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
+// --- mayorPromiseMeasures.json（Phase148、公約の個別施策・事業単位の進捗スナップショット） ---
+const VALID_MEASURE_STATUSES = new Set([
+  "COMPLETED",
+  "IN_PROGRESS",
+  "PLANNED",
+  "CONTINUING",
+  "PREPARING",
+  "NOT_ASSESSABLE",
+]);
+try {
+  const measures = readJson("src/data/mayorPromiseMeasures.json");
+  const measureIds = new Set();
+  for (const m of measures) {
+    const tag = `mayorPromiseMeasures.json (${m.measureId ?? "id不明"})`;
+    if (isBlank(m.measureId)) err(tag, "measureIdが空です");
+    else if (measureIds.has(m.measureId)) err(tag, `measureIdが重複しています: ${m.measureId}`);
+    else measureIds.add(m.measureId);
+
+    if (isBlank(m.promiseId)) err(tag, "promiseIdが空です");
+    else if (mayorPromiseIds.size > 0 && !mayorPromiseIds.has(m.promiseId))
+      err(tag, `存在しない市長公約IDを参照しています: ${m.promiseId}`);
+
+    if (isBlank(m.measureTitle)) err(tag, "measureTitleが空です");
+    if (!VALID_MEASURE_STATUSES.has(m.status)) err(tag, `未定義のstatusです: ${m.status}`);
+    if (isBlank(m.snapshotDate) || !DATE_RE.test(m.snapshotDate)) err(tag, `snapshotDateの形式が不正です: ${m.snapshotDate}`);
+    if (isBlank(m.sourceUrl) || !URL_RE.test(m.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${m.sourceUrl}`);
+    if (isBlank(m.sourceTitle)) err(tag, "sourceTitleが空です");
+    checkTrustLevel({ err }, m.trustLevel, tag);
+  }
+} catch {
+  warn("mayorPromiseMeasures.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
 for (const b of billVotes) {
   for (const pId of b.relatedMayorPromiseIds ?? []) {
     if (!mayorPromiseIds.has(pId)) warn(`billVotes.json (${b.id})`, `存在しない市長公約IDを参照しています: ${pId}`);

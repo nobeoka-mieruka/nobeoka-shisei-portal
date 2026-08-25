@@ -834,6 +834,60 @@ export interface MayorPromisesData {
   promises: MayorPromiseItem[];
 }
 
+/**
+ * 市長公約の個別施策・事業の進捗区分（Phase148、2026-08-25新設）。
+ * MayorPromiseItem.statusLabel（公約単位、達成/進行中/一部実施/未着手/方針変更/確認中/検討中/実施済み）
+ * とは別軸。1つの公約に複数の個別施策が含まれる場合、施策ごとの状況をより細かく表すために使う。
+ * 本文に根拠がない状態を推測で埋めない：「検討しています」はCOMPLETEDにしない、
+ * 「予定」はCOMPLETEDにしない、「運用開始」は施策自体の開始としてIN_PROGRESSまで、
+ * 公約全体の達成を意味しない。
+ */
+export type MayorPromiseMeasureStatus =
+  | "COMPLETED"
+  | "IN_PROGRESS"
+  | "PLANNED"
+  | "CONTINUING"
+  | "PREPARING"
+  | "NOT_ASSESSABLE";
+
+/**
+ * 市長公約の個別施策・事業1件分の進捗スナップショット（Phase148、2026-08-25新設）。
+ * MayorPromiseItem（公約単位、mayorPromises.json）よりも粒度の細かい「個別の取組み」単位の
+ * データで、mayorPromiseMeasures.jsonで管理する。promiseIdでMayorPromiseItem.idと対応付ける。
+ * 既存のMayorPromiseItem.progressHistory（公約単位の変更履歴）を置き換えるものではなく、
+ * 数値目標・現況等を構造化して保持するための補完データ。trustLevelは独自定義を増やさず
+ * 既存のArchiveSourceTrustLevel（src/types/sourceTrust.ts）を再利用する。
+ */
+export interface MayorPromiseMeasureSnapshot {
+  measureId: string;
+  /** MayorPromiseItem.id（mayorPromises.json）への参照。 */
+  promiseId: string;
+  /** MayorPromiseCategory.id（p1〜p4）。 */
+  categoryId: string;
+  measureTitle: string;
+  status: MayorPromiseMeasureStatus;
+  /** 例："令和8年度"。 */
+  fiscalYear: string;
+  /** ISO形式。この施策データの基準日（資料の基準日）。 */
+  snapshotDate: string;
+  /** 前年度の実績（確認できた場合のみ）。 */
+  previousYearResult?: string;
+  /** 今年度時点での実績（既に生じた事実。予定は含めない）。 */
+  currentYearResult?: string;
+  /** 今年度の予定・計画（未確定の将来予定）。 */
+  currentYearPlan?: string;
+  /** より先の年度の目標（確認できた場合のみ）。 */
+  futureTarget?: string;
+  /** 単位付き数値の主要な1件（複数ある場合は代表値、詳細はnotesへ）。 */
+  quantitativeValue?: number;
+  quantitativeUnit?: string;
+  sourceUrl: string;
+  sourcePage?: string;
+  sourceTitle: string;
+  trustLevel?: ArchiveSourceTrustLevel;
+  notes?: string;
+}
+
 /** サイト更新履歴の種別。 */
 export type UpdateHistoryCategory =
   | "新規追加"

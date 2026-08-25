@@ -9391,3 +9391,89 @@ ready_to_send 9・draft 7）。実送信は行っていない。
   いない。推測値・架空データは登録していない（サンプルJSONは架空データである旨を明記）。
   実際の照会送信・現地訪問は行っていない。既存の正常なコード・自動更新基盤・Phase119〜140の
   成果は変更していない。
+
+---
+
+### TASK-172 市長公約（令和8年度・令和8年7月31日現在）進捗資料の反映（独立タスク、Phase146〜151）
+
+状態：DONE（2026-08-25）
+優先度：A（ユーザー指示、独立タスク）
+対象：`src/data/mayorPromises.json`、`src/data/mayorPromiseMeasures.json`（新規）、
+`src/types/index.ts`（MayorPromiseMeasureStatus・MayorPromiseMeasureSnapshot新設）、
+`src/lib/mayorPromiseMeasureStatus.ts`（新規）、
+`src/components/mayor/MayorPromiseMeasureStatusBadge.tsx`（新規）、
+`src/pages/MayorPromiseDetailPage.tsx`、`scripts/validate-data.mjs`、`src/data/updateHistory.json`
+注記：ユーザー指示により、既存のPhase119〜145とは無関係な独立タスクとして実施した。
+Phase番号「146〜151」は本TASK専用のローカル番号。
+
+**一次資料**：https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28741.pdf
+「市長公約に関する取組み　令和8年度」（延岡市長　三浦　久知、令和8年7月31日現在、全8ページ）。
+`scripts/extract-pdf-text-pdfjs.mjs`でのテキスト抽出（8/8ページ成功）に加え、Read（PDF画像表示）で
+全8ページを直接目視確認し、数値・日付・固有名詞を最終確認した。
+
+**Phase146（PDF完全解析）**：大分類（公約）4、個別公約（サブ公約）**14**（PDF上のボックス単位、
+公約1〜3は各3件・公約4のみ5件）、具体施策・事業33件を構造化した。ユーザー提示の例示数値
+（自然体験2→5件、はらはらわくわく2→4回、ふるさと教育A部門6校/B部門17校[ノベ☆スタ20件]、
+令和8年度申請小8/中2/義務教育1校、学力向上指導員15名、夏季食支援34食分[実績962名分]、
+アリーナ2026-04-18オープン、地域商社令和9年度設立目標）はすべて実データと一致することを確認した。
+
+**Phase147（既存公約DBとの差分監査）**：既存12件を全件確認し、MATCH（PROGRESS_UPDATE相当）10件、
+WORDING_CHANGED（NEEDS_REVIEW）2件（2-3：既存「西階野球場」↔PDF「のべおかwaiwaiスタジアム」、
+3-2：既存「市民の命を守ります」↔PDF「市民の生活を守ります」、いずれも既存promiseTextは変更せず
+両表記を併記のみ）、NEW_MEASURE 2件（4-4：支所への地域活性化専門職員配置、4-5：職員の多様な
+働き方推進、既存12件に対応レコード無し）と分類した。NOT_FOUND_IN_NEW_DOCUMENTは0件（既存12件
+すべてPDF内に対応記述あり）。**既存12件のpromiseText・progressSummary・relatedBudget・relatedBill・
+notesは一切変更していない**。
+
+**Phase148（進捗データ構造化）**：`mayorPromises.json`の既存12件へ、既存の未使用フィールド
+`progressHistory[]`（型は既存、データは全件初使用）へ2026-07-31付けエントリを追記。新規promiseId
+「4-4」「4-5」を追加（計14件）。`documents[]`へ新資料を追加。別途`mayorPromiseMeasures.json`
+（新規、33件）に個別施策単位のスナップショット（measureId/promiseId/categoryId/measureTitle/
+status/fiscalYear/snapshotDate/previousYearResult/currentYearResult/currentYearPlan/
+futureTarget/quantitativeValue/quantitativeUnit/sourceUrl/sourcePage/sourceTitle/trustLevel/
+notes）を構造化。trustLevelは既存`ArchiveSourceTrustLevel`の"PRIMARY"を再利用（独自値なし）。
+statusは本文に明記された事実のみで判定し（「検討しています」→PREPARING、「予定」→PLANNED、
+「運用開始」→当該施策のIN_PROGRESSのみで公約全体の達成を意味しない）、達成率は一切算出していない。
+
+**Phase149（UI更新）**：`progressHistory`は既存の「進捗履歴」セクション（コード実装済み・データ
+未使用だった）が今回のデータ追加で自動的に表示されるようになった（コード変更不要）。新設
+「公約の現在地（個別の取組み）」セクションを`MayorPromiseDetailPage.tsx`へ追加し
+`mayorPromiseMeasures.json`を一覧表示。市民向け日本語ラベル（完了／実施中／予定／継続実施中／
+準備中／評価不能）へ変換する新規コンポーネントを追加。ルート生成・サイトマップ・SEOメタデータは
+`scripts/lib/public-routes.mjs`が`mayorPromises.json`を動的走査する既存設計のため、コード変更
+なしで新規2件（4-4/4-5）が自動生成された（prerenderルート数2240→2242）。**達成率**：PDFに公式な
+達成率記載は無く、当サイトのデータ・UIにも達成率フィールド・算出ロジックは追加していない。
+
+**Phase150（履歴・出典・整合性監査）**：選挙時公約の保持、2026-07-31進捗の別スナップショット化、
+過去snapshotの非消失（元々空だったため追加のみ）、新旧比較可能性（進捗履歴セクションの日付降順
+表示）を確認。今回追加した全レコード（progressHistory新規12件・新規promiseId2件・
+mayorPromiseMeasures.json 33件）がsourceUrl・sourceTitle・snapshotDate（またはdate）・trustLevel
+を保持していることを`validate-data.mjs`の新規検証ロジックで機械確認（0件漏れ）。件／回／校／名／
+食分／人／ヶ所の単位取り違えは無く、原文の単位をそのまま転記した（例：夏季食支援は「34食分」と
+「実績962名分」を別々の値として記録し混同していない）。
+
+**Phase151（統合・検証・本番反映、親セッション）**：`validate:data`（errors=0 warnings=40、既存
+基準から変化なし）／`validate:sources`（errors=0 warnings=15 info=66、変化なし）／
+`validate:completeness`（errors=0）／`validate:freshness`（errors=0）／`typecheck`（clean）／
+`lint`（clean）／`test`（26/26）／`build`（2242/2242ルート、`validate:seo` 2243ページ
+failures=0 warnings=0、`validate:content` 2243ページ errors=0 warnings=0）すべて成功。
+
+#### data-status への影響
+
+`/data-status`（DataStatusPage.tsx）は`mayorPromises.json`を直接参照していないため、コード変更は
+不要（母数の定義変更なし）。`MayorPage.tsx`の「個別公約数」（`promisesData.promises.length`、
+既存の動的算出）は**Before: 12件 → After: 14件**（母数の定義自体は変更なし、実データの追加による
+自然な増加）。トップページ「登録済み市長公約数」（`mayor.pledges.length`）は別データソース
+（4つの政策分野を指す）のため変化なし。
+
+#### 更新履歴
+
+`src/data/updateHistory.json`へu132を追加。公開日（2026-08-25）と資料基準日（2026-07-31）を
+明確に書き分けて記載した。
+
+完了記録：
+- 完了日：2026-08-25
+- 成果物：`reports/phase146-151-mayor-pledge-r8/phase146-pdf-analysis-and-phase147-diff-audit.md`
+- 既存の選挙時公約・既存12件のデータは一切上書きしていない。推測によるデータ補完は行っていない。
+  既存データを削除していない（純粋な追記・新規2件の追加のみ）。既存の正常なコード・自動更新基盤は
+  変更していない。
