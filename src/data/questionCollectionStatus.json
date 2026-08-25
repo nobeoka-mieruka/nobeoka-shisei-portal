@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-05",
-  "note": "延岡市議会の一般質問・質疑（本会議、councilSpeechSummaries.json基準）について、現議員任期（councilSpeechPeriod.json: 2023-04-23以降）の定例会ごとの収録状況を機械的に集計したもの。expectedSpeakerCount/expectedQuestionCountは、各会期の質問通告書を個別に確認できていないためnull（推測で埋めない）。statusは、registeredSpeakerCountが0件の会期をtranscriptUnavailable、1件以上ある会期をpartialとしている（質問者数・出典・検証の網羅的照合を経ていないため、機械集計だけではcompleteと断定しない）。",
+  "generatedAt": "2026-08-25",
+  "note": "延岡市議会の一般質問・質疑（本会議、councilSpeechSummaries.json基準）について、現議員任期（councilSpeechPeriod.json: 2023-04-23以降）の定例会ごとの収録状況を機械的に集計したもの。expectedSpeakerCount/expectedQuestionCountは、各会期の質問通告書を個別に確認できていないためnull（推測で埋めない）。statusは、registeredSpeakerCountが0件の会期をtranscriptUnavailable、1件以上ある会期をpartialとしている（質問者数・出典・検証の網羅的照合を経ていないため、機械集計だけではcompleteと断定しない）。Phase120（2026-08-25）でregisteredSpeakerCount/registeredQuestionCountをcouncilSpeechSummaries.json（generatedAt: 2026-08-23）の実件数と突き合わせ、2023-06/2023-12/2024-06/2025-03の4会期で乖離（前回集計2026-08-05以降にcouncilSpeechSummaries.jsonへ追加登録された分が未反映）を検出し、実件数へ更新した。",
   "sessions": [
     {
       "sessionId": "2023-06",
@@ -8,15 +8,15 @@
       "sessionTitle": "令和5年6月定例会",
       "status": "partial",
       "expectedSpeakerCount": null,
-      "registeredSpeakerCount": 14,
+      "registeredSpeakerCount": 15,
       "expectedQuestionCount": null,
-      "registeredQuestionCount": 96,
+      "registeredQuestionCount": 101,
       "transcriptAvailable": true,
       "noticeAvailable": null,
-      "lastCheckedAt": "2026-08-05",
-      "lastSuccessAt": "2026-08-05",
+      "lastCheckedAt": "2026-08-25",
+      "lastSuccessAt": "2026-08-25",
       "errors": [],
-      "notes": null
+      "notes": "Phase120：2026-08-05集計時点から4件（speaker+1、question+5）増加。councilSpeechSummaries.jsonの実件数に更新。"
     },
     {
       "sessionId": "2023-09",
@@ -40,15 +40,15 @@
       "sessionTitle": "令和5年12月定例会",
       "status": "partial",
       "expectedSpeakerCount": null,
-      "registeredSpeakerCount": 14,
+      "registeredSpeakerCount": 15,
       "expectedQuestionCount": null,
-      "registeredQuestionCount": 116,
+      "registeredQuestionCount": 122,
       "transcriptAvailable": true,
       "noticeAvailable": null,
-      "lastCheckedAt": "2026-08-05",
-      "lastSuccessAt": "2026-08-05",
+      "lastCheckedAt": "2026-08-25",
+      "lastSuccessAt": "2026-08-25",
       "errors": [],
-      "notes": null
+      "notes": "Phase120：2026-08-05集計時点から6件（speaker+1、question+6）増加。councilSpeechSummaries.jsonの実件数に更新。"
     },
     {
       "sessionId": "2024-03",
@@ -72,15 +72,15 @@
       "sessionTitle": "令和6年6月定例会",
       "status": "partial",
       "expectedSpeakerCount": null,
-      "registeredSpeakerCount": 15,
+      "registeredSpeakerCount": 16,
       "expectedQuestionCount": null,
-      "registeredQuestionCount": 136,
+      "registeredQuestionCount": 142,
       "transcriptAvailable": true,
       "noticeAvailable": null,
-      "lastCheckedAt": "2026-08-05",
-      "lastSuccessAt": "2026-08-05",
+      "lastCheckedAt": "2026-08-25",
+      "lastSuccessAt": "2026-08-25",
       "errors": [],
-      "notes": null
+      "notes": "Phase120：2026-08-05集計時点から7件（speaker+1、question+6）増加。councilSpeechSummaries.jsonの実件数に更新。"
     },
     {
       "sessionId": "2024-09",
@@ -120,15 +120,15 @@
       "sessionTitle": "令和7年3月定例会",
       "status": "partial",
       "expectedSpeakerCount": null,
-      "registeredSpeakerCount": 12,
+      "registeredSpeakerCount": 14,
       "expectedQuestionCount": null,
-      "registeredQuestionCount": 102,
+      "registeredQuestionCount": 106,
       "transcriptAvailable": true,
       "noticeAvailable": null,
-      "lastCheckedAt": "2026-08-05",
-      "lastSuccessAt": "2026-08-05",
+      "lastCheckedAt": "2026-08-25",
+      "lastSuccessAt": "2026-08-25",
       "errors": [],
-      "notes": null
+      "notes": "Phase120：2026-08-05集計時点から2件（speaker+2、question+4）増加。councilSpeechSummaries.jsonの実件数に更新。"
     },
     {
       "sessionId": "2025-06",
