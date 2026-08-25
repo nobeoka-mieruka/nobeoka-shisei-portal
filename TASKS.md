@@ -9107,9 +9107,11 @@ warnings=15 info=66）／`validate:finance`（errors=0 warnings=6 info=8）／
 
 ### TASK-169 実機全ページUI監査・trustLevel大規模展開・件数定義総監査・現地調査チェックリスト生成（Phase130〜134）
 
-状態：IN_PROGRESS（2026-08-25）
+状態：DONE（2026-08-25）
 優先度：A（ユーザー指示）
-対象：（本セッションで確定次第追記）
+対象：`src/data/billVotes.json`、`scripts/assign-billvotes-trustlevel.mjs`（新規）、
+`reports/field-research/`（新規）、`reports/phase130-134-staging/`各種報告書（確認のみ、
+コード変更なし：`src/pages/*`静的監査、サイト全体の件数ハードコード監査）
 注記：Phase番号「130〜134」はTASK-069（2026-08-13、元議員アーカイブのデータ充足レベル導入）
 で既に使用済みの番号と重複するが、TASK-168と同様、本TASK内のローカルPhase番号として
 使用する（ユーザー確認済みの既存方針を踏襲）。
@@ -9146,4 +9148,65 @@ UNR-029、1999年以前選挙TASK-046等）を、「どこで（機関名・所�
 請求番号等）」「何のために（確認したい具体的な数値・事実）」確認するかという、現地調査で
 そのまま使えるチェックリスト形式へ変換する。`reports/field-research/`へ保存する。
 
-**Phase134（親セッション統合）**：Phase130〜133が全て完了した後にのみ着手する。
+#### Phase130〜133 結果
+
+**Phase130（実機全ページUI監査）**：`list_connected_browsers`がworker側でも0件（未接続）だった
+ため、無限待機せず直ちに静的監査へ切替。主要12ページの実機スクリーンショット確認は
+**0ページ**（未実施と正直に記録）。共通コンポーネント（SiteHeader・BottomNav・FinanceTable・
+MiyazakiComparisonTable・VoteResultBadge等）と幅広テーブル（CompensationPage・
+CouncilActivityPage・MayorEntertainmentExpensesPage等）を静的点検した結果、過去フェーズ
+（Phase31・TASK-083・Phase78等）で対応済みの`overflow-x-auto`等がコード上維持されており、
+新たな問題は見つからなかった。コード変更なし。
+
+**Phase131（trustLevel大規模展開・billVotes.json）**：`billVotes.json`の実件数は
+**1,177件**（ユーザー提示の「約11,774件」とは10倍相違、実データを正として採用）。
+専用スクリプト`scripts/assign-billvotes-trustlevel.mjs`（dry-run/`--apply`両対応、
+監査可能性のためリポジトリに保持）で、resultDocumentUrl（延岡市公式ドメイン）・
+sourceFilePath・verificationStatus・publicationStatusの4条件を機械的に判定し、全件が
+条件に合致したため1,177件全件へ`trustLevel: "OFFICIAL_ARCHIVE"`を付与。9カテゴリ34件を
+人手でサンプル確認（うち3件は実際にPDFを取得しテキスト抽出して内容照合）し誤判定なし。
+trustLevel以外の既存フィールドは全件で変更なし（差分0件をスクリプトで機械検証）。
+
+**Phase132（件数定義総監査）**：確定基準値（登壇419・質問項目1,568・billVotes 1,177）を
+もとにサイト全体をgrep監査した結果、実行コード中のハードコードされた旧数値（397・1,470等）は
+**0件**（`updateHistory.json`の過去ログ記載は意図的に保持し書き換えず）。重要な発見：
+サイトの実表示値は**418件・1,567件**（419・1,568ではない）。原因は元議員fm06の令和4年6月
+定例会1件が`speechType: "議案質疑"`として正しく分類され、`QUESTION_LIKE_SPEECH_TYPES`
+フィルタにより意図的に除外されているためと判明（本人が原文で「一般質問には含めていない」と
+明言）。集計ロジックの不整合ではなく、「登壇記録の総数（419/1,568）」と「一般質問区分に
+限定した件数（418/1,567）」という定義の違いであり、推測での統一修正は行っていない。
+
+**Phase133（現地調査用未解決資料リスト生成）**：新規のオンライン検索・WebFetch・WebSearchは
+一切行わず、既存資料（phase33-master-unresolved-ledger.json、phase19〜21系、
+phase121-history-findings.md、TASK-046、直前のPhase127報告書等）のみを機関別に再整理。
+9機関・UNR13件・タスク1件を対象に`reports/field-research/onsite-research-checklist.md`
+（携行用）・`.json`（機械可読）を新規作成。既存のUNR・BLOCKEDステータスは変更していない。
+副次的な発見：宮崎県立図書館・宮崎県統計調査課向けの照会（INQ-001・002）は2026-08-21に
+既に送付済み・回答待ちであることが判明（次アクションは再送付ではなく回答確認）。UNR-029の
+`requiresOnsite`フラグと実際の分類（library_required）に食い違いがあることも発見したが、
+フラグ自体は変更せず実際の分類をチェックリストへ反映した。
+
+**Phase134（親セッション統合）**：4本のworktreeブランチ（`phase130-fullsite-ui-audit`／
+`phase131-trustlevel-billvotes-rollout`／`phase132-count-definition-audit`／
+`phase133-field-research-checklist`）を`--no-ff`で順次mainへマージ、コンフリクトは
+一切発生せず全て自動マージされた。マージ後、派生データ（`dataQualitySummary.json`・
+`adminReviewQueue.json`・`archiveAiCategoryCandidates.json`・`archiveRelationCandidates.json`・
+`siteUpdate.json`・`public/sitemap.xml`の`/dashboard`lastmod）を再生成。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=40＝マージ前と同数、billVotes=1177）／`validate:sources`
+（errors=0 warnings=15 info=66）／`validate:finance`（errors=0 warnings=6 info=8）／
+`validate:completeness`（errors=0 warnings=0）／`validate:freshness`（errors=0 warnings=0）／
+`validate:political-funds`（errors=0 warnings=0 info=2）／`typecheck`／`lint`／`test`（26/26）／
+`build`（2240/2240ルート prerender、`validate:seo` 2241ページ failures=0 warnings=0、
+`validate:content` 2241ページ errors=0 warnings=0）すべて成功。
+
+完了記録：
+- 完了日：2026-08-25
+- 変更概要：上記のとおり。実機UI監査（Chrome未接続のため静的監査のみ、問題なし）、
+  billVotes.json 1,177件全件へのtrustLevel(OFFICIAL_ARCHIVE)大規模展開、件数定義監査
+  （旧数値のハードコード0件、418/1,567は正しい定義差と確認）、現地調査用チェックリスト
+  9機関・UNR13件分を新規作成した。既存の必須フィールド・既存データの値（trustLevel以外）は
+  一切変更していない。推測値・架空データは登録していない。既存UNR（UNR-014/015/029等）は
+  根拠なくGREEN化していない。
