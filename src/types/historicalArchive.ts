@@ -338,6 +338,44 @@ export interface ArchiveFinance {
 }
 
 /**
+ * 年度データの資料入手状況（Phase129で新規導入、完全任意フィールド）。
+ *
+ * これまでreports/phase20-missing-years-status.json（statusCategories）・
+ * reports/phase21-inquiry-tracker.json（status/statusDefinitionsV2）の2ファイルだけで
+ * 非公式に管理されていた「資料をまだ入手できていない年度が、次に何をすべき状態か」を、
+ * 正式なデータスキーマ側にも（任意で）反映できるようにする。値の語彙は上記reportsの
+ * statusCategoriesと同一にし、矛盾する別名を作らない。
+ *
+ * - confirmed: 一次資料で年度データを確認・登録済み（population/budget/debt/fund/finance等の
+ *   サブ型が実際に登録されている年度）。このステータス自体を明示するかは任意。
+ * - online_confirmed: 資料をオンラインで発見し、内容（歳入・歳出・年度・会計区分・単位）を
+ *   直接確認済みだが、まだarchiveFiscalYears.jsonへの登録作業が済んでいない状態
+ *   （reports/phase20-missing-years-status.json準拠）。
+ * - onsite_required: 資料の所蔵館・請求記号が判明しており、現地閲覧または複写取り寄せのみが
+ *   残っている状態（同上）。
+ * - reference_pending: 所蔵館候補等への照会文は完成しているが、まだ送付していない、
+ *   または送付済みで回答待ちの状態（reports/phase20・phase21準拠）。
+ * - holding_unconfirmed: 資料そのものの存在は判明しているが、どの機関が所蔵しているか
+ *   まだ特定できていない状態（reports/phase20準拠）。
+ * - resource_unidentified: 対象年度をカバーする資料そのものが何であるか、まだ特定できていない
+ *   状態（「0件」ではなく、探索が及んでいないという意味。reports/phase20準拠）。
+ * - not_collected: reports/phase20・phase21等の調査対象にすらまだなっていない状態。
+ *   resource_unidentifiedとの違いは、探索自体に着手したかどうか。
+ *
+ * 既存データへの後方互換のため全件が未設定でも成立する。全件への一括付与は行わず、
+ * reports側の調査が進んだ年度から個別に反映する運用を想定する（trustLevel等と同じ
+ * パイロット導入パターン）。
+ */
+export type ArchiveFiscalYearDataAvailabilityStatus =
+  | "confirmed"
+  | "online_confirmed"
+  | "onsite_required"
+  | "reference_pending"
+  | "holding_unconfirmed"
+  | "resource_unidentified"
+  | "not_collected";
+
+/**
  * 年度単位の財政データ全体（FiscalYear型）。Population/Budget/Debt/Fund/Financeを
  * 年度単位で束ねる。各サブ型が確認できていない年度はundefinedのまま欠落させ、
  * 0や架空値で埋めない。市長比較・年度比較・将来の政策比較の共通土台として使う。
@@ -354,6 +392,17 @@ export interface ArchiveFiscalYear {
   finance?: ArchiveFinance;
   notes?: string;
   verifiedAt?: string;
+  /** 年度データの資料入手状況（任意、Phase129新規導入）。ArchiveFiscalYearDataAvailabilityStatus参照。
+   * 未設定は「この軸では未整理」を意味し、confirmed/not_collectedいずれとも解釈しない
+   * （既存レコードとの後方互換のため）。 */
+  dataAvailabilityStatus?: ArchiveFiscalYearDataAvailabilityStatus;
+  /** dataAvailabilityStatusを最後に見直した日（ISO）。実際に登録された数値の確認日を表す
+   * verifiedAtとは別軸（こちらは「資料の入手状況そのものをいつ確認したか」を表す）。 */
+  dataAvailabilityCheckedAt?: string;
+  /** この年度に関連する reports/phase21-inquiry-tracker.json 上の inquiry_id（例: "INQ-001"）。
+   * 同トラッカーはsrc/data配下ではなくreports配下の運用ファイルであるため、参照先IDの存在チェックは
+   * 行わず、形式チェックのみ行う（scripts/validate-data.mjs参照）。 */
+  relatedInquiryIds?: string[];
 }
 
 export type ArchivePolicyOwnerType = "mayor" | "member" | "formerMember" | "faction" | "city";

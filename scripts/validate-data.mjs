@@ -1745,6 +1745,18 @@ try {
     "futureBurdenRatioPercent",
     "currentAccountRatioPercent",
   ];
+  // reports/phase20-missing-years-status.json（statusCategories）と同一の語彙。
+  // Phase129で任意フィールドとして新設したため、値が存在する場合のみ検証する（未設定はエラーにしない）。
+  const VALID_DATA_AVAILABILITY_STATUSES = new Set([
+    "confirmed",
+    "online_confirmed",
+    "onsite_required",
+    "reference_pending",
+    "holding_unconfirmed",
+    "resource_unidentified",
+    "not_collected",
+  ]);
+  const INQUIRY_ID_RE = /^INQ-\d+$/;
 
   for (const entry of archiveFiscalYears) {
     const tag = `archiveFiscalYears.json (${entry.fiscalYear ?? "年度不明"})`;
@@ -1767,6 +1779,33 @@ try {
       { level: "warn" },
     );
     if (entry.verifiedAt && !DATE_RE.test(entry.verifiedAt)) err(tag, `verifiedAtの形式が不正です: ${entry.verifiedAt}`);
+
+    // dataAvailabilityStatus等はPhase129で新設した完全任意フィールド。設定されている場合のみ検証する。
+    if (entry.dataAvailabilityStatus !== undefined && !VALID_DATA_AVAILABILITY_STATUSES.has(entry.dataAvailabilityStatus)) {
+      err(tag, `未定義のdataAvailabilityStatusです: ${entry.dataAvailabilityStatus}`);
+    }
+    if (entry.dataAvailabilityCheckedAt !== undefined) {
+      if (!DATE_RE.test(entry.dataAvailabilityCheckedAt)) {
+        err(tag, `dataAvailabilityCheckedAtの形式が不正です: ${entry.dataAvailabilityCheckedAt}`);
+      }
+      if (entry.dataAvailabilityStatus === undefined) {
+        warn(tag, "dataAvailabilityCheckedAtが設定されていますがdataAvailabilityStatusが未設定です");
+      }
+    }
+    if (entry.relatedInquiryIds !== undefined) {
+      if (!Array.isArray(entry.relatedInquiryIds)) {
+        err(tag, "relatedInquiryIdsが配列ではありません");
+      } else {
+        for (const inquiryId of entry.relatedInquiryIds) {
+          if (typeof inquiryId !== "string" || !INQUIRY_ID_RE.test(inquiryId)) {
+            warn(
+              tag,
+              `relatedInquiryIdsの形式が想定と異なります（例: "INQ-001"): ${inquiryId}（reports/phase21-inquiry-tracker.jsonの実在確認はスキップします）`,
+            );
+          }
+        }
+      }
+    }
 
     if (entry.population) {
       const p = entry.population;
