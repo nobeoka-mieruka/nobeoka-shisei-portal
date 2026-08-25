@@ -1,0 +1,903 @@
+<title>現地調査票（Phase141）</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: #c9c9c9;
+    --card-bg: #fafafa;
+    --accent: #1f5f8b;
+    --accent-bg: #eaf2f8;
+    --priority-a1: #b3261e;
+    --priority-a2: #b45f06;
+    --priority-b: #665500;
+    --priority-c: #3d6b3d;
+    --priority-a1-bg: #fbe9e7;
+    --priority-a2-bg: #fdf1e0;
+    --priority-b-bg: #fbf6dd;
+    --priority-c-bg: #e9f3e9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16181c;
+      --fg: #e8e8e8;
+      --muted: #a8a8a8;
+      --border: #3c3f44;
+      --card-bg: #1e2126;
+      --accent: #6fb3e0;
+      --accent-bg: #1c2c36;
+      --priority-a1: #ff8a80;
+      --priority-a2: #ffc078;
+      --priority-b: #e8db6e;
+      --priority-c: #9bd39b;
+      --priority-a1-bg: #3a2220;
+      --priority-a2-bg: #3a2e18;
+      --priority-b-bg: #34301a;
+      --priority-c-bg: #1f2f22;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16181c;
+    --fg: #e8e8e8;
+    --muted: #a8a8a8;
+    --border: #3c3f44;
+    --card-bg: #1e2126;
+    --accent: #6fb3e0;
+    --accent-bg: #1c2c36;
+    --priority-a1: #ff8a80;
+    --priority-a2: #ffc078;
+    --priority-b: #e8db6e;
+    --priority-c: #9bd39b;
+    --priority-a1-bg: #3a2220;
+    --priority-a2-bg: #3a2e18;
+    --priority-b-bg: #34301a;
+    --priority-c-bg: #1f2f22;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+    font-size: 14.5px;
+  }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.2rem;
+    margin: 40px 0 12px;
+    padding: 8px 12px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-radius: 6px;
+    page-break-before: always;
+    break-before: page;
+  }
+  h2:first-of-type { page-break-before: avoid; break-before: avoid; }
+  h3.card-title {
+    font-size: 1.02rem;
+    margin: 22px 0 8px;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px;
+  }
+  p, li { color: var(--fg); }
+  .lead {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .notice {
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  .notice strong { color: var(--accent); }
+  a { color: var(--accent); }
+
+  table.meta {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 16px;
+    font-size: 0.88rem;
+  }
+  table.meta th, table.meta td {
+    border: 1px solid var(--border);
+    padding: 5px 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.meta th { background: var(--card-bg); width: 34%; white-space: nowrap; }
+
+  table.summary {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 20px;
+    font-size: 0.9rem;
+  }
+  table.summary th, table.summary td {
+    border: 1px solid var(--border);
+    padding: 6px 9px;
+  }
+  table.summary th { background: var(--accent-bg); color: var(--accent); }
+
+  .checklist { list-style: none; padding-left: 0; margin: 10px 0; }
+  .checklist li { margin: 4px 0; }
+  .checklist li::before { content: "☐ "; }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card-bg);
+    padding: 14px 16px 16px;
+    margin: 14px 0 24px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .card-head .unrid { font-weight: 700; font-size: 1.05rem; }
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .badge.p-A1 { background: var(--priority-a1-bg); color: var(--priority-a1); }
+  .badge.p-A2 { background: var(--priority-a2-bg); color: var(--priority-a2); }
+  .badge.p-B  { background: var(--priority-b-bg); color: var(--priority-b); }
+  .badge.p-C  { background: var(--priority-c-bg); color: var(--priority-c); }
+  .badge.category { background: var(--accent-bg); color: var(--accent); }
+
+  dl.fields { margin: 6px 0; }
+  dl.fields > div {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 6px 10px;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  dl.fields > div:last-child { border-bottom: none; }
+  dl.fields dt { font-weight: 600; color: var(--muted); font-size: 0.86rem; }
+  dl.fields dd { margin: 0; font-size: 0.92rem; }
+
+  .fillins {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 2px solid var(--border);
+  }
+  .fillins .fillin-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 8px;
+    align-items: baseline;
+    margin: 8px 0;
+  }
+  .fillins .fillin-row .lbl { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+  .fillins .fillin-row .blank {
+    border-bottom: 1px solid var(--fg);
+    min-height: 1.3em;
+  }
+  .fillins .fillin-row .blank.tall { min-height: 2.6em; border: 1px solid var(--border); border-radius: 4px; }
+
+  .note { font-size: 0.86rem; color: var(--muted); margin-top: 8px; }
+  .toc { columns: 2; column-gap: 24px; font-size: 0.88rem; }
+  @media (max-width: 600px) {
+    .toc { columns: 1; }
+    dl.fields > div, .fillins .fillin-row { grid-template-columns: 1fr; }
+  }
+
+  footer.doc-footer {
+    margin-top: 40px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  @media print {
+    body { max-width: 100%; padding: 0 8mm; font-size: 11.5pt; }
+    .notice { break-inside: avoid; }
+    table.meta, table.summary { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { background: none !important; color: #000 !important; border: 1px solid #000; }
+    .badge { border: 1px solid currentColor; }
+    .card { break-inside: avoid; border: 1px solid #000; }
+  }
+</style>
+
+<h1>現地調査票・印刷パッケージ（Phase141）</h1>
+<p class="lead">作成日：2026-08-25／A4想定・印刷用</p>
+
+<div class="notice">
+  <strong>本ドキュメントの位置づけ</strong><br>
+  新規のオンライン検索・WebFetch・WebSearchは一切行わず、既存資料（<code>field-research-master-plan.md</code>・<code>unr-priority-master.md/.json</code>・<code>nobeoka-library-checklist.md/.json</code>・<code>nobeoka-city-inquiry-plan.md</code>・<code>inquiry-drafts/</code>・<code>miyazaki-ndl-checklist.md</code>・<code>onsite-research-checklist.md/.json</code>・<code>reports/phase33-master-unresolved-ledger.json</code>）のみを1UNR＝1調査カードの形式へ転記・要約し、印刷しやすいレイアウトへ整理したものです。UNR31件の件数・内容は変更していません。既存資料に記載のない項目は推測で埋めず、「確認中」「要確認」と明記しています。
+</div>
+
+<h3 class="card-title" style="border:none;color:var(--fg);margin-top:24px;">使い方</h3>
+<ol>
+  <li>このHTML、または同内容のMarkdown版（<code>field-research-checksheet.md</code>）を印刷して現地へ携行する。</li>
+  <li>訪問先ごとに章が分かれている。1つの訪問でまとめて確認できるUNRは同じ章にまとまっている。</li>
+  <li>1つのUNRが複数施設に跨る場合は、<strong>主たる調査先の章に1枚のカードとして配置</strong>し、カード内「他の調査候補（対象機関）」欄に他施設の候補を記載している（同一UNRのカードを複数章へ重複掲載していない）。</li>
+  <li>現地で確認できた内容は、カード内の記入欄に手書きで記入する。</li>
+  <li>記入後は<code>field-research-master-plan.md</code>4章の標準フォーマットに沿って<code>reports/phase21-inquiry-tracker.json</code>・<code>reports/phase33-master-unresolved-ledger.json</code>・<code>src/data</code>等へ人間が反映する。</li>
+  <li>「見つからなかった」場合も正直に記録する。「見つからない」を「存在しない」に変換せず、ステータスを安易に解決扱いにしない。</li>
+</ol>
+
+<h3 class="card-title" style="border:none;color:var(--fg);">全体サマリー</h3>
+<p>UNR総数：<strong>31件</strong>（UNR-001〜UNR-031）／優先度内訳：A1＝17件・A2＝3件・B＝8件・C＝3件</p>
+<table class="summary">
+  <tr><th>調査先</th><th>カード数</th><th>対象UNR</th></tr>
+  <tr><td>第1章 延岡市立図書館</td><td>4</td><td>UNR-015, 016, 027, 029</td></tr>
+  <tr><td>第2章 延岡市役所</td><td>2</td><td>UNR-006, 020</td></tr>
+  <tr><td>第3章 延岡市議会事務局</td><td>3</td><td>UNR-008, 022, 031</td></tr>
+  <tr><td>第4章 延岡市選挙管理委員会</td><td>5</td><td>UNR-001, 002, 003, 004, 028</td></tr>
+  <tr><td>第5章 宮崎県立図書館</td><td>1</td><td>UNR-007</td></tr>
+  <tr><td>第6章 宮崎県文書センター</td><td>1</td><td>UNR-014</td></tr>
+  <tr><td>第7章 国立国会図書館（NDL）</td><td>5</td><td>UNR-005, 009, 010, 011, 013</td></tr>
+  <tr><td>第8章 内部作業・外部照会不要</td><td>10</td><td>UNR-012, 017, 018, 019, 021, 023, 024, 025, 026, 030</td></tr>
+  <tr><th>合計</th><th>31</th><td></td></tr>
+</table>
+<p class="note">割り当ての考え方：<code>unr-priority-master.json</code>のtargetInstitution欄で最初に挙がる機関を基本とし、より詳細な既存資料（<code>nobeoka-library-checklist.md</code>・<code>miyazaki-ndl-checklist.md</code>・<code>nobeoka-city-inquiry-plan.md</code>）が具体的候補資料・ページ番号まで特定している場合はそちらを優先。財政欠落年度（UNR-014・015・027）や市長任期（UNR-029・013）で市役所が2次的調査先となる場合は、各カードの「他の調査候補」欄に記載し、市役所章での重複カード化はしていない。</p>
+
+<h3 class="card-title" style="border:none;color:var(--fg);">持ち物リスト</h3>
+<ul class="checklist">
+  <li>スマートフォン（撮影・記録用）</li>
+  <li>モバイルバッテリー</li>
+  <li>筆記具・メモ帳</li>
+  <li>本チェックシート（印刷またはタブレット）</li>
+  <li>資料番号一覧・請求記号一覧（特に宮崎県文書センターの簿冊番号5043・107051）</li>
+  <li>身分証明書（要確認）</li>
+  <li>NDL利用者情報（NDL訪問時のみ、要事前登録）</li>
+  <li>USB等の記録媒体（施設が許可する場合のみ、要確認）</li>
+  <li>小銭・コピー代（要確認）</li>
+  <li>クリアファイル</li>
+</ul>
+
+<!-- ============ CHAPTER 1: 延岡市立図書館 ============ -->
+<h2 id="ch1">第1章　延岡市立図書館（郷土資料担当）</h2>
+<table class="meta">
+  <tr><th>所在地</th><td>〒882-0812 宮崎県延岡市本小路39番地1（カルチャープラザのべおか内）</td></tr>
+  <tr><th>電話</th><td>0982-32-3058</td></tr>
+  <tr><th>FAX</th><td>0982-22-0644</td></tr>
+  <tr><th>メール</th><td>toshokan@city.nobeoka.miyazaki.jp</td></tr>
+  <tr><th>開館日・利用条件</th><td>確認中（訪問前に電話で確認すること）</td></tr>
+  <tr><th>撮影可否・コピー可否</th><td>要確認</td></tr>
+</table>
+<p>推奨する確認順序：①延岡市決算書（UNR-015）②延岡市史上巻コマ124相当（UNR-029 M1〜M9）③延岡市史下巻p.911-977付近（UNR-016）④延岡市史（UNR-027補完）⑤延岡市議会史の所在確認</p>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-015</span><span class="badge p-A1">A1</span><span class="badge category">finance</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>財政欠落9年度のうち、延岡市立図書館が調査先となる4年度分の歳入総額・歳出総額</dd></div>
+    <div><dt>対象人物</dt><dd>なし</dd></div>
+    <div><dt>対象年度</dt><dd>昭和26・27・28・34年度（FY1951, 1952, 1953, 1959）</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎県立図書館（INQ-001、送付済み・回答待ち）、宮崎県文書センター（FY1951-1953分のみ）、延岡市役所財政課・総務課（最終手段）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市決算書並意見書（延岡市監査委員事務局編、延岡市発行、発行年未確認）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市決算審査意見書／延岡市統計書／延岡市勢要覧／延岡市政要覧、〔延岡市〕市政二十年史（江川林蔵編、1953年10月、FY1951・1952のみ対象）</dd></div>
+    <div><dt>請求記号</dt><dd>確認中</dd></div>
+    <div><dt>資料番号</dt><dd>ndl-src-16（決算書並意見書）、ndl-src-28（市政二十年史）</dd></div>
+    <div><dt>ページ候補</dt><dd>決算書の歳入歳出決算総括表。市政二十年史は542頁のうち財政関連の章・節を目次で特定</dd></div>
+    <div><dt>現地確認事項</dt><dd>①各年度の歳入総額・歳出総額 ②会計区分 ③決算額／決算見込額／予算額のいずれか ④単位（円／千円）</dd></div>
+    <div><dt>解消条件</dt><dd>該当年度の歳入総額・歳出総額・会計区分・単位を確認できた場合（部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">備考：INQ-003は宮崎県立図書館（INQ-001）で「所蔵なし」と判明した場合に送付する条件付き。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-016</span><span class="badge p-A1">A1</span><span class="badge category">election</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>延岡市議会議員選挙（1933〜1998年）の候補者別得票結果の収録有無</dd></div>
+    <div><dt>対象人物</dt><dd>なし（候補者全般）</dd></div>
+    <div><dt>対象年度</dt><dd>1933〜1998年（複数十回分）</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎県立図書館（郷土資料コーナー現物）、延岡市選挙管理委員会、延岡市議会事務局</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史（上巻・下巻、郷土資料コーナー現物）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市議会史（存在自体が未確認。NDL書誌検索は0件）</dd></div>
+    <div><dt>請求記号</dt><dd>確認中</dd></div>
+    <div><dt>資料番号</dt><dd>確認中（NDL書誌に「延岡市年表:p911-977」の記載あり）</dd></div>
+    <div><dt>ページ候補</dt><dd>延岡市史下巻（1983年版）p.911-977付近（延岡市年表）</dd></div>
+    <div><dt>現地確認事項</dt><dd>①年表に市議選の実施年月日・当選者数等の記録があるか ②候補者別得票結果まで含むか</dd></div>
+    <div><dt>解消条件</dt><dd>記載有無を確認できた場合（無いことの確認も解消として扱う）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <ul class="checklist">
+    <li>「延岡市議会史」という書名の資料が存在するか、OPACまたは職員に確認する</li>
+    <li>存在する場合：所蔵有無・請求記号・複写可否を確認する</li>
+    <li>存在しない場合：類似資料（議会だより縮刷版、議会記念誌等）の有無を尋ねる</li>
+  </ul>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-027</span><span class="badge p-A2">A2</span><span class="badge category">finance</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>FY1960-1982・FY1988の市債・基金・財政力指数・人口データ</dd></div>
+    <div><dt>対象人物</dt><dd>なし</dd></div>
+    <div><dt>対象年度</dt><dd>FY1960-1982、FY1988</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎県立図書館（既存Phase20/29の現地閲覧ルート優先）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市決算書並意見書（UNR-015と同一資料群を延長）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市統計書・延岡市勢要覧</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>確認中／確認中</dd></div>
+    <div><dt>ページ候補</dt><dd>確認中（決算書の歳入歳出決算総括表・市債現在高・基金残高の記載箇所）</dd></div>
+    <div><dt>現地確認事項</dt><dd>該当年度の市債・基金・財政力指数・人口の各数値</dd></div>
+    <div><dt>解消条件</dt><dd>いずれか1項目でも確認できた場合（年度ごとの部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">オンライン経路（e-Stat）の下限がFY1989であることをPhase74で実証済み。現地閲覧・外部照会以外に前進経路がない。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-029</span><span class="badge p-A1">A1</span><span class="badge category">mayor</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>市長交代の就任・退任日を月精度から日精度へ確定（M1〜M9の9区間が主対象）</dd></div>
+    <div><dt>対象人物</dt><dd>仲田又次郎・鈴木憲太郎・大島文彦・三浦虎雄・佐藤千吉郎（M1〜M9）</dd></div>
+    <div><dt>対象年度</dt><dd>1937〜1952年（M1〜M9）。M10=1956年・M11=1967年・M12=1978年・M13=1994年は他施設候補</dd></div>
+    <div><dt>他の調査候補</dt><dd>NDLデジタルコレクション（オンライン代替）、宮崎県立図書館・新聞縮刷版所蔵館（M10・M12・M13）、延岡市選挙管理委員会（M11・M13）、延岡市役所秘書担当（内部記録）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史（上巻、延岡市発行、1983年）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>確認中／pid 9774711</dd></div>
+    <div><dt>ページ候補</dt><dd>NDL版コマ124相当（市長本体の一覧表列）</dd></div>
+    <div><dt>現地確認事項</dt><dd>市長本体列の自至日付欄（就任日・退任日）を日単位で、下表9区間について確認</dd></div>
+    <div><dt>解消条件</dt><dd>各区間の就任日・退任日を日単位で確認できた場合（区間ごと部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <table class="meta">
+    <tr><th>区間</th><th>対象期間（月精度）</th><th>対象人物</th><th>確認</th></tr>
+    <tr><td>M1</td><td>1937-01-06〜1937-03-06</td><td>仲田又次郎→鈴木憲太郎</td><td>☐</td></tr>
+    <tr><td>M2</td><td>1937-04-14〜1937-05-16</td><td>鈴木憲太郎（辞職→再任）</td><td>☐</td></tr>
+    <tr><td>M3</td><td>1937-06-15〜1937-09-26</td><td>鈴木憲太郎→大島文彦</td><td>☐</td></tr>
+    <tr><td>M4</td><td>1941-09-25〜1941-10-22</td><td>大島文彦→三浦虎雄</td><td>☐</td></tr>
+    <tr><td>M5</td><td>1942-04-25〜1942-05-19</td><td>三浦虎雄（辞職→再任）</td><td>☐</td></tr>
+    <tr><td>M6</td><td>1946-03-06〜1946-03-29</td><td>三浦虎雄→鈴木憲太郎</td><td>☐</td></tr>
+    <tr><td>M7</td><td>1947-03-22〜1947-04-16</td><td>鈴木憲太郎→佐藤千吉郎</td><td>☐</td></tr>
+    <tr><td>M8</td><td>1948-06-06〜1948-07-16</td><td>佐藤千吉郎→仲田又次郎</td><td>☐</td></tr>
+    <tr><td>M9</td><td>1952-06-19〜1952-07-11</td><td>仲田又次郎→三浦虎雄</td><td>☐</td></tr>
+  </table>
+  <p class="note">参考（付録）：同コマ125にUNR-007（早生隆彦氏の生年月日候補）の記載候補があるため、ついでに確認する価値がある（正式調査先は第5章 宮崎県立図書館）。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 2: 延岡市役所 ============ -->
+<h2 id="ch2">第2章　延岡市役所</h2>
+<table class="meta">
+  <tr><th>代表電話</th><td>0982-34-2111</td></tr>
+  <tr><th>財政課</th><td>電話0982-22-7005、FAX 0982-34-2110</td></tr>
+  <tr><th>総務課（情報公開担当）</th><td>電話0982-22-7006</td></tr>
+  <tr><th>広報広聴係</th><td>電話0982-22-7042、フォームあり</td></tr>
+  <tr><th>秘書担当</th><td>直接連絡先未確認。代表窓口経由</td></tr>
+  <tr><th>統計担当</th><td>直接連絡先未確認。総合政策課経由で所管確認</td></tr>
+</table>
+<div class="notice">本章に該当するのはUNR-006・UNR-020の2件のみだが、市役所の重要度が低いわけではない。UNR-014・015・027（財政資料）、UNR-013・029（市長任期）では、市役所が<strong>エスカレーション先・裏付け確認先</strong>として各該当カードの「他の調査候補」欄に記載されている（重複カード化を避けるため本章では参照のみ）。</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-006</span><span class="badge p-A1">A1</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>教育長の氏名・在任期間（1933-2006年・2015年以降で約70年分空白）</dd></div>
+    <div><dt>対象人物</dt><dd>教育長（氏名未確認、1970年代在任者を含む）</dd></div>
+    <div><dt>対象年度</dt><dd>昭和45〜54年度（1970年代）中心。実際は1933-2006年・2015年以降全体が空白</dd></div>
+    <div><dt>調査先（主）</dt><dd>延岡市教育委員会事務局（市役所代表窓口経由の取次）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市立図書館（延岡市史、ついでに確認可能）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市教育委員会 会議録・沿革資料</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市史（上巻・下巻、1983年）／延岡市勢要覧（昭和40〜50年代版）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>確認中／確認中</dd></div>
+    <div><dt>ページ候補</dt><dd>延岡市史の目次・索引にNDL版では発見できず。現地で直接確認</dd></div>
+    <div><dt>現地確認事項</dt><dd>1970年代を含む各期の教育長氏名・在任期間</dd></div>
+    <div><dt>解消条件</dt><dd>氏名・在任期間を確認できた場合、または記載が無いことを確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">参考：教育長csp-43（町田氏、2007-2015年在任）はPhase110で会議録全文検索により確定済み。INQ-007（教育委員会向け、draft）は1970年代限定。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-020</span><span class="badge p-C">C</span><span class="badge category">population</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>住民基本台帳人口・世帯数・面積の年次時系列のうち、現地確認が必要な範囲</dd></div>
+    <div><dt>対象人物</dt><dd>なし</dd></div>
+    <div><dt>対象年度</dt><dd>1996年以前（人口・世帯数）、面積は年次推移全期間</dd></div>
+    <div><dt>調査先（主）</dt><dd>延岡市役所 統計担当（所管未確認、まず広報広聴係へ確認）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市役所 広報担当（統計刊行物の所管確認）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市勢要覧・延岡市統計書のバックナンバー</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>確認中</dd></div>
+    <div><dt>現地確認事項</dt><dd>①バックナンバー（1996年以前）の保存状況 ②面積の年次推移資料の有無 ③統計担当が正しい所管か</dd></div>
+    <div><dt>解消条件</dt><dd>資料の所在を確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">1997-2026年分の毎年1月1日時点人口・世帯数は既にオンラインで抽出済み（スキーマ拡張・反映のみ内部作業として残る）。本カードはそれ以前の年度分と面積データのみが対象。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 3: 延岡市議会事務局 ============ -->
+<h2 id="ch3">第3章　延岡市議会事務局</h2>
+<table class="meta">
+  <tr><th>電話</th><td>0982-22-7029</td></tr>
+  <tr><th>所在地</th><td>確認中（延岡市役所内または近接）</td></tr>
+</table>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-008</span><span class="badge p-A1">A1</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>1978年1月4日（高橋重行辞職）以降の収入役後任者氏名</dd></div>
+    <div><dt>対象人物</dt><dd>収入役（氏名未確認、13代・高橋重行の後任）</dd></div>
+    <div><dt>対象年度</dt><dd>1978年以降</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市立図書館（延岡市史1993年版の年表部分）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市議会会議録（収入役選任同意議案、原本、1978年以降分）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市史1993年版（下巻・年表。Phase26で一部閲覧済みだが全体は未確認）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>確認中／確認中</dd></div>
+    <div><dt>ページ候補</dt><dd>現地で確認。1993年版は年表部分</dd></div>
+    <div><dt>現地確認事項</dt><dd>収入役13代（高橋重行）の後任者氏名・就任日</dd></div>
+    <div><dt>解消条件</dt><dd>後任者氏名・就任日を確認できた場合、または記載が無いことを確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">延岡市史上巻の一覧表は13代（高橋重行）で終わっており延岡市史のみでは解決不可と判明済み。INQ-005（議会事務局向け、draft、旧版）あり。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-022</span><span class="badge p-B">B</span><span class="badge category">bills</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>平成27〜30年度（22会期）の議案番号が原本PDFに印字されておらず復元できていない問題</dd></div>
+    <div><dt>対象人物</dt><dd>なし</dd></div>
+    <div><dt>対象年度</dt><dd>平成27〜30年度（22会期）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市議会会議録検索システム（オンラインで既到達、個別照合が主ルート）</dd></div>
+    <div><dt>第一候補資料</dt><dd>議案審査等結果PDF（原本、22会期分）</dd></div>
+    <div><dt>第二候補資料</dt><dd>委員長報告（会議録原本）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>該当なし</dd></div>
+    <div><dt>現地確認事項</dt><dd>22会期分の委員長報告との個別照合によるbillNumberの復元。オンラインで確認しきれない原本資料の有無</dd></div>
+    <div><dt>解消条件</dt><dd>22会期分のうち一部でも議案番号を復元できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">unr-priority-master.jsonでは内部作業のみで前進可能な区分だが、nobeoka-city-inquiry-plan.mdでは議会事務局の確認事項にも記載。billNumberを推測・省略で作らない方針を維持。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-031</span><span class="badge p-A1">A1</span><span class="badge category">bills</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>billVotes.json 1177件のうち議員個人の賛否内訳が確認できるのは2件のみという構造的ギャップ</dd></div>
+    <div><dt>対象人物</dt><dd>なし</dd></div>
+    <div><dt>対象年度</dt><dd>全期間（起立採決52件のうち残り19件は令和元年6月〜令和3年3月、6会期）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市議会会議録検索システム（オンラインで既到達、討論・採決部分の個別精読が主ルート）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市議会会議録（討論・採決部分、原本）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>各定例会・臨時会の採決結果部分</dd></div>
+    <div><dt>現地確認事項</dt><dd>残り19件（6会期）の会議録討論部分での個別賛否。原本での確認可否</dd></div>
+    <div><dt>解消条件</dt><dd>残り19件のうち一部でも個人別賛否を確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">521件の"notDisclosed"は「未収集」ではなく「公式資料上そもそも個人別記録が存在しないことを確認済み」の状態。無制限の全件取得は行わない方針（52件中33件はPhase100-101・109で処理済み）。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 4: 延岡市選挙管理委員会 ============ -->
+<h2 id="ch4">第4章　延岡市選挙管理委員会（延岡市役所内）</h2>
+<table class="meta">
+  <tr><th>電話</th><td>0982-22-7026（代表経由取次を想定）</td></tr>
+  <tr><th>所在地</th><td>確認中（延岡市役所内）</td></tr>
+  <tr><th>注記</th><td>直接連絡先未確認、代表（0982-34-2111）経由での取次を想定</td></tr>
+</table>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-001</span><span class="badge p-A1">A1</span><span class="badge category">election</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>1975年（昭和50年）市長選挙の対立候補氏名（当選・房野博以外の2名）</dd></div>
+    <div><dt>対象人物</dt><dd>対立候補2名（候補：山口哲臣・丸山正喜。1971年選挙欄との境界判別が未確定）</dd></div>
+    <div><dt>対象年度</dt><dd>昭和50年（1975年）</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎日日新聞縮刷版所蔵館（宮崎県立図書館、1975年1月分）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市長選挙 選挙結果資料（開票録・選挙録）</dd></div>
+    <div><dt>第二候補資料</dt><dd>宮崎日日新聞縮刷版（1975年1月分）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>該当なし</dd></div>
+    <div><dt>現地確認事項</dt><dd>対立候補2名の氏名確定</dd></div>
+    <div><dt>解消条件</dt><dd>対立候補2名の氏名を確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">UNR-002・003・004と同一照会（INQ-006、draft・未送付）でまとめて確認予定。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-002</span><span class="badge p-A1">A1</span><span class="badge category">election</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>1978年（昭和53年）市長選挙の候補者数・対立候補氏名</dd></div>
+    <div><dt>対象人物</dt><dd>候補：河野孔明・塩月盈・池田某・河野敏進のいずれかの組み合わせ</dd></div>
+    <div><dt>対象年度</dt><dd>昭和53年（1978年）</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎日日新聞縮刷版所蔵館（宮崎県立図書館、1978年11月分）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市長選挙 選挙結果資料（開票録・選挙録）</dd></div>
+    <div><dt>第二候補資料</dt><dd>宮崎日日新聞縮刷版（1978年11月分）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>該当なし</dd></div>
+    <div><dt>現地確認事項</dt><dd>候補者数（3名か4名か）と対立候補氏名の確定</dd></div>
+    <div><dt>解消条件</dt><dd>候補者数・対立候補氏名を確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">INQ-006（draft）で1982年分と合わせて照会予定。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-003</span><span class="badge p-A1">A1</span><span class="badge category">election</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>1982年（昭和57年）市長選挙の候補者数・対立候補氏名</dd></div>
+    <div><dt>対象人物</dt><dd>対立候補（1978年分と同様のクラスター判別問題）</dd></div>
+    <div><dt>対象年度</dt><dd>昭和57年（1982年）</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎日日新聞縮刷版所蔵館（宮崎県立図書館、1982年10月分）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市長選挙 選挙結果資料（開票録・選挙録）</dd></div>
+    <div><dt>第二候補資料</dt><dd>宮崎日日新聞縮刷版（1982年10月分）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>該当なし</dd></div>
+    <div><dt>現地確認事項</dt><dd>候補者数・対立候補氏名の確定</dd></div>
+    <div><dt>解消条件</dt><dd>候補者数・対立候補氏名を確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">INQ-006（draft）。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-004</span><span class="badge p-A1">A1</span><span class="badge category">election</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>1971・1975・1978・1982年市長選挙の候補者別得票数・無効票数</dd></div>
+    <div><dt>対象人物</dt><dd>なし（候補者全般）</dd></div>
+    <div><dt>対象年度</dt><dd>1971・1975・1978・1982年</dd></div>
+    <div><dt>他の調査候補</dt><dd>宮崎県選挙管理委員会「選挙の記録」（NDL書誌検索で所蔵館・請求記号・pid特定済み、本文未確認。1963年版は大分県立図書館貸出可）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市長選挙 選挙結果資料（開票録）</dd></div>
+    <div><dt>第二候補資料</dt><dd>宮崎県選挙管理委員会「選挙の記録」</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>該当なし</dd></div>
+    <div><dt>現地確認事項</dt><dd>4回の市長選挙の候補者別得票数・無効票数</dd></div>
+    <div><dt>解消条件</dt><dd>1回でも確認できた場合（部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">延岡市史上巻の市長選挙執行状況一覧表には候補者別得票数の記載が無いことを確認済み。UNR-001〜003と同一照会（INQ-006）でまとめて確認予定。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-028</span><span class="badge p-A1">A1</span><span class="badge category">generalQuestions</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>2006年6月13日の会議録に登場する「中井一萬」議員が既存人物データベースのいずれにも一致しない問題</dd></div>
+    <div><dt>対象人物</dt><dd>中井一萬</dd></div>
+    <div><dt>対象年度</dt><dd>1999-2003年任期（推定）</dd></div>
+    <div><dt>他の調査候補</dt><dd>なし</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市議会議員選挙 選挙結果資料（1999年・2003年執行分）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>該当なし／該当なし</dd></div>
+    <div><dt>ページ候補</dt><dd>該当なし</dd></div>
+    <div><dt>現地確認事項</dt><dd>「中井一萬」氏の1999年・2003年市議選当選記録の有無</dd></div>
+    <div><dt>解消条件</dt><dd>当選記録を確認できた場合、または該当者なしと確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">electionResults.json全10選挙・formerMembers.json 58名・members.json 26名との機械照合を2回実施済みだがいずれも該当なし（人物データベースの欠落と推定）。質問本文は未取得（member-id不明のまま要約しない方針）。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 5: 宮崎県立図書館 ============ -->
+<h2 id="ch5">第5章　宮崎県立図書館（情報提供課・郷土情報担当）</h2>
+<table class="meta">
+  <tr><th>所在地</th><td>〒880-0031 宮崎県宮崎市船塚3-210-1</td></tr>
+  <tr><th>電話（代表）</th><td>0985-29-2911</td></tr>
+  <tr><th>電話（レファレンス）</th><td>0985-29-2972</td></tr>
+  <tr><th>電話（郷土情報担当）</th><td>0985-29-2954</td></tr>
+  <tr><th>FAX</th><td>0985-22-9070</td></tr>
+  <tr><th>メール</th><td>soudan@lib.pref.miyazaki.lg.jp（レファレンス）／toshokan@pref.miyazaki.lg.jp（全般）</td></tr>
+</table>
+<div class="notice"><strong>訪問前に必ず確認すること。</strong> INQ-001（財政資料関連、UNR-014・015・027）は2026-08-21に送付済み・回答待ち。重複照会・重複訪問を避けるため、まず郷土情報担当（0985-29-2954）へ回答状況を確認すること。</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-007</span><span class="badge p-B">B</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>早生隆彦氏（mayor-12）の生年月日</dd></div>
+    <div><dt>対象人物</dt><dd>早生 隆彦（mayor-12）</dd></div>
+    <div><dt>対象年度</dt><dd>1978-1994年（早生隆彦市長在任期間）</dd></div>
+    <div><dt>他の調査候補</dt><dd>国立国会図書館（日本の歴代市長 第3巻、既到達）、延岡市立図書館（延岡市史コマ125、opportunistic）</dd></div>
+    <div><dt>第一候補資料</dt><dd>人事興信録（該当版）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市議会会議録（原本、昭和49年度以降分）、延岡市議会関係例規集、延岡市統計月報・税務要覧・勢要覧（昭和40〜50年代版）、宮崎日日新聞縮刷版（1975年1月・1978年11月・1982年10月分）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>確認中／確認中</dd></div>
+    <div><dt>ページ候補</dt><dd>早生隆彦氏の個人略歴欄（人事興信録）</dd></div>
+    <div><dt>現地確認事項</dt><dd>生年月日確定値（候補「1921-01-03」との突合含む、同姓同名の可能性に留意）</dd></div>
+    <div><dt>解消条件</dt><dd>生年月日を確認できた場合、または人事興信録に該当記載がないことを確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>要確認／要確認</dd></div>
+  </dl>
+  <p class="note">INQ-008（宮崎県立図書館向け、draft・未送付）に含まれる。延岡市史上巻コマ125に候補値の記載があるが列対応の確実性に欠ける（既存の懸念点）。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 6: 宮崎県文書センター ============ -->
+<h2 id="ch6">第6章　宮崎県文書センター（宮崎県総務部総務課）</h2>
+<table class="meta">
+  <tr><th>所在地</th><td>確認中（宮崎県立図書館とは別組織）</td></tr>
+  <tr><th>電話</th><td>0985-26-7027</td></tr>
+  <tr><th>メール</th><td>somu-bunsho-c@pref.miyazaki.lg.jp</td></tr>
+</table>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-014</span><span class="badge p-A1">A1</span><span class="badge category">finance</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>財政欠落15年度（FY1934-1948、昭和9〜23年度）が追跡台帳に未登録のまま無追跡状態</dd></div>
+    <div><dt>対象人物</dt><dd>なし</dd></div>
+    <div><dt>対象年度</dt><dd>昭和9〜23年度（FY1934-1948、15年度）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市立図書館（市政二十年史等）、延岡市役所財政課・総務課（最終手段）、宮崎県立図書館（INQ-001送付済み）</dd></div>
+    <div><dt>第一候補資料</dt><dd>簿冊番号5043「市町村行政（延岡市巡視書類）」（昭和11年、地方課、配架08-03-07）</dd></div>
+    <div><dt>第二候補資料</dt><dd>簿冊番号107051「内務報告地方」（昭和10年、地方課、配架311-05-04）</dd></div>
+    <div><dt>請求記号（簿冊番号）</dt><dd>最優先：5043、107051／次点：105877・105882（配架309-05-05）、105913（配架309-06-02）、105921・105928・105930・105932・105951（配架309-06系）</dd></div>
+    <div><dt>資料番号</dt><dd>上記簿冊番号が識別子（総合目録全件検索で財政欠落年度関連56件を確認済み）</dd></div>
+    <div><dt>ページ候補</dt><dd>簿冊単位のため、閲覧申込後に現地で特定</dd></div>
+    <div><dt>現地確認事項</dt><dd>①簿冊5043：昭和8・9年度延岡市予算並歳入歳出決算額、昭和10・11年度延岡市予算額 ②簿冊107051：市町村歳出歳入決算額 ③簿冊105877・105882：分与税分与資料調査表 ④簿冊105913：延岡市歳入歳出予算書（昭和22年度） ⑤簿冊105921等：延岡市起債許可稟請書（決算書ではなく市債発行額の一部のみ判明の可能性に留意）</dd></div>
+    <div><dt>解消条件</dt><dd>いずれかの簿冊から該当年度の歳入総額・歳出総額（または予算額）を確認できた場合（部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>未確認、要問合せ／未確認、要問合せ</dd></div>
+  </dl>
+  <div class="notice">重要な注意：「簿冊番号5043」「107051」は資料の請求番号（識別子）であり、件数ではない。</div>
+  <p class="note">Phase127（2026-08-25）で新規発見した機関。目録（書誌）レベルの確認のみで実際の数値は未確認。同センターへの照会文はまだ作成されていない。訪問前に所在地・開館時間・利用条件を電話等で確認すること。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 7: NDL ============ -->
+<h2 id="ch7">第7章　国立国会図書館（東京本館・関西館／デジタルコレクション個人送信サービス）</h2>
+<table class="meta">
+  <tr><th>所在地</th><td>確認中（東京本館・関西館の2館体制）</td></tr>
+  <tr><th>連絡先</th><td>確認中（既存資料に記載なし）</td></tr>
+  <tr><th>利用形態</th><td>個人送信サービス（要ログイン、来館不要）と、来館限定資料（館内端末閲覧のみ）の2種類</td></tr>
+</table>
+<div class="notice">NDL個人送信サービスへの自動ログインは、本サイト運営方針により実施していません。訪問前にNDL利用者登録（無料）の要否・登録方法を確認してください。</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-005</span><span class="badge p-A1">A1</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>歴代市議会副議長（1933-2026年）の氏名・任期。構造化データが1件も存在しない</dd></div>
+    <div><dt>対象人物</dt><dd>歴代副議長（氏名未確認、1970年代分＝松崎光行・黒木定夫・酒井正喜・佐藤済に対応）</dd></div>
+    <div><dt>対象年度</dt><dd>1933〜2026年（全体）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市議会事務局（議長・副議長選挙の議事部分、会議録原本での現物目視）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史 上巻 コマ209-210「歴代市議会副議長」一覧表</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市議会会議録（議長・副議長選挙の議事部分）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>pid 9774711／pid 9774711/209</dd></div>
+    <div><dt>ページ候補</dt><dd>コマ209-210</dd></div>
+    <div><dt>現地確認事項</dt><dd>姓の行と自/至日付列の対応関係の判読（過去2回で判読困難だった箇所）</dd></div>
+    <div><dt>解消条件</dt><dd>歴代副議長の氏名・任期一覧を確認できた場合（部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>スクリーンショット・転記（要ログイン）／要確認</dd></div>
+  </dl>
+  <p class="note">Phase32で「歴代議長の横断データファイルが存在しない」ことを新規発見。列対応の判読が過去2回とも未解決のため、議会事務局での現地目視との併用を推奨。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-009</span><span class="badge p-A1">A1</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>助役6〜10代の就任日・退任日（氏名は確認済み）</dd></div>
+    <div><dt>対象人物</dt><dd>長谷川渡・日高一・折小野良吉・折小野某・早瀬某（助役6〜10代）</dd></div>
+    <div><dt>対象年度</dt><dd>1946年ごろ〜1960年ごろ</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市議会事務局（補助的）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史 上巻 コマ126（助役6〜10代一覧表）</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>pid 9774711／pid 9774711/126</dd></div>
+    <div><dt>ページ候補</dt><dd>コマ126</dd></div>
+    <div><dt>現地確認事項</dt><dd>助役6〜10代の就任日・退任日（過去2回、日付の読み取り精度が不十分）</dd></div>
+    <div><dt>解消条件</dt><dd>就任日・退任日を確認できた場合（一部の代のみでも部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>スクリーンショット・転記（要ログイン）／要確認</dd></div>
+  </dl>
+  <p class="note">過去2回とも、クロップ座標が収入役側の列へずれてしまい未解決。次回は40%ズーム時の全体スクリーンショットを直接拡大して目視確認する、または現物確認（来館）を推奨。同一手法の3回目の反復は避けること。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-010</span><span class="badge p-A1">A1</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>助役／副市長の在任者が1983年2月〜1991年ごろの約8年間、citySpecialPosts.jsonに未登録</dd></div>
+    <div><dt>対象人物</dt><dd>三樹博（助役、1983-02-10就任・退任日未確認）、柳田喜継（助役、初回就任日未確認）</dd></div>
+    <div><dt>対象年度</dt><dd>1983年2月〜1991年ごろ</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市議会事務局</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史1993年版（pid 13200958）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市史2003年版・2013年版</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>pid 13200958／pid 13200958</dd></div>
+    <div><dt>ページ候補</dt><dd>年表・歴代助役表（未確認）</dd></div>
+    <div><dt>現地確認事項</dt><dd>柳田喜継氏の初回就任日（1991年、日単位）、三樹博氏の退任日・後任者</dd></div>
+    <div><dt>解消条件</dt><dd>いずれか一方でも日付を確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>スクリーンショット・転記（要ログイン）／要確認</dd></div>
+  </dl>
+  <p class="note">従来「約23年間の空白」だったが、Phase92で柳田喜継氏・三樹博氏を既存一次資料の再構造化により登録済み（新規調査なし）。空白は約8年間へ縮小。1993年版はPhase26で一部閲覧済みだが全体は未確認。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-011</span><span class="badge p-A1">A1</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>収入役1〜6代（1933年〜1951年ごろ）の氏名・任期が1件も確認できていない（Level0）</dd></div>
+    <div><dt>対象人物</dt><dd>収入役1〜6代（氏名未確認）</dd></div>
+    <div><dt>対象年度</dt><dd>1933年〜1951年ごろ</dd></div>
+    <div><dt>他の調査候補</dt><dd>なし</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史 上巻 コマ126「2 収入役」一覧表</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>pid 9774711／pid 9774711/126</dd></div>
+    <div><dt>ページ候補</dt><dd>コマ126（「2 収入役」列、初代〜6代）</dd></div>
+    <div><dt>現地確認事項</dt><dd>収入役1〜6代の氏名・任期（今回未着手のため氏名から確認）</dd></div>
+    <div><dt>解消条件</dt><dd>1名でも氏名・任期を確認できた場合（部分解消可）</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>スクリーンショット・転記（要ログイン）／要確認</dd></div>
+  </dl>
+  <p class="note">助役1-5代（UNR-009）と同じ手法・同じコマで解決可能性が高い。併せて確認すると効率的。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><span class="unrid">UNR-013</span><span class="badge p-B">B</span><span class="badge category">person</span></div>
+  <dl class="fields">
+    <div><dt>調べたい事実</dt><dd>折小野良一氏（mayor-10）の代数表記（「十一・十二代」か「十二・十三代」か）が資料間で相違</dd></div>
+    <div><dt>対象人物</dt><dd>折小野 良一（mayor-10）</dd></div>
+    <div><dt>対象年度</dt><dd>1960-1966年（折小野良一市長在任期間）</dd></div>
+    <div><dt>他の調査候補</dt><dd>延岡市役所 秘書担当（代数表記の典拠資料の内部確認）</dd></div>
+    <div><dt>第一候補資料</dt><dd>延岡市史 上巻 コマ124-125（歴代市長一覧表）</dd></div>
+    <div><dt>第二候補資料</dt><dd>延岡市公式ホームページ歴代市長ページ</dd></div>
+    <div><dt>請求記号／資料番号</dt><dd>pid 9774711／pid 9774711/124-125</dd></div>
+    <div><dt>ページ候補</dt><dd>コマ124-125</dd></div>
+    <div><dt>現地確認事項</dt><dd>折小野良一氏欄に付された代数表記の直接確認（archiveMayors.jsonの「12代・13代」表記との突合）</dd></div>
+    <div><dt>解消条件</dt><dd>コマ124-125の代数表記を直接確認できた場合</dd></div>
+    <div><dt>撮影可否／コピー可否</dt><dd>スクリーンショット・転記（要ログイン）／要確認</dd></div>
+  </dl>
+  <p class="note">任期自体は日精度で確認済み（矛盾ではなく通算代数と個人の期数の使い分けの可能性）。archiveMayors.json側は独立4資料（延岡市公式・NDL・延岡商工会議所・夕刊デイリー）で「12・13代」を裏付け。1993年版延岡市史のみ「第十一・十二代」で原因未特定（両論併記を維持）。</p>
+  <div class="fillins">
+    <div class="fillin-row"><span class="lbl">確認結果</span><span class="blank tall"></span></div>
+    <div class="fillin-row"><span class="lbl">出典</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">ページ</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">備考</span><span class="blank"></span></div>
+    <div class="fillin-row"><span class="lbl">見つからなかった場合</span><span class="blank tall"></span></div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 8: 内部作業 ============ -->
+<h2 id="ch8">第8章　内部作業・外部照会不要（対象機関なし）</h2>
+<p>以下の10件は<code>unr-priority-master.json</code>でresearchMethodが空欄（内部作業のみで前進可能）、または国の機関の公表待ちに分類されている項目です。現地調査・外部照会の対象ではないため、簡易カードのみを記載します。</p>
+<table class="summary">
+  <tr><th>UNR ID</th><th>優先度</th><th>分野</th><th>内容</th><th>現状</th><th>次のアクション</th></tr>
+  <tr><td>UNR-012</td><td>B</td><td>schema</td><td>会計管理者がCitySpecialPostRole型に存在しない</td><td>not_collected</td><td>UNR-008確定後にスキーマへ追加</td></tr>
+  <tr><td>UNR-017</td><td>B</td><td>schema</td><td>議長・副議長がCitySpecialPostRole型に存在しない</td><td>not_collected</td><td>UNR-005確定後にスキーマへ追加</td></tr>
+  <tr><td>UNR-018</td><td>B</td><td>finance</td><td>地方債現在高FY2011-2017</td><td>resolved</td><td>対応不要（記録として残す）</td></tr>
+  <tr><td>UNR-019</td><td>B</td><td>finance</td><td>市債・地方債データFY1990-2000</td><td>resolved</td><td>対応不要（記録として残す）</td></tr>
+  <tr><td>UNR-021</td><td>C</td><td>population</td><td>令和7年国勢調査確報が未公表（速報値は確認済み）</td><td>reference_pending</td><td>総務省統計局の確報公表を待つ</td></tr>
+  <tr><td>UNR-023</td><td>A2</td><td>generalQuestions</td><td>平成年代一般質問backfillのparser拡張は実装完了、councilSessions.json整備待ち</td><td>reference_pending</td><td>会期メタデータ追加後、質問候補を正式マージ（開発タスク）</td></tr>
+  <tr><td>UNR-024</td><td>C</td><td>schema</td><td>formerMembers.jsonに構造化フィールドが無い</td><td>not_collected</td><td>実データが揃った段階でスキーマ拡張検討</td></tr>
+  <tr><td>UNR-025</td><td>B</td><td>dataQuality</td><td>generalQuestions.jsonとcouncilSpeechSummaries.jsonの重複</td><td>under_review</td><td>役割分担を踏まえ人手で重複解消方針を決定</td></tr>
+  <tr><td>UNR-026</td><td>A2</td><td>schema</td><td>councilSessions.jsonの会期レコード欠落は大部分解決済み</td><td>resolved</td><td>対応不要（収録範囲2000年度まで拡大済み）</td></tr>
+  <tr><td>UNR-030</td><td>A1</td><td>finance</td><td>財政調整基金残高の3クラスター同一値疑いはPhase90で解決済み</td><td>resolved</td><td>対応不要（FY2003のみneedsReview維持）</td></tr>
+</table>
+
+<footer class="doc-footer">
+  <p><strong>現地・照会で得られた結果の反映手順</strong></p>
+  <ol>
+    <li><code>reports/phase21-inquiry-tracker.json</code>・<code>reports/phase33-master-unresolved-ledger.json</code>・<code>src/data/blockedTaskClassification.json</code>の該当レコードを人間が更新する。</li>
+    <li>確認できた数値・日付を<code>src/data</code>へ、出典（sourceUrl/sourceTitle/sourceOrganization/pageNumber等）とともに登録する。</li>
+    <li><code>npm run validate:data</code>等を実行し、errors=0を確認する。</li>
+    <li>資料が見つからなかった場合も、その旨を記録し、ステータスを安易にresolvedへ変更しない。</li>
+  </ol>
+  <p>以上、既存資料の整理・カード化のみを行いました。新たな一次資料の確認・数値の確定は行っていません。</p>
+</footer>
