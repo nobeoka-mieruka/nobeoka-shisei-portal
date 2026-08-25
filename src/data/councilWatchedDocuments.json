@@ -8,12 +8,12 @@
     "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
     "fileHash": "e03c62c915eb736cc74583212907dee5465fe92371cf25914dba651618046003",
     "ocrStatus": "text-extracted",
-    "status": "published",
+    "status": "url-change-suspected",
     "isOfficial": true,
     "firstDetectedAt": "2026-08-03",
-    "lastCheckedAt": "2026-08-10",
+    "lastCheckedAt": "2026-08-25",
     "updatedAt": null,
-    "missingStreak": 0
+    "missingStreak": 1
   },
   {
     "id": "session-schedule-a392dabc3484",
@@ -24,12 +24,12 @@
     "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
     "fileHash": "08f523d224f33711a9116ebaa3d0ac841f189ca304bcd4b1430f0c344fc244e9",
     "ocrStatus": "text-extracted",
-    "status": "published",
+    "status": "url-change-suspected",
     "isOfficial": true,
     "firstDetectedAt": "2026-08-03",
-    "lastCheckedAt": "2026-08-10",
+    "lastCheckedAt": "2026-08-25",
     "updatedAt": null,
-    "missingStreak": 0
+    "missingStreak": 1
   },
   {
     "id": "statement-resolution-93afc130e76b",
@@ -1162,5 +1162,37 @@
     "isOfficial": true,
     "firstDetectedAt": "2026-08-03",
     "lastCheckedAt": "2026-08-10"
+  },
+  {
+    "id": "session-schedule-376b0147ddbf",
+    "category": "session-schedule",
+    "title": "第27回延岡市議会（定例会）会議日程 [PDFファイル／113KB]",
+    "decidedDate": null,
+    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28674.pdf",
+    "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+    "fileHash": "da631fd843513e986bc846280046fa2bc04eaccdc4ae96c0850213e8267d3604",
+    "ocrStatus": "text-extracted",
+    "status": "published",
+    "isOfficial": true,
+    "firstDetectedAt": "2026-08-25",
+    "lastCheckedAt": "2026-08-25",
+    "updatedAt": null,
+    "missingStreak": 0
+  },
+  {
+    "id": "session-schedule-a1de84e0ce55",
+    "category": "session-schedule",
+    "title": "令和8年度　常任委員会・特別委員会開催予定表 [PDFファイル／57KB]",
+    "decidedDate": "令和8年8月21日",
+    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28682.pdf",
+    "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+    "fileHash": "d8d7c208a37830a3f413b7141e30d4017015efe3649ac1d93de349f6b660e9f9",
+    "ocrStatus": "text-extracted",
+    "status": "published",
+    "isOfficial": true,
+    "firstDetectedAt": "2026-08-25",
+    "lastCheckedAt": "2026-08-25",
+    "updatedAt": null,
+    "missingStreak": 0
   }
 ]

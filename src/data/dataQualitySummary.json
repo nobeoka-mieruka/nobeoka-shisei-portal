@@ -1,31 +1,23 @@
 {
-  "generatedAt": "2026-08-24T09:04:18.013Z",
+  "generatedAt": "2026-08-25T01:37:35.750Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 15,
-    "info": 65,
+    "info": 66,
     "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは出典タイトル欠落等の改善余地、infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
   },
   "linkHealth": {
-    "generatedAt": "2026-08-24T07:43:07.537Z",
-    "totalChecked": 1224,
-    "ok": 1203,
+    "generatedAt": "2026-08-25T01:30:40.927Z",
+    "totalChecked": 1230,
+    "ok": 1212,
     "redirect": 12,
-    "notFound404": 6,
+    "notFound404": 3,
     "serverError": 0,
     "broken": [
       {
         "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
         "files": [
           "archiveMayorTerms.json",
-          "dataQualitySummary.json"
-        ],
-        "category": "not_found_404",
-        "status": 404
-      },
-      {
-        "url": "https://news.yahoo.co.jp/articles/54bca0ed2ef221f61c15fcb199c2377eda2bf8ba",
-        "files": [
           "dataQualitySummary.json"
         ],
         "category": "not_found_404",
@@ -41,14 +33,6 @@
         "status": 404
       },
       {
-        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27980.xls",
-        "files": [
-          "dataQualitySummary.json"
-        ],
-        "category": "not_found_404",
-        "status": 404
-      },
-      {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
         "files": [
           "councilWatchedDocuments.json",
@@ -56,18 +40,10 @@
         ],
         "category": "not_found_404",
         "status": 404
-      },
-      {
-        "url": "https://www.the-miyanichi.co.jp/kennai/_84868.html",
-        "files": [
-          "dataQualitySummary.json"
-        ],
-        "category": "not_found_404",
-        "status": 404
       }
     ],
-    "excludedBackupOnlyReferences": 143,
-    "note": "*.backup.json（未使用のバックアップファイル）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
+    "excludedBackupOnlyReferences": 146,
+    "note": "*.backup.json（未使用のバックアップファイル）、および本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
   },
   "countConsistencyChecks": [
     {
