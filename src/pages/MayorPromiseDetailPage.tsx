@@ -13,6 +13,7 @@ import type {
   MayorPromiseItem,
   MayorPromiseMeasureSnapshot,
   MayorPromisesData,
+  MayorPromiseStatusLabel,
   PromiseEvidenceStatus,
 } from "../types";
 import { BackLink } from "../components/BackLink";
@@ -67,6 +68,53 @@ function collectEvidenceDocs(promise: MayorPromiseItem): EvidenceDoc[] {
   return docs;
 }
 
+/**
+ * 「進捗履歴」タイムライン1件分。公約の状態を区別して記録する2種類を扱う（Phase155）。
+ *
+ * - "baseline"：この公約データを登録した基準日（MayorPromiseItem.referenceDate）。
+ *   個別の進捗更新イベントではなく、現在の公約原文・進捗状況・関連予算等が
+ *   その日を基準に整理されていることを示す時点。
+ * - "progress_update"：progressHistoryへ追加された、公表資料に基づく進捗確認の更新。
+ *
+ * 将来、公約原文（promiseText）自体の変更を記録するデータが追加された場合は、
+ * ここに "promise_text_change" 種別を追加して区別する設計とする。現時点ではその
+ * ようなデータは存在しないため、架空の履歴は作らず追加しない。
+ */
+type PromiseTimelineEntry = {
+  kind: "baseline" | "progress_update";
+  date: string;
+  statusLabel: MayorPromiseStatusLabel;
+  summary?: string;
+  sourceTitle?: string;
+  sourceUrl?: string;
+};
+
+/**
+ * 公約1件分の「基準時点」と「進捗更新」を統合し、日付の新しい順に並べる。
+ * 実際にデータが存在する時点のみを対象とし、存在しない時点（選挙時の公約発表日など、
+ * announcedDateが未設定の場合）は追加しない。
+ */
+function buildPromiseTimeline(promise: MayorPromiseItem): PromiseTimelineEntry[] {
+  const history = promise.progressHistory ?? [];
+  const entries: PromiseTimelineEntry[] = history.map((h) => ({
+    kind: "progress_update",
+    date: h.date,
+    statusLabel: h.statusLabel,
+    summary: h.summary ?? h.note,
+    sourceTitle: h.sourceTitle,
+    sourceUrl: h.sourceUrl,
+  }));
+
+  // referenceDateがprogressHistoryのいずれかの日付と重複しない場合のみ、
+  // 別途「基準時点」として追加する（同一日の二重表示を避ける）。
+  const alreadyCovered = history.some((h) => h.date === promise.referenceDate);
+  if (promise.referenceDate && !alreadyCovered) {
+    entries.push({ kind: "baseline", date: promise.referenceDate, statusLabel: promise.statusLabel });
+  }
+
+  return entries.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
 export function MayorPromiseDetailPage() {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
@@ -104,6 +152,7 @@ export function MayorPromiseDetailPage() {
   const relatedPressConferences = (promise.relatedPressConferenceDates ?? [])
     .map((date) => mayorPressConferences.find((c) => c.date === date))
     .filter((c): c is (typeof mayorPressConferences)[number] => !!c);
+  const promiseTimeline = buildPromiseTimeline(promise);
   const categoryPromises = promisesData.promises.filter((p) => p.categoryId === promise.categoryId);
   const idx = categoryPromises.findIndex((p) => p.id === promise.id);
   const prevPromise = idx > 0 ? categoryPromises[idx - 1] : undefined;
@@ -404,34 +453,64 @@ export function MayorPromiseDetailPage() {
         </SectionCard>
       )}
 
-      {/* 進捗履歴 */}
+      {/* 進捗履歴（Phase155：基準時点と進捗更新を区別して表示） */}
       <SectionCard title="進捗履歴">
-        {promise.progressHistory && promise.progressHistory.length > 0 ? (
-          <ul className="space-y-3">
-            {[...promise.progressHistory].reverse().map((h, i) => (
-              <li key={i} className="border-b border-outline-variant pb-3 last:border-0 last:pb-0">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs text-on-surface-variant">{formatJapaneseDate(h.date)}</span>
-                  <MayorPromiseStatusBadge status={h.statusLabel} />
-                </div>
-                {(h.summary || h.note) && (
-                  <p className="mt-1 text-sm text-on-surface">{h.summary ?? h.note}</p>
-                )}
-                {h.sourceUrl && (
-                  <a
-                    href={h.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${h.sourceTitle ?? "根拠資料"}を新しいタブで開く`}
-                    className={`mt-1 inline-flex items-center gap-1 text-xs text-primary hover:underline ${linkClass}`}
-                  >
-                    <GlobeIcon className="h-3 w-3 shrink-0" />
-                    {h.sourceTitle ?? "根拠資料を見る"}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          このセクションでは、「公約原文」自体が変更された場合と、公表資料に基づき進捗状況の確認が更新された場合を区別して記録します。現時点で公約原文の変更履歴は登録されていません（上記「公約原文」を参照）。以下は、この公約データの基準時点と、進捗確認が更新された時点の一覧です。
+        </p>
+        {promiseTimeline.length > 0 ? (
+          <>
+            <ol className="relative space-y-4 border-l border-outline-variant pl-4">
+              {promiseTimeline.map((entry, i) => (
+                <li key={i} className="relative">
+                  <span
+                    className="absolute -left-[21px] top-1 h-2.5 w-2.5 rounded-full border-2 border-surface bg-outline"
+                    aria-hidden="true"
+                  />
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <time className="text-xs font-medium text-on-surface-variant">
+                      {formatJapaneseDate(entry.date)}
+                    </time>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                        entry.kind === "baseline"
+                          ? "bg-surface-container-high text-on-surface-variant"
+                          : "bg-primary-container text-on-primary-container"
+                      }`}
+                    >
+                      {entry.kind === "baseline" ? "基準時点" : "進捗更新"}
+                    </span>
+                    <MayorPromiseStatusBadge status={entry.statusLabel} />
+                  </div>
+                  {entry.kind === "baseline" ? (
+                    <p className="mt-1 text-sm text-on-surface-variant">
+                      この日を基準日として、公約の進捗状況・関連予算等のデータを整理しています（詳細は上記の各セクションを参照）。
+                    </p>
+                  ) : (
+                    entry.summary && <p className="mt-1 text-sm text-on-surface">{entry.summary}</p>
+                  )}
+                  {entry.kind === "progress_update" && entry.sourceUrl && (
+                    <a
+                      href={entry.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${entry.sourceTitle ?? "根拠資料"}を新しいタブで開く`}
+                      className={`mt-1 inline-flex items-center gap-1 text-xs text-primary hover:underline ${linkClass}`}
+                    >
+                      <GlobeIcon className="h-3 w-3 shrink-0" />
+                      {entry.sourceTitle ?? "根拠資料を見る"}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ol>
+            {promiseTimeline.length === 1 && promiseTimeline[0].kind === "baseline" && (
+              <p className="mt-3 text-xs text-on-surface-variant">
+                この基準日以降の進捗更新は、公開資料で確認でき次第追加します（最終確認日：
+                {formatJapaneseDate(promise.lastVerified)}）。
+              </p>
+            )}
+          </>
         ) : (
           <p className="text-sm text-on-surface-variant">
             この公約の詳細な変更履歴はまだ記録していません。現時点で確認できている状況は上記のとおりです（最終確認日：
