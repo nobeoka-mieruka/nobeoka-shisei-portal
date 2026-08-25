@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nobeoka-shisei-portal.pages.dev/schemas/field-research-result.schema.json",
+  "title": "FieldResearchRecordFile",
+  "description": "延岡市政見える化ポータル Phase144：現地調査結果1件分（FieldResearchRecord）の配列。TypeScript型定義 src/types/fieldResearch.ts と内容を一致させること。値の意味・必須/任意の設計方針の詳細はそちらのJSDocコメント、および reports/field-research/templates/README.md を参照。",
+  "type": "array",
+  "items": { "$ref": "#/$defs/FieldResearchRecord" },
+  "$defs": {
+    "ArchiveDatePrecision": {
+      "description": "src/types/historicalArchive.ts の ArchiveDatePrecision と同一。日付の確認できた精度。この3値で表現できない（不明・概算）場合はdatePrecisionフィールド自体を省略する。",
+      "type": "string",
+      "enum": ["day", "month", "year"]
+    },
+    "ArchiveSourceTrustLevel": {
+      "description": "src/types/sourceTrust.ts の ArchiveSourceTrustLevel と同一。出典（資料そのもの）の信頼レベル。",
+      "type": "string",
+      "enum": ["PRIMARY", "OFFICIAL_ARCHIVE", "SECONDARY", "NEWS", "SOCIAL", "UNVERIFIED"]
+    },
+    "FieldResearchOutcome": {
+      "description": "現地確認の結論。",
+      "type": "string",
+      "enum": ["CONFIRMED", "PARTIALLY_CONFIRMED", "CONTRADICTED", "NOT_FOUND", "ACCESS_DENIED", "NEEDS_FOLLOWUP"]
+    },
+    "FieldResearchUnrResolution": {
+      "description": "今回の結果を受けたUNR側の扱い方針。この値自体はUNR台帳を自動更新しない。",
+      "type": "string",
+      "enum": ["RESOLVED", "KEEP_UNR", "SPLIT_UNR", "NEW_UNR_REQUIRED"]
+    },
+    "FieldResearchRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "researchId",
+        "unrId",
+        "institution",
+        "checkedAt",
+        "checkedBy",
+        "materialTitle",
+        "photographed",
+        "copied",
+        "result",
+        "unrResolution"
+      ],
+      "properties": {
+        "researchId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "この記録の一意なID。命名例: 'FR-20260901-001'（FR-YYYYMMDD-連番）。"
+        },
+        "unrId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "調査対象のUNR ID（reports/phase33-master-unresolved-ledger.jsonの'UNR-001'等）。どのUNRとも紐付かない新規発見事項の場合は'UNR-PENDING'等を使い、notesに経緯を書く。"
+        },
+        "institution": { "type": "string", "minLength": 1 },
+        "checkedAt": {
+          "type": "string",
+          "format": "date",
+          "description": "現地確認・閲覧を行った日（ISO 8601、例: '2026-09-01'）。"
+        },
+        "checkedBy": {
+          "type": "string",
+          "minLength": 1,
+          "description": "記録者（サイト運営者本人・担当者名やハンドル名）。第三者の氏名は記載しない。"
+        },
+        "materialTitle": { "type": "string", "minLength": 1 },
+        "author": { "type": "string" },
+        "publisher": { "type": "string" },
+        "publicationYear": { "type": "integer", "minimum": 1868, "maximum": 2100 },
+        "callNumber": { "type": "string" },
+        "materialId": { "type": "string" },
+        "page": { "type": "string" },
+        "originalTextSummary": { "type": "string" },
+        "confirmedFact": { "type": "string" },
+        "datePrecision": { "$ref": "#/$defs/ArchiveDatePrecision" },
+        "trustLevel": { "$ref": "#/$defs/ArchiveSourceTrustLevel" },
+        "sourceType": {
+          "type": "string",
+          "description": "資料種別の自由記述（例: '議事録原本' '予算書' '決算書' '市史' '選挙公報' '統計書' '簿冊' '新聞記事（縮刷版）'）。代表的な値はREADME.md参照。"
+        },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "photographed": { "type": "boolean" },
+        "photoFileName": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "photographed=trueの場合のみ意味を持つ。ファイル本体はリポジトリへコミットしない。"
+        },
+        "copied": { "type": "boolean" },
+        "copyReference": { "type": "string", "description": "copied=trueの場合のみ意味を持つ。" },
+        "result": { "$ref": "#/$defs/FieldResearchOutcome" },
+        "unrResolution": { "$ref": "#/$defs/FieldResearchUnrResolution" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
