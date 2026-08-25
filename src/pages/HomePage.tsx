@@ -26,7 +26,17 @@ import { SortSelect, type SortKey } from "../components/SortSelect";
 import { StatCard } from "../components/StatCard";
 import { SiteAnalyticsSummary } from "../components/SiteAnalyticsSummary";
 import { JsonLd } from "../components/JsonLd";
-import { BriefcaseIcon, LandmarkIcon, BuildingIcon, ChartBarIcon, SearchIcon } from "../components/icons";
+import {
+  BriefcaseIcon,
+  LandmarkIcon,
+  BuildingIcon,
+  ChartBarIcon,
+  SearchIcon,
+  QuestionMarkCircleIcon,
+  DocumentIcon,
+  YenIcon,
+  CompassIcon,
+} from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
@@ -79,6 +89,24 @@ const snsOptions = [
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+interface QuickLink {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  to: string;
+}
+
+// TASK-Phase123：トップページ最上部の主導線を「議員／一般質問／議案／市長／財政／市役所の相談先」に
+// 絞ったショートカットとして追加する。既存の「目的から探す」カード群（下部）は変更・削除せず、
+// スマホでまず押されやすい代表的な入口だけをヒーロー直下にまとめる（重複導線だが誘導を明確化するため許容）。
+const quickLinks: QuickLink[] = [
+  { icon: BriefcaseIcon, label: "議員を調べる", to: "/people?type=member" },
+  { icon: QuestionMarkCircleIcon, label: "一般質問を調べる", to: "/questions" },
+  { icon: DocumentIcon, label: "議案を見る", to: "/bills/votes" },
+  { icon: LandmarkIcon, label: "市長を調べる", to: "/mayor" },
+  { icon: YenIcon, label: "財政を見る", to: "/finance" },
+  { icon: CompassIcon, label: "市役所の相談先を見る", to: "/city-guide" },
+];
 
 interface CategoryCard {
   icon: React.ComponentType<{ className?: string }>;
@@ -259,6 +287,25 @@ export function HomePage() {
           </label>
         </form>
       </div>
+
+      {/* よく使われる主要導線（ヒーロー直下・最上部） */}
+      <nav aria-label="よく使われるページへのショートカット" className="mb-5">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+          {quickLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`flex min-h-[76px] flex-col items-center justify-center gap-1.5 rounded-xl bg-surface-container-low px-1.5 py-2.5 text-center shadow-e1 transition hover:bg-surface-container ${focusRing}`}
+              >
+                <Icon className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <span className="text-xs font-medium leading-tight text-on-surface">{link.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
 
       {/* ② サイト概要 */}
       <p className="mb-5 rounded-xl bg-surface-container-low p-3.5 text-sm leading-relaxed text-on-surface-variant">

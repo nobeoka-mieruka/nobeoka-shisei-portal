@@ -6,6 +6,7 @@ import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSessionsData from "../data/councilSessions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import financeData from "../data/financeDashboard.json";
 import type {
   CouncilMember,
   Gender,
@@ -15,6 +16,7 @@ import type {
   CouncilSession,
   CouncilSpeechSummaryData,
   FormerMember,
+  FinanceDashboardData,
 } from "../types";
 import { getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
@@ -29,6 +31,7 @@ import { JsonLd } from "../components/JsonLd";
 import { Link, useLocation } from "react-router-dom";
 import { ChartBarIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
+import { formatJapaneseDate } from "../config/site";
 import { coverageHint } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
 import { allPublicSpeeches, questionLikeSpeeches, resolveMemberDisplayName } from "../lib/councilSpeeches";
@@ -46,12 +49,21 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const finance = financeData as FinanceDashboardData;
 const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
 const confirmedQuestionMemberIds = new Set(
   questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).map((s) => s.memberId),
 );
 
 const PLACEHOLDER_PROFILE = "情報確認中";
+
+/** financeDashboard.jsonは千円単位で金額を保持する（FinancePageと同じ規約）。未確認（undefined/null）は「確認中」。 */
+function formatOkuFromThousandYen(thousandYen: number | null | undefined): string {
+  if (thousandYen === null || thousandYen === undefined) return "確認中";
+  return `約${(thousandYen / 100000).toFixed(1)}億円`;
+}
+
+const cityTaxRevenue = finance.revenue.find((r) => r.label === "市税");
 
 const genderLabels: Record<Gender, string> = {
   male: "男性",
@@ -312,6 +324,63 @@ export function DashboardPage() {
         <StatCard label="採決情報が確認できた議案数" value={billsWithResult} unit="件" />
         <StatCard label="市長公約の登録数" value={totalPledges} unit="件" />
       </div>
+
+      {/* Phase123：市議会の構成に加え、延岡市全体の基礎データ（人口・財政）を1画面で概観できるように
+          追加するセクション。数値はFinancePage（/finance）と同じfinanceDashboard.jsonを再利用し、
+          データを二重管理しない。公式資料で確認できていない指標（高齢化率・出生数・死亡数・
+          転入者数・転出者数）は、現時点で当サイトの収集データに存在しないため、0や架空値を
+          表示せず「未収録」であることを明記するにとどめる。 */}
+      <SectionCard title="延岡市の基礎データ（人口・財政）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          {finance.fiscalYearLabel}・基準日：{formatJapaneseDate(finance.referenceDate)}時点の値です。詳細な内訳・出典は
+          <Link to="/finance" className="mx-1 text-primary hover:underline">
+            延岡市の財政
+          </Link>
+          で確認できます。
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <StatCard
+            label={`人口（${formatJapaneseDate(finance.populationTrend.latest.referenceDate)}現在）`}
+            value={`${finance.populationTrend.latest.population.toLocaleString("ja-JP")}`}
+            unit="人"
+            compact
+          />
+          <StatCard
+            label="一般会計総額（6月補正後）"
+            value={formatOkuFromThousandYen(finance.generalAccount.totalThousandYen)}
+            compact
+          />
+          <StatCard
+            label="市税（歳入・6月補正後）"
+            value={formatOkuFromThousandYen(cityTaxRevenue?.amountThousandYen)}
+            compact
+          />
+          <StatCard
+            label="基金全体（残高）"
+            value={formatOkuFromThousandYen(finance.fundBalance.totalFunds.total)}
+            hint={`${finance.fundBalance.totalFunds.fiscalYear}時点`}
+            compact
+          />
+          <StatCard
+            label="市債（歳入・発行予定額）"
+            value={formatOkuFromThousandYen(finance.revenue.find((r) => r.label === "市債")?.amountThousandYen)}
+            hint="年度末残高（ストック）ではなく、当年度に発行予定の金額（フロー）"
+            compact
+          />
+          <StatCard
+            label="経常収支比率"
+            value={
+              finance.financialIndicators?.currentBalanceRatioPercent != null
+                ? `${finance.financialIndicators.currentBalanceRatioPercent}％`
+                : "確認中"
+            }
+            compact
+          />
+        </div>
+        <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
+          高齢化率・出生数・死亡数・転入者数・転出者数は、当サイトが確認できた公式資料に該当データが無いため、現時点では未収録です（0件という意味ではありません）。公式資料で確認でき次第、追加します。
+        </p>
+      </SectionCard>
 
       <SectionCard title="会派別人数">
         <BarList items={factionItems} />
