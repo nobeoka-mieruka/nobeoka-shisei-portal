@@ -9307,3 +9307,37 @@ Phase135〜139の新規成果物を統合し、`reports/field-research/field-res
   照会文案（未送付）、現地調査マスタープランを新規作成した。既存UNR・BLOCKEDステータスは
   一切変更していない。推測値・架空データは登録していない。既存の正常なコード・自動更新基盤・
   Phase119〜134の成果は変更していない。
+- 統合コミットID：`f5d821c`（GitHub push済み、Cloudflare Pages Production反映確認済み
+  ／デプロイID`a173ba4e`）。
+
+---
+
+### TASK-171 現地調査票・訪問順序最適化・照会文書最終化・結果入力基盤設計（Phase141〜145）
+
+状態：IN_PROGRESS（2026-08-25）
+優先度：A（ユーザー指示）
+対象：（本セッションで確定次第追記）
+注記：Phase番号「141〜145」もTASK-168/169/170と同じ方針（TASK単位のローカルPhase番号）で
+使用する。今回の目的は新規オンライン調査ではなく、現地調査を実行可能な形へ落とし込むこと・
+現地確認結果を安全にポータルへ反映する運用を作ることである。UNR件数（31件）は今回変更しない
+前提（Phase141〜144は新規一次資料調査を行わないため）。
+
+**Phase141（現地調査票・印刷パッケージ作成）**：UNR31件を1件=1カードとして
+`reports/field-research/print/field-research-checksheet.md`・`.html`を作成、施設別分割も行う。
+
+**Phase142（現地調査順序最適化）**：施設・資料の重複解消可能性、事前予約要否等を考慮し
+`reports/field-research/field-visit-order.md`（1日案・複数日案）を作成。営業時間等未確定の
+項目は「営業時間要確認」と明記し推測しない。
+
+**Phase143（照会文書最終化）**：Phase138の照会案を送信可能な品質へ整理し
+`reports/field-research/inquiry-final/`・`reports/field-research/inquiry-status.json`を
+作成。INQ-001・002は重複送信せずWAITING_RESPONSEとして管理。自動送信は行わない。
+
+**Phase144（現地調査結果入力フォーマット設計）**：現地確認結果をリポジトリへ安全に取り込む
+標準スキーマを設計（`src/types/fieldResearch.ts`または`reports/field-research/templates/`配下）。
+既存の`ArchiveSourceTrustLevel`（`src/types/sourceTrust.ts`）・`ArchiveDatePrecision`
+（`src/types/historicalArchive.ts`、"day"|"month"|"year"の3値）を再利用し、新しい独自定義を
+増やさない。
+
+**Phase145（親セッション統合）**：Phase141〜144が全て完了した後にのみ着手する。
+Chrome UI監査（Phase135未実施分）はworkerを起動しない（今回は分離）。
