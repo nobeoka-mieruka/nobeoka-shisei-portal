@@ -14,8 +14,33 @@ export const ARCHIVE_VERIFICATION_STATUSES = new Set([
 export const ARCHIVE_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 export const ARCHIVE_URL_RE = /^(https?:\/\/\S+|\/\S+)$/;
 
+/**
+ * 出典の信頼レベル（src/types/sourceTrust.tsのArchiveSourceTrustLevelと同じ6区分）。
+ * validate-data.mjs側から重複定義せず参照できるよう、こちらにも定数として持たせている
+ * （TypeScriptの型はJSのバリデーションスクリプトから直接importできないため）。
+ */
+export const ARCHIVE_TRUST_LEVELS = new Set([
+  "PRIMARY",
+  "OFFICIAL_ARCHIVE",
+  "SECONDARY",
+  "NEWS",
+  "SOCIAL",
+  "UNVERIFIED",
+]);
+
 function isBlank(v) {
   return typeof v !== "string" || v.trim().length === 0;
+}
+
+/**
+ * trustLevelフィールドが存在する場合のみ、6区分のいずれかであることを検証する
+ * （任意フィールドのため、存在しないレコードはエラーにしない＝Phase128のパイロット運用を維持）。
+ */
+export function checkTrustLevel({ err }, value, tag) {
+  if (value === undefined || value === null) return;
+  if (!ARCHIVE_TRUST_LEVELS.has(value)) {
+    err(tag, `未定義のtrustLevelです: ${value}`);
+  }
 }
 
 /** id重複・空idを検出し、有効なidのSetを返す（他ファイルからの参照整合性チェックに使う）。 */
@@ -63,6 +88,7 @@ export function checkSourceRefs({ err, warn }, sourceRefs, tag) {
     if (ref.sourceUpdatedDate && !ARCHIVE_DATE_RE.test(ref.sourceUpdatedDate)) {
       err(tag, `sourceUpdatedDateの形式が不正です: ${ref.sourceUpdatedDate}`);
     }
+    checkTrustLevel({ err }, ref.trustLevel, tag);
   }
 }
 

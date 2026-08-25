@@ -16,6 +16,7 @@ import {
   checkPeriodConsistency,
   checkReferenceExists,
   checkSourceRefs,
+  checkTrustLevel,
   checkValuesHaveSource,
   checkYearGaps,
   checkYearRange,
@@ -129,6 +130,7 @@ for (const m of members) {
   if (formerMemberIds.has(m.id)) {
     err(tag, `現職議員IDと元議員（formerMembers.json）IDが重複しています: ${m.id}`);
   }
+  checkTrustLevel({ err }, m.trustLevel, tag);
 }
 
 // --- generalQuestions.json ---
@@ -160,6 +162,7 @@ for (const q of generalQuestions) {
   for (const item of q.relatedFinanceItems ?? []) {
     if (isBlank(item)) err(tag, "relatedFinanceItemsに空文字が含まれています");
   }
+  checkTrustLevel({ err }, q.trustLevel, tag);
 }
 
 // --- billVotes.json ---
@@ -373,6 +376,7 @@ for (const b of billVotes) {
   if (b.replacesBillId === b.id) err(tag, "replacesBillIdが自分自身を参照しています");
   if (b.supersededByBillId === b.id) err(tag, "supersededByBillIdが自分自身を参照しています");
   if ((b.relatedBillIds ?? []).includes(b.id)) err(tag, "relatedBillIdsに自分自身が含まれています");
+  checkTrustLevel({ err }, b.trustLevel, tag);
 }
 
 // 一般公開ページ（/bills/votes等）が表示する件数（publicationStatusがrejected/error以外）が、
@@ -737,6 +741,7 @@ try {
         }
       }
     }
+    checkTrustLevel({ err }, p.trustLevel, tag);
   }
 
   const docUrls = new Set();
@@ -818,6 +823,7 @@ try {
     if (c.pendingProposal?.sourceUrl && !URL_RE.test(c.pendingProposal.sourceUrl)) {
       err(tag, `pendingProposal.sourceUrlの形式が不正です: ${c.pendingProposal.sourceUrl}`);
     }
+    checkTrustLevel({ err }, c.trustLevel, tag);
   }
 } catch {
   warn("compensationComparison.json", "読み込めませんでした（存在しない場合はスキップ）");
@@ -832,6 +838,7 @@ function validateRoleRankingFile(relPath) {
     if (!URL_RE.test(data.sourceUrl ?? "")) err(relPath, `sourceUrlの形式が不正です: ${data.sourceUrl}`);
     if (data.referenceDate && !DATE_RE.test(data.referenceDate)) err(relPath, `referenceDateの形式が不正です: ${data.referenceDate}`);
     if (data.lastVerified && !DATE_RE.test(data.lastVerified)) err(relPath, `lastVerifiedの形式が不正です: ${data.lastVerified}`);
+    checkTrustLevel({ err }, data.trustLevel, relPath);
 
     for (const r of data.roles ?? []) {
       const hasRank = r.rank !== null && r.rank !== undefined;
@@ -1091,6 +1098,7 @@ try {
     }
     if (s.referenceDate && !DATE_RE.test(s.referenceDate)) err(sourceTag, `referenceDateの形式が不正です: ${s.referenceDate}`);
     if (s.confirmedDate && !DATE_RE.test(s.confirmedDate)) err(sourceTag, `confirmedDateの形式が不正です: ${s.confirmedDate}`);
+    checkTrustLevel({ err }, s.trustLevel, sourceTag);
   }
 } catch {
   warn("financeDashboard.json", "読み込めませんでした（存在しない場合はスキップ）");
