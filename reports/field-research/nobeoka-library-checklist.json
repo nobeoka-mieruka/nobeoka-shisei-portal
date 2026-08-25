@@ -1,0 +1,179 @@
+{
+  "generatedAt": "2026-08-25",
+  "phase": "Phase137",
+  "purpose": "延岡市立図書館での現地調査に、そのまま持参して使えるチェックリスト。reports/phase33-master-unresolved-ledger.json、reports/field-research/onsite-research-checklist.md／.json（Phase133）、reports/phase19-resource-dossier.md、reports/phase19-missing-years-matrix.json、reports/phase20-missing-years-status.json、reports/phase21-inquiry-ready-to-send.md、reports/phase21-inquiry-tracker.json、reports/phase29-inquiry-templates.md、src/data/blockedTaskClassification.json（TASK-046 sourceInventory）の既存調査結果のみを再整理・拡張した。新規のオンライン検索・WebFetch・WebSearchは一切行っていない。",
+  "importantNote": "既存のUNR・BLOCKEDステータス自体は変更していない。連絡先・請求記号・書誌情報は既存資料に明記されているものだけを転記し、記載の無い項目は「確認中」「要確認」とした（推測では埋めていない）。",
+  "library": {
+    "name": "延岡市立図書館（郷土資料担当）",
+    "address": "〒882-0812 宮崎県延岡市本小路39番地1（カルチャープラザのべおか内）",
+    "phone": "0982-32-3058",
+    "fax": "0982-22-0644",
+    "email": "toshokan@city.nobeoka.miyazaki.jp",
+    "openingHoursAndCoornerRules": "確認中（既存資料に記載なし。訪問前に電話で確認すること）",
+    "photographyPolicy": "要確認（施設の一般ルールは既存資料に記載なし。資料ごとに現地で確認）",
+    "copyPolicy": "要確認（施設の一般ルールは既存資料に記載なし。資料ごとに現地で確認）",
+    "contactSource": "reports/field-research/onsite-research-checklist.md セクション2、reports/phase21-inquiry-tracker.json INQ-003/INQ-009"
+  },
+  "preVisitChecklist": [
+    "電話（0982-32-3058）で郷土資料コーナーの開館日・利用条件（事前予約要否）を確認する",
+    "INQ-003（reports/phase21-inquiry-ready-to-send.md照会文3）・INQ-009（reports/phase29-inquiry-templates.mdセクション4）が既に送付・回答済みでないかreports/phase21-inquiry-tracker.jsonで確認する。INQ-003は宮崎県立図書館〔INQ-001〕の回答で所蔵なしと判明した場合に送付する条件付き。",
+    "筆記用具・メモ用紙・カメラ（撮影可否は現地確認）・電卓（金額単位の換算用）を持参する",
+    "本チェックリストとreports/field-research/onsite-research-checklist.mdを印刷またはタブレットで携行する",
+    "訪問・照会結果はreports/phase21-inquiry-tracker.json・reports/phase33-master-unresolved-ledger.json・src/data/blockedTaskClassification.jsonへ人間が反映する（本Phase137のチェックリスト作成では反映していない）",
+    "現地で数値・日付が確認できた場合の登録ルールはreports/phase19-onsite-research-plan.md（confirmed_primaryの条件、原典値と正規化値の分離等）に従うこと"
+  ],
+  "recommendedVisitOrder": [
+    "1. 延岡市決算書（UNR-015）：1回の閲覧でFY1951・1952・1953・1959の4年度を一括で埋められる可能性が最も高い。最優先。",
+    "2. 延岡市史 上巻 コマ124相当（UNR-029 M1〜M9、ついでにUNR-007早生隆彦氏の生年月日候補コマ125）：同じ巻・近接ページのため1回の閲覧で複数項目をまとめて確認できる。",
+    "3. 延岡市史 上巻 コマ126〜127相当（UNR-008収入役後任者）／教育長関連箇所（UNR-006）：同じ上巻の別ページ。",
+    "4. 延岡市史 下巻 p.911-977付近（UNR-016／TASK-046 市議選、年表部分）",
+    "5. 延岡市議会史の所在確認（TASK-046）：書名自体の存在有無をレファレンスカウンターで確認する。"
+  ],
+  "items": [
+    {
+      "unrId": "UNR-015",
+      "taskIds": [],
+      "investigationPurpose": "財政欠落年度の歳入総額・歳出総額を確認する",
+      "targetPerson": null,
+      "targetFiscalYear": "昭和26・27・28・34年度（FY1951, 1952, 1953, 1959）",
+      "primaryResourceCandidate": "延岡市決算書並意見書（延岡市監査委員事務局編、延岡市発行、昭和20・25〜39年度分・17冊、資料ID: ndl-src-16）",
+      "secondaryResourceCandidate": "延岡市決算審査意見書／延岡市統計書／延岡市勢要覧／延岡市政要覧（INQ-003記載順）。補助として〔延岡市〕市政二十年史（江川林蔵編、延岡市役所発行、1953年10月、資料ID: ndl-src-28。FY1951・1952のみ対象）",
+      "callNumberCandidate": "確認中（既存資料に記載なし。照会文で確認依頼中）",
+      "pageCandidate": "確認中（歳入歳出決算総括表を確認する。市政二十年史は542頁のうち財政関連の章・節を目次で特定する必要あり）",
+      "specificDescriptionToConfirm": [
+        "各年度の歳入総額・歳出総額",
+        "会計区分（一般会計／普通会計／特別会計の別）",
+        "決算額／決算見込額／予算額のいずれであるか",
+        "単位（円／千円）"
+      ],
+      "requiredBibliographicInfo": "決算書：編者=延岡市監査委員事務局、発行者=延岡市、発行年=未確認。市政二十年史：編者=江川林蔵、発行者=延岡市役所、発行年=1953年10月",
+      "photographyPermissionCheck": "要確認",
+      "copyPermissionCheck": "要確認",
+      "resolutionCondition": "該当年度の歳入総額・歳出総額・会計区分・単位を撮影またはメモで確認できた場合（4年度のうち一部のみ確認できた場合も部分解消として記録する）",
+      "priority": "A",
+      "notes": "INQ-003（宛先：延岡市立図書館）は宮崎県立図書館（INQ-001）の回答で「所蔵なし」と判明した場合に送付する条件付きの照会文。条件を満たしていない場合は、まず電話で在架状況を確認したうえで訪問する。"
+    },
+    {
+      "unrId": "UNR-006",
+      "taskIds": [],
+      "investigationPurpose": "1970年代（昭和45〜54年度）の教育長の氏名・在任期間を確認する。citySpecialPosts.jsonには2010年以降の4件しか登録されておらず、約77年分が空白。",
+      "targetPerson": "教育長（氏名未確認、1970年代在任者）",
+      "targetFiscalYear": "昭和45〜54年度（1970年代）",
+      "primaryResourceCandidate": "延岡市史（上巻・下巻、延岡市発行、1983年）",
+      "secondaryResourceCandidate": "延岡市勢要覧（昭和40〜50年代版）／延岡市統計書（延岡市統計月報等）",
+      "callNumberCandidate": "確認中（既存資料に記載なし）",
+      "pageCandidate": "確認中。延岡市史の目次・索引にはNDL版で教育長個人の氏名・在任期間を記載した一覧箇所が発見できていない（オンライン調査済み・未発見）。現地で目次・索引を直接確認すること。",
+      "specificDescriptionToConfirm": [
+        "1970年代の教育長氏名・在任期間（就任日・退任日）"
+      ],
+      "requiredBibliographicInfo": "延岡市史1983年版（延岡市発行）",
+      "photographyPermissionCheck": "要確認",
+      "copyPermissionCheck": "要確認",
+      "resolutionCondition": "1970年代教育長の氏名・在任期間を確認できた場合、またはこれらの資料に該当記載が無いことを確認できた場合",
+      "priority": "A",
+      "notes": "教育長csp-43（町田氏、2007-2015年在任）はPhase110で延岡市議会会議録検索システムの全文検索により既に確定済み（本項目の対象外）。1933-2006年・2015年以降は依然unconfirmed。"
+    },
+    {
+      "unrId": "UNR-008",
+      "taskIds": [],
+      "investigationPurpose": "1978年1月4日（高橋重行辞職）以降の収入役後任者氏名を確認する",
+      "targetPerson": "収入役（氏名未確認、13代・高橋重行の後任）",
+      "targetFiscalYear": "1978年以降",
+      "primaryResourceCandidate": "延岡市史（上巻、延岡市発行、1983年）",
+      "secondaryResourceCandidate": "延岡市史1993年版（下巻・年表に記載がある可能性、Phase26で一部閲覧済みだが全体は未確認）",
+      "callNumberCandidate": "確認中（既存資料に記載なし）",
+      "pageCandidate": "NDL版コマ126-127相当（同一覧表は13代=高橋重行で終わっており、次のコマ127以降は別テーマ〔固定資産評価員、市役所事務機構〕へ移行していたことをPhase27で確認済み）。現物のページ番号は現地で確認すること。1993年版は年表部分を確認する。",
+      "specificDescriptionToConfirm": [
+        "収入役13代（高橋重行）の後任者氏名・就任日"
+      ],
+      "requiredBibliographicInfo": "延岡市史1983年版上巻、1993年版（市制60周年記念十年史）",
+      "photographyPermissionCheck": "要確認",
+      "copyPermissionCheck": "要確認",
+      "resolutionCondition": "後任者氏名・就任日を確認できた場合、またはこれらの資料に記載が無いことを確認できた場合",
+      "priority": "A",
+      "notes": null
+    },
+    {
+      "unrId": "UNR-016",
+      "taskIds": ["TASK-046"],
+      "investigationPurpose": "electionResults.jsonに1999年分より前の市議選候補者別得票結果が1件も収録されていないため、収録し得る一次資料の所在・記載有無を確認する",
+      "targetPerson": null,
+      "targetFiscalYear": "1933〜1998年（延岡市議会議員選挙・補欠選挙、複数十回分）",
+      "primaryResourceCandidate": "延岡市史（上巻・下巻、郷土資料コーナー現物）",
+      "secondaryResourceCandidate": "延岡市議会史（このような書名の資料が存在するかどうか自体を含めて要確認。TASK-046の既存調査でNDLサーチ書誌検索は0件）",
+      "callNumberCandidate": "確認中（既存資料に記載なし）",
+      "pageCandidate": "延岡市史下巻（1983年版）のNDL書誌情報に「延岡市年表:p911-977」の記載があり、市議選の実施記録を含む可能性がある（本文未確認、Phase60で新規発見）。まずp.911-977付近を確認すること。",
+      "specificDescriptionToConfirm": [
+        "延岡市年表（p.911-977付近）に市議選の実施年月日・当選者数等の記録があるか",
+        "候補者別得票結果まで記載があるか（実施記録のみか、得票数まで含むかを区別して記録）",
+        "「延岡市議会史」という書名の資料が存在するか（レファレンスカウンターで確認）"
+      ],
+      "requiredBibliographicInfo": "延岡市史1983年版下巻（延岡市発行）",
+      "photographyPermissionCheck": "要確認",
+      "copyPermissionCheck": "要確認",
+      "resolutionCondition": "候補者別得票結果の記載有無を確認できた場合（記載が無いことの確認も解消として扱う。TASK-046のreopenConditions参照）",
+      "priority": "C",
+      "notes": "src/data/blockedTaskClassification.json TASK-046 sourceInventory「延岡市立図書館・宮崎県立図書館 郷土資料コーナー」（status: library_required）。TASK-046自体はRESEARCH_EXHAUSTED（オンライン経路のみで、現地閲覧・照会は未実施）。"
+    },
+    {
+      "unrId": "UNR-029",
+      "taskIds": [],
+      "investigationPurpose": "市長交代の就任・退任日を月精度から日精度へ確定する（M1〜M9の9区間。氏名・在任事実は確認済み、日付のみ未確定）",
+      "targetPerson": "仲田又次郎・鈴木憲太郎・大島文彦・三浦虎雄・佐藤千吉郎",
+      "targetFiscalYear": "1937年〜1952年",
+      "primaryResourceCandidate": "延岡市史（上巻、延岡市発行、1983年）",
+      "secondaryResourceCandidate": "なし（同一コマに9区間全てが収録されている見込みのため、単一資料での確認を優先）",
+      "callNumberCandidate": "確認中（既存資料に記載なし）",
+      "pageCandidate": "NDL版コマ124相当（市長本体の一覧表列）。現物本のページ番号への換算は現地で確認すること。",
+      "specificDescriptionToConfirm": [
+        "市長本体列の自至日付欄（就任日・退任日）を日単位で確認する"
+      ],
+      "requiredBibliographicInfo": "延岡市史1983年版上巻（延岡市発行）",
+      "photographyPermissionCheck": "要確認",
+      "copyPermissionCheck": "要確認",
+      "resolutionCondition": "各区間の就任日・退任日を日単位で確認できた場合（区間ごとに部分解消を記録してよい）",
+      "priority": "C",
+      "intervals": [
+        { "id": "M1", "period": "1937-01-06〜1937-03-06", "person": "仲田又次郎→鈴木憲太郎" },
+        { "id": "M2", "period": "1937-04-14〜1937-05-16", "person": "鈴木憲太郎（辞職→再任）" },
+        { "id": "M3", "period": "1937-06-15〜1937-09-26", "person": "鈴木憲太郎→大島文彦" },
+        { "id": "M4", "period": "1941-09-25〜1941-10-22", "person": "大島文彦→三浦虎雄" },
+        { "id": "M5", "period": "1942-04-25〜1942-05-19", "person": "三浦虎雄（辞職→再任）" },
+        { "id": "M6", "period": "1946-03-06〜1946-03-29", "person": "三浦虎雄→鈴木憲太郎" },
+        { "id": "M7", "period": "1947-03-22〜1947-04-16", "person": "鈴木憲太郎→佐藤千吉郎" },
+        { "id": "M8", "period": "1948-06-06〜1948-07-16", "person": "佐藤千吉郎→仲田又次郎" },
+        { "id": "M9", "period": "1952-06-19〜1952-07-11", "person": "仲田又次郎→三浦虎雄" }
+      ],
+      "notes": "出典：reports/field-research/onsite-research-checklist.json supplementalSection（Phase133）、reports/phase33-master-unresolved-ledger.json UNR-029。"
+    }
+  ],
+  "appendix": {
+    "title": "ついでに確認できると良い項目（延岡市立図書館への正式な照会対象ではない）",
+    "note": "延岡市史上巻コマ124（UNR-029用）と近接するコマ125を既に開くことになるため、追加コストが小さい項目として記録する。この項目の主対象は宮崎県立図書館向けの照会（INQ-008）であり、延岡市立図書館は同一書籍を所蔵していることを利用した機会的な確認にとどまる。",
+    "item": {
+      "unrId": "UNR-007",
+      "investigationPurpose": "早生隆彦氏（mayor-12）の生年月日候補の確認",
+      "targetPerson": "早生 隆彦（mayor-12）",
+      "targetFiscalYear": "1978-1994年（在任期間）",
+      "resourceCandidate": "延岡市史上巻コマ125相当（固定資産評価員一覧表）",
+      "pageCandidate": "NDL版コマ125相当。「1921-01-03（大正十年一月三日）」の記載候補があるが、本人が同表に掲載されている理由（充て職か）が不明で列対応の確実性に欠ける",
+      "specificDescriptionToConfirm": [
+        "固定資産評価員一覧表における該当欄の氏名・生年月日の列対応",
+        "早生隆彦氏本人であることの確証（同姓同名の可能性に留意）"
+      ],
+      "photographyPermissionCheck": "要確認",
+      "copyPermissionCheck": "要確認",
+      "resolutionCondition": "本人特定に至る記述（経歴等）が確認できた場合。本項目単独では解消せず、人事興信録等の別資料との突合が引き続き必要（宮崎県立図書館向けINQ-008参照）",
+      "priority": "B"
+    }
+  },
+  "summary": {
+    "unrIdsCovered": ["UNR-006", "UNR-007", "UNR-008", "UNR-015", "UNR-016", "UNR-029"],
+    "unrCount": 5,
+    "unrCountNote": "UNR-007は付録・参考扱いのため正式カウントから除外（主対象は宮崎県立図書館）。UNR-029はM1〜M9の9区間を1件として計上。",
+    "taskIdsCovered": ["TASK-046"],
+    "checklistItemCount": 5,
+    "excludedItems": "UNR-005（副議長、primaryRoute=C=NDL再読が正のルートで現地調査は二次的）、UNR-001〜004（市長選挙候補者・得票、主対象は延岡市選挙管理委員会）、UNR-009・UNR-011（primaryRoute=Cで現地調査ではなくオンライン再読が正のルート）は、reports/field-research/onsite-research-checklist.mdと同じ判断基準で本チェックリストにも含めていない。",
+    "note": "既存資料の整理・拡張のみを行った。新たな一次資料の確認・数値の確定は行っていない。"
+  }
+}
