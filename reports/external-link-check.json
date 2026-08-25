@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-24T07:43:07.537Z",
-  "targetCount": 1133,
-  "cacheReused": 739,
-  "newlyChecked": 394,
+  "generatedAt": "2026-08-25T01:30:40.927Z",
+  "targetCount": 742,
+  "cacheReused": 733,
+  "newlyChecked": 9,
   "summary": {
-    "ok": 1117,
+    "ok": 726,
     "redirect": 10,
     "not_found_404": 6
   },
@@ -6981,6 +6981,28 @@
       "error": null
     },
     {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28674.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:40.127Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28682.pdf",
+      "files": [
+        "councilWatchedDocuments.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:40.573Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28696.pdf",
       "files": [
         "civicTimelineEvents.json"
@@ -7320,6 +7342,50 @@
         "kohoOcrSearchIndex.json"
       ],
       "checkedAt": "2026-08-24T03:43:32.978Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:39.667Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:39.198Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:38.734Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:38.274Z",
       "status": 200,
       "location": null,
       "category": "ok",
@@ -14192,6 +14258,17 @@
       "error": null
     },
     {
+      "url": "https://www.soumu.go.jp/main_content/000804191.xlsx",
+      "files": [
+        "archiveFiscalYears.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:38.054Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
       "url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/teiin-kyuuyo02.html",
       "files": [
         "nationalCompensationRanking.json"
@@ -15165,6 +15242,28 @@
         "members.backup.json"
       ],
       "checkedAt": "2026-08-08T07:10:42.937Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=101608",
+      "files": [
+        "archiveMayors.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:38.535Z",
+      "status": 200,
+      "location": null,
+      "category": "ok",
+      "error": null
+    },
+    {
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=105824",
+      "files": [
+        "archiveMayors.json"
+      ],
+      "checkedAt": "2026-08-25T01:30:38.083Z",
       "status": 200,
       "location": null,
       "category": "ok",

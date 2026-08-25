@@ -28,11 +28,18 @@ const sourceHealth = runValidatorSummary("scripts/validate-sources.mjs");
 // リンク健全性：reports/external-link-check.json は非公開の内部監査キャッシュ（`reports/`は
 // ビルド対象外）。`*.backup.json`はどのソースコードからもimportされていない未使用の
 // バックアップファイルのため、公開サイトの「リンク切れ」件数には含めない（誤解を避けるため）。
+// 同様に、本スクリプトが書き出す`dataQualitySummary.json`自身（＝直前の生成結果の残骸）だけが
+// 参照元になっているURLも除外する。これを除外しないと「壊れたURLの一覧」を出力した内容自体が
+// 次回のcheck-external-links.mjsの走査対象に再び拾われ、実際のソースデータからは既に
+// 除去済みのURLが永久にリンク切れ件数へ計上され続ける自己参照ループになるため（Phase122で発見）。
+const SELF_GENERATED_FILE = "dataQualitySummary.json";
 const linkReportPath = join(root, "reports", "external-link-check.json");
 let linkHealth = null;
 if (existsSync(linkReportPath)) {
   const report = JSON.parse(readFileSync(linkReportPath, "utf8"));
-  const liveResults = report.results.filter((r) => (r.files ?? []).some((f) => !f.endsWith(".backup.json")));
+  const liveResults = report.results.filter((r) =>
+    (r.files ?? []).some((f) => !f.endsWith(".backup.json") && f !== SELF_GENERATED_FILE),
+  );
   const broken = liveResults.filter((r) => r.category === "not_found_404" || r.category === "server_error");
   linkHealth = {
     generatedAt: report.generatedAt,
@@ -43,7 +50,7 @@ if (existsSync(linkReportPath)) {
     serverError: liveResults.filter((r) => r.category === "server_error").length,
     broken: broken.map((r) => ({ url: r.url, files: r.files, category: r.category, status: r.status })),
     excludedBackupOnlyReferences: report.results.length - liveResults.length,
-    note: "*.backup.json（未使用のバックアップファイル）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。",
+    note: "*.backup.json（未使用のバックアップファイル）、および本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。",
   };
 }
 
