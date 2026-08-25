@@ -9482,9 +9482,10 @@ failures=0 warnings=0、`validate:content` 2243ページ errors=0 warnings=0）�
 
 ### TASK-173 市長公約データ最終品質監査（NEEDS_REVIEW精査・14件完全対応監査・UI最終改善・変更履歴タイムライン）（Phase152〜156）
 
-状態：IN_PROGRESS（2026-08-25）
+状態：DONE（2026-08-25）
 優先度：A（ユーザー指示）
-対象：（本セッションで確定次第追記）
+対象：`src/data/mayorPromises.json`、`src/pages/MayorPromiseDetailPage.tsx`、
+`src/pages/MayorPolicyProgressPage.tsx`、`src/lib/mayorPromiseMeasureStatus.ts`
 注記：TASK-172の成果物を前提とした次段階の品質監査。TASK-172（Phase146〜151）は再実行しない。
 Phase番号「152〜156」は本TASK専用のローカル番号。
 
@@ -9500,3 +9501,63 @@ Phase番号「152〜156」は本TASK専用のローカル番号。
   「命を守り」「生活を守り」いずれのフレーズも本文中に見つからなかった（このPDFが直接の原文
   出典ではない可能性が高い）。Phase152workerは市長公式サイト（https://hisatomo-m.jp/）・選挙公報等、
   他の情報源を確認すること。
+
+#### Phase152〜156 結果
+
+**Phase152（NEEDS_REVIEW 2件の精査）**：
+- 2-3「西階野球場」↔「のべおかwaiwaiスタジアム」：**SAME_ENTITY_RENAMED**と確定。施政方針PDF
+  （`r8_policy_budget.pdf`）に「西階公園野球場にネーミングライツを導入する」旨の記載を確認し、
+  延岡市公式ページ（親セッション事前調査）と合わせて同一施設の公式改称と判断した。
+- 3-2「市民の命」↔「市民の生活」：**AMBIGUOUS（現状維持）**。市長公式サイト
+  （https://hisatomo-m.jp/、既存登録の一次資料）を再確認したところ、現時点でも既存promiseText
+  どおり「市民の命を守ります」と掲載されており、一次資料のみで表記差の理由（意図的な変更か
+  資料固有の言い回しか）を確定できないため、推測せずAMBIGUOUSのまま維持した。
+- いずれも既存promiseTextは変更せず、判定結果を`progressHistory[].summary`の末尾へ追記する形で
+  記録した（新しい独自フィールドは追加せず、既存の記録パターンとの一貫性を優先）。
+
+**Phase153（公約14件の完全対応監査）**：14件・施策33件の対応表を作成し、mapping正常率
+**33/33件（100%）**、orphan・duplicate・wrong mapping・missing source・missing page・
+contradictory status・fiscal year mismatch・date mismatch **すべて0件**を確認した。既存12件の
+promiseTextはgit差分で無変更を機械確認。判断が必要な事項（4-4/4-5にprogressHistoryが無い＝
+新規追加のためreferenceDate自体が2026-07-31で構造上妥当、将来予定情報が一部公約で未確認、
+1-3-bの数値関係）は推測で埋めず報告のみとした。
+
+**Phase154（公約進捗UI最終改善）**：一覧ページ（`/mayor/policy-progress`）の政策カテゴリ見出しへ
+既存ロジック`aggregateCategoryStatus`（新規実装なし、再利用）によるカテゴリ全体の状況バッジを
+追加。詳細ページの「公約の現在地」セクションの表示ラベルを、汎用表現から実際の年度表記
+（【令和7年度】【令和8年度】【今後】【出典】）へ変更。達成率は追加していない。ステータス
+ラベルは色だけでなく文字で必ず併記（既存バッジコンポーネントを再利用）。実機モバイル確認は
+今回も実施できていない（正直に記録）。
+
+**Phase155（公約変更履歴・タイムライン）**：`progressHistory`のUIを改善し、「基準時点」
+（referenceDate）と「進捗更新」（progressHistory、2026-07-31）の2種類を日付降順でバッジ区別
+表示。選挙時・令和7年度単独の独立データは実在しないことを確認し、**存在しない時点は表示に
+加えなかった**（架空の変更履歴を作成していない）。「公約本文の変更」（今回は発生なし）と
+「進捗情報の更新」を明確に区別する設計とした。
+
+**Phase156（親セッション統合）**：4本のworktreeブランチを`--no-ff`で順次マージ（うち
+Phase154/155は同一ファイル`MayorPromiseDetailPage.tsx`の異なるセクションを編集していたが、
+コンフリクトなく自動マージされた）。Phase154・155workerがそれぞれ独立に「`npm run test`が
+失敗する（変更前から同一失敗）」と報告していたが、親セッションでマージ前後の両方で
+`npm run test`を実施したところ**26/26成功**しており、実際の回帰は確認されなかった（workerの
+worktree環境固有の一時的な問題だったと判断）。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=40、既存基準と完全一致）／`validate:sources`（errors=0
+warnings=15 info=66）／`validate:completeness`（errors=0）／`validate:freshness`（errors=0）／
+`validate:finance`（errors=0 warnings=6 info=8）／`validate:political-funds`（errors=0
+warnings=0 info=2）／`typecheck`（clean）／`lint`（clean）／`test`（26/26、workerが報告した
+失敗は親セッションで再現せず）／`build`（2242/2242ルート、`validate:seo` 2243ページ
+failures=0 warnings=0、`validate:content` 2243ページ errors=0 warnings=0）すべて成功。
+
+完了記録：
+- 完了日：2026-08-25
+- 変更概要：上記のとおり。NEEDS_REVIEW2件を最終判定（西階野球場＝改称確定、命/生活＝
+  AMBIGUOUS維持）、公約14件の完全対応監査（問題0件）、公約進捗UIの年度表記・カテゴリ集計
+  バッジ改善、変更履歴タイムラインの基準時点/進捗更新の区別表示を実施した。既存の選挙時公約・
+  過去データは一切削除・上書きしていない。達成率は算出していない。既存の正常なコード・
+  自動更新基盤・TASK-172の成果は変更していない。
+- 実機UI確認：親セッションで`list_connected_browsers`を確認したが、Chrome拡張は今回も未接続
+  （0件）。`/`・`/mayor/`・`/mayor/policy-progress/`・`/policies/`・`/data-status/`の実機
+  375/390/768/1280px確認は**UI_UNVERIFIED**のまま。コード変更は推測で行っていない。
