@@ -5,7 +5,9 @@
 
 機能を追加・変更したら、必ず「完成済み」「実装中」「次に実装する」を更新してください。
 
-最終更新日：2026-08-25（TASKS.md TASK-169「実機全ページUI監査・trustLevel大規模展開・件数定義総監査・現地調査チェックリスト生成（Phase130〜134）」完了。`billVotes.json`全1,177件へtrustLevel（OFFICIAL_ARCHIVE）を機械的ルールで一括付与、サイト全体の件数ハードコード監査（旧数値397/1,470の残存0件、サイト実表示値418件/1,567件が「一般質問区分限定」の正しい定義であることを確認）、現地調査用チェックリスト（`reports/field-research/`、9機関・UNR13件）を新規作成。実機UI監査はChrome拡張未接続のため静的監査のみで完了（次回接続可能な環境での再確認が必要）。詳細はTASKS.md TASK-169参照。
+最終更新日：2026-08-25（TASKS.md TASK-170「実機UI最終監査・UNR優先順位整理・調査先別チェックリスト・照会文書準備（Phase135〜140）」完了。UNR31件（ユーザー提示の131件とは実データ不一致、実数を採用）へpriority/researchMethod等を付与、延岡市立図書館・延岡市役所8部署・宮崎県立図書館等4機関それぞれの現地調査用チェックリストと未送付の照会文案を新規作成、`reports/field-research/field-research-master-plan.md`（推奨訪問順・持ち物・現地記録フォーマット・次のアクションTOP10）を作成。実機UI確認はChrome拡張が3回連続（Phase126/130/135）未接続のためYELLOWのまま残存。詳細はTASKS.md TASK-170参照。
+
+最終更新日（2026-08-25、TASK-169時点）：（TASKS.md TASK-169「実機全ページUI監査・trustLevel大規模展開・件数定義総監査・現地調査チェックリスト生成（Phase130〜134）」完了。`billVotes.json`全1,177件へtrustLevel（OFFICIAL_ARCHIVE）を機械的ルールで一括付与、サイト全体の件数ハードコード監査（旧数値397/1,470の残存0件、サイト実表示値418件/1,567件が「一般質問区分限定」の正しい定義であることを確認）、現地調査用チェックリスト（`reports/field-research/`、9機関・UNR13件）を新規作成。実機UI監査はChrome拡張未接続のため静的監査のみで完了（次回接続可能な環境での再確認が必要）。詳細はTASKS.md TASK-169参照。
 
 最終更新日（2026-08-25、TASK-168時点）：（TASKS.md TASK-168「本番反映確認・UI確認・財政/市長任期再調査・trustLevel展開・ArchiveFiscalYear拡張（Phase125〜129）」完了。Cloudflare Pages本番のコミット`7ffdb04`反映確認、`/dashboard`のレスポンシブUI静的確認（Chrome拡張未接続のため実機確認は未実施と明記）、財政欠落年度24・市長任期空白13区間の正確な件数再確認と宮崎県文書センターの新規候補資料発見（数値未確定のためデータ追加なし、既存UNRは維持）、出典信頼レベル`trustLevel`を主要データ型（SourceMeta/FinanceSourceMeta/CompensationSourceMeta）へ任意フィールドとして展開しパイロット25件へ付与、`ArchiveFiscalYear`へ資料入手状況等の任意フィールドを後方互換の形で追加。なお本行以降TASK-076〜167（Wayback Machine「広報のべおか」調査・NDL資料調査体制・財政欠落年度の現地調査パッケージ化等）の詳細な反映はTASKS.mdを正とし、本ファイルの全面的な再同期は別途の作業として残る。
 

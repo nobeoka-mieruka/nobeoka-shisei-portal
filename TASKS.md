@@ -9217,9 +9217,12 @@ phase121-history-findings.md、TASK-046、直前のPhase127報告書等）のみ
 
 ### TASK-170 実機UI最終監査・UNR優先順位整理・調査先別チェックリスト・照会文書準備（Phase135〜140）
 
-状態：IN_PROGRESS（2026-08-25）
+状態：DONE（2026-08-25、実機UI確認のみYELLOW残存）
 優先度：A（ユーザー指示）
-対象：（本セッションで確定次第追記）
+対象：`reports/phase135-ui-final-audit.md`（新規、確認のみ）、`reports/field-research/`
+配下一式（新規：`unr-priority-master.{md,json}`、`nobeoka-library-checklist.{md,json}`、
+`nobeoka-city-inquiry-plan.md`、`inquiry-drafts/`8ファイル、`miyazaki-ndl-checklist.md`、
+`field-research-master-plan.md`）
 注記：Phase番号「135〜140」も過去のTASK（TASK-070のPhase135、TASK-071のPhase136等）と
 重複するが、TASK-168・169と同じ方針（TASK単位のローカルPhase番号）で使用する。
 
@@ -9252,3 +9255,55 @@ targetInstitution/estimatedDifficulty/expectedEvidence/dependency/statusを付�
 （INQ-001・002）は重複照会せずWAITING_RESPONSEとして管理する。
 
 **Phase140（親セッション統合）**：Phase135〜139が全て完了した後にのみ着手する。
+
+#### Phase135〜140 結果
+
+**Phase135（Chrome実機UI最終監査）**：`list_connected_browsers`を1回確認、0件（Phase126・130
+に続き3回連続未接続）。無限待機せず直ちにYELLOW終了。実機確認できたページは0件（正直に記録）。
+副次的に、指示文中のパス`/members`・`/mayor-expenses`が実在しないことを`App.tsx`のルート定義で
+発見し、正しいパス（`/people`・`/mayor/entertainment-expenses`）を報告書に記録した。コード変更なし。
+
+**Phase136（UNR31件の優先順位付け）**：ユーザー提示の「UNR131件」は実データ（31件）と一致せず、
+実数31件を対象に実施。priority（A1=17／A2=3／B=8／C=3）、researchMethod（LIBRARY_COPY_REQUEST=13
+／EMAIL_INQUIRY=8／PHONE_INQUIRY=8／NDL_ONSITE=8／FIELD_VISIT=7／WAITING_RESPONSE=1／
+INFORMATION_DISCLOSURE=0／内部作業のみ=12、複数該当あり）等を付与。財政欠落24年度・市長任期
+空白13区間・歴代特別職の根拠不足・市長市議選挙結果・歴代議員データベース欠落・重要な出典欠落を
+A1へ分類。既存台帳（`phase33-master-unresolved-ledger.json`）自体は無変更。
+
+**Phase137（延岡市立図書館向け調査リスト）**：UNR-006・008・015・016・029（+TASK-046）を対象に
+現地でそのまま使える形式（第一/第二候補資料・請求記号候補・撮影/コピー可否確認欄等）で整理。
+記載のない項目は「確認中」「要確認」のまま。
+
+**Phase138（延岡市役所・議会・選管向け照会準備）**：8部署（総務課・財政課・議会事務局・選管・
+情報公開・秘書・広報・統計）へUNR15件を分類し、部署別照会文案8件を`inquiry-drafts/`へ作成
+（自動送信なし）。秘書・統計担当は直接連絡先が既存資料になく「代表経由での取次を想定」と
+正直に記録。
+
+**Phase139（宮崎県立図書館・県文書センター・NDL調査リスト）**：4機関（県立図書館・文書
+センター・NDL本館・NDLデジタルコレクション）を整理。簿冊番号5043・107051が資料識別子であり
+件数でないことを明記。INQ-001・002は重複照会せずWAITING_RESPONSE管理。
+
+**Phase140（親セッション統合）**：5本のworktreeブランチ（`phase135-ui-final-audit`／
+`phase136-unr-priority-master`／`phase137-nobeoka-library-checklist`／
+`phase138-city-inquiry-plan`／`phase139-miyazaki-ndl-checklist`）を`--no-ff`で順次mainへ
+マージ、コンフリクトなし（全てドキュメント新規追加のみで、コード・既存データの変更を伴う
+workerは無かったためbuild再実行は省略、typecheck/lint/validate:dataのみ実行し既存基準
+（0/40）と一致することを確認）。既存の「未解決資料チェックリスト」（Phase133成果物）と
+Phase135〜139の新規成果物を統合し、`reports/field-research/field-research-master-plan.md`
+（現地調査推奨順序・持ち物リスト・現地記録標準フォーマット・次のアクションTOP10）を親
+セッションで新規作成した。
+
+#### 検証結果
+
+コード・データの変更を伴うworkerが無かったため、`typecheck`（clean）／`lint`（clean）／
+`validate:data`（errors=0 warnings=40＝既存基準と完全一致）のみ実行しすべて成功。
+（build/testはコード変更が無いため今回省略。次回コード変更を伴う作業時にあわせて実行する）
+
+完了記録：
+- 完了日：2026-08-25
+- 変更概要：上記のとおり。実機UI確認は3回連続未接続でYELLOW（次回接続可能な環境での実施が
+  必要）。UNR31件（ユーザー提示の131件とは不一致、実数を採用）への優先順位付け、延岡市立
+  図書館・延岡市役所等8部署・宮崎県立図書館等4機関それぞれの現地調査用チェックリストと
+  照会文案（未送付）、現地調査マスタープランを新規作成した。既存UNR・BLOCKEDステータスは
+  一切変更していない。推測値・架空データは登録していない。既存の正常なコード・自動更新基盤・
+  Phase119〜134の成果は変更していない。
