@@ -11,9 +11,9 @@ export const mayorPromiseMeasureStatusLabel: Record<MayorPromiseMeasureStatus, s
   COMPLETED: "完了",
   IN_PROGRESS: "実施中",
   PLANNED: "予定",
-  CONTINUING: "継続実施中",
+  CONTINUING: "継続",
   PREPARING: "準備中",
-  NOT_ASSESSABLE: "評価不能",
+  NOT_ASSESSABLE: "判定できず",
 };
 
 /** 状況バッジの配色。色だけでなく必ず文字ラベル・アイコンと併用すること。 */
