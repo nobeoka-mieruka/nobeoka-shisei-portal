@@ -1,7 +1,64 @@
-# セッション引き継ぎメモ（2026-08-17更新・TASK-094〜099）
+# セッション引き継ぎメモ（2026-08-25更新・TASK-168〜173）
 
-このファイルは新しいセッションほど上に追記する運用です。2026-08-10（Phase 16/17）以前の
+このファイルは新しいセッションほど上に追記する運用です。2026-08-17（TASK-094〜099）以前の
 記録は下に残したまま、最新の状態を以下に記載します。過去の記録を削除・改変してはいけません。
+（注：2026-08-17〜2026-08-25の間にもTASK-100〜167まで多数のセッションが実施されているが、
+本メモへの追記が漏れていた。詳細はTASKS.md・PROJECT_PLAN.mdを参照。）
+
+## 2026-08-25：TASK-168〜173（本番反映確認〜市長公約令和8年度進捗反映〜最終品質監査）完了、本日の作業終了
+
+### 本日実施した内容（要約、詳細はTASKS.mdの各TASK参照）
+
+- **TASK-168**（Phase125〜129）：Cloudflare Pages本番反映確認、`/dashboard`モバイルUI静的確認、
+  財政欠落年度・市長任期空白区間の正確な件数再確認、`trustLevel`の主要データ型への展開、
+  `ArchiveFiscalYear`のoptional field拡張。
+- **TASK-169**（Phase130〜134）：実機全ページUI静的監査、`billVotes.json`1,177件全件への
+  `trustLevel`大規模展開、件数定義総監査（418/1,567件が正しい定義であることを確認）、
+  現地調査用未解決資料チェックリスト新設。
+- **TASK-170**（Phase135〜140）：Chrome実機UI最終監査（未接続でYELLOW終了）、UNR31件への
+  優先順位付け、延岡市立図書館・延岡市役所等の調査先別チェックリスト、照会文書準備。
+- **TASK-171**（Phase141〜145）：現地調査票・印刷パッケージ、訪問順序最適化（1日案・複数日案）、
+  照会文書最終化（`inquiry-status.json`）、現地調査結果入力フォーマット設計
+  （`src/types/fieldResearch.ts`）、反映フロー設計。
+- **TASK-172**（独立タスク、Phase146〜151）：延岡市公式PDF「市長公約に関する取組み　令和8年度」
+  （令和8年7月31日現在、https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28741.pdf ）を
+  一次資料として市長公約データへ反映。既存12公約のpromiseTextは無改変、`progressHistory`への
+  追記のみ。新規公約2件（4-4/4-5）を追加（12件→14件）。個別施策33件の構造化データ
+  （`src/data/mayorPromiseMeasures.json`、達成率は算出せず）を新設。
+- **TASK-173**（Phase152〜156）：NEEDS_REVIEW 2件の最終判定（西階公園野球場↔のべおかwaiwai
+  スタジアムは公式改称と確定＝SAME_ENTITY_RENAMED、市民の命↔生活を守りますは一次資料で
+  確定できずAMBIGUOUS維持）、公約14件の完全対応監査（問題0件）、公約進捗UIの年度表記・
+  カテゴリ集計バッジ改善、変更履歴タイムラインの基準時点/進捗更新の区別表示。
+
+### 本日の最終状態
+
+- HEAD ＝ origin/main ＝ Cloudflare Pages Production ＝ コミット **`f344262`**
+- `git status`：`.claude/settings.local.json`（ローカル専用、コミット対象外）以外は
+  クリーン（未コミット変更なし）
+- Phase125〜156（TASK-168〜173）はすべて**completed**として記録済み（TASKS.md参照、
+  これらのworkerには今後再指示・再起動しないこと）
+- 検証：`validate:data`(0/40)・`validate:sources`(0/15)・`validate:completeness`(0)・
+  `validate:freshness`(0)・`validate:finance`(0/6)・`validate:political-funds`(0/0/2)・
+  `typecheck`(clean)・`lint`(clean)・`test`(26/26)・`build`(2242/2242ルート、
+  `validate:seo` 0/0、`validate:content` 0/0)すべて成功
+
+### 次回セッション開始時の再開事項（最優先）
+
+1. **Chrome拡張接続後の実機UI監査**：本セッションを通じて`list_connected_browsers`は
+   毎回0件（未接続）だったため、以下は**UI_UNVERIFIED**のまま残っている。
+   - 対象viewport：375px／390px／768px／1280px
+   - 対象ページ：`/`／`/mayor/`／`/mayor/policy-progress/`／`/policies/`／`/data-status/`
+   - Chrome拡張が接続可能になったことを確認できた場合のみ、この実機監査を再開すること。
+     新しいPhase・workerを推測で追加起動しない。
+2. **未解決事項・UNRはそのまま維持**：`reports/phase33-master-unresolved-ledger.json`の
+   UNR31件（財政欠落年度UNR-014/015、市長任期空白UNR-029等）、mayorPromisesのNEEDS_REVIEW
+   判定（3-2「市民の命/生活を守ります」＝AMBIGUOUS）は、本日中に一次資料での解決がない限り
+   解決したものとして扱わないこと。
+3. Phase153で報告された軽微な要確認事項（`mayorPromiseMeasures.json`の将来予定情報が一部
+   公約で未確認、`1-3-b`の数値関係の再確認）は、次回一次資料PDFで再確認する候補として残る。
+4. `reports/field-research/`配下の現地調査チェックリスト・照会文案は、実際の現地訪問・
+   照会送付（人間の作業）を経てから、`phase21-inquiry-tracker.json`・
+   `phase33-master-unresolved-ledger.json`等へ結果を反映する運用が未着手のまま残っている。
 
 ## 2026-08-17（続き4）：NDL/Wayback非依存の全ページ横断監査（TASK-094〜099）
 
