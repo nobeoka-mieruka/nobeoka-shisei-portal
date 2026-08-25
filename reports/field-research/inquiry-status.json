@@ -1,0 +1,209 @@
+{
+ "generatedAt": "2026-08-25T00:00:00+09:00",
+ "purpose": "Phase143：延岡市政見える化ポータルが送付する（または送付済みの）全外部照会を一元管理するファイル。reports/phase21-inquiry-tracker.json（INQ-001〜009の詳細な原本）を正として整理し直し、Phase138の inquiry-drafts/ を最終化した inquiry-final/ の分（INQ-010〜018）をあわせて統合した。",
+ "importantNote": "本ファイルはClaude Codeが作成・更新するが、実際の送信・送付はサイト運営者（人間）のみが行う。statusをsent／waiting_response／answered／closedへ変更するのは、実際にその行為が完了した後にのみ行う。",
+ "statusDefinitions": {
+  "draft": "文面はあるが、送付先・送付タイミングが確定していない（条件分岐待ち、宛先未確定等）",
+  "ready_to_send": "宛先・件名・本文・確認対象資料・対象年度・質問事項がすべて確定し、運営者が差出人連絡先を記入して送信するだけの状態",
+  "sent": "運営者が実際に送付した状態",
+  "waiting_response": "送付済みで、相手機関からの回答を待っている状態",
+  "answered": "回答を受け取り、内容を記録済みの状態",
+  "closed": "回答内容の反映（登録／登録見送りの判断）まで完了し、この照会に関する対応が終わった状態"
+ },
+ "inquiries": [
+  {
+   "inquiryId": "INQ-001",
+   "institution": "宮崎県立図書館（情報提供課・郷土情報担当）",
+   "targetUNRs": ["UNR-014", "UNR-015", "UNR-016", "UNR-027"],
+   "status": "waiting_response",
+   "sentAt": "2026-08-21",
+   "responseAt": null,
+   "nextAction": "回答を待つ。回答が届いたらstatusをansweredへ更新し、responseAt・回答内容をreports/phase21-inquiry-tracker.jsonに記録する。1950年代分の資料が『所蔵なし』と分かった場合はINQ-003を送付する。",
+   "letterFile": "reports/phase21-inquiry-ready-to-send.md（照会文1）",
+   "note": "既に送付済み。本Phase143では文案の重複作成を行っていない。"
+  },
+  {
+   "inquiryId": "INQ-002",
+   "institution": "宮崎県総合政策部統計調査課",
+   "targetUNRs": ["UNR-014", "UNR-015", "UNR-027"],
+   "status": "waiting_response",
+   "sentAt": "2026-08-21",
+   "responseAt": null,
+   "nextAction": "回答を待つ。回答が届いたらstatusをansweredへ更新し、responseAt・回答内容を記録する。『宮崎県立図書館へ移管済み』等の回答があればINQ-001の回答と突き合わせる。",
+   "letterFile": "reports/phase21-inquiry-ready-to-send.md（照会文2）",
+   "note": "既に送付済み。本Phase143では文案の重複作成を行っていない。"
+  },
+  {
+   "inquiryId": "INQ-003",
+   "institution": "延岡市立図書館（郷土資料担当）",
+   "targetUNRs": ["UNR-014", "UNR-015"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "文面は完成済み。INQ-001の回答で1950年代分の資料が『所蔵なし』と判明した場合にのみ送付する。INQ-001ですべて『所蔵あり』と回答された場合はclosedへ変更する。",
+   "letterFile": "reports/phase21-inquiry-ready-to-send.md（照会文3）"
+  },
+  {
+   "inquiryId": "INQ-004",
+   "institution": "延岡市役所（財政課／総務課・情報公開担当）",
+   "targetUNRs": ["UNR-014", "UNR-015", "UNR-027"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "対象範囲がより広いINQ-010（総務課）・INQ-011（財政課）・INQ-014（情報公開担当）に統合可能。どちらか一方のみ送付し重複送付を避ける（運営者判断）。",
+   "letterFile": "reports/phase19-library-inquiry.md（3. 延岡市役所向け照会文）"
+  },
+  {
+   "inquiryId": "INQ-005",
+   "institution": "延岡市議会事務局",
+   "targetUNRs": ["UNR-005", "UNR-008", "UNR-009", "UNR-011"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "対象範囲がより広いINQ-012に統合可能（1970年代限定の狭い版）。どちらか一方のみ送付し重複送付を避ける（運営者判断）。",
+   "letterFile": "reports/phase29-inquiry-templates.md（1. 延岡市議会事務局向け照会文）"
+  },
+  {
+   "inquiryId": "INQ-006",
+   "institution": "延岡市選挙管理委員会（延岡市役所内）",
+   "targetUNRs": ["UNR-001", "UNR-002", "UNR-003", "UNR-004"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "対象範囲がより広いINQ-013に統合可能（1975/78/82年市長選挙のみに限定した狭い版）。どちらか一方のみ送付し重複送付を避ける（運営者判断）。",
+   "letterFile": "reports/phase29-inquiry-templates.md（2. 延岡市役所〈選挙管理委員会〉向け照会文）"
+  },
+  {
+   "inquiryId": "INQ-007",
+   "institution": "延岡市教育委員会事務局",
+   "targetUNRs": ["UNR-006"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "1970年代の教育長氏名・在任期間を照会する。教育委員会事務局の直接連絡先が未確認のため、まず延岡市役所代表窓口経由での取次を依頼する必要がある。Phase143の対象8部署に含まれないため文案は変更していない。",
+   "letterFile": "reports/phase29-inquiry-templates.md（3. 延岡市教育委員会向け照会文）"
+  },
+  {
+   "inquiryId": "INQ-008",
+   "institution": "宮崎県立図書館（情報提供課・郷土情報担当）",
+   "targetUNRs": ["UNR-001", "UNR-002", "UNR-003", "UNR-004", "UNR-007"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "早生隆彦氏の生年月日候補（1921-01-03）を人事興信録等で裏付けられるか確認する。あわせて1970年代の延岡市議会・行政関係資料の所蔵を確認する。INQ-001と同一機関のため、既存のやり取りがあれば統合して送付することも検討する。",
+   "letterFile": "reports/phase29-inquiry-templates.md（4. 宮崎県立図書館向け照会文）"
+  },
+  {
+   "inquiryId": "INQ-009",
+   "institution": "延岡市立図書館（郷土資料担当）",
+   "targetUNRs": ["UNR-010", "UNR-016"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "延岡市史の現物（紙版）を含む郷土資料の所蔵・請求記号・複写可否を確認する。INQ-003（財政資料）とは対象資料が異なるため別レコード。",
+   "letterFile": "reports/phase29-inquiry-templates.md（4. 延岡市立図書館向け照会文）"
+  },
+  {
+   "inquiryId": "INQ-010",
+   "institution": "延岡市役所 総務課（法制第1係）",
+   "targetUNRs": ["UNR-014", "UNR-015", "UNR-027", "UNR-029"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。財政課宛（INQ-011）とあわせて送付してよい。INQ-004と対象範囲が重なるため、どちらか一方のみ送付する。",
+   "letterFile": "reports/field-research/inquiry-final/soumu-ka.md"
+  },
+  {
+   "inquiryId": "INQ-011",
+   "institution": "延岡市役所 財政課（財政係・財務調査係）",
+   "targetUNRs": ["UNR-014", "UNR-015", "UNR-027"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。INQ-001・INQ-002の回答を待ってからの送付を推奨（図書館照会と並行送付でも支障はない）。",
+   "letterFile": "reports/field-research/inquiry-final/zaisei-ka.md"
+  },
+  {
+   "inquiryId": "INQ-012",
+   "institution": "延岡市議会事務局",
+   "targetUNRs": ["UNR-005", "UNR-008", "UNR-009", "UNR-010", "UNR-011", "UNR-016", "UNR-022", "UNR-031"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。INQ-005と対象範囲が重なるため、どちらか一方のみ送付する（本文案での送付を推奨）。",
+   "letterFile": "reports/field-research/inquiry-final/gikai-jimukyoku.md"
+  },
+  {
+   "inquiryId": "INQ-013",
+   "institution": "延岡市選挙管理委員会（延岡市役所内）",
+   "targetUNRs": ["UNR-001", "UNR-002", "UNR-003", "UNR-004", "UNR-016", "UNR-028", "UNR-029"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。直接連絡先未確認のため延岡市役所代表窓口経由での取次を想定。INQ-006と対象範囲が重なるため、どちらか一方のみ送付する（本文案での送付を推奨）。",
+   "letterFile": "reports/field-research/inquiry-final/senkyo-kanri-iinkai.md"
+  },
+  {
+   "inquiryId": "INQ-014",
+   "institution": "延岡市役所 情報公開担当（総務課法制第1係と同一部署）",
+   "targetUNRs": ["UNR-014", "UNR-015", "UNR-027"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "送付条件付き：INQ-010〜013のいずれかで『資料の所在が確認できない』『正式な手続きが必要』と案内された場合にのみ送付する。単純照会で解決した場合は送付不要。",
+   "letterFile": "reports/field-research/inquiry-final/johokoukai-tantou.md"
+  },
+  {
+   "inquiryId": "INQ-015",
+   "institution": "延岡市役所 秘書担当（市長秘書）",
+   "targetUNRs": ["UNR-013", "UNR-029"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。直接連絡先未確認のため、延岡市役所代表または総務課経由での取次を依頼する。",
+   "letterFile": "reports/field-research/inquiry-final/hisho-tantou.md"
+  },
+  {
+   "inquiryId": "INQ-016",
+   "institution": "延岡市役所 広報担当（総合政策課広報広聴係）",
+   "targetUNRs": ["UNR-020", "UNR-029"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。統計担当（INQ-017）の所管部署確認先も兼ねる。",
+   "letterFile": "reports/field-research/inquiry-final/koho-tantou.md"
+  },
+  {
+   "inquiryId": "INQ-017",
+   "institution": "延岡市役所 統計担当（所管部署は要確認）",
+   "targetUNRs": ["UNR-020"],
+   "status": "draft",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "宛先未確定のためdraftのまま。まずINQ-016（総合政策課広報広聴係）へ所管部署を確認し、確定後に宛先・連絡先を記入してready_to_sendへ更新する。",
+   "letterFile": "reports/field-research/inquiry-final/tokei-tantou.md"
+  },
+  {
+   "inquiryId": "INQ-018",
+   "institution": "宮崎県文書センター（宮崎県総務部総務課）",
+   "targetUNRs": ["UNR-014", "UNR-015"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。簿冊番号5043・107051を優先して所蔵・閲覧方法・複写可否・情報公開請求要否を確認する。INQ-001・INQ-002とは別組織・別資料のため重複ではない。所在地は既存資料で未確認のため、来館前に電話・メールで確認する。",
+   "letterFile": "reports/field-research/inquiry-final/miyazaki-monjo-center.md"
+  }
+ ],
+ "summary": {
+  "totalInquiries": 18,
+  "byStatus": {
+   "draft": 7,
+   "ready_to_send": 9,
+   "sent": 0,
+   "waiting_response": 2,
+   "answered": 0,
+   "closed": 0
+  },
+  "note": "waiting_response（2件）＝INQ-001・INQ-002（送付済み・回答待ち。statusは送付完了後の状態を表すためsentではなくwaiting_responseとした）。ready_to_send（9件）＝INQ-003, INQ-010, INQ-011, INQ-012, INQ-013, INQ-014, INQ-015, INQ-016, INQ-018（文面完成、差出人連絡先の記入のみ残る、または送付条件が明確な状態）。draft（7件）＝INQ-004, INQ-005, INQ-006, INQ-007, INQ-008, INQ-009（既存、対象範囲が狭い／対象外部署／宛先未確認等の理由でdraftのまま）、INQ-017（統計担当、所管部署未確定のためdraft）。合計 2+9+7=18件。"
+ }
+}
