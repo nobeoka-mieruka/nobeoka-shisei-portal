@@ -9210,3 +9210,45 @@ phase121-history-findings.md、TASK-046、直前のPhase127報告書等）のみ
   9機関・UNR13件分を新規作成した。既存の必須フィールド・既存データの値（trustLevel以外）は
   一切変更していない。推測値・架空データは登録していない。既存UNR（UNR-014/015/029等）は
   根拠なくGREEN化していない。
+- 統合コミットID：`c92db34`（GitHub push済み、Cloudflare Pages Production反映確認済み
+  ／デプロイID`92f65f32`、本番主要ページHTTP 200を確認）。
+
+---
+
+### TASK-170 実機UI最終監査・UNR優先順位整理・調査先別チェックリスト・照会文書準備（Phase135〜140）
+
+状態：IN_PROGRESS（2026-08-25）
+優先度：A（ユーザー指示）
+対象：（本セッションで確定次第追記）
+注記：Phase番号「135〜140」も過去のTASK（TASK-070のPhase135、TASK-071のPhase136等）と
+重複するが、TASK-168・169と同じ方針（TASK単位のローカルPhase番号）で使用する。
+
+**着手前の数値検証（ユーザー指示による事前確認）**：
+- 「UNR131件」：`reports/phase33-master-unresolved-ledger.json`を実集計したところ、
+  実際は**31件**（UNR-001〜UNR-031）だった。リポジトリ全体でUNR-から始まるIDをgrepしても
+  一意な件数は31件のみで、131件に達する経路は見つからなかった（他に`blockedTaskClassification.json`
+  15件が関連トラッカーとして存在するが、これを合算しても46件にとどまる）。**実データの31件
+  （関連する`blockedTaskClassification.json`15件も参考情報として含める）を正としてPhase136を
+  進める**（推測で100件分のUNRを新規作成しない。件数を無理に減らしているわけではなく、
+  実在する件数がそもそも31件であることを確認した）。
+
+**Phase135（Chrome実機UI最終監査、Phase130の未実施部分のみ再開）**：Phase130全体はやり直さず、
+実機確認のみ再試行する。Chrome拡張は直近2回（Phase126・Phase130）とも未接続だったため、
+今回も未接続の可能性が高いが、workerが改めて確認する。接続不可の場合は無限待機・リトライせず
+「実機UI確認未実施：Chrome拡張未接続」と記録しYELLOWで終了する。
+
+**Phase136（UNR31件の優先順位付け）**：既存UNR台帳（31件）へpriority/impact/researchMethod/
+targetInstitution/estimatedDifficulty/expectedEvidence/dependency/statusを付与する
+（新規オンライン検索は行わない）。
+
+**Phase137（延岡市立図書館向け調査リスト）**：既存UNR・Phase133の成果物から図書館関連項目を
+抽出し、現地でそのまま使えるチェックリストへ変換する。
+
+**Phase138（延岡市役所・議会事務局・選管向け照会準備）**：既存UNRを部署別に分類し、照会文案を
+作成する（自動送信はしない）。
+
+**Phase139（宮崎県立図書館・県文書センター・NDL調査リスト）**：機関別に整理する。請求番号
+5043・107051が件数ではなく資料識別子であることを維持し、誤表示しない。既に送付済み
+（INQ-001・002）は重複照会せずWAITING_RESPONSEとして管理する。
+
+**Phase140（親セッション統合）**：Phase135〜139が全て完了した後にのみ着手する。
