@@ -457,8 +457,8 @@
       "requiresOnsite": true,
       "requiresInquiry": false,
       "requiresBulkBackfill": true,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "Phase32新規発見。"
+      "lastCheckedAt": "2026-08-25",
+      "notes": "Phase32新規発見。 【2026-08-25追記（Phase119）】既存の「延岡市史」以外の新規一次資料経路を再調査した。(1)国立公文書館デジタルアーカイブ・(2)宮崎県公式オープンデータカタログ「みやざき統計BOX」（data.stat.pref.miyazaki.lg.jp、決算関連データセット「統計年鑑219」を実際にダウンロードし内容確認）の2経路を新規に調査したが、いずれもFY1934-1948をカバーする延岡市の決算データは発見できなかった（統計BOXは2008年度以降のみ収録）。オンラインで新規に確定できた値は0件。現地調査（図書館・市役所照会）が必要という既存結論を変更する材料はなかった。同一経路の重複調査は行っていない。"
     },
     {
       "unresolvedId": "UNR-015",
@@ -490,8 +490,8 @@
       "requiresOnsite": true,
       "requiresInquiry": true,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-22",
-      "notes": "詳細はreports/phase20-missing-years-status.jsonおよび本Phase33レポートの「財政9年度調査表」セクションを参照。"
+      "lastCheckedAt": "2026-08-25",
+      "notes": "詳細はreports/phase20-missing-years-status.jsonおよび本Phase33レポートの「財政9年度調査表」セクションを参照。 【2026-08-25追記（Phase119）】総務省「市町村決算カード」の公開範囲を再確認し、オンライン公開は平成13-14年度（2001-2002年度）以降のみであることを再確認した（FY1983-1987をカバーしない）。国立公文書館デジタルアーカイブ・宮崎県公式オープンデータカタログ「みやざき統計BOX」も新規に調査したが、いずれもFY1951-1953・1959・1983-1987をカバーする延岡市データは発見できなかった。オンラインで新規に確定できた値は0件。既存の現地閲覧・外部照会が必要という結論に変更なし。同一経路の重複調査は行っていない。"
     },
     {
       "unresolvedId": "UNR-016",
@@ -861,8 +861,8 @@
       "requiresOnsite": true,
       "requiresInquiry": false,
       "requiresBulkBackfill": false,
-      "lastCheckedAt": "2026-08-23",
-      "notes": "Phase74新規発見。UNR-014/015とは別枠（FY1934-1948, 1951-53, 1959, 1983-87は既存項目でカバー済み）。"
+      "lastCheckedAt": "2026-08-25",
+      "notes": "Phase74新規発見。UNR-014/015とは別枠（FY1934-1948, 1951-53, 1959, 1983-87は既存項目でカバー済み）。 【2026-08-25追記（Phase119）】総務省「市町村決算カード」オンライン公開範囲を再確認し、平成13-14年度（2001-2002年度）以降のみであることを確認した（既存のe-Stat下限FY1989より、決算カードの下限の方がさらに新しいことが判明）。オンラインでの新規確定は0件。"
     },
     {
       "unresolvedId": "UNR-028",
