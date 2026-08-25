@@ -1,0 +1,45 @@
+{
+  "_disclaimer": "このファイルの records 配列は Phase144 で作成した架空のダミーデータであり、実在の現地調査結果ではない。フォーマットの記入例を示すことのみを目的とする。実際の現地調査結果を記録する際は、このファイルを直接編集せず、reports/field-research/results/ 配下等（未作成、実データ運用開始時に決める）へ新規ファイルとしてコピーして使うこと。src/data 配下（サイト実データ）へは絶対にそのまま登録しないこと。",
+  "_schema": "./field-research-result.schema.json",
+  "_typeDefinition": "src/types/fieldResearch.ts の FieldResearchRecordFile / FieldResearchRecord",
+  "records": [
+    {
+      "researchId": "FR-20260901-001",
+      "unrId": "UNR-999",
+      "institution": "延岡市立図書館（架空・記入例）",
+      "checkedAt": "2026-09-01",
+      "checkedBy": "運営者A（記入例）",
+      "materialTitle": "延岡市議会史（架空の資料名・記入例）",
+      "author": "延岡市議会事務局編（架空）",
+      "publisher": "延岡市議会（架空）",
+      "publicationYear": 1985,
+      "callNumber": "K318.9/ノ（架空）",
+      "page": "412-413",
+      "originalTextSummary": "架空の記入例：第◯代副議長として氏名・就任日・退任日が表として掲載されていた（原文はページ参照、転載はしない）。",
+      "confirmedFact": "架空の記入例：副議長は昭和◯年◯月◯日〜昭和◯年◯月◯日に在任していた。",
+      "datePrecision": "day",
+      "trustLevel": "PRIMARY",
+      "sourceType": "市議会史（原本）",
+      "photographed": true,
+      "photoFileName": ["FR-20260901-001-p412.jpg", "FR-20260901-001-p413.jpg"],
+      "copied": true,
+      "copyReference": "延岡市立図書館 複写受付No.◯◯（架空）",
+      "result": "CONFIRMED",
+      "unrResolution": "RESOLVED",
+      "notes": "架空の記入例。この記録単体でUNR台帳を更新するものではなく、人による確認・反映が別途必要。"
+    },
+    {
+      "researchId": "FR-20260901-002",
+      "unrId": "UNR-014",
+      "institution": "宮崎県文書センター（架空・記入例）",
+      "checkedAt": "2026-09-01",
+      "checkedBy": "運営者A（記入例）",
+      "materialTitle": "延岡市 昭和9年度歳入歳出決算書（架空の記入例）",
+      "result": "NOT_FOUND",
+      "unrResolution": "KEEP_UNR",
+      "photographed": false,
+      "copied": false,
+      "notes": "架空の記入例：簿冊番号5043（reports/phase125-129-staging/phase127-finance-mayor-gaps-report.md記載の候補、架空の引用）を閲覧請求したが、当該簿冊に昭和9年度決算の記載は無かった。別簿冊の可能性があるため、UNRは維持し次回訪問時に別番号を確認する。author/publisher/publicationYear/callNumber/materialId/page等、資料に到達できなかったため空欄（フィールド自体を省略）。"
+    }
+  ]
+}
