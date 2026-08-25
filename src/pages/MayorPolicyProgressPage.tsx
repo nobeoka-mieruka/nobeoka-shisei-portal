@@ -13,10 +13,12 @@ import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { PromiseCard } from "../components/mayor/PromiseCard";
+import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate, toFiscalYearLabel } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { aggregateCategoryStatus } from "../lib/mayorPromiseStatus";
 
 const data = policyProgressData as MayorPolicyProgressData;
 const promisesData = mayorPromisesData as MayorPromisesData;
@@ -219,6 +221,7 @@ export function MayorPolicyProgressPage() {
         {data.policies.map((policy) => {
           const items = promises.filter((p) => p.categoryTitle === policy.title && matchesPromise(p));
           const anchor = promisesData.categories.find((c) => c.id === policy.id)?.anchor;
+          const categoryStatus = aggregateCategoryStatus(promises, policy.id);
           if (hasActiveFilter && items.length === 0) return null;
           return (
             <li
@@ -226,7 +229,10 @@ export function MayorPolicyProgressPage() {
               id={anchor}
               className="scroll-mt-20 rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5"
             >
-              <h2 className="text-base font-semibold text-on-surface">{policy.title}</h2>
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="text-base font-semibold text-on-surface">{policy.title}</h2>
+                {categoryStatus && <MayorPromiseStatusBadge status={categoryStatus} />}
+              </div>
 
               <p className="mt-3 text-xs font-medium text-on-surface-variant">現在の状況</p>
               <p className="mt-1 text-sm text-on-surface">{policy.currentStatus}</p>

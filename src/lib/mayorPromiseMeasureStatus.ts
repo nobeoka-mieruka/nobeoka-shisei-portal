@@ -34,3 +34,17 @@ export const mayorPromiseMeasureStatusIcon: Record<MayorPromiseMeasureStatus, Co
   PREPARING: QuestionMarkCircleIcon,
   NOT_ASSESSABLE: QuestionMarkCircleIcon,
 };
+
+/**
+ * 施策データのfiscalYear（例："令和8年度"）から、offsetYears分だけ前後の年度ラベルを算出する
+ * （Phase154）。表示ラベルの言い換えのみを行い、実績・予定の中身は一切補完・推測しない。
+ * パターンに一致しない場合はnullを返し、呼び出し側は汎用ラベル（前年度／今年度等）へ
+ * フォールバックすること。
+ */
+export function shiftFiscalYearLabel(fiscalYear: string, offsetYears: number): string | null {
+  const m = /^令和(\d+)年度$/.exec(fiscalYear);
+  if (!m) return null;
+  const year = Number(m[1]) + offsetYears;
+  if (!Number.isFinite(year) || year <= 0) return null;
+  return `令和${year}年度`;
+}

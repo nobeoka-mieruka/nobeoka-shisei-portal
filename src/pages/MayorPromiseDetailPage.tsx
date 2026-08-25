@@ -23,6 +23,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { MayorPromiseMeasureStatusBadge } from "../components/mayor/MayorPromiseMeasureStatusBadge";
+import { shiftFiscalYearLabel } from "../lib/mayorPromiseMeasureStatus";
 import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
@@ -157,66 +158,73 @@ export function MayorPromiseDetailPage() {
         )}
       </SectionCard>
 
-      {/* 公約の現在地（個別の取組み、Phase148） */}
+      {/* 公約の現在地（個別の取組み、Phase148／年度ラベル・出典表示をPhase154で改善） */}
       {measuresForPromise.length > 0 && (
         <SectionCard title="公約の現在地（個別の取組み）">
           <ul className="space-y-4">
-            {measuresForPromise.map((m) => (
-              <li key={m.measureId} className="border-b border-outline-variant pb-4 last:border-0 last:pb-0">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-semibold text-on-surface">{m.measureTitle}</span>
-                  <MayorPromiseMeasureStatusBadge status={m.status} />
-                </div>
-                <dl className="mt-1.5 space-y-1 text-sm leading-relaxed text-on-surface-variant">
-                  {m.previousYearResult && (
-                    <div>
-                      <dt className="inline font-medium text-on-surface">前年度実績：</dt>
-                      <dd className="inline">{m.previousYearResult}</dd>
-                    </div>
-                  )}
-                  {m.currentYearResult && (
-                    <div>
-                      <dt className="inline font-medium text-on-surface">今年度の実績：</dt>
-                      <dd className="inline">{m.currentYearResult}</dd>
-                    </div>
-                  )}
-                  {m.currentYearPlan && (
-                    <div>
-                      <dt className="inline font-medium text-on-surface">今後の予定：</dt>
-                      <dd className="inline">{m.currentYearPlan}</dd>
-                    </div>
-                  )}
-                  {m.futureTarget && (
-                    <div>
-                      <dt className="inline font-medium text-on-surface">将来目標：</dt>
-                      <dd className="inline">{m.futureTarget}</dd>
-                    </div>
-                  )}
-                  {m.quantitativeValue != null && (
-                    <div>
-                      <dt className="inline font-medium text-on-surface">数値：</dt>
-                      <dd className="inline">
-                        {m.quantitativeValue}
-                        {m.quantitativeUnit ?? ""}
-                      </dd>
-                    </div>
-                  )}
-                </dl>
-                <p className="mt-1.5 text-xs text-on-surface-variant">
-                  {formatJapaneseDate(m.snapshotDate)}現在／出典：
-                  <a
-                    href={m.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${m.sourceTitle}を新しいタブで開く`}
-                    className={`ml-1 inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
-                  >
-                    {m.sourceTitle}
-                    {m.sourcePage && `（${m.sourcePage}）`}
-                  </a>
-                </p>
-              </li>
-            ))}
+            {measuresForPromise.map((m) => {
+              const previousFyLabel = shiftFiscalYearLabel(m.fiscalYear, -1) ?? "前年度";
+              return (
+                <li key={m.measureId} className="border-b border-outline-variant pb-4 last:border-0 last:pb-0">
+                  <p className="text-sm font-semibold text-on-surface">{m.measureTitle}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-on-surface-variant">
+                    <span className="font-medium text-on-surface">現在の状況：</span>
+                    <MayorPromiseMeasureStatusBadge status={m.status} />
+                  </div>
+                  <dl className="mt-2 space-y-1.5 text-sm leading-relaxed text-on-surface-variant">
+                    {m.previousYearResult && (
+                      <div>
+                        <dt className="inline font-medium text-on-surface">
+                          【{previousFyLabel}】
+                        </dt>
+                        <dd className="inline">{m.previousYearResult}</dd>
+                      </div>
+                    )}
+                    {(m.currentYearResult || m.currentYearPlan) && (
+                      <div>
+                        <dt className="inline font-medium text-on-surface">
+                          【{m.fiscalYear}】
+                        </dt>
+                        <dd className="inline">
+                          {m.currentYearResult && <>実施：{m.currentYearResult}</>}
+                          {m.currentYearResult && m.currentYearPlan && <>／</>}
+                          {m.currentYearPlan && <>予定：{m.currentYearPlan}</>}
+                        </dd>
+                      </div>
+                    )}
+                    {m.futureTarget && (
+                      <div>
+                        <dt className="inline font-medium text-on-surface">【今後】</dt>
+                        <dd className="inline">{m.futureTarget}</dd>
+                      </div>
+                    )}
+                    {m.quantitativeValue != null && (
+                      <div>
+                        <dt className="inline font-medium text-on-surface">数値：</dt>
+                        <dd className="inline">
+                          {m.quantitativeValue}
+                          {m.quantitativeUnit ?? ""}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                  <p className="mt-1.5 text-xs text-on-surface-variant">
+                    <span className="font-medium text-on-surface">【出典】</span>
+                    <a
+                      href={m.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${m.sourceTitle}を新しいタブで開く`}
+                      className={`ml-1 inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                    >
+                      {m.sourceTitle}
+                      {m.sourcePage && `（${m.sourcePage}）`}
+                    </a>
+                    　{formatJapaneseDate(m.snapshotDate)}現在
+                  </p>
+                </li>
+              );
+            })}
           </ul>
           <p className="mt-3 text-xs text-on-surface-variant">
             ここに示す「進捗」は公表資料に記載された事実の区分であり、当サイト独自の達成率・採点ではありません。
