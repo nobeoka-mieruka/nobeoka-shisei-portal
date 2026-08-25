@@ -1,0 +1,466 @@
+{
+  "generatedAt": "2026-08-25",
+  "phase": "Phase133",
+  "purpose": "現地調査・外部照会が必要な未解決資料を、機関ごとに整理した機械可読チェックリスト。新規のオンライン検索・WebFetch・WebSearchは一切行っていない。reports/phase33-master-unresolved-ledger.json、reports/phase19-resource-dossier.md、reports/phase19-missing-years-matrix.json、reports/phase20-missing-years-status.json、reports/phase21-inquiry-ready-to-send.md、reports/phase21-inquiry-tracker.json、reports/phase119-123-staging/phase121-history-findings.md、reports/phase125-129-staging/phase127-finance-mayor-gaps-report.md、reports/phase99-108-staging/phase102-103-term-gaps-findings.json、TASKS.md TASK-046、src/data/blockedTaskClassification.json の既存調査結果のみを再整理したもの。",
+  "importantNote": "本ファイルは既存資料の統合・転記のみを行っており、既存のUNR・BLOCKEDステータス自体は一切変更していない（reports/phase33-master-unresolved-ledger.json・src/data/blockedTaskClassification.jsonの値は元のまま）。連絡先・所在地は既存資料に明記されているものだけを転記し、推測では追加していない。記載のない項目は「確認中（既存資料に記載なし）」とした。",
+  "statusCategories": {
+    "reference_pending": "所蔵館候補への照会文は完成しているが、まだ送付していない、または送付済みで回答待ちの状態（reports/phase20-missing-years-status.json由来）。",
+    "onsite_required": "資料の所蔵館・請求記号（または簿冊番号）が判明しており、現地閲覧または複写取り寄せのみが残っている状態。",
+    "library_required": "現地閲覧（図書館等での現物確認）が次の一歩として必要な状態（reports/phase99-108-staging・phase121-history-findings.md由来）。",
+    "inquiry_required": "外部機関への照会（電話・メール等）が次の一歩として必要な状態（src/data/blockedTaskClassification.json由来）。",
+    "holding_unconfirmed": "資料そのものの存在は判明しているが、どの機関が所蔵しているか（所蔵館）がまだ特定できていない状態。",
+    "resource_unidentified": "対象年度をカバーする資料そのものが何であるか、まだ特定できていない状態。",
+    "draft": "照会文の文面は完成しているが、送付先・送付タイミングが確定していない状態（条件分岐待ち等）。",
+    "ready_to_send": "宛先・件名・本文・確認対象資料・対象年度・質問事項がすべて確定し、運営者が送信するだけの状態。",
+    "sent_waiting_response": "運営者（人間）が実際に送付済みで、相手機関からの回答を待っている状態（reports/phase21-inquiry-tracker.jsonのsendStatus=sent, responseStatus=waiting_response）。",
+    "research_exhausted": "複数の公開資料の経路を調査したが現時点で確認できなかった状態（資料が存在しないことの確定ではない）。"
+  },
+  "institutions": [
+    {
+      "institutionId": "inst-01",
+      "name": "宮崎県立図書館（情報提供課・郷土情報担当）",
+      "address": "〒880-0031 宮崎県宮崎市船塚3-210-1",
+      "contacts": {
+        "phoneGeneral": "0985-29-2911（代表・総務企画課）",
+        "phoneReference": "0985-29-2972（レファレンス、情報提供課）",
+        "phoneLocalHistory": "0985-29-2954（郷土情報担当）",
+        "fax": "0985-22-9070（情報提供担当）",
+        "emailReference": "soudan@lib.pref.miyazaki.lg.jp",
+        "emailGeneral": "toshokan@pref.miyazaki.lg.jp"
+      },
+      "contactSource": "reports/phase20-inquiry-final.md セクション1",
+      "items": [
+        {
+          "itemId": "inst-01-a",
+          "relatedUnrIds": ["UNR-014", "UNR-015", "UNR-027"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-001"],
+          "resourceNames": [
+            "延岡市決算書並意見書（昭和20・25〜39年度分、17冊、ndl-src-16）",
+            "〔延岡市〕市政二十年史（1953年10月発行、ndl-src-28）",
+            "延岡市統計月報・延岡市税務要覧・延岡市勢要覧商工名鑑等（ndl-src-29）",
+            "宮崎県統計年鑑 第102回〜第106回（ndl-src-31）",
+            "延岡市議会会議録（旧会期、ndl-src-15）"
+          ],
+          "callNumbers": "未確認（照会文で確認依頼中）",
+          "targetPeriod": "昭和26・27・28・34・58〜62年度（FY1951,1952,1953,1959,1983,1984,1985,1986,1987）。UNR-027はFY1960-1982・1988の補完も含む。",
+          "factsToConfirm": [
+            "各年度の歳入総額・歳出総額",
+            "会計区分（一般会計／普通会計／特別会計の別）",
+            "決算額／決算見込額／予算額のいずれであるか、単位（円／千円）"
+          ],
+          "currentStatus": "sent_waiting_response",
+          "statusDetail": "INQ-001は2026-08-21に送付済み（reports/phase21-inquiry-tracker.json）。回答は本チェックリスト作成時点（2026-08-25）で未記録。",
+          "nextAction": "回答の到着状況を郷土情報担当（0985-29-2954）に確認する。所蔵が確認できた資料は現地閲覧または複写を申請する。回答で「所蔵なし」の資料があれば延岡市立図書館（inst-02）への照会（INQ-003）へ進む。"
+        },
+        {
+          "itemId": "inst-01-b",
+          "relatedUnrIds": ["UNR-007"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-008"],
+          "resourceNames": [
+            "人事興信録（該当版）",
+            "延岡市議会会議録（原本、昭和49年度以降分）",
+            "延岡市議会関係例規集",
+            "延岡市統計月報・延岡市税務要覧・延岡市勢要覧（昭和40〜50年代版）",
+            "延岡市議会史（存在未確認）",
+            "宮崎日日新聞縮刷版（1975年1月・1978年11月・1982年10月分）"
+          ],
+          "callNumbers": "確認中（既存資料に記載なし）",
+          "targetPeriod": "昭和45〜54年度（1970年代）",
+          "factsToConfirm": [
+            "早生隆彦氏（mayor-12）の生年月日（候補値：1921-01-03、同姓同名の可能性に留意して確認）",
+            "1975・1978・1982年市長選挙の対立候補氏名・候補者別得票数・無効票数（宮崎日日新聞縮刷版）"
+          ],
+          "currentStatus": "draft",
+          "statusDetail": "INQ-008は文面完成済み、未送付（draft）。",
+          "nextAction": "reports/phase29-inquiry-templates.mdのINQ-008文面を確定し送付する。"
+        },
+        {
+          "itemId": "inst-01-c",
+          "relatedUnrIds": ["UNR-016"],
+          "relatedTaskIds": ["TASK-046"],
+          "relatedInquiryIds": [],
+          "resourceNames": [
+            "延岡市史（上巻・下巻）現物（郷土資料コーナー）",
+            "延岡市議会史（存在未確認）"
+          ],
+          "callNumbers": "確認中（既存資料に記載なし）",
+          "targetPeriod": "1933〜1998年（延岡市議会議員選挙）",
+          "factsToConfirm": [
+            "1933〜1998年に執行された延岡市議会議員選挙の候補者別得票結果"
+          ],
+          "currentStatus": "library_required",
+          "statusDetail": "src/data/blockedTaskClassification.json TASK-046のreopenConditions記載。TASK-046自体はRESEARCH_EXHAUSTED（オンライン経路のみで、現地閲覧・照会は未実施）。",
+          "nextAction": "郷土資料コーナーで延岡市史・延岡市議会史（存在すれば）の現物を確認し、候補者別得票結果の記載有無を確認する。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-02",
+      "name": "延岡市立図書館（郷土資料担当）",
+      "address": "〒882-0812 宮崎県延岡市本小路39番地1（カルチャープラザのべおか内）",
+      "contacts": {
+        "phone": "0982-32-3058",
+        "fax": "0982-22-0644",
+        "email": "toshokan@city.nobeoka.miyazaki.jp"
+      },
+      "contactSource": "reports/phase20-inquiry-final.md セクション1",
+      "items": [
+        {
+          "itemId": "inst-02-a",
+          "relatedUnrIds": ["UNR-015"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-003"],
+          "resourceNames": [
+            "延岡市決算書",
+            "延岡市決算審査意見書",
+            "延岡市統計書",
+            "延岡市勢要覧",
+            "延岡市政要覧"
+          ],
+          "callNumbers": "確認中（既存資料に記載なし）",
+          "targetPeriod": "昭和26・27・28・34年度（FY1951,1952,1953,1959）",
+          "factsToConfirm": [
+            "各年度の歳入総額・歳出総額",
+            "会計区分（一般会計／普通会計）"
+          ],
+          "currentStatus": "ready_to_send",
+          "statusDetail": "INQ-003は宛先・本文とも完成済みだが、送付条件（INQ-001＝宮崎県立図書館の回答で「所蔵なし」と判明した場合）待ち。",
+          "nextAction": "INQ-001の回答を待ち、条件を満たせば送付する。"
+        },
+        {
+          "itemId": "inst-02-b",
+          "relatedUnrIds": ["UNR-006", "UNR-008", "UNR-016"],
+          "relatedTaskIds": ["TASK-046"],
+          "relatedInquiryIds": ["INQ-009"],
+          "resourceNames": [
+            "延岡市史（上巻・下巻、1983年）",
+            "延岡市議会史（存在未確認）",
+            "延岡市勢要覧（昭和40〜50年代版）",
+            "延岡市統計書（延岡市統計月報等）",
+            "地方財政関係資料一般",
+            "選挙関係資料一般"
+          ],
+          "callNumbers": "確認中（既存資料に記載なし）",
+          "targetPeriod": "昭和45〜54年度（1970年代）、および1933〜1998年市議選（TASK-046）",
+          "factsToConfirm": [
+            "1970年代の教育長氏名・在任期間",
+            "1978年1月4日以降の収入役後任者氏名",
+            "1933〜1998年市議選の候補者別得票結果"
+          ],
+          "currentStatus": "draft",
+          "statusDetail": "INQ-009は文面完成済み、未送付（draft）。",
+          "nextAction": "reports/phase29-inquiry-templates.mdのINQ-009文面を確定し送付する。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-03",
+      "name": "延岡市役所（財政課・総務課）",
+      "address": "確認中（既存資料に記載なし。延岡市役所代表所在地のみ電話番号で判明）",
+      "contacts": {
+        "phoneGeneral": "0982-34-2111（代表）",
+        "phoneFinance": "0982-22-7005（財政課・財政係／財務調査係）、FAX 0982-34-2110",
+        "phoneGeneralAffairs": "0982-22-7006（総務課 法制第1係・情報公開担当）",
+        "phonePublicRelations": "0982-22-7042（総合政策課広報広聴係）",
+        "formUrl": "https://www.city.nobeoka.miyazaki.jp/ques/questionnaire.php?openid=5",
+        "emailNote": "各課ともメールアドレスは公式サイト上で難読化されており未確認。送付は電話またはフォーム推奨。"
+      },
+      "contactSource": "reports/phase20-inquiry-final.md セクション1／reports/phase21-inquiry-tracker.json INQ-004",
+      "items": [
+        {
+          "itemId": "inst-03-a",
+          "relatedUnrIds": ["UNR-014", "UNR-015"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-004"],
+          "resourceNames": [
+            "延岡市決算書並意見書",
+            "その他、市役所内に残る決算関係資料一般"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "昭和26・27・28・34・58〜62年度（FY1951,1952,1953,1959,1983-1987）",
+          "factsToConfirm": [
+            "上記資料が市役所内部（文書保存担当）に現存するか、既に廃棄されているか",
+            "現存する場合の歳入総額・歳出総額"
+          ],
+          "currentStatus": "draft",
+          "statusDetail": "第4照会（最終手段）。INQ-001〜003のいずれでも所在が確認できなかった場合にのみ送付する条件付き。",
+          "nextAction": "宮崎県立図書館・延岡市立図書館の両方で所蔵が確認できなかった場合に送付する。情報公開請求の前段階としての位置づけ。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-04",
+      "name": "延岡市議会事務局",
+      "address": "確認中（既存資料に記載なし）",
+      "contacts": {
+        "phone": "0982-22-7029"
+      },
+      "contactSource": "reports/phase21-inquiry-tracker.json INQ-005／src/data/blockedTaskClassification.json TASK-046",
+      "items": [
+        {
+          "itemId": "inst-04-a",
+          "relatedUnrIds": ["UNR-005", "UNR-008"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-005"],
+          "resourceNames": [
+            "延岡市議会会議録（助役選任同意議案・収入役選任同意議案・副議長選挙の審議部分、原本）",
+            "延岡市議会関係例規集",
+            "延岡市議会史（存在未確認）"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "昭和45〜54年度（1970年代）",
+          "factsToConfirm": [
+            "助役（後藤梅雄）の在任期間（既存UNRとして未採番、reports/phase29-inquiry-templates.md由来）",
+            "1978年1月4日以降の収入役後任者氏名",
+            "1970年代の副議長氏名・任期"
+          ],
+          "currentStatus": "draft",
+          "statusDetail": "INQ-005は文面完成済み、未送付。",
+          "nextAction": "reports/phase29-inquiry-templates.mdのINQ-005文面を確定し送付する。"
+        },
+        {
+          "itemId": "inst-04-b",
+          "relatedUnrIds": ["UNR-016"],
+          "relatedTaskIds": ["TASK-046"],
+          "relatedInquiryIds": [],
+          "resourceNames": [
+            "議会史・記念誌等（所在未確認）"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "1933〜1998年（延岡市議会議員選挙）",
+          "factsToConfirm": [
+            "延岡市議会史・記念誌等の所在有無"
+          ],
+          "currentStatus": "inquiry_required",
+          "statusDetail": "TASK-046 reopenConditions記載。本サイトからの問い合わせは未実施。",
+          "nextAction": "電話0982-22-7029へ、議会史・記念誌等の所在を照会する。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-05",
+      "name": "延岡市選挙管理委員会（延岡市役所内）",
+      "address": "確認中（既存資料に記載なし）",
+      "contacts": {
+        "phone": "0982-22-7026（TASK-046 reopenConditions記載）",
+        "note": "reports/phase21-inquiry-tracker.json INQ-006では「直接連絡先未確認、延岡市役所代表を通じて取次を依頼する想定」と記録されている。"
+      },
+      "contactSource": "src/data/blockedTaskClassification.json TASK-046／reports/phase21-inquiry-tracker.json INQ-006",
+      "items": [
+        {
+          "itemId": "inst-05-a",
+          "relatedUnrIds": ["UNR-001", "UNR-002", "UNR-003", "UNR-004", "UNR-029"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-006"],
+          "resourceNames": [
+            "延岡市長選挙 選挙結果資料（開票録・選挙録）"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "昭和50・53・57年（1975・1978・1982年）市長選挙、および1967年1月（UNR-029 M11）・1994年1〜2月（UNR-029 M13）の市長交代",
+          "factsToConfirm": [
+            "1975年市長選挙の対立候補氏名（候補：山口哲臣・丸山正喜）",
+            "1978年市長選挙の候補者数・対立候補氏名（候補：河野孔明・塩月盈・池田某・河野敏進）",
+            "1982年市長選挙の候補者数・対立候補氏名",
+            "1971・1975・1978・1982年市長選挙の候補者別得票数・無効票数",
+            "房野博氏の就任日（1967年1月22日〜23日、当選証書付与日と就任日の関係）",
+            "櫻井哲雄氏の就任日確定に必要な投票日（1994年1〜2月）"
+          ],
+          "currentStatus": "draft",
+          "statusDetail": "INQ-006は文面完成済み、未送付。直接連絡先が未確認のため延岡市役所代表窓口経由での取次が必要。",
+          "nextAction": "reports/phase29-inquiry-templates.mdのINQ-006文面を確定し、延岡市役所代表窓口経由で選挙管理委員会事務局へ送付する。"
+        },
+        {
+          "itemId": "inst-05-b",
+          "relatedUnrIds": ["UNR-016"],
+          "relatedTaskIds": ["TASK-046"],
+          "relatedInquiryIds": [],
+          "resourceNames": [
+            "過去の候補者別選挙結果（投票録・選挙録等）"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "1933〜1998年（延岡市議会議員選挙）",
+          "factsToConfirm": [
+            "1933〜1998年市議選の候補者別得票結果の保管状況"
+          ],
+          "currentStatus": "inquiry_required",
+          "statusDetail": "TASK-046 reopenConditions記載。本サイトからの問い合わせは未実施。",
+          "nextAction": "電話0982-22-7026へ、過去の候補者別選挙結果の保管状況を照会する。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-06",
+      "name": "延岡市教育委員会事務局",
+      "address": "確認中（既存資料に記載なし）",
+      "contacts": {
+        "note": "直接連絡先未確認。延岡市役所代表を通じて教育委員会事務局への取次を依頼する想定（reports/phase21-inquiry-tracker.json INQ-007）。"
+      },
+      "contactSource": "reports/phase21-inquiry-tracker.json INQ-007",
+      "items": [
+        {
+          "itemId": "inst-06-a",
+          "relatedUnrIds": ["UNR-006"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-007"],
+          "resourceNames": [
+            "延岡市教育委員会 会議録・沿革資料"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "昭和45〜54年度（1970年代）。1933-2006年・2015年以降は未対応。",
+          "factsToConfirm": [
+            "1970年代の教育長氏名・在任期間"
+          ],
+          "currentStatus": "draft",
+          "statusDetail": "INQ-007は文面完成済み、未送付。直接連絡先が未確認のため延岡市役所代表窓口経由での取次が必要。",
+          "nextAction": "reports/phase29-inquiry-templates.mdのINQ-007文面を確定し、延岡市役所代表窓口経由で教育委員会事務局へ送付する。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-07",
+      "name": "宮崎県総合政策部統計調査課",
+      "address": "確認中（既存資料に記載なし）",
+      "contacts": {
+        "phone": "0985-26-7042",
+        "email": "tokeichosa@pref.miyazaki.lg.jp"
+      },
+      "contactSource": "reports/phase20-inquiry-final.md セクション1",
+      "items": [
+        {
+          "itemId": "inst-07-a",
+          "relatedUnrIds": ["UNR-015"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": ["INQ-002"],
+          "resourceNames": [
+            "宮崎県統計年鑑 第102回・第103回・第104回・第105回・第106回"
+          ],
+          "callNumbers": "該当なし",
+          "targetPeriod": "昭和58〜62年度（FY1983-1987）",
+          "factsToConfirm": [
+            "各号のバックナンバー保存有無",
+            "延岡市の普通会計歳入決算額・歳出決算額（昭和58〜62年度分）が掲載された表の有無"
+          ],
+          "currentStatus": "sent_waiting_response",
+          "statusDetail": "INQ-002は2026-08-21に送付済み（reports/phase21-inquiry-tracker.json）。回答は本チェックリスト作成時点（2026-08-25）で未記録。",
+          "nextAction": "回答の到着状況を確認する（0985-26-7042）。「宮崎県立図書館へ移管済み」等の回答があればINQ-001の回答と突き合わせる。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-08",
+      "name": "宮崎県文書センター（宮崎県総務部総務課）",
+      "address": "確認中（既存資料に記載なし。県立図書館とは別組織）",
+      "contacts": {
+        "phone": "0985-26-7027",
+        "email": "somu-bunsho-c@pref.miyazaki.lg.jp"
+      },
+      "contactSource": "reports/phase33-master-unresolved-ledger.json UNR-014",
+      "items": [
+        {
+          "itemId": "inst-08-a",
+          "relatedUnrIds": ["UNR-014", "UNR-015"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": [],
+          "resourceNames": [
+            "簿冊番号5043「市町村行政（延岡市巡視書類）」（昭和11年、地方課、配架08-03-07）",
+            "簿冊番号107051「内務報告地方」（昭和10年、地方課、配架311-05-04）",
+            "簿冊番号105877・105882「市町村の予算決算」（昭和19-21年、配架309-05-05）",
+            "簿冊番号105913「市町村行政」（昭和22年、配架309-06-02）",
+            "簿冊番号105921・105928・105930・105932・105951（起債許可稟請書、昭和26-29年、配架309-06系）"
+          ],
+          "callNumbers": "簿冊番号5043（最優先）、107051（最優先）、105877、105882、105913、105921、105928、105930、105932、105951",
+          "targetPeriod": "FY1934-1948（15年度、UNR-014）。うち簿冊5043は昭和8・9年度（FY1933,1934）に直接言及。107051は昭和10年前後。105921等はFY1951-1953（UNR-015）候補。",
+          "factsToConfirm": [
+            "簿冊5043：昭和8年度・9年度（FY1933,1934）延岡市予算並歳入歳出決算額、昭和10・11年度延岡市予算額",
+            "簿冊107051：市町村歳出歳入決算額（延岡市、昭和10年前後）",
+            "簿冊105877・105882：市町村分与税分与資料調査表（延岡市、昭和19-21年度）",
+            "簿冊105913：延岡市歳入歳出予算書（昭和22年度）",
+            "簿冊105921等：延岡市起債許可稟請書（昭和26-29年度、FY1951-1953を含む）※決算書そのものではなく市債発行額の一部のみ判明する可能性がある点に留意"
+          ],
+          "currentStatus": "reference_pending",
+          "statusDetail": "UNR-014はPhase127（2026-08-25）でnot_collected→reference_pendingへ前進、requiresInquiryをtrueへ更新済み。目録（書誌）レベルの確認のみで、実際の数値は未確認。",
+          "nextAction": "電話0985-26-7027またはメールsomu-bunsho-c@pref.miyazaki.lg.jpへ、上記簿冊番号（特に5043・107051）を指定して現地閲覧または複写申請を行う。"
+        }
+      ]
+    },
+    {
+      "institutionId": "inst-09",
+      "name": "国立国会図書館（東京本館・関西館）",
+      "address": "確認中（既存資料に記載なし。東京本館・関西館の2館体制であることのみ既存資料で確認済み）",
+      "contacts": {
+        "note": "既存資料に電話・メール等の直接連絡先の記載なし。"
+      },
+      "contactSource": "reports/phase19-resource-dossier.md 資料5",
+      "items": [
+        {
+          "itemId": "inst-09-a",
+          "relatedUnrIds": ["UNR-015"],
+          "relatedTaskIds": [],
+          "relatedInquiryIds": [],
+          "resourceNames": [
+            "地方財政統計年報 昭和58年度版〜昭和62年度版（自治省編、近接版の請求記号DT772-74）"
+          ],
+          "callNumbers": "DT772-74系（近接版で確認済み、昭和58-62年度版個別の請求記号は未確認）",
+          "targetPeriod": "FY1983-1987",
+          "factsToConfirm": [
+            "延岡市（団体コード45203）のFY1983〜1987 歳入総額・歳出総額"
+          ],
+          "currentStatus": "library_required",
+          "statusDetail": "デジタル化されていても「国立国会図書館内限定公開」であり、個人送信サービス対象外。館内端末閲覧のみ。",
+          "nextAction": "国立国会図書館（東京本館または関西館）へ来館し、地方財政統計年報の該当年度版を閲覧する。"
+        },
+        {
+          "itemId": "inst-09-b",
+          "relatedUnrIds": ["UNR-016", "UNR-029"],
+          "relatedTaskIds": ["TASK-046"],
+          "relatedInquiryIds": [],
+          "resourceNames": [
+            "延岡市史（1949・1963・1983・1993年版、個人送信サービス対象）",
+            "延岡市史 上巻（1983年、pid 9774711、コマ124〜125）",
+            "延岡商工会議所四十年史",
+            "日本の歴代市長：市制施行百年の歩み 第3巻（pid 11897508、コマ361）"
+          ],
+          "callNumbers": "pid 9774711（延岡市史上巻）、pid 11897508（歴代市長第3巻）",
+          "targetPeriod": "1933〜1998年（市議選）、市長任期13区間（UNR-029、詳細は本チェックリストの補足セクション参照）",
+          "factsToConfirm": [
+            "延岡市史内の市議選候補者別得票結果の収録有無",
+            "延岡市史上巻コマ124（市長本体列の自至日付欄、M1〜M9区間、1937-1952年）",
+            "日本の歴代市長第3巻コマ361（青木善祐氏の就任日、M10区間、1956年）"
+          ],
+          "currentStatus": "library_login_required",
+          "statusDetail": "NDL個人送信サービスへのログインが必須（本サイト運営方針により自動取得は未実施）。ログインまたは現地来館閲覧のいずれかが必要。",
+          "nextAction": "NDL個人送信サービスへログインして該当箇所を確認するか、東京本館・関西館へ来館して現物を確認する。"
+        }
+      ]
+    }
+  ],
+  "supplementalSection": {
+    "title": "UNR-029（市長任期13区間の日単位空白）現地調査対象一覧",
+    "note": "reports/phase99-108-staging/phase102-103-term-gaps-findings.json・reports/phase119-123-staging/phase121-history-findings.mdより転記。M1〜M9は延岡市史上巻コマ124（延岡市立図書館・宮崎県立図書館・NDL pid 9774711で所蔵確認済み、一度の来館で複数区間をまとめて確認できる可能性）が共通の第一候補。M10〜M13は個別資料が必要。",
+    "intervals": [
+      { "id": "M1", "period": "1937-01-06〜1937-03-06（仲田又次郎→鈴木憲太郎）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M2", "period": "1937-04-14〜1937-05-16（鈴木憲太郎、辞職→再任）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M3", "period": "1937-06-15〜1937-09-26（鈴木憲太郎→大島文彦）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M4", "period": "1941-09-25〜1941-10-22（大島文彦→三浦虎雄）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M5", "period": "1942-04-25〜1942-05-19（三浦虎雄、辞職→再任）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M6", "period": "1946-03-06〜1946-03-29（三浦虎雄→鈴木憲太郎）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M7", "period": "1947-03-22〜1947-04-16（鈴木憲太郎→佐藤千吉郎）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M8", "period": "1948-06-06〜1948-07-16（佐藤千吉郎→仲田又次郎）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M9", "period": "1952-06-19〜1952-07-11（仲田又次郎→三浦虎雄）", "material": "延岡市史上巻コマ124", "status": "library_required" },
+      { "id": "M10", "period": "1956-03-27〜1956-04-21（三浦虎雄→青木善祐、就任日disputed）", "material": "日本の歴代市長第3巻コマ361／宮崎日日新聞縮刷版1956年4月分", "status": "library_required" },
+      { "id": "M11", "period": "1966-12-01〜1967-01-22（折小野良一→房野博）", "material": "宮崎日日新聞縮刷版1967年1月分／延岡市選挙管理委員会選挙録", "status": "library_required" },
+      { "id": "M12", "period": "1978-10-05〜1978-11-05（房野博→早生隆彦）", "material": "延岡市史上巻コマ215（既読）／宮崎日日新聞縮刷版1978年10月分", "status": "library_required" },
+      { "id": "M13", "period": "1994-01-11〜1994-02-06（早生隆彦→櫻井哲雄）", "material": "宮崎日日新聞縮刷版1994年1〜2月分／延岡市選挙管理委員会選挙録", "status": "library_required" }
+    ]
+  },
+  "summary": {
+    "institutionCount": 9,
+    "unrIdsCovered": ["UNR-001", "UNR-002", "UNR-003", "UNR-004", "UNR-005", "UNR-006", "UNR-007", "UNR-008", "UNR-014", "UNR-015", "UNR-016", "UNR-027", "UNR-029"],
+    "unrCount": 13,
+    "taskIdsCovered": ["TASK-046"],
+    "checklistItemCount": 15,
+    "note": "UNR-028（中井一萬氏の人物特定）とUNR-009（助役6〜10代の任期、primaryRoute=CでrequiresOnsite=false）は、今回のチェックリスト項目には含めていない（UNR-028は一次資料が選挙管理委員会・議会事務局の既存照会対象と一致しないため、UNR-009は現地調査ではなくNDL再読が正のルートのため）。次フェーズで整理が必要な場合は別途追加を検討する。助役（後藤梅雄、1970年代）はreports/phase29-inquiry-templates.md由来でUNR番号が未採番のため、inst-04-aにはUNR番号なしで記載した。"
+  }
+}
