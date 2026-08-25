@@ -9007,9 +9007,13 @@ FY1951-1953・1959・1983-1987は引き続き`reports/phase20-missing-years-stat
 
 ### TASK-168 本番反映確認・UI確認・財政/市長任期再調査・trustLevel展開・ArchiveFiscalYear拡張（Phase125〜129）
 
-状態：IN_PROGRESS（2026-08-25）
+状態：DONE（2026-08-25）
 優先度：A（ユーザー指示）
-対象：（本セッションで確定次第追記）
+対象：`src/pages/DashboardPage.tsx`（確認のみ、変更なし）、`src/data/archiveFiscalYears.json`
+（実データ変更なし）、`reports/phase33-master-unresolved-ledger.json`、
+`src/types/sourceTrust.ts`（新規）、`src/types/historicalArchive.ts`、`src/types/index.ts`、
+`scripts/validate-data.mjs`、`scripts/lib/validate-archive-common.mjs`、
+`src/data/financeDashboard.json`、`src/data/generalQuestions.json`
 注記：Phase番号「125〜129」はTASK-068（2026-08-13、元議員アーカイブ）で既に使用済みの
 番号と重複するが、本リポジトリの慣習（TASK単位でPhase番号をローカルに振り直す、
 例：TASK-092のPHASE1〜6、TASK-163のPhase17）に従い、本TASK内のローカルPhase番号として
@@ -9022,5 +9026,78 @@ Production環境の最新デプロイが`7ffdb04`（コミット後約40分後�
 本番`/dashboard/`でu131の「市の基礎データ欄」、本番`/updates/`でu131本文を
 それぞれ確認し、統合コミット`7ffdb04`が本番へ正しく反映済みであることを確認した。
 
-**Phase126〜129**：並列worker実行中（結果は本エントリへ追記予定）。
+**Phase126（`/dashboard`モバイルUI確認）**：375/390/768/1280pxでの実機確認を試みたが、
+claude-in-chrome（Chrome拡張）が本セッション・worker双方で未接続（`list_connected_browsers`が
+0件）だったため、**実機スクリーンショット確認は今回実施できていない**（できなかったことを
+正直に記録）。代わりにコードレベル（`DashboardPage.tsx`の「市の基礎データ欄」・`StatCard`等の
+Tailwindレスポンシブクラス、実データの文字数）を静的に確認し、横スクロール要因・タップ領域
+不足・色のみでの意味伝達は見当たらなかった。コード修正は行っていない。次回、Chrome拡張が
+接続可能な環境で実機確認を行うことを推奨する。
+
+**Phase127（財政欠落年度・市長任期空白区間の再調査）**：`validate:data`の実データ集計により
+件数を正確に再確認した（推測ではなく実測）。財政欠落年度は**24年度**（ユーザー提示の数値と一致、
+UNR-014：FY1934-1948の15年度＝従来ほぼ未調査、UNR-015：FY1951-53/59/83-87の9年度＝
+Phase16-21/74/119で調査済み）、市長任期空白は**13区間**（ユーザー提示の数値と一致、UNR-029）。
+市長任期13区間はPhase121（同日）で既に全区間`library_required`（現地閲覧必須）まで調査済みの
+ため、ユーザー指示どおり新規調査は行わず状態を維持した。財政欠落年度は、既に「対象年度なし」と
+確定済みの経路（宮崎県デジタルアーカイブ、財務省統計表、e-Stat、みやざき統計BOX等）を繰り返さず、
+未着手だった新しい経路のみ試行：Japan Search（jpsearch.go.jp、JS依存でWebFetch不可・
+ブラウザツール未接続のため未解決のまま）、**宮崎県文書センター**（今回初めて確認した機関）の
+全カタログ（約65,930件）を機械検索し、FY1933/1934・FY1935の決算に関連する可能性のある候補
+資料2件（請求番号5043・107051）を新規発見。ただし数値そのものは未確認のため
+`archiveFiscalYears.json`への数値追加は行わず（推測禁止の徹底）、`reports/phase33-master-unresolved-ledger.json`の
+UNR-014を`not_collected`→`reference_pending`へ、次の照会候補（請求番号）とともに更新した。
+UNR-015・UNR-029は根拠なくGREEN化していない。
+
+**Phase128（`trustLevel`の主要データ型への段階的展開）**：Phase122でパイロット導入された
+`ArchiveSourceTrustLevel`型を`src/types/sourceTrust.ts`へ独立させ（`index.ts`と
+`historicalArchive.ts`の循環import回避）、`SourceMeta`・`FinanceSourceMeta`・
+`CompensationSourceMeta`（およびそれを継承する`GeneralQuestion`・`BillVote`・`CouncilMember`・
+`Pledge`等）へ任意フィールド`trustLevel?`として展開した（既存必須フィールドは無変更）。
+`validate-data.mjs`・`validate-archive-common.mjs`へ値検証ロジックを追加（Phase122パイロット分が
+実は未検証だった穴も解消）。出典組織・出典種別から明確に判断できる範囲でパイロット付与
+（財政ダッシュボード出典11件→OFFICIAL_ARCHIVE、令和8年6月定例会の一般質問14件→PRIMARY、
+計25件）。billVotes.json（1177件）等の大規模データへの一括付与は今回範囲外とし、UI表示も
+既存の共有出典表示コンポーネントへの影響精査が未了のため見送った（正直に記録）。
+**新規発見（別課題）**：`compensationComparison.json`の実データに、型定義上必須の
+`sourceOrganization`フィールドが欠落している既存のスキーマ不整合を発見（本Phaseとは無関係の
+既存課題、今回は変更せず次回以降の課題として記録）。
+
+**Phase129（`ArchiveFiscalYear`のoptional field方式での将来拡張）**：`ArchiveFiscalYear`へ
+完全任意の3フィールドを追加：`dataAvailabilityStatus?`（新設型`ArchiveFiscalYearDataAvailabilityStatus`、
+`reports/phase20-missing-years-status.json`の`statusCategories`語彙と完全一致させ矛盾する
+別語彙は作らなかった）、`dataAvailabilityCheckedAt?`（既存`verifiedAt`とは別軸）、
+`relatedInquiryIds?`（`reports/phase21-inquiry-tracker.json`の`inquiry_id`参照）。
+`validate-data.mjs`へ値が存在する場合のみの検証ロジックを追加。Phase127との競合を避けるため
+`archiveFiscalYears.json`の実データ・既存フィールドの値は一切変更していない。
+
+#### 統合作業（親セッション）
+
+4本のworktreeブランチ（`phase126-dashboard-mobile-ui`／`phase127-finance-mayor-gaps`／
+`phase128-trustlevel-expansion`／`phase129-archivefiscalyear-optional-fields`）を`--no-ff`で
+mainへ順次マージ。`historicalArchive.ts`・`validate-data.mjs`（Phase128・129双方が変更）を
+含め、コンフリクトは一切発生せず全て自動マージされた。マージ後、派生データ
+（`dataQualitySummary.json`・`adminReviewQueue.json`・`archiveAiCategoryCandidates.json`・
+`archiveRelationCandidates.json`・`siteUpdate.json`、いずれも`generatedAt`タイムスタンプ更新のみ）を
+再生成。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=40＝マージ前と同数）／`validate:sources`（errors=0
+warnings=15 info=66）／`validate:finance`（errors=0 warnings=6 info=8）／
+`validate:completeness`（errors=0 warnings=0）／`validate:freshness`（errors=0 warnings=0）／
+`validate:political-funds`（errors=0 warnings=0 info=2）／`typecheck`／`lint`／`test`（26/26）／
+`build`（2240/2240ルート prerender、`validate:seo` 2241ページ failures=0 warnings=0、
+`validate:content` 2241ページ errors=0 warnings=0）すべて成功。
+
+完了記録：
+- 完了日：2026-08-25
+- Phase125事前確認：Cloudflare Pages Production最新デプロイがコミット`7ffdb04`であることを
+  `wrangler pages deployment list`・本番URL確認で検証済み。
+- 変更概要：上記のとおり。`/dashboard`モバイルUI静的確認（Chrome未接続のため実機確認は
+  未実施と明記）、財政欠落24年度・市長任期空白13区間の正確な件数再確認と宮崎県文書センター
+  新規候補資料発見（数値未確定のためデータ追加なし）、trustLevelの主要データ型への展開と
+  実データ25件へのパイロット付与、ArchiveFiscalYearのoptional field方式拡張を実施した。
+  既存の必須フィールド・既存データの値は一切変更していない。推測値・架空データは
+  登録していない。既存UNR（UNR-014/015/029）は根拠なくGREEN化していない。
 
