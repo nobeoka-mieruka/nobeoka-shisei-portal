@@ -1045,35 +1045,207 @@
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-08-29",
       "notes": "延岡市の学校一覧ページ（既存のcityGuideEntries.json等）には現行の学校のみが掲載されており、2008年度に廃止された旧校名までは遡及確認できていない。優先度は低（現行データへの影響は小さい）。"
+    },
+    {
+      "unresolvedId": "UNR-034",
+      "category": "finance",
+      "subcategory": "generalAccountInitialBudgetYen-FY2001-2011",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "平成13年度〜23年度（FY2001-2011）",
+      "description": "一般会計当初予算額（ArchiveBudget.generalAccountInitialBudgetYen）がFY2001-2011の全11年度で未登録。TASK-178監査（archiveFiscalYears.json全70年度の機械集計）で確認したところ、このフィールドは全70年度中FY1933の1件を除き未登録であり、既存の主要出典（総務省市町村決算カード・広報のべおか決算特集・財政状況資料集）はいずれも決算額（歳入歳出総額）中心で、当初予算額の掲載有無をFY2001-2011について個別確認できていない。延岡市史(市制80周年記念10年史)第2編第6章第2節「市財政のすう勢」表1〜3（4386.pdf pdfPage128-151、冊子p.172-195）が平成13〜23年度の一般会計歳入歳出決算等の詳細統計表を持つことはTASK-174/175（shishi-005）で確認済みだが、表の項目が決算額のみか当初予算額も含むかは未精読。",
+      "currentStatus": "not_collected",
+      "priority": "C",
+      "evidenceLevel": "Level0（対象資料の該当項目掲載有無自体が未確認）",
+      "sourceRefs": [
+        {
+          "label": "延岡市史(市制80周年記念10年史)第2編第6章第2節「市財政のすう勢」表1〜3",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4386.pdf#page=128"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "src/data/archiveFiscalYears.json（TASK-178監査、2026-08-29、全70年度の機械集計でgeneralAccountInitialBudgetYen非null年度がFY1933のみであることを確認）",
+        "reports/phase157-shishi-research/shishi-index.json（shishi-005、TASK-174で章・節・ページを特定済み、逐一照合は未実施）"
+      ],
+      "alreadyTriedMethods": [
+        "archiveFiscalYears.json全レコードをnode.jsでフィールド単位に集計し、当初予算額の登録状況を年度横断で可視化（TASK-178）"
+      ],
+      "unresolvedReason": "A（一次資料の所在は判明・延岡市公式サイトでオンライン公開中だが、本セッションはリポジトリ外ファイルへ実際にアクセスできない運用制約のため、表の項目内容を確認できていない）",
+      "nextAction": "延岡市史(4386.pdf) pdfPage128-151（冊子p.172-195）第2編第6章第2節 表1〜3を実際に精読し、(1)当初予算額の掲載有無、(2)掲載がある場合は既存のtotalRevenueYen/totalExpenditureYen（決算ベース、決算カード出典）との定義差異を確認したうえでgeneralAccountInitialBudgetYenへ登録する。市史に無い場合は各年度の「広報のべおか」当初予算特集号（5月号系、FY2010以降で実例あり）を延岡市公式サイトの広報バックナンバーから遡って探す。",
+      "nextSourceCandidate": "延岡市史(市制80周年記念10年史) 4386.pdf 第2編第6章第2節、または広報のべおか各年度5月号バックナンバー",
+      "primaryRoute": "A",
+      "secondaryRoute": "D",
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-29",
+      "notes": "TASK-178（延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011監査）で新規発見。既存の欠落年度（FY1951-1953・1959・1983-1987、UNR-014/015）とは別枠で、『年度レコード自体はあるがフィールドが空』という監査軸で見つかった。"
+    },
+    {
+      "unresolvedId": "UNR-035",
+      "category": "finance",
+      "subcategory": "localTaxRevenueYen-FY2001-2008",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "平成13年度〜20年度（FY2001-2008）",
+      "description": "市税収入額（ArchiveBudget.localTaxRevenueYen）がFY2001-2008の8年度で未登録（FY2009-2011は広報のべおか決算特集から登録済み）。FY2001-2008は総務省市町村決算カード（1018-15-2_45.pdf〜1018-15-9_45.pdf、宮崎県版）が既にsourceRefsとして登録済みで、同カードから歳入歳出総額・地方債現在高・基金3区分・財政力指数・経常収支比率を既に抽出できているが、地方税収入額の行は今回のバッチでは抽出対象に含まれていなかった可能性が高い（決算カードは標準様式で地方税の行を含むことが一般的だが、本セッションでは原本を直接確認できないため断定はしない）。",
+      "currentStatus": "not_collected",
+      "priority": "B",
+      "evidenceLevel": "Level0（決算カード内の該当行の有無を今回未確認）",
+      "sourceRefs": [
+        {
+          "label": "総務省「平成13〜20年度市町村決算カード」宮崎県（延岡市シート、archiveFiscalYears.json既存sourceRefs）",
+          "url": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "src/data/archiveFiscalYears.json（TASK-178監査、2026-08-29、FY2001-2008のbudget.localTaxRevenueYenが全てnullであることを確認）"
+      ],
+      "alreadyTriedMethods": [
+        "archiveFiscalYears.json全レコードのフィールド単位集計（TASK-178）でFY2001-2008とFY2009-2011の間の登録状況の不整合を検出"
+      ],
+      "unresolvedReason": "B（既存sourceRefsに登録済みの決算カードPDF自体を再度読み込み、地方税の行を追加抽出すれば解決できる可能性が高いが、本セッションでは実施していない）",
+      "nextAction": "既存sourceRefsの決算カードPDF（1018-15-2_45.pdf〜1018-15-9_45.pdf）をpdfjs-dist等で再解析し、地方税の行（ラベル「地方税」）を特定してlocalTaxRevenueYenへ登録する。同じバッチでnationalSubsidiesYen・prefecturalSubsidiesYen・localAllocationTaxYenの行も抽出できないか確認する。",
+      "nextSourceCandidate": "総務省市町村決算カード（既存sourceRefsのURLを再利用、新規URL探索は不要）",
+      "primaryRoute": "B",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-29",
+      "notes": "TASK-178で新規発見。延岡市史のデータでは代替できない（延岡市史は歳入歳出決算の総額表であり、内訳項目〔款別〕までは今回の監査対象外と整理されている）。決算カード再解析という別ルートの方が確実性が高いと判断した。"
+    },
+    {
+      "unresolvedId": "UNR-036",
+      "category": "finance",
+      "subcategory": "municipalBondIssuanceYen-FY2001-2008",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "平成13年度〜20年度（FY2001-2008）",
+      "description": "市債発行額（フロー、ArchiveDebt.municipalBondIssuanceYen）がFY2001-2008の8年度で未登録（municipalBondIssuanceStatusもnullのまま）。FY2009-2011は広報のべおか決算特集の円グラフから登録済み。FY2001-2008は同じ総務省市町村決算カードが既にsourceRefsとして登録済みで、市債残高（ordinaryAccountLocalBondBalanceYen）は抽出済みだが、発行額（フロー）の行は今回のバッチでは抽出対象に含まれていなかった可能性が高い。",
+      "currentStatus": "not_collected",
+      "priority": "B",
+      "evidenceLevel": "Level0（決算カード内の該当行の有無を今回未確認）",
+      "sourceRefs": [
+        {
+          "label": "総務省「平成13〜20年度市町村決算カード」宮崎県（延岡市シート、archiveFiscalYears.json既存sourceRefs）",
+          "url": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "src/data/archiveFiscalYears.json（TASK-178監査、2026-08-29、FY2001-2008のdebt.municipalBondIssuanceYenが全てnullであることを確認）"
+      ],
+      "alreadyTriedMethods": [
+        "archiveFiscalYears.json全レコードのフィールド単位集計（TASK-178）でFY2001-2008とFY2009-2011の間の登録状況の不整合を検出"
+      ],
+      "unresolvedReason": "B（既存sourceRefsに登録済みの決算カードPDF自体を再度読み込み、市債発行額の行を追加抽出すれば解決できる可能性が高いが、本セッションでは実施していない）",
+      "nextAction": "既存sourceRefsの決算カードPDF（1018-15-2_45.pdf〜1018-15-9_45.pdf）を再解析し、市債発行額の行を特定してmunicipalBondIssuanceYen（municipalBondIssuanceValueType=\"settlement\"、municipalBondIssuanceStatus=\"settlementConfirmed\"）へ登録する。UNR-035（地方税）と同一PDF・同一バッチで対応可能。",
+      "nextSourceCandidate": "総務省市町村決算カード（既存sourceRefsのURLを再利用、新規URL探索は不要）",
+      "primaryRoute": "B",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-29",
+      "notes": "TASK-178で新規発見。UNR-035と同一の決算カードPDF群を出典とするため、同一バッチでの解決を推奨する。"
+    },
+    {
+      "unresolvedId": "UNR-037",
+      "category": "finance",
+      "subcategory": "fundBalanceBreakdown-FY2009-2011",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "平成21年度〜23年度（FY2009-2011）",
+      "description": "基金の内訳（財政調整基金fiscalReserveFundYen・減債基金bondRedemptionFundYen・その他特定目的基金otherSpecificPurposeFundsYen）がFY2009-2011の3年度で未登録（合計額totalYenのみ広報のべおかのグラフから登録済み）。FY2001-2008は同じ内訳3区分が総務省市町村決算カードから登録済み。FY2009-2011についても、finance（健全化判断比率）セクションで既に同年度の決算カードPDF（1018-15-10_45.pdf〜1018-15-12_45.pdf）をsourceRefsとして参照・抽出済みであり、FY2001-2008で使えた同一様式の基金3区分の行がこれらのPDFにも存在する可能性が高い。",
+      "currentStatus": "not_collected",
+      "priority": "B",
+      "evidenceLevel": "Level0（決算カード内の該当行の有無を今回未確認）",
+      "sourceRefs": [
+        {
+          "label": "総務省「平成21〜23年度市町村決算カード」宮崎県（延岡市シート、archiveFiscalYears.json finance.sourceRefsに既存登録）",
+          "url": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-10_45.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "src/data/archiveFiscalYears.json（TASK-178監査、2026-08-29、FY2009-2011のfund.balance.fiscalReserveFundYen等3区分が全てnullであることを確認。同年finance.sourceRefsに決算カードURLが既に存在することも確認）"
+      ],
+      "alreadyTriedMethods": [
+        "archiveFiscalYears.json全レコードのフィールド単位集計（TASK-178）でFY2001-2008（内訳あり・合計なし）とFY2009-2011（合計あり・内訳なし）の間のデータ形式不整合を検出"
+      ],
+      "unresolvedReason": "B（同年度のfinanceセクションで既に引用済みの決算カードPDFを、fundセクション用に再解析すれば解決できる可能性が高いが、本セッションでは実施していない）",
+      "nextAction": "既存sourceRefsの決算カードPDF（1018-15-10_45.pdf〜1018-15-12_45.pdf）を再解析し、基金3区分（財調・減債・特定目的）の行を抽出してFY2009-2011のfund.balanceへ登録する。抽出できた場合、広報のべおか由来の既存totalYen（一般・特別・企業会計合計）とは集計範囲が異なる可能性があるため、definitionNoteで両者の関係を明記すること。",
+      "nextSourceCandidate": "総務省市町村決算カード（既存finance.sourceRefsのURLを再利用、新規URL探索は不要）",
+      "primaryRoute": "B",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": true,
+      "lastCheckedAt": "2026-08-29",
+      "notes": "TASK-178で新規発見。既存totalYen（広報のべおか、一般・特別・企業会計合計）と決算カードの基金3区分（普通会計ベースの可能性）は集計範囲が異なる場合があるため、単純合算での整合性チェックはせず、登録時にdefinitionNoteへ明記する運用とする。"
+    },
+    {
+      "unresolvedId": "UNR-038",
+      "category": "finance",
+      "subcategory": "fundBalanceTotal-FY2001-2008",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "平成13年度〜20年度（FY2001-2008）",
+      "description": "基金合計額（ArchiveFundBalance.totalYen）がFY2001-2008の8年度で未登録。既存notesに『基金合計（totalYen）はカード上に合計行が無いため算出しない』と明記されており、総務省市町村決算カードには合計行自体が無いことを既に確認済み（推定合算は行わない方針のため、内訳3区分の単純合計もtotalYenへは転記していない）。FY2009-2011は広報のべおかの棒グラフから合計額（一般・特別・企業会計合計）を登録済みだが、集計範囲がFY2001-2008の決算カード内訳（普通会計ベースの可能性）と異なる可能性があり単純比較できない。",
+      "currentStatus": "not_collected",
+      "priority": "C",
+      "evidenceLevel": "Level1（決算カードに合計行が無いことは確認済み、代替資料は未特定）",
+      "sourceRefs": [
+        {
+          "label": "延岡市史(市制80周年記念10年史)第2編第6章第2節「市財政のすう勢」表1〜3",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4386.pdf#page=128"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "src/data/archiveFiscalYears.json（既存notes、決算カードに合計行が無いことを過去のフェーズで確認済み）",
+        "reports/phase157-shishi-research/shishi-index.json（shishi-005、市有財産・市税負担状況とあわせ財政統計表の存在は確認済みだが基金残高表の有無は未確認）"
+      ],
+      "alreadyTriedMethods": [
+        "決算カード内の合計行の有無を過去フェーズで確認済み（既存notesに記載）"
+      ],
+      "unresolvedReason": "A/D（決算カードでは解決不可と判明済みのため、延岡市史の統計表〔市有財産の一部として基金残高表を含む可能性〕、または広報のべおかFY2001-2008当時のバックナンバー〔Web Archive等〕を新たに確認する必要がある）",
+      "nextAction": "延岡市史(4386.pdf) pdfPage128-151（冊子p.172-195）第2編第6章第2節 表1〜3に基金残高の合計値が含まれるか確認する。含まれない場合、広報のべおかFY2001-2008当時の決算特集号（Internet Archive等）を探す。いずれも確認できない場合、内訳3区分の単純合計を『参考値（推定合算）』として独自算出することの是非を別途検討する（CLAUDE.mdの推測値禁止方針との整合を要確認）。",
+      "nextSourceCandidate": "延岡市史(市制80周年記念10年史) 4386.pdf 第2編第6章第2節、またはInternet Archive保存の広報のべおかFY2001-2008当時号",
+      "primaryRoute": "A",
+      "secondaryRoute": "D",
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-29",
+      "notes": "TASK-178で新規発見。UNR-035〜037（決算カード再解析で解決見込み）とは異なり、決算カードでは解決できないことが既に判明している点に注意。優先度は他のfinance系UNRより低い（合計値は内訳3区分から利用者側で計算可能であり、表示上の支障は小さいため）。"
     }
   ],
   "summary": {
-    "totalItems": 33,
+    "totalItems": 38,
     "byRoute": {
       "E": 8,
       "C": 4,
-      "B": 9,
+      "B": 12,
       "D": 3,
       "F": 8,
-      "A": 1
+      "A": 3
     },
     "byPriority": {
       "A": 15,
-      "B": 9,
-      "C": 9
+      "B": 12,
+      "C": 11
     },
     "byStatus": {
       "disputed": 3,
       "unconfirmed": 5,
       "partially_resolved": 5,
-      "not_collected": 8,
+      "not_collected": 13,
       "under_review": 2,
       "reference_pending": 6,
       "resolved": 4
     },
     "requiresOnsite": 10,
     "requiresInquiry": 12,
-    "requiresBulkBackfill": 12,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。"
+    "requiresBulkBackfill": 15,
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。"
   }
 }
