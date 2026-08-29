@@ -9740,3 +9740,85 @@ PDF版あり」）と目次の最終項目（あとがき…888ページ）か�
   json・archiveMayorTerms.json・blockedTaskClassification.json・UNR台帳・TASKS.md・PROJECT_PLAN.
   md・updateHistory.json・.gitignore）の表記を「市制」へ機械的に一括修正した（データの値・日付・
   出典URL自体は変更していない、表記の正確性向上のみ）。
+
+---
+
+### TASK-176〜180 延岡市史(TASK-174・175)成果の統合フェーズ（ユーザー指示）
+
+状態：DONE（2026-08-29）
+優先度：A（ユーザー指示）
+対象：`src/data/archiveCouncilLeadership.json`（新規）、`src/types/historicalArchive.ts`、
+`src/pages/CouncilLeadershipHistoryPage.tsx`（新規）、`src/App.tsx`、`src/lib/seo.ts`、
+`scripts/lib/public-routes.mjs`、`scripts/validate-data.mjs`、`src/pages/CommitteesPage.tsx`、
+`src/pages/DataStatusPage.tsx`、`src/data/civicTimelineEvents.json`、
+`reports/phase33-master-unresolved-ledger.json`（UNR-032再分類・UNR-033再分類・
+UNR-034〜038新規）、`reports/phase157-shishi-research/task178-fy2001-2011-audit.md`（新規）、
+`src/data/blockedTaskClassification.json`
+注記：TASK-176・178は子worker（git worktree並列実行）、TASK-177・179は親セッションが直接実施
+（TASK-174・175で読み込んだ延岡市史抽出テキストはGit管理外のローカルファイルのため、独立した
+worktreeを持つworkerからはアクセスできないという制約上の判断。詳細は本エントリのTASK-177・179節
+を参照）。TASK-180は親セッションが176〜179の成果を統合。
+
+**TASK-176（歴代市議会議長・副議長データベース設計・実装、worker）**：既存データ構造（
+`archiveMemberAffiliations.json`等）を調査した結果、日単位の議長・副議長在任期間を保持する
+専用構造が存在しないことを確認し、新規に`ArchiveCouncilLeadershipTerm`型（1933年〜現在の全期間
+を収録可能な汎用構造、`src/types/historicalArchive.ts`）と`archiveCouncilLeadership.json`
+（歴代議長6件・歴代副議長11件、計17件、親セッションが事前に提供した確定ロースターをそのまま
+構造化）を新設した。roleフィールドは既存の日本語文字列命名慣習（"議長"/"副議長"）に合わせた。
+14名中13名を`formerMembers.json`の人物IDと氏名・読みで照合し`memberProfileId`で紐付け（河野治満
+のみ一致なし、髙木益夫は表記揺れを notes に明記の上で紐付け）。新規ページ`/committees/leadership-
+history`を追加し、見出し・収録状況バナーの両方で「2001〜2012年分、確認済み」であることを明示し、
+「議長不在」ではなく「調査中」と表現することで**全期間収録との誤認を防止**した。既存の
+`/committees`ページから入口リンクを追加。矛盾する重複代数「第五十三代 佐藤勉」（親セッションが
+事前調査で発見していた抽出上の疑義）は構造化データに含めなかった。
+
+**TASK-177（延岡市史→市政年表 完全統合監査、親セッション）**：TASK-174・175で読了済みの
+市史全文（ローカル保持の抽出テキスト）を再利用し、既存civicTimelineEvents.json（209件）と
+市制・合併・市長・市議会・行政改革・市役所・福祉・防災等の主要分野で突合した。合併全過程・
+口蹄疫・鳥インフルエンザ・東日本大震災・地域医療を守る条例・消防庁舎・大瀬橋等は既に高精度で
+登録済みで矛盾なしを確認。市政の歴史理解上重要と判断した6件を新規登録（civic-215〜218、いのちの
+杜完成・新生のべおかプロジェクト策定・議員定数改正2件）。副産物として、副議長代数の従来報告
+「10代」が誤りで正しくは「11代」であることを発見・訂正した。
+
+**TASK-178（財政FY2001〜2011完全照合、worker）**：`archiveFiscalYears.json`のFY2001-2011（11
+年度）を監査した結果、**年度レコード自体は全11年度が既存**（TASK-175の判断は年度単位では正しい）
+が、**フィールド単位では70箇所の欠落**（当初予算額11年度・補正後予算額10年度・一般会計単独決算額
+11年度・市債残高一般会計区分11年度・市税収入8年度・基金内訳3区分3年度・基金合計額8年度等）を新規
+発見した。原本市史PDFに本セッションからアクセスできない制約上、架空数値を作らないため新規データ
+追加は0件とし、新規UNR5件（UNR-034〜038）を登録。このうち3件（19セル相当）は延岡市史ではなく
+既存sourceRefs（総務省市町村決算カード）の再解析で埋まる可能性が高いという、より確度の高い代替
+経路も特定した。
+
+**TASK-179（UNR-032・033再分類、親セッション）**：両UNRに`requiredPrecisionForResolution`
+（解決に必要な精度）・`nextActionCandidatesInOrder`（優先順位付き次点資料）・
+`priorityRationale`（優先度の根拠）を追加。UNR-032について、副議長代数の誤集計（10代→11代）を
+発見・訂正し、原本に出現する矛盾する重複代数「第五十三代 佐藤勉」を新たな既知の未解決事項として
+記録した。
+
+**TASK-180（統合・最終品質監査、親セッション）**：worktree 2本を`--no-ff`で順次mainへマージし、
+`reports/phase33-master-unresolved-ledger.json`の実質的な競合（UNR-032の追記内容・UNR-033直後の
+UNR-034挿入位置）を手動解決（自動生成ファイル4件の軽微な競合はタイムスタンプ差分のみで機械的に
+解決）。統合後、`/data-status`に「歴代議長・副議長」のドメイン行が欠けていたことを発見し、既存の
+`councilCommittees`ドメインと同じパターンで追加した（新規データ追加によるトップ・data-status間の
+件数不整合は無いことを確認）。出典粒度（書名・章・節・冊子ページ・URL）・trustLevel（市史で直接
+確認できた分のみPRIMARY）・「全件」誤表示の3点は、いずれもTASK-176実装時点で適切に処理されて
+いることを確認した（追加の是正は不要）。実機UI確認：`list_connected_browsers`で確認したが、Chrome
+拡張は今回も未接続（0件）。静的な prerender済みHTML（`dist/committees/leadership-history/`）の
+内容確認と、既存の検証済みレスポンシブコンポーネント（`SectionCard`・`StatCard`、`max-w-3xl`
+コンテナ、`grid-cols-2 sm:grid-cols-4`等）の再利用によりモバイル崩れは想定していないが、実機
+375/390/430/768/1280pxでの視覚確認は未実施（UI_UNVERIFIED、次回接続可能な環境での実施が必要）。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=40、既存基準と完全一致）／`typecheck`（clean）／`lint`
+（clean）／`test`（26/26）／`build`（2243/2243ルート、`validate:seo` 2244ページ failures=0
+warnings=0、`validate:content` 2244ページ errors=0 warnings=0）すべて成功。
+
+完了記録：
+- 完了日：2026-08-29
+- 変更概要：上記のとおり。歴代議長6件・歴代副議長11件（計17件）の構造化データベースと専用
+  ページを新設、市政年表へ新規6件（civic-213〜218のうち213・214はTASK-175、215〜218はTASK-177）、
+  UNR新規5件（UNR-034〜038）・既存2件の再分類（UNR-032・033）を実施した。既存の確定値・既存の
+  正常なコード・自動更新基盤は一切変更していない。推測によるデータ補完は行っていない。副議長
+  代数の誤集計（10代→11代）を発見・訂正した。財政FY2001-2011のフィールド単位欠落（70箇所）を
+  可視化したが、原本未直接確認のため新規数値追加は0件（正直に報告）。

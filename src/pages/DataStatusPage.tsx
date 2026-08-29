@@ -25,6 +25,7 @@ import { summarizeVoteClassification, countBillsWithKnownProposerType } from "..
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
+import archiveCouncilLeadershipData from "../data/archiveCouncilLeadership.json";
 import type {
   CouncilMember,
   FormerMember,
@@ -37,7 +38,14 @@ import type {
   PoliticalFundOrganization,
   PoliticalFundReport,
 } from "../types";
-import type { ArchiveMayor, ArchiveMayorTerm, ArchiveCouncilDocument, ArchivePolicy, ArchiveFiscalYear } from "../types/historicalArchive";
+import type {
+  ArchiveMayor,
+  ArchiveMayorTerm,
+  ArchiveCouncilDocument,
+  ArchivePolicy,
+  ArchiveFiscalYear,
+  ArchiveCouncilLeadershipTerm,
+} from "../types/historicalArchive";
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
 import type { KohoNobeokaIssue } from "../types/kohoNobeoka";
 import type { ElectionResult } from "../types/election";
@@ -425,6 +433,18 @@ export function DataStatusPage() {
     fullyCovered: committeesWithJurisdiction === committees.length,
   };
 
+  const councilLeadership = archiveCouncilLeadershipData as ArchiveCouncilLeadershipTerm[];
+  const councilLeadershipDomain: DataDomain = {
+    label: "歴代議長・副議長",
+    count: councilLeadership.length,
+    unit: "件",
+    scope: "延岡市史（市制80周年記念10年史）で日単位の在任期間つきで確認できた2001〜2012年分のみ",
+    detail: `歴代議長${councilLeadership.filter((t) => t.role === "議長").length}件（第47〜52代）・歴代副議長${councilLeadership.filter((t) => t.role === "副議長").length}件（第50〜60代）。延岡市議会創設（初代）〜2001年以前、および2012年以降の分は現時点で未収録（「議長不在」ではなく「調査中」）。`,
+    linkTo: "/committees/leadership-history",
+    linkLabel: "歴代議長・副議長を見る",
+    fullyCovered: false,
+  };
+
   // TASK-083：用語をトップページ・ダッシュボード（HomePage.tsx／DashboardPage.tsx）の
   // StatCard labelと完全一致させる（「一般質問（登壇・確認済み件数）」「質問項目数」
   // 「最新会期の予定質問」）。ページごとに別の言い回し（登壇件数／確認済み発言数等）を
@@ -694,6 +714,7 @@ export function DataStatusPage() {
             <DomainRow key={d.label} domain={d} />
           ))}
           <DomainRow domain={councilCommittees} />
+          <DomainRow domain={councilLeadershipDomain} />
         </ul>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           「議決・審査結果確認済み：{resultConfirmedCount}／{archiveCouncilDocuments.length}件」「出典確認済み（verified）：{verifiedDocumentCount}件」（いずれも詳細アーカイブ側の内訳）。議員個人の賛否記録は「議案・採決データベース」側で管理しており、混同していません。
