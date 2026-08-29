@@ -82,7 +82,7 @@ https://www.city.nobeoka.miyazaki.jp/soshiki/13/2786.html
 
 ## 5. 今後の課題
 
-- 財政章（FY2001-2011）と`archiveFiscalYears.json`の逐一照合
+- ~~財政章（FY2001-2011）と`archiveFiscalYears.json`の逐一照合~~ → TASK-178で実施済み（下記6節参照）
 - 年表付録（39頁）の全件イベント抽出と`civicTimelineEvents.json`との網羅的突合（サンプル確認にとどまる）
 - 歴代市議会議長・副議長の構造化データファイル新設の要否検討
 - 延岡市史1963年版・1993年版との相互突合（重複期間・代数表記のずれ等）
@@ -90,3 +90,18 @@ https://www.city.nobeoka.miyazaki.jp/soshiki/13/2786.html
 
 詳細な調査インデックス（PDF名・章・節・PDFページ・冊子ページ・記載内容・対象年代・対象人物・
 対象政策事業・出典URL）は`shishi-index.json`を参照。
+
+## 6. TASK-178フォローアップ（2026-08-29）
+
+上記5節の課題のうち「財政章（FY2001-2011）とarchiveFiscalYears.jsonの逐一照合」を実施。
+詳細は`task178-fy2001-2011-audit.md`を参照。要点：
+
+- FY2001-2011は年度レコード自体は11年度とも既存（「対象期間が既存欠落年度と重ならず」という
+  75行目の記述は年度単位では正しい）。ただし**フィールド単位では11年度合計70箇所の欠落**を新規に検出し、
+  8区分に整理した。
+- うち3区分（市税収入額・市債発行額・基金内訳3区分、計19箇所）は延岡市史ではなく**既存sourceRefs
+  （総務省市町村決算カード）の再解析で埋まる可能性が高い**別の欠落と判明。
+- 延岡市史原本（4386.pdf）へ本セッションから実際にアクセスできないため、新規の数値登録は
+  0件（架空数値防止のため）。UNR-034〜038（計5件）を新規登録し、次フェーズの着手候補として整理。
+- `archiveFiscalYears.json`・`financeDashboard.json`・`similarMunicipalityFinanceComparison.json`
+  への変更は0件。
