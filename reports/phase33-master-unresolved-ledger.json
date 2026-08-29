@@ -985,18 +985,18 @@
       "targetPerson": null,
       "targetFiscalYear": null,
       "targetPeriod": "延岡市議会 歴代議長・副議長（初代〜第46代、議会創設〜2001年ごろ）",
-      "description": "TASK-174（延岡市史横断調査、Phase135〜139）で新規発見。延岡市公式ホームページ「延岡市史(市政80周年記念10年史)」（4386.pdf 第2編第9章第3節）に歴代市議会議長 第47〜52代（2001-05-09〜2011-05-01）・歴代市議会副議長 第50〜60代（2002-05-08〜2012-05-07）が日単位の在任期間つきで掲載されていることを確認したが、これは同書の対象期間（2003-2013年、実質2001年以降）にとどまり、議会創設（延岡市制施行1933年、市議会自体は戦後の地方自治法下で再編）から2001年までの初代〜第46代分は本資料に収録がない。",
+      "description": "TASK-174（延岡市史横断調査、Phase135〜139）で新規発見。延岡市公式ホームページ「延岡市史(市制80周年記念10年史)」（4386.pdf 第2編第9章第3節）に歴代市議会議長 第47〜52代（2001-05-09〜2011-05-01）・歴代市議会副議長 第50〜60代（2002-05-08〜2012-05-07）が日単位の在任期間つきで掲載されていることを確認したが、これは同書の対象期間（2003-2013年、実質2001年以降）にとどまり、議会創設（延岡市制施行1933年、市議会自体は戦後の地方自治法下で再編）から2001年までの初代〜第46代分は本資料に収録がない。",
       "currentStatus": "not_collected",
       "priority": "B",
       "evidenceLevel": "Level0（2001年以降は市史で確認済み、それ以前は情報源未特定）",
       "sourceRefs": [
         {
-          "label": "延岡市史(市政80周年記念10年史)第2編第9章第3節「歴代市議会議長」「歴代市議会副議長」冊子p.236-239",
+          "label": "延岡市史(市制80周年記念10年史)第2編第9章第3節「歴代市議会議長」「歴代市議会副議長」冊子p.236-239",
           "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4386.pdf#page=192"
         }
       ],
       "alreadyCheckedSources": [
-        "延岡市史(市政80周年記念10年史) 4386.pdf（2001年以降分は確認済み、収録範囲外の年代は0件）"
+        "延岡市史(市制80周年記念10年史) 4386.pdf（2001年以降分は確認済み、収録範囲外の年代は0件）"
       ],
       "alreadyTriedMethods": [
         "TASK-174で4386.pdf全234ページのテキスト抽出・目視確認（Phase135〜139横断調査の一部）"
@@ -1011,35 +1011,69 @@
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-08-29",
       "notes": "ポータル側に歴代議長・副議長を保持する構造化データファイルが現時点で存在しないため、2001年以降分（市史で確認済み）についても今回はデータ投入せず、まず本UNR登録とTASK-101（blockedTaskClassification.json）への追記にとどめた。新規データファイル新設の要否は次フェーズで検討する。"
+    },
+    {
+      "unresolvedId": "UNR-033",
+      "category": "education",
+      "subcategory": "schoolMergerDetail",
+      "targetPerson": null,
+      "targetFiscalYear": 2008,
+      "targetPeriod": "平成20年度（2008年度）の小学校統合（3校）",
+      "description": "TASK-175（延岡市史横断調査）で新規発見。延岡市史(市制80周年記念10年史)第5編第2章第4節に「北方町・北浦町・北川町との合併に伴い、一一校増加したが、平成二十年（二〇〇八）三校を統合し、二十四年（二〇一二）度現在、分校を含め三一校となった」との記載を確認したが、統合された具体的な3校名・統合先校名は本資料に記載がない。",
+      "currentStatus": "not_collected",
+      "priority": "C",
+      "evidenceLevel": "Level0（統合の事実と年度のみ確認、対象校名は未確認）",
+      "sourceRefs": [
+        {
+          "label": "延岡市史(市制80周年記念10年史)第5編第2章第4節「学校等一覧」二 小学校",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4389.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "延岡市史(市制80周年記念10年史) 4389.pdf（対象校名の記載なし）"
+      ],
+      "alreadyTriedMethods": [
+        "TASK-175で4389.pdf全136ページのテキスト抽出・目視確認"
+      ],
+      "unresolvedReason": "A（一次資料に記載自体がない：件数・年度のみの記載で個別校名は未記載）",
+      "nextAction": "延岡市教育委員会または延岡市統計書（学校基本調査、平成20年度版）で、統合対象となった3小学校・統合後の校名を確認する",
+      "nextSourceCandidate": "延岡市教育委員会学校教育課、延岡市統計書（各年度）",
+      "primaryRoute": "D",
+      "secondaryRoute": "E",
+      "requiresOnsite": false,
+      "requiresInquiry": true,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-29",
+      "notes": "延岡市の学校一覧ページ（既存のcityGuideEntries.json等）には現行の学校のみが掲載されており、2008年度に廃止された旧校名までは遡及確認できていない。優先度は低（現行データへの影響は小さい）。"
     }
   ],
   "summary": {
-    "totalItems": 32,
+    "totalItems": 33,
     "byRoute": {
       "E": 8,
       "C": 4,
       "B": 9,
-      "D": 2,
+      "D": 3,
       "F": 8,
       "A": 1
     },
     "byPriority": {
       "A": 15,
       "B": 9,
-      "C": 8
+      "C": 9
     },
     "byStatus": {
       "disputed": 3,
       "unconfirmed": 5,
       "partially_resolved": 5,
-      "not_collected": 7,
+      "not_collected": 8,
       "under_review": 2,
       "reference_pending": 6,
       "resolved": 4
     },
     "requiresOnsite": 10,
-    "requiresInquiry": 11,
+    "requiresInquiry": 12,
     "requiresBulkBackfill": 12,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市政80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。"
   }
 }
