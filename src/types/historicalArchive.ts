@@ -177,6 +177,52 @@ export interface ArchiveMayorTerm {
   notes?: string;
 }
 
+/** 議会内役職（議長・副議長）の区分。将来、仮議長等の区分を追加する可能性を考慮しリテラルユニオンとする。 */
+export type ArchiveCouncilLeadershipRole = "議長" | "副議長";
+
+/**
+ * 歴代議長・副議長1件分（src/data/archiveCouncilLeadership.json、TASK-176で新設）。
+ *
+ * 延岡市公式ホームページが公開する「延岡市史（市制80周年記念10年史）」第2編第9章第3節
+ * 「議員と正副議長」（4386.pdf、冊子p.236-239）に、日単位の在任期間つきで掲載された
+ * 歴代市議会議長・副議長の表を構造化したもの。既存の ArchiveMemberAffiliation
+ * （affiliationType: "councilRole"、会議録から個別に発言者表記を確認した「その日在任していた」
+ * 断片的な記録）とは別の、公式の代替わり表そのものを出典とする一次データであり、両者は
+ * 重複登録しない（affiliationTypeベースの断片記録はarchiveMemberAffiliations.jsonに残す）。
+ *
+ * 1933年の延岡市制施行〜現在の全期間を将来収録できる汎用構造としているが、2026年8月時点の
+ * 実データは第2編第9章第3節の対象期間（2001年〜2012年、歴代議長47〜52代・歴代副議長50〜60代）
+ * のみである。それ以前（初代〜第46代の議長、第49代以前の副議長）・それ以降（第53代以降の議長、
+ * 第61代以降の副議長）は「未収録・調査中」であり、「議長不在期間」ではない（推測で埋めない。
+ * reports/phase33-master-unresolved-ledger.jsonのUNR-032参照）。
+ *
+ * termStart/termEndは、代替わり（改選）が行われた当日を、退任側のtermEndと就任側のtermStartの
+ * 双方に含める資料側の記載慣行をそのまま転記しているため、前後の記録で日付が一致する場合がある
+ * （二重在任やデータ誤りではない。scripts/validate-data.mjsの重複期間チェックもこれを許容する）。
+ *
+ * ordinal（代数）は資料記載の代数をそのまま転記する。同一人物が代数を変えて重任する場合がある
+ * （例：稲田和利は第49代・第52代の議長を2度務めた）ため、氏名ではなく role+ordinal の組み合わせで
+ * 1件を一意に識別する。
+ */
+export interface ArchiveCouncilLeadershipTerm {
+  id: string;
+  role: ArchiveCouncilLeadershipRole;
+  ordinal: number;
+  name: string;
+  nameKana?: string;
+  termStart: string;
+  /** 資料上「至現在」（発刊時点で在任中）等、確定した退任日が資料からは確認できない場合はnull。
+   * 実際の退任日として架空の値を設定しないこと。 */
+  termEnd: string | null;
+  /** 現職議員（members.json）・元議員（formerMembers.json）と同一人物と公式資料で確認できた場合のみ、
+   * archiveMemberProfiles.jsonのidを設定する。名前の表記揺れ・同姓同名の可能性がある場合は
+   * 無理に紐付けない（未設定＝未確認、0件と区別する）。 */
+  memberProfileId?: string;
+  sourceRefs: ArchiveSourceRef[];
+  notes?: string;
+  lastVerifiedAt: string;
+}
+
 /**
  * 市債残高は資料ごとに定義が異なるため、区分ごとに別フィールドで保持する。
  * 異なる定義の数値を同一グラフで直接比較しないこと（UI実装時の注意）。

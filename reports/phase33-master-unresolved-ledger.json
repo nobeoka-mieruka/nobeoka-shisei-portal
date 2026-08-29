@@ -1010,7 +1010,7 @@
       "requiresInquiry": true,
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-08-29",
-      "notes": "ポータル側に歴代議長・副議長を保持する構造化データファイルが現時点で存在しないため、2001年以降分（市史で確認済み）についても今回はデータ投入せず、まず本UNR登録とTASK-101（blockedTaskClassification.json）への追記にとどめた。新規データファイル新設の要否は次フェーズで検討する。"
+      "notes": "ポータル側に歴代議長・副議長を保持する構造化データファイルが現時点で存在しないため、2001年以降分（市史で確認済み）についても今回はデータ投入せず、まず本UNR登録とTASK-101（blockedTaskClassification.json）への追記にとどめた。新規データファイル新設の要否は次フェーズで検討する。 【2026-08-29追記（TASK-176）】新設した src/data/archiveCouncilLeadership.json（型: ArchiveCouncilLeadershipTerm、src/types/historicalArchive.ts）へ、市史で確認済みの2001〜2012年分（歴代市議会議長6件・歴代市議会副議長11件、計17件）のデータ投入を完了し、/committees/leadership-history ページで公開した。本UNRが対象とする初代〜第46代（議会創設〜2001年ごろ）分は未収録のまま（currentStatus=not_collectedのまま変更なし）。また、市史原本には本表の直後に「第五十三代 佐藤勉 自2011-05-12 至現在」という記載が別途出現するが、この代数（53代）は既に湯浅啓祐（本表内で第53代として記載）に割り当て済みで矛盾する重複であり、開始日が第59代髙木益夫の就任日と完全一致する。PDFテキスト抽出時のレイアウト起因の誤り（写真キャプション等の混入）が強く疑われるが確定できないため、推測で代数を修正せず、この1件は構造化データに含めていない。"
     },
     {
       "unresolvedId": "UNR-033",
