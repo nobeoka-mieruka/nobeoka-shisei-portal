@@ -26,6 +26,15 @@ backups/
 # docs/council-speech-summary-pipeline.md 参照）
 data/minutes/
 
+# TASK-174: 延岡市史（市政80周年記念10年史、延岡市総務部総務課編）のPDF原本・pdfjsテキスト
+# 抽出結果のローカル作業ファイル（上記と同じ理由＝公式刊行物の著作物をそのまま複製・再配布
+# しない方針のため、Git管理しない。要約・出典ページ番号はreports/phase157-shishi-research/
+# shishi-index.json・README.mdへ構造化して記録している）
+reports/phase157-shishi-research/pdf/
+reports/phase157-shishi-research/extracted/
+reports/phase157-shishi-research/*-raw.txt
+reports/phase157-shishi-research/toc-full.txt
+
 # scripts/lib/minutes-source.mjs のHTTP取得結果ローカルキャッシュ（同一URL再取得防止）
 scripts/.cache/
 
