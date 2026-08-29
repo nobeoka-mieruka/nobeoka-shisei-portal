@@ -621,6 +621,22 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/committees/leadership-history":
+      return makeResult(
+        {
+          path: "/committees/leadership-history",
+          pageTitle: "歴代議長・副議長（2001〜2012年分）",
+          description:
+            "延岡市議会の歴代議長・副議長を、延岡市公式ホームページが公開する延岡市史（市制80周年記念10年史）に基づいて整理しています。現時点では2001〜2012年分（議長6件・副議長11件）のみの収録で、それ以前・それ以降は調査中です。",
+          breadcrumbs: [
+            { label: "ホーム", to: "/" },
+            { label: "委員会一覧", to: "/committees" },
+            { label: "歴代議長・副議長" },
+          ],
+        },
+        options,
+      );
+
     case "/elections":
       return makeResult(
         {

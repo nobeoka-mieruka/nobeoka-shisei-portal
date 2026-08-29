@@ -102,6 +102,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/council-activity/history",
   "/political-funds",
   "/committees",
+  "/committees/leadership-history",
   "/history",
   "/compare/municipalities",
   "/compare/similar-municipalities",
@@ -158,6 +159,7 @@ function loadData() {
   const politicalFundReports = readJson("src/data/politicalFundReports.json");
   const citySpecialPosts = readJson("src/data/citySpecialPosts.json");
   const committees = readJson("src/data/committees.json");
+  const archiveCouncilLeadership = readJson("src/data/archiveCouncilLeadership.json");
   const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
   const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
   const municipalityComparisons = readJson("src/data/municipalityComparison.json");
@@ -191,6 +193,7 @@ function loadData() {
     politicalFundReports,
     citySpecialPosts,
     committees,
+    archiveCouncilLeadership,
     committeeActivityReports,
     civicTimelineEvents,
     municipalityComparisons,
@@ -431,6 +434,12 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.committees.map((c) => c.lastVerifiedAt))],
         ["src/data/committees.json"],
+      );
+    case "/committees/leadership-history":
+      return resolveLastmod(
+        path,
+        [maxValidDate(data.archiveCouncilLeadership.map((t) => t.lastVerifiedAt))],
+        ["src/data/archiveCouncilLeadership.json"],
       );
     case "/history":
       return resolveLastmod(

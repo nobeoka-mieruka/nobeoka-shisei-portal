@@ -2060,6 +2060,77 @@ try {
   else throw e;
 }
 
+// --- archiveCouncilLeadership.json（延岡市政アーカイブ：歴代議長・副議長） ---
+try {
+  const archiveCouncilLeadership = readJson("src/data/archiveCouncilLeadership.json");
+  if (!Array.isArray(archiveCouncilLeadership)) throw new Error("配列ではありません");
+
+  checkDuplicateIds({ err, warn }, archiveCouncilLeadership, "id", "archiveCouncilLeadership.json");
+
+  const COUNCIL_LEADERSHIP_ROLES = new Set(["議長", "副議長"]);
+  for (const t of archiveCouncilLeadership) {
+    const tag = `archiveCouncilLeadership.json (${t.id ?? "id不明"})`;
+    if (!COUNCIL_LEADERSHIP_ROLES.has(t.role)) err(tag, `未定義のroleです: ${t.role}`);
+    if (typeof t.ordinal !== "number" || !Number.isInteger(t.ordinal) || t.ordinal <= 0) {
+      err(tag, `ordinalが正の整数ではありません: ${t.ordinal}`);
+    }
+    if (isBlank(t.name)) err(tag, "nameが空です");
+    checkPeriodConsistency({ err }, t.termStart, t.termEnd, tag);
+    checkReferenceExists(
+      { err, warn },
+      t.memberProfileId,
+      archiveMemberProfileIds,
+      tag,
+      `存在しない議員プロフィールIDを参照しています: ${t.memberProfileId}`,
+    );
+    checkSourceRefs({ err, warn }, t.sourceRefs, tag);
+    requireAtLeastOneSourceRef({ err }, t.sourceRefs, tag);
+    if (!t.lastVerifiedAt || !DATE_RE.test(t.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${t.lastVerifiedAt}`);
+  }
+
+  // role+ordinalの組み合わせが重複していないか（同じ代数の議長・副議長を二重登録していないか）を確認する。
+  const seenRoleOrdinal = new Set();
+  for (const t of archiveCouncilLeadership) {
+    const key = `${t.role}::${t.ordinal}`;
+    const tag = `archiveCouncilLeadership.json (${t.id ?? "id不明"})`;
+    if (seenRoleOrdinal.has(key)) err(tag, `role・ordinalの組み合わせが重複しています: ${t.role} 第${t.ordinal}代`);
+    else seenRoleOrdinal.add(key);
+  }
+
+  // 同一役職（議長／副議長）内で在任期間が重複していないかを確認する。ただし、代替わり（改選）の
+  // 当日を退任側termEnd・就任側termStartの双方に含める資料側の記載慣行があるため（型定義コメント
+  // src/types/historicalArchive.ts の ArchiveCouncilLeadershipTerm 参照）、標準のcheckNoOverlappingPeriods
+  // （同日を重複とみなす）は使わず、「開始日が前任者の終了日より前」の場合のみを重複として検出する。
+  const byLeadershipRole = new Map();
+  for (const t of archiveCouncilLeadership) {
+    if (!COUNCIL_LEADERSHIP_ROLES.has(t.role)) continue;
+    if (!byLeadershipRole.has(t.role)) byLeadershipRole.set(t.role, []);
+    byLeadershipRole.get(t.role).push(t);
+  }
+  for (const records of byLeadershipRole.values()) {
+    const sorted = [...records].sort((a, b) => String(a.termStart ?? "").localeCompare(String(b.termStart ?? "")));
+    for (let i = 1; i < sorted.length; i++) {
+      const prev = sorted[i - 1];
+      const cur = sorted[i];
+      if (
+        prev.termEnd &&
+        cur.termStart &&
+        DATE_RE.test(prev.termEnd) &&
+        DATE_RE.test(cur.termStart) &&
+        cur.termStart < prev.termEnd
+      ) {
+        err(
+          `archiveCouncilLeadership.json (${cur.id ?? "id不明"})`,
+          `在任期間が前の記録（${prev.id ?? "id不明"}）と重複しています`,
+        );
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("archiveCouncilLeadership.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- archivePolicyCategories.json / archivePolicies.json / archivePolicyQuestionRelations.json /
 //     archivePolicyFiscalRelations.json（延岡市政アーカイブ：政策） ---
 let archivePolicyCategoryIds = new Set();

@@ -46,6 +46,9 @@ const CommitteesPage = lazy(() => import("./pages/CommitteesPage").then((m) => (
 const CommitteeDetailPage = lazy(() =>
   import("./pages/CommitteeDetailPage").then((m) => ({ default: m.CommitteeDetailPage })),
 );
+const CouncilLeadershipHistoryPage = lazy(() =>
+  import("./pages/CouncilLeadershipHistoryPage").then((m) => ({ default: m.CouncilLeadershipHistoryPage })),
+);
 const ElectionsPage = lazy(() => import("./pages/ElectionsPage").then((m) => ({ default: m.ElectionsPage })));
 const ElectionDetailPage = lazy(() =>
   import("./pages/ElectionDetailPage").then((m) => ({ default: m.ElectionDetailPage })),
@@ -259,6 +262,7 @@ function App() {
               <Route path="/political-funds" element={<PoliticalFundsPage />} />
               <Route path="/political-funds/:id" element={<PoliticalFundOrganizationDetailPage />} />
               <Route path="/committees" element={<CommitteesPage />} />
+              <Route path="/committees/leadership-history" element={<CouncilLeadershipHistoryPage />} />
               <Route path="/committees/:id" element={<CommitteeDetailPage />} />
               <Route path="/elections" element={<ElectionsPage />} />
               <Route path="/elections/:id" element={<ElectionDetailPage />} />
