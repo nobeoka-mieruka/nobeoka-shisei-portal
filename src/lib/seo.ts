@@ -20,6 +20,7 @@ import mayorPromisesData from "../data/mayorPromises.json";
 import financeDashboardData from "../data/financeDashboard.json";
 import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
 import compensationComparisonData from "../data/compensationComparison.json";
+import archiveCouncilLeadershipData from "../data/archiveCouncilLeadership.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
@@ -52,6 +53,7 @@ import type {
 import type {
   ArchiveCouncilDocument,
   ArchiveCouncilDocumentType,
+  ArchiveCouncilLeadershipTerm,
   ArchiveMayor,
   ArchiveMemberProfile,
   ArchivePolicy,
@@ -106,6 +108,7 @@ const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
 const compensationComparison = compensationComparisonData as CompensationComparisonEntry[];
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
+const archiveCouncilLeadership = archiveCouncilLeadershipData as ArchiveCouncilLeadershipTerm[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
@@ -626,8 +629,7 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         {
           path: "/committees/leadership-history",
           pageTitle: "歴代議長・副議長（2001〜2012年分）",
-          description:
-            "延岡市議会の歴代議長・副議長を、延岡市公式ホームページが公開する延岡市史（市制80周年記念10年史）に基づいて整理しています。現時点では2001〜2012年分（議長6件・副議長11件）のみの収録で、それ以前・それ以降は調査中です。",
+          description: `延岡市議会の歴代議長・副議長を、延岡市公式ホームページが公開する延岡市史（市制80周年記念10年史）に基づいて整理しています。現時点では2001〜2012年分（議長${archiveCouncilLeadership.filter((t) => t.role === "議長").length}件・副議長${archiveCouncilLeadership.filter((t) => t.role === "副議長").length}件）のみの収録で、それ以前・それ以降は調査中です。`,
           breadcrumbs: [
             { label: "ホーム", to: "/" },
             { label: "委員会一覧", to: "/committees" },

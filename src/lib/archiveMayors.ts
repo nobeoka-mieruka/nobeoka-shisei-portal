@@ -19,6 +19,38 @@ export function termsForMayor(terms: ArchiveMayorTerm[], mayorId: string): Archi
 }
 
 /**
+ * Phase135：どの市長の任期にも属さない空白期間を検出する。
+ * scripts/validate-data.mjsとMayorsPage.tsxで同じ検出ロジックを個別に実装しており、
+ * MayorsPage側は件数を「13件」等の固定文言でハードコードしていたため、この共通関数へ
+ * 一本化した（データが更新されて空白期間の件数が変わっても、両者が自動的に一致するように
+ * するため）。退任日の翌日に次の任期が始まる場合（termEndを含む日まで在職）は空白ではない
+ * ため、日付を1日進めてから比較する。
+ * @param todayIso 呼び出し元の「今日」（JST基準のYYYY-MM-DD）。ビルド時とクライアント実行時で
+ *   ずれる可能性があるため、呼び出し元が明示的に渡す。
+ */
+export function findMayorTermGaps(
+  terms: ArchiveMayorTerm[],
+  todayIso: string,
+): { from: string; to: string }[] {
+  if (terms.length === 0 || !terms.every((t) => /^\d{4}-\d{2}-\d{2}$/.test(t.termStart))) return [];
+  const nextDay = (iso: string) => {
+    const d = new Date(`${iso}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() + 1);
+    return d.toISOString().slice(0, 10);
+  };
+  const sortedByStart = [...terms].sort((a, b) => a.termStart.localeCompare(b.termStart));
+  let coveredUntil = sortedByStart[0].termStart;
+  const gaps: { from: string; to: string }[] = [];
+  for (const t of sortedByStart) {
+    if (t.termStart > nextDay(coveredUntil)) gaps.push({ from: coveredUntil, to: t.termStart });
+    const end = t.termEnd ?? todayIso;
+    if (end > coveredUntil) coveredUntil = end;
+  }
+  if (coveredUntil < todayIso) gaps.push({ from: coveredUntil, to: todayIso });
+  return gaps;
+}
+
+/**
  * TASK-085：就任日が日単位まで確認済みの任期かどうか。未設定はday（既存データとの後方互換）。
  * MayorsPage・DataStatusPage・dataCompletenessSummaryの3箇所で同じ判定式を
  * 個別に実装していたため、この共通関数へ一本化した（将来ズレないようにするため）。

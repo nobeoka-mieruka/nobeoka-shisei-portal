@@ -16,6 +16,7 @@ import {
   countDayPreciseTerms,
   decadeLabel,
   earliestTermStart,
+  findMayorTermGaps,
   formatArchiveDateWithPrecision,
   isActingMayorTerm,
   mayorTermCountLabel,
@@ -80,6 +81,10 @@ export function MayorsPage() {
   const termDates = archiveMayorTerms.map((t) => t.termStart).filter(Boolean).sort();
   const coveragePeriod = termDates.length > 0 ? `${termDates[0].slice(0, 4)}年〜現在` : "確認中";
   const dayPreciseTermCount = countDayPreciseTerms(archiveMayorTerms);
+  // Phase135：validate-data.mjsと同じ共通関数で算出し、固定文言の「13件」等が実データと
+  // ずれないようにする。
+  const todayIsoJst = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const termGapCount = findMayorTermGaps(archiveMayorTerms, todayIsoJst).length;
   const unknownStatusCount = archiveMayors.filter((m) => m.status === "unknown").length;
   const profileConfirmedCount = archiveMayors.filter((m) => m.profile && m.profile.length > 0).length;
   const policyConfirmedMayorIds = new Set(archivePolicies.filter((p) => p.ownerType === "mayor").map((p) => p.ownerId));
@@ -137,7 +142,7 @@ export function MayorsPage() {
       </div>
 
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
-        就任・退任の年月日は、延岡市公式資料（近代の年表等）で年月まで確認できたものが中心です。日単位の日付はWikipedia等の二次資料にとどまり独立資料で未確認のものを含みます。前任・後任市長の間に登録期間が無い箇所は、資料で確認できない空白期間であり、職務代理者を推測で補ってはいません（2026年8月時点で13件の空白期間が未解消です）。経歴・政策の確認は一部にとどまります。
+        就任・退任の年月日は、延岡市公式資料（近代の年表等）で年月まで確認できたものが中心です。日単位の日付はWikipedia等の二次資料にとどまり独立資料で未確認のものを含みます。前任・後任市長の間に登録期間が無い箇所は、資料で確認できない空白期間であり、職務代理者を推測で補ってはいません（現時点で{termGapCount}件の空白期間が未解消です）。経歴・政策の確認は一部にとどまります。
       </div>
 
       <div className="mb-4 flex flex-wrap items-center justify-end gap-2">

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
 import { QUESTION_LIKE_SPEECH_TYPES } from "../src/lib/questionLikeSpeechTypes.ts";
 import { summarizeVoteClassification } from "../src/lib/billVotes.ts";
+import { findMayorTermGaps } from "../src/lib/archiveMayors.ts";
 import {
   ARCHIVE_VERIFICATION_STATUSES,
   checkAnyNonNullRequiresField,
@@ -1712,28 +1713,17 @@ try {
   // 日付を1日進めてから比較する（単純な文字列比較では退任日と就任日が連続していても
   // 1日分の見せかけの空白として誤検出してしまうため）。
   if (archiveMayorTerms.length > 0 && archiveMayorTerms.every((t) => DATE_RE.test(t.termStart))) {
-    const nextDay = (iso) => {
-      const d = new Date(`${iso}T00:00:00Z`);
-      d.setUTCDate(d.getUTCDate() + 1);
-      return d.toISOString().slice(0, 10);
-    };
-    const sortedByStart = [...archiveMayorTerms].sort((a, b) => String(a.termStart).localeCompare(String(b.termStart)));
     // termStart/termEndは日本標準時（JST）の暦日のため、「今日」もJSTで判定する
     // （UTCのままだとJST 00:00〜08:59の間、現職市長の任期がまだ始まっていないかのような
     // 見せかけの空白を誤検出しうる。validate-freshness.mjsと同じ修正）。
     const todayIso = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
-    let coveredUntil = sortedByStart[0].termStart;
-    const gaps = [];
-    for (const t of sortedByStart) {
-      if (t.termStart > nextDay(coveredUntil)) gaps.push([coveredUntil, t.termStart]);
-      const end = t.termEnd ?? todayIso;
-      if (end > coveredUntil) coveredUntil = end;
-    }
-    if (coveredUntil < todayIso) gaps.push([coveredUntil, todayIso]);
+    // Phase135：この検出ロジックはsrc/lib/archiveMayors.tsのfindMayorTermGapsへ一本化した
+    // （MayorsPage.tsxが同じ計算結果を「13件」等の固定文言でハードコードしていたため）。
+    const gaps = findMayorTermGaps(archiveMayorTerms, todayIso);
     if (gaps.length > 0) {
       warn(
         "archiveMayorTerms.json",
-        `任期が登録されていない空白期間があります（${gaps.length}件）: ${gaps.map(([from, to]) => `${from}〜${to}`).join("、")}`,
+        `任期が登録されていない空白期間があります（${gaps.length}件）: ${gaps.map(({ from, to }) => `${from}〜${to}`).join("、")}`,
       );
     }
   }

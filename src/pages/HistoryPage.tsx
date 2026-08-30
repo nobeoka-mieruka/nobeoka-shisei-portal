@@ -163,7 +163,7 @@ export function HistoryPage() {
 
       <SectionCard title="延岡の大きな転換点">
         <p className="text-xs leading-relaxed text-on-surface-variant">
-          152件の記録すべてを読む前に、市政史の大きな流れをつかめるよう、一次・公的資料で重要性が説明できる出来事を{TURNING_POINT_IDS.length}件選びました（当サイト独自の順位付け・評価ではありません）。
+          {allEvents.length}件の記録すべてを読む前に、市政史の大きな流れをつかめるよう、一次・公的資料で重要性が説明できる出来事を{TURNING_POINT_IDS.length}件選びました（当サイト独自の順位付け・評価ではありません）。
         </p>
         <ol className="mt-3 space-y-2 border-l-2 border-primary-container pl-3">
           {TURNING_POINT_IDS.map((id) => {

@@ -63,6 +63,26 @@ const countConsistencyChecks = [
     status: "fixed_2026-08-17",
     note: "従来「登録1,177件」が直書きされていたが、billVotes.jsonの実件数を動的に表示するよう修正済み（2026-08-17）。",
   },
+  {
+    label: "CouncilLeadershipHistoryPage.tsx（歴代議長・副議長）バナー本文の「議長6件・副議長11件」表記",
+    status: "fixed_2026-08-29",
+    note: "従来バナー本文に「議長6件・副議長11件」が直書きされていたが、同ページ内で既に計算済みのchairs.length／viceChairs.lengthを使う表記へ修正済み（2026-08-29、Phase135）。",
+  },
+  {
+    label: "src/lib/seo.ts（/committees/leadership-history）meta descriptionの「議長6件・副議長11件」表記",
+    status: "fixed_2026-08-29",
+    note: "上と同じ画面のmeta descriptionにも同じ固定文言が重複していたため、archiveCouncilLeadership.jsonから動的に算出するよう修正済み（2026-08-29、Phase135）。",
+  },
+  {
+    label: "MayorsPage.tsx（歴代市長）注記の「13件の空白期間」「2026年8月時点で」表記",
+    status: "fixed_2026-08-29",
+    note: "scripts/validate-data.mjsと個別に空白期間検出ロジックを実装し件数を「13件」と直書きしていたが、共通関数findMayorTermGaps（src/lib/archiveMayors.ts）へ一本化し動的表示に修正済み。将来データが増えても値がずれない（2026-08-29、Phase135）。",
+  },
+  {
+    label: "HistoryPage.tsx（延岡の大きな転換点）注記の「152件の記録」表記",
+    status: "fixed_2026-08-29",
+    note: "civicTimelineEvents.jsonの件数が増えても表記が更新されない固定値「152件」だったため、同ページで既に計算済みのallEvents.lengthを使う表記へ修正済み（2026-08-29、Phase135）。",
+  },
 ];
 
 const summary = {

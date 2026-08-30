@@ -633,6 +633,15 @@ export function DataStatusPage() {
         </p>
       </div>
 
+      <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+        <span className="font-semibold text-on-surface">一次資料の調査状況：</span>
+        延岡市公式ホームページが公開する「延岡市史（市制80周年記念10年史）」（全939ページ）について、ページ単位の確認：939／939ページ（100%、2026-08-29時点）。これは資料本文を最後まで確認したという意味であり、記載内容をすべてデータベース化したという意味ではありません。確認結果のうち、他の公式資料と照合できた範囲から順次データへ反映しています（例：
+        <Link to="/committees/leadership-history" className="mx-1 text-primary hover:underline">
+          歴代議長・副議長（2001〜2012年分）
+        </Link>
+        ）。反映が済んでいない事項は「未収録」「調査中」等で明示し、未反映＝0件とは扱っていません。
+      </p>
+
       <SectionCard title="データ完全性ダッシュボード">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           「収録件数」だけでなく、一次資料で確認できた母数（対象会期数・議案件数・団体数など）に対する収録率を示します。母数が一次資料で確認できていない項目は「母数未確認」とし、100%と表示することはありません。
