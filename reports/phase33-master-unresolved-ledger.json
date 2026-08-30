@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24",
+  "generatedAt": "2026-08-30T13:02:27.746Z",
   "purpose": "Phase33 STEP1：Phase27〜32で残った未解決事項を1つのマスター台帳へ統合し、次に取るべき解決ルート（Route A〜F）を確定する。既存reports（phase20-missing-years-status.json、phase28-unresolved-personnel.json、phase32-unresolved-audit.md、ndl-historical-source-ledger.json、phase21-inquiry-tracker.json）を参照・統合し、重複登録は行っていない。財政9年度の年度別詳細は既存のphase20-missing-years-status.jsonをそのまま情報源として使い、本台帳では要約レベルの1レコードにまとめている（同じ内容の複製を避けるため）。",
   "routeDefinitions": {
     "A": "オンライン一次資料で再調査可能",
@@ -1235,28 +1235,137 @@
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-08-29",
       "notes": "TASK-178で新規発見。UNR-035〜037（決算カード再解析で解決見込み）とは異なり、決算カードでは解決できないことが既に判明している点に注意。優先度は他のfinance系UNRより低い（合計値は内訳3区分から利用者側で計算可能であり、表示上の支障は小さいため）。"
+    },
+    {
+      "unresolvedId": "UNR-039",
+      "category": "mayorPromise",
+      "subcategory": "budget-detail-p3-p4",
+      "targetPerson": null,
+      "targetFiscalYear": "令和8年度",
+      "targetPeriod": "令和8年度（2026年度）",
+      "description": "市長公約3-1（医療機関事業承継支援）・3-2（避難所・防災）・3-3（シニア）・4-1〜4-5（市役所改革）の各施策について、令和8年2月12日市長定例記者会見資料「令和8年度当初予算の主な事業」（主要事業を抜粋した16件のハイライト資料）には該当する個別事業が掲載されておらず、relatedBudgetを確定できていない。ハイライト資料に掲載が無いことは予算が存在しないことを意味しない（規模の小さい事業は抜粋対象外の可能性が高い）。",
+      "currentStatus": "not_collected",
+      "priority": "B",
+      "evidenceLevel": "Level0（当該施策名を含む個別予算項目の一次資料未確認）",
+      "sourceRefs": [
+        {
+          "label": "令和8年度当初予算の主な事業ならびに令和8年度組織改正（令和8年2月12日市長定例記者会見資料）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25833.pdf"
+        },
+        {
+          "label": "市長公約に関する取組み　令和8年度（令和8年7月31日現在）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28741.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "令和8年度当初予算の主な事業ならびに令和8年度組織改正（25833.pdf、全27ページをRead toolで直接確認、Phase136）",
+        "延岡市議会の議案データベース（billVotes.json、全1177件を各施策の固有名詞でキーワード検索、Phase136）",
+        "financeDashboard.json（令和8年度補正予算事業一覧、supplementaryBudgetProjects）"
+      ],
+      "alreadyTriedMethods": [
+        "公式PDF直接読み込み（Read tool）",
+        "billVotes.jsonキーワード検索（延べ約30語）"
+      ],
+      "unresolvedReason": "C（資料自体は存在するが、該当箇所を含む詳細な款・項・目・事業別の予算書または予算に関する説明書を未取得）",
+      "nextAction": "延岡市公式サイトの「財政」ページで公開されている「令和8年度予算に関する説明書」（款・項・目・事業別の詳細版、当初予算の主な事業16件より粒度が細かい版）を取得し、各施策名で照合する",
+      "nextSourceCandidate": "延岡市公式ホームページ 財政ページ（https://www.city.nobeoka.miyazaki.jp/life/3/22/96/ ）掲載の令和8年度予算に関する説明書、または主要施策の成果に関する説明書（決算時）",
+      "primaryRoute": "B",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-30",
+      "notes": "Phase136（公約→施策→予算→議案→実施→成果 追跡監査）で新規登録。既存UNR-001〜038とは対象領域が異なる（市長公約の予算追跡）ため新規カテゴリ「mayorPromise」を追加した。"
+    },
+    {
+      "unresolvedId": "UNR-040",
+      "category": "mayorPromise",
+      "subcategory": "1-3",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "令和9年度（予定）",
+      "description": "公約1-3「こども未来部」設置について、現時点（令和8年度）は「こども未来部設置準備室」段階であり、部の正式設置には行政組織条例の改正議案が必要になる見込みだが、当該議案はまだ提出されていない（議案データベースを検索し確認済み）。正式設置が議案化された時点でrelatedBillVoteIdsへ追記する必要がある。",
+      "currentStatus": "not_collected",
+      "priority": "C",
+      "evidenceLevel": "Level1（設置準備段階であることは確認済み、正式設置の時期・議案化は未確認）",
+      "sourceRefs": [
+        {
+          "label": "広報のべおか2026年4月号「令和8年度当初予算における主な事業」",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/26531.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "延岡市議会の議案データベース（billVotes.json、全1177件、「部設置条例」「組織条例」「行政組織」で検索、Phase136）"
+      ],
+      "alreadyTriedMethods": [
+        "billVotes.jsonキーワード検索"
+      ],
+      "unresolvedReason": "D（将来発生する予定の議案であり、現時点では存在しない）",
+      "nextAction": "令和9年度予算・組織改正の発表時（例年2月頃の市長定例記者会見）に、こども未来部設置に関する議案の有無を確認する",
+      "nextSourceCandidate": "令和9年2月頃の市長定例記者会見資料、延岡市議会 令和9年3月定例会 議案書",
+      "primaryRoute": "B",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-30",
+      "notes": "Phase136で新規登録。継続監視項目（次年度の資料公開を待つ、推測での前倒し登録はしない）。"
+    },
+    {
+      "unresolvedId": "UNR-041",
+      "category": "mayorPromise",
+      "subcategory": "2-1",
+      "targetPerson": null,
+      "targetFiscalYear": null,
+      "targetPeriod": "令和9年度（予定）",
+      "description": "公約2-1「地域商社の設立」について、令和8年度は「地域商社設立準備事業」（検討・ビジョン策定段階）であり、地域商社そのもの（法人設立、出資等）に関する議案はまだ存在しない（議案データベースを検索し確認済み）。市長公約に関する取組み資料（令和8年7月31日現在）によれば設立目標は令和9年度。",
+      "currentStatus": "not_collected",
+      "priority": "C",
+      "evidenceLevel": "Level1（準備段階であることは確認済み、法人設立時の議案化は未確認）",
+      "sourceRefs": [
+        {
+          "label": "市長公約に関する取組み　令和8年度（令和8年7月31日現在）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28741.pdf"
+        }
+      ],
+      "alreadyCheckedSources": [
+        "延岡市議会の議案データベース（billVotes.json、全1177件、「地域商社」で検索、Phase136）"
+      ],
+      "alreadyTriedMethods": [
+        "billVotes.jsonキーワード検索"
+      ],
+      "unresolvedReason": "D（将来発生する予定の議案であり、現時点では存在しない）",
+      "nextAction": "令和9年度に地域商社の法人設立が具体化した時点で、出資金・補助金等に関する議案の有無を確認する",
+      "nextSourceCandidate": "令和9年度当初予算関連議案、市長定例記者会見資料（令和9年度）",
+      "primaryRoute": "B",
+      "secondaryRoute": null,
+      "requiresOnsite": false,
+      "requiresInquiry": false,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-08-30",
+      "notes": "Phase136で新規登録。継続監視項目（次年度の資料公開を待つ、推測での前倒し登録はしない）。"
     }
   ],
   "summary": {
-    "totalItems": 38,
+    "totalItems": 41,
     "byRoute": {
       "E": 8,
       "C": 4,
-      "B": 12,
+      "B": 15,
       "D": 3,
       "F": 8,
       "A": 3
     },
     "byPriority": {
       "A": 15,
-      "B": 12,
-      "C": 11
+      "B": 13,
+      "C": 13
     },
     "byStatus": {
       "disputed": 3,
       "unconfirmed": 5,
       "partially_resolved": 5,
-      "not_collected": 13,
+      "not_collected": 16,
       "under_review": 2,
       "reference_pending": 6,
       "resolved": 4
@@ -1264,6 +1373,6 @@
     "requiresOnsite": 10,
     "requiresInquiry": 12,
     "requiresBulkBackfill": 15,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。 Phase136（公約→施策→予算→議案→実施→成果 追跡監査、2026-08-30）でUNR-039〜041（計3件）を新規追加（新規カテゴリ「mayorPromise」）。既存UNR-001〜038のステータス変更は無し。"
   }
 }

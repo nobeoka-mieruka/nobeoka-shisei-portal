@@ -51,6 +51,17 @@ const linkClass =
 /** 未登録の任意項目を表示するときの共通文言。架空の値で埋めないためのプレースホルダー。 */
 const UNREGISTERED = "情報未登録";
 
+/**
+ * Phase136：relatedBudget/relatedBillが未調査のまま「確認中」の2文字だけになっている場合の
+ * フォールバック表示。空欄でも「確認中」の2文字だけでもなく、状態を具体的な文章で示す
+ * （項目11）。データ側で既に詳しい説明文へ置き換え済みの場合はそのまま表示するため、
+ * この関数は「確認中」という完全一致の値のときだけ働く。
+ */
+function relatedFieldDisplay(value: string, kind: "予算" | "議案"): string {
+  if (value !== "確認中") return value;
+  return `現在確認できる公式資料では、この公約に対応する個別の${kind}を特定できていません（「${kind}が存在しない」という意味ではありません）。`;
+}
+
 function isPdfUrl(url: string): boolean {
   return /\.pdf($|\?)/i.test(url);
 }
@@ -334,11 +345,11 @@ export function MayorPromiseDetailPage() {
         <dl className="grid grid-cols-1 gap-x-4 gap-y-3 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">予算措置</dt>
-            <dd className="mt-0.5 text-on-surface">{promise.relatedBudget}</dd>
+            <dd className="mt-0.5 text-on-surface">{relatedFieldDisplay(promise.relatedBudget, "予算")}</dd>
           </div>
           <div>
-            <dt className="text-xs font-medium text-on-surface-variant">関連議案（公約文中の言及）</dt>
-            <dd className="mt-0.5 text-on-surface">{promise.relatedBill}</dd>
+            <dt className="text-xs font-medium text-on-surface-variant">関連議案</dt>
+            <dd className="mt-0.5 text-on-surface">{relatedFieldDisplay(promise.relatedBill, "議案")}</dd>
           </div>
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">担当部署</dt>
