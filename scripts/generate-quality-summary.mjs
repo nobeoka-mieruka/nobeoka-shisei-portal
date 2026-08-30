@@ -33,12 +33,30 @@ const sourceHealth = runValidatorSummary("scripts/validate-sources.mjs");
 // 次回のcheck-external-links.mjsの走査対象に再び拾われ、実際のソースデータからは既に
 // 除去済みのURLが永久にリンク切れ件数へ計上され続ける自己参照ループになるため（Phase122で発見）。
 const SELF_GENERATED_FILE = "dataQualitySummary.json";
+// Phase135-R：councilWatchedDocuments.jsonは「会議日程」等、市議会が会期ごとに差し替える
+// 一時的なPDFを継続監視するための内部専用データ（公開ページには一切表示されない）。
+// scripts/sync-council-data.mjsの設計上、資料が新しいものに差し替わっても古いレコードは
+// 削除せず「url-change-suspected」として履歴保持する（監査証跡のため）。
+// 2026-08-30の一次資料確認（sourcePageUrl https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html
+// を直接確認）で、以下の2件は後継の資料（新しいattachment ID）に既に置き換わっており、
+// 後継資料は既に別レコードとして正常に追跡できていることを確認済み（=一次資料が消失した
+// わけではなく、市議会サイト内での正常な更新）。市民向けに表示されないデータであり、
+// 新しい資料が既に追跡できているため、URLの張り替えは行わず（同一資料か断定できないため）、
+// リンク切れ件数からは除外する。
+const SUPERSEDED_INTERNAL_ONLY_URLS = new Set([
+  // 第26回定例会 会議日程 → 第27回（28674.pdf）に差し替え済み（2026-08-30確認）
+  "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
+  // 令和8年度 常任委員会・特別委員会開催予定表（旧版）→ 新版（28682.pdf）に差し替え済み（2026-08-30確認）
+  "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
+]);
 const linkReportPath = join(root, "reports", "external-link-check.json");
 let linkHealth = null;
 if (existsSync(linkReportPath)) {
   const report = JSON.parse(readFileSync(linkReportPath, "utf8"));
-  const liveResults = report.results.filter((r) =>
-    (r.files ?? []).some((f) => !f.endsWith(".backup.json") && f !== SELF_GENERATED_FILE),
+  const liveResults = report.results.filter(
+    (r) =>
+      (r.files ?? []).some((f) => !f.endsWith(".backup.json") && f !== SELF_GENERATED_FILE) &&
+      !SUPERSEDED_INTERNAL_ONLY_URLS.has(r.url),
   );
   const broken = liveResults.filter((r) => r.category === "not_found_404" || r.category === "server_error");
   linkHealth = {
@@ -50,7 +68,7 @@ if (existsSync(linkReportPath)) {
     serverError: liveResults.filter((r) => r.category === "server_error").length,
     broken: broken.map((r) => ({ url: r.url, files: r.files, category: r.category, status: r.status })),
     excludedBackupOnlyReferences: report.results.length - liveResults.length,
-    note: "*.backup.json（未使用のバックアップファイル）、および本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。",
+    note: "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち後継資料への移行を一次資料で確認済みの2件（councilWatchedDocuments.json、Phase135-Rで確認、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。",
   };
 }
 

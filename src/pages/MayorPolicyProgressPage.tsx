@@ -2,7 +2,14 @@ import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import policyProgressData from "../data/mayorPolicyProgress.json";
 import mayorPromisesData from "../data/mayorPromises.json";
-import type { MayorPolicyProgressData, MayorPromiseItem, MayorPromiseStatusLabel, MayorPromisesData } from "../types";
+import mayorPromiseMeasuresData from "../data/mayorPromiseMeasures.json";
+import type {
+  MayorPolicyProgressData,
+  MayorPromiseItem,
+  MayorPromiseMeasureSnapshot,
+  MayorPromiseStatusLabel,
+  MayorPromisesData,
+} from "../types";
 import { BackLink } from "../components/BackLink";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -23,6 +30,23 @@ import { aggregateCategoryStatus } from "../lib/mayorPromiseStatus";
 const data = policyProgressData as MayorPolicyProgressData;
 const promisesData = mayorPromisesData as MayorPromisesData;
 const promises = promisesData.promises;
+const promiseMeasures = mayorPromiseMeasuresData as MayorPromiseMeasureSnapshot[];
+
+/**
+ * Phase135-R：relatedBudget/relatedBillは自由記述文であり、Phase136で「確認中」の2文字だけ
+ * だった値を「確認中（〜を検索したが見つからなかった）」という説明文へ拡張したため、
+ * 前方一致（"確認中"で始まるか）で確定・未確定を区別する（完全一致では判定できない）。
+ * scripts/test-mayor-promise-tracking.mjsの同名ロジックと一致させること。
+ */
+function isBudgetConfirmed(p: MayorPromiseItem): boolean {
+  return !p.relatedBudget.startsWith("確認中");
+}
+function isBillConfirmed(p: MayorPromiseItem): boolean {
+  return !p.relatedBill.startsWith("確認中") && (p.relatedBillVoteIds?.length ?? 0) > 0;
+}
+function hasCompletedMeasure(promiseId: string): boolean {
+  return promiseMeasures.some((m) => m.promiseId === promiseId && m.status === "COMPLETED");
+}
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -172,12 +196,51 @@ export function MayorPolicyProgressPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="全公約数" value={promises.length} unit="件" />
+        <StatCard label="個別施策数" value={promiseMeasures.length} unit="件" hint="1公約に複数の施策がある場合があります" />
         {[...statusCounts.entries()]
           .sort((a, b) => STATUS_DISPLAY_ORDER.indexOf(a[0]) - STATUS_DISPLAY_ORDER.indexOf(b[0]))
           .map(([label, count]) => (
             <StatCard key={label} label={label} value={count} unit="件" />
           ))}
       </div>
+
+      {/* Phase135-R項目8：公約→施策→予算→議案→成果の追跡到達度。「議案1件」等が「他の公約に
+          議案が存在しない」ことを意味しないよう、注記で明示する（誤読防止）。 */}
+      <SectionCard title="公式資料でどこまで追跡できているか">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          各公約について、公式資料で「具体的な施策」「予算」「議案」「成果（完了した施策）」のどこまで直接の対応関係を確認できたかを集計しています。件数が少ない項目（議案・成果）は「対応する議案・成果が存在しない」という意味ではなく、「現時点で当サイトが公式資料との直接の関連を確認できたのがこの件数」という意味です。多くの施策は市長の予算執行権限内の措置（要綱制定・人事配置等）であり、性質上、独立した議案を伴わない場合があります。
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">施策まで確認</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promises.filter((p) => promiseMeasures.some((m) => m.promiseId === p.id)).length}
+              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">予算まで確認</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promises.filter(isBudgetConfirmed).length}
+              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">議案まで確認</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promises.filter(isBillConfirmed).length}
+              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">成果（完了施策）まで確認</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promises.filter((p) => hasCompletedMeasure(p.id)).length}
+              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+            </dd>
+          </div>
+        </dl>
+      </SectionCard>
 
       <div className="space-y-3 rounded-xl bg-surface-container-low p-4 sm:p-5">
         <SearchBar

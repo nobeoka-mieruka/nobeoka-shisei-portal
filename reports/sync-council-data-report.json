@@ -1,10 +1,10 @@
 {
-  "runAt": "2026-08-23T23:33:25.978Z",
+  "runAt": "2026-08-30T14:23:21.668Z",
   "dryRun": true,
-  "forced": false,
+  "forced": true,
   "lastSuccessfulRunAt": null,
   "hoursSinceLast": null,
-  "gateReason": "no-previous-record",
+  "gateReason": "force",
   "ran": true,
   "allowedHosts": [
     "www.city.nobeoka.miyazaki.jp",
@@ -19,9 +19,9 @@
       "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
       "status": "ok",
       "detected": 2,
-      "new": 2,
+      "new": 0,
       "updated": 0,
-      "unchanged": 0,
+      "unchanged": 2,
       "removedSuspected": 0,
       "urlChangeSuspected": 0,
       "errors": 0

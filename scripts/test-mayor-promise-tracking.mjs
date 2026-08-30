@@ -11,7 +11,7 @@
  *
  * 使い方: node scripts/test-mayor-promise-tracking.mjs
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import assert from "node:assert/strict";
 
@@ -31,11 +31,22 @@ const measures = readJson("src/data/mayorPromiseMeasures.json");
 const billVotes = readJson("src/data/billVotes.json");
 const billIds = new Set(billVotes.map((b) => b.id));
 
+/**
+ * Phase135-R：relatedBudget/relatedBillは自由記述文であり、Phase136で「確認中」の2文字だけ
+ * だった値を「確認中（〜を検索したが見つからなかった）」という説明文へ拡張したため、
+ * 単純な完全一致（=== "確認中"）では「未確定」を検出できなくなった（全14件が非該当という
+ * 誤った集計になっていた不具合をPhase135-Rの監査で発見・修正）。前方一致（"確認中"で始まるか）
+ * で判定することで、確定情報（事業名から始まる文）と未確定（「確認中」から始まる説明文）を
+ * 正しく区別する。
+ */
+const isBudgetConfirmed = (p) => !p.relatedBudget.startsWith("確認中");
+const isBillConfirmed = (p) => !p.relatedBill.startsWith("確認中") && (p.relatedBillVoteIds ?? []).length > 0;
+
 console.log("\n公約データの現況（実データから再計算、固定値は使わない）");
 console.log(`  公約数：${promises.length}件`);
 console.log(`  個別施策（measures）数：${measures.length}件`);
-console.log(`  relatedBudgetが「確認中」の完全一致文字列でない公約数：${promises.filter((p) => p.relatedBudget !== "確認中").length}件`);
-console.log(`  relatedBillが「確認中」の完全一致文字列でない公約数：${promises.filter((p) => p.relatedBill !== "確認中").length}件`);
+console.log(`  予算まで確認できた公約数：${promises.filter(isBudgetConfirmed).length}件`);
+console.log(`  議案まで確認できた公約数：${promises.filter(isBillConfirmed).length}件`);
 console.log(`  relatedBillVoteIdsを1件以上持つ公約数：${promises.filter((p) => (p.relatedBillVoteIds ?? []).length > 0).length}件`);
 
 console.log("\n項目16：追跡チェーン固有の整合性チェック");
@@ -119,6 +130,44 @@ check("relatedBudgetCandidates／relatedBillCandidatesにstatus=\"confirmed\"が
       assert.notEqual(c.status, "confirmed", `公約${p.id}の候補「${c.label}」がstatus="confirmed"になっています`);
     }
   }
+});
+
+check("「公約」と「個別施策」の件数を取り違えた固定文言（例：「31公約」「公約31件」「14施策」等）が画面表示コード・SEO文言に存在しない（Phase135-R：数値の主語取り違え防止）", () => {
+  // 対象はページ・コンポーネント（.tsx）とSEO文言（lib/seo.ts）に限定する。
+  // src/data配下のJSON（notes等）には、当時の件数を正しく記録した過去の監査記録
+  // （例：「既存の12公約（1-1〜4-3）とは別の項目として」＝4-4/4-5追加前の正しい記述）が
+  // 含まれており、これらを機械的に「誤り」として検出すると過去の記録を書き換える圧力になる
+  // ため対象外とする（ユーザー指示：「当時31公約と認識していた」という歴史的記録は書き換えない）。
+  const glob = (dir, exts) => {
+    const out = [];
+    const walk = (d) => {
+      for (const entry of readdirSync(d, { withFileTypes: true })) {
+        const p = join(d, entry.name);
+        if (entry.isDirectory()) walk(p);
+        else if (exts.some((e) => entry.name.endsWith(e))) out.push(p);
+      }
+    };
+    walk(dir);
+    return out;
+  };
+  const files = [...glob(join(ROOT, "src/pages"), [".tsx"]), ...glob(join(ROOT, "src/components"), [".tsx"]), join(ROOT, "src/lib/seo.ts")];
+  // 「N公約」「公約N件」のNが実際の公約数（promises.length）と異なる場合、または
+  // 「N施策」「施策N件」のNが実際の施策数（measures.length）と異なる場合に検出する。
+  // 実際の件数と一致する表記（動的計算の結果を偶然ハードコードしたに過ぎない場合を含む）は
+  // 誤りとは断定できないため対象外とする。
+  const violations = [];
+  for (const file of files) {
+    const text = readFileSync(file, "utf8");
+    for (const m of text.matchAll(/(\d+)\s*公約|公約\s*(\d+)\s*件/g)) {
+      const n = Number(m[1] ?? m[2]);
+      if (n !== promises.length && n > 1) violations.push(`${file}: "${m[0]}"（実際の公約数は${promises.length}件）`);
+    }
+    for (const m of text.matchAll(/(\d+)\s*施策|施策\s*(\d+)\s*件/g)) {
+      const n = Number(m[1] ?? m[2]);
+      if (n !== measures.length && n > 1) violations.push(`${file}: "${m[0]}"（実際の個別施策数は${measures.length}件）`);
+    }
+  }
+  assert.equal(violations.length, 0, `公約/施策の件数取り違えの疑いがある固定文言があります:\n${violations.join("\n")}`);
 });
 
 console.log(`\n${passCount}件成功`);

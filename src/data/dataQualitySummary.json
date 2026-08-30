@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T13:03:58.715Z",
+  "generatedAt": "2026-08-30T14:25:58.771Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 15,
@@ -8,10 +8,10 @@
   },
   "linkHealth": {
     "generatedAt": "2026-08-25T01:30:40.927Z",
-    "totalChecked": 1230,
+    "totalChecked": 1228,
     "ok": 1212,
     "redirect": 12,
-    "notFound404": 3,
+    "notFound404": 1,
     "serverError": 0,
     "broken": [
       {
@@ -22,28 +22,10 @@
         ],
         "category": "not_found_404",
         "status": 404
-      },
-      {
-        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
-        "files": [
-          "councilWatchedDocuments.json",
-          "dataQualitySummary.json"
-        ],
-        "category": "not_found_404",
-        "status": 404
-      },
-      {
-        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
-        "files": [
-          "councilWatchedDocuments.json",
-          "dataQualitySummary.json"
-        ],
-        "category": "not_found_404",
-        "status": 404
       }
     ],
-    "excludedBackupOnlyReferences": 146,
-    "note": "*.backup.json（未使用のバックアップファイル）、および本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
+    "excludedBackupOnlyReferences": 148,
+    "note": "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち後継資料への移行を一次資料で確認済みの2件（councilWatchedDocuments.json、Phase135-Rで確認、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
   },
   "countConsistencyChecks": [
     {
