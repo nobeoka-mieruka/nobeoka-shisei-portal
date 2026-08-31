@@ -14,6 +14,7 @@ import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, formatPercentOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
 import {
   FINANCE_METRICS,
@@ -62,22 +63,10 @@ export function CompareFinancePage() {
       </div>
 
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-        <GlossaryNote
-          term="財政力指数"
-          definition="自治体の財政力を示す指数です。1に近い、または1を超えるほど自主財源の割合が高いことを意味しますが、地方交付税制度の性質上、多くの自治体で1未満です。"
-        />
-        <GlossaryNote
-          term="経常収支比率"
-          definition="人件費や扶助費など毎年度必ず必要な経費に、税収等の経常的な収入がどれだけ使われているかを示す比率です。高いほど、新規事業に使える財源の余裕が少ないとされます。"
-        />
-        <GlossaryNote
-          term="実質公債費比率"
-          definition="収入に対する借金返済額の割合を示す指標で、一定の基準を超えると起債（借金）に国・県の許可が必要になります。"
-        />
-        <GlossaryNote
-          term="将来負担比率"
-          definition="将来的に自治体が負担する可能性のある負債の大きさを、財政規模と比べて示す指標です。数値が高いほど将来の負担が大きいことを意味します。"
-        />
+        <GlossaryNote term="財政力指数" definition={FINANCE_GLOSSARY["財政力指数"]} />
+        <GlossaryNote term="経常収支比率" definition={FINANCE_GLOSSARY["経常収支比率"]} />
+        <GlossaryNote term="実質公債費比率" definition={FINANCE_GLOSSARY["実質公債費比率"]} />
+        <GlossaryNote term="将来負担比率" definition={FINANCE_GLOSSARY["将来負担比率"]} />
       </div>
 
       <SectionCard title="比較する年度を選ぶ">

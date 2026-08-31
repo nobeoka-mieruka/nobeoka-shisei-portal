@@ -70,6 +70,40 @@ export function hasPopulationData(y: ArchiveFiscalYear): boolean {
   return !!y.population;
 }
 
+/**
+ * Phase137：上記hasBudgetData等は「そのサブオブジェクト自体が存在するか」（＝この軸で調査に
+ * 着手済みか）だけを見ており、フィールド単位の欠損（例：budgetは存在するが
+ * generalAccountInitialBudgetYenだけがnull）までは区別できない。「年度は収録済みだが
+ * 一部項目が未確認」という状態をUI・data-statusで正しく表せるよう、代表的なフィールド単位の
+ * 判定関数をここに追加する。項目名は既存スキーマ（src/types/historicalArchive.ts）の
+ * フィールド名をそのまま使い、独自の名称は作らない。
+ */
+export function hasInitialBudgetAmount(y: ArchiveFiscalYear): boolean {
+  return y.budget?.generalAccountInitialBudgetYen != null;
+}
+/**
+ * 市債残高（普通会計ベース）。ArchiveMunicipalBondBalanceは定義の異なる5区分
+ * （一般会計／普通会計／特別会計含む／企業会計含む／市民1人当たり）を持ち、実際に登録されている
+ * 年度が最も多いのはordinaryAccountLocalBondBalanceYen（普通会計、Phase137時点で36年度）のため、
+ * これを代表指標とする。generalAccountBondBalanceYen（一般会計）はFY2025のみで別区分のため、
+ * 単純合算はしない（区分を明示した別集計として扱う）。
+ */
+export function hasOrdinaryAccountBondBalance(y: ArchiveFiscalYear): boolean {
+  return y.debt?.balance?.ordinaryAccountLocalBondBalanceYen != null;
+}
+/** 基金残高。totalYen（合計）は元資料に合計行が無い年度が多いため、区分ごとの内訳値（財源調整用・財政調整基金単体・減債基金・その他特定目的基金）のいずれか1つでも確認できていれば「確認済み」とする。 */
+export function hasAnyFundBalance(y: ArchiveFiscalYear): boolean {
+  const b = y.fund?.balance;
+  if (!b) return false;
+  return b.totalYen != null || b.fiscalAdjustmentFundYen != null || b.fiscalReserveFundYen != null || b.bondRedemptionFundYen != null || b.otherSpecificPurposeFundsYen != null;
+}
+/** 財政健全化判断比率。4指標（実質公債費比率・将来負担比率・経常収支比率・財政力指数）のいずれか1つでも確認できていれば「確認済み」とする（4指標すべてを要求すると、一部だけ確認できた年度が「未確認」として過小評価されるため）。 */
+export function hasAnyFinanceRatio(y: ArchiveFiscalYear): boolean {
+  const f = y.finance;
+  if (!f) return false;
+  return f.realDebtServiceRatioPercent != null || f.futureBurdenRatioPercent != null || f.currentAccountRatioPercent != null || f.financialStrengthIndex != null;
+}
+
 /** 円単位の内部値を「約◯億円」表示に変換する。nullは「確認中」。 */
 export function formatOkuYenOrConfirming(value: number | null | undefined): string {
   if (value === null || value === undefined) return "確認中";

@@ -67,6 +67,10 @@ import {
   hasDebtData,
   hasFundData,
   hasFinanceRatioData,
+  hasInitialBudgetAmount,
+  hasOrdinaryAccountBondBalance,
+  hasAnyFundBalance,
+  hasAnyFinanceRatio,
   fiscalYearGapNote,
 } from "../lib/archiveFinance";
 import {
@@ -331,11 +335,22 @@ export function DataStatusPage() {
   const membersWithoutConfirmedQuestion = members.filter((m) => !confirmedQuestionMemberIds.has(m.id));
 
   // --- 財政 ---
+  // 以下は「サブオブジェクト自体が存在するか」（＝この軸で調査に着手済みか）の集計。
+  // 年度の一部だけ確認できた場合でもtrueになるため、フィールド単位の完成度とは別軸として扱う
+  // （Phase137：「年度は収録済みだが項目未確認」を区別するため、下のfiscalYearsWith*Field系を新設）。
   const fiscalYearsWithBudget = archiveFiscalYears.filter(hasBudgetData).length;
   const fiscalYearsWithPopulation = archiveFiscalYears.filter(hasPopulationData).length;
   const fiscalYearsWithDebt = archiveFiscalYears.filter(hasDebtData).length;
   const fiscalYearsWithFund = archiveFiscalYears.filter(hasFundData).length;
   const fiscalYearsWithFinance = archiveFiscalYears.filter(hasFinanceRatioData).length;
+  // Phase137：フィールド単位の完成度（年度×項目）。具体的な数値フィールドが実際に埋まっている
+  // 年度数を数える。歳入歳出総額はhasBudgetData（70/70、常にtrueで「予算に着手した年度」を
+  // 意味するに過ぎない）とは別の指標として扱う。
+  const fiscalYearsWithTotalRevenue = archiveFiscalYears.filter((y) => y.budget?.totalRevenueYen != null).length;
+  const fiscalYearsWithInitialBudget = archiveFiscalYears.filter(hasInitialBudgetAmount).length;
+  const fiscalYearsWithBondBalance = archiveFiscalYears.filter(hasOrdinaryAccountBondBalance).length;
+  const fiscalYearsWithFundBalanceField = archiveFiscalYears.filter(hasAnyFundBalance).length;
+  const fiscalYearsWithFinanceRatioField = archiveFiscalYears.filter(hasAnyFinanceRatio).length;
   const fiscalYearRange =
     archiveFiscalYears.length > 0
       ? `${Math.min(...archiveFiscalYears.map((f) => f.fiscalYear))}年度〜${Math.max(...archiveFiscalYears.map((f) => f.fiscalYear))}年度`
@@ -582,20 +597,32 @@ export function DataStatusPage() {
       note: "常任委員会3件は延岡市議会委員会条例の個別列挙、議会運営委員会1件は地方自治法第109条第3項の一般規定、特別委員会2件は設置時の提案理由により、所管事項をそれぞれ確認済み（6／6件。Phase44で表記を実態に合わせて修正）",
     },
     {
-      label: "財政：予算・決算（歳入歳出総額）の年度確認",
+      label: "財政：年度レコードの登録（この軸で調査に着手した年度）",
       metric: simpleCompleteness(fiscalYearsWithBudget, archiveFiscalYears.length),
+      note: "この行は「年度レコードが存在するか」のみを示し、以下の項目別の行が実際の数値の有無を示します（Phase137で分離）。",
     },
     {
-      label: "財政：市債残高の年度確認",
-      metric: simpleCompleteness(fiscalYearsWithDebt, archiveFiscalYears.length),
+      label: "財政：歳入総額（決算ベース）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithTotalRevenue, archiveFiscalYears.length),
     },
     {
-      label: "財政：基金残高の年度確認",
-      metric: simpleCompleteness(fiscalYearsWithFund, archiveFiscalYears.length),
+      label: "財政：一般会計当初予算額の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithInitialBudget, archiveFiscalYears.length),
+      note: "Phase137で平成19〜令和8年度分（20年度）を延岡市「当初予算の概要」の年度別推移表から新規確認しました。",
     },
     {
-      label: "財政：財政健全化判断比率の年度確認",
-      metric: simpleCompleteness(fiscalYearsWithFinance, archiveFiscalYears.length),
+      label: "財政：市債残高（普通会計）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithBondBalance, archiveFiscalYears.length),
+      note: "市債残高は資料により「一般会計」「普通会計」等、基準が異なります。ここでは登録年度数が最も多い普通会計ベースを集計しています（他の基準の残高は個別ページでご確認ください）。",
+    },
+    {
+      label: "財政：基金残高（いずれかの区分）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithFundBalanceField, archiveFiscalYears.length),
+    },
+    {
+      label: "財政：財政健全化判断比率（いずれかの指標）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithFinanceRatioField, archiveFiscalYears.length),
+      note: "財政力指数・経常収支比率・実質公債費比率・将来負担比率のうち、いずれか1つでも確認できた年度数です。4指標すべてが揃っているとは限りません。",
     },
     {
       label: "財政：人口の年度確認",

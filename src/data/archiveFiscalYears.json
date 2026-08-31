@@ -2476,7 +2476,7 @@
       },
       "notes": "財政調整基金・減債基金・その他特定目的基金を総務省市町村決算カードより新規登録。"
     },
-    "notes": "年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-02-term-01、mayor-13-term-03）。 年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-02-term-01、mayor-13-term-03）。",
+    "notes": "年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-02-term-01、mayor-13-term-03）。 年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-02-term-01、mayor-13-term-03）。 【合併注記・Phase137】平成18年2月20日（2006-02-20）に延岡市・北方町・北浦町が合併し「新延岡市」が発足した。この年度（FY2005＝平成17年度、2005年4月〜2006年3月）は年度途中（2月20日）に行政区域が変わっているため、年度内の財政・人口データは前半（旧延岡市単独）と後半（新延岡市）が混在している可能性がある。前年度（FY2004以前）の延岡市データと単純に比較しないこと。",
     "population": {
       "fiscalYear": 2005,
       "population": 122568,
@@ -2627,7 +2627,8 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2006年1月1日時点の値（121,517人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
         }
       ]
-    }
+    },
+    "notes": "【合併注記・Phase137】平成19年3月31日（2007-03-31、年度最終日）に延岡市・北川町が合併した。この年度（FY2006＝平成18年度、2006年4月〜2007年3月）は、平成18年2月20日合併（北方町・北浦町）後の新延岡市区域でほぼ全期間の集計だが、北川町分は年度最終日のみ含まれる可能性がある。FY2007（平成19年度）以降が北川町を含む現在の行政区域での最初の通年データとなる。前年度以前と区域が異なるため単純な前年比較はできない。"
   },
   {
     "fiscalYear": 2007,
@@ -2654,7 +2655,7 @@
     },
     "budget": {
       "fiscalYear": 2007,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 55678000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -2675,6 +2676,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成19年度の値：55,678,000千円）"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -2751,7 +2762,8 @@
           "notes": "同一Excelファイルの平成9年〜令和8年の長期系列（既存のFY2009以降の登録で使用済みの資料と同一ファイル）から、2007年1月1日時点の値（129,217人）をxlsxパッケージでシート「現住人口（H.９〜）」を解析して新規取得した。"
         }
       ]
-    }
+    },
+    "notes": "【合併注記・Phase137】平成18年2月20日（北方町・北浦町）・平成19年3月31日（北川町）の合併により、この年度（FY2007＝平成19年度、2007年4月〜2008年3月）が現在の行政区域（延岡市・北方・北浦・北川の4地域）での最初の通年（年度全体）データとなる。FY2006以前とは集計対象の行政区域が異なるため、単純な前年比較はできない。"
   },
   {
     "fiscalYear": 2008,
@@ -2778,7 +2790,7 @@
     },
     "budget": {
       "fiscalYear": 2008,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 54140000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -2799,6 +2811,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成20年度の値：54,140,000千円）"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -2881,7 +2903,7 @@
     "fiscalYear": 2009,
     "budget": {
       "fiscalYear": 2009,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 51317000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -2903,6 +2925,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額577億7,644万円・歳出総額563億5,818万円。実質収支は「約12億円」（本文中の概数表記、円グラフの差引額14億1,826万円とは定義が異なる可能性があるため数値フィールドには未登録）。国・県支出金143億5,314万円は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成21年度の値：51,317,000千円）"
         }
       ],
       "notes": "国・県支出金143億5,314万円は資料上「国・県支出金」として一体表記されており、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが、按分不明のため今後修正の可能性あり。実質収支は本文で「約12億円」とのみ記載され正確な値は未確認。"
@@ -3044,7 +3076,7 @@
     "fiscalYear": 2010,
     "budget": {
       "fiscalYear": 2010,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 53624000000,
       "generalAccountFinalBudgetYen": 57239310000,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -3076,6 +3108,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "「平成22年度一般会計現計予算」（歳出・歳入とも572億3,931万円）の円グラフから、補正後予算額として登録した。既存の決算額（歳入582億8,294万円・歳出564億5,813万円、2011年11月号の決算特集より）とは定義が異なる別の値のため、両方を保持する。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成22年度の値：53,624,000千円）"
         }
       ],
       "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。 平成22年度の補正後予算額（一般会計現計予算）572億3,931万円は、広報のべおか2011年5月号「財政状況の公表」（Internet Archive保存）から新規登録した。"
@@ -3217,7 +3259,7 @@
     "fiscalYear": 2011,
     "budget": {
       "fiscalYear": 2011,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 56222000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -3239,6 +3281,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額591.1452億円・歳出総額570.7417億円。国・県支出金は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成23年度の値：56,222,000千円）"
         }
       ],
       "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。"
@@ -3379,7 +3431,7 @@
     "fiscalYear": 2012,
     "budget": {
       "fiscalYear": 2012,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 53713000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -3401,6 +3453,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額573.5523億円・歳出総額555.6305億円。国・県支出金は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成24年度の値：53,713,000千円）"
         }
       ],
       "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。"
@@ -3581,7 +3643,7 @@
     "fiscalYear": 2013,
     "budget": {
       "fiscalYear": 2013,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 55341000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -3603,6 +3665,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額594億5,648万円・歳出総額581億6,443万円。実質収支10億2,312万円（黒字決算）。国・県支出金144億1,687万円は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成25年度の値：55,341,000千円）"
         }
       ],
       "notes": "国・県支出金144億1,687万円は資料上「国・県支出金」として一体表記されており、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが、按分不明のため今後修正の可能性あり。"
@@ -3783,7 +3855,7 @@
     "fiscalYear": 2014,
     "budget": {
       "fiscalYear": 2014,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 60688000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -3805,6 +3877,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額630.7127億円・歳出総額616.7951億円。国・県支出金は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成26年度の値：60,688,000千円）"
         }
       ],
       "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。"
@@ -3985,7 +4067,7 @@
     "fiscalYear": 2015,
     "budget": {
       "fiscalYear": 2015,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 57638000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -4007,6 +4089,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額591.3149億円・歳出総額579.6731億円。国・県支出金は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成27年度の値：57,638,000千円）"
         }
       ],
       "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。"
@@ -4187,7 +4279,7 @@
     "fiscalYear": 2016,
     "budget": {
       "fiscalYear": 2016,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 58803000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -4209,6 +4301,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額634億950万円・歳出総額618億8,634万円。国・県支出金は一体表記のためnationalSubsidiesYenへ暫定計上（按分不明）。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成28年度の値：58,803,000千円）"
         }
       ],
       "notes": "国・県支出金は資料上一体表記のため、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが按分不明のため今後修正の可能性あり。"
@@ -4389,7 +4491,7 @@
     "fiscalYear": 2017,
     "budget": {
       "fiscalYear": 2017,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 57156000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -4411,6 +4513,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Windows OCR基盤（WinRT）でPDFページを画像化し、目視で読み取った円グラフの内訳を登録。歳入総額634億1,487万円・歳出総額617億5,180万円。歳入内訳のうち地方交付税153億1,270万円・市税142億6,073万円・国県支出金（国・県支出金162億1,491万円のうち内訳不明のため国庫補助金相当としてnationalSubsidiesYenへ計上、県支出金分との按分は未確認）。会計区分（一般会計単独か否か）は資料に明記が無いため、他年度との厳密な比較は要注意。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成29年度の値：57,156,000千円）"
         }
       ],
       "notes": "国・県支出金162億1,491万円は資料上「国・県支出金」として一体表記されており、国庫支出金・県支出金の内訳は未確認。nationalSubsidiesYenへ暫定計上したが、按分不明のため今後修正の可能性あり。"
@@ -4680,7 +4792,7 @@
     },
     "budget": {
       "fiscalYear": 2018,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 56068225000,
       "generalAccountFinalBudgetYen": 60659690000,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -4711,6 +4823,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "決算の状況の円グラフから、歳入総額597億1,614万円・歳出総額580億274万円（決算確定値）を登録した。実質収支は13億4,673万円の黒字。5月号の「最終予算額」（補正後予算、606億5,969万円）とは定義が異なる決算値のため、既存のgeneralAccountFinalBudgetYenは変更せず、決算値のみtotalRevenueYen/totalExpenditureYenへ追加した。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成30年度の値：56,068,225千円）"
         }
       ],
       "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。"
@@ -4844,7 +4966,7 @@
     },
     "budget": {
       "fiscalYear": 2019,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 58578000000,
       "generalAccountFinalBudgetYen": 60973840000,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -4874,6 +4996,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase113で新規登録。総務省が公開するXLSX形式の決算カード（宮崎県内27市町村の一括ファイル、シート「4延岡市」）をxlsxパッケージでセル単位で読み取った。歳入総額・歳出総額（従来は未登録）、および歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同カード内の他項目（財政力指数0.49、経常収支比率94.3%、実質公債費比率8.9%、財政調整基金5,121,878千円、減債基金2,476,092千円、地方債現在高56,152,458千円）は、既存登録値（financialStrengthIndex 0.49、currentAccountRatioPercent 94.3、realDebtServiceRatioPercent 8.9、fiscalReserveFundYen 5,122,000千円、bondRedemptionFundYen 2,476,000千円、ordinaryAccountLocalBondBalanceYen 56,152,000千円）とほぼ完全に一致（財政調整基金のみ千円未満の端数差122千円）することを確認し、既存値の妥当性を裏付けた（既存値は変更していない）。会計区分は決算カードの標準である「普通会計」ベース。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和元年度の値：58,578,000千円）"
         }
       ],
       "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。 Phase113: 総務省「令和元年度市町村決算カード」（普通会計ベース）により、歳入総額・歳出総額および歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
@@ -4923,7 +5055,7 @@
     },
     "budget": {
       "fiscalYear": 2020,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 61633000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -4953,6 +5085,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase113で新規登録。総務省が公開するXLSX形式の決算カード（宮崎県内27市町村の一括ファイル、シート「4延岡市」）をxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。国庫支出金が対前年度比+128%（25,639,703千円）と大幅増加しているが、これは新型コロナウイルス感染症対応の各種国庫交付金（特別定額給付金給付事業費補助金等）による全国的な傾向と整合し、異常値ではないと判断した。同カード内の既存登録値（歳入総額77,776,083千円・歳出総額75,003,441千円・財政力指数0.49・経常収支比率92.8%・実質公債費比率8.1%・財政調整基金5,032,997千円・減債基金2,384,088千円・地方債現在高55,428,571千円）とすべて完全一致することを確認し、既存値の妥当性を裏付けた（既存値は変更していない）。会計区分は決算カードの標準である「普通会計」ベース。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和2年度の値：61,633,000千円）"
         }
       ],
       "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 総務省「令和2年度市町村決算カード」（普通会計ベース、既存の歳入総額・歳出総額と完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
@@ -5161,7 +5303,7 @@
     },
     "budget": {
       "fiscalYear": 2021,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 63246000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -5191,6 +5333,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和3年度の値：63,246,000千円）"
         }
       ],
       "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
@@ -5325,7 +5477,7 @@
     },
     "budget": {
       "fiscalYear": 2022,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 64491436000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -5355,6 +5507,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和4年度の値：64,491,436千円）"
         }
       ],
       "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
@@ -5489,7 +5651,7 @@
     },
     "budget": {
       "fiscalYear": 2023,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 66732715000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -5519,6 +5681,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和5年度の値：66,732,715千円）"
         }
       ],
       "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
@@ -5685,7 +5857,7 @@
     },
     "budget": {
       "fiscalYear": 2024,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 68865000000,
       "generalAccountFinalBudgetYen": null,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -5715,6 +5887,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和6年度の値：68,865,000千円）"
         }
       ],
       "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
@@ -5804,6 +5986,33 @@
         ]
       },
       "notes": "残高（ストック）は令和8年3月31日現在の確定値として登録。発行額（フロー）は令和7年度の予算額のみ確認でき、決算額は出納整理期間中のため未確定（財政状況資料集の令和7年度版は本日時点で未公表）。"
+    },
+    "budget": {
+      "fiscalYear": 2025,
+      "generalAccountInitialBudgetYen": 71181000000,
+      "generalAccountFinalBudgetYen": null,
+      "generalAccountSettlementYen": null,
+      "specialAccountBudgetYen": null,
+      "enterpriseAccountBudgetYen": null,
+      "totalRevenueYen": null,
+      "totalExpenditureYen": null,
+      "localTaxRevenueYen": null,
+      "localAllocationTaxYen": null,
+      "nationalSubsidiesYen": null,
+      "prefecturalSubsidiesYen": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録（budgetサブオブジェクト自体が未登録だったため新設）。同資料P3の推移表より令和7年度の一般会計当初予算規模71,181,000千円を確認（単位千円、×1000して円に換算）。同資料P2「予算集計表」の「令和7年度当初（B）」列の一般会計71,181,000千円とも完全一致（内部整合性確認済み）。歳入総額・歳出総額（決算ベース）・市税・地方交付税・決算額・補正後予算額は、令和7年度の財政状況資料集がまだ未公表のため（2026-08-31時点で最新は令和6年度版）引き続き未確認。"
+        }
+      ],
+      "notes": "令和7年度の一般会計当初予算規模のみ確認済み（Phase137）。決算・歳入歳出内訳は財政状況資料集の令和7年度版公表後に再調査が必要（fiscalYear全体のnotesも参照）。"
     }
   },
   {
@@ -5830,7 +6039,7 @@
     },
     "budget": {
       "fiscalYear": 2026,
-      "generalAccountInitialBudgetYen": null,
+      "generalAccountInitialBudgetYen": 69066000000,
       "generalAccountFinalBudgetYen": 69988095000,
       "generalAccountSettlementYen": null,
       "specialAccountBudgetYen": null,
@@ -5863,6 +6072,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "既存financeDashboard.jsonのrevenue配列（市税・地方交付税・国庫支出金、6月補正後）から千円→円換算して移行。歳入総額・歳出総額（totalRevenueYen/totalExpenditureYen）は決算が存在しないため未登録のまま。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
+          "sourceTitle": "延岡市「令和8年度当初予算の概要」P3「当初予算年度別推移（一般会計）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-02-09",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和8年度の値：69,066,000千円）"
         }
       ],
       "notes": "令和8年度は年度途中のため、決算額は存在しない。予算額も今後の補正でさらに変わる可能性がある。 市税・地方交付税・国庫支出金を追加登録（財源内訳の一部のみ、6月補正後予算ベース）。"

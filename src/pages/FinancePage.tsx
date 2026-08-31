@@ -17,6 +17,8 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
+import { GlossaryNote } from "../components/GlossaryNote";
+import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
 
 const data = financeData as FinanceDashboardData;
 const latestArchiveFiscalYear = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]).at(-1)?.fiscalYear;
@@ -239,6 +241,7 @@ export function FinancePage() {
       </SectionCard>
 
       <SectionCard title="財源調整用基金の推移">
+        <GlossaryNote term="基金" definition={FINANCE_GLOSSARY["基金"]} className="mb-3" />
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           縦軸：億円／横軸：年度末・単位：千円（グラフは億円換算）。令和7年度は決算額ではなく見込額のため「令和7年度末見込」と表示し、他の年度と区別しています。財政調整基金・減債基金など基金種別ごとの複数年度推移は、公式資料で確認でき次第追加します（現時点では合算値のみ掲載）。
         </p>
@@ -285,6 +288,7 @@ export function FinancePage() {
       </SectionCard>
 
       <SectionCard title="市債について">
+        <GlossaryNote term="市債" definition={FINANCE_GLOSSARY["市債"]} className="mb-3" />
         <p className="text-sm font-semibold text-on-surface">
           {formatThousandYen(data.revenue.find((r) => r.label === "市債")?.amountThousandYen ?? 0)}
         </p>
@@ -325,6 +329,12 @@ export function FinancePage() {
             <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
               {fi.fiscalYearLabel}の数値です。総務省の地方公共団体財政健全化法に基づき延岡市が公表した指標のみ掲載し、独自の評価・順位づけは行っていません。
             </p>
+            <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <GlossaryNote term="財政力指数" definition={FINANCE_GLOSSARY["財政力指数"]} />
+              <GlossaryNote term="経常収支比率" definition={FINANCE_GLOSSARY["経常収支比率"]} />
+              <GlossaryNote term="実質公債費比率" definition={FINANCE_GLOSSARY["実質公債費比率"]} />
+              <GlossaryNote term="将来負担比率" definition={FINANCE_GLOSSARY["将来負担比率"]} />
+            </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <StatCard label="実質公債費比率" value={formatPercentOrConfirming(fi.realDebtServiceRatioPercent)} compact />
               <StatCard label="将来負担比率" value={formatPercentOrConfirming(fi.futureBurdenRatioPercent)} compact />
