@@ -3,21 +3,41 @@ import type { MayorPromiseDocument, MayorPromiseItem } from "../../types";
 import { GlobeIcon } from "../icons";
 import { formatJapaneseDate } from "../../config/site";
 import { MayorPromiseStatusBadge } from "./MayorPromiseStatusBadge";
+import { isPromiseBudgetConfirmed, isPromiseBillConfirmed } from "../../lib/mayorPromiseStatus";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
+/** Phase140：予算・議案の確認状況を短い結論バッジで表す（色だけでなく文字で状態を示す）。 */
+function ConclusionPill({ label, confirmed }: { label: string; confirmed: boolean }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${
+        confirmed
+          ? "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]"
+          : "border border-outline-variant text-on-surface-variant"
+      }`}
+    >
+      {label}：{confirmed ? "確認済み" : "資料確認中"}
+    </span>
+  );
+}
+
 interface PromiseCardProps {
   promise: MayorPromiseItem;
   documents: MayorPromiseDocument[];
+  /** この公約に「完了した施策（成果）」が1件以上あるか。呼び出し側（一覧ページ）で計算済みの値を渡す。 */
+  hasCompletedMeasure?: boolean;
 }
 
-export function PromiseCard({ promise, documents }: PromiseCardProps) {
+export function PromiseCard({ promise, documents, hasCompletedMeasure = false }: PromiseCardProps) {
   const evidenceDocs: (MayorPromiseDocument & { page?: string })[] = [];
   for (const ref of promise.evidenceItems) {
     const doc = documents.find((d) => d.key === ref.documentKey);
     if (doc) evidenceDocs.push({ ...doc, page: ref.page });
   }
+  const budgetConfirmed = isPromiseBudgetConfirmed(promise);
+  const billConfirmed = isPromiseBillConfirmed(promise);
 
   return (
     <li className="rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
@@ -41,6 +61,18 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
         <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{promise.citizenSummary}</p>
       )}
 
+      {/* Phase140項目3：結論（第1層）。詳しい経緯を読まなくても「予算・議案・成果まで
+          確認できているか」がひと目で分かるようにする。 */}
+      <div className="mt-2.5 flex flex-wrap gap-1.5">
+        <ConclusionPill label="予算" confirmed={budgetConfirmed} />
+        <ConclusionPill label="議案" confirmed={billConfirmed} />
+        {hasCompletedMeasure && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#e0f2e9] px-2.5 py-1 text-xs font-medium text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]">
+            成果：完了した取組あり
+          </span>
+        )}
+      </div>
+
       {promise.progressSummary.length > 0 && (
         <div className="mt-3">
           <p className="text-xs font-medium text-on-surface-variant">現在確認できた取組</p>
@@ -52,20 +84,30 @@ export function PromiseCard({ promise, documents }: PromiseCardProps) {
         </div>
       )}
 
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        <div>
-          <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
-          <p className="mt-1 text-sm text-on-surface">{promise.relatedBudget}</p>
+      {/* Phase140項目3・17：予算・議案の詳しい調査経緯（第3層）は折りたたみにし、
+          結論だけ知りたい人の負担を減らす。一次資料の記載自体は削除しない。 */}
+      <details className="mt-3 rounded-lg bg-surface-container-low">
+        <summary className="cursor-pointer list-none rounded-lg px-3 py-2 text-xs font-medium text-on-surface-variant [&::-webkit-details-marker]:hidden">
+          <span className="inline-flex items-center gap-1">
+            <span aria-hidden>▶</span>
+            予算・議案の詳しい調査内容を見る
+          </span>
+        </summary>
+        <div className="grid grid-cols-1 gap-3 px-3 pb-3 sm:grid-cols-2">
+          <div>
+            <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
+            <p className="mt-1 text-sm text-on-surface">{promise.relatedBudget}</p>
+          </div>
+          <div>
+            <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
+            <p className="mt-1 text-sm text-on-surface">{promise.relatedBill}</p>
+          </div>
         </div>
-        <div>
-          <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
-          <p className="mt-1 text-sm text-on-surface">{promise.relatedBill}</p>
-        </div>
-      </div>
+      </details>
 
       {evidenceDocs.length > 0 ? (
         <div className="mt-3">
-          <p className="text-xs font-medium text-on-surface-variant">根拠資料あり</p>
+          <p className="text-xs font-medium text-on-surface-variant">出典を見る（一次資料）</p>
           <ul className="mt-1 space-y-1.5">
             {evidenceDocs.map((doc) => (
               <li key={doc.key}>

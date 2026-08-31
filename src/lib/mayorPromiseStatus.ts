@@ -1,6 +1,23 @@
 import type { ComponentType, SVGProps } from "react";
-import type { MayorPromiseItem, MayorPromiseStatusLabel } from "../types";
+import type { MayorPromiseItem, MayorPromiseMeasureSnapshot, MayorPromiseStatusLabel } from "../types";
 import { CheckCircleIcon, ClockIcon, ChartBarIcon, MinusCircleIcon, ArrowPathIcon, QuestionMarkCircleIcon } from "../components/icons";
+
+/**
+ * Phase140：relatedBudget/relatedBillは自由記述文であり、Phase136で「確認中」の2文字だけ
+ * だった値を「確認中（〜を検索したが見つからなかった）」という説明文へ拡張したため、
+ * 前方一致（"確認中"で始まるか）で確定・未確定を区別する。
+ * MayorPolicyProgressPage.tsx（旧・重複実装）・PromiseCard.tsx・scripts/test-mayor-promise-tracking.mjsの
+ * 判定式を一本化した（Phase135-Rで一度発生した「確認中の前方一致漏れ」の再発防止）。
+ */
+export function isPromiseBudgetConfirmed(p: MayorPromiseItem): boolean {
+  return !p.relatedBudget.startsWith("確認中");
+}
+export function isPromiseBillConfirmed(p: MayorPromiseItem): boolean {
+  return !p.relatedBill.startsWith("確認中") && (p.relatedBillVoteIds?.length ?? 0) > 0;
+}
+export function hasPromiseCompletedMeasure(promiseId: string, measures: MayorPromiseMeasureSnapshot[]): boolean {
+  return measures.some((m) => m.promiseId === promiseId && m.status === "COMPLETED");
+}
 
 /** 状況バッジの配色。色だけでなく必ず文字ラベル・アイコンと併用すること。 */
 export const mayorPromiseStatusClass: Record<MayorPromiseStatusLabel, string> = {

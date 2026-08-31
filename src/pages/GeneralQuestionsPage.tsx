@@ -364,9 +364,10 @@ export function GeneralQuestionsPage() {
 
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={query} onChange={setQuery} placeholder="質問内容、議員名、テーマで検索" />
+        {/* Phase140項目10：「何について質問したか」から探せることを優先し、テーマを先頭にする。 */}
         <div className="flex flex-wrap items-center gap-2">
-          <FilterSelect label="議員" value={memberId} onChange={setMemberId} options={memberOptions} />
           <FilterSelect label="テーマ" value={theme} onChange={setTheme} options={themeOptions} />
+          <FilterSelect label="議員" value={memberId} onChange={setMemberId} options={memberOptions} />
           <FilterSelect label="年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
           <FilterSelect label="会議" value={session} onChange={setSession} options={sessionOptions} />
           <FilterSelect label="質問区分" value={questionType} onChange={setQuestionType} options={questionTypeOptions} />
@@ -471,8 +472,8 @@ export function GeneralQuestionsPage() {
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={vQuery} onChange={setVQuery} placeholder="質問内容、議員名、テーマで検索" />
         <div className="flex flex-wrap items-center gap-2">
-          <FilterSelect label="議員" value={vMemberId} onChange={setVMemberId} options={verifiedMemberOptions} />
           <FilterSelect label="テーマ" value={vTheme} onChange={setVTheme} options={verifiedThemeOptions} />
+          <FilterSelect label="議員" value={vMemberId} onChange={setVMemberId} options={verifiedMemberOptions} />
           <FilterSelect label="年" value={vYear} onChange={setVYear} options={verifiedYearOptions} />
           <FilterSelect label="会議" value={vSessionId} onChange={setVSessionId} options={verifiedSessionOptions} />
           <FilterSelect label="答弁者" value={vAnswerer} onChange={setVAnswerer} options={verifiedAnswererOptions} />

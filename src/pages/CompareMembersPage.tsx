@@ -123,9 +123,11 @@ export function CompareMembersPage() {
         </p>
       </SectionCard>
 
-      {selectedPeople.length > 0 && selectedPeople.length < MIN_COMPARE_ITEMS && (
-        <p className="rounded-xl bg-surface-container-low p-4 text-sm text-on-surface-variant">
-          比較には{MIN_COMPARE_ITEMS}件以上の選択が必要です。もう{MIN_COMPARE_ITEMS - selectedPeople.length}件選んでください。
+      {selectedPeople.length < MIN_COMPARE_ITEMS && (
+        <p className="rounded-xl border border-primary/30 bg-primary-container/40 p-4 text-sm font-medium text-on-surface">
+          {selectedPeople.length === 0
+            ? `比較したい議員を${MIN_COMPARE_ITEMS}名以上選んでください（上の一覧をタップ）。`
+            : `比較には${MIN_COMPARE_ITEMS}件以上の選択が必要です。もう${MIN_COMPARE_ITEMS - selectedPeople.length}件選んでください。`}
         </p>
       )}
 

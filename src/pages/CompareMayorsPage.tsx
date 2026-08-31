@@ -140,9 +140,11 @@ export function CompareMayorsPage() {
         </p>
       </SectionCard>
 
-      {selectedMayors.length > 0 && selectedMayors.length < MIN_COMPARE_ITEMS && (
-        <p className="rounded-xl bg-surface-container-low p-4 text-sm text-on-surface-variant">
-          比較には{MIN_COMPARE_ITEMS}件以上の選択が必要です。もう{MIN_COMPARE_ITEMS - selectedMayors.length}件選んでください。
+      {selectedMayors.length < MIN_COMPARE_ITEMS && (
+        <p className="rounded-xl border border-primary/30 bg-primary-container/40 p-4 text-sm font-medium text-on-surface">
+          {selectedMayors.length === 0
+            ? `比較したい市長を${MIN_COMPARE_ITEMS}名以上選んでください（上の一覧をタップ）。`
+            : `比較には${MIN_COMPARE_ITEMS}件以上の選択が必要です。もう${MIN_COMPARE_ITEMS - selectedMayors.length}件選んでください。`}
         </p>
       )}
 

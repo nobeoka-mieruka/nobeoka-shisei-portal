@@ -170,5 +170,27 @@ check("「公約」と「個別施策」の件数を取り違えた固定文言�
   assert.equal(violations.length, 0, `公約/施策の件数取り違えの疑いがある固定文言があります:\n${violations.join("\n")}`);
 });
 
+check('予算・議案の確認状況判定（"確認中"前方一致）が、src/lib/mayorPromiseStatus.tsの共通関数以外で再実装されていない（Phase135-Rで一度発生した重複実装バグの再発防止）', () => {
+  const walk = (dir, out) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const p = join(dir, entry.name);
+      if (entry.isDirectory()) walk(p, out);
+      else if (entry.name.endsWith(".tsx")) out.push(p);
+    }
+  };
+  const files = [];
+  walk(join(ROOT, "src/pages"), files);
+  walk(join(ROOT, "src/components"), files);
+  const suspects = [];
+  for (const f of files) {
+    if (f.endsWith("mayorPromiseStatus.ts")) continue;
+    const text = readFileSync(f, "utf8");
+    if (/relatedBudget\.startsWith\(["']確認中["']\)/.test(text) || /relatedBill\.startsWith\(["']確認中["']\)/.test(text)) {
+      suspects.push(f);
+    }
+  }
+  assert.equal(suspects.length, 0, `relatedBudget/relatedBillの確認状況判定を独自に再実装しているファイル: ${suspects.join("、")}`);
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");

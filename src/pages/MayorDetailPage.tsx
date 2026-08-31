@@ -134,7 +134,7 @@ export function MayorDetailPage() {
         <p className="mt-2 text-xs text-on-surface-variant">
           生没年：
           {mayor.birthDate || mayor.deathDate
-            ? `${mayor.birthDate ? formatJapaneseDate(mayor.birthDate) : "不明"}〜${mayor.deathDate ? formatJapaneseDate(mayor.deathDate) : mayor.status === "deceased" ? "不明" : ""}`
+            ? `${mayor.birthDate ? formatJapaneseDate(mayor.birthDate) : "未確認"}〜${mayor.deathDate ? formatJapaneseDate(mayor.deathDate) : mayor.status === "deceased" ? "未確認" : ""}`
             : "資料未確認"}
           {mayor.birthplace ? `／出身地：${mayor.birthplace}` : ""}
         </p>

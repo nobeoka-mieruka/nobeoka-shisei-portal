@@ -25,27 +25,22 @@ import { GlobeIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate, toFiscalYearLabel } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
-import { aggregateCategoryStatus } from "../lib/mayorPromiseStatus";
+import {
+  aggregateCategoryStatus,
+  isPromiseBudgetConfirmed,
+  isPromiseBillConfirmed,
+  hasPromiseCompletedMeasure,
+} from "../lib/mayorPromiseStatus";
 
 const data = policyProgressData as MayorPolicyProgressData;
 const promisesData = mayorPromisesData as MayorPromisesData;
 const promises = promisesData.promises;
 const promiseMeasures = mayorPromiseMeasuresData as MayorPromiseMeasureSnapshot[];
 
-/**
- * Phase135-R：relatedBudget/relatedBillは自由記述文であり、Phase136で「確認中」の2文字だけ
- * だった値を「確認中（〜を検索したが見つからなかった）」という説明文へ拡張したため、
- * 前方一致（"確認中"で始まるか）で確定・未確定を区別する（完全一致では判定できない）。
- * scripts/test-mayor-promise-tracking.mjsの同名ロジックと一致させること。
- */
-function isBudgetConfirmed(p: MayorPromiseItem): boolean {
-  return !p.relatedBudget.startsWith("確認中");
-}
-function isBillConfirmed(p: MayorPromiseItem): boolean {
-  return !p.relatedBill.startsWith("確認中") && (p.relatedBillVoteIds?.length ?? 0) > 0;
-}
+const isBudgetConfirmed = isPromiseBudgetConfirmed;
+const isBillConfirmed = isPromiseBillConfirmed;
 function hasCompletedMeasure(promiseId: string): boolean {
-  return promiseMeasures.some((m) => m.promiseId === promiseId && m.status === "COMPLETED");
+  return hasPromiseCompletedMeasure(promiseId, promiseMeasures);
 }
 
 const linkClass =
@@ -189,6 +184,33 @@ export function MayorPolicyProgressPage() {
         </p>
       </div>
 
+      {/* Phase140項目1・2：市民向け要約。専門的な集計表（下の「公式資料でどこまで追跡できて
+          いるか」）を読む前に、まずここで全体像をつかめるようにする。数値はすべて既存データ
+          からその場で計算しており、固定値のハードコードはしていない。 */}
+      <div className="rounded-xl border border-primary/30 bg-primary-container/40 p-4 sm:p-5">
+        <p className="text-sm font-semibold text-on-surface">まずここを見る</p>
+        <p className="mt-1.5 text-sm leading-relaxed text-on-surface">
+          市長の公約は{promises.length}件です。それぞれの公約には具体的な取組（個別施策）が複数含まれていることが多く、取組単位で数えると全部で{promiseMeasures.length}件になります（
+          <strong className="font-semibold">
+            {promises.length}件の公約
+          </strong>
+          と
+          <strong className="font-semibold">{promiseMeasures.length}件の個別施策</strong>
+          は別の数え方です）。
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-on-surface">
+          {promises.length}件の公約のうち、具体的な取組の内容までは
+          <strong className="font-semibold text-on-surface">{promises.filter((p) => promiseMeasures.some((m) => m.promiseId === p.id)).length}件すべて</strong>
+          で確認できています。その先の「予算額」まで特定できたのは
+          <strong className="font-semibold text-on-surface">{promises.filter(isBudgetConfirmed).length}件</strong>
+          、「対応する議案」まで特定できたのは
+          <strong className="font-semibold text-on-surface">{promises.filter(isBillConfirmed).length}件</strong>
+          、「完了した成果」まで確認できたのは
+          <strong className="font-semibold text-on-surface">{promises.filter((p) => hasCompletedMeasure(p.id)).length}件</strong>
+          です。残りは「まだ実施の途中」「予算・議案が制度上発生しない措置」等の理由で、公式資料との直接のつながりを特定できていないだけであり、「達成していない」という意味ではありません。
+        </p>
+      </div>
+
       <GlossaryNote
         term="進捗状況の表示"
         definition="「未着手」は、市長本人の公表資料等で着手していないことが確認できた場合に使います。まだ確認できていない場合は「確認中」と表示し、「未着手」とは区別しています（「確認中」は0件・未達成を意味しません）。"
@@ -205,8 +227,9 @@ export function MayorPolicyProgressPage() {
       </div>
 
       {/* Phase135-R項目8：公約→施策→予算→議案→成果の追跡到達度。「議案1件」等が「他の公約に
-          議案が存在しない」ことを意味しないよう、注記で明示する（誤読防止）。 */}
-      <SectionCard title="公式資料でどこまで追跡できているか">
+          議案が存在しない」ことを意味しないよう、注記で明示する（誤読防止）。上の「まずここを
+          見る」で要約済みのため、ここは詳細版（第2層）として位置づける。 */}
+      <SectionCard title="公式資料でどこまで追跡できているか（詳細）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           各公約について、公式資料で「具体的な施策」「予算」「議案」「成果（完了した施策）」のどこまで直接の対応関係を確認できたかを集計しています。件数が少ない項目（議案・成果）は「対応する議案・成果が存在しない」という意味ではなく、「現時点で当サイトが公式資料との直接の関連を確認できたのがこの件数」という意味です。多くの施策は市長の予算執行権限内の措置（要綱制定・人事配置等）であり、性質上、独立した議案を伴わない場合があります。
         </p>
@@ -322,7 +345,12 @@ export function MayorPolicyProgressPage() {
               {items.length > 0 ? (
                 <ul className="mt-4 space-y-3 border-t border-outline-variant pt-4">
                   {items.map((p) => (
-                    <PromiseCard key={p.id} promise={p} documents={promisesData.documents} />
+                    <PromiseCard
+                      key={p.id}
+                      promise={p}
+                      documents={promisesData.documents}
+                      hasCompletedMeasure={hasCompletedMeasure(p.id)}
+                    />
                   ))}
                 </ul>
               ) : (
