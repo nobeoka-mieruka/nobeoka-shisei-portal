@@ -1,10 +1,10 @@
 {
-  "runAt": "2026-08-30T14:23:21.668Z",
-  "dryRun": true,
-  "forced": true,
-  "lastSuccessfulRunAt": null,
-  "hoursSinceLast": null,
-  "gateReason": "force",
+  "runAt": "2026-08-31T22:56:31.435Z",
+  "dryRun": false,
+  "forced": false,
+  "lastSuccessfulRunAt": "2026-08-26T20:21:00.581Z",
+  "hoursSinceLast": 122.5919038888889,
+  "gateReason": "interval-elapsed",
   "ran": true,
   "allowedHosts": [
     "www.city.nobeoka.miyazaki.jp",
@@ -22,7 +22,7 @@
       "new": 0,
       "updated": 0,
       "unchanged": 2,
-      "removedSuspected": 0,
+      "removedSuspected": 2,
       "urlChangeSuspected": 0,
       "errors": 0
     },
@@ -74,8 +74,7 @@
       "categoryLabel": "議員名簿（変更検知）",
       "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
       "status": "ok",
-      "changed": false,
-      "note": "dry-run: 未保存"
+      "changed": false
     }
   ],
   "unavailableCategories": [
@@ -99,7 +98,7 @@
     }
   ],
   "fetchStats": {
-    "checked": 6,
+    "checked": 55,
     "count429": 0,
     "count403": 0,
     "count5xx": 0,
