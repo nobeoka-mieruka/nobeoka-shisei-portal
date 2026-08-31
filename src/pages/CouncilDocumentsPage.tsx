@@ -11,6 +11,8 @@ import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { GlossaryNote } from "../components/GlossaryNote";
+import { COUNCIL_GLOSSARY, SOURCE_GLOSSARY } from "../lib/councilGlossary";
 
 const councilSessions = councilSessionsData as CouncilSession[];
 
@@ -82,8 +84,19 @@ export function CouncilDocumentsPage() {
       </div>
 
       <p className="mb-4 rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-        本ページは、延岡市議会および延岡市が公開している会議録、審議結果、市議会だよりなどの一次資料を、市民が確認しやすいよう定例会ごとに整理したものです。資料の内容は変更せず掲載しています。最新情報および正式な内容については、延岡市議会公式サイトもあわせてご確認ください。当サイトは、特定の議員、会派、政党、議案への支持・反対を目的とするものではありません。
+        本ページは、延岡市議会および延岡市が公開している会議録、審議結果、市議会だよりなどの
+        <span className="font-medium text-on-surface">一次資料</span>
+        を、市民が確認しやすいよう定例会ごとに整理したものです。資料の内容は変更せず掲載しています。最新情報および正式な内容については、延岡市議会公式サイトもあわせてご確認ください。当サイトは、特定の議員、会派、政党、議案への支持・反対を目的とするものではありません。
       </p>
+
+      {/* Phase141項目7・13：初めて市議会を見る市民向けに、基礎用語をここでまとめて説明する。
+          単一情報源はsrc/lib/councilGlossary.ts。 */}
+      <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <GlossaryNote term="一次資料" definition={SOURCE_GLOSSARY["一次資料"]} />
+        <GlossaryNote term="定例会" definition={COUNCIL_GLOSSARY["定例会"]} />
+        <GlossaryNote term="臨時会" definition={COUNCIL_GLOSSARY["臨時会"]} />
+        <GlossaryNote term="本会議" definition={COUNCIL_GLOSSARY["本会議"]} />
+      </div>
 
       <a
         href="https://www.youtube.com/channel/UCGo355CFS2v2pAjbIkgzSAQ"

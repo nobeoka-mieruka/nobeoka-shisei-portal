@@ -27,6 +27,7 @@ import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 import { ReviewFlowTimeline } from "../components/bills/ReviewFlowTimeline";
 import { GlossaryNote } from "../components/GlossaryNote";
+import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -317,12 +318,28 @@ export function BillVoteDetailPage() {
               definition="請願・陳情に対する議会の判断です。「採択」は内容に賛成し実現を求めること、「不採択」は実現を求めないことを意味します。「一部採択」「趣旨採択」は、内容の一部または趣旨のみに賛成する判断です。"
             />
           )}
+          {/* Phase141項目6：議決結果の用語を、実際にこの議案が該当するものだけ表示する
+              （存在しない語の説明を大量追加しない）。単一情報源はsrc/lib/councilGlossary.ts。
+              「不認定」は文字列として「認定」を含むため、「不認定」に一致した場合は
+              「認定」（逆の意味）を重複表示しないよう除外する。 */}
+          {!isPetitionLike &&
+            bill.result !== "継続審査" &&
+            Object.entries(COUNCIL_GLOSSARY)
+              .filter(([term]) => bill.result.includes(term))
+              .filter(([term]) => !(term === "認定" && bill.result.includes("不認定")))
+              .map(([term, definition]) => <GlossaryNote key={term} term={term} definition={definition} />)}
         </div>
       </SectionCard>
 
       {/* 議案の概要 */}
       <SectionCard title="議案の概要">
         <div className="space-y-3">
+          {/* Phase141項目17・18：この概要文は、議案名・議決結果等から当サイトが機械的に
+              組み立てた定型文であり、延岡市議会が公式に作成した要約ではない。公式資料そのものと
+              誤認されないよう明示する（1177件中、独自に読み込んで作成した要約は現時点で0件）。 */}
+          <p className="text-[11px] text-on-surface-variant">
+            ※この概要は、議案名・提出者・議決結果などから当サイトが機械的に組み立てた説明です。延岡市議会が公式に作成した要約ではありません。詳しい内容は下記の出典PDF（原資料）でご確認ください。
+          </p>
           <p className="text-sm leading-relaxed text-on-surface">{bill.summary}</p>
           {bill.reason && (
             <div>
