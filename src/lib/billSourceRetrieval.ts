@@ -64,6 +64,69 @@ export const SOURCE_RETRIEVAL_CATEGORY_LABEL: Record<BillSourceRetrievalCategory
 };
 
 /**
+ * Phase144項目31：Phase142のA区分（174件）とPhase143のD-A区分（202件）は、
+ * 同じ「構造化しやすいカテゴリ（予算/契約/財産取得/決算/専決処分）」という判定基準を共有するが、
+ * **互いに素な（重複しない）集合**である。
+ * - A（174件）＝ classifyBillSourceRetrieval()が"A"を返す議案＝ transcriptUrlが**既に**個別に
+ *   登録されている議案のうち、構造化しやすいカテゴリのもの。
+ * - D-A（202件）＝ classifyDSourceRetrievalSubcategory()の対象＝ transcriptUrlが**まだ**
+ *   登録されていない議案（＝classifyBillSourceRetrievalが"D"を返す議案）のうち、
+ *   構造化しやすいカテゴリのもの。
+ * transcriptUrlの有無で完全に分岐するため、A（174件）とD-A（202件）は定義上重複しない
+ * （重複件数は常に0）。市民向けUIでは、この2つの数字をそのまま並べて表示すると
+ * 「174」「202」の関係が伝わらないため、内部分類の生数値を市民向けページへ直接出さない
+ * （項目34）。
+ */
+export function countOverlapBetweenAAndDA(bills: SourceRetrievalInput[]): number {
+  let overlap = 0;
+  for (const b of bills) {
+    const isA = classifyBillSourceRetrieval(b) === "A";
+    const isDA = classifyBillSourceRetrieval(b) === "D" && classifyDSourceRetrievalSubcategory(b) === "D-A";
+    if (isA && isDA) overlap++; // 定義上、常に0になるはずの検算用
+  }
+  return overlap;
+}
+
+/**
+ * Phase144項目32・33：「原資料への到達可能性」（このファイルのA/B/C/D）と「説明の品質段階」
+ * （src/lib/billSummaryQuality.tsのLevel0〜3）は、意図的に別軸として設計している。
+ * sourceRetrievalStatus（本ファイル）とsummaryQuality（billSummaryQuality.ts）を混同しないこと。
+ * 例：ある議案がA区分（本文取得が容易）であっても、まだ人が本文を読んで確認していなければ
+ * Level1のままであり、A区分＝Level3を意味しない。
+ *
+ * 1,177件全体を「原資料到達性区分（A/B/D。C区分は実例0件のため列を省略）」×
+ * 「説明品質段階（Level1/Level2/Level3）」でクロス集計する。合計は必ず1,177件になる。
+ */
+export function crossTabulateSourceRetrievalAndLevel<T extends SourceRetrievalInput>(
+  bills: T[],
+  levelOf: (bill: T) => 1 | 2 | 3,
+): Record<BillSourceRetrievalCategory, Record<"Level1" | "Level2" | "Level3", number>> {
+  const matrix: Record<string, Record<string, number>> = {};
+  for (const cat of ["A", "B", "C", "D"] as BillSourceRetrievalCategory[]) {
+    matrix[cat] = { Level1: 0, Level2: 0, Level3: 0 };
+  }
+  for (const b of bills) {
+    const cat = classifyBillSourceRetrieval(b);
+    const level = levelOf(b);
+    matrix[cat][`Level${level}`]++;
+  }
+  return matrix as Record<BillSourceRetrievalCategory, Record<"Level1" | "Level2" | "Level3", number>>;
+}
+
+/**
+ * Phase144項目35：「確認済み」という言葉を安易にまとめず、3段階を区別する市民向けラベル。
+ * - sourceLinked（出典確認済み）：審議結果PDF等の出典が紐付いている（1,177件全件が該当）。
+ * - sourceTextVerified（本文確認済み）：会議録等の一次資料本文を人が実際に確認した。
+ * - summaryVerified（詳しい説明確認済み）：本文確認の上で、市民向けの独自説明まで作成・照合した（Level3）。
+ * この3つを同じ「確認済み」という言葉でまとめて表示しない。
+ */
+export const CONFIRMATION_LEVEL_LABEL = {
+  sourceLinked: "出典確認済み",
+  sourceTextVerified: "本文確認済み",
+  summaryVerified: "詳しい説明確認済み",
+} as const;
+
+/**
  * Phase143項目17〜19：A区分（174件）を将来（Phase144以降）半自動処理する際の、
  * 一次資料からの抽出候補の共通スキーマ（設計のみ。billVotes.jsonへの永続フィールドではない）。
  *

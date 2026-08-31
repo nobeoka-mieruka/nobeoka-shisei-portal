@@ -22,6 +22,7 @@ import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import { summarizeVoteClassification, countBillsWithKnownProposerType } from "../lib/billVotes";
+import { getBillExplanationLevel } from "../lib/billSummaryQuality";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
@@ -416,6 +417,10 @@ export function DataStatusPage() {
   const billVotesVoteMethodKnown = billVotes.filter((b) => b.voteMethod).length;
   const billVotesCommitteeKnown = billVotes.filter((b) => b.committee).length;
   const billVotesProposerTypeKnown = countBillsWithKnownProposerType(billVotes);
+  // Phase144項目34・35：「出典が紐付いていること」と「一次資料本文に基づく詳しい説明があること」は
+  // 別の確認段階（src/lib/billSummaryQuality.ts）のため、別の行として分けて表示する
+  // （同じ「確認済み」という言葉でまとめない）。
+  const billVotesDetailedExplanationCount = billVotes.filter((b) => getBillExplanationLevel(b) === 3).length;
   const councilExtra: DataDomain = {
     label: "議案・採決データベース",
     count: billVotes.length,
@@ -586,6 +591,11 @@ export function DataStatusPage() {
       label: "議案：付託委員会の確認",
       metric: simpleCompleteness(billVotesCommitteeKnown, billVotes.length),
       note: "未確認分は会議録未公開の会期のみ（委員会付託省略案件は「付託なし」として確認済みに計上）",
+    },
+    {
+      label: "議案：一次資料本文に基づく詳しい説明の作成",
+      metric: simpleCompleteness(billVotesDetailedExplanationCount, billVotes.length),
+      note: "議案名・議決結果・出典（審議結果PDF等）は全1,177件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。",
     },
     {
       label: "政治資金団体：代表者・会計責任者・当該年分収支の完全確認",

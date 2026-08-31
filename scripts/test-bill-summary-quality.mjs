@@ -91,18 +91,24 @@ check("Level3（独自要約あり）の議案数と、Phase142で一次資料�
   }
 });
 
-check("mainChangesに含まれる金額表記は、桁区切りカンマと「円」表記のみで、千円・百万円・万円が同一文字列内で混在していない（単位変換ミスの簡易検査）", () => {
+check("mainChangesに含まれる金額表記に、算用数字＋「千円」「百万円」という省略単位（決算書・集計表特有の表記で、当サイトの本文中の金額表記スタイルには存在しない）が混入していない（単位変換ミスの簡易検査）", () => {
+  // Phase142・143は算用数字＋「億」「万円」表記（例："690億6,600万円"）、Phase144は原文どおりの
+  // 漢数字読み下し表記（例："六百八十八億六千五百万円"）を使っており、どちらも"百万円"や"千円"を
+  // 「万」「億」等の漢数字と組み合わせた大きな数の一部として含みうる（例："六千五百万円"は
+  // 部分文字列として"百万円"を含むが、これは正しい表記であり誤りではない）。単純な部分文字列
+  // 一致では誤検知するため、実際に単位変換ミスが疑われる形（算用数字に直接「千円」「百万円」が
+  // 単位として付く、決算書特有の省略表記）だけを検出する。
+  // 「◯万◯千円」（例："2,968万9千円"）は、万の位と千の位を組み合わせた正常な日本語の桁表記であり、
+  // 誤りではないため対象外とする（直前4文字以内に「万」がある「千円」は除外）。
+  const suspiciousSenPattern = /(?<![万][0-9０-９,，]{0,4})[0-9０-９][,，0-9０-９]*\s*千円/;
+  const suspiciousHyakumanPattern = /[0-9０-９][,，0-9０-９]*\s*百万円/;
   const suspects = [];
   for (const b of billVotes) {
     for (const line of b.mainChanges ?? []) {
-      const hasMan = /万円/.test(line);
-      const hasSen = /千円/.test(line) && !/万\S{0,3}千円/.test(line); // 「◯万◯千円」は正常な日本語表記なので除外
-      const hasHyakuman = /百万円/.test(line);
-      if (hasMan && hasHyakuman) suspects.push(`${b.id}: ${line}`);
-      if (hasSen && hasHyakuman) suspects.push(`${b.id}: ${line}`);
+      if (suspiciousSenPattern.test(line) || suspiciousHyakumanPattern.test(line)) suspects.push(`${b.id}: ${line}`);
     }
   }
-  assert.equal(suspects.length, 0, `単位混在の疑いがある記述: ${suspects.join(" / ")}`);
+  assert.equal(suspects.length, 0, `算用数字＋省略単位の疑いがある記述: ${suspects.join(" / ")}`);
 });
 
 check("summarySource: \"manual\"の議案は、既存の議決結果（result）を書き換えていない（Phase141時点の議決結果分布と比較して変化がない）", () => {

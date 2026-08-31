@@ -110,14 +110,14 @@ check("Phase143で新たに一次資料本文を確認・独自要約へ昇格�
   }
 });
 
-check("summaryVerified（Level3、独自要約あり）の総数が22件である（Phase142の19件＋Phase143で新たに昇格した3件）", () => {
+check("summaryVerified（Level3、独自要約あり）の総数が61件である（Phase142の19件＋Phase143の3件＋Phase144で新たに昇格した39件。詳細な内訳の回帰確認はtest-bill-level3-criteria.mjs側で行う）", () => {
   const level3 = billVotes.filter((b) => b.summarySource === "manual" && (b.reason || (b.mainChanges && b.mainChanges.length > 0) || b.citizenImpact));
-  assert.equal(level3.length, 22, `Level3の件数が22件ではありません（${level3.length}件）`);
+  assert.equal(level3.length, 61, `Level3の件数が61件ではありません（${level3.length}件）`);
 });
 
-check("sourceTextVerifiedの総数が23件である（Phase142の20件＋Phase143で新たに本文確認・データ反映した3件）", () => {
+check("sourceTextVerifiedの総数が62件である（Phase142の20件＋Phase143の3件＋Phase144で新たに本文確認・データ反映した39件）", () => {
   const verified = billVotes.filter((b) => b.sourceTextVerifiedAt);
-  assert.equal(verified.length, 23, `sourceTextVerifiedAtを持つ議案の件数が23件ではありません（${verified.length}件）`);
+  assert.equal(verified.length, 62, `sourceTextVerifiedAtを持つ議案の件数が62件ではありません（${verified.length}件）`);
 });
 
 check("議案第162号は、Phase143でも引き続きLevel2（本文確認済み・独自要約なし）のままで、Level3へ無理に昇格されていない", () => {
