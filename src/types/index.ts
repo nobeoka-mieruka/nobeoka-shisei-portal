@@ -1357,17 +1357,29 @@ export interface BillVoteItem {
   effectiveDate?: string;
 
   // 議案の概要（詳細ページ用の任意項目。データがない項目は表示しない）
-  /** 提出理由。 */
+  /** 提出理由。一次資料（会議録の提案理由説明等）で確認できた場合のみ設定する。推測で埋めない。 */
   reason?: string;
-  /** 主な変更内容の箇条書き。 */
+  /** 主な変更内容の箇条書き。一次資料で確認できた事実（金額・契約方法・相手方等）のみ。 */
   mainChanges?: string[];
-  /** 市民生活への影響。 */
+  /** 市民生活への影響。一次資料から直接読み取れる場合のみ設定する（条例改正だから等の機械的な決めつけは禁止）。 */
   citizenImpact?: string;
   /** 関連する予算の概要。 */
   relatedBudgetSummary?: string;
   /** 関連する条例名の一覧（公式資料で確認できた場合のみ）。 */
   relatedOrdinances?: string[];
   topics?: string[];
+
+  /**
+   * Phase142：一次資料本文（会議録の提案理由説明・議案書等）を人が実際に読み、この議案固有の
+   * 内容を確認した日付（ISO形式）。sourceFilePath/sourceDocumentId等の「出典が紐付いていること
+   * （sourceLinked）」とは別の軸として扱う（紐付いているだけでは本文を読んだことにはならない）。
+   * 本文を確認した結果、この議案固有の説明が資料に見当たらなかった場合も、確認作業自体は
+   * 行ったこととして設定してよい（その場合はreason等を推測で埋めず、verificationNoteに
+   * 「確認したが記載なし」等の経緯を記録する）。src/lib/billSummaryQuality.tsの
+   * getBillExplanationLevel()が、この値とreason/summarySource等を組み合わせて
+   * 「どこまで確認済みか」の段階を判定する（新規の巨大な状態フィールド群は追加しない）。
+   */
+  sourceTextVerifiedAt?: string;
 
   /** ISO形式。サイト運営者がこの議案データをいつ確認したか。 */
   lastVerified?: string;

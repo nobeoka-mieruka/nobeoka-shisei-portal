@@ -39,6 +39,13 @@ function main() {
       skippedManual++;
       continue;
     }
+    // Phase142：一次資料本文を人が確認して書いた市民向け要約（summarySource: "manual"）は、
+    // extractionSourceが"automatic"のままでも（＝議決結果等の構造化データ自体は自動抽出由来でも）、
+    // 定型文で上書きしない。
+    if (bill.summarySource === "manual") {
+      skippedManual++;
+      continue;
+    }
     const nextSummary = buildDetailSummary(bill);
     if (bill.summary === nextSummary && bill.summarySource === "template") {
       unchanged++;

@@ -28,6 +28,7 @@ import { getSeoForPath } from "../lib/seo";
 import { ReviewFlowTimeline } from "../components/bills/ReviewFlowTimeline";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
+import { BILL_EXPLANATION_LEVEL_DESCRIPTION, BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -153,6 +154,10 @@ export function BillVoteDetailPage() {
 
   const verification = verificationStatusOf(bill);
   const isVerified = verification === "verified";
+  // Phase142：「出典が紐付いていること」と「本文を読んで確認したこと」は別軸。
+  // どこまで確認済みかを4段階（Level0〜3）で示す。単一情報源はsrc/lib/billSummaryQuality.ts。
+  const explanationLevel = getBillExplanationLevel(bill);
+  const isManualSummary = bill.summarySource === "manual";
 
   const sessionBills = billVotes.filter((b) => b.session === bill.session);
   const idx = sessionBills.findIndex((b) => b.id === bill.id);
@@ -334,12 +339,37 @@ export function BillVoteDetailPage() {
       {/* 議案の概要 */}
       <SectionCard title="議案の概要">
         <div className="space-y-3">
-          {/* Phase141項目17・18：この概要文は、議案名・議決結果等から当サイトが機械的に
-              組み立てた定型文であり、延岡市議会が公式に作成した要約ではない。公式資料そのものと
-              誤認されないよう明示する（1177件中、独自に読み込んで作成した要約は現時点で0件）。 */}
-          <p className="text-[11px] text-on-surface-variant">
-            ※この概要は、議案名・提出者・議決結果などから当サイトが機械的に組み立てた説明です。延岡市議会が公式に作成した要約ではありません。詳しい内容は下記の出典PDF（原資料）でご確認ください。
-          </p>
+          {/* Phase142：この議案の説明が「どこまで確認済みか」を4段階で明示する。
+              出典が紐付いているだけの状態（Level1）と、一次資料本文まで確認した状態（Level2・3）を
+              区別する。単一情報源はsrc/lib/billSummaryQuality.ts。 */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                explanationLevel >= 3
+                  ? "bg-primary-container text-on-primary-container"
+                  : explanationLevel >= 2
+                    ? "bg-tertiary-container text-on-tertiary-container"
+                    : "bg-surface-container-high text-on-surface-variant"
+              }`}
+            >
+              確認状況：{BILL_EXPLANATION_LEVEL_LABEL[explanationLevel]}
+            </span>
+          </div>
+          <p className="text-[11px] text-on-surface-variant">{BILL_EXPLANATION_LEVEL_DESCRIPTION[explanationLevel]}</p>
+
+          {/* Phase141項目17・18／Phase142：定型説明（Level0・1）は「機械的に組み立てた説明」である旨を、
+              独自要約（Level3、summarySource: "manual"）は「一次資料をもとにしたこのサイトによる要約」で
+              あり公式の要約ではない旨を、それぞれ正しく区別して明示する。公式資料そのものと
+              誤認されないようにするため。 */}
+          {isManualSummary ? (
+            <p className="text-[11px] text-on-surface-variant">
+              ※この説明は、会議録等の一次資料本文をもとに、当サイトが市民向けに整理したものです（延岡市議会が公式に作成した要約ではありません）。詳しい内容は下記の根拠資料（会議録・PDF等）でご確認ください。
+            </p>
+          ) : (
+            <p className="text-[11px] text-on-surface-variant">
+              ※この概要は、議案名・提出者・議決結果などから当サイトが機械的に組み立てた説明です。延岡市議会が公式に作成した要約ではありません。詳しい内容は下記の出典PDF（原資料）でご確認ください。
+            </p>
+          )}
           <p className="text-sm leading-relaxed text-on-surface">{bill.summary}</p>
           {bill.reason && (
             <div>
@@ -389,7 +419,12 @@ export function BillVoteDetailPage() {
             </div>
           )}
         </div>
-        {!hasOverview && (
+        {!hasOverview && explanationLevel >= 2 && (
+          <p className="mt-1 text-xs text-on-surface-variant">
+            一次資料本文（会議録等）は確認しましたが、この議案固有の提案理由等の記載は見当たりませんでした。推測で補うことはしていません。
+          </p>
+        )}
+        {!hasOverview && explanationLevel < 2 && (
           <p className="mt-1 text-xs text-on-surface-variant">概要以外の項目は公開資料で確認でき次第、追加します。</p>
         )}
       </SectionCard>
