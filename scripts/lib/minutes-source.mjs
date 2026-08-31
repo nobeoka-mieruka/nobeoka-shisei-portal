@@ -502,9 +502,16 @@ export async function resolveYearTreedepth({ code, year }) {
   throw new Error(`年 ${year} に対応するタブが見つかりませんでした（令和5年〜令和8年、平成12年〜平成29年の範囲で確認済み）`);
 }
 
-/** 会期ラベル（例: "令和 7年 第15回臨時会"）から、回次・区分を抽出する。 */
+/**
+ * 会期ラベル（例: "令和 7年 第15回臨時会"）から、回次・区分を抽出する。
+ * Phase138で発見：延岡市議会会議録検索システムは1桁の回次を「第 8回」のように
+ * 全角/半角スペースで桁埋めして表示するため、従来の`第(\d+)回`では「第」と数字の間に
+ * 空白があるラベル（1〜9回のうち桁埋めされたもの）を取りこぼしていた（sessionNumber/
+ * sessionTypeがundefinedのまま返り、呼び出し側で会期を特定できなくなる不具合）。
+ * 空白の有無を許容するよう修正した。
+ */
 function parseSessionLabel(label) {
-  const m = label.match(/第(\d+)回(定例会|臨時会)/);
+  const m = label.match(/第\s*(\d+)回(定例会|臨時会)/);
   return m ? { sessionNumber: `第${m[1]}回`, sessionType: m[2] } : { sessionNumber: undefined, sessionType: undefined };
 }
 

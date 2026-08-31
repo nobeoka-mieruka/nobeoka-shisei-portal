@@ -1868,7 +1868,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 42977780000,
       "totalExpenditureYen": 42230027000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 13431875000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -1882,13 +1882,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2001,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 4446200000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 48028775000,
@@ -1910,9 +1919,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成13年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2001,
@@ -2002,7 +2021,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 41372009000,
       "totalExpenditureYen": 40796507000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 12558696000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2016,13 +2035,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2002,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 4714900000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 48537904000,
@@ -2044,9 +2072,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成14年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2002,
@@ -2136,7 +2174,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 41963736000,
       "totalExpenditureYen": 41192424000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 12337610000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2150,13 +2188,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2003,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 5066000000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 49309931000,
@@ -2178,9 +2225,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成15年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2003,
@@ -2270,7 +2327,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 41660716000,
       "totalExpenditureYen": 40820287000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 12559132000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2284,13 +2341,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2004,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 4224600000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 49264002000,
@@ -2312,9 +2378,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成16年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2004,
@@ -2404,7 +2480,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 52625050000,
       "totalExpenditureYen": 51480995000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 13553110000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2418,13 +2494,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2005,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 5699800000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 60829651000,
@@ -2446,9 +2531,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成17年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2005,
@@ -2537,7 +2632,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 57626494000,
       "totalExpenditureYen": 56217081000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 13863514000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2551,13 +2646,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2006,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 8862200000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 70502189000,
@@ -2579,9 +2683,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成18年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2006,
@@ -2662,7 +2776,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 58040377000,
       "totalExpenditureYen": 56668465000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 15145106000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2686,13 +2800,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成19年度の値：55,678,000千円）"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+          "sourceTitle": "総務省「平成19年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2007,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 6957300000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 70858341000,
@@ -2714,9 +2837,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+          "sourceTitle": "総務省「平成19年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2007,
@@ -2797,7 +2930,7 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 58158783000,
       "totalExpenditureYen": 56859095000,
-      "localTaxRevenueYen": null,
+      "localTaxRevenueYen": 14725100000,
       "localAllocationTaxYen": null,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
@@ -2821,13 +2954,22 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成20年度の値：54,140,000千円）"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+          "sourceTitle": "総務省「平成20年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
     },
     "debt": {
       "fiscalYear": 2008,
-      "municipalBondIssuanceYen": null,
+      "municipalBondIssuanceYen": 7433478000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 71370425000,
@@ -2849,9 +2991,19 @@
         ]
       },
       "notes": "地方債現在高（残高）のみ登録。当該年度の市債発行額（フロー）は今回未確認。",
-      "municipalBondIssuanceStatus": null,
-      "municipalBondIssuanceSourceRefs": [],
-      "municipalBondIssuanceValueType": null
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+          "sourceTitle": "総務省「平成20年度市町村決算カード」宮崎県（延岡市、p.4）",
+          "sourceOrganization": "総務省",
+          "accessedAt": "2026-08-31",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase138で新規登録。既存sourceRefsと同一の決算カードPDFを再読み込みし、Read toolで「地方債」欄（歳入の状況表、決算額）を直接確認した（UNR-036の解決）。市債残高（ストック）とは別の、当該年度の発行額（フロー）。"
+        }
+      ],
+      "municipalBondIssuanceValueType": "settlement"
     },
     "fund": {
       "fiscalYear": 2008,
@@ -3050,10 +3202,10 @@
         "perCapitaYen": null,
         "totalYen": 15342990000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
-        "definitionNote": "「基金の残高」棒グラフの平成21年度末（見込み）値15,342,990,000円（一般・特別・企業会計の合計、本文に明記）。この値は後年（FY2011決算特集等）の「21年度末」欄でも同一値として繰り返し引用されており、実質的に確定値と一致しているとみられるが、本資料自体は「見込み」表記のためisEstimateをtrueとする。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "fiscalReserveFundYen": 2562208000,
+        "bondRedemptionFundYen": 1109383000,
+        "otherSpecificPurposeFundsYen": 7939003000,
+        "definitionNote": "「基金の残高」棒グラフの平成21年度末（見込み）値15,342,990,000円（一般・特別・企業会計の合計、本文に明記）。この値は後年（FY2011決算特集等）の「21年度末」欄でも同一値として繰り返し引用されており、実質的に確定値と一致しているとみられるが、本資料自体は「見込み」表記のためisEstimateをtrueとする。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。 【Phase138追記】財政調整基金単体（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金（otherSpecificPurposeFundsYen）は、総務省「平成21年度市町村決算カード」（延岡市、p.4、決算カード内の「積立金 現在高」区分）から新規登録した（UNR-037の解決）。この決算カードの基準（総務省統一様式）と、上記totalYen（広報のべおか、一般・特別・企業会計合計）は集計範囲が異なる可能性があるため、内訳3区分の合計とtotalYenを比較・整合させる操作は行っていない。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2702.pdf",
@@ -3064,6 +3216,15 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債・基金の残高（一般・特別・企業会計の合計）」棒グラフ（18〜21年度末、21年度末は見込み、本文に明記）の21年度末値。"
+          },
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-10_45.pdf",
+            "sourceTitle": "総務省「平成21年度市町村決算カード」宮崎県（延岡市、p.4）",
+            "sourceOrganization": "総務省",
+            "accessedAt": "2026-08-31",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase138で新規登録。同年度finance.sourceRefsに既に登録済みの決算カードPDFを、fund.balance用に再解析した（UNR-037の解決）。"
           }
         ]
       },
@@ -3233,10 +3394,10 @@
         "perCapitaYen": null,
         "totalYen": 16319980000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
-        "definitionNote": "「基金の残高」棒グラフの平成22年度末（見込み）値16,319,980,000円（一般・特別・企業会計の合計、本文に明記、決算未確定時点の見込額）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "fiscalReserveFundYen": 3173591000,
+        "bondRedemptionFundYen": 1112247000,
+        "otherSpecificPurposeFundsYen": 8943977000,
+        "definitionNote": "「基金の残高」棒グラフの平成22年度末（見込み）値16,319,980,000円（一般・特別・企業会計の合計、本文に明記、決算未確定時点の見込額）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。 【Phase138追記】財政調整基金単体（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金（otherSpecificPurposeFundsYen）は、総務省「平成22年度市町村決算カード」（延岡市、p.4、決算カード内の「積立金 現在高」区分）から新規登録した（UNR-037の解決）。この決算カードの基準（総務省統一様式）と、上記totalYen（広報のべおか、一般・特別・企業会計合計）は集計範囲が異なる可能性があるため、内訳3区分の合計とtotalYenを比較・整合させる操作は行っていない。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2690.pdf",
@@ -3247,6 +3408,15 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「市債・基金の残高（一般・特別・企業会計の合計）」棒グラフ（19〜22年度末、22年度末は見込み、本文に明記）の22年度末値。決算確定後の同一時点値が2011年11月号決算特集で公表されている可能性があるため、確定値が別途見つかった場合はこちらを見込み値として残しつつ確定値を優先する。"
+          },
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-11_45.pdf",
+            "sourceTitle": "総務省「平成22年度市町村決算カード」宮崎県（延岡市、p.4）",
+            "sourceOrganization": "総務省",
+            "accessedAt": "2026-08-31",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase138で新規登録。同年度finance.sourceRefsに既に登録済みの決算カードPDFを、fund.balance用に再解析した（UNR-037の解決）。"
           }
         ]
       },
@@ -3405,10 +3575,10 @@
         "perCapitaYen": null,
         "totalYen": 18038500000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": null,
-        "bondRedemptionFundYen": null,
-        "otherSpecificPurposeFundsYen": null,
-        "definitionNote": "「基金（貯金）の残高の推移」棒グラフの平成23年度末値18,038,500,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。",
+        "fiscalReserveFundYen": 3502760000,
+        "bondRedemptionFundYen": 1713342000,
+        "otherSpecificPurposeFundsYen": 9674730000,
+        "definitionNote": "「基金（貯金）の残高の推移」棒グラフの平成23年度末値18,038,500,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。 【Phase138追記】財政調整基金単体（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金（otherSpecificPurposeFundsYen）は、総務省「平成23年度市町村決算カード」（延岡市、p.4、決算カード内の「積立金 現在高」区分）から新規登録した（UNR-037の解決）。この決算カードの基準（総務省統一様式）と、上記totalYen（広報のべおか、一般・特別・企業会計合計）は集計範囲が異なる可能性があるため、内訳3区分の合計とtotalYenを比較・整合させる操作は行っていない。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2672.pdf",
@@ -3419,6 +3589,15 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "「基金（貯金）の残高の推移」棒グラフ（20〜23年度末、一般・特別・企業会計の合計、本文に明記）の23年度末値。20年度末153億1,590万円・21年度末153億4,299万円・22年度末163億1,998万円という推移も確認したが、これらは既存データの他フィールドと重複するため登録しない。"
+          },
+          {
+            "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-12_45.pdf",
+            "sourceTitle": "総務省「平成23年度市町村決算カード」宮崎県（延岡市、p.4）",
+            "sourceOrganization": "総務省",
+            "accessedAt": "2026-08-31",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase138で新規登録。同年度finance.sourceRefsに既に登録済みの決算カードPDFを、fund.balance用に再解析した（UNR-037の解決）。"
           }
         ]
       },
