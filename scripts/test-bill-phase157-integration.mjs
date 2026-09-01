@@ -41,7 +41,7 @@ check("Phase153（条例96件）：全件Level3化されている（実証済み
   assert.equal(l2Count, 22, `Phase153・154でLevel2止まりとなった議案が22件ではありません（${l2Count}件）`);
 });
 
-check("Level1+Level2+Level3の合計が議案総数1,177件と一致し、Level3総数は510件である", () => {
+check("Level1+Level2+Level3の合計が議案総数1,177件と一致し、Level3総数はPhase157完了時点（510件）を下限とする", () => {
   let l1 = 0, l2 = 0, l3 = 0;
   for (const b of billVotes) {
     if (isLevel3(b)) l3++;
@@ -49,8 +49,10 @@ check("Level1+Level2+Level3の合計が議案総数1,177件と一致し、Level3
     else l1++;
   }
   assert.equal(l1 + l2 + l3, 1177, `Level1+2+3の合計が1,177件ではありません（${l1 + l2 + l3}件）`);
-  assert.equal(l3, 510, `Level3の総数が510件ではありません（${l3}件）`);
-  assert.equal(l2, 65, `Level2の総数が65件ではありません（${l2}件）`);
+  // Phase158以降でさらにLevel3化が進むため、厳密な固定値ではなく下限チェックとする。
+  // Phase158〜162時点の正確な値はtest-bill-phase162-integration.mjs側で検証する。
+  assert.ok(l3 >= 510, `Level3の総数が510件を下回っています（${l3}件）`);
+  assert.ok(l2 >= 65, `Level2の総数が65件を下回っています（${l2}件）`);
 });
 
 check("sourceTextVerifiedとLevel2+Level3の関係：sourceTextVerifiedAtを持つ議案は必ずLevel2かLevel3のいずれかであり、その逆（Level2/3なのにsourceTextVerifiedAtが無い）は存在しない", () => {

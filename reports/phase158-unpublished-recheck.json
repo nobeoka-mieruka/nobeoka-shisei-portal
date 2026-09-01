@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-09-01",
+  "startingUnpublishedCount": 10,
+  "newlyPublishedCount": 0,
+  "stillUnpublishedCount": 10,
+  "level2CandidateCount": 0,
+  "level3CandidateCount": 0,
+  "sessionCheckResult": {
+    "checkedAt": "2026-09-01",
+    "code": "48o046ot0cia1xvtw7",
+    "year": 2026,
+    "note": "scripts/lib/minutes-source.mjsのlistSessionsForYear({code:'48o046ot0cia1xvtw7', year:2026})を1回だけ実行。令和8年のタブに登場するセッションは以下の1件のみで、令和8年5月臨時会・6月定例会に相当するセッションは未登場（Phase109時点の確認結果と同一）。",
+    "sessionsFoundFor2026": [
+      {
+        "treedepth": "令和 8年 第24回定例会 ",
+        "label": "令和 8年 第24回定例会",
+        "sessionNumber": "第24回",
+        "sessionType": "定例会",
+        "note": "令和8年2〜3月開催（令和8年度当初予算議会）。fileName R080216A〜R080319A相当。対象10件（5月臨時会・6月定例会）とは別会期。"
+      }
+    ],
+    "conclusion": "令和8年5月臨時会・6月定例会に相当するセッションはkensakusystem.jpの年タブに未登場。会議録は本日時点でも未公開のまま。"
+  },
+  "task004Status": {
+    "coverageConfirmed": true,
+    "note": "src/data/blockedTaskClassification.jsonのTASK-004（status: WAITING_EXTERNAL, blockedReasonCode: SOURCE_NOT_PUBLISHED, attemptCount: 24, autoRecheck: true）が、令和8年5月臨時会2件・6月定例会8件を含むbillVotes24件（voteMethod/committee未確認分）を包括的にカバーしていることを確認した。autoRecheckMechanismは.github/workflows/update-council-documents.yml（既存の日次自動更新）であり、会議録公開後は次回自動巡回で反映される想定。TASK-004自体は変更していない。新規の監視の仕組みは作成していない（二重監視回避）。"
+  },
+  "bills": [
+    {
+      "id": "2026-06-gian-20",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "令和8年6月定例会の会議録は本日時点でkensakusystem.jpの年タブに未登場。会議録が未作成・未公開であるためであり、議案資料自体が不存在という意味ではない（404・リンク切れ・資料不存在とは異なる）。"
+    },
+    {
+      "id": "2026-06-gian-5",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-06-gian-6",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-06-gian-7",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-06-gian-16",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-06-gian-17",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-06-gian-18",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-06-gian-21",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年6月定例会の会議録未公開）。"
+    },
+    {
+      "id": "2026-05-extraordinary-gian-2",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "令和8年5月臨時会の会議録は本日時点でkensakusystem.jpの年タブに未登場。会議録が未作成・未公開であるためであり、議案資料自体が不存在という意味ではない（404・リンク切れ・資料不存在とは異なる）。"
+    },
+    {
+      "id": "2026-05-extraordinary-gian-3",
+      "classification": "NOT_YET_PUBLISHED",
+      "fileName": null,
+      "what": null,
+      "reason": null,
+      "note": "同上（令和8年5月臨時会の会議録未公開）。"
+    }
+  ]
+}

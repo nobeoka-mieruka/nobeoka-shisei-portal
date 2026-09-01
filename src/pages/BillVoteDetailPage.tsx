@@ -28,6 +28,7 @@ import { getSeoForPath } from "../lib/seo";
 import { ReviewFlowTimeline } from "../components/bills/ReviewFlowTimeline";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
+import { BillCategoryNotice, BillResultOutcomeNotice } from "../components/bills/BillCategoryNotice";
 import { BILL_EXPLANATION_LEVEL_DESCRIPTION, BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
@@ -293,6 +294,10 @@ export function BillVoteDetailPage() {
         </dl>
       </div>
 
+      {/* Phase161：意見書・決議・請願・陳情は市長提出の条例・予算議案とは性質が異なるため、
+          カテゴリ専用の案内文を表示する（該当しない案件では何も表示しない）。 */}
+      <BillCategoryNotice bill={bill} />
+
       {/* 審査の流れ */}
       <SectionCard title="審査の流れ">
         <ReviewFlowTimeline bill={bill} allBills={billVotes} />
@@ -322,6 +327,11 @@ export function BillVoteDetailPage() {
               term="採択・不採択"
               definition="請願・陳情に対する議会の判断です。「採択」は内容に賛成し実現を求めること、「不採択」は実現を求めないことを意味します。「一部採択」「趣旨採択」は、内容の一部または趣旨のみに賛成する判断です。"
             />
+          )}
+          {/* Phase161：意見書・決議・請願・陳情は、市長提出議案とは制度上の位置づけが異なるため、
+              単一情報源であるCOUNCIL_GLOSSARY（src/lib/councilGlossary.ts）から該当する用語のみを表示する。 */}
+          {bill.category && COUNCIL_GLOSSARY[bill.category] && (
+            <GlossaryNote term={bill.category} definition={COUNCIL_GLOSSARY[bill.category]} />
           )}
           {/* Phase141項目6：議決結果の用語を、実際にこの議案が該当するものだけ表示する
               （存在しない語の説明を大量追加しない）。単一情報源はsrc/lib/councilGlossary.ts。
@@ -433,6 +443,9 @@ export function BillVoteDetailPage() {
       <SectionCard title="議決結果">
         <p className="text-xs text-on-surface-variant">議会全体の結果</p>
         <p className="text-2xl font-bold text-on-surface">{bill.result}</p>
+        {/* Phase161：「撤回」「廃案」を、議会が内容に反対した「否決」や請願・陳情の「不採択」と
+            明確に区別して案内する（既存のresultフィールドの値のみを用いる）。 */}
+        <BillResultOutcomeNotice bill={bill} />
         {!isVerified && (
           <p className="mt-1 text-xs text-on-surface-variant">
             {bill.unresolvedFields?.includes("result")

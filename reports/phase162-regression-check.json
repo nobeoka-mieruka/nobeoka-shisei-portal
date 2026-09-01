@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-09-04",
+  "note": "Phase162統合時に、既存Level3（Phase157完了時点510件）を対象に、summary/reason/mainChanges/result/votingDate/billNumber/billTitle/transcriptUrlの意図しない変更が無いかを親セッションが直接確認した結果を記録する。",
+  "preExistingLevel3Count": 510,
+  "postIntegrationLevel3Count": 622,
+  "newlyPromotedCount": 112,
+  "unintendedChangesAmongPreExistingLevel3": 0,
+  "droppedFromLevel3": 0,
+  "totalBillsChangedThisIntegration": 200
+}

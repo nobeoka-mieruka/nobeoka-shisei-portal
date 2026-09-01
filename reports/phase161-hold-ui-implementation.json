@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-09-01",
+  "statementBillCount": 36,
+  "petitionBillCount": 30,
+  "withdrawnAbandonedCount": 3,
+  "filesChanged": [
+    "src/pages/BillVoteDetailPage.tsx",
+    "src/lib/councilGlossary.ts"
+  ],
+  "filesCreated": [
+    "src/components/bills/BillCategoryNotice.tsx"
+  ],
+  "glossaryAddedCount": 5,
+  "personalInfoAddedCount": 0,
+  "dataValueChangesCount": 0,
+  "typecheckResult": "pass",
+  "lintResult": "pass",
+  "buildResult": "pass",
+  "testResult": "pass",
+  "implementationSummary": "src/components/bills/BillCategoryNotice.tsx を新規作成し、(1) getBillCategoryNoticeText(bill) — category==='意見書'|'決議'|'請願'|'陳情' のとき、市長提出の予算・条例議案とは異なる旨を、既存フィールド（category・proposer・proposerType・committee）のみから組み立てて返す関数と、それを表示する <BillCategoryNotice> コンポーネント、(2) getBillResultOutcomeNotice(bill) — result==='撤回'/'廃案'/(includes)'否決'/(includes)'不採択' を判定し、'撤回'『提出者自身がこの案件を、採決される前に取り下げました。そのため採決は行われていません。議会が内容に反対した「否決」とは異なります。』／'廃案'『会期中に議決に至らないまま、この案件は「廃案」となりました。議会が内容に反対した「否決」とは異なります。』／通常の'否決'／請願・陳情の'不採択' をそれぞれ区別する文言を返す関数と <BillResultOutcomeNotice> コンポーネントを実装した。撤回・廃案は emphasize=true として tertiary-container の目立つ枠、否決・不採択は通常の補足テキストで表示を分けた。請願の案内文には『紹介議員：現在のデータには含まれていません』という正直な注記を含め、BillVoteItem型への新規フィールド追加は行っていない（Phase156の設計どおり型拡張はコンポーネント側の固定文言に留めた）。BillVoteDetailPage.tsxでは、議案基本情報カードの直後（審査の流れセクションの前）に<BillCategoryNotice bill={bill} />を追加し、議決結果セクションの結果表示直下に<BillResultOutcomeNotice bill={bill} />を追加した。また『審査の流れ』セクションの用語説明ブロックに、bill.categoryがCOUNCIL_GLOSSARYに存在する場合（意見書/決議/請願/陳情）のみGlossaryNoteを表示する分岐を追加した。src/lib/councilGlossary.ts のCOUNCIL_GLOSSARYへ、既存の用語集の仕組みを再利用する形で「意見書」「決議」「請願」「陳情」「廃案」の5用語を追記した（新規の用語集ファイルは作らず、既存の単一情報源に追記する方針を踏襲）。billVotes.json・scripts/lib配下・package.json・reports配下・billRiskClassification.ts等の他Phaseファイルは一切変更していない。市民向けUIに『HOLD』『REVIEW』『R1』『R2』『R3』等の内部コードを一切出力しないことを確認済み（新規コンポーネントもcategory/result等の公開フィールドのみを参照し、内部分類コードには一切依存していない）。実装後、npm run typecheck（0 errors）、npm run lint（既存の2件の未使用変数警告以外は追加0件、warningのみでexit 0。新規ファイルでreact(only-export-components)警告2件が出るが、これはリポジトリ内の既存パターンと同種の許容範囲の警告でエラーではない）、npm run build（prerender 2243ルート成功、validate:seo/validate:content ともにerrors=0 warnings=0）、npm test（全17スイート・約60チェックすべて成功、Phase145-157の既存整合性テストも全てpassし、HOLD69件・R3等のデータは変更されていないことを既存テストが確認済み）を実行し、いずれも成功を確認した。npm run buildの副作用として src/data/adminReviewQueue.json・archiveAiCategoryCandidates.json・archiveRelationCandidates.json・dataQualitySummary.json・siteUpdate.json のタイムスタンプ等が自動更新されたため、これらはgit checkoutで元に戻し、意図した3ファイル（BillVoteDetailPage.tsx、councilGlossary.ts、BillCategoryNotice.tsx新規）のみが差分として残る状態にした。"
+}
