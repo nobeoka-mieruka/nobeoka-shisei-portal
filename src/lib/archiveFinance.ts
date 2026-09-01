@@ -121,6 +121,37 @@ export function hasAnyFinanceRatio(y: ArchiveFiscalYear): boolean {
   return f.realDebtServiceRatioPercent != null || f.futureBurdenRatioPercent != null || f.currentAccountRatioPercent != null || f.financialStrengthIndex != null;
 }
 
+/**
+ * Phase177：Phase165で新規確認したフィールドのうち、hasGeneralAccountBondBalance・
+ * hasGeneralAccountSettlement（Phase168で追加済み）以外の項目にも、データ収録状況ページの
+ * 完全性ダッシュボードへ未反映のものが残っていたため追加する。個別ページ
+ * （FinanceBudgetPage・FinanceDebtPage等）には既に表示済みの値で、ここでは
+ * 「完全性ダッシュボードで年度カバレッジを集計できるか」の観点のみを追加する
+ * （データ実値・既存の型定義は変更しない）。
+ */
+/** 一般会計補正後（最終）予算額。当初予算・決算額とは別の集計（generalAccountFinalBudgetYen）。 */
+export function hasFinalBudgetAmount(y: ArchiveFiscalYear): boolean {
+  return y.budget?.generalAccountFinalBudgetYen != null;
+}
+/** 特別会計予算額（specialAccountBudgetYen）。Phase165でFY2020〜2025分を新規確認するまで、当サイトのどの画面にも表示されていなかった項目。 */
+export function hasSpecialAccountBudget(y: ArchiveFiscalYear): boolean {
+  return y.budget?.specialAccountBudgetYen != null;
+}
+/** 市債残高（企業会計を含む全会計、includingEnterpriseAccountsYen）。一般会計・普通会計ベースとは別区分。 */
+export function hasBondBalanceIncludingEnterprise(y: ArchiveFiscalYear): boolean {
+  return y.debt?.balance?.includingEnterpriseAccountsYen != null;
+}
+/** 市債残高（市民1人当たり、perCapitaYen）。FinanceDebtPageの年度別一覧には既に表示されている。 */
+export function hasBondBalancePerCapita(y: ArchiveFiscalYear): boolean {
+  return y.debt?.balance?.perCapitaYen != null;
+}
+/** 歳入内訳（地方税・地方交付税・国庫支出金・都道府県支出金）のいずれか1つでも確認できていれば「確認済み」とする（4項目すべてを要求すると過小評価されるため、hasAnyFundBalance等と同じ方針）。 */
+export function hasAnyRevenueBreakdown(y: ArchiveFiscalYear): boolean {
+  const b = y.budget;
+  if (!b) return false;
+  return b.localTaxRevenueYen != null || b.localAllocationTaxYen != null || b.nationalSubsidiesYen != null || b.prefecturalSubsidiesYen != null;
+}
+
 /** 円単位の内部値を「約◯億円」表示に変換する。nullは「確認中」。 */
 export function formatOkuYenOrConfirming(value: number | null | undefined): string {
   if (value === null || value === undefined) return "確認中";
