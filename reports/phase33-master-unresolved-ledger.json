@@ -1613,19 +1613,37 @@
         {
           "label": "延岡市議会会議録 第22回（平成26年）VOL.14（宮崎県立図書館所蔵、NDLサーチ書誌情報）",
           "url": "https://ndlsearch.ndl.go.jp/books/R100000001-I45111101948308"
+        },
+        {
+          "label": "のべおか市議会だより 第53号（平成24年11月1日発行、2012-09会期分）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1732.pdf"
+        },
+        {
+          "label": "のべおか市議会だより 第56号（平成25年8月1日発行、2013-06会期分）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1729.pdf"
+        },
+        {
+          "label": "のべおか市議会だより 第57号（平成25年11月1日発行、2013-09会期分）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1689.pdf"
+        },
+        {
+          "label": "のべおか市議会だより 第61号（平成26年11月1日発行、2014-09会期分）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1688.pdf"
         }
       ],
       "alreadyCheckedSources": [
         "延岡市公式ホームページ 議案等審議結果一覧（Phase163で9会期分すべて確認済み、PDF発見なし）",
         "Wayback Machine（Phase163で9会期分すべて確認済み、Phase175でshigikai/配下の全アーカイブURLをCDX APIで網羅的に再確認したが対象9会期の結果PDFは1件も存在しないことを追加確認）",
-        "広報のべおかOCR索引（kohoOcrSearchIndex.json、収録範囲2010年5月号以降のみで対象会期の一部しかカバーせず、「議案」「可決」等のキーワード自体が索引化されていないため有効な手がかりなし）"
+        "広報のべおかOCR索引（kohoOcrSearchIndex.json、収録範囲2010年5月号以降のみで対象会期の一部しかカバーせず、「議案」「可決」等のキーワード自体が索引化されていないため有効な手がかりなし）",
+        "延岡市公式ホームページ「のべおか市議会だより」バックナンバー一覧（Phase179で新規発見、/site/gikai/7287.html。掲載範囲は第47号＝平成23年5月発行以降のみ）"
       ],
       "alreadyTriedMethods": [
         "Wayback Machine CDX API（http://web.archive.org/cdx/search/cdx?url=city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai&matchType=prefix）でshigikai/配下の全アーカイブURL（101件）を洗い出し、対象9会期のsessionNumberパターンに一致する審議結果PDFが存在しないことを確認",
-        "NDLサーチ OpenSearch API（https://iss.ndl.go.jp/api/opensearch?title=延岡市議会会議録&cnt=300）で全234件の書誌レコード（dcndl:volume・dc:description・rdfs:seeAlso）を取得し、対象9会期の開閉会日・回次と突合。8会期で完全一致するレコードを新規発見（宮崎県立図書館所蔵、館内限定・持出禁止）"
+        "NDLサーチ OpenSearch API（https://iss.ndl.go.jp/api/opensearch?title=延岡市議会会議録&cnt=300）で全234件の書誌レコード（dcndl:volume・dc:description・rdfs:seeAlso）を取得し、対象9会期の開閉会日・回次と突合。8会期で完全一致するレコードを新規発見（宮崎県立図書館所蔵、館内限定・持出禁止）",
+        "Phase179：広報のべおか（市長部局発行）とは別系統の「のべおか市議会だより」（議会事務局発行、市公式サイトで常時公開）を新規に発見・調査。対象9会期のうち2012-09・2013-06・2013-09・2014-09の4会期は該当号（第53・56・57・61号）が公式サイトに掲載されており、議案の議決件数（可決・報告等の集計）と一般質問登壇議員数・登壇日を新規に確認できた（既存のmeetingDaysの一般質問日と完全一致）。残る2000-09・2004-06・2005-09・2006-06の4会期は、バックナンバー掲載が第47号（平成23年5月発行）以降に限られるため対象外であることを確認した（新規到達なし）。"
       ],
-      "unresolvedReason": "D（会議録原本は宮崎県立図書館に館内限定で所蔵されており、議案ごとの審議結果・賛否を確認するには現地閲覧が必要）",
-      "nextAction": "宮崎県立図書館（郷土資料コーナー、M書庫）で該当巻を閲覧し、議案番号・件名・賛否結果をbillVotes.jsonのスキーマに転記する。または延岡市議会事務局へ当該年度の議案審議結果一覧の写しの提供可否を照会する。",
+      "unresolvedReason": "D（会議録原本は宮崎県立図書館に館内限定で所蔵されており、議案ごとの個別賛否を確認するには現地閲覧が必要。ただし2012-09・2013-06・2013-09・2014-09の4会期は「のべおか市議会だより」により議案の議決件数の集計値・一般質問登壇議員数はオンラインで確認済み）",
+      "nextAction": "宮崎県立図書館（郷土資料コーナー、M書庫）で該当巻を閲覧し、議案番号・件名・賛否結果をbillVotes.jsonのスキーマに転記する。または延岡市議会事務局へ当該年度の議案審議結果一覧の写しの提供可否を照会する。「のべおか市議会だより」に掲載された一般質問登壇議員名・議案の議決件数集計をbillVotes.json／councilSpeechSummaries.jsonへ構造化登録するかは、別タスクとして改めて検討する（今回はcouncilSessions.jsonのdocuments／descriptionへの反映のみ実施）。",
       "nextSourceCandidate": "宮崎県立図書館 郷土資料室（延岡市議会会議録シリーズ、上記sourceRefs参照）、延岡市議会事務局（Tel: 0982-22-7029）",
       "primaryRoute": "D",
       "secondaryRoute": "E",
@@ -1633,7 +1651,7 @@
       "requiresInquiry": true,
       "requiresBulkBackfill": false,
       "lastCheckedAt": "2026-09-01",
-      "notes": "Phase175で新規登録。既存UNR-022（H27-30年度billNumber未復元）・UNR-023（一般質問backfillの平成年代対応、councilSpeechSummaries.json側）とは対象データが異なる別枠。本UNRは会期要約（councilSessions.json）のsummaryStatus改善が目的で、billVotes.json側の議案データ登録自体は範囲外（今後の別タスク）。2014-03のみ本UNRの対象外（NDLサーチに書誌が見つからず、UNR-061として別枠管理）。"
+      "notes": "Phase175で新規登録。既存UNR-022（H27-30年度billNumber未復元）・UNR-023（一般質問backfillの平成年代対応、councilSpeechSummaries.json側）とは対象データが異なる別枠。本UNRは会期要約（councilSessions.json）のsummaryStatus改善が目的で、billVotes.json側の議案データ登録自体は範囲外（今後の別タスク）。2014-03のみ本UNRの対象外（NDLサーチに書誌が見つからず、UNR-061として別枠管理）。 【2026-09-01追記（Phase179）】「のべおか市議会だより」を新規の一次資料経路として発見し、2012-09・2013-06・2013-09・2014-09の4会期でNDL書誌に加え第2の独立資料による裏付けを得た（フィールド単位ではsummaryStatus区分は引き続きpartially-verified、ただし議案の議決件数集計・一般質問登壇議員数という新規フィールドが加わった）。2000-09・2004-06・2005-09・2006-06の4会期は同ルートでも新規情報なし（既存のNDL書誌のみが引き続き根拠）。currentStatus・evidenceLevelは変更なし（議案ごとの個別賛否という中核的な未解決点は残るため）。"
     },
     {
       "unresolvedId": "UNR-061",
@@ -1642,24 +1660,37 @@
       "targetPerson": null,
       "targetFiscalYear": null,
       "targetPeriod": "2014年2月〜3月（平成26年3月定例会、第19回）",
-      "description": "2014-03（平成26年3月定例会、第19回、2014-02-25〜2014-03-19）は、Phase175の調査で他の8会期（UNR-060）と異なり、NDLサーチに対応する書誌レコードが見つからなかった。隣接する巻（第17回=VOL.11〔2013年12月〕、第20回・第21回=VOL.13〔2014年5-6月〕）は書誌が存在するため、本来「第18回（臨時会）・第19回（定例会）」でVOL.12相当の巻が刊行・寄贈されているはずと推定されるが、NDLサーチのOpenSearch API（延岡市議会会議録タイトル検索・全234件）、任意語検索（延岡市議会第１９回、0件）のいずれでも該当レコードを確認できなかった。",
-      "currentStatus": "not_collected",
+      "description": "2014-03（平成26年3月定例会、第19回、2014-02-25〜2014-03-19）は、Phase175の調査で他の8会期（UNR-060）と異なり、NDLサーチに対応する書誌レコードが見つからなかった。隣接する巻（第17回=VOL.11〔2013年12月〕、第20回・第21回=VOL.13〔2014年5-6月〕）は書誌が存在するため、本来「第18回（臨時会）・第19回（定例会）」でVOL.12相当の巻が刊行・寄贈されているはずと推定されるが、NDLサーチのOpenSearch API（延岡市議会会議録タイトル検索・全234件）、任意語検索（延岡市議会第１９回、0件）のいずれでも該当レコードを確認できなかった。 【2026-09-01追記（Phase179）】NDLサーチとは別系統の一次資料として、延岡市議会自身が編集・発行し延岡市公式ホームページで常時公開している「のべおか市議会だより」第59号（平成26年5月1日発行）を新規に発見した。本文に議決結果（25件を可決・承認、報告1件）と一般質問の実施日・登壇議員数（3月4日・5日・6日の3日間、会派代表質問6名・関連質問3名・個人質問4名の計13名）が明記されており、一般質問実施日は既存のmeetingDays（第2〜4号）と完全に一致することを確認した。会議録原本の書誌には引き続き到達できていないが、本会期についてもオンラインで確認可能な公式一次資料が存在することが判明したため、HUMAN_LIBRARY_CHECK_REQUIREDからFOUND_PARTIAL相当へ前進したと判断する。",
+      "currentStatus": "partially_resolved",
       "priority": "C",
-      "evidenceLevel": "Level1（隣接巻の存在パターンから該当巻自体の存在は推定できるが、書誌そのものは未確認）",
-      "sourceRefs": [],
+      "evidenceLevel": "Level2（「のべおか市議会だより」により、一般質問実施日・登壇議員数・議案の議決件数集計を確認。会議録原本の書誌・議案ごとの個別賛否は依然未確認）",
+      "sourceRefs": [
+        {
+          "label": "のべおか市議会だより 第59号（平成26年5月1日発行、2014-03会期分）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1691.pdf"
+        }
+      ],
       "alreadyCheckedSources": [
         "NDLサーチ OpenSearch API（title=延岡市議会会議録、全234件を確認）",
         "NDLサーチ OpenSearch API（any=延岡市議会第１９回、0件）",
         "Wayback Machine CDX（shigikai/配下、UNR-060と共通の101件を確認、該当パターンなし）",
-        "延岡市公式ホームページ・Wayback Machine（Phase163で既に確認済み、PDF発見なし）"
+        "延岡市公式ホームページ・Wayback Machine（Phase163で既に確認済み、PDF発見なし）",
+        "延岡市公式ホームページ「のべおか市議会だより」バックナンバー一覧（Phase179で新規発見、/site/gikai/7287.html）で第59号（平成26年5月1日発行）を特定・全文確認"
       ],
       "alreadyTriedMethods": [
-        "NDLサーチのタイトル検索・任意語検索を組み合わせて計3パターンで再検索（3回まで、と定めた再試行上限に到達したため打ち切り）"
+        "NDLサーチのタイトル検索・任意語検索を組み合わせて計3パターンで再検索（Phase175時点で3回まで、と定めた再試行上限に到達したため打ち切り。Phase179では同一検索の再試行はしていない）",
+        "Phase179：NDLサーチに書誌が見つからないNDL書誌検索とは別の経路として、延岡市議会公式サイトの「のべおか市議会だより」バックナンバー一覧を新規に確認し、平成26年3月定例会を報告する第59号（平成26年5月1日発行）を特定・全文取得した"
       ],
-      "unresolvedReason": "D（NDLサーチ未掲載のため、宮崎県立図書館・延岡市議会事務局への直接照会が必要）",
-      "nextAction": "宮崎県立図書館へ「延岡市議会会議録 平成26年 第18回・第19回」の所蔵有無を直接照会する（同館の請求記号体系は318413-0025-西暦年のパターンであり、2014年分の巻が該当する可能性が高い）。あわせて延岡市議会事務局へも確認する。",
+      "unresolvedReason": "D（会議録原本の書誌はNDLサーチ未掲載のままで、所在確認には宮崎県立図書館・延岡市議会事務局への直接照会が必要。ただし「のべおか市議会だより」によりオンラインで到達可能な代替の公式一次資料は確保できた）",
+      "nextAction": "宮崎県立図書館へ「延岡市議会会議録 平成26年 第18回・第19回」の所蔵有無を直接照会する（同館の請求記号体系は318413-0025-西暦年のパターンであり、2014年分の巻が該当する可能性が高い）。あわせて延岡市議会事務局へも確認する。「のべおか市議会だより」第59号に掲載された一般質問登壇議員名・議案の議決件数集計をcouncilSpeechSummaries.json／billVotes.jsonへ構造化登録するかは、別タスクとして改めて検討する。",
       "nextSourceCandidate": "宮崎県立図書館（電話・メール照会）、延岡市議会事務局（Tel: 0982-22-7029）",
-      "notes": "Phase175で新規登録。対象9会期のうち本会期のみHUMAN_LIBRARY_CHECK_REQUIREDに分類（他8会期はUNR-060でFOUND_PARTIALとして書誌確認済み）。councilSessions.jsonのdescriptionにも同旨を記載済み。"
+      "primaryRoute": "D",
+      "secondaryRoute": "E",
+      "requiresOnsite": true,
+      "requiresInquiry": true,
+      "requiresBulkBackfill": false,
+      "lastCheckedAt": "2026-09-01",
+      "notes": "Phase175で新規登録。対象9会期のうち本会期のみHUMAN_LIBRARY_CHECK_REQUIREDに分類されていた（他8会期はUNR-060でFOUND_PARTIALとして書誌確認済み）。 【2026-09-01追記（Phase179）】「のべおか市議会だより」第59号の新規発見により、本会期もFOUND_PARTIAL相当（オンラインで確認可能な公式一次資料あり）へ前進した。councilSessions.jsonの2014-03エントリのdocuments・descriptionに反映済み（summaryStatusをunavailableからpartially-verifiedへ更新、generate-session-summaries.mjs経由）。あわせてcouncilSessions.json内の誤記（description内の「UNR-068参照」は本UNR-061の誤記だったため「UNR-061参照」に修正済み）。"
     }
   ],
   "summary": {
@@ -1668,7 +1699,7 @@
       "E": 12,
       "C": 4,
       "B": 17,
-      "D": 4,
+      "D": 5,
       "F": 8,
       "A": 3
     },
@@ -1680,8 +1711,8 @@
     "byStatus": {
       "disputed": 4,
       "unconfirmed": 7,
-      "partially_resolved": 7,
-      "not_collected": 15,
+      "partially_resolved": 8,
+      "not_collected": 14,
       "under_review": 2,
       "reference_pending": 6,
       "resolved": 7
@@ -1689,6 +1720,6 @@
     "requiresOnsite": 14,
     "requiresInquiry": 19,
     "requiresBulkBackfill": 16,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。 Phase136（公約→施策→予算→議案→実施→成果 追跡監査、2026-08-30）でUNR-039〜041（計3件）を新規追加（新規カテゴリ「mayorPromise」）。既存UNR-001〜038のステータス変更は無し。 Phase137（財政・人口データ欠損の一次資料再調査、2026-08-31）でUNR-034を部分解決（FY2007-2011分の一般会計当初予算額を新規資料で確認、FY2001-2006分は継続）。新規UNRは登録しなかった（推測での大量登録を避けるため）。 Phase138（未解決一次資料 集中攻略、2026-08-31）でUNR-035・036・037を解決（総務省市町村決算カードの再解析）。UNR-034は引き続き部分解決のまま（FY2001-2006が未解決）。UNR-038は決算カードでは解決不可と既に判明しているため対象外（延岡市史の再調査は今回禁止のため見送り）。新規UNRは登録しなかった。 Phase173（政務活動費・費用弁償の制度存在確認、2026-09-01）でUNR-042（政務活動費の制度存在）・UNR-043（費用弁償の制度存在）を新規追加。Phase169が試した経路（例規集リンクの存在確認、市議会サイト、総務省調査PDF、全国市民オンブズマン、billVotes.json議案名検索）に加え、Phase173では例規集検索システムへの直接アクセス（JavaScript前提のためWebFetchで接続エラー）・延岡市議会公式サイト下位ページ・予算資料PDF再アクセス（404）・全国市議会議長会実態調査PDF（表紙のみ取得可能）・Wayback Machine（本セッション環境からアクセス不可）を新たに試みたが、いずれも制度の存否を直接確認できなかった。「制度なし」と判定せず「公開資料では確認できず」として保留し、reports/field-research/inquiry-final/gikai-jimukyoku.mdへ確認事項5を追記した（未送付のまま）。既存UNR-001〜041のステータス変更は無し。archiveFiscalYears.json等のデータ実値変更は無し。 Phase174（2026-09-01、委員会構成の旧任期遡及調査）でUNR-050〜052（計3件）を新規追加。archiveCommitteeMembers.jsonへ2019年5月17日〜2022年5月9日の4任期分132件を新規登録し、2019年統一地方選後の任期から現行任期（2026年）まで空白なく連結した（既存49件と合わせて181件）。UNR-050は2003・2007・2011・2015年任期（2019年4月以前）の未着手を、UNR-051は委員会条例制定（1970年）〜会議録検索システム収録開始（2000年）までの構造的な確認不能期間を、UNR-052は旧任期中に存在した現行committees.json未収録の特別委員会2件（議会活性化特別委員会の旧称同名委員会、地域新電力事業調査特別委員会）の新規発見を、それぞれ記録した。既存UNR-001〜041のステータス変更は無し。 Phase175（2026-09-01、councilSessions.jsonのsummaryStatus=\"unavailable\"のまま残っていた9会期の追加調査）でUNR-060・061（計2件）を新規追加（新規カテゴリ「councilSessions」）。NDLサーチの書誌情報を新財源として活用し、9会期中8会期をunavailable→partially-verifiedへ前進させた（councilSessions.json側で直接反映、UNR側はcurrentStatus=partially_resolvedとして記録）。残り1会期（2014-03）はNDLサーチにも書誌が見つからずnot_collectedのまま（UNR-061）。既存UNR-001〜041のステータス変更は無し。 Phase176（市長任期13区間UNR-029の最終オンライン確認・NDL資料整理・現地確認リスト作成、2026-09-01）でUNR-029のalreadyTriedMethods・sourceRefsを初めて実データで埋め、requiresOnsite/requiresInquiryをfalse→trueへ是正した（フラグ不整合の是正）。新規のオンライン解決は0/13（chrome拡張未接続のためNDL個人送信サービス再閲覧は実施せず、JACAR・Wayback Machine・NDL Search OpenSearch APIのみ新規試行、いずれも既存記録を裏付けたのみ）。reports/field-research/onsite-research-checklist.json（既にM1〜M13を含む）は既存内容を流用し変更していない。新規UNRは登録しなかった（4386.pdf＝延岡市史市制80周年記念10年史の再読は禁止指示のため実施していない）。 Phase172親統合でPhase173・177・174・175・176の5ブランチをマージし、summary集計値（totalItems=48、requiresOnsite=14、requiresInquiry=19等）をitems配列の実件数から再計算した（内容の書き換えは無し）。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。 Phase136（公約→施策→予算→議案→実施→成果 追跡監査、2026-08-30）でUNR-039〜041（計3件）を新規追加（新規カテゴリ「mayorPromise」）。既存UNR-001〜038のステータス変更は無し。 Phase137（財政・人口データ欠損の一次資料再調査、2026-08-31）でUNR-034を部分解決（FY2007-2011分の一般会計当初予算額を新規資料で確認、FY2001-2006分は継続）。新規UNRは登録しなかった（推測での大量登録を避けるため）。 Phase138（未解決一次資料 集中攻略、2026-08-31）でUNR-035・036・037を解決（総務省市町村決算カードの再解析）。UNR-034は引き続き部分解決のまま（FY2001-2006が未解決）。UNR-038は決算カードでは解決不可と既に判明しているため対象外（延岡市史の再調査は今回禁止のため見送り）。新規UNRは登録しなかった。 Phase173（政務活動費・費用弁償の制度存在確認、2026-09-01）でUNR-042（政務活動費の制度存在）・UNR-043（費用弁償の制度存在）を新規追加。Phase169が試した経路（例規集リンクの存在確認、市議会サイト、総務省調査PDF、全国市民オンブズマン、billVotes.json議案名検索）に加え、Phase173では例規集検索システムへの直接アクセス（JavaScript前提のためWebFetchで接続エラー）・延岡市議会公式サイト下位ページ・予算資料PDF再アクセス（404）・全国市議会議長会実態調査PDF（表紙のみ取得可能）・Wayback Machine（本セッション環境からアクセス不可）を新たに試みたが、いずれも制度の存否を直接確認できなかった。「制度なし」と判定せず「公開資料では確認できず」として保留し、reports/field-research/inquiry-final/gikai-jimukyoku.mdへ確認事項5を追記した（未送付のまま）。既存UNR-001〜041のステータス変更は無し。archiveFiscalYears.json等のデータ実値変更は無し。 Phase174（2026-09-01、委員会構成の旧任期遡及調査）でUNR-050〜052（計3件）を新規追加。archiveCommitteeMembers.jsonへ2019年5月17日〜2022年5月9日の4任期分132件を新規登録し、2019年統一地方選後の任期から現行任期（2026年）まで空白なく連結した（既存49件と合わせて181件）。UNR-050は2003・2007・2011・2015年任期（2019年4月以前）の未着手を、UNR-051は委員会条例制定（1970年）〜会議録検索システム収録開始（2000年）までの構造的な確認不能期間を、UNR-052は旧任期中に存在した現行committees.json未収録の特別委員会2件（議会活性化特別委員会の旧称同名委員会、地域新電力事業調査特別委員会）の新規発見を、それぞれ記録した。既存UNR-001〜041のステータス変更は無し。 Phase175（2026-09-01、councilSessions.jsonのsummaryStatus=\"unavailable\"のまま残っていた9会期の追加調査）でUNR-060・061（計2件）を新規追加（新規カテゴリ「councilSessions」）。NDLサーチの書誌情報を新財源として活用し、9会期中8会期をunavailable→partially-verifiedへ前進させた（councilSessions.json側で直接反映、UNR側はcurrentStatus=partially_resolvedとして記録）。残り1会期（2014-03）はNDLサーチにも書誌が見つからずnot_collectedのまま（UNR-061）。既存UNR-001〜041のステータス変更は無し。 Phase176（市長任期13区間UNR-029の最終オンライン確認・NDL資料整理・現地確認リスト作成、2026-09-01）でUNR-029のalreadyTriedMethods・sourceRefsを初めて実データで埋め、requiresOnsite/requiresInquiryをfalse→trueへ是正した（フラグ不整合の是正）。新規のオンライン解決は0/13（chrome拡張未接続のためNDL個人送信サービス再閲覧は実施せず、JACAR・Wayback Machine・NDL Search OpenSearch APIのみ新規試行、いずれも既存記録を裏付けたのみ）。reports/field-research/onsite-research-checklist.json（既にM1〜M13を含む）は既存内容を流用し変更していない。新規UNRは登録しなかった（4386.pdf＝延岡市史市制80周年記念10年史の再読は禁止指示のため実施していない）。 Phase172親統合でPhase173・177・174・175・176の5ブランチをマージし、summary集計値（totalItems=48、requiresOnsite=14、requiresInquiry=19等）をitems配列の実件数から再計算した（内容の書き換えは無し）。 Phase179（2026-09-01、UNR-060・061対象9会期のフィールド単位分解・複数資料再構成）で、NDLサーチとは別系統の一次資料「のべおか市議会だより」（延岡市議会公式発行、市公式サイトで常時公開）を新規発見した。2012-09・2013-06・2013-09・2014-09の4会期（UNR-060の一部）で議案の議決件数集計・一般質問登壇議員数を新規に確認し（currentStatusは既にpartially_resolvedのまま変更なし、根拠資料が2件に増加）、2014-03（UNR-061）は本資料により初めてオンラインで到達可能な公式一次資料が見つかったため、currentStatusをnot_collected→partially_resolvedへ、primaryRouteをDへ新規設定した（byStatus・byRouteを本更新に合わせて再計算：partially_resolved 7→8、not_collected 15→14、byRoute.D 4→5）。2000-09・2004-06・2005-09・2006-06の4会期は同資料の掲載範囲外（第47号＝平成23年5月以降のみ）で新規情報なし。councilSessions.jsonの2014-03エントリはsummaryStatusをunavailable→partially-verifiedへ更新（generate-session-summaries.mjs経由）。billVotes.json・councilSpeechSummaries.jsonへの個別データ登録は今回のスコープ外（既存方針を踏襲）。"
   }
 }

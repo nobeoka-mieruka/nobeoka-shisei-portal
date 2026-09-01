@@ -41,11 +41,24 @@ check("Phase163：会期要約19件のうち10件に公式資料（議案等審�
   }
   // 【Phase175追記】Phase163時点でunavailableのまま残っていた9会期のうち、Phase175でNDLサーチ
   // （国立国会図書館サーチ）の書誌情報を新規発見できた8会期はpartially-verifiedへ前進した。
-  // 2014-03のみ対応するNDLサーチ書誌が見つからず、unavailableのまま（UNR-061参照）。
-  const stillUnavailableIds = ["2014-03"];
-  for (const id of stillUnavailableIds) {
+  // 2014-03のみPhase175時点では対応するNDLサーチ書誌が見つからず、unavailableのままだった（UNR-061参照）。
+  // 【Phase179追記】2014-03はNDLサーチとは別系統の一次資料「のべおか市議会だより」第59号
+  // （延岡市議会公式発行、市公式サイトで常時公開）を新規発見し、partially-verifiedへ前進した。
+  // 会議録原本の書誌（NDLサーチ）には引き続き到達できていないため、documentsのcategoryは
+  // "minutes"ではなく"newsletters"のみが登録されている点が他の8会期と異なる。
+  const phase179ImprovedIds = ["2014-03"];
+  for (const id of phase179ImprovedIds) {
     const s = cs.find((x) => x.id === id);
-    assert.equal(s.summaryStatus, "unavailable", `${id}のsummaryStatusがunavailableのままのはずです（NDLサーチにも書誌が見つからなかったため）`);
+    assert.ok(s, `${id}がcouncilSessions.jsonに見つかりません`);
+    assert.equal(s.summaryStatus, "partially-verified", `${id}のsummaryStatusがpartially-verifiedではありません（${s.summaryStatus}）`);
+    assert.ok(
+      s.documents.some((d) => d.category === "newsletters" && d.storageType === "external" && (d.sourceUrl ?? "").includes("city.nobeoka.miyazaki.jp")),
+      `${id}に「のべおか市議会だより」（newsletters/external）が登録されていません`,
+    );
+    assert.ok(
+      !s.documents.some((d) => d.category === "minutes"),
+      `${id}にNDLサーチの会議録書誌（minutes）が登録されています。Phase175〜179時点では未発見のはずです`,
+    );
   }
   const phase175ImprovedIds = ["2000-09", "2004-06", "2005-09", "2006-06", "2012-09", "2013-06", "2013-09", "2014-09"];
   for (const id of phase175ImprovedIds) {
