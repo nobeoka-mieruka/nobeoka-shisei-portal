@@ -2197,6 +2197,7 @@ export type SearchEntryType =
   | "guide"
   | "press-conference"
   | "election"
+  | "theme"
   | "page";
 
 /**
