@@ -23,7 +23,7 @@ import { formatJapaneseDate } from "../config/site";
 import { formatArchiveDateWithPrecision, isActingMayorTerm, mayorRoleLabel, termsForMayor } from "../lib/archiveMayors";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
-import { civicTimelineEventsForPerson } from "../lib/civicTimeline";
+import { civicTimelineEventsForPerson, civicTimelineEventFiscalYear } from "../lib/civicTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -402,6 +402,12 @@ export function MayorDetailPage() {
                   </div>
                   <p className="mt-1 text-sm font-medium text-on-surface">{ev.title}</p>
                   <p className="mt-1 text-sm text-on-surface-variant">{ev.summary}</p>
+                  <Link
+                    to={`/timeline/${civicTimelineEventFiscalYear(ev)}`}
+                    className={`mt-2 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}
+                  >
+                    同じ年度の財政・人口・議案等をまとめて見る
+                  </Link>
                 </li>
               ))}
             </ul>

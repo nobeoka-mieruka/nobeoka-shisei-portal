@@ -37,6 +37,7 @@ import { isActingMayorTerm, mayorRoleLabel } from "../lib/archiveMayors";
 import { FINANCE_METRICS } from "../lib/archiveFinanceMetrics";
 import { documentPath, documentTypeLabel, documentResultLabel } from "../lib/archiveCouncilDocuments";
 import { policyOwnerName, policyOwnerLinkTo, type PolicyOwnerLookup } from "../lib/archivePolicies";
+import { civicTimelineEventsInFiscalYear } from "../lib/civicTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -72,6 +73,10 @@ export function TimelineYearPage() {
         (p) => (p.relatedFiscalYears ?? []).includes(fiscalYear) || (p.announcedDate && fiscalYearOfIsoDate(p.announcedDate) === fiscalYear),
       )
     : [];
+  // Phase188：市政年表（civicTimelineEvents.json）側からも、この年度に対応する出来事を
+  // 自動フィルタで逆引きする（日付は年月まで判読できた場合のみ会計年度換算、それ以外は
+  // 年フィールドをそのまま近似値として使う。手作業でのイベント文章の複製登録はしない）。
+  const civicEvents = isValidYear ? civicTimelineEventsInFiscalYear(fiscalYear) : [];
 
   const hasAnyData =
     mayorTerms.length > 0 ||
@@ -79,7 +84,8 @@ export function TimelineYearPage() {
     fiscalYearEntry != null ||
     questions.length > 0 ||
     documents.length > 0 ||
-    policies.length > 0;
+    policies.length > 0 ||
+    civicEvents.length > 0;
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -195,6 +201,37 @@ export function TimelineYearPage() {
                   </Link>
                   でも確認できます。
                 </p>
+              </>
+            )}
+          </SectionCard>
+
+          <SectionCard title="市政年表（この年度の主な出来事）">
+            {civicEvents.length === 0 ? (
+              <p className="text-sm text-on-surface-variant">
+                この年度に対応することが確認できた市政年表の出来事はありません（市政年表は市庁舎・行政組織・災害・公共事業・教育福祉産業等を対象としており、網羅を保証するものではありません）。
+              </p>
+            ) : (
+              <>
+                <p className="text-xs leading-relaxed text-on-surface-variant">
+                  出来事の日付（年、判読できれば月まで）から会計年度を近似して対応付けています。日付が年単位までしか判明していない出来事は、前後1年度分ずれる可能性があります。
+                </p>
+                <ul className="mt-2 space-y-2">
+                  {civicEvents.map((ev) => (
+                    <li key={ev.id} className="rounded-lg border border-outline-variant p-3 text-sm">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                        <span className="font-medium text-on-surface">{ev.dateLabel}</span>
+                        <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-semibold text-on-surface-variant">
+                          {ev.category}
+                        </span>
+                      </div>
+                      <p className="mt-1 font-medium text-on-surface">{ev.title}</p>
+                      <p className="mt-1 text-xs text-on-surface-variant">{ev.summary}</p>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/history" className="mt-2 inline-block text-sm font-medium text-primary hover:underline">
+                  市政年表（全期間）で確認する
+                </Link>
               </>
             )}
           </SectionCard>

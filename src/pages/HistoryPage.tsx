@@ -1,7 +1,13 @@
 import { useMemo, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { sortedCivicTimelineEvents, civicTimelineCategories, civicTimelineDecades, getCivicTimelineEvent } from "../lib/civicTimeline";
+import {
+  sortedCivicTimelineEvents,
+  civicTimelineCategories,
+  civicTimelineDecades,
+  getCivicTimelineEvent,
+  civicTimelineEventFiscalYear,
+} from "../lib/civicTimeline";
 import archiveMayorsData from "../data/archiveMayors.json";
 import nobeokaCensusPopulationData from "../data/nobeokaCensusPopulation.json";
 import type { ArchiveMayor } from "../types/historicalArchive";
@@ -265,33 +271,39 @@ export function HistoryPage() {
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-on-surface">{event.summary}</p>
                 {event.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{event.notes}</p>}
-                {((event.relatedPersonIds && event.relatedPersonIds.length > 0) ||
-                  (event.relatedPages && event.relatedPages.length > 0)) && (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {event.relatedPersonIds?.map((id) => {
-                      const mayor = mayorById.get(id);
-                      if (!mayor) return null;
-                      return (
-                        <Link
-                          key={id}
-                          to={`/mayors/${mayor.slug}`}
-                          className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
-                        >
-                          {mayor.name}市長の在任中
-                        </Link>
-                      );
-                    })}
-                    {event.relatedPages?.map((p) => (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {event.relatedPersonIds?.map((id) => {
+                    const mayor = mayorById.get(id);
+                    if (!mayor) return null;
+                    return (
                       <Link
-                        key={p.to}
-                        to={p.to}
+                        key={id}
+                        to={`/mayors/${mayor.slug}`}
                         className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
                       >
-                        {p.label}
+                        {mayor.name}市長の在任中
                       </Link>
-                    ))}
-                  </div>
-                )}
+                    );
+                  })}
+                  {event.relatedPages?.map((p) => (
+                    <Link
+                      key={p.to}
+                      to={p.to}
+                      className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                    >
+                      {p.label}
+                    </Link>
+                  ))}
+                  {/* Phase188：出来事の日付（年、判読できれば月まで）から会計年度を近似し、
+                      同じ年度の市長任期・財政・人口・議案・一般質問等をまとめて確認できる
+                      年度別ページへ横断的に誘導する（手入力ではなく自動算出）。 */}
+                  <Link
+                    to={`/timeline/${civicTimelineEventFiscalYear(event)}`}
+                    className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                  >
+                    同じ年度の市長・財政・人口等を見る
+                  </Link>
+                </div>
                 <div className="mt-3 space-y-1">
                   {event.sourceRefs.map((ref) => (
                     <SourceLink key={ref.url} url={ref.url} label={ref.label} verifiedAt={event.lastVerifiedAt} />

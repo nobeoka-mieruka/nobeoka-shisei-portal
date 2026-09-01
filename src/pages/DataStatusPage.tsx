@@ -804,7 +804,11 @@ export function DataStatusPage() {
         <Link to="/committees/leadership-history" className="mx-1 text-primary hover:underline">
           歴代議長・副議長（2001〜2012年分）
         </Link>
-        を新たに掲載）。反映が済んでいない事項は「未収録」「調査中」等で明示し、未反映＝0件とは扱っていません。
+        を新たに掲載）。反映が済んでいない事項は「未収録」「調査中」等で明示し、未反映＝0件とは扱っていません。調査で使用する資料の種類や、確認できない情報の扱い方は
+        <Link to="/editorial-policy#research-method" className="mx-1 text-primary hover:underline">
+          編集方針（古い年代・未公開資料の調べ方）
+        </Link>
+        でご覧いただけます。
       </p>
 
       <SectionCard title="データ完全性ダッシュボード">
