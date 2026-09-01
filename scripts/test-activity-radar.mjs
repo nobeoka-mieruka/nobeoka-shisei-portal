@@ -21,7 +21,10 @@ import { pathToFileURL } from "node:url";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const srcPath = join(ROOT, "src/lib/activityRadar.ts");
-const source = readFileSync(srcPath, "utf8");
+// Windows環境（core.autocrlf等）でCRLFとしてチェックアウトされている場合でも、
+// 以降のパターン一致（LF前提の複数行リテラル）が失敗しないよう改行をLFへ正規化する。
+// 一時ファイルとして実行するだけの用途のため、元ファイルの改行コードには影響しない。
+const source = readFileSync(srcPath, "utf8").replace(/\r\n/g, "\n");
 
 const patched = source.replace(
   'import type { CouncilSpeech } from "../types";\nimport questionCollectionStatusData from "../data/questionCollectionStatus.json";',
