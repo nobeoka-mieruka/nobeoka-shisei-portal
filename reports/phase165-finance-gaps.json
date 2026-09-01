@@ -1,0 +1,112 @@
+{
+  "generatedAt": "2026-09-01",
+  "task": "Phase165: archiveFiscalYears.json 財政数値欠損の最新年度優先調査(FY2025→逆順)",
+  "targetFile": "src/data/archiveFiscalYears.json",
+  "recordCount": 70,
+  "investigationScope": "FY2019-FY2026 (最新年度から逆順)。全70件のうち、直近8年度分を対象に一次資料(延岡市監査委員の決算審査意見書・公営企業会計決算審査意見書・延岡市の財政事情)を再調査。",
+  "startingGapCount": 880,
+  "investigatedCount": 88,
+  "newlyConfirmedValueCount": 37,
+  "notYetPublishedCount": 25,
+  "remainingUnconfirmedCount": 51,
+  "remainingUnconfirmedBreakdown": {
+    "notYetPublished_FY2026": 13,
+    "notYetPublished_FY2025": 12,
+    "notFoundOrNoDefinition_FY2025_2019": 26,
+    "note": "notYetPublishedCount(25) = FY2026(13、年度未終了) + FY2025(12、決算・健全化判断比率等の一次資料が2026-09-01時点で未公表)。remainingUnconfirmedCount(51)全体には、これに加えて公表済み年度(FY2019-2024)で一次資料を探しても見つからない・統一定義が無いため登録を見送った26件(enterpriseAccountBudgetYen・includingSpecialAccountsYen・fund.perCapitaYen等)を含む。"
+  },
+  "resolvedByCategory": {
+    "市債残高": 15,
+    "基金残高": 0,
+    "健全化判断比率": 0,
+    "決算額": 6,
+    "その他": 16
+  },
+  "resolvedByCategoryNote": "「決算額」=一般会計歳出決算額(generalAccountSettlementYen)6件。「その他」=補正後予算額(generalAccountFinalBudgetYen)6件+特別会計予算額(specialAccountBudgetYen)6件+FY2025歳入内訳4項目(市税・地方交付税・国庫支出金・県支出金)。「市債残高」=一般会計市債残高(generalAccountBondBalanceYen)6件+市民一人当たり市債残高(perCapitaYen)5件+一般会計＋企業会計合算残高(includingEnterpriseAccountsYen)4件。基金残高・健全化判断比率(健全化判断比率等)は今回0件(FY2025分は一次資料未公表、FY2019-2024分は財政状況資料集等から既に確認済みだったため新規確定なし)。",
+  "byFiscalYear": [
+    {
+      "fiscalYear": 2026,
+      "fieldsResolved": [],
+      "fieldsStillMissing": ["budget.generalAccountSettlementYen", "budget.totalRevenueYen", "budget.totalExpenditureYen", "budget.prefecturalSubsidiesYen", "budget.specialAccountBudgetYen", "budget.enterpriseAccountBudgetYen", "debt.balance.generalAccountBondBalanceYen", "debt.balance.ordinaryAccountLocalBondBalanceYen", "debt.balance.includingSpecialAccountsYen", "debt.balance.includingEnterpriseAccountsYen", "debt.balance.perCapitaYen", "fund(object未登録)", "finance(object未登録)"],
+      "status": "年度途中(NOT_YET_PUBLISHED)。決算・残高・比率は年度終了(2027-03-31)まで存在しないため推測補完せず。"
+    },
+    {
+      "fiscalYear": 2025,
+      "fieldsResolved": ["budget.generalAccountFinalBudgetYen", "budget.specialAccountBudgetYen", "budget.localTaxRevenueYen", "budget.localAllocationTaxYen", "budget.nationalSubsidiesYen", "budget.prefecturalSubsidiesYen"],
+      "fieldsStillMissing": ["budget.generalAccountSettlementYen", "budget.totalRevenueYen", "budget.totalExpenditureYen", "budget.enterpriseAccountBudgetYen", "debt.balance.ordinaryAccountLocalBondBalanceYen", "debt.balance.includingSpecialAccountsYen", "debt.balance.perCapitaYen", "fund.balance.fiscalReserveFundYen", "fund.balance.bondRedemptionFundYen", "fund.balance.otherSpecificPurposeFundsYen", "fund.balance.totalYen", "fund.balance.perCapitaYen", "finance(object未登録)"],
+      "status": "「延岡市の財政事情(令和7年度後期)」PDF(2026-05-01公表)により予算ベースの6項目を新規確定。決算・健全化判断比率・財政状況資料集ベースの数値は2026-09-01時点で令和7年度版が未公表のためNOT_YET_PUBLISHED。"
+    },
+    {
+      "fiscalYear": 2024,
+      "fieldsResolved": ["budget.generalAccountSettlementYen", "budget.generalAccountFinalBudgetYen", "budget.specialAccountBudgetYen", "debt.balance.generalAccountBondBalanceYen", "debt.balance.includingEnterpriseAccountsYen", "debt.balance.perCapitaYen"],
+      "fieldsStillMissing": ["budget.enterpriseAccountBudgetYen", "debt.balance.includingSpecialAccountsYen", "fund.balance.perCapitaYen"],
+      "status": "令和6年度決算審査意見書・公営企業会計決算審査意見書により6件確定。"
+    },
+    {
+      "fiscalYear": 2023,
+      "fieldsResolved": ["budget.generalAccountSettlementYen", "budget.generalAccountFinalBudgetYen", "budget.specialAccountBudgetYen", "debt.balance.generalAccountBondBalanceYen", "debt.balance.includingEnterpriseAccountsYen", "debt.balance.perCapitaYen"],
+      "fieldsStillMissing": ["budget.enterpriseAccountBudgetYen", "debt.balance.includingSpecialAccountsYen", "fund.balance.perCapitaYen"],
+      "status": "令和6年度決算審査意見書の前年度比較列＋令和5年度決算審査意見書(自年度版)＋公営企業会計決算審査意見書により6件確定。"
+    },
+    {
+      "fiscalYear": 2022,
+      "fieldsResolved": ["budget.generalAccountSettlementYen", "budget.generalAccountFinalBudgetYen", "budget.specialAccountBudgetYen", "debt.balance.generalAccountBondBalanceYen", "debt.balance.includingEnterpriseAccountsYen", "debt.balance.perCapitaYen"],
+      "fieldsStillMissing": ["budget.enterpriseAccountBudgetYen", "debt.balance.includingSpecialAccountsYen", "fund.balance.perCapitaYen"],
+      "status": "令和4年度決算審査意見書・公営企業会計決算審査意見書により6件確定。"
+    },
+    {
+      "fiscalYear": 2021,
+      "fieldsResolved": ["budget.generalAccountSettlementYen", "budget.generalAccountFinalBudgetYen", "budget.specialAccountBudgetYen", "debt.balance.generalAccountBondBalanceYen", "debt.balance.includingEnterpriseAccountsYen", "debt.balance.perCapitaYen"],
+      "fieldsStillMissing": ["budget.enterpriseAccountBudgetYen", "debt.balance.includingSpecialAccountsYen", "fund.balance.perCapitaYen"],
+      "status": "令和4年度決算審査意見書の前年度比較列＋令和3年度決算審査意見書(Wayback Machine経由、自年度版)＋令和4年度公営企業会計決算審査意見書の前年度比較列により6件確定。"
+    },
+    {
+      "fiscalYear": 2020,
+      "fieldsResolved": ["budget.generalAccountSettlementYen", "budget.generalAccountFinalBudgetYen", "budget.specialAccountBudgetYen", "debt.balance.generalAccountBondBalanceYen", "debt.balance.perCapitaYen"],
+      "fieldsStillMissing": ["budget.enterpriseAccountBudgetYen", "debt.balance.includingSpecialAccountsYen", "debt.balance.includingEnterpriseAccountsYen", "fund.balance.perCapitaYen", "finance.futureBurdenRatioPercent"],
+      "status": "令和3年度決算審査意見書の前年度比較列＋令和2年度決算審査意見書(Wayback Machine経由、自年度版)により5件確定。企業会計決算審査意見書(令和2年度分)は今回未取得のためincludingEnterpriseAccountsYenは未確定。finance.futureBurdenRatioPercentは原資料で「－」(算定なし)と明記されており0や未確認とは異なる。"
+    },
+    {
+      "fiscalYear": 2019,
+      "fieldsResolved": ["budget.generalAccountSettlementYen", "debt.balance.generalAccountBondBalanceYen"],
+      "fieldsStillMissing": ["budget.specialAccountBudgetYen", "budget.enterpriseAccountBudgetYen", "debt.balance.includingSpecialAccountsYen", "debt.balance.includingEnterpriseAccountsYen", "debt.balance.perCapitaYen", "fund.balance.perCapitaYen", "finance.debtServiceRatioPercent", "finance.futureBurdenRatioPercent"],
+      "status": "令和2年度決算審査意見書の前年度比較列(令和元年度)により2件確定。令和元年度の自年度版決算審査意見書は延岡市サイト・Wayback Machineとも今回発見できず、特別会計予算額等は未確定。"
+    }
+  ],
+  "sourceRefAddedCount": 23,
+  "warningsResolvedCount": 0,
+  "hardLimitReached": false,
+  "primarySourcesUsed": [
+    {"title": "延岡市の財政事情（令和7年度後期）令和7年度予算に対する収入支出状況", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27138.pdf", "publishedDate": "2026-05-01"},
+    {"title": "延岡市の財政事情（令和7年度後期）市債残高", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27146.pdf", "publishedDate": "2026-05-01", "note": "既存登録データとの整合を再確認したのみで新規登録はしていない"},
+    {"title": "令和６年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf", "publishedDate": "2025-08-15"},
+    {"title": "令和６年度 延岡市公営企業会計決算審査意見書（水道・下水道事業会計）", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24566.pdf", "publishedDate": "2025-07-25"},
+    {"title": "令和５年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20032.pdf", "publishedDate": "2024-08-01"},
+    {"title": "令和４年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf", "publishedDate": "2023-08-01"},
+    {"title": "令和４年度 延岡市公営企業会計決算審査意見書（水道・下水道事業会計）", "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15733.pdf", "publishedDate": "2023-08-01"},
+    {"title": "令和3年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市公式サイトから削除済み、Wayback Machine経由）", "url": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf", "publishedDate": "2022-08-01"},
+    {"title": "令和2年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市公式サイトから削除済み、Wayback Machine経由）", "url": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf", "publishedDate": "2021-08-02"}
+  ],
+  "methodologyNotes": [
+    "各年度の「決算審査意見書」本編は当該年度の数値と前年度比較列の2年度分を収録しており、1本のPDFから最大2年度分のgeneralAccountSettlementYen/generalAccountBondBalanceYenを確定できた（例: 令和6年度決算審査意見書からFY2024自年度分とFY2023比較列分の両方を確定）。",
+    "generalAccountSettlementYenは、既存の型定義コメント(src/types/historicalArchive.ts)および同一グループでチャート表示されるgeneralAccountInitialBudgetYen/generalAccountFinalBudgetYenとの対比関係から、「一般会計歳出決算額」（予算執行額）と解釈して登録した。歳入決算額は別数値であり、混同していない。",
+    "debt.balance.includingEnterpriseAccountsYen（FY2021-2024）は、一般会計の市債残高（決算審査意見書ベース）に、公営企業会計決算審査意見書の比較貸借対照表に記載された企業債残高（水道・下水道、固定負債＋流動負債）を当サイトで合算して算出した。各sourceRefのnotesに算出過程を明記し、既存のperCapitaYen算出（人口で除した参考値）と同様、サイト側計算値であることを明示した。",
+    "debt.balance.perCapitaYenは、決算審査意見書本文に記載された「約XX万円」という原資料の概数表記をそのまま転記した（当サイト独自の除算計算ではない）。",
+    "budget.enterpriseAccountBudgetYenは、水道・下水道の予算が収益的収支・資本的収支に分かれて公表されており、単一の「企業会計予算額」として集計する統一的な定義が既存データに見当たらないため、今回は全年度で登録を見送った（推測による合算を避けた）。",
+    "debt.balance.includingSpecialAccountsYenは、決算審査意見書に「特別会計において、市債の発行は行われていない」との記載はあるが、これはフロー（当年度発行額）の話であり、ストック（残高）が0であることの直接的な確認にはならないため、0として補完せず未登録のまま維持した。",
+    "FY2025・FY2026の決算・健全化判断比率・財政状況資料集ベースの数値は、延岡市公式サイトで2026-09-01時点で令和7年度版が未公表であることを確認した上でNOT_YET_PUBLISHEDとして扱い、推測補完しなかった。"
+  ],
+  "operationalIncident": {
+    "description": "作業中、archiveFiscalYears.jsonへの編集(未コミット)が、同一ワーキングディレクトリを共有する別の並列workerのgit操作によって編集前の状態(HEAD)へ巻き戻される事象が発生した(git diff --statが空になり、HEADがPhase158-162まで進んでいた)。値・出典はすべて会話ログ内に保持していたため、全37件の編集を1本の統合スクリプトで再適用し、即座にコミット(5bd5bc1)・プッシュして確定させた。",
+    "resolution": "コミット5bd5bc1として確定済み。origin/mainへプッシュ済み。"
+  },
+  "commit": {
+    "hash": "5bd5bc1",
+    "pushed": true,
+    "filesChanged": ["src/data/archiveFiscalYears.json"]
+  },
+  "validation": {
+    "validateData": "errors=0, warnings=21（既存warning、Phase165による変化なし）",
+    "jsonValid": true
+  }
+}

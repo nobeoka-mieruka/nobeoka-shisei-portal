@@ -1,0 +1,220 @@
+{
+  "generatedAt": "2026-09-01",
+  "worker": "Phase163",
+  "hardLimitSessions": 19,
+  "criticalBlockerFound": {
+    "summary": "scripts/lib/council-shared.mjs の eraYearFor(year) が『令和${year-2019+1}年』固定式で、平成以前・令和0年以前の日付に対して『令和-10年』『令和0年』のような不正な元号表記を生成する。scripts/lib/session-summary.mjs の formatEraDate() 経由でこの関数を使う buildSessionSummary() の summary（長文要約）が、2019年5月（令和改元）より前の開催日を持つ会期すべてでこの不正表記を出力する。",
+    "affectedFunction": "scripts/lib/council-shared.mjs: eraYearFor() / scripts/lib/session-summary.mjs: formatEraDate()",
+    "reproduction": "資料を追加した10会期（2007-06〜2019-03）すべてで node scripts/generate-session-summaries.mjs --session=<id> を実行したところ、summaryに『令和-11年6月5日』『令和-10年9月3日』『令和0年11月27日』等の不正な元号表記が生成されることを確認した。",
+    "actionTaken": "scripts/lib配下は変更禁止のため修正不可。validate-data.mjsが『summaryStatus!=unavailableならsummary必須』を強制するため、summaryのみ空にする折衷案も採用できなかった（検証エラーになることを確認済み）。そのため、該当10会期は summaryStatus を安全側の『unavailable』に戻し、shortSummary/summary/summaryGeneratedAt(不整合分)/summaryVerifiedAt/summarySources を未設定に統一した。ただし documents 配列（実PDF・出典）はそのまま保持している。",
+    "recommendation": "scripts/lib/council-shared.mjs の eraYearFor() を、1989-01-08以降=平成、2019-05-01以降=令和のように月日境界で分岐するよう修正（または昭和以前も含む一般的な和暦変換）した上で、node scripts/generate-session-summaries.mjs --session=<対象10件> を再実行すれば、10会期すべてが自動的に summaryStatus=partially-verified まで解決する見込み。billVotes.jsonへの議案登録も別途行えばverifiedまで到達しうる。この修正はscripts/lib配下のため、当worker(Phase163)の権限外（他フェーズでの対応を推奨）。"
+  },
+  "targetSessions": [
+    { "id": "2000-09", "title": "平成12年9月定例会", "startDate": "2000-09-05", "endDate": "2000-09-25", "summaryStatusBefore": "unavailable" },
+    { "id": "2004-06", "title": "平成16年6月定例会", "startDate": "2004-06-07", "endDate": "2004-06-23", "summaryStatusBefore": "unavailable" },
+    { "id": "2005-09", "title": "平成17年9月定例会", "startDate": "2005-09-07", "endDate": "2005-09-28", "summaryStatusBefore": "unavailable" },
+    { "id": "2006-06", "title": "平成18年6月定例会", "startDate": "2006-06-05", "endDate": "2006-06-26", "summaryStatusBefore": "unavailable" },
+    { "id": "2007-06", "title": "平成19年6月定例会", "startDate": "2007-06-05", "endDate": "2007-06-22", "summaryStatusBefore": "unavailable" },
+    { "id": "2008-09", "title": "平成20年9月定例会", "startDate": "2008-09-03", "endDate": "2008-09-24", "summaryStatusBefore": "unavailable" },
+    { "id": "2009-09", "title": "平成21年9月定例会", "startDate": "2009-09-01", "endDate": "2009-09-18", "summaryStatusBefore": "unavailable" },
+    { "id": "2010-06", "title": "平成22年6月定例会", "startDate": "2010-06-09", "endDate": "2010-06-24", "summaryStatusBefore": "unavailable" },
+    { "id": "2011-03", "title": "平成23年3月定例会", "startDate": "2011-03-01", "endDate": "2011-03-25", "summaryStatusBefore": "unavailable" },
+    { "id": "2012-09", "title": "平成24年9月定例会", "startDate": "2012-09-04", "endDate": "2012-09-24", "summaryStatusBefore": "unavailable" },
+    { "id": "2013-06", "title": "平成25年6月定例会", "startDate": "2013-06-03", "endDate": "2013-06-21", "summaryStatusBefore": "unavailable" },
+    { "id": "2013-09", "title": "平成25年9月定例会", "startDate": "2013-09-03", "endDate": "2013-09-24", "summaryStatusBefore": "unavailable" },
+    { "id": "2014-03", "title": "平成26年3月定例会", "startDate": "2014-02-25", "endDate": "2014-03-19", "summaryStatusBefore": "unavailable" },
+    { "id": "2014-09", "title": "平成26年9月定例会", "startDate": "2014-09-02", "endDate": "2014-09-22", "summaryStatusBefore": "unavailable" },
+    { "id": "2015-09", "title": "平成27年9月定例会", "startDate": "2015-09-01", "endDate": "2015-09-18", "summaryStatusBefore": "unavailable" },
+    { "id": "2016-09", "title": "平成28年9月定例会", "startDate": "2016-08-30", "endDate": "2016-09-16", "summaryStatusBefore": "unavailable" },
+    { "id": "2017-06", "title": "平成29年6月定例会", "startDate": "2017-06-05", "endDate": "2017-06-23", "summaryStatusBefore": "unavailable" },
+    { "id": "2018-12", "title": "平成30年12月定例会", "startDate": "2018-11-27", "endDate": "2018-12-14", "summaryStatusBefore": "unavailable" },
+    { "id": "2019-03", "title": "平成31年3月定例会", "startDate": "2019-02-26", "endDate": "2019-03-20", "summaryStatusBefore": "unavailable" }
+  ],
+  "resolvedCount_summaryStatus": 0,
+  "documentsAttachedCount": 10,
+  "unresolvedCount_noDocumentFound": 9,
+  "warningsResolvedCount": 0,
+  "sourceRefAddedCount": 10,
+  "contradictionCount": 0,
+  "newUnrCount": 0,
+  "note_on_resolvedCount": "summaryStatusの'unavailable'解消自体は0件（上記eraYearForバグにより安全側でunavailableへ戻したため）。ただし10会期について一次資料PDF（議案等審議結果）を実際に確認・保存し、councilSessions.jsonのdocuments配列へ登録済み。eraYearForバグ修正後にnode scripts/generate-session-summaries.mjsを再実行すれば、コード変更なしでこの10件は自動的にpartially-verifiedへ解決する見込み。",
+  "results": [
+    {
+      "id": "2007-06",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://web.archive.org/web/20191117083433/http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf1902/02shingikekka.pdf",
+      "originalCityUrl_nowDead": "http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf1902/02shingikekka.pdf",
+      "filePathSaved": "/council-documents/2007/2007-06/2007-06.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第２回延岡市議会定例会での議案等審議結果（会期：平成１９年６月５日～６月２２日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "現在の延岡市議会公式サイト（結果一覧ページ）は平成27年度以前を掲載しておらず、当該URLは現在404。Internet Archive(Wayback Machine)に保存された、市が過去に公式サイトで公開していた同一PDFを一次資料として採用。"
+    },
+    {
+      "id": "2008-09",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://web.archive.org/web/20191117083457/http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2009/09shingikekka.pdf",
+      "originalCityUrl_nowDead": "http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2009/09shingikekka.pdf",
+      "filePathSaved": "/council-documents/2008/2008-09/2008-09.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第９回延岡市議会定例会での議案等審議結果（会期：平成２０年９月３日～９月２４日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "Wayback Machineに保存された旧公式サイトのPDFを一次資料として採用（現URLは404）。"
+    },
+    {
+      "id": "2009-09",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://web.archive.org/web/20191117082949/http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2109/15kekka.pdf",
+      "originalCityUrl_nowDead": "http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2109/15kekka.pdf",
+      "filePathSaved": "/council-documents/2009/2009-09/2009-09.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第１５回延岡市議会定例会での議案等審議結果（会期：平成２１年９月１日～９月１８日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "Wayback Machineに保存された旧公式サイトのPDFを一次資料として採用（現URLは404）。"
+    },
+    {
+      "id": "2010-06",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://web.archive.org/web/20191114195107/http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2206/20kekka.pdf",
+      "originalCityUrl_nowDead": "http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2206/20kekka.pdf",
+      "filePathSaved": "/council-documents/2010/2010-06/2010-06.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第２０回延岡市議会定例会での議案等審議結果（会期：平成２２年６月９日～６月２４日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "Wayback Machineに保存された旧公式サイトのPDFを一次資料として採用（現URLは404）。"
+    },
+    {
+      "id": "2011-03",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://web.archive.org/web/20191119060033/http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2303/25kekka.pdf",
+      "originalCityUrl_nowDead": "http://www.city.nobeoka.miyazaki.jp/contents/sonota/gikai/shigikai/pdf2303/25kekka.pdf",
+      "filePathSaved": "/council-documents/2011/2011-03/2011-03.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第２５回延岡市議会定例会での議案等審議結果（会期：平成２３年３月１日～３月２５日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "Wayback Machineに保存された旧公式サイトのPDFを一次資料として採用（現URLは404）。"
+    },
+    {
+      "id": "2012-09",
+      "outcome": "unresolved",
+      "documentFound": false,
+      "note": "延岡市公式サイト（現行の議案等審議結果一覧ページ、平成27年度以降のみ掲載）・Wayback Machine双方を調査したが、平成24年度（2012年度）の議案等審議結果PDFは発見できなかった。旧CMS（/contents/sonota/gikai/shigikai/配下、shingikekka.pdf/kekka.pdf形式）は平成23年6月（2011年6月、pdf2306/2306.pdf）を最後にWayback Machineでの記録が途絶えており、新CMS（/uploaded/attachment/形式）は平成27年度（2015年度）分から現存を確認。この間（平成23年後半〜平成26年度、2011〜2014年度）はどちらの仕組みでもPDFが確認できず、空白期間となっている。"
+    },
+    {
+      "id": "2013-06",
+      "outcome": "unresolved",
+      "documentFound": false,
+      "note": "2012-09と同じ空白期間（平成23年後半〜平成26年度）に該当。公式サイト・Wayback Machine双方で議案等審議結果PDFを発見できなかった。"
+    },
+    {
+      "id": "2013-09",
+      "outcome": "unresolved",
+      "documentFound": false,
+      "note": "2012-09と同じ空白期間に該当。公式サイト・Wayback Machine双方で議案等審議結果PDFを発見できなかった。"
+    },
+    {
+      "id": "2014-03",
+      "outcome": "unresolved",
+      "documentFound": false,
+      "note": "2012-09と同じ空白期間に該当。公式サイト・Wayback Machine双方で議案等審議結果PDFを発見できなかった。"
+    },
+    {
+      "id": "2014-09",
+      "outcome": "unresolved",
+      "documentFound": false,
+      "note": "2012-09と同じ空白期間に該当。公式サイト・Wayback Machine双方で議案等審議結果PDFを発見できなかった。"
+    },
+    {
+      "id": "2015-09",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1660.pdf",
+      "filePathSaved": "/council-documents/2015/2015-09/2015-09.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第３回延岡市議会（定例会）での議案審議等結果（会期：平成２７年９月１日～９月１８日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "現行の延岡市議会公式サイト『議案等審議結果』一覧ページ（https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html、平成27年度以降を掲載）から直接ダウンロード・保存。ライブ資料。"
+    },
+    {
+      "id": "2016-09",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1631.pdf",
+      "filePathSaved": "/council-documents/2016/2016-09/2016-09.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第８回延岡市議会（定例会）での議案審議等結果（会期：平成28年8月30日～9月16日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "現行の延岡市議会公式サイト『議案等審議結果』一覧ページから直接ダウンロード・保存。ライブ資料。"
+    },
+    {
+      "id": "2017-06",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1628.pdf",
+      "filePathSaved": "/council-documents/2017/2017-06/2017-06.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第12回延岡市議会（定例会）での議案審議等結果（会期：平成29年6月5日～6月23日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "現行の延岡市議会公式サイト『議案等審議結果』一覧ページから直接ダウンロード・保存。ライブ資料。"
+    },
+    {
+      "id": "2018-12",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1600.pdf",
+      "filePathSaved": "/council-documents/2018/2018-12/2018-12.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第20回延岡市議会（定例会）での議案審議等結果（会期：平成30年11月27日～12月14日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "現行の延岡市議会公式サイト『議案等審議結果』一覧ページから直接ダウンロード・保存。ライブ資料。"
+    },
+    {
+      "id": "2019-03",
+      "outcome": "document-attached_summary-blocked-by-library-bug",
+      "documentFound": true,
+      "documentUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1598.pdf",
+      "filePathSaved": "/council-documents/2019/2019-03/2019-03.pdf",
+      "verifiedContentMatch": "PDF本文冒頭『第22回延岡市議会（定例会）での議案審議等結果（会期：平成31年2月26日～3月20日）』を確認。councilSessions.jsonのstartDate/endDateと完全一致。",
+      "generatedSummaryStatus": "unavailable（documentsは保持、summary生成はeraYearForバグのため保留）",
+      "note": "現行の延岡市議会公式サイト『議案等審議結果』一覧ページから直接ダウンロード・保存。ライブ資料。"
+    },
+    { "id": "2000-09", "outcome": "unresolved", "documentFound": false, "note": "延岡市議会公式サイト旧CMS（/contents/sonota/gikai/shigikai/配下）でWayback Machineから確認できる最古の『議案等審議結果』集約PDFは平成19年（2007年）2月開催分（第2回、pdf1902/02shingikekka.pdf）であり、それ以前（本件2000年含む）の集約PDFは同サイトに存在しなかった（またはWayback Machineに一度も記録されなかった）ことを確認した。" },
+    { "id": "2004-06", "outcome": "unresolved", "documentFound": false, "note": "2000-09と同じ理由（平成19年より前の集約PDFは同サイト上で確認できず）。" },
+    { "id": "2005-09", "outcome": "unresolved", "documentFound": false, "note": "2000-09と同じ理由。" },
+    { "id": "2006-06", "outcome": "unresolved", "documentFound": false, "note": "2000-09と同じ理由。" }
+  ],
+  "methodology": {
+    "sourcesChecked": [
+      "延岡市議会公式サイト『議案等審議結果』一覧ページ（https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html、現行は平成27年度以降のみ掲載）",
+      "Internet Archive Wayback Machine（web.archive.org、CDX APIによるURL網羅調査＋実際のPDFダウンロード・pdfjs-distによる本文抽出で会期日・第N回番号を突合）",
+      "旧CMS配下 /contents/sonota/gikai/shigikai/（2003年〜2011年6月ごろまでの『shingikekka.pdf』『kekka.pdf』形式を発見）"
+    ],
+    "sourcesCheckedButNoAdditionalData": [
+      "src/data/kohoOcrSearchIndex.json 等の既存OCRキャッシュ（本タスクの主目的である『議案等審議結果』PDF探索には直接該当する追加情報なし。市議会だよりの一般記事のみ）",
+      "scripts/.cache/minutes（会議録検索システムのキャッシュ。本タスクは審議結果PDF探索が主眼のため、既存キャッシュの追加調査は行っていない）"
+    ],
+    "verificationMethod": "各PDFはダウンロード後、scripts/lib/pdf-text.mjs（既存・変更なし）をスクラッチパッド上の一時スクリプトから読み取り専用でimportしてテキスト抽出し、本文中の『会期：...年...月...日～...月...日』『第N回延岡市議会定例会』の記載が councilSessions.json の startDate/endDate/title と完全一致することを確認した上でのみ『verified（本文確認済み）』として採用した。URLのみ発見しダウンロード未実施のものは0件（発見できたものは全てダウンロード・保存・登録まで完了）。"
+  },
+  "filesChanged": [
+    "src/data/councilSessions.json（documents配列への追記10件のみ。startDate/endDate/meetingDays等の他フィールドは変更していない）",
+    "public/council-documents/2007/2007-06/2007-06.pdf",
+    "public/council-documents/2008/2008-09/2008-09.pdf",
+    "public/council-documents/2009/2009-09/2009-09.pdf",
+    "public/council-documents/2010/2010-06/2010-06.pdf",
+    "public/council-documents/2011/2011-03/2011-03.pdf",
+    "public/council-documents/2015/2015-09/2015-09.pdf",
+    "public/council-documents/2016/2016-09/2016-09.pdf",
+    "public/council-documents/2017/2017-06/2017-06.pdf",
+    "public/council-documents/2018/2018-12/2018-12.pdf",
+    "public/council-documents/2019/2019-03/2019-03.pdf"
+  ],
+  "filesNotModified_confirmedForbiddenListRespected": [
+    "src/data/billVotes.json",
+    "src/lib/*.ts",
+    "scripts/lib/*.mjs",
+    "package.json",
+    "reports/*"
+  ],
+  "qualityChecks": {
+    "validateData": "errors=0, warnings=21（既存の警告のみ。うち19件は本タスク対象会期のsummaryStatus=unavailable警告、他2件は本タスク無関係の既存警告）",
+    "typecheck": "エラーなし（tsc -b成功）",
+    "lint": "エラーなし（既存の警告2件のみ、本タスク無関係）",
+    "build": "成功（vite build, prerender 2243ルート, validate:seo failures=0, validate:content errors=0）。ただしnpm run buildが連鎖実行する各種generateスクリプトが council-documents と無関係なデータファイル（sitemap.xml, adminReviewQueue.json, archiveFiscalYears.json 等）を副作用的に書き換えたため、並行実行中の他フェーズ作業との競合を避ける目的でそれらは git checkout により明示的に元へ戻した（このworkerの成果物はcouncilSessions.jsonとpublic/council-documents配下のみ）。"
+  }
+}

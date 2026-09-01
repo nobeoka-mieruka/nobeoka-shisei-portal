@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-09-01",
+  "worker": "Phase164",
+  "scopeNote": "対象は厳密に13期間の空白（archiveMayorTerms.jsonの隣接レコード間で2日以上空いている箇所）のみ。他の歴代市長データへは一切手を広げていない。billVotes.json・src/lib・scripts/lib・package.json・reports配下・councilSessions.jsonは変更していない。archiveMayorTerms.json自体への変更も、今回は新規に日単位を確定できる一次資料が見つからなかったため行っていない（推測での穴埋め・未確認情報での上書きを避けるため）。",
+  "priorWorkReviewed": [
+    "src/data/blockedTaskClassification.json（TASK-045・TASK-074・TASK-101〜105を精読）",
+    "reports/ndl-historical-source-ledger.json（ndl-src-01〜24、全件精読）",
+    "reports/physical-source-candidates.md",
+    "reports/phase109-118-staging/phase111-mayors-audit-findings.json（前回の官報・JACAR・夕刊デイリー調査記録）",
+    "reports/field-research/unr-priority-master.json / .md（UNR-029の現況＝partially_resolved）",
+    "src/data/archiveMayorTerms.json（対象17レコードの現況を直接確認。全てtermStartPrecision/termEndPrecision=\"month\"であることを確認）"
+  ],
+  "importantCorrection": "タスク指示のJSON例では existingPrecision の例として\"day\"が示されていたが、実際にarchiveMayorTerms.jsonを確認したところ、対象13区間に隣接する全17任期レコードのtermStartPrecision・termEndPrecisionはすべて\"month\"だった（日付文字列自体は日単位まで格納されているが、精度フラグはmonthに設定されている＝Wikipedia等未確認情報源由来の日付を保守的に低精度扱いしているため）。本findingsではこの実際の値（\"month\"）を記録する。",
+  "targetGaps": [
+    { "gapNumber": 1, "from": "mayor-04-term-01", "fromEnd": "1937-01-06", "to": "mayor-05-term-01", "toStart": "1937-03-06", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-01", "ndl-src-02", "ndl-src-10"] },
+    { "gapNumber": 2, "from": "mayor-05-term-01", "fromEnd": "1937-04-14", "to": "mayor-05-term-02", "toStart": "1937-05-16", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02"] },
+    { "gapNumber": 3, "from": "mayor-05-term-02", "fromEnd": "1937-06-15", "to": "mayor-06-term-01", "toStart": "1937-09-26", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02"] },
+    { "gapNumber": 4, "from": "mayor-06-term-01", "fromEnd": "1941-09-25", "to": "mayor-07-term-01", "toStart": "1941-10-22", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02", "ndl-src-10"] },
+    { "gapNumber": 5, "from": "mayor-07-term-01", "fromEnd": "1942-04-25", "to": "mayor-07-term-02", "toStart": "1942-05-19", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02"] },
+    { "gapNumber": 6, "from": "mayor-07-term-02", "fromEnd": "1946-03-06", "to": "mayor-05-term-03", "toStart": "1946-03-29", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02"] },
+    { "gapNumber": 7, "from": "mayor-05-term-03", "fromEnd": "1947-03-22", "to": "mayor-08-term-01", "toStart": "1947-04-16", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02"] },
+    { "gapNumber": 8, "from": "mayor-08-term-01", "fromEnd": "1948-06-06", "to": "mayor-04-term-02", "toStart": "1948-07-16", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-02", "ndl-src-10"] },
+    { "gapNumber": 9, "from": "mayor-04-term-02", "fromEnd": "1952-06-19", "to": "mayor-07-term-03", "toStart": "1952-07-11", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-10"], "note": "1952-04-30の官報デジタルコレクション無料公開範囲を超えるため、官報アプローチは原理的に対象外" },
+    { "gapNumber": 10, "from": "mayor-07-term-03", "fromEnd": "1956-03-27", "to": "mayor-09-term-01", "toStart": "1956-04-21", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-24（延岡商工会議所四十年史、投票日1956-04-19を確定済みだが就任日はdisputedのまま）"] },
+    { "gapNumber": 11, "from": "mayor-10-term-02", "fromEnd": "1966-12-01", "to": "mayor-11-term-01", "toStart": "1967-01-22", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-24"] },
+    { "gapNumber": 12, "from": "mayor-11-term-03", "fromEnd": "1978-10-05", "to": "mayor-12-term-01", "toStart": "1978-11-05", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-03"] },
+    { "gapNumber": 13, "from": "mayor-12-term-04", "fromEnd": "1994-01-11", "to": "mayor-13-term-01", "toStart": "1994-02-06", "existingPrecision": "month/month", "existingSourcesChecked": ["TASK-045", "TASK-074", "ndl-src-05"] }
+  ],
+  "fullyResolvedCount": 0,
+  "monthPrecisionImprovedCount": 0,
+  "yearPrecisionImprovedCount": 0,
+  "unresolvedCount": 13,
+  "ndlSourcesChecked": 2,
+  "kanpouChecked": 2,
+  "miyazakiKenkouhouChecked": 1,
+  "onsiteInvestigationCandidateCount": 13,
+  "sourceRefAddedCount": 0,
+  "warningsResolvedCount": 0,
+  "newAvenuesAttemptedThisPhase": [
+    {
+      "avenue": "NDLデジタルコレクション『官報』（1883-1952年、ログイン不要でフルテキスト検索・閲覧可能な範囲）への機械的フィルタ検索",
+      "method": "dl.ndl.go.jp（claude-in-chrome経由、URLに認証情報の入力は一切行っていない）で全文検索『延岡市長』を実行し、資料種別フィルタの『官報』カテゴリの該当件数を確認した。",
+      "result": "全文検索『延岡市長』（NDLデジタルコレクション全体1,166件）のうち、官報カテゴリの該当件数は0件だった。より広い『延岡市』単独では官報カテゴリに1,072件ヒットしたが、この語だけでは市長人事以外（郵便・通牒・条約関連等）の記事が大半を占めると推定され、UIの絞り込み操作（チェックボックス＋適用ボタン）がクライアント側で不安定だったため、1,072件を個別に精査するには至らなかった。",
+      "conclusion": "『延岡市長』という定型句そのものは戦前期官報に登場しない可能性が高い（市長人事は内務省による中央官報告示の対象ではなく、市議会による選任事項だったと推定される）。gapNumber 1-8（1937-1948年、官報無料公開範囲内）について、官報からの日単位確定は現時点で成果なし。gapNumber 9（1952年）は官報デジタルコレクション無料公開の上限（1952-04-30）を超えるため対象外。",
+      "isNewFinding": true,
+      "recommendedNextStep": "『延岡市 市長』ではなく、個々の市長氏名（鈴木憲太郎・大島文彦・三浦虎雄・佐藤千吉郎・仲田又次郎・青木善祐）を単体で官報カテゴリに絞り込み、1937-1948年の該当巻を1件ずつ確認する詳細作業は今回時間内に完了できず、次フェーズの候補として残す。"
+    },
+    {
+      "avenue": "夕刊デイリー公式サイトの検索フォームを直接操作（Google経由のWebSearchではなく、サイト自身の?s=検索を実行）",
+      "method": "https://www.yukan-daily.co.jp/?s=房野博 および ?s=早生隆彦 を直接実行。",
+      "result": "いずれも『該当する記事はありませんでした』（0件）。Phase111のWebSearch（Google索引経由）での未検出という結論と一致し、サイト自身の検索エンジンでも同じ結論であることを独立に確認した。",
+      "conclusion": "gapNumber 11（房野博の就任、1967年）・gapNumber 12〜13に関連する早生隆彦の記事は、夕刊デイリーのサイト内検索（自社検索エンジン）でも見つからない。ただし同サイトのheadline-newsシステム（news.php?id=）はこの?s=検索の対象外である可能性があり、完全な否定にはならない。",
+      "isNewFinding": true
+    },
+    {
+      "avenue": "宮崎県公報のデジタルアーカイブ提供状況の確認",
+      "method": "WebSearchで『宮崎県公報 デジタル アーカイブ 昭和』を検索。",
+      "result": "宮崎県公式サイトの公報ダウンロードサービスは令和年間（近年）分のみが対象で、昭和期（1937-1994年対象期間）の県公報デジタルアーカイブは確認できなかった。",
+      "conclusion": "宮崎県公報は昭和期分についてオンラインでは確認できず、優先調査対象6（宮崎県公報）はこの13区間について現時点で前進しない。物理資料としての宮崎県立公文書館所蔵の可能性は残るが未確認。",
+      "isNewFinding": true
+    },
+    {
+      "avenue": "JACAR（アジア歴史資料センター）のより具体的な検索語（内務省地方局人事関係文書等）",
+      "method": "WebSearchで『アジア歴史資料センター 内務省 地方局 延岡市長 任命』を検索（Phase111のnextActionsで示唆されていた切り口）。",
+      "result": "関連する公文書を特定できなかった（一般的な同センターの説明ページ等が返るのみ）。",
+      "conclusion": "WebSearch経由でのJACAR探索はこれ以上前進しなかった。JACAR自体のサイト内検索フォームを直接操作すればさらに前進する余地は残るが、本フェーズでは未実施（次フェーズ候補）。",
+      "isNewFinding": false
+    }
+  ],
+  "results": [
+    { "gapNumber": 1, "outcome": "unresolved", "newFinding": "官報フルテキスト検索『延岡市長』は0件（新規の否定的確認）。", "note": "既存month精度を維持。現地調査（延岡市史1963年版コマ102-104の再確認、または延岡市立・宮崎県立図書館での現物閲覧）が引き続き最有力の次の一歩。" },
+    { "gapNumber": 2, "outcome": "unresolved", "newFinding": "同上（官報0件）。鈴木憲太郎氏の2度目の就任・辞職。", "note": "既存month精度を維持。" },
+    { "gapNumber": 3, "outcome": "unresolved", "newFinding": "同上（官報0件）。", "note": "既存month精度を維持。" },
+    { "gapNumber": 4, "outcome": "unresolved", "newFinding": "同上（官報0件）。", "note": "既存month精度を維持。" },
+    { "gapNumber": 5, "outcome": "unresolved", "newFinding": "同上（官報0件）。", "note": "既存month精度を維持。" },
+    { "gapNumber": 6, "outcome": "unresolved", "newFinding": "同上（官報0件）。三浦虎雄氏の公職追放による辞職〜鈴木憲太郎氏3度目の就任。", "note": "既存month精度を維持。" },
+    { "gapNumber": 7, "outcome": "unresolved", "newFinding": "同上（官報0件）。", "note": "既存month精度を維持。" },
+    { "gapNumber": 8, "outcome": "unresolved", "newFinding": "同上（官報0件）。", "note": "既存month精度を維持。" },
+    { "gapNumber": 9, "outcome": "unresolved", "newFinding": "官報デジタルコレクション無料公開範囲（〜1952-04-30）を超えるため官報アプローチ自体が対象外であることを確認。", "note": "既存month精度を維持。" },
+    { "gapNumber": 10, "outcome": "unresolved", "newFinding": "既存のdisputed状態（就任日04-10 vs 04-21）に変化なし。新規資料は見つからなかった。", "note": "既存month精度を維持。投票日（1956-04-19）は既に延岡商工会議所四十年史で確定済み（既存sourceRefs）。" },
+    { "gapNumber": 11, "outcome": "unresolved", "newFinding": "夕刊デイリー自社検索で『房野博』0件（新規の否定的確認、サイト自身の検索エンジンで再確認）。", "note": "既存month精度を維持。" },
+    { "gapNumber": 12, "outcome": "unresolved", "newFinding": "新規に確認できた情報なし。", "note": "既存month精度を維持。" },
+    { "gapNumber": 13, "outcome": "unresolved", "newFinding": "夕刊デイリー自社検索で『早生隆彦』0件（新規の否定的確認）。桜井哲雄氏の就任経緯（投票日等）を裏付ける一次資料も引き続き未発見。", "note": "既存month精度を維持。" }
+  ],
+  "conclusion": "13区間すべてについて、既存のTASK-045・TASK-074・Phase111等の調査結論（NDL個人送信サービスへのログイン、または延岡市立図書館・宮崎県立図書館等での現物閲覧が必要）に変化はない。本フェーズでは、(1)NDLデジタルコレクション『官報』のログイン不要フルテキスト検索（新規の切り口）で『延岡市長』0件という否定的知見を得た、(2)夕刊デイリーの自社検索フォームを直接操作し房野博・早生隆彦とも0件を独立確認した、(3)宮崎県公報のオンラインアーカイブが昭和期分は存在しないことを確認した。いずれも『空白＝市長不在』と断定するものではなく、資料未確認状態が継続していることを示す。archiveMayorTerms.jsonへの変更（sourceRefs追加・precision更新）は、確認できる新事実が得られなかったため今回は一切行っていない（既存データを壊さない方針を優先）。NDL個人送信サービスへのログインは一切試みていない。",
+  "recommendedNextPhase": [
+    "NDL官報フルテキスト検索を、『延岡市長』のような複合語ではなく個々の市長氏名（鈴木憲太郎・大島文彦・三浦虎雄・佐藤千吉郎・仲田又次郎・青木善祐）単体×官報カテゴリで再試行する（本フェーズでUI操作の不安定さにより未完了）。",
+    "JACARのサイト内検索フォームを直接操作する（WebSearch経由ではなくブラウザ操作で）。",
+    "延岡史談会報（1988年3月、宮崎県立図書館所蔵）・延岡市議会会議録旧会期（宮崎県立図書館所蔵）の現地閲覧。",
+    "ユーザー本人によるNDL個人送信サービスへのログイン（延岡市史1963年版コマ102-104、1983年版上巻コマ124-127等、既に該当箇所が特定済みの巻から着手すると効率的）。"
+  ]
+}

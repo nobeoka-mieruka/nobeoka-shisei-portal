@@ -1,0 +1,354 @@
+{
+  "generatedAt": "2026-09-01",
+  "phase": "Phase166",
+  "promiseCount": 14,
+  "measureCount": 33,
+  "budgetConfirmedCount": 6,
+  "billConfirmedCount": 1,
+  "implementationConfirmedCount": 28,
+  "outcomeConfirmedCount": 2,
+  "needsMoreConfirmationCount": 5,
+  "newBillLinkageCount": 2,
+  "newBudgetLinkageCount": 0,
+  "newOutcomeSourceCount": 0,
+  "speculativeLinkageExcludedCount": 55,
+  "sourceRefAddedCount": 2,
+  "contradictionCount": 0,
+  "methodology": {
+    "scope": "33個別施策（mayorPromiseMeasures.json）・14公約（mayorPromises.json）を対象に、billVotes.json中のLevel3議案622件（summarySource===\"manual\" かつ reason/mainChanges/citizenImpactのいずれかを保有）を、各公約・各施策のmeasureTitle/promiseTextに含まれる固有名詞キーワードで検索した。",
+    "linkageCriteria": "キーワード一致のみでは確定とせず、議案のreason/mainChanges本文または公約資料のevidenceItems/sourceUrlで、(a)同一事業名の明記、(b)同一施策名の明記、(c)予算科目・事業コードの連続性、(d)担当事業としての明記、のいずれかが一次資料で確認できる場合のみrelatedBillVoteIds等へ追加した。",
+    "termWindowNote": "現市長（三浦久知氏、archiveMayorTerms.jsonのmayor-01-term-01）の任期開始日は2025-07-20（一次資料で確認済み）。多くのキーワード一致議案は任期開始前の議案であり、公約（現市長の令和7年就任時公約）とは無関係な過去の別事業・別施設名の同名一致であったため、内容を個別に精査し除外した。",
+    "excludedCategories": [
+      "道路名・地区名など地理的固有名詞が一致するだけで、施策内容が全く異なる議案（例：「愛宕山」を含む市道の陥没事故損害賠償、「北方」「北浦」「北川」「島浦」を含む無関係な条例改正・工事契約・指定管理者指定）",
+      "現市長就任(2025-07-20)以前の議案で、同じ分野・同じキーワードを含むが別事業・別年度の取り組みであるもの（例：2020年度健康マイレージアプリ構築、2021-2022年度の医療機関関連介護保険特別会計補正等）",
+      "一般会計補正予算・当初予算等、多数の事業を一括して議決する大型予算議案の中で、対象事業名が歳出項目の一つとして言及されているに留まり、当該事業単体を議決する独立の議案ではないもの"
+    ]
+  },
+  "newBillLinkages": [
+    {
+      "promiseId": "2-3",
+      "billId": "2023-06-gian-19",
+      "billTitle": "延岡市都市公園条例の一部を改正する条例の制定（令和5年6月定例会 議案第19号）",
+      "reasonForLinkage": "提案理由本文に「西階公園に建設中の多目的屋内アリーナの使用料について、所要の改正を行う」と明記されており、公約が指す「アスリートタウン延岡アリーナ（西階公園多目的屋内アリーナ）」を対象とした議案であることを確認した。"
+    },
+    {
+      "promiseId": "2-3",
+      "billId": "2026-03-gian-155",
+      "billTitle": "延岡市都市公園条例の一部を改正する条例の制定（令和8年3月定例会 議案第155号）",
+      "reasonForLinkage": "提案理由本文に「現在、整備を進めている西階公園野球場について、良好な施設環境の維持と市民サービスの向上を図るため、使用料の改定を行う」と明記されており、公約が指す「西階野球場（西階公園野球場、愛称のべおかwaiwaiスタジアム）」を対象とした議案であることを確認した。"
+    }
+  ],
+  "excludedCandidateFindings": [
+    {
+      "promiseId": "2-2",
+      "billId": "2026-03-gian-170",
+      "billTitle": "和解及び損害賠償の額の決定（令和8年3月定例会 議案第170号）",
+      "reasonForExclusion": "「愛宕山」で一致したが、内容は市道「構口愛宕山線」の埋設管破損による陥没事故の損害賠償であり、公約（愛宕山笠沙の御碕公園のカフェ誘致・賑わい創出）とは無関係の道路名一致のみ。"
+    },
+    {
+      "promiseId": "3-2",
+      "billId": "2025-12-gian-71",
+      "billTitle": "令和7年度延岡市一般会計補正予算（令和7年12月定例会 議案第71号）",
+      "reasonForExclusion": "繰越明許費の説明に「津波避難施設整備事業ほか九件」との記載があるが、これは土々呂地区複合型避難施設等の建設・整備という別の継続事業であり、公約の具体的施策（避難所運営マニュアル改訂・段ボールベッド等の物資導入）とは異なる。"
+    }
+  ],
+  "measures": [
+    {
+      "measureId": "1-1-a",
+      "promiseId": "1-1",
+      "budgetStatus": "candidate",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "こども未来創造機構の事業はrelatedBudgetCandidates（candidate、confirmed未満）に対応。前年度(R7)実施実績(2件)はあるが今年度(R8)5件は予定値でまだ実績確定していない。"
+    },
+    {
+      "measureId": "1-1-b",
+      "promiseId": "1-1",
+      "budgetStatus": "confirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "はらはらわくわくふるさと体験事業は施政方針で公約と明示的に対応確認済み(relatedBudget confirmed)。前年度2回実施の実績あり、今年度4回は予定。"
+    },
+    {
+      "measureId": "1-1-c",
+      "promiseId": "1-1",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "ふるさと教育推進事業は promiseレベルのrelatedBudget（はらはらわくわく事業）とは別事業で、本測定に対応する予算確認は無い。前年度A/B/C部門の実施実績はある。"
+    },
+    {
+      "measureId": "1-2-a",
+      "promiseId": "1-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "Qubenaは対象学年へ導入済み（実施確認済み）。効果検証アンケートはこれからで成果指標なし。promiseのrelatedBudget（NOBEOKAスクール・イノベーション事業）とは別施策。"
+    },
+    {
+      "measureId": "1-2-b",
+      "promiseId": "1-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "ライフイズテックレッスンは中学校技術科向けに導入済み。予算・成果指標は未確認。"
+    },
+    {
+      "measureId": "1-2-c",
+      "promiseId": "1-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "学力向上指導員15名を配置（実績数値）。学力向上等のアウトカム指標は無い。個別予算額の確認はできていない。"
+    },
+    {
+      "measureId": "1-2-d",
+      "promiseId": "1-2",
+      "budgetStatus": "confirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "NOBEOKAスクール・イノベーション事業はrelatedBudget confirmed（2,610千円、令和8年2月市長記者会見資料No.372と一致）。3チームが活動中で成果は年度末フォーラム待ち。"
+    },
+    {
+      "measureId": "1-3-a",
+      "promiseId": "1-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "こども未来部設置準備室を中心に協議・情報収集を実施中（実施確認済み）。部設置自体（最終成果）は未達。"
+    },
+    {
+      "measureId": "1-3-b",
+      "promiseId": "1-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "confirmed",
+      "note": "夏季食支援は実績962名分の配布という具体的な利用実績データがあり、outcome確認済み。個別予算額は未確認。"
+    },
+    {
+      "measureId": "2-1-a",
+      "promiseId": "2-1",
+      "budgetStatus": "confirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "地域商社設立準備事業はrelatedBudget confirmed（7,192千円）。ワークショップ・ヒアリング実施中。地域商社設立（成果）は令和9年度目標でまだ。"
+    },
+    {
+      "measureId": "2-2-a",
+      "promiseId": "2-2",
+      "budgetStatus": "confirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "愛宕山笠沙の御碕公園賑わい創出検討事業（15,671千円）に地域活性化起業人制度活用が明記されrelatedBudget confirmed。NTT東日本と契約締結済み（実施確認済み）。実証実験の成果はこれから。"
+    },
+    {
+      "measureId": "2-2-b",
+      "promiseId": "2-2",
+      "budgetStatus": "confirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "同事業に有識者アドバイスが明記されrelatedBudget confirmed。文化芸術企画アドバイザーとの協議を実施中。成果指標なし。"
+    },
+    {
+      "measureId": "2-2-c",
+      "promiseId": "2-2",
+      "budgetStatus": "confirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "同事業に樹木剪定・伐採が明記されrelatedBudget confirmed。前年度に一部実施済み（実績）。整備完了等の成果はまだ。"
+    },
+    {
+      "measureId": "2-3-a",
+      "promiseId": "2-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "confirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "アリーナ・野球場の建設工事請負契約・使用料条例改正等9件の議案でbillStatus confirmed（Phase166でアリーナ・野球場それぞれの使用料条例改正2件を新規追加）。令和8年4月18日グランドオープンで供用開始は確認済みだが、これは施設完成の事実であり、公約の目的（大会・合宿誘致の拡大）の達成を意味しない。単一年度の予算総額は複数年度・複数議案にまたがるため未特定（budgetStatus unconfirmed）。"
+    },
+    {
+      "measureId": "2-3-b",
+      "promiseId": "2-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "女子ハンドボールリーグ「リーグH」の令和8年10月18日公式戦開催が決定（誘致活動の具体的成果に近い事実）だが、開催日は本findings作成時点で未到来のため大会実施・利用実績としてのoutcomeは未確認。"
+    },
+    {
+      "measureId": "2-3-c",
+      "promiseId": "2-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "unconfirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "みやざきフェニックス・リーグの延岡開催自体が未定の段階で、具体的な実施事実はまだ無い。"
+    },
+    {
+      "measureId": "3-1-a",
+      "promiseId": "3-1",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "医療機関新規開業促進・事業承継支援補助金交付要綱を制定し運用開始（実施確認済み）。補助金の利用実績（医師確保等の成果）は未確認。個別予算額も未確認。"
+    },
+    {
+      "measureId": "3-1-b",
+      "promiseId": "3-1",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "熊本大学・大分大学への訪問・依頼を実施（実施確認済み）。医師派遣等の具体的成果は未確認。"
+    },
+    {
+      "measureId": "3-2-a",
+      "promiseId": "3-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "九州市長会相互支援体制の支援都市が決定し訪問・WEB会議を実施（実施確認済み）。実際の災害対応実績は無い（平時のため成果指標なし）。"
+    },
+    {
+      "measureId": "3-2-b",
+      "promiseId": "3-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "避難所運営マニュアルを改訂し8ヶ所で運営手順書を作成（実施確認済み、数値あり）。訓練実施・段ボールベッド等の導入はこれからで成果は未確認。"
+    },
+    {
+      "measureId": "3-3-a",
+      "promiseId": "3-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "ボランティアへの名札配布・手帳作成・保険加入推奨を実施（実施確認済み）。ボランティア人数増加等の成果指標は無い。"
+    },
+    {
+      "measureId": "3-3-b",
+      "promiseId": "3-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "unconfirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "シニア向け相談ブース新設・就職支援セミナー継続実施はいずれも記載が今年度の「予定」欄のみで、今年度の具体的な実施結果の記述が無いため実施確認済みとはしていない。"
+    },
+    {
+      "measureId": "4-1-a",
+      "promiseId": "4-1",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "unconfirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "「GIFT」研修は令和8年9月開催予定で、findings作成時点（2026年9月1日）で開催実施の記述が資料に無いため実施未確認。"
+    },
+    {
+      "measureId": "4-2-a",
+      "promiseId": "4-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "延岡YEG×市役所ワールドカフェを令和8年7月9日に実施済み（実施確認済み）。成果指標は無い。"
+    },
+    {
+      "measureId": "4-2-b",
+      "promiseId": "4-2",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "にぎわい創出プロジェクト実行委員会を立ち上げイルミネーション展開に取り組み中（実施確認済み）。展開自体の成果はこれから。"
+    },
+    {
+      "measureId": "4-3-a",
+      "promiseId": "4-3",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "confirmed",
+      "note": "出張なんでも総合相談センターは前年度計5件・今年度は島浦10件・土々呂/伊形7件の相談対応実績があり、具体的な利用実績数値としてoutcome確認済み。"
+    },
+    {
+      "measureId": "4-4-a",
+      "promiseId": "4-4",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "令和8年4月から北方総合支所へ地域おこし協力隊1名が着任済み（実施確認済み）。地域振興の成果指標は無い。"
+    },
+    {
+      "measureId": "4-4-b",
+      "promiseId": "4-4",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "北方・北浦・北川各総合支所に地域振興職員を配置し研修を実施（実施確認済み）。成果指標は無い。"
+    },
+    {
+      "measureId": "4-5-a",
+      "promiseId": "4-5",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "unconfirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "フレックスタイム制を見据えた早出・遅出勤務は「試行導入を検討中」の段階で、今年度中の制度構築は予定であり実施はまだ。"
+    },
+    {
+      "measureId": "4-5-b",
+      "promiseId": "4-5",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "佐伯市との職員相互派遣を令和8年4月1日付で実施済み（実施確認済み、status COMPLETED）。交流の効果自体の指標は無い。"
+    },
+    {
+      "measureId": "4-5-c",
+      "promiseId": "4-5",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "RPA内製化研修に職員4名が参加し取り組み中（実施確認済み）。RPA活用実績等の成果は未確認。"
+    },
+    {
+      "measureId": "4-5-d",
+      "promiseId": "4-5",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "unconfirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "庁外副業の基準は「今年度中に作成予定」の段階で、まだ作成されていない。"
+    },
+    {
+      "measureId": "4-5-e",
+      "promiseId": "4-5",
+      "budgetStatus": "unconfirmed",
+      "billStatus": "unconfirmed",
+      "implementationStatus": "confirmed",
+      "outcomeStatus": "unconfirmed",
+      "note": "PR動画作成・公開、資格取得支援制度の案内明記、記者会見説明、アンケート開始など複数の具体的対策を実施済み（実施確認済み）。申込者数自体が増加したかという成果指標はまだ確認できていない。"
+    }
+  ]
+}
