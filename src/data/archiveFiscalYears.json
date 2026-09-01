@@ -5073,7 +5073,7 @@
       "fiscalYear": 2019,
       "municipalBondIssuanceYen": 5347613000,
       "balance": {
-        "generalAccountBondBalanceYen": null,
+        "generalAccountBondBalanceYen": 56152458949,
         "ordinaryAccountLocalBondBalanceYen": 56152000000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
@@ -5089,10 +5089,21 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円（財政状況資料集の千円単位より粗い精度）。FY2020分で同一年度末時点の財政状況資料集ベースの数値（地方債現在高55,428,571千円・財政調整基金5,032,997千円・減債基金2,384,088千円）と、本資料の値（地方債55,428百万円・財政調整基金5,033百万円・減債基金2,384百万円）が百万円単位の丸め差以内で一致することを確認済み（発生主義の財務書類「一般会計等」区分と、決算統計ベースの「普通会計」区分は、延岡市の場合ほぼ同一の範囲を指すと判断できる）。"
+          },
+          {
+            "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf",
+            "sourceTitle": "延岡市監査委員「令和2年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2021-08-02",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。令和2年度決算審査意見書P3「市債借入償還状況表」の「前年度末残高」列（令和元年度末＝令和2年3月31日現在の一般会計市債残高）56,152,458,949円をgeneralAccountBondBalanceYenへ登録。"
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（令和元年度、宮崎県・延岡市）で確認した。",
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（令和元年度、宮崎県・延岡市）で確認した。 Phase165: 同審査意見書の前年度末残高欄（令和元年度末＝令和2年3月31日現在）により一般会計の市債残高を新規登録した。",
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
         {
@@ -5147,7 +5158,7 @@
       "fiscalYear": 2019,
       "generalAccountInitialBudgetYen": 58578000000,
       "generalAccountFinalBudgetYen": 60973840000,
-      "generalAccountSettlementYen": null,
+      "generalAccountSettlementYen": 59850459760,
       "specialAccountBudgetYen": null,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 61593312000,
@@ -5185,9 +5196,20 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和元年度の値：58,578,000千円）"
+        },
+        {
+          "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf",
+          "sourceTitle": "延岡市監査委員「令和2年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2021-08-02",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。令和2年度決算審査意見書の前年度比較列（令和元年度）より、一般会計歳出決算額59,850,459,760円（generalAccountSettlementYen）を登録。同表の令和元年度一般会計歳入決算額61,747,630,600円は、既存のtotalRevenueYen（財政状況資料集・普通会計ベース、未登録の場合は据え置き）とは別会計区分のため新規登録していない。既存のgeneralAccountFinalBudgetYen（60,973,840,000円、別出典より登録済み）とは別数値（決算額であり予算額ではない）である点に注意。"
         }
       ],
-      "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。 Phase113: 総務省「令和元年度市町村決算カード」（普通会計ベース）により、歳入総額・歳出総額および歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
+      "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。 Phase113: 総務省「令和元年度市町村決算カード」（普通会計ベース）により、歳入総額・歳出総額および歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。 Phase165: 令和2年度決算審査意見書（Wayback Machine経由）の前年度比較列（令和元年度）により、一般会計決算額（歳出ベース）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2019,
@@ -5235,9 +5257,9 @@
     "budget": {
       "fiscalYear": 2020,
       "generalAccountInitialBudgetYen": 61633000000,
-      "generalAccountFinalBudgetYen": null,
-      "generalAccountSettlementYen": null,
-      "specialAccountBudgetYen": null,
+      "generalAccountFinalBudgetYen": 82040736006,
+      "generalAccountSettlementYen": 75011774517,
+      "specialAccountBudgetYen": 30117033000,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 77776083000,
       "totalExpenditureYen": 75003441000,
@@ -5274,19 +5296,41 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和2年度の値：61,633,000千円）"
+        },
+        {
+          "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
+          "sourceTitle": "延岡市監査委員「令和3年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2022-08-01",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。令和3年度決算審査意見書の前年度比較列（令和2年度）より、一般会計歳出決算額75,011,774,517円（generalAccountSettlementYen）を登録。同表の令和2年度一般会計歳入決算額77,784,416,625円は、既存のtotalRevenueYen（財政状況資料集・普通会計ベース、未登録の場合は据え置き）とは別会計区分のため新規登録していない。同資料には令和2年度の一般会計予算現額（比較用）の記載が無いため、generalAccountFinalBudgetYenは今回も未登録（別出典より別途登録）。"
+        },
+        {
+          "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf",
+          "sourceTitle": "延岡市監査委員「令和2年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2021-08-02",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。延岡市公式サイトの現行ページ（/soshiki/78/1210.html）からは削除済み（直リンクは404）のため、Internet Archive Wayback Machine（2023-10-24取得スナップショット）経由でPDF本文をダウンロードしReadツールで直接確認。P2「決算の概要 (1)決算の規模」より令和2年度の一般会計予算現額82,040,736,006円（generalAccountFinalBudgetYen）・特別会計予算現額30,117,033,000円（specialAccountBudgetYen）を登録。同ページの一般会計歳出決算額は既存登録のgeneralAccountSettlementYen（75,011,774,517円）と完全一致（クロスチェック）。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 総務省「令和2年度市町村決算カード」（普通会計ベース、既存の歳入総額・歳出総額と完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 総務省「令和2年度市町村決算カード」（普通会計ベース、既存の歳入総額・歳出総額と完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。 Phase165: 令和3年度決算審査意見書の前年度比較列、および令和2年度決算審査意見書（Wayback Machine経由、自年度版）により、一般会計の補正後（最終）予算額・特別会計予算額・一般会計決算額（歳出ベース）を新規登録した。"
     },
     "debt": {
       "fiscalYear": 2020,
       "municipalBondIssuanceYen": 5577391000,
       "balance": {
-        "generalAccountBondBalanceYen": null,
+        "generalAccountBondBalanceYen": 55428571097,
         "ordinaryAccountLocalBondBalanceYen": 55428571000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": null,
+        "perCapitaYen": 473000,
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。perCapitaYenは当該年度population（119,164人）で除して当サイトが計算した参考値。",
         "sourceRefs": [
           {
@@ -5298,10 +5342,32 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
+            "sourceTitle": "延岡市監査委員「令和3年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2022-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。令和3年度決算審査意見書P3「市債借入償還状況表」の「前年度末残高」列（令和2年度末＝令和3年3月31日現在の一般会計市債残高）55,428,571,097円をgeneralAccountBondBalanceYenへ登録。"
+          },
+          {
+            "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf",
+            "sourceTitle": "延岡市監査委員「令和2年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2021-08-02",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。P3「(3)市債の状況」本文に「本年度末における市民一人当たりの市債残高は、約47万3千円となっている」との記載があり、原資料の概数表記をそのままperCapitaYenへ登録（当サイト独自計算値ではない）。同ページの市債借入償還状況表・本年度末残高55,428,571,097円は、既存登録済みのgeneralAccountBondBalanceYenと完全一致（クロスチェック）。"
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（令和2年度、宮崎県・延岡市）で確認した。",
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 市債発行額（フロー、決算額）は総務省「市町村決算状況調」決算カード（令和2年度、宮崎県・延岡市）で確認した。 Phase165: 決算審査意見書により一般会計の市債残高（令和3年3月31日現在）・市民一人当たり市債残高（概数）を新規登録した。",
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
         {
@@ -5446,11 +5512,11 @@
       "fiscalYear": 2021,
       "municipalBondIssuanceYen": 7038061000,
       "balance": {
-        "generalAccountBondBalanceYen": null,
+        "generalAccountBondBalanceYen": 56172738028,
         "ordinaryAccountLocalBondBalanceYen": 56172738000,
         "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": null,
+        "includingEnterpriseAccountsYen": 89206707903,
+        "perCapitaYen": 486000,
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
@@ -5462,10 +5528,43 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
+            "sourceTitle": "令和４年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2023-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。令和4年度決算審査意見書P3「市債借入償還状況表」の「前年度末残高」列（令和3年度末＝令和4年3月31日現在の一般会計市債残高）56,172,738,028円をgeneralAccountBondBalanceYenへ登録。"
+          },
+          {
+            "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
+            "sourceTitle": "延岡市監査委員「令和3年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2022-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。P3「(3)市債の状況」本文に「本年度末における市民一人当たりの市債残高は、約48万6千円となっている」との記載があり、原資料の概数表記をそのままperCapitaYenへ登録（当サイト独自計算値ではない）。同ページの市債借入償還状況表・本年度末残高56,172,738,028円は、既存登録済みのgeneralAccountBondBalanceYenと完全一致（クロスチェック）。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15733.pdf",
+            "sourceTitle": "令和４年度 延岡市公営企業会計決算審査意見書（水道事業会計・下水道事業会計、延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 28,
+            "sourcePublishedDate": "2023-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録（当サイトによる計算値）。令和4年度公営企業会計決算審査意見書「付表5 比較貸借対照表」の前年度（令和3年度）比較列より、水道事業会計の企業債残高（固定負債7,868,430,622円＋流動負債624,117,913円＝8,492,548,535円、P28）と下水道事業会計の企業債残高（固定負債22,347,158,830円＋流動負債2,194,262,510円＝24,541,421,340円、P60）を確認し、合計33,033,969,875円を算出。これに一般会計の市債残高（56,172,738,028円、令和4年3月31日現在）を加算し、includingEnterpriseAccountsYen（一般会計＋企業会計＝89,206,707,903円）として登録した。"
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 Phase165: 決算審査意見書（一般会計・公営企業会計）により一般会計の市債残高（令和4年3月31日現在）・市民一人当たり市債残高（概数）、および企業債残高を合算したincludingEnterpriseAccountsYenを新規登録した。",
       "municipalBondIssuanceValueType": "settlement",
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
@@ -5483,9 +5582,9 @@
     "budget": {
       "fiscalYear": 2021,
       "generalAccountInitialBudgetYen": 63246000000,
-      "generalAccountFinalBudgetYen": null,
-      "generalAccountSettlementYen": null,
-      "specialAccountBudgetYen": null,
+      "generalAccountFinalBudgetYen": 79114750094,
+      "generalAccountSettlementYen": 71969649117,
+      "specialAccountBudgetYen": 30167689000,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 75934099000,
       "totalExpenditureYen": 71960873000,
@@ -5522,9 +5621,31 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和3年度の値：63,246,000千円）"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
+          "sourceTitle": "令和４年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2023-08-01",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。令和4年度決算審査意見書の前年度比較列（令和3年度）より、一般会計歳出決算額71,969,649,117円（generalAccountSettlementYen）を登録。同表の令和3年度一般会計歳入決算額75,942,875,432円は、既存のtotalRevenueYen（財政状況資料集・普通会計ベース）とは別会計区分のため新規登録していない。"
+        },
+        {
+          "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
+          "sourceTitle": "延岡市監査委員「令和3年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書」",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2022-08-01",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。延岡市公式サイトの現行ページ（/soshiki/78/1210.html）からは削除済み（直リンクは404）のため、Internet Archive Wayback Machine（2023-10-24取得スナップショット）経由でPDF本文をダウンロードしReadツールで直接確認。P2「決算の概要 (1)決算の規模」より令和3年度の一般会計予算現額79,114,750,094円（generalAccountFinalBudgetYen）・特別会計予算現額30,167,689,000円（specialAccountBudgetYen）を登録。既存のgeneralAccountSettlementYen（71,969,649,117円）と同じ表内の一般会計歳出決算額が完全一致することを確認済み（クロスチェック）。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。 Phase165: 令和4年度決算審査意見書の前年度比較列、および令和3年度決算審査意見書（Wayback Machine経由、自年度版）により、一般会計の補正後（最終）予算額・特別会計予算額・一般会計決算額（歳出ベース）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2021,
@@ -5620,11 +5741,11 @@
       "fiscalYear": 2022,
       "municipalBondIssuanceYen": 4724117000,
       "balance": {
-        "generalAccountBondBalanceYen": null,
+        "generalAccountBondBalanceYen": 54683037650,
         "ordinaryAccountLocalBondBalanceYen": 54689691000,
         "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": null,
+        "includingEnterpriseAccountsYen": 86720327102,
+        "perCapitaYen": 480000,
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
@@ -5636,10 +5757,32 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
+            "sourceTitle": "令和４年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2023-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。P3「(3)市債の状況 市債借入償還状況表」より一般会計の本年度末残高54,683,037,650円（generalAccountBondBalanceYen、令和5年3月31日現在）を登録。本文に「本年度末における市民一人当たりの市債残高は、約48万円」との記載があり、原資料の概数表記をそのままperCapitaYenへ登録（当サイト独自計算値ではない）。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15733.pdf",
+            "sourceTitle": "令和４年度 延岡市公営企業会計決算審査意見書（水道事業会計・下水道事業会計、延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 28,
+            "sourcePublishedDate": "2023-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録（当サイトによる計算値）。令和4年度公営企業会計決算審査意見書「付表5 比較貸借対照表」より、水道事業会計の企業債残高（固定負債7,733,123,848円＋流動負債627,306,774円＝8,360,430,622円、P28）と下水道事業会計の企業債残高（固定負債21,549,485,231円＋流動負債2,127,373,599円＝23,676,858,830円、P60）を確認し、合計32,037,289,452円を算出。これに一般会計の市債残高（54,683,037,650円、令和5年3月31日現在）を加算し、includingEnterpriseAccountsYen（一般会計＋企業会計＝86,720,327,102円）として登録した。"
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 Phase165: 同審査意見書により一般会計の市債残高（令和5年3月31日現在）・市民一人当たり市債残高（概数）、および公営企業会計決算審査意見書に基づく企業債残高を合算したincludingEnterpriseAccountsYenを新規登録した。",
       "municipalBondIssuanceValueType": "settlement",
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
@@ -5657,9 +5800,9 @@
     "budget": {
       "fiscalYear": 2022,
       "generalAccountInitialBudgetYen": 64491436000,
-      "generalAccountFinalBudgetYen": null,
-      "generalAccountSettlementYen": null,
-      "specialAccountBudgetYen": null,
+      "generalAccountFinalBudgetYen": 77613822766,
+      "generalAccountSettlementYen": 69480370787,
+      "specialAccountBudgetYen": 29621921000,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 73095850000,
       "totalExpenditureYen": 69471701000,
@@ -5696,9 +5839,20 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和4年度の値：64,491,436千円）"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
+          "sourceTitle": "令和４年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2023-08-01",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。令和4年度決算審査意見書PDFをReadツールでページ画像を直接確認。P2「決算の概要 (1)決算の規模」より令和4年度の一般会計予算現額77,613,822,766円（generalAccountFinalBudgetYen）・特別会計予算現額29,621,921,000円（specialAccountBudgetYen）を登録。同ページの一般会計歳出決算額69,480,370,787円をgeneralAccountSettlementYenへ登録（一般会計歳入決算額73,104,520,235円は、既存のtotalRevenueYen（財政状況資料集・普通会計ベース）とは別会計区分のため新規登録していない）。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。 Phase165: 令和4年度決算審査意見書（延岡市監査委員）により、一般会計の補正後（最終）予算額・特別会計予算額・一般会計決算額（歳出ベース）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2022,
@@ -5794,11 +5948,11 @@
       "fiscalYear": 2023,
       "municipalBondIssuanceYen": 5463242000,
       "balance": {
-        "generalAccountBondBalanceYen": null,
+        "generalAccountBondBalanceYen": 54015235316,
         "ordinaryAccountLocalBondBalanceYen": 54021888000,
         "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": null,
+        "includingEnterpriseAccountsYen": 85286544395,
+        "perCapitaYen": 482000,
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
@@ -5810,10 +5964,43 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+            "sourceTitle": "令和６年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2025-08-15",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。令和6年度決算審査意見書P3「市債借入償還状況表」の「前年度末残高」列（令和5年度末＝令和6年3月31日現在の一般会計市債残高）54,015,235,316円をgeneralAccountBondBalanceYenへ登録。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20032.pdf",
+            "sourceTitle": "令和５年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2024-08-01",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。P3「(3)市債の状況」本文に「本年度末における市民一人当たりの市債残高は、約48万2千円となっている」との記載があり、原資料の概数表記をそのままperCapitaYenへ登録（当サイト独自計算値ではない）。同ページの市債借入償還状況表・本年度末残高54,015,235,316円は、既存登録済みのgeneralAccountBondBalanceYenと完全一致（クロスチェック）。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24566.pdf",
+            "sourceTitle": "令和６年度 延岡市公営企業会計決算審査意見書（水道事業会計・下水道事業会計、延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 28,
+            "sourcePublishedDate": "2025-07-25",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録（当サイトによる計算値）。令和6年度公営企業会計決算審査意見書「付表5 比較貸借対照表」の前年度（令和5年度）比較列より、水道事業会計の企業債残高（固定負債7,552,077,698円＋流動負債627,046,150円＝8,179,123,848円、P28）と下水道事業会計の企業債残高（固定負債20,961,890,435円＋流動負債2,130,294,796円＝23,092,185,231円、P60）を確認し、合計31,271,309,079円を算出。これに一般会計の市債残高（54,015,235,316円、令和6年3月31日現在）を加算し、includingEnterpriseAccountsYen（一般会計＋企業会計＝85,286,544,395円）として登録した。"
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 Phase165: 決算審査意見書（一般会計・公営企業会計）により一般会計の市債残高（令和6年3月31日現在）・市民一人当たり市債残高（概数）・企業債残高を合算したincludingEnterpriseAccountsYenを新規登録した。",
       "municipalBondIssuanceValueType": "settlement",
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
@@ -5831,9 +6018,9 @@
     "budget": {
       "fiscalYear": 2023,
       "generalAccountInitialBudgetYen": 66732715000,
-      "generalAccountFinalBudgetYen": null,
-      "generalAccountSettlementYen": null,
-      "specialAccountBudgetYen": null,
+      "generalAccountFinalBudgetYen": 77871737976,
+      "generalAccountSettlementYen": 69958562838,
+      "specialAccountBudgetYen": 29743740000,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 72565693000,
       "totalExpenditureYen": 69891005000,
@@ -5870,9 +6057,31 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和5年度の値：66,732,715千円）"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+          "sourceTitle": "令和６年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 8,
+          "sourcePublishedDate": "2025-08-15",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。令和6年度決算審査意見書（前年度＝令和5年度との比較表）より、令和5年度の一般会計予算現額77,871,737,976円（generalAccountFinalBudgetYen、P8「概況」表の比較列）・一般会計歳出決算額69,958,562,838円（generalAccountSettlementYen、同表）を登録。同表の令和5年度一般会計歳入決算額72,633,251,048円は、既存のtotalRevenueYen＝72,565,693,000円（財政状況資料集・普通会計ベース）とは別会計区分のため新規登録はしていない。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20032.pdf",
+          "sourceTitle": "令和５年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 2,
+          "sourcePublishedDate": "2024-08-01",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。令和5年度決算審査意見書（自年度版）PDFをダウンロードしReadツールで直接確認。P2「決算の概要 (1)決算の規模」より令和5年度の特別会計予算現額29,743,740,000円（specialAccountBudgetYen）を登録。同ページの一般会計予算現額77,871,737,976円・一般会計歳出決算額69,958,562,838円は、既存登録済みのgeneralAccountFinalBudgetYen・generalAccountSettlementYenと完全一致（クロスチェック）。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。 Phase165: 令和6年度決算審査意見書の前年度比較列、および令和5年度決算審査意見書（自年度版）により、一般会計の補正後予算額・特別会計予算額・一般会計決算額（歳出ベース）を新規登録した。"
     },
     "finance": {
       "fiscalYear": 2023,
@@ -6000,11 +6209,11 @@
       "fiscalYear": 2024,
       "municipalBondIssuanceYen": 5953987000,
       "balance": {
-        "generalAccountBondBalanceYen": null,
+        "generalAccountBondBalanceYen": 53943620399,
         "ordinaryAccountLocalBondBalanceYen": 53950273000,
         "includingSpecialAccountsYen": null,
-        "includingEnterpriseAccountsYen": null,
-        "perCapitaYen": null,
+        "includingEnterpriseAccountsYen": 84808688532,
+        "perCapitaYen": 490000,
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
@@ -6016,10 +6225,32 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+            "sourceTitle": "令和６年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 3,
+            "sourcePublishedDate": "2025-08-15",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録。P3「(3)市債の状況 市債借入償還状況表」より一般会計の本年度末残高53,943,620,399円（generalAccountBondBalanceYen、令和7年3月31日現在）を登録。同ページの本文に「本年度末における市民一人当たりの市債残高は、約49万円となっている」との記載があり、原資料の概数表記をそのままperCapitaYenへ登録した（当サイトによる独自計算値ではない）。includingSpecialAccountsYenは、本審査意見書に特別会計の市債残高との合算値の記載が無いため、引き続き未登録。"
+          },
+          {
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24566.pdf",
+            "sourceTitle": "令和６年度 延岡市公営企業会計決算審査意見書（水道事業会計・下水道事業会計、延岡市監査委員）",
+            "sourceOrganization": "延岡市監査委員",
+            "pageNumber": 28,
+            "sourcePublishedDate": "2025-07-25",
+            "accessedAt": "2026-09-01",
+            "extractionMethod": "manual",
+            "verificationStatus": "needsReview",
+            "notes": "Phase165で新規登録（当サイトによる計算値）。公営企業会計決算審査意見書「付表5 比較貸借対照表」より、水道事業会計の企業債残高（固定負債7,440,039,556円＋流動負債628,738,142円＝8,068,777,698円、P28）と下水道事業会計の企業債残高（固定負債20,758,211,099円＋流動負債2,038,079,336円＝22,796,290,435円、P60）を確認し、合計30,865,068,133円を算出。これに一般会計の市債残高（53,943,620,399円、令和7年3月31日現在）を加算し、includingEnterpriseAccountsYen（一般会計＋企業会計＝84,808,688,532円）として登録した。企業債残高は令和7年3月31日現在の貸借対照表計上額（起債時からの累計額から償還累計額を控除した帳簿残高）であり、一般会計側の市債残高（同時点、決算審査意見書ベース）と基準日は一致している。"
           }
         ]
       },
-      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。",
+      "notes": "残高（ストック）のみ登録。当該年度の発行額（フロー）は未確認。 Phase165: 同審査意見書により一般会計の市債残高（令和7年3月31日現在、一般会計区分・精算額）・原資料記載の市民一人当たり市債残高（概数）、および公営企業会計決算審査意見書に基づく企業債残高を合算したincludingEnterpriseAccountsYenを新規登録した。",
       "municipalBondIssuanceValueType": "settlement",
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
@@ -6037,9 +6268,9 @@
     "budget": {
       "fiscalYear": 2024,
       "generalAccountInitialBudgetYen": 68865000000,
-      "generalAccountFinalBudgetYen": null,
-      "generalAccountSettlementYen": null,
-      "specialAccountBudgetYen": null,
+      "generalAccountFinalBudgetYen": 84242259805,
+      "generalAccountSettlementYen": 70996333169,
+      "specialAccountBudgetYen": 29429638000,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 74004811000,
       "totalExpenditureYen": 70924122000,
@@ -6076,9 +6307,20 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （令和6年度の値：68,865,000千円）"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
+          "sourceTitle": "令和６年度 延岡市歳入歳出決算審査意見書・延岡市基金運用状況審査意見書（延岡市監査委員）",
+          "sourceOrganization": "延岡市監査委員",
+          "pageNumber": 8,
+          "sourcePublishedDate": "2025-08-15",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。決算審査意見書PDFをダウンロードしReadツールでページ画像を直接確認。P2「決算の概要 (1)決算の規模」より令和6年度の一般会計予算現額84,242,259,805円（generalAccountFinalBudgetYen）・特別会計予算現額29,429,638,000円（specialAccountBudgetYen）を登録。P8「一般会計 (1)概況」より一般会計歳出決算額70,996,333,169円をgeneralAccountSettlementYenへ登録（同ページの一般会計歳入決算額74,077,022,952円は、既存のtotalRevenueYen＝74,004,811,000円（財政状況資料集・普通会計ベース）とは別会計区分のため据え置き、新規登録はしていない）。企業会計（水道・下水道事業）の予算額は本審査意見書の対象外（別会計の決算審査）のため、enterpriseAccountBudgetYenは今回も未登録。"
         }
       ],
-      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。"
+      "notes": "総括表の歳入総額・歳出総額（決算ベース）のみ登録。当初予算額の複数年度推移を示す資料（令和8年度予算編成概要PDF等）は文字化けにより今回安全に抽出できなかったため、当初予算額は引き続き未確認。 Phase113: 延岡市「財政状況資料集」（普通会計の状況シート、既存の歳入総額と同一出典・完全一致を確認済み）により、歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金）を新規登録した。 Phase165: 令和6年度決算審査意見書（延岡市監査委員）により、一般会計の補正後（最終）予算額・特別会計予算額・一般会計決算額（歳出ベース）を新規登録した。"
     },
     "mayorId": "mayor-03",
     "mayorTermId": "mayor-03-term-02"
@@ -6169,16 +6411,16 @@
     "budget": {
       "fiscalYear": 2025,
       "generalAccountInitialBudgetYen": 71181000000,
-      "generalAccountFinalBudgetYen": null,
+      "generalAccountFinalBudgetYen": 75675078000,
       "generalAccountSettlementYen": null,
-      "specialAccountBudgetYen": null,
+      "specialAccountBudgetYen": 28884550000,
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": null,
       "totalExpenditureYen": null,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 16284125000,
+      "localAllocationTaxYen": 15054460000,
+      "nationalSubsidiesYen": 15626497000,
+      "prefecturalSubsidiesYen": 5975564000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
@@ -6189,9 +6431,19 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "Phase137で新規登録（budgetサブオブジェクト自体が未登録だったため新設）。同資料P3の推移表より令和7年度の一般会計当初予算規模71,181,000千円を確認（単位千円、×1000して円に換算）。同資料P2「予算集計表」の「令和7年度当初（B）」列の一般会計71,181,000千円とも完全一致（内部整合性確認済み）。歳入総額・歳出総額（決算ベース）・市税・地方交付税・決算額・補正後予算額は、令和7年度の財政状況資料集がまだ未公表のため（2026-08-31時点で最新は令和6年度版）引き続き未確認。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27138.pdf",
+          "sourceTitle": "延岡市の財政事情（令和7年度後期）令和7年度予算に対する収入支出状況",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-05-01",
+          "accessedAt": "2026-09-01",
+          "extractionMethod": "manual",
+          "verificationStatus": "needsReview",
+          "notes": "Phase165で新規登録。PDFをダウンロードしReadツールで直接読み取り。一般会計の予算額（令和8年3月31日現在の現計予算、歳入・歳出とも一致）75,675,078千円をgeneralAccountFinalBudgetYenへ登録。同資料の特別会計（国民健康保険・食肉センター・介護保険・後期高齢者医療の合計）予算額28,884,550千円をspecialAccountBudgetYenへ登録。一般会計歳入内訳のうち市税16,284,125千円・地方交付税15,054,460千円・国庫支出金15,626,497千円・県支出金5,975,564千円を、それぞれlocalTaxRevenueYen・localAllocationTaxYen・nationalSubsidiesYen・prefecturalSubsidiesYenへ登録。いずれも予算額（現計）であり決算額ではない点に注意（収入済額・支出済額は同資料に記載があるが、令和8年3月31日時点は出納整理期間中のため決算確定額ではなく、今回は登録を見送った）。企業会計（水道・下水道）の予算額は別PDF（27141.pdf・27144.pdf）に会計別の収益的・資本的収支の内訳のみ記載されており、enterpriseAccountBudgetYenとして単一値へ集計する統一的な定義が既存データに無いため、今回は登録を見送った。"
         }
       ],
-      "notes": "令和7年度の一般会計当初予算規模のみ確認済み（Phase137）。決算・歳入歳出内訳は財政状況資料集の令和7年度版公表後に再調査が必要（fiscalYear全体のnotesも参照）。"
+      "notes": "令和7年度の一般会計当初予算規模のみ確認済み（Phase137）。決算・歳入歳出内訳は財政状況資料集の令和7年度版公表後に再調査が必要（fiscalYear全体のnotesも参照）。 Phase165: 「延岡市の財政事情（令和7年度後期）」の予算執行状況PDF（27138.pdf）により、令和7年度の補正後（現計）予算額・特別会計予算額・歳入内訳4項目（予算ベース）を新規登録した。決算額・歳入歳出総額（決算ベース）は財政状況資料集の令和7年度版が未公表のため引き続き未確認。"
     }
   },
   {
