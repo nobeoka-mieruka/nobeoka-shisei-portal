@@ -214,6 +214,18 @@ function fiscalYearOfIsoDate(iso) {
   return month >= 4 ? year : year - 1;
 }
 
+/**
+ * src/lib/civicTimeline.ts の civicTimelineEventFiscalYear と同じ定義（このスクリプトから
+ * ビルド前のsrc/配下TypeScriptを直接importできないためミラー実装する）。
+ */
+function civicTimelineEventFiscalYear(event) {
+  const match = event.dateLabel.match(/^(\d{4})年(\d{1,2})月/);
+  if (match) {
+    return fiscalYearOfIsoDate(`${match[1]}-${match[2].padStart(2, "0")}-01`);
+  }
+  return event.year;
+}
+
 /** archiveFiscalYears.json内の全sourceRefsから、確認可能な日付だけを平坦化して集める。 */
 function archiveFiscalYearDates(archiveFiscalYears) {
   return archiveFiscalYears.flatMap((y) => [
@@ -697,6 +709,29 @@ export function getIndexableRoutes() {
     urls.push({
       path,
       lastmod: resolveLastmod(path, [], ["src/data/councilSpeechSummaries.json"]),
+    });
+  }
+  // Phase188：市政年表（civicTimelineEvents.json、HistoryPage・MayorDetailPageから
+  // 「同じ年度の市長・財政・人口等を見る」で参照）がカバーする会計年度も、財政データ・
+  // 市長任期・旧任期一般質問のいずれにも該当しない場合はページを生成する（未生成だと
+  // 本番404になる）。
+  const civicEventFiscalYears = new Set(data.civicTimelineEvents.map((e) => civicTimelineEventFiscalYear(e)));
+  for (const fiscalYear of civicEventFiscalYears) {
+    if (
+      financeCoveredFiscalYears.has(fiscalYear) ||
+      mayorTermFiscalYears.has(fiscalYear) ||
+      speechCoveredFiscalYears.has(fiscalYear)
+    ) {
+      continue;
+    }
+    const path = `/timeline/${fiscalYear}`;
+    urls.push({
+      path,
+      lastmod: resolveLastmod(
+        path,
+        [maxValidDate(data.civicTimelineEvents.map((e) => e.lastVerifiedAt))],
+        ["src/data/civicTimelineEvents.json"],
+      ),
     });
   }
 
