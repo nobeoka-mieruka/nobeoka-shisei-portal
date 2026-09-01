@@ -396,6 +396,18 @@ export function extractCandidateFields(block, category, billTitle) {
     }
   }
 
+  // Phase149で発見・修正：同一目的で複数の条例等をまとめて改正する一括見出し（例：
+  // 「議案第◯号及び第◯号は、指定管理者制度導入のため関連6条例を改正するものであります。」）
+  // では、個別の説明文（individualText）が存在せず一括見出し（commonText）のみの議案が
+  // 発生する。この場合、以下のフォールバック（individualのsentencesのみを見る）では
+  // what/reasonが常にnullになっていたが、commonTextには実際には改正理由が明記されている
+  // ことが多い。individualが空のときのみ、commonSentencesを同じルールで見るフォールバックを
+  // 追加する（individualが存在する通常のケースの挙動は変えない＝最小変更）。
+  if (sentences.length === 0 && commonSentences.length > 0) {
+    const commonReason = commonSentences.find((s) => s.startsWith("本案は")) ?? null;
+    return { what: commonSentences[0] ?? null, reason: commonReason, amountRawText: null, amountSentences };
+  }
+
   // その他カテゴリ：単純な最初の文をwhat、"本案は"文をreasonとする（Phase143相当のフォールバック）。
   const reason = sentences.find((s) => s.startsWith("本案は")) ?? null;
   return { what: sentences[0] ?? null, reason, amountRawText: null, amountSentences };

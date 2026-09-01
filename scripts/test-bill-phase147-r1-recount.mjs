@@ -104,7 +104,7 @@ check("Phase147で新たに解決した6件は、いずれも会議録の「（�
   }
 });
 
-check("SOURCE_LINK_MISSING（20件）の実態監査：解決済み5件（うち3件がPhase147で新規）、会議録未公開のため未解決10件、その他未解決5件（R2/R3または今回対象外）で合計20件と一致する", () => {
+check("SOURCE_LINK_MISSING（20件）の実態監査：Phase147時点で解決済み5件（うち3件がPhase147で新規）、会議録未公開のため未解決10件、その他未解決5件（R2/R3または今回対象外）で合計20件と一致する【Phase148追記】その他未解決5件のうち4件（令和5年5月臨時会（1）の専決処分4件）をPhase148で新規解決したため、解決済みは9件・その他未解決は1件（議案第9号・再議、政治的係争性のため意図的に非抽出）へ更新した。会議録未公開10件は不変", () => {
   const slm = reviewBills.filter((b) => primaryReasonCode(b) === "SOURCE_LINK_MISSING");
   assert.equal(slm.length, 20, `SOURCE_LINK_MISSINGが20件ではありません（${slm.length}件）`);
   let resolved = 0, unpublished = 0, other = 0;
@@ -114,9 +114,9 @@ check("SOURCE_LINK_MISSING（20件）の実態監査：解決済み5件（うち
     else if (unpublishedSessionIds.has(b.sessionId)) unpublished++;
     else other++;
   }
-  assert.equal(resolved, 5, `SOURCE_LINK_MISSINGのうち解決済みが5件ではありません（${resolved}件）`);
+  assert.equal(resolved, 9, `SOURCE_LINK_MISSINGのうち解決済みが9件ではありません（${resolved}件）`);
   assert.equal(unpublished, 10, `SOURCE_LINK_MISSINGのうち会議録未公開が10件ではありません（${unpublished}件）`);
-  assert.equal(other, 5, `SOURCE_LINK_MISSINGのうちその他未解決が5件ではありません（${other}件）`);
+  assert.equal(other, 1, `SOURCE_LINK_MISSINGのうちその他未解決が1件ではありません（${other}件）`);
 });
 
 check("R1残存7件とSOURCE_LINK_MISSING（20件）は同一集合ではない：重複は4件のみ（議案第10号・第20号・第21号・第9号）。辺地整備計画・市道路線認定の3件（category=その他）はSOURCE_LINK_MISSINGに含まれない（構造化カテゴリではないため）", () => {
@@ -131,14 +131,17 @@ check("R1残存7件とSOURCE_LINK_MISSING（20件）は同一集合ではない�
   assert.deepEqual(notInSlm.sort(), ["2021-06-gian-20", "2021-06-gian-21", "2021-06-gian-25"], "SOURCE_LINK_MISSINGに含まれない3件が期待どおりではありません");
 });
 
-check("R2（583件）・R3（102件）・HOLD（69件）は、Phase147でデータ変更されていない（sourceTextVerifiedAtがPhase147の日付＝2026-09-02になっている議案が0件）", () => {
+check("R3（102件）・HOLD（69件）はPhase147〜152で一切データ変更されていない（sourceTextVerifiedAtがこの期間の日付＝2026-09-02になっている議案が0件）。R2（583件）はPhase147では未変更だったが、Phase149・150で個別に実証確認した最大30件ずつ（合計60件）のみ意図的に変更されており、総数583件は不変【Phase152更新】", () => {
   const holdBills = risk.HOLD.map((id) => billById.get(id));
-  const touchedR2 = r2Bills.filter((b) => b.sourceTextVerifiedAt === "2026-09-02");
   const touchedR3 = r3Bills.filter((b) => b.sourceTextVerifiedAt === "2026-09-02");
   const touchedHold = holdBills.filter((b) => b.sourceTextVerifiedAt === "2026-09-02");
-  assert.equal(touchedR2.length, 0, `R2にPhase147で変更された議案があります: ${touchedR2.map((b) => b.id).join("、")}`);
-  assert.equal(touchedR3.length, 0, `R3にPhase147で変更された議案があります: ${touchedR3.map((b) => b.id).join("、")}`);
-  assert.equal(touchedHold.length, 0, `HOLDにPhase147で変更された議案があります: ${touchedHold.map((b) => b.id).join("、")}`);
+  assert.equal(touchedR3.length, 0, `R3にこの期間で変更された議案があります: ${touchedR3.map((b) => b.id).join("、")}`);
+  assert.equal(touchedHold.length, 0, `HOLDにこの期間で変更された議案があります: ${touchedHold.map((b) => b.id).join("、")}`);
+  // Phase149（条例30件実証、重大修正1件を除く29件）＋Phase150（その他30件実証、全件）＋
+  // Phase148（SOURCE_LINK_MISSING由来で新規解決した専決処分4件、令和5年5月臨時会（1）は
+  // 専決処分4件が同一会期に集中しておりR2判定）＝29+30+4=63件が今回の意図した変更件数。
+  const touchedR2 = r2Bills.filter((b) => b.sourceTextVerifiedAt === "2026-09-02");
+  assert.equal(touchedR2.length, 63, `R2で変更された議案が63件ではありません（Phase149の29件＋Phase150の30件＋Phase148の4件の想定と異なる）: ${touchedR2.length}件`);
   assert.equal(r2Bills.length, 583, `R2が583件ではありません（${r2Bills.length}件）`);
   assert.equal(r3Bills.length, 102, `R3が102件ではありません（${r3Bills.length}件）`);
   assert.equal(holdBills.length, 69, `HOLDが69件ではありません（${holdBills.length}件）`);

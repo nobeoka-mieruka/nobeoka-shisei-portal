@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-09-01",
+  "totalCount": 20,
+  "classificationCounts": {
+    "RESOLVED": 5,
+    "NOT_YET_PUBLISHED": 10,
+    "LINKAGE_MISSING": 4,
+    "SOURCE_UNRESOLVED": 0,
+    "POLITICALLY_SENSITIVE_INTENTIONALLY_NOT_EXTRACTED": 1
+  },
+  "bills": [
+    {
+      "id": "2023-05-gian-7",
+      "classification": "RESOLVED",
+      "note": "billVotes.jsonのtranscriptUrlはkensakusystem.jp形式（Code=48o046ot0cia1xvtw7&fileName=R050530A&startPos=0）で正しい。fileName R050530A＝2023-05-30は令和5年5月臨時会（2）（votingDate 2023-05-30と一致）。sourceTextVerifiedAt=2026-09-01設定済み、reasonフィールドも一次資料の文と一致。relatedDocumentUrlsフィールド自体がこのエントリには存在せず、重複・矛盾するURLは無い。確認済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2023-06-gian-10",
+      "classification": "RESOLVED",
+      "note": "transcriptUrlはCode=48o046ot0cia1xvtw7&fileName=R050616A&startPos=0で正しい。fileName R050616A＝2023-06-16は令和5年6月定例会の開会日（votingDateは会期最終日2023-07-07で、提案理由説明日と採決日が異なるのは通常の会期運営として整合）。sourceTextVerifiedAt=2026-09-02設定済み。relatedDocumentUrlsフィールドは存在せず、矛盾するURLは無い。確認済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2023-06-gian-20",
+      "classification": "RESOLVED",
+      "note": "transcriptUrlはCode=48o046ot0cia1xvtw7&fileName=R050616A&startPos=0で2023-06-gian-10と同一会期・同一開会日を指しており矛盾なし（同じ本会議日の市長発言から複数議案を抽出しているため同一fileNameになるのは正しい挙動）。sourceTextVerifiedAt=2026-09-02設定済み。relatedDocumentUrlsフィールドは存在せず、矛盾するURLは無い。確認済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2023-06-gian-21",
+      "classification": "RESOLVED",
+      "note": "transcriptUrlはCode=48o046ot0cia1xvtw7&fileName=R050616A&startPos=0で他の令和5年6月定例会分と同一fileNameであり矛盾なし。sourceTextVerifiedAt=2026-09-02設定済み。relatedDocumentUrlsフィールドは存在せず、矛盾するURLは無い。確認済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2023-07-extraordinary-02-gian-28",
+      "classification": "RESOLVED",
+      "note": "transcriptUrlはCode=48o046ot0cia1xvtw7&fileName=R050714A&startPos=0で正しい。fileName R050714A＝2023-07-14はvotingDate 2023-07-14と完全一致（令和5年7月臨時会（2）、開会即日議決）。sourceTextVerifiedAt=2026-09-01設定済み、reasonの内容（再議否決の経緯）も一次資料の文と一致。relatedDocumentUrlsフィールドは存在せず、矛盾するURLは無い。確認済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-20",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "listSessionsForYear({code,year:2026})を再実行した結果、登録されているのは「令和 8年 第24回定例会」（2〜3月開催、令和8年度当初予算議会）のみで、令和8年5月臨時会・6月定例会に相当するセッションはkensakusystem.jpの年タブに依然として存在しない（Phase147時点から状態変化なし）。src/data/blockedTaskClassification.jsonのTASK-004（status: WAITING_EXTERNAL、blockedReasonCode: SOURCE_NOT_PUBLISHED、autoRecheck: true、autoRecheckMechanism: .github/workflows/update-council-documents.yml）がこの24件（本件含む）を正しくカバーしている。引き続き未公開、既存TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-5",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-6",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-7",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-16",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-17",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-18",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-06-gian-21",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年6月定例会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-05-extraordinary-gian-2",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "listSessionsForYear({code,year:2026})の結果に令和8年5月臨時会に相当するセッションは存在しない（登録は第24回定例会のみ）。TASK-004（blockedReasonCode: SOURCE_NOT_PUBLISHED）がこの令和8年5月臨時会分の専決処分2件を含めてカバー済み。引き続き未公開、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2026-05-extraordinary-gian-3",
+      "classification": "NOT_YET_PUBLISHED",
+      "note": "同上（令和8年5月臨時会セッション自体がkensakusystem.jpに未登場）。TASK-004でカバー済み、変更不要。",
+      "newlyExtracted": null
+    },
+    {
+      "id": "2023-05-extraordinary-gian-2",
+      "classification": "LINKAGE_MISSING",
+      "note": "令和5年5月臨時会（1）＝kensakusystem.jp上の「令和 5年 第 1回臨時会」（listSessionsForYear({code,year:2023})で確認）に一致し、listMeetingDaysでfileName R050515A（5月15日、開会挨拶のみ、議案説明なし）・R050516A（5月16日、議案説明日）の2日を確認した。R050516Aの市長発言（pos=11368、議案第二号から第三号及び議案第五号の一括見出し＋議案第四号の個別説明）から、splitSpeechIntoBillBlocks+extractCandidateFields（category=\"専決処分\"）で議案第2号のブロックを新規抽出できた。会議は5月15日（開会挨拶のみ）・16日（議案説明）の2日間で、議案説明は16日のみに存在することを確認済み。",
+      "newlyExtracted": {
+        "fileName": "R050516A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050516A&startPos=0",
+        "what": "まず、議案第二号は、令和五年度延岡市一般会計当初予算の専決処分の承認についてであります。",
+        "reason": null,
+        "secondaryReason": null,
+        "amountRawText": "すなわち、歴史・文化ゾーン内駐車場管理システム等整備事業、一億三千五百二十八万五千円を除きまして、予算総額を六百六十七億三千二百七十一万五千円としました。",
+        "mainChanges": [
+          "すなわち、歴史・文化ゾーン内駐車場管理システム等整備事業、一億三千五百二十八万五千円を除きまして、予算総額を六百六十七億三千二百七十一万五千円としました。",
+          "また、債務負担行為についても、歴史・文化ゾーン内駐車場管理システム事業費、四千八十万円を除きまして、五十六億三百六十一万七千円としました。"
+        ],
+        "extractionNote": "commonText（一括見出し）は「議案第二号から第三号及び議案第五号は、予算に関する専決処分の承認を求めるものであります。」。reason/secondaryReasonは、extractCandidateFieldsの専決処分カテゴリ用の既存正規表現（本案は…専決処分／補正の内容でありますが、等）にこのブロックの文が一致しなかったためnullのまま（推測で埋めていない）。手続き経緯自体はwhatに続く個別テキストに含まれている（「三月二十九日付で専決処分を行いましたので、これを報告し、その承認を求めるものであります。」）。"
+      }
+    },
+    {
+      "id": "2023-05-extraordinary-gian-3",
+      "classification": "LINKAGE_MISSING",
+      "note": "上記と同一の市長発言（R050516A、pos=11368）から、個別マーカー「次に、議案第三号は、」で議案第3号のブロックを新規抽出できた。",
+      "newlyExtracted": {
+        "fileName": "R050516A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050516A&startPos=0",
+        "what": "次に、議案第三号は、令和五年度延岡市一般会計補正予算の専決処分の承認についてであります。",
+        "reason": "本案は、令和五年第二十九回延岡市議会定例会で、議案第一四四号令和五年度延岡市一般会計補正予算第一号として三月二十四日に可決されましたが、その補正前の令和五年度一般会計当初予算自体を三月二十九日付で専決処分することに伴い、本補正予算についても同様に、同日付で専決処分したところであります。",
+        "secondaryReason": "この補正の内容は、三月二十四日に既に可決されたものと同じでありまして、歳入歳出それぞれ六億四百二十四万三千円を減額し、予算総額を六百六十一億二千八百四十七万二千円としたところであります。",
+        "amountRawText": null,
+        "mainChanges": [
+          "この補正の内容は、三月二十四日に既に可決されたものと同じでありまして、歳入歳出それぞれ六億四百二十四万三千円を減額し、予算総額を六百六十一億二千八百四十七万二千円としたところであります。"
+        ],
+        "extractionNote": "commonTextなし（議案第4号と同じく個別マーカーのみで検出、一括見出しのbillNumbers=[2,5]には3が含まれないため）。amountRawTextはextractCandidateFieldsの専決処分カテゴリの金額行検出正規表現（追加し|増額し|としました|といたしました、かつ「円」を含む文）に該当する文がsecondaryReason文と重複したため、amountLineとしては別文が見つからずnullのまま（推測で埋めていない。実際の金額情報はsecondaryReasonに含まれている）。"
+      }
+    },
+    {
+      "id": "2023-05-extraordinary-gian-4",
+      "classification": "LINKAGE_MISSING",
+      "note": "上記と同一の市長発言（R050516A、pos=11368）から、個別マーカー「次に、議案第四号は、」で議案第4号のブロックを新規抽出できた。",
+      "newlyExtracted": {
+        "fileName": "R050516A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050516A&startPos=0",
+        "what": "次に、議案第四号は、延岡市税条例の一部改正に係る専決処分の承認についてであります。",
+        "reason": "本案は、緊急を要するため、地方自治法第百七十九条第一項の規定により専決処分を行いましたので、同条第三項の規定により、これを報告し、その承認を求めるものであります。",
+        "secondaryReason": null,
+        "amountRawText": null,
+        "mainChanges": [
+          "本案は、地方税法等の一部が改正されたことにより、個人市民税、法人市民税、市たばこ税において、本年四月一日付で地方税統一ＱＲコードに対応した納付書様式が新たに追加されることとなったことに伴い、所要の改正を行ったものであります。",
+          "また、軽自動車税においても、同じく法改正により、燃費性能などの優れた軽自動車の取得に対して税率を軽減するグリーン化特例の措置について、本年四月一日付で適用期間の延長が必要となったなどによりまして、所要の改正を行ったものであります。"
+        ],
+        "extractionNote": "条例改正のため金額（円）を含む文は存在せず、amountRawTextはnullで正しい（推測で埋めていない）。secondaryReason（extractCandidateFieldsの「補正の内容でありますが/ですが/は、」パターン）は税条例改正の説明文と一致しないためnullのまま。実質的な改正内容はmainChangesの2文に記載。"
+      }
+    },
+    {
+      "id": "2023-05-extraordinary-gian-5",
+      "classification": "LINKAGE_MISSING",
+      "note": "上記と同一の市長発言（R050516A、pos=11368）から、個別マーカー「次に、議案第五号は、」で議案第5号のブロックを新規抽出できた。",
+      "newlyExtracted": {
+        "fileName": "R050516A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050516A&startPos=0",
+        "what": "次に、議案第五号は、令和五年度延岡市一般会計補正予算に係る専決処分の承認についてであります。",
+        "reason": "本案は、緊急を要するため、地方自治法第百七十九条第一項の規定により専決処分を行いましたので、これを報告し、その承認を求めるものであり、歳入歳出それぞれ二億八百十六万六千円を追加し、予算総額を六百六十三億三千六百六十三万八千円としたところであります。",
+        "secondaryReason": "補正予算の内容でありますが、国の令和四年度予備費による事業として、令和三年度、令和四年度と同様に、食費などの物価高騰に直面し、影響を特に受ける低所得の子育て世帯を支援するため、児童一人当たり五万円の子育て世帯生活支援特別給付金を支給するものであります。",
+        "amountRawText": "本案は、緊急を要するため、地方自治法第百七十九条第一項の規定により専決処分を行いましたので、これを報告し、その承認を求めるものであり、歳入歳出それぞれ二億八百十六万六千円を追加し、予算総額を六百六十三億三千六百六十三万八千円としたところであります。",
+        "mainChanges": [
+          "補正予算の内容でありますが、国の令和四年度予備費による事業として、令和三年度、令和四年度と同様に、食費などの物価高騰に直面し、影響を特に受ける低所得の子育て世帯を支援するため、児童一人当たり五万円の子育て世帯生活支援特別給付金を支給するものであります。",
+          "この補正財源としましては、全額、国庫支出金を計上しております。"
+        ],
+        "extractionNote": "reasonとamountRawTextが同一文になっているのは、extractCandidateFieldsの既存ロジック（proceduralReasonの検出条件「本案は」で始まり「専決処分」を含む文、amountLineの検出条件「追加し/増額し/としました/といたしました」かつ「円」を含む文）が同じ1文に両方合致したためで、パーサーの仕様どおりの挙動（新設の正規表現は使っていない）。"
+      }
+    },
+    {
+      "id": "2023-07-extraordinary-01-gian-9",
+      "classification": "POLITICALLY_SENSITIVE_INTENTIONALLY_NOT_EXTRACTED",
+      "note": "Phase147で既に調査済み、政治的係争性のため意図的に非抽出、変更なし。会議録原文（R050711A）の市長発言は6月定例会での修正可決に対する再議請求の理由説明であり、市の事業の必要性を主張する一方的な政治的主張（議会側への反論を含む）が大半を占めるため、中立的な事実整理として抽出するには編集判断のリスクを伴うとしてPhase147で自動抽出を意図的に見送った判断をそのまま維持する。今回は再調査（会議録の再読み込み）を行っていない。",
+      "newlyExtracted": null
+    }
+  ]
+}
