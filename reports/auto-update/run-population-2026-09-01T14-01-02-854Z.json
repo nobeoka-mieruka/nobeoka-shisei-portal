@@ -1,0 +1,36 @@
+{
+  "target": "population",
+  "startedAt": "2026-09-01T14:01:02.854Z",
+  "finishedAt": "2026-09-01T14:01:03.666Z",
+  "dryRun": true,
+  "watchedSource": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+  "baseScriptExitCode": 0,
+  "overallLevel": "GREEN",
+  "summary": {
+    "detected": 1,
+    "green": 1,
+    "yellow": 0,
+    "red": 0,
+    "error": 0
+  },
+  "entries": [
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls",
+      "sourceType": "人口・世帯数統計xls（延岡市公式、現住人口及び世帯数の推移）",
+      "sessionId": null,
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-09-01T14:01:02.854Z",
+      "httpStatus": 200,
+      "contentHash": "7182f797f1ff8b9d5f831139bc214da986744c8bf8e15902a7b6a23c140ee306",
+      "parserVersion": "update-population.mjs@2026-08",
+      "extractionStatus": "referenceDate=2026-08-01 population=107905 male=51252 female=56653 households=50133（fileChangedSincePreviousRun=false）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    }
+  ],
+  "circuitBreakerTripped": false,
+  "circuitBreakerReason": null,
+  "note": "dryRun=trueのため、本番データ（src/data/archiveFiscalYears.json等）への書き込みは一切行っていない。新しい基準日を検出した場合も、既存年度の書き換えではなく新規エントリ追加の候補として報告するのみで、自動反映は行わない（別途、人間の確認とAUTO_APPLY_GREENフラグの有効化が必要）。"
+}
