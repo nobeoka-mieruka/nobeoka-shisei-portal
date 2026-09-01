@@ -29,10 +29,10 @@ export function SourceRefList({ refs }: { refs: ArchiveSourceRef[] }) {
                 className={`inline-flex items-center gap-1.5 text-primary hover:underline ${linkClass}`}
               >
                 <GlobeIcon className="h-4 w-4 shrink-0" aria-hidden />
-                {ref.sourceTitle ?? ref.sourceUrl}
+                <span className="break-words">{ref.sourceTitle ?? ref.sourceUrl}</span>
               </a>
             ) : (
-              <span className="text-on-surface-variant">{ref.sourceTitle ?? "出典URL未確認"}</span>
+              <span className="break-words text-on-surface-variant">{ref.sourceTitle ?? "出典URL未確認"}</span>
             )}
             <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
               {archiveVerificationStatusLabel(ref.verificationStatus)}

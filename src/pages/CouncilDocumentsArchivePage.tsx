@@ -486,7 +486,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
                   href={ref.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-primary hover:underline ${linkClass}`}
+                  className={`break-words text-primary hover:underline ${linkClass}`}
                 >
                   {ref.sourceTitle ?? ref.sourceUrl}
                 </a>

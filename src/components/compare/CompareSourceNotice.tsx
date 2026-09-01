@@ -31,7 +31,7 @@ export function CompareSourceNotice({ items, className = "" }: CompareSourceNoti
                     href={ref.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary hover:underline"
+                    className="break-words text-primary hover:underline"
                   >
                     {ref.sourceTitle ?? ref.sourceUrl}
                   </a>
