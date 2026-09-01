@@ -89,6 +89,22 @@ check("Phase146でR1（REVIEW内NEAR_SAFE候補）36件を一次資料検証し�
   }
 });
 
+check("Phase147でR1残存7件のうち6件を一次資料再検証し、Level3化した4件・Level2止まりとした2件が意図通りの区分になっている（無理な昇格・意図しない後退が無いことの固定リスト回帰）。残り1件（議案第9号・再議）は政治的に係争性の高い内容のため意図的に既存維持とした（Level1のまま）", () => {
+  const phase147Level3Ids = ["2023-06-gian-10", "2023-06-gian-20", "2023-06-gian-21", "2021-06-gian-25"];
+  const phase147Level2Ids = ["2021-06-gian-20", "2021-06-gian-21"];
+  for (const id of phase147Level3Ids) {
+    const b = billVotes.find((x) => x.id === id);
+    assert.ok(b && isLevel3(b), `${id}はPhase147でLevel3化されているはずですが、Level3条件を満たしていません`);
+  }
+  for (const id of phase147Level2Ids) {
+    const b = billVotes.find((x) => x.id === id);
+    assert.ok(b && isLevel2(b), `${id}はPhase147でLevel2止まりとしたはずですが、Level2条件を満たしていません`);
+  }
+  const bill9 = billVotes.find((x) => x.id === "2023-07-extraordinary-01-gian-9");
+  assert.ok(bill9 && !isLevel2(bill9) && !isLevel3(bill9), "議案第9号（再議）は今回意図的に既存維持（Level1）としたはずが、Level2/3へ変化しています");
+  assert.ok(bill9.verificationNote?.includes("Phase147"), "議案第9号のverificationNoteにPhase147の調査記録が追記されていません");
+});
+
 check("Level2（本文確認済み・独自要約なし）の議案は、すべてsourceTextVerifiedAtを持ち、reasonやcitizenImpact等の独自内容を持たない（項目28：議案第162号を含む）", () => {
   const level2Bills = billVotes.filter(isLevel2);
   assert.ok(level2Bills.length > 0, "Level2の議案が1件もありません");

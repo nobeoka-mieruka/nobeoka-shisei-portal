@@ -1,0 +1,331 @@
+{
+  "generatedAt": "2026-09-02",
+  "residual7": {
+    "note": "Phase146で「抽出不可・既存維持」だった7件。Phase147で6件を解決（発見した2つのparserバグの修正＋fetchヒューリスティックの改善）。残り1件（議案第9号・再議）は、政治的に係争性の高い内容のため今回も意図的に自動抽出を見送った（編集方針上の判断であり、技術的な抽出失敗ではない）。",
+    "bills": [
+      {
+        "id": "2023-06-gian-10",
+        "fiscalYear": "令和5年度",
+        "session": "令和5年6月定例会",
+        "billNumber": "議案第10号",
+        "billTitle": "令和5年度延岡市下水道事業会計補正予算",
+        "category": "予算",
+        "proposerType": "mayor",
+        "levelAfter": 3,
+        "sourceRetrievalStatus": "A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050616A&startPos=0",
+        "primaryReasonCode147": "FETCH_HEURISTIC_MISSED_LATER_SEGMENT",
+        "outcome": "Level3へ昇格"
+      },
+      {
+        "id": "2023-06-gian-20",
+        "fiscalYear": "令和5年度",
+        "session": "令和5年6月定例会",
+        "billNumber": "議案第20号",
+        "billTitle": "財産の取得（水槽付消防ポンプ自動車の購入）",
+        "category": "財産取得",
+        "proposerType": "mayor",
+        "levelAfter": 3,
+        "sourceRetrievalStatus": "A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050616A&startPos=0",
+        "primaryReasonCode147": "FETCH_HEURISTIC_MISSED_LATER_SEGMENT",
+        "outcome": "Level3へ昇格"
+      },
+      {
+        "id": "2023-06-gian-21",
+        "fiscalYear": "令和5年度",
+        "session": "令和5年6月定例会",
+        "billNumber": "議案第21号",
+        "billTitle": "財産の取得（小型動力ポンプ付積載車の購入）",
+        "category": "財産取得",
+        "proposerType": "mayor",
+        "levelAfter": 3,
+        "sourceRetrievalStatus": "A",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R050616A&startPos=0",
+        "primaryReasonCode147": "FETCH_HEURISTIC_MISSED_LATER_SEGMENT",
+        "outcome": "Level3へ昇格"
+      },
+      {
+        "id": "2023-07-extraordinary-01-gian-9",
+        "fiscalYear": "令和5年度",
+        "session": "令和5年7月臨時会（1）",
+        "billNumber": "議案第9号",
+        "billTitle": "令和5年度延岡市一般会計補正予算に対する再議",
+        "category": "予算",
+        "proposerType": "mayor",
+        "levelAfter": 1,
+        "sourceRetrievalStatus": "D",
+        "transcriptUrl": null,
+        "primaryReasonCode147": "POLITICALLY_CONTESTED_CONTENT",
+        "outcome": "既存維持（政治的に係争性の高い再議理由説明のため、中立的な事実整理としての自動抽出を見送った。verificationNoteに詳細記録）"
+      },
+      {
+        "id": "2021-06-gian-20",
+        "fiscalYear": "令和3年度",
+        "session": "令和3年6月定例会",
+        "billNumber": "議案第20号",
+        "billTitle": "藤の木辺地に係る総合整備計画の策定",
+        "category": "その他",
+        "proposerType": "mayor",
+        "levelAfter": 2,
+        "sourceRetrievalStatus": "B",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R030608A&startPos=0",
+        "primaryReasonCode147": "FETCH_HEURISTIC_MISSED_LATER_SEGMENT",
+        "outcome": "Level2へ昇格"
+      },
+      {
+        "id": "2021-06-gian-21",
+        "fiscalYear": "令和3年度",
+        "session": "令和3年6月定例会",
+        "billNumber": "議案第21号",
+        "billTitle": "松瀬辺地に係る総合整備計画の策定",
+        "category": "その他",
+        "proposerType": "mayor",
+        "levelAfter": 2,
+        "sourceRetrievalStatus": "B",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R030608A&startPos=0",
+        "primaryReasonCode147": "FETCH_HEURISTIC_MISSED_LATER_SEGMENT",
+        "outcome": "Level2へ昇格"
+      },
+      {
+        "id": "2021-06-gian-25",
+        "fiscalYear": "令和3年度",
+        "session": "令和3年6月定例会",
+        "billNumber": "議案第25号",
+        "billTitle": "市道の路線認定（1路線）",
+        "category": "その他",
+        "proposerType": "mayor",
+        "levelAfter": 3,
+        "sourceRetrievalStatus": "B",
+        "transcriptUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R030608A&startPos=0",
+        "primaryReasonCode147": "FETCH_HEURISTIC_MISSED_LATER_SEGMENT",
+        "outcome": "Level3へ昇格"
+      }
+    ],
+    "outcomeCounts": {
+      "Level3へ昇格": 4,
+      "既存維持（政治的に係争性の高い再議理由説明のため、中立的な事実整理としての自動抽出を見送った。verificationNoteに詳細記録）": 1,
+      "Level2へ昇格": 2
+    }
+  },
+  "sourceLinkMissing20": {
+    "note": "REVIEW 721件のreasonCode内訳のSOURCE_LINK_MISSING（20件、構造化カテゴリ・市長提出・会議録リンク未登録）の実態監査。「本当にリンクが無いのか」を個別確認した結果。",
+    "bills": [
+      {
+        "id": "2026-06-gian-20",
+        "category": "予算",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-5",
+        "category": "予算",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-6",
+        "category": "予算",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-7",
+        "category": "予算",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-16",
+        "category": "財産取得",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-17",
+        "category": "財産取得",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-18",
+        "category": "財産取得",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-06-gian-21",
+        "category": "契約",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-06",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2023-05-gian-7",
+        "category": "予算",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-05",
+        "hasTranscriptUrl": true,
+        "sourceTextVerifiedAt": "2026-09-01",
+        "status": "resolved_this_or_prior_phase"
+      },
+      {
+        "id": "2023-05-extraordinary-gian-2",
+        "category": "専決処分",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-05-extraordinary",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_other_untouched_this_phase"
+      },
+      {
+        "id": "2023-05-extraordinary-gian-3",
+        "category": "専決処分",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-05-extraordinary",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_other_untouched_this_phase"
+      },
+      {
+        "id": "2023-05-extraordinary-gian-4",
+        "category": "専決処分",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-05-extraordinary",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_other_untouched_this_phase"
+      },
+      {
+        "id": "2023-05-extraordinary-gian-5",
+        "category": "専決処分",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-05-extraordinary",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_other_untouched_this_phase"
+      },
+      {
+        "id": "2023-06-gian-10",
+        "category": "予算",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-06",
+        "hasTranscriptUrl": true,
+        "sourceTextVerifiedAt": "2026-09-02",
+        "status": "resolved_this_or_prior_phase"
+      },
+      {
+        "id": "2023-06-gian-20",
+        "category": "財産取得",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-06",
+        "hasTranscriptUrl": true,
+        "sourceTextVerifiedAt": "2026-09-02",
+        "status": "resolved_this_or_prior_phase"
+      },
+      {
+        "id": "2023-06-gian-21",
+        "category": "財産取得",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-06",
+        "hasTranscriptUrl": true,
+        "sourceTextVerifiedAt": "2026-09-02",
+        "status": "resolved_this_or_prior_phase"
+      },
+      {
+        "id": "2023-07-extraordinary-01-gian-9",
+        "category": "予算",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-07-extraordinary-01",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_other_untouched_this_phase"
+      },
+      {
+        "id": "2023-07-extraordinary-02-gian-28",
+        "category": "予算",
+        "fiscalYear": "令和5年度",
+        "sessionId": "2023-07-extraordinary-02",
+        "hasTranscriptUrl": true,
+        "sourceTextVerifiedAt": "2026-09-01",
+        "status": "resolved_this_or_prior_phase"
+      },
+      {
+        "id": "2026-05-extraordinary-gian-2",
+        "category": "専決処分",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-05-extraordinary",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      },
+      {
+        "id": "2026-05-extraordinary-gian-3",
+        "category": "専決処分",
+        "fiscalYear": "令和8年度",
+        "sessionId": "2026-05-extraordinary",
+        "hasTranscriptUrl": false,
+        "sourceTextVerifiedAt": null,
+        "status": "unresolved_source_not_yet_published"
+      }
+    ],
+    "statusCounts": {
+      "unresolved_source_not_yet_published": 10,
+      "resolved_this_or_prior_phase": 5,
+      "unresolved_other_untouched_this_phase": 5
+    },
+    "overlapWithResidual7Count": 4,
+    "overlapWithResidual7Ids": [
+      "2023-06-gian-10",
+      "2023-06-gian-20",
+      "2023-06-gian-21",
+      "2023-07-extraordinary-01-gian-9"
+    ]
+  },
+  "r2Subgrouping": {
+    "note": "R2（583件）のデータ変更は行っていない（読み取り専用の分析のみ）。Phase148の設計材料として、reasonCode内訳とR2-A/B/C候補分類を記録する。",
+    "reasonCounts": {
+      "ORDINANCE_COMPLEX": 310,
+      "SOURCE_LINK_MISSING": 11,
+      "OTHER_NARRATIVE": 262
+    },
+    "r2A": {
+      "label": "構造化カテゴリ・市長提出・出典未到達（SOURCE_LINK_MISSING相当）",
+      "count": 11,
+      "note": "個別確認すればSAFE相当に近づく可能性が高いが、一括説明内の個別文脈判断が必要なためR2にとどまる"
+    },
+    "r2B": {
+      "label": "条例の一括改正説明（ORDINANCE_COMPLEX）",
+      "count": 310,
+      "note": "新規制定/一部改正/全部改正/廃止の識別に個別確認が必要"
+    },
+    "r2C": {
+      "label": "その他・多様な内容（OTHER_NARRATIVE）",
+      "count": 262,
+      "note": "指定管理者・財産処分・訴えの提起等、一律のルールが定めにくい"
+    }
+  }
+}
