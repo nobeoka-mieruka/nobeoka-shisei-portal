@@ -1,5 +1,5 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import { getCommittee, billsForCommittee, reportsForCommittee } from "../lib/committees";
+import { getCommittee, billsForCommittee, reportsForCommittee, membershipHistoryForCommittee } from "../lib/committees";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -49,6 +49,16 @@ export function CommitteeDetailPage() {
   const orderedMembers = [...committee.members].sort((a, b) => ROLE_ORDER[a.role] - ROLE_ORDER[b.role]);
   const reviewedBills = billsForCommittee(committee.name);
   const activityReports = reportsForCommittee(committee.id);
+  const membershipHistory = membershipHistoryForCommittee(committee.id);
+
+  const historyByTerm = new Map<string, typeof membershipHistory>();
+  for (const rec of membershipHistory) {
+    const key = `${rec.termStart}__${rec.termEnd ?? ""}`;
+    const group = historyByTerm.get(key);
+    if (group) group.push(rec);
+    else historyByTerm.set(key, [rec]);
+  }
+  const historyTermGroups = [...historyByTerm.entries()].sort((a, b) => b[0].localeCompare(a[0]));
 
   const billsByFiscalYear = new Map<string, typeof reviewedBills>();
   for (const bill of reviewedBills) {
@@ -156,6 +166,46 @@ export function CommitteeDetailPage() {
         </ul>
       </SectionCard>
 
+      {historyTermGroups.length > 0 && (
+        <SectionCard title="過去の委員構成（会議録ベース）">
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            延岡市議会会議録（常任委員会委員・議会運営委員会委員の選任、正副委員長互選結果の報告）で確認できた、現行任期より前の構成です。会議録で確認できた任期のみを収録しており、収録範囲外の年代は「確認中」として区別しています。任期によっては、委員長・副委員長のみを収録し、委員全員までは収録していない場合があります。
+          </p>
+          <div className="space-y-4">
+            {historyTermGroups.map(([key, records]) => {
+              const [termStart, termEnd] = key.split("__");
+              const ordered = [...records].sort((a, b) => ROLE_ORDER[a.role] - ROLE_ORDER[b.role]);
+              return (
+                <div key={key}>
+                  <h3 className="text-xs font-semibold text-on-surface-variant">
+                    {formatDateOrRaw(termStart)} 〜 {termEnd ? formatDateOrRaw(termEnd) : "確認中"}
+                  </h3>
+                  <ul className="mt-2 divide-y divide-outline-variant text-sm">
+                    {ordered.map((rec) => (
+                      <li key={rec.id} className="flex flex-wrap items-center justify-between gap-2 py-2">
+                        <Link
+                          to={`/members/${rec.memberId}`}
+                          className={`font-medium text-primary hover:underline ${linkClass}`}
+                        >
+                          {rec.memberName}
+                        </Link>
+                        <span className="shrink-0 rounded-full bg-surface-container-high px-2.5 py-0.5 text-xs font-semibold text-on-surface">
+                          {rec.role}
+                        </span>
+                        {rec.notes && <p className="w-full text-xs text-on-surface-variant">{rec.notes}</p>}
+                      </li>
+                    ))}
+                  </ul>
+                  {records[0]?.sourceRefs.map((ref) => (
+                    <SourceLink key={ref.url} url={ref.url} label={ref.label} className="mt-2" />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        </SectionCard>
+      )}
+
       <SectionCard title="審査した議案">
         {reviewedBills.length === 0 ? (
           <p className="rounded-lg bg-surface-container-high/70 px-3 py-2.5 text-xs leading-relaxed text-on-surface-variant">
@@ -227,6 +277,13 @@ export function CommitteeDetailPage() {
               <li key={report.id} className="rounded-lg border border-outline-variant p-3">
                 <p className="text-xs text-on-surface-variant">令和{report.fiscalYear - 2018}年度</p>
                 <p className="mt-0.5 font-medium text-on-surface">{report.title}</p>
+                {report.visitedMunicipalities && report.visitedMunicipalities.length > 0 && (
+                  <p className="mt-1 text-xs text-on-surface-variant">
+                    視察先：{report.visitedMunicipalities.join("、")}
+                    {report.visitDate ? `（${report.visitDate}）` : ""}
+                  </p>
+                )}
+                {report.notes && <p className="mt-1 text-xs text-on-surface-variant">{report.notes}</p>}
                 <SourceLink url={report.url} label="報告書PDFを見る" className="mt-2" />
               </li>
             ))}

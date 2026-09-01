@@ -2,7 +2,14 @@ import committeesData from "../data/committees.json";
 import billVotesData from "../data/billVotes.json";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
-import type { Committee, BillVoteItem, CommitteeActivityReport, CommitteeReportActivityEvent } from "../types";
+import archiveCommitteeMembersData from "../data/archiveCommitteeMembers.json";
+import type {
+  Committee,
+  BillVoteItem,
+  CommitteeActivityReport,
+  CommitteeReportActivityEvent,
+  ArchiveCommitteeMemberTerm,
+} from "../types";
 
 /**
  * 委員会（常任委員会・議会運営委員会・特別委員会）関連のデータアクセスヘルパー。
@@ -17,6 +24,7 @@ export const committees = committeesData as Committee[];
 const billVotes = billVotesData as BillVoteItem[];
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 const committeeReportActivity = (committeeReportActivityData as { events: CommitteeReportActivityEvent[] }).events;
+const archiveCommitteeMembers = archiveCommitteeMembersData as ArchiveCommitteeMemberTerm[];
 
 export function sortedCommittees(): Committee[] {
   const order = { 常任委員会: 0, 議会運営委員会: 1, 特別委員会: 2 } as const;
@@ -60,4 +68,19 @@ export function committeeReportActivityForMember(memberId: string): CommitteeRep
   return committeeReportActivity
     .filter((e) => e.memberId === memberId)
     .sort((a, b) => (b.meetingDate ?? "").localeCompare(a.meetingDate ?? ""));
+}
+
+/**
+ * 指定した委員会（committees.jsonのid）の過去（現行任期より前）の構成員履歴を、
+ * 任期開始日の新しい順・委員長→副委員長→委員の順で返す（Phase170、会議録ベース）。
+ */
+export function membershipHistoryForCommittee(committeeId: string): ArchiveCommitteeMemberTerm[] {
+  const roleOrder: Record<string, number> = { 委員長: 0, 副委員長: 1, 委員: 2 };
+  return archiveCommitteeMembers
+    .filter((r) => r.committeeId === committeeId)
+    .sort((a, b) => {
+      const termDiff = b.termStart.localeCompare(a.termStart);
+      if (termDiff !== 0) return termDiff;
+      return (roleOrder[a.role] ?? 9) - (roleOrder[b.role] ?? 9);
+    });
 }
