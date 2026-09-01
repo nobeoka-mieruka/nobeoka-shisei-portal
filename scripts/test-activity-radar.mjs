@@ -21,7 +21,10 @@ import { pathToFileURL } from "node:url";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const srcPath = join(ROOT, "src/lib/activityRadar.ts");
-const source = readFileSync(srcPath, "utf8");
+// Windows環境ではgitのcore.autocrlf設定によりCRLFで作業ツリーへ展開されることがあるため、
+// 改行コードをLFへ正規化してからパッチ対象の文字列を検索する（Phase168で発覚。
+// ファイル自体の改行コードは変更しない＝readFileSyncの結果をローカル変数上で正規化するのみ）。
+const source = readFileSync(srcPath, "utf8").replace(/\r\n/g, "\n");
 
 const patched = source.replace(
   'import type { CouncilSpeech } from "../types";\nimport questionCollectionStatusData from "../data/questionCollectionStatus.json";',
