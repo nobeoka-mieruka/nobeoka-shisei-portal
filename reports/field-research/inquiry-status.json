@@ -126,11 +126,11 @@
   {
    "inquiryId": "INQ-012",
    "institution": "延岡市議会事務局",
-   "targetUNRs": ["UNR-005", "UNR-008", "UNR-009", "UNR-010", "UNR-011", "UNR-016", "UNR-022", "UNR-031"],
+   "targetUNRs": ["UNR-005", "UNR-008", "UNR-009", "UNR-010", "UNR-011", "UNR-016", "UNR-022", "UNR-031", "UNR-042", "UNR-043"],
    "status": "ready_to_send",
    "sentAt": null,
    "responseAt": null,
-   "nextAction": "差出人連絡先を記入のうえ送付。INQ-005と対象範囲が重なるため、どちらか一方のみ送付する（本文案での送付を推奨）。",
+   "nextAction": "差出人連絡先を記入のうえ送付。INQ-005と対象範囲が重なるため、どちらか一方のみ送付する（本文案での送付を推奨）。Phase173でUNR-042・UNR-043（政務活動費・費用弁償の制度存在）を対象に追加し、確認事項5を追記した。",
    "letterFile": "reports/field-research/inquiry-final/gikai-jimukyoku.md"
   },
   {

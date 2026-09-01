@@ -75,6 +75,11 @@ import {
   hasAnyFundBalance,
   hasAnyFinanceRatio,
   hasGeneralAccountSettlement,
+  hasFinalBudgetAmount,
+  hasSpecialAccountBudget,
+  hasBondBalanceIncludingEnterprise,
+  hasBondBalancePerCapita,
+  hasAnyRevenueBreakdown,
   fiscalYearGapNote,
 } from "../lib/archiveFinance";
 import {
@@ -361,6 +366,14 @@ export function DataStatusPage() {
   // 反映されていなかったため追加した。
   const fiscalYearsWithGeneralAccountBondBalance = archiveFiscalYears.filter(hasGeneralAccountBondBalance).length;
   const fiscalYearsWithGeneralAccountSettlement = archiveFiscalYears.filter(hasGeneralAccountSettlement).length;
+  // Phase177：Phase165で新規確認した37件のフィールドのうち、Phase168（上記2指標）で
+  // まだ反映されていなかった残り5項目を追加する。個別ページには表示済みだが、この
+  // 完全性ダッシュボードには未反映だった（データ実値は変更しない、表示・集計ロジックのみ追加）。
+  const fiscalYearsWithFinalBudget = archiveFiscalYears.filter(hasFinalBudgetAmount).length;
+  const fiscalYearsWithSpecialAccountBudget = archiveFiscalYears.filter(hasSpecialAccountBudget).length;
+  const fiscalYearsWithBondBalanceIncludingEnterprise = archiveFiscalYears.filter(hasBondBalanceIncludingEnterprise).length;
+  const fiscalYearsWithBondBalancePerCapita = archiveFiscalYears.filter(hasBondBalancePerCapita).length;
+  const fiscalYearsWithRevenueBreakdown = archiveFiscalYears.filter(hasAnyRevenueBreakdown).length;
   const fiscalYearRange =
     archiveFiscalYears.length > 0
       ? `${Math.min(...archiveFiscalYears.map((f) => f.fiscalYear))}年度〜${Math.max(...archiveFiscalYears.map((f) => f.fiscalYear))}年度`
@@ -663,6 +676,31 @@ export function DataStatusPage() {
       label: "財政：一般会計決算額（歳出決算ベース）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithGeneralAccountSettlement, archiveFiscalYears.length),
       note: "予算額（当初・補正後）とは別の、決算が確定した金額です（Phase165でFY2019〜2024分を新規確認、財政の予算ページでご確認いただけます）。",
+    },
+    {
+      label: "財政：一般会計補正後（最終）予算額の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithFinalBudget, archiveFiscalYears.length),
+      note: "当初予算・決算額とは別の集計です。Phase177で完全性ダッシュボードへ追加しました（財政の予算ページでご確認いただけます）。",
+    },
+    {
+      label: "財政：特別会計予算額の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithSpecialAccountBudget, archiveFiscalYears.length),
+      note: "一般会計とは別会計の予算額です。Phase165でFY2020〜2025分を新規確認しましたが、Phase177まで完全性ダッシュボードへ未反映でした。",
+    },
+    {
+      label: "財政：市債残高（企業会計を含む全会計）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithBondBalanceIncludingEnterprise, archiveFiscalYears.length),
+      note: "一般会計・普通会計ベースとは定義が異なる別集計です（水道・下水道等の企業債残高を合算）。Phase165でFY2021〜2024分を新規に算出・登録しましたが、Phase177まで完全性ダッシュボードへ未反映でした。",
+    },
+    {
+      label: "財政：市債残高（市民1人当たり）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithBondBalancePerCapita, archiveFiscalYears.length),
+      note: "財政の市債ページの年度別一覧には既に表示されている項目です。Phase177で完全性ダッシュボードへ追加しました。",
+    },
+    {
+      label: "財政：歳入内訳（地方税・地方交付税・国庫支出金・県支出金のいずれか）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithRevenueBreakdown, archiveFiscalYears.length),
+      note: "歳入総額（決算ベース）の内訳項目です。4項目すべてが揃っているとは限りません。Phase177で完全性ダッシュボードへ追加しました。",
     },
     {
       label: "財政：財政健全化判断比率（いずれかの指標）の年度確認",
