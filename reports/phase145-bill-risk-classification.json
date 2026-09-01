@@ -1192,5 +1192,10 @@
     "2026-03-gian-172",
     "2026-03-gian-173",
     "2026-03-gian-193"
-  ]
+  ],
+  "processingStatus": {
+    "note": "SAFE325件は、複数worker（fork並列）＋親セッションにより全件処理を試行した。IMPROVED（一次資料本文で内容を確認・Level3化）とAMBIGUOUS（本文所在を確認できず、既存値のまま・推測補完なし）の内訳は reports/phase145-level3-audit.json 側の最終Level集計を参照。",
+    "safeTotal": 325,
+    "attemptedTotal": 325
+  }
 }
