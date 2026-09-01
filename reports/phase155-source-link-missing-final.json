@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-09-01",
+  "totalCount": 20,
+  "finalClassificationCounts": { "RESOLVED": 9, "NOT_YET_PUBLISHED": 10, "SOURCE_UNRESOLVED": 0 },
+  "sourceListReconstruction": {
+    "note": "SOURCE_LINK_MISSING 20件の正式な完全リストは、reports/phase147-r1-residual-and-r2-subgrouping.json の sourceLinkMissing20 に既に存在した（Phase147で個別監査済み）。この20件は自分でid推測せず、当該reportから復元した。Phase147時点のstatusCountsは resolved_this_or_prior_phase=5, unresolved_source_not_yet_published=10, unresolved_other_untouched_this_phase=5（うち4件=2023-05-extraordinary-gian-2/3/4/5＝専決処分）。billVotes.jsonを確認したところ、この4件は現在transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02・summarySource=manualとなっており、Phase147〜Phase152の間（TASK-004メモの『Phase148専決処分4件』に一致）に解決済みだった。よって resolved 5+4=9、unresolved 10+1(議案第9号)=11 となり、本タスクで渡された phase155-slm-remaining-11.json（11件）と完全に一致することを確認した。"
+  },
+  "unpublishedRecheck": {
+    "stillUnpublished": true,
+    "sessionsFoundFor2026": [
+      { "treedepth": "令和 8年 第24回定例会 ", "label": "令和 8年 第24回定例会", "sessionNumber": "第24回", "sessionType": "定例会" }
+    ],
+    "task004CoverageConfirmed": true,
+    "note": "scripts/lib/minutes-source.mjsのlistSessionsForYear({code:'48o046ot0cia1xvtw7', year:2026})を実行した結果、令和8年のセッションとして『令和8年第24回定例会』（2〜3月開催、令和8年度当初予算議会）1件のみが会議録検索システムのタブに登場しており、令和8年5月臨時会・6月定例会に相当するセッションは本日（2026-09-01）時点でもタブ一覧に存在しないことを確認した（Phase109の直接確認結果と同じ状態）。よってこの10件は引き続き『会議録は未公開（資料が存在しないという意味ではない）』であり、リンク切れ扱いにはしていない。src/data/blockedTaskClassification.jsonのTASK-004（title: 議案賛否データの投入・品質向上、voteMethod/committee残り24件）を確認したところ、status: WAITING_EXTERNAL、autoRecheck: true、autoRecheckMechanism: '.github/workflows/update-council-documents.yml（既存の日次自動更新。会議録が公開され次第、次回の自動巡回で反映される）'であり、対象24件（令和8年5月臨時会・6月定例会分）に本Phaseの10件が含まれることを確認した。TASK-004の対象範囲・情報の新しさに問題は見つからなかった（lastCheckedAt: 2026-08-28、今回の再確認結果と矛盾しない）。新しい監視の仕組みは追加していない。TASK-004自体の書き換えも行っていない。"
+  },
+  "bill9Investigation": {
+    "additionalSourcesFound": [],
+    "recommendation": "RESOLVED（資料到達済み、要約は編集方針上見送り）",
+    "reasoning": "議案『2023-07-extraordinary-01-gian-9』（令和5年7月臨時会（1）、議案第9号「令和5年度延岡市一般会計補正予算に対する再議」）について、一次資料への到達可能性のみを再確認した。既存のsrc/data/billVotes.json該当エントリには、sourceFilePath（/council-documents/2023/2023-07-extraordinary-01/2023-07-e-01.pdf）とresultDocumentUrl（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14688.pdf）が既に登録・到達済みであることを確認した。また会議録原文（fileName: R050711A）はPhase147で精読済みであることがverificationNoteに明記されている。今回、これら以外に本議案の中立的事実（争点・手続き経過）を記載した新たな一次資料は探索していない（Phase147で既に『会議録原文を精読した上で、内容の性質上、自動抽出を見送る』という編集判断まで完了しており、再議の同一会期・後続臨時会の議案第28号（2023-07-extraordinary-02-gian-28、transcriptUrl: R050714A）に市長自身による中立的な事実経過の説明が既に登録されている旨もverificationNoteに記録済みのため、重複調査は行わなかった）。従って『一次資料そのものへは到達できているか』という軸では、到達済み・内容確認済みであり、SOURCE_LINK_MISSINGという分類ラベル（transcriptUrl未設定）は技術的には正しいが、実質的には資料未到達ではなく編集方針上の意図的な見送りである。RESOLVEDに分類することを推奨するが、他の18件（transcriptUrl設定済み）とは性質が異なる（transcriptUrlフィールド自体は今回もsetしていない）ため、親セッション（Phase157）の最終判断を仰ぐ。SOURCE_UNRESOLVEDではない（『到達できない』わけではないため）。"
+  },
+  "bills": [
+    { "id": "2023-05-gian-7", "classification": "RESOLVED", "note": "transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-01・summarySource=manual。Phase147以前に解決済み。" },
+    { "id": "2023-06-gian-10", "classification": "RESOLVED", "note": "transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02。Phase147でfetchヒューリスティック改善によりLevel3へ昇格。" },
+    { "id": "2023-06-gian-20", "classification": "RESOLVED", "note": "transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02。Phase147でfetchヒューリスティック改善によりLevel3へ昇格。" },
+    { "id": "2023-06-gian-21", "classification": "RESOLVED", "note": "transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02。Phase147でfetchヒューリスティック改善によりLevel3へ昇格。" },
+    { "id": "2023-07-extraordinary-02-gian-28", "classification": "RESOLVED", "note": "transcriptUrl設定済み（R050714A）・sourceTextVerifiedAt=2026-09-01。議案第9号（再議）の後続議案として、市長自身による中立的な事実経過説明が登録済み。" },
+    { "id": "2023-05-extraordinary-gian-2", "classification": "RESOLVED", "note": "専決処分4件の1つ。transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02・summarySource=manual。Phase147〜152の間（TASK-004メモの『Phase148専決処分4件』）に解決。" },
+    { "id": "2023-05-extraordinary-gian-3", "classification": "RESOLVED", "note": "専決処分4件の1つ。transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02・reasonあり（Level3）。" },
+    { "id": "2023-05-extraordinary-gian-4", "classification": "RESOLVED", "note": "専決処分4件の1つ。transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02・reasonあり（Level3）。" },
+    { "id": "2023-05-extraordinary-gian-5", "classification": "RESOLVED", "note": "専決処分4件の1つ。transcriptUrl設定済み・sourceTextVerifiedAt=2026-09-02・reasonあり（Level3）。" },
+    { "id": "2026-06-gian-5", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。listSessionsForYear(2026)で当該セッション自体がまだ会議録検索システムのタブに存在しないことを2026-09-01時点で再確認。TASK-004（autoRecheck: true）でカバー済み。" },
+    { "id": "2026-06-gian-6", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-06-gian-7", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-06-gian-16", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-06-gian-17", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-06-gian-18", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-06-gian-20", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-06-gian-21", "classification": "NOT_YET_PUBLISHED", "note": "令和8年6月定例会。同上。" },
+    { "id": "2026-05-extraordinary-gian-2", "classification": "NOT_YET_PUBLISHED", "note": "令和8年5月臨時会。同上（会議録未公開、リンク切れではない）。" },
+    { "id": "2026-05-extraordinary-gian-3", "classification": "NOT_YET_PUBLISHED", "note": "令和8年5月臨時会。同上（会議録未公開、リンク切れではない）。" },
+    { "id": "2023-07-extraordinary-01-gian-9", "classification": "RESOLVED", "note": "会議録原文（R050711A）はPhase147で精読済み、sourceFilePath・resultDocumentUrlも既に登録済みで一次資料に到達している。ただし市長発言が政治的に係争性の高い再議理由説明であるため、編集方針（特定の政治的立場を支持・批判しない）に照らし、中立的な要約としての自動抽出（transcriptUrl・reason登録）は意図的に見送っている。技術的な意味でのSOURCE_LINK_MISSING（transcriptUrl未設定）は現在も解消していないが、資料未到達ではなく編集判断による意図的現状維持のため、暫定的にRESOLVEDとして計上した（親セッションの最終判断を推奨、bill9Investigation参照）。" }
+  ]
+}

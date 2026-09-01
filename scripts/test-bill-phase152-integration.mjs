@@ -96,7 +96,9 @@ check("Level1+Level2+Level3の合計が議案総数1,177件と一致する", () 
     else l1++;
   }
   assert.equal(l1 + l2 + l3, 1177, `Level1+2+3の合計が1,177件ではありません（${l1 + l2 + l3}件）`);
-  assert.equal(l3, 388, `Level3の総数が388件ではありません（${l3}件）`);
+  // Phase152完了時点の388件を下限とする（Phase153以降でさらにLevel3化が進むため、厳密な固定値ではなく
+  // 下限チェックとする。Phase153〜157時点の正確な値はtest-bill-phase157-integration.mjs側で検証する）。
+  assert.ok(l3 >= 388, `Level3の総数が388件を下回っています（${l3}件）`);
 });
 
 console.log(`\n${passCount}件成功`);
