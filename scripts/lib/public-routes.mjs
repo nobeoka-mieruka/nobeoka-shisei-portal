@@ -161,6 +161,7 @@ function loadData() {
   const committees = readJson("src/data/committees.json");
   const archiveCouncilLeadership = readJson("src/data/archiveCouncilLeadership.json");
   const committeeActivityReports = readJson("src/data/committeeActivityReports.json");
+  const archiveCommitteeMembers = readJson("src/data/archiveCommitteeMembers.json");
   const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
   const municipalityComparisons = readJson("src/data/municipalityComparison.json");
   const similarMunicipalityFinanceComparison = readJson("src/data/similarMunicipalityFinanceComparison.json");
@@ -195,6 +196,7 @@ function loadData() {
     committees,
     archiveCouncilLeadership,
     committeeActivityReports,
+    archiveCommitteeMembers,
     civicTimelineEvents,
     municipalityComparisons,
     similarMunicipalityFinanceComparison,
@@ -545,12 +547,17 @@ export function getIndexableRoutes() {
   for (const c of data.committees) {
     const path = `/committees/${c.id}`;
     const reports = data.committeeActivityReports.filter((r) => r.committeeId === c.id);
+    const historyRecords = data.archiveCommitteeMembers.filter((r) => r.committeeId === c.id);
     urls.push({
       path,
       lastmod: resolveLastmod(
         path,
-        [c.lastVerifiedAt, maxValidDate(reports.map((r) => r.lastVerifiedAt))],
-        ["src/data/committees.json", "src/data/committeeActivityReports.json"],
+        [
+          c.lastVerifiedAt,
+          maxValidDate(reports.map((r) => r.lastVerifiedAt)),
+          maxValidDate(historyRecords.map((r) => r.lastVerifiedAt)),
+        ],
+        ["src/data/committees.json", "src/data/committeeActivityReports.json", "src/data/archiveCommitteeMembers.json"],
       ),
     });
   }

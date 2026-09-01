@@ -27,6 +27,7 @@ import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import archiveCouncilLeadershipData from "../data/archiveCouncilLeadership.json";
+import archiveCommitteeMembersData from "../data/archiveCommitteeMembers.json";
 import type {
   CouncilMember,
   FormerMember,
@@ -460,7 +461,7 @@ export function DataStatusPage() {
       committeesWithJurisdiction < committees.length
         ? "（延岡市議会委員会条例の条文が未確認のため残りは「確認できず」と表示）"
         : "（延岡市議会委員会条例の条文と照合し、全委員会の所管事項を確認済み）"
-    }。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。`,
+    }。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。過去（現行任期より前）の委員長・副委員長・委員の在任履歴：会議録で確認できた${(archiveCommitteeMembersData as { termStart: string }[]).length}件（2023〜2025年の常任委員会・議会運営委員会の選任任期分。それ以前は未収録・調査中）。`,
     linkTo: "/committees",
     linkLabel: "委員会一覧を見る",
     fullyCovered: committeesWithJurisdiction === committees.length,

@@ -267,11 +267,54 @@ export interface CommitteeActivityReport {
   committeeName: string;
   /** 対象年度（西暦、4月始まり）。例：令和7年度 → 2025。 */
   fiscalYear: number;
-  /** 調査テーマ名、または「最終報告書」「中間報告書（第N回）」等の表記。 */
+  /** 調査テーマ名、または「最終報告書」「中間報告書（第N回）」等の表記。複数テーマがある年度は「／」区切り。 */
   title: string;
   url: string;
   /** この報告書PDFへのリンクを掲載している一覧ページのURL。 */
   sourceUrl: string;
+  /**
+   * 報告書PDF本文の「他自治体の取り組み状況」「先進地視察」等で言及された視察先自治体名
+   * （「◯◯市（△△県）」の表記、判明した範囲のみ）。テーマが複数ある場合はテーマ順に列挙。
+   * 視察の言及自体が無い年度（内部協議のみの活動報告等）はフィールド自体を省略する。
+   */
+  visitedMunicipalities?: string[];
+  /**
+   * 視察等の実施日（報告書PDF内に日付が明記されている場合のみ）。単日はISO形式（YYYY-MM-DD）、
+   * 複数日にわたる場合は「YYYY-MM-DD〜YYYY-MM-DD」の表記。明記が無い場合は推測せずフィールド自体を省略する。
+   */
+  visitDate?: string;
+  /** 推測を避けるための補足（テーマの原文表記の注記、視察日不明の理由等）。 */
+  notes?: string;
+  lastVerifiedAt: string;
+}
+
+/**
+ * 過去（現行任期より前）の常任委員会・議会運営委員会の構成員1名分の履歴
+ * （src/data/archiveCommitteeMembers.json）。committees.jsonが保持するのは現行任期の構成のみ
+ * のため、過去の委員長・副委員長・委員の在任履歴は本ファイルで別管理する（二重管理を避ける）。
+ * 一次資料は延岡市議会会議録（常任委員会委員・議会運営委員会委員の選任、正副委員長互選結果の
+ * 本会議での報告発言）。推測で埋めておらず、会議録で選任・互選が確認できた任期のみを収録する。
+ */
+export interface ArchiveCommitteeMemberTerm {
+  id: string;
+  /** committees.jsonのid（同一委員会の過去の任期を指す）。 */
+  committeeId: string;
+  /** 選任当時の委員会名。 */
+  committeeName: string;
+  /** members.json（現職）またはformerMembers.json（元議員）のid。 */
+  memberId: string;
+  memberName: string;
+  role: CommitteeRole;
+  /** 任期開始日（本会議での選任日、ISO形式）。 */
+  termStart: string;
+  /**
+   * 任期終了日（ISO形式）。次の改選が会議録で確認できた場合、その前日を設定する
+   * （改選日と同日にはしない：会議録上の代替わり日をそのまま記録したものであり、
+   * 重複や誤りではない）。次の改選が未確認の場合はnull。
+   */
+  termEnd: string | null;
+  sourceRefs: SourceEntry[];
+  notes?: string;
   lastVerifiedAt: string;
 }
 

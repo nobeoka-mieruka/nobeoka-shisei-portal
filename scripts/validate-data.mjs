@@ -1428,10 +1428,81 @@ try {
     if (isBlank(r.url) || !URL_RE.test(r.url)) err(tag, `urlの形式が不正です: ${r.url}`);
     if (isBlank(r.sourceUrl) || !URL_RE.test(r.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${r.sourceUrl}`);
     if (!r.lastVerifiedAt || !DATE_RE.test(r.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${r.lastVerifiedAt}`);
+    if (r.visitedMunicipalities !== undefined) {
+      if (!Array.isArray(r.visitedMunicipalities) || r.visitedMunicipalities.length === 0) {
+        err(tag, "visitedMunicipalitiesは空でない配列である必要があります");
+      } else if (r.visitedMunicipalities.some((v) => isBlank(v))) {
+        err(tag, "visitedMunicipalitiesに空の要素があります");
+      }
+    }
+    if (r.visitDate !== undefined && isBlank(r.visitDate)) err(tag, "visitDateが空です");
   }
 } catch (e) {
   if (e?.code !== "ENOENT") {
     warn("committeeActivityReports.json", `読み込みに失敗しました: ${e.message}`);
+  }
+}
+
+// --- archiveCommitteeMembers.json（過去の常任委員会・議会運営委員会の構成員履歴、会議録ベース） ---
+try {
+  const historyRecords = readJson("src/data/archiveCommitteeMembers.json");
+  const committeesForHistory = readJson("src/data/committees.json");
+  const knownCommitteeIdsForHistory = new Set(committeesForHistory.map((c) => c.id));
+  const VALID_COMMITTEE_ROLES = new Set(["委員長", "副委員長", "委員"]);
+  const historyIds = new Set();
+  const seenCommitteeTermRole = new Set();
+
+  for (const rec of historyRecords) {
+    const tag = `archiveCommitteeMembers.json (${rec.id ?? "id不明"})`;
+    if (isBlank(rec.id)) err(tag, "idが空です");
+    else if (historyIds.has(rec.id)) err(tag, `idが重複しています: ${rec.id}`);
+    else historyIds.add(rec.id);
+
+    if (isBlank(rec.committeeId) || !knownCommitteeIdsForHistory.has(rec.committeeId)) {
+      err(tag, `存在しない委員会IDを参照しています: ${rec.committeeId}`);
+    }
+    if (isBlank(rec.committeeName)) err(tag, "committeeNameが空です");
+    if (isBlank(rec.memberId) || !(memberIds.has(rec.memberId) || formerMemberIds.has(rec.memberId))) {
+      err(tag, `存在しない議員IDを参照しています: ${rec.memberId}`);
+    }
+    if (isBlank(rec.memberName)) err(tag, "memberNameが空です");
+    if (!VALID_COMMITTEE_ROLES.has(rec.role)) err(tag, `未定義のroleです: ${rec.role}`);
+    if (!rec.termStart || !DATE_RE.test(rec.termStart)) err(tag, `termStartの形式が不正です: ${rec.termStart}`);
+    if (rec.termEnd !== null && !DATE_RE.test(rec.termEnd)) err(tag, `termEndの形式が不正です: ${rec.termEnd}`);
+    if (rec.termStart && rec.termEnd && rec.termEnd < rec.termStart) {
+      err(tag, `termEndがtermStartより前になっています: ${rec.termStart} > ${rec.termEnd}`);
+    }
+    if (!Array.isArray(rec.sourceRefs) || rec.sourceRefs.length === 0) {
+      err(tag, "sourceRefsが空です");
+    } else {
+      for (const ref of rec.sourceRefs) {
+        if (isBlank(ref.label)) err(tag, "sourceRefs.labelが空です");
+        if (isBlank(ref.url) || !URL_RE.test(ref.url)) err(tag, `sourceRefs.urlの形式が不正です: ${ref.url}`);
+      }
+    }
+    if (!rec.lastVerifiedAt || !DATE_RE.test(rec.lastVerifiedAt)) {
+      err(tag, `lastVerifiedAtの形式が不正です: ${rec.lastVerifiedAt}`);
+    }
+
+    // 同一委員会・同一任期開始日で、同じ役職（委員長／副委員長）が2名以上いないか（委員は複数名いて当然のため対象外）。
+    if (rec.role !== "委員" && rec.committeeId && rec.termStart) {
+      const key = `${rec.committeeId} ${rec.termStart} ${rec.role}`;
+      if (seenCommitteeTermRole.has(key)) {
+        err(tag, `同一委員会・同一任期で${rec.role}が重複しています`);
+      }
+      seenCommitteeTermRole.add(key);
+    }
+  }
+
+  if (historyRecords.length > 50) {
+    err(
+      "archiveCommitteeMembers.json",
+      `新規レコードのhard limit（50件）を超えています: ${historyRecords.length}件`,
+    );
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("archiveCommitteeMembers.json", `読み込みに失敗しました: ${e.message}`);
   }
 }
 
