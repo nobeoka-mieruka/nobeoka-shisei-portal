@@ -75,15 +75,16 @@ check("Level2（本文確認済み・独自要約なし）の議案は、すべ�
   assert.ok(bill162 && isLevel2(bill162), "議案第162号がLevel2ではありません（無理な昇格または降格が起きている疑い）");
 });
 
-check("A区分（174件）とD-A区分（202件）は重複しない（transcriptUrlの有無で完全に分岐するため、定義上重複件数は常に0）", () => {
+check("A区分とD-A区分は重複しない（transcriptUrlの有無で完全に分岐するため、定義上重複件数は常に0）。Phase145のSAFE並列検証でD-A→Aへ多数昇格したため、件数は既存値超過を確認する", () => {
   const isA = (b) => classifyRetrieval(b) === "A";
   const isDA = (b) => classifyRetrieval(b) === "D" && STRUCTURED_CATEGORIES.has(b.category);
   const overlap = billVotes.filter((b) => isA(b) && isDA(b));
   assert.equal(overlap.length, 0, `A区分とD-A区分が重複している議案があります: ${overlap.map((b) => b.id).join("、")}`);
   const aCount = billVotes.filter(isA).length;
   const daCount = billVotes.filter(isDA).length;
-  assert.equal(aCount, 174, `A区分の件数が174件ではありません（${aCount}件）`);
-  assert.equal(daCount, 202, `D-A区分の件数が202件ではありません（${daCount}件）`);
+  assert.ok(aCount >= 267, `A区分の件数が267件未満です（${aCount}件）`);
+  assert.ok(daCount <= 109, `D-A区分の件数が109件を超えています（${daCount}件）`);
+  assert.equal(aCount + daCount, 174 + 202, `A+D-Aの合計が本来一定（376件）のはずが変化しています（${aCount + daCount}件）`);
 });
 
 check("1,177件全体の「原資料到達性区分（A/B/D）×説明品質段階（Level1/Level2/Level3）」クロス集計の合計が1,177件と一致する", () => {
@@ -95,9 +96,12 @@ check("1,177件全体の「原資料到達性区分（A/B/D）×説明品質段�
   let sum = 0;
   for (const cat of Object.keys(matrix)) for (const lv of Object.keys(matrix[cat])) sum += matrix[cat][lv];
   assert.equal(sum, 1177, `クロス集計の合計が1,177件ではありません（${sum}件）: ${JSON.stringify(matrix)}`);
-  // D区分（619件）はPhase144時点でLevel1のみのはず（D→A/Bへの個別リンク登録・Level3昇格は
-  // まだ行っていないため。実施した場合はこの期待値を更新すること）。
-  assert.equal(matrix.D[1], 619, `D区分Level1の件数が619件ではありません（${matrix.D[1]}件）`);
+  // D区分は常にLevel1のみのはず（本文確認・独自要約化はsourceTextVerifiedAt設定と同時に
+  // transcriptUrlも設定する実装のため、検証済みの議案は同時にA/Bへ再分類され、D区分から
+  // 抜ける。D区分に残っている議案＝まだ会議録リンクが個別登録されていない議案、という
+  // 対応関係が常に保たれているはず）。
+  const dTotal = matrix.D[1] + matrix.D[2] + matrix.D[3];
+  assert.equal(matrix.D[1], dTotal, `D区分にLevel1以外の議案があります（Level1=${matrix.D[1]}件、D区分合計=${dTotal}件）`);
   assert.equal(matrix.D[2], 0, "D区分にLevel2の議案があります（想定外）");
   assert.equal(matrix.D[3], 0, "D区分にLevel3の議案があります（想定外：D区分はまだ個別リンク未登録のはず）");
 });
@@ -144,16 +148,16 @@ check("Phase144でbill-speech-parser.mjs（機械抽出）により新規Level3�
   assert.equal(suspects.length, 0, `算用数字＋省略単位の疑いがある記述: ${suspects.join(" / ")}`);
 });
 
-check("summaryVerified（Level3）の総数が61件、sourceTextVerifiedの総数が62件である（Phase142〜144の累計）", () => {
+check("summaryVerified（Level3）・sourceTextVerifiedの総数が、Phase144時点（61件・62件）を下回っていない（Phase145で後退していないか）", () => {
   const level3Count = billVotes.filter(isLevel3).length;
   const verifiedCount = billVotes.filter((b) => b.sourceTextVerifiedAt).length;
-  assert.equal(level3Count, 61, `Level3の総数が61件ではありません（${level3Count}件）`);
-  assert.equal(verifiedCount, 62, `sourceTextVerifiedの総数が62件ではありません（${verifiedCount}件）`);
+  assert.ok(level3Count >= 61, `Level3の総数が61件を下回っています（${level3Count}件）`);
+  assert.ok(verifiedCount >= 62, `sourceTextVerifiedの総数が62件を下回っています（${verifiedCount}件）`);
 });
 
-check("A区分内でLevel3へ昇格した議案は50件である（Phase144の目標「最初の50件」と一致）", () => {
+check("A区分内でLevel3へ昇格した議案は、Phase144の50件を下回っていない", () => {
   const level3InA = billVotes.filter((b) => isLevel3(b) && classifyRetrieval(b) === "A");
-  assert.equal(level3InA.length, 50, `A区分内のLevel3件数が50件ではありません（${level3InA.length}件）`);
+  assert.ok(level3InA.length >= 50, `A区分内のLevel3件数が50件を下回っています（${level3InA.length}件）`);
 });
 
 console.log(`\n${passCount}件成功`);
