@@ -121,3 +121,17 @@ body {
 .tap-highlight-none {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Phase190（WCAG）：OSの「視差効果を減らす」設定を有効にしている利用者向けに、
+   transition/animationをほぼ無効化する。個別コンポーネントごとの対応ではなく、
+   全ページ共通のグローバルルールとして一括対応する。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
