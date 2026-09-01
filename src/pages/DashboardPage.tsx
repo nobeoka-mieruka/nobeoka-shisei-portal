@@ -310,14 +310,12 @@ export function DashboardPage() {
         />
         {questionStats.scheduledCount > 0 && (
           <StatCard
-            label="最新会期の予定質問"
+            label="会議録未公開会期の予定質問"
             value={questionStats.scheduledCount}
             unit="件"
-            hint={
-              questionStats.scheduledSessionName
-                ? `${questionStats.scheduledSessionName}／質問通告書ベース${questionStats.scheduledNewsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`
-                : undefined
-            }
+            hint={questionStats.scheduledSessions
+              .map((s) => `${s.sessionName}：${s.count}件／質問通告書ベース${s.newsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`)
+              .join("　")}
           />
         )}
         <StatCard label="登録済み議案数" value={totalBills} unit="件" hint={coverageHint("billVotes", totalBills)} />
@@ -410,7 +408,7 @@ export function DashboardPage() {
       <p className="px-1 text-xs text-on-surface-variant">
         以下の一般質問の内訳は、会議録本文で内容を確認済みの累計{questionStats.confirmedCount}件（対象
         {questionStats.targetSessionCount}会期中、収録済み{questionStats.collectedSessionCount}会期分）が対象です。
-        会議録が未公開の最新会期の予定質問（{questionStats.scheduledCount}件）は含みません。
+        会議録が未公開の会期の予定質問（{questionStats.scheduledCount}件）は含みません。
       </p>
 
       <SectionCard title="議員別一般質問確認件数（上位10名・確認済み分）">

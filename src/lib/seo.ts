@@ -1455,7 +1455,10 @@ function questionSeo(id: string, options?: SeoOptions): SeoResult {
         { label: "一般質問データベース", to: "/questions" },
         { label: item.memberName },
       ],
-      datePublished: item.questionDate,
+      // questionDateは開催（予定）日であり、質問通告書ベースで会議録未公開の会期では
+      // 未来日になりうる（datePublishedに未来日は不適切）。referenceDateは通告書自体の
+      // 公表日で、常に過去日であるためこちらを使う。
+      datePublished: item.referenceDate,
     },
     options,
   );

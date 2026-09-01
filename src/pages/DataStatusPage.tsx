@@ -494,13 +494,23 @@ export function DataStatusPage() {
       linkLabel: "一般質問データベースを見る",
     },
     {
-      label: "最新会期の予定質問",
+      label: "会議録未公開会期の予定質問",
       count: questionStats.scheduledCount,
       unit: "件",
-      scope: questionStats.scheduledSessionName ?? "直近1会期",
-      detail: questionStats.scheduledNewsletterConfirmed
-        ? "会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです（TASK-079、2026-08-15確認）。個々の質問項目・答弁内容は会議録公開後に確認します。"
-        : "会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。",
+      scope:
+        questionStats.scheduledSessions.length > 0
+          ? questionStats.scheduledSessions.map((s) => s.sessionName).join("、")
+          : "該当会期なし",
+      detail:
+        questionStats.scheduledSessions.length > 0
+          ? questionStats.scheduledSessions
+              .map((s) =>
+                s.newsletterConfirmed
+                  ? `${s.sessionName}（${s.count}件）：会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです（TASK-079）。個々の質問項目・答弁内容は会議録公開後に確認します。`
+                  : `${s.sessionName}（${s.count}件）：会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。`,
+              )
+              .join(" ")
+          : "該当する会期はありません。",
       linkTo: "/questions",
     },
   ];

@@ -402,14 +402,12 @@ export function HomePage() {
           />
           {questionStats.scheduledCount > 0 && (
             <StatCard
-              label="最新会期の予定質問"
+              label="会議録未公開会期の予定質問"
               value={questionStats.scheduledCount}
               unit="件"
-              hint={
-                questionStats.scheduledSessionName
-                  ? `${questionStats.scheduledSessionName}／質問通告書ベース${questionStats.scheduledNewsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`
-                  : undefined
-              }
+              hint={questionStats.scheduledSessions
+                .map((s) => `${s.sessionName}：${s.count}件／質問通告書ベース${s.newsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`)
+                .join("　")}
             />
           )}
           <StatCard

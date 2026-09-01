@@ -11,12 +11,24 @@ import questionCollectionStatusData from "../data/questionCollectionStatus.json"
  * 【用語の区別】
  * - 確認済み：councilSpeechSummaries.json（会議録本文を実際に読んで要約・登録した一般質問）。
  *   会議録取得済みの全12会期（TRANSCRIPT_AVAILABLE_SESSION_IDS）を対象とした累計件数。
- * - 予定：generalQuestions.json（会議録がまだ公開されていない最新会期について、
+ * - 予定：generalQuestions.json（会議録がまだ公開されていない会期について、
  *   質問通告書＝事前提出された質問予告のみを登録したもの。実際の質疑応答内容の
- *   確認はまだできていない）。
+ *   確認はまだできていない）。会議録が未公開の会期が複数同時に存在する場合（例：
+ *   開催済みだが会議録未公開の会期と、開催前で通告書のみの会期が並行する場合）は、
+ *   会期ごとに分けて集計する（Phase：令和8年9月定例会追加時に単一会期前提から拡張）。
  * この2つは対象が重ならない別々の集合であり、単純に足し合わせて「合計件数」として
  * 表示しない（予定質問は、実際に登壇するか・内容が変わるかを会議録で未確認のため）。
  */
+export interface ScheduledQuestionSession {
+  /** 会期名（例："令和8年6月定例会"）。 */
+  sessionName: string;
+  /** この会期の予定質問件数（generalQuestions.json内で該当sessionNameを持つ件数）。 */
+  count: number;
+  /** TASK-079：この会期の予定質問について、「のべおか市議会だより」で開催・実施を
+   * 確認済みかどうか。会期内の全件がnewsletterConfirmed:trueの場合のみtrue。 */
+  newsletterConfirmed: boolean;
+}
+
 export interface GeneralQuestionStats {
   /** 会議録本文で内容を確認済みの一般質問・代表質問・関連質問・総括質疑の累計件数。 */
   confirmedCount: number;
@@ -26,13 +38,11 @@ export interface GeneralQuestionStats {
    * 大きい値になる。
    */
   totalQuestionItemCount: number;
-  /** 質問通告書に基づく、開催後だが会議録未公開の最新会期の予定質問件数。 */
+  /** 質問通告書に基づく、会議録未公開の会期ごとの予定質問件数（会期名・件数・だより確認有無）。
+   * 会議録未公開の会期が0件なら空配列。 */
+  scheduledSessions: ScheduledQuestionSession[];
+  /** scheduledSessionsの件数の合計（会議録未公開の全会期分の予定質問の合計件数）。 */
   scheduledCount: number;
-  /** 予定質問の対象会期名（例："令和8年6月定例会"）。予定質問が0件の場合はnull。 */
-  scheduledSessionName: string | null;
-  /** TASK-079：予定質問（会議録未公開）について、「のべおか市議会だより」で開催・実施を
-   * 確認済みかどうか。全件がnewsletterConfirmed:trueの場合のみtrue（0件の場合はfalse）。 */
-  scheduledNewsletterConfirmed: boolean;
   /** 現議員任期以降の収録対象会期数（questionCollectionStatus.json全件）。 */
   targetSessionCount: number;
   /** 会議録取得済み（transcriptAvailable:true）会期数。 */
@@ -60,12 +70,22 @@ export function calculateGeneralQuestionStats(
   const targetSessionCount = status.sessions.length;
   const uncollectedSessions = status.sessions.filter((s) => !s.transcriptAvailable);
 
+  const scheduledSessions: ScheduledQuestionSession[] = [];
+  for (const q of generalQuestions) {
+    let session = scheduledSessions.find((s) => s.sessionName === q.sessionName);
+    if (!session) {
+      session = { sessionName: q.sessionName, count: 0, newsletterConfirmed: true };
+      scheduledSessions.push(session);
+    }
+    session.count += 1;
+    if (q.newsletterConfirmed !== true) session.newsletterConfirmed = false;
+  }
+
   return {
     confirmedCount,
     totalQuestionItemCount,
+    scheduledSessions,
     scheduledCount: generalQuestions.length,
-    scheduledSessionName: generalQuestions[0]?.sessionName ?? null,
-    scheduledNewsletterConfirmed: generalQuestions.length > 0 && generalQuestions.every((q) => q.newsletterConfirmed === true),
     targetSessionCount,
     collectedSessionCount: targetSessionCount - uncollectedSessions.length,
     uncollectedSessionCount: uncollectedSessions.length,
