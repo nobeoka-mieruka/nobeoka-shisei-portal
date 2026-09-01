@@ -70,13 +70,14 @@ check("D区分は、すべて令和元年度〜令和4年度の範囲内に収�
   assert.equal(sum, Dbills.length, `年度別内訳の合計がD区分件数と一致しません: ${JSON.stringify(byYear)}`);
 });
 
-check("D区分を、D-A（構造化しやすいカテゴリ）／D-B（個別確認必要なカテゴリ）へ再分類すると、D-B=417件（Phase145のSAFE並列検証はD-Bの条例/人事/その他等には手を付けていないため不変）", () => {
+check("D区分を、D-A（構造化しやすいカテゴリ）／D-B（個別確認必要なカテゴリ）へ再分類すると、D-Bが417件以下である（Phase145基準417件。Phase146はREVIEW 721件のうちR1＝技術的な抽出問題のみの36件を対象に一次資料を確認しており、その一部でtranscriptUrlが新規に確認できたためD-Bが減少しうる。D-Aは対象外＝不変のはず）", () => {
   let DA = 0, DB = 0;
   for (const b of Dbills) {
     if (STRUCTURED_CATEGORIES.has(b.category)) DA++;
     else DB++;
   }
-  assert.equal(DB, 417, `D-B件数が417件ではありません（${DB}件）。Phase145はD-Bへ手を付けない方針のため不変のはず`);
+  assert.ok(DB <= 417, `D-B件数が417件を超えています（${DB}件）`);
+  assert.equal(DA, 44, `D-A件数が44件ではありません（${DA}件）。Phase146はD-A（構造化しやすいカテゴリのD区分）を対象にしていないため不変のはず`);
   assert.equal(DA + DB, Dbills.length, "D-A+D-BがD区分件数と一致しません");
 });
 

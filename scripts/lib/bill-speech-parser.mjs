@@ -113,7 +113,21 @@ export function splitSpeechIntoBillBlocks(text) {
   const result = new Map();
 
   // 終了境界の候補（「以上、議案の概要であります。」「よろしく御審議」「（降壇）」等）で全体を打ち切る。
-  const endMatch = text.match(/以上(?:が)?(?:、)?(?:議案の概要|補正予算の概要)であります。|よろしく御審議|（降壇）/);
+  //
+  // Phase146で発見・修正したバグ：「（降壇）」は、市長がその日に複数回登壇して別々の議案
+  // （例：人事案件を先に単独で提案し、いったん降壇した後、改めて登壇して議案の概要をまとめて
+  // 説明する）を説明する場合、1日の発言の中に複数回出現しうる（実例：令和元年6月定例会の
+  // 開会日、議案第25号＝固定資産評価審査委員会委員の選任を単独提案した直後に「（降壇）」が
+  // 現れ、その後に改めて登壇して議案第5号以降の議案の概要説明が続く）。
+  // 従来はtext内で最初に見つかった終了境界でtextを打ち切っていたため、この「複数登壇」パターンの
+  // 会議録では、最初の登壇分（1議案）しか抽出できず、それ以降の議案が軒並み検出漏れになっていた。
+  // 終了境界を探す開始位置を「最後に見つかった議案マーカーの位置」以降に限定することで、
+  // 議案マーカーより前で終了境界と誤認して打ち切ることがないようにした（終了境界は、あくまで
+  // 「最後の議案の説明がどこで終わるか」を区切るためだけに使う）。
+  const lastMarkerIndex = markers.length > 0 ? markers[markers.length - 1].index : 0;
+  const endRegex = /以上(?:が)?(?:、)?(?:議案の概要|補正予算の概要)であります。|よろしく御審議|（降壇）/g;
+  endRegex.lastIndex = lastMarkerIndex;
+  const endMatch = endRegex.exec(text);
   const hardEnd = endMatch ? endMatch.index : text.length;
 
   let currentGroup = null; // { billNumbers: number[], commonText: string }

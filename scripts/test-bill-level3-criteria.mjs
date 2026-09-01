@@ -84,7 +84,13 @@ check("A区分とD-A区分は重複しない（transcriptUrlの有無で完全�
   const daCount = billVotes.filter(isDA).length;
   assert.ok(aCount >= 267, `A区分の件数が267件未満です（${aCount}件）`);
   assert.ok(daCount <= 109, `D-A区分の件数が109件を超えています（${daCount}件）`);
-  assert.equal(aCount + daCount, 174 + 202, `A+D-Aの合計が本来一定（376件）のはずが変化しています（${aCount + daCount}件）`);
+  // 【Phase146追記】Phase145まではA区分の供給源がD-A→A（transcriptUrl新規登録）のみだったため
+  // A+D-Aは376件で一定だったが、Phase146のR1（REVIEW内の技術的抽出問題のみの候補）検証で、
+  // 「構造化しやすいカテゴリ・令和5〜8年度・transcriptUrl未登録」のためB区分に分類されていた
+  // 議案（classifyBillSourceRetrievalのconfirmedYears無条件B分岐によるもの）にtranscriptUrlが
+  // 新規確認され、B→Aという別の昇格経路が生じた。そのためA+D-Aは376件を下回ることはないが、
+  // 上回ることはある（単調増加。B→A分だけA単独が増え、D-Aは変化しない）。
+  assert.ok(aCount + daCount >= 174 + 202, `A+D-Aの合計が既存基準（376件）を下回っています（${aCount + daCount}件）`);
 });
 
 check("1,177件全体の「原資料到達性区分（A/B/D）×説明品質段階（Level1/Level2/Level3）」クロス集計の合計が1,177件と一致する", () => {
