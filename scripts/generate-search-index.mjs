@@ -582,6 +582,25 @@ for (const c of committees) {
   });
 }
 
+// --- themes（質問テーマ。ThemesPage.tsx／themes.jsonと同じデータ源。
+// 「子育てについて誰が質問した？」等、テーマ名からの検索意図に対応するため索引化する） ---
+try {
+  const themes = readJson("src/data/themes.json");
+  for (const t of themes) {
+    entries.push({
+      id: `theme-${t.id}`,
+      type: "theme",
+      title: t.name,
+      description: t.description,
+      url: `/themes/${t.slug}`,
+      keywords: [t.name, ...(t.keywords ?? [])].filter(Boolean),
+      sourceId: t.id,
+    });
+  }
+} catch {
+  // データがない場合はスキップ
+}
+
 // --- civic timeline events（市政年表） ---
 const civicTimelineEvents = readJson("src/data/civicTimelineEvents.json");
 for (const ev of civicTimelineEvents) {
@@ -711,6 +730,136 @@ const staticPages = [
     description: "延岡市役所の部・課・室・センターの所管・電話番号・所在地を、延岡市公式ホームページ「組織でさがす」の公表内容に基づいて整理しています。",
     url: "/city-organization",
     keywords: ["組織", "組織図", "部課", "電話番号", "所在地", "行政組織"],
+  },
+  // --- 財政アーカイブの推移ページ（FinanceBudgetPage/FinanceDebtPage/FinanceFundsPage、
+  // src/data/archiveFiscalYears.jsonの年度別データを使う）。個別年度エントリではなくページ単位で索引化する。 ---
+  {
+    id: "page-finance-budget",
+    title: "予算・決算規模の推移",
+    description: "延岡市の一般会計・特別会計・企業会計の当初予算・最終予算・決算額の推移を、年度ごとに一次資料で確認できた範囲で整理しています。",
+    url: "/finance/budget",
+    keywords: ["予算", "決算", "当初予算", "最終予算", "一般会計", "特別会計", "企業会計", "財政"],
+  },
+  {
+    id: "page-finance-debt",
+    title: "市債の推移",
+    description: "延岡市の市債（借金）の発行額・年度末残高の推移を、年度ごとに一次資料で確認できた範囲で整理しています。",
+    url: "/finance/debt",
+    keywords: ["市債", "借金", "地方債", "残高", "財政"],
+  },
+  {
+    id: "page-finance-funds",
+    title: "基金残高の推移",
+    description: "延岡市の基金（貯金）残高の推移を、財源調整用基金とその他特定目的基金に分けて、年度ごとに一次資料で確認できた範囲で整理しています。",
+    url: "/finance/funds",
+    keywords: ["基金", "財政調整基金", "貯金", "残高", "財政"],
+  },
+  // --- 比較機能（ComparePage.tsx以下。最大4件までの並べ比較。点数化・優劣判定は行わない） ---
+  {
+    id: "page-compare",
+    title: "市政アーカイブの比較",
+    description: "歴代市長・議員・年度別財政・人口などを、最大4件まで選んで比較できます。点数化や優劣・勝敗の判定は行いません。",
+    url: "/compare",
+    keywords: ["比較", "歴代市長の比較", "議員の比較", "財政の比較", "人口の比較"],
+  },
+  {
+    id: "page-compare-similar-municipalities",
+    title: "類似団体（Ⅲ－３）財政比較",
+    description: "総務省の類似団体区分「Ⅲ－３」に属する全国の自治体と、財政力指数等を同一年度・同一定義で比較します。",
+    url: "/compare/similar-municipalities",
+    keywords: ["類似団体", "財政力指数", "財政比較", "総務省"],
+  },
+  {
+    id: "page-compare-mayors",
+    title: "歴代市長の比較",
+    description: "延岡市歴代市長の任期・就任回数・出典を最大4名まで並べて比較します。",
+    url: "/compare/mayors",
+    keywords: ["市長", "歴代市長", "任期", "比較"],
+  },
+  {
+    id: "page-compare-members",
+    title: "議員の比較",
+    description: "延岡市議会の現職議員・元議員を横断して最大4名まで並べて比較します。",
+    url: "/compare/members",
+    keywords: ["議員", "現職議員", "元議員", "比較"],
+  },
+  {
+    id: "page-compare-finance",
+    title: "年度別財政の比較",
+    description: "延岡市の人口・予算・市債・基金・財政健全化判断比率をまとめて年度間で比較します。",
+    url: "/compare/finance",
+    keywords: ["財政", "人口", "予算", "市債", "基金", "財政健全化判断比率", "比較"],
+  },
+  {
+    id: "page-compare-population",
+    title: "人口の比較",
+    description: "延岡市の人口・世帯数を最大4年度まで並べて比較します。人口減少の推移を年度間で確認できます。",
+    url: "/compare/population",
+    keywords: ["人口", "人口減少", "世帯数", "比較"],
+  },
+  {
+    id: "page-compare-budget",
+    title: "予算・決算の比較",
+    description: "延岡市の一般会計の当初予算・補正後予算・決算額を年度間で比較します。",
+    url: "/compare/budget",
+    keywords: ["予算", "決算", "一般会計", "比較"],
+  },
+  {
+    id: "page-compare-debt",
+    title: "市債の比較",
+    description: "延岡市の市債発行額・年度末残高（区分別）を年度間で比較します。",
+    url: "/compare/debt",
+    keywords: ["市債", "残高", "比較"],
+  },
+  {
+    id: "page-compare-funds",
+    title: "基金の比較",
+    description: "延岡市の財源調整用基金・その他特定目的基金の残高を年度間で比較します。",
+    url: "/compare/funds",
+    keywords: ["基金", "残高", "比較"],
+  },
+  {
+    id: "page-compare-policies",
+    title: "政策の比較",
+    description: "延岡市長・議員・会派・市の政策を最大4件まで並べて比較します。",
+    url: "/compare/policies",
+    keywords: ["政策", "公約", "比較"],
+  },
+  {
+    id: "page-bills-compare",
+    title: "議案の比較",
+    description: "延岡市議会の議案を最大4件まで選んで、提出者・採決結果・賛否等を並べて比較します。",
+    url: "/bills/compare",
+    keywords: ["議案", "採決", "賛否", "比較"],
+  },
+  // --- その他の検索・一覧ツール ---
+  {
+    id: "page-council-documents",
+    title: "定例会・議会資料",
+    description: "延岡市議会の定例会・臨時会ごとに、議案書・会議録等の議会資料を一覧で確認できます。",
+    url: "/council-documents",
+    keywords: ["定例会", "臨時会", "議会資料", "議案書", "会議録"],
+  },
+  {
+    id: "page-themes",
+    title: "テーマから探す",
+    description: "延岡市議会の一般質問・質疑を、公式会議録本文から確認できたテーマ（子育て・福祉・防災・人口減少など）別に整理しています。",
+    url: "/themes",
+    keywords: ["テーマ", "分野別", "子育て", "福祉", "防災", "人口減少"],
+  },
+  {
+    id: "page-executive-answers",
+    title: "市長・執行部答弁の検索",
+    description: "延岡市議会の一般質問に対する市長・執行部の答弁を、公式会議録本文から検索できます。",
+    url: "/executive-answers",
+    keywords: ["市長答弁", "執行部答弁", "一般質問", "会議録"],
+  },
+  {
+    id: "page-koho-search",
+    title: "広報のべおか　文字起こし検索",
+    description: "広報紙「広報のべおか」の紙面をテキスト化し、キーワードで検索できる試験公開中のツールです。",
+    url: "/koho-search",
+    keywords: ["広報のべおか", "広報紙", "文字起こし", "OCR"],
   },
 ];
 for (const p of staticPages) {

@@ -2788,6 +2788,7 @@ const VALID_SEARCH_TYPES = new Set([
   "political-fund",
   "committee",
   "election",
+  "theme",
   "page",
 ]);
 // 実在するルートの先頭一致のみを許可する（管理用・非公開データの混入を防ぐ）。

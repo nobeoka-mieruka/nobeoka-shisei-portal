@@ -32,8 +32,14 @@ const typeLabels: Record<SearchEntryType, string> = {
   guide: "市役所案内",
   "press-conference": "市長記者会見",
   election: "選挙結果",
+  theme: "質問テーマ",
   page: "固定ページ",
 };
+
+/** URLの?type=値が既知のtypeLabelsキーに一致する場合のみ受け付ける（不正な値の混入防止）。 */
+function isKnownSearchEntryType(value: string): value is SearchEntryType {
+  return value in typeLabels;
+}
 
 const sortOptions: { value: SearchSortKey; label: string }[] = [
   { value: "relevance", label: "関連度順" },
@@ -41,6 +47,10 @@ const sortOptions: { value: SearchSortKey; label: string }[] = [
   { value: "oldest", label: "古い順" },
   { value: "kana", label: "五十音順" },
 ];
+const SORT_KEYS = new Set(sortOptions.map((o) => o.value));
+function isKnownSortKey(value: string): value is SearchSortKey {
+  return SORT_KEYS.has(value as SearchSortKey);
+}
 
 const EXAMPLE_KEYWORDS = ["市長公約", "一般質問", "議案", "条例", "政策", "子育て", "防災", "報酬", "財政", "市役所案内"];
 
@@ -53,11 +63,17 @@ const linkClass =
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
-  const [typeFilter, setTypeFilter] = useState<"all" | SearchEntryType>("all");
+  const [typeFilter, setTypeFilter] = useState<"all" | SearchEntryType>(() => {
+    const t = searchParams.get("type") ?? "";
+    return t && isKnownSearchEntryType(t) ? t : "all";
+  });
   const [fiscalYearFilter, setFiscalYearFilter] = useState(() => searchParams.get("fiscalYear") ?? "");
   const [verificationStatusFilter, setVerificationStatusFilter] = useState(() => searchParams.get("verificationStatus") ?? "");
   const [includeAi, setIncludeAi] = useState(() => searchParams.get("includeAi") === "true");
-  const [sort, setSort] = useState<SearchSortKey>("relevance");
+  const [sort, setSort] = useState<SearchSortKey>(() => {
+    const s = searchParams.get("sort") ?? "";
+    return s && isKnownSortKey(s) ? s : "relevance";
+  });
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeSuggestion, setActiveSuggestion] = useState(-1);
@@ -72,11 +88,22 @@ export function SearchPage() {
   }, [searchParams]);
 
   // 入力を少し待ってからURLへ反映する（共有・戻るボタン対応。結果自体は待たずに即時更新）。
+  // 既存のfiscalYear・type等のクエリを消さないよう、常にsearchParamsを丸ごと置き換えるのではなく
+  // 現在の値をベースに?qだけを更新する（過去、絞り込み中に検索語を変えると年度・種類等の
+  // 絞り込みがURLから消えてしまう不具合があったため修正）。
   useEffect(() => {
     const timer = setTimeout(() => {
       const current = searchParams.get("q") ?? "";
       if (current !== query) {
-        setSearchParams(query ? { q: query } : {}, { replace: true });
+        setSearchParams(
+          (prev) => {
+            const next = new URLSearchParams(prev);
+            if (query) next.set("q", query);
+            else next.delete("q");
+            return next;
+          },
+          { replace: true },
+        );
         if (query.trim()) addTerm(query.trim());
       }
     }, URL_SYNC_DELAY_MS);
@@ -88,19 +115,23 @@ export function SearchPage() {
     setVisibleCount(PAGE_SIZE);
   }, [query, typeFilter, fiscalYearFilter, verificationStatusFilter, includeAi, sort]);
 
-  // 年度・確認状況・AI候補を含めるかの絞り込みは、選択のたびに即座にURLへ反映する
-  // （検索結果URLを共有できるようにするため）。
+  // 種類・年度・確認状況・並び替え・AI候補を含めるかの絞り込みは、選択のたびに即座にURLへ反映する
+  // （検索結果URLを共有・ブックマークでき、戻る操作でも絞り込み条件が失われないようにするため）。
   useEffect(() => {
     const next = new URLSearchParams(searchParams);
+    if (typeFilter !== "all") next.set("type", typeFilter);
+    else next.delete("type");
     if (fiscalYearFilter) next.set("fiscalYear", fiscalYearFilter);
     else next.delete("fiscalYear");
     if (verificationStatusFilter) next.set("verificationStatus", verificationStatusFilter);
     else next.delete("verificationStatus");
     if (includeAi) next.set("includeAi", "true");
     else next.delete("includeAi");
+    if (sort !== "relevance") next.set("sort", sort);
+    else next.delete("sort");
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fiscalYearFilter, verificationStatusFilter, includeAi]);
+  }, [typeFilter, fiscalYearFilter, verificationStatusFilter, includeAi, sort]);
 
   const hasQuery = query.trim().length > 0;
 
@@ -159,7 +190,15 @@ export function SearchPage() {
     setShowSuggestions(false);
     setActiveSuggestion(-1);
     if (value.trim()) {
-      setSearchParams({ q: value }, { replace: true });
+      // 既存の絞り込み（type・fiscalYear等）を保ったまま?qだけを更新する。
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          next.set("q", value);
+          return next;
+        },
+        { replace: true },
+      );
       addTerm(value.trim());
     }
   };
