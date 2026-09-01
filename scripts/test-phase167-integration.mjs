@@ -39,10 +39,24 @@ check("Phase163：会期要約19件のうち10件に公式資料（議案等審�
     assert.ok(s.documents && s.documents.length > 0, `${id}にdocumentsが登録されていません`);
     assert.ok(s.summary && !s.summary.includes("令和-"), `${id}のsummaryに不正な元号表記が含まれています`);
   }
-  const stillUnavailableIds = ["2000-09", "2004-06", "2005-09", "2006-06", "2012-09", "2013-06", "2013-09", "2014-03", "2014-09"];
+  // 【Phase175追記】Phase163時点でunavailableのまま残っていた9会期のうち、Phase175でNDLサーチ
+  // （国立国会図書館サーチ）の書誌情報を新規発見できた8会期はpartially-verifiedへ前進した。
+  // 2014-03のみ対応するNDLサーチ書誌が見つからず、unavailableのまま（UNR-061参照）。
+  const stillUnavailableIds = ["2014-03"];
   for (const id of stillUnavailableIds) {
     const s = cs.find((x) => x.id === id);
-    assert.equal(s.summaryStatus, "unavailable", `${id}のsummaryStatusがunavailableのままのはずです（一次資料が見つからなかったため）`);
+    assert.equal(s.summaryStatus, "unavailable", `${id}のsummaryStatusがunavailableのままのはずです（NDLサーチにも書誌が見つからなかったため）`);
+  }
+  const phase175ImprovedIds = ["2000-09", "2004-06", "2005-09", "2006-06", "2012-09", "2013-06", "2013-09", "2014-09"];
+  for (const id of phase175ImprovedIds) {
+    const s = cs.find((x) => x.id === id);
+    assert.ok(s, `${id}がcouncilSessions.jsonに見つかりません`);
+    assert.equal(s.summaryStatus, "partially-verified", `${id}のsummaryStatusがpartially-verifiedではありません（${s.summaryStatus}）`);
+    assert.ok(s.documents && s.documents.length > 0, `${id}にdocumentsが登録されていません`);
+    assert.ok(
+      s.documents.some((d) => d.category === "minutes" && d.storageType === "external" && (d.sourceUrl ?? "").includes("ndlsearch.ndl.go.jp")),
+      `${id}にNDLサーチの書誌情報（minutes/external）が登録されていません`,
+    );
   }
 });
 
