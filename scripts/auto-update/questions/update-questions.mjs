@@ -45,6 +45,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { fetchWithRetry } from "../core/fetch.mjs";
 import { classifyItem, checkCircuitBreaker } from "../core/classify.mjs";
 import { validateEntry } from "../core/validate.mjs";
@@ -118,6 +119,101 @@ export function deriveSessionInfo(title) {
   return { sessionId, questionDate, sessionName };
 }
 
+/**
+ * 質問通告書1件分について、outcome（new/updated/unchanged/removed_candidate）・
+ * 「予定」と「確認済み」の混同防止のための異常検知（anomalyDetected）・人間確認要否を
+ * 判定する（I/O・非同期処理を一切含まない純粋関数）。
+ *
+ * 【回帰テストの主対象】この関数は「会議録公開後、質問通告書だけで確認済み（登壇済み）へ
+ * 昇格してしまわないこと」を保証する中核ロジックであり、scripts/test-question-notice-lifecycle.mjs
+ * から直接呼び出して検証する。会議録公開後の安全な遷移は、
+ *   1. questionCollectionStatus.jsonの該当会期がtranscriptAvailable:trueになる
+ *   2. その状態で該当会期の質問通告書を検出すると、本関数がanomalyDetected=trueを返し、
+ *      classifyItem()が無条件でRED（自動反映対象外）にする
+ *   3. 人間が会議録本文を確認し、councilSpeechSummaries.jsonへ手動で追加登録する
+ *      （このパイプラインはconfirmed側のデータへは一切書き込まない）
+ * という3段階を経る設計である。
+ */
+export function evaluateQuestionNoticeRecord(record, { generalQuestionsByUrl, transcriptAvailableSessionIds, memberIdSet, allowedHosts }) {
+  const sessionInfo = deriveSessionInfo(record.title);
+
+  const validationEntryObj = {
+    sourceUrl: record.sourceUrl,
+    sessionId: sessionInfo?.sessionId ?? null,
+    memberName: record.memberName,
+    questionDate: sessionInfo?.questionDate ?? null,
+    title: record.title,
+  };
+  const validation = validateEntry(validationEntryObj, {
+    allowedHosts,
+    requiredFields: ["memberName", "questionDate", "title"],
+  });
+
+  const memberIdKnown = record.memberId !== null && record.memberId !== undefined;
+  const memberIdValid = !memberIdKnown || memberIdSet.has(record.memberId);
+
+  let outcome;
+  const mismatches = [];
+  if (record.status !== "published") {
+    outcome = "removed_candidate";
+  } else {
+    const gq = generalQuestionsByUrl.get(record.sourceUrl);
+    if (!gq) {
+      outcome = "new";
+    } else {
+      if (gq.memberId !== record.memberId) {
+        mismatches.push(`memberId不一致（登録済み予定質問:${gq.memberId} / 今回検出:${record.memberId}）`);
+      }
+      if (sessionInfo && gq.sessionName !== sessionInfo.sessionName) {
+        mismatches.push(`sessionName不一致（登録済み予定質問:${gq.sessionName} / 今回検出:${sessionInfo.sessionName}）`);
+      }
+      if (sessionInfo && gq.questionDate !== sessionInfo.questionDate) {
+        mismatches.push(`questionDate不一致（登録済み予定質問:${gq.questionDate} / 今回検出:${sessionInfo.questionDate}）`);
+      }
+      outcome = mismatches.length > 0 ? "updated" : "unchanged";
+    }
+  }
+
+  const sessionTranscriptAlreadyPublic = sessionInfo ? transcriptAvailableSessionIds.has(sessionInfo.sessionId) : false;
+
+  const anomalyDetected = sessionTranscriptAlreadyPublic || (memberIdKnown && !memberIdValid);
+  const anomalyReason = sessionTranscriptAlreadyPublic
+    ? `検出会期(${sessionInfo?.sessionId})はquestionCollectionStatus.json上で既にtranscriptAvailable=true（会議録確認済み）。予定質問の通告書検出と確認済み会期が重複しており、「予定」と「確認済み」の混同防止のため自動反映不可`
+    : memberIdKnown && !memberIdValid
+      ? `memberId(${record.memberId})がmembers.jsonに存在しない`
+      : undefined;
+
+  const requiresHumanReview =
+    outcome === "new" ||
+    outcome === "updated" ||
+    outcome === "removed_candidate" ||
+    record.speakerIdentificationStatus !== "confirmed";
+  const humanReviewReason =
+    outcome === "new"
+      ? "新規検出の質問通告書。予定質問（generalQuestions.json）として追加する前に人間確認が必要（会議録は未公開のため確認済みへの昇格は行わない）"
+      : outcome === "updated"
+        ? `既存の予定質問登録内容と差分あり: ${mismatches.join("; ")}`
+        : outcome === "removed_candidate"
+          ? undefined // classify.mjs内でoutcome==="removed_candidate"は無条件YELLOW固定文言になる
+          : record.speakerIdentificationStatus !== "confirmed"
+            ? `質問者（議員）の自動特定ができていない通告書（speakerIdentificationStatus=${record.speakerIdentificationStatus}）`
+            : undefined;
+
+  return {
+    sessionInfo,
+    validation,
+    memberIdKnown,
+    memberIdValid,
+    outcome,
+    mismatches,
+    sessionTranscriptAlreadyPublic,
+    anomalyDetected,
+    anomalyReason,
+    requiresHumanReview,
+    humanReviewReason,
+  };
+}
+
 /** 新規候補（generalQuestions.json未登録）についてのみ、実到達性・ハッシュを確認する（保存はしない）。 */
 async function probeNewDocument(sourceUrl) {
   try {
@@ -177,46 +273,20 @@ async function main() {
 
   const classifiedEntries = [];
   for (const record of questionNoticeRecords) {
-    const sessionInfo = deriveSessionInfo(record.title);
-
-    const validationEntryObj = {
-      sourceUrl: record.sourceUrl,
-      sessionId: sessionInfo?.sessionId ?? null,
-      memberName: record.memberName,
-      questionDate: sessionInfo?.questionDate ?? null,
-      title: record.title,
-    };
-    const validation = validateEntry(validationEntryObj, {
+    const {
+      sessionInfo,
+      validation,
+      outcome,
+      anomalyDetected,
+      anomalyReason,
+      requiresHumanReview,
+      humanReviewReason,
+    } = evaluateQuestionNoticeRecord(record, {
+      generalQuestionsByUrl,
+      transcriptAvailableSessionIds,
+      memberIdSet,
       allowedHosts: ALLOWED_HOSTS,
-      requiredFields: ["memberName", "questionDate", "title"],
     });
-
-    const memberIdKnown = record.memberId !== null && record.memberId !== undefined;
-    const memberIdValid = !memberIdKnown || memberIdSet.has(record.memberId);
-
-    let outcome;
-    const mismatches = [];
-    if (record.status !== "published") {
-      outcome = "removed_candidate";
-    } else {
-      const gq = generalQuestionsByUrl.get(record.sourceUrl);
-      if (!gq) {
-        outcome = "new";
-      } else {
-        if (gq.memberId !== record.memberId) {
-          mismatches.push(`memberId不一致（登録済み予定質問:${gq.memberId} / 今回検出:${record.memberId}）`);
-        }
-        if (sessionInfo && gq.sessionName !== sessionInfo.sessionName) {
-          mismatches.push(`sessionName不一致（登録済み予定質問:${gq.sessionName} / 今回検出:${sessionInfo.sessionName}）`);
-        }
-        if (sessionInfo && gq.questionDate !== sessionInfo.questionDate) {
-          mismatches.push(`questionDate不一致（登録済み予定質問:${gq.questionDate} / 今回検出:${sessionInfo.questionDate}）`);
-        }
-        outcome = mismatches.length > 0 ? "updated" : "unchanged";
-      }
-    }
-
-    const sessionTranscriptAlreadyPublic = sessionInfo ? transcriptAvailableSessionIds.has(sessionInfo.sessionId) : false;
 
     let probe = null;
     let reachable;
@@ -241,29 +311,6 @@ async function main() {
       httpStatus = null;
       extractionStatus = "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）";
     }
-
-    const anomalyDetected = sessionTranscriptAlreadyPublic || (memberIdKnown && !memberIdValid);
-    const anomalyReason = sessionTranscriptAlreadyPublic
-      ? `検出会期(${sessionInfo?.sessionId})はquestionCollectionStatus.json上で既にtranscriptAvailable=true（会議録確認済み）。予定質問の通告書検出と確認済み会期が重複しており、「予定」と「確認済み」の混同防止のため自動反映不可`
-      : memberIdKnown && !memberIdValid
-        ? `memberId(${record.memberId})がmembers.jsonに存在しない`
-        : undefined;
-
-    const requiresHumanReview =
-      outcome === "new" ||
-      outcome === "updated" ||
-      outcome === "removed_candidate" ||
-      record.speakerIdentificationStatus !== "confirmed";
-    const humanReviewReason =
-      outcome === "new"
-        ? "新規検出の質問通告書。予定質問（generalQuestions.json）として追加する前に人間確認が必要（会議録は未公開のため確認済みへの昇格は行わない）"
-        : outcome === "updated"
-          ? `既存の予定質問登録内容と差分あり: ${mismatches.join("; ")}`
-          : outcome === "removed_candidate"
-            ? undefined // classify.mjs内でoutcome==="removed_candidate"は無条件YELLOW固定文言になる
-            : record.speakerIdentificationStatus !== "confirmed"
-              ? `質問者（議員）の自動特定ができていない通告書（speakerIdentificationStatus=${record.speakerIdentificationStatus}）`
-              : undefined;
 
     const result = classifyItem({
       schemaValid: validation.valid,
@@ -391,4 +438,10 @@ async function main() {
   process.exitCode = summary.red > 0 ? 1 : 0;
 }
 
-main();
+// `node scripts/auto-update/questions/update-questions.mjs`として直接実行された場合のみ本処理を
+// 実行する（scripts/test-question-notice-lifecycle.mjs等から deriveSessionInfo /
+// evaluateQuestionNoticeRecord のみをimportして使う場合に、ネットワーク取得を伴う
+// main()が副作用として実行されてしまわないようにするため）。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}

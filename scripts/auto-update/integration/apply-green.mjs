@@ -31,6 +31,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { AUTO_UPDATE_DIR, STATUS_PATH, readStatus } from "../core/report.mjs";
 
 /**
@@ -197,4 +198,9 @@ async function main() {
   console.log(`[apply-green] status.json参照元: ${STATUS_PATH}`);
 }
 
-main();
+// `node scripts/auto-update/integration/apply-green.mjs`として直接実行された場合のみ実行する
+// （回帰テスト等からreadAutoApplyGreenFlag／listApplicableGreenItems／isEligibleForAutoApplyの
+// みをimportして使う場合に、CLI引数必須のmain()が副作用として実行されないようにするため）。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}
