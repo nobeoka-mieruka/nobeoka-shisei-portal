@@ -64,6 +64,20 @@ export function countDayPreciseTerms(terms: ArchiveMayorTerm[]): number {
   return terms.filter(isDayPreciseTerm).length;
 }
 
+/**
+ * 就任日（day単位で確認済みのtermStart）から基準日までの在任日数を算出する。
+ * 就任日当日を1日目として数える（例：就任日と同じ日が基準日なら1日）。
+ * 呼び出し側は、必ずisDayPreciseTerm()がtrueの任期でのみ使うこと（月・年単位の
+ * 概算日付から日数を計算すると、不正確な数値を確定した事実であるかのように
+ * 見せてしまうため）。
+ * @param todayIso 呼び出し元の「今日」（JST基準のYYYY-MM-DD）。
+ */
+export function daysInOffice(termStartIso: string, todayIso: string): number {
+  const start = new Date(`${termStartIso}T00:00:00Z`).getTime();
+  const today = new Date(`${todayIso}T00:00:00Z`).getTime();
+  return Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
+}
+
 /** 就任回数の表示用テキスト。件数不明の場合はterms配列長を使わず「確認中」とする。 */
 export function mayorTermCountLabel(mayor: ArchiveMayor, terms: ArchiveMayorTerm[]): string {
   const own = termsForMayor(terms, mayor.id);

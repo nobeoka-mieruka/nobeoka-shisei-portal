@@ -2,6 +2,9 @@ import { useMemo } from "react";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
 import mayorData from "../data/mayor.json";
+import mayorPromisesData from "../data/mayorPromises.json";
+import archiveMayorsData from "../data/archiveMayors.json";
+import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSessionsData from "../data/councilSessions.json";
@@ -11,17 +14,21 @@ import type {
   CouncilMember,
   Gender,
   Mayor,
+  MayorPromisesData,
   GeneralQuestionItem,
   BillVoteItem,
   CouncilSession,
+  CouncilSpeech,
   CouncilSpeechSummaryData,
   FormerMember,
   FinanceDashboardData,
 } from "../types";
+import type { ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
 import { getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { BarList, type BarListItem } from "../components/dashboard/BarList";
 import { ProgressStat } from "../components/dashboard/ProgressStat";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -41,10 +48,17 @@ import {
   aggregateConfirmedQuestionsByTopic,
   calculateGeneralQuestionStats,
 } from "../lib/generalQuestionStats";
+import { termsForMayor, formatArchiveDateWithPrecision, isDayPreciseTerm, daysInOffice } from "../lib/archiveMayors";
+import { committees as councilCommittees } from "../lib/committees";
+import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
+import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
 const mayor = mayorData as Mayor;
+const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
+const archiveMayors = archiveMayorsData as ArchiveMayor[];
+const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
@@ -54,6 +68,25 @@ const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, g
 const confirmedQuestionMemberIds = new Set(
   questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).map((s) => s.memberId),
 );
+
+// Phase185：現職市長の任期情報は、市長プロフィール（mayor.json）ではなく、日付精度まで
+// 管理している延岡市政アーカイブ（archiveMayors.json／archiveMayorTerms.json）を単一情報源とする
+// （MayorsPage.tsx等と同じ既存データ・既存関数を再利用し、就任日を独自に書き起こさない）。
+const currentArchiveMayor = archiveMayors.find((m) => m.isCurrentMayor);
+const currentMayorTerm = currentArchiveMayor
+  ? termsForMayor(archiveMayorTerms, currentArchiveMayor.id).at(-1)
+  : undefined;
+
+// Phase185：会期一覧（councilSessions.json）のidは"YYYY-MM"または"YYYY-MM-extraordinary"形式で
+// 常に開催年月の昇順になっているため、文字列の降順ソートで最新会期を取得できる
+// （startDateが未確認の会期が多く、日付フィールドでは並べ替えられないため）。
+const latestCouncilSession = [...councilSessions].sort((a, b) => b.id.localeCompare(a.id))[0] as
+  | CouncilSession
+  | undefined;
+const latestSessionBills = latestCouncilSession
+  ? billVotes.filter((b) => b.sessionId === latestCouncilSession.id)
+  : [];
+const latestSessionBillsWithResult = latestSessionBills.filter((b) => b.result !== "確認中").length;
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -269,6 +302,51 @@ export function DashboardPage() {
     return { photo, profile, profileUrl, sns, questions, votes, reports };
   }, []);
 
+  // Phase185：市長の在任日数は「今日」に依存するため、他の集計と異なりコンポーネント内で
+  // 都度算出する（MayorsPage.tsxのtodayIsoJst算出と同じJST変換方法に揃える）。
+  const todayIsoJst = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const daysInOfficeCount =
+    currentMayorTerm && isDayPreciseTerm(currentMayorTerm)
+      ? daysInOffice(currentMayorTerm.termStart, todayIsoJst)
+      : null;
+
+  // Phase185：市長公約の進捗状況は、mayor.pledges（マニフェストの大項目、進捗状況を持たない）
+  // ではなく、進捗を個別に追跡しているmayorPromises.json（MayorPromiseItem[]）を集計元とする
+  // （2つの「公約」データは数え方が異なるため混同しない。詳細は下記の案内文で明示する）。
+  const pledgeStatusItems: BarListItem[] = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of mayorPromises) {
+      counts.set(p.statusLabel, (counts.get(p.statusLabel) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([label, count]) => ({ key: label, label, count }))
+      .sort((a, b) => b.count - a.count);
+  }, []);
+
+  const latestDecidedBillDisplay = useMemo(() => {
+    const dated = billVotes
+      .filter((b): b is BillVoteItem & { votingDate: string } => !!b.votingDate)
+      .sort((a, b) => b.votingDate.localeCompare(a.votingDate));
+    const latest = dated[0];
+    if (!latest) return undefined;
+    return { date: latest.votingDate, title: latest.billTitle, result: latest.result, href: `/bills/votes/${latest.id}` };
+  }, []);
+
+  const latestConfirmedQuestionDisplay = useMemo(() => {
+    const dated = questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members))
+      .map((s) => (s.date ? { speech: s, date: s.date } : null))
+      .filter((x): x is { speech: CouncilSpeech; date: string } => x !== null)
+      .sort((a, b) => b.date.localeCompare(a.date));
+    const latest = dated[0];
+    if (!latest) return undefined;
+    return {
+      date: latest.date,
+      name: resolveMemberDisplayName(latest.speech.memberId, members, formerMembers),
+      topicsLabel: latest.speech.topics.slice(0, 2).join("、") || "テーマ確認中",
+      href: `/members/${latest.speech.memberId}/questions/${latest.speech.id}`,
+    };
+  }, []);
+
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
       {seo.jsonLd.map((entry) => (
@@ -287,11 +365,126 @@ export function DashboardPage() {
         </Link>
       </div>
 
+      {/* Phase185：最初の数十秒で「延岡市政で今何が起きているか」を把握できるよう、
+          市長・議会・直近の動きの3枚を、詳細な内訳（下部の会派別人数等）より前に置く。
+          数値はすべて既存データ（archiveMayors.json・archiveMayorTerms.json・
+          mayorPromises.json・councilSessions.json・billVotes.json・councilSpeechSummaries.json）
+          から自動算出し、固定値はハードコードしない。 */}
+      <SectionCard title="市長">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <StatCard label="氏名" value={mayor.name} compact />
+          <StatCard
+            label="就任日"
+            value={
+              currentMayorTerm
+                ? formatArchiveDateWithPrecision(currentMayorTerm.termStart, currentMayorTerm.termStartPrecision, formatJapaneseDate)
+                : "確認中"
+            }
+            compact
+          />
+          <StatCard
+            label="在任日数"
+            value={daysInOfficeCount ?? "確認中"}
+            unit={daysInOfficeCount !== null ? "日" : undefined}
+            hint={daysInOfficeCount !== null ? "就任日を1日目として算出しています（毎日自動更新）。" : undefined}
+          />
+          <StatCard
+            label="進捗を確認できる公約項目数"
+            value={mayorPromises.length}
+            unit="件"
+            hint="市長公約の進捗状況ページで個別に進捗を追跡している項目数です。マニフェストの大項目数（下記「市長公約の登録数」）とは数え方が異なります。"
+          />
+        </div>
+        {pledgeStatusItems.length > 0 && (
+          <div className="mt-4">
+            <p className="mb-2 text-xs text-on-surface-variant">
+              公約の進捗状況（{mayorPromises.length}件の内訳）
+            </p>
+            <BarList items={pledgeStatusItems} unit="件" />
+          </div>
+        )}
+        <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
+          進捗状況は、市長本人の公表資料・延岡市の公開資料に基づく分類であり、当サイト独自の達成率評価ではありません。
+        </p>
+        <Link to="/mayor/policy-progress" className="mt-2 inline-block text-sm text-primary hover:underline">
+          市長公約の進捗状況を詳しく見る
+        </Link>
+      </SectionCard>
+
+      <SectionCard title="今の会期・委員会">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <StatCard label="直近の会期" value={latestCouncilSession?.title ?? "確認中"} compact />
+          <StatCard label="会期区分" value={latestCouncilSession?.sessionType ?? "確認中"} compact />
+          <StatCard
+            label="この会期の登録議案数"
+            value={latestSessionBills.length}
+            unit="件"
+            hint={`うち議決結果が確認できた件数：${latestSessionBillsWithResult}件`}
+          />
+          <StatCard
+            label="常任・特別委員会数"
+            value={councilCommittees.length}
+            unit="委員会"
+            hint="議会運営委員会を含みます。予算・決算審査特別委員会等、会期ごとに設置される臨時の委員会は含みません。"
+          />
+        </div>
+        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+          {latestCouncilSession && (
+            <Link to={`/council-documents/${latestCouncilSession.id}`} className="text-primary hover:underline">
+              この会期の資料を見る
+            </Link>
+          )}
+          <Link to="/committees" className="text-primary hover:underline">
+            委員会の一覧を見る
+          </Link>
+        </div>
+      </SectionCard>
+
+      {(latestDecidedBillDisplay || latestConfirmedQuestionDisplay) && (
+        <SectionCard title="最近の動き">
+          <ul className="space-y-2">
+            {latestDecidedBillDisplay && (
+              <li className="rounded-xl bg-surface-container-low p-3.5 shadow-e1 sm:p-4">
+                <Link to={latestDecidedBillDisplay.href} className="block rounded-lg">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                    <span>{formatJapaneseDate(latestDecidedBillDisplay.date)}</span>
+                    <span className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-xs font-semibold text-on-surface-variant">
+                      議案
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm font-medium text-on-surface">
+                    {latestDecidedBillDisplay.title}（{latestDecidedBillDisplay.result}）
+                  </p>
+                </Link>
+              </li>
+            )}
+            {latestConfirmedQuestionDisplay && (
+              <li className="rounded-xl bg-surface-container-low p-3.5 shadow-e1 sm:p-4">
+                <Link to={latestConfirmedQuestionDisplay.href} className="block rounded-lg">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
+                    <span>{formatJapaneseDate(latestConfirmedQuestionDisplay.date)}</span>
+                    <span className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-xs font-semibold text-on-surface-variant">
+                      一般質問
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm font-medium text-on-surface">
+                    {latestConfirmedQuestionDisplay.name}議員（{latestConfirmedQuestionDisplay.topicsLabel}）
+                  </p>
+                </Link>
+              </li>
+            )}
+          </ul>
+          <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+            会議録・議案審議結果として当サイトが確認できたもののうち、最も新しい日付のものです（発生順ではなく確認・登録順の場合があります）。
+          </p>
+        </SectionCard>
+      )}
+
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard label="定数" value={COUNCIL_STATUTORY_SEATS} unit="名" />
         <StatCard label="現員" value={total} unit="名" />
         <StatCard label="欠員" value={vacancySeats} unit="名" />
-        <StatCard label="会派数" value={factionCount} unit="会派" />
+        <StatCard label="会派数" value={factionCount} unit="会派" hint={COUNCIL_GLOSSARY["会派"]} />
         <StatCard label="平均年齢" value={averageAge ?? "—"} unit={averageAge !== null ? "歳" : undefined} />
         <StatCard label="女性議員数" value={femaleCount} unit="名" />
       </div>
@@ -320,8 +513,18 @@ export function DashboardPage() {
           />
         )}
         <StatCard label="登録済み議案数" value={totalBills} unit="件" hint={coverageHint("billVotes", totalBills)} />
-        <StatCard label="採決情報が確認できた議案数" value={billsWithResult} unit="件" />
-        <StatCard label="市長公約の登録数" value={totalPledges} unit="件" />
+        <StatCard
+          label="採決情報が確認できた議案数"
+          value={billsWithResult}
+          unit="件"
+          hint={`登録済み${totalBills}件のうち、議決結果（可決・否決等）が公式資料で確認できた件数です。`}
+        />
+        <StatCard
+          label="市長公約の登録数"
+          value={totalPledges}
+          unit="件"
+          hint={`現職市長（${mayor.name}）の公約のマニフェスト上の大項目数です。進捗を個別に追跡している項目数は上記「市長」欄をご覧ください。`}
+        />
       </div>
 
       {/* Phase123：市議会の構成に加え、延岡市全体の基礎データ（人口・財政）を1画面で概観できるように
@@ -373,6 +576,7 @@ export function DashboardPage() {
                 ? `${finance.financialIndicators.currentBalanceRatioPercent}％`
                 : "確認中"
             }
+            hint={FINANCE_GLOSSARY["経常収支比率"]}
             compact
           />
         </div>
@@ -382,6 +586,7 @@ export function DashboardPage() {
       </SectionCard>
 
       <SectionCard title="会派別人数">
+        <GlossaryNote term="会派" definition={COUNCIL_GLOSSARY["会派"]} className="mb-3" />
         <BarList items={factionItems} />
       </SectionCard>
 

@@ -17,6 +17,7 @@ import type {
 } from "../types";
 import { allFactions, getFaction } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
+import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
 import { MemberCard } from "../components/MemberCard";
 import { SearchBar } from "../components/SearchBar";
 import { FactionFilter } from "../components/FactionFilter";
@@ -553,11 +554,7 @@ export function HomePage() {
         </summary>
 
         <div className="px-4 pb-4 sm:px-5">
-          <GlossaryNote
-            term="会派"
-            definition="考え方が近い議員同士が議会内で作るグループです。政党の名称と一致する場合もあれば、一致しない場合もあります。"
-            className="mb-3"
-          />
+          <GlossaryNote term="会派" definition={COUNCIL_GLOSSARY["会派"]} className="mb-3" />
           <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
             <SearchBar value={query} onChange={setQuery} />
             <FactionFilter factions={allFactions} selected={factionId} onChange={setFactionId} />
