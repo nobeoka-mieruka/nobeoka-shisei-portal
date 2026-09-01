@@ -64,6 +64,31 @@ check("Level3の議案は、すべて次の7条件を満たす（項目14）：�
   assert.equal(violations.length, 0, `Level3条件を満たさない議案: ${violations.join("、")}`);
 });
 
+check("Phase146でR1（REVIEW内NEAR_SAFE候補）36件を一次資料検証し、Level3化した15件・Level2止まりとした11件が、それぞれ意図通りの区分になっている（無理な昇格・意図しない後退が無いことの固定リスト回帰）", () => {
+  const phase146Level3Ids = [
+    "2023-05-gian-7", "2023-07-extraordinary-02-gian-28", "2024-09-gian-39",
+    "2025-07-extraordinary-gian-38", "2025-09-gian-52", "2025-09-gian-53",
+    "2022-03-gian-134", "2020-09-gian-40", "2020-09-gian-41", "2020-09-gian-42",
+    "2020-06-gian-23", "2019-09-gian-47", "2019-09-gian-53", "2019-09-gian-54", "2019-06-gian-19",
+  ];
+  const phase146Level2Ids = [
+    "2023-05-gian-8", "2025-01-extraordinary-gian-110", "2022-06-gian-20",
+    "2020-06-gian-22", "2019-06-gian-23",
+    "2025-03-gian-144", "2025-03-gian-145", "2022-03-gian-144", "2022-03-gian-145",
+    "2020-09-gian-53", "2020-09-gian-54",
+  ];
+  assert.equal(phase146Level3Ids.length, 15, "Phase146 Level3固定リストの件数が15件ではありません");
+  assert.equal(phase146Level2Ids.length, 11, "Phase146 Level2固定リストの件数が11件ではありません");
+  for (const id of phase146Level3Ids) {
+    const b = billVotes.find((x) => x.id === id);
+    assert.ok(b && isLevel3(b), `${id}はPhase146でLevel3化されているはずですが、Level3条件を満たしていません`);
+  }
+  for (const id of phase146Level2Ids) {
+    const b = billVotes.find((x) => x.id === id);
+    assert.ok(b && isLevel2(b), `${id}はPhase146でLevel2止まりとしたはずですが、Level2条件を満たしていません`);
+  }
+});
+
 check("Level2（本文確認済み・独自要約なし）の議案は、すべてsourceTextVerifiedAtを持ち、reasonやcitizenImpact等の独自内容を持たない（項目28：議案第162号を含む）", () => {
   const level2Bills = billVotes.filter(isLevel2);
   assert.ok(level2Bills.length > 0, "Level2の議案が1件もありません");
