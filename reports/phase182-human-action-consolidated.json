@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-09-01T23:00:00+09:00",
+  "purpose": "Phase182：UNR台帳・INQ台帳・現地調査チェックリスト（onsite-research-checklist、mayor-term-gaps-field-kit）を横断的に整理し、同一案件の三重管理を検査した上で、未解決事項をA（オンライン調査完了・未解決）／B（照会すれば解決可能）／C（現地資料確認が必要）の3種類へ分類したもの。",
+  "methodology": "UNR台帳（reports/phase33-master-unresolved-ledger.json）の全48件のうち、currentStatus!=resolvedの41件を対象に、requiresOnsite/requiresInquiryフラグを機械的に集計して分類した。requiresOnsite=trueをC、requiresOnsite=false かつ requiresInquiry=trueをB、どちらもfalseをAとした。",
+  "tripleManagementCheck": {
+    "result": "問題となる三重管理は検出されなかった。",
+    "findings": [
+      "延岡市議会事務局宛の照会はINQ-012（1本）に統合済み。INQ-005（狭い旧版）はnextActionで『INQ-012に統合可能、重複送付を避ける』と明記されており、実際に2通とも送付されるリスクはない。",
+      "延岡市選挙管理委員会宛の照会も同様にINQ-013（1本）に統合済み。INQ-006（狭い旧版）はnextActionで統合案内済み。",
+      "市長任期13区間（UNR-029）は、UNR台帳（ステータス管理）・onsite-research-checklist.json（現地訪問の概要リスト）・mayor-term-gaps-field-kit.json（Phase181、区間ごとの詳細現地調査票）の3ファイルに存在するが、これは重複登録ではなく「概要→詳細」の階層構造であり、相互参照されている（3ファイルとも同一の13区間IDを使用し矛盾なし）。",
+      "会期票9会期（UNR-060・061）は、UNR台帳・councilSessions.json（公開データ）・新規INQ-019（宮崎県立図書館宛）の3箇所に存在するが、これも「内部管理／公開データ／外部照会」という異なる役割であり重複ではない。"
+    ]
+  },
+  "syncGapsFound": [
+    "UNR-005・009・010・011は、INQ-012（延岡市議会事務局宛、ready_to_send）の対象UNRとして実際に照会対象になっているにもかかわらず、UNR側のrequiresInquiryフラグがfalseのままだった（Phase78-138時点の古いフラグが未更新）。今回はUNR台帳のitems配列本体は変更せず、本ファイルで既知の不整合として記録するにとどめた（次フェーズでの是正候補）。"
+  ],
+  "categoryA_onlineExhausted": {
+    "description": "オンライン調査を複数フェーズにわたり実施済みで、これ以上のオンライン検索での改善可能性が低いと判断された項目。照会・現地確認いずれも現時点では設定されていないもの（多くは優先度が低い、または次の一次資料の手がかりが無い）。",
+    "count": 21,
+    "items": ["UNR-005", "UNR-009", "UNR-010", "UNR-011", "UNR-012", "UNR-013", "UNR-017", "UNR-020", "UNR-021", "UNR-022", "UNR-023", "UNR-024", "UNR-025", "UNR-031", "UNR-034", "UNR-038", "UNR-039", "UNR-040", "UNR-041", "UNR-050", "UNR-052"],
+    "note": "UNR-005・009・010・011は上記syncGapsFoundのとおりINQ-012で実質的に照会対象になっているため、運用上はB相当として扱われている。"
+  },
+  "categoryB_inquiryResolvable": {
+    "description": "延岡市の担当部署等への照会（郵送・メール・電話）で解決できる可能性が高い項目。現地訪問までは不要と判断されたもの。",
+    "count": 6,
+    "items": [
+      { "unr": "UNR-007", "inquiry": "INQ-008（宮崎県立図書館）" },
+      { "unr": "UNR-028", "inquiry": "INQ-013（延岡市選挙管理委員会）対象内" },
+      { "unr": "UNR-032", "inquiry": "INQ-012（延岡市議会事務局）確認事項4で対応" },
+      { "unr": "UNR-033", "inquiry": "未割当（延岡市教育委員会事務局＝INQ-007の対象拡張候補）" },
+      { "unr": "UNR-042", "inquiry": "INQ-012（延岡市議会事務局）確認事項5で対応" },
+      { "unr": "UNR-043", "inquiry": "INQ-012（延岡市議会事務局）確認事項5で対応" }
+    ]
+  },
+  "categoryC_onsiteRequired": {
+    "description": "図書館等での現物資料の閲覧が必要な項目。",
+    "count": 14,
+    "items": [
+      { "unr": "UNR-001", "target": "延岡市選挙管理委員会／宮崎県立図書館（INQ-013／INQ-008）" },
+      { "unr": "UNR-002", "target": "同上" },
+      { "unr": "UNR-003", "target": "同上" },
+      { "unr": "UNR-004", "target": "同上" },
+      { "unr": "UNR-006", "target": "延岡市教育委員会事務局（INQ-007）／図書館" },
+      { "unr": "UNR-008", "target": "延岡市議会事務局（INQ-012）" },
+      { "unr": "UNR-014", "target": "延岡市立図書館／宮崎県立図書館／延岡市役所（INQ-001,003,010,011,014,018）" },
+      { "unr": "UNR-015", "target": "同上" },
+      { "unr": "UNR-016", "target": "延岡市立図書館（INQ-009）" },
+      { "unr": "UNR-027", "target": "同上（INQ-001,010,011,014,018）" },
+      { "unr": "UNR-029", "target": "延岡市立図書館／宮崎県立図書館／国立国会図書館（現地調査票13件完成済み＝mayor-term-gaps-field-kit.json）" },
+      { "unr": "UNR-051", "target": "延岡市議会事務局（INQ-012確認事項4）／延岡市史等" },
+      { "unr": "UNR-060", "target": "宮崎県立図書館（新規INQ-019）" },
+      { "unr": "UNR-061", "target": "宮崎県立図書館（新規INQ-019）" }
+    ]
+  },
+  "consolidatedInquiryStatus": {
+    "totalInquiries": 19,
+    "readyToSendNotYetSent": 10,
+    "waitingResponse": 2,
+    "note": "詳細はreports/field-research/inquiry-status.jsonを参照。新規追加：INQ-019（宮崎県立図書館、会議録9会期分）。"
+  }
+}

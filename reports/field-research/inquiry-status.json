@@ -126,11 +126,11 @@
   {
    "inquiryId": "INQ-012",
    "institution": "延岡市議会事務局",
-   "targetUNRs": ["UNR-005", "UNR-008", "UNR-009", "UNR-010", "UNR-011", "UNR-016", "UNR-022", "UNR-031", "UNR-042", "UNR-043"],
+   "targetUNRs": ["UNR-005", "UNR-008", "UNR-009", "UNR-010", "UNR-011", "UNR-016", "UNR-022", "UNR-031", "UNR-042", "UNR-043", "UNR-050", "UNR-051", "UNR-052"],
    "status": "ready_to_send",
    "sentAt": null,
    "responseAt": null,
-   "nextAction": "差出人連絡先を記入のうえ送付。INQ-005と対象範囲が重なるため、どちらか一方のみ送付する（本文案での送付を推奨）。Phase173でUNR-042・UNR-043（政務活動費・費用弁償の制度存在）を対象に追加し、確認事項5を追記した。",
+   "nextAction": "差出人連絡先を記入のうえ送付。INQ-005と対象範囲が重なるため、どちらか一方のみ送付する（本文案での送付を推奨）。Phase173でUNR-042・UNR-043（政務活動費・費用弁償の制度存在）、Phase174でUNR-050〜052（旧任期委員会構成）を対象に追加し、確認事項4・5を追記した。Phase182で本レコードのtargetUNRsを実際の照会文（gikai-jimukyoku.md）の内容と同期させた（照会文自体の追加変更は無し）。市議会事務局宛の照会はこのINQ-012の1本のみに集約されており、他に同機関宛の未送付レコードはINQ-005（重複・送付しない）以外に存在しない。",
    "letterFile": "reports/field-research/inquiry-final/gikai-jimukyoku.md"
   },
   {
@@ -192,18 +192,28 @@
    "responseAt": null,
    "nextAction": "差出人連絡先を記入のうえ送付。簿冊番号5043・107051を優先して所蔵・閲覧方法・複写可否・情報公開請求要否を確認する。INQ-001・INQ-002とは別組織・別資料のため重複ではない。所在地は既存資料で未確認のため、来館前に電話・メールで確認する。",
    "letterFile": "reports/field-research/inquiry-final/miyazaki-monjo-center.md"
+  },
+  {
+   "inquiryId": "INQ-019",
+   "institution": "宮崎県立図書館（情報提供課・郷土情報担当）",
+   "targetUNRs": ["UNR-060", "UNR-061"],
+   "status": "ready_to_send",
+   "sentAt": null,
+   "responseAt": null,
+   "nextAction": "差出人連絡先を記入のうえ送付。INQ-001（同館、財政・人口データ対象）とは対象UNR・対象資料が異なるため別レコード（統合しない）。Phase175・179でNDLサーチにより新規発見した会議録9会期分の所蔵確認が目的。",
+   "letterFile": "reports/field-research/inquiry-final/miyazaki-library-council-minutes.md"
   }
  ],
  "summary": {
-  "totalInquiries": 18,
+  "totalInquiries": 19,
   "byStatus": {
    "draft": 7,
-   "ready_to_send": 9,
+   "ready_to_send": 10,
    "sent": 0,
    "waiting_response": 2,
    "answered": 0,
    "closed": 0
   },
-  "note": "waiting_response（2件）＝INQ-001・INQ-002（送付済み・回答待ち。statusは送付完了後の状態を表すためsentではなくwaiting_responseとした）。ready_to_send（9件）＝INQ-003, INQ-010, INQ-011, INQ-012, INQ-013, INQ-014, INQ-015, INQ-016, INQ-018（文面完成、差出人連絡先の記入のみ残る、または送付条件が明確な状態）。draft（7件）＝INQ-004, INQ-005, INQ-006, INQ-007, INQ-008, INQ-009（既存、対象範囲が狭い／対象外部署／宛先未確認等の理由でdraftのまま）、INQ-017（統計担当、所管部署未確定のためdraft）。合計 2+9+7=18件。"
+  "note": "waiting_response（2件）＝INQ-001・INQ-002（送付済み・回答待ち。statusは送付完了後の状態を表すためsentではなくwaiting_responseとした）。ready_to_send（10件）＝INQ-003, INQ-010, INQ-011, INQ-012, INQ-013, INQ-014, INQ-015, INQ-016, INQ-018, INQ-019（文面完成、差出人連絡先の記入のみ残る、または送付条件が明確な状態）。draft（7件）＝INQ-004, INQ-005, INQ-006, INQ-007, INQ-008, INQ-009（既存、対象範囲が狭い／対象外部署／宛先未確認等の理由でdraftのまま）、INQ-017（統計担当、所管部署未確定のためdraft）。合計 2+10+7=19件。 Phase182統合監査：同一機関へ複数の未送付レコードが存在するケース（延岡市議会事務局＝INQ-005/012、延岡市選挙管理委員会＝INQ-006/013）は、いずれも狭い版（draft）が広い版（ready_to_send）に統合済みである旨がnextActionに明記されており、実際に2通とも送付される二重送付のリスクは無いことを確認した。UNR台帳（reports/phase33-master-unresolved-ledger.json）・現地調査チェックリスト（onsite-research-checklist.json、mayor-term-gaps-field-kit.json）との突合も実施し、同一案件が3系統で矛盾する記載になっていないことを確認した（詳細はreports/phase182-human-action-consolidated.json参照）。"
  }
 }
