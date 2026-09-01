@@ -907,6 +907,58 @@ function validateRoleRankingFile(relPath) {
 validateRoleRankingFile("src/data/nationalCompensationRanking.json");
 validateRoleRankingFile("src/data/similarMunicipalityComparison.json");
 
+// --- executiveCompensationComparison.json（副市長・教育長の給料月額比較データ、Phase169で新設） ---
+try {
+  const executiveComp = readJson("src/data/executiveCompensationComparison.json");
+  const executiveCompIds = new Set();
+
+  for (const e of executiveComp) {
+    const tag = `executiveCompensationComparison.json (${e.id ?? e.municipality ?? "id不明"})`;
+
+    if (isBlank(e.id)) err(tag, "idが空です");
+    else if (executiveCompIds.has(e.id)) err(tag, `自治体IDが重複しています: ${e.id}`);
+    else executiveCompIds.add(e.id);
+
+    if (isBlank(e.municipality)) err(tag, "municipalityが空です");
+    if (isBlank(e.prefecture)) err(tag, "prefectureが空です");
+    if (!e.referenceDate || !DATE_RE.test(e.referenceDate)) err(tag, `referenceDateが未登録または形式が不正です: ${e.referenceDate}`);
+    if (e.confirmedAt && !DATE_RE.test(e.confirmedAt)) err(tag, `confirmedAtの形式が不正です: ${e.confirmedAt}`);
+
+    if (!Array.isArray(e.deputyMayors) || e.deputyMayors.length === 0) {
+      err(tag, "deputyMayorsが配列でないか空です（副市長データが未確認の場合でも、確認できていない旨をnotesに明記の上で空配列以外にする運用は行っていないため、必ず1件以上必要）");
+    } else {
+      for (const d of e.deputyMayors) {
+        if (!isPositiveAmount(d.monthly)) err(tag, `副市長の給料月額(deputyMayors[].monthly)が不正、または0以下の金額です: ${d.monthly}`);
+        if (d.title !== undefined && isBlank(d.title)) err(tag, "deputyMayors[].titleが空文字です（省略するかnon-blankにしてください）");
+      }
+      if (e.deputyMayors.length > 1) {
+        const titles = e.deputyMayors.map((d) => d.title).filter((t) => t !== undefined);
+        if (titles.length !== e.deputyMayors.length) {
+          err(tag, "副市長が複数名いる場合は、区別のためすべてのdeputyMayors[].titleを設定してください");
+        }
+      }
+    }
+
+    if (e.educationSuperintendentMonthly !== null && !isPositiveAmount(e.educationSuperintendentMonthly)) {
+      err(tag, `educationSuperintendentMonthlyが不正、または0以下の金額です: ${e.educationSuperintendentMonthly}`);
+    }
+    if (e.bonusMonths !== null && (typeof e.bonusMonths !== "number" || !Number.isFinite(e.bonusMonths) || e.bonusMonths < 0)) {
+      err(tag, `bonusMonthsが不正です（null または0以上の数値である必要があります）: ${e.bonusMonths}`);
+    }
+
+    if (!URL_RE.test(e.sourceUrl ?? "")) err(tag, `sourceUrlの形式が不正です: ${e.sourceUrl}`);
+    if (isBlank(e.sourceTitle)) err(tag, "sourceTitleが空です");
+    if (isBlank(e.notes)) err(tag, "notesが空です");
+  }
+
+  // hard limit: Phase169のCLAUDE.md方針により比較自治体は最大10。
+  if (executiveComp.length > 10) {
+    err("executiveCompensationComparison.json", `比較自治体数が上限10を超えています: ${executiveComp.length}件`);
+  }
+} catch {
+  warn("executiveCompensationComparison.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
 // --- similarMunicipalityFinanceComparison.json（類似団体Ⅲ－３財政比較データ） ---
 try {
   const simFin = readJson("src/data/similarMunicipalityFinanceComparison.json");

@@ -6,8 +6,10 @@ import miyazakiComparisonData from "../data/miyazakiCompensationComparison.json"
 import nationalRankingData from "../data/nationalCompensationRanking.json";
 import similarMunicipalityData from "../data/similarMunicipalityComparison.json";
 import pendingMunicipalitiesData from "../data/compensationPendingMunicipalities.json";
+import executiveCompensationData from "../data/executiveCompensationComparison.json";
 import type {
   CompensationComparisonEntry,
+  ExecutiveCompensationEntry,
   MiyazakiCompensationComparison,
   NationalCompensationRanking,
   PendingMunicipalityEntry,
@@ -44,6 +46,7 @@ const miyazakiComparison = miyazakiComparisonData as MiyazakiCompensationCompari
 const nationalRanking = nationalRankingData as NationalCompensationRanking;
 const similarMunicipality = similarMunicipalityData as SimilarMunicipalityComparison;
 const pendingMunicipalities = pendingMunicipalitiesData as PendingMunicipalityEntry[];
+const executiveCompensation = executiveCompensationData as ExecutiveCompensationEntry[];
 const NOBEOKA = "延岡市";
 
 const MIYAZAKI_COMPARISON_CSV_COLUMNS: CsvColumn<MiyazakiCompensationComparison["municipalities"][number]>[] = [
@@ -115,6 +118,57 @@ export function CompensationPage() {
         </div>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           年間支給見込額は、月額×12か月＋期末手当で算出しています。退職手当・その他手当・旅費・費用弁償は含みません。市長と議員で期末手当の支給月数が異なる場合は区別して表示し、期末手当の公式資料を確認できない自治体は「算定不可」としています。
+        </p>
+      </SectionCard>
+
+      <SectionCard title="副市長・教育長の報酬（月額）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          副市長・教育長は市長・議長・副議長・議員とは別区分の特別職のため、上記の「延岡市の報酬」とは別に整理しています。自治体ごとに人事行政の運営状況等の公式資料で確認できた最新の基準日時点の給料月額です。基準日が自治体によって異なる場合があります。
+        </p>
+        <div className="space-y-3">
+          {executiveCompensation.map((e) => {
+            const isNobeoka = e.municipality === NOBEOKA;
+            return (
+              <div
+                key={e.id}
+                className={`rounded-xl border border-outline-variant p-4 ${
+                  isNobeoka ? "border-l-4 border-l-primary bg-primary-container/30" : "bg-surface-container-low"
+                }`}
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <p className="font-semibold text-on-surface">{e.municipality}</p>
+                  <p className="text-xs text-on-surface-variant">基準日：{formatJapaneseDate(e.referenceDate)}現在</p>
+                </div>
+                <dl className="mt-2 grid grid-cols-1 gap-x-3 gap-y-1.5 text-sm sm:grid-cols-2">
+                  {e.deputyMayors.map((d, i) => (
+                    <div key={i} className="flex items-baseline justify-between gap-2">
+                      <dt className="text-on-surface-variant">副市長{d.title ? `（${d.title}）` : ""}</dt>
+                      <dd className="font-medium text-on-surface">{formatYen(d.monthly)}</dd>
+                    </div>
+                  ))}
+                  <div className="flex items-baseline justify-between gap-2">
+                    <dt className="text-on-surface-variant">教育長</dt>
+                    <dd className="font-medium text-on-surface">
+                      {e.educationSuperintendentMonthly !== null ? formatYen(e.educationSuperintendentMonthly) : "確認中"}
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <dt className="text-on-surface-variant">期末手当支給月数</dt>
+                    <dd className="text-on-surface">{e.bonusMonths !== null ? `${e.bonusMonths}か月分` : "確認中"}</dd>
+                  </div>
+                </dl>
+                {!e.educationSuperintendentMonthly && (
+                  <p className="mt-1.5 text-[11px] leading-snug text-on-surface-variant">
+                    理由：教育長の給料月額が公式資料の該当表に掲載されていない、または確認できていないため
+                  </p>
+                )}
+                <SourceLink url={e.sourceUrl} label={e.sourceTitle} verifiedAt={e.confirmedAt} className="mt-2" />
+              </div>
+            );
+          })}
+        </div>
+        <p className="mt-3 rounded-lg bg-surface-container-high/60 p-3 text-xs leading-relaxed text-on-surface-variant">
+          政務活動費（会派・議員個人への調査研究費）および議員個人への費用弁償の交付額・使用額は、当サイトで一次資料を確認できていません（「確認中」）。延岡市議会が政務活動費の制度を設けているかどうかを含め、確認でき次第掲載します。0円や未交付として扱っているものではありません。
         </p>
       </SectionCard>
 

@@ -640,6 +640,37 @@ export interface SimilarMunicipalityComparison extends CompensationSourceMeta {
   roles: RoleRankingEntry[];
 }
 
+/** 副市長1名分の給料月額（Phase169で新設）。総括担当・事業担当のように複数名いる自治体向けにtitleで区別する。 */
+export interface DeputyMayorCompensationItem {
+  /** 担当区分等の呼称（例：「総括担当」）。単数制で区分名が公表されていない自治体はundefined。 */
+  title?: string;
+  monthly: number;
+}
+
+/**
+ * 副市長・教育長の給料月額比較データ（Phase169で新設）。
+ * 市長・議長・副議長・議員の比較（CompensationComparisonEntry）とは別に管理する。
+ * 副市長が複数名（総括担当・事業担当等）いる自治体はdeputyMayorsに複数件格納する。
+ */
+export interface ExecutiveCompensationEntry {
+  /** 自治体を一意に識別するID（ローマ字スラッグ）。 */
+  id: string;
+  municipality: string;
+  prefecture: string;
+  /** ISO形式。給料月額の基準日（自治体ごとに公表資料の最新時点が異なるため、共通日ではない）。 */
+  referenceDate: string;
+  deputyMayors: DeputyMayorCompensationItem[];
+  /** 教育長の給料月額。公式資料で確認できない場合は null。 */
+  educationSuperintendentMonthly: number | null;
+  /** 副市長・教育長の期末手当支給月数。公式資料で確認できない場合は null。 */
+  bonusMonths: number | null;
+  sourceTitle: string;
+  sourceUrl: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  confirmedAt: string;
+  notes: string;
+}
+
 /** 市長公約1件分の進捗状況（土台段階：詳細な判定・関連予算の紐付けは行わない）。 */
 export interface MayorPolicyProgressItem {
   id: string;

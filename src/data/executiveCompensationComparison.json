@@ -1,0 +1,57 @@
+[
+  {
+    "id": "nobeoka",
+    "municipality": "延岡市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "deputyMayors": [{ "monthly": 770000 }],
+    "educationSuperintendentMonthly": 680000,
+    "bonusMonths": 3.45,
+    "sourceTitle": "延岡市公式「延岡市の人事行政の運営状況」",
+    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html",
+    "confirmedAt": "2026-09-01",
+    "notes": "延岡市公式ページ「延岡市の人事行政の運営状況」（令和7年4月1日現在）に掲載された給料月額。期末手当支給月数は令和6年度支給割合として公表された3.45月分（市長・議長・副議長・議員と同じ支給割合）。役職加算の有無は公式資料で確認できないため、年間支給見込額は本ページでは算定していない。"
+  },
+  {
+    "id": "miyazaki",
+    "municipality": "宮崎市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "deputyMayors": [{ "monthly": 840000 }],
+    "educationSuperintendentMonthly": 713000,
+    "bonusMonths": 3.45,
+    "sourceTitle": "宮崎市「宮崎市人事行政の運営等の状況の概要」（令和7年9月）",
+    "sourceUrl": "https://www.city.miyazaki.miyazaki.jp/fs/8/5/9/2/8/1/_/859281.pdf",
+    "confirmedAt": "2026-09-01",
+    "notes": "宮崎市公式PDF「宮崎市人事行政の運営等の状況の概要」（令和7年9月発行、給料月額等は令和7年4月1日現在）(14)特別職の報酬等の状況の表に掲載された副市長・教育長の給料月額。期末手当は6月期1.725月分・12月期1.725月分の計3.45月分（市長は3.35月分）。同資料に掲載の市長・議長・副議長・議員の額（市長1,053,000円、議長696,000円、副議長625,000円、議員583,000円）は既存のcompensationComparison.jsonの値と一致することを確認した。"
+  },
+  {
+    "id": "miyakonojo",
+    "municipality": "都城市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2025-04-01",
+    "deputyMayors": [
+      { "title": "総括担当", "monthly": 755000 },
+      { "title": "事業担当", "monthly": 675000 }
+    ],
+    "educationSuperintendentMonthly": null,
+    "bonusMonths": 3.45,
+    "sourceTitle": "都城市「都城市の給与・定員管理等について」",
+    "sourceUrl": "https://www.city.miyakonojo.miyazaki.jp/uploaded/attachment/45717.pdf",
+    "confirmedAt": "2026-09-01",
+    "notes": "都城市公式PDF「都城市の給与・定員管理等について」の「5 特別職の報酬等の状況（令和7年4月1日現在）」の表に掲載された副市長（総括担当・事業担当の2名制）の給料月額。期末手当は令和6年度支給割合3.45月分（市長・副市長・議長・副議長・議員とも同一）。同表に教育長の行は掲載されておらず、教育長の給料月額は当サイトでは未確認（educationSuperintendentMonthly: null）。同資料に掲載の市長・議長・副議長・議員の額（市長940,000円、議長500,000円、副議長420,000円、議員400,000円）は既存のcompensationComparison.jsonの値と一致することを確認した。"
+  },
+  {
+    "id": "hyuga",
+    "municipality": "日向市",
+    "prefecture": "宮崎県",
+    "referenceDate": "2024-04-01",
+    "deputyMayors": [{ "monthly": 692000 }],
+    "educationSuperintendentMonthly": null,
+    "bonusMonths": 3.4,
+    "sourceTitle": "日向市「日向市の給与・定員管理等について」（令和6年度分）",
+    "sourceUrl": "https://www.hyugacity.jp/tempimg/20250926103907.pdf",
+    "confirmedAt": "2026-09-01",
+    "notes": "日向市公式PDF「日向市の給与・定員管理等について」（令和6年度分、日向市人事行政の運営等の状況の公表に添付）の「5 特別職等の報酬等の状況（令和6年4月1日現在）」の表に掲載された副市長の給料月額。期末手当は令和5年度支給割合3.40月分（市長・副市長・議長・副議長・議員とも同一）。教育長の行は表に掲載されておらず、教育長の給料月額は当サイトでは未確認（educationSuperintendentMonthly: null）。日向市の令和7年度分の同資料は本ページ確認時点（2026年9月）で未公表のため、基準日は令和6年4月1日時点のものであり、他市（令和7年4月1日時点）とは基準日が異なる点に注意。同表に掲載の市長・議長・副議長・議員の額（市長865,000円、議長433,000円、副議長379,000円、議員358,000円）は既存のcompensationComparison.jsonの値と一致することを確認した。なお、compensationComparison.json側の日向市の期末手当支給月数（mayorBonusMonths/councilBonusMonths）は本資料で3.40月分と確認できるが、既存データの再検証・修正はPhase169の対象外のため本ファイルの新設のみにとどめ、既存ファイルは変更していない。"
+  }
+]
