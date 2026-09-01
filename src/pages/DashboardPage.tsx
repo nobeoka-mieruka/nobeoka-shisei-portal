@@ -119,8 +119,9 @@ export function DashboardPage() {
 
   // 以下の一般質問の内訳（議員別・テーマ別・年度別・会派別）は、いずれも会議録本文で内容を
   // 確認済みの累計データ（councilSpeechSummaries.json、questionStats.confirmedCount件）を
-  // 対象とする。会議録が未公開の最新会期の予定質問（generalQuestions.json）は、実際に登壇するか
-  // 未確定のため、この内訳には含めない（別途「最新会期の予定質問」として区別して表示する）。
+  // 対象とする。会議録が未公開の会期の予定質問（generalQuestions.json）は、実際に登壇するか
+  // 未確定のため、この内訳には含めない（別途「会議録未公開会期の予定質問」として区別して表示する。
+  // Phase168：令和8年9月定例会追加で単一会期前提の文言から複数会期対応の文言に変更）。
   const questionRankingItems: BarListItem[] = useMemo(() => {
     return aggregateConfirmedQuestionsByMember(speechSummaryData.members, (memberId) =>
       resolveMemberDisplayName(memberId, members, formerMembers),
@@ -260,7 +261,7 @@ export function DashboardPage() {
     const profileUrl = members.filter((m) => !!m.profileUrl).length;
     const sns = members.filter((m) => m.sns.length > 0).length;
     // 「一般質問あり」は、会議録で確認済みの累計データ（confirmedQuestionMemberIds）を基準とする。
-    // 会議録未公開の最新会期の予定質問（generalQuestions.json）だけを見ると、過去の会期で
+    // 会議録未公開会期の予定質問（generalQuestions.json）だけを見ると、過去の会期で
     // 確認済みの質問がある議員まで「質問なし」と誤判定してしまうため使わない。
     const questions = members.filter((m) => confirmedQuestionMemberIds.has(m.id)).length;
     const votes = members.filter((m) => voteMemberIds.has(m.id)).length;

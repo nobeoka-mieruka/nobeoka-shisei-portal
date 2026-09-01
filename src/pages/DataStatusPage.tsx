@@ -70,8 +70,10 @@ import {
   hasFinanceRatioData,
   hasInitialBudgetAmount,
   hasOrdinaryAccountBondBalance,
+  hasGeneralAccountBondBalance,
   hasAnyFundBalance,
   hasAnyFinanceRatio,
+  hasGeneralAccountSettlement,
   fiscalYearGapNote,
 } from "../lib/archiveFinance";
 import {
@@ -352,6 +354,12 @@ export function DataStatusPage() {
   const fiscalYearsWithBondBalance = archiveFiscalYears.filter(hasOrdinaryAccountBondBalance).length;
   const fiscalYearsWithFundBalanceField = archiveFiscalYears.filter(hasAnyFundBalance).length;
   const fiscalYearsWithFinanceRatioField = archiveFiscalYears.filter(hasAnyFinanceRatio).length;
+  // Phase168：Phase165で新規確認したgeneralAccountBondBalanceYen（市債残高・一般会計区分）・
+  // generalAccountSettlementYen（一般会計決算額）は、個別ページ（FinanceDebtPage・
+  // FinanceBudgetPage等）には表示済みだったが、この完全性ダッシュボードの指標行には
+  // 反映されていなかったため追加した。
+  const fiscalYearsWithGeneralAccountBondBalance = archiveFiscalYears.filter(hasGeneralAccountBondBalance).length;
+  const fiscalYearsWithGeneralAccountSettlement = archiveFiscalYears.filter(hasGeneralAccountSettlement).length;
   const fiscalYearRange =
     archiveFiscalYears.length > 0
       ? `${Math.min(...archiveFiscalYears.map((f) => f.fiscalYear))}年度〜${Math.max(...archiveFiscalYears.map((f) => f.fiscalYear))}年度`
@@ -472,8 +480,9 @@ export function DataStatusPage() {
 
   // TASK-083：用語をトップページ・ダッシュボード（HomePage.tsx／DashboardPage.tsx）の
   // StatCard labelと完全一致させる（「一般質問（登壇・確認済み件数）」「質問項目数」
-  // 「最新会期の予定質問」）。ページごとに別の言い回し（登壇件数／確認済み発言数等）を
-  // 使わないことで、同じ数値が別の名称に見えないようにする。
+  // 「会議録未公開会期の予定質問」）。ページごとに別の言い回し（登壇件数／確認済み発言数等）を
+  // 使わないことで、同じ数値が別の名称に見えないようにする（Phase168：令和8年9月定例会追加で
+  // 会期名が「最新会期」単数から複数会期対応の現在の文言に変わったため、本コメントも追従）。
   const questions: DataDomain[] = [
     {
       label: "一般質問（登壇・確認済み件数）",
@@ -641,8 +650,18 @@ export function DataStatusPage() {
       note: "市債残高は資料により「一般会計」「普通会計」等、基準が異なります。ここでは登録年度数が最も多い普通会計ベースを集計しています（他の基準の残高は個別ページでご確認ください）。",
     },
     {
+      label: "財政：市債残高（一般会計）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithGeneralAccountBondBalance, archiveFiscalYears.length),
+      note: "上記の普通会計ベースとは定義が異なる別集計です（Phase165でFY2019〜2024分を新規確認、財政の市債ページでご確認いただけます）。",
+    },
+    {
       label: "財政：基金残高（いずれかの区分）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithFundBalanceField, archiveFiscalYears.length),
+    },
+    {
+      label: "財政：一般会計決算額（歳出決算ベース）の年度確認",
+      metric: simpleCompleteness(fiscalYearsWithGeneralAccountSettlement, archiveFiscalYears.length),
+      note: "予算額（当初・補正後）とは別の、決算が確定した金額です（Phase165でFY2019〜2024分を新規確認、財政の予算ページでご確認いただけます）。",
     },
     {
       label: "財政：財政健全化判断比率（いずれかの指標）の年度確認",

@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-24T09:06:06.422Z",
+  "generatedAt": "2026-09-01T11:24:23.721Z",
   "pagesCompared": [
     "top",
     "dataStatus"
   ],
   "summary": {
-    "pass": 5,
+    "pass": 3,
     "error": 0,
-    "skip": 1
+    "skip": 3
   },
   "results": [
     {
@@ -27,27 +27,27 @@
       }
     },
     {
-      "metric": "最新会期の予定質問",
+      "metric": "会議録未公開会期の予定質問",
       "status": "PASS",
       "values": {
-        "top": "15",
-        "dataStatus": "15"
+        "top": "27",
+        "dataStatus": "27"
       }
     },
     {
       "metric": "財政：基金残高の年度確認",
-      "status": "PASS",
+      "status": "SKIP_NOT_ON_BOTH_PAGES",
       "values": {
         "top": "26",
-        "dataStatus": "26"
+        "dataStatus": null
       }
     },
     {
       "metric": "財政：市債残高の年度確認",
-      "status": "PASS",
+      "status": "SKIP_NOT_ON_BOTH_PAGES",
       "values": {
         "top": "38",
-        "dataStatus": "38"
+        "dataStatus": null
       }
     },
     {

@@ -85,17 +85,34 @@ export function hasInitialBudgetAmount(y: ArchiveFiscalYear): boolean {
  * 市債残高（普通会計ベース）。ArchiveMunicipalBondBalanceは定義の異なる5区分
  * （一般会計／普通会計／特別会計含む／企業会計含む／市民1人当たり）を持ち、実際に登録されている
  * 年度が最も多いのはordinaryAccountLocalBondBalanceYen（普通会計、Phase137時点で36年度）のため、
- * これを代表指標とする。generalAccountBondBalanceYen（一般会計）はFY2025のみで別区分のため、
- * 単純合算はしない（区分を明示した別集計として扱う）。
+ * これを代表指標とする。generalAccountBondBalanceYen（一般会計）は別区分のため単純合算はしない
+ * （区分を明示した別集計として扱う。hasGeneralAccountBondBalance参照）。
  */
 export function hasOrdinaryAccountBondBalance(y: ArchiveFiscalYear): boolean {
   return y.debt?.balance?.ordinaryAccountLocalBondBalanceYen != null;
+}
+/**
+ * 市債残高（一般会計ベース）。Phase165でFY2019〜2024分（延岡市監査委員の決算審査意見書）を
+ * 新規確認し、Phase137時点のFY2025のみ（1年度）から7年度に増えた。上記の普通会計ベースとは
+ * 定義が異なる別集計のため、混同しないこと。
+ */
+export function hasGeneralAccountBondBalance(y: ArchiveFiscalYear): boolean {
+  return y.debt?.balance?.generalAccountBondBalanceYen != null;
 }
 /** 基金残高。totalYen（合計）は元資料に合計行が無い年度が多いため、区分ごとの内訳値（財源調整用・財政調整基金単体・減債基金・その他特定目的基金）のいずれか1つでも確認できていれば「確認済み」とする。 */
 export function hasAnyFundBalance(y: ArchiveFiscalYear): boolean {
   const b = y.fund?.balance;
   if (!b) return false;
   return b.totalYen != null || b.fiscalAdjustmentFundYen != null || b.fiscalReserveFundYen != null || b.bondRedemptionFundYen != null || b.otherSpecificPurposeFundsYen != null;
+}
+/**
+ * 一般会計決算額（歳出決算ベース、generalAccountSettlementYen）。Phase165でFY2019〜2024分
+ * （延岡市監査委員の決算審査意見書）を新規確認した。予算額（当初・補正後）とは別の指標であり、
+ * 既存のhasInitialBudgetAmount（当初予算）・fiscalYearsWithTotalRevenue（歳入総額）とも
+ * 定義が異なるため、別集計として扱う。
+ */
+export function hasGeneralAccountSettlement(y: ArchiveFiscalYear): boolean {
+  return y.budget?.generalAccountSettlementYen != null;
 }
 /** 財政健全化判断比率。4指標（実質公債費比率・将来負担比率・経常収支比率・財政力指数）のいずれか1つでも確認できていれば「確認済み」とする（4指標すべてを要求すると、一部だけ確認できた年度が「未確認」として過小評価されるため）。 */
 export function hasAnyFinanceRatio(y: ArchiveFiscalYear): boolean {
