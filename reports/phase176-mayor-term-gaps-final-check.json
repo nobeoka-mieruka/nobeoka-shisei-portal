@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-09-01",
+  "phase": "Phase176",
+  "scope": "src/data/archiveMayorTerms.jsonのvalidate:data警告に列挙される13件の日単位空白期間（UNR-029）について、オンライン一次資料の最終確認、NDL個人送信サービス対象資料の整理、現地確認用チェックリストの流用可否確認を行った。",
+  "priorWorkReviewed": [
+    "reports/phase33-master-unresolved-ledger.json（UNR-029）",
+    "reports/ndl-historical-source-ledger.json（ndl-src-01〜31、全31件）",
+    "reports/phase99-108-staging/phase102-103-term-gaps-findings.json",
+    "reports/phase109-118-staging/phase110-term-gaps-findings.json・phase111-mayors-audit-findings.json",
+    "reports/phase119-123-staging/phase121-history-findings.md",
+    "reports/phase125-129-staging/phase127-finance-mayor-gaps-report.md",
+    "reports/phase164-mayor-term-gaps.json",
+    "reports/field-research/onsite-research-checklist.json・.md",
+    "reports/physical-source-candidates.md",
+    "TASKS.md（TASK-168 Phase127、TASK-169 Phase130-133関連記述）"
+  ],
+  "禁止事項の遵守": {
+    "phase163to172再実行": "していない（phase164等の既存findingsを読むのみで、同一検索・同一手法の再実行はしていない）",
+    "4386pdf再読": "していない（延岡市史・市制80周年記念10年史は対象外と確認済みのため今回のオンライン確認対象にも含めていない）",
+    "UNR番号": "UNR-029のみ更新。UNR-070〜075は未使用（新規に登録すべき別課題を発見しなかったため）",
+    "INQ番号": "INQ-024〜026は未使用（新規に照会文が必要な機関・案件を発見しなかったため。M11/M13向けの選挙管理委員会照会は既存INQ-006が既にカバー済み）"
+  },
+  "onlineFinalCheckResults": {
+    "chromeExtensionConnectionAttempt": {
+      "method": "mcp__claude-in-chrome__list_connected_browsers",
+      "result": "0件（未接続）",
+      "action": "指示通り無限待機せず、NDL個人送信サービスの新規本文閲覧は実施せず次の作業へ進んだ（HUMAN_ACTION_REQUIREDとして下記に記録）"
+    },
+    "newAvenuesAttempted": [
+      {
+        "avenue": "アジア歴史資料センター（JACAR）公式サイトのWebFetch直接確認",
+        "result": "検索フォームの具体的なURLパターンを自動取得できず、サイト内検索の直接操作にはブラウザ操作（未接続のため不可）が必要と判明。新規情報なし。"
+      },
+      {
+        "avenue": "延岡市公式サイト「近代の年表」ページのWayback Machine（archive.org）過去スナップショット確認",
+        "result": "対象URLのアーカイブ済みスナップショットが見つからなかった（archived_snapshots が空）。新規情報なし。"
+      },
+      {
+        "avenue": "NDL Search OpenSearch API（https://ndlsearch.ndl.go.jp/api/opensearch）による延岡市史全版の書誌横断クロスチェック",
+        "result": "延岡市史1963年版（NDLBibID 000001063952、pid 3027323、1101p、宮崎県立図書館・東京都立中央図書館・福岡市総合図書館所蔵、CiNii ncid BN10458011）等、既存reports/ndl-historical-source-ledger.json・physical-source-candidates.mdの記載内容と完全一致することを確認した。新規の書誌相違・新版の発見はなし。API自体はJS非依存で信頼性が高く、今後の書誌確認手段として有用（dl.ndl.go.jp本文ビューアはJS必須のためWebFetch/curlでは本文どころか個人送信対象可否すら安定して取得できないことも合わせて確認した）。"
+      }
+    ],
+    "newOnlineResolutionsCount": 0,
+    "conclusion": "13区間すべてについて、既存のPhase102-103・109-118・119-123・127・164の到達点（全13区間library_required、月精度のまま維持）に変化なし。ボトルネックは資料の所在特定ではなく、既に特定・部分閲覧済みの延岡市史各版（1963/1983/1993年版）における多列・低解像度スキャンの日単位数字判読精度であることを改めて確認した。"
+  },
+  "ndlCandidateMaterials": {
+    "count": 12,
+    "note": "reports/ndl-historical-source-ledger.jsonのうちrelatedMayorIdsがmayor-04〜mayor-13のいずれかを含む、またはM1〜M13の直接候補として言及されている資料。",
+    "items": [
+      { "id": "ndl-src-01", "title": "延岡市史 第1巻（1949年、延岡郷土研究會）", "individualSendService": true, "status": "reviewed（市長の語は序文のみ、年表なし）" },
+      { "id": "ndl-src-02", "title": "延岡市史（1963年版）", "individualSendService": true, "status": "reviewed（komma102-104に一覧表発見、日付未確定）" },
+      { "id": "ndl-src-03", "title": "延岡市史 上（1983年版）", "individualSendService": true, "status": "adopted（komma124-127に一覧表発見、日付未確定）" },
+      { "id": "ndl-src-04", "title": "延岡市史 下巻（1983年版）", "individualSendService": true, "status": "adopted（年表komma472-505、一部のみ精読）" },
+      { "id": "ndl-src-05", "title": "延岡市史（1993年版）", "individualSendService": true, "status": "adopted（komma427-428は助役分確定、市長本体は未読）" },
+      { "id": "ndl-src-06", "title": "延岡市史（2003年版）", "individualSendService": false, "status": "onsite_required（紙のみ、デジタル化なし）" },
+      { "id": "ndl-src-09", "title": "延岡市勢要覧（各年版、計12版）", "individualSendService": "不明（版により異なる）", "status": "reviewed" },
+      { "id": "ndl-src-10", "title": "日本の歴代市長：市制施行百年の歩み 第3巻（1985年）", "individualSendService": true, "status": "reviewed（M10青木善祐disputed-001の出典、再現不可）" },
+      { "id": "ndl-src-12", "title": "延岡市議会会議録（個別会期、複数）", "individualSendService": "login_required", "status": "login_required" },
+      { "id": "ndl-src-15", "title": "延岡市議会会議録（旧会期、宮崎県立図書館所蔵手書き複写等）", "individualSendService": false, "status": "metadata_only" },
+      { "id": "ndl-src-24 / ndl-src-27", "title": "延岡商工会議所四十年史（1975年）", "individualSendService": true, "status": "reviewed（1956年投票日・1967年当選日を確定済み）" },
+      { "id": "ndl-src-28", "title": "〔延岡市〕市政二十年史（1953年、江川林蔵編）", "individualSendService": "不明（デジタル化情報なし）", "status": "metadata_only" }
+    ]
+  },
+  "humanActionRequired": [
+    {
+      "item": "NDL個人送信サービスでのログイン閲覧",
+      "detail": "延岡市史1963年版（pid 3027323 komma102-104）・1983年版上巻（pid 9774711 komma124-127）の歴代市長一覧表を、ユーザー本人のNDLアカウントでログインした状態で、84%以上のズームで複数回・複数の列に分けて再読し、既存の月精度（1937/1941/1942/1946/1947/1948/1952/1956年分）と矛盾しない日単位の値が複数回一致した場合のみarchiveMayorTerms.jsonへの反映を検討する。",
+      "why": "本ワーカーではclaude-in-chrome（Chrome拡張）が未接続（list_connected_browsers=0件）のため、本文閲覧を伴う確認作業を実施できなかった。"
+    }
+  ],
+  "onsiteChecklistReuse": {
+    "action": "新規作成せず、既存のreports/field-research/onsite-research-checklist.json・.mdをそのまま流用した",
+    "reason": "既存チェックリストのsupplementalSection（title: 'UNR-029（市長任期13区間の日単位空白）現地調査対象一覧'）に、M1〜M13全13区間の対象期間・候補資料・現状ステータスが既に個別に整理済みであり、機関別（inst-05延岡市選挙管理委員会、inst-09国立国会図書館）の関連付けも既存。既存項目の並び替え・書式変更は行っていない（作業指示の禁止事項を遵守）。"
+  },
+  "onsiteCountByInstitution": {
+    "延岡市立図書館": 9,
+    "延岡市役所（延岡市選挙管理委員会）": 2,
+    "延岡市議会事務局": 0,
+    "宮崎県立図書館": 13,
+    "国立国会図書館": 13,
+    "note": "M1〜M9（9区間）は延岡市史上巻komma124が共通候補のため延岡市立図書館・宮崎県立図書館・NDLいずれでも一度の来館で複数区間をまとめて確認できる可能性がある（既存チェックリストのnote欄記載どおり）。M10〜M13（4区間）は宮崎日日新聞縮刷版（宮崎県立図書館所蔵）または延岡市選挙管理委員会選挙録（M11・M13）が個別に必要。延岡市議会事務局はUNR-029自体には直接紐づいていない（会議録収録範囲は1937-1994年の大半をカバーしないため）。"
+  },
+  "summary": {
+    "targetGapCount": 13,
+    "newOnlineResolutionCount": 0,
+    "ndlCandidateMaterialCount": 12,
+    "onsiteRequiredCount": 13,
+    "masterLedgerUpdated": "UNR-029のみ（alreadyTriedMethods・sourceRefs新規記入、requiresOnsite/requiresInquiryをfalse→true是正、集計値更新）",
+    "newUnrCreated": 0,
+    "newInqCreated": 0
+  }
+}

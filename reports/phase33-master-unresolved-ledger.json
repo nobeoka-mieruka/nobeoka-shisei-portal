@@ -906,21 +906,46 @@
       "currentStatus": "partially_resolved",
       "priority": "C",
       "evidenceLevel": "Level1（氏名・在任事実は確認済み、日単位の就任退任日のみ未確定）",
-      "sourceRefs": [],
-      "alreadyCheckedSources": [
-        "src/data/archiveMayorTerms.json（termStartPrecision/termEndPrecisionフィールドで機械集計）"
+      "sourceRefs": [
+        "https://dl.ndl.go.jp/pid/3027323（延岡市史1963年版、ndl-src-02。komma102-104に初代〜十代の歴代市長自至年月日一覧表を発見済みだが、84%ズームでも1文字の誤読リスクが残り未採用）",
+        "https://dl.ndl.go.jp/pid/9774711（延岡市史1983年版上巻、ndl-src-03。komma124-127に歴代市長・助役・収入役一覧表を発見済みだが多列・低解像度で個々の日付を確定できず）",
+        "https://dl.ndl.go.jp/pid/9774712（延岡市史1983年版下巻、ndl-src-04。巻末年表komma472-505、1970年代分の一部のみ精読済み）",
+        "https://dl.ndl.go.jp/pid/13200958（延岡市史1993年版、ndl-src-05。komma427-428等、助役人事は一部確定したが市長本体の日付欄は未読）",
+        "https://ndlsearch.ndl.go.jp/books/R100000002-I000001808772（日本の歴代市長：市制施行百年の歩み 第3巻、ndl-src-10。M10青木善祐の就任日disputed-001の出典だが再現不可）"
       ],
-      "alreadyTriedMethods": [],
-      "unresolvedReason": "F（既存資料の再精読による日付特定が必要、大量区間のため一括バックフィル向き）",
-      "nextAction": "延岡市史・官報等で該当13区間の就任・退任日（日単位）を個別に確認する",
-      "nextSourceCandidate": "延岡市史各版、国立公文書館・官報情報検索サービス",
+      "alreadyCheckedSources": [
+        "src/data/archiveMayorTerms.json（termStartPrecision/termEndPrecisionフィールドで機械集計）",
+        "reports/ndl-historical-source-ledger.json（ndl-src-01〜31、全31件精読。うちndl-src-02/03/04/05はユーザー本人のNDLログイン下で個人送信サービス実閲覧済み）",
+        "reports/phase99-108-staging/phase102-103-term-gaps-findings.json（M1〜M13個別のオンライン再検証、新規解決0件）",
+        "reports/phase109-118-staging/phase111-mayors-audit-findings.json（官報・JACAR・夕刊デイリー等の多角的調査）",
+        "reports/phase119-123-staging/phase121-history-findings.md（既存試行の再確認、新規は官報検索1点のみ）",
+        "reports/phase125-129-staging/phase127-finance-mayor-gaps-report.md（宮崎県文書センター新規発見、市長任期側は現状維持）",
+        "reports/field-research/onsite-research-checklist.json（supplementalSectionにM1〜M13の機関別現地調査リスト既存）",
+        "reports/phase164-mayor-term-gaps.json（Phase164、NDL官報全文検索『延岡市長』0件・夕刊デイリー自社検索0件・宮崎県公報デジタルアーカイブなしを新規確認、13区間とも既存month精度を維持）",
+        "reports/physical-source-candidates.md（延岡市史各版の請求記号・所蔵先一覧）"
+      ],
+      "alreadyTriedMethods": [
+        "NDLデジタルコレクション個人送信サービスでの本文実閲覧（ndl-src-02/03/04/05、ユーザー本人ログイン下でclaude-in-chrome経由、Phase7B〜Phase28・Phase25〜27）：歴代市長一覧表そのものは発見済みだが、多列・低解像度スキャンのため日単位の数字を確実に判読できず、誤記載回避のため未採用のまま",
+        "NDLデジタルコレクション『官報』カテゴリのログイン不要フルテキスト検索（Phase164、複合語『延岡市長』で0件。個々の市長氏名単体×官報カテゴリでの再試行はUI不安定のため未完了）",
+        "夕刊デイリー公式サイト自社検索フォーム直接操作（Phase164、房野博・早生隆彦とも0件）",
+        "宮崎県公報デジタルアーカイブの有無確認（Phase164、昭和期分のオンライン公開なしを確認）",
+        "アジア歴史資料センター（JACAR）でのWebSearch経由探索（Phase121・Phase164、関連公文書を特定できず）",
+        "延岡市議会会議録検索システム（kensakusystem.jp）の収録範囲確認（Phase102-103、平成12年第8回臨時会以降のみと確定、1937-1994年は対象外）",
+        "延岡市公式サイト「近代の年表」4ページの再読（Phase102-103、既存記載と完全一致、新情報なし）",
+        "Wikipedia出典（脚注）の遡及確認（Phase102-103・phase9-lane-d、いずれも既知の壁＝ndl-src-02/10の同一資料に帰着し独立資料にならず）",
+        "Wayback Machine（archive.org）での延岡市公式サイト旧年表ページの過去スナップショット確認（Phase176、対象URLのアーカイブなしで空振り）",
+        "NDL Search OpenSearch API（api/opensearch）での書誌横断確認（Phase176、延岡市史全版のNDLBibID・デジタル化pid・所蔵館を機械的に再検証、既存ndl-src-02の記載内容と完全一致・新規相違なし）"
+      ],
+      "unresolvedReason": "F（既存資料の再精読による日付特定が必要、大量区間のため一括バックフィル向き）。原資料自体（延岡市史1963/1983/1993年版）は既に特定・部分閲覧済みで、ボトルネックは資料の所在ではなくスキャン画像の解像度と多列組版による日単位数字の判読精度。",
+      "nextAction": "最有力ルートは、延岡市史1983年版上巻（pid 9774711、komma124-127）と1963年版（pid 3027323、komma102-104）の歴代市長一覧表を、既存の個人送信サービスアクセスがある状態で複数回・複数倍率（84%以上）で再読し、複数回一致した場合のみarchiveMayorTerms.jsonへ反映すること。オンラインでこれ以上前進しない場合は、reports/field-research/onsite-research-checklist.json（inst-09-b等）記載の現地閲覧（延岡市立図書館・宮崎県立図書館・国立国会図書館）へ切り替える。",
+      "nextSourceCandidate": "延岡市史1963年版（pid 3027323）・1983年版上下巻（pid 9774711/9774712）・1993年版（pid 13200958）の高精度再読、宮崎日日新聞縮刷版（M10〜M13）、延岡市選挙管理委員会選挙録（M11・M13）",
       "primaryRoute": "B",
       "secondaryRoute": "C",
-      "requiresOnsite": false,
-      "requiresInquiry": false,
+      "requiresOnsite": true,
+      "requiresInquiry": true,
       "requiresBulkBackfill": true,
-      "lastCheckedAt": "2026-08-23",
-      "notes": "Phase82・Phase85（Phase78-88横断監査）で発見・分類。UI表示は既に精度注記付きで正確なため、市民向け表示上の緊急性は低い（データの精緻化タスク）。"
+      "lastCheckedAt": "2026-09-01",
+      "notes": "Phase82・Phase85（Phase78-88横断監査）で発見・分類。UI表示は既に精度注記付きで正確なため、市民向け表示上の緊急性は低い（データの精緻化タスク）。【Phase176追記、2026-09-01】alreadyTriedMethods・sourceRefsが従来空欄のままだったため、reports/ndl-historical-source-ledger.json・phase102-103/109-118/119-123/125-129/164の既存成果を本エントリへ統合した（新規のデータ変更ではなく、既存記録の集約）。requiresOnsiteをfalse→trueへ修正（Phase133で発見されていた「実際の分類〈library_required〉とのフラグ不整合」を今回是正、既存のfield-research-checklistとの整合を取った）。requiresInquiryもfalse→trueへ修正（M11・M13は延岡市選挙管理委員会への照会〈INQ-006、未送付〉が現地閲覧と並ぶ候補ルートのため）。Phase176ではchrome拡張が未接続（list_connected_browsers=0件）だったためNDL個人送信サービスの新規閲覧は実施せず、JACAR直接検索・Wayback Machine・NDL Search OpenSearch APIによる書誌クロスチェックのみを新規に試行したが、いずれも新規のオンライン解決には至らなかった（0/13）。archiveMayorTerms.json本体・field-research/onsite-research-checklist.json本体（M1〜M13を含む既存supplementalSection）は変更していない（既に同等以上の内容が存在するため）。"
     },
     {
       "unresolvedId": "UNR-030",
@@ -1371,9 +1396,9 @@
       "reference_pending": 6,
       "resolved": 7
     },
-    "requiresOnsite": 10,
-    "requiresInquiry": 12,
+    "requiresOnsite": 11,
+    "requiresInquiry": 13,
     "requiresBulkBackfill": 15,
-    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。 Phase136（公約→施策→予算→議案→実施→成果 追跡監査、2026-08-30）でUNR-039〜041（計3件）を新規追加（新規カテゴリ「mayorPromise」）。既存UNR-001〜038のステータス変更は無し。 Phase137（財政・人口データ欠損の一次資料再調査、2026-08-31）でUNR-034を部分解決（FY2007-2011分の一般会計当初予算額を新規資料で確認、FY2001-2006分は継続）。新規UNRは登録しなかった（推測での大量登録を避けるため）。 Phase138（未解決一次資料 集中攻略、2026-08-31）でUNR-035・036・037を解決（総務省市町村決算カードの再解析）。UNR-034は引き続き部分解決のまま（FY2001-2006が未解決）。UNR-038は決算カードでは解決不可と既に判明しているため対象外（延岡市史の再調査は今回禁止のため見送り）。新規UNRは登録しなかった。"
+    "note": "byRouteはprimaryRouteのみを集計（secondaryRouteは含まない）。Route Aに分類された項目は0件だった（1933-1959年の主要人物・選挙データは既に既存フェーズで確認済みのため、新規に「オンライン一次資料で即再調査可能」な項目としては残っていない）。UNR-016（市議選1933-1998）はSTEP3で追加。 Phase44統合でUNR-017〜021（計5件）を新規追加（Phase34-37の並列調査で新規発見）。UNR-012・UNR-016は関連する新規発見事項の参照を追記。 Phase55統合でUNR-018を解決、UNR-019をunconfirmed→reference_pendingへ前進、UNR-022〜025（計4件）を新規追加（Phase45-54の並列バックフィルで新規発見）。 Phase66統合でUNR-019を解決、UNR-020/UNR-023を前進、UNR-026を新規追加（Phase56-65の並列処理で新規発見）。 Phase77統合でUNR-026を解決（一般質問21件を公開）、UNR-016前進、UNR-027/028を新規追加（Phase67-76の並列処理で新規発見）。 Phase78-88統合でUNR-029〜031を新規追加（Phase78-87の横断監査で新規発見。うちUNR-030[財政調整基金の複数年度同一値疑い]はP0相当）、UNR-010をPhase82の独立再検出により再確認。 Phase89-98継続作業（2026-08-24）でUNR-010・UNR-031を前進(not_collected/not_collected→partially_resolved)。UNR-030は既にresolved。 Phase99-108継続作業（2026-08-24）でUNR-006/008/009/011/031へPhase102-103・Phase100-101の再調査結果を追記（library_required/source_not_located再確認、バックフィルpilot結果）。ステータス自体の遷移は今回なし（新規のオンライン解決なし、誠実に未解決のまま記録）。 Phase109-118（2026-08-24）でUNR-006をunconfirmed→partially_resolvedへ前進（csp-43教育長の任期確定）。UNR-013・UNR-031へ追加の一次資料・pilot結果を追記。ステータス上昇は1件のみ、新規UNR追加なし。 Phase127（2026-08-25）でUNR-014をnot_collected→reference_pendingへ前進（宮崎県文書センターの総合目録から簿冊番号レベルの新規候補を発見、requiresInquiryをtrueへ変更）。UNR-015・UNR-029は新規のオンライン解決なし、既存ステータスを維持。 TASK-174（2026-08-29、延岡市史(市制80周年記念10年史)横断調査、Phase135〜139）でUNR-032を新規追加（歴代市議会議長・副議長のうち2001年以前分、市史の対象期間外のため未解決）。既存UNR-001〜031のステータス変更は無し。 TASK-175（2026-08-29、延岡市史(市制80周年記念10年史)残り641ページの完全調査、939/939ページ）でUNR-033を新規追加（2008年度の小学校統合3校の具体的な学校名が資料に記載なし）。既存UNR-001〜032のステータス変更は無し。 TASK-178（2026-08-29、延岡市史第2編第6章とarchiveFiscalYears.jsonのFY2001-2011フィールド単位監査）でUNR-034〜038（計5件）を新規追加。既存FY2001-2011の年度レコード自体は全11年度とも存在するが、当初予算額・市税収入額・市債発行額（フロー）・基金内訳の一部が年度によって未登録であることを新たに検出した（UNR-035〜037は既存sourceRefsの決算カード再解析で解決見込み、UNR-034・038は延岡市史等の追加確認が必要）。既存UNR-001〜033のステータス変更は無し。archiveFiscalYears.jsonへの新規データ登録は本タスクでは行っていない（市史原本へ本セッションからアクセスできないため）。 Phase136（公約→施策→予算→議案→実施→成果 追跡監査、2026-08-30）でUNR-039〜041（計3件）を新規追加（新規カテゴリ「mayorPromise」）。既存UNR-001〜038のステータス変更は無し。 Phase137（財政・人口データ欠損の一次資料再調査、2026-08-31）でUNR-034を部分解決（FY2007-2011分の一般会計当初予算額を新規資料で確認、FY2001-2006分は継続）。新規UNRは登録しなかった（推測での大量登録を避けるため）。 Phase138（未解決一次資料 集中攻略、2026-08-31）でUNR-035・036・037を解決（総務省市町村決算カードの再解析）。UNR-034は引き続き部分解決のまま（FY2001-2006が未解決）。UNR-038は決算カードでは解決不可と既に判明しているため対象外（延岡市史の再調査は今回禁止のため見送り）。新規UNRは登録しなかった。 Phase176（市長任期13区間UNR-029の最終オンライン確認・NDL資料整理・現地確認リスト作成、2026-09-01）でUNR-029のalreadyTriedMethods・sourceRefsを初めて実データで埋め、requiresOnsite/requiresInquiryをfalse→trueへ是正した（Phase133で既に発見されていたフラグ不整合の是正、集計値もrequiresOnsite 10→11・requiresInquiry 12→13へ更新）。新規のオンライン解決は0/13（chrome拡張未接続のためNDL個人送信サービス再閲覧は実施せず、JACAR・Wayback Machine・NDL Search OpenSearch APIのみ新規試行、いずれも既存記録を裏付けたのみ）。reports/field-research/onsite-research-checklist.json（既にM1〜M13を含む）は既存内容を流用し変更していない。新規UNRは登録しなかった（4386.pdf＝延岡市史市制80周年記念10年史の再読は禁止指示のため実施していない）。"
   }
 }
