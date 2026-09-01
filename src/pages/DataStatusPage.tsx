@@ -28,6 +28,8 @@ import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import archiveCouncilLeadershipData from "../data/archiveCouncilLeadership.json";
 import archiveCommitteeMembersData from "../data/archiveCommitteeMembers.json";
+import councilSessionsData from "../data/councilSessions.json";
+import { sessionSummaryStatusLabels } from "../lib/councilSessions";
 import type {
   CouncilMember,
   FormerMember,
@@ -461,6 +463,25 @@ export function DataStatusPage() {
   const countConsistencyUnresolved = dataQualitySummary.countConsistencyChecks.filter(
     (c) => !c.status.startsWith("fixed"),
   ).length;
+  // Phase183：過去の委員構成データ（Phase174・180で2003〜2022年の複数任期分を新規登録）の
+  // 収録範囲を、直書きの「2023〜2025年」ではなくデータから動的に算出する（DataStatusPage監査で
+  // 発見。データが増えるたびに文言を手で書き換えなくて済むようにする）。
+  const committeeMembershipHistory = archiveCommitteeMembersData as { termStart: string }[];
+  const committeeMembershipHistoryCount = committeeMembershipHistory.length;
+  const committeeMembershipHistoryYears = [
+    ...new Set(committeeMembershipHistory.map((r) => Number(r.termStart.slice(0, 4)))),
+  ].sort((a, b) => a - b);
+  const committeeMembershipHistoryYearRange =
+    committeeMembershipHistoryYears.length > 0
+      ? `${committeeMembershipHistoryYears[0]}〜${committeeMembershipHistoryYears[committeeMembershipHistoryYears.length - 1]}年`
+      : "未収録";
+  // 統一地方選挙は4年ごと（改選臨時会は2003・2007・2011・2015・2019〜2026年の毎年5月）に
+  // 行われるため、収録済み年から欠けている改選年のみを「未確認」として列挙する（推測で埋めない）。
+  const committeeMembershipHistoryExpectedTermYears = [2003, 2007, 2011, 2015];
+  const committeeMembershipHistoryUnconfirmedYears = committeeMembershipHistoryExpectedTermYears
+    .filter((y) => !committeeMembershipHistoryYears.includes(y))
+    .join("・");
+
   const councilCommittees: DataDomain = {
     label: "委員会（常任・議会運営・特別）",
     count: committees.length,
@@ -474,10 +495,34 @@ export function DataStatusPage() {
       committeesWithJurisdiction < committees.length
         ? "（延岡市議会委員会条例の条文が未確認のため残りは「確認できず」と表示）"
         : "（延岡市議会委員会条例の条文と照合し、全委員会の所管事項を確認済み）"
-    }。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。過去（現行任期より前）の委員長・副委員長・委員の在任履歴：会議録で確認できた${(archiveCommitteeMembersData as { termStart: string }[]).length}件（2023〜2025年の常任委員会・議会運営委員会の選任任期分。それ以前は未収録・調査中）。`,
+    }。活動報告書（所管事務調査、令和5〜7年度）：${committeeActivityReports.length}件登録。過去（現行任期より前）の委員長・副委員長・委員の在任履歴：会議録で確認できた${committeeMembershipHistoryCount}件（${committeeMembershipHistoryYearRange}の統一地方選挙後改選臨時会分${committeeMembershipHistoryUnconfirmedYears ? `。${committeeMembershipHistoryUnconfirmedYears}年の各任期は未収録・調査中` : "。統一地方選挙後の各任期は空白なく収録済み"}。委員会条例制定〈昭和45年＝1970年〉〜会議録検索システム収録開始〈平成12年＝2000年〉の約30年間は同システムで確認不能のため未収録のまま）。`,
     linkTo: "/committees",
     linkLabel: "委員会一覧を見る",
     fullyCovered: committeesWithJurisdiction === committees.length,
+  };
+
+  // Phase183：会期要約の確認状況（Phase163・175・179で計19会期がunavailableから
+  // partially-verifiedへ改善）を、「未収録9件」のような粗い表示ではなく、確認済み／一部確認済み／
+  // 未確認の内訳が分かる形で公開する（内部識別子UNR-060等は表示せず、既存のsessionSummaryStatusLabels
+  // 語彙で統一）。
+  const councilSessionsList = councilSessionsData as { summaryStatus?: keyof typeof sessionSummaryStatusLabels }[];
+  const sessionSummaryStatusCounts = councilSessionsList.reduce<Record<string, number>>((acc, s) => {
+    const key = s.summaryStatus ?? "unavailable";
+    acc[key] = (acc[key] ?? 0) + 1;
+    return acc;
+  }, {});
+  const councilSessionSummaryDomain: DataDomain = {
+    label: "会期ごとの要約（確認状況）",
+    count: councilSessionsList.length,
+    unit: "会期",
+    scope: "収録済み全会期（平成12年〜令和8年）",
+    detail: `${(Object.entries(sessionSummaryStatusCounts) as [string, number][])
+      .sort(([a], [b]) => (a === "verified" ? -1 : b === "verified" ? 1 : a.localeCompare(b)))
+      .map(([status, count]) => `${sessionSummaryStatusLabels[status as keyof typeof sessionSummaryStatusLabels] ?? status}：${count}会期`)
+      .join("／")}。「一部確認済み」は、公式資料（議案等審議結果PDF・国立国会図書館所蔵の会議録書誌等）で会期の実在・日程は確認できたが、会議録本文までは確認できていない状態で、市への確認や図書館での資料閲覧が必要な段階です。`,
+    linkTo: "/council-documents",
+    linkLabel: "会期一覧を見る",
+    fullyCovered: (sessionSummaryStatusCounts.verified ?? 0) === councilSessionsList.length,
   };
 
   const councilLeadership = archiveCouncilLeadershipData as ArchiveCouncilLeadershipTerm[];
@@ -844,6 +889,7 @@ export function DataStatusPage() {
           ))}
           <DomainRow domain={councilCommittees} />
           <DomainRow domain={councilLeadershipDomain} />
+          <DomainRow domain={councilSessionSummaryDomain} />
         </ul>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           「議決・審査結果確認済み：{resultConfirmedCount}／{archiveCouncilDocuments.length}件」「出典確認済み（verified）：{verifiedDocumentCount}件」（いずれも詳細アーカイブ側の内訳）。議員個人の賛否記録は「議案・採決データベース」側で管理しており、混同していません。
