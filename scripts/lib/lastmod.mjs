@@ -6,12 +6,14 @@
  * 1. 各データにある verifiedAt / updatedAt / lastVerified / confirmedAt / lastChecked / questionDate 等
  * 2. 更新履歴（updateHistory.json）に記録された対象ページの更新日（linkUrlが一致するもの）
  * 3. データファイルのGit上の最終コミット日（内容が変わった日。checkoutのタイムスタンプではない）
- * 4. サイト全体の最終更新日（siteUpdate.json）
+ * 4. 前回公開時のlastmod（コミット済みのpublic/sitemap.xmlに記録された日付）
+ * 5. サイト全体の最終更新日（siteUpdate.json）
  */
 import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { SITE_URL } from "./site-config.mjs";
 
 // public-routes.mjsのrootと循環importにならないよう、ここでも独立して定義する。
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -41,40 +43,45 @@ export function maxValidDate(values) {
   return valid.sort().at(-1);
 }
 
-let shallowRepoWarned = false;
+let shallowRepoCache;
 /**
- * 浅いclone（fetch-depth:1等）だと、直近コミットで変更されていないファイルの履歴を
- * git logで辿れず、gitLastCommitDateが実際には情報があるのに毎回undefinedを返し、
- * resolveLastmod()が最終フォールバック（サイト全体の最終更新日＝実質ビルド実行日）に
- * 落ちてしまう（実際には更新していないページのlastmodが常に「今日」に見える不具合。
- * 2026-08-08、GitHub Actionsのcheckout@v4がデフォルトのfetch-depth:1だったために発生）。
- * CI側はfetch-depth:0で全履歴を取得する設定にしたが、設定漏れを静かに再発させないよう、
- * 浅いcloneを検出した場合はビルドログへ警告を出す。
+ * 浅いclone（depth:1等）では、全ファイルの「最終コミット」が唯一のコミット＝HEADになるため、
+ * git logは「どのファイルもHEADの日付に更新された」という誤った答えを返す。この値をそのまま
+ * lastmodに使うと、実際には更新していないページまで毎回のデプロイ日で更新済みに見える。
+ * （2026-08-08、GitHub Actionsのcheckout@v4がデフォルトのfetch-depth:1だったため発生。
+ *  CI側はfetch-depth:0にしたが、2026-09-02のPhase198で、Cloudflare PagesのGit連携ビルド
+ *  （こちらはfetch-depthを指定できない）でも同じ症状が本番に出ていることを実測で確認した：
+ *  本番sitemap.xmlの95URLがビルド日と同じ日付になっており、全履歴があるローカルビルドでは
+ *  4URLだった。）
+ * したがって浅いcloneを検出した場合は、Gitの日付を「情報なし」として扱い、
+ * 前回公開時のlastmod（コミット済みsitemap.xml）へフォールバックする。
  */
-function warnIfShallowRepo() {
-  if (shallowRepoWarned) return;
-  shallowRepoWarned = true;
+function isShallowRepository() {
+  if (shallowRepoCache !== undefined) return shallowRepoCache;
   try {
-    const isShallow = execSync("git rev-parse --is-shallow-repository", {
+    const out = execSync("git rev-parse --is-shallow-repository", {
       cwd: root,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
     }).trim();
-    if (isShallow === "true") {
-      console.warn(
-        "[lastmod] 警告：Gitの浅いclone（shallow clone）を検出しました。ページのlastmod（最終更新日）が" +
-          "実際の更新日ではなく、フォールバックのサイト全体最終更新日（ビルド実行日相当）になっている" +
-          "可能性があります。CIのcheckoutステップにfetch-depth: 0を設定してください。",
-      );
-    }
+    shallowRepoCache = out === "true";
   } catch {
-    // git自体が使えない環境（通常のビルドでは想定外）は静かにスキップする。
+    // git自体が使えない環境では、後段のgit logもどのみち失敗する。
+    shallowRepoCache = false;
   }
+  if (shallowRepoCache) {
+    console.warn(
+      "[lastmod] 警告：Gitの浅いclone（shallow clone）を検出しました。ファイルごとの実際の更新日を" +
+        "取得できないため、Gitの日付は使わず、前回公開時のlastmod（コミット済みのpublic/sitemap.xml）を" +
+        "使用します。CIでcheckoutを行う場合はfetch-depth: 0を設定してください。",
+    );
+  }
+  return shallowRepoCache;
 }
 
 /** 対象ファイルのGit上の最終コミット日（YYYY-MM-DD）。Git情報がない場合はundefined。 */
 export function gitLastCommitDate(relPathFromRoot) {
-  warnIfShallowRepo();
+  if (isShallowRepository()) return undefined;
   try {
     const out = execSync(`git log -1 --format=%cd --date=short -- "${relPathFromRoot}"`, {
       cwd: root,
@@ -99,6 +106,41 @@ function loadUpdateHistory() {
 export function lastmodFromUpdateHistory(path) {
   const entries = loadUpdateHistory().filter((e) => e.linkUrl === path);
   return maxValidDate(entries.map((e) => e.date));
+}
+
+let publishedSitemapCache;
+/**
+ * 前回のビルドで生成され、リポジトリにコミットされているpublic/sitemap.xmlのlastmodを読む。
+ *
+ * 「データ内の日付」も「更新履歴」も「Gitの更新日」も使えない場合に、ビルド実行日を新しい
+ * 更新日として書き込んでしまうことを避けるための、最後から2番目のフォールバック。
+ * 前回公開した日付をそのまま維持するだけなので、架空の更新日を作らない。
+ *
+ * このモジュールはgenerate-sitemap.mjsがpublic/sitemap.xmlを書き出す前に読み込まれる
+ * （getIndexableRoutes()→resolveLastmod()の時点で読む）ため、参照するのは常に
+ * 「前回コミットされた内容」になる。読み込み結果はモジュール内にキャッシュする。
+ */
+function loadPublishedSitemapLastmod() {
+  if (publishedSitemapCache) return publishedSitemapCache;
+  publishedSitemapCache = new Map();
+  try {
+    const xml = readFileSync(join(root, "public", "sitemap.xml"), "utf8");
+    for (const m of xml.matchAll(/<loc>([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)) {
+      const loc = m[1];
+      if (!loc.startsWith(SITE_URL)) continue;
+      const path = loc.slice(SITE_URL.length) || "/";
+      const date = asValidDate(m[2]);
+      if (date) publishedSitemapCache.set(path, date);
+    }
+  } catch {
+    // 初回ビルド時などsitemap.xmlが無い場合は、単に候補なしとして扱う。
+  }
+  return publishedSitemapCache;
+}
+
+/** 前回公開時のlastmod（コミット済みsitemap.xml）。記録が無ければundefined。 */
+export function lastmodFromPublishedSitemap(path) {
+  return loadPublishedSitemapLastmod().get(path);
 }
 
 let siteUpdateCache;
@@ -130,6 +172,9 @@ export function resolveLastmod(path, dataDates, dataFileRelPaths = []) {
 
   const fromFiles = maxValidDate(dataFileRelPaths.map(gitLastCommitDate));
   if (fromFiles) return fromFiles;
+
+  const fromPublished = lastmodFromPublishedSitemap(path);
+  if (fromPublished) return fromPublished;
 
   return siteWideLastmod();
 }

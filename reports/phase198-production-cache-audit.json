@@ -1,0 +1,1535 @@
+{
+  "generatedAt": "2026-09-02T03:48:15.056Z",
+  "base": "https://nobeoka-shisei-portal.pages.dev",
+  "localDistPresent": true,
+  "html": [
+    {
+      "path": "/",
+      "contentPath": "/",
+      "trailingSlashRedirect": null,
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "6b3b4489298f311398197a8e7ac0eb903e0627970cbf3eef5ee63bc769d7d877",
+      "status": 200,
+      "bytes": 126586,
+      "sha256Remote": "64ed3f68c1382852f07f2487d503b6bf18b6abb4de3176a6504f743fbc5fa43d",
+      "sha256Local": "6b3b4489298f311398197a8e7ac0eb903e0627970cbf3eef5ee63bc769d7d877",
+      "localFile": "/dist/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"3f9f8a3c207e752801b43d74a4e5aae2\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "市長・市議会・議案を分かりやすく｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/",
+        "description": "延岡市長、市議会議員、議案、採決結果、一般質問、報酬などの公開情報を、市民向けに分かりやすく整理した非公式データベースです。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-15",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 4652,
+        "countPhrases": [
+          "1177件",
+          "13件",
+          "14件",
+          "1567件",
+          "27件",
+          "418件"
+        ]
+      }
+    },
+    {
+      "path": "/dashboard",
+      "contentPath": "/dashboard/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/dashboard/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "6a668030ed377407b5d3788989a0eee3ad32fa7fbb73565d1191e62cc273ca2c",
+      "status": 200,
+      "bytes": 100572,
+      "sha256Remote": "5686cea3c43802742dc8145b41f4dcb309b1ca72f3e999970af9cff032fbdf35",
+      "sha256Local": "0270e78f05674823b3ebf6f716c8499d75463f4a92bbb57721ead148c90b6730",
+      "localFile": "/dist/dashboard/index.html",
+      "identical": false,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"89edf42582c36306cd589fafa7ef9189\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "dateModified",
+          "local": "2026-09-01",
+          "remote": "2026-09-02"
+        },
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "市政データダッシュボード｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/dashboard",
+        "description": "延岡市議会議員、議案、市長公約などの登録件数や構成を、データから自動集計して確認できます。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-09-02",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 3610,
+        "countPhrases": [
+          "101件",
+          "1177件",
+          "12件",
+          "13件",
+          "14件",
+          "1567件",
+          "15件",
+          "16件",
+          "17件",
+          "19件",
+          "20件",
+          "22件",
+          "23件",
+          "25件",
+          "27件",
+          "29件",
+          "37件",
+          "38件",
+          "40件",
+          "418件",
+          "42件",
+          "45件",
+          "49件",
+          "52件",
+          "54件",
+          "56件",
+          "57件",
+          "58件",
+          "62件",
+          "64件",
+          "83件",
+          "86件"
+        ]
+      }
+    },
+    {
+      "path": "/data-status",
+      "contentPath": "/data-status/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/data-status/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "21375f60d466e5cb51e1fe7aae22b2e66f641a444dbe0991a9c10bc4a44e5178",
+      "status": 200,
+      "bytes": 108833,
+      "sha256Remote": "700319613b1eb3924128bfed714ca19df569c6ae70739189c9a8bcecfcacaa93",
+      "sha256Local": "21375f60d466e5cb51e1fe7aae22b2e66f641a444dbe0991a9c10bc4a44e5178",
+      "localFile": "/dist/data-status/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"b0bca365254dd845eddb2a1b60cc90f5\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "データ収録状況｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/data-status",
+        "description": "延岡市政見える化ポータルが登録している議員・元議員・歴代市長・議案・条例・請願・陳情・政策・財政・一般質問等の収録件数と確認状況を、既存データから自動集計して表示します。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-24",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 13263,
+        "countPhrases": [
+          "1,153件",
+          "1,176件",
+          "1,177件",
+          "1,567件",
+          "10件",
+          "1177件",
+          "11件",
+          "1228件",
+          "12件",
+          "13件",
+          "14件",
+          "15件",
+          "16件",
+          "17件",
+          "19件",
+          "2,187件",
+          "2,276件",
+          "20件",
+          "21件",
+          "23件",
+          "24件",
+          "26件",
+          "278件",
+          "27件",
+          "29件",
+          "30件",
+          "36件",
+          "39件",
+          "402件",
+          "418件",
+          "521件",
+          "622件",
+          "62件",
+          "630件",
+          "67件",
+          "68件",
+          "70件",
+          "775件",
+          "98件"
+        ]
+      }
+    },
+    {
+      "path": "/people",
+      "contentPath": "/people/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/people/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "fd6915f7d85a43549fda3a491aba9f8e63889aa9b767920af1e7bfc44d7b7710",
+      "status": 200,
+      "bytes": 180756,
+      "sha256Remote": "8c583ec231608b577308cfe5144c44cd4d99ad8f1565c4c39b7bfae222ea4e1c",
+      "sha256Local": "d7c43cab4d4c3607bf2b58a1870763d90d4bd01097cb59358ce5e6c30d4aa96b",
+      "localFile": "/dist/people/index.html",
+      "identical": false,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"5ec20a3b4942593107196d7b32ddbce2\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "dateModified",
+          "local": "2026-08-29",
+          "remote": "2026-09-02"
+        },
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "人物から探す｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/people",
+        "description": "現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-09-02",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 19099,
+        "countPhrases": [
+          "10件",
+          "11件",
+          "12件",
+          "14件",
+          "15件",
+          "16件",
+          "19件",
+          "22件",
+          "23件",
+          "25件",
+          "42件",
+          "98件"
+        ]
+      }
+    },
+    {
+      "path": "/questions",
+      "contentPath": "/questions/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/questions/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "6c6ed60433d670c7fa1127a6ab1b81bf7ff4d56eb4eb0e628d6124d666c32596",
+      "status": 200,
+      "bytes": 264203,
+      "sha256Remote": "be241095471b6ab94245b95b498e773b418566540239f6211e8c64360930c1b4",
+      "sha256Local": "6c6ed60433d670c7fa1127a6ab1b81bf7ff4d56eb4eb0e628d6124d666c32596",
+      "localFile": "/dist/questions/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"08f3466befcc82d07f26eb6f080e1b21\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "一般質問データベース｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/questions",
+        "description": "延岡市議会の一般質問を議員別、テーマ別、年度別に検索できます。質問項目・要約・出典を掲載しています。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-09-01",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 17023,
+        "countPhrases": [
+          "11件",
+          "12件",
+          "13件",
+          "14件",
+          "1567件",
+          "16件",
+          "17件",
+          "20件",
+          "27件",
+          "418件"
+        ]
+      }
+    },
+    {
+      "path": "/bills/votes",
+      "contentPath": "/bills/votes/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/bills/votes/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "25b1a8b30aa2d819b2be9a1ed08353605b568b30fb8f831ba90823f39457f2f4",
+      "status": 200,
+      "bytes": 79439,
+      "sha256Remote": "147ae10ca0547e627f6ca9b29f4eb011d77a1cb66f8c1bd4285c3403caa0b45a",
+      "sha256Local": "25b1a8b30aa2d819b2be9a1ed08353605b568b30fb8f831ba90823f39457f2f4",
+      "localFile": "/dist/bills/votes/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"1e22ed844cd2e201d4dbcd8053ff81ef\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "議案ごとの賛否｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/bills/votes",
+        "description": "延岡市議会に提出された議案の概要、採決結果、議員ごとの賛成・反対などを確認できます。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-24",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 6199,
+        "countPhrases": [
+          "1177件"
+        ]
+      }
+    },
+    {
+      "path": "/committees",
+      "contentPath": "/committees/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/committees/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "1667c9bca250599321edec0c4b066e7dd82b5f1fd6401f05caf31cf3ce696467",
+      "status": 200,
+      "bytes": 35489,
+      "sha256Remote": "41a89a8f3fd49bb8e6f9906cef93c4b391bdcf546d9607c8cd6a85dd0ce0cea0",
+      "sha256Local": "1667c9bca250599321edec0c4b066e7dd82b5f1fd6401f05caf31cf3ce696467",
+      "localFile": "/dist/committees/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"57eb3e704f1080fe310a0afb8864712e\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "委員会一覧｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/committees",
+        "description": "延岡市議会の常任委員会・議会運営委員会・特別委員会の委員名簿を、延岡市議会公式ホームページの公表資料に基づいて整理しています。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-16",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 1391,
+        "countPhrases": []
+      }
+    },
+    {
+      "path": "/finance",
+      "contentPath": "/finance/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/finance/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "84e33008d345c99c0fe4c9608b380eba36e85d43efe40af6c32f54c84841d2d7",
+      "status": 200,
+      "bytes": 130278,
+      "sha256Remote": "fecc199bc192cc007b8ebc4a152c4bc75707af13a54df00b1e6ebad330cc6e01",
+      "sha256Local": "84e33008d345c99c0fe4c9608b380eba36e85d43efe40af6c32f54c84841d2d7",
+      "localFile": "/dist/finance/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"5e8de19cc34b46b1c77f377aa2a0ef6d\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "延岡市の財政｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/finance",
+        "description": "令和8年度の一般会計の歳入・歳出構成、基金残高、人口推移、財政指標を公開資料に基づいて整理しています。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-06",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 7657,
+        "countPhrases": []
+      }
+    },
+    {
+      "path": "/history",
+      "contentPath": "/history/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/history/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "be7139fa4b9fa1a8bcd73eaea65f3313dfc5eb0622860b634b004d013903deb5",
+      "status": 200,
+      "bytes": 644030,
+      "sha256Remote": "d8ccf2bf2c1e53641da9dd1835de3a98d7cafbbcedc4805d014a2a2cb3fe0a25",
+      "sha256Local": "be7139fa4b9fa1a8bcd73eaea65f3313dfc5eb0622860b634b004d013903deb5",
+      "localFile": "/dist/history/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"08b7fb2328d39fae5e890ff151976b4a\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "延岡市政90年の歴史年表（市制施行〜現在）｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/history",
+        "description": "1933年の市制施行から現在までの延岡市政の歩みを、市制施行、合併、市庁舎、災害、公共事業等の出来事と歴代市長、人口の推移とあわせて年代順に整理しています。延岡市公式資料で確認できる範囲のみ掲載。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-29",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 56018,
+        "countPhrases": [
+          "17件",
+          "19件",
+          "217件"
+        ]
+      }
+    },
+    {
+      "path": "/mayor",
+      "contentPath": "/mayor/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/mayor/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "c529678d9f6c31a7330744ddb9f049005776ff8135114f22848f73fd326731c3",
+      "status": 200,
+      "bytes": 47028,
+      "sha256Remote": "e80d833b0165a8f808b559fde98299cd0ca31cf1d90afa59f233c7a29f7ccf0e",
+      "sha256Local": "72a1f7fcdecc6ae2b1fd7fe25c92b6c42ebc5c15c46ecc0dbe8cfc277c59c6f1",
+      "localFile": "/dist/mayor/index.html",
+      "identical": false,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"f19784dd433e2b63d1793c4c4c569ac0\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "dateModified",
+          "local": "2026-08-05",
+          "remote": "2026-09-02"
+        },
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "延岡市長 三浦 久知｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/mayor",
+        "description": "延岡市長三浦 久知氏のプロフィール、経歴、公約、市政方針を公開資料に基づいて掲載しています。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-09-02",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 1896,
+        "countPhrases": [
+          "14件"
+        ]
+      }
+    },
+    {
+      "path": "/mayor/policy-progress",
+      "contentPath": "/mayor/policy-progress/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/mayor/policy-progress/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "977b637bc928a5dc9c1b07267c3a548949270e21ec36360c533896d3d9b55e56",
+      "status": 200,
+      "bytes": 167548,
+      "sha256Remote": "43ba48f7167ba350cbd60343e73df56b4ced0f0126a2899603f71160de8f9a56",
+      "sha256Local": "977b637bc928a5dc9c1b07267c3a548949270e21ec36360c533896d3d9b55e56",
+      "localFile": "/dist/mayor/policy-progress/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"5586394e68f21927fad05794eec116b7\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "市長公約の進捗状況｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/mayor/policy-progress",
+        "description": "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料をキーワード・政策分野・進捗状況などで検索できます。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-09-01",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 15577,
+        "countPhrases": [
+          "1177件",
+          "12件",
+          "14件",
+          "33件",
+          "622件"
+        ]
+      }
+    },
+    {
+      "path": "/updates",
+      "contentPath": "/updates/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/updates/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "edef9cf3d8bbcf90823e25bac91c281fda5fe3cae61ffb9a97f41364b04f06dd",
+      "status": 200,
+      "bytes": 60076,
+      "sha256Remote": "874b18521a27b939c5febfa3961c85d935f20633afa437b188962fc9d52a692f",
+      "sha256Local": "edef9cf3d8bbcf90823e25bac91c281fda5fe3cae61ffb9a97f41364b04f06dd",
+      "localFile": "/dist/updates/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"4796bd5a3efa79599742040e2276cf1c\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "更新履歴｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/updates",
+        "description": "延岡市政見える化ポータルの機能追加、データ更新、表示改善などの更新履歴を掲載しています。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-09-01",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 5943,
+        "countPhrases": [
+          "11件",
+          "12件",
+          "137件",
+          "14件",
+          "15件",
+          "17件",
+          "18件",
+          "26件",
+          "33件"
+        ]
+      }
+    },
+    {
+      "path": "/search",
+      "contentPath": "/search/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/search/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "a76a08042568296d9919c597cc6f82d47b874ec036a07a4b60b6486aa5ca57cc",
+      "status": 200,
+      "bytes": 30284,
+      "sha256Remote": "231239ffbfed4ad8aaf0397ba89a09b41447a6326f96be7d9ec8677324725957",
+      "sha256Local": "a76a08042568296d9919c597cc6f82d47b874ec036a07a4b60b6486aa5ca57cc",
+      "localFile": "/dist/search/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"699ae270d9a93c23f4de3ead4928dbb7\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "サイト内検索｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/search",
+        "description": "議員、一般質問、議案、市長公約、財政、報酬、市役所案内などをまとめて検索できます。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": null,
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 835,
+        "countPhrases": []
+      }
+    },
+    {
+      "path": "/compare",
+      "contentPath": "/compare/",
+      "trailingSlashRedirect": {
+        "status": 308,
+        "location": "/compare/"
+      },
+      "edgeInjectedAnalyticsBeacon": true,
+      "sha256RemoteNormalized": "9b398db8acfed587917d8ae09bb1d426940b4dd16ae836da58454cd5856f2e68",
+      "status": 200,
+      "bytes": 35898,
+      "sha256Remote": "fd0df6687984dc97375e1b82150f1149ac06f10008b4c27c68d87f6dc6a0298c",
+      "sha256Local": "9b398db8acfed587917d8ae09bb1d426940b4dd16ae836da58454cd5856f2e68",
+      "localFile": "/dist/compare/index.html",
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "W/\"de8460100081fef8f326baaf5c95e3cd\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      },
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ],
+      "remoteMarkers": {
+        "title": "市政アーカイブの比較｜延岡市政見える化ポータル",
+        "canonical": "https://nobeoka-shisei-portal.pages.dev/compare",
+        "description": "歴代市長・年度別財政（人口・予算・市債・基金）を、最大4件まで選んで比較できます。点数化や優劣判定は行いません。",
+        "jsonLdCount": 0,
+        "jsonLdSha": [],
+        "dateModified": "2026-08-12",
+        "assets": [
+          "/assets/index-BDQlXE4S.js",
+          "/assets/index-DqecrAHT.css",
+          "/assets/usePageTitle-D6Pm4BqR.js"
+        ],
+        "lastUpdated": null,
+        "textLength": 1291,
+        "countPhrases": []
+      }
+    }
+  ],
+  "static": [
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "bytes": 304145,
+      "sha256Remote": "9bde8fec0f19a6db07518066d5dbf880794b21593a6c10c3329eb3ba7b8601fc",
+      "sha256Local": "8e02856e2cbd5a087332023d96609dd85c3ccac2df3fb545d32b88e780c25d69",
+      "identical": false,
+      "headers": {
+        "content-type": "application/xml",
+        "cache-control": "public, max-age=3600",
+        "etag": "W/\"11d9bb19d5ffa038ff7f769045ab4a8f\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "bytes": 85,
+      "sha256Remote": "c2231ba27a4884e73ac6065a7cbe9de2440be7b95d2bcd9d1d1dc967946b5f57",
+      "sha256Local": "c2231ba27a4884e73ac6065a7cbe9de2440be7b95d2bcd9d1d1dc967946b5f57",
+      "identical": true,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "public, max-age=3600",
+        "etag": "W/\"5b0efdee920e4cba714f9ba4d655c559\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    },
+    {
+      "path": "/favicon.svg",
+      "status": 200,
+      "bytes": 9522,
+      "sha256Remote": "61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66",
+      "sha256Local": "61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66",
+      "identical": true,
+      "headers": {
+        "content-type": "image/svg+xml",
+        "cache-control": "public, max-age=604800",
+        "etag": "W/\"e9fa0264554860705e50bb29376f7aab\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    },
+    {
+      "path": "/og-image.png",
+      "status": 200,
+      "bytes": 294427,
+      "sha256Remote": "b6c927ce8f20e927eec3c8fc88929f8a99186f74858b4a023763a1f6e7b39ef1",
+      "sha256Local": "b6c927ce8f20e927eec3c8fc88929f8a99186f74858b4a023763a1f6e7b39ef1",
+      "identical": true,
+      "headers": {
+        "content-type": "image/png",
+        "cache-control": "public, max-age=86400",
+        "etag": "\"575d02e790678794c60a9eb0e9ea8b92\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    }
+  ],
+  "assets": [
+    {
+      "path": "/assets/index-BDQlXE4S.js",
+      "status": 200,
+      "bytes": 865380,
+      "existsLocally": false,
+      "identical": null,
+      "headers": {
+        "content-type": "application/javascript",
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "W/\"9ae433b83290f82bbab80b3a48d692fb\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    },
+    {
+      "path": "/assets/index-DqecrAHT.css",
+      "status": 200,
+      "bytes": 51103,
+      "existsLocally": true,
+      "identical": true,
+      "headers": {
+        "content-type": "text/css; charset=utf-8",
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "W/\"7115740d9efef84ff433869d69027111\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    },
+    {
+      "path": "/assets/usePageTitle-D6Pm4BqR.js",
+      "status": 200,
+      "bytes": 1656723,
+      "existsLocally": true,
+      "identical": true,
+      "headers": {
+        "content-type": "application/javascript",
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "W/\"d28b0b70d890465b64adb29418dbfaf5\"",
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": {
+        "status": 304,
+        "cfCacheStatus": null
+      }
+    }
+  ],
+  "peopleVariants": [
+    {
+      "path": "/people/?type=member",
+      "status": 200,
+      "bytes": 69861,
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": null,
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": null,
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/people/?type=former-member",
+      "status": 200,
+      "bytes": 129579,
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": null,
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": null,
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/people/?type=mayor",
+      "status": 200,
+      "bytes": 53958,
+      "identical": true,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": null,
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": null,
+        "cf-cache-status": null
+      },
+      "revalidation": null,
+      "markerDiffs": [
+        {
+          "key": "assets",
+          "local": [
+            "/assets/index-BTjUWD4q.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ],
+          "remote": [
+            "/assets/index-BDQlXE4S.js",
+            "/assets/index-DqecrAHT.css",
+            "/assets/usePageTitle-D6Pm4BqR.js"
+          ]
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "path": "/api/site-stats",
+      "status": 200,
+      "bytes": 154,
+      "bodyPreview": "{\"ok\":true,\"totalViews\":2510,\"todayViews\":111,\"updatedAt\":\"2026-09-02T03:48:24.837Z\",\"source\":\"cloudflare\",\"windowDays\":180,\"rangeStartDate\":\"2026-03-06\"}",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "public, max-age=3600, s-maxage=3600",
+        "etag": null,
+        "age": null,
+        "cf-cache-status": null,
+        "last-modified": null,
+        "vary": null
+      },
+      "headersSecond": {
+        "age": "0",
+        "cf-cache-status": "HIT"
+      },
+      "revalidation": null
+    }
+  ],
+  "sitemap": {
+    "remoteUrlCount": 2201,
+    "localUrlCount": 2201,
+    "onlyInRemote": [],
+    "onlyInLocal": [],
+    "lastmodDiffCount": 91,
+    "lastmodDiffSamples": [
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/dashboard",
+        "remote": "2026-09-02",
+        "local": "2026-09-01"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/mayor",
+        "remote": "2026-09-02",
+        "local": "2026-08-05"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/members/history",
+        "remote": "2026-09-02",
+        "local": "2026-08-24"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/people",
+        "remote": "2026-09-02",
+        "local": "2026-08-29"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-council-video-streaming-2019-12",
+        "remote": "2026-09-02",
+        "local": "2026-08-23"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-nursing-care-insurance-improvement-2019-12",
+        "remote": "2026-09-02",
+        "local": "2026-08-23"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-nursing-care-insurance-improvement-2020-03",
+        "remote": "2026-09-02",
+        "local": "2026-08-23"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-nursing-care-insurance-improvement-2020-06",
+        "remote": "2026-09-02",
+        "local": "2026-08-23"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-paddy-field-subsidy-review-2022-06",
+        "remote": "2026-09-02",
+        "local": "2026-08-23"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-school-refusal-support-2026",
+        "remote": "2026-09-02",
+        "local": "2026-08-23"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-children",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-city-hall",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-economy",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-senior",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-administrative-reform",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-community-bonds",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-covid",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-economy",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      },
+      {
+        "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-future",
+        "remote": "2026-09-02",
+        "local": "2026-08-14"
+      }
+    ],
+    "remoteLastmodEqualToAuditDate": 95,
+    "localLastmodEqualToAuditDate": 4,
+    "auditDate": "2026-09-02"
+  },
+  "summary": {
+    "htmlChecked": 14,
+    "staleHtmlCount": 3,
+    "staleHtmlPaths": [
+      "/dashboard",
+      "/people",
+      "/mayor"
+    ],
+    "assetNameOnlyDiffCount": 11,
+    "assetNameOnlyDiffPaths": [
+      "/",
+      "/data-status",
+      "/questions",
+      "/bills/votes",
+      "/committees",
+      "/finance",
+      "/history",
+      "/mayor/policy-progress",
+      "/updates",
+      "/search",
+      "/compare"
+    ],
+    "dateModifiedDiffCount": 3,
+    "dateModifiedDiffs": [
+      {
+        "path": "/dashboard",
+        "key": "dateModified",
+        "local": "2026-09-01",
+        "remote": "2026-09-02"
+      },
+      {
+        "path": "/people",
+        "key": "dateModified",
+        "local": "2026-08-29",
+        "remote": "2026-09-02"
+      },
+      {
+        "path": "/mayor",
+        "key": "dateModified",
+        "local": "2026-08-05",
+        "remote": "2026-09-02"
+      }
+    ],
+    "trailingSlashRedirectCount": 13,
+    "trailingSlashRedirectStatuses": [
+      "308"
+    ],
+    "staticChecked": 4,
+    "staleStaticCount": 1,
+    "staleStaticPaths": [
+      "/sitemap.xml"
+    ],
+    "assetsChecked": 3,
+    "staleAssetCount": 0,
+    "staleAssetPaths": [],
+    "htmlWithoutRevalidation": [],
+    "assetsWithoutImmutable": [],
+    "cacheControlByKind": {
+      "html": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "static": {
+        "/sitemap.xml": "public, max-age=3600",
+        "/robots.txt": "public, max-age=3600",
+        "/favicon.svg": "public, max-age=604800",
+        "/og-image.png": "public, max-age=86400"
+      },
+      "asset": [
+        "public, max-age=31536000, immutable"
+      ],
+      "function": {
+        "/api/site-stats": "public, max-age=3600, s-maxage=3600"
+      }
+    }
+  }
+}

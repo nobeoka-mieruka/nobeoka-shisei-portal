@@ -6,6 +6,15 @@
 /images/*
   Cache-Control: public, max-age=604800
 
+# 議員・市長の顔写真（/photos/*）。/images/*と同じ種類の静的画像だが、2026-09-02（Phase198）の
+# 本番実測まで指定が漏れており、Cloudflare Pagesの既定（public, max-age=0, must-revalidate）で
+# 配信されていた。議員一覧（/people）は1ページで最大27枚を読み込むため、再訪のたびに
+# 画像1枚ずつの条件付きリクエスト（304）が発生していた。
+# ファイル名にハッシュが付かないため長期キャッシュ（immutable）にはせず、/images/*と同じ7日とする。
+# 写真を差し替えた直後に確実へ反映させたい場合は、ファイル名を変更すること。
+/photos/*
+  Cache-Control: public, max-age=604800
+
 /og/*
   Cache-Control: public, max-age=86400
 
