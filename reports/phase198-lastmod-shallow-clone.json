@@ -1,0 +1,154 @@
+{
+  "generatedAt": "2026-09-02T03:42:19.540Z",
+  "phase": "Phase198",
+  "subject": "sitemap.xml・JSON-LD dateModified の lastmod が本番でビルド日になる問題の原因特定と修正",
+  "headCommit": "871415eb00f37a038b32b0ac923c7c0e3e843a59",
+  "productionDeployCommit": "871415e（ローカルHEADと同一。本番HTML本文もローカルビルドと一致することを確認済み）",
+  "method": "本番へ実HTTPリクエストしたsitemap.xmlと、(a)コミット済みpublic/sitemap.xml、(b)全履歴ローカルビルド、(c)同一コミットの浅いclone（git clone --depth 1）でのビルド、(d)修正後の浅いcloneでのビルド、を突き合わせた",
+  "urlCounts": {
+    "remote": 2201,
+    "committed": 2201,
+    "localFullHistory": 2201,
+    "shallowAfterFix": 2201
+  },
+  "lastmodEqualToBuildDate": {
+    "production": 95,
+    "committed": 1,
+    "localFullHistoryBuild": 4,
+    "shallowCloneBeforeFix": "95（本番と完全一致。reproduction参照）",
+    "shallowCloneAfterFix": 1
+  },
+  "diffCounts": {
+    "productionVsLocalFullHistory": 91,
+    "productionVsCommitted": 94,
+    "shallowAfterFixVsCommitted": 0,
+    "shallowAfterFixVsProduction": 94,
+    "shallowAfterFixVsLocalFullHistory": 3
+  },
+  "reproduction": {
+    "command": "git clone --depth 1 <repo> && node scripts/generate-sitemap.mjs",
+    "resultBeforeFix": "lastmodが2026-09-02（ビルド日）のURLが95件。本番のsitemap.xmlとの差分0件＝本番の状態を完全に再現した",
+    "resultAfterFix": "lastmodが2026-09-02のURLは1件（サイト先頭ページのみ）。コミット済みsitemap.xmlとの差分0件",
+    "conclusion": "本番の日付ずれはCDNの古いキャッシュではなく、Cloudflare PagesのGit連携ビルドが浅いclone（全ファイルの最終コミット＝HEAD）で行われることが原因"
+  },
+  "remainingDifferenceAfterFix": [
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/about",
+      "shallowAfterFix": "2026-08-02",
+      "localFullHistory": "2026-09-02"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/contact",
+      "shallowAfterFix": "2026-07-24",
+      "localFullHistory": "2026-09-02"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/terms",
+      "shallowAfterFix": "2026-07-24",
+      "localFullHistory": "2026-09-02"
+    }
+  ],
+  "fix": "scripts/lib/lastmod.mjs：浅いcloneを検出した場合はGitの日付を使わず（全ファイルがHEADの日付になり無意味なため）、前回公開時のlastmod（コミット済みpublic/sitemap.xml）→サイト全体の最終更新日、の順にフォールバックする",
+  "sampleDiffs": [
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/dashboard",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-09-01"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/mayor",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-05"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/members/history",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-24"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/people",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-29"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-council-video-streaming-2019-12",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-23"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-nursing-care-insurance-improvement-2019-12",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-23"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-nursing-care-insurance-improvement-2020-03",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-23"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-nursing-care-insurance-improvement-2020-06",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-23"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-paddy-field-subsidy-review-2022-06",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-23"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/petitions/petition-school-refusal-support-2026",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-23"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-children",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-city-hall",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-economy",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-miura-senior",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-administrative-reform",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-community-bonds",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-covid",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-economy",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    },
+    {
+      "loc": "https://nobeoka-shisei-portal.pages.dev/policies/mayor-yomiyama-future",
+      "production": "2026-09-02",
+      "localFullHistory": "2026-08-14"
+    }
+  ]
+}
