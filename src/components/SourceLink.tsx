@@ -28,7 +28,7 @@ export function SourceLink({ url, label = "根拠資料を見る", verifiedAt, c
           }
           trackEvent("official_source_click", { link_domain: hostname, page_path: window.location.pathname });
         }}
-        className="inline-flex items-center gap-1 rounded py-1 text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="inline-flex min-h-11 items-center gap-1 rounded py-1 text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <GlobeIcon className="h-3.5 w-3.5" />
         {label}

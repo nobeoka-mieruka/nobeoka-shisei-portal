@@ -39,14 +39,14 @@ export function VerifiedSpeechCard({
         </div>
         <Link
           to={detailHref}
-          className={`shrink-0 rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
         >
           詳細を見る
         </Link>
       </div>
 
       <div className="mt-2">
-        <Link to={memberHref} className={`inline-block py-1 text-sm font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to={memberHref} className={`inline-flex min-h-11 items-center py-1 text-sm font-medium text-primary hover:underline ${linkClass}`}>
           {memberName}
         </Link>
         <Link to={detailHref} className={`block w-full text-left ${linkClass}`}>
@@ -76,7 +76,7 @@ export function VerifiedSpeechCard({
             target="_blank"
             rel="noopener noreferrer"
             aria-label="公式会議録を新しいタブで開く"
-            className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
           >
             <GlobeIcon className="h-3.5 w-3.5" />
             公式会議録を見る

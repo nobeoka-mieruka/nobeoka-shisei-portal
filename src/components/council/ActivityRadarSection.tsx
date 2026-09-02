@@ -28,7 +28,7 @@ function MetricCard({ metric }: { metric: RadarMetric }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`flex w-full flex-wrap items-center justify-between gap-2 text-left ${linkClass}`}
+        className={`flex min-h-11 w-full flex-wrap items-center justify-between gap-2 text-left ${linkClass}`}
       >
         <span className="text-sm font-semibold text-on-surface">{metric.label}</span>
         <span className="flex items-center gap-2">
@@ -123,7 +123,7 @@ export function ActivityRadarSection({
         type="button"
         onClick={() => setMethodologyOpen((v) => !v)}
         aria-expanded={methodologyOpen}
-        className={`mt-3 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
       >
         {methodologyOpen ? "算定方法を閉じる" : "算定方法を見る"}
       </button>

@@ -145,21 +145,21 @@ export function MayorDetailPage() {
           {mayor.isCurrentMayor && (
             <Link
               to="/mayor"
-              className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
             >
               現職市長の公約・市政方針を見る
             </Link>
           )}
           <Link
             to={`/compare/mayors?${buildCompareSearchParams([mayor.id]).toString()}`}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             この市長を比較
           </Link>
           {terms[0] && (
             <Link
               to={`/timeline/${fiscalYearOfIsoDate(terms[0].termStart)}`}
-              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
             >
               この市長の任期を年表で見る
             </Link>
@@ -360,7 +360,7 @@ export function MayorDetailPage() {
                 <li key={f.fiscalYear}>
                   <Link
                     to={`/timeline/${f.fiscalYear}`}
-                    className={`inline-block rounded-full bg-surface-container-high px-3 py-1 text-xs font-medium text-on-surface hover:underline ${linkClass}`}
+                    className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1 text-xs font-medium text-on-surface hover:underline ${linkClass}`}
                   >
                     {f.fiscalYear}年度
                   </Link>
@@ -404,7 +404,7 @@ export function MayorDetailPage() {
                   <p className="mt-1 text-sm text-on-surface-variant">{ev.summary}</p>
                   <Link
                     to={`/timeline/${civicTimelineEventFiscalYear(ev)}`}
-                    className={`mt-2 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}
+                    className={`mt-2 inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline ${linkClass}`}
                   >
                     同じ年度の財政・人口・議案等をまとめて見る
                   </Link>
@@ -413,7 +413,7 @@ export function MayorDetailPage() {
             </ul>
             <Link
               to={`/history?person=${mayor.id}`}
-              className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+              className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
             >
               市政年表でこの市長の在任期間の出来事だけを見る
             </Link>

@@ -50,7 +50,7 @@ export function DepartmentList({ categories, entries }: DepartmentListProps) {
                         <a
                           href={telHref}
                           aria-label={`${cityGuideConfig.officeName}${entry.department}へ電話する（${entry.phone}）`}
-                          className="inline-flex items-center gap-1.5 rounded text-sm font-medium text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded text-sm font-medium text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                         >
                           <PhoneIcon aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
                           {entry.phone}
@@ -65,7 +65,7 @@ export function DepartmentList({ categories, entries }: DepartmentListProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${entry.department}の延岡市公式ページを新しいタブで開く`}
-                          className="inline-flex items-center gap-1.5 rounded text-sm font-medium break-all text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded text-sm font-medium break-all text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                         >
                           <GlobeIcon aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
                           公式ページ

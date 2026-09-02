@@ -336,7 +336,7 @@ export function GeneralQuestionsPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${s.title}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                className={`inline-flex min-h-11 items-center gap-1 text-primary hover:underline ${linkClass}`}
               >
                 <GlobeIcon className="h-3.5 w-3.5" />
                 {s.label}（{s.title}）
@@ -373,13 +373,13 @@ export function GeneralQuestionsPage() {
           <FilterSelect label="質問区分" value={questionType} onChange={setQuestionType} options={questionTypeOptions} />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+          <label className="flex min-h-11 max-w-full shrink-0 items-stretch gap-2 rounded-full bg-surface-container-high px-4 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
             <span className="sr-only">並び替え</span>
             <select
               value={sortKey}
               onChange={(e) => setSortKey(e.target.value as QuestionSortKey)}
               aria-label="並び替え"
-              className="bg-transparent text-on-surface focus:outline-none"
+              className="min-w-0 max-w-full truncate bg-transparent text-on-surface focus:outline-none"
             >
               {sortOptions.map((o) => (
                 <option key={o.value} value={o.value}>

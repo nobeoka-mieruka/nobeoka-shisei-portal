@@ -187,14 +187,14 @@ export function BillVoteDetailPage() {
           <button
             type="button"
             onClick={handleCopy}
-            className={`rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+            className={`inline-flex min-h-11 items-center rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
           >
             {copied ? "コピーしました" : "このページのURLをコピー"}
           </button>
           <button
             type="button"
             onClick={() => window.print()}
-            className={`rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+            className={`inline-flex min-h-11 items-center rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
           >
             印刷
           </button>
@@ -453,8 +453,10 @@ export function BillVoteDetailPage() {
               : "確認中の項目があります。"}
           </p>
         )}
+        {/* Phase192：320px幅では4列だと1列あたり約42pxしか確保できず、「採決なし」
+            「確認不能」等の4文字ラベルが窮屈になるため、2列→4列と段階的に増やす。 */}
         {bill.memberVotes.length > 0 && (
-          <div className="mt-4 grid grid-cols-4 gap-2">
+          <div className="mt-4 grid grid-cols-2 gap-2 min-[400px]:grid-cols-4">
             {voteOrder.map((v) => {
               const count = bill.memberVotes.filter((mv) => mv.vote === v).length;
               return (
@@ -517,7 +519,7 @@ export function BillVoteDetailPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${d.label}を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-4 w-4" />
                   {d.label}
@@ -545,7 +547,7 @@ export function BillVoteDetailPage() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="この議案が掲載されているPDFを新しいタブで開く"
-              className={`inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
             >
               この議案が掲載されているPDFを開く
             </a>
@@ -555,14 +557,14 @@ export function BillVoteDetailPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="延岡市議会公式サイトでこの資料を確認する（新しいタブで開く）"
-                className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
               >
                 公式サイトで確認する
               </a>
             )}
             <Link
               to={`/council-documents/${councilDocumentLink.sessionId}`}
-              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
             >
               同じ定例会の資料を見る
             </Link>
@@ -589,7 +591,7 @@ export function BillVoteDetailPage() {
                 </div>
                 <Link
                   to={`/bills/compare?left=${encodeURIComponent(bill.id)}&right=${encodeURIComponent(rb.id)}`}
-                  className={`shrink-0 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+                  className={`inline-flex min-h-11 shrink-0 items-center rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
                 >
                   比較する
                 </Link>

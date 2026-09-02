@@ -62,7 +62,7 @@ function SectionSource({ section }: { section: string }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${source.title}を新しいタブで開く`}
-        className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+        className={`inline-flex min-h-11 items-center gap-1 text-primary hover:underline ${linkClass}`}
       >
         <GlobeIcon className="h-3.5 w-3.5" />
         {source.title}
@@ -121,25 +121,25 @@ export function FinancePage() {
           このページは単年度の詳細です。年度をまたいだ比較は以下の各ページで確認できます。
         </p>
         <div className="mt-2 flex flex-wrap gap-2 text-xs">
-          <Link to="/finance/budget" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/finance/budget" className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
             予算・決算規模の推移
           </Link>
-          <Link to="/finance/debt" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/finance/debt" className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
             市債の推移
           </Link>
-          <Link to="/finance/funds" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/finance/funds" className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
             基金残高の推移
           </Link>
-          <Link to="/compare/finance" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/compare/finance" className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
             年度を比較する
           </Link>
-          <Link to="/compare" className={`rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}>
+          <Link to="/compare" className={`inline-flex min-h-11 items-center rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}>
             年度・市長を選んで比較する
           </Link>
           {latestArchiveFiscalYear != null && (
             <Link
               to={`/timeline/${latestArchiveFiscalYear}`}
-              className={`rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}
+              className={`inline-flex min-h-11 items-center rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}
             >
               この年度のタイムラインを見る
             </Link>
@@ -445,7 +445,7 @@ export function FinancePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${s.title}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
               >
                 <GlobeIcon className="h-4 w-4" />
                 {s.title}

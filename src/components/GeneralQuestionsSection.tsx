@@ -39,7 +39,7 @@ export function GeneralQuestionsSection({ questions }: { questions: GeneralQuest
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={`${q.title}の質問動画を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 rounded-full bg-tertiary-container px-3 py-1.5 text-xs font-medium text-on-tertiary-container transition hover:opacity-90 ${linkClass}`}
+                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-tertiary-container px-3 py-1.5 text-xs font-medium text-on-tertiary-container transition hover:opacity-90 ${linkClass}`}
                 >
                   <PlayIcon className="h-4 w-4" />
                   質問動画を見る
@@ -51,7 +51,7 @@ export function GeneralQuestionsSection({ questions }: { questions: GeneralQuest
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={`${q.title}の会議録を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
                 >
                   会議録を見る
                 </a>

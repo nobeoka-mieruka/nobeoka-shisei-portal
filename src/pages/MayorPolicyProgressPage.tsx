@@ -334,7 +334,7 @@ export function MayorPolicyProgressPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${doc.label}のPDFを新しいタブで開く`}
-                    className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+                    className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
                   >
                     <GlobeIcon className="h-3.5 w-3.5" />
                     PDFを見る（{doc.label}）
@@ -371,7 +371,7 @@ export function MayorPolicyProgressPage() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${data.referenceLabel}を新しいタブで開く`}
-          className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+          className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
         >
           <GlobeIcon className="h-4 w-4" />
           {data.referenceLabel}

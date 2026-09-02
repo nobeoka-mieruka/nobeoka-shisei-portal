@@ -124,7 +124,7 @@ export function TimelinePage() {
                 type="button"
                 onClick={() => toggleCategory(category)}
                 aria-pressed={active}
-                className={`inline-flex min-h-[36px] items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                   active
                     ? "bg-primary text-on-primary"
                     : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
@@ -153,7 +153,7 @@ export function TimelinePage() {
           action={
             <Link
               to={`/timeline/${group.fiscalYear}`}
-              className="shrink-0 rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               この年度のタイムラインを見る
             </Link>
@@ -166,19 +166,25 @@ export function TimelinePage() {
                 <li key={event.id} className="rounded-lg border border-outline-variant p-3">
                   <div className="flex items-start gap-2">
                     <Icon className="mt-0.5 h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
-                    <div className="flex-1">
-                      <p className="text-xs text-on-surface-variant">
+                    {/* Phase192：min-w-0がないと、説明文に英数字の長い連続文字列（資料中の
+                        フィールド名等）が含まれる場合にflexアイテムが縮まず、320px幅で右方向へ
+                        大きくはみ出す（実測238px）。break-wordsと併せて折り返しを保証する。 */}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs break-words text-on-surface-variant">
                         {CATEGORY_META[event.category].label}／{event.dateLabel}
                       </p>
                       {event.relatedPath ? (
-                        <Link to={event.relatedPath} className="text-sm font-semibold text-primary hover:underline">
+                        <Link
+                          to={event.relatedPath}
+                          className="inline-flex min-h-11 items-center text-sm font-semibold break-words text-primary hover:underline"
+                        >
                           {event.title}
                         </Link>
                       ) : (
                         <p className="text-sm font-semibold text-on-surface">{event.title}</p>
                       )}
                       {event.description && (
-                        <p className="mt-1 text-sm text-on-surface-variant">{event.description}</p>
+                        <p className="mt-1 text-sm break-words text-on-surface-variant">{event.description}</p>
                       )}
                     </div>
                   </div>

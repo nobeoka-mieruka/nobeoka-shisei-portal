@@ -12,8 +12,8 @@ export function SearchBar({ value, onChange, placeholder = "議員名で検索",
   return (
     <div>
       {label && <p className="mb-1.5 px-1 text-sm font-medium text-on-surface">{label}</p>}
-      <label className="flex items-center gap-3 rounded-full bg-surface-container-high px-4 py-3 shadow-e1 transition focus-within:shadow-e2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
-        <SearchIcon className="h-5 w-5 shrink-0 text-on-surface-variant" />
+      <label className="flex min-h-11 items-stretch gap-3 rounded-full bg-surface-container-high px-4 shadow-e1 transition focus-within:shadow-e2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+        <SearchIcon className="h-5 w-5 shrink-0 self-center text-on-surface-variant" />
         <input
           type="search"
           value={value}

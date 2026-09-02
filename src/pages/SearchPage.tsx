@@ -239,8 +239,8 @@ export function SearchPage() {
         <label htmlFor="site-search-input" className="sr-only">
           サイト内検索
         </label>
-        <div className="flex items-center gap-3 rounded-full bg-surface-container-high px-4 py-3.5 shadow-e1 transition focus-within:shadow-e2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
-          <SearchIcon className="h-5 w-5 shrink-0 text-on-surface-variant" aria-hidden />
+        <div className="flex min-h-11 items-stretch gap-3 rounded-full bg-surface-container-high px-4 py-3.5 shadow-e1 transition focus-within:shadow-e2 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+          <SearchIcon className="h-5 w-5 shrink-0 self-center text-on-surface-variant" aria-hidden />
           <input
             ref={inputRef}
             id="site-search-input"
@@ -266,7 +266,7 @@ export function SearchPage() {
             type="button"
             onClick={() => commitQuery(query)}
             aria-label="検索する"
-            className={`shrink-0 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            className={`inline-flex min-h-11 shrink-0 items-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
           >
             検索
           </button>
@@ -392,13 +392,13 @@ export function SearchPage() {
           </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex min-h-11 max-w-full shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
               <span className="sr-only">年度</span>
               <select
                 value={fiscalYearFilter}
                 onChange={(e) => setFiscalYearFilter(e.target.value)}
                 aria-label="年度で絞り込み"
-                className="bg-transparent text-on-surface focus:outline-none"
+                className="min-w-0 max-w-full truncate bg-transparent py-2 text-on-surface focus:outline-none"
               >
                 <option value="">年度：すべて</option>
                 {fiscalYearOptions.map((y) => (
@@ -408,13 +408,13 @@ export function SearchPage() {
                 ))}
               </select>
             </label>
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex min-h-11 max-w-full shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
               <span className="sr-only">確認状況</span>
               <select
                 value={verificationStatusFilter}
                 onChange={(e) => setVerificationStatusFilter(e.target.value)}
                 aria-label="確認状況で絞り込み"
-                className="bg-transparent text-on-surface focus:outline-none"
+                className="min-w-0 max-w-full truncate bg-transparent py-2 text-on-surface focus:outline-none"
               >
                 <option value="">確認状況：すべて</option>
                 <option value="verified">確認済み</option>
@@ -423,7 +423,7 @@ export function SearchPage() {
                 <option value="sourceUnavailable">出典資料未確認</option>
               </select>
             </label>
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex min-h-11 max-w-full shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
               <input type="checkbox" checked={includeAi} onChange={(e) => setIncludeAi(e.target.checked)} className="h-4 w-4" />
               AI候補を含める
             </label>
@@ -438,13 +438,13 @@ export function SearchPage() {
             <p className="text-sm text-on-surface-variant" aria-live="polite">
               {sortedResults.length > 0 ? `${sortedResults.length}件見つかりました` : "0件"}
             </p>
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex min-h-11 max-w-full shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
               <span className="sr-only">並び替え</span>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SearchSortKey)}
                 aria-label="並び替え"
-                className="bg-transparent text-on-surface focus:outline-none"
+                className="min-w-0 max-w-full truncate bg-transparent py-2 text-on-surface focus:outline-none"
               >
                 {sortOptions.map((o) => (
                   <option key={o.value} value={o.value}>

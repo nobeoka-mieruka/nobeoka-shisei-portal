@@ -50,7 +50,7 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
         </div>
         <Link
           to={`/mayor/policy-progress/${promise.id}`}
-          className={`shrink-0 rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
         >
           詳細を見る
         </Link>
@@ -87,7 +87,7 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
       {/* Phase140項目3・17：予算・議案の詳しい調査経緯（第3層）は折りたたみにし、
           結論だけ知りたい人の負担を減らす。一次資料の記載自体は削除しない。 */}
       <details className="mt-3 rounded-lg bg-surface-container-low">
-        <summary className="cursor-pointer list-none rounded-lg px-3 py-2 text-xs font-medium text-on-surface-variant [&::-webkit-details-marker]:hidden">
+        <summary className="cursor-pointer list-none rounded-lg px-3 py-3.5 text-xs font-medium text-on-surface-variant [&::-webkit-details-marker]:hidden">
           <span className="inline-flex items-center gap-1">
             <span aria-hidden>▶</span>
             予算・議案の詳しい調査内容を見る
@@ -116,7 +116,7 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${doc.label}${doc.page ? `（${doc.page}）` : ""}を新しいタブで開く`}
-                  className={`inline-flex flex-wrap items-center gap-1.5 rounded text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex min-h-11 flex-wrap items-center gap-1.5 rounded text-sm text-primary hover:underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-3.5 w-3.5 shrink-0" />
                   <span>

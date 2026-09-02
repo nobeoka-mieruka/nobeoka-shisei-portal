@@ -23,7 +23,7 @@ export function QuestionCard({ categoryName, questionText, stepNumber, onYes, on
       <button
         type="button"
         onClick={onBackToCategories}
-        className="tap-highlight-none inline-flex items-center gap-1 rounded-full py-1.5 pr-3 pl-1.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="tap-highlight-none inline-flex min-h-11 items-center gap-1 rounded-full py-1.5 pr-3 pl-1.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
         カテゴリ選択に戻る

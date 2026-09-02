@@ -20,7 +20,8 @@ export function GlossaryNote({ term, definition, className = "" }: GlossaryNoteP
     <details
       className={`group rounded-xl border border-outline-variant/60 bg-surface-container-low p-3.5 text-xs leading-relaxed text-on-surface-variant ${className}`}
     >
-      <summary className="flex cursor-pointer list-none items-center gap-1.5 font-medium text-on-surface [&::-webkit-details-marker]:hidden">
+      {/* Phase192：開閉見出しのタップ領域が文字高（約16px）しか無かったため、min-h-11で44pxを確保する。 */}
+      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-1.5 font-medium text-on-surface [&::-webkit-details-marker]:hidden">
         <QuestionMarkCircleIcon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
         <span className="underline decoration-dotted underline-offset-2">{term}とは？</span>
         <span aria-hidden className="ml-auto shrink-0 text-on-surface-variant transition-transform group-open:rotate-90">

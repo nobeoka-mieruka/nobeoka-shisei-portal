@@ -87,7 +87,7 @@ export function KohoSearchPage() {
               key={k}
               type="button"
               onClick={() => setQuery(k)}
-              className={`rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant transition hover:bg-surface-container ${linkClass}`}
+              className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant transition hover:bg-surface-container ${linkClass}`}
             >
               {k}
             </button>
@@ -100,7 +100,7 @@ export function KohoSearchPage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as CategoryFilter)}
-              className={`rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1.5 text-sm text-on-surface ${linkClass}`}
+              className={`min-h-[44px] min-w-0 max-w-full rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1.5 text-sm text-on-surface ${linkClass}`}
             >
               <option value="all">すべて</option>
               {(Object.keys(KOHO_SEARCH_CATEGORY_LABEL) as KohoOcrSearchEntry["category"][]).map((c) => (
@@ -115,7 +115,7 @@ export function KohoSearchPage() {
             <select
               value={yearFilter}
               onChange={(e) => setYearFilter(e.target.value)}
-              className={`rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1.5 text-sm text-on-surface ${linkClass}`}
+              className={`min-h-[44px] min-w-0 max-w-full rounded-lg border border-outline-variant bg-surface-container-low px-2 py-1.5 text-sm text-on-surface ${linkClass}`}
             >
               <option value="all">すべて</option>
               {availableYears.map((y) => (

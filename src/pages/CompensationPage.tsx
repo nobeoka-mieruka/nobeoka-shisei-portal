@@ -252,7 +252,7 @@ export function CompensationPage() {
             {nationalRanking.notes}
           </p>
           <details className="mt-2 rounded-lg border border-outline-variant p-3">
-            <summary className="cursor-pointer text-xs font-medium text-primary">確認した内容の詳細を見る</summary>
+            <summary className="block cursor-pointer py-3.5 text-xs font-medium text-primary">確認した内容の詳細を見る</summary>
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{nationalRanking.calculationMethod}</p>
           </details>
           <SourceLink
@@ -342,7 +342,7 @@ export function CompensationPage() {
 
           {similarMunicipality.targetMunicipalities.length > 0 && (
             <details className="mt-3 rounded-lg border border-outline-variant p-3">
-              <summary className="cursor-pointer text-sm font-medium text-primary">比較対象の自治体を見る</summary>
+              <summary className="block cursor-pointer py-3 text-sm font-medium text-primary">比較対象の自治体を見る</summary>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {similarMunicipality.targetMunicipalities.map((m) => (
                   <li key={m} className="rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant">
@@ -356,7 +356,7 @@ export function CompensationPage() {
             {similarMunicipality.notes}
           </p>
           <details className="mt-2 rounded-lg border border-outline-variant p-3">
-            <summary className="cursor-pointer text-xs font-medium text-primary">確認した内容の詳細を見る</summary>
+            <summary className="block cursor-pointer py-3.5 text-xs font-medium text-primary">確認した内容の詳細を見る</summary>
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{similarMunicipality.calculationMethod}</p>
           </details>
           <SourceLink
@@ -536,7 +536,7 @@ export function CompensationPage() {
 
         {pendingMunicipalities.length > 0 && (
           <details className="mt-3 rounded-lg border border-outline-variant p-3">
-            <summary className="cursor-pointer text-xs font-medium text-primary">
+            <summary className="block cursor-pointer py-3.5 text-xs font-medium text-primary">
               期末手当確認中の自治体（{pendingMunicipalities.length}件）
             </summary>
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">

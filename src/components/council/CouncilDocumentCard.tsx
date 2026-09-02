@@ -87,7 +87,7 @@ export function CouncilDocumentCard({ document: doc }: { document: CouncilDocume
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${doc.title}のPDFを新しいタブで開く`}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${buttonFocusClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${buttonFocusClass}`}
           >
             <DocumentIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
             PDFを開く
@@ -99,7 +99,7 @@ export function CouncilDocumentCard({ document: doc }: { document: CouncilDocume
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${doc.title}を延岡市議会公式サイトで確認する（新しいタブで開く）`}
-            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium transition hover:opacity-90 ${
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium transition hover:opacity-90 ${
               pdfUrl
                 ? "border border-outline-variant text-on-surface-variant hover:bg-surface-container-high"
                 : "bg-primary-container text-on-primary-container shadow-e1"
@@ -119,7 +119,7 @@ export function CouncilDocumentCard({ document: doc }: { document: CouncilDocume
             type="button"
             onClick={() => setPreviewOpen((v) => !v)}
             aria-expanded={previewOpen}
-            className={`hidden items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high sm:inline-flex ${buttonFocusClass}`}
+            className={`hidden min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high sm:inline-flex ${buttonFocusClass}`}
           >
             {previewOpen ? "プレビューを閉じる" : "この画面でプレビューする"}
           </button>

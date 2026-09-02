@@ -35,7 +35,7 @@ export function CsvDownloadButton<T>({ filename, rows, columns, label, className
       onClick={handleClick}
       disabled={rows.length === 0 || generating}
       aria-label={`${filename} をダウンロード（${rows.length}件、CSV形式）`}
-      className={`inline-flex min-h-[40px] items-center gap-1.5 rounded-full bg-surface-container-high px-3.5 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${className}`}
+      className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-3.5 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${className}`}
     >
       <DownloadIcon className="h-4 w-4 shrink-0" aria-hidden />
       {label ?? `CSVをダウンロード（${rows.length}件）`}

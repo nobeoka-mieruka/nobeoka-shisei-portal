@@ -218,14 +218,14 @@ function DomainRow({ domain }: { domain: DataDomain }) {
       {domain.scope && <p className="mt-1 text-xs text-on-surface-variant">収録範囲：{domain.scope}</p>}
       {domain.detail && (
         <details className="mt-1">
-          <summary className="cursor-pointer text-xs font-medium text-on-surface-variant hover:text-on-surface">
+          <summary className="block cursor-pointer py-3.5 text-xs font-medium text-on-surface-variant hover:text-on-surface">
             詳しい内訳を見る
           </summary>
           <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{domain.detail}</p>
         </details>
       )}
       {domain.linkTo && (
-        <Link to={domain.linkTo} className={`mt-1.5 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to={domain.linkTo} className={`mt-1.5 inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline ${linkClass}`}>
           {domain.linkLabel ?? "詳しく見る"} →
         </Link>
       )}
@@ -851,7 +851,7 @@ export function DataStatusPage() {
         </dl>
         {dataQualitySummary.linkHealth && dataQualitySummary.linkHealth.broken.length > 0 && (
           <details className="mt-3">
-            <summary className="cursor-pointer text-xs font-medium text-on-surface-variant hover:text-on-surface">
+            <summary className="block cursor-pointer py-3.5 text-xs font-medium text-on-surface-variant hover:text-on-surface">
               リンク切れの内訳を見る（{dataQualitySummary.linkHealth.broken.length}件）
             </summary>
             <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">

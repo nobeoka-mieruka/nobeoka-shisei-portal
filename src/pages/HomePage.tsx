@@ -269,8 +269,8 @@ export function HomePage() {
           宮崎県延岡市の市長、市議会議員、議案、一般質問、財政、報酬などの公開情報を、スマートフォンからでも分かりやすく確認できる非公式サイトです。
         </p>
         <form onSubmit={handleHeroSearchSubmit} className="mt-4" role="search">
-          <label className="flex items-center gap-3 rounded-full bg-surface px-4 py-3.5 shadow-e2 transition focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary sm:py-4">
-            <SearchIcon className="h-6 w-6 shrink-0 text-on-surface-variant" aria-hidden="true" />
+          <label className="flex min-h-11 items-stretch gap-3 rounded-full bg-surface px-4 py-3.5 shadow-e2 transition focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary sm:py-4">
+            <SearchIcon className="h-6 w-6 shrink-0 self-center text-on-surface-variant" aria-hidden="true" />
             <input
               type="search"
               value={heroQuery}
@@ -281,7 +281,7 @@ export function HomePage() {
             />
             <button
               type="submit"
-              className={`shrink-0 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary transition hover:opacity-90 ${focusRing}`}
+              className={`inline-flex min-h-11 shrink-0 items-center rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary transition hover:opacity-90 ${focusRing}`}
             >
               検索
             </button>
@@ -361,16 +361,16 @@ export function HomePage() {
 
       {/* このサイトについて・編集方針等の信頼性情報 */}
       <nav aria-label="サイトの信頼性に関する情報" className="mb-6 flex flex-wrap gap-x-4 gap-y-1.5 px-1 text-sm">
-        <Link to="/about" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
+        <Link to="/about" className={`inline-flex min-h-11 items-center rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           このサイトについて
         </Link>
-        <Link to="/editorial-policy" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
+        <Link to="/editorial-policy" className={`inline-flex min-h-11 items-center rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           編集方針・情報源
         </Link>
-        <Link to="/contact" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
+        <Link to="/contact" className={`inline-flex min-h-11 items-center rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           情報提供・訂正依頼
         </Link>
-        <Link to="/updates" className={`rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
+        <Link to="/updates" className={`inline-flex min-h-11 items-center rounded text-primary underline-offset-2 hover:underline ${focusRing}`}>
           更新履歴
         </Link>
       </nav>

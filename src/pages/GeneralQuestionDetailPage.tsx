@@ -50,7 +50,7 @@ export function GeneralQuestionDetailPage() {
           <p className="text-sm text-on-surface-variant">該当する一般質問が見つかりません</p>
           <Link
             to="/questions"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
           >
             一般質問データベースへ戻る
           </Link>
@@ -101,7 +101,7 @@ export function GeneralQuestionDetailPage() {
         </div>
         <h1 className="mt-2 text-lg font-semibold leading-snug text-on-primary-container sm:text-xl">{item.title}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          <Link to={`/members/${item.memberId}`} className={`text-sm font-medium text-on-primary-container underline ${linkClass}`}>
+          <Link to={`/members/${item.memberId}`} className={`inline-flex min-h-11 items-center text-sm font-medium text-on-primary-container underline ${linkClass}`}>
             {item.memberName}議員
           </Link>
           {faction && <FactionChip faction={faction} />}
@@ -109,13 +109,13 @@ export function GeneralQuestionDetailPage() {
         <div className="mt-3 flex flex-wrap gap-2">
           <Link
             to={`/timeline/${fiscalYearOfIsoDate(item.questionDate)}`}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             年表で見る
           </Link>
           <Link
             to="/compare"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             比較ページを見る
           </Link>
@@ -220,7 +220,7 @@ export function GeneralQuestionDetailPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${l.label}を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
                 >
                   {l.label === "議会中継・録画" ? <PlayIcon className="h-3.5 w-3.5" /> : <GlobeIcon className="h-3.5 w-3.5" />}
                   {l.label}
@@ -233,7 +233,7 @@ export function GeneralQuestionDetailPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${item.sourceTitle}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
               >
                 <GlobeIcon className="h-3.5 w-3.5" />
                 {item.sourceTitle}
@@ -246,7 +246,7 @@ export function GeneralQuestionDetailPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${item.sourceTitle}を新しいタブで開く`}
-            className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
           >
             <GlobeIcon className="h-3.5 w-3.5" />
             {item.sourceTitle}

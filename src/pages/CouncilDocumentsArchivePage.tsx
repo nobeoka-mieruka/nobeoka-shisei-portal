@@ -147,7 +147,7 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">年度</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={fiscalYearFilter}
               onChange={(e) => updateParam("fiscalYear", e.target.value)}
             >
@@ -162,7 +162,7 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">会期</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={sessionFilter}
               onChange={(e) => updateParam("session", e.target.value)}
             >
@@ -177,7 +177,7 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">結果</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={resultFilter}
               onChange={(e) => updateParam("result", e.target.value)}
             >
@@ -332,13 +332,13 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             to={`/timeline/${doc.fiscalYear}`}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             年表で見る
           </Link>
           <Link
             to="/compare"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             比較ページを見る
           </Link>
@@ -408,7 +408,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
           {doc.existingBillVoteId && (
             <Link
               to={`/bills/votes/${doc.existingBillVoteId}`}
-              className={`mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+              className={`mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
             >
               議員別賛否の全件を見る
             </Link>

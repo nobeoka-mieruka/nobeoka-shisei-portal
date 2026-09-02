@@ -86,7 +86,7 @@ export function CouncilActivityHistoryPage() {
 
               <Link
                 to={`/members/former/${e.formerMemberId}`}
-                className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                className={`mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
               >
                 プロフィール・発言記録の詳細を見る →
               </Link>

@@ -99,7 +99,7 @@ export function CouncilSessionDetailPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="延岡市議会公式サイトの定例会関連ページを新しいタブで開く"
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            className={`mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
           >
             <GlobeIcon className="h-4 w-4" aria-hidden="true" />
             延岡市議会公式サイトで確認する
@@ -152,7 +152,7 @@ export function CouncilSessionDetailPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`${src.title}を新しいタブで開く`}
-                            className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                            className={`inline-flex min-h-11 items-center gap-1 text-primary hover:underline ${linkClass}`}
                           >
                             {src.title}
                             {src.page && `（${src.page}ページ）`}
@@ -229,7 +229,7 @@ export function CouncilSessionDetailPage() {
         )}
         <Link
           to={`/bills/votes?session=${encodeURIComponent(session.title)}`}
-          className={`mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+          className={`mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
         >
           この定例会の議案一覧を見る
         </Link>

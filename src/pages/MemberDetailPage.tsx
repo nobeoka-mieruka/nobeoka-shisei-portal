@@ -247,14 +247,14 @@ export function MemberDetailPage() {
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
               to={`/compare/members?${buildCompareSearchParams([personSlug("former-member", formerMember.id)]).toString()}`}
-              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
             >
               この議員を比較
             </Link>
             {formerMember.servedSessions[0] && (
               <Link
                 to={`/timeline/${formerMember.servedSessions[0].slice(0, 4)}`}
-                className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
               >
                 年表で見る
               </Link>
@@ -389,7 +389,7 @@ export function MemberDetailPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${member.name}の公式プロフィールを新しいタブで開く`}
-            className={`mt-4 inline-flex h-10 items-center gap-1.5 rounded-full bg-primary-container px-4 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+            className={`mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
           >
             <GlobeIcon className="h-4 w-4" />
             {isProfileConfirmed ? "公式プロフィール" : "公式プロフィールを見る"}
@@ -400,13 +400,13 @@ export function MemberDetailPage() {
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             to={`/compare/members?${buildCompareSearchParams([personSlug("member", member.id)]).toString()}`}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             この議員を比較
           </Link>
           <Link
             to="/timeline"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             年表で見る
           </Link>
@@ -420,7 +420,7 @@ export function MemberDetailPage() {
       />
       <Link
         to={`/council-activity/${member.id}`}
-        className={`inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        className={`inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
       >
         議員活動バロメーターで詳しく見る（他の議員と比較する） →
       </Link>
@@ -462,7 +462,7 @@ export function MemberDetailPage() {
                   {ev.href && ev.kind !== "report" ? (
                     <Link
                       to={ev.href}
-                      className={`mt-0.5 block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                      className={`mt-0.5 flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
                     >
                       {ev.label}
                     </Link>
@@ -471,7 +471,7 @@ export function MemberDetailPage() {
                       href={ev.href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className={`mt-0.5 block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                      className={`mt-0.5 flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
                     >
                       {ev.label}
                     </a>
@@ -485,7 +485,7 @@ export function MemberDetailPage() {
               <button
                 type="button"
                 onClick={() => setShowAllTimeline((v) => !v)}
-                className={`mt-3 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
               >
                 {showAllTimeline ? "表示を減らす" : `すべて表示（${timelineEvents.length}件）`}
               </button>
@@ -552,7 +552,7 @@ export function MemberDetailPage() {
                 <Link
                   key={committee}
                   to={`/committees/${matched.id}`}
-                  className="rounded-full bg-surface-container-high px-3 py-1 text-sm text-on-surface-variant transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1 text-sm text-on-surface-variant transition hover:bg-surface-container-highest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {committee}
                 </Link>
@@ -615,7 +615,7 @@ export function MemberDetailPage() {
 
             <Link
               to={`/questions?member=${member.id}`}
-              className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+              className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
             >
               この議員の一般質問をすべて見る
             </Link>
@@ -704,7 +704,7 @@ export function MemberDetailPage() {
                                 <button
                                   type="button"
                                   onClick={() => setSelectedTopic(t.label)}
-                                  className={`rounded-full bg-surface-container-high px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container-highest ${linkClass}`}
+                                  className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1 text-xs text-on-surface-variant hover:bg-surface-container-highest ${linkClass}`}
                                 >
                                   {t.label}
                                 </button>
@@ -807,7 +807,7 @@ export function MemberDetailPage() {
                             type="button"
                             onClick={() => setSelectedTopic(isSelected ? "" : t.topic)}
                             aria-pressed={isSelected}
-                            className={`rounded-full px-3 py-1.5 text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                            className={`inline-flex min-h-11 items-center rounded-full px-3 py-1.5 text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                               isSelected
                                 ? "bg-primary text-on-primary"
                                 : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
@@ -867,7 +867,7 @@ export function MemberDetailPage() {
                       )}
                       <Link
                         to={`/members/${member.id}/questions/${s.id}`}
-                        className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                        className={`mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
                       >
                         質問・答弁の詳細を見る
                       </Link>
@@ -952,7 +952,7 @@ export function MemberDetailPage() {
                       <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
                         <Link
                           to={`/bills/votes/${bill.id}`}
-                          className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                          className={`flex min-h-11 min-w-0 flex-1 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
                         >
                           {bill.billTitle}
                         </Link>
@@ -991,7 +991,7 @@ export function MemberDetailPage() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`${r.title}の詳細を新しいタブで開く`}
-                    className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    className={`mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline ${linkClass}`}
                   >
                     詳しく見る
                   </a>

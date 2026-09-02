@@ -32,7 +32,7 @@ function BillPicker({ label, value, onChange }: { label: string; value: string; 
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full rounded-lg border border-outline-variant bg-surface px-3 py-3 text-sm text-on-surface ${linkClass}`}
+        className={`w-full min-w-0 max-w-full rounded-lg border border-outline-variant bg-surface px-3 py-3 text-sm text-on-surface ${linkClass}`}
       >
         <option value="">議案を選択してください</option>
         {sorted.map((b) => (

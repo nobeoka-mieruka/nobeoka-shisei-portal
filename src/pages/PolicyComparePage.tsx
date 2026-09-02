@@ -157,7 +157,7 @@ export function PolicyComparePage() {
                   type="button"
                   onClick={() => setMetricKey(m.key)}
                   aria-pressed={metricKey === m.key}
-                  className={`min-h-[36px] rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                  className={`inline-flex min-h-11 items-center rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                     metricKey === m.key
                       ? "bg-primary text-on-primary"
                       : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"

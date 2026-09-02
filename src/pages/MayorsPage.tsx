@@ -161,7 +161,7 @@ export function MayorsPage() {
               type="button"
               onClick={() => setSortOrder(order)}
               aria-pressed={sortOrder === order}
-              className={`min-h-[36px] px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+              className={`inline-flex min-h-11 items-center px-3 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                 sortOrder === order ? "bg-primary text-on-primary" : "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
               }`}
             >

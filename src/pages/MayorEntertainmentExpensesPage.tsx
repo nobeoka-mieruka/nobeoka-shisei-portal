@@ -205,7 +205,7 @@ export function MayorEntertainmentExpensesPage() {
               </div>
               {m.status === "confirmed" && m.items.length > 0 && (
                 <details className="mt-2">
-                  <summary className="cursor-pointer text-xs font-medium text-primary">明細を見る</summary>
+                  <summary className="block cursor-pointer py-3.5 text-xs font-medium text-primary">明細を見る</summary>
                   <ul className="mt-2 space-y-1.5 border-t border-outline-variant pt-2">
                     {m.items.map((e, i) => (
                       <li key={i} className="flex flex-wrap items-baseline justify-between gap-x-2 text-xs">
@@ -247,13 +247,13 @@ export function MayorEntertainmentExpensesPage() {
             <FilterSelect label="年度" value={fiscalYearFilter} onChange={setFiscalYearFilter} options={fiscalYearOptions} />
             <FilterSelect label="月" value={monthFilter} onChange={setMonthFilter} options={monthOptions} />
             <FilterSelect label="区分" value={categoryFilter} onChange={setCategoryFilter} options={categoryOptions} />
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+            <label className="flex min-h-11 max-w-full shrink-0 items-stretch gap-2 rounded-full bg-surface-container-high px-4 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <span className="sr-only">並び替え</span>
               <select
                 value={sortKey}
                 onChange={(e) => setSortKey(e.target.value as ExpenseSortKey)}
                 aria-label="並び替え"
-                className="bg-transparent text-on-surface focus:outline-none"
+                className="min-w-0 max-w-full truncate bg-transparent text-on-surface focus:outline-none"
               >
                 {sortOptions.map((o) => (
                   <option key={o.value} value={o.value}>

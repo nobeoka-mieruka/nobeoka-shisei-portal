@@ -75,7 +75,7 @@ export function PersonTimeline({ events }: { events: TimelineEvent[] }) {
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className={`mt-3 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-surface-container-high ${linkClass}`}
+          className={`mt-3 inline-flex min-h-11 items-center rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-surface-container-high ${linkClass}`}
         >
           {expanded ? "表示を減らす" : `すべて表示（${events.length}件）`}
         </button>

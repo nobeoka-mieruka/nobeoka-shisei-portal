@@ -78,7 +78,7 @@ export function PoliciesPage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">所有者種別</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={ownerTypeFilter}
               onChange={(e) => updateParam("ownerType", e.target.value)}
             >
@@ -93,7 +93,7 @@ export function PoliciesPage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">政策テーマ</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={categoryFilter}
               onChange={(e) => updateParam("category", e.target.value)}
             >
