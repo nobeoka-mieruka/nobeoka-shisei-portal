@@ -64,7 +64,9 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
                     type="button"
                     onClick={() => handleSort(col.key)}
                     aria-label={`${col.label}で並び替え`}
-                    className="rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    /* Phase197：並び替えボタンの高さが16pxしかなかったため、
+                       CouncilActivityPageの並び替えボタンと同じ inline-flex＋min-h-11 に揃える。 */
+                    className="inline-flex min-h-11 items-center rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     {col.label}
                     {sortIndicator(col.key)}

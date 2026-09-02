@@ -440,7 +440,9 @@ export function BillVotesPage() {
                       </div>
                       <Link
                         to={`/bills/votes/${bill.id}`}
-                        className="shrink-0 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                        /* Phase197：一覧カードの主要操作。GeneralQuestionCard・VerifiedSpeechCardの
+                           「詳細を見る」と同じ inline-flex＋min-h-11 に揃え、44pxのタップ領域を確保する。 */
+                        className="inline-flex min-h-11 shrink-0 items-center rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                       >
                         詳細を見る
                       </Link>

@@ -226,7 +226,12 @@ export function CouncilActivityPage() {
             <ol className="space-y-1.5 text-sm text-on-surface">
               {speechTop3.map((e, i) => (
                 <li key={e.member.id} className="flex items-center justify-between gap-2">
-                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
+                  {/* Phase197：TOP3一覧の議員リンク。高さ20px・行間6pxで隣の操作要素まで
+                      26pxしか離れておらず余裕が小さかったため、44pxのタップ領域を確保する。 */}
+                  <Link
+                    to={`/council-activity/${e.member.id}`}
+                    className={`inline-flex min-h-11 items-center hover:underline ${linkClass}`}
+                  >
                     {i + 1}位　{e.member.name}
                   </Link>
                   <span className="tabular-nums text-xs font-semibold text-orange-700 dark:text-orange-300">
@@ -247,7 +252,13 @@ export function CouncilActivityPage() {
             <ul className="mt-1.5 flex flex-wrap gap-x-2 gap-y-1 text-xs text-on-surface-variant">
               {questionFull.map((e) => (
                 <li key={e.member.id}>
-                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
+                  {/* Phase197：折り返し表示の議員名一覧。高さ17pxのリンクの中心同士が縦に
+                      17pxしか離れておらず（WCAG 2.2 2.5.8の大きさ・間隔いずれも未充足）、
+                      スマートフォンで隣の議員のページを誤って開きやすかった。44pxのタップ領域を確保する。 */}
+                  <Link
+                    to={`/council-activity/${e.member.id}`}
+                    className={`inline-flex min-h-11 items-center hover:underline ${linkClass}`}
+                  >
                     {e.member.name}
                   </Link>
                 </li>
@@ -267,7 +278,12 @@ export function CouncilActivityPage() {
             <ol className="mt-1 space-y-1.5 text-sm text-on-surface">
               {submitterTop3.map((e, i) => (
                 <li key={e.member.id} className="flex items-center justify-between gap-2">
-                  <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
+                  {/* Phase197：TOP3一覧の議員リンク。高さ20px・行間6pxで隣の操作要素まで
+                      26pxしか離れておらず余裕が小さかったため、44pxのタップ領域を確保する。 */}
+                  <Link
+                    to={`/council-activity/${e.member.id}`}
+                    className={`inline-flex min-h-11 items-center hover:underline ${linkClass}`}
+                  >
                     {i + 1}位　{e.member.name}
                   </Link>
                   <span className="tabular-nums text-xs font-semibold text-orange-700 dark:text-orange-300">{e.count}件</span>
@@ -330,7 +346,9 @@ export function CouncilActivityPage() {
                     <button
                       type="button"
                       onClick={() => handleSort(col.key)}
-                      className={`inline-flex min-h-11 items-center gap-1 font-semibold hover:underline ${linkClass}`}
+                      /* Phase197：高さはPhase192で44pxを確保済み。短い列名では幅が36〜40pxに
+                         なるため、min-w-11で当たり判定の幅も44pxにする（文字は左寄せのまま）。 */
+                      className={`inline-flex min-h-11 min-w-11 items-center gap-1 font-semibold hover:underline ${linkClass}`}
                       aria-label={`${col.label}で並べ替え`}
                     >
                       {col.label}
@@ -349,18 +367,27 @@ export function CouncilActivityPage() {
                 return (
                   <tr key={m.id} className="border-b border-gray-100 align-middle dark:border-outline-variant/60">
                     <td className="whitespace-nowrap py-2 pr-2">
-                      <input
-                        type="checkbox"
-                        checked={compareIds.includes(m.id)}
-                        onChange={() => toggleCompare(m.id)}
-                        disabled={!compareIds.includes(m.id) && compareIds.length >= 3}
-                        aria-label={`${m.name}を比較対象に選ぶ`}
-                        className="h-4 w-4"
-                      />
+                      {/* Phase197：裸のチェックボックスは実効タップ領域が16x16pxしかなかったため、
+                          <label>で包んで44x44pxの当たり判定を確保する（チェックボックス自体の
+                          見た目の大きさは変えない。アクセシブルな名前はinputのaria-labelのまま）。 */}
+                      <label className="flex min-h-11 w-11 cursor-pointer items-center justify-center">
+                        <input
+                          type="checkbox"
+                          checked={compareIds.includes(m.id)}
+                          onChange={() => toggleCompare(m.id)}
+                          disabled={!compareIds.includes(m.id) && compareIds.length >= 3}
+                          aria-label={`${m.name}を比較対象に選ぶ`}
+                          className="h-4 w-4"
+                        />
+                      </label>
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">{i + 1}</td>
                     <td className="whitespace-nowrap py-2 pr-3">
-                      <Link to={`/council-activity/${m.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
+                      {/* Phase197：表セル内に単独で置かれた議員名リンク。44pxのタップ領域を確保する。 */}
+                      <Link
+                        to={`/council-activity/${m.id}`}
+                        className={`inline-flex min-h-11 items-center font-medium text-on-surface hover:underline ${linkClass}`}
+                      >
                         {m.name}
                       </Link>
                       {faction && <FactionChip faction={faction} className="ml-2" />}
@@ -413,7 +440,9 @@ export function CouncilActivityPage() {
                 <li key={m.id} className={`rounded-lg p-3 ${flatCardClass}`}>
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-xs text-on-surface-variant">順位 {i + 1}</span>
-                    <label className="flex items-center gap-1.5 text-xs text-on-surface-variant">
+                    {/* Phase197：<label>で包まれているため実効タップ領域は46x16px（横は充足、
+                        縦が不足）だった。min-h-11で縦44pxを確保する。 */}
+                    <label className="flex min-h-11 items-center gap-1.5 text-xs text-on-surface-variant">
                       <input
                         type="checkbox"
                         checked={compareIds.includes(m.id)}
@@ -425,7 +454,11 @@ export function CouncilActivityPage() {
                       比較
                     </label>
                   </div>
-                  <Link to={`/council-activity/${m.id}`} className={`font-medium text-on-surface hover:underline ${linkClass}`}>
+                  {/* Phase197：スマートフォン用一覧カードの議員名リンク。44pxのタップ領域を確保する。 */}
+                  <Link
+                    to={`/council-activity/${m.id}`}
+                    className={`inline-flex min-h-11 items-center font-medium text-on-surface hover:underline ${linkClass}`}
+                  >
                     {m.name}
                   </Link>
                   {faction && <FactionChip faction={faction} className="ml-2" />}

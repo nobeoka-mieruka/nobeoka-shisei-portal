@@ -475,7 +475,9 @@ export function CompensationPage() {
                         rel="noopener noreferrer"
                         title={c.sourceTitle}
                         aria-label={`${c.sourceTitle}を新しいタブで開く`}
-                        className="text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                        /* Phase197：表セルに単独で置かれた出典リンク。文章中の引用ではないため
+                           44pxのタップ領域を確保する。 */
+                        className="inline-flex min-h-11 items-center text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                       >
                         {c.municipality}公式資料
                       </a>
@@ -525,7 +527,9 @@ export function CompensationPage() {
                   rel="noopener noreferrer"
                   title={c.sourceTitle}
                   aria-label={`${c.sourceTitle}を新しいタブで開く`}
-                  className="mt-2 inline-block whitespace-nowrap text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  /* Phase197：スマートフォン専用カードの出典リンク。単独で置かれた操作要素であり
+                     文章の一部ではないため、44pxのタップ領域を確保する。 */
+                  className="mt-2 inline-flex min-h-11 items-center whitespace-nowrap text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {c.municipality}公式資料
                 </a>

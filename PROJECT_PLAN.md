@@ -5,6 +5,24 @@
 
 機能を追加・変更したら、必ず「完成済み」「実装中」「次に実装する」を更新してください。
 
+最終更新日（2026-09-02、TASK-182／Phase197時点）：（TASKS.md「TASK-182 タップ領域・320px要対応候補の
+完全分類」完了。Phase191が残した「タップ領域44px未満1,356件」「320x568の要対応90件」について、件数を
+ゼロにするのではなく1件ずつの実害を判定する監査`scripts/audit-tap-targets.mjs`（`npm run audit:tap-targets`）
+を新設した。Phase191と同一の検出条件（9ビューポート×32ページ）を再現したうえで、実効タップ領域
+（`<label>`で包んだ入力欄・全面リンクの重なりを実測）、最近接の操作要素までの中心間距離、WCAG 2.2
+達成基準2.5.8（AA・24px、間隔／インライン例外を含む）とWCAG 2.1 達成基準2.5.5（AAA・44px）の充足を
+付加し、REAL_BUG／ACCESSIBILITY_IMPROVEMENT／INTENTIONAL／FALSE_POSITIVE／NON_INTERACTIVEの5分類へ
+49グループすべてを割り当てた（未分類0）。320x568の89件は実害0・改善対象9・設計上の意図79
+（パンくず47＋ヘッダー検索32）・誤検出1で、全件を要素の切り出し画像でも確認した。実害と判定した1件
+（`/council-activity`の実施率100%議員名一覧、隣の議員名の中心まで17px）を含む23グループ・13ファイルを
+`inline-flex min-h-11 items-center`へ統一して修正し、タップ領域44px未満1,356→1,268件、320x568の要対応
+90→82件（実害0件）、横スクロールは前後とも0件。ヘッダー（`top-[57px]`前提の6ページ同時変更が必要）と
+パンくず（全ページ先頭に約28px加算）は理由を明記してINTENTIONALのまま据え置き、安全な解決手順を提案
+として記録した。検出器の判定条件も見直し、`div`が直接テキストを含む注記文中のリンク9件を本文中の
+リンクへ再分類した。`src/data`配下の手入力データの値・statusは一切変更していない。詳細は
+`reports/phase197-tap-target-classification.md`／`reports/phase197-320px-classification.md`および
+TASKS.md TASK-182参照。）
+
 最終更新日（2026-09-02、Phase194時点）：（Phase194「WCAG 2.1 AA・キーボード操作 実動作監査」完了。
 `npm run build` 後の本番同等ビルドに対し、Playwright＋@axe-core/playwright で全ページコンポーネント
 78ページを自動監査し、あわせて実ブラウザで Tab／Shift+Tab／Enter／Space／Escape／矢印キーを送信する

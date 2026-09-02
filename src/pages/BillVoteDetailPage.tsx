@@ -585,7 +585,11 @@ export function BillVoteDetailPage() {
               <li key={rb.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-outline-variant p-3">
                 <div className="min-w-0">
                   <p className="text-xs text-on-surface-variant">{rb.billNumber}／{rb.session}</p>
-                  <Link to={`/bills/votes/${rb.id}`} className={`text-sm font-medium text-primary underline ${linkClass}`}>
+                  {/* Phase197：1件1行の関連議案リンク（文章中の引用ではない）。44pxのタップ領域を確保する。 */}
+                  <Link
+                    to={`/bills/votes/${rb.id}`}
+                    className={`inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
+                  >
                     {rb.billTitle}
                   </Link>
                 </div>

@@ -51,7 +51,9 @@ export function BarList({ items, unit = "人", emptyLabel = "データがあり�
             {item.to ? (
               <Link
                 to={item.to}
-                className="tap-highlight-none block rounded-lg px-1.5 py-1 transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                /* Phase197：スマートフォン幅では2段組で44px以上あるが、sm以上で1行になると
+                   高さ28pxになるため、min-h-11で44pxのタップ領域を確保する。 */
+                className="tap-highlight-none flex min-h-11 flex-col justify-center rounded-lg px-1.5 py-1 transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 {content}
               </Link>
