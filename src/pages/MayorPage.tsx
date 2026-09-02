@@ -71,7 +71,7 @@ export function MayorPage() {
 
         <Link
           to="/mayor/policy-progress"
-          className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+          className={`mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
         >
           <ChartBarIcon className="h-4 w-4" />
           公約の進捗状況
@@ -79,7 +79,7 @@ export function MayorPage() {
 
         <Link
           to="/mayor/entertainment-expenses"
-          className={`mt-4 inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+          className={`mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
         >
           <YenIcon className="h-4 w-4" />
           市長交際費を見る
@@ -91,7 +91,7 @@ export function MayorPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="延岡市長 公式ホームページを新しいタブで開く"
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+            className={`mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
           >
             <GlobeIcon className="h-4 w-4" />
             公式ホームページ
@@ -104,7 +104,7 @@ export function MayorPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="このページの情報源を新しいタブで開く"
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
+            className={`mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-4 py-2 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
           >
             <GlobeIcon className="h-4 w-4" />
             情報源を見る
@@ -186,7 +186,7 @@ export function MayorPage() {
               ))}
             </ul>
             {mayorSubmittedBills.length > 5 && (
-              <Link to="/bills/votes" className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}>
+              <Link to="/bills/votes" className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}>
                 市長提出議案をすべて見る
               </Link>
             )}
@@ -224,7 +224,7 @@ export function MayorPage() {
               </li>
             ))}
           </ul>
-          <Link to="/mayor/press-conferences" className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}>
+          <Link to="/mayor/press-conferences" className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}>
             市長定例記者会見をすべて見る
           </Link>
         </SectionCard>

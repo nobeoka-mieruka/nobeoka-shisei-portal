@@ -175,7 +175,7 @@ export function ExecutiveAnswersPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="原本（公式会議録）を新しいタブで開く"
-                          className={`inline-flex items-center gap-1 text-sm font-medium text-primary underline ${linkClass}`}
+                          className={`inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary underline ${linkClass}`}
                         >
                           <GlobeIcon className="h-3.5 w-3.5" />
                           原本を見る

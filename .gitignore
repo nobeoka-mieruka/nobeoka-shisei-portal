@@ -64,3 +64,10 @@ scripts/auto-update/*/state/
 *.njsproj
 *.sln
 *.sw?
+
+# Phase191 レスポンシブ監査の生成物のうち、スクリーンショット（バイナリ）と
+# 全組合せ明細JSON（数MB）は再生成可能なためGit管理外とする。
+# 種類＋要素セレクタ単位へ集約した audit-<label>-summary.json のみコミットする。
+reports/phase191-responsive/screenshots/
+reports/phase191-responsive/audit-before.json
+reports/phase191-responsive/audit-after.json

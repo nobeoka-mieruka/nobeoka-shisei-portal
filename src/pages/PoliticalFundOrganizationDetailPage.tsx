@@ -86,7 +86,7 @@ export function PoliticalFundOrganizationDetailPage() {
         </p>
         <Link
           to="/political-funds"
-          className="inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           政治資金収支報告書の一覧に戻る
         </Link>
@@ -122,7 +122,7 @@ export function PoliticalFundOrganizationDetailPage() {
         {relatedMemberLink ? (
           <Link
             to={relatedMemberLink.href}
-            className="mt-2 inline-flex items-center text-sm text-on-primary-container underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="mt-2 inline-flex min-h-11 items-center text-sm text-on-primary-container underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             関連する{relatedMemberLink.isFormer ? "元議員" : "議員"}ページを見る
           </Link>
@@ -202,7 +202,7 @@ export function PoliticalFundOrganizationDetailPage() {
                 </dl>
 
                 <details className="mt-3">
-                  <summary className="cursor-pointer text-sm text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <summary className="block cursor-pointer py-3 text-sm text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                     収入の内訳を見る
                   </summary>
                   <div className="mt-2">
@@ -214,7 +214,7 @@ export function PoliticalFundOrganizationDetailPage() {
                 </details>
 
                 <details className="mt-3">
-                  <summary className="cursor-pointer text-sm text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <summary className="block cursor-pointer py-3 text-sm text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                     支出の内訳を見る
                   </summary>
                   <div className="mt-2">

@@ -22,7 +22,7 @@ export function CompensationBarChart({ entries }: CompensationBarChartProps) {
             type="button"
             onClick={() => setRole(r.key)}
             aria-pressed={role === r.key}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+            className={`inline-flex min-h-11 items-center rounded-full px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
               role === r.key
                 ? "bg-primary text-on-primary"
                 : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"

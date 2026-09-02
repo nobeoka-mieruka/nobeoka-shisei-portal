@@ -87,7 +87,7 @@ export function CityOrganizationPage() {
                     </dl>
                     {section.subSectionPhones && section.subSectionPhones.length > 1 && (
                       <details className="mt-1">
-                        <summary className="cursor-pointer text-xs text-primary">係ごとの電話番号を見る</summary>
+                        <summary className="block cursor-pointer py-3.5 text-xs text-primary">係ごとの電話番号を見る</summary>
                         <ul className="mt-1 space-y-0.5 pl-4 text-xs text-on-surface-variant">
                           {section.subSectionPhones.map((sub, i) => (
                             <li key={i}>

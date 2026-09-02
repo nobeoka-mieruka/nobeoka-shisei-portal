@@ -330,7 +330,7 @@ export function CouncilActivityPage() {
                     <button
                       type="button"
                       onClick={() => handleSort(col.key)}
-                      className={`inline-flex items-center gap-1 font-semibold hover:underline ${linkClass}`}
+                      className={`inline-flex min-h-11 items-center gap-1 font-semibold hover:underline ${linkClass}`}
                       aria-label={`${col.label}で並べ替え`}
                     >
                       {col.label}
@@ -394,7 +394,7 @@ export function CouncilActivityPage() {
                 key={col.key}
                 type="button"
                 onClick={() => handleSort(col.key)}
-                className={`rounded-full border px-2.5 py-1 ${
+                className={`inline-flex min-h-11 items-center rounded-full border px-2.5 py-1 ${
                   sortKey === col.key
                     ? "border-orange-500 bg-orange-50 text-orange-700 dark:border-orange-400 dark:bg-orange-950/30 dark:text-orange-300"
                     : "border-gray-200 text-on-surface-variant dark:border-outline-variant"
@@ -577,7 +577,7 @@ export function CouncilActivityPage() {
         <button
           type="button"
           onClick={() => setMatrixExpanded((v) => !v)}
-          className={`mb-3 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-surface-container-high ${linkClass}`}
+          className={`mb-3 inline-flex min-h-11 items-center rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-surface-container-high ${linkClass}`}
           aria-expanded={matrixExpanded}
         >
           {matrixExpanded ? "一覧を閉じる" : `一覧を開く（${matrix.length}名）`}
@@ -668,7 +668,7 @@ export function CouncilActivityPage() {
         </ul>
         <Link
           to="/methodology/activity-radar"
-          className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}
+          className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
         >
           算定方法・計算式・出典を見る →
         </Link>

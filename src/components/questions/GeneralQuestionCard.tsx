@@ -49,7 +49,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
         </div>
         <Link
           to={`/questions/${item.id}`}
-          className={`shrink-0 rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-full bg-primary-container px-3.5 py-1.5 text-xs font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
         >
           詳細を見る
         </Link>
@@ -58,7 +58,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
       <div className="mt-2">
         <Link
           to={`/members/${item.memberId}`}
-          className={`inline-block py-1 text-sm font-medium text-primary underline ${linkClass}`}
+          className={`inline-flex min-h-11 items-center py-1 text-sm font-medium text-primary underline ${linkClass}`}
         >
           {item.memberName}
         </Link>
@@ -93,7 +93,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.title}の質問通告書を新しいタブで開く`}
-              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               質問通告書を見る
@@ -105,7 +105,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.newsletterTitle ?? "市議会だより"}を新しいタブで開く`}
-              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               市議会だよりを見る
@@ -117,7 +117,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.title}の会議録を新しいタブで開く`}
-              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               会議録を見る
@@ -129,7 +129,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.title}の議会映像を新しいタブで開く`}
-              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
             >
               <PlayIcon className="h-3.5 w-3.5" />
               {videoLabel(item)}
@@ -141,7 +141,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.title}の質問資料を新しいタブで開く`}
-              className={`inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               質問資料を見る
@@ -154,7 +154,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
         type="button"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
-        className={`mt-3 text-sm font-medium text-primary underline ${linkClass}`}
+        className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
       >
         {expanded ? "閉じる" : "詳しく見る"}
       </button>
@@ -177,7 +177,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.sourceTitle}を新しいタブで開く`}
-              className={`inline-flex items-center gap-1 text-primary underline ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1 text-primary underline ${linkClass}`}
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               {item.sourceTitle}

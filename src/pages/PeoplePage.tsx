@@ -179,7 +179,7 @@ export function PeoplePage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">人物種別</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={typeFilter}
               onChange={(e) => updateParam("type", e.target.value)}
             >
@@ -194,7 +194,7 @@ export function PeoplePage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">現職・元職</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={statusFilter}
               onChange={(e) => updateParam("status", e.target.value)}
             >
@@ -206,7 +206,7 @@ export function PeoplePage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">会派</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={factionFilter}
               onChange={(e) => updateParam("faction", e.target.value)}
             >
@@ -221,7 +221,7 @@ export function PeoplePage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">在職年代・選挙年代</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={yearFilter}
               onChange={(e) => updateParam("year", e.target.value)}
             >
@@ -236,7 +236,7 @@ export function PeoplePage() {
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-xs font-medium text-on-surface-variant">元議員の資料充足レベル</span>
             <select
-              className="min-h-[44px] rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
+              className="min-h-[44px] max-w-full min-w-0 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm text-on-surface"
               value={dataTierFilter}
               onChange={(e) => updateParam("dataTier", e.target.value)}
             >
@@ -388,13 +388,13 @@ export function PersonDetailPage() {
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             to={primaryDetailLink}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
           >
             プロフィール・発言記録の詳細を見る
           </Link>
           <Link
             to={compareLinkFor(personType, id, person.slug)}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             この人物を比較
           </Link>
@@ -406,7 +406,7 @@ export function PersonDetailPage() {
                   ? `/timeline/${relatedFiscalYears[0]}`
                   : "/timeline"
             }
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             年表で見る
           </Link>

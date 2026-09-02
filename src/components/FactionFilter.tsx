@@ -39,7 +39,7 @@ function FilterChip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+      className={`inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
         active
           ? "border-transparent bg-secondary-container text-on-secondary-container"
           : "border-outline-variant bg-surface-container-low text-on-surface-variant hover:bg-surface-container"

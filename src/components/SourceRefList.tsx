@@ -26,7 +26,7 @@ export function SourceRefList({ refs }: { refs: ArchiveSourceRef[] }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${ref.sourceTitle ?? "出典"}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1.5 text-primary underline ${linkClass}`}
+                className={`inline-flex min-h-11 items-center gap-1.5 py-1 text-primary underline ${linkClass}`}
               >
                 <GlobeIcon className="h-4 w-4 shrink-0" aria-hidden />
                 <span className="break-words">{ref.sourceTitle ?? ref.sourceUrl}</span>

@@ -13,7 +13,7 @@ export function SourceList({ sources }: { sources?: SourceEntry[] }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${s.label}を新しいタブで開く`}
-            className="inline-flex items-center gap-1.5 rounded text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded py-1 text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <GlobeIcon className="h-4 w-4 shrink-0" />
             <span className="break-words">{s.label}</span>

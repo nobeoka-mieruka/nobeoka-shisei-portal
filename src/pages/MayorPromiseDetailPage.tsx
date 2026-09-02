@@ -142,7 +142,7 @@ export function MayorPromiseDetailPage() {
           <p className="text-sm text-on-surface-variant">該当する公約が見つかりません</p>
           <Link
             to="/mayor/policy-progress"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 ${linkClass}`}
           >
             公約一覧へ戻る
           </Link>
@@ -275,7 +275,7 @@ export function MayorPromiseDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.sourceTitle}を新しいタブで開く`}
-                      className={`ml-1 inline-flex items-center gap-1 text-primary underline ${linkClass}`}
+                      className={`ml-1 inline-flex min-h-11 items-center gap-1 text-primary underline ${linkClass}`}
                     >
                       {m.sourceTitle}
                       {m.sourcePage && `（${m.sourcePage}）`}
@@ -435,7 +435,7 @@ export function MayorPromiseDetailPage() {
         </p>
         <Link
           to="/finance"
-          className={`mt-2 inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
+          className={`mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
         >
           <YenIcon className="h-3.5 w-3.5 shrink-0" />
           延岡市の財政データを見る
@@ -453,7 +453,7 @@ export function MayorPromiseDetailPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${link.label}を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
+                  className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-3.5 w-3.5 shrink-0" />
                   {link.label}
@@ -506,7 +506,7 @@ export function MayorPromiseDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${entry.sourceTitle ?? "根拠資料"}を新しいタブで開く`}
-                      className={`mt-1 inline-flex items-center gap-1 text-xs text-primary underline ${linkClass}`}
+                      className={`mt-1 inline-flex min-h-11 items-center gap-1 text-xs text-primary underline ${linkClass}`}
                     >
                       <GlobeIcon className="h-3 w-3 shrink-0" />
                       {entry.sourceTitle ?? "根拠資料を見る"}

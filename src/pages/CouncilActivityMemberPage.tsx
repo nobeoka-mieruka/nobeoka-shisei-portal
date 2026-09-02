@@ -171,7 +171,7 @@ export function CouncilActivityMemberPage() {
                 href={member.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-1.5 inline-block text-xs font-medium text-primary underline ${linkClass}`}
+                className={`mt-1.5 inline-flex min-h-11 items-center text-xs font-medium text-primary underline ${linkClass}`}
               >
                 延岡市議会公式プロフィールページ →
               </a>
@@ -179,7 +179,7 @@ export function CouncilActivityMemberPage() {
           </div>
           <Link
             to={`/members/${member.id}`}
-            className={`mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+            className={`mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
           >
             議員プロフィール全体を見る
           </Link>
@@ -320,7 +320,7 @@ export function CouncilActivityMemberPage() {
 
         <Link
           to={`/members/${member.id}#questions`}
-          className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
+          className={`mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
         >
           個別の一般質問・答弁の全件を見る →
         </Link>
@@ -366,7 +366,7 @@ export function CouncilActivityMemberPage() {
         )}
         <Link
           to={`/members/${member.id}#votes`}
-          className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
+          className={`mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
         >
           議案賛否の全件を見る →
         </Link>
@@ -491,7 +491,7 @@ export function CouncilActivityMemberPage() {
         </p>
         <Link
           to="/council-activity"
-          className={`mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
+          className={`mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary-container px-4 py-2.5 text-sm font-medium text-on-primary-container transition hover:opacity-90 ${linkClass}`}
         >
           議員活動バロメーター一覧・比較ページへ
         </Link>

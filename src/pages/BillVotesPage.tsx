@@ -339,7 +339,17 @@ export function BillVotesPage() {
 
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
         <SearchBar value={query} onChange={setQuery} placeholder="議案番号、議案名、概要で検索" />
-        <div className="flex flex-wrap items-center gap-2">
+        {/* Phase192：絞り込み条件が10項目あるため、スマートフォン幅で折り返すと
+            この固定表示（sticky）のバー自体が画面の大半を覆い、画面下部の
+            ボトムナビゲーションとも重なっていた（320〜430pxで実測）。
+            スマートフォンでは1行の横スクロール（既存の表・パンくずと同じ方式）にし、
+            sm以上ではこれまでどおり折り返して全条件を一覧表示する。 */}
+        <p className="text-xs text-on-surface-variant sm:hidden">絞り込み条件は横にスクロールできます（全9項目＋並び替え）</p>
+        <div
+          className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-x-visible sm:px-0 sm:pb-0"
+          role="group"
+          aria-label="議案の絞り込み条件"
+        >
           <FilterSelect label="年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
           <FilterSelect label="定例会" value={session} onChange={setSession} options={sessionOptions} />
           <FilterSelect label="分類" value={category} onChange={setCategory} options={categoryOptions} />
@@ -349,13 +359,13 @@ export function BillVotesPage() {
           <FilterSelect label="提出者" value={proposerType} onChange={setProposerType} options={proposerTypeOptions} />
           <FilterSelect label="採決方法" value={voteMethod} onChange={setVoteMethod} options={voteMethodOptions} />
           <FilterSelect label="採決の傾向" value={unanimity} onChange={setUnanimity} options={unanimityOptions} />
-          <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
-            <SortIcon className="h-4 w-4 shrink-0" />
+          <label className="flex min-h-11 max-w-full shrink-0 items-stretch gap-2 rounded-full bg-surface-container-high px-4 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+            <SortIcon className="h-4 w-4 shrink-0 self-center" />
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as SortKey)}
               aria-label="並び替え"
-              className="bg-transparent text-on-surface focus:outline-none"
+              className="min-w-0 max-w-full truncate bg-transparent text-on-surface focus:outline-none"
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>

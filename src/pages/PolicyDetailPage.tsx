@@ -112,14 +112,14 @@ export function PolicyDetailPage() {
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             to={`/compare/policies?${buildCompareSearchParams([policy.id]).toString()}`}
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             この政策を比較
           </Link>
           {(policy.announcedDate || (policy.relatedFiscalYears && policy.relatedFiscalYears.length > 0)) && (
             <Link
               to={`/timeline/${policy.announcedDate ? fiscalYearOfIsoDate(policy.announcedDate) : policy.relatedFiscalYears![0]}`}
-              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
             >
               年表で見る
             </Link>

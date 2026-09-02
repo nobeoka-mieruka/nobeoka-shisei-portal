@@ -110,7 +110,7 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
               type="button"
               onClick={() => handleSort(col.key)}
               aria-pressed={sortKey === col.key}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
+              className={`inline-flex min-h-11 items-center rounded-full px-3 py-1.5 text-xs font-medium transition ${
                 sortKey === col.key
                   ? "bg-primary text-on-primary"
                   : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"

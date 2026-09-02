@@ -164,7 +164,7 @@ export function MemberFormerDetailPage() {
           {profile.legacyFormerMemberId && (
             <Link
               to={`/compare/members?${buildCompareSearchParams([personSlug("former-member", profile.legacyFormerMemberId)]).toString()}`}
-              className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
             >
               この議員を比較
             </Link>
@@ -177,7 +177,7 @@ export function MemberFormerDetailPage() {
                   ? `/timeline/${fiscalYearOfIsoDate(speeches[0].date)}`
                   : "/timeline"
             }
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             年表で見る
           </Link>

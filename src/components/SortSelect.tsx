@@ -18,13 +18,13 @@ interface SortSelectProps {
 
 export function SortSelect({ value, onChange }: SortSelectProps) {
   return (
-    <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-4 py-2.5 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
-      <SortIcon className="h-4 w-4 shrink-0" />
+    <label className="flex min-h-11 max-w-full shrink-0 items-stretch gap-2 rounded-full bg-surface-container-high px-4 text-sm text-on-surface-variant shadow-e1 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
+      <SortIcon className="h-4 w-4 shrink-0 self-center" />
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as SortKey)}
         aria-label="並び替え"
-        className="bg-transparent text-on-surface focus:outline-none"
+        className="min-w-0 max-w-full truncate bg-transparent text-on-surface focus:outline-none"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

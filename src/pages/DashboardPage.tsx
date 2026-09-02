@@ -358,7 +358,7 @@ export function DashboardPage() {
         <p className="mt-1 text-sm text-on-primary-container/80">現員{total}名の構成をひと目で確認できます。</p>
         <Link
           to="/finance"
-          className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <ChartBarIcon className="h-4 w-4" />
           延岡市の財政を見る

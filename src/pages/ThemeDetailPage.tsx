@@ -151,13 +151,13 @@ export function ThemeDetailPage() {
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             to="/timeline"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             年表で見る
           </Link>
           <Link
             to="/compare"
-            className={`inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full bg-surface-container-high px-4 py-2 text-sm font-medium text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
           >
             比較ページを見る
           </Link>
@@ -333,7 +333,7 @@ export function ThemeDetailPage() {
                   </div>
                   <Link
                     to={`/members/${mId}/questions/${speech.id}`}
-                    className={`mt-2 inline-block text-sm font-medium text-primary underline ${linkClass}`}
+                    className={`mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
                   >
                     質問・答弁の詳細を見る
                   </Link>

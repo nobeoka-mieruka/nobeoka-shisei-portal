@@ -229,7 +229,7 @@ export function TimelineYearPage() {
                     </li>
                   ))}
                 </ul>
-                <Link to="/history" className="mt-2 inline-block text-sm font-medium text-primary underline">
+                <Link to="/history" className="mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary underline">
                   市政年表（全期間）で確認する
                 </Link>
               </>

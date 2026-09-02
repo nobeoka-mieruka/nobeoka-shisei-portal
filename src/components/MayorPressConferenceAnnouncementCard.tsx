@@ -39,7 +39,7 @@ export function MayorPressConferenceAnnouncementCard({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${announcement.title} ${pdf.label}を新しいタブで開く`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <DocumentIcon className="h-3.5 w-3.5 shrink-0" />
             {pdf.label}
