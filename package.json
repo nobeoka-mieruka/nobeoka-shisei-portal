@@ -48,6 +48,7 @@
     "check:bundle-size": "node scripts/check-bundle-size.mjs",
     "analyze:bundle": "vite build --config vite.analyze.config.ts --outDir dist-analyze",
     "audit:responsive": "node scripts/audit-responsive.mjs",
+    "audit:tap-targets": "node scripts/audit-tap-targets.mjs",
     "smoke:production": "node scripts/smoke-production.mjs",
     "validate:content": "node scripts/validate-content.mjs",
     "validate:freshness": "node scripts/validate-freshness.mjs",

@@ -1,0 +1,3446 @@
+{
+  "label": "before",
+  "generatedAt": "2026-09-02T03:51:12.023Z",
+  "baseUrl": "http://localhost:4187",
+  "phase": "Phase197",
+  "purpose": "Phase191の検出条件をそのまま再現したうえで、各検出へ実効タップ領域・WCAG 2.2 2.5.8（AA・24px）／WCAG 2.1 2.5.5（AAA・44px）の充足・間隔例外・所属領域を付加し、5分類へ割り当てる。件数をゼロにすることは目的にしていない。",
+  "criteria": {
+    "REAL_BUG": "実効タップ領域が小さく、かつ隣接する操作要素と近接しており、実際に押し間違いが起きる（市民の利用を妨げる）もの。",
+    "ACCESSIBILITY_IMPROVEMENT": "押し間違いは起きないが、WCAG 2.2 達成基準2.5.8（AA・24x24）またはWCAG 2.1 達成基準2.5.5（AAA・44x44）に届かず、改善すべきもの。",
+    "INTENTIONAL": "設計上の意図があり、拡大すると別の不具合（レイアウト前提の崩れ、全ページの情報量減）を招くもの。理由を必ず記述する。",
+    "FALSE_POSITIVE": "実効タップ領域は十分あり、検出器（見た目の矩形だけを見る条件）の誤りであるもの。",
+    "NON_INTERACTIVE": "セレクタには一致するが、実際には操作対象でないもの。"
+  },
+  "viewports": [
+    "320x568",
+    "360x800",
+    "375x812",
+    "390x844",
+    "430x932",
+    "768x1024",
+    "1280x720",
+    "1440x900",
+    "1920x1080"
+  ],
+  "pages": [
+    "/",
+    "/dashboard",
+    "/data-status",
+    "/people",
+    "/questions",
+    "/bills",
+    "/bills/votes",
+    "/committees",
+    "/finance",
+    "/timeline",
+    "/mayor",
+    "/mayors",
+    "/mayor/policy-progress",
+    "/compare",
+    "/compensation",
+    "/council-activity",
+    "/members/m01",
+    "/members/m02",
+    "/members/m03",
+    "/members/m04",
+    "/questions/gq2026-06-m24",
+    "/questions/gq2026-06-m17",
+    "/questions/gq2026-06-m14",
+    "/questions/gq2026-06-m08",
+    "/bills/votes/2019-06-gian-10",
+    "/bills/votes/2019-06-chinjo-1",
+    "/bills/bill-fy2026-general-account-supplementary-budget-2",
+    "/bills/bill-auditor-appointment-2026-06",
+    "/bills/bill-bridge-repair-contract-2026-06",
+    "/mayors/aoki-yoshisuke",
+    "/mayors/miura-hisatomo",
+    "/mayors/fusano-hiroshi"
+  ],
+  "summary": {
+    "tapTargetSmall": {
+      "groups": 22,
+      "occurrences": 1352,
+      "occurrencesAt320": 89,
+      "occurrencesMobile": 449
+    },
+    "tapTargetInlineLink": {
+      "groups": 27,
+      "occurrences": 1291,
+      "occurrencesAt320": 103
+    },
+    "revisedDetector": {
+      "note": "Phase191の判定は「display:inline かつ p / li / dd / td / blockquote / figcaption を祖先に持つ」場合だけを本文中のインラインリンクとみなしていた。Phase197ではこれに「同じ親要素に非空のテキストノードがある」場合を加え、divが直接テキストを含む注記文の中のリンクも本文中のリンクとして扱う。",
+      "tapTargetSmallPhase191": 1352,
+      "tapTargetSmallPhase197": 1343,
+      "reclassifiedToInlineLink": 9
+    },
+    "nonInteractiveEvidence": {
+      "note": "セレクタに一致するが操作対象でない要素の実測。検出器はsr-only・disabled・大きさ0の要素を既に除外している。",
+      "inertLinks": 0,
+      "roleOnlyWithoutTabindex": 0,
+      "readOnlyControls": 0
+    },
+    "byClassification": {
+      "INTENTIONAL": 25,
+      "ACCESSIBILITY_IMPROVEMENT": 22,
+      "FALSE_POSITIVE": 1,
+      "REAL_BUG": 1
+    },
+    "occurrencesByClassification": {
+      "INTENTIONAL": 2355,
+      "ACCESSIBILITY_IMPROVEMENT": 270,
+      "FALSE_POSITIVE": 9,
+      "REAL_BUG": 9
+    },
+    "occurrences320ByClassification": {
+      "INTENTIONAL": 170,
+      "ACCESSIBILITY_IMPROVEMENT": 20,
+      "FALSE_POSITIVE": 1,
+      "REAL_BUG": 1
+    },
+    "unclassifiedGroups": 0
+  },
+  "groups": [
+    {
+      "id": "G001",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.mt-4.space-y-3.mt-2 > div.rounded-lg.border.border-outline-variant.p-3 > ul.mt-1.space-y-1 > li.text-on-surface-variant > a.break-words.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 530,
+      "occurrencesAt320": 24,
+      "occurrencesMobile": 167,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/timeline"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "113x17",
+        "125x17",
+        "130x17",
+        "135x17",
+        "157x17",
+        "181x33",
+        "184x33",
+        "187x17",
+        "187x33",
+        "189x17",
+        "192x33",
+        "193x17",
+        "193x33",
+        "194x33",
+        "196x33",
+        "197x33",
+        "199x17",
+        "199x33",
+        "200x17",
+        "201x33",
+        "203x33",
+        "204x17",
+        "204x33",
+        "205x17",
+        "218x17",
+        "221x17",
+        "225x33",
+        "227x33",
+        "229x33",
+        "231x33",
+        "232x33",
+        "233x33",
+        "235x33",
+        "237x17",
+        "237x33",
+        "239x33",
+        "240x33",
+        "241x33",
+        "242x33",
+        "243x33",
+        "244x33",
+        "247x17",
+        "247x33",
+        "249x33",
+        "251x33",
+        "252x17",
+        "252x33",
+        "253x17",
+        "253x33",
+        "254x33",
+        "255x33",
+        "256x33",
+        "257x33",
+        "258x33",
+        "259x33",
+        "261x33",
+        "263x33",
+        "264x33",
+        "265x33",
+        "266x33",
+        "267x33",
+        "268x33",
+        "269x33",
+        "270x33",
+        "271x33",
+        "273x33",
+        "275x33",
+        "276x33",
+        "277x17",
+        "286x17",
+        "287x17",
+        "292x33",
+        "293x17",
+        "299x17",
+        "300x33",
+        "301x33",
+        "302x33",
+        "303x33",
+        "304x33",
+        "305x33",
+        "306x33",
+        "307x17",
+        "307x33",
+        "309x17",
+        "309x33",
+        "310x33",
+        "311x17",
+        "311x33",
+        "312x17",
+        "312x33",
+        "313x33",
+        "317x33",
+        "329x17",
+        "330x17",
+        "333x17",
+        "337x17",
+        "340x17",
+        "343x17",
+        "350x17",
+        "360x17",
+        "371x17",
+        "373x17",
+        "391x17",
+        "396x17",
+        "397x17",
+        "404x17",
+        "407x17",
+        "411x17",
+        "415x17",
+        "423x17",
+        "424x17",
+        "429x17",
+        "433x17",
+        "441x17",
+        "449x17",
+        "451x17",
+        "455x17",
+        "457x17",
+        "459x17",
+        "465x17",
+        "466x17",
+        "471x17",
+        "475x17",
+        "477x17",
+        "493x17",
+        "494x17",
+        "511x17",
+        "513x17",
+        "517x17",
+        "519x17",
+        "523x17",
+        "529x17",
+        "533x17",
+        "538x17",
+        "541x17",
+        "543x17",
+        "550x17",
+        "552x17",
+        "556x17",
+        "557x17",
+        "565x17",
+        "573x17",
+        "575x17",
+        "576x17",
+        "577x17",
+        "588x17",
+        "590x17",
+        "600x17",
+        "605x17",
+        "616x17",
+        "617x33",
+        "618x17",
+        "621x33",
+        "622x33",
+        "630x17",
+        "633x17",
+        "779x17",
+        "785x17",
+        "789x17"
+      ],
+      "minWidth": 113,
+      "minHeight": 17,
+      "minEffectiveWidth": 113,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 36,
+      "sampleText": "議案審議結果（令和8年6月定例会）",
+      "sampleOpenTag": "<a href=\"https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"break-words text-primary underline\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G002",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "header.sticky.top-0.z-20.border-b > div.mx-auto.flex.max-w-5xl.flex-wrap > div.flex.shrink-0.items-center.gap-1 > nav.hidden.shrink-0.items-center.gap-1 > a.rounded-full.px-4.py-2.text-sm",
+      "ruleId": "header-desktop-nav",
+      "component": "src/components/SiteHeader.tsx（主要メニュー）",
+      "uiCategory": "header nav（PC用ナビゲーション）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "ヘッダー高さ57pxを前提に、6ページ（HomePage・BillVotesPage・GeneralQuestionsPage×2・ExecutiveAnswersPage・ThemeDetailPage）のsticky絞り込みバーが`top-[57px]`で配置されている。ヘッダー内の操作要素を44pxへ拡大するとヘッダー高さが変わり、この6ページのバーがヘッダーに潜り込む／隙間が空くため、同時変更なしには安全に拡大できない。高さ36pxでWCAG 2.2 AA（2.5.8・24px）は充足しており、最近接の操作要素とも24px以上離れているため押し間違いは起きない。Phase192の判断を維持する。",
+      "userImpact": "妨げない（md以上でのみ表示。36pxでAA充足、最近接56px）",
+      "proposal": "解決するなら、`top-[57px]`を使う6ページのsticky絞り込みバーを同時に変更する必要がある。ヘッダー高さをCSSカスタムプロパティ（例：`--site-header-h`）で一元管理し、各stickyバーを`top-[var(--site-header-h)]`に置き換えたうえで、ヘッダーのナビ・検索リンクを`min-h-11`へ拡大する手順であれば安全に実施できる。Phase197では提案のみとする。",
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 515,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/",
+        "/bills",
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06",
+        "/bills/bill-fy2026-general-account-supplementary-budget-2",
+        "/bills/votes",
+        "/bills/votes/2019-06-chinjo-1",
+        "/bills/votes/2019-06-gian-10",
+        "/committees",
+        "/compare",
+        "/compensation",
+        "/council-activity",
+        "/dashboard",
+        "/data-status",
+        "/finance",
+        "/mayor",
+        "/mayor/policy-progress",
+        "/mayors",
+        "/mayors/aoki-yoshisuke",
+        "/mayors/fusano-hiroshi",
+        "/mayors/miura-hisatomo",
+        "/members/m01",
+        "/members/m02",
+        "/members/m03",
+        "/members/m04",
+        "/people",
+        "/questions",
+        "/questions/gq2026-06-m08",
+        "/questions/gq2026-06-m14",
+        "/questions/gq2026-06-m17",
+        "/questions/gq2026-06-m24",
+        "/timeline"
+      ],
+      "pathCount": 32,
+      "sizes": [
+        "102x36",
+        "105x36",
+        "130x36",
+        "60x36",
+        "88x36",
+        "93x36"
+      ],
+      "minWidth": 60,
+      "minHeight": 36,
+      "minEffectiveWidth": 60,
+      "minEffectiveHeight": 36,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "site-header"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 56,
+      "sampleText": "議員一覧",
+      "sampleOpenTag": "<a aria-current=\"page\" class=\"rounded-full px-4 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary bg-secondary-container text-on-secondary-container\" href=\"/\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G003",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex.min-h-svh.flex-col.overflow-x-hidden > header.sticky.top-0.z-20.border-b > div.mx-auto.flex.max-w-5xl.flex-wrap > div.flex.shrink-0.items-center.gap-1 > a.flex.shrink-0.items-center.gap-1.5",
+      "ruleId": "header-search-link",
+      "component": "src/components/SiteHeader.tsx（サイト内検索リンク）",
+      "uiCategory": "header nav（検索リンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "ヘッダー高さ57pxを前提に、6ページ（HomePage・BillVotesPage・GeneralQuestionsPage×2・ExecutiveAnswersPage・ThemeDetailPage）のsticky絞り込みバーが`top-[57px]`で配置されている。ヘッダー内の操作要素を44pxへ拡大するとヘッダー高さが変わり、この6ページのバーがヘッダーに潜り込む／隙間が空くため、同時変更なしには安全に拡大できない。高さ36pxでWCAG 2.2 AA（2.5.8・24px）は充足しており、最近接の操作要素とも24px以上離れているため押し間違いは起きない。Phase192の判断を維持する。",
+      "userImpact": "妨げない（36pxでAA充足、最近接92px）",
+      "proposal": "上記`header-desktop-nav`と同じ手順で同時に解決できる。Phase197では提案のみとする。",
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 288,
+      "occurrencesAt320": 32,
+      "occurrencesMobile": 160,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/",
+        "/bills",
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06",
+        "/bills/bill-fy2026-general-account-supplementary-budget-2",
+        "/bills/votes",
+        "/bills/votes/2019-06-chinjo-1",
+        "/bills/votes/2019-06-gian-10",
+        "/committees",
+        "/compare",
+        "/compensation",
+        "/council-activity",
+        "/dashboard",
+        "/data-status",
+        "/finance",
+        "/mayor",
+        "/mayor/policy-progress",
+        "/mayors",
+        "/mayors/aoki-yoshisuke",
+        "/mayors/fusano-hiroshi",
+        "/mayors/miura-hisatomo",
+        "/members/m01",
+        "/members/m02",
+        "/members/m03",
+        "/members/m04",
+        "/people",
+        "/questions",
+        "/questions/gq2026-06-m08",
+        "/questions/gq2026-06-m14",
+        "/questions/gq2026-06-m17",
+        "/questions/gq2026-06-m24",
+        "/timeline"
+      ],
+      "pathCount": 32,
+      "sizes": [
+        "74x36"
+      ],
+      "minWidth": 74,
+      "minHeight": 36,
+      "minEffectiveWidth": 74,
+      "minEffectiveHeight": 36,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "site-header"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 92,
+      "sampleText": "検索",
+      "sampleOpenTag": "<a aria-label=\"サイト内検索へ移動\" class=\"flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary text-on-surface-variant hover:bg-surface-container-high\" href=\"/search\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/root__74x36__0.png"
+    },
+    {
+      "id": "G004",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "footer.mt-8.border-t.border-outline-variant.px-4 > div.mx-auto.max-w-5xl.space-y-2.text-center > div.space-y-1.5.text-xs.leading-relaxed.text-on-surface-variant > p > a.rounded.text-on-surface-variant.underline.hover:text-on-surface",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 288,
+      "occurrencesAt320": 32,
+      "occurrencesMobile": 160,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/",
+        "/bills",
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06",
+        "/bills/bill-fy2026-general-account-supplementary-budget-2",
+        "/bills/votes",
+        "/bills/votes/2019-06-chinjo-1",
+        "/bills/votes/2019-06-gian-10",
+        "/committees",
+        "/compare",
+        "/compensation",
+        "/council-activity",
+        "/dashboard",
+        "/data-status",
+        "/finance",
+        "/mayor",
+        "/mayor/policy-progress",
+        "/mayors",
+        "/mayors/aoki-yoshisuke",
+        "/mayors/fusano-hiroshi",
+        "/mayors/miura-hisatomo",
+        "/members/m01",
+        "/members/m02",
+        "/members/m03",
+        "/members/m04",
+        "/people",
+        "/questions",
+        "/questions/gq2026-06-m08",
+        "/questions/gq2026-06-m14",
+        "/questions/gq2026-06-m17",
+        "/questions/gq2026-06-m24",
+        "/timeline"
+      ],
+      "pathCount": 32,
+      "sizes": [
+        "102x16",
+        "108x17"
+      ],
+      "minWidth": 102,
+      "minHeight": 16,
+      "minEffectiveWidth": 102,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "site-footer"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 57,
+      "sampleText": "情報提供・訂正依頼",
+      "sampleOpenTag": "<a class=\"rounded text-on-surface-variant underline hover:text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/contact\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G005",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "ruleId": "breadcrumbs",
+      "component": "src/components/Breadcrumbs.tsx",
+      "uiCategory": "breadcrumb（パンくずリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "パンくずリンクは高さ16px（text-xs 1行）だが、隣接する操作要素とは46〜58px離れておりWCAG 2.2 AA（2.5.8）の「間隔」例外を満たす。44px化すると全ページの先頭に約28px加算され、スマートフォンで本文の見え始めが遅くなる（本サイトはスマホ表示を最優先する方針）。Phase192の判断を維持する。",
+      "userImpact": "妨げない（16pxだが最近接46〜58pxで間隔例外を充足）",
+      "proposal": "44pxではなくWCAG 2.2 AAの下限である24pxに合わせるなら、リンクへ`inline-flex items-center min-h-6`を付けると全ページの加算は約8pxに収まり、間隔例外に頼らず2.5.8を直接充足できる。レイアウト影響が全ページに及ぶため、Phase197では提案のみとする。",
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 279,
+      "occurrencesAt320": 31,
+      "occurrencesMobile": 155,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills",
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06",
+        "/bills/bill-fy2026-general-account-supplementary-budget-2",
+        "/bills/votes/2019-06-chinjo-1",
+        "/bills/votes/2019-06-gian-10",
+        "/compare",
+        "/council-activity",
+        "/dashboard",
+        "/data-status",
+        "/mayors/aoki-yoshisuke",
+        "/mayors/fusano-hiroshi",
+        "/mayors/miura-hisatomo",
+        "/members/m01",
+        "/members/m02",
+        "/members/m03",
+        "/members/m04",
+        "/people",
+        "/timeline"
+      ],
+      "pathCount": 19,
+      "sizes": [
+        "36x16",
+        "48x16",
+        "83x16"
+      ],
+      "minWidth": 36,
+      "minHeight": 16,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "breadcrumb"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 46,
+      "sampleText": "ホーム",
+      "sampleOpenTag": "<a class=\"shrink-0 rounded whitespace-nowrap hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/dashboard__36x16__1.png"
+    },
+    {
+      "id": "G006",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "ruleId": "breadcrumbs",
+      "component": "src/components/Breadcrumbs.tsx",
+      "uiCategory": "breadcrumb（パンくずリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "パンくずリンクは高さ16px（text-xs 1行）だが、隣接する操作要素とは46〜58px離れておりWCAG 2.2 AA（2.5.8）の「間隔」例外を満たす。44px化すると全ページの先頭に約28px加算され、スマートフォンで本文の見え始めが遅くなる（本サイトはスマホ表示を最優先する方針）。Phase192の判断を維持する。",
+      "userImpact": "妨げない（16pxだが最近接46〜58pxで間隔例外を充足）",
+      "proposal": "44pxではなくWCAG 2.2 AAの下限である24pxに合わせるなら、リンクへ`inline-flex items-center min-h-6`を付けると全ページの加算は約8pxに収まり、間隔例外に頼らず2.5.8を直接充足できる。レイアウト影響が全ページに及ぶため、Phase197では提案のみとする。",
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 108,
+      "occurrencesAt320": 12,
+      "occurrencesMobile": 60,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/committees",
+        "/finance",
+        "/mayor",
+        "/mayor/policy-progress",
+        "/questions/gq2026-06-m08",
+        "/questions/gq2026-06-m14",
+        "/questions/gq2026-06-m17",
+        "/questions/gq2026-06-m24"
+      ],
+      "pathCount": 8,
+      "sizes": [
+        "119x16",
+        "36x16"
+      ],
+      "minWidth": 36,
+      "minHeight": 16,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "breadcrumb"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 46,
+      "sampleText": "ホーム",
+      "sampleOpenTag": "<a class=\"shrink-0 rounded whitespace-nowrap hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/committees__36x16__9.png"
+    },
+    {
+      "id": "G007",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.mt-2.space-y-2 > li > a.text-sm.font-medium.text-primary.underline",
+      "ruleId": "mayor-detail-related-lists",
+      "component": "src/pages/MayorDetailPage.tsx（関連政策・関連議案の一覧リンク）",
+      "uiCategory": "text link（1件1行の一覧リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "`li`がリンクだけを含む一覧であり、文章中のインラインリンクではない（Phase191の判定条件では`li`を祖先に持つためインライン扱いになっていた）。1件1行の一覧リンクなので、44px化しても文章の行送りは崩れない。",
+      "userImpact": "妨げない（最近接42pxで間隔例外を充足。高さ20pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 73,
+      "occurrencesAt320": 3,
+      "occurrencesMobile": 29,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors/miura-hisatomo"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "185x20",
+        "213x20",
+        "237x20",
+        "268x20",
+        "269x20",
+        "279x20",
+        "329x20",
+        "349x20",
+        "405x20",
+        "475x20",
+        "671x20"
+      ],
+      "minWidth": 185,
+      "minHeight": 20,
+      "minEffectiveWidth": 185,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 42,
+      "sampleText": "② 地域経済を活性化させます",
+      "sampleOpenTag": "<a class=\"text-sm font-medium text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/policies/mayor-miura-economy\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G008",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "li.rounded-lg.border.border-outline-variant.p-3 > dl.mt-2.grid.grid-cols-1.gap-x-3 > div > dd.inline > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 45,
+      "occurrencesAt320": 5,
+      "occurrencesMobile": 25,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors/aoki-yoshisuke",
+        "/mayors/fusano-hiroshi",
+        "/mayors/miura-hisatomo"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "51x17",
+        "63x17"
+      ],
+      "minWidth": 51,
+      "minHeight": 17,
+      "minEffectiveWidth": 51,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 21,
+      "sampleText": "三浦 虎雄",
+      "sampleOpenTag": "<a class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/mayors/miura-torao\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G009",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline.focus-visible:outline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 36,
+      "occurrencesAt320": 4,
+      "occurrencesMobile": 20,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/members/m01",
+        "/members/m02",
+        "/members/m03",
+        "/members/m04"
+      ],
+      "pathCount": 4,
+      "sizes": [
+        "228x37",
+        "360x37",
+        "48x17"
+      ],
+      "minWidth": 48,
+      "minHeight": 17,
+      "minEffectiveWidth": 48,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 21,
+      "sampleText": "算定方法",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/methodology/activity-radar\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G010",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-3.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 27,
+      "occurrencesAt320": 3,
+      "occurrencesMobile": 15,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "246x37",
+        "36x17",
+        "72x17",
+        "84x17",
+        "916x37"
+      ],
+      "minWidth": 36,
+      "minHeight": 17,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 110,
+      "sampleText": "こちら",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline\" href=\"/methodology/activity-radar\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G011",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.px-4.py-4.sm:px-6 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "ruleId": "breadcrumbs",
+      "component": "src/components/Breadcrumbs.tsx",
+      "uiCategory": "breadcrumb（パンくずリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "パンくずリンクは高さ16px（text-xs 1行）だが、隣接する操作要素とは46〜58px離れておりWCAG 2.2 AA（2.5.8）の「間隔」例外を満たす。44px化すると全ページの先頭に約28px加算され、スマートフォンで本文の見え始めが遅くなる（本サイトはスマホ表示を最優先する方針）。Phase192の判断を維持する。",
+      "userImpact": "妨げない（16pxだが最近接46〜58pxで間隔例外を充足）",
+      "proposal": "44pxではなくWCAG 2.2 AAの下限である24pxに合わせるなら、リンクへ`inline-flex items-center min-h-6`を付けると全ページの加算は約8pxに収まり、間隔例外に頼らず2.5.8を直接充足できる。レイアウト影響が全ページに及ぶため、Phase197では提案のみとする。",
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 27,
+      "occurrencesAt320": 3,
+      "occurrencesMobile": 15,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes",
+        "/mayors",
+        "/questions"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "36x16"
+      ],
+      "minWidth": 36,
+      "minHeight": 16,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "breadcrumb"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 58,
+      "sampleText": "ホーム",
+      "sampleOpenTag": "<a class=\"shrink-0 rounded whitespace-nowrap hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/questions__36x16__5.png"
+    },
+    {
+      "id": "G012",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "section.rounded-2xl.bg-surface-container-low.p-5.shadow-e1 > dl.mt-3.grid.grid-cols-1.gap-x-3 > div > dd.inline > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 27,
+      "occurrencesAt320": 3,
+      "occurrencesMobile": 15,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06",
+        "/bills/bill-fy2026-general-account-supplementary-budget-2"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "97x17"
+      ],
+      "minWidth": 97,
+      "minHeight": 17,
+      "minEffectiveWidth": 97,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 105,
+      "sampleText": "令和8年6月定例会",
+      "sampleOpenTag": "<a class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/council-documents/2026-06\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G013",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.mt-2.space-y-2 > li.text-sm > a.break-words.text-primary.underline.focus-visible:outline",
+      "ruleId": "archive-detail-source-list",
+      "component": "src/pages/CouncilDocumentsArchivePage.tsx（詳細ページの出典リンク一覧）",
+      "uiCategory": "source link（出典リンク一覧）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "出典1件＝1行の一覧で、各行はリンクと確認状況バッジ（操作要素ではない）で構成される。文章中の引用ではないため、44px化しても読みやすさを損なわない。行の高さが増えることで隣接リンクとの距離にも余裕が出る。",
+      "userImpact": "妨げない（隣接するのは同じ一覧の別の出典リンクで、行が分かれており取り違えは起きにくい）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与（`src/pages/TimelinePage.tsx`で実績のある、折り返しを保つ書き方に合わせる）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 27,
+      "occurrencesAt320": 3,
+      "occurrencesMobile": 15,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06",
+        "/bills/bill-fy2026-general-account-supplementary-budget-2"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "226x20"
+      ],
+      "minWidth": 226,
+      "minHeight": 20,
+      "minEffectiveWidth": 226,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 18,
+      "sampleText": "議案審議結果（令和8年6月定例会）",
+      "sampleOpenTag": "<a href=\"https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"break-words text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G014",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-2.text-xs.leading-relaxed.text-on-surface-variant > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 27,
+      "occurrencesAt320": 3,
+      "occurrencesMobile": 15,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors/aoki-yoshisuke",
+        "/mayors/fusano-hiroshi",
+        "/mayors/miura-hisatomo"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "299x37",
+        "323x37",
+        "48x17"
+      ],
+      "minWidth": 48,
+      "minHeight": 17,
+      "minEffectiveWidth": 48,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 114,
+      "sampleText": "市政年表",
+      "sampleOpenTag": "<a class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/history?person=mayor-09\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G015",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.space-y-3.sm:hidden > ul.space-y-2 > li.rounded-lg.p-3.border.border-gray-200 > a.font-medium.text-on-surface.hover:underline.focus-visible:outline",
+      "ruleId": "council-activity-member-link-mobile",
+      "component": "src/pages/CouncilActivityPage.tsx（スマートフォン用一覧の議員名リンク）",
+      "uiCategory": "card action（一覧カードの議員名リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "カード内に単独で置かれた議員名リンクであり、文章の一部ではない。スマートフォン専用表示なのでタップ領域を優先して確保する。",
+      "userImpact": "妨げない（52x24pxでAA充足、最近接75px。AAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 20,
+      "occurrencesAt320": 4,
+      "occurrencesMobile": 20,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "100x24",
+        "52x24",
+        "68x24",
+        "84x24"
+      ],
+      "minWidth": 52,
+      "minHeight": 24,
+      "minEffectiveWidth": 52,
+      "minEffectiveHeight": 24,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 75,
+      "sampleText": "吉田 茂仁",
+      "sampleOpenTag": "<a class=\"font-medium text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/council-activity/m26\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G016",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-3.flex.flex-wrap.gap-x-4 > a.text-primary.underline",
+      "ruleId": "dashboard-session-links",
+      "component": "src/pages/DashboardPage.tsx（今の会期・委員会の導線リンク）",
+      "uiCategory": "text link（独立した導線リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "折り返し行に並ぶ独立した導線リンクで、文章の一部ではない。高さ20pxは行の高さで決まっているだけであり、`inline-flex min-h-11 items-center`で44pxを確保しても情報は減らず、レイアウト前提も壊れない。",
+      "userImpact": "妨げない（最近接27pxで間隔例外は充足。ただし高さ20pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与（Phase192で他ページの導線リンクへ適用済みの方式に合わせた）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 18,
+      "occurrencesAt320": 2,
+      "occurrencesMobile": 10,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "126x20",
+        "140x20"
+      ],
+      "minWidth": 126,
+      "minHeight": 20,
+      "minEffectiveWidth": 126,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 27,
+      "sampleText": "この会期の資料を見る",
+      "sampleOpenTag": "<a class=\"text-primary underline\" href=\"/council-documents/2026-06\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/dashboard__140x20__3.png"
+    },
+    {
+      "id": "G017",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > p.rounded-xl.bg-surface-container-low.p-3.text-xs > a.mx-1.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 18,
+      "occurrencesAt320": 2,
+      "occurrencesMobile": 10,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "209x17",
+        "240x17",
+        "256x37",
+        "304x37",
+        "316x37",
+        "318x37",
+        "364x37",
+        "369x37",
+        "949x37"
+      ],
+      "minWidth": 209,
+      "minHeight": 17,
+      "minEffectiveWidth": 209,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 13,
+      "sampleText": "歴代議長・副議長（2001〜2012年分）",
+      "sampleOpenTag": "<a class=\"mx-1 text-primary underline\" href=\"/committees/leadership-history\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G018",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.mb-4.rounded-lg.bg-surface-container-low.p-3 > dl.mt-2.grid.grid-cols-1.gap-2 > div > dd.text-sm.text-on-surface > a.font-medium.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 18,
+      "occurrencesAt320": 2,
+      "occurrencesMobile": 10,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "112x20",
+        "140x20"
+      ],
+      "minWidth": 112,
+      "minHeight": 20,
+      "minEffectiveWidth": 112,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 46,
+      "sampleText": "議員活動バロメーター",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline\" href=\"/council-activity\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G019",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.rounded-2xl.bg-surface-container-low.p-5.shadow-e1 > dl.mt-3.grid.grid-cols-1.gap-x-4 > div > dd.text-on-surface > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 18,
+      "occurrencesAt320": 2,
+      "occurrencesMobile": 10,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes/2019-06-chinjo-1",
+        "/bills/votes/2019-06-gian-10"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "98x20"
+      ],
+      "minWidth": 98,
+      "minHeight": 20,
+      "minEffectiveWidth": 98,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 65,
+      "sampleText": "総務政策委員会",
+      "sampleOpenTag": "<a class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/committees/committee-somu-seisaku\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G020",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.min-w-0.flex-1 > div.mt-1 > div.text-sm.text-on-surface > p > a.font-medium.text-primary.underline.focus-visible:outline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 18,
+      "occurrencesAt320": 2,
+      "occurrencesMobile": 10,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes/2019-06-chinjo-1",
+        "/bills/votes/2019-06-gian-10"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "98x20"
+      ],
+      "minWidth": 98,
+      "minHeight": 20,
+      "minEffectiveWidth": 98,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 24,
+      "sampleText": "総務政策委員会",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/committees/committee-somu-seisaku\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G021",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "table.w-full.min-w-[820px].border-collapse.text-sm > tbody > tr.border-b.border-gray-100.align-middle.dark:border-outline-variant/60 > td.whitespace-nowrap.py-2.pr-3 > a.font-medium.text-on-surface.hover:underline.focus-visible:outline",
+      "ruleId": "council-activity-member-link-table",
+      "component": "src/pages/CouncilActivityPage.tsx（全議員比較表の議員名リンク）",
+      "uiCategory": "text link（表セル内のリンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "表のセルに単独で置かれたリンクであり、文章中の引用ではない。行の高さが44pxになるだけで情報は減らない。",
+      "userImpact": "妨げない（sm以上でのみ表示。最近接40pxで間隔例外を充足）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 16,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "45x20",
+        "59x20",
+        "73x20",
+        "87x20"
+      ],
+      "minWidth": 45,
+      "minHeight": 20,
+      "minEffectiveWidth": 45,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "table-body"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 40,
+      "sampleText": "吉田 茂仁",
+      "sampleOpenTag": "<a class=\"font-medium text-on-surface hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/council-activity/m26\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G022",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "main#main-content > div.flex-1 > div.px-4.py-4.sm:px-6 > p.mt-6.px-1.text-xs.leading-relaxed > a.mx-1.text-primary.underline.focus-visible:outline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 14,
+      "occurrencesAt320": 2,
+      "occurrencesMobile": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "280x37",
+        "316x37",
+        "328x37",
+        "330x37",
+        "340x37",
+        "342x37",
+        "706x37",
+        "84x17"
+      ],
+      "minWidth": 84,
+      "minHeight": 17,
+      "minEffectiveWidth": 84,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 20,
+      "sampleText": "市長情報ページ",
+      "sampleOpenTag": "<a class=\"mx-1 text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/mayor\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G023",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "table.w-full.min-w-[560px].border-collapse.text-sm > thead > tr.border-b.border-outline-variant.text-left.text-xs > th.px-3.py-2.text-right.font-medium > button.rounded.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "ruleId": "compensation-miyazaki-sort",
+      "component": "src/components/compensation/MiyazakiComparisonTable.tsx（表の並び替えボタン）",
+      "uiCategory": "sort control（表ヘッダーの並び替えボタン）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "表ヘッダーの並び替えボタンが高さ16pxしかなく、WCAG 2.2 AA（24px）を大きさ自体では満たしていない（間隔例外でのみ充足）。同じ役割のボタンは`src/pages/CouncilActivityPage.tsx`で既に`inline-flex min-h-11 items-center gap-1`を使っており、実装を揃えられる。",
+      "userImpact": "妨げない（sm以上でのみ表示。最近接123〜236px）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与し、CouncilActivityPageの並び替えボタンと実装を統一。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 12,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "24x16",
+        "36x16",
+        "39x16"
+      ],
+      "minWidth": 24,
+      "minHeight": 16,
+      "minEffectiveWidth": 24,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "table-header"
+      ],
+      "tags": [
+        "button"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 123,
+      "sampleText": "市長 ▼",
+      "sampleOpenTag": "<button type=\"button\" aria-label=\"市長で並び替え\" class=\"rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G024",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > a.mt-2.inline-block.text-sm.text-primary",
+      "ruleId": "dashboard-policy-progress-link",
+      "component": "src/pages/DashboardPage.tsx（市長公約の進捗状況への導線）",
+      "uiCategory": "text link（独立した導線リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "セクション末尾に単独で置かれた導線リンクであり、文章の一部ではない。44px化しても情報は減らない。",
+      "userImpact": "妨げない（最近接36px。高さ20pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-block` を `inline-flex min-h-11 items-center` へ変更。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "210x20"
+      ],
+      "minWidth": 210,
+      "minHeight": 20,
+      "minEffectiveWidth": 210,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 36,
+      "sampleText": "市長公約の進捗状況を詳しく見る",
+      "sampleOpenTag": "<a class=\"mt-2 inline-block text-sm text-primary underline\" href=\"/mayor/policy-progress\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/dashboard__210x20__2.png"
+    },
+    {
+      "id": "G025",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-3.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x17"
+      ],
+      "minWidth": 72,
+      "minHeight": 17,
+      "minEffectiveWidth": 72,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 440,
+      "sampleText": "延岡市の財政",
+      "sampleOpenTag": "<a class=\"mx-1 text-primary underline\" href=\"/finance\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G026",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-3.text-xs.leading-relaxed.text-on-surface-variant > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "156x17",
+        "288x37",
+        "360x37",
+        "670x37"
+      ],
+      "minWidth": 156,
+      "minHeight": 17,
+      "minEffectiveWidth": 156,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 678,
+      "sampleText": "広報のべおか文字起こし検索",
+      "sampleOpenTag": "<a class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/koho-search\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G027",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-3.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "120x17"
+      ],
+      "minWidth": 120,
+      "minHeight": 17,
+      "minEffectiveWidth": 120,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 273,
+      "sampleText": "議員活動バロメーター",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline\" href=\"/council-activity\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G028",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-4.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "300x37",
+        "84x17",
+        "930x37"
+      ],
+      "minWidth": 84,
+      "minHeight": 17,
+      "minEffectiveWidth": 84,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 105,
+      "sampleText": "算定方法ページ",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline\" href=\"/methodology/activity-radar\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G029",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2 > a.block.w-full.text-left.focus-visible:outline",
+      "ruleId": "verified-speech-card-title",
+      "component": "src/components/questions/VerifiedSpeechCard.tsx（カード見出しリンク）",
+      "uiCategory": "card action（カード見出しリンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "カード見出し全幅のリンクで、高さだけが1行分（22px）のためWCAG 2.2 AAの24pxに2px足りない（現状は間隔例外で充足）。縦paddingを1段足せば大きさ自体で24pxを満たせ、カード内の余白も自然になる。",
+      "userImpact": "妨げない（幅256px以上・最近接104px。高さ22pxでAA下限に2px足りない）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`py-1`を付与（高さ22px→30px）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/questions"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "256x22",
+        "296x22",
+        "311x22",
+        "326x22",
+        "366x22",
+        "680x22",
+        "936x22"
+      ],
+      "minWidth": 256,
+      "minHeight": 22,
+      "minEffectiveWidth": 256,
+      "minEffectiveHeight": 22,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 104,
+      "sampleText": "甲斐 忠篤議員の一般質問",
+      "sampleOpenTag": "<a class=\"block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/members/m07/questions/m07-2026-02-27-ippan-shitsumon\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/questions__256x22__6.png"
+    },
+    {
+      "id": "G030",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": true,
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > div.mb-1.rounded-xl.bg-surface-container-low.p-4 > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "archive-notice-inline-link",
+      "component": "src/pages/CouncilDocumentsArchivePage.tsx（登録状況の注記文）",
+      "uiCategory": "inline citation（注記文中のインラインリンク）",
+      "classification": "FALSE_POSITIVE",
+      "classificationLabel": "検出器の誤り",
+      "reason": "注記文の途中に置かれたインラインリンク（`…既存の議案賛否データ（/bills/votes）で…`）であり、実体は`tap-target-inline-link`である。Phase191の判定は`display:inline`かつ`p / li / dd / td / blockquote / figcaption`のいずれかを祖先に持つ場合のみインライン扱いにしており、このように`div`が直接テキストを含む場合を取りこぼしていた。Phase197の改良判定（同じ親要素に非空のテキストノードがあればインライン扱い）では`tap-target-inline-link`へ再分類される。表示側の変更は不要。",
+      "userImpact": "妨げない（本文中のインラインリンク）",
+      "proposal": null,
+      "detectorFix": "同じ親要素に非空のテキストノードがある`display:inline`の要素もインラインリンクとして扱う（`typeRevised`に反映済み）。",
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "62x17"
+      ],
+      "minWidth": 62,
+      "minHeight": 17,
+      "minEffectiveWidth": 62,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 73,
+      "sampleText": "/bills/votes",
+      "sampleOpenTag": "<a class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/bills/votes\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/bills__62x17__7.png"
+    },
+    {
+      "id": "G031",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.flex.flex-wrap.items-start.justify-between > a.shrink-0.rounded-full.bg-primary-container.px-4",
+      "ruleId": "bill-votes-detail-chip",
+      "component": "src/pages/BillVotesPage.tsx（一覧カードの「詳細を見る」）",
+      "uiCategory": "chip link（カードの主要操作）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "一覧カードの主要操作である「詳細を見る」チップが36pxで、同じ役割の`GeneralQuestionCard`・`VerifiedSpeechCard`の「詳細を見る」（`inline-flex min-h-11 items-center`）と実装が揃っていない。",
+      "userImpact": "妨げない（36pxでAA充足、最近接198px。AAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与し、他の一覧カードと実装を統一。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "102x36"
+      ],
+      "minWidth": 102,
+      "minHeight": 36,
+      "minEffectiveWidth": 102,
+      "minEffectiveHeight": 36,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 198,
+      "sampleText": "詳細を見る",
+      "sampleOpenTag": "<a class=\"shrink-0 rounded-full bg-primary-container px-4 py-2 text-sm font-medium text-on-primary-container shadow-e1 transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/bills/votes/2026-06-gian-5\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/bills_votes__102x36__8.png"
+    },
+    {
+      "id": "G032",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "main#main-content > div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > p.rounded-xl.bg-surface-container-low.p-3.text-xs > a.mx-1.text-primary.underline.focus-visible:outline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/committees"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "132x17",
+        "309x37",
+        "333x37",
+        "363x37"
+      ],
+      "minWidth": 132,
+      "minHeight": 17,
+      "minEffectiveWidth": 132,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 17,
+      "sampleText": "歴代議長・副議長ページ",
+      "sampleOpenTag": "<a class=\"mx-1 text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/committees/leadership-history\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G033",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > p.px-1.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.text-primary.underline.focus-visible:outline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compare"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "280x37",
+        "84x17"
+      ],
+      "minWidth": 84,
+      "minHeight": 17,
+      "minEffectiveWidth": 84,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 139,
+      "sampleText": "延岡市政の年表",
+      "sampleOpenTag": "<a class=\"mx-1 text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/timeline\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G034",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.mx-auto.max-w-4xl.space-y-4.px-4 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "ruleId": "breadcrumbs",
+      "component": "src/components/Breadcrumbs.tsx",
+      "uiCategory": "breadcrumb（パンくずリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "パンくずリンクは高さ16px（text-xs 1行）だが、隣接する操作要素とは46〜58px離れておりWCAG 2.2 AA（2.5.8）の「間隔」例外を満たす。44px化すると全ページの先頭に約28px加算され、スマートフォンで本文の見え始めが遅くなる（本サイトはスマホ表示を最優先する方針）。Phase192の判断を維持する。",
+      "userImpact": "妨げない（16pxだが最近接46〜58pxで間隔例外を充足）",
+      "proposal": "44pxではなくWCAG 2.2 AAの下限である24pxに合わせるなら、リンクへ`inline-flex items-center min-h-6`を付けると全ページの加算は約8pxに収まり、間隔例外に頼らず2.5.8を直接充足できる。レイアウト影響が全ページに及ぶため、Phase197では提案のみとする。",
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "36x16"
+      ],
+      "minWidth": 36,
+      "minHeight": 16,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "breadcrumb"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 58,
+      "sampleText": "ホーム",
+      "sampleOpenTag": "<a class=\"shrink-0 rounded whitespace-nowrap hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/compensation__36x16__10.png"
+    },
+    {
+      "id": "G035",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > div.rounded-2xl.p-5.sm:p-6.border > p.mt-3.border-t.border-gray-200.pt-3 > a.font-medium.text-primary.underline.focus-visible:outline",
+      "ruleId": "inline-citation-default",
+      "component": "（本文・注記文中のインラインリンク：複数ファイル）",
+      "uiCategory": "inline citation（本文中のインラインリンク）",
+      "classification": "INTENTIONAL",
+      "classificationLabel": "設計上の意図",
+      "reason": "本文・注記文の中に組み込まれたインラインリンク（出典・関連ページへの引用）であり、高さは周囲の非リンク文字の行の高さで決まる。WCAG 2.2 達成基準2.5.8の「インライン」例外に該当する。拡大すると文章の行送りが崩れ、かえって読みにくくなる。",
+      "userImpact": "妨げない（文章中のリンク。WCAG 2.2 2.5.8「インライン」例外）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": false,
+      "fix": null,
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "36x17",
+        "669x37"
+      ],
+      "minWidth": 36,
+      "minHeight": 17,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 76,
+      "sampleText": "こちら",
+      "sampleOpenTag": "<a class=\"font-medium text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/methodology/activity-radar\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G036",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.grid.grid-cols-1.gap-3.sm:grid-cols-3 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ol.space-y-1.5.text-sm.text-on-surface > li.flex.items-center.justify-between.gap-2 > a.hover:underline.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "ruleId": "council-activity-top3",
+      "component": "src/pages/CouncilActivityPage.tsx（発言量TOP3・提出者件数TOP3の議員リンク）",
+      "uiCategory": "text link（一覧内の議員リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "3件だけの短い一覧で、各行が高さ20px・行間6pxのため隣接する操作要素との距離が26pxしかない。WCAG 2.2 AAの間隔例外（24px）は満たすものの余裕が小さく、スマートフォンでは押し間違いが起きやすい部類に入る。3件のみのため44px化してもカードが極端に伸びない。",
+      "userImpact": "妨げない（最近接26pxで間隔例外は充足。ただし余裕が2pxしかない）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与（隣接距離26px→50px）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "95x20"
+      ],
+      "minWidth": 95,
+      "minHeight": 20,
+      "minEffectiveWidth": 95,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 26,
+      "sampleText": "1位 上杉 泰洋",
+      "sampleOpenTag": "<a class=\"hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/council-activity/m03\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/council_activity__95x20__12.png"
+    },
+    {
+      "id": "G037",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.grid.grid-cols-1.gap-3.sm:grid-cols-3 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.mt-1.5.flex.flex-wrap.gap-x-2 > li > a.hover:underline.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "ruleId": "council-activity-question-rate-chips",
+      "component": "src/pages/CouncilActivityPage.tsx（B. 一般質問実施率100%の議員名一覧）",
+      "uiCategory": "text link（折り返し表示の議員名一覧）",
+      "classification": "REAL_BUG",
+      "classificationLabel": "実害あり",
+      "reason": "議員名リンクを`flex-wrap`＋`gap-y-1`（縦4px）で詰めて並べているため、高さ17pxのリンクの中心同士が縦に17pxしか離れていない。WCAG 2.2 達成基準2.5.8の大きさ（24px）も「間隔」例外（24px）も満たさず、「インライン」例外にも当たらない（各`li`はリンクだけを含み、文章ではない）。スマートフォンで隣の議員のページを開いてしまう誤タップが現実に起こりうるため、実害ありとする。",
+      "userImpact": "妨げる（高さ17px・最近接17pxで、隣の議員名を誤って開きやすい）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "各リンクへ`inline-flex min-h-11 items-center`を付与し、縦方向のタップ領域を44pxにする。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "51x17"
+      ],
+      "minWidth": 51,
+      "minHeight": 17,
+      "minEffectiveWidth": 51,
+      "minEffectiveHeight": 17,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": false,
+      "minNearestControlDistance": 17,
+      "sampleText": "宮田 博徳",
+      "sampleOpenTag": "<a class=\"hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/council-activity/m24\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G038",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.grid.grid-cols-1.gap-3.sm:grid-cols-3 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ol.mt-1.space-y-1.5.text-sm.text-on-surface > li.flex.items-center.justify-between.gap-2 > a.hover:underline.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "ruleId": "council-activity-top3",
+      "component": "src/pages/CouncilActivityPage.tsx（発言量TOP3・提出者件数TOP3の議員リンク）",
+      "uiCategory": "text link（一覧内の議員リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "3件だけの短い一覧で、各行が高さ20px・行間6pxのため隣接する操作要素との距離が26pxしかない。WCAG 2.2 AAの間隔例外（24px）は満たすものの余裕が小さく、スマートフォンでは押し間違いが起きやすい部類に入る。3件のみのため44px化してもカードが極端に伸びない。",
+      "userImpact": "妨げない（最近接26pxで間隔例外は充足。ただし余裕が2pxしかない）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与（隣接距離26px→50px）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "95x20"
+      ],
+      "minWidth": 95,
+      "minHeight": 20,
+      "minEffectiveWidth": 95,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 26,
+      "sampleText": "1位 北林 幹雄",
+      "sampleOpenTag": "<a class=\"hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/council-activity/m11\" data-discover=\"true\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/council_activity__95x20__13.png"
+    },
+    {
+      "id": "G039",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2.text-sm > ul.mt-1.flex.flex-wrap.gap-1 > li > a.rounded-full.bg-surface-container-high.px-2.py-0.5",
+      "ruleId": "archive-detail-year-chips",
+      "component": "src/pages/CouncilDocumentsArchivePage.tsx（関連年度のチップリンク）",
+      "uiCategory": "chip link（年度チップ）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "背景色と丸みを持つチップ型のリンクであり、見た目のうえでも文章ではなくボタン状の操作要素として提示している。高さ21pxはWCAG 2.2 AAの24pxに届かず（現状は間隔例外でのみ充足）、チップである以上は大きさ自体で満たすべきである。",
+      "userImpact": "妨げない（最近接100px。高さ21pxでAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 9,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/bill-fy2026-general-account-supplementary-budget-2"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "67x21"
+      ],
+      "minWidth": 67,
+      "minHeight": 21,
+      "minEffectiveWidth": 67,
+      "minEffectiveHeight": 21,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 100,
+      "sampleText": "2026年度",
+      "sampleOpenTag": "<a class=\"rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/finance/budget\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G040",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "table.w-full.min-w-[820px].border-collapse.text-sm > thead > tr.border-b.border-gray-200.text-left.text-xs > th.whitespace-nowrap.py-2.pr-3 > button.inline-flex.min-h-11.items-center.gap-1",
+      "ruleId": "council-activity-sort",
+      "component": "src/pages/CouncilActivityPage.tsx（全議員比較表の並び替えボタン）",
+      "uiCategory": "sort control（表ヘッダーの並び替えボタン）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "高さはPhase192で44pxを確保済みで、AAは充足している。残るのは短い列名（「氏名」等）のときに幅が36〜40pxになる点だけであり、`min-w-11`を足せば見た目を変えずにAAA（44x44）も満たせる。",
+      "userImpact": "妨げない（高さ44px確保済み。幅36〜40pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`min-w-11`を付与（文字は左寄せのまま、ボタンの当たり判定だけ44px幅にする）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 8,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "36x44",
+        "40x44"
+      ],
+      "minWidth": 36,
+      "minHeight": 44,
+      "minEffectiveWidth": 36,
+      "minEffectiveHeight": 44,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "table-header"
+      ],
+      "tags": [
+        "button"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 50,
+      "sampleText": "氏名 ▲",
+      "sampleOpenTag": "<button type=\"button\" class=\"inline-flex min-h-11 items-center gap-1 font-semibold hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" aria-label=\"氏名で並べ替え\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G041",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "details.group.mb-2.rounded-xl.bg-surface-container-low > div.px-4.pb-4.sm:px-5 > div.grid.grid-cols-2.gap-4.md:grid-cols-3 > div.group.relative.flex.min-w-0 > a.relative.z-10.mt-0.5.inline-block",
+      "ruleId": "member-card-profile-link",
+      "component": "src/components/MemberCard.tsx（公式プロフィールへの外部リンク）",
+      "uiCategory": "source link（外部の公式資料リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "カード全面リンク（`absolute inset-0`）の上に重ねた外部リンクで、押し間違えると議員詳細ページではなく外部サイトへ移動する。高さ32pxはAAを満たすが、重なりのある配置なのでAAA（44px）まで確保したほうが誤操作が減る。",
+      "userImpact": "妨げない（32pxでAA充足。最近接25pxはカード全面リンクとの距離で、意図的な重ね合わせ）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-block`を`inline-flex min-h-11 items-center justify-center`へ変更（表示文字は変えない）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 6,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 2,
+      "viewports": [
+        "375x812",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "114x32",
+        "134x32"
+      ],
+      "minWidth": 114,
+      "minHeight": 32,
+      "minEffectiveWidth": 114,
+      "minEffectiveHeight": 32,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "disclosure"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 25,
+      "sampleText": "公式プロフィール",
+      "sampleOpenTag": "<a href=\"https://www.city.nobeoka.miyazaki.jp/site/gikai/1440.html\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"稲田 雅之の公式プロフィールを新しいタブで開く\" class=\"relative z-10 mt-0.5 inline-block max-w-full break-words rounded-full px-2.5 py-2 text-xs font-medium text-primary transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G042",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2 > button.block.w-full.text-left.focus-visible:outline",
+      "ruleId": "general-question-card-title",
+      "component": "src/components/questions/GeneralQuestionCard.tsx（カード見出しの開閉ボタン）",
+      "uiCategory": "accordion（カード見出しの開閉ボタン）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "上記`verified-speech-card-title`と同じ形の見出しで、開閉操作を担うボタン。高さだけが1行分（22px）で24pxに届かない。",
+      "userImpact": "妨げない（幅326px以上・最近接144px。高さ22pxでAA下限に2px足りない）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`py-1`を付与（高さ22px→30px）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 6,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 2,
+      "viewports": [
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/questions"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "326x22",
+        "366x22",
+        "680x22",
+        "936x22"
+      ],
+      "minWidth": 326,
+      "minHeight": 22,
+      "minEffectiveWidth": 326,
+      "minEffectiveHeight": 22,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "button"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 144,
+      "sampleText": "子育て支援、婚活支援、治水対策 ほか4項目",
+      "sampleOpenTag": "<button type=\"button\" aria-expanded=\"false\" class=\"block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G043",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.mx-auto.max-w-4xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.space-y-3.sm:hidden > div.rounded-xl.border.border-outline-variant.p-4 > a.mt-2.inline-block.whitespace-nowrap.text-sm",
+      "ruleId": "compensation-mobile-source-link",
+      "component": "src/pages/CompensationPage.tsx（スマートフォン用カードの出典リンク）",
+      "uiCategory": "source link（出典リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "スマートフォン幅でのみ表示される出典リンクで、カード内に単独で置かれている。文章の一部ではないため拡大しても読みやすさを損なわない。スマートフォン専用表示であるだけに、タップ領域はむしろ優先して確保すべき箇所である。",
+      "userImpact": "妨げない（最近接283px。高さ20pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-block`を`inline-flex min-h-11 items-center`へ変更。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 5,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "98x20"
+      ],
+      "minWidth": 98,
+      "minHeight": 20,
+      "minEffectiveWidth": 98,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 283,
+      "sampleText": "延岡市公式資料",
+      "sampleOpenTag": "<a href=\"https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"延岡市公式「延岡市の人事行政の運営状況」\" aria-label=\"延岡市公式「延岡市の人事行政の運営状況」を新しいタブで開く\" class=\"mt-2 inline-block whitespace-nowrap text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/compensation__98x20__11.png"
+    },
+    {
+      "id": "G044",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "ul.space-y-2 > li.rounded-lg.p-3.border.border-gray-200 > div.flex.items-center.justify-between.gap-2 > label.flex.items-center.gap-1.5.text-xs > input.h-4.w-4",
+      "ruleId": "council-activity-compare-checkbox-mobile",
+      "component": "src/pages/CouncilActivityPage.tsx（スマートフォン用一覧の「比較」チェックボックス）",
+      "uiCategory": "checkbox（比較対象の選択）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "チェックボックス本体は16x16pxだが`<label>`で包まれているため実効タップ領域は46x16px（横は充足、縦が不足）。スマートフォン専用表示の選択操作であり、縦16pxはWCAG 2.2 AAの24pxを大きさ自体では満たしていない（現状は間隔例外でのみ充足）。",
+      "userImpact": "妨げない（`<label>`により実効46x16px、最近接81px。ただし高さ16pxでAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`<label>`へ`min-h-11`を付与（実効タップ領域を46x44pxにする）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 5,
+      "occurrencesAt320": 1,
+      "occurrencesMobile": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "16x16"
+      ],
+      "minWidth": 16,
+      "minHeight": 16,
+      "minEffectiveWidth": 46,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "label"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "input"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 81,
+      "sampleText": "",
+      "sampleOpenTag": "<input aria-label=\"吉田 茂仁を比較対象に選ぶ\" class=\"h-4 w-4\" type=\"checkbox\">",
+      "clipScreenshot": "reports/phase197-screenshots/before/council_activity__16x16__14.png"
+    },
+    {
+      "id": "G045",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-3 > li > a.tap-highlight-none.block.rounded-lg.px-1.5",
+      "ruleId": "dashboard-barlist-link",
+      "component": "src/components/dashboard/BarList.tsx（会派別内訳の棒グラフ行リンク）",
+      "uiCategory": "text link（グラフ行リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "スマートフォン幅では2段組で44px以上あり検出されない。sm以上で1行になると高さ28pxになる。行全体がリンクなので幅は十分あり、`min-h-11`を足すだけでAAAも満たせる。",
+      "userImpact": "妨げない（28pxでAA充足、最近接40px。sm以上でのみ1行になりAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`block`を`flex min-h-11 flex-col justify-center`へ変更。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 4,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "680x28",
+        "936x28"
+      ],
+      "minWidth": 680,
+      "minHeight": 28,
+      "minEffectiveWidth": 680,
+      "minEffectiveHeight": 28,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": true,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 40,
+      "sampleText": "自民党きずなの会 9人",
+      "sampleOpenTag": "<a class=\"tap-highlight-none block rounded-lg px-1.5 py-1 transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/?faction=jimin-kizuna\" data-discover=\"true\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G046",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "table.w-full.min-w-[560px].border-collapse.text-sm > thead > tr.border-b.border-outline-variant.text-left.text-xs > th.py-2.pr-3.font-medium > button.rounded.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "ruleId": "compensation-miyazaki-sort",
+      "component": "src/components/compensation/MiyazakiComparisonTable.tsx（表の並び替えボタン）",
+      "uiCategory": "sort control（表ヘッダーの並び替えボタン）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "表ヘッダーの並び替えボタンが高さ16pxしかなく、WCAG 2.2 AA（24px）を大きさ自体では満たしていない（間隔例外でのみ充足）。同じ役割のボタンは`src/pages/CouncilActivityPage.tsx`で既に`inline-flex min-h-11 items-center gap-1`を使っており、実装を揃えられる。",
+      "userImpact": "妨げない（sm以上でのみ表示。最近接123〜236px）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与し、CouncilActivityPageの並び替えボタンと実装を統一。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 4,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "48x16"
+      ],
+      "minWidth": 48,
+      "minHeight": 16,
+      "minEffectiveWidth": 48,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "table-header"
+      ],
+      "tags": [
+        "button"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 236,
+      "sampleText": "自治体名",
+      "sampleOpenTag": "<button type=\"button\" aria-label=\"自治体名で並び替え\" class=\"rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G047",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "table.min-w-[1150px].border-collapse.text-sm.tabular-nums > tbody > tr.border-b.border-outline-variant.align-top.last:border-0 > td.min-w-[220px].px-3.py-3.text-left > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "ruleId": "compensation-table-source-link",
+      "component": "src/pages/CompensationPage.tsx（比較表の出典リンク）",
+      "uiCategory": "source link（出典リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "表のセルに単独で置かれた出典リンクであり、文章中の引用ではない。",
+      "userImpact": "妨げない（最近接45pxで間隔例外を充足。高さ20pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 4,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "98x20"
+      ],
+      "minWidth": 98,
+      "minHeight": 20,
+      "minEffectiveWidth": 98,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "table-body"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 45,
+      "sampleText": "延岡市公式資料",
+      "sampleOpenTag": "<a href=\"https://www.city.nobeoka.miyazaki.jp/soshiki/16/14315.html\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"延岡市公式「延岡市の人事行政の運営状況」\" aria-label=\"延岡市公式「延岡市の人事行政の運営状況」を新しいタブで開く\" class=\"text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G048",
+      "type": "tap-target-small",
+      "typeRevised": "tap-target-small",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "table.w-full.min-w-[820px].border-collapse.text-sm > tbody > tr.border-b.border-gray-100.align-middle.dark:border-outline-variant/60 > td.whitespace-nowrap.py-2.pr-2 > input.h-4.w-4",
+      "ruleId": "council-activity-compare-checkbox-table",
+      "component": "src/pages/CouncilActivityPage.tsx（全議員比較表の選択チェックボックス）",
+      "uiCategory": "checkbox（比較対象の選択）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "`<label>`で包まれていない裸のチェックボックスで、実効タップ領域が16x16pxしかない。`aria-label`によるアクセシブルな名前は付いているが、当たり判定は広げられていない。",
+      "userImpact": "妨げない（sm以上でのみ表示。最近接40px。ただし16x16pxでAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "チェックボックスを`<label class=\"flex min-h-11 w-11 cursor-pointer items-center justify-center\">`で包み、実効タップ領域を44x44pxにする（表示上のチェックボックスの大きさは変えない）。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 4,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "16x16"
+      ],
+      "minWidth": 16,
+      "minHeight": 16,
+      "minEffectiveWidth": 16,
+      "minEffectiveHeight": 16,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "table-body"
+      ],
+      "tags": [
+        "input"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 40,
+      "sampleText": "",
+      "sampleOpenTag": "<input aria-label=\"吉田 茂仁を比較対象に選ぶ\" class=\"h-4 w-4\" type=\"checkbox\">",
+      "clipScreenshot": null
+    },
+    {
+      "id": "G049",
+      "type": "tap-target-inline-link",
+      "typeRevised": "tap-target-inline-link",
+      "reclassifiedByRevisedDetector": false,
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-2 > li.flex.flex-wrap.items-center.justify-between > div.min-w-0 > a.text-sm.font-medium.text-primary.underline",
+      "ruleId": "bill-vote-detail-related-link",
+      "component": "src/pages/BillVoteDetailPage.tsx（関連議案の一覧リンク）",
+      "uiCategory": "text link（1件1行の一覧リンク）",
+      "classification": "ACCESSIBILITY_IMPROVEMENT",
+      "classificationLabel": "改善対象",
+      "reason": "1件1行の関連議案一覧のリンクであり、文章中の引用ではない。",
+      "userImpact": "妨げない（最近接78px。高さ20pxでAAA未達）",
+      "proposal": null,
+      "detectorFix": null,
+      "fixedInPhase197": true,
+      "fix": "`inline-flex min-h-11 items-center`を付与。",
+      "anyInertLink": false,
+      "anyRoleOnlyWithoutTabindex": false,
+      "anyReadOnly": false,
+      "occurrences": 4,
+      "occurrencesAt320": 0,
+      "occurrencesMobile": 0,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes/2019-06-gian-10"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "350x20"
+      ],
+      "minWidth": 350,
+      "minHeight": 20,
+      "minEffectiveWidth": 350,
+      "minEffectiveHeight": 20,
+      "effectiveSources": [
+        "self"
+      ],
+      "regions": [
+        "content"
+      ],
+      "tags": [
+        "a"
+      ],
+      "meetsWcag21AAA_44px": false,
+      "meetsWcag22AA_24px": false,
+      "spacingExceptionOk": true,
+      "minNearestControlDistance": 78,
+      "sampleText": "延岡市特別職職員給与条例の一部を改正する条例の制定",
+      "sampleOpenTag": "<a class=\"text-sm font-medium text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" href=\"/bills/votes/2019-12-gian-88\" data-discover=\"true\">",
+      "clipScreenshot": null
+    }
+  ]
+}

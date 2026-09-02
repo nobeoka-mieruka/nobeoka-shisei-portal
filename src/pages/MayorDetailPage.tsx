@@ -304,7 +304,11 @@ export function MayorDetailPage() {
           <ul className="mt-2 space-y-2">
             {relatedPolicies.map((p) => (
               <li key={p.id}>
-                <Link to={`/policies/${p.slug}`} className={`text-sm font-medium text-primary underline ${linkClass}`}>
+                {/* Phase197：1件1行の一覧リンク（文章中の引用ではない）。44pxのタップ領域を確保する。 */}
+                <Link
+                  to={`/policies/${p.slug}`}
+                  className={`inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
+                >
                   {p.title}
                 </Link>
               </li>
@@ -330,7 +334,11 @@ export function MayorDetailPage() {
             <ul className="mt-2 space-y-2">
               {relatedDocuments.map((d) => (
                 <li key={d.id}>
-                  <Link to={documentPath(d)} className={`text-sm font-medium text-primary underline ${linkClass}`}>
+                  {/* Phase197：1件1行の一覧リンク（文章中の引用ではない）。44pxのタップ領域を確保する。 */}
+                  <Link
+                    to={documentPath(d)}
+                    className={`inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
+                  >
                     [{documentTypeLabel(d.documentType)}] {d.title}
                   </Link>
                 </li>

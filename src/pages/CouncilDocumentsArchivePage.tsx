@@ -461,7 +461,9 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
                   <li key={y}>
                     <Link
                       to="/finance/budget"
-                      className={`rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary underline ${linkClass}`}
+                      /* Phase197：チップ型のリンク（ボタン状の操作要素として提示している）。
+                         高さ21pxはWCAG 2.2 AAの24pxに届かないため44pxのタップ領域を確保する。 */
+                      className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary underline ${linkClass}`}
                     >
                       {y}年度
                     </Link>
@@ -486,7 +488,9 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
                   href={ref.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`break-words text-primary underline ${linkClass}`}
+                  /* Phase197：出典1件＝1行の一覧リンク（文章中の引用ではない）。
+                     TimelinePageと同じ書き方で、折り返しを保ったまま44pxのタップ領域を確保する。 */
+                  className={`inline-flex min-h-11 items-center break-words text-primary underline ${linkClass}`}
                 >
                   {ref.sourceTitle ?? ref.sourceUrl}
                 </a>

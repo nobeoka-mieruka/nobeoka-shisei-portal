@@ -406,7 +406,9 @@ export function DashboardPage() {
         <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
           進捗状況は、市長本人の公表資料・延岡市の公開資料に基づく分類であり、当サイト独自の達成率評価ではありません。
         </p>
-        <Link to="/mayor/policy-progress" className="mt-2 inline-block text-sm text-primary underline">
+        {/* Phase197：単独で置かれた導線リンクは文章の一部ではないため、
+            inline-flex＋min-h-11で44pxのタップ領域を確保する（表示文字は変えない）。 */}
+        <Link to="/mayor/policy-progress" className="mt-2 inline-flex min-h-11 items-center text-sm text-primary underline">
           市長公約の進捗状況を詳しく見る
         </Link>
       </SectionCard>
@@ -429,12 +431,16 @@ export function DashboardPage() {
           />
         </div>
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+          {/* Phase197：折り返し行に並ぶ独立した導線リンク。44pxのタップ領域を確保する。 */}
           {latestCouncilSession && (
-            <Link to={`/council-documents/${latestCouncilSession.id}`} className="text-primary underline">
+            <Link
+              to={`/council-documents/${latestCouncilSession.id}`}
+              className="inline-flex min-h-11 items-center text-primary underline"
+            >
               この会期の資料を見る
             </Link>
           )}
-          <Link to="/committees" className="text-primary underline">
+          <Link to="/committees" className="inline-flex min-h-11 items-center text-primary underline">
             委員会の一覧を見る
           </Link>
         </div>

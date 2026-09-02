@@ -69,5 +69,9 @@ scripts/auto-update/*/state/
 # 全組合せ明細JSON（数MB）は再生成可能なためGit管理外とする。
 # 種類＋要素セレクタ単位へ集約した audit-<label>-summary.json のみコミットする。
 reports/phase191-responsive/screenshots/
-reports/phase191-responsive/audit-before.json
-reports/phase191-responsive/audit-after.json
+reports/phase191-responsive/audit-*.json
+!reports/phase191-responsive/audit-*-summary.json
+
+# Phase197 タップ領域分類監査の要素切り出し画像（バイナリ・再生成可能）。
+# 分類結果（reports/phase197-*.json、reports/phase197-*.md）はコミットする。
+reports/phase197-screenshots/

@@ -66,7 +66,8 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
           type="button"
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
-          className={`block w-full text-left ${linkClass}`}
+          /* Phase197：開閉ボタンの高さが22pxでWCAG 2.2 AA（24px）に2px足りなかったため縦paddingを追加する。 */
+          className={`block w-full py-1 text-left ${linkClass}`}
         >
           <h2 className="text-base font-semibold leading-snug text-on-surface">{item.title}</h2>
         </button>

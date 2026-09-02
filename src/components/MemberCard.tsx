@@ -35,10 +35,12 @@ export function MemberCard({ member }: { member: CouncilMember }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${member.name}の公式プロフィールを新しいタブで開く`}
-          className="relative z-10 mt-0.5 inline-block max-w-full break-words rounded-full px-2.5 py-2 text-xs font-medium text-primary transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          /* Phase197：カード全面リンク（absolute inset-0）の上に重ねた外部リンク。押し間違えると
+             議員詳細ではなく外部サイトへ移動するため、44pxのタップ領域まで確保する。 */
+          className="relative z-10 mt-0.5 inline-flex min-h-11 max-w-full items-center justify-center break-words rounded-full px-2.5 py-2 text-xs font-medium text-primary transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <GlobeIcon className="mr-1 inline h-3.5 w-3.5 align-text-bottom" />
-          公式プロフィール
+          <GlobeIcon className="mr-1 h-3.5 w-3.5 shrink-0" aria-hidden />
+          <span className="break-words">公式プロフィール</span>
         </a>
       )}
     </div>

@@ -9908,3 +9908,151 @@ failures=0 warnings=0、`validate:content` 2,271ページ errors=0 warnings=0）
 - 変更概要：上記のとおり。`src/data`配下の手入力データは一切変更していない。
   HUMAN_ACTION_REQUIRED（政務活動費・費用弁償・市長任期13区間・会期票・議会事務局照会・
   図書館照会）のデータステータスにも変更はない。表示情報の削除は行っていない。
+
+---
+
+### TASK-182 タップ領域・320px要対応候補の完全分類（Phase197）
+
+状態：DONE（2026-09-02）
+優先度：A（ユーザー指示）
+対象：`scripts/audit-tap-targets.mjs`（新規）、`scripts/lib/tap-target-classification.mjs`（新規）、
+`scripts/lib/tap-target-report.mjs`（新規）、`reports/phase197-*.json`／`*.md`（新規）、
+`package.json`（`audit:tap-targets`追加）、`.gitignore`、`src/components/` 5ファイル、`src/pages/` 8ファイル
+
+**目的**：Phase191が残した「タップ領域44px未満」「320x568の要対応」を、件数をゼロにするためではなく、
+1件ずつが実際に市民の利用を妨げるのかを判定して5分類（REAL_BUG／ACCESSIBILITY_IMPROVEMENT／
+INTENTIONAL／FALSE_POSITIVE／NON_INTERACTIVE）へ割り当てる。
+
+**判定の根拠**：44px未満かどうかではなく、次の公開仕様と実測値で判定した。
+
+- WCAG 2.2 達成基準2.5.8 Target Size (Minimum)（レベルAA、24x24 CSSピクセル。「間隔」＝他の操作要素の
+  中心と24px以上離れている、「インライン」＝文章中のリンク、等の例外がある）
+- WCAG 2.1 達成基準2.5.5 Target Size（レベルAAA、44x44 CSSピクセル）。Phase191の監査しきい値44pxは
+  このAAA基準であり、下回ること自体はAA不適合を意味しない。
+
+**新設した監査（`scripts/audit-tap-targets.mjs`、`npm run audit:tap-targets`）**：Phase191と同一の
+検出条件（9ビューポート×32ページ＝288組合せ、同一のセレクタ生成・sr-only除外）を再現したうえで、
+各検出へ判定材料を実測して付加する。
+
+1. 実効タップ領域（`<label>`で包んだ入力欄、`position:absolute; inset:0`の疑似要素で広げた領域など、
+   見た目の矩形より広い操作領域を実測する）
+2. 最近接の操作要素までの中心間距離（WCAG 2.2 2.5.8の「間隔」例外の判定材料）
+3. WCAG 2.2 AA（24px）／WCAG 2.1 AAA（44px）の充足
+4. 所属領域（サイトヘッダー／パンくず／表のヘッダー行／本文など）と開始タグ（実装ファイルの特定用）
+5. 320x568での要素切り出し画像（`reports/phase197-screenshots/`、Git管理外・再生成可能）
+
+分類テーブルは`scripts/lib/tap-target-classification.mjs`に実装ファイル単位で記録し、Markdown生成は
+`scripts/lib/tap-target-report.mjs`へ分離した（`--render-only`で、実測をやり直さずに分類・文言だけを
+再生成できる）。
+
+**検出器（判定条件）の見直し**：Phase191は「`display:inline`かつ`p`/`li`/`dd`/`td`/`blockquote`/
+`figcaption`を祖先に持つ」場合だけを本文中のインラインリンクとみなしていたため、`div`が直接テキストを
+含む注記文の中のリンク（例：`/bills`の「…既存の議案賛否データ（/bills/votes）で…」）を要対応側へ
+数えていた。Phase197では「同じ親要素に非空のテキストノードがある」場合も本文中のリンクとして扱う
+判定を追加し、9件を再分類した（レポートには従来判定・改良判定の両方を記録している）。
+
+#### 320x568 要対応候補の分類（89件、Phase191記録は90件）
+
+| 分類 | 件数 | 内訳 |
+| --- | --- | --- |
+| REAL_BUG（実害あり） | 0 | — |
+| ACCESSIBILITY_IMPROVEMENT（改善対象） | 9 | ダッシュボードの導線リンク3・議員活動TOP3リンク2・カード見出しリンク1・「詳細を見る」1・報酬の出典リンク1・比較チェックボックス1 |
+| INTENTIONAL（設計上の意図） | 79 | パンくずリンク47・ヘッダー検索リンク32 |
+| FALSE_POSITIVE（検出器の誤り） | 1 | 注記文中のインラインリンク（`/bills`） |
+| NON_INTERACTIVE（操作対象でない） | 0 | href無し・`#`・`javascript:`のリンク0件、role属性だけで一致しtabindexを持たない要素0件、readonly／aria-disabled 0件 |
+
+89件すべてについて、ルート・要素・実装ファイル・ビューポート・実サイズ・実効サイズ・最近接の操作要素まで
+の距離・原因・市民の利用を妨げるかを`reports/phase197-320px-classification.json`／`.md`に記録し、
+320x568の実描画から要素を切り出した画像でも確認した。修正後は89件→82件（実害0件）。
+
+#### タップ領域候補の分類（component単位、対象1,352件／参考1,291件）
+
+| 分類 | グループ数 | 対象（tap-target-small） | 参考（tap-target-inline-link） |
+| --- | --- | --- | --- |
+| REAL_BUG | 1 | 0件 | 9件 |
+| ACCESSIBILITY_IMPROVEMENT | 22 | 117件 | 153件 |
+| INTENTIONAL | 25 | 1,226件 | 1,129件 |
+| FALSE_POSITIVE | 1 | 9件 | 0件 |
+| NON_INTERACTIVE | 0 | 0件 | 0件 |
+
+UI種別の内訳：header nav（PC用ナビ・検索リンク）／breadcrumb／inline citation（本文中の引用）／
+source link（出典リンク）／text link（一覧・導線リンク）／card action（カード見出し）／
+accordion（開閉ボタン）／chip link（チップ型リンク）／sort control（並び替えボタン）／
+checkbox（比較対象の選択）／グラフ行リンク。ページ送り（`Pagination`）はPhase192で44px確保済みのため
+検出0件、絞り込み（`FilterSelect`・`SortSelect`・`SearchBar`）も同様に検出0件だった。
+
+唯一のREAL_BUGは`/council-activity`の「B. 一般質問実施率100%」の議員名一覧で、`flex-wrap`＋`gap-y-1`で
+詰めて並べているため高さ17pxのリンクの中心同士が縦に17pxしか離れておらず、大きさ（24px）・間隔（24px）
+いずれの基準も満たさず、インライン例外にも当たらない（各`li`はリンクだけを含み文章ではない）。
+スマートフォンで隣の議員のページを開く誤タップが現実に起こりうるため実害ありと判定し修正した。
+
+#### Phase192が意図的に据え置いた3グループ（INTENTIONAL、理由と提案）
+
+- **ヘッダーのPC用ナビ（515件）・ヘッダー検索リンク（288件）**：ヘッダー高さ57pxを前提に、6ページ
+  （`HomePage`・`BillVotesPage`・`GeneralQuestionsPage`×2・`ExecutiveAnswersPage`・`ThemeDetailPage`）の
+  sticky絞り込みバーが`top-[57px]`で配置されている。拡大するとヘッダー高さが変わり、この6ページの
+  バーがヘッダーに潜り込む／隙間が空く。高さ36pxでWCAG 2.2 AAは充足し、最近接の操作要素とも56px／92px
+  離れている。**提案**：ヘッダー高さをCSSカスタムプロパティ（例`--site-header-h`）で一元管理し、
+  6ページのstickyバーを`top-[var(--site-header-h)]`へ置き換えたうえでヘッダーを`min-h-11`にすれば
+  安全に解決できる（Phase197では提案のみ）。
+- **パンくずリンク（423件）**：高さ16pxだが隣接する操作要素とは46〜58px離れており「間隔」例外を満たす。
+  44px化すると全ページの先頭に約28px加算される。**提案**：AAAの44pxではなくAAの下限24pxに合わせ、
+  リンクへ`inline-flex items-center min-h-6`を付ければ全ページの加算は約8pxに収まり、間隔例外に頼らず
+  2.5.8を直接充足できる（Phase197では提案のみ）。
+
+#### 修正内容（REAL_BUG・ACCESSIBILITY_IMPROVEMENTのみ、23グループ／13ファイル）
+
+`inline-flex min-h-11 items-center`（Phase192で確立済みの書き方）へ統一する形で修正した。表示情報の
+削除・文言の変更は行っていない。
+
+- `src/pages/CouncilActivityPage.tsx`：実施率100%の議員名一覧（REAL_BUG）、発言量TOP3・提出者件数TOP3の
+  議員リンク、表と一覧カードの議員名リンク、比較チェックボックス（`<label>`で44px確保）、
+  並び替えボタンへ`min-w-11`
+- `src/pages/DashboardPage.tsx`：会期資料・委員会一覧・市長公約進捗の導線リンク3件
+- `src/components/compensation/MiyazakiComparisonTable.tsx`：表ヘッダーの並び替えボタン（高さ16px→44px）
+- `src/components/questions/VerifiedSpeechCard.tsx`・`GeneralQuestionCard.tsx`：カード見出しの
+  リンク／開閉ボタン（高さ22px→30px、AAの24pxを大きさ自体で充足）
+- `src/pages/BillVotesPage.tsx`：一覧カードの「詳細を見る」
+- `src/components/MemberCard.tsx`：公式プロフィールへの外部リンク（カード全面リンクに重なるため44px確保）
+- `src/pages/CompensationPage.tsx`：スマホ用カードと比較表の出典リンク
+- `src/components/dashboard/BarList.tsx`：会派別内訳の棒グラフ行リンク
+- `src/pages/MayorDetailPage.tsx`：関連政策・関連議案の一覧リンク
+- `src/pages/CouncilDocumentsArchivePage.tsx`：出典リンク一覧・関連年度チップ
+- `src/pages/BillVoteDetailPage.tsx`：関連議案の一覧リンク
+
+#### 検証結果（Phase191と同一の監査スクリプトによる実測、before／after）
+
+| 指標 | before | after |
+| --- | --- | --- |
+| ビューポート×ページ組合せ | 288（全て実描画） | 288（全て実描画） |
+| ページ全体の横スクロール | 0件 | 0件 |
+| ビューポート外突出／文字切れ／tableの横溢れ／固定表示の重なり／オーバーレイのはみ出し | 各0件 | 各0件 |
+| タップ領域44px未満（tap-target-small） | 1,356件 | 1,268件 |
+| 本文中のインラインリンク（tap-target-inline-link） | 1,291件 | 1,129件 |
+| 検出総数 | 2,647件 | 2,397件 |
+| 320x568の要対応件数 | 90件 | 82件 |
+| うち実害（REAL_BUG） | 0件 | 0件 |
+
+分類監査（`audit-tap-targets.mjs`）側の実測では、対象1,352件→1,267件、320x568は89件→82件。Phase191の
+記録（1,356件・90件）との数件の差は、Phase191実施後のコミット（検索件数の整合修正・一般質問一覧の
+リンク先修正・本番スモークテスト追加）による実描画の差であり、判定ロジックの違いではない。
+
+修正後に残る検出の内訳（対象1,267件）：INTENTIONAL 1,226件（ヘッダー515＋288、パンくず423）、
+ACCESSIBILITY_IMPROVEMENT 23件（カード見出し2グループ＝AAは充足しAAAのみ未達、宮崎県9市比較表の
+並び替えボタン＝高さ44px確保済みで短い列名のとき幅24〜36px）、FALSE_POSITIVE 18件（注記文中の
+インラインリンク9、`<label>`で44pxを確保済みのチェックボックス9＝要素の矩形だけを見る条件では
+引き続き検出される）。実害（REAL_BUG）は0件。
+
+`validate:data`（errors=0 warnings=21、既存基準と一致）／`typecheck`（clean）／`lint`（既存4 warningsのみ、
+新規0）／`npm test`（全て通過）／`build`（`validate:seo` failures=0 warnings=0、`validate:content`
+errors=0 warnings=0、`check-bundle-size` エラー0件・警告0件）すべて成功。
+
+完了記録：
+- 完了日：2026-09-02
+- 変更概要：上記のとおり。`src/data`配下の手入力データの値・statusは一切変更していない。
+  HUMAN_ACTION_REQUIRED（市長任期13区間・政務活動費・費用弁償・会期資料・議会事務局照会・図書館資料確認）
+  についてもオンライン再調査は行わず、既存ステータスを維持している。表示情報の削除は行っていない。
+- 残課題：ヘッダー（`top-[57px]`前提の6ページ同時変更）とパンくず（全ページ先頭の余白増）の44px化は
+  提案のみで未実施。カード見出し2グループはAA充足・AAA未達のまま。`BillVoteDetailPage`の賛否一覧の
+  議員名リンクは同じ書き方だが監査対象32ページのデータでは検出されなかったため、実測できた範囲のみ
+  修正し未検出分は変更していない。
