@@ -9,10 +9,15 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `cf29d4eb8a0c2c277a0e45c2d3f167031bdec508`（`cf29d4e`） |
-| commit 日時 | 2026-09-02T13:15:46+09:00 |
-| production deploy ID | `7b162a77-415b-48ec-ab9e-3515d5d820e5` |
+| release commit | `a13be69`（Phase200） |
+| production deploy ID | `131e0f8a-7d97-478d-9c57-a841832a76a1` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
+
+公開内容そのものは `cf29d4e`（Phase197〜199 の統合、deploy `7b162a77`）と**同一**です
+（`git diff cf29d4e a13be69 -- src/ public/` が空）。`a13be69` は本ファイルと監査スクリプトの追加のみ。
+
+このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
+スナップショットは「自分自身のコミット」ではなく「記述対象のリリース」を指します。
 
 ## 件数
 
