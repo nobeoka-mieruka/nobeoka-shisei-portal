@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-02T04:23:50.346Z",
+  "release": {
+    "commitSha": "cf29d4eb8a0c2c277a0e45c2d3f167031bdec508",
+    "commitShaShort": "cf29d4e",
+    "commitDate": "2026-09-02T13:15:46+09:00",
+    "productionDeployId": "7b162a77-415b-48ec-ab9e-3515d5d820e5",
+    "productionUrl": "https://nobeoka-shisei-portal.pages.dev/"
+  },
+  "counts": {
+    "bills": 1177,
+    "generalQuestions": 27,
+    "councilSpeechRecords": 419,
+    "questionItems": 1568,
+    "currentMembers": 26,
+    "memberProfilesIncludingFormer": 84,
+    "mayorsHistorical": 14,
+    "mayorTermRecords": 30,
+    "mayorPromises": 14,
+    "civicTimelineEvents": 217,
+    "updateHistoryEntries": 137,
+    "councilSessions": 61,
+    "searchIndexEntries": 2276,
+    "searchIndexUniqueUrls": 1916
+  },
+  "sources": {
+    "uniqueSourceUrls": 5488
+  },
+  "blockedTasks": {
+    "total": 15,
+    "byStatus": {
+      "WAITING_EXTERNAL": 2,
+      "COMPLETED": 3,
+      "MANUAL_REVIEW": 8,
+      "RESEARCH_EXHAUSTED": 2
+    },
+    "humanActionRequired": 10,
+    "humanActionTopics": [
+      "市長任期13区間",
+      "政務活動費",
+      "費用弁償",
+      "会期資料",
+      "議会事務局照会",
+      "図書館資料確認"
+    ]
+  },
+  "qualityBaseline": {
+    "pageCountContradictions": 0,
+    "brokenInternalLinks": 0,
+    "productionVisualErrors": 0,
+    "horizontalOverflowPx": 0,
+    "consoleErrors": 0,
+    "testFailures": 0,
+    "validateDataErrors": 0,
+    "validateSeoFailures": 0,
+    "validateContentErrors": 0,
+    "knownDataWarnings": 21,
+    "brokenExternalLinks": 1
+  },
+  "consistencyAsserts": {
+    "searchIndexMetaMatchesIndex": true
+  }
+}
