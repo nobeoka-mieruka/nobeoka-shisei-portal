@@ -116,7 +116,7 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${doc.label}${doc.page ? `（${doc.page}）` : ""}を新しいタブで開く`}
-                  className={`inline-flex flex-wrap items-center gap-1.5 rounded text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex flex-wrap items-center gap-1.5 rounded text-sm text-primary underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-3.5 w-3.5 shrink-0" />
                   <span>

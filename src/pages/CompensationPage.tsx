@@ -475,7 +475,7 @@ export function CompensationPage() {
                         rel="noopener noreferrer"
                         title={c.sourceTitle}
                         aria-label={`${c.sourceTitle}を新しいタブで開く`}
-                        className="text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                        className="text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                       >
                         {c.municipality}公式資料
                       </a>
@@ -525,7 +525,7 @@ export function CompensationPage() {
                   rel="noopener noreferrer"
                   title={c.sourceTitle}
                   aria-label={`${c.sourceTitle}を新しいタブで開く`}
-                  className="mt-2 inline-block whitespace-nowrap text-sm text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="mt-2 inline-block whitespace-nowrap text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {c.municipality}公式資料
                 </a>

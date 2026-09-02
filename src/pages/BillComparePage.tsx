@@ -68,7 +68,7 @@ function BillSummaryColumn({ bill }: { bill: BillVoteItem }) {
           <dd className="inline font-medium text-on-surface">{bill.result}</dd>
         </div>
       </dl>
-      <Link to={`/bills/votes/${bill.id}`} className={`inline-block text-sm text-primary hover:underline ${linkClass}`}>
+      <Link to={`/bills/votes/${bill.id}`} className={`inline-block text-sm text-primary underline ${linkClass}`}>
         議案詳細を見る
       </Link>
     </div>

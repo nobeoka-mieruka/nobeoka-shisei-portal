@@ -406,7 +406,7 @@ export function DashboardPage() {
         <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
           進捗状況は、市長本人の公表資料・延岡市の公開資料に基づく分類であり、当サイト独自の達成率評価ではありません。
         </p>
-        <Link to="/mayor/policy-progress" className="mt-2 inline-block text-sm text-primary hover:underline">
+        <Link to="/mayor/policy-progress" className="mt-2 inline-block text-sm text-primary underline">
           市長公約の進捗状況を詳しく見る
         </Link>
       </SectionCard>
@@ -430,11 +430,11 @@ export function DashboardPage() {
         </div>
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
           {latestCouncilSession && (
-            <Link to={`/council-documents/${latestCouncilSession.id}`} className="text-primary hover:underline">
+            <Link to={`/council-documents/${latestCouncilSession.id}`} className="text-primary underline">
               この会期の資料を見る
             </Link>
           )}
-          <Link to="/committees" className="text-primary hover:underline">
+          <Link to="/committees" className="text-primary underline">
             委員会の一覧を見る
           </Link>
         </div>
@@ -535,7 +535,7 @@ export function DashboardPage() {
       <SectionCard title="延岡市の基礎データ（人口・財政）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           {finance.fiscalYearLabel}・基準日：{formatJapaneseDate(finance.referenceDate)}時点の値です。詳細な内訳・出典は
-          <Link to="/finance" className="mx-1 text-primary hover:underline">
+          <Link to="/finance" className="mx-1 text-primary underline">
             延岡市の財政
           </Link>
           で確認できます。

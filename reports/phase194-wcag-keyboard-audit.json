@@ -1,0 +1,5798 @@
+{
+  "generatedAt": "2026-09-02T01:32:32.965Z",
+  "note": "延岡市政見える化ポータル Phase194 アクセシビリティ（WCAG 2.1 AA）実動作監査の結果サマリ。scripts/audit-accessibility.mjs で生成した完全ログから、ページ単位の要点のみを抜き出したもの。自動監査の violation が0件でもWCAG完全準拠を意味しない（詳細は reports/phase194-wcag-keyboard-audit.md）。",
+  "baseUrl": "http://localhost:4173",
+  "axeTags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "best-practice"
+  ],
+  "summary": {
+    "pagesAudited": 78,
+    "violationsByImpact": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "violationsByRule": {},
+    "keyboardTrapsSuspected": [],
+    "invisibleFocusPages": [],
+    "skipLinkFailures": [],
+    "horizontalScrollPages": [],
+    "reducedMotionFailures": [],
+    "headingSkipPages": [],
+    "multipleH1Pages": [],
+    "unlabeledNavPages": [],
+    "danglingAriaControlsPages": [],
+    "pagesWithErrors": [],
+    "darkContrastViolations": [],
+    "incompleteByRule": {
+      "color-contrast": 68
+    }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "label": "トップ（議員一覧）",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 44,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "よく使われるページへのショートカット",
+        "サイトの信頼性に関する情報",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 79,
+        "uniqueTabStops": 79,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 2
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "label.flex shrink-0 items-center gap-2 rounded",
+            "select.bg-transparent text-on-surface focus:out",
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 846,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/search",
+      "label": "サイト内検索",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 43,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 50,
+        "uniqueTabStops": 50,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 198,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/search?q=%E8%AD%B0%E6%A1%88",
+      "label": "検索結果",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 45,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 80,
+        "uniqueTabStops": 80,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "button.shrink-0 rounded-full px-3.5 py-2 text-s",
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "button.shrink-0 rounded-full px-3.5 py-2 text-s"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 476,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/koho-search",
+      "label": "広報のべおか検索",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 39,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 48,
+        "uniqueTabStops": 48,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 209,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/dashboard",
+      "label": "ダッシュボード",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 62,
+        "uniqueTabStops": 62,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1082,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/people",
+      "label": "人物から探す",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 90,
+        "uniqueTabStops": 90,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1353,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/people/former-member-fm01",
+      "label": "人物詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 46,
+        "uniqueTabStops": 46,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 210,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/members/m01",
+      "label": "議員詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(8)"
+      ],
+      "axePasses": 46,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 90,
+        "uniqueTabStops": 89,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [
+          {
+            "label": "一般質問58データあり",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "議会発言79データあり",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "出席状況―対象記録なし・データ整備中",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "議案等の意思表示100データあり",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          }
+        ],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1153,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/members/former",
+      "label": "元議員一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 90,
+        "uniqueTabStops": 90,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 815,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/members/former/fm01",
+      "label": "元議員詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(6)"
+      ],
+      "axePasses": 42,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 21,
+        "uniqueTabStops": 18,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [
+          {
+            "label": "一般質問100データあり",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "議会発言100データあり",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "出席状況―対象記録なし・データ整備中",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "議案等の意思表示100データあり",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          }
+        ],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 748,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/members/history",
+      "label": "議員の変遷",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 47,
+        "uniqueTabStops": 40,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 621,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/members/fm01/questions/fm01-2019-12-ippan-shitsumon",
+      "label": "議員質問詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 44,
+        "uniqueTabStops": 44,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 210,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayor",
+      "label": "市長ページ",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 59,
+        "uniqueTabStops": 57,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 350,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayor/policy-progress",
+      "label": "市長公約進捗",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 41,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 28,
+        "uniqueTabStops": 21,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 15
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "label.flex shrink-0 items-center gap-2 rounded",
+            "select.bg-transparent text-on-surface focus:out",
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "label.flex shrink-0 items-center gap-2 rounded",
+            "select.bg-transparent text-on-surface focus:out"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1187,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayor/policy-progress/1-1",
+      "label": "公約詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 54,
+        "uniqueTabStops": 52,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 392,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayor/entertainment-expenses",
+      "label": "市長交際費",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(5)"
+      ],
+      "axePasses": 40,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 16,
+        "uniqueTabStops": 11,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 3
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "table.w-full min-w-[820px] border-collapse tex",
+            "thead.",
+            "tr.border-b border-outline-variant text-lef",
+            "th.px-3 py-2 font-medium",
+            "th.px-3 py-2 font-medium"
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 831,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayor/press-conferences",
+      "label": "市長記者会見一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 42,
+        "uniqueTabStops": 42,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 197,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayors",
+      "label": "歴代市長",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 39,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 57,
+        "uniqueTabStops": 57,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 368,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/mayors/miura-hisatomo",
+      "label": "歴代市長詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 61,
+        "uniqueTabStops": 61,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 308,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/city-officials",
+      "label": "副市長・教育長等",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(4)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 83,
+        "uniqueTabStops": 39,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1319,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/city-organization",
+      "label": "市の組織",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 9,
+        "uniqueTabStops": 6,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 61
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1692,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/political-funds",
+      "label": "政治資金",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 60,
+        "uniqueTabStops": 60,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 376,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/political-funds/pf-org-001",
+      "label": "政治団体詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(4)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 41,
+        "uniqueTabStops": 41,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 205,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/committees",
+      "label": "委員会一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 47,
+        "uniqueTabStops": 47,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 240,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/committees/leadership-history",
+      "label": "歴代議長・副議長",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 8,
+        "uniqueTabStops": 5,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 547,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/committees/committee-gikai-unei",
+      "label": "委員会詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 36,
+        "uniqueTabStops": 25,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 807,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/elections",
+      "label": "選挙一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 44,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 43,
+        "uniqueTabStops": 39,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 537,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/elections/election-council-2023",
+      "label": "選挙詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(104)"
+      ],
+      "axePasses": 44,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "th.px-3 py-2.5 text-xs font-semibold text-o"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "th.px-3 py-2.5 text-xs font-semibold text-o"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "tbody."
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 554,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/finance",
+      "label": "財政",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(37)"
+      ],
+      "axePasses": 47,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 76,
+        "uniqueTabStops": 76,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 6
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "tbody."
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "tbody."
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1093,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/finance/budget",
+      "label": "予算",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(17)"
+      ],
+      "axePasses": 46,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 19,
+        "uniqueTabStops": 16,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 4790,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/finance/debt",
+      "label": "市債",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 48,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 14,
+        "uniqueTabStops": 11,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 2707,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/finance/funds",
+      "label": "基金",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(6)"
+      ],
+      "axePasses": 46,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 14,
+        "uniqueTabStops": 11,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 2
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti",
+            "span.flex-1 text-center text-[9px] leading-ti"
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1731,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare",
+      "label": "比較トップ",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 48,
+        "uniqueTabStops": 48,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 241,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/mayors",
+      "label": "市長比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 229,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/members",
+      "label": "議員比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 518,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/finance",
+      "label": "財政比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 11,
+        "uniqueTabStops": 8,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 4
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 432,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/population",
+      "label": "人口比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 256,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/budget",
+      "label": "予算比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 394,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/debt",
+      "label": "市債比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 298,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/funds",
+      "label": "基金比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 265,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/municipalities",
+      "label": "自治体比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(87)"
+      ],
+      "axePasses": 45,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 89,
+        "uniqueTabStops": 70,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "th.px-3 py-2.5 text-xs font-semibold text-o"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "th.px-3 py-2.5 text-xs font-semibold text-o"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "tbody."
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 838,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/similar-municipalities",
+      "label": "類似団体比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(243)"
+      ],
+      "axePasses": 47,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 45,
+        "uniqueTabStops": 45,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "table.w-full min-w-[640px] text-left text-sm",
+            "thead.",
+            "tr.border-b border-outline-variant text-xs ",
+            "th.whitespace-nowrap py-2 pr-2 text-right",
+            "th.whitespace-nowrap py-2 pr-2 text-right"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "table.w-full min-w-[640px] text-left text-sm",
+            "thead.",
+            "tr.border-b border-outline-variant text-xs ",
+            "th.whitespace-nowrap py-2 pr-2 text-right",
+            "th.whitespace-nowrap py-2 pr-2 text-right"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "table.w-full min-w-[640px] text-left text-sm",
+            "thead.",
+            "tr.border-b border-outline-variant text-xs ",
+            "th.whitespace-nowrap py-2 pr-2 text-right",
+            "tbody."
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 876,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compare/policies",
+      "label": "政策比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 7,
+        "uniqueTabStops": 4,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 248,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/timeline",
+      "label": "市政年表",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(8)"
+      ],
+      "axePasses": 39,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 90,
+        "uniqueTabStops": 67,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "div.flex-1",
+            "p.text-xs text-on-surface-variant",
+            "p.mt-1 text-sm text-on-surface-variant",
+            "div.flex-1",
+            "p.text-xs text-on-surface-variant"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "div.flex-1",
+            "p.text-xs text-on-surface-variant",
+            "p.mt-1 text-sm text-on-surface-variant",
+            "div.flex-1",
+            "p.text-xs text-on-surface-variant"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 11428,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/timeline/1963",
+      "label": "年表（年別）",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(22)"
+      ],
+      "axePasses": 44,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 45,
+        "uniqueTabStops": 45,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "th.px-3 py-2.5 text-xs font-semibold text-o"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "table.w-full min-w-[360px] border-collapse tex",
+            "thead.",
+            "tr.bg-surface-container-high",
+            "th.px-3 py-2.5 text-xs font-semibold text-o",
+            "tbody."
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 334,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/history",
+      "label": "沿革",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 44,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "年代へ移動",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 46,
+        "uniqueTabStops": 32,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "button.shrink-0 rounded-full px-3.5 py-2 text-x",
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 4775,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/policies",
+      "label": "政策・公約",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 57,
+        "uniqueTabStops": 57,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 380,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/policies/mayor-miura-children",
+      "label": "政策詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 43,
+        "uniqueTabStops": 43,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 211,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/compensation",
+      "label": "報酬比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 44,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 69,
+        "uniqueTabStops": 67,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 4
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "table.min-w-[1150px] border-collapse text-sm t",
+            "thead.",
+            "tr.border-b border-outline-variant text-lef",
+            "th.min-w-[110px] whitespace-nowrap px-3 py-",
+            "th.min-w-[150px] whitespace-nowrap px-3 py-"
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 994,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/city-guide",
+      "label": "市役所案内診断",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 54,
+        "uniqueTabStops": 54,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 288,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/about",
+      "label": "このサイトについて",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(1)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 47,
+        "uniqueTabStops": 47,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 273,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/terms",
+      "label": "利用規約",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(1)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 38,
+        "uniqueTabStops": 38,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 190,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/editorial-policy",
+      "label": "編集方針",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 39,
+        "uniqueTabStops": 39,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 263,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "label": "お問い合わせ",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 40,
+        "uniqueTabStops": 40,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 189,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/bills",
+      "label": "議案アーカイブ",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 46,
+        "uniqueTabStops": 46,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 248,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/bills/votes",
+      "label": "議案賛否一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 40,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "ページ送り",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 19,
+        "uniqueTabStops": 16,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 2
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "label.flex shrink-0 items-center gap-2 rounded",
+            "select.bg-transparent text-on-surface focus:out",
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [
+            "label.flex shrink-0 items-center gap-2 rounded",
+            "select.bg-transparent text-on-surface focus:out"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 627,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/bills/compare",
+      "label": "議案比較",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 42,
+        "uniqueTabStops": 41,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 2530,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/bills/bill-auditor-appointment-2026-06",
+      "label": "議案詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 44,
+        "uniqueTabStops": 44,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 219,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/ordinances",
+      "label": "条例一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 46,
+        "uniqueTabStops": 46,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 250,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/ordinances/ordinance-special-use-district-2023",
+      "label": "条例詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 44,
+        "uniqueTabStops": 44,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 235,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/petitions",
+      "label": "請願一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 57,
+        "uniqueTabStops": 54,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 340,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/petitions/petition-covid-vaccine-concern-2024",
+      "label": "請願詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 44,
+        "uniqueTabStops": 44,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 219,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/requests",
+      "label": "陳情一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 62,
+        "uniqueTabStops": 58,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 381,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/requests/request-council-reform-2023-12",
+      "label": "陳情詳細",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 44,
+        "uniqueTabStops": 44,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 219,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/council-documents",
+      "label": "議会資料一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(25)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 68,
+        "uniqueTabStops": 68,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 27
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 920,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/council-documents/2004-06",
+      "label": "定例会詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(7)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 45,
+        "uniqueTabStops": 45,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [
+          {
+            "label": "この画面でプレビューする",
+            "before": "false",
+            "afterEnter": "false",
+            "afterSpace": "false",
+            "enterToggles": false,
+            "spaceToggles": false
+          }
+        ],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 293,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/questions",
+      "label": "一般質問一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 40,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "ページ送り",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 90,
+        "uniqueTabStops": 47,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [
+          {
+            "label": "買い物困難者支援、夏休みランチクーポン事業、高齢者支援 ほか",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "詳しく見る",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "令和8年熊本地震、避難所運営、生成AI ほか1項目",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          },
+          {
+            "label": "詳しく見る",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          }
+        ],
+        "detailsElements": 1
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 2039,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/questions/gq2026-06-m01",
+      "label": "一般質問詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(4)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 48,
+        "uniqueTabStops": 48,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 256,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/themes",
+      "label": "テーマ一覧",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 34,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 55,
+        "uniqueTabStops": 55,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 257,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/themes/digital",
+      "label": "テーマ詳細",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 38,
+        "uniqueTabStops": 34,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 746,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/executive-answers",
+      "label": "執行部答弁",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 38,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 11,
+        "uniqueTabStops": 8,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 56760,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/updates",
+      "label": "更新履歴",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 35,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "ページ送り",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 50,
+        "uniqueTabStops": 48,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 398,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/data-status",
+      "label": "データ整備状況",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(32)"
+      ],
+      "axePasses": 37,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 18,
+        "uniqueTabStops": 11,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 18
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 838,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/methodology/activity-radar",
+      "label": "活動レーダー算定方法",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(3)"
+      ],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 39,
+        "uniqueTabStops": 39,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 398,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/council-activity",
+      "label": "議会活動",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(2)"
+      ],
+      "axePasses": 47,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 90,
+        "uniqueTabStops": 64,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [
+          {
+            "label": "一覧を開く（26名）",
+            "before": "false",
+            "afterEnter": "true",
+            "afterSpace": "false",
+            "enterToggles": true,
+            "spaceToggles": true
+          }
+        ],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [
+            "table.w-full min-w-[820px] border-collapse tex",
+            "thead.",
+            "tr.border-b border-gray-200 text-left text-",
+            "th.whitespace-nowrap py-2 pr-3",
+            "button.inline-flex items-center gap-1 font-semi"
+          ],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 2289,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/council-activity/history",
+      "label": "議会活動の推移",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 36,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 8,
+        "uniqueTabStops": 5,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 1914,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/council-activity/m01",
+      "label": "議員別議会活動",
+      "axeViolations": [],
+      "axeIncomplete": [
+        "color-contrast(7)"
+      ],
+      "axePasses": 43,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "パンくずリスト",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 11,
+        "uniqueTabStops": 7,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": false,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 994,
+        "notReduced": []
+      },
+      "errors": []
+    },
+    {
+      "path": "/this-route-does-not-exist",
+      "label": "404ページ",
+      "axeViolations": [],
+      "axeIncomplete": [],
+      "axePasses": 32,
+      "darkContrastViolationNodes": 0,
+      "h1Count": 1,
+      "headingSkips": [],
+      "navLabels": [
+        "主要メニュー",
+        "人物",
+        "議会",
+        "市政",
+        "市民向け",
+        "画面下部メニュー"
+      ],
+      "unlabeledFormControls": 0,
+      "imgsMissingAltAttr": [],
+      "danglingAriaControls": [],
+      "keyboard": {
+        "tabStops": 37,
+        "uniqueTabStops": 37,
+        "trapSuspected": false,
+        "invisibleFocus": [],
+        "shiftTabWorks": true,
+        "skipLink": {
+          "present": true,
+          "visibleOnFocus": true,
+          "focusStyleApplied": true,
+          "movedFocusToMain": true
+        },
+        "disclosures": [],
+        "detailsElements": 0
+      },
+      "zoom": [
+        {
+          "width": 320,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "overflowing": [
+            "a.flex flex-1 flex-col items-center justif",
+            "span.flex h-8 w-14 items-center justify-cente"
+          ],
+          "horizontalScroll": false
+        },
+        {
+          "width": 375,
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "overflowing": [],
+          "horizontalScroll": false
+        },
+        {
+          "width": 640,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "overflowing": [],
+          "horizontalScroll": false
+        }
+      ],
+      "reducedMotion": {
+        "mediaMatches": true,
+        "animatedElements": 148,
+        "notReduced": []
+      },
+      "errors": []
+    }
+  ]
+}

@@ -111,7 +111,7 @@ export function TimelineYearPage() {
         <SectionCard title="年度の形式を確認できません">
           <p className="text-sm text-on-surface-variant">
             URLの年度（{params.year}）を数値として認識できませんでした。
-            <Link to="/timeline" className="mx-1 text-primary hover:underline">
+            <Link to="/timeline" className="mx-1 text-primary underline">
               年表トップ
             </Link>
             から年度をお選びください。
@@ -137,7 +137,7 @@ export function TimelineYearPage() {
                     <li key={term.id} className="rounded-lg border border-outline-variant p-3 text-sm">
                       <div className="flex items-center gap-2">
                         <LandmarkIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
-                        <Link to={`/mayors/${mayor.slug}`} className="font-semibold text-primary hover:underline">
+                        <Link to={`/mayors/${mayor.slug}`} className="font-semibold text-primary underline">
                           {mayor.name}
                         </Link>
                         {isActingMayorTerm(term) && (
@@ -196,7 +196,7 @@ export function TimelineYearPage() {
                 />
                 <p className="mt-2 text-xs text-on-surface-variant">
                   詳細な出典・定義は
-                  <Link to={`/compare/finance?years=${fiscalYear}`} className="mx-1 text-primary hover:underline">
+                  <Link to={`/compare/finance?years=${fiscalYear}`} className="mx-1 text-primary underline">
                     年度別財政の比較
                   </Link>
                   でも確認できます。
@@ -229,7 +229,7 @@ export function TimelineYearPage() {
                     </li>
                   ))}
                 </ul>
-                <Link to="/history" className="mt-2 inline-block text-sm font-medium text-primary hover:underline">
+                <Link to="/history" className="mt-2 inline-block text-sm font-medium text-primary underline">
                   市政年表（全期間）で確認する
                 </Link>
               </>
@@ -243,7 +243,7 @@ export function TimelineYearPage() {
               <ul className="space-y-2">
                 {questions.map((q) => (
                   <li key={q.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                    <Link to={`/questions/${q.id}`} className="font-semibold text-primary hover:underline">
+                    <Link to={`/questions/${q.id}`} className="font-semibold text-primary underline">
                       {q.title}
                     </Link>
                     <p className="mt-1 text-xs text-on-surface-variant">
@@ -262,7 +262,7 @@ export function TimelineYearPage() {
               <ul className="space-y-2">
                 {documents.map((d) => (
                   <li key={d.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                    <Link to={documentPath(d)} className="font-semibold text-primary hover:underline">
+                    <Link to={documentPath(d)} className="font-semibold text-primary underline">
                       {d.title}
                     </Link>
                     <p className="mt-1 text-xs text-on-surface-variant">
@@ -283,7 +283,7 @@ export function TimelineYearPage() {
                   const ownerLinkTo = policyOwnerLinkTo(p, ownerLookup);
                   return (
                     <li key={p.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                      <Link to={`/policies/${p.slug}`} className="font-semibold text-primary hover:underline">
+                      <Link to={`/policies/${p.slug}`} className="font-semibold text-primary underline">
                         {p.title}
                       </Link>
                       <p className="mt-1 text-xs text-on-surface-variant">

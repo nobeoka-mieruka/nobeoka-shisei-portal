@@ -39,16 +39,16 @@ export function CouncilActivityHistoryPage() {
 
       <div className="rounded-xl bg-primary-container p-4 text-on-primary-container">
         <h1 className="text-lg font-bold">元議員の活動履歴（参考情報）</h1>
-        <p className="mt-1 text-xs text-on-primary-container/70">対象：現職ではない元議員{entries.length}名</p>
+        <p className="mt-1 text-xs text-on-primary-container/80">対象：現職ではない元議員{entries.length}名</p>
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         このページは、公開資料から確認できた元議員の活動記録を、在職期間内に限定して整理したものです。議員の能力、政策の質、政治的立場、人物評価を示すものではありません。
-        <Link to="/council-activity" className={`font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to="/council-activity" className={`font-medium text-primary underline ${linkClass}`}>
           現職議員の活動比較ページ
         </Link>
         とは対象期間・対象会期が異なるため、現職議員との数値の単純比較・総合順位付けはできません（本ページでは並べ替え機能を設けていません）。詳しい算定方法は
-        <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
           こちら
         </Link>
         。
@@ -86,7 +86,7 @@ export function CouncilActivityHistoryPage() {
 
               <Link
                 to={`/members/former/${e.formerMemberId}`}
-                className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
               >
                 プロフィール・発言記録の詳細を見る →
               </Link>

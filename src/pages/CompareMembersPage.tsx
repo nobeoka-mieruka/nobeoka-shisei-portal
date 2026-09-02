@@ -142,7 +142,7 @@ export function CompareMembersPage() {
                 {
                   header: "氏名",
                   render: (p) => (
-                    <Link to={`/people/${p.slug}`} className="text-primary hover:underline">
+                    <Link to={`/people/${p.slug}`} className="text-primary underline">
                       {p.name}
                     </Link>
                   ),

@@ -62,7 +62,7 @@ function SectionSource({ section }: { section: string }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${source.title}を新しいタブで開く`}
-        className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+        className={`inline-flex items-center gap-1 text-primary underline ${linkClass}`}
       >
         <GlobeIcon className="h-3.5 w-3.5" />
         {source.title}
@@ -121,16 +121,16 @@ export function FinancePage() {
           このページは単年度の詳細です。年度をまたいだ比較は以下の各ページで確認できます。
         </p>
         <div className="mt-2 flex flex-wrap gap-2 text-xs">
-          <Link to="/finance/budget" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/finance/budget" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}>
             予算・決算規模の推移
           </Link>
-          <Link to="/finance/debt" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/finance/debt" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}>
             市債の推移
           </Link>
-          <Link to="/finance/funds" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/finance/funds" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}>
             基金残高の推移
           </Link>
-          <Link to="/compare/finance" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary hover:underline ${linkClass}`}>
+          <Link to="/compare/finance" className={`rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}>
             年度を比較する
           </Link>
           <Link to="/compare" className={`rounded-full bg-primary-container px-3 py-1.5 text-on-primary-container hover:underline ${linkClass}`}>
@@ -445,7 +445,7 @@ export function FinancePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${s.title}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
               >
                 <GlobeIcon className="h-4 w-4" />
                 {s.title}

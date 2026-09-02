@@ -275,7 +275,7 @@ export function MayorPromiseDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.sourceTitle}を新しいタブで開く`}
-                      className={`ml-1 inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                      className={`ml-1 inline-flex items-center gap-1 text-primary underline ${linkClass}`}
                     >
                       {m.sourceTitle}
                       {m.sourcePage && `（${m.sourcePage}）`}
@@ -310,7 +310,7 @@ export function MayorPromiseDetailPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${doc.label}${doc.page ? `（${doc.page}）` : ""}を新しいタブで開く`}
-                    className={`inline-flex flex-wrap items-center gap-1.5 rounded text-sm text-primary hover:underline ${linkClass}`}
+                    className={`inline-flex flex-wrap items-center gap-1.5 rounded text-sm text-primary underline ${linkClass}`}
                   >
                     {pdf ? <DocumentIcon className="h-3.5 w-3.5 shrink-0" /> : <GlobeIcon className="h-3.5 w-3.5 shrink-0" />}
                     <span>
@@ -388,7 +388,7 @@ export function MayorPromiseDetailPage() {
                   )}
                 </div>
                 <p className="mt-1 text-xs text-on-surface-variant">候補と判断した理由：{c.candidateReason}</p>
-                <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs text-primary hover:underline">
+                <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs text-primary underline">
                   出典：{c.source}（{c.sourceDate}）
                 </a>
               </li>
@@ -403,21 +403,21 @@ export function MayorPromiseDetailPage() {
           <ul className="space-y-2 text-sm">
             {relatedBills.map((bill) => (
               <li key={bill.id}>
-                <Link to={`/bills/votes/${bill.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/bills/votes/${bill.id}`} className={`text-primary underline ${linkClass}`}>
                   関連議案：{bill.billTitle}
                 </Link>
               </li>
             ))}
             {relatedQuestions.map((q) => (
               <li key={q.id}>
-                <Link to={`/questions/${q.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/questions/${q.id}`} className={`text-primary underline ${linkClass}`}>
                   関連する一般質問：{q.title}（{q.memberName}議員）
                 </Link>
               </li>
             ))}
             {relatedPressConferences.map((c) => (
               <li key={c.date}>
-                <Link to={`/mayor/press-conferences/${c.date}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/mayor/press-conferences/${c.date}`} className={`text-primary underline ${linkClass}`}>
                   関連する市長記者会見：{c.title}
                 </Link>
               </li>
@@ -435,7 +435,7 @@ export function MayorPromiseDetailPage() {
         </p>
         <Link
           to="/finance"
-          className={`mt-2 inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+          className={`mt-2 inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
         >
           <YenIcon className="h-3.5 w-3.5 shrink-0" />
           延岡市の財政データを見る
@@ -453,7 +453,7 @@ export function MayorPromiseDetailPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${link.label}を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-3.5 w-3.5 shrink-0" />
                   {link.label}
@@ -506,7 +506,7 @@ export function MayorPromiseDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${entry.sourceTitle ?? "根拠資料"}を新しいタブで開く`}
-                      className={`mt-1 inline-flex items-center gap-1 text-xs text-primary hover:underline ${linkClass}`}
+                      className={`mt-1 inline-flex items-center gap-1 text-xs text-primary underline ${linkClass}`}
                     >
                       <GlobeIcon className="h-3 w-3 shrink-0" />
                       {entry.sourceTitle ?? "根拠資料を見る"}
@@ -565,7 +565,7 @@ export function MayorPromiseDetailPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${policyData.referenceLabel}を新しいタブで開く`}
-            className={`ml-1 text-primary hover:underline ${linkClass}`}
+            className={`ml-1 text-primary underline ${linkClass}`}
           >
             {policyData.referenceLabel}
           </a>

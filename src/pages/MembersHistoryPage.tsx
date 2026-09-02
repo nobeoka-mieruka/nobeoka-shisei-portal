@@ -66,7 +66,7 @@ export function MembersHistoryPage() {
             <li key={session.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1">
               <Link
                 to={`/council-documents/${session.id}`}
-                className={`text-sm font-semibold text-primary hover:underline ${linkClass}`}
+                className={`text-sm font-semibold text-primary underline ${linkClass}`}
               >
                 {session.title}
               </Link>
@@ -77,7 +77,7 @@ export function MembersHistoryPage() {
                   confirmedFormerProfiles.map((p, i) => (
                     <span key={p.id}>
                       {i > 0 && "、"}
-                      <Link to={`/members/former/${p.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                      <Link to={`/members/former/${p.slug}`} className={`text-primary underline ${linkClass}`}>
                         {p.name}
                       </Link>
                     </span>
@@ -93,7 +93,7 @@ export function MembersHistoryPage() {
 
       <p className="mt-6 px-1 text-xs leading-relaxed text-on-surface-variant">
         元議員の詳細は
-        <Link to="/members/former" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/members/former" className={`mx-1 text-primary underline ${linkClass}`}>
           元議員一覧
         </Link>
         でも確認できます。

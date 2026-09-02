@@ -371,7 +371,7 @@ export function MayorPolicyProgressPage() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${data.referenceLabel}を新しいタブで開く`}
-          className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+          className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
         >
           <GlobeIcon className="h-4 w-4" />
           {data.referenceLabel}

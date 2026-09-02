@@ -149,7 +149,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
                             href={ref.sourceUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary hover:underline"
+                            className="text-primary underline"
                           >
                             {ref.sourceTitle ?? "出典"}
                           </a>

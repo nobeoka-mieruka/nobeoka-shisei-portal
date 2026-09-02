@@ -153,7 +153,7 @@ export function TimelinePage() {
           action={
             <Link
               to={`/timeline/${group.fiscalYear}`}
-              className="shrink-0 rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="shrink-0 rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               この年度のタイムラインを見る
             </Link>
@@ -171,7 +171,7 @@ export function TimelinePage() {
                         {CATEGORY_META[event.category].label}／{event.dateLabel}
                       </p>
                       {event.relatedPath ? (
-                        <Link to={event.relatedPath} className="text-sm font-semibold text-primary hover:underline">
+                        <Link to={event.relatedPath} className="text-sm font-semibold text-primary underline">
                           {event.title}
                         </Link>
                       ) : (

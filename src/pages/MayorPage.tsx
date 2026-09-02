@@ -186,7 +186,7 @@ export function MayorPage() {
               ))}
             </ul>
             {mayorSubmittedBills.length > 5 && (
-              <Link to="/bills/votes" className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}>
+              <Link to="/bills/votes" className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}>
                 市長提出議案をすべて見る
               </Link>
             )}
@@ -224,7 +224,7 @@ export function MayorPage() {
               </li>
             ))}
           </ul>
-          <Link to="/mayor/press-conferences" className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}>
+          <Link to="/mayor/press-conferences" className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}>
             市長定例記者会見をすべて見る
           </Link>
         </SectionCard>

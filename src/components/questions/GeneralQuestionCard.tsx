@@ -58,7 +58,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
       <div className="mt-2">
         <Link
           to={`/members/${item.memberId}`}
-          className={`inline-block py-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+          className={`inline-block py-1 text-sm font-medium text-primary underline ${linkClass}`}
         >
           {item.memberName}
         </Link>
@@ -154,7 +154,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
         type="button"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
-        className={`mt-3 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        className={`mt-3 text-sm font-medium text-primary underline ${linkClass}`}
       >
         {expanded ? "閉じる" : "詳しく見る"}
       </button>
@@ -177,7 +177,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.sourceTitle}を新しいタブで開く`}
-              className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+              className={`inline-flex items-center gap-1 text-primary underline ${linkClass}`}
             >
               <GlobeIcon className="h-3.5 w-3.5" />
               {item.sourceTitle}

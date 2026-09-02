@@ -166,7 +166,7 @@ export function ExecutiveAnswersPage() {
                       </div>
                     )}
                     <div className="mt-2 flex flex-wrap items-center gap-3">
-                      <Link to={`/members/${e.memberId}/questions/${e.speechId}`} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                      <Link to={`/members/${e.memberId}/questions/${e.speechId}`} className={`text-sm font-medium text-primary underline ${linkClass}`}>
                         詳細を見る
                       </Link>
                       {e.sourceUrl && (
@@ -175,7 +175,7 @@ export function ExecutiveAnswersPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="原本（公式会議録）を新しいタブで開く"
-                          className={`inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                          className={`inline-flex items-center gap-1 text-sm font-medium text-primary underline ${linkClass}`}
                         >
                           <GlobeIcon className="h-3.5 w-3.5" />
                           原本を見る

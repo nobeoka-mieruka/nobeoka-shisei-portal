@@ -94,7 +94,7 @@ export function PolicyDetailPage() {
         <p className="mt-2 text-sm text-on-surface-variant">
           {policyOwnerTypeLabel(policy.ownerType)}：
           {ownerLinkTo ? (
-            <Link to={ownerLinkTo} className={`text-primary hover:underline ${linkClass}`}>
+            <Link to={ownerLinkTo} className={`text-primary underline ${linkClass}`}>
               {ownerName}
             </Link>
           ) : (
@@ -152,7 +152,7 @@ export function PolicyDetailPage() {
                 <li key={r.id} className="rounded-lg border border-outline-variant p-3 text-sm">
                   <div className="flex flex-wrap items-center gap-2">
                     {question ? (
-                      <Link to={`/questions/${r.questionId}`} className={`text-primary hover:underline ${linkClass}`}>
+                      <Link to={`/questions/${r.questionId}`} className={`text-primary underline ${linkClass}`}>
                         {question.title}
                       </Link>
                     ) : (

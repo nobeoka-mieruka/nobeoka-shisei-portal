@@ -185,21 +185,21 @@ export function GeneralQuestionDetailPage() {
           <ul className="space-y-2 text-sm">
             {relatedBills.map((bill) => (
               <li key={bill.id}>
-                <Link to={`/bills/votes/${bill.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/bills/votes/${bill.id}`} className={`text-primary underline ${linkClass}`}>
                   関連議案：{bill.billTitle}
                 </Link>
               </li>
             ))}
             {relatedPromises.map((promise) => (
               <li key={promise.id}>
-                <Link to={`/mayor/policy-progress/${promise.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/mayor/policy-progress/${promise.id}`} className={`text-primary underline ${linkClass}`}>
                   関連する市長公約：{promise.promiseText}
                 </Link>
               </li>
             ))}
             {item.relatedFinanceItems && item.relatedFinanceItems.length > 0 && (
               <li>
-                <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
+                <Link to="/finance" className={`text-primary underline ${linkClass}`}>
                   関連する予算・財政情報：{item.relatedFinanceItems.join("、")}
                 </Link>
               </li>
@@ -220,7 +220,7 @@ export function GeneralQuestionDetailPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${l.label}を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
                 >
                   {l.label === "議会中継・録画" ? <PlayIcon className="h-3.5 w-3.5" /> : <GlobeIcon className="h-3.5 w-3.5" />}
                   {l.label}
@@ -233,7 +233,7 @@ export function GeneralQuestionDetailPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${item.sourceTitle}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
               >
                 <GlobeIcon className="h-3.5 w-3.5" />
                 {item.sourceTitle}
@@ -246,7 +246,7 @@ export function GeneralQuestionDetailPage() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${item.sourceTitle}を新しいタブで開く`}
-            className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+            className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
           >
             <GlobeIcon className="h-3.5 w-3.5" />
             {item.sourceTitle}

@@ -277,7 +277,9 @@ export function SearchPage() {
             type="search"
             role="combobox"
             aria-expanded={showSuggestions && suggestions.length > 0}
-            aria-controls="search-suggestions-listbox"
+            // Phase194（WCAG）：候補リストが閉じているときはid参照先が存在しないため、
+            // 開いているときだけaria-controlsを指定する（存在しないIDの参照を避ける）。
+            aria-controls={showSuggestions && suggestions.length > 0 ? "search-suggestions-listbox" : undefined}
             aria-autocomplete="list"
             aria-activedescendant={activeSuggestion >= 0 ? `search-suggestion-${activeSuggestion}` : undefined}
             value={query}
@@ -310,7 +312,9 @@ export function SearchPage() {
             className="absolute inset-x-0 top-full z-30 mt-1 max-h-72 overflow-y-auto rounded-2xl bg-surface-container-high shadow-e2"
           >
             {suggestions.map((s, i) => (
-              <li key={s}>
+              // Phase194（WCAG）：role="listbox"が直接持てる子はrole="option"のみのため、
+              // 中間の<li>はrole="presentation"にしてボタン側をoptionとして扱わせる。
+              <li key={s} role="presentation">
                 <button
                   id={`search-suggestion-${i}`}
                   role="option"
@@ -422,7 +426,7 @@ export function SearchPage() {
           </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <span className="sr-only">年度</span>
               <select
                 value={fiscalYearFilter}
@@ -438,7 +442,7 @@ export function SearchPage() {
                 ))}
               </select>
             </label>
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <span className="sr-only">確認状況</span>
               <select
                 value={verificationStatusFilter}
@@ -453,7 +457,7 @@ export function SearchPage() {
                 <option value="sourceUnavailable">出典資料未確認</option>
               </select>
             </label>
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <input type="checkbox" checked={includeAi} onChange={(e) => setIncludeAi(e.target.checked)} className="h-4 w-4" />
               AI候補を含める
             </label>
@@ -468,7 +472,7 @@ export function SearchPage() {
             <p className="text-sm text-on-surface-variant" aria-live="polite">
               {sortedResults.length > 0 ? `${sortedResults.length}件見つかりました` : "0件"}
             </p>
-            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant">
+            <label className="flex shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <span className="sr-only">並び替え</span>
               <select
                 value={sort}
@@ -563,7 +567,7 @@ export function SearchPage() {
                 <li>・年度や種類の絞り込みを解除する</li>
                 <li>
                   ・
-                  <Link to="/contact" className={`text-primary hover:underline ${linkClass}`}>
+                  <Link to="/contact" className={`text-primary underline ${linkClass}`}>
                     情報提供・訂正依頼ページ
                   </Link>
                   から探している情報をお知らせいただくこともできます

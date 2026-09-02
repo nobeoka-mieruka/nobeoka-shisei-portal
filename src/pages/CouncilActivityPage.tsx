@@ -209,7 +209,7 @@ export function CouncilActivityPage() {
         <p className="mt-1 text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
         <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-on-surface-variant dark:border-outline-variant">
           件数や実施率は活動の「量」を示すものであり、政策の内容や「質」を評価するものではありません。議員の能力、政治的立場、人物評価を示すものでもありません。資料の公開状況によって確認可能な情報量に差があります。詳しい算定方法は
-          <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+          <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
             こちら
           </Link>
           、出典は各項目のリンク先でご確認いただけます。
@@ -229,7 +229,7 @@ export function CouncilActivityPage() {
                   <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
                     {i + 1}位　{e.member.name}
                   </Link>
-                  <span className="tabular-nums text-xs font-semibold text-orange-600 dark:text-orange-400">
+                  <span className="tabular-nums text-xs font-semibold text-orange-700 dark:text-orange-300">
                     {metricByKey(e.metrics, "speech")!.rawValue}件
                   </span>
                 </li>
@@ -270,7 +270,7 @@ export function CouncilActivityPage() {
                   <Link to={`/council-activity/${e.member.id}`} className={`hover:underline ${linkClass}`}>
                     {i + 1}位　{e.member.name}
                   </Link>
-                  <span className="tabular-nums text-xs font-semibold text-orange-600 dark:text-orange-400">{e.count}件</span>
+                  <span className="tabular-nums text-xs font-semibold text-orange-700 dark:text-orange-300">{e.count}件</span>
                 </li>
               ))}
             </ol>
@@ -535,22 +535,25 @@ export function CouncilActivityPage() {
         </p>
         <dl className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {evidenceSummary.map((item) => (
-            <div key={item.key} className="rounded-lg bg-surface-container-low p-3">
-              <div className="flex items-center justify-between gap-2">
-                <dt className="text-sm font-medium text-on-surface">{item.label}</dt>
-                <dd
-                  className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    item.code === "confirmed"
-                      ? "bg-primary-container text-on-primary-container"
-                      : item.code === "waiting_external"
-                        ? "bg-tertiary-container text-on-tertiary-container"
-                        : "bg-surface-container-high text-on-surface-variant"
-                  }`}
-                >
-                  {item.statusText}
-                </dd>
-              </div>
-              <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{item.detail}</p>
+            // Phase194（WCAG）：<dl>直下のグループ<div>にはdt/dd以外を置けないため、
+            // 見た目を変えずにgridで「項目名／状況バッジ／説明」を配置する。
+            <div
+              key={item.key}
+              className="grid grid-cols-[1fr_auto] items-center gap-x-2 rounded-lg bg-surface-container-low p-3"
+            >
+              <dt className="text-sm font-medium text-on-surface">{item.label}</dt>
+              <dd
+                className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                  item.code === "confirmed"
+                    ? "bg-primary-container text-on-primary-container"
+                    : item.code === "waiting_external"
+                      ? "bg-tertiary-container text-on-tertiary-container"
+                      : "bg-surface-container-high text-on-surface-variant"
+                }`}
+              >
+                {item.statusText}
+              </dd>
+              <dd className="col-span-2 mt-1 text-xs leading-relaxed text-on-surface-variant">{item.detail}</dd>
             </div>
           ))}
         </dl>
@@ -606,8 +609,11 @@ export function CouncilActivityPage() {
                         </Link>
                       </th>
                       {row.cells.map((cell) => (
-                        <td key={cell.indicatorKey} className="py-1.5 pr-2 text-on-surface" aria-label={cell.label}>
+                        // Phase194（WCAG）：aria-labelでセル内容を置き換えるのではなく、
+                        // 記号は装飾扱いにしてスクリーンリーダー用テキストを併記する。
+                        <td key={cell.indicatorKey} className="py-1.5 pr-2 text-on-surface">
                           <span aria-hidden="true">{cell.symbol}</span>
+                          <span className="sr-only">{cell.label}</span>
                         </td>
                       ))}
                     </tr>
@@ -662,7 +668,7 @@ export function CouncilActivityPage() {
         </ul>
         <Link
           to="/methodology/activity-radar"
-          className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+          className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}
         >
           算定方法・計算式・出典を見る →
         </Link>
@@ -685,7 +691,7 @@ export function CouncilActivityPage() {
           <button
             type="button"
             onClick={() => setCompareIds([])}
-            className={`mt-3 text-xs font-medium text-primary hover:underline ${linkClass}`}
+            className={`mt-3 text-xs font-medium text-primary underline ${linkClass}`}
           >
             比較をクリア
           </button>

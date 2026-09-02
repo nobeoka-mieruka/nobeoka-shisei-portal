@@ -62,7 +62,7 @@ export function QuestionTopicChart({ topics, onSelectTopic, selectedTopic }: Que
           type="button"
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
-          className="mt-3 text-sm font-medium text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="mt-3 text-sm font-medium text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {expanded ? "折りたたむ" : `すべて表示（${topics.length}件）`}
         </button>

@@ -336,7 +336,7 @@ export function GeneralQuestionsPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${s.title}を新しいタブで開く`}
-                className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                className={`inline-flex items-center gap-1 text-primary underline ${linkClass}`}
               >
                 <GlobeIcon className="h-3.5 w-3.5" />
                 {s.label}（{s.title}）

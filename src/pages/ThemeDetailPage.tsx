@@ -194,7 +194,7 @@ export function ThemeDetailPage() {
           <ul className="mt-2 divide-y divide-outline-variant text-sm">
             {memberCounts.map(({ member, count }) => (
               <li key={member.id} className="flex items-center justify-between gap-2 py-2">
-                <Link to={`/members/${member.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/members/${member.id}`} className={`text-primary underline ${linkClass}`}>
                   {member.name}
                 </Link>
                 <span className="text-xs text-on-surface-variant">{count}件</span>
@@ -210,7 +210,7 @@ export function ThemeDetailPage() {
           <ul className="mt-2 divide-y divide-outline-variant text-sm">
             {formerMemberCounts.map(({ member, count }) => (
               <li key={member.id} className="flex items-center justify-between gap-2 py-2">
-                <Link to={`/members/former/${member.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/members/former/${member.id}`} className={`text-primary underline ${linkClass}`}>
                   {member.name}
                 </Link>
                 <span className="text-xs text-on-surface-variant">{count}件</span>
@@ -229,7 +229,7 @@ export function ThemeDetailPage() {
             <ul className="mt-2 space-y-2">
               {confirmedPolicies.map((p) => (
                 <li key={p.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                  <Link to={`/policies/${p.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                  <Link to={`/policies/${p.slug}`} className={`text-primary underline ${linkClass}`}>
                     {p.title}
                   </Link>
                   <div className="mt-1 flex flex-wrap gap-1">
@@ -251,7 +251,7 @@ export function ThemeDetailPage() {
                 {confirmedMayors.map((m, i) => (
                   <span key={m.id}>
                     {i > 0 && "、"}
-                    <Link to={`/mayors/${m.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                    <Link to={`/mayors/${m.slug}`} className={`text-primary underline ${linkClass}`}>
                       {m.name}
                     </Link>
                   </span>
@@ -275,7 +275,7 @@ export function ThemeDetailPage() {
               return (
                 <li key={candidate.id} className="rounded-lg border border-outline-variant p-3 text-sm">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Link to={`${basePath}/${document.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                    <Link to={`${basePath}/${document.slug}`} className={`text-primary underline ${linkClass}`}>
                       {document.title}
                     </Link>
                     <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
@@ -333,7 +333,7 @@ export function ThemeDetailPage() {
                   </div>
                   <Link
                     to={`/members/${mId}/questions/${speech.id}`}
-                    className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    className={`mt-2 inline-block text-sm font-medium text-primary underline ${linkClass}`}
                   >
                     質問・答弁の詳細を見る
                   </Link>

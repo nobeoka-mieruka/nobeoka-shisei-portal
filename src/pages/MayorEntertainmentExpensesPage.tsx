@@ -312,7 +312,7 @@ export function MayorEntertainmentExpensesPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${e.sourceTitle}を新しいタブで開く`}
-                      className="text-xs text-primary hover:underline"
+                      className="text-xs text-primary underline"
                     >
                       {e.sourceTitle}
                     </a>
@@ -344,7 +344,7 @@ export function MayorEntertainmentExpensesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${e.sourceTitle}を新しいタブで開く`}
-                  className="block text-primary hover:underline"
+                  className="block text-primary underline"
                 >
                   {e.sourceTitle}
                 </a>

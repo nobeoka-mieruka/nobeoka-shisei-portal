@@ -115,7 +115,7 @@ export function ElectionDetailPage() {
                       {c.name}
                       {c.age != null && <span className="ml-1 text-xs text-on-surface-variant">（{c.age}歳）</span>}
                       {link && (
-                        <a href={link.href} className="ml-2 text-xs text-primary hover:underline">
+                        <a href={link.href} className="ml-2 text-xs text-primary underline">
                           {link.label}
                         </a>
                       )}
@@ -139,7 +139,7 @@ export function ElectionDetailPage() {
         <ul className="space-y-2 text-xs leading-relaxed text-on-surface-variant">
           {election.sourceRefs.map((ref, i) => (
             <li key={i}>
-              <a href={ref.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              <a href={ref.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">
                 {ref.sourceTitle}
               </a>
               （{ref.sourceOrganization}、確認日：{ref.accessedAt}）

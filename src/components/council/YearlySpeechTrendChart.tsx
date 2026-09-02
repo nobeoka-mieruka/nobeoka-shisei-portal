@@ -16,10 +16,9 @@ export function YearlySpeechTrendChart({ counts }: { counts: YearlySpeechCount[]
         const unresolved = c.targetSessionCount - c.sessionsWithQuestions;
         return (
           <li key={c.year}>
-            <div
-              className="flex items-baseline justify-between gap-2"
-              aria-label={`${c.year}年：質問・質疑を確認した会期${c.sessionsWithQuestions}会期`}
-            >
+            {/* Phase194（WCAG）：role未指定のdivへaria-labelを付けると支援技術によっては
+                無視される（aria-prohibited-attr）ため、可視テキストで同じ内容を伝える。 */}
+            <div className="flex items-baseline justify-between gap-2">
               <span className="text-sm font-medium text-on-surface">{c.year}年</span>
               <span className="shrink-0 text-xs text-on-surface-variant">{c.sessionsWithQuestions}会期</span>
             </div>

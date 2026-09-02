@@ -83,7 +83,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-x-6 gap-y-5 pt-3 text-left sm:grid-cols-2 lg:grid-cols-4">
           {footerGroups.map((group) => (
             <div key={group.heading}>
-              <h3 className="mb-1 text-xs font-semibold text-on-surface-variant">{group.heading}</h3>
+              <h2 className="mb-1 text-xs font-semibold text-on-surface-variant">{group.heading}</h2>
               {/* Phase31：スマホ幅でgrid-cols-2にすると「副市長・教育長・行政委員会委員」等の
                   長いラベルが1列あたり数文字ずつの窮屈な折り返しになり読みにくかったため、
                   全幅で1列に統一した（情報量は変えず、読みやすさを優先）。 */}

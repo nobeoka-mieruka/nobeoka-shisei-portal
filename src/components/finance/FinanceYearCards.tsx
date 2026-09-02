@@ -152,7 +152,7 @@ export function FinanceYearCards<T>({ caption, years, getYear, rowKey, fields, d
                 </dl>
                 <Link
                   to={detailHref(row)}
-                  className="mt-3 inline-flex min-h-[44px] items-center text-sm text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="mt-3 inline-flex min-h-[44px] items-center text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {detailLabel} →
                 </Link>

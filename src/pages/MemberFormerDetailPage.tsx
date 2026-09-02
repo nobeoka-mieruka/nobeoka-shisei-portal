@@ -321,7 +321,7 @@ export function MemberFormerDetailPage() {
                 <li key={s.id}>
                   <Link
                     to={`/members/${legacyId}/questions/${s.id}`}
-                    className={`block rounded-lg bg-surface-container-high p-3 text-sm text-primary hover:underline ${linkClass}`}
+                    className={`block rounded-lg bg-surface-container-high p-3 text-sm text-primary underline ${linkClass}`}
                   >
                     {session?.title ?? s.sessionId}
                     {s.date && `（${formatJapaneseDate(s.date)}）`}の{s.speechType}

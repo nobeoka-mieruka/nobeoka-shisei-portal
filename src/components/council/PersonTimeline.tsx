@@ -58,7 +58,7 @@ export function PersonTimeline({ events }: { events: TimelineEvent[] }) {
                   <span key={i}>
                     {i > 0 && "、"}
                     {s.url ? (
-                      <a href={s.url} target="_blank" rel="noreferrer" className={`text-primary hover:underline ${linkClass}`}>
+                      <a href={s.url} target="_blank" rel="noreferrer" className={`text-primary underline ${linkClass}`}>
                         {s.label}
                       </a>
                     ) : (

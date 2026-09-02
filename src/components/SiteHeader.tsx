@@ -38,7 +38,7 @@ export function SiteHeader() {
           </span>
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          <nav className="hidden shrink-0 items-center gap-1 md:flex">
+          <nav aria-label="主要メニュー" className="hidden shrink-0 items-center gap-1 md:flex">
             <NavLink to="/" end className={navLinkClass}>
               議員一覧
             </NavLink>

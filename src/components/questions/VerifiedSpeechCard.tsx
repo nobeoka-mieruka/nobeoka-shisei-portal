@@ -46,7 +46,7 @@ export function VerifiedSpeechCard({
       </div>
 
       <div className="mt-2">
-        <Link to={memberHref} className={`inline-block py-1 text-sm font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to={memberHref} className={`inline-block py-1 text-sm font-medium text-primary underline ${linkClass}`}>
           {memberName}
         </Link>
         <Link to={detailHref} className={`block w-full text-left ${linkClass}`}>

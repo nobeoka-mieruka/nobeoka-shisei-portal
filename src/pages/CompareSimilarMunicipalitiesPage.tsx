@@ -183,7 +183,9 @@ export function CompareSimilarMunicipalitiesPage() {
         {/* TASK-083：このページはモバイル用カード表示を持たず、狭い画面でも表をそのまま
             横スクロールで見せる設計のため、案内文を常時表示する（sm:hiddenにしない）。 */}
         <p className="mb-2 text-xs text-on-surface-variant sm:hidden">表は横にスクロールできます</p>
-        <div className="overflow-x-auto">
+        {/* Phase194（WCAG 2.1.1）：この表にはリンク等のフォーカス可能な要素がないため、
+            スクロール領域自体をキーボードで操作できるようにtabIndexとラベルを付与する。 */}
+        <div className="overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" tabIndex={0} role="region" aria-label="類似団体の財政指標比較表（横スクロールできます）">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead>
               <tr className="border-b border-outline-variant text-xs text-on-surface-variant">
@@ -246,7 +248,7 @@ export function CompareSimilarMunicipalitiesPage() {
         <ul className="space-y-2 text-xs leading-relaxed text-on-surface-variant">
           {similarMunicipalityFinance.sourceRefs.map((ref, i) => (
             <li key={i}>
-              <a href={ref.sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary hover:underline ${linkClass}`}>
+              <a href={ref.sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
                 {ref.sourceTitle}
               </a>
               （{ref.sourceOrganization}、確認日：{ref.accessedAt}）
