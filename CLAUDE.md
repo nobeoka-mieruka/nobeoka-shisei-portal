@@ -35,17 +35,6 @@ https://nobeoka-shisei-portal.pages.dev/
 ・市長記者会見
 ・総務省などの公的機関資料
 
-## 技術構成
-
-・React
-・TypeScript
-・Vite
-・Tailwind CSS
-・GitHub
-・Cloudflare Pages
-・Cloudflare Pages Functions
-・JSONまたはTypeScriptによるデータ管理
-
 ## 作業開始時の確認
 
 毎回、作業前に次を確認する。
