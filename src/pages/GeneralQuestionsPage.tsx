@@ -510,7 +510,7 @@ export function GeneralQuestionsPage() {
                     key={speech.id}
                     speech={speech}
                     memberName={memberLink?.name ?? speech.memberId}
-                    memberHref={memberLink?.href ?? "/members"}
+                    memberHref={memberLink?.href ?? "/people"}
                     sessionTitle={session?.title ?? speech.sessionId}
                   />
                 );
