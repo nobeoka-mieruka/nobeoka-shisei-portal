@@ -147,14 +147,26 @@ function embeddedIn(token: string, candidates: string[]): string[] {
 // 完全一致 ＞ タイトル一致 ＞ 人物名一致 ＞ テーマ（キーワード）一致 ＞ 概要一致 ＞ 本文一致 の順。
 const SCORE_EXACT_TITLE = 100;
 const SCORE_TITLE_CONTAINS_QUERY = 60;
-/** タイトル部分一致の最低保証割合（検索語がタイトルのごく一部でも、一致自体は評価する）。 */
-const TITLE_COVERAGE_FLOOR = 0.35;
+/**
+ * タイトル部分一致の最低保証割合（検索語がタイトルのごく一部でも、一致自体は評価する）。
+ * Phase199：0.35では「議員」のような2文字の一般語が20文字を超えるタイトルに含まれるだけで
+ * 24点前後（部分一致60点の約4割）が入り、その語そのものを見出し語として登録している
+ * 入口ページ（keywords完全一致）より上位に来ていたため、0.10へ下げた。
+ * 一致していること自体は引き続き評価するが、タイトルに占める割合の重みを大きくしている。
+ */
+const TITLE_COVERAGE_FLOOR = 0.1;
 const SCORE_TITLE_TOKEN = 20;
 /** 議員・元議員・市長など「その人自身のページ」のタイトル（＝氏名）に一致した場合の加点。 */
 const SCORE_PERSON_NAME = 15;
 const SCORE_KEYWORD_TOKEN = 12;
-/** 登録キーワードが検索語とそのまま一致した場合の追加加点（そのエントリはその語そのものを扱っている）。 */
-const SCORE_KEYWORD_EXACT = 8;
+/**
+ * 登録キーワードが検索語とそのまま一致した場合の追加加点（そのエントリはその語そのものを扱っている）。
+ * Phase199：keywordsは「このエントリは何についてのものか」を登録した見出し語であり、
+ * 検索語とそのまま一致することは、タイトルにたまたま部分文字列として含まれることよりも強い根拠である。
+ * 「議員」「市長」のような役職名・分野名で検索したとき、その語を扱う入口ページ（議員一覧・
+ * 一般質問データベース等）が、その語をタイトルの一部に含むだけの個別データより上位に来るようにする。
+ */
+const SCORE_KEYWORD_EXACT = 30;
 const SCORE_EMBEDDED_TITLE = 10;
 const SCORE_EMBEDDED_KEYWORD = 6;
 const SCORE_DESCRIPTION_TOKEN = 5;
@@ -188,6 +200,23 @@ function personNameOf(normalizedTitle: string): string {
 }
 
 /**
+ * Phase199：人物ページのタイトル一致の判定に使う、末尾の肩書きを除いたタイトル。
+ * generate-search-index.mjsは同姓同名を区別するため「氏名（元議員）」「氏名（元市長）」のように
+ * 生成した肩書きを括弧書きで付けているが、これはタイトルの内容そのものではなく表示上の識別子であり、
+ * 同じ肩書きは各エントリのkeywords（「元議員」「過去の議員」「元市長」等）にも登録済みである。
+ * これをタイトル一致として数えると、「議員」「市長」のような役職名だけの検索で、
+ * 括弧書きを持つ人物ページ（元議員58件）だけが上位を占めてしまう（Phase195の残課題）。
+ * そのため、タイトル一致・タイトル完全一致・出現回数の判定では括弧書きの肩書きを除いた形を使う。
+ * 除外するのは末尾の括弧1組だけで、氏名自体に括弧が含まれる場合（「〇〇（旧姓〇〇）」等）でも
+ * 氏名部分は失われない。keywords一致は従来どおり行うため、元議員が検索結果から消えることはない。
+ */
+function titleForMatching(type: SearchEntryType, normalizedTitle: string): string {
+  if (!PERSON_ENTRY_TYPES.has(type)) return normalizedTitle;
+  const stripped = normalizedTitle.replace(/\s*\([^()]*\)\s*$/, "").trim();
+  return stripped.length > 0 ? stripped : normalizedTitle;
+}
+
+/**
  * エントリ区分ごとの最終倍率。
  * ・update（更新履歴）はサイトの作業記録であり、市民が探している市政情報そのものではないため下げる。
  * ・speech（会議録の発言）は「〇〇議員の一般質問」という一般的なタイトルで件数も多く、
@@ -200,6 +229,7 @@ const TYPE_SCORE_WEIGHT: Partial<Record<SearchEntryType, number>> = {
 };
 
 interface NormalizedEntry {
+  /** 一致判定に使うタイトル（人物ページは末尾の肩書き「（元議員）」等を除いた形）。 */
   title: string;
   compactTitle: string;
   /** 人物ページのみ、肩書きを除いた氏名部分（空白・中黒を除いた形）。 */
@@ -224,13 +254,14 @@ function getNormalizedEntry(entry: SearchIndexEntry): NormalizedEntry {
   const cached = normalizedEntryCache.get(entry);
   if (cached) return cached;
 
-  const title = normalize(entry.title);
+  const rawTitle = normalize(entry.title);
+  const title = titleForMatching(entry.type, rawTitle);
   const description = normalize(entry.description);
   const keywordsNorm = entry.keywords.map(normalize);
   const value: NormalizedEntry = {
     title,
-    compactTitle: compact(entry.title),
-    compactPersonName: PERSON_ENTRY_TYPES.has(entry.type) ? compact(personNameOf(title)) : "",
+    compactTitle: compact(title),
+    compactPersonName: PERSON_ENTRY_TYPES.has(entry.type) ? compact(personNameOf(rawTitle)) : "",
     description,
     keywordsNorm,
     compactKeywords: entry.keywords.map(compact),
@@ -384,7 +415,10 @@ export function searchEntries(
 
     // 検索語全体とタイトルの一致は、空白・中黒を除いた形で判定する
     // （「小野 正二」と「小野正二」、「福祉・介護」と「福祉介護」を同じ扱いにするため）。
-    if (compactQueryForms.some((q) => f.compactTitle === q)) {
+    // 人物ページは氏名そのものでの検索も完全一致として扱う。タイトルが「延岡市長 三浦 久知」の
+    // ように肩書きを伴っていても、氏名で検索した人にとってはそのページが探しているものである
+    // （肩書き付きのアーカイブページだけが完全一致になり、本人の主ページより上位に来るのを防ぐ）。
+    if (compactQueryForms.some((q) => f.compactTitle === q || (f.compactPersonName.length > 0 && f.compactPersonName === q))) {
       score += SCORE_EXACT_TITLE;
     } else {
       const matchedForm = compactQueryForms.find((q) => f.compactTitle.includes(q));
@@ -413,6 +447,45 @@ export function searchEntries(
 
   results.sort((a, b) => b.score - a.score);
   return results;
+}
+
+/** 同じURL（＝同じ遷移先ページ）を指す検索結果を1件にまとめたもの。 */
+export interface GroupedSearchResult {
+  /** そのURLの中で最も上位（並び替え後の先頭）の結果。 */
+  result: SearchResult;
+  /** 同じURLを指す、代表以外の一致（そのページ内の別の項目）。 */
+  others: SearchResult[];
+}
+
+/**
+ * Phase199：同じURLを指す検索結果を1件にまとめる。
+ *
+ * 索引には、1つのページの中の個別項目を別エントリとして登録しているものがある
+ * （市政年表の出来事217件→/history、更新履歴138件→/updates、自治体比較7件→/compare/municipalities）。
+ * これらのページには項目ごとのアンカーが無く（/updatesは20件ずつのページ送り）、
+ * どの結果を押しても同じページの先頭に遷移するため、複数行に分けて並べても
+ * 利用者にとっての遷移先は増えない。「市議会議員」等で検索したときに、
+ * 同じ/historyへの行が10件以上続き、議員一覧や現職議員が下へ押し出されていた。
+ *
+ * そのため表示時は1つのURLにつき1行にまとめ、まとめられた一致の見出しは
+ * othersとして同じ行の中に残す（どの項目が一致したかの情報は失わない）。
+ * URLが異なるものは別の遷移先なのでまとめない
+ * （例：議員ページ/members/m04と、その議員の質問ページ/members/m04/questions/...）。
+ */
+export function groupResultsByUrl(results: SearchResult[]): GroupedSearchResult[] {
+  const byUrl = new Map<string, GroupedSearchResult>();
+  const groups: GroupedSearchResult[] = [];
+  for (const result of results) {
+    const existing = byUrl.get(result.entry.url);
+    if (existing) {
+      existing.others.push(result);
+      continue;
+    }
+    const group: GroupedSearchResult = { result, others: [] };
+    byUrl.set(result.entry.url, group);
+    groups.push(group);
+  }
+  return groups;
 }
 
 export type SearchSortKey = "relevance" | "newest" | "oldest" | "kana";

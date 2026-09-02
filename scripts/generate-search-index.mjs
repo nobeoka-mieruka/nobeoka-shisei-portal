@@ -41,7 +41,10 @@ for (const m of members) {
     description: [factionName(m.factionId), ...(m.committees ?? [])].filter(Boolean).join("／"),
     url: `/members/${m.id}`,
     // 議員ページのtitleは氏名だけなので、「議員」で検索したときにも現職議員が見つかるようにする。
-    keywords: ["市議会議員", "議員", "現職議員", m.nameKana, factionName(m.factionId), ...(m.committees ?? []), m.district].filter(
+    // Phase199：「市議」（市議会議員の一般的な略称）でも見つかるよう見出し語に加える。
+    // 表記ゆれ辞書での相互展開は行わない（「市議」は「市議会」の一部にも含まれてしまい、
+    // 「市議会議員」の検索に「市議会」だけの資料が混ざるため）。
+    keywords: ["市議会議員", "市議", "議員", "現職議員", m.nameKana, factionName(m.factionId), ...(m.committees ?? []), m.district].filter(
       Boolean,
     ),
     content: [m.profile, ...(m.sns ?? []).map((s) => s.platform)].filter(Boolean).join(" "),
@@ -787,7 +790,7 @@ const staticPages = [
     title: "議員の比較",
     description: "延岡市議会の現職議員・元議員を横断して最大4名まで並べて比較します。",
     url: "/compare/members",
-    keywords: ["議員", "現職議員", "元議員", "比較"],
+    keywords: ["議員", "市議会議員", "市議", "現職議員", "元議員", "比較"],
   },
   {
     id: "page-compare-finance",
@@ -896,7 +899,9 @@ const staticPages = [
     title: "人物から探す",
     description: "現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。",
     url: "/people",
-    keywords: ["人物", "議員一覧", "議員", "元議員", "市長"],
+    // Phase199：「市議」「市議会議員」「現職議員」で検索したときにも、この入口ページが見つかるようにする
+    // （タイトル「人物から探す」には役職名が含まれないため、見出し語として登録しておく必要がある）。
+    keywords: ["人物", "議員一覧", "議員", "市議会議員", "市議", "現職議員", "元議員", "市長"],
   },
   {
     id: "page-history",

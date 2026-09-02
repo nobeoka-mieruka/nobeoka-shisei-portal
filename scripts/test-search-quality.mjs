@@ -10,6 +10,11 @@
  * 5. 0件のときに「実際に結果が出る別の言い方」を案内できること
  * 6. 表記ゆれ辞書（src/data/searchSynonyms.json）自体の整合性
  *
+ * Phase199で追加：
+ * 7. 役職名（議員・市議・市議会議員）での検索が、市民が期待する入口を上位に出すこと
+ *    （元議員は結果から消さず、順位だけを是正していること）
+ * 8. 同じURL（同じ遷移先ページ）を指す結果を1行にまとめられること
+ *
  * 使い方: node --experimental-strip-types scripts/test-search-quality.mjs
  * （src/lib/search.tsを直接importするため、Node 24のTS直接実行を使う）
  */
@@ -20,7 +25,7 @@ import assert from "node:assert/strict";
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const readJson = (relPath) => JSON.parse(readFileSync(join(ROOT, relPath), "utf8"));
 
-const { searchEntries, getAlternativeQueries, normalize, compact, expandVariants } = await import(
+const { searchEntries, getAlternativeQueries, groupResultsByUrl, normalize, compact, expandVariants } = await import(
   "../src/lib/search.ts"
 );
 
@@ -37,6 +42,9 @@ function check(label, fn) {
 const search = (query) => searchEntries(searchIndex, query);
 const topTypes = (results, n) => results.slice(0, n).map((r) => r.entry.type);
 const topUrls = (results, n) => results.slice(0, n).map((r) => r.entry.url);
+/** 検索結果を、SearchPageの表示と同じく「同じURLは1行」にまとめたもの。 */
+const grouped = (query) => groupResultsByUrl(search(query));
+const groupedTop = (query, n) => grouped(query).slice(0, n).map((g) => g.result);
 
 // --- 1. 検索語テストセット -------------------------------------------------
 // expectTypes：上位5件のいずれかがこの種類であること（市民が探しているであろう情報の種類）
@@ -435,6 +443,148 @@ check("表記ゆれ辞書とqueryHintsの役割が混ざっていない（言い
   }
 });
 
+// --- 7. 役職名での検索（Phase199） -----------------------------------------
+console.log("\nPhase199-7：役職名（議員・市議・市議会議員）での検索が、市民の入口を上位に出す");
+
+/** 議員を探している人にとっての入口とみなすURL（現職議員一覧・議員比較・元議員一覧・議員在籍履歴）。 */
+const MEMBER_ENTRY_URLS = new Set(["/people", "/compare/members", "/members/former", "/members/history"]);
+/** 個々の現職議員ページ（/members/m01 等）。 */
+const isCurrentMemberResult = (r) => r.entry.type === "member";
+
+let roleRankingCheckCount = 0;
+const roleRankingCheck = (label, fn) => {
+  roleRankingCheckCount += 1;
+  rankingCheckCount += 1;
+  check(label, fn);
+};
+
+roleRankingCheck("「議員」「市議」「市議会議員」の上位20行に、議員を探す入口が2件以上出る", () => {
+  const failures = [];
+  for (const query of ["議員", "市議", "市議会議員"]) {
+    const top = groupedTop(query, 20);
+    const hits = top.filter((r) => MEMBER_ENTRY_URLS.has(r.entry.url) || isCurrentMemberResult(r));
+    if (hits.length < 2) {
+      failures.push(`「${query}」の上位20行の入口が${hits.length}件（${top.slice(0, 5).map((r) => r.entry.title).join(" / ")}）`);
+    }
+  }
+  assert.equal(failures.length, 0, failures.join(" / "));
+});
+
+roleRankingCheck("「議員」の上位10行を元議員ページが占めない（Phase195の残課題）", () => {
+  // 改善前は、タイトルに「（元議員）」を含むだけの元議員ページ58件が2〜10位を独占していた。
+  const top10 = groupedTop("議員", 10);
+  const formerInTop10 = top10.filter((r) => r.entry.type === "former-member");
+  assert.equal(
+    formerInTop10.length,
+    0,
+    `「議員」の上位10行に元議員ページが${formerInTop10.length}件あります（${formerInTop10.map((r) => r.entry.title).join(" / ")}）`,
+  );
+  // 現職議員は元議員より上位に出ること（「議員」は通常、今の議員を指す）。
+  const rows = grouped("議員");
+  const firstMember = rows.findIndex((g) => g.result.entry.type === "member");
+  const firstFormer = rows.findIndex((g) => g.result.entry.type === "former-member");
+  assert.ok(firstMember >= 0, "「議員」の結果に現職議員ページがありません");
+  assert.ok(
+    firstFormer === -1 || firstMember < firstFormer,
+    `「議員」で元議員（${firstFormer + 1}行目）が現職議員（${firstMember + 1}行目）より上位です`,
+  );
+});
+
+roleRankingCheck("元議員は検索結果から消えていない（順位だけの調整であること）", () => {
+  const former = search("議員").filter((r) => r.entry.type === "former-member");
+  assert.ok(former.length >= 50, `「議員」の結果に元議員が${former.length}件しかありません`);
+  // 「元議員」で探せば上位に出ること
+  const formerTop10 = groupedTop("元議員", 10);
+  assert.ok(
+    formerTop10.some((r) => r.entry.type === "former-member"),
+    `「元議員」の上位10行に元議員ページがありません（${formerTop10.map((r) => r.entry.title).join(" / ")}）`,
+  );
+  // 元議員の氏名で検索すれば、その本人のページが1位であること
+  const byName = search("福良 博");
+  assert.ok(byName.length > 0, "元議員名「福良 博」が0件です");
+  assert.equal(
+    byName[0].entry.url,
+    "/members/former/fm15",
+    `元議員名の1位が本人ページではありません（${byName[0].entry.title}）`,
+  );
+});
+
+roleRankingCheck("生成タイトルの肩書き（（元議員）（元市長））はタイトル一致として数えない", () => {
+  // 「議員」で、肩書きを括弧書きで持つだけの人物ページが、その語を見出し語に持つページより上位に来ないこと。
+  const rows = search("議員");
+  const bestFormer = rows.find((r) => r.entry.type === "former-member");
+  const bestMember = rows.find((r) => r.entry.type === "member");
+  assert.ok(bestFormer && bestMember, "「議員」に現職議員・元議員の結果がありません");
+  assert.ok(
+    bestMember.score > bestFormer.score,
+    `現職議員（${bestMember.score.toFixed(1)}点）が元議員（${bestFormer.score.toFixed(1)}点）以下です`,
+  );
+  // 一方で、氏名での検索は肩書きの有無に関わらず本人のページが1位であること（現市長は主ページ/mayorが1位）。
+  assert.equal(search("三浦久知")[0].entry.url, "/mayor");
+});
+
+// --- 8. 同じURLを指す結果のまとめ（Phase199） ------------------------------
+console.log("\nPhase199-8：同じページ（同じURL）を指す結果を1行にまとめる");
+
+let duplicateFixCount = 0;
+
+check("groupResultsByUrl：件数・並び順を保ったまま、同じURLを1行にまとめる", () => {
+  const results = search("市議会議員");
+  const groups = groupResultsByUrl(results);
+  const total = groups.reduce((sum, g) => sum + 1 + g.others.length, 0);
+  assert.equal(total, results.length, "まとめる前後で一致件数が変わっています（結果を捨てていないこと）");
+  const urls = groups.map((g) => g.result.entry.url);
+  assert.equal(new Set(urls).size, urls.length, "まとめた後もURLが重複しています");
+  // 代表は、そのURLの中で最も上位（元の並び順で最初）の結果であること
+  for (const g of groups) {
+    for (const other of g.others) {
+      assert.equal(other.entry.url, g.result.entry.url, "別のURLの結果がまとめられています");
+      assert.ok(
+        results.indexOf(g.result) < results.indexOf(other),
+        `代表（${g.result.entry.title}）より上位の結果がまとめられています`,
+      );
+    }
+  }
+});
+
+check("1ページ内の個別項目を索引化しているページは、検索結果で1行にまとまる", () => {
+  // /history（市政年表の出来事）、/updates（更新履歴の各項目）、/compare/municipalities（自治体ごとの行）は、
+  // ページ内に項目ごとのアンカーが無く、どの結果を押しても同じページの先頭へ遷移するため、
+  // 複数行に分けても遷移先は増えない。まとめて1行にし、他の一致は行の中に残す。
+  const cases = [
+    { query: "台風", url: "/history" },
+    { query: "更新履歴", url: "/updates" },
+    { query: "比較データ", url: "/compare/municipalities" },
+  ];
+  for (const c of cases) {
+    const results = search(c.query);
+    const sameUrl = results.filter((r) => r.entry.url === c.url);
+    assert.ok(sameUrl.length >= 2, `「${c.query}」で${c.url}を指す結果が${sameUrl.length}件しかありません（テストの前提）`);
+    const groups = groupResultsByUrl(results).filter((g) => g.result.entry.url === c.url);
+    assert.equal(groups.length, 1, `「${c.query}」で${c.url}が${groups.length}行に分かれています`);
+    assert.equal(
+      groups[0].others.length,
+      sameUrl.length - 1,
+      `${c.url}にまとめられた他の一致の件数が合いません`,
+    );
+    duplicateFixCount += sameUrl.length - 1;
+  }
+});
+
+check("代表的な検索語で、まとめた後の上位20行に同じURLが二重に出ない", () => {
+  const failures = [];
+  for (const testCase of SEARCH_TEST_CASES) {
+    const urls = groupedTop(testCase.query, 20).map((r) => r.entry.url);
+    if (new Set(urls).size !== urls.length) failures.push(testCase.query);
+  }
+  assert.equal(failures.length, 0, `同じURLが重複している検索語: ${failures.join(" / ")}`);
+});
+
+check("まとめても0件になる検索語が無い（全テスト語で1行以上残る）", () => {
+  const empty = SEARCH_TEST_CASES.filter((c) => grouped(c.query).length === 0).map((c) => c.query);
+  assert.equal(empty.length, 0, `まとめた結果が0行になった検索語: ${empty.join(" / ")}`);
+});
+
 // --- 集計 ------------------------------------------------------------------
 console.log("\nPhase195 検索品質サマリー");
 console.log(`  検索テスト語数: ${SEARCH_TEST_CASES.length}`);
@@ -442,6 +592,7 @@ console.log(`  期待結果を満たした語数: ${expectationPassCount}`);
 console.log(`  0件になった語数: ${emptyResultCount}`);
 console.log(`  表記ゆれグループ数: ${dictionary.orthographicVariants.length}（表記対比検証 ${variantCheckCount}件）`);
 console.log(`  言い換え案内（queryHints）数: ${dictionary.queryHints.length}`);
-console.log(`  検索順位テスト数: ${rankingCheckCount}`);
+console.log(`  検索順位テスト数: ${rankingCheckCount}（うちPhase199の役職名検索 ${roleRankingCheckCount}件）`);
+console.log(`  同じURLへまとめた重複結果の件数（テスト対象3ページの合計）: ${duplicateFixCount}`);
 
 console.log(`\n✅ test-search-quality: ${passCount} checks passed\n`);

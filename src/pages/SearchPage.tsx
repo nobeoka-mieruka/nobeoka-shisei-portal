@@ -12,6 +12,7 @@ import { formatJapaneseDate } from "../config/site";
 import {
   getAlternativeQueries,
   getSuggestions,
+  groupResultsByUrl,
   searchEntries,
   sortResults,
   type AlternativeQuery,
@@ -185,7 +186,14 @@ export function SearchPage() {
   );
 
   const sortedResults = useMemo(() => sortResults(filteredResults, sort), [filteredResults, sort]);
-  const visibleResults = sortedResults.slice(0, visibleCount);
+
+  // Phase199：同じページ（同じURL）を指す結果は1行にまとめて表示する。
+  // 市政年表・更新履歴・自治体比較は、1ページの中の個別項目を索引に登録しているため、
+  // まとめないと同じ遷移先の行が10件以上続き、他の情報が下へ押し出されてしまう。
+  // まとめた一致の見出しは行の中に残すので、どの項目が一致したかは分かる。
+  const groupedResults = useMemo(() => groupResultsByUrl(sortedResults), [sortedResults]);
+  const visibleGroups = groupedResults.slice(0, visibleCount);
+  const mergedCount = sortedResults.length - groupedResults.length;
 
   // 検索語の入力が落ち着いてから（連続キー入力のたびに送信しないよう）、0件率・
   // 検索回数を把握するための最小限のイベントを送信する。検索語そのものは送らない。
@@ -470,7 +478,11 @@ export function SearchPage() {
 
           <div className="mt-3 flex items-center justify-between gap-2">
             <p className="text-sm text-on-surface-variant" aria-live="polite">
-              {sortedResults.length > 0 ? `${sortedResults.length}件見つかりました` : "0件"}
+              {sortedResults.length > 0
+                ? mergedCount > 0
+                  ? `${sortedResults.length}件見つかりました（同じページを指す結果をまとめて${groupedResults.length}件で表示）`
+                  : `${sortedResults.length}件見つかりました`
+                : "0件"}
             </p>
             <label className="flex min-h-11 max-w-full shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <span className="sr-only">並び替え</span>
@@ -593,7 +605,7 @@ export function SearchPage() {
           ) : (
             <>
               <ul className="mt-3 space-y-3">
-                {visibleResults.map(({ entry, matchedKeywords, matchedAiCandidateKeywords }, index) => (
+                {visibleGroups.map(({ result: { entry, matchedKeywords, matchedAiCandidateKeywords }, others }, index) => (
                   <li key={entry.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1">
                     <Link
                       to={entry.url}
@@ -632,17 +644,27 @@ export function SearchPage() {
                         </p>
                       )}
                     </Link>
+                    {others.length > 0 && (
+                      <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                        このページ内の他の一致（{others.length}件）：
+                        {others
+                          .slice(0, 3)
+                          .map((o) => o.entry.title)
+                          .join("、")}
+                        {others.length > 3 && ` ほか${others.length - 3}件`}
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>
 
-              {visibleCount < sortedResults.length && (
+              {visibleCount < groupedResults.length && (
                 <button
                   type="button"
                   onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
                   className={`mt-4 w-full rounded-full border border-outline-variant py-2.5 text-sm font-medium text-on-surface-variant transition hover:bg-surface-container-high ${linkClass}`}
                 >
-                  さらに表示（残り{sortedResults.length - visibleCount}件）
+                  さらに表示（残り{groupedResults.length - visibleCount}件）
                 </button>
               )}
             </>
