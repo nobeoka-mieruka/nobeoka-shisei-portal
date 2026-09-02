@@ -1,15 +1,19 @@
 import { useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import membersData from "../data/members.json";
-import billVotesData from "../data/billVotes.json";
+// Phase193：トップページで使うのは「公開議案の件数」と「一般質問の件数」だけのため、
+// 本文を含む billVotes.json（約2.6MB）・councilSpeechSummaries.json（約6.0MB）ではなく、
+// 同じデータから項目を絞って生成した軽量インデックスを読み込む（件数は元データと同一）。
+// トップページはエントリチャンクに含まれるため、ここでのimportが初期ロード量を直接左右する。
+import billVotesIndexData from "../data/billVotesIndex.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
-import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+import councilSpeechIndexData from "../data/councilSpeechIndex.json";
 import updateHistoryData from "../data/updateHistory.json";
 import type {
   CouncilMember,
   Gender,
-  BillVoteItem,
+  BillVoteIndexItem,
   Mayor,
   GeneralQuestionItem,
   CouncilSpeechSummaryData,
@@ -50,10 +54,10 @@ import { homeDataCoverageItems } from "../lib/dataCompletenessSummary";
 import { formatCoverageRate, COMPLETENESS_STATUS_LABELS } from "../lib/completeness";
 
 const members = membersData as CouncilMember[];
-const billVotes = publicBills(billVotesData as BillVoteItem[]);
+const billVotes = publicBills(billVotesIndexData as BillVoteIndexItem[]);
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
-const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const speechSummaryData = councilSpeechIndexData as unknown as CouncilSpeechSummaryData;
 const vacantSeats = Math.max(COUNCIL_STATUTORY_SEATS - members.length, 0);
 const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
 // TASK-077：更新履歴（updateHistory.json）は手動キュレーションされた既存データを

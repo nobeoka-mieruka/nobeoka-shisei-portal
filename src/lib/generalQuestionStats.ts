@@ -61,7 +61,12 @@ export function calculateGeneralQuestionStats(
 ): GeneralQuestionStats {
   const confirmedSpeeches = questionLikeSpeeches(allPublicSpeeches(speechRecords));
   const confirmedCount = confirmedSpeeches.length;
-  const totalQuestionItemCount = confirmedSpeeches.reduce((sum, speech) => sum + speech.questionItems.length, 0);
+  // Phase193：軽量インデックス（councilSpeechIndex.json）はquestionItems本文を持たず、
+  // 件数だけをquestionItemCountとして保持する。どちらの入力でも同じ件数になるようにする。
+  const totalQuestionItemCount = confirmedSpeeches.reduce(
+    (sum, speech) => sum + (speech.questionItemCount ?? speech.questionItems.length),
+    0,
+  );
 
   const status = questionCollectionStatusData as {
     generatedAt: string;

@@ -14,14 +14,18 @@ import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
 import mayorData from "../data/mayor.json";
 import generalQuestionsData from "../data/generalQuestions.json";
-import billVotesData from "../data/billVotes.json";
+// Phase193：SEOのtitle・descriptionと「この議員の賛否が確認できるか」の判定に必要な項目だけを
+// 抜き出した軽量インデックスを使う（billVotes.json本体〔約2.6MB〕は、要約文・根拠資料を
+// 表示する画面側でimportする）。値はbillVotes.jsonからの純粋な抜き出しで内容は同一。
+import billVotesIndexData from "../data/billVotesIndex.json";
 import councilSessionsData from "../data/councilSessions.json";
 import mayorPromisesData from "../data/mayorPromises.json";
 import financeDashboardData from "../data/financeDashboard.json";
 import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
 import compensationComparisonData from "../data/compensationComparison.json";
 import archiveCouncilLeadershipData from "../data/archiveCouncilLeadership.json";
-import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
+// Phase193：同上。本文（質問項目・出典一覧）を含まない軽量インデックスを使う。
+import councilSpeechIndexData from "../data/councilSpeechIndex.json";
 import themesData from "../data/themes.json";
 import { mayorPressConferences } from "../data/mayorPressConferences";
 import politicalFundOrganizationsData from "../data/politicalFundOrganizations.json";
@@ -32,9 +36,11 @@ import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import electionResultsData from "../data/electionResults.json";
-import { buildPersonIndex, parsePersonSlug, personTypeLabel } from "./people";
+// Phase193：people.tsはbillVotes.json・councilSpeechSummaries.jsonを読み込むため、
+// スラッグ解釈と表示ラベルだけを持つ軽量モジュールからimportする。
+import { parsePersonSlug, personTypeLabel, type PersonType } from "./personSlug";
 import type {
-  BillVoteItem,
+  BillVoteIndexItem,
   Committee,
   CompensationComparisonEntry,
   CouncilMember,
@@ -99,10 +105,10 @@ const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
 const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
-const billVotes = publicBills(billVotesData as BillVoteItem[]);
+const billVotes = publicBills(billVotesIndexData as BillVoteIndexItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
-const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const speechSummaryData = councilSpeechIndexData as unknown as CouncilSpeechSummaryData;
 const themes = themesData as Theme[];
 const financeDashboard = financeDashboardData as FinanceDashboardData;
 const entertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
@@ -1368,7 +1374,7 @@ function memberSeo(id: string, options?: SeoOptions): SeoResult {
   }
 
   const memberQuestions = generalQuestions.filter((q) => q.memberId === member.id);
-  const memberHasBillVotes = billVotes.some((b) => b.memberVotes.some((v) => v.memberId === member.id));
+  const memberHasBillVotes = billVotes.some((b) => (b.memberIdsWithVote ?? []).includes(member.id));
 
   const titleParts = ["プロフィール"];
   if (memberQuestions.length > 0) titleParts.push("一般質問");
@@ -1591,11 +1597,24 @@ function councilDocumentDetailSeo(
   );
 }
 
+/**
+ * /people/:slug のSEOで必要なのは人物名だけのため、buildPersonIndex()（活動件数の集計や
+ * 統合タイムラインまで組み立てる重い処理）は呼ばず、人物一覧と同じ3つの情報源
+ * （members.json／formerMembers.json／archiveMayors.json）から氏名だけを引く。
+ * 対象人物の集合・氏名はbuildPersonIndex()と同一。
+ */
+function personDisplayName(personType: PersonType, id: string): string | undefined {
+  if (personType === "member") return members.find((m) => m.id === id)?.name;
+  if (personType === "former-member") return formerMembers.find((m) => m.id === id)?.name;
+  return archiveMayors.find((m) => m.id === id)?.name;
+}
+
 /** /people/:slug */
 function personDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   const parsed = parsePersonSlug(slug);
-  const person = parsed ? buildPersonIndex().find((p) => p.slug === slug) : undefined;
-  if (!parsed || !person) return notFound(`/people/${slug}`, "人物情報");
+  const personName = parsed ? personDisplayName(parsed.personType, parsed.id) : undefined;
+  if (!parsed || !personName) return notFound(`/people/${slug}`, "人物情報");
+  const person = { name: personName };
 
   return makeResult(
     {

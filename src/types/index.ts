@@ -1879,6 +1879,12 @@ export interface CouncilSpeech {
   topics: string[];
   shortSummary?: string;
   questionItems: CouncilSpeechQuestionItem[];
+  /**
+   * Phase193：軽量インデックス（src/data/councilSpeechIndex.json）でのみ設定される、
+   * 本来のquestionItemsの件数。本文を含むcouncilSpeechSummaries.jsonでは未設定で、
+   * 件数を数える処理は `questionItemCount ?? questionItems.length` を使う。
+   */
+  questionItemCount?: number;
   summarySources: CouncilSpeechSummarySource[];
   /** ISO形式。人が公式会議録と照合した日時。未確認の場合はnull。 */
   verifiedAt?: string | null;
@@ -1955,7 +1961,31 @@ export interface CouncilSpeechSummaryData {
   version: number;
   /** ISO形式。このデータを最後に生成した日時。null＝まだ生成（会議録取得・解析）を実行していない。 */
   generatedAt: string | null;
+  /**
+   * Phase193：src/data/councilSpeechIndex.json（本文を含まない軽量インデックス）でのみtrue。
+   * 元データ（councilSpeechSummaries.json）では未設定。
+   */
+  isLightweightIndex?: boolean;
   members: CouncilMemberSpeechRecord[];
+}
+
+/**
+ * Phase193：src/data/billVotesIndex.json 1件分（議案の軽量インデックス）。
+ *
+ * SEOのtitle・description生成と件数集計だけに使う射影で、要約文・根拠資料URL・
+ * 確認メモなどは含まない。議案の中身を表示する画面は billVotes.json を直接importすること。
+ * 値は billVotes.json からの純粋な抜き出しで、推測値・補完値は含まない。
+ */
+export interface BillVoteIndexItem {
+  id: string;
+  billNumber: string;
+  billTitle: string;
+  result: BillVoteResult;
+  verificationStatus?: BillVerificationStatus;
+  publicationStatus?: BillPublicationStatus;
+  proposerType?: BillProposerType;
+  /** 個人別賛否が公開されている議案のみ設定。未設定＝賛否を確認できる議員がいない。 */
+  memberIdsWithVote?: string[];
 }
 
 /**

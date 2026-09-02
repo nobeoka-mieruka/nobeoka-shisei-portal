@@ -11,7 +11,9 @@ import archivePoliciesData from "../data/archivePolicies.json";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
-import searchIndexData from "../data/searchIndex.json";
+// Phase193：ここで使うのは登録件数だけのため、約2.9MBのsearchIndex.json本体ではなく、
+// 同時に生成される件数のみのメタデータを読み込む（件数はsearchIndex.jsonと常に一致する）。
+import searchIndexMetaData from "../data/searchIndexMeta.json";
 import committeesData from "../data/committees.json";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
 import politicalFundOrganizationsData from "../data/politicalFundOrganizations.json";
@@ -637,7 +639,7 @@ export function DataStatusPage() {
   const platform: DataDomain[] = [
     {
       label: "検索インデックス登録件数",
-      count: searchIndexData.length,
+      count: searchIndexMetaData.entryCount,
       unit: "件",
       detail: "議員・元議員・市長・議案・条例・請願・陳情・政策・一般質問・財政データ等を横断的に検索対象としています。",
       linkTo: "/search",
