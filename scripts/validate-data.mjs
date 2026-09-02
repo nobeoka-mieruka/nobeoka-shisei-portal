@@ -2880,6 +2880,66 @@ try {
   warn("searchIndex.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
+// --- searchSynonyms.json（サイト内検索の表記ゆれ辞書） ---
+// 同じ語の書き分け（orthographicVariants）と、市民の言い換え語の案内（queryHints）を分けて管理する。
+// 意味の異なる語を同一視しないよう、語の重複と根拠noteの有無を検証する。
+try {
+  const searchSynonyms = readJson("src/data/searchSynonyms.json");
+  const synonymTag = "searchSynonyms.json";
+
+  if (!DATE_RE.test(searchSynonyms.lastUpdated ?? "")) {
+    err(synonymTag, `lastUpdatedの形式が不正です: ${searchSynonyms.lastUpdated}`);
+  }
+
+  const variantGroupIds = new Set();
+  const variantTerms = new Map();
+  for (const group of searchSynonyms.orthographicVariants ?? []) {
+    const tag = `${synonymTag} (orthographicVariants: ${group.id ?? "id不明"})`;
+    if (isBlank(group.id)) err(tag, "idが空です");
+    else if (variantGroupIds.has(group.id)) err(tag, `idが重複しています: ${group.id}`);
+    else variantGroupIds.add(group.id);
+
+    if (!Array.isArray(group.terms) || group.terms.length < 2) {
+      err(tag, "termsは2件以上必要です（同じ語の書き分けを登録するため）");
+    } else {
+      for (const term of group.terms) {
+        if (isBlank(term)) {
+          err(tag, "termsに空の語があります");
+          continue;
+        }
+        if (variantTerms.has(term)) {
+          err(tag, `「${term}」が${variantTerms.get(term)}にも登録されています（同じ語を複数グループへ登録しない）`);
+        } else {
+          variantTerms.set(term, group.id);
+        }
+      }
+    }
+    if (isBlank(group.note)) err(tag, "noteが空です（同じ語と判断した根拠を必ず書く）");
+  }
+
+  const hintIds = new Set();
+  for (const hint of searchSynonyms.queryHints ?? []) {
+    const tag = `${synonymTag} (queryHints: ${hint.id ?? "id不明"})`;
+    if (isBlank(hint.id)) err(tag, "idが空です");
+    else if (hintIds.has(hint.id)) err(tag, `idが重複しています: ${hint.id}`);
+    else hintIds.add(hint.id);
+
+    if (isBlank(hint.query)) err(tag, "queryが空です");
+    if (!Array.isArray(hint.suggestions) || hint.suggestions.length === 0) {
+      err(tag, "suggestionsが空です");
+    } else if (hint.suggestions.some((s) => s === hint.query)) {
+      err(tag, "suggestionsにquery自身が含まれています");
+    }
+    if (isBlank(hint.note)) err(tag, "noteが空です（利用者へ表示する説明を必ず書く）");
+    // 言い換え語（意味が完全には同じでない語）を、表記ゆれとして自動展開してはいけない。
+    if (variantTerms.has(hint.query) && (hint.suggestions ?? []).some((s) => variantTerms.has(s))) {
+      err(tag, `「${hint.query}」と提案語が表記ゆれ辞書にも登録されています（役割を分けること）`);
+    }
+  }
+} catch {
+  warn("searchSynonyms.json", "読み込めませんでした（存在しない場合はスキップ）");
+}
+
 // --- councilSpeechSummaries.json ---
 const VALID_SPEECH_SUMMARY_STATUSES = new Set([
   "verified",

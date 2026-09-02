@@ -2229,3 +2229,38 @@ export interface SearchIndexEntry {
    */
   aiCandidateKeywords?: string[];
 }
+
+/**
+ * 同じ語の書き分け（送り仮名・交ぜ書き・公式略称）のグループ。
+ * 検索時に相互展開し、どの表記で検索しても同じ結果が得られるようにする。
+ * 意味の異なる語（例：「DX」と「デジタル」）は登録しない。
+ */
+export interface SearchOrthographicVariantGroup {
+  id: string;
+  /** 相互に置き換え可能な表記。2件以上。 */
+  terms: string[];
+  /** 同一語と判断した根拠（公開資料での書き分け状況など）。 */
+  note: string;
+}
+
+/**
+ * 市民がよく使う言い換え語から、公式資料での言い方への案内。
+ * 検索結果を自動で差し替えることはせず、「別の言い方で探す」提案としてのみ表示する。
+ */
+export interface SearchQueryHint {
+  id: string;
+  /** 利用者が入力しやすい語。 */
+  query: string;
+  /** 提案する検索語（このサイトで実際に結果が出る語）。 */
+  suggestions: string[];
+  /** 画面に表示する補足説明。 */
+  note: string;
+}
+
+/** src/data/searchSynonyms.jsonの構造。 */
+export interface SearchSynonymDictionary {
+  note: string;
+  lastUpdated: string;
+  orthographicVariants: SearchOrthographicVariantGroup[];
+  queryHints: SearchQueryHint[];
+}

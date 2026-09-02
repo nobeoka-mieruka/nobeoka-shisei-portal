@@ -9,7 +9,15 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { useSearchHistory } from "../hooks/useSearchHistory";
 import { formatJapaneseDate } from "../config/site";
-import { getSuggestions, searchEntries, sortResults, type SearchResult, type SearchSortKey } from "../lib/search";
+import {
+  getAlternativeQueries,
+  getSuggestions,
+  searchEntries,
+  sortResults,
+  type AlternativeQuery,
+  type SearchResult,
+  type SearchSortKey,
+} from "../lib/search";
 import { trackEvent } from "../lib/analytics";
 
 const searchIndex = searchIndexData as SearchIndexEntry[];
@@ -53,6 +61,13 @@ function isKnownSortKey(value: string): value is SearchSortKey {
 }
 
 const EXAMPLE_KEYWORDS = ["市長公約", "一般質問", "議案", "条例", "政策", "子育て", "防災", "報酬", "財政", "市役所案内"];
+
+/** 0件のときに案内する「別の言い方」の、候補を出した理由の表示名。 */
+const ALTERNATIVE_REASON_LABELS: Record<AlternativeQuery["reason"], string> = {
+  hint: "このサイトでの言い方",
+  narrower: "検索語に含まれる言葉",
+  token: "1語ずつ検索",
+};
 
 const PAGE_SIZE = 20;
 const URL_SYNC_DELAY_MS = 200;
@@ -184,6 +199,21 @@ export function SearchPage() {
   }, [query]);
 
   const suggestions = useMemo(() => (hasQuery ? getSuggestions(searchIndex, query, 8) : []), [query, hasQuery]);
+
+  const hasActiveFilter = typeFilter !== "all" || fiscalYearFilter !== "" || verificationStatusFilter !== "";
+
+  // 検索語自体で1件も見つからなかったときだけ、実際に結果が出る「別の言い方」を探す
+  // （辞書の言い換え候補・検索語に含まれる語・1語ずつの検索。件数を確認済みの候補だけを案内する）。
+  const alternativeQueries: AlternativeQuery[] = useMemo(
+    () => (hasQuery && allResults.length === 0 ? getAlternativeQueries(searchIndex, query, { includeAi }, 4) : []),
+    [query, hasQuery, allResults.length, includeAi],
+  );
+
+  const clearFilters = () => {
+    setTypeFilter("all");
+    setFiscalYearFilter("");
+    setVerificationStatusFilter("");
+  };
 
   const commitQuery = (value: string) => {
     setQuery(value);
@@ -456,24 +486,80 @@ export function SearchPage() {
           </div>
 
           {sortedResults.length === 0 ? (
-            <div className="mt-6 space-y-4 rounded-xl bg-surface-container-low p-6 text-center sm:p-8">
-              <p className="text-sm text-on-surface-variant">該当する情報が見つかりませんでした。</p>
-              {(typeFilter !== "all" || fiscalYearFilter !== "" || verificationStatusFilter !== "") && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setTypeFilter("all");
-                    setFiscalYearFilter("");
-                    setVerificationStatusFilter("");
-                  }}
-                  className={`inline-flex min-h-11 items-center rounded-full border border-outline-variant px-4 text-sm font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
-                >
-                  絞り込みを解除して検索語のみで探す
-                </button>
+            <div className="mt-6 space-y-4 rounded-xl bg-surface-container-low p-6 sm:p-8">
+              {allResults.length > 0 ? (
+                <>
+                  <p className="text-center text-sm text-on-surface-variant">
+                    「{query.trim()}」では{allResults.length}件見つかりましたが、現在の絞り込み条件に一致する結果はありません。
+                  </p>
+                  {hasActiveFilter && (
+                    <div className="text-center">
+                      <button
+                        type="button"
+                        onClick={clearFilters}
+                        className={`inline-flex min-h-11 items-center rounded-full bg-primary px-4 text-sm font-medium text-on-primary transition hover:opacity-90 ${linkClass}`}
+                      >
+                        絞り込みを解除して{allResults.length}件を表示する
+                      </button>
+                    </div>
+                  )}
+                  {availableTypes.length > 0 && (
+                    <div>
+                      <p className="text-center text-xs font-medium text-on-surface-variant">別の種類から探す</p>
+                      <ul className="mt-2 flex flex-wrap justify-center gap-2">
+                        {availableTypes.map((t) => (
+                          <li key={t}>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setTypeFilter(t);
+                                setFiscalYearFilter("");
+                                setVerificationStatusFilter("");
+                              }}
+                              className={`min-h-11 rounded-full bg-surface-container-high px-3.5 text-sm text-on-surface transition hover:bg-surface-container-highest ${linkClass}`}
+                            >
+                              {typeLabels[t]}（{countsByType.get(t) ?? 0}件）
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <p className="text-center text-sm text-on-surface-variant">
+                    「{query.trim()}」に該当する情報は見つかりませんでした。
+                  </p>
+                  {alternativeQueries.length > 0 && (
+                    <div>
+                      <p className="text-center text-xs font-medium text-on-surface-variant">別の言い方で探す</p>
+                      <ul className="mx-auto mt-2 max-w-sm space-y-2">
+                        {alternativeQueries.map((a) => (
+                          <li key={a.term}>
+                            <button
+                              type="button"
+                              onClick={() => commitQuery(a.term)}
+                              className={`flex w-full min-h-11 flex-col items-start gap-0.5 rounded-xl bg-surface-container-high px-4 py-2 text-left transition hover:bg-surface-container-highest ${linkClass}`}
+                            >
+                              <span className="text-sm font-medium text-on-surface">
+                                「{a.term}」で検索（{a.count}件）
+                              </span>
+                              <span className="text-xs text-on-surface-variant">
+                                {a.note ?? ALTERNATIVE_REASON_LABELS[a.reason]}
+                              </span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </>
               )}
+
               <ul className="mx-auto max-w-sm space-y-1 text-left text-xs text-on-surface-variant">
-                <li>・検索語を短くする</li>
-                <li>・別の表現で検索する</li>
+                <li>・検索語を短くする（「延岡駅前の再開発」→「延岡駅」など）</li>
+                <li>・別の表現で検索する（「議事録」→「会議録」など）</li>
                 <li>・年度や種類の絞り込みを解除する</li>
                 <li>
                   ・
@@ -484,7 +570,7 @@ export function SearchPage() {
                 </li>
               </ul>
               <div>
-                <p className="text-xs font-medium text-on-surface-variant">検索例</p>
+                <p className="text-center text-xs font-medium text-on-surface-variant">検索例</p>
                 <ul className="mt-2 flex flex-wrap justify-center gap-2">
                   {EXAMPLE_KEYWORDS.map((k) => (
                     <li key={k}>
