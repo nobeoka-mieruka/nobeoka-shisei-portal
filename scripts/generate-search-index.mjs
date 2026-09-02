@@ -40,7 +40,10 @@ for (const m of members) {
     title: m.name,
     description: [factionName(m.factionId), ...(m.committees ?? [])].filter(Boolean).join("／"),
     url: `/members/${m.id}`,
-    keywords: [m.nameKana, factionName(m.factionId), ...(m.committees ?? []), m.district].filter(Boolean),
+    // 議員ページのtitleは氏名だけなので、「議員」で検索したときにも現職議員が見つかるようにする。
+    keywords: ["市議会議員", "議員", "現職議員", m.nameKana, factionName(m.factionId), ...(m.committees ?? []), m.district].filter(
+      Boolean,
+    ),
     content: [m.profile, ...(m.sns ?? []).map((s) => s.platform)].filter(Boolean).join(" "),
     sourceId: m.id,
   });
@@ -297,7 +300,9 @@ try {
       title: truncate(p.promiseText, 60),
       description: `${p.categoryTitle}／${p.statusLabel}`,
       url: p.id ? `/mayor/policy-progress/${p.id}` : anchor ? `/mayor/policy-progress#${anchor}` : "/mayor/policy-progress",
-      keywords: [p.categoryTitle, p.statusLabel, ...evidenceLabels],
+      // 公約の本文（title）には「公約」という語が入らないため、区分名をキーワードとして持たせる
+      // （「公約」で検索したときに個別の公約が見つからなかったため）。
+      keywords: ["市長公約", "公約", p.categoryTitle, p.statusLabel, ...evidenceLabels],
       content: [p.citizenSummary, ...(p.progressSummary ?? []), p.notes].filter(Boolean).join(" "),
       date: p.lastVerified,
       sourceId: p.id,
@@ -350,7 +355,8 @@ for (const q of generalQuestions) {
     title: q.title,
     description: truncate(q.summary, 80),
     url: `/questions/${q.id}`,
-    keywords: [q.memberName, q.sessionName, q.fiscalYear, ...(q.topics ?? [])].filter(Boolean),
+    // 質問のtitle（質問項目の並び）には「一般質問」という語が入らないため、区分名を持たせる。
+    keywords: ["一般質問", q.memberName, q.sessionName, q.fiscalYear, ...(q.topics ?? [])].filter(Boolean),
     content: [...(q.questionItems ?? []), q.answerSummary].filter(Boolean).join(" "),
     date: q.questionDate,
     sourceId: q.id,
@@ -860,6 +866,52 @@ const staticPages = [
     description: "広報紙「広報のべおか」の紙面をテキスト化し、キーワードで検索できる試験公開中のツールです。",
     url: "/koho-search",
     keywords: ["広報のべおか", "広報紙", "文字起こし", "OCR"],
+  },
+  // 主要な一覧ページ（「一般質問」「議案」「公約」等でサイト内検索したときに、個別データだけでなく
+  // その入口ページ自体も見つかるようにする）。タイトル・説明はsrc/lib/seo.tsの各ページのmetaと同じ文言を使う。
+  {
+    id: "page-questions",
+    title: "一般質問データベース",
+    description: "延岡市議会の一般質問を議員別、テーマ別、年度別に検索できます。質問項目・要約・出典を掲載しています。",
+    url: "/questions",
+    keywords: ["一般質問", "代表質問", "質問", "議員別", "テーマ別"],
+  },
+  {
+    id: "page-bills-votes",
+    title: "議案ごとの賛否",
+    description: "延岡市議会に提出された議案の概要、採決結果、議員ごとの賛成・反対などを確認できます。",
+    url: "/bills/votes",
+    keywords: ["議案", "採決結果", "賛否", "賛成", "反対", "議決"],
+  },
+  {
+    id: "page-mayor-policy-progress",
+    title: "市長公約の進捗状況",
+    description:
+      "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料をキーワード・政策分野・進捗状況などで検索できます。",
+    url: "/mayor/policy-progress",
+    keywords: ["市長公約", "公約", "進捗状況", "マニフェスト"],
+  },
+  {
+    id: "page-people",
+    title: "人物から探す",
+    description: "現職議員・元議員・市長を横断して、関連する政策・議案・条例・請願・陳情をまとめて確認できます。",
+    url: "/people",
+    keywords: ["人物", "議員一覧", "議員", "元議員", "市長"],
+  },
+  {
+    id: "page-history",
+    title: "延岡市政90年の歴史年表（市制施行〜現在）",
+    description:
+      "1933年の市制施行から現在までの延岡市政の歩みを、市制施行、合併、市庁舎、災害、公共事業等の出来事と歴代市長、人口の推移とあわせて年代順に整理しています。",
+    url: "/history",
+    keywords: ["市政年表", "年表", "歴史", "市制施行", "合併"],
+  },
+  {
+    id: "page-updates",
+    title: "更新履歴",
+    description: "延岡市政見える化ポータルの機能追加、データ更新、表示改善などの更新履歴を掲載しています。",
+    url: "/updates",
+    keywords: ["更新履歴", "更新情報", "お知らせ"],
   },
 ];
 for (const p of staticPages) {
