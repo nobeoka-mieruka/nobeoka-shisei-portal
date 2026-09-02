@@ -280,13 +280,13 @@ export function MayorDetailPage() {
                     <div>
                       <dt className="inline">前任市長：</dt>
                       <dd className="inline">
-                        {previous ? <Link to={`/mayors/${previous.slug}`} className={`text-primary hover:underline ${linkClass}`}>{previous.name}</Link> : "確認中"}
+                        {previous ? <Link to={`/mayors/${previous.slug}`} className={`text-primary underline ${linkClass}`}>{previous.name}</Link> : "確認中"}
                       </dd>
                     </div>
                     <div>
                       <dt className="inline">後任市長：</dt>
                       <dd className="inline">
-                        {next ? <Link to={`/mayors/${next.slug}`} className={`text-primary hover:underline ${linkClass}`}>{next.name}</Link> : "確認中"}
+                        {next ? <Link to={`/mayors/${next.slug}`} className={`text-primary underline ${linkClass}`}>{next.name}</Link> : "確認中"}
                       </dd>
                     </div>
                   </dl>
@@ -304,7 +304,7 @@ export function MayorDetailPage() {
           <ul className="mt-2 space-y-2">
             {relatedPolicies.map((p) => (
               <li key={p.id}>
-                <Link to={`/policies/${p.slug}`} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                <Link to={`/policies/${p.slug}`} className={`text-sm font-medium text-primary underline ${linkClass}`}>
                   {p.title}
                 </Link>
               </li>
@@ -330,7 +330,7 @@ export function MayorDetailPage() {
             <ul className="mt-2 space-y-2">
               {relatedDocuments.map((d) => (
                 <li key={d.id}>
-                  <Link to={documentPath(d)} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                  <Link to={documentPath(d)} className={`text-sm font-medium text-primary underline ${linkClass}`}>
                     [{documentTypeLabel(d.documentType)}] {d.title}
                   </Link>
                 </li>
@@ -371,7 +371,7 @@ export function MayorDetailPage() {
         ) : (
           <p className="mt-2 text-sm text-on-surface-variant">
             財政年度別アーカイブ（
-            <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
+            <Link to="/finance" className={`text-primary underline ${linkClass}`}>
               財政ページ
             </Link>
             ）は{archiveFiscalYearMinFy != null && archiveFiscalYearMaxFy != null ? `FY${archiveFiscalYearMinFy}〜${archiveFiscalYearMaxFy}年度分` : "一部年度分"}
@@ -386,7 +386,7 @@ export function MayorDetailPage() {
           <>
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
               延岡市公式ホームページの年表・資料をもとにした「
-              <Link to={`/history?person=${mayor.id}`} className={`text-primary hover:underline ${linkClass}`}>
+              <Link to={`/history?person=${mayor.id}`} className={`text-primary underline ${linkClass}`}>
                 市政年表
               </Link>
               」のうち、この市長の在任期間（確認できた任期）に含まれることが一次資料から確認できた出来事です（在任中に発生した出来事であり、この市長が実施した政策・実績を示すものではありません）。市庁舎・行政組織・災害・公共事業・教育福祉産業等を対象としており、網羅を保証するものではありません。
@@ -404,7 +404,7 @@ export function MayorDetailPage() {
                   <p className="mt-1 text-sm text-on-surface-variant">{ev.summary}</p>
                   <Link
                     to={`/timeline/${civicTimelineEventFiscalYear(ev)}`}
-                    className={`mt-2 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}
+                    className={`mt-2 inline-block text-xs font-medium text-primary underline ${linkClass}`}
                   >
                     同じ年度の財政・人口・議案等をまとめて見る
                   </Link>
@@ -413,7 +413,7 @@ export function MayorDetailPage() {
             </ul>
             <Link
               to={`/history?person=${mayor.id}`}
-              className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+              className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}
             >
               市政年表でこの市長の在任期間の出来事だけを見る
             </Link>
@@ -421,7 +421,7 @@ export function MayorDetailPage() {
         ) : (
           <p className="mt-2 text-sm text-on-surface-variant">
             当サイトの
-            <Link to="/history" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+            <Link to="/history" className={`mx-1 text-primary underline ${linkClass}`}>
               市政年表
             </Link>
             のうち、この市長の在任期間に一次資料で明確に紐づけられた出来事は現在ありません（市政年表自体に出来事が掲載されていない、または在任期間との対応が資料から確定できないためで、在任中に何も無かったという意味ではありません）。

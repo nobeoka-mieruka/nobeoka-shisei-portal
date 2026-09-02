@@ -41,7 +41,7 @@ export function ResultCard({ entry, categoryName, onRestart, onShowList }: Resul
 
         <dl className="mt-4 space-y-4">
           <div>
-            <dt className="text-xs font-medium text-on-primary-container/70">相談内容</dt>
+            <dt className="text-xs font-medium text-on-primary-container/80">相談内容</dt>
             <dd className="mt-1 text-base leading-relaxed text-on-primary-container">
               <span className="font-medium">{categoryName}</span>
               {consultationSummary && (
@@ -51,9 +51,9 @@ export function ResultCard({ entry, categoryName, onRestart, onShowList }: Resul
           </div>
 
           <div className="flex items-start gap-2.5">
-            <BuildingIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/70" />
+            <BuildingIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/80" />
             <div className="min-w-0">
-              <dt className="text-xs font-medium text-on-primary-container/70">相談先（担当課）</dt>
+              <dt className="text-xs font-medium text-on-primary-container/80">相談先（担当課）</dt>
               <dd className="text-xl font-bold leading-tight break-words text-on-primary-container sm:text-2xl">
                 {entry.department}
               </dd>
@@ -64,9 +64,9 @@ export function ResultCard({ entry, categoryName, onRestart, onShowList }: Resul
           </div>
 
           <div className="flex items-start gap-2.5">
-            <PhoneIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/70" />
+            <PhoneIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/80" />
             <div className="min-w-0">
-              <dt className="text-xs font-medium text-on-primary-container/70">電話番号</dt>
+              <dt className="text-xs font-medium text-on-primary-container/80">電話番号</dt>
               {telHref ? (
                 <dd>
                   <a
@@ -77,7 +77,7 @@ export function ResultCard({ entry, categoryName, onRestart, onShowList }: Resul
                     {displayPhone}
                   </a>
                   {!hasConfirmedPhone && (
-                    <span className="ml-2 align-middle text-xs text-on-primary-container/70">
+                    <span className="ml-2 align-middle text-xs text-on-primary-container/80">
                       （代表電話・内容をお伝えください）
                     </span>
                   )}
@@ -89,21 +89,21 @@ export function ResultCard({ entry, categoryName, onRestart, onShowList }: Resul
           </div>
 
           <div className="flex items-start gap-2.5">
-            <ClockIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/70" />
+            <ClockIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/80" />
             <div>
-              <dt className="text-xs font-medium text-on-primary-container/70">受付時間</dt>
+              <dt className="text-xs font-medium text-on-primary-container/80">受付時間</dt>
               <dd className="text-sm text-on-primary-container">{cityGuideConfig.officeHours}</dd>
               {cityGuideConfig.note && (
-                <p className="mt-0.5 text-xs text-on-primary-container/70">※{cityGuideConfig.note}</p>
+                <p className="mt-0.5 text-xs text-on-primary-container/80">※{cityGuideConfig.note}</p>
               )}
             </div>
           </div>
 
           {entry.location && (
             <div className="flex items-start gap-2.5">
-              <MapPinIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/70" />
+              <MapPinIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/80" />
               <div className="min-w-0">
-                <dt className="text-xs font-medium text-on-primary-container/70">場所</dt>
+                <dt className="text-xs font-medium text-on-primary-container/80">場所</dt>
                 <dd className="text-sm text-on-primary-container">{entry.location}</dd>
               </div>
             </div>
@@ -111,9 +111,9 @@ export function ResultCard({ entry, categoryName, onRestart, onShowList }: Resul
 
           {entry.officialUrl && (
             <div className="flex items-start gap-2.5">
-              <GlobeIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/70" />
+              <GlobeIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-on-primary-container/80" />
               <div className="min-w-0">
-                <dt className="text-xs font-medium text-on-primary-container/70">公式ページ</dt>
+                <dt className="text-xs font-medium text-on-primary-container/80">公式ページ</dt>
                 <dd>
                   <a
                     href={entry.officialUrl}

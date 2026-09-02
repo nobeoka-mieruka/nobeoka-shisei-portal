@@ -136,11 +136,11 @@ export function HistoryPage() {
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         歴代市長の就任・退任は
-        <Link to="/mayors" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/mayors" className={`mx-1 text-primary underline ${linkClass}`}>
           歴代市長アーカイブ
         </Link>
         で、市長ごとの選挙結果・出来事の比較は
-        <Link to="/compare/mayors" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/compare/mayors" className={`mx-1 text-primary underline ${linkClass}`}>
           歴代市長の比較
         </Link>
         で確認できます。延岡市公式資料等で確認できる範囲のみを掲載しており、日付が月までしか判明していない出来事は「〇〇年〇月」と表示しています。確認できていない事項は空欄にせず「確認中」「未収集」等で示しています。
@@ -217,7 +217,7 @@ export function HistoryPage() {
               href={nobeokaCensusPopulation.primarySource.url}
               target="_blank"
               rel="noreferrer"
-              className={`ml-1 text-primary hover:underline ${linkClass}`}
+              className={`ml-1 text-primary underline ${linkClass}`}
             >
               {nobeokaCensusPopulation.primarySource.title}
             </a>
@@ -279,7 +279,7 @@ export function HistoryPage() {
                       <Link
                         key={id}
                         to={`/mayors/${mayor.slug}`}
-                        className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                        className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary underline ${linkClass}`}
                       >
                         {mayor.name}市長の在任中
                       </Link>
@@ -289,7 +289,7 @@ export function HistoryPage() {
                     <Link
                       key={p.to}
                       to={p.to}
-                      className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                      className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary underline ${linkClass}`}
                     >
                       {p.label}
                     </Link>
@@ -299,7 +299,7 @@ export function HistoryPage() {
                       年度別ページへ横断的に誘導する（手入力ではなく自動算出）。 */}
                   <Link
                     to={`/timeline/${civicTimelineEventFiscalYear(event)}`}
-                    className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                    className={`rounded-full bg-surface-container-high px-3 py-1.5 text-xs font-medium text-primary underline ${linkClass}`}
                   >
                     同じ年度の市長・財政・人口等を見る
                   </Link>

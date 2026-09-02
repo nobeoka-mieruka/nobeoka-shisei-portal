@@ -451,7 +451,7 @@ export function PersonDetailPage() {
           {voteCount > 0 && (
             <>
               （
-              <Link to="/bills/votes" className={`text-primary hover:underline ${linkClass}`}>
+              <Link to="/bills/votes" className={`text-primary underline ${linkClass}`}>
                 議案ごとの賛否ページ
               </Link>
               で確認できます）
@@ -461,11 +461,11 @@ export function PersonDetailPage() {
         {(personType === "member" || personType === "former-member") && (
           <p className="mt-1 text-sm text-on-surface-variant">
             一般質問・答弁の詳細は
-            <Link to={primaryDetailLink} className={`mx-1 text-primary hover:underline ${linkClass}`}>
+            <Link to={primaryDetailLink} className={`mx-1 text-primary underline ${linkClass}`}>
               プロフィールページ
             </Link>
             でご確認いただけます。選挙・任期・委員会所属・一般質問・議案への賛否を時系列でまとめた
-            <Link to={primaryDetailLink} className={`mx-1 text-primary hover:underline ${linkClass}`}>
+            <Link to={primaryDetailLink} className={`mx-1 text-primary underline ${linkClass}`}>
               活動タイムライン
             </Link>
             も同じページで確認できます。
@@ -481,7 +481,7 @@ export function PersonDetailPage() {
           <ul className="mt-2 space-y-2">
             {policies.map((p) => (
               <li key={p.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                <Link to={`/policies/${p.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/policies/${p.slug}`} className={`text-primary underline ${linkClass}`}>
                   {p.title}
                 </Link>
                 <div className="mt-1 flex flex-wrap gap-1">
@@ -511,7 +511,7 @@ export function PersonDetailPage() {
                 d.documentType === "bill" ? "/bills" : d.documentType === "ordinance" ? "/ordinances" : d.documentType === "petition" ? "/petitions" : "/requests";
               return (
                 <li key={d.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                  <Link to={`${basePath}/${d.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                  <Link to={`${basePath}/${d.slug}`} className={`text-primary underline ${linkClass}`}>
                     {d.title}
                   </Link>
                   <p className="mt-1 text-xs text-on-surface-variant">
@@ -535,7 +535,7 @@ export function PersonDetailPage() {
               <li key={y}>
                 <Link
                   to="/finance/budget"
-                  className={`rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary hover:underline ${linkClass}`}
+                  className={`rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary underline ${linkClass}`}
                 >
                   {y}年度
                 </Link>

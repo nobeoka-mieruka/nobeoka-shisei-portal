@@ -55,7 +55,7 @@ export function ReviewFlowTimeline({ bill, allBills }: { bill: BillVoteItem; all
         <div className="text-sm text-on-surface">
           <p>
             {committee ? (
-              <Link to={`/committees/${committee.id}`} className={`font-medium text-primary hover:underline ${linkClass}`}>
+              <Link to={`/committees/${committee.id}`} className={`font-medium text-primary underline ${linkClass}`}>
                 {bill.committee}
               </Link>
             ) : (

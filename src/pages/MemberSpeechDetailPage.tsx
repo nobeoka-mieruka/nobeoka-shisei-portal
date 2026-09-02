@@ -169,7 +169,7 @@ export function MemberSpeechDetailPage() {
           {speech.summarySources.map((src, i) => (
             <li key={i}>
               {src.sourceUrl ? (
-                <a href={src.sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary hover:underline ${linkClass}`}>
+                <a href={src.sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
                   {src.title}
                 </a>
               ) : (
@@ -186,7 +186,7 @@ export function MemberSpeechDetailPage() {
         <CorrectionRequestButton pageName={`${member.name}議員の${speech.speechType}要約`} buttonLabel="要約内容の訂正・情報提供" />
       </div>
 
-      <Link to={member.href} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+      <Link to={member.href} className={`text-sm font-medium text-primary underline ${linkClass}`}>
         {member.name}議員のページに戻る
       </Link>
     </div>

@@ -151,7 +151,7 @@ export function CommitteeDetailPage() {
             <li key={m.memberId} className="flex flex-wrap items-center justify-between gap-2 py-2">
               <Link
                 to={`/members/${m.memberId}`}
-                className={`font-medium text-primary hover:underline ${linkClass}`}
+                className={`font-medium text-primary underline ${linkClass}`}
               >
                 {m.memberName}
               </Link>
@@ -185,7 +185,7 @@ export function CommitteeDetailPage() {
                       <li key={rec.id} className="flex flex-wrap items-center justify-between gap-2 py-2">
                         <Link
                           to={`/members/${rec.memberId}`}
-                          className={`font-medium text-primary hover:underline ${linkClass}`}
+                          className={`font-medium text-primary underline ${linkClass}`}
                         >
                           {rec.memberName}
                         </Link>

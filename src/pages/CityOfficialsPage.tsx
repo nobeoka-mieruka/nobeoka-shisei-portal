@@ -138,7 +138,7 @@ export function CityOfficialsPage() {
                   <ul className="mt-2 space-y-1">
                     {p.relatedLinks.map((l) => (
                       <li key={l.to}>
-                        <Link to={l.to} className={`text-xs font-medium text-primary hover:underline ${linkClass}`}>
+                        <Link to={l.to} className={`text-xs font-medium text-primary underline ${linkClass}`}>
                           {l.label}
                         </Link>
                       </li>
@@ -175,7 +175,7 @@ export function CityOfficialsPage() {
                   <ul className="mt-2 space-y-1">
                     {p.relatedLinks.map((l) => (
                       <li key={l.to}>
-                        <Link to={l.to} className={`text-xs font-medium text-primary hover:underline ${linkClass}`}>
+                        <Link to={l.to} className={`text-xs font-medium text-primary underline ${linkClass}`}>
                           {l.label}
                         </Link>
                       </li>

@@ -17,8 +17,8 @@ export function MemberCard({ member }: { member: CouncilMember }) {
       />
       <Avatar name={member.name} photoUrl={member.photoUrl} color={faction.color} size="lg" />
       <div className="min-w-0 max-w-full">
-        <p className="truncate text-base font-semibold text-on-surface">{member.name}</p>
-        <p className="truncate text-sm text-on-surface-variant">{member.nameKana}</p>
+        <p className="break-words text-base font-semibold text-on-surface">{member.name}</p>
+        <p className="break-words text-sm text-on-surface-variant">{member.nameKana}</p>
       </div>
       <FactionChip faction={faction} />
       {(member.termCount || member.committees.length > 0) && (
@@ -35,7 +35,7 @@ export function MemberCard({ member }: { member: CouncilMember }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${member.name}の公式プロフィールを新しいタブで開く`}
-          className="relative z-10 mt-0.5 inline-block max-w-full truncate rounded-full px-2.5 py-2 text-xs font-medium text-primary transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="relative z-10 mt-0.5 inline-block max-w-full break-words rounded-full px-2.5 py-2 text-xs font-medium text-primary transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <GlobeIcon className="mr-1 inline h-3.5 w-3.5 align-text-bottom" />
           公式プロフィール

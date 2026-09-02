@@ -5,6 +5,22 @@
 
 機能を追加・変更したら、必ず「完成済み」「実装中」「次に実装する」を更新してください。
 
+最終更新日（2026-09-02、Phase194時点）：（Phase194「WCAG 2.1 AA・キーボード操作 実動作監査」完了。
+`npm run build` 後の本番同等ビルドに対し、Playwright＋@axe-core/playwright で全ページコンポーネント
+78ページを自動監査し、あわせて実ブラウザで Tab／Shift+Tab／Enter／Space／Escape／矢印キーを送信する
+実動作監査を実施（監査スクリプト `scripts/audit-accessibility.mjs` を新規追加。playwright は
+Cloudflare Pages のビルドを重くしないため package.json の依存には含めず `--no-save` で導入する運用）。
+自動監査 violation は serious 95／moderate 11（計106ノード）→0、ダークテーマのコントラスト違反
+8ノード→0。加えて自動監査では検出できなかった問題6件（検索結果ページの絞り込みselectにフォーカス
+表示が無い、閉じているときも参照切れの `aria-controls` が出力される、`role="listbox"` 直下に
+`role="option"` 以外の要素がある、`<nav>` ランドマークが全ページ無名、role無しdivへのaria-label、
+200%拡大時に議員名が省略記号で切れる）を実動作で検出し修正した。キーボードトラップ0件、
+スキップリンク78ページで正常動作、320/375/640pxで横スクロール0件、`prefers-reduced-motion` は
+transitionを持つ846要素すべてで有効。会派色などデータ側（`src/data/**`）の値・statusは一切変更せず、
+表示側（`src/lib/contrastColor.ts` 新規）でコントラストを確保した。詳細は
+`reports/phase194-wcag-keyboard-audit.md` / `.json` 参照。自動監査0件はWCAG完全準拠を意味しないため、
+スクリーンリーダー実機確認は残課題として明記している）
+
 最終更新日（2026-08-29、TASK-176〜180時点）：（TASKS.md「TASK-176〜180 延岡市史(TASK-174・175)
 成果の統合フェーズ」完了。歴代市議会議長・副議長データベース（`archiveCouncilLeadership.json`、
 議長6件・副議長11件、計17件、`/committees/leadership-history`で公開、収録範囲〔2001〜2012年分〕

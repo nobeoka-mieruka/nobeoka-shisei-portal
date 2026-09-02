@@ -104,7 +104,7 @@ export function FinanceBudgetPage() {
           key={y.fiscalYear}
           title={`${fiscalYearLabel(y.fiscalYear)}の出典・確認状況`}
           action={
-            <Link to={`/timeline/${y.fiscalYear}`} className={`shrink-0 text-xs text-primary hover:underline ${linkClass}`}>
+            <Link to={`/timeline/${y.fiscalYear}`} className={`shrink-0 text-xs text-primary underline ${linkClass}`}>
               この年度のタイムラインを見る
             </Link>
           }

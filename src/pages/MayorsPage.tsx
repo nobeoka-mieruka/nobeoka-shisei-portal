@@ -219,11 +219,11 @@ export function MayorsPage() {
 
       <p className="mt-6 px-1 text-xs leading-relaxed text-on-surface-variant">
         現職市長の公約・市政方針・記者会見等の詳細は
-        <Link to="/mayor" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/mayor" className={`mx-1 text-primary underline ${linkClass}`}>
           市長情報ページ
         </Link>
         でも確認できます。市長を選んで比較したい場合は
-        <Link to="/compare/mayors" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/compare/mayors" className={`mx-1 text-primary underline ${linkClass}`}>
           歴代市長の比較
         </Link>
         をご利用ください。

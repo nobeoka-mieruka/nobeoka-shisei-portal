@@ -225,7 +225,7 @@ function DomainRow({ domain }: { domain: DataDomain }) {
         </details>
       )}
       {domain.linkTo && (
-        <Link to={domain.linkTo} className={`mt-1.5 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to={domain.linkTo} className={`mt-1.5 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
           {domain.linkLabel ?? "詳しく見る"} →
         </Link>
       )}
@@ -801,11 +801,11 @@ export function DataStatusPage() {
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         <span className="font-semibold text-on-surface">一次資料の調査状況：</span>
         延岡市公式ホームページが公開する「延岡市史（市制80周年記念10年史）」（全939ページ）を、歴代市長・歴代議長副議長・人口・財政等の既存データに誤りや空白がないか横断的に確認するために調査しました。ページ単位の確認：939／939ページ（100%、2026-08-29時点）。これは資料本文を最後まで確認したという意味であり、記載内容をすべてデータベース化したという意味ではありません。確認した結果、他の公式資料と照合できた範囲から順次データへ反映しています（例：
-        <Link to="/committees/leadership-history" className="mx-1 text-primary hover:underline">
+        <Link to="/committees/leadership-history" className="mx-1 text-primary underline">
           歴代議長・副議長（2001〜2012年分）
         </Link>
         を新たに掲載）。反映が済んでいない事項は「未収録」「調査中」等で明示し、未反映＝0件とは扱っていません。調査で使用する資料の種類や、確認できない情報の扱い方は
-        <Link to="/editorial-policy#research-method" className="mx-1 text-primary hover:underline">
+        <Link to="/editorial-policy#research-method" className="mx-1 text-primary underline">
           編集方針（古い年代・未公開資料の調べ方）
         </Link>
         でご覧いただけます。
@@ -967,7 +967,7 @@ export function DataStatusPage() {
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           文字起こし結果は下書き（未確認）の状態であり、元のPDF画像・PDF内蔵テキストと照合できたものだけを本番データ（財政・市政年表等の各ページ）へ反映しています。文字起こし対象の号数が増えたため、キーワード検索できる試験版画面（
-          <Link to="/koho-search" className={`text-primary hover:underline ${linkClass}`}>
+          <Link to="/koho-search" className={`text-primary underline ${linkClass}`}>
             広報のべおか文字起こし検索
           </Link>
           ）を公開していますが、検索結果の多くは未確認のOCR結果である点にご注意ください。
@@ -1027,7 +1027,7 @@ export function DataStatusPage() {
 
       <SectionCard title="議員活動バロメーターの収録状況">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          <Link to="/council-activity" className="font-medium text-primary hover:underline">
+          <Link to="/council-activity" className="font-medium text-primary underline">
             議員活動バロメーター
           </Link>
           のレーダーチャートは、指標によって収録状況が異なります。このグラフだけを見て「全データが揃っている」と誤解しないよう、確認できている人数を集計しています。
@@ -1042,7 +1042,7 @@ export function DataStatusPage() {
         </dl>
         <p className="mb-4 text-xs leading-relaxed text-on-surface-variant">
           「公開資料から確認できず」は0件・未着手という意味ではなく、複数の公開資料経路を調査したうえで確認できていないことを示します（詳細は各項目の説明・
-          <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
+          <Link to="/methodology/activity-radar" className="font-medium text-primary underline">
             算定方法ページ
           </Link>
           をご覧ください）。
@@ -1055,7 +1055,7 @@ export function DataStatusPage() {
               <dt className="text-xs text-on-surface-variant">現職議員</dt>
               <dd className="text-sm text-on-surface">
                 {activityTargetCount}名（
-                <Link to="/council-activity" className="font-medium text-primary hover:underline">
+                <Link to="/council-activity" className="font-medium text-primary underline">
                   議員活動バロメーター
                 </Link>
                 で一覧・比較を掲載）
@@ -1065,7 +1065,7 @@ export function DataStatusPage() {
               <dt className="text-xs text-on-surface-variant">元議員（現職ではない）</dt>
               <dd className="text-sm text-on-surface">
                 {formerMemberCount}名（
-                <Link to="/council-activity/history" className="font-medium text-primary hover:underline">
+                <Link to="/council-activity/history" className="font-medium text-primary underline">
                   元議員の活動履歴
                 </Link>
                 に在職期間内の記録のみ掲載。現職との総合順位・単純比較は行っていません）
@@ -1115,7 +1115,7 @@ export function DataStatusPage() {
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           「出席状況」「請願・提案等」は複数の公開資料経路を調査しましたが一次資料を確認できていないため、現時点で全{activityTargetCount}名が「対象記録なし」です（0点として扱ってはいません）。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会が一般公開していることを確認できていないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しい算定方法は
-          <Link to="/methodology/activity-radar" className="font-medium text-primary hover:underline">
+          <Link to="/methodology/activity-radar" className="font-medium text-primary underline">
             こちら
           </Link>
           。
@@ -1186,14 +1186,14 @@ export function DataStatusPage() {
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           「個人別賛否紐付け人数（議員）」は、1件以上の議案で個人別の賛否が記録されている議員の人数です。これが{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名中{peopleStatus.voteLinkedCount}名（26名全員等）になっていても、「全議案について全議員の賛否が取得済み」という意味ではありません。実際に個人別の賛否が確認できている議案の件数は「個人別賛否確認済み（議案）」（{individualVoteConfirmedBillCount}／{billVotes.length}件）の方をご覧ください。議案単位の内訳（個人別に公開・採決方式のみ判明・非公開と確認済み・不明）は
-          <Link to="/bills/votes" className="font-medium text-primary hover:underline">
+          <Link to="/bills/votes" className="font-medium text-primary underline">
             議案ごとの賛否
           </Link>
           のページで確認できます。
         </p>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           「未確認人物ID数」は、選挙・一般質問・議会発言・議案賛否・委員会のいずれの根拠も確認できていない人物IDの件数です（0件は、登録済みの全員について何らかの根拠を確認できていることを意味します）。人物の詳細は
-          <Link to="/people" className="font-medium text-primary hover:underline">
+          <Link to="/people" className="font-medium text-primary underline">
             人物から探す
           </Link>
           からご覧いただけます。

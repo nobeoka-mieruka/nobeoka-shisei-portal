@@ -127,7 +127,7 @@ export function MethodologyActivityRadarPage() {
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           議員詳細ページ・議員活動バロメーターに表示している「議会活動データ」レーダーチャートの定義・計算式・データの扱いを説明します。
         </p>
-        <p className="mt-1 text-xs text-on-primary-container/70">現在の算定対象期間：{targetPeriod}</p>
+        <p className="mt-1 text-xs text-on-primary-container/80">現在の算定対象期間：{targetPeriod}</p>
       </div>
 
       <SectionCard title="このチャートは人物評価ではありません">
@@ -146,7 +146,7 @@ export function MethodologyActivityRadarPage() {
         <ul className="mt-2 grid grid-cols-1 gap-1.5 text-xs text-on-surface-variant sm:grid-cols-2">
           {Object.entries(DATA_STATUS_JA).map(([key, label]) => (
             <li key={key} className="rounded-lg bg-surface-container-high px-2.5 py-1.5">
-              <span className="font-mono text-[10px] text-on-surface-variant/70">{key}</span>：{label}
+              <span className="font-mono text-[10px] text-on-surface-variant">{key}</span>：{label}
             </li>
           ))}
         </ul>
@@ -157,11 +157,11 @@ export function MethodologyActivityRadarPage() {
 
       <SectionCard title="「確認済み」「一部公開」「公開資料未確認」「公開待ち」の意味">
         <p className="text-sm leading-relaxed text-on-surface">
-          <Link to="/council-activity" className="font-medium text-primary hover:underline">
+          <Link to="/council-activity" className="font-medium text-primary underline">
             議員活動バロメーター
           </Link>
           や
-          <Link to="/data-status" className="font-medium text-primary hover:underline">
+          <Link to="/data-status" className="font-medium text-primary underline">
             データ収録状況
           </Link>
           ページでは、指標が「対象記録なし」になっている理由を、次の4つの状態文言で市民向けに説明しています。これらはスコアではなく、資料の収録状況の説明です。資料が公開されていない項目を0点として扱うことはありません。

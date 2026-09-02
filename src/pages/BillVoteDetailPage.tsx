@@ -254,7 +254,7 @@ export function BillVoteDetailPage() {
               <dt className="text-xs text-on-surface-variant">担当委員会</dt>
               <dd className="text-on-surface">
                 {committeeForBill ? (
-                  <Link to={`/committees/${committeeForBill.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                  <Link to={`/committees/${committeeForBill.id}`} className={`text-primary underline ${linkClass}`}>
                     {bill.committee}
                   </Link>
                 ) : (
@@ -486,7 +486,7 @@ export function BillVoteDetailPage() {
                 <div className="min-w-0">
                   <Link
                     to={`/members/${v.memberId}`}
-                    className={`text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    className={`text-sm font-medium text-primary underline ${linkClass}`}
                   >
                     {v.memberName}
                   </Link>
@@ -517,7 +517,7 @@ export function BillVoteDetailPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${d.label}を新しいタブで開く`}
-                  className={`inline-flex items-center gap-1.5 text-sm text-primary hover:underline ${linkClass}`}
+                  className={`inline-flex items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
                 >
                   <GlobeIcon className="h-4 w-4" />
                   {d.label}
@@ -583,7 +583,7 @@ export function BillVoteDetailPage() {
               <li key={rb.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-outline-variant p-3">
                 <div className="min-w-0">
                   <p className="text-xs text-on-surface-variant">{rb.billNumber}／{rb.session}</p>
-                  <Link to={`/bills/votes/${rb.id}`} className={`text-sm font-medium text-primary hover:underline ${linkClass}`}>
+                  <Link to={`/bills/votes/${rb.id}`} className={`text-sm font-medium text-primary underline ${linkClass}`}>
                     {rb.billTitle}
                   </Link>
                 </div>
@@ -605,7 +605,7 @@ export function BillVoteDetailPage() {
           <ul className="space-y-2 text-sm">
             {relatedQuestions.map((q) => (
               <li key={q.id}>
-                <Link to={`/questions/${q.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/questions/${q.id}`} className={`text-primary underline ${linkClass}`}>
                   関連する一般質問：{q.title}（{q.memberName}議員）
                 </Link>
               </li>
@@ -617,14 +617,14 @@ export function BillVoteDetailPage() {
             )}
             {relatedPromises.map((p) => (
               <li key={p.id}>
-                <Link to={`/mayor/policy-progress/${p.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/mayor/policy-progress/${p.id}`} className={`text-primary underline ${linkClass}`}>
                   関連する市長公約：{p.promiseText}
                 </Link>
               </li>
             ))}
             {bill.relatedFinanceItems && bill.relatedFinanceItems.length > 0 && (
               <li>
-                <Link to="/finance" className={`text-primary hover:underline ${linkClass}`}>
+                <Link to="/finance" className={`text-primary underline ${linkClass}`}>
                   関連する予算・財政情報：{bill.relatedFinanceItems.join("、")}
                 </Link>
               </li>

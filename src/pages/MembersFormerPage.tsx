@@ -116,11 +116,11 @@ export function MembersFormerPage() {
 
       <p className="mt-6 px-1 text-xs leading-relaxed text-on-surface-variant">
         現職議員の一覧は
-        <Link to="/" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/" className={`mx-1 text-primary underline ${linkClass}`}>
           議員一覧
         </Link>
         、会期ごとの在籍構成は
-        <Link to="/members/history" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/members/history" className={`mx-1 text-primary underline ${linkClass}`}>
           在籍履歴
         </Link>
         でも確認できます。

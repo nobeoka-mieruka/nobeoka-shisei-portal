@@ -152,7 +152,7 @@ export function CouncilSessionDetailPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`${src.title}を新しいタブで開く`}
-                            className={`inline-flex items-center gap-1 text-primary hover:underline ${linkClass}`}
+                            className={`inline-flex items-center gap-1 text-primary underline ${linkClass}`}
                           >
                             {src.title}
                             {src.page && `（${src.page}ページ）`}

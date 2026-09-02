@@ -84,7 +84,7 @@ export function ComparePage() {
 
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         年度・任期をまたいだ時系列の一覧は
-        <Link to="/timeline" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/timeline" className={`mx-1 text-primary underline ${linkClass}`}>
           延岡市政の年表
         </Link>
         でも確認できます。

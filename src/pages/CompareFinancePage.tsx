@@ -148,11 +148,11 @@ export function CompareFinancePage() {
             />
             <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
               市債残高（区分別）・基金の内訳は
-              <Link to="/compare/debt" className="mx-1 text-primary hover:underline">
+              <Link to="/compare/debt" className="mx-1 text-primary underline">
                 市債の比較
               </Link>
               ・
-              <Link to="/compare/funds" className="mx-1 text-primary hover:underline">
+              <Link to="/compare/funds" className="mx-1 text-primary underline">
                 基金の比較
               </Link>
               でも確認できます。定義が異なる数値（当初予算・補正後予算・決算、市債の発行額・残高、基金総額・財源調整用基金）は単純比較できません。
@@ -266,7 +266,7 @@ export function CompareFinancePage() {
 
           <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
             年度別の詳細な出来事（市長任期・議案・一般質問等）は
-            <Link to="/timeline" className="mx-1 text-primary hover:underline">
+            <Link to="/timeline" className="mx-1 text-primary underline">
               延岡市政の年表
             </Link>
             でも確認できます。

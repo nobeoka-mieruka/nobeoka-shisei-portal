@@ -136,7 +136,7 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
 
       <div className="mb-1 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         現在登録している{documentTypeLabel(documentType)}は{docs.length}件です。既存の議案賛否データ（
-        <Link to="/bills/votes" className={`text-primary hover:underline ${linkClass}`}>
+        <Link to="/bills/votes" className={`text-primary underline ${linkClass}`}>
           /bills/votes
         </Link>
         ）で公式資料を確認できたものから少数ずつ登録しています。未登録は「情報が無い」ことを意味しません。「個人別賛否確認済み」は、この一覧の各件が既存の議案賛否データ側で議員ごとの賛否まで登録されているかを示します（議決結果そのものは全件で確認済みです）。
@@ -304,7 +304,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
             <dt className="inline">会期：</dt>
             <dd className="inline">
               {doc.sessionId ? (
-                <Link to={`/council-documents/${doc.sessionId}`} className={`text-primary hover:underline ${linkClass}`}>
+                <Link to={`/council-documents/${doc.sessionId}`} className={`text-primary underline ${linkClass}`}>
                   {sessionTitle(doc.sessionId)}
                 </Link>
               ) : (
@@ -378,7 +378,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
               {relatedOrdinances.map((o, i) => (
                 <span key={o.id}>
                   {i > 0 && "、"}
-                  <Link to={`/ordinances/${o.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                  <Link to={`/ordinances/${o.slug}`} className={`text-primary underline ${linkClass}`}>
                     {o.title}
                   </Link>
                 </span>
@@ -431,7 +431,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
               <ul className="mt-1 space-y-1">
                 {relatedQuestions.map((q) => (
                   <li key={q.id}>
-                    <Link to={`/questions/${q.id}`} className={`text-primary hover:underline ${linkClass}`}>
+                    <Link to={`/questions/${q.id}`} className={`text-primary underline ${linkClass}`}>
                       {q.title}
                     </Link>
                   </li>
@@ -445,7 +445,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
               <ul className="mt-1 space-y-1">
                 {relatedPolicies.map((p) => (
                   <li key={p.id}>
-                    <Link to={`/policies/${p.slug}`} className={`text-primary hover:underline ${linkClass}`}>
+                    <Link to={`/policies/${p.slug}`} className={`text-primary underline ${linkClass}`}>
                       {p.title}
                     </Link>
                   </li>
@@ -461,7 +461,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
                   <li key={y}>
                     <Link
                       to="/finance/budget"
-                      className={`rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary hover:underline ${linkClass}`}
+                      className={`rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-primary underline ${linkClass}`}
                     >
                       {y}年度
                     </Link>
@@ -486,7 +486,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
                   href={ref.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`break-words text-primary hover:underline ${linkClass}`}
+                  className={`break-words text-primary underline ${linkClass}`}
                 >
                   {ref.sourceTitle ?? ref.sourceUrl}
                 </a>
@@ -500,7 +500,7 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
           ))}
           {sourceUrl && doc.sourceRefs.every((r) => r.sourceUrl !== sourceUrl) && (
             <li className="text-sm">
-              <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary hover:underline ${linkClass}`}>
+              <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
                 審議結果資料（既存議案賛否データより）
               </a>
             </li>

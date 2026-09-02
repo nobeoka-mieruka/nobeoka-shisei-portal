@@ -176,7 +176,7 @@ export function KohoSearchPage() {
                     href={r.sourcePdf}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`mt-1 inline-block text-xs text-primary hover:underline ${linkClass}`}
+                    className={`mt-1 inline-block text-xs text-primary underline ${linkClass}`}
                   >
                     元のPDFを見る
                   </a>
@@ -193,7 +193,7 @@ export function KohoSearchPage() {
       <p className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         広報のべおかは2010年4月号以降のPDFを対象としています（それ以前の号は市公式サイトに掲載がなく確認できていません）。文字起こしは段階的に進めており、全号を網羅しているわけではありません。詳しい進捗は
         {" "}
-        <a href="/data-status" className={`text-primary hover:underline ${linkClass}`}>
+        <a href="/data-status" className={`text-primary underline ${linkClass}`}>
           データ収録状況
         </a>
         {" "}をご覧ください。

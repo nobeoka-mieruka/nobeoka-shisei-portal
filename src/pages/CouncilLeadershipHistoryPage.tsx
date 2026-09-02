@@ -68,7 +68,7 @@ function LeadershipSection({ role, entries }: { role: ArchiveCouncilLeadershipRo
               {profile && (
                 <Link
                   to={`/members/former/${profile.slug}`}
-                  className={`mt-1 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}
+                  className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}
                 >
                   プロフィール・発言記録を見る →
                 </Link>
@@ -138,7 +138,7 @@ export function CouncilLeadershipHistoryPage() {
 
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         現在の常任委員会・議会運営委員会・特別委員会の委員長・副委員長は
-        <Link to="/committees" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/committees" className={`mx-1 text-primary underline ${linkClass}`}>
           委員会一覧
         </Link>
         でご覧いただけます。出典：
@@ -146,7 +146,7 @@ export function CouncilLeadershipHistoryPage() {
           href="https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4386.pdf#page=192"
           target="_blank"
           rel="noopener noreferrer"
-          className={`mx-1 text-primary hover:underline ${linkClass}`}
+          className={`mx-1 text-primary underline ${linkClass}`}
         >
           延岡市史（市制80周年記念10年史）第2編第9章第3節「議員と正副議長」
         </a>

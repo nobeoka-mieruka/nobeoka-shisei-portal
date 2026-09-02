@@ -75,7 +75,7 @@ export function TermsPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${s.link.label}（外部サイトが新しいタブで開きます）`}
-                  className="mt-1 inline-block rounded text-sm text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="mt-1 inline-block rounded text-sm text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {s.link.label}
                   <span aria-hidden>（外部サイト）</span>

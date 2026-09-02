@@ -120,7 +120,7 @@ export function FinanceFundsPage() {
               key={y.fiscalYear}
               title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}
               action={
-                <Link to={`/timeline/${y.fiscalYear}`} className="shrink-0 text-xs text-primary hover:underline">
+                <Link to={`/timeline/${y.fiscalYear}`} className="shrink-0 text-xs text-primary underline">
                   この年度のタイムラインを見る
                 </Link>
               }
@@ -137,7 +137,7 @@ export function FinanceFundsPage() {
 
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         年度を選んで並べて比較したい場合は
-        <Link to="/compare/funds" className="mx-1 text-primary hover:underline">
+        <Link to="/compare/funds" className="mx-1 text-primary underline">
           基金の比較
         </Link>
         をご利用ください。

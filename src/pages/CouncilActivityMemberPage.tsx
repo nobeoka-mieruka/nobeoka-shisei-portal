@@ -171,7 +171,7 @@ export function CouncilActivityMemberPage() {
                 href={member.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-1.5 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}
+                className={`mt-1.5 inline-block text-xs font-medium text-primary underline ${linkClass}`}
               >
                 延岡市議会公式プロフィールページ →
               </a>
@@ -226,35 +226,35 @@ export function CouncilActivityMemberPage() {
             <p className="mt-1 text-lg font-semibold text-on-surface">
               {questionMetric?.value !== null && questionMetric?.value !== undefined ? `${Math.round(questionMetric.value)}%` : "確認中"}
             </p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">発言量</p>
-            <p className="mt-1 text-lg font-semibold text-orange-600 dark:text-orange-400">{speechCount}件</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+            <p className="mt-1 text-lg font-semibold text-orange-700 dark:text-orange-300">{speechCount}件</p>
+            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">請願・提案</p>
-            <p className="mt-1 text-lg font-semibold text-orange-600 dark:text-orange-400">{submitterCount}件</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+            <p className="mt-1 text-lg font-semibold text-orange-700 dark:text-orange-300">{submitterCount}件</p>
+            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">情報発信</p>
             <p className="mt-1 text-lg font-semibold text-on-surface">{channelCount}媒体</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">出席状況</p>
             <p className="mt-1 text-lg font-semibold text-on-surface-variant">確認中</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary hover:underline ${linkClass}`}>
+            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
@@ -320,7 +320,7 @@ export function CouncilActivityMemberPage() {
 
         <Link
           to={`/members/${member.id}#questions`}
-          className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+          className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
         >
           個別の一般質問・答弁の全件を見る →
         </Link>
@@ -366,7 +366,7 @@ export function CouncilActivityMemberPage() {
         )}
         <Link
           to={`/members/${member.id}#votes`}
-          className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+          className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
         >
           議案賛否の全件を見る →
         </Link>
@@ -412,7 +412,7 @@ export function CouncilActivityMemberPage() {
                 <li key={r.id} className="rounded-lg bg-surface-container-high px-3 py-2 text-xs text-on-surface">
                   {r.meetingDate ? formatJapaneseDate(r.meetingDate) : "日付確認中"}　{r.committeeName}
                   {r.role === "chair" ? "委員長" : "副委員長"}として報告
-                  <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer" className={`ml-2 text-primary hover:underline ${linkClass}`}>
+                  <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer" className={`ml-2 text-primary underline ${linkClass}`}>
                     会議録を見る
                   </a>
                 </li>
@@ -459,22 +459,22 @@ export function CouncilActivityMemberPage() {
                 <div className="mt-2 flex flex-wrap gap-3 text-xs">
                   <Link
                     to="/methodology/activity-radar"
-                    className={`font-medium text-primary hover:underline ${linkClass}`}
+                    className={`font-medium text-primary underline ${linkClass}`}
                   >
                     算定方法を見る →
                   </Link>
                   {(def.key === "question" || def.key === "speech") && (
-                    <Link to={`/members/${member.id}#questions`} className={`font-medium text-primary hover:underline ${linkClass}`}>
+                    <Link to={`/members/${member.id}#questions`} className={`font-medium text-primary underline ${linkClass}`}>
                       元データ（一般質問・発言）を見る →
                     </Link>
                   )}
                   {def.key === "voting" && (
-                    <Link to={`/members/${member.id}#votes`} className={`font-medium text-primary hover:underline ${linkClass}`}>
+                    <Link to={`/members/${member.id}#votes`} className={`font-medium text-primary underline ${linkClass}`}>
                       元データ（議案賛否）を見る →
                     </Link>
                   )}
                   {def.key === "disclosure" && verifiedSns.length > 0 && (
-                    <Link to={`/members/${member.id}`} className={`font-medium text-primary hover:underline ${linkClass}`}>
+                    <Link to={`/members/${member.id}`} className={`font-medium text-primary underline ${linkClass}`}>
                       確認済み公式SNSを見る →
                     </Link>
                   )}

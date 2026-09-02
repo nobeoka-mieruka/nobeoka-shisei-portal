@@ -107,7 +107,7 @@ export function FinanceDebtPage() {
           key={y.fiscalYear}
           title={`${fiscalYearLabel(y.fiscalYear)}の定義・出典`}
           action={
-            <Link to={`/timeline/${y.fiscalYear}`} className="shrink-0 text-xs text-primary hover:underline">
+            <Link to={`/timeline/${y.fiscalYear}`} className="shrink-0 text-xs text-primary underline">
               この年度のタイムラインを見る
             </Link>
           }
@@ -123,11 +123,11 @@ export function FinanceDebtPage() {
 
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         当該年度の一般会計の歳入における市債の計上額（予算・決算の区分は各年度データを参照）は
-        <Link to="/finance/budget" className="mx-1 text-primary hover:underline">
+        <Link to="/finance/budget" className="mx-1 text-primary underline">
           予算・決算規模の推移
         </Link>
         でも確認できます。年度を選んで並べて比較したい場合は
-        <Link to="/compare/debt" className="mx-1 text-primary hover:underline">
+        <Link to="/compare/debt" className="mx-1 text-primary underline">
           市債の比較
         </Link>
         をご利用ください。

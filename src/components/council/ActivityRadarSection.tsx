@@ -73,7 +73,7 @@ export function ActivityRadarSection({
       <SectionCard title="議会活動データ">
         <p className="text-xs leading-relaxed text-on-surface-variant">
           公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません（
-          <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+          <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
             算定方法
           </Link>
           ）。
@@ -89,7 +89,7 @@ export function ActivityRadarSection({
     <SectionCard title="議会活動データ">
       <p className="text-xs leading-relaxed text-on-surface-variant">
         公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません（
-        <Link to="/methodology/activity-radar" className={`font-medium text-primary hover:underline ${linkClass}`}>
+        <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
           算定方法
         </Link>
         ）。
@@ -123,7 +123,7 @@ export function ActivityRadarSection({
         type="button"
         onClick={() => setMethodologyOpen((v) => !v)}
         aria-expanded={methodologyOpen}
-        className={`mt-3 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        className={`mt-3 text-sm font-medium text-primary underline ${linkClass}`}
       >
         {methodologyOpen ? "算定方法を閉じる" : "算定方法を見る"}
       </button>
@@ -133,7 +133,7 @@ export function ActivityRadarSection({
             各項目は、既存の一次情報・公開データを共通の計算式で0〜100へ換算した指数です。データが確認できない項目は0点にせず「対象記録なし」として扱い、在職期間（在職中かつ会議録等が取得済みの会期）のみを集計対象にしています。
           </p>
           <p>詳しい定義・計算式・欠損データの扱い・出典の一覧は、算定方法ページでご確認いただけます。</p>
-          <Link to="/methodology/activity-radar" className={`inline-block font-medium text-primary hover:underline ${linkClass}`}>
+          <Link to="/methodology/activity-radar" className={`inline-block font-medium text-primary underline ${linkClass}`}>
             算定方法の詳細ページを見る →
           </Link>
         </div>

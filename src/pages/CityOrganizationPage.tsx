@@ -59,7 +59,7 @@ export function CityOrganizationPage() {
                   href={division.officialUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-primary hover:underline"
+                  className="text-xs text-primary underline"
                 >
                   公式ページ
                 </a>
@@ -101,7 +101,7 @@ export function CityOrganizationPage() {
                       href={section.officialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-1 inline-block text-xs text-primary hover:underline"
+                      className="mt-1 inline-block text-xs text-primary underline"
                     >
                       公式ページ
                     </a>

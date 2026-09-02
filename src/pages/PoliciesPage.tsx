@@ -148,7 +148,7 @@ export function PoliciesPage() {
 
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         政策同士を比較したい場合は
-        <Link to="/compare/policies" className={`mx-1 text-primary hover:underline ${linkClass}`}>
+        <Link to="/compare/policies" className={`mx-1 text-primary underline ${linkClass}`}>
           政策比較
         </Link>
         をご利用ください。政策テーマは上の絞り込みから選べます。

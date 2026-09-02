@@ -273,7 +273,7 @@ export function MemberDetailPage() {
                   <li key={s.id}>
                     <Link
                       to={`/members/${formerMember.id}/questions/${s.id}`}
-                      className={`block rounded-lg bg-surface-container-high p-3 text-sm text-primary hover:underline ${linkClass}`}
+                      className={`block rounded-lg bg-surface-container-high p-3 text-sm text-primary underline ${linkClass}`}
                     >
                       {session?.title ?? s.sessionId}
                       {s.date && `（${formatJapaneseDate(s.date)}）`}の{s.speechType}
@@ -420,7 +420,7 @@ export function MemberDetailPage() {
       />
       <Link
         to={`/council-activity/${member.id}`}
-        className={`inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline ${linkClass}`}
+        className={`inline-flex items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}
       >
         議員活動バロメーターで詳しく見る（他の議員と比較する） →
       </Link>
@@ -462,7 +462,7 @@ export function MemberDetailPage() {
                   {ev.href && ev.kind !== "report" ? (
                     <Link
                       to={ev.href}
-                      className={`mt-0.5 block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                      className={`mt-0.5 block text-sm font-medium text-primary underline ${linkClass}`}
                     >
                       {ev.label}
                     </Link>
@@ -471,7 +471,7 @@ export function MemberDetailPage() {
                       href={ev.href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className={`mt-0.5 block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                      className={`mt-0.5 block text-sm font-medium text-primary underline ${linkClass}`}
                     >
                       {ev.label}
                     </a>
@@ -485,7 +485,7 @@ export function MemberDetailPage() {
               <button
                 type="button"
                 onClick={() => setShowAllTimeline((v) => !v)}
-                className={`mt-3 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                className={`mt-3 text-sm font-medium text-primary underline ${linkClass}`}
               >
                 {showAllTimeline ? "表示を減らす" : `すべて表示（${timelineEvents.length}件）`}
               </button>
@@ -533,7 +533,7 @@ export function MemberDetailPage() {
           <ul className="space-y-2">
             {memberSpecialPosts.map((p) => (
               <li key={p.id} className="text-sm">
-                <Link to="/city-officials" className={`font-medium text-primary hover:underline ${linkClass}`}>
+                <Link to="/city-officials" className={`font-medium text-primary underline ${linkClass}`}>
                   {p.roleLabel}
                 </Link>
                 {p.notes && <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">{p.notes}</p>}
@@ -615,7 +615,7 @@ export function MemberDetailPage() {
 
             <Link
               to={`/questions?member=${member.id}`}
-              className={`mt-3 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+              className={`mt-3 inline-block text-sm font-medium text-primary underline ${linkClass}`}
             >
               この議員の一般質問をすべて見る
             </Link>
@@ -823,7 +823,7 @@ export function MemberDetailPage() {
                     <button
                       type="button"
                       onClick={() => setSelectedTopic("")}
-                      className={`mt-2 text-xs font-medium text-primary hover:underline ${linkClass}`}
+                      className={`mt-2 text-xs font-medium text-primary underline ${linkClass}`}
                     >
                       絞り込みを解除
                     </button>
@@ -837,7 +837,7 @@ export function MemberDetailPage() {
                   <button
                     type="button"
                     onClick={() => setSelectedTopic("")}
-                    className={`text-xs font-medium text-primary hover:underline ${linkClass}`}
+                    className={`text-xs font-medium text-primary underline ${linkClass}`}
                   >
                     「{selectedTopic}」の絞り込みを解除
                   </button>
@@ -867,7 +867,7 @@ export function MemberDetailPage() {
                       )}
                       <Link
                         to={`/members/${member.id}/questions/${s.id}`}
-                        className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                        className={`mt-2 inline-block text-sm font-medium text-primary underline ${linkClass}`}
                       >
                         質問・答弁の詳細を見る
                       </Link>
@@ -952,7 +952,7 @@ export function MemberDetailPage() {
                       <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
                         <Link
                           to={`/bills/votes/${bill.id}`}
-                          className={`min-w-0 flex-1 text-sm font-medium text-primary hover:underline ${linkClass}`}
+                          className={`min-w-0 flex-1 text-sm font-medium text-primary underline ${linkClass}`}
                         >
                           {bill.billTitle}
                         </Link>
@@ -991,7 +991,7 @@ export function MemberDetailPage() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`${r.title}の詳細を新しいタブで開く`}
-                    className={`mt-2 inline-block text-sm font-medium text-primary hover:underline ${linkClass}`}
+                    className={`mt-2 inline-block text-sm font-medium text-primary underline ${linkClass}`}
                   >
                     詳しく見る
                   </a>

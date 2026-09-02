@@ -11,7 +11,7 @@ import { getOperatorField } from "../config/operator";
 import { getSeoForPath } from "../lib/seo";
 
 const linkClass =
-  "rounded text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "rounded text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 const externalLinkClass = `inline-flex items-center gap-1 ${linkClass}`;
 
