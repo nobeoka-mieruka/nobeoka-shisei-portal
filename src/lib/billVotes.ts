@@ -9,19 +9,23 @@ import type { BillPublicationStatus, BillVerificationStatus, BillMemberVoteStatu
  * 一般公開ページから除外するのは、誤抽出と判断され却下された（rejected）データと、
  * 抽出処理自体がエラーになった（error）データのみ。
  */
-export function isPubliclyVisibleBill(bill: BillVoteItem): boolean {
+export function isPubliclyVisibleBill(bill: Pick<BillVoteItem, "publicationStatus">): boolean {
   const hiddenStatuses: BillPublicationStatus[] = ["rejected", "error"];
   return !hiddenStatuses.includes(bill.publicationStatus as BillPublicationStatus);
 }
 
-/** 一般公開してよい議案だけを返す（rejected・errorを除く）。 */
-export function publicBills(bills: BillVoteItem[]): BillVoteItem[] {
+/**
+ * 一般公開してよい議案だけを返す（rejected・errorを除く）。
+ * Phase193：軽量インデックス（BillVoteIndexItem）にも同じ判定を使えるよう、
+ * publicationStatusだけを見るジェネリックにしている（判定内容は従来と同一）。
+ */
+export function publicBills<T extends Pick<BillVoteItem, "publicationStatus">>(bills: T[]): T[] {
   return bills.filter(isPubliclyVisibleBill);
 }
 
 /** TASK-085：提出者区分が確認済みの議案数。DataStatusPage・dataCompletenessSummaryで
  * 個別に同じ式を実装していたため一本化した。 */
-export function countBillsWithKnownProposerType(bills: BillVoteItem[]): number {
+export function countBillsWithKnownProposerType(bills: Pick<BillVoteItem, "proposerType">[]): number {
   return bills.filter((b) => b.proposerType).length;
 }
 

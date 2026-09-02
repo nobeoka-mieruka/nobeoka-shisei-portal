@@ -6,11 +6,14 @@
  * トップページと/data-statusの数字が食い違わないようにする。「サイト完成率○%」の
  * ような単一の総合スコアは作らず、項目ごとの分子／分母を個別に見せる方針を維持する。
  */
-import billVotesData from "../data/billVotes.json";
+// Phase193：ここで必要なのは議案の総件数と提出者区分の有無だけのため、本文を含む
+// billVotes.json（約2.6MB）ではなく軽量インデックスを使う（件数・内訳は元データと同一）。
+// このモジュールはトップページ経由でエントリチャンクに含まれる。
+import billVotesIndexData from "../data/billVotesIndex.json";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
-import type { BillVoteItem } from "../types";
+import type { BillVoteIndexItem } from "../types";
 import type { ArchiveFiscalYear, ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
 import { simpleCompleteness, type CompletenessMetric } from "./completeness";
 import type { GeneralQuestionStats } from "./generalQuestionStats";
@@ -18,7 +21,7 @@ import { countDayPreciseTerms } from "./archiveMayors";
 import { countBillsWithKnownProposerType } from "./billVotes";
 import { hasFundData, hasDebtData } from "./archiveFinance";
 
-const billVotes = billVotesData as BillVoteItem[];
+const billVotes = billVotesIndexData as BillVoteIndexItem[];
 const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];

@@ -867,4 +867,13 @@ for (const p of staticPages) {
 }
 
 writeFileSync(join(root, "src", "data", "searchIndex.json"), `${JSON.stringify(entries, null, 2)}\n`, "utf8");
+
+// Phase193：検索インデックスの件数だけを使う画面（/data-status）が、約2.9MBの
+// searchIndex.json全体を読み込まずに済むよう、件数だけの小さなファイルも書き出す。
+// 値はsearchIndex.jsonと同時に生成するため、常に一致する。
+writeFileSync(
+  join(root, "src", "data", "searchIndexMeta.json"),
+  `${JSON.stringify({ entryCount: entries.length }, null, 2)}\n`,
+  "utf8",
+);
 console.log(`[generate-search-index] wrote ${entries.length} entries to src/data/searchIndex.json`);

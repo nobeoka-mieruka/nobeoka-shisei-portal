@@ -1,0 +1,13 @@
+{
+  "_comment": "Phase193：初期ロード量の基準値（bytes）。npm run check:bundle-size -- --update で現在値へ更新する。意図的に増やす場合のみ更新し、理由をコミットメッセージへ残すこと。",
+  "updatedAt": "2026-09-02",
+  "warnRatio": 1.05,
+  "failRatio": 1.2,
+  "baseline": {
+    "initialJsFileCount": 2,
+    "initialJsBytes": 2521002,
+    "initialJsGzip": 379555,
+    "initialCssGzip": 9601,
+    "largestInitialChunkGzip": 219395
+  }
+}

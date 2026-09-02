@@ -25,6 +25,7 @@ import type {
 import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
 import { getPersonTimeline } from "./personTimeline";
 import { getFormerMemberDataTier, type FormerMemberDataTier } from "./formerMemberActivity";
+import { personSlug, type PersonType } from "./personSlug";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -39,7 +40,10 @@ const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[
 const archiveMemberAffiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[];
 const archiveMemberTerms = archiveMemberTermsData as ArchiveMemberTerm[];
 
-export type PersonType = "member" | "former-member" | "mayor";
+// Phase193：スラッグ操作・表示ラベルはsrc/lib/personSlug.ts（大きなデータを参照しない
+// 軽量モジュール）へ移した。既存の呼び出し側との互換のためここから再エクスポートする。
+export { personSlug, parsePersonSlug, personTypeLabel } from "./personSlug";
+export type { PersonType } from "./personSlug";
 
 export interface PersonSummary {
   personType: PersonType;
@@ -127,18 +131,6 @@ function personActivityBreakdownFor(personType: PersonType, id: string): PersonA
 function formerMemberDataTierOf(formerMemberId: string): FormerMemberDataTier {
   const eventTypes = new Set(getPersonTimeline(formerMemberId).map((e) => e.eventType));
   return getFormerMemberDataTier(eventTypes);
-}
-
-export function personSlug(personType: PersonType, id: string): string {
-  return `${personType}-${id}`;
-}
-
-export function parsePersonSlug(slug: string): { personType: PersonType; id: string } | undefined {
-  for (const type of ["member", "former-member", "mayor"] as PersonType[]) {
-    const prefix = `${type}-`;
-    if (slug.startsWith(prefix)) return { personType: type, id: slug.slice(prefix.length) };
-  }
-  return undefined;
 }
 
 function relatedDocumentCountFor(personType: PersonType, id: string): number {
@@ -261,17 +253,6 @@ export function buildPersonIndex(): PersonSummary[] {
   }
 
   return people;
-}
-
-export function personTypeLabel(type: PersonType): string {
-  switch (type) {
-    case "member":
-      return "現職議員";
-    case "former-member":
-      return "元議員";
-    case "mayor":
-      return "市長";
-  }
 }
 
 /** 人物詳細ページ内で、その人物に紐づく確認済み政策を返す（archivePolicies.jsonの確定データ）。 */

@@ -10,6 +10,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+
+# npm run analyze:bundle（チャンクごとの内訳を調べる一時出力。Phase193）
+dist-analyze
+chunk-analysis.json
 .wrangler
 *.local
 .env
