@@ -6,6 +6,7 @@ import type {
   ArchiveMemberProfile,
   ArchiveMemberTerm,
   ArchivePolicy,
+  ArchiveSourceRef,
 } from "../types/historicalArchive";
 import type { ArchiveTimelineEvent, ArchiveTimelineYearGroup } from "../types/timeline";
 import type { GeneralQuestionItem } from "../types";
@@ -149,7 +150,92 @@ export function buildFinanceMetricEvents(fiscalYears: ArchiveFiscalYear[]): Arch
   return events;
 }
 
-/** 一般質問を年表イベントに変換する。個別の出典URLは持たないため、詳細ページへのリンクで確認する。 */
+/**
+ * Phase204：一般質問1件が既に持っている一次資料参照（会議録・質問通告書・市議会だより）を、
+ * 年表イベント用のArchiveSourceRefへ「そのまま継承」する。
+ *
+ * 原則：
+ * - 元データ（generalQuestions.json）に存在するURL・タイトル・機関名・信頼レベル・確認日だけを
+ *   詰め替える。存在しない項目は推測で補わず、フィールドごと省略する
+ *   （出典が1件も無い一般質問は、年表でも「出典未登録」のまま表示する）。
+ * - 同じURLを指す参照は1件にまとめる（generalQuestions.jsonではsourceUrlとnoticeUrlが
+ *   同一PDFを指す場合があり、そのまま並べると同じ出典が二重表示されるため）。
+ * - verificationStatusは資料の種類に応じて決める。会議録は正式な発言記録のため"verified"、
+ *   質問通告書は「通告時点の予定」であり実際の発言は会議録での確認が必要なため
+ *   会議録が未確認の間は"partiallyVerified"、市議会だよりは号の目次・見出しレベルの
+ *   確認にとどまるため"partiallyVerified"とする（GeneralQuestionItemの型注記に準拠）。
+ */
+export function generalQuestionSourceRefs(q: GeneralQuestionItem): ArchiveSourceRef[] {
+  const refs: ArchiveSourceRef[] = [];
+  const seenUrls = new Set<string>();
+  const push = (ref: ArchiveSourceRef) => {
+    if (ref.sourceUrl) {
+      if (seenUrls.has(ref.sourceUrl)) return;
+      seenUrls.add(ref.sourceUrl);
+    }
+    refs.push(ref);
+  };
+
+  // 会議録が確認できている場合は、その記載内容が確認済みであることを示す。
+  const transcriptVerified = Boolean(q.transcriptUrl || q.transcriptPdfUrl);
+
+  const organization = q.sourceOrganization ? { sourceOrganization: q.sourceOrganization } : {};
+  const accessed = q.lastVerified ? { accessedAt: q.lastVerified } : {};
+
+  // 1. レコードが宣言している主たる出典（質問通告書または会議録）。
+  if (q.sourceUrl) {
+    push({
+      sourceUrl: q.sourceUrl,
+      ...(q.sourceTitle ? { sourceTitle: q.sourceTitle } : {}),
+      ...organization,
+      ...(q.trustLevel ? { trustLevel: q.trustLevel } : {}),
+      ...accessed,
+      verificationStatus: transcriptVerified ? "verified" : "partiallyVerified",
+    });
+  }
+
+  // 2. 質問通告書（主たる出典と同一URLの場合は1でまとめ済み）。
+  for (const url of [q.noticeUrl, q.noticePdf]) {
+    if (!url) continue;
+    push({
+      sourceUrl: url,
+      ...(q.noticeTitle ? { sourceTitle: q.noticeTitle } : {}),
+      ...organization,
+      ...accessed,
+      verificationStatus: transcriptVerified ? "verified" : "partiallyVerified",
+    });
+  }
+
+  // 3. 会議録（公開され次第、generalQuestions.jsonへ登録される）。
+  for (const url of [q.transcriptUrl, q.transcriptPdfUrl]) {
+    if (!url) continue;
+    push({
+      sourceUrl: url,
+      ...(q.transcriptReference ? { sourceTitle: q.transcriptReference } : {}),
+      ...organization,
+      ...accessed,
+      verificationStatus: "verified",
+    });
+  }
+
+  // 4. のべおか市議会だより（会議録公開前の中間確認資料）。
+  if (q.newsletterUrl) {
+    push({
+      sourceUrl: q.newsletterUrl,
+      ...(q.newsletterTitle ? { sourceTitle: q.newsletterTitle } : {}),
+      ...(q.newsletterCheckedAt ? { accessedAt: q.newsletterCheckedAt } : {}),
+      verificationStatus: "partiallyVerified",
+    });
+  }
+
+  return refs;
+}
+
+/**
+ * 一般質問を年表イベントに変換する。出典は元データ（generalQuestions.json）が既に持っている
+ * 一次資料参照をgeneralQuestionSourceRefs()で継承する。元データに出典が無い質問は
+ * 年表側でも0件のままとし、「出典未登録」と表示する（推測でURLを補わない）。
+ */
 export function buildGeneralQuestionEvents(questions: GeneralQuestionItem[]): ArchiveTimelineEvent[] {
   return questions.map((q) => ({
     id: `question-${q.id}`,
@@ -159,7 +245,7 @@ export function buildGeneralQuestionEvents(questions: GeneralQuestionItem[]): Ar
     fiscalYear: fiscalYearOfIsoDate(q.questionDate),
     title: `${q.memberName}の一般質問：${q.title}`,
     relatedPath: `/questions/${q.id}`,
-    sourceRefs: [],
+    sourceRefs: generalQuestionSourceRefs(q),
   }));
 }
 

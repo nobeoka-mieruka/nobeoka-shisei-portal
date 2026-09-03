@@ -1241,6 +1241,12 @@ export interface GeneralQuestionItem {
   sourceOrganization: string;
   sourceUrl: string;
   sourceType?: QuestionSourceType;
+  /**
+   * 出典の信頼レベル（任意、Phase128で展開。区分の詳細はsrc/types/sourceTrust.tsを参照）。
+   * generalQuestions.jsonでは既に全件へ登録されているが、既存データへの後方互換のため
+   * 任意項目とする（Phase204で型定義側へ追記。値の追加・変更は行っていない）。
+   */
+  trustLevel?: ArchiveSourceTrustLevel;
   /** ISO形式。会議録等の基準日。 */
   referenceDate?: string;
   /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
