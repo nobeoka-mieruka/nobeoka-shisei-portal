@@ -1,7 +1,12 @@
 import type { CouncilMemberSpeechRecord, CouncilSession, GeneralQuestionItem } from "../types";
 import { allPublicSpeeches, questionLikeSpeeches } from "./councilSpeeches";
-import { toFiscalYearLabel } from "../config/site";
+import { formatJapaneseDate, toFiscalYearLabel } from "../config/site";
 import questionCollectionStatusData from "../data/questionCollectionStatus.json";
+import {
+  councilSessionIdFromSessionName,
+  councilSessionPhaseLabels,
+  type CouncilSessionPhase,
+} from "./councilSessions";
 
 /**
  * サイト全体で「一般質問の件数」を表示する箇所（トップページ・ダッシュボード・
@@ -22,11 +27,129 @@ import questionCollectionStatusData from "../data/questionCollectionStatus.json"
 export interface ScheduledQuestionSession {
   /** 会期名（例："令和8年6月定例会"）。 */
   sessionName: string;
+  /** 会期名から導出した会期ID（例："2026-06"）。導出できない表記の場合はnull。 */
+  sessionId: string | null;
+  /**
+   * Phase203：会期の進行状態。questionCollectionStatus.jsonへ登録済み＝会期が終了して
+   * 収録対象になった会期を"completed"、まだ登録されていない会期（開催前または開催中で、
+   * 議決結果・会議録のいずれも未確認）を"upcoming"とする。判定に今日の日付は使わない。
+   */
+  phase: CouncilSessionPhase;
   /** この会期の予定質問件数（generalQuestions.json内で該当sessionNameを持つ件数）。 */
   count: number;
+  /** この会期で質問を予定している議員の人数（同一議員の複数件は1名と数える）。 */
+  memberCount: number;
+  /** 質問通告書に記載された質問予定日のうち最も早い日（generalQuestions.jsonの実値のみ）。 */
+  firstQuestionDate?: string;
+  /** 同じく最も遅い日。1日だけの場合はfirstQuestionDateと同じ値になる。 */
+  lastQuestionDate?: string;
   /** TASK-079：この会期の予定質問について、「のべおか市議会だより」で開催・実施を
    * 確認済みかどうか。会期内の全件がnewsletterConfirmed:trueの場合のみtrue。 */
   newsletterConfirmed: boolean;
+  /** 会議録本文を確認済みか（questionCollectionStatus.jsonのtranscriptAvailable）。 */
+  transcriptAvailable: boolean;
+}
+
+/** questionCollectionStatus.json（会期の収録状況の単一情報源）の読み出し。 */
+const questionCollectionStatus = questionCollectionStatusData as {
+  generatedAt: string;
+  sessions: { sessionId: string; sessionTitle: string; transcriptAvailable: boolean }[];
+};
+
+/**
+ * 質問通告書ベースの予定質問（generalQuestions.json）を会期ごとにまとめ、
+ * 会期の進行状態（Phase203）を付与する。
+ *
+ * 会議録本文を確認済みの一般質問（councilSpeechSummaries.json）を必要としないため、
+ * 会期一覧ページなど重いデータを読み込みたくない画面からも単独で呼び出せる。
+ */
+export function scheduledQuestionSessions(generalQuestions: GeneralQuestionItem[]): ScheduledQuestionSession[] {
+  const registeredSessionIds = new Map(
+    questionCollectionStatus.sessions.map((s) => [s.sessionId, s.transcriptAvailable]),
+  );
+  const membersBySession = new Map<string, Set<string>>();
+  const sessions: ScheduledQuestionSession[] = [];
+
+  for (const q of generalQuestions) {
+    let session = sessions.find((s) => s.sessionName === q.sessionName);
+    if (!session) {
+      const sessionId = councilSessionIdFromSessionName(q.sessionName);
+      session = {
+        sessionName: q.sessionName,
+        sessionId,
+        phase: councilSessionPhaseForSessionName(q.sessionName),
+        count: 0,
+        memberCount: 0,
+        newsletterConfirmed: true,
+        transcriptAvailable: (sessionId !== null && registeredSessionIds.get(sessionId)) === true,
+      };
+      sessions.push(session);
+      membersBySession.set(q.sessionName, new Set());
+    }
+    session.count += 1;
+    membersBySession.get(q.sessionName)?.add(q.memberId);
+    if (q.newsletterConfirmed !== true) session.newsletterConfirmed = false;
+    if (q.questionDate) {
+      if (!session.firstQuestionDate || q.questionDate < session.firstQuestionDate) {
+        session.firstQuestionDate = q.questionDate;
+      }
+      if (!session.lastQuestionDate || q.questionDate > session.lastQuestionDate) {
+        session.lastQuestionDate = q.questionDate;
+      }
+    }
+  }
+
+  for (const session of sessions) {
+    session.memberCount = membersBySession.get(session.sessionName)?.size ?? 0;
+  }
+
+  // 会期IDの昇順（開催年月順）に並べる。IDを導出できない会期は末尾に置く。
+  return sessions.sort((a, b) => {
+    if (a.sessionId && b.sessionId) return a.sessionId.localeCompare(b.sessionId);
+    if (a.sessionId) return -1;
+    if (b.sessionId) return 1;
+    return a.sessionName.localeCompare(b.sessionName, "ja");
+  });
+}
+
+/**
+ * 会期名1件分の進行状態（Phase203）。questionCollectionStatus.jsonへ登録済み＝会期が終了して
+ * 収録対象になった会期は"completed"、未登録の会期は"upcoming"（開催前または開催中）。
+ * 今日の日付は使わない（プリレンダリング済みHTMLと閲覧時で表示が食い違わないようにするため）。
+ * 会期IDを導出できない表記は、根拠なく「開催予定」と表示しないよう"completed"側に倒す。
+ */
+export function councilSessionPhaseForSessionName(sessionName: string): CouncilSessionPhase {
+  const sessionId = councilSessionIdFromSessionName(sessionName);
+  if (sessionId === null) return "completed";
+  return questionCollectionStatus.sessions.some((s) => s.sessionId === sessionId) ? "completed" : "upcoming";
+}
+
+/**
+ * 質問通告書に記載された質問予定日の範囲を表示用の文字列にする。
+ * 日付が1件も無い会期はundefinedを返す（推測した日付を作らない）。
+ */
+export function formatScheduledQuestionPeriod(session: ScheduledQuestionSession): string | undefined {
+  const { firstQuestionDate, lastQuestionDate } = session;
+  if (!firstQuestionDate) return undefined;
+  if (!lastQuestionDate || lastQuestionDate === firstQuestionDate) return formatJapaneseDate(firstQuestionDate);
+  return `${formatJapaneseDate(firstQuestionDate)}〜${formatJapaneseDate(lastQuestionDate)}`;
+}
+
+/**
+ * 「会議録未公開会期の予定質問」の内訳説明文。トップページ・ダッシュボード・データ収録状況で
+ * 同じ文言になるよう、ここを唯一の情報源とする（会期名・件数・日付はすべて引数の実データから）。
+ * 会期の状態（開催済み／開催予定・開催中）を必ず併記し、直近の確認済み会期と混同しないようにする。
+ */
+export function scheduledSessionBreakdownHint(sessions: ScheduledQuestionSession[]): string {
+  return sessions
+    .map((s) => {
+      const parts = [`${s.count}件`, "質問通告書ベース"];
+      const period = formatScheduledQuestionPeriod(s);
+      if (period) parts.push(`一般質問の予定日 ${period}`);
+      if (s.newsletterConfirmed) parts.push("市議会だよりで開催確認済み");
+      return `${s.sessionName}（${councilSessionPhaseLabels[s.phase]}）：${parts.join("／")}`;
+    })
+    .join("　");
 }
 
 export interface GeneralQuestionStats {
@@ -43,6 +166,20 @@ export interface GeneralQuestionStats {
   scheduledSessions: ScheduledQuestionSession[];
   /** scheduledSessionsの件数の合計（会議録未公開の全会期分の予定質問の合計件数）。 */
   scheduledCount: number;
+  /**
+   * Phase203：scheduledSessionsのうち、会期が終了して収録対象へ登録済みのもの
+   * （＝「直近の確認済み会期」側。会議録の公開待ち）。
+   */
+  completedScheduledSessions: ScheduledQuestionSession[];
+  /** completedScheduledSessionsの予定質問件数の合計。 */
+  completedScheduledCount: number;
+  /**
+   * Phase203：scheduledSessionsのうち、これから開催される、または開催中の会期
+   * （＝「次回・開催予定の会期」側。議決結果・会議録とも未確認）。
+   */
+  upcomingScheduledSessions: ScheduledQuestionSession[];
+  /** upcomingScheduledSessionsの予定質問件数の合計。 */
+  upcomingScheduledCount: number;
   /** 現議員任期以降の収録対象会期数（questionCollectionStatus.json全件）。 */
   targetSessionCount: number;
   /** 会議録取得済み（transcriptAvailable:true）会期数。 */
@@ -68,29 +205,24 @@ export function calculateGeneralQuestionStats(
     0,
   );
 
-  const status = questionCollectionStatusData as {
-    generatedAt: string;
-    sessions: { sessionId: string; sessionTitle: string; transcriptAvailable: boolean }[];
-  };
+  const status = questionCollectionStatus;
   const targetSessionCount = status.sessions.length;
   const uncollectedSessions = status.sessions.filter((s) => !s.transcriptAvailable);
 
-  const scheduledSessions: ScheduledQuestionSession[] = [];
-  for (const q of generalQuestions) {
-    let session = scheduledSessions.find((s) => s.sessionName === q.sessionName);
-    if (!session) {
-      session = { sessionName: q.sessionName, count: 0, newsletterConfirmed: true };
-      scheduledSessions.push(session);
-    }
-    session.count += 1;
-    if (q.newsletterConfirmed !== true) session.newsletterConfirmed = false;
-  }
+  const scheduledSessions = scheduledQuestionSessions(generalQuestions);
+  const completedScheduledSessions = scheduledSessions.filter((s) => s.phase === "completed");
+  const upcomingScheduledSessions = scheduledSessions.filter((s) => s.phase === "upcoming");
+  const sumCount = (list: ScheduledQuestionSession[]) => list.reduce((sum, s) => sum + s.count, 0);
 
   return {
     confirmedCount,
     totalQuestionItemCount,
     scheduledSessions,
     scheduledCount: generalQuestions.length,
+    completedScheduledSessions,
+    completedScheduledCount: sumCount(completedScheduledSessions),
+    upcomingScheduledSessions,
+    upcomingScheduledCount: sumCount(upcomingScheduledSessions),
     targetSessionCount,
     collectedSessionCount: targetSessionCount - uncollectedSessions.length,
     uncollectedSessionCount: uncollectedSessions.length,

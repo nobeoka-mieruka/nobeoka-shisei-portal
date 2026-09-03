@@ -33,6 +33,13 @@ import { allPublicSpeeches, findMemberOrFormerLink, questionLikeSpeeches, resolv
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
+import { scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
+import {
+  LATEST_CONFIRMED_SESSION_HEADING,
+  councilSessionPhaseLabels,
+  latestConfirmedCouncilSession,
+} from "../lib/councilSessions";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -50,6 +57,14 @@ const verifiedSpeeches: CouncilSpeech[] = questionLikeSpeeches(allPublicSpeeches
 const VERIFIED_PAGE_SIZE = 20;
 
 const REGULAR_SESSION_TYPES = new Set(["定例会"]);
+
+// Phase203：質問通告書ベースの予定質問を会期ごとにまとめ、「開催済み（会議録の公開待ち）」と
+// 「これから開催される会期」を分けて表示するための集計。会期名・件数・質問予定日は
+// generalQuestions.jsonの実データのみを使う。
+const scheduledSessions = scheduledQuestionSessions(questions);
+const completedScheduledSessions = scheduledSessions.filter((s) => s.phase === "completed");
+const upcomingScheduledSessions = scheduledSessions.filter((s) => s.phase === "upcoming");
+const latestConfirmedSession = latestConfirmedCouncilSession(councilSessions);
 
 type QuestionSortKey = "dateDesc" | "dateAsc" | "memberName";
 
@@ -316,7 +331,7 @@ export function GeneralQuestionsPage() {
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">一般質問データベース</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市議会の一般質問・代表質問を、議員別、テーマ別、年度別に整理しています。質問回数や質問項目数のみで議員活動を評価するものではありません。このページには2種類のデータがあります。（1）直近会期の「質問通告書」に基づく予定質問項目（会議録公開前の暫定情報）、（2）公式会議録本文で実際の質問・答弁まで確認できた過去会期のアーカイブです。
+          延岡市議会の一般質問・代表質問を、議員別、テーマ別、年度別に整理しています。質問回数や質問項目数のみで議員活動を評価するものではありません。このページには2種類のデータがあります。（1）会議録がまだ公開されていない会期の「質問通告書」に基づく予定質問項目（開催済みで会議録の公開を待っている会期と、これから開催される会期の両方を含みます）、（2）公式会議録本文で実際の質問・答弁まで確認できた過去会期のアーカイブです。
         </p>
       </div>
 
@@ -355,6 +370,42 @@ export function GeneralQuestionsPage() {
       <p className="mb-4 px-1 text-xs leading-relaxed text-on-surface-variant">
         質問通告書に基づく予定内容です。会議録がまだ公開されていない会期が複数ある場合は、その全会期分を含みます。開催・実施の事実そのものは「のべおか市議会だより」で確認できている場合、その旨をカードに表示します（会議録は未公開のため、個々の答弁内容はまだ確認できていません）。会議録が公開でき次第、内容を確認のうえ更新します。
       </p>
+
+      {/* Phase203：同じ「予定質問」でも、開催済みで会議録の公開を待っている会期と、
+          これから開催される会期は意味が異なるため、状態を明記して分けて示す。
+          会期名・件数・日付はすべてgeneralQuestions.jsonの実データから取得する。 */}
+      {scheduledSessions.length > 0 && (
+        <div className="mb-4 space-y-3 px-1">
+          {completedScheduledSessions.length > 0 && (
+            <div className="rounded-xl border border-outline-variant bg-surface-container-low p-4">
+              <h3 className="text-sm font-semibold text-on-surface">
+                {LATEST_CONFIRMED_SESSION_HEADING}（会議録の公開待ち）
+              </h3>
+              <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">
+                {completedScheduledSessions.map((s) => (
+                  <li key={s.sessionName}>
+                    <span className="font-medium text-on-surface">{s.sessionName}</span>
+                    <span className="ml-2 rounded-full bg-secondary-container px-2 py-0.5 text-xs font-semibold text-on-secondary-container">
+                      {councilSessionPhaseLabels[s.phase]}
+                    </span>
+                    <span className="ml-2">
+                      予定質問{s.count}件（{s.memberCount}名）
+                      {s.newsletterConfirmed ? "／市議会だよりで開催確認済み" : ""}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {latestConfirmedSession && (
+                <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+                  議案等審議結果などの公式資料を確認できている直近の会期は「{latestConfirmedSession.title}」です。会議録本文が公開され次第、下の「確認済み」側へ移します。
+                </p>
+              )}
+            </div>
+          )}
+          <UpcomingSessionsNotice sessions={upcomingScheduledSessions} showQuestionsLink={false} />
+        </div>
+      )}
+
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="登録済み質問数" value={questions.length} unit="件" />
         <StatCard label="登録済み議員数" value={registeredMemberCount} unit="名" />

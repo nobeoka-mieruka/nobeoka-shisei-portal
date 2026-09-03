@@ -31,7 +31,14 @@ import committeeReportActivityData from "../data/committeeReportActivity.json";
 import archiveCouncilLeadershipData from "../data/archiveCouncilLeadership.json";
 import archiveCommitteeMembersData from "../data/archiveCommitteeMembers.json";
 import councilSessionsData from "../data/councilSessions.json";
-import { sessionSummaryStatusLabels } from "../lib/councilSessions";
+import {
+  LATEST_CONFIRMED_SESSION_HEADING,
+  UPCOMING_SESSION_HEADING,
+  councilSessionPhaseLabels,
+  joinSessionNames,
+  latestConfirmedCouncilSession,
+  sessionSummaryStatusLabels,
+} from "../lib/councilSessions";
 import type {
   CouncilMember,
   FormerMember,
@@ -63,7 +70,7 @@ import { ChartBarIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { allPublicSpeeches, questionLikeSpeeches } from "../lib/councilSpeeches";
-import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
+import { calculateGeneralQuestionStats, formatScheduledQuestionPeriod } from "../lib/generalQuestionStats";
 import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { isDayPreciseTerm } from "../lib/archiveMayors";
@@ -507,21 +514,41 @@ export function DataStatusPage() {
   // partially-verifiedへ改善）を、「未収録9件」のような粗い表示ではなく、確認済み／一部確認済み／
   // 未確認の内訳が分かる形で公開する（内部識別子UNR-060等は表示せず、既存のsessionSummaryStatusLabels
   // 語彙で統一）。
-  const councilSessionsList = councilSessionsData as { summaryStatus?: keyof typeof sessionSummaryStatusLabels }[];
+  const councilSessionsList = councilSessionsData as {
+    id: string;
+    title: string;
+    eraYear: string;
+    summaryStatus?: keyof typeof sessionSummaryStatusLabels;
+  }[];
+  // 収録範囲の元号表記は、固定文字列ではなくデータ（eraYear）の最初と最後から組み立てる。
+  const sessionsByIdAsc = [...councilSessionsList].sort((a, b) => a.id.localeCompare(b.id));
+  const sessionEraRange =
+    sessionsByIdAsc.length > 0
+      ? `${sessionsByIdAsc[0].eraYear}〜${sessionsByIdAsc[sessionsByIdAsc.length - 1].eraYear}`
+      : "確認中";
   const sessionSummaryStatusCounts = councilSessionsList.reduce<Record<string, number>>((acc, s) => {
     const key = s.summaryStatus ?? "unavailable";
     acc[key] = (acc[key] ?? 0) + 1;
     return acc;
   }, {});
+  // Phase203：この会期一覧は「公式資料を確認できた会期」だけを収録しており、これから開催される
+  // 会期（質問通告書のみが公開されている会期）は含まない。件数の食い違いに見えないよう明記する。
+  const latestConfirmedSession = latestConfirmedCouncilSession(councilSessionsList);
+  const upcomingSessionNote =
+    questionStats.upcomingScheduledSessions.length > 0
+      ? `${UPCOMING_SESSION_HEADING}（${joinSessionNames(questionStats.upcomingScheduledSessions.map((s) => s.sessionName))}）は、議案等審議結果などの公式資料がまだ公開されていないため、この${councilSessionsList.length}会期には含みません。`
+      : "";
   const councilSessionSummaryDomain: DataDomain = {
     label: "会期ごとの要約（確認状況）",
     count: councilSessionsList.length,
     unit: "会期",
-    scope: "収録済み全会期（平成12年〜令和8年）",
+    scope: latestConfirmedSession
+      ? `公式資料を確認できた会期のみ（${sessionEraRange}／${LATEST_CONFIRMED_SESSION_HEADING}：${latestConfirmedSession.title}）`
+      : `公式資料を確認できた会期のみ（${sessionEraRange}）`,
     detail: `${(Object.entries(sessionSummaryStatusCounts) as [string, number][])
       .sort(([a], [b]) => (a === "verified" ? -1 : b === "verified" ? 1 : a.localeCompare(b)))
       .map(([status, count]) => `${sessionSummaryStatusLabels[status as keyof typeof sessionSummaryStatusLabels] ?? status}：${count}会期`)
-      .join("／")}。「一部確認済み」は、公式資料（議案等審議結果PDF・国立国会図書館所蔵の会議録書誌等）で会期の実在・日程は確認できたが、会議録本文までは確認できていない状態で、市への確認や図書館での資料閲覧が必要な段階です。`,
+      .join("／")}。「一部確認済み」は、公式資料（議案等審議結果PDF・国立国会図書館所蔵の会議録書誌等）で会期の実在・日程は確認できたが、会議録本文までは確認できていない状態で、市への確認や図書館での資料閲覧が必要な段階です。${upcomingSessionNote}`,
     linkTo: "/council-documents",
     linkLabel: "会期一覧を見る",
     fullyCovered: (sessionSummaryStatusCounts.verified ?? 0) === councilSessionsList.length,
@@ -567,18 +594,36 @@ export function DataStatusPage() {
       label: "会議録未公開会期の予定質問",
       count: questionStats.scheduledCount,
       unit: "件",
+      // Phase203：開催済み（会議録の公開待ち）の会期と、これから開催される会期は別物のため、
+      // 会期の状態（councilSessionPhaseLabels）を必ず併記して区別する。
+      // 会期名・件数・質問予定日はすべてgeneralQuestions.jsonの実データから取得する。
       scope:
         questionStats.scheduledSessions.length > 0
-          ? questionStats.scheduledSessions.map((s) => s.sessionName).join("、")
+          ? [
+              questionStats.completedScheduledSessions.length > 0
+                ? `開催済み・会議録公開待ち：${joinSessionNames(questionStats.completedScheduledSessions.map((s) => s.sessionName))}（${questionStats.completedScheduledCount}件）`
+                : null,
+              questionStats.upcomingScheduledSessions.length > 0
+                ? `${UPCOMING_SESSION_HEADING}：${joinSessionNames(questionStats.upcomingScheduledSessions.map((s) => s.sessionName))}（${questionStats.upcomingScheduledCount}件）`
+                : null,
+            ]
+              .filter((s): s is string => s !== null)
+              .join("／")
           : "該当会期なし",
       detail:
         questionStats.scheduledSessions.length > 0
           ? questionStats.scheduledSessions
-              .map((s) =>
-                s.newsletterConfirmed
-                  ? `${s.sessionName}（${s.count}件）：会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです（TASK-079）。個々の質問項目・答弁内容は会議録公開後に確認します。`
-                  : `${s.sessionName}（${s.count}件）：会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。`,
-              )
+              .map((s) => {
+                const period = formatScheduledQuestionPeriod(s);
+                const periodText = period ? `一般質問の予定日：${period}。` : "";
+                const base = `${s.sessionName}（${councilSessionPhaseLabels[s.phase]}・${s.count}件／${s.memberCount}名）：${periodText}`;
+                if (s.phase === "upcoming") {
+                  return `${base}まだ開催されていない（または開催中の）会期です。議決結果・会議録とも未確認のため、「${LATEST_CONFIRMED_SESSION_HEADING}」には含めていません。`;
+                }
+                return s.newsletterConfirmed
+                  ? `${base}会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです（TASK-079）。個々の質問項目・答弁内容は会議録公開後に確認します。`
+                  : `${base}会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。`;
+              })
               .join(" ")
           : "該当する会期はありません。",
       linkTo: "/questions",

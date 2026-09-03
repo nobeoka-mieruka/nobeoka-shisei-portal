@@ -47,7 +47,8 @@ import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
 import { coverageHint } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
-import { calculateGeneralQuestionStats } from "../lib/generalQuestionStats";
+import { calculateGeneralQuestionStats, scheduledSessionBreakdownHint } from "../lib/generalQuestionStats";
+import { LATEST_CONFIRMED_SESSION_HEADING, UPCOMING_SESSION_HEADING } from "../lib/councilSessions";
 import { UPDATE_HISTORY_CATEGORY_CLASS, sortUpdateHistoryByDateDesc } from "../lib/updateHistory";
 import { formatJapaneseDate } from "../config/site";
 import { homeDataCoverageItems } from "../lib/dataCompletenessSummary";
@@ -410,9 +411,18 @@ export function HomePage() {
               label="会議録未公開会期の予定質問"
               value={questionStats.scheduledCount}
               unit="件"
-              hint={questionStats.scheduledSessions
-                .map((s) => `${s.sessionName}：${s.count}件／質問通告書ベース${s.newsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`)
-                .join("　")}
+              hint={scheduledSessionBreakdownHint(questionStats.scheduledSessions)}
+            />
+          )}
+          {/* Phase203：開催済みで会議録公開待ちの会期と、これから開催される会期を混同しないよう、
+              「次回・開催予定の会期」を独立したカードとして表示する。会期名・件数・日付は
+              generalQuestions.json（質問通告書ベース）の実データのみを使う。 */}
+          {questionStats.upcomingScheduledSessions.length > 0 && (
+            <StatCard
+              label={UPCOMING_SESSION_HEADING}
+              value={questionStats.upcomingScheduledSessions.map((s) => s.sessionName).join("、")}
+              compact
+              hint={`まだ開催されていない（または開催中の）会期です。公式資料を確認できている「${LATEST_CONFIRMED_SESSION_HEADING}」とは別に扱っており、議決結果・会議録はいずれも未確認です。${scheduledSessionBreakdownHint(questionStats.upcomingScheduledSessions)}`}
             />
           )}
           <StatCard

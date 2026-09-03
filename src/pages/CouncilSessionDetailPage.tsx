@@ -1,7 +1,7 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import councilSessionsData from "../data/councilSessions.json";
 import billVotesData from "../data/billVotes.json";
-import type { BillVoteItem, CouncilSession } from "../types";
+import type { BillVoteItem, CouncilSession, GeneralQuestionItem } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
 import { JsonLd } from "../components/JsonLd";
@@ -10,7 +10,15 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CouncilDocumentCard } from "../components/council/CouncilDocumentCard";
 import { SessionSummaryStatusBadge } from "../components/council/SessionSummaryStatusBadge";
 import { councilDocumentCategoryLabels, councilDocumentCategoryOrder, publicDocuments } from "../lib/councilDocuments";
-import { billsForSession, sessionBillStats, sessionSummaryStatusLabels } from "../lib/councilSessions";
+import {
+  billsForSession,
+  latestConfirmedCouncilSession,
+  sessionBillStats,
+  sessionSummaryStatusLabels,
+} from "../lib/councilSessions";
+import { scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
+import generalQuestionsData from "../data/generalQuestions.json";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -18,6 +26,11 @@ import { GlobeIcon } from "../components/icons";
 
 const councilSessions = councilSessionsData as CouncilSession[];
 const billVotes = billVotesData as BillVoteItem[];
+// Phase203：公式資料を確認できている直近の会期と、質問通告書だけが公開されている開催予定の会期。
+const latestConfirmedSessionId = latestConfirmedCouncilSession(councilSessions)?.id;
+const upcomingScheduledSessions = scheduledQuestionSessions(generalQuestionsData as GeneralQuestionItem[]).filter(
+  (s) => s.phase === "upcoming",
+);
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -54,6 +67,7 @@ export function CouncilSessionDetailPage() {
     .map((category) => ({ category, documents: visibleDocuments.filter((d) => d.category === category) }))
     .filter((group) => group.documents.length > 0);
 
+  const isLatestConfirmedSession = session.id === latestConfirmedSessionId;
   const sessionBills = billsForSession(billVotes, session);
   const stats = sessionBillStats(sessionBills);
   const summaryStatus = session.summaryStatus;
@@ -110,6 +124,10 @@ export function CouncilSessionDetailPage() {
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
         掲載しているPDFは、延岡市議会および延岡市が公開している公式資料を、市民が確認しやすいよう定例会ごとに整理したものです。資料の内容は変更せず掲載しています。最新情報および正式な内容については、延岡市議会公式サイトもあわせてご確認ください。当サイトは、特定の議員、会派、政党、議案への支持・反対を目的とするものではありません。
       </p>
+
+      {/* Phase203：直近の確認済み会期の詳細ページで、「この会期が最新」と「これから開催される
+          会期がある」を取り違えないよう、開催予定の会期を別枠で案内する。 */}
+      {isLatestConfirmedSession && <UpcomingSessionsNotice sessions={upcomingScheduledSessions} />}
 
       <SectionCard title="この会期の概要">
         {summaryStatus && summaryStatus !== "unavailable" ? (
