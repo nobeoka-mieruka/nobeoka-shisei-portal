@@ -31,6 +31,12 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
 import { MAYOR_PROMISE_LEVELS } from "../lib/mayorPromiseTerms";
+import {
+  classifyPromiseBudgetLinkage,
+  classifyPromiseBillLinkage,
+  linkageToneClass,
+  type LinkageDisplay,
+} from "../lib/mayorPromiseLinkage";
 
 const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
   confirmed: "確定",
@@ -61,6 +67,23 @@ const UNREGISTERED = "情報未登録";
 function relatedFieldDisplay(value: string, kind: "予算" | "議案"): string {
   if (value !== "確認中") return value;
   return `現在確認できる公式資料では、この公約に対応する個別の${kind}を特定できていません（「${kind}が存在しない」という意味ではありません）。`;
+}
+
+/**
+ * Phase208：予算・議案の状態を市民向けの結論として1行で示す。
+ * 内部コード（reasonCode）は表示せず、色だけでなく必ず文字で状態が分かるようにする。
+ */
+function LinkageConclusion({ display }: { display: LinkageDisplay }) {
+  return (
+    <>
+      <span
+        className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${linkageToneClass[display.tone]}`}
+      >
+        {display.pillLabel}
+      </span>
+      <p className="mt-1.5 text-sm leading-relaxed text-on-surface">{display.description}</p>
+    </>
+  );
 }
 
 function isPdfUrl(url: string): boolean {
@@ -164,6 +187,8 @@ export function MayorPromiseDetailPage() {
   const relatedPressConferences = (promise.relatedPressConferenceDates ?? [])
     .map((date) => mayorPressConferences.find((c) => c.date === date))
     .filter((c): c is (typeof mayorPressConferences)[number] => !!c);
+  const budgetLinkage = classifyPromiseBudgetLinkage(promise);
+  const billLinkage = classifyPromiseBillLinkage(promise);
   const promiseTimeline = buildPromiseTimeline(promise);
   const categoryPromises = promisesData.promises.filter((p) => p.categoryId === promise.categoryId);
   const idx = categoryPromises.findIndex((p) => p.id === promise.id);
@@ -346,11 +371,21 @@ export function MayorPromiseDetailPage() {
         <dl className="grid grid-cols-1 gap-x-4 gap-y-3 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">予算措置</dt>
-            <dd className="mt-0.5 text-on-surface">{relatedFieldDisplay(promise.relatedBudget, "予算")}</dd>
+            <dd className="mt-1">
+              <LinkageConclusion display={budgetLinkage.display} />
+              <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
+                {relatedFieldDisplay(promise.relatedBudget, "予算")}
+              </p>
+            </dd>
           </div>
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">関連議案</dt>
-            <dd className="mt-0.5 text-on-surface">{relatedFieldDisplay(promise.relatedBill, "議案")}</dd>
+            <dd className="mt-1">
+              <LinkageConclusion display={billLinkage.display} />
+              <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
+                {relatedFieldDisplay(promise.relatedBill, "議案")}
+              </p>
+            </dd>
           </div>
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">担当部署</dt>
@@ -425,7 +460,12 @@ export function MayorPromiseDetailPage() {
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-on-surface-variant">関連情報は登録されていません</p>
+          /* Phase208：「関連議案：なし」ではなく、なぜ個別にリンクできる議案が無いのかを実態に応じて示す。
+             詳しい説明は上の「関連情報」で述べているため、ここでは状態だけを短く再掲する。 */
+          <p className="text-sm leading-relaxed text-on-surface-variant">
+            個別にリンクできる議案・一般質問・記者会見は登録されていません（議案の状況：
+            {billLinkage.display.pillLabel}）。理由は上の「関連情報」に記載しています。
+          </p>
         )}
       </SectionCard>
 

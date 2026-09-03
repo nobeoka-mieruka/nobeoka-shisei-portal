@@ -9,7 +9,12 @@
  * ID重複・status/statusLabel整合性・確定ステータスの根拠資料必須等）は重複させず、
  * ここではPhase136で新たに追加した「予算→議案の追跡チェーン」に固有の整合性のみを検証する。
  *
- * 使い方: node scripts/test-mayor-promise-tracking.mjs
+ * Phase208で追加：予算→議案→成果の状態表現（src/lib/mayorPromiseLinkage.ts）の検証。
+ * 「独立した議案が無いことを確認済み」と「まだ確認できていない」を必ず別の状態として数え、
+ * 一次資料の裏付けが無いまま前者へ格上げされていないことを機械的に保証する。
+ *
+ * 使い方: node --experimental-strip-types scripts/test-mayor-promise-tracking.mjs
+ * （src/lib/mayorPromiseLinkage.tsを直接importするため、NodeのTS直接実行を使う）
  */
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -17,6 +22,10 @@ import assert from "node:assert/strict";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const readJson = (relPath) => JSON.parse(readFileSync(join(ROOT, relPath), "utf8"));
+
+const { classifyPromiseBudgetLinkage, classifyPromiseBillLinkage, summarizeBillLinkage } = await import(
+  "../src/lib/mayorPromiseLinkage.ts"
+);
 
 let passCount = 0;
 function check(label, fn) {
@@ -190,6 +199,145 @@ check('予算・議案の確認状況判定（"確認中"前方一致）が、sr
     }
   }
   assert.equal(suspects.length, 0, `relatedBudget/relatedBillの確認状況判定を独自に再実装しているファイル: ${suspects.join("、")}`);
+});
+
+console.log("\nPhase208：予算→議案→成果の状態表現");
+
+/**
+ * Phase205（reports/phase205-mayor-promise-linkage.json）で確定した内訳。
+ * これはハードコードした「期待する結論」ではなく、一次資料の記述内容が変わらない限り
+ * 変わってはならない baseline。新しい一次資料で状態が動いた場合は、この期待値の更新と
+ * 根拠（どの資料のどこ）の記録をセットで行う。
+ */
+const PHASE205_BILL_BASELINE = {
+  CONFIRMED_RELATED_BILL: 1,
+  BUDGET_BILL_INCLUDED: 4,
+  NO_SEPARATE_BILL_LIKELY: 7,
+  PENDING_FUTURE_BILL: 1,
+  NOT_INTERPRETED: 1,
+};
+
+const billLinkages = promises.map((p) => ({ id: p.id, ...classifyPromiseBillLinkage(p) }));
+const budgetLinkages = promises.map((p) => ({ id: p.id, ...classifyPromiseBudgetLinkage(p) }));
+const tally = (rows) => {
+  const out = {};
+  for (const r of rows) out[r.reasonCode] = (out[r.reasonCode] ?? 0) + 1;
+  return out;
+};
+const billTally = tally(billLinkages);
+const budgetTally = tally(budgetLinkages);
+console.log(`  議案側の内訳：${JSON.stringify(billTally)}`);
+console.log(`  予算側の内訳：${JSON.stringify(budgetTally)}`);
+
+check("議案側の理由コードの内訳がPhase205のbaselineと一致する（根拠なく状態が動いていない）", () => {
+  assert.deepEqual(billTally, PHASE205_BILL_BASELINE);
+  const total = Object.values(billTally).reduce((a, b) => a + b, 0);
+  assert.equal(total, promises.length, "全公約が1つの理由コードへ分類されていません");
+});
+
+check("予算側は一次資料で対応関係を確認できた公約のみがCONFIRMED_BUDGET_ITEMになっている", () => {
+  assert.equal(budgetTally.CONFIRMED_BUDGET_ITEM, 4);
+  const total = Object.values(budgetTally).reduce((a, b) => a + b, 0);
+  assert.equal(total, promises.length);
+});
+
+check('「議案化を伴わない可能性が高い」だけを根拠に「独立した議案が無いことを確認済み」へ格上げしていない（NO_SEPARATE_BILL_CONFIRMEDは0件）', () => {
+  const upgraded = billLinkages.filter((l) => l.reasonCode === "NO_SEPARATE_BILL_CONFIRMED");
+  assert.equal(
+    upgraded.length,
+    0,
+    `一次資料が断定していないのに確認済みへ格上げされた公約があります: ${upgraded.map((l) => l.id).join("、")}`,
+  );
+});
+
+check("原文が結論を留保している（「断定はしていない」）公約は、「独立した議案が無いことを確認済み」に分類されない", () => {
+  const violations = billLinkages.filter((l) => l.hedged && l.reasonCode === "NO_SEPARATE_BILL_CONFIRMED");
+  assert.equal(violations.length, 0, `ヘッジ表現があるのに確認済み扱いの公約: ${violations.map((l) => l.id).join("、")}`);
+});
+
+check("原文が結論を留保している公約は、表示文からも留保が消えていない（確認済みと言い切っていない）", () => {
+  // 予算議案への包含だけが整理済みで、別議案の不存在までは断定していない公約
+  // （例：1-2）について、市民向けの説明文からその留保が落ちていないことを保証する。
+  const hedgedRows = billLinkages.filter((l) => l.hedged);
+  assert.ok(hedgedRows.length > 0, "ヘッジ表現を持つ公約が1件も検出されていません（判定式の退行の疑い）");
+  for (const l of hedgedRows) {
+    assert.ok(
+      /確認中|引き続き確認/.test(l.display.description),
+      `公約${l.id}の説明文に「確認中」であることの断りがありません: ${l.display.description}`,
+    );
+  }
+});
+
+check("「独立議案なしを確認済み」と「追加確認中」が別の数として集計される（同じ数に潰れていない）", () => {
+  const summary = summarizeBillLinkage(promises);
+  assert.equal(summary.confirmedBill, PHASE205_BILL_BASELINE.CONFIRMED_RELATED_BILL);
+  assert.equal(summary.noSeparateBillConfirmed, PHASE205_BILL_BASELINE.BUDGET_BILL_INCLUDED);
+  assert.equal(
+    summary.underReview,
+    PHASE205_BILL_BASELINE.NO_SEPARATE_BILL_LIKELY +
+      PHASE205_BILL_BASELINE.PENDING_FUTURE_BILL +
+      PHASE205_BILL_BASELINE.NOT_INTERPRETED,
+  );
+  assert.equal(summary.sourceNotFound, 0);
+  assert.equal(
+    summary.confirmedBill + summary.noSeparateBillConfirmed + summary.underReview + summary.sourceNotFound,
+    promises.length,
+  );
+  console.log(
+    `    関連議案を確認済み：${summary.confirmedBill}件／予算議案に含まれることを確認：${summary.noSeparateBillConfirmed}件／追加確認中：${summary.underReview}件`,
+  );
+});
+
+check("全公約の表示文言（バッジ・説明文）が空でなく、内部コードをそのまま含まない", () => {
+  const codes = [
+    "CONFIRMED_RELATED_BILL",
+    "BUDGET_BILL_INCLUDED",
+    "NO_SEPARATE_BILL_CONFIRMED",
+    "NO_SEPARATE_BILL_LIKELY",
+    "PENDING_FUTURE_BILL",
+    "NOT_INTERPRETED",
+    "UNDER_REVIEW",
+    "SOURCE_NOT_FOUND",
+    "CONFIRMED_BUDGET_ITEM",
+    "NOT_IN_MAJOR_PROJECT_LIST",
+    "WITHIN_EXISTING_OPERATING_COST",
+    "MULTI_YEAR_MULTI_BILL",
+  ];
+  for (const l of [...billLinkages, ...budgetLinkages]) {
+    assert.ok(l.display.pillLabel.length > 0, `${l.id}のバッジ文言が空です`);
+    assert.ok(l.display.description.length > 0, `${l.id}の説明文が空です`);
+    for (const code of codes) {
+      assert.ok(!l.display.pillLabel.includes(code), `${l.id}のバッジ文言に内部コード${code}が含まれています`);
+      assert.ok(!l.display.description.includes(code), `${l.id}の説明文に内部コード${code}が含まれています`);
+    }
+    assert.ok(
+      !/^なし$|：なし|関連議案：なし/.test(l.display.pillLabel),
+      `${l.id}のバッジ文言が「なし」と断定しています（実態に応じた表現にしてください）`,
+    );
+  }
+});
+
+check("議案・予算の状態判定（理由コードの読み取り）がsrc/lib/mayorPromiseLinkage.ts以外で再実装されていない", () => {
+  const walk = (dir, out) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const q = join(dir, entry.name);
+      if (entry.isDirectory()) walk(q, out);
+      else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) out.push(q);
+    }
+  };
+  const files = [];
+  walk(join(ROOT, "src/pages"), files);
+  walk(join(ROOT, "src/components"), files);
+  const suspects = [];
+  for (const f of files) {
+    const text = readFileSync(f, "utf8");
+    if (/議案化を伴わない可能性が高い|独立の議案は無い|主要事業一覧/.test(text)) suspects.push(f);
+  }
+  assert.equal(
+    suspects.length,
+    0,
+    `relatedBudget/relatedBillの状態判定を独自に再実装しているファイル: ${suspects.join("、")}`,
+  );
 });
 
 console.log(`\n${passCount}件成功`);

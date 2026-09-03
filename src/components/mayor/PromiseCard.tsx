@@ -3,22 +3,28 @@ import type { MayorPromiseDocument, MayorPromiseItem } from "../../types";
 import { GlobeIcon } from "../icons";
 import { formatJapaneseDate } from "../../config/site";
 import { MayorPromiseStatusBadge } from "./MayorPromiseStatusBadge";
-import { isPromiseBudgetConfirmed, isPromiseBillConfirmed } from "../../lib/mayorPromiseStatus";
+import {
+  classifyPromiseBudgetLinkage,
+  classifyPromiseBillLinkage,
+  linkageToneClass,
+  type LinkageDisplay,
+} from "../../lib/mayorPromiseLinkage";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
-/** Phase140：予算・議案の確認状況を短い結論バッジで表す（色だけでなく文字で状態を示す）。 */
-function ConclusionPill({ label, confirmed }: { label: string; confirmed: boolean }) {
+/**
+ * Phase140：予算・議案の確認状況を短い結論バッジで表す（色だけでなく文字で状態を示す）。
+ * Phase208：「確認済み／資料確認中」の2値表示をやめ、実態に応じた市民向けの文言にした
+ * （例：「予算議案に含まれています」と「追加確認中」を区別する）。内部コードは表示しない。
+ */
+function ConclusionPill({ label, display }: { label: string; display: LinkageDisplay }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${
-        confirmed
-          ? "bg-[#e0f2e9] text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]"
-          : "border border-outline-variant text-on-surface-variant"
-      }`}
+      title={display.description}
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${linkageToneClass[display.tone]}`}
     >
-      {label}：{confirmed ? "確認済み" : "資料確認中"}
+      {label}：{display.pillLabel}
     </span>
   );
 }
@@ -36,8 +42,8 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
     const doc = documents.find((d) => d.key === ref.documentKey);
     if (doc) evidenceDocs.push({ ...doc, page: ref.page });
   }
-  const budgetConfirmed = isPromiseBudgetConfirmed(promise);
-  const billConfirmed = isPromiseBillConfirmed(promise);
+  const budgetLinkage = classifyPromiseBudgetLinkage(promise);
+  const billLinkage = classifyPromiseBillLinkage(promise);
 
   return (
     <li className="rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
@@ -64,8 +70,8 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
       {/* Phase140項目3：結論（第1層）。詳しい経緯を読まなくても「予算・議案・成果まで
           確認できているか」がひと目で分かるようにする。 */}
       <div className="mt-2.5 flex flex-wrap gap-1.5">
-        <ConclusionPill label="予算" confirmed={budgetConfirmed} />
-        <ConclusionPill label="議案" confirmed={billConfirmed} />
+        <ConclusionPill label="予算" display={budgetLinkage.display} />
+        <ConclusionPill label="議案" display={billLinkage.display} />
         {hasCompletedMeasure && (
           <span className="inline-flex items-center gap-1 rounded-full bg-[#e0f2e9] px-2.5 py-1 text-xs font-medium text-[#1e6b45] dark:bg-[#0f2e1f] dark:text-[#7fd9a8]">
             成果：完了した取組あり
@@ -94,13 +100,17 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
           </span>
         </summary>
         <div className="grid grid-cols-1 gap-3 px-3 pb-3 sm:grid-cols-2">
+          {/* Phase208：バッジの短い文言だけでは伝わらない「なぜその状態なのか」を、
+              一次資料の原文（第3層）より前に市民向けの1文で示す。 */}
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
-            <p className="mt-1 text-sm text-on-surface">{promise.relatedBudget}</p>
+            <p className="mt-1 text-sm leading-relaxed text-on-surface">{budgetLinkage.display.description}</p>
+            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{promise.relatedBudget}</p>
           </div>
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
-            <p className="mt-1 text-sm text-on-surface">{promise.relatedBill}</p>
+            <p className="mt-1 text-sm leading-relaxed text-on-surface">{billLinkage.display.description}</p>
+            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{promise.relatedBill}</p>
           </div>
         </div>
       </details>
