@@ -1,0 +1,1256 @@
+{
+  "generatedAt": "2026-09-03",
+  "phase": "Phase207",
+  "totalBills": 1177,
+  "candidates": {
+    "EXPLAINABLE_FROM_PRIMARY": 30,
+    "SHARED_REASON_HELD": 56,
+    "SHARED_REASON_QUOTE": 90
+  },
+  "appliedCount": 176,
+  "skippedCount": 0,
+  "skipped": [],
+  "levels": {
+    "level1": 346,
+    "level2": 179,
+    "level3": 652
+  },
+  "sourceTextVerified": 831,
+  "sharedProposalStatementCount": 146,
+  "sourceRefVerified": 798,
+  "missingSourceRef": [],
+  "applied": [
+    {
+      "id": "2023-06-gian-24",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R050616A",
+      "addedDoc": false,
+      "quoteLength": 126
+    },
+    {
+      "id": "2023-12-gian-81",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 60
+    },
+    {
+      "id": "2023-12-gian-82",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 64
+    },
+    {
+      "id": "2023-12-gian-83",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 46
+    },
+    {
+      "id": "2023-12-gian-84",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 52
+    },
+    {
+      "id": "2023-12-gian-85",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 58
+    },
+    {
+      "id": "2023-12-gian-86",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 76
+    },
+    {
+      "id": "2023-12-gian-87",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 44
+    },
+    {
+      "id": "2023-12-gian-88",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 42
+    },
+    {
+      "id": "2024-03-gian-140",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 140
+    },
+    {
+      "id": "2024-12-gian-89",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 58
+    },
+    {
+      "id": "2024-12-gian-90",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 60
+    },
+    {
+      "id": "2024-12-gian-91",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 65
+    },
+    {
+      "id": "2024-12-gian-92",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 66
+    },
+    {
+      "id": "2024-12-gian-93",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 76
+    },
+    {
+      "id": "2024-12-gian-94",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 45
+    },
+    {
+      "id": "2024-12-gian-95",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 45
+    },
+    {
+      "id": "2024-12-gian-96",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 42
+    },
+    {
+      "id": "2024-12-gian-97",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 58
+    },
+    {
+      "id": "2024-12-gian-98",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 45
+    },
+    {
+      "id": "2022-12-gian-87",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 60
+    },
+    {
+      "id": "2022-12-gian-88",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 44
+    },
+    {
+      "id": "2022-12-gian-89",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 65
+    },
+    {
+      "id": "2022-12-gian-90",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 47
+    },
+    {
+      "id": "2022-12-gian-91",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 48
+    },
+    {
+      "id": "2019-12-gian-78",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R011126A",
+      "addedDoc": false,
+      "quoteLength": 58
+    },
+    {
+      "id": "2019-12-gian-79",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R011126A",
+      "addedDoc": false,
+      "quoteLength": 60
+    },
+    {
+      "id": "2019-12-gian-80",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R011126A",
+      "addedDoc": false,
+      "quoteLength": 82
+    },
+    {
+      "id": "2021-06-gian-20",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R030608A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2021-06-gian-21",
+      "type": "EXPLAINABLE_FROM_PRIMARY",
+      "fileName": "R030608A",
+      "addedDoc": false,
+      "quoteLength": 41
+    },
+    {
+      "id": "2022-09-gian-57",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 177
+    },
+    {
+      "id": "2021-12-gian-92",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-93",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-94",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-95",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-96",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-97",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-98",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-99",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-12-gian-100",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R031130A",
+      "addedDoc": false,
+      "quoteLength": 121
+    },
+    {
+      "id": "2021-09-gian-46",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R030831A",
+      "addedDoc": false,
+      "quoteLength": 162
+    },
+    {
+      "id": "2021-09-gian-47",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R030831A",
+      "addedDoc": false,
+      "quoteLength": 162
+    },
+    {
+      "id": "2021-09-gian-48",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R030831A",
+      "addedDoc": false,
+      "quoteLength": 162
+    },
+    {
+      "id": "2021-09-gian-49",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R030831A",
+      "addedDoc": false,
+      "quoteLength": 162
+    },
+    {
+      "id": "2020-12-gian-66",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-67",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-68",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-69",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-70",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-71",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-72",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-73",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-74",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-75",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-76",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-77",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-78",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-79",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-80",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-81",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-82",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-83",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-85",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-86",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-87",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-89",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-90",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-91",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-12-gian-92",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R021130A",
+      "addedDoc": false,
+      "quoteLength": 145
+    },
+    {
+      "id": "2020-03-gian-112",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 165
+    },
+    {
+      "id": "2020-03-gian-113",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 165
+    },
+    {
+      "id": "2020-03-gian-114",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 165
+    },
+    {
+      "id": "2020-03-gian-115",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 165
+    },
+    {
+      "id": "2020-03-gian-116",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-117",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-118",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-119",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-120",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-121",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-122",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-123",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-124",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-125",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-126",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-127",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2020-03-gian-128",
+      "type": "SHARED_REASON_HELD",
+      "fileName": "R020225A",
+      "addedDoc": false,
+      "quoteLength": 200
+    },
+    {
+      "id": "2023-06-gian-11",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050616A",
+      "addedDoc": false,
+      "quoteLength": 166
+    },
+    {
+      "id": "2023-09-gian-52",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-53",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-54",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-55",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-56",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-57",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-58",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-59",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-09-gian-60",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R050825A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-12-gian-78",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2023-12-gian-79",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R051124A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2024-03-gian-130",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-131",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-132",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-133",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-134",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-135",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-136",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-03-gian-137",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060222A",
+      "addedDoc": false,
+      "quoteLength": 40
+    },
+    {
+      "id": "2024-09-gian-40",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-41",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-42",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-43",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-44",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-45",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-46",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-47",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-48",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-49",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-50",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-09-gian-51",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R060902A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2024-12-gian-78",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 47
+    },
+    {
+      "id": "2024-12-gian-79",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 47
+    },
+    {
+      "id": "2024-12-gian-80",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 49
+    },
+    {
+      "id": "2024-12-gian-81",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R061122A",
+      "addedDoc": false,
+      "quoteLength": 49
+    },
+    {
+      "id": "2025-09-gian-54",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-55",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-56",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-57",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-58",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-59",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-60",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-61",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-62",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-63",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-64",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-65",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 35
+    },
+    {
+      "id": "2025-09-gian-67",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2025-09-gian-68",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R070829A",
+      "addedDoc": false,
+      "quoteLength": 39
+    },
+    {
+      "id": "2025-12-gian-87",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-88",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-89",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-90",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-91",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-92",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-93",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-94",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-95",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-96",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-97",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-98",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-99",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-100",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-101",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-102",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-104",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-105",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-106",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-107",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-108",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-109",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-110",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-111",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-112",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2025-12-gian-113",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R071121A",
+      "addedDoc": false,
+      "quoteLength": 54
+    },
+    {
+      "id": "2022-12-gian-83",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 33
+    },
+    {
+      "id": "2022-12-gian-84",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 33
+    },
+    {
+      "id": "2022-12-gian-85",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R041125A",
+      "addedDoc": false,
+      "quoteLength": 33
+    },
+    {
+      "id": "2022-09-gian-47",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-48",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-49",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-50",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-51",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-52",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-53",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-54",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-55",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2022-09-gian-56",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R040826A",
+      "addedDoc": false,
+      "quoteLength": 38
+    },
+    {
+      "id": "2021-06-gian-16",
+      "type": "SHARED_REASON_QUOTE",
+      "fileName": "R030608A",
+      "addedDoc": false,
+      "quoteLength": 52
+    }
+  ]
+}

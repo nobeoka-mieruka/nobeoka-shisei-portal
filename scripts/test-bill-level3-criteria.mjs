@@ -91,14 +91,30 @@ check("Phase146でR1（REVIEW内NEAR_SAFE候補）36件を一次資料検証し�
 
 check("Phase147でR1残存7件のうち6件を一次資料再検証し、Level3化した4件・Level2止まりとした2件が意図通りの区分になっている（無理な昇格・意図しない後退が無いことの固定リスト回帰）。残り1件（議案第9号・再議）は政治的に係争性の高い内容のため意図的に既存維持とした（Level1のまま）", () => {
   const phase147Level3Ids = ["2023-06-gian-10", "2023-06-gian-20", "2023-06-gian-21", "2021-06-gian-25"];
-  const phase147Level2Ids = ["2021-06-gian-20", "2021-06-gian-21"];
+  /*
+   * Phase207による更新（なぜ動いたか）：
+   * Phase147がLevel2止まりとした2件（2021-06-gian-20・2021-06-gian-21）は、
+   * 「本案は」等で始まる定型の提案理由文が抽出できなかったためLevel2に据え置かれていた。
+   * しかし当時のverificationNoteには、会議録本文から転記した
+   * 「議案第二〇号は藤の木辺地において、農道小原潜水橋の補修工事を行うものであります。」のように、
+   * その議案だけを指し、議案名からは分からない事実（対象の施設名・工事内容）を含む原文引用が
+   * 既に記録されていた。Phase206でこの点を再点検し、Phase207で原文をそのまま提出理由として
+   * 登録した（要約・言い換え・理由の補完はしていない。原文完全一致を
+   * scripts/test-bill-phase206-explainability.mjs で検証している）。
+   * したがってこの2件はLevel3へ前進しており、意図しない後退ではない。
+   */
+  const phase207PromotedFromPhase147Level2Ids = ["2021-06-gian-20", "2021-06-gian-21"];
   for (const id of phase147Level3Ids) {
     const b = billVotes.find((x) => x.id === id);
     assert.ok(b && isLevel3(b), `${id}はPhase147でLevel3化されているはずですが、Level3条件を満たしていません`);
   }
-  for (const id of phase147Level2Ids) {
+  for (const id of phase207PromotedFromPhase147Level2Ids) {
     const b = billVotes.find((x) => x.id === id);
-    assert.ok(b && isLevel2(b), `${id}はPhase147でLevel2止まりとしたはずですが、Level2条件を満たしていません`);
+    assert.ok(b && isLevel3(b), `${id}はPhase207で原文引用を提出理由として登録しLevel3化したはずですが、Level3条件を満たしていません`);
+    assert.ok(
+      (b.verificationNote ?? "").includes("Phase206-207追記"),
+      `${id}のverificationNoteにPhase206-207の経緯が記録されていません`,
+    );
   }
   const bill9 = billVotes.find((x) => x.id === "2023-07-extraordinary-01-gian-9");
   assert.ok(bill9 && !isLevel2(bill9) && !isLevel3(bill9), "議案第9号（再議）は今回意図的に既存維持（Level1）としたはずが、Level2/3へ変化しています");
@@ -143,14 +159,31 @@ check("1,177件全体の「原資料到達性区分（A/B/D）×説明品質段�
   let sum = 0;
   for (const cat of Object.keys(matrix)) for (const lv of Object.keys(matrix[cat])) sum += matrix[cat][lv];
   assert.equal(sum, 1177, `クロス集計の合計が1,177件ではありません（${sum}件）: ${JSON.stringify(matrix)}`);
-  // D区分は常にLevel1のみのはず（本文確認・独自要約化はsourceTextVerifiedAt設定と同時に
-  // transcriptUrlも設定する実装のため、検証済みの議案は同時にA/Bへ再分類され、D区分から
-  // 抜ける。D区分に残っている議案＝まだ会議録リンクが個別登録されていない議案、という
-  // 対応関係が常に保たれているはず）。
-  const dTotal = matrix.D[1] + matrix.D[2] + matrix.D[3];
-  assert.equal(matrix.D[1], dTotal, `D区分にLevel1以外の議案があります（Level1=${matrix.D[1]}件、D区分合計=${dTotal}件）`);
-  assert.equal(matrix.D[2], 0, "D区分にLevel2の議案があります（想定外）");
-  assert.equal(matrix.D[3], 0, "D区分にLevel3の議案があります（想定外：D区分はまだ個別リンク未登録のはず）");
+  /*
+   * この不変条件が守りたいのは「本文を確認したことになっている議案は、必ず会議録本文へ
+   * たどり着けること」であり、たどり着く先が transcriptUrl であること自体ではない。
+   *
+   * Phase207による更新（なぜ動いたか）：
+   * Phase160 が会議録本文（提案理由説明の日）まで確認しながら billVotes.json へ反映せず
+   * 保留していた56件を、Phase207 で反映した。この56件について分かっているのは
+   * 「提案理由説明が載っている会議録のファイル名」であり、議決日の本会議録
+   * （transcriptUrl に入れている種類のリンク）ではない。議決日のファイル名は確認できて
+   * いないため、推測でtranscriptUrlを埋めることはせず、確認できた会議録を
+   * relatedDocumentUrls（議案の提案理由の説明（会議録））として登録した。
+   * その結果、D区分（transcriptUrl未登録）にLevel2が56件生じる。
+   * そこで不変条件を「D区分にLevel2以上があってはならない」から
+   * 「D区分でLevel2以上のものは、必ず会議録リンクをrelatedDocumentUrlsに持つ」へ改めた。
+   */
+  assert.equal(matrix.D[3], 0, "D区分にLevel3の議案があります（想定外：個別説明を書いた議案は会議録リンクを持つはず）");
+  const dVerifiedWithoutMinutes = billVotes
+    .filter((b) => classifyRetrieval(b) === "D" && levelOf(b) >= 2)
+    .filter((b) => !(b.relatedDocumentUrls ?? []).some((d) => d.sourceType === "会議録"))
+    .map((b) => b.id);
+  assert.deepEqual(
+    dVerifiedWithoutMinutes,
+    [],
+    `会議録リンクを持たないのに本文確認済みになっている議案があります: ${dVerifiedWithoutMinutes.join("、")}`,
+  );
 });
 
 check("Level3の議案は、根拠資料（sourceExcerpt相当）を追跡できる：sourceFilePath/sourceDocumentIdに加え、会議録の実際の日付（fileName）が既存transcriptUrlと異なる場合はrelatedDocumentUrlsに正しいリンクを持つ", () => {

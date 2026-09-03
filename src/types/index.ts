@@ -1388,6 +1388,24 @@ export type BillVoteMethod =
 export type IndividualVoteDisclosureStatus = "disclosed" | "notDisclosed" | "unconfirmed";
 
 /**
+ * Phase206/207：複数議案が一括で提案説明された場合の、会議録原文の共通説明。
+ * 「この議案だけの説明が存在しない」ことと「共通説明までは確認できている」ことを
+ * 画面上で区別するために、個別説明（reason / mainChanges）とは別のフィールドで保持する。
+ */
+export interface BillSharedProposalStatement {
+  /** 会議録原文の引用（そのまま。要約・言い換え・補完はしない）。 */
+  quote: string;
+  /** 引用元の会議録ファイル名（例："R040826A"）。 */
+  sourceFileName: string;
+  /** 引用元の会議録URL（延岡市議会公式の会議録検索システム）。 */
+  sourceUrl: string;
+  /** この引用を一次資料本文と突き合わせて確認した日付（ISO形式）。 */
+  verifiedAt: string;
+  /** 引用を取得した経緯（どのフェーズのどの記録から転記したか）。 */
+  generatedFrom: string;
+}
+
+/**
  * 議案ごとの賛否データベース1件分のデータ（第1段階：構造のみ）。
  * 架空の議案・議員・賛否結果は登録しないこと（未確認の場合は billVotes.json を空配列のままにする）。
  */
@@ -1450,6 +1468,13 @@ export interface BillVoteItem {
   mainChanges?: string[];
   /** 市民生活への影響。一次資料から直接読み取れる場合のみ設定する（条例改正だから等の機械的な決めつけは禁止）。 */
   citizenImpact?: string;
+  /**
+   * Phase206/207：この議案が他の議案とまとめて提案説明された場合の、会議録原文の共通説明。
+   * 「この議案固有の説明」（reason / mainChanges）とは必ず別に保持する。
+   * quote には会議録原文をそのまま入れ、要約・言い換え・理由の補完は行わない。
+   * 個別の提案理由が存在しないことと、共通説明のみ存在することを画面上で区別するために使う。
+   */
+  sharedProposalStatement?: BillSharedProposalStatement;
   /** 関連する予算の概要。 */
   relatedBudgetSummary?: string;
   /** 関連する条例名の一覧（公式資料で確認できた場合のみ）。 */

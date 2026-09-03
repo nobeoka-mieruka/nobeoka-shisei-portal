@@ -343,7 +343,11 @@ for (const b of billVotes) {
       ...(b.topics ?? []),
       ...(b.memberVotes ?? []).map((v) => v.memberName),
     ].filter(Boolean),
-    content: [b.summary, b.reason, b.citizenImpact, ...(b.relatedOrdinances ?? [])].filter(Boolean).join(" "),
+    // Phase207：提出理由が会議録原文の引用そのもので、概要がその引用から始まる議案では、
+    // 同じ文を検索索引へ二重に入れない（議案詳細ページ側も同じ条件で重複表示を避けている）。
+    content: [b.summary, b.summary?.startsWith(b.reason ?? " ") ? null : b.reason, b.citizenImpact, ...(b.relatedOrdinances ?? [])]
+      .filter(Boolean)
+      .join(" "),
     date: b.votingDate || b.submittedDate,
     sourceId: b.id,
   });
