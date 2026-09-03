@@ -151,7 +151,8 @@ export function FinancePage() {
       <div className="rounded-xl border border-primary/30 bg-primary-container/40 p-4 sm:p-5">
         <p className="text-sm font-semibold text-on-surface">延岡市のお金をざっくり見る</p>
         <p className="mt-1.5 text-sm leading-relaxed text-on-surface">
-          延岡市が{data.fiscalYearLabel}に使う予定のお金（一般会計）は約
+          {/* formatOku() が既に「約」を含む値を返すため、ここで「約」を重ねない（Phase201：「約約699.9億円」の二重語修正） */}
+          延岡市が{data.fiscalYearLabel}に使う予定のお金（一般会計）は
           {formatOku(data.generalAccount.totalThousandYen)}です。この下に、収入（歳入）の内訳、借金にあたる「市債」、貯金にあたる「基金」、市の人口の推移をまとめています。年度をまたいだ推移は、下の「予算・決算規模の推移」等のボタンから確認できます。
         </p>
       </div>
