@@ -32,6 +32,8 @@ import {
   aggregateYearlySpeechCounts,
   findMemberSpeechAnalysis,
 } from "../lib/councilSpeeches";
+import { councilSessionPhaseLabels } from "../lib/councilSessions";
+import { councilSessionPhaseForSessionName } from "../lib/generalQuestionStats";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
 import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
@@ -582,8 +584,14 @@ export function MemberDetailPage() {
                 <p className="text-xs text-on-surface-variant">登録件数</p>
                 <p className="mt-1 text-lg font-semibold text-on-surface">{memberQuestions.length}件</p>
               </div>
+              {/* Phase203：この日付は、開催予定の会期の質問通告書に基づく「これから行われる予定の日」の
+                  場合がある。既に質問した日と取り違えないよう、会期の状態に応じて見出しを変える。 */}
               <div className="rounded-lg bg-surface-container-high p-3">
-                <p className="text-xs text-on-surface-variant">最新の質問日</p>
+                <p className="text-xs text-on-surface-variant">
+                  {councilSessionPhaseForSessionName(memberQuestions[0].sessionName) === "upcoming"
+                    ? "次回の質問予定日"
+                    : "最新の質問日"}
+                </p>
                 <p className="mt-1 text-lg font-semibold text-on-surface">
                   {formatJapaneseDate(memberQuestions[0].questionDate)}
                 </p>
@@ -606,7 +614,9 @@ export function MemberDetailPage() {
               {latestQuestions.map((q) => (
                 <li key={q.id} className="rounded-lg border border-outline-variant p-3">
                   <p className="text-xs text-on-surface-variant">
-                    {formatJapaneseDate(q.questionDate)}／{q.sessionName}
+                    {councilSessionPhaseForSessionName(q.sessionName) === "upcoming" ? "質問予定日 " : ""}
+                    {formatJapaneseDate(q.questionDate)}／{q.sessionName}（
+                    {councilSessionPhaseLabels[councilSessionPhaseForSessionName(q.sessionName)]}）
                   </p>
                   <p className="mt-1 text-sm font-medium text-on-surface">{q.title}</p>
                 </li>

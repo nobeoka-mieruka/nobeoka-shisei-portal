@@ -18,6 +18,8 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
+import { councilSessionPhaseLabels } from "../lib/councilSessions";
+import { councilSessionPhaseForSessionName } from "../lib/generalQuestionStats";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -78,6 +80,10 @@ export function GeneralQuestionDetailPage() {
     item.documentUrl && { label: "質問資料", url: item.documentUrl },
   ].filter((l): l is { label: string; url: string } => !!l);
 
+  // Phase203：この質問が属する会期が「開催済み（会議録の公開待ち）」か「開催予定・開催中」かを、
+  // questionCollectionStatus.jsonへの登録有無だけから判定する（今日の日付は使わない）。
+  const sessionPhase = councilSessionPhaseForSessionName(item.sessionName);
+
   const sameSessionQuestions = questions
     .filter((q) => q.sessionName === item.sessionName)
     .sort((a, b) => (a.questionOrder ?? 0) - (b.questionOrder ?? 0));
@@ -95,9 +101,16 @@ export function GeneralQuestionDetailPage() {
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-wrap items-center gap-2 text-xs text-on-primary-container/80">
-          <span>{formatJapaneseDate(item.questionDate)}</span>
+          <span>
+            {sessionPhase === "upcoming" ? "質問予定日 " : ""}
+            {formatJapaneseDate(item.questionDate)}
+          </span>
           <span>{item.sessionName}</span>
           <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-on-surface">{item.questionType}</span>
+          {/* Phase203：これから開催される会期の質問通告書であることを、日付の隣で明示する。 */}
+          <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-on-surface">
+            {councilSessionPhaseLabels[sessionPhase]}
+          </span>
         </div>
         <h1 className="mt-2 text-lg font-semibold leading-snug text-on-primary-container sm:text-xl">{item.title}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-2">

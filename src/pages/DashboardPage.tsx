@@ -47,7 +47,15 @@ import {
   aggregateConfirmedQuestionsByMember,
   aggregateConfirmedQuestionsByTopic,
   calculateGeneralQuestionStats,
+  scheduledSessionBreakdownHint,
 } from "../lib/generalQuestionStats";
+import {
+  LATEST_CONFIRMED_SESSION_HEADING,
+  UPCOMING_SESSION_HEADING,
+  councilSessionPhaseLabels,
+  latestConfirmedCouncilSession,
+} from "../lib/councilSessions";
+import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
 import { termsForMayor, formatArchiveDateWithPrecision, isDayPreciseTerm, daysInOffice } from "../lib/archiveMayors";
 import { committees as councilCommittees } from "../lib/committees";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
@@ -80,9 +88,10 @@ const currentMayorTerm = currentArchiveMayor
 // Phase185：会期一覧（councilSessions.json）のidは"YYYY-MM"または"YYYY-MM-extraordinary"形式で
 // 常に開催年月の昇順になっているため、文字列の降順ソートで最新会期を取得できる
 // （startDateが未確認の会期が多く、日付フィールドでは並べ替えられないため）。
-const latestCouncilSession = [...councilSessions].sort((a, b) => b.id.localeCompare(a.id))[0] as
-  | CouncilSession
-  | undefined;
+// Phase203：同じ並べ替えを複数ページで書かないよう、src/lib/councilSessions.tsへ集約した。
+// この会期は「公式資料（議案等審議結果）を確認できている直近の会期」であり、
+// これから開催される会期（質問通告書だけが公開されている会期）とは別物として扱う。
+const latestCouncilSession: CouncilSession | undefined = latestConfirmedCouncilSession(councilSessions);
 const latestSessionBills = latestCouncilSession
   ? billVotes.filter((b) => b.sessionId === latestCouncilSession.id)
   : [];
@@ -413,9 +422,17 @@ export function DashboardPage() {
         </Link>
       </SectionCard>
 
-      <SectionCard title="今の会期・委員会">
+      {/* Phase203：「公式資料を確認できている直近の会期」と「これから開催される会期」は
+          別物のため、同じ見出しにまとめず、状態を明記して分けて表示する。
+          会期名・件数・日付はすべて既存データ（councilSessions.json／generalQuestions.json）から取得する。 */}
+      <SectionCard title="会期・委員会">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <StatCard label="直近の会期" value={latestCouncilSession?.title ?? "確認中"} compact />
+          <StatCard
+            label={LATEST_CONFIRMED_SESSION_HEADING}
+            value={latestCouncilSession?.title ?? "確認中"}
+            hint={`議案等審議結果などの公式資料を確認できている、いちばん新しい会期です（状態：${councilSessionPhaseLabels.completed}）。`}
+            compact
+          />
           <StatCard label="会期区分" value={latestCouncilSession?.sessionType ?? "確認中"} compact />
           <StatCard
             label="この会期の登録議案数"
@@ -430,6 +447,12 @@ export function DashboardPage() {
             hint="議会運営委員会を含みます。予算・決算審査特別委員会等、会期ごとに設置される臨時の委員会は含みません。"
           />
         </div>
+        {latestCouncilSession && questionStats.completedScheduledSessions.some((s) => s.sessionId === latestCouncilSession.id) && (
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+            {latestCouncilSession.title}は議決結果を確認済みですが、会議録本文はまだ公開されていません。この会期の一般質問は、質問通告書に基づく予定内容として掲載しています。
+          </p>
+        )}
+        <UpcomingSessionsNotice sessions={questionStats.upcomingScheduledSessions} className="mt-4" />
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
           {/* Phase197：折り返し行に並ぶ独立した導線リンク。44pxのタップ領域を確保する。 */}
           {latestCouncilSession && (
@@ -513,9 +536,15 @@ export function DashboardPage() {
             label="会議録未公開会期の予定質問"
             value={questionStats.scheduledCount}
             unit="件"
-            hint={questionStats.scheduledSessions
-              .map((s) => `${s.sessionName}：${s.count}件／質問通告書ベース${s.newsletterConfirmed ? "（市議会だよりで開催確認済み）" : ""}`)
-              .join("　")}
+            hint={scheduledSessionBreakdownHint(questionStats.scheduledSessions)}
+          />
+        )}
+        {questionStats.upcomingScheduledSessions.length > 0 && (
+          <StatCard
+            label={UPCOMING_SESSION_HEADING}
+            value={questionStats.upcomingScheduledSessions.map((s) => s.sessionName).join("、")}
+            hint={`まだ開催されていない（または開催中の）会期です。上記「${LATEST_CONFIRMED_SESSION_HEADING}」とは別に数えており、議決結果・会議録はいずれも未確認です。${scheduledSessionBreakdownHint(questionStats.upcomingScheduledSessions)}`}
+            compact
           />
         )}
         <StatCard label="登録済み議案数" value={totalBills} unit="件" hint={coverageHint("billVotes", totalBills)} />
@@ -620,7 +649,8 @@ export function DashboardPage() {
       <p className="px-1 text-xs text-on-surface-variant">
         以下の一般質問の内訳は、会議録本文で内容を確認済みの累計{questionStats.confirmedCount}件（対象
         {questionStats.targetSessionCount}会期中、収録済み{questionStats.collectedSessionCount}会期分）が対象です。
-        会議録が未公開の会期の予定質問（{questionStats.scheduledCount}件）は含みません。
+        会議録が未公開の会期の予定質問（{questionStats.scheduledCount}件）は含みません。その内訳は、開催済みで会議録の公開を待っている会期が
+        {questionStats.completedScheduledCount}件、{UPCOMING_SESSION_HEADING}が{questionStats.upcomingScheduledCount}件です。
       </p>
 
       <SectionCard title="議員別一般質問確認件数（上位10名・確認済み分）">

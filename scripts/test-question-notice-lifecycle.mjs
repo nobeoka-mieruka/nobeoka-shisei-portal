@@ -405,5 +405,60 @@ check("未公開会期の予定質問合計（scheduledCount=27件）と確認�
   assert.equal(confirmedCount, 418);
 });
 
+console.log("\nPhase203：「直近の確認済み会期」と「次回・開催予定の会期」の分離");
+
+// src/lib/councilSessions.tsは型importのみ（実行時importを持たない）ため、
+// questionLikeSpeechTypes.tsと同じ方法（Node 24のTS直接import）で読み込める。
+const { councilSessionIdFromSessionName, latestConfirmedCouncilSession, councilSessionPhaseLabels } = await import(
+  "../src/lib/councilSessions.ts"
+);
+const councilSessions = readJson("src/data/councilSessions.json");
+
+check("councilSessionIdFromSessionName()は、generalQuestions.jsonの全会期名から会期IDを導出できる（導出できない表記があれば会期の状態判定が推測になるため許容しない）", () => {
+  for (const sessionName of new Set(generalQuestions.map((q) => q.sessionName))) {
+    const sessionId = councilSessionIdFromSessionName(sessionName);
+    assert.ok(sessionId, `会期名「${sessionName}」から会期IDを導出できません`);
+    assert.match(sessionId, /^\d{4}-\d{2}(-extraordinary)?$/, `会期ID「${sessionId}」の形式が想定外です`);
+  }
+});
+
+check("latestConfirmedCouncilSession()は、councilSessions.json（公式資料を確認済みの会期）の中で最も新しい会期を返す", () => {
+  const latest = latestConfirmedCouncilSession(councilSessions);
+  assert.ok(latest, "councilSessions.jsonが空です");
+  for (const s of councilSessions) {
+    assert.ok(s.id <= latest.id, `${s.id}がlatestConfirmedCouncilSession()の返した${latest.id}より新しくなっています`);
+  }
+});
+
+check("市民向けの表示ラベルは、内部状態（completed / upcoming）から変換して得ており、状態ごとに別の日本語が割り当てられている", () => {
+  assert.equal(typeof councilSessionPhaseLabels.completed, "string");
+  assert.equal(typeof councilSessionPhaseLabels.upcoming, "string");
+  assert.notEqual(councilSessionPhaseLabels.completed, councilSessionPhaseLabels.upcoming);
+});
+
+check("予定質問の会期は「開催済み（questionCollectionStatus.jsonへ登録済み）」と「次回・開催予定（未登録）」に漏れなく重複なく分かれ、件数の合計がgeneralQuestions.jsonの総数と一致する", () => {
+  const registeredSessionIds = new Set(questionCollectionStatus.sessions.map((s) => s.sessionId));
+  const sessionNames = [...new Set(generalQuestions.map((q) => q.sessionName))];
+  const completed = sessionNames.filter((n) => registeredSessionIds.has(councilSessionIdFromSessionName(n)));
+  const upcoming = sessionNames.filter((n) => !registeredSessionIds.has(councilSessionIdFromSessionName(n)));
+  assert.equal(completed.length + upcoming.length, sessionNames.length, "会期がどちらの区分にも入っていない、または重複しています");
+  const countOf = (names) => generalQuestions.filter((q) => names.includes(q.sessionName)).length;
+  assert.equal(countOf(completed) + countOf(upcoming), generalQuestions.length, "予定質問の件数の合計が総数と一致しません");
+});
+
+check("「次回・開催予定」に分類される会期は、councilSessions.json（議決結果などの公式資料を確認済みの会期）に存在しない（直近の確認済み会期と混同していない）", () => {
+  const registeredSessionIds = new Set(questionCollectionStatus.sessions.map((s) => s.sessionId));
+  const confirmedSessionIds = new Set(councilSessions.map((s) => s.id));
+  const upcomingSessionIds = [...new Set(generalQuestions.map((q) => q.sessionName))]
+    .map((n) => councilSessionIdFromSessionName(n))
+    .filter((id) => !registeredSessionIds.has(id));
+  for (const sessionId of upcomingSessionIds) {
+    assert.ok(
+      !confirmedSessionIds.has(sessionId),
+      `会期${sessionId}は「次回・開催予定」と判定されているのに、councilSessions.jsonにも登録されています（どちらかのデータが古い可能性があります）`,
+    );
+  }
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");

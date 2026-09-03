@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import councilSessionsData from "../data/councilSessions.json";
-import type { CouncilSession } from "../types";
+import generalQuestionsData from "../data/generalQuestions.json";
+import type { CouncilSession, GeneralQuestionItem } from "../types";
 import { publicDocuments } from "../lib/councilDocuments";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -13,8 +14,17 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { COUNCIL_GLOSSARY, SOURCE_GLOSSARY } from "../lib/councilGlossary";
+import { LATEST_CONFIRMED_SESSION_HEADING, latestConfirmedCouncilSession } from "../lib/councilSessions";
+import { scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
 
 const councilSessions = councilSessionsData as CouncilSession[];
+// Phase203：この一覧は「公式資料を確認できた会期」だけを載せている。質問通告書だけが公開されて
+// いる会期（＝これから開催される会期）は一覧に現れないため、別枠で状態つきで案内する。
+const upcomingScheduledSessions = scheduledQuestionSessions(generalQuestionsData as GeneralQuestionItem[]).filter(
+  (s) => s.phase === "upcoming",
+);
+const latestConfirmedSession = latestConfirmedCouncilSession(councilSessions);
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -88,6 +98,21 @@ export function CouncilDocumentsPage() {
         <span className="font-medium text-on-surface">一次資料</span>
         を、市民が確認しやすいよう定例会ごとに整理したものです。資料の内容は変更せず掲載しています。最新情報および正式な内容については、延岡市議会公式サイトもあわせてご確認ください。当サイトは、特定の議員、会派、政党、議案への支持・反対を目的とするものではありません。
       </p>
+
+      {/* Phase203：一覧に並ぶのは公式資料を確認できた会期だけ。直近の確認済み会期と、
+          まだ資料が公開されていない開催予定の会期を、別の見出しで分けて示す。 */}
+      {latestConfirmedSession && (
+        <div className="mb-4 rounded-xl border border-outline-variant bg-surface-container-low p-4">
+          <h2 className="text-sm font-semibold text-on-surface">{LATEST_CONFIRMED_SESSION_HEADING}</h2>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+            <Link to={`/council-documents/${latestConfirmedSession.id}`} className={`text-primary underline ${linkClass}`}>
+              {latestConfirmedSession.title}
+            </Link>
+            （{latestConfirmedSession.sessionType}）— 議案等審議結果などの公式資料を確認できている、いちばん新しい会期です。
+          </p>
+        </div>
+      )}
+      <UpcomingSessionsNotice sessions={upcomingScheduledSessions} className="mb-4" />
 
       {/* Phase141項目7・13：初めて市議会を見る市民向けに、基礎用語をここでまとめて説明する。
           単一情報源はsrc/lib/councilGlossary.ts。 */}
