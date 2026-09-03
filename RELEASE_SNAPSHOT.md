@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で安定版として固定した時点の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜205 の品質改善を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -9,15 +9,21 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `a13be69`（Phase200） |
-| production deploy ID | `131e0f8a-7d97-478d-9c57-a841832a76a1` |
+| release commit | `89e79a1`（Phase205） |
+| production deploy ID | `e4531851-61cc-465e-8ba0-93d09dfdb4ac` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
-
-公開内容そのものは `cf29d4e`（Phase197〜199 の統合、deploy `7b162a77`）と**同一**です
-（`git diff cf29d4e a13be69 -- src/ public/` が空）。`a13be69` は本ファイルと監査スクリプトの追加のみ。
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
 スナップショットは「自分自身のコミット」ではなく「記述対象のリリース」を指します。
+
+### Phase200 からの件数差分（いずれも根拠あり）
+
+| 項目 | Phase200 | Phase205 | 理由 |
+| --- | --- | --- | --- |
+| 更新履歴エントリ | 137 | 138 | Phase202 の統一を記録する u137 を1件追加 |
+| 検索索引エントリ | 2,276 | 2,277 | 同エントリが索引化されたもの |
+
+議案1,177・個別公約14・市政年表217・現職議員26 ほかの件数は**すべて不変**です（データ値の変更なし）。
 
 ## 件数
 
@@ -32,9 +38,9 @@
 | 歴代市長 | 14（任期レコード 30） |
 | 市長公約 | 14 |
 | 市政年表イベント | 217 |
-| 更新履歴エントリ | 137 |
+| 更新履歴エントリ | 138 |
 | 会期 | 61 |
-| 検索索引エントリ | 2,276（うち固有URL 1,916） |
+| 検索索引エントリ | 2,277（うち固有URL 1,916） |
 | 出典URL（重複除去） | 5,488 |
 | プリレンダリング済みページ | 2,270 + `404.html` |
 | route template | 79 |
@@ -48,10 +54,10 @@
 | --- | --- |
 | page 間件数矛盾 | 0 |
 | broken internal link | 0（2,270ページ / リンク先2,335種類を検査） |
-| production visual error | 0（14ページ × 3viewport = 42件） |
+| production visual error | 0（9ページ × 6viewport = 54件。320/375/390/430/1280/1440px で実レンダリング確認） |
 | horizontal overflow | 0px |
 | console error | 0 |
-| test failures | 0（227 checks / 24スクリプト） |
+| test failures | 0（266 checks / 25スクリプト） |
 | validate:data errors | 0 |
 | validate:seo failures | 0（2,271ページ） |
 | validate:content errors | 0（2,271ページ） |
