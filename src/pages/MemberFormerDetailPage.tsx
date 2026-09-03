@@ -50,6 +50,7 @@ import {
   calculateVotingDisclosureIndex,
   eligibleSessionIdsFor,
 } from "../lib/activityRadar";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const profiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const terms = archiveMemberTermsData as ArchiveMemberTerm[];
@@ -154,7 +155,7 @@ export function MemberFormerDetailPage() {
           </span>
         </div>
         {profile.nameKana && <p className="mt-1 text-sm text-on-surface-variant">{profile.nameKana}</p>}
-        {profile.notes && <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{profile.notes}</p>}
+        {profile.notes && <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{humanizeDataNote(profile.notes)}</p>}
         <p className="mt-3 rounded-lg bg-surface-container-lowest p-3 text-xs leading-relaxed text-on-surface-variant">
           <strong className="font-semibold text-on-surface">{FORMER_MEMBER_DATA_TIER_LABELS[dataTier]}</strong>
           ：{FORMER_MEMBER_DATA_TIER_DESCRIPTIONS[dataTier]}　{FORMER_MEMBER_DATA_TIER_DISCLAIMER}

@@ -84,7 +84,7 @@ export function calculateQuestionActivityIndex(
     label: "一般質問",
     description: "在職中に会議録を取得・確認できた定例会のうち、一般質問・代表質問等を行ったことが確認できた会期の割合です。",
     methodNote: "確認できた質問会期数 ÷ 対象会期数 × 100（在職中かつ会議録取得済みの定例会のみを分母とする）。",
-    sourceLabel: "会議録本文（councilSpeechSummaries.json）",
+    sourceLabel: "会議録本文（会議録の発言要約データ）",
     updatedAt,
   };
   if (eligibleSessionIds.length === 0) {
@@ -111,7 +111,7 @@ export function calculateSpeechActivityIndex(
     label: "議会発言",
     description: "会議録を取得・確認できた会期のうち、発言（一般質問等）が確認できた会期の割合と、確認できた質問項目数を組み合わせた指数です。長い発言ほど高得点にならないよう、項目数は上限を設けて頭打ちにしています。",
     methodNote: "（発言確認会期数÷対象会期数×50）＋（質問項目数を上限20件でlog正規化した値×50）。",
-    sourceLabel: "会議録本文（councilSpeechSummaries.json）",
+    sourceLabel: "会議録本文（会議録の発言要約データ）",
     updatedAt,
   };
   if (eligibleSessionIds.length === 0) {
@@ -173,7 +173,7 @@ export function calculateVotingDisclosureIndex(numerator: number, denominator: n
     label: "議案等の意思表示",
     description: "公開されている記名採決のうち、この議員の賛否・棄権・欠席等の意思表示が確認できた議案の割合です。賛成・反対どちらであるかを評価するものではありません。",
     methodNote: "意思表示を確認できた議案数 ÷ 対象議案数 × 100（賛成・反対の内容は得点化しない）。",
-    sourceLabel: "議案ごとの賛否（billVotes.json）",
+    sourceLabel: "議案ごとの賛否（議案賛否データ）",
     updatedAt,
   };
   if (denominator === 0) {
@@ -222,7 +222,7 @@ export function calculateInformationDisclosureIndex(
     label: "情報公開",
     description: "経歴、所属会派、所属委員会、当選回数、公式ページ・SNS、一般質問履歴、議案賛否履歴など、ポータル上で確認できるプロフィール情報の充足状況です。SNSを利用していないこと自体を低評価とするものではありません。",
     methodNote: "確認できた項目数 ÷ 確認対象項目数 × 100。",
-    sourceLabel: "議員プロフィール（members.json等）",
+    sourceLabel: "議員プロフィール（現職議員データ等）",
     updatedAt,
   };
   if (checklist.length === 0) {

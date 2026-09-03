@@ -24,6 +24,7 @@ import { formatArchiveDateWithPrecision, isActingMayorTerm, mayorRoleLabel, term
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { civicTimelineEventsForPerson, civicTimelineEventFiscalYear } from "../lib/civicTimeline";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -139,7 +140,7 @@ export function MayorDetailPage() {
           {mayor.birthplace ? `／出身地：${mayor.birthplace}` : ""}
         </p>
         {mayor.profile && <p className="mt-3 text-base leading-loose text-on-surface">{mayor.profile}</p>}
-        {mayor.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{mayor.notes}</p>}
+        {mayor.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(mayor.notes)}</p>}
 
         <div className="mt-4 flex flex-wrap gap-2">
           {mayor.isCurrentMayor && (
@@ -290,7 +291,7 @@ export function MayorDetailPage() {
                       </dd>
                     </div>
                   </dl>
-                  {term.notes && <p className="mt-2 text-xs text-on-surface-variant">{term.notes}</p>}
+                  {term.notes && <p className="mt-2 text-xs text-on-surface-variant">{humanizeDataNote(term.notes)}</p>}
                 </li>
               );
             })}
@@ -409,7 +410,7 @@ export function MayorDetailPage() {
                     </span>
                   </div>
                   <p className="mt-1 text-sm font-medium text-on-surface">{ev.title}</p>
-                  <p className="mt-1 text-sm text-on-surface-variant">{ev.summary}</p>
+                  <p className="mt-1 text-sm text-on-surface-variant">{humanizeDataNote(ev.summary)}</p>
                   <Link
                     to={`/timeline/${civicTimelineEventFiscalYear(ev)}`}
                     className={`mt-2 inline-flex min-h-11 items-center text-xs font-medium text-primary underline ${linkClass}`}

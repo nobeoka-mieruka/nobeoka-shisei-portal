@@ -3,6 +3,7 @@ import type { CouncilDocument } from "../../types";
 import { councilDocumentCategoryLabels } from "../../lib/councilDocuments";
 import { formatJapaneseDate } from "../../config/site";
 import { DocumentIcon, GlobeIcon } from "../icons";
+import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
 const buttonFocusClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -48,7 +49,7 @@ export function CouncilDocumentCard({ document: doc }: { document: CouncilDocume
           </div>
           <p className="mt-1 break-words text-base font-semibold leading-snug text-on-surface">{doc.title}</p>
           {doc.description && (
-            <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{doc.description}</p>
+            <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{humanizeDataNote(doc.description)}</p>
           )}
         </div>
       </div>

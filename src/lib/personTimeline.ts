@@ -127,7 +127,7 @@ function termEvents(personId: string): TimelineEvent[] {
       datePrecision: "day",
       displayDate: formatDayDate(t.termStart),
       title: `第${t.termNumber ?? "?"}期　任期開始`,
-      summary: "termStartは選挙日を基準としており、実際の就任日（初議会招集日等）とは前後する可能性があります。",
+      summary: "任期開始日は選挙日を基準としており、実際の就任日（初議会招集日等）とは前後する可能性があります。",
       sourceRefs,
     });
     if (t.termEnd) {

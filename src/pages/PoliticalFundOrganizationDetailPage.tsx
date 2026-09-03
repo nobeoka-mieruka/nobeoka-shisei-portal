@@ -15,6 +15,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { findMemberOrFormerLink } from "../lib/councilSpeeches";
 import { getSeoForPath } from "../lib/seo";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -158,7 +159,7 @@ export function PoliticalFundOrganizationDetailPage() {
             className="mt-2"
           />
         )}
-        {organization.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{organization.notes}</p>}
+        {organization.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(organization.notes)}</p>}
       </SectionCard>
 
       <SectionCard title="収支報告書">
@@ -228,7 +229,7 @@ export function PoliticalFundOrganizationDetailPage() {
                 {report.sourceUrl && (
                   <SourceLink url={report.sourceUrl} label={report.sourceTitle ?? "収支報告書を見る"} className="mt-3" />
                 )}
-                {report.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{report.notes}</p>}
+                {report.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(report.notes)}</p>}
                 <LastUpdatedInfo verifiedAt={report.verifiedAt ?? undefined} className="mt-3" />
               </li>
             ))}

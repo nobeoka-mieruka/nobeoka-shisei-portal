@@ -38,6 +38,7 @@ import { FINANCE_METRICS } from "../lib/archiveFinanceMetrics";
 import { documentPath, documentTypeLabel, documentResultLabel } from "../lib/archiveCouncilDocuments";
 import { policyOwnerName, policyOwnerLinkTo, type PolicyOwnerLookup } from "../lib/archivePolicies";
 import { civicTimelineEventsInFiscalYear } from "../lib/civicTimeline";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -225,7 +226,7 @@ export function TimelineYearPage() {
                         </span>
                       </div>
                       <p className="mt-1 font-medium text-on-surface">{ev.title}</p>
-                      <p className="mt-1 text-xs text-on-surface-variant">{ev.summary}</p>
+                      <p className="mt-1 text-xs text-on-surface-variant">{humanizeDataNote(ev.summary)}</p>
                     </li>
                   ))}
                 </ul>

@@ -19,6 +19,7 @@ import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const data = financeData as FinanceDashboardData;
 const latestArchiveFiscalYear = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]).at(-1)?.fiscalYear;
@@ -274,7 +275,7 @@ export function FinancePage() {
             { header: "区分", render: (f) => (f.isEstimate ? "見込額" : "決算額") },
           ]}
         />
-        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{data.fundBalance.definitionNote}</p>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(data.fundBalance.definitionNote)}</p>
         <SectionSource section="fundBalanceTrend" />
       </SectionCard>
 
@@ -302,7 +303,7 @@ export function FinancePage() {
         <p className="text-sm font-semibold text-on-surface">
           {formatThousandYen(data.revenue.find((r) => r.label === "市債")?.amountThousandYen ?? 0)}
         </p>
-        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{data.debtNote}</p>
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(data.debtNote)}</p>
         {data.debtBalanceTrend && data.debtBalanceTrend.length > 0 ? (
           <>
             <FinanceLineChart
@@ -461,7 +462,7 @@ export function FinancePage() {
         </ul>
       </SectionCard>
 
-      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">{data.notes}</p>
+      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(data.notes)}</p>
 
       <p className="px-1 text-xs text-on-surface-variant">最終確認：{formatJapaneseDate(data.lastVerified)}</p>
 

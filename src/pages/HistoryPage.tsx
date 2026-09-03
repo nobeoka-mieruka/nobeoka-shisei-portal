@@ -26,6 +26,7 @@ import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
 import type { CivicTimelineEvent } from "../types";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
@@ -269,8 +270,8 @@ export function HistoryPage() {
                     {event.category}
                   </span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-on-surface">{event.summary}</p>
-                {event.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{event.notes}</p>}
+                <p className="mt-2 text-sm leading-relaxed text-on-surface">{humanizeDataNote(event.summary)}</p>
+                {event.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(event.notes)}</p>}
                 <div className="mt-2 flex flex-wrap gap-2">
                   {event.relatedPersonIds?.map((id) => {
                     const mayor = mayorById.get(id);

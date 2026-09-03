@@ -13,6 +13,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import type { CsvColumn } from "../lib/csv";
 import type { MunicipalityComparisonEntry, DatedMetric } from "../types";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 function metricCell(metric: DatedMetric, formatValue: (v: number) => string): string {
   if (metric.value === null) return metric.notApplicableReason ? "算定不可" : "確認中";
@@ -194,7 +195,7 @@ export function CompareMunicipalitiesPage() {
                   </li>
                 ))}
               </ul>
-              {m.notes && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{m.notes}</p>}
+              {m.notes && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(m.notes)}</p>}
               <LastUpdatedInfo verifiedAt={m.lastVerifiedAt} className="mt-1.5" />
             </li>
           ))}

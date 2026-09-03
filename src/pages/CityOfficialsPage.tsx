@@ -13,6 +13,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate, SITE_URL } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
 
@@ -132,14 +133,14 @@ export function CityOfficialsPage() {
                   {p.nameKana && <span className="ml-1.5 text-xs font-normal text-on-surface-variant">（{p.nameKana}）</span>}
                 </p>
                 <p className="mt-1 text-xs text-on-surface-variant">{appointmentLabelFor(p)}</p>
-                {p.termNote && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{p.termNote}</p>}
-                {p.notes && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{p.notes}</p>}
+                {p.termNote && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(p.termNote)}</p>}
+                {p.notes && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(p.notes)}</p>}
                 {p.relatedLinks && p.relatedLinks.length > 0 && (
                   <ul className="mt-2 space-y-1">
                     {p.relatedLinks.map((l) => (
                       <li key={l.to}>
                         <Link to={l.to} className={`text-xs font-medium text-primary underline ${linkClass}`}>
-                          {l.label}
+                          {humanizeDataNote(l.label)}
                         </Link>
                       </li>
                     ))}
@@ -170,13 +171,13 @@ export function CityOfficialsPage() {
                   {p.appointedDate ? `${formatJapaneseDate(p.appointedDate)} 就任（議会同意）` : "就任日確認中"}
                   {p.retiredDate ? `〜${formatJapaneseDate(p.retiredDate)} 退任` : "〜退任日確認中"}
                 </p>
-                {p.termNote && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{p.termNote}</p>}
+                {p.termNote && <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(p.termNote)}</p>}
                 {p.relatedLinks && p.relatedLinks.length > 0 && (
                   <ul className="mt-2 space-y-1">
                     {p.relatedLinks.map((l) => (
                       <li key={l.to}>
                         <Link to={l.to} className={`text-xs font-medium text-primary underline ${linkClass}`}>
-                          {l.label}
+                          {humanizeDataNote(l.label)}
                         </Link>
                       </li>
                     ))}

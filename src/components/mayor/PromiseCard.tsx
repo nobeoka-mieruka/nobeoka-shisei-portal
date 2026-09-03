@@ -9,6 +9,7 @@ import {
   linkageToneClass,
   type LinkageDisplay,
 } from "../../lib/mayorPromiseLinkage";
+import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -105,12 +106,12 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
             <p className="mt-1 text-sm leading-relaxed text-on-surface">{budgetLinkage.display.description}</p>
-            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{promise.relatedBudget}</p>
+            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(promise.relatedBudget)}</p>
           </div>
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
             <p className="mt-1 text-sm leading-relaxed text-on-surface">{billLinkage.display.description}</p>
-            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{promise.relatedBill}</p>
+            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(promise.relatedBill)}</p>
           </div>
         </div>
       </details>

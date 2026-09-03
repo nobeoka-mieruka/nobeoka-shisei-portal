@@ -22,6 +22,7 @@ import {
   hasBudgetData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const budgetInitialMetric = financeMetricByKey("budgetInitial")!;
 const budgetFinalMetric = financeMetricByKey("budgetFinal")!;
@@ -109,7 +110,7 @@ export function FinanceBudgetPage() {
             </Link>
           }
         >
-          {y.budget?.notes && <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">{y.budget.notes}</p>}
+          {y.budget?.notes && <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(y.budget.notes)}</p>}
           <SourceRefList refs={y.budget?.sourceRefs ?? []} />
         </SectionCard>
       ))}

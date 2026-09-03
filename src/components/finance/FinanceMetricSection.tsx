@@ -6,6 +6,7 @@ import { FinanceLineChart } from "./FinanceLineChart";
 import { FinanceBarChart } from "./FinanceBarChart";
 import { CompareTable } from "../compare/CompareTable";
 import { CompareSourceNotice } from "../compare/CompareSourceNotice";
+import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
 interface FinanceMetricSectionProps {
   metric: FinanceMetricDefinition;
@@ -55,7 +56,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
   return (
     <div>
       <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-        単位：{metric.unit}。{metric.definitionNote}
+        単位：{metric.unit}。{humanizeDataNote(metric.definitionNote)}
       </p>
 
       {nonNullPoints.length === 0 ? (
@@ -123,7 +124,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
               ...(showValueTypeColumn
                 ? [{ header: "値の種類", render: (p: (typeof points)[number]) => p.valueTypeLabel ?? "-" }]
                 : []),
-              { header: "定義", wrap: true, render: (p) => p.definitionNoteOverride ?? metric.definitionNote },
+              { header: "定義", wrap: true, render: (p) => humanizeDataNote(p.definitionNoteOverride ?? metric.definitionNote) },
               {
                 header: "確認状況",
                 render: (p) =>
@@ -170,7 +171,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
               .map((p) => ({
                 label: fiscalYearLabel(p.year),
                 sourceRefs: p.sourceRefs,
-                definitionNote: p.definitionNoteOverride,
+                definitionNote: humanizeDataNote(p.definitionNoteOverride),
                 unit: metric.unit,
               }))}
           />

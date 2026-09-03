@@ -24,7 +24,7 @@ const AXES = [
     definition: "在職中に会議録を取得・確認できた定例会のうち、一般質問・代表質問等を行ったことが確認できた会期の割合。",
     formula: "確認できた質問会期数 ÷ 対象会期数 × 100",
     sourceTypes: "一次資料（会議録本文）",
-    source: "会議録本文（councilSpeechSummaries.json）",
+    source: "会議録本文（会議録の発言要約データ）",
     targetPeriod: "現職議員：会議録取得済みの全会期／元議員：在職・発言を確認できた会期のみ",
     missingDataPolicy: "対象会期数が0（＝在職・会議録取得済みの会期が無い）の場合のみ「対象記録なし」とする。0点として扱わない。",
     exclusionRule: "会議録が未公開の会期は分母からも分子からも除外する（「質問しなかった」とみなさない）。",
@@ -36,7 +36,7 @@ const AXES = [
       "発言（一般質問等）が確認できた会期の割合と、確認できた質問項目数を組み合わせた指数。長文・多数項目の発言だけが有利にならないよう、項目数は上限20件で対数変換して頭打ちにしている。",
     formula: "（発言確認会期数÷対象会期数×50）＋（質問項目数を上限20件でlog正規化した値×50）",
     sourceTypes: "一次資料（会議録本文）",
-    source: "会議録本文（councilSpeechSummaries.json）",
+    source: "会議録本文（会議録の発言要約データ）",
     targetPeriod: "一般質問と同じ（現職議員：会議録取得済みの全会期／元議員：在職・発言を確認できた会期のみ）",
     missingDataPolicy: "対象会期数が0の場合のみ「対象記録なし」とする。0点として扱わない。",
     exclusionRule: "会議録が未公開の会期は分母からも分子からも除外する。",
@@ -59,7 +59,7 @@ const AXES = [
       "公開されている記名採決のうち、賛成・反対・棄権・欠席等の意思表示が確認できた議案の割合。賛成・反対どちらであるかを評価するものではない。",
     formula: "意思表示を確認できた議案数 ÷ 対象議案数 × 100（賛否の内容は得点化しない）",
     sourceTypes: "一次資料（議案ごとの賛否・会議録）",
-    source: "議案ごとの賛否（billVotes.json）",
+    source: "議案ごとの賛否（議案賛否データ）",
     targetPeriod: "議員個人の賛否内訳（memberVotes）が登録されている議案が対象",
     missingDataPolicy:
       "対象議案が0件（＝その議員について意思表示が確認できた議案が1件も無い）の場合は「対象記録なし」とする。0点として扱わない。",
@@ -83,7 +83,7 @@ const AXES = [
       "議員本人の能力・活動量ではなく、ポータル上で確認できるプロフィール情報（経歴、所属会派、所属委員会、当選回数、公式ページ・SNS、一般質問履歴、議案賛否履歴等）の充足状況。SNSを利用していないこと自体を低評価とするものではない。",
     formula: "確認できた項目数 ÷ 確認対象項目数 × 100",
     sourceTypes: "一次資料＋準一次資料（議員プロフィール・本人確認済みSNS）",
-    source: "議員プロフィール（members.json・formerMembers.json・archiveMemberProfiles.json等）",
+    source: "議員プロフィール（現職議員データ・元議員データ・議員プロフィールデータ等）",
     targetPeriod: "現時点のプロフィール情報（期間の概念はなし）",
     missingDataPolicy: "確認対象項目自体が定義できない場合のみ「対象記録なし」。通常は必ず0〜100の実値が算定される（未記入も「確認した結果」として扱う）。",
     exclusionRule: "該当なし。",
@@ -239,7 +239,7 @@ export function MethodologyActivityRadarPage() {
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-on-surface-variant">
           <li>現職議員：現在の議員任期は全員が同一の選挙日であるため、公式会議録の取得・確認が完了している全ての定例会（現在：{targetPeriod}）を対象期間とします。</li>
           <li>
-            元議員：公式資料で在職・発言を確認できた会期（`formerMembers.json`の`servedSessions`）のみを対象期間とします。これは「確認できた在職会期数」であり、実際の在職期間全体を保証するものではない点に注意してください。
+            元議員：公式資料で在職・発言を確認できた会期（元議員データの「在職した会期」）のみを対象期間とします。これは「確認できた在職会期数」であり、実際の在職期間全体を保証するものではない点に注意してください。
           </li>
           <li>会議録が未公開の会期（例：直近の定例会で会議録がまだ公開されていない場合）は、分母からも分子からも除外し、「質問しなかった」とは扱いません。</li>
         </ul>
@@ -274,11 +274,11 @@ export function MethodologyActivityRadarPage() {
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">議席番号</dt>
-            <dd>議員詳細ページ（members.json）の確認済みプロフィール本文に記載されている議席番号をそのまま表示しています。新しい調査は行っていません。</dd>
+            <dd>議員詳細ページ（現職議員データ）の確認済みプロフィール本文に記載されている議席番号をそのまま表示しています。新しい調査は行っていません。</dd>
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">選挙時得票（参考情報）</dt>
-            <dd>令和5年4月23日執行の延岡市議会議員選挙における得票数（electionResults.json）です。活動指標スコアには一切含めていません。</dd>
+            <dd>令和5年4月23日執行の延岡市議会議員選挙における得票数（選挙結果データ）です。活動指標スコアには一切含めていません。</dd>
           </div>
         </dl>
       </SectionCard>

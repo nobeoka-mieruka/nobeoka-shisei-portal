@@ -5,6 +5,7 @@ import { formatJapaneseDate } from "../../config/site";
 import { GlobeIcon, PlayIcon } from "../icons";
 import { councilSessionPhaseLabels } from "../../lib/councilSessions";
 import { councilSessionPhaseForSessionName } from "../../lib/generalQuestionStats";
+import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -94,7 +95,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
         </div>
       )}
 
-      <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{item.summary}</p>
+      <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{humanizeDataNote(item.summary)}</p>
       <p className="mt-1 text-xs text-on-surface-variant">質問項目 {item.questionItems.length}件</p>
 
       {(item.noticeUrl || item.newsletterUrl || item.transcriptUrl || item.videoUrl) && (
@@ -196,7 +197,7 @@ export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
             </a>
             <p className="mt-1">公表機関：{item.sourceOrganization}</p>
             <p className="mt-1">最終確認：{formatJapaneseDate(item.lastVerified)}</p>
-            {item.notes && <p className="mt-1">{item.notes}</p>}
+            {item.notes && <p className="mt-1">{humanizeDataNote(item.notes)}</p>}
           </div>
         </div>
       )}

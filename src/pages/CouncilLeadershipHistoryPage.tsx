@@ -16,6 +16,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate, SITE_URL } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archiveCouncilLeadership = archiveCouncilLeadershipData as ArchiveCouncilLeadershipTerm[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
@@ -73,7 +74,7 @@ function LeadershipSection({ role, entries }: { role: ArchiveCouncilLeadershipRo
                   プロフィール・発言記録を見る →
                 </Link>
               )}
-              {t.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{t.notes}</p>}
+              {t.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(t.notes)}</p>}
               <div className="mt-2">
                 <SourceRefList refs={t.sourceRefs} />
               </div>

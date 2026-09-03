@@ -45,6 +45,7 @@ import {
   groupEventsByFiscalYear,
 } from "../lib/archiveTimeline";
 import { sortedFiscalYears } from "../lib/archiveFinance";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -184,7 +185,7 @@ export function TimelinePage() {
                         <p className="text-sm font-semibold text-on-surface">{event.title}</p>
                       )}
                       {event.description && (
-                        <p className="mt-1 text-sm break-words text-on-surface-variant">{event.description}</p>
+                        <p className="mt-1 text-sm break-words text-on-surface-variant">{humanizeDataNote(event.description)}</p>
                       )}
                     </div>
                   </div>

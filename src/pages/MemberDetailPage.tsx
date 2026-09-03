@@ -72,6 +72,7 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { personSlug } from "../lib/people";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 /** TASK-018：一般質問・議案表決・活動レポートを日付順に統合表示するための年表イベント1件分。 */
 interface MemberTimelineEvent {
@@ -239,9 +240,9 @@ export function MemberDetailPage() {
             元議員（現職ではありません）
           </span>
           <h1 className="mt-2 text-2xl font-semibold text-on-surface">{formerMember.name}</h1>
-          <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{formerMember.note}</p>
+          <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{humanizeDataNote(formerMember.note)}</p>
           {formerMember.sourceNote && (
-            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{formerMember.sourceNote}</p>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(formerMember.sourceNote)}</p>
           )}
           {formerMember.lastVerified && (
             <p className="mt-2 text-xs text-on-surface-variant">確認日：{formatJapaneseDate(formerMember.lastVerified)}</p>
@@ -509,7 +510,7 @@ export function MemberDetailPage() {
                   {formatJapaneseDate(t.termStart)}〜{t.termEnd ? formatJapaneseDate(t.termEnd) : "現在"}
                 </p>
                 {t.sourceRefs[0]?.notes && (
-                  <p className="mt-1 text-xs text-on-surface-variant">{t.sourceRefs[0].notes}</p>
+                  <p className="mt-1 text-xs text-on-surface-variant">{humanizeDataNote(t.sourceRefs[0].notes)}</p>
                 )}
               </li>
             ))}
@@ -538,7 +539,7 @@ export function MemberDetailPage() {
                 <Link to="/city-officials" className={`font-medium text-primary underline ${linkClass}`}>
                   {p.roleLabel}
                 </Link>
-                {p.notes && <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">{p.notes}</p>}
+                {p.notes && <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(p.notes)}</p>}
               </li>
             ))}
           </ul>

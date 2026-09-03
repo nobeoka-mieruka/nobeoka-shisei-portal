@@ -11,6 +11,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { electionResultById, personLinkForCandidate, formatElectionDate, electionCandidateListConfirmed } from "../lib/elections";
 import type { ElectionCandidate } from "../types/election";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const TYPE_LABEL: Record<"mayor" | "councilMember", string> = {
   mayor: "市長選挙",
@@ -69,7 +70,7 @@ export function ElectionDetailPage() {
       </div>
 
       {election.notes && (
-        <p className="rounded-xl bg-surface-container-low p-4 text-sm leading-relaxed text-on-surface">{election.notes}</p>
+        <p className="rounded-xl bg-surface-container-low p-4 text-sm leading-relaxed text-on-surface">{humanizeDataNote(election.notes)}</p>
       )}
 
       {!candidateListConfirmed && (
@@ -143,7 +144,7 @@ export function ElectionDetailPage() {
                 {ref.sourceTitle}
               </a>
               （{ref.sourceOrganization}、確認日：{ref.accessedAt}）
-              {ref.notes && <p className="mt-1">{ref.notes}</p>}
+              {ref.notes && <p className="mt-1">{humanizeDataNote(ref.notes)}</p>}
             </li>
           ))}
         </ul>

@@ -20,6 +20,7 @@ import { publicBills } from "../lib/billVotes";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { councilSessionPhaseLabels } from "../lib/councilSessions";
 import { councilSessionPhaseForSessionName } from "../lib/generalQuestionStats";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -136,7 +137,7 @@ export function GeneralQuestionDetailPage() {
       </div>
 
       <SectionCard title="質問内容（要約）">
-        <p className="text-sm leading-relaxed text-on-surface">{item.summary}</p>
+        <p className="text-sm leading-relaxed text-on-surface">{humanizeDataNote(item.summary)}</p>
       </SectionCard>
 
       <SectionCard title="質問項目">
@@ -266,7 +267,7 @@ export function GeneralQuestionDetailPage() {
           </a>
         )}
         <p className="mt-2 text-xs text-on-surface-variant">公表機関：{item.sourceOrganization}</p>
-        {item.notes && <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{item.notes}</p>}
+        {item.notes && <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(item.notes)}</p>}
       </SectionCard>
 
       {(prevQuestion || nextQuestion) && (

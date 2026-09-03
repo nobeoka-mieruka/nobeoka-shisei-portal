@@ -37,6 +37,7 @@ import {
   linkageToneClass,
   type LinkageDisplay,
 } from "../lib/mayorPromiseLinkage";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
   confirmed: "確定",
@@ -320,7 +321,7 @@ export function MayorPromiseDetailPage() {
 
       {/* 判断根拠 */}
       <SectionCard title="判断根拠">
-        <p className="text-sm leading-relaxed text-on-surface">{promise.notes || UNREGISTERED}</p>
+        <p className="text-sm leading-relaxed text-on-surface">{promise.notes ? humanizeDataNote(promise.notes) : UNREGISTERED}</p>
       </SectionCard>
 
       {/* 根拠資料一覧 */}
@@ -374,7 +375,7 @@ export function MayorPromiseDetailPage() {
             <dd className="mt-1">
               <LinkageConclusion display={budgetLinkage.display} />
               <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
-                {relatedFieldDisplay(promise.relatedBudget, "予算")}
+                {humanizeDataNote(relatedFieldDisplay(promise.relatedBudget, "予算"))}
               </p>
             </dd>
           </div>
@@ -383,7 +384,7 @@ export function MayorPromiseDetailPage() {
             <dd className="mt-1">
               <LinkageConclusion display={billLinkage.display} />
               <p className="mt-1.5 text-xs leading-relaxed text-on-surface-variant">
-                {relatedFieldDisplay(promise.relatedBill, "議案")}
+                {humanizeDataNote(relatedFieldDisplay(promise.relatedBill, "議案"))}
               </p>
             </dd>
           </div>
@@ -539,7 +540,7 @@ export function MayorPromiseDetailPage() {
                       この日を基準日として、公約の進捗状況・関連予算等のデータを整理しています（詳細は上記の各セクションを参照）。
                     </p>
                   ) : (
-                    entry.summary && <p className="mt-1 text-sm text-on-surface">{entry.summary}</p>
+                    entry.summary && <p className="mt-1 text-sm text-on-surface">{humanizeDataNote(entry.summary)}</p>
                   )}
                   {entry.kind === "progress_update" && entry.sourceUrl && (
                     <a
