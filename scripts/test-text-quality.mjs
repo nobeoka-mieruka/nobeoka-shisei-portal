@@ -148,8 +148,26 @@ function extractRenderedText(html) {
     .replace(/&#39;/g, "'");
 }
 
+/**
+ * dist/ が src/ より古いと、このレイヤーは実際のコードではなく前回ビルドの遺物を検査してしまう。
+ * 修正済みなのに失敗したり（古い dist にバグが残っている）、未修正なのに合格したり（古い dist が
+ * たまたま綺麗）するため、鮮度を確認できないときは判定せずスキップする。
+ * ビルド直後の状態は `npm run build` の末尾でこのスクリプトが実行されて担保される。
+ */
+function distIsStale() {
+  const newestSource = listFiles(path.join(ROOT, "src"), (name) => /\.(tsx?|json)$/.test(name)).reduce(
+    (max, f) => Math.max(max, statSync(f).mtimeMs),
+    0,
+  );
+  const distIndex = path.join(DIST, "index.html");
+  if (!existsSync(distIndex)) return true;
+  return statSync(distIndex).mtimeMs < newestSource;
+}
+
 if (!existsSync(DIST)) {
   console.log("  -- skip - prerender済みHTMLの検査（dist/ が無いためスキップ。npm run build 後に再実行してください）");
+} else if (distIsStale()) {
+  console.log("  -- skip - prerender済みHTMLの検査（dist/ が src/ より古いためスキップ。npm run build 後に再実行してください）");
 } else {
   const htmlFiles = listFiles(DIST, (name) => name === "index.html" || name === "404.html");
   const infoCounts = new Map(INFO_DUPLICATES.map((p) => [p, 0]));
