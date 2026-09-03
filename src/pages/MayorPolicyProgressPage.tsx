@@ -31,6 +31,7 @@ import {
   isPromiseBillConfirmed,
   hasPromiseCompletedMeasure,
 } from "../lib/mayorPromiseStatus";
+import { summarizeBillLinkage } from "../lib/mayorPromiseLinkage";
 import {
   MAYOR_PROMISE_GLOSSARY,
   MAYOR_PROMISE_LEVELS,
@@ -45,6 +46,13 @@ const promiseMeasures = mayorPromiseMeasuresData as MayorPromiseMeasureSnapshot[
 
 const isBudgetConfirmed = isPromiseBudgetConfirmed;
 const isBillConfirmed = isPromiseBillConfirmed;
+/**
+ * Phase208：議案側の状況の内訳。「対応する議案そのものを特定できた」件数（isBillConfirmed）だけでは、
+ * 「事業費が当初予算の議案に含まれることを確認済み」と「まだ確認できていない」が同じ数に
+ * 埋もれてしまうため、市民向けに3区分で併記する。判定は src/lib/mayorPromiseLinkage.ts に集約。
+ */
+const billLinkageSummary = summarizeBillLinkage(promises);
+
 function hasCompletedMeasure(promiseId: string): boolean {
   return hasPromiseCompletedMeasure(promiseId, promiseMeasures);
 }
@@ -69,6 +77,17 @@ type PresenceFilterValue = "yes" | "no";
 const presenceOptions: { value: PresenceFilterValue; label: string }[] = [
   { value: "yes", label: "あり" },
   { value: "no", label: "なし" },
+];
+
+/**
+ * Phase208：議案の絞り込みだけは「なし」と表示しない。この絞り込みが見ているのは
+ * relatedBillVoteIds（当サイトが個別の議案まで紐付けられたか）であり、
+ * 「その公約に関係する議案が存在しない」という意味ではないため、
+ * 「議案リンクあり／リンクは確認中」という表現にする。
+ */
+const billPresenceOptions: { value: PresenceFilterValue; label: string }[] = [
+  { value: "yes", label: "議案リンクあり" },
+  { value: "no", label: "リンクは確認中" },
 ];
 
 const documentByKey = new Map(promisesData.documents.map((d) => [d.key, d]));
@@ -211,6 +230,9 @@ export function MayorPolicyProgressPage() {
           <strong className="font-semibold text-on-surface">{promises.filter(isBudgetConfirmed).length}件</strong>
           、「対応する議案」まで特定できたのは
           <strong className="font-semibold text-on-surface">{promises.filter(isBillConfirmed).length}件</strong>
+          （このほか
+          <strong className="font-semibold text-on-surface">{billLinkageSummary.noSeparateBillConfirmed}件</strong>
+          は、事業費が当初予算の議案に含まれており、事業ごとに単独で議決された議案は無いことを確認済みです）
           、「完了した成果」まで確認できたのは
           <strong className="font-semibold text-on-surface">{promises.filter((p) => hasCompletedMeasure(p.id)).length}件</strong>
           です。残りは「まだ実施の途中」「予算・議案が制度上発生しない措置」等の理由で、公式資料との直接のつながりを特定できていないだけであり、「達成していない」という意味ではありません。
@@ -277,6 +299,11 @@ export function MayorPolicyProgressPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {promises.filter(isBillConfirmed).length}
               <span className="text-xs font-normal text-on-surface-variant">／{mayorPromiseCounts.promise}件の{MAYOR_PROMISE_LEVELS.promise.label}</span>
+              {/* Phase208：内部コードは出さず、実態を市民向けの言葉で併記する。 */}
+              <p className="mt-1 text-xs font-normal leading-relaxed text-on-surface-variant">
+                予算議案に含まれることを確認：{billLinkageSummary.noSeparateBillConfirmed}件／追加確認中：
+                {billLinkageSummary.underReview + billLinkageSummary.sourceNotFound}件
+              </p>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -300,7 +327,7 @@ export function MayorPolicyProgressPage() {
           <FilterSelect label="進捗状況" value={status} onChange={setStatus} options={statusOptions} />
           <FilterSelect label="政策分野" value={categoryId} onChange={setCategoryId} options={categoryOptions} />
           <FilterSelect label="根拠資料の有無" value={evidence} onChange={setEvidence} options={presenceOptions} />
-          <FilterSelect label="関連議案の有無" value={hasBill} onChange={setHasBill} options={presenceOptions} />
+          <FilterSelect label="関連議案リンクの状況" value={hasBill} onChange={setHasBill} options={billPresenceOptions} />
           <FilterSelect
             label="関連一般質問の有無"
             value={hasQuestion}

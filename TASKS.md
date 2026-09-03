@@ -10205,3 +10205,101 @@ errors=0 warnings=0、`check-bundle-size` エラー0件・警告0件）すべて
   更新履歴（u137）を1件追加。HUMAN_ACTION_REQUIRED 項目のステータスは変更していない。
 - 残課題：`updateHistory.json` の過去エントリは当時の事実の記録であるため文言を書き換えていない
   （いずれも「個別公約」「施策」の語を使っており、今回の統一と矛盾しない）。
+
+---
+
+### TASK-185 市長公約14件「予算→議案→成果」の状態精密化と市民向け表示（Phase208）
+
+状態：DONE（2026-09-03）
+優先度：A（ユーザー指示）
+対象：`src/lib/mayorPromiseLinkage.ts`（新規）、`src/components/mayor/PromiseCard.tsx`、
+`src/pages/MayorPromiseDetailPage.tsx`、`src/pages/MayorPolicyProgressPage.tsx`、
+`scripts/test-mayor-promise-tracking.mjs`、`package.json`、`src/data/mayorPromises.json`（表記1箇所）
+
+#### 背景
+
+Phase205（TASK-183）の分析で、議案側の状態には性質の異なる2つが混在していることが分かっていた。
+
+- 事業費が当初予算の議案に含まれ、事業ごとに単独で議決された議案は無いと整理済み（＝答えが出ている）
+- 要綱・人事上の措置等で議案化を伴わない可能性が高いが、原文自身が「断定はしていない」と明記（＝未確定）
+
+ところが画面ではどちらも「議案：資料確認中」という同一のバッジに潰れており、
+市民から見て「まだ調べていない」のか「調べた結果その形になっている」のか区別できなかった。
+Phase205 は分析のみで、この判定結果は `reports/` の中だけに存在していた。
+
+#### 実装
+
+- `src/lib/mayorPromiseLinkage.ts`（新規）：Phase205 の判定規則（`scripts/analyze-phase205.mjs` の
+  `classifyBudget`／`classifyBill`）と**同一の規則**を UI から使える単一情報源として実装した。
+  判定規則自体は変更していない。
+- **新しい status enum は追加していない**。解決状況は既存の
+  `PromiseEvidenceStatus`（`confirmed` / `candidate` / `under_review` / `not_found` / `unavailable`、
+  `src/types/index.ts`）をそのまま再利用し、理由コードは Phase205 の文字列を引き継いだ。
+  要件にあった `CONFIRMED_RELATED_BILL`／`BUDGET_BILL_INCLUDED`／`UNDER_REVIEW`／`SOURCE_NOT_FOUND` は
+  すべて既存語彙の組み合わせで表現できた。
+- `NO_SEPARATE_BILL_CONFIRMED`（独立議案が無いことの確認済み）は型としては定義したが、
+  **格上げの条件は「原文にヘッジ表現（断定はしていない）が無いこと」とし、現時点の該当は0件**。
+  一次資料で断定できる根拠が手元に無いため、7件は `NO_SEPARATE_BILL_LIKELY`（＝確認中側）のまま維持した。
+- 画面表示（内部コードは一切出さない）：
+  「関連議案を確認済み」／「予算議案に含まれています」／「追加確認中」／「資料確認中」。
+  一覧カードのバッジ、詳細ページの「関連情報」、詳細ページの「関連する議案・一般質問・記者会見」の
+  空表示（従来は「関連情報は登録されていません」）をすべてこの語彙に統一した。
+- 公約1-2 は「予算議案に含まれる」ことは整理済みだが、原文が
+  「個別事業名を明示した議案が別途存在しないと断定はしていない」と留保している。
+  この留保を表示から落とさないよう、説明文の末尾に「引き続き確認します」の一文を必ず付ける実装にした。
+- 一覧ページの絞り込み「関連議案の有無（あり／なし）」を
+  「関連議案リンクの状況（議案リンクあり／リンクは確認中）」に変更した。
+  この絞り込みが見ているのは `relatedBillVoteIds` の登録有無であり、「議案が存在しない」ことではないため。
+- `src/data/mayorPromises.json`：公約2-3の `relatedBudget` 本文にあった内部フィールド名
+  「下記relatedBillに記載」を、画面上の見出しに合わせて「下記「関連議案」欄に記載」へ修正した
+  （事実関係の変更なし。表記のみ）。
+
+#### 重点8公約（3-1・3-2・3-3・4-1〜4-5）について
+
+Phase205 が「令和8年度 延岡市予算に関する説明書（当初予算）1資料で同時に解決しうる」とした8公約は、
+**当該資料がリポジトリ内に存在しない（未取得）ため、状態を更新していない**。
+新規のオンライン調査は行っていない。8件はいずれも `NOT_IN_MAJOR_PROJECT_LIST`（予算）のまま維持。
+
+#### 件数（Phase205 baseline から変更なし）
+
+| 区分 | 件数 |
+| --- | --- |
+| 個別公約 | 14（政策分野4／個別施策33も維持） |
+| 予算：一次資料で対応関係を確認済み | 4 |
+| 議案：関連議案を確認済み（`CONFIRMED_RELATED_BILL`） | 1 |
+| 議案：予算議案に含まれることを確認（`BUDGET_BILL_INCLUDED`） | 4 |
+| 議案：独立議案なしを確認済み（`NO_SEPARATE_BILL_CONFIRMED`） | 0 |
+| 議案：追加確認中（`NO_SEPARATE_BILL_LIKELY` 7＋`PENDING_FUTURE_BILL` 1＋`NOT_INTERPRETED` 1） | 9 |
+| 議案：参照できる資料の記述が無い（`SOURCE_NOT_FOUND`） | 0 |
+| 成果：当年度実績を確認済み | 12 |
+
+#### テスト
+
+`scripts/test-mayor-promise-tracking.mjs` に Phase208 の検証を6件追加（8件→16件）。
+`src/lib/mayorPromiseLinkage.ts` を直接 import するため `--experimental-strip-types` 実行に変更した。
+
+- 議案側の理由コードの内訳が Phase205 baseline と一致する（根拠なく状態が動いていない）
+- 「議案化を伴わない可能性が高い」だけを根拠に確認済みへ格上げしていない（`NO_SEPARATE_BILL_CONFIRMED` 0件）
+- 原文が留保している公約は確認済みに分類されず、表示文からも留保が消えていない
+- 「独立議案なしを確認済み」と「追加確認中」が別の数として集計される
+- 表示文言に内部コード・「なし」の断定が含まれない
+- 状態判定が `src/lib/mayorPromiseLinkage.ts` 以外で再実装されていない
+
+#### 検証結果
+
+`validate:data` errors=0 / warnings=21（既存基準と一致）／`typecheck` clean／
+`lint` 既存4 warnings のみ（新規0）／`npm test` 全スイート通過（failures 0）／
+`build` 成功（`validate:seo` failures=0 warnings=0、`validate:content` errors=0 warnings=0、
+`check-bundle-size` エラー0・警告0、`check-internal-links` リンク切れ0件／2,270ページ）。
+
+完了記録：
+- 完了日：2026-09-03
+- 変更概要：状態表現の共通ロジック追加とUI文言の精密化。公約の件数・進捗状況・出典・
+  `relatedBillVoteIds` は一切変更していない。`RELEASE_SNAPSHOT.md` /
+  `reports/release-snapshot.json` の baseline は変更していない。
+  HUMAN_ACTION_REQUIRED 項目のステータスも変更していない。
+- 残課題：(1) 重点8公約は「令和8年度 延岡市予算に関する説明書」の取得が前提。
+  (2) `relatedBudget`／`relatedBill` 本文に内部ファイル名「billVotes.json」が現れる箇所が残っている
+  （市民向け表現としては不適切だが、調査経緯の記録でもあるため今回は書き換えていない）。
+  (3) `NO_SEPARATE_BILL_LIKELY` 7件を確認済みへ格上げするには、要綱制定・人事措置に議案が
+  不要であることを断定できる一次資料（延岡市の事務決裁規程等）が必要。
