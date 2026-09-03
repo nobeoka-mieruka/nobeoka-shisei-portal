@@ -24,6 +24,7 @@ import {
   hasDebtData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const debtIssuanceMetric = financeMetricByKey("debtIssuance")!;
 const debtBalanceGeneralMetric = financeMetricByKey("debtBalanceGeneral")!;
@@ -112,8 +113,8 @@ export function FinanceDebtPage() {
             </Link>
           }
         >
-          <p className="text-xs leading-relaxed text-on-surface-variant">{y.debt?.balance.definitionNote}</p>
-          {y.debt?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.debt.notes}</p>}
+          <p className="text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(y.debt?.balance.definitionNote)}</p>
+          {y.debt?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(y.debt.notes)}</p>}
           <div className="mt-2 space-y-2">
             <SourceRefList refs={y.debt?.balance.sourceRefs ?? []} />
             <SourceRefList refs={y.debt?.municipalBondIssuanceSourceRefs ?? []} />

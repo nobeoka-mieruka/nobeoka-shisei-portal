@@ -11,6 +11,7 @@ import { getSeoForPath } from "../lib/seo";
 import { similarMunicipalityFinance, computeStatsByAccessor } from "../lib/similarMunicipalityFinance";
 import type { CsvColumn } from "../lib/csv";
 import type { SimilarMunicipalityFinanceEntry } from "../types/similarMunicipalityFinance";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -252,7 +253,7 @@ export function CompareSimilarMunicipalitiesPage() {
                 {ref.sourceTitle}
               </a>
               （{ref.sourceOrganization}、確認日：{ref.accessedAt}）
-              {ref.notes && <p className="mt-1">{ref.notes}</p>}
+              {ref.notes && <p className="mt-1">{humanizeDataNote(ref.notes)}</p>}
             </li>
           ))}
         </ul>

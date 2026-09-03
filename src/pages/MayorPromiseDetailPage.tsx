@@ -31,6 +31,7 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
 import { MAYOR_PROMISE_LEVELS } from "../lib/mayorPromiseTerms";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
   confirmed: "確定",
@@ -295,7 +296,7 @@ export function MayorPromiseDetailPage() {
 
       {/* 判断根拠 */}
       <SectionCard title="判断根拠">
-        <p className="text-sm leading-relaxed text-on-surface">{promise.notes || UNREGISTERED}</p>
+        <p className="text-sm leading-relaxed text-on-surface">{promise.notes ? humanizeDataNote(promise.notes) : UNREGISTERED}</p>
       </SectionCard>
 
       {/* 根拠資料一覧 */}
@@ -346,11 +347,11 @@ export function MayorPromiseDetailPage() {
         <dl className="grid grid-cols-1 gap-x-4 gap-y-3 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">予算措置</dt>
-            <dd className="mt-0.5 text-on-surface">{relatedFieldDisplay(promise.relatedBudget, "予算")}</dd>
+            <dd className="mt-0.5 text-on-surface">{humanizeDataNote(relatedFieldDisplay(promise.relatedBudget, "予算"))}</dd>
           </div>
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">関連議案</dt>
-            <dd className="mt-0.5 text-on-surface">{relatedFieldDisplay(promise.relatedBill, "議案")}</dd>
+            <dd className="mt-0.5 text-on-surface">{humanizeDataNote(relatedFieldDisplay(promise.relatedBill, "議案"))}</dd>
           </div>
           <div>
             <dt className="text-xs font-medium text-on-surface-variant">担当部署</dt>
@@ -499,7 +500,7 @@ export function MayorPromiseDetailPage() {
                       この日を基準日として、公約の進捗状況・関連予算等のデータを整理しています（詳細は上記の各セクションを参照）。
                     </p>
                   ) : (
-                    entry.summary && <p className="mt-1 text-sm text-on-surface">{entry.summary}</p>
+                    entry.summary && <p className="mt-1 text-sm text-on-surface">{humanizeDataNote(entry.summary)}</p>
                   )}
                   {entry.kind === "progress_update" && entry.sourceUrl && (
                     <a

@@ -24,6 +24,7 @@ import {
   hasFundData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const fundTotalMetric = financeMetricByKey("fundTotal")!;
 
@@ -125,8 +126,8 @@ export function FinanceFundsPage() {
                 </Link>
               }
             >
-              <p className="text-xs leading-relaxed text-on-surface-variant">{y.fund?.balance.definitionNote}</p>
-              {y.fund?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{y.fund.notes}</p>}
+              <p className="text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(y.fund?.balance.definitionNote)}</p>
+              {y.fund?.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(y.fund.notes)}</p>}
               <div className="mt-2">
                 <SourceRefList refs={y.fund?.balance.sourceRefs ?? []} />
               </div>

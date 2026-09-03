@@ -30,6 +30,7 @@ import { GlossaryNote } from "../components/GlossaryNote";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
 import { BillCategoryNotice, BillResultOutcomeNotice } from "../components/bills/BillCategoryNotice";
 import { BILL_EXPLANATION_LEVEL_DESCRIPTION, BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -209,7 +210,7 @@ export function BillVoteDetailPage() {
             <p className="text-sm font-semibold">この案件は現在確認作業中です</p>
           </div>
           <p className="mt-2 text-sm leading-relaxed">
-            {bill.verificationNote ??
+            {humanizeDataNote(bill.verificationNote) ??
               "この案件は公式資料の記載が複雑なため、現在確認作業中です。議会全体の結果や個人別表決の一部に、未確定の項目があります。正式な内容は延岡市議会の公式資料をご確認ください。"}
           </p>
         </div>
@@ -380,11 +381,11 @@ export function BillVoteDetailPage() {
               ※この概要は、議案名・提出者・議決結果などから当サイトが機械的に組み立てた説明です。延岡市議会が公式に作成した要約ではありません。詳しい内容は下記の出典PDF（原資料）でご確認ください。
             </p>
           )}
-          <p className="text-sm leading-relaxed text-on-surface">{bill.summary}</p>
+          <p className="text-sm leading-relaxed text-on-surface">{humanizeDataNote(bill.summary)}</p>
           {bill.reason && (
             <div>
               <p className="text-xs font-medium text-on-surface-variant">提出理由</p>
-              <p className="mt-1 text-sm leading-relaxed text-on-surface">{bill.reason}</p>
+              <p className="mt-1 text-sm leading-relaxed text-on-surface">{humanizeDataNote(bill.reason)}</p>
             </div>
           )}
           {bill.mainChanges && bill.mainChanges.length > 0 && (
@@ -400,13 +401,13 @@ export function BillVoteDetailPage() {
           {bill.citizenImpact && (
             <div>
               <p className="text-xs font-medium text-on-surface-variant">市民生活への影響</p>
-              <p className="mt-1 text-sm leading-relaxed text-on-surface">{bill.citizenImpact}</p>
+              <p className="mt-1 text-sm leading-relaxed text-on-surface">{humanizeDataNote(bill.citizenImpact)}</p>
             </div>
           )}
           {bill.relatedBudgetSummary && (
             <div>
               <p className="text-xs font-medium text-on-surface-variant">関連する予算</p>
-              <p className="mt-1 text-sm leading-relaxed text-on-surface">{bill.relatedBudgetSummary}</p>
+              <p className="mt-1 text-sm leading-relaxed text-on-surface">{humanizeDataNote(bill.relatedBudgetSummary)}</p>
             </div>
           )}
           {bill.relatedOrdinances && bill.relatedOrdinances.length > 0 && (
@@ -500,7 +501,7 @@ export function BillVoteDetailPage() {
           </ul>
         ) : (
           <p className="rounded-lg bg-surface-container-high/70 px-3 py-2.5 text-xs leading-relaxed text-on-surface-variant">
-            {memberVotesUnavailableReason(bill)}
+            {humanizeDataNote(memberVotesUnavailableReason(bill))}
           </p>
         )}
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">

@@ -36,6 +36,7 @@ import {
 } from "../lib/archivePolicies";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archivePolicyCategories = archivePolicyCategoriesData as ArchivePolicyCategory[];
@@ -129,7 +130,7 @@ export function PolicyDetailPage() {
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
         <h2 className="text-base font-semibold text-on-surface">概要</h2>
-        <p className="mt-2 text-sm leading-loose text-on-surface">{policy.summary}</p>
+        <p className="mt-2 text-sm leading-loose text-on-surface">{humanizeDataNote(policy.summary)}</p>
         {policy.sourceOriginalText && (
           <div className="mt-3 rounded-lg border border-outline-variant bg-surface p-3">
             <p className="text-xs font-medium text-on-surface-variant">原文</p>
@@ -139,7 +140,7 @@ export function PolicyDetailPage() {
         <p className="mt-3 text-xs text-on-surface-variant">
           資料区分：{policySourceTypeLabel(policy.sourceType)}
         </p>
-        {policy.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{policy.notes}</p>}
+        {policy.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(policy.notes)}</p>}
       </section>
 
       {questionRelations.length > 0 && (

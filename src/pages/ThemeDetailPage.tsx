@@ -33,6 +33,7 @@ import { documentResultLabel, documentTypeLabel } from "../lib/archiveCouncilDoc
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const themes = themesData as Theme[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
@@ -323,7 +324,7 @@ export function ThemeDetailPage() {
                     </span>
                     <SpeechSummaryStatusBadge status={speech.summaryStatus} />
                   </div>
-                  {speech.shortSummary && <p className="mt-1 text-sm text-on-surface">{speech.shortSummary}</p>}
+                  {speech.shortSummary && <p className="mt-1 text-sm text-on-surface">{humanizeDataNote(speech.shortSummary)}</p>}
                   <div className="mt-1.5 flex flex-wrap gap-1">
                     {matchedTopics.map((t) => (
                       <span key={t} className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-xs text-on-surface-variant">

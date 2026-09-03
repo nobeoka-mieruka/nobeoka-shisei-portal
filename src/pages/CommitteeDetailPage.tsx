@@ -11,6 +11,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import type { CommitteeRole } from "../types";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -142,7 +143,7 @@ export function CommitteeDetailPage() {
             </div>
           )}
         </dl>
-        {committee.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{committee.notes}</p>}
+        {committee.notes && <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(committee.notes)}</p>}
       </SectionCard>
 
       <SectionCard title="委員名簿">
@@ -159,7 +160,7 @@ export function CommitteeDetailPage() {
                 {m.role}
               </span>
               {m.appointedNote && (
-                <p className="w-full text-xs text-on-surface-variant">{m.appointedNote}</p>
+                <p className="w-full text-xs text-on-surface-variant">{humanizeDataNote(m.appointedNote)}</p>
               )}
             </li>
           ))}
@@ -192,7 +193,7 @@ export function CommitteeDetailPage() {
                         <span className="shrink-0 rounded-full bg-surface-container-high px-2.5 py-0.5 text-xs font-semibold text-on-surface">
                           {rec.role}
                         </span>
-                        {rec.notes && <p className="w-full text-xs text-on-surface-variant">{rec.notes}</p>}
+                        {rec.notes && <p className="w-full text-xs text-on-surface-variant">{humanizeDataNote(rec.notes)}</p>}
                       </li>
                     ))}
                   </ul>
@@ -283,7 +284,7 @@ export function CommitteeDetailPage() {
                     {report.visitDate ? `（${report.visitDate}）` : ""}
                   </p>
                 )}
-                {report.notes && <p className="mt-1 text-xs text-on-surface-variant">{report.notes}</p>}
+                {report.notes && <p className="mt-1 text-xs text-on-surface-variant">{humanizeDataNote(report.notes)}</p>}
                 <SourceLink url={report.url} label="報告書PDFを見る" className="mt-2" />
               </li>
             ))}

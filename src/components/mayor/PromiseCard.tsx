@@ -4,6 +4,7 @@ import { GlobeIcon } from "../icons";
 import { formatJapaneseDate } from "../../config/site";
 import { MayorPromiseStatusBadge } from "./MayorPromiseStatusBadge";
 import { isPromiseBudgetConfirmed, isPromiseBillConfirmed } from "../../lib/mayorPromiseStatus";
+import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -96,11 +97,11 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
         <div className="grid grid-cols-1 gap-3 px-3 pb-3 sm:grid-cols-2">
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
-            <p className="mt-1 text-sm text-on-surface">{promise.relatedBudget}</p>
+            <p className="mt-1 text-sm text-on-surface">{humanizeDataNote(promise.relatedBudget)}</p>
           </div>
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
-            <p className="mt-1 text-sm text-on-surface">{promise.relatedBill}</p>
+            <p className="mt-1 text-sm text-on-surface">{humanizeDataNote(promise.relatedBill)}</p>
           </div>
         </div>
       </details>

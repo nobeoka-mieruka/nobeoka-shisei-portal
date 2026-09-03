@@ -29,6 +29,7 @@ import {
   resolveCouncilVotes,
   resolveDocumentSourceUrl,
 } from "../lib/archiveCouncilDocuments";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const billVotes = billVotesData as BillVoteItem[];
@@ -347,8 +348,8 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
 
       <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
         <h2 className="text-base font-semibold text-on-surface">概要</h2>
-        <p className="mt-2 text-sm leading-loose text-on-surface">{doc.summary}</p>
-        {doc.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{doc.notes}</p>}
+        <p className="mt-2 text-sm leading-loose text-on-surface">{humanizeDataNote(doc.summary)}</p>
+        {doc.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(doc.notes)}</p>}
       </section>
 
       {doc.ordinanceDetail && (

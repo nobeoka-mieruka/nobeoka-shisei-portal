@@ -130,6 +130,37 @@ const BANNED_DUPLICATES = ["約約", "円円", "％％", "年年度", "月月", 
 /** 入れ子引用として正当に出現しうるため、件数の表示のみ行う。 */
 const INFO_DUPLICATES = ["「「", "」」"];
 
+/**
+ * Phase209・レイヤー3：市民向けページに内部用語（データのフィールド名・列挙値・
+ * ファイル名・整理番号・リポジトリ内パス）がそのまま出ていないかを検査する。
+ * 表示側の言い換えは `src/lib/citizenTermLabels.ts` の `humanizeDataNote()` が担当する。
+ * 検出されたら、対応表へ日本語ラベルを足すか、表示箇所を `humanizeDataNote()` で包む。
+ */
+const INTERNAL_TERM_PATTERNS = [
+  { label: "内部データファイル名", re: /(^|[^/A-Za-z0-9._-])[a-z][A-Za-z0-9]*\.json(?![A-Za-z0-9])/ },
+  { label: "内部の金額フィールド名", re: /(^|[^A-Za-z0-9_])[a-z][A-Za-z0-9]*Yen(?![A-Za-z0-9_])/ },
+  {
+    label: "出典・確認状況の内部フィールド名／列挙値",
+    re: /(^|[^A-Za-z0-9_])(?:verificationStatus|verificationNote|sourceRefs?|reasonCode|partiallyVerified|needsReview|sourceUnavailable|not_researched|unconfirmed)(?![A-Za-z0-9_])/,
+  },
+  { label: "内部の整理番号", re: /(?<!未確認項目)UNR-\d+|(?<!照会事項)INQ-\d+|(?<!要再確認項目)disputed-\d+/ },
+  { label: "議案説明の内部段階区分", re: /(^|[^A-Za-z0-9_])Level[123](?![A-Za-z0-9_])/ },
+  {
+    label: "人手対応の内部ステータス",
+    re: /(^|[^A-Za-z0-9_])(?:HUMAN_ACTION_REQUIRED|MANUAL_REVIEW|RESEARCH_EXHAUSTED|WAITING_EXTERNAL)(?![A-Za-z0-9_])/,
+  },
+  {
+    label: "リポジトリ内のパス",
+    re: /(^|[^A-Za-z0-9])(?:src\/data|reports|scripts)\/[A-Za-z0-9._/-]+\.(?:json|md|mjs|ts|ps1)(?![A-Za-z0-9])/,
+  },
+];
+
+/**
+ * 監査・専門ページ。内部の状態名を「意味の説明付きで」提示すること自体が目的の画面のため、
+ * レイヤー3の対象外にする（一般市民向けページでの露出のみを回帰対象にする）。
+ */
+const AUDIT_ROUTES = ["/data-status", "/methodology"];
+
 /** prerender済みHTMLから本文の表示テキストを取り出す。 */
 function extractRenderedText(html) {
   const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/);
@@ -198,6 +229,34 @@ if (!existsSync(DIST)) {
 
   check(`prerender済みHTMLの本文に明確な二重語（${BANNED_DUPLICATES.join("・")}）が無い`, () => {
     assert.equal(found.length, 0, `二重語:\n    ${found.slice(0, 40).join("\n    ")}`);
+  });
+
+  /* ---------------------------------------------------------------- *
+   * レイヤー3：prerender済みHTML（内部用語の露出）
+   * ---------------------------------------------------------------- */
+
+  const internalFound = [];
+  for (const file of htmlFiles) {
+    const route = "/" + path.relative(DIST, file).replace(/\\/g, "/").replace(/\/?index\.html$/, "");
+    if (AUDIT_ROUTES.some((prefix) => route === prefix || route.startsWith(`${prefix}/`))) continue;
+    const text = extractRenderedText(readFileSync(file, "utf8"));
+    for (const { label, re } of INTERNAL_TERM_PATTERNS) {
+      const scanner = new RegExp(re.source, "g");
+      let m;
+      while ((m = scanner.exec(text))) {
+        const context = text.slice(Math.max(0, m.index - 40), m.index + 60).replace(/\s+/g, " ").trim();
+        internalFound.push(`${route}: ${label}「${m[0].trim()}」…${context}…`);
+      }
+    }
+  }
+
+  check("prerender済みHTMLの本文に、市民向けページ用の日本語へ言い換えていない内部用語が無い", () => {
+    assert.equal(
+      internalFound.length,
+      0,
+      `内部用語の露出（src/lib/citizenTermLabels.ts の対応表へ追加し、表示箇所を humanizeDataNote() で包む）:\n    ` +
+        `${internalFound.slice(0, 40).join("\n    ")}\n    （合計${internalFound.length}件）`,
+    );
   });
 }
 

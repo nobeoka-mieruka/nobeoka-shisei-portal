@@ -23,6 +23,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { GlobeIcon } from "../components/icons";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const councilSessions = councilSessionsData as CouncilSession[];
 const billVotes = billVotesData as BillVoteItem[];
@@ -133,7 +134,7 @@ export function CouncilSessionDetailPage() {
         {summaryStatus && summaryStatus !== "unavailable" ? (
           <div className="space-y-3">
             {summaryStatus !== "verified" && <SessionSummaryStatusBadge status={summaryStatus} />}
-            <p className="whitespace-pre-line text-sm leading-relaxed text-on-surface">{session.summary}</p>
+            <p className="whitespace-pre-line text-sm leading-relaxed text-on-surface">{humanizeDataNote(session.summary)}</p>
             {summaryStatus !== "verified" && (
               <p className="rounded-lg bg-surface-container-high p-3 text-xs leading-relaxed text-on-surface-variant">
                 この要約は公式資料を基に作成していますが、一部の内容（{sessionSummaryStatusLabels[summaryStatus]}）を確認中です。正式な内容は出典資料をご確認ください。

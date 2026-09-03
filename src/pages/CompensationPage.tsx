@@ -39,6 +39,7 @@ import {
   getMonthly,
   rankByRole,
 } from "../lib/compensation";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const comparison = compensationData as CompensationComparisonEntry[];
 const prefectureRanking = prefectureRankingData as PrefectureCompensationRanking;
@@ -249,11 +250,11 @@ export function CompensationPage() {
             })}
           </div>
           <p className="mt-3 rounded-lg bg-surface-container-high/60 p-3 text-xs leading-relaxed text-on-surface-variant">
-            {nationalRanking.notes}
+            {humanizeDataNote(nationalRanking.notes)}
           </p>
           <details className="mt-2 rounded-lg border border-outline-variant p-3">
             <summary className="block cursor-pointer py-3.5 text-xs font-medium text-primary">確認した内容の詳細を見る</summary>
-            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{nationalRanking.calculationMethod}</p>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(nationalRanking.calculationMethod)}</p>
           </details>
           <SourceLink
             url={nationalRanking.sourceUrl}
@@ -353,11 +354,11 @@ export function CompensationPage() {
             </details>
           )}
           <p className="mt-3 rounded-lg bg-surface-container-high/60 p-3 text-xs leading-relaxed text-on-surface-variant">
-            {similarMunicipality.notes}
+            {humanizeDataNote(similarMunicipality.notes)}
           </p>
           <details className="mt-2 rounded-lg border border-outline-variant p-3">
             <summary className="block cursor-pointer py-3.5 text-xs font-medium text-primary">確認した内容の詳細を見る</summary>
-            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{similarMunicipality.calculationMethod}</p>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(similarMunicipality.calculationMethod)}</p>
           </details>
           <SourceLink
             url={similarMunicipality.sourceUrl}
@@ -388,8 +389,8 @@ export function CompensationPage() {
           現在の公表月額）です。列見出しをクリック（モバイルはボタンをタップ）すると並び替えができます。
         </p>
         <MiyazakiComparisonTable municipalities={miyazakiComparison.municipalities} />
-        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{miyazakiComparison.calculationMethod}</p>
-        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{miyazakiComparison.notes}</p>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(miyazakiComparison.calculationMethod)}</p>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(miyazakiComparison.notes)}</p>
         <SourceLink
           url={miyazakiComparison.sourceUrl}
           label={`${miyazakiComparison.sourceTitle}（${miyazakiComparison.sourceOrganization}）`}
@@ -597,7 +598,7 @@ export function CompensationPage() {
             <li key={c.municipality} className="border-b border-outline-variant pb-3 last:border-0 last:pb-0">
               <p className="text-sm font-medium text-on-surface">{c.municipality}</p>
               <SourceLink url={c.sourceUrl} label={c.sourceTitle} verifiedAt={c.confirmedAt} className="mt-1" />
-              <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{c.notes}</p>
+              <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(c.notes)}</p>
             </li>
           ))}
         </ul>
