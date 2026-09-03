@@ -75,6 +75,12 @@ import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
 import { isDayPreciseTerm } from "../lib/archiveMayors";
 import {
+  MAYOR_PROMISE_LEVELS,
+  MAYOR_PROMISE_SCALE_NOTE,
+  MAYOR_PROMISE_SCALE_SUMMARY,
+  mayorPromiseCounts,
+} from "../lib/mayorPromiseTerms";
+import {
   hasBudgetData,
   hasPopulationData,
   hasDebtData,
@@ -632,15 +638,41 @@ export function DataStatusPage() {
 
   const policy: DataDomain[] = [
     {
-      // トップページの「登録済み市長公約数」は現職市長（三浦市長）の公約のみを数えており
-      // （mayor.pledges.length）、こちらは歴代の政策・公約アーカイブ全体の件数のため、
+      // 現職市長の公約と、歴代の政策・公約アーカイブは集計対象が異なるため、
       // 単純に「政策・公約」とだけ表示すると同じ言葉で桁の違う数字に見えてしまう。
       // 集計対象が異なることを明示する（DataStatusPage監査で発見）。
       label: "政策・公約データ（歴代分を含む総数）",
       count: archivePolicies.length,
       unit: "件",
-      scope: "歴代の市長・市政の政策・公約アーカイブ全体。現職市長の公約のみの件数はトップページ「登録済み市長公約数」を参照",
+      scope: `歴代の市長・市政の政策・公約アーカイブ全体。現職市長の公約のみの件数は下記3項目（${MAYOR_PROMISE_SCALE_SUMMARY}）を参照`,
       linkTo: "/policies",
+    },
+    // Phase202：「4件」「14件」「33件」がいずれも「市長公約」と呼ばれてページ間で混同されて
+    // いたため、3階層それぞれを別項目として並べ、何を数えた値かを明示する。
+    // 名称・件数はsrc/lib/mayorPromiseTerms.tsの単一情報源から取得し、直書きしない。
+    {
+      label: `現職市長の公約：${MAYOR_PROMISE_LEVELS.policyArea.label}`,
+      count: mayorPromiseCounts.policyArea,
+      unit: "件",
+      scope: MAYOR_PROMISE_LEVELS.policyArea.definition,
+      detail: MAYOR_PROMISE_SCALE_NOTE,
+      linkTo: "/mayor/policy-progress",
+    },
+    {
+      label: `現職市長の公約：${MAYOR_PROMISE_LEVELS.promise.label}`,
+      count: mayorPromiseCounts.promise,
+      unit: "件",
+      scope: MAYOR_PROMISE_LEVELS.promise.definition,
+      detail: MAYOR_PROMISE_SCALE_NOTE,
+      linkTo: "/mayor/policy-progress",
+    },
+    {
+      label: `現職市長の公約：${MAYOR_PROMISE_LEVELS.measure.label}`,
+      count: mayorPromiseCounts.measure,
+      unit: "件",
+      scope: MAYOR_PROMISE_LEVELS.measure.definition,
+      detail: MAYOR_PROMISE_SCALE_NOTE,
+      linkTo: "/mayor/policy-progress",
     },
   ];
 
@@ -1063,13 +1095,18 @@ export function DataStatusPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{similarMunicipalityFinance.municipalities.length}自治体確認済み</dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">市長公約</dt>
+            <dt className="text-xs text-on-surface-variant">市長公約（予算事業との対応）</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">根拠資料調査中</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">市長公約の収録件数</dt>
+            <dd className="mt-0.5 text-sm font-semibold leading-relaxed text-on-surface">{MAYOR_PROMISE_SCALE_SUMMARY}</dd>
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          類似団体（人口・産業構造が近い全国の自治体グループ）は、延岡市を含め59自治体を総務省公式資料から特定し、財政指標の比較データを掲載しています。市長公約は、公約本文と名称が完全一致する予算事業の候補は複数見つかっていますが、「確定（confirmed）」に必要な原本資料との照合がまだ済んでいないため、確定件数は0件のままです。0件は「根拠が無い」のではなく「照合作業が完了していない」という意味です。
+          類似団体（人口・産業構造が近い全国の自治体グループ）は、延岡市を含め{similarMunicipalityFinance.municipalities.length}自治体を総務省公式資料から特定し、財政指標の比較データを掲載しています。市長公約は、公約本文と名称が完全一致する予算事業の候補は複数見つかっていますが、「確定（confirmed）」に必要な原本資料との照合がまだ済んでいないため、確定件数は0件のままです。0件は「根拠が無い」のではなく「照合作業が完了していない」という意味です。
         </p>
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{MAYOR_PROMISE_SCALE_NOTE}</p>
       </SectionCard>
 
       <SectionCard title="議員活動バロメーターの収録状況">

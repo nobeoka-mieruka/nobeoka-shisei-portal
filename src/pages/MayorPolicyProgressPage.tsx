@@ -31,6 +31,12 @@ import {
   isPromiseBillConfirmed,
   hasPromiseCompletedMeasure,
 } from "../lib/mayorPromiseStatus";
+import {
+  MAYOR_PROMISE_GLOSSARY,
+  MAYOR_PROMISE_LEVELS,
+  MAYOR_PROMISE_SCALE_NOTE,
+  mayorPromiseCounts,
+} from "../lib/mayorPromiseTerms";
 
 const data = policyProgressData as MayorPolicyProgressData;
 const promisesData = mayorPromisesData as MayorPromisesData;
@@ -190,16 +196,16 @@ export function MayorPolicyProgressPage() {
       <div className="rounded-xl border border-primary/30 bg-primary-container/40 p-4 sm:p-5">
         <p className="text-sm font-semibold text-on-surface">まずここを見る</p>
         <p className="mt-1.5 text-sm leading-relaxed text-on-surface">
-          市長の公約は{promises.length}件です。それぞれの公約には具体的な取組（個別施策）が複数含まれていることが多く、取組単位で数えると全部で{promiseMeasures.length}件になります（
-          <strong className="font-semibold">
-            {promises.length}件の公約
-          </strong>
-          と
-          <strong className="font-semibold">{promiseMeasures.length}件の個別施策</strong>
-          は別の数え方です）。
+          市長公約は3つの階層で数えています。いちばん大きな区分が
+          <strong className="font-semibold">{MAYOR_PROMISE_LEVELS.policyArea.label}{mayorPromiseCounts.policyArea}件</strong>
+          、それを1件ずつに分けたものが
+          <strong className="font-semibold">{MAYOR_PROMISE_LEVELS.promise.label}{mayorPromiseCounts.promise}件</strong>
+          、さらに各{MAYOR_PROMISE_LEVELS.promise.label}に含まれる具体的な事業・取組みが
+          <strong className="font-semibold">{MAYOR_PROMISE_LEVELS.measure.label}{mayorPromiseCounts.measure}件</strong>
+          です。数え方が違うだけで、どれか1つが正しい「公約数」というわけではありません。
         </p>
         <p className="mt-2 text-sm leading-relaxed text-on-surface">
-          {promises.length}件の公約のうち、具体的な取組の内容までは
+          {MAYOR_PROMISE_LEVELS.promise.label}{mayorPromiseCounts.promise}件のうち、具体的な取組の内容までは
           <strong className="font-semibold text-on-surface">{promises.filter((p) => promiseMeasures.some((m) => m.promiseId === p.id)).length}件すべて</strong>
           で確認できています。その先の「予算額」まで特定できたのは
           <strong className="font-semibold text-on-surface">{promises.filter(isBudgetConfirmed).length}件</strong>
@@ -216,9 +222,27 @@ export function MayorPolicyProgressPage() {
         definition="「未着手」は、市長本人の公表資料等で着手していないことが確認できた場合に使います。まだ確認できていない場合は「確認中」と表示し、「未着手」とは区別しています（「確認中」は0件・未達成を意味しません）。"
       />
 
+      <GlossaryNote term={MAYOR_PROMISE_GLOSSARY.term} definition={MAYOR_PROMISE_GLOSSARY.definition} />
+
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="全公約数" value={promises.length} unit="件" />
-        <StatCard label="個別施策数" value={promiseMeasures.length} unit="件" hint="1公約に複数の施策がある場合があります" />
+        <StatCard
+          label={MAYOR_PROMISE_LEVELS.policyArea.statLabel}
+          value={mayorPromiseCounts.policyArea}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.policyArea.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
+        <StatCard
+          label={MAYOR_PROMISE_LEVELS.promise.statLabel}
+          value={mayorPromiseCounts.promise}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.promise.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
+        <StatCard
+          label={MAYOR_PROMISE_LEVELS.measure.statLabel}
+          value={mayorPromiseCounts.measure}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.measure.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
         {[...statusCounts.entries()]
           .sort((a, b) => STATUS_DISPLAY_ORDER.indexOf(a[0]) - STATUS_DISPLAY_ORDER.indexOf(b[0]))
           .map(([label, count]) => (
@@ -231,35 +255,35 @@ export function MayorPolicyProgressPage() {
           見る」で要約済みのため、ここは詳細版（第2層）として位置づける。 */}
       <SectionCard title="公式資料でどこまで追跡できているか（詳細）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          各公約について、公式資料で「具体的な施策」「予算」「議案」「成果（完了した施策）」のどこまで直接の対応関係を確認できたかを集計しています。件数が少ない項目（議案・成果）は「対応する議案・成果が存在しない」という意味ではなく、「現時点で当サイトが公式資料との直接の関連を確認できたのがこの件数」という意味です。多くの施策は市長の予算執行権限内の措置（要綱制定・人事配置等）であり、性質上、独立した議案を伴わない場合があります。
+          各{MAYOR_PROMISE_LEVELS.promise.label}について、公式資料で「具体的な施策」「予算」「議案」「成果（完了した施策）」のどこまで直接の対応関係を確認できたかを集計しています。件数が少ない項目（議案・成果）は「対応する議案・成果が存在しない」という意味ではなく、「現時点で当サイトが公式資料との直接の関連を確認できたのがこの件数」という意味です。多くの施策は市長の予算執行権限内の措置（要綱制定・人事配置等）であり、性質上、独立した議案を伴わない場合があります。
         </p>
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">施策まで確認</dt>
+            <dt className="text-xs text-on-surface-variant">{MAYOR_PROMISE_LEVELS.measure.label}まで確認</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {promises.filter((p) => promiseMeasures.some((m) => m.promiseId === p.id)).length}
-              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+              <span className="text-xs font-normal text-on-surface-variant">／{mayorPromiseCounts.promise}件の{MAYOR_PROMISE_LEVELS.promise.label}</span>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">予算まで確認</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {promises.filter(isBudgetConfirmed).length}
-              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+              <span className="text-xs font-normal text-on-surface-variant">／{mayorPromiseCounts.promise}件の{MAYOR_PROMISE_LEVELS.promise.label}</span>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">議案まで確認</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {promises.filter(isBillConfirmed).length}
-              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+              <span className="text-xs font-normal text-on-surface-variant">／{mayorPromiseCounts.promise}件の{MAYOR_PROMISE_LEVELS.promise.label}</span>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">成果（完了施策）まで確認</dt>
+            <dt className="text-xs text-on-surface-variant">成果（完了した{MAYOR_PROMISE_LEVELS.measure.label}）まで確認</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {promises.filter((p) => hasCompletedMeasure(p.id)).length}
-              <span className="text-xs font-normal text-on-surface-variant">／{promises.length}公約</span>
+              <span className="text-xs font-normal text-on-surface-variant">／{mayorPromiseCounts.promise}件の{MAYOR_PROMISE_LEVELS.promise.label}</span>
             </dd>
           </div>
         </dl>
@@ -269,7 +293,7 @@ export function MayorPolicyProgressPage() {
         <SearchBar
           value={query}
           onChange={setQuery}
-          label="公約をキーワードで検索"
+          label={`${MAYOR_PROMISE_LEVELS.promise.label}をキーワードで検索`}
           placeholder="子育て、医療、交通など"
         />
         <div className="flex flex-wrap items-center gap-2">
@@ -288,8 +312,8 @@ export function MayorPolicyProgressPage() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm text-on-surface-variant">
             {filteredPromises.length > 0
-              ? `${filteredPromises.length}件の公約が見つかりました`
-              : "条件に一致する公約は見つかりませんでした。"}
+              ? `${filteredPromises.length}件の${MAYOR_PROMISE_LEVELS.promise.label}が見つかりました`
+              : `条件に一致する${MAYOR_PROMISE_LEVELS.promise.label}は見つかりませんでした。`}
           </p>
           {hasActiveFilter && (
             <button
@@ -356,7 +380,7 @@ export function MayorPolicyProgressPage() {
               ) : (
                 hasActiveFilter && (
                   <p className="mt-4 border-t border-outline-variant pt-4 text-sm text-on-surface-variant">
-                    条件に一致する公約はありません。
+                    条件に一致する{MAYOR_PROMISE_LEVELS.promise.label}はありません。
                   </p>
                 )
               )}

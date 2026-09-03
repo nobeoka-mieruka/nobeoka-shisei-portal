@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T02:23:54.138Z",
+  "generatedAt": "2026-09-03T01:47:06.460Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -52,6 +52,16 @@
       "label": "HistoryPage.tsx（延岡の大きな転換点）注記の「152件の記録」表記",
       "status": "fixed_2026-08-29",
       "note": "civicTimelineEvents.jsonの件数が増えても表記が更新されない固定値「152件」だったため、同ページで既に計算済みのallEvents.lengthを使う表記へ修正済み（2026-08-29、Phase135）。"
+    },
+    {
+      "label": "市長公約の「政策分野」「個別公約」「個別施策」のページ間での呼称・件数の不統一",
+      "status": "fixed_2026-09-03",
+      "note": "同じ「市長公約」という語のまま、トップページ（政策分野の数）・ダッシュボード（個別公約の数）・市長公約の進捗状況（個別施策の数）で数えている対象が異なり、市民が混同していた。呼称・定義・件数をsrc/lib/mayorPromiseTerms.tsへ一本化し、全ページ・meta description・JSON-LDが同じ単一情報源から自動算出した値を表示するよう修正済み（2026-09-03、Phase202）。"
+    },
+    {
+      "label": "DataStatusPage.tsx（類似団体比較・市長公約の調査状況）本文の「59自治体」表記",
+      "status": "fixed_2026-09-03",
+      "note": "similarMunicipalityFinanceComparison.jsonの件数が増減しても表記が更新されない固定値だったため、similarMunicipalityFinance.municipalities.lengthを使う表記へ修正済み（2026-09-03、Phase202）。"
     }
   ]
 }

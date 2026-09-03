@@ -30,6 +30,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
+import { MAYOR_PROMISE_LEVELS } from "../lib/mayorPromiseTerms";
 
 const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
   confirmed: "確定",
@@ -137,7 +138,7 @@ export function MayorPromiseDetailPage() {
   if (!promise) {
     return (
       <div className="px-4 py-6 sm:px-6">
-        <BackLink to="/mayor/policy-progress" label="公約一覧に戻る" />
+        <BackLink to="/mayor/policy-progress" label={`${MAYOR_PROMISE_LEVELS.promise.label}一覧に戻る`} />
         <div className="mt-4 space-y-4 rounded-xl bg-surface-container-low p-8 text-center">
           <p className="text-sm text-on-surface-variant">該当する公約が見つかりません</p>
           <Link
@@ -175,7 +176,7 @@ export function MayorPromiseDetailPage() {
         <JsonLd key={entry.id} id={entry.id} data={entry.data} />
       ))}
       <Breadcrumbs items={seo.breadcrumbs} />
-      <BackLink to="/mayor/policy-progress" label="公約一覧に戻る" />
+      <BackLink to="/mayor/policy-progress" label={`${MAYOR_PROMISE_LEVELS.promise.label}一覧に戻る`} />
 
       {/* 公約の基本情報 */}
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
@@ -218,9 +219,9 @@ export function MayorPromiseDetailPage() {
         )}
       </SectionCard>
 
-      {/* 公約の現在地（個別の取組み、Phase148／年度ラベル・出典表示をPhase154で改善） */}
+      {/* 公約の現在地（個別施策、Phase148／年度ラベル・出典表示をPhase154で改善。Phase202で呼称を統一） */}
       {measuresForPromise.length > 0 && (
-        <SectionCard title="公約の現在地（個別の取組み）">
+        <SectionCard title={`公約の現在地（${MAYOR_PROMISE_LEVELS.measure.label}）`}>
           <ul className="space-y-4">
             {measuresForPromise.map((m) => {
               const previousFyLabel = shiftFiscalYearLabel(m.fiscalYear, -1) ?? "前年度";
@@ -580,7 +581,7 @@ export function MayorPromiseDetailPage() {
               to={`/mayor/policy-progress/${prevPromise.id}`}
               className={`min-w-0 flex-1 rounded-xl bg-surface-container-low p-3 text-sm shadow-e1 transition hover:bg-surface-container-high ${linkClass}`}
             >
-              <span className="block text-xs text-on-surface-variant">同じカテゴリの前の公約</span>
+              <span className="block text-xs text-on-surface-variant">同じ{MAYOR_PROMISE_LEVELS.policyArea.label}の前の{MAYOR_PROMISE_LEVELS.promise.label}</span>
               <span className="block truncate font-medium text-on-surface">{prevPromise.promiseText}</span>
             </Link>
           ) : (
@@ -591,7 +592,7 @@ export function MayorPromiseDetailPage() {
               to={`/mayor/policy-progress/${nextPromise.id}`}
               className={`min-w-0 flex-1 rounded-xl bg-surface-container-low p-3 text-right text-sm shadow-e1 transition hover:bg-surface-container-high ${linkClass}`}
             >
-              <span className="block text-xs text-on-surface-variant">同じカテゴリの次の公約</span>
+              <span className="block text-xs text-on-surface-variant">同じ{MAYOR_PROMISE_LEVELS.policyArea.label}の次の{MAYOR_PROMISE_LEVELS.promise.label}</span>
               <span className="block truncate font-medium text-on-surface">{nextPromise.promiseText}</span>
             </Link>
           ) : (
