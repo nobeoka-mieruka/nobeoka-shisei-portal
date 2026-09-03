@@ -19,6 +19,13 @@ import { PlayIcon, GlobeIcon, ChartBarIcon, YenIcon } from "../components/icons"
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link, useLocation } from "react-router-dom";
 import { aggregateCategoryStatus } from "../lib/mayorPromiseStatus";
+import {
+  MAYOR_PROMISE_GLOSSARY,
+  MAYOR_PROMISE_LEVELS,
+  MAYOR_PROMISE_SCALE_NOTE,
+  mayorPromiseCounts,
+} from "../lib/mayorPromiseTerms";
+import { GlossaryNote } from "../components/GlossaryNote";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -113,11 +120,29 @@ export function MayorPage() {
       </section>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="公約分野" value={mayor.pledges.length} unit="件" />
-        <StatCard label="SNS" value={mayor.sns.length} unit="件" />
-        <StatCard label="個別公約数" value={promisesData.promises.length} unit="件" />
+        <StatCard
+          label={MAYOR_PROMISE_LEVELS.policyArea.statLabel}
+          value={mayorPromiseCounts.policyArea}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.policyArea.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
+        <StatCard
+          label={MAYOR_PROMISE_LEVELS.promise.statLabel}
+          value={mayorPromiseCounts.promise}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.promise.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
+        <StatCard
+          label={MAYOR_PROMISE_LEVELS.measure.statLabel}
+          value={mayorPromiseCounts.measure}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.measure.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
         <StatCard label="任期開始" value={termStart ?? "情報確認中"} compact />
+        <StatCard label="SNS" value={mayor.sns.length} unit="件" />
       </div>
+
+      <GlossaryNote term={MAYOR_PROMISE_GLOSSARY.term} definition={MAYOR_PROMISE_GLOSSARY.definition} />
 
       {mayor.career.length > 0 && (
         <SectionCard title="経歴">
@@ -132,7 +157,11 @@ export function MayorPage() {
         </SectionCard>
       )}
 
-      <SectionCard title="公約">
+      <SectionCard title={`公約の${MAYOR_PROMISE_LEVELS.policyArea.label}（${mayorPromiseCounts.policyArea}件）`}>
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          {MAYOR_PROMISE_SCALE_NOTE}下の{mayorPromiseCounts.policyArea}件はいちばん大きな区分で、それぞれに
+          {MAYOR_PROMISE_LEVELS.promise.label}が含まれます。
+        </p>
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {mayor.pledges.map((p) => {
             const category = promisesData.categories.find((c) => c.id === p.id);

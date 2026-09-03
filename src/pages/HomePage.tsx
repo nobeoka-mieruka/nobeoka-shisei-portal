@@ -52,6 +52,7 @@ import { UPDATE_HISTORY_CATEGORY_CLASS, sortUpdateHistoryByDateDesc } from "../l
 import { formatJapaneseDate } from "../config/site";
 import { homeDataCoverageItems } from "../lib/dataCompletenessSummary";
 import { formatCoverageRate, COMPLETENESS_STATUS_LABELS } from "../lib/completeness";
+import { MAYOR_PROMISE_LEVELS, MAYOR_PROMISE_SCALE_NOTE, mayorPromiseCounts } from "../lib/mayorPromiseTerms";
 
 const members = membersData as CouncilMember[];
 const billVotes = publicBills(billVotesIndexData as BillVoteIndexItem[]);
@@ -416,10 +417,10 @@ export function HomePage() {
             />
           )}
           <StatCard
-            label="登録済み市長公約数"
-            value={mayor.pledges.length}
+            label={`市長公約の${MAYOR_PROMISE_LEVELS.policyArea.statLabel}`}
+            value={mayorPromiseCounts.policyArea}
             unit="件"
-            hint={`現職市長（${mayor.name}）の公約のみの件数です。歴代の政策・公約アーカイブ全体の件数はデータ収録状況ページに別掲しています。`}
+            hint={`現職市長（${mayor.name}）が掲げた${MAYOR_PROMISE_LEVELS.policyArea.label}の数です。${MAYOR_PROMISE_SCALE_NOTE}歴代の政策・公約アーカイブ全体の件数はデータ収録状況ページに別掲しています。`}
           />
           <StatCard
             label="サイトの最終更新（ビルド日時）"

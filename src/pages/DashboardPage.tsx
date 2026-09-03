@@ -51,6 +51,12 @@ import {
 import { termsForMayor, formatArchiveDateWithPrecision, isDayPreciseTerm, daysInOffice } from "../lib/archiveMayors";
 import { committees as councilCommittees } from "../lib/committees";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
+import {
+  MAYOR_PROMISE_GLOSSARY,
+  MAYOR_PROMISE_LEVELS,
+  MAYOR_PROMISE_SCALE_NOTE,
+  mayorPromiseCounts,
+} from "../lib/mayorPromiseTerms";
 import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
 
 const members = membersData as CouncilMember[];
@@ -146,7 +152,6 @@ export function DashboardPage() {
       .sort((a, b) => b.count - a.count);
   }, []);
 
-  const totalPledges = mayor.pledges.length;
   const totalBills = billVotes.length;
   const billsWithResult = useMemo(() => billVotes.filter((b) => b.result !== "確認中").length, []);
 
@@ -310,9 +315,10 @@ export function DashboardPage() {
       ? daysInOffice(currentMayorTerm.termStart, todayIsoJst)
       : null;
 
-  // Phase185：市長公約の進捗状況は、mayor.pledges（マニフェストの大項目、進捗状況を持たない）
-  // ではなく、進捗を個別に追跡しているmayorPromises.json（MayorPromiseItem[]）を集計元とする
-  // （2つの「公約」データは数え方が異なるため混同しない。詳細は下記の案内文で明示する）。
+  // Phase185：市長公約の進捗状況は、政策分野（mayor.pledges／mayorPromises.jsonのcategories、
+  // 進捗状況を持たない）ではなく、進捗を個別に追跡している個別公約（mayorPromises.jsonの
+  // promises＝MayorPromiseItem[]）を集計元とする。
+  // Phase202：3階層の呼び名・件数はsrc/lib/mayorPromiseTerms.tsに集約し、直書きしない。
   const pledgeStatusItems: BarListItem[] = useMemo(() => {
     const counts = new Map<string, number>();
     for (const p of mayorPromises) {
@@ -389,16 +395,16 @@ export function DashboardPage() {
             hint={daysInOfficeCount !== null ? "就任日を1日目として算出しています（毎日自動更新）。" : undefined}
           />
           <StatCard
-            label="進捗を確認できる公約項目数"
-            value={mayorPromises.length}
+            label={MAYOR_PROMISE_LEVELS.promise.statLabel}
+            value={mayorPromiseCounts.promise}
             unit="件"
-            hint="市長公約の進捗状況ページで個別に進捗を追跡している項目数です。マニフェストの大項目数（下記「市長公約の登録数」）とは数え方が異なります。"
+            hint={`${MAYOR_PROMISE_LEVELS.promise.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
           />
         </div>
         {pledgeStatusItems.length > 0 && (
           <div className="mt-4">
             <p className="mb-2 text-xs text-on-surface-variant">
-              公約の進捗状況（{mayorPromises.length}件の内訳）
+              {MAYOR_PROMISE_LEVELS.promise.label}{mayorPromiseCounts.promise}件の進捗状況の内訳
             </p>
             <BarList items={pledgeStatusItems} unit="件" />
           </div>
@@ -526,12 +532,19 @@ export function DashboardPage() {
           hint={`登録済み${totalBills}件のうち、議決結果（可決・否決等）が公式資料で確認できた件数です。`}
         />
         <StatCard
-          label="市長公約の登録数"
-          value={totalPledges}
+          label={`市長公約の${MAYOR_PROMISE_LEVELS.policyArea.statLabel}`}
+          value={mayorPromiseCounts.policyArea}
           unit="件"
-          hint={`現職市長（${mayor.name}）の公約のマニフェスト上の大項目数です。進捗を個別に追跡している項目数は上記「市長」欄をご覧ください。`}
+          hint={`現職市長（${mayor.name}）の${MAYOR_PROMISE_LEVELS.policyArea.label}の数です。${MAYOR_PROMISE_SCALE_NOTE}`}
+        />
+        <StatCard
+          label={`市長公約の${MAYOR_PROMISE_LEVELS.measure.statLabel}`}
+          value={mayorPromiseCounts.measure}
+          unit="件"
+          hint={`${MAYOR_PROMISE_LEVELS.measure.definition}${MAYOR_PROMISE_SCALE_NOTE}`}
         />
       </div>
+      <GlossaryNote term={MAYOR_PROMISE_GLOSSARY.term} definition={MAYOR_PROMISE_GLOSSARY.definition} />
 
       {/* Phase123：市議会の構成に加え、延岡市全体の基礎データ（人口・財政）を1画面で概観できるように
           追加するセクション。数値はFinancePage（/finance）と同じfinanceDashboard.jsonを再利用し、

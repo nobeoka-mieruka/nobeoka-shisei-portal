@@ -18,6 +18,9 @@
  * 出力：
  * - src/data/councilSpeechIndex.json … councilSpeechSummaries.jsonから本文系フィールドを除いたもの
  * - src/data/billVotesIndex.json     … billVotes.jsonからSEO・件数集計に必要な項目だけを抜き出したもの
+ * - src/data/mayorPromiseMeasuresIndex.json
+ *       … mayorPromiseMeasures.jsonから、件数集計と公約との対応確認に必要なIDだけを抜き出したもの
+ *         （Phase202：市長公約の3階層の件数をseo.tsが参照するため。実績・予定の本文は含めない）
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -106,11 +109,31 @@ function buildBillVotesIndex(bills) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// 3. 市長公約の個別施策インデックス（mayorPromiseMeasuresIndex.json）
+// ---------------------------------------------------------------------------
+// Phase202：市長公約の3階層（政策分野・個別公約・個別施策）の件数を、全ページが読み込む
+// src/lib/seo.ts のmeta description・JSON-LDでも使うため、IDと進捗区分だけの射影を用意する。
+// 実績・予定・注記等の本文はここに含めない（必要な画面はmayorPromiseMeasures.jsonを直接参照する）。
+const MEASURE_INDEX_FIELDS = ["measureId", "promiseId", "categoryId", "status"];
+
+function buildMayorPromiseMeasuresIndex(measures) {
+  return measures.map((m) => {
+    const entry = {};
+    for (const key of MEASURE_INDEX_FIELDS) {
+      if (m[key] !== undefined) entry[key] = m[key];
+    }
+    return entry;
+  });
+}
+
 const speechSource = readJson("councilSpeechSummaries.json");
 const billsSource = readJson("billVotes.json");
+const measureSource = readJson("mayorPromiseMeasures.json");
 
 const speechIndex = buildCouncilSpeechIndex(speechSource);
 const billIndex = buildBillVotesIndex(billsSource);
+const measureIndex = buildMayorPromiseMeasuresIndex(measureSource);
 
 // 射影の健全性チェック（件数が元データと一致すること）。
 const sourceSpeechCount = speechSource.members.reduce((sum, m) => sum + (m.speeches ?? []).length, 0);
@@ -121,9 +144,15 @@ if (sourceSpeechCount !== indexSpeechCount) {
 if (billsSource.length !== billIndex.length) {
   throw new Error(`[generate-data-indexes] 議案件数が一致しません: ${billsSource.length} !== ${billIndex.length}`);
 }
+if (measureSource.length !== measureIndex.length) {
+  throw new Error(
+    `[generate-data-indexes] 個別施策件数が一致しません: ${measureSource.length} !== ${measureIndex.length}`,
+  );
+}
 
 const speechResult = writeJsonIfChanged("councilSpeechIndex.json", speechIndex);
 const billResult = writeJsonIfChanged("billVotesIndex.json", billIndex);
+const measureResult = writeJsonIfChanged("mayorPromiseMeasuresIndex.json", measureIndex);
 
 const kb = (n) => `${(n / 1024).toFixed(0)}KB`;
 console.log(
@@ -131,4 +160,7 @@ console.log(
 );
 console.log(
   `[generate-data-indexes] billVotesIndex.json ${kb(billResult.bytes)}（議案${billIndex.length}件、${billResult.changed ? "更新" : "変更なし"}）`,
+);
+console.log(
+  `[generate-data-indexes] mayorPromiseMeasuresIndex.json ${kb(measureResult.bytes)}（個別施策${measureIndex.length}件、${measureResult.changed ? "更新" : "変更なし"}）`,
 );

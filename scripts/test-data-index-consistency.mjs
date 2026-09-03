@@ -96,6 +96,35 @@ check("発言の識別情報・分類が元データと一致する", speechFiel
 check("questionItemCountが元データの質問項目数と一致する", questionItemCountMismatch === 0, `${questionItemCountMismatch}件`);
 check("インデックスに本文（questionItems・summarySources）が含まれていない", leakedBodyText === 0, `${leakedBodyText}件`);
 
+// --- 市長公約の個別施策インデックス（Phase202） -----------------------------
+// トップページ・ダッシュボード・市長公約の進捗状況・meta descriptionが表示する
+// 「個別施策◯件」は、このインデックスの件数から自動算出している。
+const measures = read("mayorPromiseMeasures.json");
+const measureIndex = read("mayorPromiseMeasuresIndex.json");
+
+check("個別施策の件数が一致する", measures.length === measureIndex.length, `${measures.length} vs ${measureIndex.length}`);
+
+let measureOrderMismatch = 0;
+let measureFieldMismatch = 0;
+let measureLeakedBodyText = 0;
+for (const [i, entry] of measureIndex.entries()) {
+  const source = measures[i];
+  if (source?.measureId !== entry.measureId) {
+    measureOrderMismatch++;
+    continue;
+  }
+  for (const key of ["promiseId", "categoryId", "status"]) {
+    if ((source[key] ?? undefined) !== (entry[key] ?? undefined)) measureFieldMismatch++;
+  }
+  // 本文（実績・予定・注記・出典）はインデックスに含めない方針が守られているか。
+  for (const key of ["previousYearResult", "currentYearPlan", "currentYearResult", "notes", "sourceUrl", "measureTitle"]) {
+    if (entry[key] !== undefined) measureLeakedBodyText++;
+  }
+}
+check("個別施策インデックスの並び順が元データと一致する", measureOrderMismatch === 0, `${measureOrderMismatch}件`);
+check("個別施策インデックスの各項目が元データと一致する", measureFieldMismatch === 0, `${measureFieldMismatch}項目`);
+check("個別施策インデックスに本文（実績・予定・注記・出典）が含まれていない", measureLeakedBodyText === 0, `${measureLeakedBodyText}件`);
+
 // --- 検索インデックスの件数 -------------------------------------------------
 const searchIndex = read("searchIndex.json");
 const searchIndexMeta = read("searchIndexMeta.json");

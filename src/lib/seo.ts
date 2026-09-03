@@ -67,6 +67,7 @@ import type {
 import type { ElectionResult } from "../types/election";
 import { aggregateSpeechesByTheme, findPublishedSpeech } from "./councilSpeeches";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../config/site";
+import { MAYOR_PROMISE_LEVELS, MAYOR_PROMISE_SCALE_SUMMARY, mayorPromiseCounts } from "./mayorPromiseTerms";
 import { getOperatorField, isOperatorConfigured } from "../config/operator";
 import { billOgImage, memberOgImage } from "./ogImage";
 import { normalizePathname, safeDecodeURIComponent } from "./normalizePathname";
@@ -108,6 +109,8 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesIndexData as BillVoteIndexItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
+// Phase202：市長公約の3階層（政策分野・個別公約・個別施策）の呼称・件数は
+// src/lib/mayorPromiseTerms.ts の単一情報源を使う（meta descriptionへ件数を直書きしない）。
 const speechSummaryData = councilSpeechIndexData as unknown as CouncilSpeechSummaryData;
 const themes = themesData as Theme[];
 const financeDashboard = financeDashboardData as FinanceDashboardData;
@@ -464,7 +467,7 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         {
           path: "/mayor",
           pageTitle: `延岡市長 ${mayor.name}`,
-          description: `延岡市長${mayor.name}氏のプロフィール、経歴、公約、市政方針を公開資料に基づいて掲載しています。`,
+          description: `延岡市長${mayor.name}氏のプロフィール、経歴、公約（${MAYOR_PROMISE_SCALE_SUMMARY}）、市政方針を公開資料に基づいて掲載しています。`,
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市長情報" }],
           extraJsonLd: [personJsonLd("person-jsonld", mayor.name, url, sameAs, undefined, mayor.photoUrl)],
           mainEntity: { "@type": "Person", name: mayor.name, url },
@@ -550,14 +553,13 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         {
           path: "/mayor/policy-progress",
           pageTitle: "市長公約の進捗状況",
-          description:
-            "延岡市長の個別公約について、現在の状況、確認できた取組、根拠資料をキーワード・政策分野・進捗状況などで検索できます。",
+          description: `延岡市長の公約（${MAYOR_PROMISE_SCALE_SUMMARY}）について、現在の状況、確認できた取組、根拠資料をキーワード・政策分野・進捗状況などで検索できます。`,
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市長公約の進捗状況" }],
           extraJsonLd: [
             datasetJsonLd({
               id: "dataset-policy-progress-jsonld",
               name: "市長公約の進捗状況データ",
-              description: "市長の個別公約ごとの進捗状況、根拠資料を整理したデータです。",
+              description: `市長の${MAYOR_PROMISE_LEVELS.promise.label}${mayorPromiseCounts.promise}件ごとの進捗状況・根拠資料と、その内訳である${MAYOR_PROMISE_LEVELS.measure.label}${mayorPromiseCounts.measure}件を、${MAYOR_PROMISE_LEVELS.policyArea.label}${mayorPromiseCounts.policyArea}件に分けて整理したデータです。`,
               url: `${SITE_URL}/mayor/policy-progress`,
               dateModified: lastmod,
             }),
@@ -932,13 +934,13 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         {
           path: "/dashboard",
           pageTitle: "市政データダッシュボード",
-          description: "延岡市議会議員、議案、市長公約などの登録件数や構成を、データから自動集計して確認できます。",
+          description: `延岡市議会議員、議案、市長公約（${MAYOR_PROMISE_SCALE_SUMMARY}）などの登録件数や構成を、データから自動集計して確認できます。`,
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "ダッシュボード" }],
           extraJsonLd: [
             datasetJsonLd({
               id: "dataset-dashboard-jsonld",
               name: "延岡市政データダッシュボード集計データ",
-              description: "延岡市議会議員、議案、市長公約などの登録件数・構成を自動集計したデータです。",
+              description: `延岡市議会議員、議案、市長公約（${MAYOR_PROMISE_SCALE_SUMMARY}）などの登録件数・構成を自動集計したデータです。`,
               url: `${SITE_URL}/dashboard`,
               dateModified: lastmod,
             }),

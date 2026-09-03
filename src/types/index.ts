@@ -766,7 +766,10 @@ export interface MayorPromiseDocument {
   publishedDate?: string;
 }
 
-/** 個別公約が属する政策カテゴリ（4つの政策）。 */
+/**
+ * 個別公約が属する政策分野（施政方針でいう「私の公約である４つの政策」）。
+ * 表示名は src/lib/mayorPromiseTerms.ts の MAYOR_PROMISE_LEVELS.policyArea に統一する。
+ */
 export interface MayorPromiseCategory {
   id: string;
   title: string;
@@ -897,7 +900,11 @@ export interface MayorPromiseItem {
   relatedBillCandidates?: MayorPromiseCandidateEvidence[];
 }
 
-/** 市長公約の進捗状況ページ（個別公約12項目）全体のデータ。 */
+/**
+ * 市長公約の進捗状況ページ全体のデータ。
+ * categories＝政策分野、promises＝個別公約。件数はデータから算出し、
+ * 表示名・件数は src/lib/mayorPromiseTerms.ts に集約する（Phase202）。
+ */
 export interface MayorPromisesData {
   /** ISO形式。データ全体の基準日。 */
   referenceDate: string;

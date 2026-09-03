@@ -10056,3 +10056,66 @@ errors=0 warnings=0、`check-bundle-size` エラー0件・警告0件）すべて
   提案のみで未実施。カード見出し2グループはAA充足・AAA未達のまま。`BillVoteDetailPage`の賛否一覧の
   議員名リンクは同じ書き方だが監査対象32ページのデータでは検出されなかったため、実測できた範囲のみ
   修正し未検出分は変更していない。
+
+---
+
+### TASK-183 市長公約「4 / 14 / 33」の名称・定義の統一（Phase202）
+
+状態：DONE
+
+#### 背景
+
+サイト上に、市長公約に関する数字が「4件」「14件」「33件」と3種類あり、いずれも
+「市長公約」という同じ言葉で表示されていたため、どれが公約の件数なのか判断できなかった。
+
+- トップページ「登録済み市長公約数」＝4件（`mayor.json` の `pledges`）
+- ダッシュボード「進捗を確認できる公約項目数」＝14件、別欄の「市長公約の登録数」＝4件
+- 市長情報「公約分野」＝4件、「個別公約数」＝14件
+- 市長公約の進捗状況「全公約数」＝14件、「個別施策数」＝33件
+
+#### 実データで確認した正式な定義
+
+| 数字 | 呼称 | データ上の実体 | 根拠 |
+| --- | --- | --- | --- |
+| 4 | 政策分野 | `mayorPromises.json` の `categories`（`mayorPolicyProgress.json` の `policies`、`mayor.json` の `pledges` と id が一致：p1〜p4） | 令和8年度施政方針本文の「私の公約である４つの政策」。`/mayor/policy-progress` の絞り込みラベルも従来から「政策分野」 |
+| 14 | 個別公約 | `mayorPromises.json` の `promises`（id 1-1〜4-5） | `src/types/index.ts`・`src/lib/seo.ts`・更新履歴で従来から「個別公約」 |
+| 33 | 個別施策 | `mayorPromiseMeasures.json` | 出典は延岡市「市長公約に関する取組み　令和8年度」（令和8年7月31日現在）。`/mayor/policy-progress` の集計カード・`MayorPromiseMeasureSnapshot` で従来から「個別施策」 |
+
+事前の仮説「4＝マニフェスト大項目／14＝公約項目／33＝個別施策」のうち、4 と 14 の呼称は
+実データ・一次資料と一致しなかったため採用せず、既存の正式呼称（政策分野・個別公約）に揃えた。
+33 は仮説どおり「個別施策」。「マニフェストの大項目」という語はサイト側の説明文にしか存在せず、
+一次資料の呼称ではないため廃止した。
+
+#### 実装
+
+- `src/lib/mayorPromiseTerms.ts`（新規）：3階層の表示名・定義・件数の単一情報源。
+  件数はすべてデータから算出し、固定値を持たない。
+- `src/data/mayorPromiseMeasuresIndex.json`（新規、`scripts/generate-data-indexes.mjs` の生成物）：
+  `seo.ts`（全ページが読み込む）から個別施策の件数を参照するための軽量インデックス。
+  本文を含む `mayorPromiseMeasures.json`（約25KB）をエントリチャンクへ持ち込まないための射影。
+- 表示側を統一：`HomePage` / `DashboardPage` / `MayorPage` / `MayorPolicyProgressPage` /
+  `MayorPromiseDetailPage` / `DataStatusPage` / `seo.ts`（meta description・JSON-LD）。
+  「市長公約の3つの数え方」を説明する `GlossaryNote` を主要3ページへ追加。
+- ハードコード削除：`DataStatusPage` 本文の「59自治体」を
+  `similarMunicipalityFinance.municipalities.length` へ、`src/types/index.ts` の
+  「個別公約12項目」というコメント上の固定件数を削除。
+- 件数整合テストを `scripts/test-count-consistency.mjs` へ7件追加（政策分野IDの3ファイル一致、
+  categoryTitle一致、個別施策のcategoryId整合、単一情報源が固定値を持たないこと、
+  表示ページが単一情報源を参照していること、件数の直書き禁止、旧ラベルの復活検知）。
+  `scripts/test-data-index-consistency.mjs` へ新インデックスの検証を4件追加。
+
+#### 検証結果
+
+`validate:data`（errors=0 warnings=21、既存基準と一致）／`typecheck`（clean）／
+`lint`（既存4 warningsのみ、新規0）／`npm test`（exit 0、`test-count-consistency` は10件→14件、
+`test-data-index-consistency` は12件→16件）／`build`（`validate:seo` failures=0 warnings=0、
+`validate:content` errors=0 warnings=0、`check-bundle-size` エラー0件・警告0件、
+`check-internal-links` リンク切れ0件）すべて成功。
+
+完了記録：
+- 完了日：2026-09-03
+- 変更概要：表示名・件数表示の統一のみ。`src/data` 配下の公約データ（`mayorPromises.json`・
+  `mayorPromiseMeasures.json`・`mayorPolicyProgress.json`・`mayor.json`）の値は一切変更していない。
+  更新履歴（u137）を1件追加。HUMAN_ACTION_REQUIRED 項目のステータスは変更していない。
+- 残課題：`updateHistory.json` の過去エントリは当時の事実の記録であるため文言を書き換えていない
+  （いずれも「個別公約」「施策」の語を使っており、今回の統一と矛盾しない）。
