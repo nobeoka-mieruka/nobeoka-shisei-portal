@@ -1,0 +1,722 @@
+{
+  "generatedAt": "2026-09-03",
+  "phase": "Phase205",
+  "scope": [
+    "src/data/mayorPromises.json",
+    "src/data/mayorPromiseMeasures.json"
+  ],
+  "promiseCount": 14,
+  "measureCount": 33,
+  "referenceDate": "2026-07-14",
+  "lastVerified": "2026-08-25",
+  "statusVocabulary": {
+    "note": "status は Phase166（reports/phase166-mayor-promise-audit.json）の confirmed / candidate / unconfirmed をそのまま再利用している（新しい status enum は導入していない）。reasonCode は status を置き換えるものではなく、『unconfirmed の理由』だけを補足するために追加した。理由：既存の3値だけでは『関連議案が無いことを確認済み』と『まだ確認できていない』が同じ unconfirmed に潰れてしまい、両者を区別せよという要件を満たせないため。",
+    "budgetReasonCodes": {
+      "NOT_IN_MAJOR_PROJECT_LIST": "市長定例記者会見資料の主要事業一覧に該当項目の記載が無かった。同資料は大規模事業の抜粋であり、予算が存在しないことを意味しない（＝未確認）。",
+      "WITHIN_EXISTING_OPERATING_COST": "既存の人件費・事務費の枠内で実施されているとみられるが、独立した予算額の明記は未確認。",
+      "MULTI_YEAR_MULTI_BILL": "複数年度・複数議案にまたがる大型公共工事のため、単一年度の予算額としては特定できていない。個別金額は関連議案側に記載あり。",
+      "UNDER_REVIEW": "上記のいずれにも当てはまらない未確認。"
+    },
+    "billReasonCodes": {
+      "CONFIRMED_RELATED_BILL": "relatedBillVoteIds に、議案名または提案理由本文で対象施設・事業が直接確認できた議案が登録されている。",
+      "BUDGET_BILL_INCLUDED": "当初予算議案に含まれる歳出予算の一部であり、個別事業単位で議決された独立の議案は無い、と一次資料に基づき整理済み。",
+      "PENDING_FUTURE_BILL": "現時点で議案が存在しないのは実態と整合し、将来の制度変更時に議案が提出される見込み。",
+      "NO_SEPARATE_BILL_LIKELY": "要綱・人事上の措置・運用改善等、制度上そもそも議案化を伴わない可能性が高いと整理済み。ただし原文が『断定はしていない』と明記しているため、『議案なしを確認済み』とは扱わない。",
+      "NOT_INTERPRETED": "議案検索で該当0件だが、議案が無い理由の整理が relatedBill 本文に記載されていない（＝未確認）。"
+    },
+    "outcomeReasonCodes": {
+      "PREVIOUS_YEAR_ONLY": "前年度実績のみ確認でき、当年度の実績値は未確認（計画値のみ）。",
+      "PLAN_ONLY": "計画値のみで、前年度・当年度とも実績値は未確認。"
+    }
+  },
+  "summary": {
+    "budget": {
+      "byStatus": {
+        "unconfirmed": 10,
+        "confirmed": 4
+      },
+      "byReasonCode": {
+        "NOT_IN_MAJOR_PROJECT_LIST": 8,
+        "(confirmed)": 4,
+        "WITHIN_EXISTING_OPERATING_COST": 1,
+        "MULTI_YEAR_MULTI_BILL": 1
+      },
+      "withCandidates": 1
+    },
+    "bill": {
+      "byStatus": {
+        "unconfirmed": 13,
+        "confirmed": 1
+      },
+      "byReasonCode": {
+        "NO_SEPARATE_BILL_LIKELY": 7,
+        "BUDGET_BILL_INCLUDED": 4,
+        "NOT_INTERPRETED": 1,
+        "PENDING_FUTURE_BILL": 1,
+        "CONFIRMED_RELATED_BILL": 1
+      },
+      "hedgedCount": 8,
+      "linkedBillVoteIdCount": 9
+    },
+    "outcome": {
+      "byStatus": {
+        "confirmed": 12,
+        "unconfirmed": 2
+      },
+      "byReasonCode": {
+        "(confirmed)": 12,
+        "PLAN_ONLY": 1,
+        "PREVIOUS_YEAR_ONLY": 1
+      }
+    },
+    "progressStatus": {
+      "進行中": 12,
+      "検討中": 2
+    }
+  },
+  "nextInvestigationTargets": [
+    {
+      "rank": 1,
+      "id": "3-1",
+      "promiseText": "診療所やクリニックの事業承継を支援し、地域の身近な医療を守ります。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 1,
+      "id": "3-2",
+      "promiseText": "津波対策と福祉避難体制を強化し、避難所環境の質を高めることで、市民の命を守ります。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": "議案側も未整理（NOT_INTERPRETED）。議案検索で該当0件だが、議案が無い理由の整理が relatedBill 本文に記載されていない。",
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NOT_INTERPRETED",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 1,
+      "id": "3-3",
+      "promiseText": "豊富な経験を持つシニア世代が地域で力を発揮できる仕組みを整えます。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 1,
+      "id": "4-1",
+      "promiseText": "若手職員によるプロジェクトチームを発足します。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "unconfirmed"
+    },
+    {
+      "rank": 1,
+      "id": "4-2",
+      "promiseText": "民間人材と市職員がチームを組む仕組みをつくり、新たな政策創出を実現します。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 1,
+      "id": "4-3",
+      "promiseText": "市民が身近な場所で気軽に悩みを相談できる体制を整えます。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 1,
+      "id": "4-4",
+      "promiseText": "北方・北浦・北川・島浦の支所に地域活性化専門の職員を配置し、個性ある地域づくりを推進します。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 1,
+      "id": "4-5",
+      "promiseText": "職員の多様な働き方を推進します。",
+      "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "NO_SEPARATE_BILL_LIKELY",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 2,
+      "id": "1-3",
+      "promiseText": "市役所に「こども未来部」を設置し子育て支援を強化します。",
+      "reason": "既存の人件費・事務費の枠内とみられるが未確認。予算に関する説明書の組織費目で確認できる可能性がある。",
+      "secondaryNote": null,
+      "nextSource": "令和8年度 延岡市予算に関する説明書（総務費）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "WITHIN_EXISTING_OPERATING_COST",
+      "billStatus": "unconfirmed",
+      "billReasonCode": "PENDING_FUTURE_BILL",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 4,
+      "id": "2-3",
+      "promiseText": "アスリートタウン延岡アリーナや西階野球場を核に、スポーツ合宿・大会の誘致を拡大します。",
+      "reason": "個別の工事請負契約金額は relatedBillVoteIds の各議案（いずれもLevel3・一次資料確認済み）に既に記載があり、relatedBudget からも参照済み。追加調査の必要性は低い。",
+      "secondaryNote": null,
+      "nextSource": "（追加調査不要）",
+      "budgetStatus": "unconfirmed",
+      "budgetReasonCode": "MULTI_YEAR_MULTI_BILL",
+      "billStatus": "confirmed",
+      "billReasonCode": "CONFIRMED_RELATED_BILL",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 6,
+      "id": "1-1",
+      "promiseText": "家庭環境に関わらず、すべての子どもが延岡の自然体験に参加できる仕組みを整えます。",
+      "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+      "secondaryNote": null,
+      "nextSource": "「市長公約に関する取組み」次年度版",
+      "budgetStatus": "confirmed",
+      "budgetReasonCode": null,
+      "billStatus": "unconfirmed",
+      "billReasonCode": "BUDGET_BILL_INCLUDED",
+      "outcomeStatus": "unconfirmed"
+    },
+    {
+      "rank": 6,
+      "id": "1-2",
+      "promiseText": "子どもひとりひとりの理解度に合わせた学びを実現します。",
+      "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+      "secondaryNote": null,
+      "nextSource": "「市長公約に関する取組み」次年度版",
+      "budgetStatus": "confirmed",
+      "budgetReasonCode": null,
+      "billStatus": "unconfirmed",
+      "billReasonCode": "BUDGET_BILL_INCLUDED",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 6,
+      "id": "2-1",
+      "promiseText": "地域商社を設立し、延岡の優れた農林水産物の販売強化を行います。",
+      "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+      "secondaryNote": null,
+      "nextSource": "「市長公約に関する取組み」次年度版",
+      "budgetStatus": "confirmed",
+      "budgetReasonCode": null,
+      "billStatus": "unconfirmed",
+      "billReasonCode": "BUDGET_BILL_INCLUDED",
+      "outcomeStatus": "confirmed"
+    },
+    {
+      "rank": 6,
+      "id": "2-2",
+      "promiseText": "愛宕山の魅力をさらに高めるカフェを誘致し、市民が集う拠点づくりと観光振興を図ります。",
+      "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+      "secondaryNote": null,
+      "nextSource": "「市長公約に関する取組み」次年度版",
+      "budgetStatus": "confirmed",
+      "budgetReasonCode": null,
+      "billStatus": "unconfirmed",
+      "billReasonCode": "BUDGET_BILL_INCLUDED",
+      "outcomeStatus": "confirmed"
+    }
+  ],
+  "promises": [
+    {
+      "id": "3-1",
+      "categoryId": "p3",
+      "promiseText": "診療所やクリニックの事業承継を支援し、地域の身近な医療を守ります。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 2,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 3,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "3-2",
+      "categoryId": "p3",
+      "promiseText": "津波対策と福祉避難体制を強化し、避難所環境の質を高めることで、市民の命を守ります。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_INTERPRETED",
+        "billVoteIds": [],
+        "hedged": false
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 2,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 3,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-09-01",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）",
+        "secondaryNote": "議案側も未整理（NOT_INTERPRETED）。議案検索で該当0件だが、議案が無い理由の整理が relatedBill 本文に記載されていない。"
+      }
+    },
+    {
+      "id": "3-3",
+      "categoryId": "p3",
+      "promiseText": "豊富な経験を持つシニア世代が地域で力を発揮できる仕組みを整えます。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 2,
+        "withCurrentYearResult": 1
+      },
+      "evidenceItemCount": 3,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "4-1",
+      "categoryId": "p4",
+      "promiseText": "若手職員によるプロジェクトチームを発足します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "unconfirmed",
+        "reasonCode": "PLAN_ONLY",
+        "measureCount": 1,
+        "withCurrentYearResult": 0
+      },
+      "evidenceItemCount": 2,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "4-2",
+      "categoryId": "p4",
+      "promiseText": "民間人材と市職員がチームを組む仕組みをつくり、新たな政策創出を実現します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 2,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 3,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "4-3",
+      "categoryId": "p4",
+      "promiseText": "市民が身近な場所で気軽に悩みを相談できる体制を整えます。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 1,
+        "withCurrentYearResult": 1
+      },
+      "evidenceItemCount": 3,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "4-4",
+      "categoryId": "p4",
+      "promiseText": "北方・北浦・北川・島浦の支所に地域活性化専門の職員を配置し、個性ある地域づくりを推進します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 2,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 1,
+      "progressHistoryCount": 0,
+      "lastVerified": "2026-09-01",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "4-5",
+      "categoryId": "p4",
+      "promiseText": "職員の多様な働き方を推進します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NOT_IN_MAJOR_PROJECT_LIST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "NO_SEPARATE_BILL_LIKELY",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 5,
+        "withCurrentYearResult": 3
+      },
+      "evidenceItemCount": 1,
+      "progressHistoryCount": 0,
+      "lastVerified": "2026-09-01",
+      "investigation": {
+        "rank": 1,
+        "reason": "relatedBudget 本文が『予算に関する説明書等のより詳細な資料での確認が必要』と、次に見るべき一次資料を具体的に名指ししている。同じ1資料で複数公約が同時に解決する。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（当初予算）"
+      }
+    },
+    {
+      "id": "1-3",
+      "categoryId": "p1",
+      "promiseText": "市役所に「こども未来部」を設置し子育て支援を強化します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "WITHIN_EXISTING_OPERATING_COST",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "PENDING_FUTURE_BILL",
+        "billVoteIds": [],
+        "hedged": false
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 2,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 6,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 2,
+        "reason": "既存の人件費・事務費の枠内とみられるが未確認。予算に関する説明書の組織費目で確認できる可能性がある。",
+        "nextSource": "令和8年度 延岡市予算に関する説明書（総務費）"
+      }
+    },
+    {
+      "id": "2-3",
+      "categoryId": "p2",
+      "promiseText": "アスリートタウン延岡アリーナや西階野球場を核に、スポーツ合宿・大会の誘致を拡大します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "MULTI_YEAR_MULTI_BILL",
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "confirmed",
+        "reasonCode": "CONFIRMED_RELATED_BILL",
+        "billVoteIds": [
+          "2022-09-gian-60",
+          "2023-06-gian-19",
+          "2023-12-gian-88",
+          "2023-12-gian-89",
+          "2023-12-gian-90",
+          "2023-12-gian-91",
+          "2024-09-gian-54",
+          "2026-03-gian-155",
+          "2026-03-gian-160"
+        ],
+        "hedged": false
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 3,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 3,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-09-01",
+      "investigation": {
+        "rank": 4,
+        "reason": "個別の工事請負契約金額は relatedBillVoteIds の各議案（いずれもLevel3・一次資料確認済み）に既に記載があり、relatedBudget からも参照済み。追加調査の必要性は低い。",
+        "nextSource": "（追加調査不要）"
+      }
+    },
+    {
+      "id": "1-1",
+      "categoryId": "p1",
+      "promiseText": "家庭環境に関わらず、すべての子どもが延岡の自然体験に参加できる仕組みを整えます。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "hasCandidates": true
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "BUDGET_BILL_INCLUDED",
+        "billVoteIds": [],
+        "hedged": false
+      },
+      "outcome": {
+        "status": "unconfirmed",
+        "reasonCode": "PREVIOUS_YEAR_ONLY",
+        "measureCount": 3,
+        "withCurrentYearResult": 0
+      },
+      "evidenceItemCount": 4,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 6,
+        "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+        "nextSource": "「市長公約に関する取組み」次年度版"
+      }
+    },
+    {
+      "id": "1-2",
+      "categoryId": "p1",
+      "promiseText": "子どもひとりひとりの理解度に合わせた学びを実現します。",
+      "progressStatus": "in_progress",
+      "progressStatusLabel": "進行中",
+      "budgetLinkage": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "BUDGET_BILL_INCLUDED",
+        "billVoteIds": [],
+        "hedged": true
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 4,
+        "withCurrentYearResult": 4
+      },
+      "evidenceItemCount": 4,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 6,
+        "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+        "nextSource": "「市長公約に関する取組み」次年度版"
+      }
+    },
+    {
+      "id": "2-1",
+      "categoryId": "p2",
+      "promiseText": "地域商社を設立し、延岡の優れた農林水産物の販売強化を行います。",
+      "progressStatus": "considering",
+      "progressStatusLabel": "検討中",
+      "budgetLinkage": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "BUDGET_BILL_INCLUDED",
+        "billVoteIds": [],
+        "hedged": false
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 1,
+        "withCurrentYearResult": 1
+      },
+      "evidenceItemCount": 4,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-08-25",
+      "investigation": {
+        "rank": 6,
+        "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+        "nextSource": "「市長公約に関する取組み」次年度版"
+      }
+    },
+    {
+      "id": "2-2",
+      "categoryId": "p2",
+      "promiseText": "愛宕山の魅力をさらに高めるカフェを誘致し、市民が集う拠点づくりと観光振興を図ります。",
+      "progressStatus": "considering",
+      "progressStatusLabel": "検討中",
+      "budgetLinkage": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "hasCandidates": false
+      },
+      "billLinkage": {
+        "status": "unconfirmed",
+        "reasonCode": "BUDGET_BILL_INCLUDED",
+        "billVoteIds": [],
+        "hedged": false
+      },
+      "outcome": {
+        "status": "confirmed",
+        "reasonCode": null,
+        "measureCount": 3,
+        "withCurrentYearResult": 2
+      },
+      "evidenceItemCount": 4,
+      "progressHistoryCount": 1,
+      "lastVerified": "2026-09-01",
+      "investigation": {
+        "rank": 6,
+        "reason": "予算・議案とも一次資料で確認済み。次は成果（実績値）の確認が中心。",
+        "nextSource": "「市長公約に関する取組み」次年度版"
+      }
+    }
+  ]
+}

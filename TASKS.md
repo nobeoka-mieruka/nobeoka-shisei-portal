@@ -10056,3 +10056,89 @@ errors=0 warnings=0、`check-bundle-size` エラー0件・警告0件）すべて
   提案のみで未実施。カード見出し2グループはAA充足・AAA未達のまま。`BillVoteDetailPage`の賛否一覧の
   議員名リンクは同じ書き方だが監査対象32ページのデータでは検出されなかったため、実測できた範囲のみ
   修正し未検出分は変更していない。
+
+---
+
+### TASK-183 次期改善対象の確定（議案詳細説明・市長公約の予算/議案/成果）（Phase205）
+
+状態：DONE（2026-09-03）
+優先度：A（ユーザー指示）
+対象：`scripts/analyze-phase205.mjs`（新規）、`reports/phase205-bill-explanation-priority.json`（新規）、
+`reports/phase205-mayor-promise-linkage.json`（新規）、`reports/phase205-next-improvement-targets.md`（新規）
+
+**目的**：新規の一次資料調査を行わずに、既存データだけから「次に安全に改善できる対象」を確定する。
+分析タスクであり、`src/data` 配下のデータ値・status は一切変更していない。
+
+**A. 議案詳細説明（全1,177件）**
+
+集計は既存の `src/lib/billSummaryQuality.ts`・`src/lib/billSourceRetrieval.ts` と**同一の判定定義**を
+使っている（Phase205で新しい判定基準は作っていない）。
+
+| 呼び方 | 判定フィールド | 件数 |
+| --- | --- | --- |
+| 出典確認済み | `sourceFilePath` または `sourceDocumentId` | 1,177 |
+| 一次資料本文確認済み | `sourceTextVerifiedAt` | 775 |
+| 詳細説明あり（Level3） | `summarySource==="manual"` かつ `reason`／`mainChanges`／`citizenImpact` のいずれか | 622 |
+| 詳細説明なし | 上記以外（Level1＋Level2） | 555 |
+| 原資料未確認（Level1） | `sourceTextVerifiedAt` 無し かつ 詳細説明無し | 402 |
+| HUMAN_ACTION_REQUIRED | `billVotes.json` 内に該当フィールド・該当値なし | 0 |
+| source不足 | `transcriptUrl` 未登録（`resultDocumentUrl` は全件登録済み） | 284 |
+
+優先度分類（153＋174＋228＝555＝詳細説明なし、と一致することを検算済み）：
+
+- **Priority A（153件）＝ 一次資料本文確認済み ＋ 説明未作成（Level2）**。
+  ただしこのうち **151件は「原文に個別の提案理由が記載されていないことを確認済み」**
+  （`verificationNote` に明記。多くは市長が複数議案を一括説明した会期）であり、
+  「書き忘れ」ではない。ここへ説明文を新規生成することは推測の混入になるため行わない。
+  残り2件（`2025-09-gian-50`・`2021-06-gian-7`）のみ再確認の余地がある。
+- **Priority B（174件、うち直ちに着手可113件）＝ 一次資料あり ＋ 追加構造化が必要**。
+  内訳は `HELD_RECORD_NOT_APPLIED` 56件（Phase160 が会議録本文まで到達し共通説明文を引用済みだが、
+  `billVotes.json` へ `sourceTextVerifiedAt` を書かず保留した分。`reports/phase160-held-for-future-56.json`）と
+  `TRANSCRIPT_LINKED_NOT_READ` 118件。
+- **Priority C（228件）＝ 原資料不足**。`MINUTES_NOT_PUBLISHED` 24件（令和8年度、TASK-004と同じ
+  会議録未公開。日次自動巡回で解決）と `TRANSCRIPT_LINK_UNRESOLVED` 204件（会議録は公開済みだが
+  議案への個別リンク未登録。「原資料が存在しない」という意味ではない）。
+
+**B. 市長公約14件（予算→議案→成果）**
+
+新しい status enum は導入していない。status は Phase166（`reports/phase166-mayor-promise-audit.json`）で
+既に使われている **confirmed / candidate / unconfirmed** をそのまま再利用した。
+ただし既存の3値だけでは「関連議案が無いことを確認済み」と「まだ確認できていない」が同じ
+`unconfirmed` に潰れるため、**unconfirmed の理由だけを `reasonCode` として補足**した
+（status の置き換えではない）。
+
+- 予算：confirmed 4／unconfirmed 10（`NOT_IN_MAJOR_PROJECT_LIST` 8、`WITHIN_EXISTING_OPERATING_COST` 1、
+  `MULTI_YEAR_MULTI_BILL` 1）。
+- 議案：`CONFIRMED_RELATED_BILL` 1（公約2-3、登録議案9件）／`BUDGET_BILL_INCLUDED` 4／
+  `NO_SEPARATE_BILL_LIKELY` 7／`PENDING_FUTURE_BILL` 1／`NOT_INTERPRETED` 1。
+  **確認済みで「独立議案なし」と言えるのは `BUDGET_BILL_INCLUDED` の4件のみ**。
+  `NO_SEPARATE_BILL_LIKELY` 7件は原文自身が「断定はしていない」と明記しており、
+  「議案なしを確認済み」として扱ってはならない（8公約が hedged 表記）。
+- 成果：confirmed 12／unconfirmed 2（`PREVIOUS_YEAR_ONLY` 1、`PLAN_ONLY` 1）。
+- **次回重点調査候補は8公約（3-1・3-2・3-3・4-1〜4-5）**。いずれも `relatedBudget` 本文が
+  「予算に関する説明書等のより詳細な資料での確認が必要」と次に見るべき資料を名指ししており、
+  同じ1資料（令和8年度 予算に関する説明書）で8公約が同時に解決しうる。
+
+**実装しなかった理由**：
+(1) Priority A の153件は一次資料に材料が無いことを確認済みで、説明文生成は推測の混入になる。
+(2) Priority B の `HELD_RECORD_NOT_APPLIED` 56件は新規調査ゼロで前進できるが、Level1/Level2 の件数が
+動き、Phase162系の既存テストの期待値と `RELEASE_SNAPSHOT.md` の baseline に影響するため、
+テスト更新とセットの独立フェーズとして扱うのが安全。
+(3) 公約2-3の `relatedBudget`（`MULTI_YEAR_MULTI_BILL`）は、個別の工事請負契約金額が
+`relatedBillVoteIds` の各議案（すべてLevel3）に既に記載され `relatedBudget` 本文からも参照済みで、
+追加対応は不要。
+
+**検証結果**：`validate:data` errors=0 / warnings=21（既存基準と一致）、`typecheck` clean、
+`lint` 既存4 warnings のみ（新規0）、`npm test` 全スイート通過（failures 0）、
+`build` 成功（`validate:seo` failures=0 warnings=0、`validate:content` errors=0 warnings=0、
+`check-bundle-size` エラー0・警告0、`check-internal-links` リンク切れ0件／2,270ページ）。
+ビルドの副作用で再生成された `src/data/*`・`public/*` は `git checkout` で元に戻し、
+新規4ファイルのみを差分として残した。
+
+完了記録：
+- 完了日：2026-09-03
+- 変更概要：分析スクリプト1本とレポート3本の追加のみ。`src/data` 配下・UI・ルートは無変更。
+  HUMAN_ACTION_REQUIRED 項目の再調査・ステータス変更は行っていない。
+  `RELEASE_SNAPSHOT.md` / `reports/release-snapshot.json` の baseline は変更していない。
+- 残課題：Priority B の56件反映（テスト期待値更新とセット）、Priority A 151件の
+  「共通の一括説明」表示改善、公約8件の予算に関する説明書での確認。
