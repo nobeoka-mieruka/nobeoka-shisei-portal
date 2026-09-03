@@ -32,13 +32,28 @@ function isLevel2(b) {
 console.log("\nPhase157：Phase153〜156統合結果の現況");
 
 check("Phase153（条例96件）：全件Level3化されている（実証済み30件と重複しない、310件全体への拡張はしていない）", () => {
-  const touched = billVotes.filter((b) => b.sourceTextVerifiedAt === "2026-09-03");
+  /*
+   * Phase207による更新（なぜ動いたか）：
+   * (1) Phase207 も同じ日付（2026-09-03）で、Phase160 が保留していた56件へ
+   *     sourceTextVerifiedAt を記録した。そのため日付だけでは Phase153・154 の対象と
+   *     区別できない。56件は sharedProposalStatement.generatedFrom に取得元
+   *     （reports/phase160-held-for-future-56.json）を必ず記録しているため、それで除外する。
+   * (2) Phase153・154 が「対象のみ確認できた」としてLevel2に据え置いた22件は、
+   *     verificationNote に会議録原文の引用が既に転記されていた。Phase206 でその引用を
+   *     再点検したところ、いずれも議案名の言い換えではなく、議案名からは分からない事実を
+   *     含むこの議案固有の記述だったため、Phase207 で原文をそのまま提出理由として登録した
+   *     （要約・言い換えなし。原文完全一致は test-bill-phase206-explainability.mjs で検証）。
+   *     その結果 Level3 が 122→144、Level2 が 22→0 になった。
+   */
+  const isPhase207HeldRecord = (b) =>
+    (b.sharedProposalStatement?.generatedFrom ?? "").includes("phase160-held-for-future-56.json");
+  const touched = billVotes.filter((b) => b.sourceTextVerifiedAt === "2026-09-03" && !isPhase207HeldRecord(b));
   // Phase153の96件＋Phase154の48件＝144件がこの日付で変更されたはず。
   assert.equal(touched.length, 144, `sourceTextVerifiedAtが2026-09-03の議案が144件ではありません（${touched.length}件）`);
   const l3Count = touched.filter(isLevel3).length;
   const l2Count = touched.filter(isLevel2).length;
-  assert.equal(l3Count, 122, `Phase153・154でLevel3化された議案が122件ではありません（${l3Count}件）`);
-  assert.equal(l2Count, 22, `Phase153・154でLevel2止まりとなった議案が22件ではありません（${l2Count}件）`);
+  assert.equal(l3Count, 144, `Phase153・154対象のうちLevel3が144件ではありません（${l3Count}件）`);
+  assert.equal(l2Count, 0, `Phase153・154対象のうちLevel2が0件ではありません（${l2Count}件）`);
 });
 
 check("Level1+Level2+Level3の合計が議案総数1,177件と一致し、Level3総数はPhase157完了時点（510件）を下限とする", () => {

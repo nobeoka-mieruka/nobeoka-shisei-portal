@@ -30,6 +30,7 @@ import { GlossaryNote } from "../components/GlossaryNote";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
 import { BillCategoryNotice, BillResultOutcomeNotice } from "../components/bills/BillCategoryNotice";
 import { BILL_EXPLANATION_LEVEL_DESCRIPTION, BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
+import { classifyBillExplainability } from "../lib/billExplainability";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -159,6 +160,13 @@ export function BillVoteDetailPage() {
   // どこまで確認済みかを4段階（Level0〜3）で示す。単一情報源はsrc/lib/billSummaryQuality.ts。
   const explanationLevel = getBillExplanationLevel(bill);
   const isManualSummary = bill.summarySource === "manual";
+  // Phase206：詳しい説明がまだ無い議案について、「説明未整備」とだけ書かず、
+  // なぜ無いのか（資料に個別の理由が無い／他の議案とまとめて説明された／会議録が未公表 など）を
+  // 市民向けの言葉で伝える。内部コードは画面に出さない。単一情報源はsrc/lib/billExplainability.ts。
+  const explainability = classifyBillExplainability(bill, explanationLevel);
+  // Phase207：提出理由が概要の冒頭と同一文（会議録原文をそのまま採録したもの）の場合、
+  // 同じ文を2度表示しない。
+  const showReasonSeparately = Boolean(bill.reason) && !bill.summary.startsWith(bill.reason ?? "");
 
   const sessionBills = billVotes.filter((b) => b.session === bill.session);
   const idx = sessionBills.findIndex((b) => b.id === bill.id);
@@ -381,7 +389,40 @@ export function BillVoteDetailPage() {
             </p>
           )}
           <p className="text-sm leading-relaxed text-on-surface">{bill.summary}</p>
-          {bill.reason && (
+
+          {/* Phase206：詳しい説明がまだ無い場合に、その理由を市民向けの言葉で説明する。
+              「説明未整備」とだけ表示しないための注記。内部の分類コードは表示しない。 */}
+          {explainability && (
+            <div className="rounded-xl bg-surface-container-high p-3">
+              <p className="text-xs font-semibold text-on-surface">{explainability.citizenLabel}</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-on-surface-variant">{explainability.citizenDescription}</p>
+            </div>
+          )}
+
+          {/* Phase207：複数議案が一括で提案説明された場合、共通説明の原文をそのまま掲載する
+              （この議案固有の提案理由として示さない）。 */}
+          {bill.sharedProposalStatement && (
+            <div>
+              <p className="text-xs font-medium text-on-surface-variant">まとめて説明されたときの会議録（原文）</p>
+              <blockquote className="mt-1 border-l-4 border-outline-variant pl-3 text-sm leading-relaxed text-on-surface">
+                {bill.sharedProposalStatement.quote}
+              </blockquote>
+              <p className="mt-1 text-[11px] text-on-surface-variant">
+                出典：延岡市議会 会議録（{bill.sharedProposalStatement.sourceFileName}）／確認日：
+                {bill.sharedProposalStatement.verifiedAt}
+              </p>
+              <a
+                href={bill.sharedProposalStatement.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={`mt-1 inline-flex min-h-11 items-center text-xs text-primary underline ${linkClass}`}
+              >
+                会議録でこの説明を見る（外部サイト）
+              </a>
+            </div>
+          )}
+
+          {showReasonSeparately && bill.reason && (
             <div>
               <p className="text-xs font-medium text-on-surface-variant">提出理由</p>
               <p className="mt-1 text-sm leading-relaxed text-on-surface">{bill.reason}</p>

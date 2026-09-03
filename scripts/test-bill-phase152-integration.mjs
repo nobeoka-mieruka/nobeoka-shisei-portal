@@ -72,11 +72,22 @@ check("Phase150（その他）：30件実証は全件完全一致。理由が本
     const b = billById.get(id);
     assert.ok(b && isLevel3(b), `${id}はPhase150でLevel3化されているはずですが、Level3条件を満たしていません`);
   }
-  const level2Ids = ["2019-12-gian-78", "2022-12-gian-89", "2023-12-gian-82", "2023-12-gian-86", "2024-12-gian-92", "2024-12-gian-96"];
-  assert.equal(level2Ids.length, 6, "Phase150 Level2固定リストの件数が6件ではありません");
-  for (const id of level2Ids) {
+  /*
+   * Phase207による更新（なぜ動いたか）：
+   * Phase150が「対象のみ確認できた」としてLevel2に据え置いた6件は、いずれも
+   * verificationNoteに会議録原文の引用が既に転記されていた。Phase206でその引用を再点検した
+   * ところ、6件とも議案名の言い換えではなく、議案名からは分からない事実
+   * （指定管理者となる団体名など）を含むこの議案固有の記述だった。
+   * そこでPhase207で原文をそのまま提出理由として登録した（要約・言い換え・理由の補完はしない。
+   * 原文完全一致は scripts/test-bill-phase206-explainability.mjs で検証している）。
+   * 「本案は」等で始まる定型の提案理由文が無いという当時の記録自体は変更していない。
+   */
+  const phase207PromotedIds = ["2019-12-gian-78", "2022-12-gian-89", "2023-12-gian-82", "2023-12-gian-86", "2024-12-gian-92", "2024-12-gian-96"];
+  assert.equal(phase207PromotedIds.length, 6, "Phase150 Level2固定リストの件数が6件ではありません");
+  for (const id of phase207PromotedIds) {
     const b = billById.get(id);
-    assert.ok(b && isLevel2(b), `${id}はPhase150でLevel2止まりとしたはずですが、Level2条件を満たしていません`);
+    assert.ok(b && isLevel3(b), `${id}はPhase207で原文引用を提出理由として登録しLevel3化したはずですが、Level3条件を満たしていません`);
+    assert.ok((b.verificationNote ?? "").includes("Phase206-207追記"), `${id}のverificationNoteにPhase206-207の経緯が記録されていません`);
   }
 });
 

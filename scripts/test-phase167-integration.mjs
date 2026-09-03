@@ -114,7 +114,26 @@ check("Phase166：mayorPromisesの新規議案紐付け2件（2023-06-gian-19, 2
   }
 });
 
-check("議案品質データ（Phase162完了時点：Level1=402/Level2=153/Level3=622/sourceTextVerified=775）は、Phase163〜166で一切変更されていない", () => {
+/*
+ * Phase207 による期待値の更新（なぜ動いたか）：
+ * Phase162完了時点の Level1=402 / Level2=153 / Level3=622 / sourceTextVerified=775 は、
+ * Phase163〜206 の間は一切変更されていない。Phase207 で次の2つの反映を行ったため、
+ * データ件数が動いた（新規のオンライン調査・推測での加筆は行っていない）。
+ *
+ *  (1) Level2 → Level3：30件
+ *      verificationNote に既に転記されていた「この議案固有の会議録原文」を、そのまま
+ *      提出理由（reason）として登録した（要約・言い換えなし。テストで原文完全一致を検証）。
+ *      Level2 153 − 30 = 123
+ *  (2) Level1 → Level2：56件
+ *      Phase160 が会議録本文まで確認し原文引用まで記録しながら billVotes.json へ反映せず
+ *      保留していた56件（reports/phase160-held-for-future-56.json）を反映した。
+ *      共通の一括説明しか存在しないため reason は書かず、sharedProposalStatement へ
+ *      原文引用として登録し、本文確認済み（sourceTextVerifiedAt）を記録した。
+ *      Level1 402 − 56 = 346／Level2 123 + 56 = 179／sourceTextVerified 775 + 56 = 831
+ *
+ * 結果：Level1=346 / Level2=179 / Level3=652 / sourceTextVerified=831（合計は1,177で不変）。
+ */
+check("議案品質データ（Phase207適用後：Level1=346/Level2=179/Level3=652/sourceTextVerified=831）", () => {
   const bv = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
   function isLevel3(b) {
     return b.summarySource === "manual" && Boolean(b.reason || (b.mainChanges && b.mainChanges.length > 0) || b.citizenImpact);
@@ -128,10 +147,10 @@ check("議案品質データ（Phase162完了時点：Level1=402/Level2=153/Leve
     else if (isLevel2(b)) l2++;
     else l1++;
   }
-  assert.equal(l1, 402, `Level1が402件ではありません（${l1}件）`);
-  assert.equal(l2, 153, `Level2が153件ではありません（${l2}件）`);
-  assert.equal(l3, 622, `Level3が622件ではありません（${l3}件）`);
-  assert.equal(bv.filter((b) => b.sourceTextVerifiedAt).length, 775, "sourceTextVerifiedが775件ではありません");
+  assert.equal(l1, 346, `Level1が346件ではありません（${l1}件）`);
+  assert.equal(l2, 179, `Level2が179件ではありません（${l2}件）`);
+  assert.equal(l3, 652, `Level3が652件ではありません（${l3}件）`);
+  assert.equal(bv.filter((b) => b.sourceTextVerifiedAt).length, 831, "sourceTextVerifiedが831件ではありません");
 });
 
 console.log(`\n${passCount}件成功`);
