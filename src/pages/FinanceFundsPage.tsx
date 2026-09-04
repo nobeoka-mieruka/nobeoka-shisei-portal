@@ -24,6 +24,7 @@ import {
   hasFundData,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
+import { continuousFiscalYearSeries, formatFiscalYearRanges } from "../lib/financeChartSeries";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const fundTotalMetric = financeMetricByKey("fundTotal")!;
@@ -38,6 +39,26 @@ export function FinanceFundsPage() {
 
   const rows = archiveFiscalYears.filter(hasFundData);
   const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasFundData), "基金残高");
+  /*
+   * Phase216：財源調整用基金の推移グラフ。値を確認できている年度が飛んでいるため、横軸を
+   * 1年度＝1目盛りの連続した年度軸にそろえ、未確認の年度は値なし（点も線も描かない）とする。
+   * 値の補間は行わない。
+   */
+  const fiscalAdjustmentFundPoints = continuousFiscalYearSeries(
+    rows.map((y) => ({
+      year: y.fiscalYear,
+      label: fiscalYearLabel(y.fiscalYear),
+      value: y.fund?.balance.fiscalAdjustmentFundYen ?? null,
+      isEstimate: y.fund?.isEstimate,
+    })),
+    fiscalYearLabel,
+  );
+  const fiscalAdjustmentFundOmittedYears = [
+    ...new Set([
+      ...rows.filter((y) => y.fund?.balance.fiscalAdjustmentFundYen == null).map((y) => y.fiscalYear),
+      ...fiscalAdjustmentFundPoints.filter((p) => p.value == null).map((p) => p.year),
+    ]),
+  ].sort((a, b) => a - b);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -85,14 +106,16 @@ export function FinanceFundsPage() {
               縦軸：億円／横軸：年度末。財源調整用基金の定義は年度により資料の記載が異なる場合があるため、各年度の「定義・出典」を必ずご確認ください。
             </p>
             <FinanceLineChart
-              points={rows.map((y) => ({
-                label: fiscalYearLabel(y.fiscalYear),
-                value: y.fund?.balance.fiscalAdjustmentFundYen ?? null,
-                isEstimate: y.fund?.isEstimate,
-              }))}
+              points={fiscalAdjustmentFundPoints}
               formatValue={(v) => formatOkuYenOrConfirming(v)}
               ariaLabel="財源調整用基金の年度末残高の推移グラフ。詳細は直後の表を参照してください。"
             />
+            {fiscalAdjustmentFundOmittedYears.length > 0 && (
+              <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                値を確認できていない年度：{formatFiscalYearRanges(fiscalAdjustmentFundOmittedYears)}
+                。これらの年度は0ではなく「分からない」という意味で、グラフでは点を打たず線もつないでいません。
+              </p>
+            )}
             <FinanceYearCards
               caption="年度別の基金残高（財源調整用基金・その他特定目的基金・全体）"
               years={rows}
@@ -113,7 +136,7 @@ export function FinanceFundsPage() {
           </SectionCard>
 
           <SectionCard title="基金総額の年度推移">
-            <FinanceMetricSection metric={fundTotalMetric} years={rows} showTable={false} />
+            <FinanceMetricSection metric={fundTotalMetric} years={rows} showTable={false} continuousYearAxis />
           </SectionCard>
 
           {rows.map((y) => (

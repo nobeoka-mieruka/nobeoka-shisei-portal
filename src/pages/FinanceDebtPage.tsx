@@ -71,11 +71,11 @@ export function FinanceDebtPage() {
       />
 
       <SectionCard title="市債発行額の年度推移">
-        <FinanceMetricSection metric={debtIssuanceMetric} years={rows} showTable={false} />
+        <FinanceMetricSection metric={debtIssuanceMetric} years={rows} showTable={false} continuousYearAxis />
       </SectionCard>
 
       <SectionCard title="年度末市債残高（一般会計）の年度推移">
-        <FinanceMetricSection metric={debtBalanceGeneralMetric} years={rows} showTable={false} />
+        <FinanceMetricSection metric={debtBalanceGeneralMetric} years={rows} showTable={false} continuousYearAxis />
       </SectionCard>
 
       <SectionCard title="年度別 市債発行額・残高（一覧）">
