@@ -8,6 +8,7 @@
  *   出現は誤検知になるため、prerender済みHTMLの<body>innerTextに限定して検査する）
  * - 内部リンク（相対パス）の遷移先ページが実際にdist配下に存在しない（リンク切れ）
  * - 空のhref（href=""）やhref="#"のまま放置されたリンク
+ * - 実在しない元号年（「令和0年度」「令和-18年度」等）が表示されている（Phase219）
  *
  * 「確認中」「準備中」等の曖昧語そのものは対象外（scripts/validate-content-wording.mjsで別途扱う）。
  * これは自動生成データの構造的な不整合を検出する意図であり、文言の適切さは人が判断する。
@@ -64,6 +65,11 @@ const findings = [];
 const BANNED_LITERAL_RE = /(^|[^\w."'])(undefined|NaN)([^\w."']|$)/g;
 // "null"は自然文中の単語として出現しない前提だが、念のため同様に検出（JSON-LD内は既に除外済み）
 const BANNED_NULL_RE = /(^|[^\w."'])(null)([^\w."']|$)/g;
+// Phase219：元号は1年（元年）から始まるため、「令和0年」「令和-18年度」「平成0年」は実在しない。
+// 西暦→和暦の換算で元号の境界を分岐し忘れると生成される（src/config/site.ts の toEraYearLabel 参照。
+// 従来は /dashboard の一般質問年度別集計と /council-documents の年度見出しに計30箇所出力されていた）。
+// 検出時は0へ丸めて隠すのではなく、正しい元号へ直すこと。
+const INVALID_ERA_YEAR_RE = /(令和|平成|昭和)(-\s*\d+|0+)年/g;
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, "utf8");
@@ -91,7 +97,22 @@ for (const file of htmlFiles) {
     }
   }
 
-  // 2. 空のhref・ダミーhrefの内部リンク
+  // 2. 実在しない元号年（令和0年・令和-18年度 等）の表示
+  const visibleText = bodyText.replace(/<[^>]*>/g, " ");
+  INVALID_ERA_YEAR_RE.lastIndex = 0;
+  let em;
+  while ((em = INVALID_ERA_YEAR_RE.exec(visibleText))) {
+    const context = visibleText.slice(Math.max(0, em.index - 40), em.index + 40).replace(/\s+/g, " ");
+    errors += 1;
+    findings.push({
+      level: "ERROR",
+      route,
+      rule: "invalid-era-year",
+      detail: `実在しない元号年が表示されています（"${em[0]}"）: …${context}…`,
+    });
+  }
+
+  // 3. 空のhref・ダミーhrefの内部リンク
   const hrefEmptyRe = /<a\s[^>]*href=["'](#|javascript:void\(0\))?["'][^>]*>/g;
   let hm;
   while ((hm = hrefEmptyRe.exec(html))) {
@@ -107,7 +128,7 @@ for (const file of htmlFiles) {
     }
   }
 
-  // 3. 内部リンク（同一オリジンの絶対パス）のリンク切れ検出
+  // 4. 内部リンク（同一オリジンの絶対パス）のリンク切れ検出
   const hrefRe = /href="(\/[^"#?]*)(?:[?#][^"]*)?"/g;
   let lm;
   const seenInThisPage = new Set();

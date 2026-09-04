@@ -29,7 +29,14 @@ import { VerifiedSpeechCard } from "../components/questions/VerifiedSpeechCard";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { GlobeIcon } from "../components/icons";
 import { getSeoForPath } from "../lib/seo";
-import { allPublicSpeeches, findMemberOrFormerLink, questionLikeSpeeches, resolveMemberDisplayName } from "../lib/councilSpeeches";
+import {
+  allPublicSpeeches,
+  archiveCoverageRangeLabel,
+  councilSpeechCoverage,
+  findMemberOrFormerLink,
+  questionLikeSpeeches,
+  resolveMemberDisplayName,
+} from "../lib/councilSpeeches";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
@@ -46,7 +53,12 @@ const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const councilSessions = councilSessionsData as CouncilSession[];
+
+// Phase219：アーカイブの収録範囲は固定文字列で書かず、実データの会期タイトルから組み立てる
+// （実際には平成12年9月定例会までさかのぼって収録しているが、説明文は「旧任期（令和元年6月〜
+// 令和5年3月）」までとしか書いておらず、同ページの「収録期間」の実測値と矛盾していた）。
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+const archiveRangeLabel = archiveCoverageRangeLabel(councilSpeechCoverage(speechSummaryData.members, councilSessions));
 
 const verifiedSpeeches: CouncilSpeech[] = questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).sort(
   (a, b) => (b.date ?? "").localeCompare(a.date ?? ""),
@@ -483,15 +495,17 @@ export function GeneralQuestionsPage() {
         2. 確認済み一般質問アーカイブ（公式会議録ベース）
       </h2>
       <p className="mb-4 px-1 text-xs leading-relaxed text-on-surface-variant">
-        延岡市議会の公式会議録本文で、実際の質問・答弁まで確認できた記録です。現在の議員任期（令和5年5月15日、令和5年第1回臨時会以降）に加え、旧任期（令和元年6月〜令和5年3月）の一般質問アーカイブも対象に含みます。要約はAIが作成し人が確認したものですが、正確な内容は必ず公式会議録原文をご確認ください。
+        延岡市議会の公式会議録本文で、実際の質問・答弁まで確認できた記録です。現在の議員任期（令和5年5月15日、令和5年第1回臨時会以降）
+        {archiveRangeLabel ? `に加え、旧任期以前の一般質問アーカイブ（${archiveRangeLabel}）も対象に含みます` : "を対象としています"}
+        。要約はAIが作成し人が確認したものですが、正確な内容は必ず公式会議録原文をご確認ください。
       </p>
 
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard
-          label="全収録対象会期（現任期＋旧任期）"
+          label="全収録対象会期（現任期＋旧任期以前）"
           value={`${coveredRegularSessionCount}/${regularSessionsInPeriod.length}`}
           unit="会期"
-          hint="現任期・旧任期を合わせた定例会のうち、確認済み発言が登録済みの会期数。トップページの「現任期対象会期」（現任期の定例会のみが対象）とは集計範囲が異なります。"
+          hint="現任期・旧任期以前を合わせた定例会のうち、確認済み発言が登録済みの会期数。トップページの「現任期対象会期」（現任期の定例会のみが対象）とは集計範囲が異なります。"
         />
         <StatCard
           label="一般質問（登壇・確認済み件数）"

@@ -25,7 +25,10 @@ import type { ArchiveMemberProfile, ArchiveMemberTerm } from "../types/historica
 import { getFaction } from "../lib/factions";
 import { getCommitteeByName } from "../lib/committees";
 import {
+  archiveCoverageRangeLabel,
+  councilSpeechCoverage,
   findMemberSpeechRecord,
+  isArchiveSpeech,
   publicSpeeches,
   currentTermPublicSpeeches,
   aggregateMemberTopics,
@@ -103,6 +106,12 @@ const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
 // councilSessions.jsonは既に「現在の議員任期（令和5年5月〜）」の会期のみを収録しているため、
 // 収録対象期間（councilSpeechPeriod.from）より前の会期は構造上含まれていない。
 const allSessionIdsInPeriod = (councilSessionsData as CouncilSession[]).map((s) => s.id);
+
+// Phase219：収録範囲の説明を固定文字列で持たず、実データから組み立てる（旧任期以前の
+// アーカイブ発言を表示している議員ページに、現任期専用の説明が出ないようにするため）。
+const archiveRangeLabel = archiveCoverageRangeLabel(
+  councilSpeechCoverage(speechSummaryData.members, councilSessions),
+);
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
@@ -644,6 +653,8 @@ export function MemberDetailPage() {
               </p>
               <p className="mt-1 text-xs text-on-surface-variant">
                 収録対象：令和5年5月15日（令和5年第1回臨時会、現在の議員任期における最初の本会議）以降に開催された本会議
+                {publishedMemberSpeeches.some(isArchiveSpeech) &&
+                  `。この議員のページには、現任期より前に開催された本会議の記録（旧任期以前の一般質問アーカイブ${archiveRangeLabel ? `。現在の収録範囲：${archiveRangeLabel}` : ""}）も含みます`}
               </p>
 
               {speechRecord && (

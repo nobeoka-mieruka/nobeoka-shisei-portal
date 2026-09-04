@@ -12,7 +12,13 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
-import { findMemberOrFormerLink, findPublishedSpeech } from "../lib/councilSpeeches";
+import {
+  archiveCoverageRangeLabel,
+  councilSpeechCoverage,
+  findMemberOrFormerLink,
+  findPublishedSpeech,
+  isArchiveSpeech,
+} from "../lib/councilSpeeches";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
@@ -22,6 +28,11 @@ const formerMembers = formerMembersData as FormerMember[];
 const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
+
+// Phase219：収録範囲の説明を固定文字列で持たず、実データ（councilSpeechSummaries.json／
+// councilSessions.json）から組み立てる。旧任期以前のアーカイブ質問ページに、現任期専用の
+// 「収録対象は令和5年5月15日以降」という説明が出て、表示している記録と矛盾していたため。
+const archiveRangeLabel = archiveCoverageRangeLabel(councilSpeechCoverage(speechSummaryData.members, councilSessions));
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -98,7 +109,10 @@ export function MemberSpeechDetailPage() {
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-        掲載している質問・答弁の要約は、延岡市議会が公開する公式会議録を基にAIで作成し、確認状況を表示しています。原文のすべての文脈や表現を再現するものではありません。正式な発言内容は公式会議録をご確認ください。収録対象は、令和5年5月15日（令和5年第1回臨時会、現在の議員任期における最初の本会議）以降に開催された本会議です。
+        掲載している質問・答弁の要約は、延岡市議会が公開する公式会議録を基にAIで作成し、確認状況を表示しています。原文のすべての文脈や表現を再現するものではありません。正式な発言内容は公式会議録をご確認ください。
+        {isArchiveSpeech(speech)
+          ? `この記録は、現在の議員任期（最初の本会議は令和5年5月15日、令和5年第1回臨時会）より前に開催された本会議のものです。旧任期以前の一般質問・質疑は、公式会議録で内容を確認できた分をアーカイブとして収録しています${archiveRangeLabel ? `（現在の収録範囲：${archiveRangeLabel}）` : ""}。`
+          : "収録対象は、令和5年5月15日（令和5年第1回臨時会、現在の議員任期における最初の本会議）以降に開催された本会議です。"}
       </p>
 
       <SectionCard title="質問項目">
