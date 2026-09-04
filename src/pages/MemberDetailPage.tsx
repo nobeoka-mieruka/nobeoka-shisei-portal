@@ -188,11 +188,8 @@ export function MemberDetailPage() {
     const events: MemberTimelineEvent[] = [];
     for (const s of publishedMemberSpeeches) {
       if (!s.date) continue;
-      const label = s.shortSummary
-        ? s.shortSummary.length > 44
-          ? `${s.shortSummary.slice(0, 44)}…`
-          : s.shortSummary
-        : `${s.speechType}`;
+      const summaryText = humanizeDataNote(s.shortSummary) ?? "";
+      const label = summaryText ? (summaryText.length > 44 ? `${summaryText.slice(0, 44)}…` : summaryText) : `${s.speechType}`;
       events.push({
         id: `q-${s.id}`,
         date: s.date,
@@ -866,7 +863,7 @@ export function MemberDetailPage() {
                         </span>
                         <SpeechSummaryStatusBadge status={s.summaryStatus} />
                       </div>
-                      {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{s.shortSummary}</p>}
+                      {s.shortSummary && <p className="mt-1 text-sm text-on-surface">{humanizeDataNote(s.shortSummary)}</p>}
                       {s.topics.length > 0 && (
                         <div className="mt-1.5 flex flex-wrap gap-1">
                           {s.topics.map((t) => (

@@ -187,13 +187,21 @@ export function MethodologyActivityRadarPage() {
       </SectionCard>
 
       <SectionCard title="6つの指標の定義・計算式・出典・データ収録状況">
+        {/* Phase214：内部コード（indicatorId）を凡例なしで置かない。何の記号かを先に説明する。 */}
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          各指標の右上にある「算定用の記号（algorithm ID）」は、当サイトが計算処理の中でその指標を指すために使っている英字の名前です（question＝一般質問、speech＝議会内発言、attendance＝出席状況、voting＝議案等の意思表示、proposal＝請願・提案等、disclosure＝情報発信・プロフィール充足度）。点数や順位を表すものではありません。当サイトの記録に出てくる他の記号・番号の読み方は
+          <Link to="/data-status" className="mx-1 font-medium text-primary underline">
+            データ収録状況ページの凡例
+          </Link>
+          にまとめています。
+        </p>
         <ul className="space-y-4">
           {completenessByIndicator.map((axis) => (
             <li key={axis.indicatorId} className="rounded-lg border border-outline-variant p-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-sm font-semibold text-on-surface">{axis.label}</p>
                 <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[11px] text-on-surface-variant">
-                  algorithm ID: {axis.indicatorId}
+                  算定用の記号（algorithm ID）：{axis.indicatorId}
                 </span>
               </div>
               <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{axis.definition}</p>

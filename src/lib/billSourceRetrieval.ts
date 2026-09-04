@@ -56,11 +56,15 @@ export function classifyDSourceRetrievalSubcategory(bill: SourceRetrievalInput):
   return STRUCTURED_CATEGORIES.has(bill.category ?? "") ? "D-A" : "D-B";
 }
 
+/**
+ * A〜Dの市民向けラベル。画面に出す文言のため、内部フィールド名（D区分の判定に使う
+ * `sourceRetrievalUnresolved`）はここには書かず、この注記にとどめる（Phase212）。
+ */
 export const SOURCE_RETRIEVAL_CATEGORY_LABEL: Record<BillSourceRetrievalCategory, string> = {
-  A: "本文取得＋構造化が比較的安全",
-  B: "本文取得できるが個別確認必要",
-  C: "画像PDF/OCR等が必要",
-  D: "会議録リンクが未登録（sourceRetrievalUnresolved。原資料が存在しない、という意味ではない）",
+  A: "会議録の本文を取得でき、内容の整理も比較的進めやすい",
+  B: "会議録の本文は取得できるが、1件ずつの確認が必要",
+  C: "画像のPDFのため、文字認識（OCR）などの追加処理が必要",
+  D: "会議録へのリンクがまだ登録できていない（原資料が存在しない、という意味ではない）",
 };
 
 /**

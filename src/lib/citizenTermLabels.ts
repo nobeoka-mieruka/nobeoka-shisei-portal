@@ -16,6 +16,18 @@
  *
  * 実装上の注意：後読み（`(?<=...)`）は古い iOS Safari で構文エラーになり、
  * 読み込み時点でページ全体が壊れるため使わない。直前の1文字は捕捉グループで受ける。
+ *
+ * Phase212 の追加分：
+ * - 開発フェーズ番号（`Phase166`）・作業ブロック番号（`Block3`）は、当サイトを作る側の
+ *   作業単位でしかなく、市民が辿れる資料ではない。日付と本文が残れば意味は失われないため
+ *   **削除・一般化**する。
+ * - レコードID（`fm32`・`m08`・`pf-org-016`・`civic-047`・`mayor-14-term-01`・`TASK-174`）は
+ *   **削除しない**。削ると「既存civic-030（台風18号）・civic-053（…）」のように文が壊れ、
+ *   出典の追跡もできなくなる。`fm*`・`pf-org-*` は公開URLのスラッグでもある。
+ *   代わりに「整理番号」「調査タスク」と前置きし、内部の番号だと分かる形で残す
+ *   （UNR-・INQ- を Phase209 が「未確認項目UNR-050」としたのと同じ方針）。
+ *   番号そのものの意味は `/data-status` の凡例で説明する。
+ * - 調査に使った道具の名前（`pdftotext`・`pdfjs-dist`・`WinRT`）は日本語の説明語へ置き換える。
  */
 
 /**
@@ -133,6 +145,9 @@ const INTERNAL_TERM_LABELS: Record<string, string> = {
 
   // ---- 議案・一般質問・政策 ----
   billTitle: "議案名",
+  sharedProposalStatement: "一括説明の原文欄",
+  reason: "提案理由の欄",
+  reasonCode: "理由の区分",
   commonText: "一括見出し文",
   existingBillVoteId: "対応する議案賛否データの整理番号",
   memberVotes: "議員別の賛否",
@@ -149,7 +164,14 @@ const INTERNAL_TERM_LABELS: Record<string, string> = {
   dateLabel: "日付の表記",
   fileName: "会議録ファイル名",
 
-  // ---- 資料の機械処理 ----
+  // ---- 資料の機械処理（Phase212：調査に使った道具の名前は、市民には何のことか分からない） ----
+  "pdftotext/xpdf": "PDF文字抽出ツール",
+  pdftotext: "PDF文字抽出ツール",
+  "pdfjs-dist": "PDF読み取りプログラム",
+  "WinRT（Windows.Data.Pdf）": "Windows標準のPDF読み取り機能",
+  WinRT: "Windows標準のPDF読み取り機能",
+  "GetText3.exeテキスト": "会議録の本文テキスト",
+  "GetText3.exeページ": "会議録の本文ページ",
   announcedDate: "公表日",
   effectStatus: "効力状況",
   inForce: "現に効力あり",
@@ -168,8 +190,15 @@ const INTERNAL_TERM_LABELS: Record<string, string> = {
   Level3: "市民向けの詳しい説明まで確認済み",
 };
 
-/** 置換対象にしない語（実在の固有名詞・URLの一部など）。対応表と重複させないための備忘。 */
-export const CITIZEN_TERM_PROPER_NOUNS = ["waiwaiPLAYLAB", "Qubena", "GetText3.exe"];
+/**
+ * 置換対象にしない語（実在の固有名詞・URLの一部など）。対応表と重複させないための備忘。
+ *
+ * `GetText3.exe` は延岡市議会「会議録検索システム」のページを指すURLの一部であり、出典URLとしては
+ * そのまま残す必要がある。ただし本文中に「GetText3.exeテキスト」「GetText3.exeページ」の形で
+ * 書かれている箇所は市民には意味が分からないため、その2語だけを上の対応表で言い換えている
+ * （URL中は `GetText3.exe?...` と続くため、「テキスト」「ページ」まで含む対応表の語には一致しない）。
+ */
+export const CITIZEN_TERM_PROPER_NOUNS = ["waiwaiPLAYLAB", "Qubena"];
 
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -217,27 +246,52 @@ export function humanizeDataNote(text?: string | null): string | undefined {
   out = out.replace(/reports\/[A-Za-z0-9._/-]+\.(?:json|md)/g, "当サイトの調査記録");
   out = out.replace(/scripts\/[A-Za-z0-9._/-]+\.(?:mjs|ts|ps1)/g, "当サイトの処理スクリプト");
 
-  // 2) 整理番号（内部台帳の番号。何の番号かが分かるよう日本語の見出しを付ける）
+  // 2) 開発フェーズ番号・作業ブロック番号（Phase212）。
+  //    当サイトを作る側の作業単位を指すだけの番号で、市民が辿れる資料ではない。
+  //    「いつ・何を確認したか」は日付と本文が残るため、番号を外しても意味は失われない。
+  out = out.replace(/[（(]\s*Phase\s?\d+(?:\s?[-–—〜～]\s?\d+)*\s*[)）]/g, "");
+  out = out.replace(/Phase\s?\d+(?:\s?[-–—〜～]\s?\d+)*\s*(?=追記|補足)/g, "");
+  out = out.replace(/Phase\s?\d+(?:\s?[-–—〜～]\s?\d+)*/g, "これまでの確認作業");
+  out = out.replace(/(^|[^A-Za-z0-9_])Block\s?(\d+)/g, "$1調査区分$2");
+
+  // 3) 整理番号（内部台帳の番号。何の番号かが分かるよう日本語の見出しを付ける）
   out = out.replace(/UNR-(\d+)/g, "未確認項目UNR-$1");
   out = out.replace(/INQ-(\d+)/g, "照会事項INQ-$1");
+  out = out.replace(/TASK-(\d+)/g, "調査タスクTASK-$1");
   out = out.replace(/disputed-(\d+)/g, "要再確認項目$1");
   out = out.replace(/acl-chair-(\d+)/g, "第$1代");
-  out = out.replace(/acl-vice-chair-(\d+)/g, "第$1代副議長");
+  // データ側の実際のIDは `acl-vicechair-51`（ハイフン2つ）。旧表記も残しておく。
+  out = out.replace(/acl-vice-?chair-(\d+)/g, "第$1代副議長");
 
-  // 3) データファイル名（拡張子の有無どちらの書き方でも置換する。対応表に無いものは残す）
+  // 3-2) レコードID（Phase212）。当サイト内の1件を指す番号で、削ると
+  //      「既存civic-030（台風18号）・civic-053（…）」のように文が壊れる。
+  //      公開URLのスラッグ（/members/fm09・/political-funds/pf-org-001）でもあるため消さず、
+  //      「整理番号」と明示して、市民が内部の番号だと分かるようにする。
+  out = out.replace(
+    /(^|[^/A-Za-z0-9_-])(mayor-\d+-term-\d+|pf-org-\d+|civic-\d+|fm\d+|m\d{2,3})(?![/A-Za-z0-9_-])/g,
+    "$1整理番号$2",
+  );
+  // 「id: fm32」のように内部のフィールド名が前置きされている書き方を整える。
+  out = out.replace(/(^|[^A-Za-z0-9_])id:\s*(?=整理番号)/g, "$1");
+
+  // 4) データファイル名（拡張子の有無どちらの書き方でも置換する。対応表に無いものは残す）
   out = out.replace(DATA_FILE_JSON_PATTERN, (m, name: string) => DATA_FILE_LABELS[name] ?? m);
   out = out.replace(DATA_FILE_BARE_PATTERN, (_m, before: string, name: string) => `${before}${DATA_FILE_LABELS[name]}`);
 
-  // 4) フィールド名・列挙値
+  // 5) フィールド名・列挙値
   out = out.replace(TERM_PATTERN, (_m, before: string, name: string) => `${before}${INTERNAL_TERM_LABELS[name]}`);
 
-  // 5) 言い換えの結果できた重複（「減債基金（減債基金＝…）」等）と空の括弧を整理する
+  // 6) 言い換えの結果できた重複（「減債基金（減債基金＝…）」等）と空の括弧を整理する
   out = out
     .replace(/([^\s（）「」]+)（\1）/g, "$1")
     .replace(/([^\s（）「」]+)（\1＝/g, "$1（")
     .replace(/([^\s（）「」]+)（\1、/g, "$1（")
     .replace(/（\s*）/g, "")
-    .replace(/（\s*＝/g, "（");
+    .replace(/（\s*＝/g, "（")
+    // 番号を外した跡に残る空白（「これまでの確認作業 でその記録を反映し」等）を詰める。
+    .replace(/(これまでの確認作業)[ \t]+(?=[^\s\x21-\x7E])/g, "$1")
+    .replace(/【([^【】]*?)[ \t]+】/g, "【$1】")
+    .replace(/[ \t]{2,}/g, " ");
 
   return out;
 }

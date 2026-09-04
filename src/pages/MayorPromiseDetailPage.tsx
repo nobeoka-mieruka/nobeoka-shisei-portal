@@ -350,7 +350,7 @@ export function MayorPromiseDetailPage() {
                       </span>
                     )}
                     <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant">
-                      {doc.sourceType}
+                      {humanizeDataNote(doc.sourceType)}
                     </span>
                   </a>
                   {doc.publishedDate && (
@@ -424,7 +424,7 @@ export function MayorPromiseDetailPage() {
                     </span>
                   )}
                 </div>
-                <p className="mt-1 text-xs text-on-surface-variant">候補と判断した理由：{c.candidateReason}</p>
+                <p className="mt-1 text-xs text-on-surface-variant">候補と判断した理由：{humanizeDataNote(c.candidateReason)}</p>
                 <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs text-primary underline">
                   出典：{c.source}（{c.sourceDate}）
                 </a>

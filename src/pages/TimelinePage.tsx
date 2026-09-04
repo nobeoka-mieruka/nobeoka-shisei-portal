@@ -172,7 +172,7 @@ export function TimelinePage() {
                         大きくはみ出す（実測238px）。break-wordsと併せて折り返しを保証する。 */}
                     <div className="min-w-0 flex-1">
                       <p className="text-xs break-words text-on-surface-variant">
-                        {CATEGORY_META[event.category].label}／{event.dateLabel}
+                        {CATEGORY_META[event.category].label}／{humanizeDataNote(event.dateLabel)}
                       </p>
                       {event.relatedPath ? (
                         <Link
