@@ -69,6 +69,9 @@ export function ComparePopulationPage() {
         <SectionCard title="比較結果">
           <FinanceLineChart
             points={selectedRows.map((y) => ({
+              // Phase216：yearを渡すことで、連続していない年度を選んだ場合に線でつながなくなる
+              //（間の年度の値を確認していないため、直線で結ぶと推移を推定したように見えてしまう）。
+              year: y.fiscalYear,
               label: fiscalYearLabel(y.fiscalYear),
               value: y.population?.population ?? null,
             }))}

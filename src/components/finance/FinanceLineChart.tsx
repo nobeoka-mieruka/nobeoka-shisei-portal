@@ -1,8 +1,17 @@
-interface FinanceLineChartPoint {
+import { useId } from "react";
+import { financeLineGaps, financeLineSegments, formatFiscalYearRanges } from "../../lib/financeChartSeries";
+
+export interface FinanceLineChartPoint {
   label: string;
   /** 未確認・未収録の年度はnullを渡すこと。0を代入すると「実際に0だった」と誤解されるため使わない。 */
   value: number | null;
   isEstimate?: boolean;
+  /**
+   * Phase216：年度（西暦）。指定すると「年度が1つ違いの点どうし」だけを線で結ぶ。
+   * 年度が飛んでいる箇所（資料未確認の期間）は線を切り、その区間を斜線で示す。
+   * 国勢調査のように5年おきの調査を等間隔に並べる系列では指定しない。
+   */
+  year?: number;
 }
 
 interface FinanceLineChartProps {
@@ -74,8 +83,13 @@ function axisLabelClassName(index: number, total: number, steps: number[]): stri
  * 同士だけをつなぎ（欠損年度をまたいで直線補間しない）、欠損点には丸マーカーを打たず、
  * 凡例（下部の一覧）には「確認中」と表示する（ActivityRadarChart.tsxの欠損データの扱いと
  * 同じ考え方）。
+ *
+ * Phase216：点にyear（年度）を指定した系列では、配列上で隣り合っていても年度が1つ違いで
+ * なければ線を結ばない。線を結んでいない区間（＝資料未確認の期間）は斜線の帯で塗り、
+ * グラフ直下にも文字で明示する（色や線の形だけで意味を伝えない）。値の補間は一切行わない。
  */
 export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グラフ" }: FinanceLineChartProps) {
+  const gapPatternId = `finance-line-gap-${useId().replace(/:/g, "")}`;
   const values = points.map((p) => p.value).filter((v): v is number => v !== null);
   const max = values.length > 0 ? Math.max(...values) : 1;
   const min = values.length > 0 ? Math.min(...values) : 0;
@@ -87,24 +101,62 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
     return { ...p, x, y };
   });
 
-  // 欠損点（value===null）をまたいで直線補間しないよう、連続する非欠損区間ごとに別のpathセグメントへ分ける。
-  const segments: string[] = [];
-  let current: string[] = [];
-  for (const c of coords) {
-    if (c.y === null) {
-      if (current.length > 1) segments.push(current.join(" "));
-      current = [];
-      continue;
-    }
-    current.push(`${current.length === 0 ? "M" : "L"} ${c.x.toFixed(1)} ${c.y.toFixed(1)}`);
-  }
-  if (current.length > 1) segments.push(current.join(" "));
+  // 欠損点（value===null）や年度の飛びをまたいで直線補間しないよう、連結してよい区間ごとに
+  // 別のpathセグメントへ分ける（判定はfinanceLineSegmentsに集約し、回帰テストから直接検証する）。
+  const segments = financeLineSegments(points)
+    .filter((indexes) => indexes.length > 1)
+    .map((indexes) =>
+      indexes
+        .map((idx, n) => `${n === 0 ? "M" : "L"} ${coords[idx].x.toFixed(1)} ${coords[idx].y!.toFixed(1)}`)
+        .join(" "),
+    );
+
+  const gaps = financeLineGaps(points).map((gap) => ({
+    ...gap,
+    description:
+      gap.missingYears.length > 0
+        ? `${formatFiscalYearRanges(gap.missingYears)}は資料未確認です（値を推定して線でつないでいません）。`
+        : `${points[gap.fromIndex].label}と${points[gap.toIndex].label}の間は資料未確認です（値を推定して線でつないでいません）。`,
+  }));
+  const gapSummary =
+    gaps.length > 0
+      ? `資料未確認のため線をつないでいない区間が${gaps.length}か所あります（内訳はグラフ直後の説明を参照してください）。`
+      : "";
 
   const labelSteps = axisLabelSteps(points.length);
 
   return (
     <div>
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="h-auto w-full" role="img" aria-label={ariaLabel}>
+      <svg
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        className="h-auto w-full"
+        role="img"
+        aria-label={gapSummary ? `${ariaLabel}${gapSummary}` : ariaLabel}
+      >
+        {gaps.length > 0 && (
+          <defs>
+            <pattern id={gapPatternId} width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="8" height="8" fill="var(--color-surface-container-high)" />
+              <line x1="0" y1="0" x2="0" y2="8" stroke="var(--color-outline-variant)" strokeWidth="1.5" />
+            </pattern>
+          </defs>
+        )}
+        {gaps.map((gap, i) => {
+          const x1 = coords[gap.fromIndex].x;
+          const x2 = coords[gap.toIndex].x;
+          return (
+            <rect
+              key={`gap-${i}`}
+              x={x1 + 2}
+              y={PAD_Y}
+              width={Math.max(2, x2 - x1 - 4)}
+              height={HEIGHT - PAD_Y * 2}
+              fill={`url(#${gapPatternId})`}
+            >
+              <title>{gap.description}</title>
+            </rect>
+          );
+        })}
         <line
           x1={PAD_X}
           y1={HEIGHT - PAD_Y}
@@ -127,7 +179,9 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
               fill={c.isEstimate ? "var(--color-surface)" : "var(--color-primary)"}
               stroke="var(--color-primary)"
               strokeWidth="2"
-            />
+            >
+              <title>{`${c.label}${c.isEstimate ? "（見込）" : ""}：${formatValue(c.value as number)}`}</title>
+            </circle>
           ))}
       </svg>
       {/*
@@ -149,6 +203,41 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
           </span>
         ))}
       </div>
+      {/*
+        Phase216：斜線の帯（＝資料未確認で線をつないでいない区間）の凡例。模様だけで意味を
+        伝えないよう、必ず文字でも同じ内容を示す。
+      */}
+      {gaps.length > 0 && (
+        <div className="mt-3 flex items-start gap-2 rounded-lg bg-surface-container-high p-2.5 text-xs leading-relaxed text-on-surface-variant">
+          <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0" aria-hidden>
+            {/* 別のsvg要素のdefsを参照すると環境により解決されないため、凡例用のパターンはここで独自に定義する。 */}
+            <defs>
+              <pattern
+                id={`${gapPatternId}-legend`}
+                width="8"
+                height="8"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(45)"
+              >
+                <rect width="8" height="8" fill="var(--color-surface-container-high)" />
+                <line x1="0" y1="0" x2="0" y2="8" stroke="var(--color-outline-variant)" strokeWidth="1.5" />
+              </pattern>
+            </defs>
+            <rect
+              width="16"
+              height="16"
+              rx="2"
+              fill={`url(#${gapPatternId}-legend)`}
+              stroke="var(--color-outline-variant)"
+            />
+          </svg>
+          <p>
+            <span className="font-semibold text-on-surface">斜線の区間は資料未確認</span>
+            です。値が分からないため点を打たず、線もつないでいません（0とは扱っていません）。
+            {gaps.map((g) => g.description).join("")}
+          </p>
+        </div>
+      )}
       <ul className="mt-3 flex flex-wrap gap-2">
         {points.map((p, i) => (
           <li key={i} className="min-w-[92px] flex-1 rounded-lg border border-outline-variant px-2 py-1.5 text-xs">

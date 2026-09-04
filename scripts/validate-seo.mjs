@@ -100,8 +100,21 @@ function checkPage(routePath, { expectIndexable }) {
   }
   const html = readFileSync(filePath, "utf8");
 
-  const titleCount = count(html, /<title>[^<]*<\/title>/g);
-  if (titleCount !== 1) fail(`[${label}] titleが${titleCount}個です（1個である必要があります）`);
+  /*
+   * Phase216：ページタイトルは<head>内の<title>だけを数える。
+   * SVGの<title>は図の説明（マウスオーバー時の吹き出し・支援技術向けの名前）であり、
+   * ページタイトルとは別物のため、混ぜて数えると折れ線グラフのある財政ページが誤って失敗する。
+   */
+  const head = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i)?.[1] ?? "";
+  const titleCount = count(head, /<title>[^<]*<\/title>/g);
+  if (titleCount !== 1) fail(`[${label}] head内のtitleが${titleCount}個です（1個である必要があります）`);
+  const bodyTitleOutsideSvg = count(
+    (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? "").replace(/<svg[\s\S]*?<\/svg>/gi, ""),
+    /<title>[^<]*<\/title>/g,
+  );
+  if (bodyTitleOutsideSvg > 0) {
+    fail(`[${label}] body内（SVG外）に<title>が${bodyTitleOutsideSvg}個あります`);
+  }
 
   const descCount = count(html, /<meta name="description" content="[^"]*"\s*\/>/g);
   if (descCount !== 1) fail(`[${label}] meta descriptionが${descCount}個です（1個である必要があります）`);
