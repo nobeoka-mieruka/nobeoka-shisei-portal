@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で固定し、Phase201〜214 の品質改善を反映した安定版の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜218 の品質改善を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -9,8 +9,8 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `9864f64`（Phase214） |
-| production deploy ID | `a051d481-5734-4b71-8052-97ab72dd3a09` |
+| release commit | `14b58d8`（Phase218） |
+| production deploy ID | `db1cb836-07b0-427c-80f3-7b1d220a4c02` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
@@ -74,7 +74,7 @@
 | production visual error | 0（20ページ × 6viewport = 120件。議案詳細10件を含む。320/375/390/430/1280/1440px で実レンダリング確認） |
 | horizontal overflow | 0px |
 | console error | 0 |
-| test failures | 0（286 checks / 26スクリプト） |
+| test failures | 0（308 checks / 27スクリプト） |
 | validate:data errors | 0 |
 | validate:seo failures | 0（2,271ページ） |
 | validate:content errors | 0（2,271ページ） |
@@ -131,6 +131,7 @@
 | `npm run audit:tap-targets` | タップ領域の WCAG 2.2 AA / 2.1 AAA 判定 |
 | `npm run audit:production-cache` | 本番のキャッシュヘッダーと鮮度の実測 |
 | `npm run analyze:bundle` | チャンク別モジュール内訳 |
+| `node scripts/audit-screenreader-semantics.mjs` | accessibility tree による読み上げ意味構造の監査（追加インストール不要） |
 
 `audit:*` と `smoke:production` は `playwright-core` とローカル Chromium を使います。
 アクセシビリティ監査（`scripts/audit-accessibility.mjs`）の再実行には
@@ -140,8 +141,7 @@
 
 1. **ビルド非再現性**: 生成データの `generatedAt`（ビルド時刻）により、内容が同一でも毎回チャンクハッシュが変わり、再訪ユーザーが同じ内容の JS（845KB）を再取得する。値は画面表示にも使われるため要検討。
 2. **タップ領域**: ヘッダー（803件）の 44px 化は `top-[57px]` を使う6ページの sticky バー同時変更が必要。パンくず（423件）の 24px 化は全ページ +約8px。いずれも WCAG 2.2 AA は充足済みで、AAA のみ未達。
-3. **データ文面に残る内部識別子**: 注記本文には `bondRedemptionFundYen` 等のフィールド名やレコードIDが残っている。Phase209・212 で**表示は市民向けに変換済み**（一般公開ページの裸の露出は0件）だが、データ側の文面自体は未修正。`/finance/funds` の出典注記に残る `fund.balance.` のようなパス接頭辞は言い換え対象外。
+3. **データ文面に残る内部識別子（方針として維持）**: Phase217 で 5,247件を分類し、出典追跡・監査履歴に必要な 2,842件は**意図的に維持**、参照が壊れていた1件のみ削除。表示側は `humanizeDataNote()` で変換し、一般公開本文への流出は `scripts/test-text-quality.mjs` のレイヤー3・3-2・3-3 が形（camelCase・パス・末尾数字ID等）でも検出して防ぐ。未着手は「注記本文に直接書かれた外部URL 39件の `sourceRefs` 構造化」のみ。
 4. **検索**: 「市議会議員」の上位が選挙結果に偏る（語義的には妥当）。`/history`・`/updates` に項目アンカーが無いため同一URL結果を統合表示している。
 5. **末尾スラッシュ**: 308リダイレクトが発生（sitemap・canonical は末尾スラッシュなし）。クロール時に1ホップ増える。
-6. **スクリーンリーダー実機確認**（NVDA/VoiceOver/TalkBack）は未実施。自動 a11y 監査 0件は WCAG 完全準拠を意味しない。
-7. **基金グラフの欠損年度が圧縮される**: `/finance/funds` の基金総額グラフで、資料が無い 1989→2001 の11年が1目盛りに圧縮され直線で結ばれる（`FinanceMetricSection` が null 年度を事前除外するため `FinanceLineChart` の非補間保護が働かない）。表示方針の変更を伴い他ページにも影響するため未修正。
+6. **スクリーンリーダー実機確認**（NVDA/VoiceOver/TalkBack）は**未実施**（`MANUAL_ACCESSIBILITY_CHECK_REQUIRED`）。この環境に NVDA は未インストールで、導入もしていない。Phase218 で accessibility tree による代替監査（12ページ・160件検出→0件）を実施したが、読み上げ音声の自然さ・ブラウズ/フォームモード切替・見出しジャンプの実使用感・点字出力・ライブリージョンの実発話などは実機でしか判定できない。自動 a11y 監査 0件は WCAG 完全準拠を意味しない。
