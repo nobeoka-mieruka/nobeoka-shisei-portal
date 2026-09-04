@@ -46,6 +46,23 @@ export type SourceType =
 /**
  * 出典・確認日・更新日などをまとめて記録するための共通項目。すべて任意項目で、
  * データが揃っている範囲だけ入力すればよい（未入力＝「未確認」として扱う）。
+ *
+ * Phase217：注記系フィールドの役割分担（新しい `internalNote` / `publicNote` は追加しない。
+ * 既存の項目で役割が足りているため、増やすと同じ内容が2か所に分かれて食い違う）。
+ *
+ * - `sourceRefs` / `sourceRef`（`ArchiveSourceRef`）：**出典そのもの**。資料名・URL・公表日・
+ *   確認状況（`verificationStatus`）を項目に分けて持つ。出典として使える資料は、注記本文へ
+ *   書かずにこちらへ入れる（一覧表示・リンク切れ検査・出典数の集計が効くため）。
+ * - `notes` / `note` / `sourceNote` / `termNote` / `definitionNote`：その項目の**補足説明**。
+ *   市民向けページの本文としてそのまま表示される。
+ * - `verificationNote`：**確認作業の記録**（いつ・どの資料で・どう突き合わせたか）。内部寄りだが
+ *   一部のページで表示されるため、表示前に `humanizeDataNote()` を通す。
+ * - `generatedFrom`（`SharedProposalStatement`）：値の**生成元の記録**。画面には出さない監査用。
+ *
+ * どの注記にも、当サイト内部の識別子（レコードID・データファイル名・調査の整理番号）を
+ * 残してよい。出典追跡に必要なため削除しない。市民向けの言い換えは表示直前に
+ * `src/lib/citizenTermLabels.ts` の `humanizeDataNote()` が行い、言い換え漏れは
+ * `scripts/test-text-quality.mjs` のレイヤー3〜3-3 が検出する。
  */
 export interface SourceMeta {
   sourceTitle?: string;

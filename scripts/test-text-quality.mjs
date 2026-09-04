@@ -8,6 +8,10 @@
  * このテストは同種の再発を2層で検出する。
  *   レイヤー1（常に実行）：src/ のソースを走査し、「約」等の接頭辞・「円」等の単位を
  *     すでに付与するフォーマッタ関数の呼び出しに、literal の接頭辞・単位を重ねている箇所を検出する。
+ *   レイヤー3〜3-3（dist/ がある場合のみ）：市民向けページの本文に内部用語・内部識別子が
+ *     出ていないことを確認する。3 は既知の語、3-2 は対応表にあるのに変換されていない語、
+ *     3-3（Phase217）は**語を知らなくても形で分かる識別子**（camelCase・snake_case・
+ *     ドット区切りの項目パス・末尾が数字のレコードID等）を検出する。
  *   レイヤー2（dist/ がある場合のみ）：prerender 済み HTML の本文テキストを走査し、
  *     「約約」「円円」等の明確な二重語を検出する。dist/ が無い場合はスキップする
  *     （`npm test` は build を前提にしないため。build 後に実行すればこの層も走る）。
@@ -177,6 +181,42 @@ const INTERNAL_TERM_PATTERNS = [
  */
 const AUDIT_ROUTES = ["/data-status", "/methodology"];
 
+/**
+ * Phase217・レイヤー3-3：**語を知らなくても**「内部識別子の形」で検出するための規則。
+ *
+ * レイヤー3・3-2 は、あらかじめ登録した語だけを探す。そのため、データへ新しい注記が入って
+ * 未知の内部識別子（新しいフィールド名・新しいレコードID・新しい列挙値）が本文へ混ざると
+ * 気付けない。ここでは英数字だけで構成された「識別子らしい形」を検出し、正当な語だけを
+ * 下の許可リストで明示する。データ側の注記は書き換えず、表示直前に
+ * `src/lib/citizenTermLabels.ts` の `humanizeDataNote()` で言い換える方針
+ * （分類方針 A〜D は同ファイルの冒頭コメントを参照）。
+ */
+const IDENTIFIER_SHAPES = [
+  { label: "camelCase（内部の項目名らしい語）", re: /(?<![A-Za-z0-9_./-])[a-z][a-z0-9]*[A-Z][A-Za-z0-9]*(?![A-Za-z0-9_./-])/ },
+  { label: "PascalCase（データ構造の型名らしい語）", re: /(?<![A-Za-z0-9_./-])[A-Z][a-z0-9]+(?:[A-Z][a-z0-9]+){1,}(?![A-Za-z0-9_./-])/ },
+  { label: "snake_case（内部の列挙値らしい語）", re: /(?<![A-Za-z0-9_./-])[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]+(?![A-Za-z0-9_./-])/ },
+  // `debt.balance.普通会計の…` のように後ろへ日本語が続く書き方も拾うため、末尾の「.」は許す。
+  { label: "ドット区切りの項目パス", re: /(?<![A-Za-z0-9_./-])[a-z][A-Za-z0-9]*(?:\.[a-z][A-Za-z0-9]*)+(?![A-Za-z0-9_/-])/ },
+  { label: "末尾が数字のレコードID", re: /(?<![A-Za-z0-9_./-])[a-z][a-z0-9]*(?:-[a-z0-9]+)*-\d{1,4}(?![A-Za-z0-9_-])/ },
+];
+
+/** 実在する固有名詞・サービス名。会議録や公式資料にこの表記で出てくるため、言い換えない。 */
+const SHAPE_ALLOWED_TOKENS = new Set(["waiwaiPLAYLAB", "Qubena", "xID", "YouTube", "TikTok", "PayPay", "GoTo"]);
+/** インターネット上のドメイン名・資料のファイル名（外部の実在する名前なのでそのまま出す）。 */
+const SHAPE_ALLOWED_SUFFIXES = [".jp", ".com", ".net", ".org", ".info", ".pdf", ".html", ".htm"];
+/** 当サイトの公開URLのスラッグ（市民が /elections/◯◯ でそのまま辿れる番号）。 */
+const SHAPE_ALLOWED_PREFIXES = ["election-"];
+/** 出典表記として正当な形（内部識別子ではない）。 */
+const SHAPE_ALLOWED_PATTERNS = [
+  // 資料のページ範囲。出典名の一部として「印刷p256-257」のように書かれる。
+  /^p\d+(?:-\d+)?$/,
+  // インターネット上のドメイン名。本文に `pref.miyazaki.lg.jp/senkyo/…` のようにURLの一部が
+  // 書かれていると末尾が切れて拾われるため、ドメインを示す区切り（.jp・.lg 等）で判定する。
+  /(^|\.)(?:jp|com|net|org|info|co|lg|go|ne|ac|ed|gr)($|\.)/,
+];
+/** 直前にこの日本語が付いていれば、内部の番号だと分かる形で提示できている（Phase209・212 の方針）。 */
+const ID_LABEL_PREFIXES = ["整理番号", "調査タスク", "未確認項目", "照会事項", "要再確認項目"];
+
 /** prerender済みHTMLから本文の表示テキストを取り出す。 */
 function extractRenderedText(html) {
   const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/);
@@ -324,6 +364,50 @@ if (!existsSync(DIST)) {
       0,
       `対応表にあるのに変換されていない語（その表示箇所が humanizeDataNote() を通っていない）:\n    ` +
         `${unwrapped.slice(0, 40).join("\n    ")}\n    （合計${unwrapped.length}件）`,
+    );
+  });
+
+  /* ---------------------------------------------------------------- *
+   * レイヤー3-3（Phase217）：形から見て内部識別子の語が本文に出ていないか
+   *
+   * データ側の注記本文には、出典追跡のために内部識別子を残している（維持する＝分類A）。
+   * その代わり、**一般公開ページの本文へは1件も出さない**ことをここで保証する。
+   * 未知の語でも形で検出するため、新しい注記が入っても取りこぼさない。
+   * ---------------------------------------------------------------- */
+
+  const shapeFound = [];
+  const shapeTokens = new Map();
+  for (const file of htmlFiles) {
+    const route = "/" + path.relative(DIST, file).replace(/\\/g, "/").replace(/\/?index\.html$/, "");
+    if (AUDIT_ROUTES.some((prefix) => route === prefix || route.startsWith(`${prefix}/`))) continue;
+    const text = extractRenderedText(readFileSync(file, "utf8"));
+    for (const { label, re } of IDENTIFIER_SHAPES) {
+      const scanner = new RegExp(re.source, "g");
+      let m;
+      while ((m = scanner.exec(text))) {
+        const token = m[0];
+        if (SHAPE_ALLOWED_TOKENS.has(token)) continue;
+        if (SHAPE_ALLOWED_SUFFIXES.some((suffix) => token.endsWith(suffix))) continue;
+        if (SHAPE_ALLOWED_PREFIXES.some((prefix) => token.startsWith(prefix))) continue;
+        if (SHAPE_ALLOWED_PATTERNS.some((allowed) => allowed.test(token))) continue;
+        // 「整理番号civic-047」のように、内部の番号だと分かる日本語が前置きされていれば良しとする。
+        const before = text.slice(Math.max(0, m.index - 8), m.index);
+        if (ID_LABEL_PREFIXES.some((prefix) => before.endsWith(prefix))) continue;
+        shapeTokens.set(token, (shapeTokens.get(token) ?? 0) + 1);
+        const context = text.slice(Math.max(0, m.index - 40), m.index + 60).replace(/\s+/g, " ").trim();
+        shapeFound.push(`${route}: ${label}「${token}」…${context}…`);
+      }
+    }
+  }
+
+  check("市民向けページの本文に、内部識別子の形をした未変換の語が無い", () => {
+    assert.equal(
+      shapeFound.length,
+      0,
+      `内部識別子の露出（データ側は書き換えず、src/lib/citizenTermLabels.ts へ日本語を登録して言い換える。` +
+        `実在の固有名詞・ドメイン・公開URLのスラッグなら、このファイルの許可リストへ理由付きで追加する）:\n    ` +
+        `${shapeFound.slice(0, 40).join("\n    ")}\n    （合計${shapeFound.length}件／` +
+        `語の種類${shapeTokens.size}件：${[...shapeTokens.keys()].slice(0, 20).join("・")}）`,
     );
   });
 }

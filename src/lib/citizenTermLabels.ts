@@ -28,6 +28,26 @@
  *   （UNR-・INQ- を Phase209 が「未確認項目UNR-050」としたのと同じ方針）。
  *   番号そのものの意味は `/data-status` の凡例で説明する。
  * - 調査に使った道具の名前（`pdftotext`・`pdfjs-dist`・`WinRT`）は日本語の説明語へ置き換える。
+ *
+ * Phase217（データ注記に残る内部識別子の管理方針）：
+ * `src/data` の注記本文に残っている内部識別子を、次の4分類で扱うことに決めた。
+ * データ側は原則そのまま（＝調査記録としての正確さを優先）、表示側でだけ言い換える。
+ *
+ * - **A. 内部管理上必要（維持）**：出典追跡・監査履歴に不可欠なもの。
+ *   レコードID（`civic-047`・`csp-35`・`mayor-03`・`fm32` 等）、実在するリポジトリ内パス
+ *   （`reports/…json`・`scripts/…mjs`・`docs/…md`）、データファイル名、整理番号
+ *   （`UNR-`・`INQ-`・`TASK-`）、開発フェーズ番号。**削除しない。**
+ *   表示時は「整理番号◯◯」等と前置きするか、日本語の呼び名へ言い換える。
+ * - **B. sourceRef へ移行できるもの**：注記本文に直接書かれた外部資料のURL等。
+ *   既存の `sourceRefs` へ構造化できるが、文が壊れる恐れがあるため一括移行はしない。
+ * - **C. 人間向けの文章へ変換できるもの**：内部の項目名（`fund.balance` 等）・列挙値
+ *   （`confirmed_primary` 等）・型名（`CitySpecialPostRole` 等）・道具名（`WebFetch` 等）。
+ *   下の対応表へ日本語を登録して、表示直前に言い換える。
+ * - **D. 不要な残骸**：参照先が存在しない、意味を持たない断片。これだけ削除してよい。
+ *
+ * どれに当たるか迷うものは A（維持）に倒す。判定の回帰は `scripts/test-text-quality.mjs`
+ * のレイヤー3〜3-3が担保する（3-3 は「英数字だけの識別子らしい語」を形で検出するため、
+ * 対応表に無い新しい語が本文へ入り込んでも気付ける）。
  */
 
 /**
@@ -188,6 +208,48 @@ const INTERNAL_TERM_LABELS: Record<string, string> = {
   Level1: "議決結果まで確認済み",
   Level2: "一次資料の本文まで確認済み",
   Level3: "市民向けの詳しい説明まで確認済み",
+
+  /* ---- Phase217：注記本文が参照している「データの項目名そのもの」 ---- */
+  notes: "注記欄",
+  isEstimate: "見込み値かどうかの区分",
+  debtServiceRatioPercent: "公債費比率",
+  affiliationId: "会派・委員会所属データの整理番号",
+
+  /* ----
+   * Phase217：年度別の財政データは `fund.balance.◯◯` のように項目の場所を「.」でつないで
+   * 書いている。区切りごとに別々の語として言い換えると「基金残高.減債基金」のように
+   * なるため、つないだ形のまま対応表へ登録して1つの日本語にする（長い語から照合される）。
+   * ---- */
+  "fund.balance.fiscalReserveFundYen": "基金残高のうち財政調整基金",
+  "fund.balance.bondRedemptionFundYen": "基金残高のうち減債基金",
+  "fund.balance.otherSpecificPurposeFundsYen": "基金残高のうちその他特定目的基金",
+  "fund.balance.sourceRefs": "基金残高の出典情報",
+  "fund.balance": "基金残高",
+  "debt.balance.ordinaryAccountLocalBondBalanceYen": "市債残高のうち普通会計の地方債残高",
+  "debt.balance.sourceRefs": "市債残高の出典情報",
+  "debt.balance": "市債残高",
+  "budget.totalExpenditureYen": "予算の歳出総額",
+  "budget.sourceRefs": "予算の出典情報",
+  "budget.notes": "予算の注記欄",
+  "finance.debtServiceRatioPercent": "財政指標の公債費比率",
+  "finance.sourceRefs": "財政指標の出典情報",
+  "population.sourceRefs": "人口の出典情報",
+
+  /* ---- Phase217：調査の確度・判定を表す内部の区分（型定義ではなく調査メモ内の語） ---- */
+  confirmed_primary: "一次資料で確認済み",
+  confirmed_indirect: "間接的な資料で確認",
+  confirmed_single_source: "単一資料のみで確認",
+  directly_attributed: "本人が直接進めたと確認",
+  follow_up_source: "追加調査の候補資料",
+  SAME_ENTITY_RENAMED: "同一のものの名称変更",
+  NOT_FOUND: "資料を確認できず",
+
+  /* ---- Phase217：当サイトのデータ構造の名前（型名） ---- */
+  CitySpecialPostRole型: "市の特別職の役職区分",
+  ArchiveBudget型: "年度別の予算データの項目",
+
+  /* ---- Phase217：調査に使った道具の名前（Phase212 と同じ方針） ---- */
+  WebFetch: "ウェブ資料の取得",
 };
 
 /**
@@ -267,9 +329,30 @@ export function humanizeDataNote(text?: string | null): string | undefined {
   //      「既存civic-030（台風18号）・civic-053（…）」のように文が壊れる。
   //      公開URLのスラッグ（/members/fm09・/political-funds/pf-org-001）でもあるため消さず、
   //      「整理番号」と明示して、市民が内部の番号だと分かるようにする。
+  //      Phase217：`mayor-03/mayor-14` のようにレコードIDを「/」で並べている書き方は、
+  //      URL の一部と区別できるよう**両側ともレコードIDのときだけ**中黒へ置き換える。
+  //      これをしないと、次の置換が「/」を URL とみなして前置きを付けられない。
   out = out.replace(
-    /(^|[^/A-Za-z0-9_-])(mayor-\d+-term-\d+|pf-org-\d+|civic-\d+|fm\d+|m\d{2,3})(?![/A-Za-z0-9_-])/g,
+    /(^|[^/A-Za-z0-9_-])((?:mayor-\d+(?:-term-\d+)?|pf-org-\d+|civic-\d+|csp-\d+|fm\d+|m\d{2,3}))\/(?=(?:mayor-\d+(?:-term-\d+)?|pf-org-\d+|civic-\d+|csp-\d+|fm\d+|m\d{2,3})(?![/A-Za-z0-9_-]))/g,
+    "$1$2・",
+  );
+  //      Phase217 で、同じ性質の他のレコードID（市の特別職 `csp-35`・歴代市長 `mayor-03`・
+  //      調査記録 `finding-019`／`ndl-src-08`・委員会活動報告 `car-…-2023`）も同じ扱いに揃えた。
+  //      `election-mayor-2018` のような選挙IDは公開URL（/elections/…）そのものなので前置きしない。
+  out = out.replace(
+    /(^|[^/A-Za-z0-9_-])(archive-(?:fm|m)\d+(?:-[a-z]+)*(?:-\d+)?|mayor-\d+-term-\d+|mayor-\d+|pf-org-\d+|civic-\d+|csp-\d+|findings?-\d+|ndl-src-\d+|car-[a-z]+(?:-[a-z]+)*-\d{4}|fm\d+|m\d{2,3})(?![/A-Za-z0-9_-])/g,
     "$1整理番号$2",
+  );
+  // 任期の枝番（`mayor-04-term-02` の後半だけが本文に現れる書き方）は日本語の「第N期」にする。
+  // 上のレコードIDの置換が先に走るため、`mayor-04-term-02` 全体はここでは分解されない。
+  out = out.replace(/(^|[^A-Za-z0-9_-])term-0*(\d+)(?![A-Za-z0-9_-])/g, "$1第$2期");
+  // 国立国会図書館デジタルコレクションの「コマ番号」を、調査時に `komma286-287` とローマ字で
+  // 書き残している箇所がある。番号自体は出典の位置を示すため残し、読める表記に戻す。
+  out = out.replace(/(^|[^A-Za-z0-9_])komma(?=\d)/g, "$1コマ");
+  // 広報のべおかの号を指す内部ID（`koho_2026_04`）は、そのまま「◯年◯月号」と読める形にする。
+  out = out.replace(
+    /(^|[^A-Za-z0-9_])koho_(\d{4})_0*(\d{1,2})(?![A-Za-z0-9_])/g,
+    (_m, before: string, year: string, month: string) => `${before}広報のべおか${year}年${month}月号`,
   );
   // 「id: fm32」のように内部のフィールド名が前置きされている書き方を整える。
   out = out.replace(/(^|[^A-Za-z0-9_])id:\s*(?=整理番号)/g, "$1");
@@ -291,7 +374,9 @@ export function humanizeDataNote(text?: string | null): string | undefined {
     // 番号を外した跡に残る空白（「これまでの確認作業 でその記録を反映し」等）を詰める。
     .replace(/(これまでの確認作業)[ \t]+(?=[^\s\x21-\x7E])/g, "$1")
     .replace(/【([^【】]*?)[ \t]+】/g, "【$1】")
-    .replace(/[ \t]{2,}/g, " ");
+    .replace(/[ \t]{2,}/g, " ")
+    // データ側に既に「整理番号◯◯」と書かれていた場合の重ね付けを1つに戻す（Phase217）。
+    .replace(/(整理番号)+整理番号/g, "整理番号");
 
   return out;
 }
