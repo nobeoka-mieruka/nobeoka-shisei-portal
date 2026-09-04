@@ -12,6 +12,7 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import type { CommitteeRole } from "../types";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { BILL_SESSION_FISCAL_YEAR_HINT, BILL_SESSION_FISCAL_YEAR_LABEL } from "../lib/billFiscalYear";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -225,6 +226,9 @@ export function CommitteeDetailPage() {
               })()}
               。委員会単独の開催日・開催回数は
               公式資料で公表されていないため、ここでは議案が審査された定例会・臨時会の会期数で示しています。
+              {/* Phase220：ここでの年度見出しは会期年度であり、議案名に入っている
+                  予算・決算の対象年度とは別のものであることを明記する。 */}
+              {`以下の年度は${BILL_SESSION_FISCAL_YEAR_LABEL}（${BILL_SESSION_FISCAL_YEAR_HINT}）で、議案名に書かれた予算・決算の対象年度とは異なることがあります。`}
             </p>
             <div className="space-y-4">
               {fiscalYearGroups.map(([fiscalYear, bills]) => (

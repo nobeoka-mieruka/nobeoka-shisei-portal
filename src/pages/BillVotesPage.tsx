@@ -18,6 +18,10 @@ import { publicBills, reviewFlowSummaryLabel, verificationStatusOf, verification
 import { VerificationStatusBadge } from "../components/bills/VerificationStatusBadge";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import { Pagination } from "../components/Pagination";
+import {
+  BILL_SESSION_FISCAL_YEAR_DESCRIPTION,
+  BILL_SESSION_FISCAL_YEAR_LABEL,
+} from "../lib/billFiscalYear";
 import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
 
@@ -28,7 +32,8 @@ const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const BILLS_PAGE_SIZE = 20;
 
 const BILL_VOTES_CSV_COLUMNS: CsvColumn<BillVoteItem>[] = [
-  { header: "年度", value: (b) => b.fiscalYear },
+  // Phase220：この列は議案名に書かれた予算・決算の対象年度ではなく、会期年度（審議した会期の年度）。
+  { header: BILL_SESSION_FISCAL_YEAR_LABEL, value: (b) => b.fiscalYear },
   { header: "定例会・臨時会", value: (b) => b.session },
   { header: "議案番号", value: (b) => b.billNumber },
   { header: "件名", value: (b) => b.billTitle },
@@ -335,6 +340,12 @@ export function BillVotesPage() {
           term="賛否"
           definition="議案に対して、議員一人ひとりが賛成・反対の意思を示した記録です。賛否の数のみで議員の能力や政策の是非を評価するものではありません。"
         />
+        {/* Phase220：絞り込みの「会期年度」が、議案名に入っている予算・決算の対象年度とは
+            別のものであることを、一覧の時点で説明する。 */}
+        <GlossaryNote
+          term={BILL_SESSION_FISCAL_YEAR_LABEL}
+          definition={BILL_SESSION_FISCAL_YEAR_DESCRIPTION}
+        />
       </div>
 
       <div className="sticky top-[57px] z-10 -mx-4 space-y-3 bg-surface/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-0 sm:py-2">
@@ -350,7 +361,14 @@ export function BillVotesPage() {
           role="group"
           aria-label="議案の絞り込み条件"
         >
-          <FilterSelect label="年度" value={fiscalYear} onChange={setFiscalYear} options={fiscalYearOptions} />
+          {/* Phase220：「年度」だけでは、議案名に入っている予算・決算の対象年度と取り違えられる。
+              この絞り込みは会期年度（議案を審議した会期が属する年度）で絞り込む。 */}
+          <FilterSelect
+            label={BILL_SESSION_FISCAL_YEAR_LABEL}
+            value={fiscalYear}
+            onChange={setFiscalYear}
+            options={fiscalYearOptions}
+          />
           <FilterSelect label="定例会" value={session} onChange={setSession} options={sessionOptions} />
           <FilterSelect label="分類" value={category} onChange={setCategory} options={categoryOptions} />
           <FilterSelect label="確認状況" value={verification} onChange={setVerification} options={verificationOptions} />
