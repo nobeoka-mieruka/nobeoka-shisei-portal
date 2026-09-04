@@ -10,7 +10,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SessionSummaryStatusBadge } from "../components/council/SessionSummaryStatusBadge";
 import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { formatJapaneseDate } from "../config/site";
+import { formatJapaneseDate, toEraFiscalYearLabel } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { COUNCIL_GLOSSARY, SOURCE_GLOSSARY } from "../lib/councilGlossary";
@@ -75,7 +75,7 @@ export function CouncilDocumentsPage() {
       .sort((a, b) => b[0] - a[0])
       .map(([fiscalYear, sessions]) => ({
         fiscalYear,
-        label: `令和${fiscalYear - 2018}年度`,
+        label: toEraFiscalYearLabel(fiscalYear),
         sessions: [...sessions].sort(compareSessionsInFiscalYear),
       }));
   }, []);

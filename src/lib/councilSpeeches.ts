@@ -415,3 +415,59 @@ export function collectExecutiveAnswers(records: CouncilMemberSpeechRecord[]): E
   }
   return entries;
 }
+
+/**
+ * 一般質問アーカイブの収録範囲（Phase219）。
+ *
+ * councilSpeechSummaries.jsonには、現任期（councilSpeechPeriod.from＝令和5年4月23日の選挙以降）の
+ * 発言だけでなく、旧任期以前の一般質問アーカイブ（元議員のレコード、および現職議員の
+ * speech.term:"previous"）も登録されている。実データの収録範囲は平成12年9月定例会までさかのぼる
+ * ため、「収録対象は令和5年5月15日以降の本会議」という現任期だけの説明を旧任期の質問ページへも
+ * そのまま出すと、実際に表示している記録と説明が矛盾する。
+ *
+ * ページごとに固定文字列で範囲を書かず、必ずこの集計（実データの会期タイトル）から組み立てる。
+ */
+export interface CouncilSpeechCoverage {
+  /** 現任期（収録対象期間内）の確認済み質問・質疑の件数。 */
+  currentTermCount: number;
+  /** 旧任期以前のアーカイブとして収録している確認済み質問・質疑の件数。 */
+  archiveCount: number;
+  /** アーカイブのうち最も古い会期のタイトル（councilSessions.jsonの実データ）。0件ならnull。 */
+  archiveFirstSessionTitle: string | null;
+  /** アーカイブのうち最も新しい会期のタイトル。0件ならnull。 */
+  archiveLastSessionTitle: string | null;
+}
+
+/** 発言1件が、現任期（収録対象期間）ではなく旧任期以前のアーカイブかどうか。 */
+export function isArchiveSpeech(speech: CouncilSpeech): boolean {
+  return !isWithinCouncilSpeechPeriod(speech.date);
+}
+
+/** 公開済みの確認済み質問・質疑を、現任期と旧任期以前のアーカイブに分けて集計する。 */
+export function councilSpeechCoverage(
+  records: CouncilMemberSpeechRecord[],
+  sessions: { id: string; title: string }[],
+): CouncilSpeechCoverage {
+  const speeches = questionLikeSpeeches(allPublicSpeeches(records));
+  const archiveSpeeches = speeches.filter(isArchiveSpeech);
+  const archiveSessionIds = [...new Set(archiveSpeeches.map((s) => s.sessionId))].sort();
+  const titleOf = (sessionId: string | undefined): string | null =>
+    sessionId === undefined ? null : (sessions.find((s) => s.id === sessionId)?.title ?? null);
+  return {
+    currentTermCount: speeches.length - archiveSpeeches.length,
+    archiveCount: archiveSpeeches.length,
+    archiveFirstSessionTitle: titleOf(archiveSessionIds[0]),
+    archiveLastSessionTitle: titleOf(archiveSessionIds[archiveSessionIds.length - 1]),
+  };
+}
+
+/**
+ * 旧任期以前アーカイブの収録範囲を "平成12年9月定例会〜令和5年3月定例会" の形にする。
+ * アーカイブが0件、または会期タイトルを確認できない場合はnull（推測した範囲を作らない）。
+ */
+export function archiveCoverageRangeLabel(coverage: CouncilSpeechCoverage): string | null {
+  const first = coverage.archiveFirstSessionTitle;
+  const last = coverage.archiveLastSessionTitle;
+  if (!first || !last) return null;
+  return first === last ? first : `${first}〜${last}`;
+}

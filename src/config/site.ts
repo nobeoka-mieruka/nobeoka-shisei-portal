@@ -31,18 +31,66 @@ export function formatJapaneseDateIfIso(value: string): string {
   return ISO_DATE_PATTERN.test(value) ? formatJapaneseDate(value) : value;
 }
 
-/** 令和元年（2019年）を基準とした年度換算の起点。 */
+/** 各元号の開始年（西暦）。令和元年＝2019年、平成元年＝1989年、昭和元年＝1926年。 */
 const REIWA_START_YEAR = 2019;
+const HEISEI_START_YEAR = 1989;
+const SHOWA_START_YEAR = 1926;
+
+/**
+ * 西暦の年を和暦（元号＋年）へ変換する。画面側（React/TypeScript）の元号換算は、この関数だけを
+ * 情報源とする。各ページで `令和${year - 2018}年` のような式を書かない。
+ *
+ * Phase219：従来の年度表記は「令和＝西暦−2018」という式だけを、元号の分岐なしにすべての年へ
+ * 適用していた。そのため令和より前の年（2000年＝平成12年、2018年＝平成30年など）に対して
+ * 「令和-18年度」「令和0年度」という実在しない表記を生成していた。存在しない年度を0へ丸めたり
+ * 非表示にしたりするのではなく、元号の境界で分岐して正しい元号を返すことで解消する。
+ * スクリプト側の scripts/lib/council-shared.mjs の eraYearFor（Phase163で同じ誤りを修正済み）と
+ * 同じ規則・同じ表記（1年は「元年」）に揃えてある。
+ *
+ * 注意：換算は「年」単位のため、改元日をまたぐ年（1989年・2019年）の改元日前後を日単位で
+ * 区別することはできない（2019年3月は正しくは平成31年3月だが、この関数は令和元年を返す）。
+ * 会期名など日単位の正確さが必要な表示は、councilSessions.json の eraYear / title（開催月まで
+ * 確認した実データ）を使うこと。年度（4月始まり）の呼称は年度開始年の元号に合わせるため、
+ * toEraFiscalYearLabel は改元年でも正しい（2019年度＝令和元年度）。
+ */
+export function toEraYearLabel(year: number): string {
+  if (year >= REIWA_START_YEAR) {
+    const n = year - REIWA_START_YEAR + 1;
+    return `令和${n === 1 ? "元" : n}年`;
+  }
+  if (year >= HEISEI_START_YEAR) {
+    const n = year - HEISEI_START_YEAR + 1;
+    return `平成${n === 1 ? "元" : n}年`;
+  }
+  if (year >= SHOWA_START_YEAR) {
+    const n = year - SHOWA_START_YEAR + 1;
+    return `昭和${n === 1 ? "元" : n}年`;
+  }
+  // 大正以前は本サイトの対象範囲外（延岡市議会関連データは大正末期以降のみを扱う）。
+  // 推測で元号を割り当てず、西暦のまま表示する。
+  return `西暦${year}年`;
+}
+
+/**
+ * 会計年度（4月始まりの年度の開始年。例：2019 → "令和元年度"、2018 → "平成30年度"）を
+ * 和暦の年度表記へ変換する。年度の呼称は年度開始年の元号に合わせる（国・自治体の慣行と同じ）。
+ */
+export function toEraFiscalYearLabel(fiscalYear: number): string {
+  return `${toEraYearLabel(fiscalYear)}度`;
+}
+
+/** "2026-07-11" のようなISO形式の日付が属する会計年度（4月始まり）の開始年を返す。 */
+export function fiscalYearOfIsoDate(iso: string): number {
+  const [year, month] = iso.split("-").map(Number);
+  return month >= 4 ? year : year - 1;
+}
 
 /**
  * "2026-07-11" のようなISO形式の日付を、日本の会計年度（4月始まり）に基づく
  * "令和8年度" のような表記に変換する。絞り込み条件の年度表示に使う。
  */
 export function toFiscalYearLabel(iso: string): string {
-  const [year, month] = iso.split("-").map(Number);
-  const fiscalYear = month >= 4 ? year : year - 1;
-  const reiwaYear = fiscalYear - REIWA_START_YEAR + 1;
-  return `令和${reiwaYear}年度`;
+  return toEraFiscalYearLabel(fiscalYearOfIsoDate(iso));
 }
 
 /**

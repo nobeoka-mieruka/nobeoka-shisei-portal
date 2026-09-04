@@ -8,7 +8,7 @@ import { LastUpdatedInfo } from "../components/LastUpdatedInfo";
 import { BackLink } from "../components/BackLink";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { formatJapaneseDate } from "../config/site";
+import { formatJapaneseDate, toEraFiscalYearLabel } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import type { CommitteeRole } from "../types";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
@@ -276,7 +276,7 @@ export function CommitteeDetailPage() {
           <ul className="space-y-2">
             {activityReports.map((report) => (
               <li key={report.id} className="rounded-lg border border-outline-variant p-3">
-                <p className="text-xs text-on-surface-variant">令和{report.fiscalYear - 2018}年度</p>
+                <p className="text-xs text-on-surface-variant">{toEraFiscalYearLabel(report.fiscalYear)}</p>
                 <p className="mt-0.5 font-medium text-on-surface">{report.title}</p>
                 {report.visitedMunicipalities && report.visitedMunicipalities.length > 0 && (
                   <p className="mt-1 text-xs text-on-surface-variant">

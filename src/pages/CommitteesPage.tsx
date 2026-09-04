@@ -10,7 +10,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import type { Committee, CommitteeActivityReport } from "../types";
 import type { CsvColumn } from "../lib/csv";
-import { SITE_URL, formatJapaneseDate } from "../config/site";
+import { SITE_URL, formatJapaneseDate, toEraFiscalYearLabel } from "../config/site";
 
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 
@@ -31,7 +31,7 @@ const COMMITTEES_CSV_COLUMNS: CsvColumn<Committee>[] = [
 
 const COMMITTEE_ACTIVITY_REPORTS_CSV_COLUMNS: CsvColumn<CommitteeActivityReport>[] = [
   { header: "委員会名", value: (r) => r.committeeName },
-  { header: "年度", value: (r) => `令和${r.fiscalYear - 2018}年度` },
+  { header: "年度", value: (r) => toEraFiscalYearLabel(r.fiscalYear) },
   { header: "調査テーマ・報告書名", value: (r) => r.title },
   { header: "報告書PDF", value: (r) => r.url },
   { header: "出典ページ", value: (r) => r.sourceUrl },

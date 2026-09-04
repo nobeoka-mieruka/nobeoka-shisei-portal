@@ -399,7 +399,7 @@ export function HomePage() {
             label="一般質問（登壇・確認済み件数）"
             value={questionStats.confirmedCount}
             unit="件"
-            hint={`議員1名が1回の登壇で行った質問・答弁のやり取り1回分を1件と数えています。現任期対象会期：収録済み${questionStats.collectedSessionCount}／${questionStats.targetSessionCount}会期（現任期＋旧任期の全期間の会期数は一般質問データベースに別掲）`}
+            hint={`議員1名が1回の登壇で行った質問・答弁のやり取り1回分を1件と数えています。現任期対象会期：収録済み${questionStats.collectedSessionCount}／${questionStats.targetSessionCount}会期（現任期＋旧任期以前の全期間の会期数は一般質問データベースに別掲）`}
           />
           <StatCard
             label="質問項目数"
