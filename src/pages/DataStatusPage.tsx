@@ -29,6 +29,7 @@ import { BILL_EXPLAINABILITY_CITIZEN_LABEL } from "../lib/billExplainability";
 import { SOURCE_RETRIEVAL_CATEGORY_LABEL } from "../lib/billSourceRetrieval";
 import { TRUST_LEVEL_LABEL } from "../lib/councilGlossary";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { formatJapaneseDateIfIso } from "../config/site";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
@@ -1055,7 +1056,12 @@ export function DataStatusPage() {
           {humanizeDataNote(dataQualitySummary.linkHealth?.note)}
         </p>
         <p className="mt-1 text-xs text-on-surface-variant">
-          監査実施日：外部リンク＝{dataQualitySummary.linkHealth?.generatedAt.slice(0, 10) ?? "未計測"}／出典検証＝ビルド時に毎回再計算
+          {/* Phase218：ISO文字列のままだと数字とハイフンの羅列として読み上げられるため日本語表記にする。 */}
+          監査実施日：外部リンク＝
+          {dataQualitySummary.linkHealth
+            ? formatJapaneseDateIfIso(dataQualitySummary.linkHealth.generatedAt.slice(0, 10))
+            : "未計測"}
+          ／出典検証＝ビルド時に毎回再計算
         </p>
       </SectionCard>
 
@@ -1304,11 +1310,11 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          「出席状況」「請願・提案等」は複数の公開資料経路を調査しましたが一次資料を確認できていないため、現時点で全{activityTargetCount}名が「対象記録なし」です（0点として扱ってはいません）。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会が一般公開していることを確認できていないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しい算定方法は
+          「出席状況」「請願・提案等」は複数の公開資料経路を調査しましたが一次資料を確認できていないため、現時点で全{activityTargetCount}名が「対象記録なし」です（0点として扱ってはいません）。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会が一般公開していることを確認できていないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しくは
           <Link to="/methodology/activity-radar" className="font-medium text-primary underline">
-            こちら
+            活動指標の算定方法
           </Link>
-          。
+          をご覧ください。
         </p>
       </SectionCard>
 

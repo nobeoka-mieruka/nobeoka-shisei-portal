@@ -69,7 +69,7 @@ export function FinanceMetricSection({ metric, years, showTable = true }: Financ
             <FinanceLineChart
               points={nonNullPoints.map((p) => ({ label: fiscalYearLabel(p.year), value: p.value as number }))}
               formatValue={(v) => metric.formatValue(v)}
-              ariaLabel={`${metric.label}の年度推移グラフ。詳細は直後の表を参照してください。`}
+              ariaLabel={`${metric.label}の年度推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。`}
             />
           ) : (
             <FinanceBarChart

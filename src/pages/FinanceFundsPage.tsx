@@ -91,7 +91,7 @@ export function FinanceFundsPage() {
                 isEstimate: y.fund?.isEstimate,
               }))}
               formatValue={(v) => formatOkuYenOrConfirming(v)}
-              ariaLabel="財源調整用基金の年度末残高の推移グラフ。詳細は直後の表を参照してください。"
+              ariaLabel="財源調整用基金の年度末残高の推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。"
             />
             <FinanceYearCards
               caption="年度別の基金残高（財源調整用基金・その他特定目的基金・全体）"

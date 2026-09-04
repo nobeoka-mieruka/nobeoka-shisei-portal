@@ -208,11 +208,11 @@ export function CouncilActivityPage() {
         <p className="mt-2 text-sm text-on-surface-variant">公開資料から見える5つの指標</p>
         <p className="mt-1 text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
         <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-on-surface-variant dark:border-outline-variant">
-          件数や実施率は活動の「量」を示すものであり、政策の内容や「質」を評価するものではありません。議員の能力、政治的立場、人物評価を示すものでもありません。資料の公開状況によって確認可能な情報量に差があります。詳しい算定方法は
+          件数や実施率は活動の「量」を示すものであり、政策の内容や「質」を評価するものではありません。議員の能力、政治的立場、人物評価を示すものでもありません。資料の公開状況によって確認可能な情報量に差があります。詳しくは
           <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
-            こちら
+            活動指標の算定方法
           </Link>
-          、出典は各項目のリンク先でご確認いただけます。
+          をご覧ください。出典は各項目のリンク先でご確認いただけます。
         </p>
       </div>
 

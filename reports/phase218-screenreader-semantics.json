@@ -1,0 +1,1587 @@
+{
+  "generatedAt": "2026-09-04T10:49:55.164Z",
+  "baseUrl": "http://localhost:4194",
+  "note": "Accessibility Tree ベースの代替検証。実スクリーンリーダー確認ではない。",
+  "pages": [
+    {
+      "path": "/",
+      "label": "トップ",
+      "url": "http://localhost:4194/",
+      "issues": [],
+      "info": {
+        "title": "市長・市議会・議案を分かりやすく｜延岡市政見える化ポータル",
+        "axNodeCount": 741,
+        "mainCount": 1,
+        "navNames": [
+          "よく使われるページへのショートカット",
+          "サイトの信頼性に関する情報",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "延岡市政を、調べる・探す・比較する"
+          },
+          {
+            "level": 2,
+            "name": "目的から探す"
+          },
+          {
+            "level": 3,
+            "name": "人物を調べる"
+          },
+          {
+            "level": 3,
+            "name": "市議会を調べる"
+          },
+          {
+            "level": 3,
+            "name": "市政を調べる"
+          },
+          {
+            "level": 3,
+            "name": "データを見る"
+          },
+          {
+            "level": 3,
+            "name": "サイト内を検索する"
+          },
+          {
+            "level": 2,
+            "name": "市政データ概要"
+          },
+          {
+            "level": 2,
+            "name": "最近の更新"
+          },
+          {
+            "level": 2,
+            "name": "データ整備状況"
+          },
+          {
+            "level": 2,
+            "name": "議員を探す"
+          },
+          {
+            "level": 2,
+            "name": "サイト利用状況"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 79,
+        "buttonCount": 1,
+        "formControlCount": 1,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 7,
+        "ariaCurrent": [
+          "a[page]「議員一覧」",
+          "a[page]「議員一覧」"
+        ],
+        "externalLinkCount": 26,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 46,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/dashboard/",
+      "label": "ダッシュボード",
+      "url": "http://localhost:4194/dashboard/",
+      "issues": [],
+      "info": {
+        "title": "市政データダッシュボード｜延岡市政見える化ポータル",
+        "axNodeCount": 1532,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "ダッシュボード"
+          },
+          {
+            "level": 2,
+            "name": "市長"
+          },
+          {
+            "level": 2,
+            "name": "会期・委員会"
+          },
+          {
+            "level": 3,
+            "name": "次回・開催予定の会期"
+          },
+          {
+            "level": 2,
+            "name": "最近の動き"
+          },
+          {
+            "level": 2,
+            "name": "延岡市の基礎データ（人口・財政）"
+          },
+          {
+            "level": 2,
+            "name": "会派別人数"
+          },
+          {
+            "level": 2,
+            "name": "男女別人数"
+          },
+          {
+            "level": 2,
+            "name": "年齢構成"
+          },
+          {
+            "level": 2,
+            "name": "当選回数別人数"
+          },
+          {
+            "level": 2,
+            "name": "委員会別所属人数"
+          },
+          {
+            "level": 2,
+            "name": "議員別一般質問確認件数（上位10名・確認済み分）"
+          },
+          {
+            "level": 2,
+            "name": "一般質問 テーマ別件数"
+          },
+          {
+            "level": 2,
+            "name": "一般質問 年度別件数"
+          },
+          {
+            "level": 2,
+            "name": "一般質問 会派別件数"
+          },
+          {
+            "level": 2,
+            "name": "情報入力状況"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 65,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "a[page]「ダッシュボード」",
+          "span[page]「ダッシュボード」",
+          "a[page]「ダッシュボード」"
+        ],
+        "externalLinkCount": 0,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 48,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/finance/",
+      "label": "財政",
+      "url": "http://localhost:4194/finance/",
+      "issues": [],
+      "info": {
+        "title": "延岡市の財政｜延岡市政見える化ポータル",
+        "axNodeCount": 2029,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "延岡市の財政"
+          },
+          {
+            "level": 2,
+            "name": "歳入構成（主要項目）"
+          },
+          {
+            "level": 2,
+            "name": "歳出構成（目的別）"
+          },
+          {
+            "level": 2,
+            "name": "歳出構成（性質別）"
+          },
+          {
+            "level": 2,
+            "name": "6月補正予算の主な内容"
+          },
+          {
+            "level": 2,
+            "name": "財源調整用基金の推移"
+          },
+          {
+            "level": 2,
+            "name": "基金全体の内訳（令和6年度末）"
+          },
+          {
+            "level": 2,
+            "name": "市債について"
+          },
+          {
+            "level": 2,
+            "name": "財政指標（健全化判断比率等）"
+          },
+          {
+            "level": 2,
+            "name": "市民1人当たりの金額（参考値）"
+          },
+          {
+            "level": 2,
+            "name": "延岡市の人口推移"
+          },
+          {
+            "level": 2,
+            "name": "出典一覧"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 67,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [
+          {
+            "tag": "svg",
+            "role": "img",
+            "ariaLabel": "財源調整用基金の年度末残高の推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。",
+            "ariaLabelledby": null,
+            "ariaHidden": false,
+            "nearbyTable": true,
+            "hasAdjacentValues": true,
+            "swallowedTextLength": 0,
+            "className": "h-auto w-full"
+          },
+          {
+            "tag": "svg",
+            "role": "img",
+            "ariaLabel": "市債残高の年度推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。",
+            "ariaLabelledby": null,
+            "ariaHidden": false,
+            "nearbyTable": true,
+            "hasAdjacentValues": true,
+            "swallowedTextLength": 0,
+            "className": "h-auto w-full"
+          },
+          {
+            "tag": "svg",
+            "role": "img",
+            "ariaLabel": "延岡市の人口推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。",
+            "ariaLabelledby": null,
+            "ariaHidden": false,
+            "nearbyTable": true,
+            "hasAdjacentValues": true,
+            "swallowedTextLength": 0,
+            "className": "h-auto w-full"
+          }
+        ],
+        "tableCount": 6,
+        "tables": [
+          {
+            "caption": true,
+            "ariaLabel": "",
+            "thCount": 3,
+            "thWithoutScope": 0,
+            "rowCount": 9,
+            "emptyTh": 0
+          },
+          {
+            "caption": true,
+            "ariaLabel": "",
+            "thCount": 3,
+            "thWithoutScope": 0,
+            "rowCount": 13,
+            "emptyTh": 0
+          },
+          {
+            "caption": true,
+            "ariaLabel": "",
+            "thCount": 3,
+            "thWithoutScope": 0,
+            "rowCount": 10,
+            "emptyTh": 0
+          },
+          {
+            "caption": true,
+            "ariaLabel": "",
+            "thCount": 3,
+            "thWithoutScope": 0,
+            "rowCount": 6,
+            "emptyTh": 0
+          },
+          {
+            "caption": true,
+            "ariaLabel": "",
+            "thCount": 3,
+            "thWithoutScope": 0,
+            "rowCount": 6,
+            "emptyTh": 0
+          },
+          {
+            "caption": true,
+            "ariaLabel": "",
+            "thCount": 3,
+            "thWithoutScope": 0,
+            "rowCount": 8,
+            "emptyTh": 0
+          }
+        ],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "span[page]「延岡市の財政」"
+        ],
+        "externalLinkCount": 11,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 32,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/finance/funds/",
+      "label": "基金",
+      "url": "http://localhost:4194/finance/funds/",
+      "issues": [],
+      "info": {
+        "title": "基金残高の推移（延岡市政アーカイブ）｜延岡市政見える化ポータル",
+        "axNodeCount": 3186,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "基金残高の推移"
+          },
+          {
+            "level": 2,
+            "name": "財源調整用基金の推移"
+          },
+          {
+            "level": 2,
+            "name": "基金総額の年度推移"
+          },
+          {
+            "level": 2,
+            "name": "1989年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2001年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2002年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2003年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2004年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2005年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2006年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2007年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2008年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2009年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2010年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2011年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2012年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2013年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2014年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2015年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2016年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2017年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2018年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2019年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2020年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2021年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2022年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2023年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2024年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "2025年度の定義・出典"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 153,
+        "buttonCount": 5,
+        "formControlCount": 1,
+        "charts": [
+          {
+            "tag": "svg",
+            "role": "img",
+            "ariaLabel": "財源調整用基金の年度末残高の推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。",
+            "ariaLabelledby": null,
+            "ariaHidden": false,
+            "nearbyTable": false,
+            "hasAdjacentValues": true,
+            "swallowedTextLength": 0,
+            "className": "h-auto w-full"
+          },
+          {
+            "tag": "svg",
+            "role": "img",
+            "ariaLabel": "基金総額の年度推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。",
+            "ariaLabelledby": null,
+            "ariaHidden": false,
+            "nearbyTable": false,
+            "hasAdjacentValues": true,
+            "swallowedTextLength": 0,
+            "className": "h-auto w-full"
+          }
+        ],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 1,
+        "ariaCurrent": [
+          "span[page]「基金残高の推移」"
+        ],
+        "externalLinkCount": 59,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [
+          "「詳細を見る →」が 26 種類の行き先"
+        ],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 41,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/bills/",
+      "label": "議案アーカイブ",
+      "url": "http://localhost:4194/bills/",
+      "issues": [],
+      "info": {
+        "title": "議案アーカイブ｜延岡市政見える化ポータル",
+        "axNodeCount": 396,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "議案アーカイブ（詳細調査）"
+          },
+          {
+            "level": 2,
+            "name": "絞り込み"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 45,
+        "buttonCount": 0,
+        "formControlCount": 3,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 3,
+        "ariaCurrent": [
+          "span[page]「議案アーカイブ」"
+        ],
+        "externalLinkCount": 1,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 39,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/bills/bill-auditor-appointment-2026-06/",
+      "label": "議案詳細1（人事）",
+      "url": "http://localhost:4194/bills/bill-auditor-appointment-2026-06/",
+      "issues": [],
+      "info": {
+        "title": "監査委員の選任（後藤博文氏）｜議案｜延岡市政見える化ポータル",
+        "axNodeCount": 312,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "監査委員の選任（後藤博文氏）"
+          },
+          {
+            "level": 2,
+            "name": "概要"
+          },
+          {
+            "level": 2,
+            "name": "議員別賛否"
+          },
+          {
+            "level": 2,
+            "name": "出典・確認状況"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 47,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "span[page]「監査委員の選任（後藤博文氏）」"
+        ],
+        "externalLinkCount": 2,
+        "newWindowWithoutNotice": [
+          "議案審議結果（令和8年6月定例会） → https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/279"
+        ],
+        "newWindowWithoutNoticeCount": 1,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 37,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/bills/bill-bridge-repair-contract-2026-06/",
+      "label": "議案詳細2（契約）",
+      "url": "http://localhost:4194/bills/bill-bridge-repair-contract-2026-06/",
+      "issues": [],
+      "info": {
+        "title": "工事請負変更契約の締結（下赤橋橋梁修繕工事）｜議案｜延岡市政見える化ポータル",
+        "axNodeCount": 315,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "工事請負変更契約の締結（下赤橋橋梁修繕工事）"
+          },
+          {
+            "level": 2,
+            "name": "概要"
+          },
+          {
+            "level": 2,
+            "name": "議員別賛否"
+          },
+          {
+            "level": 2,
+            "name": "出典・確認状況"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 47,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "span[page]「工事請負変更契約の締結（下赤橋橋梁修繕工事）」"
+        ],
+        "externalLinkCount": 2,
+        "newWindowWithoutNotice": [
+          "議案審議結果（令和8年6月定例会） → https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/279"
+        ],
+        "newWindowWithoutNoticeCount": 1,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 37,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/bills/bill-fy2026-general-account-supplementary-budget-2/",
+      "label": "議案詳細3（補正予算）",
+      "url": "http://localhost:4194/bills/bill-fy2026-general-account-supplementary-budget-2/",
+      "issues": [],
+      "info": {
+        "title": "令和8年度延岡市一般会計補正予算（二次分）｜議案｜延岡市政見える化ポータル",
+        "axNodeCount": 330,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "令和8年度延岡市一般会計補正予算（二次分）"
+          },
+          {
+            "level": 2,
+            "name": "概要"
+          },
+          {
+            "level": 2,
+            "name": "議員別賛否"
+          },
+          {
+            "level": 2,
+            "name": "関連情報"
+          },
+          {
+            "level": 2,
+            "name": "出典・確認状況"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 48,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "span[page]「令和8年度延岡市一般会計補正予算（二次分）」"
+        ],
+        "externalLinkCount": 2,
+        "newWindowWithoutNotice": [
+          "議案審議結果（令和8年6月定例会） → https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/279"
+        ],
+        "newWindowWithoutNoticeCount": 1,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 38,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/mayor/",
+      "label": "市長",
+      "url": "http://localhost:4194/mayor/",
+      "issues": [],
+      "info": {
+        "title": "延岡市長 三浦 久知｜延岡市政見える化ポータル",
+        "axNodeCount": 606,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "三浦 久知"
+          },
+          {
+            "level": 2,
+            "name": "経歴"
+          },
+          {
+            "level": 2,
+            "name": "公約の政策分野（4件）"
+          },
+          {
+            "level": 2,
+            "name": "市長提出議案"
+          },
+          {
+            "level": 2,
+            "name": "市長定例記者会見・発表"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 62,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "a[page]「市長ページ」",
+          "span[page]「市長情報」",
+          "a[page]「市長ページ」"
+        ],
+        "externalLinkCount": 6,
+        "newWindowWithoutNotice": [
+          " → https://www.instagram.com/miura.hisatomo/",
+          " → https://x.com/hisatomo_m",
+          " → https://www.facebook.com/miura.hisatomo/"
+        ],
+        "newWindowWithoutNoticeCount": 3,
+        "ambiguousLinkNames": [],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 53,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/mayor/policy-progress/",
+      "label": "市長公約進捗",
+      "url": "http://localhost:4194/mayor/policy-progress/",
+      "issues": [],
+      "info": {
+        "title": "市長公約の進捗状況｜延岡市政見える化ポータル",
+        "axNodeCount": 1859,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "市長公約の進捗状況"
+          },
+          {
+            "level": 2,
+            "name": "公式資料でどこまで追跡できているか（詳細）"
+          },
+          {
+            "level": 2,
+            "name": "全ての子どもたちの可能性を伸ばします"
+          },
+          {
+            "level": 2,
+            "name": "地域経済を活性化させます"
+          },
+          {
+            "level": 2,
+            "name": "シニア世代が輝き、安心して暮らせるまちにします"
+          },
+          {
+            "level": 2,
+            "name": "市役所をもっと前向きな組織にします"
+          },
+          {
+            "level": 2,
+            "name": "参考資料"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 113,
+        "buttonCount": 0,
+        "formControlCount": 7,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 7,
+        "ariaCurrent": [
+          "a[page]「市長ページ」",
+          "span[page]「市長公約の進捗状況」",
+          "a[page]「市長ページ」"
+        ],
+        "externalLinkCount": 39,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [
+          "「詳細を見る」が 14 種類の行き先"
+        ],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 24,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/data-status/",
+      "label": "データ整備状況",
+      "url": "http://localhost:4194/data-status/",
+      "issues": [],
+      "info": {
+        "title": "データ収録状況｜延岡市政見える化ポータル",
+        "axNodeCount": 2334,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "データ収録状況"
+          },
+          {
+            "level": 2,
+            "name": "記号・番号の凡例（調査メモに出てくる内部の符号）"
+          },
+          {
+            "level": 2,
+            "name": "データ完全性ダッシュボード"
+          },
+          {
+            "level": 2,
+            "name": "出典・リンクの健全性（品質監査）"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会（議案・条例・請願・陳情）"
+          },
+          {
+            "level": 2,
+            "name": "一般質問"
+          },
+          {
+            "level": 2,
+            "name": "政策・財政・政治資金"
+          },
+          {
+            "level": 2,
+            "name": "横断機能（検索・比較・年表）"
+          },
+          {
+            "level": 2,
+            "name": "調査継続中の項目（未解決タスクの状況）"
+          },
+          {
+            "level": 2,
+            "name": "広報のべおか・選挙アーカイブの調査状況"
+          },
+          {
+            "level": 2,
+            "name": "類似団体比較・市長公約の調査状況"
+          },
+          {
+            "level": 2,
+            "name": "議員活動バロメーターの収録状況"
+          },
+          {
+            "level": 2,
+            "name": "人物データ収録状況"
+          },
+          {
+            "level": 2,
+            "name": "議会事務局への確認候補（本サイトからの問い合わせは行っていません）"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 74,
+        "buttonCount": 0,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "span[page]「データ収録状況」"
+        ],
+        "externalLinkCount": 0,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [
+          "「詳しく見る →」が 7 種類の行き先"
+        ],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 11,
+        "focusOrderDomBreaks": []
+      }
+    },
+    {
+      "path": "/timeline/",
+      "label": "市政年表",
+      "url": "http://localhost:4194/timeline/",
+      "issues": [],
+      "info": {
+        "title": "延岡市政の年表｜延岡市政見える化ポータル",
+        "axNodeCount": 44457,
+        "mainCount": 1,
+        "navNames": [
+          "パンくずリスト",
+          "人物",
+          "議会",
+          "市政",
+          "市民向け",
+          "画面下部メニュー"
+        ],
+        "headings": [
+          {
+            "level": 1,
+            "name": "延岡市政の年表"
+          },
+          {
+            "level": 2,
+            "name": "カテゴリで絞り込む"
+          },
+          {
+            "level": 2,
+            "name": "2026年度"
+          },
+          {
+            "level": 2,
+            "name": "2025年度"
+          },
+          {
+            "level": 2,
+            "name": "2024年度"
+          },
+          {
+            "level": 2,
+            "name": "2023年度"
+          },
+          {
+            "level": 2,
+            "name": "2022年度"
+          },
+          {
+            "level": 2,
+            "name": "2021年度"
+          },
+          {
+            "level": 2,
+            "name": "2020年度"
+          },
+          {
+            "level": 2,
+            "name": "2019年度"
+          },
+          {
+            "level": 2,
+            "name": "2018年度"
+          },
+          {
+            "level": 2,
+            "name": "2017年度"
+          },
+          {
+            "level": 2,
+            "name": "2016年度"
+          },
+          {
+            "level": 2,
+            "name": "2015年度"
+          },
+          {
+            "level": 2,
+            "name": "2014年度"
+          },
+          {
+            "level": 2,
+            "name": "2013年度"
+          },
+          {
+            "level": 2,
+            "name": "2012年度"
+          },
+          {
+            "level": 2,
+            "name": "2011年度"
+          },
+          {
+            "level": 2,
+            "name": "2010年度"
+          },
+          {
+            "level": 2,
+            "name": "2009年度"
+          },
+          {
+            "level": 2,
+            "name": "2008年度"
+          },
+          {
+            "level": 2,
+            "name": "2007年度"
+          },
+          {
+            "level": 2,
+            "name": "2006年度"
+          },
+          {
+            "level": 2,
+            "name": "2005年度"
+          },
+          {
+            "level": 2,
+            "name": "2004年度"
+          },
+          {
+            "level": 2,
+            "name": "2003年度"
+          },
+          {
+            "level": 2,
+            "name": "2002年度"
+          },
+          {
+            "level": 2,
+            "name": "2001年度"
+          },
+          {
+            "level": 2,
+            "name": "2000年度"
+          },
+          {
+            "level": 2,
+            "name": "1999年度"
+          },
+          {
+            "level": 2,
+            "name": "1998年度"
+          },
+          {
+            "level": 2,
+            "name": "1997年度"
+          },
+          {
+            "level": 2,
+            "name": "1996年度"
+          },
+          {
+            "level": 2,
+            "name": "1995年度"
+          },
+          {
+            "level": 2,
+            "name": "1994年度"
+          },
+          {
+            "level": 2,
+            "name": "1993年度"
+          },
+          {
+            "level": 2,
+            "name": "1992年度"
+          },
+          {
+            "level": 2,
+            "name": "1991年度"
+          },
+          {
+            "level": 2,
+            "name": "1990年度"
+          },
+          {
+            "level": 2,
+            "name": "1989年度"
+          },
+          {
+            "level": 2,
+            "name": "1988年度"
+          },
+          {
+            "level": 2,
+            "name": "1986年度"
+          },
+          {
+            "level": 2,
+            "name": "1982年度"
+          },
+          {
+            "level": 2,
+            "name": "1981年度"
+          },
+          {
+            "level": 2,
+            "name": "1980年度"
+          },
+          {
+            "level": 2,
+            "name": "1979年度"
+          },
+          {
+            "level": 2,
+            "name": "1978年度"
+          },
+          {
+            "level": 2,
+            "name": "1977年度"
+          },
+          {
+            "level": 2,
+            "name": "1976年度"
+          },
+          {
+            "level": 2,
+            "name": "1975年度"
+          },
+          {
+            "level": 2,
+            "name": "1974年度"
+          },
+          {
+            "level": 2,
+            "name": "1973年度"
+          },
+          {
+            "level": 2,
+            "name": "1972年度"
+          },
+          {
+            "level": 2,
+            "name": "1971年度"
+          },
+          {
+            "level": 2,
+            "name": "1970年度"
+          },
+          {
+            "level": 2,
+            "name": "1969年度"
+          },
+          {
+            "level": 2,
+            "name": "1968年度"
+          },
+          {
+            "level": 2,
+            "name": "1967年度"
+          },
+          {
+            "level": 2,
+            "name": "1966年度"
+          },
+          {
+            "level": 2,
+            "name": "1965年度"
+          },
+          {
+            "level": 2,
+            "name": "1964年度"
+          },
+          {
+            "level": 2,
+            "name": "1963年度"
+          },
+          {
+            "level": 2,
+            "name": "1962年度"
+          },
+          {
+            "level": 2,
+            "name": "1961年度"
+          },
+          {
+            "level": 2,
+            "name": "1960年度"
+          },
+          {
+            "level": 2,
+            "name": "1958年度"
+          },
+          {
+            "level": 2,
+            "name": "1957年度"
+          },
+          {
+            "level": 2,
+            "name": "1956年度"
+          },
+          {
+            "level": 2,
+            "name": "1955年度"
+          },
+          {
+            "level": 2,
+            "name": "1954年度"
+          },
+          {
+            "level": 2,
+            "name": "1952年度"
+          },
+          {
+            "level": 2,
+            "name": "1950年度"
+          },
+          {
+            "level": 2,
+            "name": "1949年度"
+          },
+          {
+            "level": 2,
+            "name": "1948年度"
+          },
+          {
+            "level": 2,
+            "name": "1947年度"
+          },
+          {
+            "level": 2,
+            "name": "1946年度"
+          },
+          {
+            "level": 2,
+            "name": "1945年度"
+          },
+          {
+            "level": 2,
+            "name": "1942年度"
+          },
+          {
+            "level": 2,
+            "name": "1941年度"
+          },
+          {
+            "level": 2,
+            "name": "1937年度"
+          },
+          {
+            "level": 2,
+            "name": "1936年度"
+          },
+          {
+            "level": 2,
+            "name": "1933年度"
+          },
+          {
+            "level": 2,
+            "name": "人物"
+          },
+          {
+            "level": 2,
+            "name": "議会"
+          },
+          {
+            "level": 2,
+            "name": "市政"
+          },
+          {
+            "level": 2,
+            "name": "市民向け"
+          }
+        ],
+        "linkCount": 1922,
+        "buttonCount": 6,
+        "formControlCount": 0,
+        "charts": [],
+        "tableCount": 0,
+        "tables": [],
+        "controlCount": 0,
+        "ariaCurrent": [
+          "span[page]「延岡市政の年表」"
+        ],
+        "externalLinkCount": 1185,
+        "newWindowWithoutNotice": [],
+        "newWindowWithoutNoticeCount": 0,
+        "ambiguousLinkNames": [
+          "「財政力指数：0.53」が 2 種類の行き先",
+          "「実質公債費比率：8.1％」が 2 種類の行き先",
+          "「財政力指数：0.50」が 2 種類の行き先",
+          "「市税：約148.5億円」が 2 種類の行き先",
+          "「財政力指数：0.49」が 3 種類の行き先",
+          "「財政力指数：0.48」が 4 種類の行き先",
+          "「経常収支比率：92.2％」が 2 種類の行き先",
+          "「実質公債費比率：9.8％」が 2 種類の行き先",
+          "「財政力指数：0.46」が 3 種類の行き先",
+          "「財政力指数：0.45」が 2 種類の行き先"
+        ],
+        "exposedDecorativeSymbols": [],
+        "exposedDecorativeSymbolCount": 0,
+        "tabStopCount": 40,
+        "focusOrderDomBreaks": []
+      }
+    }
+  ],
+  "summary": {
+    "pagesAudited": 12,
+    "totalIssues": 0,
+    "bySeverity": {},
+    "byCategory": {},
+    "issues": []
+  }
+}
