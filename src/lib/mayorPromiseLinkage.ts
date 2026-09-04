@@ -26,6 +26,10 @@ import type { MayorPromiseItem, PromiseEvidenceStatus } from "../types";
  *   一次資料が断定している場合だけ。原文に「断定はしていない」等のヘッジ表現がある限り、
  *   under_review 側に置く（＝「議案なし」と「確認中」を混同しない）。
  * - reasonCode（内部コード）を画面へそのまま出さない。表示は必ず下記の表示辞書を経由する。
+ * - Phase213：pending のうち「次にどの公式資料を確認すれば進むか」が特定できているものは
+ *   awaitingSource にその資料名を持たせ、画面で「何を待っているか」を示す。
+ *   resolved（確認済みで独立した議案・予算が無い）には awaitingSource を付けない。
+ *   これは表示の粒度を上げるだけで、状態（reasonCode / resolution）は一切変えていない。
  * - 既存の isPromiseBudgetConfirmed / isPromiseBillConfirmed（src/lib/mayorPromiseStatus.ts）は
  *   「予算額／対応する議案そのものを特定できた公約数」という別指標であり、変更していない。
  *   BUDGET_BILL_INCLUDED は「独立議案が無いことの確認」であって「議案を特定できた」ではないため、
@@ -83,6 +87,23 @@ export interface LinkageDisplay {
   /** 詳細ページ用の1文説明（市民向け）。 */
   description: string;
   tone: LinkageTone;
+  /**
+   * Phase213：「何が揃えば次に進むのか」が読み手に分かるように、確認待ちの一次資料名を持たせる。
+   * 値は Phase205（reports/phase205-mayor-promise-linkage.json の nextInvestigationTargets.nextSource）で
+   * すでに特定済みの資料名をそのまま引き継いだものであり、Phase213 で新しく調査した資料ではない。
+   * 「まだ確認できていない（＝資料待ち）」の場合にだけ入れる。
+   * 「確認済みで独立した議案・予算が無い」場合（tone: "resolved"）には決して入れない。
+   */
+  awaitingSource?: string;
+}
+
+/**
+ * Phase213：その状態が「特定の公式資料の入手・確認を待っている」ものかどうか。
+ * 「確認済みで議案・予算なし（resolved）」と読み手が区別できるようにするための判定であり、
+ * 新しい状態を作るものではない（tone と awaitingSource の組み合わせを見ているだけ）。
+ */
+export function isAwaitingSource(display: LinkageDisplay): boolean {
+  return display.tone === "pending" && typeof display.awaitingSource === "string" && display.awaitingSource.length > 0;
 }
 
 export interface MayorPromiseBudgetLinkage {
@@ -129,16 +150,20 @@ const BUDGET_DISPLAY: Record<MayorPromiseBudgetReasonCode, LinkageDisplay> = {
     tone: "confirmed",
   },
   NOT_IN_MAJOR_PROJECT_LIST: {
-    pillLabel: "追加確認中",
+    // Phase213：「追加確認中」だけでは何を待っているのか市民に伝わらないため、
+    // 待っている資料が特定できている状態であることを短い文言でも示す（内部コードは出さない）。
+    pillLabel: "予算資料の確認待ち",
     description:
-      "市長定例記者会見資料の主要事業一覧には、この公約に対応する項目がありませんでした。同資料は規模の大きい事業の抜粋のため、予算が無いという意味ではありません。より詳しい予算資料での確認が必要です。",
+      "市長定例記者会見資料の主要事業一覧には、この公約に対応する項目がありませんでした。同資料は規模の大きい事業の抜粋のため、予算が無いという意味ではありません。事業ごとの予算額まで分かる下記の資料を当サイトではまだ確認できておらず、確認できた時点でこの欄を更新します。",
     tone: "pending",
+    awaitingSource: "令和8年度 延岡市予算に関する説明書（当初予算）",
   },
   WITHIN_EXISTING_OPERATING_COST: {
-    pillLabel: "追加確認中",
+    pillLabel: "予算資料の確認待ち",
     description:
-      "既存の人件費・事務費の枠内で実施されているとみられますが、独立した予算額の記載は確認できていません。",
+      "既存の人件費・事務費の枠内で実施されているとみられますが、独立した予算額の記載は確認できていません。下記の資料の総務費の内訳で確認できる可能性があり、確認できた時点でこの欄を更新します。",
     tone: "pending",
+    awaitingSource: "令和8年度 延岡市予算に関する説明書（総務費）",
   },
   MULTI_YEAR_MULTI_BILL: {
     pillLabel: "関連議案に金額の記載あり",
@@ -297,6 +322,31 @@ export function classifyPromiseBillLinkage(p: MayorPromiseItem): MayorPromiseBil
       : base;
 
   return { reasonCode, resolution, display, billVoteIds, hedged };
+}
+
+/**
+ * Phase213：予算側の状況を、市民向けの区分で集計する。
+ * 「金額まで確認できた」「関連議案に金額の記載がある（整理済み）」「特定の公式資料を待っている」
+ * 「それ以外の確認中」を、必ず別の数として数える（資料待ちを『予算なし』と読ませない）。
+ */
+export function summarizeBudgetLinkage(promises: MayorPromiseItem[]): {
+  confirmedAmount: number;
+  amountInRelatedBills: number;
+  awaitingSource: number;
+  underReview: number;
+} {
+  let confirmedAmount = 0;
+  let amountInRelatedBills = 0;
+  let awaitingSource = 0;
+  let underReview = 0;
+  for (const p of promises) {
+    const linkage = classifyPromiseBudgetLinkage(p);
+    if (linkage.reasonCode === "CONFIRMED_BUDGET_ITEM") confirmedAmount += 1;
+    else if (linkage.resolution === "confirmed") amountInRelatedBills += 1;
+    else if (isAwaitingSource(linkage.display)) awaitingSource += 1;
+    else underReview += 1;
+  }
+  return { confirmedAmount, amountInRelatedBills, awaitingSource, underReview };
 }
 
 /**

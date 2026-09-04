@@ -6,6 +6,7 @@ import { MayorPromiseStatusBadge } from "./MayorPromiseStatusBadge";
 import {
   classifyPromiseBudgetLinkage,
   classifyPromiseBillLinkage,
+  isAwaitingSource,
   linkageToneClass,
   type LinkageDisplay,
 } from "../../lib/mayorPromiseLinkage";
@@ -20,13 +21,31 @@ const linkClass =
  * （例：「予算議案に含まれています」と「追加確認中」を区別する）。内部コードは表示しない。
  */
 function ConclusionPill({ label, display }: { label: string; display: LinkageDisplay }) {
+  // Phase213：バッジ文言自体が対象（予算／議案）を含む場合は、「予算：予算資料の確認待ち」のように
+  // 同じ語が重ならないようにする。読み上げ時も冗長にならない。
+  const text = display.pillLabel.startsWith(label) ? display.pillLabel : `${label}：${display.pillLabel}`;
   return (
     <span
       title={display.description}
       className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${linkageToneClass[display.tone]}`}
     >
-      {label}：{display.pillLabel}
+      {text}
     </span>
+  );
+}
+
+/**
+ * Phase213：「確認中」だけでは何を待っているのか分からないため、確認待ちの公式資料名を明示する。
+ * 「確認済みで独立した議案・予算が無い」状態には awaitingSource を付けていないため、
+ * この行が出るかどうかで「資料待ち」と「確認済み」を読み分けられる。
+ */
+function AwaitingSourceNote({ display }: { display: LinkageDisplay }) {
+  if (!isAwaitingSource(display)) return null;
+  return (
+    <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+      <span className="font-medium text-on-surface">確認待ちの資料：</span>
+      {display.awaitingSource}
+    </p>
   );
 }
 
@@ -106,11 +125,13 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連予算</p>
             <p className="mt-1 text-sm leading-relaxed text-on-surface">{budgetLinkage.display.description}</p>
+            <AwaitingSourceNote display={budgetLinkage.display} />
             <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(promise.relatedBudget)}</p>
           </div>
           <div>
             <p className="text-xs font-medium text-on-surface-variant">関連議案</p>
             <p className="mt-1 text-sm leading-relaxed text-on-surface">{billLinkage.display.description}</p>
+            <AwaitingSourceNote display={billLinkage.display} />
             <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(promise.relatedBill)}</p>
           </div>
         </div>

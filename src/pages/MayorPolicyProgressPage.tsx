@@ -31,7 +31,7 @@ import {
   isPromiseBillConfirmed,
   hasPromiseCompletedMeasure,
 } from "../lib/mayorPromiseStatus";
-import { summarizeBillLinkage } from "../lib/mayorPromiseLinkage";
+import { summarizeBillLinkage, summarizeBudgetLinkage } from "../lib/mayorPromiseLinkage";
 import {
   MAYOR_PROMISE_GLOSSARY,
   MAYOR_PROMISE_LEVELS,
@@ -52,6 +52,12 @@ const isBillConfirmed = isPromiseBillConfirmed;
  * 埋もれてしまうため、市民向けに3区分で併記する。判定は src/lib/mayorPromiseLinkage.ts に集約。
  */
 const billLinkageSummary = summarizeBillLinkage(promises);
+/**
+ * Phase213：予算側の内訳。「予算額まで特定できた」件数だけを出すと、残りが「予算が無い」と
+ * 読まれかねない。実際には多くが「事業ごとの予算額まで分かる公式資料をまだ確認できていない」
+ * 資料待ちであるため、その件数を別に数えて併記する。判定は src/lib/mayorPromiseLinkage.ts に集約。
+ */
+const budgetLinkageSummary = summarizeBudgetLinkage(promises);
 
 function hasCompletedMeasure(promiseId: string): boolean {
   return hasPromiseCompletedMeasure(promiseId, promiseMeasures);
@@ -228,6 +234,9 @@ export function MayorPolicyProgressPage() {
           <strong className="font-semibold text-on-surface">{promises.filter((p) => promiseMeasures.some((m) => m.promiseId === p.id)).length}件すべて</strong>
           で確認できています。その先の「予算額」まで特定できたのは
           <strong className="font-semibold text-on-surface">{promises.filter(isBudgetConfirmed).length}件</strong>
+          （このほか
+          <strong className="font-semibold text-on-surface">{budgetLinkageSummary.awaitingSource}件</strong>
+          は、事業ごとの予算額まで分かる公式資料を当サイトがまだ確認できていない「資料待ち」で、予算が無いという意味ではありません）
           、「対応する議案」まで特定できたのは
           <strong className="font-semibold text-on-surface">{promises.filter(isBillConfirmed).length}件</strong>
           （このほか
@@ -292,6 +301,11 @@ export function MayorPolicyProgressPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {promises.filter(isBudgetConfirmed).length}
               <span className="text-xs font-normal text-on-surface-variant">／{mayorPromiseCounts.promise}件の{MAYOR_PROMISE_LEVELS.promise.label}</span>
+              {/* Phase213：残りを「予算なし」と読ませないため、資料待ちの件数を分けて示す。 */}
+              <p className="mt-1 text-xs font-normal leading-relaxed text-on-surface-variant">
+                関連議案に金額の記載あり：{budgetLinkageSummary.amountInRelatedBills}件／予算資料の確認待ち：
+                {budgetLinkageSummary.awaitingSource}件
+              </p>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">

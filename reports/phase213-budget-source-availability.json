@@ -1,0 +1,95 @@
+{
+  "generatedAt": "2026-09-04",
+  "phase": "Phase213",
+  "purpose": "Phase205が『次に見るべき一次資料』として名指しした「令和8年度 延岡市予算に関する説明書（当初予算）」が、リポジトリ内の既存資産として新たに存在するかを再確認し、重点8公約の状態を更新できるかを判定した記録。新しいWeb調査は行っていない。",
+  "scope": {
+    "focusPromiseIds": [
+      "3-1",
+      "3-2",
+      "3-3",
+      "4-1",
+      "4-2",
+      "4-3",
+      "4-4",
+      "4-5"
+    ],
+    "searchedLocations": [
+      "src/data/",
+      "source-assets/",
+      "public/",
+      "reports/",
+      "data/",
+      "docs/",
+      "backups/",
+      "templates/"
+    ]
+  },
+  "searchLog": [
+    {
+      "method": "ファイル名検索",
+      "query": "*説明書* / *予算* / *budget* / *当初*（node_modules・.git を除く全体）",
+      "hits": [
+        "public/documents/mayor-policy/r8_policy_budget.pdf",
+        "public/documents/mayor-policy/r8_june_supplementary_budget.pdf",
+        "scripts/bundle-size-budget.json（ビルド設定、資料ではない）",
+        "src/pages/CompareBudgetPage.tsx / src/pages/FinanceBudgetPage.tsx（画面、資料ではない）"
+      ],
+      "note": "「予算に関する説明書」に該当するファイルは0件。"
+    },
+    {
+      "method": "本文検索",
+      "query": "「説明書」（src・scripts・reports・data・public・docs・templates・functions の json/ts/tsx/md/mjs/txt）",
+      "hits": [
+        "src/data/mayorPromises.json（次に確認すべき資料として名指ししている記述そのもの、8件）",
+        "scripts/analyze-phase205.mjs・reports/phase205-mayor-promise-linkage.json（同上の派生）",
+        "src/data/councilSpeechSummaries.json（ワクチン接種券の説明書。無関係）"
+      ],
+      "note": "資料本体の登録は0件。「まだ確認できていない」ことを記録した文だけが存在する。"
+    },
+    {
+      "method": "PDF本文抽出（scripts/extract-pdf-text-pdfjs.mjs、リポジトリ内の既存PDFのみ）",
+      "target": "public/documents/mayor-policy/r8_policy_budget.pdf（17ページ）",
+      "documentTitle": "令和８年度 施政方針・予算説明（令和8年2月16日 延岡市長 三浦久知）",
+      "finding": "施政方針の演説本文であり、事業ごとの予算額の一覧は含まない。重点8公約に関係する語（事業承継・避難所運営・健康マイレージ・プロジェクトチーム・総合相談・タウンミーティング・フレックス・佐伯市）は本文中に登場するが、いずれも金額の記載を伴わない。",
+      "resolvesFocusPromises": false
+    },
+    {
+      "method": "PDF本文抽出（同上）",
+      "target": "public/documents/mayor-policy/r8_june_supplementary_budget.pdf（10ページ）",
+      "documentTitle": "令和8年度 6月補正予算の概要（令和8年5月27日 財政課作成）",
+      "finding": "事業名と補正額（単位: 千円）を突き合わせられる粒度はあるが、対象は6月補正の計上事業に限られ、当初予算の事業別内訳ではない。重点8公約に対応する事業名（医療機関・事業承継・シニア・支所・地域おこし協力隊・人事交流等）の記載は0件。",
+      "resolvesFocusPromises": false
+    }
+  ],
+  "conclusion": {
+    "documentPresentInRepository": false,
+    "equivalentDocumentPresent": false,
+    "equivalentCriteria": "公約の個別事業名と予算額を突き合わせられる粒度の、令和8年度当初予算に関する公式資料",
+    "stateChanges": 0,
+    "newlyConfirmed": 0,
+    "note": "一次資料が見つからないため、8公約の予算側は NOT_IN_MAJOR_PROJECT_LIST（＝未確認）のまま据え置いた。新しい状態は作っていない。議案側（NO_SEPARATE_BILL_LIKELY 7件・NOT_INTERPRETED 1件）も据え置き。"
+  },
+  "uiChange": {
+    "summary": "『確認中』としか読めなかった表示を『予算資料の確認待ち』に変え、待っている一次資料名（令和8年度 延岡市予算に関する説明書）を画面に併記した。",
+    "implementedIn": [
+      "src/lib/mayorPromiseLinkage.ts（LinkageDisplay.awaitingSource / isAwaitingSource / summarizeBudgetLinkage を追加。既存の表示辞書と tone をそのまま利用）",
+      "src/components/mayor/PromiseCard.tsx",
+      "src/pages/MayorPromiseDetailPage.tsx",
+      "src/pages/MayorPolicyProgressPage.tsx"
+    ],
+    "guarantee": "awaitingSource は tone: pending にだけ付与し、tone: resolved（確認済みで独立した議案・予算が無い）には付けない。これにより「確認済みで議案・予算なし」と「資料待ち」を読み手が区別できる。内部コードは画面に出していない。"
+  },
+  "counts": {
+    "promises": 14,
+    "policyAreas": 4,
+    "measures": 33,
+    "budgetAwaitingSource": 9,
+    "budgetAwaitingSourceBreakdown": {
+      "令和8年度 延岡市予算に関する説明書（当初予算）": 8,
+      "令和8年度 延岡市予算に関する説明書（総務費）": 1
+    },
+    "budgetConfirmedAmount": 4,
+    "budgetAmountInRelatedBills": 1
+  },
+  "humanActionRequired": "「令和8年度 延岡市予算に関する説明書」の入手は、延岡市の公表状況に依存する外部要因であり、コード変更では解決しない。公表・入手が確認できた時点で、8公約の relatedBudget を一次資料に基づいて更新する。"
+}

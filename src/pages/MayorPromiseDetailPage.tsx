@@ -34,6 +34,7 @@ import { MAYOR_PROMISE_LEVELS } from "../lib/mayorPromiseTerms";
 import {
   classifyPromiseBudgetLinkage,
   classifyPromiseBillLinkage,
+  isAwaitingSource,
   linkageToneClass,
   type LinkageDisplay,
 } from "../lib/mayorPromiseLinkage";
@@ -83,6 +84,16 @@ function LinkageConclusion({ display }: { display: LinkageDisplay }) {
         {display.pillLabel}
       </span>
       <p className="mt-1.5 text-sm leading-relaxed text-on-surface">{display.description}</p>
+      {/* Phase213：待っているだけの状態なのか、確認した結果なのかを読み分けられるように、
+          「何が揃えば進むのか」（確認待ちの公式資料名）をその場に書く。 */}
+      {isAwaitingSource(display) && (
+        <p className="mt-1.5 rounded-lg bg-surface-container-low px-2.5 py-2 text-xs leading-relaxed text-on-surface-variant">
+          <span className="font-medium text-on-surface">確認待ちの資料：</span>
+          {display.awaitingSource}
+          <br />
+          この資料を確認できるまでは「予算が無い」とも「予算がある」とも判断していません。
+        </p>
+      )}
     </>
   );
 }
