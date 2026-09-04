@@ -18,6 +18,56 @@ const PAD_X = 24;
 const PAD_Y = 20;
 
 /**
+ * Phase211：横軸ラベルの間引き幅。
+ *
+ * 【背景】横軸ラベルは1点につき1マスの等幅レイアウトで並べているが、ラベル自体（例「2014年度」）は
+ * それ以上縮まない幅を持つため、点数が多いとラベル列が描画領域からあふれ、右側のラベルが
+ * 画面外へ切れていた。実測（375px幅・/finance/funds の26点グラフ）では26件中13件が切れ、
+ * 「2021〜2025年度の折れ線が2010〜2012年度のラベルの上に見える」という、年度を読み違える
+ * 表示になっていた（グラフ自体は全幅で描かれるため、残ったラベルと点の位置が対応しなくなる）。
+ *
+ * 【方針】ラベルを間引いて表示する。マス自体は全点分そのまま残し、間引いたラベルは
+ * `visibility:hidden`（Tailwindの`invisible`）にするため、点とラベルの位置対応はずれない。
+ * 値そのものはグラフ直下の一覧に全点分を表示しているため、情報は失われない。
+ *
+ * 下記は「その画面幅で無理なく並べられるラベル数の上限」の目安（実測に基づく）。
+ * 画面が広い段は狭い段より必ず多く表示し、狭い段で表示するラベルは広い段でも必ず表示する
+ * （間引き幅を互いの倍数にすることで担保する）。
+ */
+const AXIS_LABEL_CAPACITY = [
+  /** 〜639px（ラベル9px）。 */ { className: "", capacity: 12 },
+  /** 640〜767px（ラベル12px）。 */ { className: "invisible sm:visible", capacity: 17 },
+  /** 768〜1023px。 */ { className: "invisible md:visible", capacity: 21 },
+  /** 1024px〜（本文の最大幅に達する）。 */ { className: "invisible lg:visible", capacity: 30 },
+] as const;
+
+/**
+ * 画面幅の段ごとの間引き幅（何点おきにラベルを表示するか）を求める。
+ * 広い段から順に決め、狭い段の間引き幅は必ず広い段の倍数にする
+ * （狭い段で表示するラベルが広い段で消える、という逆転を防ぐ）。
+ * 最新年度が必ず表示されるよう、末尾（最後の点）を基準に間引く。
+ */
+function axisLabelSteps(total: number): number[] {
+  const steps: number[] = [];
+  let step = 1;
+  for (let i = AXIS_LABEL_CAPACITY.length - 1; i >= 0; i--) {
+    const { capacity } = AXIS_LABEL_CAPACITY[i];
+    while (Math.ceil(total / step) > capacity) step += steps.length === 0 ? 1 : step;
+    steps.unshift(step);
+  }
+  return steps;
+}
+
+/** 各ラベルに与える表示クラス。狭い段で表示されるものは空文字（＝常時表示）。 */
+function axisLabelClassName(index: number, total: number, steps: number[]): string {
+  const fromEnd = total - 1 - index;
+  for (let i = 0; i < steps.length; i++) {
+    if (fromEnd % steps[i] === 0) return AXIS_LABEL_CAPACITY[i].className;
+  }
+  return "invisible";
+}
+
+/**
  * 財政・人口等の年度推移グラフ（自前SVG実装）。
  *
  * 【方針】未確認・未収録の年度（value===null）は0点として描画しない。折れ線は値がある点
@@ -50,6 +100,8 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
   }
   if (current.length > 1) segments.push(current.join(" "));
 
+  const labelSteps = axisLabelSteps(points.length);
+
   return (
     <div>
       <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="h-auto w-full" role="img" aria-label={ariaLabel}>
@@ -78,11 +130,20 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
             />
           ))}
       </svg>
-      <div className="mt-1 flex justify-between gap-1 px-1">
+      {/*
+        横軸ラベル。`minmax(0, 1fr)`の等幅グリッドにすることで、ラベルの文字幅にかかわらず
+        マスの幅が必ず等しくなり、グラフ上の点とラベルの位置が一致する（flexでは幅の広い
+        ラベルのマスだけが広がり、点とラベルがずれていた）。ラベル自身は`w-min`で
+        最小幅にとどめ、マスの中央に置く。
+      */}
+      <div
+        className="mt-1 grid gap-1 px-1"
+        style={{ gridTemplateColumns: `repeat(${points.length}, minmax(0, 1fr))` }}
+      >
         {points.map((p, i) => (
           <span
             key={i}
-            className="flex-1 text-center text-[9px] leading-tight text-on-surface-variant sm:text-xs"
+            className={`w-min justify-self-center text-center text-[9px] leading-tight text-on-surface-variant sm:text-xs ${axisLabelClassName(i, points.length, labelSteps)}`}
           >
             {p.label}
           </span>
