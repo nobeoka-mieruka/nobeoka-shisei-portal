@@ -31,7 +31,11 @@ import {
   isPromiseBillConfirmed,
   hasPromiseCompletedMeasure,
 } from "../lib/mayorPromiseStatus";
-import { summarizeBillLinkage, summarizeBudgetLinkage } from "../lib/mayorPromiseLinkage";
+import {
+  groupPromisesByAwaitingBudgetSource,
+  summarizeBillLinkage,
+  summarizeBudgetLinkage,
+} from "../lib/mayorPromiseLinkage";
 import {
   MAYOR_PROMISE_GLOSSARY,
   MAYOR_PROMISE_LEVELS,
@@ -58,6 +62,13 @@ const billLinkageSummary = summarizeBillLinkage(promises);
  * 資料待ちであるため、その件数を別に数えて併記する。判定は src/lib/mayorPromiseLinkage.ts に集約。
  */
 const budgetLinkageSummary = summarizeBudgetLinkage(promises);
+/**
+ * Phase215：資料待ちは「1本の資料を全員で待っている」状態ではないため、待っている資料ごとの
+ * 内訳も併せて出す。総数（budgetLinkageSummary.awaitingSource）と、その内訳で最も多い資料の
+ * 件数は別の数であり、内訳を並べて示すことで片方だけを総数と読み違えないようにする。
+ * 件数はいずれも src/lib/mayorPromiseLinkage.ts の判定から算出し、固定値は持たない。
+ */
+const awaitingBudgetSourceGroups = groupPromisesByAwaitingBudgetSource(promises);
 
 function hasCompletedMeasure(promiseId: string): boolean {
   return hasPromiseCompletedMeasure(promiseId, promiseMeasures);
@@ -328,6 +339,27 @@ export function MayorPolicyProgressPage() {
             </dd>
           </div>
         </dl>
+        {/* Phase215：「予算資料の確認待ち」の合計と、待っている資料ごとの件数は別の数え方。
+            片方だけを見て総数と読み違えないよう、合計と内訳を同じ場所に並べて示す。
+            件数はすべて src/lib/mayorPromiseLinkage.ts の判定から算出しており、固定値ではない。 */}
+        {awaitingBudgetSourceGroups.length > 0 && (
+          <div className="mt-3 rounded-lg border border-outline-variant p-3">
+            <p className="text-xs leading-relaxed text-on-surface">
+              「予算資料の確認待ち」{budgetLinkageSummary.awaitingSource}件（
+              {MAYOR_PROMISE_LEVELS.promise.label}
+              {mayorPromiseCounts.promise}
+              件のうち）が待っている資料の内訳です。1本の資料をすべてが待っているわけではないため、資料ごとの件数と合計は別の数です（資料ごとの件数を足すと
+              {budgetLinkageSummary.awaitingSource}件になります）。
+            </p>
+            <ul className="mt-2 space-y-1 text-xs leading-relaxed text-on-surface-variant">
+              {awaitingBudgetSourceGroups.map((group) => (
+                <li key={group.source}>
+                  {group.source}：{group.promiseIds.length}件
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </SectionCard>
 
       <div className="space-y-3 rounded-xl bg-surface-container-low p-4 sm:p-5">

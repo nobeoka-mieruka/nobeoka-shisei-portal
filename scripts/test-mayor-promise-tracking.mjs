@@ -30,6 +30,7 @@ const readJson = (relPath) => JSON.parse(readFileSync(join(ROOT, relPath), "utf8
 const {
   classifyPromiseBudgetLinkage,
   classifyPromiseBillLinkage,
+  groupPromisesByAwaitingBudgetSource,
   isAwaitingSource,
   summarizeBillLinkage,
   summarizeBudgetLinkage,
@@ -352,8 +353,12 @@ console.log("\nPhase213：資料待ちの明示");
 
 /**
  * Phase205（reports/phase205-mayor-promise-linkage.json の nextInvestigationTargets）で
- * 「令和8年度 延岡市予算に関する説明書」を次に見るべき資料として名指しされた重点公約。
+ * 「令和8年度 延岡市予算に関する説明書（当初予算）」を次に見るべき資料として名指しされた重点公約。
  * Phase213時点で同資料はリポジトリ内に存在せず（既存資産の横断検索で0件）、状態は据え置き。
+ *
+ * Phase215注記：これは「予算資料の確認待ち」の**総数ではない**。資料待ちの個別公約は9件あり、
+ * うち8件がこの資料（当初予算）を、残る1件（1-3）が同説明書の総務費の内訳を待っている。
+ * 総数と資料別の内訳は下の Phase215 のチェックで別々に検証する。
  */
 const PHASE213_AWAITING_PROMISE_IDS = ["3-1", "3-2", "3-3", "4-1", "4-2", "4-3", "4-4", "4-5"];
 
@@ -415,6 +420,70 @@ check("確認待ち資料名に内部コードが混ざっていない", () => {
       const label = linkage.display.awaitingSource ?? "";
       assert.ok(!/[A-Z_]{6,}/.test(label), `${p.id}の確認待ち資料名に内部コードらしき文字列があります: ${label}`);
     }
+  }
+});
+
+console.log("\nPhase215：資料待ち件数の定義整合（総数と資料別の内訳を混同しない）");
+
+check("「予算資料の確認待ち」の総数と、待っている資料ごとの内訳の合計が一致する", () => {
+  const summary = summarizeBudgetLinkage(promises);
+  const groups = groupPromisesByAwaitingBudgetSource(promises);
+  const total = groups.reduce((sum, g) => sum + g.promiseIds.length, 0);
+  assert.equal(
+    total,
+    summary.awaitingSource,
+    `資料別の内訳の合計（${total}件）が、資料待ちの総数（${summary.awaitingSource}件）と一致しません`,
+  );
+  assert.equal(
+    new Set(groups.flatMap((g) => g.promiseIds)).size,
+    total,
+    "同じ個別公約が複数の資料グループに重複して数えられています",
+  );
+  console.log(`    ${groups.map((g) => `${g.source}：${g.promiseIds.length}件`).join("／")}（合計${total}件）`);
+});
+
+check("重点公約8件は「資料待ち9件」の部分集合であり、9件目は別の資料を待っている", () => {
+  const groups = groupPromisesByAwaitingBudgetSource(promises);
+  assert.equal(groups.length, 2, `確認待ちの資料の種類数が想定（2種類）と異なります：${groups.length}`);
+  const [largest, rest] = groups;
+  assert.deepEqual(
+    [...largest.promiseIds].sort(),
+    [...PHASE213_AWAITING_PROMISE_IDS].sort(),
+    "重点公約（当初予算の説明書を待っている公約）の顔ぶれがPhase205 baselineと一致しません",
+  );
+  assert.ok(
+    largest.source.includes("当初予算"),
+    `重点公約が待っている資料名が「当初予算」を指していません：${largest.source}`,
+  );
+  assert.equal(largest.promiseIds.length, 8, "重点公約の件数が8件ではありません");
+  assert.deepEqual(rest.promiseIds, ["1-3"], "9件目の資料待ち公約が1-3ではありません");
+  assert.ok(
+    rest.source.includes("総務費"),
+    `9件目が待っている資料名が「総務費」を指していません：${rest.source}`,
+  );
+  assert.notEqual(
+    largest.promiseIds.length,
+    summarizeBudgetLinkage(promises).awaitingSource,
+    "重点公約数と資料待ち総数が同じ数になっています（どちらかの母集団の定義が壊れています）",
+  );
+});
+
+check("「確認待ちの資料」行が出る公約の数が、集計値（予算資料の確認待ち）と一致する", () => {
+  // 一覧カード（PromiseCard）・詳細ページ（MayorPromiseDetailPage）は isAwaitingSource が真の
+  // 公約にだけ「確認待ちの資料」を表示する。その公約数と /mayor/policy-progress の集計値がずれると、
+  // 「9件と書いてあるのに、資料名が出ているのは別の件数」というページ間の矛盾になる。
+  const shownOnCards = promises.filter((p) => isAwaitingSource(classifyPromiseBudgetLinkage(p).display));
+  assert.equal(
+    shownOnCards.length,
+    summarizeBudgetLinkage(promises).awaitingSource,
+    "個別ページで資料待ちと表示される公約数と、集計ページの件数が一致しません",
+  );
+  for (const p of shownOnCards) {
+    const { display } = classifyPromiseBudgetLinkage(p);
+    const groups = groupPromisesByAwaitingBudgetSource(promises);
+    const group = groups.find((g) => g.source === display.awaitingSource);
+    assert.ok(group, `公約${p.id}が表示する資料名「${display.awaitingSource}」が内訳に存在しません`);
+    assert.ok(group.promiseIds.includes(p.id), `公約${p.id}が資料別の内訳に含まれていません`);
   }
 });
 

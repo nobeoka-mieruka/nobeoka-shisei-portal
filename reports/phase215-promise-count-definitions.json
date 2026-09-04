@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-09-04",
+  "phase": "Phase215",
+  "purpose": "Phase213 の記録に併記された「重点8公約」と「予算資料の確認待ち9件」が、異なる母集団なのか・集計ロジックの差なのか・表示ミスなのかを、コードと実データから確定した記録。新しいWeb調査は行っていない。",
+  "question": "8 と 9 の関係は何か",
+  "conclusion": {
+    "relationship": "SUBSET",
+    "summary": "8 は 9 の部分集合。異なる母集団を同じ「件」という単位で併記していたため混同しやすかっただけで、集計ロジックの差でも表示ミスでもない。",
+    "definitions": {
+      "予算資料の確認待ち（個別公約）": {
+        "count": 9,
+        "definition": "予算側の状態が tone: pending かつ確認待ちの一次資料名（awaitingSource）を特定できている個別公約の数。src/lib/mayorPromiseLinkage.ts の summarizeBudgetLinkage().awaitingSource。"
+      },
+      "重点公約": {
+        "count": 8,
+        "definition": "上記のうち、待っている資料が「令和8年度 延岡市予算に関する説明書（当初予算）」である個別公約の数（reasonCode: NOT_IN_MAJOR_PROJECT_LIST）。Phase205 が「1資料で同時に解決しうる」と位置づけた調査優先群であり、資料待ちの総数ではない。"
+      }
+    },
+    "difference": {
+      "promiseId": "1-3",
+      "reasonCode": "WITHIN_EXISTING_OPERATING_COST",
+      "awaitingSource": "令和8年度 延岡市予算に関する説明書（総務費）",
+      "why": "9件目の 1-3 は「こども未来部設置準備室」で、relatedBudget 本文が『既存の人件費・事務費の枠内』と記録している。Phase205 が次に見るべき資料として同説明書の「総務費」の内訳を名指ししているため、待っている資料が重点公約8件（当初予算）とは別区分になる。"
+    },
+    "evidence": [
+      "src/data/mayorPromises.json の relatedBudget 本文（3-1・3-2・3-3・4-1〜4-5 は『主要事業一覧…記載は無かった』、1-3 は『既存の人件費・事務費の枠内』）",
+      "src/lib/mayorPromiseLinkage.ts の classifyPromiseBudgetLinkage（判定規則）と BUDGET_DISPLAY（awaitingSource の資料名）",
+      "reports/phase205-mayor-promise-linkage.json の nextInvestigationTargets（rank1 が8件・rank2 が 1-3）",
+      "reports/phase213-budget-source-availability.json の counts.budgetAwaitingSourceBreakdown（8 / 1）"
+    ]
+  },
+  "countsFromData": {
+    "promises": 14,
+    "budgetConfirmedAmount": 4,
+    "budgetAmountInRelatedBills": 1,
+    "budgetAwaitingSource": 9,
+    "budgetOtherUnderReview": 0,
+    "awaitingSourceBreakdown": [
+      {
+        "source": "令和8年度 延岡市予算に関する説明書（当初予算）",
+        "count": 8,
+        "promiseIds": [
+          "3-1",
+          "3-2",
+          "3-3",
+          "4-1",
+          "4-2",
+          "4-3",
+          "4-4",
+          "4-5"
+        ]
+      },
+      {
+        "source": "令和8年度 延岡市予算に関する説明書（総務費）",
+        "count": 1,
+        "promiseIds": [
+          "1-3"
+        ]
+      }
+    ]
+  },
+  "changes": {
+    "stateChanges": 0,
+    "dataChanges": 0,
+    "code": [
+      "src/lib/mayorPromiseLinkage.ts：groupPromisesByAwaitingBudgetSource を追加（資料別の内訳をデータから算出。判定規則・状態は変更していない）",
+      "src/pages/MayorPolicyProgressPage.tsx：資料待ちの総数に加えて、待っている資料ごとの件数を画面に表示（8と9が別の数であることが読み取れるようにした）",
+      "scripts/test-mayor-promise-tracking.mjs：総数と内訳の一致・8が9の部分集合であること・個別ページで資料待ち表示になる公約数と集計値の一致を検証（3件追加）",
+      "scripts/test-count-consistency.mjs：資料名と件数のページ直書き、内部の呼び名『重点◯公約』の混入を検知（3件追加）"
+    ],
+    "documents": [
+      "PROJECT_PLAN.md：『市長公約8件の予算確認』を『予算資料の確認待ち＝個別公約9件（内訳8＋1）』へ改め、8が部分集合であることを明記",
+      "TASKS.md：TASK-185 の『重点8公約』節に Phase215 追記"
+    ]
+  },
+  "notChanged": [
+    "政策分野4 / 個別公約14 / 個別施策33",
+    "各公約の reasonCode・resolution・進捗状況・出典・relatedBillVoteIds",
+    "RELEASE_SNAPSHOT.md / reports/release-snapshot.json",
+    "reports/phase213-budget-source-availability.json（Phase213時点の記録として保持。内訳8／1の記載は実データと一致している）",
+    "HUMAN_ACTION_REQUIRED 項目のステータス"
+  ],
+  "humanActionRequired": "「令和8年度 延岡市予算に関する説明書」の入手は延岡市の公表状況に依存する外部要因であり、コード変更では解決しない（Phase213 から変更なし）。"
+}

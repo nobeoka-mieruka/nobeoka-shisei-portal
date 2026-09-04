@@ -372,3 +372,48 @@ export function summarizeBillLinkage(promises: MayorPromiseItem[]): {
   }
   return { confirmedBill, noSeparateBillConfirmed, underReview, sourceNotFound };
 }
+
+/**
+ * Phase215：「資料待ち」の数え方を、資料別の内訳としても取り出せるようにする。
+ *
+ * ■ なぜ必要か
+ * Phase213 の記録には「重点8公約」と「資料待ち9件」が併記されており、同じ「件」という単位のまま
+ * 母集団が違う2つの数が並んでいた。実データで確認すると次のとおりで、どちらも正しい。
+ *   - 9 ＝ 予算側が資料待ちの個別公約数（summarizeBudgetLinkage().awaitingSource）。
+ *   - 8 ＝ そのうち「令和8年度 延岡市予算に関する説明書（当初予算）」を待っている公約数
+ *         （reasonCode: NOT_IN_MAJOR_PROJECT_LIST）。
+ *   - 残る1件は個別公約 1-3 で、同説明書の「総務費」の内訳を待っている
+ *         （reasonCode: WITHIN_EXISTING_OPERATING_COST）。
+ * つまり 8 は 9 の部分集合であり、集計ロジックの差でも表示ミスでもない。
+ * ただし「8件」を単独で書くと資料待ちの総数と読み違えられるため、
+ * 総数（9）と資料別の内訳（8／1）は必ずこの関数から同時に算出し、画面にも内訳を出す。
+ *
+ * 判定は classifyPromiseBudgetLinkage / isAwaitingSource をそのまま使う。
+ * 新しい状態も新しい件数の固定値も作っていない。
+ */
+export interface AwaitingBudgetSourceGroup {
+  /** 確認待ちの公式資料名（LinkageDisplay.awaitingSource と同一の文字列）。 */
+  source: string;
+  /** その資料を待っている個別公約のID。件数はこの配列の長さ。 */
+  promiseIds: string[];
+}
+
+/**
+ * 予算側が「特定の公式資料の確認待ち」である個別公約を、待っている資料ごとにまとめる。
+ * 件数の多い資料を先に返す（同数のときは資料名順）。
+ * 返り値の promiseIds の合計は summarizeBudgetLinkage().awaitingSource と必ず一致する
+ * （検証：scripts/test-mayor-promise-tracking.mjs）。
+ */
+export function groupPromisesByAwaitingBudgetSource(promises: MayorPromiseItem[]): AwaitingBudgetSourceGroup[] {
+  const bySource = new Map<string, string[]>();
+  for (const p of promises) {
+    const { display } = classifyPromiseBudgetLinkage(p);
+    if (!isAwaitingSource(display) || !display.awaitingSource) continue;
+    const ids = bySource.get(display.awaitingSource);
+    if (ids) ids.push(p.id);
+    else bySource.set(display.awaitingSource, [p.id]);
+  }
+  return [...bySource.entries()]
+    .map(([source, promiseIds]) => ({ source, promiseIds }))
+    .sort((a, b) => b.promiseIds.length - a.promiseIds.length || a.source.localeCompare(b.source, "ja"));
+}
