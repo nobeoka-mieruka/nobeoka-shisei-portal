@@ -1,5 +1,10 @@
 # 延岡市政見える化ポータル 実行タスク
 
+最終更新日：2026-09-05（Phase222でTASK-186「「リンク切れ」「出典不足」の件数定義の是正」を
+完了記録として追加した。データ収録状況ページで意味の異なる件数が同じ見出しにまとめられていた2点
+〔公開画面のリンク切れ／内部データに残る到達不能な参照URL、出典タイトル欠落／延岡市以外の公的機関
+ドメインの使用〕を、データを推測で補わずに表示定義の側で分離した。以下は前回更新時の記録。）
+
 最終更新日：2026-08-17（TASK-100でNDLサーチ手動ログイン後の自動調査・資料収集の設計書
 〔docs/ndl-search-research-plan.md〕を新規作成し、TASK-101〜105として実調査タスクを
 分割登録した。claude-in-chrome未接続〔list_connected_browsers=0件〕のため、いずれも
@@ -8,6 +13,7 @@
 
 現在のTASK集計（本ファイルの`状態：`行を機械集計、2026-08-17時点）：
 DONE 106／BLOCKED 12／READY 0／IN_PROGRESS 0（残差は分割管理のみの親タスク等、集計対象外）
+（2026-09-05時点：DONE 107。TASK-186を追加。BLOCKED・READY・IN_PROGRESSの件数に変更なし）
 ／`### TASK-`見出し総数121
 
 READY・IN_PROGRESSともに0件。BLOCKED 12件のうち7件は一次資料の不存在・未公表・環境制約が
@@ -10310,3 +10316,98 @@ Phase205 が「令和8年度 延岡市予算に関する説明書（当初予算
   （市民向け表現としては不適切だが、調査経緯の記録でもあるため今回は書き換えていない）。
   (3) `NO_SEPARATE_BILL_LIKELY` 7件を確認済みへ格上げするには、要綱制定・人事措置に議案が
   不要であることを断定できる一次資料（延岡市の事務決裁規程等）が必要。
+
+---
+
+### TASK-186 「リンク切れ」「出典不足」の件数定義の是正（Phase222）
+
+状態：DONE（2026-09-05）
+優先度：A（ユーザー指示）
+対象：`scripts/check-broken-link-exposure.mjs`（新規）、`scripts/validate-sources.mjs`、
+`scripts/generate-quality-summary.mjs`、`src/pages/DataStatusPage.tsx`、`package.json`、
+`src/data/dataQualitySummary.json`（生成物）、`reports/broken-link-exposure.json`（生成物）、
+`src/data/politicalFundOrganizations.json`（pf-org-001の再確認記録のみ）
+
+#### 背景
+
+`/data-status`「出典・リンクの健全性」に、意味の異なるものを1つの数字にまとめた表示が2箇所あった。
+
+1. **「リンク切れ（現行サイトで使用中のデータのみ）1件」**
+   実体は「内部データに残している到達不能な参照URL」1件（`archiveMayorTerms.json` の
+   Wikipedia「仲田又次郎」、404）。Phase209 で公開画面では既に非リンク化しており、
+   市民がクリックして404に飛ぶリンクは0件だった。しかし表示は両者を区別しておらず、
+   公開画面に押せるリンク切れが1件あるかのように読めた。出典レコード自体は
+   「いつ・何を根拠にしたか」の記録なので削除しない（0にはしない）。
+2. **「出典不足（出典タイトル欠落等）23件」**
+   実体は23件すべてが「延岡市・宮崎県・国の公式ドメイン一覧の外にある公的機関（国立国会図書館）の
+   資料を一次資料として使用している」という通知で、**タイトル欠落は0件**だった。
+
+#### 調査結果（B：出典メタデータ不足23件の実体）
+
+`validate:sources` の warning 23件の内訳（分類コードを新設して再集計）：
+
+| 分類 | 件数 |
+| --- | ---: |
+| `MISSING_TITLE`（出典タイトルが空） | 0 |
+| `NON_NOBEOKA_PUBLIC_DOMAIN`（延岡市以外の公的機関ドメインを一次資料として使用） | 23 |
+| `MISSING_SOURCE` / `MISSING_OFFICIAL_LIST_URL` / `UNPARSEABLE_WAYBACK_URL` / `VALIDATION_ERROR` | 各0 |
+
+23件の内訳は `civicTimelineEvents.json` 15件（`dl.ndl.go.jp` 14件・`ndlsearch.ndl.go.jp` 1件）と
+`councilSessions.json` 8件（`ndlsearch.ndl.go.jp`、宮崎県立図書館所蔵の会議録原本の書誌情報）。
+23件とも資料名・編者・発行者・発行年・該当コマ番号（または請求記号）が登録済みで、
+補完すべきメタデータは無い。対象URLの到達性も `curl` で確認し、いずれも HTTP 200（`SOURCE_UNAVAILABLE` 0件）。
+**出典タイトルの推測生成は一切行っていない**（生成の必要が無かった）。
+
+#### 実装
+
+- `scripts/check-broken-link-exposure.mjs`（新規、`npm run check:broken-link-exposure`）
+  プリレンダリング済みの `dist/` を走査し、`dataQualitySummary.json` の `linkHealth.broken` にある
+  URLが `<a href>` として公開画面に出ていないかを実測する。1件でもあれば終了コード1でビルドを止める。
+  結果は `reports/broken-link-exposure.json` へ書き出す（新しい到達性判定は行わない。既存の
+  外部リンク監査キャッシュの結果だけを使う）。`build` の `check:internal-links` 直後に実行する。
+- `scripts/validate-sources.mjs`：warning に分類コードを付け、`--json` で
+  `warningsByCode` を含む機械可読な集計を出力できるようにした。**検証ロジックそのものは変更していない**
+  （errors=0 / warnings=23 / info=71 は Phase218 と同一）。
+- `scripts/generate-quality-summary.mjs`：`--json` から `warningsByCode` を取り込み、
+  `reports/broken-link-exposure.json` を `publicExposure` として集計へ加えた。
+- `src/pages/DataStatusPage.tsx`：4つの指標を別々に表示する。
+  「公開画面のリンク切れ（市民がクリックできるもの）0件（公開ページ2,274件を実際に走査）」／
+  「内部データに残る到達できない参照URL 1件／1,228件中（記録として保持）」／
+  「出典のタイトルが未登録 0件」／「件数不整合 0件」。
+  加えて両者の違いの説明文と、出典検証23件の内訳（内部コードは画面に出さない）を追加した。
+
+#### 政治資金（C）
+
+確認中の1団体は `pf-org-001`「みうら久知後援会」。宮崎県選挙管理委員会の
+「政治資金収支報告書の公表等」および「政治資金収支報告書の公表」ページを 2026-09-05 に直接確認し、
+定期公表分の最新は引き続き令和6年分（令和7年11月28日公表）で**令和7年分は未公表**、
+令和8年4月2日・6月4日・8月3日の解散団体分・追加公表分の掲載団体名にも当団体は無いことを確認した。
+`verifiedAt` と経緯（notes）のみ更新し、団体区分・代表者・会計責任者・提出先は「確認中」を維持した。
+当該収支報告書は画像形式PDFでの公表が通例で、本セッションでは画像の目視確認ができないため、
+公表後もテキストで確認できない項目は推測で補わない方針を notes に明記した。
+
+#### 受入条件
+
+- 公開画面でクリック可能なリンク切れが0件であることを、主張ではなくビルド時の実測で保証する
+- 出典タイトルを推測生成しない／Wikipediaを別ページへ差し替えない
+- 画像PDFのOCR結果だけで政治資金を確定しない
+- `validate:data` errors=0・warnings=21（既存基準）、新規 warning 0
+
+#### 検証結果
+
+`validate:data` errors=0 / warnings=21（既存基準と一致）／`typecheck` clean／
+`lint` 既存4 warnings のみ（新規0）／`npm test` 23スイート全通過（failures 0）／
+`build` 成功（`validate:seo` failures=0、`validate:content` errors=0、`check-bundle-size` エラー0・警告0、
+`check-internal-links` リンク切れ0件／2,270ページ、`check-broken-link-exposure` 公開画面の
+クリック可能なリンク切れ0件／2,274ページ）。
+
+完了記録：
+- 完了日：2026-09-05
+- 変更概要：件数の**定義と表示**の是正のみ。`src/data` 配下の手入力データの値は
+  `politicalFundOrganizations.json` の `verifiedAt`・`notes`（再確認の記録）以外に変更していない。
+  `RELEASE_SNAPSHOT.md` / `reports/release-snapshot.json` は変更していない（統合時に更新）。
+  HUMAN_ACTION_REQUIRED 項目のステータスも変更していない。
+- 残課題：(1) `archiveMayorTerms.json` の Wikipedia「仲田又次郎」404 は、日単位の就任日を裏づける
+  代替一次資料が見つかるまで内部データ上の参照として残る（公開画面には露出しない）。
+  (2) `pf-org-001` は令和8年11月頃と見込まれる令和7年分の定期公表待ち。公表後も画像PDFのため、
+  人による目視確認が必要になる可能性が高い。

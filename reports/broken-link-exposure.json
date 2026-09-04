@@ -1,0 +1,8 @@
+{
+  "generatedAt": "2026-09-04T23:08:34.372Z",
+  "checkedPages": 2274,
+  "knownBrokenUrls": 1,
+  "clickableBrokenLinks": 0,
+  "exposures": [],
+  "note": "dist/（プリレンダリング済みの公開HTML）に対する実測。knownBrokenUrls＝外部リンク監査で到達不能と確認済みのURL数（内部データ上の参照。出典記録として保持する）。clickableBrokenLinks＝そのうち市民がクリックできる<a href>として公開画面に出ている件数（0でなければビルドを失敗させる）。"
+}

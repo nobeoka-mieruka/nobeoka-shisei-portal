@@ -1,10 +1,18 @@
 {
-  "generatedAt": "2026-09-03T01:47:06.460Z",
+  "generatedAt": "2026-09-04T23:06:11.659Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
     "info": 71,
-    "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは出典タイトル欠落等の改善余地、infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
+    "warningsByCode": {
+      "MISSING_TITLE": 0,
+      "NON_NOBEOKA_PUBLIC_DOMAIN": 23,
+      "MISSING_SOURCE": 0,
+      "MISSING_OFFICIAL_LIST_URL": 0,
+      "UNPARSEABLE_WAYBACK_URL": 0,
+      "VALIDATION_ERROR": 0
+    },
+    "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは分類コードごとの内訳（warningsByCode）で意味が異なる。MISSING_TITLEだけが「出典タイトルの欠落」で、NON_NOBEOKA_PUBLIC_DOMAINは国立国会図書館など延岡市以外の公的機関の資料を一次資料として使っている件数（出典情報は揃っており、欠落ではない）。infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
   },
   "linkHealth": {
     "generatedAt": "2026-08-25T01:30:40.927Z",
@@ -26,6 +34,12 @@
     ],
     "excludedBackupOnlyReferences": 148,
     "note": "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち後継資料への移行を一次資料で確認済みの2件（councilWatchedDocuments.json、Phase135-Rで確認、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
+  },
+  "publicExposure": {
+    "generatedAt": "2026-09-04T23:03:35.070Z",
+    "checkedPages": 2274,
+    "clickableBrokenLinks": 0,
+    "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"
   },
   "countConsistencyChecks": [
     {

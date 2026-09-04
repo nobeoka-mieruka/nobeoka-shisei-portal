@@ -29,6 +29,7 @@ import { BILL_EXPLAINABILITY_CITIZEN_LABEL } from "../lib/billExplainability";
 import { SOURCE_RETRIEVAL_CATEGORY_LABEL } from "../lib/billSourceRetrieval";
 import { TRUST_LEVEL_LABEL } from "../lib/councilGlossary";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { BROKEN_SOURCE_LINK_LABEL } from "../lib/brokenSourceLinks";
 import { formatJapaneseDateIfIso } from "../config/site";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
@@ -149,7 +150,24 @@ const linkClass =
 // validate:sources／reports/external-link-check.jsonから再集計、新しい検証ロジックの追加なし）。
 interface DataQualitySummary {
   generatedAt: string;
-  sourceHealth: { errors: number | null; warnings: number | null; info: number | null; note: string };
+  sourceHealth: {
+    errors: number | null;
+    warnings: number | null;
+    info: number | null;
+    /**
+     * Phase222：warningの分類ごとの件数。合計値だけでは「何が足りないのか」が分からず、
+     * 従来は全件を「出典タイトル欠落等」と表示していたが、実際にはタイトル欠落は0件で、
+     * 全件が「国立国会図書館など延岡市以外の公的機関の資料を一次資料として使っている」
+     * という別の意味の通知だった。code別に表示して意味の取り違えを防ぐ。
+     */
+    warningsByCode?: Record<string, number>;
+    note: string;
+  };
+  /**
+   * 内部データ（src/data配下の出典レコード）が参照しているURLの到達性。
+   * brokenは「内部データに残っている到達できない参照URL」であり、
+   * 「市民が公開画面でクリックできるリンク切れ」ではない（後者はpublicExposure）。
+   */
   linkHealth: {
     generatedAt: string;
     totalChecked: number;
@@ -161,9 +179,33 @@ interface DataQualitySummary {
     excludedBackupOnlyReferences: number;
     note: string;
   } | null;
+  /**
+   * Phase222：プリレンダリング済みの公開HTMLを実際に走査し、到達できないURLが
+   * クリックできるリンクとして市民に提示されていないかを実測した結果
+   * （scripts/check-broken-link-exposure.mjs、0件でなければビルドが失敗する）。
+   */
+  publicExposure: {
+    generatedAt: string;
+    checkedPages: number;
+    clickableBrokenLinks: number;
+    note: string;
+  } | null;
   countConsistencyChecks: { label: string; status: string; note: string }[];
 }
 const dataQualitySummary = dataQualitySummaryData as DataQualitySummary;
+
+/**
+ * Phase222：出典検証warningの分類コードを市民向けの日本語に言い換える。
+ * 内部コード（MISSING_TITLE等）は画面に出さず、「何件が何の状態か」だけを伝える。
+ */
+const SOURCE_WARNING_CODE_LABEL: Record<string, string> = {
+  MISSING_TITLE: "出典のタイトルが未登録",
+  NON_NOBEOKA_PUBLIC_DOMAIN: "延岡市以外の公的機関（国立国会図書館など）の資料を一次資料として使用",
+  MISSING_SOURCE: "出典そのものが未登録",
+  MISSING_OFFICIAL_LIST_URL: "政治団体の公表一覧URLが未登録",
+  UNPARSEABLE_WAYBACK_URL: "保存版URLから元の資料URLを判別できない",
+  VALIDATION_ERROR: "検証処理が失敗した",
+};
 
 interface DataDomain {
   label: string;
@@ -483,6 +525,10 @@ export function DataStatusPage() {
   const countConsistencyUnresolved = dataQualitySummary.countConsistencyChecks.filter(
     (c) => !c.status.startsWith("fixed"),
   ).length;
+  // Phase222：出典検証の指摘を分類ごとに並べる（0件の分類は表示しない。件数が多い順）。
+  const sourceWarningBreakdown = Object.entries(dataQualitySummary.sourceHealth.warningsByCode ?? {})
+    .filter(([, count]) => count > 0)
+    .sort((a, b) => b[1] - a[1]);
   // Phase183：過去の委員構成データ（Phase174・180で2003〜2022年の複数任期分を新規登録）の
   // 収録範囲を、直書きの「2023〜2025年」ではなくデータから動的に算出する（DataStatusPage監査で
   // 発見。データが増えるたびに文言を手で書き換えなくて済むようにする）。
@@ -1012,33 +1058,66 @@ export function DataStatusPage() {
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           出典の形式・外部リンクの到達性・画面表示の件数が実データとずれていないかを機械的に監査した結果です。新しい判定基準は追加せず、既存の<code>validate:sources</code>・外部リンク監査キャッシュを集計しています。
         </p>
-        <dl className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+{/* Phase222：「リンク切れ」を1つの数字にまとめると、市民がクリックして404に飛ぶ状態
+            （公開画面のリンク切れ）と、出典の記録として内部に残している到達不能URL（記録なので
+            消さない）が同じものに見えてしまう。両者を別々の指標として表示する。 */}
+        <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">出典不足（出典タイトル欠落等）</dt>
+            <dt className="text-xs text-on-surface-variant">
+              公開画面のリンク切れ（市民がクリックできるもの）
+            </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
-              {dataQualitySummary.sourceHealth.warnings ?? "確認不可"}件
+              {dataQualitySummary.publicExposure
+                ? `${dataQualitySummary.publicExposure.clickableBrokenLinks}件`
+                : "未計測"}
+            </dd>
+            <dd className="mt-0.5 text-xs text-on-surface-variant">
+              {dataQualitySummary.publicExposure
+                ? `公開ページ${dataQualitySummary.publicExposure.checkedPages.toLocaleString("ja-JP")}件を実際に走査`
+                : "次回のビルドで計測されます"}
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">リンク切れ（現行サイトで使用中のデータのみ）</dt>
+            <dt className="text-xs text-on-surface-variant">
+              内部データに残る到達できない参照URL（記録として保持）
+            </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
-              {dataQualitySummary.linkHealth ? dataQualitySummary.linkHealth.broken.length : "未計測"}
-              {dataQualitySummary.linkHealth && `／${dataQualitySummary.linkHealth.totalChecked}件中`}
+              {dataQualitySummary.linkHealth
+                ? `${dataQualitySummary.linkHealth.broken.length}件／${dataQualitySummary.linkHealth.totalChecked.toLocaleString("ja-JP")}件中`
+                : "未計測"}
+            </dd>
+            <dd className="mt-0.5 text-xs text-on-surface-variant">
+              画面ではリンクにせず「{BROKEN_SOURCE_LINK_LABEL}」と表示
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">出典のタイトルが未登録</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {dataQualitySummary.sourceHealth.warningsByCode?.MISSING_TITLE ?? "確認不可"}件
+            </dd>
+            <dd className="mt-0.5 text-xs text-on-surface-variant">
+              出典検証の指摘{dataQualitySummary.sourceHealth.warnings ?? 0}件のうち、タイトルが空のもの
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">件数不整合（画面表示とデータ件数のずれ）</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {countConsistencyUnresolved}件
+            </dd>
+            <dd className="mt-0.5 text-xs text-on-surface-variant">
               {dataQualitySummary.countConsistencyChecks.length > 0 &&
-                `（把握済み${dataQualitySummary.countConsistencyChecks.length}件のうち解消済み${dataQualitySummary.countConsistencyChecks.length - countConsistencyUnresolved}件）`}
+                `把握済み${dataQualitySummary.countConsistencyChecks.length}件のうち解消済み${dataQualitySummary.countConsistencyChecks.length - countConsistencyUnresolved}件`}
             </dd>
           </div>
         </dl>
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+          「公開画面のリンク切れ」と「内部データに残る到達できない参照URL」は別のものです。前者は市民が押すと「ページが見つかりません」になるリンクで、0件でなければビルドを止めています。後者は、いつ・どの資料を根拠にしたかという記録として残しているURLで、資料そのものが公開元から消えても記録は消しません（消すと根拠が追えなくなるため）。該当する出典は画面上でリンクにせず、「{BROKEN_SOURCE_LINK_LABEL}」と文字で示しています。
+        </p>
         {dataQualitySummary.linkHealth && dataQualitySummary.linkHealth.broken.length > 0 && (
           <details className="mt-3">
             <summary className="block cursor-pointer py-3.5 text-xs font-medium text-on-surface-variant hover:text-on-surface">
-              リンク切れの内訳を見る（{dataQualitySummary.linkHealth.broken.length}件）
+              内部データに残る到達できない参照URLの内訳を見る（
+              {dataQualitySummary.linkHealth.broken.length}件）
             </summary>
             <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">
               {dataQualitySummary.linkHealth.broken.map((b) => (
@@ -1052,6 +1131,24 @@ export function DataStatusPage() {
             </ul>
           </details>
         )}
+        {sourceWarningBreakdown.length > 0 && (
+          <details className="mt-1">
+            <summary className="block cursor-pointer py-3.5 text-xs font-medium text-on-surface-variant hover:text-on-surface">
+              出典検証の指摘{dataQualitySummary.sourceHealth.warnings ?? 0}件の内訳を見る
+            </summary>
+            <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">
+              {sourceWarningBreakdown.map(([code, count]) => (
+                <li key={code} className="rounded border border-outline-variant p-2">
+                  <span className="font-medium text-on-surface">{count}件</span>：
+                  {SOURCE_WARNING_CODE_LABEL[code] ?? code}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              「延岡市以外の公的機関（国立国会図書館など）の資料を一次資料として使用」は、出典情報が足りないという意味ではありません。市史・商工会議所史・市議会会議録の書誌情報など、延岡市・延岡市議会のサイトには無い資料を国立国会図書館で確認した件数で、資料名・編者・発行年・該当ページはいずれも登録済みです。
+            </p>
+          </details>
+        )}
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           {humanizeDataNote(dataQualitySummary.linkHealth?.note)}
         </p>
@@ -1060,6 +1157,10 @@ export function DataStatusPage() {
           監査実施日：外部リンク＝
           {dataQualitySummary.linkHealth
             ? formatJapaneseDateIfIso(dataQualitySummary.linkHealth.generatedAt.slice(0, 10))
+            : "未計測"}
+          ／公開画面の走査＝
+          {dataQualitySummary.publicExposure
+            ? formatJapaneseDateIfIso(dataQualitySummary.publicExposure.generatedAt.slice(0, 10))
             : "未計測"}
           ／出典検証＝ビルド時に毎回再計算
         </p>

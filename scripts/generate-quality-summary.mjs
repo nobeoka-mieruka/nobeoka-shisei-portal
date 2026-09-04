@@ -16,11 +16,26 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
+// Phase222：validate-sources.mjs の --json 出力（warningを分類コードごとに数えたもの）を使う。
+// 従来はログ行を正規表現で拾って合計値だけを取り出していたため、/data-status 側で
+// 「出典タイトル欠落等」という一括りの見出しにせざるを得ず、実際の内訳
+// （タイトル欠落0件／国立国会図書館ドメインの一次資料23件）と表示が食い違っていた。
 function runValidatorSummary(scriptRelPath) {
-  const out = execFileSync("node", [join(root, scriptRelPath)], { encoding: "utf8", cwd: root });
-  const m = /errors=(\d+)\s+warnings=(\d+)(?:\s+info=(\d+))?/.exec(out);
-  if (!m) return { errors: null, warnings: null, info: null, raw: out.trim().slice(-500) };
-  return { errors: Number(m[1]), warnings: Number(m[2]), info: m[3] ? Number(m[3]) : 0 };
+  const out = execFileSync("node", [join(root, scriptRelPath), "--json"], {
+    encoding: "utf8",
+    cwd: root,
+  });
+  try {
+    const parsed = JSON.parse(out);
+    return {
+      errors: parsed.errors,
+      warnings: parsed.warnings,
+      info: parsed.info,
+      warningsByCode: parsed.warningsByCode ?? {},
+    };
+  } catch {
+    return { errors: null, warnings: null, info: null, warningsByCode: {}, raw: out.trim().slice(-500) };
+  }
 }
 
 const sourceHealth = runValidatorSummary("scripts/validate-sources.mjs");
@@ -61,6 +76,8 @@ if (existsSync(linkReportPath)) {
   const broken = liveResults.filter((r) => r.category === "not_found_404" || r.category === "server_error");
   linkHealth = {
     generatedAt: report.generatedAt,
+    // Phase222：ここは「内部データが参照しているURLのうち到達できないもの」の件数であり、
+    // 「市民が公開画面でクリックできるリンク切れ」の件数ではない（後者は publicExposure）。
     totalChecked: liveResults.length,
     ok: liveResults.filter((r) => r.category === "ok").length,
     redirect: liveResults.filter((r) => r.category === "redirect").length,
@@ -69,6 +86,22 @@ if (existsSync(linkReportPath)) {
     broken: broken.map((r) => ({ url: r.url, files: r.files, category: r.category, status: r.status })),
     excludedBackupOnlyReferences: report.results.length - liveResults.length,
     note: "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち後継資料への移行を一次資料で確認済みの2件（councilWatchedDocuments.json、Phase135-Rで確認、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。",
+  };
+}
+
+// Phase222：公開画面での露出（＝市民が押せるリンク切れ）の実測結果。
+// scripts/check-broken-link-exposure.mjs がビルド後の dist/ を走査して書き出す内部監査結果を
+// 読み込むだけで、ここで新しい判定は行わない（linkHealth が external-link-check.json を
+// 読むのと同じ構成）。前回ビルドの結果を使うため generatedAt を必ず併記する。
+const exposureReportPath = join(root, "reports", "broken-link-exposure.json");
+let publicExposure = null;
+if (existsSync(exposureReportPath)) {
+  const exposure = JSON.parse(readFileSync(exposureReportPath, "utf8"));
+  publicExposure = {
+    generatedAt: exposure.generatedAt,
+    checkedPages: exposure.checkedPages,
+    clickableBrokenLinks: exposure.clickableBrokenLinks,
+    note: "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。",
   };
 }
 
@@ -117,13 +150,20 @@ const summary = {
   generatedAt: new Date().toISOString(),
   sourceHealth: {
     ...sourceHealth,
-    note: "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは出典タイトル欠落等の改善余地、infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。",
+    note: "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは分類コードごとの内訳（warningsByCode）で意味が異なる。MISSING_TITLEだけが「出典タイトルの欠落」で、NON_NOBEOKA_PUBLIC_DOMAINは国立国会図書館など延岡市以外の公的機関の資料を一次資料として使っている件数（出典情報は揃っており、欠落ではない）。infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。",
   },
   linkHealth,
+  publicExposure,
   countConsistencyChecks,
 };
 
 writeFileSync(join(root, "src", "data", "dataQualitySummary.json"), JSON.stringify(summary, null, 2) + "\n");
 console.log(
-  `[generate-quality-summary] sourceHealth: errors=${sourceHealth.errors} warnings=${sourceHealth.warnings} info=${sourceHealth.info} / linkHealth: broken=${linkHealth ? linkHealth.broken.length : "N/A"}／${linkHealth ? linkHealth.totalChecked : "N/A"}件 / countConsistencyChecks=${countConsistencyChecks.length}件`,
+  `[generate-quality-summary] sourceHealth: errors=${sourceHealth.errors} warnings=${sourceHealth.warnings} info=${sourceHealth.info}` +
+    ` (${Object.entries(sourceHealth.warningsByCode ?? {})
+      .map(([c, n]) => `${c}=${n}`)
+      .join(" ")})` +
+    ` / 内部データ上の到達不能URL=${linkHealth ? linkHealth.broken.length : "N/A"}／${linkHealth ? linkHealth.totalChecked : "N/A"}件` +
+    ` / 公開画面のクリック可能なリンク切れ=${publicExposure ? publicExposure.clickableBrokenLinks : "未計測"}` +
+    ` / countConsistencyChecks=${countConsistencyChecks.length}件`,
 );
