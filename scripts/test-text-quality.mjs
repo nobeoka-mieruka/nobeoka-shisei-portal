@@ -153,6 +153,22 @@ const INTERNAL_TERM_PATTERNS = [
     label: "リポジトリ内のパス",
     re: /(^|[^A-Za-z0-9])(?:src\/data|reports|scripts)\/[A-Za-z0-9._/-]+\.(?:json|md|mjs|ts|ps1)(?![A-Za-z0-9])/,
   },
+  /* --- Phase212 で追加した層 --- */
+  {
+    // 開発フェーズ番号・作業ブロック番号は、市民が辿れる資料ではないため本文から消す。
+    label: "開発フェーズ番号・作業ブロック番号",
+    re: /(^|[^A-Za-z0-9_])(?:Phase|Block)\s?\d+(?![A-Za-z0-9_])/,
+  },
+  {
+    // レコードIDは消さずに残すが、必ず「整理番号」「調査タスク」と前置きして出す
+    // （前置きの無い裸のIDは、市民には何の番号か分からない）。凡例は /data-status。
+    label: "前置きの無いレコードID",
+    re: /(?<!整理番号)(?:civic-\d+|pf-org-\d+|mayor-\d+-term-\d+)|(?<!整理番号)(?<![A-Za-z0-9_/-])(?:fm\d+|m\d{2,3})(?![A-Za-z0-9_-])|(?<!調査タスク)TASK-\d+|acl-vice-?chair-\d+/,
+  },
+  {
+    label: "調査に使った道具の名前",
+    re: /(^|[^A-Za-z0-9_])(?:pdftotext|pdfjs-dist|WinRT)(?![A-Za-z0-9_])|GetText3\.exe(?:テキスト|ページ)/,
+  },
 ];
 
 /**
@@ -256,6 +272,58 @@ if (!existsSync(DIST)) {
       0,
       `内部用語の露出（src/lib/citizenTermLabels.ts の対応表へ追加し、表示箇所を humanizeDataNote() で包む）:\n    ` +
         `${internalFound.slice(0, 40).join("\n    ")}\n    （合計${internalFound.length}件）`,
+    );
+  });
+
+  /* ---------------------------------------------------------------- *
+   * レイヤー3-2（Phase212）：対応表に載っている語が、そもそも変換されずに出ていないか
+   *
+   * レイヤー3は「対応表へ追加すべき語」を探す。こちらは逆に、**対応表には既にあるのに
+   * 画面へそのまま出ている**語を探す。これは対応表の不足ではなく、その表示箇所が
+   * `humanizeDataNote()` を通っていないことを意味する（Phase212 では市政年表の日付表記
+   * `dateLabel` と市長公約の候補理由 `candidateReason` がこれで見つかった）。
+   * 対応表は単一情報源のままにしたいので、キーはソースから読み出して常に同期させる。
+   * ---------------------------------------------------------------- */
+
+  const labelSource = readFileSync(path.join(SRC, "lib/citizenTermLabels.ts"), "utf8");
+  function tableKeys(startMarker, endMarker) {
+    const block = labelSource.slice(labelSource.indexOf(startMarker), labelSource.indexOf(endMarker));
+    return [...block.matchAll(/^ {2}"?([A-Za-z0-9_.]+)"?:/gm)].map((m) => m[1]);
+  }
+  // 短い語は英文の出典名などに紛れて誤検出しうるため、5文字以上のキーだけを対象にする。
+  const mappedTerms = [
+    ...tableKeys("const DATA_FILE_LABELS", "const INTERNAL_TERM_LABELS"),
+    ...tableKeys("const INTERNAL_TERM_LABELS", "/** 置換対象にしない語"),
+  ].filter((key) => key.length >= 5);
+  const mappedTermPattern = new RegExp(
+    `(^|[^A-Za-z0-9_/.-])(${mappedTerms
+      .map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .sort((a, b) => b.length - a.length)
+      .join("|")})(?![A-Za-z0-9_-])`,
+    "g",
+  );
+
+  const unwrapped = [];
+  for (const file of htmlFiles) {
+    const route = "/" + path.relative(DIST, file).replace(/\\/g, "/").replace(/\/?index\.html$/, "");
+    if (AUDIT_ROUTES.some((prefix) => route === prefix || route.startsWith(`${prefix}/`))) continue;
+    const text = extractRenderedText(readFileSync(file, "utf8"));
+    const scanner = new RegExp(mappedTermPattern.source, "g");
+    let m;
+    while ((m = scanner.exec(text))) {
+      const context = text.slice(Math.max(0, m.index - 40), m.index + 60).replace(/\s+/g, " ").trim();
+      unwrapped.push(`${route}: 「${m[2]}」…${context}…`);
+    }
+  }
+
+  console.log(`\n対応表の現況：言い換え対象${mappedTerms.length}語（5文字以上のキーを src/lib/citizenTermLabels.ts から再抽出）`);
+
+  check("対応表に載っている内部用語が、言い換えられないまま市民向けページに出ていない", () => {
+    assert.equal(
+      unwrapped.length,
+      0,
+      `対応表にあるのに変換されていない語（その表示箇所が humanizeDataNote() を通っていない）:\n    ` +
+        `${unwrapped.slice(0, 40).join("\n    ")}\n    （合計${unwrapped.length}件）`,
     );
   });
 }

@@ -66,7 +66,7 @@ const linkClass =
 
 const HISTORY_CSV_COLUMNS: CsvColumn<CivicTimelineEvent>[] = [
   { header: "年", value: (e) => e.year },
-  { header: "日付", value: (e) => e.dateLabel },
+  { header: "日付", value: (e) => humanizeDataNote(e.dateLabel) ?? e.dateLabel },
   { header: "分類", value: (e) => e.category },
   { header: "タイトル", value: (e) => e.title },
   { header: "概要", value: (e) => e.summary },
@@ -178,7 +178,7 @@ export function HistoryPage() {
             if (!ev) return null;
             return (
               <li key={id} className="relative">
-                <p className="text-xs font-medium text-on-surface-variant">{ev.dateLabel}</p>
+                <p className="text-xs font-medium text-on-surface-variant">{humanizeDataNote(ev.dateLabel)}</p>
                 <p className="text-sm font-semibold text-on-surface">{ev.title}</p>
                 <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">{TURNING_POINT_REASONS[id]}</p>
               </li>
@@ -265,7 +265,7 @@ export function HistoryPage() {
             <li key={event.id}>
               <SectionCard title={event.title} titleClassName="text-sm font-semibold text-on-surface">
                 <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-                  <span className="font-medium text-on-surface">{event.dateLabel}</span>
+                  <span className="font-medium text-on-surface">{humanizeDataNote(event.dateLabel)}</span>
                   <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-semibold text-on-surface-variant">
                     {event.category}
                   </span>

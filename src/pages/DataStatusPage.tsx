@@ -24,7 +24,11 @@ import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import { summarizeVoteClassification, countBillsWithKnownProposerType } from "../lib/billVotes";
-import { getBillExplanationLevel } from "../lib/billSummaryQuality";
+import { BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
+import { BILL_EXPLAINABILITY_CITIZEN_LABEL } from "../lib/billExplainability";
+import { SOURCE_RETRIEVAL_CATEGORY_LABEL } from "../lib/billSourceRetrieval";
+import { TRUST_LEVEL_LABEL } from "../lib/councilGlossary";
+import { humanizeDataNote } from "../lib/citizenTermLabels";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
@@ -627,7 +631,7 @@ export function DataStatusPage() {
                   return `${base}まだ開催されていない（または開催中の）会期です。議決結果・会議録とも未確認のため、「${LATEST_CONFIRMED_SESSION_HEADING}」には含めていません。`;
                 }
                 return s.newsletterConfirmed
-                  ? `${base}会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです（TASK-079）。個々の質問項目・答弁内容は会議録公開後に確認します。`
+                  ? `${base}会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです。個々の質問項目・答弁内容は会議録公開後に確認します。`
                   : `${base}会議録公開前の暫定情報（質問通告書ベース）です。実際の質疑応答内容はまだ確認できていません。`;
               })
               .join(" ")
@@ -766,12 +770,12 @@ export function DataStatusPage() {
     {
       label: "委員会：所管事項の確認",
       metric: simpleCompleteness(committeesWithJurisdiction, committees.length),
-      note: "常任委員会3件は延岡市議会委員会条例の個別列挙、議会運営委員会1件は地方自治法第109条第3項の一般規定、特別委員会2件は設置時の提案理由により、所管事項をそれぞれ確認済み（6／6件。Phase44で表記を実態に合わせて修正）",
+      note: "常任委員会3件は延岡市議会委員会条例の個別列挙、議会運営委員会1件は地方自治法第109条第3項の一般規定、特別委員会2件は設置時の提案理由により、所管事項をそれぞれ確認済み（6／6件）",
     },
     {
       label: "財政：年度レコードの登録（この軸で調査に着手した年度）",
       metric: simpleCompleteness(fiscalYearsWithBudget, archiveFiscalYears.length),
-      note: "この行は「年度レコードが存在するか」のみを示し、以下の項目別の行が実際の数値の有無を示します（Phase137で分離）。",
+      note: "この行は「年度レコードが存在するか」のみを示し、以下の項目別の行が実際の数値の有無を示します。",
     },
     {
       label: "財政：歳入総額（決算ベース）の年度確認",
@@ -780,7 +784,7 @@ export function DataStatusPage() {
     {
       label: "財政：一般会計当初予算額の年度確認",
       metric: simpleCompleteness(fiscalYearsWithInitialBudget, archiveFiscalYears.length),
-      note: "Phase137で平成19〜令和8年度分（20年度）を延岡市「当初予算の概要」の年度別推移表から新規確認しました。",
+      note: "平成19〜令和8年度分（20年度）を延岡市「当初予算の概要」の年度別推移表から新規確認しました。",
     },
     {
       label: "財政：市債残高（普通会計）の年度確認",
@@ -790,7 +794,7 @@ export function DataStatusPage() {
     {
       label: "財政：市債残高（一般会計）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithGeneralAccountBondBalance, archiveFiscalYears.length),
-      note: "上記の普通会計ベースとは定義が異なる別集計です（Phase165でFY2019〜2024分を新規確認、財政の市債ページでご確認いただけます）。",
+      note: "上記の普通会計ベースとは定義が異なる別集計です（2019〜2024年度分を確認済み。財政の市債ページでご確認いただけます）。",
     },
     {
       label: "財政：基金残高（いずれかの区分）の年度確認",
@@ -799,32 +803,32 @@ export function DataStatusPage() {
     {
       label: "財政：一般会計決算額（歳出決算ベース）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithGeneralAccountSettlement, archiveFiscalYears.length),
-      note: "予算額（当初・補正後）とは別の、決算が確定した金額です（Phase165でFY2019〜2024分を新規確認、財政の予算ページでご確認いただけます）。",
+      note: "予算額（当初・補正後）とは別の、決算が確定した金額です（2019〜2024年度分を確認済み。財政の予算ページでご確認いただけます）。",
     },
     {
       label: "財政：一般会計補正後（最終）予算額の年度確認",
       metric: simpleCompleteness(fiscalYearsWithFinalBudget, archiveFiscalYears.length),
-      note: "当初予算・決算額とは別の集計です。Phase177で完全性ダッシュボードへ追加しました（財政の予算ページでご確認いただけます）。",
+      note: "当初予算・決算額とは別の集計です（財政の予算ページでご確認いただけます）。",
     },
     {
       label: "財政：特別会計予算額の年度確認",
       metric: simpleCompleteness(fiscalYearsWithSpecialAccountBudget, archiveFiscalYears.length),
-      note: "一般会計とは別会計の予算額です。Phase165でFY2020〜2025分を新規確認しましたが、Phase177まで完全性ダッシュボードへ未反映でした。",
+      note: "一般会計とは別会計の予算額です（2020〜2025年度分を確認済み）。",
     },
     {
       label: "財政：市債残高（企業会計を含む全会計）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithBondBalanceIncludingEnterprise, archiveFiscalYears.length),
-      note: "一般会計・普通会計ベースとは定義が異なる別集計です（水道・下水道等の企業債残高を合算）。Phase165でFY2021〜2024分を新規に算出・登録しましたが、Phase177まで完全性ダッシュボードへ未反映でした。",
+      note: "一般会計・普通会計ベースとは定義が異なる別集計です（水道・下水道等の企業債残高を合算）。2021〜2024年度分を算出・登録済みです。",
     },
     {
       label: "財政：市債残高（市民1人当たり）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithBondBalancePerCapita, archiveFiscalYears.length),
-      note: "財政の市債ページの年度別一覧には既に表示されている項目です。Phase177で完全性ダッシュボードへ追加しました。",
+      note: "財政の市債ページの年度別一覧には既に表示されている項目です。",
     },
     {
       label: "財政：歳入内訳（地方税・地方交付税・国庫支出金・県支出金のいずれか）の年度確認",
       metric: simpleCompleteness(fiscalYearsWithRevenueBreakdown, archiveFiscalYears.length),
-      note: "歳入総額（決算ベース）の内訳項目です。4項目すべてが揃っているとは限りません。Phase177で完全性ダッシュボードへ追加しました。",
+      note: "歳入総額（決算ベース）の内訳項目です。4項目すべてが揃っているとは限りません。",
     },
     {
       label: "財政：財政健全化判断比率（いずれかの指標）の年度確認",
@@ -890,6 +894,108 @@ export function DataStatusPage() {
         でご覧いただけます。
       </p>
 
+      {/*
+        Phase214：このページと調査メモに残している内部の記号・番号の凡例。
+        当サイトは、市民向けの本文には内部コードを出さない方針（言い換えは
+        src/lib/citizenTermLabels.ts が担当）だが、調査の追跡に必要な通し番号
+        （整理番号・UNR・INQ・TASK）は消さずに残している。凡例の無いコード値を
+        残さないため、意味の対応表をこのページに置く。ラベルは各機能の単一情報源から
+        読み込み、二重管理にしない。
+      */}
+      <SectionCard title="記号・番号の凡例（調査メモに出てくる内部の符号）">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          当サイトの調査メモには、同じ記録を指し示すための通し番号や、確認の進み具合を表す区分が出てきます。市民向けの本文には内部の英語コードを出さないようにしていますが、出典をたどれるようにするため通し番号そのものは残しています。ここでは、その読み方をまとめています。数値の良し悪しや順位を表すものではありません。
+        </p>
+        <dl className="space-y-2 text-xs leading-relaxed text-on-surface-variant">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">整理番号（civic-047／fm32／pf-org-016／mayor-14-term-01 など）</dt>
+            <dd className="mt-0.5">
+              当サイトがデータ1件ごとに付けている通し番号です。番号自体に意味はなく、「どの記録のことか」を取り違えないための符号です。元議員（fm…）と政治団体（pf-org…）の番号は、そのままページのURLにも使っています。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">未確認項目UNR-… ／ 照会事項INQ-… ／ 調査タスクTASK-…</dt>
+            <dd className="mt-0.5">
+              いずれも当サイトの作業記録に付けた通し番号です。UNRは「まだ確認できていない点」、INQは「議会事務局等へ確認する候補」、TASKは「当サイトの作業単位」を指します。市民の方が参照できる公的な文書番号ではありません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">出典の確認状況（verified など）</dt>
+            <dd className="mt-0.5">
+              当サイトが公開資料の記載と突き合わせた段階を示すもので、資料そのものの正しさを保証する区分ではありません。
+              <span className="mt-1 block">
+                verified＝確認済み／partiallyVerified・partially-verified＝一部確認済み／needsReview＝要確認／candidate＝候補（未確定）／confirmed＝確定／unverified・raw＝未確認／sourceUnavailable＝出典資料未確認
+              </span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            {/*
+              内部値（一次資料＝英字の区分名）を見出しへ直書きすると、市民向けページへ
+              コピーされたときに凡例なしで露出する。区分名は下の対応表から生成し、
+              見出しには書かない（scripts/test-civic-glossary.mjs の直書き検査を維持する）。
+            */}
+            <dt className="font-medium text-on-surface">資料の種類（一次資料・公式資料などの区分）</dt>
+            <dd className="mt-0.5">
+              その情報がどの種類の資料に基づくかの区分です。
+              <span className="mt-1 block">
+                {Object.entries(TRUST_LEVEL_LABEL)
+                  .map(([code, label]) => `${code}＝${label}`)
+                  .join("／")}
+              </span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">議案の説明の確認段階（Level0〜Level3）</dt>
+            <dd className="mt-0.5">
+              議案1件ごとに、どこまで確認できたかを表す段階です。
+              <span className="mt-1 block">
+                {Object.entries(BILL_EXPLANATION_LEVEL_LABEL)
+                  .map(([level, label]) => `Level${level}＝${label}`)
+                  .join("／")}
+              </span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">会議録本文の取得しやすさ（A〜D区分）</dt>
+            <dd className="mt-0.5">
+              議案の原資料にどこまで到達できるかの区分で、上の「確認段階」とは別の軸です。
+              <span className="mt-1 block">
+                {Object.entries(SOURCE_RETRIEVAL_CATEGORY_LABEL)
+                  .map(([code, label]) => `${code}＝${label}`)
+                  .join("／")}
+              </span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">説明がまだ無い理由の区分（SHARED_REASON など）</dt>
+            <dd className="mt-0.5">
+              「説明が無い」を一括りにせず、なぜ無いのかを分けて記録しています。議案ページには下記の日本語のみを表示しています。
+              <span className="mt-1 block">
+                {Object.entries(BILL_EXPLAINABILITY_CITIZEN_LABEL)
+                  .map(([code, label]) => `${code}＝${label}`)
+                  .join("／")}
+              </span>
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">人手対応の状態（HUMAN_ACTION_REQUIRED など）</dt>
+            <dd className="mt-0.5">
+              自動処理では解決できない項目に付けている状態です。WAITING_EXTERNAL＝公式資料の公開待ち／MANUAL_REVIEW＝人手による追加調査が必要／RESEARCH_EXHAUSTED＝調査を尽くしたが未確認／BLOCKED_TECHNICAL＝技術的制約／NOT_APPLICABLE＝対象外／COMPLETED＝解決済み。これらをまとめて「人の確認が必要（HUMAN_ACTION_REQUIRED）」と呼ぶことがあります。件数は下の「調査継続中の項目」でご確認いただけます。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="font-medium text-on-surface">データ収録状況の区分（complete／partial／missing、confirmed_zero など）</dt>
+            <dd className="mt-0.5">
+              議員活動バロメーターで使う区分です。「確認した結果0件」と「資料が無く評価できない」を必ず区別します。詳しい対応表は
+              <Link to="/methodology/activity-radar" className="mx-1 text-primary underline">
+                議会活動データの算定方法
+              </Link>
+              に掲載しています。
+            </dd>
+          </div>
+        </dl>
+      </SectionCard>
+
       <SectionCard title="データ完全性ダッシュボード">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           「収録件数」だけでなく、一次資料で確認できた母数（対象会期数・議案件数・団体数など）に対する収録率を示します。例えば「収録12件／確認済み母数13件／収録率92%」は、「一次資料で対象と確認できた13件のうち、当サイトで12件を収録している」という意味です（世の中に存在するすべての対象のうち92%という意味ではありません）。母数が一次資料で確認できていない項目は「母数未確認」とし、100%と表示することはありません。
@@ -946,7 +1052,7 @@ export function DataStatusPage() {
           </details>
         )}
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          {dataQualitySummary.linkHealth?.note}
+          {humanizeDataNote(dataQualitySummary.linkHealth?.note)}
         </p>
         <p className="mt-1 text-xs text-on-surface-variant">
           監査実施日：外部リンク＝{dataQualitySummary.linkHealth?.generatedAt.slice(0, 10) ?? "未計測"}／出典検証＝ビルド時に毎回再計算
@@ -1054,7 +1160,7 @@ export function DataStatusPage() {
         {kohoDamagedIssues.length > 0 && (
           <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
             {kohoDamagedIssues.map((k) => `${k.issueYearMonth}号`).join("、")}
-            について：{kohoDamagedIssues[0].sourceStatus?.note}
+            について：{humanizeDataNote(kohoDamagedIssues[0].sourceStatus?.note)}
             （延岡市公式サイト・Webアーカイブ・国立国会図書館デジタルコレクション・宮崎県立図書館のオンライン蔵書検索など、オンラインで確認できる経路は確認しましたが、代替の資料は見つかりませんでした）。
           </p>
         )}

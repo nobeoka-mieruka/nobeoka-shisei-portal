@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { CouncilSpeech } from "../../types";
 import { formatJapaneseDate } from "../../config/site";
 import { speechSummaryStatusLabel } from "../../lib/councilSpeeches";
+import { humanizeDataNote } from "../../lib/citizenTermLabels";
 import { GlobeIcon } from "../icons";
 
 const linkClass =
@@ -67,7 +68,9 @@ export function VerifiedSpeechCard({
         </div>
       )}
 
-      {speech.shortSummary && <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{speech.shortSummary}</p>}
+      {speech.shortSummary && (
+        <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{humanizeDataNote(speech.shortSummary)}</p>
+      )}
       <p className="mt-1 text-xs text-on-surface-variant">質問項目 {speech.questionItems.length}件</p>
 
       {speech.summarySources.length > 0 && speech.summarySources[0]?.sourceUrl && (

@@ -404,7 +404,7 @@ export function MayorDetailPage() {
               {relatedEvents.map((ev) => (
                 <li key={ev.id} className="rounded-lg border border-outline-variant p-3">
                   <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-                    <span className="font-medium text-on-surface">{ev.dateLabel}</span>
+                    <span className="font-medium text-on-surface">{humanizeDataNote(ev.dateLabel)}</span>
                     <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-semibold text-on-surface-variant">
                       {ev.category}
                     </span>
