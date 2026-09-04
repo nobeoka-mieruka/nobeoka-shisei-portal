@@ -14,7 +14,6 @@
  * 使い方: node scripts/verify-production.mjs
  */
 import { chromium } from "playwright-core";
-import { readFileSync } from "node:fs";
 
 const BASE = process.env.SMOKE_BASE ?? "https://nobeoka-shisei-portal.pages.dev";
 
