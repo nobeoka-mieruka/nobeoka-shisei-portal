@@ -13,13 +13,25 @@
  *     ドメインが延岡市・延岡市議会・宮崎県等の既知の公式ドメイン一覧に含まれない
  *     （＝「公式」表示の誤用の疑い）
  *
- * warning（改善余地はあるが、ビルドは止めない）：
- *   - 公式ドメインの出典なのにタイトル（sourceTitle/title/label等）が空
+ * warning（改善余地はあるが、ビルドは止めない）。Phase222でcode付きに分類した：
+ *   - MISSING_TITLE              公式ドメインの出典なのにタイトル（sourceTitle/title/label等）が空
+ *   - NON_NOBEOKA_PUBLIC_DOMAIN  公的機関だが延岡市・宮崎県・国の公式ドメイン一覧の外
+ *                                （国立国会図書館・他自治体・政党公式サイト等）
+ *   - MISSING_SOURCE             出典配列そのものが空
+ *   - MISSING_OFFICIAL_LIST_URL  政治団体の公表一覧URLが未設定
+ *   - UNPARSEABLE_WAYBACK_URL    Wayback URLから元URLを取り出せない
+ *   - VALIDATION_ERROR           検証処理自体が失敗した
+ *
+ * Phase222の背景：従来 /data-status は全warningをまとめて「出典不足（出典タイトル欠落等）」
+ * として表示していたが、実際の内訳は NON_NOBEOKA_PUBLIC_DOMAIN が全件で、MISSING_TITLE は
+ * 0件だった（タイトル・編者・発行年・コマ番号まで登録済み）。件数の意味と表示が食い違わない
+ * よう、codeごとの内訳を出力できるようにする。
  *
  * info（参考情報）：
  *   - 二次資料ドメイン（Wikipedia等）を出典として使っている件数
  *
- * 使い方：node scripts/validate-sources.mjs
+ * 使い方：node scripts/validate-sources.mjs [--json]
+ *   --json … 人が読むログの代わりに、機械可読な集計結果（JSON）だけを標準出力へ出す
  */
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -58,8 +70,14 @@ const SECONDARY_DOMAINS = new Set([
 ]);
 
 const errors = [];
+/** @type {{code: string, message: string}[]} */
 const warnings = [];
 const info = [];
+
+/** warningを分類コード付きで記録する（表示側が「何件が何の問題か」を取り違えないため）。 */
+function warn(code, message) {
+  warnings.push({ code, message });
+}
 
 function hostOf(url) {
   try {
@@ -107,10 +125,13 @@ function checkRef(file, label, url, title, claimsOfficial) {
   if (claimsOfficial && !isOfficial && !isOtherPublic) {
     errors.push(`${file} [${label}]: 公式資料として扱われていますが、ドメイン "${checkHost ?? host}" は既知の公式ドメイン一覧にありません`);
   } else if (claimsOfficial && isOtherPublic) {
-    warnings.push(`${file} [${label}]: 公式資料として扱われていますが、延岡市・延岡市議会・国の公式ドメインではありません（${checkHost}、他の公的機関・政党公式サイトの可能性）`);
+    warn(
+      "NON_NOBEOKA_PUBLIC_DOMAIN",
+      `${file} [${label}]: 公式資料として扱われていますが、延岡市・延岡市議会・国の公式ドメインではありません（${checkHost}、他の公的機関・政党公式サイトの可能性）`,
+    );
   }
   if (isOfficial && (!title || title.trim() === "")) {
-    warnings.push(`${file} [${label}]: 公式ドメインの出典ですがタイトルが未設定です（${url}）`);
+    warn("MISSING_TITLE", `${file} [${label}]: 公式ドメインの出典ですがタイトルが未設定です（${url}）`);
   }
   if (isSecondary) {
     info.push(`${file} [${label}]: 二次資料ドメイン（${checkHost}）を出典として使用`);
@@ -118,7 +139,10 @@ function checkRef(file, label, url, title, claimsOfficial) {
   if (isWayback && isOfficial) {
     info.push(`${file} [${label}]: Internet Archive（Wayback Machine）に保存された公式資料（元ドメイン: ${checkHost}）を出典として使用`);
   } else if (isWayback && !originalUrl) {
-    warnings.push(`${file} [${label}]: web.archive.orgのURLですが元URLの形式を認識できませんでした（値: "${url}"）`);
+    warn(
+      "UNPARSEABLE_WAYBACK_URL",
+      `${file} [${label}]: web.archive.orgのURLですが元URLの形式を認識できませんでした（値: "${url}"）`,
+    );
   }
 }
 
@@ -129,7 +153,7 @@ try {
     for (const speech of member.speeches ?? []) {
       if (!speech.isPublished) continue;
       if (!speech.summarySources || speech.summarySources.length === 0) {
-        warnings.push(`councilSpeechSummaries.json [${speech.id}]: 出典（summarySources）が空です`);
+        warn("MISSING_SOURCE", `councilSpeechSummaries.json [${speech.id}]: 出典（summarySources）が空です`);
         continue;
       }
       for (const src of speech.summarySources) {
@@ -138,7 +162,7 @@ try {
     }
   }
 } catch (e) {
-  warnings.push(`councilSpeechSummaries.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `councilSpeechSummaries.json の検証中にエラー: ${e.message}`);
 }
 
 // --- 2. archiveMayors.json / archiveMayorTerms.json（歴代市長） ---
@@ -155,7 +179,7 @@ for (const file of ["src/data/archiveMayors.json", "src/data/archiveMayorTerms.j
       }
     }
   } catch (e) {
-    warnings.push(`${file} の検証中にエラー: ${e.message}`);
+    warn("VALIDATION_ERROR", `${file} の検証中にエラー: ${e.message}`);
   }
 }
 
@@ -168,7 +192,7 @@ try {
     }
   }
 } catch (e) {
-  warnings.push(`civicTimelineEvents.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `civicTimelineEvents.json の検証中にエラー: ${e.message}`);
 }
 
 // --- 4. committees.json ---
@@ -180,7 +204,7 @@ try {
     }
   }
 } catch (e) {
-  warnings.push(`committees.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `committees.json の検証中にエラー: ${e.message}`);
 }
 
 // --- 5. citySpecialPosts.json ---
@@ -192,7 +216,7 @@ try {
     }
   }
 } catch (e) {
-  warnings.push(`citySpecialPosts.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `citySpecialPosts.json の検証中にエラー: ${e.message}`);
 }
 
 // --- 6. politicalFundOrganizations.json（政治資金） ---
@@ -207,11 +231,11 @@ try {
       const claimsOfficial = org.verificationStatus !== "pending";
       checkRef("politicalFundOrganizations.json", org.id, org.officialListUrl, org.name, claimsOfficial);
     } else {
-      warnings.push(`politicalFundOrganizations.json [${org.id}]: officialListUrlが未設定です`);
+      warn("MISSING_OFFICIAL_LIST_URL", `politicalFundOrganizations.json [${org.id}]: officialListUrlが未設定です`);
     }
   }
 } catch (e) {
-  warnings.push(`politicalFundOrganizations.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `politicalFundOrganizations.json の検証中にエラー: ${e.message}`);
 }
 
 // --- 7. councilSessions.json（会期・議案審議結果PDF） ---
@@ -226,7 +250,7 @@ try {
     }
   }
 } catch (e) {
-  warnings.push(`councilSessions.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `councilSessions.json の検証中にエラー: ${e.message}`);
 }
 
 // --- 8. mayorPromises.json（市長公約） ---
@@ -235,17 +259,53 @@ try {
   const promises = data.promises ?? data;
   for (const p of promises) {
     if (!p.sources || p.sources.length === 0) {
-      warnings.push(`mayorPromises.json [${p.id}]: 出典（sources）が空です`);
+      warn("MISSING_SOURCE", `mayorPromises.json [${p.id}]: 出典（sources）が空です`);
     }
   }
 } catch (e) {
-  warnings.push(`mayorPromises.json の検証中にエラー: ${e.message}`);
+  warn("VALIDATION_ERROR", `mayorPromises.json の検証中にエラー: ${e.message}`);
 }
 
-for (const i of info) console.log(`[INFO] ${i}`);
-for (const w of warnings) console.log(`[WARN] ${w}`);
-for (const e of errors) console.error(`[ERR] ${e}`);
+// warningの分類ごとの件数。0件のcodeも必ず出す（「0件が表に出ない」状態を作らないため）。
+const WARNING_CODES = [
+  "MISSING_TITLE",
+  "NON_NOBEOKA_PUBLIC_DOMAIN",
+  "MISSING_SOURCE",
+  "MISSING_OFFICIAL_LIST_URL",
+  "UNPARSEABLE_WAYBACK_URL",
+  "VALIDATION_ERROR",
+];
+const warningsByCode = Object.fromEntries(
+  WARNING_CODES.map((code) => [code, warnings.filter((w) => w.code === code).length]),
+);
+const uncategorized = warnings.filter((w) => !WARNING_CODES.includes(w.code)).length;
+if (uncategorized > 0) warningsByCode.OTHER = uncategorized;
 
-console.log(`[validate-sources] errors=${errors.length} warnings=${warnings.length} info=${info.length}`);
+if (process.argv.includes("--json")) {
+  console.log(
+    JSON.stringify(
+      {
+        errors: errors.length,
+        warnings: warnings.length,
+        info: info.length,
+        warningsByCode,
+        warningDetails: warnings,
+      },
+      null,
+      2,
+    ),
+  );
+} else {
+  for (const i of info) console.log(`[INFO] ${i}`);
+  for (const w of warnings) console.log(`[WARN] (${w.code}) ${w.message}`);
+  for (const e of errors) console.error(`[ERR] ${e}`);
+
+  console.log(
+    `[validate-sources] warning内訳: ${Object.entries(warningsByCode)
+      .map(([c, n]) => `${c}=${n}`)
+      .join(" ")}`,
+  );
+  console.log(`[validate-sources] errors=${errors.length} warnings=${warnings.length} info=${info.length}`);
+}
 
 if (errors.length > 0) process.exit(1);
