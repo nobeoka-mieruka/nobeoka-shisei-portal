@@ -35,11 +35,8 @@ import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
 import { scheduledQuestionSessions } from "../lib/generalQuestionStats";
 import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
-import {
-  LATEST_CONFIRMED_SESSION_HEADING,
-  councilSessionPhaseLabels,
-  latestConfirmedCouncilSession,
-} from "../lib/councilSessions";
+import { LATEST_CONFIRMED_SESSION_HEADING, latestConfirmedCouncilSession } from "../lib/councilSessions";
+import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -65,6 +62,9 @@ const scheduledSessions = scheduledQuestionSessions(questions);
 const completedScheduledSessions = scheduledSessions.filter((s) => s.phase === "completed");
 const upcomingScheduledSessions = scheduledSessions.filter((s) => s.phase === "upcoming");
 const latestConfirmedSession = latestConfirmedCouncilSession(councilSessions);
+// Phase221：質問カード側でも会期全体の日程から状態を判定できるよう、会期名から会期を引ける表を作る
+// （1件だけの質問予定日で判定して、ページごとに会期の状態表示が食い違わないようにするため）。
+const scheduledSessionByName = new Map(scheduledSessions.map((s) => [s.sessionName, s]));
 
 type QuestionSortKey = "dateDesc" | "dateAsc" | "memberName";
 
@@ -385,9 +385,10 @@ export function GeneralQuestionsPage() {
                 {completedScheduledSessions.map((s) => (
                   <li key={s.sessionName}>
                     <span className="font-medium text-on-surface">{s.sessionName}</span>
-                    <span className="ml-2 rounded-full bg-secondary-container px-2 py-0.5 text-xs font-semibold text-on-secondary-container">
-                      {councilSessionPhaseLabels[s.phase]}
-                    </span>
+                    <CouncilSessionStatusBadge
+                      session={s}
+                      className="ml-2 bg-secondary-container text-on-secondary-container"
+                    />
                     <span className="ml-2">
                       予定質問{s.count}件（{s.memberCount}名）
                       {s.newsletterConfirmed ? "／市議会だよりで開催確認済み" : ""}
@@ -470,7 +471,11 @@ export function GeneralQuestionsPage() {
           {filteredQuestions.length > 0 && (
             <ul className="space-y-3">
               {filteredQuestions.map((item) => (
-                <GeneralQuestionCard key={item.id} item={item} />
+                <GeneralQuestionCard
+                  key={item.id}
+                  item={item}
+                  session={scheduledSessionByName.get(item.sessionName)}
+                />
               ))}
             </ul>
           )}

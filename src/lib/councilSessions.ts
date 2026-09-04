@@ -40,24 +40,22 @@ export function sessionBillStats(bills: BillVoteItem[]): SessionBillStats | unde
 //   3. generalQuestions.json          … 質問通告書ベースの予定質問（会期名・質問予定日）
 //
 // 過去データの再分類は行わない（councilSessions.jsonにある会期はすべて"completed"）。
-// 「開催中」と「開催前」をさらに分ける判定は実行日（今日）に依存する。本サイトはプリレンダ
-// リング済みHTMLをhydrateする構成のため、実行日に依存した文言はビルド時と閲覧時で食い違う。
-// そのため内部状態は日付に依存しない2つに限定し、開催予定日そのもの（generalQuestions.jsonの
-// questionDateの実値）を併記して利用者が判断できるようにする。
+//
+// Phase221：この「日付に依存しないデータ上の状態」はそのまま維持したうえで、市民向けの表示は
+// 「開催予定／開催中／一般質問終了・結果確認中／開催済み」へ分けた。表示状態の判定と日本語
+// ラベルは src/lib/councilSessionSchedule.ts に集約している（日付は引数で受け取る純関数のため、
+// プリレンダリング時にビルド日時の状態が焼き付くことはない）。
 // ---------------------------------------------------------------------------
 
 /**
- * 会期の進行状態。
+ * 会期の「データ上の」進行状態（日付に依存しない。表示ラベルではない）。
  * - "completed"：会期が終了し、当サイトの収録対象として登録済み（公式資料の確認段階に入っている）
- * - "upcoming"：これから開催される、または開催中。議決結果・会議録のいずれもまだ確認できていない
+ * - "upcoming"：収録対象としてまだ登録していない。議決結果・会議録のいずれも未確認
+ *
+ * 市民向けの表示状態（開催予定／開催中／結果確認中）は、この値と実際の日程・閲覧日から
+ * councilSessionScheduleInfo()（src/lib/councilSessionSchedule.ts）で導出する。
  */
 export type CouncilSessionPhase = "completed" | "upcoming";
-
-/** 内部状態を市民向けの日本語へ変換する。表示側でこの表以外の言い回しを作らない。 */
-export const councilSessionPhaseLabels: Record<CouncilSessionPhase, string> = {
-  completed: "開催済み",
-  upcoming: "開催予定・開催中",
-};
 
 /** 「直近の確認済み会期」欄の見出し（ページ間で言い回しを揃えるための単一情報源）。 */
 export const LATEST_CONFIRMED_SESSION_HEADING = "直近の確認済み会期";

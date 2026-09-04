@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import type { GeneralQuestionItem } from "../../types";
 import { formatJapaneseDate } from "../../config/site";
 import { GlobeIcon, PlayIcon } from "../icons";
-import { councilSessionPhaseLabels } from "../../lib/councilSessions";
 import { councilSessionPhaseForSessionName } from "../../lib/generalQuestionStats";
+import {
+  questionDateLabelPrefix,
+  type CouncilSessionScheduleInput,
+} from "../../lib/councilSessionSchedule";
+import { useTodayJst } from "../../hooks/useTodayJst";
+import { CouncilSessionStatusBadge } from "../council/CouncilSessionStatusBadge";
 import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
 const linkClass =
@@ -29,24 +34,45 @@ function videoLabel(item: GeneralQuestionItem): string {
   return "議会映像を見る";
 }
 
-export function GeneralQuestionCard({ item }: { item: GeneralQuestionItem }) {
+export function GeneralQuestionCard({
+  item,
+  session,
+}: {
+  item: GeneralQuestionItem;
+  /**
+   * この質問が属する会期の日程（scheduledQuestionSessions()の1件）。ページ間で会期の状態表示が
+   * 食い違わないよう、呼び出し側から会期全体の日程を渡す。渡されない場合は、この質問の
+   * 予定日1日だけを日程とみなして判定する（推測で会期の日程を作らない）。
+   */
+  session?: CouncilSessionScheduleInput;
+}) {
   const [expanded, setExpanded] = useState(false);
   // Phase203：開催済み（会議録の公開待ち）の会期と、これから開催される会期を1枚のカード上でも
-  // 見分けられるようにする。判定はquestionCollectionStatus.jsonへの登録有無だけで行う。
+  // 見分けられるようにする。データ上の状態はquestionCollectionStatus.jsonへの登録有無だけで決まる。
+  // Phase221：市民向けの表示状態（開催予定／開催中／一般質問終了・結果確認中）は、
+  // 閲覧日（日本標準時。ハイドレーション完了後にだけ確定）と実際の日程から導出する。
   const sessionPhase = councilSessionPhaseForSessionName(item.sessionName);
+  const today = useTodayJst();
+  const datePrefix = questionDateLabelPrefix(sessionPhase, item.questionDate, today);
+  const scheduleInput: CouncilSessionScheduleInput = session ?? {
+    phase: sessionPhase,
+    firstQuestionDate: item.questionDate,
+    lastQuestionDate: item.questionDate,
+  };
 
   return (
     <li className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
           <span>
-            {sessionPhase === "upcoming" ? "質問予定日 " : ""}
+            {datePrefix}
             {formatJapaneseDate(item.questionDate)}
           </span>
           <span>{item.sessionName}</span>
-          <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-medium text-on-surface-variant">
-            {councilSessionPhaseLabels[sessionPhase]}
-          </span>
+          <CouncilSessionStatusBadge
+            session={scheduleInput}
+            className="bg-surface-container-high font-medium text-on-surface-variant"
+          />
           <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${questionTypeStyle[item.questionType]}`}>
             {item.questionType}
           </span>

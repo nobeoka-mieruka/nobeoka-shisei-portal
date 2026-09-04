@@ -52,10 +52,11 @@ import {
 import {
   LATEST_CONFIRMED_SESSION_HEADING,
   UPCOMING_SESSION_HEADING,
-  councilSessionPhaseLabels,
   latestConfirmedCouncilSession,
 } from "../lib/councilSessions";
 import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
+import { councilSessionScheduleStateLabel } from "../lib/councilSessionSchedule";
+import { useTodayJst } from "../hooks/useTodayJst";
 import { termsForMayor, formatArchiveDateWithPrecision, isDayPreciseTerm, daysInOffice } from "../lib/archiveMayors";
 import { committees as councilCommittees } from "../lib/committees";
 import { COUNCIL_GLOSSARY } from "../lib/councilGlossary";
@@ -316,12 +317,14 @@ export function DashboardPage() {
     return { photo, profile, profileUrl, sns, questions, votes, reports };
   }, []);
 
-  // Phase185：市長の在任日数は「今日」に依存するため、他の集計と異なりコンポーネント内で
-  // 都度算出する（MayorsPage.tsxのtodayIsoJst算出と同じJST変換方法に揃える）。
-  const todayIsoJst = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  // Phase185：市長の在任日数は「今日」に依存するため、他の集計と異なりコンポーネント内で都度算出する。
+  // Phase221：レンダリング中に new Date() を呼ぶと、プリレンダリング済みHTMLにビルド日時の日数が
+  // 焼き付き（翌日以降ずっと古い日数のまま）、ハイドレーション時にも不一致が起きる。
+  // useTodayJst()はハイドレーション完了後にだけ日付を返すため、この2つを同時に防げる。
+  const todayJst = useTodayJst();
   const daysInOfficeCount =
-    currentMayorTerm && isDayPreciseTerm(currentMayorTerm)
-      ? daysInOffice(currentMayorTerm.termStart, todayIsoJst)
+    todayJst && currentMayorTerm && isDayPreciseTerm(currentMayorTerm)
+      ? daysInOffice(currentMayorTerm.termStart, todayJst)
       : null;
 
   // Phase185：市長公約の進捗状況は、政策分野（mayor.pledges／mayorPromises.jsonのcategories、
@@ -401,7 +404,11 @@ export function DashboardPage() {
             label="在任日数"
             value={daysInOfficeCount ?? "確認中"}
             unit={daysInOfficeCount !== null ? "日" : undefined}
-            hint={daysInOfficeCount !== null ? "就任日を1日目として算出しています（毎日自動更新）。" : undefined}
+            hint={
+              daysInOfficeCount !== null
+                ? "就任日を1日目として、ご覧の日（日本標準時）まで算出しています。"
+                : undefined
+            }
           />
           <StatCard
             label={MAYOR_PROMISE_LEVELS.promise.statLabel}
@@ -436,7 +443,7 @@ export function DashboardPage() {
           <StatCard
             label={LATEST_CONFIRMED_SESSION_HEADING}
             value={latestCouncilSession?.title ?? "確認中"}
-            hint={`議案等審議結果などの公式資料を確認できている、いちばん新しい会期です（状態：${councilSessionPhaseLabels.completed}）。`}
+            hint={`議案等審議結果などの公式資料を確認できている、いちばん新しい会期です（状態：${councilSessionScheduleStateLabel("completed", null)}）。`}
             compact
           />
           <StatCard label="会期区分" value={latestCouncilSession?.sessionType ?? "確認中"} compact />
@@ -542,14 +549,14 @@ export function DashboardPage() {
             label="会議録未公開会期の予定質問"
             value={questionStats.scheduledCount}
             unit="件"
-            hint={scheduledSessionBreakdownHint(questionStats.scheduledSessions)}
+            hint={scheduledSessionBreakdownHint(questionStats.scheduledSessions, todayJst)}
           />
         )}
         {questionStats.upcomingScheduledSessions.length > 0 && (
           <StatCard
             label={UPCOMING_SESSION_HEADING}
             value={questionStats.upcomingScheduledSessions.map((s) => s.sessionName).join("、")}
-            hint={`まだ開催されていない（または開催中の）会期です。上記「${LATEST_CONFIRMED_SESSION_HEADING}」とは別に数えており、議決結果・会議録はいずれも未確認です。${scheduledSessionBreakdownHint(questionStats.upcomingScheduledSessions)}`}
+            hint={`上記「${LATEST_CONFIRMED_SESSION_HEADING}」とは別に数えており、議決結果・会議録はいずれも未確認です。${scheduledSessionBreakdownHint(questionStats.upcomingScheduledSessions, todayJst)}`}
             compact
           />
         )}

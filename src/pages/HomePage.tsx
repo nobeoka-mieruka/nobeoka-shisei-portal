@@ -49,6 +49,7 @@ import { coverageHint } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
 import { calculateGeneralQuestionStats, scheduledSessionBreakdownHint } from "../lib/generalQuestionStats";
 import { LATEST_CONFIRMED_SESSION_HEADING, UPCOMING_SESSION_HEADING } from "../lib/councilSessions";
+import { useTodayJst } from "../hooks/useTodayJst";
 import { UPDATE_HISTORY_CATEGORY_CLASS, sortUpdateHistoryByDateDesc } from "../lib/updateHistory";
 import { formatJapaneseDate } from "../config/site";
 import { homeDataCoverageItems } from "../lib/dataCompletenessSummary";
@@ -186,6 +187,9 @@ export function HomePage() {
   const navigate = useNavigate();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
+  // Phase221：会期の状態（開催予定／開催中／結果確認中）の判定に使う日本標準時の今日。
+  // ハイドレーション完了後にだけ確定するため、プリレンダリング済みHTMLへビルド日時の状態が入らない。
+  const todayJst = useTodayJst();
   const [searchParams] = useSearchParams();
   const [heroQuery, setHeroQuery] = useState("");
   const [query, setQuery] = useState("");
@@ -412,7 +416,7 @@ export function HomePage() {
               label="会議録未公開会期の予定質問"
               value={questionStats.scheduledCount}
               unit="件"
-              hint={scheduledSessionBreakdownHint(questionStats.scheduledSessions)}
+              hint={scheduledSessionBreakdownHint(questionStats.scheduledSessions, todayJst)}
             />
           )}
           {/* Phase203：開催済みで会議録公開待ちの会期と、これから開催される会期を混同しないよう、
@@ -423,7 +427,7 @@ export function HomePage() {
               label={UPCOMING_SESSION_HEADING}
               value={questionStats.upcomingScheduledSessions.map((s) => s.sessionName).join("、")}
               compact
-              hint={`まだ開催されていない（または開催中の）会期です。公式資料を確認できている「${LATEST_CONFIRMED_SESSION_HEADING}」とは別に扱っており、議決結果・会議録はいずれも未確認です。${scheduledSessionBreakdownHint(questionStats.upcomingScheduledSessions)}`}
+              hint={`公式資料を確認できている「${LATEST_CONFIRMED_SESSION_HEADING}」とは別に扱っており、議決結果・会議録はいずれも未確認です。${scheduledSessionBreakdownHint(questionStats.upcomingScheduledSessions, todayJst)}`}
             />
           )}
           <StatCard

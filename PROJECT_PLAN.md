@@ -5,6 +5,27 @@
 
 機能を追加・変更したら、必ず「完成済み」「実装中」「次に実装する」を更新してください。
 
+最終更新日（2026-09-05、Phase221時点）：（会期の状態表示を「開催予定・開催中」という複合ラベル1つから、
+閲覧日に応じた「開催予定／開催中／一般質問終了・結果確認中／開催済み」へ分離した。Phase203はプリレンダ
+リング構成（ビルド時にHTMLを固定してハイドレーションする）を理由に日付依存の表示を避けていたが、本Phaseは
+その制約を次の方法で解決した：(1) 判定ロジック`src/lib/councilSessionSchedule.ts`を「今日（YYYY-MM-DD）」を
+引数で受け取る純関数にし、内部で`new Date()`を呼ばない。(2) サーバー生成（prerender）側は`today=null`で
+呼び出し、状態は必ず`pending`＝日付に依存しない表記「開催予定または開催中」＋実際の日程（質問通告書の
+実値）だけを出す。したがってビルド日時の状態がHTMLへ焼き付くことは構造的に起こらない。(3) ブラウザ側は
+`src/hooks/useTodayJst.ts`（`useSyncExternalStore`のgetServerSnapshot/getSnapshot）でハイドレーション
+完了後にだけ日本標準時（Asia/Tokyo）の今日を確定させ、同じ純関数で精密なラベルへ差し替える。サーバー出力と
+初回クライアント出力が必ず一致するためハイドレーション不一致は発生しない（`vite preview`＋headless Chromium
+で8ページ・7時点を実測し、コンソールのerror/warning 0件）。新しいstatusフィールドはデータへ追加しておらず、
+判定には既存の実データ（`councilSessions.json`のstartDate/endDate、`generalQuestions.json`のquestionDate、
+`questionCollectionStatus.json`への登録有無）だけを使う。会期の開会日・閉会日が未確認の会期は一般質問の
+予定日を基準に判定し、その旨と基準日程を必ず画面に併記する（閉会日を推測しないため、終了後のラベルは
+「開催済み」と断定せず「一般質問終了・結果確認中」とする）。状態語彙・日本語ラベルは
+`councilSessionSchedule.ts`とバッジ部品`src/components/council/CouncilSessionStatusBadge.tsx`が単一情報源で、
+`councilSessionPhaseLabels`は廃止した。あわせてダッシュボードの市長「在任日数」もレンダリング中の
+`new Date()`をやめ、同じフックで算出するよう修正（ビルド日の日数がHTMLへ固定される問題の解消）。境界値
+テスト`scripts/test-council-session-schedule-state.mjs`（27件、`npm test`へ登録）で開始日前日／開始当日／
+会期中／終了日／終了翌日と、UTC・米国西海岸端末でもAsia/Tokyo基準になることを固定した。）
+
 最終更新日（2026-09-03、TASK-183／Phase202時点）：（TASKS.md「TASK-183 市長公約「4 / 14 / 33」の
 名称・定義の統一」完了。サイト上に3種類あった市長公約の数字を、実データと一次資料の呼称に合わせて
 「政策分野4件（`mayorPromises.json`のcategories＝施政方針の『私の公約である４つの政策』）」
