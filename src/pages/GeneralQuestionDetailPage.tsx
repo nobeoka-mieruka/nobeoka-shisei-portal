@@ -18,14 +18,19 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
-import { councilSessionPhaseLabels } from "../lib/councilSessions";
-import { councilSessionPhaseForSessionName } from "../lib/generalQuestionStats";
+import { councilSessionPhaseForSessionName, scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import { questionDateLabelPrefix } from "../lib/councilSessionSchedule";
+import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
+import { useTodayJst } from "../hooks/useTodayJst";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const promisesData = mayorPromisesData as MayorPromisesData;
+// Phase221：会期の状態は、質問1件の予定日ではなく会期全体の日程（質問通告書の実データ）から
+// 判定する。一覧ページ・議員詳細ページと同じ集計関数を使い、ページ間で表示が食い違わないようにする。
+const scheduledSessionByName = new Map(scheduledQuestionSessions(questions).map((s) => [s.sessionName, s]));
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -42,6 +47,9 @@ export function GeneralQuestionDetailPage() {
   const location = useLocation();
   const item = questions.find((q) => q.id === id);
   const seo = getSeoForPath(location.pathname);
+  // Phase221：日本標準時の「今日」はハイドレーション完了後にだけ確定する（プリレンダリング済み
+  // HTMLへビルド日時の状態を焼き付けないため）。フックの呼び出し順を固定するため早期returnより前に置く。
+  const today = useTodayJst();
 
   usePageTitle();
 
@@ -81,9 +89,15 @@ export function GeneralQuestionDetailPage() {
     item.documentUrl && { label: "質問資料", url: item.documentUrl },
   ].filter((l): l is { label: string; url: string } => !!l);
 
-  // Phase203：この質問が属する会期が「開催済み（会議録の公開待ち）」か「開催予定・開催中」かを、
-  // questionCollectionStatus.jsonへの登録有無だけから判定する（今日の日付は使わない）。
+  // Phase203／Phase221：データ上の状態（収録対象として登録済みか）はquestionCollectionStatus.jsonの
+  // 登録有無だけで決まる。市民向けの表示状態（開催予定／開催中／一般質問終了・結果確認中）は、
+  // 会期の日程と閲覧日（日本標準時）から導出する。
   const sessionPhase = councilSessionPhaseForSessionName(item.sessionName);
+  const scheduleInput = scheduledSessionByName.get(item.sessionName) ?? {
+    phase: sessionPhase,
+    firstQuestionDate: item.questionDate,
+    lastQuestionDate: item.questionDate,
+  };
 
   const sameSessionQuestions = questions
     .filter((q) => q.sessionName === item.sessionName)
@@ -103,15 +117,16 @@ export function GeneralQuestionDetailPage() {
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-wrap items-center gap-2 text-xs text-on-primary-container/80">
           <span>
-            {sessionPhase === "upcoming" ? "質問予定日 " : ""}
+            {questionDateLabelPrefix(sessionPhase, item.questionDate, today)}
             {formatJapaneseDate(item.questionDate)}
           </span>
           <span>{item.sessionName}</span>
           <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-on-surface">{item.questionType}</span>
-          {/* Phase203：これから開催される会期の質問通告書であることを、日付の隣で明示する。 */}
-          <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-on-surface">
-            {councilSessionPhaseLabels[sessionPhase]}
-          </span>
+          {/* Phase221：会期がこれからなのか、開催中なのか、結果待ちなのかを日付の隣で明示する。 */}
+          <CouncilSessionStatusBadge
+            session={scheduleInput}
+            className="bg-surface-container-low font-normal text-on-surface"
+          />
         </div>
         <h1 className="mt-2 text-lg font-semibold leading-snug text-on-primary-container sm:text-xl">{item.title}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-2">

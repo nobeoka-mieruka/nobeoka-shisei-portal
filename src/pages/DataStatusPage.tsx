@@ -40,11 +40,12 @@ import councilSessionsData from "../data/councilSessions.json";
 import {
   LATEST_CONFIRMED_SESSION_HEADING,
   UPCOMING_SESSION_HEADING,
-  councilSessionPhaseLabels,
   joinSessionNames,
   latestConfirmedCouncilSession,
   sessionSummaryStatusLabels,
 } from "../lib/councilSessions";
+import { councilSessionScheduleInfo } from "../lib/councilSessionSchedule";
+import { useTodayJst } from "../hooks/useTodayJst";
 import type {
   CouncilMember,
   FormerMember,
@@ -350,6 +351,9 @@ export function DataStatusPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
+  // Phase221：会期の状態（開催予定／開催中／一般質問終了・結果確認中）の判定に使う日本標準時の今日。
+  // ハイドレーション完了後にだけ確定するため、プリレンダリング済みHTMLへビルド日時の状態が入らない。
+  const todayJst = useTodayJst();
   const taskStatusCounts = blockedTaskStatusCounts();
 
   // --- 広報のべおかOCR・選挙アーカイブ（Phase68〜70で追加） ---
@@ -687,9 +691,10 @@ export function DataStatusPage() {
               .map((s) => {
                 const period = formatScheduledQuestionPeriod(s);
                 const periodText = period ? `一般質問の予定日：${period}。` : "";
-                const base = `${s.sessionName}（${councilSessionPhaseLabels[s.phase]}・${s.count}件／${s.memberCount}名）：${periodText}`;
+                const schedule = councilSessionScheduleInfo(s, todayJst);
+                const base = `${s.sessionName}（${schedule.label}・${s.count}件／${s.memberCount}名）：${periodText}`;
                 if (s.phase === "upcoming") {
-                  return `${base}まだ開催されていない（または開催中の）会期です。議決結果・会議録とも未確認のため、「${LATEST_CONFIRMED_SESSION_HEADING}」には含めていません。`;
+                  return `${base}議決結果・会議録とも未確認のため、「${LATEST_CONFIRMED_SESSION_HEADING}」には含めていません。${schedule.description}`;
                 }
                 return s.newsletterConfirmed
                   ? `${base}会議録は未公開ですが、「のべおか市議会だより」で開催・実施は確認済みです。個々の質問項目・答弁内容は会議録公開後に確認します。`

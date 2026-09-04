@@ -35,8 +35,10 @@ import {
   aggregateYearlySpeechCounts,
   findMemberSpeechAnalysis,
 } from "../lib/councilSpeeches";
-import { councilSessionPhaseLabels } from "../lib/councilSessions";
-import { councilSessionPhaseForSessionName } from "../lib/generalQuestionStats";
+import { councilSessionPhaseForSessionName, scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import { questionDateLabelPrefix } from "../lib/councilSessionSchedule";
+import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
+import { useTodayJst } from "../hooks/useTodayJst";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
 import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
@@ -94,6 +96,9 @@ const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[
 const archiveMemberTerms = archiveMemberTermsData as ArchiveMemberTerm[];
 const councilSessions = councilSessionsData as CouncilSession[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
+// Phase221：会期の状態は、質問1件の予定日ではなく会期全体の日程から判定する
+// （一般質問一覧・質問詳細と同じ集計関数を使い、ページ間で表示が食い違わないようにする）。
+const scheduledSessionByName = new Map(scheduledQuestionSessions(generalQuestions).map((s) => [s.sessionName, s]));
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 // 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数。2026-08時点で記名投票1件
 // （27名分）のみ登録済みのため、その27名はレーダーチャートの「議案等の意思表示」に実値が入り、
@@ -125,6 +130,9 @@ export function MemberDetailPage() {
   const member = members.find((m) => m.id === id);
   const formerMember = !member ? formerMembers.find((m) => m.id === id) : undefined;
   const seo = getSeoForPath(location.pathname);
+  // Phase221：日本標準時の「今日」はハイドレーション完了後にだけ確定する
+  // （プリレンダリング済みHTMLにビルド日時の判定結果を焼き付けないため）。
+  const today = useTodayJst();
   const selectedTopic = searchParams.get("questionTopic") ?? "";
 
   const setSelectedTopic = (topic: string) => {
@@ -592,10 +600,16 @@ export function MemberDetailPage() {
                 <p className="mt-1 text-lg font-semibold text-on-surface">{memberQuestions.length}件</p>
               </div>
               {/* Phase203：この日付は、開催予定の会期の質問通告書に基づく「これから行われる予定の日」の
-                  場合がある。既に質問した日と取り違えないよう、会期の状態に応じて見出しを変える。 */}
+                  場合がある。既に質問した日と取り違えないよう、会期の状態に応じて見出しを変える。
+                  Phase221：見出しは閲覧日（日本標準時）で切り替える。日付が未確定（プリレンダリング済み
+                  HTML・JavaScript無効時）のときは、質問通告書ベースであることが分かる予定日表記を保つ。 */}
               <div className="rounded-lg bg-surface-container-high p-3">
                 <p className="text-xs text-on-surface-variant">
-                  {councilSessionPhaseForSessionName(memberQuestions[0].sessionName) === "upcoming"
+                  {questionDateLabelPrefix(
+                    councilSessionPhaseForSessionName(memberQuestions[0].sessionName),
+                    memberQuestions[0].questionDate,
+                    today,
+                  )
                     ? "次回の質問予定日"
                     : "最新の質問日"}
                 </p>
@@ -620,10 +634,25 @@ export function MemberDetailPage() {
             <ul className="mt-3 space-y-2">
               {latestQuestions.map((q) => (
                 <li key={q.id} className="rounded-lg border border-outline-variant p-3">
-                  <p className="text-xs text-on-surface-variant">
-                    {councilSessionPhaseForSessionName(q.sessionName) === "upcoming" ? "質問予定日 " : ""}
-                    {formatJapaneseDate(q.questionDate)}／{q.sessionName}（
-                    {councilSessionPhaseLabels[councilSessionPhaseForSessionName(q.sessionName)]}）
+                  <p className="flex flex-wrap items-center gap-1.5 text-xs text-on-surface-variant">
+                    <span>
+                      {questionDateLabelPrefix(
+                        councilSessionPhaseForSessionName(q.sessionName),
+                        q.questionDate,
+                        today,
+                      )}
+                      {formatJapaneseDate(q.questionDate)}／{q.sessionName}
+                    </span>
+                    <CouncilSessionStatusBadge
+                      session={
+                        scheduledSessionByName.get(q.sessionName) ?? {
+                          phase: councilSessionPhaseForSessionName(q.sessionName),
+                          firstQuestionDate: q.questionDate,
+                          lastQuestionDate: q.questionDate,
+                        }
+                      }
+                      className="bg-surface-container-highest font-medium text-on-surface-variant"
+                    />
                   </p>
                   <p className="mt-1 text-sm font-medium text-on-surface">{q.title}</p>
                 </li>

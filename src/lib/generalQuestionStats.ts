@@ -2,11 +2,8 @@ import type { CouncilMemberSpeechRecord, CouncilSession, GeneralQuestionItem } f
 import { allPublicSpeeches, questionLikeSpeeches } from "./councilSpeeches";
 import { formatJapaneseDate, toFiscalYearLabel } from "../config/site";
 import questionCollectionStatusData from "../data/questionCollectionStatus.json";
-import {
-  councilSessionIdFromSessionName,
-  councilSessionPhaseLabels,
-  type CouncilSessionPhase,
-} from "./councilSessions";
+import { councilSessionIdFromSessionName, type CouncilSessionPhase } from "./councilSessions";
+import { councilSessionScheduleInfo } from "./councilSessionSchedule";
 
 /**
  * サイト全体で「一般質問の件数」を表示する箇所（トップページ・ダッシュボード・
@@ -138,16 +135,23 @@ export function formatScheduledQuestionPeriod(session: ScheduledQuestionSession)
 /**
  * 「会議録未公開会期の予定質問」の内訳説明文。トップページ・ダッシュボード・データ収録状況で
  * 同じ文言になるよう、ここを唯一の情報源とする（会期名・件数・日付はすべて引数の実データから）。
- * 会期の状態（開催済み／開催予定・開催中）を必ず併記し、直近の確認済み会期と混同しないようにする。
+ * 会期の状態（開催予定／開催中／一般質問終了・結果確認中／開催済み）を必ず併記し、
+ * 直近の確認済み会期と混同しないようにする。
+ *
+ * @param today 日本標準時の今日（YYYY-MM-DD）。プリレンダリング時・ハイドレーション完了前は
+ *              null を渡す（日付に依存しない「開催予定または開催中」表記になる）。
  */
-export function scheduledSessionBreakdownHint(sessions: ScheduledQuestionSession[]): string {
+export function scheduledSessionBreakdownHint(
+  sessions: ScheduledQuestionSession[],
+  today: string | null = null,
+): string {
   return sessions
     .map((s) => {
       const parts = [`${s.count}件`, "質問通告書ベース"];
       const period = formatScheduledQuestionPeriod(s);
       if (period) parts.push(`一般質問の予定日 ${period}`);
       if (s.newsletterConfirmed) parts.push("市議会だよりで開催確認済み");
-      return `${s.sessionName}（${councilSessionPhaseLabels[s.phase]}）：${parts.join("／")}`;
+      return `${s.sessionName}（${councilSessionScheduleInfo(s, today).label}）：${parts.join("／")}`;
     })
     .join("　");
 }

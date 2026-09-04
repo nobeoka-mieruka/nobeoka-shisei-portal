@@ -409,9 +409,11 @@ console.log("\nPhase203：「直近の確認済み会期」と「次回・開催
 
 // src/lib/councilSessions.tsは型importのみ（実行時importを持たない）ため、
 // questionLikeSpeechTypes.tsと同じ方法（Node 24のTS直接import）で読み込める。
-const { councilSessionIdFromSessionName, latestConfirmedCouncilSession, councilSessionPhaseLabels } = await import(
+const { councilSessionIdFromSessionName, latestConfirmedCouncilSession } = await import(
   "../src/lib/councilSessions.ts"
 );
+// Phase221：市民向けの表示ラベルはsrc/lib/councilSessionSchedule.tsへ移した（日付は引数で受け取る）。
+const { councilSessionScheduleStateLabel } = await import("../src/lib/councilSessionSchedule.ts");
 const councilSessions = readJson("src/data/councilSessions.json");
 
 check("councilSessionIdFromSessionName()は、generalQuestions.jsonの全会期名から会期IDを導出できる（導出できない表記があれば会期の状態判定が推測になるため許容しない）", () => {
@@ -430,10 +432,12 @@ check("latestConfirmedCouncilSession()は、councilSessions.json（公式資料�
   }
 });
 
-check("市民向けの表示ラベルは、内部状態（completed / upcoming）から変換して得ており、状態ごとに別の日本語が割り当てられている", () => {
-  assert.equal(typeof councilSessionPhaseLabels.completed, "string");
-  assert.equal(typeof councilSessionPhaseLabels.upcoming, "string");
-  assert.notEqual(councilSessionPhaseLabels.completed, councilSessionPhaseLabels.upcoming);
+check("市民向けの表示ラベルは内部状態から変換して得ており、状態ごとに別の日本語が割り当てられている（Phase221で開催予定／開催中／結果確認中を分離）", () => {
+  const labels = ["completed", "upcoming", "ongoing", "awaiting-results", "pending"].map((state) =>
+    councilSessionScheduleStateLabel(state, "question-dates"),
+  );
+  for (const label of labels) assert.equal(typeof label, "string");
+  assert.equal(new Set(labels).size, labels.length, `状態ごとのラベルが重複しています: ${labels.join("、")}`);
 });
 
 check("予定質問の会期は「開催済み（questionCollectionStatus.jsonへ登録済み）」と「次回・開催予定（未登録）」に漏れなく重複なく分かれ、件数の合計がgeneralQuestions.jsonの総数と一致する", () => {
