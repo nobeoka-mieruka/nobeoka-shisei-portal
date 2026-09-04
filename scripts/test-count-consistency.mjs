@@ -221,5 +221,57 @@ check("歴代市長（archiveMayors.json）の全レコードに、任期（arch
   );
 });
 
+/**
+ * Phase215：市長公約の「予算資料の確認待ち」まわりの件数を、ページに直書きさせないための
+ * 退行防止チェック。
+ *
+ * 背景：Phase213 の記録では「重点8公約」と「資料待ち9件」が同じ「件」という単位で併記されていた。
+ * 実データ上、9 は予算側が資料待ちの個別公約の総数、8 はそのうち「令和8年度 延岡市予算に関する
+ * 説明書（当初予算）」を待っている数（残る1件は同説明書の総務費を待つ個別公約 1-3）で、
+ * 8 は 9 の部分集合である。どちらかをページに直書きすると、資料が公表されて件数が動いたときに
+ * ページ間で違う数字が並ぶため、必ず src/lib/mayorPromiseLinkage.ts の算出結果を使う。
+ * 件数そのものの整合は scripts/test-mayor-promise-tracking.mjs で検証する。
+ */
+const PROMISE_LINKAGE_SOURCE_FILE = "src/lib/mayorPromiseLinkage.ts";
+/** 確認待ち資料名・資料待ち件数を画面に出すファイル。 */
+const PROMISE_LINKAGE_DISPLAY_FILES = [
+  "src/pages/MayorPolicyProgressPage.tsx",
+  "src/pages/MayorPromiseDetailPage.tsx",
+  "src/components/mayor/PromiseCard.tsx",
+];
+
+check("確認待ちの資料名が、単一情報源（mayorPromiseLinkage.ts）以外に直書きされていない", () => {
+  const libSrc = readSrc(PROMISE_LINKAGE_SOURCE_FILE);
+  assert.ok(
+    libSrc.includes("予算に関する説明書"),
+    `${PROMISE_LINKAGE_SOURCE_FILE} に確認待ち資料名の定義が見当たりません`,
+  );
+  for (const file of PROMISE_LINKAGE_DISPLAY_FILES) {
+    assert.ok(
+      !readSrc(file).includes("予算に関する説明書"),
+      `${file} に確認待ち資料名が直書きされています（表示は mayorPromiseLinkage.ts の値を使うこと）`,
+    );
+  }
+});
+
+check("「予算資料の確認待ち」の件数と、資料別の内訳がページに固定値で直書きされていない", () => {
+  const src = readSrc("src/pages/MayorPolicyProgressPage.tsx");
+  assert.ok(
+    !/(資料待ち|確認待ち)[^<>{}]{0,10}\d+件/.test(src),
+    "MayorPolicyProgressPage.tsx に資料待ちの件数が固定値で直書きされています",
+  );
+  assert.ok(
+    /summarizeBudgetLinkage\(promises\)/.test(src) && /groupPromisesByAwaitingBudgetSource\(promises\)/.test(src),
+    "資料待ちの総数・資料別の内訳が mayorPromiseLinkage.ts の算出結果から表示されていません",
+  );
+});
+
+check("内部の呼び名（重点8公約）が公開ページの文言に混ざっていない", () => {
+  for (const file of PROMISE_LINKAGE_DISPLAY_FILES) {
+    const src = readSrc(file);
+    assert.ok(!/重点\d*公約/.test(src), `${file} に内部の呼び名「重点◯公約」が現れています`);
+  }
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");

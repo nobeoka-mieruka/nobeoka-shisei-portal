@@ -10260,6 +10260,13 @@ Phase205 が「令和8年度 延岡市予算に関する説明書（当初予算
 **当該資料がリポジトリ内に存在しない（未取得）ため、状態を更新していない**。
 新規のオンライン調査は行っていない。8件はいずれも `NOT_IN_MAJOR_PROJECT_LIST`（予算）のまま維持。
 
+【Phase215追記】この「8」は**予算資料の確認待ちの総数ではない**。実データで確認したところ、
+予算側が資料待ちの個別公約は9件で、内訳は「令和8年度 延岡市予算に関する説明書（当初予算）」待ち8件
+（＝上記の重点公約）＋同説明書の「総務費」の内訳待ち1件（個別公約 1-3、`WITHIN_EXISTING_OPERATING_COST`）。
+8は9の部分集合であり、集計ロジックの差でも表示ミスでもない。以後、総数（9）と資料別の内訳（8／1）は
+`src/lib/mayorPromiseLinkage.ts` の `summarizeBudgetLinkage` / `groupPromisesByAwaitingBudgetSource` から
+同時に算出し、どちらか一方だけを「件」で書かない（記録：`reports/phase215-promise-count-definitions.json`）。
+
 #### 件数（Phase205 baseline から変更なし）
 
 | 区分 | 件数 |
