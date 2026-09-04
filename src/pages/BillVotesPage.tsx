@@ -21,6 +21,7 @@ import { Pagination } from "../components/Pagination";
 import {
   BILL_SESSION_FISCAL_YEAR_DESCRIPTION,
   BILL_SESSION_FISCAL_YEAR_LABEL,
+  displayFiscalYearLabel,
 } from "../lib/billFiscalYear";
 import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
@@ -216,7 +217,8 @@ export function BillVotesPage() {
     () =>
       Array.from(new Set(billVotes.map((b) => b.fiscalYear)))
         .sort((a, b) => b.localeCompare(a, "ja"))
-        .map((y) => ({ value: y, label: y })),
+        // 照合に使う value は記録どおりの文字列のまま、表示ラベルだけ表記をそろえる。
+        .map((y) => ({ value: y, label: displayFiscalYearLabel(y) })),
     [],
   );
 

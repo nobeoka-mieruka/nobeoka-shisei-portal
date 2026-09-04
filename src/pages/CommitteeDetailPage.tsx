@@ -12,7 +12,11 @@ import { formatJapaneseDate, toEraFiscalYearLabel } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import type { CommitteeRole } from "../types";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
-import { BILL_SESSION_FISCAL_YEAR_HINT, BILL_SESSION_FISCAL_YEAR_LABEL } from "../lib/billFiscalYear";
+import {
+  BILL_SESSION_FISCAL_YEAR_HINT,
+  BILL_SESSION_FISCAL_YEAR_LABEL,
+  displayFiscalYearLabel,
+} from "../lib/billFiscalYear";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -234,7 +238,7 @@ export function CommitteeDetailPage() {
               {fiscalYearGroups.map(([fiscalYear, bills]) => (
                 <div key={fiscalYear}>
                   <h3 className="text-xs font-semibold text-on-surface-variant">
-                    {fiscalYear}（{bills.length}件）
+                    {displayFiscalYearLabel(fiscalYear)}（{bills.length}件）
                   </h3>
                   <ul className="mt-2 space-y-2">
                     {bills.map((bill) => (

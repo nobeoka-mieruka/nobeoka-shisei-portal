@@ -34,6 +34,7 @@ const {
   parseJapaneseFiscalYearLabel,
   findFiscalYearLabelInBillTitle,
   billTitleFiscalYearNote,
+  displayFiscalYearLabel,
 } = await import("../src/lib/billFiscalYear.ts");
 
 const bills = readJson("src/data/billVotes.json");
@@ -212,5 +213,51 @@ check("議案の画面が fiscalYear を「年度」というラベルのまま�
     "議案一覧のCSV見出しに「年度」単独が残っています",
   );
 });
+
+check("年度表記が「令和1年度」と「令和元年度」で割れていない（表示層でそろえる）", () => {
+  // billVotes.json は出典どおり「令和1年度」と記録している。データは変えず、
+  // 表示だけサイト共通の表記規則（1年は「元年」）にそろえる。
+  assert.equal(displayFiscalYearLabel("令和1年度"), "令和元年度");
+  assert.equal(displayFiscalYearLabel("平成1年度"), "平成元年度");
+  assert.equal(displayFiscalYearLabel("令和7年度"), "令和7年度");
+  // 解釈できない表記は推測せずそのまま返す
+  assert.equal(displayFiscalYearLabel("不明"), "不明");
+  // 実データ全件が解釈可能であること（解釈できない表記が増えたら気づけるように）
+  const unparsable = bills
+    .map((b) => b.fiscalYear)
+    .filter((y) => y && parseJapaneseFiscalYearLabel(y) === null);
+  assert.deepEqual(unparsable, [], "解釈できない年度表記があります: " + unparsable.join("、"));
+});
+
+check("議案名から引用した年度は原文のまま（表記をそろえない）", () => {
+  // 会期年度はそろえるが、議案名の中の年度は出典どおりに見せる。
+  const src = readText("src/lib/billFiscalYear.ts");
+  assert.ok(
+    /sessionFiscalYearLabel: displayFiscalYearLabel\(/.test(src),
+    "会期年度が表示用に正規化されていません",
+  );
+  assert.ok(
+    /titleFiscalYearLabel: inTitle\.label/.test(src),
+    "議案名から取り出した年度を書き換えています（原文のまま渡すこと）",
+  );
+});
+
+check("議案の画面が会期年度をそのまま出さず表示用に整えている", () => {
+  const detail = readText("src/pages/BillVoteDetailPage.tsx");
+  assert.ok(
+    /displayFiscalYearLabel\(bill\.fiscalYear\)/.test(detail),
+    "議案詳細ページが会期年度を生の文字列のまま表示しています",
+  );
+  const list = readText("src/pages/BillVotesPage.tsx");
+  assert.ok(
+    /label: displayFiscalYearLabel\(y\)/.test(list),
+    "議案一覧の年度絞り込みの表示ラベルが整えられていません",
+  );
+  assert.ok(
+    /value: y,/.test(list),
+    "絞り込みの照合値は記録どおりの文字列のままにすること",
+  );
+});
+
 
 console.log(`\n${passCount} checks passed（Phase220：議案の年度ラベル）\n`);

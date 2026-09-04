@@ -1,4 +1,7 @@
 import type { BillVoteItem } from "../types";
+// Node から直接 TypeScript を実行するテスト（scripts/test-bill-fiscal-year-label.mjs）が
+// このモジュールを import するため、拡張子付きで書く（councilSessionSchedule.ts と同じ方針）。
+import { toEraFiscalYearLabel } from "../config/site.ts";
 
 /**
  * Phase220：議案データの `fiscalYear` が何を指すのかの単一情報源。
@@ -46,6 +49,21 @@ export function parseJapaneseFiscalYearLabel(label: string): number | null {
 }
 
 /**
+ * 年度表記を、サイト全体の表記規則（1年は「元年」）にそろえて表示するための正規化。
+ *
+ * 背景：`billVotes.json` の `fiscalYear` は文字列で、2019年度分は「令和1年度」と記録されている。
+ * 一方、会期名や Phase219 で共通化した換算関数は「令和元年度」を返すため、同じ議案の
+ * 詳細ページに「会期年度：令和1年度」と「令和元年6月定例会」が並んで表示されていた。
+ *
+ * データ側の文字列は出典どおりの記録として変更せず、**表示の直前にだけ**そろえる。
+ * 解釈できない表記（想定外の元号など）は推測せずそのまま返す。
+ */
+export function displayFiscalYearLabel(label: string): string {
+  const year = parseJapaneseFiscalYearLabel(label);
+  return year === null ? label : toEraFiscalYearLabel(year);
+}
+
+/**
  * 議案名の中に書かれている年度を、**最初の1つだけ**そのままの表記で取り出す。
  * 名称に年度表記が無い議案はnull（無い年度を推測して補わない）。
  */
@@ -68,5 +86,7 @@ export function billTitleFiscalYearNote(
   if (sessionYear === null) return null;
   const inTitle = findFiscalYearLabelInBillTitle(bill.billTitle);
   if (!inTitle || inTitle.year === sessionYear) return null;
-  return { sessionFiscalYearLabel: bill.fiscalYear, titleFiscalYearLabel: inTitle.label };
+  // 会期年度はサイトの表記規則にそろえる。議案名から取り出した年度は原文の引用なので、
+  // 表記が違っても書き換えない（出典どおりに見せる）。
+  return { sessionFiscalYearLabel: displayFiscalYearLabel(bill.fiscalYear), titleFiscalYearLabel: inTitle.label };
 }

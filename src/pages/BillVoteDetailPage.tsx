@@ -37,6 +37,7 @@ import {
   BILL_SESSION_FISCAL_YEAR_HINT,
   BILL_SESSION_FISCAL_YEAR_LABEL,
   billTitleFiscalYearNote,
+  displayFiscalYearLabel,
 } from "../lib/billFiscalYear";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
@@ -246,7 +247,7 @@ export function BillVoteDetailPage() {
           <div>
             <dt className="text-xs text-on-surface-variant">{BILL_SESSION_FISCAL_YEAR_LABEL}</dt>
             <dd className="text-on-surface">
-              {bill.fiscalYear}
+              {displayFiscalYearLabel(bill.fiscalYear)}
               <span className="mt-0.5 block text-xs text-on-surface-variant">{BILL_SESSION_FISCAL_YEAR_HINT}</span>
             </dd>
           </div>
