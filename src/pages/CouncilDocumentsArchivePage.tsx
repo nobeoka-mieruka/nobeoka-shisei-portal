@@ -30,6 +30,7 @@ import {
   resolveDocumentSourceUrl,
 } from "../lib/archiveCouncilDocuments";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { formatJapaneseDateIfIso } from "../config/site";
 
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const billVotes = billVotesData as BillVoteItem[];
@@ -39,6 +40,15 @@ const archivePolicies = archivePoliciesData as { id: string; title: string; slug
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+/**
+ * Phase218：提出日・議決日を「2026-06-26」のISO文字列のまま表示していたため、
+ * スクリーンリーダーでは数字とハイフンの羅列として読み上げられていた
+ * （サイト内の他ページは「2026年6月26日」と表示している）。
+ */
+function displayDate(value?: string): string {
+  return value ? formatJapaneseDateIfIso(value) : "確認中";
+}
 
 function sessionTitle(sessionId?: string): string | undefined {
   if (!sessionId) return undefined;
@@ -315,11 +325,11 @@ function DocumentDetailPage({ documentType, basePath, listLabel }: DetailPageCon
           </div>
           <div>
             <dt className="inline">提出日：</dt>
-            <dd className="inline">{doc.submittedDate ?? "確認中"}</dd>
+            <dd className="inline">{displayDate(doc.submittedDate)}</dd>
           </div>
           <div>
             <dt className="inline">議決日・審査日：</dt>
-            <dd className="inline">{doc.decisionDate ?? "確認中"}</dd>
+            <dd className="inline">{displayDate(doc.decisionDate)}</dd>
           </div>
           <div>
             <dt className="inline">提出者：</dt>

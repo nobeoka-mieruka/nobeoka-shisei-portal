@@ -190,7 +190,13 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
         ラベルのマスだけが広がり、点とラベルがずれていた）。ラベル自身は`w-min`で
         最小幅にとどめ、マスの中央に置く。
       */}
+      {/*
+        Phase218：横軸ラベルは目盛りの見た目であり、同じ年度が直後の一覧に値付きで並ぶ。
+        支援技術へ公開すると「2001年度 2005年度 2009年度…」という値を伴わない年号の羅列が
+        読み上げられ、直後の一覧と二重になるため aria-hidden で除外する。
+      */}
       <div
+        aria-hidden="true"
         className="mt-1 grid gap-1 px-1"
         style={{ gridTemplateColumns: `repeat(${points.length}, minmax(0, 1fr))` }}
       >
@@ -238,7 +244,8 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
           </p>
         </div>
       )}
-      <ul className="mt-3 flex flex-wrap gap-2">
+      {/* グラフ本体（role="img"）の代替情報。スクリーンリーダーでも一覧として辿れるよう名前を付ける。 */}
+      <ul className="mt-3 flex flex-wrap gap-2" aria-label="グラフの数値一覧（年度別）">
         {points.map((p, i) => (
           <li key={i} className="min-w-[92px] flex-1 rounded-lg border border-outline-variant px-2 py-1.5 text-xs">
             <p className="text-on-surface-variant">

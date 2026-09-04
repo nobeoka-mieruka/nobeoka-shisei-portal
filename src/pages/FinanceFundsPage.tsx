@@ -108,7 +108,7 @@ export function FinanceFundsPage() {
             <FinanceLineChart
               points={fiscalAdjustmentFundPoints}
               formatValue={(v) => formatOkuYenOrConfirming(v)}
-              ariaLabel="財源調整用基金の年度末残高の推移グラフ。詳細は直後の表を参照してください。"
+              ariaLabel="財源調整用基金の年度末残高の推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。"
             />
             {fiscalAdjustmentFundOmittedYears.length > 0 && (
               <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">

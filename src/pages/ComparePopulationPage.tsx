@@ -76,7 +76,7 @@ export function ComparePopulationPage() {
               value: y.population?.population ?? null,
             }))}
             formatValue={(v) => `${v.toLocaleString("ja-JP")}人`}
-            ariaLabel="選択した年度の人口の推移グラフ。詳細は直後の表を参照してください。"
+            ariaLabel="選択した年度の人口の推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。"
           />
           <FinanceTable
             caption="選択した年度の人口・世帯数・基準日"

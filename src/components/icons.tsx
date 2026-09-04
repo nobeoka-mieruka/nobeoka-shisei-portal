@@ -2,11 +2,26 @@ import type { SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
+/**
+ * Phase218：本ファイルのアイコンはすべて装飾（意味は隣接する可視テキストが持つ）。
+ *
+ * `role` を指定しない `<svg>` でも、Chromium はアクセシビリティツリーへ
+ * `image`（名前なし）ノードとして公開する。実測（CDP `Accessibility.getFullAXTree`）で
+ * 対象12ページ合計158個の「名前のない画像」が公開されており、スクリーンリーダーでは
+ * リンク内やナビゲーション内で無名の「グラフィック」が読み上げられる状態だった。
+ * そのため既定で `aria-hidden` を付け、支援技術から除外する。
+ * `focusable="false"` は、SVGが個別のタブ位置になる古い挙動への保険。
+ *
+ * 意味を持つアイコンを追加する場合は、呼び出し側で `aria-hidden={false}` と
+ * `role="img"` / `aria-label` を渡して上書きすること（`...props` が後勝ちになる）。
+ */
 const base = (props: IconProps) => ({
   width: 24,
   height: 24,
   viewBox: "0 0 24 24",
   fill: "none",
+  "aria-hidden": true,
+  focusable: "false" as const,
   ...props,
 });
 

@@ -18,8 +18,15 @@ export function FinanceBarChart({ points, formatValue, ariaLabel = "比較棒グ
   const max = Math.max(...points.map((p) => p.value ?? 0), 0);
 
   return (
-    <div role="img" aria-label={ariaLabel}>
-      <ul className="space-y-3">
+    /*
+      Phase218：以前はこの外枠に role="img" を付けていたが、role="img" は子孫を
+      presentational にするため、内側の項目名と数値（下の <ul>）がアクセシビリティツリーから
+      すべて消え、スクリーンリーダーでは「比較棒グラフ」という名前しか読み上げられなかった。
+      グラフの意味は「項目名＋数値」のテキストが持っているので、テキストは公開したまま、
+      見た目だけの棒（バー）を aria-hidden で除外する。
+    */
+    <div>
+      <ul className="space-y-3" aria-label={ariaLabel}>
         {points.map((p, i) => {
           const pct = p.value != null && max > 0 ? Math.round((p.value / max) * 100) : 0;
           return (
@@ -27,7 +34,7 @@ export function FinanceBarChart({ points, formatValue, ariaLabel = "比較棒グ
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
                 <span className="text-sm text-on-surface sm:w-24 sm:shrink-0">{p.label}</span>
                 <span className="flex flex-1 items-center gap-3">
-                  <span className="relative h-4 flex-1 overflow-hidden rounded-full bg-surface-container-high">
+                  <span aria-hidden="true" className="relative h-4 flex-1 overflow-hidden rounded-full bg-surface-container-high">
                     <span
                       className="absolute inset-y-0 left-0 rounded-full transition-[width]"
                       style={{

@@ -2,6 +2,7 @@ import { archiveVerificationStatusLabel } from "../../lib/archiveMayors";
 import { BROKEN_SOURCE_LINK_LABEL, isKnownBrokenSourceLink } from "../../lib/brokenSourceLinks";
 import type { CompareSourceNoticeItem } from "../../types/compare";
 import { humanizeDataNote } from "../../lib/citizenTermLabels";
+import { formatJapaneseDateIfIso } from "../../config/site";
 
 interface CompareSourceNoticeProps {
   items: CompareSourceNoticeItem[];
@@ -34,10 +35,14 @@ export function CompareSourceNotice({ items, className = "" }: CompareSourceNoti
               return (
                 <li key={i} className="text-on-surface-variant">
                   {ref.sourceUrl && !broken ? (
+                    // Phase218：SourceLink / SourceList / SourceRefList は「新しいタブで開く」ことを
+                    // accessible name で伝えているが、本コンポーネントだけ告知が無く、
+                    // /timeline 等で新しいタブが開くことが読み上げから分からなかった（実測1,185件）。
                     <a
                       href={ref.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${ref.sourceTitle ?? ref.sourceUrl}を新しいタブで開く`}
                       className="break-words text-primary underline"
                     >
                       {ref.sourceTitle ?? ref.sourceUrl}
@@ -54,8 +59,9 @@ export function CompareSourceNotice({ items, className = "" }: CompareSourceNoti
                   {(ref.sourceOrganization || ref.sourcePublishedDate || ref.accessedAt) && (
                     <span className="block text-on-surface-variant/80">
                       {ref.sourceOrganization && <>公表機関：{ref.sourceOrganization}　</>}
-                      {ref.sourcePublishedDate && <>公表日：{ref.sourcePublishedDate}　</>}
-                      {ref.accessedAt && <>取得日：{ref.accessedAt}</>}
+                      {/* Phase218：ISO文字列のままだと数字とハイフンの羅列として読み上げられるため日本語表記にする。 */}
+                      {ref.sourcePublishedDate && <>公表日：{formatJapaneseDateIfIso(ref.sourcePublishedDate)}　</>}
+                      {ref.accessedAt && <>取得日：{formatJapaneseDateIfIso(ref.accessedAt)}</>}
                     </span>
                   )}
                 </li>

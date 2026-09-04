@@ -17,6 +17,20 @@ export function formatJapaneseDate(iso: string): string {
   return `${year}年${month}月${day}日`;
 }
 
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * ISO形式（YYYY-MM-DD）のときだけ日本語表記へ変換し、それ以外は元の値をそのまま返す。
+ *
+ * Phase218：出典の「取得日」「公表日」「議決日」等がISO文字列のまま表示されている画面があり、
+ * スクリーンリーダーでは「にせんにじゅうろく ハイフン ぜろはち ハイフン さんじゅういち」のように
+ * 数字とハイフンの羅列として読み上げられていた。年月のみの記録や注記付きの記録も実在するため、
+ * 変換できない値は推測で補完せずそのまま表示する。
+ */
+export function formatJapaneseDateIfIso(value: string): string {
+  return ISO_DATE_PATTERN.test(value) ? formatJapaneseDate(value) : value;
+}
+
 /** 令和元年（2019年）を基準とした年度換算の起点。 */
 const REIWA_START_YEAR = 2019;
 

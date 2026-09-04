@@ -263,7 +263,7 @@ export function FinancePage() {
             isEstimate: f.isEstimate,
           }))}
           formatValue={formatOku}
-          ariaLabel="財源調整用基金の年度末残高の推移グラフ。詳細は直後の表を参照してください。"
+          ariaLabel="財源調整用基金の年度末残高の推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。"
         />
         <FinanceTable
           caption="財源調整用基金の年度末残高の表形式データ"
@@ -313,7 +313,7 @@ export function FinancePage() {
                 isEstimate: d.isEstimate,
               }))}
               formatValue={formatOku}
-              ariaLabel="市債残高の年度推移グラフ。詳細は直後の表を参照してください。"
+              ariaLabel="市債残高の年度推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。"
             />
             <FinanceTable
               caption="市債残高の年度推移の表形式データ"
@@ -406,7 +406,7 @@ export function FinancePage() {
         <FinanceLineChart
           points={data.populationTrend.trend.map((p) => ({ label: p.year, value: p.population }))}
           formatValue={(v) => `${v.toLocaleString("ja-JP")}人`}
-          ariaLabel="延岡市の人口推移グラフ。詳細は直後の表を参照してください。"
+          ariaLabel="延岡市の人口推移グラフ。グラフ直後の年度別一覧に各年度の値を掲載しています。"
         />
         <FinanceTable
           caption="延岡市の人口推移（各年1月1日現在）の表形式データ"
