@@ -1,0 +1,139 @@
+{
+  "description": "Phase220の回帰用fixture。議案の『会期年度』（billVotes.fiscalYear＝議案を審議した定例会・臨時会が属する年度）と、議案名に書かれた『対象年度』が食い違う実データを固定する。どちらも公式資料どおりの正しい値であり、一致させる方向の修正をしてはいけない。expectExplanation が true の議案は、詳細ページで両者の違いを説明する表示が出ることを期待する。",
+  "sourceOfTruth": "src/data/billVotes.json / src/data/councilSessions.json",
+  "fixedAt": "2026-09-05",
+  "cases": [
+    {
+      "id": "2026-03-gian-134",
+      "category": "予算",
+      "session": "令和8年3月定例会",
+      "billTitle": "令和8年度水道事業会計予算",
+      "sessionFiscalYear": "令和7年度",
+      "titleFiscalYear": "令和8年度",
+      "votingDate": "2026-03-19",
+      "expectExplanation": true,
+      "why": "3月定例会は前年度（令和7年度）のうちに開かれ、そこで翌年度（令和8年度）の当初予算を議決する。Phase220の起点となった議案。"
+    },
+    {
+      "id": "2024-03-gian-108",
+      "category": "予算",
+      "session": "令和6年3月定例会",
+      "billTitle": "令和6年度延岡市一般会計予算",
+      "sessionFiscalYear": "令和5年度",
+      "titleFiscalYear": "令和6年度",
+      "votingDate": "2024-03-22",
+      "expectExplanation": true,
+      "why": "一般会計の当初予算でも同じ構造になることを固定する（単年の例外ではない）。"
+    },
+    {
+      "id": "2024-03-gian-148",
+      "category": "予算",
+      "session": "令和6年3月定例会",
+      "billTitle": "令和6年度延岡市一般会計補正予算（第1号）",
+      "sessionFiscalYear": "令和5年度",
+      "titleFiscalYear": "令和6年度",
+      "votingDate": "2024-03-22",
+      "expectExplanation": true,
+      "why": "補正予算でも、翌年度を対象とするものが前年度の3月定例会で議決される場合がある。"
+    },
+    {
+      "id": "2023-09-gian-30",
+      "category": "決算",
+      "session": "令和5年9月定例会",
+      "billTitle": "令和4年度延岡市一般会計歳入歳出決算の認定",
+      "sessionFiscalYear": "令和5年度",
+      "titleFiscalYear": "令和4年度",
+      "votingDate": "2023-09-29",
+      "expectExplanation": true,
+      "why": "決算は逆方向。終わった年度（令和4年度）の決算を、翌年度（令和5年度）の9月定例会で認定する。"
+    },
+    {
+      "id": "2023-09-gian-35",
+      "category": "決算",
+      "session": "令和5年9月定例会",
+      "billTitle": "令和4年度延岡市水道事業会計剰余金の処分及び決算の認定",
+      "sessionFiscalYear": "令和5年度",
+      "titleFiscalYear": "令和4年度",
+      "votingDate": "2023-09-29",
+      "expectExplanation": true,
+      "why": "企業会計の決算でも同じ構造であることを固定する。"
+    },
+    {
+      "id": "2025-03-gian-135",
+      "category": "財産取得",
+      "session": "令和7年3月定例会",
+      "billTitle": "財産の取得（令和7年度中学校教師用指導書）",
+      "sessionFiscalYear": "令和6年度",
+      "titleFiscalYear": "令和7年度",
+      "votingDate": "2025-03-21",
+      "expectExplanation": true,
+      "why": "予算・決算以外でも議案名の年度が会期年度と異なる。分類で場合分けした実装にしないための例。"
+    },
+    {
+      "id": "2024-12-gian-84",
+      "category": "財産取得",
+      "session": "令和6年12月定例会",
+      "billTitle": "財産の取得（追認：令和2年度小学校教師用指導書（前期分））",
+      "sessionFiscalYear": "令和6年度",
+      "titleFiscalYear": "令和2年度",
+      "votingDate": "2024-12-13",
+      "expectExplanation": true,
+      "why": "議案名の年度が会期年度より4年前を指す追認案件。差が±1年に限られないことを固定する。"
+    },
+    {
+      "id": "2022-06-seigan-6",
+      "category": "請願",
+      "session": "令和4年6月定例会",
+      "billTitle": "延岡市駅前複合施設「エンクロス」の管理運営等に関する見直し方針（案）に反対し、令和5年度以降も現在の管理運営内容の継続を求める請願書",
+      "sessionFiscalYear": "令和4年度",
+      "titleFiscalYear": "令和5年度",
+      "votingDate": "2022-07-01",
+      "expectExplanation": true,
+      "why": "請願・陳情でも議案名に年度が入る。議案名の年度＝予算の対象年度と断定してはいけない例。"
+    },
+    {
+      "id": "2024-03-ketsugi-2",
+      "category": "決議",
+      "session": "令和6年3月定例会",
+      "billTitle": "令和6年度における市職員の不適正な事務処理等に関する調査特別委員会の調査経費に関する決議",
+      "sessionFiscalYear": "令和5年度",
+      "titleFiscalYear": "令和6年度",
+      "votingDate": "2024-03-22",
+      "expectExplanation": true,
+      "why": "決議でも議案名の年度が翌年度を指す。"
+    },
+    {
+      "id": "2026-06-gian-5",
+      "category": "予算",
+      "session": "令和8年6月定例会",
+      "billTitle": "令和8年度延岡市一般会計補正予算",
+      "sessionFiscalYear": "令和8年度",
+      "titleFiscalYear": "令和8年度",
+      "votingDate": "2026-07-03",
+      "expectExplanation": false,
+      "why": "対照例。会期年度と議案名の年度が一致する予算議案では、違いの説明を出さない。"
+    },
+    {
+      "id": "2026-06-gian-14",
+      "category": "条例",
+      "session": "令和8年6月定例会",
+      "billTitle": "延岡市印鑑の登録及び証明に関する条例の一部を改正する条例の制定",
+      "sessionFiscalYear": "令和8年度",
+      "titleFiscalYear": null,
+      "votingDate": "2026-06-12",
+      "expectExplanation": false,
+      "why": "対照例。議案名に年度表記が無い議案では、無い年度を推測して補わない。"
+    },
+    {
+      "id": "2023-09-gian-61",
+      "category": "契約",
+      "session": "令和5年9月定例会",
+      "billTitle": "工事請負契約の締結(延岡市し尿受入施設整備工事(機械設備))",
+      "sessionFiscalYear": "令和5年度",
+      "titleFiscalYear": null,
+      "votingDate": "2023-09-15",
+      "expectExplanation": false,
+      "why": "対照例。契約議案は議案名に年度を持たないことが多い。"
+    }
+  ]
+}

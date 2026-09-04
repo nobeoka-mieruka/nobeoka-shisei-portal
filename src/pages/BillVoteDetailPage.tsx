@@ -32,6 +32,12 @@ import { BillCategoryNotice, BillResultOutcomeNotice } from "../components/bills
 import { BILL_EXPLANATION_LEVEL_DESCRIPTION, BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
 import { classifyBillExplainability } from "../lib/billExplainability";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import {
+  BILL_SESSION_FISCAL_YEAR_DESCRIPTION,
+  BILL_SESSION_FISCAL_YEAR_HINT,
+  BILL_SESSION_FISCAL_YEAR_LABEL,
+  billTitleFiscalYearNote,
+} from "../lib/billFiscalYear";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -133,6 +139,8 @@ export function BillVoteDetailPage() {
   const committeeForBill = bill.committee ? getCommitteeByName(bill.committee) : undefined;
   const flowStatus = committeeFlowStatus(bill, billVotes);
   const isPetitionLike = bill.category === "請願" || bill.category === "陳情";
+  // Phase220：議案名に書かれた年度と会期年度が食い違う議案（当初予算・決算など）だけ、その理由を説明する。
+  const fiscalYearNote = billTitleFiscalYearNote(bill);
   const relatedQuestions = (bill.relatedQuestionIds ?? [])
     .map((qId) => generalQuestions.find((q) => q.id === qId))
     .filter((q): q is GeneralQuestionItem => !!q);
@@ -232,9 +240,15 @@ export function BillVoteDetailPage() {
         </div>
         <h1 className="mt-1 text-xl font-semibold text-on-surface sm:text-2xl">{bill.billTitle}</h1>
         <dl className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 text-sm sm:grid-cols-2">
+          {/* Phase220：ラベルが「年度」だけだと、議案名の年度（予算・決算の対象年度）と
+              取り違えられる。値は変更せず、この値の実際の意味（会期年度）をラベルで示す。
+              単一情報源は src/lib/billFiscalYear.ts。 */}
           <div>
-            <dt className="text-xs text-on-surface-variant">年度</dt>
-            <dd className="text-on-surface">{bill.fiscalYear}</dd>
+            <dt className="text-xs text-on-surface-variant">{BILL_SESSION_FISCAL_YEAR_LABEL}</dt>
+            <dd className="text-on-surface">
+              {bill.fiscalYear}
+              <span className="mt-0.5 block text-xs text-on-surface-variant">{BILL_SESSION_FISCAL_YEAR_HINT}</span>
+            </dd>
           </div>
           <div>
             <dt className="text-xs text-on-surface-variant">定例会・臨時会</dt>
@@ -301,6 +315,32 @@ export function BillVoteDetailPage() {
             </div>
           )}
         </dl>
+
+        {/* Phase220：議案名の年度と会期年度が違って見える議案で、「どちらかが間違い」と
+            受け取られないようにする。どちらも公式資料どおりの表記であることを明記し、
+            議案名の年度は説明のための引用としてのみ扱う（データには保存しない）。 */}
+        {fiscalYearNote && (
+          <div className="mt-4 rounded-xl border border-outline-variant bg-surface-container p-3.5 text-xs leading-relaxed text-on-surface-variant">
+            <p className="font-medium text-on-surface">この議案には、年度が2つ出てきます</p>
+            <ul className="mt-1.5 list-disc space-y-1 pl-5">
+              <li>
+                <span className="font-medium text-on-surface">
+                  会期年度 {fiscalYearNote.sessionFiscalYearLabel}
+                </span>
+                ：議会がこの議案を審議した定例会・臨時会が開かれた年度です。
+              </li>
+              <li>
+                <span className="font-medium text-on-surface">
+                  議案名の中の「{fiscalYearNote.titleFiscalYearLabel}」
+                </span>
+                ：この議案が扱う内容の年度です（予算議案なら予算の対象年度、決算議案なら決算の対象年度）。
+              </li>
+            </ul>
+            <p className="mt-1.5">
+              議会の年度は4月から翌年3月までです。翌年度の当初予算は前年度の3月定例会で議決し、決算は終わった年度の分を翌年度の9月定例会で認定するため、2つの年度がずれることがあります。どちらも公式資料どおりの表記で、誤りではありません。
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Phase161：意見書・決議・請願・陳情は市長提出の条例・予算議案とは性質が異なるため、
@@ -311,6 +351,8 @@ export function BillVoteDetailPage() {
       <SectionCard title="審査の流れ">
         <ReviewFlowTimeline bill={bill} allBills={billVotes} />
         <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {/* Phase220：基本情報の「会期年度」が何を指すのかを、全議案で開いて確認できるようにする。 */}
+          <GlossaryNote term={BILL_SESSION_FISCAL_YEAR_LABEL} definition={BILL_SESSION_FISCAL_YEAR_DESCRIPTION} />
           <GlossaryNote
             term="委員会付託"
             definition="議案を本会議で全議員が審議する前に、専門的に扱う委員会（総務政策・産業建設・厚生教育など）へ審査を委ねることです。"

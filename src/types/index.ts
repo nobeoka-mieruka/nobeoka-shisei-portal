@@ -1428,6 +1428,13 @@ export interface BillSharedProposalStatement {
  */
 export interface BillVoteItem {
   id: string;
+  /**
+   * **会期年度**（例："令和7年度"）。この議案を審議した定例会・臨時会が属する年度（4月始まり）で、
+   * `councilSessions.json` の当該会期の `fiscalYear` と一致する（Phase220で全1,177件を照合し例外なし）。
+   * 議案名に書かれた年度（当初予算・決算などの対象年度）とは別物であり、両者はしばしばずれる。
+   * 例："令和8年度水道事業会計予算" は 令和8年3月定例会＝会期年度 令和7年度 で議決される。
+   * 一致させる方向にデータを書き換えないこと。表示ラベルの単一情報源は src/lib/billFiscalYear.ts。
+   */
   fiscalYear: string;
   session: string;
   billNumber: string;
