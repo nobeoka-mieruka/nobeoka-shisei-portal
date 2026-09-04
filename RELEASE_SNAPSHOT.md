@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で固定し、Phase201〜209 の品質改善を反映した安定版の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜214 の品質改善を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -9,8 +9,8 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `65b4393`（Phase209） |
-| production deploy ID | `4ff0c494-c7f9-45ea-a731-2f493243156b` |
+| release commit | `9864f64`（Phase214） |
+| production deploy ID | `a051d481-5734-4b71-8052-97ab72dd3a09` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
@@ -74,7 +74,7 @@
 | production visual error | 0（20ページ × 6viewport = 120件。議案詳細10件を含む。320/375/390/430/1280/1440px で実レンダリング確認） |
 | horizontal overflow | 0px |
 | console error | 0 |
-| test failures | 0（282 checks / 26スクリプト） |
+| test failures | 0（286 checks / 26スクリプト） |
 | validate:data errors | 0 |
 | validate:seo failures | 0（2,271ページ） |
 | validate:content errors | 0（2,271ページ） |
@@ -140,7 +140,8 @@
 
 1. **ビルド非再現性**: 生成データの `generatedAt`（ビルド時刻）により、内容が同一でも毎回チャンクハッシュが変わり、再訪ユーザーが同じ内容の JS（845KB）を再取得する。値は画面表示にも使われるため要検討。
 2. **タップ領域**: ヘッダー（803件）の 44px 化は `top-[57px]` を使う6ページの sticky バー同時変更が必要。パンくず（423件）の 24px 化は全ページ +約8px。いずれも WCAG 2.2 AA は充足済みで、AAA のみ未達。
-3. **`/timeline` のデータ文面**: 一部の説明文に `bondRedemptionFundYen` 等の内部フィールド名が混入している（表示の折り返しは対応済み、文面自体はデータ側の課題）。
+3. **データ文面に残る内部識別子**: 注記本文には `bondRedemptionFundYen` 等のフィールド名やレコードIDが残っている。Phase209・212 で**表示は市民向けに変換済み**（一般公開ページの裸の露出は0件）だが、データ側の文面自体は未修正。`/finance/funds` の出典注記に残る `fund.balance.` のようなパス接頭辞は言い換え対象外。
 4. **検索**: 「市議会議員」の上位が選挙結果に偏る（語義的には妥当）。`/history`・`/updates` に項目アンカーが無いため同一URL結果を統合表示している。
 5. **末尾スラッシュ**: 308リダイレクトが発生（sitemap・canonical は末尾スラッシュなし）。クロール時に1ホップ増える。
 6. **スクリーンリーダー実機確認**（NVDA/VoiceOver/TalkBack）は未実施。自動 a11y 監査 0件は WCAG 完全準拠を意味しない。
+7. **基金グラフの欠損年度が圧縮される**: `/finance/funds` の基金総額グラフで、資料が無い 1989→2001 の11年が1目盛りに圧縮され直線で結ばれる（`FinanceMetricSection` が null 年度を事前除外するため `FinanceLineChart` の非補間保護が働かない）。表示方針の変更を伴い他ページにも影響するため未修正。
