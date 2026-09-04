@@ -13,6 +13,10 @@
  * 「独立した議案が無いことを確認済み」と「まだ確認できていない」を必ず別の状態として数え、
  * 一次資料の裏付けが無いまま前者へ格上げされていないことを機械的に保証する。
  *
+ * Phase213で追加：「まだ確認できていない」のうち、次に確認すべき公式資料が特定できているもの
+ * （＝資料待ち）を、awaitingSourceで市民向けに明示できていることの検証。
+ * 「確認済みで独立した議案・予算が無い」状態に資料待ちの表示が混ざらないことも保証する。
+ *
  * 使い方: node --experimental-strip-types scripts/test-mayor-promise-tracking.mjs
  * （src/lib/mayorPromiseLinkage.tsを直接importするため、NodeのTS直接実行を使う）
  */
@@ -23,9 +27,13 @@ import assert from "node:assert/strict";
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const readJson = (relPath) => JSON.parse(readFileSync(join(ROOT, relPath), "utf8"));
 
-const { classifyPromiseBudgetLinkage, classifyPromiseBillLinkage, summarizeBillLinkage } = await import(
-  "../src/lib/mayorPromiseLinkage.ts"
-);
+const {
+  classifyPromiseBudgetLinkage,
+  classifyPromiseBillLinkage,
+  isAwaitingSource,
+  summarizeBillLinkage,
+  summarizeBudgetLinkage,
+} = await import("../src/lib/mayorPromiseLinkage.ts");
 
 let passCount = 0;
 function check(label, fn) {
@@ -338,6 +346,76 @@ check("議案・予算の状態判定（理由コードの読み取り）がsrc/
     0,
     `relatedBudget/relatedBillの状態判定を独自に再実装しているファイル: ${suspects.join("、")}`,
   );
+});
+
+console.log("\nPhase213：資料待ちの明示");
+
+/**
+ * Phase205（reports/phase205-mayor-promise-linkage.json の nextInvestigationTargets）で
+ * 「令和8年度 延岡市予算に関する説明書」を次に見るべき資料として名指しされた重点公約。
+ * Phase213時点で同資料はリポジトリ内に存在せず（既存資産の横断検索で0件）、状態は据え置き。
+ */
+const PHASE213_AWAITING_PROMISE_IDS = ["3-1", "3-2", "3-3", "4-1", "4-2", "4-3", "4-4", "4-5"];
+
+check("重点公約が「資料待ち」として表示され、何を待っているかが画面文言に含まれている", () => {
+  for (const id of PHASE213_AWAITING_PROMISE_IDS) {
+    const promise = promises.find((p) => p.id === id);
+    assert.ok(promise, `公約${id}が見つかりません`);
+    const { display } = classifyPromiseBudgetLinkage(promise);
+    assert.ok(isAwaitingSource(display), `公約${id}の予算欄が資料待ちとして扱われていません`);
+    assert.ok(
+      display.awaitingSource.includes("予算に関する説明書"),
+      `公約${id}の確認待ち資料名が具体的ではありません: ${display.awaitingSource}`,
+    );
+    assert.ok(
+      /確認待ち|確認できておらず|確認でき次第|確認できた時点/.test(display.pillLabel + display.description),
+      `公約${id}の表示文が「何を待っているか」を示していません`,
+    );
+  }
+});
+
+check("「確認済み（資料待ちではない）」の状態に確認待ち資料が混ざっていない", () => {
+  const violations = [];
+  for (const p of promises) {
+    for (const linkage of [classifyPromiseBudgetLinkage(p), classifyPromiseBillLinkage(p)]) {
+      if (linkage.display.tone !== "pending" && linkage.display.awaitingSource) {
+        violations.push(`${p.id}（${linkage.reasonCode}）`);
+      }
+      if (linkage.display.awaitingSource !== undefined) {
+        assert.ok(
+          typeof linkage.display.awaitingSource === "string" && linkage.display.awaitingSource.length > 0,
+          `${p.id}の確認待ち資料名が空です`,
+        );
+      }
+    }
+  }
+  assert.equal(
+    violations.length,
+    0,
+    `確認済みの状態に「資料待ち」の表示が付いています: ${violations.join("、")}`,
+  );
+});
+
+check("予算側の集計が「金額まで確認」「関連議案に金額あり」「資料待ち」「その他確認中」を別々に数える", () => {
+  const summary = summarizeBudgetLinkage(promises);
+  assert.equal(summary.confirmedAmount, 4);
+  assert.equal(summary.awaitingSource, 9, "資料待ちの件数がPhase205の内訳と一致しません");
+  assert.equal(
+    summary.confirmedAmount + summary.amountInRelatedBills + summary.awaitingSource + summary.underReview,
+    promises.length,
+  );
+  console.log(
+    `    予算額まで確認：${summary.confirmedAmount}件／関連議案に金額の記載あり：${summary.amountInRelatedBills}件／予算資料の確認待ち：${summary.awaitingSource}件／その他確認中：${summary.underReview}件`,
+  );
+});
+
+check("確認待ち資料名に内部コードが混ざっていない", () => {
+  for (const p of promises) {
+    for (const linkage of [classifyPromiseBudgetLinkage(p), classifyPromiseBillLinkage(p)]) {
+      const label = linkage.display.awaitingSource ?? "";
+      assert.ok(!/[A-Z_]{6,}/.test(label), `${p.id}の確認待ち資料名に内部コードらしき文字列があります: ${label}`);
+    }
+  }
 });
 
 console.log(`\n${passCount}件成功`);
