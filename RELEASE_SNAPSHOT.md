@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で固定し、Phase201〜218 の品質改善を反映した安定版の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜223 の品質改善を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -9,8 +9,8 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `14b58d8`（Phase218） |
-| production deploy ID | `db1cb836-07b0-427c-80f3-7b1d220a4c02` |
+| release commit | `fc6e6ab`（Phase223） |
+| production deploy ID | `fc246889-6cc1-4565-91b1-28f972439364` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
@@ -71,10 +71,10 @@
 | --- | --- |
 | page 間件数矛盾 | 0 |
 | broken internal link | 0（2,270ページ / リンク先2,335種類を検査） |
-| production visual error | 0（20ページ × 6viewport = 120件。議案詳細10件を含む。320/375/390/430/1280/1440px で実レンダリング確認） |
+| production visual error | 0（27ページ × 7viewport = 189件。旧任期/現任期の質問詳細各3件・予算議案5件・通常議案5件を含む。320/375/390/430/768/1280/1440px で実レンダリング確認） |
 | horizontal overflow | 0px |
 | console error | 0 |
-| test failures | 0（308 checks / 27スクリプト） |
+| test failures | 0（359 checks / 30スクリプト） |
 | validate:data errors | 0 |
 | validate:seo failures | 0（2,271ページ） |
 | validate:content errors | 0（2,271ページ） |
@@ -132,6 +132,8 @@
 | `npm run audit:production-cache` | 本番のキャッシュヘッダーと鮮度の実測 |
 | `npm run analyze:bundle` | チャンク別モジュール内訳 |
 | `node scripts/audit-screenreader-semantics.mjs` | accessibility tree による読み上げ意味構造の監査（追加インストール不要） |
+| `npm run scan:era` | 実在しない元号年度（令和0・令和マイナス・NaN年 等）の全ページ走査。build 末尾でも実行 |
+| `npm run verify:production` | 本番の実レンダリング確認（27ページ × 7viewport） |
 
 `audit:*` と `smoke:production` は `playwright-core` とローカル Chromium を使います。
 アクセシビリティ監査（`scripts/audit-accessibility.mjs`）の再実行には
