@@ -21,6 +21,7 @@ import politicalFundReportsData from "../data/politicalFundReports.json";
 import kohoNobeokaIssuesData from "../data/kohoNobeokaIssues.json";
 import electionResultsData from "../data/electionResults.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
+import { civicTimelineEvents } from "../lib/civicTimeline";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import { summarizeVoteClassification, countBillsWithKnownProposerType } from "../lib/billVotes";
@@ -783,6 +784,9 @@ export function DataStatusPage() {
     },
   ];
 
+  // 実施主体の注記が付いた出来事の件数（注記オブジェクトが無い＝未確認）。
+  const civicTimelineImplementationConfirmed = civicTimelineEvents.filter((e) => e.implementation).length;
+
   const platform: DataDomain[] = [
     {
       label: "検索インデックス登録件数",
@@ -798,6 +802,18 @@ export function DataStatusPage() {
       unit: "名分が比較・年表で利用可能",
       linkTo: "/compare/mayors",
       linkLabel: "歴代市長を比較する",
+    },
+    // Phase230-232：市政年表には延岡市の事業ではない出来事（宮崎県が設置した学校・病院、
+    // 県主催で延岡市が参加した催し等）も含まれる。実施主体を一次資料で確認できた件数と
+    // 確認中の件数を分けて示し、「確認中」を0件・市の事業と読み替えられないようにする。
+    {
+      label: "市政年表の出来事",
+      count: civicTimelineEvents.length,
+      unit: "件",
+      scope: "延岡市公式ホームページの年表・市史等で確認できた出来事",
+      detail: `実施主体（延岡市／宮崎県／共同など）を一次資料で確認できたもの：${civicTimelineImplementationConfirmed}件／確認中：${civicTimelineEvents.length - civicTimelineImplementationConfirmed}件。確認中は「延岡市の事業である」という意味でも「延岡市の事業ではない」という意味でもありません。延岡市内で行われたことと、延岡市が実施したことは別に扱っています。`,
+      linkTo: "/history",
+      linkLabel: "市政年表を見る",
     },
   ];
 

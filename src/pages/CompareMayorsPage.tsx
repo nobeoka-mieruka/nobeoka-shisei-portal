@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import electionResultsData from "../data/electionResults.json";
@@ -220,6 +220,19 @@ export function CompareMayorsPage() {
           <SectionCard title="件数を選んで比較">
             <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
               在籍年数は任期開始・終了年から算出した概算（暦年ベース）であり、実日数ではありません。任期が未確認の市長は算出していません。
+            </p>
+            {/* Phase232：「在任中の市政イベント件数」には、延岡市の事業ではない出来事
+                （宮崎県が設置した学校・病院など）も含まれる。件数を並べる画面では
+                実績の多寡と読まれやすいため、その点を文字で明示する。 */}
+            <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+              「在任中の市政イベント件数」は、その市長の在任期間中に起きたことが一次資料で確認できた出来事の数です。延岡市の事業ではない出来事（宮崎県が設置した学校・病院など）も含み、市長の実績の多さを示すものではありません。出来事ごとの実施主体は
+              <Link
+                to="/history"
+                className="mx-1 text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                市政年表
+              </Link>
+              で、一次資料で確認できたものだけ表示しています。
             </p>
             <div className="flex flex-wrap gap-2" role="group" aria-label="比較する件数の切り替え">
               {countMetrics.map((m) => (

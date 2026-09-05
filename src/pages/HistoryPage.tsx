@@ -29,7 +29,14 @@ import type { CsvColumn } from "../lib/csv";
 import type { CivicTimelineEvent } from "../types";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 import { sourceMediumLabel } from "../lib/sourceMedium";
-import { IMPLEMENTING_BODY_LABEL, NOBEOKA_RELATION_LABEL } from "../lib/implementationAttribution";
+import {
+  IMPLEMENTATION_FILTER_LABEL,
+  IMPLEMENTATION_FILTER_ORDER,
+  IMPLEMENTING_BODY_LABEL,
+  NOBEOKA_RELATION_LABEL,
+  UNCONFIRMED_IMPLEMENTATION_FILTER,
+  implementationFilterValue,
+} from "../lib/implementationAttribution";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
@@ -96,6 +103,9 @@ export function HistoryPage() {
 
   const [decade, setDecade] = useState("all");
   const [category, setCategory] = useState("all");
+  // Phase232：実施主体（延岡市／宮崎県／共同／確認中）での絞り込み。既存の年代・分類と
+  // 同じFilterSelectに1つ追加するだけで、新しい検索画面は作らない。
+  const [implementingBody, setImplementingBody] = useState("all");
   // 歴代市長ページ（/mayors/:slug）から「この市長の在任期間の出来事だけ見る」形で遷移してきた場合の
   // 絞り込み。relatedPersonIdsは根拠が確認できた場合のみ設定されるため、この絞り込みも
   // 一次資料で確認できた対応関係の範囲に限られる（「在任中に発生した」であり「市長の実績」ではない）。
@@ -120,6 +130,17 @@ export function HistoryPage() {
     { value: "all", label: "すべての分類" },
     ...civicTimelineCategories.map((c) => ({ value: c, label: c })),
   ];
+  // Phase232：実施主体の選択肢は、実際にデータへ存在する区分だけを件数付きで並べる
+  // （該当0件の空の選択肢を作らない）。値は内部コードではなく画面に出さない短い識別子。
+  const implementingBodyCounts = new Map<string, number>();
+  for (const e of allEvents) {
+    const key = implementationFilterValue(e.implementation);
+    implementingBodyCounts.set(key, (implementingBodyCounts.get(key) ?? 0) + 1);
+  }
+  const implementingBodyOptions = IMPLEMENTATION_FILTER_ORDER.filter((v) => implementingBodyCounts.has(v)).map((v) => ({
+    value: v,
+    label: `${IMPLEMENTATION_FILTER_LABEL[v]}（${implementingBodyCounts.get(v)}件）`,
+  }));
 
   const clearPersonFilter = () => {
     const next = new URLSearchParams(searchParams);
@@ -132,9 +153,10 @@ export function HistoryPage() {
       const matchesDecade = decade === "all" || Math.floor(e.year / 10) * 10 === Number(decade);
       const matchesCategory = category === "all" || e.category === category;
       const matchesPerson = !personFilter || e.relatedPersonIds?.includes(personFilter);
-      return matchesDecade && matchesCategory && matchesPerson;
+      const matchesBody = implementingBody === "all" || implementationFilterValue(e.implementation) === implementingBody;
+      return matchesDecade && matchesCategory && matchesPerson && matchesBody;
     });
-  }, [allEvents, decade, category, personFilter]);
+  }, [allEvents, decade, category, personFilter, implementingBody]);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -267,6 +289,14 @@ export function HistoryPage() {
       <div className="flex flex-wrap items-center gap-2">
         <FilterSelect label="年代" value={decade} onChange={setDecade} options={decadeOptions} />
         <FilterSelect label="分類" value={category} onChange={setCategory} options={categoryOptions} />
+        {/* Phase232：「延岡市の事業」と「宮崎県の事業」を読み分けられるようにする絞り込み。
+            選択肢の文字はすべて市民向けの日本語で、内部コードは表示しない。 */}
+        <FilterSelect
+          label="実施主体"
+          value={implementingBody}
+          onChange={setImplementingBody}
+          options={implementingBodyOptions}
+        />
         <div className="ml-auto">
           <CsvDownloadButton filename="nobeoka-civic-timeline.csv" rows={filtered} columns={HISTORY_CSV_COLUMNS} />
         </div>
@@ -274,7 +304,16 @@ export function HistoryPage() {
 
       <p className="text-xs text-on-surface-variant" aria-live="polite" aria-atomic="true">
         {allEvents.length}件中{filtered.length}件を表示
+        {implementingBody !== "all" && `（絞り込み：${IMPLEMENTATION_FILTER_LABEL[implementingBody]}）`}
       </p>
+
+      {/* Phase232：「確認中」で絞り込んだときに、それが「延岡市の事業」の一覧だと
+          誤解されないよう、絞り込みの意味をその場で文字で説明する。 */}
+      {implementingBody === UNCONFIRMED_IMPLEMENTATION_FILTER && (
+        <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+          ここに表示しているのは、実施主体をまだ一次資料で確認できていない出来事です。延岡市の事業であるという意味でも、延岡市の事業ではないという意味でもありません。
+        </p>
+      )}
 
       {filtered.length === 0 ? (
         <p className="rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">

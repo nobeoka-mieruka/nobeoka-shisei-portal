@@ -24,6 +24,12 @@
  *   G. 県関連の出来事を全件監査し、市と県の取り違えが双方向とも0件である
  *      （実レンダリングによる確認は scripts/audit-prefecture-attribution-rendering.mjs）
  *
+ * Phase232 で追加した固定事項：
+ *   8. 歴代市長ページ（在任中の出来事）でも実施主体を表示している
+ *      （市長個人の実績と読まれやすい場所であるため）
+ *   9. 絞り込みUIの値に内部コードをそのまま使わず、選択肢の文字はすべて日本語である
+ *  10. 絞り込みに「確認中」の区分があり、そのラベルが延岡市の事業を意味しない
+ *
  * 使い方: node --experimental-strip-types scripts/test-implementation-attribution.mjs
  */
 import { readFileSync, readdirSync } from "node:fs";
@@ -125,7 +131,13 @@ check("未確認（未設定）を「延岡市の事業」として扱わず、�
 });
 
 check("実施主体を表示するページが、この注記を実際に使っている（データだけ作って未接続にしない）", () => {
-  const consumers = ["src/pages/HistoryPage.tsx", "src/pages/TimelineYearPage.tsx"];
+  // Phase232：歴代市長ページの「市政上の主な出来事（在任中）」は、県立学校・県立病院の
+  // 整備などが市長個人の実績として読まれやすい。ここでも実施主体を表示し続けることを固定する。
+  const consumers = [
+    "src/pages/HistoryPage.tsx",
+    "src/pages/TimelineYearPage.tsx",
+    "src/pages/MayorDetailPage.tsx",
+  ];
   const notWired = consumers.filter((f) => !/ImplementationAttributionNote/.test(readSrc(f)));
   assert.equal(notWired.length, 0, `実施主体の注記を使っていないページ: ${notWired.join("、")}`);
   // 画面には内部コードを出さず、市民向けの日本語へ変換する。
@@ -135,6 +147,38 @@ check("実施主体を表示するページが、この注記を実際に使っ�
   for (const relation of RELATIONS) {
     assert.ok(new RegExp(`${relation}:`).test(labelSource), `${relation} の日本語ラベルが無い`);
   }
+});
+
+check("実施主体の絞り込みが、内部コードを画面へ出さず日本語の選択肢だけを並べる（Phase232）", () => {
+  // 絞り込みの値（selectのvalue）は、内部コードをそのまま使わない。
+  const filterBlock = labelSource.slice(labelSource.indexOf("IMPLEMENTING_BODY_FILTER_VALUE"));
+  const filterValues = [...filterBlock.matchAll(/^ {2}([A-Za-z]+): "([a-z]+)",$/gm)];
+  assert.equal(filterValues.length, BODIES.size, "実施主体の区分と絞り込みの値が1対1で対応していない");
+  for (const [, body, value] of filterValues) {
+    assert.ok(BODIES.has(body), `${body} は型定義に無い区分`);
+    assert.notEqual(value, body, `${body}: 内部コードをそのまま絞り込みの値にしている`);
+    // ラベル表に日本語の文字ラベルがあること（色や記号だけで区別しない）。
+    const labelMatch = labelSource.match(new RegExp(`\\n  ${value}: "([^"]+)"`));
+    assert.ok(labelMatch, `${value} の日本語ラベルが無い`);
+    assert.ok(/[ぁ-んァ-ン一-龥]/.test(labelMatch[1]), `${value} のラベルが日本語になっていない`);
+  }
+  // 絞り込みの選択肢は、すべて並び順の定義に含まれる（画面から漏れる区分を作らない）。
+  const orderBlock = labelSource.slice(labelSource.indexOf("IMPLEMENTATION_FILTER_ORDER"));
+  for (const [, , value] of filterValues) {
+    assert.ok(orderBlock.includes(`"${value}"`), `${value} が絞り込みの並び順に含まれていない`);
+  }
+});
+
+check("絞り込みの「確認中」が、延岡市の事業を意味する表示になっていない（Phase232）", () => {
+  const unconfirmedLabel = labelSource.match(/\[UNCONFIRMED_IMPLEMENTATION_FILTER\]: "([^"]+)"/);
+  assert.ok(unconfirmedLabel, "「確認中」の選択肢ラベルが無い");
+  assert.ok(unconfirmedLabel[1].includes("確認中"), "「確認中」であることが文字で分からない");
+  assert.ok(!unconfirmedLabel[1].includes("延岡市の事業"), "未確認を延岡市の事業として表示している");
+  // 未設定の出来事は「確認中」に分類し、実施主体が延岡市の区分へ寄せない。
+  assert.ok(
+    /return attribution\s*\?[\s\S]*?: UNCONFIRMED_IMPLEMENTATION_FILTER;/.test(labelSource),
+    "未設定の出来事が「確認中」以外へ分類されている",
+  );
 });
 
 check("宮崎県の予算・県議会の議決結果が、延岡市の財政・議案データへ混入していない", () => {
