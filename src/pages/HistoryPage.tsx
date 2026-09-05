@@ -27,6 +27,7 @@ import { formatJapaneseDate } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
 import type { CivicTimelineEvent } from "../types";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { sourceMediumLabel } from "../lib/sourceMedium";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
@@ -305,10 +306,22 @@ export function HistoryPage() {
                     同じ年度の市長・財政・人口等を見る
                   </Link>
                 </div>
+                {/* Phase228：市政年表の出典には新聞記事も含まれる。報道は一次資料ではないため、
+                    公式資料と同じ見た目で「根拠資料」として並べず、文字のラベルで区別する。 */}
                 <div className="mt-3 space-y-1">
-                  {event.sourceRefs.map((ref) => (
-                    <SourceLink key={ref.url} url={ref.url} label={ref.label} verifiedAt={event.lastVerifiedAt} />
-                  ))}
+                  {event.sourceRefs.map((ref) => {
+                    const mediumLabel = sourceMediumLabel(ref);
+                    return (
+                      <div key={ref.url} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <SourceLink url={ref.url} label={ref.label} verifiedAt={event.lastVerifiedAt} />
+                        {mediumLabel && (
+                          <span className="rounded-full bg-surface-container-highest px-2 py-0.5 text-xs text-on-surface-variant">
+                            {mediumLabel}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </SectionCard>
             </li>
