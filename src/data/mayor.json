@@ -7,16 +7,26 @@
   "career": [
     {
       "id": "c1",
+      "year": "平成17年",
+      "description": "中央大学商学部卒業"
+    },
+    {
+      "id": "c2",
       "year": "平成19年",
       "description": "早稲田大学大学院公共経営研究科修了、宮崎県庁入庁"
     },
     {
-      "id": "c2",
+      "id": "c3",
       "year": "平成25年",
-      "description": "延岡市役所入庁"
+      "description": "宮崎県庁退職、延岡市役所入庁"
     },
     {
-      "id": "c3",
+      "id": "c4",
+      "year": "令和7年6月",
+      "description": "延岡市役所退職"
+    },
+    {
+      "id": "c5",
       "year": "令和7年7月20日",
       "description": "第29代延岡市長就任"
     }
@@ -60,5 +70,37 @@
   ],
   "officialUrl": "https://hisatomo-m.jp/",
   "sourceUrl": "https://hisatomo-m.jp/",
-  "videos": []
+  "videos": [],
+  "sources": [
+    {
+      "label": "延岡市公式ホームページ「市長プロフィール」（2025年7月20日更新）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/43566.html"
+    },
+    {
+      "label": "延岡市公式ホームページ「市長室」",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/"
+    },
+    {
+      "label": "延岡市公式ホームページ「市長公約の進捗状況」（2026年8月25日更新）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/51666.html"
+    },
+    {
+      "label": "延岡市公式ホームページ「市長の交際費等」",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/49506.html"
+    },
+    {
+      "label": "延岡市公式ホームページ「市長の資産などの公開」（2026年5月15日更新）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/2791.html"
+    },
+    {
+      "label": "延岡市公式ホームページ「施政方針」",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/mayor/51665.html"
+    },
+    {
+      "label": "三浦久知 公式サイト",
+      "url": "https://hisatomo-m.jp/"
+    }
+  ],
+  "verifiedAt": "2026-09-05",
+  "updatedAt": "2026-09-05"
 }

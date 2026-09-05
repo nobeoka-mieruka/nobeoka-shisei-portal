@@ -479,7 +479,10 @@ export function MayorPolicyProgressPage() {
         このページは、市長の公約、市長本人が公表した進捗資料、延岡市の施政方針、予算書などを基に公開情報を整理したものです。市長本人の自己評価と、延岡市が公表した事実は区別して表示しています。掲載内容は、特定の政治家を支持、推薦、批判することを目的としたものではありません。
       </p>
 
-      <p className="px-1 text-xs text-on-surface-variant">最終確認：{formatJapaneseDate(data.referenceDate)}</p>
+      <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
+        資料の基準日：{formatJapaneseDate(data.referenceDate)}
+        {data.lastVerified && <>／最終確認：{formatJapaneseDate(data.lastVerified)}</>}
+      </p>
 
       <CorrectionRequestButton pageName="市長公約の進捗状況" />
     </div>

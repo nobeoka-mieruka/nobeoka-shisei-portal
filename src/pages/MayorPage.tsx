@@ -1,8 +1,9 @@
 import mayorData from "../data/mayor.json";
 import mayorPromisesData from "../data/mayorPromises.json";
+import mayorAssetDisclosuresData from "../data/mayorAssetDisclosures.json";
 import billVotesData from "../data/billVotes.json";
 import { getSortedMayorPressConferences } from "../data/mayorPressConferences";
-import type { BillVoteItem, Mayor, MayorPromisesData } from "../types";
+import type { BillVoteItem, Mayor, MayorAssetDisclosuresData, MayorPromisesData } from "../types";
 import { Avatar } from "../components/Avatar";
 import { SnsLinks } from "../components/SnsLinks";
 import { SectionCard } from "../components/SectionCard";
@@ -32,6 +33,8 @@ import { getSeoForPath } from "../lib/seo";
 
 const mayor = mayorData as Mayor;
 const promisesData = mayorPromisesData as MayorPromisesData;
+const assetDisclosures = mayorAssetDisclosuresData as MayorAssetDisclosuresData;
+const assetDisclosureCount = assetDisclosures.groups.reduce((sum, g) => sum + g.documents.length, 0);
 const pressConferences = getSortedMayorPressConferences();
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const mayorSubmittedBills = billVotes
@@ -298,6 +301,72 @@ export function MayorPage() {
               </li>
             ))}
           </ul>
+        </SectionCard>
+      )}
+
+      {assetDisclosureCount > 0 && (
+        <SectionCard title={`市長の資産などの公開（${assetDisclosureCount}件）`}>
+          <p className="text-sm leading-relaxed text-on-surface">
+            「{assetDisclosures.legalBasis}」に基づき、延岡市が公開している資産報告書です。
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{assetDisclosures.overview}</p>
+
+          <h3 className="mt-4 text-sm font-semibold text-on-surface">公開される報告書の種類</h3>
+          <dl className="mt-2 space-y-2">
+            {assetDisclosures.reportTypes.map((t) => (
+              <div key={t.id} className="rounded-lg border border-outline-variant p-3">
+                <dt className="text-sm font-medium text-on-surface">{t.name}</dt>
+                <dd className="mt-1 text-xs leading-relaxed text-on-surface-variant">{t.description}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {assetDisclosures.groups.map((group) => (
+            <div key={group.id} className="mt-4">
+              <h3 className="text-sm font-semibold text-on-surface">{group.label}</h3>
+              <ul className="mt-2 space-y-2">
+                {group.documents.map((doc) => (
+                  <li key={doc.id}>
+                    <a
+                      href={doc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${doc.label}（延岡市公式ホームページのPDF）を新しいタブで開く`}
+                      className={`flex min-h-11 items-center gap-3 rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
+                    >
+                      <GlobeIcon className="h-4 w-4 shrink-0 text-on-surface-variant" aria-hidden />
+                      <span className="min-w-0">
+                        <span className="block text-sm font-medium text-on-surface">{doc.label}</span>
+                        <span className="block text-xs text-on-surface-variant">
+                          延岡市公式ホームページ／{doc.fileType}
+                          {doc.fileSizeLabel ? `／${doc.fileSizeLabel}` : ""}
+                        </span>
+                        {doc.note && (
+                          <span className="mt-1 block text-xs leading-relaxed text-on-surface-variant">{doc.note}</span>
+                        )}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <p className="mt-4 text-xs leading-relaxed text-on-surface-variant">
+            {assetDisclosures.originalInspection}
+            <br />
+            出典：
+            <a
+              href={assetDisclosures.sourcePageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`underline ${linkClass}`}
+            >
+              {assetDisclosures.sourcePageTitle}
+            </a>
+            （公式ページ更新日 {formatJapaneseDate(assetDisclosures.sourcePageUpdatedAt)}／当サイト最終確認日{" "}
+            {formatJapaneseDate(assetDisclosures.lastVerified)}）
+          </p>
         </SectionCard>
       )}
 
