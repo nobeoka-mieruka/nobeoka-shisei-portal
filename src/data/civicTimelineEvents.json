@@ -1341,7 +1341,13 @@
       }
     ],
     "lastVerifiedAt": "2026-08-11",
-    "verificationStatus": "verified"
+    "verificationStatus": "verified",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1687.html",
+      "attributionNote": "延岡市公式サイトの年表に「県立延岡病院」と記載されており、宮崎県が設置・運営する病院の施設整備である。延岡市の事業ではない。延岡市の負担・共同実施を示す記載は同資料に無い。"
+    }
   },
   {
     "id": "civic-070",
@@ -1640,7 +1646,13 @@
     ],
     "lastVerifiedAt": "2026-08-14",
     "verificationStatus": "verified",
-    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+      "attributionNote": "延岡市公式サイトの年表に「県立延岡図書館」と記載されており、宮崎県が設置した施設である。延岡市の事業ではない。"
+    }
   },
   {
     "id": "civic-085",
@@ -1680,7 +1692,13 @@
     ],
     "lastVerifiedAt": "2026-08-14",
     "verificationStatus": "verified",
-    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+      "attributionNote": "延岡市公式サイトの年表に「県立延岡工業学校」と記載されており、宮崎県が設置した学校である。延岡市の事業ではない。"
+    }
   },
   {
     "id": "civic-087",
@@ -1760,7 +1778,13 @@
     ],
     "lastVerifiedAt": "2026-08-14",
     "verificationStatus": "verified",
-    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+      "attributionNote": "延岡市公式サイトの年表に「県立延岡ろう学校」と記載されており、宮崎県が設置した学校である。延岡市の事業ではない。"
+    }
   },
   {
     "id": "civic-091",
@@ -1900,7 +1924,13 @@
     ],
     "lastVerifiedAt": "2026-08-14",
     "verificationStatus": "verified",
-    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。"
+    "notes": "在任中の一般的な市政動向として年表に記載。延岡市公式サイトの原文を2026-08-14に確認済み。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+      "attributionNote": "延岡市公式サイトの年表に「県立延岡恒富高等学校・県立延岡岡富高等学校」と記載されており、宮崎県が設置した学校である。延岡市の事業ではない。"
+    }
   },
   {
     "id": "civic-098",
@@ -2000,7 +2030,13 @@
     ],
     "lastVerifiedAt": "2026-08-14",
     "verificationStatus": "verified",
-    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。"
+    "notes": "延岡市公式サイトの原文を2026-08-14に確認済み。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+      "attributionNote": "延岡市公式サイトの年表に「県立延岡商業高等学校」と記載されており、宮崎県が設置した学校である。延岡市の事業ではない。"
+    }
   },
   {
     "id": "civic-103",
@@ -2932,7 +2968,14 @@
       }
     ],
     "lastVerifiedAt": "2026-08-16",
-    "verificationStatus": "verified"
+    "verificationStatus": "verified",
+    "implementation": {
+      "implementingBody": "nobeokaCity",
+      "nobeokaRelation": "cityProject",
+      "implementationScope": "nobeokaCity",
+      "attributionSourceUrl": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
+      "attributionNote": "延岡市が制定した条例であり延岡市の施策。背景に県立延岡病院の医師退職問題があるが、条例の制定主体は延岡市である。"
+    }
   },
   {
     "id": "civic-149",
@@ -3933,7 +3976,14 @@
     ],
     "lastVerifiedAt": "2026-08-21",
     "verificationStatus": "partiallyVerified",
-    "notes": "Phase27（Block6：1970年代調査）で新規発見。国立国会図書館デジタルコレクション（個人送信サービス、pid 9774712、コマ496）を実閲覧して確認した。月日は同資料の当該箇所からは確認できなかったため年のみを登録する。既存civicTimelineEvents.jsonに同種の記載がないことを確認済み（重複なし）。"
+    "notes": "Phase27（Block6：1970年代調査）で新規発見。国立国会図書館デジタルコレクション（個人送信サービス、pid 9774712、コマ496）を実閲覧して確認した。月日は同資料の当該箇所からは確認できなかったため年のみを登録する。既存civicTimelineEvents.jsonに同種の記載がないことを確認済み（重複なし）。",
+    "implementation": {
+      "implementingBody": "cityPrefectureJoint",
+      "nobeokaRelation": "cityPrefectureJoint",
+      "implementationScope": "nobeokaCity",
+      "attributionSourceUrl": "https://dl.ndl.go.jp/pid/9774712/1/496",
+      "attributionNote": "延岡市史（1983年版上巻）の年表に、宮崎県・延岡市・旭化成の三者で公害防止協定を締結したと記載されている。県と市の双方が締結当事者として資料に明示されているため共同として扱う（民間企業を含む三者協定である）。"
+    }
   },
   {
     "id": "civic-199",
@@ -4213,7 +4263,13 @@
     ],
     "lastVerifiedAt": "2026-08-29",
     "verificationStatus": "verified",
-    "notes": "TASK-175（延岡市史横断調査）で新規発見。市史に「平成十七年（二〇〇五）四月に延岡西高等学校および延岡東高等学校を統合し...創立」との記載を確認（開校日の日単位までは記載なし）。両校の閉校式典は2007年3月。宮崎県立の学校再編であり延岡市自体の施策ではないが、市民生活・教育環境への影響が大きいため市政年表候補として記録する。"
+    "notes": "TASK-175（延岡市史横断調査）で新規発見。市史に「平成十七年（二〇〇五）四月に延岡西高等学校および延岡東高等学校を統合し...創立」との記載を確認（開校日の日単位までは記載なし）。両校の閉校式典は2007年3月。宮崎県立の学校再編であり延岡市自体の施策ではないが、市民生活・教育環境への影響が大きいため市政年表候補として記録する。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4389.pdf",
+      "attributionNote": "宮崎県立高等学校の再編統合であり、延岡市の施策ではない（この出来事の補足欄にも記載）。市民の教育環境への影響が大きいため市政年表に収録している。"
+    }
   },
   {
     "id": "civic-214",
@@ -4230,7 +4286,13 @@
     ],
     "lastVerifiedAt": "2026-08-29",
     "verificationStatus": "verified",
-    "notes": "TASK-175（延岡市史横断調査）で新規発見。市史に統合3校それぞれの沿革として記載。県立特別支援学校の再編であり延岡市自体の施策ではないが、市民生活・教育環境への影響が大きいため市政年表候補として記録する。"
+    "notes": "TASK-175（延岡市史横断調査）で新規発見。市史に統合3校それぞれの沿革として記載。県立特別支援学校の再編であり延岡市自体の施策ではないが、市民生活・教育環境への影響が大きいため市政年表候補として記録する。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "relatedOnly",
+      "attributionSourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4389.pdf",
+      "attributionNote": "宮崎県立特別支援学校の再編統合であり、延岡市の施策ではない（この出来事の補足欄にも記載）。市民の教育環境への影響が大きいため市政年表に収録している。"
+    }
   },
   {
     "id": "civic-215",
@@ -4327,7 +4389,14 @@
     ],
     "lastVerifiedAt": "2026-09-05",
     "verificationStatus": "verified",
-    "notes": "主催は宮崎県であり、延岡市が単独で実施する事業ではない。延岡市は参加機関（災害支援課）として県の発表資料に明記されている。出典は開催前の報道発表で、実施結果を報告する公表資料は確認日時点では確認できていない。宮崎県の予算額・事業費は延岡市の予算ではないため本項目には含めていない。県は令和8年度に延岡市のほか宮崎市・日南市でも実施予定としている。"
+    "notes": "主催は宮崎県であり、延岡市が単独で実施する事業ではない。延岡市は参加機関（災害支援課）として県の発表資料に明記されている。出典は開催前の報道発表で、実施結果を報告する公表資料は確認日時点では確認できていない。宮崎県の予算額・事業費は延岡市の予算ではないため本項目には含めていない。県は令和8年度に延岡市のほか宮崎市・日南市でも実施予定としている。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "nobeokaParticipant",
+      "implementationScope": "nobeokaCity",
+      "attributionSourceUrl": "https://www.pref.miyazaki.lg.jp/kiki-kikikanri/press/2026/08/20260818141134.html",
+      "attributionNote": "宮崎県（総務部危機管理局危機管理課）が実施する事業として県が報道発表したもの。延岡市（災害支援課）は参加機関として同資料に明記されている。会場が延岡市内であることは延岡市の事業であることを意味しない。"
+    }
   },
   {
     "id": "civic-220",
@@ -4347,6 +4416,13 @@
     ],
     "lastVerifiedAt": "2026-09-05",
     "verificationStatus": "verified",
-    "notes": "主催は宮崎県であり、延岡市が主催する会議ではない。会場が延岡市役所であること、延岡市長が出席者として県の発表資料に明記されていることから市政関連として登録した。県の発表資料に各首長の氏名の記載はないため、関連人物は開催日時点の延岡市長（三浦久知）としている。出典は開催前の報道発表で、開催結果や議論の内容を報告する公表資料は確認日時点では確認できていない。"
+    "notes": "主催は宮崎県であり、延岡市が主催する会議ではない。会場が延岡市役所であること、延岡市長が出席者として県の発表資料に明記されていることから市政関連として登録した。県の発表資料に各首長の氏名の記載はないため、関連人物は開催日時点の延岡市長（三浦久知）としている。出典は開催前の報道発表で、開催結果や議論の内容を報告する公表資料は確認日時点では確認できていない。",
+    "implementation": {
+      "implementingBody": "miyazakiPrefecture",
+      "nobeokaRelation": "nobeokaParticipant",
+      "implementationScope": "northernMiyazaki",
+      "attributionSourceUrl": "https://www.pref.miyazaki.lg.jp/shichoson/press/2026/08/20260803135738.html",
+      "attributionNote": "宮崎県（総務部市町村課）主催の会合として県が報道発表したもの。東臼杵ブロック（延岡市・日向市・門川町・諸塚村・椎葉村・美郷町）が対象で、出席者に延岡市長が明記されている。会場が延岡市役所であることは延岡市の主催を意味しない。"
+    }
   }
 ]

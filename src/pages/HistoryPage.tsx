@@ -20,6 +20,7 @@ import { FilterSelect } from "../components/FilterSelect";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import { LastUpdated } from "../components/LastUpdated";
+import { ImplementationAttributionNote } from "../components/ImplementationAttributionNote";
 import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
@@ -28,6 +29,7 @@ import type { CsvColumn } from "../lib/csv";
 import type { CivicTimelineEvent } from "../types";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 import { sourceMediumLabel } from "../lib/sourceMedium";
+import { IMPLEMENTING_BODY_LABEL, NOBEOKA_RELATION_LABEL } from "../lib/implementationAttribution";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
@@ -71,6 +73,16 @@ const HISTORY_CSV_COLUMNS: CsvColumn<CivicTimelineEvent>[] = [
   { header: "分類", value: (e) => e.category },
   { header: "タイトル", value: (e) => e.title },
   { header: "概要", value: (e) => e.summary },
+  // Phase230-231：一次資料で確認できた場合のみ実施主体を書き出す。
+  // 未確認を「延岡市」で埋めず「確認中」と明示する。
+  {
+    header: "実施主体",
+    value: (e) => (e.implementation ? IMPLEMENTING_BODY_LABEL[e.implementation.implementingBody] : "確認中"),
+  },
+  {
+    header: "延岡市との関係",
+    value: (e) => (e.implementation ? NOBEOKA_RELATION_LABEL[e.implementation.nobeokaRelation] : "確認中"),
+  },
   { header: "出典", value: (e) => e.sourceRefs.map((s) => s.url) },
   { header: "確認状況", value: (e) => (e.verificationStatus === "verified" ? "確認済み" : "一部確認済み") },
   { header: "最終確認日", value: (e) => e.lastVerifiedAt },
@@ -92,6 +104,8 @@ export function HistoryPage() {
 
   const allEvents = sortedCivicTimelineEvents();
   const decades = civicTimelineDecades();
+  // 実施主体を一次資料で確認できた件数（未確認との違いを件数でも示す）。
+  const implementationCount = allEvents.filter((e) => e.implementation).length;
   const latestVerifiedAt = allEvents
     .map((e) => e.lastVerifiedAt)
     .filter((d): d is string => !!d)
@@ -146,6 +160,12 @@ export function HistoryPage() {
           歴代市長の比較
         </Link>
         で確認できます。延岡市公式資料等で確認できる範囲のみを掲載しており、日付が月までしか判明していない出来事は「〇〇年〇月」と表示しています。確認できていない事項は空欄にせず「確認中」「未収集」等で示しています。
+      </p>
+
+      {/* Phase230-231：市政年表には延岡市の事業以外（県立施設の設置、県主催の催し等）も含まれる。
+          実施主体の表示が無い出来事を「延岡市の事業」と読ませないための説明。 */}
+      <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+        この年表には、延岡市の事業ではない出来事（宮崎県が設置した学校・病院、宮崎県が主催し延岡市が参加した催しなど）も含まれます。一次資料で実施主体を確認できた出来事には「実施主体」「延岡市との関係」を表示しています（{implementationCount}件）。表示が無い出来事は実施主体を確認中であり、延岡市の事業であることを意味しません。延岡市内で行われたことと、延岡市が実施したことは別です。
       </p>
 
       <nav aria-label="年代へ移動">
@@ -272,6 +292,9 @@ export function HistoryPage() {
                   </span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-on-surface">{humanizeDataNote(event.summary)}</p>
+                {/* Phase230-231：延岡市の事業ではない出来事（県立施設・県主催の催し等）を
+                    市の事業と誤読させないため、一次資料で実施主体を確認できたものだけ明示する。 */}
+                <ImplementationAttributionNote attribution={event.implementation} className="mt-2" />
                 {event.notes && <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(event.notes)}</p>}
                 <div className="mt-2 flex flex-wrap gap-2">
                   {event.relatedPersonIds?.map((id) => {

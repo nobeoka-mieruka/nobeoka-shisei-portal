@@ -1732,6 +1732,31 @@ try {
   const events = readJson("src/data/civicTimelineEvents.json");
   const VALID_TIMELINE_CATEGORIES = new Set(["市制施行・合併", "市庁舎", "行政組織", "災害", "公共事業", "教育・福祉・産業"]);
   const VALID_TIMELINE_VERIFICATION = new Set(["verified", "partiallyVerified"]);
+  // Phase230：実施主体の区分（src/types/implementationAttribution.ts のミラー。
+  // scripts配下からはsrc/のTypeScriptを直接importできないため、値だけを写している）。
+  const VALID_IMPLEMENTING_BODY = new Set([
+    "nobeokaCity",
+    "miyazakiPrefecture",
+    "nationalGovernment",
+    "cityPrefectureJoint",
+    "wideAreaUnion",
+    "other",
+  ]);
+  const VALID_IMPLEMENTATION_SCOPE = new Set([
+    "nobeokaCity",
+    "northernMiyazaki",
+    "miyazakiPrefecture",
+    "national",
+    "other",
+  ]);
+  const VALID_NOBEOKA_RELATION = new Set([
+    "cityProject",
+    "prefecturalProjectInNobeoka",
+    "cityPrefectureJoint",
+    "nobeokaParticipant",
+    "nobeokaBeneficiary",
+    "relatedOnly",
+  ]);
   const eventIds = new Set();
   const knownTimelinePersonIds = new Set([...memberIds, ...formerMemberIds, ...archiveMayorIds]);
 
@@ -1765,6 +1790,43 @@ try {
     if (!ev.lastVerifiedAt || !DATE_RE.test(ev.lastVerifiedAt)) err(tag, `lastVerifiedAtの形式が不正です: ${ev.lastVerifiedAt}`);
     if (!VALID_TIMELINE_VERIFICATION.has(ev.verificationStatus)) {
       err(tag, `未定義のverificationStatusです: ${ev.verificationStatus}`);
+    }
+    // Phase230-231：実施主体の注記（任意）。設定されている場合のみ検証する。
+    // 未設定は「未確認」であり正常な状態なので、欠落をwarnにしない（推測での一括付与を促さない）。
+    if (ev.implementation !== undefined) {
+      const impl = ev.implementation;
+      if (typeof impl !== "object" || impl === null || Array.isArray(impl)) {
+        err(tag, "implementationがオブジェクトではありません");
+      } else {
+        if (!VALID_IMPLEMENTING_BODY.has(impl.implementingBody)) {
+          err(tag, `未定義のimplementingBodyです: ${impl.implementingBody}`);
+        }
+        if (!VALID_NOBEOKA_RELATION.has(impl.nobeokaRelation)) {
+          err(tag, `未定義のnobeokaRelationです: ${impl.nobeokaRelation}`);
+        }
+        if (impl.implementationScope !== undefined && !VALID_IMPLEMENTATION_SCOPE.has(impl.implementationScope)) {
+          err(tag, `未定義のimplementationScopeです: ${impl.implementationScope}`);
+        }
+        if (isBlank(impl.attributionSourceUrl) || !URL_RE.test(impl.attributionSourceUrl)) {
+          err(tag, `implementation.attributionSourceUrlが不正です: ${impl.attributionSourceUrl}`);
+        } else if (!(ev.sourceRefs ?? []).some((s) => s.url === impl.attributionSourceUrl)) {
+          // 実施主体は「このレコードの出典で確認できた」ものだけを設定する。
+          err(tag, `implementation.attributionSourceUrlがsourceRefsに含まれていません: ${impl.attributionSourceUrl}`);
+        }
+        // 県が主体の出来事を「延岡市の事業」と読ませないための整合性チェック。
+        if (impl.implementingBody === "nobeokaCity" && impl.nobeokaRelation !== "cityProject") {
+          err(tag, `implementingBody=nobeokaCityのときnobeokaRelationはcityProjectである必要があります: ${impl.nobeokaRelation}`);
+        }
+        if (impl.nobeokaRelation === "cityProject" && impl.implementingBody !== "nobeokaCity") {
+          err(tag, `nobeokaRelation=cityProjectのときimplementingBodyはnobeokaCityである必要があります: ${impl.implementingBody}`);
+        }
+        if (
+          (impl.implementingBody === "cityPrefectureJoint") !==
+          (impl.nobeokaRelation === "cityPrefectureJoint")
+        ) {
+          err(tag, "共同実施はimplementingBodyとnobeokaRelationの双方をcityPrefectureJointにしてください（片方だけの設定は誤読の原因になります）");
+        }
+      }
     }
   }
 } catch (e) {
