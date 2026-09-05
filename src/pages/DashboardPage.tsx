@@ -24,7 +24,7 @@ import type {
   FinanceDashboardData,
 } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
-import { getFaction } from "../lib/factions";
+import { allFactions, getFaction, sortedFactionOfficers } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
@@ -115,6 +115,30 @@ function formatOkuFromThousandYen(thousandYen: number | null | undefined): strin
 }
 
 const cityTaxRevenue = finance.revenue.find((r) => r.label === "市税");
+
+// Phase236：会派役員は、一次資料（会派名簿）で確認できた会派だけを対象にする。
+// 会派の並び順は会派別人数と同じ「所属人数の多い順」とし、役員の有無や役職で順位を作らない。
+const factionMemberCounts = new Map<string, number>();
+for (const m of members) {
+  factionMemberCounts.set(m.factionId, (factionMemberCounts.get(m.factionId) ?? 0) + 1);
+}
+const factionOfficerGroups = allFactions
+  .filter((f) => Array.isArray(f.officers))
+  .map((faction) => ({ faction, officers: sortedFactionOfficers(faction) }))
+  .sort(
+    (a, b) =>
+      (factionMemberCounts.get(b.faction.id) ?? 0) - (factionMemberCounts.get(a.faction.id) ?? 0),
+  );
+/** 会派名簿の基準日。全会派が同一の名簿に基づくため、最も新しい基準日を代表として表示する。 */
+const factionOfficersAsOf = factionOfficerGroups
+  .map((g) => g.faction.officersAsOf)
+  .filter((d): d is string => !!d)
+  .sort()
+  .at(-1);
+/** 会派役員の出典URL（データから取得し、画面側に直書きしない）。 */
+const factionOfficerSource = factionOfficerGroups
+  .flatMap((g) => g.faction.officersSourceRefs ?? [])
+  .find((s) => !!s.url);
 
 const genderLabels: Record<Gender, string> = {
   male: "男性",
@@ -646,6 +670,62 @@ export function DashboardPage() {
         <GlossaryNote term="会派" definition={COUNCIL_GLOSSARY["会派"]} className="mb-3" />
         <BarList items={factionItems} />
       </SectionCard>
+
+      {/*
+        会派役員（Phase236）。延岡市議会「会派役員及び所属議員名簿」に記載された役職だけを、
+        名簿の記載順のまま表示する。序列や影響力の評価は行わない。
+      */}
+      {factionOfficerGroups.length > 0 && (
+        <SectionCard title="会派役員">
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            延岡市議会が公表する会派名簿に記載されている役職です
+            {factionOfficersAsOf && `（名簿の基準日：${formatJapaneseDate(factionOfficersAsOf)}）`}。
+            {"名簿に役職の記載が無い議員は、この一覧には現れません（役職に就いていないという意味ではありません）。"}
+            会派の力関係や序列を示すものではありません。
+          </p>
+          <ul className="space-y-3">
+            {factionOfficerGroups.map((group) => (
+              <li key={group.faction.id}>
+                <p className="text-sm font-medium text-on-surface">{group.faction.name}</p>
+                {group.officers.length > 0 ? (
+                  <ul className="mt-1 space-y-1">
+                    {group.officers.map((o) => (
+                      <li key={o.memberId} className="flex items-center gap-2 text-sm">
+                        <span className="w-20 shrink-0 text-on-surface-variant">{o.role}</span>
+                        <Link
+                          to={`/members/${o.memberId}`}
+                          className="inline-flex min-h-11 items-center rounded text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                        >
+                          {o.memberName}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {group.faction.officersNote && (
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+                    {group.faction.officersNote}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+          {factionOfficerSource && (
+            <p className="mt-3 text-xs text-on-surface-variant">
+              出典：
+              <a
+                href={factionOfficerSource.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                {factionOfficerSource.label}
+              </a>
+              <span aria-hidden>（外部サイト）</span>
+            </p>
+          )}
+        </SectionCard>
+      )}
 
       <SectionCard title="男女別人数">
         <BarList items={genderItems} />

@@ -36,11 +36,45 @@ export interface SNSLink {
   verificationStatus?: SocialVerificationStatus;
 }
 
+/**
+ * 会派内の役職。延岡市議会「会派役員及び所属議員名簿」に実際に記載されている語だけを使う。
+ * 名簿に役職の記載が無い議員は「役職なし」ではなく単に記載が無いだけなので、
+ * `FactionOfficer` のレコード自体を作らない（推測で役職を補わない）。
+ */
+export type FactionOfficerRole = "団長" | "副団長" | "幹事長" | "副幹事長" | "顧問";
+
+/** 会派役員1名分。名簿の記載どおりの氏名と役職を持つ。 */
+export interface FactionOfficer {
+  memberId: string;
+  memberName: string;
+  role: FactionOfficerRole;
+}
+
 export interface Faction {
   id: string;
   name: string;
   /** Optional accent color (hex) used for the faction chip. Falls back to a palette cycle if omitted. */
   color?: string;
+  /**
+   * 延岡市議会「会派役員及び所属議員名簿」に記載された会派名。当サイトの表示名（`name`）に
+   * 補足を付けている場合だけ設定する（例：表示名「友愛クラブ（国民民主党）」／名簿「友愛クラブ」）。
+   */
+  officialName?: string;
+  /**
+   * 会派役員。一次資料（会派名簿）で確認できた会派のみ。
+   * - 未設定＝未確認（「役員がいない」という意味ではない）
+   * - 空配列＝名簿上「会派に所属しない議員」等として扱われ、会派役員が置かれていないことを確認済み
+   *   （その理由は `officersNote` に記載する）
+   */
+  officers?: FactionOfficer[];
+  /** 会派役員の基準日（名簿の「〜現在」）。ISO形式。 */
+  officersAsOf?: string;
+  /** 会派役員についての補足説明（市民向けにそのまま表示される）。 */
+  officersNote?: string;
+  /** 会派役員の出典。 */
+  officersSourceRefs?: SourceEntry[];
+  /** 会派役員をサイト運営者が最後に確認した日。ISO形式。 */
+  officersVerifiedAt?: string;
 }
 
 /**

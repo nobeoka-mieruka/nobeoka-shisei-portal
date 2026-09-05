@@ -98,8 +98,9 @@ export function countOverlapBetweenAAndDA(bills: SourceRetrievalInput[]): number
  * 例：ある議案がA区分（本文取得が容易）であっても、まだ人が本文を読んで確認していなければ
  * Level1のままであり、A区分＝Level3を意味しない。
  *
- * 1,177件全体を「原資料到達性区分（A/B/D。C区分は実例0件のため列を省略）」×
- * 「説明品質段階（Level1/Level2/Level3）」でクロス集計する。合計は必ず1,177件になる。
+ * 渡された議案全体を「原資料到達性区分（A/B/D。C区分は実例0件のため列を省略）」×
+ * 「説明品質段階（Level1/Level2/Level3）」でクロス集計する。合計は必ず議案の総件数と一致する
+ * （件数は billVotes.json の実件数から算出し、この注釈にも呼び出し側にも直書きしない）。
  */
 export function crossTabulateSourceRetrievalAndLevel<T extends SourceRetrievalInput>(
   bills: T[],
@@ -119,7 +120,7 @@ export function crossTabulateSourceRetrievalAndLevel<T extends SourceRetrievalIn
 
 /**
  * Phase144項目35：「確認済み」という言葉を安易にまとめず、3段階を区別する市民向けラベル。
- * - sourceLinked（出典確認済み）：審議結果PDF等の出典が紐付いている（1,177件全件が該当）。
+ * - sourceLinked（出典確認済み）：審議結果PDF等の出典が紐付いている（登録済みの議案は全件が該当）。
  * - sourceTextVerified（本文確認済み）：会議録等の一次資料本文を人が実際に確認した。
  * - summaryVerified（詳しい説明確認済み）：本文確認の上で、市民向けの独自説明まで作成・照合した（Level3）。
  * この3つを同じ「確認済み」という言葉でまとめて表示しない。

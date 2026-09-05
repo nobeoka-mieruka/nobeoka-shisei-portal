@@ -22,7 +22,7 @@ import type {
   CitySpecialPost,
 } from "../types";
 import type { ArchiveMemberProfile, ArchiveMemberTerm } from "../types/historicalArchive";
-import { getFaction } from "../lib/factions";
+import { getFaction, getFactionOfficerRole } from "../lib/factions";
 import { getCommitteeByName } from "../lib/committees";
 import {
   archiveCoverageRangeLabel,
@@ -321,6 +321,8 @@ export function MemberDetailPage() {
   }
 
   const faction = getFaction(member.factionId);
+  // 会派内の役職（団長・幹事長等）。名簿に記載が無い議員は null（推測で補わない）。
+  const factionOfficerRole = getFactionOfficerRole(member.factionId, member.id);
   const isProfileConfirmed = member.profile !== PLACEHOLDER_PROFILE;
   const memberArchiveProfile = archiveMemberProfiles.find((p) => p.legacyMemberId === member.id);
   const memberArchiveTerms = memberArchiveProfile
@@ -374,6 +376,9 @@ export function MemberDetailPage() {
             <p className="text-sm text-on-surface-variant">{member.nameKana}</p>
             <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
               <FactionChip faction={faction} size="md" />
+              {factionOfficerRole && (
+                <span className="text-sm text-on-surface-variant">会派内の役職：{factionOfficerRole}</span>
+              )}
               {member.termCount && (
                 <span className="text-sm text-on-surface-variant">当選{member.termCount}回</span>
               )}
@@ -557,6 +562,39 @@ export function MemberDetailPage() {
               </li>
             ))}
           </ul>
+        </SectionCard>
+      )}
+
+      {/*
+        会派内の役職（Phase236）。延岡市議会「会派役員及び所属議員名簿」で確認できた会派のみ表示する。
+        名簿に役職の記載が無い議員は「役職なし」と断定せず、記載が無いことをそのまま説明する。
+      */}
+      {Array.isArray(faction.officers) && (
+        <SectionCard title="会派内の役職">
+          {factionOfficerRole ? (
+            <p className="text-sm text-on-surface">
+              <span className="text-on-surface-variant">{faction.name}：</span>
+              <span className="font-medium">{factionOfficerRole}</span>
+            </p>
+          ) : faction.officers.length === 0 ? (
+            // 会派に所属しない議員など、その会派に役員が置かれていないことを確認済みの場合。
+            <p className="text-sm leading-relaxed text-on-surface-variant">{faction.officersNote}</p>
+          ) : (
+            <p className="text-sm leading-relaxed text-on-surface-variant">
+              延岡市議会の会派名簿に、この議員の会派内の役職は記載されていません（役職に就いていないという意味ではありません）。
+            </p>
+          )}
+          {faction.officersAsOf && (
+            <p className="mt-2 text-xs text-on-surface-variant">名簿の基準日：{formatJapaneseDate(faction.officersAsOf)}</p>
+          )}
+          <div className="mt-2">
+            <SourceList sources={faction.officersSourceRefs} />
+          </div>
+          {faction.officersVerifiedAt && (
+            <p className="mt-1 text-xs text-on-surface-variant">
+              当サイトでの最終確認日：{formatJapaneseDate(faction.officersVerifiedAt)}
+            </p>
+          )}
         </SectionCard>
       )}
 
