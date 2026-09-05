@@ -17,6 +17,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SourceRefList } from "../components/SourceRefList";
 import { ClockIcon } from "../components/icons";
+import { ImplementationAttributionNote } from "../components/ImplementationAttributionNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
 import { formatJapaneseDate } from "../config/site";
@@ -92,6 +93,10 @@ export function MayorDetailPage() {
   const mayorById = new Map(archiveMayors.map((m) => [m.id, m]));
   const relatedPolicies = archivePolicies.filter((p) => p.ownerType === "mayor" && p.ownerId === mayor.id);
   const relatedEvents = civicTimelineEventsForPerson(mayor.id);
+  // Phase232：在任中の出来事には、延岡市の事業ではないもの（宮崎県が設置した学校・病院、
+  // 県主催で延岡市が参加した催し等）も含まれる。市長の実績と読まれやすい場所であるため、
+  // 一次資料で実施主体を確認できた件数をここで数え、その件数がある場合だけ説明を出す。
+  const relatedEventsWithAttribution = relatedEvents.filter((e) => e.implementation).length;
   // TASK-081：日付重複による機械的な紐付け（scripts/link-council-documents-to-mayors.mjs・
   // scripts/link-fiscal-years-to-mayors.mjs）。推測ではなく、確認済みの決定日・任期日付の
   // 重複のみで判定している（年度途中の市長交代年度はいずれの市長にも紐付けていない）。
@@ -400,6 +405,14 @@ export function MayorDetailPage() {
               </Link>
               」のうち、この市長の在任期間（確認できた任期）に含まれることが一次資料から確認できた出来事です（在任中に発生した出来事であり、この市長が実施した政策・実績を示すものではありません）。市庁舎・行政組織・災害・公共事業・教育福祉産業等を対象としており、網羅を保証するものではありません。
             </p>
+            {/* Phase232：この一覧には延岡市の事業ではない出来事（県立学校・県立病院の設置、
+                県主催の催し等）も含まれる。市長個人・延岡市の事業と誤読させないため、
+                一次資料で実施主体を確認できた件数がある場合だけ、その旨を文字で説明する。 */}
+            {relatedEventsWithAttribution > 0 && (
+              <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                この一覧には、延岡市の事業ではない出来事（宮崎県が設置した学校・病院など）も含まれます。一次資料で実施主体を確認できた{relatedEventsWithAttribution}件には「実施主体」「延岡市との関係」を各出来事の下に表示しています。表示が無い出来事は実施主体を確認中であり、延岡市やこの市長の事業であることを意味しません。
+              </p>
+            )}
             <ul className="mt-3 space-y-2">
               {relatedEvents.map((ev) => (
                 <li key={ev.id} className="rounded-lg border border-outline-variant p-3">
@@ -411,6 +424,9 @@ export function MayorDetailPage() {
                   </div>
                   <p className="mt-1 text-sm font-medium text-on-surface">{ev.title}</p>
                   <p className="mt-1 text-sm text-on-surface-variant">{humanizeDataNote(ev.summary)}</p>
+                  {/* Phase230-232：延岡市の事業ではない出来事を、この市長・延岡市の実績と
+                      誤読させないため、一次資料で実施主体を確認できたものだけ明示する。 */}
+                  <ImplementationAttributionNote attribution={ev.implementation} className="mt-2" />
                   <Link
                     to={`/timeline/${civicTimelineEventFiscalYear(ev)}`}
                     className={`mt-2 inline-flex min-h-11 items-center text-xs font-medium text-primary underline ${linkClass}`}
