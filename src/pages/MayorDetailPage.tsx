@@ -26,6 +26,7 @@ import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { civicTimelineEventsForPerson, civicTimelineEventFiscalYear } from "../lib/civicTimeline";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { classifySourceMedium } from "../lib/sourceMedium";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -97,6 +98,23 @@ export function MayorDetailPage() {
   // 県主催で延岡市が参加した催し等）も含まれる。市長の実績と読まれやすい場所であるため、
   // 一次資料で実施主体を確認できた件数をここで数え、その件数がある場合だけ説明を出す。
   const relatedEventsWithAttribution = relatedEvents.filter((e) => e.implementation).length;
+  // Phase241：出典の媒体区分（報道・事典）を、Phase228で導入した判定（src/lib/sourceMedium.ts）で数える。
+  // 以前はここで公表機関名が Wikipedia と完全一致するものだけを除いて件数を表示していたため、
+  // 新聞記事（宮崎日日新聞・夕刊デイリー・読売新聞等）や、機関名が「Wikipedia（記事内に…）」と
+  // 補足付きで登録された事典が「一次資料」として数えられていた。報道はLEVEL B・事典は二次資料であり、
+  // 一次資料と同列に数えてはならない。
+  // 判定できない資料（unclassified）を「一次資料」と断定はしないため、件数は
+  // 「出典の総数」と「そのうち一次資料ではないと判定できた件数」に分けて示す。
+  const sourceMediumCounts = mayor.sourceRefs.reduce(
+    (acc, ref) => {
+      const medium = classifySourceMedium(ref);
+      if (medium === "news") acc.news += 1;
+      else if (medium === "reference") acc.reference += 1;
+      return acc;
+    },
+    { news: 0, reference: 0 },
+  );
+  const nonPrimarySourceCount = sourceMediumCounts.news + sourceMediumCounts.reference;
   // TASK-081：日付重複による機械的な紐付け（scripts/link-council-documents-to-mayors.mjs・
   // scripts/link-fiscal-years-to-mayors.mjs）。推測ではなく、確認済みの決定日・任期日付の
   // 重複のみで判定している（年度途中の市長交代年度はいずれの市長にも紐付けていない）。
@@ -227,7 +245,17 @@ export function MayorDetailPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs text-on-surface-variant">
-          一次資料件数：{mayor.sourceRefs.filter((r) => r.sourceOrganization !== "Wikipedia").length}件（Wikipedia等の二次資料を除く）
+          出典：{mayor.sourceRefs.length}件
+          {nonPrimarySourceCount > 0 && (
+            <>
+              （うち
+              {sourceMediumCounts.news > 0 && `報道${sourceMediumCounts.news}件`}
+              {sourceMediumCounts.news > 0 && sourceMediumCounts.reference > 0 && "・"}
+              {sourceMediumCounts.reference > 0 && `事典・百科事典${sourceMediumCounts.reference}件`}
+              は一次資料ではありません）
+            </>
+          )}
+          。各出典の種別は、下の「出典・確認状況」欄に1件ずつ表示しています。
         </p>
       </section>
 
