@@ -507,7 +507,7 @@ export function DataStatusPage() {
   ];
 
   // TASK-072：documentTypeLabel(type)（「議案」「条例」等の裸の名称）をそのままラベルにすると、
-  // 下のcouncilExtra（1,177件の議案・採決データベース）と同じ「議案」という語で桁違いの件数が
+  // 下のcouncilExtra（議案・採決データベース。全件を機械的に登録した一覧）と同じ「議案」という語で桁違いの件数が
   // 並んでしまい、何を1件として数えているのか分からず矛盾に見える。「詳細アーカイブ化済み」を
   // 明示して、どちらも同じ集計方法だと誤解されないようにする。
   const council: DataDomain[] = documentTypeCounts.map(({ type, count }) => ({
@@ -843,7 +843,7 @@ export function DataStatusPage() {
     {
       label: "議案：一次資料本文に基づく詳しい説明の作成",
       metric: simpleCompleteness(billVotesDetailedExplanationCount, billVotes.length),
-      note: "議案名・議決結果・出典（審議結果PDF等）は全1,177件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。",
+      note: `議案名・議決結果・出典（審議結果PDF等）は全${billVotes.length.toLocaleString()}件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。`,
     },
     {
       label: "政治資金団体：代表者・会計責任者・当該年分収支の完全確認",
