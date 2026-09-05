@@ -380,7 +380,11 @@ export type CivicTimelineCategory =
 
 /**
  * 市政年表1件分（src/data/civicTimelineEvents.json）。延岡市公式ホームページが公表する
- * 「近代の年表」等の一次資料のみを対象とし、推測で日付・出来事を補完しない。
+ * 「近代の年表」等の一次資料を主対象とし、推測で日付・出来事を補完しない。
+ * 宮崎県など他の公的機関が公表した一次資料も、延岡市・延岡市長・延岡市の施設・延岡市の参加が
+ * その資料に明示されている場合に限り対象とする（その場合は主催・実施主体が延岡市ではないことを
+ * summary/notesで明示する）。県の予算額・県議会の議決結果など、延岡市の予算・議会のデータでは
+ * ないものを、市の財政・議案データへ転記してはならない。
  * 歴代市長の就任・退任はarchiveMayors.json/archiveMayorTerms.jsonで別管理のため対象外。
  */
 export interface CivicTimelineEvent {
