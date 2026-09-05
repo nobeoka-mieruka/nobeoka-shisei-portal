@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import electionResultsData from "../data/electionResults.json";
@@ -94,7 +95,7 @@ export function CompareMayorsPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
   const [metricKey, setMetricKey] = useState<CountMetricKey>("tenureYears");
 
   const selected = parseCompareSelection(searchParams, mayorIds);

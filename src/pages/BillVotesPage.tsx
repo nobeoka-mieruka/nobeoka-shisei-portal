@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useInitialSearchParams } from "../hooks/useHydratedSearchParams";
 import billVotesData from "../data/billVotes.json";
 import type { BillCategory, BillProposerType, BillVoteItem, BillVoteResult } from "../types";
 import { SearchBar } from "../components/SearchBar";
@@ -182,23 +183,41 @@ export function BillVotesPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
-  const [query, setQuery] = useState(searchParams.get("q") ?? "");
-  const [fiscalYear, setFiscalYear] = useState(searchParams.get("year") ?? "all");
-  const [session, setSession] = useState(searchParams.get("session") ?? "all");
-  const [category, setCategory] = useState(searchParams.get("category") ?? "all");
-  const [verification, setVerification] = useState(searchParams.get("status") ?? "all");
-  const [result, setResult] = useState(searchParams.get("result") ?? "all");
-  const [committee, setCommittee] = useState(searchParams.get("committee") ?? "all");
-  const [proposerType, setProposerType] = useState(searchParams.get("proposer") ?? "all");
-  const [voteMethod, setVoteMethod] = useState(searchParams.get("method") ?? "all");
+  // Phase240：絞り込み条件の初期値は既定値に固定する。プリレンダリング済みHTMLは常に
+  // クエリなしの内容（静的ホスティングはクエリを無視して同じファイルを返す）のため、
+  // 初回レンダリングでURLの条件を反映するとハイドレーション不一致になる。
+  // アクセス時のURLに入っていた条件は、ハイドレーション完了後に一度だけ反映する。
+  const [query, setQuery] = useState("");
+  const [fiscalYear, setFiscalYear] = useState("all");
+  const [session, setSession] = useState("all");
+  const [category, setCategory] = useState("all");
+  const [verification, setVerification] = useState("all");
+  const [result, setResult] = useState("all");
+  const [committee, setCommittee] = useState("all");
+  const [proposerType, setProposerType] = useState("all");
+  const [voteMethod, setVoteMethod] = useState("all");
   const [unanimity, setUnanimity] = useState("all");
   const [sort, setSort] = useState<SortKey>("newest");
   const [page, setPage] = useState(1);
 
+  const initialParamsApplied = useInitialSearchParams((params) => {
+    setQuery(params.get("q") ?? "");
+    setFiscalYear(params.get("year") ?? "all");
+    setSession(params.get("session") ?? "all");
+    setCategory(params.get("category") ?? "all");
+    setVerification(params.get("status") ?? "all");
+    setResult(params.get("result") ?? "all");
+    setCommittee(params.get("committee") ?? "all");
+    setProposerType(params.get("proposer") ?? "all");
+    setVoteMethod(params.get("method") ?? "all");
+  });
+
   // 検索条件をURLクエリへ反映し、再読み込みや共有後も条件を維持できるようにする。
+  // 反映前（＝ハイドレーション完了前）に書き戻すと、共有されたURLの条件を消してしまうため待つ。
   useEffect(() => {
+    if (!initialParamsApplied) return;
     const next = new URLSearchParams();
     if (query) next.set("q", query);
     if (fiscalYear !== "all") next.set("year", fiscalYear);
@@ -211,7 +230,7 @@ export function BillVotesPage() {
     if (voteMethod !== "all") next.set("method", voteMethod);
     setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, fiscalYear, session, category, verification, result, committee, proposerType, voteMethod]);
+  }, [initialParamsApplied, query, fiscalYear, session, category, verification, result, committee, proposerType, voteMethod]);
 
   const fiscalYearOptions = useMemo(
     () =>

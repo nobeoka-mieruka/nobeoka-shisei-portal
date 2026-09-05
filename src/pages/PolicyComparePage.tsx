@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archivePolicyCategoriesData from "../data/archivePolicyCategories.json";
 import archiveMayorsData from "../data/archiveMayors.json";
@@ -49,7 +50,7 @@ export function PolicyComparePage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
   const [metricKey, setMetricKey] = useState<CountMetricKey>("billCount");
 
   const selected = parseCompareSelection(searchParams, policyIds);

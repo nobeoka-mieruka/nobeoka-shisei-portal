@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useInitialSearchParams } from "../hooks/useHydratedSearchParams";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -113,18 +114,24 @@ export function CouncilActivityPage() {
   const [factionFilter, setFactionFilter] = useState("all");
   const [committeeFilter, setCommitteeFilter] = useState("all");
   // 比較状態はURLクエリ（?compare=m01,m02,m03）と同期し、URLを共有すれば同じ比較結果を再現できる。
-  const [compareIds, setCompareIds] = useState<string[]>(() => {
-    const raw = searchParams.get("compare");
-    return raw ? raw.split(",").filter(Boolean).slice(0, 3) : [];
+  // Phase240：初期値は「未選択」に固定する。プリレンダリング済みHTMLは常にクエリなしの内容
+  // （静的ホスティングはクエリを無視して同じファイルを返す）のため、初回レンダリングで
+  // クエリを反映するとハイドレーション不一致になる。アクセス時のクエリは完了後に反映する。
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const initialParamsApplied = useInitialSearchParams((params) => {
+    const raw = params.get("compare");
+    setCompareIds(raw ? raw.split(",").filter(Boolean).slice(0, 3) : []);
   });
 
   useEffect(() => {
+    // アクセス時のクエリを反映する前に書き戻すと、共有されたURLの比較対象を消してしまう。
+    if (!initialParamsApplied) return;
     const next = new URLSearchParams(searchParams);
     if (compareIds.length > 0) next.set("compare", compareIds.join(","));
     else next.delete("compare");
-    setSearchParams(next, { replace: true });
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [compareIds]);
+  }, [compareIds, initialParamsApplied]);
 
   // 対象議員は members.json の件数をそのまま使う（人数を固定値へ書き換えない。任期交代等で
   // 人数が変わってもコード変更は不要）。

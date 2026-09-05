@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { useInitialSearchParams } from "../hooks/useHydratedSearchParams";
 import searchIndexData from "../data/searchIndex.json";
 import type { SearchEntryType, SearchIndexEntry } from "../types";
 import { SearchIcon } from "../components/icons";
@@ -78,36 +79,47 @@ const linkClass =
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
-  const [typeFilter, setTypeFilter] = useState<"all" | SearchEntryType>(() => {
-    const t = searchParams.get("type") ?? "";
-    return t && isKnownSearchEntryType(t) ? t : "all";
-  });
-  const [fiscalYearFilter, setFiscalYearFilter] = useState(() => searchParams.get("fiscalYear") ?? "");
-  const [verificationStatusFilter, setVerificationStatusFilter] = useState(() => searchParams.get("verificationStatus") ?? "");
-  const [includeAi, setIncludeAi] = useState(() => searchParams.get("includeAi") === "true");
-  const [sort, setSort] = useState<SearchSortKey>(() => {
-    const s = searchParams.get("sort") ?? "";
-    return s && isKnownSortKey(s) ? s : "relevance";
-  });
+  // Phase240：検索語・絞り込みの初期値は既定値に固定する。プリレンダリング済みHTMLは常に
+  // クエリなしの内容（静的ホスティングはクエリを無視して同じファイルを返す）のため、
+  // 初回レンダリングでURLの条件を反映するとハイドレーション不一致になる。
+  // アクセス時のURLに入っていた条件は、ハイドレーション完了後に一度だけ反映する。
+  const [query, setQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState<"all" | SearchEntryType>("all");
+  const [fiscalYearFilter, setFiscalYearFilter] = useState("");
+  const [verificationStatusFilter, setVerificationStatusFilter] = useState("");
+  const [includeAi, setIncludeAi] = useState(false);
+  const [sort, setSort] = useState<SearchSortKey>("relevance");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeSuggestion, setActiveSuggestion] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const { history, addTerm, removeTerm, clearHistory } = useSearchHistory();
 
+  const initialParamsApplied = useInitialSearchParams((params) => {
+    setQuery(params.get("q") ?? "");
+    const t = params.get("type") ?? "";
+    setTypeFilter(t && isKnownSearchEntryType(t) ? t : "all");
+    setFiscalYearFilter(params.get("fiscalYear") ?? "");
+    setVerificationStatusFilter(params.get("verificationStatus") ?? "");
+    setIncludeAi(params.get("includeAi") === "true");
+    const s = params.get("sort") ?? "";
+    setSort(s && isKnownSortKey(s) ? s : "relevance");
+  });
+
   // URLの?qが外部要因（戻る/進む、共有リンク）で変わったら、入力欄の表示も追従させる。
   useEffect(() => {
+    if (!initialParamsApplied) return;
     const urlQuery = searchParams.get("q") ?? "";
     setQuery((current) => (current === urlQuery ? current : urlQuery));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [searchParams, initialParamsApplied]);
 
   // 入力を少し待ってからURLへ反映する（共有・戻るボタン対応。結果自体は待たずに即時更新）。
   // 既存のfiscalYear・type等のクエリを消さないよう、常にsearchParamsを丸ごと置き換えるのではなく
   // 現在の値をベースに?qだけを更新する（過去、絞り込み中に検索語を変えると年度・種類等の
   // 絞り込みがURLから消えてしまう不具合があったため修正）。
   useEffect(() => {
+    if (!initialParamsApplied) return;
     const timer = setTimeout(() => {
       const current = searchParams.get("q") ?? "";
       if (current !== query) {
@@ -125,7 +137,7 @@ export function SearchPage() {
     }, URL_SYNC_DELAY_MS);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [query, initialParamsApplied]);
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -134,6 +146,8 @@ export function SearchPage() {
   // 種類・年度・確認状況・並び替え・AI候補を含めるかの絞り込みは、選択のたびに即座にURLへ反映する
   // （検索結果URLを共有・ブックマークでき、戻る操作でも絞り込み条件が失われないようにするため）。
   useEffect(() => {
+    // アクセス時のURLの条件を反映する前に書き戻すと、共有されたURLの絞り込みを消してしまう。
+    if (!initialParamsApplied) return;
     const next = new URLSearchParams(searchParams);
     if (typeFilter !== "all") next.set("type", typeFilter);
     else next.delete("type");
@@ -147,7 +161,7 @@ export function SearchPage() {
     else next.delete("sort");
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typeFilter, fiscalYearFilter, verificationStatusFilter, includeAi, sort]);
+  }, [initialParamsApplied, typeFilter, fiscalYearFilter, verificationStatusFilter, includeAi, sort]);
 
   const hasQuery = query.trim().length > 0;
 

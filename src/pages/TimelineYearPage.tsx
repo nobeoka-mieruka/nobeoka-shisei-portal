@@ -107,6 +107,16 @@ export function TimelineYearPage() {
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           市長任期・議員在籍・一般質問・議案条例請願陳情・政策・財政データを、公式資料で確認できた範囲で一覧表示します。点数化や評価は行っていません。
         </p>
+        {/* Phase240：この年表は暦年ではなく年度（4月〜翌年3月）で区切っている。
+            1〜3月の出来事が「前の年のページ」に出るのは正しい挙動だが、
+            暦年だと思って見ると取り違えやすいため、データは変えずに文字で説明する。 */}
+        {isValidYear && (
+          <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
+            この年表は年度単位で表示しています。年度は4月から翌年3月までのため、{fiscalYear}年度のページには
+            {fiscalYear}年4月から{fiscalYear + 1}年3月までの内容が入ります（{fiscalYear + 1}年1月〜3月の出来事も、この
+            {fiscalYear}年度に含まれます）。
+          </p>
+        )}
       </div>
 
       {!isValidYear ? (

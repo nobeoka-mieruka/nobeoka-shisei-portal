@@ -1,4 +1,5 @@
-import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import billVotesData from "../data/billVotes.json";
 import councilSessionsData from "../data/councilSessions.json";
@@ -85,7 +86,7 @@ function DocumentsListPage({ documentType, basePath, heroTitle, heroDescription 
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
 
   const docs = documentsOfType(archiveCouncilDocuments, documentType);
   const resultConfirmedCount = docs.filter((d) => !!d.result).length;

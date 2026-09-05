@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
 import factionsData from "../data/factions.json";
@@ -78,7 +79,7 @@ export function CompareMembersPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
   const [metricKey, setMetricKey] = useState<CountMetricKey>("voteCount");
 
   const selected = parseCompareSelection(searchParams, memberIds);

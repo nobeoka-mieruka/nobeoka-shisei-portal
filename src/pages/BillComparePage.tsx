@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useHydratedSearchParams, useInitialSearchParams } from "../hooks/useHydratedSearchParams";
 import billVotesData from "../data/billVotes.json";
 import type { BillVoteItem } from "../types";
 import { publicBills } from "../lib/billVotes";
@@ -79,12 +80,18 @@ export function BillComparePage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
 
   const leftId = searchParams.get("left") ?? "";
   const rightId = searchParams.get("right") ?? "";
-  const [pickLeft, setPickLeft] = useState(leftId);
-  const [pickRight, setPickRight] = useState(rightId);
+  // 選択欄の初期値は、プリレンダリング済みHTMLと一致させるため未選択のままにし、
+  // ハイドレーション完了後に、アクセス時のURLで指定されていた議案を反映する。
+  const [pickLeft, setPickLeft] = useState("");
+  const [pickRight, setPickRight] = useState("");
+  useInitialSearchParams((params) => {
+    setPickLeft(params.get("left") ?? "");
+    setPickRight(params.get("right") ?? "");
+  });
 
   const leftBill = billsById.get(leftId);
   const rightBill = billsById.get(rightId);

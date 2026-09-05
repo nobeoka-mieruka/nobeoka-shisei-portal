@@ -1,4 +1,5 @@
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import type { ArchiveFiscalYear } from "../types/historicalArchive";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -21,7 +22,7 @@ export function ComparePopulationPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
 
   const selected = parseCompareSelection(searchParams, yearIds, "years");
   const selectedRows = archiveFiscalYears

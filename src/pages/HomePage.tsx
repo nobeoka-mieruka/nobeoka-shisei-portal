@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useInitialSearchParams } from "../hooks/useHydratedSearchParams";
 import membersData from "../data/members.json";
 // Phase193：トップページで使うのは「公開議案の件数」と「一般質問の件数」だけのため、
 // 本文を含む billVotes.json（約2.6MB）・councilSpeechSummaries.json（約6.0MB）ではなく、
@@ -190,10 +191,13 @@ export function HomePage() {
   // Phase221：会期の状態（開催予定／開催中／結果確認中）の判定に使う日本標準時の今日。
   // ハイドレーション完了後にだけ確定するため、プリレンダリング済みHTMLへビルド日時の状態が入らない。
   const todayJst = useTodayJst();
-  const [searchParams] = useSearchParams();
   const [heroQuery, setHeroQuery] = useState("");
   const [query, setQuery] = useState("");
-  const [factionId, setFactionId] = useState<string | "all">(searchParams.get("faction") ?? "all");
+  // Phase240：初期値は「すべて」に固定する。プリレンダリング済みHTMLは常にクエリなしの内容
+  // （静的ホスティングはクエリを無視して同じファイルを返す）のため、初回レンダリングで
+  // ?faction= を反映するとハイドレーション不一致になる。完了後に一度だけ反映する。
+  const [factionId, setFactionId] = useState<string | "all">("all");
+  useInitialSearchParams((params) => setFactionId(params.get("faction") ?? "all"));
   const [gender, setGender] = useState<string>("all");
   const [committee, setCommittee] = useState<string>("all");
   const [termCount, setTermCount] = useState<string>("all");
