@@ -55,6 +55,7 @@
     "smoke:production": "node scripts/smoke-production.mjs",
     "verify:production": "node scripts/verify-production.mjs",
     "audit:production-cache": "node scripts/audit-production-cache.mjs",
+    "audit:attribution": "node scripts/audit-prefecture-attribution-rendering.mjs",
     "validate:content": "node scripts/validate-content.mjs",
     "validate:freshness": "node scripts/validate-freshness.mjs",
     "validate:sources": "node scripts/validate-sources.mjs",
