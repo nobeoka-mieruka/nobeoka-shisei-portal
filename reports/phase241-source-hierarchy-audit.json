@@ -1,0 +1,211 @@
+{
+  "phase": "Phase241",
+  "title": "宮崎県関連・情報源階層・報道境界の再監査（仕組みが機能し続けているかの確認）",
+  "generatedBy": "worker-241",
+  "generatedAt": "2026-09-05",
+  "scope": [
+    "既に整備済みの仕組み（Phase224〜234）が正しく機能し続けているかの確認が主目的。",
+    "大量の新規登録は行っていない。新しい無制限のWeb調査も行っていない。",
+    "新聞社サイトの記事ページは1件も取得していない（robots.txt の全面Disallowを尊重する正式方針）。"
+  ],
+  "baselineUnchanged": {
+    "note": "件数はスクリプトで実測した値であり、本ファイルへ固定値として持たせるためのものではない。",
+    "billVotes": 1178,
+    "councilSessions": 62,
+    "civicTimelineEvents": 219,
+    "implementationConfirmed": 12,
+    "implementationUnconfirmed": 207,
+    "validateDataErrors": 0,
+    "validateDataWarnings": 21
+  },
+  "sourceHierarchy": {
+    "levels": {
+      "LEVEL_A_PRIMARY": "延岡市・延岡市議会・宮崎県・宮崎県議会・国/省庁・NDL・官報公報・公式PDF",
+      "LEVEL_B_SECONDARY": "宮崎日日新聞・夕刊デイリー等の報道",
+      "LEVEL_C_DISCOVERY_ONLY": "検索snippet・SNS・まとめ・個人ブログ"
+    },
+    "checks": [
+      {
+        "id": "p241-h-01",
+        "item": "report が PRIMARY 扱いになっていないか（実施主体の根拠URL）",
+        "method": "scripts/test-implementation-attribution.mjs F1・F2（報道ドメイン14件・一次資料ドメイン判定）",
+        "result": "PASS",
+        "violations": 0
+      },
+      {
+        "id": "p241-h-02",
+        "item": "attributionSourceUrl に新聞ドメインが入っていないか",
+        "method": "src/data 全JSONのURLをホスト名で走査（web.archive.org経由は保存元ホストで判定）",
+        "result": "PASS",
+        "violations": 0,
+        "detail": "実施主体を確認済み12件の attributionSourceUrl は city.nobeoka.miyazaki.jp 8件／pref.miyazaki.lg.jp 2件／dl.ndl.go.jp 1件／web.archive.org経由の延岡市公式1件。報道ドメインは0件。"
+      },
+      {
+        "id": "p241-h-03",
+        "item": "sourceType: \"news\" の実データ",
+        "method": "src/data 全JSON走査",
+        "result": "PASS",
+        "count": 0
+      },
+      {
+        "id": "p241-h-04",
+        "item": "src/lib/sourceMedium.ts が報道・事典に「一次資料ではありません」と表示する仕組み",
+        "method": "scripts/test-source-medium-labeling.mjs（1件ずつのラベル）＋ 実コードの利用箇所確認",
+        "result": "FIXED",
+        "violations": 1,
+        "finding": "1件ずつのラベル表示（SourceRefList・CompareSourceNotice・HistoryPage）は正しく機能していた。しかし /mayors/:slug の要約行だけが Phase228 の判定を使っておらず、公表機関名が \"Wikipedia\" と完全一致するものだけを除いて残りを「一次資料件数」と表示していた。歴代市長の出典59件のうち、報道7件（宮崎日日新聞・宮崎日日新聞社・夕刊デイリー・読売新聞オンライン）と、機関名に補足が付いた事典6件（Wikipedia（記事内に…）・コトバンク）が一次資料として数えられていた。",
+        "fix": "src/pages/MayorDetailPage.tsx で classifySourceMedium を使い、表示を「出典N件（うち報道X件・事典・百科事典Y件は一次資料ではありません）」へ変更。判定できない資料を「一次資料である」と断定しない書き方にした。scripts/test-source-medium-labeling.mjs へ回帰テスト2件を追加。",
+        "dataChanged": false
+      },
+      {
+        "id": "p241-h-05",
+        "item": "報道ドメイン一覧の網羅性（夕刊デイリーの取りこぼし）",
+        "method": "src/data の実データに現れる報道ドメインと、各スクリプトのドメイン表を突き合わせ",
+        "result": "FIXED",
+        "violations": 1,
+        "finding": "scripts/validate-sources.mjs の SECONDARY_DOMAINS と scripts/generate-final-quality-audit.mjs の NEWS_DOMAINS に www.yukan-daily.co.jp が入っておらず、実データにある夕刊デイリーの出典2件が、前者では「二次資料ドメインを使用」のinfoに出ず、後者では未分類ドメインの既定値（D：その他二次資料）へ落ちて「新聞・報道（C）」として数えられていなかった。いずれも一次資料（A）として数えてはいなかったため、公開画面への影響は無い。",
+        "fix": "両スクリプトのドメイン表へ www.yukan-daily.co.jp を追加（後者には www.nishinippon.co.jp も追加）。validate:sources は errors 0 / warnings 23（増減なし）／info 71→73。",
+        "dataChanged": false,
+        "publicDisplayAffected": false
+      }
+    ],
+    "violationsFound": 2,
+    "violationsRemaining": 0
+  },
+  "prefectureCityBoundary": {
+    "checks": [
+      {
+        "id": "p241-b-01",
+        "item": "宮崎県の予算が延岡市の財政データへ入っていないか",
+        "method": "scripts/test-implementation-attribution.mjs A1・A2・A3 ＋ pref.miyazaki.lg.jp のURL全件確認",
+        "result": "PASS",
+        "contaminations": 0,
+        "detail": "financeDashboard.json の出典に宮崎県公表の県予算資料は0件。archiveFiscalYears.json に現れる pref.miyazaki.lg.jp の資料は、県が公表する市町村決算関係の資料（資料名に「延岡市」「市町村」を含む）に限られる。politicalFundOrganizations/Reports・prefectureCompensationRanking・miyazakiCompensationComparison の県URLは、宮崎県選挙管理委員会・県市町村課が法令に基づき公表する市町村データであり、県自身の予算ではない。"
+      },
+      {
+        "id": "p241-b-02",
+        "item": "宮崎県議会が延岡市議会のデータへ入っていないか",
+        "method": "scripts/test-implementation-attribution.mjs B1・B2・B3",
+        "result": "PASS",
+        "contaminations": 0,
+        "detail": "councilSessions・billVotes・generalQuestions のURLは city.nobeoka.miyazaki.jp / kensakusystem.jp / ndlsearch.ndl.go.jp に限られ、会議名・提出者・出典機関にも県議会は無い。formerMembers.json の元議員2名（fm14・fm47）の注記に宮崎県議会への転身が書かれているが、これは経歴の記述であり市議会データへの混入ではない（servedSessions・generalQuestions には県議会分を入れていない）。"
+      },
+      {
+        "id": "p241-b-03",
+        "item": "「延岡で開催」だけで市事業と判定されていないか",
+        "method": "scripts/test-implementation-attribution.mjs C1・G1",
+        "result": "PASS",
+        "misattributions": 0,
+        "detail": "県関連の出来事13件のうち実施主体を確認済み11件・未確認2件。県のものが市の事業として公開されている件数0、市のものが県の事業として公開されている件数0。"
+      },
+      {
+        "id": "p241-b-04",
+        "item": "implementingBody / nobeokaRelation の付与が一次資料に基づいているか",
+        "method": "attributionSourceUrl が同レコードの sourceRefs に含まれること（validate:data の error 条件）＋ ドメイン判定",
+        "result": "PASS",
+        "violations": 0
+      }
+    ]
+  },
+  "prefectureNewMaterials": {
+    "question": "Phase226 以降に、延岡市の関与・負担・共同実施が資料に明示されている宮崎県の公式資料が新たに出ていないか",
+    "method": "宮崎県公式サイト（pref.miyazaki.lg.jp）に限定した検索。新聞サイトは対象外。",
+    "checkedAt": "2026-09-05",
+    "newlyEligibleMaterials": 0,
+    "examined": [
+      {
+        "url": "https://www.pref.miyazaki.lg.jp/kiki-kikikanri/press/2026/09/20260819123400.html",
+        "title": "令和8年度宮崎県防災週間イベントについて（都城会場中止）",
+        "publishedAt": "2026-09-03",
+        "result": "NOT_ELIGIBLE",
+        "reason": "会場は宮崎市・都城市の2か所のみで、延岡市への言及・関与・負担の明示が無い。既登録の civic-219（防災実践塾）とは別の事業。"
+      }
+    ],
+    "conclusion": "該当なし。civicTimelineEvents への追加は0件。"
+  },
+  "deferredAttributionCases": {
+    "note": "Phase226・Phase230-231 が保留した案件を再確認した。一次資料で確定できないものは未設定のまま維持する。",
+    "cases": [
+      {
+        "id": "civic-112",
+        "title": "宮崎県北部広域市町村圏協議会発足（1971年10月）",
+        "phase241Result": "UNCONFIRMED_MAINTAINED",
+        "implementationSet": false,
+        "recheck": "延岡市公式サイト・宮崎県公式サイトに限定して、協議会の構成団体（延岡市が参加していること）を明示する資料を探したが確認できなかった。既存の出典（延岡市「近代の年表（1971〜1990年）」）は発足の事実のみを記載している。",
+        "decision": "名称に「宮崎県北部」「市町村圏」とあることだけを根拠に wideAreaUnion / nobeokaParticipant を付けない。未設定のまま維持する。"
+      },
+      {
+        "id": "civic-120",
+        "title": "木工団地操業開始、県立延岡東高校開校（1977年4月）",
+        "phase241Result": "UNCONFIRMED_MAINTAINED",
+        "implementationSet": false,
+        "recheck": "1レコードに実施主体の異なる2つの出来事（木工団地の操業開始／宮崎県立高校の開校）が含まれるという Phase230-231 の判断は現在も妥当。県立高校の設置主体が宮崎県であることは名称から明らかだが、同じレコードの木工団地の実施主体は出典に明記されていないため、レコード単位で単一の実施主体を確定できない。",
+        "decision": "レコード分割はデータ構造の変更を伴うため本Phaseの範囲外とし、未設定のまま維持する。分割してから県立高校側に miyazakiPrefecture を付けるのが次の候補。"
+      }
+    ]
+  },
+  "newsBoundary": {
+    "policy": "the-miyanichi.co.jp・yukan-daily.co.jp は robots.txt でクローラーを全面拒否している。記事ページは取得しない。",
+    "articlePagesFetched": 0,
+    "factsConfirmedFromNewsOnly": 0,
+    "ledger": "reports/phase227-news-discovery-ledger.json",
+    "primaryNotFoundRecheck": {
+      "method": "市公式サイト（city.nobeoka.miyazaki.jp）に限定した検索・閲覧のみ。新聞側は一切参照していない。",
+      "checkedAt": "2026-09-05",
+      "resolvedCount": 0,
+      "results": [
+        {
+          "id": "p227-miya-01",
+          "topic": "車中泊避難の適切運営を協議",
+          "result": "PRIMARY_NOT_FOUND",
+          "detail": "延岡市の防災・災害サイトおよび危機管理部門のページに、車中泊避難の運営体制・協議会・マニュアル策定を示す公表資料を確認できなかった。"
+        },
+        {
+          "id": "p227-miya-02",
+          "topic": "九州中央自動車道 建設促進大会の延期・高校生の提言",
+          "result": "PRIMARY_NOT_FOUND",
+          "detail": "延岡市高速道対策課のページには令和3〜5年度の提言活動の記録があるが、建設促進大会の延期および当該の高校生提言に対応する公表資料を確認できなかった。"
+        },
+        {
+          "id": "p227-miya-09",
+          "topic": "森林クレジット活用／協議会解散",
+          "result": "PRIMARY_NOT_FOUND",
+          "detail": "延岡市林務課のページに「森林由来Jークレジット推進協議会」の設立（2023年6月15日更新）の記載はあるが、解散に関する記載は無い。設立の事実は確認できるが、報道が伝える「解散」は一次資料で確認できないため採用しない。"
+        },
+        {
+          "id": "p227-yukan-05",
+          "topic": "課税事務の誤り（4,770万円）",
+          "result": "PRIMARY_NOT_FOUND",
+          "detail": "延岡市市民税課に課税事務処理ミスの公表ページ（https://www.city.nobeoka.miyazaki.jp/soshiki/19/34438.html、公表2024年5月1日）が存在するが、対象5名・課税漏れ1,212,300円・還付遅れ9,900円であり、報道の見出しにある4,770万円とは規模が一致しない。別件である可能性が高く、同一の事案として扱わない。金額・件数とも報道を根拠に確定しない。"
+        },
+        {
+          "id": "p227-yukan-06",
+          "topic": "野口遵記念館 工事請負契約の締結",
+          "result": "PRIMARY_NOT_FOUND",
+          "detail": "billVotes.json に野口遵記念館関連の議案8件（建設基金条例の廃止・議決事項の一部変更（野口遵記念館建設建築主体工事）・指定管理者の指定・財産の取得・請願など）が延岡市議会の審議結果PDFを出典として登録済みだが、「工事請負契約の締結（野口遵記念館…）」という議案そのものは収録されていない。記事の掲載日が未確定で対象議案を同定できないため、報道と既存議案を結び付けない。"
+        }
+      ]
+    }
+  },
+  "verification": {
+    "validate:data": "errors 0 / warnings 21（既存分。新規warning 0）",
+    "typecheck": "PASS",
+    "lint": "PASS（既存warning 3件のみ。新規0）",
+    "test": "PASS（失敗0）",
+    "build": "PASS（validate:seo / validate:content / check:bundle-size / check:internal-links / check:broken-link-exposure / scan:era を含む。broken internal link 0）",
+    "audit:attribution": "PASS（指摘0）"
+  },
+  "summary": {
+    "sourceHierarchyViolations": 2,
+    "sourceHierarchyViolationsFixed": 2,
+    "prefectureBudgetIntoCityFinance": 0,
+    "prefectureAssemblyIntoCityCouncil": 0,
+    "implementingBodyMisattributions": 0,
+    "factsConfirmedFromNewsOnly": 0,
+    "newPrefecturalMaterialsEligible": 0,
+    "deferredCasesResolved": 0,
+    "primaryNotFoundResolved": 0,
+    "dataRecordsAdded": 0,
+    "dataRecordsChanged": 0
+  }
+}

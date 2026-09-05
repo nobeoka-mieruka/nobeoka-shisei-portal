@@ -437,5 +437,48 @@
     "新聞候補は src/data へ登録しない。一次資料が確定した時点で、既存の ArchiveSourceRef（trustLevel: \"NEWS\"）または MayorPromiseCandidateEvidence（sourceType: \"news\"）で、あくまで補助的な参照として付ける。",
     "報道を主根拠にした登録は行わない。報道が示す論点は、市公式ページ・議案書・会議録の側で裏づけが取れて初めて反映する。",
     "対象期間の網羅性は robots 制約により本フェーズでは担保できない。上記 MANUAL_BROWSER_CHECK_REQUIRED を人手で消化するまで『2026年8月の報道を確認済み』とは記載しないこと。"
+  ],
+
+  "recheckHistory": [
+    {
+      "phase": "Phase241",
+      "checkedAt": "2026-09-05",
+      "checkedBy": "worker-241",
+      "scope": "PRIMARY_NOT_FOUND のまま残っている案件について、市公式側（city.nobeoka.miyazaki.jp）で一次資料が公開されていないかだけを確認した。新聞社サイトには一切アクセスしていない。",
+      "articlePagesFetched": 0,
+      "factsConfirmedFromNewsOnly": 0,
+      "statusChanges": 0,
+      "resolved": 0,
+      "findings": [
+        {
+          "id": "p227-miya-01",
+          "statusAfter": "PRIMARY_NOT_FOUND",
+          "note": "延岡市の防災・災害サイトおよび危機管理部門のページに、車中泊避難の運営体制・協議会・マニュアル策定を示す公表資料を確認できなかった。"
+        },
+        {
+          "id": "p227-miya-02",
+          "statusAfter": "PRIMARY_NOT_FOUND",
+          "note": "延岡市高速道対策課のページに令和3〜5年度の提言活動の記録はあるが、建設促進大会の延期および当該の高校生提言に対応する公表資料を確認できなかった。"
+        },
+        {
+          "id": "p227-miya-09",
+          "statusAfter": "PRIMARY_NOT_FOUND",
+          "primarySourceSearchedAdded": ["https://www.city.nobeoka.miyazaki.jp/soshiki/39/"],
+          "note": "延岡市林務課のページに「森林由来Jークレジット推進協議会」の設立（2023年6月15日更新）の記載はあるが、解散に関する記載は無い。設立の事実は確認できるが、報道が伝える「解散」は一次資料で確認できないため採用しない。"
+        },
+        {
+          "id": "p227-yukan-05",
+          "statusAfter": "PRIMARY_NOT_FOUND",
+          "primarySourceSearchedAdded": ["https://www.city.nobeoka.miyazaki.jp/soshiki/19/34438.html"],
+          "note": "延岡市市民税課に課税事務処理ミスの公表ページ（公表2024年5月1日）が存在するが、対象5名・課税漏れ1,212,300円・還付遅れ9,900円であり、見出しの4,770万円とは規模が一致しない。別件である可能性が高く、同一の事案として扱わない。"
+        },
+        {
+          "id": "p227-yukan-06",
+          "statusAfter": "PRIMARY_NOT_FOUND",
+          "note": "billVotes.json に野口遵記念館関連の議案8件が延岡市議会の審議結果PDFを出典として登録済みだが、「工事請負契約の締結（野口遵記念館…）」という議案そのものは収録されていない。記事の掲載日が未確定で対象議案を同定できないため、報道と既存議案を結び付けない。"
+        }
+      ],
+      "relatedReport": "reports/phase241-source-hierarchy-audit.json"
+    }
   ]
 }

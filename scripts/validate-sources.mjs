@@ -65,8 +65,12 @@ const OTHER_PUBLIC_DOMAINS = new Set([
   "dl.ndl.go.jp", "ndlsearch.ndl.go.jp",
 ]);
 
+// Phase241：夕刊デイリー（www.yukan-daily.co.jp）が抜けており、実データに2件ある同紙の
+// 出典が「二次資料ドメインを使用」のinfoに現れていなかった。報道は LEVEL B であり、
+// 一次資料と同格に扱わない（RELEASE_SNAPSHOT.md「情報源の信頼階層」）。
 const SECONDARY_DOMAINS = new Set([
-  "ja.wikipedia.org", "kotobank.jp", "news.yahoo.co.jp", "www.the-miyanichi.co.jp", "go2senkyo.com",
+  "ja.wikipedia.org", "kotobank.jp", "news.yahoo.co.jp", "www.the-miyanichi.co.jp",
+  "www.yukan-daily.co.jp", "go2senkyo.com",
 ]);
 
 const errors = [];

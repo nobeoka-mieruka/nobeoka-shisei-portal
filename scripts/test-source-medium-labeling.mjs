@@ -137,5 +137,62 @@ check("出典を描画するコンポーネント・ページが、この判定�
   assert.equal(notWired.length, 0, `sourceMediumLabelを使っていない出典表示: ${notWired.join("、")}`);
 });
 
+/* ============================================================================
+ * Phase241：出典の「件数」の側でも、報道・事典を一次資料として数えないこと。
+ *
+ * Phase228 は1件ずつのラベル表示を整えたが、`/mayors/:slug` の要約行は
+ * 「sourceOrganization !== "Wikipedia"」という完全一致だけで二次資料を除いており、
+ * 新聞記事（宮崎日日新聞・夕刊デイリー・読売新聞オンライン）と、機関名が
+ * 「Wikipedia（記事内に…の出典が明記されている）」と補足付きで登録された事典が、
+ * まとめて「一次資料件数」に数えられていた。
+ * 件数はラベルより目に付きやすく、誤りの影響が大きいため回帰テストで固定する。
+ * ========================================================================= */
+
+check("出典の件数を数えるページが、機関名の完全一致ではなく媒体区分の判定を使っている（Phase241）", () => {
+  const counterPages = ["src/pages/MayorDetailPage.tsx"];
+  for (const file of counterPages) {
+    const src = readSrc(file);
+    assert.ok(
+      /classifySourceMedium/.test(src),
+      `${file}: 出典の件数を classifySourceMedium で分類していない`,
+    );
+    // 「Wikipedia だけを文字列比較で除外して残りを一次資料と呼ぶ」書き方を禁止する。
+    assert.ok(
+      !/sourceOrganization\s*!==\s*"Wikipedia"/.test(src),
+      `${file}: 機関名の完全一致（!== "Wikipedia"）で二次資料を除いている。補足付きの機関名と報道を取りこぼす`,
+    );
+    assert.ok(
+      !/一次資料件数/.test(src),
+      `${file}: 判定できない資料まで含む件数を「一次資料件数」と表示している`,
+    );
+  }
+});
+
+check("実データで、報道・事典が一次資料として数えられない（機関名に補足が付いていても取りこぼさない）（Phase241）", () => {
+  const mayors = JSON.parse(readFileSync(join(ROOT, "src/data/archiveMayors.json"), "utf8"));
+  const refs = mayors.flatMap((m) => m.sourceRefs ?? []);
+  // 旧実装（Wikipedia の完全一致のみを除外）が実際に取りこぼしていた出典が現存すること。
+  // 現存しなくなった場合は、この検査が空振りしていないかを確認して条件を見直すこと。
+  const missedByOldRule = refs.filter(
+    (r) => r.sourceOrganization !== "Wikipedia" && classifySourceMedium(r) !== "unclassified",
+  );
+  assert.ok(
+    missedByOldRule.length > 0,
+    "旧実装が取りこぼしていた出典が0件（この検査が空振りしている。データの前提を確認すること）",
+  );
+  // 新実装は、その全件を報道または事典として分類できる。
+  for (const ref of missedByOldRule) {
+    assert.ok(
+      ["news", "reference"].includes(classifySourceMedium(ref)),
+      `一次資料として数えられてしまう出典が残っている: ${ref.sourceOrganization ?? ref.sourceTitle}`,
+    );
+  }
+  console.log(
+    `     （歴代市長の出典 ${refs.length}件のうち、報道 ${
+      refs.filter((r) => classifySourceMedium(r) === "news").length
+    }件・事典 ${refs.filter((r) => classifySourceMedium(r) === "reference").length}件は一次資料ではないと判定）`,
+  );
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");

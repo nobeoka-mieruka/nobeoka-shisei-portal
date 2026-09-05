@@ -32,9 +32,11 @@ const OFFICIAL_DOMAINS = new Set([
 const LIBRARY_DOMAINS = new Set([
   "ndlsearch.ndl.go.jp", "dl.ndl.go.jp", "id.ndl.go.jp",
 ]);
+// Phase241：夕刊デイリー・西日本新聞が抜けており、未分類ドメインの既定値（D：その他二次資料）へ
+// 落ちて「新聞・報道」として数えられていなかった。報道は LEVEL B として C に分類する。
 const NEWS_DOMAINS = new Set([
   "www.the-miyanichi.co.jp", "news.yahoo.co.jp", "www.yomiuri.co.jp", "www.asahi.com",
-  "mainichi.jp", "www3.nhk.or.jp",
+  "mainichi.jp", "www3.nhk.or.jp", "www.yukan-daily.co.jp", "www.nishinippon.co.jp",
 ]);
 const SECONDARY_DOMAINS = new Set([
   "ja.wikipedia.org", "kotobank.jp", "go2senkyo.com",
