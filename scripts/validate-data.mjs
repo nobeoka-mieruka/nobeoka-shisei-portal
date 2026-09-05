@@ -4064,6 +4064,114 @@ try {
   );
 }
 
+// --- publicComments.json（パブリックコメント＝意見募集。Phase239で新設） ---
+try {
+  const publicComments = readJson("src/data/publicComments.json");
+  const PUBLIC_COMMENT_STATUSES = new Set([
+    "planned",
+    "open",
+    "closed-preparing-result",
+    "result-published",
+    "not-conducted",
+  ]);
+  // 結果に関する数値（提出者数・意見数）と結果URLは、市が結果を公表した案件にだけ設定する。
+  // 未公表を0で埋めない・推測でURLを付けない、という編集方針をデータ側で担保する。
+  const RESULT_PUBLISHED = "result-published";
+
+  if (!Array.isArray(publicComments.entries)) {
+    err("publicComments.json", "entriesが配列ではありません");
+  } else {
+    if (isBlank(publicComments.note)) err("publicComments.json", "noteが空です（データの位置づけの説明は必須です）");
+    if (!Array.isArray(publicComments.coveredFiscalYears) || publicComments.coveredFiscalYears.length === 0) {
+      err("publicComments.json", "coveredFiscalYearsが空です（どの年度を収録しているかを明示してください）");
+    }
+    if (!publicComments.statusSource || !URL_RE.test(publicComments.statusSource.url ?? "")) {
+      err("publicComments.json", "statusSource.urlが不正です（状態の根拠となる市の運用状況一覧ページのURLが必要です）");
+    }
+    for (const field of ["statusSourceUpdatedAt", "lastVerifiedAt"]) {
+      if (!DATE_RE.test(publicComments[field] ?? "")) {
+        err("publicComments.json", `${field}がYYYY-MM-DD形式ではありません: ${publicComments[field]}`);
+      }
+    }
+
+    const seenIds = new Set();
+    for (const e of publicComments.entries) {
+      const tag = `publicComments.json (${e.id ?? "id不明"})`;
+      if (isBlank(e.id)) err("publicComments.json", "idが空のエントリがあります");
+      else if (seenIds.has(e.id)) err("publicComments.json", `idが重複しています: ${e.id}`);
+      else seenIds.add(e.id);
+
+      if (isBlank(e.title)) err(tag, "titleが空です");
+      if (isBlank(e.department)) err(tag, "departmentが空です（所管課は公式ページの表記をそのまま登録してください）");
+      if (isBlank(e.sourceOrganization)) err(tag, "sourceOrganizationが空です");
+      else if (e.sourceOrganization !== "延岡市") {
+        err(tag, `延岡市以外の意見募集は登録しないでください（宮崎県・国の意見募集との取り違え防止）: ${e.sourceOrganization}`);
+      }
+
+      for (const field of ["startDate", "endDate", "lastVerifiedAt"]) {
+        if (!DATE_RE.test(e[field] ?? "")) err(tag, `${field}がYYYY-MM-DD形式ではありません: ${e[field]}`);
+      }
+      if (e.sourcePageUpdatedAt != null && !DATE_RE.test(e.sourcePageUpdatedAt)) {
+        err(tag, `sourcePageUpdatedAtがYYYY-MM-DD形式ではありません: ${e.sourcePageUpdatedAt}`);
+      }
+      if (DATE_RE.test(e.startDate ?? "") && DATE_RE.test(e.endDate ?? "") && e.endDate < e.startDate) {
+        err(tag, `endDate（${e.endDate}）がstartDate（${e.startDate}）より前になっています`);
+      }
+
+      if (!PUBLIC_COMMENT_STATUSES.has(e.status)) {
+        err(tag, `statusが不正です（市の公表区分をそのまま転記してください）: ${e.status}`);
+      }
+
+      if (!URL_RE.test(e.officialUrl ?? "")) err(tag, `officialUrlが不正です: ${e.officialUrl}`);
+      if (!Array.isArray(e.documentUrls)) err(tag, "documentUrlsが配列ではありません");
+      else for (const url of e.documentUrls) {
+        if (!URL_RE.test(url)) err(tag, `documentUrlsに不正なURLがあります: ${url}`);
+      }
+      if (e.resultUrl != null && !URL_RE.test(e.resultUrl)) err(tag, `resultUrlが不正です: ${e.resultUrl}`);
+
+      for (const field of ["submitterCount", "opinionCount"]) {
+        const value = e[field];
+        if (value != null && (typeof value !== "number" || !Number.isInteger(value) || value < 0)) {
+          err(tag, `${field}が不正です（0以上の整数、またはnull）: ${value}`);
+        }
+        if (e.status !== RESULT_PUBLISHED && value != null) {
+          err(
+            tag,
+            `結果が公表されていない案件（status=${e.status}）に${field}が設定されています。未公表は0ではなくnullにしてください`,
+          );
+        }
+        if (e.status === RESULT_PUBLISHED && value == null) {
+          warn(tag, `結果公表済みですが${field}が未登録です（公式ページに記載が無い場合はnullのままで構いません）`);
+        }
+      }
+      if (e.status !== RESULT_PUBLISHED && e.resultUrl != null) {
+        err(tag, `結果が公表されていない案件（status=${e.status}）にresultUrlが設定されています`);
+      }
+      if (e.status === RESULT_PUBLISHED && e.resultUrl == null) {
+        err(tag, "結果公表済みですがresultUrlが未設定です（結果の掲載先を登録してください）");
+      }
+
+      if (isBlank(e.trustLevel)) err(tag, "trustLevelが空です（出典の種別を明示してください）");
+      checkTrustLevel({ err }, e.trustLevel, tag);
+      if (!Array.isArray(e.sourceRefs) || e.sourceRefs.length === 0) {
+        err(tag, "sourceRefsが空です（出典なしの意見募集は登録しないでください）");
+      } else {
+        for (const s of e.sourceRefs) {
+          if (isBlank(s.label)) err(tag, "sourceRefsにlabelが空の出典があります");
+          if (!URL_RE.test(s.url ?? "")) err(tag, `sourceRefsに不正なURLがあります: ${s.url}`);
+        }
+        const refUrls = new Set(e.sourceRefs.map((s) => s.url));
+        if (!refUrls.has(e.officialUrl)) {
+          err(tag, "officialUrlがsourceRefsに含まれていません（掲載元を出典として明示してください）");
+        }
+      }
+    }
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("publicComments.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- electionResults.json（選挙結果：市長選・市議選） ---
 try {
   const elections = readJson("src/data/electionResults.json");

@@ -163,6 +163,7 @@ const categoryCards: CategoryCard[] = [
       { label: "延岡市の財政", to: "/finance" },
       { label: "市長公約の進捗", to: "/mayor/policy-progress" },
       { label: "市政年表", to: "/history" },
+      { label: "パブリックコメント", to: "/public-comments" },
       { label: "選挙結果", to: "/elections" },
       { label: "市役所どこに行けばいい？診断", to: "/city-guide" },
       { label: "市役所の組織一覧", to: "/city-organization" },

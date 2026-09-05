@@ -45,6 +45,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/compensation", label: "報酬" },
       { to: "/compare", label: "比較する" },
       { to: "/timeline", label: "年表を見る" },
+      { to: "/public-comments", label: "パブリックコメント" },
       { to: "/dashboard", label: "ダッシュボード" },
     ],
   },
