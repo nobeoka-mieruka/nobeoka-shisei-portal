@@ -1,0 +1,130 @@
+{
+  "phase": "Phase233",
+  "title": "県関連の実施主体表示の実レンダリング監査",
+  "generatedAt": "2026-09-05",
+  "baseUrl": "http://localhost:4193",
+  "viewport": "390x844",
+  "totals": {
+    "pagesRendered": 16,
+    "cardsChecked": 27,
+    "attributedEvents": 12,
+    "prefectureRelatedEvents": 13,
+    "unclassifiedPrefectural": 2,
+    "findings": 0
+  },
+  "pages": [
+    {
+      "path": "/history/",
+      "kind": "timeline-all",
+      "attributedEventsRendered": 12,
+      "unclassifiedPrefecturalRendered": 2,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/",
+      "kind": "timeline-index",
+      "attributedEventsRendered": 0,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/1939/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/1944/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/1948/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/1955/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/1958/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/1971/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 1,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/2005/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/2009/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 1,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/2012/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 2,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/2013/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 0,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/timeline/2026/",
+      "kind": "timeline-year",
+      "attributedEventsRendered": 2,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/finance/",
+      "kind": "finance",
+      "attributedEventsRendered": 0,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/bills/",
+      "kind": "bills",
+      "attributedEventsRendered": 0,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    },
+    {
+      "path": "/questions/",
+      "kind": "questions",
+      "attributedEventsRendered": 0,
+      "unclassifiedPrefecturalRendered": 0,
+      "consoleErrors": 0
+    }
+  ],
+  "findings": []
+}
