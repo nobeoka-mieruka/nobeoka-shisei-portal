@@ -807,8 +807,10 @@ export interface PolicyProgressDocument {
 
 /** 市長公約の進捗状況ページ全体のデータ。 */
 export interface MayorPolicyProgressData {
-  /** ISO形式。データの基準日。 */
+  /** ISO形式。データの基準日（出典資料が「何年何月何日現在」の内容かを指す）。 */
   referenceDate: string;
+  /** ISO形式。サイト運営者が延岡市公式サイトの掲載内容をいつ確認したか。基準日とは区別する。 */
+  lastVerified?: string;
   documents: PolicyProgressDocument[];
   referenceUrl: string;
   referenceLabel: string;
@@ -839,6 +841,13 @@ export interface MayorPromiseDocument {
   sourceType: string;
   /** ISO形式。資料が公開された日（確認できた場合のみ設定する）。 */
   publishedDate?: string;
+  /**
+   * `url` が当サイトに置いた複製の場合に、延岡市公式ホームページ上の同じ資料のURL。
+   * 発行元の原本へ辿れるようにするためのもので、確認できた場合のみ設定する。
+   */
+  officialUrl?: string;
+  /** `officialUrl` の掲載ページの名称（例: 延岡市公式サイト「施政方針」）。 */
+  officialUrlLabel?: string;
 }
 
 /**
@@ -1108,6 +1117,56 @@ export interface MayorEntertainmentExpensesData {
   confirmedZeroMonths: string[];
   /** まだ公式資料が公表されていない月（YYYY-MM形式）の一覧。推定値を出さず「データ確認中」と表示するために使う。 */
   unconfirmedMonths: string[];
+}
+
+/**
+ * 「政治倫理の確立のための延岡市長の資産等の公開に関する条例」に基づき公開される資産報告書1件分。
+ *
+ * 当サイトは資産額そのものを転載しない。延岡市公式ホームページで公開されている
+ * 報告書PDFへのリンクと、公式ページに記載された見出し・時点だけを構造化する。
+ */
+export interface MayorAssetDisclosureDocument {
+  id: string;
+  /** 延岡市公式ホームページのリンク文言をそのまま使う（例: 令和8年4月作成の資産報告書（令和7年12月31日時点））。 */
+  label: string;
+  /** 延岡市公式ホームページ上のPDFの絶対URL。 */
+  url: string;
+  fileType: "PDF";
+  /** 公式ページに記載されたファイルサイズ表記（例: 355KB）。 */
+  fileSizeLabel?: string;
+  /**
+   * ISO形式。報告書が対象とする時点。
+   * 公式ページの表記から一意に読み取れない場合は設定しない（推定しない）。
+   */
+  referenceDate?: string;
+  /** 公式ページの作成時期の表記（例: 令和8年4月作成）。 */
+  publishedLabel: string;
+  /** 公式ページの表記に注意が必要な場合の補足。 */
+  note?: string;
+}
+
+/** 資産報告書を公式ページの見出し（代次）ごとにまとめたもの。 */
+export interface MayorAssetDisclosureGroup {
+  id: string;
+  /** 公式ページの見出しをそのまま使う（例: 第29代延岡市長）。氏名は公式ページに記載が無いため補わない。 */
+  label: string;
+  documents: MayorAssetDisclosureDocument[];
+}
+
+/** 市長の資産などの公開ページ全体のデータ。 */
+export interface MayorAssetDisclosuresData {
+  sourcePageTitle: string;
+  sourcePageUrl: string;
+  /** ISO形式。延岡市公式ホームページに表示されている更新日。 */
+  sourcePageUpdatedAt: string;
+  /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
+  lastVerified: string;
+  legalBasis: string;
+  overview: string;
+  originalInspection: string;
+  contact: string;
+  reportTypes: { id: string; name: string; description: string }[];
+  groups: MayorAssetDisclosureGroup[];
 }
 
 /** 財政ダッシュボードの金額1件分（千円単位）。構成比は資料に記載された値をそのまま使用する（独自算定はしない）。 */

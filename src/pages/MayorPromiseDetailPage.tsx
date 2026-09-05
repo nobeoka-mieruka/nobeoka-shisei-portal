@@ -369,6 +369,20 @@ export function MayorPromiseDetailPage() {
                       資料公開日：{formatJapaneseDate(doc.publishedDate)}
                     </p>
                   )}
+                  {doc.officialUrl && (
+                    <p className="mt-0.5 text-xs text-on-surface-variant">
+                      発行元の原本：
+                      <a
+                        href={doc.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${doc.label}の原本（${doc.officialUrlLabel ?? "延岡市公式ホームページ"}）を新しいタブで開く`}
+                        className={`underline ${linkClass}`}
+                      >
+                        {doc.officialUrlLabel ?? "延岡市公式ホームページ"}
+                      </a>
+                    </p>
+                  )}
                 </li>
               );
             })}

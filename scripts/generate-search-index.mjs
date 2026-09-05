@@ -277,14 +277,37 @@ try {
 
 // --- mayor ---
 const mayor = readJson("src/data/mayor.json");
+// 資産公開は /mayor 内のセクション（専用URLを持たない）ため、mayor-main の索引へ含める。
+// 件数・見出しはデータから組み立て、ここへ直書きしない。
+let assetDisclosureKeywords = [];
+let assetDisclosureContent = "";
+try {
+  const assetDisclosures = readJson("src/data/mayorAssetDisclosures.json");
+  assetDisclosureKeywords = [
+    "資産公開",
+    "市長の資産などの公開",
+    "資産報告書",
+    ...(assetDisclosures.reportTypes ?? []).map((t) => t.name),
+  ];
+  assetDisclosureContent = [
+    assetDisclosures.legalBasis,
+    assetDisclosures.overview,
+    ...(assetDisclosures.reportTypes ?? []).map((t) => `${t.name}：${t.description}`),
+    ...(assetDisclosures.groups ?? []).flatMap((g) => (g.documents ?? []).map((d) => `${g.label} ${d.label}`)),
+  ]
+    .filter(Boolean)
+    .join(" ");
+} catch {
+  // データがない場合はスキップ
+}
 entries.push({
   id: "mayor-main",
   type: "mayor",
   title: `延岡市長 ${mayor.name}`,
-  description: "延岡市長のプロフィール、経歴、公約、市政方針",
+  description: "延岡市長のプロフィール、経歴、公約、市政方針、資産などの公開",
   url: "/mayor",
-  keywords: [mayor.name, mayor.nameKana, "市長", "延岡市長"].filter(Boolean),
-  content: mayor.profile,
+  keywords: [mayor.name, mayor.nameKana, "市長", "延岡市長", ...assetDisclosureKeywords].filter(Boolean),
+  content: [mayor.profile, assetDisclosureContent].filter(Boolean).join(" "),
 });
 
 // --- mayor promises ---

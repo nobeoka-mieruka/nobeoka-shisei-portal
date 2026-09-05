@@ -467,7 +467,7 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         {
           path: "/mayor",
           pageTitle: `延岡市長 ${mayor.name}`,
-          description: `延岡市長${mayor.name}氏のプロフィール、経歴、公約（${MAYOR_PROMISE_SCALE_SUMMARY}）、市政方針を公開資料に基づいて掲載しています。`,
+          description: `延岡市長${mayor.name}氏のプロフィール、経歴、公約（${MAYOR_PROMISE_SCALE_SUMMARY}）、市政方針、資産などの公開を公開資料に基づいて掲載しています。`,
           breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市長情報" }],
           extraJsonLd: [personJsonLd("person-jsonld", mayor.name, url, sameAs, undefined, mayor.photoUrl)],
           mainEntity: { "@type": "Person", name: mayor.name, url },
