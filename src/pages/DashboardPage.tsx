@@ -129,6 +129,8 @@ const factionOfficerGroups = allFactions
     (a, b) =>
       (factionMemberCounts.get(b.faction.id) ?? 0) - (factionMemberCounts.get(a.faction.id) ?? 0),
   );
+/** 名簿で役職を確認できた会派役員の人数（データから算出し、画面へ直書きしない）。 */
+const factionOfficerTotal = factionOfficerGroups.reduce((sum, g) => sum + g.officers.length, 0);
 /** 会派名簿の基準日。全会派が同一の名簿に基づくため、最も新しい基準日を代表として表示する。 */
 const factionOfficersAsOf = factionOfficerGroups
   .map((g) => g.faction.officersAsOf)
@@ -456,9 +458,21 @@ export function DashboardPage() {
         </p>
         {/* Phase197：単独で置かれた導線リンクは文章の一部ではないため、
             inline-flex＋min-h-11で44pxのタップ領域を確保する（表示文字は変えない）。 */}
-        <Link to="/mayor/policy-progress" className="mt-2 inline-flex min-h-11 items-center text-sm text-primary underline">
-          市長公約の進捗状況を詳しく見る
-        </Link>
+        {/* Phase238：市長交際費・資産などの公開は延岡市公式ホームページの公表資料をもとに
+            登録済みだが、この集約ページから辿れなかったため導線を追加する。金額の集計値は
+            公表済みの月だけの合計であり、年度の総額と誤解されないよう、ここでは件数・金額を
+            出さず各ページへ案内する。 */}
+        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+          <Link to="/mayor/policy-progress" className="inline-flex min-h-11 items-center text-primary underline">
+            市長公約の進捗状況を詳しく見る
+          </Link>
+          <Link to="/mayor/entertainment-expenses" className="inline-flex min-h-11 items-center text-primary underline">
+            市長交際費の公表資料を見る
+          </Link>
+          <Link to="/mayor" className="inline-flex min-h-11 items-center text-primary underline">
+            市長の資産などの公開を見る
+          </Link>
+        </div>
       </SectionCard>
 
       {/* Phase203：「公式資料を確認できている直近の会期」と「これから開催される会期」は
@@ -680,6 +694,7 @@ export function DashboardPage() {
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
             延岡市議会が公表する会派名簿に記載されている役職です
             {factionOfficersAsOf && `（名簿の基準日：${formatJapaneseDate(factionOfficersAsOf)}）`}。
+            名簿で役職を確認できた議員は{factionOfficerTotal}名です。
             {"名簿に役職の記載が無い議員は、この一覧には現れません（役職に就いていないという意味ではありません）。"}
             会派の力関係や序列を示すものではありません。
           </p>

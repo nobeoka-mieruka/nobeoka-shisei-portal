@@ -168,20 +168,50 @@ export function TimelineYearPage() {
             )}
           </SectionCard>
 
-          <SectionCard title="議員在籍・会派・役職">
+          {/* Phase238：見出しが「会派・役職」を含んでいたが、この年表が参照している
+              archiveMemberTerms.json には会派・議会内役職の項目が無く、年度ごとの会派も
+              一次資料で確認できていない（archiveMemberAffiliations.json にも該当レコードは無い）。
+              データの無い枠を見出しだけで作らないよう「議員在籍」に改め、確認できている
+              任期・当選回数と議員ページへの導線を表示する。データ側は変更していない。 */}
+          <SectionCard title="議員在籍">
             {memberTerms.length === 0 ? (
               <p className="text-sm text-on-surface-variant">確認できたデータはまだありません。</p>
             ) : (
-              <ul className="space-y-2">
-                {memberTerms.map((term) => {
-                  const profile = archiveMemberProfiles.find((p) => p.id === term.memberProfileId);
-                  return (
-                    <li key={term.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                      {profile?.name ?? "確認中"}
-                    </li>
-                  );
-                })}
-              </ul>
+              <>
+                <p className="text-xs leading-relaxed text-on-surface-variant">
+                  {fiscalYearLabel(fiscalYear)}に在職していたことを、選挙結果などの公式資料で確認できた議員です（{memberTerms.length}名）。会派・議会内役職の年度ごとの記録は、この年表のもとになっているデータには含まれていません（確認できた分は各議員のページに掲載しています）。
+                </p>
+                <ul className="mt-2 space-y-2">
+                  {memberTerms.map((term) => {
+                    const profile = archiveMemberProfiles.find((p) => p.id === term.memberProfileId);
+                    const currentMemberId =
+                      profile?.legacyMemberId && members.some((m) => m.id === profile.legacyMemberId)
+                        ? profile.legacyMemberId
+                        : null;
+                    const to = currentMemberId
+                      ? `/members/${currentMemberId}`
+                      : profile && !profile.legacyMemberId
+                        ? `/members/former/${profile.slug}`
+                        : null;
+                    return (
+                      <li key={term.id} className="rounded-lg border border-outline-variant p-3 text-sm">
+                        {profile && to ? (
+                          <Link to={to} className="font-semibold text-primary underline">
+                            {profile.name}
+                          </Link>
+                        ) : (
+                          <span className="font-semibold text-on-surface">{profile?.name ?? "確認中"}</span>
+                        )}
+                        <p className="mt-1 text-xs text-on-surface-variant">
+                          任期：{formatJapaneseDate(term.termStart)}〜
+                          {term.termEnd ? formatJapaneseDate(term.termEnd) : "現在"}
+                          {term.termNumber != null ? `／当選${term.termNumber}回目` : ""}
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
             )}
           </SectionCard>
 
