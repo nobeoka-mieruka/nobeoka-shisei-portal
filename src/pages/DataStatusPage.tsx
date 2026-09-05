@@ -21,8 +21,11 @@ import politicalFundOrganizationsData from "../data/politicalFundOrganizations.j
 import politicalFundReportsData from "../data/politicalFundReports.json";
 import kohoNobeokaIssuesData from "../data/kohoNobeokaIssues.json";
 import electionResultsData from "../data/electionResults.json";
+import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
+import mayorAssetDisclosuresData from "../data/mayorAssetDisclosures.json";
 import { kohoOcrSearchIndex } from "../lib/kohoSearch";
 import { civicTimelineEvents } from "../lib/civicTimeline";
+import { allFactions, sortedFactionOfficers } from "../lib/factions";
 import { similarMunicipalityFinance } from "../lib/similarMunicipalityFinance";
 import { getAllCurrentMemberActivity, getEvidenceAvailabilitySummary, metricByKey } from "../lib/councilActivityBarometer";
 import { summarizeVoteClassification, countBillsWithKnownProposerType } from "../lib/billVotes";
@@ -59,6 +62,8 @@ import type {
   CommitteeActivityReport,
   PoliticalFundOrganization,
   PoliticalFundReport,
+  MayorEntertainmentExpensesData,
+  MayorAssetDisclosuresData,
 } from "../types";
 import type {
   ArchiveMayor,
@@ -160,6 +165,17 @@ const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFu
 const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
 const kohoNobeokaIssues = kohoNobeokaIssuesData as KohoNobeokaIssue[];
 const electionResults = electionResultsData as ElectionResult[];
+const mayorEntertainmentExpenses = mayorEntertainmentExpensesData as MayorEntertainmentExpensesData;
+const mayorAssetDisclosures = mayorAssetDisclosuresData as MayorAssetDisclosuresData;
+
+/**
+ * Phase238：同じ議案総数が、見出しでは桁区切りあり・説明文では桁区切りなしで表示され、
+ * 同じページの中で違う数字のように見えていた。4桁以上の件数はすべてこの関数を通して表示し、
+ * 表記をそろえる（値そのものは変えない。件数は常に実データから算出する）。
+ */
+function formatCount(value: number): string {
+  return value.toLocaleString("ja-JP");
+}
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -391,6 +407,37 @@ export function DataStatusPage() {
   const committeeReportToPlenaryConfirmedMembers = committeeReportMemberIds.size;
   const committeeReportToPlenaryTotalEvents = committeeReportActivityData.events.length;
   const evidenceSummary = getEvidenceAvailabilitySummary();
+  // Phase238：レーダーチャートの指標数も固定値で書かず、実際の指標配列の長さから数える
+  // （指標が増減したときに説明文だけが古い数字のまま残らないようにする）。
+  const activityMetricCount = activityEntries[0]?.metrics.length ?? 0;
+
+  // Phase238：会派・会派役員の収録状況。会派数・所属人数・役員人数はいずれも
+  // factions.json／members.json の実データから数え、ページへ件数を直書きしない。
+  // 会派の並び順は所属人数の多い順とし、役員の有無や役職で順位を作らない（DashboardPageと同じ扱い）。
+  const factionMemberCounts = new Map<string, number>();
+  for (const m of members) {
+    factionMemberCounts.set(m.factionId, (factionMemberCounts.get(m.factionId) ?? 0) + 1);
+  }
+  const factionsWithRoster = allFactions.filter((f) => Array.isArray(f.officers));
+  const factionOfficerCount = allFactions.reduce((sum, f) => sum + sortedFactionOfficers(f).length, 0);
+  const factionOfficersAsOf = allFactions
+    .map((f) => f.officersAsOf)
+    .filter((d): d is string => !!d)
+    .sort()
+    .at(-1);
+  const factionMemberBreakdown = [...allFactions]
+    .sort((a, b) => (factionMemberCounts.get(b.id) ?? 0) - (factionMemberCounts.get(a.id) ?? 0))
+    .map((f) => `${f.name}${factionMemberCounts.get(f.id) ?? 0}名`)
+    .join("／");
+
+  // Phase238：市長交際費・市長の資産公開（いずれも延岡市公式ホームページの公表資料）。
+  // 未公表の月を0円として扱わないよう、確認できた月数と未公表の月数を分けて数える。
+  const entertainmentMonthsWithExpense = new Set(mayorEntertainmentExpenses.expenses.map((e) => e.date.slice(0, 7)));
+  const entertainmentConfirmedMonthCount =
+    entertainmentMonthsWithExpense.size + mayorEntertainmentExpenses.confirmedZeroMonths.length;
+  const entertainmentUnconfirmedMonthCount = mayorEntertainmentExpenses.unconfirmedMonths.length;
+  const entertainmentTotalMonthCount = entertainmentConfirmedMonthCount + entertainmentUnconfirmedMonthCount;
+  const assetDisclosureDocumentCount = mayorAssetDisclosures.groups.reduce((sum, g) => sum + g.documents.length, 0);
 
   // --- 議員プロフィール収録率 ---
   const memberPhotoCount = members.filter((m) => !!m.photoUrl).length;
@@ -471,7 +518,7 @@ export function DataStatusPage() {
       count: members.length,
       unit: "名",
       scope: "現在の任期",
-      detail: `顔写真：${memberPhotoCount}／${members.length}名／公式プロフィール：${memberProfileCount}／${members.length}名／公式サイト：${memberProfileUrlCount}／${members.length}名／SNS：${memberSnsCount}／${members.length}名／所属委員会登録：${memberCommitteeCount}／${members.length}名／一般質問（会議録確認済み）：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名／議案賛否・議員との紐付け（1件以上の個人別賛否が記録されている議員数。全議案の賛否が取得済みという意味ではありません）：${memberWithBillVoteCount}／${members.length}名／個人別賛否が確認できた議案そのものの件数：${individualVoteConfirmedBillCount}／${billVotes.length}件`,
+      detail: `顔写真：${memberPhotoCount}／${members.length}名／公式プロフィール：${memberProfileCount}／${members.length}名／公式サイト：${memberProfileUrlCount}／${members.length}名／SNS：${memberSnsCount}／${members.length}名／所属委員会登録：${memberCommitteeCount}／${members.length}名／一般質問（会議録確認済み）：${members.length - membersWithoutConfirmedQuestion.length}／${members.length}名／議案賛否・議員との紐付け（1件以上の個人別賛否が記録されている議員数。全議案の賛否が取得済みという意味ではありません）：${memberWithBillVoteCount}／${members.length}名／個人別賛否が確認できた議案そのものの件数：${formatCount(individualVoteConfirmedBillCount)}／${formatCount(billVotes.length)}件`,
       linkTo: "/",
       linkLabel: "議員一覧を見る",
     },
@@ -549,12 +596,16 @@ export function DataStatusPage() {
     label: "議案・採決データベース",
     count: billVotes.length,
     unit: "件",
-    detail: `議案総数${billVotes.length}件のうち、出典（審議結果PDF等）確認済み${billVotesSourceLinkedCount}件／一次資料本文（会議録の提案理由説明等）を確認済み${billVotesBodyVerifiedCount}件／その本文に基づく詳細な説明あり${billVotesDetailedExplanationCount}件／詳しい内容は追加確認中${billVotesAdditionalConfirmingCount}件です（「追加確認中」は情報が無いという意味ではなく、議案名・議決結果・出典は確認済みで、議案固有の詳しい提案理由等をまだ整理できていない状態です）。議決結果は${billVotes.length}件全てを登録済み。個人（議員ごと）の賛否内訳（採決方式と公開状況を別軸に整理）：個人別に公開${voteClassification.byDisclosure.individual}件（記名投票等）／採決方式は判明しているが個人別は未確認${voteClassification.byDisclosure.aggregate}件（起立採決・簡易採決等で、会議録には方式の記載はあるが個人別の内訳までは未調査）／個人別は非公開と確認済み${voteClassification.byDisclosure.not_disclosed}件（会議録で非公開と確認済み）／採決方式・公開状況とも不明${voteClassification.byDisclosure.unknown}件（会議録自体が未公開）。品質項目の確認状況：提出者区分${billVotesProposerTypeKnown}／${billVotes.length}件・採決方法${billVotesVoteMethodKnown}／${billVotes.length}件・付託委員会${billVotesCommitteeKnown}／${billVotes.length}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
+    detail: `議案総数${formatCount(billVotes.length)}件のうち、出典（審議結果PDF等）確認済み${formatCount(billVotesSourceLinkedCount)}件／一次資料本文（会議録の提案理由説明等）を確認済み${formatCount(billVotesBodyVerifiedCount)}件／その本文に基づく詳細な説明あり${formatCount(billVotesDetailedExplanationCount)}件／詳しい内容は追加確認中${formatCount(billVotesAdditionalConfirmingCount)}件です（「追加確認中」は情報が無いという意味ではなく、議案名・議決結果・出典は確認済みで、議案固有の詳しい提案理由等をまだ整理できていない状態です）。議決結果は${formatCount(billVotes.length)}件全てを登録済み。個人（議員ごと）の賛否内訳（採決方式と公開状況を別軸に整理）：個人別に公開${voteClassification.byDisclosure.individual}件（記名投票等）／採決方式は判明しているが個人別は未確認${voteClassification.byDisclosure.aggregate}件（起立採決・簡易採決等で、会議録には方式の記載はあるが個人別の内訳までは未調査）／個人別は非公開と確認済み${voteClassification.byDisclosure.not_disclosed}件（会議録で非公開と確認済み）／採決方式・公開状況とも不明${voteClassification.byDisclosure.unknown}件（会議録自体が未公開）。品質項目の確認状況：提出者区分${formatCount(billVotesProposerTypeKnown)}／${formatCount(billVotes.length)}件・採決方法${formatCount(billVotesVoteMethodKnown)}／${formatCount(billVotes.length)}件・付託委員会${formatCount(billVotesCommitteeKnown)}／${formatCount(billVotes.length)}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
     linkTo: "/bills/votes",
     linkLabel: "議案ごとの賛否を見る",
   };
 
   const committeesWithJurisdiction = committees.filter((c) => c.jurisdiction !== null).length;
+  // Phase238：所管事項の根拠を種類ごとに説明する注記で「常任委員会3件」「（6／6件）」が
+  // 直書きされていた。委員会が増減したときに説明だけが古い数字で残らないよう、
+  // committees.json の type から数える（根拠の文言は変更していない）。
+  const committeeCountByType = (type: string) => committees.filter((c) => c.type === type).length;
   const countConsistencyUnresolved = dataQualitySummary.countConsistencyChecks.filter(
     (c) => !c.status.startsWith("fixed"),
   ).length;
@@ -598,6 +649,21 @@ export function DataStatusPage() {
     linkTo: "/committees",
     linkLabel: "委員会一覧を見る",
     fullyCovered: committeesWithJurisdiction === committees.length,
+  };
+
+  // Phase238：会派は「議員が何人所属しているか」だけでなく、公表されている会派役員名簿を
+  // どこまで確認できているかも収録状況として示す（Round1で会派役員16名を一次資料から登録済み）。
+  const councilFactions: DataDomain = {
+    label: "会派・会派役員",
+    count: allFactions.length,
+    unit: "会派",
+    scope: factionOfficersAsOf
+      ? `延岡市議会「会派役員及び所属議員名簿」（名簿の基準日：${formatJapaneseDateIfIso(factionOfficersAsOf)}）`
+      : "延岡市議会「会派役員及び所属議員名簿」",
+    detail: `所属人数の内訳（現職議員${members.length}名）：${factionMemberBreakdown}。名簿に役職の記載があり会派役員として確認できた議員：${factionOfficerCount}名。役職名は名簿の記載どおりで、当サイトが序列や影響力を判定したものではありません。名簿に役職の記載が無い議員、会派役員が置かれていない会派について、役職を推定して補うことはしていません。`,
+    linkTo: "/dashboard",
+    linkLabel: "会派別人数・会派役員を見る",
+    fullyCovered: factionsWithRoster.length === allFactions.length,
   };
 
   // Phase183：会期要約の確認状況（Phase163・175・179で計19会期がunavailableから
@@ -786,6 +852,31 @@ export function DataStatusPage() {
     },
   ];
 
+  // Phase238：Round1で登録した市長交際費（令和8年7月分まで）と市長の資産公開を、
+  // 収録状況の集計にも反映する。どちらも延岡市公式ホームページの公表資料であり、
+  // 未公表分を0として扱わず「まだ公表されていない」と区別して数える。
+  const mayorDisclosure: DataDomain[] = [
+    {
+      label: "市長交際費（公表済みの支出明細）",
+      count: mayorEntertainmentExpenses.expenses.length,
+      unit: "件",
+      scope: `${mayorEntertainmentExpenses.fiscalYearLabel}（延岡市公式ホームページの月別公表資料）`,
+      detail: `公表資料を確認できた月：${entertainmentConfirmedMonthCount}／${entertainmentTotalMonthCount}か月（うち支出0円と公式資料で確認できた月：${mayorEntertainmentExpenses.confirmedZeroMonths.length}か月）。まだ公表されていない月：${entertainmentUnconfirmedMonthCount}か月。未公表の月を0円として扱ってはいません。`,
+      linkTo: "/mayor/entertainment-expenses",
+      linkLabel: "市長交際費を見る",
+      fullyCovered: entertainmentUnconfirmedMonthCount === 0,
+    },
+    {
+      label: "市長の資産などの公開（公表されている報告書）",
+      count: assetDisclosureDocumentCount,
+      unit: "件",
+      scope: `「${mayorAssetDisclosures.legalBasis}」に基づき延岡市が公開している報告書`,
+      detail: `${mayorAssetDisclosures.groups.map((g) => `${g.label}：${g.documents.length}件`).join("／")}。当サイトは資産額そのものを転載せず、延岡市公式ホームページが公開している報告書へのリンクと、公式ページに記載された見出し・時点だけを整理しています（公式ページ更新日：${formatJapaneseDateIfIso(mayorAssetDisclosures.sourcePageUpdatedAt)}）。${mayorAssetDisclosures.originalInspection}`,
+      linkTo: "/mayor",
+      linkLabel: "市長ページで確認する",
+    },
+  ];
+
   const finance: DataDomain[] = [
     {
       label: "財政・人口・基金・市債（年度データ）",
@@ -859,7 +950,7 @@ export function DataStatusPage() {
       metric: simpleCompleteness(billVotesDetailedExplanationCount, billVotes.length),
       // Phase236：件数は billVotes.json の実件数から組み立てる（固定値の直書きを解消）。
       // 旧値をコメントにも書かない（増えたときに古い数字が残るため）。
-      note: `議案名・議決結果・出典（審議結果PDF等）は全${billVotes.length.toLocaleString("ja-JP")}件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。`,
+      note: `議案名・議決結果・出典（審議結果PDF等）は全${formatCount(billVotes.length)}件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。`,
     },
     {
       label: "政治資金団体：代表者・会計責任者・当該年分収支の完全確認",
@@ -868,7 +959,7 @@ export function DataStatusPage() {
     {
       label: "委員会：所管事項の確認",
       metric: simpleCompleteness(committeesWithJurisdiction, committees.length),
-      note: "常任委員会3件は延岡市議会委員会条例の個別列挙、議会運営委員会1件は地方自治法第109条第3項の一般規定、特別委員会2件は設置時の提案理由により、所管事項をそれぞれ確認済み（6／6件）",
+      note: `常任委員会${committeeCountByType("常任委員会")}件は延岡市議会委員会条例の個別列挙、議会運営委員会${committeeCountByType("議会運営委員会")}件は地方自治法第109条第3項の一般規定、特別委員会${committeeCountByType("特別委員会")}件は設置時の提案理由により、所管事項をそれぞれ確認済み（${committeesWithJurisdiction}／${committees.length}件）`,
     },
     {
       label: "財政：年度レコードの登録（この軸で調査に着手した年度）",
@@ -1227,7 +1318,7 @@ export function DataStatusPage() {
 
       <SectionCard title="議会（議案・条例・請願・陳情）">
         <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
-          「議案・採決データベース」（{billVotes.length}件）と「詳細アーカイブ化済み議案」（{documentTypeCounts.find((d) => d.type === "bill")?.count ?? 0}件）は、同じ「議案」でも数え方が異なる別々の集計です。前者は議案ごとの議決結果を機械的に登録した一覧、後者はその中から提出経緯・審査過程まで人手で詳しく調べて記録したものです。条例・請願・陳情についても同様に、「詳細アーカイブ化済み」は全件一覧ではありません。
+          「議案・採決データベース」（{formatCount(billVotes.length)}件）と「詳細アーカイブ化済み議案」（{documentTypeCounts.find((d) => d.type === "bill")?.count ?? 0}件）は、同じ「議案」でも数え方が異なる別々の集計です。前者は議案ごとの議決結果を機械的に登録した一覧、後者はその中から提出経緯・審査過程まで人手で詳しく調べて記録したものです。条例・請願・陳情についても同様に、「詳細アーカイブ化済み」は全件一覧ではありません。
         </p>
         <ul className="space-y-2">
           <DomainRow domain={councilExtra} />
@@ -1235,6 +1326,7 @@ export function DataStatusPage() {
             <DomainRow key={d.label} domain={d} />
           ))}
           <DomainRow domain={councilCommittees} />
+          <DomainRow domain={councilFactions} />
           <DomainRow domain={councilLeadershipDomain} />
           <DomainRow domain={councilSessionSummaryDomain} />
         </ul>
@@ -1251,9 +1343,9 @@ export function DataStatusPage() {
         </ul>
       </SectionCard>
 
-      <SectionCard title="政策・財政・政治資金">
+      <SectionCard title="政策・財政・政治資金・市長の公表資料">
         <ul className="space-y-2">
-          {[...policy, ...finance, ...politicalFunds].map((d) => (
+          {[...policy, ...finance, ...politicalFunds, ...mayorDisclosure].map((d) => (
             <DomainRow key={d.label} domain={d} />
           ))}
         </ul>
@@ -1449,7 +1541,7 @@ export function DataStatusPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{committeeReportToPlenaryConfirmedMembers}名（計{committeeReportToPlenaryTotalEvents}件）</dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">6指標すべて算定可能</dt>
+            <dt className="text-xs text-on-surface-variant">{activityMetricCount}指標すべて算定可能</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityFullCompleteCount}名</dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -1457,7 +1549,7 @@ export function DataStatusPage() {
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityPartialCount}名</dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">6指標とも対象記録なしの議員</dt>
+            <dt className="text-xs text-on-surface-variant">{activityMetricCount}指標とも対象記録なしの議員</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{activityAllMissingCount}名</dd>
           </div>
         </dl>
@@ -1518,7 +1610,7 @@ export function DataStatusPage() {
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">個人別賛否確認済み（議案）</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
-              {individualVoteConfirmedBillCount}／{billVotes.length}件
+              {formatCount(individualVoteConfirmedBillCount)}／{formatCount(billVotes.length)}件
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -1533,7 +1625,7 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          「個人別賛否紐付け人数（議員）」は、1件以上の議案で個人別の賛否が記録されている議員の人数です。これが{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名中{peopleStatus.voteLinkedCount}名（26名全員等）になっていても、「全議案について全議員の賛否が取得済み」という意味ではありません。実際に個人別の賛否が確認できている議案の件数は「個人別賛否確認済み（議案）」（{individualVoteConfirmedBillCount}／{billVotes.length}件）の方をご覧ください。議案単位の内訳（個人別に公開・採決方式のみ判明・非公開と確認済み・不明）は
+          「個人別賛否紐付け人数（議員）」は、1件以上の議案で個人別の賛否が記録されている議員の人数です。これが{peopleStatus.currentMemberCount + peopleStatus.formerMemberCount}名中{peopleStatus.voteLinkedCount}名（現職{members.length}名全員等）になっていても、「全議案について全議員の賛否が取得済み」という意味ではありません。実際に個人別の賛否が確認できている議案の件数は「個人別賛否確認済み（議案）」（{formatCount(individualVoteConfirmedBillCount)}／{formatCount(billVotes.length)}件）の方をご覧ください。議案単位の内訳（個人別に公開・採決方式のみ判明・非公開と確認済み・不明）は
           <Link to="/bills/votes" className="font-medium text-primary underline">
             議案ごとの賛否
           </Link>
