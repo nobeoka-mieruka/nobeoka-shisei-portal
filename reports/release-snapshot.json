@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T23:46:38.330Z",
+  "generatedAt": "2026-09-05T01:08:26.196Z",
   "release": {
-    "commitSha": "fc6e6ab72666e1f9f03a5db65ae38da7f7e3cd59",
-    "commitShaShort": "fc6e6ab",
-    "commitDate": "2026-09-05T08:36:26+09:00",
-    "productionDeployId": "fc246889-6cc1-4565-91b1-28f972439364",
+    "commitSha": "749175c683ffbd5abfbde66d473c4eb7d419e8e7",
+    "commitShaShort": "749175c",
+    "commitDate": "2026-09-05T09:57:57+09:00",
+    "productionDeployId": "2b32d46a-a5b9-4a8e-bc35-c40dd48a1b69",
     "productionUrl": "https://nobeoka-shisei-portal.pages.dev/"
   },
   "counts": {
-    "bills": 1177,
+    "bills": 1178,
     "generalQuestions": 27,
     "councilSpeechRecords": 419,
     "questionItems": 1568,
@@ -18,14 +18,14 @@
     "mayorsHistorical": 14,
     "mayorTermRecords": 30,
     "mayorPromises": 14,
-    "civicTimelineEvents": 217,
-    "updateHistoryEntries": 139,
-    "councilSessions": 61,
-    "searchIndexEntries": 2278,
-    "searchIndexUniqueUrls": 1916
+    "civicTimelineEvents": 219,
+    "updateHistoryEntries": 143,
+    "councilSessions": 62,
+    "searchIndexEntries": 2285,
+    "searchIndexUniqueUrls": 1917
   },
   "sources": {
-    "uniqueSourceUrls": 5488
+    "uniqueSourceUrls": 5494
   },
   "blockedTasks": {
     "total": 15,
