@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で固定し、Phase201〜234 の品質改善を反映した安定版の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜242 の品質改善を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -9,8 +9,8 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `cb7eac7`（Phase234） |
-| production deploy ID | `e8e5f3c3-4cf8-4f6e-b535-a7cbcf258a22` |
+| release commit | `81aaf19`（Phase242） |
+| production deploy ID | `17bc17a5-53f4-4a14-baad-2eca2505211b` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
@@ -23,9 +23,9 @@
 | 議案 | 1,177 | 1,178 | 議案第48号（工事請負契約、令和8年9月定例会、原案可決 2026-08-28）を市議会公式資料から追加 |
 | 会期 | 61 | 62 | 令和8年9月定例会を追加 |
 | 市政年表イベント | 217 | 219 | 宮崎県主催だが延岡市の関与が資料に明示された2件（防災実践塾・円卓トーク） |
-| 更新履歴エントリ | 137 | 143 | Phase202・208・225 の記録 |
-| 検索索引エントリ | 2,276 | 2,285 | 上記の追加分が索引化されたもの |
-| 出典URL（重複除去） | 5,488 | 5,494 | 新規に登録した一次資料の出典 |
+| 更新履歴エントリ | 137 | 149 | Phase202・208・225・235・236・239 の記録 |
+| 検索索引エントリ | 2,276 | 2,292 | 上記の追加分が索引化されたもの |
+| 出典URL（重複除去） | 5,488 | 5,530 | 新規に登録した一次資料の出典 |
 
 **政策分野4・個別公約14・個別施策33・現職議員26 は不変**です。
 議案の増加は令和8年9月定例会の新規議案であり、既存1,177件は変わっていません。
@@ -43,13 +43,13 @@
 | 歴代市長 | 14（任期レコード 30） |
 | 市長公約 | 14 |
 | 市政年表イベント | 219 |
-| 更新履歴エントリ | 143 |
+| 更新履歴エントリ | 149 |
 | 会期 | 62 |
-| 検索索引エントリ | 2,285（うち固有URL 1,917） |
-| 出典URL（重複除去） | 5,494 |
-| プリレンダリング済みページ | 2,272 + `404.html` |
+| 検索索引エントリ | 2,292（うち固有URL 1,918） |
+| 出典URL（重複除去） | 5,530 |
+| プリレンダリング済みページ | 2,273 + `404.html` |
 | route template | 79 |
-| sitemap 掲載URL | 2,203 |
+| sitemap 掲載URL | 2,204 |
 
 `sitemap` との差 69 件の内訳: `/members/fm*` 58件（canonical は `/members/former/:slug`）+ `noindex` 11件（`/compare/*`・`/bills/compare`・`/koho-search`・`/search`）。
 
@@ -116,19 +116,48 @@
 
 調査台帳は `reports/phase227-news-discovery-ledger.json`。
 
+## 市民参加（パブリックコメント）（Phase239）
+
+`src/data/publicComments.json` に5件。**状態は日付から推定せず**、延岡市の
+「パブリックコメント条例 運用状況」ページのどの見出しの下に載っているかをそのまま転記する。
+
+| 状態 | 件数 |
+| --- | ---: |
+| 意見募集中（`open`） | 2 |
+| 結果公表済み（`result-published`） | 3 |
+
+提出者数と意見数は市が別々に公表しているため `submitterCount` / `opinionCount` に分けている。
+**未公表を0にしない** — `status !== "result-published"` で件数や `resultUrl` があると `validate:data` が error。
+結果公表済みのうち1件は市が「意見が寄せられなかった」と公表しているため 0人・0件（推定の0ではない）。
+
+## 議案の採決方法・付託委員会（TASK-004）
+
+令和8年5月臨時会・6月定例会の会議録公開を受け、**議案24件の採決方法・付託委員会・会議録URLを
+一次資料から確定**した（会議録原文の記述が根拠。推測なし）。
+
+| 指標 | 変化 |
+| --- | --- |
+| voteMethod 確認 | 1,153 / 1,177 → **1,177 / 1,178**（99.9%） |
+| committee 確認 | 1,153 / 1,177 → **1,177 / 1,178**（99.9%） |
+
+**TASK-004 の status は `WAITING_EXTERNAL` のまま**。当初対象24件は解決したが、
+同じ理由（会議録未公開）で `2026-09-gian-48`（令和8年9月定例会）が新たに残るため。
+HUMAN_ACTION_REQUIRED は10件から減らしていない。
+
 ## 品質 baseline（すべて 0 が安定版の条件）
 
 | 指標 | 値 |
 | --- | --- |
 | page 間件数矛盾 | 0 |
-| broken internal link | 0（2,272ページ / リンク先2,338種類を検査） |
-| production visual error | 0（27ページ × 7viewport = 189件。旧任期/現任期の質問詳細各3件・予算議案5件・通常議案5件を含む。320/375/390/430/768/1280/1440px で実レンダリング確認） |
+| broken internal link | 0（2,273ページ / リンク先2,339種類を検査） |
+| production visual error | 0（27ページ × 7viewport = 189件 ＋ 追加15ページ × 7viewport = 105件。320/375/390/430/768/1280/1440px で実レンダリング確認） |
 | horizontal overflow | 0px |
 | console error | 0 |
-| test failures | 0（388 checks / 32スクリプト） |
+| hydration error | 0（70URL のクエリ付き直アクセス・リロードで検査。`npm run audit:hydration`） |
+| test failures | 0（404 checks / 34スクリプト） |
 | validate:data errors | 0 |
-| validate:seo failures | 0（2,273ページ） |
-| validate:content errors | 0（2,273ページ） |
+| validate:seo failures | 0（2,274ページ） |
+| validate:content errors | 0（2,274ページ） |
 
 ### 別管理（0 にはしない）
 
