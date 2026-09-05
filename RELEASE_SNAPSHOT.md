@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で固定し、Phase201〜229 の品質改善を反映した安定版の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜234 の品質改善を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -9,8 +9,8 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `749175c`（Phase229） |
-| production deploy ID | `2b32d46a-a5b9-4a8e-bc35-c40dd48a1b69` |
+| release commit | `cb7eac7`（Phase234） |
+| production deploy ID | `e8e5f3c3-4cf8-4f6e-b535-a7cbcf258a22` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
@@ -125,7 +125,7 @@
 | production visual error | 0（27ページ × 7viewport = 189件。旧任期/現任期の質問詳細各3件・予算議案5件・通常議案5件を含む。320/375/390/430/768/1280/1440px で実レンダリング確認） |
 | horizontal overflow | 0px |
 | console error | 0 |
-| test failures | 0（365 checks / 31スクリプト） |
+| test failures | 0（388 checks / 32スクリプト） |
 | validate:data errors | 0 |
 | validate:seo failures | 0（2,273ページ） |
 | validate:content errors | 0（2,273ページ） |
@@ -185,42 +185,68 @@
 | `node scripts/audit-screenreader-semantics.mjs` | accessibility tree による読み上げ意味構造の監査（追加インストール不要） |
 | `npm run scan:era` | 実在しない元号年度（令和0・令和マイナス・NaN年 等）の全ページ走査。build 末尾でも実行 |
 | `npm run verify:production` | 本番の実レンダリング確認（27ページ × 7viewport） |
+| `npm run audit:attribution` | 実施主体の表示監査（市と県の取り違えが無いかを実レンダリングで確認）。build が必要 |
 
 `audit:*` と `smoke:production` は `playwright-core` とローカル Chromium を使います。
 アクセシビリティ監査（`scripts/audit-accessibility.mjs`）の再実行には
 `npm i --no-save playwright @axe-core/playwright` が必要です（Cloudflare Pages のビルドを重くしないため package.json には入れていません）。
 
-## 次の小規模改善候補（方針決定済み・未実装）
+## 事業の実施主体（Phase230-234）
 
-### 県事業と市事業の構造的な区別
+**延岡市内で行われる宮崎県の事業を、延岡市の事業と誤解させない**ための最小限の構造化。
+既存フィールド33キーを監査した結果、実施主体を表せるものは0件だったため、任意フィールドを1つだけ追加した。
 
-Phase226・228 で県市連携案件が増えたため、**県の事業を延岡市単独の事業と誤認させない**ための
-最小限の構造化を採用する方針が決まっている。**大規模な schema migration は行わない。**
-
-既存構造を確認したうえで、必要なら**任意フィールド**として `implementingBody` / `implementationScope` 相当を追加する。
-既存構造で表現できない場合のみ `nobeokaRelation` 相当も検討する。
-**既存の enum・命名規則がある場合はそちらを優先する。**
-
-| フィールド | 概念例 |
+| 項目 | 内容 |
 | --- | --- |
-| `implementingBody` | `nobeoka_city` / `miyazaki_prefecture` / `national_government` / `joint` / `other` |
-| `implementationScope` | `nobeoka_city` / `northern_miyazaki` / `miyazaki_prefecture` / `national` |
-| `nobeokaRelation` | `implemented_in_nobeoka` / `nobeoka_participant` / `nobeoka_beneficiary` / `city_prefecture_joint` / `related_only` |
+| 型 | `src/types/implementationAttribution.ts` |
+| 付与先 | `CivicTimelineEvent.implementation?`（任意。**無い＝未確認が正常状態**） |
+| `implementingBody` | `nobeokaCity` / `miyazakiPrefecture` / `nationalGovernment` / `cityPrefectureJoint` / `wideAreaUnion` / `other` |
+| `nobeokaRelation` | `cityProject` / `prefecturalProjectInNobeoka` / `cityPrefectureJoint` / `nobeokaParticipant` / `nobeokaBeneficiary` / `relatedOnly` |
+| `implementationScope`（任意） | `nobeokaCity` / `northernMiyazaki` / `miyazakiPrefecture` / `national` / `other` |
+| `attributionSourceUrl`（必須） | 同レコードの `sourceRefs` に含まれる URL でなければ `validate:data` が error |
 
-**設定のルール**
+migration 不要・完全後方互換。命名は既存型に合わせた camelCase。
 
-- 一次資料で確定できる案件だけ設定する。不明なら null / 未設定のままにする
-- 県の事業を延岡市の事業へ変換しない
-- 県の予算を延岡市の財政データへ入れない
-- 県議会を延岡市議会のデータへ入れない
-- **「延岡で開催」というだけで延岡市の事業と判定しない**
+### 分類の状況
 
-UI では「実施主体：宮崎県」「対象地域：延岡市」「延岡市との関係：共同実施」のように市民向けの日本語へ変換する。
+| 区分 | 件数 |
+| --- | ---: |
+| 宮崎県の事業 | 10 |
+| 延岡市の事業 | 1 |
+| 延岡市と宮崎県の共同 | 1 |
+| **実施主体を確認済み** | **12** |
+| 実施主体を確認中（未設定） | 207 |
+| 市政年表の出来事（合計） | 219 |
 
-**この構造化が無いことによる現在の制約**
+**一次資料で確定できる案件だけに付与している。** 推測での分類は行わず、確定できないものは未設定のまま。
+「延岡で開催」というだけでは市の事業と判定しない（県主催・延岡市開催は「宮崎県の事業／延岡市が参加」）。
 
-- 宮崎県9月補正の「延岡港海岸（延岡市）外3港 90,000千円」を、延岡市の事業費と誤読させずに扱えない（Phase226 が登録を見送った理由）
-- 市政年表の「県立◯◯」「県道」等20件は、県が設置した施設が市域にあるだけで県市共同事業ではない。区別が無いまま提示すると誤誘導になる（Phase228 の指摘）
+### 表示
+
+`/history`・`/timeline/:year`・`/mayors/:slug` で「実施主体：宮崎県／対象地域：延岡市／
+延岡市との関係：延岡市が参加（主催・実施主体ではありません）」のように**日本語で**表示する。
+内部コードは画面に出さない。`/history` には実施主体の絞り込みがあり、
+「確認中」を選んだときは**それが延岡市の事業の一覧ではない**旨をその場で説明する。
+色付き badge は作らず、既存の `dl/dt/dd`「項目名：値」で伝える（色だけで意味を伝えない）。
+
+### 再発防止（Phase233）
+
+`scripts/test-implementation-attribution.mjs`（23検査）が次を固定している。
+
+- 宮崎県の予算が延岡市の一般会計・補正予算・基金・市債・財政ダッシュボードへ入らない
+- 宮崎県議会の議案・一般質問・議員が延岡市議会のデータへ入らない
+- 開催地が延岡市であることを理由に県の事業を市の事業として分類しない
+- 一次資料に根拠が無い案件を共同実施へ格上げしない
+- 実施主体が未設定でも既存ページが壊れない（後方互換）
+- 報道（LEVEL B）だけを根拠に実施主体を確定しない
+
+各検査は**故障注入15件＋レンダリング2件で実際に発火することを実証済み**。
+実レンダリング監査は `npm run audit:attribution`。
+
+### 未着手（資料整備待ち）
+
+`ArchivePolicy` / `MayorPromiseMeasureSnapshot` / `BillVote` への展開は、確定できるレコードが無いため未実施。
+展開する際は新しい区分体系を作らず `ImplementationAttribution` を再利用すること。
 
 ## 既知の残課題（安定版として許容、次回以降の候補）
 
