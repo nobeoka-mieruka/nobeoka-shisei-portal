@@ -321,7 +321,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2007/2007-06/2007-06.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -397,7 +398,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2008/2008-09/2008-09.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -473,7 +475,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2009/2009-09/2009-09.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -549,7 +552,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2010/2010-06/2010-06.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -619,7 +623,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2011/2011-03/2011-03.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -1116,7 +1121,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2015/2015-09/2015-09.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -1192,7 +1198,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2016/2016-09/2016-09.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -1268,7 +1275,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2017/2017-06/2017-06.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -1344,7 +1352,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2018/2018-12/2018-12.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -1420,7 +1429,8 @@
         "isOfficial": true,
         "verifiedAt": "2026-09-01",
         "filePath": "/council-documents/2019/2019-03/2019-03.pdf",
-        "textExtractionStatus": "not_extracted"
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
       }
     ],
     "lastVerified": "2026-08-31",
@@ -3291,6 +3301,51 @@
         "title": "議案等審議結果",
         "filePath": "/council-documents/2026/2026-06/2026-6.pdf",
         "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf"
+      }
+    ]
+  },
+  {
+    "id": "2026-09",
+    "year": 2026,
+    "fiscalYear": 2026,
+    "eraYear": "令和8年",
+    "title": "令和8年9月定例会",
+    "sessionType": "定例会",
+    "sessionNumber": "第27回",
+    "folderPath": "/council-documents/2026/2026-09",
+    "documents": [
+      {
+        "id": "2026-09-results-1",
+        "category": "results",
+        "title": "議案等審議結果",
+        "storageType": "local",
+        "filePath": "/council-documents/2026/2026-09/results/deliberation-results.pdf",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28811.pdf",
+        "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "fileSize": "32KB",
+        "verifiedAt": "2026-09-05",
+        "isOfficial": true,
+        "verificationStatus": "自動取得",
+        "publicationStatus": "published",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-05"
+      }
+    ],
+    "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+    "status": "自動取得",
+    "lastVerified": "2026-09-05",
+    "shortSummary": "令和8年9月定例会では、契約に関する議案が審議されました。議決結果は原案可決1件などです。",
+    "summary": "令和8年9月定例会では、契約に関する議案が審議されました。一般質問は、質問通告書で予定が公表されている段階です（実施内容は会議録の公開後に確認します）。登録議案数は1件です。主な審議結果は、原案可決1件などです。このページでは、議案一覧、審議結果、一般質問、関連する公式資料を掲載しています。",
+    "summaryStatus": "verified",
+    "summaryGeneratedAt": "2026-09-05",
+    "summaryVerifiedAt": "2026-09-05",
+    "summarySources": [
+      {
+        "documentId": "2026-09-results-1",
+        "title": "議案等審議結果",
+        "filePath": "/council-documents/2026/2026-09/results/deliberation-results.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28811.pdf"
       }
     ]
   }

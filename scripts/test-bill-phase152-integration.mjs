@@ -99,14 +99,14 @@ check("sourceTextVerifiedAt=2026-09-02の議案は合計69件（Phase147のR1残
   assert.equal(touched.length, 69, `sourceTextVerifiedAtが2026-09-02の議案が69件ではありません（${touched.length}件）`);
 });
 
-check("Level1+Level2+Level3の合計が議案総数1,177件と一致する", () => {
+check("Level1+Level2+Level3の合計が議案総数1,178件と一致する", () => {
   let l1 = 0, l2 = 0, l3 = 0;
   for (const b of billVotes) {
     if (isLevel3(b)) l3++;
     else if (isLevel2(b)) l2++;
     else l1++;
   }
-  assert.equal(l1 + l2 + l3, 1177, `Level1+2+3の合計が1,177件ではありません（${l1 + l2 + l3}件）`);
+  assert.equal(l1 + l2 + l3, 1178, `Level1+2+3の合計が1,178件ではありません（${l1 + l2 + l3}件）`);
   // Phase152完了時点の388件を下限とする（Phase153以降でさらにLevel3化が進むため、厳密な固定値ではなく
   // 下限チェックとする。Phase153〜157時点の正確な値はtest-bill-phase157-integration.mjs側で検証する）。
   assert.ok(l3 >= 388, `Level3の総数が388件を下回っています（${l3}件）`);

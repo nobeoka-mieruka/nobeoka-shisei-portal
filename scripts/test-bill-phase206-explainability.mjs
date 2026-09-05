@@ -12,7 +12,7 @@
  * 4. Phase207 が登録した提出理由（reason）は、verificationNote に既に転記済みの原文引用と
  *    **完全一致**すること（＝要約・言い換え・推測が混入していないこと）。
  * 5. 市民向けの表示文に内部コードが混入していないこと。
- * 6. 議案総数は 1,177 件のまま変わらないこと。
+ * 6. 議案総数は 1,178 件のまま変わらないこと。
  *
  * 使い方: node --experimental-strip-types scripts/test-bill-phase206-explainability.mjs
  */
@@ -52,8 +52,8 @@ function check(label, fn) {
 
 console.log("\nPhase206・207：議案説明の説明可能性と出典");
 
-check("議案総数は1,177件のまま", () => {
-  assert.equal(bills.length, 1177, `議案総数が1177件ではありません（${bills.length}件）`);
+check("議案総数は1,178件のまま", () => {
+  assert.equal(bills.length, 1178, `議案総数が1178件ではありません（${bills.length}件）`);
 });
 
 check("詳細説明が無い議案は、必ず既知の説明可能性コードのいずれかに分類される（合計が一致する）", () => {

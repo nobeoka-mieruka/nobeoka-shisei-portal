@@ -19,7 +19,7 @@ function check(label, fn) {
 }
 
 const billVotes = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
-assert.ok(Array.isArray(billVotes) && billVotes.length === 1177, `billVotes.jsonの件数が1,177件ではありません（${billVotes.length}件）`);
+assert.ok(Array.isArray(billVotes) && billVotes.length === 1178, `billVotes.jsonの件数が1,178件ではありません（${billVotes.length}件）`);
 
 // src/lib/billSourceRetrieval.tsはTypeScriptのためこのプレーンNodeスクリプトから直接importできない。
 // 分類ロジックそのものは、そのファイルのJSDocコメントに明記した「STRUCTURED_CATEGORIES／
@@ -53,8 +53,8 @@ check("D区分（sourceRetrievalUnresolved。会議録リンク未登録）が52
   assert.ok(D <= 526, `D区分の件数が526件を超えています（${D}件）`);
 });
 
-check("A + B + D の合計が議案総数1,177件と一致する（C区分は実例0件のため式に含めない）", () => {
-  assert.equal(A + B + D, 1177, `A+B+Dの合計が1,177件ではありません（${A + B + D}件）`);
+check("A + B + D の合計が議案総数1,178件と一致する（C区分は実例0件のため式に含めない）", () => {
+  assert.equal(A + B + D, 1178, `A+B+Dの合計が1,178件ではありません（${A + B + D}件）`);
 });
 
 check("D区分619件は、すべて令和元年度〜令和4年度の議案である（他年度の議案が紛れ込んでいない）", () => {

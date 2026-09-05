@@ -450,16 +450,32 @@ check("予定質問の会期は「開催済み（questionCollectionStatus.json�
   assert.equal(countOf(completed) + countOf(upcoming), generalQuestions.length, "予定質問の件数の合計が総数と一致しません");
 });
 
-check("「次回・開催予定」に分類される会期は、councilSessions.json（議決結果などの公式資料を確認済みの会期）に存在しない（直近の確認済み会期と混同していない）", () => {
+/*
+ * 【Phase225で判定条件を精密化】
+ * もともとは「次回・開催予定の会期はcouncilSessions.jsonに一切存在しない」という条件だった。
+ * しかし延岡市議会は、会期の途中で議決した議案がある場合、会期の終了を待たずに
+ * 「議案等審議結果」PDFを公開する（令和8年9月定例会は令和8年8月28日に議案第48号を議決し、
+ * 同日現在の審議結果PDF〈28811.pdf〉が公開された。一般質問は同年9月8日〜10日の予定）。
+ * この実際の運用では「審議結果が一部公開済み ＋ 一般質問はこれから」という状態が正常に起こるため、
+ * 存在そのものを禁止すると、公開済みの一次資料を登録できなくなってしまう。
+ *
+ * このテストが本来検出したいのは「会議録まで公開されているのに収録状況（questionCollectionStatus.json）
+ * が更新されていない＝データが古い」状態なので、判定条件をそこへ絞る。
+ */
+check("「次回・開催予定」の会期は、会議録（minutes）が登録された状態でcouncilSessions.jsonに残っていない（会議録公開後に収録状況の更新を忘れていないか）", () => {
   const registeredSessionIds = new Set(questionCollectionStatus.sessions.map((s) => s.sessionId));
-  const confirmedSessionIds = new Set(councilSessions.map((s) => s.id));
+  const councilSessionById = new Map(councilSessions.map((s) => [s.id, s]));
   const upcomingSessionIds = [...new Set(generalQuestions.map((q) => q.sessionName))]
     .map((n) => councilSessionIdFromSessionName(n))
     .filter((id) => !registeredSessionIds.has(id));
   for (const sessionId of upcomingSessionIds) {
-    assert.ok(
-      !confirmedSessionIds.has(sessionId),
-      `会期${sessionId}は「次回・開催予定」と判定されているのに、councilSessions.jsonにも登録されています（どちらかのデータが古い可能性があります）`,
+    const session = councilSessionById.get(sessionId);
+    if (!session) continue;
+    const minutes = (session.documents ?? []).filter((d) => d.category === "minutes");
+    assert.equal(
+      minutes.length,
+      0,
+      `会期${sessionId}は「次回・開催予定」と判定されているのに、councilSessions.jsonへ会議録（minutes）が${minutes.length}件登録されています（questionCollectionStatus.jsonが古い可能性があります）`,
     );
   }
 });

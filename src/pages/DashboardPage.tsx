@@ -79,6 +79,8 @@ const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const finance = financeData as FinanceDashboardData;
+/** 掲載中の予算額の補正段階ラベル（例:「9月補正（2次分）」）。financeDashboard.json 側で管理する。 */
+const financeStageLabel = finance.supplementaryStageLabel ?? "補正";
 const questionStats = calculateGeneralQuestionStats(speechSummaryData.members, generalQuestions);
 const confirmedQuestionMemberIds = new Set(
   questionLikeSpeeches(allPublicSpeeches(speechSummaryData.members)).map((s) => s.memberId),
@@ -603,12 +605,12 @@ export function DashboardPage() {
             compact
           />
           <StatCard
-            label="一般会計総額（6月補正後）"
+            label={`一般会計総額（${financeStageLabel}後）`}
             value={formatOkuFromThousandYen(finance.generalAccount.totalThousandYen)}
             compact
           />
           <StatCard
-            label="市税（歳入・6月補正後）"
+            label={`市税（歳入・${financeStageLabel}後）`}
             value={formatOkuFromThousandYen(cityTaxRevenue?.amountThousandYen)}
             compact
           />

@@ -56,14 +56,14 @@ check("Phase153（条例96件）：全件Level3化されている（実証済み
   assert.equal(l2Count, 0, `Phase153・154対象のうちLevel2が0件ではありません（${l2Count}件）`);
 });
 
-check("Level1+Level2+Level3の合計が議案総数1,177件と一致し、Level3総数はPhase157完了時点（510件）を下限とする", () => {
+check("Level1+Level2+Level3の合計が議案総数1,178件と一致し、Level3総数はPhase157完了時点（510件）を下限とする", () => {
   let l1 = 0, l2 = 0, l3 = 0;
   for (const b of billVotes) {
     if (isLevel3(b)) l3++;
     else if (isLevel2(b)) l2++;
     else l1++;
   }
-  assert.equal(l1 + l2 + l3, 1177, `Level1+2+3の合計が1,177件ではありません（${l1 + l2 + l3}件）`);
+  assert.equal(l1 + l2 + l3, 1178, `Level1+2+3の合計が1,178件ではありません（${l1 + l2 + l3}件）`);
   // Phase158以降でさらにLevel3化が進むため、厳密な固定値ではなく下限チェックとする。
   // Phase158〜162時点の正確な値はtest-bill-phase162-integration.mjs側で検証する。
   assert.ok(l3 >= 510, `Level3の総数が510件を下回っています（${l3}件）`);

@@ -20,7 +20,7 @@ function check(label, fn) {
 }
 
 const billVotes = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
-assert.equal(billVotes.length, 1177, "billVotes.jsonの件数が1,177件ではありません");
+assert.equal(billVotes.length, 1178, "billVotes.jsonの件数が1,178件ではありません");
 
 const STRUCTURED_CATEGORIES = new Set(["予算", "契約", "財産取得", "決算", "専決処分"]);
 const LINK_CONFIRMED_YEARS = new Set(["令和5年度", "令和6年度", "令和7年度", "令和8年度"]);
@@ -51,11 +51,11 @@ function classifyRisk(b) {
 
 console.log("\n議案の自動処理リスク分類の現況");
 
-check("SAFE/REVIEW/HOLD/VERIFIEDの合計が議案総数1,177件と一致する", () => {
+check("SAFE/REVIEW/HOLD/VERIFIEDの合計が議案総数1,178件と一致する", () => {
   const counts = { SAFE: 0, REVIEW: 0, HOLD: 0, VERIFIED: 0 };
   for (const b of billVotes) counts[classifyRisk(b)]++;
   const sum = Object.values(counts).reduce((a, c) => a + c, 0);
-  assert.equal(sum, 1177, `合計が1,177件ではありません（${sum}件）: ${JSON.stringify(counts)}`);
+  assert.equal(sum, 1178, `合計が1,178件ではありません（${sum}件）: ${JSON.stringify(counts)}`);
 });
 
 check("HOLD分類には請願・陳情・意見書・決議・撤回・廃案・不明以外の議案が含まれていない", () => {
