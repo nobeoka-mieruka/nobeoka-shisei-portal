@@ -843,7 +843,8 @@ export function DataStatusPage() {
     {
       label: "議案：一次資料本文に基づく詳しい説明の作成",
       metric: simpleCompleteness(billVotesDetailedExplanationCount, billVotes.length),
-      note: "議案名・議決結果・出典（審議結果PDF等）は全1,177件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。",
+      // Phase236：件数は billVotes.json の実件数から組み立てる（旧「全1,177件」の直書きを解消）。
+      note: `議案名・議決結果・出典（審議結果PDF等）は全${billVotes.length.toLocaleString("ja-JP")}件で確認済みです。ここでの「確認済み」は、会議録等の本文を人が読んで作成した独自の説明があることを指します（残りは、件名・議決結果・出典から機械的に組み立てた定型の説明です）。`,
     },
     {
       label: "政治資金団体：代表者・会計責任者・当該年分収支の完全確認",

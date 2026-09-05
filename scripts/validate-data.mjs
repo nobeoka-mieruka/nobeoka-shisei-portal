@@ -1404,6 +1404,81 @@ try {
   }
 }
 
+// --- factions.json の会派役員（Phase236） ---
+// 会派役員は延岡市議会「会派役員及び所属議員名簿」だけを根拠にする。氏名・役職を推測で
+// 補わないよう、(1) 参照先の議員IDが実在するか (2) 氏名がmembers.jsonと一致するか
+// (3) 役職が名簿に実在する語か (4) 出典が付いているか、をerrorで固定する。
+try {
+  const factionsForOfficers = readJson("src/data/factions.json");
+  const VALID_FACTION_OFFICER_ROLES = new Set(["団長", "副団長", "幹事長", "副幹事長", "顧問"]);
+  const memberNameById = new Map(members.map((m) => [m.id, m.name]));
+  const memberFactionById = new Map(members.map((m) => [m.id, m.factionId]));
+
+  for (const f of factionsForOfficers ?? []) {
+    const tag = `factions.json (${f.id ?? "id不明"})`;
+    if (f.officers === undefined) {
+      // 未設定＝未確認。会派役員は任意項目なので、未設定であること自体は問題にしない。
+      if (f.officersAsOf || f.officersSourceRefs || f.officersVerifiedAt) {
+        err(tag, "officersが未設定なのに会派役員の基準日・出典・確認日だけが設定されています");
+      }
+      continue;
+    }
+    if (!Array.isArray(f.officers)) {
+      err(tag, "officersが配列ではありません");
+      continue;
+    }
+
+    const seenOfficerIds = new Set();
+    const roleCounts = new Map();
+    for (const o of f.officers) {
+      if (isBlank(o.memberId)) {
+        err(tag, "officersにmemberIdが空の要素があります");
+      } else if (!memberIds.has(o.memberId)) {
+        err(tag, `officersが存在しない議員IDを参照しています: ${o.memberId}`);
+      } else if (seenOfficerIds.has(o.memberId)) {
+        err(tag, `同じ議員が会派役員として重複登録されています: ${o.memberId}`);
+      } else {
+        seenOfficerIds.add(o.memberId);
+        const officialName = memberNameById.get(o.memberId);
+        if (o.memberName !== officialName) {
+          err(tag, `officersのmemberName（${o.memberName}）がmembers.jsonの氏名（${officialName}）と一致しません`);
+        }
+        const memberFactionId = memberFactionById.get(o.memberId);
+        if (memberFactionId !== f.id) {
+          err(tag, `${o.memberId}はこの会派の所属ではありません（members.jsonのfactionId: ${memberFactionId}）`);
+        }
+      }
+      if (!VALID_FACTION_OFFICER_ROLES.has(o.role)) err(tag, `未定義の会派役員roleです: ${o.role}`);
+      else roleCounts.set(o.role, (roleCounts.get(o.role) ?? 0) + 1);
+    }
+    for (const role of ["団長", "副団長", "幹事長", "副幹事長"]) {
+      const count = roleCounts.get(role) ?? 0;
+      if (count > 1) err(tag, `${role}が複数登録されています（${count}名）`);
+    }
+
+    if (f.officersAsOf && !DATE_RE.test(f.officersAsOf)) err(tag, `officersAsOfの形式が不正です: ${f.officersAsOf}`);
+    if (f.officersVerifiedAt && !DATE_RE.test(f.officersVerifiedAt)) {
+      err(tag, `officersVerifiedAtの形式が不正です: ${f.officersVerifiedAt}`);
+    }
+    if (!Array.isArray(f.officersSourceRefs) || f.officersSourceRefs.length === 0) {
+      err(tag, "officersを登録する場合はofficersSourceRefs（出典）が必要です");
+    } else {
+      for (const s of f.officersSourceRefs) {
+        if (isBlank(s.label)) err(tag, "officersSourceRefsのlabelが空です");
+        if (isBlank(s.url) || !URL_RE.test(s.url)) err(tag, `officersSourceRefsのurlが不正です: ${s.url}`);
+      }
+    }
+    // 会派役員が0名の場合は「未確認」と区別できるよう、理由を必ず文章で残す。
+    if (f.officers.length === 0 && isBlank(f.officersNote)) {
+      err(tag, "officersが空配列の場合は、役員が置かれていない理由をofficersNoteに記載してください");
+    }
+  }
+} catch (e) {
+  if (e?.code !== "ENOENT") {
+    warn("factions.json", `会派役員の検証に失敗しました: ${e.message}`);
+  }
+}
+
 // --- committeeActivityReports.json（委員会活動報告書・所管事務調査報告書） ---
 try {
   const reports = readJson("src/data/committeeActivityReports.json");
