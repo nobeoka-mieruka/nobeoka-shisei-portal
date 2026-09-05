@@ -1,18 +1,23 @@
 {
-  "checkedAt": "2026-08-28T05:00:04.801Z",
+  "checkedAt": "2026-09-05T00:26:29.173Z",
   "watchedPage": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
   "dryRun": false,
-  "detected": 26,
-  "new": 0,
+  "detected": 27,
+  "new": 1,
   "reconciled": 0,
   "updated": 0,
   "unchanged": 26,
   "removed": 0,
   "errors": 0,
-  "published": 42,
+  "published": 67,
   "pendingReview": 0,
   "storageBase": "/council-documents",
   "entries": [
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28811.pdf",
+      "sessionId": "2026-09",
+      "outcome": "new"
+    },
     {
       "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27929.pdf",
       "sessionId": "2026-06",

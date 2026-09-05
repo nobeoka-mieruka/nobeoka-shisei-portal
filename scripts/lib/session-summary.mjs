@@ -74,9 +74,16 @@ function hasDocumentCategory(documents, category) {
  * @param {object} session councilSessions.jsonの1件
  * @param {object[]} bills このsessionに属するbillVotes（フィルタ済み）
  * @param {number} generalQuestionCount このsessionの一般質問件数
+ * @param {{generalQuestionsHeld?: boolean}} [options]
+ *   generalQuestionsHeld … 一般質問が実際に行われたことを公式資料で確認できている場合のみ true。
+ *   generalQuestions.json には質問通告書ベースの「予定」も含まれるため、これを区別せずに
+ *   「一般質問も行われました」と書くと、開催前の会期について事実と異なる説明になる
+ *   （令和8年9月定例会：審議結果PDFは会期途中で公開済み・一般質問は9月8日〜10日の予定）。
+ *   未指定の場合は後方互換のため true 扱いにする。
  * @returns {{shortSummary: string, summary: string, summaryStatus: string, sources: object[]}}
  */
-export function buildSessionSummary(session, bills, generalQuestionCount) {
+export function buildSessionSummary(session, bills, generalQuestionCount, options = {}) {
+  const generalQuestionsHeld = options.generalQuestionsHeld ?? true;
   const visibleDocuments = (session.documents ?? []).filter(
     (d) => d.publicationStatus === undefined || d.publicationStatus === "published",
   );
@@ -130,10 +137,13 @@ export function buildSessionSummary(session, bills, generalQuestionCount) {
   }
 
   const activityNotes = [];
-  if (generalQuestionCount > 0) activityNotes.push("一般質問");
+  if (generalQuestionCount > 0 && generalQuestionsHeld) activityNotes.push("一般質問");
   if (hasCommitteeReview) activityNotes.push("委員会審査");
   if (activityNotes.length > 0) {
     parts.push(`会期中には${activityNotes.join("・")}も行われました。`);
+  }
+  if (generalQuestionCount > 0 && !generalQuestionsHeld) {
+    parts.push("一般質問は、質問通告書で予定が公表されている段階です（実施内容は会議録の公開後に確認します）。");
   }
   if (hasPetitions) {
     parts.push("請願・陳情の審査も行われました。");

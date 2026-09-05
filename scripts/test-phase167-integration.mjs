@@ -132,8 +132,15 @@ check("Phase166：mayorPromisesの新規議案紐付け2件（2023-06-gian-19, 2
  *      Level1 402 − 56 = 346／Level2 123 + 56 = 179／sourceTextVerified 775 + 56 = 831
  *
  * 結果：Level1=346 / Level2=179 / Level3=652 / sourceTextVerified=831（合計は1,177で不変）。
+ *
+ * 【Phase225追記】延岡市議会公式サイトの「議案等審議結果」に令和8年9月定例会（第27回）分
+ * （28811.pdf、令和8年8月28日現在）が公開され、議案第48号「工事請負契約の締結（西階公園陸上
+ * 競技場フィールド・走路改修工事）」1件を一次資料に基づき追加した。この議案は審議結果PDFのみを
+ * 出典とし、会議録本文は未公表のため Level1（sourceTextVerifiedAt なし）に分類される。
+ * よって Level1=347 / Level2=179 / Level3=652 / sourceTextVerified=831（合計 1,178）となる。
+ * Level2・Level3・sourceTextVerified は不変であることを、引き続きこのテストで固定する。
  */
-check("議案品質データ（Phase207適用後：Level1=346/Level2=179/Level3=652/sourceTextVerified=831）", () => {
+check("議案品質データ（Phase207適用後＋Phase225の新規1件：Level1=347/Level2=179/Level3=652/sourceTextVerified=831）", () => {
   const bv = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
   function isLevel3(b) {
     return b.summarySource === "manual" && Boolean(b.reason || (b.mainChanges && b.mainChanges.length > 0) || b.citizenImpact);
@@ -147,7 +154,7 @@ check("議案品質データ（Phase207適用後：Level1=346/Level2=179/Level3=
     else if (isLevel2(b)) l2++;
     else l1++;
   }
-  assert.equal(l1, 346, `Level1が346件ではありません（${l1}件）`);
+  assert.equal(l1, 347, `Level1が347件ではありません（${l1}件）`);
   assert.equal(l2, 179, `Level2が179件ではありません（${l2}件）`);
   assert.equal(l3, 652, `Level3が652件ではありません（${l3}件）`);
   assert.equal(bv.filter((b) => b.sourceTextVerifiedAt).length, 831, "sourceTextVerifiedが831件ではありません");

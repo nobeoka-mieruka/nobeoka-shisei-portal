@@ -1,6 +1,6 @@
 /**
  * Phase144：Level3昇格条件（7項目）の機械検査、A区分とD-A区分の重複件数（常に0であるべき）、
- * 1,177件全体の「原資料到達性区分×説明品質段階」クロス集計、根拠資料（sourceExcerpt相当）の
+ * 1,178件全体の「原資料到達性区分×説明品質段階」クロス集計、根拠資料（sourceExcerpt相当）の
  * 追跡可能性についての回帰テスト。
  *
  * 使い方: node scripts/test-bill-level3-criteria.mjs
@@ -19,7 +19,7 @@ function check(label, fn) {
 }
 
 const billVotes = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
-assert.equal(billVotes.length, 1177, "billVotes.jsonの件数が1,177件ではありません");
+assert.equal(billVotes.length, 1178, "billVotes.jsonの件数が1,178件ではありません");
 
 const STRUCTURED_CATEGORIES = new Set(["予算", "契約", "財産取得", "決算", "専決処分"]);
 const LINK_CONFIRMED_YEARS = new Set(["令和5年度", "令和6年度", "令和7年度", "令和8年度"]);
@@ -150,7 +150,7 @@ check("A区分とD-A区分は重複しない（transcriptUrlの有無で完全�
   assert.ok(aCount + daCount >= 174 + 202, `A+D-Aの合計が既存基準（376件）を下回っています（${aCount + daCount}件）`);
 });
 
-check("1,177件全体の「原資料到達性区分（A/B/D）×説明品質段階（Level1/Level2/Level3）」クロス集計の合計が1,177件と一致する", () => {
+check("1,178件全体の「原資料到達性区分（A/B/D）×説明品質段階（Level1/Level2/Level3）」クロス集計の合計が1,178件と一致する", () => {
   const matrix = { A: { 1: 0, 2: 0, 3: 0 }, B: { 1: 0, 2: 0, 3: 0 }, D: { 1: 0, 2: 0, 3: 0 } };
   for (const b of billVotes) {
     const cat = classifyRetrieval(b);
@@ -158,7 +158,7 @@ check("1,177件全体の「原資料到達性区分（A/B/D）×説明品質段�
   }
   let sum = 0;
   for (const cat of Object.keys(matrix)) for (const lv of Object.keys(matrix[cat])) sum += matrix[cat][lv];
-  assert.equal(sum, 1177, `クロス集計の合計が1,177件ではありません（${sum}件）: ${JSON.stringify(matrix)}`);
+  assert.equal(sum, 1178, `クロス集計の合計が1,178件ではありません（${sum}件）: ${JSON.stringify(matrix)}`);
   /*
    * この不変条件が守りたいのは「本文を確認したことになっている議案は、必ず会議録本文へ
    * たどり着けること」であり、たどり着く先が transcriptUrl であること自体ではない。

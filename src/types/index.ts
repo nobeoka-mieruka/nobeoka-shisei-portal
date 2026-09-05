@@ -998,6 +998,7 @@ export type UpdateHistoryCategory =
   | "出典追加"
   | "修正"
   | "議案・表決"
+  | "議会資料"
   | "品質改善"
   | "新機能";
 
@@ -1063,7 +1064,7 @@ export interface FinanceAmountItem {
   percentage?: number;
 }
 
-/** 6月補正予算の主な事業1件分（千円単位）。 */
+/** 補正予算の主な事業1件分（千円単位）。 */
 export interface FinanceProjectItem {
   title: string;
   amountThousandYen: number;
@@ -2123,6 +2124,11 @@ export interface FinanceDashboardData {
   referenceDate: string;
   /** ISO形式。サイト運営者がこの情報をいつ確認したか。 */
   lastVerified: string;
+  /**
+   * 掲載している予算額がどの補正段階のものかを示すラベル（例: "9月補正（2次分）"）。
+   * 画面の見出し（「一般会計総額（○○後）」等）に使う。未設定の場合は補正段階を明示しない表記になる。
+   */
+  supplementaryStageLabel?: string;
   generalAccount: FinanceGeneralAccount;
   revenue: FinanceAmountItem[];
   expenditureByPurpose: FinanceAmountItem[];

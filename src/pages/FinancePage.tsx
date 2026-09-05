@@ -22,6 +22,11 @@ import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const data = financeData as FinanceDashboardData;
+/**
+ * 掲載中の予算額がどの補正段階のものかを示すラベル（例:「9月補正（2次分）」）。
+ * データ側（financeDashboard.json）で管理し、補正のたびに画面文言を書き換えなくて済むようにする。
+ */
+const stageLabel = data.supplementaryStageLabel ?? "補正";
 const latestArchiveFiscalYear = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]).at(-1)?.fiscalYear;
 
 function formatThousandYen(value: number): string {
@@ -111,7 +116,7 @@ export function FinancePage() {
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">延岡市の財政</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">
-          {data.fiscalYearLabel}6月補正後の一般会計（基準日：{formatJapaneseDate(data.referenceDate)}
+          {data.fiscalYearLabel}{stageLabel}後の一般会計（基準日：{formatJapaneseDate(data.referenceDate)}
           ）を、公開資料に基づいて整理しています。
         </p>
       </div>
@@ -160,13 +165,13 @@ export function FinancePage() {
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <StatCard
-          label="一般会計総額（6月補正後）"
+          label={`一般会計総額（${stageLabel}後）`}
           value={formatThousandYen(data.generalAccount.totalThousandYen)}
           hint={formatOku(data.generalAccount.totalThousandYen)}
           compact
         />
         <StatCard
-          label="6月補正額"
+          label={`${stageLabel}額`}
           value={formatThousandYen(data.generalAccount.supplementaryThousandYen)}
           hint={formatOku(data.generalAccount.supplementaryThousandYen)}
           compact
@@ -181,7 +186,7 @@ export function FinancePage() {
 
       <SectionCard title="歳入構成（主要項目）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          {data.fiscalYearLabel}・単位：千円（速報値ではなく6月補正後の予算額）。一般会計歳入のうち、資料で構成比が示された主要項目です。ここに挙げた項目の合計は歳入全体には一致しません。市債についての注記は本ページ下部をご覧ください。
+          {data.fiscalYearLabel}・単位：千円（速報値ではなく{stageLabel}後の予算額）。一般会計歳入のうち、資料で構成比が示された主要項目です。ここに挙げた項目の合計は歳入全体には一致しません。市債についての注記は本ページ下部をご覧ください。
         </p>
         <FinanceBarList items={data.revenue} />
         <FinanceTable
@@ -233,9 +238,9 @@ export function FinancePage() {
         <SectionSource section="expenditureByNature" />
       </SectionCard>
 
-      <SectionCard title="6月補正予算の主な内容">
+      <SectionCard title={`${stageLabel}予算の主な内容`}>
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          単位：千円。6月補正予算に計上された主な事業です。市長の公約・政策との関連付けは行っていません。
+          単位：千円。{stageLabel}予算に計上された主な事業です。市長の公約・政策との関連付けは行っていません。
         </p>
         <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {data.supplementaryBudgetProjects.map((p) => (
