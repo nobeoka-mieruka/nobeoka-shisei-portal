@@ -29,7 +29,7 @@ import { SITE_URL } from "../config/site";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 
-// 1,177件（2026-08時点）を1ページに全件表示すると、スマートフォンで
+// 議案は千件規模あり、1ページに全件表示するとスマートフォンで
 // スクロールが極端に長くなるため、20件ずつページ分割して表示する。
 const BILLS_PAGE_SIZE = 20;
 

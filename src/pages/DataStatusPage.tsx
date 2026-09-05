@@ -507,7 +507,7 @@ export function DataStatusPage() {
   ];
 
   // TASK-072：documentTypeLabel(type)（「議案」「条例」等の裸の名称）をそのままラベルにすると、
-  // 下のcouncilExtra（1,177件の議案・採決データベース）と同じ「議案」という語で桁違いの件数が
+  // 下のcouncilExtra（議案・採決データベース。全件を機械的に登録した一覧）と同じ「議案」という語で桁違いの件数が
   // 並んでしまい、何を1件として数えているのか分からず矛盾に見える。「詳細アーカイブ化済み」を
   // 明示して、どちらも同じ集計方法だと誤解されないようにする。
   const council: DataDomain[] = documentTypeCounts.map(({ type, count }) => ({

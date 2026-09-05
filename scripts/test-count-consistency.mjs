@@ -273,5 +273,95 @@ check("内部の呼び名（重点8公約）が公開ページの文言に混ざ
   }
 });
 
+/**
+ * Phase237：議案総数の「現在値」を単一情報源（実データ）に固定するチェック。
+ *
+ * 背景：議案は Phase225 で 1,177 件 → 1,178 件になった。延岡市議会公式ホームページの
+ * 「定例会等での議案等審議結果」に令和8年9月定例会（第27回）分の審議結果PDF
+ * （https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28811.pdf）が公開され、
+ * 議案第48号「工事請負契約の締結（西階公園陸上競技場フィールド・走路改修工事）」
+ * （議決日 2026-08-28、原案可決）を一次資料に基づき追加したためである。
+ *
+ * したがって 1,178 が現在値であり、1,177 は「当時の記録」としてのみ残してよい。
+ * 画面に出す件数は必ず billVotes.json の実データから算出し、ページへ直書きしない。
+ *
+ * 議案が増えるのは、延岡市議会公式資料で新しい議案が確認できた場合だけである。
+ * その場合に限り BILL_TOTAL を更新し、根拠（会期・議案番号・出典PDFのURL）を
+ * このコメントへ追記すること。件数を推測で動かさない。
+ */
+const BILL_TOTAL = 1178;
+
+/** 議案の件数を画面へ出す（または画面用の集計を組み立てる）ファイル。 */
+const BILL_COUNT_DISPLAY_FILES = [
+  "src/pages/HomePage.tsx",
+  "src/pages/DashboardPage.tsx",
+  "src/pages/DataStatusPage.tsx",
+  "src/pages/BillVotesPage.tsx",
+  "src/pages/CouncilDocumentsArchivePage.tsx",
+  "src/lib/seo.ts",
+  "src/lib/dataCompletenessSummary.ts",
+  "src/lib/councilActivityBarometer.ts",
+  "src/lib/billSourceRetrieval.ts",
+];
+
+check(`議案総数が実データ・軽量インデックス・検索索引で一致し、現在値（${BILL_TOTAL}件）である`, () => {
+  const bills = readJson("src/data/billVotes.json");
+  // publicBills() と同じ条件（src/lib/billVotes.ts）。非公開扱いの議案は画面に出ない。
+  const publicBills = bills.filter((b) => b.publicationStatus !== "rejected" && b.publicationStatus !== "error");
+  const billIndex = readJson("src/data/billVotesIndex.json");
+  const searchBills = readJson("src/data/searchIndex.json").filter((e) => e.type === "bill");
+
+  assert.equal(
+    bills.length,
+    BILL_TOTAL,
+    `議案総数が${BILL_TOTAL}件ではありません（${bills.length}件）。` +
+      "1,177件へ戻す変更は許されません（Phase225で議案第48号を一次資料から追加済み）。" +
+      "公式資料で新しい議案を確認して増やした場合のみ、このテストのBILL_TOTALと根拠コメントを更新してください。",
+  );
+  assert.equal(publicBills.length, BILL_TOTAL, `公開対象の議案が${BILL_TOTAL}件ではありません（${publicBills.length}件）`);
+  assert.equal(billIndex.length, BILL_TOTAL, `billVotesIndex.jsonが${BILL_TOTAL}件ではありません（${billIndex.length}件）`);
+  assert.equal(searchBills.length, BILL_TOTAL, `検索索引の議案エントリが${BILL_TOTAL}件ではありません（${searchBills.length}件）`);
+  assert.equal(new Set(bills.map((b) => b.id)).size, bills.length, "billVotes.jsonにID重複があります");
+});
+
+check("議案の件数を画面へ出すファイルに、議案総数が固定値で直書きされていない（現在値・旧値とも）", () => {
+  // 1177 は旧値、1178 は現在値。どちらも直書きしてはならない（増えたときに画面ごとの数字がずれる）。
+  const forbidden = [/1,?177/, /1,?178/];
+  for (const file of BILL_COUNT_DISPLAY_FILES) {
+    const src = readSrc(file);
+    for (const re of forbidden) {
+      const hit = src.match(re);
+      assert.ok(
+        !hit,
+        `${file} に議案総数「${hit?.[0]}」が直書きされています（billVotes.length 等でデータから算出してください）`,
+      );
+    }
+  }
+});
+
+check("議案の件数を画面へ出す主要ページが、データからの算出（billVotes.length）を使っている", () => {
+  for (const file of [
+    "src/pages/HomePage.tsx",
+    "src/pages/DashboardPage.tsx",
+    "src/pages/DataStatusPage.tsx",
+    "src/pages/CouncilDocumentsArchivePage.tsx",
+  ]) {
+    assert.ok(
+      /billVotes\.length/.test(readSrc(file)),
+      `${file} が billVotes.length による自動算出を使っていません（件数を直書きしている可能性があります）`,
+    );
+  }
+});
+
+check("画面へ出るデータ注記（市長公約の関連議案）に、古い議案総数が残っていない", () => {
+  // 注記は humanizeDataNote() を通して表示され、そのとき「Phase◯◯で確認」という
+  // 当時を示す語が取り除かれる。そのため注記に裸の件数が残っていると、読み手には
+  // 現在値として読めてしまう。ここでは件数を書かず「全件」と表現する。
+  // なお src/data/updateHistory.json は「更新履歴＝当時の記録」であり、この検査の対象外。
+  const src = readSrc("src/data/mayorPromises.json");
+  assert.ok(!/全1,?177件/.test(src), "mayorPromises.jsonの注記に古い議案総数「全1,177件」が残っています");
+  assert.ok(!/全1,?178件/.test(src), "mayorPromises.jsonの注記に議案総数が直書きされています（「全件」と書いてください）");
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");

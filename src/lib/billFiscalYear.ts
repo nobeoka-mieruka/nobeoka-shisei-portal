@@ -6,7 +6,8 @@ import { toEraFiscalYearLabel } from "../config/site.ts";
 /**
  * Phase220：議案データの `fiscalYear` が何を指すのかの単一情報源。
  *
- * 確認した事実（1,177件全件で照合）：
+ * 確認した事実（Phase220 で当時の全 1,177 件を照合。Phase237 で現在の議案全件を再照合し、
+ * 例外 0 件を確認した。現在の件数は billVotes.json の実データから算出すること）：
  * - `billVotes.fiscalYear` は、`councilSessions.json` の当該会期の `fiscalYear`（4月始まりの年度）と
  *   **1件の例外もなく一致**する。
  * - 議決日（`votingDate`）が属する年度、提出日（`submittedDate`）が属する年度とも一致する。
