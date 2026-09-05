@@ -3,6 +3,7 @@ import { BROKEN_SOURCE_LINK_LABEL, isKnownBrokenSourceLink } from "../../lib/bro
 import type { CompareSourceNoticeItem } from "../../types/compare";
 import { humanizeDataNote } from "../../lib/citizenTermLabels";
 import { formatJapaneseDateIfIso } from "../../config/site";
+import { sourceMediumLabel } from "../../lib/sourceMedium";
 
 interface CompareSourceNoticeProps {
   items: CompareSourceNoticeItem[];
@@ -16,6 +17,9 @@ interface CompareSourceNoticeProps {
  *
  * Phase209：外部リンク監査で404を確認済みのURLはリンクにせず「リンク切れ・代替資料確認中」
  * と表示する。定義注記は内部フィールド名を市民向けの日本語へ言い換えて表示する。
+ *
+ * Phase228：/timeline・/timeline/:year の出典欄には新聞記事・事典（Wikipedia等）も並ぶ。
+ * 報道は一次資料ではないため、文字のラベルで区別する（判定は表示層のみ）。
  */
 export function CompareSourceNotice({ items, className = "" }: CompareSourceNoticeProps) {
   return (
@@ -32,6 +36,7 @@ export function CompareSourceNotice({ items, className = "" }: CompareSourceNoti
           <ul className="mt-1 space-y-1">
             {item.sourceRefs.map((ref, i) => {
               const broken = isKnownBrokenSourceLink(ref.sourceUrl);
+              const mediumLabel = sourceMediumLabel(ref);
               return (
                 <li key={i} className="text-on-surface-variant">
                   {ref.sourceUrl && !broken ? (
@@ -56,6 +61,7 @@ export function CompareSourceNotice({ items, className = "" }: CompareSourceNoti
                   )}
                   {ref.pageNumber != null && <>（p.{ref.pageNumber}）</>}
                   （{archiveVerificationStatusLabel(ref.verificationStatus)}）
+                  {mediumLabel && <>（{mediumLabel}）</>}
                   {(ref.sourceOrganization || ref.sourcePublishedDate || ref.accessedAt) && (
                     <span className="block text-on-surface-variant/80">
                       {ref.sourceOrganization && <>公表機関：{ref.sourceOrganization}　</>}

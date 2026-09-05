@@ -4,6 +4,7 @@ import { BROKEN_SOURCE_LINK_LABEL, isKnownBrokenSourceLink } from "../lib/broken
 import { formatJapaneseDate } from "../config/site";
 import { GlobeIcon } from "./icons";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { sourceMediumLabel } from "../lib/sourceMedium";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -17,6 +18,10 @@ const linkClass =
  *
  * Phase209：外部リンク監査で404を確認済みのURLはリンクにせず、「リンク切れ・代替資料確認中」
  * として表示する（出典の記録自体は残す）。注記は内部用語を市民向けに言い換えて表示する。
+ *
+ * Phase228：新聞記事・事典（Wikipedia等）が、延岡市・延岡市議会の一次資料と同じ見た目で
+ * 「出典」欄に並んでいた。報道は一次資料ではないため、文字のラベルで区別する
+ * （判定は表示層のみ。データには何も追加していない）。
  */
 export function SourceRefList({ refs }: { refs: ArchiveSourceRef[] }) {
   if (refs.length === 0) return null;
@@ -24,6 +29,7 @@ export function SourceRefList({ refs }: { refs: ArchiveSourceRef[] }) {
     <ul className="space-y-2">
       {refs.map((ref, i) => {
         const broken = isKnownBrokenSourceLink(ref.sourceUrl);
+        const mediumLabel = sourceMediumLabel(ref);
         return (
           <li key={`${ref.sourceUrl ?? "source"}-${i}`} className="text-sm">
             <div className="flex flex-wrap items-center gap-2">
@@ -41,6 +47,11 @@ export function SourceRefList({ refs }: { refs: ArchiveSourceRef[] }) {
               ) : (
                 <span className="break-words text-on-surface-variant">
                   {ref.sourceTitle ?? (broken ? ref.sourceUrl : "出典URL未確認")}
+                </span>
+              )}
+              {mediumLabel && (
+                <span className="rounded-full bg-surface-container-highest px-2 py-0.5 text-xs text-on-surface-variant">
+                  {mediumLabel}
                 </span>
               )}
               {broken && (

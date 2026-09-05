@@ -1,0 +1,365 @@
+{
+  "phase": "Phase228",
+  "title": "政策成果・市民参加・県市連携・メディア報道の4観点 評価と設計提案",
+  "generatedAt": "2026-09-05",
+  "scope": "評価・設計提案が主。実装は既存構造で安全に表現できる小規模なもののみ。",
+  "baseline": {
+    "releaseCommit": "fc6e6ab",
+    "note": "議案1,177・政策分野4・個別公約14・個別施策33 は本Phaseで一切変更していない。RELEASE_SNAPSHOT.md / reports/release-snapshot.json も変更していない。",
+    "dataChanges": "src/data配下のJSONは1件も変更していない（本Phaseの実装は表示層のみ）"
+  },
+  "absoluteConstraints": {
+    "newspaperMustNotBeShownAsEvidence": {
+      "status": "違反を検出し、本Phaseで是正した",
+      "detail": "SourceRefList / CompareSourceNotice / HistoryPage は、延岡市・延岡市議会の一次資料と新聞記事・事典を『出典・確認状況』欄へ同じ見た目で並べていた。文字ラベルで区別するよう変更し、回帰テストで固定した。"
+    },
+    "noInferredData": "推測によるデータ補完は行っていない。媒体区分は登録済みの sourceOrganization / sourceTitle からの表示層の機械的分類であり、データとして保存しない（AnswererRole と同方式）。判定できないものはラベルを付けない。",
+    "humanActionRequiredUntouched": "blockedTaskClassification.json は未変更。",
+    "phases219to223NotRerun": true
+  },
+
+  "A_政策成果": {
+    "question": "「何をやるか」だけでなく「実際に成果が出たか」を表示できるか",
+    "existingData": {
+      "primarySource": "src/data/mayorPromiseMeasures.json（市長公約に関する取組み 令和8年度、令和8年7月31日現在、trustLevel=PRIMARY 33件）",
+      "measuresTotal": 33,
+      "withPreviousYearResult": 6,
+      "withCurrentYearResult": 24,
+      "withAnyResult": 28,
+      "withFutureTarget": 2,
+      "withQuantitativeValue": 7,
+      "withPlanAndResultBoth": 10,
+      "fiscalYearsCovered": ["令和8年度"],
+      "statusCounts": { "CONTINUING": 9, "IN_PROGRESS": 15, "PREPARING": 4, "COMPLETED": 2, "PLANNED": 3 },
+      "quantitativeUnits": [
+        "件（令和8年度予定）",
+        "回（令和8年度予定）",
+        "名（令和8年度）",
+        "食分",
+        "ヶ所（手順書作成済み）",
+        "名（RPA内製化研修参加者）"
+      ]
+    },
+    "candidateCount": 28,
+    "expressibleWithExistingStructure": [
+      "施策ごとの『前年度の実績』と『今年度の計画』の並置（previousYearResult / currentYearPlan）",
+      "施策ごとの定量値と単位の表示（quantitativeValue / quantitativeUnit、7件）",
+      "施策の進捗区分5種の文字表示（MayorPromiseMeasureStatusBadge で実装済み）",
+      "出典PDF・ページ番号・基準日の明示（sourceUrl / sourcePage / snapshotDate）"
+    ],
+    "notExpressibleWithExistingStructure": [
+      "『目標値 → 実績値 → 達成状況』の3点セット。futureTarget は2件のみで、目標値は数値ではなく文章。目標と実績を同一指標・同一単位で対比できるデータが無い",
+      "複数年度の時系列。fiscalYear は令和8年度の単年スナップショットのみで、経年の伸び・停滞を示せない",
+      "定量値の単位が『件（令和8年度予定）』のように単位と年度・確定/予定の別が1文字列に混在しており、機械的な比較・グラフ化ができない",
+      "地方創生・総合戦略のKPIそのもの。構造化データは0件。会議録要約に第一期総合戦略17項目のKPI達成、ナーブネット事業のKPI未達、空飛ぶクルマ事業の研修医KPI等の言及が15件あるが、いずれも答弁の要約であって指標データではない"
+    ],
+    "keyRisk": "『成果が出たか』の表示は、サイト独自の達成率・採点になりやすい。CLAUDE.md の『独自の達成率や採点は原則使用しない』に抵触しないよう、市が公表した数値をそのまま並置するに留める設計が必須。",
+    "recommendedNow": [],
+    "futureCandidates": [
+      {
+        "id": "A-1",
+        "title": "施策スナップショットの複数年度化",
+        "requiredData": "『市長公約に関する取組み』の令和7年度版PDF（および以後の各年度版）",
+        "approach": "mayorPromiseMeasures.json は既に fiscalYear / snapshotDate / sourceUrl を1レコードずつ持つため、年度の異なるレコードを追加するだけで時系列化できる。スキーマ変更不要。",
+        "blockedBy": "過年度版PDFの所在確認が必要（未確認のため本Phaseでは登録しない）"
+      },
+      {
+        "id": "A-2",
+        "title": "quantitativeUnit の分解",
+        "requiredData": "なし（既存33件の再整理のみ）",
+        "approach": "quantitativeUnit（例『件（令和8年度予定）』）を unit（件）と valueKind（'planned' | 'actual'）へ分ける。目標と実績を取り違えずにグラフ化できるようになる。",
+        "blockedBy": "既存33件の書き換えを伴うため、単独Phaseとして親の承認が必要"
+      },
+      {
+        "id": "A-3",
+        "title": "総合戦略KPIデータセットの新設",
+        "requiredData": "第二期延岡市まち・ひと・しごと創生総合戦略および各年度の効果検証（KPI一覧・目標値・実績値）の一次資料",
+        "proposedSchema": {
+          "file": "src/data/strategyKpi.json",
+          "record": {
+            "id": "string（例 kpi-2phase-017）",
+            "strategyName": "string（例『第二期延岡市まち・ひと・しごと創生総合戦略』）",
+            "projectName": "string（4つのプロジェクト等の区分）",
+            "indicatorName": "string（指標名の原文。言い換えない）",
+            "unit": "string（人・件・％等。年度や予定/実績は含めない）",
+            "baselineValue": "number | null（基準値。未公表は null）",
+            "baselineFiscalYear": "string | null",
+            "targetValue": "number | null（市が公表した目標値のみ。推定しない）",
+            "targetFiscalYear": "string | null",
+            "actualValue": "number | null（市が公表した実績値のみ）",
+            "actualFiscalYear": "string | null",
+            "achievementNote": "string | null（市が公表した達成状況の記載を原文で。サイト独自の達成率は入れない）",
+            "status": "'published' | 'notPublished' | 'underConfirmation'",
+            "sourceUrl": "string",
+            "sourceTitle": "string",
+            "sourcePage": "string | null",
+            "snapshotDate": "string（ISO）",
+            "trustLevel": "'PRIMARY'",
+            "notes": "string | null"
+          },
+          "rules": [
+            "actualValue が未公表の指標を 0 として扱わない（null のまま『公表なし』と表示）",
+            "達成率はサイトで計算しない。市が公表した達成状況の記載のみを転記する",
+            "目標年度と実績年度を別項目にし、混同しない"
+          ]
+        },
+        "blockedBy": "KPI一覧の一次資料URL未特定。会議録の答弁からKPI値を復元することは推測になるため行わない。"
+      }
+    ]
+  },
+
+  "B_市民参加": {
+    "question": "パブリックコメント等について『募集中 / 終了 / 結果公表 / 意見数 / 市の回答』を可視化できるか",
+    "existingData": {
+      "structuredPublicCommentRecords": 0,
+      "dedicatedDataFile": null,
+      "dedicatedType": null,
+      "speechQuestionItemsMentioningPublicComment": 33,
+      "billsMentioningPublicComment": [
+        { "id": "2023-12-gian-68", "title": "令和5年度延岡市一般会計補正予算" },
+        { "id": "2021-03-gian-135", "title": "延岡城・内藤記念博物館条例の制定" },
+        { "id": "2021-03-gian-137", "title": "延岡市長期総合計画後期基本計画の策定" }
+      ],
+      "themeKeyword": "themes.json にキーワードとして『パブリックコメント』が1件登録されている（テーマ分類用であり、案件データではない）"
+    },
+    "candidateCount": 36,
+    "expressibleWithExistingStructure": [
+      "会議録要約の全文検索で『パブリックコメント』を含む一般質問へ到達すること（/search で既に可能）",
+      "議案詳細で、その議案の審議過程にパブリックコメントへの言及があることを会議録から確認すること（間接的）"
+    ],
+    "notExpressibleWithExistingStructure": [
+      "募集中／終了／結果公表 の状態表示。案件を表すレコードが存在しないため、状態を持たせる場所が無い",
+      "意見数・市の回答。数値も回答本文も、どのデータにも登録されていない",
+      "募集期間・対象計画・担当課。同上",
+      "『募集中』の表示。これは日付依存の動的表示であり、プリレンダリング済みHTMLでは Phase221 の会期状態と同じ設計（today=null のときに断定しない）が別途必要になる"
+    ],
+    "keyRisk": "『意見数0件』と『意見数を市が公表していない』を混同しないこと。CLAUDE.md の『未確認データを0として扱わない』が直接効く領域。",
+    "recommendedNow": [],
+    "futureCandidates": [
+      {
+        "id": "B-1",
+        "title": "パブリックコメント案件データの新設",
+        "requiredData": "延岡市公式サイトの意見公募手続（パブリックコメント）一覧および各案件の結果公表ページ",
+        "proposedSchema": {
+          "file": "src/data/publicComments.json",
+          "record": {
+            "id": "string（例 pc-2026-001）",
+            "title": "string（案件名の原文）",
+            "department": "string | null（担当課。未確認は null）",
+            "purpose": "string | null（募集の趣旨。市の記載の要約）",
+            "periodFrom": "string | null（ISO。募集開始日）",
+            "periodTo": "string | null（ISO。募集終了日）",
+            "publicationStatus": "'recruiting' | 'closed' | 'resultPublished' | 'unknown'（unknown は推測しないための既定値）",
+            "opinionCount": "number | null（市が公表した意見数。未公表は null。0件と混同しない）",
+            "opinionSubmitterCount": "number | null（提出者数。意見数と別項目にする）",
+            "resultUrl": "string | null（結果公表ページ）",
+            "cityResponseSummary": "string | null（市の考え方の要約。市の回答本文の転載はしない）",
+            "relatedBillIds": "string[]（billVotes.json のID。存在検証の対象）",
+            "relatedPolicyIds": "string[]",
+            "sourceUrl": "string",
+            "sourceTitle": "string",
+            "lastVerifiedAt": "string（ISO）",
+            "notes": "string | null"
+          },
+          "rules": [
+            "publicationStatus は資料で確認できたときだけ設定し、期間から自動推定して『募集中』と断定しない",
+            "opinionCount が null のときは画面に『公表なし』と文字で表示する（0 と書かない）",
+            "『募集中』の判定を日付で行う場合は Phase221 の会期状態と同じく、today=null（サーバー生成HTML）では断定しない",
+            "relatedBillIds / relatedPolicyIds は validate-data.mjs の関連ID存在検証へ追加する"
+          ]
+        },
+        "displayProposal": "/policies 配下に『市民の意見募集（パブリックコメント）』セクションを追加し、案件一覧＋状態バッジ（文字併記）＋意見数（未公表は『公表なし』）＋結果公表リンクを表示。議案詳細からは relatedBillIds 経由で相互リンク。",
+        "blockedBy": "案件一覧の一次資料の収集が未実施。1件も登録できないため、空配列での先行実装は行わない。"
+      }
+    ]
+  },
+
+  "C_県市連携": {
+    "question": "『延岡市単独施策』と『宮崎県との共同・連携事業』を区別して表示できるか",
+    "existingData": {
+      "structuredJointProjectField": null,
+      "timelineEventsMentioningPrefecture": 20,
+      "timelineEventCategories": {
+        "市制施行・合併": 14,
+        "公共事業": 37,
+        "市庁舎": 9,
+        "災害": 26,
+        "教育・福祉・産業": 44,
+        "行政組織": 87
+      },
+      "billsMentioningPrefecture": [
+        { "id": "2024-06-gian-23", "title": "宮崎県後期高齢者医療広域連合規約の変更に関する協議" },
+        { "id": "2025-06-gian-23", "title": "財産の取得（宮崎県体育館駐車場整備事業用地）" }
+      ],
+      "promiseMeasuresMentioningPrefecture": 0,
+      "speechQuestionItemsMentioningPrefecture": 120,
+      "speechKeywordCounts": {
+        "県との連携": 14,
+        "県と連携": 4,
+        "国・県": 94,
+        "県営": 5,
+        "県立延岡病院": 16,
+        "県道": 30,
+        "定住自立圏": 2
+      }
+    },
+    "candidateCount": 142,
+    "expressibleWithExistingStructure": [
+      "『宮崎県』を含む議案の全文検索（/search・/bills/votes の検索）",
+      "県立施設等が登場する市政年表の閲覧（ただし『県が設置した』事実であって『県市共同事業』ではない）"
+    ],
+    "notExpressibleWithExistingStructure": [
+      "実施主体の区別そのもの。CivicTimelineEvent・ArchivePolicy・MayorPromiseMeasure・BillVote のいずれにも実施主体・共同実施を表すフィールドが無い",
+      "timeline の category は『公共事業』『行政組織』等の分野分類であり、主体の分類ではないため転用できない",
+      "『県立延岡病院』『県道』の20件は、県が設置・管理する施設が延岡市域にある事実であって、延岡市と宮崎県の共同事業ではない。この20件をそのまま『県市連携』として提示すると誤誘導になる",
+      "会議録の120件は『国・県への要望』『県の補助制度の活用』を含み、共同事業とは限らない。テキスト一致だけで連携事業と断定できない"
+    ],
+    "keyRisk": "キーワード一致で『県市連携事業』と分類することは推測にあたる。実施主体は議案書・予算資料に負担割合や協定名が明記されている場合にのみ確定できる。",
+    "recommendedNow": [],
+    "futureCandidates": [
+      {
+        "id": "C-1",
+        "title": "実施主体区分フィールドの追加",
+        "requiredData": "議案書・予算資料・協定書における実施主体・負担区分の明記",
+        "proposedSchema": {
+          "field": "implementationScope",
+          "appliesTo": ["MayorPromiseMeasure", "ArchivePolicy", "CivicTimelineEvent"],
+          "type": "'cityOnly' | 'cityPrefectureJoint' | 'prefectureLed' | 'nationalProgram' | 'wideAreaUnion' | 'unknown'",
+          "defaultValue": "'unknown'",
+          "companionFields": {
+            "implementationScopeSource": "string | null（この区分を確定した一次資料のURL）",
+            "implementationScopeNote": "string | null（負担割合・協定名等、資料に明記された内容のみ）"
+          },
+          "rules": [
+            "既定値は 'unknown'。キーワード一致で cityPrefectureJoint に自動分類しない",
+            "implementationScopeSource が無いレコードは 'unknown' のままにする",
+            "画面では 'unknown' を『実施主体 確認中』と文字で表示し、『市単独』と読ませない",
+            "『県立◯◯』『県道◯◯』は prefectureLed であって cityPrefectureJoint ではない。両者を混同しない"
+          ]
+        },
+        "displayProposal": "施策・政策の詳細ページに『実施主体』行を追加し、cityPrefectureJoint のもののみ /policies に絞り込みフィルタを提供する。確定件数が一定数に達するまでフィルタは公開しない。",
+        "blockedBy": "現時点で一次資料により実施主体を確定できるレコードは、議案2件（後期高齢者医療広域連合規約・宮崎県体育館駐車場整備事業用地）に限られる。この2件だけで区分表示を公開しても市民の役に立たないため、実装は資料整備後。"
+      }
+    ]
+  },
+
+  "D_メディア報道": {
+    "question": "重要案件について『公式資料』と『報道・関連記事』を別タブ・別ラベルで示せるか",
+    "existingData": {
+      "existingTypeSupport": "MayorPromiseCandidateEvidence.sourceType: 'primary' | 'news'（src/types/index.ts）",
+      "dataRowsUsingThatFlag": 0,
+      "existingDisplaySupport": "MayorPromiseDetailPage.tsx が sourceType==='news' のとき『報道（一次資料ではありません）』を表示。ただし該当データが0件のため、この分岐は現在1件も描画されていない",
+      "newsSourceRecordsShownWithoutDistinction": 11,
+      "secondarySourceRecordsShownWithoutDistinction": 27,
+      "newsSourceRecordBreakdown": {
+        "archiveMayors.json": 7,
+        "archiveMayorTerms.json": 2,
+        "civicTimelineEvents.json": 2
+      },
+      "newsOutlets": ["宮崎日日新聞（Miyanichi e-press）", "宮崎日日新聞社", "夕刊デイリー（延岡市の地方紙）", "読売新聞オンライン（Yahoo!ニュース配信）"],
+      "secondaryOutlets": ["Wikipedia", "コトバンク"]
+    },
+    "candidateCount": 38,
+    "findingCritical": {
+      "severity": "high",
+      "summary": "報道11件・事典27件が、延岡市・延岡市議会の一次資料と同じ見た目で『出典・確認状況』欄に並んでいた。SourceLink の既定ラベルは『根拠資料を見る』であり、報道を根拠資料として提示する状態になっていた。",
+      "affectedRenderers": [
+        "src/components/SourceRefList.tsx（/mayors/:slug・/members/former/:slug・/policies/:slug・/finance/* ほか）",
+        "src/components/compare/CompareSourceNotice.tsx（/timeline・/timeline/:year・/compare/*）",
+        "src/pages/HistoryPage.tsx（/history）"
+      ]
+    },
+    "expressibleWithExistingStructure": [
+      "登録済みの sourceOrganization / sourceTitle から、表示層で報道・事典・その他を機械的に分類し、文字ラベルで区別すること（データ追加なしで実現でき、本Phaseで実装した）",
+      "MayorPromiseCandidateEvidence の sourceType='news' 分岐（既存。データが入れば即座に機能する）"
+    ],
+    "notExpressibleWithExistingStructure": [
+      "『重要案件ごとの関連報道一覧』。案件と報道記事を結ぶデータが無く、報道記事レコード自体も存在しない",
+      "公式資料タブ／報道タブの2タブUI。タブを分けるには、同じ案件に紐づく報道が複数件必要だが、現在の報道11件は市長個人の任期・死去・就任を裏づける単発の出典であり、案件単位でまとまっていない",
+      "報道内容の要約表示。著作権上、見出し・要約の掲載可否の判断が別途必要"
+    ],
+    "recommendedNow": [
+      {
+        "id": "D-1",
+        "title": "出典欄で報道・事典を文字ラベルで区別する",
+        "status": "本Phaseで実装済み",
+        "why": "『新聞を根拠資料として表示しない』という絶対条件が、現在の公開画面で満たされていなかったため。",
+        "how": "src/lib/sourceMedium.ts を新設し、登録済みの公表機関名・資料名から news / reference / unclassified を判定。SourceRefList・CompareSourceNotice・HistoryPage で『報道（一次資料ではありません）』『事典・百科事典（一次資料ではありません）』を表示する。",
+        "safety": [
+          "src/data配下のJSONは一切変更していない（媒体区分は保存しない計算結果）",
+          "判定できないものにはラベルを付けない。『一次資料である』とは断定しない",
+          "事典（Wikipedia・コトバンク）を報道より先に判定するため、記事内の参考文献に新聞名が挙がっていても報道と誤表示しない",
+          "実データ1,453件の出典レコードに対し、誤検出0件・取りこぼし0件を確認"
+        ],
+        "test": "scripts/test-source-medium-labeling.mjs（npm test へ登録済み、6 checks）"
+      }
+    ],
+    "futureCandidates": [
+      {
+        "id": "D-2",
+        "title": "重要案件の『公式資料 / 報道・関連記事』2タブ表示",
+        "requiredData": "案件（議案・公約・施策）に紐づく報道記事のレコード",
+        "proposedSchema": {
+          "file": "src/data/relatedNewsArticles.json",
+          "record": {
+            "id": "string",
+            "subjectType": "'bill' | 'promise' | 'measure' | 'policy' | 'civicTimelineEvent'",
+            "subjectId": "string（既存IDへの参照。存在検証の対象）",
+            "outlet": "string（媒体名。例『宮崎日日新聞』）",
+            "headline": "string（見出しの原文）",
+            "publishedDate": "string（ISO）",
+            "url": "string",
+            "archiveUrl": "string | null（Internet Archive 保存版）",
+            "sourceType": "'news'（この配列は常に news。primary をここに入れない）",
+            "checkedAt": "string（ISO）",
+            "notes": "string | null"
+          },
+          "rules": [
+            "この配列は根拠資料としては使わない。公式資料が無い事実を、報道だけで確定させない",
+            "報道タブは公式資料タブと必ず別の見出し・別のラベルにし、既定で公式資料タブを選択状態にする",
+            "報道タブの冒頭に『これらは一次資料ではありません』と常時表示する",
+            "本文・要約の転載はせず、見出しと出典リンクのみを保持する"
+          ]
+        },
+        "displayProposal": "議案詳細・公約詳細の資料セクションを『公式資料』『報道・関連記事（一次資料ではありません）』の2タブに分ける。報道タブが0件の案件ではタブ自体を表示しない。",
+        "blockedBy": "報道記事の収集方針（対象範囲・著作権・恒久リンクの確保）が未決定。外部AI APIやクローラの追加は行わない前提での収集手段を先に決める必要がある。"
+      },
+      {
+        "id": "D-3",
+        "title": "SourceLink の既定ラベル『根拠資料を見る』の見直し",
+        "requiredData": "なし",
+        "approach": "既定ラベルが『根拠資料を見る』であるため、呼び出し側がラベルを渡さない箇所では報道も『根拠資料』と表示されうる。既定値を『出典を見る』へ変更し、報道には媒体ラベルを併記する。",
+        "blockedBy": "SourceLink の利用箇所全件の文言影響確認が必要。本Phaseでは、報道が実際に流れる /history 側でラベル併記して回避した。"
+      }
+    ]
+  },
+
+  "summary": {
+    "candidateCounts": {
+      "政策成果": 28,
+      "市民参加": 36,
+      "県市連携": 142,
+      "メディア報道": 38
+    },
+    "recommendedNowCount": 1,
+    "futureCandidateCount": 8,
+    "implementedInThisPhase": ["D-1"],
+    "changedFiles": [
+      "src/lib/sourceMedium.ts（新規）",
+      "src/components/SourceRefList.tsx",
+      "src/components/compare/CompareSourceNotice.tsx",
+      "src/pages/HistoryPage.tsx",
+      "scripts/test-source-medium-labeling.mjs（新規）",
+      "package.json（npm test へ追加）",
+      "reports/phase228-assessment.json（新規）",
+      "reports/phase228-assessment.md（新規）"
+    ],
+    "unchanged": [
+      "src/data配下のすべてのJSON",
+      "RELEASE_SNAPSHOT.md",
+      "reports/release-snapshot.json",
+      "src/data/blockedTaskClassification.json",
+      "議案1,177・政策分野4・個別公約14・個別施策33"
+    ]
+  }
+}
