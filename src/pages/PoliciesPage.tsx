@@ -1,4 +1,5 @@
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archivePolicyCategoriesData from "../data/archivePolicyCategories.json";
 import membersData from "../data/members.json";
@@ -34,7 +35,7 @@ export function PoliciesPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
 
   const ownerTypeFilter = searchParams.get("ownerType") ?? "";
   const categoryFilter = searchParams.get("category") ?? "";

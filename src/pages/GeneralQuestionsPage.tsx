@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useInitialSearchParams } from "../hooks/useHydratedSearchParams";
 import generalQuestionsData from "../data/generalQuestions.json";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
@@ -130,10 +131,12 @@ export function GeneralQuestionsPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams] = useSearchParams();
-
   const [query, setQuery] = useState("");
-  const [memberId, setMemberId] = useState(searchParams.get("member") ?? "all");
+  // Phase240：初期値は「すべて」に固定する。プリレンダリング済みHTMLは常にクエリなしの内容
+  // （静的ホスティングはクエリを無視して同じファイルを返す）のため、初回レンダリングで
+  // ?member= を反映するとハイドレーション不一致になる。完了後に一度だけ反映する。
+  const [memberId, setMemberId] = useState("all");
+  useInitialSearchParams((params) => setMemberId(params.get("member") ?? "all"));
   const [theme, setTheme] = useState("all");
   const [fiscalYear, setFiscalYear] = useState("all");
   const [session, setSession] = useState("all");

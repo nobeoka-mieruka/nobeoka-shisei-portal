@@ -1,5 +1,5 @@
-import { useSyncExternalStore } from "react";
 import { COUNCIL_SESSION_TIME_ZONE, dateStringInTimeZone } from "../lib/councilSessionSchedule";
+import { useIsHydrated } from "./useIsHydrated";
 
 /**
  * Phase221：プリレンダリング済みHTMLと閲覧時で表示が食い違わない形で「今日」を得るための仕組み。
@@ -10,20 +10,13 @@ import { COUNCIL_SESSION_TIME_ZONE, dateStringInTimeZone } from "../lib/councilS
  *   - ハイドレーション時にサーバー出力とクライアント出力が食い違い、React が警告を出す
  * という2つの問題が同時に起きる。
  *
- * そこで useSyncExternalStore の getServerSnapshot / getSnapshot を使い、
- *   - サーバー生成時と、ハイドレーション中の初回クライアントレンダリング → false（＝日付未確定）
- *   - ハイドレーション完了後の再レンダリング → true（＝日付確定）
- * とする。サーバー出力と初回クライアント出力が必ず一致するため、ハイドレーション不一致は
- * 構造的に発生しない。日付に依存する文言は「確定後」だけに出す。
+ * そのため useIsHydrated()（src/hooks/useIsHydrated.ts、Phase240で共通化）で
+ * 「ハイドレーション完了後」だけ日時を確定させる。日付に依存する文言は確定後だけに出す。
  */
-const subscribeToNothing = () => () => {};
-const getClientSnapshot = () => true;
-const getServerSnapshot = () => false;
 
-/** ハイドレーションが完了し、閲覧時の日時を安全に参照できる状態になったか。 */
-export function useIsHydrated(): boolean {
-  return useSyncExternalStore(subscribeToNothing, getClientSnapshot, getServerSnapshot);
-}
+// 既存の呼び出し側（Phase221当時から useTodayJst.ts の useIsHydrated を参照している箇所）との
+// 互換のため、共通化後もここから再エクスポートする。
+export { useIsHydrated } from "./useIsHydrated";
 
 /**
  * 日本標準時（Asia/Tokyo）の今日（YYYY-MM-DD）。

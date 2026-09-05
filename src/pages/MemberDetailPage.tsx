@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
@@ -126,7 +127,7 @@ const linkClass =
 export function MemberDetailPage() {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
   const member = members.find((m) => m.id === id);
   const formerMember = !member ? formerMembers.find((m) => m.id === id) : undefined;
   const seo = getSeoForPath(location.pathname);

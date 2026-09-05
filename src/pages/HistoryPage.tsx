@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useHydratedSearchParams } from "../hooks/useHydratedSearchParams";
 import {
   sortedCivicTimelineEvents,
   civicTimelineCategories,
@@ -99,7 +99,7 @@ export function HistoryPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useHydratedSearchParams();
 
   const [decade, setDecade] = useState("all");
   const [category, setCategory] = useState("all");

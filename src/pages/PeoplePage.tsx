@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useIsHydrated } from "../hooks/useIsHydrated";
 import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
 import archiveMayorsData from "../data/archiveMayors.json";
@@ -115,10 +115,10 @@ export function PeoplePage() {
   // これらをtypeと同様に即座に反映すると、サーバーHTML（常に絞り込みなし相当）と
   // 食い違いhydrationエラーになるため、マウント後（＝通常のクライアント側再描画）に
   // のみ反映する。
-  const [hasMounted, setHasMounted] = useState(false);
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  // Phase240：以前はこのページ専用の hasMounted（useState + useEffect）で判定していたが、
+  // 同じ目的の仕組みがサイト内に複数あると抜け漏れが起きるため、共通の useIsHydrated()
+  // （src/hooks/useIsHydrated.ts）へ統一した。判定の意味・タイミングは従来と同じ。
+  const hasMounted = useIsHydrated();
 
   const people = buildPersonIndex();
 
