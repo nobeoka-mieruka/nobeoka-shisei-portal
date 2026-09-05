@@ -10411,3 +10411,86 @@ Phase205 が「令和8年度 延岡市予算に関する説明書（当初予算
   代替一次資料が見つかるまで内部データ上の参照として残る（公開画面には露出しない）。
   (2) `pf-org-001` は令和8年11月頃と見込まれる令和7年分の定期公表待ち。公表後も画像PDFのため、
   人による目視確認が必要になる可能性が高い。
+
+### TASK-187 新聞記事を「発見の手掛かり」として使う調査（Phase227、Phase224の新聞ドメイン収集）
+
+状態：DONE（2026-09-05）
+優先度：B（ユーザー指示）
+対象：`reports/phase227-news-discovery-ledger.json`（新規、調査台帳のみ）
+
+#### 目的
+
+新聞を一次資料化することが目的ではない。一次資料だけでは拾いにくい政策論点・市議会の争点・
+市長発言の背景・市民反応・事業の経緯を**発見する**ために使う。
+順序は「新聞記事で発見 → 一次資料を探す → 一次資料で確定 → ポータル更新」。
+
+#### 前提となるアクセス方針の確認結果（重要）
+
+対象2紙はいずれも robots.txt で Claude 系クローラーを全面 Disallow としている。
+
+- `www.the-miyanichi.co.jp`：`ClaudeBot` / `Claude-SearchBot` / `Claude-User` は
+  `/adplanning/` 等を除き `Disallow: /`
+- `www.yukan-daily.co.jp`：`ClaudeBot` / `anthropic-ai` / `Claude-Web` は `Disallow: /`
+
+したがって**記事ページの取得（WebFetch / curl）およびサイト内検索は一切行っていない**。
+候補の把握は検索エンジンのインデックス経由で得られる見出しとURLのみに基づく。
+この制約により、対象期間（2026-08-01〜2026-09-05）の**網羅性は担保されていない**。
+両紙のサイト内検索・掲載日の確定は `MANUAL_BROWSER_CHECK_REQUIRED` として台帳に残した。
+
+#### 出典構造の確認結果（新スキーマを作らない判断）
+
+新聞ソースを表す新しい型・データ構造は**作っていない**。既存の `ArchiveSourceRef`
+（`src/types/historicalArchive.ts`）で必要な項目をすべて表現できることを確認した。
+
+| 求められた項目 | 既存フィールド |
+| --- | --- |
+| publisher | `sourceOrganization` |
+| headline | `sourceTitle` |
+| publicationDate | `sourcePublishedDate` |
+| url | `sourceUrl` |
+| relatedEntity | `sourceRefs` を持つ親レコード自体 |
+| sourceLevel: SECONDARY | `trustLevel`（`src/types/sourceTrust.ts`）。報道にはより厳密な `"NEWS"` が既にある |
+| primarySourceResolved | `verificationStatus`（事実確認の軸）＋ `notes`。`trustLevel`（資料種別の軸）と独立した2軸として既に設計済み |
+| notes | `notes` |
+
+市長公約側には `MayorPromiseCandidateEvidence.sourceType: "primary" | "news"` も既にあるが、
+`"news"` の実データは0件であり、本フェーズでも追加していない。
+
+#### 調査結果
+
+候補21件（宮崎日日新聞13件／夕刊デイリー8件）を台帳化した。分類は
+`PRIMARY_FOUND` 1件／`ALREADY_KNOWN` 8件／`PRIMARY_NOT_FOUND` 4件／`NOT_RELEVANT` 8件。
+
+ユーザー指示Bの確認対象（令和8年6月25日付 夕刊デイリーの延岡脱炭素エネルギーマネジメント関連記事）は、
+延岡市公式ホームページ 脱炭素政策室の
+`https://www.city.nobeoka.miyazaki.jp/soshiki/91/51573.html`（2026-08-21掲載）が紙面を紹介している。
+**ポータルには未記録であり、記録も不要と判断した**。内容がFM延岡「ココカラSDGs」第63回（6月18日放送）への
+ゲスト出演の紹介で、市の意思決定・議案・予算・公約の新たな事実を含まないため。
+脱炭素先行地域（一ヶ岡地区）という論点自体は議案・一般質問・会議録要約に一次資料ベースで登録済み。
+
+既存の新聞URL（宮崎日日新聞6件・夕刊デイリー2件、`src/data` 内）はすべて歴代市長の経歴に紐づく
+歴史記録であり、対象期間のものは0件であることを確認した。
+
+#### 受入条件
+
+- **新聞だけを根拠に、金額・日付・議決結果・人名・公約達成・財政数値・議案状態を確定・上書きした件数：0**
+- 記事全文をGitへ保存しない（保持したのは見出し・URL・発行元・分類のみ）
+- paywall回避・robots制限回避・ログイン突破を行わない
+- `src/data` 配下の実データを変更しない
+- `validate:data` errors=0・warnings=21（既存基準）、新規 warning 0
+
+#### 検証結果
+
+`validate:data` errors=0 / warnings=21（既存基準と一致）／`typecheck` clean／
+`lint` 既存4 warnings のみ（新規0）／`npm test` failures 0／`build` 成功
+（`check-internal-links` リンク切れ0件）。
+
+完了記録：
+- 完了日：2026-09-05
+- 変更概要：調査台帳 `reports/phase227-news-discovery-ledger.json` の追加のみ。
+  `src/data` 配下のデータ、型定義、画面、`RELEASE_SNAPSHOT.md` /
+  `reports/release-snapshot.json` はいずれも変更していない。
+  HUMAN_ACTION_REQUIRED 項目のステータスも変更していない。
+- 残課題：robots制約により2紙のサイト内検索と掲載日確定ができない。台帳の
+  `manualBrowserCheckRequired` 4件は人手（ブラウザ実機）での確認が必要。
+  それが済むまで「2026年8月の報道を確認済み」と記載しないこと。

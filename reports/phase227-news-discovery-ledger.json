@@ -1,0 +1,441 @@
+{
+  "phase": "Phase227",
+  "title": "新聞記事を「発見の手掛かり」として使うための調査台帳（宮崎日日新聞・夕刊デイリー）",
+  "generatedBy": "manual (worker-227)",
+  "generatedAt": "2026-09-05",
+  "targetPeriod": { "from": "2026-08-01", "to": "2026-09-05" },
+  "purpose": [
+    "新聞を一次資料化することが目的ではない。",
+    "一次資料だけでは拾いにくい政策論点・議会の争点・市民反応・事業の経緯を『発見』するために使う。",
+    "発見 → 一次資料を探す → 一次資料で確定 → ポータル更新、という順序を守る。"
+  ],
+  "hardConstraints": {
+    "factsConfirmedFromNewsOnly": 0,
+    "articleFullTextStored": 0,
+    "paywallBypassAttempts": 0,
+    "robotsBypassAttempts": 0,
+    "loginBypassAttempts": 0,
+    "note": "本台帳は見出し（記事タイトル）・URL・発行元・分類のみを保持する。記事本文は一切保存していない。金額・日付・議決結果・人名・公約達成・財政数値・議案状態のいずれも、新聞を根拠に確定・上書きしていない。"
+  },
+
+  "accessPolicyFindings": {
+    "summary": "両紙とも robots.txt で Claude 系クローラーを全面 Disallow としている。したがって記事ページの取得（WebFetch / curl）は行っていない。本台帳の候補はすべて検索エンジンのインデックス経由で得た見出しとURLのみに基づく。",
+    "publishers": [
+      {
+        "domain": "www.the-miyanichi.co.jp",
+        "robotsUrl": "https://www.the-miyanichi.co.jp/robots.txt",
+        "checkedAt": "2026-09-05",
+        "rulesForThisAgent": "User-agent: ClaudeBot / Claude-SearchBot / Claude-User はいずれも Allow: /adplanning/ ・ Allow: /adplanning-list を除き Disallow: /",
+        "consequence": "記事ページの本文取得は行わない。見出しとURLのみを検索インデックス経由で扱う。掲載日は未確定のまま扱う。"
+      },
+      {
+        "domain": "www.yukan-daily.co.jp",
+        "robotsUrl": "https://www.yukan-daily.co.jp/robots.txt",
+        "checkedAt": "2026-09-05",
+        "rulesForThisAgent": "User-agent: ClaudeBot / anthropic-ai / Claude-Web はいずれも Disallow: /",
+        "consequence": "同上。サイト内のヘッドライン一覧・記事検索も実行していない。"
+      }
+    ],
+    "paywallEncountered": "記事ページを取得していないため、paywall の有無自体を実測していない（宮崎日日新聞DIGITALは有料会員制の記事を含むことが知られているが、本フェーズでは到達を試みていない）。"
+  },
+
+  "schemaDecision": {
+    "conclusion": "新しいスキーマは作らない。既存の出典構造で表現できる。",
+    "existingStructure": "src/types/historicalArchive.ts の ArchiveSourceRef（archiveMayors.json / archiveMayorTerms.json / civicTimelineEvents.json 等が使用）",
+    "fieldMapping": {
+      "publisher": "ArchiveSourceRef.sourceOrganization",
+      "headline": "ArchiveSourceRef.sourceTitle",
+      "publicationDate": "ArchiveSourceRef.sourcePublishedDate",
+      "url": "ArchiveSourceRef.sourceUrl",
+      "relatedEntity": "sourceRefs を保持する親レコード（市長・任期・年表イベント等）そのものが関連対象を表す",
+      "sourceLevel: SECONDARY": "ArchiveSourceRef.trustLevel（src/types/sourceTrust.ts）。報道は SECONDARY より厳密な \"NEWS\" が既に存在する",
+      "primarySourceResolved": "ArchiveSourceRef.verificationStatus（事実確認の軸）＋ notes。trustLevel（資料種別の軸）とは独立した2軸として既に設計されている",
+      "notes": "ArchiveSourceRef.notes",
+      "accessedAt": "ArchiveSourceRef.accessedAt"
+    },
+    "alsoAvailable": "市長公約側には MayorPromiseCandidateEvidence（src/types/index.ts）があり sourceType: \"primary\" | \"news\" を既に持つ。ただし現時点で sourceType: \"news\" の実データは0件であり、本フェーズでも追加していない。",
+    "notImplemented": "上記のとおり既存構造で足りるため、型・データの追加変更は行っていない。新聞候補を src/data へ登録するのは、対応する一次資料が確定してからで足りる（新聞URLは一次資料の代替にならない）。"
+  },
+
+  "existingNewsUrlsInPortal": {
+    "note": "既登録の新聞URLはすべて歴代市長の経歴（archiveMayors / archiveMayorTerms / civicTimelineEvents）に紐づく歴史記録であり、対象期間（2026-08-01〜）のものは1件も無い。",
+    "theMiyanichi": {
+      "occurrencesInSrcData": 6,
+      "uniqueUrls": [
+        "https://web.archive.org/web/20250613112338/https://www.the-miyanichi.co.jp/kennai/_84868.html",
+        "https://www.the-miyanichi.co.jp/kennai/_58518.html（Wayback経由で保持）",
+        "https://web.archive.org/web/20250227015255/https://www.the-miyanichi.co.jp/hito/_31790.html"
+      ]
+    },
+    "yukanDaily": {
+      "occurrencesInSrcData": 2,
+      "uniqueUrls": [
+        "https://www.yukan-daily.co.jp/headline-news/news.php?id=105824",
+        "https://www.yukan-daily.co.jp/headline-news/news.php?id=101608"
+      ]
+    }
+  },
+
+  "trackingStatusDefinitions": {
+    "PRIMARY_FOUND": "新聞で発見した論点について、一次資料（市・市議会等の公式資料）に到達できた。",
+    "PRIMARY_NOT_FOUND": "一次資料に到達できなかった。この場合、新聞記事だけでデータを確定しない（本台帳に留める）。",
+    "ALREADY_KNOWN": "当該論点は既に一次資料ベースでポータルへ登録済み。新聞側の追加登録は不要。",
+    "NOT_RELEVANT": "市政データ（議案・一般質問・財政・公約・議員・年表）として登録対象にならない話題。"
+  },
+
+  "candidates": [
+    {
+      "id": "p227-miya-01",
+      "publisher": "宮崎日日新聞",
+      "headline": "避難者の把握、電源確保、災害関連死リスク…車中泊避難の適切運営を協議 延岡市",
+      "url": "https://www.the-miyanichi.co.jp/today/topic/1039787.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "防災（車中泊避難の運営体制・マニュアル策定）",
+      "primaryTracking": "PRIMARY_NOT_FOUND",
+      "primarySourceSearched": [
+        "https://www.city.nobeoka.miyazaki.jp/soshiki/15/（危機管理企画課：該当記載なし）",
+        "https://www.city.nobeoka.miyazaki.jp/site/disaster/49176.html（指定避難所運営マニュアル：車中泊避難の協議会の記載を確認できず）"
+      ],
+      "registeredInPortal": false,
+      "notes": "検索インデックス上の要旨に協議会の設置や他災害への言及が見られるが、掲載日・内容とも一次資料で裏づけられていないため、事実として一切採用しない。市の公式ページに対応する報道発表・会議資料が公開されれば、その時点で一次資料として登録を検討する。"
+    },
+    {
+      "id": "p227-miya-02",
+      "publisher": "宮崎日日新聞",
+      "headline": "九州中央道 夢かなえる道 延岡の高校生 市役所で寸劇や提言発表 熊本地震影響で建設促進大会延期",
+      "url": "https://www.the-miyanichi.co.jp/today/kennaiippan/1041704.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "九州中央自動車道の建設促進（要望活動）",
+      "primaryTracking": "PRIMARY_NOT_FOUND",
+      "primarySourceSearched": [],
+      "registeredInPortal": false,
+      "notes": "記事IDが本台帳中で最も新しく、対象期間内の可能性があるが未確認。開催・延期の事実は一次資料で確認できていないため採用しない。"
+    },
+    {
+      "id": "p227-miya-03",
+      "publisher": "宮崎日日新聞",
+      "headline": "26年度 延岡市予算案690億円 「多様な人材活躍」推進",
+      "url": "https://www.the-miyanichi.co.jp/today/kennaiippan/562514.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "令和8年度一般会計当初予算案",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "令和8年度の財政・予算は一次資料（予算書・議案）ベースで登録済み。記事に現れる金額は照合も上書きもしていない。"
+    },
+    {
+      "id": "p227-miya-04",
+      "publisher": "宮崎日日新聞",
+      "headline": "延岡市当初予算 積み残し事業に一定判断",
+      "url": "https://www.the-miyanichi.co.jp/today/kennaiippan/562493.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "前市長からの継続事業の扱い（市長公約の背景）",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "関連する事業名は mayorPromises.json に一次資料ベースで既出。事業の休止・継続の判断は一次資料でのみ確定する。"
+    },
+    {
+      "id": "p227-miya-05",
+      "publisher": "宮崎日日新聞",
+      "headline": "地域新電力会社の設立見送り 宮崎県延岡市",
+      "url": "https://www.the-miyanichi.co.jp/today/kennaiippan/862658.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "地域新電力（政策の方針転換）",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "地域新電力は議案・一般質問・会議録要約に一次資料ベースで多数登録済み。方針転換の有無・時期は会議録等でのみ確定する。"
+    },
+    {
+      "id": "p227-miya-06",
+      "publisher": "宮崎日日新聞",
+      "headline": "給食費半額や水道料免除 延岡市、物価対策を議会提案へ",
+      "url": "https://www.the-miyanichi.co.jp/today/kennaiippan/820211.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "物価高騰対策（給食費・水道料金）",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "給食費・水道料金・物価高騰対策は議案データと会議録要約に登録済み。提案内容・議決結果は議案書と会議録でのみ確定する。"
+    },
+    {
+      "id": "p227-miya-07",
+      "publisher": "宮崎日日新聞",
+      "headline": "延岡市第７次長計周知へロゴマーク 小野さん（延岡）デザイン採用",
+      "url": "https://www.the-miyanichi.co.jp/chiiki-2/kenpoku/800045.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "第7次長期総合計画の広報",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "ロゴマークの採用自体は市政データの登録対象ではない。長期総合計画そのものは市公式資料で別途扱う。"
+    },
+    {
+      "id": "p227-miya-08",
+      "publisher": "宮崎日日新聞",
+      "headline": "宮崎県市町村長・議会議員一覧（延岡市）",
+      "url": "https://www.the-miyanichi.co.jp/special/Member_of_Assembly/detail.php?type=all&area=%E5%BB%B6%E5%B2%A1%E5%B8%82",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "市議会議員の一覧（政党所属・当選回数等）",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "過去フェーズで既に発見・検討済みの一覧ページ。議員の属性は市議会公式資料で確定する方針であり、本ページを根拠に議員データを上書きしない。"
+    },
+    {
+      "id": "p227-miya-09",
+      "publisher": "宮崎日日新聞",
+      "headline": "森林クレジット活用に成果 延岡市など協議会解散",
+      "url": "https://www.the-miyanichi.co.jp/chiiki-2/kenpoku/756947.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "森林クレジット・協議会",
+      "primaryTracking": "PRIMARY_NOT_FOUND",
+      "primarySourceSearched": [],
+      "registeredInPortal": false,
+      "notes": "本フェーズでは対応する一次資料の特定に至っていない。協議会の解散という事実は新聞のみでは採用しない。"
+    },
+    {
+      "id": "p227-miya-10",
+      "publisher": "宮崎日日新聞",
+      "headline": "大規模災害時にスピーディーな支援を カーシェア協会、延岡市に支部設置へ",
+      "url": "https://www.the-miyanichi.co.jp/today/topic/473576.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "民間団体の支部設置",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "民間団体の動きであり市政データの登録対象ではない。"
+    },
+    {
+      "id": "p227-miya-11",
+      "publisher": "宮崎日日新聞",
+      "headline": "新宮崎県体育館大型ビジョン設置要望",
+      "url": "https://www.the-miyanichi.co.jp/today/kennaiippan/899183.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "県施設に関する要望",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "宮崎県の施設に関する話題であり、本ポータルの対象（延岡市政）外。"
+    },
+    {
+      "id": "p227-miya-12",
+      "publisher": "宮崎日日新聞",
+      "headline": "クサフグの産卵確認 延岡市",
+      "url": "https://www.the-miyanichi.co.jp/today/topic/808316.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "自然・生物",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "市政の意思決定に関わらない話題。"
+    },
+    {
+      "id": "p227-miya-13",
+      "publisher": "宮崎日日新聞",
+      "headline": "延岡ゆかりの５０歳、集まれ！ 有志が同窓会企画",
+      "url": "https://www.the-miyanichi.co.jp/today/chiiki/826646.html",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "地域の話題",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "市政の意思決定に関わらない話題。"
+    },
+
+    {
+      "id": "p227-yukan-01",
+      "publisher": "夕刊デイリー",
+      "headline": "（見出し未取得）令和8年6月25日付 夕刊デイリー掲載記事：延岡脱炭素エネルギーマネジメント株式会社 代表取締役がFM延岡「ココカラSDGs」第63回に出演",
+      "url": null,
+      "publicationDate": "2026-06-25",
+      "publicationDateStatus": "CONFIRMED_BY_PRIMARY",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "延岡市公式ホームページ（脱炭素政策室）が当該紙面を紹介",
+      "topic": "脱炭素先行地域／延岡脱炭素エネルギーマネジメント株式会社",
+      "primaryTracking": "PRIMARY_FOUND",
+      "primarySourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/91/51573.html",
+      "primarySourceTitle": "夕刊デイリーにおける記事掲載（延岡脱炭素エネルギーマネジメント株式会社）｜延岡市 脱炭素政策室",
+      "primarySourcePublishedDate": "2026-08-21",
+      "registeredInPortal": false,
+      "portalDecision": "登録不要",
+      "notes": "ユーザー指示Bの確認対象。結論：この記事はポータルに未記録であり、記録も不要と判断した。理由は(1)内容がFM延岡のラジオ番組（第63回、6月18日放送）へのゲスト出演の紹介であり、市の意思決定・議案・予算・公約の新たな事実を含まないこと、(2)市公式ページ側は紙面画像（JPG）を掲載しており記事本文のWebページURLが公表されていないこと。脱炭素先行地域（一ヶ岡地区）・延岡脱炭素エネルギーマネジメント株式会社という論点自体は、議案・一般質問・会議録要約に一次資料ベースで既に多数登録済み（ALREADY_KNOWN）。紙面画像の内容は取得・保存していない。"
+    },
+    {
+      "id": "p227-yukan-02",
+      "publisher": "夕刊デイリー",
+      "headline": "脱炭素先行地域の選定受け",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=104472",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "脱炭素先行地域（一ヶ岡地区）の補助事業受付窓口",
+      "primaryTracking": "ALREADY_KNOWN",
+      "primarySourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/91/30333.html",
+      "registeredInPortal": false,
+      "notes": "対応する市公式ページ（申請受付窓口・ホームページ開設）が存在する。脱炭素先行地域は既にポータルへ一次資料ベースで登録済み。"
+    },
+    {
+      "id": "p227-yukan-03",
+      "publisher": "夕刊デイリー",
+      "headline": "一般会計６２８億１８６４万円",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=97712",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "当初予算（過年度）",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "財政データは予算書・決算書ベースで登録済み。記事の金額は照合も上書きもしていない。"
+    },
+    {
+      "id": "p227-yukan-04",
+      "publisher": "夕刊デイリー",
+      "headline": "延岡市が組織改正－4月1日付",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=97735",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "市の組織改正",
+      "primaryTracking": "ALREADY_KNOWN",
+      "registeredInPortal": false,
+      "notes": "市の組織は cityOrganizationSections.json に市公式資料ベースで登録済み。"
+    },
+    {
+      "id": "p227-yukan-05",
+      "publisher": "夕刊デイリー",
+      "headline": "４７７０万円の課税ミスが判明−延岡市",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=96059",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "課税事務の誤り・補正予算",
+      "primaryTracking": "PRIMARY_NOT_FOUND",
+      "primarySourceSearched": [],
+      "registeredInPortal": false,
+      "notes": "対応する一次資料（報道発表・議案・会議録）を本フェーズでは特定していない。金額・件数は新聞のみでは採用しない。"
+    },
+    {
+      "id": "p227-yukan-06",
+      "publisher": "夕刊デイリー",
+      "headline": "野口遵記念館、工事請負契約を締結",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=90849",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "工事請負契約（議案）",
+      "primaryTracking": "PRIMARY_NOT_FOUND",
+      "primarySourceSearched": [],
+      "registeredInPortal": false,
+      "notes": "工事請負契約は議案として扱われることが多いが、本フェーズでは対応する議案の特定を行っていない。契約金額・締結日は新聞のみでは採用しない。"
+    },
+    {
+      "id": "p227-yukan-07",
+      "publisher": "夕刊デイリー",
+      "headline": "くじら池近くに太陽光発電所−延岡市上伊形町",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=102979",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "民間の太陽光発電所",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "民間事業であり市政データの登録対象ではない。"
+    },
+    {
+      "id": "p227-yukan-08",
+      "publisher": "夕刊デイリー",
+      "headline": "ココカラＳＤＧｓ−第２２回「今こそ知りたい！『地の利』生かした再生可能エネルギー」",
+      "url": "https://www.yukan-daily.co.jp/headline-news/news.php?id=101437",
+      "publicationDate": null,
+      "publicationDateStatus": "UNCONFIRMED",
+      "trustLevel": "NEWS",
+      "discoveryMethod": "search-index-only",
+      "topic": "ラジオ番組の紹介",
+      "primaryTracking": "NOT_RELEVANT",
+      "registeredInPortal": false,
+      "notes": "市の意思決定に関わる新たな事実を含まない。"
+    }
+  ],
+
+  "counts": {
+    "theMiyanichiCandidates": 13,
+    "yukanDailyCandidates": 8,
+    "totalCandidates": 21,
+    "primaryFound": 1,
+    "alreadyKnown": 8,
+    "primaryNotFound": 4,
+    "notRelevant": 8,
+    "newlyRegisteredToPortal": 0,
+    "factsConfirmedFromNewsOnly": 0
+  },
+
+  "manualBrowserCheckRequired": [
+    {
+      "id": "p227-manual-01",
+      "item": "宮崎日日新聞のサイト内記事検索（延岡市／延岡市議会／三浦市長 等）を 2026-08-01〜2026-09-05 の範囲で実施し、対象期間の記事を網羅的に確認する。",
+      "reason": "the-miyanichi.co.jp の robots.txt が ClaudeBot / Claude-SearchBot / Claude-User を Disallow: / としているため、エージェントからのサイト内検索・記事閲覧は行えない。",
+      "status": "MANUAL_BROWSER_CHECK_REQUIRED"
+    },
+    {
+      "id": "p227-manual-02",
+      "item": "夕刊デイリーのヘッドラインニュース一覧を 2026-08-01〜2026-09-05 の範囲で確認する。",
+      "reason": "yukan-daily.co.jp の robots.txt が ClaudeBot / anthropic-ai / Claude-Web を Disallow: / としている。",
+      "status": "MANUAL_BROWSER_CHECK_REQUIRED"
+    },
+    {
+      "id": "p227-manual-03",
+      "item": "本台帳の各候補の掲載日（publicationDate）の確定。現在ほぼ全件が UNCONFIRMED。",
+      "reason": "記事ページを取得していないため。掲載日が未確定である以上、対象期間内かどうかも確定していない。",
+      "status": "MANUAL_BROWSER_CHECK_REQUIRED"
+    },
+    {
+      "id": "p227-manual-04",
+      "item": "p227-miya-01（車中泊避難）・p227-yukan-05（課税ミス）・p227-yukan-06（工事請負契約）・p227-miya-09（森林クレジット協議会解散）について、対応する市・市議会の一次資料の有無を人手で確認する。",
+      "reason": "一次資料に到達できていない。到達できるまでデータ化しない。",
+      "status": "PRIMARY_NOT_FOUND"
+    }
+  ],
+
+  "nextSteps": [
+    "新聞候補は src/data へ登録しない。一次資料が確定した時点で、既存の ArchiveSourceRef（trustLevel: \"NEWS\"）または MayorPromiseCandidateEvidence（sourceType: \"news\"）で、あくまで補助的な参照として付ける。",
+    "報道を主根拠にした登録は行わない。報道が示す論点は、市公式ページ・議案書・会議録の側で裏づけが取れて初めて反映する。",
+    "対象期間の網羅性は robots 制約により本フェーズでは担保できない。上記 MANUAL_BROWSER_CHECK_REQUIRED を人手で消化するまで『2026年8月の報道を確認済み』とは記載しないこと。"
+  ]
+}
