@@ -5,6 +5,7 @@ import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMayorTermsData from "../data/archiveMayorTerms.json";
 import citySpecialPostsData from "../data/citySpecialPosts.json";
+import publicCommentsData from "../data/publicComments.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import billVotesData from "../data/billVotes.json";
 import archivePoliciesData from "../data/archivePolicies.json";
@@ -69,6 +70,7 @@ import type {
 } from "../types/historicalArchive";
 import type { ArchiveMemberProfile } from "../types/historicalArchive";
 import type { KohoNobeokaIssue } from "../types/kohoNobeoka";
+import type { PublicCommentDataset } from "../types/publicComment";
 import type { ElectionResult } from "../types/election";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -136,6 +138,7 @@ const archiveFormerMemberProfiles = (archiveMemberProfilesData as ArchiveMemberP
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
 const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
+const publicComments = publicCommentsData as PublicCommentDataset;
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const billVotes = billVotesData as BillVoteItem[];
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
@@ -501,6 +504,17 @@ export function DataStatusPage() {
       detail:
         "副市長・教育長・監査委員・農業委員会委員に加え、選挙管理委員（4名）・補充員（4名）も本会議録で氏名を確認し掲載済みです。ただし選挙管理委員会の委員長は委員の互選で決まり、公開の本会議では確認できないため未掲載です。",
       linkTo: "/city-officials",
+      linkLabel: "一覧を見る",
+      fullyCovered: false,
+    },
+    {
+      label: "パブリックコメント（意見募集）",
+      count: publicComments.entries.length,
+      unit: "件",
+      scope: publicComments.coveredFiscalYears.join("・"),
+      detail:
+        "延岡市公式ホームページの「パブリックコメント条例 運用状況」一覧に掲載されている案件を収録しています。募集中か終了かは市の公表区分をそのまま掲載し、当サイトで日付から判定していません。結果の提出者数・意見数は、市が結果を公表した案件にのみ掲載しています（未公表は「公表なし」と表示し、0とはしません）。過年度分は未収録です。",
+      linkTo: "/public-comments",
       linkLabel: "一覧を見る",
       fullyCovered: false,
     },

@@ -69,6 +69,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/mayor/press-conferences",
   "/mayors",
   "/city-officials",
+  "/public-comments",
   "/policies",
   "/people",
   "/bills",
@@ -167,6 +168,7 @@ function loadData() {
   const similarMunicipalityFinanceComparison = readJson("src/data/similarMunicipalityFinanceComparison.json");
   const electionResults = readJson("src/data/electionResults.json");
   const cityOrganizationSections = readJson("src/data/cityOrganizationSections.json");
+  const publicComments = readJson("src/data/publicComments.json");
   return {
     members,
     formerMembers,
@@ -202,6 +204,7 @@ function loadData() {
     similarMunicipalityFinanceComparison,
     electionResults,
     cityOrganizationSections,
+    publicComments,
   };
 }
 
@@ -291,6 +294,18 @@ function staticPageLastmod(path, data) {
         path,
         [maxValidDate(data.citySpecialPosts.map((p) => p.lastVerifiedAt))],
         ["src/data/citySpecialPosts.json"],
+      );
+    case "/public-comments":
+      return resolveLastmod(
+        path,
+        [
+          maxValidDate([
+            data.publicComments.lastVerifiedAt,
+            ...data.publicComments.entries.map((e) => e.lastVerifiedAt),
+            ...data.publicComments.entries.map((e) => e.sourcePageUpdatedAt),
+          ]),
+        ],
+        ["src/data/publicComments.json"],
       );
     case "/policies":
       return resolveLastmod(

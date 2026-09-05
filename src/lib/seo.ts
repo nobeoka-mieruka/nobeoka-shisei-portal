@@ -517,6 +517,28 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/public-comments":
+      return makeResult(
+        {
+          path: "/public-comments",
+          pageTitle: "パブリックコメント（意見募集）",
+          description:
+            "延岡市が計画や条例の案について市民から意見を募集するパブリックコメントの一覧です。募集期間・所管課・対象資料・結果を、延岡市公式ホームページの運用状況一覧に基づいて整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "パブリックコメント（意見募集）" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-public-comments-jsonld",
+              name: "延岡市 パブリックコメント（意見募集）データ",
+              description:
+                "延岡市が実施したパブリックコメント（意見募集）の募集期間・所管課・対象資料・結果を、延岡市公式ホームページに基づいて整理したデータです。",
+              url: `${SITE_URL}/public-comments`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/people":
       return makeResult(
         {
