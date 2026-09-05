@@ -39,6 +39,7 @@ import { documentPath, documentTypeLabel, documentResultLabel } from "../lib/arc
 import { policyOwnerName, policyOwnerLinkTo, type PolicyOwnerLookup } from "../lib/archivePolicies";
 import { civicTimelineEventsInFiscalYear } from "../lib/civicTimeline";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { ImplementationAttributionNote } from "../components/ImplementationAttributionNote";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -227,6 +228,9 @@ export function TimelineYearPage() {
                       </div>
                       <p className="mt-1 font-medium text-on-surface">{ev.title}</p>
                       <p className="mt-1 text-xs text-on-surface-variant">{humanizeDataNote(ev.summary)}</p>
+                      {/* Phase230-231：延岡市の事業でないもの（県立施設・県主催の催し等）を
+                          市の事業と誤読させないため、確認できたものだけ実施主体を明示する。 */}
+                      <ImplementationAttributionNote attribution={ev.implementation} className="mt-1" />
                     </li>
                   ))}
                 </ul>

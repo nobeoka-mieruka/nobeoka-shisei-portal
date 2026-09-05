@@ -1,4 +1,17 @@
 import type { ArchiveSourceTrustLevel } from "./sourceTrust";
+import type {
+  ImplementationAttribution,
+  ImplementationScope,
+  ImplementingBody,
+  NobeokaRelation,
+} from "./implementationAttribution";
+
+/**
+ * 実施主体の区分（Phase230）。定義・設定ルールの詳細は
+ * src/types/implementationAttribution.ts を参照。市政年表以外のデータ型へ展開する場合も
+ * 新しい区分体系を作らず、この型を再利用する。
+ */
+export type { ImplementationAttribution, ImplementationScope, ImplementingBody, NobeokaRelation };
 
 export type SNSPlatform =
   | "x"
@@ -402,6 +415,13 @@ export interface CivicTimelineEvent {
   sourceRefs: SourceEntry[];
   /** 日付の粒度・出典間の記載差異等の補足。 */
   notes?: string;
+  /**
+   * 実施主体の注記（Phase230で追加した任意フィールド）。
+   * 延岡市の事業か、宮崎県など他の団体の事業かを一次資料で確定できた出来事にだけ設定する。
+   * **未設定＝未確認**であり、「延岡市の事業」を意味しない（画面では「確認中」と表示する）。
+   * 全件への一括付与は行わない。設定ルールはsrc/types/implementationAttribution.tsを参照。
+   */
+  implementation?: ImplementationAttribution;
   lastVerifiedAt: string;
   verificationStatus: "verified" | "partiallyVerified";
 }

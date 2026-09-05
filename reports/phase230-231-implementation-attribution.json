@@ -1,0 +1,300 @@
+{
+  "phase": "Phase230-231",
+  "title": "実施主体（延岡市／宮崎県／共同）の最小構造化と、一次資料で確定できる案件だけの付与",
+  "generatedAt": "2026-09-05",
+  "baseUnchanged": {
+    "billVotes": 1178,
+    "policyCategories": 4,
+    "mayorPromises": 14,
+    "mayorPromiseMeasures": 33,
+    "councilSessions": 62,
+    "civicTimelineEvents": 219,
+    "validateDataWarnings": 21,
+    "humanActionRequired": 10
+  },
+  "phase230_audit": {
+    "question": "実施主体・共同実施・対象地域を表す概念が既存データ・型・バリデータに存在するか",
+    "method": "src/data配下の全JSON（80ファイル）の全キーを機械的に列挙し、body/organ/owner/agency/department/jurisdiction/scope/area/municipality/government/projectType/collaboration/entity/implement/joint/relation 等の語を含むキーを抽出。src/types配下14ファイルとscripts/validate-data.mjsを目視確認した。",
+    "inspectedDistinctJsonKeys": 33,
+    "reusableForImplementingBody": 0,
+    "newFieldsAdded": 1,
+    "examinedExistingFields": [
+      {
+        "field": "ownerType",
+        "file": "src/data/archivePolicies.json",
+        "values": ["mayor", "member"],
+        "verdict": "再利用不可。政策の『提案者（市長・議員）』であり、事業の実施主体ではない"
+      },
+      {
+        "field": "organizationType",
+        "file": "src/data/politicalFundOrganizations.json",
+        "values": ["後援会", "資金管理団体", "確認中"],
+        "verdict": "再利用不可。政治資金団体の種別"
+      },
+      {
+        "field": "jurisdiction",
+        "file": "src/data/committees.json",
+        "verdict": "再利用不可。市議会委員会の所管事項の文章"
+      },
+      {
+        "field": "scope",
+        "file": "src/data/councilSpeechIndex.json ほか",
+        "values": ["plenary", "committee"],
+        "verdict": "再利用不可。会議の種別（本会議・委員会）"
+      },
+      {
+        "field": "department",
+        "file": "src/data/cityGuideEntries.json",
+        "verdict": "再利用不可。市役所の担当課名（市役所案内用）"
+      },
+      {
+        "field": "sourceOrganization / organization",
+        "file": "各データのsourceRefs等",
+        "verdict": "再利用不可。『資料を公表した機関』であり『事業を実施した組織』とは別軸（県の報道発表で公表された市の事業、市の年表に載る県の事業のどちらもありうる）"
+      },
+      {
+        "field": "trustLevel（ArchiveSourceTrustLevel）",
+        "verdict": "再利用不可。資料の種類の軸。ただし『任意フィールド・全件一括付与しない』という運用の先例として設計を踏襲した"
+      },
+      {
+        "field": "category（CivicTimelineCategory）",
+        "verdict": "再利用不可。分野分類であって主体分類ではない（Phase228の指摘どおり）"
+      },
+      {
+        "field": "relationType / relationStatus / sourceEntityType / municipality / prefecture / existingImplementation / ownerId / organizationId / targetEntityType",
+        "verdict": "いずれも別目的。実施主体を表すものは存在しない"
+      }
+    ],
+    "conclusion": "実施主体を表すフィールドは既存に0件。既存フィールドでは表現できないため、任意フィールドを1つだけ追加した。既存レコードの書き換え（migration）は不要で、後方互換である。"
+  },
+  "phase230_schema": {
+    "typeModule": "src/types/implementationAttribution.ts",
+    "reExportedFrom": "src/types/index.ts",
+    "attachedTo": [
+      {
+        "type": "CivicTimelineEvent",
+        "file": "src/data/civicTimelineEvents.json",
+        "field": "implementation",
+        "optional": true
+      }
+    ],
+    "notAttachedYet": {
+      "types": ["ArchivePolicy", "MayorPromiseMeasureSnapshot", "BillVote"],
+      "reason": "一次資料で実施主体を確定できるレコードが現時点で無いため、空のフィールドを先行実装しない（Phase228の方針を踏襲）。展開する場合は本型を再利用し、新しい区分体系を作らないこと。"
+    },
+    "fields": {
+      "implementation": "ImplementationAttribution | 未設定（未設定＝未確認。延岡市の事業を意味しない）",
+      "implementation.implementingBody": ["nobeokaCity", "miyazakiPrefecture", "nationalGovernment", "cityPrefectureJoint", "wideAreaUnion", "other"],
+      "implementation.nobeokaRelation": ["cityProject", "prefecturalProjectInNobeoka", "cityPrefectureJoint", "nobeokaParticipant", "nobeokaBeneficiary", "relatedOnly"],
+      "implementation.implementationScope": ["nobeokaCity", "northernMiyazaki", "miyazakiPrefecture", "national", "other", "（資料に明記が無ければ未設定）"],
+      "implementation.attributionSourceUrl": "string（必須。同じレコードのsourceRefsに含まれるURLでなければvalidate:dataがerrorにする）",
+      "implementation.attributionNote": "string（任意。資料に明記された内容のみ）"
+    },
+    "namingDecision": "既存の型定義がcamelCaseのユニオン型（verificationStatus・ownerType・relationType等）を使っているため、指示書のsnake_case案ではなくcamelCaseを採用した。値の意味は指示書の案と同一。joint は既存Phase228案の語（cityPrefectureJoint）に合わせた。",
+    "validationRules": [
+      "未定義の区分値はerror",
+      "attributionSourceUrlがsourceRefsに無い場合はerror（根拠のない区分を作らせない）",
+      "implementingBody=nobeokaCity と nobeokaRelation=cityProject は必ず対で設定する",
+      "cityPrefectureJoint は implementingBody と nobeokaRelation の双方に設定されている場合のみ有効",
+      "未設定はerrorでもwarningでもない（推測による一括付与を促さないため）"
+    ]
+  },
+  "phase231_classification": {
+    "targetPool": "Phase226で延岡市関連として確認済みの県公式資料由来の出来事＋市政年表で県に言及する既存レコード（29件）",
+    "classified": 12,
+    "byResult": {
+      "CONFIRMED_CITY": 1,
+      "CONFIRMED_PREFECTURE": 9,
+      "CONFIRMED_JOINT": 1,
+      "CONFIRMED_OTHER": 0,
+      "UNCONFIRMED": 1
+    },
+    "note": "CONFIRMED_CITY 1件・CONFIRMED_PREFECTURE 9件・CONFIRMED_JOINT 1件の計11件へ implementation を付与した。civic-220（円卓トーク）は県主体のため CONFIRMED_PREFECTURE に含む（合計12件が付与済み＝市1・県10・共同1）。",
+    "confirmed": [
+      {
+        "id": "civic-219",
+        "title": "宮崎県が防災実践塾を延岡市で実施すると発表",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "implementationScope": "nobeokaCity",
+        "nobeokaRelation": "nobeokaParticipant",
+        "sourceUrl": "https://www.pref.miyazaki.lg.jp/kiki-kikikanri/press/2026/08/20260818141134.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "宮崎県（総務部危機管理局危機管理課）の報道発表。延岡市（災害支援課）は参加機関として明記。開催地が延岡市であることを理由に市の事業とはしない。"
+      },
+      {
+        "id": "civic-220",
+        "title": "宮崎県が円卓トーク（東臼杵ブロック）を延岡市役所で開催と発表",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "implementationScope": "northernMiyazaki",
+        "nobeokaRelation": "nobeokaParticipant",
+        "sourceUrl": "https://www.pref.miyazaki.lg.jp/shichoson/press/2026/08/20260803135738.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "宮崎県（総務部市町村課）主催。延岡市長は出席者として明記。会場が延岡市役所であることは主催を意味しない。主催者と参加者を区別した。"
+      },
+      {
+        "id": "civic-198",
+        "title": "宮崎県・延岡市・旭化成の三者で公害防止協定を締結",
+        "result": "CONFIRMED_JOINT",
+        "implementingBody": "cityPrefectureJoint",
+        "implementationScope": "nobeokaCity",
+        "nobeokaRelation": "cityPrefectureJoint",
+        "sourceUrl": "https://dl.ndl.go.jp/pid/9774712/1/496",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "延岡市史（1983年版上巻）の年表に県・市・旭化成の三者による締結と明記。双方が締結当事者として資料にあるため共同とした（本Phaseで唯一のjoint）。"
+      },
+      {
+        "id": "civic-148",
+        "title": "延岡市地域医療を守る条例制定",
+        "result": "CONFIRMED_CITY",
+        "implementingBody": "nobeokaCity",
+        "implementationScope": "nobeokaCity",
+        "nobeokaRelation": "cityProject",
+        "sourceUrl": "https://web.archive.org/web/20140715143912/http://www.city.nobeoka.miyazaki.jp/contents/kikaku/keieiseisaku/kouhou/2009year.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "延岡市が制定した条例。背景に県立延岡病院の医師退職問題があるため県の案件と誤読されうるが、制定主体は延岡市。"
+      },
+      {
+        "id": "civic-069",
+        "title": "県立延岡病院に新救命救急センターが完成",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1687.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "県立病院の施設整備。延岡市の負担・共同実施を示す記載は資料に無いため joint にしない。対象地域は資料に明記が無いため未設定。"
+      },
+      {
+        "id": "civic-084",
+        "title": "県立延岡図書館再建",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "延岡市公式サイトの年表に「県立」と明記された施設。"
+      },
+      {
+        "id": "civic-086",
+        "title": "県立延岡工業学校が開校",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "同上。"
+      },
+      {
+        "id": "civic-097",
+        "title": "県立延岡恒富高等学校・延岡岡富高等学校設置",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10719.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "同上。"
+      },
+      {
+        "id": "civic-090",
+        "title": "県立延岡ろう学校設立",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "同上。"
+      },
+      {
+        "id": "civic-102",
+        "title": "県立延岡商業高等学校開校",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/10721.html",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "同上。"
+      },
+      {
+        "id": "civic-213",
+        "title": "県立延岡星雲高等学校 開校（延岡西高・延岡東高を再編統合）",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4389.pdf",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "県立高等学校の再編統合。既存レコードの補足にも「延岡市自体の施策ではない」と記録済み。"
+      },
+      {
+        "id": "civic-214",
+        "title": "県立延岡しろやま支援学校 創立（3特別支援学校を統合）",
+        "result": "CONFIRMED_PREFECTURE",
+        "implementingBody": "miyazakiPrefecture",
+        "nobeokaRelation": "relatedOnly",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4389.pdf",
+        "sourceLevel": "LEVEL_A_PRIMARY",
+        "reason": "県立特別支援学校の再編統合。同上。"
+      }
+    ],
+    "unconfirmedOrExcluded": [
+      {
+        "id": "civic-120",
+        "title": "木工団地操業開始、県立延岡東高校開校",
+        "result": "UNCONFIRMED",
+        "reason": "1レコードに主体の異なる2つの出来事（木工団地・県立高校）が含まれ、単一の実施主体を確定できない。分割は本Phaseの範囲外。"
+      },
+      {
+        "id": "civic-112",
+        "title": "宮崎県北部広域市町村圏協議会発足",
+        "result": "UNCONFIRMED",
+        "reason": "構成団体（延岡市が参加していること）が出典に明記されていない。名称からの推測で wideAreaUnion / nobeokaParticipant にしない。"
+      },
+      {
+        "id": "civic-068",
+        "title": "ドクターヘリの運航開始",
+        "result": "UNCONFIRMED",
+        "reason": "運航主体（県・病院・国庫補助の別）が出典に明記されていない。"
+      },
+      {
+        "id": "civic-015",
+        "title": "市警察廃止・県警察署発足",
+        "result": "UNCONFIRMED",
+        "reason": "警察法改正に伴う制度変更であり、国・県・市のいずれを実施主体とするかを出典が明示していない。"
+      },
+      {
+        "subject": "宮崎県9月補正予算（一般会計補正予算第3号）／延岡港海岸（延岡市）外3港 90,000千円",
+        "result": "EXCLUDED_PREFECTURAL_BUDGET",
+        "reason": "宮崎県の予算であり延岡市の予算ではない。financeDashboard.json・archiveFiscalYears.json 等の市の財政データへは登録しない（Phase226の判断を維持）。実データに0件であることをテストで固定した（scripts/test-implementation-attribution.mjs）。"
+      },
+      {
+        "subject": "宮崎県議会の日程・質問・議決結果",
+        "result": "EXCLUDED_PREFECTURAL_ASSEMBLY",
+        "reason": "延岡市議会のデータ（councilSessions・billVotes・generalQuestions）へ入れない。0件であることをテストで固定した。"
+      },
+      {
+        "subject": "議案 2024-06-gian-23（宮崎県後期高齢者医療広域連合規約の変更）／2025-06-gian-23（財産の取得〈宮崎県体育館駐車場整備事業用地〉）",
+        "result": "UNCONFIRMED",
+        "reason": "議案そのものは延岡市議会の議決であり、対象事業の実施主体とは別軸。用地取得後の事業主体・費用負担が会議録から一義に確定できないため、BillVoteへの区分付与は見送った。"
+      },
+      {
+        "subject": "Phase228の県市連携候補142件（市政年表20件・会議録の質問項目120件・議案2件）",
+        "result": "NOT_MECHANICALLY_CLASSIFIED",
+        "reason": "「県」「県道」「国・県」等のキーワード一致は実施主体の根拠にならない（Phase228の結論）。会議録の質問項目120件は『国・県への要望』『県の補助制度の活用』を含み、共同事業とは限らないため一切分類していない。"
+      }
+    ]
+  },
+  "display": {
+    "pages": ["/history", "/timeline/:year"],
+    "component": "src/components/ImplementationAttributionNote.tsx",
+    "labels": "src/lib/implementationAttribution.ts（内部コードは画面に出さず、市民向けの日本語へ変換する）",
+    "unsetHandling": "注記が無い出来事には何も描画しない。ページ冒頭で『表示が無い出来事は実施主体を確認中であり、延岡市の事業であることを意味しません』と文字で説明する。CSV出力では未確認を「確認中」と書き、空欄や「延岡市」で埋めない。"
+  },
+  "verification": {
+    "validateData": "errors=0 warnings=21（据え置き）",
+    "typecheck": "成功",
+    "lint": "警告4件（すべて既存。新規0）",
+    "test": "372 checks 成功（Phase230-231の新規7件を含む。失敗0）",
+    "build": "成功。prerender 2272/2272＋404.html、validate:seo failures=0 warnings=0、validate:content errors=0 warnings=0、内部リンク切れ0、公開画面のクリック可能なリンク切れ0、scan:era 0件",
+    "countsUnchanged": "議案1,178／政策分野4／個別公約14／個別施策33／会期62／市政年表219"
+  }
+}
