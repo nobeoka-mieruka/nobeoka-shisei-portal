@@ -91,11 +91,29 @@
 - 県の資料は「延岡市の関与・負担・共同実施が資料に明示されているもの」だけ候補化する
 - `CivicTimelineEvent` の型コメントに恒久ルールとして明記済み
 
-### 新聞2紙の制約（重要）
+### 新聞サイトの扱い（正式方針）
 
-`the-miyanichi.co.jp` と `yukan-daily.co.jp` は **robots.txt で Claude 系クローラーを全面 Disallow** している。
-記事取得・サイト内検索はできないため、**この2紙の自動更新監視はエージェント単独では実現できない**。
-継続するなら「人手のブラウザ確認で見出し・掲載日を台帳へ入力 → エージェントは市公式側の一次資料探索のみ担当」という分担になる。
+`the-miyanichi.co.jp`（宮崎日日新聞）と `yukan-daily.co.jp`（夕刊デイリー）は
+**robots.txt で Claude 系クローラーを全面 Disallow** している。
+**両紙の robots.txt とサイト側のクロール方針を尊重し、自動クロール・自動収集の対象には追加しない。**
+
+今後も `sourceLevel = SECONDARY / DISCOVERY` として扱い、次の経路で記事の存在を把握した場合にのみ、
+**一次資料を探すための手掛かり**として使用する。
+
+- 人による通常のブラウザ閲覧
+- 正規に取得できる検索結果・記事メタデータ
+- 公式サイトからの紹介
+- 他資料からの記事参照
+
+**禁止**: robots 制限の回避／自動巡回の強行／paywall 回避／新聞本文の大量保存／
+新聞単独での市政データ確定／新聞単独での GREEN 自動本番反映。
+
+重要案件を新聞で発見した場合の流れ:
+
+```
+新聞 → 延岡市・延岡市議会・宮崎県・宮崎県議会等の一次資料を探す → 一次資料で確認 → 確定
+```
+
 調査台帳は `reports/phase227-news-discovery-ledger.json`。
 
 ## 品質 baseline（すべて 0 が安定版の条件）
@@ -171,6 +189,38 @@
 `audit:*` と `smoke:production` は `playwright-core` とローカル Chromium を使います。
 アクセシビリティ監査（`scripts/audit-accessibility.mjs`）の再実行には
 `npm i --no-save playwright @axe-core/playwright` が必要です（Cloudflare Pages のビルドを重くしないため package.json には入れていません）。
+
+## 次の小規模改善候補（方針決定済み・未実装）
+
+### 県事業と市事業の構造的な区別
+
+Phase226・228 で県市連携案件が増えたため、**県の事業を延岡市単独の事業と誤認させない**ための
+最小限の構造化を採用する方針が決まっている。**大規模な schema migration は行わない。**
+
+既存構造を確認したうえで、必要なら**任意フィールド**として `implementingBody` / `implementationScope` 相当を追加する。
+既存構造で表現できない場合のみ `nobeokaRelation` 相当も検討する。
+**既存の enum・命名規則がある場合はそちらを優先する。**
+
+| フィールド | 概念例 |
+| --- | --- |
+| `implementingBody` | `nobeoka_city` / `miyazaki_prefecture` / `national_government` / `joint` / `other` |
+| `implementationScope` | `nobeoka_city` / `northern_miyazaki` / `miyazaki_prefecture` / `national` |
+| `nobeokaRelation` | `implemented_in_nobeoka` / `nobeoka_participant` / `nobeoka_beneficiary` / `city_prefecture_joint` / `related_only` |
+
+**設定のルール**
+
+- 一次資料で確定できる案件だけ設定する。不明なら null / 未設定のままにする
+- 県の事業を延岡市の事業へ変換しない
+- 県の予算を延岡市の財政データへ入れない
+- 県議会を延岡市議会のデータへ入れない
+- **「延岡で開催」というだけで延岡市の事業と判定しない**
+
+UI では「実施主体：宮崎県」「対象地域：延岡市」「延岡市との関係：共同実施」のように市民向けの日本語へ変換する。
+
+**この構造化が無いことによる現在の制約**
+
+- 宮崎県9月補正の「延岡港海岸（延岡市）外3港 90,000千円」を、延岡市の事業費と誤読させずに扱えない（Phase226 が登録を見送った理由）
+- 市政年表の「県立◯◯」「県道」等20件は、県が設置した施設が市域にあるだけで県市共同事業ではない。区別が無いまま提示すると誤誘導になる（Phase228 の指摘）
 
 ## 既知の残課題（安定版として許容、次回以降の候補）
 
