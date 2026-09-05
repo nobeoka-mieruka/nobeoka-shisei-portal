@@ -45,10 +45,16 @@ async function main() {
     return;
   }
 
-  // 令和8年5月臨時会・6月定例会に相当する会期ラベルが新たに現れたかを、キーワードで判定する
+  // まだ会議録が公開されていない会期が新たに現れたかを、会期ラベルで判定する
   // （既存のparseSessionLabel()が返すlabelには「令和8年 第◯回定例会」等の表記が含まれる）。
-  const knownAsOf20260813 = new Set(["令和 8年 第24回定例会"]);
-  const newSessions = sessions.filter((s) => !knownAsOf20260813.has(s.label?.trim()));
+  //
+  // 【2026-09-05更新】第25回臨時会（令和8年5月）・第26回定例会（令和8年6月）は会議録が公開され、
+  // 該当24件のvoteMethod・committeeを会議録本文（R080508A／R080612A／R080626A／R080703A）から
+  // 確認・登録済みのため、「既知（対応済み）」の集合へ移した。これを更新しないと、対応済みの
+  // 会期を毎日「新しい会期」として誤検出し、statusを不要にMANUAL_REVIEWへ倒してしまう。
+  // 次に待っているのは令和8年9月定例会（第27回相当、議案第48号のvoteMethod・committee）。
+  const knownSessions = new Set(["令和 8年 第24回定例会", "令和 8年 第25回臨時会", "令和 8年 第26回定例会"]);
+  const newSessions = sessions.filter((s) => !knownSessions.has(s.label?.trim()));
 
   task004.lastCheckedAt = today;
   task004.attemptCount = (task004.attemptCount ?? 0) + 1;
