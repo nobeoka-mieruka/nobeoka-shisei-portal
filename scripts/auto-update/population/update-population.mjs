@@ -18,11 +18,12 @@
  *   - 人口・世帯数統計xls（src/data/archiveCrawlerTargets.jsonの id="population" と同一URL。
  *     「現住人口及び世帯数の推移」、月次データ。実際に公開されている列（年月・人口・男・女・世帯数）
  *     のみを読み取る。存在しない項目は取得しない）。
- *   - 上記xlsが404等で取得できない場合のフォールバック：延岡市統計ページ
- *     （/soshiki/1/1364.html。archiveCrawlerTargets.jsonのpopulationのnotesに記載された、
- *     添付ファイルID変更時に最新IDを確認するための起点ページ）を core/fetch.mjs の
- *     fetchWithRetry で到達性のみ確認する（bills/update-bills.mjsのprobeNewDocumentと同じ、
- *     「動的に見つかった付随資料をcore/fetch.mjsで確認する」という設計を踏襲）。
+ *   - 出典URLは固定せず、公式「延岡市の統計」ページ（/soshiki/1/1364.html）から
+ *     現住人口系列のExcelリンクを解決する（Phase249、resolve-population-source.mjs）。
+ *     延岡市は統計ファイルを更新するたびに添付ファイルIDを変え、古いIDを404にするため、
+ *     IDを固定すると差し替えのたびにパイプラインが止まる。一覧ページ側が壊れた場合は
+ *     既知URL（PINNED_POPULATION_XLS_URL）へフォールバックする。
+ *     404・301/302・ファイル差し替え・添付ID変更・HTML誤認・古い版への逆戻りを検出する。
  *
  * 判定方針（新しい期間の追加を原則とする）：
  *   - xlsの最新行（人口>0の最終行）の基準日が、本番データ（src/data/archiveFiscalYears.json、
@@ -38,7 +39,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchCitySiteBuffer, sha256OfBuffer, ALLOWED_HOSTS as CITY_SITE_ALLOWED_HOSTS } from "../../lib/city-site-fetch.mjs";
+import { fetchCitySiteText, fetchCitySiteWithMeta, sha256OfBuffer, ALLOWED_HOSTS as CITY_SITE_ALLOWED_HOSTS } from "../../lib/city-site-fetch.mjs";
+import { resolvePopulationSource, highestSeverity, PINNED_POPULATION_XLS_URL, POPULATION_STATS_PAGE_URL } from "./resolve-population-source.mjs";
 import { fetchWithRetry } from "../core/fetch.mjs";
 import { classifyItem, checkCircuitBreaker } from "../core/classify.mjs";
 import { validateEntry } from "../core/validate.mjs";
@@ -46,13 +48,13 @@ import { writeRunReport, updateStatus, ROOT } from "../core/report.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TARGET = "population";
-const PARSER_VERSION = "update-population.mjs@2026-08";
+const PARSER_VERSION = "update-population.mjs@2026-09（出典URL自動解決対応）";
 const verbose = process.argv.includes("--verbose");
 
 // src/data/archiveCrawlerTargets.json の id="population" と同一URL（推測で新規URLを作らない）。
-const POPULATION_XLS_URL = "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls";
+const POPULATION_XLS_URL = PINNED_POPULATION_XLS_URL;
 // archiveCrawlerTargets.jsonのpopulation.notesに記載された、添付ファイルID変更時の確認起点ページ。
-const POPULATION_STATS_FALLBACK_URL = "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html";
+const POPULATION_STATS_FALLBACK_URL = POPULATION_STATS_PAGE_URL;
 
 const ARCHIVE_FISCAL_YEARS_PATH = join(ROOT, "src", "data", "archiveFiscalYears.json");
 const STATE_DIR = join(__dirname, "state");
@@ -214,13 +216,41 @@ async function main() {
   const baseline = loadProductionBaseline();
   log("[update-population] 本番データの既知最新値:", baseline);
 
-  let fetchResult = { buffer: null, error: null };
-  try {
-    const buffer = await fetchCitySiteBuffer(POPULATION_XLS_URL);
-    fetchResult = { buffer, error: null };
-  } catch (e) {
-    fetchResult = { buffer: null, error: e.message };
+  // Phase249：固定の添付ファイルIDを直接叩くのをやめ、公式「延岡市の統計」ページから
+  // 現住人口系列のExcelを解決する。IDが差し替わっても自動更新が止まらないようにするため。
+  // 既知URL（PINNED_POPULATION_XLS_URL）は一覧ページ側が壊れたときのfallbackとしてのみ使う。
+  const resolution = await resolvePopulationSource({
+    fetchText: (url) => fetchCitySiteText(url),
+    fetchBinary: async (url) => {
+      const meta = await fetchCitySiteWithMeta(url);
+      return { buffer: meta.buffer, finalUrl: meta.finalUrl };
+    },
+    pinnedUrl: POPULATION_XLS_URL,
+    statsPageUrl: POPULATION_STATS_FALLBACK_URL,
+    baselineReferenceDate: baseline?.referenceDate ?? null,
+  });
+  const resolvedUrl = resolution.resolvedUrl ?? POPULATION_XLS_URL;
+  const resolutionSeverity = highestSeverity(resolution.issues);
+  for (const issue of resolution.issues) {
+    console.log(`[update-population] [${issue.severity}] ${issue.code}: ${issue.message}`);
   }
+  log("[update-population] 出典URL解決:", {
+    resolvedUrl,
+    resolvedFrom: resolution.resolvedFrom,
+    label: resolution.linkLabel,
+    labelReferenceDate: resolution.labelReferenceDate,
+    diagnostics: resolution.diagnostics,
+  });
+
+  const fetchResult = resolution.ok
+    ? { buffer: resolution.buffer, error: null }
+    : {
+        buffer: null,
+        error: resolution.issues
+          .filter((i) => i.severity === "RED")
+          .map((i) => `${i.code}: ${i.message}`)
+          .join(" / ") || "出典URLを解決できませんでした",
+      };
 
   const entries = [];
   let circuitBreakerNewCount = 0;
@@ -229,7 +259,7 @@ async function main() {
     console.log(`[update-population] 主資料の取得に失敗: ${fetchResult.error}。フォールバックページを確認します。`);
     const fallback = await probeFallback();
     const validation = validateEntry(
-      { sourceUrl: POPULATION_XLS_URL, outcome: "error" },
+      { sourceUrl: resolvedUrl, outcome: "error" },
       { allowedHosts: CITY_SITE_ALLOWED_HOSTS, requireSessionId: false, requiredFields: ["outcome"] },
     );
     const result = classifyItem({
@@ -244,7 +274,7 @@ async function main() {
       anomalyDetected: false,
     });
     entries.push({
-      sourceUrl: POPULATION_XLS_URL,
+      sourceUrl: resolvedUrl,
       sourceType: "人口・世帯数統計xls（延岡市公式）",
       sessionId: null,
       outcome: "error",
@@ -278,7 +308,7 @@ async function main() {
         anomalyDetected: false,
       });
       entries.push({
-        sourceUrl: POPULATION_XLS_URL,
+        sourceUrl: resolvedUrl,
         sourceType: "人口・世帯数統計xls（延岡市公式）",
         sessionId: null,
         outcome: "error",
@@ -299,7 +329,7 @@ async function main() {
       if (outcome === "new") circuitBreakerNewCount += 1;
 
       const validation = validateEntry(
-        { sourceUrl: POPULATION_XLS_URL, outcome },
+        { sourceUrl: resolvedUrl, outcome },
         { allowedHosts: CITY_SITE_ALLOWED_HOSTS, requireSessionId: false, requiredFields: ["outcome"] },
       );
 
@@ -333,7 +363,7 @@ async function main() {
       }
 
       entries.push({
-        sourceUrl: POPULATION_XLS_URL,
+        sourceUrl: resolvedUrl,
         sourceType: "人口・世帯数統計xls（延岡市公式、現住人口及び世帯数の推移）",
         sessionId: null,
         outcome: outcome === "error" ? "error" : outcome,
@@ -369,14 +399,35 @@ async function main() {
     previousKnownTotal: 1, // 監視対象resourceは常に1件（人口xls）。
   });
 
-  const overallLevel = circuitBreaker.tripped ? "RED" : summary.red > 0 ? "RED" : summary.yellow > 0 ? "YELLOW" : "GREEN";
+  // Phase249：出典URL解決の段階で検出した異常（リダイレクト・添付ID変更・逆戻り等）も総合判定へ反映する。
+  // INFO（添付ファイルIDが変わったが一覧ページから解決できた）はGREENのままにする
+  // ＝IDの差し替えだけで自動更新が止まらないことが、この改善の目的であるため。
+  const baseLevel = circuitBreaker.tripped ? "RED" : summary.red > 0 ? "RED" : summary.yellow > 0 ? "YELLOW" : "GREEN";
+  const overallLevel =
+    baseLevel === "RED" || resolutionSeverity === "RED"
+      ? "RED"
+      : baseLevel === "YELLOW" || resolutionSeverity === "YELLOW"
+        ? "YELLOW"
+        : "GREEN";
 
   const report = {
     target: TARGET,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: true,
-    watchedSource: POPULATION_XLS_URL,
+    watchedSource: resolvedUrl,
+    watchedSourceResolution: {
+      resolvedFrom: resolution.resolvedFrom,
+      statsPageUrl: POPULATION_STATS_FALLBACK_URL,
+      pinnedUrl: POPULATION_XLS_URL,
+      linkLabel: resolution.linkLabel,
+      labelReferenceDate: resolution.labelReferenceDate,
+      attachmentIdChanged: resolution.attachmentIdChanged,
+      bufferKind: resolution.bufferKind,
+      severity: resolutionSeverity,
+      issues: resolution.issues,
+      diagnostics: resolution.diagnostics,
+    },
     baseScriptExitCode: 0,
     overallLevel,
     summary,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T04:51:07.110Z",
+  "generatedAt": "2026-09-12T08:15:55.199Z",
   "baseUrl": "http://localhost:4194",
   "checkedUrls": 70,
   "hydrationErrors": 0,
@@ -175,7 +175,7 @@
       "hydrationErrors": 0,
       "consoleErrors": 0,
       "prerenderChars": 594,
-      "hydratedChars": 915
+      "hydratedChars": 1012
     },
     {
       "url": "http://localhost:4194/compare/population/?years=2026",
@@ -184,7 +184,7 @@
       "hydrationErrors": 0,
       "consoleErrors": 0,
       "prerenderChars": 594,
-      "hydratedChars": 923
+      "hydratedChars": 1020
     },
     {
       "url": "http://localhost:4194/compare/population/?years=2026,2025",
@@ -193,7 +193,7 @@
       "hydrationErrors": 0,
       "consoleErrors": 0,
       "prerenderChars": 594,
-      "hydratedChars": 1038
+      "hydratedChars": 1266
     },
     {
       "url": "http://localhost:4194/compare/policies/",

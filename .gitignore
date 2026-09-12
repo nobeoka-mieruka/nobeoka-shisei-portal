@@ -50,6 +50,13 @@ scripts/.cache/
 scripts/_sync-state.json
 scripts/_archive-crawler-sync-state.json
 
+# Phase251：scripts/qa-checks/配下の横断監査が毎回上書きする出力ファイル。
+# 実行のたびにgeneratedAtが変わるだけの一時生成物で、`npm run quality:check` でいつでも再生成できる。
+# 日付・Phase名の付いた正式な監査証跡（reports/phase*-*.json、reports/auto-update/run-*-<timestamp>.json、
+# reports/data-audit-YYYY-MM-DD.json 等）とは異なり履歴を持たない（同じファイルを上書きし続ける）ため、
+# Git管理対象から外す。scripts/_*.json と同じ「_プレフィックス＝生成物」の扱いに揃えた。
+reports/qa-checks/_out-*.json
+
 # scripts/auto-update/{finance,population}/update-*.mjs のクロス実行ハッシュ比較用ローカル状態
 # （前回取得時のcontent hash等）。上記と同じ理由でGit管理外とする。
 scripts/auto-update/*/state/
@@ -71,6 +78,9 @@ scripts/auto-update/*/state/
 reports/phase191-responsive/screenshots/
 reports/phase191-responsive/audit-*.json
 !reports/phase191-responsive/audit-*-summary.json
+# Phase251：ただし audit-latest-summary.json は実行のたびに上書きされる一時生成物
+# （Git管理しているのは audit-before/after/phase197-after のようにPhase名を付けて固定した比較用スナップショットのみ）。
+reports/phase191-responsive/audit-latest-summary.json
 
 # Phase197 タップ領域分類監査の要素切り出し画像（バイナリ・再生成可能）。
 # 分類結果（reports/phase197-*.json、reports/phase197-*.md）はコミットする。

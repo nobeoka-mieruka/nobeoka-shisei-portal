@@ -47,6 +47,11 @@ export function ComparePopulationPage() {
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           延岡市の人口を、最大4年度まで選んで比較できます。基準日は資料により1月1日・7月1日等が混在するため、各年度の基準日を必ずご確認ください。
         </p>
+        {/* Phase248：世帯数を26年度分掲載したことに伴い、人口・世帯数がどの系列の数値で、
+            どの範囲（市域）の集計なのかを、表を見る前に読める位置へ明示する。 */}
+        <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
+          人口・世帯数はいずれも延岡市「現住人口及び世帯数の推移」の同じ表・同じ基準日の数値（現住人口の系列）です。住民基本台帳や国勢調査の人口・世帯数とは別の系列のため、混ぜて比べることはできません。
+        </p>
       </div>
 
       <SectionCard title="比較する年度を選ぶ">
@@ -98,6 +103,11 @@ export function ComparePopulationPage() {
               { header: "基準日", render: (y) => y.population?.referenceDate ?? "確認中" },
             ]}
           />
+          {/* Phase248：編入合併の前後を含む年度を選ぶと市域の広がりの分だけ増えて見えるため、
+              表の直後に理由を書く（数値そのものは公式資料のとおりで、当サイトの補正はしていない）。 */}
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+            数値は当時の市域（行政区域）で集計されたもので、現在の市域に組み替えた数値ではありません。平成18年2月20日に北方町・北浦町、平成19年3月31日に北川町が編入されたため、その前後の年度を直接比べると、市域が広がった分だけ増えて見えます。
+          </p>
         </SectionCard>
       )}
     </div>

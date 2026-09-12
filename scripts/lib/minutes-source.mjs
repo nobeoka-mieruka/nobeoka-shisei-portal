@@ -285,9 +285,15 @@ function sjisPercentEncode(str) {
   return out;
 }
 
-async function fetchWithRetry(url, init, retries = RETRIES) {
+async function fetchWithRetry(url, init, retries = RETRIES, options = {}) {
+  // Phase250：会期一覧（木構造ナビゲーション）の応答は「まだ公開されていない会期が後から増える」
+  // ため、永続キャッシュを読むと新しい会期をいつまでも検出できない（会議録公開の監視が機能しない）。
+  // 実際に、ローカルキャッシュが残っていると令和8年のタブが「第24回定例会」1件しか返らず、
+  // 公式サイト側には既に第25回臨時会・第26回定例会が載っている、という食い違いが再現した。
+  // 会議録本文（確定した過去の発言）はこれまでどおりキャッシュする。
+  const noCache = options.noCache === true;
   const cacheKey = cacheKeyFor(url, init);
-  const cached = readCache(cacheKey);
+  const cached = noCache ? null : readCache(cacheKey);
   if (cached) return cached;
 
   // 同時に発行される複数リクエストの開始時刻を少しずつずらし、バーストを避ける。
@@ -331,7 +337,7 @@ async function fetchWithRetry(url, init, retries = RETRIES) {
       const contentType = res.headers.get("content-type") ?? "";
       registerSuccess(startedAt);
       const result = { status: res.status, contentType, buf };
-      writeCache(cacheKey, result);
+      if (!noCache) writeCache(cacheKey, result);
       return result;
     } catch (e) {
       lastError = e;
@@ -413,11 +419,16 @@ export async function listMeetingDays({ code, sessionLabel }) {
 
 async function postTreedepth(code, treedepth) {
   const body = `Code=${code}&treedepth=${sjisPercentEncode(treedepth)}&page=&fileName=`;
-  const { buf } = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe`, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body,
-  });
+  const { buf } = await fetchWithRetry(
+    `${BASE}/cgi-bin3/See.exe`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    },
+    RETRIES,
+    { noCache: true }, // Phase250：会期一覧は増えるためキャッシュしない。
+  );
   return decodeSjis(buf);
 }
 
@@ -493,7 +504,10 @@ export async function resolveYearTreedepth({ code, year }) {
   const eraNum = year - config.startYear;
   const targetLabel = config.label(eraNum);
 
-  const rootHtml = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe?Code=${code}`, {}).then(({ buf }) => decodeSjis(buf));
+  // Phase250：年タブ一覧もキャッシュしない（新しい年・会期が後から現れるため）。
+  const rootHtml = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe?Code=${code}`, {}, RETRIES, { noCache: true }).then(({ buf }) =>
+    decodeSjis(buf),
+  );
   let tabs = parseYearTabs(rootHtml);
 
   const direct = tabs.find((t) => t.altLabel === targetLabel);

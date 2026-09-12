@@ -67,8 +67,14 @@ async function main() {
     // confirmed（COMPLETED）へは、実際の抽出作業が完了するまで進めない。
     task004.status = "MANUAL_REVIEW";
     task004.blockedReasonCode = "MANUAL_REVIEW_REQUIRED";
-    task004.reasonSummary = `令和8年5月臨時会・6月定例会の会議録が公開されたことを自動確認スクリプトが検出（${today}）。voteMethod・committeeの抽出には氏名照合を伴う手動確認が必要（billVotes24件）。`;
-    task004.notes = `${task004.notes}\n【自動確認 ${today}：状態遷移】check-pending-council-minutes.mjsが新しい会期を検出し（${labels}）、status を WAITING_EXTERNAL から MANUAL_REVIEW へ自動遷移しました。実際の議案別voteMethod・committeeの抽出・登録は、Phase101/107と同様の手動確認プロセス（氏名照合を伴う、このスクリプトでは行わない）で別途対応してください。`;
+    // Phase250：遷移時に書き込む文言は「今まさに待っている対象」を指すようにする。
+    // 旧文言は令和8年5月臨時会・6月定例会を待っていた頃のままで、当時の対象24件は
+    // 2026-09-05に登録済み。いま待っているのは令和8年9月定例会（第27回）であり、
+    // 会議録が公開されたら議案第48号のvoteMethod・committee（1件）に加えて、
+    // 一般質問13件（gq2026-09-*、質問通告書ベースの「予定」として登録済み）の
+    // 実際の質問内容・答弁を会議録本文で確認する作業が発生する。
+    task004.reasonSummary = `令和8年9月定例会（第27回相当）の会議録が公開されたことを自動確認スクリプトが検出（${today}：${labels}）。議案第48号（2026-09-gian-48）のvoteMethod・committeeの確定と、同会期の一般質問13件（質問通告書ベースで登録済みの「予定」）の会議録本文による確認が必要。いずれも氏名・発言の照合を伴うため手動確認とする。`;
+    task004.notes = `${task004.notes}\n【自動確認 ${today}：状態遷移】check-pending-council-minutes.mjsが新しい会期を検出し（${labels}）、status を WAITING_EXTERNAL から MANUAL_REVIEW へ自動遷移しました。対応する作業は次の2つで、いずれもこのスクリプトでは行いません。(1) 議案第48号のvoteMethod・committeeを会議録本文から確定する（Phase101/107と同じ手動確認プロセス）。(2) 令和8年9月定例会の一般質問13件について、既に「予定」として登録済みのレコード（gq2026-09-*）へ会議録の確認結果を紐付ける。**新しい質問レコードを13件作らないこと**（予定版と実績版の二重登録を禁止する）。`;
     // 「資料が公開されたか」の自動確認としての役目は終えたため、自動再確認は止める
     // （以後は人手（AI含む）による抽出作業の完了を待つ段階のため）。
     task004.autoRecheck = false;

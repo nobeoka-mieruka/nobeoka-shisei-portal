@@ -182,5 +182,9 @@ export async function fetchCitySiteWithMeta(url) {
     etag: res.headers.get("etag"),
     lastModified: res.headers.get("last-modified"),
     contentLength: res.headers.get("content-length"),
+    // Phase249：301/302でURLが移動した場合に呼び出し側が検出できるよう、最終URLとリダイレクト有無を返す。
+    // （ホストが許可ドメイン外へ移った場合は fetchCitySite 内で既に遮断済み。）
+    finalUrl: res.url || url,
+    redirected: Boolean(res.redirected),
   };
 }

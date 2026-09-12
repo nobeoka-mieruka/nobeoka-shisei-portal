@@ -55,6 +55,32 @@ function formatIndexOrConfirming(value: number | null | undefined): string {
   return value.toFixed(2);
 }
 
+/**
+ * Phase248：人口・世帯数の系列定義と、市域（集計範囲）の変更をまとめた注記。
+ *
+ * 掲載している人口・世帯数は、いずれも延岡市「現住人口及び世帯数の推移」の**同じ表の同じ行**
+ * （同一基準日）から取得した「現住人口」系列である。同じ統計ページで別に公表されている
+ * 「住民基本台帳による町丁目別人口・世帯数」「国勢調査」とは別系列のため、混ぜて比較できない。
+ *
+ * また、この表は当時の行政区域ベースで、遡及的な市域の組み替えをしていない
+ * （平成18年2月20日の北方町・北浦町編入、平成19年3月31日の北川町編入の前後で
+ * 人口・世帯数ともに実際の段差があることを月次データで確認済み）。
+ * このため、編入前後の年度を直接比較すると「増えた」ように見える点を必ず添える。
+ */
+const POPULATION_BOUNDARY_NOTE =
+  "この数値は当時の市域（行政区域）で集計されており、現在の市域に組み替えた数値ではありません。" +
+  "平成18年2月20日に北方町・北浦町、平成19年3月31日に北川町が編入されたため、その前後の年度を直接比べると市域の広がりの分だけ増えて見えます。";
+
+const POPULATION_SERIES_NOTE =
+  "延岡市「現住人口及び世帯数の推移」の各年度の基準日時点の現住人口です（基準日は年度により異なる場合があります）。" +
+  "住民基本台帳人口・国勢調査人口とは別の系列のため、混ぜて比較できません。" +
+  POPULATION_BOUNDARY_NOTE;
+
+const HOUSEHOLDS_SERIES_NOTE =
+  "同じ表・同じ基準日の行から取得した、現住人口に対応する世帯数です。" +
+  "住民基本台帳の世帯数・国勢調査の世帯数とは別の系列のため、混ぜて比較できません。" +
+  POPULATION_BOUNDARY_NOTE;
+
 export const FINANCE_METRICS: FinanceMetricDefinition[] = [
   {
     key: "population",
@@ -62,7 +88,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     unit: "人",
     group: "population",
     chartKind: "line",
-    definitionNote: "各年度の基準日時点の人口（基準日は年度により異なる場合があります）。",
+    definitionNote: POPULATION_SERIES_NOTE,
     formatValue: formatPersonOrConfirming,
     getPoint: (y) => ({ value: y.population?.population ?? null, sourceRefs: y.population?.sourceRefs ?? [] }),
   },
@@ -72,7 +98,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     unit: "世帯",
     group: "population",
     chartKind: "line",
-    definitionNote: "各年度の基準日時点の世帯数。",
+    definitionNote: HOUSEHOLDS_SERIES_NOTE,
     formatValue: formatHouseholdsOrConfirming,
     getPoint: (y) => ({ value: y.population?.households ?? null, sourceRefs: y.population?.sourceRefs ?? [] }),
   },
