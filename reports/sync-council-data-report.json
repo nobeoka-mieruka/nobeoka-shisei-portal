@@ -1,6 +1,6 @@
 {
-  "runAt": "2026-08-30T14:23:21.668Z",
-  "dryRun": true,
+  "runAt": "2026-09-12T04:27:41.754Z",
+  "dryRun": false,
   "forced": true,
   "lastSuccessfulRunAt": null,
   "hoursSinceLast": null,
@@ -22,7 +22,7 @@
       "new": 0,
       "updated": 0,
       "unchanged": 2,
-      "removedSuspected": 0,
+      "removedSuspected": 1,
       "urlChangeSuspected": 0,
       "errors": 0
     },
@@ -57,12 +57,12 @@
       "categoryLabel": "一般質問 質問通告一覧",
       "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html",
       "detailUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1402.html",
-      "sessionTitle": "第26回延岡市議会(令和8年6月定例会)",
+      "sessionTitle": "第27回延岡市議会(令和8年9月定例会)",
       "status": "ok",
-      "detected": 14,
+      "detected": 27,
       "new": 0,
       "updated": 0,
-      "unchanged": 14,
+      "unchanged": 27,
       "removedSuspected": 0,
       "urlChangeSuspected": 0,
       "needsReview": 0,
@@ -74,8 +74,7 @@
       "categoryLabel": "議員名簿（変更検知）",
       "pageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
       "status": "ok",
-      "changed": false,
-      "note": "dry-run: 未保存"
+      "changed": false
     }
   ],
   "unavailableCategories": [
@@ -99,7 +98,7 @@
     }
   ],
   "fetchStats": {
-    "checked": 6,
+    "checked": 55,
     "count429": 0,
     "count403": 0,
     "count5xx": 0,

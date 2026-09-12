@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T10:34:02.605Z",
+  "generatedAt": "2026-09-12T04:51:07.110Z",
   "baseUrl": "http://localhost:4194",
   "checkedUrls": 70,
   "hydrationErrors": 0,
@@ -12,8 +12,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 925
+      "prerenderChars": 594,
+      "hydratedChars": 936
     },
     {
       "url": "http://localhost:4194/compare/mayors/?items=mayor-01",
@@ -21,8 +21,8 @@
       "query": "?items=mayor-01",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 933
+      "prerenderChars": 594,
+      "hydratedChars": 944
     },
     {
       "url": "http://localhost:4194/compare/mayors/?items=mayor-01,mayor-02",
@@ -30,8 +30,8 @@
       "query": "?items=mayor-01,mayor-02",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2227
+      "prerenderChars": 594,
+      "hydratedChars": 2238
     },
     {
       "url": "http://localhost:4194/compare/members/",
@@ -39,8 +39,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1840
+      "prerenderChars": 594,
+      "hydratedChars": 1851
     },
     {
       "url": "http://localhost:4194/compare/members/?items=member-m01",
@@ -48,8 +48,8 @@
       "query": "?items=member-m01",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1848
+      "prerenderChars": 594,
+      "hydratedChars": 1859
     },
     {
       "url": "http://localhost:4194/compare/members/?items=member-m01,member-m02",
@@ -57,8 +57,8 @@
       "query": "?items=member-m01,member-m02",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2214
+      "prerenderChars": 594,
+      "hydratedChars": 2225
     },
     {
       "url": "http://localhost:4194/compare/finance/",
@@ -66,8 +66,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1334
+      "prerenderChars": 594,
+      "hydratedChars": 1345
     },
     {
       "url": "http://localhost:4194/compare/finance/?years=2026",
@@ -75,8 +75,8 @@
       "query": "?years=2026",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1342
+      "prerenderChars": 594,
+      "hydratedChars": 1353
     },
     {
       "url": "http://localhost:4194/compare/finance/?years=2026,2025",
@@ -84,8 +84,8 @@
       "query": "?years=2026,2025",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2900
+      "prerenderChars": 594,
+      "hydratedChars": 2911
     },
     {
       "url": "http://localhost:4194/compare/budget/",
@@ -93,8 +93,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1247
+      "prerenderChars": 594,
+      "hydratedChars": 1258
     },
     {
       "url": "http://localhost:4194/compare/budget/?years=2026",
@@ -102,8 +102,8 @@
       "query": "?years=2026",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1255
+      "prerenderChars": 594,
+      "hydratedChars": 1266
     },
     {
       "url": "http://localhost:4194/compare/budget/?years=2026,2025",
@@ -111,8 +111,8 @@
       "query": "?years=2026,2025",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2807
+      "prerenderChars": 594,
+      "hydratedChars": 2818
     },
     {
       "url": "http://localhost:4194/compare/debt/",
@@ -120,8 +120,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1046
+      "prerenderChars": 594,
+      "hydratedChars": 1057
     },
     {
       "url": "http://localhost:4194/compare/debt/?years=2026",
@@ -129,8 +129,8 @@
       "query": "?years=2026",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1054
+      "prerenderChars": 594,
+      "hydratedChars": 1065
     },
     {
       "url": "http://localhost:4194/compare/debt/?years=2026,2025",
@@ -138,8 +138,8 @@
       "query": "?years=2026,2025",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2155
+      "prerenderChars": 594,
+      "hydratedChars": 2166
     },
     {
       "url": "http://localhost:4194/compare/funds/",
@@ -147,8 +147,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 932
+      "prerenderChars": 594,
+      "hydratedChars": 943
     },
     {
       "url": "http://localhost:4194/compare/funds/?years=2026",
@@ -156,8 +156,8 @@
       "query": "?years=2026",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 932
+      "prerenderChars": 594,
+      "hydratedChars": 943
     },
     {
       "url": "http://localhost:4194/compare/funds/?years=2026,2025",
@@ -165,8 +165,8 @@
       "query": "?years=2026,2025",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 940
+      "prerenderChars": 594,
+      "hydratedChars": 951
     },
     {
       "url": "http://localhost:4194/compare/population/",
@@ -174,8 +174,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 904
+      "prerenderChars": 594,
+      "hydratedChars": 915
     },
     {
       "url": "http://localhost:4194/compare/population/?years=2026",
@@ -183,8 +183,8 @@
       "query": "?years=2026",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 912
+      "prerenderChars": 594,
+      "hydratedChars": 923
     },
     {
       "url": "http://localhost:4194/compare/population/?years=2026,2025",
@@ -192,8 +192,8 @@
       "query": "?years=2026,2025",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1027
+      "prerenderChars": 594,
+      "hydratedChars": 1038
     },
     {
       "url": "http://localhost:4194/compare/policies/",
@@ -201,8 +201,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1137
+      "prerenderChars": 594,
+      "hydratedChars": 1148
     },
     {
       "url": "http://localhost:4194/compare/policies/?items=policy-mayor01-01",
@@ -210,8 +210,8 @@
       "query": "?items=policy-mayor01-01",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1176
+      "prerenderChars": 594,
+      "hydratedChars": 1187
     },
     {
       "url": "http://localhost:4194/compare/policies/?items=policy-mayor01-01,policy-mayor01-02",
@@ -219,8 +219,8 @@
       "query": "?items=policy-mayor01-01,policy-mayor01-02",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1607
+      "prerenderChars": 594,
+      "hydratedChars": 1618
     },
     {
       "url": "http://localhost:4194/compare/municipalities/",
@@ -228,8 +228,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 7004
+      "prerenderChars": 594,
+      "hydratedChars": 7261
     },
     {
       "url": "http://localhost:4194/compare/similar-municipalities/",
@@ -237,8 +237,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5660
+      "prerenderChars": 594,
+      "hydratedChars": 5672
     },
     {
       "url": "http://localhost:4194/compare/",
@@ -246,8 +246,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1226
+      "prerenderChars": 594,
+      "hydratedChars": 1238
     },
     {
       "url": "http://localhost:4194/bills/compare/",
@@ -255,8 +255,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 103148
+      "prerenderChars": 594,
+      "hydratedChars": 103159
     },
     {
       "url": "http://localhost:4194/bills/compare/?left=2026-06-gian-14",
@@ -264,8 +264,8 @@
       "query": "?left=2026-06-gian-14",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 103148
+      "prerenderChars": 594,
+      "hydratedChars": 103159
     },
     {
       "url": "http://localhost:4194/bills/compare/?left=2026-06-gian-14&right=2026-06-gian-19",
@@ -273,8 +273,8 @@
       "query": "?left=2026-06-gian-14&right=2026-06-gian-19",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 103413
+      "prerenderChars": 594,
+      "hydratedChars": 103424
     },
     {
       "url": "http://localhost:4194/bills/votes/",
@@ -282,8 +282,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5924
+      "prerenderChars": 594,
+      "hydratedChars": 6337
     },
     {
       "url": "http://localhost:4194/bills/votes/?q=条例",
@@ -291,8 +291,8 @@
       "query": "?q=条例",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 6073
+      "prerenderChars": 594,
+      "hydratedChars": 6309
     },
     {
       "url": "http://localhost:4194/bills/votes/?year=%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6",
@@ -300,8 +300,8 @@
       "query": "?year=%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5920
+      "prerenderChars": 594,
+      "hydratedChars": 6333
     },
     {
       "url": "http://localhost:4194/bills/votes/?result=可決",
@@ -309,8 +309,8 @@
       "query": "?result=可決",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2017
+      "prerenderChars": 594,
+      "hydratedChars": 2043
     },
     {
       "url": "http://localhost:4194/questions/",
@@ -318,8 +318,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 17437
+      "prerenderChars": 594,
+      "hydratedChars": 17517
     },
     {
       "url": "http://localhost:4194/questions/?member=m24",
@@ -327,8 +327,8 @@
       "query": "?member=m24",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 11931
+      "prerenderChars": 594,
+      "hydratedChars": 11987
     },
     {
       "url": "http://localhost:4194/history/",
@@ -336,8 +336,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 57737
+      "prerenderChars": 594,
+      "hydratedChars": 57749
     },
     {
       "url": "http://localhost:4194/history/?person=mayor-04",
@@ -345,8 +345,8 @@
       "query": "?person=mayor-04",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 6857
+      "prerenderChars": 594,
+      "hydratedChars": 6869
     },
     {
       "url": "http://localhost:4194/",
@@ -354,8 +354,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2588
+      "prerenderChars": 594,
+      "hydratedChars": 2619
     },
     {
       "url": "http://localhost:4194/?faction=komei",
@@ -363,8 +363,8 @@
       "query": "?faction=komei",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2588
+      "prerenderChars": 594,
+      "hydratedChars": 2619
     },
     {
       "url": "http://localhost:4194/policies/",
@@ -372,8 +372,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1930
+      "prerenderChars": 594,
+      "hydratedChars": 1942
     },
     {
       "url": "http://localhost:4194/policies/?ownerType=mayor",
@@ -381,8 +381,8 @@
       "query": "?ownerType=mayor",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1797
+      "prerenderChars": 594,
+      "hydratedChars": 1809
     },
     {
       "url": "http://localhost:4194/policies/?category=%E7%94%9F%E6%B4%BB",
@@ -390,8 +390,8 @@
       "query": "?category=%E7%94%9F%E6%B4%BB",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1062
+      "prerenderChars": 594,
+      "hydratedChars": 1074
     },
     {
       "url": "http://localhost:4194/people/",
@@ -399,8 +399,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 18514
+      "prerenderChars": 594,
+      "hydratedChars": 18526
     },
     {
       "url": "http://localhost:4194/people/?type=member",
@@ -408,8 +408,8 @@
       "query": "?type=member",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5726
+      "prerenderChars": 594,
+      "hydratedChars": 5738
     },
     {
       "url": "http://localhost:4194/people/?status=current",
@@ -417,8 +417,8 @@
       "query": "?status=current",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5773
+      "prerenderChars": 594,
+      "hydratedChars": 5785
     },
     {
       "url": "http://localhost:4194/people/?type=member&status=current",
@@ -426,8 +426,8 @@
       "query": "?type=member&status=current",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5726
+      "prerenderChars": 594,
+      "hydratedChars": 5738
     },
     {
       "url": "http://localhost:4194/people/?faction=jimin-kizuna",
@@ -435,8 +435,8 @@
       "query": "?faction=jimin-kizuna",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 3182
+      "prerenderChars": 594,
+      "hydratedChars": 3194
     },
     {
       "url": "http://localhost:4194/people/?dataTier=full",
@@ -444,8 +444,8 @@
       "query": "?dataTier=full",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1815
+      "prerenderChars": 594,
+      "hydratedChars": 1827
     },
     {
       "url": "http://localhost:4194/search/",
@@ -453,8 +453,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 777
+      "prerenderChars": 594,
+      "hydratedChars": 788
     },
     {
       "url": "http://localhost:4194/search/?q=議案",
@@ -462,8 +462,8 @@
       "query": "?q=議案",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2717
+      "prerenderChars": 594,
+      "hydratedChars": 2728
     },
     {
       "url": "http://localhost:4194/search/?q=議案&type=bill",
@@ -471,8 +471,8 @@
       "query": "?q=議案&type=bill",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2159
+      "prerenderChars": 594,
+      "hydratedChars": 2170
     },
     {
       "url": "http://localhost:4194/council-activity/",
@@ -480,8 +480,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5838
+      "prerenderChars": 594,
+      "hydratedChars": 5848
     },
     {
       "url": "http://localhost:4194/council-activity/?compare=m01",
@@ -489,8 +489,8 @@
       "query": "?compare=m01",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 5990
+      "prerenderChars": 594,
+      "hydratedChars": 6000
     },
     {
       "url": "http://localhost:4194/bills/",
@@ -498,8 +498,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1376
+      "prerenderChars": 594,
+      "hydratedChars": 1388
     },
     {
       "url": "http://localhost:4194/bills/?fiscalYear=%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6",
@@ -507,8 +507,8 @@
       "query": "?fiscalYear=%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1185
+      "prerenderChars": 594,
+      "hydratedChars": 1197
     },
     {
       "url": "http://localhost:4194/ordinances/",
@@ -516,8 +516,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1323
+      "prerenderChars": 594,
+      "hydratedChars": 1335
     },
     {
       "url": "http://localhost:4194/ordinances/?fiscalYear=2023",
@@ -525,8 +525,8 @@
       "query": "?fiscalYear=2023",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1239
+      "prerenderChars": 594,
+      "hydratedChars": 1251
     },
     {
       "url": "http://localhost:4194/ordinances/?session=2023-06",
@@ -534,8 +534,8 @@
       "query": "?session=2023-06",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1159
+      "prerenderChars": 594,
+      "hydratedChars": 1171
     },
     {
       "url": "http://localhost:4194/ordinances/?result=%E5%8E%9F%E6%A1%88%E5%8F%AF%E6%B1%BA",
@@ -543,8 +543,8 @@
       "query": "?result=%E5%8E%9F%E6%A1%88%E5%8F%AF%E6%B1%BA",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1323
+      "prerenderChars": 594,
+      "hydratedChars": 1335
     },
     {
       "url": "http://localhost:4194/petitions/",
@@ -552,8 +552,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2463
+      "prerenderChars": 594,
+      "hydratedChars": 2475
     },
     {
       "url": "http://localhost:4194/petitions/?fiscalYear=2023",
@@ -561,8 +561,8 @@
       "query": "?fiscalYear=2023",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1257
+      "prerenderChars": 594,
+      "hydratedChars": 1269
     },
     {
       "url": "http://localhost:4194/petitions/?session=2023-06",
@@ -570,8 +570,8 @@
       "query": "?session=2023-06",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1257
+      "prerenderChars": 594,
+      "hydratedChars": 1269
     },
     {
       "url": "http://localhost:4194/petitions/?result=adopted",
@@ -579,8 +579,8 @@
       "query": "?result=adopted",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1713
+      "prerenderChars": 594,
+      "hydratedChars": 1725
     },
     {
       "url": "http://localhost:4194/requests/",
@@ -588,8 +588,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 2678
+      "prerenderChars": 594,
+      "hydratedChars": 2690
     },
     {
       "url": "http://localhost:4194/requests/?fiscalYear=2023",
@@ -597,8 +597,8 @@
       "query": "?fiscalYear=2023",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1573
+      "prerenderChars": 594,
+      "hydratedChars": 1585
     },
     {
       "url": "http://localhost:4194/requests/?session=2023-07-extraordinary-03",
@@ -606,8 +606,8 @@
       "query": "?session=2023-07-extraordinary-03",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1418
+      "prerenderChars": 594,
+      "hydratedChars": 1430
     },
     {
       "url": "http://localhost:4194/requests/?result=adopted",
@@ -615,8 +615,8 @@
       "query": "?result=adopted",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 1864
+      "prerenderChars": 594,
+      "hydratedChars": 1876
     },
     {
       "url": "http://localhost:4194/members/m01/",
@@ -624,8 +624,8 @@
       "query": "",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 9509
+      "prerenderChars": 594,
+      "hydratedChars": 9689
     },
     {
       "url": "http://localhost:4194/members/m01/?questionTopic=%E9%98%B2%E7%81%BD",
@@ -633,8 +633,8 @@
       "query": "?questionTopic=%E9%98%B2%E7%81%BD",
       "hydrationErrors": 0,
       "consoleErrors": 0,
-      "prerenderChars": 583,
-      "hydratedChars": 7509
+      "prerenderChars": 594,
+      "hydratedChars": 7689
     }
   ],
   "findings": []

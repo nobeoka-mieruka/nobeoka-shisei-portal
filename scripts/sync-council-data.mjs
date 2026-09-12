@@ -73,7 +73,14 @@ function parseGenericPdfListing(html) {
     // 直前100文字以内に「令和N年M月D日」があれば議決日等として拾う（ベストエフォート、無くても可）。
     const precedingWindow = html.slice(Math.max(0, m.index - 120), m.index);
     const dateMatch = precedingWindow.match(/令和(?:元|\d+)年\d{1,2}月\d{1,2}日(?![^<]*<\/a>)/g);
-    const decidedDate = dateMatch ? dateMatch[dateMatch.length - 1] : null;
+    // 会議日程ページ（/site/gikai/6758.html）のように、日付を「（更新日：令和N年M月D日）」の形で
+    // リンクの直後に置く一覧がある。この場合、直前ウィンドウには「1つ前の資料の日付」しか無く、
+    // そのまま採用すると別資料の日付を取り違える（2026-09-12に実データで確認）。
+    // リンク直後に更新日表記がある場合は、そちらを優先する（「更新日：」という語を伴う場合に限定するため、
+    // 議決日を直前に置く意見書・決議ページ等の既存の拾い方には影響しない）。
+    const followingWindow = html.slice(m.index + m[0].length, m.index + m[0].length + 120);
+    const followingDate = followingWindow.match(/更新日\s*[：:]\s*(令和(?:元|\d+)年\d{1,2}月\d{1,2}日)/);
+    const decidedDate = followingDate ? followingDate[1] : dateMatch ? dateMatch[dateMatch.length - 1] : null;
     entries.push({ href, linkText, decidedDate });
   }
   return entries;

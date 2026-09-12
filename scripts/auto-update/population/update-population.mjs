@@ -50,7 +50,7 @@ const PARSER_VERSION = "update-population.mjs@2026-08";
 const verbose = process.argv.includes("--verbose");
 
 // src/data/archiveCrawlerTargets.json の id="population" と同一URL（推測で新規URLを作らない）。
-const POPULATION_XLS_URL = "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28569.xls";
+const POPULATION_XLS_URL = "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls";
 // archiveCrawlerTargets.jsonのpopulation.notesに記載された、添付ファイルID変更時の確認起点ページ。
 const POPULATION_STATS_FALLBACK_URL = "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html";
 
