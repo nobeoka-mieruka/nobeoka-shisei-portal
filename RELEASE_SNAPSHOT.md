@@ -1,6 +1,6 @@
 # 公開版 Release Snapshot（安定版の固定記録）
 
-このファイルは、Phase197〜200 で固定し、Phase201〜242 の品質改善と、Phase243〜247 の差分更新・Phase248〜251 の改善を反映した安定版の記録です。
+このファイルは、Phase197〜200 で固定し、Phase201〜242 の品質改善と、Phase243〜247 の差分更新・Phase248〜251 の改善・Phase252〜255 の監視自動化を反映した安定版の記録です。
 機械可読版は `reports/release-snapshot.json`（生成: `node scripts/generate-release-snapshot.mjs --deploy-id <id>`）。
 
 以後は**毎回の全データ再監査を行いません**。新しい公開資料が出たときだけ、下記「日常運用フロー」に戻します。
@@ -154,7 +154,7 @@ HUMAN_ACTION_REQUIRED は10件から減らしていない。
 | horizontal overflow | 0px |
 | console error | 0 |
 | hydration error | 0（70URL のクエリ付き直アクセス・リロードで検査。`npm run audit:hydration`） |
-| test failures | 0（404 checks / 34スクリプト） |
+| test failures | 0（1,610 checks / 39スクリプト。Phase252〜255で6スイート追加） |
 | validate:data errors | 0 |
 | validate:seo failures | 0（2,274ページ） |
 | validate:content errors | 0（2,274ページ） |
@@ -356,6 +356,106 @@ main包含状況・dry-run判定を恒久記録として残した（SHAから復
 (5) 実際に2026-08-24以降再生成されておらずコミット済み内容が陳腐化していた（走査対象71→82ファイル）。
 日付・Phase名の付いた正式な監査証跡（`reports/phase*-*`・`reports/data-audit-*`・
 `reports/auto-update/run-*-<timestamp>.json`）には一切手を付けていない。
+
+## Phase252〜255：監視の自動化と運用残骸の再発防止（2026-09-12）
+
+データ値の再監査は行っていない。監視の仕組みと運用ルールだけを直した回。
+
+### 一般質問の会議録公開監視（Phase252）
+
+「予定」（質問通告書だけが根拠）を「確認済み」（会議録本文を読んで確認）へ進めてよいのは、
+公式会議録が公開されたときだけである。その公開を毎日自動で検出する仕組みが無かったため新設した。
+
+`npm run watch:question-transcripts`（`scripts/check-question-transcript-publication.mjs`）。
+`src/data` は一切書き換えず、`reports/question-transcript-publication.json` を出すだけ。
+監視対象は件数をハードコードせず、`generalQuestions.json` の質問日と
+`questionCollectionStatus.json` の `transcriptAvailable` から毎回導出する。
+日次ワークフロー（`update-council-documents.yml`）へ組み込み、
+会議録が公開された会期が見つかったときだけジョブ要約へ通知する。
+
+**判定の根拠は「質問日と同じ日付の本会議録が実在すること」だけ**。
+予定日を過ぎたことや、検索結果が0件だったことを根拠にしない。
+公開後に出すのは**既存の質問IDへの紐付け候補**のみで、新規レコードは作らない。
+
+**見つかった不具合**：`scripts/lib/minutes-source.mjs` の `listMeetingDays()` が会議日一覧を
+無期限キャッシュしていた（実測：令和8年第26回定例会がキャッシュ0件・実サイト6件）。
+Phase250 で1階層上の `postTreedepth()` だけを対象外にしていたため取り残されていた。
+公開の有無を見る監視がキャッシュを読むと、公開後も永久に未公開と判定してしまう。修正済み。
+
+**初回実行の結果**：令和8年6月定例会（質問14件）の会議録が
+R080612A〜R080703A の6日分で**公開済み**であることを検出した（従来は気づけていなかった）。
+令和8年9月定例会（質問13件）は会議録未公開のため `WAITING_FOR_OFFICIAL_RECORD` のまま。
+`questionCollectionStatus.json` の2026-06は、当サイトとして本文照合が未了のため
+`transcriptAvailable: false` を維持し、注記へ「原本は公開済み・照合が未了」である旨を追記した。
+
+### botブランチの増殖防止（Phase253）
+
+**原因は実ログで確定**（推測ではない）。実行ログ 34603730843（2026-09-11）で、
+`git push origin "$BRANCH"` は成功し、直後の `gh pr create` が
+`GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)`
+で失敗していた。`set -e` により push 後にステップが異常終了するため、PRの無いブランチだけが残る。
+同じ構造が `sync-council-data.yml`・`civic-archive-sync.yml` にもあった。
+
+この権限は Settings > Actions > General > Workflow permissions の設定であり、
+ワークフローからは変更できない。そこで**設定が無効でもブランチが増えない形**を既定にした。
+
+| ワークフロー | 変更後の既定動作 |
+| --- | --- |
+| `auto-update-dryrun.yml` | ブランチもcommitも作らない。結果はジョブ要約＋Artifactのみ |
+| `sync-council-data.yml` | PR無効時はブランチを作らず、検出結果をジョブ要約へ出す |
+| `civic-archive-sync.yml` | 同上 |
+
+PR方式はリポジトリ変数 `BOT_PULL_REQUESTS_ENABLED=true` を設定したときだけ有効になる。
+opt-in時にPR作成が失敗した場合は、**リモートHEADがpush直後のSHAと一致する場合に限り**
+自分が作ったブランチを削除する（`--force` は使わない）。
+`scripts/test-workflow-branch-policy.mjs`（36検査）が回帰テストする。
+
+**残存19本は全件残置**。全19本ともdry-run生成物（`reports/auto-update/`配下）だけだが
+main に未包含であり、「main未包含の内容が1行でもあるブランチは削除しない」方針に従った。
+実測結果は `reports/phase253-bot-branch-audit.json`（HEAD SHA・変更ファイル・復元コマンド）。
+
+### 残課題の運用台帳（Phase254）
+
+`npm run ledger:human-action`（`scripts/build-human-action-ledger.mjs`）で
+`reports/human-action-ledger.json` / `.md` を**既存データから毎回生成**する。
+手入力の台帳ファイルは持たず、`blockedTaskClassification.json` と
+`validate:data` の `[WARN]` 出力だけを情報源にする。既存schemaは変更していない。
+
+分類は既存フィールド（`status` / `blockedReasonCode` / `nextActionCategory`）から導出するだけで、
+データ側へ新しい列挙値を書き足していない。
+
+| 分類 | 件数 |
+| --- | ---: |
+| 一次資料の公開待ち | 2 |
+| 図書館・現地での資料確認が必要 | 2 |
+| 外部サービスのログイン・閲覧制限がある | 8 |
+| オンライン調査では確認が困難 | 3 |
+| 人間による判断・照合が必要 / 資料そのものが確認できない / 技術的制約 | 0 |
+
+**件数を減らすことは目的にしていない。** リリースを止める案件は0件
+（`validate:data` の error が0のため）。台帳は運用者向けであり、
+市民向けページからは読み込まない（`test-human-action-ledger.mjs` が352検査で固定）。
+
+### 人口・財政の差分監視（Phase255）
+
+**人口**：一覧ページのリンク表記から最新基準日だけを先に読み、既存データと同じで
+出典URLも変わっていなければ **Excelを取得せずに `NO_CHANGE` で終了**する
+（毎回314KBを取得して26年度分を読み直さない）。
+基準日が新しくなった場合、または添付ファイルIDが変わった場合（＝既存URLが失効した可能性）は
+従来どおり取得し、公式ドメイン確認・マジックバイト判定・系列判定・基準日確認・既存値比較まで行う。
+
+**財政**：前年度比の大きな変動で毎回YELLOWが立ち続けていた問題を修正した。
+この変動幅は公表ページの数値そのものから計算されるため、資料が更新されなくても毎回同じ値になる。
+令和6年度の将来負担比率15.9%（前年度2.1%）は既に `financeDashboard.json` へ登録済み＝
+一次資料と突き合わせ確認済みであるにもかかわらず、2026-08-24以降ずっとYELLOWだった。
+公表値が登録済みの値と一致する場合（`outcome === "unchanged"`）はGREENのままとし、
+変動の事実は理由欄へ記録するだけにした。新年度・値の変化・RED異常の検出は従来どおり。
+
+出典階層は `scripts/test-finance-source-hierarchy.mjs`（841検査）で固定した。
+**発行者名だけでは弾かない**：宮崎県統計年鑑（昭和期の延岡市の歳入歳出）や
+総務省の決算カード（延岡市が提出した決算の集計）は、発行者が市外でも中身は延岡市の数値であり正当。
+検査するのは「報道機関を財政数値の確定根拠にしない」「宮崎県自身の予算・決算を市の財政値の根拠にしない」
+「監視の入口が延岡市公式ドメインの外へ広がらない」の3点。
 
 ## 人手対応が必要な項目
 

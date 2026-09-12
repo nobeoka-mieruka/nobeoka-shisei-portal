@@ -402,11 +402,21 @@ export function looksGarbled(text) {
  */
 export async function listMeetingDays({ code, sessionLabel }) {
   const body = `Code=${code}&treedepth=${sjisPercentEncode(sessionLabel)}&page=&fileName=`;
-  const { buf } = await fetchWithRetry(`${BASE}/cgi-bin3/See.exe`, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body,
-  });
+  const { buf } = await fetchWithRetry(
+    `${BASE}/cgi-bin3/See.exe`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    },
+    RETRIES,
+    // Phase252：会期内の会議日一覧は、会期の進行・会議録の公開にあわせて後から増える
+    // （実測：令和8年第26回定例会はローカルキャッシュ0件に対し実サイト6件）。Phase250では
+    // postTreedepth（年→会期の一覧）だけをキャッシュ対象外にしたが、その1階層下にあたる
+    // この関数が取り残されていた。会議録が「公開されたか」を見る監視がキャッシュを読むと、
+    // 実際に公開された後も永久に未公開と判定してしまうため、ここもキャッシュしない。
+    { noCache: true },
+  );
   const html = decodeSjis(buf);
   const days = [];
   const re = /ResultFrame\.exe\?Code=([^&]+)&fileName=([^&]+)&startPos=0"[\s\S]*?>（([^）]+)）</g;

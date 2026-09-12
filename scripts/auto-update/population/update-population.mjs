@@ -228,6 +228,10 @@ async function main() {
     pinnedUrl: POPULATION_XLS_URL,
     statsPageUrl: POPULATION_STATS_FALLBACK_URL,
     baselineReferenceDate: baseline?.referenceDate ?? null,
+    // Phase255：まず一覧ページの表記から最新基準日だけを確認し、既存データと同じで
+    // 出典URLも変わっていなければExcelを取得しない（差分方式）。基準日が新しくなった場合や
+    // 添付ファイルIDが変わった場合は従来どおり取得して全項目を検証する。
+    skipDownloadWhenUnchanged: true,
   });
   const resolvedUrl = resolution.resolvedUrl ?? POPULATION_XLS_URL;
   const resolutionSeverity = highestSeverity(resolution.issues);
@@ -255,7 +259,44 @@ async function main() {
   const entries = [];
   let circuitBreakerNewCount = 0;
 
-  if (fetchResult.error) {
+  if (resolution.downloadSkipped) {
+    // Phase255：一覧ページの最新基準日が既存データと同じで、出典URLも変わっていない。
+    // このときExcelの中身は既存データと同じであることが確定しているため、取得・解析せずに
+    // 「変更なし」として終了する（毎回26年度分を読み直さない差分方式）。
+    // ローカル状態（contentHash）は取得していないので更新しない＝次に取得したときに正しく比較できる。
+    const validation = validateEntry(
+      { sourceUrl: resolvedUrl, outcome: "unchanged" },
+      { allowedHosts: CITY_SITE_ALLOWED_HOSTS, requireSessionId: false, requiredFields: ["outcome"] },
+    );
+    const result = classifyItem({
+      schemaValid: validation.valid,
+      schemaErrors: validation.errors,
+      outcome: "unchanged",
+      isOfficialPrimarySource: true,
+      reachable: true,
+      httpStatus: 200,
+      requiresHumanReview: false,
+      anomalyDetected: false,
+    });
+    console.log(
+      `[update-population] 最新基準日=${resolution.labelReferenceDate}（既存データと同じ）。Excelの取得を省略し、変更なしとして終了します。`,
+    );
+    entries.push({
+      sourceUrl: resolvedUrl,
+      sourceType: "人口・世帯数統計xls（延岡市公式）",
+      sessionId: null,
+      outcome: "unchanged",
+      lastCheckedAt: startedAt,
+      httpStatus: 200,
+      contentHash: state.population?.contentHash ?? null,
+      parserVersion: PARSER_VERSION,
+      extractionStatus: `reference_date_unchanged: 一覧ページの基準日=${resolution.labelReferenceDate}／既存データの最新基準日=${baseline?.referenceDate ?? "未登録"}（Excel未取得）`,
+      validationStatus: validation.valid ? "schema_valid" : "schema_invalid",
+      validationErrors: validation.errors,
+      level: result.level,
+      reason: result.reason,
+    });
+  } else if (fetchResult.error) {
     console.log(`[update-population] 主資料の取得に失敗: ${fetchResult.error}。フォールバックページを確認します。`);
     const fallback = await probeFallback();
     const validation = validateEntry(

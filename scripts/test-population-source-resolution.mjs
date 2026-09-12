@@ -252,6 +252,92 @@ console.log("\n=== Phase249：固定された添付ファイルIDの棚卸し ==
   check("一覧ページURLが解決モジュールに定義されている", resolverSrc.includes("/soshiki/1/1364.html"));
 }
 
+console.log("\n=== Phase255：基準日だけを先に確認する差分方式 ===");
+{
+  // 1) 基準日も出典URLも変わっていない → Excelを取得しない
+  let binaryFetchCount = 0;
+  const unchanged = await resolvePopulationSource({
+    fetchText: async () => statsPageHtml(),
+    fetchBinary: async (url) => {
+      binaryFetchCount += 1;
+      return { buffer: XLS_BYTES, finalUrl: url };
+    },
+    pinnedUrl: PINNED,
+    statsPageUrl: STATS_PAGE,
+    baselineReferenceDate: "2026-09-01",
+    skipDownloadWhenUnchanged: true,
+  });
+  check("基準日が同じならExcelを取得しない", binaryFetchCount === 0, `取得回数=${binaryFetchCount}`);
+  check("取得を省略しても解決は成功扱い", unchanged.ok === true);
+  check("取得を省略したことを明示する", unchanged.downloadSkipped === true && unchanged.referenceDateUnchanged === true);
+  check("省略時も出典URLを返す", unchanged.resolvedUrl === PINNED);
+  check("省略時に異常を捏造しない", unchanged.issues.length === 0, JSON.stringify(unchanged.issues));
+
+  // 2) 基準日が新しくなった → 従来どおり取得して検証する
+  let newDateFetchCount = 0;
+  const newer = await resolvePopulationSource({
+    fetchText: async () => statsPageHtml({ currentLabelDate: "令和8年10月1日" }),
+    fetchBinary: async (url) => {
+      newDateFetchCount += 1;
+      return { buffer: XLS_BYTES_V2, finalUrl: url };
+    },
+    pinnedUrl: PINNED,
+    statsPageUrl: STATS_PAGE,
+    baselineReferenceDate: "2026-09-01",
+    skipDownloadWhenUnchanged: true,
+  });
+  check("新しい基準日が出たらExcelを取得する", newDateFetchCount === 1, `取得回数=${newDateFetchCount}`);
+  check("新しい基準日を読み取る", newer.labelReferenceDate === "2026-10-01", String(newer.labelReferenceDate));
+  check("新しい基準日のときは取得省略にしない", !newer.downloadSkipped);
+
+  // 3) 基準日は同じでも添付ファイルIDが変わった → 取得して検証する
+  //    （既存データが指すURLが失効した可能性があるため、省略してはいけない）
+  let swappedFetchCount = 0;
+  const swapped = await resolvePopulationSource({
+    fetchText: async () => statsPageHtml({ currentId: "29999" }),
+    fetchBinary: async (url) => {
+      swappedFetchCount += 1;
+      return { buffer: XLS_BYTES_V2, finalUrl: url };
+    },
+    pinnedUrl: PINNED,
+    statsPageUrl: STATS_PAGE,
+    baselineReferenceDate: "2026-09-01",
+    skipDownloadWhenUnchanged: true,
+  });
+  check("添付ファイルIDが変わったら基準日が同じでも取得する", swappedFetchCount === 1, `取得回数=${swappedFetchCount}`);
+  check("添付ファイルID変更を検出する", swapped.attachmentIdChanged === true);
+  check("添付ファイルID変更は処理を止めない（INFO）", swapped.issues.every((i) => i.severity !== "RED"));
+
+  // 4) 差分先行判定は既定では無効（従来の全項目検証を壊さない）
+  let defaultFetchCount = 0;
+  await resolvePopulationSource({
+    fetchText: async () => statsPageHtml(),
+    fetchBinary: async (url) => {
+      defaultFetchCount += 1;
+      return { buffer: XLS_BYTES, finalUrl: url };
+    },
+    pinnedUrl: PINNED,
+    statsPageUrl: STATS_PAGE,
+    baselineReferenceDate: "2026-09-01",
+  });
+  check("既定では従来どおりExcelを取得する", defaultFetchCount === 1, `取得回数=${defaultFetchCount}`);
+
+  // 5) 既存の最新基準日が分からない場合は省略しない
+  let noBaselineFetchCount = 0;
+  await resolvePopulationSource({
+    fetchText: async () => statsPageHtml(),
+    fetchBinary: async (url) => {
+      noBaselineFetchCount += 1;
+      return { buffer: XLS_BYTES, finalUrl: url };
+    },
+    pinnedUrl: PINNED,
+    statsPageUrl: STATS_PAGE,
+    baselineReferenceDate: null,
+    skipDownloadWhenUnchanged: true,
+  });
+  check("既存の基準日が無い場合は省略しない", noBaselineFetchCount === 1, `取得回数=${noBaselineFetchCount}`);
+}
+
 console.log(`\n${passed}件成功`);
 if (failures.length > 0) {
   console.error(`\n${failures.length}件失敗:`);

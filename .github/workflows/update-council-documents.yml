@@ -68,6 +68,37 @@ jobs:
         run: node --experimental-strip-types scripts/check-pending-council-minutes.mjs
         continue-on-error: true
 
+      # Phase252：一般質問「予定」レコードに対する会議録公開監視。
+      # src/data配下は書き換えず、reports/question-transcript-publication.json を出すだけ。
+      # 会議録が公開された会期が見つかったときだけ、ジョブ要約へ通知を出す
+      # （一覧ページの更新日時だけが変わったような、実データに影響しない変化では通知しない）。
+      - name: Check official transcript publication for planned general questions (Phase252)
+        id: transcript_watch
+        run: node scripts/check-question-transcript-publication.mjs
+        continue-on-error: true
+
+      - name: Notify when an official transcript became available
+        if: always()
+        run: |
+          REPORT=reports/question-transcript-publication.json
+          if [ ! -f "$REPORT" ]; then
+            echo "会議録公開監視のレポートが生成されていません（監視ステップのログを確認してください）。" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          OUTCOME=$(node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('$REPORT','utf8')).overallOutcome)")
+          if [ "$OUTCOME" = "UPDATE_CANDIDATE" ]; then
+            {
+              echo "## 一般質問：公式会議録が公開されました"
+              echo ""
+              echo "既存の「予定」レコードへ会議録の確認結果を紐付ける作業が必要です。"
+              echo "**新しい質問レコードを作らないでください**（予定版＋実績版の二重登録を禁止しています）。"
+              echo ""
+              node -e "const r=JSON.parse(require('fs').readFileSync('$REPORT','utf8'));for(const s of r.sessions){console.log('- '+s.sessionId+'（'+(s.sessionName||'会期名未登録')+'）質問'+s.questionCount+'件: '+s.state);}"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "一般質問の会議録公開監視: $OUTCOME（実データに影響する変化はありません）" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Validate data
         run: npm run validate:data
 
@@ -97,7 +128,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/councilSessions.json src/data/councilDocumentSources.json src/data/councilExtractionSources.json src/data/billVotes.json src/data/updateHistory.json src/data/searchIndex.json src/data/siteUpdate.json src/data/blockedTaskClassification.json public/council-documents public/sitemap.xml public/robots.txt reports/council-document-update-report.json reports/council-extraction-review.json reports/council-extraction-review.md
+          git add src/data/councilSessions.json src/data/councilDocumentSources.json src/data/councilExtractionSources.json src/data/billVotes.json src/data/updateHistory.json src/data/searchIndex.json src/data/siteUpdate.json src/data/blockedTaskClassification.json public/council-documents public/sitemap.xml public/robots.txt reports/council-document-update-report.json reports/council-extraction-review.json reports/council-extraction-review.md reports/question-transcript-publication.json
           if git diff --cached --name-only | grep -q "^src/data/blockedTaskClassification.json$" && git diff --cached -- src/data/blockedTaskClassification.json | grep -q '^-.*"status": "WAITING_EXTERNAL"'; then
             echo "notice=公開待ち資料の状態が遷移しました（blockedTaskClassification.jsonを確認してください）" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -113,5 +144,6 @@ jobs:
             reports/council-document-update-report.json
             reports/council-extraction-review.json
             reports/council-extraction-review.md
+            reports/question-transcript-publication.json
           if-no-files-found: ignore
           retention-days: 90

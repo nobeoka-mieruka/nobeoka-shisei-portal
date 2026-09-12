@@ -1,0 +1,259 @@
+{
+  "generatedAt": "2026-09-12",
+  "phase": "Phase253",
+  "note": "bot branchが増え続けた原因の事実確認と、残存branchの実測記録。内容を確認していないbranchは削除しない。",
+  "rootCause": {
+    "confirmed": true,
+    "evidence": "GitHub Actions run 34603730843（2026-09-11）のログ。ステップ「Create branch, commit and open Pull Request」で git push origin $BRANCH は成功し、直後の gh pr create が失敗した。",
+    "errorMessage": "pull request create failed: GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)",
+    "mechanism": "set -e により push 成功後にステップが異常終了するため、PRの無いbranchだけが残る。同じ構造が sync-council-data.yml・civic-archive-sync.yml にもあった。",
+    "repositorySetting": "Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests（無効）。ワークフローからは変更できない。",
+    "pullRequestsCreated": 0
+  },
+  "prevention": {
+    "approach": "PR作成が見込めない場合はbranchを作らない設計へ変更（利用者の設定変更を必須条件にしない）。",
+    "changes": [
+      "auto-update-dryrun.yml: 既定でbranch・commitを作らず、ジョブ要約とArtifactだけを残す。",
+      "sync-council-data.yml / civic-archive-sync.yml: PR方式を opt-in にし、無効時は検出結果をジョブ要約へ出すだけにする。",
+      "opt-in時にPR作成が失敗した場合は、リモートHEADがpush直後のSHAと一致する場合に限りbranchを削除する（--force不使用）。",
+      "scripts/test-workflow-branch-policy.mjs で回帰テストする。"
+    ],
+    "optInVariable": "BOT_PULL_REQUESTS_ENABLED=true（リポジトリ変数。リポジトリ設定でPR作成を許可したうえで設定する）"
+  },
+  "remainingBranches": {
+    "total": 19,
+    "deletedThisPhase": 0,
+    "deletionEligible": 0,
+    "reasonKept": "全19本ともdry-run生成物（reports/auto-update/配下）のみだが、mainに未包含。main未包含の内容が1行でもあるbranchは削除しない方針のため残置する。内容はheadShaから復元できる。"
+  },
+  "branches": [
+    {
+      "branch": "bot/auto-update-dryrun-20260824095226",
+      "headSha": "8b3a668c5ec22b845e83fae629a6165734915a31",
+      "committedAt": "2026-08-24T09:52:26Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-24、GREEN44/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 8b3a668c5ec22b845e83fae629a6165734915a31:refs/heads/bot/auto-update-dryrun-20260824095226"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260825093905",
+      "headSha": "9d4b05aa9cba80eda6a2d1f931545e924ba7de15",
+      "committedAt": "2026-08-25T09:39:05Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-25、GREEN44/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 9d4b05aa9cba80eda6a2d1f931545e924ba7de15:refs/heads/bot/auto-update-dryrun-20260825093905"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260826094518",
+      "headSha": "46ca116af196eb618403173288bf598acd4c2d9e",
+      "committedAt": "2026-08-26T09:45:18Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-26、GREEN44/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 46ca116af196eb618403173288bf598acd4c2d9e:refs/heads/bot/auto-update-dryrun-20260826094518"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260827194159",
+      "headSha": "05be01482d2859f9b0a113c56c87f1e6fe6fbaa7",
+      "committedAt": "2026-08-27T19:41:59Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-27、GREEN44/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 05be01482d2859f9b0a113c56c87f1e6fe6fbaa7:refs/heads/bot/auto-update-dryrun-20260827194159"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260828204655",
+      "headSha": "ddebc30d237ca064a2ff9bf3ff2174bcad4f21a1",
+      "committedAt": "2026-08-28T20:46:55Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-28、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin ddebc30d237ca064a2ff9bf3ff2174bcad4f21a1:refs/heads/bot/auto-update-dryrun-20260828204655"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260829141519",
+      "headSha": "8629cde8558d1d5425fa90ca8130c57e6ca8cbc4",
+      "committedAt": "2026-08-29T14:15:19Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-29、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 8629cde8558d1d5425fa90ca8130c57e6ca8cbc4:refs/heads/bot/auto-update-dryrun-20260829141519"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260830142126",
+      "headSha": "730bcb722c8cffb5f69da23e77d1b7294c2768b0",
+      "committedAt": "2026-08-30T14:21:26Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-30、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 730bcb722c8cffb5f69da23e77d1b7294c2768b0:refs/heads/bot/auto-update-dryrun-20260830142126"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260831164954",
+      "headSha": "de35531050a67c68109a084c90d45d9033d8e055",
+      "committedAt": "2026-08-31T16:49:54Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-31、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin de35531050a67c68109a084c90d45d9033d8e055:refs/heads/bot/auto-update-dryrun-20260831164954"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260901140146",
+      "headSha": "de7463efc659c2ca8c5d29e31d23adc3809dcd7e",
+      "committedAt": "2026-09-01T14:01:46Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-01、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin de7463efc659c2ca8c5d29e31d23adc3809dcd7e:refs/heads/bot/auto-update-dryrun-20260901140146"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260902132310",
+      "headSha": "662af2dd88812813efe36ba99577f91fed9d5b6a",
+      "committedAt": "2026-09-02T13:23:10Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-02、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 662af2dd88812813efe36ba99577f91fed9d5b6a:refs/heads/bot/auto-update-dryrun-20260902132310"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260903132156",
+      "headSha": "7706041fae6333e1f469deba7df445ddcb8535ab",
+      "committedAt": "2026-09-03T13:21:56Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-03、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 7706041fae6333e1f469deba7df445ddcb8535ab:refs/heads/bot/auto-update-dryrun-20260903132156"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260904131548",
+      "headSha": "c474a7b1c96e56879bcfcb7ef88b986c7a213e71",
+      "committedAt": "2026-09-04T13:15:48Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-04、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin c474a7b1c96e56879bcfcb7ef88b986c7a213e71:refs/heads/bot/auto-update-dryrun-20260904131548"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260905123009",
+      "headSha": "ce7b13ac53c48314d67e6af2edfb3f58839f8397",
+      "committedAt": "2026-09-05T12:30:09Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-05、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin ce7b13ac53c48314d67e6af2edfb3f58839f8397:refs/heads/bot/auto-update-dryrun-20260905123009"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260906124333",
+      "headSha": "c1301790e072a420a32e6cf819d247052bcff202",
+      "committedAt": "2026-09-06T12:43:33Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-06、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin c1301790e072a420a32e6cf819d247052bcff202:refs/heads/bot/auto-update-dryrun-20260906124333"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260907145441",
+      "headSha": "210ea611c11263098f25be8c871fe925fb928736",
+      "committedAt": "2026-09-07T14:54:41Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-07、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 210ea611c11263098f25be8c871fe925fb928736:refs/heads/bot/auto-update-dryrun-20260907145441"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260908132507",
+      "headSha": "364088e23f09ca71c8a24d382f22679cad0d5938",
+      "committedAt": "2026-09-08T13:25:07Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-08、GREEN45/YELLOW2）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 364088e23f09ca71c8a24d382f22679cad0d5938:refs/heads/bot/auto-update-dryrun-20260908132507"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260909133245",
+      "headSha": "2469d204b7cf420215559bf0c60b2f57b507874e",
+      "committedAt": "2026-09-09T13:32:45Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-09、RED判定あり・要確認）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 2469d204b7cf420215559bf0c60b2f57b507874e:refs/heads/bot/auto-update-dryrun-20260909133245"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260910132349",
+      "headSha": "d930087f4920e8744454dc97e68bd71861ec321e",
+      "committedAt": "2026-09-10T13:23:49Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-10、RED判定あり・要確認）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin d930087f4920e8744454dc97e68bd71861ec321e:refs/heads/bot/auto-update-dryrun-20260910132349"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260911132242",
+      "headSha": "5791944a8061af8941441cc76d11a7cd51948ae9",
+      "committedAt": "2026-09-11T13:22:42Z",
+      "subject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-11、RED判定あり・要確認）",
+      "changedFileCount": 5,
+      "dryRunReportOnly": true,
+      "nonReportFiles": [],
+      "containedInMain": "NO",
+      "deletionEligible": false,
+      "restoreCommand": "git push origin 5791944a8061af8941441cc76d11a7cd51948ae9:refs/heads/bot/auto-update-dryrun-20260911132242"
+    }
+  ]
+}

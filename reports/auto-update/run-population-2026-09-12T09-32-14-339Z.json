@@ -1,0 +1,60 @@
+{
+  "target": "population",
+  "startedAt": "2026-09-12T09:32:14.339Z",
+  "finishedAt": "2026-09-12T09:32:15.398Z",
+  "dryRun": true,
+  "watchedSource": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+  "watchedSourceResolution": {
+    "resolvedFrom": "stats-page",
+    "statsPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+    "pinnedUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+    "linkLabel": "令和8年9月1日現在 現住人口・世帯数の推移 [Excelファイル／314KB]",
+    "labelReferenceDate": "2026-09-01",
+    "attachmentIdChanged": false,
+    "bufferKind": "xls",
+    "severity": "NONE",
+    "issues": [],
+    "diagnostics": {
+      "statsPageFetched": true,
+      "candidateCount": 1,
+      "rejectedCount": 9,
+      "pinnedUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+      "statsPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/1364.html",
+      "excludedBySeries": [
+        "令和8年9月1日現在 住民基本台帳による町丁目別人口 [Excelファイル／480KB]",
+        "令和8年9月1日現在 住民基本台帳による年齢別人口 [Excelファイル／1.25MB]",
+        "令和7年毎月分 住民基本台帳による町丁目別人口・世帯数 [Excelファイル／619KB]",
+        "住民基本台帳による町丁目別人口・世帯数の推移（平成19年～） [Excelファイル／705KB]"
+      ]
+    }
+  },
+  "baseScriptExitCode": 0,
+  "overallLevel": "GREEN",
+  "summary": {
+    "detected": 1,
+    "green": 1,
+    "yellow": 0,
+    "red": 0,
+    "error": 0
+  },
+  "entries": [
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+      "sourceType": "人口・世帯数統計xls（延岡市公式、現住人口及び世帯数の推移）",
+      "sessionId": null,
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-09-12T09:32:14.339Z",
+      "httpStatus": 200,
+      "contentHash": "4331c36d85311d6b7c39bcc202bb6e3b081822de34131bc78ffa4d604911dee4",
+      "parserVersion": "update-population.mjs@2026-09（出典URL自動解決対応）",
+      "extractionStatus": "referenceDate=2026-09-01 population=107803 male=51208 female=56595 households=50069（fileChangedSincePreviousRun=false）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    }
+  ],
+  "circuitBreakerTripped": false,
+  "circuitBreakerReason": null,
+  "note": "dryRun=trueのため、本番データ（src/data/archiveFiscalYears.json等）への書き込みは一切行っていない。新しい基準日を検出した場合も、既存年度の書き換えではなく新規エントリ追加の候補として報告するのみで、自動反映は行わない（別途、人間の確認とAUTO_APPLY_GREENフラグの有効化が必要）。"
+}

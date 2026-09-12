@@ -98,8 +98,28 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create branch, commit and open Pull Request
-        if: steps.sync.outputs.ran == 'true' && steps.diff.outputs.changed == 'true'
+      # Phase253：PR作成が許可されていない状態でブランチだけを作らないようにする。
+      # リポジトリ設定（Settings > Actions > General > Workflow permissions >
+      # Allow GitHub Actions to create and approve pull requests）が無効だと、pushは成功するのに
+      # gh pr create が必ず失敗し、誰も読まないブランチが残り続ける（auto-update-dryrun.ymlで
+      # 実際に19本まで積み上がった）。設定はワークフローから変更できないため、
+      # リポジトリ変数 BOT_PULL_REQUESTS_ENABLED=true を設定したときだけPR方式を使う。
+      - name: Notify detected changes without creating a branch (PR作成が無効な場合)
+        if: steps.sync.outputs.ran == 'true' && steps.diff.outputs.changed == 'true' && vars.BOT_PULL_REQUESTS_ENABLED != 'true'
+        run: |
+          {
+            echo "## 延岡市議会 自動巡回：変更を検出しました（ブランチは作成していません）"
+            echo ""
+            echo "ActionsによるPull Request作成が許可されていないため、ブランチを作らずに検出結果だけを残しています。"
+            echo "巡回結果は、この実行の Artifacts（sync-council-data-report）から取得できます。"
+            echo "変更内容を取り込む場合は、ローカルで \`npm run sync:council-data\` 相当の巡回を実行し、人が確認したうえでコミットしてください。"
+            echo ""
+            echo "PR方式を使う場合は、リポジトリ設定でActionsのPull Request作成を許可したうえで、"
+            echo "リポジトリ変数 BOT_PULL_REQUESTS_ENABLED=true を設定してください。"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Create branch, commit and open Pull Request (opt-in)
+        if: steps.sync.outputs.ran == 'true' && steps.diff.outputs.changed == 'true' && vars.BOT_PULL_REQUESTS_ENABLED == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

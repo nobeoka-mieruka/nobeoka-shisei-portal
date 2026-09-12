@@ -1,0 +1,349 @@
+{
+  "generatedAt": "2026-09-12T09:38:23.990Z",
+  "note": "一般質問「予定」レコードに対する公式会議録の公開監視。src/data配下への書き込みは行わない（検出のみ）。新しい質問レコードは作らず、既存IDへの紐付け候補だけを報告する。",
+  "overallOutcome": "UPDATE_CANDIDATE",
+  "dataChangeCount": 0,
+  "summary": {
+    "pendingSessionCount": 2,
+    "pendingQuestionCount": 27,
+    "transcriptAvailableSessionCount": 1,
+    "transcriptAvailableQuestionCount": 14,
+    "waitingSessionCount": 1,
+    "waitingQuestionCount": 13,
+    "newQuestionRecordsCreated": 0,
+    "duplicateRecordsCreated": 0
+  },
+  "fetchErrors": [],
+  "sessions": [
+    {
+      "sessionId": "2026-06",
+      "sessionName": "令和8年6月定例会",
+      "registeredInCollectionStatus": true,
+      "questionCount": 14,
+      "questionDates": [
+        "2026-06-23",
+        "2026-06-24",
+        "2026-06-25"
+      ],
+      "state": "OFFICIAL_RECORD_AVAILABLE",
+      "minutesSessionLabels": [
+        "令和 8年 第24回定例会",
+        "令和 8年 第25回臨時会",
+        "令和 8年 第26回定例会"
+      ],
+      "matchedMeetingDays": [
+        {
+          "questionDate": "2026-06-23",
+          "fileName": "R080623A",
+          "meetingLabel": "（第2号 6月23日）",
+          "minutesSessionLabel": "令和 8年 第26回定例会"
+        },
+        {
+          "questionDate": "2026-06-24",
+          "fileName": "R080624A",
+          "meetingLabel": "（第3号 6月24日）",
+          "minutesSessionLabel": "令和 8年 第26回定例会"
+        },
+        {
+          "questionDate": "2026-06-25",
+          "fileName": "R080625A",
+          "meetingLabel": "（第4号 6月25日）",
+          "minutesSessionLabel": "令和 8年 第26回定例会"
+        }
+      ],
+      "unmatchedQuestionDates": [],
+      "updateCandidates": [
+        {
+          "existingQuestionId": "gq2026-06-m24",
+          "memberName": "宮田 博徳",
+          "questionDate": "2026-06-23",
+          "transcriptFileName": "R080623A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m17",
+          "memberName": "長友 幸子",
+          "questionDate": "2026-06-23",
+          "transcriptFileName": "R080623A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m14",
+          "memberName": "柴 浩信",
+          "questionDate": "2026-06-23",
+          "transcriptFileName": "R080623A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m08",
+          "memberName": "甲斐 正幸",
+          "questionDate": "2026-06-23",
+          "transcriptFileName": "R080623A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m26",
+          "memberName": "吉田 茂仁",
+          "questionDate": "2026-06-23",
+          "transcriptFileName": "R080623A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m13",
+          "memberName": "小御門 綾",
+          "questionDate": "2026-06-24",
+          "transcriptFileName": "R080624A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m03",
+          "memberName": "上杉 泰洋",
+          "questionDate": "2026-06-24",
+          "transcriptFileName": "R080624A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m10",
+          "memberName": "河野 治満",
+          "questionDate": "2026-06-24",
+          "transcriptFileName": "R080624A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m23",
+          "memberName": "峯田 克明",
+          "questionDate": "2026-06-24",
+          "transcriptFileName": "R080624A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m01",
+          "memberName": "稲田 雅之",
+          "questionDate": "2026-06-24",
+          "transcriptFileName": "R080624A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m19",
+          "memberName": "比江島 久美子",
+          "questionDate": "2026-06-25",
+          "transcriptFileName": "R080625A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m06",
+          "memberName": "甲斐 行雄",
+          "questionDate": "2026-06-25",
+          "transcriptFileName": "R080625A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m20",
+          "memberName": "平田 信広",
+          "questionDate": "2026-06-25",
+          "transcriptFileName": "R080625A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        },
+        {
+          "existingQuestionId": "gq2026-06-m02",
+          "memberName": "猪之鼻 哲",
+          "questionDate": "2026-06-25",
+          "transcriptFileName": "R080625A",
+          "action": "既存レコードへ会議録の確認結果を追記する（新規レコードを作らない）",
+          "fieldsToConfirm": [
+            "議員（memberId／memberName）",
+            "質問日（questionDate）",
+            "質問順（questionOrder）",
+            "質問方式（questionType）",
+            "質問本文（questionItems／summary）",
+            "答弁者",
+            "答弁本文",
+            "出典（sourceUrl／sourceTitle）",
+            "会議録本文URL（transcriptUrl）",
+            "本文確認日（sourceTextVerifiedAt）"
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "2026-09",
+      "sessionName": "令和8年9月定例会",
+      "registeredInCollectionStatus": false,
+      "questionCount": 13,
+      "questionDates": [
+        "2026-09-08",
+        "2026-09-09",
+        "2026-09-10"
+      ],
+      "state": "WAITING_FOR_OFFICIAL_RECORD",
+      "minutesSessionLabels": [
+        "令和 8年 第24回定例会",
+        "令和 8年 第25回臨時会",
+        "令和 8年 第26回定例会"
+      ],
+      "matchedMeetingDays": [],
+      "unmatchedQuestionDates": [
+        "2026-09-08",
+        "2026-09-09",
+        "2026-09-10"
+      ],
+      "updateCandidates": []
+    }
+  ]
+}

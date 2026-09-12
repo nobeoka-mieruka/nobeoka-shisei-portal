@@ -145,6 +145,9 @@ export async function resolvePopulationSource(deps) {
     pinnedUrl = PINNED_POPULATION_XLS_URL,
     statsPageUrl = POPULATION_STATS_PAGE_URL,
     baselineReferenceDate = null,
+    // Phase255：基準日が変わっていないときにExcelのダウンロードまで省略するか。
+    // 既定はfalse（従来どおり毎回取得して全項目を検証する）。差分監視用途でのみtrueにする。
+    skipDownloadWhenUnchanged = false,
   } = deps;
 
   const issues = [];
@@ -185,6 +188,38 @@ export async function resolvePopulationSource(deps) {
   }
   if (pinnedUrl && !attempts.some((a) => a.url === pinnedUrl)) {
     attempts.push({ url: pinnedUrl, from: "pinned-fallback", label: null, labelReferenceDate: null });
+  }
+
+  // 2.5) Phase255：差分先行判定。
+  // 一覧ページのリンク表記から読み取った基準日が既存データの最新基準日と同じで、かつ
+  // 解決したURLも既知URLと同じ（＝ファイルが差し替えられていない）場合、Excelを取得しても
+  // 得られる値は既存データと同じであることが分かっているため、ダウンロードせずに終了する。
+  // 毎回314KBのExcelを取得し直して26年度分を読み直す必要はない、という差分方式にするための分岐。
+  //
+  // 逆に、基準日が新しくなっている場合や、添付ファイルIDが変わっている（＝資料が差し替えられ、
+  // 既存データが指すURLが失効した可能性がある）場合は、この分岐へ入らず従来どおり取得して
+  // 公式ドメイン確認・マジックバイト判定・系列判定・基準日確認・既存値比較まで行う。
+  if (skipDownloadWhenUnchanged && baselineReferenceDate && attempts.length > 0) {
+    const primary = attempts[0];
+    const referenceDateUnchanged = primary.labelReferenceDate === baselineReferenceDate;
+    const urlUnchanged = primary.url === pinnedUrl;
+    if (referenceDateUnchanged && urlUnchanged) {
+      diagnostics.downloadSkippedReason = `一覧ページの基準日（${primary.labelReferenceDate}）が既存データの最新基準日と同じで、出典URLも変わっていないため、Excelの取得を省略しました。`;
+      return {
+        ok: true,
+        downloadSkipped: true,
+        referenceDateUnchanged: true,
+        resolvedUrl: primary.url,
+        resolvedFrom: primary.from,
+        buffer: null,
+        bufferKind: null,
+        linkLabel: primary.label,
+        labelReferenceDate: primary.labelReferenceDate,
+        attachmentIdChanged: false,
+        issues,
+        diagnostics,
+      };
+    }
   }
 
   for (const attempt of attempts) {

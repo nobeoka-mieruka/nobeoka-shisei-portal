@@ -466,9 +466,19 @@ async function main() {
       });
       let level = result.level;
       let reason = result.reason;
-      if (!redAnomaly && yellowAnomaly && level === "GREEN") {
+      // Phase255：前年度比の大きな変動（YELLOW）は「公表値が既存データと一致しているか」で扱いを分ける。
+      // この変動幅はページに公表されている数値そのものから計算されるため、資料が更新されていなくても
+      // 毎回同じ値になる。実際、令和6年度の将来負担比率15.9%（前年度2.1%）は既にfinanceDashboard.jsonへ
+      // 登録済み＝人が一次資料と突き合わせて確認済みであるにもかかわらず、毎回YELLOWが立ち続けていた。
+      // 毎回鳴る通知は「変化があったときの通知」として機能しないため、outcome==="unchanged"
+      // （＝公表値が登録済みの値と一致し、ページも新年度ではない）の場合はGREENのままにし、
+      // 変動の事実は reason へ記録するだけにする。新年度・値の変化・RED異常は従来どおり検出する。
+      const ratioAlreadyConfirmed = outcome === "unchanged";
+      if (!redAnomaly && yellowAnomaly && level === "GREEN" && !ratioAlreadyConfirmed) {
         level = "YELLOW";
         reason = yellowAnomaly.reason;
+      } else if (!redAnomaly && yellowAnomaly && level === "GREEN" && ratioAlreadyConfirmed) {
+        reason = `${reason}／${yellowAnomaly.reason}（公表値は登録済みの値と一致するため確認済みとして扱う）`;
       } else if (anomalies.length > 0) {
         reason = `${reason}／${anomalies.map((a) => a.reason).join("／")}`;
       }

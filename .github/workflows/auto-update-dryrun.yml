@@ -7,14 +7,20 @@ name: Auto-update pipeline (dry-run audit)
 # population=人口。それぞれWorkstream C・B・Dが実装するもので、このworkflow自身は
 # Updaterのロジックを持たない）を「存在するもののみ」dry-runモードで順次実行し、
 # 生成された reports/auto-update/run-*.json・status.json の差分を検出したら、
-# botブランチ経由でPull Requestを作成する（既存の.github/workflows/sync-council-data.yml・
-# civic-archive-sync.ymlと同じ方式）。
+# その要約をジョブ要約（Actionsの実行画面）へ出し、レポート本体をArtifactとして保存する。
+#
+# 【Phase253（2026-09-12）でPR方式をやめた理由】
+# 以前は差分を検出するとbotブランチを作ってPull Requestを開く方式だったが、リポジトリ設定で
+# ActionsによるPR作成が許可されていないため、pushだけ成功してPR作成が必ず失敗し、
+# 読まれないブランチが毎日1本ずつ増え続けていた（19本・PRは0件）。ブランチを作らない方式を
+# 既定とし、PR方式はリポジトリ変数 BOT_PULL_REQUESTS_ENABLED=true を設定した場合だけ有効になる。
 #
 # 【このworkflowが行わないこと（重要）】
 # ・本番データ（src/data/*.json）への書き込み・commitは一切行わない
 #   （各Updaterはdry-runのみで、本番JSONを変更しない設計になっている。
 #   scripts/auto-update/bills/update-bills.mjsのコメント・reportのnoteフィールド参照）。
-# ・mainブランチへの直接push、auto-mergeは行わない（人が内容を確認してマージする）。
+# ・mainブランチへの直接push、auto-mergeは行わない。
+# ・既定ではブランチもcommitも作らない（成果物はジョブ要約とArtifactのみ）。
 # ・複数Updaterの並列実行はしない（同一の延岡市公式サイトへ負荷が集中するのを避けるため、
 #   1ジョブ内で順番に実行し、実際にHTTPアクセスを伴うUpdaterの実行後は待機を挟む）。
 #
@@ -293,8 +299,42 @@ jobs:
           EOF
           node /tmp/aggregate.mjs
 
-      - name: Create branch, commit and open Pull Request
+      # Phase253：dry-runの結果はまずジョブ要約（Actionsの実行画面）へ出す。
+      # ここではブランチもコミットも作らない。
+      #
+      # 【設計変更の理由（2026-09-12、実ログで確認した事実）】
+      # 旧実装は「ブランチ作成 → commit → push → gh pr create」を1ステップで行っていたため、
+      # push は成功するが gh pr create が
+      #   GraphQL: GitHub Actions is not permitted to create or approve pull requests (createPullRequest)
+      # で失敗し、set -e でステップが終了していた。結果として、誰も読まないブランチだけが
+      # 毎日1本ずつ増え続けていた（2026-08-24〜2026-09-11の19本。PRは1件も作られていない）。
+      # この権限はリポジトリ設定（Settings > Actions > General > Workflow permissions >
+      # Allow GitHub Actions to create and approve pull requests）であり、ワークフロー側からは
+      # 変更できない。そこで「設定が無効でもブランチが増えない」形を既定にする。
+      - name: Publish dry-run report to job summary
         if: steps.diff.outputs.changed == 'true'
+        run: |
+          cat /tmp/pr-body.md >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "> レポート本体は、この実行の Artifacts（auto-update-dryrun-reports）から取得できます。" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report that no dry-run差分 was produced
+        if: steps.diff.outputs.changed != 'true'
+        run: echo "自動更新パイプライン dry-run: レポートに差分はありませんでした（通知不要）。" >> "$GITHUB_STEP_SUMMARY"
+
+      # 【任意】リポジトリ設定でActionsによるPR作成を許可した場合だけ、PR方式を有効にする。
+      # 有効化の手順：
+      #   1. Settings > Actions > General > Workflow permissions で
+      #      「Allow GitHub Actions to create and approve pull requests」を有効にする。
+      #   2. Settings > Secrets and variables > Actions > Variables で
+      #      BOT_PULL_REQUESTS_ENABLED = true を追加する。
+      # 変数が未設定なら、このステップは丸ごとスキップされる（＝ブランチは作られない）。
+      #
+      # PR作成に失敗した場合は、このジョブが直前にpushしたブランチだけを削除して後始末する。
+      # 削除するのは「リモートのHEADが、たった今pushしたSHAと完全に一致する」場合に限る
+      # （他の誰かが触った可能性があるブランチは削除しない）。--force は使わない。
+      - name: Create branch and open Pull Request (opt-in)
+        if: steps.diff.outputs.changed == 'true' && vars.BOT_PULL_REQUESTS_ENABLED == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -307,11 +347,25 @@ jobs:
           git add reports/auto-update
           git commit -m "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）"
           git push origin "$BRANCH"
+          PUSHED_SHA="$(git rev-parse HEAD)"
+          set +e
           gh pr create \
             --title "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）" \
             --body-file /tmp/pr-body.md \
             --base main \
             --head "$BRANCH"
+          PR_STATUS=$?
+          set -e
+          if [ "$PR_STATUS" -ne 0 ]; then
+            REMOTE_SHA="$(git ls-remote origin "refs/heads/$BRANCH" | awk '{print $1}')"
+            if [ "$REMOTE_SHA" = "$PUSHED_SHA" ]; then
+              git push origin --delete "$BRANCH"
+              echo "::warning::PR作成に失敗したため、このジョブが作成したブランチ $BRANCH を削除しました（内容はArtifactsに残っています）。リポジトリ設定でActionsのPR作成が許可されているか確認してください。"
+            else
+              echo "::warning::PR作成に失敗しましたが、ブランチ $BRANCH の内容がpush時から変化しているため削除しませんでした。手動で確認してください。"
+            fi
+            exit "$PR_STATUS"
+          fi
 
       - name: Upload dry-run reports
         if: always()
