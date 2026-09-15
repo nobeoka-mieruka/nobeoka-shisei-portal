@@ -9,8 +9,8 @@
 
 | 項目 | 値 |
 | --- | --- |
-| release commit | `4e651ef`（Phase252〜255） |
-| production deploy ID | `884de6e1-9eb8-4a70-b419-6a0f6b8741ee` |
+| release commit | `64e0baa`（Phase256〜258） |
+| production deploy ID | `842d8756-3559-4419-934b-cfc2c2d2fc00` |
 | production URL | https://nobeoka-shisei-portal.pages.dev/ |
 
 このファイルを後から更新するコミットは記録の修正であり、公開内容の変更ではありません。
