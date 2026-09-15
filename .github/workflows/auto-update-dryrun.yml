@@ -318,9 +318,15 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "> レポート本体は、この実行の Artifacts（auto-update-dryrun-reports）から取得できます。" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Report that no dry-run差分 was produced
+      # 注意：この run: は必ずブロックスカラー（|）で書くこと。
+      # 1行形式（run: echo "... dry-run: ..."）にすると、本文に含まれる「コロン＋空白」を
+      # YAMLがマッピングの区切りとみなし、ワークフローファイル全体が解析不能になる。
+      # 実際にPhase253でこの形にしてしまい、GitHubがファイルを読めなくなった結果、
+      # scheduleが起動しなくなり、mainへのpushのたびに0秒の失敗runだけが記録されていた。
+      - name: Report that no dry-run diff was produced
         if: steps.diff.outputs.changed != 'true'
-        run: echo "自動更新パイプライン dry-run: レポートに差分はありませんでした（通知不要）。" >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          echo "自動更新パイプライン dry-run: レポートに差分はありませんでした（通知不要）。" >> "$GITHUB_STEP_SUMMARY"
 
       # 【任意】リポジトリ設定でActionsによるPR作成を許可した場合だけ、PR方式を有効にする。
       # 有効化の手順：

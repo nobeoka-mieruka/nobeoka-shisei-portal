@@ -153,6 +153,47 @@ ok(
   dryrunSteps.some((s) => /upload-artifact/.test(s.body) && /if:\s*always\(\)/.test(s.body)),
 );
 
+/* --- Phase259：ワークフローファイルがGitHubに読める形であること ---
+ *
+ * 【背景（実ログで確定した事実）】
+ * Phase253の編集で、1行形式の `run: echo "... dry-run: レポート..."` を書いてしまった。
+ * YAMLのプレーンスカラーは「コロン＋空白」を含められないため、この1行でファイル全体が
+ * 解析不能になり、GitHubはワークフロー名を読めず（実行一覧の名前がファイルパスになる）、
+ * scheduleは一切起動せず、mainへpushするたびに0秒・ジョブ0件の失敗runだけが記録されていた。
+ * 実行ログ上は「何も動いていない」ので原因が見えにくい。形の段階で止める。
+ *
+ * YAMLパーサを依存に追加せず、この壊れ方（1行スカラー内のコロン＋空白）だけを検出する。
+ * 複数行にしたい場合はブロックスカラー（`run: |`）を使うこと。
+ */
+const PLAIN_SCALAR_KEYS = ["run", "name", "if"];
+for (const file of workflowFiles) {
+  const text = readFileSync(join(WORKFLOW_DIR, file), "utf8");
+  const offenders = [];
+  for (const [i, line] of text.split(/\r?\n/).entries()) {
+    const m = line.match(/^\s*(?:- )?(run|name|if):\s+(.*)$/);
+    if (!m) continue;
+    const [, key, rawValue] = m;
+    if (!PLAIN_SCALAR_KEYS.includes(key)) continue;
+    const value = rawValue.trim();
+    // ブロックスカラー（| や >）と、値全体が引用符で囲まれている場合は対象外。
+    if (/^[|>]/.test(value)) continue;
+    if (/^"(?:[^"\\]|\\.)*"$/.test(value) || /^'(?:[^']|'')*'$/.test(value)) continue;
+    if (value.includes(": ")) offenders.push(`${i + 1}行目: ${key}: ${value.slice(0, 60)}`);
+  }
+  ok(
+    `${file}: 1行で書いたスカラーに「コロン＋空白」が無い（YAMLが解析不能になる書き方をしていない）${
+      offenders.length ? ` — ${offenders.join(" / ")}` : ""
+    }`,
+    offenders.length === 0,
+  );
+}
+
+/* ワークフロー名が読める形で定義されていること（GitHub上で名前がファイルパスに退化しない）。 */
+for (const file of workflowFiles) {
+  const text = readFileSync(join(WORKFLOW_DIR, file), "utf8");
+  ok(`${file}: トップレベルに name: が定義されている`, /^name:\s*\S/m.test(text));
+}
+
 /* 会議録公開監視（Phase252）が日次ワークフローへ組み込まれていること */
 const dailyText = readFileSync(join(WORKFLOW_DIR, "update-council-documents.yml"), "utf8");
 ok(
