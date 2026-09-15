@@ -179,6 +179,20 @@ export function GeneralQuestionDetailPage() {
               </p>
             )}
           </div>
+        ) : item.transcriptUrl ? (
+          // 会議録本文と照合済みの質問は、質問項目ごとの答弁の要約を議員ページの発言記録に
+          // 収録している（このページで同じ内容を二重に持たない）。
+          <p className="text-sm leading-relaxed text-on-surface-variant">
+            答弁の内容は公式会議録で確認済みです。質問項目ごとの答弁の要約は
+            {member ? (
+              <Link to={`/members/${member.id}`} className={`text-primary underline ${linkClass}`}>
+                {member.name}議員のページ
+              </Link>
+            ) : (
+              "議員のページ"
+            )}
+            に掲載しています。原文は下の出典欄の会議録ページからご覧いただけます。
+          </p>
         ) : (
           <p className="text-sm text-on-surface-variant">
             会議録で答弁内容を確認できていないため、現時点では掲載していません。
@@ -313,7 +327,11 @@ export function GeneralQuestionDetailPage() {
       )}
 
       {item.lastVerified && (
-        <LastUpdated dataAsOfLabel="この予定質問データの最終確認日" dataAsOf={formatJapaneseDate(item.lastVerified)} />
+        <LastUpdated
+          // 会議録本文と照合済みの質問は「予定」ではなくなるため、確認日のラベルも切り替える。
+          dataAsOfLabel={item.transcriptUrl ? "この質問データの最終確認日" : "この予定質問データの最終確認日"}
+          dataAsOf={formatJapaneseDate(item.lastVerified)}
+        />
       )}
 
       <CorrectionRequestButton pageName={`${item.memberName}議員の一般質問「${item.title}」`} />

@@ -3,9 +3,10 @@
  * データ分離と、公開後の安全な遷移（予定→実施確認→会議録本文確認済み）についての回帰テスト。
  *
  * 目的：
- * 1. 令和8年6月定例会（14件・市議会だよりで開催確認済み）と令和8年9月定例会（13件・未確認）が、
- *    データ構造上（generalQuestions.jsonのnewsletterConfirmedフィールド・sessionName）で
- *    明確に区別されたままであることを固定する。
+ * 1. 令和8年6月定例会（14件・Phase256で会議録本文と照合済み）と令和8年9月定例会（13件・会議録未公開）が、
+ *    データ構造上（generalQuestions.jsonのnewsletterConfirmedフィールド・sessionName・transcriptUrl）で
+ *    明確に区別されたままであることを固定する。会議録を確認済みかどうかは
+ *    questionCollectionStatus.jsonのtranscriptAvailableを単一情報源として判定し、会期名を直接書かない。
  * 2. 質問通告書公式ページ（総括質疑及び一般質問発言通告一覧表、1416.html→1402.html）が、
  *    既存の定期巡回台帳（src/data/archiveCrawlerTargets.json）に重複なく1件だけ登録されており、
  *    実際の取得ロジックは既存資産（scripts/sync-council-data.mjs）を再利用していることを確認する。
@@ -65,9 +66,18 @@ check("generalQuestions.jsonの令和8年9月定例会は13件、全件newslette
   );
 });
 
-check("generalQuestions.json（予定質問）は6月・9月とも1件もtranscriptUrlを持たない（会議録未確認のまま「確認済み」情報を混入させていない）", () => {
-  const pendingSessions = ["令和8年6月定例会", "令和8年9月定例会"];
-  const withTranscript = generalQuestions.filter((q) => pendingSessions.includes(q.sessionName) && q.transcriptUrl);
+check("会議録を確認していない会期の質問レコードは1件もtranscriptUrlを持たない（会議録未確認のまま「確認済み」情報を混入させていない）", () => {
+  // 「会議録を確認済みの会期」は収録状況（questionCollectionStatus.json）を単一情報源として導出し、
+  // 会期名をハードコードしない（照合が進んだ会期でこの検査が誤って失敗しないようにするため）。
+  const confirmedSessionIds = new Set(
+    readJson("src/data/questionCollectionStatus.json")
+      .sessions.filter((s) => s.transcriptAvailable === true)
+      .map((s) => s.sessionId),
+  );
+  const withTranscript = generalQuestions.filter((q) => {
+    const info = deriveSessionInfoFromSessionName(q.sessionName);
+    return q.transcriptUrl && (!info || !confirmedSessionIds.has(info.sessionId));
+  });
   assert.equal(withTranscript.length, 0, `会議録URLを持つ予定質問が${withTranscript.length}件あります（${withTranscript.map((q) => q.id).join("、")}）`);
 });
 
@@ -79,12 +89,24 @@ console.log("\nPhase171-2：questionCollectionStatus.jsonとの整合（会議�
 
 const questionCollectionStatus = readJson("src/data/questionCollectionStatus.json");
 
-check("questionCollectionStatus.jsonは13会期を対象とし、未公開（transcriptAvailable:false）は令和8年6月定例会の1件のみ", () => {
+check("questionCollectionStatus.jsonは13会期を対象とし、令和8年6月定例会（2026-06）は会議録照合済み（transcriptAvailable:true）である", () => {
   assert.equal(questionCollectionStatus.sessions.length, 13, `対象会期数が13件ではありません（${questionCollectionStatus.sessions.length}件）`);
-  const uncollected = questionCollectionStatus.sessions.filter((s) => !s.transcriptAvailable);
-  assert.equal(uncollected.length, 1, `会議録未公開の会期が1件ではありません（${uncollected.length}件）`);
-  assert.equal(uncollected[0].sessionId, "2026-06", `会議録未公開の会期IDが2026-06ではありません（${uncollected[0].sessionId}）`);
-  assert.equal(uncollected[0].sessionTitle, "令和8年6月定例会");
+  const june = questionCollectionStatus.sessions.find((s) => s.sessionId === "2026-06");
+  assert.ok(june, "questionCollectionStatus.jsonに2026-06が登録されていません");
+  assert.equal(june.sessionTitle, "令和8年6月定例会");
+  assert.equal(june.transcriptAvailable, true, "2026-06がtranscriptAvailable:trueになっていません（Phase256で会議録本文と照合済み）");
+  assert.ok(june.registeredSpeakerCount > 0, "2026-06の登録質問者数が0件のままです");
+});
+
+check("会議録照合済みの会期の質問レコードには、全件に会議録リンク（transcriptUrl）が登録されている", () => {
+  const confirmedSessionIds = new Set(
+    questionCollectionStatus.sessions.filter((s) => s.transcriptAvailable === true).map((s) => s.sessionId),
+  );
+  const missing = generalQuestions.filter((q) => {
+    const info = deriveSessionInfoFromSessionName(q.sessionName);
+    return info && confirmedSessionIds.has(info.sessionId) && !q.transcriptUrl;
+  });
+  assert.equal(missing.length, 0, `会議録照合済み会期なのに会議録リンクがない質問が${missing.length}件あります（${missing.map((q) => q.id).join("、")}）`);
 });
 
 check("令和8年9月定例会（2026-09）はquestionCollectionStatus.jsonにまだ登録されていない（会期そのものがまだ完全に終わっていないため、機械集計側の対象外のまま）", () => {
@@ -92,17 +114,23 @@ check("令和8年9月定例会（2026-09）はquestionCollectionStatus.jsonに�
   assert.equal(sept, undefined, "questionCollectionStatus.jsonに2026-09が登録されています（想定外の早期追加）");
 });
 
-check("generalQuestions.jsonに登録された全予定質問について、対応する会期がquestionCollectionStatus.json上でtranscriptAvailable:trueになっていない（＝現時点で「予定」と「確認済み」が重複した異常状態のレコードは存在しない）", () => {
+check("会議録確認済みの会期の質問レコードは、いずれも新規IDではなく質問通告書由来の既存IDのまま更新されている（二重登録していない）", () => {
   const transcriptAvailableSessionIds = new Set(
     questionCollectionStatus.sessions.filter((s) => s.transcriptAvailable === true).map((s) => s.sessionId),
   );
+  const seen = new Set();
   for (const q of generalQuestions) {
+    assert.ok(!seen.has(q.id), `質問IDが重複しています: ${q.id}`);
+    seen.add(q.id);
     const info = deriveSessionInfoFromSessionName(q.sessionName, q.questionDate);
-    if (!info) continue;
-    assert.ok(
-      !transcriptAvailableSessionIds.has(info.sessionId),
-      `予定質問${q.id}（${q.sessionName}）の会期は既に会議録確認済み（transcriptAvailable:true）です。確認済みデータへの手動移行が必要です`,
+    if (!info || !transcriptAvailableSessionIds.has(info.sessionId)) continue;
+    // 会議録確認済みへ移行しても、IDは質問通告書登録時（gq{年}-{月}-{議員ID}）のまま維持する。
+    assert.match(
+      q.id,
+      /^gq\d{4}-\d{2}-m\d{2}$/,
+      `会議録確認済みの質問${q.id}のIDが、質問通告書登録時の形式から変わっています（新規レコードを作っていないか確認が必要）`,
     );
+    assert.ok(q.noticeUrl, `会議録確認済みの質問${q.id}から質問通告書の出典が失われています`);
   }
 });
 
@@ -387,8 +415,8 @@ function computeConfirmedStats() {
 
 check("確認済み一般質問（councilSpeechSummaries.json、公開・収録対象期間内・一般質問系区分）の累計件数と質問項目数を固定する（トップページ・データ収録状況・一般質問一覧の「登壇・確認済み件数」と同じ集計条件）", () => {
   const { confirmedCount, totalQuestionItemCount } = computeConfirmedStats();
-  assert.equal(confirmedCount, 418, `確認済み一般質問の件数が418件ではありません（${confirmedCount}件）。src/lib/generalQuestionStats.tsのconfirmedCountの実データが変化した場合は、意図した変更か確認したうえで期待値を更新してください`);
-  assert.equal(totalQuestionItemCount, 1567, `確認済み一般質問の質問項目数が1567件ではありません（${totalQuestionItemCount}件）`);
+  assert.equal(confirmedCount, 432, `確認済み一般質問の件数が432件ではありません（${confirmedCount}件）。src/lib/generalQuestionStats.tsのconfirmedCountの実データが変化した場合は、意図した変更か確認したうえで期待値を更新してください`);
+  assert.equal(totalQuestionItemCount, 1717, `確認済み一般質問の質問項目数が1717件ではありません（${totalQuestionItemCount}件）`);
 });
 
 check("最新会期（現時点で会議録未公開）の予定質問者数：令和8年6月定例会14名・令和8年9月定例会13名。質問通告書ベースの2会期が同時に存在する状態を維持している", () => {
@@ -398,11 +426,11 @@ check("最新会期（現時点で会議録未公開）の予定質問者数：�
   assert.equal(septMembers.size, 13, `令和8年9月定例会の質問者数（議員の種類数）が13名ではありません（${septMembers.size}名）`);
 });
 
-check("未公開会期の予定質問合計（scheduledCount=27件）と確認済み件数（confirmedCount=418件）は、それぞれ独立した集計値として固定される（generalQuestionStats.tsの設計方針どおり、対象が重ならない別々の集合として扱われ、単純合算した「合計445件」等の値をどこにも表示していないことを、この2つの期待値そのものが担保する）", () => {
+check("未公開会期の予定質問合計（scheduledCount=27件）と確認済み件数（confirmedCount=432件）は、それぞれ独立した集計値として固定される（generalQuestionStats.tsの設計方針どおり、対象が重ならない別々の集合として扱われ、単純合算した「合計459件」等の値をどこにも表示していないことを、この2つの期待値そのものが担保する）", () => {
   const scheduledCount = generalQuestions.length;
   const { confirmedCount } = computeConfirmedStats();
   assert.equal(scheduledCount, 27);
-  assert.equal(confirmedCount, 418);
+  assert.equal(confirmedCount, 432);
 });
 
 console.log("\nPhase203：「直近の確認済み会期」と「次回・開催予定の会期」の分離");

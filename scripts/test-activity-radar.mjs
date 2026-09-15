@@ -116,8 +116,34 @@ console.log("TRANSCRIPT_AVAILABLE_SESSION_IDS の確認");
 test("会議録取得済みの会期が1件以上ある", () => {
   assert.ok(TRANSCRIPT_AVAILABLE_SESSION_IDS.length > 0);
 });
-test("会議録未公開の会期（2026-06）は含まれない", () => {
-  assert.ok(!TRANSCRIPT_AVAILABLE_SESSION_IDS.includes("2026-06"));
+// 「未公開の会期」は会期IDをハードコードせず、収録状況データ（transcriptAvailable）から導出する。
+// 会議録を照合して収録済みへ切り替えた会期（Phase256の2026-06など）でこの検査が壊れないようにするため。
+const collectionStatus = JSON.parse(readFileSync(join(ROOT, "src/data/questionCollectionStatus.json"), "utf8"));
+const transcriptAvailableSessionIds = collectionStatus.sessions
+  .filter((s) => s.transcriptAvailable === true)
+  .map((s) => s.sessionId);
+// 質問通告書だけを根拠に登録されている会期（収録状況でtranscriptAvailable:trueになっていない会期。
+// 収録状況へ未登録の会期も含む）は、会議録取得済みとして数えてはならない。
+const noticeOnlySessionIds = [
+  ...new Set(
+    JSON.parse(readFileSync(join(ROOT, "src/data/generalQuestions.json"), "utf8"))
+      .map((q) => String(q.questionDate ?? "").slice(0, 7))
+      .filter((id) => id && !transcriptAvailableSessionIds.includes(id)),
+  ),
+];
+test("会議録を確認できていない会期（質問通告書のみで登録された会期）は含まれない", () => {
+  assert.ok(
+    noticeOnlySessionIds.length > 0,
+    "質問通告書のみの会期が1件もないため、この検査が素通りしています（想定外）",
+  );
+  for (const id of noticeOnlySessionIds) {
+    assert.ok(!TRANSCRIPT_AVAILABLE_SESSION_IDS.includes(id), `会議録未確認の会期 ${id} が含まれています`);
+  }
+});
+test("会議録を照合済みの会期（収録状況がtranscriptAvailable:trueの会期）は全て含まれる", () => {
+  for (const id of transcriptAvailableSessionIds) {
+    assert.ok(TRANSCRIPT_AVAILABLE_SESSION_IDS.includes(id), `照合済みの会期 ${id} が含まれていません`);
+  }
 });
 
 console.log("\ncalculateQuestionActivityIndex");

@@ -1,0 +1,1368 @@
+{
+  "generatedAt": "2026-09-12",
+  "phase": "Phase257",
+  "note": "過去に残ったdry-run専用botブランチの整理記録。削除はこの記録を保存した後に行う。--force・一括削除は使用しない。今後の増殖防止はPhase253で実装済み（ブランチを作らない既定＋opt-in時のSHA一致確認つき後始末）。",
+  "policy": {
+    "deletionConditions": [
+      "dry-run専用生成物のみ（またはmainに包含済み）",
+      "未反映コードなし",
+      "未反映データなし",
+      "未反映一次資料なし",
+      "open PRなし",
+      "復元情報をこの記録へ保存済み"
+    ],
+    "prohibited": [
+      "一括force delete",
+      "内容未確認の削除",
+      "main未包含の実データcommitの削除",
+      "tag削除",
+      "main削除",
+      "稼働中branchの削除"
+    ]
+  },
+  "pullRequests": {
+    "open": 0,
+    "all": 0,
+    "source": "gh pr list --state open / --state all（いずれも0件）"
+  },
+  "summary": {
+    "startingBranchCount": 19,
+    "decisionDelete": 19,
+    "decisionKeep": 0,
+    "forceDeleteCount": 0,
+    "deleted": 19,
+    "skipped": 0
+  },
+  "branches": [
+    {
+      "branch": "bot/auto-update-dryrun-20260824095226",
+      "headSha": "8b3a668c5ec22b845e83fae629a6165734915a31",
+      "treeSha": "b3836a3330ee35f4778eca1f0859eeed912e9bb3",
+      "createdAt": "2026-08-24T09:52:26Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-24、GREEN44/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-24T09-49-45-881Z.json",
+          "reports/auto-update/run-finance-2026-08-24T09-51-08-456Z.json",
+          "reports/auto-update/run-population-2026-08-24T09-51-42-422Z.json",
+          "reports/auto-update/run-questions-2026-08-24T09-50-33-898Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-24T09-49-45-881Z.json",
+          "blobSha": "8337b29d3e9df74ad6a95deaaee106ecc333d68c"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-24T09-51-08-456Z.json",
+          "blobSha": "f2e721431eccc32bc8a9ec7c7c3dad4c7606de9c"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-24T09-51-42-422Z.json",
+          "blobSha": "8e779e1f38388f42e03afa0c888c5ca2eb3b16fe"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-24T09-50-33-898Z.json",
+          "blobSha": "5eb8e35559cdf619cc16eae83bb653a90e1408f2"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "ed094a8b6c355667de9dd6a4a2df5d19dcd79d68"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-24T09-49-45-881Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-24T09-51-08-456Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-24T09-51-42-422Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-24T09-50-33-898Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 8b3a668c5ec22b845e83fae629a6165734915a31:refs/heads/bot/auto-update-dryrun-20260824095226",
+      "deletedAt": "2026-09-12T12:03:41.681Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260825093905",
+      "headSha": "9d4b05aa9cba80eda6a2d1f931545e924ba7de15",
+      "treeSha": "7ee501aa73b08333a1e4b9f592b96e86ae826d39",
+      "createdAt": "2026-08-25T09:39:05Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-25、GREEN44/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-25T09-36-29-404Z.json",
+          "reports/auto-update/run-finance-2026-08-25T09-37-46-782Z.json",
+          "reports/auto-update/run-population-2026-08-25T09-38-19-771Z.json",
+          "reports/auto-update/run-questions-2026-08-25T09-37-13-502Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-25T09-36-29-404Z.json",
+          "blobSha": "f95fa34fe78df8b95990ad4cfdd6cabf207ca6ca"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-25T09-37-46-782Z.json",
+          "blobSha": "f12a629dfa3e453224a907d74580b4b910cea5da"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-25T09-38-19-771Z.json",
+          "blobSha": "d7c6c51f45a5569d29febe28f69425489989a06b"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-25T09-37-13-502Z.json",
+          "blobSha": "22052a99deeb25c3e606d40b53d9d0d505e63936"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "67bfd084c45b1241afeffbd72570fd0d9668d09e"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-25T09-36-29-404Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-25T09-37-46-782Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-25T09-38-19-771Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-25T09-37-13-502Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 9d4b05aa9cba80eda6a2d1f931545e924ba7de15:refs/heads/bot/auto-update-dryrun-20260825093905",
+      "deletedAt": "2026-09-12T12:03:44.997Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260826094518",
+      "headSha": "46ca116af196eb618403173288bf598acd4c2d9e",
+      "treeSha": "524abe98f278fd001cb0b1c5272f3a3d2ea61faf",
+      "createdAt": "2026-08-26T09:45:18Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-26、GREEN44/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-26T09-42-31-085Z.json",
+          "reports/auto-update/run-finance-2026-08-26T09-43-57-819Z.json",
+          "reports/auto-update/run-population-2026-08-26T09-44-32-306Z.json",
+          "reports/auto-update/run-questions-2026-08-26T09-43-23-303Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-26T09-42-31-085Z.json",
+          "blobSha": "6493e3ecae301dd01cd2b3a4dcc4db4c178e6ce7"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-26T09-43-57-819Z.json",
+          "blobSha": "aa3be08120c20701be79ea8a82de8a3fd376769b"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-26T09-44-32-306Z.json",
+          "blobSha": "fd9c18e773e006402c5ae7b5429a37da69fbe0c4"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-26T09-43-23-303Z.json",
+          "blobSha": "e196f8a62dfdf276ddeb4bcd317501956a0ed0e2"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "763827fab7dfd2c2bbc62db273e7965318f6812b"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-26T09-42-31-085Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-26T09-43-57-819Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-26T09-44-32-306Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-26T09-43-23-303Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 46ca116af196eb618403173288bf598acd4c2d9e:refs/heads/bot/auto-update-dryrun-20260826094518",
+      "deletedAt": "2026-09-12T12:03:48.588Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260827194159",
+      "headSha": "05be01482d2859f9b0a113c56c87f1e6fe6fbaa7",
+      "treeSha": "1977bd7cced3a6d9ac778742d2119d72723f94d2",
+      "createdAt": "2026-08-27T19:41:59Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-27、GREEN44/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-27T19-39-21-686Z.json",
+          "reports/auto-update/run-finance-2026-08-27T19-40-40-790Z.json",
+          "reports/auto-update/run-population-2026-08-27T19-41-13-567Z.json",
+          "reports/auto-update/run-questions-2026-08-27T19-40-07-741Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-27T19-39-21-686Z.json",
+          "blobSha": "09d77edee6c299910dc888c51953e9f08ab8d7e9"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-27T19-40-40-790Z.json",
+          "blobSha": "15ba5774f991cf8eb1c6c6a245809c279c2044fa"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-27T19-41-13-567Z.json",
+          "blobSha": "bdaf428325cc9bc4ed0b8687d7a11111164042ff"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-27T19-40-07-741Z.json",
+          "blobSha": "648b3cfe600968515688759ccc799c133a360e49"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "bdd62dd334fda0c0bcf65b9115cfbaa733a16372"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-27T19-39-21-686Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-27T19-40-40-790Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-27T19-41-13-567Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-27T19-40-07-741Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 05be01482d2859f9b0a113c56c87f1e6fe6fbaa7:refs/heads/bot/auto-update-dryrun-20260827194159",
+      "deletedAt": "2026-09-12T12:03:52.636Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260828204655",
+      "headSha": "ddebc30d237ca064a2ff9bf3ff2174bcad4f21a1",
+      "treeSha": "436563d06c475036d8c8e132084bf5d4674b9c3e",
+      "createdAt": "2026-08-28T20:46:55Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-28、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-28T20-44-13-944Z.json",
+          "reports/auto-update/run-finance-2026-08-28T20-45-35-288Z.json",
+          "reports/auto-update/run-population-2026-08-28T20-46-09-753Z.json",
+          "reports/auto-update/run-questions-2026-08-28T20-45-00-665Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-28T20-44-13-944Z.json",
+          "blobSha": "4b364ca1846972f3491401712302bf85d4f8fef0"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-28T20-45-35-288Z.json",
+          "blobSha": "5ccad6c52ef72282de8db13e151bdaeae6b7dd3c"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-28T20-46-09-753Z.json",
+          "blobSha": "844ca3959d71b746f61df0c24772540d49a7eec1"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-28T20-45-00-665Z.json",
+          "blobSha": "cf210ac92949f95af677ceb50a38e3d1034df864"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "1ef41b79b4729a228011f9e76c37c1c02eea93b0"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-28T20-44-13-944Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-28T20-45-35-288Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-28T20-46-09-753Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-28T20-45-00-665Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin ddebc30d237ca064a2ff9bf3ff2174bcad4f21a1:refs/heads/bot/auto-update-dryrun-20260828204655",
+      "deletedAt": "2026-09-12T12:03:55.743Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260829141519",
+      "headSha": "8629cde8558d1d5425fa90ca8130c57e6ca8cbc4",
+      "treeSha": "cb6fd375bd714e72d21c78ace153a9f0d38645d0",
+      "createdAt": "2026-08-29T14:15:19Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-29、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-29T14-12-37-283Z.json",
+          "reports/auto-update/run-finance-2026-08-29T14-13-59-296Z.json",
+          "reports/auto-update/run-population-2026-08-29T14-14-32-591Z.json",
+          "reports/auto-update/run-questions-2026-08-29T14-13-24-573Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-29T14-12-37-283Z.json",
+          "blobSha": "e29f4407dd98cc25b149724dd7bd28e33486b648"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-29T14-13-59-296Z.json",
+          "blobSha": "225eb26b19fbedf3bb262a2b19903a0f5db04a0f"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-29T14-14-32-591Z.json",
+          "blobSha": "1f339ada655b1c12ad8f3a46b638cf71a5f5cb50"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-29T14-13-24-573Z.json",
+          "blobSha": "8aeec5c84637ad57994409f61283d38f9c69fdd7"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "191e1f0b3faff67d25ded3e6addf09591e861ce1"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-29T14-12-37-283Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-29T14-13-59-296Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-29T14-14-32-591Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-29T14-13-24-573Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 8629cde8558d1d5425fa90ca8130c57e6ca8cbc4:refs/heads/bot/auto-update-dryrun-20260829141519",
+      "deletedAt": "2026-09-12T12:03:59.059Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260830142126",
+      "headSha": "730bcb722c8cffb5f69da23e77d1b7294c2768b0",
+      "treeSha": "f0d994793e628dde485b0fc6387096a73c9e1bf4",
+      "createdAt": "2026-08-30T14:21:26Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-30、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-30T14-18-45-581Z.json",
+          "reports/auto-update/run-finance-2026-08-30T14-20-06-010Z.json",
+          "reports/auto-update/run-population-2026-08-30T14-20-39-788Z.json",
+          "reports/auto-update/run-questions-2026-08-30T14-19-31-629Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-30T14-18-45-581Z.json",
+          "blobSha": "a9fdfb9756c030cca15c00522ebe5c576b632d97"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-30T14-20-06-010Z.json",
+          "blobSha": "c1009f91512397e6bfd9f0fe9e2b9b113beec907"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-30T14-20-39-788Z.json",
+          "blobSha": "02b9a5f4f320155c08010610d9870d601b3d5950"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-30T14-19-31-629Z.json",
+          "blobSha": "d273c77172a709cd15b1357f6815168ff2cbe099"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "f8832d1bfc035eb2671f7ef7d751f1c06f675ed3"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-30T14-18-45-581Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-30T14-20-06-010Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-30T14-20-39-788Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-30T14-19-31-629Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 730bcb722c8cffb5f69da23e77d1b7294c2768b0:refs/heads/bot/auto-update-dryrun-20260830142126",
+      "deletedAt": "2026-09-12T12:04:02.285Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260831164954",
+      "headSha": "de35531050a67c68109a084c90d45d9033d8e055",
+      "treeSha": "46be7a480747ec01cb29b2c690b23b5c32172b7a",
+      "createdAt": "2026-08-31T16:49:54Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-08-31、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-08-31T16-47-14-751Z.json",
+          "reports/auto-update/run-finance-2026-08-31T16-48-37-199Z.json",
+          "reports/auto-update/run-population-2026-08-31T16-49-10-811Z.json",
+          "reports/auto-update/run-questions-2026-08-31T16-48-03-943Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-31T16-47-14-751Z.json",
+          "blobSha": "86cb8b049357007a1d8cebaa14fe2259b3257e3f"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-31T16-48-37-199Z.json",
+          "blobSha": "b634af3a32279e8886d75da2c1c264e4a302e0ce"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-31T16-49-10-811Z.json",
+          "blobSha": "02b69de472fd7181ec78071b2b860fccfb0345bb"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-31T16-48-03-943Z.json",
+          "blobSha": "7c756526b98e0cf943fc075c12d09b95bd46f519"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "732caca99e707975a14be8e2142eea82d79c7c0d"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-08-31T16-47-14-751Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-08-31T16-48-37-199Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-08-31T16-49-10-811Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-08-31T16-48-03-943Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin de35531050a67c68109a084c90d45d9033d8e055:refs/heads/bot/auto-update-dryrun-20260831164954",
+      "deletedAt": "2026-09-12T12:04:06.366Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260901140146",
+      "headSha": "de7463efc659c2ca8c5d29e31d23adc3809dcd7e",
+      "treeSha": "456c2a4344ffb48d5300fc0cfbbf41991f65751b",
+      "createdAt": "2026-09-01T14:01:46Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-01、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-01T13-59-06-360Z.json",
+          "reports/auto-update/run-finance-2026-09-01T14-00-27-984Z.json",
+          "reports/auto-update/run-population-2026-09-01T14-01-02-854Z.json",
+          "reports/auto-update/run-questions-2026-09-01T13-59-53-854Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-01T13-59-06-360Z.json",
+          "blobSha": "05e6dd5879928b515ef4f2775cb2ebe3e997d9d9"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-01T14-00-27-984Z.json",
+          "blobSha": "c90df7baff3f0d086b46f0e4f741b99d861cc9fc"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-01T14-01-02-854Z.json",
+          "blobSha": "6c772a2418652d5977193fc9f168a6acc1432024"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-01T13-59-53-854Z.json",
+          "blobSha": "3bfbeb21e27502bbbd0b72b67d610cf81d490df0"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "307d464d4a73f83204edc61a6421d6c0f333d3fe"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-01T13-59-06-360Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-01T14-00-27-984Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-01T14-01-02-854Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-01T13-59-53-854Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin de7463efc659c2ca8c5d29e31d23adc3809dcd7e:refs/heads/bot/auto-update-dryrun-20260901140146",
+      "deletedAt": "2026-09-12T12:04:09.749Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260902132310",
+      "headSha": "662af2dd88812813efe36ba99577f91fed9d5b6a",
+      "treeSha": "9b8e0d675fba90967db49fa040ccc2281227ba06",
+      "createdAt": "2026-09-02T13:23:10Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-02、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-02T13-20-29-356Z.json",
+          "reports/auto-update/run-finance-2026-09-02T13-21-50-135Z.json",
+          "reports/auto-update/run-population-2026-09-02T13-22-23-626Z.json",
+          "reports/auto-update/run-questions-2026-09-02T13-21-15-800Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-02T13-20-29-356Z.json",
+          "blobSha": "3117587a4d3b645213b2bc6ebb9050e66449e09a"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-02T13-21-50-135Z.json",
+          "blobSha": "f0d78c1fbec5d58a92ab73ca62f6a806c9bd0e14"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-02T13-22-23-626Z.json",
+          "blobSha": "9b1c07adefe9a77369b07318b0bb123fd2a00669"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-02T13-21-15-800Z.json",
+          "blobSha": "bb30f3ddf07459f6efdde76bb5bcb8c6f183e40b"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "0be76a055fe41e799252f0c548097ed966a60fbb"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-02T13-20-29-356Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-02T13-21-50-135Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-02T13-22-23-626Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-02T13-21-15-800Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 662af2dd88812813efe36ba99577f91fed9d5b6a:refs/heads/bot/auto-update-dryrun-20260902132310",
+      "deletedAt": "2026-09-12T12:04:13.075Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260903132156",
+      "headSha": "7706041fae6333e1f469deba7df445ddcb8535ab",
+      "treeSha": "8c3a83531afaf219fe816b78488f4c0214188e6d",
+      "createdAt": "2026-09-03T13:21:56Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-03、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-03T13-19-14-704Z.json",
+          "reports/auto-update/run-finance-2026-09-03T13-20-36-411Z.json",
+          "reports/auto-update/run-population-2026-09-03T13-21-10-286Z.json",
+          "reports/auto-update/run-questions-2026-09-03T13-20-01-973Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-03T13-19-14-704Z.json",
+          "blobSha": "16aa63e5d534509c1cbb09f2458015d79d4493bb"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-03T13-20-36-411Z.json",
+          "blobSha": "898110b38785a8a3ec0fffa9be54c792b6fe7985"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-03T13-21-10-286Z.json",
+          "blobSha": "608d9d8cfe288b4778ccb3fb65a909122d3c2513"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-03T13-20-01-973Z.json",
+          "blobSha": "e8eb89a9bebe6300a2f715ade82cea3127080751"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "b7f67ed6828ad1b03945c25962a09c9a651f23cd"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-03T13-19-14-704Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-03T13-20-36-411Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-03T13-21-10-286Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-03T13-20-01-973Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 7706041fae6333e1f469deba7df445ddcb8535ab:refs/heads/bot/auto-update-dryrun-20260903132156",
+      "deletedAt": "2026-09-12T12:04:16.645Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260904131548",
+      "headSha": "c474a7b1c96e56879bcfcb7ef88b986c7a213e71",
+      "treeSha": "a3f618cb81d951cbc21a6dd37b8b0715099836d3",
+      "createdAt": "2026-09-04T13:15:48Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-04、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-04T13-13-06-247Z.json",
+          "reports/auto-update/run-finance-2026-09-04T13-14-27-229Z.json",
+          "reports/auto-update/run-population-2026-09-04T13-15-00-614Z.json",
+          "reports/auto-update/run-questions-2026-09-04T13-13-52-960Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-04T13-13-06-247Z.json",
+          "blobSha": "ddae9fbd6d32001b862e8d71f17c9edde379bc07"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-04T13-14-27-229Z.json",
+          "blobSha": "75ee8adaa75e1ebd880ab43223d6debda42396c2"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-04T13-15-00-614Z.json",
+          "blobSha": "657c12dc5e819b6948dd947a32043b4006616e59"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-04T13-13-52-960Z.json",
+          "blobSha": "26cf3eb4204154a5ccba3e66ab08478f585cdfdc"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "189bf6170dc29e8b59ce4e545231a3beedd63ecf"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-04T13-13-06-247Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-04T13-14-27-229Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-04T13-15-00-614Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-04T13-13-52-960Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin c474a7b1c96e56879bcfcb7ef88b986c7a213e71:refs/heads/bot/auto-update-dryrun-20260904131548",
+      "deletedAt": "2026-09-12T12:04:20.026Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260905123009",
+      "headSha": "ce7b13ac53c48314d67e6af2edfb3f58839f8397",
+      "treeSha": "fef264edcccb39bd8909896829757802e921dc71",
+      "createdAt": "2026-09-05T12:30:09Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-05、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-05T12-27-30-906Z.json",
+          "reports/auto-update/run-finance-2026-09-05T12-28-47-352Z.json",
+          "reports/auto-update/run-population-2026-09-05T12-29-20-783Z.json",
+          "reports/auto-update/run-questions-2026-09-05T12-28-13-806Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-05T12-27-30-906Z.json",
+          "blobSha": "cd7567aa9e14c305ce392ba2e98e6f293a36d0a1"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-05T12-28-47-352Z.json",
+          "blobSha": "9be9fc5495225a9b2c99beceb61a6c411a383b43"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-05T12-29-20-783Z.json",
+          "blobSha": "c2db2224d937f312a78cd86967b078ffcb8659a7"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-05T12-28-13-806Z.json",
+          "blobSha": "b875db0777fe3f2e585ce25de0e85b9ffad3d145"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "bb5914d70ecd89fa085c0b48b6d69228dd7793ec"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-05T12-27-30-906Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-05T12-28-47-352Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-05T12-29-20-783Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-05T12-28-13-806Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin ce7b13ac53c48314d67e6af2edfb3f58839f8397:refs/heads/bot/auto-update-dryrun-20260905123009",
+      "deletedAt": "2026-09-12T12:04:23.915Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260906124333",
+      "headSha": "c1301790e072a420a32e6cf819d247052bcff202",
+      "treeSha": "bce59028a4cdc1d0ee91e19f637bd68ea447905f",
+      "createdAt": "2026-09-06T12:43:33Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-06、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-06T12-40-52-103Z.json",
+          "reports/auto-update/run-finance-2026-09-06T12-42-15-854Z.json",
+          "reports/auto-update/run-population-2026-09-06T12-42-49-801Z.json",
+          "reports/auto-update/run-questions-2026-09-06T12-41-41-103Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-06T12-40-52-103Z.json",
+          "blobSha": "68889a1658dc937a7fe5ef789ddd1d4b1d01dbe2"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-06T12-42-15-854Z.json",
+          "blobSha": "246b7f79ff9e66050e6577d06855d98e2bde22aa"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-06T12-42-49-801Z.json",
+          "blobSha": "550aa1ecb9f15e806ea91ea430d16f9faaace179"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-06T12-41-41-103Z.json",
+          "blobSha": "0dea88545e05ab695fc12acc7daff792f7f9d644"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "4b8e765073e67a6810ce3a39c088917b62f57770"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-06T12-40-52-103Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-06T12-42-15-854Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-06T12-42-49-801Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-06T12-41-41-103Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin c1301790e072a420a32e6cf819d247052bcff202:refs/heads/bot/auto-update-dryrun-20260906124333",
+      "deletedAt": "2026-09-12T12:04:28.130Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260907145441",
+      "headSha": "210ea611c11263098f25be8c871fe925fb928736",
+      "treeSha": "69ee68d5d9f363b18003bfaf14c09da3c1dee000",
+      "createdAt": "2026-09-07T14:54:41Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-07、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-07T14-52-01-111Z.json",
+          "reports/auto-update/run-finance-2026-09-07T14-53-22-596Z.json",
+          "reports/auto-update/run-population-2026-09-07T14-53-56-349Z.json",
+          "reports/auto-update/run-questions-2026-09-07T14-52-47-882Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-07T14-52-01-111Z.json",
+          "blobSha": "d52833709d082301d1f8adce4e985c09f20404ec"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-07T14-53-22-596Z.json",
+          "blobSha": "405a1e45704a1ad5435d3242d77d0e693fa26882"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-07T14-53-56-349Z.json",
+          "blobSha": "55b3b4f91fcbbede2dfddbf9ba7f78129acfad39"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-07T14-52-47-882Z.json",
+          "blobSha": "893af2a7322a2d7ebcb0c90516a2c378f2e9b909"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "e86a0967db274397950134249cf8ed9359fa5fb4"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-07T14-52-01-111Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-07T14-53-22-596Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-07T14-53-56-349Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-07T14-52-47-882Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 210ea611c11263098f25be8c871fe925fb928736:refs/heads/bot/auto-update-dryrun-20260907145441",
+      "deletedAt": "2026-09-12T12:04:31.331Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260908132507",
+      "headSha": "364088e23f09ca71c8a24d382f22679cad0d5938",
+      "treeSha": "88135a9a58ead3f15cccef7f0bfbb7beb7610593",
+      "createdAt": "2026-09-08T13:25:07Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-08、GREEN45/YELLOW2）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-08T13-22-21-824Z.json",
+          "reports/auto-update/run-finance-2026-09-08T13-23-44-517Z.json",
+          "reports/auto-update/run-population-2026-09-08T13-24-18-243Z.json",
+          "reports/auto-update/run-questions-2026-09-08T13-23-09-675Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-08T13-22-21-824Z.json",
+          "blobSha": "433a2340df579dd46f5fe93b5a1c6159d11aeb49"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-08T13-23-44-517Z.json",
+          "blobSha": "a3bb82304cfddb016e30002c433bbd630ef41907"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-08T13-24-18-243Z.json",
+          "blobSha": "e397fcf076fbdabf8551aa7114158565c880f268"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-08T13-23-09-675Z.json",
+          "blobSha": "66039c2878184d9bd0994e20a3cfbdd9547d9da7"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "798a919a6eec92708cebc7d57ee2a27399343343"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-08T13-22-21-824Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-08T13-23-44-517Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-08T13-24-18-243Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-08T13-23-09-675Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 364088e23f09ca71c8a24d382f22679cad0d5938:refs/heads/bot/auto-update-dryrun-20260908132507",
+      "deletedAt": "2026-09-12T12:04:35.252Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260909133245",
+      "headSha": "2469d204b7cf420215559bf0c60b2f57b507874e",
+      "treeSha": "daffad21383f56939e98109c9aecc77584de7354",
+      "createdAt": "2026-09-09T13:32:45Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-09、RED判定あり・要確認）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-09T13-30-31-908Z.json",
+          "reports/auto-update/run-finance-2026-09-09T13-31-53-647Z.json",
+          "reports/auto-update/run-population-2026-09-09T13-32-27-345Z.json",
+          "reports/auto-update/run-questions-2026-09-09T13-31-19-026Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-09T13-30-31-908Z.json",
+          "blobSha": "9786cf25c3746cee676d358a0bae0c3a0a3bbcc5"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-09T13-31-53-647Z.json",
+          "blobSha": "b16ac8e29f70cf6ae4e2cab8aa92be4a84f8bb6e"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-09T13-32-27-345Z.json",
+          "blobSha": "20c512f888bf4b3e24836b0540f39a7a97daba01"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-09T13-31-19-026Z.json",
+          "blobSha": "00480ff4cfde72f9f0ab30023f81ea00d88f495c"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "9e3c8e419a8dfc05bebf2fca30f6927e862108e0"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-09T13-30-31-908Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-09T13-31-53-647Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-09T13-32-27-345Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-09T13-31-19-026Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 2469d204b7cf420215559bf0c60b2f57b507874e:refs/heads/bot/auto-update-dryrun-20260909133245",
+      "deletedAt": "2026-09-12T12:04:38.641Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260910132349",
+      "headSha": "d930087f4920e8744454dc97e68bd71861ec321e",
+      "treeSha": "665cbba112298023e0934724cadae9c6b07c0a6c",
+      "createdAt": "2026-09-10T13:23:49Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-10、RED判定あり・要確認）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-10T13-21-36-970Z.json",
+          "reports/auto-update/run-finance-2026-09-10T13-22-57-402Z.json",
+          "reports/auto-update/run-population-2026-09-10T13-23-30-713Z.json",
+          "reports/auto-update/run-questions-2026-09-10T13-22-23-826Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-10T13-21-36-970Z.json",
+          "blobSha": "bc99490ab5cd391d47d593f0e25375743960d7b3"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-10T13-22-57-402Z.json",
+          "blobSha": "7868436918e5ad100cb057de4e891202d8f1f855"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-10T13-23-30-713Z.json",
+          "blobSha": "50ad4d67aba01462796c7bde3873c5daad917530"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-10T13-22-23-826Z.json",
+          "blobSha": "6389592cf23784b9d455542b85967cf36c46bacc"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "0f1095b6f09c023d847247726ee064c00e482d4a"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-10T13-21-36-970Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-10T13-22-57-402Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-10T13-23-30-713Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-10T13-22-23-826Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin d930087f4920e8744454dc97e68bd71861ec321e:refs/heads/bot/auto-update-dryrun-20260910132349",
+      "deletedAt": "2026-09-12T12:04:41.867Z"
+    },
+    {
+      "branch": "bot/auto-update-dryrun-20260911132242",
+      "headSha": "5791944a8061af8941441cc76d11a7cd51948ae9",
+      "treeSha": "671f949cb03f5fef43d103e324db4244896d7bea",
+      "createdAt": "2026-09-11T13:22:42Z",
+      "commitCount": 1,
+      "commitSubject": "chore: 自動更新パイプライン dry-run監査レポート（2026-09-11、RED判定あり・要確認）",
+      "diffSummary": {
+        "changedFiles": 5,
+        "files": [
+          "reports/auto-update/run-bills-2026-09-11T13-20-29-705Z.json",
+          "reports/auto-update/run-finance-2026-09-11T13-21-50-025Z.json",
+          "reports/auto-update/run-population-2026-09-11T13-22-23-390Z.json",
+          "reports/auto-update/run-questions-2026-09-11T13-21-15-768Z.json",
+          "reports/auto-update/status.json"
+        ],
+        "nonReportFiles": [],
+        "srcDataFiles": [],
+        "codeFiles": []
+      },
+      "containedInMain": "NO",
+      "fileHashes": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-11T13-20-29-705Z.json",
+          "blobSha": "0f9d58efb0c20f411c309bb4f5707eaf9ca38f39"
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-11T13-21-50-025Z.json",
+          "blobSha": "715c05c76dfb25d2ef4f6e38173908b89b32ebb6"
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-11T13-22-23-390Z.json",
+          "blobSha": "23c0599c7fe79a998d3b47983a0f58e335ac419b"
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-11T13-21-15-768Z.json",
+          "blobSha": "51a1580906623b99bf5158f965b13fc8d08eae8e"
+        },
+        {
+          "file": "reports/auto-update/status.json",
+          "blobSha": "8dcca89427c6c948dcab52acae6a0bc392964fea"
+        }
+      ],
+      "dryRunFlags": [
+        {
+          "file": "reports/auto-update/run-bills-2026-09-11T13-20-29-705Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-finance-2026-09-11T13-21-50-025Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-population-2026-09-11T13-22-23-390Z.json",
+          "dryRun": true
+        },
+        {
+          "file": "reports/auto-update/run-questions-2026-09-11T13-21-15-768Z.json",
+          "dryRun": true
+        }
+      ],
+      "unmergedCode": false,
+      "unmergedData": false,
+      "unmergedPrimarySource": false,
+      "openPullRequest": false,
+      "decision": "DELETE",
+      "reason": "dry-run専用生成物のみ（reports/auto-update/配下の run-*.json 4件＋status.json）。未反映のコード・src/data・一次資料はいずれも0件で、全run reportが dryRun:true。対応するPull Requestは開始から1件も存在しない（gh pr list --state all が0件）。内容はheadSha・blobShaから完全に復元できる。",
+      "restoreCommand": "git push origin 5791944a8061af8941441cc76d11a7cd51948ae9:refs/heads/bot/auto-update-dryrun-20260911132242",
+      "deletedAt": "2026-09-12T12:04:46.280Z"
+    }
+  ]
+}
