@@ -1,19 +1,272 @@
 {
-  "checkedAt": "2026-09-17T23:12:38.899Z",
+  "checkedAt": "2026-09-18T22:54:07.928Z",
   "dryRun": false,
   "sessionFilter": null,
   "limit": null,
-  "documentsProcessed": 0,
-  "documentsSkippedUnchanged": 53,
+  "documentsProcessed": 1,
+  "documentsSkippedUnchanged": 52,
   "documentsOcrRequired": 0,
   "documentsError": 0,
-  "proposalsExtracted": 0,
-  "proposalsPublished": 0,
+  "proposalsExtracted": 29,
+  "proposalsPublished": 28,
   "proposalsPendingReview": 0,
   "proposalsUpdatedPendingReview": 0,
   "proposalsSupplementalUpdated": 0,
-  "proposalsUnchanged": 0,
+  "proposalsUnchanged": 1,
   "proposalsConflict": 0,
   "memberVoteNote": "このPDF（議案等審議結果）には議員個人の賛否は記載されていないため、議員別賛否（memberVotes）は抽出していません。",
-  "items": []
+  "items": [
+    {
+      "id": "2026-09-gian-29",
+      "session": "2026-09",
+      "billNumber": "議案第29号",
+      "title": "令和8年度延岡市一般会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-30",
+      "session": "2026-09",
+      "billNumber": "議案第30号",
+      "title": "令和8年度延岡市国民健康保険特別会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-31",
+      "session": "2026-09",
+      "billNumber": "議案第31号",
+      "title": "令和8年度延岡市介護保険特別会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-32",
+      "session": "2026-09",
+      "billNumber": "議案第32号",
+      "title": "令和8年度延岡市水道事業会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-33",
+      "session": "2026-09",
+      "billNumber": "議案第33号",
+      "title": "令和8年度延岡市下水道事業会計補正予算",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-34",
+      "session": "2026-09",
+      "billNumber": "議案第34号",
+      "title": "延岡市行政手続条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-35",
+      "session": "2026-09",
+      "billNumber": "議案第35号",
+      "title": "延岡市道の駅北川はゆま条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-36",
+      "session": "2026-09",
+      "billNumber": "議案第36号",
+      "title": "延岡市営農飲雑用水供給施設条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-37",
+      "session": "2026-09",
+      "billNumber": "議案第37号",
+      "title": "延岡市家庭的保育事業等の設備及び運営に関する基準を定める条例等の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-38",
+      "session": "2026-09",
+      "billNumber": "議案第38号",
+      "title": "延岡市立学校設置条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-39",
+      "session": "2026-09",
+      "billNumber": "議案第39号",
+      "title": "延岡市都市公園条例の一部を改正する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-40",
+      "session": "2026-09",
+      "billNumber": "議案第40号",
+      "title": "槇峰辺地に係る総合整備計画の策定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-41",
+      "session": "2026-09",
+      "billNumber": "議案第41号",
+      "title": "藤の木辺地に係る総合整備計画の策定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-42",
+      "session": "2026-09",
+      "billNumber": "議案第42号",
+      "title": "松瀬辺地に係る総合整備計画の策定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-43",
+      "session": "2026-09",
+      "billNumber": "議案第43号",
+      "title": "下鹿川辺地に係る総合整備計画の変更",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-44",
+      "session": "2026-09",
+      "billNumber": "議案第44号",
+      "title": "三椪辺地に係る総合整備計画の変更",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-45",
+      "session": "2026-09",
+      "billNumber": "議案第45号",
+      "title": "下塚辺地（北川町）に係る総合整備計画の変更",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-46",
+      "session": "2026-09",
+      "billNumber": "議案第46号",
+      "title": "工事請負契約の締結（令和5年災第235号下祝子稲葉崎線道路災害復旧工事）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-47",
+      "session": "2026-09",
+      "billNumber": "議案第47号",
+      "title": "工事請負契約の締結（延岡市旧清掃工場煙突解体工事）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-49",
+      "session": "2026-09",
+      "billNumber": "議案第49号",
+      "title": "令和8年度延岡市一般会計補正予算（二次分）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-50",
+      "session": "2026-09",
+      "billNumber": "議案第50号",
+      "title": "教育委員会委員の選任（廣池加代子氏）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-51",
+      "session": "2026-09",
+      "billNumber": "議案第51号",
+      "title": "公平委員会委員の選任（高橋一善氏）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-52",
+      "session": "2026-09",
+      "billNumber": "議案第52号",
+      "title": "人権擁護委員候補者の推薦（甲斐典子氏）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-53",
+      "session": "2026-09",
+      "billNumber": "議案第53号",
+      "title": "人権擁護委員候補者の推薦（久峩一晋氏）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-gian-54",
+      "session": "2026-09",
+      "billNumber": "議案第54号",
+      "title": "延岡市議会議員の請負の状況の公表に関する条例の制定",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-ikensho-9",
+      "session": "2026-09",
+      "billNumber": "意見書第9号",
+      "title": "働く者の声を尊重した労働時間法制の実現とＩＬＯ三者構成原則の堅持を求める意見書（案）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-ikensho-10",
+      "session": "2026-09",
+      "billNumber": "意見書第10号",
+      "title": "少人数学級の推進及び義務教育費国庫負担制度の拡充を求める意見書（案）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    },
+    {
+      "id": "2026-09-ketsugi-10",
+      "session": "2026-09",
+      "billNumber": "決議第10号",
+      "title": "2029年度「全国豊かな海づくり大会」の延岡市開催を求める決議（案）",
+      "outcome": "new",
+      "publicationStatus": "published",
+      "reasons": []
+    }
+  ]
 }
