@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15",
+  "generatedAt": "2026-09-19",
   "note": "残課題の運用台帳。件数を減らすことを目的にしていない。一次資料が確認できない項目は、維持することが正しい状態である。運用者向けの記録であり、市民向けページへはそのまま出さない（citizenLabelの表現だけを使う）。",
   "definitions": {
     "warning": "validate:data が出力する [WARN] の件数。データの誤りではなく、一次資料の不足に起因する未確認項目。",
@@ -10,7 +10,7 @@
   },
   "counts": {
     "validateDataErrors": 0,
-    "validateDataWarnings": 21,
+    "validateDataWarnings": 23,
     "openTasks": 12,
     "waitingOfficialSource": 2,
     "humanActionRequired": 10,
@@ -18,7 +18,7 @@
     "byCategory": {
       "WAITING_OFFICIAL_SOURCE": 2,
       "ONSITE_CONFIRMATION": 2,
-      "MANUAL_REVIEW": 0,
+      "MANUAL_REVIEW": 1,
       "EXTERNAL_ACCESS_REQUIRED": 8,
       "DATA_GAP": 0,
       "TECHNICAL_LIMITATION": 0,
@@ -37,7 +37,7 @@
       "reason": "令和8年5月臨時会・6月定例会の会議録が公開されたため、当初の対象24件のvoteMethod・committeeは会議録本文から確認・登録を完了した（2026-09-05）。残る未確認は、令和8年9月定例会の議案第48号（2026-09-gian-48）1件で、同会期の会議録が会議録検索システムにまだ登場していないためである（同じ理由・同じ待ち方のため、本タスクで引き続き管理する）。",
       "requiredAction": "waiting_for_publication",
       "sourceCandidate": "令和8年9月定例会分の公開時期は未定（会議録の公開スケジュールは公式サイトで個別公表されていないため、時期を推定せず、日次の自動巡回で登場を待つ）",
-      "lastCheckedAt": "2026-09-14",
+      "lastCheckedAt": "2026-09-18",
       "priority": "high",
       "blocksRelease": false,
       "blocksDataPublication": true,
@@ -259,7 +259,7 @@
       "blocksDataPublication": true,
       "autoRecheck": false,
       "relatedTaskId": "TASK-101",
-      "warningCount": 19,
+      "warningCount": 20,
       "warningFile": "councilSessions.json"
     },
     {
@@ -301,6 +301,26 @@
       "relatedTaskId": "TASK-102",
       "warningCount": 1,
       "warningFile": "archiveFiscalYears.json"
+    },
+    {
+      "id": "WARN-searchIndex",
+      "origin": "data-warning",
+      "category": "MANUAL_REVIEW",
+      "categoryLabel": "人間による判断・照合が必要",
+      "citizenLabel": "追加確認中",
+      "title": "searchIndex.json のwarning",
+      "domain": "searchIndex.json",
+      "reason": "同一内容（type/url/title）のエントリが重複登録されています",
+      "requiredAction": null,
+      "sourceCandidate": null,
+      "lastCheckedAt": null,
+      "priority": "medium",
+      "blocksRelease": false,
+      "blocksDataPublication": true,
+      "autoRecheck": false,
+      "relatedTaskId": null,
+      "warningCount": 1,
+      "warningFile": "searchIndex.json"
     }
   ]
 }

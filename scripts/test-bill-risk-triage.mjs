@@ -18,7 +18,7 @@ function check(label, fn) {
 }
 
 const billVotes = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
-assert.equal(billVotes.length, 1178, "billVotes.jsonの件数が1,178件ではありません");
+assert.equal(billVotes.length, 1206, "billVotes.jsonの件数が1,206件ではありません");
 
 const STRUCTURED_CATEGORIES = new Set(["予算", "契約", "財産取得", "決算", "専決処分"]);
 const LINK_CONFIRMED_YEARS = new Set(["令和5年度", "令和6年度", "令和7年度", "令和8年度"]);
@@ -36,7 +36,7 @@ function isLevel2(b) {
 
 console.log("\nPhase145：リスク分類・並列検証後のデータ整合性");
 
-check("A + B + D の合計が議案総数1,178件と一致する（C区分は実例0件のため式に含めない）", () => {
+check("A + B + D の合計が議案総数1,206件と一致する（C区分は実例0件のため式に含めない）", () => {
   let A = 0, B = 0, D = 0;
   for (const b of billVotes) {
     const c = classifyRetrieval(b);
@@ -44,17 +44,17 @@ check("A + B + D の合計が議案総数1,178件と一致する（C区分は実
     else if (c === "B") B++;
     else D++;
   }
-  assert.equal(A + B + D, 1178, `A+B+Dの合計が1,178件ではありません（A=${A} B=${B} D=${D}）`);
+  assert.equal(A + B + D, 1206, `A+B+Dの合計が1,206件ではありません（A=${A} B=${B} D=${D}）`);
 });
 
-check("Level1 + Level2 + Level3 の合計が議案総数1,178件と一致する", () => {
+check("Level1 + Level2 + Level3 の合計が議案総数1,206件と一致する", () => {
   let L1 = 0, L2 = 0, L3 = 0;
   for (const b of billVotes) {
     if (isLevel3(b)) L3++;
     else if (isLevel2(b)) L2++;
     else L1++;
   }
-  assert.equal(L1 + L2 + L3, 1178, `Level1+Level2+Level3の合計が1,178件ではありません（L1=${L1} L2=${L2} L3=${L3}）`);
+  assert.equal(L1 + L2 + L3, 1206, `Level1+Level2+Level3の合計が1,206件ではありません（L1=${L1} L2=${L2} L3=${L3}）`);
 });
 
 check("Level3の議案は、すべてtranscriptUrlまたはrelatedDocumentUrls（会議録）を持つ（根拠資料を追跡できない独自要約が無い）", () => {

@@ -139,8 +139,13 @@ check("Phase166：mayorPromisesの新規議案紐付け2件（2023-06-gian-19, 2
  * 出典とし、会議録本文は未公表のため Level1（sourceTextVerifiedAt なし）に分類される。
  * よって Level1=347 / Level2=179 / Level3=652 / sourceTextVerified=831（合計 1,178）となる。
  * Level2・Level3・sourceTextVerified は不変であることを、引き続きこのテストで固定する。
+ *
+ * 【Phase262追記】自動更新が令和8年9月定例会の審議結果PDF（29070.pdf、令和8年9月18日現在）から
+ * 28件（議案第29〜47号・第49〜53号、意見書第9・10号、決議第10号）を追加した。2026-09-19に同PDFと
+ * 議案番号・件名・審議結果・議決日を照合済み。いずれも会議録本文が未公表のため Level1 に分類される。
+ * よって Level1=375 / Level2=179 / Level3=652 / sourceTextVerified=831（合計 1,206）となる。
  */
-check("議案品質データ（Phase207適用後＋Phase225の新規1件：Level1=347/Level2=179/Level3=652/sourceTextVerified=831）", () => {
+check("議案品質データ（Phase207適用後＋Phase225・Phase262の新規29件：Level1=375/Level2=179/Level3=652/sourceTextVerified=831）", () => {
   const bv = JSON.parse(readFileSync(join(ROOT, "src/data/billVotes.json"), "utf8"));
   function isLevel3(b) {
     return b.summarySource === "manual" && Boolean(b.reason || (b.mainChanges && b.mainChanges.length > 0) || b.citizenImpact);
@@ -154,7 +159,7 @@ check("議案品質データ（Phase207適用後＋Phase225の新規1件：Level
     else if (isLevel2(b)) l2++;
     else l1++;
   }
-  assert.equal(l1, 347, `Level1が347件ではありません（${l1}件）`);
+  assert.equal(l1, 375, `Level1が375件ではありません（${l1}件）`);
   assert.equal(l2, 179, `Level2が179件ではありません（${l2}件）`);
   assert.equal(l3, 652, `Level3が652件ではありません（${l3}件）`);
   assert.equal(bv.filter((b) => b.sourceTextVerifiedAt).length, 831, "sourceTextVerifiedが831件ではありません");

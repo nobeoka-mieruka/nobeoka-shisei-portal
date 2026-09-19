@@ -10718,3 +10718,40 @@ Phase225 の提案スキーマを、次の点だけ変更して実装した。
   同レコードの市税等も6月補正後ベースのため、まとめて更新する必要がある。
 - 延岡市サイトの「6月補正（概要書）」リンク（/uploaded/life/48542_130421_misc.pdf）がPDFを返さない。
 - 自動更新で追加された令和8年9月定例会の議案28件により、議案件数を固定値で検査している既存テスト10件が失敗している（本タスク以前から）。
+
+### TASK-191 令和8年9月定例会の自動取込議案28件を審議結果PDFと照合し、議案件数の固定値テストを更新（Phase262）
+
+状態：DONE（2026-09-19）
+優先度：A（`npm test`が失敗したままのため。READY 0件のため「次へ」指示で新規登録）
+対象：`scripts/test-count-consistency.mjs`、`scripts/test-phase167-integration.mjs`、`scripts/test-bill-source-retrieval.mjs`、
+`scripts/test-bill-level3-criteria.mjs`、`scripts/test-bill-risk-classification.mjs`、`scripts/test-bill-risk-triage.mjs`、
+`scripts/test-bill-phase152-integration.mjs`、`scripts/test-bill-phase157-integration.mjs`、`scripts/test-bill-phase206-explainability.mjs`、
+`reports/human-action-ledger.{json,md}`（再生成）
+
+#### 背景
+
+2026-09-18以降の自動更新コミットが、延岡市議会「第27回延岡市議会（定例会）での議案審議等結果」
+（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29070.pdf、令和8年9月18日現在）から令和8年9月定例会の
+28件を`billVotes.json`へ追加した（1,178件→1,206件）。議案件数を固定値で検査する既存テスト9件と、派生台帳の
+再生成を検査するテスト1件が失敗し、`npm test`が赤のままになっていた。
+
+#### 照合結果（件数を動かす前に一次資料で確認）
+
+同PDFを取得して行単位で抽出し、同会期の登録29件（Phase225の議案第48号＋今回の28件）すべてについて議案番号・件名・
+審議結果・議決日が一致することを確認した。差異は件名の全角／半角数字のみ。議案第50〜53号の「原案同意」は抽出規則
+（`scripts/lib/council-bill-extraction.mjs`）が既存表記「同意」へ正規化したもの（既存の選任・推薦議案134件もすべて「同意」）。
+報告第6〜21号は議案ではないため登録対象外。PDFにあってデータに無い議案、データにあってPDFに無い議案はいずれも0件。
+追加28件はいずれも会議録本文が未公表のためLevel1（Level1 347→375、Level2 179・Level3 652・本文確認済み831は不変）。
+
+#### 実施内容
+
+- 議案総数の現在値を1,206へ更新し、根拠（会期・議案番号の範囲・出典PDF・照合日）をテストのコメントへ追記。
+  旧値1,177・1,178に加え1,206も画面ファイルへの直書きを禁止。
+- 各テストの過去の記録（「Phase145：全1,178件」等）は当時の記録として残し、検査値のみ更新。
+- 派生台帳`reports/human-action-ledger.*`を再生成（validate:dataの警告件数・TASK-004の最終確認日の追随）。
+- 結果：`npm test`全件成功（exit 0）。データ（billVotes.json）は変更していない。
+
+#### 残課題
+
+- 令和8年9月定例会28件の議員別賛否・提出理由：会議録公開後に確認する（TASK-004の範囲）。
+- `searchIndex.json`の同一内容エントリ重複（update-u139）が台帳のMANUAL_REVIEWに1件計上されている（既存の警告）。

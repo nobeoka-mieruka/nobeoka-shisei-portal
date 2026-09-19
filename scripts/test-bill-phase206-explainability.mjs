@@ -13,6 +13,8 @@
  *    **完全一致**すること（＝要約・言い換え・推測が混入していないこと）。
  * 5. 市民向けの表示文に内部コードが混入していないこと。
  * 6. 議案総数は 1,178 件のまま変わらないこと。
+ *    （Phase262：令和8年9月定例会の審議結果PDFと照合した28件の追加により現在値は1,206件。
+ *     根拠は scripts/test-count-consistency.mjs の BILL_TOTAL のコメントを参照）
  *
  * 使い方: node --experimental-strip-types scripts/test-bill-phase206-explainability.mjs
  */
@@ -52,8 +54,8 @@ function check(label, fn) {
 
 console.log("\nPhase206・207：議案説明の説明可能性と出典");
 
-check("議案総数は1,178件のまま", () => {
-  assert.equal(bills.length, 1178, `議案総数が1178件ではありません（${bills.length}件）`);
+check("議案総数は1,206件のまま", () => {
+  assert.equal(bills.length, 1206, `議案総数が1206件ではありません（${bills.length}件）`);
 });
 
 check("詳細説明が無い議案は、必ず既知の説明可能性コードのいずれかに分類される（合計が一致する）", () => {
