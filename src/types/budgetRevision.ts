@@ -29,6 +29,8 @@ export interface BudgetSource {
  * 補正額の財源内訳（千円）。概要書の「補正額の財源内訳」欄の区分どおり。
  * 資料で空欄の区分は0ではなくnull（空欄＝その財源が無いことを資料が示している場合も、
  * 当サイトでは値を作らない）。合計は補正額と一致することを validate:data で検査する。
+ * 資料で「△」（減額）と記載された値は負の整数で持つ（例：9月補正の国・県支出金 △5,002千円）。
+ * 概要書の「地方債／その他」欄は1列で、(債) の付いた額を地方債、財源名の付いた額をその他として分ける。
  */
 export interface BudgetFunding {
   nationalPrefecturalThousandYen: number | null;
@@ -39,7 +41,15 @@ export interface BudgetFunding {
   generalRevenueThousandYen: number | null;
   /** 「一般財源」の内容（例：繰越金）。 */
   generalRevenueNote: string | null;
+  /**
+   * 資料の「財源内訳欄の『その他』及び『一般財源』の内容」が、その他・一般財源のどちらの内容かを
+   * 区別せずに列挙している場合の原文（例：9月補正の一般会計）。区別できる場合は otherNote／generalRevenueNote を使う。
+   */
+  combinedContentNote?: string;
 }
+
+/** 会計の区分。一般会計と特別会計・企業会計を合算して「延岡市の予算総額」と表示しないために持つ。 */
+export type BudgetAccountCategory = "一般会計" | "特別会計" | "企業会計";
 
 /** 金額の内訳1行（資料の概要欄に記載された内訳。例：「扶助費（図書カード購入費）17,400千円」）。 */
 export interface BudgetProjectBreakdown {
@@ -51,6 +61,9 @@ export interface BudgetProjectBreakdown {
 export interface BudgetRevisionProject {
   /** 年度・段階を含む一意なID（例：fy2026-sep-2-book-card）。 */
   id: string;
+  /** 事業が属する会計（資料の表記どおり。例：一般会計、国民健康保険特別会計、下水道事業）。 */
+  accountName: string;
+  accountCategory: BudgetAccountCategory;
   /** 事業名（資料の表記どおり）。 */
   name: string;
   /** 担当課（資料の【】内の表記どおり）。 */
@@ -65,6 +78,10 @@ export interface BudgetRevisionProject {
   purpose: string;
   /** 対象者・対象施設（資料に明記されたもののみ。記載が無ければnull）。 */
   targets: string | null;
+  /** 実施時期（資料に明記されたもののみ。例：「訪問予定日 10月下旬」。記載が無ければnull）。 */
+  schedule: string | null;
+  /** 資料が明記している関連事業（例：「【No.１ 延岡にぎわい創出支援事業 関連】」）。内容の類似では設定しない。 */
+  relatedProjectIds: string[];
   beforeThousandYen: number;
   supplementaryThousandYen: number;
   afterThousandYen: number;
@@ -88,6 +105,7 @@ export interface BudgetRevisionProject {
 export interface BudgetRevisionAccount {
   /** 会計名（資料の表記どおり。例：一般会計）。 */
   accountName: string;
+  accountCategory: BudgetAccountCategory;
   /** 対応する議案の番号（資料に明記された表記。例：議案第49号）。 */
   billNumber: string;
   /** billVotes.json の議案ID。議決結果・議員別賛否はこの議案レコードを参照する（ここに複製しない）。 */
@@ -126,6 +144,16 @@ export interface BudgetRevision {
   accounts: BudgetRevisionAccount[];
   /** 主要事業。資料で確認・登録した段階のみ（未登録の段階は空配列で、画面に「未登録」と表示する）。 */
   projects: BudgetRevisionProject[];
+  /**
+   * 事業一覧の網羅範囲。
+   * - `all`: 資料の事業内訳の合計が補正額と一致する（9月補正（2次分）など）。事業合計＝補正額を検査する。
+   * - `listedOnly`: 資料が「概要掲載事業」だけを掲載しており、補正額の一部しか事業別に示されない（9月補正など）。
+   *   事業合計は listedProjectTotals（資料の「概要掲載事業合計」欄）と一致することを検査し、補正額との差は画面で明示する。
+   * - `none`: 事業内訳を未登録。
+   */
+  projectCoverage: "all" | "listedOnly" | "none";
+  /** projectCoverage が listedOnly の場合の、資料の「○○会計 概要掲載事業合計」欄（会計区分ごと）。 */
+  listedProjectTotals: { accountCategory: BudgetAccountCategory; supplementaryThousandYen: number }[];
   /** 事業グループごとの補正額合計（資料の「○○事業合計」欄。検算用）。 */
   projectGroupTotals: { group: string; supplementaryThousandYen: number }[];
   sources: BudgetSource[];

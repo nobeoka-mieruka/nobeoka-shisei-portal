@@ -91,6 +91,29 @@ check("Phase263：年度別アーカイブの令和8年度 当初予算・補正
   assert.ok(!b.sourceRefs.some((r) => (r.sourceUrl ?? "").includes("r8_june_supplementary_budget")), "6月補正時点の出典が補正後予算の根拠に残っています");
 });
 
+check("Phase264：9月補正（議案第29号）の一般会計 概要掲載事業18件が概要書（28796.pdf）の合計欄と一致する", () => {
+  const sep1 = byId.get("fy2026-sep-1");
+  assert.equal(sep1.projectCoverage, "listedOnly", "概要書は概要掲載事業のみのため listedOnly で登録する");
+  assert.equal(sep1.projects.length, 18);
+  const sum = (key) => sep1.projects.reduce((s, p) => s + (p[key] ?? 0), 0);
+  const fsum = (key) => sep1.projects.reduce((s, p) => s + (p.funding[key] ?? 0), 0);
+  assert.equal(sum("supplementaryThousandYen"), 306267, "一般会計 概要掲載事業合計（306,267千円）");
+  assert.equal(fsum("nationalPrefecturalThousandYen"), 6298, "国県支出金の合計（6,298千円）");
+  assert.equal(fsum("localBondThousandYen") + fsum("otherThousandYen"), 214783, "地方債・その他の合計（214,783千円）");
+  assert.equal(fsum("generalRevenueThousandYen"), 85186, "一般財源の合計（85,186千円）");
+  const a = sep1.accounts.find((x) => x.accountName === "一般会計");
+  assert.equal(a.supplementaryThousandYen, 645609);
+  assert.deepEqual(
+    [a.funding.nationalPrefecturalThousandYen, a.funding.localBondThousandYen, a.funding.otherThousandYen, a.funding.generalRevenueThousandYen],
+    [-5002, 208100, 39369, 403142],
+    "資料の△5,002（国県支出金の減額）を負の値で保持",
+  );
+  // 資料に明記された関連（都市公園ライトアップ事業「【No.１ 延岡にぎわい創出支援事業 関連】」）だけを関連付ける
+  const lightup = sep1.projects.find((p) => p.name === "都市公園ライトアップ事業");
+  assert.deepEqual(lightup.relatedProjectIds, ["fy2026-sep-1-nigiwai"]);
+  assert.equal(sep1.projects.filter((p) => p.relatedProjectIds.length > 0).length, 1);
+});
+
 check("9月補正と9月補正（2次分）は別の議案・別のIDで、同じ定例会でも回次で区別される", () => {
   const sep1 = byId.get("fy2026-sep-1");
   assert.equal(sep1.sessionId, sep2.sessionId);

@@ -32,13 +32,6 @@ export function budgetRevisionsForYear(fiscalYear: number): BudgetRevision[] {
   return BUDGET_REVISIONS.filter((r) => r.fiscalYear === fiscalYear).sort((a, b) => a.sequence - b.sequence);
 }
 
-/** 事業内訳を登録済みの段階のうち最新のもの。 */
-export function latestRevisionWithProjects(fiscalYear: number): BudgetRevision | undefined {
-  return budgetRevisionsForYear(fiscalYear)
-    .filter((r) => r.projects.length > 0)
-    .at(-1);
-}
-
 export function budgetBill(billId: string): BudgetRevisionBill | undefined {
   return BILLS.get(billId);
 }

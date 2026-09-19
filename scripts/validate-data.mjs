@@ -1211,7 +1211,8 @@ try {
       [f.nationalPrefecturalThousandYen, f.localBondThousandYen, f.otherThousandYen, f.generalRevenueThousandYen].reduce((sum, v) => sum + (v ?? 0), 0);
     const checkFunding = (f, amount, tag) => {
       for (const key of ["nationalPrefecturalThousandYen", "localBondThousandYen", "otherThousandYen", "generalRevenueThousandYen"]) {
-        if (f[key] !== null && (!isInt(f[key]) || f[key] < 0)) err(tag, `funding.${key}が0以上の整数（千円）ではありません: ${f[key]}`);
+        // 資料の「△」（減額）は負の整数で持つため、符号は問わず整数（千円）であることだけを検査する。
+        if (f[key] !== null && !isInt(f[key])) err(tag, `funding.${key}が整数（千円）ではありません: ${f[key]}`);
       }
       if (fundingTotal(f) !== amount) err(tag, `財源内訳の合計（${fundingTotal(f)}千円）が補正額（${amount}千円）と一致しません`);
       if (f.otherThousandYen === null && f.otherNote) err(tag, "funding.otherNoteがありますがotherThousandYenがnullです");
@@ -1307,10 +1308,46 @@ try {
         const sum = (r.projects ?? []).filter((p) => p.group === g.group).reduce((s, p) => s + p.supplementaryThousandYen, 0);
         if (sum !== g.supplementaryThousandYen) err(tag, `事業グループ「${g.group}」の合計（${sum}千円）が資料の合計欄（${g.supplementaryThousandYen}千円）と一致しません`);
       }
-      // 事業が登録されている段階は、事業の合計が補正額（全会計の合計）と一致すること（事業の登録漏れ・二重登録の検出）。
-      if ((r.projects ?? []).length > 0) {
+      // 事業一覧の網羅範囲（projectCoverage）に応じて合計を検査する（事業の登録漏れ・二重登録の検出）。
+      const categories = new Set(["一般会計", "特別会計", "企業会計"]);
+      for (const a of r.accounts ?? []) {
+        if (!categories.has(a.accountCategory)) err(tag, `${a.accountName}のaccountCategoryが未定義です: ${a.accountCategory}`);
+      }
+      for (const p of r.projects ?? []) {
+        const pTag = `${tag} (project:${p.id})`;
+        if (!categories.has(p.accountCategory)) err(pTag, `accountCategoryが未定義です: ${p.accountCategory}`);
+        if (isBlank(p.accountName)) err(pTag, "accountNameが空です");
+        if (p.schedule !== null && isBlank(p.schedule)) err(pTag, "scheduleは記載が無ければnullにしてください");
+        for (const rid of p.relatedProjectIds ?? []) {
+          if (!(r.projects ?? []).some((x) => x.id === rid) && !revisions.some((x) => x.projects.some((y) => y.id === rid))) {
+            err(pTag, `relatedProjectIds（${rid}）が存在しません`);
+          }
+        }
+      }
+      if (!["all", "listedOnly", "none"].includes(r.projectCoverage)) err(tag, `projectCoverageが未定義です: ${r.projectCoverage}`);
+      if (r.projectCoverage === "none" && (r.projects ?? []).length > 0) err(tag, "projectCoverageがnoneなのに事業が登録されています");
+      if (r.projectCoverage !== "none" && (r.projects ?? []).length === 0) err(tag, `projectCoverageが${r.projectCoverage}なのに事業が0件です`);
+      if (r.projectCoverage === "all") {
         const total = (r.accounts ?? []).reduce((s, a) => s + (a.supplementaryThousandYen ?? 0), 0);
         if (projectSum !== total) err(tag, `事業の補正額の合計（${projectSum}千円）が補正額（${total}千円）と一致しません`);
+      }
+      if (r.projectCoverage === "listedOnly") {
+        // 資料が「概要掲載事業」だけを載せている場合は、会計区分ごとに資料の「概要掲載事業合計」欄と一致すること。
+        if ((r.listedProjectTotals ?? []).length === 0) err(tag, "projectCoverageがlistedOnlyの場合はlistedProjectTotals（資料の概要掲載事業合計）が必要です");
+        const listedCategories = new Set((r.listedProjectTotals ?? []).map((t) => t.accountCategory));
+        for (const t of r.listedProjectTotals ?? []) {
+          const sum = r.projects.filter((p) => p.accountCategory === t.accountCategory).reduce((s, p) => s + p.supplementaryThousandYen, 0);
+          if (sum !== t.supplementaryThousandYen) err(tag, `${t.accountCategory}の事業合計（${sum}千円）が資料の概要掲載事業合計（${t.supplementaryThousandYen}千円）と一致しません`);
+          const accountTotal = (r.accounts ?? []).filter((a) => a.accountCategory === t.accountCategory).reduce((s, a) => s + (a.supplementaryThousandYen ?? 0), 0);
+          if (accountTotal === 0 && !(r.accounts ?? []).some((a) => a.accountCategory === t.accountCategory)) {
+            err(tag, `${t.accountCategory}の概要掲載事業合計がありますが、同じ区分の会計（accounts）が登録されていません`);
+          }
+        }
+        for (const p of r.projects) {
+          if (!listedCategories.has(p.accountCategory)) err(tag, `事業（${p.id}）の会計区分（${p.accountCategory}）の概要掲載事業合計がlistedProjectTotalsにありません`);
+        }
+      } else if ((r.listedProjectTotals ?? []).length > 0) {
+        err(tag, "listedProjectTotalsはprojectCoverageがlistedOnlyの場合だけ設定してください");
       }
     }
 

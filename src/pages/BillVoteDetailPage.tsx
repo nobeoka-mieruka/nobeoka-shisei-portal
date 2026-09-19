@@ -548,7 +548,10 @@ export function BillVoteDetailPage() {
             </div>
             {budgetLink.revision.projects.length > 0 && (
               <div>
-                <dt className="text-on-surface-variant">計上された事業（{budgetLink.revision.projects.length}件）</dt>
+                <dt className="text-on-surface-variant">
+                  計上された事業（{budgetLink.revision.projects.length}件
+                  {budgetLink.revision.projectCoverage === "listedOnly" && "・概要書に掲載された主な事業のみ"}）
+                </dt>
                 <dd>
                   <ul className="mt-1 space-y-0.5 text-xs">
                     {budgetLink.revision.projects.map((p) => (
