@@ -1,0 +1,418 @@
+[
+  {
+    "id": "fy2026-initial",
+    "fiscalYear": 2026,
+    "kind": "initial",
+    "label": "当初予算",
+    "sessionId": "2026-03",
+    "round": 1,
+    "sequence": 0,
+    "accounts": [
+      {
+        "accountName": "一般会計",
+        "billNumber": "議案第129号",
+        "billId": "2026-03-gian-129",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 69066000,
+        "funding": null,
+        "sourceIndex": 0
+      }
+    ],
+    "projects": [],
+    "projectGroupTotals": [],
+    "sources": [
+      {
+        "title": "令和8年度当初予算（概要書）「令和８年度予算集計表」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27655.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 4,
+        "documentDate": "2026-02-09",
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      }
+    ],
+    "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
+    "notes": "予算集計表の「一般会計〔議案第129号〕令和８年度当初（Ａ）69,066,000千円」。当初予算の主要事業（概要書8〜100ページ）は未登録。"
+  },
+  {
+    "id": "fy2026-mar-1",
+    "fiscalYear": 2026,
+    "kind": "supplementary",
+    "label": "補正予算（第1号）",
+    "sessionId": "2026-03",
+    "round": 1,
+    "sequence": 1,
+    "accounts": [
+      {
+        "accountName": "一般会計",
+        "billNumber": "議案第169号",
+        "billId": "2026-03-gian-169",
+        "beforeThousandYen": 69066000,
+        "supplementaryThousandYen": 342240,
+        "afterThousandYen": 69408240,
+        "funding": null,
+        "sourceIndex": 0
+      }
+    ],
+    "projects": [],
+    "projectGroupTotals": [],
+    "sources": [
+      {
+        "title": "令和8年度1号補正（概要書）「補正予算（第１号）の概要」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27657.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 1,
+        "documentDate": "2026-02-24",
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      }
+    ],
+    "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
+    "notes": "当初予算と同じ令和8年3月定例会で審議された、令和8年度一般会計の最初の補正予算。事業内訳・財源内訳は未登録。"
+  },
+  {
+    "id": "fy2026-jun-1",
+    "fiscalYear": 2026,
+    "kind": "supplementary",
+    "label": "6月補正",
+    "sessionId": "2026-06",
+    "round": 1,
+    "sequence": 2,
+    "accounts": [
+      {
+        "accountName": "一般会計",
+        "billNumber": "議案第5号",
+        "billId": "2026-06-gian-5",
+        "beforeThousandYen": 69408240,
+        "supplementaryThousandYen": 579855,
+        "afterThousandYen": 69988095,
+        "funding": null,
+        "sourceIndex": 0
+      }
+    ],
+    "projects": [],
+    "projectGroupTotals": [],
+    "sources": [
+      {
+        "title": "令和8年度補正予算書（6月補正）「議案第５号 令和８年度延岡市一般会計補正予算」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27598.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 3,
+        "documentDate": null,
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      }
+    ],
+    "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
+    "notes": "予算書の議案本文「歳入歳出それぞれ579,855千円を追加し、歳入歳出予算の総額を歳入歳出それぞれ69,988,095千円とする」。延岡市の予算ページに掲載された「6月補正（概要書）」のリンク先は2026-09-19時点でPDFではなくHTMLページが返るため、予算書（議案本文・6月補正予算集計表）を出典とした。事業内訳・財源内訳は未登録。"
+  },
+  {
+    "id": "fy2026-jun-2",
+    "fiscalYear": 2026,
+    "kind": "supplementary",
+    "label": "6月補正（2次分）",
+    "sessionId": "2026-06",
+    "round": 2,
+    "sequence": 3,
+    "accounts": [
+      {
+        "accountName": "一般会計",
+        "billNumber": "議案第20号",
+        "billId": "2026-06-gian-20",
+        "beforeThousandYen": 69988095,
+        "supplementaryThousandYen": 303060,
+        "afterThousandYen": 70291155,
+        "funding": null,
+        "sourceIndex": 0
+      }
+    ],
+    "projects": [],
+    "projectGroupTotals": [],
+    "sources": [
+      {
+        "title": "令和8年度6月補正（2次分）（概要書）「６月補正（２次分）予算の概要」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27762.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 1,
+        "documentDate": null,
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      }
+    ],
+    "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
+    "notes": "事業内訳・財源内訳は未登録（概要書には「台風第６号に係る復旧事業」等の内訳が記載されている）。"
+  },
+  {
+    "id": "fy2026-sep-1",
+    "fiscalYear": 2026,
+    "kind": "supplementary",
+    "label": "9月補正",
+    "sessionId": "2026-09",
+    "round": 1,
+    "sequence": 4,
+    "accounts": [
+      {
+        "accountName": "一般会計",
+        "billNumber": "議案第29号",
+        "billId": "2026-09-gian-29",
+        "beforeThousandYen": 70291155,
+        "supplementaryThousandYen": 645609,
+        "afterThousandYen": 70936764,
+        "funding": null,
+        "sourceIndex": 0
+      }
+    ],
+    "projects": [],
+    "projectGroupTotals": [],
+    "sources": [
+      {
+        "title": "令和8年度9月補正（概要書）「９月補正予算の概要」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28796.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 1,
+        "documentDate": null,
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      }
+    ],
+    "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
+    "notes": "同じ概要書に国民健康保険（議案第30号）・介護保険（議案第31号）・水道事業（議案第32号）・下水道事業（議案第33号）の各会計の補正も記載されているが、ここでは一般会計のみ登録。事業内訳・財源内訳は未登録。"
+  },
+  {
+    "id": "fy2026-sep-2",
+    "fiscalYear": 2026,
+    "kind": "supplementary",
+    "label": "9月補正（2次分）",
+    "sessionId": "2026-09",
+    "round": 2,
+    "sequence": 5,
+    "accounts": [
+      {
+        "accountName": "一般会計",
+        "billNumber": "議案第49号",
+        "billId": "2026-09-gian-49",
+        "beforeThousandYen": 70936764,
+        "supplementaryThousandYen": 74985,
+        "afterThousandYen": 71011749,
+        "funding": {
+          "nationalPrefecturalThousandYen": 62716,
+          "localBondThousandYen": null,
+          "otherThousandYen": 300,
+          "otherNote": "寄附金",
+          "generalRevenueThousandYen": 11969,
+          "generalRevenueNote": "繰越金"
+        },
+        "sourceIndex": 0
+      }
+    ],
+    "projects": [
+      {
+        "id": "fy2026-sep-2-book-card",
+        "name": "図書カード配布による読書活動応援事業",
+        "department": "総合政策課",
+        "isNew": true,
+        "group": "物価高騰対策事業（物価高騰対応重点支援地方創生臨時交付金充当事業）",
+        "budgetClassification": "2総務費 1)総務管理費 (9)企画費",
+        "purpose": "延岡市に住民登録のある小中学生を対象に図書カード2,000円分を配布し、物価高騰の影響を受ける子育て世帯の負担軽減を図りながら、子どもたちの豊かな心を育み、可能性を伸ばすことが期待できる読書活動を推進する。",
+        "targets": "令和８年10月１日時点で延岡市に住民登録のある小中学生 約8,700人（平成23年４月２日～令和２年４月１日生まれ）",
+        "beforeThousandYen": 0,
+        "supplementaryThousandYen": 21537,
+        "afterThousandYen": 21537,
+        "funding": {
+          "nationalPrefecturalThousandYen": 18382,
+          "localBondThousandYen": null,
+          "otherThousandYen": null,
+          "otherNote": null,
+          "generalRevenueThousandYen": 3155,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          { "label": "扶助費（図書カード購入費）", "thousandYen": 17400 },
+          { "label": "通信運搬費", "thousandYen": 4002 },
+          { "label": "消耗品費", "thousandYen": 135 }
+        ],
+        "policyCategoryIds": ["childcare", "education"],
+        "relatedPromiseIds": [],
+        "sourceIndex": 1
+      },
+      {
+        "id": "fy2026-sep-2-disability-facilities",
+        "name": "障がい者施設物価高騰対策給付金支給事業",
+        "department": "障がい福祉課",
+        "isNew": true,
+        "group": "物価高騰対策事業（物価高騰対応重点支援地方創生臨時交付金充当事業）",
+        "budgetClassification": "3民生費 1)社会福祉費 (2)障がい者福祉費",
+        "purpose": "物価高騰の影響を受ける市内の障がい者施設に対し給付金を支給することで、事業者の経済的負担の軽減を図り、もって利用者への質の高いサービス提供体制の維持につなげる。",
+        "targets": "市内の障がい者施設（訪問系41事業所・通所系73事業所・居住系 定員465人）",
+        "beforeThousandYen": 0,
+        "supplementaryThousandYen": 9988,
+        "afterThousandYen": 9988,
+        "funding": {
+          "nationalPrefecturalThousandYen": 8525,
+          "localBondThousandYen": null,
+          "otherThousandYen": null,
+          "otherNote": null,
+          "generalRevenueThousandYen": 1463,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          { "label": "訪問系 25,000円/事業所 × 41事業所（利用者1,475人）", "thousandYen": 1025 },
+          { "label": "通所系 75,000円/事業所 × 73事業所（利用者1,550人）", "thousandYen": 5475 },
+          { "label": "居住系 7,500円/人（定員）× 465人", "thousandYen": 3488 }
+        ],
+        "policyCategoryIds": ["disability", "welfare"],
+        "relatedPromiseIds": [],
+        "sourceIndex": 1
+      },
+      {
+        "id": "fy2026-sep-2-care-facilities",
+        "name": "介護施設等物価高騰対策給付金支給事業",
+        "department": "介護保険課",
+        "isNew": true,
+        "group": "物価高騰対策事業（物価高騰対応重点支援地方創生臨時交付金充当事業）",
+        "budgetClassification": "3民生費 1)社会福祉費 (4)高齢者福祉費",
+        "purpose": "物価高騰の影響を受ける市内の介護サービス事業所に対し給付金を支給することで、事業者の経済的負担の軽減を図り、もって利用者への質の高いサービス提供体制の維持につなげる。",
+        "targets": "市内の介護サービス事業所（訪問系60事業所・居宅介護支援52事業所・福祉用具貸与等6事業所・通所系76事業所・（看護）小規模多機能型居宅介護11事業所・居住系83施設 定員3,328人）",
+        "beforeThousandYen": 0,
+        "supplementaryThousandYen": 34435,
+        "afterThousandYen": 34435,
+        "funding": {
+          "nationalPrefecturalThousandYen": 29390,
+          "localBondThousandYen": null,
+          "otherThousandYen": null,
+          "otherNote": null,
+          "generalRevenueThousandYen": 5045,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          { "label": "訪問系 25,000円/事業所 × 60事業所（利用者2,042人）", "thousandYen": 1500 },
+          { "label": "居宅介護支援 25,000円/事業所 × 52事業所（利用者3,328人）", "thousandYen": 1300 },
+          { "label": "福祉用具貸与・特定福祉用具販売 25,000円/事業所 × 6事業所（利用者3,176人）", "thousandYen": 150 },
+          { "label": "通所系 75,000円/事業所 × 76事業所（利用者2,980人）", "thousandYen": 5700 },
+          { "label": "（看護）小規模多機能型居宅介護 75,000円/事業所 × 11事業所（利用者279人）", "thousandYen": 825 },
+          { "label": "居住系 7,500円/人（定員）× 3,328人（83施設）", "thousandYen": 24960 }
+        ],
+        "policyCategoryIds": ["senior", "welfare"],
+        "relatedPromiseIds": [],
+        "sourceIndex": 1
+      },
+      {
+        "id": "fy2026-sep-2-childcare-facilities",
+        "name": "保育施設等物価高騰対策給付金支給事業",
+        "department": "こども保育課",
+        "isNew": true,
+        "group": "物価高騰対策事業（物価高騰対応重点支援地方創生臨時交付金充当事業）",
+        "budgetClassification": "3民生費 2)児童福祉費 (4)子育て支援費",
+        "purpose": "物価高騰の影響を受ける市内の保育施設等（公立を除く。）に対し給付金を支給することで、事業者の経済的負担の軽減を図り、もって利用者への質の高いサービス提供体制の維持につなげる。",
+        "targets": "市内の保育施設等（公立を除く。特定教育・保育施設45施設・認可外保育施設8施設）",
+        "beforeThousandYen": 0,
+        "supplementaryThousandYen": 3839,
+        "afterThousandYen": 3839,
+        "funding": {
+          "nationalPrefecturalThousandYen": 3276,
+          "localBondThousandYen": null,
+          "otherThousandYen": null,
+          "otherNote": null,
+          "generalRevenueThousandYen": 563,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          { "label": "特定教育・保育施設 950円/人 × 利用定員3,862人（45施設）", "thousandYen": 3669 },
+          { "label": "認可外保育施設 950円/人 × 利用定員179人（8施設）", "thousandYen": 170 }
+        ],
+        "policyCategoryIds": ["childcare"],
+        "relatedPromiseIds": [],
+        "sourceIndex": 1
+      },
+      {
+        "id": "fy2026-sep-2-ecopark",
+        "name": "祖母・傾・大崩ユネスコエコパーク推進事業",
+        "department": "地域政策課",
+        "isNew": false,
+        "group": "その他事務事業",
+        "budgetClassification": "2総務費 1)総務管理費 (9)企画費",
+        "purpose": "ユネスコエコパーク登録10周年（令和９年度）を見据え、県の補助制度を活用し、延岡市、高千穂町及び日之影町の地域活動団体と学校、企業、行政等が協働して、これまでの取組や地域資源の魅力を「見える化」するとともに、テレビＣＭなど多様な媒体を用いて効果的に市内外への情報発信及び機運醸成を図るため、必要な事業費を増額する。",
+        "targets": null,
+        "beforeThousandYen": 12870,
+        "supplementaryThousandYen": 4886,
+        "afterThousandYen": 17756,
+        "funding": {
+          "nationalPrefecturalThousandYen": 3143,
+          "localBondThousandYen": null,
+          "otherThousandYen": null,
+          "otherNote": null,
+          "generalRevenueThousandYen": 1743,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          { "label": "制作委託料（ＣＭ制作、放映）", "thousandYen": 4715 },
+          { "label": "報償費", "thousandYen": 171 }
+        ],
+        "policyCategoryIds": ["environment"],
+        "relatedPromiseIds": [],
+        "sourceIndex": 2
+      },
+      {
+        "id": "fy2026-sep-2-school-library",
+        "name": "学校図書館図書整備事業",
+        "department": "学校支援課",
+        "isNew": false,
+        "group": "その他事務事業",
+        "budgetClassification": "10教育費 1)教育総務費 (1)教育委員会費",
+        "purpose": "県外にお住まいの本市出身者からご寄附をいただき、その方の希望を踏まえ、母校である東小学校及び延岡中学校の図書の充実を図るため図書購入予算を増額する。",
+        "targets": "東小学校、延岡中学校",
+        "beforeThousandYen": 12384,
+        "supplementaryThousandYen": 300,
+        "afterThousandYen": 12684,
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 300,
+          "otherNote": "寄附金",
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null
+        },
+        "breakdown": [{ "label": "備品購入費", "thousandYen": 300 }],
+        "policyCategoryIds": ["education"],
+        "relatedPromiseIds": [],
+        "sourceIndex": 2
+      }
+    ],
+    "projectGroupTotals": [
+      { "group": "物価高騰対策事業（物価高騰対応重点支援地方創生臨時交付金充当事業）", "supplementaryThousandYen": 69799 },
+      { "group": "その他事務事業", "supplementaryThousandYen": 5186 }
+    ],
+    "sources": [
+      {
+        "title": "令和8年度9月補正（2次分）（概要書）「９月補正（２次分）予算の概要」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28903.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 1,
+        "documentDate": "2026-08-31",
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（2次分）（概要書）「主要事業等内訳（物価高騰対策事業）」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28903.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 5,
+        "documentDate": "2026-08-31",
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（2次分）（概要書）「主要事業等内訳（その他事務事業）」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28903.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 6,
+        "documentDate": "2026-08-31",
+        "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      }
+    ],
+    "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
+    "notes": "延岡市の予算ページに「9月補正（2次分）（概要書）」として掲載されたPDF（attachment/28903.pdf）。財政ダッシュボードが従来出典としていたattachment/28904.pdfは、2026-09-19にダウンロードして比較した結果、28903.pdfとバイト単位で同一の資料だった。予算書は attachment/28987.pdf。"
+  }
+]

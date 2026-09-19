@@ -445,6 +445,20 @@ try {
 }
 
 // --- finance ---
+/** 財政ページに表示する年度の予算段階（補正の名称・議案番号）と事業（名称・担当課）。 */
+function budgetRevisionKeywords(fiscalYear) {
+  try {
+    const revisions = readJson("src/data/budgetRevisions.json").filter((r) => String(r.fiscalYear) === String(fiscalYear));
+    return revisions.flatMap((r) => [
+      r.label,
+      ...r.accounts.map((a) => a.billNumber),
+      ...r.projects.flatMap((p) => [p.name, p.department]),
+    ]);
+  } catch {
+    return [];
+  }
+}
+
 try {
   const finance = readJson("src/data/financeDashboard.json");
   const fi = finance.financialIndicators;
@@ -471,7 +485,8 @@ try {
       ...(finance.revenue ?? []).map((r) => r.label),
       ...(finance.expenditureByPurpose ?? []).map((r) => r.label),
       ...(finance.expenditureByNature ?? []).map((r) => r.label),
-      ...(finance.supplementaryBudgetProjects ?? []).map((p) => p.title),
+      // Phase261：補正予算の事業は budgetRevisions.json（段階別・議案との関連付き）から取る。
+      ...budgetRevisionKeywords(finance.fiscalYear),
       ...(fi ? [fi.fiscalYearLabel, ...(fi.notApplicableIndicators ?? [])] : []),
     ].filter(Boolean),
   });

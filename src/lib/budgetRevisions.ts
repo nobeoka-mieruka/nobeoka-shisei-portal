@@ -1,0 +1,101 @@
+/**
+ * Phase261：当初予算・補正予算の段階別データ（src/data/budgetRevisions.json）の表示用ヘルパー。
+ *
+ * 予算→事業→議案→議決→議員別賛否を1本でたどれるよう、予算データは議案ID（billId）だけを持ち、
+ * 議決結果・議決日・議員別賛否は billVotes.json の射影（budgetRevisionBillsIndex.json、
+ * scripts/generate-data-indexes.mjs が生成）から引く。予算データ側に議決結果を複製しない。
+ */
+import budgetRevisionsData from "../data/budgetRevisions.json";
+import budgetRevisionBillsData from "../data/budgetRevisionBillsIndex.json";
+import policyCategoriesData from "../data/archivePolicyCategories.json";
+import type { BudgetFunding, BudgetRevision, BudgetRevisionAccount } from "../types/budgetRevision";
+
+export interface BudgetRevisionBill {
+  id: string;
+  billNumber: string;
+  billTitle: string;
+  session?: string;
+  result?: string;
+  votingDate?: string;
+  publicationStatus?: string;
+  verificationStatus?: string;
+  memberVoteCount: number;
+  memberVoteSummary: Record<string, number>;
+}
+
+export const BUDGET_REVISIONS = budgetRevisionsData as BudgetRevision[];
+const BILLS = new Map((budgetRevisionBillsData as BudgetRevisionBill[]).map((b) => [b.id, b]));
+const CATEGORY_LABELS = new Map((policyCategoriesData as { id: string; label: string }[]).map((c) => [c.id, c.label]));
+
+/** 年度内の段階を時系列（当初予算→補正の提出順）に並べる。 */
+export function budgetRevisionsForYear(fiscalYear: number): BudgetRevision[] {
+  return BUDGET_REVISIONS.filter((r) => r.fiscalYear === fiscalYear).sort((a, b) => a.sequence - b.sequence);
+}
+
+/** 事業内訳を登録済みの段階のうち最新のもの。 */
+export function latestRevisionWithProjects(fiscalYear: number): BudgetRevision | undefined {
+  return budgetRevisionsForYear(fiscalYear)
+    .filter((r) => r.projects.length > 0)
+    .at(-1);
+}
+
+export function budgetBill(billId: string): BudgetRevisionBill | undefined {
+  return BILLS.get(billId);
+}
+
+/** 議案詳細ページから、その議案に対応する予算段階・会計を引く。 */
+export function budgetRevisionForBill(billId: string): { revision: BudgetRevision; account: BudgetRevisionAccount } | undefined {
+  for (const revision of BUDGET_REVISIONS) {
+    const account = revision.accounts.find((a) => a.billId === billId);
+    if (account) return { revision, account };
+  }
+  return undefined;
+}
+
+export function policyCategoryLabel(id: string): string {
+  return CATEGORY_LABELS.get(id) ?? id;
+}
+
+/** 金額は財政ページの既存表記（千円単位＋必要に応じて億円の概数）に合わせる。 */
+export function formatThousandYen(value: number): string {
+  return `${value.toLocaleString("ja-JP")}千円`;
+}
+
+export function formatOkuFromThousand(value: number): string {
+  return `約${(value / 100000).toFixed(1)}億円`;
+}
+
+/** 財源内訳を「国・県支出金 18,382千円」のような行に変換する（空欄の区分は出さない）。 */
+export function fundingRows(funding: BudgetFunding): { label: string; value: string }[] {
+  const rows: { label: string; value: string }[] = [];
+  const push = (label: string, v: number | null, note: string | null) => {
+    if (v === null) return;
+    rows.push({ label: note ? `${label}（${note}）` : label, value: formatThousandYen(v) });
+  };
+  push("国・県支出金", funding.nationalPrefecturalThousandYen, null);
+  push("地方債", funding.localBondThousandYen, null);
+  push("その他", funding.otherThousandYen, funding.otherNote);
+  push("一般財源", funding.generalRevenueThousandYen, funding.generalRevenueNote);
+  return rows;
+}
+
+/** 議員別賛否の表示文。0件は「未登録」と明示し、全会一致等を推測しない。 */
+export function memberVoteText(bill: BudgetRevisionBill | undefined): string {
+  if (!bill) return "議案データ未登録";
+  if (bill.memberVoteCount === 0) {
+    return "議員ごとの賛否は未登録です（延岡市議会の審議結果資料には議決結果のみが記載されています。会議録等の公式資料で確認でき次第登録します）";
+  }
+  // 表示ラベルは BillMemberVoteStatus（src/types/index.ts）の定義に合わせる。
+  const labels: Record<string, string> = {
+    approve: "賛成",
+    oppose: "反対",
+    departed: "退席",
+    absent: "欠席",
+    recused: "除斥",
+    notVoting: "採決なし",
+    abstained: "棄権",
+    unconfirmed: "確認不能",
+  };
+  const parts = Object.entries(bill.memberVoteSummary).map(([vote, n]) => `${labels[vote] ?? vote}${n}人`);
+  return `${bill.memberVoteCount}人分を登録済み${parts.length > 0 ? `（${parts.join("・")}）` : ""}`;
+}

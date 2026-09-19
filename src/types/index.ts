@@ -1177,12 +1177,6 @@ export interface FinanceAmountItem {
   percentage?: number;
 }
 
-/** 補正予算の主な事業1件分（千円単位）。 */
-export interface FinanceProjectItem {
-  title: string;
-  amountThousandYen: number;
-}
-
 /** 一般会計の総額系数値（千円単位）。 */
 export interface FinanceGeneralAccount {
   /** 補正後の総額。 */
@@ -2246,7 +2240,8 @@ export interface FinanceDashboardData {
   revenue: FinanceAmountItem[];
   expenditureByPurpose: FinanceAmountItem[];
   expenditureByNature: FinanceAmountItem[];
-  supplementaryBudgetProjects: FinanceProjectItem[];
+  // 補正予算の事業一覧は Phase261 で src/data/budgetRevisions.json（段階別・議案との関連付き）へ移した。
+  // ここに複製しない（旧 supplementaryBudgetProjects）。
   fundBalance: FundBalanceData;
   populationTrend: PopulationTrendData;
   /** 市債（歳入項目）についての注記。市債残高ではないことを明記する。 */

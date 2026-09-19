@@ -11,6 +11,7 @@ import { FinanceBarList } from "../components/finance/FinanceBarList";
 import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { FinanceTable } from "../components/finance/FinanceTable";
 import { SoundnessRatiosSection } from "../components/finance/SoundnessRatiosSection";
+import { BudgetRevisionsSection } from "../components/finance/BudgetRevisionsSection";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -240,23 +241,7 @@ export function FinancePage() {
         <SectionSource section="expenditureByNature" />
       </SectionCard>
 
-      <SectionCard title={`${stageLabel}予算の主な内容`}>
-        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          単位：千円。{stageLabel}予算に計上された主な事業です。市長の公約・政策との関連付けは行っていません。
-        </p>
-        <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {data.supplementaryBudgetProjects.map((p) => (
-            <li
-              key={p.title}
-              className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 rounded-lg border border-outline-variant p-3"
-            >
-              <span className="text-sm text-on-surface">{p.title}</span>
-              <span className="text-sm font-semibold text-on-surface">{formatThousandYen(p.amountThousandYen)}</span>
-            </li>
-          ))}
-        </ul>
-        <SectionSource section="supplementaryBudgetProjects" />
-      </SectionCard>
+      <BudgetRevisionsSection fiscalYear={Number(data.fiscalYear)} />
 
       <SectionCard title="財源調整用基金の推移">
         <GlossaryNote term="基金" definition={FINANCE_GLOSSARY["基金"]} className="mb-3" />

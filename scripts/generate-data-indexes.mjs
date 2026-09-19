@@ -21,6 +21,9 @@
  * - src/data/mayorPromiseMeasuresIndex.json
  *       … mayorPromiseMeasures.jsonから、件数集計と公約との対応確認に必要なIDだけを抜き出したもの
  *         （Phase202：市長公約の3階層の件数をseo.tsが参照するため。実績・予定の本文は含めない）
+ * - src/data/budgetRevisionBillsIndex.json
+ *       … budgetRevisions.jsonが参照する議案だけの議決結果・議決日・議員別賛否の件数
+ *         （Phase261：財政ページの「予算→議案→議決」表示用。予算データへ議決結果を複製しない）
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -127,13 +130,40 @@ function buildMayorPromiseMeasuresIndex(measures) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// 4. 予算段階に関連する議案の射影（budgetRevisionBillsIndex.json）
+// ---------------------------------------------------------------------------
+// Phase261：財政ページの「予算→議案→議決→議員別賛否」表示で、budgetRevisions.jsonが参照する議案だけの
+// 議決結果・議決日・議員別賛否の有無を使う。財政ページにbillVotes.json（約2.8MB）を読み込ませないための射影で、
+// 議決結果等を予算データ側へ複製しない（元データはbillVotes.jsonのまま）。
+const BUDGET_BILL_FIELDS = ["id", "billNumber", "billTitle", "session", "result", "votingDate", "publicationStatus", "verificationStatus"];
+
+function buildBudgetRevisionBillsIndex(revisions, bills) {
+  const referenced = new Set(revisions.flatMap((r) => (r.accounts ?? []).map((a) => a.billId)));
+  return bills
+    .filter((bill) => referenced.has(bill.id))
+    .map((bill) => {
+      const entry = {};
+      for (const key of BUDGET_BILL_FIELDS) {
+        if (bill[key] !== undefined) entry[key] = bill[key];
+      }
+      // 議員別賛否は件数と賛否の内訳のみ（氏名は議案詳細ページで確認する）。0件は「公表なし・未登録」を表す。
+      const votes = bill.memberVotes ?? [];
+      entry.memberVoteCount = votes.length;
+      entry.memberVoteSummary = votes.reduce((acc, v) => ({ ...acc, [v.vote]: (acc[v.vote] ?? 0) + 1 }), {});
+      return entry;
+    });
+}
+
 const speechSource = readJson("councilSpeechSummaries.json");
 const billsSource = readJson("billVotes.json");
 const measureSource = readJson("mayorPromiseMeasures.json");
+const budgetRevisionSource = readJson("budgetRevisions.json");
 
 const speechIndex = buildCouncilSpeechIndex(speechSource);
 const billIndex = buildBillVotesIndex(billsSource);
 const measureIndex = buildMayorPromiseMeasuresIndex(measureSource);
+const budgetBillIndex = buildBudgetRevisionBillsIndex(budgetRevisionSource, billsSource);
 
 // 射影の健全性チェック（件数が元データと一致すること）。
 const sourceSpeechCount = speechSource.members.reduce((sum, m) => sum + (m.speeches ?? []).length, 0);
@@ -153,6 +183,7 @@ if (measureSource.length !== measureIndex.length) {
 const speechResult = writeJsonIfChanged("councilSpeechIndex.json", speechIndex);
 const billResult = writeJsonIfChanged("billVotesIndex.json", billIndex);
 const measureResult = writeJsonIfChanged("mayorPromiseMeasuresIndex.json", measureIndex);
+const budgetBillResult = writeJsonIfChanged("budgetRevisionBillsIndex.json", budgetBillIndex);
 
 const kb = (n) => `${(n / 1024).toFixed(0)}KB`;
 console.log(
@@ -163,4 +194,7 @@ console.log(
 );
 console.log(
   `[generate-data-indexes] mayorPromiseMeasuresIndex.json ${kb(measureResult.bytes)}（個別施策${measureIndex.length}件、${measureResult.changed ? "更新" : "変更なし"}）`,
+);
+console.log(
+  `[generate-data-indexes] budgetRevisionBillsIndex.json ${kb(budgetBillResult.bytes)}（予算段階の関連議案${budgetBillIndex.length}件、${budgetBillResult.changed ? "更新" : "変更なし"}）`,
 );

@@ -32,6 +32,7 @@ import { BillCategoryNotice, BillResultOutcomeNotice } from "../components/bills
 import { BILL_EXPLANATION_LEVEL_DESCRIPTION, BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/billSummaryQuality";
 import { classifyBillExplainability } from "../lib/billExplainability";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { budgetRevisionForBill, formatThousandYen } from "../lib/budgetRevisions";
 import {
   BILL_SESSION_FISCAL_YEAR_DESCRIPTION,
   BILL_SESSION_FISCAL_YEAR_HINT,
@@ -119,6 +120,7 @@ export function BillVoteDetailPage() {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const bill = billVotes.find((b) => b.id === id);
+  const budgetLink = bill ? budgetRevisionForBill(bill.id) : undefined;
   const seo = getSeoForPath(location.pathname);
   const [copied, setCopied] = useState(false);
 
@@ -523,6 +525,64 @@ export function BillVoteDetailPage() {
           <p className="mt-1 text-xs text-on-surface-variant">概要以外の項目は公開資料で確認でき次第、追加します。</p>
         )}
       </SectionCard>
+
+      {/* Phase261：予算議案の場合、延岡市の予算資料（概要書等）の数値と事業へ戻れるようにする */}
+      {budgetLink && (
+        <SectionCard title="この議案の予算額（延岡市の予算資料）">
+          <dl className="space-y-1 text-sm">
+            <div className="flex flex-wrap gap-x-2">
+              <dt className="text-on-surface-variant">予算の段階</dt>
+              <dd className="text-on-surface">
+                {budgetLink.revision.label}（{budgetLink.account.accountName}）
+              </dd>
+            </div>
+            {budgetLink.account.supplementaryThousandYen !== null && (
+              <div className="flex flex-wrap gap-x-2">
+                <dt className="text-on-surface-variant">補正額</dt>
+                <dd className="font-semibold text-on-surface">{formatThousandYen(budgetLink.account.supplementaryThousandYen)}</dd>
+              </div>
+            )}
+            <div className="flex flex-wrap gap-x-2">
+              <dt className="text-on-surface-variant">{budgetLink.revision.kind === "initial" ? "当初予算額" : "補正後の予算額"}</dt>
+              <dd className="text-on-surface">{formatThousandYen(budgetLink.account.afterThousandYen)}</dd>
+            </div>
+            {budgetLink.revision.projects.length > 0 && (
+              <div>
+                <dt className="text-on-surface-variant">計上された事業（{budgetLink.revision.projects.length}件）</dt>
+                <dd>
+                  <ul className="mt-1 space-y-0.5 text-xs">
+                    {budgetLink.revision.projects.map((p) => (
+                      <li key={p.id} className="flex flex-wrap justify-between gap-x-3">
+                        <span className="text-on-surface">{p.name}</span>
+                        <span className="text-on-surface-variant">{formatThousandYen(p.supplementaryThousandYen)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            )}
+          </dl>
+          <p className="mt-2 text-xs">
+            <Link
+              to={`/finance#budget-revision-${budgetLink.revision.id}`}
+              className={`inline-flex min-h-11 items-center text-primary underline ${linkClass}`}
+            >
+              財政ページで予算の変化と事業の詳細を見る
+            </Link>
+          </p>
+          <p className="text-xs text-on-surface-variant">
+            出典：
+            <a
+              href={`${budgetLink.revision.sources[budgetLink.account.sourceIndex].url}#page=${budgetLink.revision.sources[budgetLink.account.sourceIndex].pdfPage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex min-h-11 items-center text-primary underline ${linkClass}`}
+            >
+              {budgetLink.revision.sources[budgetLink.account.sourceIndex].title}
+            </a>
+          </p>
+        </SectionCard>
+      )}
 
       {/* 議決結果 */}
       <SectionCard title="議決結果">

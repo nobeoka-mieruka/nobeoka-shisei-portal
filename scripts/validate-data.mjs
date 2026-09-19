@@ -1191,6 +1191,170 @@ try {
   warn("financeDashboard.json", "読み込めませんでした（存在しない場合はスキップ）");
 }
 
+// --- budgetRevisions.json（Phase261：当初予算・補正予算の段階別データ。予算→事業→議案→議決の追跡用） ---
+{
+  const tagBase = "budgetRevisions.json";
+  let revisions = null;
+  try {
+    revisions = readJson("src/data/budgetRevisions.json");
+  } catch (e) {
+    if (e?.code === "ENOENT") warn(tagBase, "読み込めませんでした（存在しない場合はスキップ）");
+    else throw e;
+  }
+  if (revisions) {
+    const billById = new Map(billVotes.map((b) => [b.id, b]));
+    const sessionIds = new Set((councilSessions ?? []).map((s) => s.id));
+    const categoryIds = new Set(readJson("src/data/archivePolicyCategories.json").map((c) => c.id));
+    const promiseIds = new Set((readJson("src/data/mayorPromises.json").promises ?? []).map((p) => p.id));
+    const isInt = (v) => Number.isInteger(v);
+    const fundingTotal = (f) =>
+      [f.nationalPrefecturalThousandYen, f.localBondThousandYen, f.otherThousandYen, f.generalRevenueThousandYen].reduce((sum, v) => sum + (v ?? 0), 0);
+    const checkFunding = (f, amount, tag) => {
+      for (const key of ["nationalPrefecturalThousandYen", "localBondThousandYen", "otherThousandYen", "generalRevenueThousandYen"]) {
+        if (f[key] !== null && (!isInt(f[key]) || f[key] < 0)) err(tag, `funding.${key}が0以上の整数（千円）ではありません: ${f[key]}`);
+      }
+      if (fundingTotal(f) !== amount) err(tag, `財源内訳の合計（${fundingTotal(f)}千円）が補正額（${amount}千円）と一致しません`);
+      if (f.otherThousandYen === null && f.otherNote) err(tag, "funding.otherNoteがありますがotherThousandYenがnullです");
+      if (f.generalRevenueThousandYen === null && f.generalRevenueNote) err(tag, "funding.generalRevenueNoteがありますがgeneralRevenueThousandYenがnullです");
+    };
+
+    const ids = new Set();
+    const projectIds = new Set();
+    const stageKeys = new Set();
+    for (const r of revisions) {
+      const tag = `${tagBase} (${r.id ?? "id不明"})`;
+      if (isBlank(r.id)) err(tag, "idが空です");
+      else if (ids.has(r.id)) err(tag, `idが重複しています: ${r.id}`);
+      ids.add(r.id);
+      if (!isInt(r.fiscalYear)) err(tag, `fiscalYearが整数ではありません: ${r.fiscalYear}`);
+      if (!["initial", "supplementary"].includes(r.kind)) err(tag, `kindが未定義です: ${r.kind}`);
+      if (!r.id?.startsWith(`fy${r.fiscalYear}-`)) err(tag, `idは「fy{年度}-」で始めてください（年度＋段階で一意にするため）`);
+      if (!sessionIds.has(r.sessionId)) err(tag, `sessionId（${r.sessionId}）がcouncilSessions.jsonに存在しません`);
+      // 同じ定例会で複数回の補正がある（9月補正と9月補正（2次分）等）ため、年度＋定例会＋種別＋回次で一意にする。
+      const stageKey = `${r.fiscalYear}|${r.sessionId}|${r.kind}|${r.round}`;
+      if (stageKeys.has(stageKey)) err(tag, `年度・定例会・種別・回次の組（${stageKey}）が重複しています`);
+      stageKeys.add(stageKey);
+      if (!isInt(r.round) || r.round < 1) err(tag, `roundは1以上の整数にしてください: ${r.round}`);
+      if (r.kind === "initial" && r.sequence !== 0) err(tag, "当初予算のsequenceは0にしてください");
+      if (!URL_RE.test(r.listingPageUrl ?? "")) err(tag, `listingPageUrlの形式が不正です: ${r.listingPageUrl}`);
+
+      if (!Array.isArray(r.sources) || r.sources.length === 0) err(tag, "sourcesが空です");
+      for (const [i, s] of (r.sources ?? []).entries()) {
+        const sTag = `${tag} (sources[${i}])`;
+        if (isBlank(s.title)) err(sTag, "titleが空です");
+        if (!URL_RE.test(s.url ?? "")) err(sTag, `urlの形式が不正です: ${s.url}`);
+        if (!["概要書", "予算書"].includes(s.sourceType)) err(sTag, `sourceTypeが未定義です: ${s.sourceType}`);
+        if (!isInt(s.pdfPage) || s.pdfPage < 1) err(sTag, `pdfPageが不正です: ${s.pdfPage}`);
+        if (s.documentDate !== null && !DATE_RE.test(s.documentDate ?? "")) err(sTag, `documentDateの形式が不正です: ${s.documentDate}`);
+        if (!DATE_RE.test(s.retrievedAt ?? "")) err(sTag, `retrievedAtの形式が不正です: ${s.retrievedAt}`);
+        checkTrustLevel({ err }, s.trustLevel, sTag);
+      }
+      const checkSourceIndex = (index, where) => {
+        if (!isInt(index) || !r.sources?.[index]) err(tag, `${where}のsourceIndex（${index}）に対応する出典がありません`);
+      };
+
+      if (!Array.isArray(r.accounts) || r.accounts.length === 0) err(tag, "accountsが空です");
+      for (const a of r.accounts ?? []) {
+        const aTag = `${tag} (${a.accountName ?? "会計不明"})`;
+        checkSourceIndex(a.sourceIndex, a.accountName);
+        const bill = billById.get(a.billId);
+        if (!bill) err(aTag, `billId（${a.billId}）がbillVotes.jsonに存在しません`);
+        else {
+          if (bill.billNumber !== a.billNumber) err(aTag, `billNumber（${a.billNumber}）が議案データ（${bill.billNumber}）と一致しません`);
+          if (bill.sessionId !== r.sessionId) err(aTag, `議案の定例会（${bill.sessionId}）とsessionId（${r.sessionId}）が一致しません`);
+          if (!bill.billTitle.includes(a.accountName)) err(aTag, `議案名（${bill.billTitle}）に会計名（${a.accountName}）が含まれていません（別の議案と関連付けている疑い）`);
+        }
+        if (!isInt(a.afterThousandYen) || a.afterThousandYen <= 0) err(aTag, `afterThousandYenが正の整数（千円）ではありません: ${a.afterThousandYen}`);
+        if (r.kind === "initial") {
+          if (a.beforeThousandYen !== null || a.supplementaryThousandYen !== null) err(aTag, "当初予算にbefore/supplementaryを設定しないでください（当初予算と補正額の混同防止）");
+        } else {
+          if (!isInt(a.beforeThousandYen) || !isInt(a.supplementaryThousandYen)) err(aTag, "補正予算はbeforeThousandYen・supplementaryThousandYenを整数（千円）で設定してください");
+          else if (a.beforeThousandYen + a.supplementaryThousandYen !== a.afterThousandYen) {
+            err(aTag, `補正前（${a.beforeThousandYen}）＋補正額（${a.supplementaryThousandYen}）が補正後（${a.afterThousandYen}）と一致しません`);
+          }
+          if (a.funding) checkFunding(a.funding, a.supplementaryThousandYen, aTag);
+        }
+      }
+
+      let projectSum = 0;
+      for (const p of r.projects ?? []) {
+        const pTag = `${tag} (project:${p.id ?? "id不明"})`;
+        if (isBlank(p.id) || !p.id.startsWith(`${r.id}-`)) err(pTag, `事業idは「${r.id}-」で始めてください`);
+        if (projectIds.has(p.id)) err(pTag, `事業idが重複しています: ${p.id}`);
+        projectIds.add(p.id);
+        for (const field of ["name", "department", "group", "budgetClassification", "purpose"]) {
+          if (isBlank(p[field])) err(pTag, `${field}が空です`);
+        }
+        for (const field of ["beforeThousandYen", "supplementaryThousandYen", "afterThousandYen"]) {
+          if (!isInt(p[field]) || p[field] < 0) err(pTag, `${field}が0以上の整数（千円）ではありません: ${p[field]}`);
+        }
+        if (p.beforeThousandYen + p.supplementaryThousandYen !== p.afterThousandYen) err(pTag, "補正前＋補正額が補正後と一致しません");
+        checkFunding(p.funding, p.supplementaryThousandYen, pTag);
+        const breakdownSum = (p.breakdown ?? []).reduce((sum, b) => sum + b.thousandYen, 0);
+        if ((p.breakdown ?? []).length > 0 && breakdownSum !== p.supplementaryThousandYen) {
+          err(pTag, `内訳の合計（${breakdownSum}千円）が補正額（${p.supplementaryThousandYen}千円）と一致しません`);
+        }
+        for (const c of p.policyCategoryIds ?? []) {
+          if (!categoryIds.has(c)) err(pTag, `policyCategoryIds（${c}）がarchivePolicyCategories.jsonに存在しません（独自タグは作らない）`);
+        }
+        for (const pid of p.relatedPromiseIds ?? []) {
+          if (!promiseIds.has(pid)) err(pTag, `relatedPromiseIds（${pid}）がmayorPromises.jsonに存在しません`);
+        }
+        checkSourceIndex(p.sourceIndex, p.id);
+        projectSum += p.supplementaryThousandYen ?? 0;
+      }
+      for (const g of r.projectGroupTotals ?? []) {
+        const sum = (r.projects ?? []).filter((p) => p.group === g.group).reduce((s, p) => s + p.supplementaryThousandYen, 0);
+        if (sum !== g.supplementaryThousandYen) err(tag, `事業グループ「${g.group}」の合計（${sum}千円）が資料の合計欄（${g.supplementaryThousandYen}千円）と一致しません`);
+      }
+      // 事業が登録されている段階は、事業の合計が補正額（全会計の合計）と一致すること（事業の登録漏れ・二重登録の検出）。
+      if ((r.projects ?? []).length > 0) {
+        const total = (r.accounts ?? []).reduce((s, a) => s + (a.supplementaryThousandYen ?? 0), 0);
+        if (projectSum !== total) err(tag, `事業の補正額の合計（${projectSum}千円）が補正額（${total}千円）と一致しません`);
+      }
+    }
+
+    // 年度内の時系列：会計ごとに、前の段階の補正後＝次の段階の補正前（段階の抜け・順序誤りの検出）。
+    const byYear = new Map();
+    for (const r of revisions) byYear.set(r.fiscalYear, [...(byYear.get(r.fiscalYear) ?? []), r]);
+    for (const [fy, list] of byYear) {
+      const sorted = [...list].sort((a, b) => a.sequence - b.sequence);
+      const seqs = sorted.map((r) => r.sequence);
+      if (new Set(seqs).size !== seqs.length) err(tagBase, `FY${fy}のsequenceが重複しています`);
+      const lastAfter = new Map();
+      for (const r of sorted) {
+        for (const a of r.accounts) {
+          const prev = lastAfter.get(a.accountName);
+          if (r.kind === "supplementary" && prev !== undefined && prev !== a.beforeThousandYen) {
+            err(`${tagBase} (${r.id})`, `${a.accountName}の補正前（${a.beforeThousandYen}千円）が直前の段階の補正後（${prev}千円）と一致しません`);
+          }
+          lastAfter.set(a.accountName, a.afterThousandYen);
+        }
+      }
+    }
+
+    // 財政ダッシュボードの一般会計（最新段階の補正前・補正額・補正後）が、段階別データの最新段階と一致すること。
+    try {
+      const dashboard = readJson("src/data/financeDashboard.json");
+      const latest = revisions
+        .filter((r) => String(r.fiscalYear) === dashboard.fiscalYear)
+        .sort((a, b) => b.sequence - a.sequence)[0];
+      const general = latest?.accounts.find((a) => a.accountName === "一般会計");
+      if (general) {
+        const g = dashboard.generalAccount;
+        if (g.totalThousandYen !== general.afterThousandYen || g.totalBeforeThousandYen !== general.beforeThousandYen || g.supplementaryThousandYen !== general.supplementaryThousandYen) {
+          err(tagBase, `financeDashboard.jsonの一般会計（${g.totalBeforeThousandYen}＋${g.supplementaryThousandYen}＝${g.totalThousandYen}）が最新段階（${latest.id}）と一致しません`);
+        }
+        if (dashboard.supplementaryStageLabel !== latest.label) {
+          err(tagBase, `financeDashboard.jsonのsupplementaryStageLabel（${dashboard.supplementaryStageLabel}）が最新段階のlabel（${latest.label}）と一致しません`);
+        }
+      }
+    } catch {
+      // financeDashboard.jsonの読み込み失敗は上の節で報告済み
+    }
+  }
+}
+
 // --- politicalFundOrganizations.json / politicalFundReports.json（政治資金収支報告書。TASK-016Aから実データを順次登録） ---
 try {
   const politicalFundOrganizations = readJson("src/data/politicalFundOrganizations.json");

@@ -66,6 +66,7 @@ import { classifyItem, checkCircuitBreaker } from "../core/classify.mjs";
 import { validateEntry } from "../core/validate.mjs";
 import { writeRunReport, updateStatus, ROOT } from "../core/report.mjs";
 import { parseSoundnessRatioPage } from "../../lib/soundness-ratio-page.mjs";
+import { classifyBudgetListing } from "../../lib/budget-listing.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TARGET = "finance";
@@ -368,6 +369,99 @@ async function evaluateBinaryHashTarget({ url, sourceType, stateKey, state }) {
   return { url, sourceType, contentHash, schemaValid: true, schemaErrors: [], outcome, anomalyDetected: false };
 }
 
+const BUDGET_REVISIONS_PATH = join(ROOT, "src", "data", "budgetRevisions.json");
+
+async function evaluateBudgetListingPage(url, fiscalYear, startedAt) {
+  const sourceType = "年度の予算ページ（延岡市公式、当初予算・補正予算の資料一覧。段階ごとの登録漏れ検知）";
+  let html;
+  let status = null;
+  try {
+    const buffer = await fetchCitySiteBuffer(url);
+    html = buffer.toString("utf8");
+    status = 200;
+  } catch (e) {
+    const result = classifyItem({
+      schemaValid: true,
+      schemaErrors: [],
+      outcome: "error",
+      isOfficialPrimarySource: true,
+      reachable: false,
+      httpStatus: null,
+      requiresHumanReview: true,
+      humanReviewReason: `取得失敗: ${e.message}`,
+      anomalyDetected: false,
+    });
+    return {
+      sourceUrl: url,
+      sourceType,
+      sessionId: null,
+      outcome: "error",
+      lastCheckedAt: startedAt,
+      httpStatus: null,
+      contentHash: null,
+      parserVersion: PARSER_VERSION,
+      extractionStatus: `fetch_failed: ${e.message}`,
+      validationStatus: "schema_invalid",
+      validationErrors: [e.message],
+      level: result.level,
+      reason: result.reason,
+    };
+  }
+  const links = extractLinks(html).map((l) => ({ text: l.text, url: resolveUrl(l.href, url) }));
+  const revisions = JSON.parse(readFileSync(BUDGET_REVISIONS_PATH, "utf8"));
+  const registeredUrls = new Set(revisions.flatMap((r) => r.sources.map((s) => s.url)));
+  const { stages, unregistered } = classifyBudgetListing(links, registeredUrls);
+  const structureBroken = stages.length === 0;
+  const outcome = structureBroken ? "error" : unregistered.length > 0 ? "new" : "unchanged";
+  const validation = validateEntry(
+    { sourceUrl: url, outcome },
+    { allowedHosts: CITY_SITE_ALLOWED_HOSTS, requireSessionId: false, requiredFields: ["outcome"] },
+  );
+  const result = classifyItem({
+    schemaValid: validation.valid && !structureBroken,
+    schemaErrors: structureBroken ? ["資料リンク（「○○（概要書）」「○○（予算書）」）が1件も見つかりませんでした（ページ構造変化の可能性）"] : validation.errors,
+    outcome,
+    isOfficialPrimarySource: true,
+    reachable: true,
+    httpStatus: status,
+    requiresHumanReview: outcome === "new",
+    humanReviewReason:
+      outcome === "new"
+        ? `budgetRevisions.json に未登録の段階を検出：${unregistered.map((s) => s.stageLabel).join("、")}。概要書・予算書を開いて補正前・補正額・補正後・議案番号を確認してから登録すること。`
+        : undefined,
+    anomalyDetected: false,
+  });
+  return {
+    sourceUrl: url,
+    sourceType,
+    sessionId: null,
+    outcome,
+    lastCheckedAt: startedAt,
+    httpStatus: status,
+    contentHash: sha256OfBufferForDiff(Buffer.from(stages.map((s) => `${s.stageLabel}:${s.documents.map((d) => d.url).join(",")}`).join("|"), "utf8")),
+    parserVersion: PARSER_VERSION,
+    extractionStatus: `年度=${fiscalYear ?? "不明"} 段階=${stages.length}件（未登録${unregistered.length}件）`,
+    validationStatus: validation.valid && !structureBroken ? "schema_valid" : "schema_invalid",
+    validationErrors: validation.errors,
+    level: result.level,
+    reason: result.reason,
+    // 人間確認用の候補。数値は資料を開いて確認するまで入れない（null）。
+    ...(unregistered.length > 0
+      ? {
+          updateCandidates: unregistered.map((s) => ({
+            fiscalYear,
+            label: s.stageLabel,
+            documents: s.documents,
+            beforeThousandYen: null,
+            supplementaryThousandYen: null,
+            afterThousandYen: null,
+            billNumber: null,
+          })),
+        }
+      : {}),
+  };
+}
+
 function formatExtracted(ratio) {
   if (!ratio) return "抽出失敗";
   const current = ratio.current === null ? "該当なし" : `${ratio.current}%`;
@@ -501,6 +595,14 @@ async function main() {
   });
   pushEntryFromIndexResult(budgetResult);
   if (!budgetResult.fetchError) nextState.budgetIndex = { contentHash: budgetResult.contentHash, lastCheckedAt: startedAt };
+
+  // F) Phase261：年度の予算ページ（例：令和8年度予算 48542.html）に掲載された当初予算・補正予算・専決処分等の
+  //    資料リンクを「段階名」ごとにまとめ、budgetRevisions.json に未登録の段階を検出する。
+  //    9月補正と9月補正（2次分）のように同じ月に複数の補正があっても、段階名（リンク文言）で区別するため
+  //    上書き・取り違えは起きない。資料の中身（PDF）は開かない＝新しい段階は必ずYELLOW（人が概要書と照合して登録）。
+  if (!budgetResult.fetchError && budgetResult.latestUrl) {
+    entries.push(await evaluateBudgetListingPage(budgetResult.latestUrl, budgetResult.detectedLatestYear, startedAt));
+  }
 
   // B) 決算資料（健全化判断比率）の新年度検知（優先度2）
   const settlementResult = await evaluateYearIndexTarget({
@@ -755,7 +857,7 @@ async function main() {
     updatedCount: 0,
     removedCandidateCount: 0,
     detectedTotal: entries.length,
-    previousKnownTotal: 5, // 監視対象resourceは常に5件（A〜E）。
+    previousKnownTotal: 6, // 監視対象resourceは6件（A〜F）。
   });
 
   const overallLevel = circuitBreaker.tripped ? "RED" : summary.red > 0 ? "RED" : summary.yellow > 0 ? "YELLOW" : "GREEN";
