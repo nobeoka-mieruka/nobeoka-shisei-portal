@@ -5045,6 +5045,9 @@
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
         }
       ],
+      "notApplicableRatios": [
+        "futureBurdenRatioPercent"
+      ],
       "notes": "将来負担比率は当該号で「該当なし」と明記（前年度は9.3%だったため、基準を下回り算定対象外になったとみられる。0という意味ではない）。経常収支比率・財政力指数は当該号のこの記事には記載なし。 財政力指数0.48を新規登録。 経常収支比率92.2%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
     },
     "mayorId": "mayor-03",
@@ -5229,6 +5232,9 @@
           "verificationStatus": "needsReview",
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
         }
+      ],
+      "notApplicableRatios": [
+        "futureBurdenRatioPercent"
       ],
       "notes": "財政力指数0.49を新規登録。 経常収支比率94.3%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。 実質公債費比率8.9%を新規登録（現行サイトのattachment/6498.pdfが2026-08-17時点でHTML404を返すため取得不能だったが、総務省決算カードにより判明）。 将来負担比率は総務省決算カード上「-」（該当なし。将来負担額が充当可能財源等を下回るため算定なし。0%ではない）。"
     },
@@ -5437,7 +5443,62 @@
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
         }
       ],
-      "notes": "将来負担比率は資料上「-」（将来負担額が充当可能財源等を下回るため、算定なし。0％や未確認とは異なる）。実質収支2,109,555千円、実質収支比率6.6%、標準財政規模32,195,730千円も同資料に記載。"
+      "notes": "将来負担比率は資料上「-」（将来負担額が充当可能財源等を下回るため、算定なし。0％や未確認とは異なる）。実質収支2,109,555千円、実質収支比率6.6%、標準財政規模32,195,730千円も同資料に記載。",
+      "soundness": {
+        "actualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 11.71,
+          "reconstructionStandardPercent": 20
+        },
+        "consolidatedActualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 16.71,
+          "reconstructionStandardPercent": 30
+        },
+        "realDebtServiceRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 25,
+          "reconstructionStandardPercent": 35
+        },
+        "futureBurdenRatio": {
+          "status": "notApplicable",
+          "earlyWarningStandardPercent": 350,
+          "reconstructionStandardPercent": null
+        },
+        "fundShortageRatios": [
+          {
+            "accountName": "水道事業",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "下水道事業",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "食肉センター",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          }
+        ],
+        "sourceRef": {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/6752.html",
+          "sourceTitle": "令和2年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2021-09-17",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      }
     },
     "mayorId": "mayor-03",
     "mayorTermId": "mayor-03-term-01"
@@ -5666,7 +5727,62 @@
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
         }
       ],
-      "notes": "実質収支2,543,985千円、実質収支比率7.7%、標準財政規模33,171,044千円も同資料に記載。"
+      "notes": "実質収支2,543,985千円、実質収支比率7.7%、標準財政規模33,171,044千円も同資料に記載。",
+      "soundness": {
+        "actualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 11.67,
+          "reconstructionStandardPercent": 20
+        },
+        "consolidatedActualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 16.67,
+          "reconstructionStandardPercent": 30
+        },
+        "realDebtServiceRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 25,
+          "reconstructionStandardPercent": 35
+        },
+        "futureBurdenRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 350,
+          "reconstructionStandardPercent": null
+        },
+        "fundShortageRatios": [
+          {
+            "accountName": "水道事業",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "下水道事業",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "食肉センター",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          }
+        ],
+        "sourceRef": {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/20701.html",
+          "sourceTitle": "令和3年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2022-09-16",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      }
     },
     "mayorId": "mayor-03",
     "mayorTermId": "mayor-03-term-01"
@@ -5873,7 +5989,62 @@
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
         }
       ],
-      "notes": "実質収支2,104,150千円、実質収支比率6.6%、標準財政規模32,067,253千円も同資料に記載。"
+      "notes": "実質収支2,104,150千円、実質収支比率6.6%、標準財政規模32,067,253千円も同資料に記載。",
+      "soundness": {
+        "actualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 11.72,
+          "reconstructionStandardPercent": 20
+        },
+        "consolidatedActualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 16.72,
+          "reconstructionStandardPercent": 30
+        },
+        "realDebtServiceRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 25,
+          "reconstructionStandardPercent": 35
+        },
+        "futureBurdenRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 350,
+          "reconstructionStandardPercent": null
+        },
+        "fundShortageRatios": [
+          {
+            "accountName": "水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "下水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "食肉センター特別会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          }
+        ],
+        "sourceRef": {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/29621.html",
+          "sourceTitle": "令和4年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2023-09-29",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      }
     },
     "mayorId": "mayor-03",
     "mayorTermId": "mayor-03-term-02"
@@ -6102,7 +6273,62 @@
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
         }
       ],
-      "notes": "実質収支1,815,659千円、実質収支比率5.6%、標準財政規模32,545,525千円も同資料に記載。"
+      "notes": "実質収支1,815,659千円、実質収支比率5.6%、標準財政規模32,545,525千円も同資料に記載。",
+      "soundness": {
+        "actualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 11.7,
+          "reconstructionStandardPercent": 20
+        },
+        "consolidatedActualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 16.7,
+          "reconstructionStandardPercent": 30
+        },
+        "realDebtServiceRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 25,
+          "reconstructionStandardPercent": 35
+        },
+        "futureBurdenRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 350,
+          "reconstructionStandardPercent": null
+        },
+        "fundShortageRatios": [
+          {
+            "accountName": "水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "下水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "食肉センター特別会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          }
+        ],
+        "sourceRef": {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/37572.html",
+          "sourceTitle": "令和5年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2024-10-04",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      }
     },
     "mayorId": "mayor-03",
     "mayorTermId": "mayor-03-term-02"
@@ -6203,7 +6429,62 @@
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 financialStrengthIndex(0.53)・currentAccountRatioPercent(97.2)は、既存financeDashboard.jsonのfinancialIndicators（TASK-035で確認済み）とも一致。debtServiceRatioPercent(公債費負担比率)を新規追加。realDebtServiceRatioPercent・futureBurdenRatioPercentは既存値（8.6/15.9）と完全一致のため変更なし。"
         }
       ],
-      "notes": "実質赤字比率・連結実質赤字比率・資金不足比率は延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされている。 financialStrengthIndex・currentAccountRatioPercent・debtServiceRatioPercentは財政状況資料集で確認し追加登録（既存のTASK-035確認値と一致）。"
+      "notes": "実質赤字比率・連結実質赤字比率・資金不足比率は延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされている。 financialStrengthIndex・currentAccountRatioPercent・debtServiceRatioPercentは財政状況資料集で確認し追加登録（既存のTASK-035確認値と一致）。",
+      "soundness": {
+        "actualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 11.69,
+          "reconstructionStandardPercent": 20
+        },
+        "consolidatedActualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 16.69,
+          "reconstructionStandardPercent": 30
+        },
+        "realDebtServiceRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 25,
+          "reconstructionStandardPercent": 35
+        },
+        "futureBurdenRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 350,
+          "reconstructionStandardPercent": null
+        },
+        "fundShortageRatios": [
+          {
+            "accountName": "水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "下水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "食肉センター特別会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          }
+        ],
+        "sourceRef": {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/44461.html",
+          "sourceTitle": "令和6年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2025-09-19",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      }
     },
     "debt": {
       "fiscalYear": 2024,
@@ -6370,7 +6651,7 @@
       },
       "notes": "決算未確定の見込額。決算確定後に更新が必要。"
     },
-    "notes": "令和7年度（FY2025）決算・財政健全化判断比率・地方債現在高は、2026-08-11時点で延岡市「財政状況資料集」「健全化判断比率等の公表」ともに令和6年度版（R6版）が最新で、令和7年度版は未公表（延岡市公式サイトの財政課ページ・健全化判断比率索引ページで確認済み）。「延岡市の財政事情（令和7年度後期）」（2026-05-01公表）に市債残高PDF（27146.pdf）が含まれているが、PDFのテキスト抽出でラベルと数値の対応付けが安全にできず、確定登録は見送った（一次資料は存在するが未確認のまま）。決算未確定・年度途中のデータを推測で補完していない。財政状況資料集の公表後、既存の同一手法（Excelの総括表シート解析）で再調査すること。 年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-01-term-01、mayor-03-term-02）。 年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-01-term-01、mayor-03-term-02）。",
+    "notes": "【2026-09-19更新】令和7年度の健全化判断比率は、延岡市「令和7年度健全化判断比率等の公表」（2026-09-18更新）で公表されたためfinanceへ登録した（実質公債費比率8.7%・将来負担比率32.3%）。以下は2026-08-11時点の記録：令和7年度（FY2025）決算・財政健全化判断比率・地方債現在高は、2026-08-11時点で延岡市「財政状況資料集」「健全化判断比率等の公表」ともに令和6年度版（R6版）が最新で、令和7年度版は未公表（延岡市公式サイトの財政課ページ・健全化判断比率索引ページで確認済み）。「延岡市の財政事情（令和7年度後期）」（2026-05-01公表）に市債残高PDF（27146.pdf）が含まれているが、PDFのテキスト抽出でラベルと数値の対応付けが安全にできず、確定登録は見送った（一次資料は存在するが未確認のまま）。決算未確定・年度途中のデータを推測で補完していない。財政状況資料集の公表後、既存の同一手法（Excelの総括表シート解析）で再調査すること。 年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-01-term-01、mayor-03-term-02）。 年度途中に市長が交代したため単一のmayorIdは設定していません（該当任期：mayor-01-term-01、mayor-03-term-02）。",
     "debt": {
       "fiscalYear": 2025,
       "municipalBondIssuanceYen": 6882300000,
@@ -6444,6 +6725,83 @@
         }
       ],
       "notes": "令和7年度の一般会計当初予算規模のみ確認済み（Phase137）。決算・歳入歳出内訳は財政状況資料集の令和7年度版公表後に再調査が必要（fiscalYear全体のnotesも参照）。 Phase165: 「延岡市の財政事情（令和7年度後期）」の予算執行状況PDF（27138.pdf）により、令和7年度の補正後（現計）予算額・特別会計予算額・歳入内訳4項目（予算ベース）を新規登録した。決算額・歳入歳出総額（決算ベース）は財政状況資料集の令和7年度版が未公表のため引き続き未確認。"
+    },
+    "finance": {
+      "fiscalYear": 2025,
+      "debtServiceRatioPercent": null,
+      "realDebtServiceRatioPercent": 8.7,
+      "futureBurdenRatioPercent": 32.3,
+      "currentAccountRatioPercent": null,
+      "financialStrengthIndex": null,
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/51957.html",
+          "sourceTitle": "令和7年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2026-09-18",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      ],
+      "soundness": {
+        "actualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 11.66,
+          "reconstructionStandardPercent": 20
+        },
+        "consolidatedActualDeficitRatio": {
+          "status": "notApplicable",
+          "percent": null,
+          "earlyWarningStandardPercent": 16.66,
+          "reconstructionStandardPercent": 30
+        },
+        "realDebtServiceRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 25,
+          "reconstructionStandardPercent": 35
+        },
+        "futureBurdenRatio": {
+          "status": "reported",
+          "earlyWarningStandardPercent": 350,
+          "reconstructionStandardPercent": null
+        },
+        "fundShortageRatios": [
+          {
+            "accountName": "水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "下水道事業会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          },
+          {
+            "accountName": "食肉センター特別会計",
+            "status": "notApplicable",
+            "percent": null,
+            "managementSoundnessStandardPercent": 20
+          }
+        ],
+        "sourceRef": {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/51957.html",
+          "sourceTitle": "令和7年度健全化判断比率等の公表",
+          "sourceOrganization": "延岡市",
+          "trustLevel": "PRIMARY",
+          "sourceUpdatedDate": "2026-09-18",
+          "accessedAt": "2026-09-19",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "延岡市財政課の公表ページ（地方公共団体財政健全化法に基づく公表）の2つの表（健全化判断比率・資金不足比率）を scripts/lib/soundness-ratio-page.mjs で解析し、本文の定型文（「…は○%で、前年度(○%)と比較すると」）の値とも一致することを確認した。「―」は資料の備考どおり該当なし（赤字・資金不足が生じていない等）であり0%ではない。"
+        }
+      },
+      "notes": "令和7年度決算に基づく健全化判断比率（2026-09-18更新の延岡市公表ページ）。実質公債費比率8.7%（前年度8.6%）、将来負担比率32.3%（前年度15.9%）。前年度値は登録済みの令和6年度の値と一致。経常収支比率・財政力指数・公債費負担比率はこの資料に記載がないため未登録（null＝確認中。財政状況資料集等の公表後に確認する）。"
     }
   },
   {

@@ -364,7 +364,66 @@ export interface ArchiveFinance {
   /** 財政力指数。 */
   financialStrengthIndex: number | null;
   sourceRefs: ArchiveSourceRef[];
+  /**
+   * 延岡市「令和N年度健全化判断比率等の公表」ページに基づく5指標の区分と法定基準（Phase260で追加、任意）。
+   * 実質公債費比率・将来負担比率の「値」は二重登録を避けるため上の realDebtServiceRatioPercent・
+   * futureBurdenRatioPercent だけに持ち、ここには区分（算定あり／該当なし）と法定基準だけを持つ。
+   */
+  soundness?: ArchiveFinanceSoundness;
+  /**
+   * soundnessが無い年度で、出典資料に「該当なし」（算定されない）と明記されていた比率（Phase260で追加、任意）。
+   * 値はnullのまま、「確認中」と区別して表示するために使う。根拠はsourceRefs・notesに記載すること。
+   */
+  notApplicableRatios?: Array<"realDebtServiceRatioPercent" | "futureBurdenRatioPercent">;
   notes?: string;
+}
+
+/**
+ * 健全化判断比率の区分。
+ * - reported: 比率が算定・公表されている
+ * - notApplicable: 公表資料で「―」「該当なし」（赤字・資金不足が生じていない／将来負担額を充当可能財源等が
+ *   上回り算定されない）。0%とは異なる。
+ */
+export type SoundnessRatioStatus = "reported" | "notApplicable";
+
+/** 法定基準（地方公共団体財政健全化法）。延岡市の実績値とは別物であり、表示でも区別する。基準が定められていない場合はnull。 */
+export interface SoundnessStandards {
+  /** 早期健全化基準(%)。実質赤字比率・連結実質赤字比率は標準財政規模に応じて年度ごとに変わる。 */
+  earlyWarningStandardPercent: number | null;
+  /** 財政再生基準(%)。将来負担比率には定められていない（null）。 */
+  reconstructionStandardPercent: number | null;
+}
+
+/** 実質赤字比率・連結実質赤字比率（値もここに持つ。ArchiveFinance本体に対応フィールドがないため）。 */
+export interface SoundnessDeficitRatio extends SoundnessStandards {
+  status: SoundnessRatioStatus;
+  /** status==="reported" のときの比率(%)。notApplicableならnull。 */
+  percent: number | null;
+}
+
+/** 実質公債費比率・将来負担比率（値はArchiveFinance本体のフィールドを参照）。 */
+export interface SoundnessValueRef extends SoundnessStandards {
+  status: SoundnessRatioStatus;
+}
+
+/** 資金不足比率（公営企業の会計ごと）。 */
+export interface SoundnessFundShortageRatio {
+  /** 公表資料の会計名の表記どおり（例：「水道事業会計」「水道事業」）。 */
+  accountName: string;
+  status: SoundnessRatioStatus;
+  percent: number | null;
+  /** 経営健全化基準(%)。 */
+  managementSoundnessStandardPercent: number | null;
+}
+
+export interface ArchiveFinanceSoundness {
+  actualDeficitRatio: SoundnessDeficitRatio;
+  consolidatedActualDeficitRatio: SoundnessDeficitRatio;
+  realDebtServiceRatio: SoundnessValueRef;
+  futureBurdenRatio: SoundnessValueRef;
+  fundShortageRatios: SoundnessFundShortageRatio[];
+  /** 根拠となった「健全化判断比率等の公表」ページ。 */
+  sourceRef: ArchiveSourceRef;
 }
 
 /**

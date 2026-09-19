@@ -16,6 +16,7 @@ import {
   checkPercentRange,
   checkPeriodConsistency,
   checkReferenceExists,
+  checkFinanceSoundness,
   checkSourceRefs,
   checkTrustLevel,
   checkValuesHaveSource,
@@ -2187,13 +2188,22 @@ try {
         err(fiTag, `finance.fiscalYear(${fi.fiscalYear})が年度エントリのfiscalYear(${entry.fiscalYear})と一致しません`);
       }
       for (const rf of FINANCE_RATIO_FIELDS) {
-        // 将来負担比率は財政再生基準が350%であり、100%を超える値も実際に存在するため上限を緩和する。
+        // 将来負担比率は市町村の早期健全化基準が350%であり（財政再生基準は定められていない）、
+        // 100%を超える値も実際に存在するため上限を緩和する。
         const max = rf === "futureBurdenRatioPercent" ? 400 : 100;
         checkPercentRange({ err }, fi[rf], rf, fiTag, { max });
       }
       checkNonNegative({ err }, fi.financialStrengthIndex, "financialStrengthIndex", fiTag);
       checkSourceRefs({ err, warn }, fi.sourceRefs, fiTag);
       checkValuesHaveSource({ warn }, fi, [...FINANCE_RATIO_FIELDS, "financialStrengthIndex"], fi.sourceRefs, fiTag);
+      if (fi.soundness) checkFinanceSoundness({ err }, fi, `${fiTag} / soundness`);
+      for (const field of fi.notApplicableRatios ?? []) {
+        if (!["realDebtServiceRatioPercent", "futureBurdenRatioPercent"].includes(field)) {
+          err(fiTag, `notApplicableRatiosに未定義の項目があります: ${field}`);
+        } else if (fi[field] !== null) {
+          err(fiTag, `notApplicableRatiosに${field}がありますが値がnullではありません（該当なしと数値の二重登録）: ${fi[field]}`);
+        }
+      }
     }
   }
 } catch (e) {

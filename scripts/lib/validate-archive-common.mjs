@@ -162,6 +162,76 @@ export function checkPercentRange({ err }, value, fieldName, tag, { max = 100 } 
   }
 }
 
+const SOUNDNESS_STATUSES = new Set(["reported", "notApplicable"]);
+
+/**
+ * archiveFiscalYears.json の finance.soundness（健全化判断比率等の区分と法定基準）を検証する。
+ * - status と値の整合：reported なら数値、notApplicable なら null（「該当なし」を0%として登録しない）
+ * - 実質公債費比率・将来負担比率の値は finance 本体のフィールドだけに持つ（二重登録しない）
+ * - 法定基準は0〜400%の数値またはnull
+ * - 出典（sourceRef）が必須
+ */
+export function checkFinanceSoundness({ err }, finance, tag) {
+  const s = finance.soundness;
+  const checkStandard = (value, name) => checkPercentRange({ err }, value, name, tag, { max: 400 });
+  const checkStatus = (status, name) => {
+    if (!SOUNDNESS_STATUSES.has(status)) err(tag, `${name}.statusが未定義です: ${status}`);
+  };
+
+  for (const key of ["actualDeficitRatio", "consolidatedActualDeficitRatio"]) {
+    const r = s[key];
+    if (!r) {
+      err(tag, `${key}が未設定です`);
+      continue;
+    }
+    checkStatus(r.status, key);
+    if (r.status === "reported" && typeof r.percent !== "number") err(tag, `${key}はreportedですがpercentが数値ではありません: ${r.percent}`);
+    if (r.status === "notApplicable" && r.percent !== null) err(tag, `${key}はnotApplicable（該当なし）ですがpercentがnullではありません: ${r.percent}`);
+    checkPercentRange({ err }, r.percent, `${key}.percent`, tag, { max: 400 });
+    checkStandard(r.earlyWarningStandardPercent, `${key}.earlyWarningStandardPercent`);
+    checkStandard(r.reconstructionStandardPercent, `${key}.reconstructionStandardPercent`);
+  }
+
+  for (const [key, field] of [
+    ["realDebtServiceRatio", "realDebtServiceRatioPercent"],
+    ["futureBurdenRatio", "futureBurdenRatioPercent"],
+  ]) {
+    const r = s[key];
+    if (!r) {
+      err(tag, `${key}が未設定です`);
+      continue;
+    }
+    checkStatus(r.status, key);
+    if ("percent" in r) err(tag, `${key}に値(percent)を持たせないでください（finance.${field}と二重登録になるため）`);
+    if (r.status === "reported" && typeof finance[field] !== "number") err(tag, `${key}はreportedですがfinance.${field}が数値ではありません`);
+    if (r.status === "notApplicable" && finance[field] !== null) err(tag, `${key}はnotApplicable（該当なし）ですがfinance.${field}がnullではありません`);
+    checkStandard(r.earlyWarningStandardPercent, `${key}.earlyWarningStandardPercent`);
+    checkStandard(r.reconstructionStandardPercent, `${key}.reconstructionStandardPercent`);
+  }
+
+  if (!Array.isArray(s.fundShortageRatios) || s.fundShortageRatios.length === 0) {
+    err(tag, "fundShortageRatiosが空です（公表資料の資金不足比率の表の会計を登録してください）");
+  } else {
+    const names = new Set();
+    for (const f of s.fundShortageRatios) {
+      if (isBlank(f.accountName)) err(tag, "fundShortageRatiosのaccountNameが空です");
+      else if (names.has(f.accountName)) err(tag, `fundShortageRatiosの会計名が重複しています: ${f.accountName}`);
+      names.add(f.accountName);
+      checkStatus(f.status, `fundShortageRatios(${f.accountName})`);
+      if (f.status === "reported" && typeof f.percent !== "number") err(tag, `資金不足比率(${f.accountName})はreportedですがpercentが数値ではありません`);
+      if (f.status === "notApplicable" && f.percent !== null) err(tag, `資金不足比率(${f.accountName})はnotApplicableですがpercentがnullではありません`);
+      checkStandard(f.managementSoundnessStandardPercent, `fundShortageRatios(${f.accountName}).managementSoundnessStandardPercent`);
+    }
+  }
+
+  if (!s.sourceRef) err(tag, "sourceRef（健全化判断比率等の公表ページ）が未設定です");
+  else {
+    checkSourceRefs({ err, warn: () => {} }, [s.sourceRef], tag);
+    if (isBlank(s.sourceRef.sourceUrl)) err(tag, "sourceRef.sourceUrlが空です");
+    checkTrustLevel({ err }, s.sourceRef.trustLevel, tag);
+  }
+}
+
 /** 年度が妥当な範囲・整数かを確認する。 */
 export function checkYearRange({ err }, year, tag, { min = 1947, max = 2100 } = {}) {
   if (typeof year !== "number" || !Number.isInteger(year)) {

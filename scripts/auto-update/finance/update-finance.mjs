@@ -23,11 +23,15 @@
  *   B) https://www.city.nobeoka.miyazaki.jp/soshiki/18/48507.html … 「健全化判断比率」年度別
  *      一覧ページ。「令和N年度健全化判断比率等の公表」リンクの年度で決算資料の新年度公開を
  *      検知する（優先度2）。
- *   C) Bで見つかった最新年度の個別ページ（現状 44461.html。archiveCrawlerTargets.jsonの
- *      id="finance"と同一URL）を core/fetch.mjs の fetchWithRetry で動的に取得し
- *      （bills/update-bills.mjsのprobeNewDocumentと同じ「動的に見つかった資料をcore/fetch.mjsで
- *      確認する」設計）、本文に明記された実質公債費比率・将来負担比率の実数値と前年度比較値を
- *      抽出する（優先度3：市債・基金等の明確な数値。OCR不要、HTML本文に平文で記載されている）。
+ *   C) Bで見つかった最新年度の個別ページ（令和7年度分は 51957.html）を core/fetch.mjs の
+ *      fetchWithRetry で動的に取得し（bills/update-bills.mjsのprobeNewDocumentと同じ「動的に
+ *      見つかった資料をcore/fetch.mjsで確認する」設計）、scripts/lib/soundness-ratio-page.mjs で
+ *      5指標（実質赤字比率・連結実質赤字比率・実質公債費比率・将来負担比率・資金不足比率）・
+ *      法定基準・前年度比較値を抽出する（OCR不要、HTML本文に平文で記載されている）。
+ *      Phase260：表と本文の値の食い違い・行の欠落・年度の不一致・前年度値と登録済みデータの
+ *      不一致はRED（誤った数値を自動反映しない＝要確認）。新年度・内容変化を検出し問題が無い場合は、
+ *      archiveFiscalYears.json の finance と同じ形の updateCandidate をレポートに添付する
+ *      （人間が公式ページと照合してから登録する。本番データへは書き込まない）。
  *   D) https://www.city.nobeoka.miyazaki.jp/soshiki/18/48504.html … 「財政状況資料集」（xlsx）
  *      年度別一覧ページ。「令和N年度財政状況資料集」リンクの年度で新年度資料の存在を検知する
  *      （優先度3の補助。xlsxの中身は開かない＝検知のみ）。
@@ -61,6 +65,7 @@ import { fetchWithRetry } from "../core/fetch.mjs";
 import { classifyItem, checkCircuitBreaker } from "../core/classify.mjs";
 import { validateEntry } from "../core/validate.mjs";
 import { writeRunReport, updateStatus, ROOT } from "../core/report.mjs";
+import { parseSoundnessRatioPage } from "../../lib/soundness-ratio-page.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TARGET = "finance";
@@ -150,12 +155,111 @@ function loadKnownLatestBudgetYear() {
   return max;
 }
 
-/** 本番データ（読み取り専用）financeDashboard.jsonから、健全化判断比率の既知最新決算年度を取得する。 */
+/**
+ * 本番データ（読み取り専用）から、健全化判断比率の既知最新決算年度を取得する。
+ * Phase260：単一情報源である archiveFiscalYears.json の finance.soundness（「健全化判断比率等の公表」
+ * ページ由来の登録）を優先し、未登録の場合のみ従来どおり financeDashboard.json のラベルを見る。
+ */
 function loadKnownLatestSettlementYear() {
+  const years = JSON.parse(readFileSync(ARCHIVE_FISCAL_YEARS_PATH, "utf8"));
+  const withSoundness = years.filter((y) => y.finance?.soundness).map((y) => y.fiscalYear);
+  if (withSoundness.length > 0) return Math.max(...withSoundness);
   const dash = JSON.parse(readFileSync(FINANCE_DASHBOARD_PATH, "utf8"));
   const label = dash.financialIndicators?.fiscalYearLabel ?? "";
   const m = label.match(/令和(\d+)年度/);
   return m ? Number(m[1]) + REIWA_ERA_OFFSET : null;
+}
+
+/** 本番データ（読み取り専用）archiveFiscalYears.jsonの指定年度のfinance。 */
+function loadArchiveFinance(fiscalYear) {
+  const years = JSON.parse(readFileSync(ARCHIVE_FISCAL_YEARS_PATH, "utf8"));
+  return years.find((y) => y.fiscalYear === fiscalYear)?.finance ?? null;
+}
+
+/**
+ * 解析結果が本番データ（archiveFiscalYears.json）の登録内容と一致するか。
+ * 値（実質公債費比率・将来負担比率）・5指標の区分・法定基準・資金不足比率の会計まで比較する。
+ */
+function soundnessMatchesProduction(parsed, finance) {
+  if (!finance?.soundness) return false;
+  const s = finance.soundness;
+  const r = parsed.ratios;
+  const sameStd = (a, b) =>
+    a.earlyWarningStandardPercent === b.earlyWarningStandardPercent && a.reconstructionStandardPercent === b.reconstructionStandardPercent;
+  if (finance.realDebtServiceRatioPercent !== r.realDebtServiceRatio.percent) return false;
+  if (finance.futureBurdenRatioPercent !== r.futureBurdenRatio.percent) return false;
+  for (const key of ["actualDeficitRatio", "consolidatedActualDeficitRatio", "realDebtServiceRatio", "futureBurdenRatio"]) {
+    if (s[key].status !== r[key].status || !sameStd(s[key], r[key])) return false;
+  }
+  for (const key of ["actualDeficitRatio", "consolidatedActualDeficitRatio"]) {
+    if (s[key].percent !== r[key].percent) return false;
+  }
+  if (s.fundShortageRatios.length !== parsed.fundShortageRatios.length) return false;
+  return parsed.fundShortageRatios.every((f) => {
+    const known = s.fundShortageRatios.find((k) => k.accountName === f.accountName);
+    return known && known.status === f.status && known.percent === f.percent && known.managementSoundnessStandardPercent === f.managementSoundnessStandardPercent;
+  });
+}
+
+/**
+ * 人間確認用の更新候補（archiveFiscalYears.json の finance レコードと同じ形）。本番データへは書き込まない。
+ * 経常収支比率・財政力指数・公債費負担比率はこのページに記載がないため null（確認中）のまま。
+ */
+function buildSoundnessCandidate(parsed, detailUrl, accessedAt) {
+  const reiwa = parsed.fiscalYear - REIWA_ERA_OFFSET;
+  const sourceRef = {
+    sourceUrl: detailUrl,
+    sourceTitle: `令和${reiwa}年度健全化判断比率等の公表`,
+    sourceOrganization: "延岡市",
+    trustLevel: "PRIMARY",
+    sourceUpdatedDate: parsed.updatedDate,
+    accessedAt,
+    extractionMethod: "other",
+    verificationStatus: "needsReview",
+    notes: `自動巡回（${PARSER_VERSION}）で表と本文を解析した更新候補。人が公式ページと照合してから登録すること。`,
+  };
+  const pick = ({ status, earlyWarningStandardPercent, reconstructionStandardPercent }) => ({
+    status,
+    earlyWarningStandardPercent,
+    reconstructionStandardPercent,
+  });
+  return {
+    fiscalYear: parsed.fiscalYear,
+    debtServiceRatioPercent: null,
+    realDebtServiceRatioPercent: parsed.ratios.realDebtServiceRatio.percent,
+    futureBurdenRatioPercent: parsed.ratios.futureBurdenRatio.percent,
+    currentAccountRatioPercent: null,
+    financialStrengthIndex: null,
+    sourceRefs: [sourceRef],
+    soundness: {
+      actualDeficitRatio: parsed.ratios.actualDeficitRatio,
+      consolidatedActualDeficitRatio: parsed.ratios.consolidatedActualDeficitRatio,
+      realDebtServiceRatio: pick(parsed.ratios.realDebtServiceRatio),
+      futureBurdenRatio: pick(parsed.ratios.futureBurdenRatio),
+      fundShortageRatios: parsed.fundShortageRatios,
+      sourceRef,
+    },
+  };
+}
+
+/**
+ * 公表ページの「前年度(x%)」が、本番データに登録済みの前年度の値と一致するか。
+ * 一致しない場合は、前年度値の修正（再算定）か解析ミスのいずれかであり、自動反映できない。
+ */
+function priorYearMismatches(parsed) {
+  const prev = loadArchiveFinance(parsed.fiscalYear - 1);
+  if (!prev) return [];
+  const mismatches = [];
+  for (const [key, field, label] of [
+    ["realDebtServiceRatio", "realDebtServiceRatioPercent", "実質公債費比率"],
+    ["futureBurdenRatio", "futureBurdenRatioPercent", "将来負担比率"],
+  ]) {
+    const prior = parsed.priorYear[key];
+    if (prior != null && prev[field] != null && prior !== prev[field]) {
+      mismatches.push(`${label}の前年度値がページ（${prior}%）と登録済みデータ（${prev[field]}%）で一致しません`);
+    }
+  }
+  return mismatches;
 }
 
 /** 本番データ（読み取り専用）financeDashboard.jsonのdebtBalanceTrend出典から、財政状況資料集の既知最新年度を取得する。 */
@@ -166,19 +270,6 @@ function loadKnownLatestFiscalMaterialsYear() {
   const matches = [...(source.title ?? "").matchAll(/令和(\d+)年度版/g)];
   if (matches.length === 0) return null;
   return Math.max(...matches.map((m) => Number(m[1]) + REIWA_ERA_OFFSET));
-}
-
-/**
- * 本文中の「{label}は{値}%で、前年度({前年値}%)と比較すると」という定型文から、
- * 当年値・前年値を抽出する（延岡市「健全化判断比率等の公表」ページの実際の文面パターン）。
- */
-function extractRatioWithPriorYear(text, label) {
-  const i = text.indexOf(`${label}は`);
-  if (i === -1) return null;
-  const window = text.slice(i, i + 100);
-  const m = window.match(/は([-0-9.]+)[%％][^\d]*?前年度\(([-0-9.]+)/);
-  if (!m) return null;
-  return { current: Number(m[1]), prior: Number(m[2]) };
 }
 
 /** 年度別一覧ページ（優先度1・2・3補助）に共通の判定ロジック。 */
@@ -277,14 +368,25 @@ async function evaluateBinaryHashTarget({ url, sourceType, stateKey, state }) {
   return { url, sourceType, contentHash, schemaValid: true, schemaErrors: [], outcome, anomalyDetected: false };
 }
 
+function formatExtracted(ratio) {
+  if (!ratio) return "抽出失敗";
+  const current = ratio.current === null ? "該当なし" : `${ratio.current}%`;
+  return ratio.prior === null ? current : `${current}(前年度${ratio.prior}%)`;
+}
+
 /** 優先度3：健全化判断比率の実数値抽出＋異常値検知（本文の平文記載を利用、OCR不要）。 */
-function detectRatioAnomaly(ratio, label) {
+function detectRatioAnomaly(ratio, label, { max = 60 } = {}) {
   if (!ratio) {
     return { anomalyDetected: true, severity: "RED", reason: `${label}の数値を本文から抽出できませんでした（空値への上書き、またはページ構造変化の疑い）` };
   }
-  if (ratio.current < -10 || ratio.current > 60) {
+  // 当年が「該当なし」（―）の場合は比率が算定されていないため、範囲・変動幅の判定対象外。
+  if (ratio.current === null) return { anomalyDetected: false };
+  // 範囲の上限は指標ごとに変える（将来負担比率は市町村の早期健全化基準が350%で、過去に142.5%の年度もある）。
+  if (ratio.current < -10 || ratio.current > max) {
     return { anomalyDetected: true, severity: "RED", reason: `${label}が想定範囲外の値です（${ratio.current}%、制度上想定される範囲を大きく外れている）` };
   }
+  // 前年度が「該当なし」だった年はページに前年度比較が無い（prior===null）ため、変動幅は判定しない。
+  if (ratio.prior === null) return { anomalyDetected: false };
   const pointDiff = Math.abs(ratio.current - ratio.prior);
   if (pointDiff >= 40) {
     return { anomalyDetected: true, severity: "RED", reason: `${label}が前年度から${pointDiff.toFixed(1)}ポイント変動（極端な変化のため自動反映不可）` };
@@ -420,32 +522,47 @@ async function main() {
       const res = await fetchWithRetry(detailUrl, { allowedHosts, maxRetries: 2 });
       const buf = Buffer.from(await res.arrayBuffer());
       const contentHash = sha256OfBufferForDiff(buf);
-      const text = htmlToText(buf.toString("utf8"));
-      const realDebtServiceRatio = extractRatioWithPriorYear(text, "実質公債費比率");
-      const futureBurdenRatio = extractRatioWithPriorYear(text, "将来負担比率");
+      // Phase260：表（5指標・法定基準・資金不足比率）と本文の定型文を共通パーサーで読む。
+      // 表と本文の値の食い違い・行の欠落・年度の読み取り失敗は parsed.errors に入り、RED（自動反映不可）にする。
+      const parsed = parseSoundnessRatioPage(buf.toString("utf8"));
+      const ratioOf = (key) => {
+        const r = parsed.ratios[key];
+        if (!r) return null;
+        return { current: r.percent, prior: parsed.priorYear[key] ?? null };
+      };
+      const realDebtServiceRatio = ratioOf("realDebtServiceRatio");
+      const futureBurdenRatio = ratioOf("futureBurdenRatio");
 
       const anomalyA = detectRatioAnomaly(realDebtServiceRatio, "実質公債費比率");
-      const anomalyB = detectRatioAnomaly(futureBurdenRatio, "将来負担比率");
-      const anomalies = [anomalyA, anomalyB].filter((a) => a.anomalyDetected);
+      const anomalyB = detectRatioAnomaly(futureBurdenRatio, "将来負担比率", { max: 400 });
+      const structuralProblems = [...parsed.errors];
+      if (parsed.fiscalYear !== null && parsed.fiscalYear !== settlementResult.detectedLatestYear) {
+        structuralProblems.push(
+          `一覧ページのリンク年度（${settlementResult.detectedLatestYear}）と個別ページ本文の年度（${parsed.fiscalYear}）が一致しません`,
+        );
+      }
+      if (parsed.fiscalYear !== null && parsed.errors.length === 0) structuralProblems.push(...priorYearMismatches(parsed));
+      const anomalies = [
+        anomalyA,
+        anomalyB,
+        ...structuralProblems.map((reason) => ({ anomalyDetected: true, severity: "RED", reason: `${reason}（誤った数値を自動反映しないため要確認）` })),
+      ].filter((a) => a.anomalyDetected);
       const redAnomaly = anomalies.find((a) => a.severity === "RED");
       const yellowAnomaly = anomalies.find((a) => a.severity === "YELLOW");
 
-      // outcomeはローカルの前回ハッシュではなく、本番データ（financeDashboard.json、読み取り専用）の
+      // outcomeはローカルの前回ハッシュではなく、本番データ（archiveFiscalYears.json、読み取り専用）の
       // 既存登録値と比較して決める（初回実行でも「本番に既に反映済みか」を正しく判定できるため）。
       let outcome;
       if (settlementResult.outcome === "new") {
         outcome = "new"; // Bの年度別一覧で新年度と判定済み（同一の新年度イベント）。
       } else {
-        const dash = JSON.parse(readFileSync(FINANCE_DASHBOARD_PATH, "utf8"));
-        const fi = dash.financialIndicators ?? {};
-        const matchesProduction =
-          realDebtServiceRatio &&
-          futureBurdenRatio &&
-          fi.realDebtServiceRatioPercent === realDebtServiceRatio.current &&
-          fi.futureBurdenRatioPercent === futureBurdenRatio.current;
-        outcome = matchesProduction ? "unchanged" : "updated";
+        const known = parsed.fiscalYear !== null ? loadArchiveFinance(parsed.fiscalYear) : null;
+        outcome = parsed.errors.length === 0 && soundnessMatchesProduction(parsed, known) ? "unchanged" : "updated";
       }
       if (outcome === "new") circuitBreakerNewCount += 1;
+      // 新年度・内容変化があり、構造上の問題も無い場合だけ、人間確認用の更新候補を作る（本番データへは書かない）。
+      const updateCandidate =
+        outcome !== "unchanged" && !redAnomaly && parsed.fiscalYear !== null ? buildSoundnessCandidate(parsed, detailUrl, startedAt.slice(0, 10)) : null;
 
       const validation = validateEntry(
         { sourceUrl: detailUrl, outcome },
@@ -459,8 +576,13 @@ async function main() {
         isOfficialPrimarySource: true,
         reachable: res.ok,
         httpStatus: res.status,
-        requiresHumanReview: outcome === "updated",
-        humanReviewReason: outcome === "updated" ? "同一年度ページの本文が変化（数値修正の可能性）のため人間確認が必要。" : undefined,
+        requiresHumanReview: outcome !== "unchanged",
+        humanReviewReason:
+          outcome === "updated"
+            ? "公表ページの内容が登録済みデータと一致しない（数値修正の可能性）ため人間確認が必要。"
+            : outcome === "new"
+              ? "新しい年度の健全化判断比率を検出。updateCandidateを公式ページと照合してからarchiveFiscalYears.jsonへ追加すること。"
+              : undefined,
         anomalyDetected: Boolean(redAnomaly),
         anomalyReason: redAnomaly?.reason,
       });
@@ -485,18 +607,19 @@ async function main() {
 
       entries.push({
         sourceUrl: detailUrl,
-        sourceType: "健全化判断比率 個別年度ページ（延岡市公式、実質公債費比率・将来負担比率の実数値）",
+        sourceType: "健全化判断比率 個別年度ページ（延岡市公式、5指標・法定基準・資金不足比率）",
         sessionId: null,
         outcome,
         lastCheckedAt: startedAt,
         httpStatus: res.status,
         contentHash,
         parserVersion: PARSER_VERSION,
-        extractionStatus: `実質公債費比率=${realDebtServiceRatio ? `${realDebtServiceRatio.current}%(前年度${realDebtServiceRatio.prior}%)` : "抽出失敗"} 将来負担比率=${futureBurdenRatio ? `${futureBurdenRatio.current}%(前年度${futureBurdenRatio.prior}%)` : "抽出失敗"}`,
-        validationStatus: validation.valid ? "schema_valid" : "schema_invalid",
-        validationErrors: validation.errors,
+        extractionStatus: `年度=${parsed.fiscalYear ?? "読取失敗"} 実質公債費比率=${formatExtracted(realDebtServiceRatio)} 将来負担比率=${formatExtracted(futureBurdenRatio)} 資金不足比率の会計=${parsed.fundShortageRatios.length}件`,
+        validationStatus: validation.valid && parsed.errors.length === 0 ? "schema_valid" : "schema_invalid",
+        validationErrors: [...validation.errors, ...parsed.errors],
         level,
         reason,
+        ...(updateCandidate ? { updateCandidate } : {}),
       });
       nextState.settlementDetail = { contentHash, lastCheckedAt: startedAt };
     } catch (e) {

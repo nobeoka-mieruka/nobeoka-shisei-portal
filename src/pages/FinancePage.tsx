@@ -10,6 +10,7 @@ import { StatCard } from "../components/StatCard";
 import { FinanceBarList } from "../components/finance/FinanceBarList";
 import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { FinanceTable } from "../components/finance/FinanceTable";
+import { SoundnessRatiosSection } from "../components/finance/SoundnessRatiosSection";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -27,7 +28,8 @@ const data = financeData as FinanceDashboardData;
  * データ側（financeDashboard.json）で管理し、補正のたびに画面文言を書き換えなくて済むようにする。
  */
 const stageLabel = data.supplementaryStageLabel ?? "補正";
-const latestArchiveFiscalYear = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]).at(-1)?.fiscalYear;
+const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
+const latestArchiveFiscalYear = archiveFiscalYears.at(-1)?.fiscalYear;
 
 function formatThousandYen(value: number): string {
   return `${value.toLocaleString("ja-JP")}千円`;
@@ -339,21 +341,19 @@ export function FinancePage() {
         )}
       </SectionCard>
 
-      <SectionCard title="財政指標（健全化判断比率等）">
+      <SoundnessRatiosSection years={archiveFiscalYears} />
+
+      <SectionCard title={fi ? `その他の財政指標（${fi.fiscalYearLabel}）` : "その他の財政指標"}>
         {fi ? (
           <>
             <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-              {fi.fiscalYearLabel}の数値です。総務省の地方公共団体財政健全化法に基づき延岡市が公表した指標のみ掲載し、独自の評価・順位づけは行っていません。
+              {fi.fiscalYearLabel}の数値です（上の健全化判断比率とは対象年度・出典が異なります）。延岡市が公表した指標のみ掲載し、独自の評価・順位づけは行っていません。
             </p>
             <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
               <GlossaryNote term="財政力指数" definition={FINANCE_GLOSSARY["財政力指数"]} />
               <GlossaryNote term="経常収支比率" definition={FINANCE_GLOSSARY["経常収支比率"]} />
-              <GlossaryNote term="実質公債費比率" definition={FINANCE_GLOSSARY["実質公債費比率"]} />
-              <GlossaryNote term="将来負担比率" definition={FINANCE_GLOSSARY["将来負担比率"]} />
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              <StatCard label="実質公債費比率" value={formatPercentOrConfirming(fi.realDebtServiceRatioPercent)} compact />
-              <StatCard label="将来負担比率" value={formatPercentOrConfirming(fi.futureBurdenRatioPercent)} compact />
               <StatCard
                 label="財政力指数"
                 value={fi.fiscalStrengthIndex === null ? "確認中" : fi.fiscalStrengthIndex.toString()}
@@ -366,11 +366,6 @@ export function FinancePage() {
                 compact
               />
             </div>
-            {fi.notApplicableIndicators.length > 0 && (
-              <p className="mt-3 text-xs text-on-surface-variant">
-                対象なし（赤字・資金不足が生じていないため算定対象外）：{fi.notApplicableIndicators.join("、")}
-              </p>
-            )}
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{fi.note}</p>
             <SectionSource section="financialIndicators" />
           </>

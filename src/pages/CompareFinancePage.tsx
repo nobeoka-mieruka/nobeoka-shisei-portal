@@ -14,7 +14,8 @@ import { ChartBarIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { formatOkuYenOrConfirming, formatPercentOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
+import { formatSoundnessValue } from "../lib/financeSoundness";
 import { FINANCE_GLOSSARY } from "../lib/financeGlossary";
 import { parseCompareSelection, buildCompareSearchParams, MIN_COMPARE_ITEMS } from "../lib/archiveCompare";
 import {
@@ -143,8 +144,8 @@ export function CompareFinancePage() {
                 { header: "基金総額", align: "right", render: (y) => formatOkuYenOrConfirming(y.fund?.balance.totalYen) },
                 { header: "財源調整用基金", align: "right", render: (y) => formatOkuYenOrConfirming(y.fund?.balance.fiscalAdjustmentFundYen) },
                 { header: "財政力指数", align: "right", render: (y) => (y.finance?.financialStrengthIndex != null ? y.finance.financialStrengthIndex.toFixed(2) : "確認中") },
-                { header: "実質公債費比率", align: "right", render: (y) => formatPercentOrConfirming(y.finance?.realDebtServiceRatioPercent) },
-                { header: "将来負担比率", align: "right", render: (y) => formatPercentOrConfirming(y.finance?.futureBurdenRatioPercent) },
+                { header: "実質公債費比率", align: "right", render: (y) => formatSoundnessValue(y.finance, "realDebtServiceRatioPercent") },
+                { header: "将来負担比率", align: "right", render: (y) => formatSoundnessValue(y.finance, "futureBurdenRatioPercent") },
               ]}
             />
             <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">

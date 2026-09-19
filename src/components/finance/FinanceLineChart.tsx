@@ -12,6 +12,19 @@ export interface FinanceLineChartPoint {
    * 国勢調査のように5年おきの調査を等間隔に並べる系列では指定しない。
    */
   year?: number;
+  /**
+   * Phase260：資料で「該当なし」（赤字が生じていない・算定されない等）と明記された年度。
+   * valueはnullのまま渡す。点は打たず線もつながないが、「資料未確認」の斜線区間とは区別し、
+   * 一覧には「該当なし」と表示する（0%とも確認中とも異なるため）。
+   */
+  notApplicable?: boolean;
+}
+
+/** Phase260：法定基準などの参照線。実績値の系列とは別物であることを線種（破線）と文字の両方で示す。 */
+export interface FinanceLineChartReferenceLine {
+  value: number;
+  /** 例「早期健全化基準 25.0％」。グラフ上と直下の凡例の両方に表示する。 */
+  label: string;
 }
 
 interface FinanceLineChartProps {
@@ -19,6 +32,8 @@ interface FinanceLineChartProps {
   formatValue: (value: number) => string;
   /** スクリーンリーダー向けの説明。省略時は汎用の「推移グラフ」を使う（直後の表で詳細を確認できる）。 */
   ariaLabel?: string;
+  /** 参照線（任意）。縦軸の範囲は参照線も含めて決める。 */
+  referenceLines?: FinanceLineChartReferenceLine[];
 }
 
 const WIDTH = 600;
@@ -88,16 +103,18 @@ function axisLabelClassName(index: number, total: number, steps: number[]): stri
  * なければ線を結ばない。線を結んでいない区間（＝資料未確認の期間）は斜線の帯で塗り、
  * グラフ直下にも文字で明示する（色や線の形だけで意味を伝えない）。値の補間は一切行わない。
  */
-export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グラフ" }: FinanceLineChartProps) {
+export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グラフ", referenceLines = [] }: FinanceLineChartProps) {
   const gapPatternId = `finance-line-gap-${useId().replace(/:/g, "")}`;
   const values = points.map((p) => p.value).filter((v): v is number => v !== null);
-  const max = values.length > 0 ? Math.max(...values) : 1;
-  const min = values.length > 0 ? Math.min(...values) : 0;
+  const scaleValues = [...values, ...referenceLines.map((r) => r.value)];
+  const max = scaleValues.length > 0 ? Math.max(...scaleValues) : 1;
+  const min = scaleValues.length > 0 ? Math.min(...scaleValues) : 0;
   const range = max - min || 1;
+  const yOf = (value: number) => HEIGHT - PAD_Y - ((value - min) / range) * (HEIGHT - PAD_Y * 2);
 
   const coords = points.map((p, i) => {
     const x = points.length > 1 ? PAD_X + (i * (WIDTH - PAD_X * 2)) / (points.length - 1) : WIDTH / 2;
-    const y = p.value === null ? null : HEIGHT - PAD_Y - ((p.value - min) / range) * (HEIGHT - PAD_Y * 2);
+    const y = p.value === null ? null : yOf(p.value);
     return { ...p, x, y };
   });
 
@@ -111,13 +128,17 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
         .join(" "),
     );
 
-  const gaps = financeLineGaps(points).map((gap) => ({
-    ...gap,
-    description:
-      gap.missingYears.length > 0
-        ? `${formatFiscalYearRanges(gap.missingYears)}は資料未確認です（値を推定して線でつないでいません）。`
-        : `${points[gap.fromIndex].label}と${points[gap.toIndex].label}の間は資料未確認です（値を推定して線でつないでいません）。`,
-  }));
+  // 区間内の点がすべて「該当なし」の場合は資料未確認ではないため、斜線の区間から外して別に示す。
+  const gaps = financeLineGaps(points)
+    .filter((gap) => !points.slice(gap.fromIndex + 1, gap.toIndex).every((p) => p.notApplicable))
+    .map((gap) => ({
+      ...gap,
+      description:
+        gap.missingYears.length > 0
+          ? `${formatFiscalYearRanges(gap.missingYears)}は資料未確認です（値を推定して線でつないでいません）。`
+          : `${points[gap.fromIndex].label}と${points[gap.toIndex].label}の間は資料未確認です（値を推定して線でつないでいません）。`,
+    }));
+  const notApplicableLabels = points.filter((p) => p.notApplicable).map((p) => p.label);
   const gapSummary =
     gaps.length > 0
       ? `資料未確認のため線をつないでいない区間が${gaps.length}か所あります（内訳はグラフ直後の説明を参照してください）。`
@@ -165,6 +186,31 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
           stroke="var(--color-outline-variant)"
           strokeWidth="1"
         />
+        {referenceLines.map((r) => {
+          const y = yOf(r.value);
+          return (
+            <g key={`ref-${r.value}`}>
+              <line
+                x1={PAD_X}
+                y1={y}
+                x2={WIDTH - PAD_X}
+                y2={y}
+                stroke="var(--color-on-surface-variant)"
+                strokeWidth="1.5"
+                strokeDasharray="6 4"
+              />
+              <text
+                x={WIDTH - PAD_X}
+                y={y - 5}
+                textAnchor="end"
+                fontSize="13"
+                fill="var(--color-on-surface-variant)"
+              >
+                {r.label}
+              </text>
+            </g>
+          );
+        })}
         {segments.map((d, i) => (
           <path key={i} d={d} fill="none" stroke="var(--color-primary)" strokeWidth="2.5" />
         ))}
@@ -244,6 +290,23 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
           </p>
         </div>
       )}
+      {referenceLines.length > 0 && (
+        <p className="mt-2 flex items-center gap-2 text-xs leading-relaxed text-on-surface-variant">
+          <svg viewBox="0 0 24 8" className="h-2 w-6 shrink-0" aria-hidden>
+            <line x1="0" y1="4" x2="24" y2="4" stroke="currentColor" strokeWidth="1.5" strokeDasharray="6 4" />
+          </svg>
+          <span>
+            破線は法定基準（{referenceLines.map((r) => r.label).join("、")}）で、延岡市の実績値ではありません。
+          </span>
+        </p>
+      )}
+      {notApplicableLabels.length > 0 && (
+        <p className="mt-2 rounded-lg bg-surface-container-high p-2.5 text-xs leading-relaxed text-on-surface-variant">
+          <span className="font-semibold text-on-surface">該当なし：</span>
+          {notApplicableLabels.join("、")}
+          （公表資料で「該当なし」（算定されない）とされた年度です。0％ではないため点を打っていません）
+        </p>
+      )}
       {/* グラフ本体（role="img"）の代替情報。スクリーンリーダーでも一覧として辿れるよう名前を付ける。 */}
       <ul className="mt-3 flex flex-wrap gap-2" aria-label="グラフの数値一覧（年度別）">
         {points.map((p, i) => (
@@ -252,7 +315,9 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
               {p.label}
               {p.isEstimate ? "（見込）" : ""}
             </p>
-            <p className="font-semibold text-on-surface">{p.value === null ? "確認中" : formatValue(p.value)}</p>
+            <p className="font-semibold text-on-surface">
+              {p.value === null ? (p.notApplicable ? "該当なし" : "確認中") : formatValue(p.value)}
+            </p>
           </li>
         ))}
       </ul>
