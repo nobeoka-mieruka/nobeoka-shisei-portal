@@ -371,8 +371,19 @@ async function evaluateBinaryHashTarget({ url, sourceType, stateKey, state }) {
 
 const BUDGET_REVISIONS_PATH = join(ROOT, "src", "data", "budgetRevisions.json");
 
-async function evaluateBudgetListingPage(url, fiscalYear, startedAt) {
-  const sourceType = "年度の予算ページ（延岡市公式、当初予算・補正予算の資料一覧。段階ごとの登録漏れ検知）";
+/**
+ * 年度の予算ページから、企業会計等の別ページ（リンク文言「掲載はこちら」、同一ホストのHTML）を探す。
+ * 令和8年度は「企業会計 掲載はこちら」→ soshiki/55/48610.html（水道・下水道の予算書）。
+ */
+function findSubListingUrls(html, baseUrl) {
+  return extractLinks(html)
+    .filter((l) => l.text.includes("掲載はこちら") && /\.html$/.test(l.href))
+    .map((l) => resolveUrl(l.href, baseUrl))
+    .filter((u, i, arr) => arr.indexOf(u) === i && new URL(u).host === new URL(baseUrl).host);
+}
+
+async function evaluateBudgetListingPage(url, fiscalYear, startedAt, { sourceType: sourceTypeOverride, collectSubListings = false } = {}) {
+  const sourceType = sourceTypeOverride ?? "年度の予算ページ（延岡市公式、当初予算・補正予算の資料一覧。段階ごとの登録漏れ検知）";
   let html;
   let status = null;
   try {
@@ -410,7 +421,7 @@ async function evaluateBudgetListingPage(url, fiscalYear, startedAt) {
   const links = extractLinks(html).map((l) => ({ text: l.text, url: resolveUrl(l.href, url) }));
   const revisions = JSON.parse(readFileSync(BUDGET_REVISIONS_PATH, "utf8"));
   const registeredUrls = new Set(revisions.flatMap((r) => r.sources.map((s) => s.url)));
-  const { stages, unregistered } = classifyBudgetListing(links, registeredUrls);
+  const { stages, unregistered, duplicates } = classifyBudgetListing(links, registeredUrls);
   const structureBroken = stages.length === 0;
   const outcome = structureBroken ? "error" : unregistered.length > 0 ? "new" : "unchanged";
   const validation = validateEntry(
@@ -427,11 +438,18 @@ async function evaluateBudgetListingPage(url, fiscalYear, startedAt) {
     requiresHumanReview: outcome === "new",
     humanReviewReason:
       outcome === "new"
-        ? `budgetRevisions.json に未登録の段階を検出：${unregistered.map((s) => s.stageLabel).join("、")}。概要書・予算書を開いて補正前・補正額・補正後・議案番号を確認してから登録すること。`
+        ? `budgetRevisions.json に未登録の段階を検出：${unregistered.map((s) => `${s.stageLabel}（${s.kind}${s.round > 1 ? `・${s.round}次分` : ""}・${s.accountScope}）`).join("、")}。概要書・予算書を開いて補正前・補正額・補正後・議案番号を確認してから登録すること。`
         : undefined,
-    anomalyDetected: false,
+    // 同じ段階・同じ資料種別に別のPDFが複数ある場合は差し替え・重複掲載の疑い（誤った資料を登録しないためRED）。
+    anomalyDetected: duplicates.length > 0,
+    anomalyReason:
+      duplicates.length > 0
+        ? `同じ段階に同じ種類の資料が複数掲載されています（重複・差し替えの疑い）：${duplicates.map((s) => s.stageLabel).join("、")}`
+        : undefined,
   });
+  const subListingUrls = collectSubListings ? findSubListingUrls(html, url) : [];
   return {
+    subListingUrls,
     sourceUrl: url,
     sourceType,
     sessionId: null,
@@ -601,7 +619,17 @@ async function main() {
   //    9月補正と9月補正（2次分）のように同じ月に複数の補正があっても、段階名（リンク文言）で区別するため
   //    上書き・取り違えは起きない。資料の中身（PDF）は開かない＝新しい段階は必ずYELLOW（人が概要書と照合して登録）。
   if (!budgetResult.fetchError && budgetResult.latestUrl) {
-    entries.push(await evaluateBudgetListingPage(budgetResult.latestUrl, budgetResult.detectedLatestYear, startedAt));
+    const { subListingUrls, ...listingEntry } = await evaluateBudgetListingPage(budgetResult.latestUrl, budgetResult.detectedLatestYear, startedAt, {
+      collectSubListings: true,
+    });
+    entries.push(listingEntry);
+    // Phase265：企業会計（水道・下水道）の予算書は別ページに掲載されるため、1階層だけたどって同じ判定を行う。
+    for (const subUrl of subListingUrls) {
+      const { subListingUrls: _ignored, ...subEntry } = await evaluateBudgetListingPage(subUrl, budgetResult.detectedLatestYear, startedAt, {
+        sourceType: "年度の予算ページからリンクされた資料一覧（延岡市公式、企業会計等の予算書。段階ごとの登録漏れ検知）",
+      });
+      entries.push(subEntry);
+    }
   }
 
   // B) 決算資料（健全化判断比率）の新年度検知（優先度2）
@@ -857,7 +885,7 @@ async function main() {
     updatedCount: 0,
     removedCandidateCount: 0,
     detectedTotal: entries.length,
-    previousKnownTotal: 6, // 監視対象resourceは6件（A〜F）。
+    previousKnownTotal: 6, // 監視対象resourceの最低件数（A〜F）。予算ページからリンクされた資料一覧の分は年度により増える。
   });
 
   const overallLevel = circuitBreaker.tripped ? "RED" : summary.red > 0 ? "RED" : summary.yellow > 0 ? "YELLOW" : "GREEN";

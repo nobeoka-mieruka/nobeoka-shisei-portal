@@ -47,7 +47,7 @@ function SourceLink({ source, label }: { source: BudgetSource; label?: string })
   );
 }
 
-function BillDecision({ billId, billNumber }: { billId: string; billNumber: string }) {
+function BillDecision({ billId, billNumber, submittedDate }: { billId: string; billNumber: string; submittedDate?: string | null }) {
   const bill = budgetBill(billId);
   return (
     <span>
@@ -55,8 +55,76 @@ function BillDecision({ billId, billNumber }: { billId: string; billNumber: stri
         {billNumber}
       </Link>
       {bill?.result ? `：${bill.result}` : "：議決結果確認中"}
-      {bill?.votingDate ? `（${formatJapaneseDate(bill.votingDate)}議決）` : ""}
+      {(submittedDate || bill?.votingDate) && (
+        <span className="text-on-surface-variant">
+          （{submittedDate ? `${formatJapaneseDate(submittedDate)}提出` : ""}
+          {submittedDate && bill?.votingDate ? "→" : ""}
+          {bill?.votingDate ? `${formatJapaneseDate(bill.votingDate)}議決` : ""}）
+        </span>
+      )}
     </span>
+  );
+}
+
+/**
+ * Phase265：特別会計・企業会計の予算の変化（会計ごと）。一般会計とは別会計のため、
+ * 一般会計の予算額と合算した「総額」は表示しない。
+ */
+function OtherAccountsSection({ revisions, eraYear }: { revisions: BudgetRevision[]; eraYear: string }) {
+  const order: string[] = [];
+  const rows = new Map<string, { r: BudgetRevision; a: BudgetRevisionAccount }[]>();
+  for (const r of revisions) {
+    for (const a of r.accounts) {
+      if (a.accountCategory === "一般会計") continue;
+      if (!rows.has(a.accountName)) {
+        rows.set(a.accountName, []);
+        order.push(a.accountName);
+      }
+      rows.get(a.accountName)!.push({ r, a });
+    }
+  }
+  if (order.length === 0) return null;
+  return (
+    <SectionCard title={`${eraYear} 特別会計・企業会計の予算（一般会計とは別会計）`}>
+      <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+        単位：千円。国民健康保険・介護保険などの特別会計と、水道・下水道の企業会計は、一般会計とは別に予算を立てています。
+        会計ごとに目的や財源が異なるため、一般会計と合算した「総額」は表示していません。一覧に無い段階は、その会計の補正が無かった段階です。
+      </p>
+      <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        {order.map((name) => {
+          const list = rows.get(name)!;
+          const latest = list.at(-1)!;
+          return (
+            <li key={name} className="rounded-lg border border-outline-variant p-3">
+              <p className="text-sm font-semibold text-on-surface">
+                {name}
+                <span className="ml-2 text-xs font-normal text-on-surface-variant">{list[0].a.accountCategory}</span>
+              </p>
+              <ol className="mt-2 space-y-1.5 text-sm">
+                {list.map(({ r, a }) => (
+                  <li key={r.id}>
+                    <p className="text-xs font-semibold text-on-surface-variant">{r.label}</p>
+                    <p className="text-on-surface">
+                      {r.kind === "initial"
+                        ? `当初予算額 ${formatThousandYen(a.afterThousandYen)}`
+                        : `補正額 ${formatSupplementary(a.supplementaryThousandYen ?? 0)} → 補正後 ${formatThousandYen(a.afterThousandYen)}`}
+                    </p>
+                    <p className="text-xs text-on-surface-variant">
+                      <BillDecision billId={a.billId} billNumber={a.billNumber} submittedDate={a.submittedDate} />
+                    </p>
+                    {a.note && <p className="text-xs leading-relaxed text-on-surface-variant">{a.note}</p>}
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-2 text-xs text-on-surface-variant">
+                {latest.r.kind === "initial" ? "現在の予算額（当初予算のまま）" : `現在の予算額（${latest.r.label}後）`}：
+                <span className="font-semibold text-on-surface">{formatThousandYen(latest.a.afterThousandYen)}</span>
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </SectionCard>
   );
 }
 
@@ -98,7 +166,7 @@ function RevisionTimeline({ revisions }: { revisions: BudgetRevision[] }) {
             <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
               <p className="text-sm font-semibold text-on-surface">{r.label}</p>
               <p className="text-xs text-on-surface-variant">
-                <BillDecision billId={a.billId} billNumber={a.billNumber} />
+                <BillDecision billId={a.billId} billNumber={a.billNumber} submittedDate={a.submittedDate} />
               </p>
             </div>
             <dl className="mt-1.5 grid grid-cols-1 gap-x-4 gap-y-0.5 text-sm sm:grid-cols-2">
@@ -219,7 +287,7 @@ function ProjectCard({ p, revision, account }: { p: BudgetRevisionProject; revis
         <div>
           <dt className="text-xs font-semibold text-on-surface-variant">いつ決まった？・議会では？</dt>
           <dd className="text-on-surface">
-            <BillDecision billId={account.billId} billNumber={account.billNumber} />
+            <BillDecision billId={account.billId} billNumber={account.billNumber} submittedDate={account.submittedDate} />
           </dd>
         </div>
         {related.length > 0 && (
@@ -261,19 +329,26 @@ function RevisionProjects({ revision, collapsed }: { revision: BudgetRevision; c
   const account = generalAccount(revision) ?? revision.accounts[0];
   const bill = budgetBill(account.billId);
   const groups = [...new Set(revision.projects.map((p) => p.group))];
-  const listedTotal = revision.listedProjectTotals.reduce((s, t) => s + t.supplementaryThousandYen, 0);
-  const accountTotal = revision.accounts
-    .filter((a) => revision.listedProjectTotals.some((t) => t.accountCategory === a.accountCategory))
-    .reduce((s, a) => s + (a.supplementaryThousandYen ?? 0), 0);
-
-  // 事業一覧が補正額の一部しか示さない場合の注記。折りたたみの外に常に表示する（補正額の読み違いを防ぐため）。
+  // 事業一覧が補正額の一部しか示さない場合の注記（会計区分ごと。区分をまたいで合算しない）。
+  // 折りたたみの外に常に表示する（補正額の読み違いを防ぐため）。
   const coverageNote =
     revision.projectCoverage === "listedOnly" ? (
-      <p className="mb-3 rounded-lg border border-outline-variant p-3 text-xs leading-relaxed text-on-surface-variant">
-        延岡市の概要書は、この補正のうち主な事業（概要掲載事業）だけを掲載しています。掲載事業の合計は
-        {formatThousandYen(listedTotal)}で、補正額 {formatThousandYen(accountTotal)} との差
-        {formatThousandYen(accountTotal - listedTotal)}の事業別の内訳は概要書に記載がないため、当サイトでは登録していません。
-      </p>
+      <div className="mb-3 rounded-lg border border-outline-variant p-3 text-xs leading-relaxed text-on-surface-variant">
+        <p>延岡市の概要書は、この補正のうち主な事業（概要掲載事業）だけを掲載しています。</p>
+        <ul className="mt-1 space-y-0.5">
+          {revision.listedProjectTotals.map((t) => {
+            const accountTotal = revision.accounts
+              .filter((a) => a.accountCategory === t.accountCategory)
+              .reduce((s, a) => s + (a.supplementaryThousandYen ?? 0), 0);
+            return (
+              <li key={t.accountCategory}>
+                {t.accountCategory}：補正額 {formatThousandYen(accountTotal)} のうち掲載事業 {formatThousandYen(t.supplementaryThousandYen)}
+                （差 {formatThousandYen(accountTotal - t.supplementaryThousandYen)} は事業別の内訳の記載なし）
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     ) : null;
 
   const body = (
@@ -322,7 +397,7 @@ function RevisionProjects({ revision, collapsed }: { revision: BudgetRevision; c
           <div className="flex flex-wrap gap-x-2">
             <dt className="text-on-surface-variant">議案・議決</dt>
             <dd className="text-on-surface">
-              <BillDecision billId={account.billId} billNumber={account.billNumber} />
+              <BillDecision billId={account.billId} billNumber={account.billNumber} submittedDate={account.submittedDate} />
               {bill?.session ? `（${bill.session}）` : ""}
             </dd>
           </div>
@@ -389,6 +464,8 @@ export function BudgetRevisionsSection({ fiscalYear }: { fiscalYear: number }) {
           </a>
         </p>
       </SectionCard>
+
+      <OtherAccountsSection revisions={revisions} eraYear={eraYear} />
 
       {withProjects.map((r, i) => (
         <RevisionProjects key={r.id} revision={r} collapsed={i > 0} />

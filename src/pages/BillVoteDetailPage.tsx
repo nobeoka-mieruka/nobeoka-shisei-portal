@@ -121,6 +121,8 @@ export function BillVoteDetailPage() {
   const location = useLocation();
   const bill = billVotes.find((b) => b.id === id);
   const budgetLink = bill ? budgetRevisionForBill(bill.id) : undefined;
+  // この議案の会計の事業だけを表示する（同じ補正の別会計の事業を混ぜない）。
+  const accountProjects = budgetLink ? budgetLink.revision.projects.filter((p) => p.accountName === budgetLink.account.accountName) : [];
   const seo = getSeoForPath(location.pathname);
   const [copied, setCopied] = useState(false);
 
@@ -546,15 +548,27 @@ export function BillVoteDetailPage() {
               <dt className="text-on-surface-variant">{budgetLink.revision.kind === "initial" ? "当初予算額" : "補正後の予算額"}</dt>
               <dd className="text-on-surface">{formatThousandYen(budgetLink.account.afterThousandYen)}</dd>
             </div>
-            {budgetLink.revision.projects.length > 0 && (
+            {budgetLink.account.submittedDate && (
+              <div className="flex flex-wrap gap-x-2">
+                <dt className="text-on-surface-variant">提出日（予算書）</dt>
+                <dd className="text-on-surface">{formatJapaneseDate(budgetLink.account.submittedDate)}</dd>
+              </div>
+            )}
+            {budgetLink.account.note && (
+              <div>
+                <dt className="sr-only">注記</dt>
+                <dd className="text-xs leading-relaxed text-on-surface-variant">{budgetLink.account.note}</dd>
+              </div>
+            )}
+            {accountProjects.length > 0 && (
               <div>
                 <dt className="text-on-surface-variant">
-                  計上された事業（{budgetLink.revision.projects.length}件
+                  計上された事業（{accountProjects.length}件
                   {budgetLink.revision.projectCoverage === "listedOnly" && "・概要書に掲載された主な事業のみ"}）
                 </dt>
                 <dd>
                   <ul className="mt-1 space-y-0.5 text-xs">
-                    {budgetLink.revision.projects.map((p) => (
+                    {accountProjects.map((p) => (
                       <li key={p.id} className="flex flex-wrap justify-between gap-x-3">
                         <span className="text-on-surface">{p.name}</span>
                         <span className="text-on-surface-variant">{formatThousandYen(p.supplementaryThousandYen)}</span>
@@ -567,7 +581,7 @@ export function BillVoteDetailPage() {
           </dl>
           <p className="mt-2 text-xs">
             <Link
-              to={`/finance#budget-revision-${budgetLink.revision.id}`}
+              to={budgetLink.account.accountCategory === "一般会計" ? `/finance#budget-revision-${budgetLink.revision.id}` : "/finance"}
               className={`inline-flex min-h-11 items-center text-primary underline ${linkClass}`}
             >
               財政ページで予算の変化と事業の詳細を見る

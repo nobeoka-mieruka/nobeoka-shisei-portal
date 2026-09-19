@@ -1266,6 +1266,14 @@ try {
           if (!bill.billTitle.includes(a.accountName)) err(aTag, `議案名（${bill.billTitle}）に会計名（${a.accountName}）が含まれていません（別の議案と関連付けている疑い）`);
         }
         if (!isInt(a.afterThousandYen) || a.afterThousandYen <= 0) err(aTag, `afterThousandYenが正の整数（千円）ではありません: ${a.afterThousandYen}`);
+        // Phase265：提出日は予算書の議案本文で確認したものだけを持ち、出典を必須にする。議決日より後にはならない。
+        if (a.submittedDate !== null && a.submittedDate !== undefined) {
+          if (!DATE_RE.test(a.submittedDate)) err(aTag, `submittedDateの形式が不正です: ${a.submittedDate}`);
+          if (!isInt(a.submittedDateSourceIndex) || !r.sources?.[a.submittedDateSourceIndex]) err(aTag, "submittedDateの出典（submittedDateSourceIndex）がありません");
+          if (bill?.votingDate && a.submittedDate > bill.votingDate) err(aTag, `提出日（${a.submittedDate}）が議決日（${bill.votingDate}）より後です`);
+        } else if (a.submittedDateSourceIndex !== null && a.submittedDateSourceIndex !== undefined) {
+          err(aTag, "submittedDateがnullなのにsubmittedDateSourceIndexが設定されています");
+        }
         if (r.kind === "initial") {
           if (a.beforeThousandYen !== null || a.supplementaryThousandYen !== null) err(aTag, "当初予算にbefore/supplementaryを設定しないでください（当初予算と補正額の混同防止）");
         } else {

@@ -21,6 +21,8 @@ export interface BudgetRevisionBill {
   verificationStatus?: string;
   memberVoteCount: number;
   memberVoteSummary: Record<string, number>;
+  individualVoteDisclosureStatus?: "disclosed" | "notDisclosed" | "unconfirmed";
+  voteMethod?: string;
 }
 
 export const BUDGET_REVISIONS = budgetRevisionsData as BudgetRevision[];
@@ -72,11 +74,18 @@ export function fundingRows(funding: BudgetFunding): { label: string; value: str
   return rows;
 }
 
-/** 議員別賛否の表示文。0件は「未登録」と明示し、全会一致等を推測しない。 */
+/**
+ * 議員別賛否の表示文。0件の場合は議案データの individualVoteDisclosureStatus で
+ * 「公表なし（会議録で確認済み：起立採決等で個人の賛否が記録されていない）」と
+ * 「未確認（会議録で未確認・未公開）」を区別し、全会一致等から個人の賛否を推測しない。
+ */
 export function memberVoteText(bill: BudgetRevisionBill | undefined): string {
   if (!bill) return "議案データ未登録";
   if (bill.memberVoteCount === 0) {
-    return "議員ごとの賛否は未登録です（延岡市議会の審議結果資料には議決結果のみが記載されています。会議録等の公式資料で確認でき次第登録します）";
+    if (bill.individualVoteDisclosureStatus === "notDisclosed") {
+      return `公表なし：会議録で確認した結果、${bill.voteMethod ? `${bill.voteMethod}で` : "起立採決等で"}議決されており、公式資料に議員個人の賛成・反対は記録されていません。`;
+    }
+    return "未確認：延岡市議会の審議結果資料には議決結果のみが記載されています。会議録等の公式資料で確認でき次第登録します（推測では登録しません）。";
   }
   // 表示ラベルは BillMemberVoteStatus（src/types/index.ts）の定義に合わせる。
   const labels: Record<string, string> = {

@@ -17,7 +17,87 @@
         "afterThousandYen": 69066000,
         "funding": null,
         "sourceIndex": 0,
-        "accountCategory": "一般会計"
+        "accountCategory": "一般会計",
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 1
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 2,
+        "accountName": "国民健康保険特別会計",
+        "accountCategory": "特別会計",
+        "billNumber": "議案第130号",
+        "billId": "2026-03-gian-130",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 12300148,
+        "sourceIndex": 0
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 3,
+        "accountName": "食肉センター特別会計",
+        "accountCategory": "特別会計",
+        "billNumber": "議案第131号",
+        "billId": "2026-03-gian-131",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 100,
+        "sourceIndex": 0
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 4,
+        "accountName": "介護保険特別会計",
+        "accountCategory": "特別会計",
+        "billNumber": "議案第132号",
+        "billId": "2026-03-gian-132",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 14075065,
+        "sourceIndex": 0
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 5,
+        "accountName": "後期高齢者医療特別会計",
+        "accountCategory": "特別会計",
+        "billNumber": "議案第133号",
+        "billId": "2026-03-gian-133",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 2225521,
+        "sourceIndex": 0
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 6,
+        "accountName": "水道事業会計",
+        "accountCategory": "企業会計",
+        "billNumber": "議案第134号",
+        "billId": "2026-03-gian-134",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 4168178,
+        "sourceIndex": 0
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-02-16",
+        "submittedDateSourceIndex": 7,
+        "accountName": "下水道事業会計",
+        "accountCategory": "企業会計",
+        "billNumber": "議案第135号",
+        "billId": "2026-03-gian-135",
+        "beforeThousandYen": null,
+        "supplementaryThousandYen": null,
+        "afterThousandYen": 7019698,
+        "sourceIndex": 0
       }
     ],
     "projects": [],
@@ -31,10 +111,73 @@
         "documentDate": "2026-02-09",
         "retrievedAt": "2026-09-19",
         "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（予算書）議案第129号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27654.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 7,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（予算書）議案第130号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27654.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 15,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（予算書）議案第131号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27654.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 18,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（予算書）議案第132号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27654.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 21,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（予算書）議案第133号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27654.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 24,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（企業会計）（予算書）議案第134号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48610_126191_misc.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 4,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度当初予算（企業会計）（予算書）議案第135号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48610_126191_misc.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 35,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
       }
     ],
     "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
-    "notes": "予算集計表の「一般会計〔議案第129号〕令和８年度当初（Ａ）69,066,000千円」。当初予算の主要事業（概要書8〜100ページ）は未登録。",
+    "notes": "予算集計表の「一般会計〔議案第129号〕令和８年度当初（Ａ）69,066,000千円」。当初予算の主要事業（概要書8〜100ページ）は未登録。 特別会計・企業会計の額は同じ予算集計表の各会計の「令和８年度当初（Ａ）」欄（一般会計とは別会計で、合算しない）。",
     "projectCoverage": "none",
     "listedProjectTotals": []
   },
@@ -56,7 +199,9 @@
         "afterThousandYen": 69408240,
         "funding": null,
         "sourceIndex": 0,
-        "accountCategory": "一般会計"
+        "accountCategory": "一般会計",
+        "submittedDate": "2026-03-02",
+        "submittedDateSourceIndex": 1
       }
     ],
     "projects": [],
@@ -69,6 +214,15 @@
         "pdfPage": 1,
         "documentDate": "2026-02-24",
         "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度1号補正（予算書）議案第169号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27656.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 3,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
         "trustLevel": "PRIMARY"
       }
     ],
@@ -95,7 +249,37 @@
         "afterThousandYen": 69988095,
         "funding": null,
         "sourceIndex": 0,
-        "accountCategory": "一般会計"
+        "accountCategory": "一般会計",
+        "submittedDate": "2026-06-12",
+        "submittedDateSourceIndex": 0
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-06-12",
+        "submittedDateSourceIndex": 2,
+        "accountName": "水道事業会計",
+        "accountCategory": "企業会計",
+        "billNumber": "議案第6号",
+        "billId": "2026-06-gian-6",
+        "beforeThousandYen": 4168178,
+        "supplementaryThousandYen": 0,
+        "afterThousandYen": 4168178,
+        "sourceIndex": 1,
+        "note": "集計表の補正額は0千円。議案本文では収益的収入の総額（2,437,303千円）は変わらず、営業収益△305,659千円・営業外収益＋305,659千円の組替えと、他会計からの補助金等の額（106,647千円→412,306千円）の変更を行っている。"
+      },
+      {
+        "funding": null,
+        "submittedDate": "2026-06-12",
+        "submittedDateSourceIndex": 3,
+        "accountName": "下水道事業会計",
+        "accountCategory": "企業会計",
+        "billNumber": "議案第7号",
+        "billId": "2026-06-gian-7",
+        "beforeThousandYen": 7019698,
+        "supplementaryThousandYen": 25000,
+        "afterThousandYen": 7044698,
+        "sourceIndex": 1,
+        "note": "議案本文では資本的収入・資本的支出をそれぞれ25,000千円増額（建設改良費）。"
       }
     ],
     "projects": [],
@@ -108,6 +292,33 @@
         "pdfPage": 3,
         "documentDate": null,
         "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度補正予算書（6月補正）「６月補正予算集計表」",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27598.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 2,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度6月補正（企業会計）（予算書）議案第６号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27597.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 3,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度6月補正（企業会計）（予算書）議案第７号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27597.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 12,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
         "trustLevel": "PRIMARY"
       }
     ],
@@ -134,7 +345,9 @@
         "afterThousandYen": 70291155,
         "funding": null,
         "sourceIndex": 0,
-        "accountCategory": "一般会計"
+        "accountCategory": "一般会計",
+        "submittedDate": "2026-06-23",
+        "submittedDateSourceIndex": 1
       }
     ],
     "projects": [],
@@ -147,6 +360,15 @@
         "pdfPage": 1,
         "documentDate": null,
         "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度6月補正（2次分）（予算書）議案第20号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27761.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 3,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
         "trustLevel": "PRIMARY"
       }
     ],
@@ -181,7 +403,93 @@
           "combinedContentNote": "資料の「財源内訳欄の『その他』及び『一般財源』の内容」欄には、その他と一般財源を区別せずに「寄附金13,860千円・繰入金17,289千円・繰越金273,989千円・諸収入137,373千円」と記載（合計442,511千円＝その他39,369千円＋一般財源403,142千円）。"
         },
         "sourceIndex": 0,
-        "accountCategory": "一般会計"
+        "accountCategory": "一般会計",
+        "submittedDate": "2026-08-28",
+        "submittedDateSourceIndex": 5
+      },
+      {
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 7028,
+          "otherNote": "基金繰入金",
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null
+        },
+        "submittedDate": "2026-08-28",
+        "submittedDateSourceIndex": 6,
+        "accountName": "国民健康保険特別会計",
+        "accountCategory": "特別会計",
+        "billNumber": "議案第30号",
+        "billId": "2026-09-gian-30",
+        "beforeThousandYen": 12300148,
+        "supplementaryThousandYen": 7028,
+        "afterThousandYen": 12307176,
+        "sourceIndex": 0
+      },
+      {
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 152522,
+          "otherNote": null,
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null,
+          "combinedContentNote": "資料の「その他」の内容：支払基金交付金11,096千円・一般会計繰入金2千円・繰越金140,973千円・諸収入451千円。"
+        },
+        "submittedDate": "2026-08-28",
+        "submittedDateSourceIndex": 7,
+        "accountName": "介護保険特別会計",
+        "accountCategory": "特別会計",
+        "billNumber": "議案第31号",
+        "billId": "2026-09-gian-31",
+        "beforeThousandYen": 14075065,
+        "supplementaryThousandYen": 152522,
+        "afterThousandYen": 14227587,
+        "sourceIndex": 0
+      },
+      {
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 0,
+          "otherNote": null,
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null,
+          "combinedContentNote": "資料の「その他」の内容：工事負担金△6,500千円・損益勘定留保資金△16,300千円・一般会計出資金22,800千円（合計0千円）。"
+        },
+        "submittedDate": "2026-08-28",
+        "submittedDateSourceIndex": 8,
+        "accountName": "水道事業会計",
+        "accountCategory": "企業会計",
+        "billNumber": "議案第32号",
+        "billId": "2026-09-gian-32",
+        "beforeThousandYen": 4168178,
+        "supplementaryThousandYen": 0,
+        "afterThousandYen": 4168178,
+        "sourceIndex": 0,
+        "note": "補正額は0千円だが、財源の内訳（工事負担金・損益勘定留保資金・一般会計出資金）が変わっている。"
+      },
+      {
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": 31800,
+          "otherThousandYen": 49963,
+          "otherNote": null,
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null,
+          "combinedContentNote": "資料の「その他」の内容：一般会計補助金37,538千円・一般会計出資金12,425千円。"
+        },
+        "submittedDate": "2026-08-28",
+        "submittedDateSourceIndex": 9,
+        "accountName": "下水道事業会計",
+        "accountCategory": "企業会計",
+        "billNumber": "議案第33号",
+        "billId": "2026-09-gian-33",
+        "beforeThousandYen": 7044698,
+        "supplementaryThousandYen": 81763,
+        "afterThousandYen": 7126461,
+        "sourceIndex": 0
       }
     ],
     "projects": [
@@ -881,12 +1189,195 @@
         ],
         "relatedPromiseIds": [],
         "sourceIndex": 4
+      },
+      {
+        "isNew": false,
+        "schedule": null,
+        "relatedProjectIds": [],
+        "relatedPromiseIds": [],
+        "sourceIndex": 10,
+        "id": "fy2026-sep-1-nhi-refund",
+        "accountName": "国民健康保険特別会計",
+        "accountCategory": "特別会計",
+        "name": "償還金",
+        "department": "国民健康保険課",
+        "group": "特別会計 主要事業（概要掲載事業）",
+        "budgetClassification": "国民健康保険特別会計",
+        "purpose": "令和７年度決算に伴う国・県への償還金",
+        "targets": null,
+        "beforeThousandYen": 1,
+        "supplementaryThousandYen": 7028,
+        "afterThousandYen": 7029,
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 7028,
+          "otherNote": "国民健康保険基金繰入金",
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          {
+            "label": "国",
+            "thousandYen": 6515
+          },
+          {
+            "label": "県",
+            "thousandYen": 513
+          }
+        ],
+        "policyCategoryIds": [
+          "welfare",
+          "healthcare"
+        ]
+      },
+      {
+        "isNew": true,
+        "schedule": null,
+        "relatedProjectIds": [],
+        "relatedPromiseIds": [],
+        "sourceIndex": 10,
+        "id": "fy2026-sep-1-care-refund",
+        "accountName": "介護保険特別会計",
+        "accountCategory": "特別会計",
+        "name": "償還金",
+        "department": "介護保険課・健康長寿課",
+        "group": "特別会計 主要事業（概要掲載事業）",
+        "budgetClassification": "介護保険特別会計",
+        "purpose": "令和７年度決算に伴う国・県等への償還金",
+        "targets": null,
+        "beforeThousandYen": 0,
+        "supplementaryThousandYen": 126167,
+        "afterThousandYen": 126167,
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 126167,
+          "otherNote": "繰越金等",
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          {
+            "label": "国",
+            "thousandYen": 81929
+          },
+          {
+            "label": "県",
+            "thousandYen": 13780
+          },
+          {
+            "label": "一般会計",
+            "thousandYen": 27385
+          },
+          {
+            "label": "社会保険診療報酬支払基金",
+            "thousandYen": 3073
+          }
+        ],
+        "policyCategoryIds": [
+          "senior",
+          "welfare"
+        ]
+      },
+      {
+        "isNew": true,
+        "schedule": null,
+        "relatedProjectIds": [],
+        "relatedPromiseIds": [],
+        "sourceIndex": 10,
+        "id": "fy2026-sep-1-nojicho-collapse",
+        "accountName": "下水道事業会計",
+        "accountCategory": "企業会計",
+        "name": "野地町陥没復旧事業",
+        "department": "下水道課",
+        "group": "企業会計 主要事業（概要掲載事業）",
+        "budgetClassification": "下水道事業 2事業費用 1)営業費用",
+        "purpose": "令和８年６月24日に発生した野地町３丁目道路陥没事故については、汚水幹線の破損により管路内へ土砂が流入し、一部区間が閉塞したことで下流側への汚水排水機能が失われたため、陥没箇所の復旧工事、汚水幹線の仮復旧工事及び本復旧工事完了までの維持管理経費等について所要の補正を行う。",
+        "targets": "野地町３丁目",
+        "beforeThousandYen": 0,
+        "supplementaryThousandYen": 37538,
+        "afterThousandYen": 37538,
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": null,
+          "otherThousandYen": 37538,
+          "otherNote": null,
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          {
+            "label": "修繕費",
+            "thousandYen": 20429
+          },
+          {
+            "label": "清掃委託料",
+            "thousandYen": 5895
+          },
+          {
+            "label": "調査委託料等",
+            "thousandYen": 11214
+          }
+        ],
+        "policyCategoryIds": [
+          "water-sewage",
+          "disaster-prevention"
+        ]
+      },
+      {
+        "isNew": false,
+        "schedule": null,
+        "relatedProjectIds": [],
+        "relatedPromiseIds": [],
+        "sourceIndex": 10,
+        "id": "fy2026-sep-1-sewer-single",
+        "accountName": "下水道事業会計",
+        "accountCategory": "企業会計",
+        "name": "下水道事業（単独）",
+        "department": "下水道課",
+        "group": "企業会計 主要事業（概要掲載事業）",
+        "budgetClassification": "下水道事業 4資本的支出 1)建設改良費",
+        "purpose": "今回の道路陥没事故の原因となった汚水幹線は、令和７年度に実施した管渠点検で一部腐食が確認され、国の指針に基づき概ね５年程度で補修を行う計画であった。しかし、今回の陥没は、腐食の進行による破損が原因と推測されるため、これまでに実施した点検結果から、同等の箇所を抽出して管渠の緊急点検を実施する。併せて、本復旧工事の工法検討を含む詳細設計業務委託の増額を行う。",
+        "targets": null,
+        "beforeThousandYen": 337431,
+        "supplementaryThousandYen": 39800,
+        "afterThousandYen": 377231,
+        "funding": {
+          "nationalPrefecturalThousandYen": null,
+          "localBondThousandYen": 31800,
+          "otherThousandYen": 8000,
+          "otherNote": null,
+          "generalRevenueThousandYen": null,
+          "generalRevenueNote": null
+        },
+        "breakdown": [
+          {
+            "label": "汚水幹線復旧計画等詳細設計業務委託料",
+            "thousandYen": 30000
+          },
+          {
+            "label": "管渠緊急点検調査委託料",
+            "thousandYen": 9800
+          }
+        ],
+        "policyCategoryIds": [
+          "water-sewage"
+        ]
       }
     ],
     "projectGroupTotals": [
       {
         "group": "一般会計 主要事業（概要掲載事業）",
         "supplementaryThousandYen": 306267
+      },
+      {
+        "group": "特別会計 主要事業（概要掲載事業）",
+        "supplementaryThousandYen": 133195
+      },
+      {
+        "group": "企業会計 主要事業（概要掲載事業）",
+        "supplementaryThousandYen": 77338
       }
     ],
     "sources": [
@@ -934,15 +1425,77 @@
         "documentDate": null,
         "retrievedAt": "2026-09-20",
         "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（予算書）議案第29号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28795.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 5,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（予算書）議案第30号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28795.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 11,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（予算書）議案第31号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28795.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 13,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（企業会計）（予算書）議案第32号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28763.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 3,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（企業会計）（予算書）議案第33号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28763.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 11,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（概要書）「主要事業等内訳」（特別会計・企業会計）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28796.pdf",
+        "sourceType": "概要書",
+        "pdfPage": 9,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
+        "trustLevel": "PRIMARY"
       }
     ],
     "listingPageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/18/48542.html",
-    "notes": "概要書の主要事業等内訳は「概要掲載事業」のみを掲載しており、一般会計の概要掲載事業合計は306,267千円（補正額645,609千円のうち、残る339,342千円の事業別内訳は概要書に記載がない）。",
+    "notes": "概要書の主要事業等内訳は「概要掲載事業」のみを掲載しており、一般会計の概要掲載事業合計は306,267千円（補正額645,609千円のうち、残る339,342千円の事業別内訳は概要書に記載がない）。 特別会計（国民健康保険・介護保険）・企業会計（水道・下水道）も同じ概要書1ページ・9ページから登録（一般会計とは別会計で、合算しない）。特別会計の補正額159,550千円のうち概要掲載事業は133,195千円、企業会計の補正額81,763千円のうち概要掲載事業は77,338千円。",
     "projectCoverage": "listedOnly",
     "listedProjectTotals": [
       {
         "accountCategory": "一般会計",
         "supplementaryThousandYen": 306267
+      },
+      {
+        "accountCategory": "特別会計",
+        "supplementaryThousandYen": 133195
+      },
+      {
+        "accountCategory": "企業会計",
+        "supplementaryThousandYen": 77338
       }
     ]
   },
@@ -971,7 +1524,9 @@
           "generalRevenueNote": "繰越金"
         },
         "sourceIndex": 0,
-        "accountCategory": "一般会計"
+        "accountCategory": "一般会計",
+        "submittedDate": "2026-09-08",
+        "submittedDateSourceIndex": 3
       }
     ],
     "projects": [
@@ -1275,6 +1830,15 @@
         "pdfPage": 6,
         "documentDate": "2026-08-31",
         "retrievedAt": "2026-09-19",
+        "trustLevel": "PRIMARY"
+      },
+      {
+        "title": "令和8年度9月補正（2次分）（予算書）議案第49号",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28987.pdf",
+        "sourceType": "予算書",
+        "pdfPage": 3,
+        "documentDate": null,
+        "retrievedAt": "2026-09-20",
         "trustLevel": "PRIMARY"
       }
     ],

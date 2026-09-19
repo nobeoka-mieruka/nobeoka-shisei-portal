@@ -21,6 +21,20 @@ export function parseBudgetListingLink(text) {
 }
 
 /**
+ * 段階名から種類を判定する（報告用。判定できない名前も「その他」として検知対象に含める）。
+ * 例：「当初予算」「1号補正」「9月補正（2次分）」「12月補正（3次分）」「専決処分」「6月補正（企業会計）」。
+ */
+export function classifyStageLabel(stageLabel) {
+  const accountScope = /企業会計/.test(stageLabel) ? "企業会計" : /特別会計/.test(stageLabel) ? "特別会計" : "全会計または一般会計";
+  let kind = "その他";
+  if (/専決/.test(stageLabel)) kind = "専決処分";
+  else if (/当初/.test(stageLabel)) kind = "当初予算";
+  else if (/補正/.test(stageLabel)) kind = "補正予算";
+  const round = stageLabel.match(/[（(]\s*(\d+)\s*次分\s*[)）]/);
+  return { kind, round: round ? Number(round[1]) : 1, accountScope };
+}
+
+/**
  * 資料リンクを段階ごとにまとめ、登録済みURL（budgetRevisions.json の sources）と照合する。
  * 段階のいずれかの資料URLが登録済みなら「登録済みの段階」とみなす
  * （概要書・予算書の片方だけを出典にしている段階があるため）。
@@ -36,9 +50,15 @@ export function classifyBudgetListing(links, registeredUrls) {
     if (!entry.documents.some((d) => d.url === link.url)) entry.documents.push({ sourceType: parsed.sourceType, url: link.url });
     stages.set(parsed.stageLabel, entry);
   }
-  const all = [...stages.values()];
+  const all = [...stages.values()].map((s) => ({ ...s, ...classifyStageLabel(s.stageLabel) }));
   return {
     stages: all,
     unregistered: all.filter((s) => !s.documents.some((d) => registeredUrls.has(d.url))),
+    // 同じ段階・同じ資料種別に別々のPDFが2つ以上ある＝差し替え・重複掲載の疑い（自動では判断しない）。
+    duplicates: all.filter((s) => {
+      const byType = new Map();
+      for (const d of s.documents) byType.set(d.sourceType, (byType.get(d.sourceType) ?? 0) + 1);
+      return [...byType.values()].some((n) => n > 1);
+    }),
   };
 }

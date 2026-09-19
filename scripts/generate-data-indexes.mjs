@@ -136,7 +136,19 @@ function buildMayorPromiseMeasuresIndex(measures) {
 // Phase261：財政ページの「予算→議案→議決→議員別賛否」表示で、budgetRevisions.jsonが参照する議案だけの
 // 議決結果・議決日・議員別賛否の有無を使う。財政ページにbillVotes.json（約2.8MB）を読み込ませないための射影で、
 // 議決結果等を予算データ側へ複製しない（元データはbillVotes.jsonのまま）。
-const BUDGET_BILL_FIELDS = ["id", "billNumber", "billTitle", "session", "result", "votingDate", "publicationStatus", "verificationStatus"];
+const BUDGET_BILL_FIELDS = [
+  "id",
+  "billNumber",
+  "billTitle",
+  "session",
+  "result",
+  "votingDate",
+  "publicationStatus",
+  "verificationStatus",
+  // Phase265：議員別賛否が「公表なし（会議録で確認済み）」か「未確認」かを区別して表示するため。
+  "individualVoteDisclosureStatus",
+  "voteMethod",
+];
 
 function buildBudgetRevisionBillsIndex(revisions, bills) {
   const referenced = new Set(revisions.flatMap((r) => (r.accounts ?? []).map((a) => a.billId)));

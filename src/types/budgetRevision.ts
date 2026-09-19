@@ -119,6 +119,12 @@ export interface BudgetRevisionAccount {
   /** 補正額の財源内訳。資料で確認していない段階はnull。 */
   funding: BudgetFunding | null;
   sourceIndex: number;
+  /** 議案の提出日（予算書の議案本文末尾「令和○年○月○日提出」、ISO形式）。確認できなければnull。 */
+  submittedDate: string | null;
+  /** submittedDate の根拠（sources の添字）。submittedDate が null なら null。 */
+  submittedDateSourceIndex: number | null;
+  /** 資料の注記（例：補正額0でも科目間の組替えがある場合の説明）。 */
+  note?: string;
 }
 
 /**
