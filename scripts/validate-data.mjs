@@ -1321,6 +1321,31 @@ try {
       const sorted = [...list].sort((a, b) => a.sequence - b.sequence);
       const seqs = sorted.map((r) => r.sequence);
       if (new Set(seqs).size !== seqs.length) err(tagBase, `FY${fy}のsequenceが重複しています`);
+      // 同一年度で同じ議案番号を2つの段階に関連付けない（9月補正と9月補正（2次分）は別議案のため別データとして許可される）。
+      const seenBills = new Map();
+      for (const r of sorted) {
+        for (const a of r.accounts) {
+          if (seenBills.has(a.billNumber)) err(`${tagBase} (${r.id})`, `${a.billNumber}が同一年度の別の段階（${seenBills.get(a.billNumber)}）にも関連付けられています`);
+          seenBills.set(a.billNumber, r.id);
+        }
+      }
+      // 当初予算＋各補正額の合計＝最新の補正後予算額（会計ごと）。
+      const totals = new Map();
+      for (const r of sorted) {
+        for (const a of r.accounts) {
+          const t = totals.get(a.accountName) ?? { sum: null, latest: null, latestId: null };
+          if (r.kind === "initial") t.sum = a.afterThousandYen;
+          else if (t.sum !== null) t.sum += a.supplementaryThousandYen ?? 0;
+          t.latest = a.afterThousandYen;
+          t.latestId = r.id;
+          totals.set(a.accountName, t);
+        }
+      }
+      for (const [accountName, t] of totals) {
+        if (t.sum !== null && t.sum !== t.latest) {
+          err(tagBase, `FY${fy}の${accountName}：当初予算＋各補正額の合計（${t.sum}千円）が最新段階（${t.latestId}）の補正後予算額（${t.latest}千円）と一致しません`);
+        }
+      }
       const lastAfter = new Map();
       for (const r of sorted) {
         for (const a of r.accounts) {
@@ -1331,6 +1356,45 @@ try {
           lastAfter.set(a.accountName, a.afterThousandYen);
         }
       }
+    }
+
+    // Phase263：年度別アーカイブ（/finance/budget・/compare/*の数値源）の当初予算・補正後予算が、
+    // 段階別データ（当初予算の段階・最新段階）と一致すること。補正のたびに片方だけ更新して食い違うのを防ぐ。
+    try {
+      const archiveYears = readJson("src/data/archiveFiscalYears.json");
+      for (const [fy, list] of byYear) {
+        const budget = archiveYears.find((y) => y.fiscalYear === fy)?.budget;
+        if (!budget) continue;
+        const generalStages = [...list]
+          .sort((a, b) => a.sequence - b.sequence)
+          .map((r) => ({ r, a: r.accounts.find((x) => x.accountName === "一般会計") }))
+          .filter((x) => x.a);
+        const initial = generalStages.find((x) => x.r.kind === "initial");
+        const latest = generalStages.at(-1);
+        if (initial && budget.generalAccountInitialBudgetYen !== initial.a.afterThousandYen * 1000) {
+          err(tagBase, `archiveFiscalYears.json FY${fy}の当初予算（${budget.generalAccountInitialBudgetYen}円）が段階別データ（${initial.r.id}：${initial.a.afterThousandYen}千円）と一致しません`);
+        }
+        if (latest && latest.r.kind === "supplementary" && budget.generalAccountFinalBudgetYen !== latest.a.afterThousandYen * 1000) {
+          err(tagBase, `archiveFiscalYears.json FY${fy}の補正後予算（${budget.generalAccountFinalBudgetYen}円）が最新段階（${latest.r.id}：${latest.a.afterThousandYen}千円）と一致しません`);
+        }
+      }
+      const dashboard = readJson("src/data/financeDashboard.json");
+      const dashBudget = archiveYears.find((y) => String(y.fiscalYear) === dashboard.fiscalYear)?.budget;
+      if (dashBudget) {
+        for (const [label, field] of [
+          ["市税", "localTaxRevenueYen"],
+          ["地方交付税", "localAllocationTaxYen"],
+          ["国庫支出金", "nationalSubsidiesYen"],
+          ["県支出金", "prefecturalSubsidiesYen"],
+        ]) {
+          const item = dashboard.revenue.find((r) => r.label === label);
+          if (item && dashBudget[field] !== null && dashBudget[field] !== item.amountThousandYen * 1000) {
+            err(tagBase, `archiveFiscalYears.json FY${dashboard.fiscalYear}の${label}（${dashBudget[field]}円）が財政ダッシュボードの歳入（${item.amountThousandYen}千円）と一致しません`);
+          }
+        }
+      }
+    } catch {
+      // archiveFiscalYears.jsonの読み込み失敗は該当節で報告済み
     }
 
     // 財政ダッシュボードの一般会計（最新段階の補正前・補正額・補正後）が、段階別データの最新段階と一致すること。

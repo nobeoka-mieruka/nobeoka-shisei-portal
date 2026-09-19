@@ -82,6 +82,15 @@ check("令和8年度の一般会計：当初69,066,000千円から6段階がつ�
   assert.equal(list.at(-1).accounts[0].afterThousandYen, 71011749);
 });
 
+check("Phase263：年度別アーカイブの令和8年度 当初予算・補正後予算が段階別データ（当初・最新段階）と一致する", () => {
+  const b = readJson("src/data/archiveFiscalYears.json").find((y) => y.fiscalYear === 2026).budget;
+  assert.equal(b.generalAccountInitialBudgetYen, 69066000000, "当初予算（690.66億円）が変わっています");
+  assert.equal(b.generalAccountFinalBudgetYen, 71011749000, "補正後予算が9月補正（2次分）後の71,011,749千円ではありません（6月補正後の値が残っていないか）");
+  assert.equal(b.nationalSubsidiesYen, 14809569000);
+  assert.equal(b.prefecturalSubsidiesYen, 6147485000);
+  assert.ok(!b.sourceRefs.some((r) => (r.sourceUrl ?? "").includes("r8_june_supplementary_budget")), "6月補正時点の出典が補正後予算の根拠に残っています");
+});
+
 check("9月補正と9月補正（2次分）は別の議案・別のIDで、同じ定例会でも回次で区別される", () => {
   const sep1 = byId.get("fy2026-sep-1");
   assert.equal(sep1.sessionId, sep2.sessionId);

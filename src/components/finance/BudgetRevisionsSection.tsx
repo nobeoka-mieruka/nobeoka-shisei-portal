@@ -59,6 +59,24 @@ function RevisionTimeline({ revisions }: { revisions: BudgetRevision[] }) {
   const latest = general.at(-1);
   return (
     <>
+      {initial && latest && latest.r.kind === "supplementary" && (
+        <div className="mb-3 rounded-lg bg-surface-container-high p-3 text-sm" aria-label="当初予算と現在の予算額の違い">
+          <p className="text-xs text-on-surface-variant">当初予算（年度当初に決まった額）</p>
+          <p className="font-semibold text-on-surface">
+            {formatThousandYen(initial.a.afterThousandYen)}（{formatOkuFromThousand(initial.a.afterThousandYen)}）
+          </p>
+          <p className="my-1 text-xs text-on-surface-variant" aria-hidden="true">
+            ↓ {general.length - 1}回の補正（累計 ＋{formatThousandYen(latest.a.afterThousandYen - initial.a.afterThousandYen)}、当サイトが各段階の数値から計算）
+          </p>
+          <p className="text-xs text-on-surface-variant">{latest.r.label}後の予算額（現在の予算額）</p>
+          <p className="font-semibold text-on-surface">
+            {formatThousandYen(latest.a.afterThousandYen)}（{formatOkuFromThousand(latest.a.afterThousandYen)}）
+          </p>
+          <p className="sr-only">
+            当初予算から{general.length - 1}回の補正を経て現在の予算額になりました。補正額の累計は{formatThousandYen(latest.a.afterThousandYen - initial.a.afterThousandYen)}です。
+          </p>
+        </div>
+      )}
       <ol className="space-y-2">
         {general.map(({ r, a }) => (
           <li key={r.id} id={`budget-revision-${r.id}`} className="rounded-lg border border-outline-variant p-3">
@@ -95,13 +113,6 @@ function RevisionTimeline({ revisions }: { revisions: BudgetRevision[] }) {
           </li>
         ))}
       </ol>
-      {initial && latest && latest.r.kind === "supplementary" && (
-        <p className="mt-3 rounded-lg bg-surface-container-high p-3 text-xs leading-relaxed text-on-surface-variant">
-          当初予算 {formatThousandYen(initial.a.afterThousandYen)} から、{general.length - 1}回の補正を経て、
-          {latest.r.label}後の一般会計予算額は <span className="font-semibold text-on-surface">{formatThousandYen(latest.a.afterThousandYen)}</span>
-          です（補正額の累計 {formatThousandYen(latest.a.afterThousandYen - initial.a.afterThousandYen)}。累計は当サイトが各段階の数値から計算）。
-        </p>
-      )}
     </>
   );
 }

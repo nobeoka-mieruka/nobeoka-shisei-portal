@@ -12,6 +12,7 @@ import { FinanceLineChart } from "../components/finance/FinanceLineChart";
 import { FinanceTable } from "../components/finance/FinanceTable";
 import { SoundnessRatiosSection } from "../components/finance/SoundnessRatiosSection";
 import { BudgetRevisionsSection } from "../components/finance/BudgetRevisionsSection";
+import { budgetRevisionsForYear } from "../lib/budgetRevisions";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -31,6 +32,11 @@ const data = financeData as FinanceDashboardData;
 const stageLabel = data.supplementaryStageLabel ?? "補正";
 const archiveFiscalYears = sortedFiscalYears(archiveFiscalYearsData as ArchiveFiscalYear[]);
 const latestArchiveFiscalYear = archiveFiscalYears.at(-1)?.fiscalYear;
+/** 当初予算（千円）。段階別データ（budgetRevisions.json）の当初予算の段階から取る（無ければnull＝表示しない）。 */
+const initialBudgetThousandYen =
+  budgetRevisionsForYear(Number(data.fiscalYear))
+    .find((r) => r.kind === "initial")
+    ?.accounts.find((a) => a.accountName === "一般会計")?.afterThousandYen ?? null;
 
 function formatThousandYen(value: number): string {
   return `${value.toLocaleString("ja-JP")}千円`;
@@ -161,14 +167,23 @@ export function FinancePage() {
         <p className="text-sm font-semibold text-on-surface">延岡市のお金をざっくり見る</p>
         <p className="mt-1.5 text-sm leading-relaxed text-on-surface">
           {/* formatOku() が既に「約」を含む値を返すため、ここで「約」を重ねない（Phase201：「約約699.9億円」の二重語修正） */}
-          延岡市が{data.fiscalYearLabel}に使う予定のお金（一般会計）は
-          {formatOku(data.generalAccount.totalThousandYen)}です。この下に、収入（歳入）の内訳、借金にあたる「市債」、貯金にあたる「基金」、市の人口の推移をまとめています。年度をまたいだ推移は、下の「予算・決算規模の推移」等のボタンから確認できます。
+          延岡市が{data.fiscalYearLabel}に使う予定のお金（一般会計）は、{stageLabel}までの補正を反映した現在の予算額で
+          {formatOku(data.generalAccount.totalThousandYen)}です
+          {initialBudgetThousandYen !== null && `（年度当初の当初予算は${formatOku(initialBudgetThousandYen)}）`}。この下に、収入（歳入）の内訳、借金にあたる「市債」、貯金にあたる「基金」、市の人口の推移をまとめています。年度をまたいだ推移は、下の「予算・決算規模の推移」等のボタンから確認できます。
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {initialBudgetThousandYen !== null && (
+          <StatCard
+            label="当初予算（年度当初）"
+            value={formatThousandYen(initialBudgetThousandYen)}
+            hint={formatOku(initialBudgetThousandYen)}
+            compact
+          />
+        )}
         <StatCard
-          label={`一般会計総額（${stageLabel}後）`}
+          label={`一般会計総額（${stageLabel}後の現在の予算額）`}
           value={formatThousandYen(data.generalAccount.totalThousandYen)}
           hint={formatOku(data.generalAccount.totalThousandYen)}
           compact
@@ -180,7 +195,7 @@ export function FinancePage() {
           compact
         />
         <StatCard
-          label="補正前総額"
+          label={`${stageLabel}前の総額`}
           value={formatThousandYen(data.generalAccount.totalBeforeThousandYen)}
           hint={formatOku(data.generalAccount.totalBeforeThousandYen)}
           compact
