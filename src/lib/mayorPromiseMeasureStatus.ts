@@ -48,3 +48,12 @@ export function shiftFiscalYearLabel(fiscalYear: string, offsetYears: number): s
   if (!Number.isFinite(year) || year <= 0) return null;
   return `令和${year}年度`;
 }
+
+/**
+ * Phase267：指標の年度別の値が「実績」なのか「資料に書かれた予定・計画値」なのかの表示ラベル。
+ * 予定を実績として読ませないため、値の横に必ずこの文字ラベルを併記する（色だけで区別しない）。
+ */
+export const MEASURE_INDICATOR_KIND_LABEL: Record<"result" | "plan", string> = {
+  result: "実績",
+  plan: "予定（計画値）",
+};

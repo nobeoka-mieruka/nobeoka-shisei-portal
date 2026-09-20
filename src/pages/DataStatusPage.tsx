@@ -109,6 +109,7 @@ import {
   countBrokenPromiseSourceUrls,
   type PromiseQualityMetric,
 } from "../lib/mayorPromiseDataQuality";
+import { summarizeMeasureIndicators } from "../lib/mayorPromiseIndicators";
 import {
   hasBudgetData,
   hasPopulationData,
@@ -253,6 +254,12 @@ const promiseDataQuality = computeMayorPromiseDataQuality({
   measures: mayorPromiseMeasures,
   referenceDate: mayorPromises.referenceDate,
 });
+/**
+ * Phase267：個別施策の数値を「指標ごと・年度ごと」に構造化できている範囲。
+ * 1つの施策に複数の数値が入っていた状態をどこまで解消できたかを示す。
+ */
+const promiseIndicatorSummary = summarizeMeasureIndicators(mayorPromiseMeasures);
+
 /** 根拠資料のうち、外部リンク監査で到達できなかったもの（通常は0件）。 */
 const promiseBrokenSourceCount = countBrokenPromiseSourceUrls(
   mayorPromises.documents,
@@ -1602,6 +1609,40 @@ export function DataStatusPage() {
             ))}
           </ul>
         )}
+
+        <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">数値指標の構造化と年度別の記録</p>
+        <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
+          公表資料では「前年度2件→今年度5件予定」のように、1つの取組みの中に複数の数値・複数の年度・実績と予定が混ざって書かれています。
+          当サイトはこれを指標ごと・年度ごとに分けて登録し、翌年度の数値が出ても前年度の数値が上書きされないようにしています。
+        </p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">数値指標を登録した{MAYOR_PROMISE_LEVELS.measure.label}</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promiseIndicatorSummary.measuresWithIndicators}／{promiseIndicatorSummary.measureTotal}件
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">登録した指標</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{promiseIndicatorSummary.indicatorTotal}件</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">年度別の値（実績／予定）</dt>
+            <dd className="mt-0.5 text-sm font-semibold leading-relaxed text-on-surface">
+              実績{promiseIndicatorSummary.resultValueTotal}件／予定{promiseIndicatorSummary.planValueTotal}件
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">2年度以上の推移を追える指標</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promiseIndicatorSummary.multiYearIndicatorTotal}件
+            </dd>
+          </div>
+        </dl>
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+          収録している年度：{promiseIndicatorSummary.fiscalYears.join("、")}。「予定」は公表資料に書かれた計画値であり、実績ではありません。
+          数値は公表資料に書かれているものだけを登録し、当サイトによる合算・推定は行っていません（検証：validate:data）。
+        </p>
 
         <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">まだ登録できていない項目</p>
         <ul className="space-y-2">

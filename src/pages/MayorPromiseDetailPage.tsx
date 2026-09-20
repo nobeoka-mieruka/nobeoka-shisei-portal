@@ -24,7 +24,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { MayorPromiseMeasureStatusBadge } from "../components/mayor/MayorPromiseMeasureStatusBadge";
-import { shiftFiscalYearLabel } from "../lib/mayorPromiseMeasureStatus";
+import { MEASURE_INDICATOR_KIND_LABEL, shiftFiscalYearLabel } from "../lib/mayorPromiseMeasureStatus";
 import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
@@ -296,7 +296,10 @@ export function MayorPromiseDetailPage() {
                         <dd className="inline">{m.futureTarget}</dd>
                       </div>
                     )}
-                    {m.quantitativeValue != null && (
+                    {/* Phase267：指標（indicators）がある施策は、代表値1件ではなく
+                        「指標ごと・年度ごと・実績／予定の区別付き」で表示する。
+                        指標が未登録の施策は従来どおり代表値を表示する（後方互換）。 */}
+                    {(m.indicators?.length ?? 0) === 0 && m.quantitativeValue != null && (
                       <div>
                         <dt className="inline font-medium text-on-surface">数値：</dt>
                         <dd className="inline">
@@ -306,6 +309,42 @@ export function MayorPromiseDetailPage() {
                       </div>
                     )}
                   </dl>
+                  {(m.indicators?.length ?? 0) > 0 && (
+                    <div className="mt-2 rounded-lg bg-surface-container-low p-3">
+                      <p className="text-xs font-medium text-on-surface">数値で確認できる指標</p>
+                      <ul className="mt-1.5 space-y-2">
+                        {m.indicators?.map((indicator) => (
+                          <li key={indicator.id}>
+                            <p className="break-words text-sm font-medium text-on-surface">
+                              {indicator.label}
+                              <span className="ml-1 text-xs font-normal text-on-surface-variant">（単位：{indicator.unit}）</span>
+                            </p>
+                            <ul className="mt-0.5 space-y-0.5">
+                              {indicator.values.map((v) => (
+                                <li
+                                  key={`${v.fiscalYear}-${v.kind}`}
+                                  className="flex flex-wrap items-baseline gap-x-2 text-sm text-on-surface-variant"
+                                >
+                                  <span className="font-medium text-on-surface">{v.fiscalYear}</span>
+                                  <span className="text-on-surface">
+                                    {v.value.toLocaleString("ja-JP")}
+                                    {indicator.unit}
+                                  </span>
+                                  <span className="rounded-full bg-surface-variant px-2 py-0.5 text-xs text-on-surface-variant">
+                                    {MEASURE_INDICATOR_KIND_LABEL[v.kind]}
+                                  </span>
+                                  {v.note && <span className="w-full break-words text-xs">{v.note}</span>}
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                        いずれも下記の出典資料に書かれている数値をそのまま分けたものです（当サイトによる合算・推定は行っていません）。「予定」は資料に記載された計画値で、実績ではありません。
+                      </p>
+                    </div>
+                  )}
                   <p className="mt-1.5 text-xs text-on-surface-variant">
                     <span className="font-medium text-on-surface">【出典】</span>
                     <a

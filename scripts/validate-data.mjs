@@ -5,6 +5,7 @@ import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
 import { QUESTION_LIKE_SPEECH_TYPES } from "../src/lib/questionLikeSpeechTypes.ts";
 import { summarizeVoteClassification } from "../src/lib/billVotes.ts";
 import { findMayorTermGaps } from "../src/lib/archiveMayors.ts";
+import { validateMeasureIndicators } from "../src/lib/mayorPromiseIndicators.ts";
 import {
   ARCHIVE_VERIFICATION_STATUSES,
   checkAnyNonNullRequiresField,
@@ -767,6 +768,19 @@ const VALID_MEASURE_STATUSES = new Set([
   "PREPARING",
   "NOT_ASSESSABLE",
 ]);
+/**
+ * Phase267：indicators（指標ごと・年度ごとの数値）の検証は src/lib/mayorPromiseIndicators.ts に
+ * 集約し、回帰テスト（scripts/test-mayor-promise-indicators.mjs）と同じ判定を使う。
+ */
+try {
+  const measures = readJson("src/data/mayorPromiseMeasures.json");
+  for (const issue of validateMeasureIndicators(measures)) {
+    err(issue.tag, issue.message);
+  }
+} catch {
+  warn("mayorPromiseMeasures.json", "指標（indicators）の検証をスキップしました（読み込めませんでした）");
+}
+
 try {
   const measures = readJson("src/data/mayorPromiseMeasures.json");
   const measureIds = new Set();

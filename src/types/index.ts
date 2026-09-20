@@ -1043,14 +1043,64 @@ export interface MayorPromiseMeasureSnapshot {
   currentYearPlan?: string;
   /** より先の年度の目標（確認できた場合のみ）。 */
   futureTarget?: string;
-  /** 単位付き数値の主要な1件（複数ある場合は代表値、詳細はnotesへ）。 */
+  /**
+   * 単位付き数値の主要な1件（複数ある場合は代表値、詳細はnotesへ）。
+   * Phase267以降、複数の数値や年度別の数値は indicators へ分けて持つ。
+   * このフィールドは既存UI・既存テストとの後方互換のために残しており、削除しない
+   * （indicators を持つ施策では、いずれかの指標の値と必ず一致する。検証：validate-data.mjs）。
+   */
   quantitativeValue?: number;
   quantitativeUnit?: string;
+  /**
+   * Phase267：1つの施策に複数の数値指標が含まれる場合に、指標ごと・年度ごとに分けて持つ。
+   * previousYearResult / currentYearResult / currentYearPlan の文章に既に書かれている数値を
+   * 構造化したものだけを登録し、資料に無い数値の推定・合算はしない。
+   */
+  indicators?: MayorPromiseIndicator[];
   sourceUrl: string;
   sourcePage?: string;
   sourceTitle: string;
   trustLevel?: ArchiveSourceTrustLevel;
   notes?: string;
+}
+
+/**
+ * Phase267：個別施策に含まれる数値指標1件分（例：「実施回数」「相談件数」）。
+ *
+ * ■ なぜ必要か
+ * 従来は quantitativeValue / quantitativeUnit に「代表値1件」しか持てず、
+ * 1つの施策に複数の数値がある場合（例：前年度2件→今年度5件予定、会場数と相談件数）は
+ * 文章の中に埋もれていた。さらに単位側に「件（令和8年度予定）」のように年度と予定・実績の
+ * 区別が混ざっており、機械的な比較ができなかった。
+ * 指標（label＋unit）と、年度ごとの値（fiscalYear＋kind）を分けて持つことでこれを解消する。
+ *
+ * ■ 守ること
+ * - unit には単位だけを書く（「件」「回」「名」等）。年度・「予定」「実績」等を混ぜない。
+ * - 値は必ず一次資料の記述にそのまま現れる数値のみを登録する。合算・按分・推定はしない。
+ * - 「実績」と「予定」は kind で必ず区別する（予定を実績として表示しない）。
+ */
+export interface MayorPromiseIndicator {
+  /** 施策ID＋連番（例："1-1-a-1"）。データ全体で一意。 */
+  id: string;
+  /** 指標名。一次資料の記述に基づく名称のみを使い、推測で命名しない。 */
+  label: string;
+  /** 単位のみ（例："件"、"回"、"名"）。年度・予定・実績等を含めない。 */
+  unit: string;
+  /** 年度ごとの値。上書きせず追加していくことで、年度をまたぐ推移を失わない。 */
+  values: MayorPromiseIndicatorValue[];
+}
+
+/** 指標の、ある年度の値1件分。 */
+export interface MayorPromiseIndicatorValue {
+  /** 例："令和7年度"。 */
+  fiscalYear: string;
+  value: number;
+  /** result＝既に生じた実績、plan＝資料に記載された予定・計画値。混同させない。 */
+  kind: "result" | "plan";
+  /** この値が記載されている資料のページ（施策のsourcePageと異なる場合のみ）。 */
+  sourcePage?: string;
+  /** 値の範囲・条件の補足（例：どの会場の件数か）。資料の記述の範囲内で書く。 */
+  note?: string;
 }
 
 /** サイト更新履歴の種別。 */

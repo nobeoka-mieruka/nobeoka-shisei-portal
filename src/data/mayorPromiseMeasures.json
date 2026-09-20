@@ -15,6 +15,27 @@
     "currentYearPlan": "延岡こどもパーク、昆虫観察ワークショップ、乗馬体験、スキムボード体験、ルアー作り+ルアーフィッシング体験（5件）",
     "quantitativeValue": 5,
     "quantitativeUnit": "件（令和8年度予定）",
+    "indicators": [
+      {
+        "id": "1-1-a-1",
+        "label": "自然体験活動の実施件数",
+        "unit": "件",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 2,
+            "kind": "result",
+            "note": "ホタル観察、延岡こどもパーク"
+          },
+          {
+            "fiscalYear": "令和8年度",
+            "value": 5,
+            "kind": "plan",
+            "note": "延岡こどもパーク、昆虫観察ワークショップ、乗馬体験、スキムボード体験、ルアー作り＋ルアーフィッシング体験"
+          }
+        ]
+      }
+    ],
     "notes": "令和7年度は2件だった自然体験活動を令和8年度は5件に増やす予定。"
   },
   {
@@ -32,7 +53,26 @@
     "previousYearResult": "2回実施",
     "currentYearPlan": "4回実施予定（高学年向け9月「国スポ・障スポってなあに？」、10月一人乗りカヌー体験、低学年向け11月・12月）",
     "quantitativeValue": 4,
-    "quantitativeUnit": "回（令和8年度予定）"
+    "quantitativeUnit": "回（令和8年度予定）",
+    "indicators": [
+      {
+        "id": "1-1-b-1",
+        "label": "はらはらわくわくふるさと体験事業（番外編）の実施回数",
+        "unit": "回",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 2,
+            "kind": "result"
+          },
+          {
+            "fiscalYear": "令和8年度",
+            "value": 4,
+            "kind": "plan"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -48,6 +88,83 @@
     "sourcePage": "p.2",
     "previousYearResult": "A部門（創作活動）6校、B部門（体験活動）17校（うちノベ☆スタ自然体験20件）、C部門（文化施設見学）全校で野口遵記念館・延岡城内藤記念博物館見学",
     "currentYearPlan": "小学校8校・中学校2校・義務教育学校1校から申請済み、順次創作活動・体験活動・文化施設見学を実施",
+    "indicators": [
+      {
+        "id": "1-1-c-1",
+        "label": "ふるさと教育推進事業A部門（創作活動）の実施校数",
+        "unit": "校",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 6,
+            "kind": "result"
+          }
+        ]
+      },
+      {
+        "id": "1-1-c-2",
+        "label": "ふるさと教育推進事業B部門（体験活動）の実施校数",
+        "unit": "校",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 17,
+            "kind": "result"
+          }
+        ]
+      },
+      {
+        "id": "1-1-c-3",
+        "label": "B部門のうちノベ☆スタ自然体験の実施件数",
+        "unit": "件",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 20,
+            "kind": "result"
+          }
+        ]
+      },
+      {
+        "id": "1-1-c-4",
+        "label": "ふるさと教育推進事業の申請校数（小学校）",
+        "unit": "校",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 8,
+            "kind": "result",
+            "note": "申請済み"
+          }
+        ]
+      },
+      {
+        "id": "1-1-c-5",
+        "label": "ふるさと教育推進事業の申請校数（中学校）",
+        "unit": "校",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 2,
+            "kind": "result",
+            "note": "申請済み"
+          }
+        ]
+      },
+      {
+        "id": "1-1-c-6",
+        "label": "ふるさと教育推進事業の申請校数（義務教育学校）",
+        "unit": "校",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 1,
+            "kind": "result",
+            "note": "申請済み"
+          }
+        ]
+      }
+    ],
     "notes": "複数区分（A/B/C部門）の件数を含むため代表的な数値は設定していない。"
   },
   {
@@ -96,7 +213,21 @@
     "previousYearResult": "令和7年度の採用実績あり",
     "currentYearResult": "令和8年度は15名の指導員を雇用",
     "quantitativeValue": 15,
-    "quantitativeUnit": "名（令和8年度）"
+    "quantitativeUnit": "名（令和8年度）",
+    "indicators": [
+      {
+        "id": "1-2-c-1",
+        "label": "学習指導員の雇用人数",
+        "unit": "名",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 15,
+            "kind": "result"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -143,6 +274,32 @@
     "currentYearResult": "住民税非課税世帯の小中高生対象に食料品34食分を配布、実績962名分",
     "quantitativeValue": 34,
     "quantitativeUnit": "食分",
+    "indicators": [
+      {
+        "id": "1-3-b-1",
+        "label": "配布した食料品",
+        "unit": "食分",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 34,
+            "kind": "result"
+          }
+        ]
+      },
+      {
+        "id": "1-3-b-2",
+        "label": "食料品の配布実績（人数）",
+        "unit": "名分",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 962,
+            "kind": "result"
+          }
+        ]
+      }
+    ],
     "notes": "実績962名分の食料を配布（配布対象世帯数の実績値）。"
   },
   {
@@ -303,7 +460,21 @@
     "currentYearResult": "「延岡市指定避難所運営マニュアル」を改訂し、指定避難所のうち8ヶ所で「避難所運営手順書」を作成",
     "currentYearPlan": "県総合防災訓練にあわせ避難所運営訓練を実施予定、段ボールベッド・インフレートマットの購入を推進中",
     "quantitativeValue": 8,
-    "quantitativeUnit": "ヶ所（手順書作成済み）"
+    "quantitativeUnit": "ヶ所（手順書作成済み）",
+    "indicators": [
+      {
+        "id": "3-2-b-1",
+        "label": "避難所運営手順書を作成した指定避難所数",
+        "unit": "ヶ所",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 8,
+            "kind": "result"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -345,7 +516,22 @@
     "measureTitle": "民間企業人と市職員のタッグによる課題解決研修「GIFT」",
     "status": "PLANNED",
     "sourcePage": "p.6",
-    "currentYearPlan": "課題テーマ「①商店街の活性化②フードロス対策③愛宕山の活性化」の3つで令和8年9月から研修開催予定"
+    "currentYearPlan": "課題テーマ「①商店街の活性化②フードロス対策③愛宕山の活性化」の3つで令和8年9月から研修開催予定",
+    "indicators": [
+      {
+        "id": "4-1-a-1",
+        "label": "若手職員プロジェクトチームの課題テーマ数",
+        "unit": "テーマ",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 3,
+            "kind": "plan",
+            "note": "①商店街の活性化②フードロス対策③愛宕山の活性化"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -388,7 +574,34 @@
     "status": "IN_PROGRESS",
     "sourcePage": "p.6",
     "currentYearResult": "令和8年4月から北方総合支所に新たに1名の隊員が着任",
-    "currentYearPlan": "島野浦島の活性化のため新たに1名を採用予定"
+    "currentYearPlan": "島野浦島の活性化のため新たに1名を採用予定",
+    "indicators": [
+      {
+        "id": "4-4-a-1",
+        "label": "北方総合支所に着任した地域おこし協力隊員数",
+        "unit": "名",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 1,
+            "kind": "result",
+            "note": "令和8年4月着任"
+          }
+        ]
+      },
+      {
+        "id": "4-4-a-2",
+        "label": "島野浦島の活性化のための採用予定人数",
+        "unit": "名",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 1,
+            "kind": "plan"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -420,7 +633,71 @@
     "currentYearResult": "6月18日島浦（相談件数10件、空家施策推進室と共催）、7月16日土々呂・伊形（相談件数7件、空家施策推進室と共催）を実施済み",
     "currentYearPlan": "令和8年度は全10回開催予定（うち2回は他部署共催）、8月〜3月に東海・恒富・川中・南方・北方・北浦・北川で順次開催",
     "quantitativeValue": 10,
-    "quantitativeUnit": "回（令和8年度予定）"
+    "quantitativeUnit": "回（令和8年度予定）",
+    "indicators": [
+      {
+        "id": "4-3-a-1",
+        "label": "出張なんでも総合相談センターの開催会場数",
+        "unit": "会場",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 3,
+            "kind": "result",
+            "note": "北方・北浦・北川"
+          }
+        ]
+      },
+      {
+        "id": "4-3-a-2",
+        "label": "出張なんでも総合相談センターの相談対応件数（年度計）",
+        "unit": "件",
+        "values": [
+          {
+            "fiscalYear": "令和7年度",
+            "value": 5,
+            "kind": "result"
+          }
+        ]
+      },
+      {
+        "id": "4-3-a-3",
+        "label": "出張なんでも総合相談センターの開催回数",
+        "unit": "回",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 10,
+            "kind": "plan",
+            "note": "うち2回は他部署共催"
+          }
+        ]
+      },
+      {
+        "id": "4-3-a-4",
+        "label": "出張なんでも総合相談センターの相談件数（島浦、6月18日）",
+        "unit": "件",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 10,
+            "kind": "result"
+          }
+        ]
+      },
+      {
+        "id": "4-3-a-5",
+        "label": "出張なんでも総合相談センターの相談件数（土々呂・伊形、7月16日）",
+        "unit": "件",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 7,
+            "kind": "result"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -448,7 +725,22 @@
     "measureTitle": "佐伯市との人事交流復活",
     "status": "COMPLETED",
     "sourcePage": "p.7",
-    "currentYearResult": "令和8年4月1日から佐伯市と延岡市でそれぞれ職員1名を相互派遣（延岡市：観光戦略課→佐伯市、佐伯市：観光戦略課→延岡市）"
+    "currentYearResult": "令和8年4月1日から佐伯市と延岡市でそれぞれ職員1名を相互派遣（延岡市：観光戦略課→佐伯市、佐伯市：観光戦略課→延岡市）",
+    "indicators": [
+      {
+        "id": "4-5-b-1",
+        "label": "佐伯市との相互派遣人数（各市1名ずつ）",
+        "unit": "名",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 1,
+            "kind": "result",
+            "note": "延岡市・佐伯市がそれぞれ1名"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -465,7 +757,21 @@
     "currentYearResult": "RPA内製化研修として職員4名がRPAシナリオ作成に取り組み中、宮崎市（庁内セカンドワーク実施）への視察を令和8年6月に実施",
     "currentYearPlan": "佐世保市・八女市への視察も予定",
     "quantitativeValue": 4,
-    "quantitativeUnit": "名（RPA内製化研修参加者）"
+    "quantitativeUnit": "名（RPA内製化研修参加者）",
+    "indicators": [
+      {
+        "id": "4-5-c-1",
+        "label": "RPA内製化研修の参加職員数",
+        "unit": "名",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 4,
+            "kind": "result"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
