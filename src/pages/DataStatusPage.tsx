@@ -1638,6 +1638,27 @@ export function DataStatusPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              なぜ問い合わせが必要か：延岡市公式サイトの
+              <a
+                href="https://www.city.nobeoka.miyazaki.jp/soshiki/18/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-1 text-primary underline"
+              >
+                財政課ページ
+              </a>
+              と
+              <a
+                href="https://www.city.nobeoka.miyazaki.jp/life/3/22/96/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-1 text-primary underline"
+              >
+                財政のページ
+              </a>
+              を{formatJapaneseDateIfIso("2026-09-20")}に確認しましたが、当初予算の概要・予算編成方針・健全化判断比率等は公開されている一方、事業ごとの予算額まで分かる「予算に関する説明書」「歳入歳出予算事項別明細書」に当たる資料は掲載を確認できませんでした（財政課ページ・財政ページを確認）。ウェブ上に無いだけで、閲覧や写しの交付ができる可能性はあるため、上記の文面での確認をご案内しています。
+            </p>
             {budgetInquirySection && (
               <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
                 参考の問い合わせ先：延岡市役所 {cityOrganizationSectionFullName(budgetInquirySection)}
