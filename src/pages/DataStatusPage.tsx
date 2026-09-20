@@ -57,6 +57,8 @@ import type {
   BillVoteItem,
   GeneralQuestionItem,
   CouncilSpeechSummaryData,
+  MayorPromisesData,
+  MayorPromiseMeasureSnapshot,
   CitySpecialPost,
   Committee,
   CommitteeActivityReport,
@@ -100,6 +102,13 @@ import {
   MAYOR_PROMISE_SCALE_SUMMARY,
   mayorPromiseCounts,
 } from "../lib/mayorPromiseTerms";
+import mayorPromisesData from "../data/mayorPromises.json";
+import mayorPromiseMeasuresData from "../data/mayorPromiseMeasures.json";
+import {
+  computeMayorPromiseDataQuality,
+  countBrokenPromiseSourceUrls,
+  type PromiseQualityMetric,
+} from "../lib/mayorPromiseDataQuality";
 import {
   hasBudgetData,
   hasPopulationData,
@@ -228,6 +237,27 @@ interface DataQualitySummary {
   countConsistencyChecks: { label: string; status: string; note: string }[];
 }
 const dataQualitySummary = dataQualitySummaryData as DataQualitySummary;
+
+/**
+ * Phase266：市長公約データについて「当サイトの整備がどこまで進んでいるか」を実データから集計する。
+ * 件数・率はここでの算出結果だけを表示し、画面へ直書きしない（公約データを追加・変更すれば
+ * 表示も自動的に変わる）。算出ロジックと故障注入テストは src/lib/mayorPromiseDataQuality.ts と
+ * scripts/test-mayor-promise-data-quality.mjs にある。
+ */
+const mayorPromises = mayorPromisesData as MayorPromisesData;
+const mayorPromiseMeasures = mayorPromiseMeasuresData as MayorPromiseMeasureSnapshot[];
+const promiseDataQuality = computeMayorPromiseDataQuality({
+  promises: mayorPromises.promises,
+  categories: mayorPromises.categories,
+  documents: mayorPromises.documents,
+  measures: mayorPromiseMeasures,
+  referenceDate: mayorPromises.referenceDate,
+});
+/** 根拠資料のうち、外部リンク監査で到達できなかったもの（通常は0件）。 */
+const promiseBrokenSourceCount = countBrokenPromiseSourceUrls(
+  mayorPromises.documents,
+  (dataQualitySummary.linkHealth?.broken ?? []).map((b) => b.url),
+);
 
 /**
  * Phase222：出典検証warningの分類コードを市民向けの日本語に言い換える。
@@ -363,6 +393,40 @@ function CompletenessRow({ label, metric, note }: { label: string; metric: Compl
         )}
       </p>
       {note && <p className="mt-0.5 text-xs text-on-surface-variant">{note}</p>}
+    </li>
+  );
+}
+
+/**
+ * Phase266：市長公約データの整備状況1指標分の表示。
+ * 「収録率」ではなく「付与済み○件／対象○件」というデータ整備側の言い方に統一し、
+ * 公約の達成度と読み違えられないようにする。未整備の公約は必ずIDを挙げて、
+ * 「どれが未整備なのか」を市民が個別ページで確認できるようにする。
+ */
+function PromiseQualityRow({ item }: { item: PromiseQualityMetric }) {
+  return (
+    <li className="rounded-lg border border-outline-variant p-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <p className="text-sm font-semibold text-on-surface">{item.label}</p>
+        <p className="text-sm text-on-surface-variant">
+          <span className="font-semibold text-on-surface">{formatCoverageRate(item.metric)}</span>（
+          {item.metric.collected}件／対象{item.metric.totalKnown ?? 0}件）
+        </p>
+      </div>
+      <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{item.description}</p>
+      {item.missingPromiseIds.length > 0 && (
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          未整備（{item.missingPromiseIds.length}件）：
+          {item.missingPromiseIds.map((id, index) => (
+            <span key={id}>
+              {index > 0 && "、"}
+              <Link to={`/mayor/policy-progress/${id}`} className="font-medium text-primary underline">
+                公約{id}
+              </Link>
+            </span>
+          ))}
+        </p>
+      )}
     </li>
   );
 }
@@ -1444,6 +1508,124 @@ export function DataStatusPage() {
         </p>
       </SectionCard>
 
+      <SectionCard title="市長公約データの整備状況（当サイト自身のデータ品質）">
+        <div className="mb-3 rounded-lg border border-outline-variant bg-surface-container p-3">
+          <p className="text-sm font-semibold text-on-surface">これは「当サイトのデータ整備状況」です</p>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+            以下の数字は、当サイトが市長公約のデータをどこまで整備できているか（根拠資料を紐付けたか、変更履歴を記録したか）を示すものです。
+            市長が公約をどこまで達成したかを示すものではありません。例えば「根拠資料の付与率100%」は、すべての
+            {MAYOR_PROMISE_LEVELS.promise.label}に延岡市の公表資料を紐付け済みという意味であり、公約が達成されたという意味ではありません。
+            公約それぞれの状況は
+            <Link to="/mayor/policy-progress" className="mx-1 font-medium text-primary underline">
+              市長公約の進捗状況
+            </Link>
+            でご確認ください。当サイトは公約の達成度を独自に採点していません。
+          </p>
+        </div>
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          集計対象は{MAYOR_PROMISE_SCALE_SUMMARY}です。数字はすべて公約データからその場で算出しており、画面に固定値は書いていません（公約データを追加・修正すれば、この一覧も自動的に変わります）。
+          「品質○点」のような総合スコアは、重み付けが恣意的になるため作っていません。
+        </p>
+        <ul className="space-y-2">
+          {[
+            promiseDataQuality.metrics.publication,
+            promiseDataQuality.metrics.cityOfficialSource,
+            promiseDataQuality.metrics.changeHistory,
+            promiseDataQuality.metrics.fiscalYear,
+            promiseDataQuality.metrics.judgementNote,
+            promiseDataQuality.metrics.measurePrimarySource,
+          ].map((item) => (
+            <PromiseQualityRow key={item.label} item={item} />
+          ))}
+        </ul>
+
+        <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">根拠資料の状況</p>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">登録している根拠資料</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{promiseDataQuality.sourceDocuments.total}件</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">うち延岡市の公表資料</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promiseDataQuality.sourceDocuments.cityOfficialCount}件
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">うち市長本人などの公表資料</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promiseDataQuality.sourceDocuments.otherPublisherCount}件
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">{BROKEN_SOURCE_LINK_LABEL}</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{promiseBrokenSourceCount}件</dd>
+          </div>
+        </dl>
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+          変更履歴は{MAYOR_PROMISE_LEVELS.promise.label}あわせて{promiseDataQuality.changeHistoryEntryTotal}件を記録しています（1件の公約に複数の記録が付くことがあります）。
+          存在しない資料を参照している箇所は{promiseDataQuality.sourceDocuments.unresolvedKeys.length}件です。
+        </p>
+
+        <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">
+          追加の公式資料確認が必要な{MAYOR_PROMISE_LEVELS.promise.label}：{promiseDataQuality.verification.pendingPromiseCount}件
+        </p>
+        <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
+          公約データそのものは掲載済みでも、予算額や関連議案の裏付けまでは確認できていないものがあります。「確認できていない」と「確認した結果それが無い」を別々に数えています。
+          予算：金額を確認済み{promiseDataQuality.verification.budget.confirmedAmount}件／関連議案に金額の記載あり
+          {promiseDataQuality.verification.budget.amountInRelatedBills}件／資料待ち
+          {promiseDataQuality.verification.budget.awaitingSource}件／その他確認中
+          {promiseDataQuality.verification.budget.underReview}件。 議案：関連議案を確認済み
+          {promiseDataQuality.verification.bill.confirmedBill}件／独立した議案が無いことを確認済み
+          {promiseDataQuality.verification.bill.noSeparateBillConfirmed}件／確認中
+          {promiseDataQuality.verification.bill.underReview}件／判断材料となる資料が未発見
+          {promiseDataQuality.verification.bill.sourceNotFound}件。
+        </p>
+        {promiseDataQuality.verification.awaitingBudgetSourceGroups.length > 0 && (
+          <ul className="space-y-2">
+            {promiseDataQuality.verification.awaitingBudgetSourceGroups.map((group) => (
+              <li key={group.source} className="rounded-lg bg-surface-container-low p-3">
+                <p className="break-words text-sm font-medium text-on-surface">{group.source}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">
+                  この資料の確認を待っている{MAYOR_PROMISE_LEVELS.promise.label}：{group.promiseIds.length}件（
+                  {group.promiseIds.map((id, index) => (
+                    <span key={id}>
+                      {index > 0 && "、"}
+                      <Link to={`/mayor/policy-progress/${id}`} className="font-medium text-primary underline">
+                        公約{id}
+                      </Link>
+                    </span>
+                  ))}
+                  ）
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">まだ登録できていない項目</p>
+        <ul className="space-y-2">
+          {promiseDataQuality.optionalFields.map((item) => (
+            <PromiseQualityRow key={item.label} item={item} />
+          ))}
+        </ul>
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+          これらが未登録であることは、担当部署や公表日が存在しないという意味ではなく、当サイトが公式資料で確認できていないという意味です（推測では登録しません）。
+        </p>
+
+        <p className="mt-4 text-xs leading-relaxed text-on-surface-variant">
+          公約データの基準日：{formatJapaneseDateIfIso(promiseDataQuality.asOf.referenceDate)}／個別公約の最終確認日（最新）：
+          {promiseDataQuality.asOf.latestPromiseVerified
+            ? formatJapaneseDateIfIso(promiseDataQuality.asOf.latestPromiseVerified)
+            : "未登録"}
+          ／{MAYOR_PROMISE_LEVELS.measure.label}の資料時点（最新）：
+          {promiseDataQuality.asOf.latestMeasureSnapshot
+            ? formatJapaneseDateIfIso(promiseDataQuality.asOf.latestMeasureSnapshot)
+            : "未登録"}
+          ／収録している対象年度：{promiseDataQuality.asOf.fiscalYears.join("、")}。 基準日・最終確認日と、取組みの対象年度は別の概念として分けて管理しています。
+        </p>
+      </SectionCard>
+
       <SectionCard title="類似団体比較・市長公約の調査状況">
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -1452,7 +1634,12 @@ export function DataStatusPage() {
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">市長公約（予算事業との対応）</dt>
-            <dd className="mt-0.5 text-lg font-semibold text-on-surface">根拠資料調査中</dd>
+            {/* Phase266：「根拠資料調査中」という固定文言では、実際に予算額まで確認できた件数が
+                増えても表示が変わらなかった。公約データから算出した件数を表示する。 */}
+            <dd className="mt-0.5 text-sm font-semibold leading-relaxed text-on-surface">
+              予算額を確認済み{promiseDataQuality.verification.budget.confirmedAmount}件／資料待ち
+              {promiseDataQuality.verification.budget.awaitingSource}件
+            </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">市長公約の収録件数</dt>
@@ -1460,7 +1647,7 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          類似団体（人口・産業構造が近い全国の自治体グループ）は、延岡市を含め{similarMunicipalityFinance.municipalities.length}自治体を総務省公式資料から特定し、財政指標の比較データを掲載しています。市長公約は、公約本文と名称が完全一致する予算事業の候補は複数見つかっていますが、「確定（confirmed）」に必要な原本資料との照合がまだ済んでいないため、確定件数は0件のままです。0件は「根拠が無い」のではなく「照合作業が完了していない」という意味です。
+          類似団体（人口・産業構造が近い全国の自治体グループ）は、延岡市を含め{similarMunicipalityFinance.municipalities.length}自治体を総務省公式資料から特定し、財政指標の比較データを掲載しています。市長公約は、一次資料で予算事業との対応を確認できたものから順に確定させており、残りは事業ごとの予算額まで分かる公式資料の確認待ちです。確認待ちは「根拠が無い」のではなく「照合作業が完了していない」という意味です。内訳と対象の公約は上の「市長公約データの整備状況」でご確認いただけます。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">{MAYOR_PROMISE_SCALE_NOTE}</p>
       </SectionCard>
