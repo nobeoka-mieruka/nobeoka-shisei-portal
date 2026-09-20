@@ -29,7 +29,13 @@ import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
-import { publicBills } from "../lib/billVotes";
+import {
+  VOTE_DISCLOSURE_CATEGORY_LABELS_JA,
+  VOTE_METHOD_CATEGORY_LABELS_JA,
+  classifyVoteDisclosure,
+  classifyVoteMethod,
+  publicBills,
+} from "../lib/billVotes";
 import { MAYOR_PROMISE_LEVELS } from "../lib/mayorPromiseTerms";
 import {
   classifyPromiseBudgetLinkage,
@@ -502,11 +508,21 @@ export function MayorPromiseDetailPage() {
       <SectionCard title="関連する議案・一般質問・記者会見">
         {relatedBills.length > 0 || relatedQuestions.length > 0 || relatedPressConferences.length > 0 ? (
           <ul className="space-y-2 text-sm">
+            {/* Phase267：公約→議案→議決結果→議員別賛否まで、どこまで公式資料で辿れるかを
+                その場で示す。議員別賛否が無い場合に「非公開と確認済み」と「まだ未確認」を
+                区別し、全会一致等から個人の賛否を推測しない。 */}
             {relatedBills.map((bill) => (
               <li key={bill.id}>
                 <Link to={`/bills/votes/${bill.id}`} className={`text-primary underline ${linkClass}`}>
                   関連議案：{bill.billTitle}
                 </Link>
+                <span className="mt-0.5 block text-xs leading-relaxed text-on-surface-variant">
+                  議決結果：{bill.result ?? "確認中"}／採決方式：
+                  {VOTE_METHOD_CATEGORY_LABELS_JA[classifyVoteMethod(bill)]}／議員別の賛否：
+                  {bill.memberVotes.length > 0
+                    ? `${bill.memberVotes.length}名分を収録`
+                    : VOTE_DISCLOSURE_CATEGORY_LABELS_JA[classifyVoteDisclosure(bill)]}
+                </span>
               </li>
             ))}
             {relatedQuestions.map((q) => (

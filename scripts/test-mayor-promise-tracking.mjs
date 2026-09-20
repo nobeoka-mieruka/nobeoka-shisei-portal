@@ -487,5 +487,59 @@ check("「確認待ちの資料」行が出る公約の数が、集計値（予�
   }
 });
 
+console.log("\n項目17：公約→議案→議決結果→議員別賛否の追跡（Phase267）");
+
+check("公約が参照する議案は、議決結果まで公式データで辿れる", () => {
+  const billById = new Map(billVotes.map((b) => [b.id, b]));
+  for (const p of promises) {
+    for (const billId of p.relatedBillVoteIds ?? []) {
+      const bill = billById.get(billId);
+      assert.ok(bill, `公約${p.id}が存在しない議案を参照しています: ${billId}`);
+      assert.ok(
+        typeof bill.result === "string" && bill.result.length > 0,
+        `公約${p.id}の関連議案${billId}に議決結果がありません`,
+      );
+    }
+  }
+});
+
+check("議員別賛否が0件の関連議案では「非公開と確認済み」と「未確認」を区別している（推測で賛否を作らない）", () => {
+  const billById = new Map(billVotes.map((b) => [b.id, b]));
+  for (const p of promises) {
+    for (const billId of p.relatedBillVoteIds ?? []) {
+      const bill = billById.get(billId);
+      if ((bill.memberVotes ?? []).length > 0) continue;
+      const status = bill.individualVoteDisclosureStatus;
+      assert.ok(
+        status === "notDisclosed" || status === "unconfirmed",
+        `議案${billId}の議員別賛否の公開状況が区別されていません: ${status}`,
+      );
+    }
+  }
+});
+
+check("公約詳細ページが、関連議案の議決結果と議員別賛否の状況を表示している", () => {
+  const page = readFileSync(join(ROOT, "src/pages/MayorPromiseDetailPage.tsx"), "utf8");
+  assert.ok(page.includes("議決結果："), "関連議案の議決結果が表示されていません");
+  assert.ok(
+    page.includes("VOTE_DISCLOSURE_CATEGORY_LABELS_JA"),
+    "議員別賛否の公開状況（非公開と確認済み／未確認）が区別表示されていません",
+  );
+});
+
+check("公約と議案・予算の関連付けに、当サイトの評価・達成判定の文言を持ち込んでいない", () => {
+  const page = readFileSync(join(ROOT, "src/pages/MayorPromiseDetailPage.tsx"), "utf8");
+  // 「独自の達成率・採点ではありません」のような打ち消しの説明文・実装注意コメントは対象外とし、
+  // 評価を断定する表現だけを検出する。
+  const isDisclaimer = (line) => /ではありません|行っておらず|表示しない|しません|禁止/.test(line);
+  for (const word of ["公約を実現", "公約達成", "達成率"]) {
+    const offending = page
+      .split(/\r?\n/)
+      .filter((line) => line.includes(word))
+      .filter((line) => !isDisclaimer(line));
+    assert.deepEqual(offending, [], `公約詳細ページに評価・達成判定の文言があります: ${word}`);
+  }
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");
