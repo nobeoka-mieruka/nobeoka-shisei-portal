@@ -110,6 +110,7 @@ import {
   type PromiseQualityMetric,
 } from "../lib/mayorPromiseDataQuality";
 import { summarizeMeasureIndicators } from "../lib/mayorPromiseIndicators";
+import { cityOrganizationSectionByName, cityOrganizationSectionFullName } from "../lib/cityOrganization";
 import {
   hasBudgetData,
   hasPopulationData,
@@ -259,6 +260,13 @@ const promiseDataQuality = computeMayorPromiseDataQuality({
  * 1つの施策に複数の数値が入っていた状態をどこまで解消できたかを示す。
  */
 const promiseIndicatorSummary = summarizeMeasureIndicators(mayorPromiseMeasures);
+
+/**
+ * 予算資料の確認待ちについて、市民が市へ問い合わせる際の参考連絡先。
+ * 課名・電話番号は延岡市の組織データ（src/data/cityOrganizationSections.json）から引き、
+ * このページへ直書きしない。該当課が見つからない場合は連絡先を表示しない（推測で書かない）。
+ */
+const budgetInquirySection = cityOrganizationSectionByName("財政課");
 
 /** 根拠資料のうち、外部リンク監査で到達できなかったもの（通常は0件）。 */
 const promiseBrokenSourceCount = countBrokenPromiseSourceUrls(
@@ -1608,6 +1616,36 @@ export function DataStatusPage() {
               </li>
             ))}
           </ul>
+        )}
+
+        {promiseDataQuality.verification.awaitingBudgetSourceGroups.length > 0 && (
+          <div className="mt-3 rounded-lg border border-outline-variant p-3">
+            <p className="text-sm font-semibold text-on-surface">市へ確認が必要な項目（そのまま問い合わせに使える文面）</p>
+            <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+              当サイトから延岡市への問い合わせは行っていません。市民の方が直接確認・情報公開請求等を検討される際の参考として、
+              確認待ちの資料ごとに文面を用意しています（対象の公約と件数は上記のとおり、データから自動で作成しています）。
+            </p>
+            <ul className="mt-2 space-y-2">
+              {promiseDataQuality.verification.awaitingBudgetSourceGroups.map((group) => (
+                <li key={group.source} className="rounded-lg bg-surface-container-low p-3">
+                  <p className="break-words text-sm leading-relaxed text-on-surface">
+                    「{group.source}」のうち、市長公約に関係する事業ごとの予算額が分かる部分を確認したいのですが、
+                    ウェブサイトで公開されていますか。公開されていない場合、閲覧または写しの交付を受ける方法を教えてください。
+                  </p>
+                  <p className="mt-1 text-xs text-on-surface-variant">
+                    この資料を待っている{MAYOR_PROMISE_LEVELS.promise.label}：{group.promiseIds.length}件
+                  </p>
+                </li>
+              ))}
+            </ul>
+            {budgetInquirySection && (
+              <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                参考の問い合わせ先：延岡市役所 {cityOrganizationSectionFullName(budgetInquirySection)}
+                {budgetInquirySection.phone && `（Tel: ${budgetInquirySection.phone}）`}
+                。延岡市が公表している組織情報（{formatJapaneseDateIfIso(budgetInquirySection.dataAsOf)}時点）に基づく連絡先です。
+              </p>
+            )}
+          </div>
         )}
 
         <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">数値指標の構造化と年度別の記録</p>
