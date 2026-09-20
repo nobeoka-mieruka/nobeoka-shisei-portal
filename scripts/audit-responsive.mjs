@@ -99,6 +99,10 @@ const PAGES = [
   { path: "/bills/bill-fy2026-general-account-supplementary-budget-2", kind: "bill-detail" },
   { path: "/bills/bill-auditor-appointment-2026-06", kind: "bill-detail" },
   { path: "/bills/bill-bridge-repair-contract-2026-06", kind: "bill-detail" },
+  // 市長公約の詳細（Phase267で追加した指標・年度別数値のカード表示を含む）
+  { path: "/mayor/policy-progress/1-1", kind: "promise-detail" },
+  { path: "/mayor/policy-progress/4-3", kind: "promise-detail" },
+  { path: "/mayor/policy-progress/2-3", kind: "promise-detail" },
   // 歴代市長詳細（3件以上）
   { path: "/mayors/aoki-yoshisuke", kind: "mayor-detail" },
   { path: "/mayors/miura-hisatomo", kind: "mayor-detail" },
