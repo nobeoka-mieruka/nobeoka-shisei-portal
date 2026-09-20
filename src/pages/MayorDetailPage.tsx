@@ -200,17 +200,35 @@ export function MayorDetailPage() {
           <div className="rounded-lg border border-outline-variant p-3">
             <dt className="text-xs font-medium text-on-surface-variant">選挙</dt>
             <dd className="mt-1 text-sm text-on-surface">
-              {relatedElections.length === 0
-                ? mayor.isCurrentMayor || terms.some((t) => isActingMayorTerm(t))
-                  ? "確認中"
-                  : "確認できた選挙結果なし（未収集の可能性があります）"
-                : relatedElections
-                    .map((e) => {
-                      const own = e.candidates.find((c) => c.linkedProfileId === mayor.id);
-                      const unopposed = e.candidateCount === 1;
-                      return `${e.electionDate.slice(0, 4)}年：${unopposed ? "無投票当選" : own?.votes != null ? `${own.votes.toLocaleString("ja-JP")}票で当選` : "当選（得票数は確認中）"}`;
-                    })
-                    .join("／")}
+              {relatedElections.length === 0 ? (
+                mayor.isCurrentMayor || terms.some((t) => isActingMayorTerm(t)) ? (
+                  "確認中"
+                ) : (
+                  "確認できた選挙結果なし（未収集の可能性があります）"
+                )
+              ) : (
+                /* Phase272：選挙結果ページへ移動できるようにする（候補者一覧・投票結果・
+                   開票結果・選挙公報などの選挙資料はそちらに集約している）。 */
+                <ul className="space-y-1">
+                  {relatedElections.map((e) => {
+                    const own = e.candidates.find((c) => c.linkedProfileId === mayor.id);
+                    const unopposed = e.candidateCount === 1;
+                    const resultText = unopposed
+                      ? "無投票当選"
+                      : own?.votes != null
+                        ? `${own.votes.toLocaleString("ja-JP")}票で当選`
+                        : "当選（得票数は確認中）";
+                    return (
+                      <li key={e.id}>
+                        <Link to={`/elections/${e.id}`} className="text-primary underline">
+                          {e.electionDate.slice(0, 4)}年 {e.electionName}
+                        </Link>
+                        ：{resultText}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </dd>
           </div>
           <div className="rounded-lg border border-outline-variant p-3">

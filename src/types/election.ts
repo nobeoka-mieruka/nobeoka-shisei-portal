@@ -12,6 +12,8 @@
  * 結果PDF）で確認できた値のみを構造化し、確認できていない項目は
  * nullのまま残す。
  */
+import type { ArchiveSourceTrustLevel } from "./sourceTrust";
+
 export interface ElectionCandidate {
   name: string;
   nameKana: string | null;
@@ -20,6 +22,8 @@ export interface ElectionCandidate {
   party: string | null;
   /** 現職／新人／元職。資料の表記が無い場合はnull。 */
   incumbencyStatus: string | null;
+  /** 届出番号（公式の開票結果等で確認できた場合のみ）。掲載順・当選確度とは無関係。 */
+  registrationNumber?: number;
   /** 按分票を含む場合は小数のまま保持する（他候補との合計得票の按分等）。 */
   votes: number | null;
   elected: boolean;
@@ -78,14 +82,71 @@ export interface ElectionResult {
   /** 無効票数。確認できない場合はnull。 */
   invalidVotes: number | null;
   candidates: ElectionCandidate[];
-  sourceRefs: {
-    sourceUrl: string;
-    sourceTitle: string;
-    sourceOrganization: string;
-    accessedAt: string;
-    extractionMethod: "manual" | "pdf-extraction" | "official-api" | "other";
-    verificationStatus: "verified" | "needsReview" | "partiallyVerified";
-    notes?: string;
-  }[];
+  sourceRefs: ElectionSourceRef[];
   notes: string | null;
+}
+
+/**
+ * Phase272：選挙公報の中で、その候補者の掲載がどこにあるかを示すメタデータ。
+ * 掲載順序は抽選で決まるため、順序に意味（優劣・当選確度等）を読ませない。
+ * 公約本文の分解・要約はここでは行わない（資料の所在を示すだけ）。
+ */
+export interface ElectionGazettePlacement {
+  /** 選挙公報に掲載されている候補者名（資料の表記をそのまま使う）。 */
+  candidateName: string;
+  /** 届出番号（開票結果等の公式資料で確認できた場合のみ）。 */
+  registrationNumber?: number;
+  /** 掲載位置（例："おもて面 左上"）。資料を見て確認できた範囲で記載する。 */
+  placement: string;
+}
+
+/**
+ * 選挙結果の出典1件分。
+ *
+ * Phase272：「誰が発行した資料か（publisher）」と「どこから取得したか（hostType /
+ * retrievedFrom / sourceOrganization）」を必ず分けて持つ。
+ * 例：選挙公報は延岡市選挙管理委員会が発行した資料だが、市公式サイトでの掲載は
+ * 選挙後に終了しており、当サイトが参照できるのは第三者のミラーである。
+ * これを「延岡市公式サイトから取得した資料」と表示すると、出典の性格を偽ることになる。
+ *
+ * 既存フィールド（sourceUrl / sourceTitle / sourceOrganization / accessedAt /
+ * extractionMethod / verificationStatus / notes）の意味は変更していない。
+ * sourceOrganization は従来どおり「掲載元（取得先）の組織名」を表す。
+ */
+export interface ElectionSourceRef {
+  /**
+   * 安定した出典ID（例："election-mayor-2025-koho"）。
+   * 将来、選挙公報と公約データ等を照合する際の参照キーとして使う。
+   * データ全体で重複しないこと（検証：scripts/validate-data.mjs）。
+   */
+  sourceId?: string;
+  /** 資料種別（例："選挙公報"、"確定投票結果"、"確定開票結果"）。 */
+  documentType?: string;
+  /**
+   * 発行主体（例："延岡市選挙管理委員会"）。
+   * 取得先（sourceOrganization）とは別概念。市が発行した資料を第三者サイトから
+   * 取得した場合、publisher＝延岡市選挙管理委員会、sourceOrganization＝取得先となる。
+   */
+  publisher?: string;
+  /**
+   * 取得元の種別。
+   * "official_site"＝発行主体自身の公式サイトから取得、
+   * "third_party_mirror"＝第三者がミラーしたものから取得、
+   * "web_archive"＝Wayback Machine等の保存版から取得。
+   */
+  hostType?: "official_site" | "third_party_mirror" | "web_archive";
+  /** 取得元の説明（例："選挙ドットコム（第三者によるミラー）"）。 */
+  retrievedFrom?: string;
+  /** 資料そのものの種別（一次資料か等）。src/types/sourceTrust.ts の定義に従う。 */
+  trustLevel?: ArchiveSourceTrustLevel;
+  /** 選挙公報の場合の、候補者ごとの掲載位置。 */
+  candidatePlacements?: ElectionGazettePlacement[];
+  sourceUrl: string;
+  sourceTitle: string;
+  /** 掲載元（取得先）の組織名。発行主体は publisher で表す。 */
+  sourceOrganization: string;
+  accessedAt: string;
+  extractionMethod: "manual" | "pdf-extraction" | "official-api" | "other";
+  verificationStatus: "verified" | "needsReview" | "partiallyVerified";
+  notes?: string;
 }

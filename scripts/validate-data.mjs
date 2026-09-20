@@ -4477,6 +4477,10 @@ try {
   checkDuplicateIds({ err, warn }, elections, "id", "electionResults.json");
 
   const VALID_ELECTION_TYPES = new Set(["mayor", "councilMember"]);
+  // Phase272：選挙出典の「発行主体」と「取得元」を取り違えないための検証用。
+  const VALID_ELECTION_HOST_TYPES = new Set(["official_site", "third_party_mirror", "web_archive"]);
+  const NOBEOKA_OFFICIAL_HOST = "www.city.nobeoka.miyazaki.jp";
+  const electionSourceIds = new Set();
   const allPersonIds = new Set([...memberIds, ...formerMemberIds, ...archiveMayorIds]);
 
   for (const e of elections) {
@@ -4542,6 +4546,50 @@ try {
       }
       if (c.linkedProfileId != null && !allPersonIds.has(c.linkedProfileId)) {
         err(ctag, `linkedProfileIdが現職議員・元議員・歴代市長のいずれのIDにも一致しません（推測でリンクしていないか確認してください）: ${c.linkedProfileId}`);
+      }
+      if (c.registrationNumber != null && (!Number.isInteger(c.registrationNumber) || c.registrationNumber < 1)) {
+        err(ctag, `registrationNumber（届出番号）は1以上の整数にしてください: ${c.registrationNumber}`);
+      }
+    }
+
+    // Phase272：出典の「発行主体（publisher）」と「取得元（hostType / sourceOrganization）」の整合。
+    // 市が発行した資料を第三者ミラーから取得した場合に、公式サイトから取得したかのように
+    // 見せてしまうこと（出典の性格の偽り）を機械的に防ぐ。
+    const registrationNumbers = new Set(
+      (e.candidates ?? []).map((c) => c.registrationNumber).filter((n) => n != null),
+    );
+    for (const ref of e.sourceRefs ?? []) {
+      const rtag = `${tag} source=${ref.sourceId ?? ref.sourceUrl ?? "不明"}`;
+      if (ref.sourceId != null) {
+        if (isBlank(ref.sourceId)) err(rtag, "sourceIdが空文字です");
+        else if (electionSourceIds.has(ref.sourceId)) err(rtag, `sourceIdが重複しています: ${ref.sourceId}`);
+        else electionSourceIds.add(ref.sourceId);
+      }
+      if (ref.hostType != null && !VALID_ELECTION_HOST_TYPES.has(ref.hostType)) {
+        err(rtag, `未定義のhostTypeです: ${ref.hostType}`);
+      }
+      const isNobeokaOfficialUrl = typeof ref.sourceUrl === "string" && ref.sourceUrl.includes(NOBEOKA_OFFICIAL_HOST);
+      if (ref.hostType === "official_site" && ref.publisher === "延岡市選挙管理委員会" && !isNobeokaOfficialUrl) {
+        err(
+          rtag,
+          "延岡市選挙管理委員会が発行した資料をhostType=\"official_site\"としていますが、URLが延岡市公式サイトではありません（ミラー取得はthird_party_mirrorを使ってください）",
+        );
+      }
+      if (ref.hostType === "third_party_mirror" && ref.trustLevel === "PRIMARY") {
+        err(rtag, "第三者ミラーから取得した資料にtrustLevel=\"PRIMARY\"は設定できません（原本への直接到達ではないため）");
+      }
+      if (ref.publisher != null && isBlank(ref.publisher)) err(rtag, "publisher（発行主体）が空文字です");
+      if (ref.hostType === "third_party_mirror" && isBlank(ref.retrievedFrom)) {
+        err(rtag, "third_party_mirrorの場合はretrievedFrom（取得元の説明）を設定してください");
+      }
+      checkTrustLevel({ err }, ref.trustLevel, rtag);
+      for (const placement of ref.candidatePlacements ?? []) {
+        const ptag = `${rtag} placement=${placement.candidateName ?? "氏名不明"}`;
+        if (isBlank(placement.candidateName)) err(ptag, "candidatePlacementsのcandidateNameが空です");
+        if (isBlank(placement.placement)) err(ptag, "candidatePlacementsのplacement（掲載位置）が空です");
+        if (placement.registrationNumber != null && registrationNumbers.size > 0 && !registrationNumbers.has(placement.registrationNumber)) {
+          err(ptag, `candidatePlacementsの届出番号が候補者一覧に存在しません: ${placement.registrationNumber}`);
+        }
       }
     }
   }

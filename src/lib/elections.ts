@@ -59,3 +59,14 @@ export function electionResultsForPerson(personId: string): ElectionResult[] {
     .filter((e) => e.candidates.some((c) => c.linkedProfileId === personId))
     .sort((a, b) => b.electionDate.localeCompare(a.electionDate));
 }
+
+/**
+ * Phase272：選挙資料の「取得元の種別」の表示ラベル。
+ * 発行主体（publisher）とは別軸で、市が発行した資料でも市公式サイト以外から
+ * 取得している場合があることを、画面上で必ず区別できるようにする。
+ */
+export const ELECTION_SOURCE_HOST_TYPE_LABEL: Record<"official_site" | "third_party_mirror" | "web_archive", string> = {
+  official_site: "発行元の公式サイト",
+  third_party_mirror: "外部アーカイブ／ミラー",
+  web_archive: "ウェブ保存版（Wayback Machine等）",
+};

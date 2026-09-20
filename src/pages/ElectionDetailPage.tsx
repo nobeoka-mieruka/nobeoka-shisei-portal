@@ -9,7 +9,7 @@ import { LastUpdated } from "../components/LastUpdated";
 import { BackLink } from "../components/BackLink";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { electionResultById, personLinkForCandidate, formatElectionDate, electionCandidateListConfirmed } from "../lib/elections";
+import { electionResultById, personLinkForCandidate, formatElectionDate, electionCandidateListConfirmed, ELECTION_SOURCE_HOST_TYPE_LABEL } from "../lib/elections";
 import type { ElectionCandidate } from "../types/election";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 
@@ -124,6 +124,13 @@ export function ElectionDetailPage() {
                   );
                 },
               },
+              {
+                // Phase272：届出番号は公式の開票結果で確認できたもののみ表示する。
+                // 抽選で決まる番号であり、優劣・当選確度とは無関係。
+                header: "届出番号",
+                align: "right",
+                render: (c) => (c.registrationNumber != null ? `${c.registrationNumber}` : "確認中"),
+              },
               { header: "党派", render: (c) => c.party ?? "確認中" },
               { header: "新現元", render: (c) => c.incumbencyStatus ?? "確認中" },
               { header: "得票数", align: "right", render: (c) => (c.votes != null ? `${c.votes.toLocaleString("ja-JP")}票` : "確認中") },
@@ -136,15 +143,64 @@ export function ElectionDetailPage() {
         </SectionCard>
       )}
 
-      <SectionCard title="出典">
-        <ul className="space-y-2 text-xs leading-relaxed text-on-surface-variant">
+      <SectionCard title="出典・選挙資料">
+        {/* Phase272：発行主体（誰が作った資料か）と取得元（どこから入手したか）を必ず分けて示す。
+            市が発行した資料でも、市公式サイトでの掲載が終了しミラーからしか参照できない場合があり、
+            これを「市公式サイトの資料」と表示すると出典の性格を偽ることになる。 */}
+        <ul className="space-y-3 text-xs leading-relaxed text-on-surface-variant">
           {election.sourceRefs.map((ref, i) => (
-            <li key={i}>
-              <a href={ref.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                {ref.sourceTitle}
-              </a>
-              （{ref.sourceOrganization}、確認日：{ref.accessedAt}）
-              {ref.notes && <p className="mt-1">{humanizeDataNote(ref.notes)}</p>}
+            <li key={ref.sourceId ?? i} className="rounded-lg border border-outline-variant p-3">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                {ref.documentType && (
+                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-medium text-on-surface">
+                    {ref.documentType}
+                  </span>
+                )}
+                <a
+                  href={ref.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="break-words font-medium text-primary underline"
+                >
+                  {ref.sourceTitle}
+                </a>
+              </div>
+              <dl className="mt-1.5 space-y-0.5">
+                {ref.publisher && (
+                  <div>
+                    <dt className="inline font-medium text-on-surface">発行：</dt>
+                    <dd className="inline">{ref.publisher}</dd>
+                  </div>
+                )}
+                <div>
+                  <dt className="inline font-medium text-on-surface">取得：</dt>
+                  <dd className="inline">
+                    {ref.hostType ? `${ELECTION_SOURCE_HOST_TYPE_LABEL[ref.hostType]}／` : ""}
+                    {ref.retrievedFrom ?? ref.sourceOrganization}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="inline font-medium text-on-surface">確認日：</dt>
+                  <dd className="inline">{ref.accessedAt}</dd>
+                </div>
+              </dl>
+              {ref.candidatePlacements && ref.candidatePlacements.length > 0 && (
+                <div className="mt-1.5">
+                  <p className="font-medium text-on-surface">この資料での候補者の掲載位置</p>
+                  <ul className="mt-0.5 space-y-0.5">
+                    {ref.candidatePlacements.map((p) => (
+                      <li key={p.candidateName}>
+                        {p.registrationNumber != null && `届出番号${p.registrationNumber}　`}
+                        {p.candidateName}：{p.placement}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-0.5">
+                    掲載順序は抽選で決まっており、順序に優劣の意味はありません。当サイトはこの資料の内容を公約データベースへ取り込んでいません。
+                  </p>
+                </div>
+              )}
+              {ref.notes && <p className="mt-1.5">{humanizeDataNote(ref.notes)}</p>}
             </li>
           ))}
         </ul>

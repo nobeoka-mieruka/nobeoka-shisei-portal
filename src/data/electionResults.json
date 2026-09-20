@@ -3761,9 +3761,9 @@
     "seats": 1,
     "candidateCount": 3,
     "eligibleVoters": 94757,
-    "votersCount": null,
+    "votersCount": 56167,
     "turnoutPercent": 59.27,
-    "invalidVotes": null,
+    "invalidVotes": 892,
     "candidates": [
       {
         "name": "三浦久知",
@@ -3773,7 +3773,8 @@
         "incumbencyStatus": "新人",
         "votes": 20052,
         "elected": true,
-        "linkedProfileId": "mayor-01"
+        "linkedProfileId": "mayor-01",
+        "registrationNumber": 1
       },
       {
         "name": "ごとう哲朗",
@@ -3783,7 +3784,8 @@
         "incumbencyStatus": "新人",
         "votes": 20016,
         "elected": false,
-        "linkedProfileId": null
+        "linkedProfileId": null,
+        "registrationNumber": 2
       },
       {
         "name": "吉本やすし",
@@ -3793,7 +3795,8 @@
         "incumbencyStatus": "新人",
         "votes": 15196,
         "elected": false,
-        "linkedProfileId": "fm01"
+        "linkedProfileId": "fm01",
+        "registrationNumber": 3
       }
     ],
     "sourceRefs": [
@@ -3804,7 +3807,75 @@
         "accessedAt": "2026-08-11",
         "extractionMethod": "manual",
         "verificationStatus": "verified",
-        "notes": "既存archiveMayorTerms.json mayor-01-term-01のsourceRefsと同一資料。読谷山洋司前市長の辞職（2025-06-30付）に伴う選挙。36票差の接戦。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、候補者氏名・当落・得票数がページ本体の記載と一致することを再確認した。）"
+        "notes": "既存archiveMayorTerms.json mayor-01-term-01のsourceRefsと同一資料。読谷山洋司前市長の辞職（2025-06-30付）に伴う選挙。36票差の接戦。 （Phase107追記: 2026-08-24、WebFetchで同URLへ実際にアクセスし、候補者氏名・当落・得票数がページ本体の記載と一致することを再確認した。）",
+        "sourceId": "election-mayor-2025-go2senkyo",
+        "documentType": "選挙結果の集計ページ",
+        "publisher": "選挙ドットコム",
+        "hostType": "official_site",
+        "retrievedFrom": "選挙ドットコム",
+        "trustLevel": "SECONDARY"
+      },
+      {
+        "sourceId": "election-mayor-2025-vote-result",
+        "documentType": "確定投票結果",
+        "publisher": "延岡市選挙管理委員会",
+        "hostType": "official_site",
+        "retrievedFrom": "延岡市公式ホームページ「延岡市長選挙の結果」",
+        "trustLevel": "PRIMARY",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23538.pdf",
+        "sourceTitle": "令和7年7月20日執行 延岡市長選挙 確定投票結果",
+        "sourceOrganization": "延岡市選挙管理委員会",
+        "accessedAt": "2026-09-21",
+        "extractionMethod": "pdf-extraction",
+        "verificationStatus": "verified",
+        "notes": "当日有権者数94,757人（男44,423・女50,334）、投票者数56,167人（男26,043・女30,124）、棄権者数38,590人、投票率59.27%（男58.63・女59.85）。当サイトに掲載している有権者数・投票者数・投票率は、この資料の記載と一致することを確認済み。掲載ページ：https://www.city.nobeoka.miyazaki.jp/soshiki/79/2721.html（最終更新 2025年7月21日）。"
+      },
+      {
+        "sourceId": "election-mayor-2025-count-result",
+        "documentType": "確定開票結果",
+        "publisher": "延岡市選挙管理委員会",
+        "hostType": "official_site",
+        "retrievedFrom": "延岡市公式ホームページ「延岡市長選挙の結果」",
+        "trustLevel": "PRIMARY",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23539.pdf",
+        "sourceTitle": "令和7年7月20日執行 延岡市長選挙 確定開票結果",
+        "sourceOrganization": "延岡市選挙管理委員会",
+        "accessedAt": "2026-09-21",
+        "extractionMethod": "pdf-extraction",
+        "verificationStatus": "verified",
+        "notes": "確定時刻1時15分。届出番号順に、みうら久知20,052票・ごとう哲朗20,016票・吉本やすし15,196票、得票総数（＝有効投票数）55,264票、無効投票数892票、投票総数56,156票、その他（持帰り等）11票、投票者総数56,167票。当サイトに掲載している候補者別の得票数・無効票数・投票者数は、この資料の記載と一致することを確認済み。"
+      },
+      {
+        "sourceId": "election-mayor-2025-koho",
+        "documentType": "選挙公報",
+        "publisher": "延岡市選挙管理委員会",
+        "hostType": "third_party_mirror",
+        "retrievedFrom": "選挙ドットコム（第三者によるミラー）",
+        "trustLevel": "OFFICIAL_ARCHIVE",
+        "candidatePlacements": [
+          {
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "placement": "おもて面 左上"
+          },
+          {
+            "candidateName": "ごとう 哲朗",
+            "registrationNumber": 2,
+            "placement": "おもて面 右上"
+          },
+          {
+            "candidateName": "吉本 やすし",
+            "registrationNumber": 3,
+            "placement": "おもて面 右中段"
+          }
+        ],
+        "sourceUrl": "https://prod-cdn.go2senkyo.com/public/senkyo_koho/26032/20250720延岡市長選挙.pdf",
+        "sourceTitle": "令和7年7月20日執行 延岡市長選挙公報（延岡市選挙管理委員会発行）",
+        "sourceOrganization": "選挙ドットコム（ミラー）",
+        "accessedAt": "2026-09-21",
+        "extractionMethod": "pdf-extraction",
+        "verificationStatus": "verified",
+        "notes": "発行は延岡市選挙管理委員会だが、当サイトが到達できるのは第三者（選挙ドットコム）によるミラーであり、延岡市公式サイトからの直接取得ではない。延岡市公式サイトの選挙管理委員会事務局ページ・「延岡市長選挙候補者等一覧及び選挙公報」（/soshiki/79/13020.html）は2026年9月21日時点でいずれも参照できず（後者はHTTP 404）、市公式サイトでの現在の掲載は確認できなかった。資料には「この選挙公報は、候補者から提出された原稿をそのまま写真製版して印刷したものです。（掲載順序は、抽選で決定しています。）」と明記されており、掲載順序に優劣の意味は無い。おもて面に3候補の政策等、うら面に投票方法の案内を掲載。当サイトはこの資料の内容を公約データベースへは取り込んでいない（照合は未実施）。"
       }
     ],
     "notes": "読谷山洋司の辞職（病気療養）に伴う選挙。新人3名による争い、三浦久知が僅差で初当選。候補者「吉本やすし」氏は、得票数（15,196票、27.5%）がformerMembers.json fm01（吉本靖、元延岡市議会議員）のnoteに記載の得票数と完全一致するためfm01としてリンクした。",
