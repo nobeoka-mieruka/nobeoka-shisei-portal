@@ -11,6 +11,7 @@ import {
   fundingRows,
   memberVoteText,
   policyCategoryLabel,
+  promiseLabel,
 } from "../../lib/budgetRevisions";
 import type { BudgetRevision, BudgetRevisionAccount, BudgetRevisionProject, BudgetSource } from "../../types/budgetRevision";
 
@@ -306,9 +307,14 @@ function ProjectCard({ p, revision, account }: { p: BudgetRevisionProject; revis
           <dt className="text-xs font-semibold text-on-surface-variant">関連する公約・政策</dt>
           <dd className="text-xs leading-relaxed text-on-surface">
             {p.relatedPromiseIds.length > 0 ? (
+              // Phase274：どの公約かが分かるように公約名を出す。タップ領域も他のリンクに合わせる。
               p.relatedPromiseIds.map((id) => (
-                <Link key={id} to={`/mayor/policy-progress/${id}`} className={`mr-2 text-primary underline ${linkClass}`}>
-                  関連する公約
+                <Link
+                  key={id}
+                  to={`/mayor/policy-progress/${id}`}
+                  className={`mr-2 inline-flex min-h-11 items-center text-primary underline ${linkClass}`}
+                >
+                  {promiseLabel(id)}
                 </Link>
               ))
             ) : (

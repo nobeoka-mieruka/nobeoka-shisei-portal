@@ -245,7 +245,20 @@ check("議案側の理由コードの内訳がPhase205のbaselineと一致する
 });
 
 check("予算側は一次資料で対応関係を確認できた公約のみがCONFIRMED_BUDGET_ITEMになっている", () => {
-  assert.equal(budgetTally.CONFIRMED_BUDGET_ITEM, 4);
+  // Phase274：件数ではなく「どの公約が確認済みか」を固定する。件数だけだと、ある公約が
+  // 根拠なく確認済みへ上がり、別の公約が下がっても気付けないため。
+  // 1-1・1-2・2-1・2-2：施政方針・広報のべおか・市長定例記者会見資料で予算事業を確認（Phase205）。
+  // 2-3・4-2：令和8年度9月補正（概要書）の主要事業等内訳で、事業名・実施主体が一致することを確認（Phase274）。
+  const CONFIRMED_BUDGET_PROMISE_IDS = ["1-1", "1-2", "2-1", "2-2", "2-3", "4-2"];
+  const confirmed = budgetLinkages
+    .filter((l) => l.reasonCode === "CONFIRMED_BUDGET_ITEM")
+    .map((l) => l.id)
+    .sort();
+  assert.deepEqual(
+    confirmed,
+    [...CONFIRMED_BUDGET_PROMISE_IDS].sort(),
+    "予算額を確認済みの公約が変わっています。一次資料の裏付けを確認し、変更が正しい場合はこの一覧を更新してください",
+  );
   const total = Object.values(budgetTally).reduce((a, b) => a + b, 0);
   assert.equal(total, promises.length);
 });
@@ -360,7 +373,9 @@ console.log("\nPhase213：資料待ちの明示");
  * うち8件がこの資料（当初予算）を、残る1件（1-3）が同説明書の総務費の内訳を待っている。
  * 総数と資料別の内訳は下の Phase215 のチェックで別々に検証する。
  */
-const PHASE213_AWAITING_PROMISE_IDS = ["3-1", "3-2", "3-3", "4-1", "4-2", "4-3", "4-4", "4-5"];
+// Phase274：4-2は令和8年度9月補正（概要書）で予算事業（延岡にぎわい創出支援事業3,000千円）を
+// 確認できたため、資料待ちから外れた。残り7件は当初予算の説明書を待っている。
+const PHASE213_AWAITING_PROMISE_IDS = ["3-1", "3-2", "3-3", "4-1", "4-3", "4-4", "4-5"];
 
 check("重点公約が「資料待ち」として表示され、何を待っているかが画面文言に含まれている", () => {
   for (const id of PHASE213_AWAITING_PROMISE_IDS) {
@@ -403,8 +418,10 @@ check("「確認済み（資料待ちではない）」の状態に確認待ち�
 
 check("予算側の集計が「金額まで確認」「関連議案に金額あり」「資料待ち」「その他確認中」を別々に数える", () => {
   const summary = summarizeBudgetLinkage(promises);
-  assert.equal(summary.confirmedAmount, 4);
-  assert.equal(summary.awaitingSource, 9, "資料待ちの件数がPhase205の内訳と一致しません");
+  // Phase274：令和8年度9月補正（概要書）で2件（2-3・4-2）の予算事業を確認できたため、
+  // 予算額まで確認：4→6件、資料待ち：9→8件へ変わった（内訳の根拠は上のCONFIRMED_BUDGET_PROMISE_IDS）。
+  assert.equal(summary.confirmedAmount, 6);
+  assert.equal(summary.awaitingSource, 8, "資料待ちの件数が想定と一致しません");
   assert.equal(
     summary.confirmedAmount + summary.amountInRelatedBills + summary.awaitingSource + summary.underReview,
     promises.length,
@@ -442,7 +459,7 @@ check("「予算資料の確認待ち」の総数と、待っている資料ご�
   console.log(`    ${groups.map((g) => `${g.source}：${g.promiseIds.length}件`).join("／")}（合計${total}件）`);
 });
 
-check("重点公約8件は「資料待ち9件」の部分集合であり、9件目は別の資料を待っている", () => {
+check("当初予算の説明書を待つ公約は「資料待ち全体」の部分集合であり、残る1件は別の資料を待っている", () => {
   const groups = groupPromisesByAwaitingBudgetSource(promises);
   assert.equal(groups.length, 2, `確認待ちの資料の種類数が想定（2種類）と異なります：${groups.length}`);
   const [largest, rest] = groups;
@@ -455,7 +472,8 @@ check("重点公約8件は「資料待ち9件」の部分集合であり、9件�
     largest.source.includes("当初予算"),
     `重点公約が待っている資料名が「当初予算」を指していません：${largest.source}`,
   );
-  assert.equal(largest.promiseIds.length, 8, "重点公約の件数が8件ではありません");
+  // Phase274：4-2が9月補正の概要書で確認できたため、当初予算の説明書を待つ公約は8→7件。
+  assert.equal(largest.promiseIds.length, 7, "当初予算の説明書を待つ公約の件数が想定と異なります");
   assert.deepEqual(rest.promiseIds, ["1-3"], "9件目の資料待ち公約が1-3ではありません");
   assert.ok(
     rest.source.includes("総務費"),

@@ -8,7 +8,8 @@
 import budgetRevisionsData from "../data/budgetRevisions.json";
 import budgetRevisionBillsData from "../data/budgetRevisionBillsIndex.json";
 import policyCategoriesData from "../data/archivePolicyCategories.json";
-import type { BudgetFunding, BudgetRevision, BudgetRevisionAccount } from "../types/budgetRevision";
+import mayorPromisesIndex from "../data/mayorPromisesIndex.json";
+import type { BudgetFunding, BudgetRevision, BudgetRevisionAccount, BudgetRevisionProject } from "../types/budgetRevision";
 
 export interface BudgetRevisionBill {
   id: string;
@@ -26,6 +27,7 @@ export interface BudgetRevisionBill {
 }
 
 export const BUDGET_REVISIONS = budgetRevisionsData as BudgetRevision[];
+const MAYOR_PROMISES_INDEX = mayorPromisesIndex as { promises: { id: string; promiseText: string }[] };
 const BILLS = new Map((budgetRevisionBillsData as BudgetRevisionBill[]).map((b) => [b.id, b]));
 const CATEGORY_LABELS = new Map((policyCategoriesData as { id: string; label: string }[]).map((c) => [c.id, c.label]));
 
@@ -100,4 +102,53 @@ export function memberVoteText(bill: BudgetRevisionBill | undefined): string {
   };
   const parts = Object.entries(bill.memberVoteSummary).map(([vote, n]) => `${labels[vote] ?? vote}${n}人`);
   return `${bill.memberVoteCount}人分を登録済み${parts.length > 0 ? `（${parts.join("・")}）` : ""}`;
+}
+
+/**
+ * Phase274：ある市長公約に紐づけられた予算事業を返す。
+ *
+ * 紐づけは予算側（budgetRevisions.json の projects[].relatedPromiseIds）にだけ持たせており、
+ * 公約側はIDを持たない（参照を片方向にして循環を作らないため）。この関数は公約詳細ページから
+ * 予算事業・その議案・議決結果まで辿れるようにするための逆引き。
+ */
+export function budgetProjectsForPromise(promiseId: string): {
+  revisionId: string;
+  revisionLabel: string;
+  fiscalYear: number;
+  project: BudgetRevisionProject;
+  bill: BudgetRevisionBill | undefined;
+}[] {
+  const results: {
+    revisionId: string;
+    revisionLabel: string;
+    fiscalYear: number;
+    project: BudgetRevisionProject;
+    bill: BudgetRevisionBill | undefined;
+  }[] = [];
+  for (const revision of BUDGET_REVISIONS) {
+    for (const project of revision.projects ?? []) {
+      if (!(project.relatedPromiseIds ?? []).includes(promiseId)) continue;
+      const account = revision.accounts.find((a) => a.accountName === project.accountName) ?? revision.accounts[0];
+      results.push({
+        revisionId: revision.id,
+        revisionLabel: revision.label,
+        fiscalYear: revision.fiscalYear,
+        project,
+        bill: account ? budgetBill(account.billId) : undefined,
+      });
+    }
+  }
+  return results;
+}
+
+/**
+ * Phase274：公約IDを、市民が読んで分かる短い名前にする。
+ * 全ページが読み込む軽量インデックス（mayorPromisesIndex.json）を使い、
+ * 本文を含む mayorPromises.json（約75KB）を財政ページへ持ち込まない。
+ */
+export function promiseLabel(promiseId: string): string {
+  const promise = MAYOR_PROMISES_INDEX.promises.find((p) => p.id === promiseId);
+  if (!promise) return `公約${promiseId}`;
+  const text = promise.promiseText;
+  return text.length > 28 ? `${text.slice(0, 28)}…` : text;
 }
