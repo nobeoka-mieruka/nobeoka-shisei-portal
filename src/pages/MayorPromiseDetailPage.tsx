@@ -24,10 +24,15 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { LastUpdated } from "../components/LastUpdated";
 import { MayorPromiseStatusBadge } from "../components/mayor/MayorPromiseStatusBadge";
 import { MayorPromiseMeasureStatusBadge } from "../components/mayor/MayorPromiseMeasureStatusBadge";
-import { MEASURE_INDICATOR_KIND_LABEL, shiftFiscalYearLabel } from "../lib/mayorPromiseMeasureStatus";
+import {
+  MEASURE_INDICATOR_KIND_DESCRIPTION,
+  MEASURE_INDICATOR_KIND_LABEL,
+  measureIndicatorKindClass,
+  shiftFiscalYearLabel,
+} from "../lib/mayorPromiseMeasureStatus";
 import { GlobeIcon, DocumentIcon, YenIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
-import { formatJapaneseDate } from "../config/site";
+import { formatJapaneseDate, toEraFiscalYearLabel } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import {
   VOTE_DISCLOSURE_CATEGORY_LABELS_JA,
@@ -44,6 +49,7 @@ import {
   linkageToneClass,
   type LinkageDisplay,
 } from "../lib/mayorPromiseLinkage";
+import { budgetProjectsForPromise } from "../lib/budgetRevisions";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
@@ -194,6 +200,7 @@ export function MayorPromiseDetailPage() {
   }
 
   const evidenceDocs = collectEvidenceDocs(promise);
+  const relatedBudgetProjects = budgetProjectsForPromise(promise.id);
   const measuresForPromise = promiseMeasures.filter((m) => m.promiseId === promise.id);
   const category = promisesData.categories.find((c) => c.id === promise.categoryId);
   const relatedBills = (promise.relatedBillVoteIds ?? [])
@@ -405,10 +412,64 @@ export function MayorPromiseDetailPage() {
                                     {v.value.toLocaleString("ja-JP")}
                                     {indicator.unit}
                                   </span>
-                                  <span className="rounded-full bg-surface-variant px-2 py-0.5 text-xs text-on-surface-variant">
+                                  {/* Phase274：実績・予算額・予定・目標・算出値・速報値を必ず文字で区別する。
+                                      色だけに頼らないよう、バッジは文字ラベルを持つ。 */}
+                                  <span
+                                    className={`rounded-full px-2 py-0.5 text-xs font-medium ${measureIndicatorKindClass[v.kind]}`}
+                                  >
                                     {MEASURE_INDICATOR_KIND_LABEL[v.kind]}
                                   </span>
+                                  {v.asOfDate && (
+                                    <span className="text-xs">{formatJapaneseDate(v.asOfDate)}時点</span>
+                                  )}
                                   {v.note && <span className="w-full break-words text-xs">{v.note}</span>}
+                                  {/* 「なぜこの数字？」：値ごとに根拠をその場で開けるようにする。 */}
+                                  <details className="w-full">
+                                    <summary className="cursor-pointer text-xs text-primary underline">根拠を見る</summary>
+                                    <dl className="mt-1 space-y-0.5 rounded bg-surface-container px-2 py-1.5 text-xs">
+                                      <div>
+                                        <dt className="inline font-medium text-on-surface">値：</dt>
+                                        <dd className="inline">
+                                          {v.value.toLocaleString("ja-JP")}
+                                          {indicator.unit}
+                                        </dd>
+                                      </div>
+                                      <div>
+                                        <dt className="inline font-medium text-on-surface">年度：</dt>
+                                        <dd className="inline">
+                                          {v.fiscalYear}
+                                          {v.fiscalYearBasis === "derived" && "（資料に年度の記載が無く、資料の対象年度から補ったもの）"}
+                                        </dd>
+                                      </div>
+                                      <div>
+                                        <dt className="inline font-medium text-on-surface">種類：</dt>
+                                        <dd className="inline">
+                                          {MEASURE_INDICATOR_KIND_LABEL[v.kind]}
+                                          {MEASURE_INDICATOR_KIND_DESCRIPTION[v.kind]}
+                                        </dd>
+                                      </div>
+                                      {v.derivation && (
+                                        <div>
+                                          <dt className="inline font-medium text-on-surface">算出式：</dt>
+                                          <dd className="inline">{v.derivation}</dd>
+                                        </div>
+                                      )}
+                                      <div>
+                                        <dt className="inline font-medium text-on-surface">資料名：</dt>
+                                        <dd className="inline">{m.sourceTitle}</dd>
+                                      </div>
+                                      {(v.sourcePage ?? m.sourcePage) && (
+                                        <div>
+                                          <dt className="inline font-medium text-on-surface">該当ページ：</dt>
+                                          <dd className="inline">{v.sourcePage ?? m.sourcePage}</dd>
+                                        </div>
+                                      )}
+                                      <div>
+                                        <dt className="inline font-medium text-on-surface">資料の基準日：</dt>
+                                        <dd className="inline">{formatJapaneseDate(m.snapshotDate)}</dd>
+                                      </div>
+                                    </dl>
+                                  </details>
                                 </li>
                               ))}
                             </ul>
@@ -416,7 +477,8 @@ export function MayorPromiseDetailPage() {
                         ))}
                       </ul>
                       <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-                        いずれも下記の出典資料に書かれている数値をそのまま分けたものです（当サイトによる合算・推定は行っていません）。「予定」は資料に記載された計画値で、実績ではありません。
+                        いずれも下記の出典資料に書かれている数値をそのまま分けたものです（当サイトによる合算・推定は行っていません）。
+                        「予定（計画値）」「目標値」「予算額」は実績ではありません。
                       </p>
                     </div>
                   )}
@@ -574,6 +636,51 @@ export function MayorPromiseDetailPage() {
       )}
 
       {/* 関連議案・関連一般質問・関連記者会見（ID参照で確認できたもののみ表示） */}
+      {/* Phase274：予算側から公約へ張られた関連（budgetRevisions.json の relatedPromiseIds）を
+          公約側からも辿れるようにする。情報が無い公約ではカード自体を出さない。 */}
+      {relatedBudgetProjects.length > 0 && (
+        <SectionCard title="関連する予算・事業">
+          <ul className="space-y-3">
+            {relatedBudgetProjects.map(({ revisionLabel, fiscalYear, project, bill }) => (
+              <li key={project.id} className="rounded-lg border border-outline-variant p-3">
+                <p className="text-sm font-semibold text-on-surface">{project.name}</p>
+                <dl className="mt-1 space-y-0.5 text-xs leading-relaxed text-on-surface-variant">
+                  <div>
+                    <dt className="inline font-medium text-on-surface">予算：</dt>
+                    <dd className="inline">
+                      {toEraFiscalYearLabel(fiscalYear)} {revisionLabel}
+                      {project.supplementaryThousandYen != null &&
+                        `${project.supplementaryThousandYen.toLocaleString("ja-JP")}千円`}
+                    </dd>
+                  </div>
+                  {project.department && (
+                    <div>
+                      <dt className="inline font-medium text-on-surface">担当課：</dt>
+                      <dd className="inline">{project.department}</dd>
+                    </div>
+                  )}
+                  {bill && (
+                    <div>
+                      <dt className="inline font-medium text-on-surface">議案：</dt>
+                      <dd className="inline">
+                        <Link to={`/bills/votes/${bill.id}`} className={`text-primary underline ${linkClass}`}>
+                          {bill.billNumber ?? bill.billTitle}
+                        </Link>
+                        　議決結果：{bill.result ?? "確認中"}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+            延岡市の予算資料で、この公約の取組みと事業名・対象が一致することを確認できたものだけを載せています。
+            議決結果は、その予算議案全体に対する議会の議決であり、この公約だけを取り出して議決したものではありません。
+          </p>
+        </SectionCard>
+      )}
+
       <SectionCard title="関連する議案・一般質問・記者会見">
         {relatedBills.length > 0 || relatedQuestions.length > 0 || relatedPressConferences.length > 0 ? (
           <ul className="space-y-2 text-sm">
@@ -594,6 +701,7 @@ export function MayorPromiseDetailPage() {
                 </span>
               </li>
             ))}
+            {/* Phase274：議決結果を「議会が公約を認めた」と読まれないようにする注記。 */}
             {relatedQuestions.map((q) => (
               <li key={q.id}>
                 <Link to={`/questions/${q.id}`} className={`text-primary underline ${linkClass}`}>

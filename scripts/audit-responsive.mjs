@@ -76,6 +76,10 @@ const PAGES = [
   { path: "/bills/votes", kind: "index" },
   { path: "/committees", kind: "index" },
   { path: "/finance", kind: "index" },
+  { path: "/finance/budget", kind: "index" },
+  { path: "/elections", kind: "index" },
+  // Phase274：選挙資料（選挙公報の12項目・出典カード）を含む詳細ページ
+  { path: "/elections/election-mayor-2025", kind: "election-detail" },
   { path: "/timeline", kind: "index" },
   { path: "/mayor", kind: "index" },
   { path: "/mayors", kind: "index" },

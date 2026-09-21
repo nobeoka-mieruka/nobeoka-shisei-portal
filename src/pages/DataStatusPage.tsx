@@ -110,6 +110,7 @@ import {
   type PromiseQualityMetric,
 } from "../lib/mayorPromiseDataQuality";
 import { summarizeMeasureIndicators } from "../lib/mayorPromiseIndicators";
+import { MEASURE_INDICATOR_KIND_LABEL } from "../lib/mayorPromiseMeasureStatus";
 import { cityOrganizationSectionByName, cityOrganizationSectionFullName } from "../lib/cityOrganization";
 import {
   hasBudgetData,
@@ -1693,6 +1694,31 @@ export function DataStatusPage() {
             <dt className="text-xs text-on-surface-variant">年度別の値（実績／予定）</dt>
             <dd className="mt-0.5 text-sm font-semibold leading-relaxed text-on-surface">
               実績{promiseIndicatorSummary.resultValueTotal}件／予定{promiseIndicatorSummary.planValueTotal}件
+            </dd>
+          </div>
+          {/* Phase274：実績・予定・予算額・目標などを同じ見た目で並べないため、
+              値の種類ごとの件数と、いつ時点の値かを記録できた割合も出す。 */}
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">値の種類（実績・予定など）</dt>
+            <dd className="mt-0.5 text-sm font-semibold leading-relaxed text-on-surface">
+              {Object.entries(promiseIndicatorSummary.byKind)
+                .map(
+                  ([kind, count]) =>
+                    `${MEASURE_INDICATOR_KIND_LABEL[kind as keyof typeof MEASURE_INDICATOR_KIND_LABEL]}${count}件`,
+                )
+                .join("／")}
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">いつ時点の値かを記録できた値</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promiseIndicatorSummary.asOfDateTotal}／{promiseIndicatorSummary.valueTotal}件
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">年度を当サイトが補った値</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {promiseIndicatorSummary.derivedFiscalYearTotal}件
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
