@@ -89,8 +89,22 @@ console.log("\nPhase171-2：questionCollectionStatus.jsonとの整合（会議�
 
 const questionCollectionStatus = readJson("src/data/questionCollectionStatus.json");
 
-check("questionCollectionStatus.jsonは13会期を対象とし、令和8年6月定例会（2026-06）は会議録照合済み（transcriptAvailable:true）である", () => {
-  assert.equal(questionCollectionStatus.sessions.length, 13, `対象会期数が13件ではありません（${questionCollectionStatus.sessions.length}件）`);
+/**
+ * 対象会期は件数ではなく会期IDの集合で固定する（件数だけだと、別の会期が入れ替わっても気づけない）。
+ * 現議員任期（2023-04-23以降）に閉会した定例会をすべて並べたもの。
+ */
+const EXPECTED_COLLECTION_SESSION_IDS = [
+  "2023-06", "2023-09", "2023-12", "2024-03", "2024-06", "2024-09", "2024-12",
+  "2025-03", "2025-06", "2025-09", "2025-12", "2026-03", "2026-06", "2026-09",
+];
+
+check("questionCollectionStatus.jsonは閉会済みの定例会をすべて対象とし、令和8年6月定例会（2026-06）は会議録照合済み（transcriptAvailable:true）である", () => {
+  const actual = questionCollectionStatus.sessions.map((s) => s.sessionId).sort();
+  assert.deepEqual(
+    actual,
+    [...EXPECTED_COLLECTION_SESSION_IDS].sort(),
+    `対象会期が想定と異なります（${actual.join("、")}）`,
+  );
   const june = questionCollectionStatus.sessions.find((s) => s.sessionId === "2026-06");
   assert.ok(june, "questionCollectionStatus.jsonに2026-06が登録されていません");
   assert.equal(june.sessionTitle, "令和8年6月定例会");
@@ -109,9 +123,18 @@ check("会議録照合済みの会期の質問レコードには、全件に会�
   assert.equal(missing.length, 0, `会議録照合済み会期なのに会議録リンクがない質問が${missing.length}件あります（${missing.map((q) => q.id).join("、")}）`);
 });
 
-check("令和8年9月定例会（2026-09）はquestionCollectionStatus.jsonにまだ登録されていない（会期そのものがまだ完全に終わっていないため、機械集計側の対象外のまま）", () => {
+check("令和8年9月定例会（2026-09）は閉会済みとして登録され、会議録は未公開（予定と確認済みを混ぜていない）", () => {
+  // 会期の閉会は、延岡市議会「第27回延岡市議会（定例会）での議案審議等結果（令和8年9月18日現在）」
+  // （attachment/29070.pdf）で確認済み。会議録本文はまだ公開されていないため、
+  // 会議録ベースの登録件数は0件のままでなければならない（通告書ベースの予定13件を混ぜない）。
   const sept = questionCollectionStatus.sessions.find((s) => s.sessionId === "2026-09");
-  assert.equal(sept, undefined, "questionCollectionStatus.jsonに2026-09が登録されています（想定外の早期追加）");
+  assert.ok(sept, "questionCollectionStatus.jsonに2026-09が登録されていません");
+  assert.equal(sept.sessionTitle, "令和8年9月定例会");
+  assert.equal(sept.transcriptAvailable, false, "2026-09の会議録はまだ公開されていないはずです");
+  assert.equal(sept.status, "transcriptUnavailable", `2026-09のstatusが想定と異なります: ${sept.status}`);
+  assert.equal(sept.registeredSpeakerCount, 0, "会議録が未公開なのに登録質問者数が0件ではありません");
+  assert.equal(sept.registeredQuestionCount, 0, "会議録が未公開なのに登録質問項目数が0件ではありません");
+  assert.equal(sept.expectedSpeakerCount, null, "公式側の質問者数は未確認のためnullのままにしてください");
 });
 
 check("会議録確認済みの会期の質問レコードは、いずれも新規IDではなく質問通告書由来の既存IDのまま更新されている（二重登録していない）", () => {

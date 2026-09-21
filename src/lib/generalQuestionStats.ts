@@ -12,7 +12,8 @@ import { councilSessionScheduleInfo } from "./councilSessionSchedule";
  *
  * 【用語の区別】
  * - 確認済み：councilSpeechSummaries.json（会議録本文を実際に読んで要約・登録した一般質問）。
- *   会議録取得済みの全12会期（TRANSCRIPT_AVAILABLE_SESSION_IDS）を対象とした累計件数。
+ *   会議録を取得済みの会期（questionCollectionStatus.jsonでtranscriptAvailable:trueの会期）を
+ *   対象とした累計件数。会期数はデータから導出するため、ここに数を書かない。
  * - 予定：generalQuestions.json（会議録がまだ公開されていない会期について、
  *   質問通告書＝事前提出された質問予告のみを登録したもの。実際の質疑応答内容の
  *   確認はまだできていない）。会議録が未公開の会期が複数同時に存在する場合（例：

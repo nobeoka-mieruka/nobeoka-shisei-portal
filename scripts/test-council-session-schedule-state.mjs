@@ -220,6 +220,22 @@ function scheduleInputsFromData() {
 
 const dataSessions = scheduleInputsFromData();
 
+/**
+ * 「収録対象へ未登録の会期」の判定ロジックを検証するための入力。
+ *
+ * 実データに未登録の会期があればそれを使う。会議録の公開が進んで全会期が登録済みになると
+ * 実データからは消えてしまうため、その場合は実在する会期の一般質問の予定日をそのまま使い、
+ * 状態だけを未登録（upcoming）にした入力で同じ経路を通す。日付を作り出すことはしない。
+ */
+const upcomingSessionInputs = (() => {
+  const real = dataSessions.filter((s) => s.phase === "upcoming");
+  if (real.length > 0) return real;
+  const withDates = dataSessions.filter((s) => s.firstQuestionDate && s.lastQuestionDate);
+  assert.ok(withDates.length > 0, "一般質問の予定日を持つ会期が実データに1件もありません");
+  const latest = withDates[withDates.length - 1];
+  return [{ ...latest, phase: "upcoming" }];
+})();
+
 check(`generalQuestions.jsonの全会期（${dataSessions.length}会期）が、日程または収録状況から状態を判定できる（「日程未確認」が0件）`, () => {
   const unconfirmed = dataSessions.filter(
     (s) => councilSessionScheduleState(s, "2026-09-05") === "schedule-unconfirmed",
@@ -246,9 +262,7 @@ check("実データの全会期は、today=nullのとき「開催済み」か「
 });
 
 check("収録対象へ未登録の会期は、一般質問の予定日を基準に判定している（会期の開会日・閉会日を推測していない）", () => {
-  const upcoming = dataSessions.filter((s) => s.phase === "upcoming");
-  assert.ok(upcoming.length > 0, "収録対象へ未登録の会期が実データに存在しません");
-  for (const session of upcoming) {
+  for (const session of upcomingSessionInputs) {
     const period = resolveCouncilSessionSchedulePeriod(session);
     assert.ok(period, `${session.sessionName}の日程を解決できません`);
     assert.equal(period.basis, "question-dates", `${session.sessionName}の判定基準が想定外です`);
@@ -264,7 +278,7 @@ check("収録対象へ未登録の会期は、一般質問の予定日を基準�
 });
 
 check("収録対象へ未登録の会期は、日付を進めていくと 開催予定 → 開催中 → 結果確認中 の順に一度ずつ遷移する（逆行・重複がない）", () => {
-  for (const session of dataSessions.filter((s) => s.phase === "upcoming")) {
+  for (const session of upcomingSessionInputs) {
     const period = resolveCouncilSessionSchedulePeriod(session);
     const day = (iso, offset) => {
       const d = new Date(`${iso}T00:00:00Z`);

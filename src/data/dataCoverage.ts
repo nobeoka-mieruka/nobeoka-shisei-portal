@@ -16,8 +16,11 @@ export interface DataCoverageEntry {
 
 export const dataCoverage = {
   generalQuestions: {
+    // ここでいう「一般質問」は質問通告書ベースの予定（generalQuestions.json）のこと。
+    // 会議録本文を確認して登録した分（councilSpeechSummaries.json）とは別の集合なので、
+    // 収録範囲も予定側の会期だけを書く。
     label: "一般質問",
-    scope: "令和8年6月定例会",
+    scope: "令和8年6月・9月定例会（質問通告書に基づく予定。会議録の公開後に内容を確認）",
   },
   billVotes: {
     label: "議案・採決結果",

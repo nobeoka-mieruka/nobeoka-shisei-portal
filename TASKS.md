@@ -18,6 +18,7 @@ DONE 106／BLOCKED 12／READY 0／IN_PROGRESS 0（残差は分割管理のみの
 （市民参加）の新規収録」をDONEとして追加。BLOCKED・READY・IN_PROGRESSの件数に変更なし）
 （2026-09-21・Phase276時点：TASK-195「類似団体比較の将来負担比率の母数明示」をDONEとして追加）
 （2026-09-21・Phase277時点：TASK-196「年度別人口の基準日をそろえる」をDONEとして追加）
+（2026-09-21・Phase278時点：TASK-197「令和8年9月定例会の閉会登録と議案の出典切れ解消」をDONEとして追加）
 ／`### TASK-`見出し総数150（2026-09-21に実データから再集計：DONE 135／BLOCKED 11／READY 0／IN_PROGRESS 0）
 
 READY・IN_PROGRESSともに0件。BLOCKED 11件（2026-09-21再集計。上の「12件」は2026-08-17時点の値）
@@ -10970,3 +10971,71 @@ CLAUDE.md の「未確認と確認した結果0を区別する」「推定順位
 FY2026の基準日を2026-09-01へ戻すと `validate:data` が
 「人口の基準日の月日が年度によって異なります（年度どうしを並べて比較できません）: 2026年度（09-01）」
 を error として検出することを確認した（検出後に元へ戻している）。
+
+### TASK-197 令和8年9月定例会を閉会済みとして登録し、議案の出典切れを解消（Phase278）
+
+状態：DONE（2026-09-21）
+優先度：A（閉会済みの会期を「開催予定または開催中」と表示していたため）
+対象：`src/data/questionCollectionStatus.json`、`src/data/billVotes.json`、`src/data/dataCoverage.ts`、
+`src/lib/generalQuestionStats.ts`、`scripts/validate-data.mjs`、
+`scripts/test-question-notice-lifecycle.mjs`、`scripts/test-council-session-schedule-state.mjs`
+
+#### 1. 令和8年9月定例会が「開催予定」のままだった
+
+`questionCollectionStatus.json` への登録が「会期が終わって収録対象になったか」の判定に使われている
+（`councilSessionPhaseForSessionName`）。令和8年9月定例会が未登録だったため、一般質問ページに
+「次回・開催予定の会期／令和8年9月定例会／開催予定または開催中」と表示されていた。
+
+閉会は一次資料で確認した。延岡市議会「第27回延岡市議会（定例会）での議案審議等結果
+（令和8年9月18日現在）」（attachment/29070.pdf）の本文で、議案29件のうち28件が9月18日に
+議決（人事同意案件を含む）、残る1件が8月28日に議決されていることを確認。
+
+登録内容は次のとおり（このファイルの注記にある定義どおり）。
+
+| 項目 | 値 | 根拠 |
+|---|---|---|
+| status | `transcriptUnavailable` | 会議録ベースの登録が0件のため（注記の定義） |
+| registeredSpeakerCount / QuestionCount | 0 / 0 | `councilSpeechSummaries.json` の実件数を再集計して0件を確認 |
+| expected* | null | 公式側の分母は未確認（推測で埋めない） |
+| transcriptAvailable | false | 会議録検索システムに第27回定例会が未登場 |
+| newsletterAvailable | false | 公式ページ（更新日2026年8月3日）の最新号は第108号（6月定例議会を収録） |
+
+質問通告書ベースの予定13件（質問項目112項目）は `generalQuestions.json` 側のままで、
+「予定」と「確認済み」を足し合わせない設計は崩していない。
+
+結果、一般質問ページの表示が「令和8年9月定例会 開催済み 予定質問13件（13名）」へ変わり、
+ホームの会期数表示も「収録済み13／14会期」になった。
+
+#### 2. 議案第48号の出典が削除済みPDFを指していた
+
+`2026-09-gian-48` だけが `2026-09-results-1`（attachment/28811.pdf）を出典にしていた。
+
+- 旧URL（28811.pdf）は **HTTP 404**、`councilSessions.json` でも `removedPendingReview`
+- 後継（29070.pdf）は HTTP 200 で、ローカル複製 `deliberation-results-02.pdf` と **SHA-256 が一致**（`0c6dc519…`）
+- その1ページ目に「議案第48号 工事請負契約の締結（西階公園陸上競技場フィールド・走路改修工事）
+  原案可決 ８月28日」と記載されていることを本文抽出で直接確認
+- 件名・議決結果・議決日は登録済みの内容と一致するため、**出典の指し先だけ**を差し替えた
+
+`validate-data.mjs` に「公開が終了した定例会資料を出典にしている議案」を error として検出する
+検査を追加。故障注入（48号の出典を旧資料へ戻す）で検出されることを確認した。
+
+#### 3. 収録範囲の表示と古いコメント
+
+- `dataCoverage.generalQuestions.scope` を「令和8年6月・9月定例会（質問通告書に基づく予定…）」へ。
+  ただしこの項目は現在どの画面からも参照されていない（`billVotes` のみ使用中）ため、市民向けの表示は変わらない
+- `generalQuestionStats.ts` の「全12会期」というコメントを、会期数をデータから導出する旨の記述へ
+
+#### 4. 前提が変わったテスト2件の更新
+
+- `test-question-notice-lifecycle.mjs`：会期数のハードコード（13件）を会期IDの集合へ。
+  「2026-09は未登録であること」という検査を「閉会済みとして登録され、会議録は未公開であること」へ
+- `test-council-session-schedule-state.mjs`：未登録会期の判定ロジックの検査が、実データに
+  未登録会期が存在することを前提にしていた。実データに無い場合は実在する会期の予定日をそのまま使い、
+  状態だけを未登録にした入力で同じ経路を通すようにした（日付を作り出してはいない）
+
+#### 確認したが対応不要だったもの
+
+`committeeReportActivity.json` 等の `committeeId: null`（30件）は不具合ではなく**設計どおり**。
+`Committee` 型のコメントに「予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会等、
+会期ごとに議長を除く全議員で構成・設置される臨時の委員会は対象外（委員名簿に個別掲載されないため）」と
+明記されており、`committeeId` も「現行名簿に無い委員会（活動終了した特別委員会等）の場合はnull」と定義されている。

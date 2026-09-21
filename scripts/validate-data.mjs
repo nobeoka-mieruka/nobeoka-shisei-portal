@@ -491,6 +491,8 @@ try {
   councilSessions = readJson("src/data/councilSessions.json");
   const sessionIds = new Set();
   const documentIds = new Set();
+  /** 市が差し替え・削除した資料のID → その状態。議案の出典がここを指していないか確かめる。 */
+  const unpublishedDocumentIds = new Map();
   const usedFilePaths = new Map();
 
   for (const s of councilSessions) {
@@ -543,7 +545,13 @@ try {
       const docTag = `councilSessions.json (${s.id ?? "id不明"} / ${d.id ?? "資料id不明"})`;
       if (isBlank(d.id)) err(docTag, "資料のidが空です");
       else if (documentIds.has(d.id)) err(docTag, `資料IDが重複しています: ${d.id}`);
-      else documentIds.add(d.id);
+      else {
+        documentIds.add(d.id);
+        // 市が差し替え・削除した資料は、後続の議案の出典として残したままにしない。
+        if (d.publicationStatus && d.publicationStatus !== "published") {
+          unpublishedDocumentIds.set(d.id, d.publicationStatus);
+        }
+      }
 
       if (isBlank(d.title)) err(docTag, "資料のtitleが空です");
       if (!VALID_DOCUMENT_CATEGORIES.has(d.category)) err(docTag, `未定義のcategoryです: ${d.category}`);
@@ -602,6 +610,14 @@ try {
     }
     if (b.sourceDocumentId && !documentIds.has(b.sourceDocumentId)) {
       warn(tag, `存在しない定例会資料IDを参照しています: ${b.sourceDocumentId}`);
+    }
+    // 市が差し替えた資料を出典のまま残すと、市民が出典をたどれない（リンク先が404になる）。
+    if (b.sourceDocumentId && unpublishedDocumentIds.has(b.sourceDocumentId)) {
+      err(
+        tag,
+        `公開が終了した定例会資料を出典にしています（${b.sourceDocumentId}：${unpublishedDocumentIds.get(b.sourceDocumentId)}）。` +
+          "市が差し替えた後継資料へ向け直してください。",
+      );
     }
   }
 } catch {
