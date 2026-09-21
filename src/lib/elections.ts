@@ -6,7 +6,7 @@ import membersData from "../data/members.json";
 import formerMembersData from "../data/formerMembers.json";
 import archiveMayorsData from "../data/archiveMayors.json";
 import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
-import type { ElectionResult } from "../types/election";
+import type { ElectionGazetteItem, ElectionResult } from "../types/election";
 import type { CouncilMember, FormerMember } from "../types";
 import type { ArchiveMayor, ArchiveMemberProfile } from "../types/historicalArchive";
 import { findMemberOrFormerLink } from "./councilSpeeches";
@@ -70,3 +70,19 @@ export const ELECTION_SOURCE_HOST_TYPE_LABEL: Record<"official_site" | "third_pa
   third_party_mirror: "外部アーカイブ／ミラー",
   web_archive: "ウェブ保存版（Wayback Machine等）",
 };
+
+/**
+ * Phase273：選挙公報の掲載項目を政策分野ごとにまとめる（資料の並び順を保つ）。
+ * 分野の順序・項目の順序は資料のとおりで、当サイトが並べ替えることはしない。
+ */
+export function groupGazetteItemsByCategory(
+  items: ElectionGazetteItem[],
+): { categoryNumber: number; categoryTitle: string; items: ElectionGazetteItem[] }[] {
+  const groups: { categoryNumber: number; categoryTitle: string; items: ElectionGazetteItem[] }[] = [];
+  for (const item of items) {
+    const existing = groups.find((g) => g.categoryNumber === item.categoryNumber);
+    if (existing) existing.items.push(item);
+    else groups.push({ categoryNumber: item.categoryNumber, categoryTitle: item.categoryTitle, items: [item] });
+  }
+  return groups;
+}
