@@ -72,8 +72,15 @@ export interface SimilarMunicipalityFinanceEntry {
   /** 経常収支比率(%)。 */
   ordinaryBalanceRatioPercent: number | null;
   realDebtServiceRatioPercent: number | null;
-  /** 将来負担比率(%)。算定なしの場合はnull。 */
+  /** 将来負担比率(%)。算定なしの場合はnull（futureBurdenRatioStatusで理由を区別する）。 */
   futureBurdenRatioPercent: number | null;
+  /**
+   * 将来負担比率の取得状況。総務省資料で「-」と表記されている団体は、将来負担額が
+   * 充当可能財源等を下回るため比率が算定されないことを示す「該当なし」であり、
+   * 0%でも未確認でもない。この区別が無いと、比率が算定された団体だけを母数にした
+   * 順位が実態と食い違って見えるため、必ず値とあわせて保持する。
+   */
+  futureBurdenRatioStatus: Extract<SimilarMunicipalityDataStatus, "CONFIRMED" | "NOT_APPLICABLE">;
   /** ラスパイレス指数（職員給与水準の指標、参考値）。 */
   laspeyresIndex: number | null;
   /** 基金残高の内訳（Phase88追加、全団体同一定義）。 */
@@ -89,6 +96,10 @@ export interface SimilarMunicipalityFinanceData {
   classificationCode: string;
   fiscalYear: number;
   note: string;
+  /** 将来負担比率の「該当なし」の意味と、順位の母数の扱いを説明する注記。 */
+  futureBurdenRatioNote: string;
+  /** 将来負担比率を総務省原本と突合した日。 */
+  futureBurdenRatioVerifiedAt: string;
   sourceRefs: {
     sourceUrl: string;
     sourceTitle: string;

@@ -18,6 +18,14 @@ const linkClass =
 
 const fmt = (v: number | null | undefined, unit = "") => (v == null ? "確認中" : `${v.toLocaleString("ja-JP")}${unit}`);
 
+/**
+ * 将来負担比率の表示。総務省資料で「-」と表記されている団体は、将来負担額が充当可能財源等を
+ * 下回るため比率が算定されない「該当なし」であり、0%でも未確認でもない。「確認中」と同じ見た目に
+ * してしまうと、資料を確認できていないかのように読めるため、文字で区別する。
+ */
+const fmtFutureBurden = (m: SimilarMunicipalityFinanceEntry) =>
+  m.futureBurdenRatioStatus === "NOT_APPLICABLE" ? "該当なし" : fmt(m.futureBurdenRatioPercent, "%");
+
 interface IndicatorDef {
   key: string;
   label: string;
@@ -25,6 +33,10 @@ interface IndicatorDef {
   /** 市民向けの一言説明。価値判断（高い＝良い/悪い等）は含めない。 */
   description: string;
   accessor: (m: SimilarMunicipalityFinanceEntry) => number | null | undefined;
+  /** 一次資料で「該当なし」と明記されている団体の判定（順位の母数から外れる理由の説明用）。 */
+  isNotApplicable?: (m: SimilarMunicipalityFinanceEntry) => boolean;
+  /** 順位の母数が59団体でない指標について、その理由を市民向けに説明する文。 */
+  denominatorNote?: string;
 }
 
 const INDICATORS: IndicatorDef[] = [
@@ -55,6 +67,9 @@ const INDICATORS: IndicatorDef[] = [
     unit: "%",
     description: "借金の残高や将来支払う可能性のある負担が、収入に対してどれくらいの規模かを示す割合です。算定方法上、将来の負担より備えの方が大きい場合は「算定なし」またはマイナスの値になることがあります。",
     accessor: (m) => m.futureBurdenRatioPercent,
+    isNotApplicable: (m) => m.futureBurdenRatioStatus === "NOT_APPLICABLE",
+    denominatorNote:
+      "これらの団体は、将来の負担より備えの方が大きく、比率そのものが算定されていません（総務省の資料では「-」と表記されます）。0%という意味でも、当サイトが確認できていないという意味でもないため、順位の母数には含めていません。",
   },
   {
     key: "population",
@@ -87,6 +102,7 @@ const CSV_COLUMNS: CsvColumn<SimilarMunicipalityFinanceEntry>[] = [
   { header: "経常収支比率(%)", value: (m) => m.ordinaryBalanceRatioPercent },
   { header: "実質公債費比率(%)", value: (m) => m.realDebtServiceRatioPercent },
   { header: "将来負担比率(%)", value: (m) => m.futureBurdenRatioPercent },
+  { header: "将来負担比率の状況", value: (m) => (m.futureBurdenRatioStatus === "NOT_APPLICABLE" ? "該当なし（算定されていない）" : "算定あり") },
   { header: "基金残高(円)", value: (m) => m.fundBalance?.totalFundBalanceYen ?? null },
   { header: "基金残高・住民1人当たり(円)", value: (m) => m.fundBalance?.perCapitaTotalFundBalanceYen ?? null },
 ];
@@ -128,8 +144,8 @@ export function CompareSimilarMunicipalitiesPage() {
 
       <SectionCard title="指標ごとの延岡市の位置">
         <div className="space-y-4">
-          {INDICATORS.map(({ key, label, unit, description, accessor }) => {
-            const stats = computeStatsByAccessor(accessor);
+          {INDICATORS.map(({ key, label, unit, description, accessor, isNotApplicable, denominatorNote }) => {
+            const stats = computeStatsByAccessor(accessor, isNotApplicable);
             return (
               <div key={key} className="rounded-lg bg-surface-container-low p-3">
                 <p className="text-sm font-semibold text-on-surface">{label}</p>
@@ -142,8 +158,11 @@ export function CompareSimilarMunicipalitiesPage() {
                   <StatCard label="最低" value={fmt(stats.min, unit)} compact />
                 </div>
                 {stats.nobeokaRankFromLowest != null && (
-                  <p className="mt-2 text-xs text-on-surface-variant">
-                    {stats.count}団体中、値が小さい方から{stats.nobeokaRankFromLowest}番目（同値の場合は同順位）。
+                  <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                    {stats.count === similarMunicipalityFinance.municipalities.length
+                      ? `${stats.count}団体中、値が小さい方から${stats.nobeokaRankFromLowest}番目（同値の場合は同順位）。`
+                      : `${similarMunicipalityFinance.municipalities.length}団体のうち、この指標の値が算定されている${stats.count}団体の中では、値が小さい方から${stats.nobeokaRankFromLowest}番目（同値の場合は同順位）。`}
+                    {stats.notApplicableCount > 0 && denominatorNote ? `残る${stats.notApplicableCount}団体は「該当なし」です。${denominatorNote}` : ""}
                   </p>
                 )}
               </div>
@@ -207,7 +226,7 @@ export function CompareSimilarMunicipalitiesPage() {
                   <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.financialStrengthIndex)}</td>
                   <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.ordinaryBalanceRatioPercent, "%")}</td>
                   <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.realDebtServiceRatioPercent, "%")}</td>
-                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(nobeoka.futureBurdenRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmtFutureBurden(nobeoka)}</td>
                   <td className="whitespace-nowrap py-2 pr-2 text-right">
                     {nobeoka.fundBalance?.totalFundBalanceYen != null
                       ? `${Math.round(nobeoka.fundBalance.totalFundBalanceYen / 1e8).toLocaleString("ja-JP")}億円`
@@ -225,7 +244,7 @@ export function CompareSimilarMunicipalitiesPage() {
                   <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.financialStrengthIndex)}</td>
                   <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.ordinaryBalanceRatioPercent, "%")}</td>
                   <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.realDebtServiceRatioPercent, "%")}</td>
-                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmt(m.futureBurdenRatioPercent, "%")}</td>
+                  <td className="whitespace-nowrap py-2 pr-2 text-right">{fmtFutureBurden(m)}</td>
                   <td className="whitespace-nowrap py-2 pr-2 text-right">
                     {m.fundBalance?.totalFundBalanceYen != null
                       ? `${Math.round(m.fundBalance.totalFundBalanceYen / 1e8).toLocaleString("ja-JP")}億円`

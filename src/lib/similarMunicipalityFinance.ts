@@ -19,6 +19,12 @@ export interface FieldStats {
   nobeokaValue: number | null;
   /** 値を確認できた自治体の中での延岡市の順位（1=最小値）。値が同じ場合は同順位。未確認の場合はnull。 */
   nobeokaRankFromLowest: number | null;
+  /**
+   * 「該当なし」として母数から外した自治体数。
+   * 将来負担比率のように、一次資料で「該当なし」と明記されている団体がある指標では、
+   * 順位の母数が59団体より小さくなる。その事実を画面に明示するために数えておく。
+   */
+  notApplicableCount: number;
 }
 
 /**
@@ -29,8 +35,17 @@ export function computeFieldStats(field: NumericField): FieldStats {
   return computeStatsByAccessor((m) => m[field] as number | null);
 }
 
-/** フィールド名ではなく任意の抽出関数で統計値を算出する（基金残高等のネストしたフィールド用）。 */
-export function computeStatsByAccessor(accessor: (m: SimilarMunicipalityFinanceEntry) => number | null | undefined): FieldStats {
+/**
+ * フィールド名ではなく任意の抽出関数で統計値を算出する（基金残高等のネストしたフィールド用）。
+ *
+ * isNotApplicable を渡すと、一次資料で「該当なし」と明記されている団体を数え上げる。
+ * 値そのものは元から null なので算出結果は変わらないが、「母数が59団体ではない」ことを
+ * 画面で説明できるようにする。該当なしの団体に当サイトの判断で0等を補うことはしない。
+ */
+export function computeStatsByAccessor(
+  accessor: (m: SimilarMunicipalityFinanceEntry) => number | null | undefined,
+  isNotApplicable?: (m: SimilarMunicipalityFinanceEntry) => boolean,
+): FieldStats {
   const values = similarMunicipalityFinance.municipalities
     .map((m) => accessor(m))
     .filter((v): v is number => typeof v === "number");
@@ -52,8 +67,13 @@ export function computeStatsByAccessor(accessor: (m: SimilarMunicipalityFinanceE
     nobeokaRankFromLowest = sorted.filter((v) => v < nobeokaValue).length + 1;
   }
 
+  const notApplicableCount = isNotApplicable
+    ? similarMunicipalityFinance.municipalities.filter((m) => isNotApplicable(m)).length
+    : 0;
+
   return {
     count: sorted.length,
+    notApplicableCount,
     min: sorted.length ? sorted[0] : null,
     max: sorted.length ? sorted[sorted.length - 1] : null,
     median,

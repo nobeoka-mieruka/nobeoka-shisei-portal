@@ -1047,6 +1047,17 @@ try {
     if (m.futureBurdenRatioPercent != null && typeof m.futureBurdenRatioPercent !== "number") {
       err(mtag, `futureBurdenRatioPercentが数値ではありません: ${m.futureBurdenRatioPercent}`);
     }
+    // 将来負担比率は、原本で「-」の団体（＝将来負担額が充当可能財源等を下回り算定されない）と、
+    // 単に未取得の団体とを取り違えると、順位の母数が実態と食い違って見える。必ず区別して持つ。
+    if (m.futureBurdenRatioStatus !== "CONFIRMED" && m.futureBurdenRatioStatus !== "NOT_APPLICABLE") {
+      err(mtag, `futureBurdenRatioStatusはCONFIRMEDかNOT_APPLICABLEにしてください: ${m.futureBurdenRatioStatus}`);
+    }
+    if (m.futureBurdenRatioStatus === "NOT_APPLICABLE" && m.futureBurdenRatioPercent != null) {
+      err(mtag, `将来負担比率が「該当なし」なのに値が入っています: ${m.futureBurdenRatioPercent}`);
+    }
+    if (m.futureBurdenRatioStatus === "CONFIRMED" && m.futureBurdenRatioPercent == null) {
+      err(mtag, "将来負担比率が「算定あり」なのに値がありません");
+    }
     if (m.fundBalance != null) {
       const ftag = `${mtag} / fundBalance`;
       if (isBlank(m.fundBalance.accountType)) err(ftag, "accountTypeが空です（総額／一般会計／全会計等の区分を明記してください）");
@@ -1062,6 +1073,12 @@ try {
   }
   if (!Array.isArray(simFin.sourceRefs) || simFin.sourceRefs.length === 0) {
     err(tag, "sourceRefsが空です（出典なしのデータは登録しないでください）");
+  }
+  if (isBlank(simFin.futureBurdenRatioNote)) {
+    err(tag, "futureBurdenRatioNoteが空です（「該当なし」の意味と順位の母数の扱いを必ず説明してください）");
+  }
+  if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(simFin.futureBurdenRatioVerifiedAt ?? "")) {
+    err(tag, `futureBurdenRatioVerifiedAtが日付ではありません: ${simFin.futureBurdenRatioVerifiedAt}`);
   }
 } catch (e) {
   if (e?.code === "ENOENT") warn("similarMunicipalityFinanceComparison.json", "読み込めませんでした（存在しない場合はスキップ）");
