@@ -2552,6 +2552,38 @@ try {
       }
     }
   }
+
+  // 年度別の一覧で人口を並べるため、基準日の月日は全年度でそろっている必要がある。
+  // 出典の「現住人口及び世帯数の推移」は月ごとの一覧なので、1年度だけ別の月から取ると
+  // 減少幅が実際より大きく（または小さく）見える。そろっていない年度をここで検出する。
+  {
+    const withPopulation = archiveFiscalYears.filter((e) => e.population?.referenceDate);
+    const byMonthDay = new Map();
+    for (const e of withPopulation) {
+      const monthDay = String(e.population.referenceDate).slice(5);
+      if (!byMonthDay.has(monthDay)) byMonthDay.set(monthDay, []);
+      byMonthDay.get(monthDay).push(e.fiscalYear);
+    }
+    if (byMonthDay.size > 1) {
+      const [, majorityYears] = [...byMonthDay.entries()].sort((a, b) => b[1].length - a[1].length)[0];
+      const odd = [...byMonthDay.entries()]
+        .filter(([, years]) => years !== majorityYears)
+        .map(([monthDay, years]) => `${years.join("、")}年度（${monthDay}）`);
+      err(
+        "archiveFiscalYears.json",
+        `人口の基準日の月日が年度によって異なります（年度どうしを並べて比較できません）: ${odd.join(" / ")}`,
+      );
+    }
+    for (const e of withPopulation) {
+      const year = Number(String(e.population.referenceDate).slice(0, 4));
+      if (year !== e.fiscalYear) {
+        err(
+          `archiveFiscalYears.json (FY${e.fiscalYear}) / population`,
+          `referenceDateの年(${year})が年度(${e.fiscalYear})と一致しません: ${e.population.referenceDate}`,
+        );
+      }
+    }
+  }
 } catch (e) {
   if (e?.code === "ENOENT") warn("archiveFiscalYears.json", "読み込めませんでした（存在しない場合はスキップ）");
   else throw e;

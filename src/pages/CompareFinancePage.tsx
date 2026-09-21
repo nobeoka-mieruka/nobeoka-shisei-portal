@@ -13,6 +13,7 @@ import { FinanceMetricSection } from "../components/finance/FinanceMetricSection
 import { ChartBarIcon } from "../components/icons";
 import { GlossaryNote } from "../components/GlossaryNote";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { formatOkuYenOrConfirming, fiscalYearLabel, sortedFiscalYears } from "../lib/archiveFinance";
 import { formatSoundnessValue } from "../lib/financeSoundness";
@@ -133,6 +134,12 @@ export function CompareFinancePage() {
                   align: "right",
                   render: (y) => (y.population?.population != null ? `${y.population.population.toLocaleString("ja-JP")}人` : "確認中"),
                 },
+                {
+                  // 人口は出典が月ごとの一覧なので、どの日の値かで数字が変わる。
+                  // 年度どうしを並べる表では、基準日を数字のそばに置いて取り違えを防ぐ。
+                  header: "人口の基準日",
+                  render: (y) => (y.population?.referenceDate ? formatJapaneseDate(y.population.referenceDate) : "確認中"),
+                },
                 { header: "当初予算", align: "right", render: (y) => formatOkuYenOrConfirming(y.budget?.generalAccountInitialBudgetYen) },
                 { header: "補正後予算", align: "right", render: (y) => formatOkuYenOrConfirming(y.budget?.generalAccountFinalBudgetYen) },
                 { header: "決算額", align: "right", render: (y) => formatOkuYenOrConfirming(y.budget?.generalAccountSettlementYen) },
@@ -214,10 +221,14 @@ export function CompareFinancePage() {
                   },
                 },
                 {
-                  header: "分母（人口・年度）",
+                  header: "分母（人口・基準日）",
                   align: "right",
                   render: (y) =>
-                    y.population?.population != null ? `${y.population.population.toLocaleString("ja-JP")}人（${fiscalYearLabel(y.fiscalYear)}）` : "確認中",
+                    y.population?.population != null
+                      ? `${y.population.population.toLocaleString("ja-JP")}人（${fiscalYearLabel(y.fiscalYear)}／${
+                          y.population.referenceDate ? formatJapaneseDate(y.population.referenceDate) : "基準日確認中"
+                        }）`
+                      : "確認中",
                 },
               ]}
             />

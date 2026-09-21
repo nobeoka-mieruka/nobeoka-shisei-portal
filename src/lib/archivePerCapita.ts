@@ -13,6 +13,8 @@ export interface PerCapitaResult {
   denominatorLabel: string;
   denominatorPopulation: number;
   populationFiscalYear: number;
+  /** 分母に使った人口の基準日（YYYY-MM-DD）。出典が月ごとの一覧のため、どの日の値かで結果が変わる。 */
+  populationReferenceDate: string | null;
   rounding: string;
   /** 当サイトが算出した値であり、元資料に掲載された値そのものではないことを示すフラグ。常にtrue。 */
   isCalculated: true;
@@ -41,6 +43,7 @@ export function computePerCapitaYen(
     denominatorLabel: "人口",
     denominatorPopulation: population,
     populationFiscalYear: populationYear.fiscalYear,
+    populationReferenceDate: populationYear.population?.referenceDate ?? null,
     rounding: "円未満四捨五入",
     isCalculated: true,
     sourceRefs: [...amountSourceRefs, ...(populationYear.population?.sourceRefs ?? [])],
@@ -53,5 +56,8 @@ export function formatPerCapitaYen(value: number): string {
 
 /** 算式・分子・分母・使用した人口年度・丸め方・算出値である旨をまとめた1行の説明文を作る。 */
 export function describePerCapita(result: PerCapitaResult, label: string): string {
-  return `${label}：${formatPerCapitaYen(result.value)}（${result.formula}＝${result.numeratorYen.toLocaleString("ja-JP")}円÷${result.denominatorPopulation.toLocaleString("ja-JP")}人〔${result.populationFiscalYear}年度人口〕、${result.rounding}、当サイトによる算出値）`;
+  const denominator = result.populationReferenceDate
+    ? `${result.populationFiscalYear}年度人口・${result.populationReferenceDate}現在〕`
+    : `${result.populationFiscalYear}年度人口〕`;
+  return `${label}：${formatPerCapitaYen(result.value)}（${result.formula}＝${result.numeratorYen.toLocaleString("ja-JP")}円÷${result.denominatorPopulation.toLocaleString("ja-JP")}人〔${denominator}、${result.rounding}、当サイトによる算出値）`;
 }
