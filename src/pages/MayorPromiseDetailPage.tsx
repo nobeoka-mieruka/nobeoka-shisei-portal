@@ -36,7 +36,7 @@ import {
   classifyVoteMethod,
   publicBills,
 } from "../lib/billVotes";
-import { MAYOR_PROMISE_LEVELS } from "../lib/mayorPromiseTerms";
+import { MAYOR_PROMISE_LEVELS, formatGazetteItemLabel } from "../lib/mayorPromiseTerms";
 import {
   classifyPromiseBudgetLinkage,
   classifyPromiseBillLinkage,
@@ -240,6 +240,75 @@ export function MayorPromiseDetailPage() {
       {/* 公約原文 */}
       <SectionCard title="公約原文">
         <p className="text-sm leading-relaxed text-on-surface">{promise.promiseText}</p>
+        {/* Phase273：「この公約文はどこから来たのか」を本文のすぐ下に示す。
+            現況や予算の根拠（根拠資料一覧）とは別に、本文だけの出どころを扱う。
+            資料の見出しと文言が違う場合は、隠さずその違いも示す。 */}
+        {promise.promiseTextSource && (
+          <div className="mt-3 rounded-lg bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
+            <p className="text-sm font-medium text-on-surface">この公約はどこから？</p>
+            {(() => {
+              const source = promise.promiseTextSource;
+              const doc = promisesData.documents.find((d) => d.key === source.documentKey);
+              const gazetteDoc = source.electionGazette
+                ? promisesData.documents.find((d) => d.key === source.electionGazette?.documentKey)
+                : undefined;
+              return (
+                <>
+                  <p className="mt-1.5">
+                    <span className="font-medium text-on-surface">市の公表資料：</span>
+                    {doc ? (
+                      <a href={doc.url} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
+                        {doc.label}
+                      </a>
+                    ) : (
+                      UNREGISTERED
+                    )}
+                    {source.page && `（${source.page}）`}
+                  </p>
+                  <p className="mt-1">
+                    {source.match === "verbatim"
+                      ? "この資料の見出しと、上の公約原文は一字一句同じです。"
+                      : "この資料の見出しと、上の公約原文には次の違いがあります。当サイトでは、どちらが本来の文言か確定できないため、原文を書き換えていません。"}
+                  </p>
+                  {source.match !== "verbatim" && source.sourceHeading && (
+                    <p className="mt-1 rounded bg-surface-container px-2 py-1.5">
+                      <span className="font-medium text-on-surface">資料の見出し：</span>
+                      {source.sourceHeading}
+                      {source.differenceNote && <span className="mt-0.5 block">{source.differenceNote}</span>}
+                    </p>
+                  )}
+                  {source.electionGazette && (
+                    <p className="mt-1.5">
+                      <span className="font-medium text-on-surface">選挙公報：</span>
+                      {gazetteDoc ? (
+                        <a
+                          href={gazetteDoc.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`text-primary underline ${linkClass}`}
+                        >
+                          令和7年7月20日執行 延岡市長選挙公報
+                        </a>
+                      ) : (
+                        "令和7年7月20日執行 延岡市長選挙公報"
+                      )}
+                      の
+                      {formatGazetteItemLabel(source.electionGazette.itemId)}
+                      {source.electionGazette.relation === "exact" ? "にほぼ直接対応します。" : "の一部に対応します。"}
+                      {source.electionGazette.note && <span className="mt-0.5 block">{source.electionGazette.note}</span>}
+                      <Link to="/elections/election-mayor-2025" className={`mt-0.5 block font-medium text-primary underline ${linkClass}`}>
+                        2025年延岡市長選挙の資料を見る
+                      </Link>
+                    </p>
+                  )}
+                  <p className="mt-1.5">
+                    確認日：{formatJapaneseDate(source.confirmedAt)}。選挙のときの資料と、就任後に市が公表している資料は別のものです。当サイトは、両者の文言を自動的に同じものとして扱ってはいません。
+                  </p>
+                </>
+              );
+            })()}
+          </div>
+        )}
       </SectionCard>
 
       {/* 市民向け概要 */}

@@ -82,6 +82,12 @@ export interface MayorPromiseDataQuality {
   metrics: {
     publication: PromiseQualityMetric;
     cityOfficialSource: PromiseQualityMetric;
+    /** 公約文そのものの出どころを記録できている割合（現況・予算の根拠とは別軸）。 */
+    promiseTextSource: PromiseQualityMetric;
+    /** 公約文が市の公表資料の見出しと一字一句同じ割合。 */
+    promiseTextVerbatim: PromiseQualityMetric;
+    /** 選挙公報のどの項目に対応するかを確認できた割合。 */
+    electionGazetteMapped: PromiseQualityMetric;
     changeHistory: PromiseQualityMetric;
     fiscalYear: PromiseQualityMetric;
     judgementNote: PromiseQualityMetric;
@@ -209,6 +215,25 @@ export function computeMayorPromiseDataQuality(input: {
       "個別公約のうち、どの年度の取組みかを示す対象年度付きの個別施策が1件以上紐付いているものの割合です。",
       promises,
       (p) => (measuresByPromiseId.get(p.id) ?? []).some((m) => !isBlank(m.fiscalYear)),
+    ),
+    // Phase273：公約本文そのものの出どころが記録されているか。現況や予算の根拠とは別軸。
+    promiseTextSource: buildMetric(
+      "公約本文の出どころの記録率",
+      "個別公約のうち、その公約文が延岡市のどの公表資料のどこに載っている文言かを記録しているものの割合です。現況や予算の根拠とは別に数えています。",
+      promises,
+      (p) => p.promiseTextSource != null && !isBlank(p.promiseTextSource.documentKey),
+    ),
+    promiseTextVerbatim: buildMetric(
+      "公約本文が資料と一字一句同じもの",
+      "個別公約のうち、当サイトが掲載している公約文が、市の公表資料の見出しと一字一句同じものの割合です。違いがある場合は詳細ページに資料側の文言を併記しています。",
+      promises,
+      (p) => p.promiseTextSource?.match === "verbatim",
+    ),
+    electionGazetteMapped: buildMetric(
+      "選挙公報との対応が確認できたもの",
+      "個別公約のうち、令和7年7月20日執行の延岡市長選挙公報のどの項目に対応するかを確認できたものの割合です。文言が大きく異なるものは、無理に対応づけていません。",
+      promises,
+      (p) => p.promiseTextSource?.electionGazette != null,
     ),
     judgementNote: buildMetric(
       "判断根拠の記録率",
