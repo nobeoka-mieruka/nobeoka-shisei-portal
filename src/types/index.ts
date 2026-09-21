@@ -927,6 +927,44 @@ export interface MayorPromiseCandidateEvidence {
   notes?: string;
 }
 
+/**
+ * Phase273：公約本文（promiseText）が、どの資料のどこに載っている文言なのかの記録。
+ *
+ * 従来 evidenceItems は「公約本文・現況・予算のどれの根拠か」を区別せず1つの配列に
+ * まとめていたため、市民から見て「この公約文はどこから来たのか」が分からなかった。
+ * この欄は本文の出どころだけを指す。現況や予算の根拠は従来どおり evidenceItems に置く。
+ *
+ * 当サイト掲載本文は、資料の見出しと一字一句同じとは限らない（表記ゆれや、
+ * 市の資料と市長本人の公表資料で語が異なる箇所がある）。その差異を隠さず match と
+ * sourceHeading に記録し、本文そのものは推測で書き換えない。
+ */
+export interface MayorPromiseTextSource {
+  /** MayorPromiseDocument.key（本文が載っている資料）。 */
+  documentKey: string;
+  /** 資料内のページ（例："p.4"）。 */
+  page?: string;
+  /** "verbatim"＝資料の見出しと一字一句同じ。"minor_difference"＝表記や語に違いがある。 */
+  match: "verbatim" | "minor_difference";
+  /** 違いがある場合の、資料側の見出し原文。 */
+  sourceHeading?: string;
+  /** 違いの説明。 */
+  differenceNote?: string;
+  /** 対応が確認できた選挙公報の項目（確認できた公約のみ）。 */
+  electionGazette?: {
+    /** electionResults.json の出典ID（例："election-mayor-2025-koho"）。 */
+    sourceId: string;
+    /** MayorPromiseDocument.key（資料一覧側の参照）。 */
+    documentKey: string;
+    /** 選挙公報の項目ID（例："koho-2025-p2-2"）。 */
+    itemId: string;
+    /** "exact"＝ほぼ直接対応、"partial"＝公報項目の一部に対応。 */
+    relation: "exact" | "partial";
+    note?: string;
+  };
+  /** ISO形式。この対応を確認した日。 */
+  confirmedAt: string;
+}
+
 export interface MayorPromiseItem {
   id: string;
   categoryId: string;
@@ -943,6 +981,11 @@ export interface MayorPromiseItem {
   evidenceItems: MayorPromiseEvidenceRef[];
   /** 情報の出所区分（例：延岡市公式資料／市長本人の公表資料）。区別のためのタグ。 */
   sources: string[];
+  /**
+   * Phase273：公約本文そのものの出どころ。
+   * evidenceItems（現況・予算・議案を含む根拠資料の一覧）とは別に、本文だけの根拠を持つ。
+   */
+  promiseTextSource?: MayorPromiseTextSource;
   /**
    * 関連予算。個別事業ごとの予算額を資料内で特定できた場合はその内容を、
    * 特定できない場合は「確認中」を設定する（推定はしない）。

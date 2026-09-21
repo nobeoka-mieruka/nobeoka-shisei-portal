@@ -744,6 +744,34 @@ try {
         }
       }
     }
+    // Phase273：公約本文の出どころ（promiseTextSource）の検証。
+    // 「資料と一字一句同じ」と宣言しているのに差異の説明が入っている、といった
+    // 食い違いを機械的に止める。資料keyの実在も確認する。
+    const pts = p.promiseTextSource;
+    if (pts != null) {
+      const sTag = `${tag} promiseTextSource`;
+      if (isBlank(pts.documentKey)) err(sTag, "documentKey（本文が載っている資料）が空です");
+      else if (!documentKeys.has(pts.documentKey)) err(sTag, `存在しない資料keyを参照しています: ${pts.documentKey}`);
+      if (!["verbatim", "minor_difference"].includes(pts.match))
+        err(sTag, `matchはverbatimかminor_differenceのいずれかです: ${pts.match}`);
+      if (pts.match === "verbatim" && (!isBlank(pts.sourceHeading) || !isBlank(pts.differenceNote)))
+        err(sTag, "一字一句同じ（verbatim）と宣言しているのに、資料側の見出しや差異の説明が入っています");
+      if (pts.match === "minor_difference" && isBlank(pts.sourceHeading))
+        err(sTag, "違いがある（minor_difference）場合は、資料側の見出し原文（sourceHeading）を記録してください");
+      if (pts.match === "minor_difference" && pts.sourceHeading === p.promiseText)
+        err(sTag, "資料側の見出しと本文が同一なのにminor_differenceになっています");
+      if (isBlank(pts.confirmedAt) || !DATE_RE.test(pts.confirmedAt))
+        err(sTag, `confirmedAtの形式が不正です: ${pts.confirmedAt}`);
+      const gazette = pts.electionGazette;
+      if (gazette != null) {
+        if (isBlank(gazette.sourceId)) err(sTag, "選挙公報のsourceIdが空です");
+        if (isBlank(gazette.itemId)) err(sTag, "選挙公報の項目ID（itemId）が空です");
+        if (!["exact", "partial"].includes(gazette.relation))
+          err(sTag, `選挙公報との対応区分はexactかpartialのいずれかです: ${gazette.relation}`);
+        if (isBlank(gazette.documentKey) || !documentKeys.has(gazette.documentKey))
+          err(sTag, `選挙公報の資料keyが資料一覧にありません: ${gazette.documentKey}`);
+      }
+    }
     checkTrustLevel({ err }, p.trustLevel, tag);
   }
 
@@ -4583,6 +4611,26 @@ try {
         err(rtag, "third_party_mirrorの場合はretrievedFrom（取得元の説明）を設定してください");
       }
       checkTrustLevel({ err }, ref.trustLevel, rtag);
+      // Phase273：選挙公報の掲載内容（原文）の検証。原文を要約・改変しないための最低限の形式検査。
+      const gazetteItemIds = new Set();
+      for (const item of ref.gazetteItems ?? []) {
+        const gtag = `${rtag} item=${item.itemId ?? "id不明"}`;
+        if (isBlank(item.itemId)) err(gtag, "掲載項目のitemIdが空です");
+        else if (gazetteItemIds.has(item.itemId)) err(gtag, `掲載項目のitemIdが重複しています: ${item.itemId}`);
+        else gazetteItemIds.add(item.itemId);
+        if (isBlank(item.text)) err(gtag, "掲載項目の原文（text）が空です");
+        if (isBlank(item.categoryTitle)) err(gtag, "掲載項目の政策分野名が空です");
+        if (isBlank(item.candidateName)) err(gtag, "掲載項目の候補者名が空です");
+        if (!Number.isInteger(item.categoryNumber) || item.categoryNumber < 1)
+          err(gtag, `categoryNumberは1以上の整数にしてください: ${item.categoryNumber}`);
+        if (!Number.isInteger(item.itemNumber) || item.itemNumber < 1)
+          err(gtag, `itemNumberは1以上の整数にしてください: ${item.itemNumber}`);
+        if (item.registrationNumber != null && registrationNumbers.size > 0 && !registrationNumbers.has(item.registrationNumber))
+          err(gtag, `掲載項目の届出番号が候補者一覧に存在しません: ${item.registrationNumber}`);
+      }
+      if ((ref.gazetteItems ?? []).length > 0 && ref.transcription == null) {
+        err(rtag, "掲載内容を登録する場合は、transcription（転記方法の記録）も設定してください");
+      }
       for (const placement of ref.candidatePlacements ?? []) {
         const ptag = `${rtag} placement=${placement.candidateName ?? "氏名不明"}`;
         if (isBlank(placement.candidateName)) err(ptag, "candidatePlacementsのcandidateNameが空です");

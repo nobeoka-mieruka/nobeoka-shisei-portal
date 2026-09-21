@@ -1,0 +1,311 @@
+{
+  "_comment": "Phase273：市長公約の変更禁止項目のスナップショット。scripts/test-mayor-promise-protection.mjs が現行データと突き合わせる。公約本文・ID・件数・指標の値を正当な理由で変更した場合のみ、scripts/generate-mayor-promise-protection-snapshot.mjs で更新すること。",
+  "generatedAt": "2026-09-21",
+  "categoryCount": 4,
+  "promiseCount": 14,
+  "promises": [
+    {
+      "id": "1-1",
+      "categoryId": "p1",
+      "promiseText": "家庭環境に関わらず、すべての子どもが延岡の自然体験に参加できる仕組みを整えます。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "1-2",
+      "categoryId": "p1",
+      "promiseText": "子どもひとりひとりの理解度に合わせた学びを実現します。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "1-3",
+      "categoryId": "p1",
+      "promiseText": "市役所に「こども未来部」を設置し子育て支援を強化します。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "2-1",
+      "categoryId": "p2",
+      "promiseText": "地域商社を設立し、延岡の優れた農林水産物の販売強化を行います。",
+      "statusLabel": "検討中"
+    },
+    {
+      "id": "2-2",
+      "categoryId": "p2",
+      "promiseText": "愛宕山の魅力をさらに高めるカフェを誘致し、市民が集う拠点づくりと観光振興を図ります。",
+      "statusLabel": "検討中"
+    },
+    {
+      "id": "2-3",
+      "categoryId": "p2",
+      "promiseText": "アスリートタウン延岡アリーナや西階野球場を核に、スポーツ合宿・大会の誘致を拡大します。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "3-1",
+      "categoryId": "p3",
+      "promiseText": "診療所やクリニックの事業承継を支援し、地域の身近な医療を守ります。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "3-2",
+      "categoryId": "p3",
+      "promiseText": "津波対策と福祉避難体制を強化し、避難所環境の質を高めることで、市民の命を守ります。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "3-3",
+      "categoryId": "p3",
+      "promiseText": "豊富な経験を持つシニア世代が地域で力を発揮できる仕組みを整えます。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "4-1",
+      "categoryId": "p4",
+      "promiseText": "若手職員によるプロジェクトチームを発足します。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "4-2",
+      "categoryId": "p4",
+      "promiseText": "民間人材と市職員がチームを組む仕組みをつくり、新たな政策創出を実現します。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "4-3",
+      "categoryId": "p4",
+      "promiseText": "市民が身近な場所で気軽に悩みを相談できる体制を整えます。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "4-4",
+      "categoryId": "p4",
+      "promiseText": "北方・北浦・北川・島浦の支所に地域活性化専門の職員を配置し、個性ある地域づくりを推進します。",
+      "statusLabel": "進行中"
+    },
+    {
+      "id": "4-5",
+      "categoryId": "p4",
+      "promiseText": "職員の多様な働き方を推進します。",
+      "statusLabel": "進行中"
+    }
+  ],
+  "measureCount": 33,
+  "indicatorValues": [
+    {
+      "measureId": "1-1-a",
+      "indicatorId": "1-1-a-1",
+      "label": "自然体験活動の実施件数",
+      "unit": "件",
+      "fiscalYear": "令和7年度",
+      "value": 2,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-a",
+      "indicatorId": "1-1-a-1",
+      "label": "自然体験活動の実施件数",
+      "unit": "件",
+      "fiscalYear": "令和8年度",
+      "value": 5,
+      "kind": "plan"
+    },
+    {
+      "measureId": "1-1-b",
+      "indicatorId": "1-1-b-1",
+      "label": "はらはらわくわくふるさと体験事業（番外編）の実施回数",
+      "unit": "回",
+      "fiscalYear": "令和7年度",
+      "value": 2,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-b",
+      "indicatorId": "1-1-b-1",
+      "label": "はらはらわくわくふるさと体験事業（番外編）の実施回数",
+      "unit": "回",
+      "fiscalYear": "令和8年度",
+      "value": 4,
+      "kind": "plan"
+    },
+    {
+      "measureId": "1-1-c",
+      "indicatorId": "1-1-c-1",
+      "label": "ふるさと教育推進事業A部門（創作活動）の実施校数",
+      "unit": "校",
+      "fiscalYear": "令和7年度",
+      "value": 6,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-c",
+      "indicatorId": "1-1-c-2",
+      "label": "ふるさと教育推進事業B部門（体験活動）の実施校数",
+      "unit": "校",
+      "fiscalYear": "令和7年度",
+      "value": 17,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-c",
+      "indicatorId": "1-1-c-3",
+      "label": "B部門のうちノベ☆スタ自然体験の実施件数",
+      "unit": "件",
+      "fiscalYear": "令和7年度",
+      "value": 20,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-c",
+      "indicatorId": "1-1-c-4",
+      "label": "ふるさと教育推進事業の申請校数（小学校）",
+      "unit": "校",
+      "fiscalYear": "令和8年度",
+      "value": 8,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-c",
+      "indicatorId": "1-1-c-5",
+      "label": "ふるさと教育推進事業の申請校数（中学校）",
+      "unit": "校",
+      "fiscalYear": "令和8年度",
+      "value": 2,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-1-c",
+      "indicatorId": "1-1-c-6",
+      "label": "ふるさと教育推進事業の申請校数（義務教育学校）",
+      "unit": "校",
+      "fiscalYear": "令和8年度",
+      "value": 1,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-2-c",
+      "indicatorId": "1-2-c-1",
+      "label": "学習指導員の雇用人数",
+      "unit": "名",
+      "fiscalYear": "令和8年度",
+      "value": 15,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-3-b",
+      "indicatorId": "1-3-b-1",
+      "label": "配布した食料品",
+      "unit": "食分",
+      "fiscalYear": "令和8年度",
+      "value": 34,
+      "kind": "result"
+    },
+    {
+      "measureId": "1-3-b",
+      "indicatorId": "1-3-b-2",
+      "label": "食料品の配布実績（人数）",
+      "unit": "名分",
+      "fiscalYear": "令和8年度",
+      "value": 962,
+      "kind": "result"
+    },
+    {
+      "measureId": "3-2-b",
+      "indicatorId": "3-2-b-1",
+      "label": "避難所運営手順書を作成した指定避難所数",
+      "unit": "ヶ所",
+      "fiscalYear": "令和8年度",
+      "value": 8,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-1-a",
+      "indicatorId": "4-1-a-1",
+      "label": "若手職員プロジェクトチームの課題テーマ数",
+      "unit": "テーマ",
+      "fiscalYear": "令和8年度",
+      "value": 3,
+      "kind": "plan"
+    },
+    {
+      "measureId": "4-3-a",
+      "indicatorId": "4-3-a-1",
+      "label": "出張なんでも総合相談センターの開催会場数",
+      "unit": "会場",
+      "fiscalYear": "令和7年度",
+      "value": 3,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-3-a",
+      "indicatorId": "4-3-a-2",
+      "label": "出張なんでも総合相談センターの相談対応件数（年度計）",
+      "unit": "件",
+      "fiscalYear": "令和7年度",
+      "value": 5,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-3-a",
+      "indicatorId": "4-3-a-3",
+      "label": "出張なんでも総合相談センターの開催回数",
+      "unit": "回",
+      "fiscalYear": "令和8年度",
+      "value": 10,
+      "kind": "plan"
+    },
+    {
+      "measureId": "4-3-a",
+      "indicatorId": "4-3-a-4",
+      "label": "出張なんでも総合相談センターの相談件数（島浦、6月18日）",
+      "unit": "件",
+      "fiscalYear": "令和8年度",
+      "value": 10,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-3-a",
+      "indicatorId": "4-3-a-5",
+      "label": "出張なんでも総合相談センターの相談件数（土々呂・伊形、7月16日）",
+      "unit": "件",
+      "fiscalYear": "令和8年度",
+      "value": 7,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-4-a",
+      "indicatorId": "4-4-a-1",
+      "label": "北方総合支所に着任した地域おこし協力隊員数",
+      "unit": "名",
+      "fiscalYear": "令和8年度",
+      "value": 1,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-4-a",
+      "indicatorId": "4-4-a-2",
+      "label": "島野浦島の活性化のための採用予定人数",
+      "unit": "名",
+      "fiscalYear": "令和8年度",
+      "value": 1,
+      "kind": "plan"
+    },
+    {
+      "measureId": "4-5-b",
+      "indicatorId": "4-5-b-1",
+      "label": "佐伯市との相互派遣人数（各市1名ずつ）",
+      "unit": "名",
+      "fiscalYear": "令和8年度",
+      "value": 1,
+      "kind": "result"
+    },
+    {
+      "measureId": "4-5-c",
+      "indicatorId": "4-5-c-1",
+      "label": "RPA内製化研修の参加職員数",
+      "unit": "名",
+      "fiscalYear": "令和8年度",
+      "value": 4,
+      "kind": "result"
+    }
+  ]
+}

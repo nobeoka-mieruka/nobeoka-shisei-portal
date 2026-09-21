@@ -1,10 +1,10 @@
-import mayorPromisesData from "../data/mayorPromises.json";
+// Phase273：seo.ts経由で全ページに載るため、件数だけの軽量インデックスを使う。
+import mayorPromisesIndex from "../data/mayorPromisesIndex.json";
 // Phase202：このモジュールはsrc/lib/seo.ts（全ページが読み込む）からも参照されるため、
 // 本文を含むmayorPromiseMeasures.json（約25KB）ではなく、IDだけの軽量インデックス
 // （scripts/generate-data-indexes.mjsの生成物）を読む。件数は元データと完全に一致する
 // （検証：scripts/test-data-index-consistency.mjs）。
 import mayorPromiseMeasuresIndex from "../data/mayorPromiseMeasuresIndex.json";
-import type { MayorPromisesData } from "../types";
 
 /**
  * Phase202：市長公約まわりでサイト上に現れる3つの数字（政策分野・個別公約・個別施策）の
@@ -34,7 +34,7 @@ import type { MayorPromisesData } from "../types";
  * （退行防止チェックは scripts/test-count-consistency.mjs）。
  */
 
-const promisesData = mayorPromisesData as MayorPromisesData;
+const promisesData = mayorPromisesIndex;
 const promiseMeasures = mayorPromiseMeasuresIndex;
 
 /** 3階層それぞれの表示名。画面・meta description・JSON-LD はすべてこの語を使う。 */
@@ -69,7 +69,7 @@ export const MAYOR_PROMISE_LEVELS = {
  * scripts/test-count-consistency.mjs で検証する）。
  */
 export const mayorPromiseCounts = {
-  policyArea: promisesData.categories.length,
+  policyArea: promisesData.categoryCount,
   promise: promisesData.promises.length,
   measure: promiseMeasures.length,
 } as const;
@@ -94,3 +94,15 @@ export const MAYOR_PROMISE_GLOSSARY = {
     `／${MAYOR_PROMISE_LEVELS.measure.label}（${mayorPromiseCounts.measure}件）：${MAYOR_PROMISE_LEVELS.measure.definition}` +
     " 当サイトが独自に達成率を算定したものではなく、公表資料の区切り方をそのまま数えたものです。",
 } as const;
+
+/**
+ * Phase273：選挙公報の項目ID（例 "koho-2025-p2-2"）を、市民向けの表示に直す。
+ * 内部IDを画面へそのまま出さないための変換（例：「政策②の2つ目の項目」）。
+ */
+export function formatGazetteItemLabel(itemId: string): string {
+  const matched = itemId.match(/p(\d+)-(\d+)$/);
+  if (!matched) return "掲載項目";
+  const CIRCLED = ["", "①", "②", "③", "④", "⑤"];
+  const category = CIRCLED[Number(matched[1])] ?? `${matched[1]}`;
+  return `政策${category}の${matched[2]}つ目の項目`;
+}
