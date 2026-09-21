@@ -19,7 +19,9 @@ import generalQuestionsData from "../data/generalQuestions.json";
 // 表示する画面側でimportする）。値はbillVotes.jsonからの純粋な抜き出しで内容は同一。
 import billVotesIndexData from "../data/billVotesIndex.json";
 import councilSessionsData from "../data/councilSessions.json";
-import mayorPromisesData from "../data/mayorPromises.json";
+// Phase273：全ページが読み込むモジュールのため、本文・状況・分野名だけの軽量インデックスを使う
+// （件数・本文は mayorPromises.json と完全に一致する。検証：scripts/test-data-index-consistency.mjs）。
+import mayorPromisesIndex from "../data/mayorPromisesIndex.json";
 import financeDashboardData from "../data/financeDashboard.json";
 import mayorEntertainmentExpensesData from "../data/mayorEntertainmentExpenses.json";
 import compensationComparisonData from "../data/compensationComparison.json";
@@ -51,7 +53,6 @@ import type {
   GeneralQuestionItem,
   Mayor,
   MayorEntertainmentExpensesData,
-  MayorPromisesData,
   PoliticalFundOrganization,
   PoliticalFundReport,
   Theme,
@@ -108,7 +109,7 @@ const mayor = mayorData as Mayor;
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 const billVotes = publicBills(billVotesIndexData as BillVoteIndexItem[]);
 const councilSessions = councilSessionsData as CouncilSession[];
-const mayorPromises = (mayorPromisesData as MayorPromisesData).promises;
+const mayorPromises = mayorPromisesIndex.promises;
 // Phase202：市長公約の3階層（政策分野・個別公約・個別施策）の呼称・件数は
 // src/lib/mayorPromiseTerms.ts の単一情報源を使う（meta descriptionへ件数を直書きしない）。
 const speechSummaryData = councilSpeechIndexData as unknown as CouncilSpeechSummaryData;

@@ -144,7 +144,10 @@ check("全ての個別施策のcategoryIdが、紐づく個別公約のcategoryI
 
 check(`${MAYOR_PROMISE_TERMS_FILE} が3階層の件数をすべてデータから算出しており、固定値を持たない`, () => {
   const src = readSrc(MAYOR_PROMISE_TERMS_FILE);
-  for (const expr of ["promisesData.categories.length", "promisesData.promises.length", "promiseMeasures.length"]) {
+  // Phase273：全ページが読み込むモジュールのため、公約データは本文・状況だけの軽量インデックス
+  // （mayorPromisesIndex.json）から数えるようになった。政策分野数は元データの categories.length を
+  // 生成時に写した categoryCount を使う（値が一致することは下の項目と generate-data-indexes.mjs で保証）。
+  for (const expr of ["promisesData.categoryCount", "promisesData.promises.length", "promiseMeasures.length"]) {
     assert.ok(src.includes(expr), `${MAYOR_PROMISE_TERMS_FILE} に ${expr} による自動算出が見当たりません`);
   }
   const countsBlock = src.slice(src.indexOf("export const mayorPromiseCounts"));

@@ -127,6 +127,37 @@ check("個別施策インデックスに本文（実績・予定・注記・出�
 
 // --- 検索インデックスの件数 -------------------------------------------------
 const searchIndex = read("searchIndex.json");
+// Phase273：市長公約の軽量インデックス（seo.ts が全ページで読み込む）が、元データと一致するか。
+// 件数・ID・公約本文・状況ラベル・政策分野数のいずれかがずれると、ページのタイトルや
+// meta description が実際の公約と食い違うため、ここで機械的に止める。
+const promisesSource = read("mayorPromises.json");
+const promisesIndex = read("mayorPromisesIndex.json");
+check(
+  "mayorPromisesIndex.jsonの個別公約件数がmayorPromises.jsonと一致する",
+  promisesSource.promises.length === promisesIndex.promises.length,
+  `${promisesSource.promises.length} vs ${promisesIndex.promises.length}`,
+);
+check(
+  "mayorPromisesIndex.jsonの政策分野数がmayorPromises.jsonと一致する",
+  promisesSource.categories.length === promisesIndex.categoryCount,
+  `${promisesSource.categories.length} vs ${promisesIndex.categoryCount}`,
+);
+const promiseFieldMismatch = promisesSource.promises
+  .map((p, i) => {
+    const entry = promisesIndex.promises[i];
+    if (!entry) return `${p.id}: インデックスに存在しない`;
+    for (const key of ["id", "categoryId", "categoryTitle", "promiseText", "statusLabel"]) {
+      if (p[key] !== entry[key]) return `${p.id}.${key}`;
+    }
+    return null;
+  })
+  .filter(Boolean);
+check(
+  "mayorPromisesIndex.jsonの公約本文・状況ラベル・分野名が元データと一字一句一致する",
+  promiseFieldMismatch.length === 0,
+  promiseFieldMismatch.join("、"),
+);
+
 const searchIndexMeta = read("searchIndexMeta.json");
 check(
   "searchIndexMeta.jsonの件数がsearchIndex.jsonと一致する",
