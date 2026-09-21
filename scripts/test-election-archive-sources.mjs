@@ -151,17 +151,47 @@ check("当選者は1名で、最多得票の候補者と一致する", () => {
 
 console.log("\n項目4：公約データベースへ取り込んでいないこと");
 
-check("選挙公報の出典が市長公約データへ持ち込まれていない", () => {
-  for (const relPath of ["src/data/mayorPromises.json", "src/data/mayorPromiseMeasures.json"]) {
-    const text = readText(relPath);
-    assert.ok(!text.includes("senkyo_koho"), `${relPath} に選挙公報のミラーURLが混入しています`);
-    assert.ok(!text.includes("election-mayor-2025-koho"), `${relPath} に選挙公報の出典IDが混入しています`);
+check("選挙公報の原文が、市長公約の本文として取り込まれていない", () => {
+  // Phase273：公約側から選挙公報を「出典」として参照することは許可しているが、
+  // 公報の文言を公約本文（promiseText）へ写すことは禁止する（資料が別である以上、
+  // どちらが本来の文言かを当サイトが決めてしまうことになるため）。
+  const koho = mayor2025.sourceRefs.find((r) => r.sourceId === "election-mayor-2025-koho");
+  const gazetteTexts = new Set((koho.gazetteItems ?? []).map((item) => item.text));
+  const promises = readJson("src/data/mayorPromises.json").promises;
+  for (const p of promises) {
+    // 市の公表資料の見出しと本文が一致している場合（match: "verbatim"）は、その見出しが
+    // たまたま選挙公報と同文であることがある（公約4-4が実例）。これは正当な一致なので除外し、
+    // 「市の資料とは違うのに、公報の文言と一致している」＝公報の文言を採用した場合だけを検出する。
+    if (p.promiseTextSource?.match !== "minor_difference") continue;
+    assert.ok(
+      !gazetteTexts.has(p.promiseText),
+      `公約${p.id}の本文が、市の公表資料ではなく選挙公報の文言に置き換わっています`,
+    );
+  }
+  // 個別施策側には選挙公報を持ち込まない（施策の出典は市の公表資料のみ）。
+  const measuresText = readText("src/data/mayorPromiseMeasures.json");
+  assert.ok(!measuresText.includes("senkyo_koho"), "個別施策データに選挙公報が混入しています");
+});
+
+check("選挙公報を参照している公約は、公報のどの項目に対応するかまで記録している", () => {
+  const koho = mayor2025.sourceRefs.find((r) => r.sourceId === "election-mayor-2025-koho");
+  const itemIds = new Set((koho.gazetteItems ?? []).map((item) => item.itemId));
+  const promises = readJson("src/data/mayorPromises.json").promises;
+  const referencing = promises.filter((p) => (p.evidenceItems ?? []).some((e) => e.documentKey === "senkyo_koho_2025"));
+  assert.ok(referencing.length > 0, "選挙公報を参照している公約がありません");
+  for (const p of referencing) {
+    const gazette = p.promiseTextSource?.electionGazette;
+    assert.ok(gazette, `公約${p.id}が選挙公報を参照していますが、対応する公報項目が記録されていません`);
+    assert.equal(gazette.sourceId, "election-mayor-2025-koho");
+    assert.ok(itemIds.has(gazette.itemId), `公約${p.id}が存在しない公報項目を参照しています: ${gazette.itemId}`);
+    assert.ok(["exact", "partial"].includes(gazette.relation), `公約${p.id}の対応区分が不正です: ${gazette.relation}`);
   }
 });
 
-check("選挙公報の注記に、公約データベースへ未反映であることが明記されている", () => {
+check("選挙公報の注記が、照合の実施状況と対応件数の考え方を説明している", () => {
   const koho = mayor2025.sourceRefs.find((r) => r.sourceId === "election-mayor-2025-koho");
-  assert.match(koho.notes, /公約データベースへは取り込んでいない/);
+  assert.match(koho.notes, /文言比較/);
+  assert.match(koho.notes, /公約本文そのものは書き換えていない/);
 });
 
 check("市長詳細ページから選挙結果ページへ移動できる", () => {
