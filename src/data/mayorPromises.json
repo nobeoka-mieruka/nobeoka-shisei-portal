@@ -145,12 +145,15 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.2",
-        "match": "minor_difference",
-        "sourceHeading": "家庭環境に関わらず、全ての子どもが延岡の自然体験に参加できる仕組みを整えます。",
-        "differenceNote": "資料は「全ての子ども」、当サイト掲載本文は「すべての子ども」。表記の違いのみで内容は同じ。",
-        "confirmedAt": "2026-09-21"
+        "documentKey": "official_site",
+        "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.2",
+          "match": "different_wording",
+          "heading": "家庭環境に関わらず、全ての子どもが延岡の自然体験に参加できる仕組みを整えます。"
+        }
       },
       "relatedPressConferenceDates": [
         "2026-08-21"
@@ -206,10 +209,14 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.2",
+        "documentKey": "official_site",
         "match": "verbatim",
-        "confirmedAt": "2026-09-21"
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.2",
+          "match": "verbatim"
+        }
       }
     },
     {
@@ -271,19 +278,22 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.3",
-        "match": "minor_difference",
-        "sourceHeading": "市役所に「こども未来部」を設置し、子育て支援を強化します。",
-        "differenceNote": "資料は「設置し、子育て」と読点あり、当サイト掲載本文は読点なし。表記の違いのみ。",
+        "documentKey": "official_site",
+        "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.3",
+          "match": "different_wording",
+          "heading": "市役所に「こども未来部」を設置し、子育て支援を強化します。"
+        },
         "electionGazette": {
           "sourceId": "election-mayor-2025-koho",
           "documentKey": "senkyo_koho_2025",
           "itemId": "koho-2025-p1-3",
           "relation": "exact",
           "note": "選挙公報①-3と、読点1字を除き同一。"
-        },
-        "confirmedAt": "2026-09-21"
+        }
       }
     },
     {
@@ -339,17 +349,21 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.4",
+        "documentKey": "official_site",
         "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.4",
+          "match": "verbatim"
+        },
         "electionGazette": {
           "sourceId": "election-mayor-2025-koho",
           "documentKey": "senkyo_koho_2025",
           "itemId": "koho-2025-p2-1",
           "relation": "partial",
           "note": "選挙公報②-1の前半「地域商社を設立し」「販路開拓／販売強化」に対応。公報にある「ふるさと納税日本一を目指します」は当サイト掲載本文に含まれない。"
-        },
-        "confirmedAt": "2026-09-21"
+        }
       },
       "relatedQuestionIds": [
         "gq2026-06-m02"
@@ -409,17 +423,21 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.4",
+        "documentKey": "official_site",
         "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.4",
+          "match": "verbatim"
+        },
         "electionGazette": {
           "sourceId": "election-mayor-2025-koho",
           "documentKey": "senkyo_koho_2025",
           "itemId": "koho-2025-p2-2",
           "relation": "exact",
           "note": "愛宕山・カフェ誘致・市民の場と観光の3要素が対応。"
-        },
-        "confirmedAt": "2026-09-21"
+        }
       },
       "relatedQuestionIds": [
         "gq2026-06-m02"
@@ -499,12 +517,15 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.4",
-        "match": "minor_difference",
-        "sourceHeading": "アスリートタウン延岡アリーナやのべおかwaiwaiスタジアムを核に、スポーツ合宿・大会の誘致を拡大します。",
-        "differenceNote": "資料は「のべおかwaiwaiスタジアム」、当サイト掲載本文は「西階野球場」。同一施設の愛称かどうかを一次資料で確定できていないため、本文は変更していない。",
-        "confirmedAt": "2026-09-21"
+        "documentKey": "official_site",
+        "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.4",
+          "match": "different_wording",
+          "heading": "アスリートタウン延岡アリーナやのべおかwaiwaiスタジアムを核に、スポーツ合宿・大会の誘致を拡大します。"
+        }
       },
       "relatedQuestionIds": [
         "gq2026-09-m23",
@@ -558,17 +579,21 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.5",
+        "documentKey": "official_site",
         "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.5",
+          "match": "verbatim"
+        },
         "electionGazette": {
           "sourceId": "election-mayor-2025-koho",
           "documentKey": "senkyo_koho_2025",
           "itemId": "koho-2025-p3-1",
           "relation": "exact",
           "note": "診療所・事業承継の支援・地域医療を守る、の3要素が対応。"
-        },
-        "confirmedAt": "2026-09-21"
+        }
       }
     },
     {
@@ -618,12 +643,15 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.5",
-        "match": "minor_difference",
-        "sourceHeading": "津波対策と福祉避難体制を強化し、避難所環境の質を高めることで、市民の生活を守ります。",
-        "differenceNote": "資料は「市民の生活を守ります」、当サイト掲載本文は「市民の命を守ります」。市長本人の公式サイトには「命」と記載されており、どちらが原文か確定できないため本文は変更していない。",
-        "confirmedAt": "2026-09-21"
+        "documentKey": "official_site",
+        "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.5",
+          "match": "different_wording",
+          "heading": "津波対策と福祉避難体制を強化し、避難所環境の質を高めることで、市民の生活を守ります。"
+        }
       }
     },
     {
@@ -676,17 +704,21 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.5",
+        "documentKey": "official_site",
         "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.5",
+          "match": "verbatim"
+        },
         "electionGazette": {
           "sourceId": "election-mayor-2025-koho",
           "documentKey": "senkyo_koho_2025",
           "itemId": "koho-2025-p3-3",
           "relation": "exact",
           "note": "シニア世代が地域で活躍できる場の創出が対応。公報にある「仕事」（就労）の明示は当サイト掲載本文に含まれない。"
-        },
-        "confirmedAt": "2026-09-21"
+        }
       }
     },
     {
@@ -727,12 +759,15 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.6",
-        "match": "minor_difference",
-        "sourceHeading": "若手職員によるプロジェクトチームを発足させます。",
-        "differenceNote": "資料は「発足させます」、当サイト掲載本文は「発足します」。表記の違いのみ。",
-        "confirmedAt": "2026-09-21"
+        "documentKey": "official_site",
+        "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.6",
+          "match": "different_wording",
+          "heading": "若手職員によるプロジェクトチームを発足させます。"
+        }
       }
     },
     {
@@ -779,12 +814,15 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.6",
-        "match": "minor_difference",
-        "sourceHeading": "民間人材と市職員がチームを組み、新たな政策創出を実現します。",
-        "differenceNote": "資料は「チームを組み、新たな政策創出を実現します」、当サイト掲載本文は「チームを組む仕組みをつくり、新たな政策創出を実現します」。",
-        "confirmedAt": "2026-09-21"
+        "documentKey": "official_site",
+        "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.6",
+          "match": "different_wording",
+          "heading": "民間人材と市職員がチームを組み、新たな政策創出を実現します。"
+        }
       }
     },
     {
@@ -832,10 +870,14 @@
         }
       ],
       "promiseTextSource": {
-        "documentKey": "r8_promise_progress_0731",
-        "page": "p.7",
+        "documentKey": "official_site",
         "match": "verbatim",
-        "confirmedAt": "2026-09-21"
+        "confirmedAt": "2026-09-21",
+        "cityDocument": {
+          "documentKey": "r8_promise_progress_0731",
+          "page": "p.7",
+          "match": "verbatim"
+        }
       },
       "relatedPressConferenceDates": [
         "2026-06-05"
@@ -874,14 +916,15 @@
         "documentKey": "r8_promise_progress_0731",
         "page": "p.6",
         "match": "verbatim",
+        "confirmedAt": "2026-09-21",
+        "note": "市長本人の公式サイトの政策セクション（12項目）には無く、延岡市が公表した資料で新たに確認された公約項目。",
         "electionGazette": {
           "sourceId": "election-mayor-2025-koho",
           "documentKey": "senkyo_koho_2025",
           "itemId": "koho-2025-p4-2",
           "relation": "exact",
           "note": "選挙公報④-2と一字一句同一（句読点を含む）。"
-        },
-        "confirmedAt": "2026-09-21"
+        }
       }
     },
     {
@@ -916,7 +959,8 @@
         "documentKey": "r8_promise_progress_0731",
         "page": "p.7",
         "match": "verbatim",
-        "confirmedAt": "2026-09-21"
+        "confirmedAt": "2026-09-21",
+        "note": "市長本人の公式サイトの政策セクション（12項目）には無く、延岡市が公表した資料で新たに確認された公約項目。"
       }
     }
   ]

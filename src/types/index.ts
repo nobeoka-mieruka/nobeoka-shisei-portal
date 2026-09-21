@@ -949,6 +949,23 @@ export interface MayorPromiseTextSource {
   sourceHeading?: string;
   /** 違いの説明。 */
   differenceNote?: string;
+  /** 補足（この項目がどの資料で新たに確認されたか等）。 */
+  note?: string;
+  /**
+   * Phase275：同じ公約を延岡市が言い換えて公表している場合の、市の資料側の記録。
+   *
+   * 当サイトの本文は市長本人が公表した文言をそのまま載せている。市の資料は同じ公約を
+   * 別の言い回しで書いていることがあり（例：「市民の命を守ります」↔「市民の生活を守ります」）、
+   * どちらかが誤りというものではない。両方を記録し、画面でも両方を示す。
+   */
+  cityDocument?: {
+    documentKey: string;
+    page?: string;
+    /** "verbatim"＝市の資料も同じ文言。"different_wording"＝市の資料は別の言い回し。 */
+    match: "verbatim" | "different_wording";
+    /** 市の資料側の見出し原文（言い回しが異なる場合のみ）。 */
+    heading?: string;
+  };
   /** 対応が確認できた選挙公報の項目（確認できた公約のみ）。 */
   electionGazette?: {
     /** electionResults.json の出典ID（例："election-mayor-2025-koho"）。 */

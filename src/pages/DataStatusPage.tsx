@@ -1549,6 +1549,7 @@ export function DataStatusPage() {
             // Phase273：公約文そのものの出どころ（本文の根拠）は、現況や予算の根拠とは別に数える。
             promiseDataQuality.metrics.promiseTextSource,
             promiseDataQuality.metrics.promiseTextVerbatim,
+            promiseDataQuality.metrics.promiseTextCityWording,
             promiseDataQuality.metrics.electionGazetteMapped,
             promiseDataQuality.metrics.changeHistory,
             promiseDataQuality.metrics.fiscalYear,

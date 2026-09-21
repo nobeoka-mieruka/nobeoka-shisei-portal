@@ -762,6 +762,20 @@ try {
         err(sTag, "資料側の見出しと本文が同一なのにminor_differenceになっています");
       if (isBlank(pts.confirmedAt) || !DATE_RE.test(pts.confirmedAt))
         err(sTag, `confirmedAtの形式が不正です: ${pts.confirmedAt}`);
+      // Phase275：市が同じ公約を言い換えて公表している場合の記録の検証。
+      const cityDoc = pts.cityDocument;
+      if (cityDoc != null) {
+        if (isBlank(cityDoc.documentKey) || !documentKeys.has(cityDoc.documentKey))
+          err(sTag, `市の資料の資料keyが資料一覧にありません: ${cityDoc.documentKey}`);
+        if (!["verbatim", "different_wording"].includes(cityDoc.match))
+          err(sTag, `市の資料との一致区分はverbatimかdifferent_wordingです: ${cityDoc.match}`);
+        if (cityDoc.match === "different_wording" && isBlank(cityDoc.heading))
+          err(sTag, "市の資料が別の言い回しの場合は、市の資料側の見出し原文（heading）を記録してください");
+        if (cityDoc.match === "verbatim" && !isBlank(cityDoc.heading))
+          err(sTag, "市の資料も同じ文言（verbatim）の場合、見出し原文は不要です（二重管理になります）");
+        if (cityDoc.heading === p.promiseText)
+          err(sTag, "市の資料の見出しと本文が同一なのにdifferent_wordingになっています");
+      }
       const gazette = pts.electionGazette;
       if (gazette != null) {
         if (isBlank(gazette.sourceId)) err(sTag, "選挙公報のsourceIdが空です");

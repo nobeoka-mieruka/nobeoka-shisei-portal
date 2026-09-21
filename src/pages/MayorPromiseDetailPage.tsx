@@ -41,7 +41,7 @@ import {
   classifyVoteMethod,
   publicBills,
 } from "../lib/billVotes";
-import { MAYOR_PROMISE_LEVELS, formatGazetteItemLabel } from "../lib/mayorPromiseTerms";
+import { MAYOR_PROMISE_LEVELS, documentKindLabel, formatGazetteItemLabel } from "../lib/mayorPromiseTerms";
 import {
   classifyPromiseBudgetLinkage,
   classifyPromiseBillLinkage,
@@ -262,7 +262,7 @@ export function MayorPromiseDetailPage() {
               return (
                 <>
                   <p className="mt-1.5">
-                    <span className="font-medium text-on-surface">市の公表資料：</span>
+                    <span className="font-medium text-on-surface">この文言が載っている資料：</span>
                     {doc ? (
                       <a href={doc.url} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
                         {doc.label}
@@ -271,11 +271,13 @@ export function MayorPromiseDetailPage() {
                       UNREGISTERED
                     )}
                     {source.page && `（${source.page}）`}
+                    {doc && `　資料の種類：${documentKindLabel(doc)}`}
                   </p>
                   <p className="mt-1">
                     {source.match === "verbatim"
-                      ? "この資料の見出しと、上の公約原文は一字一句同じです。"
-                      : "この資料の見出しと、上の公約原文には次の違いがあります。当サイトでは、どちらが本来の文言か確定できないため、原文を書き換えていません。"}
+                      ? "上の公約原文は、この資料の文言と一字一句同じです。"
+                      : "上の公約原文と、この資料の文言には違いがあります。どちらが本来の文言か確定できないため、原文は書き換えていません。"}
+                    {source.note && <span className="mt-0.5 block">{source.note}</span>}
                   </p>
                   {source.match !== "verbatim" && source.sourceHeading && (
                     <p className="mt-1 rounded bg-surface-container px-2 py-1.5">
@@ -284,6 +286,39 @@ export function MayorPromiseDetailPage() {
                       {source.differenceNote && <span className="mt-0.5 block">{source.differenceNote}</span>}
                     </p>
                   )}
+                  {/* Phase275：同じ公約を延岡市が言い換えて公表している場合、その文言も併記する。
+                      どちらかが誤りというものではないため、両方を示して読み手の判断材料にする。 */}
+                  {(() => {
+                    const cityDoc = source.cityDocument;
+                    if (!cityDoc) return null;
+                    const cityDocument = promisesData.documents.find((d) => d.key === cityDoc.documentKey);
+                    return (
+                      <p className="mt-1.5">
+                        <span className="font-medium text-on-surface">延岡市の公表資料：</span>
+                        {cityDocument ? (
+                          <a
+                            href={cityDocument.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`text-primary underline ${linkClass}`}
+                          >
+                            {cityDocument.label}
+                          </a>
+                        ) : (
+                          UNREGISTERED
+                        )}
+                        {cityDoc.page && `（${cityDoc.page}）`}
+                        {cityDoc.match === "verbatim" ? (
+                          "　市の資料も同じ文言で掲載しています。"
+                        ) : (
+                          <span className="mt-1 block rounded bg-surface-container px-2 py-1.5">
+                            市の資料では次の言い回しで掲載されています（同じ公約を市が言い換えたもので、どちらかが誤りというわけではありません）。
+                            <span className="mt-0.5 block font-medium text-on-surface">{cityDoc.heading}</span>
+                          </span>
+                        )}
+                      </p>
+                    );
+                  })()}
                   {source.electionGazette && (
                     <p className="mt-1.5">
                       <span className="font-medium text-on-surface">選挙公報：</span>

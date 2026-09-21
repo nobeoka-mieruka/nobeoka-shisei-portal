@@ -106,3 +106,19 @@ export function formatGazetteItemLabel(itemId: string): string {
   const category = CIRCLED[Number(matched[1])] ?? `${matched[1]}`;
   return `政策${category}の${matched[2]}つ目の項目`;
 }
+
+/**
+ * Phase275：根拠資料の種類を、市民向けの短い日本語にする。
+ *
+ * 内部の区分コード（PRIMARY / OFFICIAL_ARCHIVE 等）をそのまま画面へ出さず、
+ * 「誰が出した資料か」「どこから取ってきたか」が一目で分かる言葉にする。
+ * 判定は資料に登録済みの情報（発行元のドメイン・sourceType）だけで行い、推測しない。
+ */
+export function documentKindLabel(document: { url: string; sourceType?: string; electionSourceId?: string }): string {
+  const sourceType = document.sourceType ?? "";
+  if (document.electionSourceId) return "公式発行資料（外部アーカイブ経由）";
+  if (document.url.includes("www.city.nobeoka.miyazaki.jp")) return "延岡市の公式資料";
+  if (document.url.startsWith("/documents/")) return "延岡市の公式資料（当サイトに複製）";
+  if (sourceType.includes("市長本人") || document.url.includes("hisatomo-m.jp")) return "市長本人の公表資料";
+  return "参考資料";
+}

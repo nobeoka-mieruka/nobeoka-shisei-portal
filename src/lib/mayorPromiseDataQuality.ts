@@ -86,6 +86,8 @@ export interface MayorPromiseDataQuality {
     promiseTextSource: PromiseQualityMetric;
     /** 公約文が市の公表資料の見出しと一字一句同じ割合。 */
     promiseTextVerbatim: PromiseQualityMetric;
+    /** 延岡市の公表資料でも同じ文言で掲載されている割合。 */
+    promiseTextCityWording: PromiseQualityMetric;
     /** 選挙公報のどの項目に対応するかを確認できた割合。 */
     electionGazetteMapped: PromiseQualityMetric;
     changeHistory: PromiseQualityMetric;
@@ -224,10 +226,16 @@ export function computeMayorPromiseDataQuality(input: {
       (p) => p.promiseTextSource != null && !isBlank(p.promiseTextSource.documentKey),
     ),
     promiseTextVerbatim: buildMetric(
-      "公約本文が資料と一字一句同じもの",
-      "個別公約のうち、当サイトが掲載している公約文が、市の公表資料の見出しと一字一句同じものの割合です。違いがある場合は詳細ページに資料側の文言を併記しています。",
+      "公約本文が出典と一字一句同じもの",
+      "個別公約のうち、当サイトが掲載している公約文が、その出典資料の文言と一字一句同じものの割合です。",
       promises,
       (p) => p.promiseTextSource?.match === "verbatim",
+    ),
+    promiseTextCityWording: buildMetric(
+      "延岡市の公表資料でも同じ文言のもの",
+      "個別公約のうち、延岡市が公表した資料でも同じ文言で掲載されているものの割合です。市が言い換えて公表している場合は、詳細ページに市の資料側の文言も併記しています（どちらかが誤りという意味ではありません）。",
+      promises,
+      (p) => p.promiseTextSource?.cityDocument == null || p.promiseTextSource.cityDocument.match === "verbatim",
     ),
     electionGazetteMapped: buildMetric(
       "選挙公報との対応が確認できたもの",
