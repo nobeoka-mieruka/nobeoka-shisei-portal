@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T22:46:53.333Z",
+  "generatedAt": "2026-09-21T23:43:29.890Z",
   "note": "一般質問「予定」レコードに対する公式会議録の公開監視。src/data配下への書き込みは行わない（検出のみ）。新しい質問レコードは作らず、既存IDへの紐付け候補だけを報告する。",
   "overallOutcome": "NO_CHANGE",
   "dataChangeCount": 0,
@@ -18,7 +18,7 @@
     {
       "sessionId": "2026-09",
       "sessionName": "令和8年9月定例会",
-      "registeredInCollectionStatus": false,
+      "registeredInCollectionStatus": true,
       "questionCount": 13,
       "questionDates": [
         "2026-09-08",
