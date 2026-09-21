@@ -24,13 +24,13 @@
           {
             "fiscalYear": "令和7年度",
             "value": 2,
-            "kind": "result",
+            "kind": "actual",
             "note": "ホタル観察、延岡こどもパーク"
           },
           {
             "fiscalYear": "令和8年度",
             "value": 5,
-            "kind": "plan",
+            "kind": "planned",
             "note": "延岡こどもパーク、昆虫観察ワークショップ、乗馬体験、スキムボード体験、ルアー作り＋ルアーフィッシング体験"
           }
         ]
@@ -63,12 +63,12 @@
           {
             "fiscalYear": "令和7年度",
             "value": 2,
-            "kind": "result"
+            "kind": "actual"
           },
           {
             "fiscalYear": "令和8年度",
             "value": 4,
-            "kind": "plan"
+            "kind": "planned"
           }
         ]
       }
@@ -87,7 +87,7 @@
     "status": "IN_PROGRESS",
     "sourcePage": "p.2",
     "previousYearResult": "A部門（創作活動）6校、B部門（体験活動）17校（うちノベ☆スタ自然体験20件）、C部門（文化施設見学）全校で野口遵記念館・延岡城内藤記念博物館見学",
-    "currentYearPlan": "小学校8校・中学校2校・義務教育学校1校から申請済み、順次創作活動・体験活動・文化施設見学を実施",
+    "currentYearPlan": "申請のあった学校で、順次、創作活動・体験活動・文化施設見学を実施予定",
     "indicators": [
       {
         "id": "1-1-c-1",
@@ -97,7 +97,7 @@
           {
             "fiscalYear": "令和7年度",
             "value": 6,
-            "kind": "result"
+            "kind": "actual"
           }
         ]
       },
@@ -109,19 +109,19 @@
           {
             "fiscalYear": "令和7年度",
             "value": 17,
-            "kind": "result"
+            "kind": "actual"
           }
         ]
       },
       {
         "id": "1-1-c-3",
-        "label": "B部門のうちノベ☆スタ自然体験の実施件数",
+        "label": "B部門のうちノベ☆スタへ依頼した自然体験の件数",
         "unit": "件",
         "values": [
           {
             "fiscalYear": "令和7年度",
             "value": 20,
-            "kind": "result"
+            "kind": "actual"
           }
         ]
       },
@@ -133,8 +133,9 @@
           {
             "fiscalYear": "令和8年度",
             "value": 8,
-            "kind": "result",
-            "note": "申請済み"
+            "kind": "actual",
+            "note": "申請済み",
+            "asOfDate": "2026-07-31"
           }
         ]
       },
@@ -146,8 +147,9 @@
           {
             "fiscalYear": "令和8年度",
             "value": 2,
-            "kind": "result",
-            "note": "申請済み"
+            "kind": "actual",
+            "note": "申請済み",
+            "asOfDate": "2026-07-31"
           }
         ]
       },
@@ -159,13 +161,15 @@
           {
             "fiscalYear": "令和8年度",
             "value": 1,
-            "kind": "result",
-            "note": "申請済み"
+            "kind": "actual",
+            "note": "申請済み",
+            "asOfDate": "2026-07-31"
           }
         ]
       }
     ],
-    "notes": "複数区分（A/B/C部門）の件数を含むため代表的な数値は設定していない。"
+    "notes": "複数区分（A/B/C部門）の件数を含むため代表的な数値は設定していない。",
+    "currentYearResult": "令和8年度も同様の事業を行っており、現時点で小学校8校、中学校2校、義務教育学校1校から申請がされている"
   },
   {
     "fiscalYear": "令和8年度",
@@ -217,13 +221,14 @@
     "indicators": [
       {
         "id": "1-2-c-1",
-        "label": "学習指導員の雇用人数",
+        "label": "学力向上指導員の雇用人数",
         "unit": "名",
         "values": [
           {
             "fiscalYear": "令和8年度",
             "value": 15,
-            "kind": "result"
+            "kind": "actual",
+            "asOfDate": "2026-07-31"
           }
         ]
       }
@@ -243,7 +248,23 @@
     "sourcePage": "p.2",
     "currentYearResult": "「学力向上」「働き方・働きがい改革」「DX」の3チームが連携し研究中（自己調整学習の導入、協働的な学びの推進等）",
     "futureTarget": "年度末に市民参加の教育フォーラムを開催予定",
-    "notes": "令和8年度新規事業。"
+    "notes": "令和8年度新規事業。",
+    "indicators": [
+      {
+        "id": "1-2-d-1",
+        "label": "NOBEOKAスクール・イノベーション事業で連携するチーム数",
+        "unit": "チーム",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 3,
+            "kind": "actual",
+            "asOfDate": "2026-07-31",
+            "note": "「学力向上」「働き方・働きがい改革」「DX」の3チーム"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -277,30 +298,32 @@
     "indicators": [
       {
         "id": "1-3-b-1",
-        "label": "配布した食料品",
+        "label": "配布した食料品の食数",
         "unit": "食分",
         "values": [
           {
             "fiscalYear": "令和8年度",
             "value": 34,
-            "kind": "result"
+            "kind": "actual",
+            "asOfDate": "2026-07-31"
           }
         ]
       },
       {
         "id": "1-3-b-2",
-        "label": "食料品の配布実績（人数）",
+        "label": "配布した食料の名分数",
         "unit": "名分",
         "values": [
           {
             "fiscalYear": "令和8年度",
             "value": 962,
-            "kind": "result"
+            "kind": "actual",
+            "asOfDate": "2026-07-31"
           }
         ]
       }
     ],
-    "notes": "実績962名分の食料を配布（配布対象世帯数の実績値）。"
+    "notes": "資料の記載は「食料品34食分を配布しています」「※実績：962名分の食料を配布」。34食分が1人あたりの配布量か総量かは資料から判別できないため、資料の表記のまま2つの指標に分けて登録している。"
   },
   {
     "fiscalYear": "令和8年度",
@@ -443,7 +466,23 @@
     "measureTitle": "九州市長会による相互支援体制の構築",
     "status": "IN_PROGRESS",
     "sourcePage": "p.5",
-    "currentYearResult": "延岡市の支援都市（先遣市：熊本県合志市、支援市：福岡県北九州市・飯塚市）が決定、4月訪問・5月WEB会議で情報共有"
+    "currentYearResult": "大規模災害に備えた九州市長会の相互支援体制で、延岡市を支援する3市（先遣市：熊本県合志市、支援市：福岡県北九州市・飯塚市）が決定。各支援都市を4月に訪問し、5月にWEB会議で情報共有を実施",
+    "indicators": [
+      {
+        "id": "3-2-a-1",
+        "label": "大規模災害時に延岡市を支援することが決定した都市数",
+        "unit": "市",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 3,
+            "kind": "actual",
+            "asOfDate": "2026-07-31",
+            "note": "先遣市：熊本県合志市、支援市：福岡県北九州市・飯塚市"
+          }
+        ]
+      }
+    ]
   },
   {
     "fiscalYear": "令和8年度",
@@ -470,7 +509,10 @@
           {
             "fiscalYear": "令和8年度",
             "value": 8,
-            "kind": "result"
+            "kind": "actual",
+            "asOfDate": "2026-07-31",
+            "fiscalYearBasis": "derived",
+            "note": "資料は「指定避難所のうち8ヶ所について手順書を作成しました」とだけ記載し、作成年度を書いていない。当サイトが資料の対象年度から補った年度であり、令和7年度以前に作成された可能性もある。"
           }
         ]
       }
@@ -520,13 +562,13 @@
     "indicators": [
       {
         "id": "4-1-a-1",
-        "label": "若手職員プロジェクトチームの課題テーマ数",
+        "label": "課題解決研修「GIFT」の課題テーマ数",
         "unit": "テーマ",
         "values": [
           {
             "fiscalYear": "令和8年度",
             "value": 3,
-            "kind": "plan",
+            "kind": "planned",
             "note": "①商店街の活性化②フードロス対策③愛宕山の活性化"
           }
         ]
@@ -584,20 +626,20 @@
           {
             "fiscalYear": "令和8年度",
             "value": 1,
-            "kind": "result",
+            "kind": "actual",
             "note": "令和8年4月着任"
           }
         ]
       },
       {
         "id": "4-4-a-2",
-        "label": "島野浦島の活性化のための採用予定人数",
+        "label": "島野浦島の活性化のために採用する地域おこし協力隊員数",
         "unit": "名",
         "values": [
           {
             "fiscalYear": "令和8年度",
             "value": 1,
-            "kind": "plan"
+            "kind": "planned"
           }
         ]
       }
@@ -643,7 +685,7 @@
           {
             "fiscalYear": "令和7年度",
             "value": 3,
-            "kind": "result",
+            "kind": "actual",
             "note": "北方・北浦・北川"
           }
         ]
@@ -656,7 +698,7 @@
           {
             "fiscalYear": "令和7年度",
             "value": 5,
-            "kind": "result"
+            "kind": "actual"
           }
         ]
       },
@@ -668,7 +710,7 @@
           {
             "fiscalYear": "令和8年度",
             "value": 10,
-            "kind": "plan",
+            "kind": "planned",
             "note": "うち2回は他部署共催"
           }
         ]
@@ -681,7 +723,8 @@
           {
             "fiscalYear": "令和8年度",
             "value": 10,
-            "kind": "result"
+            "kind": "actual",
+            "asOfDate": "2026-06-18"
           }
         ]
       },
@@ -693,7 +736,21 @@
           {
             "fiscalYear": "令和8年度",
             "value": 7,
-            "kind": "result"
+            "kind": "actual",
+            "asOfDate": "2026-07-16"
+          }
+        ]
+      },
+      {
+        "id": "4-3-a-6",
+        "label": "出張なんでも総合相談センターのうち他部署と共催する回数",
+        "unit": "回",
+        "values": [
+          {
+            "fiscalYear": "令和8年度",
+            "value": 2,
+            "kind": "planned",
+            "note": "全10回のうち2回"
           }
         ]
       }
@@ -735,8 +792,9 @@
           {
             "fiscalYear": "令和8年度",
             "value": 1,
-            "kind": "result",
-            "note": "延岡市・佐伯市がそれぞれ1名"
+            "kind": "actual",
+            "note": "延岡市・佐伯市がそれぞれ1名",
+            "asOfDate": "2026-04-01"
           }
         ]
       }
@@ -754,8 +812,8 @@
     "measureTitle": "庁内副業の制度設計",
     "status": "IN_PROGRESS",
     "sourcePage": "p.7",
-    "currentYearResult": "RPA内製化研修として職員4名がRPAシナリオ作成に取り組み中、宮崎市（庁内セカンドワーク実施）への視察を令和8年6月に実施",
-    "currentYearPlan": "佐世保市・八女市への視察も予定",
+    "currentYearResult": "令和8年6月に「庁内セカンドワーク」を実施している宮崎市への視察を実施",
+    "currentYearPlan": "RPA内製化研修として、RPAを職員自身で開発できるよう4名の職員が講師のアドバイスを受けながら、更新が必要となったRPAシナリオの作成に取り組むこととしている。佐世保市・八女市への視察も予定",
     "quantitativeValue": 4,
     "quantitativeUnit": "名（RPA内製化研修参加者）",
     "indicators": [
@@ -767,7 +825,7 @@
           {
             "fiscalYear": "令和8年度",
             "value": 4,
-            "kind": "result"
+            "kind": "planned"
           }
         ]
       }

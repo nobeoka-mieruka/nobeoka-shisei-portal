@@ -1133,13 +1133,35 @@ export interface MayorPromiseIndicator {
   values: MayorPromiseIndicatorValue[];
 }
 
-/** 指標の、ある年度の値1件分。 */
+/**
+ * 指標の、ある年度の値1件分。
+ *
+ * Phase274：区分（kind）を6種類へ広げた。「予算に計上した額」「これからやる予定」
+ * 「政策目標」「当サイトが計算した値」「速報値」を、実績と同じ見た目で並べないため。
+ */
 export interface MayorPromiseIndicatorValue {
   /** 例："令和7年度"。 */
   fiscalYear: string;
   value: number;
-  /** result＝既に生じた実績、plan＝資料に記載された予定・計画値。混同させない。 */
-  kind: "result" | "plan";
+  /**
+   * 値の性格。実績と予定・予算・目標を必ず区別する。
+   * - actual：既に生じた実績（実施済み・決定済み）
+   * - budget：予算に計上された額
+   * - planned：資料に記載された予定・計画値
+   * - target：政策目標値
+   * - derived：当サイトが資料の数値から計算した値（derivation に算出式を書く）
+   * - provisional：速報値・暫定値
+   */
+  kind: "actual" | "budget" | "planned" | "target" | "derived" | "provisional";
+  /** kind が "derived" の場合の算出式。画面にもそのまま出す。 */
+  derivation?: string;
+  /** ISO形式。その値が「いつ時点のものか」。資料から特定できる場合のみ設定する（推定で埋めない）。 */
+  asOfDate?: string;
+  /**
+   * 年度（fiscalYear）の根拠。省略時は資料に年度が明記されている（explicit）。
+   * "derived"＝資料に年度の記載が無く、資料全体の対象年度から当サイトが補ったもの。
+   */
+  fiscalYearBasis?: "explicit" | "derived";
   /** この値が記載されている資料のページ（施策のsourcePageと異なる場合のみ）。 */
   sourcePage?: string;
   /** 値の範囲・条件の補足（例：どの会場の件数か）。資料の記述の範囲内で書く。 */

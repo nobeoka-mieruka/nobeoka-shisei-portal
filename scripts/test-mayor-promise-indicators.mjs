@@ -133,13 +133,69 @@ expectIssue(
 );
 
 expectIssue(
+  "区分を実績から予定へ変えると、予定欄にその数値が無いことを検出する",
+  (data) => {
+    // 1-1-a-1 の令和7年度2件は「前年度実績」欄にしか無いため、予定に変えると根拠が消える。
+    const m = data.find((x) => x.measureId === "1-1-a");
+    m.indicators[0].values.find((v) => v.fiscalYear === "令和7年度").kind = "planned";
+  },
+  "実績と予定の取り違えの疑い",
+);
+
+expectIssue(
+  "予定の値を実績へ変えると、実績欄にその数値が無いことを検出する",
+  (data) => {
+    const m = data.find((x) => x.measureId === "1-1-a");
+    m.indicators[0].values.find((v) => v.fiscalYear === "令和8年度").kind = "actual";
+  },
+  "実績と予定の取り違えの疑い",
+);
+
+expectIssue(
+  "未定義の区分を設定すると検出する",
+  (data) => {
+    const m = data.find((x) => (x.indicators ?? []).length > 0);
+    m.indicators[0].values[0].kind = "estimated";
+  },
+  "kindはactual／budget／planned／target／derived／provisionalのいずれかです",
+);
+
+expectIssue(
+  "当サイトの算出値に算出式が無いと検出する",
+  (data) => {
+    const m = data.find((x) => (x.indicators ?? []).length > 0);
+    m.indicators[0].values[0].kind = "derived";
+  },
+  "算出式（derivation）が必要です",
+);
+
+expectIssue(
+  "「いつ時点の値か」の日付が壊れていると検出する",
+  (data) => {
+    const m = data.find((x) => (x.indicators ?? []).some((i) => i.values.some((v) => v.asOfDate)));
+    const value = m.indicators.flatMap((i) => i.values).find((v) => v.asOfDate);
+    value.asOfDate = "令和8年7月31日";
+  },
+  "asOfDateの形式が不正です",
+);
+
+expectIssue(
+  "指標名に「実績」「予定」を入れると検出する（区分はkindで表すため）",
+  (data) => {
+    const m = data.find((x) => (x.indicators ?? []).length > 0);
+    m.indicators[0].label = `${m.indicators[0].label}（実績）`;
+  },
+  "指標名に「実績」「予定」等を入れないでください",
+);
+
+expectIssue(
   "同じ指標に同じ年度・同じ区分の値を重複登録すると検出する",
   (data) => {
     const m = data.find((x) => (x.indicators ?? []).length > 0);
     const first = m.indicators[0].values[0];
     m.indicators[0].values.push({ ...first });
   },
-  "年度と区分（実績／予定）が重複しています",
+  "年度と区分が重複しています",
 );
 
 expectIssue(
@@ -196,12 +252,12 @@ expectIssue(
 );
 
 expectIssue(
-  "実績／予定の区分を不正な値にすると検出する",
+  "区分を未定義の値にすると検出する",
   (data) => {
     const m = data.find((x) => (x.indicators ?? []).length > 0);
     m.indicators[0].values[0].kind = "confirmed";
   },
-  "kindはresult（実績）かplan（予定）のいずれかです",
+  "kindはactual／budget／planned／target／derived／provisionalのいずれかです",
 );
 
 expectIssue(

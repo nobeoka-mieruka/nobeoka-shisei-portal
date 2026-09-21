@@ -36,7 +36,10 @@ const FISCAL_YEAR_RE = /^(令和|平成|昭和)\d+年度$/;
 /** 単位に混ぜてはいけない語。年度はfiscalYear、実績／予定はkindで表す。 */
 const UNIT_FORBIDDEN_RE = /(年度|予定|実績|見込|累計|時点)/;
 
-const VALID_KINDS = new Set(["result", "plan"]);
+const VALID_KINDS = new Set(["actual", "budget", "planned", "target", "derived", "provisional"]);
+
+/** 指標名に混ぜてはいけない語（区分はkind、年度はfiscalYearで表す）。 */
+const LABEL_FORBIDDEN_RE = /(実績|予定|見込|速報)/;
 
 const isBlank = (value: unknown): boolean => typeof value !== "string" || value.trim().length === 0;
 
@@ -45,13 +48,36 @@ const isBlank = (value: unknown): boolean => typeof value !== "string" || value.
  * 「資料に書かれている数値だけを指標にする」ことを機械的に確かめるために使う。
  */
 export function numbersInMeasureText(measure: MayorPromiseMeasureSnapshot): Set<number> {
-  const text = [
+  const found = numbersInFields([
     measure.previousYearResult,
     measure.currentYearResult,
     measure.currentYearPlan,
     measure.futureTarget,
     measure.notes,
-  ]
+  ]);
+  if (typeof measure.quantitativeValue === "number") found.add(measure.quantitativeValue);
+  return found;
+}
+
+/**
+ * Phase274：実績と予定を取り違えていないかを機械的に確かめるため、
+ * 区分ごとに「どの転記欄に書かれているはずか」を分けて照合する。
+ * 実績（actual）は前年度実績・今年度実績の欄、予定（planned）は今年度予定・将来目標の欄。
+ * 従来は5つの欄をまとめて連結していたため、予定欄の数値を実績として登録しても素通りしていた。
+ */
+export function numbersForKind(measure: MayorPromiseMeasureSnapshot, kind: string): Set<number> {
+  if (kind === "actual" || kind === "provisional") {
+    return numbersInFields([measure.previousYearResult, measure.currentYearResult]);
+  }
+  if (kind === "planned" || kind === "target") {
+    return numbersInFields([measure.currentYearPlan, measure.futureTarget]);
+  }
+  // budget・derived は転記欄の対応が一意に決まらないため、従来どおり全欄で照合する。
+  return numbersInMeasureText(measure);
+}
+
+function numbersInFields(fields: (string | undefined)[]): Set<number> {
+  const text = fields
     .filter((t): t is string => typeof t === "string")
     .join(" ")
     .replace(/,/g, "");
@@ -59,7 +85,6 @@ export function numbersInMeasureText(measure: MayorPromiseMeasureSnapshot): Set<
   for (const m of text.matchAll(/\d+(?:\.\d+)?/g)) {
     found.add(Number(m[0]));
   }
-  if (typeof measure.quantitativeValue === "number") found.add(measure.quantitativeValue);
   return found;
 }
 
@@ -87,6 +112,11 @@ export function validateMeasureIndicators(measures: MayorPromiseMeasureSnapshot[
       else seenIndicatorIds.add(indicator.id);
 
       if (isBlank(indicator.label)) issues.push({ tag, message: "指標のlabel（指標名）が空です" });
+      else if (LABEL_FORBIDDEN_RE.test(indicator.label))
+        issues.push({
+          tag,
+          message: `指標名に「実績」「予定」等を入れないでください（区分はkindで表します）: ${indicator.label}`,
+        });
       if (isBlank(indicator.unit)) issues.push({ tag, message: "指標のunit（単位）が空です" });
       else if (UNIT_FORBIDDEN_RE.test(indicator.unit))
         issues.push({
@@ -100,6 +130,7 @@ export function validateMeasureIndicators(measures: MayorPromiseMeasureSnapshot[
       }
 
       const seenYearKind = new Set<string>();
+      const seenYears = new Set<string>();
       for (const value of indicator.values) {
         const valueTag = `${tag} ${value.fiscalYear ?? "年度不明"}`;
         if (isBlank(value.fiscalYear) || !FISCAL_YEAR_RE.test(value.fiscalYear))
@@ -118,12 +149,36 @@ export function validateMeasureIndicators(measures: MayorPromiseMeasureSnapshot[
             });
         }
         if (!VALID_KINDS.has(value.kind))
-          issues.push({ tag: valueTag, message: `kindはresult（実績）かplan（予定）のいずれかです: ${value.kind}` });
+          issues.push({
+            tag: valueTag,
+            message: `kindはactual／budget／planned／target／derived／provisionalのいずれかです: ${value.kind}`,
+          });
+        // Phase274：実績なのに「予定」欄の数値、予定なのに「実績」欄の数値、という取り違えを止める。
+        else if (typeof value.value === "number" && Number.isFinite(value.value) && value.kind !== "derived") {
+          const expected = numbersForKind(measure, value.kind);
+          if (!expected.has(value.value)) {
+            const where =
+              value.kind === "planned" || value.kind === "target" ? "今年度の予定・将来目標" : "前年度実績・今年度実績";
+            issues.push({
+              tag: valueTag,
+              message: `区分「${value.kind}」の値ですが、${where}の欄にこの数値がありません（実績と予定の取り違えの疑い）: ${value.value}`,
+            });
+          }
+        }
+        if (value.kind === "derived" && isBlank(value.derivation))
+          issues.push({ tag: valueTag, message: "当サイトの算出値（derived）には算出式（derivation）が必要です" });
+        if (value.asOfDate != null && !/^\d{4}-\d{2}(-\d{2})?$/.test(value.asOfDate))
+          issues.push({ tag: valueTag, message: `asOfDateの形式が不正です: ${value.asOfDate}` });
+        if (value.fiscalYearBasis != null && !["explicit", "derived"].includes(value.fiscalYearBasis))
+          issues.push({ tag: valueTag, message: `fiscalYearBasisはexplicitかderivedです: ${value.fiscalYearBasis}` });
 
         const key = `${value.fiscalYear}／${value.kind}`;
         if (seenYearKind.has(key))
-          issues.push({ tag: valueTag, message: `同じ指標の中で年度と区分（実績／予定）が重複しています: ${key}` });
+          issues.push({ tag: valueTag, message: `同じ指標の中で年度と区分が重複しています: ${key}` });
         else seenYearKind.add(key);
+        if (seenYears.has(value.fiscalYear) && !seenYearKind.has(key))
+          issues.push({ tag: valueTag, message: `同じ指標の中で同じ年度の値が複数あります: ${value.fiscalYear}` });
+        seenYears.add(value.fiscalYear);
       }
     }
 
@@ -158,6 +213,12 @@ export interface MeasureIndicatorSummary {
   fiscalYears: string[];
   /** 2年度以上の値を持つ指標の数（年度をまたぐ推移を追えるもの）。 */
   multiYearIndicatorTotal: number;
+  /** 区分（実績・予算額・予定・目標・算出値・速報値）ごとの件数。 */
+  byKind: Record<string, number>;
+  /** 「いつ時点の値か」を資料から特定できた値の数。 */
+  asOfDateTotal: number;
+  /** 年度が資料に明記されておらず、当サイトが補った値の数。 */
+  derivedFiscalYearTotal: number;
 }
 
 export function summarizeMeasureIndicators(measures: MayorPromiseMeasureSnapshot[]): MeasureIndicatorSummary {
@@ -168,6 +229,9 @@ export function summarizeMeasureIndicators(measures: MayorPromiseMeasureSnapshot
   let planValueTotal = 0;
   let multiYearIndicatorTotal = 0;
   let measuresWithIndicators = 0;
+  let asOfDateTotal = 0;
+  let derivedFiscalYearTotal = 0;
+  const byKind: Record<string, number> = {};
 
   for (const measure of measures) {
     const indicators = measure.indicators ?? [];
@@ -178,8 +242,11 @@ export function summarizeMeasureIndicators(measures: MayorPromiseMeasureSnapshot
       const years = new Set<string>();
       for (const value of indicator.values ?? []) {
         valueTotal += 1;
-        if (value.kind === "plan") planValueTotal += 1;
-        else resultValueTotal += 1;
+        if (value.kind === "actual") resultValueTotal += 1;
+        else if (value.kind === "planned") planValueTotal += 1;
+        byKind[value.kind] = (byKind[value.kind] ?? 0) + 1;
+        if (value.asOfDate) asOfDateTotal += 1;
+        if (value.fiscalYearBasis === "derived") derivedFiscalYearTotal += 1;
         years.add(value.fiscalYear);
         if (!fiscalYears.includes(value.fiscalYear)) fiscalYears.push(value.fiscalYear);
       }
@@ -196,5 +263,8 @@ export function summarizeMeasureIndicators(measures: MayorPromiseMeasureSnapshot
     planValueTotal,
     fiscalYears,
     multiYearIndicatorTotal,
+    byKind,
+    asOfDateTotal,
+    derivedFiscalYearTotal,
   };
 }

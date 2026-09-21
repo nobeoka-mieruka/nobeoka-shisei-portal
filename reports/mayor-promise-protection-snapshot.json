@@ -98,7 +98,7 @@
       "unit": "件",
       "fiscalYear": "令和7年度",
       "value": 2,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-a",
@@ -107,7 +107,7 @@
       "unit": "件",
       "fiscalYear": "令和8年度",
       "value": 5,
-      "kind": "plan"
+      "kind": "planned"
     },
     {
       "measureId": "1-1-b",
@@ -116,7 +116,7 @@
       "unit": "回",
       "fiscalYear": "令和7年度",
       "value": 2,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-b",
@@ -125,7 +125,7 @@
       "unit": "回",
       "fiscalYear": "令和8年度",
       "value": 4,
-      "kind": "plan"
+      "kind": "planned"
     },
     {
       "measureId": "1-1-c",
@@ -134,7 +134,7 @@
       "unit": "校",
       "fiscalYear": "令和7年度",
       "value": 6,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-c",
@@ -143,16 +143,16 @@
       "unit": "校",
       "fiscalYear": "令和7年度",
       "value": 17,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-c",
       "indicatorId": "1-1-c-3",
-      "label": "B部門のうちノベ☆スタ自然体験の実施件数",
+      "label": "B部門のうちノベ☆スタへ依頼した自然体験の件数",
       "unit": "件",
       "fiscalYear": "令和7年度",
       "value": 20,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-c",
@@ -161,7 +161,7 @@
       "unit": "校",
       "fiscalYear": "令和8年度",
       "value": 8,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-c",
@@ -170,7 +170,7 @@
       "unit": "校",
       "fiscalYear": "令和8年度",
       "value": 2,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-1-c",
@@ -179,34 +179,52 @@
       "unit": "校",
       "fiscalYear": "令和8年度",
       "value": 1,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-2-c",
       "indicatorId": "1-2-c-1",
-      "label": "学習指導員の雇用人数",
+      "label": "学力向上指導員の雇用人数",
       "unit": "名",
       "fiscalYear": "令和8年度",
       "value": 15,
-      "kind": "result"
+      "kind": "actual"
+    },
+    {
+      "measureId": "1-2-d",
+      "indicatorId": "1-2-d-1",
+      "label": "NOBEOKAスクール・イノベーション事業で連携するチーム数",
+      "unit": "チーム",
+      "fiscalYear": "令和8年度",
+      "value": 3,
+      "kind": "actual"
     },
     {
       "measureId": "1-3-b",
       "indicatorId": "1-3-b-1",
-      "label": "配布した食料品",
+      "label": "配布した食料品の食数",
       "unit": "食分",
       "fiscalYear": "令和8年度",
       "value": 34,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "1-3-b",
       "indicatorId": "1-3-b-2",
-      "label": "食料品の配布実績（人数）",
+      "label": "配布した食料の名分数",
       "unit": "名分",
       "fiscalYear": "令和8年度",
       "value": 962,
-      "kind": "result"
+      "kind": "actual"
+    },
+    {
+      "measureId": "3-2-a",
+      "indicatorId": "3-2-a-1",
+      "label": "大規模災害時に延岡市を支援することが決定した都市数",
+      "unit": "市",
+      "fiscalYear": "令和8年度",
+      "value": 3,
+      "kind": "actual"
     },
     {
       "measureId": "3-2-b",
@@ -215,16 +233,16 @@
       "unit": "ヶ所",
       "fiscalYear": "令和8年度",
       "value": 8,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "4-1-a",
       "indicatorId": "4-1-a-1",
-      "label": "若手職員プロジェクトチームの課題テーマ数",
+      "label": "課題解決研修「GIFT」の課題テーマ数",
       "unit": "テーマ",
       "fiscalYear": "令和8年度",
       "value": 3,
-      "kind": "plan"
+      "kind": "planned"
     },
     {
       "measureId": "4-3-a",
@@ -233,7 +251,7 @@
       "unit": "会場",
       "fiscalYear": "令和7年度",
       "value": 3,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "4-3-a",
@@ -242,7 +260,7 @@
       "unit": "件",
       "fiscalYear": "令和7年度",
       "value": 5,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "4-3-a",
@@ -251,7 +269,7 @@
       "unit": "回",
       "fiscalYear": "令和8年度",
       "value": 10,
-      "kind": "plan"
+      "kind": "planned"
     },
     {
       "measureId": "4-3-a",
@@ -260,7 +278,7 @@
       "unit": "件",
       "fiscalYear": "令和8年度",
       "value": 10,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "4-3-a",
@@ -269,7 +287,16 @@
       "unit": "件",
       "fiscalYear": "令和8年度",
       "value": 7,
-      "kind": "result"
+      "kind": "actual"
+    },
+    {
+      "measureId": "4-3-a",
+      "indicatorId": "4-3-a-6",
+      "label": "出張なんでも総合相談センターのうち他部署と共催する回数",
+      "unit": "回",
+      "fiscalYear": "令和8年度",
+      "value": 2,
+      "kind": "planned"
     },
     {
       "measureId": "4-4-a",
@@ -278,16 +305,16 @@
       "unit": "名",
       "fiscalYear": "令和8年度",
       "value": 1,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "4-4-a",
       "indicatorId": "4-4-a-2",
-      "label": "島野浦島の活性化のための採用予定人数",
+      "label": "島野浦島の活性化のために採用する地域おこし協力隊員数",
       "unit": "名",
       "fiscalYear": "令和8年度",
       "value": 1,
-      "kind": "plan"
+      "kind": "planned"
     },
     {
       "measureId": "4-5-b",
@@ -296,7 +323,7 @@
       "unit": "名",
       "fiscalYear": "令和8年度",
       "value": 1,
-      "kind": "result"
+      "kind": "actual"
     },
     {
       "measureId": "4-5-c",
@@ -305,7 +332,7 @@
       "unit": "名",
       "fiscalYear": "令和8年度",
       "value": 4,
-      "kind": "result"
+      "kind": "planned"
     }
   ]
 }
