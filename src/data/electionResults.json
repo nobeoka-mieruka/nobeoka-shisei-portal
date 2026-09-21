@@ -3875,7 +3875,124 @@
         "accessedAt": "2026-09-21",
         "extractionMethod": "pdf-extraction",
         "verificationStatus": "verified",
-        "notes": "URLはファイル名に日本語を含むため、確実に到達できるパーセントエンコード形式で登録している。発行は延岡市選挙管理委員会だが、当サイトが到達できるのは第三者（選挙ドットコム）によるミラーであり、延岡市公式サイトからの直接取得ではない。延岡市公式サイトの選挙管理委員会事務局ページ・「延岡市長選挙候補者等一覧及び選挙公報」（/soshiki/79/13020.html）は2026年9月21日時点でいずれも参照できず（後者はHTTP 404）、市公式サイトでの現在の掲載は確認できなかった。資料には「この選挙公報は、候補者から提出された原稿をそのまま写真製版して印刷したものです。（掲載順序は、抽選で決定しています。）」と明記されており、掲載順序に優劣の意味は無い。おもて面に3候補の政策等、うら面に投票方法の案内を掲載。当サイトはこの資料の内容を公約データベースへは取り込んでいない（照合は未実施）。"
+        "notes": "URLはファイル名に日本語を含むため、確実に到達できるパーセントエンコード形式で登録している。発行は延岡市選挙管理委員会だが、当サイトが到達できるのは第三者（選挙ドットコム）によるミラーであり、延岡市公式サイトからの直接取得ではない。延岡市公式サイトの選挙管理委員会事務局ページ・「延岡市長選挙候補者等一覧及び選挙公報」（/soshiki/79/13020.html）は2026年9月21日時点でいずれも参照できず（後者はHTTP 404）、市公式サイトでの現在の掲載は確認できなかった。資料には「この選挙公報は、候補者から提出された原稿をそのまま写真製版して印刷したものです。（掲載順序は、抽選で決定しています。）」と明記されており、掲載順序に優劣の意味は無い。おもて面に3候補の政策等、うら面に投票方法の案内を掲載。当サイトは、この資料の12項目と市長公約データベースの個別公約14件を2026年9月21日に文言比較し、対応が明確に確認できた6件についてのみ、公約側の資料一覧へこの資料を追加した（公約本文そのものは書き換えていない）。残る8件は文言の差が大きい、または対応する項目が公報に無いため、無理に対応づけていない。",
+        "catchphrase": "お年寄りも、わけもんも、みんなで延岡をつくる",
+        "gazetteItems": [
+          {
+            "itemId": "koho-2025-p1-1",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 1,
+            "categoryTitle": "全ての子どもたちの可能性を伸ばします",
+            "itemNumber": 1,
+            "text": "塾や習い事、自然体験で使えるクーポン券を子育て世帯に配布します。"
+          },
+          {
+            "itemId": "koho-2025-p1-2",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 1,
+            "categoryTitle": "全ての子どもたちの可能性を伸ばします",
+            "itemNumber": 2,
+            "text": "小中学校で習熟度別指導を全面導入し、ひとりひとりに合った学びを推進します。"
+          },
+          {
+            "itemId": "koho-2025-p1-3",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 1,
+            "categoryTitle": "全ての子どもたちの可能性を伸ばします",
+            "itemNumber": 3,
+            "text": "市役所に「こども未来部」を設置し、子育て支援を強化します。"
+          },
+          {
+            "itemId": "koho-2025-p2-1",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 2,
+            "categoryTitle": "地域経済を活性化させます",
+            "itemNumber": 1,
+            "text": "地域商社を設立し、農作物、海産物などの掘り起こしや販路開拓を行い、ふるさと納税日本一を目指します。"
+          },
+          {
+            "itemId": "koho-2025-p2-2",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 2,
+            "categoryTitle": "地域経済を活性化させます",
+            "itemNumber": 2,
+            "text": "日本夜景遺産に選ばれている愛宕山にカフェを誘致し、市民の憩いの場とともに観光客誘致に繋げます。"
+          },
+          {
+            "itemId": "koho-2025-p2-3",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 2,
+            "categoryTitle": "地域経済を活性化させます",
+            "itemNumber": 3,
+            "text": "県立体育館やスポーツパークを活用し、合宿誘致を強化し、飲食店や宿泊を伸ばします。"
+          },
+          {
+            "itemId": "koho-2025-p3-1",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 3,
+            "categoryTitle": "シニア世代が輝き、安心して暮らせるまちにします",
+            "itemNumber": 1,
+            "text": "診療所などが廃業した際、新たな医師による事業承継を支援し、地域医療を守ります。"
+          },
+          {
+            "itemId": "koho-2025-p3-2",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 3,
+            "categoryTitle": "シニア世代が輝き、安心して暮らせるまちにします",
+            "itemNumber": 2,
+            "text": "大規模災害への備えとして、福祉避難所の充実や、既存の避難所の段ボールベッドを増やす等、安心して避難できる環境を早急に整えます。"
+          },
+          {
+            "itemId": "koho-2025-p3-3",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 3,
+            "categoryTitle": "シニア世代が輝き、安心して暮らせるまちにします",
+            "itemNumber": 3,
+            "text": "シニア世代の皆さんが活き活きと活躍できる仕事や地域での活動の場を創出します。"
+          },
+          {
+            "itemId": "koho-2025-p4-1",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 4,
+            "categoryTitle": "市役所をもっと前向きな組織へ",
+            "itemNumber": 1,
+            "text": "民間企業人と市職員がタッグを組んだ政策提案プロジェクトチームにより新たなアイディアを創出します。"
+          },
+          {
+            "itemId": "koho-2025-p4-2",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 4,
+            "categoryTitle": "市役所をもっと前向きな組織へ",
+            "itemNumber": 2,
+            "text": "北方・北浦・北川・島浦の支所に地域活性化専門の職員を配置し、個性ある地域づくりを推進します。"
+          },
+          {
+            "itemId": "koho-2025-p4-3",
+            "candidateName": "みうら 久知",
+            "registrationNumber": 1,
+            "categoryNumber": 4,
+            "categoryTitle": "市役所をもっと前向きな組織へ",
+            "itemNumber": 3,
+            "text": "市の相談窓口がもっと身近になるよう、ショッピングセンターなどで出張相談会を実施します。"
+          }
+        ],
+        "transcription": {
+          "method": "PDFを2.5倍解像度でPNG化し、政策分野ごとに切り出した画像を目視確認して転記",
+          "transcribedAt": "2026-09-21",
+          "scope": "当選者（みうら久知）の掲載内容のみ。他の2候補の掲載内容は未転記。",
+          "note": "原文のまま転記しており、要約・言い換え・項目の分割統合は行っていない。この内容は市長公約データベースの本文へは反映していない（対応関係の記録のみ）。"
+        }
       }
     ],
     "notes": "読谷山洋司の辞職（病気療養）に伴う選挙。新人3名による争い、三浦久知が僅差で初当選。候補者「吉本やすし」氏は、得票数（15,196票、27.5%）がformerMembers.json fm01（吉本靖、元延岡市議会議員）のnoteに記載の得票数と完全一致するためfm01としてリンクした。",

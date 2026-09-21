@@ -100,6 +100,42 @@ export interface ElectionGazettePlacement {
   placement: string;
 }
 
+
+/**
+ * Phase273：選挙公報に掲載された候補者の政策1項目分（原文のまま）。
+ *
+ * 選挙公報は「候補者から提出された原稿をそのまま写真製版して印刷したもの」であり、
+ * ここに登録するのも原文そのままとする。要約・言い換え・項目の分割統合はしない。
+ * これは選挙時点の資料であり、就任後の市長公約データベース
+ * （src/data/mayorPromises.json）とは別の資料である。両者を自動的に同一視しない。
+ */
+export interface ElectionGazetteItem {
+  /** 安定したID（例："koho-2025-p1-1"＝分野1の1項目目）。 */
+  itemId: string;
+  /** 掲載されている候補者名（資料の表記をそのまま使う）。 */
+  candidateName: string;
+  /** 届出番号（確認できた場合のみ）。 */
+  registrationNumber?: number;
+  /** 政策分野の番号（資料上の①〜④）。 */
+  categoryNumber: number;
+  /** 政策分野の見出し（原文）。 */
+  categoryTitle: string;
+  /** 分野内での項目番号。 */
+  itemNumber: number;
+  /** 項目の原文。 */
+  text: string;
+}
+
+/** 選挙公報の転記方法の記録（OCRだけで確定していないことを示す）。 */
+export interface ElectionGazetteTranscription {
+  method: string;
+  /** ISO形式。転記した日。 */
+  transcribedAt: string;
+  /** 転記した範囲（全候補者か、当選者のみか等）。 */
+  scope: string;
+  note?: string;
+}
+
 /**
  * 選挙結果の出典1件分。
  *
@@ -141,6 +177,12 @@ export interface ElectionSourceRef {
   trustLevel?: ArchiveSourceTrustLevel;
   /** 選挙公報の場合の、候補者ごとの掲載位置。 */
   candidatePlacements?: ElectionGazettePlacement[];
+  /** 選挙公報の場合の、掲載内容（原文のまま）。 */
+  gazetteItems?: ElectionGazetteItem[];
+  /** 選挙公報の場合の、キャッチコピー（原文のまま）。 */
+  catchphrase?: string;
+  /** 選挙公報の場合の、転記方法の記録。 */
+  transcription?: ElectionGazetteTranscription;
   sourceUrl: string;
   sourceTitle: string;
   /** 掲載元（取得先）の組織名。発行主体は publisher で表す。 */
