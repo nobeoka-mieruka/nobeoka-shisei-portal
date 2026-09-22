@@ -5,8 +5,13 @@ import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
 import councilSpeechPeriod from "../config/councilSpeechPeriod.json";
 import billProposalRolesData from "../data/billProposalRoles.json";
+import { committeeReportActivityEvents, committeeReportActivityForMember } from "./committees";
+import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
+import themesData from "../data/themes.json";
+import { classifyTopicWithEvidence, isPolicyTheme } from "./topicClassificationMeta";
 import type {
   CouncilMember,
+  CouncilSpeech,
   GeneralQuestionItem,
   BillVoteItem,
   BillMemberVoteStatus,
@@ -43,7 +48,12 @@ import {
   type EvidenceAvailabilityEntry,
 } from "./evidenceAvailability";
 import questionCollectionStatusData from "../data/questionCollectionStatus.json";
-import { buildCouncilActivityRecord, type CouncilActivityRecord } from "./councilActivityRecord";
+import {
+  buildCouncilActivityRecord,
+  type ActivityRecordListItem,
+  type CouncilActivityRecord,
+  type CouncilActivityRecordExtras,
+} from "./councilActivityRecord";
 
 /**
  * 「延岡市議会 議員活動バロメーター」（/council-activity、/council-activity/:memberId）用の
@@ -120,9 +130,18 @@ export function isCouncilChairperson(member: CouncilMember): boolean {
     .includes("議長");
 }
 
-/** 議長を質問系の指標の対象外とする理由（市民向けの説明文）。 */
+/**
+ * 議長を質問系の指標の対象外とする理由（市民向けの説明文）。
+ *
+ * 「議長在任期間だから対象外」とは書かない。就任日・退任日を示す一次資料を確認できて
+ * いないため、対象期間のどこからが議長在任だったのかを当サイトは特定できていない
+ * （歴代議長の記録は第52代／2011年までしか収録できていない。第53代以降は調査中）。
+ * 分かっているのは「現在は議長である」ことだけなので、対象期間全体を対象外として扱う。
+ * 逆向き（分母に入れて低い実施率を出す）は、役職に就いたことが活動の少なさとして
+ * 表示される誤りになるため採らない。
+ */
 const CHAIRPERSON_NOT_APPLICABLE_REASON =
-  "議長在任期間のため一般質問実施率の算定対象外です。議長は会議の進行役を務めるため一般質問を行わない慣例があり、活動が少ないという意味ではありません。";
+  "議長は会議の進行役を務めるため、一般質問を行わない慣例があります。議長の就任日・退任日を示す公式資料を確認できていないため、対象期間全体を実施率の算定対象外としています。質問をしなかった、活動が少ない、という意味ではありません。";
 
 /**
  * 公開記録による議会活動（①市政運営の監視・評価）を、議員1名分算定する。
@@ -137,21 +156,125 @@ const questionCollectionStatus = questionCollectionStatusData as {
   sessions: { sessionId: string; sessionTitle: string }[];
 };
 
+/** 会期IDから、市民向けの会期名（令和5年6月定例会）へ。 */
+function sessionTitleOf(sessionId: string): string {
+  return questionCollectionStatus.sessions.find((s) => s.sessionId === sessionId)?.sessionTitle ?? sessionId;
+}
+
+const themeNameBySlug = new Map((themesData as { slug: string; name: string }[]).map((t) => [t.slug, t.name]));
+const speechAnalysisMembers = (
+  memberSpeechAnalysisData as {
+    members: { memberId: string; recurringTopics?: { label: string; sessionIds: string[] }[] }[];
+  }
+).members;
+
+/**
+ * 一般質問以外の記録（政策分野・継続テーマ・決議の提出者・委員長報告・記名投票）を組み立てる。
+ *
+ * どれも「確認できた事実の一覧」であり、件数の多さを評価に使わない。
+ * 分類が当サイトの自動処理によるものは、その旨を各行に添える。
+ */
+function buildRecordExtras(member: CouncilMember, speeches: CouncilSpeech[]): CouncilActivityRecordExtras {
+  // --- 政策分野（自動分類）。分類できなかった見出し語は、分野として数えず別に示す。 ---
+  const topicAggregates = aggregateMemberTopics(speeches);
+  const bySlug = new Map<string, { sessionIds: Set<string>; topics: Set<string> }>();
+  let unclassifiedTopicCount = 0;
+  for (const agg of topicAggregates) {
+    const classified = classifyTopicWithEvidence(agg.topic);
+    if (!classified.themeSlug || !isPolicyTheme(classified.themeSlug)) {
+      unclassifiedTopicCount += 1;
+      continue;
+    }
+    const entry = bySlug.get(classified.themeSlug) ?? { sessionIds: new Set<string>(), topics: new Set<string>() };
+    for (const id of agg.sessionIds) entry.sessionIds.add(id);
+    entry.topics.add(agg.topic);
+    bySlug.set(classified.themeSlug, entry);
+  }
+  const policyThemes: ActivityRecordListItem[] = [...bySlug.entries()]
+    .map(([slug, e]) => {
+      const ids = [...e.sessionIds].sort();
+      return {
+        slug,
+        sessionCount: ids.length,
+        item: {
+          label: themeNameBySlug.get(slug) ?? slug,
+          detail: `${ids.length}会期（${sessionTitleOf(ids[0])}〜${sessionTitleOf(ids[ids.length - 1])}）`,
+          classificationNote: `自動分類（キーワード）。この分野へ入れた見出し語：${[...e.topics].join("、")}`,
+          url: `/themes/${slug}`,
+          urlLabel: "このテーマの質問を見る",
+        } satisfies ActivityRecordListItem,
+      };
+    })
+    .sort((a, b) => b.sessionCount - a.sessionCount || a.item.label.localeCompare(b.item.label, "ja"))
+    .map((x) => x.item);
+  if (unclassifiedTopicCount > 0) {
+    policyThemes.push({
+      label: "分類していない見出し語",
+      detail: `${unclassifiedTopicCount}語句`,
+      classificationNote:
+        "どのキーワードにも一致しなかった見出し語です。推測で分野を割り当てていないため、政策分野の1つとしては数えていません。",
+    });
+  }
+
+  // --- 継続テーマ。2会期以上で確認できたものだけ（同一会期内の複数質問は継続と扱わない）。 ---
+  const recurring = speechAnalysisMembers.find((m) => m.memberId === member.id)?.recurringTopics ?? [];
+  const recurringThemes: ActivityRecordListItem[] = recurring
+    .map((t) => {
+      const ids = [...t.sessionIds].sort();
+      return {
+        sessionCount: ids.length,
+        item: {
+          label: t.label,
+          detail: `${ids.length}会期（最初：${sessionTitleOf(ids[0])}／最新：${sessionTitleOf(ids[ids.length - 1])}）`,
+        } satisfies ActivityRecordListItem,
+      };
+    })
+    .sort((a, b) => b.sessionCount - a.sessionCount || a.item.label.localeCompare(b.item.label, "ja"))
+    .map((x) => x.item);
+
+  // --- 議員提出決議の提出者 ---
+  const decisionSubmissions: ActivityRecordListItem[] = billProposalRoles
+    .filter((r) => r.role === "submitter" && r.personId === member.id)
+    .map((r) => ({
+      label: `${r.recordType}（${r.date}）`,
+      url: r.sourceRefs?.[0]?.url,
+      urlLabel: "会議録",
+    }));
+
+  // --- 本会議での委員長・副委員長報告 ---
+  const committeeReports: ActivityRecordListItem[] = committeeReportActivityForMember(member.id).map((e) => ({
+    label: e.committeeName,
+    detail: e.meetingDate,
+    url: e.sourceUrl,
+    urlLabel: "会議録",
+  }));
+
+  // --- 議案への賛否（個人別に公開されている議案のみ） ---
+  const namedVotes = {
+    numerator: billsWithMemberVotesInCurrentTerm.filter((b) =>
+      b.memberVotes.some((v) => v.memberId === member.id),
+    ).length,
+    denominator: billsWithAnyMemberVoteDisclosed,
+  };
+
+  return { policyThemes, recurringThemes, decisionSubmissions, committeeReports, namedVotes };
+}
+
 export function getMemberActivityRecord(member: CouncilMember): CouncilActivityRecord {
   const speechRecord = findMemberSpeechRecord(speechSummaryData.members, member.id);
   const speeches = currentTermPublicSpeeches(speechRecord);
-  const sessionTitleOf = (sessionId: string) =>
-    questionCollectionStatus.sessions.find((s) => s.sessionId === sessionId)?.sessionTitle ?? sessionId;
   const all = radarEligibleSessions.map((sessionId) => ({ sessionId, sessionTitle: sessionTitleOf(sessionId) }));
+  const extras = buildRecordExtras(member, speeches);
 
   if (isCouncilChairperson(member)) {
     return buildCouncilActivityRecord(
       speeches,
       [],
       all.map((s) => ({ ...s, reason: CHAIRPERSON_NOT_APPLICABLE_REASON })),
+      extras,
     );
   }
-  return buildCouncilActivityRecord(speeches, all, []);
+  return buildCouncilActivityRecord(speeches, all, [], extras);
 }
 
 /**
@@ -340,6 +463,10 @@ export interface MemberVoteEvidence {
   }[];
   /** サイト全体の登録議案数（この議員に限らない、比較の分母の参考値）。 */
   totalBillCountSitewide: number;
+  /** 会議録で「個人別の賛否は記載されていない」と確認できた議案数（起立採決など）。 */
+  notDisclosedBillCountSitewide: number;
+  /** 個人別の賛否を当サイトがまだ確認できていない議案数。非公開と断定していない。 */
+  unconfirmedBillCountSitewide: number;
 }
 
 export function getMemberVoteEvidence(member: CouncilMember): MemberVoteEvidence {
@@ -365,6 +492,8 @@ export function getMemberVoteEvidence(member: CouncilMember): MemberVoteEvidence
       vote: b.memberVotes.find((v) => v.memberId === member.id)!.vote,
     })),
     totalBillCountSitewide: billVotes.length,
+    notDisclosedBillCountSitewide: billVotes.filter((x) => x.individualVoteDisclosureStatus === "notDisclosed").length,
+    unconfirmedBillCountSitewide: billVotes.filter((x) => x.individualVoteDisclosureStatus === "unconfirmed").length,
   };
 }
 
@@ -425,8 +554,11 @@ export interface IndicatorCoverageDetail {
   totalMemberCount: number;
   /** 会議録を確認できた会期数（会期の概念がない指標はnull）。 */
   confirmedSessionCount: number | null;
-  /** この指標の根拠となる一次資料の件数と、その単位の説明。 */
-  sourceRecordCount: number;
+  /**
+   * この指標の根拠となる一次資料の件数と、その単位の説明。
+   * 件数を数えられない（資料そのものを確認できていない）場合は null。0件とは書かない。
+   */
+  sourceRecordCount: number | null;
   sourceRecordUnit: string;
   /** 何が不足しているかの市民向け説明。 */
   missingDescription: string;
@@ -436,6 +568,9 @@ export function getIndicatorCoverageDetail(): IndicatorCoverageDetail[] {
   const coverage = getIndicatorCoverage();
   const byKey = new Map(coverage.map((c) => [c.indicatorKey, c]));
   const confirmedSessionCount = TRANSCRIPT_AVAILABLE_SESSION_IDS.length;
+  // 「請願・提案等」で個人に帰属できている記録。実データから数え、説明文へ直書きしない。
+  const decisionSubmitterRecordCount = billProposalRoles.filter((r) => r.role === "submitter").length;
+  const committeeReportRecordCount = committeeReportActivityEvents.length;
   const speechRecordCount = speechSummaryData.members.reduce((sum, m) => sum + (m.speeches?.length ?? 0), 0);
   const questionItemCount = speechSummaryData.members.reduce(
     (sum, m) => sum + (m.speeches ?? []).reduce((s2, sp) => s2 + (sp.questionItems?.length ?? 0), 0),
@@ -463,9 +598,11 @@ export function getIndicatorCoverageDetail(): IndicatorCoverageDetail[] {
     {
       indicatorKey: "attendance",
       indicatorLabel: "出席状況",
-      confirmedSessionCount: 0,
-      sourceRecordCount: 0,
-      sourceRecordUnit: "出席記録0件",
+      // 0会期・0件と書くと「調べた結果ゼロだった」と読めてしまう。出席はそもそも会期単位の
+      // 概念ではなく、議員別の名簿自体を確認できていないため、件数を持たない。
+      confirmedSessionCount: null,
+      sourceRecordCount: null,
+      sourceRecordUnit: "議員別の出席・欠席名簿を確認できていません",
       missingDescription: "複数の公開資料経路を調査しましたが、議員別の出席・欠席名簿を確認できていません（公開資料から確認できず）。",
     },
     {
@@ -480,10 +617,10 @@ export function getIndicatorCoverageDetail(): IndicatorCoverageDetail[] {
       indicatorKey: "proposal",
       indicatorLabel: "請願・提案等",
       confirmedSessionCount: null,
-      sourceRecordCount: 0,
-      sourceRecordUnit: "議員別の提案者・紹介議員情報0件",
+      sourceRecordCount: decisionSubmitterRecordCount + committeeReportRecordCount,
+      sourceRecordUnit: `決議の提出者${decisionSubmitterRecordCount}件・本会議での委員長副委員長報告${committeeReportRecordCount}件（条例案・意見書等の提出者と紹介議員は未取得）`,
       missingDescription:
-        "議員別の提案者・紹介議員情報は未収録です。本会議での委員長・副委員長報告（68件）は参考情報として個人ページに別途掲載していますが、この指標の算定には含めていません。",
+        "会議録で氏名を確認できた記録（決議の提出者・委員長副委員長報告）は個人ページに実数で掲載しています。条例案・意見書等の提出者と、請願・陳情の紹介議員は議員別に取り込めていないため、この指標としては算定していません（0件という意味ではありません）。",
     },
     {
       indicatorKey: "disclosure",

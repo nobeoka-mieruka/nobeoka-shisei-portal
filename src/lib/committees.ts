@@ -64,6 +64,14 @@ export function reportsForCommittee(committeeId: string): CommitteeActivityRepor
 }
 
 /** 指定した議員が本会議で行った委員長・副委員長報告の記録（Phase101、会議録から機械抽出・氏名完全一致確認済み）。 */
+/**
+ * 本会議での委員長・副委員長報告のうち、会議録で氏名を確認できた記録（個人に帰属できるもの）。
+ * 件数を説明文へ直書きしないための単一情報源。
+ */
+export const committeeReportActivityEvents: CommitteeReportActivityEvent[] = committeeReportActivity.filter(
+  (e) => !!e.memberId,
+);
+
 export function committeeReportActivityForMember(memberId: string): CommitteeReportActivityEvent[] {
   return committeeReportActivity
     .filter((e) => e.memberId === memberId)
