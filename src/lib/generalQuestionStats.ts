@@ -111,14 +111,11 @@ export function scheduledQuestionSessions(generalQuestions: GeneralQuestionItem[
 }
 
 /**
- * 会期名1件分の進行状態。**会議録本文を確認できた会期だけ**を"completed"とし、
- * まだ確認できていない会期は"upcoming"（開催前・開催中・結果確認中）とする。
+ * 会期名1件分の進行状態。収録状況へ登録済み＝会期が閉会し、議案審議結果を確認できた会期を
+ * "completed"、まだ登録されていない会期を"upcoming"（開催前または開催中）とする。
  *
- * 収録状況への登録（questionCollectionStatus.jsonに行があること）は「会期が閉会した」
- * という意味であって、「一般質問が実際に行われたことを確認できた」という意味ではない。
- * 登録の有無で判定すると、議決結果しか分かっていない会期まで「開催済み」と断定し、
- * 質問日から「質問予定日」の表記が消えて実施済みの質問日のように見えてしまう。
- * （2026-09に会期要約の自動生成で同じ取り違えが起きたため、こちらも同じ基準にそろえた。）
+ * これは「会期が終わったか」の軸であり、「一般質問が行われたことを確認できたか」とは別。
+ * 質問の実施を確認できたかは questionTranscriptConfirmedForSessionName() を使うこと。
  *
  * 今日の日付は使わない（プリレンダリング済みHTMLと閲覧時で表示が食い違わないようにするため）。
  * 会期IDを導出できない表記は、根拠なく「開催予定」と表示しないよう"completed"側に倒す。
@@ -126,9 +123,32 @@ export function scheduledQuestionSessions(generalQuestions: GeneralQuestionItem[
 export function councilSessionPhaseForSessionName(sessionName: string): CouncilSessionPhase {
   const sessionId = councilSessionIdFromSessionName(sessionName);
   if (sessionId === null) return "completed";
-  return questionCollectionStatus.sessions.some((s) => s.sessionId === sessionId && s.transcriptAvailable === true)
-    ? "completed"
-    : "upcoming";
+  return questionCollectionStatus.sessions.some((s) => s.sessionId === sessionId) ? "completed" : "upcoming";
+}
+
+/**
+ * 会議録がまだ公開されていない会期の予定質問だけを返す。
+ *
+ * 「予定」として見せてよいのは、会議録で内容を確認できていない会期だけ。
+ * 確認できた会期の質問は、確認済みの一般質問として別に数えて表示する。
+ */
+export function sessionsAwaitingTranscript(
+  generalQuestions: GeneralQuestionItem[],
+): ScheduledQuestionSession[] {
+  return scheduledQuestionSessions(generalQuestions).filter((s) => !s.transcriptAvailable);
+}
+
+/**
+ * その会期の一般質問を、会議録本文で確認できているか。
+ *
+ * 会期が閉会したこと（議案審議結果で確認できる）と、一般質問が実際に行われたこと
+ * （会議録で確認する）は別の事実なので、判定を分けている。閉会を根拠に質問の実施まで
+ * 確かめたことにすると、通告どおりに行われたかどうかを確認しないまま断定してしまう。
+ */
+export function questionTranscriptConfirmedForSessionName(sessionName: string): boolean {
+  const sessionId = councilSessionIdFromSessionName(sessionName);
+  if (sessionId === null) return false;
+  return questionCollectionStatus.sessions.some((s) => s.sessionId === sessionId && s.transcriptAvailable === true);
 }
 
 /**
@@ -226,7 +246,7 @@ export function calculateGeneralQuestionStats(
   const targetSessionCount = status.sessions.length;
   const uncollectedSessions = status.sessions.filter((s) => !s.transcriptAvailable);
 
-  const scheduledSessions = scheduledQuestionSessions(generalQuestions);
+  const scheduledSessions = sessionsAwaitingTranscript(generalQuestions);
   const completedScheduledSessions = scheduledSessions.filter((s) => s.phase === "completed");
   const upcomingScheduledSessions = scheduledSessions.filter((s) => s.phase === "upcoming");
   const sumCount = (list: ScheduledQuestionSession[]) => list.reduce((sum, s) => sum + s.count, 0);
@@ -238,7 +258,7 @@ export function calculateGeneralQuestionStats(
     // 「会議録未公開会期の予定質問」の件数。会議録を確認できた会期の質問は、
     // 既に確認済みの一般質問として別に数えているため、ここへ足さない
     // （足すと、確認済みの会期まで「会議録の公開待ち」に見えてしまう）。
-    scheduledCount: sumCount(scheduledSessions.filter((s) => !s.transcriptAvailable)),
+    scheduledCount: sumCount(scheduledSessions),
     completedScheduledSessions,
     completedScheduledCount: sumCount(completedScheduledSessions),
     upcomingScheduledSessions,

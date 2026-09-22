@@ -170,19 +170,14 @@ check("日程を1日も確認できていない会期は、推測で開催予定
 
 console.log("\nPhase221-4：質問日の見出し語（予定日と実施済みの日を取り違えない）");
 
-check("会議録確認済みの会期（completed）の質問日には「質問予定日」を付けない", () => {
-  assert.equal(questionDateLabelPrefix("completed", "2025-09-10", "2026-09-05"), "");
-  assert.equal(questionDateLabelPrefix("completed", "2025-09-10", null), "");
+check("会議録で質問の実施を確認できた場合だけ、質問日に「質問予定日」を付けない", () => {
+  assert.equal(questionDateLabelPrefix(true), "");
 });
 
-check("未確認の会期の質問日は、当日までは「質問予定日」・翌日以降は付けない", () => {
-  assert.equal(questionDateLabelPrefix("upcoming", "2026-09-08", "2026-09-07"), "質問予定日 ");
-  assert.equal(questionDateLabelPrefix("upcoming", "2026-09-08", "2026-09-08"), "質問予定日 ");
-  assert.equal(questionDateLabelPrefix("upcoming", "2026-09-08", "2026-09-09"), "");
-});
-
-check("today=null（サーバー生成HTML）では、質問通告書ベースであることが分かる「質問予定日」表記を保つ", () => {
-  assert.equal(questionDateLabelPrefix("upcoming", "2026-09-08", null), "質問予定日 ");
+check("会議録で確認できていない質問は、予定日が過ぎていても「質問予定日」のままにする", () => {
+  // 予定日が過ぎたことは、その日に質問が行われたことを意味しない
+  // （通告した項目を本人が割愛した実例がある）。暦から実施を推し量らない。
+  assert.equal(questionDateLabelPrefix(false), "質問予定日 ");
 });
 
 console.log("\nPhase221-5：実データでの整合（ページ間で会期の状態が食い違わないこと）");

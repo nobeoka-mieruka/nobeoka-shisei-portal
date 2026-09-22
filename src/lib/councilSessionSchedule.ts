@@ -242,16 +242,14 @@ export function councilSessionScheduleInfo(
 
 /**
  * 一般質問1件分の日付の見出し語。予定日（これから）と実施済みの日を取り違えないようにする。
- * 会議録で内容を確認済みの会期（phase="completed"）は通常の質問日として扱う。
+ *
+ * 判断の根拠は「会議録で質問の実施を確認できたか」。会期が閉会しただけでは、
+ * 通告どおりに質問が行われたかは分からない（取下げ・割愛の実例がある）ため、
+ * 会議録を確認できていない間は「質問予定日」の表記を保つ。
  */
-export function questionDateLabelPrefix(
-  phase: CouncilSessionPhase,
-  questionDate: string,
-  today: string | null,
-): string {
-  if (phase === "completed") return "";
-  // 閲覧日が未確定のとき（サーバー生成HTML）は、質問通告書ベースであることが分かる
-  // 「質問予定日」表記を保つ（ビルド日時での判定はしない）。
-  if (today === null) return "質問予定日 ";
-  return questionDate >= today ? "質問予定日 " : "";
+export function questionDateLabelPrefix(transcriptConfirmed: boolean): string {
+  // 予定日が過ぎたことは、その日に質問が行われたことを意味しない
+  // （取下げ・割愛の実例がある）。暦から実施を推し量らず、会議録で
+  // 確認できるまでは「質問予定日」の表記を保つ。
+  return transcriptConfirmed ? "" : "質問予定日 ";
 }

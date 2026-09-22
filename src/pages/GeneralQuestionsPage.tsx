@@ -41,7 +41,7 @@ import {
 import { CsvDownloadButton } from "../components/CsvDownloadButton";
 import type { CsvColumn } from "../lib/csv";
 import { SITE_URL } from "../config/site";
-import { scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import { scheduledQuestionSessions, sessionsAwaitingTranscript } from "../lib/generalQuestionStats";
 import { UpcomingSessionsNotice } from "../components/council/UpcomingSessionsNotice";
 import { LATEST_CONFIRMED_SESSION_HEADING, latestConfirmedCouncilSession } from "../lib/councilSessions";
 import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
@@ -71,13 +71,17 @@ const REGULAR_SESSION_TYPES = new Set(["定例会"]);
 // Phase203：質問通告書ベースの予定質問を会期ごとにまとめ、「開催済み（会議録の公開待ち）」と
 // 「これから開催される会期」を分けて表示するための集計。会期名・件数・質問予定日は
 // generalQuestions.jsonの実データのみを使う。
-const scheduledSessions = scheduledQuestionSessions(questions);
+// 「予定」として見せるのは、会議録がまだ公開されていない会期だけ。
+// 会議録を確認できた会期の質問は、下の確認済みの一覧で内容ごと掲載している。
+const scheduledSessions = sessionsAwaitingTranscript(questions);
+// 会期の状態（開催済み／開催予定）の引き当てには、確認済みの会期も含めた全体を使う。
+const allScheduledSessions = scheduledQuestionSessions(questions);
 const completedScheduledSessions = scheduledSessions.filter((s) => s.phase === "completed");
 const upcomingScheduledSessions = scheduledSessions.filter((s) => s.phase === "upcoming");
 const latestConfirmedSession = latestConfirmedCouncilSession(councilSessions);
 // Phase221：質問カード側でも会期全体の日程から状態を判定できるよう、会期名から会期を引ける表を作る
 // （1件だけの質問予定日で判定して、ページごとに会期の状態表示が食い違わないようにするため）。
-const scheduledSessionByName = new Map(scheduledSessions.map((s) => [s.sessionName, s]));
+const scheduledSessionByName = new Map(allScheduledSessions.map((s) => [s.sessionName, s]));
 
 type QuestionSortKey = "dateDesc" | "dateAsc" | "memberName";
 

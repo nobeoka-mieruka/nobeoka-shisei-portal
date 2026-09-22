@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import type { GeneralQuestionItem } from "../../types";
 import { formatJapaneseDate } from "../../config/site";
 import { GlobeIcon, PlayIcon } from "../icons";
-import { councilSessionPhaseForSessionName } from "../../lib/generalQuestionStats";
+import { councilSessionPhaseForSessionName, questionTranscriptConfirmedForSessionName } from "../../lib/generalQuestionStats";
 import {
   questionDateLabelPrefix,
   type CouncilSessionScheduleInput,
 } from "../../lib/councilSessionSchedule";
-import { useTodayJst } from "../../hooks/useTodayJst";
 import { CouncilSessionStatusBadge } from "../council/CouncilSessionStatusBadge";
 import { humanizeDataNote } from "../../lib/citizenTermLabels";
 
@@ -52,8 +51,7 @@ export function GeneralQuestionCard({
   // Phase221：市民向けの表示状態（開催予定／開催中／一般質問終了・結果確認中）は、
   // 閲覧日（日本標準時。ハイドレーション完了後にだけ確定）と実際の日程から導出する。
   const sessionPhase = councilSessionPhaseForSessionName(item.sessionName);
-  const today = useTodayJst();
-  const datePrefix = questionDateLabelPrefix(sessionPhase, item.questionDate, today);
+  const datePrefix = questionDateLabelPrefix(questionTranscriptConfirmedForSessionName(item.sessionName));
   const scheduleInput: CouncilSessionScheduleInput = session ?? {
     phase: sessionPhase,
     firstQuestionDate: item.questionDate,

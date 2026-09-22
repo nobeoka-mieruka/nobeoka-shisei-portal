@@ -18,10 +18,13 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { publicBills } from "../lib/billVotes";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
-import { councilSessionPhaseForSessionName, scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import {
+  councilSessionPhaseForSessionName,
+  questionTranscriptConfirmedForSessionName,
+  scheduledQuestionSessions,
+} from "../lib/generalQuestionStats";
 import { questionDateLabelPrefix } from "../lib/councilSessionSchedule";
 import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
-import { useTodayJst } from "../hooks/useTodayJst";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
@@ -49,7 +52,6 @@ export function GeneralQuestionDetailPage() {
   const seo = getSeoForPath(location.pathname);
   // Phase221：日本標準時の「今日」はハイドレーション完了後にだけ確定する（プリレンダリング済み
   // HTMLへビルド日時の状態を焼き付けないため）。フックの呼び出し順を固定するため早期returnより前に置く。
-  const today = useTodayJst();
 
   usePageTitle();
 
@@ -123,7 +125,7 @@ export function GeneralQuestionDetailPage() {
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex flex-wrap items-center gap-2 text-xs text-on-primary-container/80">
           <span>
-            {questionDateLabelPrefix(sessionPhase, item.questionDate, today)}
+            {questionDateLabelPrefix(questionTranscriptConfirmedForSessionName(item.sessionName))}
             {formatJapaneseDate(item.questionDate)}
           </span>
           <span>{item.sessionName}</span>

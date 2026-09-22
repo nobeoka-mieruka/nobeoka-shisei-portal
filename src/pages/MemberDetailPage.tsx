@@ -36,10 +36,13 @@ import {
   aggregateYearlySpeechCounts,
   findMemberSpeechAnalysis,
 } from "../lib/councilSpeeches";
-import { councilSessionPhaseForSessionName, scheduledQuestionSessions } from "../lib/generalQuestionStats";
+import {
+  councilSessionPhaseForSessionName,
+  questionTranscriptConfirmedForSessionName,
+  scheduledQuestionSessions,
+} from "../lib/generalQuestionStats";
 import { questionDateLabelPrefix } from "../lib/councilSessionSchedule";
 import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
-import { useTodayJst } from "../hooks/useTodayJst";
 import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummaryStatusBadge";
 import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
@@ -133,7 +136,6 @@ export function MemberDetailPage() {
   const seo = getSeoForPath(location.pathname);
   // Phase221：日本標準時の「今日」はハイドレーション完了後にだけ確定する
   // （プリレンダリング済みHTMLにビルド日時の判定結果を焼き付けないため）。
-  const today = useTodayJst();
   const selectedTopic = searchParams.get("questionTopic") ?? "";
 
   const setSelectedTopic = (topic: string) => {
@@ -644,11 +646,7 @@ export function MemberDetailPage() {
                   HTML・JavaScript無効時）のときは、質問通告書ベースであることが分かる予定日表記を保つ。 */}
               <div className="rounded-lg bg-surface-container-high p-3">
                 <p className="text-xs text-on-surface-variant">
-                  {questionDateLabelPrefix(
-                    councilSessionPhaseForSessionName(memberQuestions[0].sessionName),
-                    memberQuestions[0].questionDate,
-                    today,
-                  )
+                  {questionDateLabelPrefix(questionTranscriptConfirmedForSessionName(memberQuestions[0].sessionName))
                     ? "次回の質問予定日"
                     : "最新の質問日"}
                 </p>
@@ -675,11 +673,7 @@ export function MemberDetailPage() {
                 <li key={q.id} className="rounded-lg border border-outline-variant p-3">
                   <p className="flex flex-wrap items-center gap-1.5 text-xs text-on-surface-variant">
                     <span>
-                      {questionDateLabelPrefix(
-                        councilSessionPhaseForSessionName(q.sessionName),
-                        q.questionDate,
-                        today,
-                      )}
+                      {questionDateLabelPrefix(questionTranscriptConfirmedForSessionName(q.sessionName))}
                       {formatJapaneseDate(q.questionDate)}／{q.sessionName}
                     </span>
                     <CouncilSessionStatusBadge
