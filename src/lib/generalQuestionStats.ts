@@ -28,9 +28,9 @@ export interface ScheduledQuestionSession {
   /** 会期名から導出した会期ID（例："2026-06"）。導出できない表記の場合はnull。 */
   sessionId: string | null;
   /**
-   * Phase203：会期の進行状態。questionCollectionStatus.jsonへ登録済み＝会期が終了して
-   * 収録対象になった会期を"completed"、まだ登録されていない会期（開催前または開催中で、
-   * 議決結果・会議録のいずれも未確認）を"upcoming"とする。判定に今日の日付は使わない。
+   * 会期の進行状態。会議録本文を確認できた会期だけを"completed"とし、
+   * まだ確認できていない会期（開催前・開催中・議決結果は分かったが会議録は未公開）を
+   * "upcoming"とする。判定に今日の日付は使わない。
    */
   phase: CouncilSessionPhase;
   /** この会期の予定質問件数（generalQuestions.json内で該当sessionNameを持つ件数）。 */
@@ -111,15 +111,24 @@ export function scheduledQuestionSessions(generalQuestions: GeneralQuestionItem[
 }
 
 /**
- * 会期名1件分の進行状態（Phase203）。questionCollectionStatus.jsonへ登録済み＝会期が終了して
- * 収録対象になった会期は"completed"、未登録の会期は"upcoming"（開催前または開催中）。
+ * 会期名1件分の進行状態。**会議録本文を確認できた会期だけ**を"completed"とし、
+ * まだ確認できていない会期は"upcoming"（開催前・開催中・結果確認中）とする。
+ *
+ * 収録状況への登録（questionCollectionStatus.jsonに行があること）は「会期が閉会した」
+ * という意味であって、「一般質問が実際に行われたことを確認できた」という意味ではない。
+ * 登録の有無で判定すると、議決結果しか分かっていない会期まで「開催済み」と断定し、
+ * 質問日から「質問予定日」の表記が消えて実施済みの質問日のように見えてしまう。
+ * （2026-09に会期要約の自動生成で同じ取り違えが起きたため、こちらも同じ基準にそろえた。）
+ *
  * 今日の日付は使わない（プリレンダリング済みHTMLと閲覧時で表示が食い違わないようにするため）。
  * 会期IDを導出できない表記は、根拠なく「開催予定」と表示しないよう"completed"側に倒す。
  */
 export function councilSessionPhaseForSessionName(sessionName: string): CouncilSessionPhase {
   const sessionId = councilSessionIdFromSessionName(sessionName);
   if (sessionId === null) return "completed";
-  return questionCollectionStatus.sessions.some((s) => s.sessionId === sessionId) ? "completed" : "upcoming";
+  return questionCollectionStatus.sessions.some((s) => s.sessionId === sessionId && s.transcriptAvailable === true)
+    ? "completed"
+    : "upcoming";
 }
 
 /**
@@ -169,18 +178,21 @@ export interface GeneralQuestionStats {
   /** 質問通告書に基づく、会議録未公開の会期ごとの予定質問件数（会期名・件数・だより確認有無）。
    * 会議録未公開の会期が0件なら空配列。 */
   scheduledSessions: ScheduledQuestionSession[];
-  /** scheduledSessionsの件数の合計（会議録未公開の全会期分の予定質問の合計件数）。 */
+  /**
+   * 会議録がまだ公開されていない会期の予定質問の合計件数。
+   * 会議録を確認できた会期の質問は confirmedCount 側で数えるため、ここには含めない。
+   */
   scheduledCount: number;
   /**
-   * Phase203：scheduledSessionsのうち、会期が終了して収録対象へ登録済みのもの
-   * （＝「直近の確認済み会期」側。会議録の公開待ち）。
+   * scheduledSessionsのうち、会議録本文を確認できた会期のもの
+   * （＝通告と会議録の両方がそろっている会期）。
    */
   completedScheduledSessions: ScheduledQuestionSession[];
   /** completedScheduledSessionsの予定質問件数の合計。 */
   completedScheduledCount: number;
   /**
-   * Phase203：scheduledSessionsのうち、これから開催される、または開催中の会期
-   * （＝「次回・開催予定の会期」側。議決結果・会議録とも未確認）。
+   * scheduledSessionsのうち、会議録本文をまだ確認できていない会期
+   * （開催前・開催中のほか、議決結果は確認できたが会議録が未公開の会期を含む）。
    */
   upcomingScheduledSessions: ScheduledQuestionSession[];
   /** upcomingScheduledSessionsの予定質問件数の合計。 */
@@ -223,7 +235,10 @@ export function calculateGeneralQuestionStats(
     confirmedCount,
     totalQuestionItemCount,
     scheduledSessions,
-    scheduledCount: generalQuestions.length,
+    // 「会議録未公開会期の予定質問」の件数。会議録を確認できた会期の質問は、
+    // 既に確認済みの一般質問として別に数えているため、ここへ足さない
+    // （足すと、確認済みの会期まで「会議録の公開待ち」に見えてしまう）。
+    scheduledCount: sumCount(scheduledSessions.filter((s) => !s.transcriptAvailable)),
     completedScheduledSessions,
     completedScheduledCount: sumCount(completedScheduledSessions),
     upcomingScheduledSessions,

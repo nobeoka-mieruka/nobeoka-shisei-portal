@@ -80,8 +80,14 @@ export function GeneralQuestionDetailPage() {
     .map((promiseId) => promisesData.promises.find((p) => p.id === promiseId))
     .filter((p): p is (typeof promisesData.promises)[number] => !!p);
 
+  // 質問通告書そのものが出典になっている質問では、通告書の掲載が終了すると
+  // 出典リンクも開けなくなる。開けないリンクは出さず、資料名と経緯を文字で示す。
+  const sourceRemoved = item.noticeUrlStatus === "removed" && item.sourceUrl === item.noticeUrl;
+
   const sourceLinks = [
-    item.noticeUrl && { label: "質問通告書", url: item.noticeUrl },
+    // 延岡市の公式サイトで掲載が終了した資料は、開けないリンクを出さない。
+    // どこにあった資料かは notes に残している。
+    item.noticeUrl && item.noticeUrlStatus !== "removed" && { label: "質問通告書", url: item.noticeUrl },
     item.newsletterUrl && { label: item.newsletterTitle ?? "市議会だより", url: item.newsletterUrl },
     item.transcriptPdfUrl && { label: "会議録PDF", url: item.transcriptPdfUrl },
     item.transcriptUrl && { label: "会議録ページ", url: item.transcriptUrl },
@@ -271,29 +277,45 @@ export function GeneralQuestionDetailPage() {
               </li>
             ))}
             <li>
-              <a
-                href={item.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${item.sourceTitle}を新しいタブで開く`}
-                className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
-              >
-                <GlobeIcon className="h-3.5 w-3.5" />
-                {item.sourceTitle}
-              </a>
+              {sourceRemoved ? (
+                <span className="inline-flex items-start gap-1.5 text-sm text-on-surface-variant">
+                  <GlobeIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                  <span>
+                    {item.sourceTitle}（延岡市の公式サイトでの掲載は終了しています）
+                  </span>
+                </span>
+              ) : (
+                <a
+                  href={item.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${item.sourceTitle}を新しいタブで開く`}
+                  className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
+                >
+                  <GlobeIcon className="h-3.5 w-3.5" />
+                  {item.sourceTitle}
+                </a>
+              )}
             </li>
           </ul>
         ) : (
-          <a
-            href={item.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${item.sourceTitle}を新しいタブで開く`}
-            className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
-          >
-            <GlobeIcon className="h-3.5 w-3.5" />
-            {item.sourceTitle}
-          </a>
+          sourceRemoved ? (
+            <span className="inline-flex items-start gap-1.5 text-sm text-on-surface-variant">
+              <GlobeIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+              <span>{item.sourceTitle}（延岡市の公式サイトでの掲載は終了しています）</span>
+            </span>
+          ) : (
+            <a
+              href={item.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${item.sourceTitle}を新しいタブで開く`}
+              className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
+            >
+              <GlobeIcon className="h-3.5 w-3.5" />
+              {item.sourceTitle}
+            </a>
+          )
         )}
         <p className="mt-2 text-xs text-on-surface-variant">公表機関：{item.sourceOrganization}</p>
         {item.notes && <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(item.notes)}</p>}

@@ -1456,6 +1456,14 @@ export interface GeneralQuestionItem {
   // 質問通告書（基礎資料）
   noticeTitle?: string;
   noticeUrl?: string;
+  /**
+   * 質問通告書PDFの現在の状態。延岡市は会期ごとに通告一覧ページを差し替えるため、
+   * 過去の会期のPDFは削除されて開けなくなることがある。removed の場合、元のURLは
+   * どこにあった資料かの記録として残すが、開けないリンクは画面に出さない。
+   */
+  noticeUrlStatus?: "available" | "removed";
+  /** noticeUrlStatus を確認した日。 */
+  noticeUrlCheckedAt?: string;
   /** 質問通告書PDFのURL（ある場合のみ）。 */
   noticePdf?: string;
 

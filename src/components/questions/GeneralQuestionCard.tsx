@@ -126,7 +126,7 @@ export function GeneralQuestionCard({
 
       {(item.noticeUrl || item.newsletterUrl || item.transcriptUrl || item.videoUrl) && (
         <div className="mt-3 flex flex-wrap gap-2">
-          {item.noticeUrl && (
+          {item.noticeUrl && item.noticeUrlStatus !== "removed" && (
             <a
               href={item.noticeUrl}
               target="_blank"
