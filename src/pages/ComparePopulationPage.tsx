@@ -45,7 +45,7 @@ export function ComparePopulationPage() {
           <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">人口の比較</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市の人口を、最大4年度まで選んで比較できます。基準日は資料により1月1日・7月1日等が混在するため、各年度の基準日を必ずご確認ください。
+          延岡市の人口を、最大4年度まで選んで比較できます。基準日は全年度とも各年1月1日にそろえています（下の表の「基準日」列で確認できます）。
         </p>
         {/* Phase248：世帯数を26年度分掲載したことに伴い、人口・世帯数がどの系列の数値で、
             どの範囲（市域）の集計なのかを、表を見る前に読める位置へ明示する。 */}
