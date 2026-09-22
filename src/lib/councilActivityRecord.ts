@@ -38,6 +38,49 @@ export type ActivityRecordAvailability =
   /** 制度上その議員に当てはまらないため、算定の対象にしない。 */
   | "not-applicable";
 
+/**
+ * 会期を実施率の分母から外した理由。内部コードであり、画面にそのまま出さない。
+ * 表示用の日本語は EXCLUSION_REASON_LABELS_JA で別に持つ（内部コードと表示文言を分離する）。
+ */
+export type ActivityExclusionReason =
+  /** その会期の時点でまだ議員ではなかった（初当選前・途中就任前）。 */
+  | "NOT_YET_MEMBER"
+  /** その会期の時点ですでに議員ではなかった（辞職・失職・任期満了後）。 */
+  | "NO_LONGER_MEMBER"
+  /** 議長在任のため、慣例として一般質問を行わない。 */
+  | "SPEAKER_TERM"
+  /** 会議録などの一次資料がまだ公開されていない。「質問なし」ではない。 */
+  | "SOURCE_NOT_PUBLISHED"
+  /** 上記以外で、制度上その議員に当てはまらない。 */
+  | "NOT_APPLICABLE";
+
+/** 市民向けの短い説明。内部コードとは1対1で対応させる。 */
+export const EXCLUSION_REASON_LABELS_JA: Record<ActivityExclusionReason, string> = {
+  NOT_YET_MEMBER: "この会期の時点では、まだ議員ではありませんでした",
+  NO_LONGER_MEMBER: "この会期の時点では、すでに議員ではありませんでした",
+  SPEAKER_TERM: "役職就任期間のため、比較条件を揃える目的で算定対象会期から除外しています",
+  SOURCE_NOT_PUBLISHED: "会議録がまだ公開されていないため、確認できません（質問がなかったという意味ではありません）",
+  NOT_APPLICABLE: "制度上、この議員には当てはまりません",
+};
+
+/**
+ * 質問項目1件について、再質問を確認できたかどうかの判定。
+ *
+ * 機械で判定できることだけを状態にする。「追及が鋭い」といった中身の評価はしない。
+ * 公開する指標（再質問確認数・確認率）に数えるのは CONFIRMED だけにする。
+ */
+export type FollowUpConfidence =
+  /** 本人の再質問があり、その前に答弁が記録されている。 */
+  | "CONFIRMED"
+  /** 本人の再質問はあるが、先行する質問・答弁が会議録要約に取り込めていない。 */
+  | "LIKELY"
+  /** 再質問の記録はあるが、発言者が本人ではない（他の議員の関連質問）。 */
+  | "NOT_INDIVIDUALLY_ATTRIBUTABLE"
+  /** 同じ登壇の他の質問には再質問が記録されているため、この項目は確認したうえで0件。 */
+  | "CONFIRMED_ZERO"
+  /** その登壇全体に再質問の記録が1件も無く、0件なのか未整備なのか判断できない。 */
+  | "UNRECORDED";
+
 /** 画面上のまとまり。数字を一列に並べた「成績表」に見せないための区分。 */
 export type ActivityRecordGroup = "question" | "theme" | "council";
 
@@ -49,8 +92,15 @@ export interface SessionQuestionRecord {
   countedInDenominator: boolean;
   /** 質問・質疑を確認できたか。分母外の会期では null。 */
   asked: boolean | null;
-  /** 分母から外した理由（対象外のときのみ）。 */
+  /** 分母から外した理由の内部コード（対象外のときのみ）。 */
+  excludedReasonCode?: ActivityExclusionReason;
+  /** 分母から外した理由の説明文（市民向け。コードの定型文＋個別の補足）。 */
   excludedReason?: string;
+  /**
+   * その判断の根拠にした資料のID。第三者が同じ資料へ辿れるようにする。
+   * 根拠資料を特定できていない場合は持たせない（でっち上げない）。
+   */
+  evidenceSourceId?: string;
   /** 会議録へのリンク（確認できた場合）。 */
   transcriptUrl?: string;
 }
@@ -80,6 +130,9 @@ export interface ActivityRecordValue {
   /** 割合の場合の分子・分母。実数のみの項目では持たない。 */
   numerator?: number;
   denominator?: number;
+  /** 根拠の画面で、分子・分母が何を数えたものかを言葉で示すための見出し。 */
+  numeratorLabel?: string;
+  denominatorLabel?: string;
   /** kind が list のときの中身。 */
   items?: ActivityRecordListItem[];
   availability: ActivityRecordAvailability;
@@ -127,6 +180,54 @@ function questionLikeSpeeches(speeches: CouncilSpeech[]): CouncilSpeech[] {
 }
 
 /**
+ * 質問項目1件の再質問を判定する。
+ *
+ * 会議録の要約では、他の議員が持ち時間の中で行った「関連質問」が、
+ * 登壇した議員の質問項目の中に再質問として並ぶことがある（発言者名は別人、
+ * speakerId は空）。これを本人の再質問として数えると、他人の発言を
+ * その議員の実績にしてしまうため、発言者が本人であることを必ず確かめる。
+ */
+export function judgeFollowUp(
+  item: CouncilSpeech["questionItems"][number],
+  memberId: string,
+  speechHasAnyFollowUp: boolean,
+): FollowUpConfidence {
+  const exchanges = [...(item.exchanges ?? [])].sort((a, b) => a.order - b.order);
+  const followUps = exchanges.filter((e) => e.type === "follow-up-question");
+  if (followUps.length === 0) {
+    // 同じ登壇の他の項目に再質問が記録されているなら、この項目は確認したうえで0件。
+    // 登壇全体に1件も無い場合は、再質問が無かったのか要約が未整備なのか区別できない。
+    return speechHasAnyFollowUp ? "CONFIRMED_ZERO" : "UNRECORDED";
+  }
+  const own = followUps.filter((e) => e.speakerId === memberId);
+  if (own.length === 0) return "NOT_INDIVIDUALLY_ATTRIBUTABLE";
+  const afterAnswer = own.some((e) =>
+    exchanges.some((x) => x.order < e.order && (x.type === "answer" || x.type === "follow-up-answer")),
+  );
+  return afterAnswer ? "CONFIRMED" : "LIKELY";
+}
+
+/** 議員1名分の、質問項目ごとの判定結果をまとめる。 */
+function summarizeFollowUps(speeches: CouncilSpeech[]): Record<FollowUpConfidence, number> {
+  const counts: Record<FollowUpConfidence, number> = {
+    CONFIRMED: 0,
+    LIKELY: 0,
+    NOT_INDIVIDUALLY_ATTRIBUTABLE: 0,
+    CONFIRMED_ZERO: 0,
+    UNRECORDED: 0,
+  };
+  for (const speech of speeches) {
+    const speechHasAnyFollowUp = (speech.questionItems ?? []).some((q) =>
+      (q.exchanges ?? []).some((e) => e.type === "follow-up-question"),
+    );
+    for (const item of speech.questionItems ?? []) {
+      counts[judgeFollowUp(item, speech.memberId, speechHasAnyFollowUp)] += 1;
+    }
+  }
+  return counts;
+}
+
+/**
  * 公開記録による議会活動を算定する。
  *
  * @param speeches その議員の、対象期間内の公開済み発言
@@ -138,7 +239,14 @@ function questionLikeSpeeches(speeches: CouncilSpeech[]): CouncilSpeech[] {
 export function buildCouncilActivityRecord(
   speeches: CouncilSpeech[],
   eligibleSessions: { sessionId: string; sessionTitle: string }[],
-  excludedSessions: { sessionId: string; sessionTitle: string; reason: string }[] = [],
+  excludedSessions: {
+    sessionId: string;
+    sessionTitle: string;
+    reasonCode: ActivityExclusionReason;
+    /** コードの定型文に加えて示したい補足（無ければ定型文だけを使う）。 */
+    reasonNote?: string;
+    evidenceSourceId?: string;
+  }[] = [],
   extras: CouncilActivityRecordExtras = {},
 ): CouncilActivityRecord {
   const asked = questionLikeSpeeches(speeches);
@@ -162,7 +270,11 @@ export function buildCouncilActivityRecord(
       sessionTitle: s.sessionTitle,
       countedInDenominator: false,
       asked: null,
-      excludedReason: s.reason,
+      excludedReasonCode: s.reasonCode,
+      excludedReason: s.reasonNote
+        ? `${EXCLUSION_REASON_LABELS_JA[s.reasonCode]}。${s.reasonNote}`
+        : EXCLUSION_REASON_LABELS_JA[s.reasonCode],
+      evidenceSourceId: s.evidenceSourceId,
     })),
   ].sort((a, b) => a.sessionId.localeCompare(b.sessionId));
 
@@ -172,13 +284,21 @@ export function buildCouncilActivityRecord(
   // 分母が0になるのは、その議員が一般質問を行える会期が1つも無かった場合
   // （議長在任が対象期間の全てを占める等）。0%ではなく「対象外」とする。
   const denominatorAvailable = denominator > 0;
-  const notApplicableNote = excludedSessions[0]?.reason;
+  // 分母が0のときに示す理由。制度上の対象外（議長など）を優先して拾う。
+  const notApplicableSource =
+    excludedSessions.find((s) => s.reasonCode === "SPEAKER_TERM") ?? excludedSessions[0];
+  const notApplicableNote = notApplicableSource
+    ? notApplicableSource.reasonNote
+      ? `${EXCLUSION_REASON_LABELS_JA[notApplicableSource.reasonCode]}。${notApplicableSource.reasonNote}`
+      : EXCLUSION_REASON_LABELS_JA[notApplicableSource.reasonCode]
+    : undefined;
 
   const questionItems = asked.reduce((sum, s) => sum + s.questionItems.length, 0);
-  const allItems = asked.flatMap((s) => s.questionItems);
-  const itemsWithFollowUp = allItems.filter((item) =>
-    (item.exchanges ?? []).some((e) => e.type === "follow-up-question"),
-  ).length;
+  const followUps = summarizeFollowUps(asked);
+  // 公開する件数は CONFIRMED だけ。判断できないもの（UNRECORDED）は分母からも外し、
+  // 0件として扱わずに別の行で件数を示す。
+  const itemsWithFollowUp = followUps.CONFIRMED;
+  const followUpDenominator = questionItems - followUps.UNRECORDED;
 
   const values: ActivityRecordValue[] = [
     {
@@ -190,6 +310,8 @@ export function buildCouncilActivityRecord(
       unit: "会期",
       numerator: denominatorAvailable ? askedSessionCount : undefined,
       denominator: denominatorAvailable ? denominator : undefined,
+      numeratorLabel: "一般質問を行った会期",
+      denominatorLabel: "算定対象の会期（会議録を確認できた会期）",
       availability: !denominatorAvailable
         ? "not-applicable"
         : askedSessionCount > 0
@@ -211,6 +333,8 @@ export function buildCouncilActivityRecord(
       unit: "%",
       numerator: denominatorAvailable ? askedSessionCount : undefined,
       denominator: denominatorAvailable ? denominator : undefined,
+      numeratorLabel: "一般質問を行った会期",
+      denominatorLabel: "算定対象の会期（会議録を確認できた会期）",
       availability: denominatorAvailable ? "available" : "not-applicable",
       availabilityNote: denominatorAvailable ? undefined : notApplicableNote,
       description:
@@ -253,7 +377,7 @@ export function buildCouncilActivityRecord(
           : "confirmed-zero",
       availabilityNote: denominatorAvailable ? undefined : notApplicableNote,
       description:
-        "公開会議録上で再質問として確認できた記録がある質問項目の数です。多い少ないで優劣を判断するものではありません。",
+        "答弁のあとに本人が重ねて質問したことを、公開会議録上で確認できた質問項目の数です。他の議員が持ち時間の中で行った関連質問は含みません。多い少ないで優劣を判断するものではありません。",
       sourceLabel: SOURCE_MINUTES,
       ordinanceBasis: ORDINANCE_MONITORING,
       evidenceKind: "sessions",
@@ -264,20 +388,31 @@ export function buildCouncilActivityRecord(
       group: "question",
       kind: "number",
       value:
-        denominatorAvailable && questionItems > 0
-          ? Math.round((itemsWithFollowUp / questionItems) * 100)
+        denominatorAvailable && followUpDenominator > 0
+          ? Math.round((itemsWithFollowUp / followUpDenominator) * 100)
           : null,
       unit: "%",
-      numerator: denominatorAvailable && questionItems > 0 ? itemsWithFollowUp : undefined,
-      denominator: denominatorAvailable && questionItems > 0 ? questionItems : undefined,
+      numerator: denominatorAvailable && followUpDenominator > 0 ? itemsWithFollowUp : undefined,
+      denominator: denominatorAvailable && followUpDenominator > 0 ? followUpDenominator : undefined,
+      numeratorLabel: "再質問を確認できた質問項目",
+      denominatorLabel: "再質問の有無を確認できた質問項目",
       availability: !denominatorAvailable
         ? "not-applicable"
-        : questionItems > 0
+        : followUpDenominator > 0
           ? "available"
-          : "confirmed-zero",
-      availabilityNote: denominatorAvailable ? undefined : notApplicableNote,
+          : questionItems === 0
+            ? // 質問項目そのものが0件。確認した結果として0件である。
+              "confirmed-zero"
+            : // 質問項目はあるが、そのすべてで再質問の記録が残っていない。
+              // 再質問が無かったのか未整備なのか区別できないため、0%とは書かない。
+              "not-acquired",
       description:
-        "公開会議録上で再質問として確認できた質問の割合です。答弁を受けて重ねて質問した記録があるかどうかだけを数えており、やり取りの内容は評価していません。",
+        "再質問の有無を確認できた質問項目のうち、公開会議録上で再質問を確認できた質問の割合です。やり取りの内容は評価していません。",
+      availabilityNote: !denominatorAvailable
+        ? notApplicableNote
+        : followUps.UNRECORDED > 0
+          ? `このほかに、登壇全体で再質問の記録が残っていない質問項目が${followUps.UNRECORDED}件あります。再質問をしなかったのか、会議録の要約がそこまで作られていないのかを区別できないため、分母から外しています（0件として扱っていません）。`
+          : undefined,
       sourceLabel: SOURCE_MINUTES,
       ordinanceBasis: ORDINANCE_MONITORING,
       evidenceKind: "sessions",
@@ -370,6 +505,8 @@ export function buildCouncilActivityRecord(
     unit: "件",
     numerator: namedVotes && namedVotes.denominator > 0 ? namedVotes.numerator : undefined,
     denominator: namedVotes && namedVotes.denominator > 0 ? namedVotes.denominator : undefined,
+    numeratorLabel: "この議員の賛否を確認できた議案",
+    denominatorLabel: "個人別の賛否が公開されている議案",
     availability:
       !namedVotes || namedVotes.denominator === 0
         ? "not-individually-attributable"

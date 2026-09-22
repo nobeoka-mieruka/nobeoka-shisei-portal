@@ -1,0 +1,121 @@
+{
+  "note": "現在の議員任期（令和5年4月23日執行の市議会議員選挙以降）の正副議長の在任期間。議長は会議の進行役を務めるため一般質問を行わない慣例があり、一般質問実施率の算定対象会期を決めるために使う。副議長は算定対象から外していない（副議長が一般質問を行わないと明記した公式資料を確認できていないため）。歴代の正副議長（2001〜2012年、第47〜52代議長・第50〜60代副議長）は archiveCouncilLeadership.json で別に管理している。",
+  "verifiedAt": "2026-09-23",
+  "terms": [
+    {
+      "id": "leadership-chair-2023-05",
+      "role": "議長",
+      "ordinal": 59,
+      "memberId": "m22",
+      "officialName": "松田 満男",
+      "termStart": "2023-05-15",
+      "termEnd": "2024-05-07",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和5年第1回臨時会（第1号 5月15日）／臨時議長（上杉泰洋君）",
+          "url": "https://www.kensakusystem.jp/nobeoka/",
+          "quote": "よって、松田満男議員が議長に当選されました。"
+        },
+        {
+          "label": "のべおか市議会だより 第96号（令和5年8月1日発行）8ページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14804.pdf",
+          "quote": "5月の臨時会におきまして、第5９代議長に就任いたしました。"
+        },
+        {
+          "label": "延岡市議会 会議録検索システム／令和6年第10回臨時会（第1号 5月7日）／副議長（早瀨賢一君）",
+          "url": "https://www.kensakusystem.jp/nobeoka/",
+          "quote": "松田満男議長より、議長の辞職"
+        }
+      ],
+      "notes": "退任日は、議長辞職と後任の議長選挙が行われた令和6年第10回臨時会の開会日（2024-05-07）。"
+    },
+    {
+      "id": "leadership-chair-2024-05",
+      "role": "議長",
+      "ordinal": 60,
+      "memberId": "m18",
+      "officialName": "早瀨 賢一",
+      "termStart": "2024-05-07",
+      "termEnd": null,
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和6年第10回臨時会（第1号 5月7日）／副議長（早瀨賢一君）",
+          "url": "https://www.kensakusystem.jp/nobeoka/",
+          "quote": "よって、私、早瀨賢一が議長に当選をいたしましたので"
+        },
+        {
+          "label": "のべおか市議会だより 第100号（令和6年8月1日発行）8ページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/19254.pdf",
+          "quote": "5 月の臨時議会におきまして、第 60 代議長に就任いたしました。"
+        },
+        {
+          "label": "のべおか市議会だより 第108号（令和8年8月1日発行）7ページ「令和8年度 延岡市議会の議会構成」（令和8年5月8日現在）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28427.pdf",
+          "quote": "議　長　早　瀨　賢　一"
+        }
+      ],
+      "notes": "令和7年5月8日にいったん辞職・再選されているが在任は連続している。members.json の表記は「早瀬 賢一」、公式資料の表記は「早瀨 賢一」（旧字）。同一人物であることは議席番号・議会構成表で確認した。退任日は未到来のため null（架空の日付を入れない）。"
+    },
+    {
+      "id": "leadership-vicechair-2023-05",
+      "role": "副議長",
+      "ordinal": null,
+      "memberId": "m18",
+      "officialName": "早瀨 賢一",
+      "termStart": "2023-05-15",
+      "termEnd": "2024-05-07",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和5年第1回臨時会（第1号 5月15日）／議長（松田満男君）",
+          "url": "https://www.kensakusystem.jp/nobeoka/",
+          "quote": "よって、早瀨賢一議員が副議長に当選されました。"
+        }
+      ],
+      "notes": "代数は現任期分の公表資料を確認できていないため null。"
+    },
+    {
+      "id": "leadership-vicechair-2024-05",
+      "role": "副議長",
+      "ordinal": null,
+      "memberId": "m09",
+      "officialName": "梶本 英一",
+      "termStart": "2024-05-07",
+      "termEnd": "2026-05-08",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和6年第10回臨時会（第1号 5月7日）／議長（早瀨賢一君）",
+          "url": "https://www.kensakusystem.jp/nobeoka/",
+          "quote": "よって、梶本英一議員が副議長に当選されました。"
+        },
+        {
+          "label": "のべおか市議会だより 第104号（令和7年8月1日発行）5ページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/23717.pdf",
+          "quote": "５月８日に開催された臨時議会において、早瀨賢一議長と梶本英一副議長が再任されました。"
+        }
+      ],
+      "notes": "令和7年5月8日にいったん辞職・再選されているが在任は連続している。"
+    },
+    {
+      "id": "leadership-vicechair-2026-05",
+      "role": "副議長",
+      "ordinal": null,
+      "memberId": "m05",
+      "officialName": "小野 挙",
+      "termStart": "2026-05-08",
+      "termEnd": null,
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和8年第25回臨時会（第1号 5月8日）／議長（早瀨賢一君）",
+          "url": "https://www.kensakusystem.jp/nobeoka/",
+          "quote": "よって、小野　挙議員が副議長に当選されました。"
+        },
+        {
+          "label": "のべおか市議会だより 第108号（令和8年8月1日発行）7ページ（令和8年5月8日現在）",
+          "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28427.pdf",
+          "quote": "副議長　小　野　　挙"
+        }
+      ],
+      "notes": "退任日は未到来のため null。"
+    }
+  ]
+}

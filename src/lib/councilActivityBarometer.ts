@@ -7,6 +7,7 @@ import councilSpeechPeriod from "../config/councilSpeechPeriod.json";
 import billProposalRolesData from "../data/billProposalRoles.json";
 import { committeeReportActivityEvents, committeeReportActivityForMember } from "./committees";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
+import councilLeadershipTermsData from "../data/councilLeadershipTerms.json";
 import themesData from "../data/themes.json";
 import { classifyTopicWithEvidence, isPolicyTheme } from "./topicClassificationMeta";
 import type {
@@ -53,6 +54,7 @@ import {
   type ActivityRecordListItem,
   type CouncilActivityRecord,
   type CouncilActivityRecordExtras,
+  EXCLUSION_REASON_LABELS_JA,
 } from "./councilActivityRecord";
 
 /**
@@ -140,8 +142,73 @@ export function isCouncilChairperson(member: CouncilMember): boolean {
  * 逆向き（分母に入れて低い実施率を出す）は、役職に就いたことが活動の少なさとして
  * 表示される誤りになるため採らない。
  */
-const CHAIRPERSON_NOT_APPLICABLE_REASON =
-  "議長は会議の進行役を務めるため、一般質問を行わない慣例があります。議長の就任日・退任日を示す公式資料を確認できていないため、対象期間全体を実施率の算定対象外としています。質問をしなかった、活動が少ない、という意味ではありません。";
+interface CouncilLeadershipTerm {
+  id: string;
+  role: "議長" | "副議長";
+  memberId: string;
+  officialName: string;
+  termStart: string;
+  termEnd: string | null;
+  sourceRefs: { label: string; url?: string; quote?: string }[];
+}
+
+export const councilLeadershipTerms = (councilLeadershipTermsData as { terms: CouncilLeadershipTerm[] }).terms;
+
+/**
+ * 会期がいつ開かれたかを、その会期に登録されている発言の日付から求める。
+ *
+ * councilSessions.json は現任期の会期に startDate を持っていないため、
+ * 実際に会議が開かれた日（会議録の発言日）を使う。日付を作り出さない。
+ */
+const sessionStartDates: Map<string, string> = (() => {
+  const map = new Map<string, string>();
+  for (const m of speechSummaryData.members) {
+    for (const sp of m.speeches ?? []) {
+      if (!sp.date) continue;
+      const current = map.get(sp.sessionId);
+      if (!current || sp.date < current) map.set(sp.sessionId, sp.date);
+    }
+  }
+  return map;
+})();
+
+/** その会期が、指定した在任期間の中にあるか。 */
+function sessionWithinTerm(sessionId: string, term: CouncilLeadershipTerm): boolean {
+  const date = sessionStartDates.get(sessionId);
+  if (!date) return false;
+  if (date < term.termStart) return false;
+  return term.termEnd === null || date < term.termEnd;
+}
+
+/**
+ * その議員が議長だったために一般質問を行わなかった会期。
+ *
+ * 議長は会議の進行役を務めるため一般質問を行わない慣例がある。
+ * 副議長は対象から外さない（副議長が一般質問を行わないと明記した公式資料を
+ * 確認できていないため。実データ上は副議長在任中の登壇が確認できていないが、
+ * それは測定している当のものであり、除外の根拠にはしない）。
+ */
+function chairpersonSessionsFor(memberId: string, sessionIds: string[]): Map<string, CouncilLeadershipTerm> {
+  const result = new Map<string, CouncilLeadershipTerm>();
+  for (const term of councilLeadershipTerms) {
+    if (term.role !== "議長" || term.memberId !== memberId) continue;
+    for (const sessionId of sessionIds) {
+      if (sessionWithinTerm(sessionId, term)) result.set(sessionId, term);
+    }
+  }
+  return result;
+}
+
+/** 議長在任を理由に対象外とするときの、市民向けの補足。 */
+function chairpersonNote(term: CouncilLeadershipTerm): string {
+  const until = term.termEnd ? `${term.termEnd}まで` : "現在まで";
+  return (
+    `${term.termStart}から${until}、${term.officialName}議員が議長を務めています` +
+    `（出典：${term.sourceRefs[0]?.label ?? "延岡市議会 会議録"}）。` +
+    "議長は本会議の進行役を務める役職です。役職就任期間を算定対象に含めると議員どうしで条件が揃わないため、" +
+    "一般質問実施率の算定対象会期から除いています。質問できなかった、活動が少ない、という意味ではありません。"
+  );
+}
 
 /**
  * 公開記録による議会活動（①市政運営の監視・評価）を、議員1名分算定する。
@@ -260,21 +327,62 @@ function buildRecordExtras(member: CouncilMember, speeches: CouncilSpeech[]): Co
   return { policyThemes, recurringThemes, decisionSubmissions, committeeReports, namedVotes };
 }
 
+/**
+ * 会議録がまだ公開されていない会期。分母にも分子にも入れないが、
+ * 「落としたこと」自体は画面に残す。黙って除くと、対象期間が実際より短いのに
+ * 全部を数えたように見えてしまう。
+ */
+function unpublishedSessionExclusions(): {
+  sessionId: string;
+  sessionTitle: string;
+  reasonCode: "SOURCE_NOT_PUBLISHED";
+  evidenceSourceId: string;
+}[] {
+  const available = new Set(radarEligibleSessions);
+  return questionCollectionStatus.sessions
+    .filter((s) => !available.has(s.sessionId))
+    .map((s) => ({
+      sessionId: s.sessionId,
+      sessionTitle: s.sessionTitle,
+      reasonCode: "SOURCE_NOT_PUBLISHED" as const,
+      evidenceSourceId: "questionCollectionStatus.json",
+    }));
+}
+
+/**
+ * その議員が一般質問を行える立場にあった会期。議長在任の会期だけを除く。
+ * 記録と6指標の両方がこれを使うため、画面どうしで値が食い違わない。
+ */
+export function questionEligibleSessionsFor(member: CouncilMember): string[] {
+  const chairSessions = chairpersonSessionsFor(member.id, radarEligibleSessions);
+  return radarEligibleSessions.filter((id) => !chairSessions.has(id));
+}
+
 export function getMemberActivityRecord(member: CouncilMember): CouncilActivityRecord {
   const speechRecord = findMemberSpeechRecord(speechSummaryData.members, member.id);
   const speeches = currentTermPublicSpeeches(speechRecord);
   const all = radarEligibleSessions.map((sessionId) => ({ sessionId, sessionTitle: sessionTitleOf(sessionId) }));
   const extras = buildRecordExtras(member, speeches);
 
-  if (isCouncilChairperson(member)) {
-    return buildCouncilActivityRecord(
-      speeches,
-      [],
-      all.map((s) => ({ ...s, reason: CHAIRPERSON_NOT_APPLICABLE_REASON })),
-      extras,
-    );
-  }
-  return buildCouncilActivityRecord(speeches, all, [], extras);
+  // 議長を務めていた会期だけを分母から外す。対象期間すべてを外すと、
+  // 議長就任前に行った一般質問まで無かったことになる。
+  const chairSessions = chairpersonSessionsFor(member.id, radarEligibleSessions);
+  const eligible = all.filter((s) => !chairSessions.has(s.sessionId));
+  const excluded = [
+    ...all
+      .filter((s) => chairSessions.has(s.sessionId))
+      .map((s) => {
+        const term = chairSessions.get(s.sessionId)!;
+        return {
+          ...s,
+          reasonCode: "SPEAKER_TERM" as const,
+          reasonNote: chairpersonNote(term),
+          evidenceSourceId: term.id,
+        };
+      }),
+    ...unpublishedSessionExclusions(),
+  ];
+  return buildCouncilActivityRecord(speeches, eligible, excluded, extras);
 }
 
 /**
@@ -295,10 +403,13 @@ export function getMemberActivityMetrics(member: CouncilMember): RadarMetric[] {
   const updatedAt = member.updatedAt ?? member.verifiedAt;
 
   return [
-    calculateQuestionActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt, {
-      notApplicableReason: isCouncilChairperson(member) ? CHAIRPERSON_NOT_APPLICABLE_REASON : undefined,
+    calculateQuestionActivityIndex(currentTermSpeechesForRadar, questionEligibleSessionsFor(member), updatedAt, {
+      notApplicableReason:
+        questionEligibleSessionsFor(member).length === 0
+          ? `${EXCLUSION_REASON_LABELS_JA.SPEAKER_TERM}`
+          : undefined,
     }),
-    calculateSpeechActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt),
+    calculateSpeechActivityIndex(currentTermSpeechesForRadar, questionEligibleSessionsFor(member), updatedAt),
     calculateAttendanceIndex(),
     calculateVotingDisclosureIndex(memberBillVotesInCurrentTerm.length, billsWithAnyMemberVoteDisclosed),
     calculateProposalActivityIndex(),
