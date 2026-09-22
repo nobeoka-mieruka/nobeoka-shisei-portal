@@ -1,7 +1,8 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import councilSessionsData from "../data/councilSessions.json";
 import billVotesData from "../data/billVotes.json";
-import type { BillVoteItem, CouncilSession, GeneralQuestionItem } from "../types";
+import councilReportsData from "../data/councilReports.json";
+import type { BillVoteItem, CouncilReportItem, CouncilSession, GeneralQuestionItem } from "../types";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { BackLink } from "../components/BackLink";
 import { JsonLd } from "../components/JsonLd";
@@ -27,6 +28,7 @@ import { humanizeDataNote } from "../lib/citizenTermLabels";
 
 const councilSessions = councilSessionsData as CouncilSession[];
 const billVotes = billVotesData as BillVoteItem[];
+const councilReports = (councilReportsData as { reports: CouncilReportItem[] }).reports;
 // Phase203：公式資料を確認できている直近の会期と、質問通告書だけが公開されている開催予定の会期。
 const latestConfirmedSessionId = latestConfirmedCouncilSession(councilSessions)?.id;
 const upcomingScheduledSessions = scheduledQuestionSessions(generalQuestionsData as GeneralQuestionItem[]).filter(
@@ -70,6 +72,8 @@ export function CouncilSessionDetailPage() {
 
   const isLatestConfirmedSession = session.id === latestConfirmedSessionId;
   const sessionBills = billsForSession(billVotes, session);
+  // 市長報告は議決・採決を要しない案件。議案と同じ一覧に混ぜず、別の節として見せる。
+  const sessionReports = councilReports.filter((r) => r.sessionId === session.id);
   const stats = sessionBillStats(sessionBills);
   const summaryStatus = session.summaryStatus;
 
@@ -253,6 +257,37 @@ export function CouncilSessionDetailPage() {
           この定例会の議案一覧を見る
         </Link>
       </SectionCard>
+
+      {sessionReports.length > 0 && (
+        <SectionCard title={`この定例会の市長報告（${sessionReports.length}件）`}>
+          <p className="text-sm leading-relaxed text-on-surface-variant">
+            市長から議会へ提出された報告です。<strong className="font-semibold text-on-surface">議決・採決を行わない案件</strong>のため、
+            賛成・反対といった議決結果はありません。議員ごとの賛否もなく、議員の賛否の集計にも含めていません。
+          </p>
+          <ul className="mt-3 space-y-1.5">
+            {sessionReports.map((report) => (
+              <li key={report.id} className="rounded-lg bg-surface-container-low px-3 py-2">
+                <p className="text-sm text-on-surface">
+                  <span className="font-medium">{report.reportNumber}</span>
+                  <span className="ml-1.5">{report.title}</span>
+                </p>
+                <p className="mt-0.5 text-xs text-on-surface-variant">
+                  {report.category}／報告日：{formatJapaneseDate(report.reportedDate)}（議決日ではありません）
+                </p>
+                {report.notes && <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{report.notes}</p>}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+            出典：
+            <a href={sessionReports[0].sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
+              {sessionReports[0].sourceTitle}
+            </a>
+            （延岡市議会、公開日：{formatJapaneseDate(sessionReports[0].publishedDate)}／当サイト確認日：
+            {formatJapaneseDate(sessionReports[0].lastVerified)}／延岡市公式の一次資料）
+          </p>
+        </SectionCard>
+      )}
 
       <div>
         <CorrectionRequestButton pageName={session.title} />

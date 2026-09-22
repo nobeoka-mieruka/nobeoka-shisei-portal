@@ -4737,3 +4737,67 @@ if (errors.length > 0) {
   console.error("\nデータ検証でエラーが見つかったため、ビルドを中止します。上記のエラー内容を確認してください。");
   process.exit(1);
 }
+
+// --- councilReports.json（市長報告：議決を要しない案件） ---
+try {
+  const reportsData = readJson("src/data/councilReports.json");
+  const tag = "councilReports.json";
+  if (!Array.isArray(reportsData.reports)) throw new Error("reportsが配列ではありません");
+
+  const VALID_REPORT_CATEGORIES = new Set([
+    "出資法人等の経営状況報告",
+    "専決処分の報告",
+    "財政指標の報告",
+    "その他",
+  ]);
+  const seenIds = new Set();
+  const seenNumbers = new Set();
+
+  for (const r of reportsData.reports) {
+    const rTag = `${tag} (${r.id ?? "id不明"})`;
+    if (isBlank(r.id)) err(rTag, "idが空です");
+    else if (seenIds.has(r.id)) err(rTag, `idが重複しています: ${r.id}`);
+    else seenIds.add(r.id);
+
+    const numberKey = `${r.sessionId}/${r.reportNumber}`;
+    if (isBlank(r.reportNumber)) err(rTag, "reportNumberが空です");
+    else if (seenNumbers.has(numberKey)) err(rTag, `同じ会期に同じ報告番号があります: ${numberKey}`);
+    else seenNumbers.add(numberKey);
+
+    if (isBlank(r.title)) err(rTag, "titleが空です");
+    if (!VALID_REPORT_CATEGORIES.has(r.category)) err(rTag, `未定義のcategoryです: ${r.category}`);
+    if (!DATE_RE.test(r.reportedDate ?? "")) err(rTag, `reportedDateの形式が不正です: ${r.reportedDate}`);
+    if (!DATE_RE.test(r.publishedDate ?? "")) err(rTag, `publishedDateの形式が不正です: ${r.publishedDate}`);
+    if (!DATE_RE.test(r.lastVerified ?? "")) err(rTag, `lastVerifiedの形式が不正です: ${r.lastVerified}`);
+    if (isBlank(r.sourceUrl) || !/^https:\/\//.test(r.sourceUrl)) err(rTag, `sourceUrlが不正です: ${r.sourceUrl}`);
+    if (isBlank(r.sourceTitle)) err(rTag, "sourceTitleが空です（出典資料名は必須です）");
+    if (r.trustLevel !== "PRIMARY") err(rTag, `trustLevelが不正です: ${r.trustLevel}`);
+    if (typeof r.sourcePage !== "number" || r.sourcePage <= 0) err(rTag, `sourcePageが不正です: ${r.sourcePage}`);
+
+    // 報告は議決・採決を要しない案件なので、議決や賛否に関する項目を持たせない。
+    // 持たせてしまうと議員の賛否集計へ誤って加算される恐れがある。
+    for (const forbidden of ["votingDate", "result", "memberVotes", "voteMethod", "individualVoteDisclosureStatus"]) {
+      if (r[forbidden] !== undefined) {
+        err(rTag, `報告には議決・採決に関する項目を持たせないでください: ${forbidden}`);
+      }
+    }
+  }
+
+  // 報告番号は議案番号とは別系列。同じ会期の議案と取り違えていないかを確かめる。
+  try {
+    const billsForCheck = readJson("src/data/billVotes.json");
+    const billNumbers = new Set(
+      (Array.isArray(billsForCheck) ? billsForCheck : billsForCheck.billVotes).map((b) => `${b.sessionId}/${b.billNumber}`),
+    );
+    for (const r of reportsData.reports) {
+      if (billNumbers.has(`${r.sessionId}/${r.reportNumber}`)) {
+        err(tag, `報告が議案としても登録されています（重複）: ${r.sessionId} ${r.reportNumber}`);
+      }
+    }
+  } catch {
+    warn(tag, "billVotes.jsonと突き合わせられませんでした");
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("councilReports.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}

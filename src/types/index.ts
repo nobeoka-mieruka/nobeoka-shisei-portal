@@ -2606,3 +2606,45 @@ export interface SearchSynonymDictionary {
   orthographicVariants: SearchOrthographicVariantGroup[];
   queryHints: SearchQueryHint[];
 }
+
+/**
+ * 市長が議会へ提出した報告1件分（src/data/councilReports.json）。
+ *
+ * 地方自治法等に基づいて議会へ提出される報告で、議決・採決を要しない。
+ * 議案・採決データ（BillVoteItem）と同じ配列に混ぜると「議案総数」「採決方法の確認率」
+ * 「付託委員会の確認率」といった既存の集計値の意味が変わってしまうため、別に管理する。
+ * 採決が無いので議員別の賛否は持たず、議員の賛否集計にも一切加算しない。
+ */
+export interface CouncilReportItem {
+  id: string;
+  /** councilSessions.jsonの会期id（例："2026-09"）。 */
+  sessionId: string;
+  /** 会期名（例："令和8年9月定例会"）。 */
+  session: string;
+  /** 公式資料での会議名（例："第27回延岡市議会定例会"）。 */
+  sessionTitle: string;
+  /** 報告番号（例："報告第6号"）。議案番号とは別系列。 */
+  reportNumber: string;
+  /** 公式資料の件名をそのまま。要約・言い換えはしない。 */
+  title: string;
+  /** 公式資料の内容から機械的に判定できる範囲の分類。 */
+  category: "出資法人等の経営状況報告" | "専決処分の報告" | "財政指標の報告" | "その他";
+  proposerType: "mayor";
+  proposer: string;
+  /** 報告日（議決日ではない）。 */
+  reportedDate: string;
+  /** councilSessions.jsonの資料id。 */
+  sourceDocumentId: string;
+  sourceUrl: string;
+  /** その資料を掲載している公式ページ。 */
+  sourcePageUrl: string;
+  sourceTitle: string;
+  sourceFilePath: string;
+  sourcePage: number;
+  /** 公式資料の公開日。報告日と同じとは限らないため別に持つ。 */
+  publishedDate: string;
+  trustLevel: "PRIMARY";
+  verificationStatus: "verified" | "partially-verified" | "unverified";
+  lastVerified: string;
+  notes: string | null;
+}
