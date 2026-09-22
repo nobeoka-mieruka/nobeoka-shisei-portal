@@ -15,6 +15,8 @@ import {
 import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 import { classifyTopicToThemeSlug } from "../lib/themeClassification";
 import { TOPIC_CLASSIFICATION_VERSION } from "../lib/topicClassificationMeta";
+import { AXIS_STATUS_LABELS_JA, buildCouncilActivityProfile } from "../lib/councilActivityProfile";
+import { getMemberActivityRecord } from "../lib/councilActivityBarometer";
 import billProposalRolesData from "../data/billProposalRoles.json";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import speechSummaryData from "../data/councilSpeechSummaries.json";
@@ -129,6 +131,16 @@ export function MethodologyCouncilActivityPage() {
     return { ...axis, complete, partial, missing, total: entries.length };
   });
   const evidenceSummary = getEvidenceAvailabilitySummary();
+  // 7軸の定義は、議員ページと同じ関数から取る（説明と実装がずれないようにする）。
+  // 軸ごとの説明は議員によって変わらないため、代表として1名分を使う。
+  const profileAxes = entries.length
+    ? buildCouncilActivityProfile(
+        entries[0].member,
+        getMemberActivityRecord(entries[0].member),
+        targetPeriod,
+        entries.length,
+      )
+    : [];
   const chairpersonEntries = entries.filter((e) => isCouncilChairperson(e.member));
   // 「請願・提案等」で個人に帰属できている記録の件数。手書きせず実データから数える。
   const decisionSubmitterRecordCount = (billProposalRolesData as { roles: { role: string }[] }).roles.filter(
@@ -258,6 +270,83 @@ export function MethodologyCouncilActivityPage() {
             <dd>新しい会議録を取り込むたびに再計算されます。このページの数値も、開くたびに既存データから自動で集計しています。最終更新日はページ末尾に表示しています。</dd>
           </div>
         </dl>
+      </SectionCard>
+
+      <SectionCard title="議会活動プロフィール（7軸）の算定方法">
+        <p className="text-sm leading-relaxed text-on-surface">
+          各議員のページに表示している7軸について、条例との関係、何を測っているか、何を測っていないか、算定式、除外条件、
+          一次資料、更新方法を公開します。第三者が同じ一次資料から再計算できることを目標にしています。
+        </p>
+        <p className="mt-2 rounded-lg bg-surface-container-high p-3 text-sm leading-relaxed text-on-surface">
+          この指標は、議員の能力、人格、優秀さ、政治的立場を評価するものではありません。
+          公開一次資料から確認できる活動記録を、共通ルールで整理したものです。
+          軸を合計した総合点、偏差値、順位づけは作成していません。
+        </p>
+        <ul className="mt-3 space-y-3">
+          {profileAxes.map((axis) => (
+            <li key={axis.key} className="rounded-lg border border-outline-variant p-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm font-semibold text-on-surface">
+                  {axis.order}. {axis.label}
+                </p>
+                <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[11px] text-on-surface-variant">
+                  {AXIS_STATUS_LABELS_JA[axis.status]}
+                </span>
+              </div>
+              <dl className="mt-2 space-y-1 text-xs leading-relaxed text-on-surface-variant">
+                {[
+                  ["条例との関係", axis.roleInOrdinance],
+                  ["今回観測している活動", axis.observedActivity],
+                  ["何を測っているか", axis.measures],
+                  ["何を測っていないか", axis.doesNotMeasure],
+                  ["使用データ", axis.dataUsed],
+                  [
+                    "算定式",
+                    axis.measurement
+                      ? `${axis.measurement.numeratorLabel} ÷ ${axis.measurement.denominatorLabel} × 100`
+                      : "割合としては算定していません。",
+                  ],
+                  ["分子", axis.measurement ? axis.measurement.numeratorLabel : "（算定していません）"],
+                  ["分母", axis.measurement ? axis.measurement.denominatorLabel : "（算定していません）"],
+                  ["上限の意味", axis.upperBoundMeaning],
+                  ["除外条件", axis.notApplicableRule],
+                  ["算定できない条件", `${AXIS_STATUS_LABELS_JA[axis.status]}：${axis.reason}`],
+                  ["欠損時の扱い", axis.missingRule],
+                  ["個人への帰属", axis.individualAttribution],
+                  ["対象期間", axis.targetPeriodLabel],
+                  ["更新方法", axis.updateRule],
+                ].map(([term, value]) => (
+                  <div key={term}>
+                    <dt className="inline font-medium text-on-surface">{term}：</dt>
+                    <dd className="inline">{value}</dd>
+                  </div>
+                ))}
+                <div key="sources">
+                  <dt className="inline font-medium text-on-surface">一次資料：</dt>
+                  <dd className="inline">
+                    {axis.sourceRefs.map((ref, i) => (
+                      <span key={ref.label}>
+                        {i > 0 && "、"}
+                        {ref.url ? (
+                          <a
+                            href={ref.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary underline"
+                          >
+                            {ref.label}
+                          </a>
+                        ) : (
+                          ref.label
+                        )}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
       </SectionCard>
 
       <SectionCard title="政策分野と継続テーマの扱い">

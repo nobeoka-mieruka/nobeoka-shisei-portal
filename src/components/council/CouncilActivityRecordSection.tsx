@@ -70,11 +70,13 @@ function RecordRow({
   targetPeriodLabel,
   updatedAt,
   sessionsNode,
+  excludedCount,
 }: {
   value: ActivityRecordValue;
   targetPeriodLabel: string;
   updatedAt?: string;
   sessionsNode: React.ReactNode;
+  excludedCount: number;
 }) {
   const [open, setOpen] = useState(false);
   const hasEvidence = value.evidenceKind !== "none";
@@ -126,6 +128,30 @@ function RecordRow({
 
       {open && (
         <div className="mt-1.5 rounded-lg bg-surface-container-high p-3">
+          {/* 第三者が同じ数字を出せるよう、分子・分母と式をそのまま置く。 */}
+          {value.numerator != null && value.denominator != null && (
+            <dl className="mb-2 space-y-0.5 rounded-md bg-surface p-2.5 text-xs leading-relaxed text-on-surface">
+              <div className="flex justify-between gap-2">
+                <dt>{value.denominatorLabel ?? "分母"}</dt>
+                <dd className="tabular-nums font-medium">{value.denominator.toLocaleString("ja-JP")}</dd>
+              </div>
+              <div className="flex justify-between gap-2">
+                <dt>{value.numeratorLabel ?? "分子"}</dt>
+                <dd className="tabular-nums font-medium">{value.numerator.toLocaleString("ja-JP")}</dd>
+              </div>
+              {excludedCount > 0 && (
+                <div className="flex justify-between gap-2 text-on-surface-variant">
+                  <dt>算定対象外の会期</dt>
+                  <dd className="tabular-nums">{excludedCount.toLocaleString("ja-JP")}</dd>
+                </div>
+              )}
+              <p className="mt-1 border-t border-outline-variant pt-1 tabular-nums">
+                {value.unit === "%"
+                  ? `${value.numerator} ÷ ${value.denominator} × 100 = ${value.value}%`
+                  : `${value.numerator} ／ ${value.denominator} = ${formatValue(value.value, value.unit)}`}
+              </p>
+            </dl>
+          )}
           {value.evidenceKind === "sessions" && sessionsNode}
           {value.evidenceKind === "items" &&
             (items.length > 0 ? (
@@ -205,8 +231,8 @@ export function CouncilActivityRecordSection({
   const sessionsNode = (
     <>
       <p className="text-xs leading-relaxed text-on-surface-variant">
-        一般質問実施率の分子・分母に、どの会期が入っているかの内訳です。
-        {excluded.length > 0 && "算定の対象外とした会期も、理由とあわせて示しています。"}
+        どの会期を数え、どの会期を算定の対象外にしたかの内訳です。会議録が公開されていない会期は、
+        分母にも分子にも入れていません（質問がなかったという意味ではありません）。
       </p>
       <ul className="mt-2 space-y-1.5">
         {record.sessions.map((s) => (
@@ -268,6 +294,7 @@ export function CouncilActivityRecordSection({
                   targetPeriodLabel={targetPeriodLabel}
                   updatedAt={updatedAt}
                   sessionsNode={sessionsNode}
+                  excludedCount={excluded.length}
                 />
               ))}
             </ul>

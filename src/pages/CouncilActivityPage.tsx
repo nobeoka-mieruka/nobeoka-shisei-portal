@@ -234,9 +234,25 @@ export function CouncilActivityPage() {
   // 比較は「同じ定義の記録を横に並べる」だけにする。行＝項目、列＝議員。
   // 値そのものは各議員の記録から取るため、誰を並べても表示値は変わらない。
   const compareRecords = compareEntries.map((e) => ({ member: e.member, record: getMemberActivityRecord(e.member) }));
+  // 件数だけを並べると在任期間の長さの影響を受けるため、算定対象の会期数を必ず併記する。
+  const compareEligibleCounts = compareRecords.map(
+    (c) => c.record.sessions.filter((x) => x.countedInDenominator).length,
+  );
+  // 対象期間が違う議員どうしを、同じ条件で比べたように見せない。
+  const comparePeriodDiffers = new Set(compareEligibleCounts).size > 1;
   const compareRows =
     compareRecords.length > 0
-      ? compareRecords[0].record.values.map((template) => ({
+      ? [
+          {
+            key: "eligible-sessions",
+            label: "算定対象の会期数",
+            cells: compareEligibleCounts.map((n) => ({
+              text: `${n.toLocaleString("ja-JP")}会期`,
+              stateLabel: null,
+              fraction: null,
+            })),
+          },
+          ...compareRecords[0].record.values.map((template) => ({
           key: template.key,
           label: template.label,
           cells: compareRecords.map(({ record }) => {
@@ -258,7 +274,8 @@ export function CouncilActivityPage() {
                 v.numerator != null && v.denominator != null ? `${v.numerator}／${v.denominator}` : null,
             };
           }),
-        }))
+          })),
+        ]
       : [];
   const committeeOptions = sortedCommittees().map((c) => ({ value: c.id, label: c.name }));
   const factionOptions = allFactions.map((f) => ({ value: f.id, label: f.name }));
@@ -785,6 +802,12 @@ export function CouncilActivityPage() {
 
       {compareEntries.length > 0 && (
         <SectionCard title={`比較（${compareEntries.length}名選択中）`}>
+          {comparePeriodDiffers && (
+            <p className="mb-3 rounded-lg border border-tertiary/40 bg-tertiary-container/40 px-3 py-2 text-xs font-medium leading-relaxed text-on-surface">
+              対象期間が異なります。算定対象の会期数が議員によって違うため、件数をそのまま比べることはできません。
+              割合（一般質問実施率・再質問確認率）と、各行の分子・分母をあわせてご覧ください。
+            </p>
+          )}
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
             同じ定義の公開記録を、そのまま横に並べています。順位・総合点・優劣の判定は行いません。
             ここに出る値は誰と並べても変わりません（他の議員の数値で割ったり正規化したりしていないためです）。

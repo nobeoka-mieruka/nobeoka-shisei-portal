@@ -47,6 +47,9 @@ import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { MemberSpeechAnalysisStatusBadge } from "../components/council/MemberSpeechAnalysisStatusBadge";
 import { CouncilActivityRecordSection } from "../components/council/CouncilActivityRecordSection";
+import { CouncilActivityProfileChart } from "../components/council/CouncilActivityProfileChart";
+import { buildCouncilActivityProfile } from "../lib/councilActivityProfile";
+import membersDataForProfile from "../data/members.json";
 import {
   activityTargetPeriodLabel,
   getMemberActivityRecord,
@@ -335,6 +338,13 @@ export function MemberDetailPage() {
   // 以前はこのページで同じ計算を別に書いていたため、議員活動のページと値が食い違い、
   // 議長を対象外にする扱いも反映されていなかった。
   const activityRecord = getMemberActivityRecord(member);
+  // 7軸のプロフィール。数値は activityRecord から取り、二重に計算しない。
+  const activityProfile = buildCouncilActivityProfile(
+    member,
+    activityRecord,
+    activityTargetPeriodLabel(),
+    (membersDataForProfile as unknown[]).length,
+  );
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -410,6 +420,27 @@ export function MemberDetailPage() {
           </Link>
         </div>
       </section>
+
+      <SectionCard title="議会活動プロフィール">
+        <p className="text-xs leading-relaxed text-on-surface-variant">
+          公開一次資料から確認できる議会活動を、延岡市議会基本条例に示された議会・議員の役割を参考に、共通の算定方法で整理しています。
+          この図は議員個人の能力・人格・政治的立場を評価するものではありません。
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+          数値を出しているのは、一次資料から個人単位で確認でき、全議員に同じ算定方法を適用でき、算定式を公開でき、第三者が再計算できる軸だけです。
+          条件を満たさない軸は0や最低値にせず、算定できない理由を示しています。総合点・順位づけは行いません。
+          各軸について、条例上の役割・今回観測している活動・使用データを分けて示しています。
+        </p>
+        <div className="mt-3">
+          <CouncilActivityProfileChart axes={activityProfile} memberName={member.name} />
+        </div>
+        <Link
+          to="/methodology/council-activity"
+          className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
+        >
+          算定方法を見る
+        </Link>
+      </SectionCard>
 
       <CouncilActivityRecordSection
         record={activityRecord}
