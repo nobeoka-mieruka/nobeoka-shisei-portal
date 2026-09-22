@@ -123,13 +123,17 @@ export function CouncilActivityMemberPage() {
 
   const questionMetric = metricByKey(metrics, "question");
   const speechMetric = metricByKey(metrics, "speech");
-  const speechCount = speechMetric?.rawValue ?? 0;
+  // rawValue が無いのは「会議録を取得できた会期が無い」状態であり、0件ではない。
+  const speechCount = speechMetric?.rawValue ?? null;
+  const questionNotApplicable = questionMetric?.dataStatus === "not-applicable";
 
   // 事実の要約のみを機械的に生成する（優秀／劣っている等の評価語は使用しない）。
   const factsSummary =
     questionMetric?.value !== null && questionMetric?.value !== undefined
-      ? `一般質問実施率${Math.round(questionMetric.value)}%、議会内発言${speechCount}件、公式情報発信${channelCount}媒体、請願・提案等${submitterCount}件が公開資料から確認されています。`
-      : null;
+      ? `一般質問実施率${Math.round(questionMetric.value)}%、議会内発言${speechCount ?? "未取得"}件、公式情報発信${channelCount}媒体、請願・提案等${submitterCount}件が公開資料から確認されています。`
+      : questionNotApplicable
+        ? `${questionMetric?.notApplicableReason ?? "制度上、一般質問実施率の算定対象外です。"}`
+        : null;
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -241,7 +245,12 @@ export function CouncilActivityMemberPage() {
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">一般質問</p>
             <p className="mt-1 text-lg font-semibold text-on-surface">
-              {questionMetric?.value !== null && questionMetric?.value !== undefined ? `${Math.round(questionMetric.value)}%` : "確認中"}
+              {/* 「制度上の対象外（議長など）」を「まだ調べていない」と同じ言葉にしない。 */}
+              {questionMetric?.value !== null && questionMetric?.value !== undefined
+                ? `${Math.round(questionMetric.value)}%`
+                : questionNotApplicable
+                  ? "対象外"
+                  : "確認中"}
             </p>
             <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
@@ -249,7 +258,9 @@ export function CouncilActivityMemberPage() {
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">発言量</p>
-            <p className="mt-1 text-lg font-semibold text-orange-700 dark:text-orange-300">{speechCount}件</p>
+            <p className="mt-1 text-lg font-semibold text-orange-700 dark:text-orange-300">
+              {speechCount === null ? "未取得" : `${speechCount.toLocaleString("ja-JP")}件`}
+            </p>
             <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
@@ -282,20 +293,32 @@ export function CouncilActivityMemberPage() {
         <p className="text-xs leading-relaxed text-on-surface-variant">
           対象期間（{targetPeriod}）中の記録です。「登壇回数」「質問項目数」は異なる数え方のため区別しています。
         </p>
+        {/* 制度上そもそも一般質問を行わない議員に、0回・0件・0／13会期を並べない。 */}
+        {questionNotApplicable && (
+          <p className="mt-2 rounded-lg bg-surface-container-high px-3 py-2 text-xs leading-relaxed text-on-surface-variant">
+            {questionMetric?.notApplicableReason ??
+              "制度上、一般質問実施率の算定対象外です。"}
+            この議員については、以下の件数を実績として読まないでください。
+          </p>
+        )}
         <dl className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">
               登壇回数
               <span className="ml-1 text-[11px]">（本会議で一般質問・代表質問等のために発言した回数）</span>
             </dt>
-            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{evidence.appearanceCount}回</dd>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {questionNotApplicable ? "対象外" : `${evidence.appearanceCount}回`}
+            </dd>
           </div>
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">
               質問項目数
               <span className="ml-1 text-[11px]">（全登壇を通じた個別質問項目の合計）</span>
             </dt>
-            <dd className="mt-0.5 text-lg font-semibold text-on-surface">{evidence.questionItemCount}件</dd>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {questionNotApplicable ? "対象外" : `${evidence.questionItemCount}件`}
+            </dd>
           </div>
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">
@@ -303,13 +326,17 @@ export function CouncilActivityMemberPage() {
               <span className="ml-1 text-[11px]">（一般質問を行ったことが確認できた会期）</span>
             </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
-              {evidence.sessionIdsWithQuestion.length}／{evidence.targetSessionCount}会期
+              {questionNotApplicable
+                ? "対象外"
+                : `${evidence.sessionIdsWithQuestion.length}／${evidence.targetSessionCount}会期`}
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">答弁者の内訳（質問項目単位、重複あり）</dt>
             <dd className="mt-0.5 text-sm text-on-surface">
-              市長答弁：{evidence.mayorAnsweredItemCount}件／執行部（市長以外）答弁：{evidence.executiveAnsweredItemCount}件
+              {questionNotApplicable
+                ? "対象外"
+                : `市長答弁：${evidence.mayorAnsweredItemCount}件／執行部（市長以外）答弁：${evidence.executiveAnsweredItemCount}件`}
             </dd>
           </div>
         </dl>
@@ -346,7 +373,7 @@ export function CouncilActivityMemberPage() {
       <SectionCard title="議案への賛否（個人別に確認できたもの）">
         {voteEvidence.disclosedBillCount === 0 ? (
           <p className="text-sm text-on-surface-variant">
-            この議員について、個人別賛否資料が公開されていないため確認できません（0件という意味ではありません）。
+            この議員について、個人別の賛否を確認できた議案はまだありません（0件という意味ではありません）。
           </p>
         ) : (
           <>
@@ -378,7 +405,10 @@ export function CouncilActivityMemberPage() {
         )}
         {undisclosedBillCount > 0 && (
           <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-            上記以外の議案（サイト全体で登録済みの{voteEvidence.totalBillCountSitewide}件中{undisclosedBillCount}件）は、個人別の賛否記録がまだ公開されていないため、この議員についても確認できません。「反対0件」等の意味ではありません。
+            上記以外の議案（サイト全体で登録済みの{voteEvidence.totalBillCountSitewide}件中{undisclosedBillCount}件）について、この議員の賛否は確認できていません。内訳は2種類あります。
+            {voteEvidence.notDisclosedBillCountSitewide}件は起立採決などで、会議録に議員一人ひとりの賛否が記載されていないことを確認済みです。
+            残る{voteEvidence.unconfirmedBillCountSitewide}件は、採決の方式までは分かっているものの、個人別の賛否を当サイトがまだ確認できていないもので、公開されていないと断定したものではありません。
+            いずれも「反対0件」等の意味ではありません。
           </p>
         )}
         <Link

@@ -6,7 +6,6 @@ import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { FactionChip } from "../components/FactionChip";
-import { Avatar } from "../components/Avatar";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { SearchBar } from "../components/SearchBar";
 import { FilterSelect } from "../components/FilterSelect";
@@ -55,10 +54,12 @@ type SortKey = "name" | "speechCount" | "questionRate" | "submitterCount" | "cha
 
 interface BarometerRow {
   entry: MemberActivityEntry;
-  /** 発言件数（確認できた質問項目数の実数、指数化前）。 */
-  speechCount: number;
-  /** 一般質問実施率（0〜100、未収録はnull）。 */
+  /** 発言件数（確認できた質問項目数の実数）。会議録を取得できた会期が無い場合はnull（0件ではない）。 */
+  speechCount: number | null;
+  /** 一般質問実施率（0〜100）。算定できない場合はnull。 */
   questionRate: number | null;
+  /** 実施率がnullの理由が「制度上の対象外」（議長など）かどうか。未取得と区別して表示する。 */
+  questionNotApplicable: boolean;
   /** 決議の提出者として確認できた件数（限定あり、confirmed_zeroを含む実数）。 */
   submitterCount: number;
   /** 情報発信媒体数（本人確認済みSNS＋公式プロフィールページの実数）。 */
@@ -90,8 +91,12 @@ function sortRows(rows: BarometerRow[], sortKey: SortKey, dir: "asc" | "desc"): 
   return sorted;
 }
 
-/** 列内最大値を基準にバー長を正規化した横棒グラフ（強調色は呼び出し側で指定）。 */
-function ValueBar({ value, max, colorClass }: { value: number; max: number; colorClass: string }) {
+/** 固定の基準値でバー長を決める横棒グラフ（強調色は呼び出し側で指定）。 */
+function ValueBar({ value, max, colorClass }: { value: number | null; max: number; colorClass: string }) {
+  // 値が無いのは0件ではない。バーを長さ0で描かず、言葉で状態を出す。
+  if (value === null) {
+    return <span className="text-xs text-on-surface-variant">未取得</span>;
+  }
   const pct = max > 0 ? Math.round((value / max) * 100) : 0;
   return (
     <div className="flex items-center gap-2">
@@ -103,9 +108,12 @@ function ValueBar({ value, max, colorClass }: { value: number; max: number; colo
   );
 }
 
-function RateBar({ value }: { value: number | null }) {
+function RateBar({ value, notApplicable }: { value: number | null; notApplicable?: boolean }) {
+  // 「制度上の対象外（議長など）」を「まだ調べていない」と同じ言葉にしない。
   if (value === null) {
-    return <span className="text-xs text-on-surface-variant">確認中</span>;
+    return (
+      <span className="text-xs text-on-surface-variant">{notApplicable ? "対象外" : "確認中"}</span>
+    );
   }
   return (
     <div className="flex items-center gap-2">
@@ -162,8 +170,11 @@ export function CouncilActivityPage() {
     () =>
       allEntries.map((entry) => ({
         entry,
-        speechCount: metricByKey(entry.metrics, "speech")?.rawValue ?? 0,
+        // rawValue が無いのは「会議録を取得できた会期が無い」状態で、0件ではない。
+        // ?? 0 にすると、会議録の取得が途切れた瞬間に全議員が0件表示になる。
+        speechCount: metricByKey(entry.metrics, "speech")?.rawValue ?? null,
         questionRate: metricByKey(entry.metrics, "question")?.value ?? null,
+        questionNotApplicable: metricByKey(entry.metrics, "question")?.dataStatus === "not-applicable",
         submitterCount: decisionSubmitterCountFor(entry.member.id),
         channelCount: informationChannelCount(entry.member),
       })),
@@ -220,6 +231,35 @@ export function CouncilActivityPage() {
   }
 
   const compareEntries = allEntries.filter((e) => compareIds.includes(e.member.id));
+  // 比較は「同じ定義の記録を横に並べる」だけにする。行＝項目、列＝議員。
+  // 値そのものは各議員の記録から取るため、誰を並べても表示値は変わらない。
+  const compareRecords = compareEntries.map((e) => ({ member: e.member, record: getMemberActivityRecord(e.member) }));
+  const compareRows =
+    compareRecords.length > 0
+      ? compareRecords[0].record.values.map((template) => ({
+          key: template.key,
+          label: template.label,
+          cells: compareRecords.map(({ record }) => {
+            const v = record.values.find((x) => x.key === template.key);
+            if (!v) return { text: null, stateLabel: "―", fraction: null };
+            if (v.kind === "list") {
+              const count = v.items?.length ?? 0;
+              return count > 0 && v.availability !== "not-applicable"
+                ? { text: `${count.toLocaleString("ja-JP")}件`, stateLabel: null, fraction: null }
+                : { text: null, stateLabel: COMPARE_AVAILABILITY_LABEL[v.availability], fraction: null };
+            }
+            if (v.value === null) {
+              return { text: null, stateLabel: COMPARE_AVAILABILITY_LABEL[v.availability], fraction: null };
+            }
+            return {
+              text: `${v.value.toLocaleString("ja-JP")}${v.unit}`,
+              stateLabel: null,
+              fraction:
+                v.numerator != null && v.denominator != null ? `${v.numerator}／${v.denominator}` : null,
+            };
+          }),
+        }))
+      : [];
   const committeeOptions = sortedCommittees().map((c) => ({ value: c.id, label: c.name }));
   const factionOptions = allFactions.map((f) => ({ value: f.id, label: f.name }));
 
@@ -426,7 +466,7 @@ export function CouncilActivityPage() {
                       <ValueBar value={row.speechCount} max={SPEECH_BAR_MAX} colorClass="bg-orange-500" />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3">
-                      <RateBar value={row.questionRate} />
+                      <RateBar value={row.questionRate} notApplicable={row.questionNotApplicable} />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3">
                       <ValueBar value={row.submitterCount} max={SUBMITTER_BAR_MAX} colorClass="bg-orange-500" />
@@ -502,7 +542,7 @@ export function CouncilActivityPage() {
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">実施率</dt>
                       <dd>
-                        <RateBar value={row.questionRate} />
+                        <RateBar value={row.questionRate} notApplicable={row.questionNotApplicable} />
                       </dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
@@ -549,7 +589,11 @@ export function CouncilActivityPage() {
               <div
                 className="mt-1 h-2.5 w-full overflow-hidden rounded-full bg-surface-container-high"
                 role="img"
-                aria-label={`${c.indicatorLabel}：対象${c.totalCount}名中${c.completeCount}名分のデータを収録済み（${c.coveragePercent}%）`}
+                aria-label={
+                  c.coveragePercent === 0
+                    ? `${c.indicatorLabel}：この項目を確認できた議員はいません（対象${c.totalCount}名、未収録）`
+                    : `${c.indicatorLabel}：対象${c.totalCount}名中${c.completeCount}名分のデータを収録済み（${c.coveragePercent}%）`
+                }
               >
                 <div
                   className={`h-full rounded-full ${c.coveragePercent === 0 ? "bg-outline-variant" : "bg-primary"}`}
@@ -572,7 +616,9 @@ export function CouncilActivityPage() {
                 <div>
                   <dt className="inline font-medium text-on-surface">確認できた人数：</dt>
                   <dd className="inline">
-                    {d.confirmedMemberCount}／{d.totalMemberCount}名
+                    {d.confirmedMemberCount === 0
+                      ? `この項目を確認できた議員はいません（対象${d.totalMemberCount}名）`
+                      : `${d.confirmedMemberCount}／${d.totalMemberCount}名`}
                   </dd>
                 </div>
                 {d.confirmedSessionCount !== null && (
@@ -740,50 +786,67 @@ export function CouncilActivityPage() {
       {compareEntries.length > 0 && (
         <SectionCard title={`比較（${compareEntries.length}名選択中）`}>
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-            会議録で確認できた事実を並べたものです。点数化・順位付けはしていません。ここに出る値は、誰と並べても変わりません（他の議員の数値で割ったり正規化したりしていないためです）。件数は、会期ごとに会議録から要約を取り込めた量に左右されるため、多い少ないをそのまま活動量の差とは読めません。
+            同じ定義の公開記録を、そのまま横に並べています。順位・総合点・優劣の判定は行いません。
+            ここに出る値は誰と並べても変わりません（他の議員の数値で割ったり正規化したりしていないためです）。
+            件数は、会期ごとに会議録から要約を取り込めた量に左右されるため、多い少ないをそのまま活動量の差とは読めません。
+            最終的な判断は、各行の根拠から一次資料をご確認ください。
           </p>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {compareEntries.map((e) => {
-              const record = getMemberActivityRecord(e.member);
-              return (
-                <div key={e.member.id} className="rounded-lg border border-outline-variant p-3">
-                  <div className="text-center">
-                    <Avatar name={e.member.name} photoUrl={e.member.photoUrl} size="sm" className="mx-auto" />
-                    <p className="mt-1.5 text-sm font-medium text-on-surface">{e.member.name}</p>
-                  </div>
-                  <dl className="mt-2 space-y-1.5">
-                    {record.values.map((v) => (
-                      <div key={v.key} className="flex flex-wrap items-baseline justify-between gap-1">
-                        <dt className="text-xs text-on-surface-variant">{v.label}</dt>
-                        <dd className="text-sm font-semibold text-on-surface">
-                          {v.value === null ? (
-                            <span className="text-xs font-normal text-on-surface-variant">
-                              {COMPARE_AVAILABILITY_LABEL[v.availability]}
-                            </span>
-                          ) : (
-                            <>
-                              {v.value.toLocaleString("ja-JP")}
-                              {v.unit}
-                              {v.numerator != null && v.denominator != null && (
-                                <span className="ml-1 text-xs font-normal text-on-surface-variant">
-                                  （{v.numerator}／{v.denominator}）
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </dd>
-                      </div>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[22rem] border-collapse text-sm">
+              <caption className="sr-only">選択した議員の、公開記録による議会活動の比較（順位付けは行っていません）</caption>
+              <thead>
+                <tr className="border-b border-outline-variant">
+                  <th scope="col" className="py-2 pr-2 text-left text-xs font-medium text-on-surface-variant">
+                    項目
+                  </th>
+                  {compareRecords.map((c) => (
+                    <th key={c.member.id} scope="col" className="py-2 px-2 text-left text-xs font-medium text-on-surface">
+                      <Link to={`/council-activity/${c.member.id}`} className={`text-primary underline ${linkClass}`}>
+                        {c.member.name}
+                      </Link>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {compareRows.map((row) => (
+                  <tr key={row.key} className="border-b border-outline-variant/60 align-top">
+                    <th scope="row" className="py-2 pr-2 text-left text-xs font-normal text-on-surface-variant">
+                      {row.label}
+                    </th>
+                    {row.cells.map((cell, i) => (
+                      <td key={compareRecords[i].member.id} className="py-2 px-2 text-sm text-on-surface">
+                        {cell.text === null ? (
+                          <span className="text-xs text-on-surface-variant">{cell.stateLabel}</span>
+                        ) : (
+                          <>
+                            <span className="font-semibold tabular-nums">{cell.text}</span>
+                            {cell.fraction && (
+                              <span className="ml-1 text-xs font-normal text-on-surface-variant">（{cell.fraction}）</span>
+                            )}
+                          </>
+                        )}
+                      </td>
                     ))}
-                  </dl>
-                  <Link
-                    to={`/council-activity/${e.member.id}`}
-                    className={`mt-2 inline-flex min-h-11 items-center text-xs font-medium text-primary underline ${linkClass}`}
-                  >
-                    根拠（会期ごとの内訳）を見る →
-                  </Link>
-                </div>
-              );
-            })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+            「対象外」は制度上その議員に当てはまらない項目、「確認した結果0件」は一次資料を確認したうえで0件だったもの、
+            「未取得」「個人別の記録なし」は当サイトが確認できていないものです。いずれも0件とは異なります。
+          </p>
+          <div className="mt-3 flex flex-wrap gap-3">
+            {compareRecords.map((c) => (
+              <Link
+                key={c.member.id}
+                to={`/council-activity/${c.member.id}`}
+                className={`inline-flex min-h-11 items-center text-xs font-medium text-primary underline ${linkClass}`}
+              >
+                {c.member.name}の根拠を見る →
+              </Link>
+            ))}
           </div>
           <button
             type="button"

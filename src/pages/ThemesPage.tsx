@@ -10,6 +10,7 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { aggregateSpeechesByTheme } from "../lib/councilSpeeches";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
+import { isPolicyTheme } from "../lib/topicClassificationMeta";
 
 const themes = themesData as Theme[];
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
@@ -24,6 +25,11 @@ export function ThemesPage() {
   usePageTitle();
 
   const aggregates = aggregateSpeechesByTheme(speechSummaryData.members);
+  // 「未分類」「その他」は政策テーマではない。前者は自動分類が当たらなかった状態、
+  // 後者はキーワードが1つも定義されておらず分類先として選ばれない受け皿。
+  // 政策テーマのカードに混ぜると、分類できていないことが1つの政策分野のように見える。
+  const policyThemes = themes.filter((t) => isPolicyTheme(t.slug));
+  const nonPolicyThemes = themes.filter((t) => !isPolicyTheme(t.slug));
   const bySlug = new Map(aggregates.map((a) => [a.slug, a]));
   const coveredMemberIds = new Set(aggregates.flatMap((a) => a.memberIds));
   const coveredMemberNames = members.filter((m) => coveredMemberIds.has(m.id)).map((m) => m.name);
@@ -52,7 +58,7 @@ export function ThemesPage() {
       </div>
 
       <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {themes.map((theme) => {
+        {policyThemes.map((theme) => {
           const aggregate = bySlug.get(theme.slug);
           const questionCount = aggregate?.speechIds.length ?? 0;
           const memberCount = aggregate?.memberIds.length ?? 0;
@@ -75,8 +81,43 @@ export function ThemesPage() {
         })}
       </ul>
 
+      <section className="mt-6">
+        <h2 className="text-sm font-semibold text-on-surface">分類の状況</h2>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          テーマは、会議録の見出し語をキーワード辞書と照合して自動で分類しています（AIによる内容の判定は行っていません）。
+          どのキーワードにも当たらない語句は、推測で分野を割り当てず「未分類」としています。未分類が多いことは、
+          その分野の質問が少ないという意味ではなく、辞書に受け皿の語がまだ足りないことを示します。
+        </p>
+        <ul className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {nonPolicyThemes.map((theme) => {
+            const aggregate = bySlug.get(theme.slug);
+            const questionCount = aggregate?.speechIds.length ?? 0;
+            return (
+              <li key={theme.id}>
+                <Link
+                  to={`/themes/${theme.slug}`}
+                  className={`block h-full rounded-xl border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
+                >
+                  <p className="text-sm font-semibold text-on-surface">{theme.name}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{theme.description}</p>
+                  <p className="mt-1.5 text-xs text-on-surface-variant">
+                    {questionCount > 0
+                      ? `${questionCount}件の質問が、このどの分野にも分類されていません`
+                      : "該当する質問はありません"}
+                  </p>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
       <p className="mt-6 px-1 text-xs leading-relaxed text-on-surface-variant">
-        テーマは、会議録本文・質問要約に明記された語句を機械的に分類したものです。件数は会議録上の質問をテーマ別に分類した集計であり、質問内容の質、政策への貢献度、議員活動全体を評価するものではありません。
+        件数は会議録上の質問をテーマ別に分類した集計であり、質問内容の質、政策への貢献度、議員活動全体を評価するものではありません。分類の詳しい方法は
+        <Link to="/methodology/council-activity" className={`mx-1 font-medium text-primary underline ${linkClass}`}>
+          議会活動の記録の算定方法
+        </Link>
+        で説明しています。
       </p>
 
       <LastUpdated className="mt-4" />

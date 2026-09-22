@@ -68,7 +68,17 @@ export function CouncilActivityHistoryPage() {
                 {e.metrics.map((m) => (
                   <div key={m.key} className="rounded-lg bg-surface-container-low p-3">
                     <dt className="text-xs text-on-surface-variant">{m.label}</dt>
-                    <dd className="mt-0.5 text-lg font-semibold text-on-surface">{m.value === null ? "対象記録なし" : `${m.value}%`}</dd>
+                    <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+                      {/* 割合を算定しない指標（発言量・議案への意思表示）は value が常に null。
+                          そこだけを見て「対象記録なし」と書くと、確認済みの実数まで隠れてしまう。 */}
+                      {m.value !== null
+                        ? `${m.value}%`
+                        : m.numerator != null && m.denominator != null
+                          ? `${m.numerator}／${m.denominator}`
+                          : m.rawValue != null
+                            ? `${m.rawValue.toLocaleString("ja-JP")}件`
+                            : "対象記録なし"}
+                    </dd>
                     <dd className="mt-1 text-xs leading-relaxed text-on-surface-variant">{m.description}</dd>
                   </div>
                 ))}
