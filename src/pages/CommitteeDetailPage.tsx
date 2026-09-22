@@ -212,7 +212,7 @@ export function CommitteeDetailPage() {
         </SectionCard>
       )}
 
-      <SectionCard title="審査した議案">
+      <SectionCard title="この委員会へ付託された議案">
         {reviewedBills.length === 0 ? (
           <p className="rounded-lg bg-surface-container-high/70 px-3 py-2.5 text-xs leading-relaxed text-on-surface-variant">
             当サイトのデータベースで、本委員会が付託先として確認できた議案はまだ登録されていません。
