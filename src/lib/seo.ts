@@ -75,6 +75,7 @@ import { normalizePathname, safeDecodeURIComponent } from "./normalizePathname";
 import { publicDocuments } from "./councilDocuments";
 import { publicBills } from "./billVotes";
 import photoDimensionsData from "../data/photoDimensions.json";
+import { questionTranscriptConfirmedForSessionName } from "./generalQuestionStats";
 
 const photoDimensions = photoDimensionsData as Record<string, { width: number; height: number }>;
 
@@ -1479,7 +1480,11 @@ function questionSeo(id: string, options?: SeoOptions): SeoResult {
     {
       path: `/questions/${id}`,
       pageTitle: `${item.title}｜${item.memberName}議員の一般質問`,
-      description: `${item.memberName}議員が${item.questionDate}の${item.sessionName}で行った質問「${item.title}」の内容・答弁・出典を掲載しています。`,
+      // 会議録で実施を確認できていない質問について「行った」と書かない。
+      // 質問通告書だけが根拠の段階では、通告の内容であることが分かる書き方にする。
+      description: questionTranscriptConfirmedForSessionName(item.sessionName)
+        ? `${item.memberName}議員が${item.questionDate}の${item.sessionName}で行った質問「${item.title}」の内容・答弁・出典を掲載しています。`
+        : `${item.memberName}議員が${item.sessionName}へ通告した質問「${item.title}」の項目と出典を掲載しています。質問の内容と答弁は、会議録の公開後に確認します。`,
       ogType: "article",
       breadcrumbs: [
         { label: "ホーム", to: "/" },
