@@ -9,6 +9,8 @@ import {
   FUND_SHORTAGE_DESCRIPTION,
   SOUNDNESS_INDICATORS,
   describePointDifference,
+  formatPointDifference,
+  LARGE_POINT_CHANGE,
   formatRatioPercent,
   formatStandardPercent,
   latestSoundnessYear,
@@ -176,6 +178,22 @@ export function SoundnessRatiosSection({ years }: { years: ArchiveFiscalYear[] }
             {priorLabel} {valueText(indicatorValue(prior, "futureBurdenRatio"))} → {latestLabel} {valueText(indicatorValue(finance, "futureBurdenRatio"))}
           </p>
           <p className="mt-0.5 text-sm text-on-surface">{describePointDifference(futureBurdenDiff)}</p>
+          {/*
+            前年度から大きく動いた年度は、基準内であっても見落とされやすい。
+            公式資料から言えることだけを、色ではなく文章で添える。
+            「財政危機」「危険水準」のような、公式資料から導けない断定はしない。
+          */}
+          {futureBurdenDiff >= LARGE_POINT_CHANGE && (
+            <p className="mt-2 rounded-lg bg-surface-container p-2.5 text-xs leading-relaxed text-on-surface">
+              <span className="font-semibold">見るときの注意：</span>
+              {latestLabel}の将来負担比率は
+              {futureBurdenStandard !== null ? `法定の早期健全化基準（${formatStandardPercent(futureBurdenStandard)}）を下回っていますが、` : "法定基準を下回っていますが、"}
+              前年度から{formatPointDifference(futureBurdenDiff)}大きく上昇しています。
+              上昇の要因は確認が必要です。延岡市の「健全化判断比率等の公表」には比率の内訳が掲載されていないため、
+              <strong className="font-semibold">詳細な増加要因は追加資料による確認が必要</strong>です。
+              当サイトでは要因を推測して記載することはしません。
+            </p>
+          )}
         </div>
       )}
       <p className="mb-2 mt-2 text-xs leading-relaxed text-on-surface-variant">

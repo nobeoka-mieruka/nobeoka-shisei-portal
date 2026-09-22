@@ -107,3 +107,17 @@ export function settlementLabel(fiscalYear: number): string {
 export function formatRatioPercent(value: number): string {
   return `${value.toFixed(1)}％`;
 }
+
+/**
+ * 「前年度から大きく上昇した」と添えるかどうかの境目（ポイント）。
+ *
+ * 公式資料に「大きい／小さい」の基準は無いため、当サイトが評価を下すための線引きではない。
+ * 前年度比の変化がこの幅を超えた年度について、基準内であっても見落とされないよう
+ * 「要因の確認が必要」と中立的に案内するためだけに使う。
+ */
+export const LARGE_POINT_CHANGE = 10;
+
+/** 「16.4ポイント」のような差分の表記（上昇・低下の語は含めない）。 */
+export function formatPointDifference(diff: number): string {
+  return `${Math.abs(diff).toFixed(1)}ポイント`;
+}
