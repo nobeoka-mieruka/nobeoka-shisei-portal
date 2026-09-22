@@ -51,7 +51,13 @@ function main() {
   const questionCollectionStatus = existsSync(questionCollectionStatusPath)
     ? readJson(questionCollectionStatusPath)
     : { sessions: [] };
-  const heldQuestionSessionIds = new Set((questionCollectionStatus.sessions ?? []).map((s) => s.sessionId));
+  // 「一般質問が行われた」と書けるのは、会議録本文を確認できた会期だけ。
+  // 収録対象へ登録しただけ（＝会期が閉会した）では、議決結果が分かっているに過ぎず、
+  // 一般質問が実際にどう行われたかは確認できていない。登録の有無で判定すると、
+  // 会議録が未公開の会期について「一般質問も行われました」と断定してしまう。
+  const heldQuestionSessionIds = new Set(
+    (questionCollectionStatus.sessions ?? []).filter((s) => s.transcriptAvailable === true).map((s) => s.sessionId),
+  );
 
   let updated = 0;
   let unchanged = 0;
