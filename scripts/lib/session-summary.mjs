@@ -101,7 +101,10 @@ export function buildSessionSummary(session, bills, generalQuestionCount, option
   const categories = summarizeCategories(bills);
   const results = summarizeResults(bills);
   const hasUnresolvedResult = bills.some((b) => !b.result || b.result === "確認中");
-  const hasCommitteeReview = bills.some((b) => !!b.committee);
+  // 付託先は議案審議結果（公式資料）に記載があるため「付託された」ことは書ける。
+  // 一方、委員会がいつ開き何を審査したかは公表されておらず当サイトのデータにも無いため、
+  // 「審査が行われました」とは書かない（付託の記録から審査の中身を推し量らない）。
+  const hasCommitteeReferral = bills.some((b) => !!b.committee && b.committee !== "付託なし（本会議で即日議決）");
   const hasMinutes = hasDocumentCategory(visibleDocuments, "minutes");
   const hasResultsDoc = hasDocumentCategory(visibleDocuments, "results");
   const hasPetitions = hasDocumentCategory(visibleDocuments, "petitions") || categories.includes("請願") || categories.includes("陳情");
@@ -138,15 +141,18 @@ export function buildSessionSummary(session, bills, generalQuestionCount, option
 
   const activityNotes = [];
   if (generalQuestionCount > 0 && generalQuestionsHeld) activityNotes.push("一般質問");
-  if (hasCommitteeReview) activityNotes.push("委員会審査");
+  if (hasCommitteeReferral) activityNotes.push("委員会への付託");
   if (activityNotes.length > 0) {
     parts.push(`会期中には${activityNotes.join("・")}も行われました。`);
   }
   if (generalQuestionCount > 0 && !generalQuestionsHeld) {
     parts.push("一般質問は、質問通告書で予定が公表されている段階です（実施内容は会議録の公開後に確認します）。");
   }
+  if (hasCommitteeReferral) {
+    parts.push("委員会がいつ開かれ何を審査したかは公表されていないため、当サイトでは付託先のみを掲載しています。");
+  }
   if (hasPetitions) {
-    parts.push("請願・陳情の審査も行われました。");
+    parts.push("請願・陳情も審議されました。");
   }
 
   if (bills.length > 0) {

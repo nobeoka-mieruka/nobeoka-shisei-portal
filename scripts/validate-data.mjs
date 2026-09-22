@@ -286,6 +286,15 @@ for (const b of billVotes) {
   if (hasMemberVotes && b.individualVoteDisclosureStatus && b.individualVoteDisclosureStatus !== "disclosed") {
     err(tag, `memberVotesがあるのにindividualVoteDisclosureStatusが"${b.individualVoteDisclosureStatus}"です`);
   }
+  // 「公表なしと確認済み」「全会一致」は、画面で断定的に表示する。根拠がレコードに残っていないと、
+  // 何を見てそう判断したのか後から辿れず、市民にも示せない。必ず根拠を添えさせる。
+  const hasDisclosureEvidence = Boolean(b.verificationNote || b.transcriptUrl || b.sourceTextVerifiedAt);
+  if (b.individualVoteDisclosureStatus === "notDisclosed" && !hasDisclosureEvidence) {
+    err(tag, "個人別賛否を『公表なしと確認済み』にするには、確認の根拠（verificationNote／transcriptUrl／sourceTextVerifiedAt のいずれか）が必要です");
+  }
+  if (b.voteMethod === "全会一致" && !hasDisclosureEvidence) {
+    err(tag, "採決方法を『全会一致』にするには、一次資料での確認の根拠（verificationNote／transcriptUrl／sourceTextVerifiedAt のいずれか）が必要です");
+  }
   if (!hasMemberVotes && b.individualVoteDisclosureStatus === "disclosed") {
     err(tag, 'memberVotesが空なのにindividualVoteDisclosureStatusが"disclosed"です');
   }
@@ -1119,6 +1128,10 @@ try {
     "baseline",
     "url-change-suspected",
     "removed-confirmed-suspected",
+    // removed-confirmed は「削除の疑い」ではなく「取得できないことを確かめた」状態。
+    // 公式サイトで404、公式の一覧ページからも消えている、保存記録も無い、のすべてを
+    // 確認したものだけに使う（疑いの段階と区別する）。
+    "removed-confirmed",
     "要確認（変更検知）",
   ]);
   const ALLOWED_OCR_STATUS = new Set(["text-extracted", "OCR確認待ち", undefined, null]);
