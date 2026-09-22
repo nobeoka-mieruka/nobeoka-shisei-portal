@@ -25,16 +25,31 @@ import {
   decisionSubmitterTop,
   decisionSubmitterCountFor,
   informationChannelCount,
+  getMemberActivityRecord,
   type MemberActivityEntry,
 } from "../lib/councilActivityBarometer";
-import { ActivityRadarChart } from "../components/council/ActivityRadarChart";
 import { sortedCommittees, committeesForMember } from "../lib/committees";
+import type { ActivityRecordAvailability } from "../lib/councilActivityRecord";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 /** 「白背景・薄いグレー罫線・グラデーション無し」で統一するための、この2ページ専用のカードスタイル。 */
 const flatCardClass = "border border-gray-200 bg-white shadow-none dark:border-outline-variant dark:bg-surface-container-low";
+
+/**
+ * 比較カードで、値が無いときに出す言葉。
+ * 「確認した結果0件」以外を0として見せないため、状態ごとに別の言葉を割り当てている。
+ */
+const COMPARE_AVAILABILITY_LABEL: Record<ActivityRecordAvailability, string> = {
+  available: "―",
+  partial: "一部のみ確認",
+  "confirmed-zero": "確認した結果0件",
+  "not-acquired": "未取得",
+  "not-published": "公式資料が未公表",
+  "not-individually-attributable": "個人別の記録なし",
+  "not-applicable": "対象外",
+};
 
 type SortKey = "name" | "speechCount" | "questionRate" | "submitterCount" | "channelCount";
 
@@ -167,10 +182,18 @@ export function CouncilActivityPage() {
 
   const sortedRows = useMemo(() => sortRows(filteredRows, sortKey, sortDir), [filteredRows, sortKey, sortDir]);
 
-  // 横棒グラフは「表示中の列内最大値」を基準に正規化する（絞り込み・並べ替えても列内の相対比較を保つ）。
-  const maxSpeech = Math.max(1, ...filteredRows.map((r) => r.speechCount));
-  const maxSubmitter = Math.max(1, ...filteredRows.map((r) => r.submitterCount));
-  const maxChannel = Math.max(1, ...filteredRows.map((r) => r.channelCount));
+  // 横棒グラフの長さは、表示中の他の議員に左右されない固定の基準で決める。
+  //
+  // 以前は「表示中の列内最大値」で正規化していたため、会派で絞り込んだり氏名で検索したり
+  // すると、同じ議員の棒の長さが変わっていた。数値そのものは実数表示なので値は動かないが、
+  // 見た目は完全な相対比較で、「他の議員の活動によって本人の数値が上下しない」という
+  // 公開している説明と食い違っていた。
+  //
+  // 基準は、その項目が取りうる上限をデータから決め打ちせず、キリのよい固定値に置く。
+  // 上限を超える値は棒が振り切れた状態になるが、実数を併記しているため誤読は生じない。
+  const SPEECH_BAR_MAX = 150;
+  const SUBMITTER_BAR_MAX = 10;
+  const CHANNEL_BAR_MAX = 6;
 
   const speechTop3 = useMemo(() => topByRawValue(allEntries, "speech", 3), [allEntries]);
   const questionFull = useMemo(
@@ -216,7 +239,7 @@ export function CouncilActivityPage() {
         <p className="mt-1 text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
         <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-on-surface-variant dark:border-outline-variant">
           件数や実施率は活動の「量」を示すものであり、政策の内容や「質」を評価するものではありません。議員の能力、政治的立場、人物評価を示すものでもありません。資料の公開状況によって確認可能な情報量に差があります。詳しくは
-          <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
+          <Link to="/methodology/council-activity" className={`font-medium text-primary underline ${linkClass}`}>
             活動指標の算定方法
           </Link>
           をご覧ください。出典は各項目のリンク先でご確認いただけます。
@@ -400,16 +423,16 @@ export function CouncilActivityPage() {
                       {faction && <FactionChip faction={faction} className="ml-2" />}
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3">
-                      <ValueBar value={row.speechCount} max={maxSpeech} colorClass="bg-orange-500" />
+                      <ValueBar value={row.speechCount} max={SPEECH_BAR_MAX} colorClass="bg-orange-500" />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3">
                       <RateBar value={row.questionRate} />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3">
-                      <ValueBar value={row.submitterCount} max={maxSubmitter} colorClass="bg-orange-500" />
+                      <ValueBar value={row.submitterCount} max={SUBMITTER_BAR_MAX} colorClass="bg-orange-500" />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3">
-                      <ValueBar value={row.channelCount} max={maxChannel} colorClass="bg-secondary" />
+                      <ValueBar value={row.channelCount} max={CHANNEL_BAR_MAX} colorClass="bg-secondary" />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
                     <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
@@ -473,7 +496,7 @@ export function CouncilActivityPage() {
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">発言件数</dt>
                       <dd>
-                        <ValueBar value={row.speechCount} max={maxSpeech} colorClass="bg-orange-500" />
+                        <ValueBar value={row.speechCount} max={SPEECH_BAR_MAX} colorClass="bg-orange-500" />
                       </dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
@@ -489,13 +512,13 @@ export function CouncilActivityPage() {
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">提出者件数</dt>
                       <dd>
-                        <ValueBar value={row.submitterCount} max={maxSubmitter} colorClass="bg-orange-500" />
+                        <ValueBar value={row.submitterCount} max={SUBMITTER_BAR_MAX} colorClass="bg-orange-500" />
                       </dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">情報発信媒体数</dt>
                       <dd>
-                        <ValueBar value={row.channelCount} max={maxChannel} colorClass="bg-secondary" />
+                        <ValueBar value={row.channelCount} max={CHANNEL_BAR_MAX} colorClass="bg-secondary" />
                       </dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
@@ -512,7 +535,7 @@ export function CouncilActivityPage() {
 
       <SectionCard title="データ充足状況">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          「データ充足率」は、対象議員{coverage[0]?.totalCount ?? allEntries.length}名のうち何名分の指標を算定できたかの割合です。「議員活動点」（個人ページのレーダーチャート・実数）とは別物であり、充足率が低い指標は議員の活動が少ないという意味ではなく、本サイトがまだ一次資料を収録できていないことを示します。
+          「データ充足率」は、対象議員{coverage[0]?.totalCount ?? allEntries.length}名のうち何名分の指標を算定できたかの割合です。個人ページに表示している活動の記録（実施率・実数）とは別物であり、充足率が低い項目は議員の活動が少ないという意味ではなく、本サイトがまだ一次資料を収録できていないことを示します。
         </p>
         <ul className="space-y-2">
           {coverage.map((c) => (
@@ -537,7 +560,7 @@ export function CouncilActivityPage() {
           ))}
         </ul>
         <p className="mt-3 rounded-lg bg-tertiary-container px-3 py-2 text-xs leading-relaxed text-on-tertiary-container">
-          注意：ここでの「データ充足率」は資料の網羅度（何人分・何件確認できたか）を示すものであり、「議員活動点」（レーダーチャート・実数）とは別の指標です。充足率が高いこと自体を「活動が優れている」という評価として読まないでください。
+          注意：ここでの「データ充足率」は資料の網羅度（何人分・何件確認できたか）を示すものであり、議員ごとの活動の記録（実施率・実数）とは別のものです。充足率が高いこと自体を「活動が優れている」という評価として読まないでください。
         </p>
 
         <p className="mb-2 mt-4 text-xs font-medium text-on-surface-variant">指標別の詳しい内訳</p>
@@ -707,7 +730,7 @@ export function CouncilActivityPage() {
           </li>
         </ul>
         <Link
-          to="/methodology/activity-radar"
+          to="/methodology/council-activity"
           className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
         >
           算定方法・計算式・出典を見る →
@@ -717,16 +740,50 @@ export function CouncilActivityPage() {
       {compareEntries.length > 0 && (
         <SectionCard title={`比較（${compareEntries.length}名選択中）`}>
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-            延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化して並べたものです。数値は活動の記録であり、議員個人の能力や成果を判定するものではありません。形の大小・面積を「優れている／劣っている」の意味で読まないでください。
+            会議録で確認できた事実を並べたものです。点数化・順位付けはしていません。ここに出る値は、誰と並べても変わりません（他の議員の数値で割ったり正規化したりしていないためです）。件数は、会期ごとに会議録から要約を取り込めた量に左右されるため、多い少ないをそのまま活動量の差とは読めません。
           </p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {compareEntries.map((e) => (
-              <div key={e.member.id} className="rounded-lg border border-outline-variant p-3 text-center">
-                <Avatar name={e.member.name} photoUrl={e.member.photoUrl} size="sm" className="mx-auto" />
-                <p className="mt-1.5 text-sm font-medium text-on-surface">{e.member.name}</p>
-                <ActivityRadarChart metrics={e.metrics} />
-              </div>
-            ))}
+            {compareEntries.map((e) => {
+              const record = getMemberActivityRecord(e.member);
+              return (
+                <div key={e.member.id} className="rounded-lg border border-outline-variant p-3">
+                  <div className="text-center">
+                    <Avatar name={e.member.name} photoUrl={e.member.photoUrl} size="sm" className="mx-auto" />
+                    <p className="mt-1.5 text-sm font-medium text-on-surface">{e.member.name}</p>
+                  </div>
+                  <dl className="mt-2 space-y-1.5">
+                    {record.values.map((v) => (
+                      <div key={v.key} className="flex flex-wrap items-baseline justify-between gap-1">
+                        <dt className="text-xs text-on-surface-variant">{v.label}</dt>
+                        <dd className="text-sm font-semibold text-on-surface">
+                          {v.value === null ? (
+                            <span className="text-xs font-normal text-on-surface-variant">
+                              {COMPARE_AVAILABILITY_LABEL[v.availability]}
+                            </span>
+                          ) : (
+                            <>
+                              {v.value.toLocaleString("ja-JP")}
+                              {v.unit}
+                              {v.numerator != null && v.denominator != null && (
+                                <span className="ml-1 text-xs font-normal text-on-surface-variant">
+                                  （{v.numerator}／{v.denominator}）
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <Link
+                    to={`/council-activity/${e.member.id}`}
+                    className={`mt-2 inline-flex min-h-11 items-center text-xs font-medium text-primary underline ${linkClass}`}
+                  >
+                    根拠（会期ごとの内訳）を見る →
+                  </Link>
+                </div>
+              );
+            })}
           </div>
           <button
             type="button"

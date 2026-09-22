@@ -46,8 +46,11 @@ import { SpeechSummaryStatusBadge } from "../components/council/SpeechSummarySta
 import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { MemberSpeechAnalysisStatusBadge } from "../components/council/MemberSpeechAnalysisStatusBadge";
-import { ActivityRadarSection } from "../components/council/ActivityRadarSection";
-import { activityTargetPeriodLabel, getMemberActivityMetrics } from "../lib/councilActivityBarometer";
+import { CouncilActivityRecordSection } from "../components/council/CouncilActivityRecordSection";
+import {
+  activityTargetPeriodLabel,
+  getMemberActivityRecord,
+} from "../lib/councilActivityBarometer";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -325,14 +328,13 @@ export function MemberDetailPage() {
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
 
-  // 議会活動データ（レーダーチャート）。議員の能力・優劣を示すものではなく、
-  // 公開データの共通基準による指数化であることをコンポーネント側でも明示している。
+  // 公開記録による議会活動。議員の能力・優劣を示すものではなく、会議録で確認できた事実だけを数える。
   // 旧任期の発言（speech.term:"previous"、TASK-005系）を現職memberIdへ追加した場合でも、
-  // 現任期のみを対象とする指数を汚染しないよう、currentTermPublicSpeechesで明示的に絞り込む。
-  // 指標は councilActivityBarometer の getMemberActivityMetrics を唯一の情報源とする。
+  // 現任期のみを対象とする集計を汚染しないよう、currentTermPublicSpeechesで明示的に絞り込む。
+  // 値は councilActivityBarometer の getMemberActivityRecord を唯一の情報源とする。
   // 以前はこのページで同じ計算を別に書いていたため、議員活動のページと値が食い違い、
   // 議長を対象外にする扱いも反映されていなかった。
-  const radarMetrics = getMemberActivityMetrics(member);
+  const activityRecord = getMemberActivityRecord(member);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -409,11 +411,12 @@ export function MemberDetailPage() {
         </div>
       </section>
 
-      <ActivityRadarSection
-        metrics={radarMetrics}
+      <CouncilActivityRecordSection
+        record={activityRecord}
         targetPeriodLabel={activityTargetPeriodLabel()}
         updatedAt={member.updatedAt ?? member.verifiedAt}
       />
+
       <Link
         to={`/council-activity/${member.id}`}
         className={`inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary underline ${linkClass}`}

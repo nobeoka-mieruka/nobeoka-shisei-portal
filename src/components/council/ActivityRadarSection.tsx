@@ -99,7 +99,7 @@ export function ActivityRadarSection({
       <SectionCard title="議会活動データ">
         <p className="text-xs leading-relaxed text-on-surface-variant">
           延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化・可視化しています。各指標の算出方法、対象期間、使用した一次資料は、数値の根拠として公開しています（
-          <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
+          <Link to="/methodology/council-activity" className={`font-medium text-primary underline ${linkClass}`}>
             算定方法
           </Link>
           ）。資料未公開・未確認の情報は、実績ゼロとしては扱いません。示しているのは公開された議会活動の記録であり、議員個人の能力や人物、政策の内容の良し悪しを判定するものではありません。
@@ -115,7 +115,7 @@ export function ActivityRadarSection({
     <SectionCard title="議会活動データ">
       <p className="text-xs leading-relaxed text-on-surface-variant">
         延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化・可視化しています。各指標の算出方法、対象期間、使用した一次資料は、数値の根拠として公開しています（
-        <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
+        <Link to="/methodology/council-activity" className={`font-medium text-primary underline ${linkClass}`}>
           算定方法
         </Link>
         ）。
@@ -174,7 +174,7 @@ export function ActivityRadarSection({
             指標は、公開された一次資料から確認できた件数を、あらかじめ決めた固定の分母で割った割合です。他の議員の活動によって本人の値が上下することはありません。資料を確認できていない項目は0とはせず「資料を確認中」、制度上その議員に当てはまらない項目は「対象外」として区別しています。集計の対象は、在職中かつ会議録を確認できた会期に限っています。
           </p>
           <p>詳しい定義・計算式・欠損データの扱い・出典の一覧は、算定方法ページでご確認いただけます。</p>
-          <Link to="/methodology/activity-radar" className={`inline-block font-medium text-primary underline ${linkClass}`}>
+          <Link to="/methodology/council-activity" className={`inline-block font-medium text-primary underline ${linkClass}`}>
             算定方法の詳細ページを見る →
           </Link>
         </div>

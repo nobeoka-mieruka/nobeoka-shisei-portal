@@ -104,7 +104,7 @@ const ROUTES = [
   { path: "/executive-answers", label: "執行部答弁" },
   { path: "/updates", label: "更新履歴" },
   { path: "/data-status", label: "データ整備状況" },
-  { path: "/methodology/activity-radar", label: "活動レーダー算定方法" },
+  { path: "/methodology/council-activity", label: "議会活動の記録の算定方法" },
   { path: "/council-activity", label: "議会活動" },
   { path: "/council-activity/history", label: "議会活動の推移" },
   { path: "/council-activity/m01", label: "議員別議会活動" },

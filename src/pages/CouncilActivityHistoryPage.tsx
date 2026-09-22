@@ -48,7 +48,7 @@ export function CouncilActivityHistoryPage() {
           現職議員の活動比較ページ
         </Link>
         とは対象期間・対象会期が異なるため、現職議員との数値の単純比較・総合順位付けはできません（本ページでは並べ替え機能を設けていません）。詳しくは
-        <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
+        <Link to="/methodology/council-activity" className={`font-medium text-primary underline ${linkClass}`}>
           活動指標の算定方法
         </Link>
         をご覧ください。

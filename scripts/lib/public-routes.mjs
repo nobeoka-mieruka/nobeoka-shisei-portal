@@ -98,7 +98,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/terms",
   "/updates",
   "/data-status",
-  "/methodology/activity-radar",
+  "/methodology/council-activity",
   "/council-activity",
   "/council-activity/history",
   "/political-funds",
@@ -438,8 +438,8 @@ function staticPageLastmod(path, data) {
           "src/data/searchIndex.json",
         ],
       );
-    case "/methodology/activity-radar":
-      return resolveLastmod(path, [], ["src/lib/activityRadar.ts", "src/pages/MethodologyActivityRadarPage.tsx"]);
+    case "/methodology/council-activity":
+      return resolveLastmod(path, [], ["src/lib/activityRadar.ts", "src/pages/MethodologyCouncilActivityPage.tsx"]);
     case "/council-activity":
       return resolveLastmod(
         path,

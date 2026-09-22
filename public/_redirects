@@ -3,3 +3,6 @@
 # ここでSPA用の無条件フォールバック（/* /index.html 200）は行わない。
 # 一致する静的ファイルがないURLは、wrangler.jsonc の not_found_handling（404-page）により
 # dist/404.html が実際のHTTP 404として返される。
+
+# 旧URLからの恒久リダイレクト（2026-09-22、算定内容を会期単位の記録へ改めた際に改称）。
+/methodology/activity-radar  /methodology/council-activity  301

@@ -10,11 +10,15 @@ import {
   currentTermNamedVoteBillCount,
   getAllCurrentMemberActivity,
   getEvidenceAvailabilitySummary,
+  isCouncilChairperson,
 } from "../lib/councilActivityBarometer";
 import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
+import { classifyTopicToThemeSlug } from "../lib/themeClassification";
+import speechSummaryData from "../data/councilSpeechSummaries.json";
+import { QUESTION_LIKE_SPEECH_TYPES } from "../lib/questionLikeSpeechTypes";
 
 /**
- * 議会活動データ（レーダーチャート）の算定方法ページ。
+ * 議会活動の記録（公開された一次資料から確認できた事実）の算定方法ページ。
  *
  * Phase95で、各指標の透明性を高めるため以下の構造化項目を追加した：
  * indicatorId・targetPeriod・sourceTypes・missingDataPolicy・exclusionRule・completenessNote
@@ -38,13 +42,13 @@ const AXES = [
     indicatorId: "speech",
     label: "議会内発言",
     definition:
-      "発言（一般質問等）が確認できた会期の割合と、確認できた質問項目数を組み合わせた指数。長文・多数項目の発言だけが有利にならないよう、項目数は上限20件で対数変換して頭打ちにしている。",
-    formula: "（発言確認会期数÷対象会期数×50）＋（質問項目数を上限20件でlog正規化した値×50）",
+      "会議録で確認できた質問項目の実数。会期ごとに要約を抽出できた量が異なるため、件数の多い少ないをそのまま活動量の差とは読めない。割合には換算せず、実数のまま示す。",
+    formula: "確認できた質問項目数（実数。0〜100の指数へは換算しない）",
     sourceTypes: "一次資料（会議録本文）",
     source: "会議録本文（会議録の発言要約データ）",
     targetPeriod: "一般質問と同じ（現職議員：会議録取得済みの全会期／元議員：在職・発言を確認できた会期のみ）",
-    missingDataPolicy: "対象会期数が0の場合のみ「対象記録なし」とする。0点として扱わない。",
-    exclusionRule: "会議録が未公開の会期は分母からも分子からも除外する。",
+    missingDataPolicy: "会議録を未取得の会期がある場合、その分の項目は数に含まれない（「質問しなかった」という意味ではない）。",
+    exclusionRule: "会議録が未公開・未取得の会期は集計対象に含めない。",
   },
   {
     indicatorId: "attendance",
@@ -62,7 +66,7 @@ const AXES = [
     label: "議案等の意思表示",
     definition:
       "公開されている記名採決のうち、賛成・反対・棄権・欠席等の意思表示が確認できた議案の割合。賛成・反対どちらであるかを評価するものではない。",
-    formula: "意思表示を確認できた議案数 ÷ 対象議案数 × 100（賛否の内容は得点化しない）",
+    formula: "意思表示を確認できた議案数／対象議案数（分子・分母をそのまま示す。賛否の内容は数値化しない）",
     sourceTypes: "一次資料（議案ごとの賛否・会議録）",
     source: "議案ごとの賛否（議案賛否データ）",
     targetPeriod: "議員個人の賛否内訳（memberVotes）が登録されている議案が対象",
@@ -103,7 +107,7 @@ const DATA_STATUS_JA: Record<string, string> = {
   not_applicable: "指標対象外",
 };
 
-export function MethodologyActivityRadarPage() {
+export function MethodologyCouncilActivityPage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
@@ -117,6 +121,22 @@ export function MethodologyActivityRadarPage() {
     return { ...axis, complete, partial, missing, total: entries.length };
   });
   const evidenceSummary = getEvidenceAvailabilitySummary();
+  const chairpersonEntries = entries.filter((e) => isCouncilChairperson(e.member));
+  // テーマ分類の到達率は、手書きの数値を置かずにこのページで都度数える（辞書を更新すれば自動で変わる）。
+  const topicClassification = (() => {
+    let total = 0;
+    let unclassified = 0;
+    for (const m of (speechSummaryData as { members: { speeches: { speechType: string; topics?: string[] }[] }[] }).members) {
+      for (const sp of m.speeches) {
+        if (!QUESTION_LIKE_SPEECH_TYPES.has(sp.speechType)) continue;
+        for (const t of sp.topics ?? []) {
+          total += 1;
+          if (classifyTopicToThemeSlug(t) === "unclassified") unclassified += 1;
+        }
+      }
+    }
+    return { total, unclassified, rate: total > 0 ? Math.round((unclassified / total) * 100) : null };
+  })();
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -127,10 +147,10 @@ export function MethodologyActivityRadarPage() {
 
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">
-          議会活動データ（レーダーチャート）の算定方法
+          議会活動の記録の算定方法
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          議員詳細ページ・議員活動バロメーターに表示している「議会活動データ」レーダーチャートの定義・計算式・データの扱いを説明します。
+          議員詳細ページ・議員活動バロメーターに表示している議会活動の記録について、対象資料・対象期間・算定方法・欠損の扱いを説明します。複数の項目を合算した総合点や議員の順位付けは行っていません。
         </p>
         <p className="mt-1 text-xs text-on-primary-container/80">現在の算定対象期間：{targetPeriod}</p>
       </div>
@@ -145,6 +165,65 @@ export function MethodologyActivityRadarPage() {
         <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
           現在の指標は、延岡市議会基本条例に定められた議会・議員の役割に沿った内容へ見直しを進めています。見直しの結果は、確定しだいこのページに反映します。
         </p>
+      </SectionCard>
+
+      <SectionCard title="一般質問の実施状況（会期単位）の算定方法">
+        <p className="text-sm leading-relaxed text-on-surface">
+          議員個人に確実に帰属し、全議員を同じ条件で数えられるのは、現時点では「その会期に本会議で質問に立ったかどうか」です。質問項目数や再質問数は、会議録から要約を取り込めた量に左右され、会期によって1登壇あたりの記録量が大きく異なります。そのため会期単位を中心に置き、件数は参考の実数として併記しています。
+        </p>
+        <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">対象資料</dt>
+            <dd>延岡市議会の公式会議録（本会議）本文のみ。報道、SNS、後援会資料などの二次資料は使いません。</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">対象期間</dt>
+            <dd>{targetPeriod}（会議録本文を取得・確認できた定例会のみ）。</dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">一般質問実施率</dt>
+            <dd>
+              一般質問を行った会期数 ÷ 一般質問が可能だった会期数 × 100。質問の回数・長さ・内容の良し悪しは含みません。画面には必ず分子と分母を並べて表示します。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">再質問の確認率</dt>
+            <dd>
+              再質問を会議録で確認できた質問項目数 ÷ 質問項目の総数 × 100。答弁を受けて重ねて質問した記録があるかどうかだけを数えており、やり取りの内容は評価しません。質問項目が0件の会期しかない場合は0%とせず、算定しません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">議長在任期間の扱い</dt>
+            <dd>
+              議長は会議の進行役を務めるため一般質問を行わない慣例があります。議長在任期間は実施率の分母から除き、0%ではなく「対象外」と表示します（現在：現職議員{entries.length}名中{chairpersonEntries.length}名）。活動が少ないという意味ではありません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">欠損の扱い</dt>
+            <dd>
+              会議録が未公開・未取得の会期は、分母にも分子にも入れません。「確認した結果0件」と「まだ確認できていない」「公式資料が未公表」「個人別の記録がない」「制度上の対象外」は、画面上でも別々の言葉で表示し、どれも0件としては扱いません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">個人への帰属ルール</dt>
+            <dd>
+              会議録に発言者として氏名が記載されている記録だけを、その議員の記録として数えます。委員会の質疑のように「委員より」とだけ記録され誰の発言か特定できないものは、件数に加えず「個人別の記録なし」として扱います。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">テーマの分類方法</dt>
+            <dd>
+              会議録の見出し語を、あらかじめ人が定義したテーマ辞書のキーワードと文字列で照合しているだけで、AIによる内容の判定は行っていません。どのキーワードにも一致しない語句は推測で分類せず「未分類」とします
+              {topicClassification.rate !== null &&
+                `（現在：${topicClassification.total.toLocaleString("ja-JP")}語句中${topicClassification.unclassified.toLocaleString("ja-JP")}語句・約${topicClassification.rate}%が未分類）`}
+              。テーマそのものに重要度の差は付けません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">更新のタイミング</dt>
+            <dd>新しい会議録を取り込むたびに再計算されます。このページの数値も、開くたびに既存データから自動で集計しています。最終更新日はページ末尾に表示しています。</dd>
+          </div>
+        </dl>
       </SectionCard>
 
       <SectionCard title="「0点」と「対象外」は別物です">
@@ -162,7 +241,7 @@ export function MethodologyActivityRadarPage() {
           ))}
         </ul>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-          レーダーチャート上でも、資料が確認できない指標は0点の位置に描画せず、外周に破線のマーカーのみを表示します（塗りつぶし多角形には含めません）。数値表示部分も「0」ではなく「対象記録なし」と明記します。
+          議員1人の活動を複数の軸でまとめて描くレーダーチャートは、個人に帰属できる一次資料が十分にそろうまで公開しません（軸の大半が「対象記録なし」のまま描くと、資料が無いことが活動が少ないことのように見えてしまうためです）。数値表示部分も「0」ではなく「対象記録なし」と明記します。
         </p>
       </SectionCard>
 
@@ -197,7 +276,7 @@ export function MethodologyActivityRadarPage() {
         </ul>
       </SectionCard>
 
-      <SectionCard title="6つの指標の定義・計算式・出典・データ収録状況">
+      <SectionCard title="項目ごとの定義・計算式・出典・データ収録状況">
         {/* Phase214：内部コード（indicatorId）を凡例なしで置かない。何の記号かを先に説明する。 */}
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           各指標の右上にある「算定用の記号（algorithm ID）」は、当サイトが計算処理の中でその指標を指すために使っている英字の名前です（question＝一般質問、speech＝議会内発言、attendance＝出席状況、voting＝議案等の意思表示、proposal＝請願・提案等、disclosure＝情報発信・プロフィール充足度）。点数や順位を表すものではありません。当サイトの記録に出てくる他の記号・番号の読み方は
@@ -272,13 +351,13 @@ export function MethodologyActivityRadarPage() {
 
       <SectionCard title="一覧・個人ページに表示している「実数」の補足">
         <p className="text-sm leading-relaxed text-on-surface">
-          議員活動バロメーターの一覧・個人ページには、上記6指標の0〜100点の指数とは別に、次の「実数」も表示しています。いずれも新しい採点・順位ロジックではなく、既存の一次資料をそのまま数え上げたものです。
+          議員活動バロメーターの一覧・個人ページには、上記の項目とあわせて次の「実数」も表示しています。いずれも新しい採点・順位ロジックではなく、既存の一次資料をそのまま数え上げたものです。
         </p>
         <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">発言件数</dt>
             <dd>
-              「議会内発言」指数の算定に使っている、確認できた質問項目数（rawValue）そのものです。指数化する前の件数を、順位や比較に使いたい場合の実数として表示しています。
+              会議録で確認できた質問項目数そのものです。0〜100の指数へ換算したり、他の項目と合算したりはしていません。
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
@@ -289,7 +368,7 @@ export function MethodologyActivityRadarPage() {
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">情報発信媒体数</dt>
-            <dd>本人確認済み（verified）のSNS・Web媒体数に、議会公式プロフィールページを加えた実数です。「情報発信・プロフィール充足度」指数（0〜100点）の分子とは項目の数え方が異なります。</dd>
+            <dd>本人確認済み（verified）のSNS・Web媒体数に、議会公式プロフィールページを加えた実数です。「情報発信・プロフィール充足度」の割合の分子とは項目の数え方が異なります。</dd>
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">議席番号</dt>
@@ -297,7 +376,7 @@ export function MethodologyActivityRadarPage() {
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">選挙時得票（参考情報）</dt>
-            <dd>令和5年4月23日執行の延岡市議会議員選挙における得票数（選挙結果データ）です。活動指標スコアには一切含めていません。</dd>
+            <dd>令和5年4月23日執行の延岡市議会議員選挙における得票数（選挙結果データ）です。議会活動の記録には一切含めていません。</dd>
           </div>
         </dl>
       </SectionCard>

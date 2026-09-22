@@ -10,7 +10,6 @@ import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
 import { SnsLinks } from "../components/SnsLinks";
-import { ActivityRadarChart } from "../components/council/ActivityRadarChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { PersonTimeline } from "../components/council/PersonTimeline";
 import { getPersonTimeline } from "../lib/personTimeline";
@@ -20,6 +19,7 @@ import { getSeoForPath } from "../lib/seo";
 import {
   activityTargetPeriodLabel,
   getAllCurrentMemberActivity,
+  getMemberActivityRecord,
   getMemberQuestionEvidence,
   getMemberVoteEvidence,
   metricByKey,
@@ -28,7 +28,7 @@ import {
   informationChannelCount,
   electionVoteReferenceFor,
 } from "../lib/councilActivityBarometer";
-import type { RadarMetric } from "../lib/activityRadar";
+import type { RadarDataStatus } from "../lib/activityRadar";
 import { billVoteLabels, billVoteSymbols } from "../lib/billVotes";
 import { committeesForMember, reportsForCommittee, billsForCommittee, committeeReportActivityForMember } from "../lib/committees";
 import { formatJapaneseDate } from "../config/site";
@@ -42,16 +42,11 @@ const linkClass =
 const flatCardClass = "border border-gray-200 bg-white shadow-e1 dark:border-outline-variant dark:bg-surface-container-low";
 
 /**
- * ページ上部のレーダーチャート・実数カードで使う5指標（一般質問／議会内発言／請願・提案等／
- * 情報発信／出席状況）。「議案等の意思表示」は、既存の「議案への賛否」セクションで別途
- * 詳しく扱っているためこの5指標には含めない（活動指標データ自体は変更していない。ページ下部の
- * 「6つの指標の実数と算定方法」では引き続き6指標全てを掲載する）。
+ * ページ上部で先に示す、会期単位の公開記録（一般質問実施率とその分子・分母）。
+ * 会期単位を先に置くのは、質問項目数の抽出量が会期ごとに大きく異なり、件数だけを
+ * 先に見せると議員の活動ではなく当サイトの整備状況を見せてしまうため。
  */
-const TOP_METRIC_ORDER = ["question", "speech", "proposal", "disclosure", "attendance"] as const;
-
-function pickTopMetrics(metrics: RadarMetric[]): RadarMetric[] {
-  return TOP_METRIC_ORDER.map((key) => metrics.find((m) => m.key === key)).filter((m): m is RadarMetric => !!m);
-}
+const TOP_RECORD_KEYS = ["asked-rate", "asked-sessions", "question-items"] as const;
 
 const STAR_METRICS = [
   { key: "question", label: "一般質問", unit: "%" },
@@ -68,9 +63,12 @@ const STAR_METRICS = [
  * 数値の大小を示すだけの中立な充填バーに変更した（Phase89-98横断監査で発見・修正）。
  * 優劣を連想させる星アイコンは使わず、実数（下段に別途表示済み）を補助する視覚要素に留める。
  */
-function ValueBar({ value }: { value: number | null }) {
+function ValueBar({ value, dataStatus }: { value: number | null; dataStatus?: RadarDataStatus }) {
+  if (dataStatus === "not-applicable") {
+    return <span className="text-xs text-on-surface-variant">対象外</span>;
+  }
   if (value === null) {
-    return <span className="text-xs text-on-surface-variant">データ未収録</span>;
+    return <span className="text-xs text-on-surface-variant">割合としては算定しません</span>;
   }
   const percent = Math.max(0, Math.min(100, Math.round(value)));
   return (
@@ -103,7 +101,12 @@ export function CouncilActivityMemberPage() {
 
   const entry = getAllCurrentMemberActivity().find((e) => e.member.id === member.id)!;
   const metrics = entry.metrics;
-  const topMetrics = pickTopMetrics(metrics);
+  const activityRecord = getMemberActivityRecord(member);
+  const topRecordValues = TOP_RECORD_KEYS.map((key) => activityRecord.values.find((v) => v.key === key)).filter(
+    (v): v is (typeof activityRecord.values)[number] => !!v,
+  );
+  // 議長など、制度上一般質問を行わない期間は「0件」ではなく理由を添えて示す。
+  const chairpersonNote = activityRecord.values.find((v) => v.availability === "not-applicable")?.availabilityNote;
   const faction = getFaction(member.factionId);
   const targetPeriod = activityTargetPeriodLabel();
   const verifiedSns = member.sns.filter((s) => s.verificationStatus === "verified");
@@ -185,19 +188,33 @@ export function CouncilActivityMemberPage() {
           </Link>
         </div>
 
-        {/* 上部右：5指標のレーダーチャート・活動指標スコア・選挙時得票（参考情報） */}
+        {/* 上部右：会期単位で確認できた記録・選挙時得票（参考情報） */}
         <div className={`rounded-2xl p-5 ${flatCardClass}`}>
-          <p className="text-sm font-semibold text-on-surface">活動指標スコア（1〜5段階）</p>
-          <p className="mt-1 text-xs text-on-surface-variant">
-            公開資料ベースの活動指数です。議員の能力・政策の質・人物評価を示すものではありません。
+          <p className="text-sm font-semibold text-on-surface">公開記録から確認できた議会活動</p>
+          <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+            会議録で確認できた事実の記録です。複数の項目を合算した総合点や議員の順位付けは行っていません。
           </p>
-          <div className="mt-2">
-            <ActivityRadarChart metrics={topMetrics} />
-          </div>
-          <p className="mt-1 text-center text-[11px] text-on-surface-variant">
-            5つの軸それぞれを0〜100点で算定し、20点ごとに1〜5の5段階として表示しています。
-          </p>
-          <p className="mt-1 text-center text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
+          <dl className="mt-3 space-y-2">
+            {topRecordValues.map((v) => (
+              <div key={v.key} className="flex flex-wrap items-baseline justify-between gap-2">
+                <dt className="text-xs text-on-surface-variant">{v.label}</dt>
+                <dd className="text-sm font-semibold text-on-surface">
+                  {v.value === null ? "―" : `${v.value.toLocaleString("ja-JP")}${v.unit}`}
+                  {v.numerator != null && v.denominator != null && (
+                    <span className="ml-1 text-xs font-normal text-on-surface-variant">
+                      （{v.numerator}／{v.denominator}）
+                    </span>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          {chairpersonNote && (
+            <p className="mt-2 rounded-lg bg-surface-container-high px-3 py-2 text-xs leading-relaxed text-on-surface-variant">
+              {chairpersonNote}
+            </p>
+          )}
+          <p className="mt-2 text-center text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
           {electionVote && (
             <p className="mt-3 rounded-lg bg-gray-50 px-3 py-2 text-center text-xs text-on-surface-variant dark:bg-surface-container-high">
               参考情報：{electionVote.electionName}（{electionVote.electionDateLabel}）得票数
@@ -219,42 +236,42 @@ export function CouncilActivityMemberPage() {
         </p>
       </SectionCard>
 
-      <SectionCard title="5つの指標の実数" className={flatCardClass}>
+      <SectionCard title="公開資料から数えた実数" className={flatCardClass}>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">一般質問</p>
             <p className="mt-1 text-lg font-semibold text-on-surface">
               {questionMetric?.value !== null && questionMetric?.value !== undefined ? `${Math.round(questionMetric.value)}%` : "確認中"}
             </p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
+            <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">発言量</p>
             <p className="mt-1 text-lg font-semibold text-orange-700 dark:text-orange-300">{speechCount}件</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
+            <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">請願・提案</p>
             <p className="mt-1 text-lg font-semibold text-orange-700 dark:text-orange-300">{submitterCount}件</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
+            <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">情報発信</p>
             <p className="mt-1 text-lg font-semibold text-on-surface">{channelCount}媒体</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
+            <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
           <div className="rounded-lg border border-gray-200 p-3 dark:border-outline-variant">
             <p className="text-xs text-on-surface-variant">出席状況</p>
             <p className="mt-1 text-lg font-semibold text-on-surface-variant">確認中</p>
-            <Link to="/methodology/activity-radar" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
+            <Link to="/methodology/council-activity" className={`mt-1 inline-block text-xs font-medium text-primary underline ${linkClass}`}>
               算定方法を見る →
             </Link>
           </div>
@@ -433,7 +450,7 @@ export function CouncilActivityMemberPage() {
         )}
       </SectionCard>
 
-      <SectionCard title="6つの指標の実数と算定方法（詳細）">
+      <SectionCard title="項目ごとの実数と算定方法（詳細）">
         <ul className="space-y-3">
           {STAR_METRICS.map((def) => {
             const m = metrics.find((x) => x.key === def.key)!;
@@ -441,16 +458,18 @@ export function CouncilActivityMemberPage() {
               <li key={def.key} className="rounded-lg border border-outline-variant p-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="text-sm font-semibold text-on-surface">{def.label}</span>
-                  <ValueBar value={m.value} />
+                  <ValueBar value={m.value} dataStatus={m.dataStatus} />
                 </div>
                 <p className="mt-1 text-sm text-on-surface">
-                  {m.value !== null
-                    ? m.numerator != null && m.denominator != null
-                      ? `${Math.round(m.value)}${def.unit}（${m.numerator}／${m.denominator}）`
+                  {m.dataStatus === "not-applicable"
+                    ? "対象外"
+                    : m.numerator != null && m.denominator != null
+                      ? `${m.numerator}／${m.denominator}${m.value !== null ? `（${Math.round(m.value)}${def.unit}）` : ""}`
                       : m.rawValue != null
-                        ? `${m.rawValue}件相当（指数${Math.round(m.value)}点）`
-                        : `${Math.round(m.value)}${def.unit}`
-                    : "対象記録なし・データ整備中"}
+                        ? `${m.rawValue.toLocaleString("ja-JP")}件`
+                        : m.value !== null
+                          ? `${Math.round(m.value)}${def.unit}`
+                          : "対象記録なし・データ整備中"}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{m.description}</p>
                 <p className="mt-1 text-xs text-on-surface-variant">算定方法：{m.methodNote}</p>
@@ -458,7 +477,7 @@ export function CouncilActivityMemberPage() {
                 {m.updatedAt && <p className="mt-1 text-xs text-on-surface-variant">最終確認日：{m.updatedAt}</p>}
                 <div className="mt-2 flex flex-wrap gap-3 text-xs">
                   <Link
-                    to="/methodology/activity-radar"
+                    to="/methodology/council-activity"
                     className={`font-medium text-primary underline ${linkClass}`}
                   >
                     算定方法を見る →

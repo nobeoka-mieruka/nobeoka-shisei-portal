@@ -1275,7 +1275,7 @@ export function DataStatusPage() {
             <dt className="font-medium text-on-surface">データ収録状況の区分（complete／partial／missing、confirmed_zero など）</dt>
             <dd className="mt-0.5">
               議員活動バロメーターで使う区分です。「確認した結果0件」と「資料が無く評価できない」を必ず区別します。詳しい対応表は
-              <Link to="/methodology/activity-radar" className="mx-1 text-primary underline">
+              <Link to="/methodology/council-activity" className="mx-1 text-primary underline">
                 議会活動データの算定方法
               </Link>
               に掲載しています。
@@ -1808,7 +1808,7 @@ export function DataStatusPage() {
           <Link to="/council-activity" className="font-medium text-primary underline">
             議員活動バロメーター
           </Link>
-          のレーダーチャートは、指標によって収録状況が異なります。このグラフだけを見て「全データが揃っている」と誤解しないよう、確認できている人数を集計しています。
+          に表示している活動の記録は、項目によって収録状況が異なります。表示されている数値だけを見て「全データが揃っている」と誤解しないよう、確認できている人数を集計しています。
         </p>
         <dl className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
           {evidenceSummary.map((item) => (
@@ -1820,7 +1820,7 @@ export function DataStatusPage() {
         </dl>
         <p className="mb-4 text-xs leading-relaxed text-on-surface-variant">
           「公開資料から確認できず」は0件・未着手という意味ではなく、複数の公開資料経路を調査したうえで確認できていないことを示します（詳細は各項目の説明・
-          <Link to="/methodology/activity-radar" className="font-medium text-primary underline">
+          <Link to="/methodology/council-activity" className="font-medium text-primary underline">
             算定方法ページ
           </Link>
           をご覧ください）。
@@ -1893,7 +1893,7 @@ export function DataStatusPage() {
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           「出席状況」「請願・提案等」は複数の公開資料経路を調査しましたが一次資料を確認できていないため、現時点で全{activityTargetCount}名が「対象記録なし」です（0点として扱ってはいません）。委員会そのものの会議録（開催日・出席委員・個別発言全文）は延岡市議会が一般公開していることを確認できていないため、委員会内部の発言・質疑は活動指標スコアに含めていません。「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録を会議録から機械的に確認・登録したもので、これも参考情報にとどめ活動指標スコアには含めていません（内部エラーではなく、公開資料の収録状況としての説明です）。詳しくは
-          <Link to="/methodology/activity-radar" className="font-medium text-primary underline">
+          <Link to="/methodology/council-activity" className="font-medium text-primary underline">
             活動指標の算定方法
           </Link>
           をご覧ください。

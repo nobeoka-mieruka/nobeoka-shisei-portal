@@ -1237,14 +1237,14 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
-    case "/methodology/activity-radar":
+    case "/methodology/council-activity":
       return makeResult(
         {
-          path: "/methodology/activity-radar",
-          pageTitle: "議会活動データ（レーダーチャート）の算定方法",
+          path: "/methodology/council-activity",
+          pageTitle: "議会活動の記録の算定方法",
           description:
-            "議員詳細ページに表示している議会活動データ（レーダーチャート）の定義・計算式・欠損データの扱い・在職期間の扱いを説明します。議員の能力や優劣を評価するものではありません。",
-          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議会活動データの算定方法" }],
+            "議員詳細ページに表示している議会活動の記録について、対象資料・対象期間・一般質問実施率と再質問確認率の算定方法・欠損データの扱い・議長在任期間の扱いを説明します。総合点や順位付けは行っていません。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "議会活動の記録の算定方法" }],
         },
         options,
       );

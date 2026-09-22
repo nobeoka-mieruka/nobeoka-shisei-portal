@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useRef } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { initGoogleAnalytics, trackPageView } from "./lib/analytics";
 import { SiteHeader } from "./components/SiteHeader";
 import { BottomNav } from "./components/BottomNav";
@@ -169,8 +169,8 @@ const SearchPage = lazy(() => import("./pages/SearchPage").then((m) => ({ defaul
 const KohoSearchPage = lazy(() => import("./pages/KohoSearchPage").then((m) => ({ default: m.KohoSearchPage })));
 const UpdatesPage = lazy(() => import("./pages/UpdatesPage").then((m) => ({ default: m.UpdatesPage })));
 const DataStatusPage = lazy(() => import("./pages/DataStatusPage").then((m) => ({ default: m.DataStatusPage })));
-const MethodologyActivityRadarPage = lazy(() =>
-  import("./pages/MethodologyActivityRadarPage").then((m) => ({ default: m.MethodologyActivityRadarPage })),
+const MethodologyCouncilActivityPage = lazy(() =>
+  import("./pages/MethodologyCouncilActivityPage").then((m) => ({ default: m.MethodologyCouncilActivityPage })),
 );
 const CouncilActivityPage = lazy(() => import("./pages/CouncilActivityPage").then((m) => ({ default: m.CouncilActivityPage })));
 const CouncilActivityHistoryPage = lazy(() =>
@@ -326,7 +326,12 @@ function App() {
               <Route path="/koho-search" element={<KohoSearchPage />} />
               <Route path="/updates" element={<UpdatesPage />} />
               <Route path="/data-status" element={<DataStatusPage />} />
-              <Route path="/methodology/activity-radar" element={<MethodologyActivityRadarPage />} />
+              <Route path="/methodology/council-activity" element={<MethodologyCouncilActivityPage />} />
+              {/* 旧URL。ブックマーク・外部リンクを維持するため恒久リダイレクトする（配信側は public/_redirects の301）。 */}
+              <Route
+                path="/methodology/activity-radar"
+                element={<Navigate to="/methodology/council-activity" replace />}
+              />
               <Route path="/council-activity" element={<CouncilActivityPage />} />
               <Route path="/council-activity/history" element={<CouncilActivityHistoryPage />} />
               <Route path="/council-activity/:memberId" element={<CouncilActivityMemberPage />} />
