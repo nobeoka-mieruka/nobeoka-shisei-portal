@@ -14,6 +14,7 @@ import {
 } from "../lib/councilActivityBarometer";
 import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 import { classifyTopicToThemeSlug } from "../lib/themeClassification";
+import { TOPIC_CLASSIFICATION_VERSION } from "../lib/topicClassificationMeta";
 import billProposalRolesData from "../data/billProposalRoles.json";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import speechSummaryData from "../data/councilSpeechSummaries.json";
@@ -169,16 +170,35 @@ export function MethodologyCouncilActivityPage() {
         <p className="mt-1 text-xs text-on-primary-container/80">現在の算定対象期間：{targetPeriod}</p>
       </div>
 
-      <SectionCard title="この指標が示すもの">
+      <SectionCard title="このページの目的">
         <p className="text-sm leading-relaxed text-on-surface">
-          延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化・可視化しています。各指標の算出方法、対象期間、使用した一次資料をこのページで公開し、数値の根拠を確認できるようにしています。資料未公開・未確認の情報は、原則として実績ゼロとは扱いません。
+          延岡市議会等が公開する一次資料から確認できる事実を、全議員に共通の基準で整理し、算定方法と根拠を公開するためのページです。
+          市民が数値をそのまま受け取るのではなく、元の一次資料まで辿って自分で確かめられるようにすることを目的にしています。
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-on-surface">
-          示しているのは公開された議会活動の記録であり、議員個人の能力や人物、政策の内容の良し悪しを判定するものではありません。他の議員の活動によって本人の数値が上下しない基準を用いており、複数の指標を合算した総合点や議員の順位付けは行いません。
+        <p className="mt-3 rounded-lg bg-surface-container-high p-3 text-sm leading-relaxed text-on-surface">
+          ここに掲載している記録は、<strong>政策内容への賛否</strong>、<strong>賛成・反対の方向</strong>、
+          <strong>議員個人の人格・能力</strong>を評価するものではありません。
+          複数の項目を合計した総合点、議員の順位付け、平均より上か下かという評価は一切行っていません。
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
-          現在の指標は、延岡市議会基本条例に定められた議会・議員の役割に沿った内容へ見直しを進めています。見直しの結果は、確定しだいこのページに反映します。
+      </SectionCard>
+
+      <SectionCard title="延岡市議会基本条例との関係">
+        <p className="text-sm leading-relaxed text-on-surface">
+          何を記録として整理するかは、延岡市議会基本条例が議会・議員に定めている役割を出発点にしています。
+          条例に根拠を求めるのは、当サイトが独自に「議員とはこうあるべきだ」と決めないためです。
         </p>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-on-surface-variant">
+          <li>一般質問の実施状況・再質問は、第2条第1号（市長等が行う市政の運営状況を公正に監視、評価すること）に対応します。</li>
+          <li>政策テーマは、第2条第2号（政策の立案・決定・執行・評価における論点、争点を明らかにすること）に対応します。</li>
+          <li>
+            条例のうち「議会は」を主語とする条文（第5条〜第22条の大半）は、議会全体としての責務を定めたものです。
+            これらを議員一人ひとりの記録へ割り振ることはしていません。会派や委員会、議会全体の活動を個人の実績に按分しないためです。
+          </li>
+          <li>
+            敬老会・地域の祭り・草刈り・清掃活動・冠婚葬祭・個人的なボランティア・SNSでの発信などは、
+            条例が定める議会・議員の職務ではないため、記録の対象にしていません。行っていないという意味ではありません。
+          </li>
+        </ul>
       </SectionCard>
 
       <SectionCard title="一般質問の実施状況（会期単位）の算定方法">
@@ -238,6 +258,71 @@ export function MethodologyCouncilActivityPage() {
             <dd>新しい会議録を取り込むたびに再計算されます。このページの数値も、開くたびに既存データから自動で集計しています。最終更新日はページ末尾に表示しています。</dd>
           </div>
         </dl>
+      </SectionCard>
+
+      <SectionCard title="政策分野と継続テーマの扱い">
+        <p className="text-sm leading-relaxed text-on-surface">
+          政策分野は、会議録の見出し語（自由記述の日本語）を、人があらかじめ定義したキーワード辞書と文字列で照合して分類しています。
+          生成AIによる内容の判定は行っていません。分野の数や広さを点数にすることはせず、どの分野を取り上げたかを一覧として示すだけです。
+        </p>
+        <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">分類の根拠（classificationMethod）</dt>
+            <dd>
+              分類が何によって付いたのかを、公式資料の分類／人が定めた対応表／キーワードによる自動分類／AIによる自動分類の4つに区別して保持しています。
+              現在使っているのは後ろから2番目までで、AIによる分類は使用していません。画面では自動分類であることを明記します。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">確からしさ（classificationConfidence）</dt>
+            <dd>
+              主観的な点数は付けません。見出し語がキーワードと完全に一致したか、一部に含んでいたか、どれにも当たらなかったかという、
+              機械的に判定できる3段階だけを持ちます。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">分類の版（classificationVersion）</dt>
+            <dd>
+              キーワード辞書や表記揺れの対応表を変更したときに版を上げます（現在の版：{TOPIC_CLASSIFICATION_VERSION}）。
+              版が変われば過去の分類結果も変わりうるため、いつ時点の分類かを区別できるようにしています。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">分類していない語句</dt>
+            <dd>
+              どのキーワードにも当たらない語句は、推測で分野を割り当てず「分類していない見出し語」として別に数えます
+              {topicClassification.rate !== null &&
+                `（現在：${topicClassification.total.toLocaleString("ja-JP")}語句中${topicClassification.unclassified.toLocaleString("ja-JP")}語句・約${topicClassification.rate}%）`}
+              。多いことは、その分野の質問が少ないという意味ではなく、辞書に受け皿の語がまだ足りないことを示します。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">継続テーマ</dt>
+            <dd>
+              2つ以上の会期で確認できたテーマだけを「継続」として扱います。同じ会期の中で複数回質問した場合は継続に数えません。
+              テーマ名・扱った会期数・最初に確認できた会期・最新の会期を、そのまま事実として表示します。テーマ同士の重要度は比べません。
+            </dd>
+          </div>
+        </dl>
+      </SectionCard>
+
+      <SectionCard title="途中就任・辞職・欠員の扱い">
+        <p className="text-sm leading-relaxed text-on-surface">
+          在職していなかった会期は、分母にも分子にも入れません。欠席や実績ゼロとしては扱いません。
+        </p>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-on-surface-variant">
+          <li>
+            現職議員{entries.length}名は全員、令和5年4月23日執行の市議会議員選挙で同時に就任しているため、
+            対象期間に差はありません。任期途中で就任した現職議員は現在いません。
+          </li>
+          <li>
+            任期の途中で辞職した議員は、現職議員の一覧から外れます。その議員の記録は元議員のページで、
+            在職を確認できた会期だけを対象期間として表示します。
+          </li>
+          <li>
+            欠員が生じている期間について、他の議員の分母を増減させることはありません。
+          </li>
+        </ul>
       </SectionCard>
 
       <SectionCard title="「0件」と「対象外」は別物です">

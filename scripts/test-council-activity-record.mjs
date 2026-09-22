@@ -208,7 +208,7 @@ check("会期ごとの内訳に、会議録へのリンクが含まれる", () =
   assert.equal(notAsked.asked, false);
   assert.equal(notAsked.transcriptUrl, undefined, "質問の記録が無い会期にリンクを付けない");
   const ui = readSrc("src/components/council/CouncilActivityRecordSection.tsx");
-  assert.match(ui, /根拠を見る（会期ごとの内訳）/);
+  assert.match(ui, /根拠を見る/, "各項目に根拠への導線が要ります");
 });
 
 // --- 実データでの整合 ---
@@ -285,6 +285,179 @@ check("出席状況を「公表されていない」と断定していない", (
     }
   }
   assert.match(page, /断定するものではありません/, "確認できていないことの但し書きが必要です");
+});
+
+// --- 7. 欠損値をレーダーの0として扱わない ---
+check("レーダーチャートが、欠損値を0の位置へ描画しない", () => {
+  const chart = readSrc("src/components/council/ActivityRadarChart.tsx");
+  // 欠損軸は多角形へ含めず、欠損をまたいだ直線補間もしない。
+  assert.match(chart, /m.value === null/, "欠損の分岐がありません");
+  assert.ok(
+    !chart.includes("m.value ?? 0") && !chart.includes("m.value || 0"),
+    "欠損を0へ丸めています",
+  );
+  // 読み上げ用の文言でも「0点」と言わない。
+  assert.match(chart, /データ未収録/, "欠損を数値として読み上げています");
+
+  // 個人ページでは、軸の大半が欠損のままチャートを出さない。
+  const memberPage = readSrc("src/pages/MemberDetailPage.tsx");
+  assert.ok(!memberPage.includes("ActivityRadarChart"), "個人ページにレーダーチャートが復活しています");
+});
+
+// --- 8. 会議録に名前があるだけで出席扱いしない ---
+check("出席を、発言記録や名前の出現から数えていない", () => {
+  const radar = readSrc("src/lib/activityRadar.ts");
+  // calculateAttendanceIndex は引数を取らず、常に算定しない値を返す。
+  assert.ok(
+    radar.includes("export function calculateAttendanceIndex(): RadarMetric"),
+    "出席の算定関数が引数を取るようになっています（発言データを渡し始めた疑い）",
+  );
+  const body = radar.slice(radar.indexOf("export function calculateAttendanceIndex"));
+  const fn = body.slice(0, body.indexOf(String.fromCharCode(10) + "}"));
+  assert.ok(fn.includes("value: null"), "出席に数値が入っています");
+  // 関数の中で件数を数え始めていないこと（.length / filter / reduce が現れない）。
+  for (const counting of [".length", ".filter(", ".reduce(", "Math.round"]) {
+    assert.ok(!fn.includes(counting), `出席を数え始めています: ${counting}`);
+  }
+
+  // 記名投票の名簿を出席として流用していないこと。
+  const barometer = readSrc("src/lib/councilActivityBarometer.ts");
+  assert.ok(
+    !/attendance[^;]*memberVotes/.test(barometer),
+    "記名投票の名簿を出席として数えています",
+  );
+});
+
+// --- 9. 「公開されていない」と「当サイト未取得」を区別する ---
+check("未取得と未公表を、同じ言葉で説明していない", () => {
+  const vocab = readSrc("src/lib/evidenceAvailability.ts");
+  const notCollected = vocab.match(/not_collected: "([^"]+)"/g) ?? [];
+  const notPublished = vocab.match(/source_not_published: "([^"]+)"/g) ?? [];
+  assert.ok(notCollected.length >= 2 && notPublished.length >= 2, "両方の説明文が揃っていません");
+  // ラベルと説明文が、互いに異なる語であること。
+  assert.notEqual(
+    EVIDENCE_LABEL(vocab, "not_collected"),
+    EVIDENCE_LABEL(vocab, "source_not_published"),
+    "未取得と未公表に同じラベルを使っています",
+  );
+  // 未取得の説明が「0件ではない」と明言していること。
+  assert.match(vocab, /not_collected: "[^"]*0件という意味ではありません/);
+});
+
+function EVIDENCE_LABEL(src, code) {
+  const m = src.match(new RegExp(code + ': "([^"]+)"'));
+  return m ? m[1] : null;
+}
+
+// --- 10. 「確認できていない」ものを0件・0会期・0%として出さない ---
+console.log("");
+console.log("0として表示してよいのは、確認した結果0件のときだけ");
+
+check("データ充足状況が、確認できていない項目に0会期・0件と書かない", () => {
+  const src = readSrc("src/lib/councilActivityBarometer.ts");
+  // 出席状況は議員別の名簿自体を確認できていないため、件数を持たない。
+  assert.ok(!src.includes('sourceRecordUnit: "出席記録0件"'), "出席を0件と書いています");
+  assert.ok(
+    !src.includes('sourceRecordUnit: "議員別の提案者・紹介議員情報0件"'),
+    "登録済みの記録があるのに0件と書いています",
+  );
+  // 出席の行が confirmedSessionCount を持たないこと（0会期と表示されないため）。
+  const attendance = src.slice(src.indexOf('indicatorLabel: "出席状況"'));
+  const block = attendance.slice(0, attendance.indexOf("},"));
+  assert.match(block, /confirmedSessionCount: null/, "出席に会期数が入っています");
+  assert.match(block, /sourceRecordCount: null/, "出席に件数が入っています");
+});
+
+check("一覧・個人ページが、値の無い件数を0へ丸めていない", () => {
+  for (const rel of ["src/pages/CouncilActivityPage.tsx", "src/pages/CouncilActivityMemberPage.tsx"]) {
+    const src = readSrc(rel);
+    assert.ok(
+      !src.includes("rawValue ?? 0"),
+      `${rel} が、未取得の件数を0として表示します（会議録の取得が途切れた瞬間に全議員0件になります）`,
+    );
+  }
+});
+
+check("制度上の対象外を「確認中」と同じ言葉にしていない", () => {
+  const list = readSrc("src/pages/CouncilActivityPage.tsx");
+  assert.match(list, /notApplicable \? "対象外" : "確認中"/, "一覧で対象外と確認中を区別していません");
+  const detail = readSrc("src/pages/CouncilActivityMemberPage.tsx");
+  assert.match(detail, /questionNotApplicable/, "個人ページで対象外を区別していません");
+});
+
+check("議長は、質問項目まで含めて対象外になる（0件と書かない）", () => {
+  const record = buildCouncilActivityRecord([], [], [{ ...S("2023-06"), reason: "議長在任のため算定対象外" }]);
+  for (const key of ["asked-sessions", "asked-rate", "question-items", "follow-up-items", "follow-up-rate"]) {
+    const v = record.values.find((x) => x.key === key);
+    assert.equal(v.value, null, `${key} が0として表示されます`);
+    assert.equal(v.availability, "not-applicable", `${key} が対象外になっていません`);
+  }
+});
+
+check("議案への賛否は、記録が無いとき個人帰属不能として扱う", () => {
+  const withNone = buildCouncilActivityRecord([], [S("2023-06")], [], {});
+  const v = withNone.values.find((x) => x.key === "named-votes");
+  assert.equal(v.value, null, "0件として表示してはいけない");
+  assert.equal(v.availability, "not-individually-attributable");
+  assert.match(v.availabilityNote ?? "", /特定できない/);
+
+  const withVotes = buildCouncilActivityRecord([], [S("2023-06")], [], {
+    namedVotes: { numerator: 1, denominator: 2 },
+  });
+  const v2 = withVotes.values.find((x) => x.key === "named-votes");
+  assert.equal(v2.value, 1);
+  assert.equal(v2.denominator, 2);
+  assert.equal(v2.availability, "available");
+});
+
+// --- 11. 政策分野・継続テーマ ---
+console.log("");
+console.log("政策テーマ");
+
+check("政策分野は一覧として持ち、点数にしていない", () => {
+  const record = buildCouncilActivityRecord([], [S("2023-06")], [], {
+    policyThemes: [{ label: "子育て・教育", detail: "3会期" }],
+  });
+  const v = record.values.find((x) => x.key === "policy-themes");
+  assert.equal(v.kind, "list");
+  assert.equal(v.value, null, "分野数を数値として持ってはいけない");
+  assert.equal(v.items.length, 1);
+  // 説明文が、広さを評価しないと明言していること。
+  assert.match(v.description, /評価するものではなく/);
+});
+
+check("継続テーマは、最初と最新の会期まで示す", () => {
+  const record = buildCouncilActivityRecord([], [S("2023-06")], [], {
+    recurringThemes: [{ label: "防災", detail: "4会期（最初：令和5年6月定例会／最新：令和8年3月定例会）" }],
+  });
+  const v = record.values.find((x) => x.key === "recurring-themes");
+  assert.match(v.items[0].detail, /最初：/);
+  assert.match(v.items[0].detail, /最新：/);
+  assert.match(v.description, /2つ以上の会期/);
+});
+
+check("分類の根拠・確からしさ・版を保持している", () => {
+  const meta = readSrc("src/lib/topicClassificationMeta.ts");
+  for (const key of ["TopicClassificationMethod", "TopicClassificationConfidence", "TOPIC_CLASSIFICATION_VERSION"]) {
+    assert.ok(meta.includes(key), `${key} がありません`);
+  }
+  // AIは語彙にあるが、現在どこからも返していないこと。
+  assert.ok(!/method: "ai"/.test(meta), "AI分類を返す経路ができています（画面表示の見直しが必要です）");
+  // 自動分類であることを画面へ出す語があること。
+  assert.match(meta, /自動分類（キーワード）/);
+});
+
+check("「未分類」「その他」を政策テーマのカードに混ぜていない", () => {
+  const meta = readSrc("src/lib/topicClassificationMeta.ts");
+  assert.match(meta, /NON_POLICY_THEME_SLUGS/);
+  const page = readSrc("src/pages/ThemesPage.tsx");
+  assert.match(page, /policyThemes\.map/, "政策テーマのカードを絞り込んでいません");
+  assert.match(page, /nonPolicyThemes/, "未分類・その他を別枠にしていません");
+
+  // themes.json 側の前提（キーワードが空＝照合では選ばれない）が変わっていないこと。
+  const themes = readJson("src/data/themes.json");
+  const empty = themes.filter((t) => (t.keywords ?? []).length === 0).map((t) => t.slug).sort();
+  assert.deepEqual(empty, ["other", "unclassified"], "キーワードが空のテーマが変わりました（表示の見直しが必要です）");
 });
 
 console.log(`\n${passCount}件成功\n`);
