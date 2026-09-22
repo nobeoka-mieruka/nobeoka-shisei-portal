@@ -3,6 +3,7 @@ import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
+import councilSpeechPeriod from "../config/councilSpeechPeriod.json";
 import billProposalRolesData from "../data/billProposalRoles.json";
 import type {
   CouncilMember,
@@ -65,8 +66,25 @@ const councilSessions = councilSessionsData as CouncilSession[];
 
 const PLACEHOLDER_PROFILE = "情報確認中";
 
-/** 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数（サイト全体での分母）。 */
-const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
+/** 現在の議員任期の開始日（令和5年4月23日執行の市議会議員選挙日）。 */
+const COUNCIL_TERM_START = councilSpeechPeriod.from;
+
+/**
+ * 議員別の賛否内訳（memberVotes）が登録されている議案のうち、現在の任期に属するもの。
+ *
+ * サイト全体の件数をそのまま分母にすると、現在の任期より前に行われた記名投票が
+ * 分母へ入ってしまい、その当時まだ在職していなかった議員だけが機械的に低い値になる。
+ * これは議員の行動とは無関係な差であり、当サイトが独自に付けた評価になってしまう。
+ * 一般質問・発言の指標が eligibleSessionIdsFor() で在職期間をそろえているのと同じ考え方で、
+ * 賛否の指標も現在の任期（councilSpeechPeriod.from 以降）の議案だけを対象にする。
+ */
+const billsWithMemberVotesInCurrentTerm = billVotes.filter(
+  (b) => b.memberVotes.length > 0 && (b.memberVoteRecordedDate ?? b.votingDate ?? "") >= COUNCIL_TERM_START,
+);
+const billsWithAnyMemberVoteDisclosed = billsWithMemberVotesInCurrentTerm.length;
+
+/** 現在の任期で議員別の賛否が公開されている議案数（画面の説明文に直書きしないための単一情報源）。 */
+export const currentTermNamedVoteBillCount = billsWithMemberVotesInCurrentTerm.length;
 
 /** councilSessions.jsonが収録している全会期ID（現議員任期以降のみ、既存データの構造上の前提）。 */
 const allSessionIdsInPeriod = councilSessions.map((s) => s.id);
@@ -95,6 +113,10 @@ export function getMemberActivityMetrics(member: CouncilMember): RadarMetric[] {
   const publishedMemberSpeeches = publicSpeeches(speechRecord);
   const currentTermSpeechesForRadar = currentTermPublicSpeeches(speechRecord);
   const memberAllBillVotes = billVotes.filter((b) => b.memberVotes.some((v) => v.memberId === member.id));
+  // 分母と同じ範囲（現在の任期）で数えないと、割合が100%を超えたり議員間で比べられなくなる。
+  const memberBillVotesInCurrentTerm = billsWithMemberVotesInCurrentTerm.filter((b) =>
+    b.memberVotes.some((v) => v.memberId === member.id),
+  );
   const isProfileConfirmed = member.profile !== PLACEHOLDER_PROFILE;
   const updatedAt = member.updatedAt ?? member.verifiedAt;
 
@@ -102,7 +124,7 @@ export function getMemberActivityMetrics(member: CouncilMember): RadarMetric[] {
     calculateQuestionActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt),
     calculateSpeechActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt),
     calculateAttendanceIndex(),
-    calculateVotingDisclosureIndex(memberAllBillVotes.length, billsWithAnyMemberVoteDisclosed),
+    calculateVotingDisclosureIndex(memberBillVotesInCurrentTerm.length, billsWithAnyMemberVoteDisclosed),
     calculateProposalActivityIndex(),
     calculateInformationDisclosureIndex(
       [

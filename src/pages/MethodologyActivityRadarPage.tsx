@@ -5,7 +5,12 @@ import { SectionCard } from "../components/SectionCard";
 import { LastUpdated } from "../components/LastUpdated";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getSeoForPath } from "../lib/seo";
-import { activityTargetPeriodLabel, getAllCurrentMemberActivity, getEvidenceAvailabilitySummary } from "../lib/councilActivityBarometer";
+import {
+  activityTargetPeriodLabel,
+  currentTermNamedVoteBillCount,
+  getAllCurrentMemberActivity,
+  getEvidenceAvailabilitySummary,
+} from "../lib/councilActivityBarometer";
 import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 
 /**
@@ -255,7 +260,7 @@ export function MethodologyActivityRadarPage() {
 
       <SectionCard title="現在データが不足している項目">
         <p className="text-sm leading-relaxed text-on-surface">
-          「出席状況」「請願・提案等」の2項目は、本サイトが現時点でこれらの一次データ（個別の出席記録、議員別の提案者情報）を収録できていないため、全ての議員で「対象記録なし」と表示されます。「議案等の意思表示」は、議員個人の議案賛否内訳（memberVotes）が登録されている議案が現時点で記名投票1件（令和5年7月臨時会、当時27名分）のみのため、この1議案についてのみ判定できます。現職議員{entries.length}名は全員この記名投票の対象だったため{entries.length}名とも算定可能ですが、対象議案が1件のみである点にご留意ください。これは議員個人の活動が確認できないという意味ではなく、本サイトのデータ整備がまだ追いついていないことを示しています。データが収録され次第、順次反映します。
+          「出席状況」「請願・提案等」の2項目は、本サイトが現時点でこれらの一次データ（個別の出席記録、議員別の提案者情報）を収録できていないため、全ての議員で「対象記録なし」と表示されます。「議案等の意思表示」は、議員個人の議案賛否内訳が登録されている議案が、現在の任期では{currentTermNamedVoteBillCount}件（記名投票）のみのため、その範囲でしか判定できません。現職議員{entries.length}名は全員この記名投票の対象だったため{entries.length}名とも算定できますが、対象議案がごく少数である点にご留意ください。なお、現在の任期より前に行われた記名投票は、当時まだ在職していなかった議員が不利に見えてしまうため、この項目の対象に含めていません。これは議員個人の活動が確認できないという意味ではなく、本サイトのデータ整備がまだ追いついていないことを示しています。データが収録され次第、順次反映します。
         </p>
       </SectionCard>
 

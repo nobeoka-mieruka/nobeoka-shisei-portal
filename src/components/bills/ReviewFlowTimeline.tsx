@@ -61,7 +61,7 @@ export function ReviewFlowTimeline({ bill, allBills }: { bill: BillVoteItem; all
             ) : (
               <span className="font-medium">{bill.committee}</span>
             )}
-            {" "}に付託され、審査されました。
+            {" "}に付託されました。
           </p>
           <p className="mt-1 text-xs text-on-surface-variant">
             委員会の個別の開催日・審査結果（可決すべきもの等の文言）は公式資料で公表されていないため、付託先の委員会のみを表示しています。

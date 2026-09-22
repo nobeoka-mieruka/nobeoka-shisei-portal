@@ -101,7 +101,7 @@ export function committeeFlowStatus(bill: BillVoteItem, allBills: BillVoteItem[]
 export function reviewFlowSummaryLabel(bill: BillVoteItem, allBills: BillVoteItem[]): string {
   const status = committeeFlowStatus(bill, allBills);
   if (status === "no-referral") return "委員会審査なし（付託省略）";
-  if (status === "confirmed") return `${bill.committee}で審査`;
+  if (status === "confirmed") return `${bill.committee}へ付託`;
   if (status === "source-unavailable") return "会議録公開待ち";
   return "確認中";
 }
