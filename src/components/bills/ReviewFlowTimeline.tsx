@@ -64,7 +64,7 @@ export function ReviewFlowTimeline({ bill, allBills }: { bill: BillVoteItem; all
             {" "}に付託されました。
           </p>
           <p className="mt-1 text-xs text-on-surface-variant">
-            委員会の個別の開催日・審査結果（可決すべきもの等の文言）は公式資料で公表されていないため、付託先の委員会のみを表示しています。
+            委員会の開催日と審査結果（「可決すべきもの」等の文言）は、本会議での委員長報告として会議録に記録されていますが、当サイトではまだ取り込んでいません。現時点では付託先の委員会のみを表示しています。
           </p>
         </div>
       ),

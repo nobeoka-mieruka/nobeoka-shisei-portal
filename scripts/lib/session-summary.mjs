@@ -102,8 +102,10 @@ export function buildSessionSummary(session, bills, generalQuestionCount, option
   const results = summarizeResults(bills);
   const hasUnresolvedResult = bills.some((b) => !b.result || b.result === "確認中");
   // 付託先は議案審議結果（公式資料）に記載があるため「付託された」ことは書ける。
-  // 一方、委員会がいつ開き何を審査したかは公表されておらず当サイトのデータにも無いため、
-  // 「審査が行われました」とは書かない（付託の記録から審査の中身を推し量らない）。
+  // 委員会の開催日と審査結果も、本会議での委員長報告として会議録に記録されている
+  // （例：「三月十六日に委員会を開き…いずれも原案のとおり可決すべきものと決定いたしました」）。
+  // ただし当サイトはまだ取り込んでいないため、「審査が行われました」とは書かず、
+  // 付託の事実だけを書く。「公表されていない」と書かないこと（事実と異なる）。
   const hasCommitteeReferral = bills.some((b) => !!b.committee && b.committee !== "付託なし（本会議で即日議決）");
   const hasMinutes = hasDocumentCategory(visibleDocuments, "minutes");
   const hasResultsDoc = hasDocumentCategory(visibleDocuments, "results");
@@ -149,7 +151,9 @@ export function buildSessionSummary(session, bills, generalQuestionCount, option
     parts.push("一般質問は、質問通告書で予定が公表されている段階です（実施内容は会議録の公開後に確認します）。");
   }
   if (hasCommitteeReferral) {
-    parts.push("委員会がいつ開かれ何を審査したかは公表されていないため、当サイトでは付託先のみを掲載しています。");
+    parts.push(
+      "委員会の開催日と審査結果は、本会議での委員長報告として会議録に記録されていますが、当サイトではまだ取り込んでいません。現時点では付託先のみを掲載しています。",
+    );
   }
   if (hasPetitions) {
     parts.push("請願・陳情も審議されました。");
