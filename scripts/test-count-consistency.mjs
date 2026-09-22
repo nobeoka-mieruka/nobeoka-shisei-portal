@@ -376,4 +376,67 @@ check("画面へ出るデータ注記（市長公約の関連議案）に、古�
 });
 
 console.log(`\n${passCount}件成功`);
+/** 西暦の年月を「令和8年9月」のような和暦表記にする（このファイル内だけで使う）。 */
+function eraYearMonth(isoDate) {
+  const [year, month] = isoDate.split("-").map(Number);
+  const eraYear = year - 2018;
+  // 令和1年は公式表記どおり「令和元年」。画面の文言と突き合わせるため同じ表記にそろえる。
+  return `令和${eraYear === 1 ? "元" : eraYear}年${month}月`;
+}
+
+const coverageSource = readSrc("src/data/dataCoverage.ts");
+const readScope = (key) => {
+  const match = coverageSource.match(new RegExp(key + "[^]*?scope:[^]*?\"([^\"]+)\""));
+  if (!match) throw new Error(key + " の収録範囲を読み取れません");
+  return match[1];
+};
+
+check("画面に出す「議案・審議結果の収録範囲」が、実際に登録されている会期まで届いている", () => {
+  const bills = readJson("src/data/billVotes.json");
+  const votingDates = bills.map((b) => b.votingDate).filter(Boolean).sort();
+  const latest = eraYearMonth(votingDates[votingDates.length - 1]);
+  const oldest = eraYearMonth(votingDates[0]);
+  const scope = readScope("billVotes:");
+  assert.ok(scope.includes(latest), `議案の収録範囲が最新の議決（${latest}）まで届いていません: 「${scope}」`);
+  assert.ok(scope.includes(oldest), `議案の収録範囲の開始（${oldest}）が実データと合っていません: 「${scope}」`);
+});
+
+check("「議案・議決結果」「会議録・一般質問」「財政指標」の収録範囲を別々に示している", () => {
+  // 議決結果を取得しただけの会期を、会議録まで収録済みであるかのように見せないための検査。
+  for (const key of ["generalQuestions:", "billVotes:", "financeIndicators:"]) {
+    assert.ok(coverageSource.includes(key), `収録範囲に ${key} が定義されていません`);
+  }
+  const billScope = readScope("billVotes:");
+  assert.ok(
+    billScope.includes("議決結果"),
+    `議案の収録範囲に、議決結果の範囲であることが書かれていません: 「${billScope}」`,
+  );
+  const questionScope = readScope("generalQuestions:");
+  assert.ok(
+    questionScope.includes("会議録"),
+    `一般質問の収録範囲に、会議録の扱いが書かれていません: 「${questionScope}」`,
+  );
+});
+
+check("画面に出す「財政指標の対象年度」が、実際に登録されている年度と一致する", () => {
+  const years = readJson("src/data/archiveFiscalYears.json");
+  const soundnessYear = [...years].filter((y) => y.finance?.soundness).sort((a, b) => b.fiscalYear - a.fiscalYear)[0];
+  const ratioYear = [...years]
+    .filter((y) => y.finance?.currentAccountRatioPercent != null || y.finance?.financialStrengthIndex != null)
+    .sort((a, b) => b.fiscalYear - a.fiscalYear)[0];
+  const label = (fy) => `令和${fy - 2018}年度決算`;
+
+  const headlineMatch = coverageSource.match(/financeIndicators:[^]*?headline:[^]*?"([^"]+)"/);
+  assert.ok(headlineMatch, "財政指標の対象年度を読み取れません");
+  assert.equal(
+    headlineMatch[1],
+    label(soundnessYear.fiscalYear),
+    "財政指標の対象年度が、健全化判断比率の最新年度と一致しません",
+  );
+
+  const scope = readScope("financeIndicators:");
+  assert.ok(scope.includes(label(soundnessYear.fiscalYear)), "説明文に健全化判断比率の対象年度がありません");
+  assert.ok(scope.includes(label(ratioYear.fiscalYear)), "説明文に財政力指数・経常収支比率の対象年度がありません");
+});
+
 console.log("すべてのテストが成功しました。");

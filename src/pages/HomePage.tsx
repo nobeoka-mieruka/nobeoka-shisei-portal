@@ -46,7 +46,7 @@ import {
 import { usePageTitle } from "../hooks/usePageTitle";
 import { getLastUpdatedText } from "../lib/lastUpdated";
 import { getSeoForPath } from "../lib/seo";
-import { coverageHint } from "../data/dataCoverage";
+import { coverageHint, dataCoverage } from "../data/dataCoverage";
 import { publicBills } from "../lib/billVotes";
 import { calculateGeneralQuestionStats, scheduledSessionBreakdownHint } from "../lib/generalQuestionStats";
 import { LATEST_CONFIRMED_SESSION_HEADING, UPCOMING_SESSION_HEADING } from "../lib/councilSessions";
@@ -440,6 +440,16 @@ export function HomePage() {
             value={mayorPromiseCounts.policyArea}
             unit="件"
             hint={`現職市長（${mayor.name}）が掲げた${MAYOR_PROMISE_LEVELS.policyArea.label}の数です。${MAYOR_PROMISE_SCALE_NOTE}歴代の政策・公約アーカイブ全体の件数はデータ収録状況ページに別掲しています。`}
+          />
+          {/*
+            資料の種類ごとに収録範囲が違うため、財政指標の対象年度も並べて示す。
+            議案（議決結果）の収録が進んでも、財政指標や会議録まで同じ年度分そろっているとは限らない。
+          */}
+          <StatCard
+            label="財政指標の対象年度"
+            value={dataCoverage.financeIndicators.headline}
+            compact
+            hint={dataCoverage.financeIndicators.scope}
           />
           <StatCard
             label="サイトの最終更新（ビルド日時）"

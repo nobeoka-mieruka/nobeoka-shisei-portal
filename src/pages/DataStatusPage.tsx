@@ -8,6 +8,7 @@ import citySpecialPostsData from "../data/citySpecialPosts.json";
 import publicCommentsData from "../data/publicComments.json";
 import archiveCouncilDocumentsData from "../data/archiveCouncilDocuments.json";
 import billVotesData from "../data/billVotes.json";
+import councilReportsData from "../data/councilReports.json";
 import archivePoliciesData from "../data/archivePolicies.json";
 import archiveFiscalYearsData from "../data/archiveFiscalYears.json";
 import generalQuestionsData from "../data/generalQuestions.json";
@@ -55,6 +56,7 @@ import type {
   CouncilMember,
   FormerMember,
   BillVoteItem,
+  CouncilReportItem,
   GeneralQuestionItem,
   CouncilSpeechSummaryData,
   MayorPromisesData,
@@ -158,6 +160,7 @@ const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
 const publicComments = publicCommentsData as PublicCommentDataset;
 const archiveCouncilDocuments = archiveCouncilDocumentsData as ArchiveCouncilDocument[];
 const billVotes = billVotesData as BillVoteItem[];
+const councilReports = (councilReportsData as { reports: CouncilReportItem[] }).reports;
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -679,6 +682,22 @@ export function DataStatusPage() {
     detail: `議案総数${formatCount(billVotes.length)}件のうち、出典（審議結果PDF等）確認済み${formatCount(billVotesSourceLinkedCount)}件／一次資料本文（会議録の提案理由説明等）を確認済み${formatCount(billVotesBodyVerifiedCount)}件／その本文に基づく詳細な説明あり${formatCount(billVotesDetailedExplanationCount)}件／詳しい内容は追加確認中${formatCount(billVotesAdditionalConfirmingCount)}件です（「追加確認中」は情報が無いという意味ではなく、議案名・議決結果・出典は確認済みで、議案固有の詳しい提案理由等をまだ整理できていない状態です）。議決結果は${formatCount(billVotes.length)}件全てを登録済み。個人（議員ごと）の賛否内訳（採決方式と公開状況を別軸に整理）：個人別に公開${voteClassification.byDisclosure.individual}件（記名投票等）／採決方式は判明しているが個人別は未確認${voteClassification.byDisclosure.aggregate}件（起立採決・簡易採決等で、会議録には方式の記載はあるが個人別の内訳までは未調査）／個人別は非公開と確認済み${voteClassification.byDisclosure.not_disclosed}件（会議録で非公開と確認済み）／採決方式・公開状況とも不明${voteClassification.byDisclosure.unknown}件（会議録自体が未公開）。品質項目の確認状況：提出者区分${formatCount(billVotesProposerTypeKnown)}／${formatCount(billVotes.length)}件・採決方法${formatCount(billVotesVoteMethodKnown)}／${formatCount(billVotes.length)}件・付託委員会${formatCount(billVotesCommitteeKnown)}／${formatCount(billVotes.length)}件（付託委員会が未確認の議案は、会期の会議録自体が延岡市議会「会議録検索システム」で未公開の会期に限られます。委員会付託を省略し本会議で直接議決された議案は「付託なし」として確認済みに含めています）。議案の詳細ページでは、提出から委員会審査・本会議採決までの流れを時系列で確認できます。上記の議案・条例・請願・陳情アーカイブとは別管理の既存データベースです。`,
     linkTo: "/bills/votes",
     linkLabel: "議案ごとの賛否を見る",
+  };
+
+  const councilReportSessionLabels = [...new Set(councilReports.map((r) => r.session))].join("・");
+  const councilReportCategorySummary = [...new Set(councilReports.map((r) => r.category))]
+    .map((category) => `${category}${formatCount(councilReports.filter((r) => r.category === category).length)}件`)
+    .join("／");
+
+  // 市長報告は議決・採決を要しない案件。議案・採決データベースとは別に数え、
+  // 「議案総数」や賛否の集計には一切含めない（含めると意味の違う数が混ざる）。
+  const councilReportDomain: DataDomain = {
+    label: "市長報告（議決を要しない案件）",
+    count: councilReports.length,
+    unit: "件",
+    detail: `市長から議会へ提出された報告です。議決・採決を行わない案件のため議決結果が無く、議員ごとの賛否もありません。上の議案・採決データベースとは別に管理しており、議案総数・採決数・議員ごとの賛否の集計には含めていません。収録範囲：${councilReportSessionLabels}。内訳：${councilReportCategorySummary}。全件、延岡市議会の審議結果資料（一次資料）で件名と報告日を確認済みです。`,
+    linkTo: "/council-documents",
+    linkLabel: "定例会ごとの資料を見る",
   };
 
   const committeesWithJurisdiction = committees.filter((c) => c.jurisdiction !== null).length;
@@ -1402,6 +1421,7 @@ export function DataStatusPage() {
         </p>
         <ul className="space-y-2">
           <DomainRow domain={councilExtra} />
+          <DomainRow domain={councilReportDomain} />
           {council.map((d) => (
             <DomainRow key={d.label} domain={d} />
           ))}
