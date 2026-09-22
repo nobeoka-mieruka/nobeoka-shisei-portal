@@ -104,7 +104,7 @@ export function CompareMembersPage() {
           <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">議員の比較</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          現職議員・元議員を横断して最大4名まで選び、会派・在籍状況・関連する政策や議案の件数を比較できます。議員個人への評価・採点や優劣判定は行っていません。件数は当サイトに登録済みのデータの範囲での集計です。
+          現職議員・元議員を横断して最大4名まで選び、会派・在籍状況・関連する政策や議案の件数を比較できます。数値は、延岡市議会が公開する一次資料から確認できる活動を共通の基準で整理したもので、議員個人の優劣を判定するものではありません。件数は当サイトに登録済みのデータの範囲での集計です。
         </p>
       </div>
 

@@ -717,7 +717,7 @@ export function CouncilActivityPage() {
       {compareEntries.length > 0 && (
         <SectionCard title={`比較（${compareEntries.length}名選択中）`}>
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-            このページは公開資料から確認できた活動記録を整理したものです。議員の能力・成果・優劣を評価するものではありません。形の大小・面積を「優れている／劣っている」の意味で読まないでください。
+            延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化して並べたものです。数値は活動の記録であり、議員個人の能力や成果を判定するものではありません。形の大小・面積を「優れている／劣っている」の意味で読まないでください。
           </p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {compareEntries.map((e) => (

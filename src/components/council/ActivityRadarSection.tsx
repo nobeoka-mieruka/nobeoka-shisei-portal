@@ -72,11 +72,11 @@ export function ActivityRadarSection({
     return (
       <SectionCard title="議会活動データ">
         <p className="text-xs leading-relaxed text-on-surface-variant">
-          公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません（
+          延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化・可視化しています。各指標の算出方法、対象期間、使用した一次資料は、数値の根拠として公開しています（
           <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
             算定方法
           </Link>
-          ）。
+          ）。資料未公開・未確認の情報は、実績ゼロとしては扱いません。示しているのは公開された議会活動の記録であり、議員個人の能力や人物、政策の内容の良し悪しを判定するものではありません。
         </p>
         <p className="mt-3 rounded-lg bg-surface-container-high p-3 text-sm text-on-surface-variant">
           現在、この議員のレーダーチャートを作成できるだけの公開データがそろっていません。データは順次整備しています。
@@ -88,7 +88,7 @@ export function ActivityRadarSection({
   return (
     <SectionCard title="議会活動データ">
       <p className="text-xs leading-relaxed text-on-surface-variant">
-        公開されている議会資料を共通基準で指数化したものです。議員の能力、政策の良し悪し、優劣を評価するものではありません（
+        延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化・可視化しています。各指標の算出方法、対象期間、使用した一次資料は、数値の根拠として公開しています（
         <Link to="/methodology/activity-radar" className={`font-medium text-primary underline ${linkClass}`}>
           算定方法
         </Link>

@@ -135,9 +135,15 @@ export function MethodologyActivityRadarPage() {
         <p className="mt-1 text-xs text-on-primary-container/80">現在の算定対象期間：{targetPeriod}</p>
       </div>
 
-      <SectionCard title="このチャートは人物評価ではありません">
+      <SectionCard title="この指標が示すもの">
         <p className="text-sm leading-relaxed text-on-surface">
-          このレーダーチャートは、議員の優劣、能力、人物評価、推薦順位を示すものではありません。既存の一次情報・公開データを、項目ごとに共通基準で0〜100へ機械的に換算し、「公開情報から確認できる活動状況」を可視化しているだけです。独自の総合点、ランキング、順位、星評価、優秀・不十分などの判定は一切行っていません。
+          延岡市議会が公開する一次資料から確認できる活動を、共通の基準で指標化・可視化しています。各指標の算出方法、対象期間、使用した一次資料をこのページで公開し、数値の根拠を確認できるようにしています。資料未公開・未確認の情報は、原則として実績ゼロとは扱いません。
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-on-surface">
+          示しているのは公開された議会活動の記録であり、議員個人の能力や人物、政策の内容の良し悪しを判定するものではありません。他の議員の活動によって本人の数値が上下しない基準を用いており、複数の指標を合算した総合点や議員の順位付けは行いません。
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+          現在の指標は、延岡市議会基本条例に定められた議会・議員の役割に沿った内容へ見直しを進めています。見直しの結果は、確定しだいこのページに反映します。
         </p>
       </SectionCard>
 
