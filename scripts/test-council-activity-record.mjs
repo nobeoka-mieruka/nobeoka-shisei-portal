@@ -69,10 +69,20 @@ function makeSpeech(sessionId, itemCount, followUpCount = 0) {
       questionSummary: "",
       answerSummary: "",
       answerers: [],
+      // 実データと同じ並び（質問→答弁→再質問）にする。
+      // 答弁より前に置かれた再質問は CONFIRMED ではなく LIKELY になるため、
+      // ここを省略するとテストが実態とずれる。
       exchanges:
         i < followUpCount
-          ? [{ order: 1, type: "follow-up-question", speakerId: "mTest", summary: "" }]
-          : [{ order: 1, type: "question", speakerId: "mTest", summary: "" }],
+          ? [
+              { order: 1, type: "question", speakerId: "mTest", summary: "" },
+              { order: 2, type: "answer", speakerName: "市長", summary: "" },
+              { order: 3, type: "follow-up-question", speakerId: "mTest", summary: "" },
+            ]
+          : [
+              { order: 1, type: "question", speakerId: "mTest", summary: "" },
+              { order: 2, type: "answer", speakerName: "市長", summary: "" },
+            ],
       questionAnswerLinkStatus: "confirmed",
     })),
     summarySources: [{ title: "会議録", sourceType: "official-minutes-html", sourceUrl: "https://example.invalid/a" }],
@@ -89,12 +99,17 @@ check("議長期間は分母から除外され、0%にならない", () => {
   const record = buildCouncilActivityRecord(
     [],
     [],
-    all.map((s) => ({ ...s, reason: "議長在任期間のため算定対象外" })),
+    all.map((s) => ({ ...s, reasonCode: "SPEAKER_TERM" })),
   );
   const rate = record.values.find((v) => v.key === "asked-rate");
   assert.equal(rate.value, null, "0%として表示してはいけない");
   assert.equal(rate.availability, "not-applicable");
-  assert.match(rate.availabilityNote ?? "", /議長/);
+  // 「役職のため質問できなかった」とは書かず、比較条件を揃えるための除外であると示す。
+  assert.match(rate.availabilityNote ?? "", /役職就任期間/);
+  assert.ok(
+    !/質問できなかった/.test(rate.availabilityNote ?? ""),
+    "役職を理由に質問できなかったと断定してはいけない",
+  );
   assert.equal(record.sessions.every((s) => !s.countedInDenominator), true, "全会期が分母外になるべき");
 });
 
@@ -102,7 +117,7 @@ check("議長期間は分母から除外され、0%にならない", () => {
 check("分母に渡さなかった会期は、実施率の分母に入らない", () => {
   // 途中就任の場合、呼び出し側は就任後の会期だけを渡す。
   const record = buildCouncilActivityRecord([makeSpeech("2025-06", 3)], [S("2025-06"), S("2025-09")], [
-    { ...S("2023-06"), reason: "就任前のため算定対象外" },
+    { ...S("2023-06"), reasonCode: "NOT_YET_MEMBER" },
   ]);
   const rate = record.values.find((v) => v.key === "asked-rate");
   assert.equal(rate.denominator, 2, "就任前の会期は分母に含めない");
@@ -110,7 +125,7 @@ check("分母に渡さなかった会期は、実施率の分母に入らない"
   assert.equal(rate.value, 50);
   const excluded = record.sessions.find((s) => s.sessionId === "2023-06");
   assert.equal(excluded.countedInDenominator, false);
-  assert.match(excluded.excludedReason ?? "", /就任前/);
+  assert.match(excluded.excludedReason ?? "", /まだ議員ではありません/);
 });
 
 // --- 3. CONFIRMED_ZERO と欠損が違う ---
@@ -120,7 +135,7 @@ check("確認した結果0件と、対象外・未確認を別の状態として
   assert.equal(zeroSessions.value, 0, "確認した結果0件は0として持つ");
   assert.equal(zeroSessions.availability, "confirmed-zero");
 
-  const na = buildCouncilActivityRecord([], [], [{ ...S("2023-06"), reason: "対象外" }]);
+  const na = buildCouncilActivityRecord([], [], [{ ...S("2023-06"), reasonCode: "NOT_APPLICABLE" }]);
   const naSessions = na.values.find((v) => v.key === "asked-sessions");
   assert.equal(naSessions.value, null, "対象外は0にしない");
   assert.equal(naSessions.availability, "not-applicable");
@@ -386,7 +401,7 @@ check("制度上の対象外を「確認中」と同じ言葉にしていない"
 });
 
 check("議長は、質問項目まで含めて対象外になる（0件と書かない）", () => {
-  const record = buildCouncilActivityRecord([], [], [{ ...S("2023-06"), reason: "議長在任のため算定対象外" }]);
+  const record = buildCouncilActivityRecord([], [], [{ ...S("2023-06"), reasonCode: "SPEAKER_TERM" }]);
   for (const key of ["asked-sessions", "asked-rate", "question-items", "follow-up-items", "follow-up-rate"]) {
     const v = record.values.find((x) => x.key === key);
     assert.equal(v.value, null, `${key} が0として表示されます`);
@@ -458,6 +473,75 @@ check("「未分類」「その他」を政策テーマのカードに混ぜて�
   const themes = readJson("src/data/themes.json");
   const empty = themes.filter((t) => (t.keywords ?? []).length === 0).map((t) => t.slug).sort();
   assert.deepEqual(empty, ["other", "unclassified"], "キーワードが空のテーマが変わりました（表示の見直しが必要です）");
+});
+
+// --- 12. 除外理由をコードで追跡できる ---
+console.log("");
+console.log("分母から外した会期の追跡");
+
+check("除外会期が、理由コードと根拠資料IDを持つ", () => {
+  const record = buildCouncilActivityRecord([], [S("2025-06")], [
+    { ...S("2026-09"), reasonCode: "SOURCE_NOT_PUBLISHED", evidenceSourceId: "questionCollectionStatus.json" },
+  ]);
+  const ex = record.sessions.find((x) => x.sessionId === "2026-09");
+  assert.equal(ex.countedInDenominator, false, "未公開会期を分母に入れてはいけない");
+  assert.equal(ex.excludedReasonCode, "SOURCE_NOT_PUBLISHED");
+  assert.equal(ex.evidenceSourceId, "questionCollectionStatus.json");
+  assert.equal(ex.asked, null, "未公開会期を「質問なし」にしてはいけない");
+  // 分母は、渡した対象会期だけ。
+  const rate = record.values.find((v) => v.key === "asked-rate");
+  assert.equal(rate.denominator, 1);
+});
+
+check("内部コードと画面の文言が分離されている", () => {
+  const src = readSrc("src/lib/councilActivityRecord.ts");
+  assert.match(src, /EXCLUSION_REASON_LABELS_JA/, "表示文言の対応表がありません");
+  for (const code of ["NOT_YET_MEMBER", "NO_LONGER_MEMBER", "SPEAKER_TERM", "SOURCE_NOT_PUBLISHED", "NOT_APPLICABLE"]) {
+    assert.ok(src.includes(code), `${code} が定義されていません`);
+  }
+  // 未公開の説明が「質問なし」と読まれないようにしていること。
+  assert.match(src, /SOURCE_NOT_PUBLISHED: "[^"]*質問がなかったという意味ではありません/);
+});
+
+check("根拠の画面から、表示値を再計算できる", () => {
+  const record = buildCouncilActivityRecord([makeSpeech("2023-06", 4, 3)], [S("2023-06"), S("2023-09")], []);
+  const rate = record.values.find((v) => v.key === "asked-rate");
+  // 分子・分母と、それぞれが何を数えたものかが揃っていること。
+  assert.equal(rate.numerator, 1);
+  assert.equal(rate.denominator, 2);
+  assert.ok(rate.numeratorLabel && rate.denominatorLabel, "分子・分母の意味を示す見出しがありません");
+  assert.equal(Math.round((rate.numerator / rate.denominator) * 100), rate.value, "表示値を分子分母から再現できません");
+
+  const fuRate = record.values.find((v) => v.key === "follow-up-rate");
+  assert.equal(Math.round((fuRate.numerator / fuRate.denominator) * 100), fuRate.value);
+
+  // 画面側に、式そのものが置かれていること。
+  const ui = readSrc("src/components/council/CouncilActivityRecordSection.tsx");
+  assert.match(ui, /÷ \$\{value\.denominator\} × 100/, "根拠の画面に計算式がありません");
+});
+
+check("実データ：会議録が未公開の会期は、分母に入らず理由付きで残る", () => {
+  const status = readJson("src/data/questionCollectionStatus.json");
+  const unpublished = status.sessions.filter((x) => x.transcriptAvailable !== true);
+  const barometer = readSrc("src/lib/councilActivityBarometer.ts");
+  assert.match(barometer, /unpublishedSessionExclusions/, "未公開会期を除外として渡していません");
+  // 未公開会期が実データに存在する間は、その扱いが画面へ出ていること。
+  if (unpublished.length > 0) {
+    assert.match(barometer, /SOURCE_NOT_PUBLISHED/, "未公開の理由コードを使っていません");
+  }
+});
+
+check("比較で、対象期間が違うときに注意を出す", () => {
+  const src = readSrc("src/pages/CouncilActivityPage.tsx");
+  assert.match(src, /comparePeriodDiffers/, "対象期間の違いを判定していません");
+  assert.match(src, /対象期間が異なります/, "注意文がありません");
+  // 件数だけを並べないよう、算定対象の会期数を行として持つこと。
+  assert.match(src, /算定対象の会期数/, "対象会期数を併記していません");
+  // 判定は会期数の集合で行う（他の議員の値で正規化しない）。
+  assert.ok(
+    src.includes("new Set(compareEligibleCounts).size > 1"),
+    "対象期間の違いを、会期数の集合で判定していません",
+  );
 });
 
 console.log(`\n${passCount}件成功\n`);

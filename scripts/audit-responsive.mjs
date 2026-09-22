@@ -56,6 +56,8 @@ const VIEWPORTS = [
   { name: "375x812", width: 375, height: 812, mobile: true },
   { name: "390x844", width: 390, height: 844, mobile: true },
   { name: "430x932", width: 430, height: 932, mobile: true },
+  { name: "414x896", width: 414, height: 896, mobile: true },
+  { name: "1024x768", width: 1024, height: 768, mobile: false },
   { name: "768x1024", width: 768, height: 1024, mobile: false },
   { name: "1280x720", width: 1280, height: 720, mobile: false },
   { name: "1440x900", width: 1440, height: 900, mobile: false },
