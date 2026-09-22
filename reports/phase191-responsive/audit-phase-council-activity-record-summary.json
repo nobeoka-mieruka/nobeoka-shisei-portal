@@ -1,0 +1,2207 @@
+{
+  "label": "phase-council-activity-record",
+  "generatedAt": "2026-09-22T13:20:00.560Z",
+  "baseUrl": "http://localhost:4183",
+  "viewports": [
+    "320x568",
+    "360x800",
+    "375x812",
+    "390x844",
+    "430x932",
+    "768x1024",
+    "1280x720",
+    "1440x900",
+    "1920x1080"
+  ],
+  "pages": [
+    "/",
+    "/dashboard",
+    "/data-status",
+    "/people",
+    "/questions",
+    "/bills",
+    "/bills/votes",
+    "/committees",
+    "/finance",
+    "/finance/budget",
+    "/elections",
+    "/elections/election-mayor-2025",
+    "/timeline",
+    "/mayor",
+    "/mayors",
+    "/mayor/policy-progress",
+    "/compare",
+    "/compensation",
+    "/council-activity",
+    "/council-activity/m24",
+    "/council-activity/m18",
+    "/methodology/council-activity",
+    "/members/m01",
+    "/members/m02",
+    "/members/m03",
+    "/members/m04",
+    "/questions/gq2026-06-m24",
+    "/questions/gq2026-06-m17",
+    "/questions/gq2026-06-m14",
+    "/questions/gq2026-06-m08",
+    "/bills/votes/2019-06-gian-10",
+    "/bills/votes/2019-06-chinjo-1",
+    "/bills/bill-fy2026-general-account-supplementary-budget-2",
+    "/bills/bill-auditor-appointment-2026-06",
+    "/bills/bill-bridge-repair-contract-2026-06",
+    "/mayor/policy-progress/1-1",
+    "/mayor/policy-progress/4-3",
+    "/mayor/policy-progress/2-3",
+    "/mayors/aoki-yoshisuke",
+    "/mayors/miura-hisatomo",
+    "/mayors/fusano-hiroshi"
+  ],
+  "summary": {
+    "viewportCount": 9,
+    "pageCount": 41,
+    "combinations": 369,
+    "renderedCombinations": 369,
+    "screenshots": 369,
+    "horizontalScrollCombinations": 0,
+    "totalIssues": 4151,
+    "issuesByType": {
+      "tap-target-small": 1930,
+      "tap-target-inline-link": 2221
+    },
+    "byViewport": {
+      "320x568": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 306,
+        "blockingIssues": 134
+      },
+      "360x800": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 328,
+        "blockingIssues": 138
+      },
+      "375x812": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 337,
+        "blockingIssues": 138
+      },
+      "390x844": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 347,
+        "blockingIssues": 140
+      },
+      "430x932": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 352,
+        "blockingIssues": 140
+      },
+      "768x1024": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 615,
+        "blockingIssues": 310
+      },
+      "1280x720": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 622,
+        "blockingIssues": 310
+      },
+      "1440x900": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 622,
+        "blockingIssues": 310
+      },
+      "1920x1080": {
+        "pages": 41,
+        "horizontalScrollPages": 0,
+        "issues": 622,
+        "blockingIssues": 310
+      }
+    }
+  },
+  "note": "results（全288組合せの明細）は audit-<label>.json 側にのみ保存する（Git管理外）。ここでは種類＋要素セレクタ単位に集約した結果を記録する。",
+  "issueGroups": [
+    {
+      "type": "tap-target-small",
+      "selector": "header.sticky.top-0.z-20.border-b > div.mx-auto.flex.max-w-5xl.flex-wrap > div.flex.shrink-0.items-center.gap-1 > nav.hidden.shrink-0.items-center.gap-1 > a.rounded-full.px-4.py-2.text-sm",
+      "occurrences": 656,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/",
+        "/dashboard",
+        "/data-status",
+        "/people",
+        "/questions",
+        "/bills",
+        "/bills/votes",
+        "/committees"
+      ],
+      "pathCount": 41,
+      "sizes": [
+        "88x36",
+        "102x36",
+        "130x36",
+        "60x36"
+      ],
+      "sampleText": "議員一覧"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.mt-4.space-y-3.mt-2 > div.rounded-lg.border.border-outline-variant.p-3 > ul.mt-1.space-y-1 > li.text-on-surface-variant > a.break-words.text-primary.underline",
+      "occurrences": 562,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/timeline"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "195x33",
+        "193x17",
+        "200x33",
+        "204x33",
+        "193x33"
+      ],
+      "sampleText": "延岡市議会 総括質疑及び一般質問通告書（中城 あかね）"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "ol.relative.space-y-3.border-l.border-outline-variant > li.relative > p.mt-0.5.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 472,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity/m24",
+        "/council-activity/m18"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "229x33",
+        "223x33",
+        "235x33",
+        "234x33",
+        "232x33"
+      ],
+      "sampleText": "令和8年第26回定例会（第2号 6月23日） 宮田博徳君（一般質問）"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.flex.min-h-svh.flex-col.overflow-x-hidden > header.sticky.top-0.z-20.border-b > div.mx-auto.flex.max-w-5xl.flex-wrap > div.flex.shrink-0.items-center.gap-1 > a.flex.shrink-0.items-center.gap-1.5",
+      "occurrences": 369,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/",
+        "/dashboard",
+        "/data-status",
+        "/people",
+        "/questions",
+        "/bills",
+        "/bills/votes",
+        "/committees"
+      ],
+      "pathCount": 41,
+      "sizes": [
+        "74x36"
+      ],
+      "sampleText": "検索"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "footer.mt-8.border-t.border-outline-variant.px-4 > div.mx-auto.max-w-5xl.space-y-2.text-center > div.space-y-1.5.text-xs.leading-relaxed.text-on-surface-variant > p > a.rounded.text-on-surface-variant.underline.hover:text-on-surface",
+      "occurrences": 369,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/",
+        "/dashboard",
+        "/data-status",
+        "/people",
+        "/questions",
+        "/bills",
+        "/bills/votes",
+        "/committees"
+      ],
+      "pathCount": 41,
+      "sizes": [
+        "108x17"
+      ],
+      "sampleText": "情報提供・訂正依頼"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "occurrences": 342,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard",
+        "/data-status",
+        "/people",
+        "/bills",
+        "/finance/budget",
+        "/timeline",
+        "/compare",
+        "/council-activity"
+      ],
+      "pathCount": 23,
+      "sizes": [
+        "36x16",
+        "72x16",
+        "120x16",
+        "48x16",
+        "83x16"
+      ],
+      "sampleText": "ホーム"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "occurrences": 189,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/committees",
+        "/finance",
+        "/elections",
+        "/elections/election-mayor-2025",
+        "/mayor",
+        "/mayor/policy-progress",
+        "/questions/gq2026-06-m24",
+        "/questions/gq2026-06-m17"
+      ],
+      "pathCount": 13,
+      "sizes": [
+        "36x16",
+        "72x16",
+        "119x16",
+        "108x16"
+      ],
+      "sampleText": "ホーム"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-3 > li.rounded-lg.border.border-outline-variant.p-3 > div.mt-2.flex.flex-wrap.gap-3 > a.font-medium.text-primary.underline.focus-visible:outline",
+      "occurrences": 54,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity/m24",
+        "/council-activity/m18"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "99x16",
+        "207x16",
+        "171x16"
+      ],
+      "sampleText": "算定方法を見る →"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-3.rounded-lg.bg-surface-container-low.p-3 > p.mt-1.5 > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 51,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "227x37",
+        "108x17",
+        "270x37",
+        "282x37",
+        "294x37"
+      ],
+      "sampleText": "三浦久知公式サイト"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-2.text-sm > li > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 47,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "255x40",
+        "247x40",
+        "252x40",
+        "283x40",
+        "289x40"
+      ],
+      "sampleText": "関連する市長記者会見：令和8年8月21日市長定例記者会見"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li.rounded-lg.border.border-outline-variant.p-3 > dl.mt-2.grid.grid-cols-1.gap-x-3 > div > dd.inline > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 45,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors/aoki-yoshisuke",
+        "/mayors/miura-hisatomo",
+        "/mayors/fusano-hiroshi"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "51x17",
+        "63x17"
+      ],
+      "sampleText": "三浦 虎雄"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.text-sm.leading-relaxed.text-on-surface-variant > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 36,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/questions/gq2026-06-m24",
+        "/questions/gq2026-06-m17",
+        "/questions/gq2026-06-m14",
+        "/questions/gq2026-06-m08"
+      ],
+      "pathCount": 4,
+      "sizes": [
+        "254x43",
+        "283x43",
+        "129x20",
+        "143x20"
+      ],
+      "sampleText": "宮田 博徳議員のページ"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-2.5 > li > a.inline-flex.flex-wrap.items-center.gap-1.5",
+      "occurrences": 36,
+      "viewports": [
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "258x20",
+        "454x20"
+      ],
+      "sampleText": "三浦久知公式サイト 市長本人の進捗公表"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.px-4.py-4.sm:px-6 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/questions",
+        "/bills/votes",
+        "/mayors"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "36x16"
+      ],
+      "sampleText": "ホーム"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "ol.mt-2.space-y-1.5.text-sm > li > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "68x17",
+        "61x17",
+        "55x17"
+      ],
+      "sampleText": "議案第130号"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "main#main-content > div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > div.flex.flex-wrap.gap-2 > button.rounded-full.px-4.py-2.text-sm",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x36",
+        "88x36",
+        "130x36"
+      ],
+      "sampleText": "すべて"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "section.rounded-2xl.bg-surface-container-low.p-5.shadow-e1 > dl.mt-3.grid.grid-cols-1.gap-x-3 > div > dd.inline > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/bill-fy2026-general-account-supplementary-budget-2",
+        "/bills/bill-auditor-appointment-2026-06",
+        "/bills/bill-bridge-repair-contract-2026-06"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "97x17"
+      ],
+      "sampleText": "令和8年6月定例会"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > div.rounded-2xl.bg-gradient-to-br.from-primary-container.to-surface-container-low > div.flex.flex-wrap.items-center.gap-2 > a.text-xs.text-on-primary-container/80.hover:underline.focus-visible:outline",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "216x16",
+        "204x16",
+        "144x16"
+      ],
+      "sampleText": "全ての子どもたちの可能性を伸ばします"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-2.5 > li > p.mt-0.5.text-xs.text-on-surface-variant > a.underline.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "168x17"
+      ],
+      "sampleText": "延岡市公式サイト「施政方針」"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.text-xs.leading-relaxed.text-on-surface-variant > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "48x17",
+        "288x37"
+      ],
+      "sampleText": "編集方針"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "main#main-content > div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > p.px-1.text-xs.text-on-surface-variant > a.ml-1.text-primary.underline.focus-visible:outline",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3",
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "268x33",
+        "228x17"
+      ],
+      "sampleText": "延岡市公式サイト「市長公約の進捗状況」"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.rounded-lg.border.border-outline-variant.p-3 > dd.mt-1.text-sm.text-on-surface > ul.space-y-1 > li > a.text-primary.underline",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors/aoki-yoshisuke",
+        "/mayors/miura-hisatomo",
+        "/mayors/fusano-hiroshi"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "132x20"
+      ],
+      "sampleText": "1956年 延岡市長選挙"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-2.text-xs.leading-relaxed.text-on-surface-variant > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 27,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors/aoki-yoshisuke",
+        "/mayors/miura-hisatomo",
+        "/mayors/fusano-hiroshi"
+      ],
+      "pathCount": 3,
+      "sizes": [
+        "48x17",
+        "299x37",
+        "323x37"
+      ],
+      "sampleText": "市政年表"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-3.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline",
+      "occurrences": 26,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "246x37",
+        "84x17",
+        "108x17",
+        "72x17",
+        "306x37"
+      ],
+      "sampleText": "活動指標の算定方法"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "ul.space-y-2 > li.rounded-lg.border.border-outline-variant.p-3 > p.mt-1.text-xs.leading-relaxed.text-on-surface-variant > span > a.font-medium.text-primary.underline",
+      "occurrences": 23,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "42x17",
+        "223x37",
+        "227x37",
+        "229x37",
+        "216x37"
+      ],
+      "sampleText": "公約1-1"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-3.text-xs.leading-relaxed.text-on-surface-variant > li.rounded-lg.border.border-outline-variant.p-3 > div.flex.flex-wrap.items-baseline.gap-x-2 > a.break-words.font-medium.text-primary.underline",
+      "occurrences": 23,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections/election-mayor-2025"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "230x39",
+        "270x39",
+        "261x20",
+        "285x39",
+        "289x20"
+      ],
+      "sampleText": "延岡市長選挙 - 2025年07月20日投票 | 選挙ドットコム"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.mt-2.space-y-1.5 > li.rounded-lg.bg-surface-container-high.px-3.py-2 > div.flex.items-center.justify-between.gap-2 > a.min-w-0.truncate.text-on-surface.hover:underline",
+      "occurrences": 22,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity/m24",
+        "/council-activity/m18"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "185x20",
+        "225x20",
+        "240x20",
+        "255x20",
+        "295x20"
+      ],
+      "sampleText": "議案第9号 令和5年度延岡市一般会計補正予算に対する再議"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > p.rounded-xl.bg-surface-container-low.p-3.text-xs > a.mx-1.text-primary.underline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "256x37",
+        "240x17",
+        "209x17",
+        "304x37",
+        "316x37"
+      ],
+      "sampleText": "歴代議長・副議長（2001〜2012年分）"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.mb-4.rounded-lg.bg-surface-container-low.p-3 > dl.mt-2.grid.grid-cols-1.gap-2 > div > dd.text-sm.text-on-surface > a.font-medium.text-primary.underline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "140x20",
+        "112x20"
+      ],
+      "sampleText": "議員活動バロメーター"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "tbody > tr.border-t.border-outline-variant > td.px-3.py-2.5.text-on-surface.[font-variant-numeric:tabular-nums] > span > a.ml-2.text-xs.text-primary.underline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections/election-mayor-2025"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "84x17",
+        "96x17"
+      ],
+      "sampleText": "市長情報を見る"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.grid.grid-cols-1.gap-3.sm:grid-cols-2 > div.rounded-lg.border.border-gray-200.p-3 > a.mt-1.inline-block.text-xs.font-medium",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity/m24",
+        "/council-activity/m18"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "99x16"
+      ],
+      "sampleText": "算定方法を見る →"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-3 > li.rounded-lg.border.border-outline-variant.p-3 > div.flex.flex-wrap.items-center.justify-between > a.font-medium.text-on-surface.hover:underline.focus-visible:outline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity/m24"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "112x24",
+        "208x24"
+      ],
+      "sampleText": "総務政策委員会"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.text-sm.leading-relaxed.text-on-surface > a.font-medium.text-primary.underline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/methodology/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "140x20",
+        "98x20"
+      ],
+      "sampleText": "議員活動バロメーター"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.rounded-2xl.bg-surface-container-low.p-5.shadow-e1 > dl.mt-3.grid.grid-cols-1.gap-x-4 > div > dd.text-on-surface > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes/2019-06-gian-10",
+        "/bills/votes/2019-06-chinjo-1"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "98x20"
+      ],
+      "sampleText": "総務政策委員会"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.min-w-0.flex-1 > div.mt-1 > div.text-sm.text-on-surface > p > a.font-medium.text-primary.underline.focus-visible:outline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills/votes/2019-06-gian-10",
+        "/bills/votes/2019-06-chinjo-1"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "98x20"
+      ],
+      "sampleText": "総務政策委員会"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "li > ul.mt-0.5.space-y-0.5 > li.flex.flex-wrap.items-baseline.gap-x-2 > details.w-full > summary.cursor-pointer.text-xs.text-primary.underline",
+      "occurrences": 18,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1",
+        "/mayor/policy-progress/4-3"
+      ],
+      "pathCount": 2,
+      "sizes": [
+        "232x16",
+        "272x16",
+        "287x16",
+        "302x16",
+        "342x16"
+      ],
+      "sampleText": "根拠を見る"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li > ul.mt-0.5.list-disc.space-y-1.pl-5 > li > span.mt-0.5.block > a.font-medium.text-primary.underline",
+      "occurrences": 17,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections/election-mayor-2025"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "180x37",
+        "204x17",
+        "204x37",
+        "240x37",
+        "252x37"
+      ],
+      "sampleText": "この項目に対応する公約の進捗を見る"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "ul.space-y-2 > li.rounded-lg.bg-surface-container-low.p-3 > p.mt-0.5.text-xs.leading-relaxed.text-on-surface-variant > span > a.font-medium.text-primary.underline",
+      "occurrences": 15,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "42x17",
+        "221x37",
+        "270x37",
+        "281x37",
+        "294x37"
+      ],
+      "sampleText": "公約3-1"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "main#main-content > div.flex-1 > div.px-4.py-4.sm:px-6 > p.mt-6.px-1.text-xs.leading-relaxed > a.mx-1.text-primary.underline.focus-visible:outline",
+      "occurrences": 14,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayors"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "280x37",
+        "84x17",
+        "316x37",
+        "328x37",
+        "330x37"
+      ],
+      "sampleText": "市長情報ページ"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-3.rounded-lg.border.border-outline-variant > p.mt-2.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.text-primary.underline",
+      "occurrences": 12,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x17",
+        "268x37",
+        "280x37",
+        "292x37"
+      ],
+      "sampleText": "財政課ページ"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-4 > ul.mt-2.space-y-1.5 > li.rounded-lg.bg-surface-container-high.px-3.py-2 > a.ml-2.text-primary.underline.focus-visible:outline",
+      "occurrences": 10,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity/m18"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x17",
+        "337x33",
+        "330x33"
+      ],
+      "sampleText": "会議録を見る"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-3.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x17"
+      ],
+      "sampleText": "延岡市の財政"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-3.text-xs.text-on-surface-variant > a.rounded.text-primary.underline.focus-visible:outline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/dashboard"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "243x33",
+        "285x33",
+        "304x33",
+        "323x33",
+        "335x17"
+      ],
+      "sampleText": "延岡市議会 会派役員及び所属議員名簿（令和8年5月8日現在）"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > dl.space-y-2.text-xs.leading-relaxed.text-on-surface-variant > div.rounded-lg.bg-surface-container-low.p-3 > dd.mt-0.5 > a.mx-1.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "144x17",
+        "267x37"
+      ],
+      "sampleText": "議会活動データの算定方法"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-3.text-xs.leading-relaxed.text-on-surface-variant > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "156x17",
+        "288x37",
+        "360x37",
+        "670x37"
+      ],
+      "sampleText": "広報のべおか文字起こし検索"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mb-3.rounded-lg.border.border-outline-variant > p.mt-1.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.font-medium.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "108x17"
+      ],
+      "sampleText": "市長公約の進捗状況"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-3.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "120x17"
+      ],
+      "sampleText": "議員活動バロメーター"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-4.text-xs.leading-relaxed.text-on-surface-variant > a.font-medium.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/data-status"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "84x17",
+        "300x37",
+        "930x37"
+      ],
+      "sampleText": "算定方法ページ"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2 > a.block.w-full.py-1.text-left",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/questions"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "256x30",
+        "296x30",
+        "311x30",
+        "326x30",
+        "366x30"
+      ],
+      "sampleText": "猪之鼻 哲議員の一般質問"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > div.mb-1.rounded-xl.bg-surface-container-low.p-4 > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/bills"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "62x17"
+      ],
+      "sampleText": "/bills/votes"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "main#main-content > div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > p.rounded-xl.bg-surface-container-low.p-3.text-xs > a.mx-1.text-primary.underline.focus-visible:outline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/committees"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "132x17",
+        "309x37",
+        "333x37",
+        "363x37"
+      ],
+      "sampleText": "歴代議長・副議長ページ"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li#budget-revision-fy2026-initial > div.flex.flex-wrap.items-baseline.justify-between > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "68x17"
+      ],
+      "sampleText": "議案第129号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li#budget-revision-fy2026-mar-1 > div.flex.flex-wrap.items-baseline.justify-between > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "68x17"
+      ],
+      "sampleText": "議案第169号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li#budget-revision-fy2026-jun-1 > div.flex.flex-wrap.items-baseline.justify-between > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "55x17"
+      ],
+      "sampleText": "議案第5号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li#budget-revision-fy2026-jun-2 > div.flex.flex-wrap.items-baseline.justify-between > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "61x17"
+      ],
+      "sampleText": "議案第20号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li#budget-revision-fy2026-sep-1 > div.flex.flex-wrap.items-baseline.justify-between > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "61x17"
+      ],
+      "sampleText": "議案第29号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li#budget-revision-fy2026-sep-2 > div.flex.flex-wrap.items-baseline.justify-between > p.text-xs.text-on-surface-variant > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "61x17"
+      ],
+      "sampleText": "議案第49号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "dl.space-y-1 > div.flex.flex-wrap.gap-x-2 > dd.text-on-surface > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x20"
+      ],
+      "sampleText": "議案第49号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "dl.mt-2.space-y-2.text-sm > div > dd.text-on-surface > span > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "72x20"
+      ],
+      "sampleText": "議案第49号"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-3.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.text-primary.underline.focus-visible:outline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "96x17",
+        "291x37"
+      ],
+      "sampleText": "年度別財政の比較"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > div.rounded-2xl.bg-gradient-to-br.from-primary-container.to-surface-container-low > p.mt-2.text-sm.leading-relaxed.text-on-primary-container/80 > a.mx-1.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance/budget"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "242x43",
+        "270x43",
+        "298x43",
+        "312x43",
+        "252x20"
+      ],
+      "sampleText": "延岡市の財政（単年度ダッシュボード）"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div > label.mb-3.flex.min-h-[44px].w-fit > input.h-4.w-4.rounded.border-outline-variant",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance/budget"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "16x16"
+      ],
+      "sampleText": ""
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mb-3.flex.items-center.justify-between > a.shrink-0.text-xs.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance/budget"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "167x16"
+      ],
+      "sampleText": "この年度のタイムラインを見る"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > p.px-1.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/finance/budget"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "279x37",
+        "96x17"
+      ],
+      "sampleText": "予算・決算の比較"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "input#election-name-search",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "136x38",
+        "176x38",
+        "191x38",
+        "206x38",
+        "246x38"
+      ],
+      "sampleText": ""
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "main#main-content > div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > div.flex.flex-wrap.items-center.gap-2 > button.shrink-0.rounded-full.bg-surface-container-high.px-4",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "144x36"
+      ],
+      "sampleText": "新しい順（切替）"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-3.text-xs.leading-relaxed.text-on-surface-variant > li.rounded-lg.border.border-outline-variant.p-3 > details.mt-2.rounded-lg.bg-surface-container-low.p-3 > summary.cursor-pointer.text-xs.font-medium.text-on-surface",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections/election-mayor-2025"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "206x32",
+        "246x32",
+        "261x32",
+        "276x32",
+        "316x32"
+      ],
+      "sampleText": "この資料に載っていた政策（みうら 久知、12項目）を読む"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "ul.space-y-3.text-xs.leading-relaxed.text-on-surface-variant > li.rounded-lg.border.border-outline-variant.p-3 > details.mt-2.rounded-lg.bg-surface-container-low.p-3 > p.mt-1.5 > a.mx-1.font-medium.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/elections/election-mayor-2025"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "196x37",
+        "108x17",
+        "268x37"
+      ],
+      "sampleText": "市長公約の進捗状況"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mt-4.text-xs.leading-relaxed.text-on-surface-variant > a.underline.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "204x17"
+      ],
+      "sampleText": "延岡市公式「市長の資産などの公開」"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "main#main-content > div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > p.px-1.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.text-primary.underline.focus-visible:outline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compare"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "280x37",
+        "84x17"
+      ],
+      "sampleText": "延岡市政の年表"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.mx-auto.max-w-4xl.space-y-4.px-4 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "36x16"
+      ],
+      "sampleText": "ホーム"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > div.rounded-2xl.p-5.sm:p-6.border > p.mt-3.border-t.border-gray-200.pt-3 > a.font-medium.text-primary.underline.focus-visible:outline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "108x17",
+        "347x37",
+        "669x37"
+      ],
+      "sampleText": "活動指標の算定方法"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > p.mb-3.text-xs.leading-relaxed.text-on-surface-variant > a.mx-1.font-medium.text-primary.underline",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/methodology/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "156x17",
+        "291x37",
+        "315x37"
+      ],
+      "sampleText": "データ収録状況ページの凡例"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.space-y-3 > li.rounded-lg.bg-surface-container-high.p-3.text-sm > a.mt-1.inline-block.text-xs.text-primary",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/1-1"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "232x32",
+        "272x32",
+        "287x32",
+        "302x32",
+        "342x32"
+      ],
+      "sampleText": "出典：広報のべおか2026年4月号 p.4、施政方針（令和8年度）p.6（2026-04-01）"
+    },
+    {
+      "type": "tap-target-inline-link",
+      "selector": "li.rounded-lg.border.border-outline-variant.p-3 > dl.mt-1.space-y-0.5.text-xs.leading-relaxed > div > dd.inline > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
+      "occurrences": 9,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/mayor/policy-progress/2-3"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "61x17"
+      ],
+      "sampleText": "議案第29号"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "table.w-full.min-w-[560px].border-collapse.text-sm > thead > tr.border-b.border-outline-variant.text-left.text-xs > th.px-3.py-2.text-right.font-medium > button.inline-flex.min-h-11.items-center.rounded",
+      "occurrences": 8,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/compensation"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "36x44",
+        "24x44"
+      ],
+      "sampleText": "市長 ▼"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2 > button.block.w-full.py-1.text-left",
+      "occurrences": 6,
+      "viewports": [
+        "390x844",
+        "430x932",
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/questions"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "326x30",
+        "366x30",
+        "680x30",
+        "936x30"
+      ],
+      "sampleText": "子育て支援、婚活支援、治水対策 ほか4項目"
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "ul.space-y-2 > li.rounded-lg.p-3.border.border-gray-200 > div.flex.items-center.justify-between.gap-2 > label.flex.min-h-11.items-center.gap-1.5 > input.h-4.w-4",
+      "occurrences": 5,
+      "viewports": [
+        "320x568",
+        "360x800",
+        "375x812",
+        "390x844",
+        "430x932"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "16x16"
+      ],
+      "sampleText": ""
+    },
+    {
+      "type": "tap-target-small",
+      "selector": "tbody > tr.border-b.border-gray-100.align-middle.dark:border-outline-variant/60 > td.whitespace-nowrap.py-2.pr-2 > label.flex.min-h-11.w-11.cursor-pointer > input.h-4.w-4",
+      "occurrences": 4,
+      "viewports": [
+        "768x1024",
+        "1280x720",
+        "1440x900",
+        "1920x1080"
+      ],
+      "paths": [
+        "/council-activity"
+      ],
+      "pathCount": 1,
+      "sizes": [
+        "16x16"
+      ],
+      "sampleText": ""
+    }
+  ]
+}

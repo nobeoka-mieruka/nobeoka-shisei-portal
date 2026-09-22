@@ -87,6 +87,10 @@ const PAGES = [
   { path: "/compare", kind: "index" },
   { path: "/compensation", kind: "index" },
   { path: "/council-activity", kind: "index" },
+  // 議員活動の記録（会期単位）：一般質問実施率の分子・分母、会期ごとの内訳、議長の「対象外」表示
+  { path: "/council-activity/m24", kind: "council-activity-member" },
+  { path: "/council-activity/m18", kind: "council-activity-member" },
+  { path: "/methodology/council-activity", kind: "index" },
   // 議員詳細（3件以上）
   { path: "/members/m01", kind: "member-detail" },
   { path: "/members/m02", kind: "member-detail" },
