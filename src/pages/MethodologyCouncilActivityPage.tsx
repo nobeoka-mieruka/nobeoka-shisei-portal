@@ -14,6 +14,8 @@ import {
 } from "../lib/councilActivityBarometer";
 import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../lib/evidenceAvailability";
 import { classifyTopicToThemeSlug } from "../lib/themeClassification";
+import billProposalRolesData from "../data/billProposalRoles.json";
+import committeeReportActivityData from "../data/committeeReportActivity.json";
 import speechSummaryData from "../data/councilSpeechSummaries.json";
 import { QUESTION_LIKE_SPEECH_TYPES } from "../lib/questionLikeSpeechTypes";
 
@@ -53,19 +55,21 @@ const AXES = [
   {
     indicatorId: "attendance",
     label: "出席状況",
-    definition: "本会議・委員会ごとの出席記録を確認できた割合。",
-    formula: "出席回数 ÷ 出席対象会議数 × 100",
-    sourceTypes: "現時点で該当なし（一次資料未収録）",
-    source: "出席記録（本サイトは現時点で個別の出席記録を収録していないため、常に「対象記録なし」）",
-    targetPeriod: "（データ未収録のため算定対象期間なし）",
-    missingDataPolicy: "本サイトが個別出席記録を一切収録していないため、全議員が常に「対象記録なし」（missing）。0件にはしない。",
-    exclusionRule: "該当なし。",
+    definition:
+      "本会議・委員会に議員一人ひとりが出席したかどうかは、数値にしていません。議員別の出席・欠席名簿を、複数の公開資料経路を調査しましたが確認できていないためです（延岡市議会が公表していないと断定するものではありません）。",
+    formula: "算定していません。出席率・出席回数のいずれも表示しません。",
+    sourceTypes: "議員別の出席・欠席を示す一次資料を確認できていない",
+    source:
+      "記名投票が行われた議案では、投票した議員の氏名が会議録・「のべおか市議会だより」に記録されています。ただしこれはその日その議案の投票に加わった記録であり、会期全体の出席状況ではないため、出席として数えていません。",
+    targetPeriod: "（算定していないため対象期間なし）",
+    missingDataPolicy: "全議員を「対象記録なし」とします。欠席が0件という意味でも、出席が0件という意味でもありません。",
+    exclusionRule: "該当なし（算定自体を行っていないため）。",
   },
   {
     indicatorId: "voting",
     label: "議案等の意思表示",
     definition:
-      "公開されている記名採決のうち、賛成・反対・棄権・欠席等の意思表示が確認できた議案の割合。賛成・反対どちらであるかを評価するものではない。",
+      "公開されている記名採決のうち、賛成・反対・棄権・欠席等の意思表示が確認できた議案の数を、対象議案数とあわせて示します。割合を0〜100の値へ換算して他の項目と並べることはしません。賛成・反対どちらであるかを評価するものでもありません。",
     formula: "意思表示を確認できた議案数／対象議案数（分子・分母をそのまま示す。賛否の内容は数値化しない）",
     sourceTypes: "一次資料（議案ごとの賛否・会議録）",
     source: "議案ごとの賛否（議案賛否データ）",
@@ -77,24 +81,27 @@ const AXES = [
   {
     indicatorId: "proposal",
     label: "請願・提案等",
-    definition: "議案提出、修正案提出、請願・陳情の紹介、賛成・反対討論、動議、要望・政策提案、委員長報告等が確認できた件数。",
-    formula: "確認できた提案・討論等の件数を基に算定（現在データ整備中）",
-    sourceTypes: "現時点で該当なし（一次資料未収録）",
-    source: "議案・条例・請願・陳情アーカイブ（現時点では議員別の提案者情報が未収録のため「対象記録なし」）",
-    targetPeriod: "（データ未収録のため算定対象期間なし）",
-    missingDataPolicy: "議員別の提案者・紹介議員情報を一切収録していないため、全議員が常に「対象記録なし」（missing）。0件にはしない。",
-    exclusionRule: "該当なし。",
+    definition:
+      "会議録に議員名が記載されていて個人に帰属できるものだけを、実数のまま掲載しています。対象は「決議の提出者」と「本会議での委員長・副委員長報告」の2種類で、これらを合成した割合や点数は算定していません。",
+    formula: "算定していません。確認できた件数をそれぞれ別の実数として表示します。",
+    sourceTypes: "一次資料（会議録本文）",
+    source: "議員提出決議の提案理由説明（決議の提出者）、本会議での委員長・副委員長報告（会議録から氏名を機械的に確認・登録）",
+    targetPeriod: "会議録本文を取得・確認できた会期",
+    missingDataPolicy:
+      "条例案・意見書等の提出者と、請願・陳情の紹介議員は、議員別に収録できていないため「確認中」と表示します。0件ではありません。レーダー用の指標としては全議員を「対象記録なし」とします。",
+    exclusionRule:
+      "委員会での質疑は会議録の委員長報告に「委員より」とだけ記録され、誰の発言かを特定できないため、件数に加えず「個人別の記録なし」として扱います。",
   },
   {
     indicatorId: "disclosure",
     label: "情報発信・プロフィール充足度",
     definition:
       "議員本人の能力・活動量ではなく、ポータル上で確認できるプロフィール情報（経歴、所属会派、所属委員会、当選回数、公式ページ・SNS、一般質問履歴、議案賛否履歴等）の充足状況。SNSを利用していないこと自体を低評価とするものではない。",
-    formula: "確認できた項目数 ÷ 確認対象項目数 × 100",
+    formula: "確認できた項目数／確認対象項目数（分子・分母をそのまま示す）",
     sourceTypes: "一次資料＋準一次資料（議員プロフィール・本人確認済みSNS）",
     source: "議員プロフィール（現職議員データ・元議員データ・議員プロフィールデータ等）",
     targetPeriod: "現時点のプロフィール情報（期間の概念はなし）",
-    missingDataPolicy: "確認対象項目自体が定義できない場合のみ「対象記録なし」。通常は必ず0〜100の実値が算定される（未記入も「確認した結果」として扱う）。",
+    missingDataPolicy: "確認対象項目自体が定義できない場合のみ「対象記録なし」。通常は必ず分子・分母が確定する（未記入も「確認した結果」として扱う）。",
     exclusionRule: "該当なし。",
   },
 ] as const;
@@ -122,6 +129,13 @@ export function MethodologyCouncilActivityPage() {
   });
   const evidenceSummary = getEvidenceAvailabilitySummary();
   const chairpersonEntries = entries.filter((e) => isCouncilChairperson(e.member));
+  // 「請願・提案等」で個人に帰属できている記録の件数。手書きせず実データから数える。
+  const decisionSubmitterRecordCount = (billProposalRolesData as { roles: { role: string }[] }).roles.filter(
+    (r) => r.role === "submitter",
+  ).length;
+  const committeeReportRecordCount = (committeeReportActivityData as { events: { memberId?: string }[] }).events.filter(
+    (e) => !!e.memberId,
+  ).length;
   // テーマ分類の到達率は、手書きの数値を置かずにこのページで都度数える（辞書を更新すれば自動で変わる）。
   const topicClassification = (() => {
     let total = 0;
@@ -345,7 +359,7 @@ export function MethodologyCouncilActivityPage() {
 
       <SectionCard title="現在データが不足している項目">
         <p className="text-sm leading-relaxed text-on-surface">
-          「出席状況」「請願・提案等」の2項目は、本サイトが現時点でこれらの一次データ（個別の出席記録、議員別の提案者情報）を収録できていないため、全ての議員で「対象記録なし」と表示されます。「議案等の意思表示」は、議員個人の議案賛否内訳が登録されている議案が、現在の任期では{currentTermNamedVoteBillCount}件（記名投票）のみのため、その範囲でしか判定できません。現職議員{entries.length}名は全員この記名投票の対象だったため{entries.length}名とも算定できますが、対象議案がごく少数である点にご留意ください。なお、現在の任期より前に行われた記名投票は、当時まだ在職していなかった議員が不利に見えてしまうため、この項目の対象に含めていません。これは議員個人の活動が確認できないという意味ではなく、本サイトのデータ整備がまだ追いついていないことを示しています。データが収録され次第、順次反映します。
+          「出席状況」は、議員別の出席・欠席名簿を複数の公開資料経路で調査しましたが確認できていないため、数値にしていません（全議員で「対象記録なし」）。「請願・提案等」は、会議録に議員名が記載されている記録（決議の提出者{decisionSubmitterRecordCount}件、本会議での委員長・副委員長報告{committeeReportRecordCount}件）を実数として掲載していますが、条例案・意見書等の提出者と請願・陳情の紹介議員は議員別に収録できていないため、指標としては「対象記録なし」のまま扱っています。「議案等の意思表示」は、議員個人の議案賛否内訳が登録されている議案が、現在の任期では{currentTermNamedVoteBillCount}件（記名投票）のみのため、その範囲でしか判定できません。現職議員{entries.length}名は全員この記名投票の対象だったため{entries.length}名とも算定できますが、対象議案がごく少数である点にご留意ください。なお、現在の任期より前に行われた記名投票は、当時まだ在職していなかった議員が不利に見えてしまうため、この項目の対象に含めていません。これは議員個人の活動が確認できないという意味ではなく、本サイトのデータ整備がまだ追いついていないことを示しています。データが収録され次第、順次反映します。
         </p>
       </SectionCard>
 

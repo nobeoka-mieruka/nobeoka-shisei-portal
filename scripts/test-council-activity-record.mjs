@@ -224,4 +224,67 @@ check("実データ：議長は対象外、他の議員は同じ分母で算定�
   assert.ok(confirmed.length > 0, "会議録を確認できた会期が1件もありません");
 });
 
+// --- 算定していない項目の記述が、実装・実データと食い違っていないこと ---
+console.log("");
+console.log("事実表示へ揃えた項目の記述");
+
+check("算定していない項目に、計算式を書き残していない", () => {
+  const radar = readSrc("src/lib/activityRadar.ts");
+  const page = readSrc("src/pages/MethodologyCouncilActivityPage.tsx");
+  // 出席状況は議員別の出席・欠席名簿を確認できておらず、一度も算定していない。
+  // 「出席回数 ÷ 出席対象会議数 × 100」のような式を残すと、算定しているように読めてしまう。
+  assert.ok(!radar.includes("出席回数 ÷ 出席対象会議数"), "出席状況に計算式が残っています");
+  assert.ok(!page.includes("出席回数 ÷ 出席対象会議数"), "算定方法ページに出席状況の計算式が残っています");
+  assert.ok(!page.includes("現在データ整備中"), "「データ整備中」のまま放置された算定式が残っています");
+  // 割合として算定しなくなった項目に、÷…×100 の式を残さない。
+  // （一般質問実施率と再質問の確認率は、分子・分母を併記したうえで割合を出しているため対象外。）
+  for (const stale of [
+    "意思表示を確認できた議案数 ÷ 対象議案数 × 100",
+    "確認できた項目数 ÷ 確認対象項目数 × 100",
+  ]) {
+    assert.ok(!radar.includes(stale), `算定をやめた項目の式が残っています: ${stale}`);
+    assert.ok(!page.includes(stale), `算定方法ページに古い式が残っています: ${stale}`);
+  }
+});
+
+check("「請願・提案等」を、登録済みの記録があるのに未収録と書いていない", () => {
+  const roles = readJson("src/data/billProposalRoles.json").roles.filter((r) => r.role === "submitter");
+  const reports = readJson("src/data/committeeReportActivity.json").events.filter((e) => e.memberId);
+  // 決議の提出者・委員長報告は会議録から氏名を確認して登録済みで、サイト上でも実数を出している。
+  assert.ok(roles.length > 0, "決議の提出者が1件も登録されていません（前提が変わった可能性）");
+  assert.ok(reports.length > 0, "委員長・副委員長報告が1件も登録されていません（前提が変わった可能性）");
+
+  const radar = readSrc("src/lib/activityRadar.ts");
+  const page = readSrc("src/pages/MethodologyCouncilActivityPage.tsx");
+  assert.ok(
+    !radar.includes("議案・条例・請願・陳情アーカイブ（未収録）"),
+    "登録済みの記録があるのに、出典を「未収録」と書いています",
+  );
+  assert.ok(
+    !page.includes("議員別の提案者・紹介議員情報を一切収録していない"),
+    "登録済みの記録があるのに、「一切収録していない」と書いています",
+  );
+  // 収録できていない範囲（条例案等の提出者・紹介議員）は、引き続き明示する。
+  assert.match(page, /紹介議員/, "収録できていない範囲の説明が消えています");
+});
+
+check("出席状況を「公表されていない」と断定していない", () => {
+  // 調査して確認できなかったことと、市議会が出していないことは別である。
+  // 過去に委員会の記録でこの2つを取り違えた誤りがあり、同じ書き方を繰り返さない。
+  // （この区別を全体で見張るのは scripts/test-committee-publication-claim.mjs）
+  const radar = readSrc("src/lib/activityRadar.ts");
+  const page = readSrc("src/pages/MethodologyCouncilActivityPage.tsx");
+  for (const [name, src] of [["activityRadar.ts", radar], ["算定方法ページ", page]]) {
+    // 出席と公表の両方に触れている文だけを取り出し、必ず但し書きが付いていることを確かめる。
+    const sentences = src.split("。").filter((t) => t.includes("出席") && t.includes("公表"));
+    for (const sentence of sentences) {
+      assert.ok(
+        sentence.includes("断定するものではありません") || sentence.includes("確認できていない"),
+        `${name} が、出席記録を公表されていないと断定しています: ${sentence.trim().slice(0, 60)}`,
+      );
+    }
+  }
+  assert.match(page, /断定するものではありません/, "確認できていないことの但し書きが必要です");
+});
+
 console.log(`\n${passCount}件成功\n`);

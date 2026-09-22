@@ -180,8 +180,10 @@ export function calculateAttendanceIndex(): RadarMetric {
     key: "attendance",
     label: "出席状況",
     value: null,
-    description: "本会議・委員会ごとの出席記録を確認できた割合を示す項目です。",
-    methodNote: "出席回数 ÷ 出席対象会議数 × 100（公務・病気・議長職等の公式な欠席理由が確認できる場合は注記します）。",
+    description:
+      "本会議・委員会に議員一人ひとりが出席したかどうかの記録です。議員別の出席・欠席名簿を確認できていないため、数値にしていません。",
+    methodNote:
+      "算定していません。出席率・出席回数のいずれも表示しません（欠席が0件という意味でも、出席が0件という意味でもありません）。",
     sourceLabel: "出席記録（複数の公開資料経路を調査しましたが、議員別の出席・欠席名簿を確認できていません）",
     dataStatus: "missing",
   };
@@ -198,7 +200,7 @@ export function calculateVotingDisclosureIndex(numerator: number, denominator: n
     key: "voting",
     label: "議案等の意思表示",
     description: "公開されている記名採決のうち、この議員の賛否・棄権・欠席等の意思表示が確認できた議案の割合です。賛成・反対どちらであるかを評価するものではありません。",
-    methodNote: "意思表示を確認できた議案数 ÷ 対象議案数 × 100（賛成・反対の内容は得点化しない）。",
+    methodNote: "意思表示を確認できた議案数／対象議案数（分子・分母をそのまま示します。賛成・反対の内容は数値化しません）。",
     sourceLabel: "議案ごとの賛否（議案賛否データ）",
     updatedAt,
   };
@@ -225,9 +227,10 @@ export function calculateProposalActivityIndex(): RadarMetric {
     key: "proposal",
     label: "提案・討論等",
     value: null,
-    description: "議案提出、修正案提出、請願・陳情の紹介、賛成・反対討論、動議、要望・政策提案、委員長報告等が確認できた件数を示す項目です。",
-    methodNote: "確認できた提案・討論等の件数を基に算定します（現在データ整備中）。",
-    sourceLabel: "議案・条例・請願・陳情アーカイブ（未収録）",
+    description:
+      "会議録に議員名が記載されている「決議の提出者」と「本会議での委員長・副委員長報告」は、実数として別途掲載しています。条例案・意見書等の提出者と請願・陳情の紹介議員は議員別に収録できていないため、この項目としては算定していません。",
+    methodNote: "算定していません。確認できた件数は、合成せずそれぞれ別の実数として表示します。",
+    sourceLabel: "会議録本文（決議の提出者・委員長報告は登録済み。条例案等の提出者と紹介議員は議員別に未収録）",
     dataStatus: "missing",
   };
 }
@@ -249,7 +252,7 @@ export function calculateInformationDisclosureIndex(
     key: "disclosure",
     label: "情報公開",
     description: "経歴、所属会派、所属委員会、当選回数、公式ページ・SNS、一般質問履歴、議案賛否履歴など、ポータル上で確認できるプロフィール情報の充足状況です。SNSを利用していないこと自体を低評価とするものではありません。",
-    methodNote: "確認できた項目数 ÷ 確認対象項目数 × 100。",
+    methodNote: "確認できた項目数／確認対象項目数（分子・分母をそのまま示します）。",
     sourceLabel: "議員プロフィール（現職議員データ等）",
     updatedAt,
   };
