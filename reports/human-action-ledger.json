@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21",
+  "generatedAt": "2026-09-22",
   "note": "残課題の運用台帳。件数を減らすことを目的にしていない。一次資料が確認できない項目は、維持することが正しい状態である。運用者向けの記録であり、市民向けページへはそのまま出さない（citizenLabelの表現だけを使う）。",
   "definitions": {
     "warning": "validate:data が出力する [WARN] の件数。データの誤りではなく、一次資料の不足に起因する未確認項目。",
@@ -37,7 +37,7 @@
       "reason": "令和8年5月臨時会・6月定例会の会議録が公開されたため、当初の対象24件のvoteMethod・committeeは会議録本文から確認・登録を完了した（2026-09-05）。残る未確認は、令和8年9月定例会の議案第48号（2026-09-gian-48）1件で、同会期の会議録が会議録検索システムにまだ登場していないためである（同じ理由・同じ待ち方のため、本タスクで引き続き管理する）。",
       "requiredAction": "waiting_for_publication",
       "sourceCandidate": "令和8年9月定例会分の公開時期は未定（会議録の公開スケジュールは公式サイトで個別公表されていないため、時期を推定せず、日次の自動巡回で登場を待つ）",
-      "lastCheckedAt": "2026-09-20",
+      "lastCheckedAt": "2026-09-21",
       "priority": "high",
       "blocksRelease": false,
       "blocksDataPublication": true,
