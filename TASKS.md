@@ -19,7 +19,8 @@ DONE 106／BLOCKED 12／READY 0／IN_PROGRESS 0（残差は分割管理のみの
 （2026-09-21・Phase276時点：TASK-195「類似団体比較の将来負担比率の母数明示」をDONEとして追加）
 （2026-09-21・Phase277時点：TASK-196「年度別人口の基準日をそろえる」をDONEとして追加）
 （2026-09-21・Phase278時点：TASK-197「令和8年9月定例会の閉会登録と議案の出典切れ解消」をDONEとして追加）
-／`### TASK-`見出し総数150（2026-09-21に実データから再集計：DONE 135／BLOCKED 11／READY 0／IN_PROGRESS 0）
+（2026-09-22・Phase279時点：TASK-198「議会活動の指標を会期単位の公開記録に限定」をDONEとして追加）
+／`### TASK-`見出し総数153（2026-09-22に実データから再集計：DONE 138／BLOCKED 11／READY 0／IN_PROGRESS 0）
 
 READY・IN_PROGRESSともに0件。BLOCKED 11件（2026-09-21再集計。上の「12件」は2026-08-17時点の値）
 のうち6件は一次資料の不存在・未公表・環境制約が
@@ -11039,3 +11040,74 @@ FY2026の基準日を2026-09-01へ戻すと `validate:data` が
 `Committee` 型のコメントに「予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会等、
 会期ごとに議長を除く全議員で構成・設置される臨時の委員会は対象外（委員名簿に個別掲載されないため）」と
 明記されており、`committeeId` も「現行名簿に無い委員会（活動終了した特別委員会等）の場合はnull」と定義されている。
+
+### TASK-198 議会活動の指標を「会期単位の公開記録」に限定し、残りを事実表示へ（Phase279）
+
+状態：DONE（2026-09-22）
+優先度：A（合成した指数と、資料が無いことを0のように見せる表示が残っていたため）
+対象：`src/lib/councilActivityRecord.ts`（新規）、`src/lib/councilActivityBarometer.ts`、
+`src/lib/activityRadar.ts`、`src/lib/evidenceAvailability.ts`、
+`src/components/council/CouncilActivityRecordSection.tsx`（新規）、
+`src/components/council/ActivityRadarSection.tsx`、`src/pages/MemberDetailPage.tsx`、
+`src/pages/CouncilActivityPage.tsx`、`src/pages/CouncilActivityMemberPage.tsx`、
+`src/pages/MethodologyCouncilActivityPage.tsx`（`MethodologyActivityRadarPage.tsx`から改称）、
+`src/App.tsx`、`src/lib/seo.ts`、`public/_redirects`、
+`scripts/test-council-activity-record.mjs`（新規）、`scripts/audit-responsive.mjs`
+
+#### 1. なぜ会期単位だけを数値にしたか
+
+会議録から要約を取り込めた量が会期によって大きく異なる（1登壇あたり1.2件〜10.7件）。
+質問項目数や再質問数をそのまま並べると、議員の活動ではなく**当サイトの整備状況**を
+議員間の差として見せてしまう。「その会期に質問に立ったか」は記録の薄い会期でも残るため、
+会期単位であれば全議員を同じ条件で数えられる。件数は参考の実数として併記するにとどめた。
+
+実装したのは6つの独立した値（合算しない）。
+一般質問が可能だった会期／一般質問を行った会期／一般質問実施率／質問項目／
+再質問を確認できた質問／再質問の確認率。
+
+#### 2. 合成した指数の撤去
+
+`calculateSpeechActivityIndex` にあった
+`(会期比×50) + (log正規化した項目数×50)` という独自の合成をやめ、`value: null` と実数のみにした。
+議案等の意思表示・情報発信も、分子と分母をそのまま示す形へ変更。
+
+一覧の横棒グラフは、表示中の行の最大値（`Math.max(1, ...filteredRows)`）で長さを決めていたため、
+絞り込みを変えると同じ議員の見た目が変わっていた。固定の基準値へ置き換えた。
+
+`/council-activity` の比較欄は、レーダーチャートを並べる方式から、
+実施率と分子・分母を並べる事実比較へ変更した。
+
+#### 3. 議長の扱い
+
+議長は会議の進行役を務めるため一般質問を行わない慣例がある。議長在任期間を実施率の
+分母から除外し、0%ではなく「対象外」と理由付きで表示する。
+判定は `profile` を「。」で分割した要素に「議長」が含まれるかで行い、「副議長」を
+取り違えないことをテストで固定した。
+
+#### 4. 0件と欠損の区別
+
+`evidenceAvailability` に `not_individually_attributable`（個人別の記録なし）を追加。
+表示側は7つの状態（確認済み／一部のみ確認／確認した結果0件／未取得／公式資料が未公表／
+個人別の記録なし／対象外）を別々の言葉で出し、どれも0件としては表示しない。
+
+#### 5. 算定方法ページの改称
+
+`/methodology/activity-radar` → `/methodology/council-activity`。
+旧URLは `public/_redirects` の301とSPA側の `Navigate` の両方で維持する。
+対象資料・対象期間・一般質問実施率・再質問の確認率・欠損の扱い・議長在任期間の扱い・
+個人への帰属ルール・テーマの分類方法・更新のタイミングを公開した。
+テーマの未分類率は手書きせず、ページを開くたびに辞書から数え直している。
+
+レーダーチャートは、個人に帰属できる一次資料が十分にそろうまで公開しない。
+軸の大半が「対象記録なし」のまま描くと、資料が無いことが活動が少ないことのように見えるため。
+
+#### 6. テスト
+
+`scripts/test-council-activity-record.mjs`（11件）を追加し、`npm test` へ登録した。
+議長の分母除外／就任前会期の除外／確認した結果0件と対象外の区別／未取得・未公表・
+個人帰属不能の語彙／再質問の確認率／分母0で0%と出さないこと／同じ入力なら常に同じ値に
+なること／一覧の棒グラフが他議員の最大値で決まらないこと／会議録が増えたときの再計算／
+会期ごとの内訳から会議録へ到達できること、を固定している。
+
+`scripts/audit-responsive.mjs` の対象ページへ
+`/council-activity/m24`、`/council-activity/m18`（議長）、`/methodology/council-activity` を追加した。
