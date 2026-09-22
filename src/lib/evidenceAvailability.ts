@@ -75,7 +75,7 @@ export const EVIDENCE_AVAILABILITY_DESCRIPTIONS_JA: Record<EvidenceAvailabilityC
     "複数の公開資料の経路を調査しましたが、該当する記録を確認できませんでした。資料が存在しないと断定するものではありません。",
   not_individually_attributable:
     "公表された記録はありますが、誰の行為かが分かる形では記載されていません。委員会の質疑が「委員より」とだけ記録される場合などが当たります。行っていないという意味ではありません。",
-  not_applicable: "対象期間・対象者に本来該当しないため、確認の対象になりません（欠席・0点として扱いません）。",
+  not_applicable: "対象期間・対象者に本来該当しないため、確認の対象になりません（欠席・0件として扱いません）。",
   unknown: "現時点で状態を分類できていません。",
 };
 

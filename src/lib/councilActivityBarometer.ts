@@ -699,7 +699,7 @@ export function topByRawValue(entries: MemberActivityEntry[], key: string, n: nu
 
 /**
  * 選挙時得票（参考情報）。現行任期の選挙（令和5年4月23日執行）でこの議員が候補者として
- * 記録されている場合のみ返す。活動指標スコアには一切含めない、参考表示専用の値。
+ * 記録されている場合のみ返す。議会活動の記録には一切含めない、参考表示専用の値。
  */
 export interface ElectionVoteReference {
   electionName: string;

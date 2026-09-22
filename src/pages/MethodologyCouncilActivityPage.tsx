@@ -35,7 +35,7 @@ const AXES = [
     sourceTypes: "一次資料（会議録本文）",
     source: "会議録本文（会議録の発言要約データ）",
     targetPeriod: "現職議員：会議録取得済みの全会期／元議員：在職・発言を確認できた会期のみ",
-    missingDataPolicy: "対象会期数が0（＝在職・会議録取得済みの会期が無い）の場合のみ「対象記録なし」とする。0点として扱わない。",
+    missingDataPolicy: "対象会期数が0（＝在職・会議録取得済みの会期が無い）の場合のみ「対象記録なし」とする。0件として扱わない。",
     exclusionRule: "会議録が未公開の会期は分母からも分子からも除外する（「質問しなかった」とみなさない）。",
   },
   {
@@ -58,7 +58,7 @@ const AXES = [
     sourceTypes: "現時点で該当なし（一次資料未収録）",
     source: "出席記録（本サイトは現時点で個別の出席記録を収録していないため、常に「対象記録なし」）",
     targetPeriod: "（データ未収録のため算定対象期間なし）",
-    missingDataPolicy: "本サイトが個別出席記録を一切収録していないため、全議員が常に「対象記録なし」（missing）。0点にはしない。",
+    missingDataPolicy: "本サイトが個別出席記録を一切収録していないため、全議員が常に「対象記録なし」（missing）。0件にはしない。",
     exclusionRule: "該当なし。",
   },
   {
@@ -71,7 +71,7 @@ const AXES = [
     source: "議案ごとの賛否（議案賛否データ）",
     targetPeriod: "議員個人の賛否内訳（memberVotes）が登録されている議案が対象",
     missingDataPolicy:
-      "対象議案が0件（＝その議員について意思表示が確認できた議案が1件も無い）の場合は「対象記録なし」とする。0点として扱わない。",
+      "対象議案が0件（＝その議員について意思表示が確認できた議案が1件も無い）の場合は「対象記録なし」とする。0件として扱わない。",
     exclusionRule: "個人別の賛否内訳が登録されていない議案（起立採決など）は、分母（対象議案数）に含めない。",
   },
   {
@@ -82,7 +82,7 @@ const AXES = [
     sourceTypes: "現時点で該当なし（一次資料未収録）",
     source: "議案・条例・請願・陳情アーカイブ（現時点では議員別の提案者情報が未収録のため「対象記録なし」）",
     targetPeriod: "（データ未収録のため算定対象期間なし）",
-    missingDataPolicy: "議員別の提案者・紹介議員情報を一切収録していないため、全議員が常に「対象記録なし」（missing）。0点にはしない。",
+    missingDataPolicy: "議員別の提案者・紹介議員情報を一切収録していないため、全議員が常に「対象記録なし」（missing）。0件にはしない。",
     exclusionRule: "該当なし。",
   },
   {
@@ -226,7 +226,7 @@ export function MethodologyCouncilActivityPage() {
         </dl>
       </SectionCard>
 
-      <SectionCard title="「0点」と「対象外」は別物です">
+      <SectionCard title="「0件」と「対象外」は別物です">
         <p className="text-sm leading-relaxed text-on-surface">
           本サイトでは、次の状態を明確に区別しています。0件（該当する活動が確認された結果として本当に0件）を、資料が無いために評価できない「対象外」と混同して表示することはありません。
         </p>
@@ -254,7 +254,7 @@ export function MethodologyCouncilActivityPage() {
           <Link to="/data-status" className="font-medium text-primary underline">
             データ収録状況
           </Link>
-          ページでは、指標が「対象記録なし」になっている理由を、次の4つの状態文言で市民向けに説明しています。これらはスコアではなく、資料の収録状況の説明です。資料が公開されていない項目を0点として扱うことはありません。
+          ページでは、指標が「対象記録なし」になっている理由を、次の4つの状態文言で市民向けに説明しています。これらは点数ではなく、資料の収録状況の説明です。資料が公開されていない項目を0件として扱うことはありません。
         </p>
         <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
           {(["confirmed", "partial", "research_exhausted", "waiting_external"] as const).map((code) => (
