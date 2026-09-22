@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T01:22:24.930Z",
+  "generatedAt": "2026-09-22T06:46:05.267Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -15,11 +15,11 @@
     "note": "出典URLの形式・公式ドメイン主張の整合性を検証（validate:sources）。warningsは分類コードごとの内訳（warningsByCode）で意味が異なる。MISSING_TITLEだけが「出典タイトルの欠落」で、NON_NOBEOKA_PUBLIC_DOMAINは国立国会図書館など延岡市以外の公的機関の資料を一次資料として使っている件数（出典情報は揃っており、欠落ではない）。infoは二次資料・Wayback経由公式資料の使用通知（異常ではない）。"
   },
   "linkHealth": {
-    "generatedAt": "2026-08-25T01:30:40.927Z",
-    "totalChecked": 1228,
-    "ok": 1212,
-    "redirect": 12,
-    "notFound404": 1,
+    "generatedAt": "2026-09-22T06:28:42.999Z",
+    "totalChecked": 1344,
+    "ok": 1309,
+    "redirect": 13,
+    "notFound404": 19,
     "serverError": 0,
     "broken": [
       {
@@ -30,13 +30,174 @@
         ],
         "category": "not_found_404",
         "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2703.pdf",
+        "files": [
+          "kohoNobeokaIssues.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27613.pdf",
+        "files": [
+          "archivePolicies.json",
+          "archivePolicyQuestionRelations.json",
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27614.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27615.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27617.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27618.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27619.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27620.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27621.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27622.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27623.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27624.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27625.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27626.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27627.pdf",
+        "files": [
+          "councilWatchedDocuments.json",
+          "generalQuestions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28682.pdf",
+        "files": [
+          "councilWatchedDocuments.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28811.pdf",
+        "files": [
+          "councilDocumentSources.json",
+          "councilSessions.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
+      },
+      {
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28937.pdf",
+        "files": [
+          "councilWatchedDocuments.json"
+        ],
+        "category": "not_found_404",
+        "status": 404
       }
     ],
     "excludedBackupOnlyReferences": 148,
     "note": "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち後継資料への移行を一次資料で確認済みの2件（councilWatchedDocuments.json、Phase135-Rで確認、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
   },
   "publicExposure": {
-    "generatedAt": "2026-09-22T01:16:19.948Z",
+    "generatedAt": "2026-09-22T06:44:34.133Z",
     "checkedPages": 2319,
     "clickableBrokenLinks": 0,
     "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"
