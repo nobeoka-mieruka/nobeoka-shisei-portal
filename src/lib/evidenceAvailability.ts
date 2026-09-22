@@ -26,6 +26,12 @@ export type EvidenceAvailabilityCode =
   | "waiting_external"
   | "source_not_published"
   | "research_exhausted"
+  /**
+   * 記録そのものは公表されているが、誰の行為かが分からない状態。
+   * 例：委員会の質疑は会議録の委員長報告に載るが「委員より」と匿名で記録されるため、
+   * どの議員の発言かを特定できない。「していない」でも「未収録」でもない。
+   */
+  | "not_individually_attributable"
   | "not_applicable"
   | "unknown";
 
@@ -37,6 +43,7 @@ export const EVIDENCE_AVAILABILITY_CODES: readonly EvidenceAvailabilityCode[] = 
   "waiting_external",
   "source_not_published",
   "research_exhausted",
+  "not_individually_attributable",
   "not_applicable",
   "unknown",
 ];
@@ -50,6 +57,7 @@ export const EVIDENCE_AVAILABILITY_LABELS_JA: Record<EvidenceAvailabilityCode, s
   waiting_external: "公式資料公開待ち",
   source_not_published: "資料未公表",
   research_exhausted: "公開資料から確認できず",
+  not_individually_attributable: "個人別の記録なし",
   not_applicable: "対象外",
   unknown: "不明",
 };
@@ -65,6 +73,8 @@ export const EVIDENCE_AVAILABILITY_DESCRIPTIONS_JA: Record<EvidenceAvailabilityC
   source_not_published: "情報源となる公式資料自体が、まだ公表されていません。",
   research_exhausted:
     "複数の公開資料の経路を調査しましたが、該当する記録を確認できませんでした。資料が存在しないと断定するものではありません。",
+  not_individually_attributable:
+    "公表された記録はありますが、誰の行為かが分かる形では記載されていません。委員会の質疑が「委員より」とだけ記録される場合などが当たります。行っていないという意味ではありません。",
   not_applicable: "対象期間・対象者に本来該当しないため、確認の対象になりません（欠席・0点として扱いません）。",
   unknown: "現時点で状態を分類できていません。",
 };
@@ -91,6 +101,7 @@ export const EVIDENCE_AVAILABILITY_SYMBOLS: Record<EvidenceAvailabilityCode, str
   waiting_external: "…",
   source_not_published: "…",
   research_exhausted: "―",
+  not_individually_attributable: "△",
   not_applicable: "・",
   unknown: "？",
 };

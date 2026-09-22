@@ -31,7 +31,6 @@ import {
   findMemberSpeechRecord,
   isArchiveSpeech,
   publicSpeeches,
-  currentTermPublicSpeeches,
   aggregateMemberTopics,
   aggregateYearlySpeechCounts,
   findMemberSpeechAnalysis,
@@ -48,16 +47,7 @@ import { QuestionTopicChart } from "../components/council/QuestionTopicChart";
 import { YearlySpeechTrendChart } from "../components/council/YearlySpeechTrendChart";
 import { MemberSpeechAnalysisStatusBadge } from "../components/council/MemberSpeechAnalysisStatusBadge";
 import { ActivityRadarSection } from "../components/council/ActivityRadarSection";
-import {
-  calculateAttendanceIndex,
-  calculateInformationDisclosureIndex,
-  calculateProposalActivityIndex,
-  calculateQuestionActivityIndex,
-  calculateSpeechActivityIndex,
-  calculateVotingDisclosureIndex,
-  eligibleSessionIdsFor,
-} from "../lib/activityRadar";
-import { activityTargetPeriodLabel } from "../lib/councilActivityBarometer";
+import { activityTargetPeriodLabel, getMemberActivityMetrics } from "../lib/councilActivityBarometer";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
 import { Avatar } from "../components/Avatar";
 import { FactionChip } from "../components/FactionChip";
@@ -108,7 +98,6 @@ const billVotes = publicBills(billVotesData as BillVoteItem[]);
 // （27名分）のみ登録済みのため、その27名はレーダーチャートの「議案等の意思表示」に実値が入り、
 // それ以外の議員は対象記録なし（missing）として扱われる（議員個人が非公開なのではなく、
 // サイト側にこのデータをまだ十分収録できていないため）。
-const billsWithAnyMemberVoteDisclosed = billVotes.filter((b) => b.memberVotes.length > 0).length;
 const speechSummaryData = councilSpeechSummariesData as CouncilSpeechSummaryData;
 const memberSpeechAnalysisList = (memberSpeechAnalysisData as MemberSpeechAnalysisData).members;
 const citySpecialPosts = citySpecialPostsData as CitySpecialPost[];
@@ -340,28 +329,10 @@ export function MemberDetailPage() {
   // 公開データの共通基準による指数化であることをコンポーネント側でも明示している。
   // 旧任期の発言（speech.term:"previous"、TASK-005系）を現職memberIdへ追加した場合でも、
   // 現任期のみを対象とする指数を汚染しないよう、currentTermPublicSpeechesで明示的に絞り込む。
-  const radarEligibleSessions = eligibleSessionIdsFor({ isFormerMember: false });
-  const currentTermSpeechesForRadar = currentTermPublicSpeeches(speechRecord);
-  const radarMetrics = [
-    calculateQuestionActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
-    calculateSpeechActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, member.updatedAt ?? member.verifiedAt),
-    calculateAttendanceIndex(),
-    calculateVotingDisclosureIndex(memberAllBillVotes.length, billsWithAnyMemberVoteDisclosed),
-    calculateProposalActivityIndex(),
-    calculateInformationDisclosureIndex(
-      [
-        { label: "経歴", filled: isProfileConfirmed },
-        { label: "所属会派", filled: !!member.factionId },
-        { label: "所属委員会", filled: member.committees.length > 0 },
-        { label: "当選回数", filled: !!member.termCount },
-        { label: "公式ページ", filled: !!member.profileUrl },
-        { label: "SNS", filled: member.sns.length > 0 },
-        { label: "一般質問履歴", filled: memberQuestions.length > 0 || publishedMemberSpeeches.length > 0 },
-        { label: "議案賛否履歴", filled: memberAllBillVotes.length > 0 },
-      ],
-      member.updatedAt ?? member.verifiedAt,
-    ),
-  ];
+  // 指標は councilActivityBarometer の getMemberActivityMetrics を唯一の情報源とする。
+  // 以前はこのページで同じ計算を別に書いていたため、議員活動のページと値が食い違い、
+  // 議長を対象外にする扱いも反映されていなかった。
+  const radarMetrics = getMemberActivityMetrics(member);
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">

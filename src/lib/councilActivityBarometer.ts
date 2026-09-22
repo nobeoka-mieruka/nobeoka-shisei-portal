@@ -42,6 +42,8 @@ import {
   type EvidenceAvailabilityCode,
   type EvidenceAvailabilityEntry,
 } from "./evidenceAvailability";
+import questionCollectionStatusData from "../data/questionCollectionStatus.json";
+import { buildCouncilActivityRecord, type CouncilActivityRecord } from "./councilActivityRecord";
 
 /**
  * 「延岡市議会 議員活動バロメーター」（/council-activity、/council-activity/:memberId）用の
@@ -104,6 +106,55 @@ export interface MemberActivityEntry {
 }
 
 /**
+ * 議長かどうか。延岡市議会の公式プロフィールの記載から判定する。
+ *
+ * 議長は慣例として一般質問を行わず、常任委員会にも所属しない。そのため質問の実施を
+ * 測る指標では、0ではなく「対象外」として扱う必要がある（0にすると、役職に就いた
+ * ことが活動の少なさとして表示されてしまう）。
+ * 「副議長。」を議長と取り違えないよう、句点で区切った要素が丁度「議長」の場合だけを拾う。
+ */
+export function isCouncilChairperson(member: CouncilMember): boolean {
+  return (member.profile ?? "")
+    .split("。")
+    .map((part) => part.trim())
+    .includes("議長");
+}
+
+/** 議長を質問系の指標の対象外とする理由（市民向けの説明文）。 */
+const CHAIRPERSON_NOT_APPLICABLE_REASON =
+  "議長在任期間のため一般質問実施率の算定対象外です。議長は会議の進行役を務めるため一般質問を行わない慣例があり、活動が少ないという意味ではありません。";
+
+/**
+ * 公開記録による議会活動（①市政運営の監視・評価）を、議員1名分算定する。
+ *
+ * 議長については、一般質問を行わない慣例があるため、その会期を分母から外す。
+ * 現時点では議長の在任期間を示す一次資料が構造化されていないため、
+ * 公式プロフィールで議長と確認できる議員について、対象期間の全会期を分母から外す
+ * （途中就任・途中退任の切り分けは、在任期間の一次資料が整ってから行う）。
+ * 推測で期間を作らない。
+ */
+const questionCollectionStatus = questionCollectionStatusData as {
+  sessions: { sessionId: string; sessionTitle: string }[];
+};
+
+export function getMemberActivityRecord(member: CouncilMember): CouncilActivityRecord {
+  const speechRecord = findMemberSpeechRecord(speechSummaryData.members, member.id);
+  const speeches = currentTermPublicSpeeches(speechRecord);
+  const sessionTitleOf = (sessionId: string) =>
+    questionCollectionStatus.sessions.find((s) => s.sessionId === sessionId)?.sessionTitle ?? sessionId;
+  const all = radarEligibleSessions.map((sessionId) => ({ sessionId, sessionTitle: sessionTitleOf(sessionId) }));
+
+  if (isCouncilChairperson(member)) {
+    return buildCouncilActivityRecord(
+      speeches,
+      [],
+      all.map((s) => ({ ...s, reason: CHAIRPERSON_NOT_APPLICABLE_REASON })),
+    );
+  }
+  return buildCouncilActivityRecord(speeches, all, []);
+}
+
+/**
  * 指定した現職議員1名分の6指標を算定する。`MemberDetailPage.tsx`と全く同じ入力・同じ
  * calculate関数を使うため、議員詳細ページの値と常に一致する。
  */
@@ -121,7 +172,9 @@ export function getMemberActivityMetrics(member: CouncilMember): RadarMetric[] {
   const updatedAt = member.updatedAt ?? member.verifiedAt;
 
   return [
-    calculateQuestionActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt),
+    calculateQuestionActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt, {
+      notApplicableReason: isCouncilChairperson(member) ? CHAIRPERSON_NOT_APPLICABLE_REASON : undefined,
+    }),
     calculateSpeechActivityIndex(currentTermSpeechesForRadar, radarEligibleSessions, updatedAt),
     calculateAttendanceIndex(),
     calculateVotingDisclosureIndex(memberBillVotesInCurrentTerm.length, billsWithAnyMemberVoteDisclosed),

@@ -15,7 +15,17 @@ import { QUESTION_LIKE_SPEECH_TYPES } from "./questionLikeSpeechTypes";
  * （呼び出し側は value===null を「未収録」として表示し、0を実データとして描画しない）。
  */
 
-export type RadarDataStatus = "complete" | "partial" | "missing";
+/**
+ * 指標の算定状態。
+ *
+ * - complete … 算定できた（値が0であっても「確認した結果0」の意味）
+ * - partial … 一部の資料だけで算定した
+ * - missing … 資料が未収録・未公開で算定できない（0ではない）
+ * - not-applicable … 制度上その議員に当てはまらないため算定しない
+ *   （例：議長は慣例として一般質問を行わないため、質問の実施を測る指標の対象外）
+ *   0点として描画してはならない。
+ */
+export type RadarDataStatus = "complete" | "partial" | "missing" | "not-applicable";
 
 export interface RadarMetric {
   key: string;
@@ -34,6 +44,10 @@ export interface RadarMetric {
   sourceLabel: string;
   updatedAt?: string;
   dataStatus: RadarDataStatus;
+  /** 延岡市議会基本条例のうち、この指標が対応する条。市民へ根拠として示す。 */
+  ordinanceBasis?: string;
+  /** not-applicable のときに、なぜ対象外なのかを市民向けに説明する文。 */
+  notApplicableReason?: string;
 }
 
 /**
@@ -71,22 +85,39 @@ function publicQuestionLikeSpeeches(speeches: CouncilSpeech[]): CouncilSpeech[] 
 }
 
 /**
- * 1. 一般質問：対象会期のうち、一般質問（代表質問等含む）を行った会期の割合。
- * 「一般質問を行った定例会数 ÷ 質問可能だった定例会数 × 100」。
+ * 市政運営の監視・評価（延岡市議会基本条例 第2条第1号）。
+ *
+ * 会議録を確認できた定例会のうち、本会議で質問・質疑に立ったことが確認できた会期の割合。
+ *
+ * **会期単位で数える理由**：質問項目数や再質問数は、会議録から要約を抽出できた量に左右される。
+ * 実際に、会議録を取得済みでも要約が途中の会期があり、1登壇あたりの記録量が会期によって
+ * 1.2件〜10.7件と開きがある。件数を指標にすると、議員の活動ではなく当サイトの整備状況を
+ * 表示することになる。「その会期に登壇したかどうか」は記録が薄い会期でも確実に残るため、
+ * 会期単位であれば全議員を同じ条件で比べられる。
+ *
+ * 分母は「会議録を確認できた会期数」という固定値で、他の議員の活動によって変動しない。
  */
 export function calculateQuestionActivityIndex(
   speeches: CouncilSpeech[],
   eligibleSessionIds: string[],
   updatedAt?: string,
+  options?: { notApplicableReason?: string },
 ): RadarMetric {
   const base = {
     key: "question",
-    label: "一般質問",
-    description: "在職中に会議録を取得・確認できた定例会のうち、一般質問・代表質問等を行ったことが確認できた会期の割合です。",
-    methodNote: "確認できた質問会期数 ÷ 対象会期数 × 100（在職中かつ会議録取得済みの定例会のみを分母とする）。",
-    sourceLabel: "会議録本文（会議録の発言要約データ）",
+    label: "市政運営の監視・評価",
+    description:
+      "会議録を確認できた定例会のうち、本会議で質問・質疑に立ったことが確認できた会期の割合です。質問の回数や長さ、内容の良し悪しは含みません。",
+    methodNote:
+      "質問・質疑を確認できた会期数 ÷ 会議録を確認できた会期数 × 100。会議録が未公開の会期は分母に含めません。",
+    sourceLabel: "延岡市議会 会議録（本会議）",
+    ordinanceBasis: "延岡市議会基本条例 第2条第1号（市長等が行う市政の運営状況を公正に監視、評価すること）",
     updatedAt,
   };
+  // 制度上その議員に当てはまらない場合は、0ではなく「対象外」として扱う。
+  if (options?.notApplicableReason) {
+    return { ...base, value: null, dataStatus: "not-applicable", notApplicableReason: options.notApplicableReason };
+  }
   if (eligibleSessionIds.length === 0) {
     return { ...base, value: null, dataStatus: "missing" };
   }
@@ -98,8 +129,17 @@ export function calculateQuestionActivityIndex(
 }
 
 /**
- * 2. 議会発言：発言した会期の割合（配分50%）と、質問項目数の対数正規化（配分50%）を組み合わせる。
- * 長文・多数項目の発言だけが有利にならないよう、項目数は上限20件で対数変換して頭打ちにする。
+ * 議会での発言量（事実の実数）。
+ *
+ * 以前は「発言した会期の割合×50 ＋ 質問項目数を上限20件で対数正規化×50」という
+ * 合成値を返していたが、この重み付け・上限・対数変換には出典がなく、当サイトが作った
+ * 独自の採点だった。実測でも26名中23名が上限で頭打ちになり、質問項目135件の議員と
+ * 26件の議員が同じ値になっていた。前半の会期割合は「市政運営の監視・評価」と
+ * 分子・分母が完全に同じで、重複した軸でもあった。
+ *
+ * 現在は点数を作らず、会議録から確認できた質問項目の実数だけを返す。
+ * 会議録の要約は会期によって抽出量に差があるため、この実数は議員どうしの比較には
+ * 使わず、その議員について確認できた記録の量として示す。
  */
 export function calculateSpeechActivityIndex(
   speeches: CouncilSpeech[],
@@ -108,34 +148,20 @@ export function calculateSpeechActivityIndex(
 ): RadarMetric {
   const base = {
     key: "speech",
-    label: "議会発言",
-    description: "会議録を取得・確認できた会期のうち、発言（一般質問等）が確認できた会期の割合と、確認できた質問項目数を組み合わせた指数です。長い発言ほど高得点にならないよう、項目数は上限を設けて頭打ちにしています。",
-    methodNote: "（発言確認会期数÷対象会期数×50）＋（質問項目数を上限20件でlog正規化した値×50）。",
-    sourceLabel: "会議録本文（会議録の発言要約データ）",
+    label: "議会での発言量",
+    description:
+      "会議録から確認できた質問項目の件数です。点数ではありません。会議録の要約は会期によって抽出できた量に差があるため、議員どうしを比べる数値としては扱いません。",
+    methodNote: "会議録で確認できた質問項目の実数（点数化・正規化はしていません）。",
+    sourceLabel: "延岡市議会 会議録（本会議）",
     updatedAt,
   };
   if (eligibleSessionIds.length === 0) {
     return { ...base, value: null, dataStatus: "missing" };
   }
   const published = publicQuestionLikeSpeeches(speeches);
-  const activeSessions = new Set(published.map((s) => s.sessionId));
-  const numerator = eligibleSessionIds.filter((id) => activeSessions.has(id)).length;
-  const denominator = eligibleSessionIds.length;
-  const coverageComponent = (numerator / denominator) * 50;
-
-  const CAP = 20;
   const totalItems = published.reduce((sum, s) => sum + s.questionItems.length, 0);
-  const volumeComponent = totalItems > 0 ? (Math.log(1 + Math.min(totalItems, CAP)) / Math.log(1 + CAP)) * 50 : 0;
-
-  const value = clamp0to100(coverageComponent + volumeComponent);
-  return {
-    ...base,
-    value,
-    rawValue: totalItems,
-    numerator,
-    denominator,
-    dataStatus: "complete",
-  };
+  // 点数（value）は作らない。確認できた実数だけを持たせる。
+  return { ...base, value: null, rawValue: totalItems, dataStatus: "complete" };
 }
 
 /**
@@ -183,8 +209,10 @@ export function calculateVotingDisclosureIndex(numerator: number, denominator: n
       dataStatus: "missing",
     };
   }
-  const value = clamp0to100((numerator / denominator) * 100);
-  return { ...base, value, numerator, denominator, dataStatus: numerator > 0 ? "complete" : "missing" };
+  // 点数にはしない。延岡市議会の採決は簡易採決が大半で、個人別の賛否が公表された議案は
+  // ごくわずかしかない。割合にすると分母が小さすぎて全員が同じ値になるか、
+  // 在職期間の差だけで差がついてしまう。確認できた件数と対象件数をそのまま示す。
+  return { ...base, value: null, numerator, denominator, dataStatus: numerator > 0 ? "complete" : "missing" };
 }
 
 /**
@@ -230,14 +258,16 @@ export function calculateInformationDisclosureIndex(
   }
   const numerator = checklist.filter((c) => c.filled).length;
   const denominator = checklist.length;
-  const value = clamp0to100((numerator / denominator) * 100);
+  // 8項目の選定は当サイトの設計で、延岡市議会基本条例に根拠があるものではない。
+  // 割合にすると条例に根拠のない項目（SNSの有無など）が指標として並んでしまうため、
+  // 点数は作らず、確認できた項目数をそのまま示す。
   // チェックリストの各項目は「確認済みか否か」を必ず判定できるため、結果が0件（未記入が多い）
   // であっても、それは「データが無くて算定できない」のではなく「確認した結果0件だった」という
   // 確定した値である。したがってchecklist自体が空（算定不能）の場合のみmissingとし、
   // それ以外は常にcompleteとして扱う（valueをそのまま実データとして表示する）。
   return {
     ...base,
-    value,
+    value: null,
     numerator,
     denominator,
     dataStatus: "complete",

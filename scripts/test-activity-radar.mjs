@@ -194,33 +194,33 @@ test("対象会期が0件のとき missing", () => {
   assert.equal(m.dataStatus, "missing");
   assert.equal(m.value, null);
 });
-test("100を超えない・NaNにならない（大量の質問項目でも頭打ち）", () => {
+test("点数を作らない（合成した指数を返さない）", () => {
+  // 以前は「発言会期率×50 ＋ 質問項目数を上限20件で対数正規化×50」という合成値を
+  // 返していたが、この重み付け・上限・対数変換には出典がなく、当サイト独自の採点だった。
+  // 現在は点数を作らず、確認できた質問項目の実数だけを返す。
   const eligible = ["2023-06"];
-  const speeches = [makeSpeech("2023-06", "一般質問", 500)];
-  const m = calculateSpeechActivityIndex(speeches, eligible);
-  assert.ok(Number.isFinite(m.value));
-  assert.ok(m.value <= 100);
-  assert.ok(m.value >= 0);
+  const m = calculateSpeechActivityIndex([makeSpeech("2023-06", "一般質問", 500)], eligible);
+  assert.equal(m.value, null, "点数（value）を返してはいけない");
+  assert.equal(m.rawValue, 500, "確認できた質問項目の実数を返す");
+  assert.equal(m.dataStatus, "complete");
 });
-test("発言が全くなければ0以上100以下の値になる（NaNにならない）", () => {
-  const eligible = ["2023-06", "2023-09"];
-  const m = calculateSpeechActivityIndex([], eligible);
-  assert.ok(Number.isFinite(m.value));
-  assert.equal(m.value, 0);
+test("発言が全く無い場合も、実数0として扱い『未収録』にしない", () => {
+  const m = calculateSpeechActivityIndex([], ["2023-06", "2023-09"]);
+  assert.equal(m.value, null);
+  assert.equal(m.rawValue, 0, "確認した結果0件であることを示す");
+  assert.equal(m.dataStatus, "complete");
 });
-test("回帰防止：eligibleSessionIds外の会期の発言も質問項目数（volumeComponent）に加算される（呼び出し側で" +
-  "currentTermPublicSpeeches等により事前に絞り込む責任がある。旧任期発言を現職memberIdへ追加する場合、" +
-  "この関数自身はterm:previousを判定しないため、フィルタせずに渡すと現任期指数が汚染される）", () => {
+test("回帰防止：対象会期の外の発言も質問項目数に加算される（呼び出し側で事前に絞り込む責任がある）", () => {
+  // この関数自身は term:"previous" を判定しない。旧任期の発言を現職memberIdへ
+  // 追加する場合、フィルタせずに渡すと現任期の実数が汚染される。
   const eligible = ["2023-06"];
-  // 2019-03は対象外の会期（旧任期発言を想定）だが、この関数はeligibleSessionIdsに関わらず
-  // questionItemsを合算する仕様であることを明示するテスト。
   const previousTermSpeech = makeSpeech("2019-03", "一般質問", 10);
-  const withoutOldSpeech = calculateSpeechActivityIndex([], eligible);
-  const withOldSpeech = calculateSpeechActivityIndex([previousTermSpeech], eligible);
-  assert.equal(withoutOldSpeech.value, 0);
+  const without = calculateSpeechActivityIndex([], eligible);
+  const withOld = calculateSpeechActivityIndex([previousTermSpeech], eligible);
+  assert.equal(without.rawValue, 0);
   assert.ok(
-    withOldSpeech.value > withoutOldSpeech.value,
-    "対象期間外の発言でもvalueが増加する（=呼び出し側のフィルタが必須であることの裏付け）",
+    withOld.rawValue > without.rawValue,
+    "対象期間外の発言でも実数が増える（=呼び出し側のフィルタが必須であることの裏付け）",
   );
 });
 
@@ -242,13 +242,19 @@ test("対象議案が0件（サイト全体で議員別賛否データが未登�
   assert.equal(m.value, null);
   assert.equal(m.dataStatus, "missing");
 });
-test("対象議案があり本人の賛否が全て確認できれば100（賛否の内容自体は評価しない設計）", () => {
+test("点数にせず、確認できた件数と対象件数をそのまま返す", () => {
+  // 延岡市議会の採決は簡易採決が大半で、個人別の賛否が公表された議案はごくわずか。
+  // 割合にすると分母が小さすぎて全員が同じ値になるか、在職期間の差だけで差がつく。
   const m = calculateVotingDisclosureIndex(5, 5);
-  assert.equal(m.value, 100);
+  assert.equal(m.value, null, "点数（value）を返してはいけない");
+  assert.equal(m.numerator, 5);
+  assert.equal(m.denominator, 5);
+  assert.equal(m.dataStatus, "complete");
 });
-test("負の値にならない・100を超えない", () => {
-  const m = calculateVotingDisclosureIndex(3, 10);
-  assert.ok(m.value >= 0 && m.value <= 100);
+test("確認できた件数が0なら missing（0点にしない）", () => {
+  const m = calculateVotingDisclosureIndex(0, 10);
+  assert.equal(m.value, null);
+  assert.equal(m.dataStatus, "missing");
 });
 
 console.log("\ncalculateInformationDisclosureIndex");
@@ -262,21 +268,25 @@ test("全項目確認済みなら100・complete", () => {
     { label: "a", filled: true },
     { label: "b", filled: true },
   ]);
-  assert.equal(m.value, 100);
+  assert.equal(m.value, null, "情報公開は点数にしない（条例に根拠のある指標ではない）");
+  assert.equal(m.numerator, m.denominator, "確認できた項目数と対象項目数を返す");
   assert.equal(m.dataStatus, "complete");
 });
-test("一部のみ確認済みなら0〜100の間の値（項目自体は確認済みなのでcomplete）", () => {
+test("一部のみ確認済みなら、確認できた項目数と対象項目数を返す", () => {
   const m = calculateInformationDisclosureIndex([
     { label: "a", filled: true },
     { label: "b", filled: false },
   ]);
-  assert.equal(m.value, 50);
+  assert.equal(m.value, null, "点数にしない");
+  assert.equal(m.numerator, 1);
+  assert.equal(m.denominator, 2);
   assert.equal(m.dataStatus, "complete");
-  assert.ok(m.value > 0 && m.value < 100);
 });
-test("全項目未確認でも0点は「確認した結果0件」というcomplete扱い（missingにしない）", () => {
+test("全項目が未確認でも「確認した結果0件」として扱う（未収録にしない）", () => {
   const m = calculateInformationDisclosureIndex([{ label: "a", filled: false }]);
-  assert.equal(m.value, 0);
+  assert.equal(m.value, null);
+  assert.equal(m.numerator, 0, "確認した結果0件であることを示す");
+  assert.equal(m.denominator, 1);
   assert.equal(m.dataStatus, "complete");
 });
 
