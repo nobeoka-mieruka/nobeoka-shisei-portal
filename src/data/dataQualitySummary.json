@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T07:53:47.548Z",
+  "generatedAt": "2026-09-23T08:04:05.473Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -181,8 +181,8 @@
     "note": "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの18件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
   },
   "publicExposure": {
-    "generatedAt": "2026-09-23T07:14:08.500Z",
-    "checkedPages": 2319,
+    "generatedAt": "2026-09-23T07:55:40.025Z",
+    "checkedPages": 2312,
     "clickableBrokenLinks": 0,
     "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"
   },
