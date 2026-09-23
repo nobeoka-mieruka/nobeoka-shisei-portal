@@ -36,6 +36,7 @@ const MODULE_FILES = [
   "src/config/site.ts",
   "src/lib/archiveFinance.ts",
   "src/lib/archiveFinanceMetrics.ts",
+  "src/lib/financeSoundness.ts",
   "src/lib/archiveCouncilDocuments.ts",
   "src/lib/billVotes.ts",
   "src/lib/archiveTimeline.ts",
