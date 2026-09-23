@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T08:04:05.473Z",
+  "generatedAt": "2026-09-23T12:15:16.086Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -25,11 +25,11 @@
       {
         "url": "https://ja.wikipedia.org/wiki/仲田又次郎",
         "files": [
-          "archiveMayorTerms.json",
-          "dataQualitySummary.json"
+          "archiveMayorTerms.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "no_alternative"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2703.pdf",
@@ -37,7 +37,8 @@
           "kohoNobeokaIssues.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "no_alternative"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27613.pdf",
@@ -48,7 +49,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27614.pdf",
@@ -57,7 +59,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27615.pdf",
@@ -66,7 +69,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27617.pdf",
@@ -75,7 +79,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27618.pdf",
@@ -84,7 +89,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27619.pdf",
@@ -93,7 +99,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27620.pdf",
@@ -102,7 +109,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27621.pdf",
@@ -111,7 +119,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27622.pdf",
@@ -120,7 +129,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27623.pdf",
@@ -129,7 +139,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27624.pdf",
@@ -138,7 +149,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27625.pdf",
@@ -147,7 +159,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27626.pdf",
@@ -156,7 +169,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27627.pdf",
@@ -165,7 +179,8 @@
           "generalQuestions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_alternative_minutes"
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28811.pdf",
@@ -174,14 +189,15 @@
           "councilSessions.json"
         ],
         "category": "not_found_404",
-        "status": 404
+        "status": 404,
+        "disposition": "removed_with_successor_document"
       }
     ],
     "excludedBackupOnlyReferences": 150,
-    "note": "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの18件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。"
+    "note": "本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）と、市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの18件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）だけが参照するURLは対象外。到達できないURLは、公開元で掲載終了し代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示す。"
   },
   "publicExposure": {
-    "generatedAt": "2026-09-23T07:55:40.025Z",
+    "generatedAt": "2026-09-23T08:05:59.071Z",
     "checkedPages": 2312,
     "clickableBrokenLinks": 0,
     "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"

@@ -15,11 +15,11 @@
     "pageCount": null,
     "indexed": false,
     "researchStatus": "tested_pdftotext_sample",
-    "lastCheckedAt": "2026-08-16",
-    "httpStatus": 200,
+    "lastCheckedAt": "2026-09-23",
+    "httpStatus": 404,
     "sourceStatus": {
       "code": "SOURCE_DAMAGED",
-      "note": "原資料PDFの構造破損により閲覧・文字起こしができません。号自体が存在しないという意味ではありません。",
+      "note": "原資料PDFの構造破損により閲覧・文字起こしができません。号自体が存在しないという意味ではありません。 2026-09-23の確認では、延岡市公式サイトのこのURLは404（掲載終了）になっていた。破損していた同じファイルはInternet Archiveに残っている。",
       "investigatedAt": "2026-08-12",
       "investigatedPaths": [
         "延岡市公式サイトからの再取得（複数回、バイト単位で同一の破損状態を確認）",

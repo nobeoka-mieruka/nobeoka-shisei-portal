@@ -225,7 +225,14 @@ interface DataQualitySummary {
     redirect: number;
     notFound404: number;
     serverError: number;
-    broken: { url: string; files: string[]; category: string; status: number | null }[];
+    broken: {
+      url: string;
+      files: string[];
+      category: string;
+      status: number | null;
+      /** 扱い：公開元で掲載終了し代わりの資料（会議録・後継資料）がある／代わりの資料が無い（調査済み）。 */
+      disposition?: "removed_with_alternative_minutes" | "removed_with_successor_document" | "no_alternative";
+    }[];
     excludedBackupOnlyReferences: number;
     note: string;
   } | null;
@@ -708,6 +715,10 @@ export function DataStatusPage() {
   const countConsistencyUnresolved = dataQualitySummary.countConsistencyChecks.filter(
     (c) => !c.status.startsWith("fixed"),
   ).length;
+  // 内部の記録に残る旧URLを、代わりの資料がある（公開元で掲載終了）ものと、無いものに分ける。
+  const brokenList = dataQualitySummary.linkHealth?.broken ?? [];
+  const brokenWithAlternative = brokenList.filter((b) => b.disposition && b.disposition !== "no_alternative").length;
+  const brokenWithoutAlternative = brokenList.length - brokenWithAlternative;
   // Phase222：出典検証の指摘を分類ごとに並べる（0件の分類は表示しない。件数が多い順）。
   const sourceWarningBreakdown = Object.entries(dataQualitySummary.sourceHealth.warningsByCode ?? {})
     .filter(([, count]) => count > 0)
@@ -1320,15 +1331,23 @@ export function DataStatusPage() {
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
             <dt className="text-xs text-on-surface-variant">
-              内部データに残る到達できない参照URL（記録として保持）
+              内部の記録に残る旧URL：公開元で掲載終了（代わりの資料あり）
             </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
-              {dataQualitySummary.linkHealth
-                ? `${dataQualitySummary.linkHealth.broken.length}件／${dataQualitySummary.linkHealth.totalChecked.toLocaleString("ja-JP")}件中`
-                : "未計測"}
+              {dataQualitySummary.linkHealth ? `${brokenWithAlternative}件` : "未計測"}
             </dd>
             <dd className="mt-0.5 text-xs text-on-surface-variant">
-              画面ではリンクにせず「{BROKEN_SOURCE_LINK_LABEL}」と表示
+              会議録や後継の資料で内容を確認できます。画面ではリンクにしていません
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">内部の記録に残る旧URL：代わりの資料なし（調査済み）</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {dataQualitySummary.linkHealth ? `${brokenWithoutAlternative}件` : "未計測"}
+            </dd>
+            <dd className="mt-0.5 text-xs text-on-surface-variant">
+              画面ではリンクにせず「{BROKEN_SOURCE_LINK_LABEL}」と表示（確認した参照URL
+              {dataQualitySummary.linkHealth ? dataQualitySummary.linkHealth.totalChecked.toLocaleString("ja-JP") : "―"}件のうち）
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -1366,6 +1385,9 @@ export function DataStatusPage() {
                   <span className="font-medium text-on-surface">
                     {b.category === "not_found_404" ? "404 Not Found" : `サーバーエラー（${b.status ?? "不明"}）`}
                   </span>
+                  {b.disposition && b.disposition !== "no_alternative"
+                    ? "（公開元で掲載終了・代わりの資料あり）"
+                    : "（代わりの資料なし・調査済み）"}
                   ：{b.url}（{b.files.join("、")}）
                 </li>
               ))}
@@ -1469,14 +1491,14 @@ export function DataStatusPage() {
               ["WAITING_EXTERNAL", "公式資料の公開待ち"],
               ["MANUAL_REVIEW", "人手による追加調査が必要"],
               ["RESEARCH_EXHAUSTED", "調査を尽くしたが未確認（資料不存在の確定ではない）"],
-              ["NOT_APPLICABLE", "対象外（サイト構成側の判断待ち等）"],
+              ["NOT_APPLICABLE", "対象外（このサイトの収録対象ではないと判断したもの）"],
               ["BLOCKED_TECHNICAL", "技術的制約（OCR環境等）"],
               ["COMPLETED", "解決済み"],
             ] as [keyof ReturnType<typeof blockedTaskStatusCounts>, string][]
           ).map(([key, label]) => (
             <div key={key} className="rounded-lg bg-surface-container-low p-3">
               <dt className="text-xs text-on-surface-variant">{label}</dt>
-              <dd className="mt-0.5 text-lg font-semibold text-on-surface">{taskStatusCounts[key]}件</dd>
+              <dd className="mt-0.5 text-lg font-semibold text-on-surface">{taskStatusCounts[key]}件（作業タスク）</dd>
             </div>
           ))}
         </dl>

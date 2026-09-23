@@ -87,6 +87,24 @@ if (existsSync(linkReportPath)) {
       !isRemovedWatchedOnly(r),
   );
   const broken = liveResults.filter((r) => r.category === "not_found_404" || r.category === "server_error");
+  // 到達できない参照URLの扱い（データから決める）。「公開元で掲載終了し、代わりの資料がある」ものと、
+  // 「代わりの資料が無い（調査済み）」ものを分けて示す。同じ「到達できない」でも意味が違うため。
+  const readData = (f) => JSON.parse(readFileSync(join(root, "src", "data", f), "utf8"));
+  const removedNoticeUrls = new Set(
+    readData("generalQuestions.json")
+      .filter((q) => q.noticeUrlStatus === "removed" && q.transcriptUrl)
+      .map((q) => q.noticeUrl),
+  );
+  const docSources = readData("councilDocumentSources.json");
+  const removedDocUrls = new Set(
+    (Array.isArray(docSources) ? docSources : docSources.sources ?? []).filter((d) => d.status === "removed").map((d) => d.sourceUrl),
+  );
+  const dispositionOf = (url) =>
+    removedNoticeUrls.has(url)
+      ? "removed_with_alternative_minutes"
+      : removedDocUrls.has(url)
+        ? "removed_with_successor_document"
+        : "no_alternative";
   linkHealth = {
     generatedAt: report.generatedAt,
     // Phase222：ここは「内部データが参照しているURLのうち到達できないもの」の件数であり、
@@ -96,9 +114,16 @@ if (existsSync(linkReportPath)) {
     redirect: liveResults.filter((r) => r.category === "redirect").length,
     notFound404: liveResults.filter((r) => r.category === "not_found_404").length,
     serverError: liveResults.filter((r) => r.category === "server_error").length,
-    broken: broken.map((r) => ({ url: r.url, files: r.files, category: r.category, status: r.status })),
+    broken: broken.map((r) => ({
+      url: r.url,
+      // この要約ファイル自身は参照元ではないため、一覧に出さない。
+      files: (r.files ?? []).filter((f) => f !== SELF_GENERATED_FILE),
+      category: r.category,
+      status: r.status,
+      disposition: dispositionOf(r.url),
+    })),
     excludedBackupOnlyReferences: report.results.length - liveResults.length,
-    note: `*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの${SUPERSEDED_INTERNAL_ONLY_URLS.size}件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。`,
+    note: `本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）と、市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの${SUPERSEDED_INTERNAL_ONLY_URLS.size}件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）だけが参照するURLは対象外。到達できないURLは、公開元で掲載終了し代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示す。`,
   };
 }
 
