@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T12:15:16.086Z",
+  "generatedAt": "2026-09-23T12:25:23.281Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -197,8 +197,8 @@
     "note": "本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）と、市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの18件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）だけが参照するURLは対象外。到達できないURLは、公開元で掲載終了し代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示す。"
   },
   "publicExposure": {
-    "generatedAt": "2026-09-23T08:05:59.071Z",
-    "checkedPages": 2312,
+    "generatedAt": "2026-09-23T12:24:30.230Z",
+    "checkedPages": 2309,
     "clickableBrokenLinks": 0,
     "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"
   },

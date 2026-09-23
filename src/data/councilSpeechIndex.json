@@ -300,7 +300,7 @@
           "date": "2025-03-04",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -1457,7 +1457,7 @@
           "date": "2026-02-26",
           "meetingNumber": "第3号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -1504,7 +1504,7 @@
           "date": "2025-03-05",
           "meetingNumber": "第3号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -2218,7 +2218,7 @@
           "date": "2026-02-25",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -2725,7 +2725,7 @@
           "date": "2026-02-26",
           "meetingNumber": "第3号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -5877,7 +5877,7 @@
           "date": "2025-03-04",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -6349,7 +6349,7 @@
           "meetingNumber": "第3号",
           "meetingType": "本会議",
           "speechType": "一般質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "教育",
@@ -6359,6 +6359,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-04",
+          "duplicateOfSpeechId": "m14-2026-02-26-kanren-shitsumon",
+          "unpublishedReason": "同じ関連質問（会議録R080226Aの同じ発言位置）を重複して登録した記録。議長が関連質問として発言を許可しているため、関連質問として登録した m14-2026-02-26-kanren-shitsumon を正とし、こちらは非公開とする（内容は削除せず保持）。",
           "questionItemCount": 6
         },
         {
@@ -7571,7 +7573,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "一般質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "教育",
@@ -7580,6 +7582,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-04",
+          "duplicateOfSpeechId": "m17-2026-02-25-kanren-shitsumon",
+          "unpublishedReason": "同じ関連質問（会議録R080225Aの同じ発言位置）を重複して登録した記録。議長が関連質問として発言を許可しているため、関連質問として登録した m17-2026-02-25-kanren-shitsumon を正とし、こちらは非公開とする（内容は削除せず保持）。",
           "questionItemCount": 1
         },
         {
@@ -7626,7 +7630,7 @@
           "date": "2025-03-05",
           "meetingNumber": "第3号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -8057,7 +8061,7 @@
           "term": "previous",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "関連質問",
           "isPublished": true,
           "summaryStatus": "partially-verified",
           "topics": [
@@ -9744,7 +9748,7 @@
           "date": "2026-02-25",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -11221,7 +11225,7 @@
           "date": "2026-02-25",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -11573,7 +11577,7 @@
           "date": "2025-03-04",
           "meetingNumber": "第2号",
           "meetingType": "本会議",
-          "speechType": "一般質問",
+          "speechType": "代表質問",
           "isPublished": true,
           "summaryStatus": "verified",
           "topics": [
@@ -11624,7 +11628,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "一般質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "道路・交通",
@@ -11633,6 +11637,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-04",
+          "duplicateOfSpeechId": "m25-2026-02-25-kanren-shitsumon",
+          "unpublishedReason": "同じ関連質問（会議録R080225Aの同じ発言位置）を重複して登録した記録。議長が関連質問として発言を許可しているため、関連質問として登録した m25-2026-02-25-kanren-shitsumon を正とし、こちらは非公開とする（内容は削除せず保持）。",
           "questionItemCount": 2
         }
       ],
