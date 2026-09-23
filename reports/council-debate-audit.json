@@ -1,0 +1,1339 @@
+{
+  "auditedAt": "2026-09-23",
+  "total": 43,
+  "currentMembers": 39,
+  "formerMembers": 4,
+  "unmatched": 0,
+  "withSourceUrl": 43,
+  "stanceCounts": {
+    "mixed": 8,
+    "for": 17,
+    "against": 17,
+    "unclear": 1
+  },
+  "sourceVerified": 43,
+  "issues": [],
+  "days": [
+    {
+      "fileName": "R050324A",
+      "ok": true,
+      "extracted": 1,
+      "recorded": 1
+    },
+    {
+      "fileName": "R050328A",
+      "ok": true,
+      "extracted": 2,
+      "recorded": 2
+    },
+    {
+      "fileName": "R050707A",
+      "ok": true,
+      "extracted": 11,
+      "recorded": 11
+    },
+    {
+      "fileName": "R050711A",
+      "ok": true,
+      "extracted": 7,
+      "recorded": 7
+    },
+    {
+      "fileName": "R050731A",
+      "ok": true,
+      "extracted": 3,
+      "recorded": 3
+    },
+    {
+      "fileName": "R050929A",
+      "ok": true,
+      "extracted": 6,
+      "recorded": 6
+    },
+    {
+      "fileName": "R060322A",
+      "ok": true,
+      "extracted": 2,
+      "recorded": 2
+    },
+    {
+      "fileName": "R060708A",
+      "ok": true,
+      "extracted": 4,
+      "recorded": 4
+    },
+    {
+      "fileName": "R061004A",
+      "ok": true,
+      "extracted": 3,
+      "recorded": 3
+    },
+    {
+      "fileName": "R061213A",
+      "ok": true,
+      "extracted": 2,
+      "recorded": 2
+    },
+    {
+      "fileName": "R080319A",
+      "ok": true,
+      "extracted": 1,
+      "recorded": 1
+    },
+    {
+      "fileName": "R080703A",
+      "ok": true,
+      "extracted": 1,
+      "recorded": 1
+    }
+  ],
+  "records": [
+    {
+      "id": "debate-R050324A-29772",
+      "speakerName": "田村吉宏",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第29回定例会（第6号 3月24日）",
+      "meetingDate": "2023-03-24",
+      "fresh": {
+        "fileName": "R050324A",
+        "agendaTitle": "議案第一〇八号令和五年度延岡市一般会計予算外七件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "九番（田村吉宏君）",
+        "speakerName": "田村吉宏",
+        "pos": 29772,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050324A/29772/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "原案反対、修正案賛成",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "友愛クラブの田村吉宏でございます。議案第一〇八号の一般会計について、原案反対、修正案賛成の討論を行います。歴史・文化ゾーン内駐車場管理システム・看板等整備事業は、昨年に提案され、二度否決となり、三度目の提案であります。否決された大きな理由は"
+      }
+    },
+    {
+      "id": "debate-R050328A-10048",
+      "speakerName": "佐藤誠",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第30回臨時会（第1号 3月28日）",
+      "meetingDate": "2023-03-28",
+      "fresh": {
+        "fileName": "R050328A",
+        "agendaTitle": "議案第一〇八号令和五年度延岡市一般会計予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二四番（佐藤　誠君）",
+        "speakerName": "佐藤誠",
+        "pos": 10048,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050328A/10048/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "史・文化ゾーン内駐車場管理システム等整備事業に関する修正案に賛成の立場で討論をいたします。昨年の六月議会において、この歴史・文化ゾ",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案に賛成",
+        "excerpt": "自民党きずなの会、佐藤　誠でございます。議案第一〇八号令和五年度延岡市一般会計予算の歴史・文化ゾーン内駐車場管理システム等整備事業に関する修正案に賛成の立場で討論をいたします。昨年の六月議会において、この歴史・文化ゾーン内駐車場管理システム"
+      }
+    },
+    {
+      "id": "debate-R050328A-15780",
+      "speakerName": "河野治満",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第30回臨時会（第1号 3月28日）",
+      "meetingDate": "2023-03-28",
+      "fresh": {
+        "fileName": "R050328A",
+        "agendaTitle": "議案第一〇八号令和五年度延岡市一般会計予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二三番（河野治満君）",
+        "speakerName": "河野治満",
+        "pos": 15780,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050328A/15780/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "原案賛成、修正案反対",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "おはようございます。党派、会派の垣根を越え、是々非々による市民のための政治を実践する、のべおか市民派クラブの河野治満です。昨年七月一日の六月補正予算の採決において、市が提案した補正予算のうち、延岡城・内藤記念博物館の完成に伴う交通渋滞対策等"
+      }
+    },
+    {
+      "id": "debate-R050707A-24349",
+      "speakerName": "猪之鼻哲",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一三番（猪之鼻哲君）",
+        "speakerName": "猪之鼻哲",
+        "pos": 24349,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/24349/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "以上、賛成討論とします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案に賛成",
+        "excerpt": "ただいま議題となっています議案のうち、議案第九号について、修正案に賛成の立場で討論いたします。まず、今回のこの議案は、昨年七月に可決、事業化され、現在、約十カ所の病院において運用されている「空飛ぶクルマ」も見据えた新たな救急搬送体制づくり事"
+      }
+    },
+    {
+      "id": "debate-R050707A-28349",
+      "speakerName": "吉田茂仁",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "七番（吉田茂仁君）",
+        "speakerName": "吉田茂仁",
+        "pos": 28349,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/28349/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "構想交付金を活用した事業が削除された修正案について、私は強く反対をいたします。まず、修正案の提出理由にあった実現可能性、必要性に対しての",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案について、私は強く反対",
+        "excerpt": "皆様、おはようございます。無所属市民の会の吉田茂仁でございます。今回の議案第九号のデジタル田園都市国家構想交付金を活用した事業が削除された修正案について、私は強く反対をいたします。まず、修正案の提出理由にあった実現可能性、必要性に対しての私"
+      }
+    },
+    {
+      "id": "debate-R050707A-34520",
+      "speakerName": "宮田博徳",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "五番（宮田博徳君）",
+        "speakerName": "宮田博徳",
+        "pos": 34520,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/34520/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "修正案に賛成、原案に反対",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "私は、議案第九号令和五年度延岡市一般会計補正予算につきまして、修正案に賛成、原案に反対の立場から討論させていただきます。議長の許可を得て、パブリックコメントの資料を一部使いながら、話したいというふうに思っております。早速ですが、「空飛ぶクル"
+      }
+    },
+    {
+      "id": "debate-R050707A-38318",
+      "speakerName": "河野治満",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二六番（河野治満君）",
+        "speakerName": "河野治満",
+        "pos": 38318,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/38318/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "修正案反対、原案賛成",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "私は、党派、会派の垣根を越えて活動する無所属市民の会、河野治満です。無所属市民の会は、読谷山市長の応援団でも、イエスマンでもございません。市長の政治姿勢を大所高所から是々非々で評価し、純粋に延岡市民の幸せと市政の発展を追求するものであります"
+      }
+    },
+    {
+      "id": "debate-R050707A-46366",
+      "speakerName": "甲斐忠篤",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一二番（甲斐忠篤君）",
+        "speakerName": "甲斐忠篤",
+        "pos": 46366,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/46366/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "反対討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "original",
+        "stanceTargetBasis": "原案反対",
+        "excerpt": "皆さん、こんにちは。自民党きずなの会の甲斐忠篤でございます。私は、議案第二六号令和五年度延岡市一般会計補正予算六月補正二次分の歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場から、反対討論を行います。この事業に関しては"
+      }
+    },
+    {
+      "id": "debate-R050707A-47944",
+      "speakerName": "上杉泰洋",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二五番（上杉泰洋君）",
+        "speakerName": "上杉泰洋",
+        "pos": 47944,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/47944/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "市長提案の予算案に賛成、議会提出の修正案に反対",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "皆さん、こんにちは。無所属市民の会の上杉でございますが、吉田議員、河野議員がお話しされてダブるところもありますけども、熱意を持ってお話ししたいと思います。なぜかというと、私みたいな長老が、この新しいことに賛成しているのに、何で若い議員は反対"
+      }
+    },
+    {
+      "id": "debate-R050707A-57538",
+      "speakerName": "稲田雅之",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一八番（稲田雅之君）",
+        "speakerName": "稲田雅之",
+        "pos": 57538,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/57538/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "反対の立場から討論をいたします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "original",
+        "stanceTargetBasis": "議案第二六号令和五年度六月補正予算二次分、すなわち、歴史・文化ゾーン内駐車場管理システム等整備事業につきまして、反対の立場",
+        "excerpt": "自民党きずなの会、稲田雅之でございます。ただいま議題に上がっております議案第二六号令和五年度六月補正予算二次分、すなわち、歴史・文化ゾーン内駐車場管理システム等整備事業につきまして、反対の立場から討論をいたします。そもそも、この事業提案は、"
+      }
+    },
+    {
+      "id": "debate-R050707A-61512",
+      "speakerName": "長友幸子",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二二番（長友幸子君）",
+        "speakerName": "長友幸子",
+        "pos": 61512,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/61512/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "以上、議員の皆様の良識ある判断をお願いいたしまして、反対討論といたします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "original",
+        "stanceTargetBasis": "原案反対",
+        "excerpt": "立憲民主党市議団の長友幸子でございます。議案第二六号、歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場で討論を行います。この整備事業について、これまで市長は、延岡城・内藤記念博物館や野口遵記念館の開館に伴い、歴史・文化"
+      }
+    },
+    {
+      "id": "debate-R050707A-63626",
+      "speakerName": "北林幹雄",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二〇番（北林幹雄君）",
+        "speakerName": "北林幹雄",
+        "pos": 63626,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/63626/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "皆さん、こんにちは。私は、賛成討論をする予定はしておりませんでしたけども、大先輩議員、河野議員",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案に対して賛成",
+        "excerpt": "皆さん、こんにちは。私は、賛成討論をする予定はしておりませんでしたけども、大先輩議員、河野議員、上杉議員から名指しで批判を受けましたので、それには答えないといけないと思いまして、この場に立たせていただきました。いろいろ勉強を今までさせてもら"
+      }
+    },
+    {
+      "id": "debate-R050707A-67074",
+      "speakerName": "後藤司光",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": false,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "六番（後藤司光君）",
+        "speakerName": "後藤司光",
+        "pos": 67074,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/67074/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "私は、今回、反対の立場を取らせていただきました。今の言った、言わないは、しっかりと",
+        "stanceSourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/67450/10/1//0/0",
+        "stanceTarget": "unspecified",
+        "stanceTargetBasis": null,
+        "excerpt": "後藤司光です。今の件に、一つだけ、確認したいと思います。"
+      }
+    },
+    {
+      "id": "debate-R050707A-67978",
+      "speakerName": "吉本靖",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 3回定例会（第5号 7月 7日）",
+      "meetingDate": "2023-07-07",
+      "fresh": {
+        "fileName": "R050707A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算外二件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一六番（吉本　靖君）",
+        "speakerName": "吉本靖",
+        "pos": 67978,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/67978/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "せんでしたけれども、議会の継続性も含めて、一言、私は修正案に反対する立場で発言をさせていただきたいと思っています。実は、この「空飛ぶ",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案に反対",
+        "excerpt": "友愛クラブの吉本　靖です。討論に参戦する予定はしておりませんでしたけれども、議会の継続性も含めて、一言、私は修正案に反対する立場で発言をさせていただきたいと思っています。実は、この「空飛ぶクルマ」も見据えた新たな救急搬送体制づくり事業という"
+      }
+    },
+    {
+      "id": "debate-R050711A-36986",
+      "speakerName": "梶本英一",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一〇番（梶本英一君）",
+        "speakerName": "梶本英一",
+        "pos": 36986,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/36986/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "減額修正案に賛成",
+        "excerpt": "議案第九号の減額修正案に賛成の立場で、賛成討論を行います。市長より提出された再議書の理由には、県がドクターヘリについて、県立延岡病院に導入することが難しいとの見解をこれまで示していると記されています。ところが、同県議会の答弁書では、河野知事"
+      }
+    },
+    {
+      "id": "debate-R050711A-38476",
+      "speakerName": "峯田克明",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一五番（峯田克明君）",
+        "speakerName": "峯田克明",
+        "pos": 38476,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/38476/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "修正案に反対、原案に賛成",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "皆さん、こんにちは。無所属市民の会の峯田克明です。これから、議案第九号令和五年度延岡市一般会計補正予算修正案に反対、そして原案に賛成の立場から討論させていただきます。「空飛ぶクルマ」も見据えた新たな救急搬送体制づくり事業と平常時・災害時共通"
+      }
+    },
+    {
+      "id": "debate-R050711A-43754",
+      "speakerName": "柴浩信",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二番（柴　浩信君）",
+        "speakerName": "柴浩信",
+        "pos": 43754,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/43754/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "自民党きずなの会の柴　浩信です。私は、議案第九号の修正案賛成の立場で討論いたします。まず、議案第九号の中の「空飛ぶクルマ」も見",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案賛成",
+        "excerpt": "自民党きずなの会の柴　浩信です。私は、議案第九号の修正案賛成の立場で討論いたします。まず、議案第九号の中の「空飛ぶクルマ」も見据えた新たな救急搬送体制づくり事業について、この事業は救急搬送システムの高度化を目指すもので、延岡市で救急搬送がで"
+      }
+    },
+    {
+      "id": "debate-R050711A-50220",
+      "speakerName": "甲斐正幸",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二四番（甲斐正幸君）",
+        "speakerName": "甲斐正幸",
+        "pos": 50220,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/50220/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "修正案反対、原案賛成",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "市民が主役、市民サイドに立った議員活動を原点とし、時には、政党や会派の垣根を越え、市民の皆様のことを第一に考え、議員生活、常に是は是、非は非、政党に属することなく無所属を貫き通して活動を行っています、無所属市民の会の甲斐正幸でございます。今"
+      }
+    },
+    {
+      "id": "debate-R050711A-55586",
+      "speakerName": "吉田茂仁",
+      "stance": "mixed",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "七番（吉田茂仁君）",
+        "speakerName": "吉田茂仁",
+        "pos": 55586,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/55586/10/1//0/0",
+        "stance": "mixed",
+        "stanceBasis": "原案賛成、修正案反対",
+        "stanceSourceUrl": null,
+        "stanceTarget": "both",
+        "stanceTargetBasis": null,
+        "excerpt": "皆さん、こんにちは。無所属市民の会の吉田茂仁でございます。私は、議案第九号修正案反対、原案賛成の立場で討論させていただきます。先日も討論させていただきましたが、ほかの議員の討論や意見を聞いて思うところがありましたので、再度、討論させていただ"
+      }
+    },
+    {
+      "id": "debate-R050711A-61382",
+      "speakerName": "吉本靖",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一六番（吉本　靖君）",
+        "speakerName": "吉本靖",
+        "pos": 61382,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/61382/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "友愛クラブの吉本　靖です。私は、修正案に反対の立場で今から述べますが、できる限り一致点ができるようなことがない",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案に反対",
+        "excerpt": "友愛クラブの吉本　靖です。私は、修正案に反対の立場で今から述べますが、できる限り一致点ができるようなことがないかと思って、ちょっと発言させていただきます。実は、ドクターヘリについても議論が出ておりまして、どちらがいいのかという比較の話も出て"
+      }
+    },
+    {
+      "id": "debate-R050711A-63818",
+      "speakerName": "甲斐行雄",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 4回臨時会（第1号 7月11日）",
+      "meetingDate": "2023-07-11",
+      "fresh": {
+        "fileName": "R050711A",
+        "agendaTitle": "議案第九号令和五年度延岡市一般会計補正予算に対する再議",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "一七番（甲斐行雄君）",
+        "speakerName": "甲斐行雄",
+        "pos": 63818,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/63818/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "第九号、デジタル田園都市国家構想交付金関連事業を除く修正案に賛成の立場で討論をさせていただきます。この議案は、六月十六日に一次補正",
+        "stanceSourceUrl": null,
+        "stanceTarget": "amendment",
+        "stanceTargetBasis": "修正案に賛成",
+        "excerpt": "通告にはございませんが、皆さん方の御意見を聞いて、私も一議員として、私の思いを改めて、議案第九号、デジタル田園都市国家構想交付金関連事業を除く修正案に賛成の立場で討論をさせていただきます。この議案は、六月十六日に一次補正案として提案されたも"
+      }
+    },
+    {
+      "id": "debate-R050731A-22966",
+      "speakerName": "北林幹雄",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 6回臨時会（第1号 7月31日）",
+      "meetingDate": "2023-07-31",
+      "fresh": {
+        "fileName": "R050731A",
+        "agendaTitle": "議案第二九号令和五年度延岡市一般会計補正予算",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二〇番（北林幹雄君）",
+        "speakerName": "北林幹雄",
+        "pos": 22966,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050731A/22966/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "反対討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "自民党きずなの会の北林幹雄でございます。会派を代表して、議案第二九号に対する反対討論を行います。まず、今回の予算案は、六月議会において否決された議案そのものの上程であり、一カ月もたたない間に全く同じ議案を提出されており、これは議会の審査権を"
+      }
+    },
+    {
+      "id": "debate-R050731A-26688",
+      "speakerName": "河野治満",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 6回臨時会（第1号 7月31日）",
+      "meetingDate": "2023-07-31",
+      "fresh": {
+        "fileName": "R050731A",
+        "agendaTitle": "議案第二九号令和五年度延岡市一般会計補正予算",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二六番（河野治満君）",
+        "speakerName": "河野治満",
+        "pos": 26688,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050731A/26688/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "私は、無所属市民の会団長の河野治満です。本日は、やむにやまれぬ思いを持って、議案第二九号に対する賛成討論を行います。さて、昨年六月一日、岸田総理は、第八回デジタル田園都市国家構想実現会議を開催されました。その際、令和三年十一月からスタートし"
+      }
+    },
+    {
+      "id": "debate-R050731A-35234",
+      "speakerName": "宮田博徳",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 6回臨時会（第1号 7月31日）",
+      "meetingDate": "2023-07-31",
+      "fresh": {
+        "fileName": "R050731A",
+        "agendaTitle": "議案第二九号令和五年度延岡市一般会計補正予算",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "五番（宮田博徳君）",
+        "speakerName": "宮田博徳",
+        "pos": 35234,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050731A/35234/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成の討論をさせていただきます",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "立憲民主党市議団の宮田博徳と申します。議案第二九号令和五年度延岡市一般会計補正予算につきまして、賛成の討論をさせていただきます。私は、七月七日の六月議会の本会議で、「空飛ぶクルマ」も見据えた新たな救急搬送体制づくりに対する反対の討論を行いま"
+      }
+    },
+    {
+      "id": "debate-R050929A-22744",
+      "speakerName": "河野治満",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 7回定例会（第6号 9月29日）",
+      "meetingDate": "2023-09-29",
+      "fresh": {
+        "fileName": "R050929A",
+        "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二六番（河野治満君）",
+        "speakerName": "河野治満",
+        "pos": 22744,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/22744/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "以上、簡単でありますが、百条委員会設置に反対の立場での討論といたします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "無所属市民の会、河野治満です。ただいま、地方自治法第百条の規定により、一、総務部総務課職員による公物の窃取に関する事項、二、上下水道局職員による契約・事務手続に係る虚偽公文書作成及び地方公営企業法施行令に違反した随意契約の締結に関する事項に"
+      }
+    },
+    {
+      "id": "debate-R050929A-25872",
+      "speakerName": "宮田博徳",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 7回定例会（第6号 9月29日）",
+      "meetingDate": "2023-09-29",
+      "fresh": {
+        "fileName": "R050929A",
+        "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "五番（宮田博徳君）",
+        "speakerName": "宮田博徳",
+        "pos": 25872,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/25872/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "の不適正な事務処理等に関する調査に関する決議案につきまして、賛成の立場で意見を述べさせていただきたい、討論に参加したいというふうに",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "立憲民主党市議団の宮田博徳と申します。私は、今回の市職員の不適正な事務処理等に関する調査に関する決議案につきまして、賛成の立場で意見を述べさせていただきたい、討論に参加したいというふうに思います。まず、基本的に、公共枡設置工事につきまして、"
+      }
+    },
+    {
+      "id": "debate-R050929A-28096",
+      "speakerName": "吉田茂仁",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 7回定例会（第6号 9月29日）",
+      "meetingDate": "2023-09-29",
+      "fresh": {
+        "fileName": "R050929A",
+        "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "七番（吉田茂仁君）",
+        "speakerName": "吉田茂仁",
+        "pos": 28096,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/28096/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "吉田茂仁でございます。私は、今回の百条委員会の設置に関して、反対の立場で討論をさせていただきます。まず、百条委員会設置に関して、私",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "無所属市民の会の吉田茂仁でございます。私は、今回の百条委員会の設置に関して、反対の立場で討論をさせていただきます。まず、百条委員会設置に関して、私はあまり知識がありませんでしたので、他の自治体の過去の事例などを基に調べさせていただきました。"
+      }
+    },
+    {
+      "id": "debate-R050929A-30718",
+      "speakerName": "小御門綾",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 7回定例会（第6号 9月29日）",
+      "meetingDate": "2023-09-29",
+      "fresh": {
+        "fileName": "R050929A",
+        "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "八番（小御門綾君）",
+        "speakerName": "小御門綾",
+        "pos": 30718,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/30718/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成の立場から討論いたします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "友愛クラブの小御門綾です。私は、賛成の立場から討論いたします。今回の上下水道局職員に対する懲戒処分の事案について、当局から議会への説明をいただくとともに、本議会で私を含む各議員の質問を通じて事実確認を行いましたが、まだ不明な点もあり、議会と"
+      }
+    },
+    {
+      "id": "debate-R050929A-31680",
+      "speakerName": "上杉泰洋",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 7回定例会（第6号 9月29日）",
+      "meetingDate": "2023-09-29",
+      "fresh": {
+        "fileName": "R050929A",
+        "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二五番（上杉泰洋君）",
+        "speakerName": "上杉泰洋",
+        "pos": 31680,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/31680/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "以上で、百条委員会設置反対の立場からの討論といたします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "市民と共にある市民ファースト、無所属市民の会の上杉泰洋でございます。今回、審議になっています百条委員会の設置について、反対の立場から討論したいと思います。同じようなことがありますので、ちょっと整理しながらやりたいと思います。今回の百条委員会"
+      }
+    },
+    {
+      "id": "debate-R050929A-36108",
+      "speakerName": "柴浩信",
+      "stance": "unclear",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": null,
+        "basisInMinutes": null
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 5年第 7回定例会（第6号 9月29日）",
+      "meetingDate": "2023-09-29",
+      "fresh": {
+        "fileName": "R050929A",
+        "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二番（柴　浩信君）",
+        "speakerName": "柴浩信",
+        "pos": 36108,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/36108/10/1//0/0",
+        "stance": "unclear",
+        "stanceBasis": "",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "自民党きずなの会の柴　浩信です。ただいまの討論を聞いておりまして、少し論点整理のために発言させていただきます。今、五名の方が討論されまして、いろいろと喧々諤々の意見をお伺いしたんですが、まさに、そのような討論が行われるということは、議会とし"
+      }
+    },
+    {
+      "id": "debate-R060322A-30348",
+      "speakerName": "吉田茂仁",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第 9回定例会（第6号 3月22日）",
+      "meetingDate": "2024-03-22",
+      "fresh": {
+        "fileName": "R060322A",
+        "agendaTitle": "議案第一〇八号令和六年度延岡市一般会計予算外七件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "七番（吉田茂仁君）",
+        "speakerName": "吉田茂仁",
+        "pos": 30348,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060322A/30348/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "ようございます。私は、令和六年度一般会計当初予算案について、賛成の立場で討論をさせていただきます。その中でも、予算審議で主に争点と",
+        "stanceSourceUrl": null,
+        "stanceTarget": "original",
+        "stanceTargetBasis": "当初予算案について、賛成",
+        "excerpt": "皆様、おはようございます。私は、令和六年度一般会計当初予算案について、賛成の立場で討論をさせていただきます。その中でも、予算審議で主に争点となったナーブネット事業についてお話をさせていただきます。私は、いろいろな方々に、この事業についてお話"
+      }
+    },
+    {
+      "id": "debate-R060322A-34428",
+      "speakerName": "河野治満",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第 9回定例会（第6号 3月22日）",
+      "meetingDate": "2024-03-22",
+      "fresh": {
+        "fileName": "R060322A",
+        "agendaTitle": "議案第一〇八号令和六年度延岡市一般会計予算外七件",
+        "amendmentOnFloor": true,
+        "speakerLabelAsWritten": "二六番（河野治満君）",
+        "speakerName": "河野治満",
+        "pos": 34428,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060322A/34428/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成の立場から討論をさせていただきます",
+        "stanceSourceUrl": null,
+        "stanceTarget": "original",
+        "stanceTargetBasis": "議案第一〇八号令和六年度延岡市一般会計予算につきまして、賛成の立場",
+        "excerpt": "無所属市民の会、河野治満です。議案第一〇八号令和六年度延岡市一般会計予算につきまして、賛成の立場から討論をさせていただきます。賛成の理由とする一例として、大変な議論となっておりました平常時・災害時共通災害に強い地方創生ネットワーク事業につい"
+      }
+    },
+    {
+      "id": "debate-R060708A-55080",
+      "speakerName": "河野治満",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第12回定例会（第5号 7月 8日）",
+      "meetingDate": "2024-07-08",
+      "fresh": {
+        "fileName": "R060708A",
+        "agendaTitle": "決議第四号延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二七番（河野治満君）",
+        "speakerName": "河野治満",
+        "pos": 55080,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/55080/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "反対討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "無所属市民の会、河野治満です。ただいま、議題となっています延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。これまで読谷山市長は、男性職員に対する男性器の俗語を用いた自身の不適切な発言を"
+      }
+    },
+    {
+      "id": "debate-R060708A-58938",
+      "speakerName": "稲田雅之",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第12回定例会（第5号 7月 8日）",
+      "meetingDate": "2024-07-08",
+      "fresh": {
+        "fileName": "R060708A",
+        "agendaTitle": "決議第四号延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "一〇番（稲田雅之君）",
+        "speakerName": "稲田雅之",
+        "pos": 58938,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/58938/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "以上、延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議に賛成する立場の討論を終わり",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "自民党きずなの会の稲田雅之でございます。会派を代表いたしまして、延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に賛成する立場から討論を行います。この決議に賛成する理由は明白であります。すなわち、意見が対立している"
+      }
+    },
+    {
+      "id": "debate-R060708A-62060",
+      "speakerName": "上杉泰洋",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第12回定例会（第5号 7月 8日）",
+      "meetingDate": "2024-07-08",
+      "fresh": {
+        "fileName": "R060708A",
+        "agendaTitle": "決議第四号延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二六番（上杉泰洋君）",
+        "speakerName": "上杉泰洋",
+        "pos": 62060,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/62060/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "反対討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "無所属市民の会の上杉泰洋でございます。ただいま議題となっています延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。私がなぜ反対なのかは、議会制民主主義と延岡市議会の尊厳を守ってほしい観点"
+      }
+    },
+    {
+      "id": "debate-R060708A-66188",
+      "speakerName": "平田信広",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第12回定例会（第5号 7月 8日）",
+      "meetingDate": "2024-07-08",
+      "fresh": {
+        "fileName": "R060708A",
+        "agendaTitle": "決議第四号延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二二番（平田信広君）",
+        "speakerName": "平田信広",
+        "pos": 66188,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/66188/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成の討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "日本共産党の平田信広です。提案されています第三者委員会設置の決議案に賛成の討論を行います。少し長くなりますが、よろしくお願いいたします。今議会で、この不適切発言問題は、多くの議員が質問しました。私は取り上げませんでしたが、聞いていて、市長と"
+      }
+    },
+    {
+      "id": "debate-R061004A-37881",
+      "speakerName": "猪之鼻哲",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第13回定例会（第6号10月 4日）",
+      "meetingDate": "2024-10-04",
+      "fresh": {
+        "fileName": "R061004A",
+        "agendaTitle": "議案第六六号令和六年度延岡市一般会計補正予算",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "一四番（猪之鼻哲君）",
+        "speakerName": "猪之鼻哲",
+        "pos": 37881,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061004A/37881/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "特別委員会の名称変更及び調査事項の追加に関する決議（案）に、賛成する立場から討論を行います。読谷山市長が職員に対して、演台をたたき、",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "自民党きずなの会、猪之鼻哲です。ただいま議題となっております市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）に、賛成する立場から討論を行います。読谷山市長が職員に対して、演台をたたき、腐った古沼"
+      }
+    },
+    {
+      "id": "debate-R061004A-41771",
+      "speakerName": "松田満男",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第13回定例会（第6号10月 4日）",
+      "meetingDate": "2024-10-04",
+      "fresh": {
+        "fileName": "R061004A",
+        "agendaTitle": "議案第六六号令和六年度延岡市一般会計補正予算",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "一九番（松田満男君）",
+        "speakerName": "松田満男",
+        "pos": 41771,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061004A/41771/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "特別委員会の名称変更及び調査事項の追加に関する決議（案）に、賛成する立場から討論を行います。読谷山市長は公の場で、議会事務局の職員が",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "自民党きずなの会、松田満男です。市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）に、賛成する立場から討論を行います。読谷山市長は公の場で、議会事務局の職員が議長名の公文書を偽造したと、再三、発言"
+      }
+    },
+    {
+      "id": "debate-R061004A-44397",
+      "speakerName": "吉田茂仁",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第13回定例会（第6号10月 4日）",
+      "meetingDate": "2024-10-04",
+      "fresh": {
+        "fileName": "R061004A",
+        "agendaTitle": "議案第六六号令和六年度延岡市一般会計補正予算",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "七番（吉田茂仁君）",
+        "speakerName": "吉田茂仁",
+        "pos": 44397,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061004A/44397/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "特別委員会の名称変更及び調査事項の追加に関する決議（案）に、反対の立場で討論をさせていただきます。まず、今、討論された松田前議長に",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "私は、市職員の不適正な事務処理等に関する調査特別委員会の名称変更及び調査事項の追加に関する決議（案）に、反対の立場で討論をさせていただきます。まず、今、討論された松田前議長に関してなんですけども、一般質問を通してこの市職員の文書の捏造問題の"
+      }
+    },
+    {
+      "id": "debate-R061213A-68028",
+      "speakerName": "吉田茂仁",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第14回定例会（第5号12月13日）",
+      "meetingDate": "2024-12-13",
+      "fresh": {
+        "fileName": "R061213A",
+        "agendaTitle": "決議第六号令和六年度における市職員の不適正な事務処理及び市長の不適切発言等に関する調査特別委員会の調査経費に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "七番（吉田茂仁君）",
+        "speakerName": "吉田茂仁",
+        "pos": 68028,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061213A/68028/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "まず初めに、私は、この百条委員会調査経費追加について、反対の立場で討論をさせていただきます。先ほど、質疑においてトータル幾ら",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "まず初めに、私は、この百条委員会調査経費追加について、反対の立場で討論をさせていただきます。先ほど、質疑においてトータル幾らになるのか、令和五年度、令和六年度、トータルの見込費用を聞いたのですが、回答が返ってきませんでしたので、私のほうで計"
+      }
+    },
+    {
+      "id": "debate-R061213A-70004",
+      "speakerName": "宮田博徳",
+      "stance": "for",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 6年第14回定例会（第5号12月13日）",
+      "meetingDate": "2024-12-13",
+      "fresh": {
+        "fileName": "R061213A",
+        "agendaTitle": "決議第六号令和六年度における市職員の不適正な事務処理及び市長の不適切発言等に関する調査特別委員会の調査経費に関する決議（案）",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "五番（宮田博徳君）",
+        "speakerName": "宮田博徳",
+        "pos": 70004,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061213A/70004/10/1//0/0",
+        "stance": "for",
+        "stanceBasis": "賛成の立場から討論いたします",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "ただいま議題となっております決議第六号に、賛成の立場から討論いたします。本来の予定では、この百条委員会は先ほどの中間報告で調査終了となり、本年度の調査経費についても、上限額まで約三十二万円を残した形で終了する予定でありました。しかし、読谷山"
+      }
+    },
+    {
+      "id": "debate-R080319A-28754",
+      "speakerName": "平田信広",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 8年第24回定例会（第6号 3月19日）",
+      "meetingDate": "2026-03-19",
+      "fresh": {
+        "fileName": "R080319A",
+        "agendaTitle": "議案第一二九号令和八年度延岡市一般会計予算外七件",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二二番（平田信広君）",
+        "speakerName": "平田信広",
+        "pos": 28754,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080319A/28754/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "八年度延岡市後期高齢者医療特別会計予算の二つの特別会計予算に反対の立場から、一括して討論を行います。まず、国民健康保険特別会計です",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "皆さん、おはようございます。日本共産党の平田信広です。日本共産党を代表して、今、議題となっています議案のうち、議案第一三〇号令和八年度延岡市国民健康保険特別会計予算、議案第一三三号令和八年度延岡市後期高齢者医療特別会計予算の二つの特別会計予"
+      }
+    },
+    {
+      "id": "debate-R080703A-30276",
+      "speakerName": "平田信広",
+      "stance": "against",
+      "checks": {
+        "speakerOnPage": true,
+        "excerptOnPage": true,
+        "basisOnPage": true,
+        "basisInMinutes": true
+      },
+      "httpStatus": 200,
+      "meetingTitle": "令和 8年第26回定例会（第6号 7月 3日）",
+      "meetingDate": "2026-07-03",
+      "fresh": {
+        "fileName": "R080703A",
+        "agendaTitle": "意見書第七号皇室の伝統に基づく安定的皇位継承を確保するための法整備の早期実現を求める意見書（案）外一件",
+        "amendmentOnFloor": false,
+        "speakerLabelAsWritten": "二二番（平田信広君）",
+        "speakerName": "平田信広",
+        "pos": 30276,
+        "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080703A/30276/10/1//0/0",
+        "stance": "against",
+        "stanceBasis": "反対の立場から討論を行います",
+        "stanceSourceUrl": null,
+        "stanceTarget": "bill",
+        "stanceTargetBasis": null,
+        "excerpt": "日本共産党の平田信広です。ただいま議題となっている意見書のうち、皇室の伝統に基づく安定的皇位継承を確保するための法整備の早期実現を求める意見書（案）について、反対の立場から討論を行います。まず、憲法は、天皇の地位は国民の総意に基づくと定めて"
+      }
+    }
+  ]
+}

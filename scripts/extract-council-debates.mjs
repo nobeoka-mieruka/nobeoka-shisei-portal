@@ -69,7 +69,7 @@ function normalizeSpeakerName(label) {
  * 位置を渡さないとヘッダーだけが返るため、先に発言一覧を引いて位置を集める。
  * 発言数ぶんGetText3.exeを叩くより、1日あたり2リクエストで済む。
  */
-async function fetchDayText(fileName) {
+export async function fetchDayText(fileName) {
   const { segments } = await listSpeakerSegments({ code: CODE, fileName });
   if (!segments.length) return null;
   const body = new URLSearchParams();
@@ -120,7 +120,7 @@ function splitUtterances(text) {
   return out;
 }
 
-const PODIUM = /登壇〕s*$/;
+const PODIUM = /登壇〕\s*$/;
 const DEBATE_START = /これより[、]?(?:一括)?討論に入ります/;
 const DEBATE_END = /討論を終わり(?:ます|ました)/;
 // 「通告による討論は終わりました」は終了ではない。先に取り除く。
@@ -136,11 +136,74 @@ const AGENDA_NO_NUMBER = /^((?:決議|意見書)第[^\s　]+号.*?)を(?:一括)
  * mixed として、どちらが何かを本文の言葉のまま残す。
  */
 const SPLIT_STANCE = [
-  /原案(?:に)?反対[、,]?s*修正案(?:に)?賛成/,
-  /原案(?:に)?賛成[、,]?s*修正案(?:に)?反対/,
-  /修正案(?:に)?賛成[、,]?s*原案(?:に)?反対/,
-  /修正案(?:に)?反対[、,]?s*原案(?:に)?賛成/,
+  /原案(?:に)?反対[、,]?\s*修正案(?:に)?賛成/,
+  /原案(?:に)?賛成[、,]?\s*修正案(?:に)?反対/,
+  /修正案(?:に)?賛成[、,]?\s*原案(?:に)?反対/,
+  /修正案(?:に)?反対[、,]?\s*原案(?:に)?賛成/,
+  // 「市長提案の予算案に賛成、議会提出の修正案に反対」のように、原案を別の言葉で呼ぶ場合。
+  /(?:市長提案の予算案|市長案)に賛成[、,]\s*(?:議会提出の)?修正案に反対/,
+  /(?:議会提出の)?修正案に賛成[、,]\s*(?:市長提案の予算案|市長案)に反対/,
 ];
+
+/**
+ * 立場が「何に対する」賛成・反対かを、本文の言い回しのまま取り出す。
+ *
+ * 修正案が出ている議題では、同じ「反対」でも原案への反対と修正案への反対があり、
+ * 向きが正反対になる（実例：令和5年7月7日、「修正案について、私は強く反対」と
+ * 「市長案に賛成」は、どちらも原案を支持する立場）。対象を確かめずに賛成・反対だけを
+ * 並べると、同じ側の議員が逆の立場に見えてしまう。
+ *
+ * 対象を名指しした言い回しがあるときだけ original／amendment を返す。無ければ null。
+ * 議案番号を名指ししての賛否（「議案第二六号…につきまして、反対の立場」）は、
+ * 提出されたままの議案＝原案への立場として扱う。
+ */
+const TARGET_PATTERNS = [
+  { target: "amendment", re: /(?:減額)?修正案(?:に対して|に対する|について|には|に)?[、,]?[^。\n]{0,12}?(賛成|反対)/g },
+  {
+    target: "original",
+    re: /(?:原案|市長案|当初予算案|市長提案の予算案)(?:に対して|に対する|について|には|に)?[、,]?[^。\n]{0,12}?(賛成|反対)/g,
+  },
+  // 議案番号を名指ししていても、その間に「修正」が入る場合は修正案への立場なので除く。
+  {
+    target: "original",
+    re: /議案第[一二三四五六七八九十〇百]+号(?:(?!修正)[^。\n]){0,80}?(?:について|につきまして|に対して)[、,]?(?:(?!修正)[^。\n]){0,8}?(賛成|反対)の立場/g,
+  },
+];
+
+export const STANCE_TARGET_NOTE =
+  "stanceTarget は立場が何に対するものかを示す。bill＝修正案の出ていない議題で、議案そのものへの立場。" +
+  "original／amendment＝修正案が出ている議題で、原案（提出されたままの議案）／修正案のどちらへの立場かを、" +
+  "本人が冒頭または結びで名指しした言い回し（stanceTargetBasis）から確定したもの。both＝原案と修正案の両方に言及（mixed）。" +
+  "unspecified＝修正案が出ている議題だが、どちらへの立場かを本文から特定できないもの。" +
+  "修正案への反対は原案への賛成と同じ側になりうるため、対象を確かめずに賛成・反対だけを並べてはならない。";
+
+/** 立場の名乗りを探す範囲。討論は冒頭で名乗り、結びで繰り返す慣例がある。 */
+const DECLARATION_SPAN = 300;
+
+export function judgeTarget(text, stance, amendmentOnFloor) {
+  if (stance === "mixed") return { stanceTarget: "both", stanceTargetBasis: null };
+  if (!amendmentOnFloor) return { stanceTarget: "bill", stanceTargetBasis: null };
+  if (stance === "unclear") return { stanceTarget: "unspecified", stanceTargetBasis: null };
+  const want = stance === "for" ? "賛成" : "反対";
+  // 本文の途中では、相手方の主張の引用（「修正案に賛成をした議員が…」）や
+  // 否定（「市長案に反対する理由はどこにも見つけることができません」）が出てくる。
+  // 本人の名乗りがある冒頭と結びだけを見て、そこで対象と向きの組み合わせが
+  // 1通りに定まるときだけ対象を確定する。食い違えば確定しない。
+  const zones = [text.slice(0, DECLARATION_SPAN), text.slice(-DECLARATION_SPAN)];
+  const found = [];
+  for (const zone of zones) {
+    for (const { target, re } of TARGET_PATTERNS) {
+      for (const m of zone.matchAll(re)) found.push({ target, direction: m[1], quote: m[0] });
+    }
+  }
+  const matching = found.filter((f) => f.direction === want);
+  const targets = new Set(matching.map((f) => f.target));
+  const conflicting = found.some((f) => targets.has(f.target) && f.direction !== want);
+  if (targets.size === 1 && !conflicting) {
+    return { stanceTarget: matching[0].target, stanceTargetBasis: matching[0].quote };
+  }
+  return { stanceTarget: "unspecified", stanceTargetBasis: null };
+}
 
 function judgeStance(text) {
   for (const re of SPLIT_STANCE) {
@@ -150,13 +213,15 @@ function judgeStance(text) {
   // 討論は冒頭で立場を名乗る慣例がある（「決議案に賛成の討論を行います」）。
   // 本文が長いと途中で相手方の主張にも触れるため、全文を見ると両方に当たってしまう。
   // 名乗りの部分を先に見る。
-  const opening = text.slice(0, 200).match(/(賛成|反対)(?:の立場|の)?(?:から)?(?:の)?討論[^。]{0,12}(?:行います|いたします|します|させていただきます)/);
+  // [^。\n] としているのは、議長の制止を挟んだ別の発言どうしをまたいで引用しないため
+  // （同じ議員の続きは改行で区切って結合している）。
+  const opening = text.slice(0, 200).match(/(賛成|反対)(?:の立場|の)?(?:から)?(?:の)?討論[^。\n]{0,12}(?:行います|いたします|します|させていただきます)/);
   if (opening) {
     return { stance: opening[1] === "賛成" ? "for" : "against", basis: opening[0] };
   }
 
   // 討論の結びも立場を明言することが多い（「以上で、市長案に賛成の立場からの討論を終わります」）。
-  const closing = text.match(/以上[^。]{0,40}(賛成|反対)[^。]{0,30}討論[^。]{0,12}(?:終わり|といたします|とします)/);
+  const closing = text.match(/以上[^。\n]{0,40}(賛成|反対)[^。\n]{0,30}討論[^。\n]{0,12}(?:終わり|といたします|とします)/);
   if (closing) {
     return { stance: closing[1] === "賛成" ? "for" : "against", basis: closing[0] };
   }
@@ -187,6 +252,10 @@ export function extractDebates(fileName, text, segments = []) {
   let agenda = null;
   let inDebate = false;
   let current = null;
+  // その議題に修正案が出ているか。修正案の提出・説明は討論に入る前に行われるため、
+  // 議題が変わってから討論に入るまでの発言だけを見る（討論の中で過去の修正案に
+  // 触れただけのものは数えない）。
+  let amendmentOnFloor = false;
 
   const flush = () => {
     if (current) results.push(current);
@@ -195,7 +264,10 @@ export function extractDebates(fileName, text, segments = []) {
 
   for (const u of utterances) {
     const agendaMatch = u.text.match(AGENDA) ?? u.text.match(AGENDA_NO_NUMBER);
-    if (agendaMatch) agenda = agendaMatch[1].trim();
+    if (agendaMatch) {
+      agenda = agendaMatch[1].trim();
+      amendmentOnFloor = false;
+    }
 
     // 〔◯番（氏名君）登壇〕は、直前の発言（議長の発言許可）の末尾へ付く。
     const tookPodium = PODIUM.test(u.previousTail ?? "");
@@ -204,6 +276,8 @@ export function extractDebates(fileName, text, segments = []) {
     const cleaned = u.text.replace(NOTICED_DEBATE_END, "");
 
     if (!inDebate) {
+      // 再議では、議会がいったん修正して議決した内容（修正議決）が議題になる。
+      if (/修正案|修正議決|修正可決/.test(u.text)) amendmentOnFloor = true;
       if (DEBATE_START.test(u.text)) inDebate = true;
       continue;
     }
@@ -231,29 +305,51 @@ export function extractDebates(fileName, text, segments = []) {
 
     if (current && current.speakerName === name) {
       // 議長の制止などで発言が分断される。同じ人の連続は1件にまとめる。
-      current.text += u.text;
+      // 改行で区切るのは、立場の根拠を引用するときに、別々の発言をまたいだ
+      // 「会議録に存在しない文」を作らないため。
+      current.text += `\n${u.text}`;
+      current.parts.push({ text: u.text, pos: u.pos });
     } else {
       flush();
-      current = { fileName, agenda, speakerLabelAsWritten: u.speaker, speakerName: name, text: u.text, pos: u.pos };
+      current = {
+        fileName,
+        agenda,
+        amendmentOnFloor,
+        speakerLabelAsWritten: u.speaker,
+        speakerName: name,
+        text: u.text,
+        pos: u.pos,
+        parts: [{ text: u.text, pos: u.pos }],
+      };
     }
   }
   flush();
 
+  const urlFor = (fileName, pos) =>
+    pos == null ? null : `${BASE}/cgi-bin3/GetText3.exe?${CODE}/${fileName}/${pos}/10/1//0/0`;
   return results.map((r) => {
     const { stance, basis } = judgeStance(r.text);
+    const { stanceTarget, stanceTargetBasis } = judgeTarget(r.text, stance, r.amendmentOnFloor);
+    // 立場を述べたのが議長の制止を挟んだ続きの発言なら、その発言の位置も出典として残す
+    // （発言単位のページは、その1発言しか表示しないため）。
+    const basisPart = basis ? r.parts.find((p) => p.text.includes(basis)) : null;
+    const stanceSourceUrl = basisPart && basisPart.pos !== r.pos ? urlFor(r.fileName, basisPart.pos) : null;
     return {
       fileName: r.fileName,
       agendaTitle: r.agenda,
+      amendmentOnFloor: r.amendmentOnFloor,
       speakerLabelAsWritten: r.speakerLabelAsWritten,
       speakerName: r.speakerName,
       pos: r.pos,
-      sourceUrl:
-        r.pos == null
-          ? null
-          : `${BASE}/cgi-bin3/GetText3.exe?${CODE}/${r.fileName}/${r.pos}/10/1//0/0`,
+      sourceUrl: urlFor(r.fileName, r.pos),
       stance,
       stanceBasis: basis,
-      excerpt: r.text.slice(0, 120),
+      stanceSourceUrl,
+      stanceTarget,
+      stanceTargetBasis,
+      // 抜粋は出典URLの発言（最初の1発言）からだけ取る。続きまで含めると、
+      // リンク先のページに無い文を抜粋として示すことになる。
+      excerpt: r.parts[0].text.slice(0, 120),
     };
   });
 }
@@ -347,6 +443,10 @@ export function toDataFile(records, { members, formerMembers, councilSessions, v
       speakerLabelAsWritten: r.speakerLabelAsWritten,
       stance: r.stance,
       stanceBasis: r.stanceBasis || null,
+      stanceSourceUrl: r.stanceSourceUrl ?? null,
+      amendmentOnFloor: r.amendmentOnFloor ?? false,
+      stanceTarget: r.stanceTarget ?? null,
+      stanceTargetBasis: r.stanceTargetBasis ?? null,
       excerpt: r.excerpt,
       sourceUrl: r.sourceUrl,
     };
@@ -362,7 +462,8 @@ export function toDataFile(records, { members, formerMembers, councilSessions, v
       "その間の議員の発言を討論として数える。「通告による討論は終わりました」は途中の区切りであって終了ではないため除外する。" +
       "討論者自身も「討論を終わります」と結ぶため、終了の宣告は議事進行役の発言に限って判定する。",
     stanceNote:
-      "stance は発言本文から機械的に読み取れた場合のみ for／against とし、読み取れない場合や賛成・反対の双方に言及している場合は unclear のままにする（推測で決めない）。",
+      "stance は発言本文から読み取れた場合のみ確定する。for（賛成）／against（反対）のほか、修正案が出ている議案で「原案反対、修正案賛成」のように対象ごとに立場が分かれる場合は mixed とし、どちらかへ寄せない。本文から読み取れない場合は unclear のままにし、推測で決めない。立場を確定したものには、判断の根拠にした本文の言い回し（stanceBasis）を必ず添える。",
+    stanceTargetNote: STANCE_TARGET_NOTE,
     generatedAt: verifiedAt,
     speeches,
   };

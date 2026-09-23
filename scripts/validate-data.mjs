@@ -4738,6 +4738,49 @@ try {
   else throw e;
 }
 
+// --- councilDebateSpeeches.json（本会議の討論。立場は本文で明言されたものだけを確定する） ---
+try {
+  const tag = "councilDebateSpeeches.json";
+  const debateData = readJson("src/data/councilDebateSpeeches.json");
+  const sessionIdsForDebate = new Set(readJson("src/data/councilSessions.json").map((s) => s.id));
+  const STANCES = new Set(["for", "against", "mixed", "unclear"]);
+  const TARGETS = new Set(["bill", "original", "amendment", "both", "unspecified"]);
+  const seen = new Set();
+  for (const d of debateData.speeches ?? []) {
+    const dTag = `${tag} id=${d.id}`;
+    if (isBlank(d.id)) err(dTag, "idが空です");
+    else if (seen.has(d.id)) err(dTag, "idが重複しています");
+    else seen.add(d.id);
+    if (!d.memberId && !d.formerMemberId) err(dTag, "議員（memberId／formerMemberId）と結び付いていません");
+    if (d.memberId && !memberIds.has(d.memberId)) err(dTag, `memberIdがmembers.jsonに存在しません: ${d.memberId}`);
+    if (d.formerMemberId && !formerMemberIds.has(d.formerMemberId))
+      err(dTag, `formerMemberIdがformerMembers.jsonに存在しません: ${d.formerMemberId}`);
+    if (d.sessionId && !sessionIdsForDebate.has(d.sessionId)) err(dTag, `sessionIdがcouncilSessions.jsonに存在しません: ${d.sessionId}`);
+    if (!STANCES.has(d.stance)) err(dTag, `stanceが不正です: ${d.stance}`);
+    // 立場を確定したものには、会議録本文の根拠が必須（根拠なしの断定をさせない）。
+    if (d.stance !== "unclear" && isBlank(d.stanceBasis)) err(dTag, "立場を確定しているのに根拠（stanceBasis）がありません");
+    if (!TARGETS.has(d.stanceTarget)) err(dTag, `stanceTargetが不正です: ${d.stanceTarget}`);
+    if (d.stance === "mixed" && d.stanceTarget !== "both") err(dTag, "mixed の対象は both でなければなりません");
+    // 修正案が出ている議題で原案／修正案と名指ししたものは、その言い回しが必須。
+    if ((d.stanceTarget === "original" || d.stanceTarget === "amendment") && isBlank(d.stanceTargetBasis))
+      err(dTag, "立場の対象を確定しているのに根拠（stanceTargetBasis）がありません");
+    if (d.stanceTarget === "bill" && d.amendmentOnFloor) err(dTag, "修正案が出ている議題なのに対象が bill になっています");
+    if (!isBlank(d.meetingDate) && !DATE_RE.test(d.meetingDate)) err(dTag, `meetingDateの形式が不正です: ${d.meetingDate}`);
+    if (!isBlank(d.verifiedAt) && !DATE_RE.test(d.verifiedAt)) err(dTag, `verifiedAtの形式が不正です: ${d.verifiedAt}`);
+    for (const key of ["sourceUrl", "stanceSourceUrl"]) {
+      if (d[key] != null && !/^https:\/\/www\.kensakusystem\.jp\/nobeoka\//.test(d[key]))
+        err(dTag, `${key}が延岡市議会の会議録ではありません: ${d[key]}`);
+    }
+    if (isBlank(d.sourceUrl)) err(dTag, "出典URL（sourceUrl）がありません");
+    // 議事進行役・執行部の発言を討論として数えない。
+    if (/^(議長|副議長|仮議長|臨時議長|市長|副市長|教育長)/.test(d.speakerLabelAsWritten ?? ""))
+      err(dTag, `議事進行役・執行部の発言が混ざっています: ${d.speakerLabelAsWritten}`);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("councilDebateSpeeches.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- report ---
 for (const w of warnings) console.warn(w);
 for (const e of errors) console.error(e);
