@@ -160,7 +160,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     group: "budget",
     chartKind: "bar",
     definitionNote:
-      "歳入の決算総額。年度により、一般会計（広報等）の値と、普通会計（決算カード・財政状況資料集。2019年度以降）の値が含まれます。会計の範囲が異なる年度があるため、各年度の定義欄をご確認ください。",
+      "歳入の決算総額。年度により、一般会計（広報等）の値と、普通会計（決算カード・財政状況資料集。2001〜2008年度と2019年度以降）の値が含まれます。会計の範囲が異なる年度があるため、各年度の定義欄をご確認ください。",
     formatValue: formatOkuYenOrConfirming,
     getPoint: (y) => ({ value: y.budget?.totalRevenueYen ?? null, sourceRefs: y.budget?.sourceRefs ?? [] }),
   },
@@ -171,7 +171,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     group: "budget",
     chartKind: "bar",
     definitionNote:
-      "歳出の決算総額。年度により、一般会計（広報等）の値と、普通会計（決算カード・財政状況資料集。2019年度以降）の値が含まれます。会計の範囲が異なる年度があるため、各年度の定義欄をご確認ください。",
+      "歳出の決算総額。年度により、一般会計（広報等）の値と、普通会計（決算カード・財政状況資料集。2001〜2008年度と2019年度以降）の値が含まれます。会計の範囲が異なる年度があるため、各年度の定義欄をご確認ください。",
     formatValue: formatOkuYenOrConfirming,
     getPoint: (y) => ({ value: y.budget?.totalExpenditureYen ?? null, sourceRefs: y.budget?.sourceRefs ?? [] }),
   },

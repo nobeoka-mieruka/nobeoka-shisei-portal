@@ -212,7 +212,7 @@ const INTERNAL_TERM_LABELS: Record<string, string> = {
   /* ---- Phase217：注記本文が参照している「データの項目名そのもの」 ---- */
   notes: "注記欄",
   isEstimate: "見込み値かどうかの区分",
-  debtServiceRatioPercent: "公債費比率",
+  debtServiceRatioPercent: "公債費負担比率",
   affiliationId: "会派・委員会所属データの整理番号",
 
   /* ----
@@ -231,7 +231,7 @@ const INTERNAL_TERM_LABELS: Record<string, string> = {
   "budget.totalExpenditureYen": "予算の歳出総額",
   "budget.sourceRefs": "予算の出典情報",
   "budget.notes": "予算の注記欄",
-  "finance.debtServiceRatioPercent": "財政指標の公債費比率",
+  "finance.debtServiceRatioPercent": "財政指標の公債費負担比率",
   "finance.sourceRefs": "財政指標の出典情報",
   "population.sourceRefs": "人口の出典情報",
 

@@ -1234,6 +1234,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（26,540,191,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1990,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 5467554000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 980000000,
+        "bondRedemptionFundYen": 2283325000,
+        "otherSpecificPurposeFundsYen": 2204229000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447119&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1990）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成2年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1991-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447119&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1990）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成2年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1991-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447119&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1990）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成2年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1991-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447119&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1990）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成2年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1991-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1293,6 +1349,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（26,870,153,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1991,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 6297410000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 980000000,
+        "bondRedemptionFundYen": 2572385000,
+        "otherSpecificPurposeFundsYen": 2745025000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446951&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1991）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成3年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1992-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446951&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1991）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成3年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1992-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446951&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1991）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成3年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1992-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446951&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1991）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成3年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1992-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1352,6 +1464,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（27,753,734,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1992,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 6932791000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 826318000,
+        "bondRedemptionFundYen": 2769187000,
+        "otherSpecificPurposeFundsYen": 3337286000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446097&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1992）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成4年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1993-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446097&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1992）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成4年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1993-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446097&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1992）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成4年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1993-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446097&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1992）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成4年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1993-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1411,6 +1579,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（28,765,642,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1993,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 6792113000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 827742000,
+        "bondRedemptionFundYen": 2489775000,
+        "otherSpecificPurposeFundsYen": 3474596000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445956&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1993）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成5年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1994-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445956&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1993）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成5年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1994-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445956&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1993）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成5年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1994-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445956&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1993）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成5年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1994-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1470,6 +1694,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（30,503,663,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1994,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 6958019000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 979429000,
+        "bondRedemptionFundYen": 2202813000,
+        "otherSpecificPurposeFundsYen": 3775777000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445805&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1994）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成6年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1995-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445805&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1994）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成6年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1995-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445805&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1994）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成6年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1995-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445805&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1994）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成6年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1995-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1529,6 +1809,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（34,040,979,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1995,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 7640295000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 970692000,
+        "bondRedemptionFundYen": 1910805000,
+        "otherSpecificPurposeFundsYen": 4758798000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443690&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1995）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成7年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1996-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443690&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1995）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成7年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1996-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443690&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1995）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成7年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1996-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443690&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1995）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成7年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1996-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1588,6 +1924,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（40,081,326,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1996,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 6604276000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1134094000,
+        "bondRedemptionFundYen": 1721886000,
+        "otherSpecificPurposeFundsYen": 3748296000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443019&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1996）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成8年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1997-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443019&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1996）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成8年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1997-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443019&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1996）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成8年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1997-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443019&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1996）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成8年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1997-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1647,6 +2039,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（42,773,153,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1997,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 6818533000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434094000,
+        "bondRedemptionFundYen": 1410036000,
+        "otherSpecificPurposeFundsYen": 3974403000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442802&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1997）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成9年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1998-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442802&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1997）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成9年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1998-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442802&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1997）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成9年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1998-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442802&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1997）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成9年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1998-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1706,6 +2154,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（45,346,059,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1998,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 7188201000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434094000,
+        "bondRedemptionFundYen": 1101439000,
+        "otherSpecificPurposeFundsYen": 4652668000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443969&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1998）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成10年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 1999-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443969&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1998）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成10年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 1999-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443969&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1998）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成10年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 1999-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443969&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1998）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成10年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 1999-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1765,6 +2269,62 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（46,594,418,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 1999,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 8201083000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434094000,
+        "bondRedemptionFundYen": 1483207000,
+        "otherSpecificPurposeFundsYen": 5283782000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1999）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成11年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 2000-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1999）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成11年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 2000-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1999）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成11年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 2000-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444184&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度1999）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成11年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2000-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
@@ -1824,13 +2384,69 @@
         ]
       },
       "notes": "Phase62調査により一般会計等ベースの地方債現在高を新規登録（47,488,221,000円）。"
+    },
+    "fund": {
+      "fiscalYear": 2000,
+      "isEstimate": false,
+      "balance": {
+        "perCapitaYen": null,
+        "totalYen": 8331540000,
+        "fiscalAdjustmentFundYen": null,
+        "fiscalReserveFundYen": 1434094000,
+        "bondRedemptionFundYen": 1261012000,
+        "otherSpecificPurposeFundsYen": 5636434000,
+        "definitionNote": "基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "sourceRefs": [
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442962&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2000）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成12年度末現在高」列「001:積立基金・財政調整基金」。普通会計・決算（確定）（基準日 2001-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442962&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2000）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成12年度末現在高」列「002:積立基金・減債基金」。普通会計・決算（確定）（基準日 2001-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442962&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2000）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成12年度末現在高」列「003:積立基金・その他特定目的基金」。普通会計・決算（確定）（基準日 2001-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442962&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2000）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成12年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2001-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
+          }
+        ]
+      },
+      "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
     }
   },
   {
     "fiscalYear": 2001,
     "finance": {
       "fiscalYear": 2001,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 17.4,
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 85.3,
@@ -1855,6 +2471,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "カード表記「財政力指数11～13」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成１３年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2002-03-31）。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
         }
       ],
       "notes": "経常収支比率85.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.55を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
@@ -1942,8 +2568,8 @@
         "fiscalReserveFundYen": 1434111000,
         "bondRedemptionFundYen": 1338268000,
         "otherSpecificPurposeFundsYen": 5261613000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 8033992000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
@@ -1954,6 +2580,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "verified",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442603&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2001）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成13年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2002-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
           }
         ]
       },
@@ -1983,7 +2619,7 @@
     "fiscalYear": 2002,
     "finance": {
       "fiscalYear": 2002,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 18.5,
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 87.5,
@@ -2008,6 +2644,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "カード表記「財政力指数12～14」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成１４年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2003-03-31）。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
         }
       ],
       "notes": "経常収支比率87.5%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.56を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
@@ -2095,8 +2741,8 @@
         "fiscalReserveFundYen": 1434111000,
         "bondRedemptionFundYen": 1296319000,
         "otherSpecificPurposeFundsYen": 5223413000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 7953843000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
@@ -2107,6 +2753,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "verified",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442398&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2002）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成14年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2003-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
           }
         ]
       },
@@ -2136,7 +2792,7 @@
     "fiscalYear": 2003,
     "finance": {
       "fiscalYear": 2003,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 18,
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 86.9,
@@ -2161,6 +2817,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "カード表記「財政力指数13～15」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成１５年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2004-03-31）。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
         }
       ],
       "notes": "経常収支比率86.9%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.55を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
@@ -2248,8 +2914,8 @@
         "fiscalReserveFundYen": 1434111000,
         "bondRedemptionFundYen": 1217599000,
         "otherSpecificPurposeFundsYen": 4856700000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 7508410000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
@@ -2260,6 +2926,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、直接の目視確認は実施していないが、前年度（FY2002）・翌年度（FY2004）の原本PDFをいずれも目視確認し、両方とも同一値（1,434,111千円）であることを確認したため、FY2003も同一値である可能性が極めて高いと判断した（ただし本レコード自体の原本は未確認のため、精度としてはneedsReviewからverifiedへは格上げしない）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031441988&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2003）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成15年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2004-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
           }
         ]
       },
@@ -2289,7 +2965,7 @@
     "fiscalYear": 2004,
     "finance": {
       "fiscalYear": 2004,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 17.6,
       "realDebtServiceRatioPercent": null,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 89.8,
@@ -2314,6 +2990,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "カード表記「財政力指数（範囲表記なし）」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成１６年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2005-03-31）。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
         }
       ],
       "notes": "経常収支比率89.8%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.55を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
@@ -2401,8 +3087,8 @@
         "fiscalReserveFundYen": 1434111000,
         "bondRedemptionFundYen": 1031237000,
         "otherSpecificPurposeFundsYen": 4421702000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 6887050000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
@@ -2413,6 +3099,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "verified",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031441847&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2004）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成16年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2005-03-31）。原資料の単位は千円。団体範囲は旧延岡市単独（北方町・北浦町・北川町の編入前）。"
           }
         ]
       },
@@ -2442,8 +3138,8 @@
     "fiscalYear": 2005,
     "finance": {
       "fiscalYear": 2005,
-      "debtServiceRatioPercent": null,
-      "realDebtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 18.4,
+      "realDebtServiceRatioPercent": 15.2,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 90.3,
       "financialStrengthIndex": 0.48,
@@ -2467,9 +3163,29 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "カード表記「財政力指数（範囲表記なし）」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成１７年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2006-03-31）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成１７年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「実質公債費比率(％)」当該年度列。普通会計・決算（確定）（基準日 2006-03-31）。"
         }
       ],
-      "notes": "経常収支比率90.3%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.48を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率90.3%を総務省市町村決算カードより新規登録。実質公債費比率は決算カードに掲載されている値を登録した（2026-09-23。以前は「制度上非該当」としていたが、平成17・18年度の決算カードに掲載があることを確認し訂正）。将来負担比率は「健全化判断比率」制度（FY2007決算から適用）の前のため、この年度には算定されていない。財政力指数0.48を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2005,
@@ -2554,8 +3270,8 @@
         "fiscalReserveFundYen": 2396939000,
         "bondRedemptionFundYen": 892619000,
         "otherSpecificPurposeFundsYen": 5389973000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 8679531000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
@@ -2566,6 +3282,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031396228&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2005）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成17年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2006-03-31）。原資料の単位は千円。"
           }
         ]
       },
@@ -2594,8 +3320,8 @@
     "fiscalYear": 2006,
     "finance": {
       "fiscalYear": 2006,
-      "debtServiceRatioPercent": null,
-      "realDebtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 19.6,
+      "realDebtServiceRatioPercent": 15.8,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 92.2,
       "financialStrengthIndex": 0.49,
@@ -2619,9 +3345,29 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "カード表記「財政力指数（範囲表記なし、FY2007カード内の前年度比較列でも同値0.49を確認・二重裏付け済み）」。Phase35調査で総務省「指標の説明」（基準財政収入額÷基準財政需要額の過去3年間平均）と照合し、FY2007以降の登録値と同一定義であることを確認済み。同ページの基金残高が既存登録値と完全一致することでもクロスチェック済み。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成１８年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2007-03-31）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成１８年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「実質公債費比率(％)」当該年度列。普通会計・決算（確定）（基準日 2007-03-31）。"
         }
       ],
-      "notes": "経常収支比率92.2%を総務省市町村決算カードより新規登録。実質公債費比率・将来負担比率は「健全化判断比率」制度（平成19年法律、FY2007決算から適用）がこの年度には存在しないため構造的に対象外（未確認ではなく制度上非該当）。財政力指数0.49を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
+      "notes": "経常収支比率92.2%を総務省市町村決算カードより新規登録。実質公債費比率は決算カードに掲載されている値を登録した（2026-09-23。以前は「制度上非該当」としていたが、平成17・18年度の決算カードに掲載があることを確認し訂正）。将来負担比率は「健全化判断比率」制度（FY2007決算から適用）の前のため、この年度には算定されていない。財政力指数0.49を新規登録（Phase35調査：総務省公式定義文書との照合により、FY2007以降の登録値と同一定義＝過去3年平均であることを確認済み）。予算・決算額・市債・基金等の他区分は今回未調査のため未登録。"
     },
     "budget": {
       "fiscalYear": 2006,
@@ -2706,8 +3452,8 @@
         "fiscalReserveFundYen": 2562208000,
         "bondRedemptionFundYen": 1178676000,
         "otherSpecificPurposeFundsYen": 8012156000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 11753040000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
@@ -2718,6 +3464,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "verified",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031396033&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2006）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成18年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2007-03-31）。原資料の単位は千円。"
           }
         ]
       },
@@ -2748,7 +3504,7 @@
     "fiscalYear": 2007,
     "finance": {
       "fiscalYear": 2007,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 20.5,
       "realDebtServiceRatioPercent": 15.3,
       "futureBurdenRatioPercent": 142.5,
       "currentAccountRatioPercent": 94.6,
@@ -2763,6 +3519,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+          "sourceTitle": "総務省「平成１９年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2008-03-31）。"
         }
       ],
       "notes": "財政力指数0.51・実質公債費比率15.3%・将来負担比率142.5%・経常収支比率94.6%を総務省市町村決算カードより新規登録。予算・決算額・市債・基金等の他区分は今回未調査のため未登録（別バッチで対応）。"
@@ -2860,8 +3626,8 @@
         "fiscalReserveFundYen": 2562208000,
         "bondRedemptionFundYen": 1075192000,
         "otherSpecificPurposeFundsYen": 7445845000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 11083245000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
@@ -2872,6 +3638,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "verified",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、FY2008の原本PDF（平成20年度決算カード）に前年度（平成19年度＝FY2007）比較列が掲載されており、そこに記載された財調欄の数値（2,562,208千円）が現行DB値と完全一致することを確認した。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031395929&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2007）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成19年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2008-03-31）。原資料の単位は千円。"
           }
         ]
       },
@@ -2902,7 +3678,7 @@
     "fiscalYear": 2008,
     "finance": {
       "fiscalYear": 2008,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 21.4,
       "realDebtServiceRatioPercent": 14.7,
       "futureBurdenRatioPercent": 137.4,
       "currentAccountRatioPercent": 94.2,
@@ -2917,6 +3693,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+          "sourceTitle": "総務省「平成２０年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2009-03-31）。"
         }
       ],
       "notes": "財政力指数0.53・実質公債費比率14.7%・将来負担比率137.4%・経常収支比率94.2%を総務省市町村決算カードより新規登録。予算・決算額・市債・基金等の他区分は今回未調査のため未登録（別バッチで対応）。"
@@ -3014,8 +3800,8 @@
         "fiscalReserveFundYen": 2562208000,
         "bondRedemptionFundYen": 1088372000,
         "otherSpecificPurposeFundsYen": 7565288000,
-        "totalYen": null,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。",
+        "totalYen": 11215868000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、いずれも総務省市町村決算カードの区分。基金合計（totalYen）はカード上に合計行が無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
@@ -3026,6 +3812,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "verified",
             "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した。前年度比較列がある年度は隣接年度の値との整合も確認済み。 Phase90（UNR-030実地調査、2026-08-23）にて、総務省「市町村決算カード」原本PDFをWinRT（Windows.Data.Pdf）でページ画像化し、財調欄の数値を直接目視確認した。現行DB値が原本の記載と完全一致することを確認済み。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031395716&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2008）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成20年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2009-03-31）。原資料の単位は千円。"
           }
         ]
       },
@@ -3145,7 +3941,7 @@
     },
     "finance": {
       "fiscalYear": 2009,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 21.2,
       "realDebtServiceRatioPercent": 13.5,
       "futureBurdenRatioPercent": 116.3,
       "currentAccountRatioPercent": 91.8,
@@ -3171,6 +3967,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-10_45.pdf",
+          "sourceTitle": "総務省「平成２１年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2010-03-31）。"
         }
       ],
       "notes": "財政力指数0.51を新規登録。 経常収支比率91.8%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3337,7 +4143,7 @@
     },
     "finance": {
       "fiscalYear": 2010,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 19.8,
       "realDebtServiceRatioPercent": 12.4,
       "futureBurdenRatioPercent": 98.7,
       "currentAccountRatioPercent": 86.1,
@@ -3363,6 +4169,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-11_45.pdf",
+          "sourceTitle": "総務省「平成２２年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2011-03-31）。"
         }
       ],
       "notes": "財政力指数0.48を新規登録。 経常収支比率86.1%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3518,7 +4334,7 @@
     },
     "finance": {
       "fiscalYear": 2011,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 19.5,
       "realDebtServiceRatioPercent": 11.3,
       "futureBurdenRatioPercent": 83.7,
       "currentAccountRatioPercent": 86.3,
@@ -3544,6 +4360,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "PDFはCJK埋め込みフォントのためpdftotext等では文字化けし読み取り不能だったが、pdfjs-distにcMap/標準フォントデータを明示指定した上でテキスト座標（transform）を取得し、ラベルと数値セルの位置関係から値を特定した（既存の実質公債費比率・将来負担比率の登録値と完全一致することで抽出手法を検証済み）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-12_45.pdf",
+          "sourceTitle": "総務省「平成２３年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "PDF p.4（延岡市、団体コード452033）／右欄「公債費負担比率(％)」当該年度列。普通会計・決算（確定）（基準日 2012-03-31）。"
         }
       ],
       "notes": "財政力指数0.46を新規登録。 経常収支比率86.3%を新規登録（減収補塡債（特例分）及び臨時財政対策債を含む標準ベース）。"
@@ -3575,7 +4401,7 @@
         "perCapitaYen": null,
         "totalYen": 18038500000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": 3502760000,
+        "fiscalReserveFundYen": 3502702000,
         "bondRedemptionFundYen": 1713342000,
         "otherSpecificPurposeFundsYen": 9674730000,
         "definitionNote": "「基金（貯金）の残高の推移」棒グラフの平成23年度末値18,038,500,000円（一般・特別・企業会計の合計、本文に明記）。財政調整基金単体の内訳はこのグラフには無い（総額のみ）。 【Phase138追記】財政調整基金単体（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金（otherSpecificPurposeFundsYen）は、総務省「平成23年度市町村決算カード」（延岡市、p.4、決算カード内の「積立金 現在高」区分）から新規登録した（UNR-037の解決）。この決算カードの基準（総務省統一様式）と、上記totalYen（広報のべおか、一般・特別・企業会計合計）は集計範囲が異なる可能性があるため、内訳3区分の合計とtotalYenを比較・整合させる操作は行っていない。",
@@ -3601,7 +4427,7 @@
           }
         ]
       },
-      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高（他年度と同一定義のfiscalReserveFundYen）は本資料からは特定できず未登録。"
+      "notes": "基金全体の合計（一般・特別・企業会計の合計）のみ確認。財政調整基金単体の残高（他年度と同一定義のfiscalReserveFundYen）は本資料からは特定できず未登録。 【2026-09-23】財政調整基金を3,502,760千円から3,502,702千円に訂正（転記誤り。平成23年度決算カードの当該年度列と平成24年度決算カードの前年度列の双方が3,502,702千円）。"
     },
     "mayorId": "mayor-02",
     "mayorTermId": "mayor-02-term-02"
@@ -4806,12 +5632,12 @@
       "isEstimate": false,
       "balance": {
         "perCapitaYen": null,
-        "totalYen": null,
+        "totalYen": 19897780000,
         "fiscalAdjustmentFundYen": null,
         "fiscalReserveFundYen": 5296000000,
         "bondRedemptionFundYen": 2456000000,
         "otherSpecificPurposeFundsYen": 14320000000,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録（FY2018・FY2019と同一の計算方法）。基金全体の合計（totalYen）は、この年度は明示的な合計行が資料に無いため算出しない。",
+        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録（FY2018・FY2019と同一の計算方法）。基金全体の合計（totalYen）は、この年度は明示的な合計行が資料に無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
@@ -4822,6 +5648,16 @@
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
             "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円。固定資産側「基金」16,776百万円（うち減債基金2,456百万円）＋流動資産側「基金」5,296百万円（うち財政調整基金5,296百万円、減債基金0）から、財政調整基金5,296百万円・減債基金2,456百万円・その他特定目的基金（残差）14,320百万円を算出した（FY2018・FY2019の既存登録値と同一の計算式で導出、按分や推測は行っていない）。延岡市財政分析報告書ページ（/soshiki/18/40989.html）で平成29年度分のリンクを発見し取得した（平成28年度以前は同ページに個別ファイルリンクが無く、この基準の財務書類の公表自体がFY2017から始まっているとみられる）。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031771203&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2017）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-23",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「平成29年度末現在高」列「004:積立基金・合計」。普通会計・決算（確定）（基準日 2018-03-31）。原資料の単位は千円。"
           }
         ]
       },
@@ -5018,7 +5854,7 @@
     },
     "finance": {
       "fiscalYear": 2018,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 18.6,
       "realDebtServiceRatioPercent": 9.8,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 92.2,
@@ -5043,6 +5879,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000676980.xlsx",
+          "sourceTitle": "総務省「平成３０年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "シート「4延岡市」／セルCS54（公債費負担比率、当該年度列）。普通会計・決算（確定）（基準日 2019-03-31）。"
         }
       ],
       "notApplicableRatios": [
@@ -5216,7 +6062,7 @@
     },
     "finance": {
       "fiscalYear": 2019,
-      "debtServiceRatioPercent": null,
+      "debtServiceRatioPercent": 17.5,
       "realDebtServiceRatioPercent": 8.9,
       "futureBurdenRatioPercent": null,
       "currentAccountRatioPercent": 94.3,
@@ -5231,6 +6077,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "needsReview",
           "notes": "総務省が公開するXLSX形式の決算カードをセルアドレス単位で読み取った（同一シート内に前年度比較列があるため、隣接年度の値との整合も確認済み）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/main_content/000740038.xlsx",
+          "sourceTitle": "総務省「令和元年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "シート「4延岡市」／セルCS58（公債費負担比率、当該年度列）。普通会計・決算（確定）（基準日 2020-03-31）。"
         }
       ],
       "notApplicableRatios": [
@@ -5972,7 +6828,7 @@
     },
     "finance": {
       "fiscalYear": 2022,
-      "debtServiceRatioPercent": 14.4,
+      "debtServiceRatioPercent": 14.7,
       "realDebtServiceRatioPercent": 7.8,
       "futureBurdenRatioPercent": 2.7,
       "currentAccountRatioPercent": 91.6,
@@ -5989,7 +6845,7 @@
           "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。"
         }
       ],
-      "notes": "実質収支2,104,150千円、実質収支比率6.6%、標準財政規模32,067,253千円も同資料に記載。",
+      "notes": "実質収支2,104,150千円、実質収支比率6.6%、標準財政規模32,067,253千円も同資料に記載。 【2026-09-23】公債費負担比率を14.4%から14.7%に訂正（14.4%は令和5年度の値を読み違えたもの。令和4年度決算カード、令和5年度決算カードの前年度列、令和5年度財政状況資料集の3か所で14.7%）。",
       "soundness": {
         "actualDeficitRatio": {
           "status": "notApplicable",

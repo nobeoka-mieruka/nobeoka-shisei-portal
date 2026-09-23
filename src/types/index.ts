@@ -523,6 +523,44 @@ export interface NobeokaCensusPopulationData {
   definitionNote: string;
   mergerEvents: { date: string; annexedMunicipalities: string[]; method: string; civicTimelineEventId: string }[];
   series: NobeokaCensusPopulationPoint[];
+  /** 国勢調査の年齢3区分別人口（現在の市域）。valueType: original＝原数値、unknownImputed＝年齢不詳補完値。 */
+  ageGroups3?: {
+    censusYear: number;
+    referenceDate: string;
+    sourceType: "census";
+    valueType: "original" | "unknownImputed";
+    unit: string;
+    total: number;
+    age0to14: number;
+    age15to64: number;
+    age65plus: number;
+    ageUnknown: number;
+    method: string;
+    sourceUrl: string;
+    sourceTitle: string;
+    sourceOrganization: string;
+    notes?: string;
+    accessedAt: string;
+  }[];
+  ageGroups3Note?: string;
+  /** 令和7年国勢調査の速報値。確定値で改定されうるため、推移（series）には加えない。 */
+  census2025Preliminary?: {
+    censusYear: number;
+    referenceDate: string;
+    sourceType: "census_preliminary";
+    population: number;
+    male: number;
+    female: number;
+    households: number;
+    changeFrom2020: { population: number; populationRatePercent: number; households: number; householdsRatePercent: number };
+    ageGroupsNote: string;
+    sourceUrl: string;
+    sourceTitle: string;
+    pageOrTable: string;
+    sourceOrganization: string;
+    publishedDate: string;
+    caution: string;
+  };
 }
 
 /** 数値と、その数値の基準日・出典を1組にしたもの。自治体比較のように項目ごとに基準日が異なりうる場合に使う。 */

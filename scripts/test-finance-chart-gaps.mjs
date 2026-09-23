@@ -228,18 +228,27 @@ check("すべての折れ線指標で、値を生成していない（補間生�
   }
 });
 
-check("/finance/funds の基金総額：1989年度と2009年度が同じ線で結ばれていない", () => {
+check("/finance/funds の基金総額：値の無い年度をまたいで線を結ばない", () => {
+  // 以前は1990〜2008年度が未登録で、1989年度と2009年度を結ばないことを確かめていた。
+  // 2026-09-23に総務省「地方財政状況調査」・決算カードから1990〜2008年度を登録したため、
+  // 特定の年度ではなく「同じ線の上では年度が必ず1つずつ続く」ことを確かめる。
   const fundTotal = lineMetrics.find((m) => m.key === "fundTotal");
   assert.ok(fundTotal, "fundTotal指標が見つからない");
   const series = seriesFor(fundTotal, fundRows);
-  const indexOf = (year) => series.findIndex((p) => p.year === year);
-  const segments = financeLineSegments(series);
-  const segmentOf = (index) => segments.findIndex((s) => s.includes(index));
-  assert.ok(indexOf(1989) >= 0 && indexOf(2009) >= 0, "1989年度・2009年度が表示範囲に無い");
-  assert.notEqual(segmentOf(indexOf(1989)), segmentOf(indexOf(2009)));
-  const gaps = financeLineGaps(series);
-  assert.ok(gaps.length >= 1, "欠損区間が検出されていない");
-  assert.ok(gaps[0].missingYears.includes(1995), "1990年代の未確認年度が欠損区間に含まれていない");
+  for (const segment of financeLineSegments(series)) {
+    for (let i = 1; i < segment.length; i++) {
+      const prev = series[segment[i - 1]];
+      const curr = series[segment[i]];
+      assert.ok(prev.value != null && curr.value != null, "値の無い年度が線に含まれている");
+      assert.equal(curr.year - prev.year, 1, `${prev.year}年度と${curr.year}年度が、間の年度をまたいで結ばれている`);
+    }
+  }
+  // 値の無い年度があれば、欠損区間として検出されること。
+  const missing = series.filter((p) => p.value == null).map((p) => p.year);
+  const gapYears = financeLineGaps(series).flatMap((g) => g.missingYears ?? []);
+  for (const y of missing) {
+    if (y > series[0].year && y < series[series.length - 1].year) assert.ok(gapYears.includes(y), `${y}年度の欠損が区間として示されていない`);
+  }
 });
 
 check("/finance/funds の財源調整用基金：未確認年度を0として描いていない", () => {

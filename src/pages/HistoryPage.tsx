@@ -255,6 +255,23 @@ export function HistoryPage() {
             <strong className="font-semibold text-on-surface">市町村合併について：</strong>
             延岡市は2006年2月20日に北方町・北浦町を、2007年3月31日に北川町を編入しました。合併前後で市域・人口の集計範囲が変わるため、年ごとの単純な人口比較には注意が必要です。人口の増減を特定の市長個人の成果・責任として説明するものではありません。
           </p>
+          {nobeokaCensusPopulation.census2025Preliminary && (
+            <p>
+              <strong className="font-semibold text-on-surface">令和7年国勢調査（速報値）：</strong>
+              {formatJapaneseDate(nobeokaCensusPopulation.census2025Preliminary.referenceDate)}現在の人口
+              {nobeokaCensusPopulation.census2025Preliminary.population.toLocaleString("ja-JP")}人・世帯数
+              {nobeokaCensusPopulation.census2025Preliminary.households.toLocaleString("ja-JP")}世帯（
+              <a
+                href={nobeokaCensusPopulation.census2025Preliminary.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={`text-primary underline ${linkClass}`}
+              >
+                {nobeokaCensusPopulation.census2025Preliminary.sourceTitle}
+              </a>
+              ）。{nobeokaCensusPopulation.census2025Preliminary.caution}
+            </p>
+          )}
           <p>
             出典：
             <a
@@ -268,6 +285,52 @@ export function HistoryPage() {
             （{nobeokaCensusPopulation.primarySource.organization}、{formatJapaneseDate(nobeokaCensusPopulation.primarySource.accessedAt)}確認）
           </p>
         </div>
+        {(nobeokaCensusPopulation.ageGroups3 ?? []).length > 0 && (
+          <div className="mt-4">
+            <h3 className="text-sm font-semibold text-on-surface">年齢3区分別人口（国勢調査・現在の市域）</h3>
+            <div className="mt-2 overflow-x-auto">
+              <table className="w-full min-w-[30rem] border-collapse text-xs">
+                <caption className="sr-only">国勢調査の年齢3区分別人口（原数値）</caption>
+                <thead>
+                  <tr className="border-b border-outline-variant text-left text-on-surface-variant">
+                    <th scope="col" className="py-1.5 pr-2 font-medium">調査年</th>
+                    <th scope="col" className="py-1.5 pr-2 text-right font-medium">総数</th>
+                    <th scope="col" className="py-1.5 pr-2 text-right font-medium">0〜14歳</th>
+                    <th scope="col" className="py-1.5 pr-2 text-right font-medium">15〜64歳</th>
+                    <th scope="col" className="py-1.5 pr-2 text-right font-medium">65歳以上</th>
+                    <th scope="col" className="py-1.5 text-right font-medium">年齢不詳</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {nobeokaCensusPopulation.ageGroups3!
+                    .filter((a) => a.valueType === "original")
+                    .map((a) => (
+                      <tr key={a.censusYear} className="border-b border-outline-variant/60 tabular-nums text-on-surface">
+                        <th scope="row" className="py-1.5 pr-2 text-left font-normal">{a.censusYear}年</th>
+                        <td className="py-1.5 pr-2 text-right">{a.total.toLocaleString("ja-JP")}</td>
+                        <td className="py-1.5 pr-2 text-right">{a.age0to14.toLocaleString("ja-JP")}</td>
+                        <td className="py-1.5 pr-2 text-right">{a.age15to64.toLocaleString("ja-JP")}</td>
+                        <td className="py-1.5 pr-2 text-right">{a.age65plus.toLocaleString("ja-JP")}</td>
+                        <td className="py-1.5 text-right">{a.ageUnknown.toLocaleString("ja-JP")}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+              {nobeokaCensusPopulation.ageGroups3Note}（単位：人。出典：
+              <a
+                href={nobeokaCensusPopulation.ageGroups3![0].sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={`text-primary underline ${linkClass}`}
+              >
+                {nobeokaCensusPopulation.ageGroups3![0].sourceTitle}
+              </a>
+              ）
+            </p>
+          </div>
+        )}
       </SectionCard>
 
       {personFilter && (
