@@ -251,7 +251,7 @@ const PROPOSAL_ROLE_LABELS_JA: Record<string, string> = {
  * ここには含まれない（billProposalRoles.json自体に登録していない）。
  */
 function proposalEvents(personId: string): TimelineEvent[] {
-  const roles = (billProposalRolesData as { roles: { recordId: string; billId: string; personId: string; role: string; date: string | null; sourceRefs: { label: string; url?: string }[] }[] }).roles;
+  const roles = (billProposalRolesData as { roles: { recordId: string; billId: string; personId: string; role: string; date: string | null; verificationStatus?: string; sourceRefs: { label: string; url?: string }[] }[] }).roles;
   const billsById = new Map(billVotes.map((b) => [b.id, b]));
   return roles
     .filter((r) => r.personId === personId)
@@ -266,6 +266,11 @@ function proposalEvents(personId: string): TimelineEvent[] {
         datePrecision: (r.date ? "day" : "unknown") as DatePrecision,
         displayDate: r.date ? formatDayDate(r.date) : "日付確認中",
         title: `${bill ? `${bill.billNumber}　${bill.billTitle}` : r.billId}　（${label}）`,
+        // 会議録との照合が済んでいない記録は、確定した記録と同じ見え方にしない。
+        summary:
+          r.verificationStatus && r.verificationStatus !== "verified"
+            ? "この提出者の記録は、会議録との照合が済んでいません（要確認）。"
+            : undefined,
         relatedId: r.billId,
         sourceRefs: r.sourceRefs,
       };

@@ -1,5 +1,6 @@
 import type { CouncilMember } from "../types";
 import billProposalRolesData from "../data/billProposalRoles.json";
+import membersData from "../data/members.json";
 import questionCollectionStatusData from "../data/questionCollectionStatus.json";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
 import councilDebateSpeechesData from "../data/councilDebateSpeeches.json";
@@ -161,8 +162,15 @@ const MINUTES_SOURCE: AxisSourceRef = {
   url: "https://www.kensakusystem.jp/nobeoka/",
 };
 
-const billProposalRoles = (billProposalRolesData as { roles: { role: string; personId: string }[] }).roles;
-const decisionSubmitterRecords = billProposalRoles.filter((r) => r.role === "submitter");
+const billProposalRoles = (
+  billProposalRolesData as { roles: { role: string; personId: string; verificationStatus?: string }[] }
+).roles;
+const currentMemberIds = new Set((membersData as { id: string }[]).map((m) => m.id));
+// 「会議録で氏名まで確認できた」と書く件数なので、照合済み（verified）の記録だけを数える。
+// 「現職N名中」と並べるため、元議員の記録も含めない。
+const decisionSubmitterRecords = billProposalRoles.filter(
+  (r) => r.role === "submitter" && r.verificationStatus === "verified" && currentMemberIds.has(r.personId),
+);
 const decisionSubmitterMemberIds = new Set(decisionSubmitterRecords.map((r) => r.personId));
 
 /**
@@ -242,7 +250,7 @@ export function buildCouncilActivityProfile(
     upperBoundMeaning: "（割合として算定していません）",
     status: "CONDITIONAL",
     reason:
-      `議員提出決議の提出者は会議録で氏名まで確認でき、現在${decisionSubmitterRecords.length}件・` +
+      `議員提出決議の提出者は会議録で氏名まで確認でき、現職議員について現在${decisionSubmitterRecords.length}件・` +
       `${decisionSubmitterMemberIds.size}名分を登録しています。ただし提案の機会は議員ごとに等しくないため、` +
       "割合として算定できる分母がありません。条例案・意見書の提出者も取り込めていません。" +
       "提出の記録が無いことは、政策提言をしていないという意味ではありません。",

@@ -131,6 +131,12 @@ export function MemberSpeechDetailPage() {
                       対応関係確認中
                     </span>
                   )}
+                  {/* おおむね確認できたが一部不明瞭なものを、確認済みと同じ見え方にしない。 */}
+                  {q.questionAnswerLinkStatus === "partially-confirmed" && (
+                    <span className="rounded-full border border-outline-variant px-2 py-0.5 text-xs font-medium text-on-surface-variant">
+                      対応関係は一部確認（一部不明瞭な点があります）
+                    </span>
+                  )}
                 </div>
 
                 {sortedExchanges.length > 0 ? (

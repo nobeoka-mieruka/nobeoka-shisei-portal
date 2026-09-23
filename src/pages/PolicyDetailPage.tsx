@@ -37,6 +37,7 @@ import {
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { fiscalYearOfIsoDate } from "../lib/archiveTimeline";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { archiveVerificationStatusLabel } from "../lib/archiveMayors";
 
 const archivePolicies = archivePoliciesData as ArchivePolicy[];
 const archivePolicyCategories = archivePolicyCategoriesData as ArchivePolicyCategory[];
@@ -161,6 +162,10 @@ export function PolicyDetailPage() {
                     )}
                     <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
                       {policyQuestionRelationTypeLabel(r.relationType)}
+                    </span>
+                    {/* 確認前の関連を確定情報のように見せない。確認状況を必ず添える。 */}
+                    <span className="rounded-full border border-outline-variant px-2 py-0.5 text-xs text-on-surface-variant">
+                      関連の確認状況：{archiveVerificationStatusLabel(r.verificationStatus)}
                     </span>
                   </div>
                 </li>
