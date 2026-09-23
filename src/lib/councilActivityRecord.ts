@@ -39,6 +39,35 @@ export type ActivityRecordAvailability =
   | "not-applicable";
 
 /**
+ * 確認状況の表示ラベル。個人ページ・一覧・比較のすべてでこの表を使い、
+ * 同じ状態を画面によって別の言葉で呼ばない。
+ *
+ * 「0」を使うのは、一次資料を確認した結果、該当する記録が0件だったときだけ。
+ * 未確認・未公開・個人単位算定不可・対象外は、いずれも0とは別の状態として示す。
+ */
+export const ACTIVITY_AVAILABILITY_LABELS_JA: Record<ActivityRecordAvailability, string> = {
+  available: "確認済み",
+  partial: "一部のみ確認",
+  "confirmed-zero": "0件（資料を確認済み）",
+  "not-acquired": "未確認",
+  "not-published": "未公開",
+  "not-individually-attributable": "個人単位算定不可",
+  "not-applicable": "対象外",
+};
+
+/** 確認状況の説明（凡例に使う）。0と、0ではない状態の違いを言葉で示す。 */
+export const ACTIVITY_AVAILABILITY_DESCRIPTIONS_JA: { code: ActivityRecordAvailability; text: string }[] = [
+  { code: "confirmed-zero", text: "対象の一次資料を確認した結果、該当する記録が0件だった。" },
+  { code: "not-acquired", text: "資料は公開されているが、当サイトがまだ取り込めていない。0件という意味ではない。" },
+  { code: "not-published", text: "必要な一次資料が公開されていない。0件という意味ではない。" },
+  {
+    code: "not-individually-attributable",
+    text: "記録はあるが、誰の行為かが分かる形で公開されていない（起立採決など）。0件という意味ではない。",
+  },
+  { code: "not-applicable", text: "制度上その議員に当てはまらない（議長を務めていた会期など）。0件という意味ではない。" },
+];
+
+/**
  * 会期を実施率の分母から外した理由。内部コードであり、画面にそのまま出さない。
  * 表示用の日本語は EXCLUSION_REASON_LABELS_JA で別に持つ（内部コードと表示文言を分離する）。
  */
@@ -115,6 +144,27 @@ export interface ActivityRecordListItem {
   /** 一次資料への導線。 */
   url?: string;
   urlLabel?: string;
+  /** 2つ目の導線（立場を述べた続きの発言など、1つのページに収まらない場合）。 */
+  secondaryUrl?: string;
+  secondaryUrlLabel?: string;
+  /** 一次資料の書誌情報。分かるものだけを持たせる（推測で埋めない）。 */
+  source?: ActivityRecordSource;
+  /** 算定（分子・分母）に含めていない記録なら、その理由。一覧には残す。 */
+  notCountedReason?: string;
+}
+
+/** 一次資料の書誌情報。 */
+export interface ActivityRecordSource {
+  /** 資料名（例：延岡市議会 会議録）。 */
+  title: string;
+  /** 発行主体（例：延岡市議会）。 */
+  publisher: string;
+  /** 開催日・公開日（YYYY-MM-DD）。 */
+  date?: string;
+  /** 対象箇所（例：令和5年第3回定例会（第5号 7月7日）の 六番（後藤司光君） の発言）。 */
+  locator?: string;
+  /** 当サイトが原文と照合した日（YYYY-MM-DD）。 */
+  retrievedAt?: string;
 }
 
 /** 表示する1項目分の値。点数ではなく、確認できた事実。 */
@@ -146,6 +196,8 @@ export interface ActivityRecordValue {
   availabilityNote?: string;
   /** 「根拠を見る」で何を開くか。 */
   evidenceKind: "sessions" | "items" | "none";
+  /** 項目固有の対象期間（一般質問と異なる場合だけ。例：討論は臨時会も含む）。 */
+  periodLabel?: string;
 }
 
 /** 議員1名分の、公開記録による議会活動。 */
@@ -166,11 +218,13 @@ export interface CouncilActivityRecordExtras {
   /** 本会議での委員長・副委員長報告。 */
   committeeReports?: ActivityRecordListItem[];
   /** 議案への賛否（個人別の記録が公開されている議案のうち、確認できた数）。 */
-  namedVotes?: { numerator: number; denominator: number };
+  namedVotes?: { numerator: number; denominator: number; items?: ActivityRecordListItem[] };
   /** 本会議での討論。 */
   debates?: ActivityRecordListItem[];
   /** 討論の分子・分母（討論が行われた会期のうち、討論に立った会期）。 */
   debateSessions?: { numerator: number; denominator: number };
+  /** 討論の対象期間（定例会に加えて、その間の臨時会を含む）。 */
+  debatePeriodLabel?: string;
   /** 請願の紹介議員として、一次資料で確認できた記録。 */
   petitionIntroductions?: ActivityRecordListItem[];
 }
@@ -341,7 +395,8 @@ export function buildCouncilActivityRecord(
       denominator: denominatorAvailable ? denominator : undefined,
       numeratorLabel: "一般質問を行った会期",
       denominatorLabel: "算定対象の会期（会議録を確認できた会期）",
-      availability: denominatorAvailable ? "available" : "not-applicable",
+      // 0%は、算定対象の会期の会議録をすべて確認した結果の0なので confirmed-zero とする。
+      availability: !denominatorAvailable ? "not-applicable" : askedSessionCount > 0 ? "available" : "confirmed-zero",
       availabilityNote: denominatorAvailable ? undefined : notApplicableNote,
       description:
         "本人が一般質問可能だった会期のうち、一般質問を行った会期の割合です。質問の回数や長さ、内容の良し悪しは含みません。",
@@ -405,7 +460,9 @@ export function buildCouncilActivityRecord(
       availability: !denominatorAvailable
         ? "not-applicable"
         : followUpDenominator > 0
-          ? "available"
+          ? itemsWithFollowUp > 0
+            ? "available"
+            : "confirmed-zero"
           : questionItems === 0
             ? // 質問項目そのものが0件。確認した結果として0件である。
               "confirmed-zero"
@@ -416,7 +473,9 @@ export function buildCouncilActivityRecord(
         "再質問の有無を確認できた質問項目のうち、公開会議録上で再質問を確認できた質問の割合です。やり取りの内容は評価していません。",
       availabilityNote: !denominatorAvailable
         ? notApplicableNote
-        : followUps.UNRECORDED > 0
+        : questionItems === 0
+          ? "算定対象の会期の会議録を確認した結果、質問項目が0件だったため、割合は算定していません（0%ではありません）。"
+          : followUps.UNRECORDED > 0
           ? `このほかに、登壇全体で再質問の記録が残っていない質問項目が${followUps.UNRECORDED}件あります。再質問をしなかったのか、会議録の要約がそこまで作られていないのかを区別できないため、分母から外しています（0件として扱っていません）。`
           : undefined,
       sourceLabel: SOURCE_MINUTES,
@@ -505,7 +564,7 @@ export function buildCouncilActivityRecord(
   const debateSessions = extras.debateSessions;
   values.push({
     key: "debate-rate",
-    label: "討論を行った会期",
+    label: "討論を行った会期の割合",
     group: "council",
     kind: "number",
     value:
@@ -516,19 +575,26 @@ export function buildCouncilActivityRecord(
     numerator: debateSessions && debateSessions.denominator > 0 ? debateSessions.numerator : undefined,
     denominator: debateSessions && debateSessions.denominator > 0 ? debateSessions.denominator : undefined,
     numeratorLabel: "討論を行った会期",
-    denominatorLabel: "討論が行われた会期",
-    availability:
-      !debateSessions || debateSessions.denominator === 0
-        ? "not-acquired"
+    denominatorLabel: "討論が行われた会期（議長を務めた会期を除く）",
+    availability: !debateSessions
+      ? "not-acquired"
+      : debateSessions.denominator === 0
+        ? // 討論が行われた会期のすべてで議長を務めていた等、制度上この議員に当てはまらない。
+          "not-applicable"
         : debateSessions.numerator > 0
           ? "available"
           : "confirmed-zero",
+    availabilityNote:
+      debateSessions && debateSessions.denominator === 0
+        ? "討論が行われた会期のすべてで議長（議事進行役）を務めていたため、算定していません。討論をしなかったという意味ではありません。"
+        : undefined,
     description:
-      "本会議の討論の場で発言したことを会議録で確認できた会期の割合です。討論が1件も行われなかった会期は分母に入れていません。賛成・反対のどちらであったかは評価しません。討論に立たなかったことは、議案に賛成だったという意味でも、関心が無かったという意味でもありません。",
+      "本会議（定例会・臨時会）の討論の場で発言したことを会議録で確認できた会期の割合です。討論が1件も行われなかった会期と、議長を務めていた会期は分母に入れていません。賛成・反対のどちらであったかは評価しません。討論に立たなかったことは、議案に賛成だったという意味でも、関心が無かったという意味でもありません。",
     sourceLabel: SOURCE_MINUTES,
     ordinanceBasis: "延岡市議会基本条例 第2条第3号（議員相互の自由な討議により議論を尽くすこと）",
     evidenceKind: "items",
     items: debates,
+    periodLabel: extras.debatePeriodLabel,
   });
 
   const petitionIntroductions = extras.petitionIntroductions ?? [];
@@ -540,7 +606,9 @@ export function buildCouncilActivityRecord(
     value: null,
     unit: "",
     items: petitionIntroductions,
-    availability: petitionIntroductions.length > 0 ? "available" : "not-acquired",
+    // 紹介議員を載せる資料（請願文書表）がウェブ公開されていないため「未公開」。
+    // 当サイトが取り込めていない（未取得）のではなく、確認した結果0件でもない。
+    availability: petitionIntroductions.length > 0 ? "available" : "not-published",
     description:
       "請願の紹介議員として、会議録で氏名を確認できた記録です。延岡市議会は紹介議員を公開資料に定型掲載していないため、ここに出るのは本会議の発言の中で言及された例外的なものだけです。記録が無いことは、紹介議員になっていないという意味ではありません。",
     sourceLabel: "延岡市議会 会議録（本会議での言及）",
@@ -578,7 +646,9 @@ export function buildCouncilActivityRecord(
       "記名投票など、議員一人ひとりの賛否が公開されている議案のうち、この議員の意思表示を確認できた件数です。賛成・反対のどちらであるかは評価しません。",
     sourceLabel: "延岡市議会 議案ごとの賛否（記名投票の記録）",
     ordinanceBasis: ORDINANCE_MONITORING,
-    evidenceKind: "none",
+    // 個人別の賛否が1件も公開されていない場合は、開いても示す記録が無い。
+    evidenceKind: namedVotes && namedVotes.denominator > 0 ? "items" : "none",
+    items: namedVotes?.items ?? [],
   });
 
   return { sessions, values };

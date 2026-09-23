@@ -52,8 +52,7 @@ import { buildCouncilActivityProfile } from "../lib/councilActivityProfile";
 import membersDataForProfile from "../data/members.json";
 import {
   activityTargetPeriodLabel,
-  debateHeldSessionIds,
-  debateSessionsFor,
+  debateTargetPeriodLabel,
   getMemberActivityRecord,
 } from "../lib/councilActivityBarometer";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
@@ -346,10 +345,7 @@ export function MemberDetailPage() {
     activityRecord,
     activityTargetPeriodLabel(),
     (membersDataForProfile as unknown[]).length,
-    {
-      numerator: debateSessionsFor(member.id).length,
-      denominator: debateHeldSessionIds.length,
-    },
+    debateTargetPeriodLabel(),
   );
 
   return (
@@ -438,14 +434,9 @@ export function MemberDetailPage() {
           各軸について、条例上の役割・今回観測している活動・使用データを分けて示しています。
         </p>
         <div className="mt-3">
+          {/* 「算定方法を見る」は図の直下（コンポーネント内）で開閉する。 */}
           <CouncilActivityProfileChart axes={activityProfile} memberName={member.name} />
         </div>
-        <Link
-          to="/methodology/council-activity"
-          className={`mt-3 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
-        >
-          算定方法を見る
-        </Link>
       </SectionCard>
 
       <CouncilActivityRecordSection

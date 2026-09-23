@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SectionCard } from "../SectionCard";
-import type {
-  ActivityRecordAvailability,
-  ActivityRecordGroup,
-  ActivityRecordValue,
-  CouncilActivityRecord,
+import {
+  ACTIVITY_AVAILABILITY_DESCRIPTIONS_JA,
+  ACTIVITY_AVAILABILITY_LABELS_JA,
+  type ActivityRecordAvailability,
+  type ActivityRecordGroup,
+  type ActivityRecordListItem,
+  type ActivityRecordValue,
+  type CouncilActivityRecord,
 } from "../../lib/councilActivityRecord";
+import { formatJapaneseDate } from "../../config/site";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -16,16 +20,9 @@ const linkClass =
  *
  * 「確認した結果0件」と「まだ確認できていない」「公表されていない」
  * 「誰の行為か分からない」「制度上対象外」を、絶対に同じ0として見せない。
+ * 言葉は一覧・比較と共通の表（ACTIVITY_AVAILABILITY_LABELS_JA）から取る。
  */
-const AVAILABILITY_LABEL: Record<ActivityRecordAvailability, string> = {
-  available: "確認済み",
-  partial: "一部のみ確認",
-  "confirmed-zero": "確認した結果0件",
-  "not-acquired": "未取得",
-  "not-published": "公式資料が未公表",
-  "not-individually-attributable": "個人別の記録なし",
-  "not-applicable": "対象外",
-};
+const AVAILABILITY_LABEL = ACTIVITY_AVAILABILITY_LABELS_JA;
 
 const AVAILABILITY_CLASS: Record<ActivityRecordAvailability, string> = {
   available: "bg-primary-container text-on-primary-container",
@@ -57,6 +54,63 @@ function formatValue(value: number | null, unit: string): string {
   return `${value.toLocaleString("ja-JP")}${unit}`;
 }
 
+/** 一次資料へのリンク。サイト内は同じタブ、外部は新しいタブで開く。 */
+function ItemLink({ url, label }: { url?: string; label?: string }) {
+  if (!url) return null;
+  const text = label ?? "出典";
+  return url.startsWith("/") ? (
+    <Link to={url} className={`ml-1 inline-flex min-h-6 items-center text-primary underline ${linkClass}`}>
+      {text}
+    </Link>
+  ) : (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${text}（新しいタブで開く）`}
+      className={`ml-1 inline-flex min-h-6 items-center text-primary underline ${linkClass}`}
+    >
+      {text}
+    </a>
+  );
+}
+
+/** 一次資料の書誌情報。分かっている項目だけを出す。 */
+function ItemSource({ source, url }: { source: NonNullable<ActivityRecordListItem["source"]>; url?: string }) {
+  return (
+    <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5 rounded-md bg-surface px-2.5 py-1.5 text-[11px] leading-relaxed text-on-surface-variant">
+      <dt className="font-medium">資料名</dt>
+      <dd className="min-w-0 break-words">{source.title}</dd>
+      <dt className="font-medium">発行</dt>
+      <dd className="min-w-0 break-words">{source.publisher}</dd>
+      {source.date && (
+        <>
+          <dt className="font-medium">開催日</dt>
+          <dd className="min-w-0">{formatJapaneseDate(source.date)}</dd>
+        </>
+      )}
+      {source.locator && (
+        <>
+          <dt className="font-medium">該当箇所</dt>
+          <dd className="min-w-0 break-words">{source.locator}</dd>
+        </>
+      )}
+      {url && !url.startsWith("/") && (
+        <>
+          <dt className="font-medium">URL</dt>
+          <dd className="min-w-0 break-all">{url}</dd>
+        </>
+      )}
+      {source.retrievedAt && (
+        <>
+          <dt className="font-medium">照合日</dt>
+          <dd className="min-w-0">{formatJapaneseDate(source.retrievedAt)}</dd>
+        </>
+      )}
+    </dl>
+  );
+}
+
 function AvailabilityChip({ availability }: { availability: ActivityRecordAvailability }) {
   return (
     <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${AVAILABILITY_CLASS[availability]}`}>
@@ -83,7 +137,7 @@ function RecordRow({
   const items = value.items ?? [];
 
   return (
-    <li className="rounded-lg border border-outline-variant p-3">
+    <li data-record-key={value.key} className="rounded-lg border border-outline-variant p-3">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span className="text-sm font-semibold text-on-surface">{value.label}</span>
         <span className="flex items-center gap-2">
@@ -92,9 +146,12 @@ function RecordRow({
           )}
           {value.kind === "list" && (
             <span className="text-base font-bold text-on-surface">
-              {value.availability === "not-applicable" || items.length === 0
-                ? "―"
-                : `${items.length.toLocaleString("ja-JP")}件`}
+              {items.length > 0 && value.availability !== "not-applicable"
+                ? `${items.length.toLocaleString("ja-JP")}件`
+                : value.availability === "confirmed-zero"
+                  ? // 0と書くのは、資料を確認した結果0件だったときだけ。
+                    "0件"
+                  : "―"}
             </span>
           )}
           <AvailabilityChip availability={value.availability} />
@@ -104,6 +161,12 @@ function RecordRow({
       {value.numerator != null && value.denominator != null && (
         <p className="mt-0.5 text-xs text-on-surface-variant">
           {value.numerator.toLocaleString("ja-JP")}／{value.denominator.toLocaleString("ja-JP")}
+        </p>
+      )}
+      {/* 割合の根拠になっている個別の記録の件数。「根拠を見る」で開く一覧の件数と同じ。 */}
+      {value.kind === "number" && value.evidenceKind === "items" && (
+        <p className="mt-0.5 text-xs text-on-surface-variant" data-item-count={items.length}>
+          根拠の記録：{items.length.toLocaleString("ja-JP")}件
         </p>
       )}
 
@@ -139,7 +202,8 @@ function RecordRow({
                 <dt>{value.numeratorLabel ?? "分子"}</dt>
                 <dd className="tabular-nums font-medium">{value.numerator.toLocaleString("ja-JP")}</dd>
               </div>
-              {excludedCount > 0 && (
+              {/* 会期ごとの内訳（一般質問）の除外数。討論など別の分母を持つ項目には出さない。 */}
+              {value.evidenceKind === "sessions" && excludedCount > 0 && (
                 <div className="flex justify-between gap-2 text-on-surface-variant">
                   <dt>算定対象外の会期</dt>
                   <dd className="tabular-nums">{excludedCount.toLocaleString("ja-JP")}</dd>
@@ -157,26 +221,22 @@ function RecordRow({
             (items.length > 0 ? (
               <ul className="space-y-2">
                 {items.map((item) => (
-                  <li key={`${item.label}-${item.detail ?? ""}`} className="text-xs leading-relaxed text-on-surface">
+                  <li key={`${item.label}-${item.detail ?? ""}-${item.url ?? ""}`} className="text-xs leading-relaxed text-on-surface">
                     <span className="font-medium">{item.label}</span>
                     {item.detail && <span className="text-on-surface-variant">：{item.detail}</span>}
-                    {item.url &&
-                      (item.url.startsWith("/") ? (
-                        <Link to={item.url} className={`ml-1 text-primary underline ${linkClass}`}>
-                          {item.urlLabel ?? "出典"}
-                        </Link>
-                      ) : (
-                        <a
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`ml-1 text-primary underline ${linkClass}`}
-                        >
-                          {item.urlLabel ?? "出典"}
-                        </a>
-                      ))}
+                    <ItemLink url={item.url} label={item.urlLabel} />
+                    <ItemLink url={item.secondaryUrl} label={item.secondaryUrlLabel} />
                     {item.classificationNote && (
                       <p className="mt-0.5 text-on-surface-variant">{item.classificationNote}</p>
+                    )}
+                    {item.notCountedReason && (
+                      <p className="mt-0.5 text-on-surface-variant">※{item.notCountedReason}</p>
+                    )}
+                    {item.source && (
+                      <ItemSource
+                        source={item.source}
+                        url={item.url?.startsWith("/") ? item.secondaryUrl : item.url}
+                      />
                     )}
                   </li>
                 ))}
@@ -195,7 +255,7 @@ function RecordRow({
             </div>
             <div>
               <dt className="inline font-medium">対象期間：</dt>
-              <dd className="inline">{targetPeriodLabel}</dd>
+              <dd className="inline">{value.periodLabel ?? targetPeriodLabel}</dd>
             </div>
             {value.ordinanceBasis && (
               <div>
@@ -205,7 +265,7 @@ function RecordRow({
             )}
             {updatedAt && (
               <div>
-                <dt className="inline font-medium">最終更新：</dt>
+                <dt className="inline font-medium">議員データの最終更新：</dt>
                 <dd className="inline">{updatedAt}</dd>
               </div>
             )}
@@ -278,6 +338,19 @@ export function CouncilActivityRecordSection({
       <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
         複数の項目を合計した総合点や、議員の順位づけは行っていません。各項目は独立した記録で、誰と並べても数値は変わりません。
       </p>
+      <details className="mt-2 rounded-lg border border-outline-variant px-3 py-1 text-xs leading-relaxed text-on-surface-variant">
+        <summary className={`flex min-h-11 cursor-pointer items-center font-medium text-on-surface ${linkClass}`}>
+          表示の見方（0・未確認・未公開・個人単位算定不可・対象外）
+        </summary>
+        <dl className="mb-2 space-y-1">
+          {ACTIVITY_AVAILABILITY_DESCRIPTIONS_JA.map((d) => (
+            <div key={d.code}>
+              <dt className="inline font-medium text-on-surface">{AVAILABILITY_LABEL[d.code]}：</dt>
+              <dd className="inline">{d.text}</dd>
+            </div>
+          ))}
+        </dl>
+      </details>
 
       {GROUP_ORDER.map((group) => {
         const values = record.values.filter((v) => v.group === group);
@@ -309,7 +382,7 @@ export function CouncilActivityRecordSection({
         </div>
         {updatedAt && (
           <div>
-            <dt className="inline">最終更新：</dt>
+            <dt className="inline">議員データの最終更新：</dt>
             <dd className="inline">{updatedAt}</dd>
           </div>
         )}

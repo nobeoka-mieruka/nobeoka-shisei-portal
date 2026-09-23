@@ -148,12 +148,15 @@ check("未取得・未公表・個人帰属不能の状態が語彙として用�
   for (const code of ["not-acquired", "not-published", "not-individually-attributable"]) {
     assert.ok(src.includes(`"${code}"`), `${code} が定義されていません`);
   }
+  // 0件と取り違えないラベルが与えられていること。ラベルは一覧・比較と共通の表から取る。
+  assert.match(src, /"confirmed-zero": "0件（資料を確認済み）"/);
+  assert.match(src, /"not-acquired": "未確認"/);
+  assert.match(src, /"not-published": "未公開"/);
+  assert.match(src, /"not-individually-attributable": "個人単位算定不可"/);
+  assert.match(src, /"not-applicable": "対象外"/);
   const ui = readSrc("src/components/council/CouncilActivityRecordSection.tsx");
-  // 0件と取り違えないラベルが与えられていること。
-  assert.match(ui, /"not-acquired": "未取得"/);
-  assert.match(ui, /"not-published": "公式資料が未公表"/);
-  assert.match(ui, /"not-individually-attributable": "個人別の記録なし"/);
-  assert.match(ui, /"confirmed-zero": "確認した結果0件"/);
+  assert.match(ui, /ACTIVITY_AVAILABILITY_LABELS_JA/, "個人ページが共通のラベル表を使っていません");
+  assert.match(readSrc("src/pages/CouncilActivityPage.tsx"), /ACTIVITY_AVAILABILITY_LABELS_JA/, "一覧が共通のラベル表を使っていません");
   // 値が無いときに0と書かないこと。
   assert.match(ui, /if \(value === null\) return "―";/);
 });
@@ -395,7 +398,7 @@ check("一覧・個人ページが、値の無い件数を0へ丸めていない
 
 check("制度上の対象外を「確認中」と同じ言葉にしていない", () => {
   const list = readSrc("src/pages/CouncilActivityPage.tsx");
-  assert.match(list, /notApplicable \? "対象外" : "確認中"/, "一覧で対象外と確認中を区別していません");
+  assert.match(list, /notApplicable \? "対象外" : "未確認"/, "一覧で対象外と未確認を区別していません");
   const detail = readSrc("src/pages/CouncilActivityMemberPage.tsx");
   assert.match(detail, /questionNotApplicable/, "個人ページで対象外を区別していません");
 });

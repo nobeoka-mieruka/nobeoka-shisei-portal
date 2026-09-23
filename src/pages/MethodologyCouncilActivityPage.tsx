@@ -16,10 +16,12 @@ import { evidenceAvailabilityLabel, evidenceAvailabilityDescription } from "../l
 import { classifyTopicToThemeSlug } from "../lib/themeClassification";
 import { TOPIC_CLASSIFICATION_VERSION } from "../lib/topicClassificationMeta";
 import { AXIS_STATUS_LABELS_JA, buildCouncilActivityProfile } from "../lib/councilActivityProfile";
-import { getMemberActivityRecord } from "../lib/councilActivityBarometer";
+import { debateTargetPeriodLabel, getMemberActivityRecord } from "../lib/councilActivityBarometer";
+import { formatJapaneseDate } from "../config/site";
 import billProposalRolesData from "../data/billProposalRoles.json";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import speechSummaryData from "../data/councilSpeechSummaries.json";
+import councilDebateSpeechesData from "../data/councilDebateSpeeches.json";
 import { QUESTION_LIKE_SPEECH_TYPES } from "../lib/questionLikeSpeechTypes";
 
 /**
@@ -139,9 +141,27 @@ export function MethodologyCouncilActivityPage() {
         getMemberActivityRecord(entries[0].member),
         targetPeriod,
         entries.length,
+        debateTargetPeriodLabel(),
       )
     : [];
   const chairpersonEntries = entries.filter((e) => isCouncilChairperson(e.member));
+  // 討論の収録状況。件数は手書きせず、データから数える。
+  const debateData = councilDebateSpeechesData as unknown as {
+    generatedAt?: string;
+    speeches: { memberId: string | null; stance: "for" | "against" | "mixed" | "unclear"; stanceTarget?: string }[];
+  };
+  const debateSummary = {
+    total: debateData.speeches.length,
+    current: debateData.speeches.filter((d) => d.memberId).length,
+    verifiedAt: debateData.generatedAt ?? null,
+    stance: {
+      for: debateData.speeches.filter((d) => d.stance === "for").length,
+      against: debateData.speeches.filter((d) => d.stance === "against").length,
+      mixed: debateData.speeches.filter((d) => d.stance === "mixed").length,
+      unclear: debateData.speeches.filter((d) => d.stance === "unclear").length,
+    },
+    unspecified: debateData.speeches.filter((d) => d.stanceTarget === "unspecified").length,
+  };
   // 「請願・提案等」で個人に帰属できている記録の件数。手書きせず実データから数える。
   const decisionSubmitterRecordCount = (billProposalRolesData as { roles: { role: string }[] }).roles.filter(
     (r) => r.role === "submitter",
@@ -298,7 +318,7 @@ export function MethodologyCouncilActivityPage() {
                   {axis.order}. {axis.label}
                 </p>
                 <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[11px] text-on-surface-variant">
-                  {AXIS_STATUS_LABELS_JA[axis.status]}
+                  {axis.measurement ? "割合を算定する軸" : AXIS_STATUS_LABELS_JA[axis.status]}
                 </span>
               </div>
               <dl className="mt-2 space-y-1 text-xs leading-relaxed text-on-surface-variant">
@@ -314,15 +334,16 @@ export function MethodologyCouncilActivityPage() {
                       ? `${axis.measurement.numeratorLabel} ÷ ${axis.measurement.denominatorLabel} × 100`
                       : "割合としては算定していません。",
                   ],
-                  ["分子", axis.measurement ? axis.measurement.numeratorLabel : "（算定していません）"],
-                  ["分母", axis.measurement ? axis.measurement.denominatorLabel : "（算定していません）"],
+                  ["分子", axis.numeratorRule],
+                  ["分母", axis.denominatorRule],
                   ["上限の意味", axis.upperBoundMeaning],
                   ["除外条件", axis.notApplicableRule],
-                  ["算定できない条件", `${AXIS_STATUS_LABELS_JA[axis.status]}：${axis.reason}`],
+                  ["算定の可否", axis.reason],
                   ["欠損時の扱い", axis.missingRule],
                   ["個人への帰属", axis.individualAttribution],
                   ["対象期間", axis.targetPeriodLabel],
                   ["更新方法", axis.updateRule],
+                  ["最終確認日", axis.lastCheckedAt ? formatJapaneseDate(axis.lastCheckedAt) : "記録なし"],
                 ].map(([term, value]) => (
                   <div key={term}>
                     <dt className="inline font-medium text-on-surface">{term}：</dt>
@@ -355,6 +376,62 @@ export function MethodologyCouncilActivityPage() {
             </li>
           ))}
         </ul>
+      </SectionCard>
+
+      <SectionCard title="本会議の討論の扱い">
+        <p className="text-sm leading-relaxed text-on-surface">
+          討論は、議案の採決の前に議員が登壇して賛成・反対の理由を述べるものです。会議録に発言者の氏名が記録されるため、
+          個人に帰属できる数少ない記録として扱っています。現在、{debateSummary.total}件（うち現職議員{debateSummary.current}件）を収録し、
+          すべてを会議録の原文と照合しています（最終照合日：{debateSummary.verifiedAt ? formatJapaneseDate(debateSummary.verifiedAt) : "記録なし"}）。
+        </p>
+        <dl className="mt-3 space-y-2 text-xs leading-relaxed text-on-surface-variant">
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">討論として数えるもの</dt>
+            <dd>
+              議長が「これより討論に入ります」と宣告してから「討論を終わります」と宣告するまでの間に、議員が登壇して行った発言。
+              議長・副議長など議事進行役の発言（「採決に移ります」「起立多数」など）と、登壇せず自席から述べた発言（議長への応答、議事進行の質問など）は数えません。
+              議長の制止を挟んで同じ議員が続けた発言は、1件の討論として扱います。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">対象とする会期</dt>
+            <dd>
+              一般質問と同じ定例会の範囲に加え、その間に開かれた臨時会も含めます（臨時会でも討論が行われるため）。
+              議長が「討論なしと認めます」と宣告し、討論が行われなかった会期は、分母に入れません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">賛成・反対の表示</dt>
+            <dd>
+              立場は、本人が本文で明言している場合だけ表示し、判断の根拠にした本文の言い回しを必ず添えます。
+              賛成{debateSummary.stance.for}件・反対{debateSummary.stance.against}件・原案と修正案で立場が分かれるもの{debateSummary.stance.mixed}件・
+              読み取れないもの{debateSummary.stance.unclear}件です。読み取れないものは推測で埋めず、そのまま表示します。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">修正案が出ている議題</dt>
+            <dd>
+              修正案が出ている議題では、同じ「反対」でも原案への反対と修正案への反対があり、向きが正反対になります
+              （修正案への反対は、原案を支持する立場です）。そのため、本人が冒頭または結びで「原案に」「修正案に」と名指しした場合だけ、
+              「原案に賛成の立場」「修正案に反対の立場」のように対象まで表示します。名指しが無いもの（{debateSummary.unspecified}件）は、
+              対象を補わず「原案・修正案のどちらに対するものかは本文から特定できません」と表示します。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">討論しなかった議員の賛否</dt>
+            <dd>
+              延岡市議会の採決の多くは起立採決で、会議録に議員一人ひとりの賛否は記録されません。
+              討論に立たなかったことから賛否を推測することはしません。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-high px-3 py-2">
+            <dt className="font-medium text-on-surface">照合の方法</dt>
+            <dd>
+              発言ごとの出典ページを開き、会議名・開催日・発言者・本文が記録と一致すること、立場の根拠が1つの発言の中にそのまま存在することを確かめています。
+              あわせて、会議日ごとに抽出をやり直して同じ結果になることを確認しています（HTTP 200 で開けるだけでなく、目的の発言であることまで確認）。
+            </dd>
+          </div>
+        </dl>
       </SectionCard>
 
       <SectionCard title="政策分野と継続テーマの扱い">

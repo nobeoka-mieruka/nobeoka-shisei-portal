@@ -1,11 +1,15 @@
 import { useId, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   AXIS_STATUS_LABELS_JA,
+  AXIS_STATUS_SYMBOLS,
+  AXIS_ZERO_SYMBOL,
   canRenderPolygon,
   measurableAxisCount,
   POLYGON_MIN_AXES,
   type CouncilActivityAxis,
 } from "../../lib/councilActivityProfile";
+import { formatJapaneseDate } from "../../config/site";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -15,27 +19,24 @@ const linkClass =
  * 0（確認した結果0件）と、算定できない状態を同じ見た目にしない。
  */
 const LEGEND = [
-  { symbol: "●", label: "数値あり（公開資料から確認できた値）" },
-  { symbol: "○", label: "0（確認した結果、該当なし）" },
-  { symbol: "―", label: "N/A（個人単位で算定できない）" },
-  { symbol: "△", label: "未確認（確認作業中）" },
-  { symbol: "□", label: "未公開（必要な一次資料が未公開）" },
+  { symbol: AXIS_STATUS_SYMBOLS.CONFIRMED, label: "数値あり（公開資料から確認できた値）" },
+  { symbol: AXIS_ZERO_SYMBOL, label: "0（資料を確認した結果、該当なし）" },
+  { symbol: AXIS_STATUS_SYMBOLS.NOT_ACQUIRED, label: "未確認（当サイトが取り込めていない）" },
+  { symbol: AXIS_STATUS_SYMBOLS.SOURCE_NOT_PUBLISHED, label: "未公開（必要な一次資料が公開されていない）" },
+  { symbol: AXIS_STATUS_SYMBOLS.NOT_INDIVIDUALLY_ATTRIBUTABLE, label: "個人単位算定不可" },
+  { symbol: AXIS_STATUS_SYMBOLS.NOT_APPLICABLE, label: "対象外（制度上当てはまらない）" },
+  { symbol: AXIS_STATUS_SYMBOLS.CONDITIONAL, label: "割合にしていない軸（記録は一覧で表示）" },
 ] as const;
 
-/** 状態ごとの記号。凡例と対応させる。 */
-const STATUS_SYMBOL: Record<string, string> = {
-  CONFIRMED: "●",
-  CONDITIONAL: "―",
-  NOT_INDIVIDUALLY_ATTRIBUTABLE: "―",
-  NOT_ACQUIRED: "△",
-  SOURCE_NOT_PUBLISHED: "□",
-  RESEARCH_EXHAUSTED: "△",
-  NOT_APPLICABLE: "―",
-};
+/** 軸の状態を表す記号。確認した結果0件の軸は、数値ありとは別の記号にする。 */
+function axisSymbol(axis: CouncilActivityAxis): string {
+  if (axis.measurement && axis.measurement.numerator === 0) return AXIS_ZERO_SYMBOL;
+  return AXIS_STATUS_SYMBOLS[axis.status];
+}
 
 const VIEWBOX = 320;
 const CENTER = VIEWBOX / 2;
-const MAX_RADIUS = 96;
+const MAX_RADIUS = 88;
 const RINGS = 4;
 
 /** 頂点の座標。頂点1を真上に置き、時計回りに並べる。 */
@@ -66,8 +67,12 @@ export function CouncilActivityProfileChart({
   memberName: string;
 }) {
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const [methodOpen, setMethodOpen] = useState(false);
   const titleId = useId();
   const descId = useId();
+  const noticeId = useId();
+  const methodPanelId = useId();
+  const axisPanelIdPrefix = useId();
   const count = axes.length;
   const polygon = canRenderPolygon(axes);
   const measurable = measurableAxisCount(axes);
@@ -83,12 +88,20 @@ export function CouncilActivityProfileChart({
 
   return (
     <div>
+      {/* 図の直前に置き、図より先に読まれるようにする。 */}
+      <p
+        id={noticeId}
+        className="mb-2 rounded-lg border border-outline-variant bg-surface-container-high px-3 py-2 text-xs leading-relaxed text-on-surface"
+      >
+        公開資料で確認できた議会活動の記録を図にしたものです。議員の能力・優劣を評価するものではありません（総合点・順位は作成していません）。
+      </p>
       <div className="mx-auto w-full max-w-[20rem]">
         <svg
           viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`}
           className="h-auto w-full"
           role="img"
           aria-labelledby={`${titleId} ${descId}`}
+          aria-describedby={noticeId}
         >
           <title id={titleId}>{`${memberName}議員の議会活動プロフィール（${count}軸）`}</title>
           <desc id={descId}>
@@ -157,19 +170,19 @@ export function CouncilActivityProfileChart({
 
           {/* 軸ラベル。図の外側へ置き、2行に折り返して切れないようにする。 */}
           {axes.map((axis, i) => {
-            const p = pointAt(i, count, MAX_RADIUS + 26);
+            const p = pointAt(i, count, MAX_RADIUS + 22);
             const anchor = labelAnchor(p.x);
             const lines = splitLabel(axis.shortLabel);
             return (
               <text
                 key={axis.key}
                 x={p.x}
-                y={p.y - (lines.length - 1) * 5}
+                y={p.y - (lines.length - 1) * 6 + 4}
                 textAnchor={anchor}
-                className="fill-on-surface-variant text-[9px]"
+                className="fill-on-surface-variant text-[11px]"
               >
                 {lines.map((line, li) => (
-                  <tspan key={line} x={p.x} dy={li === 0 ? 0 : 11}>
+                  <tspan key={line} x={p.x} dy={li === 0 ? 0 : 13}>
                     {line}
                   </tspan>
                 ))}
@@ -179,8 +192,82 @@ export function CouncilActivityProfileChart({
         </svg>
       </div>
 
-      <p className="mt-1 text-center text-[11px] leading-relaxed text-on-surface-variant">
-        外側ほど、その指標で確認できた活動が多いことを表します。外周は満点・優秀という意味ではありません。
+      {/* 図の直下に、軸ごとの算定方法をその場で開けるようにする（別ページへ移動させない）。 */}
+      <div className="mt-1 text-center">
+        <button
+          type="button"
+          onClick={() => setMethodOpen((v) => !v)}
+          aria-expanded={methodOpen}
+          aria-controls={methodPanelId}
+          className={`inline-flex min-h-11 items-center gap-1 rounded-full border border-outline-variant px-4 py-2 text-sm font-medium text-primary ${linkClass}`}
+        >
+          <span aria-hidden="true">{methodOpen ? "▲" : "▼"}</span>
+          {methodOpen ? "算定方法を閉じる" : "算定方法を見る"}
+        </button>
+      </div>
+      {methodOpen && (
+        <div
+          id={methodPanelId}
+          className="mt-2 space-y-2 rounded-lg border border-outline-variant p-3 text-xs leading-relaxed text-on-surface-variant"
+        >
+          <p>
+            軸ごとに、何を数えているか・分子と分母・除外条件・欠測値の扱い・一次資料を示します。
+            すべての議員に同じ期間・同じ算定方法・同じ除外条件を適用しています。
+          </p>
+          {axes.map((axis) => (
+            <section key={axis.key} className="rounded-md bg-surface-container-high p-2.5">
+              <h3 className="text-xs font-semibold text-on-surface">
+                {axis.order}. {axis.label}
+              </h3>
+              <dl className="mt-1 space-y-1">
+                <MethodRow term="何を数えているか" value={axis.measures} />
+                <MethodRow term="対象期間" value={axis.targetPeriodLabel} />
+                <MethodRow term="分子" value={axis.numeratorRule} />
+                <MethodRow term="分母" value={axis.denominatorRule} />
+                <MethodRow term="除外条件" value={axis.notApplicableRule} />
+                <MethodRow term="欠測値の扱い" value={axis.missingRule} />
+                <div>
+                  <dt className="inline font-medium text-on-surface">一次資料：</dt>
+                  <dd className="inline">
+                    {axis.sourceRefs.map((ref, i) => (
+                      <span key={ref.label}>
+                        {i > 0 && "、"}
+                        {ref.url ? (
+                          <a
+                            href={ref.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${ref.label}（新しいタブで開く）`}
+                            className={`text-primary underline ${linkClass}`}
+                          >
+                            {ref.label}
+                          </a>
+                        ) : (
+                          ref.label
+                        )}
+                      </span>
+                    ))}
+                    （{axis.dataUsed}）
+                  </dd>
+                </div>
+                <MethodRow
+                  term="最終確認日"
+                  value={axis.lastCheckedAt ? formatJapaneseDate(axis.lastCheckedAt) : "記録なし"}
+                />
+              </dl>
+            </section>
+          ))}
+          <Link
+            to="/methodology/council-activity"
+            className={`inline-flex min-h-11 items-center font-medium text-primary underline ${linkClass}`}
+          >
+            算定方法の全文（計算式・状態の定義）を読む
+          </Link>
+        </div>
+      )}
+
+      <p className="mt-2 text-center text-[11px] leading-relaxed text-on-surface-variant">
+        外側ほど、その指標で確認できた記録の割合が高いことを表します。外周（100%）は満点・優秀という意味ではありません。
       </p>
       <ul className="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1 text-[11px] text-on-surface-variant">
         {LEGEND.map((item) => (
@@ -206,11 +293,12 @@ export function CouncilActivityProfileChart({
         {axes.map((axis) => {
           const isOpen = openKey === axis.key;
           return (
-            <li key={axis.key} className="rounded-lg border border-outline-variant">
+            <li key={axis.key} data-axis-key={axis.key} className="rounded-lg border border-outline-variant">
               <button
                 type="button"
                 onClick={() => setOpenKey(isOpen ? null : axis.key)}
                 aria-expanded={isOpen}
+                aria-controls={`${axisPanelIdPrefix}-${axis.key}`}
                 className={`flex min-h-11 w-full flex-wrap items-center justify-between gap-2 px-3 py-2 text-left ${linkClass}`}
               >
                 <span className="text-xs font-medium text-on-surface">
@@ -218,9 +306,7 @@ export function CouncilActivityProfileChart({
                 </span>
                 <span className="text-xs text-on-surface-variant">
                   <span aria-hidden="true" className="mr-1 font-mono">
-                    {axis.measurement && axis.measurement.rate === 0
-                      ? "○"
-                      : STATUS_SYMBOL[axis.status]}
+                    {axisSymbol(axis)}
                   </span>
                   {axis.measurement ? (
                     <>
@@ -237,7 +323,10 @@ export function CouncilActivityProfileChart({
                 </span>
               </button>
               {isOpen && (
-                <div className="border-t border-outline-variant px-3 py-2 text-xs leading-relaxed text-on-surface-variant">
+                <div
+                  id={`${axisPanelIdPrefix}-${axis.key}`}
+                  className="border-t border-outline-variant px-3 py-2 text-xs leading-relaxed text-on-surface-variant"
+                >
                   {axis.measurement && (
                     <dl className="mb-2 space-y-0.5 rounded-md bg-surface-container-high p-2.5 text-on-surface">
                       <div className="flex justify-between gap-2">
@@ -321,6 +410,15 @@ export function CouncilActivityProfileChart({
           );
         })}
       </ul>
+    </div>
+  );
+}
+
+function MethodRow({ term, value }: { term: string; value: string }) {
+  return (
+    <div>
+      <dt className="inline font-medium text-on-surface">{term}：</dt>
+      <dd className="inline">{value}</dd>
     </div>
   );
 }

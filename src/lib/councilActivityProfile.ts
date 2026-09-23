@@ -1,5 +1,8 @@
 import type { CouncilMember } from "../types";
 import billProposalRolesData from "../data/billProposalRoles.json";
+import questionCollectionStatusData from "../data/questionCollectionStatus.json";
+import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
+import councilDebateSpeechesData from "../data/councilDebateSpeeches.json";
 import type { CouncilActivityRecord } from "./councilActivityRecord";
 
 /**
@@ -50,14 +53,31 @@ export type AxisStatus =
 
 /** 市民向けの短い状態ラベル。内部コードと表示文言は分離する。 */
 export const AXIS_STATUS_LABELS_JA: Record<AxisStatus, string> = {
-  CONFIRMED: "算定できました",
-  CONDITIONAL: "条件付き（指標にしていません）",
-  NOT_INDIVIDUALLY_ATTRIBUTABLE: "個人単位では算定できません",
-  NOT_ACQUIRED: "一次資料を取り込めていません",
-  SOURCE_NOT_PUBLISHED: "公式資料が未公表です",
-  RESEARCH_EXHAUSTED: "調べましたが確認できていません",
-  NOT_APPLICABLE: "算定対象外です",
+  CONFIRMED: "算定済み",
+  CONDITIONAL: "割合にしていません（記録は一覧で表示）",
+  NOT_INDIVIDUALLY_ATTRIBUTABLE: "個人単位算定不可",
+  NOT_ACQUIRED: "未確認（一次資料を取り込めていません）",
+  SOURCE_NOT_PUBLISHED: "未公開（公式資料が公表されていません）",
+  RESEARCH_EXHAUSTED: "未確認（調べましたが確認できていません）",
+  NOT_APPLICABLE: "対象外",
 };
+
+/**
+ * 図と凡例に使う記号。色だけで状態を区別しないよう、状態ごとに別の記号にする。
+ * 0（確認した結果0件）と、数値を出せない5つの状態は、それぞれ別の記号で示す。
+ */
+export const AXIS_STATUS_SYMBOLS: Record<AxisStatus, string> = {
+  CONFIRMED: "●",
+  CONDITIONAL: "◇",
+  NOT_INDIVIDUALLY_ATTRIBUTABLE: "―",
+  NOT_ACQUIRED: "△",
+  SOURCE_NOT_PUBLISHED: "□",
+  RESEARCH_EXHAUSTED: "△",
+  NOT_APPLICABLE: "▽",
+};
+
+/** 確認した結果0件だった軸の記号。 */
+export const AXIS_ZERO_SYMBOL = "○";
 
 export interface AxisSourceRef {
   label: string;
@@ -115,7 +135,26 @@ export interface CouncilActivityAxis {
   individualAttribution: string;
   /** 更新方法。 */
   updateRule: string;
+  /** 分子として何を数えるか（数値を出さない軸は、その理由）。 */
+  numeratorRule: string;
+  /** 分母として何を数えるか（数値を出さない軸は、その理由）。 */
+  denominatorRule: string;
+  /**
+   * 最終確認日。この軸に使う一次資料を取り込み、または原文と照合した日（データファイルの記録日）。
+   * 記録が無ければ null（日付を作らない）。
+   */
+  lastCheckedAt: string | null;
 }
+
+/** データファイルに記録された日付（YYYY-MM-DD）を取り出す。無ければ null。 */
+function recordedDate(value: unknown): string | null {
+  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value) ? value.slice(0, 10) : null;
+}
+
+const QUESTION_DATA_CHECKED_AT = recordedDate((questionCollectionStatusData as { generatedAt?: string }).generatedAt);
+const SPEECH_ANALYSIS_CHECKED_AT = recordedDate((memberSpeechAnalysisData as { generatedAt?: string }).generatedAt);
+const PROPOSAL_ROLES_CHECKED_AT = recordedDate((billProposalRolesData as { generatedAt?: string }).generatedAt);
+const DEBATE_CHECKED_AT = recordedDate((councilDebateSpeechesData as { generatedAt?: string }).generatedAt);
 
 const MINUTES_SOURCE: AxisSourceRef = {
   label: "延岡市議会 会議録検索システム",
@@ -139,8 +178,8 @@ export function buildCouncilActivityProfile(
   record: CouncilActivityRecord,
   targetPeriodLabel: string,
   memberCount: number,
-  /** 討論の分子・分母。呼び出し側が会議録データから数えて渡す。 */
-  debate?: { numerator: number; denominator: number },
+  /** 討論の軸の対象期間（臨時会を含むため、一般質問とは文言が異なる）。 */
+  debateTargetPeriodLabel: string = targetPeriodLabel,
 ): CouncilActivityAxis[] {
   const askedRate = record.values.find((v) => v.key === "asked-rate");
   const excludedForSpeaker = record.sessions.filter((s) => s.excludedReasonCode === "SPEAKER_TERM");
@@ -186,6 +225,11 @@ export function buildCouncilActivityProfile(
     sourceRefs: [MINUTES_SOURCE],
     individualAttribution: "高い。会議録に発言者の氏名が明記されています。",
     updateRule: "新しい会議録を取り込むたびに自動で再計算します。",
+    numeratorRule:
+      "算定対象の会期のうち、本人が本会議で一般質問・質疑に立ったことを会議録で確認できた会期の数（1会期に何回質問しても1）。",
+    denominatorRule:
+      "会議録を取得できた定例会のうち、本人が一般質問を行える立場にあった会期の数（議長を務めていた会期を除く）。",
+    lastCheckedAt: QUESTION_DATA_CHECKED_AT,
   };
 
   const policyProposal: CouncilActivityAxis = {
@@ -214,6 +258,10 @@ export function buildCouncilActivityProfile(
     sourceRefs: [MINUTES_SOURCE],
     individualAttribution: `記録がある範囲では高い。ただし該当するのは${memberCount}名中${decisionSubmitterMemberIds.size}名です。`,
     updateRule: "会議録から提案理由説明の発言者を確認し、人手で登録します。",
+    numeratorRule: "割合を算定していません。決議案の提案理由説明を行った件数を、実数として一覧に示しています。",
+    denominatorRule:
+      "議員ごとに等しく与えられる「提案の機会」を一次資料から定められないため、分母を置いていません。",
+    lastCheckedAt: PROPOSAL_ROLES_CHECKED_AT,
   };
 
   const longTermView: CouncilActivityAxis = {
@@ -240,9 +288,19 @@ export function buildCouncilActivityProfile(
     sourceRefs: [MINUTES_SOURCE],
     individualAttribution: "見出し語は発言に紐づくため帰属可能。ただし分類は当サイトの自動処理です。",
     updateRule: "会議録の取り込みと、テーマ辞書の更新のたびに再計算します。",
+    numeratorRule: "割合を算定していません。取り上げた政策分野と、2会期以上で取り上げたテーマを一覧として示しています。",
+    denominatorRule: "分野の広さを良いこととして数値化しないため、分母を置いていません。",
+    lastCheckedAt: SPEECH_ANALYSIS_CHECKED_AT,
   };
 
-  const debateMeasurable = debate != null && debate.denominator > 0;
+  // 討論の値も、一般質問と同じく record（一覧に出す記録）から取り、二重に計算しない。
+  const debateRate = record.values.find((v) => v.key === "debate-rate");
+  const debateMeasurable =
+    debateRate != null &&
+    debateRate.value !== null &&
+    debateRate.numerator != null &&
+    debateRate.denominator != null &&
+    debateRate.denominator > 0;
   const memberDebate: CouncilActivityAxis = {
     key: "member-debate",
     order: 4,
@@ -255,31 +313,38 @@ export function buildCouncilActivityProfile(
     status: debateMeasurable ? "CONFIRMED" : "NOT_APPLICABLE",
     reason: debateMeasurable
       ? "討論は会議録に発言者の氏名が記録されるため、全議員に同じ算定方法を適用できます。討論に立たなかったことは、議案に賛成だった・関心が無かったという意味ではありません。"
-      : "対象期間に討論が行われた会期がないため、算定していません。",
+      : "対象期間に、この議員が討論に立てる立場にあった会期（討論が行われ、議長を務めていなかった会期）がないため、算定していません。討論をしなかったという意味ではありません。",
     measurement: debateMeasurable
       ? {
           numeratorLabel: "討論を行った会期",
-          numerator: debate.numerator,
+          numerator: debateRate.numerator as number,
           denominatorLabel: "討論が行われた会期",
-          denominator: debate.denominator,
+          denominator: debateRate.denominator as number,
           rateLabel: "確認率",
-          rate: Math.round((debate.numerator / debate.denominator) * 100),
-          ratio: debate.numerator / debate.denominator,
+          rate: debateRate.value as number,
+          ratio: (debateRate.numerator as number) / (debateRate.denominator as number),
         }
       : null,
     ordinanceBasis: "延岡市議会基本条例 第2条第3号（議員相互の自由な討議により議論を尽くすこと）",
-    measures: "本会議で賛成討論・反対討論に立ったことを会議録で確認できた会期の割合。",
+    measures:
+      "本会議（定例会・臨時会）で賛成討論・反対討論に立ったことを会議録で確認できた会期の割合。1つの会期で何回討論しても1と数えます。",
     doesNotMeasure:
       "賛成か反対かという立場、討論の内容や長さ、説得力。討論しなかった議員の賛否も測っていません（議案の採決は起立採決のため、会議録から個人の賛否は分かりません）。",
-    dataUsed: "会議録の討論の段階から抽出した発言者の記録",
-    targetPeriodLabel,
+    dataUsed: "会議録の討論の段階から抽出した発言者の記録（全件を会議録の原文と照合済み）",
+    targetPeriodLabel: debateTargetPeriodLabel,
     missingRule:
-      "討論が1件も行われなかった会期は、分母にも分子にも入れません。議案に異論が無ければ討論は行われないため、その会期を分母に入れると議員の行動と関係なく割合が下がります。",
+      "討論が1件も行われなかった会期（議長が「討論なしと認めます」と宣告した会期）は、分母にも分子にも入れません。議案に異論が無ければ討論は行われないため、その会期を分母に入れると議員の行動と関係なく割合が下がります。会議録が公開されていない会期も入れません。",
     notApplicableRule:
-      "議長を務めていた会期は、議事進行役のため分母から外します。就任前・辞職後の会期も分母に入れません。",
+      "議長を務めていた会期は、議事進行役のため分母から外します（在任期間は会議録の議長選挙・辞職の記録で確認）。副議長は外していません。現職議員は全員が同じ選挙で就任しているため、就任時期による違いはありません。",
     sourceRefs: [MINUTES_SOURCE],
     individualAttribution: "高い。会議録に発言者の氏名が明記されています。",
-    updateRule: "新しい会議録を取り込むたびに、討論の段階から自動で抽出し直します。",
+    updateRule:
+      "新しい会議録を取り込むたびに、討論の段階から自動で抽出し直し、全件を会議録の原文と照合します（scripts/audit-council-debates.mjs）。",
+    numeratorRule:
+      "分母の会期のうち、本人が登壇して賛成討論・反対討論を行ったことを会議録で確認できた会期の数（1会期に何回討論しても1）。議長の発言や、登壇せず自席から述べた発言は数えません。",
+    denominatorRule:
+      "対象期間の定例会と、その間に開かれた臨時会のうち、実際に討論が行われた会期の数（本人が議長を務めていた会期を除く）。",
+    lastCheckedAt: DEBATE_CHECKED_AT,
   };
   void member;
   return [monitoring, policyProposal, longTermView, memberDebate];

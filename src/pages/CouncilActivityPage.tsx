@@ -20,15 +20,13 @@ import {
   getEvidenceAvailabilitySummary,
   get156CellMatrix,
   metricByKey,
-  topByRawValue,
-  decisionSubmitterTop,
   decisionSubmitterCountFor,
   informationChannelCount,
   getMemberActivityRecord,
   type MemberActivityEntry,
 } from "../lib/councilActivityBarometer";
 import { sortedCommittees, committeesForMember } from "../lib/committees";
-import type { ActivityRecordAvailability } from "../lib/councilActivityRecord";
+import { ACTIVITY_AVAILABILITY_LABELS_JA, type ActivityRecordAvailability } from "../lib/councilActivityRecord";
 
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -39,15 +37,11 @@ const flatCardClass = "border border-gray-200 bg-white shadow-none dark:border-o
 /**
  * 比較カードで、値が無いときに出す言葉。
  * 「確認した結果0件」以外を0として見せないため、状態ごとに別の言葉を割り当てている。
+ * 個人ページと同じ表（ACTIVITY_AVAILABILITY_LABELS_JA）を使い、画面ごとに言葉を変えない。
  */
 const COMPARE_AVAILABILITY_LABEL: Record<ActivityRecordAvailability, string> = {
+  ...ACTIVITY_AVAILABILITY_LABELS_JA,
   available: "―",
-  partial: "一部のみ確認",
-  "confirmed-zero": "確認した結果0件",
-  "not-acquired": "未取得",
-  "not-published": "公式資料が未公表",
-  "not-individually-attributable": "個人別の記録なし",
-  "not-applicable": "対象外",
 };
 
 type SortKey = "name" | "speechCount" | "questionRate" | "submitterCount" | "channelCount";
@@ -95,7 +89,7 @@ function sortRows(rows: BarometerRow[], sortKey: SortKey, dir: "asc" | "desc"): 
 function ValueBar({ value, max, colorClass }: { value: number | null; max: number; colorClass: string }) {
   // 値が無いのは0件ではない。バーを長さ0で描かず、言葉で状態を出す。
   if (value === null) {
-    return <span className="text-xs text-on-surface-variant">未取得</span>;
+    return <span className="text-xs text-on-surface-variant">未確認</span>;
   }
   const pct = max > 0 ? Math.round((value / max) * 100) : 0;
   return (
@@ -112,7 +106,7 @@ function RateBar({ value, notApplicable }: { value: number | null; notApplicable
   // 「制度上の対象外（議長など）」を「まだ調べていない」と同じ言葉にしない。
   if (value === null) {
     return (
-      <span className="text-xs text-on-surface-variant">{notApplicable ? "対象外" : "確認中"}</span>
+      <span className="text-xs text-on-surface-variant">{notApplicable ? "対象外" : "未確認"}</span>
     );
   }
   return (
@@ -206,13 +200,6 @@ export function CouncilActivityPage() {
   const SUBMITTER_BAR_MAX = 10;
   const CHANNEL_BAR_MAX = 6;
 
-  const speechTop3 = useMemo(() => topByRawValue(allEntries, "speech", 3), [allEntries]);
-  const questionFull = useMemo(
-    () => allEntries.filter((e) => metricByKey(e.metrics, "question")?.value === 100),
-    [allEntries],
-  );
-  const submitterTop3 = useMemo(() => decisionSubmitterTop(allEntries, 3), [allEntries]);
-
   function toggleCompare(id: string) {
     setCompareIds((prev) => {
       if (prev.includes(id)) return prev.filter((x) => x !== id);
@@ -295,7 +282,7 @@ export function CouncilActivityPage() {
         <p className="mt-2 text-sm text-on-surface-variant">公開資料から見える5つの指標</p>
         <p className="mt-1 text-xs text-on-surface-variant">対象期間：{targetPeriod}</p>
         <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-on-surface-variant dark:border-outline-variant">
-          件数や実施率は活動の「量」を示すものであり、政策の内容や「質」を評価するものではありません。議員の能力、政治的立場、人物評価を示すものでもありません。資料の公開状況によって確認可能な情報量に差があります。詳しくは
+          件数や実施率は、公開資料上で確認できた記録の数と割合です（活動記録の可視化）。政策の内容や質、議員の能力・優劣、政治的立場を示すものではありません。資料の公開状況によって確認できる記録の範囲に差があります。詳しくは
           <Link to="/methodology/council-activity" className={`font-medium text-primary underline ${linkClass}`}>
             活動指標の算定方法
           </Link>
@@ -303,95 +290,10 @@ export function CouncilActivityPage() {
         </p>
       </div>
 
-      {/* TASK-075：評価・順位付けではなく確認件数の可視化であることを明確にするため
-          「ランキング」という語は使わない。A発言量TOP3／B一般質問実施率／C請願・議案等への関与 */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SectionCard title="A. 発言量TOP3" className={flatCardClass}>
-          {speechTop3.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">確認できるデータがまだありません。</p>
-          ) : (
-            <ol className="space-y-1.5 text-sm text-on-surface">
-              {speechTop3.map((e, i) => (
-                <li key={e.member.id} className="flex items-center justify-between gap-2">
-                  {/* Phase197：TOP3一覧の議員リンク。高さ20px・行間6pxで隣の操作要素まで
-                      26pxしか離れておらず余裕が小さかったため、44pxのタップ領域を確保する。 */}
-                  <Link
-                    to={`/council-activity/${e.member.id}`}
-                    className={`inline-flex min-h-11 items-center hover:underline ${linkClass}`}
-                  >
-                    {i + 1}位　{e.member.name}
-                  </Link>
-                  <span className="tabular-nums text-xs font-semibold text-orange-700 dark:text-orange-300">
-                    {metricByKey(e.metrics, "speech")!.rawValue}件
-                  </span>
-                </li>
-              ))}
-            </ol>
-          )}
-          <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
-            発言件数＝会議録から確認できた質問項目数（一般質問・代表質問等）。
-          </p>
-        </SectionCard>
-
-        <SectionCard title="B. 一般質問実施率" className={flatCardClass}>
-          <p className="text-sm text-on-surface">実施率100%：{questionFull.length}名</p>
-          {questionFull.length > 0 && (
-            <ul className="mt-1.5 flex flex-wrap gap-x-2 gap-y-1 text-xs text-on-surface-variant">
-              {questionFull.map((e) => (
-                <li key={e.member.id}>
-                  {/* Phase197：折り返し表示の議員名一覧。高さ17pxのリンクの中心同士が縦に
-                      17pxしか離れておらず（WCAG 2.2 2.5.8の大きさ・間隔いずれも未充足）、
-                      スマートフォンで隣の議員のページを誤って開きやすかった。44pxのタップ領域を確保する。 */}
-                  <Link
-                    to={`/council-activity/${e.member.id}`}
-                    className={`inline-flex min-h-11 items-center hover:underline ${linkClass}`}
-                  >
-                    {e.member.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-          <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
-            実施率＝会議録取得済みの定例会のうち、一般質問等を行ったことが確認できた会期の割合。
-          </p>
-        </SectionCard>
-
-        <SectionCard title="C. 請願・議案等への関与" className={flatCardClass}>
-          <p className="text-xs font-medium text-on-surface">提出者件数TOP3</p>
-          {submitterTop3.length === 0 ? (
-            <p className="mt-1 text-sm text-on-surface-variant">確認できるデータがまだありません。</p>
-          ) : (
-            <ol className="mt-1 space-y-1.5 text-sm text-on-surface">
-              {submitterTop3.map((e, i) => (
-                <li key={e.member.id} className="flex items-center justify-between gap-2">
-                  {/* Phase197：TOP3一覧の議員リンク。高さ20px・行間6pxで隣の操作要素まで
-                      26pxしか離れておらず余裕が小さかったため、44pxのタップ領域を確保する。 */}
-                  <Link
-                    to={`/council-activity/${e.member.id}`}
-                    className={`inline-flex min-h-11 items-center hover:underline ${linkClass}`}
-                  >
-                    {i + 1}位　{e.member.name}
-                  </Link>
-                  <span className="tabular-nums text-xs font-semibold text-orange-700 dark:text-orange-300">{e.count}件</span>
-                </li>
-              ))}
-            </ol>
-          )}
-          <p className="mt-1 text-[11px] leading-relaxed text-on-surface-variant">
-            本会議での決議（決議案）の提出者として会議録で確認できた件数のみです。条例案・請願・意見書等の提出者は含みません。
-          </p>
-          <p className="mt-3 text-xs font-medium text-on-surface">紹介議員件数TOP3</p>
-          <p className="mt-1 text-sm text-on-surface-variant">
-            請願・陳情の紹介議員（紹介した議員）の氏名は、複数回の会議録調査でも確認できていません（0件という意味ではなく、公開資料からは未確認です）。
-          </p>
-        </SectionCard>
-      </div>
-
       {/* 全議員比較表 */}
       <SectionCard title={`全議員比較（${sortedRows.length}／${allEntries.length}名）`} className={flatCardClass}>
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          列見出しをクリックすると並べ替えできます。「紹介議員件数」「出席状況」は、本サイトが議員別の一次資料をまだ収録できていないため「確認中」と表示しています（0件ではありません）。複数指標を合算した「総合順位」は掲載していません。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
+          列見出しで並べ替えできますが、並び順は順位ではありません（複数の項目を合算した総合点・順位は作っていません）。「紹介議員件数」は、紹介議員を載せる請願文書表がウェブ公開されていないため全員「未公開」、「出席状況」は当サイトが議員別の出席記録をまだ取り込めていないため全員「未確認」です（いずれも0件という意味ではありません）。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
         </p>
 
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
@@ -427,7 +329,6 @@ export function CouncilActivityPage() {
             <thead>
               <tr className="border-b border-gray-200 text-left text-xs text-on-surface-variant dark:border-outline-variant">
                 <th className="w-8 whitespace-nowrap py-2 pr-2">比較</th>
-                <th className="whitespace-nowrap py-2 pr-3">順位</th>
                 {TABLE_COLUMNS.map((col) => (
                   <th key={col.key} className="whitespace-nowrap py-2 pr-3">
                     <button
@@ -448,11 +349,11 @@ export function CouncilActivityPage() {
               </tr>
             </thead>
             <tbody>
-              {sortedRows.map((row, i) => {
+              {sortedRows.map((row) => {
                 const m = row.entry.member;
                 const faction = getFaction(m.factionId);
                 return (
-                  <tr key={m.id} className="border-b border-gray-100 align-middle dark:border-outline-variant/60">
+                  <tr key={m.id} data-member-id={m.id} className="border-b border-gray-100 align-middle dark:border-outline-variant/60">
                     <td className="whitespace-nowrap py-2 pr-2">
                       {/* Phase197：裸のチェックボックスは実効タップ領域が16x16pxしかなかったため、
                           <label>で包んで44x44pxの当たり判定を確保する（チェックボックス自体の
@@ -468,7 +369,6 @@ export function CouncilActivityPage() {
                         />
                       </label>
                     </td>
-                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">{i + 1}</td>
                     <td className="whitespace-nowrap py-2 pr-3">
                       {/* Phase197：表セル内に単独で置かれた議員名リンク。44pxのタップ領域を確保する。 */}
                       <Link
@@ -491,8 +391,8 @@ export function CouncilActivityPage() {
                     <td className="whitespace-nowrap py-2 pr-3">
                       <ValueBar value={row.channelCount} max={CHANNEL_BAR_MAX} colorClass="bg-secondary" />
                     </td>
-                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
-                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">確認中</td>
+                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">未公開</td>
+                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">未確認</td>
                   </tr>
                 );
               })}
@@ -520,13 +420,12 @@ export function CouncilActivityPage() {
             ))}
           </div>
           <ul className="space-y-2">
-            {sortedRows.map((row, i) => {
+            {sortedRows.map((row) => {
               const m = row.entry.member;
               const faction = getFaction(m.factionId);
               return (
                 <li key={m.id} className={`rounded-lg p-3 ${flatCardClass}`}>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs text-on-surface-variant">順位 {i + 1}</span>
+                  <div className="flex items-center justify-end gap-2">
                     {/* Phase197：<label>で包まれているため実効タップ領域は46x16px（横は充足、
                         縦が不足）だった。min-h-11で縦44pxを確保する。 */}
                     <label className="flex min-h-11 items-center gap-1.5 text-xs text-on-surface-variant">
@@ -564,7 +463,7 @@ export function CouncilActivityPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">紹介議員件数</dt>
-                      <dd className="text-on-surface-variant">確認中</dd>
+                      <dd className="text-on-surface-variant">未公開</dd>
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">提出者件数</dt>
@@ -580,7 +479,7 @@ export function CouncilActivityPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">出席状況</dt>
-                      <dd className="text-on-surface-variant">確認中</dd>
+                      <dd className="text-on-surface-variant">未確認</dd>
                     </div>
                   </dl>
                 </li>
@@ -657,7 +556,7 @@ export function CouncilActivityPage() {
 
       <SectionCard title="確認状況（何が公開資料から分かるか）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          6指標のスコアとは別に、活動データベース全体で「何を、どこまで確認できているか」をまとめたものです。「公開資料未確認」は0件・存在しないという意味ではなく、複数の資料経路を調査しても確認できていないことを示します。
+          6指標の値とは別に、活動データベース全体で「何を、どこまで確認できているか」をまとめたものです。「公開資料未確認」は0件・存在しないという意味ではなく、複数の資料経路を調査しても確認できていないことを示します。
         </p>
         <dl className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {evidenceSummary.map((item) => (
@@ -789,7 +688,7 @@ export function CouncilActivityPage() {
             <span className="font-medium">情報発信</span>：本人公式と確認できたWeb/SNS媒体数を含む、プロフィール情報の充足状況。
           </li>
           <li>
-            <span className="font-medium">出席状況</span>：公開資料から確認可能な本会議・委員会等の出席状況（現在、個別の出席記録が未収録のため全議員「確認中」）。
+            <span className="font-medium">出席状況</span>：公開資料から確認可能な本会議・委員会等の出席状況（現在、個別の出席記録を取り込めていないため全議員「未確認」）。
           </li>
         </ul>
         <Link
@@ -857,8 +756,9 @@ export function CouncilActivityPage() {
             </table>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-            「対象外」は制度上その議員に当てはまらない項目、「確認した結果0件」は一次資料を確認したうえで0件だったもの、
-            「未取得」「個人別の記録なし」は当サイトが確認できていないものです。いずれも0件とは異なります。
+            「0件（資料を確認済み）」は一次資料を確認したうえで0件だったものです。「未確認」は当サイトがまだ取り込めていないもの、
+            「未公開」は必要な一次資料が公開されていないもの、「個人単位算定不可」は誰の行為か分かる形で公開されていないもの、
+            「対象外」は制度上その議員に当てはまらない項目です。この4つは0件とは異なります。
           </p>
           <div className="mt-3 flex flex-wrap gap-3">
             {compareRecords.map((c) => (

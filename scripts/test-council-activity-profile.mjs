@@ -63,19 +63,15 @@ check("欠損軸を0として描かない（頂点を中心へ落とさない）
   assert.match(chartSrc, /\{polygon && \(/, "ポリゴンを無条件に描いています");
 });
 
-check("0・N/A・未確認・未公開・対象外を別の記号と言葉で示す", () => {
-  for (const [symbol, word] of [
-    ["●", "数値あり"],
-    ["○", "0（確認した結果、該当なし）"],
-    ["―", "N/A"],
-    ["△", "未確認"],
-    ["□", "未公開"],
-  ]) {
-    assert.ok(chartSrc.includes(symbol), `凡例の記号 ${symbol} がありません`);
+check("0・未確認・未公開・個人単位算定不可・対象外を別の記号と言葉で示す", () => {
+  // 凡例の言葉。
+  for (const word of ["数値あり", "0（資料を確認した結果、該当なし）", "未確認", "未公開", "個人単位算定不可", "対象外"]) {
     assert.ok(chartSrc.includes(word), `凡例の説明「${word}」がありません`);
   }
   // 状態コードごとに記号が割り当てられていること（色だけに頼らない）。
-  for (const code of [
+  const table = profileSrc.slice(profileSrc.indexOf("AXIS_STATUS_SYMBOLS"));
+  const symbolOf = (code) => (table.match(new RegExp(`${code}: "([^"]+)"`)) ?? [])[1];
+  const codes = [
     "CONFIRMED",
     "CONDITIONAL",
     "NOT_INDIVIDUALLY_ATTRIBUTABLE",
@@ -83,9 +79,22 @@ check("0・N/A・未確認・未公開・対象外を別の記号と言葉で示
     "SOURCE_NOT_PUBLISHED",
     "RESEARCH_EXHAUSTED",
     "NOT_APPLICABLE",
-  ]) {
-    assert.ok(profileSrc.includes(code), `状態コード ${code} がありません`);
-    assert.ok(chartSrc.includes(code), `記号の対応表に ${code} がありません`);
+  ];
+  for (const code of codes) assert.ok(symbolOf(code), `記号の対応表に ${code} がありません`);
+  // 0、未確認、未公開、個人単位算定不可、対象外は、それぞれ別の記号であること。
+  const zero = (profileSrc.match(/AXIS_ZERO_SYMBOL = "([^"]+)"/) ?? [])[1];
+  const distinct = [zero, ...["CONFIRMED", "NOT_ACQUIRED", "SOURCE_NOT_PUBLISHED", "NOT_INDIVIDUALLY_ATTRIBUTABLE", "NOT_APPLICABLE", "CONDITIONAL"].map(symbolOf)];
+  assert.equal(new Set(distinct).size, distinct.length, `状態の記号が重複しています: ${distinct.join(" ")}`);
+  assert.match(chartSrc, /AXIS_STATUS_SYMBOLS/, "図が記号の対応表を使っていません");
+});
+
+check("図の近くに、能力・優劣の評価ではないことと、算定方法の開閉を置いている", () => {
+  assert.match(chartSrc, /議員の能力・優劣を評価するものではありません/);
+  assert.match(chartSrc, /算定方法を見る/);
+  assert.match(chartSrc, /aria-expanded=\{methodOpen\}/, "算定方法の開閉がキーボード・読み上げに対応していません");
+  // 算定方法には、軸ごとの項目がそろっていること。
+  for (const term of ["何を数えているか", "対象期間", "分子", "分母", "除外条件", "欠測値の扱い", "一次資料", "最終確認日"]) {
+    assert.ok(chartSrc.includes(term), `算定方法に「${term}」がありません`);
   }
 });
 
@@ -166,7 +175,9 @@ check("討論が、分子・分母つきの算定軸になっている", () => {
   assert.match(profileSrc, /numeratorLabel: "討論を行った会期"/);
   assert.match(profileSrc, /denominatorLabel: "討論が行われた会期"/);
   // 討論が1件も無かった会期を分母へ入れない（議員の行動と無関係に割合が下がるため）。
-  assert.match(profileSrc, /討論が1件も行われなかった会期は、分母にも分子にも入れません/);
+  assert.match(profileSrc, /討論が1件も行われなかった会期[^。]*は、分母にも分子にも入れません/);
+  // 値は記録の一覧（debate-rate）から取り、二重に計算しない。
+  assert.match(profileSrc, /record\.values\.find\(\(v\) => v\.key === "debate-rate"\)/);
   // 立場そのものを評価しないと明言していること。
   assert.match(profileSrc, /賛成か反対かという立場/);
 });
@@ -174,8 +185,11 @@ check("討論が、分子・分母つきの算定軸になっている", () => {
 check("討論の分母が、実際に討論が行われた会期だけで作られている", () => {
   const src = readSrc("src/lib/councilActivityBarometer.ts");
   assert.match(src, /debateHeldSessionIds/, "討論が行われた会期の集合がありません");
-  // 対象期間内の会期に限っていること。
-  assert.match(src, /radarEligibleSessions\.includes\(id\)/);
+  // 対象期間内の会期に限っていること（定例会＋その間の臨時会）。
+  assert.match(src, /radarEligibleSessions\.includes\(d\.sessionId\)/);
+  assert.match(src, /extraordinarySessionIds\.has\(d\.sessionId\)/, "臨時会の討論を対象にしていません");
+  // 議長を務めた会期は、討論の分母からも外す（一般質問と同じ扱い）。
+  assert.match(src, /chairpersonSessionsFor\(memberId, debateHeldSessionIds\)/, "討論の分母で議長の会期を外していません");
 
   const data = readJson("src/data/councilDebateSpeeches.json");
   const status = readJson("src/data/questionCollectionStatus.json");
@@ -207,6 +221,35 @@ check("討論の記録が、発言ごとに一次資料へ辿れる", () => {
     data.speeches.some((sp) => sp.stance === "unclear"),
     "unclear が1件も無いのは、断定しすぎの疑いがあります",
   );
+});
+
+check("修正案が出ている議題では、立場の対象（原案・修正案）を確かめてから表示する", () => {
+  const data = readJson("src/data/councilDebateSpeeches.json");
+  for (const sp of data.speeches) {
+    if (sp.amendmentOnFloor && sp.stance !== "mixed" && sp.stance !== "unclear") {
+      assert.ok(
+        ["original", "amendment", "unspecified"].includes(sp.stanceTarget),
+        `${sp.id} は修正案が出ている議題なのに、対象を確かめていません`,
+      );
+    }
+    if (sp.stanceTarget === "original" || sp.stanceTarget === "amendment") {
+      assert.ok(sp.stanceTargetBasis, `${sp.id} は対象を確定しているのに本文の根拠がありません`);
+      // 根拠の言い回しが、名指しした対象を実際に含んでいること。
+      const names = sp.stanceTarget === "amendment" ? /修正案/ : /原案|市長案|当初予算案|市長提案の予算案|議案第/;
+      assert.match(sp.stanceTargetBasis, names, `${sp.id} の根拠が対象を名指ししていません`);
+    }
+  }
+  // 名指しが無いものを、どちらかへ寄せていないこと（1件以上残っているのが自然）。
+  assert.ok(
+    data.speeches.some((sp) => sp.stanceTarget === "unspecified"),
+    "対象を特定できない討論が1件も無いのは、推測で埋めた疑いがあります",
+  );
+  // 画面の文言：対象を特定できないときは、そう書く。
+  const barometer = readSrc("src/lib/councilActivityBarometer.ts");
+  assert.match(barometer, /原案・修正案のどちらに対する/);
+  // 立場の根拠は、議長の制止を挟んだ別の発言をまたいで引用しない。
+  const extractor = readSrc("scripts/extract-council-debates.mjs");
+  assert.match(extractor, /current\.text \+= `\\n\$\{u\.text\}`/, "続きの発言を区切らずに結合しています");
 });
 
 check("請願の紹介議員を、0件ではなく未確認として扱う", () => {

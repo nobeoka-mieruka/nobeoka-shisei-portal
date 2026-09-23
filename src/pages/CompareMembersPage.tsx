@@ -64,14 +64,22 @@ const countMetrics: { key: CountMetricKey; label: string; unit: string }[] = [
   { key: "voteCount", label: "議案賛否記録件数", unit: "件" },
 ];
 
-function countMetricValue(personId: string, key: CountMetricKey): number {
+/**
+ * 比較に使う件数。議案賛否記録が0件の場合は null を返す。
+ * 個人別の賛否が公開されるのは記名投票の議案だけで、0件は「賛否が無かった」ではなく
+ * 「在職中に個人別の賛否が公開された議案が無い（または当サイトが収録していない）」ことを表すため、
+ * 0として棒に描かない。
+ */
+function countMetricValue(personId: string, key: CountMetricKey): number | null {
   switch (key) {
     case "policyCount":
       return policiesForPerson("member", personId).length + policiesForPerson("former-member", personId).length;
     case "documentCount":
       return councilDocumentsForPerson(personId).length;
-    case "voteCount":
-      return voteCountForPerson(personId);
+    case "voteCount": {
+      const n = voteCountForPerson(personId);
+      return n > 0 ? n : null;
+    }
   }
 }
 
@@ -104,7 +112,7 @@ export function CompareMembersPage() {
           <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">議員の比較</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          現職議員・元議員を横断して最大4名まで選び、会派・在籍状況・関連する政策や議案の件数を比較できます。数値は、延岡市議会が公開する一次資料から確認できる活動を共通の基準で整理したもので、議員個人の優劣を判定するものではありません。件数は当サイトに登録済みのデータの範囲での集計です。
+          現職議員・元議員を横断して最大4名まで選び、会派・在籍状況・関連する政策や議案の件数を比較できます。件数は、延岡市議会などの公開資料上の記録のうち、当サイトがその議員と結び付けて登録した記録の件数です。議員個人の優劣や活動の多さを判定するものではありません。在職期間が議員ごとに異なるため、件数をそのまま比べることはできません。
         </p>
       </div>
 
@@ -157,7 +165,12 @@ export function CompareMembersPage() {
                   render: (p) => `${policiesForPerson("member", p.id).length + policiesForPerson("former-member", p.id).length}件`,
                 },
                 { header: "関連議案等件数", align: "right", render: (p) => `${councilDocumentsForPerson(p.id).length}件` },
-                { header: "議案賛否記録件数", align: "right", render: (p) => `${voteCountForPerson(p.id)}件` },
+                {
+                  header: "議案賛否記録件数",
+                  align: "right",
+                  // 0件は「賛否が無かった」ではないため、0とは書かない。
+                  render: (p) => (voteCountForPerson(p.id) > 0 ? `${voteCountForPerson(p.id)}件` : "記録なし"),
+                },
                 { header: "確認状況", render: (p) => archiveVerificationStatusLabel(p.verificationStatus) },
               ]}
             />
@@ -185,10 +198,14 @@ export function CompareMembersPage() {
                 </button>
               ))}
             </div>
+            <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+              棒の長さは登録済みの記録の件数で、活動の多さや優劣を表すものではありません。在職期間が議員ごとに異なるため、件数の違いをそのまま比べることはできません。
+              「議案賛否記録件数」の「記録なし」は、在職中に個人別の賛否が公開された議案（記名投票）が無いか、当サイトが収録していないことを示し、賛否が無かったという意味ではありません。
+            </p>
             <div className="mt-4">
               <FinanceBarChart
                 points={selectedPeople.map((p) => ({ label: p.name, value: countMetricValue(p.id, metricKey) }))}
-                formatValue={(v) => (v != null ? `${v}${activeMetric.unit}` : "確認中")}
+                formatValue={(v) => (v != null ? `${v}${activeMetric.unit}` : "記録なし")}
                 ariaLabel={`選択した議員の${activeMetric.label}の比較棒グラフ。詳細は上の表を参照してください。`}
               />
             </div>
