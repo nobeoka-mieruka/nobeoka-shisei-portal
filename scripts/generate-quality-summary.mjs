@@ -9,7 +9,7 @@
  * 使い方：node scripts/generate-quality-summary.mjs
  */
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -123,7 +123,8 @@ if (existsSync(linkReportPath)) {
       disposition: dispositionOf(r.url),
     })),
     excludedBackupOnlyReferences: report.results.length - liveResults.length,
-    note: `本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）と、市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの${SUPERSEDED_INTERNAL_ONLY_URLS.size}件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）だけが参照するURLは対象外。到達できないURLは、公開元で掲載終了し代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示す。`,
+    // /data-status にそのまま表示される文のため、ファイル名や状態コードを書かない（市民向けの日本語だけにする）。
+    note: `この集計のために作ったまとめ自身と、市議会が会期ごとに差し替える資料のうち、市議会サイトからの削除を確認済みで公開ページには表示していない${SUPERSEDED_INTERNAL_ONLY_URLS.size}件だけが参照するURLは数えていません。到達できないURLは、公開元で掲載が終わり代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示しています。`,
   };
 }
 
@@ -184,6 +185,37 @@ const countConsistencyChecks = [
   },
 ];
 
+// 出典の確認状況が「要確認」（原本での再照合がまだ済んでいない）の記録を、データファイルごとに数える。
+// /data-status で件数を直書きしないため、ビルドのたびに src/data 配下の全データから数え直す
+// （原本を確認して「確認済み」へ移せば、次のビルドで自動的に減る）。
+// 「要確認」は誤りの件数ではない。値は出典から登録済みで、原本との再照合を待っている状態を指す。
+// 自動生成の検索用データ（中身は他のデータの写し）と、この要約自身は二重計上になるため数えない。
+const REVIEW_SCAN_EXCLUDED = new Set([SELF_GENERATED_FILE, "searchIndex.json", "searchIndexMeta.json"]);
+const NEEDS_REVIEW_VALUES = new Set(["needsReview", "要確認"]);
+function countNeedsReview(value) {
+  if (Array.isArray(value)) return value.reduce((sum, item) => sum + countNeedsReview(item), 0);
+  if (!value || typeof value !== "object") return 0;
+  let count = 0;
+  for (const [key, child] of Object.entries(value)) {
+    if (key === "verificationStatus") {
+      if (NEEDS_REVIEW_VALUES.has(child)) count += 1;
+    } else {
+      count += countNeedsReview(child);
+    }
+  }
+  return count;
+}
+const needsReviewByFile = {};
+for (const file of readdirSync(join(root, "src", "data")).sort()) {
+  if (!file.endsWith(".json") || file.endsWith(".backup.json") || REVIEW_SCAN_EXCLUDED.has(file)) continue;
+  const count = countNeedsReview(JSON.parse(readFileSync(join(root, "src", "data", file), "utf8")));
+  if (count > 0) needsReviewByFile[file.replace(/\.json$/, "")] = count;
+}
+const sourceReview = {
+  needsReview: Object.values(needsReviewByFile).reduce((sum, n) => sum + n, 0),
+  needsReviewByFile,
+};
+
 const summary = {
   generatedAt: new Date().toISOString(),
   sourceHealth: {
@@ -192,6 +224,7 @@ const summary = {
   },
   linkHealth,
   publicExposure,
+  sourceReview,
   countConsistencyChecks,
 };
 
@@ -203,5 +236,6 @@ console.log(
       .join(" ")})` +
     ` / 内部データ上の到達不能URL=${linkHealth ? linkHealth.broken.length : "N/A"}／${linkHealth ? linkHealth.totalChecked : "N/A"}件` +
     ` / 公開画面のクリック可能なリンク切れ=${publicExposure ? publicExposure.clickableBrokenLinks : "未計測"}` +
+    ` / 要確認の出典記録=${sourceReview.needsReview}件` +
     ` / countConsistencyChecks=${countConsistencyChecks.length}件`,
 );

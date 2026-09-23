@@ -34,7 +34,7 @@ import { BILL_EXPLANATION_LEVEL_LABEL, getBillExplanationLevel } from "../lib/bi
 import { BILL_EXPLAINABILITY_CITIZEN_LABEL } from "../lib/billExplainability";
 import { SOURCE_RETRIEVAL_CATEGORY_LABEL } from "../lib/billSourceRetrieval";
 import { TRUST_LEVEL_LABEL } from "../lib/councilGlossary";
-import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { citizenDataFileLabel, humanizeDataNote } from "../lib/citizenTermLabels";
 import { BROKEN_SOURCE_LINK_LABEL } from "../lib/brokenSourceLinks";
 import { formatJapaneseDateIfIso } from "../config/site";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
@@ -97,7 +97,7 @@ import {
 import { calculateGeneralQuestionStats, formatScheduledQuestionPeriod } from "../lib/generalQuestionStats";
 import { blockedTaskStatusCounts } from "../lib/blockedTaskClassification";
 import { documentTypeLabel } from "../lib/archiveCouncilDocuments";
-import { isDayPreciseTerm } from "../lib/archiveMayors";
+import { archiveVerificationStatusLabel, findMayorTermGaps, isDayPreciseTerm } from "../lib/archiveMayors";
 import {
   MAYOR_PROMISE_LEVELS,
   MAYOR_PROMISE_SCALE_NOTE,
@@ -247,6 +247,15 @@ interface DataQualitySummary {
     clickableBrokenLinks: number;
     note: string;
   } | null;
+  /**
+   * 出典の確認状況が「要確認」（原本での再照合がまだ済んでいない）の記録の件数。
+   * scripts/generate-quality-summary.mjs がビルドのたびに src/data 配下の全データから数え直す
+   * （画面に件数を直書きしない）。古い生成結果には無いため省略可能にしている。
+   */
+  sourceReview?: {
+    needsReview: number;
+    needsReviewByFile: Record<string, number>;
+  };
   countConsistencyChecks: { label: string; status: string; note: string }[];
 }
 const dataQualitySummary = dataQualitySummaryData as DataQualitySummary;
@@ -545,8 +554,10 @@ export function DataStatusPage() {
   // --- 歴代市長 ---
   const electedMayorTerms = archiveMayorTerms.filter((t) => t.mayorRole !== "acting" && t.mayorRole !== "temporaryActing");
   const dayPreciseTerms = archiveMayorTerms.filter(isDayPreciseTerm);
-  // src/data/archiveMayorTerms.json：validate-data.mjsの空白検出（2026-08-05時点）と一致させる手集計値。空白が解消され次第、更新すること。
-  const mayorGapCount: number = 13;
+  // 任期空白の件数は手集計値を直書きせず、歴代市長ページ（MayorsPage）と同じ共通関数・同じ「今日」の求め方で数える
+  // （データの空白が解消されれば、両ページの件数が同時に変わる）。
+  const mayorGapTodayIsoJst = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const mayorGapCount = findMayorTermGaps(archiveMayorTerms, mayorGapTodayIsoJst).length;
   const mayorProfileConfirmed = archiveMayors.filter((m) => m.profile && m.profile.length > 0).length;
 
   // --- 議案・条例・請願・陳情（新アーカイブ層） ---
@@ -719,6 +730,18 @@ export function DataStatusPage() {
   const brokenList = dataQualitySummary.linkHealth?.broken ?? [];
   const brokenWithAlternative = brokenList.filter((b) => b.disposition && b.disposition !== "no_alternative").length;
   const brokenWithoutAlternative = brokenList.length - brokenWithAlternative;
+  // 「要確認」「未確認」の件数（どちらも誤りの件数ではない）。件数は直書きせず、データから数える。
+  // 要確認：出典の記録のうち、原本での再照合がまだ済んでいないもの（ビルド時に全データから集計）。
+  const needsReviewTotal = dataQualitySummary.sourceReview?.needsReview ?? null;
+  const needsReviewBreakdown = Object.entries(dataQualitySummary.sourceReview?.needsReviewByFile ?? {}).sort(
+    (a, b) => b[1] - a[1],
+  );
+  // 議員ごとの賛否：公式資料で議員ごとの賛否をまだ確認できていない議案（未確認）と、
+  // 会議録で確かめた結果、議員ごとの賛否が記録されていない議案（個人単位で確認不可）を分けて数える。
+  // 区分は上の議案・採決データベースの内訳と同じ summarizeVoteClassification() の結果を使う。
+  const individualVoteUnconfirmedCount =
+    voteClassification.byDisclosure.aggregate + voteClassification.byDisclosure.unknown;
+  const individualVoteNotRecordedCount = voteClassification.byDisclosure.not_disclosed;
   // Phase222：出典検証の指摘を分類ごとに並べる（0件の分類は表示しない。件数が多い順）。
   const sourceWarningBreakdown = Object.entries(dataQualitySummary.sourceHealth.warningsByCode ?? {})
     .filter(([, count]) => count > 0)
@@ -813,7 +836,7 @@ export function DataStatusPage() {
       : `公式資料を確認できた会期のみ（${sessionEraRange}）`,
     detail: `${(Object.entries(sessionSummaryStatusCounts) as [string, number][])
       .sort(([a], [b]) => (a === "verified" ? -1 : b === "verified" ? 1 : a.localeCompare(b)))
-      .map(([status, count]) => `${sessionSummaryStatusLabels[status as keyof typeof sessionSummaryStatusLabels] ?? status}：${count}会期`)
+      .map(([status, count]) => `${sessionSummaryStatusLabels[status as keyof typeof sessionSummaryStatusLabels] ?? "確認状況未登録"}：${count}会期`)
       .join("／")}。「一部確認済み」は、公式資料（議案等審議結果PDF・国立国会図書館所蔵の会議録書誌等）で会期の実在・日程は確認できたが、会議録本文までは確認できていない状態で、市への確認や図書館での資料閲覧が必要な段階です。${upcomingSessionNote}`,
     linkTo: "/council-documents",
     linkLabel: "会期一覧を見る",
@@ -1040,7 +1063,7 @@ export function DataStatusPage() {
     {
       label: "一般質問：現任期の対象定例会のうち会議録収録済み",
       metric: simpleCompleteness(questionStats.collectedSessionCount, questionStats.targetSessionCount),
-      note: "母数は現議員任期の対象会期数（questionCollectionStatus.jsonで確認済み）",
+      note: "母数は現議員任期の対象会期数（一般質問の収集状況データで確認済み）",
     },
     {
       label: "議案：提出者区分の確認",
@@ -1166,7 +1189,7 @@ export function DataStatusPage() {
           <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">データ収録状況</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          当サイトが登録している各データの件数・収録範囲・確認状況を、既存データから自動集計して表示しています。件数は手入力ではなく、公開中のJSONデータから常に再計算しています。「登録済み」は「対象がすべて確認済み」を意味しません。分野ごとに、氏名・件名などの基本情報の収録状況と、経歴・政策・議決結果などの詳細項目の確認状況は別に扱っています。
+          当サイトが登録している各データの件数・収録範囲・確認状況を、既存データから自動集計して表示しています。件数は手入力ではなく、公開中のデータから常に再計算しています。「登録済み」は「対象がすべて確認済み」を意味しません。分野ごとに、氏名・件名などの基本情報の収録状況と、経歴・政策・議決結果などの詳細項目の確認状況は別に扱っています。
         </p>
       </div>
 
@@ -1194,6 +1217,61 @@ export function DataStatusPage() {
       </p>
 
       {/*
+        「要確認」「未確認」の件数を、サイトの誤りの件数と読み違えないための説明。
+        件数はすべてデータから数え（要確認はビルド時の集計、議案の賛否は議案データ）、直書きしない。
+        状態は日本語の呼び名だけで示し、内部の英語コードは出さない。
+      */}
+      <SectionCard title="「要確認」「未確認」の件数の読み方">
+        <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+          次の件数は、当サイトの誤りやリンク切れの件数ではありません。まだ原本で確かめ直していない記録や、公式資料に議員ごとの記録が無い議案を、隠さずに数えたものです。
+        </p>
+        <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">
+              出典の確認状況が「{archiveVerificationStatusLabel("needsReview")}」の記録
+            </dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {needsReviewTotal === null ? "未計測" : `${formatCount(needsReviewTotal)}件`}
+            </dd>
+            <dd className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">
+              値は出典の資料から登録済みで、その原本をもう一度取り寄せて値が一致するかを、まだ確かめ直していない記録です。
+            </dd>
+          </div>
+          <div className="rounded-lg bg-surface-container-low p-3">
+            <dt className="text-xs text-on-surface-variant">議員ごとの賛否が「未確認」の議案</dt>
+            <dd className="mt-0.5 text-lg font-semibold text-on-surface">
+              {formatCount(individualVoteUnconfirmedCount)}件
+              <span className="ml-1 text-xs font-medium text-on-surface-variant">
+                （議案全体{formatCount(billVotes.length)}件のうち）
+              </span>
+            </dd>
+            <dd className="mt-0.5 text-xs leading-relaxed text-on-surface-variant">
+              議決結果は登録済みです。確認できる公式資料に議員ごとの賛成・反対が書かれていないか、会議録でまだ確かめていない議案です。このほか、会議録で確かめた結果、起立採決などで議員ごとの賛否が記録されていない「個人単位で確認不可」の議案が{formatCount(individualVoteNotRecordedCount)}件あります。
+            </dd>
+          </div>
+        </dl>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-xs leading-relaxed text-on-surface-variant">
+          <li>原本と照らし合わせて一致を確かめたものは「確認済み」に移すため、件数は今後減ることがあります。</li>
+          <li>原本がまだ公開されていない、会議録に議員ごとの記録が無いなどの理由で、確認を進めても件数が変わらないこともあります。</li>
+          <li>分からない項目は、推測で埋めたり0件として扱ったりせず、分からないまま表示しています。議員ごとの賛否も、全会一致などの結果から推測して割り当てていません。</li>
+        </ul>
+        {needsReviewBreakdown.length > 0 && (
+          <details className="mt-1">
+            <summary className="block cursor-pointer py-3.5 text-xs font-medium text-on-surface-variant hover:text-on-surface">
+              「{archiveVerificationStatusLabel("needsReview")}」の記録がどのデータにあるかを見る
+            </summary>
+            <ul className="mt-1 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">
+              {needsReviewBreakdown.map(([file, count]) => (
+                <li key={file} className="rounded border border-outline-variant p-2">
+                  <span className="font-medium text-on-surface">{formatCount(count)}件</span>：{citizenDataFileLabel(file)}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </SectionCard>
+
+      {/*
         Phase214：このページと調査メモに残している内部の記号・番号の凡例。
         当サイトは、市民向けの本文には内部コードを出さない方針（言い換えは
         src/lib/citizenTermLabels.ts が担当）だが、調査の追跡に必要な通し番号
@@ -1219,11 +1297,11 @@ export function DataStatusPage() {
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="font-medium text-on-surface">出典の確認状況（verified など）</dt>
+            <dt className="font-medium text-on-surface">出典の確認状況</dt>
             <dd className="mt-0.5">
               当サイトが公開資料の記載と突き合わせた段階を示すもので、資料そのものの正しさを保証する区分ではありません。
               <span className="mt-1 block">
-                verified＝確認済み／partiallyVerified・partially-verified＝一部確認済み／needsReview＝要確認／candidate＝候補（未確定）／confirmed＝確定／unverified・raw＝未確認／sourceUnavailable＝出典資料未確認
+                確認済み／一部確認済み／要確認（原本での再照合前）／候補（未確定）／確定／未確認／出典資料未確認
               </span>
             </dd>
           </div>
@@ -1237,19 +1315,17 @@ export function DataStatusPage() {
             <dd className="mt-0.5">
               その情報がどの種類の資料に基づくかの区分です。
               <span className="mt-1 block">
-                {Object.entries(TRUST_LEVEL_LABEL)
-                  .map(([code, label]) => `${code}＝${label}`)
-                  .join("／")}
+                {Object.values(TRUST_LEVEL_LABEL).join("／")}
               </span>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="font-medium text-on-surface">議案の説明の確認段階（Level0〜Level3）</dt>
+            <dt className="font-medium text-on-surface">議案の説明の確認段階（4段階）</dt>
             <dd className="mt-0.5">
               議案1件ごとに、どこまで確認できたかを表す段階です。
               <span className="mt-1 block">
                 {Object.entries(BILL_EXPLANATION_LEVEL_LABEL)
-                  .map(([level, label]) => `Level${level}＝${label}`)
+                  .map(([level, label]) => `段階${level}：${label}`)
                   .join("／")}
               </span>
             </dd>
@@ -1266,24 +1342,22 @@ export function DataStatusPage() {
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="font-medium text-on-surface">説明がまだ無い理由の区分（SHARED_REASON など）</dt>
+            <dt className="font-medium text-on-surface">説明がまだ無い理由の区分</dt>
             <dd className="mt-0.5">
               「説明が無い」を一括りにせず、なぜ無いのかを分けて記録しています。議案ページには下記の日本語のみを表示しています。
               <span className="mt-1 block">
-                {Object.entries(BILL_EXPLAINABILITY_CITIZEN_LABEL)
-                  .map(([code, label]) => `${code}＝${label}`)
-                  .join("／")}
+                {Object.values(BILL_EXPLAINABILITY_CITIZEN_LABEL).join("／")}
               </span>
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="font-medium text-on-surface">人手対応の状態（HUMAN_ACTION_REQUIRED など）</dt>
+            <dt className="font-medium text-on-surface">人の確認が必要な項目の状態</dt>
             <dd className="mt-0.5">
-              自動処理では解決できない項目に付けている状態です。WAITING_EXTERNAL＝公式資料の公開待ち／MANUAL_REVIEW＝人手による追加調査が必要／RESEARCH_EXHAUSTED＝調査を尽くしたが未確認／BLOCKED_TECHNICAL＝技術的制約／NOT_APPLICABLE＝対象外／COMPLETED＝解決済み。これらをまとめて「人の確認が必要（HUMAN_ACTION_REQUIRED）」と呼ぶことがあります。件数は下の「調査継続中の項目」でご確認いただけます。
+              自動処理では解決できない項目に付けている状態です。公式資料の公開待ち／人手による追加調査が必要／調査を尽くしたが未確認／技術的制約／対象外／解決済み。件数は下の「調査継続中の項目」でご確認いただけます。
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="font-medium text-on-surface">データ収録状況の区分（complete／partial／missing、confirmed_zero など）</dt>
+            <dt className="font-medium text-on-surface">データ収録状況の区分（確認済み・一部確認・確認した結果0件・資料が無く評価できない など）</dt>
             <dd className="mt-0.5">
               議員活動バロメーターで使う区分です。「確認した結果0件」と「資料が無く評価できない」を必ず区別します。詳しい対応表は
               <Link to="/methodology/council-activity" className="mx-1 text-primary underline">
@@ -1308,7 +1382,7 @@ export function DataStatusPage() {
 
       <SectionCard title="出典・リンクの健全性（品質監査）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          出典の形式・外部リンクの到達性・画面表示の件数が実データとずれていないかを機械的に監査した結果です。新しい判定基準は追加せず、既存の<code>validate:sources</code>・外部リンク監査キャッシュを集計しています。
+          出典の形式・外部リンクの到達性・画面表示の件数が実データとずれていないかを機械的に監査した結果です。新しい判定基準は追加せず、既存の出典形式の自動検査と、外部リンクの到達確認の記録を集計しています。
         </p>
 {/* Phase222：「リンク切れ」を1つの数字にまとめると、市民がクリックして404に飛ぶ状態
             （公開画面のリンク切れ）と、出典の記録として内部に残している到達不能URL（記録なので
@@ -1346,8 +1420,7 @@ export function DataStatusPage() {
               {dataQualitySummary.linkHealth ? `${brokenWithoutAlternative}件` : "未計測"}
             </dd>
             <dd className="mt-0.5 text-xs text-on-surface-variant">
-              画面ではリンクにせず「{BROKEN_SOURCE_LINK_LABEL}」と表示（確認した参照URL
-              {dataQualitySummary.linkHealth ? dataQualitySummary.linkHealth.totalChecked.toLocaleString("ja-JP") : "―"}件のうち）
+              画面ではリンクにせず「{BROKEN_SOURCE_LINK_LABEL}」と文字で表示しています
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -1371,24 +1444,26 @@ export function DataStatusPage() {
           </div>
         </dl>
         <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-          「公開画面のリンク切れ」と「内部データに残る到達できない参照URL」は別のものです。前者は市民が押すと「ページが見つかりません」になるリンクで、0件でなければビルドを止めています。後者は、いつ・どの資料を根拠にしたかという記録として残しているURLで、資料そのものが公開元から消えても記録は消しません（消すと根拠が追えなくなるため）。該当する出典は画面上でリンクにせず、「{BROKEN_SOURCE_LINK_LABEL}」と文字で示しています。
+          「公開画面のリンク切れ」と「内部の記録に残る旧URL」は別のもので、件数も別々に数えています。前者は市民が押すと「ページが見つかりません」になるリンクで、0件でなければビルドを止めています。後者は、いつ・どの資料を根拠にしたかという記録として残しているURLで、資料そのものが公開元から消えても記録は消しません（消すと根拠が追えなくなるため）。該当する出典は画面上でリンクにせず、「{BROKEN_SOURCE_LINK_LABEL}」と文字で示しています。
+          {dataQualitySummary.linkHealth &&
+            `旧URLの件数は、内部の記録に残る参照URL${dataQualitySummary.linkHealth.totalChecked.toLocaleString("ja-JP")}件の到達を確かめた結果です。`}
         </p>
         {dataQualitySummary.linkHealth && dataQualitySummary.linkHealth.broken.length > 0 && (
           <details className="mt-3">
             <summary className="block cursor-pointer py-3.5 text-xs font-medium text-on-surface-variant hover:text-on-surface">
-              内部データに残る到達できない参照URLの内訳を見る（
+              内部の記録に残る旧URLの内訳を見る（
               {dataQualitySummary.linkHealth.broken.length}件）
             </summary>
             <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-on-surface-variant">
               {dataQualitySummary.linkHealth.broken.map((b) => (
                 <li key={b.url} className="break-all rounded border border-outline-variant p-2">
                   <span className="font-medium text-on-surface">
-                    {b.category === "not_found_404" ? "404 Not Found" : `サーバーエラー（${b.status ?? "不明"}）`}
+                    {b.category === "not_found_404" ? "ページが見つからない（404）" : `サーバーエラー（${b.status ?? "不明"}）`}
                   </span>
                   {b.disposition && b.disposition !== "no_alternative"
                     ? "（公開元で掲載終了・代わりの資料あり）"
                     : "（代わりの資料なし・調査済み）"}
-                  ：{b.url}（{b.files.join("、")}）
+                  ：{b.url}（記録しているデータ：{[...new Set(b.files.map(citizenDataFileLabel))].join("、")}）
                 </li>
               ))}
             </ul>
@@ -1403,7 +1478,7 @@ export function DataStatusPage() {
               {sourceWarningBreakdown.map(([code, count]) => (
                 <li key={code} className="rounded border border-outline-variant p-2">
                   <span className="font-medium text-on-surface">{count}件</span>：
-                  {SOURCE_WARNING_CODE_LABEL[code] ?? code}
+                  {SOURCE_WARNING_CODE_LABEL[code] ?? "その他の指摘"}
                 </li>
               ))}
             </ul>
@@ -1531,7 +1606,7 @@ export function DataStatusPage() {
         </p>
         {kohoDamagedIssues.length > 0 && (
           <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-            {kohoDamagedIssues.map((k) => `${k.issueYearMonth}号`).join("、")}
+            {kohoDamagedIssues.map((k) => `${k.issueYearMonth.replace(/^(\d{4})-0?(\d{1,2})$/, "$1年$2月")}号`).join("、")}
             について：{humanizeDataNote(kohoDamagedIssues[0].sourceStatus?.note)}
             （延岡市公式サイト・Webアーカイブ・国立国会図書館デジタルコレクション・宮崎県立図書館のオンライン蔵書検索など、オンラインで確認できる経路は確認しましたが、代替の資料は見つかりませんでした）。
           </p>
@@ -1621,7 +1696,7 @@ export function DataStatusPage() {
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="text-xs text-on-surface-variant">{BROKEN_SOURCE_LINK_LABEL}</dt>
+            <dt className="text-xs text-on-surface-variant">公開元で見られなくなった資料（内部の記録上の旧URL）</dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">{promiseBrokenSourceCount}件</dd>
           </div>
         </dl>
@@ -1773,7 +1848,7 @@ export function DataStatusPage() {
         </dl>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           収録している年度：{promiseIndicatorSummary.fiscalYears.join("、")}。「予定」は公表資料に書かれた計画値であり、実績ではありません。
-          数値は公表資料に書かれているものだけを登録し、当サイトによる合算・推定は行っていません（検証：validate:data）。
+          数値は公表資料に書かれているものだけを登録し、当サイトによる合算・推定は行っていません（登録時の自動検査で確認しています）。
         </p>
 
         <p className="mb-2 mt-4 text-sm font-semibold text-on-surface">まだ登録できていない項目</p>

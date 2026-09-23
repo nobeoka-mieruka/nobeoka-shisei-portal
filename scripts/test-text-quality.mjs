@@ -410,6 +410,44 @@ if (!existsSync(DIST)) {
         `語の種類${shapeTokens.size}件：${[...shapeTokens.keys()].slice(0, 20).join("・")}）`,
     );
   });
+
+  /* ---------------------------------------------------------------- *
+   * レイヤー3-4：監査ページ /data-status でも、確認状況の英語コードは本文に出さない
+   *
+   * /data-status はレイヤー3の対象外（AUDIT_ROUTES）だが、確認状況（要確認・未確認など）と
+   * 人手対応の状態は日本語の呼び名だけで示す方針にした。凡例に英語コードを並べ直す退行や、
+   * データファイル名がそのまま出る退行をここで検出する。
+   * ---------------------------------------------------------------- */
+
+  const AUDIT_PAGE_FORBIDDEN_LABELS = new Set([
+    "内部データファイル名",
+    "出典・確認状況の内部フィールド名／列挙値",
+    "議案説明の内部段階区分",
+    "人手対応の内部ステータス",
+  ]);
+  const auditPageFound = [];
+  for (const file of htmlFiles) {
+    const route = "/" + path.relative(DIST, file).replace(/\\/g, "/").replace(/\/?index\.html$/, "");
+    if (route !== "/data-status") continue;
+    const text = extractRenderedText(readFileSync(file, "utf8"));
+    for (const { label, re } of INTERNAL_TERM_PATTERNS.filter((p) => AUDIT_PAGE_FORBIDDEN_LABELS.has(p.label))) {
+      const scanner = new RegExp(re.source, "g");
+      let m;
+      while ((m = scanner.exec(text))) {
+        const context = text.slice(Math.max(0, m.index - 40), m.index + 60).replace(/\s+/g, " ").trim();
+        auditPageFound.push(`${route}: ${label}「${m[0].trim()}」…${context}…`);
+      }
+    }
+  }
+
+  check("/data-status の本文に、確認状況・人手対応の英語コードやデータファイル名が出ていない", () => {
+    assert.equal(
+      auditPageFound.length,
+      0,
+      `/data-status に内部コードが出ています（日本語の呼び名だけで示してください）:\n    ` +
+        `${auditPageFound.slice(0, 40).join("\n    ")}\n    （合計${auditPageFound.length}件）`,
+    );
+  });
 }
 
 console.log(`\n[test-text-quality] ${passCount} check(s) passed.`);

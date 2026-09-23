@@ -30,3 +30,10 @@
 /members/m25/questions/m25-2026-02-25-ippan-shitsumon/  /members/m25/questions/m25-2026-02-25-kanren-shitsumon/  301
 /members/m14/questions/m14-2026-02-26-ippan-shitsumon  /members/m14/questions/m14-2026-02-26-kanren-shitsumon  301
 /members/m14/questions/m14-2026-02-26-ippan-shitsumon/  /members/m14/questions/m14-2026-02-26-kanren-shitsumon/  301
+
+
+# 推測されやすいURLの転送（2026-09-23）。現職議員一覧は /people?type=member、一般質問データベースは /questions にある。
+/members  /people/?type=member  301
+/members/  /people/?type=member  301
+/general-questions  /questions/  301
+/general-questions/  /questions/  301

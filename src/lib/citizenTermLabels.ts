@@ -64,9 +64,12 @@ const DATA_FILE_LABELS: Record<string, string> = {
   archiveMemberProfiles: "議員プロフィールデータ",
   archiveMemberTerms: "議員の任期データ",
   archivePolicies: "政策データ",
+  archivePolicyQuestionRelations: "政策と一般質問の関連データ",
+  billProposalRoles: "議員提出議案の提出者データ",
   billVotes: "議案賛否データ",
   citySpecialPosts: "市の特別職データ",
   civicTimelineEvents: "市政年表データ",
+  councilDocumentSources: "市議会資料の出典データ",
   councilSessions: "会期データ",
   councilSpeechSummaries: "会議録の発言要約データ",
   councilWatchedDocuments: "市議会の更新監視資料データ",
@@ -75,13 +78,23 @@ const DATA_FILE_LABELS: Record<string, string> = {
   financeDashboard: "財政ダッシュボードのデータ",
   formerMembers: "元議員データ",
   generalQuestions: "一般質問データ",
+  kohoNobeokaIssues: "広報のべおかの号データ",
   kohoOcrSearchIndex: "広報のべおかの全文検索データ",
   mayor: "市長データ",
   mayorPromises: "市長公約データ",
   members: "現職議員データ",
   questionCollectionStatus: "一般質問の収集状況データ",
   searchIndex: "サイト内検索データ",
+  similarMunicipalityFinanceComparison: "類似団体の財政比較データ",
 };
+
+/**
+ * データファイル名（`xxx.json` または拡張子なし）を市民向けの呼び名にする。
+ * 対応表に無いファイルは、内部の名前を画面に出さないよう「当サイトのデータ」とだけ示す。
+ */
+export function citizenDataFileLabel(fileName: string): string {
+  return DATA_FILE_LABELS[fileName.replace(/\.json$/, "")] ?? "当サイトのデータ";
+}
 
 /**
  * 内部のフィールド名・列挙値 → 市民向けの日本語。
