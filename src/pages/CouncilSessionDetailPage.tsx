@@ -210,6 +210,28 @@ export function CouncilSessionDetailPage() {
         )}
       </SectionCard>
 
+      {/* 開催日が未登録の会期は、その理由（会議録の公開待ち等）を示す。未登録を「開催なし」と読ませない。 */}
+      {session.meetingDaysStatus === "minutesNotYetPublished" && !(session.meetingDays ?? []).length && (
+        <SectionCard title="本会議の開催日と会議録（会議録の公開待ち）">
+          <p className="text-sm leading-relaxed text-on-surface">
+            {session.meetingDaysStatusNote}
+            {session.meetingDaysScheduleSourceUrl && (
+              <>
+                {" "}
+                <a
+                  href={session.meetingDaysScheduleSourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`text-primary underline ${linkClass}`}
+                >
+                  議会が公表した会議日程（案）（PDF）
+                </a>
+              </>
+            )}
+          </p>
+        </SectionCard>
+      )}
+
       {/* 本会議の開催日と、日ごとの会議録。会議録検索システムには会期単位の固定URLが無いため、日単位で示す。 */}
       {(session.meetingDays ?? []).some((d) => d.minutesUrl) && (
         <SectionCard title={`本会議の開催日と会議録（${session.meetingDays!.length}日）`}>

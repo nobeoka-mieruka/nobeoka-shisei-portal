@@ -2122,6 +2122,15 @@ export interface CouncilSession {
   meetingDays?: CouncilMeetingDay[];
   /** 会期（startDate〜endDate）の根拠：第1号で議長が会期の決定を宣告した発言。 */
   periodSourceRef?: { quote: string; url: string; speaker?: string; verifiedAt: string };
+  /**
+   * 開催日（meetingDays）が未登録の理由。未登録を「開催されなかった」と誤読させないために残す。
+   * minutesNotYetPublished＝会議録が未掲載（会期中・公開待ち）。
+   */
+  meetingDaysStatus?: "minutesNotYetPublished";
+  meetingDaysStatusNote?: string;
+  meetingDaysStatusCheckedAt?: string;
+  /** 議会が公表した会議日程（予定）の資料。予定であり開催の記録ではないため、開催日には使わない。 */
+  meetingDaysScheduleSourceUrl?: string;
 }
 
 /**
