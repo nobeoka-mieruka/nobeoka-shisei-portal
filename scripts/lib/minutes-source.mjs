@@ -596,7 +596,11 @@ export async function listSessionsForYear({ code, year }) {
  */
 export async function listSpeakerSegments({ code, fileName }) {
   const url = `${BASE}/cgi-bin3/r_Speakers.exe?${code}/${fileName}/0/0//10/1/3:0/654/1//0/0/0`;
-  const { buf } = await fetchWithRetry(url, {});
+  // 会議録が未公開の時点で引くと、検索システムはHTTP 200のまま
+  // 「ERROR:ファイルの読込みに失敗しました。」を返す。これをキャッシュすると、
+  // 後日公開されてもその会議日が永久に「発言0件」になる。
+  // listMeetingDays()・postTreedepth()と同じく、ここもキャッシュしない。
+  const { buf } = await fetchWithRetry(url, {}, RETRIES, { noCache: true });
   const html = decodeSjis(buf);
   // r_Speakers.exeの<title>は固定文言（"会議録の閲覧と検索"）で会議名を含まないため使わない。
   // 会議名が必要な場合はfetchMeetingTitle()、またはfetchSegmentText()が返すtitleを使うこと。

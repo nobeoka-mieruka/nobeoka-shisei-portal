@@ -1,0 +1,90 @@
+{
+  "note": "請願の紹介議員のうち、一次資料で氏名まで確認できたもの。延岡市議会は紹介議員を定型的に公表していない（議案等審議結果PDF・のべおか市議会だより・本会議の上程文のいずれにも欄が無く、請願文書表はウェブ公開されていない）。ここに載っているのは、本会議の発言の中で偶発的に言及された例外的なケースだけであり、網羅的な名簿ではない。記録が無いことは、紹介議員がいなかったという意味ではない。",
+  "scope": "地方自治法第124条により紹介議員を要するのは請願のみ。陳情は制度上、紹介議員を持たない。",
+  "verifiedAt": "2026-09-23",
+  "records": [
+    {
+      "billId": "2023-06-seigan-1",
+      "billNumber": "請願第1号",
+      "billTitle": "学校給食の無償化についての請願",
+      "introducerMemberIds": ["m20"],
+      "completeness": "sole",
+      "completenessNote": "紹介議員は1名のみであることを、本人が本会議で明言している。",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和5年第7回定例会（第3号 9月6日）／平田信広君",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050906A/139436/10/1//0/0",
+          "quote": "さきの六月議会で私が紹介議員になった請願が、全会一致で採択されました。私一人が紹介議員の請願が全会一致で採択されるのは、初めてではないかと思います"
+        }
+      ]
+    },
+    {
+      "billId": "2019-09-seigan-1",
+      "billNumber": "請願第1号",
+      "billTitle": "国民健康保険料（税）を協会けんぽ並みに引き下げる意見書提出を求める請願",
+      "introducerMemberIds": ["m20"],
+      "completeness": "partial",
+      "completenessNote": "この議員が紹介議員に含まれることは確認できたが、他に紹介議員がいたかどうかは確認できていない。",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和元年第3回定例会（第5号 9月13日）／平田信広君",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R010913A/71602/10/1//0/0",
+          "quote": "この請願は、私が紹介議員になっているわけですが、委員会審議では賛成少数で不採択になりました"
+        }
+      ]
+    },
+    {
+      "billId": "2020-06-seigan-5",
+      "billNumber": "請願第5号",
+      "billTitle": "「使おやっ！のべおかプレミアム商品券」発行についての請願書",
+      "introducerMemberIds": [],
+      "completeness": "unnamed",
+      "completenessNote": "全会派から紹介議員が出ていることは委員長報告で確認できるが、個人名は読み上げられていないため誰かを特定できない。0名という意味ではない。",
+      "sourceRefs": [
+        {
+          "label": "延岡市議会 会議録検索システム／令和2年第8回定例会（第5号 6月25日）／予算審査特別委員会委員長報告",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R020625A/16248/10/1//0/0",
+          "quote": "今回の商品券発行事業に関する請願については、全会派から紹介議員に名を連ねているが"
+        }
+      ]
+    }
+  ],
+  "checkedSources": [
+    {
+      "sourceType": "議案等審議結果PDF",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+      "result": "紹介議員の欄が存在しない。列は議案番号等・件名・審議結果・議決日のみ。令和元年12月から令和8年3月まで書式は一貫している。"
+    },
+    {
+      "sourceType": "請願文書表・陳情文書表",
+      "url": "https://www.kensakusystem.jp/nobeoka/",
+      "result": "延岡市議会のウェブ公開資料の中に見当たらない。会議録の全文検索でも該当なし。作成されていないという意味ではなく、ウェブで確認できないという意味。"
+    },
+    {
+      "sourceType": "請願書と陳情書（手続きの案内）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1429.html",
+      "result": "「請願の場合は市議会議員の紹介が必要」という制度の説明のみで、実際の紹介議員名の一覧は掲載されていない。"
+    },
+    {
+      "sourceType": "のべおか市議会だより",
+      "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1457.html",
+      "result": "第83号・第84号・第92号・第93号・第96号・第101号を確認したが、紹介議員の記載は無い。件名と審議結果のみ。"
+    },
+    {
+      "sourceType": "本会議での請願の上程",
+      "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060920A/62327/10/1//0/0",
+      "result": "上程の定型文では件名と委員会審査の終了のみが読み上げられ、紹介議員は読み上げられない。"
+    },
+    {
+      "sourceType": "委員会会議録",
+      "url": "https://www.kensakusystem.jp/nobeoka/",
+      "result": "会議録検索システムで閲覧できるのは本会議録のみ。委員会での請願趣旨説明は確認できない。"
+    }
+  ],
+  "dataNotes": [
+    {
+      "billId": "2019-12-seigan-3",
+      "note": "当サイトでは「請願第3号」として登録しているが、これは出典である令和元年12月定例会の議案等審議結果PDF（attachment/1555.pdf）が【陳情】の見出しの下に「請願第３号」と記載しているためである。同じ案件は令和2年3月定例会のPDF（attachment/1556.pdf）では「陳情第３号」と記載されており、実体は陳情。出典に忠実な登録を維持し、紹介議員の対象件数からは除いている。"
+    }
+  ]
+}
