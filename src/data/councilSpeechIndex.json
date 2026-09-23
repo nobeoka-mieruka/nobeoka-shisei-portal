@@ -281,7 +281,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "長期総合計画の策定"
@@ -289,6 +289,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m01-2025-03-04-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m01-2025-03-04-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 1
         },
         {
@@ -1435,7 +1437,7 @@
           "meetingNumber": "第3号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "市長の政治姿勢",
@@ -1444,6 +1446,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m03-2026-02-26-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m03-2026-02-26-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 2
         },
         {
@@ -2088,7 +2092,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "南延岡駅の子育て支援機能",
@@ -2097,6 +2101,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m04-2026-02-25-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m04-2026-02-25-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 2
         },
         {
@@ -2569,7 +2575,7 @@
           "meetingNumber": "第3号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "予算編成",
@@ -2578,6 +2584,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m05-2026-02-26-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m05-2026-02-26-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 2
         },
         {
@@ -9588,7 +9596,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "予算編成",
@@ -9599,6 +9607,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m21-2026-02-25-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m21-2026-02-25-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 3
         },
         {
@@ -10979,7 +10989,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "予算編成",
@@ -10989,6 +10999,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m24-2026-02-25-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m24-2026-02-25-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 3
         },
         {
@@ -11473,7 +11485,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "南延岡駅バリアフリー化"
@@ -11481,6 +11493,8 @@
           "questionItems": [],
           "summarySources": [],
           "verifiedAt": "2026-08-02",
+          "duplicateOfSpeechId": "m25-2025-03-04-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m25-2025-03-04-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。",
           "questionItemCount": 1
         },
         {
