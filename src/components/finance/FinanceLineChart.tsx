@@ -82,6 +82,23 @@ function axisLabelSteps(total: number): number[] {
   return steps;
 }
 
+/**
+ * 横軸ラベルの文字。改行してよい位置（wbr）を1か所だけ置き、語の途中では折り返さない
+ * （keep-allと組み合わせる）。最大でも2行になり、1文字ずつの縦書きにはならない。
+ */
+function AxisLabelText({ label }: { label: string }) {
+  // 「年」を含むもの（令和3年度末・2014年度）は「年」の前で、含まないもの（昭和15）は元号と数字の間で折り返す。
+  const m = /^(.*?[0-9０-９]+)(年.*)$/.exec(label) ?? /^([^0-9０-９]+)([0-9０-９].*)$/.exec(label);
+  if (!m) return <>{label}</>;
+  return (
+    <>
+      {m[1]}
+      <wbr />
+      {m[2]}
+    </>
+  );
+}
+
 /** 各ラベルに与える表示クラス。狭い段で表示されるものは空文字（＝常時表示）。 */
 function axisLabelClassName(index: number, total: number, steps: number[]): string {
   const fromEnd = total - 1 - index;
@@ -234,7 +251,9 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
         横軸ラベル。`minmax(0, 1fr)`の等幅グリッドにすることで、ラベルの文字幅にかかわらず
         マスの幅が必ず等しくなり、グラフ上の点とラベルの位置が一致する（flexでは幅の広い
         ラベルのマスだけが広がり、点とラベルがずれていた）。ラベル自身は`w-min`で
-        最小幅にとどめ、マスの中央に置く。
+        最小幅にとどめ、マスの中央に置く。和文は既定では1文字ごとに改行できるため、
+        `keep-all`で語の途中の改行を止め、数字と「年度…」の間だけで折り返す
+        （「令和3年度末」が1文字ずつ縦に並んでいた）。
       */}
       {/*
         Phase218：横軸ラベルは目盛りの見た目であり、同じ年度が直後の一覧に値付きで並ぶ。
@@ -249,9 +268,9 @@ export function FinanceLineChart({ points, formatValue, ariaLabel = "推移グ�
         {points.map((p, i) => (
           <span
             key={i}
-            className={`w-min justify-self-center text-center text-[9px] leading-tight text-on-surface-variant sm:text-xs ${axisLabelClassName(i, points.length, labelSteps)}`}
+            className={`w-min justify-self-center text-center text-[9px] leading-tight text-on-surface-variant [word-break:keep-all] sm:text-xs ${axisLabelClassName(i, points.length, labelSteps)}`}
           >
-            {p.label}
+            <AxisLabelText label={p.label} />
           </span>
         ))}
       </div>
