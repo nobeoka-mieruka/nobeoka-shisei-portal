@@ -107,6 +107,23 @@ check("議決日：開催日が登録済みの会期では、議案の議決日�
   expectNone(problems, "議決日が本会議の開催日と食い違っています");
 });
 
+check("議員個人の賛否「公表なし」：議決日の会議録（ファイル名の日付＝議決日）を根拠として記録している", () => {
+  // 提案日など別の日の会議録だけでは、その日の採決で個人別の記録が無いことは確かめられない。
+  const problems = [];
+  for (const b of billVotes) {
+    if (b.individualVoteDisclosureStatus !== "notDisclosed") continue;
+    const files = [
+      ...(b.transcriptUrl ?? "").matchAll(/(?:fileName=|\/)([RH]\d{6}[A-Z])/g),
+      ...(b.verificationNote ?? "").matchAll(/([RH]\d{6}[A-Z])/g),
+    ].map((m) => m[1]);
+    if (!b.votingDate) problems.push(`${b.id}: 議決日が未登録なのに「公表なし」`);
+    else if (!files.some((f) => dateFromMinutesFile(f) === b.votingDate)) {
+      problems.push(`${b.id}: 議決日 ${b.votingDate} の会議録が根拠に無い`);
+    }
+  }
+  expectNone(problems, "「公表なし」の根拠が議決日の会議録を指していません");
+});
+
 check("出典の重複：同じ配列の中に、まったく同じ出典（URL・位置・引用まで同一）を二重に登録していない", () => {
   const dir = join(ROOT, "src/data");
   const skip = /backup|searchIndex|Index\.json$|adminReviewQueue|dataQualitySummary/;

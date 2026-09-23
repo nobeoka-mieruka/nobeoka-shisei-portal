@@ -174,7 +174,14 @@ async function main() {
       const existingMemberVotes = existing?.memberVotes && existing.memberVotes.length > 0 ? existing.memberVotes : [];
       // 個人別賛否の公開状況：memberVotesが既にあればdisclosed、無ければ
       // 「非公表と確認できた」わけではないのでunconfirmed（確認待ち）とする。
-      const individualVoteDisclosureStatus = existingMemberVotes.length > 0 ? "disclosed" : "unconfirmed";
+      // ただし会議録で確認済みのnotDisclosed（根拠はverificationNote等に記録済み）は、
+      // 審議結果PDFからは判断できない情報なので、再抽出で未確認へ戻さない。
+      const individualVoteDisclosureStatus =
+        existingMemberVotes.length > 0
+          ? "disclosed"
+          : existing?.individualVoteDisclosureStatus === "notDisclosed"
+            ? "notDisclosed"
+            : "unconfirmed";
 
       const candidateFields = {
         id,
