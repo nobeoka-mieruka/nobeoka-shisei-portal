@@ -125,8 +125,22 @@ const DEBATE_START = /これより[、]?(?:一括)?討論に入ります/;
 const DEBATE_END = /討論を終わり(?:ます|ました)/;
 // 「通告による討論は終わりました」は終了ではない。先に取り除く。
 const NOTICED_DEBATE_END = /通告(?:による)?討論(?:は|を)終わり(?:ます|ました)/g;
-const AGENDA = /日程第[一二三四五六七八九十百]+[　\s]*(.+?)を(?:一括)?議題といたします/;
-const AGENDA_NO_NUMBER = /^((?:決議|意見書)第[^\s　]+号.*?)を(?:一括)?議題といたします/;
+const AGENDA = /日程第[一二三四五六七八九十百]+[　\s]*([^。]+?)を(?:一括)?議題といたします/g;
+// 日程番号の無い追加議題（決議案・意見書案）。議長の発言の途中で宣告されることが多いため、
+// 発言の先頭に限らず、文の区切り（。）の直後から探す。先頭に限ると直前の議題を引き継いでしまう
+// （実例：令和6年10月4日、決議第五号の討論が「議案第六六号」の討論として記録されていた）。
+const AGENDA_NO_NUMBER = /(?:^|。)[　\s]*((?:決議|意見書)第[^\s　。]+号[^。]*?)を(?:一括)?議題といたします/g;
+
+/** 1つの発言の中で最後に宣告された議題（複数あるときは、後のものが現在の議題）。 */
+function lastAgenda(text) {
+  let last = null;
+  for (const re of [AGENDA, AGENDA_NO_NUMBER]) {
+    for (const m of text.matchAll(re)) {
+      if (!last || m.index > last.index) last = { index: m.index, title: m[1].trim() };
+    }
+  }
+  return last?.title ?? null;
+}
 
 /**
  * 立場は、本文から読み取れたときだけ入れる。読み取れなければ unclear のままにする。
@@ -263,9 +277,9 @@ export function extractDebates(fileName, text, segments = []) {
   };
 
   for (const u of utterances) {
-    const agendaMatch = u.text.match(AGENDA) ?? u.text.match(AGENDA_NO_NUMBER);
-    if (agendaMatch) {
-      agenda = agendaMatch[1].trim();
+    const agendaTitle = lastAgenda(u.text);
+    if (agendaTitle) {
+      agenda = agendaTitle;
       amendmentOnFloor = false;
     }
 

@@ -164,6 +164,13 @@ for (const [fileName, recs] of byDay) {
     if (match.speakerName !== r.speakerName) issue(r, "SPEAKER_DIFFERS_ON_REEXTRACT", match.speakerName);
     // --apply で書き込む前の差分は「更新」として記録し、書き込んだ後にもう一度流して0件になることを確かめる。
     if (match.stance !== r.stance) issue(r, "STANCE_DIFFERS_ON_REEXTRACT", `${match.stance} ≠ ${r.stance}`);
+    if ((match.agendaTitle ?? null) !== (r.agendaTitle ?? null))
+      issue(r, "AGENDA_DIFFERS_ON_REEXTRACT", `${match.agendaTitle} ≠ ${r.agendaTitle}`);
+    // 議題の取り違え：発言者が冒頭で名指しした種類（決議・意見書）と、記録の議題の種類が食い違わないこと。
+    const opening = squash(match.excerpt).slice(0, 120);
+    const agendaKind = /^(決議|意見書)/.test(match.agendaTitle ?? "") ? "resolution" : "bill";
+    if (/(決議|意見書)[（(]案[）)]に/.test(opening) && agendaKind === "bill")
+      issue(r, "AGENDA_KIND_MISMATCH", `発言は決議・意見書への討論だが、議題が「${match.agendaTitle}」`);
     if ((match.stanceTarget ?? null) !== (r.stanceTarget ?? null))
       issue(r, "TARGET_DIFFERS_ON_REEXTRACT", `${match.stanceTarget} ≠ ${r.stanceTarget ?? "未設定"}`);
     // 根拠の引用は、1つの発言の中に丸ごと存在しなければならない（発言をまたいだ文は会議録に無い）。
