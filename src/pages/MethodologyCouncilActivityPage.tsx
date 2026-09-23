@@ -272,10 +272,18 @@ export function MethodologyCouncilActivityPage() {
         </dl>
       </SectionCard>
 
-      <SectionCard title="議会活動プロフィール（7軸）の算定方法">
+      <SectionCard title="議会活動プロフィールの算定方法">
         <p className="text-sm leading-relaxed text-on-surface">
-          各議員のページに表示している7軸について、条例との関係、何を測っているか、何を測っていないか、算定式、除外条件、
+          各議員のページに表示している{profileAxes.length}つの軸について、条例との関係、何を測っているか、何を測っていないか、算定式、除外条件、
           一次資料、更新方法を公開します。第三者が同じ一次資料から再計算できることを目標にしています。
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
+          当初は延岡市議会基本条例に示された役割をそのまま7つの軸にしていましたが、一次資料を調べた結果、
+          「請願・陳情の紹介」「予算・決算特別委員会」「委員会での役職と報告」の3つは、全議員に同じ算定方法を
+          適用できないことが分かったため、軸から外しました。請願の紹介議員は公開資料に定型掲載されておらず、
+          予算・決算特別委員会は議長を除く全議員が委員で委員会内の質疑が匿名、委員長報告は役職に就いた議員にしか
+          発生しません（実データでは26名中13名が0件でした）。いずれも記録そのものは各議員のページの
+          「議会での活動」に、確認できた範囲で掲載しています。
         </p>
         <p className="mt-2 rounded-lg bg-surface-container-high p-3 text-sm leading-relaxed text-on-surface">
           この指標は、議員の能力、人格、優秀さ、政治的立場を評価するものではありません。

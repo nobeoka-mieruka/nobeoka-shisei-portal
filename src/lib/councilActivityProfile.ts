@@ -1,15 +1,23 @@
 import type { CouncilMember } from "../types";
 import billProposalRolesData from "../data/billProposalRoles.json";
-import billVotesData from "../data/billVotes.json";
-import { committeeReportActivityEvents } from "./committees";
 import type { CouncilActivityRecord } from "./councilActivityRecord";
 
 /**
- * 議会活動プロフィール（7軸）。
+ * 議会活動プロフィール。
  *
- * 延岡市議会基本条例が議会・議員に定めている役割を7つの軸として置き、
- * そのうち「公開された一次資料から個人単位で確認でき、26名全員へ同じ算定方法を
- * 適用でき、算定式を公開でき、第三者が再計算できる」軸だけを数値で示す。
+ * 延岡市議会基本条例が議会・議員に定めている役割のうち、
+ * 「公開された一次資料から個人単位で確認でき、全議員へ同じ算定方法を適用でき、
+ * 算定式を公開でき、第三者が再計算できる」ものだけを軸として置く。
+ *
+ * 【軸を絞った経緯（2026-09-23）】
+ * 当初は条例上の役割をそのまま7軸としていたが、一次資料を調べた結果、
+ * 次の3つは軸として成立しないことが分かったため外した。記録そのものは
+ * 「議会での活動」として別に掲載しており、消したわけではない。
+ * - 請願・陳情の紹介：紹介議員は公開資料に定型掲載されておらず、継続して取得できない。
+ * - 予算・決算特別委員会：委員は議長を除く全議員で、委員会内の質疑は「委員より」と匿名。
+ *   委員長を務めた議員しか記録が残らず、全議員を同じ条件で比べられない。
+ * - 委員会での役職と報告：委員長報告は役職に就いた議員にしか発生しない
+ *   （実データでは26名中13名が0件）。活動量ではなく役職の割り当てを表してしまう。
  *
  * 【絶対にしないこと】
  * - 軸を合計した総合点・偏差値・星評価・順位づけ
@@ -117,13 +125,6 @@ const MINUTES_SOURCE: AxisSourceRef = {
 const billProposalRoles = (billProposalRolesData as { roles: { role: string; personId: string }[] }).roles;
 const decisionSubmitterRecords = billProposalRoles.filter((r) => r.role === "submitter");
 const decisionSubmitterMemberIds = new Set(decisionSubmitterRecords.map((r) => r.personId));
-const committeeReportMemberIds = new Set(committeeReportActivityEvents.map((e) => e.memberId));
-const petitionBills = (billVotesData as { id: string; billTitle?: string }[]).filter(
-  (b) => /請願|陳情/.test(b.billTitle ?? "") || /chinjo|seigan/.test(b.id),
-);
-const budgetReportEvents = committeeReportActivityEvents.filter((e) =>
-  /予算審査|決算審査/.test(e.committeeName ?? ""),
-);
 
 /**
  * 議員1名分の7軸を組み立てる。
@@ -138,6 +139,8 @@ export function buildCouncilActivityProfile(
   record: CouncilActivityRecord,
   targetPeriodLabel: string,
   memberCount: number,
+  /** 討論の分子・分母。呼び出し側が会議録データから数えて渡す。 */
+  debate?: { numerator: number; denominator: number },
 ): CouncilActivityAxis[] {
   const askedRate = record.values.find((v) => v.key === "asked-rate");
   const excludedForSpeaker = record.sessions.filter((s) => s.excludedReasonCode === "SPEAKER_TERM");
@@ -213,37 +216,9 @@ export function buildCouncilActivityProfile(
     updateRule: "会議録から提案理由説明の発言者を確認し、人手で登録します。",
   };
 
-  const representation: CouncilActivityAxis = {
-    key: "representation",
-    order: 3,
-    label: "請願・陳情の紹介",
-    shortLabel: "請願紹介",
-    roleInOrdinance: "市民の意見を市政に反映させること（第2条第2号）",
-    observedActivity: "請願・陳情の紹介議員として氏名を確認できた件数（現在は取り込めていません）",
-    upperBoundMeaning: "（割合として算定していません）",
-    status: "NOT_ACQUIRED",
-    reason:
-      `請願・陳情は${petitionBills.length}件を登録していますが、紹介議員の氏名は1件も取り込めていません。` +
-      "紹介した実績が無いという意味ではなく、当サイトが資料を取り込めていないという意味です。",
-    measurement: null,
-    ordinanceBasis: "延岡市議会基本条例 第2条第2号（市民の意見を市政に反映させること）",
-    measures: "（現在は測定していません）請願・陳情の紹介議員として氏名を確認できた件数。",
-    doesNotMeasure:
-      "地域行事への参加、後援会活動、SNSでの発信。これらは条例が定める議員の職務ではないため対象にしていません。",
-    dataUsed: "（未取得）請願文書表・議案書",
-    targetPeriodLabel,
-    missingRule: "紹介議員の氏名を確認できるまで、件数を表示しません。0件とは表示しません。",
-    notApplicableRule: "該当なし。",
-    sourceRefs: [
-      { label: "延岡市議会 議案等審議結果", url: "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html" },
-    ],
-    individualAttribution: "資料には紹介議員が記載されるため、取り込めば帰属可能と見込まれます。",
-    updateRule: "請願文書表の取り込みができしだい反映します。",
-  };
-
   const longTermView: CouncilActivityAxis = {
     key: "long-term-view",
-    order: 4,
+    order: 3,
     label: "取り上げた政策分野の記録",
     shortLabel: "政策分野",
     roleInOrdinance: "政策の立案・決定・執行・評価における論点、争点を明らかにすること（第2条第2号）",
@@ -267,86 +242,47 @@ export function buildCouncilActivityProfile(
     updateRule: "会議録の取り込みと、テーマ辞書の更新のたびに再計算します。",
   };
 
-  const budgetReview: CouncilActivityAxis = {
-    key: "budget-review",
-    order: 5,
-    label: "予算・決算特別委員会での報告",
-    shortLabel: "予算決算",
-    roleInOrdinance: "市長等が行う市政の運営状況を、公正に監視し、評価すること（第2条第1号）",
-    observedActivity: "本会議での予算・決算特別委員会の委員長報告（委員会内の質疑は個人を特定できません）",
-    upperBoundMeaning: "（割合として算定していません）",
-    status: "NOT_INDIVIDUALLY_ATTRIBUTABLE",
-    reason:
-      `予算審査特別委員会・決算審査特別委員会の審査結果は本会議の委員長報告で確認でき、現在${budgetReportEvents.length}件を登録しています。` +
-      "しかし委員会の中での質疑は会議録に「委員より」とだけ記録され、どの議員の発言かを特定できません。" +
-      "そのため委員長を務めた議員以外は算定できません。これは審査に加わっていないという意味ではありません。",
-    measurement: null,
-    ordinanceBasis: "延岡市議会基本条例 第2条第1号（市長等が行う市政の運営状況を公正に監視、評価すること）",
-    measures: "（現在は測定していません）本会議での予算・決算特別委員会の委員長報告は実数として別途掲載しています。",
-    doesNotMeasure: "委員会での質疑の回数・内容、予算への賛否。",
-    dataUsed: "本会議での委員長報告",
-    targetPeriodLabel,
-    missingRule: "委員会内の個別質疑は個人に帰属できないため、件数を表示しません。",
-    notApplicableRule: "委員長を務めた議員以外は、委員長報告の件数を持ちません（0件ではなく対象外）。",
-    sourceRefs: [MINUTES_SOURCE],
-    individualAttribution: "低い。委員長報告のみ帰属可能で、委員会内の発言は匿名で記録されます。",
-    updateRule: "会議録の委員長報告から機械的に確認・登録します。",
-  };
-
+  const debateMeasurable = debate != null && debate.denominator > 0;
   const memberDebate: CouncilActivityAxis = {
     key: "member-debate",
-    order: 6,
+    order: 4,
     label: "本会議での討論",
     shortLabel: "討論",
-    roleInOrdinance: "議員相互の自由な討議により議論を尽くすこと（第2条第3号）",
-    observedActivity: "本会議での賛成・反対討論の発言者（現在は取り込めていません）",
-    upperBoundMeaning: "（割合として算定していません）",
-    status: "NOT_ACQUIRED",
-    reason:
-      "賛成・反対討論の発言者は会議録本文に記載がありますが、当サイトはまだ討論者を構造化して取り込めていません。" +
-      "討論をしていないという意味ではありません。",
-    measurement: null,
+    roleInOrdinance: "議員相互の自由な討議により議論を尽くすこと（延岡市議会基本条例 第2条第3号）",
+    observedActivity: "本会議の討論の場で発言したことを、会議録で確認できた会期の割合",
+    upperBoundMeaning:
+      "討論が行われたすべての会期で討論に立った状態。満点・優秀という意味ではありません。",
+    status: debateMeasurable ? "CONFIRMED" : "NOT_APPLICABLE",
+    reason: debateMeasurable
+      ? "討論は会議録に発言者の氏名が記録されるため、全議員に同じ算定方法を適用できます。討論に立たなかったことは、議案に賛成だった・関心が無かったという意味ではありません。"
+      : "対象期間に討論が行われた会期がないため、算定していません。",
+    measurement: debateMeasurable
+      ? {
+          numeratorLabel: "討論を行った会期",
+          numerator: debate.numerator,
+          denominatorLabel: "討論が行われた会期",
+          denominator: debate.denominator,
+          rateLabel: "確認率",
+          rate: Math.round((debate.numerator / debate.denominator) * 100),
+          ratio: debate.numerator / debate.denominator,
+        }
+      : null,
     ordinanceBasis: "延岡市議会基本条例 第2条第3号（議員相互の自由な討議により議論を尽くすこと）",
-    measures: "（現在は測定していません）本会議での賛成・反対討論の発言者。",
-    doesNotMeasure: "討論の内容、賛否の方向。",
-    dataUsed: "（未取得）会議録本文の討論部分",
+    measures: "本会議で賛成討論・反対討論に立ったことを会議録で確認できた会期の割合。",
+    doesNotMeasure:
+      "賛成か反対かという立場、討論の内容や長さ、説得力。討論しなかった議員の賛否も測っていません（議案の採決は起立採決のため、会議録から個人の賛否は分かりません）。",
+    dataUsed: "会議録の討論の段階から抽出した発言者の記録",
     targetPeriodLabel,
-    missingRule: "討論者を確認できるまで、件数を表示しません。0件とは表示しません。",
-    notApplicableRule: "該当なし。",
+    missingRule:
+      "討論が1件も行われなかった会期は、分母にも分子にも入れません。議案に異論が無ければ討論は行われないため、その会期を分母に入れると議員の行動と関係なく割合が下がります。",
+    notApplicableRule:
+      "議長を務めていた会期は、議事進行役のため分母から外します。就任前・辞職後の会期も分母に入れません。",
     sourceRefs: [MINUTES_SOURCE],
-    individualAttribution: "会議録に発言者名が記載されるため、取り込めば帰属可能と見込まれます。",
-    updateRule: "会議録からの討論者抽出ができしだい反映します。",
+    individualAttribution: "高い。会議録に発言者の氏名が明記されています。",
+    updateRule: "新しい会議録を取り込むたびに、討論の段階から自動で抽出し直します。",
   };
-
-  const committeeActivity: CouncilActivityAxis = {
-    key: "committee-activity",
-    order: 7,
-    label: "委員会での役職と報告",
-    shortLabel: "委員会",
-    roleInOrdinance: "議会の活動原則（第2条）",
-    observedActivity: "所属委員会と、本会議での委員長・副委員長報告（出席名簿は確認できていません）",
-    upperBoundMeaning: "（割合として算定していません）",
-    status: "RESEARCH_EXHAUSTED",
-    reason:
-      `所属委員会は登録済みで、本会議での委員長・副委員長報告は${memberCount}名中${committeeReportMemberIds.size}名分を確認しています。` +
-      "ただし議員別の出席・欠席名簿を複数の公開資料の経路で調べましたが確認できていません" +
-      "（延岡市議会が公表していないと断定するものではありません）。" +
-      "出席の記録が無いまま委員長報告だけを軸にすると、役職に就いたかどうかを表すだけになるため、数値にしていません。",
-    measurement: null,
-    ordinanceBasis: "延岡市議会基本条例 第2条（議会の活動原則）",
-    measures: "（現在は測定していません）所属委員会と、本会議での委員長・副委員長報告は別途掲載しています。",
-    doesNotMeasure: "出席率、委員会での発言、役職の重み。委員会に所属していること自体は活動実績として数えません。",
-    dataUsed: "委員会名簿、本会議での委員長報告",
-    targetPeriodLabel,
-    missingRule: "議員別の出席・欠席名簿を確認できていないため、出席率は算定しません。欠席0件とも表示しません。",
-    notApplicableRule: "該当なし。",
-    sourceRefs: [MINUTES_SOURCE],
-    individualAttribution: "委員長報告のみ帰属可能。出席は名簿自体を確認できていません。",
-    updateRule: "出席名簿を確認できしだい、算定方法を公開したうえで反映します。",
-  };
-
   void member;
-  return [monitoring, policyProposal, representation, longTermView, budgetReview, memberDebate, committeeActivity];
+  return [monitoring, policyProposal, longTermView, memberDebate];
 }
 
 /** 数値を出せる軸の数。ポリゴン表示へ切り替えるかの判断に使う。 */

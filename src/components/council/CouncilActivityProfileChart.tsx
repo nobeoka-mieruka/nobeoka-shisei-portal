@@ -90,7 +90,7 @@ export function CouncilActivityProfileChart({
           role="img"
           aria-labelledby={`${titleId} ${descId}`}
         >
-          <title id={titleId}>{`${memberName}議員の議会活動プロフィール（7軸）`}</title>
+          <title id={titleId}>{`${memberName}議員の議会活動プロフィール（${count}軸）`}</title>
           <desc id={descId}>
             {`公開された一次資料から確認できた活動の記録です。点数や順位ではありません。${summary}`}
           </desc>

@@ -167,6 +167,12 @@ export interface CouncilActivityRecordExtras {
   committeeReports?: ActivityRecordListItem[];
   /** 議案への賛否（個人別の記録が公開されている議案のうち、確認できた数）。 */
   namedVotes?: { numerator: number; denominator: number };
+  /** 本会議での討論。 */
+  debates?: ActivityRecordListItem[];
+  /** 討論の分子・分母（討論が行われた会期のうち、討論に立った会期）。 */
+  debateSessions?: { numerator: number; denominator: number };
+  /** 請願の紹介議員として、一次資料で確認できた記録。 */
+  petitionIntroductions?: ActivityRecordListItem[];
 }
 
 const SOURCE_MINUTES = "延岡市議会 会議録（本会議）";
@@ -493,6 +499,57 @@ export function buildCouncilActivityRecord(
       "委員会の審査結果を本会議で報告した記録です。委員会の中での質疑は、会議録に「委員より」とだけ記載され誰の発言か特定できないため、含めていません。",
     sourceLabel: "延岡市議会 会議録（委員長報告）",
     evidenceKind: "items",
+  });
+
+  const debates = extras.debates ?? [];
+  const debateSessions = extras.debateSessions;
+  values.push({
+    key: "debate-rate",
+    label: "討論を行った会期",
+    group: "council",
+    kind: "number",
+    value:
+      debateSessions && debateSessions.denominator > 0
+        ? Math.round((debateSessions.numerator / debateSessions.denominator) * 100)
+        : null,
+    unit: "%",
+    numerator: debateSessions && debateSessions.denominator > 0 ? debateSessions.numerator : undefined,
+    denominator: debateSessions && debateSessions.denominator > 0 ? debateSessions.denominator : undefined,
+    numeratorLabel: "討論を行った会期",
+    denominatorLabel: "討論が行われた会期",
+    availability:
+      !debateSessions || debateSessions.denominator === 0
+        ? "not-acquired"
+        : debateSessions.numerator > 0
+          ? "available"
+          : "confirmed-zero",
+    description:
+      "本会議の討論の場で発言したことを会議録で確認できた会期の割合です。討論が1件も行われなかった会期は分母に入れていません。賛成・反対のどちらであったかは評価しません。討論に立たなかったことは、議案に賛成だったという意味でも、関心が無かったという意味でもありません。",
+    sourceLabel: SOURCE_MINUTES,
+    ordinanceBasis: "延岡市議会基本条例 第2条第3号（議員相互の自由な討議により議論を尽くすこと）",
+    evidenceKind: "items",
+    items: debates,
+  });
+
+  const petitionIntroductions = extras.petitionIntroductions ?? [];
+  values.push({
+    key: "petition-introductions",
+    label: "請願の紹介議員",
+    group: "council",
+    kind: "list",
+    value: null,
+    unit: "",
+    items: petitionIntroductions,
+    availability: petitionIntroductions.length > 0 ? "available" : "not-acquired",
+    description:
+      "請願の紹介議員として、会議録で氏名を確認できた記録です。延岡市議会は紹介議員を公開資料に定型掲載していないため、ここに出るのは本会議の発言の中で言及された例外的なものだけです。記録が無いことは、紹介議員になっていないという意味ではありません。",
+    sourceLabel: "延岡市議会 会議録（本会議での言及）",
+    ordinanceBasis: "延岡市議会基本条例 第2条第2号（市民の意見を市政に反映させること）",
+    evidenceKind: "items",
+    availabilityNote:
+      petitionIntroductions.length > 0
+        ? undefined
+        : "議案等審議結果・市議会だより・本会議の上程文のいずれにも紹介議員の欄が無く、請願文書表はウェブ公開されていません。0件ではなく、確認できていないという意味です。",
   });
 
   const namedVotes = extras.namedVotes;

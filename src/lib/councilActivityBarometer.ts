@@ -8,6 +8,8 @@ import billProposalRolesData from "../data/billProposalRoles.json";
 import { committeeReportActivityEvents, committeeReportActivityForMember } from "./committees";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
 import councilLeadershipTermsData from "../data/councilLeadershipTerms.json";
+import councilDebateSpeechesData from "../data/councilDebateSpeeches.json";
+import petitionIntroducersData from "../data/petitionIntroducers.json";
 import themesData from "../data/themes.json";
 import { classifyTopicWithEvidence, isPolicyTheme } from "./topicClassificationMeta";
 import type {
@@ -153,6 +155,70 @@ interface CouncilLeadershipTerm {
 }
 
 export const councilLeadershipTerms = (councilLeadershipTermsData as { terms: CouncilLeadershipTerm[] }).terms;
+
+interface CouncilDebateSpeech {
+  id: string;
+  sessionId: string | null;
+  memberId: string | null;
+  stance: string;
+  sourceUrl: string | null;
+  agendaTitle: string | null;
+  meetingTitle: string | null;
+}
+
+const councilDebateSpeeches = (councilDebateSpeechesData as { speeches: CouncilDebateSpeech[] }).speeches;
+
+/**
+ * 討論が実際に行われた会期。
+ *
+ * 討論は、議案に異論があったときだけ行われる。誰も討論しなかった会期を分母へ入れると、
+ * 議員の行動と関係なく実施率が下がる。実際に討論があった会期だけを分母にする。
+ */
+export const debateHeldSessionIds: string[] = [
+  ...new Set(
+    councilDebateSpeeches
+      .map((d) => d.sessionId)
+      .filter((id): id is string => !!id && radarEligibleSessions.includes(id)),
+  ),
+].sort();
+
+/** その議員が討論に立った会期（対象期間内）。 */
+export function debateSessionsFor(memberId: string): string[] {
+  return [
+    ...new Set(
+      councilDebateSpeeches
+        .filter((d) => d.memberId === memberId && d.sessionId && debateHeldSessionIds.includes(d.sessionId))
+        .map((d) => d.sessionId as string),
+    ),
+  ].sort();
+}
+
+/** 討論の立場を、画面向けの言葉にする。断定できないものは断定しない。 */
+const STANCE_LABELS_JA: Record<string, string> = {
+  for: "賛成の立場",
+  against: "反対の立場",
+  unclear: "立場は会議録から読み取れません",
+};
+
+const petitionIntroducerRecords = (
+  petitionIntroducersData as {
+    records: {
+      billId: string;
+      billNumber: string;
+      billTitle: string;
+      introducerMemberIds: string[];
+      completenessNote: string;
+      sourceRefs: { label: string; url?: string }[];
+    }[];
+  }
+).records;
+
+/** その議員の討論の記録（対象期間内）。根拠の一覧に使う。 */
+export function debateSpeechesFor(memberId: string): CouncilDebateSpeech[] {
+  return councilDebateSpeeches.filter(
+    (d) => d.memberId === memberId && d.sessionId && debateHeldSessionIds.includes(d.sessionId),
+  );
+}
 
 /**
  * 会期がいつ開かれたかを、その会期に登録されている発言の日付から求める。
@@ -324,7 +390,38 @@ function buildRecordExtras(member: CouncilMember, speeches: CouncilSpeech[]): Co
     denominator: billsWithAnyMemberVoteDisclosed,
   };
 
-  return { policyThemes, recurringThemes, decisionSubmissions, committeeReports, namedVotes };
+  // --- 本会議での討論 ---
+  const debates: ActivityRecordListItem[] = debateSpeechesFor(member.id).map((d) => ({
+    label: d.meetingTitle ?? d.sessionId ?? "本会議",
+    detail: [d.agendaTitle, STANCE_LABELS_JA[d.stance] ?? undefined].filter(Boolean).join("／") || undefined,
+    url: d.sourceUrl ?? undefined,
+    urlLabel: "会議録",
+  }));
+  const debateSessions = {
+    numerator: debateSessionsFor(member.id).length,
+    denominator: debateHeldSessionIds.length,
+  };
+
+  // --- 請願の紹介議員（確認できた例外的な記録のみ） ---
+  const petitionIntroductions: ActivityRecordListItem[] = petitionIntroducerRecords
+    .filter((r) => r.introducerMemberIds.includes(member.id))
+    .map((r) => ({
+      label: `${r.billNumber} ${r.billTitle}`,
+      detail: r.completenessNote,
+      url: r.sourceRefs[0]?.url,
+      urlLabel: "会議録",
+    }));
+
+  return {
+    policyThemes,
+    recurringThemes,
+    decisionSubmissions,
+    committeeReports,
+    namedVotes,
+    debates,
+    debateSessions,
+    petitionIntroductions,
+  };
 }
 
 /**

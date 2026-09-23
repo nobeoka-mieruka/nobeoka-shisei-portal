@@ -52,6 +52,8 @@ import { buildCouncilActivityProfile } from "../lib/councilActivityProfile";
 import membersDataForProfile from "../data/members.json";
 import {
   activityTargetPeriodLabel,
+  debateHeldSessionIds,
+  debateSessionsFor,
   getMemberActivityRecord,
 } from "../lib/councilActivityBarometer";
 import { councilSpeechPeriod } from "../config/councilSpeechPeriod";
@@ -344,6 +346,10 @@ export function MemberDetailPage() {
     activityRecord,
     activityTargetPeriodLabel(),
     (membersDataForProfile as unknown[]).length,
+    {
+      numerator: debateSessionsFor(member.id).length,
+      denominator: debateHeldSessionIds.length,
+    },
   );
 
   return (
