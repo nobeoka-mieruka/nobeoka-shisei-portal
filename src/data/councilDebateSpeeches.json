@@ -1,7 +1,7 @@
 {
   "note": "本会議での討論（賛成討論・反対討論）の発言者。会議録の討論の段階から機械的に抽出した。討論に立ったという事実の記録であり、賛成・反対の方向を評価するものではない。議案の採決は起立採決のため、討論しなかった議員の賛否は会議録から分からない。討論の有無をもって賛否を推測してはならない。",
   "method": "議長が「これより（一括）討論に入ります」と宣告してから、議長が「討論を終わります」と述べるまでを討論の段階とし、その間の議員の発言を討論として数える。「通告による討論は終わりました」は途中の区切りであって終了ではないため除外する。討論者自身も「討論を終わります」と結ぶため、終了の宣告は議事進行役の発言に限って判定する。",
-  "stanceNote": "stance は発言本文から機械的に読み取れた場合のみ for／against とし、読み取れない場合や賛成・反対の双方に言及している場合は unclear のままにする（推測で決めない）。",
+  "stanceNote": "stance は発言本文から読み取れた場合のみ確定する。for（賛成）／against（反対）のほか、修正案が出ている議案で「原案反対、修正案賛成」のように対象ごとに立場が分かれる場合は mixed とし、どちらかへ寄せない。本文から読み取れない場合は unclear のままにし、推測で決めない。立場を確定したものには、判断の根拠にした本文の言い回し（stanceBasis）を必ず添える。",
   "generatedAt": "2026-09-23",
   "speeches": [
     {
@@ -15,8 +15,8 @@
       "formerMemberId": "fm06",
       "speakerName": "田村吉宏",
       "speakerLabelAsWritten": "九番（田村吉宏君）",
-      "stance": "unclear",
-      "stanceBasis": null,
+      "stance": "mixed",
+      "stanceBasis": "原案反対、修正案賛成",
       "excerpt": "友愛クラブの田村吉宏でございます。議案第一〇八号の一般会計について、原案反対、修正案賛成の討論を行います。歴史・文化ゾーン内駐車場管理システム・看板等整備事業は、昨年に提案され、二度否決となり、三度目の提案であります。否決された大きな理由は",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050324A/29772/10/1//0/0"
     },
@@ -47,8 +47,8 @@
       "formerMemberId": null,
       "speakerName": "河野治満",
       "speakerLabelAsWritten": "二三番（河野治満君）",
-      "stance": "unclear",
-      "stanceBasis": null,
+      "stance": "mixed",
+      "stanceBasis": "原案賛成、修正案反対",
       "excerpt": "おはようございます。党派、会派の垣根を越え、是々非々による市民のための政治を実践する、のべおか市民派クラブの河野治満です。昨年七月一日の六月補正予算の採決において、市が提案した補正予算のうち、延岡城・内藤記念博物館の完成に伴う交通渋滞対策等",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050328A/15780/10/1//0/0"
     },
@@ -64,7 +64,7 @@
       "speakerName": "猪之鼻哲",
       "speakerLabelAsWritten": "一三番（猪之鼻哲君）",
       "stance": "for",
-      "stanceBasis": "ま議題となっています議案のうち、議案第九号について、修正案に賛成の立場で討論いたします。まず、今回のこの議案は、昨年七月に可決、事",
+      "stanceBasis": "以上、賛成討論とします",
       "excerpt": "ただいま議題となっています議案のうち、議案第九号について、修正案に賛成の立場で討論いたします。まず、今回のこの議案は、昨年七月に可決、事業化され、現在、約十カ所の病院において運用されている「空飛ぶクルマ」も見据えた新たな救急搬送体制づくり事",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/24349/10/1//0/0"
     },
@@ -79,8 +79,8 @@
       "formerMemberId": null,
       "speakerName": "吉田茂仁",
       "speakerLabelAsWritten": "七番（吉田茂仁君）",
-      "stance": "unclear",
-      "stanceBasis": null,
+      "stance": "against",
+      "stanceBasis": "構想交付金を活用した事業が削除された修正案について、私は強く反対をいたします。まず、修正案の提出理由にあった実現可能性、必要性に対しての",
       "excerpt": "皆様、おはようございます。無所属市民の会の吉田茂仁でございます。今回の議案第九号のデジタル田園都市国家構想交付金を活用した事業が削除された修正案について、私は強く反対をいたします。まず、修正案の提出理由にあった実現可能性、必要性に対しての私",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/28349/10/1//0/0"
     },
@@ -95,8 +95,8 @@
       "formerMemberId": null,
       "speakerName": "宮田博徳",
       "speakerLabelAsWritten": "五番（宮田博徳君）",
-      "stance": "against",
-      "stanceBasis": "年度延岡市一般会計補正予算につきまして、修正案に賛成、原案に反対の立場から討論させていただきます。議長の許可を得て、パブリックコメ",
+      "stance": "mixed",
+      "stanceBasis": "修正案に賛成、原案に反対",
       "excerpt": "私は、議案第九号令和五年度延岡市一般会計補正予算につきまして、修正案に賛成、原案に反対の立場から討論させていただきます。議長の許可を得て、パブリックコメントの資料を一部使いながら、話したいというふうに思っております。早速ですが、「空飛ぶクル",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/34520/10/1//0/0"
     },
@@ -111,8 +111,8 @@
       "formerMemberId": null,
       "speakerName": "河野治満",
       "speakerLabelAsWritten": "二六番（河野治満君）",
-      "stance": "for",
-      "stanceBasis": "に強い地方創生ネットワーク構築事業について、修正案反対、原案賛成の立場から討論を行います。まず、六月三十日に開催されました予算審査",
+      "stance": "mixed",
+      "stanceBasis": "修正案反対、原案賛成",
       "excerpt": "私は、党派、会派の垣根を越えて活動する無所属市民の会、河野治満です。無所属市民の会は、読谷山市長の応援団でも、イエスマンでもございません。市長の政治姿勢を大所高所から是々非々で評価し、純粋に延岡市民の幸せと市政の発展を追求するものであります",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/38318/10/1//0/0"
     },
@@ -128,7 +128,7 @@
       "speakerName": "甲斐忠篤",
       "speakerLabelAsWritten": "一二番（甲斐忠篤君）",
       "stance": "against",
-      "stanceBasis": "歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場から、反対討論を行います。この事業に関しては、市民の皆様に対",
+      "stanceBasis": "反対討論を行います",
       "excerpt": "皆さん、こんにちは。自民党きずなの会の甲斐忠篤でございます。私は、議案第二六号令和五年度延岡市一般会計補正予算六月補正二次分の歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場から、反対討論を行います。この事業に関しては",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/46366/10/1//0/0"
     },
@@ -143,8 +143,8 @@
       "formerMemberId": null,
       "speakerName": "上杉泰洋",
       "speakerLabelAsWritten": "二五番（上杉泰洋君）",
-      "stance": "unclear",
-      "stanceBasis": "賛成と反対の双方に言及しており、一文では決められない",
+      "stance": "for",
+      "stanceBasis": "以上で、市長案に賛成の立場からの討論を終わり",
       "excerpt": "皆さん、こんにちは。無所属市民の会の上杉でございますが、吉田議員、河野議員がお話しされてダブるところもありますけども、熱意を持ってお話ししたいと思います。なぜかというと、私みたいな長老が、この新しいことに賛成しているのに、何で若い議員は反対",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/47944/10/1//0/0"
     },
@@ -160,7 +160,7 @@
       "speakerName": "稲田雅之",
       "speakerLabelAsWritten": "一八番（稲田雅之君）",
       "stance": "against",
-      "stanceBasis": "歴史・文化ゾーン内駐車場管理システム等整備事業につきまして、反対の立場から討論をいたします。そもそも、この事業提案は、歴史・文化ゾ",
+      "stanceBasis": "反対の立場から討論をいたします",
       "excerpt": "自民党きずなの会、稲田雅之でございます。ただいま議題に上がっております議案第二六号令和五年度六月補正予算二次分、すなわち、歴史・文化ゾーン内駐車場管理システム等整備事業につきまして、反対の立場から討論をいたします。そもそも、この事業提案は、",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/57538/10/1//0/0"
     },
@@ -176,7 +176,7 @@
       "speakerName": "長友幸子",
       "speakerLabelAsWritten": "二二番（長友幸子君）",
       "stance": "against",
-      "stanceBasis": "歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場で討論を行います。この整備事業について、これまで市長は、延岡",
+      "stanceBasis": "以上、議員の皆様の良識ある判断をお願いいたしまして、反対討論といたします",
       "excerpt": "立憲民主党市議団の長友幸子でございます。議案第二六号、歴史・文化ゾーン内駐車場管理システム等整備事業について、原案反対の立場で討論を行います。この整備事業について、これまで市長は、延岡城・内藤記念博物館や野口遵記念館の開館に伴い、歴史・文化",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050707A/61512/10/1//0/0"
     },
@@ -240,7 +240,7 @@
       "speakerName": "梶本英一",
       "speakerLabelAsWritten": "一〇番（梶本英一君）",
       "stance": "for",
-      "stanceBasis": "議案第九号の減額修正案に賛成の立場で、賛成討論を行います。市長より提出された再議書の理由には、県がドクター",
+      "stanceBasis": "賛成討論を行います",
       "excerpt": "議案第九号の減額修正案に賛成の立場で、賛成討論を行います。市長より提出された再議書の理由には、県がドクターヘリについて、県立延岡病院に導入することが難しいとの見解をこれまで示していると記されています。ところが、同県議会の答弁書では、河野知事",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/36986/10/1//0/0"
     },
@@ -255,8 +255,8 @@
       "formerMemberId": null,
       "speakerName": "峯田克明",
       "speakerLabelAsWritten": "一五番（峯田克明君）",
-      "stance": "for",
-      "stanceBasis": "号令和五年度延岡市一般会計補正予算修正案に反対、そして原案に賛成の立場から討論させていただきます。「空飛ぶクルマ」も見据えた新たな",
+      "stance": "mixed",
+      "stanceBasis": "修正案に反対、原案に賛成",
       "excerpt": "皆さん、こんにちは。無所属市民の会の峯田克明です。これから、議案第九号令和五年度延岡市一般会計補正予算修正案に反対、そして原案に賛成の立場から討論させていただきます。「空飛ぶクルマ」も見据えた新たな救急搬送体制づくり事業と平常時・災害時共通",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/38476/10/1//0/0"
     },
@@ -287,8 +287,8 @@
       "formerMemberId": null,
       "speakerName": "甲斐正幸",
       "speakerLabelAsWritten": "二四番（甲斐正幸君）",
-      "stance": "for",
-      "stanceBasis": "ぶクルマ」も見据えた新たな救急搬送体制づくり事業を含む原案に賛成の立場からの討論を行います。数字上につきましては、今までにいろいろ",
+      "stance": "mixed",
+      "stanceBasis": "修正案反対、原案賛成",
       "excerpt": "市民が主役、市民サイドに立った議員活動を原点とし、時には、政党や会派の垣根を越え、市民の皆様のことを第一に考え、議員生活、常に是は是、非は非、政党に属することなく無所属を貫き通して活動を行っています、無所属市民の会の甲斐正幸でございます。今",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/50220/10/1//0/0"
     },
@@ -303,8 +303,8 @@
       "formerMemberId": null,
       "speakerName": "吉田茂仁",
       "speakerLabelAsWritten": "七番（吉田茂仁君）",
-      "stance": "unclear",
-      "stanceBasis": "賛成と反対の双方に言及しており、一文では決められない",
+      "stance": "mixed",
+      "stanceBasis": "原案賛成、修正案反対",
       "excerpt": "皆さん、こんにちは。無所属市民の会の吉田茂仁でございます。私は、議案第九号修正案反対、原案賛成の立場で討論させていただきます。先日も討論させていただきましたが、ほかの議員の討論や意見を聞いて思うところがありましたので、再度、討論させていただ",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050711A/55586/10/1//0/0"
     },
@@ -352,7 +352,7 @@
       "speakerName": "北林幹雄",
       "speakerLabelAsWritten": "二〇番（北林幹雄君）",
       "stance": "against",
-      "stanceBasis": "の北林幹雄でございます。会派を代表して、議案第二九号に対する反対討論を行います。まず、今回の予算案は、六月議会において否決された",
+      "stanceBasis": "反対討論を行います",
       "excerpt": "自民党きずなの会の北林幹雄でございます。会派を代表して、議案第二九号に対する反対討論を行います。まず、今回の予算案は、六月議会において否決された議案そのものの上程であり、一カ月もたたない間に全く同じ議案を提出されており、これは議会の審査権を",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050731A/22966/10/1//0/0"
     },
@@ -368,7 +368,7 @@
       "speakerName": "河野治満",
       "speakerLabelAsWritten": "二六番（河野治満君）",
       "stance": "for",
-      "stanceBasis": "す。本日は、やむにやまれぬ思いを持って、議案第二九号に対する賛成討論を行います。さて、昨年六月一日、岸田総理は、第八回デジタル田",
+      "stanceBasis": "賛成討論を行います",
       "excerpt": "私は、無所属市民の会団長の河野治満です。本日は、やむにやまれぬ思いを持って、議案第二九号に対する賛成討論を行います。さて、昨年六月一日、岸田総理は、第八回デジタル田園都市国家構想実現会議を開催されました。その際、令和三年十一月からスタートし",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050731A/26688/10/1//0/0"
     },
@@ -384,7 +384,7 @@
       "speakerName": "宮田博徳",
       "speakerLabelAsWritten": "五番（宮田博徳君）",
       "stance": "for",
-      "stanceBasis": "り監視と追及をしていきます。今後の市長の歩み寄りも期待して、賛成討論といたします。以上です。（降壇）",
+      "stanceBasis": "賛成の討論をさせていただきます",
       "excerpt": "立憲民主党市議団の宮田博徳と申します。議案第二九号令和五年度延岡市一般会計補正予算につきまして、賛成の討論をさせていただきます。私は、七月七日の六月議会の本会議で、「空飛ぶクルマ」も見据えた新たな救急搬送体制づくりに対する反対の討論を行いま",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050731A/35234/10/1//0/0"
     },
@@ -400,7 +400,7 @@
       "speakerName": "河野治満",
       "speakerLabelAsWritten": "二六番（河野治満君）",
       "stance": "against",
-      "stanceBasis": "権やプライバシーなど、特段の慎重な配慮を求められることから、反対の立場で討論を行います。その理由として、まず、さきの九月二十五日に",
+      "stanceBasis": "以上、簡単でありますが、百条委員会設置に反対の立場での討論といたします",
       "excerpt": "無所属市民の会、河野治満です。ただいま、地方自治法第百条の規定により、一、総務部総務課職員による公物の窃取に関する事項、二、上下水道局職員による契約・事務手続に係る虚偽公文書作成及び地方公営企業法施行令に違反した随意契約の締結に関する事項に",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/22744/10/1//0/0"
     },
@@ -448,7 +448,7 @@
       "speakerName": "小御門綾",
       "speakerLabelAsWritten": "八番（小御門綾君）",
       "stance": "for",
-      "stanceBasis": "友愛クラブの小御門綾です。私は、賛成の立場から討論いたします。今回の上下水道局職員に対する懲戒処分の事",
+      "stanceBasis": "賛成の立場から討論いたします",
       "excerpt": "友愛クラブの小御門綾です。私は、賛成の立場から討論いたします。今回の上下水道局職員に対する懲戒処分の事案について、当局から議会への説明をいただくとともに、本議会で私を含む各議員の質問を通じて事実確認を行いましたが、まだ不明な点もあり、議会と",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/30718/10/1//0/0"
     },
@@ -464,7 +464,7 @@
       "speakerName": "上杉泰洋",
       "speakerLabelAsWritten": "二五番（上杉泰洋君）",
       "stance": "against",
-      "stanceBasis": "ざいます。今回、審議になっています百条委員会の設置について、反対の立場から討論したいと思います。同じようなことがありますので、ちょ",
+      "stanceBasis": "以上で、百条委員会設置反対の立場からの討論といたします",
       "excerpt": "市民と共にある市民ファースト、無所属市民の会の上杉泰洋でございます。今回、審議になっています百条委員会の設置について、反対の立場から討論したいと思います。同じようなことがありますので、ちょっと整理しながらやりたいと思います。今回の百条委員会",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/31680/10/1//0/0"
     },
@@ -483,38 +483,6 @@
       "stanceBasis": null,
       "excerpt": "自民党きずなの会の柴　浩信です。ただいまの討論を聞いておりまして、少し論点整理のために発言させていただきます。今、五名の方が討論されまして、いろいろと喧々諤々の意見をお伺いしたんですが、まさに、そのような討論が行われるということは、議会とし",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/36108/10/1//0/0"
-    },
-    {
-      "id": "debate-R050929A-38976",
-      "meetingFileName": "R050929A",
-      "meetingTitle": null,
-      "sessionId": "2023-09",
-      "sessionLabel": "令和 5年 第 7回定例会",
-      "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
-      "memberId": "m11",
-      "formerMemberId": null,
-      "speakerName": "北林幹雄",
-      "speakerLabelAsWritten": "二〇番（北林幹雄君）",
-      "stance": "unclear",
-      "stanceBasis": null,
-      "excerpt": "過ちがあったからです。私の提案に対しまして、吉田議員が、再発防止という言葉が、三回目で述べられた、私は一言も再発防止について述べなかったと言いましたけど、私は再発防止は当然のことながら、それをするためには真実が明らかにならなければ、再発防止",
-      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/38976/10/1//0/0"
-    },
-    {
-      "id": "debate-R050929A-39810",
-      "meetingFileName": "R050929A",
-      "meetingTitle": null,
-      "sessionId": "2023-09",
-      "sessionLabel": "令和 5年 第 7回定例会",
-      "agendaTitle": "決議第一号市職員の不適正な事務処理等に関する調査に関する決議（案）",
-      "memberId": "m26",
-      "formerMemberId": null,
-      "speakerName": "吉田茂仁",
-      "speakerLabelAsWritten": "七番（吉田茂仁君）",
-      "stance": "unclear",
-      "stanceBasis": null,
-      "excerpt": "私は、先ほど討論のときに、三回目の質問の答弁で、やっと再発防止という言葉が出ましたよと。提案理由書にも再発防止とは書かれてませんし、提案理由説明のときに、こちらに登壇されたときにも、再発防止という言葉がなかったと、真実を明らかにするという言",
-      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R050929A/39810/10/1//0/0"
     },
     {
       "id": "debate-R060322A-30348",
@@ -543,8 +511,8 @@
       "formerMemberId": null,
       "speakerName": "河野治満",
       "speakerLabelAsWritten": "二六番（河野治満君）",
-      "stance": "unclear",
-      "stanceBasis": "賛成と反対の双方に言及しており、一文では決められない",
+      "stance": "for",
+      "stanceBasis": "賛成の立場から討論をさせていただきます",
       "excerpt": "無所属市民の会、河野治満です。議案第一〇八号令和六年度延岡市一般会計予算につきまして、賛成の立場から討論をさせていただきます。賛成の理由とする一例として、大変な議論となっておりました平常時・災害時共通災害に強い地方創生ネットワーク事業につい",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060322A/34428/10/1//0/0"
     },
@@ -560,7 +528,7 @@
       "speakerName": "河野治満",
       "speakerLabelAsWritten": "二七番（河野治満君）",
       "stance": "against",
-      "stanceBasis": "題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。これまで読谷山市長は、男性職員に対する男性器の俗",
+      "stanceBasis": "反対討論を行います",
       "excerpt": "無所属市民の会、河野治満です。ただいま、議題となっています延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。これまで読谷山市長は、男性職員に対する男性器の俗語を用いた自身の不適切な発言を",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/55080/10/1//0/0"
     },
@@ -576,7 +544,7 @@
       "speakerName": "稲田雅之",
       "speakerLabelAsWritten": "一〇番（稲田雅之君）",
       "stance": "for",
-      "stanceBasis": "メント問題に関する第三者委員会の設置及び調査を求める決議案に賛成する立場から討論を行います。この決議に賛成する理由は明白であります。",
+      "stanceBasis": "以上、延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議に賛成する立場の討論を終わり",
       "excerpt": "自民党きずなの会の稲田雅之でございます。会派を代表いたしまして、延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に賛成する立場から討論を行います。この決議に賛成する理由は明白であります。すなわち、意見が対立している",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/58938/10/1//0/0"
     },
@@ -591,8 +559,8 @@
       "formerMemberId": null,
       "speakerName": "上杉泰洋",
       "speakerLabelAsWritten": "二六番（上杉泰洋君）",
-      "stance": "unclear",
-      "stanceBasis": "賛成と反対の双方に言及しており、一文では決められない",
+      "stance": "against",
+      "stanceBasis": "反対討論を行います",
       "excerpt": "無所属市民の会の上杉泰洋でございます。ただいま議題となっています延岡市役所ハラスメント問題に関する第三者委員会の設置及び調査を求める決議案に対して、反対討論を行います。私がなぜ反対なのかは、議会制民主主義と延岡市議会の尊厳を守ってほしい観点",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/62060/10/1//0/0"
     },
@@ -607,8 +575,8 @@
       "formerMemberId": null,
       "speakerName": "平田信広",
       "speakerLabelAsWritten": "二二番（平田信広君）",
-      "stance": "unclear",
-      "stanceBasis": null,
+      "stance": "for",
+      "stanceBasis": "賛成の討論を行います",
       "excerpt": "日本共産党の平田信広です。提案されています第三者委員会設置の決議案に賛成の討論を行います。少し長くなりますが、よろしくお願いいたします。今議会で、この不適切発言問題は、多くの議員が質問しました。私は取り上げませんでしたが、聞いていて、市長と",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060708A/66188/10/1//0/0"
     },
@@ -661,22 +629,6 @@
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061004A/44397/10/1//0/0"
     },
     {
-      "id": "debate-R061004A-48515",
-      "meetingFileName": "R061004A",
-      "meetingTitle": null,
-      "sessionId": "2024-09",
-      "sessionLabel": "令和 6年 第13回定例会",
-      "agendaTitle": "議案第六六号令和六年度延岡市一般会計補正予算",
-      "memberId": "m24",
-      "formerMemberId": null,
-      "speakerName": "宮田博徳",
-      "speakerLabelAsWritten": "五番（宮田博徳君）",
-      "stance": "unclear",
-      "stanceBasis": null,
-      "excerpt": "今、政治倫理審査会で、私の会派が何か法律を違反して何かやったとお聞きしたんですけど、そのような事実、私の会派は私と長友議員なんですけど、私、そういう認識はないんですけど、何かあったんでしょうか。大変失礼いたしました。私の会派が何か法律違反を",
-      "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061004A/48515/10/1//0/0"
-    },
-    {
       "id": "debate-R061213A-68028",
       "meetingFileName": "R061213A",
       "meetingTitle": null,
@@ -704,7 +656,7 @@
       "speakerName": "宮田博徳",
       "speakerLabelAsWritten": "五番（宮田博徳君）",
       "stance": "for",
-      "stanceBasis": "ただいま議題となっております決議第六号に、賛成の立場から討論いたします。本来の予定では、この百条委員会は先ほどの",
+      "stanceBasis": "賛成の立場から討論いたします",
       "excerpt": "ただいま議題となっております決議第六号に、賛成の立場から討論いたします。本来の予定では、この百条委員会は先ほどの中間報告で調査終了となり、本年度の調査経費についても、上限額まで約三十二万円を残した形で終了する予定でありました。しかし、読谷山",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R061213A/70004/10/1//0/0"
     },
@@ -736,7 +688,7 @@
       "speakerName": "平田信広",
       "speakerLabelAsWritten": "二二番（平田信広君）",
       "stance": "against",
-      "stanceBasis": "確保するための法整備の早期実現を求める意見書（案）について、反対の立場から討論を行います。まず、憲法は、天皇の地位は国民の総意に基",
+      "stanceBasis": "反対の立場から討論を行います",
       "excerpt": "日本共産党の平田信広です。ただいま議題となっている意見書のうち、皇室の伝統に基づく安定的皇位継承を確保するための法整備の早期実現を求める意見書（案）について、反対の立場から討論を行います。まず、憲法は、天皇の地位は国民の総意に基づくと定めて",
       "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R080703A/30276/10/1//0/0"
     }

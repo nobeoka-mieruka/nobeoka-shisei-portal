@@ -197,6 +197,9 @@ export function debateSessionsFor(memberId: string): string[] {
 const STANCE_LABELS_JA: Record<string, string> = {
   for: "賛成の立場",
   against: "反対の立場",
+  // 修正案が出ている議案では、1つの討論の中で対象ごとに立場が分かれる。
+  // 曖昧なのではなく、対象が2つあるという事実。どちらかへ寄せない。
+  mixed: "原案と修正案で立場が分かれます",
   unclear: "立場は会議録から読み取れません",
 };
 

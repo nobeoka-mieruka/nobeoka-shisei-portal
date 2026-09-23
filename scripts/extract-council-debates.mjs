@@ -113,9 +113,14 @@ function splitUtterances(text) {
     if (current) current.text += raw.trim();
   }
   if (current) out.push(current);
+  // 直前の発言の末尾（登壇の記録が入る場所）を、各発言へ持たせる。
+  out.forEach((u, i) => {
+    u.previousTail = i > 0 ? out[i - 1].text.slice(-80) : "";
+  });
   return out;
 }
 
+const PODIUM = /登壇〕s*$/;
 const DEBATE_START = /これより[、]?(?:一括)?討論に入ります/;
 const DEBATE_END = /討論を終わり(?:ます|ました)/;
 // 「通告による討論は終わりました」は終了ではない。先に取り除く。
@@ -123,13 +128,50 @@ const NOTICED_DEBATE_END = /通告(?:による)?討論(?:は|を)終わり(?:ま
 const AGENDA = /日程第[一二三四五六七八九十百]+[　\s]*(.+?)を(?:一括)?議題といたします/;
 const AGENDA_NO_NUMBER = /^((?:決議|意見書)第[^\s　]+号.*?)を(?:一括)?議題といたします/;
 
-/** 立場は読み取れたときだけ入れる。読み取れなければ unclear。 */
+/**
+ * 立場は、本文から読み取れたときだけ入れる。読み取れなければ unclear のままにする。
+ *
+ * 修正案が出ている議案では「原案反対、修正案賛成」のように、1つの討論の中で
+ * 対象ごとに立場が分かれる。これは曖昧なのではなく、対象が2つあるという事実なので、
+ * mixed として、どちらが何かを本文の言葉のまま残す。
+ */
+const SPLIT_STANCE = [
+  /原案(?:に)?反対[、,]?s*修正案(?:に)?賛成/,
+  /原案(?:に)?賛成[、,]?s*修正案(?:に)?反対/,
+  /修正案(?:に)?賛成[、,]?s*原案(?:に)?反対/,
+  /修正案(?:に)?反対[、,]?s*原案(?:に)?賛成/,
+];
+
 function judgeStance(text) {
-  const against = /(反対)(?:の立場|する立場|討論)/.test(text);
-  const forIt = /(賛成)(?:の立場|する立場|討論)/.test(text);
-  if (against && forIt) return { stance: "unclear", basis: "賛成と反対の双方に言及しており、一文では決められない" };
-  if (against) return { stance: "against", basis: (text.match(/.{0,30}反対(?:の立場|する立場|討論).{0,30}/) ?? [""])[0] };
-  if (forIt) return { stance: "for", basis: (text.match(/.{0,30}賛成(?:の立場|する立場|討論).{0,30}/) ?? [""])[0] };
+  for (const re of SPLIT_STANCE) {
+    const m = text.match(re);
+    if (m) return { stance: "mixed", basis: m[0] };
+  }
+  // 討論は冒頭で立場を名乗る慣例がある（「決議案に賛成の討論を行います」）。
+  // 本文が長いと途中で相手方の主張にも触れるため、全文を見ると両方に当たってしまう。
+  // 名乗りの部分を先に見る。
+  const opening = text.slice(0, 200).match(/(賛成|反対)(?:の立場|の)?(?:から)?(?:の)?討論[^。]{0,12}(?:行います|いたします|します|させていただきます)/);
+  if (opening) {
+    return { stance: opening[1] === "賛成" ? "for" : "against", basis: opening[0] };
+  }
+
+  // 討論の結びも立場を明言することが多い（「以上で、市長案に賛成の立場からの討論を終わります」）。
+  const closing = text.match(/以上[^。]{0,40}(賛成|反対)[^。]{0,30}討論[^。]{0,12}(?:終わり|といたします|とします)/);
+  if (closing) {
+    return { stance: closing[1] === "賛成" ? "for" : "against", basis: closing[0] };
+  }
+  const against = /(反対)(?:の立場|する立場|討論|をいたします|をします)/.test(text);
+  const forIt = /(賛成)(?:の立場|する立場|討論|をいたします|をします)/.test(text);
+  if (against && forIt) {
+    return { stance: "unclear", basis: "賛成と反対の双方に言及しており、本文からは立場を決められない" };
+  }
+  // 根拠の抜き出しは、判定に使った言い回しと同じものを対象にする。
+  // そろえないと、判定はできたのに根拠が空、という状態が生まれる。
+  const STANCE_PHRASE = String.raw`(?:の立場|する立場|討論|をいたします|をします)`;
+  const quote = (word) =>
+    (text.match(new RegExp(String.raw`.{0,30}` + word + STANCE_PHRASE + String.raw`.{0,30}`)) ?? [""])[0];
+  if (against) return { stance: "against", basis: quote("反対") };
+  if (forIt) return { stance: "for", basis: quote("賛成") };
   return { stance: "unclear", basis: "" };
 }
 
@@ -155,6 +197,9 @@ export function extractDebates(fileName, text, segments = []) {
     const agendaMatch = u.text.match(AGENDA) ?? u.text.match(AGENDA_NO_NUMBER);
     if (agendaMatch) agenda = agendaMatch[1].trim();
 
+    // 〔◯番（氏名君）登壇〕は、直前の発言（議長の発言許可）の末尾へ付く。
+    const tookPodium = PODIUM.test(u.previousTail ?? "");
+
     // 終了判定より先に、紛らわしい定型句を消す。
     const cleaned = u.text.replace(NOTICED_DEBATE_END, "");
 
@@ -171,10 +216,19 @@ export function extractDebates(fileName, text, segments = []) {
       continue;
     }
     if (!isMemberSpeaker(u.speaker)) continue;
-    // 議長が「討論はできない」と述べた相手は討論者ではない（提出者など）。
-    if (/討論はできない/.test(u.text)) continue;
-
+    // 討論は登壇して行う。会議録は登壇を〔二二番（平田信広君）登壇〕と記録し、
+    // 終わりを（降壇）と記録する。自席からの短いやり取り（議長への応答、
+    // 他の議員の討論への補足、議事進行の質問）には登壇の記録が無い。
+    // 登壇の記録が直前に無い発言は、討論として数えない。
+    //
+    // 実例：議長が「北林議員、討論はできないんですけど、何の提案でしょうか」と述べた
+    // 直後の「過ちがあったからです。」を、討論として数えてしまっていた。
     const name = normalizeSpeakerName(u.speaker);
+    // 登壇の判定は、討論の始まりにだけ効かせる。議長の制止を挟んで同じ議員が
+    // 続きを述べる場合、その続きには登壇の記録が付かない。continue で落とすと、
+    // 後から述べた立場（「私は、今回、反対の立場を取らせていただきました」）まで消える。
+    if (!tookPodium && !(current && current.speakerName === name)) continue;
+
     if (current && current.speakerName === name) {
       // 議長の制止などで発言が分断される。同じ人の連続は1件にまとめる。
       current.text += u.text;

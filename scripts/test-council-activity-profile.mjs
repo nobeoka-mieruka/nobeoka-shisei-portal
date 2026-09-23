@@ -194,10 +194,19 @@ check("討論の記録が、発言ごとに一次資料へ辿れる", () => {
   for (const sp of data.speeches) {
     assert.ok(sp.sourceUrl, `${sp.id} に出典URLがありません`);
     assert.ok(sp.memberId || sp.formerMemberId, `${sp.id} が議員と結び付いていません`);
-    assert.ok(["for", "against", "unclear"].includes(sp.stance), `${sp.id} の立場の値が不正です`);
+    assert.ok(["for", "against", "mixed", "unclear"].includes(sp.stance), `${sp.id} の立場の値が不正です`);
+    // 立場を確定したものには、必ず本文の根拠を添える。根拠なしの断定を許さない。
+    if (sp.stance !== "unclear") {
+      assert.ok(sp.stanceBasis, `${sp.id} は立場を確定しているのに根拠がありません`);
+    }
   }
-  // 読み取れない立場を、賛成や反対へ寄せていないこと。
-  assert.ok(data.speeches.some((sp) => sp.stance === "unclear"), "unclear が1件も無いのは、断定しすぎの疑いがあります");
+  // 修正案がある議案では、対象ごとに立場が分かれる。どちらかへ寄せていないこと。
+  assert.ok(data.speeches.some((sp) => sp.stance === "mixed"), "mixed が1件も無いのは、どちらかへ寄せた疑いがあります");
+  // 読み取れないものを無理に確定していないこと。
+  assert.ok(
+    data.speeches.some((sp) => sp.stance === "unclear"),
+    "unclear が1件も無いのは、断定しすぎの疑いがあります",
+  );
 });
 
 check("請願の紹介議員を、0件ではなく未確認として扱う", () => {
@@ -211,6 +220,24 @@ check("請願の紹介議員を、0件ではなく未確認として扱う", () 
   assert.ok(data.checkedSources?.length > 0, "調査した資料の記録がありません");
   const record = readSrc("src/lib/councilActivityRecord.ts");
   assert.match(record, /0件ではなく、確認できていないという意味です/);
+});
+
+check("議事進行の発言を討論として数えていない", () => {
+  const src = readSrc("scripts/extract-council-debates.mjs");
+  // 討論は登壇して行う。自席からの短いやり取りを討論に含めない。
+  assert.match(src, /登壇〕/, "登壇の判定がありません");
+  assert.match(src, /tookPodium/, "登壇の判定を使っていません");
+  // 議長の発言を討論者として拾わない。
+  assert.match(src, /isChairSpeaker/, "議事進行役の判定がありません");
+
+  const data = readJson("src/data/councilDebateSpeeches.json");
+  // 議長・市長などの発言が混ざっていないこと。
+  for (const sp of data.speeches) {
+    assert.ok(
+      !/^(議長|副議長|市長|副市長|教育長)/.test(sp.speakerLabelAsWritten),
+      `${sp.id} に議事進行役・執行部の発言が混ざっています`,
+    );
+  }
 });
 
 console.log(`\n${passCount}件成功\n`);
