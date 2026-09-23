@@ -440,8 +440,9 @@ check("確認済み一般質問（councilSpeechSummaries.json、公開・収録�
   const { confirmedCount, totalQuestionItemCount } = computeConfirmedStats();
   // 2026-09-23：同じ登壇の一部だけを要約した代表質問の記録7件（14項目）が、全項目の記録と重複して
   // 数えられていたため公開対象から外した（432→425件、1717→1703項目）。
-  assert.equal(confirmedCount, 425, `確認済み一般質問の件数が425件ではありません（${confirmedCount}件）。src/lib/generalQuestionStats.tsのconfirmedCountの実データが変化した場合は、意図した変更か確認したうえで期待値を更新してください`);
-  assert.equal(totalQuestionItemCount, 1703, `確認済み一般質問の質問項目数が1703件ではありません（${totalQuestionItemCount}件）`);
+  // 同日：関連質問を一般質問としても二重に登録していた3件（9項目）も外した（425→422件、1703→1694項目）。
+  assert.equal(confirmedCount, 422, `確認済み一般質問の件数が422件ではありません（${confirmedCount}件）。src/lib/generalQuestionStats.tsのconfirmedCountの実データが変化した場合は、意図した変更か確認したうえで期待値を更新してください`);
+  assert.equal(totalQuestionItemCount, 1694, `確認済み一般質問の質問項目数が1694件ではありません（${totalQuestionItemCount}件）`);
 });
 
 check("最新会期（現時点で会議録未公開）の予定質問者数：令和8年6月定例会14名・令和8年9月定例会13名。質問通告書ベースの2会期が同時に存在する状態を維持している", () => {
@@ -451,11 +452,11 @@ check("最新会期（現時点で会議録未公開）の予定質問者数：�
   assert.equal(septMembers.size, 13, `令和8年9月定例会の質問者数（議員の種類数）が13名ではありません（${septMembers.size}名）`);
 });
 
-check("未公開会期の予定質問合計（scheduledCount=27件）と確認済み件数（confirmedCount=425件）は、それぞれ独立した集計値として固定される（generalQuestionStats.tsの設計方針どおり、対象が重ならない別々の集合として扱われ、単純合算した「合計459件」等の値をどこにも表示していないことを、この2つの期待値そのものが担保する）", () => {
+check("未公開会期の予定質問合計（scheduledCount=27件）と確認済み件数（confirmedCount=422件）は、それぞれ独立した集計値として固定される（generalQuestionStats.tsの設計方針どおり、対象が重ならない別々の集合として扱われ、単純合算した「合計459件」等の値をどこにも表示していないことを、この2つの期待値そのものが担保する）", () => {
   const scheduledCount = generalQuestions.length;
   const { confirmedCount } = computeConfirmedStats();
   assert.equal(scheduledCount, 27);
-  assert.equal(confirmedCount, 425);
+  assert.equal(confirmedCount, 422);
 });
 
 console.log("\nPhase203：「直近の確認済み会期」と「次回・開催予定の会期」の分離");
