@@ -1,0 +1,774 @@
+{
+  "note": "延岡市議会が公表している「常任委員会・特別委員会開催予定表」の記載を、原文のまま整理したもの。予定であり、実際に開催されたかは予定表からは確認できない（委員会の記録は公開されていない）。本会議の委員長報告で開催日が述べられているものだけ heldConfirmed: true とし、根拠を heldEvidence に残す。委員会の出席者・発言者は予定表にも委員長報告にも個人単位では記載されない。",
+  "generatedAt": "2026-09-23",
+  "meta": {
+    "description": "延岡市議会 常任委員会・特別委員会開催予定表（令和8年度、9月14日現在版）の転記。予定であり開催実績ではない。",
+    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+    "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+    "asOf": "2026-09-14",
+    "sourceLastModifiedHttp": "Mon, 14 Sep 2026 08:15:36 GMT",
+    "sha1": "1ef9c21f5a0712e81e524dd349f4ae676e3f0578",
+    "extractedWith": "pdfjs-dist text layer (scripts/extract-pdf-text-pdfjs.mjs)",
+    "retrievedAt": "2026-09-23",
+    "notes": [
+      "committeeIdがnullのもの（予算審査特別委員会・決算審査特別委員会）はcommittees.jsonに存在しない委員会。",
+      "議会運営委員会は本予定表に記載がない（開催が無いという意味ではない）。",
+      "2026-04-21の議会のあり方検討特別委員会は令和8年5月の委員改選前であり、現在のcommittees.json委員構成と同一とは限らない。",
+      "旧版（令和6年度 attachment/19031.pdf・21772.pdf、令和8年度旧版 26907.pdf）は市サイト上で404。Internet Archiveのスナップショットにリンクが残るのみで、本ファイルでは扱わない。",
+      "weekdayAsWrittenは全件、日付の実曜日と一致することを機械確認済み。",
+      "heldConfirmed=true の5件は、本会議録 R080703A の委員長報告で開催日が明示されたもの。それ以外は null（未確認）であり、「開催されなかった」ことを意味しない。"
+    ],
+    "proposedShape": "{id, committeeId|null, committeeNameAsWritten, subdivision|null, date, startTime|null, timeAsWritten, venue, topicsAsWritten[], kind:'scheduled', heldConfirmed:null, sourceUrl, sourceTitle, asOf}"
+  },
+  "items": [
+    {
+      "id": "sched-2026-001",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-04-21",
+      "weekdayAsWritten": "火",
+      "startTime": "13:30",
+      "timeAsWritten": "13：30～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "今後の活動方針等について"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-002",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-05-29",
+      "weekdayAsWritten": "金",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "アンケート調査の結果について"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-003",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-06-12",
+      "weekdayAsWritten": "金",
+      "startTime": null,
+      "timeAsWritten": "本会議終了後～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "アンケート調査結果に対する意見集約について"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-004",
+      "committeeId": null,
+      "committeeNameAsWritten": "予算審査特別委員会",
+      "subdivision": null,
+      "date": "2026-06-26",
+      "weekdayAsWritten": "金",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "令和８年度各会計補正予算の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": true,
+      "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14",
+      "heldEvidence": [
+        {
+          "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、予算審査特別委員会委員長（小野挙君））",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080703A&startPos=0",
+          "fileName": "R080703A",
+          "pos": 4448,
+          "quote": "本委員会といたしましては、六月二十六日に委員会を開き、市長をはじめ、関係部課長の出席を求め、慎重に審査いたしました結果、いずれも原案のとおり可決すべきものと決定いたしました。"
+        },
+        {
+          "label": "延岡市議会YouTube 令和8年6月定例会 再生リスト（市サイト28033.htmlからリンク。公式記録ではない旨の注記あり）",
+          "url": "https://www.youtube.com/playlist?list=PLHc3drXjeVz8",
+          "videoTitle": "令和８年６月26日　予算審査特別委員会"
+        }
+      ]
+    },
+    {
+      "id": "sched-2026-005",
+      "committeeId": "committee-somu-seisaku",
+      "committeeNameAsWritten": "総務政策委員会",
+      "subdivision": null,
+      "date": "2026-06-29",
+      "weekdayAsWritten": "月",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "付託議案・請願等の審査",
+        "所管事務調査に関する協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": true,
+      "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14",
+      "heldEvidence": [
+        {
+          "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、総務政策委員会委員長（河野治満君））",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080703A&startPos=0",
+          "fileName": "R080703A",
+          "pos": 12762,
+          "quote": "本委員会といたしましては、六月二十九日に委員会を開き、関係部課長の出席を求め、慎重に審査いたしました結果、いずれも原案のとおり可決すべきものと決定いたしました。"
+        }
+      ]
+    },
+    {
+      "id": "sched-2026-006",
+      "committeeId": "committee-sangyo-kensetsu",
+      "committeeNameAsWritten": "産業建設委員会",
+      "subdivision": null,
+      "date": "2026-06-29",
+      "weekdayAsWritten": "月",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第２委員会室",
+      "topicsAsWritten": [
+        "付託議案・請願等の審査",
+        "所管事務調査に関する協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": true,
+      "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14",
+      "heldEvidence": [
+        {
+          "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、産業建設委員会委員長（梶本英一君））",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080703A&startPos=0",
+          "fileName": "R080703A",
+          "pos": 18932,
+          "quote": "本委員会といたしましては、六月二十九日及び本日、委員会を開き、関係部課長の出席を求め、慎重に審査いたしました結果、いずれも原案のとおり可決すべきものと決定いたしました。"
+        }
+      ]
+    },
+    {
+      "id": "sched-2026-007",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-06-29",
+      "weekdayAsWritten": "月",
+      "startTime": null,
+      "timeAsWritten": "常任委員会終了後～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に対する各会派の意見集約"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-008",
+      "committeeId": "committee-kosei-kyoiku",
+      "committeeNameAsWritten": "厚生教育委員会",
+      "subdivision": null,
+      "date": "2026-06-30",
+      "weekdayAsWritten": "火",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "付託議案・請願等の審査",
+        "所管事務調査に関する協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": true,
+      "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14",
+      "heldEvidence": [
+        {
+          "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、厚生教育委員会委員長（猪之鼻哲君））",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080703A&startPos=0",
+          "fileName": "R080703A",
+          "pos": 22880,
+          "quote": "本委員会といたしましては、六月三十日に委員会を開き、関係部課長の出席を求め、慎重に審査いたしました。"
+        }
+      ]
+    },
+    {
+      "id": "sched-2026-009",
+      "committeeId": "committee-gikai-kasseika",
+      "committeeNameAsWritten": "議会活性化特別委員会",
+      "subdivision": null,
+      "date": "2026-07-01",
+      "weekdayAsWritten": "水",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "本年度における委員会の活動計画等"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-010",
+      "committeeId": "committee-sangyo-kensetsu",
+      "committeeNameAsWritten": "産業建設委員会",
+      "subdivision": null,
+      "date": "2026-07-03",
+      "weekdayAsWritten": "金",
+      "startTime": null,
+      "timeAsWritten": "本会議休憩中",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "付託議案の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": true,
+      "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14",
+      "heldEvidence": [
+        {
+          "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、産業建設委員会委員長（梶本英一君））",
+          "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R080703A&startPos=0",
+          "fileName": "R080703A",
+          "pos": 18932,
+          "quote": "本委員会といたしましては、六月二十九日及び本日、委員会を開き、…（本日＝令和8年7月3日）"
+        }
+      ]
+    },
+    {
+      "id": "sched-2026-011",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-07-17",
+      "weekdayAsWritten": "金",
+      "startTime": "13:00",
+      "timeAsWritten": "13：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-012",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-07-24",
+      "weekdayAsWritten": "金",
+      "startTime": null,
+      "timeAsWritten": "代表者会終了後～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-013",
+      "committeeId": "committee-gikai-kasseika",
+      "committeeNameAsWritten": "議会活性化特別委員会",
+      "subdivision": null,
+      "date": "2026-07-30",
+      "weekdayAsWritten": "木",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議会のICT化の推進について"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-014",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-07-31",
+      "weekdayAsWritten": "金",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-015",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-08-10",
+      "weekdayAsWritten": "月",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第２委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-016",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-08-19",
+      "weekdayAsWritten": "水",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-017",
+      "committeeId": "committee-gikai-kasseika",
+      "committeeNameAsWritten": "議会活性化特別委員会",
+      "subdivision": null,
+      "date": "2026-08-19",
+      "weekdayAsWritten": "水",
+      "startTime": "13:30",
+      "timeAsWritten": "13：30～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議会のICT化の推進について"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-018",
+      "committeeId": "committee-sangyo-kensetsu",
+      "committeeNameAsWritten": "産業建設委員会",
+      "subdivision": null,
+      "date": "2026-08-21",
+      "weekdayAsWritten": "金",
+      "startTime": "13:30",
+      "timeAsWritten": "13：30～",
+      "venue": "第２委員会室",
+      "topicsAsWritten": [
+        "所管事務調査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-019",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-08-24",
+      "weekdayAsWritten": "月",
+      "startTime": "15:00",
+      "timeAsWritten": "15：00～",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-020",
+      "committeeId": "committee-kosei-kyoiku",
+      "committeeNameAsWritten": "厚生教育委員会",
+      "subdivision": null,
+      "date": "2026-08-25",
+      "weekdayAsWritten": "火",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第２委員会室",
+      "topicsAsWritten": [
+        "所管事務調査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-021",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-09-01",
+      "weekdayAsWritten": "火",
+      "startTime": "10:30",
+      "timeAsWritten": "10：30～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数や報酬等に係る協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-022",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-09-10",
+      "weekdayAsWritten": "木",
+      "startTime": "15:30",
+      "timeAsWritten": "15：30～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "議員定数に係る協議",
+        "今後の委員会の進め方"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-023",
+      "committeeId": null,
+      "committeeNameAsWritten": "予算審査特別委員会",
+      "subdivision": null,
+      "date": "2026-09-11",
+      "weekdayAsWritten": "金",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "令和８年度各会計補正予算の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-024",
+      "committeeId": "committee-somu-seisaku",
+      "committeeNameAsWritten": "総務政策委員会",
+      "subdivision": null,
+      "date": "2026-09-14",
+      "weekdayAsWritten": "月",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "付託議案及び請願等の審査",
+        "所管事務調査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-025",
+      "committeeId": "committee-sangyo-kensetsu",
+      "committeeNameAsWritten": "産業建設委員会",
+      "subdivision": null,
+      "date": "2026-09-14",
+      "weekdayAsWritten": "月",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第２委員会室",
+      "topicsAsWritten": [
+        "付託議案及び請願等の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-026",
+      "committeeId": "committee-kosei-kyoiku",
+      "committeeNameAsWritten": "厚生教育委員会",
+      "subdivision": null,
+      "date": "2026-09-15",
+      "weekdayAsWritten": "火",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "付託議案及び請願等の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-027",
+      "committeeId": "committee-gikai-kasseika",
+      "committeeNameAsWritten": "議会活性化特別委員会",
+      "subdivision": null,
+      "date": "2026-09-16",
+      "weekdayAsWritten": "水",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "BCPに関する協議等"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-028",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-09-16",
+      "weekdayAsWritten": "水",
+      "startTime": "11:00",
+      "timeAsWritten": "11：00～ ※議会活性化特別委員会終了後",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "陳情の審査",
+        "委員長報告に関する協議 等"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-029",
+      "committeeId": null,
+      "committeeNameAsWritten": "決算審査特別委員会",
+      "subdivision": "全体会",
+      "date": "2026-09-28",
+      "weekdayAsWritten": "月",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "令和７年度各会計決算の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-030",
+      "committeeId": null,
+      "committeeNameAsWritten": "決算審査特別委員会",
+      "subdivision": "第１分科会",
+      "date": "2026-09-28",
+      "weekdayAsWritten": "月",
+      "startTime": null,
+      "timeAsWritten": "全体会終了後",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "総務政策委員会が所管する令和７年度一般会計決算の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-031",
+      "committeeId": null,
+      "committeeNameAsWritten": "決算審査特別委員会",
+      "subdivision": "第２分科会",
+      "date": "2026-09-28",
+      "weekdayAsWritten": "月",
+      "startTime": null,
+      "timeAsWritten": "第１分科会終了後",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "産業建設委員会が所管する令和７年度各会計決算の審査（一般会計、食肉センター特別会計、水道事業会計、下水道事業会計）"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-032",
+      "committeeId": null,
+      "committeeNameAsWritten": "決算審査特別委員会",
+      "subdivision": "第３分科会",
+      "date": "2026-09-29",
+      "weekdayAsWritten": "火",
+      "startTime": "10:00",
+      "timeAsWritten": "10：00～",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "厚生教育委員会が所管する令和７年度各会計決算の審査（一般会計、国民健康保険特別会計、介護保険特別会計、後期高齢者医療特別会計）"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    },
+    {
+      "id": "sched-2026-033",
+      "committeeId": null,
+      "committeeNameAsWritten": "決算審査特別委員会",
+      "subdivision": "全体会",
+      "date": "2026-09-30",
+      "weekdayAsWritten": "水",
+      "startTime": "09:00",
+      "timeAsWritten": "9：00～",
+      "venue": "議会大会議室",
+      "topicsAsWritten": [
+        "令和７年度各会計決算の審査"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-14"
+    }
+  ]
+}

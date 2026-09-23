@@ -282,6 +282,37 @@ export interface CommitteeMemberEntry {
   role: CommitteeRole;
   /** その役職への就任日が名簿に個別注記されている場合のみ（例："令和7年5月9日委員長就任"）。 */
   appointedNote?: string;
+  /**
+   * 委員長・副委員長の互選結果を本会議で報告した会議録の該当発言（本文で氏名を確認済みのもののみ）。
+   * reportedDate は互選結果が報告された日で、任期の開始日とは異なることがある。
+   */
+  roleSourceRef?: { label: string; url: string; quote: string; reportedDate: string; verifiedAt: string };
+}
+
+/**
+ * 委員会の開催予定1件分（src/data/committeeMeetingSchedule.json）。議会が公表する開催予定表の記載どおり。
+ * 予定であり、開催の事実ではない。本会議の委員長報告で開催日が述べられたものだけ heldConfirmed=true。
+ * 出席者・発言者は予定表にも委員長報告にも個人単位では記載されない（not_individually_attributable）。
+ */
+export interface CommitteeMeetingScheduleItem {
+  id: string;
+  /** committees.json の id。予算審査・決算審査など会期ごとの特別委員会は null。 */
+  committeeId: string | null;
+  committeeNameAsWritten: string;
+  subdivision: string | null;
+  date: string;
+  startTime: string | null;
+  timeAsWritten: string | null;
+  venue: string | null;
+  topicsAsWritten: string[];
+  kind: "scheduled";
+  heldConfirmed: boolean | null;
+  heldConfirmationNote?: string;
+  heldEvidence?: { label: string; url: string; quote?: string; fileName?: string; pos?: number; videoTitle?: string }[];
+  sourceUrl: string;
+  sourceTitle: string;
+  sourcePageUrl?: string;
+  asOf: string;
 }
 
 /**

@@ -4742,6 +4742,29 @@ try {
   else throw e;
 }
 
+// --- committeeMeetingSchedule.json（委員会の開催予定表。予定であって開催の事実ではない） ---
+try {
+  const tag = "committeeMeetingSchedule.json";
+  const schedule = readJson("src/data/committeeMeetingSchedule.json");
+  const committeeIdsForSchedule = new Set(readJson("src/data/committees.json").map((c) => c.id));
+  const seenScheduleIds = new Set();
+  for (const s of schedule.items ?? []) {
+    const sTag = `${tag} id=${s.id}`;
+    if (isBlank(s.id) || seenScheduleIds.has(s.id)) err(sTag, "idが空か重複しています");
+    seenScheduleIds.add(s.id);
+    if (s.committeeId !== null && !committeeIdsForSchedule.has(s.committeeId)) err(sTag, `committeeIdがcommittees.jsonに存在しません: ${s.committeeId}`);
+    if (!DATE_RE.test(s.date ?? "")) err(sTag, `dateの形式が不正です: ${s.date}`);
+    if (!DATE_RE.test(s.asOf ?? "")) err(sTag, `asOfの形式が不正です: ${s.asOf}`);
+    if (s.kind !== "scheduled") err(sTag, `kindはscheduled（予定）のみです: ${s.kind}`);
+    // 予定表だけで開催済みとしない。開催を確認したものには、本会議録などの根拠が必須。
+    if (s.heldConfirmed === true && !(s.heldEvidence ?? []).some((e) => e.url)) err(sTag, "heldConfirmed=trueなのに開催の根拠がありません");
+    if (isBlank(s.sourceUrl) || !URL_RE.test(s.sourceUrl)) err(sTag, `sourceUrlが不正です: ${s.sourceUrl}`);
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("committeeMeetingSchedule.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
+}
+
 // --- councilDebateSpeeches.json（本会議の討論。立場は本文で明言されたものだけを確定する） ---
 try {
   const tag = "councilDebateSpeeches.json";

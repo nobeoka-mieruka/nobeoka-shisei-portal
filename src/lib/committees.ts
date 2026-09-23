@@ -3,12 +3,14 @@ import billVotesData from "../data/billVotes.json";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
 import archiveCommitteeMembersData from "../data/archiveCommitteeMembers.json";
+import committeeMeetingScheduleData from "../data/committeeMeetingSchedule.json";
 import type {
   Committee,
   BillVoteItem,
   CommitteeActivityReport,
   CommitteeReportActivityEvent,
   ArchiveCommitteeMemberTerm,
+  CommitteeMeetingScheduleItem,
 } from "../types";
 
 /**
@@ -128,4 +130,15 @@ export function membershipHistoryForCommittee(committeeId: string): ArchiveCommi
       if (termDiff !== 0) return termDiff;
       return (roleOrder[a.role] ?? 9) - (roleOrder[b.role] ?? 9);
     });
+}
+
+const committeeMeetingSchedule = (
+  committeeMeetingScheduleData as unknown as { items: CommitteeMeetingScheduleItem[] }
+).items;
+
+/** 開催予定表のうち、指定した委員会の予定（日付の新しい順）。予定であり、開催の事実ではない。 */
+export function meetingScheduleForCommittee(committeeId: string): CommitteeMeetingScheduleItem[] {
+  return committeeMeetingSchedule
+    .filter((s) => s.committeeId === committeeId)
+    .sort((a, b) => b.date.localeCompare(a.date));
 }

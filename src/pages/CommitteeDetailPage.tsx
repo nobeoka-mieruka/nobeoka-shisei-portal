@@ -3,6 +3,7 @@ import {
   getCommittee,
   billsForCommittee,
   billsSubmittedByCommittee,
+  meetingScheduleForCommittee,
   reportsForCommittee,
   membershipHistoryForCommittee,
 } from "../lib/committees";
@@ -61,6 +62,7 @@ export function CommitteeDetailPage() {
   const orderedMembers = [...committee.members].sort((a, b) => ROLE_ORDER[a.role] - ROLE_ORDER[b.role]);
   const reviewedBills = billsForCommittee(committee.name);
   const submittedBills = billsSubmittedByCommittee(committee.name);
+  const schedule = meetingScheduleForCommittee(committee.id);
   const activityReports = reportsForCommittee(committee.id);
   const membershipHistory = membershipHistoryForCommittee(committee.id);
 
@@ -174,6 +176,21 @@ export function CommitteeDetailPage() {
               {m.appointedNote && (
                 <p className="w-full text-xs text-on-surface-variant">{humanizeDataNote(m.appointedNote)}</p>
               )}
+              {m.roleSourceRef && (
+                <p className="w-full text-xs text-on-surface-variant">
+                  {formatDateOrRaw(m.roleSourceRef.reportedDate)}の本会議で互選結果を報告（
+                  <a
+                    href={m.roleSourceRef.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${m.memberName}の${m.role}互選結果の報告（会議録、新しいタブで開く）`}
+                    className={`text-primary underline ${linkClass}`}
+                  >
+                    会議録
+                  </a>
+                  ）
+                </p>
+              )}
             </li>
           ))}
         </ul>
@@ -282,6 +299,56 @@ export function CommitteeDetailPage() {
           </>
         )}
       </SectionCard>
+
+      {/* 開催予定表の記載。予定であり、開催の事実や出席者・発言者を示すものではない。 */}
+      {schedule.length > 0 && (
+        <SectionCard title={`開催予定（議会公表の開催予定表、${schedule.length}件）`}>
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            延岡市議会が公表している「常任委員会・特別委員会開催予定表」（{formatDateOrRaw(schedule[0].asOf)}現在）の記載です。
+            予定表のため、実際に開催されたかは確認できません。本会議の委員長報告で開催日が述べられているものだけ「開催を確認」と表示しています。
+            委員会の記録は公開されていないため、出席した委員や発言した委員は個人単位では確認できません（委員会に所属していることは、その会議に出席・発言したことを意味しません）。
+          </p>
+          <ul className="space-y-2">
+            {schedule.map((s) => (
+              <li key={s.id} className="rounded-lg border border-outline-variant p-3 text-sm">
+                <p className="font-medium text-on-surface">
+                  {formatDateOrRaw(s.date)}
+                  {s.timeAsWritten ? `　${s.timeAsWritten}` : ""}
+                  {s.venue ? `　${s.venue}` : ""}
+                </p>
+                {s.topicsAsWritten.length > 0 && (
+                  <p className="mt-0.5 text-xs text-on-surface-variant">協議内容（予定表の記載）：{s.topicsAsWritten.join("／")}</p>
+                )}
+                <p className="mt-1 text-xs text-on-surface-variant">
+                  {s.heldConfirmed ? (
+                    <>
+                      開催を確認（本会議の委員長報告）
+                      {s.heldEvidence?.find((e) => e.fileName) && (
+                        <a
+                          href={s.heldEvidence.find((e) => e.fileName)!.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`ml-1 text-primary underline ${linkClass}`}
+                        >
+                          会議録
+                        </a>
+                      )}
+                    </>
+                  ) : (
+                    "開催の記録は非公開（予定表の記載のみ）"
+                  )}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs text-on-surface-variant">
+            出典：
+            <a href={schedule[0].sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
+              {schedule[0].sourceTitle}
+            </a>
+          </p>
+        </SectionCard>
+      )}
 
       {/* 委員会が自ら提出した議案（意見書案・決議案など）は、付託された議案とは別に示す。 */}
       {submittedBills.length > 0 && (
