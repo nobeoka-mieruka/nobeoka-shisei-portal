@@ -209,16 +209,24 @@ export function GeneralQuestionCard({
             </div>
           )}
           <div className="text-xs leading-relaxed text-on-surface-variant">
-            <a
-              href={item.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.sourceTitle}を新しいタブで開く`}
-              className={`inline-flex min-h-11 items-center gap-1 text-primary underline ${linkClass}`}
-            >
-              <GlobeIcon className="h-3.5 w-3.5" />
-              {item.sourceTitle}
-            </a>
+            {/* 市のサイトから削除された通告書（会議録公開後に掲載終了）は、切れたリンクにしない。詳細ページと同じ判定。 */}
+            {item.noticeUrlStatus === "removed" && item.sourceUrl === item.noticeUrl ? (
+              <span className="inline-flex items-start gap-1">
+                <GlobeIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                <span>{item.sourceTitle}（延岡市の公式サイトでの掲載は終了しています）</span>
+              </span>
+            ) : (
+              <a
+                href={item.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${item.sourceTitle}を新しいタブで開く`}
+                className={`inline-flex min-h-11 items-center gap-1 text-primary underline ${linkClass}`}
+              >
+                <GlobeIcon className="h-3.5 w-3.5" />
+                {item.sourceTitle}
+              </a>
+            )}
             <p className="mt-1">公表機関：{item.sourceOrganization}</p>
             <p className="mt-1">最終確認：{formatJapaneseDate(item.lastVerified)}</p>
             {item.notes && <p className="mt-1">{humanizeDataNote(item.notes)}</p>}

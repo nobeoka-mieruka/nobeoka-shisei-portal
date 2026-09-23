@@ -767,8 +767,9 @@ export function DashboardPage() {
       </SectionCard>
 
       <p className="px-1 text-xs text-on-surface-variant">
-        以下の一般質問の内訳は、会議録本文で内容を確認済みの累計{questionStats.confirmedCount}件（対象
-        {questionStats.targetSessionCount}会期中、収録済み{questionStats.collectedSessionCount}会期分）が対象です。
+        以下の一般質問の内訳は、会議録本文で内容を確認済みの累計{questionStats.confirmedCount}件（1件＝議員1名の1回の登壇。
+        現在の任期より前の会期から収録した分を含みます）が対象です。現在の任期は、対象
+        {questionStats.targetSessionCount}会期のうち{questionStats.collectedSessionCount}会期分を収録済みです。
         会議録が未公開の会期の予定質問（{questionStats.scheduledCount}件）は含みません。その内訳は、開催済みで会議録の公開を待っている会期が
         {questionStats.completedScheduledCount}件、{UPCOMING_SESSION_HEADING}が{questionStats.upcomingScheduledCount}件です。
       </p>

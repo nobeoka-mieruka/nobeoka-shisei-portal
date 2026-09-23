@@ -366,7 +366,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "長期総合計画の策定"
@@ -417,7 +417,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。この答弁は三浦市長就任（令和7年7月）以前の読谷山洋司前市長によるものであるため、現職市長と混同しないよう「読谷山市長」と明記しています。稲田議員の代表質問は令和7年度当初予算等を含む33件を対象とした総括質疑・一般質問であり、この要約に含めた1テーマ以外にも、市長の公務出席の在り方、まちづくりの成果目標設定など多数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。"
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。この答弁は三浦市長就任（令和7年7月）以前の読谷山洋司前市長によるものであるため、現職市長と混同しないよう「読谷山市長」と明記しています。稲田議員の代表質問は令和7年度当初予算等を含む33件を対象とした総括質疑・一般質問であり、この要約に含めた1テーマ以外にも、市長の公務出席の在り方、まちづくりの成果目標設定など多数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。",
+          "duplicateOfSpeechId": "m01-2025-03-04-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m01-2025-03-04-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m01-2025-03-04-ippan-shitsumon",
@@ -8957,7 +8959,7 @@
           "meetingNumber": "第3号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "市長の政治姿勢",
@@ -9037,7 +9039,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。"
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。",
+          "duplicateOfSpeechId": "m03-2026-02-26-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m03-2026-02-26-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m03-2026-02-26-ippan-shitsumon",
@@ -10422,8 +10426,8 @@
             {
               "title": "令和 7年第16回定例会（第3号3月5日） 上杉泰洋君（再質問：旭ケ丘住宅を市長へ）",
               "sourceType": "official-minutes-html",
-              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/61232/10/1//0/0",
-              "speakerSection": "pos=61232"
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R070305A/60558/10/1//0/0",
+              "speakerSection": "pos=60558"
             },
             {
               "title": "令和 7年第16回定例会（第3号3月5日） 市長（読谷山洋司君）（再答弁：移転先不足の課題）",
@@ -16585,7 +16589,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "南延岡駅の子育て支援機能",
@@ -16665,7 +16669,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。"
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。",
+          "duplicateOfSpeechId": "m04-2026-02-25-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m04-2026-02-25-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m04-2023-12-05-ippan-shitsumon",
@@ -20720,7 +20726,7 @@
           "meetingNumber": "第3号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "予算編成",
@@ -20800,7 +20806,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、数値（投資的経費約28億円減、基金137億円→73億円等）、発言者、質問と答弁の対応関係を確認済み。"
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、数値（投資的経費約28億円減、基金137億円→73億円等）、発言者、質問と答弁の対応関係を確認済み。",
+          "duplicateOfSpeechId": "m05-2026-02-26-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m05-2026-02-26-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m05-2025-09-11-ippan-shitsumon",
@@ -77935,7 +77943,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "予算編成",
@@ -78045,7 +78053,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、数値（14億円減、予算規模690億円、回答率10.1%/9.9%/7.7%等）、発言者、質問と答弁の対応関係を確認済み。"
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、数値（14億円減、予算規模690億円、回答率10.1%/9.9%/7.7%等）、発言者、質問と答弁の対応関係を確認済み。",
+          "duplicateOfSpeechId": "m21-2026-02-25-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m21-2026-02-25-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m21-2025-12-03-ippan-shitsumon",
@@ -88340,7 +88350,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "予算編成",
@@ -88461,7 +88471,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文と照合し、内容、発言者、質問と答弁の対応関係を確認済み。照合の過程で、q3の質問要約に答弁側の用語（「同時発送文書」）を質問側の説明として誤って含めていたため、原文の表現（「紙媒体による回覧板」）に修正した。"
+          "verificationNote": "公式会議録の質問原文・答弁原文と照合し、内容、発言者、質問と答弁の対応関係を確認済み。照合の過程で、q3の質問要約に答弁側の用語（「同時発送文書」）を質問側の説明として誤って含めていたため、原文の表現（「紙媒体による回覧板」）に修正した。",
+          "duplicateOfSpeechId": "m24-2026-02-25-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m24-2026-02-25-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m24-2025-12-04-ippan-shitsumon",
@@ -93893,7 +93905,7 @@
           "meetingNumber": "第2号",
           "meetingType": "本会議",
           "speechType": "代表質問",
-          "isPublished": true,
+          "isPublished": false,
           "summaryStatus": "verified",
           "topics": [
             "南延岡駅バリアフリー化"
@@ -93944,7 +93956,9 @@
             }
           ],
           "verifiedAt": "2026-08-02",
-          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。この答弁は三浦市長就任（令和7年7月）以前の読谷山洋司前市長によるものであるため、現職市長と混同しないよう「読谷山市長」と明記しています。山本議員の代表質問には、自治会加入促進、駅周辺まちづくり構想、シニア世代のスマホサポーター、障がい福祉、多様な学び方など多数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。"
+          "verificationNote": "公式会議録の質問原文・答弁原文（出典URL記載のGetText3.exeページ）と照合し、内容、発言者、質問と答弁の対応関係を確認済み。この答弁は三浦市長就任（令和7年7月）以前の読谷山洋司前市長によるものであるため、現職市長と混同しないよう「読谷山市長」と明記しています。山本議員の代表質問には、自治会加入促進、駅周辺まちづくり構想、シニア世代のスマホサポーター、障がい福祉、多様な学び方など多数の質問項目がありますが、今回は確認できた範囲のみを要約対象としています。",
+          "duplicateOfSpeechId": "m25-2025-03-04-ippan-shitsumon",
+          "unpublishedReason": "同じ登壇（会議録の同じ発言位置）の代表質問のうち一部の項目だけを試験的に要約した記録。全項目を収録した m25-2025-03-04-ippan-shitsumon と重複して件数に数えられていたため、公開対象から外した（記録自体は残す）。2026-09-23確認。"
         },
         {
           "id": "m25-2023-09-06-ippan-shitsumon",
@@ -102139,8 +102153,8 @@
             {
               "title": "令和 6年第12回定例会（第2号 6月25日） 吉本靖君（天下一中学駅伝）",
               "sourceType": "official-minutes-html",
-              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/60036/10/1//0/0",
-              "speakerSection": "pos=60036"
+              "sourceUrl": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/GetText3.exe?48o046ot0cia1xvtw7/R060625A/59586/10/1//0/0",
+              "speakerSection": "pos=59586"
             },
             {
               "title": "令和 6年第12回定例会（第2号 6月25日） 教育部長（丸山真二君）（答弁：中学駅伝）",
