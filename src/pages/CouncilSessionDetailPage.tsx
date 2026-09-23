@@ -210,6 +210,50 @@ export function CouncilSessionDetailPage() {
         )}
       </SectionCard>
 
+      {/* 本会議の開催日と、日ごとの会議録。会議録検索システムには会期単位の固定URLが無いため、日単位で示す。 */}
+      {(session.meetingDays ?? []).some((d) => d.minutesUrl) && (
+        <SectionCard title={`本会議の開催日と会議録（${session.meetingDays!.length}日）`}>
+          {session.periodSourceRef && (
+            <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
+              会期：{formatSessionPeriod(session)}（第1号で議長が「{session.periodSourceRef.quote}」と宣告
+              <a
+                href={session.periodSourceRef.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`ml-1 text-primary underline ${linkClass}`}
+              >
+                会議録
+              </a>
+              ）
+            </p>
+          )}
+          <ul className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">
+            {session.meetingDays!.map((d) => (
+              <li key={d.id}>
+                {d.minutesUrl ? (
+                  <a
+                    href={d.minutesUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${formatJapaneseDate(d.date)}（${d.meetingNumber ?? "本会議"}）の会議録を新しいタブで開く`}
+                    className={`inline-flex min-h-11 items-center text-primary underline ${linkClass}`}
+                  >
+                    {formatJapaneseDate(d.date)}（{d.meetingNumber ?? "本会議"}）の会議録
+                  </a>
+                ) : (
+                  <span className="text-on-surface-variant">
+                    {formatJapaneseDate(d.date)}（{d.meetingNumber ?? "本会議"}）
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+            延岡市議会 会議録検索システムの日ごとの会議録です。委員会の会議録は公開されていないため、ここには含まれません。
+          </p>
+        </SectionCard>
+      )}
+
       {documentsByCategory.length === 0 ? (
         <SectionCard title="議会資料">
           <p className="text-sm leading-relaxed text-on-surface-variant">

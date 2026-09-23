@@ -2021,6 +2021,10 @@ export interface CouncilMeetingDay {
   /** 会議録・議案名に明記された語句のみを設定する（独自分類・タグ付けはしない）。 */
   topics?: string[];
   documentIds?: string[];
+  /** 会議録検索システム上のその日の会議録のファイル名（例: "R080612A"）。 */
+  fileName?: string;
+  /** その日の会議録（会議録検索システムの日単位の表示）。会期単位の固定URLは存在しない。 */
+  minutesUrl?: string;
 }
 
 /**
@@ -2078,6 +2082,8 @@ export interface CouncilSession {
    * 現時点のデータ基盤（審議結果一覧PDF）では発言者・トピックを確定できないため、通常は未設定。
    */
   meetingDays?: CouncilMeetingDay[];
+  /** 会期（startDate〜endDate）の根拠：第1号で議長が会期の決定を宣告した発言。 */
+  periodSourceRef?: { quote: string; url: string; speaker?: string; verifiedAt: string };
 }
 
 /**
