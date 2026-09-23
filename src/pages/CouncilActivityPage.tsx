@@ -293,7 +293,7 @@ export function CouncilActivityPage() {
       {/* 全議員比較表 */}
       <SectionCard title={`全議員比較（${sortedRows.length}／${allEntries.length}名）`} className={flatCardClass}>
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          列見出しで並べ替えできますが、並び順は順位ではありません（複数の項目を合算した総合点・順位は作っていません）。「紹介議員件数」は、紹介議員を載せる請願文書表がウェブ公開されていないため全員「未公開」、「出席状況」は当サイトが議員別の出席記録をまだ取り込めていないため全員「未確認」です（いずれも0件という意味ではありません）。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
+          列見出しで並べ替えできますが、並び順は順位ではありません（複数の項目を合算した総合点・順位は作っていません）。「紹介議員件数」は、紹介議員を載せる請願文書表がウェブ公開されていないため全員「未公開」、「出席状況」は議員別の出席・欠席名簿がウェブ公開の資料に掲載されていないため全員「未公開」です（いずれも0件という意味ではありません）。現職議員は全員同一の選挙日（令和5年4月23日執行）から在職しているため、対象期間・在職期間の差による不公平は生じていません。
         </p>
 
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
@@ -392,7 +392,7 @@ export function CouncilActivityPage() {
                       <ValueBar value={row.channelCount} max={CHANNEL_BAR_MAX} colorClass="bg-secondary" />
                     </td>
                     <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">未公開</td>
-                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">未確認</td>
+                    <td className="whitespace-nowrap py-2 pr-3 text-xs text-on-surface-variant">未公開</td>
                   </tr>
                 );
               })}
@@ -479,7 +479,7 @@ export function CouncilActivityPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <dt className="text-on-surface-variant">出席状況</dt>
-                      <dd className="text-on-surface-variant">未確認</dd>
+                      <dd className="text-on-surface-variant">未公開</dd>
                     </div>
                   </dl>
                 </li>
@@ -688,7 +688,7 @@ export function CouncilActivityPage() {
             <span className="font-medium">情報発信</span>：本人公式と確認できたWeb/SNS媒体数を含む、プロフィール情報の充足状況。
           </li>
           <li>
-            <span className="font-medium">出席状況</span>：公開資料から確認可能な本会議・委員会等の出席状況（現在、個別の出席記録を取り込めていないため全議員「未確認」）。
+            <span className="font-medium">出席状況</span>：公開資料から確認可能な本会議・委員会等の出席状況（議員別の出席・欠席名簿がウェブ公開の会議録等に掲載されていないため、全議員「未公開」）。
           </li>
         </ul>
         <Link

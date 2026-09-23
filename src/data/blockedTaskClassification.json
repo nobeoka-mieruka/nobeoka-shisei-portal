@@ -340,5 +340,20 @@
     "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。全文閲覧不可の新聞記事は書誌情報のみ記録する方針（設計書2章・6章参照）。",
     "expectedPublicationPeriod": null,
     "nextActionCategory": "needs_ndl_login"
+  },
+  {
+    "taskId": "TASK-200",
+    "title": "本会議の議員別出席状況の収録（出席状況の一次資料）",
+    "status": "MANUAL_REVIEW",
+    "blockedReasonCode": "SOURCE_NOT_PUBLISHED",
+    "reasonSummary": "議員別の出席・欠席名簿は、ウェブで公開されている資料に掲載されていない。会議録検索システムの本文（2025年の10会議日を2026-09-23に再確認。開会宣言は「これより、本日の会議を開きます」のみ）、発言一覧（発言者と議事日程のみで名簿の区分が無い）、文書の冒頭・末尾、延岡市議会公式サイトの「本会議・委員会」配下（会議日程・質問通告書・審議結果・意見書・決議・委員会活動報告書等）、のべおか市議会だより、委員会活動報告書のいずれにも無い（Phase102・Phase106・2026-09-23）。地方自治法第123条は会議録に出席議員の氏名を記載するよう定めているため、原本の会議録には名簿がある可能性が高いが、ウェブ版には含まれていない。名簿が見つからないことを全員出席とは扱わない。",
+    "lastCheckedAt": "2026-09-23",
+    "nextCheckAt": null,
+    "attemptCount": 3,
+    "autoRecheck": false,
+    "autoRecheckMechanism": null,
+    "notes": "再開条件：(1) 延岡市議会事務局への照会、(2) 議会図書室等での会議録原本の閲覧、(3) 情報公開請求、のいずれかで議員別の出席・欠席の一次資料を入手できた場合。照会文は reports/field-research/inquiry-final/gikai-jimukyoku.md の【確認事項6】に用意した（送付は運営者の判断で行う。当サイトからは送付していない）。本会議の動画（YouTube）から出欠を読み取ることは、映像に映らない在席を欠席と誤る恐れがあり、名簿の一次資料ではないため行わない。",
+    "expectedPublicationPeriod": null,
+    "nextActionCategory": "needs_offline_library"
   }
 ]
