@@ -1,5 +1,5 @@
 /**
- * 議会活動プロフィール（7軸）の検査。
+ * 議会活動プロフィールの検査。
  *
  * ここで守りたいのは「算定できないこと」を「活動が無いこと」として
  * 見せないことに尽きる。0・N/A・未確認・未公開・対象外を分けたまま保つ。
@@ -28,17 +28,17 @@ const recordSrc = readSrc("src/lib/councilActivityRecord.ts");
 
 console.log("\n議会活動プロフィール（7軸）");
 
-check("7軸がそろっていて、それぞれ条例上の役割と観測している活動を分けている", () => {
-  for (const key of [
-    "monitoring",
-    "policy-proposal",
-    "representation",
-    "long-term-view",
-    "budget-review",
-    "member-debate",
-    "committee-activity",
-  ]) {
+check("軸がそろっていて、それぞれ条例上の役割と観測している活動を分けている", () => {
+  // 一次資料を調べた結果、請願の紹介・予算決算・委員会の3つは軸として成立しないと判断し、
+  // レーダーから外した（記録自体は「議会での活動」に残している）。
+  for (const key of ["monitoring", "policy-proposal", "long-term-view", "member-debate"]) {
     assert.ok(profileSrc.includes(`key: "${key}"`), `${key} がありません`);
+  }
+  for (const removed of ["representation", "budget-review", "committee-activity"]) {
+    assert.ok(
+      !profileSrc.includes(`key: "${removed}"`),
+      `${removed} が軸として残っています（レーダーから外す判断をしたはずです）`,
+    );
   }
   // 軸名が条例の役割そのものだと、役割全体を数値化しているように読める。
   assert.ok(
@@ -153,12 +153,64 @@ check("総合点・順位・優劣の語を生成していない", () => {
   }
 });
 
-check("実データ：26名全員で7軸を組み立てられる", () => {
+check("実データ：26名全員で軸を組み立てられる", () => {
   const members = readJson("src/data/members.json");
   assert.equal(members.length, 26, "現職議員は26名のはずです（前提が変わった可能性）");
-  // 軸の並び順が1〜7で重複していないこと。
+  // 軸の並び順が1から連番で重複していないこと。
   const orders = [...profileSrc.matchAll(/^\s*order: (\d),$/gm)].map((m) => Number(m[1]));
-  assert.deepEqual([...orders].sort((a, b) => a - b), [1, 2, 3, 4, 5, 6, 7], "軸の並び順が1〜7ではありません");
+  assert.deepEqual([...orders].sort((a, b) => a - b), [1, 2, 3, 4], "軸の並び順が1〜4ではありません");
+});
+
+check("討論が、分子・分母つきの算定軸になっている", () => {
+  assert.match(profileSrc, /debateMeasurable/, "討論の算定判定がありません");
+  assert.match(profileSrc, /numeratorLabel: "討論を行った会期"/);
+  assert.match(profileSrc, /denominatorLabel: "討論が行われた会期"/);
+  // 討論が1件も無かった会期を分母へ入れない（議員の行動と無関係に割合が下がるため）。
+  assert.match(profileSrc, /討論が1件も行われなかった会期は、分母にも分子にも入れません/);
+  // 立場そのものを評価しないと明言していること。
+  assert.match(profileSrc, /賛成か反対かという立場/);
+});
+
+check("討論の分母が、実際に討論が行われた会期だけで作られている", () => {
+  const src = readSrc("src/lib/councilActivityBarometer.ts");
+  assert.match(src, /debateHeldSessionIds/, "討論が行われた会期の集合がありません");
+  // 対象期間内の会期に限っていること。
+  assert.match(src, /radarEligibleSessions\.includes\(id\)/);
+
+  const data = readJson("src/data/councilDebateSpeeches.json");
+  const status = readJson("src/data/questionCollectionStatus.json");
+  const eligible = new Set(status.sessions.filter((x) => x.transcriptAvailable).map((x) => x.sessionId));
+  const held = new Set(data.speeches.map((x) => x.sessionId).filter((id) => id && eligible.has(id)));
+  assert.ok(held.size > 0, "討論が行われた会期が1つもありません（前提が変わった可能性）");
+  assert.ok(
+    held.size < eligible.size,
+    "すべての会期で討論が行われた場合、分母を分ける意味が無くなります（前提の再確認が必要）",
+  );
+});
+
+check("討論の記録が、発言ごとに一次資料へ辿れる", () => {
+  const data = readJson("src/data/councilDebateSpeeches.json");
+  assert.ok(data.speeches.length > 0, "討論の記録がありません");
+  for (const sp of data.speeches) {
+    assert.ok(sp.sourceUrl, `${sp.id} に出典URLがありません`);
+    assert.ok(sp.memberId || sp.formerMemberId, `${sp.id} が議員と結び付いていません`);
+    assert.ok(["for", "against", "unclear"].includes(sp.stance), `${sp.id} の立場の値が不正です`);
+  }
+  // 読み取れない立場を、賛成や反対へ寄せていないこと。
+  assert.ok(data.speeches.some((sp) => sp.stance === "unclear"), "unclear が1件も無いのは、断定しすぎの疑いがあります");
+});
+
+check("請願の紹介議員を、0件ではなく未確認として扱う", () => {
+  const data = readJson("src/data/petitionIntroducers.json");
+  assert.ok(data.records.length > 0, "確認できた紹介議員の記録がありません");
+  for (const r of data.records) {
+    assert.ok(["sole", "partial", "unnamed"].includes(r.completeness), `${r.billId} の網羅性の値が不正です`);
+    assert.ok(r.sourceRefs?.length > 0, `${r.billId} に出典がありません`);
+  }
+  // どの資料に無かったのかを記録していること（調べていないのではない）。
+  assert.ok(data.checkedSources?.length > 0, "調査した資料の記録がありません");
+  const record = readSrc("src/lib/councilActivityRecord.ts");
+  assert.match(record, /0件ではなく、確認できていないという意味です/);
 });
 
 console.log(`\n${passCount}件成功\n`);
