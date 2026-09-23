@@ -58,12 +58,25 @@ const SELF_GENERATED_FILE = "dataQualitySummary.json";
 // わけではなく、市議会サイト内での正常な更新）。市民向けに表示されないデータであり、
 // 新しい資料が既に追跡できているため、URLの張り替えは行わず（同一資料か断定できないため）、
 // リンク切れ件数からは除外する。
-const SUPERSEDED_INTERNAL_ONLY_URLS = new Set([
-  // 第26回定例会 会議日程 → 第27回（28674.pdf）に差し替え済み（2026-08-30確認）
-  "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27879.pdf",
-  // 令和8年度 常任委員会・特別委員会開催予定表（旧版）→ 新版（28682.pdf）に差し替え済み（2026-08-30確認）
-  "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28156.pdf",
-]);
+//
+// 2026-09-23：上の2件を手書きの一覧で除外していたため、その後に同じ状態
+// （status: "removed-confirmed"＝市議会サイトからの削除を確認済み）になった28682・28937は
+// リンク切れとして数えられ、扱いがそろっていなかった。一覧を手で足すのをやめ、
+// councilWatchedDocuments.json の status から決める。ただし、そのURLを他のデータも
+// 参照している場合は除外しない（公開画面に出る可能性があるため）。
+const WATCHED_DOCUMENTS_FILE = "councilWatchedDocuments.json";
+const SUPERSEDED_INTERNAL_ONLY_URLS = new Set(
+  JSON.parse(readFileSync(join(root, "src", "data", WATCHED_DOCUMENTS_FILE), "utf8"))
+    .filter((d) => d.status === "removed-confirmed" && d.sourceUrl)
+    .map((d) => d.sourceUrl),
+);
+/** 削除確認済みの監視記録だけが参照しているURLか（他のデータから参照されていれば false）。 */
+function isRemovedWatchedOnly(result) {
+  if (!SUPERSEDED_INTERNAL_ONLY_URLS.has(result.url)) return false;
+  return (result.files ?? []).every(
+    (f) => f.endsWith(WATCHED_DOCUMENTS_FILE) || f.endsWith(".backup.json") || f === SELF_GENERATED_FILE,
+  );
+}
 const linkReportPath = join(root, "reports", "external-link-check.json");
 let linkHealth = null;
 if (existsSync(linkReportPath)) {
@@ -71,7 +84,7 @@ if (existsSync(linkReportPath)) {
   const liveResults = report.results.filter(
     (r) =>
       (r.files ?? []).some((f) => !f.endsWith(".backup.json") && f !== SELF_GENERATED_FILE) &&
-      !SUPERSEDED_INTERNAL_ONLY_URLS.has(r.url),
+      !isRemovedWatchedOnly(r),
   );
   const broken = liveResults.filter((r) => r.category === "not_found_404" || r.category === "server_error");
   linkHealth = {
@@ -85,7 +98,7 @@ if (existsSync(linkReportPath)) {
     serverError: liveResults.filter((r) => r.category === "server_error").length,
     broken: broken.map((r) => ({ url: r.url, files: r.files, category: r.category, status: r.status })),
     excludedBackupOnlyReferences: report.results.length - liveResults.length,
-    note: "*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち後継資料への移行を一次資料で確認済みの2件（councilWatchedDocuments.json、Phase135-Rで確認、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。",
+    note: `*.backup.json（未使用のバックアップファイル）、本ファイル自身（dataQualitySummary.json、過去の生成結果の残骸）、および市議会の会期ごと差し替え文書のうち市議会サイトからの削除を確認済みの${SUPERSEDED_INTERNAL_ONLY_URLS.size}件（councilWatchedDocuments.jsonのstatusが removed-confirmed、公開ページには非表示）のみを参照するURLは対象外。server_errorの多くは2026-08-16から継続中のWayback Machine再生バックエンド障害（503）によるもので、当サイトの新規不具合ではない。`,
   };
 }
 

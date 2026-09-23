@@ -549,7 +549,19 @@ function appendUpdateHistoryIfNeeded(report) {
       return m ? Math.max(max, Number(m[1])) : max;
     }, 0) + 1;
 
-  const title = `延岡市議会公式サイトの議会資料を自動更新しました（${newlyPublished.length}件）`;
+  // 題名に会期名を入れる。入れないと、別の日の別の会期の更新が全く同じ題名になり、
+  // 更新履歴・検索で区別できなかった（u139とu153）。会期名は councilSessions.json の表示名を使う。
+  const sessions = readJson(sessionsPath, []);
+  const sessionTitles = [
+    ...new Set(
+      newlyPublished
+        .map((e) => sessions.find((s) => s.id === e.sessionId)?.title)
+        .filter(Boolean),
+    ),
+  ];
+  const title = sessionTitles.length
+    ? `延岡市議会公式サイトの議会資料を自動更新しました（${sessionTitles.join("・")}、${newlyPublished.length}件）`
+    : `延岡市議会公式サイトの議会資料を自動更新しました（${newlyPublished.length}件）`;
   const alreadyLogged = history.some((h) => h.date === todayIso() && h.title === title);
   if (alreadyLogged) return;
 

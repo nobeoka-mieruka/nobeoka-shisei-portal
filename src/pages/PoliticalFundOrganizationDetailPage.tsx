@@ -23,7 +23,7 @@ const archiveMemberProfiles = archiveMemberProfilesData as ArchiveMemberProfile[
 
 /** 提出先（disclosureAuthority）ごとの、収支報告書を公表している公式サイトのトップページ。 */
 const DISCLOSURE_AUTHORITY_PAGE_URL: Record<string, string> = {
-  宮崎県選挙管理委員会: "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/",
+  宮崎県選挙管理委員会: "https://www.pref.miyazaki.lg.jp/senkyo/kense/senkyo/seijishikin/public.html",
 };
 
 const INCOME_LABELS: Record<keyof PoliticalFundIncomeBreakdown, string> = {

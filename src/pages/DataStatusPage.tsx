@@ -2045,7 +2045,7 @@ export function DataStatusPage() {
           <li>議案に対する個人別の採決記録（記名投票以外の採決方法での議員別内訳）</li>
           <li>過去年度分の会議録（PDF等、会議録検索システム未収録分）の公開状況</li>
           <li>請願・陳情の紹介議員の氏名（請願者本人ではなく、議会へ取り次いだ議員）</li>
-          <li>令和8年5月臨時会・6月定例会の会議録の公開時期（公式資料の公開待ちとして分類中の項目、計{taskStatusCounts.WAITING_EXTERNAL ?? 0}件）</li>
+          <li>公式資料の公開待ちとして分類中の項目（最新の定例会の会議録や、政治資金収支報告書の公表待ちなど、計{taskStatusCounts.WAITING_EXTERNAL ?? 0}件）</li>
         </ul>
       </SectionCard>
 
