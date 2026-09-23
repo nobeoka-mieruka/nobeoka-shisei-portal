@@ -1999,6 +1999,10 @@ try {
     if (e.activityType !== "committee_report_to_plenary") {
       err(tag, `activityTypeが不正です（本会議での委員長・副委員長報告以外は登録できません）: ${e.activityType}`);
     }
+    // 発言の種類（審査結果の報告と提案理由の説明を取り違えないため、本文から判定した値を必須にする）。
+    if (!["review_report", "investigation_report", "activity_report", "proposal_explanation"].includes(e.speechKind)) {
+      err(tag, `speechKindが不正です（本文から発言の種類を判定して登録してください）: ${e.speechKind}`);
+    }
     if (e.meetingDate && !DATE_RE.test(e.meetingDate)) err(tag, `meetingDateの形式が不正です: ${e.meetingDate}`);
     if (isBlank(e.sourceUrl) || !URL_RE.test(e.sourceUrl)) err(tag, `sourceUrlの形式が不正です: ${e.sourceUrl}`);
     if (e.verificationStatus !== "verified") err(tag, `verificationStatusが不正です: ${e.verificationStatus}`);

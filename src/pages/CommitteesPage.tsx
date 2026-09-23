@@ -74,7 +74,7 @@ export function CommitteesPage() {
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-        予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会など、定例会・臨時会ごとに議長を除く全議員で構成・設置される委員会は、委員名簿に個別掲載されないため、ここには含めていません（各委員会が審査した議案は「議案ごとの賛否」ページで確認できます）。歴代の議長・副議長（2001〜2012年分、確認済み）は
+        予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会など、定例会・臨時会ごとに全議員に近い構成（予算審査・長期総合計画審査は議長を除く全議員、決算審査は議長及び監査委員を除く全議員）で設置される委員会は、委員名簿に個別掲載されないため、ここには含めていません（各委員会が審査した議案は「議案ごとの賛否」ページで確認できます）。歴代の議長・副議長（2001〜2012年分、確認済み）は
         <Link to="/committees/leadership-history" className={`mx-1 text-primary underline ${linkClass}`}>
           歴代議長・副議長ページ
         </Link>

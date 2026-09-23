@@ -49,7 +49,7 @@ export function ReviewFlowTimeline({ bill, allBills }: { bill: BillVoteItem; all
   if (flowStatus === "confirmed") {
     steps.push({
       key: "committee",
-      title: "委員会付託・審査",
+      title: bill.proposerType === "committee" ? "提出した委員会" : "委員会付託・審査",
       state: "done",
       body: (
         <div className="text-sm text-on-surface">
@@ -61,11 +61,14 @@ export function ReviewFlowTimeline({ bill, allBills }: { bill: BillVoteItem; all
             ) : (
               <span className="font-medium">{bill.committee}</span>
             )}
-            {" "}に付託されました。
+            {/* 委員会が自ら提出した議案（意見書案など）は、付託ではない。 */}
+            {bill.proposerType === "committee" ? " が提出した議案です（委員会への付託はありません）。" : " に付託されました。"}
           </p>
-          <p className="mt-1 text-xs text-on-surface-variant">
-            委員会の開催日と審査結果（「可決すべきもの」等の文言）は、本会議での委員長報告として会議録に記録されていますが、当サイトではまだ取り込んでいません。現時点では付託先の委員会のみを表示しています。
-          </p>
+          {bill.proposerType !== "committee" && (
+            <p className="mt-1 text-xs text-on-surface-variant">
+              委員会の開催日と審査結果（「可決すべきもの」等の文言）は、本会議での委員長報告として会議録に記録されていますが、当サイトではまだ取り込んでいません。現時点では付託先の委員会のみを表示しています。
+            </p>
+          )}
         </div>
       ),
     });

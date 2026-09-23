@@ -1,5 +1,11 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import { getCommittee, billsForCommittee, reportsForCommittee, membershipHistoryForCommittee } from "../lib/committees";
+import {
+  getCommittee,
+  billsForCommittee,
+  billsSubmittedByCommittee,
+  reportsForCommittee,
+  membershipHistoryForCommittee,
+} from "../lib/committees";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
 import { SectionCard } from "../components/SectionCard";
@@ -54,6 +60,7 @@ export function CommitteeDetailPage() {
 
   const orderedMembers = [...committee.members].sort((a, b) => ROLE_ORDER[a.role] - ROLE_ORDER[b.role]);
   const reviewedBills = billsForCommittee(committee.name);
+  const submittedBills = billsSubmittedByCommittee(committee.name);
   const activityReports = reportsForCommittee(committee.id);
   const membershipHistory = membershipHistoryForCommittee(committee.id);
 
@@ -275,6 +282,32 @@ export function CommitteeDetailPage() {
           </>
         )}
       </SectionCard>
+
+      {/* 委員会が自ら提出した議案（意見書案・決議案など）は、付託された議案とは別に示す。 */}
+      {submittedBills.length > 0 && (
+        <SectionCard title={`この委員会が提出した議案（${submittedBills.length}件）`}>
+          <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
+            議案等審議結果の【委員会提出議案】欄に掲載されている議案です。委員会に付託されて審査したものではなく、委員会として本会議に提出したもの（意見書案・決議案など）です。
+          </p>
+          <ul className="space-y-2">
+            {submittedBills.map((bill) => (
+              <li key={bill.id}>
+                <Link
+                  to={`/bills/votes/${bill.id}`}
+                  className={`block rounded-lg border border-outline-variant p-3 transition hover:bg-surface-container-high ${linkClass}`}
+                >
+                  <p className="text-xs text-on-surface-variant">
+                    {bill.billNumber}
+                    {bill.votingDate ? `（${formatDateOrRaw(bill.votingDate)}）` : ""}
+                    {bill.result ? `／本会議：${bill.result}` : ""}
+                  </p>
+                  <p className="mt-0.5 font-medium text-on-surface">{bill.billTitle}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
 
       {activityReports.length > 0 && (
         <SectionCard title="活動報告書（所管事務調査）">

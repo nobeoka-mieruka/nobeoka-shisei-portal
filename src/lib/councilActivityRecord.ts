@@ -555,7 +555,7 @@ export function buildCouncilActivityRecord(
     items: committeeReports,
     availability: committeeReports.length > 0 ? "available" : "confirmed-zero",
     description:
-      "委員会の審査結果を本会議で報告した記録です。委員会の中での質疑は、会議録に「委員より」とだけ記載され誰の発言か特定できないため、含めていません。",
+      "委員長・副委員長として本会議で行った、審査結果の報告・調査の報告・活動の報告・提案理由の説明の記録です（種類は各記録に表示）。委員会の中での質疑は、会議録に「委員より」とだけ記載され誰の発言か特定できないため、含めていません。",
     sourceLabel: "延岡市議会 会議録（委員長報告）",
     evidenceKind: "items",
   });

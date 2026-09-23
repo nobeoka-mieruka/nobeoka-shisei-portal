@@ -30,7 +30,13 @@ import {
 } from "../lib/councilActivityBarometer";
 import type { RadarDataStatus } from "../lib/activityRadar";
 import { billVoteLabels, billVoteSymbols } from "../lib/billVotes";
-import { committeesForMember, reportsForCommittee, billsForCommittee, committeeReportActivityForMember } from "../lib/committees";
+import {
+  committeesForMember,
+  reportsForCommittee,
+  billsForCommittee,
+  committeeReportActivityForMember,
+  committeeSpeechKindLabel,
+} from "../lib/committees";
 import { formatJapaneseDate } from "../config/site";
 
 const members = membersData as CouncilMember[];
@@ -421,7 +427,7 @@ export function CouncilActivityMemberPage() {
 
       <SectionCard title="所属委員会（参考情報）">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
-          委員会そのものの会議録（開催日・出席委員・個別の発言全文）は、複数の公開資料経路を調査しましたが、延岡市議会が一般公開していることを確認できていません（存在しないと断定するものではありません）。議会活動の記録には含めず、所属・役職・関連議案・所管事務調査報告書のみを参考情報として掲載します。下記の「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が審査結果を報告した記録です（会議録から氏名を機械的に確認・登録）。
+          委員会そのものの会議録（開催日・出席委員・個別の発言全文）は、複数の公開資料経路を調査しましたが、延岡市議会が一般公開していることを確認できていません（存在しないと断定するものではありません）。議会活動の記録には含めず、所属・役職・関連議案・所管事務調査報告書のみを参考情報として掲載します。下記の「本会議での委員長・副委員長報告」は、委員会内部の発言ではなく、本会議で委員長・副委員長が行った審査結果の報告・調査の報告・活動の報告・提案理由の説明の記録です（会議録から氏名を機械的に確認・登録し、発言の冒頭から種類を示しています）。
         </p>
         {memberCommittees.length === 0 ? (
           <p className="text-sm text-on-surface-variant">現在の委員会名簿では、所属委員会を確認できていません。</p>
@@ -443,8 +449,11 @@ export function CouncilActivityMemberPage() {
                   <p className="mt-1 text-xs text-on-surface-variant">
                     所属期間：{c.termStart ? formatJapaneseDate(c.termStart) : "確認中"}〜{c.termEnd ? formatJapaneseDate(c.termEnd) : "現在"}
                   </p>
+                  {/* 委員会単位の記録。所属していることを、本人がその議案の審査に関わった記録として見せない。 */}
                   <p className="mt-1 text-xs text-on-surface-variant">
-                    この委員会が付託先の議案：{bills.length}件／所管事務調査報告書：{reports.length}件
+                    委員会全体の記録（当サイトに登録された全期間の件数。本人の審査への関与を示すものではありません）：
+                    付託された議案 {bills.length}件／所管事務調査報告書{" "}
+                    {reports.length > 0 ? `${reports.length}件` : "当サイトへの登録なし（0件という意味ではありません）"}
                   </p>
                 </li>
               );
@@ -458,7 +467,7 @@ export function CouncilActivityMemberPage() {
               {committeeReports.map((r) => (
                 <li key={r.id} className="rounded-lg bg-surface-container-high px-3 py-2 text-xs text-on-surface">
                   {r.meetingDate ? formatJapaneseDate(r.meetingDate) : "日付確認中"}　{r.committeeName}
-                  {r.role === "chair" ? "委員長" : "副委員長"}として報告
+                  {r.role === "chair" ? "委員長" : "副委員長"}として{committeeSpeechKindLabel(r)}
                   <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer" className={`ml-2 text-primary underline ${linkClass}`}>
                     会議録を見る
                   </a>

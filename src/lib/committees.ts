@@ -16,7 +16,7 @@ import type {
  *
  * 審査議案の一覧は billVotes.json の committee フィールドから逆引きする（重複保持しない）。
  * 予算審査特別委員会・決算審査特別委員会・長期総合計画審査特別委員会等、会期ごとに
- * 議長を除く全議員で構成・設置される臨時の委員会は committees.json には収録していないが、
+ * 議長（決算審査特別委員会は議長及び監査委員）を除く全議員で構成・設置される臨時の委員会は committees.json には収録していないが、
  * 審査議案の逆引き自体は committee 名が一致すれば表示できる。
  */
 
@@ -41,13 +41,34 @@ export function getCommittee(id: string): Committee | undefined {
 
 /** 委員会名（表示名）から委員会レコードを探す。会期ごとの臨時委員会など、名簿に無い場合はundefined。 */
 export function getCommitteeByName(name: string): Committee | undefined {
-  return committees.find((c) => c.name === name);
+  // 議員の所属欄は「厚生教育委員会（委員長）」のように役職を括弧書きで添えているため、括弧書きを除いて照合する。
+  const bare = name.replace(/（[^）]*）$/, "").trim();
+  return committees.find((c) => c.name === name || c.name === bare);
 }
 
-/** 指定した委員会名が付託先として登録されている議案を、議決日の新しい順で返す。 */
+/**
+ * 委員会が自ら提出した議案（意見書案・決議案など）か。
+ *
+ * billVotes.json の committee 欄には、付託先の委員会のほかに、議案を提出した委員会が
+ * 入っているものがある（例：議会運営委員会の31件はすべて委員会提出の意見書案等で、付託ではない。
+ * 会議録でも委員長が「提案理由の説明」を行っている）。公式資料の【委員会提出議案】欄と同じ
+ * 区分（proposerType: "committee"）を使って、付託と提出を取り違えない。
+ */
+export function isSubmittedByCommittee(b: BillVoteItem): boolean {
+  return b.proposerType === "committee";
+}
+
+/** 指定した委員会名が付託先として登録されている議案を、議決日の新しい順で返す（委員会自身の提出議案は除く）。 */
 export function billsForCommittee(committeeName: string): BillVoteItem[] {
   return billVotes
-    .filter((b) => b.committee === committeeName)
+    .filter((b) => b.committee === committeeName && !isSubmittedByCommittee(b))
+    .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""));
+}
+
+/** 指定した委員会が提出した議案（意見書案・決議案など）を、議決日の新しい順で返す。 */
+export function billsSubmittedByCommittee(committeeName: string): BillVoteItem[] {
+  return billVotes
+    .filter((b) => b.committee === committeeName && isSubmittedByCommittee(b))
     .sort((a, b) => (b.votingDate ?? "").localeCompare(a.votingDate ?? ""));
 }
 
@@ -71,6 +92,22 @@ export function reportsForCommittee(committeeId: string): CommitteeActivityRepor
 export const committeeReportActivityEvents: CommitteeReportActivityEvent[] = committeeReportActivity.filter(
   (e) => !!e.memberId,
 );
+
+/**
+ * 本会議での委員長・副委員長の発言の種類（発言の冒頭の本文から判定済み）。
+ * 議会運営委員会の委員長の発言は、付託案件の審査結果の報告ではなく、
+ * 委員会として提出した意見書案・議案の提案理由の説明である。取り違えない。
+ */
+export const COMMITTEE_SPEECH_KIND_LABELS_JA: Record<NonNullable<CommitteeReportActivityEvent["speechKind"]>, string> = {
+  review_report: "審査結果の報告",
+  investigation_report: "調査の報告（中間・最終）",
+  activity_report: "活動の報告",
+  proposal_explanation: "提案理由の説明",
+};
+
+export function committeeSpeechKindLabel(e: CommitteeReportActivityEvent): string {
+  return e.speechKind ? COMMITTEE_SPEECH_KIND_LABELS_JA[e.speechKind] : "報告";
+}
 
 export function committeeReportActivityForMember(memberId: string): CommitteeReportActivityEvent[] {
   return committeeReportActivity

@@ -5,7 +5,7 @@ import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import councilSessionsData from "../data/councilSessions.json";
 import councilSpeechPeriod from "../config/councilSpeechPeriod.json";
 import billProposalRolesData from "../data/billProposalRoles.json";
-import { committeeReportActivityEvents, committeeReportActivityForMember } from "./committees";
+import { committeeReportActivityEvents, committeeReportActivityForMember, committeeSpeechKindLabel } from "./committees";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
 import councilLeadershipTermsData from "../data/councilLeadershipTerms.json";
 import councilDebateSpeechesData from "../data/councilDebateSpeeches.json";
@@ -484,7 +484,7 @@ function buildRecordExtras(member: CouncilMember, speeches: CouncilSpeech[]): Co
   // --- 本会議での委員長・副委員長報告 ---
   const committeeReports: ActivityRecordListItem[] = committeeReportActivityForMember(member.id).map((e) => ({
     label: e.committeeName,
-    detail: e.meetingDate,
+    detail: [e.meetingDate, committeeSpeechKindLabel(e)].filter(Boolean).join("・"),
     url: e.sourceUrl,
     urlLabel: "会議録",
   }));

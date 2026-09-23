@@ -287,7 +287,7 @@ export interface CommitteeMemberEntry {
 /**
  * 常任委員会・議会運営委員会・特別委員会1件分（src/data/committees.json）。
  * 現在の任期（名簿記載時点）の構成のみを対象とし、予算審査特別委員会・決算審査特別委員会・
- * 長期総合計画審査特別委員会等、会期ごとに議長を除く全議員で構成・設置される臨時の委員会は
+ * 長期総合計画審査特別委員会等、会期ごとに議長（決算審査は議長及び監査委員）を除く全議員で構成・設置される臨時の委員会は
  * 対象外とする（委員名簿に個別掲載されないため）。審査した議案は billVotes.json の
  * committee フィールドから逆引きする（本ファイルには議案一覧を重複して持たない）。
  */
@@ -411,6 +411,12 @@ export interface CommitteeReportActivityEvent {
   fileName: string;
   /** 本会議での委員長・副委員長報告。委員会内部発言（committee_internal_speech）とは明確に区別する。 */
   activityType: "committee_report_to_plenary";
+  /**
+   * 発言の種類（発言の冒頭の本文から判定）。review_report＝付託案件の審査結果の報告、
+   * investigation_report＝調査特別委員会の調査報告（中間・最終）、activity_report＝特別委員会の活動報告、
+   * proposal_explanation＝委員会として提出した意見書案・議案の提案理由の説明（議会運営委員会など）。
+   */
+  speechKind?: "review_report" | "investigation_report" | "activity_report" | "proposal_explanation";
   sourceUrl: string;
   verificationStatus: "verified";
   checkedAt: string;
