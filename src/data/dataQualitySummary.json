@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T12:56:03.338Z",
+  "generatedAt": "2026-09-23T13:13:55.927Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -197,24 +197,22 @@
     "note": "この集計のために作ったまとめ自身と、市議会が会期ごとに差し替える資料のうち、市議会サイトからの削除を確認済みで公開ページには表示していない18件だけが参照するURLは数えていません。到達できないURLは、公開元で掲載が終わり代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示しています。"
   },
   "publicExposure": {
-    "generatedAt": "2026-09-23T12:53:26.788Z",
+    "generatedAt": "2026-09-23T12:58:11.598Z",
     "checkedPages": 2309,
     "clickableBrokenLinks": 0,
     "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"
   },
   "sourceReview": {
-    "needsReview": 305,
+    "needsReview": 64,
     "needsReviewByFile": {
-      "archiveFiscalYears": 231,
-      "archiveMayorTerms": 13,
-      "archiveMayors": 10,
-      "archiveMemberAffiliations": 19,
-      "archiveMemberProfiles": 4,
-      "archivePolicies": 16,
-      "archivePolicyQuestionRelations": 4,
-      "billProposalRoles": 1,
-      "electionResults": 4,
-      "similarMunicipalityFinanceComparison": 3
+      "archiveFiscalYears": 16,
+      "archiveMayorTerms": 12,
+      "archiveMayors": 9,
+      "archiveMemberAffiliations": 15,
+      "archiveMemberProfiles": 3,
+      "archivePolicies": 6,
+      "archivePolicyQuestionRelations": 2,
+      "billProposalRoles": 1
     }
   },
   "countConsistencyChecks": [

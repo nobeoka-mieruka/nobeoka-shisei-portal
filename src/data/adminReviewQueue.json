@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-23T12:56:02.388Z",
-  "totalItems": 112,
+  "generatedAt": "2026-09-23T13:13:54.932Z",
+  "totalItems": 100,
   "byCategory": {
     "aiCategoryCandidate": 19,
     "lowConfidenceCandidate": 26,
     "relationCandidate": 15,
-    "sourceInsufficient": 30,
+    "sourceInsufficient": 18,
     "committeeIdMissing": 1,
     "possibleDuplicateCandidate": 2,
     "aiSummaryPending": 19
@@ -469,72 +469,6 @@
     },
     {
       "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-01",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-02",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-03",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-04",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-05",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-06",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-07",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-08",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-09",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "policy",
-      "sourceEntityId": "policy-mayor03-10",
-      "detail": "出典「よみやま洋司の政策（10の提言）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "mayor",
-      "sourceEntityId": "mayor-01",
-      "detail": "出典「三浦ひさとも 公式サイト」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
       "sourceEntityType": "mayor",
       "sourceEntityId": "mayor-04",
       "detail": "出典「延岡商工会議所四十年史（延岡商工会議所編、1975年）年表」の確認状況が「needsReview」です"
@@ -598,12 +532,6 @@
       "sourceEntityType": "memberProfile",
       "sourceEntityId": "archive-fm04",
       "detail": "出典「延岡市議会議員選挙 2019年04月21日投票（選挙ドットコム）」の確認状況が「needsReview」です"
-    },
-    {
-      "category": "sourceInsufficient",
-      "sourceEntityType": "memberProfile",
-      "sourceEntityId": "archive-fm05",
-      "detail": "出典「延岡市議会会議録検索システム（河野治満議員の発言中の言及）」の確認状況が「needsReview」です"
     },
     {
       "category": "sourceInsufficient",

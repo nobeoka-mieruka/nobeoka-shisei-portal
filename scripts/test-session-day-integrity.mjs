@@ -124,6 +124,35 @@ check("議員個人の賛否「公表なし」：議決日の会議録（ファ�
   expectNone(problems, "「公表なし」の根拠が議決日の会議録を指していません");
 });
 
+check("出典の確認状況「確認済み」には、確認した日付（accessedAt 等）が記録されている", () => {
+  // 「確認済み」へ移すときは、いつ原本を確かめたかを残す（要確認の縮減を後から追えるようにする）。
+  const targets = [
+    "archiveFiscalYears.json",
+    "archiveMayorTerms.json",
+    "archiveMayors.json",
+    "archiveMemberAffiliations.json",
+    "archiveMemberProfiles.json",
+    "archivePolicies.json",
+    "archivePolicyQuestionRelations.json",
+    "electionResults.json",
+    "similarMunicipalityFinanceComparison.json",
+  ];
+  const problems = [];
+  for (const f of targets) {
+    const walk = (v, path) => {
+      if (Array.isArray(v)) return v.forEach((x, i) => walk(x, `${path}[${i}]`));
+      if (!v || typeof v !== "object") return;
+      if (v.verificationStatus === "verified" && (v.sourceUrl || v.url)) {
+        const date = v.accessedAt ?? v.checkedAt ?? v.verifiedAt ?? "";
+        if (!/^\d{4}-\d{2}-\d{2}/.test(date)) problems.push(`${f}${path}: 確認日がない`);
+      }
+      for (const [k, x] of Object.entries(v)) walk(x, `${path}.${k}`);
+    };
+    walk(read(`src/data/${f}`), "");
+  }
+  expectNone(problems, "「確認済み」の出典に確認日がありません");
+});
+
 check("出典の重複：同じ配列の中に、まったく同じ出典（URL・位置・引用まで同一）を二重に登録していない", () => {
   const dir = join(ROOT, "src/data");
   const skip = /backup|searchIndex|Index\.json$|adminReviewQueue|dataQualitySummary/;
