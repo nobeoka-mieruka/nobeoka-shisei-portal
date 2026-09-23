@@ -1074,10 +1074,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 30865569000,
       "totalExpenditureYen": 30400140000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 12657350000,
+      "localAllocationTaxYen": 6342650000,
+      "nationalSubsidiesYen": 3936817000,
+      "prefecturalSubsidiesYen": 1331650000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1087,6 +1087,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446966&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1989）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝12,657,350,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1989,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=12657350）／地方交付税＝6,342,650,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「013:地方交付税」。原資料の記載：1989,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 013:地方交付税=6342650）／国庫支出金＝3,936,817,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「032:国庫支出金」。原資料の記載：1989,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 032:国庫支出金=3936817）／都道府県支出金＝1,331,650,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1989,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=1331650）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」30865569千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
@@ -1190,10 +1200,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 33026518000,
       "totalExpenditureYen": 32353645000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 12989406000,
+      "localAllocationTaxYen": 6258644000,
+      "nationalSubsidiesYen": 4573318000,
+      "prefecturalSubsidiesYen": 1543943000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1203,16 +1213,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447013&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1990）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝12,989,406,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1990,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=12989406）／地方交付税＝6,258,644,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「013:地方交付税」。原資料の記載：1990,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 013:地方交付税=6258644）／国庫支出金＝4,573,318,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「032:国庫支出金」。原資料の記載：1990,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 032:国庫支出金=4573318）／都道府県支出金＝1,543,943,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1990,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=1543943）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」33026518千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1990,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 2497217000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031447133&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1990）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝2,497,217,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号37「合計」 列「002:平成2年度発行額」。原資料の記載：行37:合計 001=25655346 002=2497217 009:差引現在高=26540191）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」2497217千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 26540191000,
@@ -1305,10 +1336,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 35147947000,
       "totalExpenditureYen": 34592758000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13378547000,
+      "localAllocationTaxYen": 6788141000,
+      "nationalSubsidiesYen": 4831994000,
+      "prefecturalSubsidiesYen": 1831100000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1318,16 +1349,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446384&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1991）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,378,547,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1991,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13378547）／地方交付税＝6,788,141,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「014:地方交付税」。原資料の記載：1991,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 014:地方交付税=6788141）／国庫支出金＝4,831,994,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「033:国庫支出金」。原資料の記載：1991,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 033:国庫支出金=4831994）／都道府県支出金＝1,831,100,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1991,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=1831100）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」35147947千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1991,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 2304771000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446944&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1991）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝2,304,771,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号37「合計」 列「002:平成3年度発行額」。原資料の記載：行37:合計 001=26540191 002=2304771 009:差引現在高=26870153）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」2304771千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 26870153000,
@@ -1420,10 +1472,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 36725144000,
       "totalExpenditureYen": 36128750000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13424854000,
+      "localAllocationTaxYen": 7710030000,
+      "nationalSubsidiesYen": 5383886000,
+      "prefecturalSubsidiesYen": 1816851000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1433,16 +1485,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445999&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1992）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,424,854,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1992,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13424854）／地方交付税＝7,710,030,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「014:地方交付税」。原資料の記載：1992,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 014:地方交付税=7710030）／国庫支出金＝5,383,886,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「033:国庫支出金」。原資料の記載：1992,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 033:国庫支出金=5383886）／都道府県支出金＝1,816,851,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1992,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=1816851）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」36725144千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1992,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 2702262000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031446110&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1992）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝2,702,262,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号38「合計」 列「002:平成4年度発行額」。原資料の記載：行38:合計 001=26870153 002=2702262 009:差引現在高=27753734）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」2702262千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 27753734000,
@@ -1535,10 +1608,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 39650052000,
       "totalExpenditureYen": 38775931000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13351628000,
+      "localAllocationTaxYen": 7615459000,
+      "nationalSubsidiesYen": 6837651000,
+      "prefecturalSubsidiesYen": 1991620000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1548,16 +1621,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445842&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1993）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,351,628,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1993,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13351628）／地方交付税＝7,615,459,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「014:地方交付税」。原資料の記載：1993,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 014:地方交付税=7615459）／国庫支出金＝6,837,651,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「033:国庫支出金」。原資料の記載：1993,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 033:国庫支出金=6837651）／都道府県支出金＝1,991,620,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1993,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=1991620）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」39650052千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1993,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 4082100000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445976&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1993）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝4,082,100,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号39「合計」 列「002:平成5年度発行額」。原資料の記載：行39:合計 001=27753734 002=4082100 009:差引現在高=28765642）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」4082100千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 28765642000,
@@ -1650,10 +1744,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 39647375000,
       "totalExpenditureYen": 38583538000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 12718730000,
+      "localAllocationTaxYen": 8177174000,
+      "nationalSubsidiesYen": 6255271000,
+      "prefecturalSubsidiesYen": 2128956000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1663,16 +1757,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445617&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1994）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝12,718,730,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1994,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=12718730）／地方交付税＝8,177,174,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「014:地方交付税」。原資料の記載：1994,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 014:地方交付税=8177174）／国庫支出金＝6,255,271,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「033:国庫支出金」。原資料の記載：1994,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 033:国庫支出金=6255271）／都道府県支出金＝2,128,956,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1994,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=2128956）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」39647375千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1994,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 4644200000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031445819&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1994）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝4,644,200,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号39「合計」 列「002:平成6年度発行額」。原資料の記載：行39:合計 001=28765642 002=4644200 009:差引現在高=30503663）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」4644200千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 30503663000,
@@ -1765,10 +1880,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 42100068000,
       "totalExpenditureYen": 40793647000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13365309000,
+      "localAllocationTaxYen": 8480338000,
+      "nationalSubsidiesYen": 5691195000,
+      "prefecturalSubsidiesYen": 2189375000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1778,16 +1893,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443596&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1995）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,365,309,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1995,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13365309）／地方交付税＝8,480,338,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「014:地方交付税」。原資料の記載：1995,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 014:地方交付税=8480338）／国庫支出金＝5,691,195,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「033:国庫支出金」。原資料の記載：1995,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 033:国庫支出金=5691195）／都道府県支出金＝2,189,375,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1995,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=2189375）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」42100068千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1995,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 5595200000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443704&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1995）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝5,595,200,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号36「合計」 列「002:平成7年度発行額」。原資料の記載：行36:合計 001=30503663 002=5595200 009:差引現在高=34040979）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」5595200千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 34040979000,
@@ -1880,10 +2016,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 45909130000,
       "totalExpenditureYen": 45062918000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13805392000,
+      "localAllocationTaxYen": 7922054000,
+      "nationalSubsidiesYen": 5653675000,
+      "prefecturalSubsidiesYen": 2155721000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -1893,16 +2029,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442887&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1996）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,805,392,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1996,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13805392）／地方交付税＝7,922,054,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「014:地方交付税」。原資料の記載：1996,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 014:地方交付税=7922054）／国庫支出金＝5,653,675,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「033:国庫支出金」。原資料の記載：1996,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 033:国庫支出金=5653675）／都道府県支出金＝2,155,721,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1996,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=2155721）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」45909130千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1996,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 8422800000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443056&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1996）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝8,422,800,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号36「合計」 列「002:平成8年度発行額」。原資料の記載：行36:合計 001=34040979 002=8422800 009:差引現在高=40081326）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」8422800千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 40081326000,
@@ -1995,10 +2152,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 42864525000,
       "totalExpenditureYen": 41952098000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 14322892000,
+      "localAllocationTaxYen": 8672529000,
+      "nationalSubsidiesYen": 5948752000,
+      "prefecturalSubsidiesYen": 1901810000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -2008,16 +2165,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442521&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1997）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝14,322,892,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1997,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=14322892）／地方交付税＝8,672,529,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「015:地方交付税」。原資料の記載：1997,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 015:地方交付税=8672529）／国庫支出金＝5,948,752,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「034:国庫支出金」。原資料の記載：1997,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 034:国庫支出金=5948752）／都道府県支出金＝1,901,810,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1997,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=1901810）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」42864525千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1997,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 5579900000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442816&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1997）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝5,579,900,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号37「合計」 列「002:平成9年度発行額」。原資料の記載：行37:合計 001=40081326 002=5579900 009:差引現在高=42773153）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」5579900千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 42773153000,
@@ -2095,6 +2273,24 @@
         ]
       },
       "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
+    },
+    "population": {
+      "fiscalYear": 1997,
+      "population": 126297,
+      "households": 45645,
+      "referenceDate": "1997-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。人口＝126,297人（シート「現住人口（H.９～）」6行目（平成９年 1月1日）「人口」列(D)。原資料の記載：９年 1月1日 126,297 … 世帯数 45,645）／世帯数＝45,645世帯（シート「現住人口（H.９～）」6行目（平成９年 1月1日）「世帯数」列(J)。原資料の記載：９年 1月1日 126,297 … 世帯数 45,645）。当時の市域（旧延岡市）。照合：既存2001〜2026年度と同じシート・同じ基準日（1月1日）の行。基準日＝1997-01-01"
+        }
+      ]
     }
   },
   {
@@ -2110,10 +2306,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 46457053000,
       "totalExpenditureYen": 44947357000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13595759000,
+      "localAllocationTaxYen": 9067877000,
+      "nationalSubsidiesYen": 6471783000,
+      "prefecturalSubsidiesYen": 3905873000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -2123,16 +2319,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443757&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1998）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,595,759,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1998,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13595759）／地方交付税＝9,067,877,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「015:地方交付税」。原資料の記載：1998,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 015:地方交付税=9067877）／国庫支出金＝6,471,783,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「034:国庫支出金」。原資料の記載：1998,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 034:国庫支出金=6471783）／都道府県支出金＝3,905,873,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1998,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=3905873）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」46457053千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1998,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 5361200000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443996&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1998）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝5,361,200,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号37「合計」 列「002:平成10年度発行額」。原資料の記載：行37:合計 001=42773153 002=5361200 009:差引現在高=45346059）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」5361200千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 45346059000,
@@ -2210,6 +2427,24 @@
         ]
       },
       "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
+    },
+    "population": {
+      "fiscalYear": 1998,
+      "population": 125738,
+      "households": 46008,
+      "referenceDate": "1998-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。人口＝125,738人（シート「現住人口（H.９～）」18行目（平成10年 1月1日）「人口」列(D)。原資料の記載：10年 1月1日 125,738 … 世帯数 46,008）／世帯数＝46,008世帯（シート「現住人口（H.９～）」18行目（平成10年 1月1日）「世帯数」列(J)。原資料の記載：10年 1月1日 125,738 … 世帯数 46,008）。当時の市域（旧延岡市）。照合：既存2001〜2026年度と同じシート・同じ基準日（1月1日）の行。基準日＝1998-01-01"
+        }
+      ]
     }
   },
   {
@@ -2225,10 +2460,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 48127768000,
       "totalExpenditureYen": 47241971000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13804594000,
+      "localAllocationTaxYen": 10157000000,
+      "nationalSubsidiesYen": 7211088000,
+      "prefecturalSubsidiesYen": 2820010000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -2238,16 +2473,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444077&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度1999）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,804,594,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：1999,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13804594）／地方交付税＝10,157,000,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「015:地方交付税」。原資料の記載：1999,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 015:地方交付税=10157000）／国庫支出金＝7,211,088,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「034:国庫支出金」。原資料の記載：1999,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 034:国庫支出金=7211088）／都道府県支出金＝2,820,010,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：1999,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=2820010）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」48127768千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 1999,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 4373000000,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031444198&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度1999）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝4,373,000,000円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号38「合計」 列「002:平成11年度発行額」。原資料の記載：行38:合計 001=45346059 002=4373000 009:差引現在高=46594418）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」4373000千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 46594418000,
@@ -2325,6 +2581,24 @@
         ]
       },
       "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
+    },
+    "population": {
+      "fiscalYear": 1999,
+      "population": 125205,
+      "households": 46357,
+      "referenceDate": "1999-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。人口＝125,205人（シート「現住人口（H.９～）」30行目（平成11年 1月1日）「人口」列(D)。原資料の記載：11年 1月1日 125,205 … 世帯数 46,357）／世帯数＝46,357世帯（シート「現住人口（H.９～）」30行目（平成11年 1月1日）「世帯数」列(J)。原資料の記載：11年 1月1日 125,205 … 世帯数 46,357）。当時の市域（旧延岡市）。照合：既存2001〜2026年度と同じシート・同じ基準日（1月1日）の行。基準日＝1999-01-01"
+        }
+      ]
     }
   },
   {
@@ -2340,10 +2614,10 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 43877025000,
       "totalExpenditureYen": 42922664000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localTaxRevenueYen": 13629455000,
+      "localAllocationTaxYen": 10223709000,
+      "nationalSubsidiesYen": 5165707000,
+      "prefecturalSubsidiesYen": 2446928000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?tclass=000001065558&cycle=7&layout=datalist",
@@ -2353,16 +2627,37 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "e-Statの統計表・グラフ表示画面（dbview）で、時間軸(年度次)を該当年度、団体名(市町村分)を延岡市（団体コード45203）に絞り込んで表示される「歳入総額(A)」「歳出総額(B)」を、単位・千円から円へ換算（×1000）して登録した。同じ画面に表示される「歳入歳出差引(C)=(A)-(B)」「実質収支(E)=(C)-(D)」の算術的整合（A-B=C、C-D=E）を各年度で確認済み（読み取り誤りに対する内部検証）。この調査表の会計区分は、既存のFY2001以降のデータ（総務省市町村決算カード）と同じ地方財政状況調査の体系に基づくものであり、普通会計ベースと推定されるが、e-Statの画面上に会計区分の明示的な注記は確認できていないため、budget.notesにその旨を記載する。"
+        },
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031442722&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表04 歳入内訳（決算年度2000）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝13,629,455,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「001:地方税」。原資料の記載：2000,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 001:地方税=13629455）／地方交付税＝10,223,709,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「015:地方交付税」。原資料の記載：2000,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 015:地方交付税=10223709）／国庫支出金＝5,165,707,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号1「決算額」 列「034:国庫支出金」。原資料の記載：2000,61,452033,宮崎県,延岡市,3,4,歳入内訳,1,決算額 … 034:国庫支出金=5165707）／都道府県支出金＝2,446,928,000円（調査表04「歳入内訳」CSV 団体コード452033 延岡市 行番号2「決算額」 列「001:都道府県支出金」。原資料の記載：2000,61,452033,宮崎県,延岡市,3,4,歳入内訳,2,決算額 … 001:都道府県支出金=2446928）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（既存1989〜2000年度のtotalRevenueYenと同じ調査）。照合：同表「045:歳入合計」43877025千円＝既存totalRevenueYen"
         }
       ],
       "notes": "総務省「地方財政状況調査」市町村分・調査表02「決算収支の状況」より歳入総額・歳出総額のみ登録（Phase8 Lane B発見、Lane A統合）。会計区分（普通会計か否か）はe-Stat画面上に明示的な注記がなく推定にとどまる。当初予算額・最終予算額・一般会計単独の決算額・市税等の内訳・市債・基金・財政指標は今回未確認。"
     },
     "debt": {
       "fiscalYear": 2000,
-      "municipalBondIssuanceYen": null,
-      "municipalBondIssuanceValueType": null,
-      "municipalBondIssuanceStatus": "notCollected",
-      "municipalBondIssuanceSourceRefs": [],
+      "municipalBondIssuanceYen": 0,
+      "municipalBondIssuanceValueType": "settlement",
+      "municipalBondIssuanceStatus": "settlementConfirmed",
+      "municipalBondIssuanceSourceRefs": [
+        {
+          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031443033&fileKind=1",
+          "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表33-4 地方債現在高の状況（決算年度2000）",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方債発行額＝0円（調査表33「地方債現在高の状況」(4) CSV 団体コード452033 行番号42「合計」 列「002:平成12年度発行額」。原資料の記載：行42:合計 001=0 002=0 009:差引現在高=0）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計。照合：調査表04「地方債」4445800千円と一致。同行009列は既存ordinaryAccountLocalBondBalanceYenと一致"
+        }
+      ],
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": 47488221000,
@@ -2440,6 +2735,24 @@
         ]
       },
       "notes": "総務省「地方財政状況調査」調査表29（基金の状況、普通会計）から新規登録（2026-09-23）。"
+    },
+    "population": {
+      "fiscalYear": 2000,
+      "population": 124931,
+      "households": 47001,
+      "referenceDate": "2000-01-01",
+      "sourceRefs": [
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+          "sourceTitle": "延岡市「現住人口及び世帯数の推移」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2026-08-04",
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。人口＝124,931人（シート「現住人口（H.９～）」42行目（平成12年 1月1日）「人口」列(D)。原資料の記載：12年 1月1日 124,931 … 世帯数 47,001）／世帯数＝47,001世帯（シート「現住人口（H.９～）」42行目（平成12年 1月1日）「世帯数」列(J)。原資料の記載：12年 1月1日 124,931 … 世帯数 47,001）。当時の市域（旧延岡市）。照合：既存2001〜2026年度と同じシート・同じ基準日（1月1日）の行。基準日＝2000-01-01"
+        }
+      ]
     }
   },
   {
@@ -2495,9 +2808,9 @@
       "totalRevenueYen": 42977780000,
       "totalExpenditureYen": 42230027000,
       "localTaxRevenueYen": 13431875000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 9360625000,
+      "nationalSubsidiesYen": 5763216000,
+      "prefecturalSubsidiesYen": 2111611000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
@@ -2517,6 +2830,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-2_45.pdf",
+          "sourceTitle": "総務省「平成１３年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝9,360,625,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 9,360,625）／国庫支出金＝5,763,216,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 5,763,216）／都道府県支出金＝2,111,611,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 2,111,611）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」42,977,780千円＝既存totalRevenueYen、「地方税」13,431,875千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -2668,9 +2991,9 @@
       "totalRevenueYen": 41372009000,
       "totalExpenditureYen": 40796507000,
       "localTaxRevenueYen": 12558696000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 9607665000,
+      "nationalSubsidiesYen": 5939533000,
+      "prefecturalSubsidiesYen": 1881276000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
@@ -2690,6 +3013,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-3_45.pdf",
+          "sourceTitle": "総務省「平成１４年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝9,607,665,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 9,607,665）／国庫支出金＝5,939,533,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 5,939,533）／都道府県支出金＝1,881,276,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 1,881,276）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」41,372,009千円＝既存totalRevenueYen、「地方税」12,558,696千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -2841,9 +3174,9 @@
       "totalRevenueYen": 41963736000,
       "totalExpenditureYen": 41192424000,
       "localTaxRevenueYen": 12337610000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 9444890000,
+      "nationalSubsidiesYen": 6115674000,
+      "prefecturalSubsidiesYen": 2156108000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
@@ -2863,6 +3196,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-4_45.pdf",
+          "sourceTitle": "総務省「平成１５年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝9,444,890,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 9,444,890）／国庫支出金＝6,115,674,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 6,115,674）／都道府県支出金＝2,156,108,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 2,156,108）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」41,963,736千円＝既存totalRevenueYen、「地方税」12,337,610千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -3014,9 +3357,9 @@
       "totalRevenueYen": 41660716000,
       "totalExpenditureYen": 40820287000,
       "localTaxRevenueYen": 12559132000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 8950619000,
+      "nationalSubsidiesYen": 6497898000,
+      "prefecturalSubsidiesYen": 1727079000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
@@ -3036,6 +3379,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-5_45.pdf",
+          "sourceTitle": "総務省「平成１６年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝8,950,619,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 8,950,619）／国庫支出金＝6,497,898,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 6,497,898）／都道府県支出金＝1,727,079,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 1,727,079）。旧延岡市単独（北方町・北浦町・北川町の編入前）。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」41,660,716千円＝既存totalRevenueYen、「地方税」12,559,132千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -3197,9 +3550,9 @@
       "totalRevenueYen": 52625050000,
       "totalExpenditureYen": 51480995000,
       "localTaxRevenueYen": 13553110000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 12707736000,
+      "nationalSubsidiesYen": 6725856000,
+      "prefecturalSubsidiesYen": 3537726000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
@@ -3219,6 +3572,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-6_45.pdf",
+          "sourceTitle": "総務省「平成１７年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝12,707,736,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 12,707,736）／国庫支出金＝6,725,856,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 6,725,856）／都道府県支出金＝3,537,726,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 3,537,726）。2005年度決算：年度途中の2006-02-20に北方町・北浦町を編入（北川町は未編入）。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」52,625,050千円＝既存totalRevenueYen、「地方税」13,553,110千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -3379,9 +3742,9 @@
       "totalRevenueYen": 57626494000,
       "totalExpenditureYen": 56217081000,
       "localTaxRevenueYen": 13863514000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 14142449000,
+      "nationalSubsidiesYen": 6715941000,
+      "prefecturalSubsidiesYen": 3835919000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
@@ -3401,6 +3764,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-7_45.pdf",
+          "sourceTitle": "総務省「平成１８年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝14,142,449,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 14,142,449）／国庫支出金＝6,715,941,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 6,715,941）／都道府県支出金＝3,835,919,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 3,835,919）。北方町・北浦町を含む。北川町は2007-03-31編入。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」57,626,494千円＝既存totalRevenueYen、「地方税」13,863,514千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -3543,9 +3916,9 @@
       "totalRevenueYen": 58040377000,
       "totalExpenditureYen": 56668465000,
       "localTaxRevenueYen": 15145106000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 13731505000,
+      "nationalSubsidiesYen": 7131245000,
+      "prefecturalSubsidiesYen": 5498203000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
@@ -3575,6 +3948,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-8_45.pdf",
+          "sourceTitle": "総務省「平成１９年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝13,731,505,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 13,731,505）／国庫支出金＝7,131,245,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 7,131,245）／都道府県支出金＝5,498,203,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 5,498,203）。現在の市域。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」58,040,377千円＝既存totalRevenueYen、「地方税」15,145,106千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -3717,9 +4100,9 @@
       "totalRevenueYen": 58158783000,
       "totalExpenditureYen": 56859095000,
       "localTaxRevenueYen": 14725100000,
-      "localAllocationTaxYen": null,
-      "nationalSubsidiesYen": null,
-      "prefecturalSubsidiesYen": null,
+      "localAllocationTaxYen": 14356134000,
+      "nationalSubsidiesYen": 7717803000,
+      "prefecturalSubsidiesYen": 4650582000,
       "sourceRefs": [
         {
           "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
@@ -3749,6 +4132,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase138で新規登録。既存sourceRefs（同一決算カードPDF、市債残高ordinaryAccountLocalBondBalanceYen等の出典として既に登録済み）を再読み込みし、Read toolで「地方税」欄（歳入の状況表）の決算額を直接確認した（UNR-035の解決）。 【2026-09-23】原本PDF p.4（延岡市）を再取得し、「歳入の状況」表 地方税行・右上「歳入総額」「歳出総額」の当該年度値が登録値と一致することを確認した（単位千円・普通会計）。"
+        },
+        {
+          "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/pdf/1018-15-9_45.pdf",
+          "sourceTitle": "総務省「平成２０年度市町村決算カード」宮崎県",
+          "sourceOrganization": "総務省",
+          "sourcePublishedDate": null,
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方交付税＝14,356,134,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「地方交付税」行「決算額」列。原資料の記載：地方交付税 14,356,134）／国庫支出金＝7,717,803,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「国庫支出金」行「決算額」列。原資料の記載：国庫支出金 7,717,803）／都道府県支出金＝4,650,582,000円（PDF p.4（延岡市、団体コード452033）／左側「歳入の状況（単位 千円・％）」の「都道府県支出金」行「決算額」列。原資料の記載：都道府県支出金 4,650,582）。現在の市域。会計区分：普通会計（同年度の既存totalRevenueYenと同じカード）。照合：同カード「歳入合計」58,158,783千円＝既存totalRevenueYen、「地方税」14,725,100千円＝既存localTaxRevenueYen"
         }
       ],
       "notes": "歳入総額・歳出総額（決算ベース）のみ総務省市町村決算カードより登録。当初予算額・最終予算額・一般会計単独の決算額は同カードに記載が無いため未確認。"
@@ -5814,8 +6207,8 @@
       "enterpriseAccountBudgetYen": null,
       "totalRevenueYen": 59716140000,
       "totalExpenditureYen": 58002740000,
-      "localTaxRevenueYen": null,
-      "localAllocationTaxYen": null,
+      "localTaxRevenueYen": 14529600000,
+      "localAllocationTaxYen": 15070890000,
       "nationalSubsidiesYen": null,
       "prefecturalSubsidiesYen": null,
       "sourceRefs": [
@@ -5848,6 +6241,16 @@
           "extractionMethod": "manual",
           "verificationStatus": "verified",
           "notes": "Phase137で新規登録。同資料は平成19年度〜令和8年度（20年度分）の一般会計当初予算規模の推移表を掲載しており、単位は千円と明記されている（原文どおり）。円換算のため×1000した値をgeneralAccountInitialBudgetYenへ登録した。令和8年度の値（69,066,000千円）は同資料P2「予算集計表」の一般会計当初予算額（69,066,000千円）と完全一致することを確認済み（同一資料内の内部整合性確認）。決算額（generalAccountSettlementYen）・補正後予算額（generalAccountFinalBudgetYen）は本資料に記載が無いため、引き続き未確認のまま。 （平成30年度の値：56,068,225千円） 【2026-09-23】原本を再取得し、この年度の値が原本の該当箇所と一致することを確認した。"
+        },
+        {
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2588.pdf",
+          "sourceTitle": "広報のべおか2019年11月号「延岡市の財政状況（平成30年度決算）」",
+          "sourceOrganization": "延岡市",
+          "sourcePublishedDate": "2019-11-01",
+          "accessedAt": "2026-09-23",
+          "extractionMethod": "manual",
+          "verificationStatus": "verified",
+          "notes": "【2026-09-23】原本を取得し、次の値を新規登録した（未登録だった項目の補完。推計・補間なし）。地方税＝14,529,600,000円（PDF 6ページ「歳入」円グラフの「市税」。原資料の記載：市税 145億2,960万円（24.3％））／地方交付税＝15,070,890,000円（PDF 6ページ「歳入」円グラフの「地方交付税」。原資料の記載：地方交付税 150億7,089万円（25.2％））。現在の市域。会計区分：一般会計（既存2018年度totalRevenueYenと同じ記事）。照合：平成30年度決算カード（普通会計）地方税14,529,604千円と万円単位で一致"
         }
       ],
       "notes": "この号は「最終予算額」（補正後予算）のみの公表で、決算額（totalRevenueYen等）はこの資料には含まれない。決算額は別途、財政状況資料集等の資料で確認する必要がある。"
