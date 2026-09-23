@@ -5131,7 +5131,7 @@
         "fiscalReserveFundYen": 5122000000,
         "bondRedemptionFundYen": 2476000000,
         "otherSpecificPurposeFundsYen": 14107000000,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録。基金全体の合計（totalYen）は、この年度は明示的な合計行が資料に無いため算出しない。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）はこの年度の一次資料からは特定できず未登録。",
+        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録。基金全体の合計（totalYen）は、財務書類には合計行が無いため、広報のべおか2020年5月号の「令和元年度末（見込み）」の値（一般・特別・企業会計の合計）を登録している。決算値ではなく見込み値であり、財務書類ベースの各基金とは集計範囲も異なる。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）はこの年度の一次資料からは特定できず未登録。",
         "sourceRefs": [
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3544.xlsx",
@@ -6687,7 +6687,7 @@
           }
         ]
       },
-      "notes": "残高（ストック）は令和8年3月31日現在の確定値として登録。発行額（フロー）は令和7年度の予算額のみ確認でき、決算額は出納整理期間中のため未確定（財政状況資料集の令和7年度版は本日時点で未公表）。"
+      "notes": "残高（ストック）は令和8年3月31日現在の値として登録（出納整理期間前の時点の値であり、決算ベースの年度末残高とは異なる可能性がある。令和7年度の決算審査意見書・財政状況資料集の公表後に照合する）。発行額（フロー）は令和7年度の予算額のみ確認でき、決算額は出納整理期間中のため未確定（財政状況資料集の令和7年度版は本日時点で未公表）。"
     },
     "budget": {
       "fiscalYear": 2025,
@@ -6879,7 +6879,7 @@
     },
     "debt": {
       "fiscalYear": 2026,
-      "municipalBondIssuanceYen": 4072600000,
+      "municipalBondIssuanceYen": 4456300000,
       "balance": {
         "generalAccountBondBalanceYen": null,
         "ordinaryAccountLocalBondBalanceYen": null,
@@ -6889,20 +6889,21 @@
         "definitionNote": "年度末市債残高（普通会計・一般会計等の区分別）は、延岡市決算書・財政状況資料集で確認中。municipalBondIssuanceYenは令和8年度予算に計上された発行額（歳入の「市債」科目）であり、残高ではない。",
         "sourceRefs": []
       },
-      "notes": "残高（ストック）データは今回未登録。発行額（フロー）は令和8年度6月補正後予算の歳入「市債」科目の計上額（予算値）であり、決算額ではない。",
+      "notes": "残高（ストック）データは今回未登録。発行額（フロー）は令和8年度9月補正（2次分）後予算の歳入「市債」科目の計上額（予算値）であり、決算額ではない。年度途中のため今後の補正で変わる。以前の値は6月補正（1次分）後の4,072,600千円（その後、6月補正（2次分）後4,248,200千円、9月補正後4,456,300千円）。",
       "municipalBondIssuanceValueType": "revisedBudget",
       "municipalBondIssuanceStatus": "budgetOnly",
       "municipalBondIssuanceSourceRefs": [
         {
-          "sourceUrl": "/documents/mayor-policy/r8_june_supplementary_budget.pdf",
-          "sourceTitle": "令和8年度6月補正予算の概要（歳入「市債」科目）",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28903.pdf",
+          "sourceTitle": "延岡市「令和8年度9月補正（2次分）（概要書）」歳入 目的別内訳（市債）",
           "sourceOrganization": "延岡市",
-          "sourcePublishedDate": "2026-06-05",
-          "accessedAt": "2026-07-14",
+          "trustLevel": "PRIMARY",
           "pageNumber": 2,
+          "sourcePublishedDate": "2026-08-31",
+          "accessedAt": "2026-09-23",
           "extractionMethod": "manual",
-          "verificationStatus": "needsReview",
-          "notes": "6月補正後予算の歳入「市債」科目の計上額であり、決算額ではない。令和8年度（FY2026）は年度途中のため決算は存在しない。"
+          "verificationStatus": "verified",
+          "notes": "9月補正（2次分）後予算の歳入「市債」4,456,300千円（補正前も同額）を円換算。9月補正（28796.pdf）で4,248,200千円から4,456,300千円に増額。決算額ではない。"
         }
       ]
     }

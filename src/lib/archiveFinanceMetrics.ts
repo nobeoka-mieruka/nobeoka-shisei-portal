@@ -11,6 +11,7 @@ import {
   municipalBondIssuanceStatusLabel,
   municipalBondIssuanceValueTypeLabel,
 } from "./archiveFinance";
+import { soundnessValueStatus, type SoundnessValueField } from "./financeSoundness";
 
 export type FinanceMetricGroup = "population" | "budget" | "debt" | "fund" | "ratio";
 
@@ -26,6 +27,25 @@ export interface FinanceMetricPoint {
   statusLabelOverride?: string;
   /** 値の性質（決算／当初予算／補正後予算等）。指定した指標のみ「値の種類」列を表示する。 */
   valueTypeLabel?: string;
+  /**
+   * 資料で「該当なし」（比率が算定されない）と明記された年度。値はnullのまま、
+   * 「確認中」「資料未確認」とは区別して表示する。
+   */
+  notApplicable?: boolean;
+}
+
+/**
+ * 健全化判断比率の年度の点。「該当なし」（赤字が無い・将来負担額を財源が上回る等で
+ * 比率が算定されない）を、確認中と同じ見え方にしない。判定は財政健全化の各画面と同じ関数を使う。
+ */
+function ratioPoint(y: ArchiveFiscalYear, field: SoundnessValueField): FinanceMetricPoint {
+  const notApplicable = soundnessValueStatus(y.finance, field) === "notApplicable";
+  return {
+    value: y.finance?.[field] ?? null,
+    sourceRefs: y.finance?.sourceRefs ?? [],
+    notApplicable,
+    statusLabelOverride: notApplicable ? "該当なし（比率が算定されない）" : undefined,
+  };
 }
 
 export interface FinanceMetricDefinition {
@@ -139,7 +159,8 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     unit: "円（億円表示）",
     group: "budget",
     chartKind: "bar",
-    definitionNote: "一般会計の歳入総額。",
+    definitionNote:
+      "歳入の決算総額。年度により、一般会計（広報等）の値と、普通会計（決算カード・財政状況資料集。2019年度以降）の値が含まれます。会計の範囲が異なる年度があるため、各年度の定義欄をご確認ください。",
     formatValue: formatOkuYenOrConfirming,
     getPoint: (y) => ({ value: y.budget?.totalRevenueYen ?? null, sourceRefs: y.budget?.sourceRefs ?? [] }),
   },
@@ -149,7 +170,8 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     unit: "円（億円表示）",
     group: "budget",
     chartKind: "bar",
-    definitionNote: "一般会計の歳出総額。",
+    definitionNote:
+      "歳出の決算総額。年度により、一般会計（広報等）の値と、普通会計（決算カード・財政状況資料集。2019年度以降）の値が含まれます。会計の範囲が異なる年度があるため、各年度の定義欄をご確認ください。",
     formatValue: formatOkuYenOrConfirming,
     getPoint: (y) => ({ value: y.budget?.totalExpenditureYen ?? null, sourceRefs: y.budget?.sourceRefs ?? [] }),
   },
@@ -235,7 +257,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     unit: "円（億円表示）",
     group: "fund",
     chartKind: "line",
-    definitionNote: "財源調整用基金とその他特定目的基金の合計（元資料の分類による）。",
+    definitionNote: "基金の年度末残高の合計。年度により元資料と会計の範囲が異なります（企業会計を含む広報の値、一般・特別会計の審査意見書の値など）。年度をまたいで比べる前に、各年度の定義欄をご確認ください。",
     formatValue: formatOkuYenOrConfirming,
     getPoint: (y) => ({
       value: y.fund?.balance.totalYen ?? null,
@@ -279,7 +301,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     unit: "（指数）",
     group: "ratio",
     chartKind: "line",
-    definitionNote: "総務省の地方公共団体財政健全化法に基づき市が公表した財政力指数。独自の評価・順位づけは行っていません。",
+    definitionNote: "市が公表した財政力指数（地方交付税法に基づく基準財政収入額を基準財政需要額で割った値の過去3年平均）。独自の評価・順位づけは行っていません。",
     formatValue: formatIndexOrConfirming,
     getPoint: (y) => ({ value: y.finance?.financialStrengthIndex ?? null, sourceRefs: y.finance?.sourceRefs ?? [] }),
   },
@@ -301,7 +323,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     chartKind: "line",
     definitionNote: "市が公表した実質公債費比率。独自の評価・順位づけは行っていません。",
     formatValue: formatPercentOrConfirming,
-    getPoint: (y) => ({ value: y.finance?.realDebtServiceRatioPercent ?? null, sourceRefs: y.finance?.sourceRefs ?? [] }),
+    getPoint: (y) => ratioPoint(y, "realDebtServiceRatioPercent"),
   },
   {
     key: "futureBurdenRatio",
@@ -311,7 +333,7 @@ export const FINANCE_METRICS: FinanceMetricDefinition[] = [
     chartKind: "line",
     definitionNote: "市が公表した将来負担比率。独自の評価・順位づけは行っていません。",
     formatValue: formatPercentOrConfirming,
-    getPoint: (y) => ({ value: y.finance?.futureBurdenRatioPercent ?? null, sourceRefs: y.finance?.sourceRefs ?? [] }),
+    getPoint: (y) => ratioPoint(y, "futureBurdenRatioPercent"),
   },
 ];
 

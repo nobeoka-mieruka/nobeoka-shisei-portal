@@ -21,6 +21,8 @@ export interface FinanceChartYearPoint {
   /** 未確認・未収録の年度はnull。0を代入すると「実際に0だった」と誤解されるため使わない。 */
   value: number | null;
   isEstimate?: boolean;
+  /** 資料で「該当なし」と明記された年度（値はnull）。 */
+  notApplicable?: boolean;
 }
 
 /** 線の連結可否の判定に必要な最小限の情報（FinanceLineChartPointもこの形を満たす）。 */

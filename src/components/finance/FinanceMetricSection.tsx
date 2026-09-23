@@ -51,15 +51,21 @@ export function FinanceMetricSection({
    * 隣り合う目盛りとして直線で結ばれ、資料が無い19年分があたかも連続的に推移したかのように
    * 見えていた。値は生成せず、横軸の並びと線の切り方だけを事実に合わせる。
    */
-  const rawLinePoints = points.map((p) => ({ year: p.year, label: fiscalYearLabel(p.year), value: p.value }));
+  const rawLinePoints = points.map((p) => ({
+    year: p.year,
+    label: fiscalYearLabel(p.year),
+    value: p.value,
+    notApplicable: p.notApplicable,
+  }));
   const linePoints = continuousYearAxis
     ? continuousFiscalYearSeries(rawLinePoints, fiscalYearLabel)
     : rawLinePoints;
   // グラフに表示していない年度（先頭・末尾の未確認年度）も含めて注記に列挙する。
+  // 資料で「該当なし」と明記された年度は、値を確認できていないのではないため含めない。
   const omittedYears = [
     ...new Set([
-      ...points.filter((p) => p.value == null).map((p) => p.year),
-      ...linePoints.filter((p) => p.value == null).map((p) => p.year),
+      ...points.filter((p) => p.value == null && !p.notApplicable).map((p) => p.year),
+      ...linePoints.filter((p) => p.value == null && !p.notApplicable).map((p) => p.year),
     ]),
   ].sort((a, b) => a - b);
 
