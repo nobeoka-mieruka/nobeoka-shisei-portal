@@ -108,13 +108,18 @@ interface QuickLink {
 // TASK-Phase123：トップページ最上部の主導線を「議員／一般質問／議案／市長／財政／市役所の相談先」に
 // 絞ったショートカットとして追加する。既存の「目的から探す」カード群（下部）は変更・削除せず、
 // スマホでまず押されやすい代表的な入口だけをヒーロー直下にまとめる（重複導線だが誘導を明確化するため許容）。
+// UI仕上げ（2026-09-24）：初めて来た人が「何が分かるサイトか」を最初の画面で把握できるよう、
+// 人口・選挙・市長公約の入口を加えて8つにし、「市政を調べる」より上に置く。ラベルは4列でも折り返さない短さにする。
+// 市長ページ（/mayor）への導線は下の「人物を調べる」カードとヘッダーに残している。
 const quickLinks: QuickLink[] = [
-  { icon: BriefcaseIcon, label: "議員を調べる", to: "/people?type=member" },
-  { icon: QuestionMarkCircleIcon, label: "一般質問を調べる", to: "/questions" },
-  { icon: DocumentIcon, label: "議案を見る", to: "/bills/votes" },
-  { icon: LandmarkIcon, label: "市長を調べる", to: "/mayor" },
-  { icon: YenIcon, label: "財政を見る", to: "/finance" },
-  { icon: CompassIcon, label: "市役所の相談先を見る", to: "/city-guide" },
+  { icon: BriefcaseIcon, label: "議員", to: "/people?type=member" },
+  { icon: QuestionMarkCircleIcon, label: "一般質問", to: "/questions" },
+  { icon: DocumentIcon, label: "議案・賛否", to: "/bills/votes" },
+  { icon: LandmarkIcon, label: "市長公約", to: "/mayor/policy-progress" },
+  { icon: YenIcon, label: "財政", to: "/finance" },
+  { icon: ChartBarIcon, label: "人口", to: "/compare/population" },
+  { icon: BuildingIcon, label: "選挙", to: "/elections" },
+  { icon: CompassIcon, label: "市役所の相談先", to: "/city-guide" },
 ];
 
 interface CategoryCard {
@@ -171,7 +176,7 @@ const categoryCards: CategoryCard[] = [
       { label: "請願・陳情", to: "/petitions" },
       { label: "延岡市の財政", to: "/finance" },
       { label: "市長公約の進捗", to: "/mayor/policy-progress" },
-      { label: "市政年表", to: "/history" },
+      { label: "市政90年の歴史", to: "/history" },
       { label: "パブリックコメント", to: "/public-comments" },
       { label: "選挙結果", to: "/elections" },
       { label: "市役所どこに行けばいい？診断", to: "/city-guide" },
@@ -290,7 +295,7 @@ export function HomePage() {
           延岡市政を、調べる・探す・比較する
         </h1>
         <p className="mt-3 text-base leading-relaxed text-on-primary-container/80">
-          宮崎県延岡市の市長、市議会議員、議案、一般質問、財政、報酬などの公開情報を、スマートフォンからでも分かりやすく確認できる非公式サイトです。
+          宮崎県延岡市の議会・市長・財政などの公開情報を、スマートフォンで確認しやすく整理した非公式サイトです。
         </p>
         <form onSubmit={handleHeroSearchSubmit} className="mt-4" role="search">
           <label className="flex min-h-11 items-stretch gap-3 rounded-full bg-surface px-4 py-3.5 shadow-e2 transition focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary sm:py-4">
@@ -312,6 +317,25 @@ export function HomePage() {
           </label>
         </form>
       </div>
+
+      {/* よく使われる主要導線（ヒーロー直下・最上部） */}
+      <nav aria-label="よく使われるページへのショートカット" className="mb-5">
+        <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
+          {quickLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`flex min-h-[76px] flex-col items-center justify-center gap-1.5 rounded-xl bg-surface-container-low px-1.5 py-2.5 text-center shadow-e1 transition hover:bg-surface-container ${focusRing}`}
+              >
+                <Icon className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <span className="text-xs font-medium leading-tight text-on-surface">{link.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
 
       {/* 市政を調べる入口：「何のデータがあるか」ではなく「何を知りたいか」から選べるようにする。
           カードを増やさず、5つの入口だけを並べる（索引や大きなデータはここでは読み込まない）。 */}
@@ -335,25 +359,6 @@ export function HomePage() {
             </li>
           ))}
         </ul>
-      </nav>
-
-      {/* よく使われる主要導線（ヒーロー直下・最上部） */}
-      <nav aria-label="よく使われるページへのショートカット" className="mb-5">
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-          {quickLinks.map((link) => {
-            const Icon = link.icon;
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`flex min-h-[76px] flex-col items-center justify-center gap-1.5 rounded-xl bg-surface-container-low px-1.5 py-2.5 text-center shadow-e1 transition hover:bg-surface-container ${focusRing}`}
-              >
-                <Icon className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <span className="text-xs font-medium leading-tight text-on-surface">{link.label}</span>
-              </Link>
-            );
-          })}
-        </div>
       </nav>
 
       {/* ② サイト概要 */}
@@ -485,7 +490,7 @@ export function HomePage() {
             hint={dataCoverage.financeIndicators.scope}
           />
           <StatCard
-            label="サイトの最終更新（ビルド日時）"
+            label="サイトの最終更新"
             value={getLastUpdatedText()}
             compact
             hint="各データの確認日は、それぞれの詳細ページでご確認ください"

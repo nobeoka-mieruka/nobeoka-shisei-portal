@@ -51,6 +51,7 @@ export const SITE_NAV_GROUPS: SiteNavGroup[] = [
       { label: "予算・決算の推移", to: "/finance/budget" },
       { label: "基金", to: "/finance/funds" },
       { label: "市債", to: "/finance/debt" },
+      { label: "人口の推移", to: "/compare/population" },
       { label: "報酬", to: "/compensation" },
     ],
   },
