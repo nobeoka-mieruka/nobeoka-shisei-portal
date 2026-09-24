@@ -25,6 +25,7 @@ import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
 import { GlobeIcon } from "../components/icons";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { questionsForSession } from "../lib/relatedRecords";
 
 const councilSessions = councilSessionsData as CouncilSession[];
 const billVotes = billVotesData as BillVoteItem[];
@@ -292,6 +293,27 @@ export function CouncilSessionDetailPage() {
             </ul>
           </SectionCard>
         ))
+      )}
+
+      {questionsForSession(session.id).length > 0 && (
+        <SectionCard title={`この会期の一般質問（${questionsForSession(session.id).length}件）`}>
+          <p className="mb-2 text-xs leading-relaxed text-on-surface-variant">
+            一般質問データベースに登録済みの、この会期の一般質問です（会期名で対応づけています）。
+          </p>
+          <ul className="space-y-1.5">
+            {questionsForSession(session.id).map((q) => (
+              <li key={q.id} className="rounded-lg border border-outline-variant px-3 py-1.5 text-sm">
+                <Link
+                  to={`/questions/${q.id}`}
+                  className="inline-flex min-h-11 items-center break-words text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  {q.memberName}議員：{q.title}
+                </Link>
+                {q.date && <p className="text-xs text-on-surface-variant">質問日：{formatJapaneseDate(q.date)}</p>}
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
       )}
 
       <SectionCard title="この定例会の議案">

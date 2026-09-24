@@ -51,7 +51,9 @@ import {
   eligibleSessionIdsFor,
 } from "../lib/activityRadar";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { memberTermStatusLabel } from "../lib/citizenStatusLabels";
 
+import { VoteScopeNote } from "../components/bills/VoteScopeNote";
 const profiles = archiveMemberProfilesData as ArchiveMemberProfile[];
 const terms = archiveMemberTermsData as ArchiveMemberTerm[];
 const affiliations = archiveMemberAffiliationsData as ArchiveMemberAffiliation[];
@@ -241,7 +243,7 @@ export function MemberFormerDetailPage() {
                   {formatJapaneseDate(t.termStart)}〜{t.termEnd ? formatJapaneseDate(t.termEnd) : "現在"}
                 </p>
                 <p className="mt-1 text-xs text-on-surface-variant">
-                  選挙区分：{t.constituency ?? "確認中"}／状態：{t.status}
+                  選挙区分：{t.constituency ?? "確認中"}／状態：{memberTermStatusLabel(t.status)}
                 </p>
               </li>
             ))}
@@ -335,6 +337,7 @@ export function MemberFormerDetailPage() {
       </SectionCard>
 
       <SectionCard title="議案賛否履歴">
+        <VoteScopeNote className="mb-3" />
         {disclosedVotes.length === 0 ? (
           <EmptyState message="この元議員について、個人別の議案賛否が公開資料で確認できたものはありません（0件という意味ではなく、公開されている記名投票等の対象に含まれていないためです）。" />
         ) : (

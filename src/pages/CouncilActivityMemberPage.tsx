@@ -38,6 +38,7 @@ import {
   committeeSpeechKindLabel,
 } from "../lib/committees";
 import { formatJapaneseDate } from "../config/site";
+import { VoteScopeNote } from "../components/bills/VoteScopeNote";
 
 const members = membersData as CouncilMember[];
 
@@ -377,6 +378,7 @@ export function CouncilActivityMemberPage() {
       </SectionCard>
 
       <SectionCard title="議案への賛否（個人別に確認できたもの）">
+        <VoteScopeNote className="mb-3" />
         {voteEvidence.disclosedBillCount === 0 ? (
           <p className="text-sm text-on-surface-variant">
             この議員について、個人別の賛否を確認できた議案はまだありません（0件という意味ではありません）。

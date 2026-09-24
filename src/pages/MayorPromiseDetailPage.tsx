@@ -51,6 +51,7 @@ import {
 } from "../lib/mayorPromiseLinkage";
 import { budgetProjectsForPromise } from "../lib/budgetRevisions";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { VoteScopeNote } from "../components/bills/VoteScopeNote";
 
 const CANDIDATE_STATUS_LABEL: Record<PromiseEvidenceStatus, string> = {
   confirmed: "確定",
@@ -717,6 +718,7 @@ export function MayorPromiseDetailPage() {
       )}
 
       <SectionCard title="関連する議案・一般質問・記者会見">
+        {relatedBills.length > 0 && <VoteScopeNote className="mb-3" />}
         {relatedBills.length > 0 || relatedQuestions.length > 0 || relatedPressConferences.length > 0 ? (
           <ul className="space-y-2 text-sm">
             {/* Phase267：公約→議案→議決結果→議員別賛否まで、どこまで公式資料で辿れるかを

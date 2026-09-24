@@ -79,6 +79,7 @@ import { getSeoForPath } from "../lib/seo";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { personSlug } from "../lib/people";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { VoteScopeNote } from "../components/bills/VoteScopeNote";
 
 /** TASK-018：一般質問・議案表決・活動レポートを日付順に統合表示するための年表イベント1件分。 */
 interface MemberTimelineEvent {
@@ -970,6 +971,7 @@ export function MemberDetailPage() {
       <VotingRecordsSection votes={member.votes} />
 
       <SectionCard title="議案・表決履歴">
+        <VoteScopeNote className="mb-3" />
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           延岡市議会の公式資料で、{member.name}議員の個人別表決を確認できた案件を掲載しています。個人別の賛否が公開資料で確認できない案件は含まれません（推測では補いません）。件数は事実の集計であり、議員活動の評価・順位付けを目的としたものではありません。
         </p>

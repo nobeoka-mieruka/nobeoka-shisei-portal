@@ -26,6 +26,8 @@ import {
 import { questionDateLabelPrefix } from "../lib/councilSessionSchedule";
 import { CouncilSessionStatusBadge } from "../components/council/CouncilSessionStatusBadge";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { RelatedRecords } from "../components/RelatedRecords";
+import { relatedLinksForQuestion } from "../lib/relatedRecords";
 
 const questions = generalQuestionsData as GeneralQuestionItem[];
 const members = membersData as CouncilMember[];
@@ -230,6 +232,8 @@ export function GeneralQuestionDetailPage() {
           </div>
         </dl>
       </SectionCard>
+
+      <RelatedRecords links={relatedLinksForQuestion(item.id)} />
 
       <SectionCard title="関連情報">
         {relatedBills.length > 0 || relatedPromises.length > 0 || (item.relatedFinanceItems?.length ?? 0) > 0 ? (

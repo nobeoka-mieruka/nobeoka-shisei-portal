@@ -22,6 +22,8 @@ import {
 import { usePageTitle } from "../hooks/usePageTitle";
 import { formatJapaneseDate } from "../config/site";
 import { getSeoForPath } from "../lib/seo";
+import { RelatedRecords } from "../components/RelatedRecords";
+import { relatedLinksForSpeech } from "../lib/relatedRecords";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -183,6 +185,8 @@ export function MemberSpeechDetailPage() {
           })}
         </ul>
       </SectionCard>
+
+      <RelatedRecords links={relatedLinksForSpeech(speech.id)} />
 
       <SectionCard title="出典・確認状況">
         <ul className="space-y-1.5 text-xs text-on-surface-variant">

@@ -40,6 +40,9 @@ import {
   billTitleFiscalYearNote,
   displayFiscalYearLabel,
 } from "../lib/billFiscalYear";
+import { RelatedRecords } from "../components/RelatedRecords";
+import { relatedLinksForBill } from "../lib/relatedRecords";
+import { VoteScopeNote } from "../components/bills/VoteScopeNote";
 
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
 const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
@@ -634,6 +637,7 @@ export function BillVoteDetailPage() {
 
       {/* 議員別賛否 */}
       <SectionCard title="議員別の賛否">
+        <VoteScopeNote className="mb-3" />
         {bill.memberVoteRecordedDate && bill.memberVoteRecordedDate !== bill.votingDate && (
           <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
             ※上記の議決日（{bill.votingDate && formatJapaneseDate(bill.votingDate)}）は議案の主たる議決日です。以下の議員別の賛否は、
@@ -768,6 +772,13 @@ export function BillVoteDetailPage() {
       )}
 
       {/* 関連情報 */}
+      <RelatedRecords
+        links={relatedLinksForBill(bill.id, (pid) => {
+          const p = mayorPromises.find((x) => x.id === pid);
+          return p ? `公約${p.id}「${p.promiseText.length > 30 ? `${p.promiseText.slice(0, 30)}…` : p.promiseText}」` : `公約${pid}`;
+        })}
+      />
+
       <SectionCard title="関連情報">
         {hasRelated ? (
           <ul className="space-y-2 text-sm">
