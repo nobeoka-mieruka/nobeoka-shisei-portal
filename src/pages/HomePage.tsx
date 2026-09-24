@@ -125,6 +125,15 @@ interface CategoryCard {
   links: { label: string; to: string }[];
 }
 
+/** トップページ「市政を調べる」の入口（5つに限定する）。 */
+const EXPLORE_LINKS: { label: string; hint: string; to: string }[] = [
+  { label: "キーワードで検索", hint: "議案・質問・会議録などをまとめて", to: "/search" },
+  { label: "テーマから見る", hint: "子育て・福祉・防災・財政など", to: "/themes" },
+  { label: "市政の流れを見る", hint: "議会・予算・選挙を時間順に", to: "/timeline" },
+  { label: "議会を見る", hint: "定例会・一般質問・議決結果", to: "/council-documents" },
+  { label: "お金を見る", hint: "予算・決算・基金・市債", to: "/finance" },
+];
+
 const categoryCards: CategoryCard[] = [
   {
     icon: BriefcaseIcon,
@@ -149,7 +158,7 @@ const categoryCards: CategoryCard[] = [
       { label: "議案ごとの賛否", to: "/bills/votes" },
       { label: "委員会", to: "/committees" },
       { label: "定例会・議会資料", to: "/council-documents" },
-      { label: "テーマから探す", to: "/themes" },
+      { label: "テーマから見る", to: "/themes" },
     ],
   },
   {
@@ -303,6 +312,30 @@ export function HomePage() {
           </label>
         </form>
       </div>
+
+      {/* 市政を調べる入口：「何のデータがあるか」ではなく「何を知りたいか」から選べるようにする。
+          カードを増やさず、5つの入口だけを並べる（索引や大きなデータはここでは読み込まない）。 */}
+      <nav aria-labelledby="home-explore-heading" className="mb-5 rounded-2xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <h2 id="home-explore-heading" className="text-base font-semibold text-on-surface">
+          市政を調べる
+        </h2>
+        <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
+          知りたいことから選んでください。議案番号や会期名を知らなくても、キーワードやテーマ、時期からたどれます。
+        </p>
+        <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-5">
+          {EXPLORE_LINKS.map((l) => (
+            <li key={l.to}>
+              <Link
+                to={l.to}
+                className={`flex min-h-11 h-full flex-col justify-center rounded-xl bg-surface px-3 py-2 text-sm font-semibold text-primary shadow-e1 transition hover:bg-surface-container ${focusRing}`}
+              >
+                {l.label}
+                <span className="mt-0.5 text-xs font-normal text-on-surface-variant">{l.hint}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       {/* よく使われる主要導線（ヒーロー直下・最上部） */}
       <nav aria-label="よく使われるページへのショートカット" className="mb-5">
@@ -579,7 +612,7 @@ export function HomePage() {
           className={`flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-4 py-3.5 text-lg font-semibold text-on-surface transition hover:bg-surface-container-high ${focusRing}`}
         >
           <span>
-            議員を詳しく絞り込む
+            議会データを絞り込む（議員を条件で探す）
             <span className="ml-2 text-sm font-normal text-on-surface-variant">（性別・委員会・当選回数等、{members.length}名）</span>
           </span>
           <span aria-hidden className="shrink-0 text-on-surface-variant transition group-open:rotate-180">
