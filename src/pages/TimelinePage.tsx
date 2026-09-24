@@ -46,6 +46,7 @@ import {
 } from "../lib/archiveTimeline";
 import { sortedFiscalYears } from "../lib/archiveFinance";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { CivicEventTimeline } from "../components/timeline/CivicEventTimeline";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -106,18 +107,26 @@ export function TimelinePage() {
       <div className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <div className="flex items-center gap-2">
           <ClockIcon className="h-6 w-6 shrink-0 text-on-primary-container" aria-hidden />
-          <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">延岡市政の年表</h1>
+          <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">市政の流れ・年表</h1>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          市長任期・議員任期・一般質問・議案条例請願陳情・政策・財政（人口・予算・決算・市債・基金等）を、公式資料で確認できた範囲で年度別に一覧表示します。点数化や評価は行っていません。データが少ない年度は「確認できたデータはまだありません」と表示し、0とは区別しています。
+          選挙、市長の就任、議会の開会、一般質問、議案の提出と議決、予算、決算、委員会、行政資料の公開を、公式資料で確認できた範囲で時間の順に並べています。点数化や評価、重要度による選別は行っていません。
         </p>
         {/* Phase240：暦年ではなく年度（4月〜翌年3月）で区切っていることを文字で明示する。
             1〜3月の出来事が「前の年のページ」に出るのは正しい挙動だが、暦年だと思って見ると
             取り違えやすいため。データ側の対応付けは変更していない。 */}
-        <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          この年表は年度単位で表示しています。年度は4月から翌年3月までのため、1月から3月までの出来事は前の年の年度に含まれます。
-        </p>
       </div>
+
+      <CivicEventTimeline />
+
+      <details className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+        <summary className="min-h-11 cursor-pointer py-2 text-base font-semibold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          年度別の記録を見る（市長・議員の任期、財政・人口、政策など）
+        </summary>
+        <div className="mt-3 space-y-4">
+        <p className="text-sm leading-relaxed text-on-surface-variant">
+          この一覧は年度単位で表示しています。年度は4月から翌年3月までのため、1月から3月までの出来事は前の年の年度に含まれます。データが少ない年度は「確認できたデータはまだありません」と表示し、0とは区別しています。
+        </p>
 
       <SectionCard title="カテゴリで絞り込む">
         <div className="flex flex-wrap gap-2" role="group" aria-label="表示するカテゴリの切り替え">
@@ -206,6 +215,8 @@ export function TimelinePage() {
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         各年度の「この年度のタイムラインを見る」からは、この一覧に無い詳細（財政指標の出典・定義等）も含めて確認できます。
       </p>
+        </div>
+      </details>
 
       <LastUpdated className="mt-4" />
     </div>

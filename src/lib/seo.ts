@@ -925,9 +925,9 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
       return makeResult(
         {
           path: "/timeline",
-          pageTitle: "延岡市政の年表",
-          description: "市長任期・年度別財政データを、公式資料で確認できた範囲で年度別に一覧表示します。",
-          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市政の年表" }],
+          pageTitle: "市政の流れ・年表",
+          description: "延岡市の選挙、市長就任、議会の開会、一般質問、議案の提出と議決、予算、決算、委員会、行政資料の公開を、公式資料で確認できた範囲で月ごとに時間順で確認できます。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "市政の流れ・年表" }],
         },
         options,
       );

@@ -15,6 +15,14 @@ import { fiscalYearLabel } from "./archiveFinance";
 import { FINANCE_METRICS } from "./archiveFinanceMetrics";
 import { documentPath, documentTypeLabel } from "./archiveCouncilDocuments";
 
+/** 日付を確認精度どおりに表示する（month は「2006年2月」、year は「2006年」）。架空の日・月を補わない。 */
+export function formatDateAtPrecision(iso: string, precision: "day" | "month" | "year"): string {
+  const [y, m] = iso.split("-");
+  if (precision === "year" || !m) return `${Number(y)}年`;
+  if (precision === "month") return `${Number(y)}年${Number(m)}月`;
+  return formatJapaneseDate(iso);
+}
+
 /** 会計年度は4月始まり。1〜3月は前年度扱いにする（config/site.tsのtoFiscalYearLabelと同じ定義）。 */
 export function fiscalYearOfIsoDate(iso: string): number {
   const [year, month] = iso.split("-").map(Number);
@@ -49,11 +57,14 @@ export function buildMayorTermEvents(mayors: ArchiveMayor[], terms: ArchiveMayor
     if (!mayor) continue;
     const relatedPath = `/mayors/${mayor.slug}`;
 
+    // 任期開始日が月までしか確認できていない任期（termStartPrecision: "month"）に、架空の日を付けない。
+    // その場合 date は null とし、表示は「2006年2月」のように年月だけにする。
+    const startPrecision = term.termStartPrecision ?? "day";
     events.push({
       id: `${term.id}-start`,
       category: "mayorTerm",
-      date: term.termStart,
-      dateLabel: formatJapaneseDate(term.termStart),
+      date: startPrecision === "day" ? term.termStart : null,
+      dateLabel: formatDateAtPrecision(term.termStart, startPrecision),
       fiscalYear: fiscalYearOfIsoDate(term.termStart),
       title: `${mayor.name}氏が市長に就任`,
       description: term.termNumber != null ? `${term.termNumber}期目` : undefined,
@@ -62,11 +73,12 @@ export function buildMayorTermEvents(mayors: ArchiveMayor[], terms: ArchiveMayor
     });
 
     if (term.termEnd) {
+      const endPrecision = term.termEndPrecision ?? "day";
       events.push({
         id: `${term.id}-end`,
         category: "mayorTerm",
-        date: term.termEnd,
-        dateLabel: formatJapaneseDate(term.termEnd),
+        date: endPrecision === "day" ? term.termEnd : null,
+        dateLabel: formatDateAtPrecision(term.termEnd, endPrecision),
         fiscalYear: fiscalYearOfIsoDate(term.termEnd),
         title: `${mayor.name}氏が市長を退任`,
         relatedPath,
