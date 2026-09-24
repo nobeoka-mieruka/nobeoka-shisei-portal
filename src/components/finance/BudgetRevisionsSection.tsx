@@ -224,7 +224,7 @@ function ProjectCard({ p, revision, account }: { p: BudgetRevisionProject; revis
       <p className="text-sm font-semibold text-on-surface">
         {p.name}
         {p.isNew && (
-          <span className="ml-2 inline-block rounded bg-primary-container px-1.5 py-0.5 text-[11px] font-medium text-on-primary-container">
+          <span className="ml-2 inline-block rounded bg-primary-container px-1.5 py-0.5 text-xs font-medium text-on-primary-container">
             新規事業
           </span>
         )}
@@ -235,7 +235,7 @@ function ProjectCard({ p, revision, account }: { p: BudgetRevisionProject; revis
       {p.policyCategoryIds.length > 0 && (
         <ul className="mt-1.5 flex flex-wrap gap-1.5" aria-label="分野">
           {p.policyCategoryIds.map((c) => (
-            <li key={c} className="rounded-full bg-surface-container-high px-2 py-0.5 text-[11px] text-on-surface-variant">
+            <li key={c} className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
               {policyCategoryLabel(c)}
             </li>
           ))}

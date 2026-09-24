@@ -88,7 +88,7 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
                   <td className="py-3 pr-3 font-medium text-on-surface">
                     {m.municipality}
                     {isNobeoka && (
-                      <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-on-primary">
+                      <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-on-primary">
                         当市
                       </span>
                     )}
@@ -135,7 +135,7 @@ export function MiyazakiComparisonTable({ municipalities }: MiyazakiComparisonTa
               <p className="font-semibold text-on-surface">
                 {m.municipality}
                 {isNobeoka && (
-                  <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-on-primary">
+                  <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-on-primary">
                     当市
                   </span>
                 )}

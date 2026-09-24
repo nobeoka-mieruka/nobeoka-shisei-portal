@@ -424,18 +424,18 @@ export function BillVoteDetailPage() {
               確認状況：{BILL_EXPLANATION_LEVEL_LABEL[explanationLevel]}
             </span>
           </div>
-          <p className="text-[11px] text-on-surface-variant">{BILL_EXPLANATION_LEVEL_DESCRIPTION[explanationLevel]}</p>
+          <p className="text-xs text-on-surface-variant">{BILL_EXPLANATION_LEVEL_DESCRIPTION[explanationLevel]}</p>
 
           {/* Phase141項目17・18／Phase142：定型説明（Level0・1）は「機械的に組み立てた説明」である旨を、
               独自要約（Level3、summarySource: "manual"）は「一次資料をもとにしたこのサイトによる要約」で
               あり公式の要約ではない旨を、それぞれ正しく区別して明示する。公式資料そのものと
               誤認されないようにするため。 */}
           {isManualSummary ? (
-            <p className="text-[11px] text-on-surface-variant">
+            <p className="text-xs text-on-surface-variant">
               ※この説明は、会議録等の一次資料本文をもとに、当サイトが市民向けに整理したものです（延岡市議会が公式に作成した要約ではありません）。詳しい内容は下記の根拠資料（会議録・PDF等）でご確認ください。
             </p>
           ) : (
-            <p className="text-[11px] text-on-surface-variant">
+            <p className="text-xs text-on-surface-variant">
               ※この概要は、議案名・提出者・議決結果などから当サイトが機械的に組み立てた説明です。延岡市議会が公式に作成した要約ではありません。詳しい内容は下記の出典PDF（原資料）でご確認ください。
             </p>
           )}
@@ -446,7 +446,7 @@ export function BillVoteDetailPage() {
           {explainability && (
             <div className="rounded-xl bg-surface-container-high p-3">
               <p className="text-xs font-semibold text-on-surface">{explainability.citizenLabel}</p>
-              <p className="mt-1 text-[11px] leading-relaxed text-on-surface-variant">{explainability.citizenDescription}</p>
+              <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{explainability.citizenDescription}</p>
             </div>
           )}
 
@@ -458,7 +458,7 @@ export function BillVoteDetailPage() {
               <blockquote className="mt-1 border-l-4 border-outline-variant pl-3 text-sm leading-relaxed text-on-surface">
                 {bill.sharedProposalStatement.quote}
               </blockquote>
-              <p className="mt-1 text-[11px] text-on-surface-variant">
+              <p className="mt-1 text-xs text-on-surface-variant">
                 出典：延岡市議会 会議録（{bill.sharedProposalStatement.sourceFileName}）／確認日：
                 {bill.sharedProposalStatement.verifiedAt}
               </p>

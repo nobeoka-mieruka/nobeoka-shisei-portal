@@ -568,11 +568,11 @@ export function MayorPromiseDetailPage() {
                       {doc.page && `（${doc.page}）`}
                     </span>
                     {pdf && (
-                      <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant">
+                      <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-medium text-on-surface-variant">
                         PDF
                       </span>
                     )}
-                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant">
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-medium text-on-surface-variant">
                       {humanizeDataNote(doc.sourceType)}
                     </span>
                   </a>
@@ -819,7 +819,7 @@ export function MayorPromiseDetailPage() {
                       {formatJapaneseDate(entry.date)}
                     </time>
                     <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                      className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                         entry.kind === "baseline"
                           ? "bg-surface-container-high text-on-surface-variant"
                           : "bg-primary-container text-on-primary-container"

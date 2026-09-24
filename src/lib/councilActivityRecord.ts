@@ -43,7 +43,7 @@ export type ActivityRecordAvailability =
  * 同じ状態を画面によって別の言葉で呼ばない。
  *
  * 「0」を使うのは、一次資料を確認した結果、該当する記録が0件だったときだけ。
- * 未確認・未公開・個人単位算定不可・対象外は、いずれも0とは別の状態として示す。
+ * 未確認・未公開・個人単位で確認不可・対象外は、いずれも0とは別の状態として示す。
  */
 export const ACTIVITY_AVAILABILITY_LABELS_JA: Record<ActivityRecordAvailability, string> = {
   available: "確認済み",
@@ -51,7 +51,7 @@ export const ACTIVITY_AVAILABILITY_LABELS_JA: Record<ActivityRecordAvailability,
   "confirmed-zero": "0件（資料を確認済み）",
   "not-acquired": "未確認",
   "not-published": "未公開",
-  "not-individually-attributable": "個人単位算定不可",
+  "not-individually-attributable": "個人単位で確認不可",
   "not-applicable": "対象外",
 };
 

@@ -1096,9 +1096,9 @@ export function DataStatusPage() {
       note: `常任委員会${committeeCountByType("常任委員会")}件は延岡市議会委員会条例の個別列挙、議会運営委員会${committeeCountByType("議会運営委員会")}件は地方自治法第109条第3項の一般規定、特別委員会${committeeCountByType("特別委員会")}件は設置時の提案理由により、所管事項をそれぞれ確認済み（${committeesWithJurisdiction}／${committees.length}件）`,
     },
     {
-      label: "財政：年度レコードの登録（この軸で調査に着手した年度）",
+      label: "財政：年度ごとの記録の登録（この軸で調査に着手した年度）",
       metric: simpleCompleteness(fiscalYearsWithBudget, archiveFiscalYears.length),
-      note: "この行は「年度レコードが存在するか」のみを示し、以下の項目別の行が実際の数値の有無を示します。",
+      note: "この行は「その年度の記録があるか」だけを示し、以下の項目別の行が実際の数値の有無を示します。",
     },
     {
       label: "財政：歳入総額（決算ベース）の年度確認",
@@ -1296,9 +1296,9 @@ export function DataStatusPage() {
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
-            <dt className="font-medium text-on-surface">未確認項目UNR-… ／ 照会事項INQ-… ／ 調査タスクTASK-…</dt>
+            <dt className="font-medium text-on-surface">未確認項目UNR-… ／ 照会事項INQ-…</dt>
             <dd className="mt-0.5">
-              いずれも当サイトの作業記録に付けた通し番号です。UNRは「まだ確認できていない点」、INQは「議会事務局等へ確認する候補」、TASKは「当サイトの作業単位」を指します。市民の方が参照できる公的な文書番号ではありません。
+              いずれも当サイトの作業記録に付けた通し番号です。UNRは「まだ確認できていない点」、INQは「議会事務局等へ確認する候補」を指します。市民の方が参照できる公的な文書番号ではありません。
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-low p-3">
@@ -2152,7 +2152,7 @@ export function DataStatusPage() {
       </SectionCard>
 
       <p className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
-        「収録件数」は登録済みレコード数の事実集計であり、実際に存在するはずの全件数（分母）を当サイトが把握しているとは限りません。歴代市長の任期空白（{mayorGapCount}件）のように、収録済みの範囲内でも未確認の期間・項目があることを明示しています。0件と「未収録・未確認」は区別して表示しています。
+        「収録件数」は登録済みの記録の件数を数えたものであり、実際に存在するはずの全件数（分母）を当サイトが把握しているとは限りません。歴代市長の任期空白（{mayorGapCount}件）のように、収録済みの範囲内でも未確認の期間・項目があることを明示しています。0件と「未収録・未確認」は区別して表示しています。
       </p>
 
       {/*

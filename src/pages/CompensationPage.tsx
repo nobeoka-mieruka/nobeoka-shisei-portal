@@ -159,7 +159,7 @@ export function CompensationPage() {
                   </div>
                 </dl>
                 {!e.educationSuperintendentMonthly && (
-                  <p className="mt-1.5 text-[11px] leading-snug text-on-surface-variant">
+                  <p className="mt-1.5 text-xs leading-snug text-on-surface-variant">
                     理由：教育長の給料月額が公式資料の該当表に掲載されていない、または確認できていないため
                   </p>
                 )}
@@ -311,7 +311,7 @@ export function CompensationPage() {
                     </p>
                   )}
                   {!hasRank && (
-                    <p className="mt-1 text-[11px] leading-snug text-on-surface-variant">
+                    <p className="mt-1 text-xs leading-snug text-on-surface-variant">
                       理由：個別団体すべての月額データを確認できていないため
                     </p>
                   )}
@@ -325,7 +325,7 @@ export function CompensationPage() {
                       >
                         <div className="h-2 rounded-full bg-primary" style={{ width: `${position}%` }} />
                       </div>
-                      <div className="mt-1 flex flex-wrap justify-between gap-x-2 text-[10px] leading-tight text-on-surface-variant">
+                      <div className="mt-1 flex flex-wrap justify-between gap-x-2 text-xs leading-tight text-on-surface-variant">
                         <span>最低 {formatYen(entry!.min as number)}</span>
                         <span>延岡市 {formatYen(nobeokaAmount)}</span>
                         <span>最高 {formatYen(entry!.max as number)}</span>

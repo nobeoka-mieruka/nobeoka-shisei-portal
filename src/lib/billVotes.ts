@@ -42,7 +42,7 @@ export const verificationStatusLabels: Record<BillVerificationStatus, string> = 
   verified: "確認済み",
   "partially-verified": "一部確認済み",
   pending: "確認待ち",
-  "individual-votes-unavailable": "個人別表決未確認",
+  "individual-votes-unavailable": "個人単位で確認不可",
 };
 
 /**

@@ -53,7 +53,7 @@ export function SiteHeader() {
               className="h-auto w-[160px] max-w-full shrink-0 rounded-md bg-white object-contain px-1.5 py-1 sm:w-[clamp(200px,38vw,400px)] sm:px-2 sm:py-1.5"
             />
           </Link>
-          <span className="shrink-0 rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant sm:px-2.5 sm:text-xs">
+          <span className="shrink-0 rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-medium text-on-surface-variant sm:px-2.5 sm:text-xs">
             非公式
           </span>
         </div>

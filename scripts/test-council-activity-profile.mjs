@@ -63,9 +63,9 @@ check("欠損軸を0として描かない（頂点を中心へ落とさない）
   assert.match(chartSrc, /\{polygon && \(/, "ポリゴンを無条件に描いています");
 });
 
-check("0・未確認・未公開・個人単位算定不可・対象外を別の記号と言葉で示す", () => {
+check("0・未確認・未公開・個人単位で確認不可・対象外を別の記号と言葉で示す", () => {
   // 凡例の言葉。
-  for (const word of ["数値あり", "0（資料を確認した結果、該当なし）", "未確認", "未公開", "個人単位算定不可", "対象外"]) {
+  for (const word of ["数値あり", "0（資料を確認した結果、該当なし）", "未確認", "未公開", "個人単位で確認不可", "対象外"]) {
     assert.ok(chartSrc.includes(word), `凡例の説明「${word}」がありません`);
   }
   // 状態コードごとに記号が割り当てられていること（色だけに頼らない）。
@@ -81,7 +81,7 @@ check("0・未確認・未公開・個人単位算定不可・対象外を別の
     "NOT_APPLICABLE",
   ];
   for (const code of codes) assert.ok(symbolOf(code), `記号の対応表に ${code} がありません`);
-  // 0、未確認、未公開、個人単位算定不可、対象外は、それぞれ別の記号であること。
+  // 0、未確認、未公開、個人単位で確認不可、対象外は、それぞれ別の記号であること。
   const zero = (profileSrc.match(/AXIS_ZERO_SYMBOL = "([^"]+)"/) ?? [])[1];
   const distinct = [zero, ...["CONFIRMED", "NOT_ACQUIRED", "SOURCE_NOT_PUBLISHED", "NOT_INDIVIDUALLY_ATTRIBUTABLE", "NOT_APPLICABLE", "CONDITIONAL"].map(symbolOf)];
   assert.equal(new Set(distinct).size, distinct.length, `状態の記号が重複しています: ${distinct.join(" ")}`);

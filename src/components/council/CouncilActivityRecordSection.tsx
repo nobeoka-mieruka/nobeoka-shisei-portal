@@ -78,7 +78,7 @@ function ItemLink({ url, label }: { url?: string; label?: string }) {
 /** 一次資料の書誌情報。分かっている項目だけを出す。 */
 function ItemSource({ source, url }: { source: NonNullable<ActivityRecordListItem["source"]>; url?: string }) {
   return (
-    <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5 rounded-md bg-surface px-2.5 py-1.5 text-[11px] leading-relaxed text-on-surface-variant">
+    <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5 rounded-md bg-surface px-2.5 py-1.5 text-xs leading-relaxed text-on-surface-variant">
       <dt className="font-medium">資料名</dt>
       <dd className="min-w-0 break-words">{source.title}</dd>
       <dt className="font-medium">発行</dt>
@@ -113,7 +113,7 @@ function ItemSource({ source, url }: { source: NonNullable<ActivityRecordListIte
 
 function AvailabilityChip({ availability }: { availability: ActivityRecordAvailability }) {
   return (
-    <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${AVAILABILITY_CLASS[availability]}`}>
+    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${AVAILABILITY_CLASS[availability]}`}>
       {AVAILABILITY_LABEL[availability]}
     </span>
   );
@@ -340,7 +340,7 @@ export function CouncilActivityRecordSection({
       </p>
       <details className="mt-2 rounded-lg border border-outline-variant px-3 py-1 text-xs leading-relaxed text-on-surface-variant">
         <summary className={`flex min-h-11 cursor-pointer items-center font-medium text-on-surface ${linkClass}`}>
-          表示の見方（0・未確認・未公開・個人単位算定不可・対象外）
+          表示の見方（0・未確認・未公開・個人単位で確認不可・対象外）
         </summary>
         <dl className="mb-2 space-y-1">
           {ACTIVITY_AVAILABILITY_DESCRIPTIONS_JA.map((d) => (

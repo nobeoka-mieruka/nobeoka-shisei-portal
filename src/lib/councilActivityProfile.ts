@@ -56,7 +56,7 @@ export type AxisStatus =
 export const AXIS_STATUS_LABELS_JA: Record<AxisStatus, string> = {
   CONFIRMED: "算定済み",
   CONDITIONAL: "割合にしていません（記録は一覧で表示）",
-  NOT_INDIVIDUALLY_ATTRIBUTABLE: "個人単位算定不可",
+  NOT_INDIVIDUALLY_ATTRIBUTABLE: "個人単位で確認不可",
   NOT_ACQUIRED: "未確認（一次資料を取り込めていません）",
   SOURCE_NOT_PUBLISHED: "未公開（公式資料が公表されていません）",
   RESEARCH_EXHAUSTED: "未確認（調べましたが確認できていません）",

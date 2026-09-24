@@ -453,7 +453,7 @@ export function DashboardPage() {
             <BarList items={pledgeStatusItems} unit="件" />
           </div>
         )}
-        <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           進捗状況は、市長本人の公表資料・延岡市の公開資料に基づく分類であり、当サイト独自の達成率評価ではありません。
         </p>
         {/* Phase197：単独で置かれた導線リンクは文章の一部ではないため、
@@ -556,7 +556,7 @@ export function DashboardPage() {
               </li>
             )}
           </ul>
-          <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+          <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
             会議録・議案審議結果として当サイトが確認できたもののうち、最も新しい日付のものです（発生順ではなく確認・登録順の場合があります）。
           </p>
         </SectionCard>
@@ -678,7 +678,7 @@ export function DashboardPage() {
             compact
           />
         </div>
-        <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
+        <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
           出生数・死亡数・転入者数・転出者数は、人口の出典としている延岡市「現住人口及び世帯数の推移」に月ごとの記載がありますが、当サイトではまだ取り込んでいません（未収録であって、0件という意味ではありません）。高齢化率は、当サイトが確認できた公式資料に該当する数値が見つかっていません。いずれも確認でき次第、追加します。
         </p>
       </SectionCard>
@@ -778,7 +778,7 @@ export function DashboardPage() {
         {questionRankingItems.length > 0 ? (
           <>
             <BarList items={questionRankingItems} unit="件" />
-            <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+            <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
               件数は会議録で確認できた一般質問の集計であり、議員の能力・評価を示すものではありません。
             </p>
           </>

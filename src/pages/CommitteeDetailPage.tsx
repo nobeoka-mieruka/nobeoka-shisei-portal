@@ -275,7 +275,7 @@ export function CommitteeDetailPage() {
                           <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
                             <p className="text-xs text-on-surface-variant">
                               {(bill.category === "請願" || bill.category === "陳情") && (
-                                <span className="mr-1.5 rounded bg-secondary-container px-1.5 py-0.5 text-[11px] font-semibold text-on-secondary-container">
+                                <span className="mr-1.5 rounded bg-secondary-container px-1.5 py-0.5 text-xs font-semibold text-on-secondary-container">
                                   {bill.category}
                                 </span>
                               )}

@@ -44,7 +44,7 @@ export function PersonTimeline({ events }: { events: TimelineEvent[] }) {
             <div className="flex flex-wrap items-center gap-1.5">
               <time className="text-xs font-medium text-on-surface-variant">{e.displayDate}</time>
               <span
-                className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${EVENT_TYPE_BADGE_CLASS[e.eventType] ?? "bg-surface-container-high text-on-surface-variant"}`}
+                className={`rounded-full px-2 py-0.5 text-xs font-semibold ${EVENT_TYPE_BADGE_CLASS[e.eventType] ?? "bg-surface-container-high text-on-surface-variant"}`}
               >
                 {TIMELINE_EVENT_TYPE_LABELS[e.eventType]}
               </span>

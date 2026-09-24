@@ -332,7 +332,9 @@ export function humanizeDataNote(text?: string | null): string | undefined {
   // 3) 整理番号（内部台帳の番号。何の番号かが分かるよう日本語の見出しを付ける）
   out = out.replace(/UNR-(\d+)/g, "未確認項目UNR-$1");
   out = out.replace(/INQ-(\d+)/g, "照会事項INQ-$1");
-  out = out.replace(/TASK-(\d+)/g, "調査タスクTASK-$1");
+  // 当サイトの作業単位の番号（TASK-…）は市民が辿れる資料ではないため、Phaseと同じく番号を外す。
+  out = out.replace(/[（(]\s*TASK-\d+\s*[)）]/g, "");
+  out = out.replace(/TASK-\d+/g, "当サイトの調査作業");
   out = out.replace(/disputed-(\d+)/g, "要再確認項目$1");
   out = out.replace(/acl-chair-(\d+)/g, "第$1代");
   // データ側の実際のIDは `acl-vicechair-51`（ハイフン2つ）。旧表記も残しておく。

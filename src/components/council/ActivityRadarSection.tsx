@@ -40,7 +40,7 @@ function MetricCard({ metric }: { metric: RadarMetric }) {
                 ? `${metric.rawValue.toLocaleString("ja-JP")}件`
                 : "―"}
           </span>
-          <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${DATA_STATUS_BADGE_CLASS[metric.dataStatus]}`}>
+          <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${DATA_STATUS_BADGE_CLASS[metric.dataStatus]}`}>
             {DATA_STATUS_LABEL[metric.dataStatus]}
           </span>
         </span>

@@ -155,7 +155,7 @@ export function ExecutiveAnswersPage() {
                       質問議員：{memberName}／質問「{e.questionTitle}」
                     </p>
                     <p className="mt-1.5 text-sm leading-relaxed text-on-surface">{e.summary}</p>
-                    <p className="mt-1 text-[11px] text-on-surface-variant">この要約はAIを利用して作成しています。正確な内容は会議録原文をご確認ください。</p>
+                    <p className="mt-1 text-xs text-on-surface-variant">この要約はAIを利用して作成しています。正確な内容は会議録原文をご確認ください。</p>
                     {e.topics.length > 0 && (
                       <div className="mt-1.5 flex flex-wrap gap-1">
                         {e.topics.map((t) => (

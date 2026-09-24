@@ -155,7 +155,7 @@ export function PromiseCard({ promise, documents, hasCompletedMeasure = false }:
                     {doc.label}
                     {doc.page && `（${doc.page}）`}
                   </span>
-                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] font-medium text-on-surface-variant">
+                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-medium text-on-surface-variant">
                     {humanizeDataNote(doc.sourceType)}
                   </span>
                 </a>

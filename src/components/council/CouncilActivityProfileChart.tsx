@@ -23,7 +23,7 @@ const LEGEND = [
   { symbol: AXIS_ZERO_SYMBOL, label: "0（資料を確認した結果、該当なし）" },
   { symbol: AXIS_STATUS_SYMBOLS.NOT_ACQUIRED, label: "未確認（当サイトが取り込めていない）" },
   { symbol: AXIS_STATUS_SYMBOLS.SOURCE_NOT_PUBLISHED, label: "未公開（必要な一次資料が公開されていない）" },
-  { symbol: AXIS_STATUS_SYMBOLS.NOT_INDIVIDUALLY_ATTRIBUTABLE, label: "個人単位算定不可" },
+  { symbol: AXIS_STATUS_SYMBOLS.NOT_INDIVIDUALLY_ATTRIBUTABLE, label: "個人単位で確認不可" },
   { symbol: AXIS_STATUS_SYMBOLS.NOT_APPLICABLE, label: "対象外（制度上当てはまらない）" },
   { symbol: AXIS_STATUS_SYMBOLS.CONDITIONAL, label: "割合にしていない軸（記録は一覧で表示）" },
 ] as const;

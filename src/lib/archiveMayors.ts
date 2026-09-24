@@ -8,9 +8,9 @@ export function archiveVerificationStatusLabel(status: ArchiveVerificationStatus
     case "partiallyVerified":
       return "一部確認済み";
     case "needsReview":
-      return "要確認";
+      return "確認中";
     case "sourceUnavailable":
-      return "出典資料未確認";
+      return "出典資料は確認中";
   }
 }
 

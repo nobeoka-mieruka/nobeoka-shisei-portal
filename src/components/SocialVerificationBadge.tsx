@@ -7,7 +7,7 @@ export function SocialVerificationBadge({ status }: { status?: SocialVerificatio
 
   return (
     <span
-      className={`inline-flex max-w-full items-center rounded-full px-2 py-0.5 text-[11px] font-medium leading-snug ${meta.className}`}
+      className={`inline-flex max-w-full items-center rounded-full px-2 py-0.5 text-xs font-medium leading-snug ${meta.className}`}
     >
       {meta.label}
     </span>

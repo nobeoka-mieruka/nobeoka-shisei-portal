@@ -416,7 +416,7 @@ export function GeneralQuestionsPage() {
                 ))}
               </ul>
               {latestConfirmedSession && (
-                <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+                <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
                   議案等審議結果などの公式資料を確認できている直近の会期は「{latestConfirmedSession.title}」です。会議録本文が公開され次第、下の「確認済み」側へ移します。
                 </p>
               )}

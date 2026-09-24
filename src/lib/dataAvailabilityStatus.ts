@@ -20,7 +20,7 @@ export type DataAvailabilityStatus = "confirmed" | "not_collected" | "under_revi
 export const DATA_AVAILABILITY_STATUS_LABELS: Record<DataAvailabilityStatus, string> = {
   confirmed: "確認済み",
   not_collected: "未収録",
-  under_review: "未確認",
+  under_review: "確認中",
   unavailable: "非公開・不存在",
   unknown: "調査中",
 };

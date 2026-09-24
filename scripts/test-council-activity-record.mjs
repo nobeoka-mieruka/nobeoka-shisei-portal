@@ -152,7 +152,7 @@ check("未取得・未公表・個人帰属不能の状態が語彙として用�
   assert.match(src, /"confirmed-zero": "0件（資料を確認済み）"/);
   assert.match(src, /"not-acquired": "未確認"/);
   assert.match(src, /"not-published": "未公開"/);
-  assert.match(src, /"not-individually-attributable": "個人単位算定不可"/);
+  assert.match(src, /"not-individually-attributable": "個人単位で確認不可"/);
   assert.match(src, /"not-applicable": "対象外"/);
   const ui = readSrc("src/components/council/CouncilActivityRecordSection.tsx");
   assert.match(ui, /ACTIVITY_AVAILABILITY_LABELS_JA/, "個人ページが共通のラベル表を使っていません");

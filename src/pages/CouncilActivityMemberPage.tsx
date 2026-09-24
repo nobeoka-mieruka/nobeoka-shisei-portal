@@ -242,7 +242,7 @@ export function CouncilActivityMemberPage() {
         ) : (
           <p className="text-sm text-on-surface-variant">現在、確認できる活動データがまだ十分にそろっていません。</p>
         )}
-        <p className="mt-2 text-[11px] leading-relaxed text-on-surface-variant">
+        <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
           請願・提案等の件数は、本会議での決議提出者として会議録で確認できた件数に限ります（条例案・請願・意見書等の提出者は含みません）。
         </p>
       </SectionCard>
@@ -312,7 +312,7 @@ export function CouncilActivityMemberPage() {
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">
               登壇回数
-              <span className="ml-1 text-[11px]">（本会議で一般質問・代表質問等のために発言した回数）</span>
+              <span className="ml-1 text-xs">（本会議で一般質問・代表質問等のために発言した回数）</span>
             </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {questionNotApplicable ? "対象外" : `${evidence.appearanceCount}回`}
@@ -321,7 +321,7 @@ export function CouncilActivityMemberPage() {
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">
               質問項目数
-              <span className="ml-1 text-[11px]">（全登壇を通じた個別質問項目の合計）</span>
+              <span className="ml-1 text-xs">（全登壇を通じた個別質問項目の合計）</span>
             </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {questionNotApplicable ? "対象外" : `${evidence.questionItemCount}件`}
@@ -330,7 +330,7 @@ export function CouncilActivityMemberPage() {
           <div className="rounded-lg bg-surface-container-high p-3">
             <dt className="text-xs text-on-surface-variant">
               会期別実施状況
-              <span className="ml-1 text-[11px]">（一般質問を行ったことが確認できた会期）</span>
+              <span className="ml-1 text-xs">（一般質問を行ったことが確認できた会期）</span>
             </dt>
             <dd className="mt-0.5 text-lg font-semibold text-on-surface">
               {questionNotApplicable

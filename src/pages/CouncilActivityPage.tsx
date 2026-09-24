@@ -757,7 +757,7 @@ export function CouncilActivityPage() {
           </div>
           <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
             「0件（資料を確認済み）」は一次資料を確認したうえで0件だったものです。「未確認」は当サイトがまだ取り込めていないもの、
-            「未公開」は必要な一次資料が公開されていないもの、「個人単位算定不可」は誰の行為か分かる形で公開されていないもの、
+            「未公開」は必要な一次資料が公開されていないもの、「個人単位で確認不可」は誰の行為か分かる形で公開されていないもの、
             「対象外」は制度上その議員に当てはまらない項目です。この4つは0件とは異なります。
           </p>
           <div className="mt-3 flex flex-wrap gap-3">

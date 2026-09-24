@@ -17,7 +17,8 @@ if (!existsSync(dist)) {
   process.exit(1);
 }
 
-const CODES = /\b(CONFIRMED|UNCONFIRMED|SOURCE_NOT_PUBLISHED|WAITING_OFFICIAL_SOURCE|NOT_INDIVIDUALLY_ATTRIBUTABLE|RESEARCH_EXHAUSTED|NEEDS_REVIEW|needsReview|termCompleted)\b|状態：(elected|resigned|unknown)/g;
+// 2026-09-24：小文字の内部区分（confirmed_zero 等）と、当サイトの作業番号（TASK-…）も対象に加えた。
+const CODES = /\b(CONFIRMED|UNCONFIRMED|SOURCE_NOT_PUBLISHED|WAITING_OFFICIAL_SOURCE|NOT_INDIVIDUALLY_ATTRIBUTABLE|RESEARCH_EXHAUSTED|NEEDS_REVIEW|needsReview|termCompleted|confirmed_zero|not_collected|not_applicable|under_review|TASK-\d+)\b|状態：(elected|resigned|unknown)/g;
 
 function* htmlFiles(dir) {
   for (const name of readdirSync(dir)) {

@@ -317,7 +317,7 @@ export function MethodologyCouncilActivityPage() {
                 <p className="text-sm font-semibold text-on-surface">
                   {axis.order}. {axis.label}
                 </p>
-                <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[11px] text-on-surface-variant">
+                <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
                   {axis.measurement ? "割合を算定する軸" : AXIS_STATUS_LABELS_JA[axis.status]}
                 </span>
               </div>
@@ -504,12 +504,12 @@ export function MethodologyCouncilActivityPage() {
           本サイトでは、次の状態を明確に区別しています。0件（該当する活動が確認された結果として本当に0件）を、資料が無いために評価できない「対象外」と混同して表示することはありません。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-          内部的には「算定可能（complete、下表の実数はこの状態で0件だった場合も含む＝confirmed_zero）」「一部データのみ（partial）」「対象記録なし（missing、一次資料未収録＝not_collected／資料非公開＝unavailable／指標対象外＝not_applicable などが含まれます）」の3区分で管理しており、missing系の詳細な内訳は各指標の「欠損データの扱い」欄で個別に説明しています。
+          大きくは「算定可能（資料を確認した結果の0件を含む）」「一部データのみ」「対象記録なし（一次資料が未収録・資料が非公開・指標の対象外などを含む）」の3つに分けており、「対象記録なし」の内訳は各指標の「欠損データの扱い」欄で個別に説明しています。
         </p>
         <ul className="mt-2 grid grid-cols-1 gap-1.5 text-xs text-on-surface-variant sm:grid-cols-2">
           {Object.entries(DATA_STATUS_JA).map(([key, label]) => (
             <li key={key} className="rounded-lg bg-surface-container-high px-2.5 py-1.5">
-              <span className="font-mono text-[10px] text-on-surface-variant">{key}</span>：{label}
+              {label}
             </li>
           ))}
         </ul>
@@ -563,7 +563,7 @@ export function MethodologyCouncilActivityPage() {
             <li key={axis.indicatorId} className="rounded-lg border border-outline-variant p-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-sm font-semibold text-on-surface">{axis.label}</p>
-                <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[11px] text-on-surface-variant">
+                <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
                   算定用の記号（algorithm ID）：{axis.indicatorId}
                 </span>
               </div>
@@ -636,7 +636,7 @@ export function MethodologyCouncilActivityPage() {
           <div className="rounded-lg bg-surface-container-high px-3 py-2">
             <dt className="font-medium text-on-surface">提出者件数（決議）</dt>
             <dd>
-              本会議での決議（決議案）の提出者として会議録で確認できた件数です。延岡市議会全体の議員提出決議は計8件あり、うち7件は提出者を特定できましたが、1件（2021年6月定例会）は会議録から個人名を確認できませんでした。条例案・請願・意見書等の提出者、請願・陳情の紹介議員は対象に含みません（別途「紹介議員件数」として「確認中」と表示しています）。0件はこの決議8件の範囲で提出者として確認できなかったことを示す確定値（confirmed_zero）であり、活動が無いという意味ではありません。
+              本会議での決議（決議案）の提出者として会議録で確認できた件数です。延岡市議会全体の議員提出決議は計8件あり、うち7件は提出者を特定できましたが、1件（2021年6月定例会）は会議録から個人名を確認できませんでした。条例案・請願・意見書等の提出者、請願・陳情の紹介議員は対象に含みません（別途「紹介議員件数」として「確認中」と表示しています）。0件はこの決議8件の範囲で提出者として確認できなかったことを示す確定値（確認済みの0件）であり、活動が無いという意味ではありません。
             </dd>
           </div>
           <div className="rounded-lg bg-surface-container-high px-3 py-2">

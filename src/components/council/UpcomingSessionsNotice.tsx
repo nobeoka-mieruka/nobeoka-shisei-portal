@@ -76,7 +76,7 @@ export function UpcomingSessionsNotice({
           );
         })}
       </ul>
-      <p className="mt-3 text-[11px] leading-relaxed text-on-surface-variant">
+      <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
         この会期は、公式資料を確認できている「{LATEST_CONFIRMED_SESSION_HEADING}」には含みません。予定日・質問項目は質問通告書の提出時点の内容であり、実際の発言内容とは異なる場合があります。
       </p>
       {showQuestionsLink && (
