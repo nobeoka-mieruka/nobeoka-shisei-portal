@@ -77,11 +77,20 @@ const CATEGORY_META: Record<ArchiveTimelineEventCategory, { label: string; icon:
 
 const ALL_CATEGORIES = Object.keys(CATEGORY_META) as ArchiveTimelineEventCategory[];
 
+/** 年度ページへのリンク一覧用（絞り込みに関係なく、記録のある全年度）。 */
+const ALL_FISCAL_YEARS = groupEventsByFiscalYear(timelineEvents).map((g) => ({
+  fiscalYear: g.fiscalYear,
+  count: g.events.length,
+}));
+
 export function TimelinePage() {
   const location = useLocation();
   const seo = getSeoForPath(location.pathname);
   usePageTitle();
   const [activeCategories, setActiveCategories] = useState<Set<ArchiveTimelineEventCategory>>(new Set(ALL_CATEGORIES));
+  // TASK-202：年度別の記録（約2,400件・HTML約2MB）は、閉じている間は描画しない。
+  // 事前生成HTMLにも含めず、開いたときに初めて組み立てる（初期値falseのためhydrationも一致する）。
+  const [yearlyOpen, setYearlyOpen] = useState(false);
 
   const toggleCategory = (category: ArchiveTimelineEventCategory) => {
     setActiveCategories((prev) => {
@@ -93,8 +102,9 @@ export function TimelinePage() {
   };
 
   const yearGroups = useMemo(
-    () => groupEventsByFiscalYear(timelineEvents.filter((e) => activeCategories.has(e.category))),
-    [activeCategories],
+    () =>
+      yearlyOpen ? groupEventsByFiscalYear(timelineEvents.filter((e) => activeCategories.has(e.category))) : [],
+    [activeCategories, yearlyOpen],
   );
 
   return (
@@ -119,7 +129,11 @@ export function TimelinePage() {
 
       <CivicEventTimeline />
 
-      <details className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
+      <details
+        className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5"
+        open={yearlyOpen}
+        onToggle={(e) => setYearlyOpen(e.currentTarget.open)}
+      >
         <summary className="min-h-11 cursor-pointer py-2 text-base font-semibold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           年度別の記録を見る（市長・議員の任期、財政・人口、政策など）
         </summary>
@@ -127,6 +141,25 @@ export function TimelinePage() {
         <p className="text-sm leading-relaxed text-on-surface-variant">
           この一覧は年度単位で表示しています。年度は4月から翌年3月までのため、1月から3月までの出来事は前の年の年度に含まれます。データが少ない年度は「確認できたデータはまだありません」と表示し、0とは区別しています。
         </p>
+
+      <nav aria-label="年度ごとのタイムライン">
+        <h2 className="text-sm font-semibold text-on-surface">年度ごとのページ</h2>
+        <ul className="mt-2 flex flex-wrap gap-2">
+          {ALL_FISCAL_YEARS.map((y) => (
+            <li key={y.fiscalYear}>
+              <Link
+                to={`/timeline/${y.fiscalYear}`}
+                className="inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-xs text-primary underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                {y.fiscalYear}年度（{y.count}件）
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {yearlyOpen && (
+        <>
 
       <SectionCard title="カテゴリで絞り込む">
         <div className="flex flex-wrap gap-2" role="group" aria-label="表示するカテゴリの切り替え">
@@ -215,6 +248,8 @@ export function TimelinePage() {
       <p className="px-1 text-xs leading-relaxed text-on-surface-variant">
         各年度の「この年度のタイムラインを見る」からは、この一覧に無い詳細（財政指標の出典・定義等）も含めて確認できます。
       </p>
+        </>
+      )}
         </div>
       </details>
 
