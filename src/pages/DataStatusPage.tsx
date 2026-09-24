@@ -146,6 +146,7 @@ import {
   FORMER_MEMBER_DATA_TIER_DESCRIPTIONS,
   FORMER_MEMBER_DATA_TIER_DISCLAIMER,
 } from "../lib/formerMemberActivity";
+import { StatusLegend } from "../components/StatusLegend";
 
 const members = membersData as CouncilMember[];
 const formerMembers = formerMembersData as FormerMember[];
@@ -1221,6 +1222,10 @@ export function DataStatusPage() {
         件数はすべてデータから数え（要確認はビルド時の集計、議案の賛否は議案データ）、直書きしない。
         状態は日本語の呼び名だけで示し、内部の英語コードは出さない。
       */}
+      <SectionCard title="確認状況の表示の見方">
+        <StatusLegend />
+      </SectionCard>
+
       <SectionCard title="「要確認」「未確認」の件数の読み方">
         <p className="mb-3 text-xs leading-relaxed text-on-surface-variant">
           次の件数は、当サイトの誤りやリンク切れの件数ではありません。まだ原本で確かめ直していない記録や、公式資料に議員ごとの記録が無い議案を、隠さずに数えたものです。

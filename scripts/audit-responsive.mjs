@@ -25,8 +25,9 @@
  *
  * 注意：本番サイト（Cloudflare Pages）へはアクセスしない。常にローカルの dist/ を対象にする。
  */
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { createServer } from "node:net";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
@@ -45,12 +46,45 @@ const LABEL = args.get("label") ?? "latest";
 const PORT = Number(args.get("port") ?? 4183);
 const EXTERNAL_BASE_URL = args.get("base-url");
 const SAVE_SCREENSHOTS = args.get("screenshots") !== "false";
+/** core：市民向け主要ページ×主要幅の短時間監査／full：詳細ページを含む全組合せ（既定） */
+const PRESET = args.get("preset") ?? "full";
+/** 監査全体の上限時間。超えたら残りは NOT_RUN として記録し、待たずに終了する。 */
+const MAX_MINUTES = Number(args.get("max-minutes") ?? 15);
+/** 1組合せ（1ページ×1ビューポート）の上限時間。goto・評価・スクリーンショットをすべて含む。 */
+const PAGE_TIMEOUT_MS = Number(args.get("page-timeout") ?? 25000);
 
 const OUT_DIR = join(root, "reports", "phase191-responsive");
 const SHOT_DIR = join(OUT_DIR, "screenshots", LABEL);
 
-/** 監査対象ビューポート（指示された9通り）。 */
-const VIEWPORTS = [
+/** core プリセットのビューポート（320〜1280の8通り）。 */
+const CORE_VIEWPORTS = [
+  { name: "320x568", width: 320, height: 568, mobile: true },
+  { name: "360x800", width: 360, height: 800, mobile: true },
+  { name: "375x812", width: 375, height: 812, mobile: true },
+  { name: "390x844", width: 390, height: 844, mobile: true },
+  { name: "414x896", width: 414, height: 896, mobile: true },
+  { name: "768x1024", width: 768, height: 1024, mobile: false },
+  { name: "1024x768", width: 1024, height: 768, mobile: false },
+  { name: "1280x720", width: 1280, height: 720, mobile: false },
+];
+
+/** core プリセットのページ。/general-questions は実在ルートではない（一般質問は /questions）ため、NotFound表示の崩れ確認として含める。 */
+const CORE_PAGES = [
+  { path: "/", kind: "top" },
+  { path: "/search", kind: "index" },
+  { path: "/themes", kind: "index" },
+  { path: "/themes/education", kind: "theme-detail" },
+  { path: "/timeline", kind: "index" },
+  { path: "/questions", kind: "index" },
+  { path: "/general-questions", kind: "not-found" },
+  { path: "/council-activity", kind: "index" },
+  { path: "/finance", kind: "index" },
+  { path: "/data-status", kind: "index" },
+  { path: "/members/m01", kind: "member-detail" },
+];
+
+/** 監査対象ビューポート（full プリセット）。 */
+const FULL_VIEWPORTS = [
   { name: "320x568", width: 320, height: 568, mobile: true },
   { name: "360x800", width: 360, height: 800, mobile: true },
   { name: "375x812", width: 375, height: 812, mobile: true },
@@ -68,7 +102,7 @@ const VIEWPORTS = [
  * 監査対象ページ。主要な一覧・ダッシュボードに加え、詳細ページ（議員・一般質問・議案・歴代市長）
  * を指示どおりの件数で含める。ルートは scripts/lib/public-routes.mjs の実在URLと一致させている。
  */
-const PAGES = [
+const FULL_PAGES = [
   { path: "/", kind: "top" },
   { path: "/dashboard", kind: "index" },
   { path: "/data-status", kind: "index" },
@@ -83,6 +117,11 @@ const PAGES = [
   // Phase274：選挙資料（選挙公報の12項目・出典カード）を含む詳細ページ
   { path: "/elections/election-mayor-2025", kind: "election-detail" },
   { path: "/timeline", kind: "index" },
+  { path: "/search", kind: "index" },
+  { path: "/themes", kind: "index" },
+  { path: "/themes/education", kind: "theme-detail" },
+  { path: "/themes/finance-reform", kind: "theme-detail" },
+  { path: "/council-documents/2026-06", kind: "session-detail" },
   { path: "/mayor", kind: "index" },
   { path: "/mayors", kind: "index" },
   { path: "/mayor/policy-progress", kind: "index" },
@@ -118,6 +157,9 @@ const PAGES = [
   { path: "/mayors/miura-hisatomo", kind: "mayor-detail" },
   { path: "/mayors/fusano-hiroshi", kind: "mayor-detail" },
 ];
+
+const VIEWPORTS = PRESET === "core" ? CORE_VIEWPORTS : FULL_VIEWPORTS;
+const PAGES = PRESET === "core" ? CORE_PAGES : FULL_PAGES;
 
 /** ブラウザ内で実行する監査本体。DOMに触れるだけで副作用は持たない。 */
 /* eslint-disable */
@@ -352,12 +394,24 @@ function collectIssues() {
 }
 /* eslint-enable */
 
+
+class TimeoutError extends Error {}
+
+/** どんな処理も必ず ms 以内に決着させる（Playwright の evaluate 等は既定でタイムアウトを持たないため）。 */
+function withTimeout(promise, ms, label) {
+  let timer;
+  const guard = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new TimeoutError(`${label} が ${ms}ms を超えました`)), ms);
+  });
+  return Promise.race([promise, guard]).finally(() => clearTimeout(timer));
+}
+
 function waitForServer(url, timeoutMs = 90000) {
   const started = Date.now();
   return new Promise((resolve, reject) => {
     const tick = async () => {
       try {
-        const res = await fetch(url, { method: "GET" });
+        const res = await fetch(url, { method: "GET", signal: AbortSignal.timeout(3000) });
         if (res.ok) return resolve(true);
       } catch {
         /* まだ起動していない */
@@ -369,114 +423,117 @@ function waitForServer(url, timeoutMs = 90000) {
   });
 }
 
-async function main() {
-  if (!existsSync(join(root, "dist", "index.html"))) {
-    throw new Error("dist/index.html がありません。先に `npm run build` を実行してください。");
+function isPortFree(port) {
+  return new Promise((resolve) => {
+    const srv = createServer();
+    srv.once("error", () => resolve(false));
+    srv.once("listening", () => srv.close(() => resolve(true)));
+    srv.listen(port, "localhost");
+  });
+}
+
+/** 前回の監査が残した vite preview 等とぶつからないよう、空いているポートを探す。 */
+async function findFreePort(start) {
+  for (let p = start; p < start + 20; p += 1) {
+    if (await isPortFree(p)) return p;
   }
+  throw new Error(`空きポートが見つかりません（${start}〜${start + 19}）`);
+}
 
-  let server = null;
-  let baseUrl = EXTERNAL_BASE_URL;
-  if (!baseUrl) {
-    baseUrl = `http://localhost:${PORT}`;
-    console.log(`[audit-responsive] vite preview を起動します (${baseUrl})`);
-    server = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
-      cwd: root,
-      shell: true,
-      stdio: "ignore",
-    });
-    await waitForServer(baseUrl);
-  }
-
-  mkdirSync(OUT_DIR, { recursive: true });
-  if (SAVE_SCREENSHOTS) {
-    rmSync(SHOT_DIR, { recursive: true, force: true });
-    mkdirSync(SHOT_DIR, { recursive: true });
-  }
-
-  const browser = await chromium.launch({ headless: true });
-  const results = [];
-  let screenshotCount = 0;
-  let renderCount = 0;
-
+/** shell 経由で起動した vite を子孫プロセスごと確実に止める（server.kill() だけでは vite 本体が残る）。 */
+function killServer(server) {
+  if (!server || server.exitCode !== null) return;
   try {
-    for (const vp of VIEWPORTS) {
-      const context = await browser.newContext({
-        viewport: { width: vp.width, height: vp.height },
-        deviceScaleFactor: 1,
-        isMobile: vp.mobile,
-        hasTouch: vp.mobile,
-        userAgent: vp.mobile
-          ? "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
-          : undefined,
-      });
-      const page = await context.newPage();
-      for (const target of PAGES) {
-        const url = baseUrl + target.path;
-        let record;
-        try {
-          await page.goto(url, { waitUntil: "networkidle", timeout: 45000 });
-          await page.waitForTimeout(120);
-          record = await page.evaluate(collectIssues);
-          // sticky要素は最上部までスクロールした状態では「張り付いていない」ため、
-          // ページ中ほどまでスクロールした状態でもう一度、固定表示同士の重なりだけを確認する。
-          await page.evaluate(() => window.scrollTo(0, Math.round(document.body.scrollHeight / 2)));
-          await page.waitForTimeout(160);
-          const scrolled = await page.evaluate(collectIssues);
-          const seen = new Set(record.issues.map((i) => i.type + "|" + i.selector + "|" + (i.detail || "")));
-          for (const issue of scrolled.issues) {
-            if (issue.type !== "pinned-overlap" && issue.type !== "overlay-out-of-viewport") continue;
-            const key = issue.type + "|" + issue.selector + "|" + (issue.detail || "");
-            if (seen.has(key)) continue;
-            seen.add(key);
-            record.issues.push({ ...issue, scrollState: "mid-page" });
-          }
-          await page.evaluate(() => window.scrollTo(0, 0));
-          await page.waitForTimeout(80);
-        } catch (err) {
-          results.push({
-            path: target.path,
-            kind: target.kind,
-            viewport: vp.name,
-            error: String(err.message || err).split("\n")[0],
-            issues: [],
-          });
-          continue;
-        }
-        renderCount += 1;
-
-        const entry = {
-          path: target.path,
-          kind: target.kind,
-          viewport: vp.name,
-          horizontalScroll: record.horizontalScroll,
-          overflowPx: record.overflowPx,
-          issues: record.issues,
-        };
-
-        const blocking = record.issues.filter(
-          (i) => i.type !== "tap-target-inline-link",
-        );
-        if (SAVE_SCREENSHOTS && (record.horizontalScroll || blocking.length > 0)) {
-          const file = join(
-            SHOT_DIR,
-            `${vp.name}__${target.path.replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_|_$/g, "") || "root"}.png`,
-          );
-          try {
-            await page.screenshot({ path: file, fullPage: true });
-            entry.screenshot = file.replace(root + "\\", "").replace(root + "/", "").replace(/\\/g, "/");
-            screenshotCount += 1;
-          } catch {
-            /* スクリーンショット失敗は監査自体を止めない */
-          }
-        }
-        results.push(entry);
-      }
-      await context.close();
-      console.log(`[audit-responsive] ${vp.name} 完了 (${PAGES.length}ページ)`);
+    if (process.platform === "win32") {
+      spawnSync("taskkill", ["/pid", String(server.pid), "/T", "/F"], { stdio: "ignore" });
+    } else {
+      process.kill(-server.pid, "SIGTERM");
     }
-  } finally {
-    await browser.close();
-    if (server) server.kill();
+  } catch {
+    try {
+      server.kill();
+    } catch {
+      /* すでに終了している */
+    }
+  }
+}
+
+/** 同一オリジン以外（GA・Google Fonts等）への通信は遮断し、外部応答待ちで監査が止まらないようにする。 */
+async function openPage(browser, vp, baseOrigin) {
+  const context = await browser.newContext({
+    viewport: { width: vp.width, height: vp.height },
+    deviceScaleFactor: 1,
+    isMobile: vp.mobile,
+    hasTouch: vp.mobile,
+    userAgent: vp.mobile
+      ? "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+      : undefined,
+  });
+  await context.route("**/*", (route) => {
+    const url = route.request().url();
+    if (url.startsWith(baseOrigin) || url.startsWith("data:") || url.startsWith("blob:")) {
+      return route.continue();
+    }
+    return route.abort();
+  });
+  context.setDefaultTimeout(PAGE_TIMEOUT_MS);
+  context.setDefaultNavigationTimeout(PAGE_TIMEOUT_MS);
+  const page = await context.newPage();
+  return { context, page };
+}
+
+async function auditOne(page, url) {
+  await page.goto(url, { waitUntil: "load" });
+  // 外部通信は遮断済みなので networkidle はすぐ成立する。成立しなくても上限付きで先へ進む。
+  await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {});
+  await page.waitForTimeout(120);
+  const record = await page.evaluate(collectIssues);
+  // sticky要素は最上部までスクロールした状態では「張り付いていない」ため、
+  // ページ中ほどまでスクロールした状態でもう一度、固定表示同士の重なりだけを確認する。
+  await page.evaluate(() => window.scrollTo(0, Math.round(document.body.scrollHeight / 2)));
+  await page.waitForTimeout(160);
+  const scrolled = await page.evaluate(collectIssues);
+  const seen = new Set(record.issues.map((i) => i.type + "|" + i.selector + "|" + (i.detail || "")));
+  for (const issue of scrolled.issues) {
+    if (issue.type !== "pinned-overlap" && issue.type !== "overlay-out-of-viewport") continue;
+    const key = issue.type + "|" + issue.selector + "|" + (issue.detail || "");
+    if (seen.has(key)) continue;
+    seen.add(key);
+    record.issues.push({ ...issue, scrollState: "mid-page" });
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(80);
+  return record;
+}
+
+const state = {
+  baseUrl: null,
+  startedAt: Date.now(),
+  results: [],
+  screenshotCount: 0,
+  deadlineHit: false,
+  reportWritten: false,
+};
+
+function statusCounts(results) {
+  const counts = { PASS: 0, ISSUES: 0, TIMEOUT: 0, ERROR: 0, NOT_RUN: 0 };
+  for (const r of results) counts[r.status] = (counts[r.status] || 0) + 1;
+  return counts;
+}
+
+function writeReports() {
+  if (state.reportWritten) return;
+  state.reportWritten = true;
+  const { results } = state;
+
+  // まだ実行していない組合せは NOT_RUN として明示する（黙って省略しない）
+  const done = new Set(results.map((r) => r.viewport + " " + r.path));
+  for (const vp of VIEWPORTS) {
+    for (const target of PAGES) {
+      if (!done.has(vp.name + " " + target.path)) {
+        results.push({ path: target.path, kind: target.kind, viewport: vp.name, status: "NOT_RUN", issues: [] });
+      }
+    }
   }
 
   const countByType = {};
@@ -489,6 +546,7 @@ async function main() {
     const rs = results.filter((r) => r.viewport === vp.name);
     byViewport[vp.name] = {
       pages: rs.length,
+      ...statusCounts(rs),
       horizontalScrollPages: rs.filter((r) => r.horizontalScroll).length,
       issues: rs.reduce((n, r) => n + r.issues.length, 0),
       blockingIssues: rs.reduce(
@@ -497,19 +555,24 @@ async function main() {
       ),
     };
   }
+  const statuses = statusCounts(results);
 
   const report = {
     label: LABEL,
+    preset: PRESET,
     generatedAt: new Date().toISOString(),
-    baseUrl,
+    elapsedSeconds: Math.round((Date.now() - state.startedAt) / 1000),
+    limits: { maxMinutes: MAX_MINUTES, pageTimeoutMs: PAGE_TIMEOUT_MS, deadlineHit: state.deadlineHit },
+    baseUrl: state.baseUrl,
     viewports: VIEWPORTS.map((v) => v.name),
     pages: PAGES.map((p) => p.path),
     summary: {
       viewportCount: VIEWPORTS.length,
       pageCount: PAGES.length,
       combinations: VIEWPORTS.length * PAGES.length,
-      renderedCombinations: renderCount,
-      screenshots: screenshotCount,
+      renderedCombinations: statuses.PASS + statuses.ISSUES,
+      statuses,
+      screenshots: state.screenshotCount,
       horizontalScrollCombinations: horizontalScrollCombos.length,
       totalIssues: Object.values(countByType).reduce((a, b) => a + b, 0),
       issuesByType: countByType,
@@ -518,15 +581,15 @@ async function main() {
     results,
   };
 
+  mkdirSync(OUT_DIR, { recursive: true });
   const outFile = join(OUT_DIR, `audit-${LABEL}.json`);
   writeFileSync(outFile, JSON.stringify(report, null, 2) + "\n", "utf8");
 
   // 全組合せの明細（数MB）はGit管理せず、種類＋要素セレクタ単位に集約した要約だけをGitへ残す。
-  // 同じ要素が9ビューポート×32ページで重複検出されるため、集約するとレビュー可能な大きさになる。
   const grouped = new Map();
   for (const r of results) {
     for (const i of r.issues) {
-      const key = `${i.type} ${i.selector}`;
+      const key = `${i.type} ${i.selector}`;
       let g = grouped.get(key);
       if (!g) {
         g = {
@@ -550,8 +613,11 @@ async function main() {
   }
   const summaryReport = {
     ...report,
-    note: "results（全288組合せの明細）は audit-<label>.json 側にのみ保存する（Git管理外）。ここでは種類＋要素セレクタ単位に集約した結果を記録する。",
+    note: "results（全組合せの明細）は audit-<label>.json 側にのみ保存する（Git管理外）。ここでは種類＋要素セレクタ単位に集約した結果と、PASS以外の組合せを記録する。",
     results: undefined,
+    nonPassing: results
+      .filter((r) => r.status === "TIMEOUT" || r.status === "ERROR" || r.status === "NOT_RUN")
+      .map((r) => ({ path: r.path, viewport: r.viewport, status: r.status, error: r.error })),
     issueGroups: [...grouped.values()]
       .sort((a, b) => b.occurrences - a.occurrences)
       .map((g) => ({
@@ -571,14 +637,161 @@ async function main() {
   writeFileSync(summaryFile, JSON.stringify(summaryReport, null, 2) + "\n", "utf8");
 
   console.log("\n=== Phase191 レスポンシブ監査サマリ ===");
-  console.log(`ビューポート: ${VIEWPORTS.length} / ページ: ${PAGES.length} / 実測組合せ: ${renderCount}`);
+  console.log(
+    `プリセット: ${PRESET} / ビューポート: ${VIEWPORTS.length} / ページ: ${PAGES.length} / 組合せ: ${VIEWPORTS.length * PAGES.length}`,
+  );
+  console.log(`経過: ${report.elapsedSeconds}秒${state.deadlineHit ? `（上限${MAX_MINUTES}分に到達）` : ""}`);
+  console.log(
+    `PASS ${statuses.PASS} / ISSUES ${statuses.ISSUES} / TIMEOUT ${statuses.TIMEOUT} / ERROR ${statuses.ERROR} / NOT_RUN ${statuses.NOT_RUN}`,
+  );
   console.log(`横スクロール発生: ${horizontalScrollCombos.length} 組合せ`);
   console.log(`検出件数: ${JSON.stringify(countByType, null, 2)}`);
+  for (const r of summaryReport.nonPassing) console.log(`  ${r.status} ${r.viewport} ${r.path} ${r.error ?? ""}`);
   console.log(`レポート（明細）: ${outFile}`);
   console.log(`レポート（集約）: ${summaryFile}`);
 }
 
+async function main() {
+  if (!existsSync(join(root, "dist", "index.html"))) {
+    throw new Error("dist/index.html がありません。先に `npm run build` を実行してください。");
+  }
+
+  let server = null;
+  const deadline = state.startedAt + MAX_MINUTES * 60 * 1000;
+
+  // 最終防衛線：ループ側の締め切り判定が何らかの理由で効かなくても、上限+2分で必ず結果を書いて終了する。
+  const watchdog = setTimeout(
+    () => {
+      console.error(`[audit-responsive] 上限 ${MAX_MINUTES}分+2分 を超えたため強制終了します`);
+      state.deadlineHit = true;
+      writeReports();
+      killServer(server);
+      process.exit(2);
+    },
+    (MAX_MINUTES + 2) * 60 * 1000,
+  );
+  watchdog.unref();
+  for (const sig of ["SIGINT", "SIGTERM"]) {
+    process.once(sig, () => {
+      killServer(server);
+      process.exit(130);
+    });
+  }
+
+  let baseUrl = EXTERNAL_BASE_URL;
+  if (!baseUrl) {
+    const port = await findFreePort(PORT);
+    baseUrl = `http://localhost:${port}`;
+    console.log(`[audit-responsive] vite preview を起動します (${baseUrl})`);
+    server = spawn("npx", ["vite", "preview", "--port", String(port), "--strictPort"], {
+      cwd: root,
+      shell: true,
+      stdio: "ignore",
+      detached: process.platform !== "win32",
+    });
+    await waitForServer(baseUrl);
+  }
+  state.baseUrl = baseUrl;
+  const baseOrigin = new URL(baseUrl).origin;
+
+  mkdirSync(OUT_DIR, { recursive: true });
+  if (SAVE_SCREENSHOTS) {
+    rmSync(SHOT_DIR, { recursive: true, force: true });
+    mkdirSync(SHOT_DIR, { recursive: true });
+  }
+
+  let browser = null;
+  let session = null; // { context, page }
+
+  const closeBrowser = async () => {
+    if (session) await withTimeout(session.context.close(), 5000, "context.close").catch(() => {});
+    session = null;
+    if (browser) await withTimeout(browser.close(), 10000, "browser.close").catch(() => {});
+    browser = null;
+  };
+  const ensureSession = async (vp) => {
+    if (browser && !browser.isConnected()) {
+      browser = null;
+      session = null;
+    }
+    if (!browser) browser = await withTimeout(chromium.launch({ headless: true }), 30000, "chromium.launch");
+    if (!session) session = await withTimeout(openPage(browser, vp, baseOrigin), 15000, "newPage");
+    return session.page;
+  };
+  /** タイムアウトやクラッシュの後は、固まったページを使い回さず作り直す。 */
+  const resetSession = async () => {
+    if (session) await withTimeout(session.context.close(), 5000, "context.close").catch(() => {});
+    session = null;
+    if (browser && !browser.isConnected()) browser = null;
+  };
+
+  try {
+    outer: for (const vp of VIEWPORTS) {
+      // 長時間の監査でChromiumが落ちることがあるため、ビューポートごとにブラウザを起動し直す。
+      await closeBrowser();
+      for (const target of PAGES) {
+        if (Date.now() > deadline) {
+          state.deadlineHit = true;
+          console.log(`[audit-responsive] 上限 ${MAX_MINUTES}分に到達。残りは NOT_RUN として記録します`);
+          break outer;
+        }
+        const url = baseUrl + target.path;
+        const t0 = Date.now();
+        const base = { path: target.path, kind: target.kind, viewport: vp.name };
+        let entry;
+        try {
+          const page = await ensureSession(vp);
+          const record = await withTimeout(auditOne(page, url), PAGE_TIMEOUT_MS, "ページ監査");
+          const blocking = record.issues.filter((i) => i.type !== "tap-target-inline-link");
+          entry = {
+            ...base,
+            status: record.horizontalScroll || blocking.length > 0 ? "ISSUES" : "PASS",
+            horizontalScroll: record.horizontalScroll,
+            overflowPx: record.overflowPx,
+            issues: record.issues,
+          };
+          if (SAVE_SCREENSHOTS && entry.status === "ISSUES") {
+            const file = join(
+              SHOT_DIR,
+              `${vp.name}__${target.path.replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_|_$/g, "") || "root"}.png`,
+            );
+            try {
+              await withTimeout(page.screenshot({ path: file, fullPage: true, timeout: 10000 }), 12000, "screenshot");
+              entry.screenshot = file.replace(root + "\\", "").replace(root + "/", "").replace(/\\/g, "/");
+              state.screenshotCount += 1;
+            } catch {
+              /* スクリーンショット失敗は監査自体を止めない */
+            }
+          }
+        } catch (err) {
+          const isTimeout = err instanceof TimeoutError || err?.name === "TimeoutError";
+          entry = {
+            ...base,
+            status: isTimeout ? "TIMEOUT" : "ERROR",
+            error: String(err?.message || err).split("\n")[0],
+            issues: [],
+          };
+          await resetSession();
+        }
+        entry.ms = Date.now() - t0;
+        state.results.push(entry);
+        console.log(`[audit-responsive] ${entry.status.padEnd(7)} ${vp.name} ${target.path} (${entry.ms}ms)`);
+      }
+      console.log(`[audit-responsive] ${vp.name} 完了 (${PAGES.length}ページ)`);
+    }
+  } finally {
+    await closeBrowser();
+    killServer(server);
+    clearTimeout(watchdog);
+  }
+
+  writeReports();
+  const s = statusCounts(state.results);
+  if (s.TIMEOUT + s.ERROR + s.NOT_RUN > 0) process.exitCode = 2;
+}
+
 main().catch((err) => {
   console.error(err);
+  if (state.results.length) writeReports();
   process.exit(1);
 });
