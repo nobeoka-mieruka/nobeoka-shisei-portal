@@ -40,6 +40,7 @@ import { policyOwnerName, policyOwnerLinkTo, type PolicyOwnerLookup } from "../l
 import { civicTimelineEventsInFiscalYear } from "../lib/civicTimeline";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
 import { ImplementationAttributionNote } from "../components/ImplementationAttributionNote";
+import { SourceList } from "../components/SourceList";
 
 const archiveMayors = archiveMayorsData as ArchiveMayor[];
 const archiveMayorTerms = archiveMayorTermsData as ArchiveMayorTerm[];
@@ -266,11 +267,16 @@ export function TimelineYearPage() {
                           {ev.category}
                         </span>
                       </div>
-                      <p className="mt-1 font-medium text-on-surface">{ev.title}</p>
+                      <p className="mt-1 break-words font-medium text-on-surface">{ev.title}</p>
                       <p className="mt-1 text-xs text-on-surface-variant">{humanizeDataNote(ev.summary)}</p>
                       {/* Phase230-231：延岡市の事業でないもの（県立施設・県主催の催し等）を
                           市の事業と誤読させないため、確認できたものだけ実施主体を明示する。 */}
                       <ImplementationAttributionNote attribution={ev.implementation} className="mt-1" />
+                      {ev.sourceRefs.length > 0 && (
+                        <div className="mt-2 text-xs">
+                          <SourceList sources={ev.sourceRefs} />
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -288,7 +294,7 @@ export function TimelineYearPage() {
               <ul className="space-y-2">
                 {questions.map((q) => (
                   <li key={q.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                    <Link to={`/questions/${q.id}`} className="font-semibold text-primary underline">
+                    <Link to={`/questions/${q.id}`} className="inline-flex min-h-11 items-center break-words font-semibold text-primary underline">
                       {q.title}
                     </Link>
                     <p className="mt-1 text-xs text-on-surface-variant">
@@ -307,7 +313,7 @@ export function TimelineYearPage() {
               <ul className="space-y-2">
                 {documents.map((d) => (
                   <li key={d.id} className="rounded-lg border border-outline-variant p-3 text-sm">
-                    <Link to={documentPath(d)} className="font-semibold text-primary underline">
+                    <Link to={documentPath(d)} className="inline-flex min-h-11 items-center break-words font-semibold text-primary underline">
                       {d.title}
                     </Link>
                     <p className="mt-1 text-xs text-on-surface-variant">

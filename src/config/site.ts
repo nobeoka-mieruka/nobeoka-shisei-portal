@@ -11,9 +11,14 @@ export const DEFAULT_DESCRIPTION =
 /** 共通OGP画像（1200x630）の絶対パス。 */
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
-/** "2026-07-11" のようなISO形式の日付を "2026年7月11日" の表記に変換する。 */
+/**
+ * "2026-07-11" のようなISO形式の日付を "2026年7月11日" の表記に変換する。
+ * 月まで・年までの値（"2026-07"／"2026"）は、その粒度のまま表示し、日を補わない（「NaN日」も出さない）。
+ */
 export function formatJapaneseDate(iso: string): string {
   const [year, month, day] = iso.split("-").map(Number);
+  if (!Number.isFinite(month)) return `${year}年`;
+  if (!Number.isFinite(day)) return `${year}年${month}月`;
   return `${year}年${month}月${day}日`;
 }
 

@@ -998,7 +998,9 @@ for (const p of staticPages) {
 // --- 一次資料リンク（sourceRefs）の付与 ---
 // 元データに記録された公式資料のURLだけを、各エントリに最大2件まで付ける。URLを作ることはしない。
 {
-  const isHttp = (u) => typeof u === "string" && /^https?:///.test(u);
+  // 注意：以前は `/^https?:///` と書かれており、JavaScriptでは `/^https?:/` の後ろが行コメントになって
+  // 常に真（正規表現オブジェクト）を返していた。http(s) のURLだけを通すよう正しく書き直す。
+  const isHttp = (u) => typeof u === "string" && /^https?:\/\//.test(u);
   const pick = (list) => {
     const out = [];
     const seen = new Set();
@@ -1071,6 +1073,22 @@ for (const p of staticPages) {
         }),
       );
     }
+  }
+  // 市長定例記者会見：データは src/data/mayorPressConferences.ts（TypeScript）にあるため、
+  // 日付と sourceUrl の組をファイルから読み取る（URLを作ることはしない）。
+  {
+    const src = readFileSync(join(root, "src", "data", "mayorPressConferences.ts"), "utf8");
+    for (const m of src.matchAll(/date:\s*"(\d{4}-\d{2}-\d{2})"[\s\S]*?sourceUrl:\s*"([^"]+)"/g)) {
+      put(`press-conference-${m[1]}`, [{ label: "市長定例記者会見（延岡市）", url: m[2] }]);
+    }
+  }
+  // 財政ダッシュボード：各数値の出典（financeDashboard.json の sources）
+  {
+    const fin = readJson("src/data/financeDashboard.json");
+    put(
+      "finance-main",
+      (fin.sources ?? []).filter((s) => isHttp(s.url)).map((s) => ({ label: s.title, url: s.url })),
+    );
   }
   for (const e of entries) {
     const refs = sourceMap.get(e.id);

@@ -384,7 +384,7 @@ export function ThemeDetailPage() {
 
       {yearCounts.length > 0 && (
         <section className="rounded-xl bg-surface-container-low p-4 shadow-e1 sm:p-5">
-          <h2 className="text-base font-semibold text-on-surface">年度別の質問件数</h2>
+          <h2 className="text-base font-semibold text-on-surface">年別の質問件数（定例会の開催年）</h2>
           <ul className="mt-2 space-y-2">
             {yearCounts.map((y) => (
               <li key={y.year}>
@@ -407,8 +407,8 @@ export function ThemeDetailPage() {
           <p className="mt-1 text-xs text-on-surface-variant">五十音・議員一覧順に表示しています。順位ではありません。</p>
           <ul className="mt-2 divide-y divide-outline-variant text-sm">
             {memberCounts.map(({ member, count }) => (
-              <li key={member.id} className="flex items-center justify-between gap-2 py-2">
-                <Link to={`/members/${member.id}`} className={`text-primary underline ${linkClass}`}>
+              <li key={member.id} className="flex items-center justify-between gap-2">
+                <Link to={`/members/${member.id}`} className={`inline-flex min-h-11 items-center text-primary underline ${linkClass}`}>
                   {member.name}
                 </Link>
                 <span className="text-xs text-on-surface-variant">{count}件</span>
@@ -423,8 +423,8 @@ export function ThemeDetailPage() {
           <h2 className="text-base font-semibold text-on-surface">元議員別の質問件数</h2>
           <ul className="mt-2 divide-y divide-outline-variant text-sm">
             {formerMemberCounts.map(({ member, count }) => (
-              <li key={member.id} className="flex items-center justify-between gap-2 py-2">
-                <Link to={`/members/former/${member.id}`} className={`text-primary underline ${linkClass}`}>
+              <li key={member.id} className="flex items-center justify-between gap-2">
+                <Link to={`/members/former/${member.id}`} className={`inline-flex min-h-11 items-center text-primary underline ${linkClass}`}>
                   {member.name}
                 </Link>
                 <span className="text-xs text-on-surface-variant">{count}件</span>
@@ -443,7 +443,7 @@ export function ThemeDetailPage() {
       </div>
 
       <section>
-        <h2 className="text-base font-semibold text-on-surface">会議録の質問・答弁（見出しのキーワードで分類、{matches.length}件）</h2>
+        <h2 className="text-base font-semibold text-on-surface">【同じキーワードを含む資料】会議録の質問・答弁（見出しのキーワードで分類、{matches.length}件）</h2>
         {filteredMatches.length === 0 ? (
           <p className="mt-2 rounded-xl bg-surface-container-low p-8 text-center text-sm text-on-surface-variant">
             条件に一致する質問は見つかりませんでした。

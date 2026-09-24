@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTodayJst } from "../../hooks/useTodayJst";
 import civicEventTimelineData from "../../data/civicEventTimeline.json";
 import {
   CIVIC_EVENT_STATUS_LABELS,
@@ -40,6 +41,13 @@ function SourceAnchor({ url, label }: { url: string; label: string }) {
 export function CivicEventTimeline() {
   const [year, setYear] = useState<number>(years[0]);
   const [activeTypes, setActiveTypes] = useState<Set<CivicEventType>>(new Set(CIVIC_EVENT_TYPES));
+  // 予定日を過ぎた「予定」は、開催結果をまだ資料で確認できていないことを明示する。
+  // 今日の日付はハイドレーション後にだけ確定する（事前生成HTMLにビルド日時の状態を焼き付けない）。
+  const today = useTodayJst();
+  const statusLabel = (e: CivicEvent) =>
+    e.status === "scheduled" && today && e.date.length === 10 && e.date < today
+      ? "予定（開催結果は確認中）"
+      : CIVIC_EVENT_STATUS_LABELS[e.status];
 
   const countsByType = useMemo(() => {
     const m = new Map<CivicEventType, number>();
@@ -132,10 +140,10 @@ export function CivicEventTimeline() {
                     </span>
                     <span
                       className={`rounded-full px-2 py-0.5 ${
-                        e.status === "scheduled" ? "border border-outline text-on-surface" : "bg-surface-container-high"
+                        e.status === "scheduled" ? "border border-outline font-semibold text-on-surface" : "bg-surface-container-high"
                       }`}
                     >
-                      {CIVIC_EVENT_STATUS_LABELS[e.status]}
+                      {statusLabel(e)}
                     </span>
                   </p>
                   <Link to={e.route} className={`inline-flex min-h-11 items-center text-sm font-semibold break-words text-primary underline ${focusRing}`}>

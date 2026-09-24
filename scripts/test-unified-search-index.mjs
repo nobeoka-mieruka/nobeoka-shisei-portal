@@ -73,7 +73,8 @@ check("検索結果の遷移先がすべて実在ページ（プリレンダリ�
 check("一次資料リンクが http(s) で、元データに記録されたURLである（孤立0件）", () => {
   const dataDir = join(ROOT, "src/data");
   const corpus = readdirSync(dataDir)
-    .filter((n) => n.endsWith(".json") && n !== "searchIndex.json")
+    // 元データはJSONのほか、TypeScriptで管理しているもの（mayorPressConferences.ts 等）も含める
+    .filter((n) => (n.endsWith(".json") && n !== "searchIndex.json") || n.endsWith(".ts"))
     .map((n) => readFileSync(join(dataDir, n), "utf8"))
     .join("\n");
   const bad = [];

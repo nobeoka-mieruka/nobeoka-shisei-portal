@@ -63,6 +63,9 @@ export function KeywordMatchList({
           {moreLink.label}（残り{items.length - limit}件）
         </Link>
       )}
+      {items.length > limit && !moreLink && (
+        <p className="mt-1 text-xs text-on-surface-variant">ほか{items.length - limit}件（ここでは先頭{limit}件だけを表示しています）</p>
+      )}
     </div>
   );
 }

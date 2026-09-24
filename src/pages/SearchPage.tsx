@@ -433,7 +433,7 @@ export function SearchPage() {
             <button
               type="button"
               onClick={() => setTypeFilter("all")}
-              className={`shrink-0 rounded-full px-3.5 py-2 text-sm font-medium transition ${
+              className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-3.5 py-2 text-sm font-medium transition ${
                 typeFilter === "all"
                   ? "bg-primary text-on-primary"
                   : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
@@ -446,7 +446,7 @@ export function SearchPage() {
                 key={t}
                 type="button"
                 onClick={() => setTypeFilter(t)}
-                className={`shrink-0 rounded-full px-3.5 py-2 text-sm font-medium transition ${
+                className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-3.5 py-2 text-sm font-medium transition ${
                   typeFilter === t
                     ? "bg-primary text-on-primary"
                     : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
@@ -671,7 +671,7 @@ export function SearchPage() {
                           </span>
                         )}
                       </div>
-                      <p className="mt-1.5 text-base font-semibold leading-snug text-on-surface">
+                      <p className="mt-1.5 break-words text-base font-semibold leading-snug text-on-surface">
                         <HighlightText text={entry.title} query={query} />
                       </p>
                       {entry.description && (

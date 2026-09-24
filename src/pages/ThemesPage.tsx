@@ -102,7 +102,7 @@ export function ThemesPage() {
                   <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{theme.description}</p>
                   <p className="mt-1.5 text-xs text-on-surface-variant">
                     {questionCount > 0
-                      ? `${questionCount}件の質問が、このどの分野にも分類されていません`
+                      ? `${questionCount}件の質問が、どの分野にも分類されていません`
                       : "該当する質問はありません"}
                   </p>
                 </Link>
