@@ -14,7 +14,9 @@ export interface BreadcrumbItem {
  */
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav aria-label="パンくずリスト" className="overflow-x-auto">
+    // リンクは44px四方の操作領域を持たせ、増えた高さは上下の負マージンで打ち消す（文字位置と下の余白16pxは従来どおり）。
+    // overflow-x-auto は縦方向もクリップするため、負マージンはリンクではなく nav 側に付ける。
+    <nav aria-label="パンくずリスト" className="-mt-3.5 mb-0.5 overflow-x-auto">
       <ol className="flex items-center gap-1 text-xs text-on-surface-variant">
         {items.map((item, i) => (
           <li key={i} className={`flex min-w-0 items-center gap-1 ${item.to ? "shrink-0" : "min-w-0"}`}>
@@ -26,7 +28,7 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
             {item.to ? (
               <Link
                 to={item.to}
-                className="shrink-0 rounded whitespace-nowrap hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded whitespace-nowrap hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 {item.label}
               </Link>

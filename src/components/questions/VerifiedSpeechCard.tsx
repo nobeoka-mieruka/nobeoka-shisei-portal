@@ -51,8 +51,8 @@ export function VerifiedSpeechCard({
           {memberName}
         </Link>
         {/* Phase197：見出しリンクの高さが22pxでWCAG 2.2 AA（24px）に2px足りなかったため縦paddingを追加する。 */}
-        <Link to={detailHref} className={`block w-full py-1 text-left ${linkClass}`}>
-          <h2 className="text-base font-semibold leading-snug text-on-surface">
+        <Link to={detailHref} className={`flex min-h-11 w-full items-center py-1 text-left ${linkClass}`}>
+          <h2 className="min-w-0 break-words text-base font-semibold leading-snug text-on-surface">
             {memberName}議員の{speech.speechType}
           </h2>
         </Link>

@@ -319,7 +319,12 @@ function collectIssues() {
     if (isControl && !el.hasAttribute("disabled")) {
       const w = rect.width;
       const h = rect.height;
-      if (w < TAP_MIN - TOL || h < TAP_MIN - TOL) {
+      // <label> で包まれた（または for で結び付いた）入力欄は、ラベル全体が操作領域になる。
+      // ラベルが44px以上あれば操作しにくくはないため、入力欄自体の小ささは数えない（Phase197のFALSE_POSITIVE判定）。
+      const label = el.tagName === "INPUT" ? el.closest("label") || (el.labels && el.labels[0]) : null;
+      const labelRect = label ? label.getBoundingClientRect() : null;
+      const labelIsLarge = !!labelRect && labelRect.width >= TAP_MIN - TOL && labelRect.height >= TAP_MIN - TOL;
+      if (!labelIsLarge && (w < TAP_MIN - TOL || h < TAP_MIN - TOL)) {
         // 本文中のインラインリンク（段落・リスト内で display:inline のもの）は
         // 拡大すると文章が読みにくくなるため別分類にする
         const inlineInText =

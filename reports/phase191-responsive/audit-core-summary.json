@@ -1,8 +1,8 @@
 {
   "label": "core",
   "preset": "core",
-  "generatedAt": "2026-09-24T05:53:02.793Z",
-  "elapsedSeconds": 166,
+  "generatedAt": "2026-09-24T12:49:31.145Z",
+  "elapsedSeconds": 119,
   "limits": {
     "maxMinutes": 15,
     "pageTimeoutMs": 25000,
@@ -38,140 +38,112 @@
     "combinations": 88,
     "renderedCombinations": 88,
     "statuses": {
-      "PASS": 16,
-      "ISSUES": 72,
+      "PASS": 88,
+      "ISSUES": 0,
       "TIMEOUT": 0,
       "ERROR": 0,
       "NOT_RUN": 0
     },
-    "screenshots": 72,
+    "screenshots": 0,
     "horizontalScrollCombinations": 0,
-    "totalIssues": 936,
+    "totalIssues": 354,
     "issuesByType": {
-      "tap-target-inline-link": 795,
-      "tap-target-small": 141
+      "tap-target-inline-link": 354
     },
     "byViewport": {
       "320x568": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 78,
-        "blockingIssues": 17
+        "issues": 46,
+        "blockingIssues": 0
       },
       "360x800": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 90,
-        "blockingIssues": 17
+        "issues": 46,
+        "blockingIssues": 0
       },
       "375x812": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 91,
-        "blockingIssues": 17
+        "issues": 47,
+        "blockingIssues": 0
       },
       "390x844": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 94,
-        "blockingIssues": 18
+        "issues": 45,
+        "blockingIssues": 0
       },
       "414x896": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 100,
-        "blockingIssues": 18
+        "issues": 46,
+        "blockingIssues": 0
       },
       "768x1024": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 161,
-        "blockingIssues": 18
+        "issues": 42,
+        "blockingIssues": 0
       },
       "1024x768": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 161,
-        "blockingIssues": 18
+        "issues": 41,
+        "blockingIssues": 0
       },
       "1280x720": {
         "pages": 11,
-        "PASS": 2,
-        "ISSUES": 9,
+        "PASS": 11,
+        "ISSUES": 0,
         "TIMEOUT": 0,
         "ERROR": 0,
         "NOT_RUN": 0,
         "horizontalScrollPages": 0,
-        "issues": 161,
-        "blockingIssues": 18
+        "issues": 41,
+        "blockingIssues": 0
       }
     }
   },
   "note": "results（全組合せの明細）は audit-<label>.json 側にのみ保存する（Git管理外）。ここでは種類＋要素セレクタ単位に集約した結果と、PASS以外の組合せを記録する。",
   "nonPassing": [],
   "issueGroups": [
-    {
-      "type": "tap-target-inline-link",
-      "selector": "div.mt-4.space-y-3.mt-2 > div.rounded-lg.border.border-outline-variant.p-3 > ul.mt-1.space-y-1 > li.text-on-surface-variant > a.break-words.text-primary.underline",
-      "occurrences": 441,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/timeline"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "171x33",
-        "169x33",
-        "164x33",
-        "135x17",
-        "166x33"
-      ],
-      "sampleText": "延岡市議会 総括質疑及び一般質問通告書（中城 あかね）"
-    },
     {
       "type": "tap-target-inline-link",
       "selector": "footer.mt-8.border-t.border-outline-variant.px-4 > div.mx-auto.max-w-5xl.space-y-2.text-center > div.space-y-1.5.text-xs.leading-relaxed.text-on-surface-variant > p > a.rounded.text-on-surface-variant.underline.hover:text-on-surface",
@@ -201,86 +173,6 @@
         "108x17"
       ],
       "sampleText": "情報提供・訂正依頼"
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
-      "occurrences": 56,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/themes/education",
-        "/timeline",
-        "/council-activity",
-        "/data-status",
-        "/members/m01"
-      ],
-      "pathCount": 5,
-      "sizes": [
-        "36x16",
-        "132x16",
-        "48x16"
-      ],
-      "sampleText": "ホーム"
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "div.space-y-4.px-4.py-4.sm:px-6 > section.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > ul.mt-2.divide-y.divide-outline-variant.text-sm > li.flex.items-center.justify-between.gap-2 > a.text-primary.underline.focus-visible:outline.focus-visible:outline-2",
-      "occurrences": 32,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/themes/education"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "59x20",
-        "45x20",
-        "73x20",
-        "87x20"
-      ],
-      "sampleText": "稲田 雅之"
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "div.px-4.py-4.sm:px-6 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
-      "occurrences": 24,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/search",
-        "/themes",
-        "/questions"
-      ],
-      "pathCount": 3,
-      "sizes": [
-        "36x16"
-      ],
-      "sampleText": "ホーム"
     },
     {
       "type": "tap-target-inline-link",
@@ -516,33 +408,6 @@
       "sampleText": "三浦 久知"
     },
     {
-      "type": "tap-target-small",
-      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2 > a.block.w-full.py-1.text-left",
-      "occurrences": 8,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/questions"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "256x30",
-        "296x30",
-        "311x30",
-        "326x30",
-        "350x30"
-      ],
-      "sampleText": "猪之鼻 哲議員の一般質問"
-    },
-    {
       "type": "tap-target-inline-link",
       "selector": "div.flex-1 > div.space-y-4.px-4.py-4.sm:px-6 > div.rounded-2xl.p-5.sm:p-6.border > p.mt-3.border-t.border-gray-200.pt-3 > a.font-medium.text-primary.underline.focus-visible:outline",
       "occurrences": 8,
@@ -566,29 +431,6 @@
         "669x37"
       ],
       "sampleText": "活動指標の算定方法"
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "div.mx-auto.max-w-3xl.space-y-4.px-4 > nav.overflow-x-auto > ol.flex.items-center.gap-1.text-xs > li.flex.min-w-0.items-center.gap-1 > a.shrink-0.rounded.whitespace-nowrap.hover:underline",
-      "occurrences": 8,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/finance"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "36x16"
-      ],
-      "sampleText": "ホーム"
     },
     {
       "type": "tap-target-inline-link",
@@ -918,67 +760,6 @@
         "930x37"
       ],
       "sampleText": "算定方法ページ"
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "ul.space-y-2 > li.rounded-lg.p-3.border.border-gray-200 > div.flex.items-center.justify-end.gap-2 > label.flex.min-h-11.items-center.gap-1.5 > input.h-4.w-4",
-      "occurrences": 5,
-      "viewports": [
-        "320x568",
-        "360x800",
-        "375x812",
-        "390x844",
-        "414x896"
-      ],
-      "paths": [
-        "/council-activity"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "16x16"
-      ],
-      "sampleText": ""
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "div.px-4.py-4.sm:px-6 > ul.space-y-3 > li.rounded-xl.bg-surface-container-low.p-4.shadow-e1 > div.mt-2 > button.block.w-full.py-1.text-left",
-      "occurrences": 5,
-      "viewports": [
-        "390x844",
-        "414x896",
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/questions"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "326x30",
-        "350x30",
-        "680x30",
-        "936x30"
-      ],
-      "sampleText": "子育て支援、婚活支援、治水対策 ほか4項目"
-    },
-    {
-      "type": "tap-target-small",
-      "selector": "tbody > tr.border-b.border-gray-100.align-middle.dark:border-outline-variant/60 > td.whitespace-nowrap.py-2.pr-2 > label.flex.min-h-11.w-11.cursor-pointer > input.h-4.w-4",
-      "occurrences": 3,
-      "viewports": [
-        "768x1024",
-        "1024x768",
-        "1280x720"
-      ],
-      "paths": [
-        "/council-activity"
-      ],
-      "pathCount": 1,
-      "sizes": [
-        "16x16"
-      ],
-      "sampleText": ""
     }
   ]
 }
