@@ -1154,9 +1154,9 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
       return makeResult(
         {
           path: "/themes",
-          pageTitle: "テーマから探す",
-          description: "延岡市議会の一般質問・質疑を、公式会議録本文から確認できたテーマ別に検索できます。",
-          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "テーマから探す" }],
+          pageTitle: "テーマから見る延岡市政",
+          description: "子育て・福祉・防災・財政などのテーマごとに、延岡市議会の一般質問・議案・議決結果・市長公約・予算の事業・委員会の資料をまとめて確認できます。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "テーマから見る延岡市政" }],
           extraJsonLd: [
             datasetJsonLd({
               id: "dataset-themes-jsonld",
@@ -1515,9 +1515,9 @@ function themeDetailSeo(slug: string, options?: SeoOptions): SeoResult {
   return makeResult(
     {
       path: `/themes/${slug}`,
-      pageTitle: `${theme.name}に関する一般質問`,
+      pageTitle: `${theme.name}（テーマから見る延岡市政）`,
       description,
-      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "テーマから探す", to: "/themes" }, { label: theme.name }],
+      breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "テーマから見る延岡市政", to: "/themes" }, { label: theme.name }],
       extraJsonLd: [
         datasetJsonLd({
           id: "dataset-theme-detail-jsonld",

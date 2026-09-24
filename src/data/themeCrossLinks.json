@@ -1,0 +1,133 @@
+{
+  "_comment": "テーマページの「参考：所管の委員会・予算の区分」の対応表（人が定義）。委員会は延岡市議会委員会条例第2条第2項が列挙する所管部局の名称（例：教育委員会、健康福祉部、農林水産部）が、テーマの名称と直接対応するものだけを載せる。予算の区分は一般会計の目的別歳出（款）の名称がテーマと直接対応するものだけを載せる。名称だけでは対応が決まらないテーマ（人口減少・移住、デジタル化、地域コミュニティ等）は載せない。テーマとの政策上の関連を確認したものではないため、画面では「確認できる関連資料」とは分けて参考として表示する。",
+  "themes": {
+    "education": {
+      "expenditurePurposeLabels": [
+        "教育費"
+      ],
+      "committees": [
+        {
+          "id": "committee-kosei-kyoiku",
+          "name": "厚生教育委員会",
+          "basis": "教育委員会の所管に属する事項"
+        }
+      ]
+    },
+    "welfare": {
+      "expenditurePurposeLabels": [
+        "民生費"
+      ],
+      "committees": [
+        {
+          "id": "committee-kosei-kyoiku",
+          "name": "厚生教育委員会",
+          "basis": "健康福祉部の所管に属する事項"
+        }
+      ]
+    },
+    "health": {
+      "expenditurePurposeLabels": [
+        "衛生費"
+      ],
+      "committees": [
+        {
+          "id": "committee-kosei-kyoiku",
+          "name": "厚生教育委員会",
+          "basis": "健康福祉部の所管に属する事項"
+        }
+      ]
+    },
+    "environment": {
+      "expenditurePurposeLabels": [
+        "衛生費"
+      ],
+      "committees": [
+        {
+          "id": "committee-kosei-kyoiku",
+          "name": "厚生教育委員会",
+          "basis": "市民環境部の所管に属する事項"
+        }
+      ]
+    },
+    "disaster": {
+      "expenditurePurposeLabels": [
+        "消防費",
+        "災害復旧費"
+      ],
+      "committees": [
+        {
+          "id": "committee-somu-seisaku",
+          "name": "総務政策委員会",
+          "basis": "危機管理部の所管に属する事項、消防本部・消防署及び消防団の所管に属する事項"
+        }
+      ]
+    },
+    "industry": {
+      "expenditurePurposeLabels": [
+        "商工費",
+        "労働費"
+      ],
+      "committees": [
+        {
+          "id": "committee-sangyo-kensetsu",
+          "name": "産業建設委員会",
+          "basis": "商工観光文化部の所管に属する事項"
+        }
+      ]
+    },
+    "tourism": {
+      "expenditurePurposeLabels": [
+        "商工費"
+      ],
+      "committees": [
+        {
+          "id": "committee-sangyo-kensetsu",
+          "name": "産業建設委員会",
+          "basis": "商工観光文化部の所管に属する事項"
+        }
+      ]
+    },
+    "primary-industry": {
+      "expenditurePurposeLabels": [
+        "農林水産業費"
+      ],
+      "committees": [
+        {
+          "id": "committee-sangyo-kensetsu",
+          "name": "産業建設委員会",
+          "basis": "農林水産部の所管に属する事項"
+        }
+      ]
+    },
+    "transportation": {
+      "expenditurePurposeLabels": [
+        "土木費"
+      ],
+      "committees": [
+        {
+          "id": "committee-sangyo-kensetsu",
+          "name": "産業建設委員会",
+          "basis": "都市建設部の所管に属する事項"
+        }
+      ]
+    },
+    "urban-development": {
+      "expenditurePurposeLabels": [
+        "土木費"
+      ],
+      "committees": [
+        {
+          "id": "committee-sangyo-kensetsu",
+          "name": "産業建設委員会",
+          "basis": "都市建設部の所管に属する事項"
+        }
+      ]
+    },
+    "finance-reform": {
+      "expenditurePurposeLabels": [
+        "公債費"
+      ],
+      "committees": []
+    }
+  }
+}

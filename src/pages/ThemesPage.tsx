@@ -41,9 +41,9 @@ export function ThemesPage() {
       ))}
       <Breadcrumbs items={seo.breadcrumbs} />
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
-        <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">テーマから探す（試験公開中）</h1>
+        <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">テーマから見る延岡市政</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          延岡市議会の一般質問・質疑を、公式会議録本文から確認できたテーマ別に整理しています。件数は事実集計であり、質問内容の質や議員活動全体を評価するものではありません。
+          子育て・福祉・防災・財政などのテーマごとに、一般質問・議案・議決結果・市長公約・予算の事業・委員会の資料をまとめて確認できます。各テーマのページでは、人が分類を確認した「確認できる関連資料」と、キーワードが一致しただけの「同じキーワードを含む資料」を分けて表示しています。件数は事実集計であり、質問内容の質や議員活動全体を評価するものではありません。
         </p>
       </div>
 
@@ -72,7 +72,7 @@ export function ThemesPage() {
                 <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{theme.description}</p>
                 <p className="mt-2 text-xs text-on-surface-variant">
                   {questionCount > 0
-                    ? `このテーマに関する質問件数：${questionCount}件（${memberCount}名の議員）`
+                    ? `会議録の質問（見出しのキーワードで分類）：${questionCount}件（${memberCount}名の議員）`
                     : "現在、このテーマに関する質問は確認できていません（未収録の可能性があります）"}
                 </p>
               </Link>
@@ -123,7 +123,7 @@ export function ThemesPage() {
       <LastUpdated className="mt-4" />
 
       <div className="mt-4">
-        <CorrectionRequestButton pageName="テーマから探す" />
+        <CorrectionRequestButton pageName="テーマから見る延岡市政" />
       </div>
     </div>
   );

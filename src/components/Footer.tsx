@@ -33,7 +33,7 @@ const footerGroups: FooterLinkGroup[] = [
       { to: "/bills/votes", label: "議案ごとの賛否" },
       { to: "/council-documents", label: "定例会・議会資料" },
       { to: "/questions", label: "一般質問データベース" },
-      { to: "/themes", label: "テーマから探す" },
+      { to: "/themes", label: "テーマから見る" },
       { to: "/executive-answers", label: "市長・執行部答弁" },
     ],
   },
