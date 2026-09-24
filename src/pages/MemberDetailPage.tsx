@@ -7,6 +7,7 @@ import archiveMemberProfilesData from "../data/archiveMemberProfiles.json";
 import archiveMemberTermsData from "../data/archiveMemberTerms.json";
 import generalQuestionsData from "../data/generalQuestions.json";
 import billVotesData from "../data/billVotes.json";
+import billProposalRolesData from "../data/billProposalRoles.json";
 import councilSpeechSummariesData from "../data/councilSpeechSummaries.json";
 import memberSpeechAnalysisData from "../data/memberSpeechAnalysis.json";
 import councilSessionsData from "../data/councilSessions.json";
@@ -79,6 +80,8 @@ import { getSeoForPath } from "../lib/seo";
 import { buildCompareSearchParams } from "../lib/archiveCompare";
 import { personSlug } from "../lib/people";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
+import { relatedRecordsIndex } from "../lib/relatedRecords";
+import { electionResultsForPerson, formatElectionDate } from "../lib/elections";
 import { VoteScopeNote } from "../components/bills/VoteScopeNote";
 
 /** TASK-018：一般質問・議案表決・活動レポートを日付順に統合表示するための年表イベント1件分。 */
@@ -102,6 +105,19 @@ const generalQuestions = generalQuestionsData as GeneralQuestionItem[];
 // （一般質問一覧・質問詳細と同じ集計関数を使い、ページ間で表示が食い違わないようにする）。
 const scheduledSessionByName = new Map(scheduledQuestionSessions(generalQuestions).map((s) => [s.sessionName, s]));
 const billVotes = publicBills(billVotesData as BillVoteItem[]);
+const publicBillVoteById = new Map(billVotes.map((b) => [b.id, b]));
+
+/** 会議録で提出者（提案理由の説明者）を確認できた議員提出議案（billProposalRoles.json、verifiedのみ）。 */
+interface BillProposalRole {
+  recordId: string;
+  billId: string;
+  recordType: string;
+  personId: string;
+  role: string;
+  date: string;
+  verificationStatus: string;
+}
+const billProposalRoles = (billProposalRolesData as { roles: BillProposalRole[] }).roles;
 // 議員別の賛否内訳（memberVotes）が1件でも登録されている議案数。2026-08時点で記名投票1件
 // （27名分）のみ登録済みのため、その27名はレーダーチャートの「議案等の意思表示」に実値が入り、
 // それ以外の議員は対象記録なし（missing）として扱われる（議員個人が非公開なのではなく、
@@ -332,6 +348,16 @@ export function MemberDetailPage() {
     : [];
   const mainThemes = Array.from(new Set(memberQuestions.flatMap((q) => q.topics)));
   const latestQuestions = memberQuestions.slice(0, 3);
+  // 横断リンク（確認済みIDの明示的な関係だけを使う）：
+  // ・選挙：選挙結果の候補者に、この議員のIDが紐付けられている選挙
+  // ・提出した議案：会議録で提出者と確認できたもので、議案ページが公開されているもの
+  const memberElections = electionResultsForPerson(member.id);
+  const submittedBills = billProposalRoles
+    .filter((r) => r.personId === member.id && r.role === "submitter" && r.verificationStatus === "verified")
+    .flatMap((r) => {
+      const bill = publicBillVoteById.get(r.billId);
+      return bill ? [{ role: r, bill }] : [];
+    });
 
   // 公開記録による議会活動。議員の能力・優劣を示すものではなく、会議録で確認できた事実だけを数える。
   // 旧任期の発言（speech.term:"previous"、TASK-005系）を現職memberIdへ追加した場合でも、
@@ -522,7 +548,7 @@ export function MemberDetailPage() {
         )}
       </SectionCard>
 
-      {memberArchiveTerms.length > 0 && (
+      {(memberArchiveTerms.length > 0 || memberElections.length > 0) && (
         <SectionCard title="選挙結果・在籍期間">
           <p className="text-xs leading-relaxed text-on-surface-variant">
             延岡市選挙管理委員会が公表する選挙結果に基づく、現在の任期の当選記録です。委員会・会派の変遷等、任期途中の履歴は今後のフェーズで拡充予定です。
@@ -540,6 +566,24 @@ export function MemberDetailPage() {
               </li>
             ))}
           </ul>
+          {memberElections.length > 0 && (
+            <>
+              <h3 className="mt-4 text-sm font-semibold text-on-surface">立候補した選挙（{memberElections.length}件）</h3>
+              <p className="mt-1 text-xs text-on-surface-variant">選挙結果の候補者名簿で、この議員と同一人物と確認できた選挙です。得票数・結果は各選挙のページで確認できます。</p>
+              <ul className="mt-1">
+                {memberElections.map((e) => (
+                  <li key={e.id}>
+                    <Link
+                      to={`/elections/${e.id}`}
+                      className={`inline-flex min-h-11 items-center text-sm break-words text-primary underline ${linkClass}`}
+                    >
+                      {e.electionDatePrecision === "month" ? formatElectionDate(e) : formatJapaneseDate(e.electionDate)}　{e.electionName}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </SectionCard>
       )}
 
@@ -690,7 +734,12 @@ export function MemberDetailPage() {
                       className="bg-surface-container-highest font-medium text-on-surface-variant"
                     />
                   </p>
-                  <p className="mt-1 text-sm font-medium text-on-surface">{q.title}</p>
+                  <Link
+                    to={`/questions/${q.id}`}
+                    className={`mt-1 inline-flex min-h-11 items-center text-sm font-medium break-words text-primary underline ${linkClass}`}
+                  >
+                    {q.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -759,7 +808,7 @@ export function MemberDetailPage() {
                 <div className="mt-3">
                   <div className="flex flex-wrap items-center gap-2">
                     <h4 className="text-sm font-semibold text-on-surface">AIによる質問内容の分析</h4>
-                    <span className="text-[11px] text-on-surface-variant">（公式会議録に基づく中立的な整理）</span>
+                    <span className="text-xs text-on-surface-variant">（公式会議録に基づく中立的な整理）</span>
                     <MemberSpeechAnalysisStatusBadge status={memberAnalysis.analysisStatus} />
                   </div>
                   <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
@@ -795,7 +844,7 @@ export function MemberDetailPage() {
                               </li>
                             ))}
                           </ul>
-                          <p className="mt-1 text-[11px] text-on-surface-variant">テーマ名をクリックすると、根拠となる質問・答弁を確認できます。</p>
+                          <p className="mt-1 text-xs text-on-surface-variant">テーマ名をクリックすると、根拠となる質問・答弁を確認できます。</p>
                         </div>
                       )}
 
@@ -955,6 +1004,14 @@ export function MemberDetailPage() {
                       >
                         質問・答弁の詳細を見る
                       </Link>
+                      {relatedRecordsIndex.speechToQuestion[s.id] && (
+                        <Link
+                          to={`/questions/${relatedRecordsIndex.speechToQuestion[s.id].questionId}`}
+                          className={`ml-4 mt-2 inline-flex min-h-11 items-center text-sm font-medium text-primary underline ${linkClass}`}
+                        >
+                          同じ質問の一般質問ページ
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -969,6 +1026,26 @@ export function MemberDetailPage() {
       </SectionCard>
 
       <VotingRecordsSection votes={member.votes} />
+
+      {submittedBills.length > 0 && (
+        <SectionCard title={`提出者として確認できた議員提出議案（${submittedBills.length}件）`}>
+          <p className="text-xs leading-relaxed text-on-surface-variant">
+            会議録で、この議員が提案理由を説明した（提出者である）ことを確認できた議案です。賛否の記録ではありません。
+          </p>
+          <ul className="mt-2 space-y-1">
+            {submittedBills.map(({ role, bill }) => (
+              <li key={role.recordId} className="text-sm">
+                <Link
+                  to={`/bills/votes/${bill.id}`}
+                  className={`inline-flex min-h-11 items-center break-words text-primary underline ${linkClass}`}
+                >
+                  {formatJapaneseDate(role.date)}　{role.recordType}：{bill.billTitle}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
 
       <SectionCard title="議案・表決履歴">
         <VoteScopeNote className="mb-3" />

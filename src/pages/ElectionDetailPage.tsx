@@ -135,9 +135,9 @@ export function ElectionDetailPage() {
                       {c.name}
                       {c.age != null && <span className="ml-1 text-xs text-on-surface-variant">（{c.age}歳）</span>}
                       {link && (
-                        <a href={link.href} className="ml-2 text-xs text-primary underline">
+                        <Link to={link.href} className="ml-2 inline-flex min-h-11 items-center text-xs text-primary underline">
                           {link.label}
-                        </a>
+                        </Link>
                       )}
                     </span>
                   );
