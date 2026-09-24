@@ -86,9 +86,30 @@ export function expandVariants(normalizedToken: string): string[] {
   return forms.slice(0, MAX_VARIANT_FORMS);
 }
 
+/**
+ * 検索結果の一致段階（小さいほど上位）。政治的な重要度・人物・新旧では並べ替えない。
+ * 1 完全一致（タイトル、または登録した見出し語が検索語とそのまま同じ）→ 2 タイトル一致
+ * → 3 本文・概要一致 → 4 キーワード・タグ一致（部分一致）
+ */
+export type SearchMatchTier = 1 | 2 | 3 | 4;
+
+export const SEARCH_MATCH_TIER_LABELS: Record<SearchMatchTier, string> = {
+  1: "完全一致",
+  2: "タイトル一致",
+  3: "本文一致",
+  4: "キーワード一致",
+};
+
 export interface SearchResult {
   entry: SearchIndexEntry;
+  /** 一致段階（並び順の第1基準）。 */
+  tier: SearchMatchTier;
+  /** 同じ段階の中での並び順に使う、一致した箇所の数に基づく点数（新しさ・種類による加減はしない）。 */
   score: number;
+  /** タイトル（空白・中黒を除く）に占める検索語の割合（0〜1、タイトル完全一致は1、タイトルに含まない場合は0）。 */
+  titleCoverage: number;
+  /** 画面に表示する一致理由（例：「タイトルに『子育て』を含む」「一般質問の本文に一致」）。 */
+  reasons: string[];
   matchedKeywords: string[];
   /** ルールベース分類候補（AI候補）に一致した場合のみ設定。公式keywordsとは別に扱う。 */
   matchedAiCandidateKeywords: string[];
@@ -100,18 +121,6 @@ export interface SearchEntriesOptions {
    * 検索対象に含める。既定はfalse（公式データのみを検索対象にする、既存動作を維持）。
    */
   includeAi?: boolean;
-}
-
-const RECENCY_HALF_LIFE_DAYS = 365;
-
-/** 新しい情報をわずかに優先するための加点（最大5点程度、日付が無い場合は0）。 */
-function recencyBoost(dateIso?: string): number {
-  if (!dateIso) return 0;
-  const time = new Date(dateIso).getTime();
-  if (Number.isNaN(time)) return 0;
-  const days = (Date.now() - time) / 86_400_000;
-  if (days < 0) return 0;
-  return 5 * Math.exp(-days / RECENCY_HALF_LIFE_DAYS);
 }
 
 function countOccurrences(haystack: string, needle: string): number {
@@ -145,7 +154,6 @@ function embeddedIn(token: string, candidates: string[]): string[] {
 
 // --- スコアの重み付け ---
 // 完全一致 ＞ タイトル一致 ＞ 人物名一致 ＞ テーマ（キーワード）一致 ＞ 概要一致 ＞ 本文一致 の順。
-const SCORE_EXACT_TITLE = 100;
 const SCORE_TITLE_CONTAINS_QUERY = 60;
 /**
  * タイトル部分一致の最低保証割合（検索語がタイトルのごく一部でも、一致自体は評価する）。
@@ -216,18 +224,6 @@ function titleForMatching(type: SearchEntryType, normalizedTitle: string): strin
   return stripped.length > 0 ? stripped : normalizedTitle;
 }
 
-/**
- * エントリ区分ごとの最終倍率。
- * ・update（更新履歴）はサイトの作業記録であり、市民が探している市政情報そのものではないため下げる。
- * ・speech（会議録の発言）は「〇〇議員の一般質問」という一般的なタイトルで件数も多く、
- *   本文の偶然一致で上位を占めやすいためわずかに下げる。
- * それ以外の区分は等倍（1.0）で、区分による有利不利を作らない。
- */
-const TYPE_SCORE_WEIGHT: Partial<Record<SearchEntryType, number>> = {
-  update: 0.7,
-  speech: 0.9,
-};
-
 interface NormalizedEntry {
   /** 一致判定に使うタイトル（人物ページは末尾の肩書き「（元議員）」等を除いた形）。 */
   title: string;
@@ -276,6 +272,14 @@ function getNormalizedEntry(entry: SearchIndexEntry): NormalizedEntry {
 interface TokenScore {
   matched: boolean;
   score: number;
+  /** この語がタイトルに含まれた。 */
+  titleHit: boolean;
+  /** この語が概要（description）に含まれた。 */
+  descriptionHit: boolean;
+  /** この語が本文（content）に含まれた。 */
+  contentHit: boolean;
+  /** 一致に使った表記（表記ゆれ展開後）。 */
+  form: string;
   matchedKeywordIndexes: number[];
   matchedAiKeywordIndexes: number[];
 }
@@ -332,7 +336,16 @@ function scoreVariantForm(f: NormalizedEntry, { form, compactForm }: QueryForm, 
     embeddedKeywordIndexes.length > 0;
 
   if (!matched) {
-    return { matched: false, score: 0, matchedKeywordIndexes: [], matchedAiKeywordIndexes: [] };
+    return {
+      matched: false,
+      score: 0,
+      titleHit: false,
+      descriptionHit: false,
+      contentHit: false,
+      form,
+      matchedKeywordIndexes: [],
+      matchedAiKeywordIndexes: [],
+    };
   }
 
   let score = 0;
@@ -362,15 +375,44 @@ function scoreVariantForm(f: NormalizedEntry, { form, compactForm }: QueryForm, 
   return {
     matched: true,
     score,
+    titleHit: titleHit || embeddedTitle,
+    descriptionHit,
+    contentHit,
+    form,
     matchedKeywordIndexes: [...matchedKeywordIndexes, ...embeddedKeywordIndexes],
     matchedAiKeywordIndexes,
   };
 }
 
+/** 検索結果の種類の表示名（検索画面・一致理由の文言で共通利用）。 */
+export const SEARCH_TYPE_LABELS: Record<SearchEntryType, string> = {
+  member: "議員",
+  "former-member": "元議員",
+  mayor: "市長",
+  promise: "市長公約",
+  bill: "議案・議決結果",
+  policy: "政策",
+  "council-document": "条例・請願・陳情",
+  question: "一般質問",
+  speech: "質問・答弁（会議録）",
+  compensation: "報酬",
+  finance: "財政",
+  "political-fund": "政治資金収支報告書",
+  committee: "委員会",
+  update: "更新履歴",
+  guide: "市役所案内",
+  "press-conference": "市長記者会見",
+  election: "選挙結果",
+  theme: "テーマ",
+  session: "会期・会議録",
+  page: "ページ",
+};
+
 /**
- * 全語（AND条件）を含むエントリだけを対象に、関連度スコアを算出して返す。
- * 完全一致 ＞ タイトル一致 ＞ 人物名一致 ＞ テーマ（キーワード）一致 ＞ 概要一致 ＞ 本文一致 の順で
- * 重み付けし、出現回数と更新の新しさをわずかに加点する。生成AIによる要約や推定順位は使用しない。
+ * 全語（AND条件）を含むエントリだけを対象に、一致段階（完全一致 → タイトル一致 → 本文一致 →
+ * キーワード一致）で並べて返す。同じ段階の中では一致した箇所の多い順、同点はID順。
+ * 新しさ・種類・人物・政治的な重要度による加点や倍率は使わない（並び順を説明できるようにするため）。
+ * 生成AIによる要約や推定順位は使用しない。
  * 表記ゆれ（障害／障がい、子ども／子供 等）はsrc/data/searchSynonyms.jsonに登録した語だけを展開する。
  */
 export function searchEntries(
@@ -385,6 +427,7 @@ export function searchEntries(
   const tokenForms = tokens.map((t) => expandVariants(t).map(toQueryForm));
   const queryForms = expandVariants(normalize(query));
   const compactQueryForms = queryForms.map(compact).filter(Boolean);
+  const displayQuery = query.trim();
 
   const results: SearchResult[] = [];
 
@@ -395,18 +438,27 @@ export function searchEntries(
     const matchedKeywordIndexes = new Set<number>();
     const matchedAiKeywordIndexes = new Set<number>();
     let allMatched = true;
+    let allInTitle = true;
+    let allInBody = true;
+    let anyInContent = false;
+    const variantForms = new Set<string>();
 
-    for (const forms of tokenForms) {
+    for (let t = 0; t < tokenForms.length; t += 1) {
+      const forms = tokenForms[t];
       let best: TokenScore | null = null;
       for (const form of forms) {
-        const s = scoreVariantForm(f, form, includeAi);
-        if (s.matched && (best === null || s.score > best.score)) best = s;
+        const sc = scoreVariantForm(f, form, includeAi);
+        if (sc.matched && (best === null || sc.score > best.score)) best = sc;
       }
       if (!best) {
         allMatched = false;
         break;
       }
       score += best.score;
+      if (!best.titleHit) allInTitle = false;
+      if (!best.titleHit && !best.descriptionHit && !best.contentHit) allInBody = false;
+      if (best.contentHit || best.descriptionHit) anyInContent = true;
+      if (best.form !== forms[0]?.form) variantForms.add(best.form);
       for (const i of best.matchedKeywordIndexes) matchedKeywordIndexes.add(i);
       for (const i of best.matchedAiKeywordIndexes) matchedAiKeywordIndexes.add(i);
     }
@@ -415,29 +467,56 @@ export function searchEntries(
 
     // 検索語全体とタイトルの一致は、空白・中黒を除いた形で判定する
     // （「小野 正二」と「小野正二」、「福祉・介護」と「福祉介護」を同じ扱いにするため）。
-    // 人物ページは氏名そのものでの検索も完全一致として扱う。タイトルが「延岡市長 三浦 久知」の
-    // ように肩書きを伴っていても、氏名で検索した人にとってはそのページが探しているものである
-    // （肩書き付きのアーカイブページだけが完全一致になり、本人の主ページより上位に来るのを防ぐ）。
-    if (compactQueryForms.some((q) => f.compactTitle === q || (f.compactPersonName.length > 0 && f.compactPersonName === q))) {
-      score += SCORE_EXACT_TITLE;
-    } else {
-      const matchedForm = compactQueryForms.find((q) => f.compactTitle.includes(q));
-      if (matchedForm) {
-        // タイトル全体に占める検索語の割合で加点する。
-        // 「議員」のような短い語が長いタイトルの一部に含まれるだけの場合と、
-        // タイトルのほとんどが検索語である場合を同じ扱いにしないための重み付け。
-        // ただし一致していること自体の価値は残すため、下限（TITLE_COVERAGE_FLOOR）を設ける。
-        const coverage = Math.min(1, matchedForm.length / f.compactTitle.length);
-        score += SCORE_TITLE_CONTAINS_QUERY * (TITLE_COVERAGE_FLOOR + (1 - TITLE_COVERAGE_FLOOR) * coverage);
-      }
-    }
+    // 人物ページは氏名そのものでの検索も完全一致として扱う。
+    const exact = compactQueryForms.some(
+      (q) => f.compactTitle === q || (f.compactPersonName.length > 0 && f.compactPersonName === q),
+    );
+    const titleContainsQuery = compactQueryForms.some((q) => f.compactTitle.includes(q));
+    // 登録した見出し語（keywords）が検索語とそのまま同じ場合も「完全一致」とする
+    // （例：「議員」で検索したとき、「議員」を見出し語に持つ議員一覧・各議員のページ）。
+    const exactKeywordIndex = f.compactKeywords.findIndex((k) => k.length > 0 && compactQueryForms.includes(k));
 
-    score += recencyBoost(entry.date);
-    score *= TYPE_SCORE_WEIGHT[entry.type] ?? 1;
+    let tier: SearchMatchTier;
+    let titleCoverage = 0;
+    const reasons: string[] = [];
+    const typeLabel = SEARCH_TYPE_LABELS[entry.type] ?? "資料";
+    // 同じ段階の中の並び順に使う、タイトルに占める検索語の割合（タイトル完全一致は1）。
+    const coverageForm = compactQueryForms.find((q) => f.compactTitle.includes(q));
+    if (coverageForm) titleCoverage = exact ? 1 : Math.min(1, coverageForm.length / f.compactTitle.length);
+    if (exact) {
+      tier = 1;
+      titleCoverage = 1;
+      reasons.push(`タイトルが『${displayQuery}』と一致`);
+    } else if (exactKeywordIndex >= 0) {
+      tier = 1;
+      reasons.push(`見出し語『${entry.keywords[exactKeywordIndex]}』と完全一致`);
+      if (titleContainsQuery) reasons.push(`タイトルに『${displayQuery}』を含む`);
+    } else if (titleContainsQuery || allInTitle) {
+      tier = 2;
+      // 同じ「タイトル一致」の中では、タイトルに占める検索語の割合が大きいものを先にする
+      // （「議員」のような短い語が長いタイトルの一部に含まれるだけのものを後ろにするため）。
+      if (coverageForm) {
+        score += SCORE_TITLE_CONTAINS_QUERY * (TITLE_COVERAGE_FLOOR + (1 - TITLE_COVERAGE_FLOOR) * titleCoverage);
+      }
+      reasons.push(`タイトルに『${displayQuery}』を含む`);
+    } else if (allInBody) {
+      tier = 3;
+      reasons.push(anyInContent ? `${typeLabel}の本文・概要に一致` : `${typeLabel}の本文に一致`);
+    } else {
+      tier = 4;
+      const kw = [...matchedKeywordIndexes].map((i) => entry.keywords[i]).filter(Boolean);
+      if (kw.length > 0) reasons.push(`キーワード『${kw.slice(0, 2).join("』『")}』に一致`);
+      else if (matchedAiKeywordIndexes.size > 0) reasons.push("分類候補（キーワード一致）に一致");
+      else reasons.push("キーワードに一致");
+    }
+    if (variantForms.size > 0) reasons.push(`表記ゆれ『${[...variantForms][0]}』でも一致`);
 
     results.push({
       entry,
+      tier,
       score,
+      titleCoverage,
+      reasons,
       matchedKeywords: [...matchedKeywordIndexes].map((i) => entry.keywords[i]).filter(Boolean),
       matchedAiCandidateKeywords: [...matchedAiKeywordIndexes]
         .map((i) => (entry.aiCandidateKeywords ?? [])[i])
@@ -445,7 +524,14 @@ export function searchEntries(
     });
   }
 
-  results.sort((a, b) => b.score - a.score);
+  // 並び順：一致段階 → タイトルに占める検索語の割合 → 一致箇所の多さ → ID。
+  results.sort(
+    (a, b) =>
+      a.tier - b.tier ||
+      b.titleCoverage - a.titleCoverage ||
+      b.score - a.score ||
+      a.entry.id.localeCompare(b.entry.id),
+  );
   return results;
 }
 

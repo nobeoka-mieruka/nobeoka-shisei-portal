@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useInitialSearchParams } from "../hooks/useHydratedSearchParams";
-import searchIndexData from "../data/searchIndex.json";
 import type { SearchEntryType, SearchIndexEntry } from "../types";
+import { useSearchIndex } from "../hooks/useSearchIndex";
 import { SearchIcon } from "../components/icons";
 import { HighlightText } from "../components/HighlightText";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
@@ -14,6 +14,9 @@ import {
   getAlternativeQueries,
   getSuggestions,
   groupResultsByUrl,
+  normalize,
+  SEARCH_MATCH_TIER_LABELS,
+  SEARCH_TYPE_LABELS,
   searchEntries,
   sortResults,
   type AlternativeQuery,
@@ -22,29 +25,29 @@ import {
 } from "../lib/search";
 import { trackEvent } from "../lib/analytics";
 
-const searchIndex = searchIndexData as SearchIndexEntry[];
+const typeLabels = SEARCH_TYPE_LABELS;
 
-const typeLabels: Record<SearchEntryType, string> = {
-  member: "議員",
-  "former-member": "元議員",
-  mayor: "市長",
-  promise: "市長公約",
-  bill: "議案",
-  policy: "政策",
-  "council-document": "条例・請願・陳情",
-  question: "一般質問",
-  speech: "質問・答弁（会議録）",
-  compensation: "報酬",
-  finance: "財政",
-  "political-fund": "政治資金収支報告書",
-  committee: "委員会",
-  update: "更新履歴",
-  guide: "市役所案内",
-  "press-conference": "市長記者会見",
-  election: "選挙結果",
-  theme: "質問テーマ",
-  page: "固定ページ",
-};
+/**
+ * 本文・概要のうち、検索語が出てくる前後だけを抜き出す（該当箇所の表示用）。
+ * 見つからない場合は空文字（該当箇所の欄を出さない）。
+ */
+function excerptFor(entry: SearchIndexEntry, query: string): string {
+  const tokens = normalize(query).split(/\s+/).filter(Boolean);
+  const texts = [entry.content ?? "", entry.description ?? ""];
+  for (const text of texts) {
+    if (!text) continue;
+    const norm = normalize(text);
+    for (const t of tokens) {
+      const idx = norm.indexOf(t);
+      if (idx < 0) continue;
+      // normalize は文字数をほぼ保つ（NFKC・かな変換）ため、同じ位置を元の文から切り出す。
+      const from = Math.max(0, idx - 40);
+      const to = Math.min(text.length, idx + t.length + 40);
+      return `${from > 0 ? "…" : ""}${text.slice(from, to)}${to < text.length ? "…" : ""}`;
+    }
+  }
+  return "";
+}
 
 /** URLの?type=値が既知のtypeLabelsキーに一致する場合のみ受け付ける（不正な値の混入防止）。 */
 function isKnownSearchEntryType(value: string): value is SearchEntryType {
@@ -52,7 +55,7 @@ function isKnownSearchEntryType(value: string): value is SearchEntryType {
 }
 
 const sortOptions: { value: SearchSortKey; label: string }[] = [
-  { value: "relevance", label: "関連度順" },
+  { value: "relevance", label: "一致順（完全一致→タイトル→本文→キーワード）" },
   { value: "newest", label: "新しい順" },
   { value: "oldest", label: "古い順" },
   { value: "kana", label: "五十音順" },
@@ -167,9 +170,12 @@ export function SearchPage() {
 
   usePageTitle();
 
+  // 索引は /search を開いたときだけ読み込む（トップページ等のJSには含めない）。
+  const { entries: searchIndex, status: indexStatus, bodiesLoaded } = useSearchIndex();
+
   const allResults: SearchResult[] = useMemo(
     () => searchEntries(searchIndex, query, { includeAi }),
-    [query, includeAi],
+    [searchIndex, query, includeAi],
   );
 
   const countsByType = useMemo(() => {
@@ -185,7 +191,7 @@ export function SearchPage() {
 
   const fiscalYearOptions = useMemo(
     () => [...new Set(searchIndex.map((e) => e.fiscalYear).filter((y): y is number => typeof y === "number"))].sort((a, b) => b - a),
-    [],
+    [searchIndex],
   );
 
   const filteredResults = useMemo(
@@ -220,15 +226,19 @@ export function SearchPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  const suggestions = useMemo(() => (hasQuery ? getSuggestions(searchIndex, query, 8) : []), [query, hasQuery]);
+  const suggestions = useMemo(
+    () => (hasQuery ? getSuggestions(searchIndex, query, 8) : []),
+    [searchIndex, query, hasQuery],
+  );
 
   const hasActiveFilter = typeFilter !== "all" || fiscalYearFilter !== "" || verificationStatusFilter !== "";
 
   // 検索語自体で1件も見つからなかったときだけ、実際に結果が出る「別の言い方」を探す
   // （辞書の言い換え候補・検索語に含まれる語・1語ずつの検索。件数を確認済みの候補だけを案内する）。
   const alternativeQueries: AlternativeQuery[] = useMemo(
-    () => (hasQuery && allResults.length === 0 ? getAlternativeQueries(searchIndex, query, { includeAi }, 4) : []),
-    [query, hasQuery, allResults.length, includeAi],
+    () =>
+      hasQuery && bodiesLoaded && allResults.length === 0 ? getAlternativeQueries(searchIndex, query, { includeAi }, 4) : [],
+    [searchIndex, bodiesLoaded, query, hasQuery, allResults.length, includeAi],
   );
 
   const clearFilters = () => {
@@ -283,7 +293,7 @@ export function SearchPage() {
       <div className="mb-5 mt-3 rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">サイト内検索</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
-          議員、一般質問、議案、市長公約、財政などをまとめて検索できます。
+          議員、一般質問、会議録、議案・議決結果、会期、委員会、市長公約、財政、選挙などをまとめて検索できます。結果は「完全一致 → タイトル一致 → 本文一致 → キーワード一致」の順に並び、重要度などによる並べ替えはしていません。
         </p>
       </div>
 
@@ -475,24 +485,41 @@ export function SearchPage() {
                 <option value="">確認状況：すべて</option>
                 <option value="verified">確認済み</option>
                 <option value="partiallyVerified">一部確認済み</option>
-                <option value="needsReview">要確認</option>
-                <option value="sourceUnavailable">出典資料未確認</option>
+                <option value="needsReview">確認中</option>
+                <option value="sourceUnavailable">資料未公開</option>
               </select>
             </label>
             <label className="flex min-h-11 max-w-full shrink-0 items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-2 text-sm text-on-surface-variant focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
               <input type="checkbox" checked={includeAi} onChange={(e) => setIncludeAi(e.target.checked)} className="h-4 w-4" />
-              AI候補を含める
+              分類候補（キーワード一致）を含める
             </label>
           </div>
           {includeAi && (
             <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-              「AI候補を含める」を選択すると、外部AIを使わないキーワード一致（ルールベース）によるテーマ分類候補も検索対象に含まれます。該当する結果には「AI候補」と表示され、公式データとは区別されます。
+              キーワードの一致だけで機械的に付けたテーマ分類の候補も検索対象に含めます（AIや人による確認はしていません）。該当する結果には「分類候補」と表示し、公式データとは区別します。
+            </p>
+          )}
+          {indexStatus === "loading" && (
+            <p className="mt-3 text-sm text-on-surface-variant" role="status">
+              検索データを読み込んでいます…
+            </p>
+          )}
+          {indexStatus === "ready-light" && (
+            <p className="mt-3 text-xs text-on-surface-variant" role="status">
+              タイトル・概要・キーワードで検索しています。会議録などの本文を読み込み中です（読み込み後に本文の一致を追加します）。
+            </p>
+          )}
+          {indexStatus === "error" && (
+            <p className="mt-3 rounded-lg bg-surface-container p-3 text-sm text-on-surface" role="alert">
+              検索データを読み込めませんでした。通信状況を確認して、ページを再読み込みしてください。
             </p>
           )}
 
           <div className="mt-3 flex items-center justify-between gap-2">
             <p className="text-sm text-on-surface-variant" aria-live="polite">
-              {sortedResults.length > 0
+              {indexStatus === "loading" || indexStatus === "idle"
+                ? "読み込み中"
+                : sortedResults.length > 0
                 ? mergedCount > 0
                   ? `${sortedResults.length}件見つかりました（同じページを指す結果をまとめて${groupedResults.length}件で表示）`
                   : `${sortedResults.length}件見つかりました`
@@ -515,7 +542,7 @@ export function SearchPage() {
             </label>
           </div>
 
-          {sortedResults.length === 0 ? (
+          {indexStatus === "loading" || indexStatus === "idle" || indexStatus === "error" ? null : sortedResults.length === 0 ? (
             <div className="mt-6 space-y-4 rounded-xl bg-surface-container-low p-6 sm:p-8">
               {allResults.length > 0 ? (
                 <>
@@ -619,7 +646,9 @@ export function SearchPage() {
           ) : (
             <>
               <ul className="mt-3 space-y-3">
-                {visibleGroups.map(({ result: { entry, matchedKeywords, matchedAiCandidateKeywords }, others }, index) => (
+                {visibleGroups.map(({ result: { entry, matchedAiCandidateKeywords, tier, reasons }, others }, index) => {
+                  const excerpt = tier >= 3 ? excerptFor(entry, query) : "";
+                  return (
                   <li key={entry.id} className="rounded-xl bg-surface-container-low p-4 shadow-e1">
                     <Link
                       to={entry.url}
@@ -630,12 +659,15 @@ export function SearchPage() {
                         <span className="inline-flex items-center rounded-full bg-secondary-container px-2.5 py-0.5 text-xs font-medium text-on-secondary-container">
                           {typeLabels[entry.type]}
                         </span>
-                        {entry.date && (
+                        {entry.date ? (
                           <span className="text-xs text-on-surface-variant">{formatJapaneseDate(entry.date)}</span>
-                        )}
+                        ) : typeof entry.fiscalYear === "number" ? (
+                          <span className="text-xs text-on-surface-variant">{entry.fiscalYear}年度</span>
+                        ) : null}
+                        <span className="text-xs text-on-surface-variant">／{SEARCH_MATCH_TIER_LABELS[tier]}</span>
                         {matchedAiCandidateKeywords.length > 0 && (
                           <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">
-                            AI候補
+                            分類候補
                           </span>
                         )}
                       </div>
@@ -647,17 +679,40 @@ export function SearchPage() {
                           <HighlightText text={entry.description} query={query} />
                         </p>
                       )}
-                      {matchedKeywords.length > 0 && (
-                        <p className="mt-1 text-xs text-on-surface-variant">
-                          該当キーワード：{matchedKeywords.slice(0, 3).join("、")}
+                      {excerpt && (
+                        <p className="mt-1.5 rounded bg-surface-container px-2 py-1 text-xs leading-relaxed text-on-surface-variant">
+                          <span className="font-medium">該当箇所：</span>
+                          <HighlightText text={excerpt} query={query} />
                         </p>
                       )}
+                      <p className="mt-1 text-xs text-on-surface-variant">
+                        <span className="font-medium">一致理由：</span>
+                        {reasons.join("／")}
+                      </p>
                       {matchedAiCandidateKeywords.length > 0 && (
                         <p className="mt-1 text-xs text-on-surface-variant">
-                          AI候補（ルールベース、外部AI API不使用）で一致：{matchedAiCandidateKeywords.slice(0, 3).join("、")}
+                          分類候補（キーワード一致、確認前）で一致：{matchedAiCandidateKeywords.slice(0, 3).join("、")}
                         </p>
                       )}
+                      <span className="mt-1.5 inline-block text-xs font-medium text-primary underline">詳細ページを見る</span>
                     </Link>
+                    {entry.sourceRefs && entry.sourceRefs.length > 0 && (
+                      <ul className="mt-1 flex flex-wrap gap-x-3" aria-label={`「${entry.title}」の一次資料`}>
+                        {entry.sourceRefs.map((ref) => (
+                          <li key={ref.url}>
+                            <a
+                              href={ref.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`一次資料：${ref.label}（外部サイトが新しいタブで開きます）`}
+                              className={`inline-flex min-h-11 items-center text-xs text-primary underline ${linkClass}`}
+                            >
+                              一次資料：{ref.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     {others.length > 0 && (
                       <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
                         このページ内の他の一致（{others.length}件）：
@@ -669,7 +724,8 @@ export function SearchPage() {
                       </p>
                     )}
                   </li>
-                ))}
+                  );
+                })}
               </ul>
 
               {visibleCount < groupedResults.length && (

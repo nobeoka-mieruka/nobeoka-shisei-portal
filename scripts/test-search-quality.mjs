@@ -18,7 +18,8 @@
  * 使い方: node --experimental-strip-types scripts/test-search-quality.mjs
  * （src/lib/search.tsを直接importするため、Node 24のTS直接実行を使う）
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { join } from "node:path";
 import assert from "node:assert/strict";
 
@@ -29,7 +30,20 @@ const { searchEntries, getAlternativeQueries, groupResultsByUrl, normalize, comp
   "../src/lib/search.ts"
 );
 
-const searchIndex = readJson("src/data/searchIndex.json");
+// 本番の /search と同じ索引（public/search-index/ の分割ファイル。本文ファイルも結合）で検証する。
+const searchIndex = (() => {
+  // 分割索引はビルド時生成（Git管理外）のため、未生成なら先に生成する。
+  if (!existsSync(join(ROOT, "public/search-index/manifest.json"))) {
+    execFileSync(process.execPath, [join(ROOT, "scripts/generate-search-index.mjs")], { stdio: "inherit" });
+  }
+  const manifest = readJson("public/search-index/manifest.json");
+  const out = [];
+  for (const f of manifest.files) {
+    const bodies = f.bodyFile ? readJson(`public/search-index/${f.bodyFile}`) : {};
+    for (const e of readJson(`public/search-index/${f.file}`)) out.push(bodies[e.id] ? { ...e, content: bodies[e.id] } : e);
+  }
+  return out;
+})();
 const dictionary = readJson("src/data/searchSynonyms.json");
 
 let passCount = 0;
@@ -553,7 +567,7 @@ check("1ページ内の個別項目を索引化しているページは、検索
   // 複数行に分けても遷移先は増えない。まとめて1行にし、他の一致は行の中に残す。
   const cases = [
     { query: "台風", url: "/history" },
-    { query: "更新履歴", url: "/updates" },
+    // 更新履歴の各項目は、公開用の検索索引に入れない（サイトの作業記録であり市政情報ではないため）。
     { query: "比較データ", url: "/compare/municipalities" },
   ];
   for (const c of cases) {

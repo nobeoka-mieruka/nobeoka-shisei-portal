@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -680,9 +680,31 @@ for (const m of municipalityComparisons) {
   });
 }
 
+// --- council sessions（会期ページ：議案一覧・会議録・会期日程） ---
+const councilSessionsForIndex = readJson("src/data/councilSessions.json");
+for (const cs of councilSessionsForIndex) {
+  entries.push({
+    id: `session-${cs.id}`,
+    type: "session",
+    title: cs.title,
+    description: truncate(cs.shortSummary ?? cs.summary ?? cs.description ?? "", 80),
+    url: `/council-documents/${cs.id}`,
+    keywords: ["会期", "定例会", "臨時会", "会議録", cs.sessionType, cs.eraYear, String(cs.year)].filter(Boolean),
+    content: cs.summary ?? "",
+    date: cs.startDate ?? undefined,
+    fiscalYear: typeof cs.fiscalYear === "number" ? cs.fiscalYear : undefined,
+    sourceId: cs.id,
+  });
+}
+
 // --- update history ---
 const updateHistory = readJson("src/data/updateHistory.json");
+const seenUpdateKeys = new Set();
 for (const u of updateHistory) {
+  // 同じ内容（タイトル・説明・日付が同一）の更新履歴が重複登録されている場合は1件だけ索引に入れる。
+  const updateKey = [u.title, u.description, u.date].join("|");
+  if (seenUpdateKeys.has(updateKey)) continue;
+  seenUpdateKeys.add(updateKey);
   entries.push({
     id: `update-${u.id}`,
     type: "update",
@@ -973,6 +995,89 @@ for (const p of staticPages) {
   entries.push({ ...p, type: "page" });
 }
 
+// --- 一次資料リンク（sourceRefs）の付与 ---
+// 元データに記録された公式資料のURLだけを、各エントリに最大2件まで付ける。URLを作ることはしない。
+{
+  const isHttp = (u) => typeof u === "string" && /^https?:///.test(u);
+  const pick = (list) => {
+    const out = [];
+    const seen = new Set();
+    for (const item of list) {
+      if (!item || !isHttp(item.url) || seen.has(item.url)) continue;
+      seen.add(item.url);
+      out.push({ label: truncate(item.label || "一次資料", 60), url: item.url });
+      if (out.length >= 2) break;
+    }
+    return out;
+  };
+  const refsOf = (refs) => (refs ?? []).map((r) => ({ label: r.sourceTitle ?? r.label ?? r.title, url: r.sourceUrl ?? r.url }));
+  const byId = (list) => new Map(list.map((x) => [x.id, x]));
+  const sourceMap = new Map();
+  const put = (id, list) => {
+    const refs = pick(list);
+    if (refs.length > 0) sourceMap.set(id, refs);
+  };
+  for (const q of readJson("src/data/generalQuestions.json")) {
+    put(`question-${q.id}`, [
+      { label: "会議録（該当箇所）", url: q.transcriptUrl },
+      { label: q.sourceTitle, url: q.sourceUrl },
+      { label: "一般質問通告書", url: q.noticeUrl },
+    ]);
+  }
+  try {
+    for (const record of readJson("src/data/councilSpeechSummaries.json").members ?? []) {
+      for (const sp of record.speeches ?? []) {
+        put(`speech-${sp.id}`, (sp.summarySources ?? []).map((x) => ({ label: x.title ?? "会議録", url: x.sourceUrl })));
+      }
+    }
+  } catch {
+    // データがない場合はスキップ
+  }
+  for (const b of readJson("src/data/billVotes.json")) {
+    put(`bill-${b.id}`, [
+      { label: "議案審議結果（延岡市議会）", url: b.resultDocumentUrl },
+      { label: "会議録", url: b.transcriptUrl },
+    ]);
+  }
+  for (const d of readJson("src/data/archiveCouncilDocuments.json")) put(`council-document-${d.id}`, refsOf(d.sourceRefs));
+  for (const e of readJson("src/data/electionResults.json")) put(`election-${e.id}`, refsOf(e.sourceRefs));
+  for (const c of readJson("src/data/committees.json")) put(`committee-${c.id}`, refsOf(c.sourceRefs));
+  for (const p of readJson("src/data/archivePolicies.json")) put(`policy-${p.id}`, refsOf(p.sourceRefs));
+  for (const p of readJson("src/data/archiveMemberProfiles.json")) put(`former-member-${p.id}`, refsOf(p.sourceRefs));
+  for (const m of readJson("src/data/archiveMayors.json")) put(`mayor-${m.id}`, refsOf(m.sourceRefs));
+  for (const m of readJson("src/data/members.json")) {
+    put(`member-${m.id}`, [{ label: m.sourceTitle, url: m.sourceUrl }, ...(m.sources ?? [])]);
+  }
+  for (const org of readJson("src/data/politicalFundOrganizations.json")) {
+    put(`political-fund-${org.id}`, [{ label: "政治資金収支報告書（公表ページ）", url: org.officialListUrl }]);
+  }
+  for (const ev of readJson("src/data/civicTimelineEvents.json")) put(`civic-timeline-${ev.id}`, refsOf(ev.sourceRefs));
+  const sessionsById = byId(readJson("src/data/councilSessions.json"));
+  for (const [id, cs] of sessionsById) {
+    put(`session-${id}`, [
+      cs.periodSourceRef ? { label: "会議録（会期の決定）", url: cs.periodSourceRef.url } : null,
+      { label: "延岡市議会 会議録検索システム", url: cs.officialSessionUrl },
+    ]);
+  }
+  {
+    const promisesData = readJson("src/data/mayorPromises.json");
+    const docByKey = new Map((promisesData.documents ?? []).map((d) => [d.key, d]));
+    for (const p of promisesData.promises ?? []) {
+      put(
+        `promise-${p.id}`,
+        (p.evidenceItems ?? []).map((ev) => {
+          const d = docByKey.get(ev.documentKey);
+          return d ? { label: d.officialUrlLabel ?? d.label, url: d.officialUrl } : null;
+        }),
+      );
+    }
+  }
+  for (const e of entries) {
+    const refs = sourceMap.get(e.id);
+    if (refs) e.sourceRefs = refs;
+  }
+}
+
 writeFileSync(join(root, "src", "data", "searchIndex.json"), `${JSON.stringify(entries, null, 2)}\n`, "utf8");
 
 // Phase193：検索インデックスの件数だけを使う画面（/data-status）が、約2.9MBの
@@ -984,3 +1089,47 @@ writeFileSync(
   "utf8",
 );
 console.log(`[generate-search-index] wrote ${entries.length} entries to src/data/searchIndex.json`);
+
+// --- 公開用の分割索引（/search を開いたときだけ fetch で読み込む） ---
+// JSのバンドルに索引を入れないよう、public/search-index/ へ種類ごとに分けて書き出す（整形なし）。
+// manifest.json に各ファイル名・件数・内容ハッシュを持たせ、キャッシュ更新はハッシュ付きURLで行う。
+{
+  const { createHash } = await import("node:crypto");
+  const outDir = join(root, "public", "search-index");
+  rmSync(outDir, { recursive: true, force: true });
+  mkdirSync(outDir, { recursive: true });
+  const byType = new Map();
+  // 更新履歴（サイトの作業記録）は市政情報ではないため、公開用の検索索引には入れない
+  // （更新履歴そのものは /updates ページとして索引に入っている）。
+  for (const e of entries) {
+    if (e.type === "update") continue;
+    if (!byType.has(e.type)) byType.set(e.type, []);
+    byType.get(e.type).push(e);
+  }
+  const files = [];
+  const hashOf = (text) => createHash("sha256").update(text).digest("hex").slice(0, 12);
+  for (const [type, list] of [...byType.entries()].sort(([a], [b]) => a.localeCompare(b))) {
+    // 本文（content）は別ファイルに分ける。まず本文なしの軽いファイルで検索結果を出し、
+    // 本文ファイルは後から読み込んで「本文に一致」の結果を追加する。
+    const light = list.map(({ content: _content, ...rest }) => rest);
+    const bodies = Object.fromEntries(list.filter((e) => e.content).map((e) => [e.id, e.content]));
+    const lightText = JSON.stringify(light);
+    const file = `${type}.json`;
+    writeFileSync(join(outDir, file), lightText, "utf8");
+    const entry = { type, file, count: list.length, bytes: Buffer.byteLength(lightText), hash: hashOf(lightText) };
+    if (Object.keys(bodies).length > 0) {
+      const bodyText = JSON.stringify(bodies);
+      entry.bodyFile = `${type}.body.json`;
+      entry.bodyBytes = Buffer.byteLength(bodyText);
+      entry.bodyHash = hashOf(bodyText);
+      writeFileSync(join(outDir, entry.bodyFile), bodyText, "utf8");
+    }
+    files.push(entry);
+  }
+  writeFileSync(
+    join(outDir, "manifest.json"),
+    JSON.stringify({ entryCount: files.reduce((n, x) => n + x.count, 0), files }),
+    "utf8",
+  );
+  console.log(`[generate-search-index] wrote ${files.length} split files to public/search-index/`);
+}

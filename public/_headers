@@ -24,6 +24,15 @@
 /favicon.svg
   Cache-Control: public, max-age=604800
 
+# サイト内検索の分割索引（/search を開いたときだけ fetch する。scripts/generate-search-index.mjs が生成）。
+# 各ファイルは ?v=<内容ハッシュ> 付きで読み込むが、URLのパス自体は変わらないため長期キャッシュにはしない。
+# manifest.json は毎回確認し、内容が変わったときだけ新しいハッシュのURLで取得し直す。
+/search-index/manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/search-index/*
+  Cache-Control: public, max-age=3600
+
 # sitemap.xml・robots.txtはビルドのたびに内容が変わり得るため、短めのキャッシュにする。
 /sitemap.xml
   Cache-Control: public, max-age=3600

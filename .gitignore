@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 
+# サイト内検索の分割索引（ビルド時に scripts/generate-search-index.mjs が生成）
+public/search-index/
+
 # npm run analyze:bundle（チャンクごとの内訳を調べる一時出力。Phase193）
 dist-analyze
 chunk-analysis.json

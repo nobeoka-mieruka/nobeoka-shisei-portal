@@ -2638,6 +2638,7 @@ export type SearchEntryType =
   | "press-conference"
   | "election"
   | "theme"
+  | "session"
   | "page";
 
 /**
@@ -2668,6 +2669,11 @@ export interface SearchIndexEntry {
    * （公式のkeywordsとは必ず分離する）。
    */
   aiCandidateKeywords?: string[];
+  /**
+   * 一次資料（公式資料）へのリンク。元データに記録されたURLだけを最大2件まで持つ（生成スクリプトで付与）。
+   * 元データに一次資料URLが無いエントリには付けない（リンクを作らない）。
+   */
+  sourceRefs?: { label: string; url: string }[];
 }
 
 /**

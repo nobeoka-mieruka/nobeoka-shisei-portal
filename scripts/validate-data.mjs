@@ -3341,6 +3341,7 @@ const VALID_SEARCH_TYPES = new Set([
   "update",
   "guide",
   "press-conference",
+  "session",
   "policy",
   "council-document",
   "political-fund",
