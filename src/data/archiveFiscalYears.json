@@ -6027,11 +6027,21 @@
         "perCapitaYen": null,
         "totalYen": 19897780000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": 5296000000,
-        "bondRedemptionFundYen": 2456000000,
-        "otherSpecificPurposeFundsYen": 14320000000,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録（FY2018・FY2019と同一の計算方法）。基金全体の合計（totalYen）は、この年度は明示的な合計行が資料に無いため算出しない。 【2026-09-23】基金の年度末現在高（普通会計、総務省「地方財政状況調査」調査表29／市町村決算カードの積立金現在高）。totalYen は積立基金の合計で、定額運用基金を含まない。2009〜2016年度・2018年度の totalYen（広報のべおか、一般・特別・企業会計の合計）とは集計範囲が異なる。",
+        "fiscalReserveFundYen": 5295641000,
+        "bondRedemptionFundYen": 2455755000,
+        "otherSpecificPurposeFundsYen": 12146384000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、総務省市町村決算カードの「積立金現在高」（普通会計、年度末、千円単位）。2001〜2016年度・2020年度以降と同じ区分。基金合計（totalYen）は総務省「地方財政状況調査」調査表29の積立基金合計（定額運用基金を含まない）で、3区分の合計と一致する。 【2026-09-24】以前は延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の百万円単位の値（その他特定目的基金は差し引き）を登録していたが、前後の年度と出典・精度をそろえるため置き換えた（置き換え前：財調5,296,000,000円・減債2,456,000,000円・特定目的14,320,000,000円）。",
         "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/main_content/000606541.xlsx",
+            "sourceTitle": "総務省「平成２９年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "シート「延岡市」右欄「積立金現在高」の当該年度（千円）列：財調 CS59=5,295,641、減債 CS60=2,455,755、特定目的 CS61=12,146,384。普通会計・決算（確定）（基準日 2018-03-31）。翌年度カードの前年度列とも一致。"
+          },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3614.xlsx",
             "sourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表（平成29年度）",
@@ -6040,7 +6050,7 @@
             "accessedAt": "2026-08-16",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円。固定資産側「基金」16,776百万円（うち減債基金2,456百万円）＋流動資産側「基金」5,296百万円（うち財政調整基金5,296百万円、減債基金0）から、財政調整基金5,296百万円・減債基金2,456百万円・その他特定目的基金（残差）14,320百万円を算出した（FY2018・FY2019の既存登録値と同一の計算式で導出、按分や推測は行っていない）。延岡市財政分析報告書ページ（/soshiki/18/40989.html）で平成29年度分のリンクを発見し取得した（平成28年度以前は同ページに個別ファイルリンクが無く、この基準の財務書類の公表自体がFY2017から始まっているとみられる）。"
+            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円。固定資産側「基金」16,776百万円（うち減債基金2,456百万円）＋流動資産側「基金」5,296百万円（うち財政調整基金5,296百万円、減債基金0）から、財政調整基金5,296百万円・減債基金2,456百万円・その他特定目的基金（残差）14,320百万円を算出した（FY2018・FY2019の既存登録値と同一の計算式で導出、按分や推測は行っていない）。延岡市財政分析報告書ページ（/soshiki/18/40989.html）で平成29年度分のリンクを発見し取得した（平成28年度以前は同ページに個別ファイルリンクが無く、この基準の財務書類の公表自体がFY2017から始まっているとみられる）。 【2026-09-24】財政調整基金・減債基金・その他特定目的基金の値は、総務省市町村決算カードの千円単位の値に置き換えた。この資料の値（百万円単位、その他特定目的基金は差し引きで算出）は、置き換え前の出典として残している。"
           },
           {
             "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031771203&fileKind=1",
@@ -6099,12 +6109,22 @@
       "municipalBondIssuanceYen": 4612651000,
       "balance": {
         "generalAccountBondBalanceYen": null,
-        "ordinaryAccountLocalBondBalanceYen": 57157000000,
+        "ordinaryAccountLocalBondBalanceYen": 57157004000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": 93333170000,
         "perCapitaYen": null,
-        "definitionNote": "延岡市「財務書類（統一的な基準）」貸借対照表の「一般会計等」区分の地方債（固定負債50,810百万円＋１年内償還予定地方債（流動負債）6,347百万円）。FY2020分での財政状況資料集（普通会計・千円単位）との突合により、この区分は普通会計の地方債現在高とほぼ同義と判断（詳細はsourceRefsのnotes参照）。",
+        "definitionNote": "延岡市「財務書類（統一的な基準）」貸借対照表の「一般会計等」区分の地方債（固定負債50,810百万円＋１年内償還予定地方債（流動負債）6,347百万円）。FY2020分での財政状況資料集（普通会計・千円単位）との突合により、この区分は普通会計の地方債現在高とほぼ同義と判断（詳細はsourceRefsのnotes参照）。 【2026-09-24】普通会計の地方債現在高を、財務書類の百万円単位の値（57,157,000,000円）から総務省市町村決算カードの千円単位の値（57,157,004千円）に置き換えた（前後の年度と同じ出典・精度）。",
         "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/main_content/000676980.xlsx",
+            "sourceTitle": "総務省「平成３０年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "シート「4延岡市」右欄「地方債現在高」の当該年度（千円）列 CS62=57,157,004。普通会計・年度末（2019-03-31）。翌年度カードの前年度列とも一致。"
+          },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3564.xlsx",
             "sourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表",
@@ -6159,11 +6179,31 @@
         "perCapitaYen": null,
         "totalYen": 24541780000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": 5285000000,
-        "bondRedemptionFundYen": 2466000000,
-        "otherSpecificPurposeFundsYen": 14857000000,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録。基金全体の合計（totalYen）は、この年度は明示的な合計行が資料に無いため算出しない。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）はこの年度の一次資料からは特定できず未登録。",
+        "fiscalReserveFundYen": 5284981000,
+        "bondRedemptionFundYen": 2466485000,
+        "otherSpecificPurposeFundsYen": 12463997000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、総務省市町村決算カードの「積立金現在高」（普通会計、年度末、千円単位）。2001〜2016年度・2020年度以降と同じ区分。基金合計（totalYen）は広報のべおかの値（一般・特別・企業会計の合計）で、3区分（普通会計）とは集計範囲が異なる。普通会計の積立基金合計は20,215,463千円（調査表29）。 【2026-09-24】以前は延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の百万円単位の値（その他特定目的基金は差し引き）を登録していたが、前後の年度と出典・精度をそろえるため置き換えた（置き換え前：財調5,285,000,000円・減債2,466,000,000円・特定目的14,857,000,000円）。",
         "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/main_content/000676980.xlsx",
+            "sourceTitle": "総務省「平成３０年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "シート「4延岡市」右欄「積立金現在高」の当該年度（千円）列：財調 CS59=5,284,981、減債 CS60=2,466,485、特定目的 CS61=12,463,997。普通会計・決算（確定）（基準日 2019-03-31）。翌年度カードの前年度列とも一致。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000031885665&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2018）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「年度末現在高」の001:財政調整基金・002:減債基金・003:その他特定目的基金が決算カードの3区分と一致（004:積立基金・合計 20,215,463千円）。"
+          },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3564.xlsx",
             "sourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表",
@@ -6172,7 +6212,7 @@
             "accessedAt": "2026-08-11",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円（財政状況資料集の千円単位より粗い精度）。FY2020分で同一年度末時点の財政状況資料集ベースの数値（地方債現在高55,428,571千円・財政調整基金5,032,997千円・減債基金2,384,088千円）と、本資料の値（地方債55,428百万円・財政調整基金5,033百万円・減債基金2,384百万円）が百万円単位の丸め差以内で一致することを確認済み（発生主義の財務書類「一般会計等」区分と、決算統計ベースの「普通会計」区分は、延岡市の場合ほぼ同一の範囲を指すと判断できる）。"
+            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円（財政状況資料集の千円単位より粗い精度）。FY2020分で同一年度末時点の財政状況資料集ベースの数値（地方債現在高55,428,571千円・財政調整基金5,032,997千円・減債基金2,384,088千円）と、本資料の値（地方債55,428百万円・財政調整基金5,033百万円・減債基金2,384百万円）が百万円単位の丸め差以内で一致することを確認済み（発生主義の財務書類「一般会計等」区分と、決算統計ベースの「普通会計」区分は、延岡市の場合ほぼ同一の範囲を指すと判断できる）。 【2026-09-24】財政調整基金・減債基金・その他特定目的基金の値は、総務省市町村決算カードの千円単位の値に置き換えた。この資料の値（百万円単位、その他特定目的基金は差し引きで算出）は、置き換え前の出典として残している。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2594.pdf",
@@ -6326,12 +6366,22 @@
       "municipalBondIssuanceYen": 5347613000,
       "balance": {
         "generalAccountBondBalanceYen": 56152458949,
-        "ordinaryAccountLocalBondBalanceYen": 56152000000,
+        "ordinaryAccountLocalBondBalanceYen": 56152458000,
         "includingSpecialAccountsYen": null,
         "includingEnterpriseAccountsYen": null,
         "perCapitaYen": null,
-        "definitionNote": "延岡市「財務書類（統一的な基準）」貸借対照表の「一般会計等」区分の地方債（固定負債49,851百万円＋１年内償還予定地方債（流動負債）6,301百万円）。FY2020分での財政状況資料集（普通会計・千円単位）との突合により、この区分は普通会計の地方債現在高とほぼ同義と判断（詳細はsourceRefsのnotes参照）。",
+        "definitionNote": "延岡市「財務書類（統一的な基準）」貸借対照表の「一般会計等」区分の地方債（固定負債49,851百万円＋１年内償還予定地方債（流動負債）6,301百万円）。FY2020分での財政状況資料集（普通会計・千円単位）との突合により、この区分は普通会計の地方債現在高とほぼ同義と判断（詳細はsourceRefsのnotes参照）。 【2026-09-24】普通会計の地方債現在高を、財務書類の百万円単位の値（56,152,000,000円）から総務省市町村決算カードの千円単位の値（56,152,458千円）に置き換えた（前後の年度と同じ出典・精度）。",
         "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/main_content/000740038.xlsx",
+            "sourceTitle": "総務省「令和元年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "シート「4延岡市」右欄「地方債現在高」の当該年度（千円）列 CS66=56,152,458。普通会計・年度末（2020-03-31）。翌年度カードの前年度列とも一致。"
+          },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3544.xlsx",
             "sourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表",
@@ -6377,11 +6427,31 @@
         "perCapitaYen": null,
         "totalYen": 24481840000,
         "fiscalAdjustmentFundYen": null,
-        "fiscalReserveFundYen": 5122000000,
-        "bondRedemptionFundYen": 2476000000,
-        "otherSpecificPurposeFundsYen": 14107000000,
-        "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、延岡市「財務書類（統一的な基準）」貸借対照表の「基金」区分（固定資産側・流動資産側の合計）から登録。基金全体の合計（totalYen）は、財務書類には合計行が無いため、広報のべおか2020年5月号の「令和元年度末（見込み）」の値（一般・特別・企業会計の合計）を登録している。決算値ではなく見込み値であり、財務書類ベースの各基金とは集計範囲も異なる。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）はこの年度の一次資料からは特定できず未登録。",
+        "fiscalReserveFundYen": 5121878000,
+        "bondRedemptionFundYen": 2476092000,
+        "otherSpecificPurposeFundsYen": 11908430000,
+        "definitionNote": "財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）・その他特定目的基金（otherSpecificPurposeFundsYen＝「特定目的」）は、総務省市町村決算カードの「積立金現在高」（普通会計、年度末、千円単位）。2001〜2016年度・2020年度以降と同じ区分。基金合計（totalYen）は広報のべおかの値（一般・特別・企業会計の合計、令和元年度末の見込み値）で、3区分（普通会計）とは集計範囲が異なる。普通会計の積立基金合計は19,506,400千円（調査表29）。 【2026-09-24】以前は延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表の百万円単位の値（その他特定目的基金は差し引き）を登録していたが、前後の年度と出典・精度をそろえるため置き換えた（置き換え前：財調5,122,000,000円・減債2,476,000,000円・特定目的14,107,000,000円）。",
         "sourceRefs": [
+          {
+            "sourceUrl": "https://www.soumu.go.jp/main_content/000740038.xlsx",
+            "sourceTitle": "総務省「令和元年度市町村決算カード」宮崎県",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "シート「4延岡市」右欄「積立金現在高」の当該年度（千円）列：財調 CS63=5,121,878、減債 CS64=2,476,092、特定目的 CS65=11,908,430。普通会計・決算（確定）（基準日 2020-03-31）。翌年度カードの前年度列とも一致。"
+          },
+          {
+            "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000032092031&fileKind=1",
+            "sourceTitle": "総務省「地方財政状況調査」市町村分 調査表29 基金の状況（決算年度2019）",
+            "sourceOrganization": "総務省",
+            "sourcePublishedDate": null,
+            "accessedAt": "2026-09-24",
+            "extractionMethod": "manual",
+            "verificationStatus": "verified",
+            "notes": "CSV 団体コード452033 延岡市 行番号6「年度末現在高」の001:財政調整基金・002:減債基金・003:その他特定目的基金が決算カードの3区分と一致（004:積立基金・合計 19,506,400千円）。"
+          },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/3544.xlsx",
             "sourceTitle": "延岡市「財務書類（統一的な基準、一般会計等）」貸借対照表",
@@ -6390,7 +6460,7 @@
             "accessedAt": "2026-08-11",
             "extractionMethod": "manual",
             "verificationStatus": "needsReview",
-            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円（財政状況資料集の千円単位より粗い精度）。FY2020分で同一年度末時点の財政状況資料集ベースの数値（地方債現在高55,428,571千円・財政調整基金5,032,997千円・減債基金2,384,088千円）と、本資料の値（地方債55,428百万円・財政調整基金5,033百万円・減債基金2,384百万円）が百万円単位の丸め差以内で一致することを確認済み（発生主義の財務書類「一般会計等」区分と、決算統計ベースの「普通会計」区分は、延岡市の場合ほぼ同一の範囲を指すと判断できる）。"
+            "notes": "貸借対照表（BS）「会計：一般会計等」区分、単位：百万円（財政状況資料集の千円単位より粗い精度）。FY2020分で同一年度末時点の財政状況資料集ベースの数値（地方債現在高55,428,571千円・財政調整基金5,032,997千円・減債基金2,384,088千円）と、本資料の値（地方債55,428百万円・財政調整基金5,033百万円・減債基金2,384百万円）が百万円単位の丸め差以内で一致することを確認済み（発生主義の財務書類「一般会計等」区分と、決算統計ベースの「普通会計」区分は、延岡市の場合ほぼ同一の範囲を指すと判断できる）。 【2026-09-24】財政調整基金・減債基金・その他特定目的基金の値は、総務省市町村決算カードの千円単位の値に置き換えた。この資料の値（百万円単位、その他特定目的基金は差し引きで算出）は、置き換え前の出典として残している。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/2582.pdf",
