@@ -165,6 +165,13 @@ for (const q of generalQuestions) {
   for (const item of q.relatedFinanceItems ?? []) {
     if (isBlank(item)) err(tag, "relatedFinanceItemsに空文字が含まれています");
   }
+  // 録画配信：公開日・確認日の形式と、案内先が延岡市の公式ページであること。
+  for (const key of ["videoPublishedDate", "videoLastVerified"]) {
+    if (q[key] && !DATE_RE.test(q[key])) err(tag, `${key}の形式が不正です: ${q[key]}`);
+  }
+  if (q.videoSourcePageUrl && !q.videoSourcePageUrl.startsWith("https://www.city.nobeoka.miyazaki.jp/")) {
+    err(tag, `videoSourcePageUrlは延岡市公式サイトのページである必要があります: ${q.videoSourcePageUrl}`);
+  }
   checkTrustLevel({ err }, q.trustLevel, tag);
 }
 
@@ -517,6 +524,26 @@ try {
     if (!VALID_COUNCIL_SESSION_TYPES.has(s.sessionType)) err(tag, `未定義のsessionTypeです: ${s.sessionType}`);
     if (isBlank(s.folderPath) || !s.folderPath.startsWith("/council-documents/")) {
       err(tag, `folderPathの形式が不正です: ${s.folderPath}`);
+    }
+    // 録画配信は公式記録ではないため、会議録とは別に持つ。市議会が録画アドレスの無断転載を
+    // 禁止しているため、YouTubeのURLは保持せず、案内先は延岡市の公式ページに限る。
+    if (s.recordedVideo) {
+      const v = s.recordedVideo;
+      if (v.isOfficialRecord !== false) err(tag, "recordedVideo.isOfficialRecordはfalseである必要があります（録画は公式記録ではない）");
+      if (isBlank(v.linkTitle)) err(tag, "recordedVideo.linkTitleが空です");
+      if (!v.sourcePageUrl?.startsWith("https://www.city.nobeoka.miyazaki.jp/")) {
+        err(tag, `recordedVideo.sourcePageUrlは延岡市公式サイトのページである必要があります: ${v.sourcePageUrl}`);
+      }
+      if (!DATE_RE.test(v.sourcePageUpdatedDate ?? "")) err(tag, `recordedVideo.sourcePageUpdatedDateの形式が不正です: ${v.sourcePageUpdatedDate}`);
+      if (v.publishedDate !== null && !DATE_RE.test(v.publishedDate ?? "")) {
+        err(tag, `recordedVideo.publishedDateは日付またはnull（未確認）である必要があります: ${v.publishedDate}`);
+      }
+      if (!DATE_RE.test(v.verifiedAt ?? "")) err(tag, `recordedVideo.verifiedAtの形式が不正です: ${v.verifiedAt}`);
+      if (!Array.isArray(v.videoTitles) || v.videoTitles.length === 0 || v.videoTitles.some(isBlank)) {
+        err(tag, "recordedVideo.videoTitlesが空、または空のタイトルを含んでいます");
+      }
+      if (isBlank(v.coverageNote)) err(tag, "recordedVideo.coverageNote（収録範囲）が空です");
+      if (/youtube.com|youtu.be/i.test(JSON.stringify(v))) err(tag, "recordedVideoにYouTubeのURLが含まれています（公式ページが無断転載を禁止）");
     }
     if (s.startDate && !DATE_RE.test(s.startDate)) err(tag, `startDateの形式が不正です: ${s.startDate}`);
     if (s.endDate && !DATE_RE.test(s.endDate)) err(tag, `endDateの形式が不正です: ${s.endDate}`);

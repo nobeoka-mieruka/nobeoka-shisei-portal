@@ -1572,6 +1572,14 @@ export interface GeneralQuestionItem {
   videoChannelName?: string;
   /** ISO形式。動画の視聴可否・内容をサイト運営者がいつ確認したか。 */
   videoLastVerified?: string;
+  /** ISO形式（日本時間の日付）。YouTube上で表示される動画の公開日。確認できた場合のみ設定する。 */
+  videoPublishedDate?: string;
+  /**
+   * 録画配信の案内ページ（延岡市議会公式ページ28033.html）。録画の「アドレス等」の無断転載が禁止されて
+   * いる会期では、videoUrlを設定せず、こちらとvideoTitleで録画の存在を示す。録画は公式記録ではないため、
+   * 設定しても質問・答弁の内容を「確認済み」とは扱わない（確認は会議録で行う）。
+   */
+  videoSourcePageUrl?: string;
 
   documentUrl?: string;
 
@@ -2131,6 +2139,37 @@ export interface CouncilSession {
   meetingDaysStatusCheckedAt?: string;
   /** 議会が公表した会議日程（予定）の資料。予定であり開催の記録ではないため、開催日には使わない。 */
   meetingDaysScheduleSourceUrl?: string;
+  /**
+   * 延岡市議会YouTubeの録画配信（会期ごとの再生リスト）。市議会は「公式記録ではない」と明記しているため、
+   * 会議録（meetingDays／meetingDaysStatus）とは別に管理し、会議録の代わりや議員個人の賛否の根拠には使わない。
+   */
+  recordedVideo?: CouncilSessionRecordedVideo;
+}
+
+/**
+ * 会期ごとの録画配信（延岡市議会YouTube）。公式ページ28033.htmlに掲載されたものだけを登録する。
+ * 同ページは録画の「アドレス等」を許可なく他のウェブサイトへ転載することを禁止しているため、
+ * YouTubeのURLは保持・表示せず、リンクは公式ページ（sourcePageUrl）へ向ける。
+ */
+export interface CouncilSessionRecordedVideo {
+  /** 公式ページ上のリンク名（例："令和8年9月定例会"）。 */
+  linkTitle: string;
+  channelName: string;
+  /** 録画へのリンクが掲載されている延岡市議会の公式ページ。画面上のリンク先はこのページにする。 */
+  sourcePageUrl: string;
+  sourcePageTitle: string;
+  /** ISO形式。公式ページの「更新日」の表示（録画自体の公開日とは別）。 */
+  sourcePageUpdatedDate: string;
+  /** ISO形式（日本時間の日付）。YouTube上で表示される動画の公開日。確認できない場合はnull（推測しない）。 */
+  publishedDate: string | null;
+  /** 確認時点で再生リストに含まれていた動画のタイトル（YouTube上の表記どおり、並び順どおり）。 */
+  videoTitles: string[];
+  /** 収録範囲の説明（何が含まれ、何が含まれていないか）。 */
+  coverageNote: string;
+  /** ISO形式。サイト運営者が公式ページと再生リストを確認した日。 */
+  verifiedAt: string;
+  /** 市議会が公式記録ではないと明記しているため、常にfalse。 */
+  isOfficialRecord: false;
 }
 
 /**

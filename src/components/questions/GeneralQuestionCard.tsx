@@ -122,7 +122,7 @@ export function GeneralQuestionCard({
       <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{humanizeDataNote(item.summary)}</p>
       <p className="mt-1 text-xs text-on-surface-variant">質問項目 {item.questionItems.length}件</p>
 
-      {(item.noticeUrl || item.newsletterUrl || item.transcriptUrl || item.videoUrl) && (
+      {(item.noticeUrl || item.newsletterUrl || item.transcriptUrl || item.videoUrl || item.videoSourcePageUrl) && (
         <div className="mt-3 flex flex-wrap gap-2">
           {item.noticeUrl && item.noticeUrlStatus !== "removed" && (
             <a
@@ -170,6 +170,18 @@ export function GeneralQuestionCard({
             >
               <PlayIcon className="h-3.5 w-3.5" />
               {videoLabel(item)}
+            </a>
+          )}
+          {!item.videoUrl && item.videoSourcePageUrl && (
+            <a
+              href={item.videoSourcePageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${item.title}の録画配信（延岡市議会の配信ページ、公式記録ではありません）を新しいタブで開く`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-2 text-xs font-medium text-on-surface transition hover:bg-surface-container-high ${linkClass}`}
+            >
+              <PlayIcon className="h-3.5 w-3.5" />
+              録画配信（公式記録ではありません）
             </a>
           )}
           {item.documentUrl && (

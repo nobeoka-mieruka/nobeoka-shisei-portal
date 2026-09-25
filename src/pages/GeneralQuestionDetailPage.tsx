@@ -40,6 +40,31 @@ const scheduledSessionByName = new Map(scheduledQuestionSessions(questions).map(
 const linkClass =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
+const RECORDING_PAGE_LABEL = "録画配信（延岡市議会の配信ページ）";
+
+/**
+ * 録画は市議会が「公式記録ではない」としているため、質問・答弁の内容確認には使わないことを示す。
+ * 会議録が公開されるまでは、録画があっても質問内容は通告時点の予定のまま扱う。
+ */
+function RecordingNotice({ item }: { item: GeneralQuestionItem }) {
+  return (
+    <div className="mt-3 rounded-lg bg-surface-container-low px-3 py-2 text-xs leading-relaxed text-on-surface-variant">
+      {item.videoTitle && (
+        <p className="text-on-surface">
+          録画：{item.videoTitle}
+          {item.videoChannelName && `（${item.videoChannelName}）`}
+          {item.videoPublishedDate && `／公開日：${formatJapaneseDate(item.videoPublishedDate)}`}
+        </p>
+      )}
+      <p className={item.videoTitle ? "mt-1" : undefined}>
+        録画は延岡市議会の公式記録ではありません（市議会の配信ページに明記されています）。答弁を確かめる参考にはなりますが、このページの質問・答弁の内容は会議録で確認します。
+        {!item.transcriptUrl && "会議録はまだ公開されていないため、質問内容は質問通告書に基づく予定のままです。"}
+      </p>
+      {item.videoLastVerified && <p className="mt-1">当サイト確認日：{formatJapaneseDate(item.videoLastVerified)}</p>}
+    </div>
+  );
+}
+
 function videoHref(item: GeneralQuestionItem): string {
   if (!item.videoUrl) return "";
   if (item.videoStartSeconds == null) return item.videoUrl;
@@ -96,6 +121,8 @@ export function GeneralQuestionDetailPage() {
     item.transcriptPdfUrl && { label: "会議録PDF", url: item.transcriptPdfUrl },
     item.transcriptUrl && { label: "会議録ページ", url: item.transcriptUrl },
     item.videoUrl && { label: "議会中継・録画", url: videoHref(item) },
+    // 録画のアドレスの無断転載が禁止されている会期は、市議会の配信ページへ案内する。
+    !item.videoUrl && item.videoSourcePageUrl && { label: RECORDING_PAGE_LABEL, url: item.videoSourcePageUrl },
     item.documentUrl && { label: "質問資料", url: item.documentUrl },
   ].filter((l): l is { label: string; url: string } => !!l);
 
@@ -277,7 +304,7 @@ export function GeneralQuestionDetailPage() {
                   aria-label={`${l.label}を新しいタブで開く`}
                   className={`inline-flex min-h-11 items-center gap-1.5 text-sm text-primary underline ${linkClass}`}
                 >
-                  {l.label === "議会中継・録画" ? <PlayIcon className="h-3.5 w-3.5" /> : <GlobeIcon className="h-3.5 w-3.5" />}
+                  {l.label === "議会中継・録画" || l.label === RECORDING_PAGE_LABEL ? <PlayIcon className="h-3.5 w-3.5" /> : <GlobeIcon className="h-3.5 w-3.5" />}
                   {l.label}
                 </a>
               </li>
@@ -323,6 +350,7 @@ export function GeneralQuestionDetailPage() {
             </a>
           )
         )}
+        {(item.videoUrl || item.videoSourcePageUrl) && <RecordingNotice item={item} />}
         <p className="mt-2 text-xs text-on-surface-variant">公表機関：{item.sourceOrganization}</p>
         {item.notes && <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{humanizeDataNote(item.notes)}</p>}
       </SectionCard>

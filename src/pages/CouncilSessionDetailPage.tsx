@@ -10,6 +10,7 @@ import { SectionCard } from "../components/SectionCard";
 import { CorrectionRequestButton } from "../components/CorrectionRequestButton";
 import { CouncilDocumentCard } from "../components/council/CouncilDocumentCard";
 import { SessionSummaryStatusBadge } from "../components/council/SessionSummaryStatusBadge";
+import { SessionRecordedVideoCard } from "../components/council/SessionRecordedVideoCard";
 import { councilDocumentCategoryLabels, councilDocumentCategoryOrder, publicDocuments } from "../lib/councilDocuments";
 import {
   billsForSession,
@@ -294,6 +295,9 @@ export function CouncilSessionDetailPage() {
           </SectionCard>
         ))
       )}
+
+      {/* 録画配信は公式記録ではないため、会議録・議会資料とは別の枠で示す。 */}
+      {session.recordedVideo && <SessionRecordedVideoCard session={session} video={session.recordedVideo} />}
 
       {questionsForSession(session.id).length > 0 && (
         <SectionCard title={`この会期の一般質問（${questionsForSession(session.id).length}件）`}>
