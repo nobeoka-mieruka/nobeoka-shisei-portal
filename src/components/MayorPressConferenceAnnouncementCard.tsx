@@ -1,5 +1,5 @@
 import type { MayorPressConferenceAnnouncement } from "../data/mayorPressConferences";
-import { DocumentIcon } from "./icons";
+import { DocumentIcon, GlobeIcon } from "./icons";
 
 export function MayorPressConferenceAnnouncementCard({
   announcement,
@@ -47,6 +47,28 @@ export function MayorPressConferenceAnnouncementCard({
           </a>
         ))}
       </div>
+
+      {announcement.relatedPages && announcement.relatedPages.length > 0 && (
+        <div className="mt-3">
+          <p className="text-xs text-on-surface-variant">同じ内容を掲載している延岡市公式ページ</p>
+          <div className="mt-1 flex flex-wrap gap-2">
+            {announcement.relatedPages.map((page) => (
+              <a
+                key={page.url}
+                href={page.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${page.label}を新しいタブで開く`}
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:bg-surface-container-high focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <GlobeIcon className="h-3.5 w-3.5 shrink-0" />
+                <span className="break-words">{page.label}</span>
+                <span aria-hidden>（外部サイト）</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </li>
   );
 }

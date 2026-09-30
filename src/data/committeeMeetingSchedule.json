@@ -2,21 +2,22 @@
   "note": "延岡市議会が公表している「常任委員会・特別委員会開催予定表」の記載を、原文のまま整理したもの。予定であり、実際に開催されたかは予定表からは確認できない（委員会の記録は公開されていない）。本会議の委員長報告で開催日が述べられているものだけ heldConfirmed: true とし、根拠を heldEvidence に残す。委員会の出席者・発言者は予定表にも委員長報告にも個人単位では記載されない。",
   "generatedAt": "2026-09-23",
   "meta": {
-    "description": "延岡市議会 常任委員会・特別委員会開催予定表（令和8年度、9月14日現在版）の転記。予定であり開催実績ではない。",
-    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
+    "description": "延岡市議会 常任委員会・特別委員会開催予定表（令和8年度、9月25日現在版）の転記。予定であり開催実績ではない。",
+    "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
     "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-    "asOf": "2026-09-14",
-    "sourceLastModifiedHttp": "Mon, 14 Sep 2026 08:15:36 GMT",
-    "sha1": "1ef9c21f5a0712e81e524dd349f4ae676e3f0578",
+    "asOf": "2026-09-25",
+    "sourceLastModifiedHttp": "Fri, 25 Sep 2026 02:00:19 GMT",
+    "sha1": "51f1bf2eea25391c853ec09680d44bf1f49282ad",
     "extractedWith": "pdfjs-dist text layer (scripts/extract-pdf-text-pdfjs.mjs)",
-    "retrievedAt": "2026-09-23",
+    "retrievedAt": "2026-10-01",
     "notes": [
       "committeeIdがnullのもの（予算審査特別委員会・決算審査特別委員会）はcommittees.jsonに存在しない委員会。",
       "議会運営委員会は本予定表に記載がない（開催が無いという意味ではない）。",
       "2026-04-21の議会のあり方検討特別委員会は令和8年5月の委員改選前であり、現在のcommittees.json委員構成と同一とは限らない。",
-      "旧版（令和6年度 attachment/19031.pdf・21772.pdf、令和8年度旧版 26907.pdf）は市サイト上で404。Internet Archiveのスナップショットにリンクが残るのみで、本ファイルでは扱わない。",
+      "旧版（令和6年度 attachment/19031.pdf・21772.pdf、令和8年度旧版 26907.pdf・9月14日現在版 29033.pdf）は市サイト上で404。本ファイルでは扱わない。",
       "weekdayAsWrittenは全件、日付の実曜日と一致することを機械確認済み。",
-      "heldConfirmed=true の5件は、本会議録 R080703A の委員長報告で開催日が明示されたもの。それ以外は null（未確認）であり、「開催されなかった」ことを意味しない。"
+      "heldConfirmed=true の5件は、本会議録 R080703A の委員長報告で開催日が明示されたもの。それ以外は null（未確認）であり、「開催されなかった」ことを意味しない。",
+      "9月25日現在版（attachment/29104.pdf）への差し替え時（2026-10-01確認）、9月14日現在版から転記していた33件は委員会名・日時・場所・協議内容とも同一で、9月30日の議会のあり方検討特別委員会・議会活性化特別委員会の2件が追加されていた（sched-2026-034・035）。"
     ],
     "proposedShape": "{id, committeeId|null, committeeNameAsWritten, subdivision|null, date, startTime|null, timeAsWritten, venue, topicsAsWritten[], kind:'scheduled', heldConfirmed:null, sourceUrl, sourceTitle, asOf}"
   },
@@ -37,10 +38,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-002",
@@ -58,10 +59,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-003",
@@ -79,10 +80,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-004",
@@ -100,10 +101,10 @@
       "kind": "scheduled",
       "heldConfirmed": true,
       "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-25",
       "heldEvidence": [
         {
           "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、予算審査特別委員会委員長（小野挙君））",
@@ -136,10 +137,10 @@
       "kind": "scheduled",
       "heldConfirmed": true,
       "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-25",
       "heldEvidence": [
         {
           "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、総務政策委員会委員長（河野治満君））",
@@ -167,10 +168,10 @@
       "kind": "scheduled",
       "heldConfirmed": true,
       "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-25",
       "heldEvidence": [
         {
           "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、産業建設委員会委員長（梶本英一君））",
@@ -197,10 +198,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-008",
@@ -219,10 +220,10 @@
       "kind": "scheduled",
       "heldConfirmed": true,
       "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-25",
       "heldEvidence": [
         {
           "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、厚生教育委員会委員長（猪之鼻哲君））",
@@ -249,10 +250,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-010",
@@ -270,10 +271,10 @@
       "kind": "scheduled",
       "heldConfirmed": true,
       "heldConfirmationNote": "本会議の委員長報告で開催日が言及されている（議題の詳細・開催時刻は予定表と同一とは限らない）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14",
+      "asOf": "2026-09-25",
       "heldEvidence": [
         {
           "label": "延岡市議会会議録（令和8年第26回定例会（第6号 7月3日）、産業建設委員会委員長（梶本英一君））",
@@ -300,10 +301,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-012",
@@ -321,10 +322,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-013",
@@ -342,10 +343,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-014",
@@ -363,10 +364,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-015",
@@ -384,10 +385,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-016",
@@ -405,10 +406,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-017",
@@ -426,10 +427,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-018",
@@ -447,10 +448,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-019",
@@ -468,10 +469,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-020",
@@ -489,10 +490,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-021",
@@ -510,10 +511,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-022",
@@ -532,10 +533,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-023",
@@ -553,10 +554,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-024",
@@ -575,10 +576,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-025",
@@ -596,10 +597,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-026",
@@ -617,10 +618,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-027",
@@ -638,10 +639,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-028",
@@ -660,10 +661,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-029",
@@ -681,10 +682,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-030",
@@ -702,10 +703,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-031",
@@ -723,10 +724,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-032",
@@ -744,10 +745,10 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
     },
     {
       "id": "sched-2026-033",
@@ -765,10 +766,52 @@
       "kind": "scheduled",
       "heldConfirmed": null,
       "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
-      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29033.pdf",
-      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月14日現在）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
       "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
-      "asOf": "2026-09-14"
+      "asOf": "2026-09-25"
+    },
+    {
+      "id": "sched-2026-034",
+      "committeeId": "committee-gikai-arikata",
+      "committeeNameAsWritten": "議会のあり方検討特別委員会",
+      "subdivision": null,
+      "date": "2026-09-30",
+      "weekdayAsWritten": "水",
+      "startTime": null,
+      "timeAsWritten": "※決算審査特別委員会終了後",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "委員長報告に関する協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-25"
+    },
+    {
+      "id": "sched-2026-035",
+      "committeeId": "committee-gikai-kasseika",
+      "committeeNameAsWritten": "議会活性化特別委員会",
+      "subdivision": null,
+      "date": "2026-09-30",
+      "weekdayAsWritten": "水",
+      "startTime": null,
+      "timeAsWritten": "※決算審査特別委員会及び議会のあり方検討特別委員会終了後",
+      "venue": "第１委員会室",
+      "topicsAsWritten": [
+        "BCPに関する協議"
+      ],
+      "kind": "scheduled",
+      "heldConfirmed": null,
+      "heldConfirmationNote": "開催予定表の記載のみ。実際に開催されたか・議題どおりだったかは本資料からは確認できない（委員会記録は非公開）",
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29104.pdf",
+      "sourceTitle": "令和8年度　常任委員会・特別委員会開催予定表（令和８年９月25日現在）",
+      "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/6758.html",
+      "asOf": "2026-09-25"
     }
   ]
 }

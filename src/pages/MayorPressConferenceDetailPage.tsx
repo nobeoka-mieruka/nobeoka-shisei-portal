@@ -72,8 +72,20 @@ export function MayorPressConferenceDetailPage() {
       </div>
 
       <p className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant">
-        出典：{conference.sourceLabel}／当サイトは延岡市公式サイトではありません。掲載内容は公式資料の記載をそのまま整理したもので、独自の評価や意見は加えていません。
+        出典：{conference.sourceLabel}
+        {conference.sourcePageUpdatedAt && <>（公式ページの更新日：{formatJapaneseDate(conference.sourcePageUpdatedAt)}）</>}
+        ／当サイトは延岡市公式サイトではありません。掲載内容は公式資料の記載をそのまま整理したもので、独自の評価や意見は加えていません。
       </p>
+
+      {conference.sourceNotice && (
+        <aside
+          aria-label="題名の表記について"
+          className="rounded-xl border border-outline-variant bg-surface-container-low p-3 text-sm leading-relaxed text-on-surface break-words"
+        >
+          <p className="font-semibold">題名の表記について</p>
+          <p className="mt-1">{conference.sourceNotice}</p>
+        </aside>
+      )}
 
       <SectionCard title="発表事項">
         <ul className="space-y-3">

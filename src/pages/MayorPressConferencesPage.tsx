@@ -58,6 +58,9 @@ export function MayorPressConferencesPage() {
                 <p className="mt-1 text-xs text-on-surface-variant">
                   開催日：{formatJapaneseDate(c.date)}／発表事項{c.announcements.length}件
                 </p>
+                {c.sourceNotice && (
+                  <p className="mt-1 text-xs text-on-surface-variant">※題名の年の表記は公式ページのまま掲載しています（詳しくは発表内容のページ）</p>
+                )}
                 <p className="mt-2 border-t border-outline-variant pt-2 text-sm text-primary">発表内容を見る</p>
               </Link>
             </li>

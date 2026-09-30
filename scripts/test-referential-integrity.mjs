@@ -19,7 +19,8 @@ import assert from "node:assert/strict";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const read = (rel) => JSON.parse(readFileSync(join(ROOT, rel), "utf8"));
-const TODAY = new Date().toISOString().slice(0, 10);
+// 確認日は日本時間（Asia/Tokyo）の暦日で記録しているため、比較も日本時間の今日で行う（UTCだと0〜9時に誤検知する）。
+const TODAY = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
 
 let passCount = 0;
 function check(label, fn) {
