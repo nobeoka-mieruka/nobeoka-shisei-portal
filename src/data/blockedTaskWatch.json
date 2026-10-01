@@ -1,11 +1,11 @@
 [
   {
     "taskId": "TASK-004",
-    "title": "議案賛否データの投入・品質向上（提出者区分の残り1件：2025-09-gian-69）",
+    "title": "議案賛否データの投入・品質向上（採決方法・付託委員会の残り1件：2026-09-gian-48）",
     "status": "blocked",
     "autoResumeClass": "auto",
     "detectionMode": "existing-pipeline",
-    "resumeCondition": "2025-09-gian-69（事業契約の締結）について、委員会審査報告書等の新たな一次資料が公式サイトに掲載されること。",
+    "resumeCondition": "令和8年9月定例会（第27回）の会議録が延岡市議会の会議録検索システムに掲載されること（2026-09-gian-48の採決方法・付託委員会を会議録本文で確認するため）。提出者区分の残り1件だった2025-09-gian-69は2026-10-01に一次資料で確定済み。",
     "sourceUrl": null,
     "expectedSourceType": "official-pdf",
     "crawlerTargetId": null,
@@ -14,7 +14,7 @@
     "lastAcknowledgedAt": null,
     "lastTransitionAt": null,
     "lastCheckedAt": null,
-    "notes": "この対象は本ファイルの巡回対象（crawlerTargetId）を新設していない。理由：`.github/workflows/update-council-documents.yml`が毎日、議案審議結果PDF全件を実際に再取得・再抽出（scripts/fetch-nobeoka-council-documents.mjs・scripts/extract-council-pdf-data.mjs）しており、新しい一次資料が公開されればbillVotes.jsonへ自動的に反映される（ハッシュ監視より精度の高い、既存の実データ再取得の仕組みが既に対象をカバーしている）。本エントリはBLOCKED 7件の網羅性のためだけに登録し、check-blocked-resume.mjsの処理対象からは除外する（crawlerTargetId=nullのエントリは同スクリプトがスキップする設計）。"
+    "notes": "この対象は本ファイルの巡回対象（crawlerTargetId）を新設していない。理由：`.github/workflows/update-council-documents.yml`が毎日、議案審議結果PDF全件を実際に再取得・再抽出（scripts/fetch-nobeoka-council-documents.mjs・scripts/extract-council-pdf-data.mjs）しており、新しい一次資料が公開されればbillVotes.jsonへ自動的に反映される（ハッシュ監視より精度の高い、既存の実データ再取得の仕組みが既に対象をカバーしている）。本エントリはBLOCKED 7件の網羅性のためだけに登録し、check-blocked-resume.mjsの処理対象からは除外する（crawlerTargetId=nullのエントリは同スクリプトがスキップする設計）。 【2026-10-01】2025-09-gian-69の提出者区分は、議案等審議結果PDF（attachment/24487.pdf）の【市長提出議案】の区分（PDF内の文字の配置で確認）と会議録R070909Aの市長の提案理由説明により「市長提出」と確定し、billVotes.jsonへ登録した。提出者区分の未確認は0件になった。TASK-004に残るのは、令和8年9月定例会の議案第48号の採決方法・付託委員会（会議録の公開待ち）のみ。"
   },
   {
     "taskId": "TASK-012",

@@ -17478,6 +17478,8 @@
     "votingDate": "2025-09-19",
     "result": "原案可決",
     "category": "契約",
+    "proposerType": "mayor",
+    "proposer": "市長",
     "memberVotes": [],
     "sessionId": "2025-09",
     "sourceDocumentId": "2025-09-results",
@@ -17508,7 +17510,8 @@
         "url": "https://www.kensakusystem.jp/nobeoka/cgi-bin3/ResultFrame.exe?Code=48o046ot0cia1xvtw7&fileName=R070909A&startPos=0",
         "sourceType": "会議録"
       }
-    ]
+    ],
+    "verificationNote": "【2026-10-01】提出者区分を「市長提出」と確認した。(1) 延岡市議会「第21回延岡市議会（定例会）での議案審議等結果」（令和7年10月3日現在、attachment/24487.pdf）の2ページで、議案第69号は【委員会提出議案】の見出しより上に記載されており、1ページの【市長提出議案】の続きにあたる（PDF内の文字の配置座標で確認：議案第69号 y=560、【委員会提出議案】 y=488）。このPDFは文字の読み出し順では2ページの見出しが先頭に並ぶため、自動抽出では区分を判定できていなかった。(2) 会議録（R070909A、令和7年9月9日）で、市長（三浦久知君）が「議案第六九号は、事業契約の締結であります。」と提案理由を説明している。"
   },
   {
     "id": "2025-09-gian-70",

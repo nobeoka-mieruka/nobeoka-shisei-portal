@@ -22,6 +22,7 @@ import {
   formatMissingFiscalYearsNote,
   fiscalYearGapNote,
   hasFundData,
+  hasAnyFundBalance,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 import { continuousFiscalYearSeries, formatFiscalYearRanges } from "../lib/financeChartSeries";
@@ -38,7 +39,7 @@ export function FinanceFundsPage() {
   usePageTitle();
 
   const rows = archiveFiscalYears.filter(hasFundData);
-  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasFundData), "基金残高");
+  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasAnyFundBalance), "基金残高");
   /*
    * Phase216：財源調整用基金の推移グラフ。値を確認できている年度が飛んでいるため、横軸を
    * 1年度＝1目盛りの連続した年度軸にそろえ、未確認の年度は値なし（点も線も描かない）とする。

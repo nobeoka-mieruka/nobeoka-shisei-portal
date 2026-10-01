@@ -19,7 +19,7 @@ import { simpleCompleteness, type CompletenessMetric } from "./completeness";
 import type { GeneralQuestionStats } from "./generalQuestionStats";
 import { countDayPreciseTerms } from "./archiveMayors";
 import { countBillsWithKnownProposerType } from "./billVotes";
-import { hasFundData, hasDebtData } from "./archiveFinance";
+import { countFinanceConfirmations, financeConfirmationLabel } from "./archiveFinance";
 
 const billVotes = billVotesIndexData as BillVoteIndexItem[];
 const archiveFiscalYears = archiveFiscalYearsData as ArchiveFiscalYear[];
@@ -34,8 +34,8 @@ export type HomeDataCoverageItem =
  * ことで、同じ集計を二重計算しない。 */
 export function homeDataCoverageItems(questionStats: GeneralQuestionStats): HomeDataCoverageItem[] {
   const billVotesProposerTypeKnown = countBillsWithKnownProposerType(billVotes);
-  const fiscalYearsWithFund = archiveFiscalYears.filter(hasFundData).length;
-  const fiscalYearsWithDebt = archiveFiscalYears.filter(hasDebtData).length;
+  // 財政の件数は/data-statusと同じ判定（src/lib/archiveFinance.tsのFINANCE_CONFIRMATION_METRICS）で数える。
+  const financeConfirmed = countFinanceConfirmations(archiveFiscalYears);
   const dayPreciseTermCount = countDayPreciseTerms(archiveMayorTerms);
 
   return [
@@ -53,14 +53,14 @@ export function homeDataCoverageItems(questionStats: GeneralQuestionStats): Home
     },
     {
       kind: "ratio",
-      label: "財政：基金残高の年度確認",
-      metric: simpleCompleteness(fiscalYearsWithFund, archiveFiscalYears.length),
+      label: financeConfirmationLabel("fund"),
+      metric: simpleCompleteness(financeConfirmed.fund, archiveFiscalYears.length),
       linkTo: "/finance",
     },
     {
       kind: "ratio",
-      label: "財政：市債残高の年度確認",
-      metric: simpleCompleteness(fiscalYearsWithDebt, archiveFiscalYears.length),
+      label: financeConfirmationLabel("bond"),
+      metric: simpleCompleteness(financeConfirmed.bond, archiveFiscalYears.length),
       linkTo: "/finance",
     },
     {

@@ -3909,6 +3909,26 @@ try {
         );
       }
       if (entry.date != null && Number.isNaN(Date.parse(entry.date))) err(tag, `dateの形式が不正です: ${entry.date}`);
+      // date＝当サイトへの反映日、sourcePublishedDate＝元の資料の公表日（Phase265）。
+      // 資料の公表日が反映日より後になることはないため、取り違えを検出する。
+      if (entry.sourcePublishedDate != null) {
+        if (!DATE_RE.test(entry.sourcePublishedDate)) {
+          err(tag, `sourcePublishedDateがYYYY-MM-DD形式ではありません: ${entry.sourcePublishedDate}`);
+        } else if (DATE_RE.test(entry.date ?? "") && entry.sourcePublishedDate > entry.date) {
+          err(tag, `sourcePublishedDate（資料の公表日 ${entry.sourcePublishedDate}）がdate（サイト反映日 ${entry.date}）より後です`);
+        }
+      }
+    }
+    // 本当の重複（同じ日・同じ区分・同じ題名の履歴が2件以上）だけを検出する。
+    // 同じ題名でも日付が違えば別の更新（例：自動更新の定型文）として正当に存在しうるため、題名だけでは判定しない。
+    const seenKeys = new Map();
+    for (const entry of updateHistory) {
+      const key = `${entry.date}|${entry.category}|${entry.title}`;
+      if (seenKeys.has(key)) {
+        err("updateHistory.json", `同じ日・同じ区分・同じ題名の更新履歴が重複しています: ${seenKeys.get(key)} / ${entry.id}（${entry.date} ${entry.title}）`);
+      } else {
+        seenKeys.set(key, entry.id);
+      }
     }
   }
 } catch (e) {

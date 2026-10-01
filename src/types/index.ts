@@ -1275,7 +1275,7 @@ export type UpdateHistoryCategory =
 /** サイトの更新履歴1件分。 */
 export interface UpdateHistoryEntry {
   id: string;
-  /** ISO形式。更新日。 */
+  /** ISO形式。当サイトへ反映した日（サイト反映日）。元の資料の公表日ではない。 */
   date: string;
   title: string;
   description: string;
@@ -1283,6 +1283,11 @@ export interface UpdateHistoryEntry {
   targetPages: string[];
   /** 使用した資料名（任意）。 */
   sourceUsed?: string;
+  /**
+   * ISO形式。元の資料が公表された日（任意）。資料が1つに定まり、その公表日を一次資料で確認できる
+   * 場合だけ設定する。複数の資料をまとめた更新や、公表日を確定できない更新では設定しない。
+   */
+  sourcePublishedDate?: string;
   category: UpdateHistoryCategory;
   /** 関連ページへのリンク先パス（任意）。指定した場合のみ linkLabel のボタンを表示する。 */
   linkUrl?: string;

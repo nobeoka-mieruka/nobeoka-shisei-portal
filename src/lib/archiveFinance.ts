@@ -3,6 +3,7 @@ import type {
   MunicipalBondIssuanceStatus,
   MunicipalBondIssuanceValueType,
 } from "../types/historicalArchive";
+import { formatFiscalYearRanges } from "./financeChartSeries";
 
 /** 年度昇順に並べ替える。元データの登録順に依存しない。 */
 export function sortedFiscalYears(years: ArchiveFiscalYear[]): ArchiveFiscalYear[] {
@@ -150,6 +151,75 @@ export function hasAnyRevenueBreakdown(y: ArchiveFiscalYear): boolean {
   const b = y.budget;
   if (!b) return false;
   return b.localTaxRevenueYen != null || b.localAllocationTaxYen != null || b.nationalSubsidiesYen != null || b.prefecturalSubsidiesYen != null;
+}
+
+/**
+ * 市債残高（年度末残高）。一般会計・普通会計・特別会計含む・企業会計含むのいずれかの区分で
+ * 金額を確認できた年度。hasDebtData（debtオブジェクトの有無）は、当該年度の市債発行予定額だけを
+ * 登録した年度（残高は確認中）も含むため、「市債残高を確認済み」の件数には使わない。
+ * 市民1人当たりの値は他の区分から算出される派生値のため、ここでは数えない。
+ */
+export function hasAnyBondBalance(y: ArchiveFiscalYear): boolean {
+  const b = y.debt?.balance;
+  if (!b) return false;
+  return (
+    b.generalAccountBondBalanceYen != null ||
+    b.ordinaryAccountLocalBondBalanceYen != null ||
+    b.includingSpecialAccountsYen != null ||
+    b.includingEnterpriseAccountsYen != null
+  );
+}
+
+/**
+ * 財政健全化判断比率（地方公共団体の財政の健全化に関する法律の4指標：実質赤字比率・連結実質赤字比率・
+ * 実質公債費比率・将来負担比率）のいずれかを確認できた年度。「赤字なし」「算定されない」等の公表区分
+ * （soundness）を確認できた年度も含む。経常収支比率・財政力指数は健全化判断比率ではないため数えない
+ * （hasAnyFinanceRatioは、これらを含む「財政指標のいずれか」の判定）。
+ */
+export function hasSoundnessRatio(y: ArchiveFiscalYear): boolean {
+  const f = y.finance;
+  if (!f) return false;
+  return f.realDebtServiceRatioPercent != null || f.futureBurdenRatioPercent != null || !!f.soundness;
+}
+
+/**
+ * 市民向けに件数を見せる財政データの区分（Phase266）。トップページとデータ収録状況ページは、
+ * この一覧のラベルと判定関数だけを使って件数を出す（ページごとに別の判定を書かない）。
+ * 「年度レコード」（archiveFiscalYears.jsonに年度の記録があること）は、数値を確認済みという意味ではない。
+ */
+export const FINANCE_CONFIRMATION_METRICS = [
+  { key: "initialBudget", label: "一般会計当初予算", test: hasInitialBudgetAmount },
+  { key: "settlement", label: "一般会計決算額", test: hasGeneralAccountSettlement },
+  { key: "fund", label: "基金残高", test: hasAnyFundBalance },
+  { key: "bond", label: "市債残高", test: hasAnyBondBalance },
+  { key: "soundness", label: "財政健全化判断比率", test: hasSoundnessRatio },
+] as const satisfies readonly { key: string; label: string; test: (y: ArchiveFiscalYear) => boolean }[];
+
+export type FinanceConfirmationKey = (typeof FINANCE_CONFIRMATION_METRICS)[number]["key"];
+
+/** 財政データの区分ごとに、数値を確認できた年度数を数える（実データから算出し、固定値を持たない）。 */
+export function countFinanceConfirmations(years: ArchiveFiscalYear[]): Record<FinanceConfirmationKey, number> {
+  return Object.fromEntries(
+    FINANCE_CONFIRMATION_METRICS.map((m) => [m.key, years.filter(m.test).length]),
+  ) as Record<FinanceConfirmationKey, number>;
+}
+
+/**
+ * 条件を満たす年度を「2009〜2018年度、2021〜2025年度」のような区間の表記にする。
+ * 説明文に確認済みの年度範囲を固定値で書くと、データ追加時に食い違うため、実データから作る。
+ */
+export function confirmedFiscalYearSpans(
+  years: ArchiveFiscalYear[],
+  test: (y: ArchiveFiscalYear) => boolean,
+): string {
+  const matched = years.filter(test).map((y) => y.fiscalYear);
+  return matched.length === 0 ? "なし" : formatFiscalYearRanges(matched);
+}
+
+/** 「財政：◯◯の年度確認」というトップページ・データ収録状況ページ共通の見出し。 */
+export function financeConfirmationLabel(key: FinanceConfirmationKey): string {
+  const m = FINANCE_CONFIRMATION_METRICS.find((x) => x.key === key);
+  return `財政：${m?.label ?? key}の年度確認`;
 }
 
 /** 円単位の内部値を「約◯億円」表示に変換する。nullは「確認中」。 */

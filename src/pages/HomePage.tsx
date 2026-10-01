@@ -515,7 +515,7 @@ export function HomePage() {
             const content = (
               <>
                 <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-                  <span>{formatJapaneseDate(entry.date)}</span>
+                  <span>サイト反映日：{formatJapaneseDate(entry.date)}</span>
                   <span
                     className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${UPDATE_HISTORY_CATEGORY_CLASS[entry.category]}`}
                   >

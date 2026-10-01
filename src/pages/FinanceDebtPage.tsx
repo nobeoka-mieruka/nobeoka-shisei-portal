@@ -22,6 +22,7 @@ import {
   formatMissingFiscalYearsNote,
   fiscalYearGapNote,
   hasDebtData,
+  hasAnyBondBalance,
 } from "../lib/archiveFinance";
 import { financeMetricByKey } from "../lib/archiveFinanceMetrics";
 import { humanizeDataNote } from "../lib/citizenTermLabels";
@@ -38,7 +39,8 @@ export function FinanceDebtPage() {
   usePageTitle();
 
   const rows = archiveFiscalYears.filter(hasDebtData);
-  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasDebtData), "市債残高");
+  const bondBalanceYearCount = archiveFiscalYears.filter(hasAnyBondBalance).length;
+  const missingYearsNote = formatMissingFiscalYearsNote(missingFiscalYears(archiveFiscalYears, hasAnyBondBalance), "市債残高");
 
   return (
     <div className="space-y-4 px-4 py-4 sm:px-6">
@@ -59,7 +61,7 @@ export function FinanceDebtPage() {
 
       <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         収録年度：{rows.length}／{archiveFiscalYears.length}年度（{fiscalYearLabel(archiveFiscalYears[0]?.fiscalYear)}〜
-        {fiscalYearLabel(archiveFiscalYears[archiveFiscalYears.length - 1]?.fiscalYear)}）。
+        {fiscalYearLabel(archiveFiscalYears[archiveFiscalYears.length - 1]?.fiscalYear)}）。このうち年度末の市債残高（いずれかの区分）を確認できた年度：{bondBalanceYearCount}年度。
         {missingYearsNote ?? "対象期間の全年度で市債残高を確認済みです。"}
         市債の増減は市長個人だけの成果・責任ではなく、国の制度・大型事業・災害復旧など複数の要因が影響します。市長・議員の評価目的での単純な比較には利用しないでください。
         {yearGapNote && <span className="mt-1 block">{yearGapNote}</span>}

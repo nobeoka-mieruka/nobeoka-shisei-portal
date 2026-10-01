@@ -38,7 +38,7 @@ export function UpdatesPage() {
       <div id="updates-heading" className="rounded-2xl bg-gradient-to-br from-primary-container to-surface-container-low p-5 shadow-e1 sm:p-6">
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">更新履歴</h1>
         <p className="mt-1 text-sm text-on-primary-container/80">
-          このサイトの機能追加・データ更新・出典追加などの記録です。新しい順に表示しています。
+          このサイトの機能追加・データ更新・出典追加などの記録です。新しい順に表示しています。「サイト反映日」は当サイトに反映した日、「資料の公表日」は元の資料が公表された日です（資料が1つに定まり、公表日を確認できた更新にだけ表示しています）。
         </p>
       </div>
 
@@ -51,7 +51,8 @@ export function UpdatesPage() {
           <li key={entry.id}>
             <SectionCard title={entry.title}>
               <div className="flex flex-wrap items-center gap-2 text-xs text-on-surface-variant">
-                <span>{formatJapaneseDate(entry.date)}</span>
+                <span>サイト反映日：{formatJapaneseDate(entry.date)}</span>
+                {entry.sourcePublishedDate && <span>資料の公表日：{formatJapaneseDate(entry.sourcePublishedDate)}</span>}
                 <span
                   className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryClass[entry.category]}`}
                 >

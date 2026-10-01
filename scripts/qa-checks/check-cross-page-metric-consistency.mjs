@@ -74,14 +74,11 @@ const LABEL_PAIRS = [
   // 常にSKIPになり、本来検出すべき不一致（トップページとdata-statusの食い違い）を
   // 検出できなくなっていたため、現在の文言に追従した。
   { metric: "会議録未公開会期の予定質問", label: "会議録未公開会期の予定質問" },
-  // 以下の3件は、トップページ側は/data-statusとは別の要約ウィジェット
-  // （src/lib/dataCompletenessSummary.ts、homeDataCoverageItems）が独自の文言で表示しており、
-  // data-status側の完全性ダッシュボード（DataStatusPage.tsx）はより詳しい区分名
-  // （例：「財政：市債残高（普通会計）の年度確認」）を使うため、ラベル文言が完全一致しない。
-  // 実際の数値自体はdata-statusの「財政・人口・基金・市債（年度データ）」カードの説明文中に
-  // 同じ分子（市債確認済みN年度／基金確認済みN年度）で埋め込まれており、Phase168時点で
-  // トップページと数値は一致している（38／26、手動確認済み）。ラベル文言をどちらかに
-  // 統一すると表示の意味が変わってしまうため、ここでは統一せずSKIPのままにしている。
+  // Phase266：財政の2件は、トップページ（src/lib/dataCompletenessSummary.ts）と/data-status
+  // （DataStatusPage.tsx）の両方が src/lib/archiveFinance.ts の FINANCE_CONFIRMATION_METRICS と
+  // financeConfirmationLabel() を使うようにしたため、見出し文言・判定とも一致する（SKIPではなく比較される）。
+  // それ以前はトップページが「記録がある年度」（hasDebtData等）、/data-statusが「数値を確認できた年度」を
+  // 数えており、市債残高で38年度と36年度のように食い違っていた。
   { metric: "財政：基金残高の年度確認", label: "財政：基金残高の年度確認" },
   { metric: "財政：市債残高の年度確認", label: "財政：市債残高の年度確認" },
   { metric: "財政：人口の年度確認", label: "財政：人口の年度確認" },
