@@ -154,6 +154,33 @@
       "lastStatus": "unchanged",
       "lastContentHash": "a25a27ef7e479858b9b2b82148407efc963cfd5db966631ac3225342c5d92f7a",
       "consecutiveNotFoundCount": 0
+    },
+    {
+      "targetId": "mayor-office-index",
+      "lastCheckedAt": "2026-10-01T04:47:38.323Z",
+      "lastSuccessfulAt": "2026-10-01T04:47:38.323Z",
+      "lastUpdatedAt": "2026-10-01T04:47:38.323Z",
+      "lastStatus": "new",
+      "lastContentHash": "830062fc0ea7303d68539180c932ab7693fb9a2bc9a25b95403d1644c563c368",
+      "consecutiveNotFoundCount": 0
+    },
+    {
+      "targetId": "mayor-promise-progress",
+      "lastCheckedAt": "2026-10-01T04:47:38.323Z",
+      "lastSuccessfulAt": "2026-10-01T04:47:38.323Z",
+      "lastUpdatedAt": "2026-10-01T04:47:38.323Z",
+      "lastStatus": "new",
+      "lastContentHash": "70378e6c3c3749385273ba69d94713a3431893f83b101113b77bb445b1278d62",
+      "consecutiveNotFoundCount": 0
+    },
+    {
+      "targetId": "public-comment-status",
+      "lastCheckedAt": "2026-10-01T04:47:38.323Z",
+      "lastSuccessfulAt": "2026-10-01T04:47:38.323Z",
+      "lastUpdatedAt": "2026-10-01T04:47:38.323Z",
+      "lastStatus": "new",
+      "lastContentHash": "97b630c83ecb84a3b4a1cad9810961158f92d39b94132f35ca95abd6496b29ce",
+      "consecutiveNotFoundCount": 0
     }
   ],
   "totalCount": 17,

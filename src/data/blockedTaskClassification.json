@@ -83,7 +83,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "存在しないURLをハッシュ監視することはできない。4回連続で同じ結論（対象議員17名の経歴を確認できる一次資料のURL自体が存在しない）に達したため、RESEARCH_EXHAUSTEDへ変更した。これは「一次資料が存在しないと確定した」という意味ではなく、「延岡市議会公式サイト・所属政党公式サイト・本人SNS等、現在確認可能な手段では調査を尽くしたが確認できていない」という意味である。次に再調査する価値があるのは、対象議員のいずれかが新たに公式サイト・SNSを開設した場合、または所属政党が議員紹介ページを新設した場合のみに限定し、通常の定期再検索は行わない。【Phase92追記】新しい情報源クラスとして広報のべおかOCR横断検索インデックス（kohoOcrSearchIndex.json、2,187件）を、学歴・職歴の記述が無い議員の氏名で機械的に照合したが、該当ヒット0件だった（広報誌は個々の議員の学歴・経歴を紹介する媒体ではないため、この情報源自体が原理的に不向きである可能性が高い）。結論は変わらずRESEARCH_EXHAUSTEDを維持する。【2026-08-12追記】判定ロジックを見直し、profile文字列だけでなくcareer配列も確認したところ、真に学歴・職歴が未確認なのは17名（m01/m02/m03/m05/m07/m08/m09/m10/m11/m12/m14/m15/m16/m20/m22/m23/m26）であることを確認した（従来「21名」としていたのはcareer配列を見落とした集計誤り）。この17名についてWebFetchでSNS本文（Instagram等）を直接確認したところ、稲田雅之（m01）・後藤司光（m12）・吉田茂仁（m26）の3名はInstagramプロフィール文で本人が延岡市議会議員であると自己申告していることを確認できたためSNSのverificationStatusをverifiedへ更新したが、いずれも学歴・職歴の記載はプロフィール文に無かった。Facebook・Xは事業者側の技術的制限（ログイン必須表示、402エラー等）で本文を確認できず、この2媒体経由での経歴確認は今回も進展しなかった。夕刊デイリー・宮崎日日新聞等の地域報道検索でも、現職議員の学歴・職歴を扱う記事は見つからなかった。結論は変わらずRESEARCH_EXHAUSTEDを維持する。【2026-08-16追記】ユーザー指示により新しい調査アングル（選挙公報、Web Archive）でbackground agentによる再調査を試みた。選挙公報の画像PDFをclaude-in-chrome経由で視覚的に確認する作業に時間がかかり、約45分経過してもsrc/data/members.jsonへの書き込みが無く完了の見込みが立たなかったため、セッションの時間予算を優先して安全に中断した（members.jsonへの変更は無し、既存データを一切壊していない）。選挙公報の候補者経歴欄という着眼点自体は有望と考えられるため、RESEARCH_EXHAUSTEDへは戻さず、次回まとまった時間を確保した専用セッションで再試行する候補として記録する。 【2026-08-16再追記（本体セッションで再試行・完了）】前回中断したbackground agentに代わり、本体セッションが3〜4名ずつの小グループに分割して選挙公報PDF（WinRTベースのscripts/pdf-page-to-png-windows.ps1でPNG化し、Readツールで目視確認）を全17名分確認した。結果：猪之鼻哲（m02）・河野治満（m10）・後藤司光（m12）・柴浩信（m14）・峯田克明（m23）の5名は生年月日・出身校・職歴を含む詳細プロフィール欄があり、career配列を新規追加した。稲田雅之（m01）・小野挙（m05）・甲斐正幸（m08）・平田信広（m20）の4名は「市議歴◯年」等の当選回数の自己申告のみ確認でき、career配列へ本人の自己申告として追加した。中城あかね（m16）・吉田茂仁（m26）の2名は年齢のみ確認でき（既存の年齢データと計算上矛盾しないことを確認）、career配列は追加せずnotesにのみ記録した。上杉泰洋（m03）・甲斐忠篤（m07）・梶本英一（m09）・北林幹雄（m11）・中島誠治（m15）・松田満男（m22）の6名は選挙公報でも学歴・職歴の記載欄自体が無かった。いずれも推測での穴埋めは行っていない。残り8名（フルの経歴が未確認の12名のうち、当選回数の自己申告のみ確認できた4名を除く）については、選挙公報という情報源を使い切ったため、真にRESEARCH_EXHAUSTEDと言える状態に近づいた。ただし平成31年（2019年）・令和元年（2019年）以前の過去の選挙公報（当選歴が長い議員の初当選時点の公報等）は今回未確認であり、次に前進させる場合の候補として残す。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "選挙公報（令和5年4月23日執行延岡市議会議員選挙）の候補者経歴欄は確認済みで、残り8名は学歴・職歴の記載なし。他の一次資料は記録上未特定。",
     "nextActionCategory": "research_exhausted"
   },
   {
@@ -98,7 +98,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "延岡市が発刊した「延岡市史 市制八十周年記念十年史」（対象期間：平成15〜25年）は既に対象期間外と確認済み（Phase45時点）。【Phase92追記】NDLサーチで『延岡市史』のデジタル化資料4点を新たに発見した：①1949年版第1巻（石川恒太郎編）、②1963年版（PID: https://dl.ndl.go.jp/pid/3027323 、序文に「延岡市長　折小野良一」の記述をNDL側の検索プレビューで確認）、③1983年版（市制60周年記念、上・下巻）、④1993年版（市制60周年記念十年史）。①〜④いずれも「インターネット公開：○」だが「国立国会図書館個人送信サービス」経由（利用者登録・ログイン必須、日本国外居住者は利用不可）であり、当方の自動化ツール（WebFetch等）ではログインを伴う本文閲覧ができないことを確認した（ID・パスワードの入力はプロジェクトの方針上も実施しない）。1983年版は1937年（延岡市制施行前後）〜1983年、1993年版は1983〜1993年をカバーすると考えられ、本タスクが必要とする1937〜1994年の日単位の市長交代日をこれらの巻が実際に含んでいるかどうかは、ログインして本文を確認しないと判定できない。人手による追加調査（国立国会図書館の利用者登録、または最寄り図書館（延岡市立図書館・宮崎県立図書館等）での現物・遠隔複写サービスの利用）であれば前進できる可能性が高いため、自動再確認の対象であるWAITING_EXTERNALから、人手の追加調査で前進しうるMANUAL_REVIEWへ変更した。推測での日付登録は行っていない。【2026-08-12追記】地域報道（夕刊デイリー・宮崎日日新聞等）を対象に鈴木憲太郎（mayor-05）・早生隆彦（mayor-12）等の就任・退任日を個別検索したが、日単位の新規情報は見つからなかった（早生隆彦の1994年1月辞職は既存データ〔termEnd 1994-01-11、月精度〕と矛盾しない範囲の情報のみ）。「延岡市議会史 目次」でも該当資料のオンライン目次は発見できなかった。新たな一次資料は見つからず、引き続きMANUAL_REVIEWを維持する。【2026-08-17追記】ユーザー指示によりNDLサーチで書誌情報のみを再整理し、精緻な書誌ID・所蔵先を新規発見した（延岡市史1993年版=R100000002-I000002328209、1983年版上/下=R100000001-I14111100095159／I11121124131757、2003年版・2013年版も新規発見したが対象期間外）。詳細は reports/ndl-historical-source-ledger.json・reports/physical-source-candidates.md（新規作成）を参照。ログインは一切試みていない。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "国立国会図書館デジタルコレクション『延岡市史』1949年版・1963年版・1983年版・1993年版（個人送信サービス、利用者本人のログインが必要）。",
     "nextActionCategory": "needs_ndl_login"
   },
   {
@@ -193,7 +193,7 @@
       "延岡市議会事務局（Tel: 0982-22-7029）へ議会史・記念誌等の所在を照会した場合",
       "延岡市公式サイト・NDLデジタルコレクション等で新たに1999年より前の候補者別選挙結果に関する一次資料がオンライン公開された場合"
     ],
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "1999年より前の選挙の所蔵資料の現物確認、または延岡市選挙管理委員会への照会（いずれもオンラインでは完結しない）。",
     "nextActionCategory": "needs_ndl_login"
   },
   {
@@ -208,7 +208,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "Phase83〜87で同一パーサーでの再試行はせず、代わりに3つの独立パーサーで診断済み（reports/koho-ocr-recovery-report.json参照）。Phase91で追加の代替経路を確認：延岡市公式サイトのバックナンバー一覧に同一URL以外の代替リンク・HTML版は無い。Internet Archive Wayback Machine（2025年1月時点の第三者クローラーによる取得）でも同一サイズ（1,048,576バイト、本来の1.46MBより小さい＝取得当時から既に破損していたことを裏付け）・同一エラーで破損していることを確認し、配信元の長期破損を裏付けた。国立国会図書館デジタルコレクション・宮崎県立図書館のオンライン蔵書検索でも代替資料は確認できなかった。src/data/kohoNobeokaIssues.jsonのkoho-2010-04にsourceStatus（code: SOURCE_DAMAGED）を設定し、/data-statusで市民向けに「原資料PDFの構造破損により閲覧・文字起こしができません（号自体が存在しないという意味ではありません）」と明記した。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "延岡市公式サイトの配信PDF（attachment/2703.pdf）自体が破損。別の入手経路は記録上未特定。",
     "nextActionCategory": "needs_offline_library"
   },
   {
@@ -263,7 +263,7 @@
       "NDLサーチで新たに全文検索可能な形でデジタル化・公開された資料が見つかった場合",
       "ユーザー本人がNDLサーチにログインし、『日本の歴代市長：市制施行百年の歩み 第3巻』の該当項目（仲田又次郎〜早生隆彦の可能性）を確認した場合"
     ],
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "国立国会図書館の『延岡市史』『延岡市勢要覧』各版（個人送信サービスへの利用者本人のログイン、または現物閲覧）。",
     "nextActionCategory": "needs_ndl_login"
   },
   {
@@ -278,7 +278,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。TASK-045・074（歴代市長分）とは対象範囲が異なる（議会史・会議録・議会だより・歴代議長副議長・議員選挙）。【2026-08-17追記】NDLサーチ書誌検索「延岡市議会会議録」（234件、ログイン不要）を実施し、reports/ndl-historical-source-ledger.json（ndl-src-15）へ記録。「延岡市議会史」（単体書誌）は0件、既存TASK-046の確認と一致。【2026-08-29追記（TASK-174、延岡市史横断調査）】延岡市公式ホームページ「延岡市史(市制80周年記念10年史)」（https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/4386.pdf 、NDLログイン不要）第2編第9章第3節に「歴代市議会議長」第47〜52代（自2001-05-09〜至2011-05-01）・「歴代市議会副議長」第50〜60代（自2002-05-08〜至2012-05-07）が日単位の在任期間つきで掲載されていることを新規発見した（reports/phase157-shishi-research/参照）。ただしこれは2001〜2012年分のみで、議会創設（初代）からの全代数は未収録（この10年史の対象期間外、1963年版・1993年版延岡市史等の別冊での確認が必要）。会議録本体（1957〜1973年分）の現物閲覧が必要という結論自体は変化なし。ポータル側に歴代議長・副議長を構造化するデータファイルが現時点で存在しないため、データ投入は本タスクでは実施せず次フェーズの検討事項として記録する（推測による代数の穴埋めはしない）。【2026-08-29追記（TASK-176）】上記の歴代市議会議長第47〜52代（6件、うち稲田和利は第49代・第52代の重任のため実質5名）・歴代市議会副議長第50〜60代（11件）を、新設した src/data/archiveCouncilLeadership.json（型: ArchiveCouncilLeadershipTerm、src/types/historicalArchive.ts）へ構造化データとして投入し、/committees/leadership-history ページで公開した。原資料に出現した重複疑いの記載（「第五十三代 佐藤勉」、開始日が第59代髙木益夫と完全一致し代数が既存の第53代湯浅啓祐と矛盾）は、UNR-032の記載どおり登録していない。会議録本体（1957〜1973年分）の現物閲覧が必要という結論、および初代〜第46代・第53代以降（議長）・第61代以降（副議長）が未収録という結論自体は変化なし。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "宮崎県立図書館所蔵の旧会期会議録（1957〜1973年分、紙媒体・来館閲覧）。",
     "nextActionCategory": "needs_offline_library"
   },
   {
@@ -293,7 +293,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。archiveFiscalYears.jsonの欠損年度（昭和期まで遡及）が対象。【2026-08-17追記】NDLサーチ全文検索（デジタル資料）で『宮崎県行政資料所在調査目録』から延岡市決算書並意見書（昭和20・25〜39年度、17冊）の所在記録を新規確認。reports/ndl-historical-source-ledger.json（ndl-src-16）へ記録。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "宮崎県行政資料所在調査目録に記載の延岡市決算書並意見書（昭和20〜39年度分、17冊）。所蔵館は記録上未特定。",
     "nextActionCategory": "needs_ndl_login"
   },
   {
@@ -308,7 +308,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。TASK-046（1999年以前の市議選候補者別得票結果、RESEARCH_EXHAUSTED）とは別枠。TASK-046のreopenConditionsにもNDLログインが含まれるが、本タスクは市長選・人口統計を含むより広い範囲。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "国立国会図書館の選挙資料・人口統計（利用者本人のログインが必要。ログイン確認は未実施）。",
     "nextActionCategory": "needs_ndl_login"
   },
   {
@@ -323,7 +323,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。既存のkohoNobeokaIssues.json（延岡市公式サイト配信分）とは別に、NDL所蔵分を台帳化する。【2026-08-17追記】NDLサーチ書誌検索「廣報のべおか」（23件）で延岡市発行の年次合本を確認。reports/ndl-historical-source-ledger.json（ndl-src-18）へ記録。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "国立国会図書館所蔵の延岡市広報合本（1987年分〜、紙媒体・来館閲覧）。",
     "nextActionCategory": "needs_ndl_login"
   },
   {
@@ -338,7 +338,7 @@
     "autoRecheck": false,
     "autoRecheckMechanism": null,
     "notes": "docs/ndl-search-research-plan.mdで新規登録（TASK-100）。全文閲覧不可の新聞記事は書誌情報のみ記録する方針（設計書2章・6章参照）。",
-    "expectedPublicationPeriod": null,
+    "expectedPublicationPeriod": "国立国会図書館の新聞・特別職・旧町村合併資料（利用者本人のログインが必要。ログイン確認は未実施）。",
     "nextActionCategory": "needs_ndl_login"
   },
   {

@@ -561,6 +561,57 @@ Phase253 で増殖は止めたが、過去に残っていた19本のブランチ
 4. **GREEN 判定**: 上表の品質 baseline がすべて維持されていること。新規 error 0 / 新規 warning 0。
 5. **反映**: commit → push → Cloudflare Pages の自動デプロイ → `npm run smoke:production`。
 
+### 自動監視の範囲（Phase272で棚卸し、2026-10-01）
+
+定期実行は4本。GitHub Actions の cron は UTC で、実際の起動は混雑により1.5〜8時間ほど遅れることがある（遅れは障害ではない）。
+
+| workflow | cron（UTC → 日本時間） | 監視・処理する対象 | 本番（main）への書き込み |
+| --- | --- | --- | --- |
+| `update-council-documents.yml` | 毎日 21:00 → 06:00 | 議案等審議結果PDF（議案・条例・請願・陳情）、一般質問の会議録公開（`check-question-transcript-publication`） | あり（検証GREEN時のみ、`chore: 延岡市議会の最新資料を自動更新`） |
+| `sync-council-data.yml` | 毎日 18:30 → 03:30（120時間ゲートで実質5日ごと） | 会議日程・委員会開催予定表、一般質問の通告一覧、意見書・決議、委員会活動報告書、議員名簿 | なし（ジョブ要約とArtifactのみ。PRは opt-in 変数が無効なので作らない） |
+| `civic-archive-sync.yml` | 毎日 19:00 → 04:00（120時間ゲートで実質5日ごと） | `src/data/archiveCrawlerTargets.json` の対象（財政・人口・基金・政治資金・報酬・市長室〈記者会見・公約の進捗状況〉・パブリックコメント運用状況 など20件）のハッシュ比較 | BLOCKEDタスクの一次資料変化の記録だけ（`review_required`） |
+| `auto-update-dryrun.yml` | 毎日 09:00 → 18:00 | 議案・一般質問・財政（予算・健全化判断比率・財政状況資料集の新年度）・人口（統計ページから最新Excelを解決し基準日を比較）の dry-run | なし（読み取り権限のみ。ジョブ要約とArtifact） |
+
+市長記者会見・市長公約の進捗状況・パブリックコメントは、Phase272 で `archiveCrawlerTargets.json` に追加した（それ以前は手動確認のみ）。
+いずれも**検知だけ**で、データへの反映は人が一次資料を確認してから行う。
+
+### 状態の呼び方（既存の値を使う。新しい状態名は作らない）
+
+| 意味 | 使う値 |
+| --- | --- |
+| 新しい資料なし | `NO_CHANGE` |
+| 公開を待っている（日付が過ぎただけでは「実施済み」にしない） | `WAITING_FOR_OFFICIAL_RECORD` |
+| 一次資料が新たに見つかった | `OFFICIAL_RECORD_AVAILABLE`／`OFFICIAL_RECORD_PARTIALLY_AVAILABLE`、巡回では `new`・`changed` |
+| データ変更の候補がある | `UPDATE_CANDIDATE`（dry-run レポートの `updateCandidate`） |
+| 確認に失敗した | `CHECK_FAILED`、巡回では `error`・`possiblyRemoved` |
+| 人の確認が必要 | `review_required`（BLOCKEDタスク）、議会資料は `pendingReview` 系 |
+
+自動判定の GREEN／YELLOW／RED（`scripts/auto-update/core/classify.mjs`）：
+
+- **GREEN**：公式一次資料で、スキーマ検証に合格し、異常な変化が無い。議案等審議結果のように自動反映の仕組みがあるものだけ、検証（validate:data・typecheck・lint・test・build）がすべて通った場合に反映する。
+- **YELLOW**：人が確認してから反映する（公式サイトから資料が消えた、OCRが必要、前年度との差が大きい など）。自動では削除も反映もしない。
+- **RED**：反映しない（取得・解析の失敗、公式以外の資料、表と本文の数値の食い違い、異常な大量変更）。原因を確認する。
+
+### 反映の判断
+
+- 自動で反映してよいもの：既存の自動更新（議案等審議結果PDFの取り込み）が GREEN のときだけ。
+- 人が確認して反映するもの：上記以外のすべて（記者会見、パブリックコメント、委員会予定、人口、財政、公約、会議録の本文）。
+  一次資料（延岡市・延岡市議会の公式ページ・添付資料・会議録）を開いて確かめ、既存レコードとの重複を確認してから登録する。
+- 推測しない：公表されていない数値を0や推定値で埋めない。公式の表記（題名の年号など）を勝手に直さない。新聞・Wikipedia だけで確定しない。
+- 重複させない：同じ出来事・資料は1件だけ登録し、別ページの資料は出典として紐付ける。差し替えられた資料は `superseded` で新しい版を指す。
+- 会議録の公開待ち：一般質問は通告書に基づく「予定」のまま `WAITING_FOR_OFFICIAL_RECORD` とし、会議録が公開されたら照合する（日付だけで実施済みにしない）。
+
+### warning と HUMAN_ACTION_REQUIRED
+
+- warning は件数を減らすこと自体を目的にしない。増えたら原因を調べ、本当の問題・確認済みなのに状態が古い・検査側の誤検出のどれかを判定する（Phase270）。
+- HUMAN_ACTION_REQUIRED（`reports/human-action-ledger.json`）は、一次資料が無い・図書館や現地での確認が必要・ログインが必要なもの。推測で解消しない。いずれも `blocksRelease=false`（リリースを止めない）。
+
+### デプロイ
+
+- 公開画面の表示が変わる変更は、通常どおり push で Cloudflare Pages に自動デプロイする。
+- 公開画面が変わらない変更（ワークフロー・テスト・内部台帳のみ）は、コミットメッセージに `[CF-Pages-Skip]` を付けてデプロイを省いてよい。省いたコミットは、次の通常のデプロイ（毎日の自動更新を含む）で一緒に本番へ入る。
+- デプロイ確認だけのための空コミット・強制デプロイはしない。
+
 ### 監査スクリプト（必要なときだけ実行）
 
 | コマンド | 用途 |
