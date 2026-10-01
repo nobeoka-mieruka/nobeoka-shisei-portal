@@ -1,41 +1,41 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-12T08:56:45.336Z",
+  "generatedAt": "2026-10-01T03:15:05.530Z",
   "release": {
-    "commitSha": "6b21d10252bccc199828705c30255aa91aaad2b5",
-    "commitShaShort": "6b21d10",
-    "commitDate": "2026-09-12T17:32:30+09:00",
-    "productionDeployId": "a6dfa376-5dc5-4c85-91b3-85e176a9f51d",
+    "commitSha": "b997b6d8ea3b79d313a5146ca92d901e6dc23a9d",
+    "commitShaShort": "b997b6d",
+    "commitDate": "2026-10-01T12:12:11+09:00",
+    "productionDeployId": "11f82343-547a-4880-b5ed-fdd91d9ac3da",
     "productionUrl": "https://nobeoka-shisei-portal.pages.dev/"
   },
   "counts": {
-    "bills": 1178,
+    "bills": 1206,
     "generalQuestions": 27,
-    "councilSpeechRecords": 419,
-    "questionItems": 1568,
+    "councilSpeechRecords": 433,
+    "questionItems": 1718,
     "currentMembers": 26,
     "memberProfilesIncludingFormer": 84,
     "mayorsHistorical": 14,
     "mayorTermRecords": 30,
     "mayorPromises": 14,
-    "civicTimelineEvents": 219,
-    "updateHistoryEntries": 151,
+    "civicTimelineEvents": 220,
+    "updateHistoryEntries": 187,
     "councilSessions": 62,
-    "searchIndexEntries": 2294,
-    "searchIndexUniqueUrls": 1918
+    "searchIndexEntries": 2425,
+    "searchIndexUniqueUrls": 2012
   },
   "sources": {
-    "uniqueSourceUrls": 5531
+    "uniqueSourceUrls": 6461
   },
   "blockedTasks": {
-    "total": 15,
+    "total": 16,
     "byStatus": {
       "WAITING_EXTERNAL": 2,
       "COMPLETED": 3,
-      "MANUAL_REVIEW": 8,
+      "MANUAL_REVIEW": 9,
       "RESEARCH_EXHAUSTED": 2
     },
-    "humanActionRequired": 10,
+    "humanActionRequired": 11,
     "humanActionTopics": [
       "市長任期13区間",
       "政務活動費",
