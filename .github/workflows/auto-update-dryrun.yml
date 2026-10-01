@@ -52,9 +52,13 @@ on:
     # 定期実行にはworkflow_dispatchの入力が無いため、target=all固定で実行する。
     - cron: "0 9 * * *"
 
+# Phase271：既定の権限は読み取りのみ。dry-run本体（dryrunジョブ）はブランチもcommitも作らず、
+# ジョブ要約とArtifactだけを出すため書き込み権限は不要（Artifactの保存はGITHUB_TOKENの権限を使わない）。
+# 書き込み権限は、opt-in変数 BOT_PULL_REQUESTS_ENABLED=true のときだけ動く open-pr ジョブにだけ与える。
+# （以前はワークフロー全体に contents: write / pull-requests: write を与えていたが、
+#   2026-10-01時点でこの変数は未設定で、書き込み権限は一度も使われていなかった。）
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: auto-update-dryrun
@@ -64,6 +68,10 @@ jobs:
   dryrun:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -328,50 +336,18 @@ jobs:
         run: |
           echo "自動更新パイプライン dry-run: レポートに差分はありませんでした（通知不要）。" >> "$GITHUB_STEP_SUMMARY"
 
-      # 【任意】リポジトリ設定でActionsによるPR作成を許可した場合だけ、PR方式を有効にする。
-      # 有効化の手順：
-      #   1. Settings > Actions > General > Workflow permissions で
-      #      「Allow GitHub Actions to create and approve pull requests」を有効にする。
-      #   2. Settings > Secrets and variables > Actions > Variables で
-      #      BOT_PULL_REQUESTS_ENABLED = true を追加する。
-      # 変数が未設定なら、このステップは丸ごとスキップされる（＝ブランチは作られない）。
-      #
-      # PR作成に失敗した場合は、このジョブが直前にpushしたブランチだけを削除して後始末する。
-      # 削除するのは「リモートのHEADが、たった今pushしたSHAと完全に一致する」場合に限る
-      # （他の誰かが触った可能性があるブランチは削除しない）。--force は使わない。
-      - name: Create branch and open Pull Request (opt-in)
+      # Phase271：PR作成は、書き込み権限を持つ別ジョブ（open-pr、ファイル末尾）で行う。
+      # そのジョブへPR本文を渡すため、opt-in変数が有効なときだけ、本文と題名の補足を小さなArtifactとして保存する。
+      # 変数が未設定（既定）なら、このステップもopen-prジョブもスキップされる。
+      - name: Upload PR body for the opt-in PR job
         if: steps.diff.outputs.changed == 'true' && vars.BOT_PULL_REQUESTS_ENABLED == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -e
-          BRANCH="bot/auto-update-dryrun-$(date -u +%Y%m%d%H%M%S)"
-          SUFFIX="$(cat /tmp/pr-title-suffix.txt 2>/dev/null || echo report)"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
-          git add reports/auto-update
-          git commit -m "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）"
-          git push origin "$BRANCH"
-          PUSHED_SHA="$(git rev-parse HEAD)"
-          set +e
-          gh pr create \
-            --title "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）" \
-            --body-file /tmp/pr-body.md \
-            --base main \
-            --head "$BRANCH"
-          PR_STATUS=$?
-          set -e
-          if [ "$PR_STATUS" -ne 0 ]; then
-            REMOTE_SHA="$(git ls-remote origin "refs/heads/$BRANCH" | awk '{print $1}')"
-            if [ "$REMOTE_SHA" = "$PUSHED_SHA" ]; then
-              git push origin --delete "$BRANCH"
-              echo "::warning::PR作成に失敗したため、このジョブが作成したブランチ $BRANCH を削除しました（内容はArtifactsに残っています）。リポジトリ設定でActionsのPR作成が許可されているか確認してください。"
-            else
-              echo "::warning::PR作成に失敗しましたが、ブランチ $BRANCH の内容がpush時から変化しているため削除しませんでした。手動で確認してください。"
-            fi
-            exit "$PR_STATUS"
-          fi
+        uses: actions/upload-artifact@v4
+        with:
+          name: auto-update-dryrun-pr-meta
+          path: |
+            /tmp/pr-body.md
+            /tmp/pr-title-suffix.txt
+          retention-days: 7
 
       - name: Upload dry-run reports
         if: always()
@@ -393,3 +369,76 @@ jobs:
         run: |
           echo "品質監査（validate:data / typecheck / lint）のいずれかが失敗しました。詳細は各ステップのログを確認してください。" >&2
           exit 1
+
+  # Phase271：opt-in時だけ動く、PR作成専用のジョブ。書き込み権限はこのジョブにだけ与える。
+  # BOT_PULL_REQUESTS_ENABLED が未設定（既定）なら、ジョブごとスキップされる
+  # （＝ブランチ・commit・push・PRはいずれも0）。dry-run本体が品質監査の失敗で終わった場合も、
+  # 従来どおりレポートのPRは作る（取り消し時は作らない）。
+  open-pr:
+    needs: dryrun
+    if: ${{ !cancelled() && needs.dryrun.outputs.changed == 'true' && vars.BOT_PULL_REQUESTS_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download dry-run reports
+        uses: actions/download-artifact@v4
+        with:
+          name: auto-update-dryrun-reports
+          path: reports/auto-update
+
+      - name: Download PR body
+        uses: actions/download-artifact@v4
+        with:
+          name: auto-update-dryrun-pr-meta
+          path: /tmp/pr-meta
+
+      # 【任意】リポジトリ設定でActionsによるPR作成を許可した場合だけ、PR方式を有効にする。
+      # 有効化の手順：
+      #   1. Settings > Actions > General > Workflow permissions で
+      #      「Allow GitHub Actions to create and approve pull requests」を有効にする。
+      #   2. Settings > Secrets and variables > Actions > Variables で
+      #      BOT_PULL_REQUESTS_ENABLED = true を追加する。
+      # 変数が未設定なら、このジョブは丸ごとスキップされる（＝ブランチは作られない）。
+      #
+      # PR作成に失敗した場合は、このジョブが直前にpushしたブランチだけを削除して後始末する。
+      # 削除するのは「リモートのHEADが、たった今pushしたSHAと完全に一致する」場合に限る
+      # （他の誰かが触った可能性があるブランチは削除しない）。--force は使わない。
+      - name: Create branch and open Pull Request (opt-in)
+        if: needs.dryrun.outputs.changed == 'true' && vars.BOT_PULL_REQUESTS_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          BRANCH="bot/auto-update-dryrun-$(date -u +%Y%m%d%H%M%S)"
+          SUFFIX="$(cat /tmp/pr-meta/pr-title-suffix.txt 2>/dev/null || echo report)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add reports/auto-update
+          git commit -m "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）"
+          git push origin "$BRANCH"
+          PUSHED_SHA="$(git rev-parse HEAD)"
+          set +e
+          gh pr create \
+            --title "chore: 自動更新パイプライン dry-run監査レポート（$(date -u +%Y-%m-%d)、${SUFFIX}）" \
+            --body-file /tmp/pr-meta/pr-body.md \
+            --base main \
+            --head "$BRANCH"
+          PR_STATUS=$?
+          set -e
+          if [ "$PR_STATUS" -ne 0 ]; then
+            REMOTE_SHA="$(git ls-remote origin "refs/heads/$BRANCH" | awk '{print $1}')"
+            if [ "$REMOTE_SHA" = "$PUSHED_SHA" ]; then
+              git push origin --delete "$BRANCH"
+              echo "::warning::PR作成に失敗したため、このジョブが作成したブランチ $BRANCH を削除しました（内容はArtifactsに残っています）。リポジトリ設定でActionsのPR作成が許可されているか確認してください。"
+            else
+              echo "::warning::PR作成に失敗しましたが、ブランチ $BRANCH の内容がpush時から変化しているため削除しませんでした。手動で確認してください。"
+            fi
+            exit "$PR_STATUS"
+          fi

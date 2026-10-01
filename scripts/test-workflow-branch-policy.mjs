@@ -194,6 +194,44 @@ for (const file of workflowFiles) {
   ok(`${file}: トップレベルに name: が定義されている`, /^name:\s*\S/m.test(text));
 }
 
+/* --- Phase271：dry-runワークフローの最小権限 ---
+ * dry-run本体はブランチもcommitも作らないため、書き込み権限は不要。
+ * 書き込み権限（contents: write / pull-requests: write）は、opt-in変数で保護された
+ * PR作成専用ジョブ（open-pr）にだけ与える。
+ */
+{
+  const lines = dryrunText.split(/\r?\n/);
+  const jobsLine = lines.findIndex((l) => /^jobs:\s*$/.test(l));
+  const topLevel = lines.slice(0, jobsLine).join("\n");
+  ok(`${DRYRUN_WORKFLOW}: ワークフロー全体の既定権限は contents: read`, /^permissions:\s*\n\s+contents:\s*read\s*$/m.test(topLevel));
+  ok(`${DRYRUN_WORKFLOW}: ワークフロー全体の既定権限に write が無い`, !/^permissions:[\s\S]*?:\s*write/m.test(topLevel.replace(/#.*$/gm, "")));
+
+  // ジョブ単位に分解（2スペースのインデントの「名前:」行が各ジョブの始まり）。
+  const jobs = {};
+  let currentJob = null;
+  for (const line of lines.slice(jobsLine + 1)) {
+    const m = line.match(/^ {2}([A-Za-z0-9_-]+):\s*$/);
+    if (m) {
+      currentJob = m[1];
+      jobs[currentJob] = [];
+    } else if (currentJob) {
+      jobs[currentJob].push(line);
+    }
+  }
+  const jobText = (name) => (jobs[name] ?? []).filter((l) => !/^\s*#/.test(l)).join("\n");
+  ok(`${DRYRUN_WORKFLOW}: dryrunジョブがある`, "dryrun" in jobs);
+  ok(`${DRYRUN_WORKFLOW}: dryrunジョブに write 権限が無い`, !/:\s*write\b/.test(jobText("dryrun")));
+  ok(`${DRYRUN_WORKFLOW}: dryrunジョブでブランチを作らない`, !/git checkout -b|git push/.test(jobText("dryrun")));
+  for (const [name] of Object.entries(jobs)) {
+    const text = jobText(name);
+    if (!/:\s*write\b/.test(text)) continue;
+    ok(
+      `${DRYRUN_WORKFLOW}: write権限を持つジョブ「${name}」は、ジョブ単位でopt-in変数により保護されている`,
+      new RegExp(`^ {4}if:.*${OPT_IN_EXPRESSION.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "m").test(text),
+    );
+  }
+}
+
 /* 会議録公開監視（Phase252）が日次ワークフローへ組み込まれていること */
 const dailyText = readFileSync(join(WORKFLOW_DIR, "update-council-documents.yml"), "utf8");
 ok(
