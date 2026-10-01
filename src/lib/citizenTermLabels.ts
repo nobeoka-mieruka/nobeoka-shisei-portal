@@ -303,6 +303,32 @@ const DATA_FILE_BARE_PATTERN = new RegExp(
 );
 
 /**
+ * 言い換えの結果できる「減債基金（減債基金＝…）」のような、語とその直後の括弧内が同じ重複を整理する。
+ *
+ * Phase269：以前は `([^\s（）「」]+)（\1）` のような後方参照の正規表現で行っていたが、同じ正規表現でも
+ * Node.js（事前生成HTMLを作るサーバー側）とブラウザ（Chrome 153）で一致する範囲が異なり、
+ * サーバーは語の途中（「歳入合計（計）」の「計」）からも一致させる一方、ブラウザは一致させなかった。
+ * その結果、同じデータからサーバーとブラウザで違う文字列ができ、React のハイドレーションエラー #418
+ * （/finance/budget・/finance/funds）になっていた。語の途中からの一致は、資料の見出しの引用
+ * 「歳入合計（計）行」を「歳入合計行」に書き換えてしまう誤りでもあった。
+ *
+ * ここでは後方参照を使わず、区切り文字で区切った「語全体」が括弧内と完全に同じ場合だけ整理する
+ * （比較は文字列の等価判定で行うため、実行環境による違いが出ない）。
+ */
+const TERM_DELIMITERS = "\\s（）「」『』・、。，,：:；;";
+const REPEATED_TERM_PATTERN = new RegExp(
+  `(^|[${TERM_DELIMITERS}])([^${TERM_DELIMITERS}]+)（([^${TERM_DELIMITERS}＝]+)(）|＝|、)`,
+  "g",
+);
+export function collapseRepeatedTerms(text: string): string {
+  return text.replace(REPEATED_TERM_PATTERN, (m, before: string, term: string, inner: string, closer: string) => {
+    if (term !== inner) return m;
+    // 「語（語）」は括弧ごと外し、「語（語＝…」「語（語、…」は括弧の中の重複だけを外す。
+    return closer === "）" ? `${before}${term}` : `${before}${term}（`;
+  });
+}
+
+/**
  * 表示直前に内部用語を日本語へ言い換える。
  * 対応表に無い語はそのまま残す（推測で言い換えない）。
  */
@@ -380,10 +406,7 @@ export function humanizeDataNote(text?: string | null): string | undefined {
   out = out.replace(TERM_PATTERN, (_m, before: string, name: string) => `${before}${INTERNAL_TERM_LABELS[name]}`);
 
   // 6) 言い換えの結果できた重複（「減債基金（減債基金＝…）」等）と空の括弧を整理する
-  out = out
-    .replace(/([^\s（）「」]+)（\1）/g, "$1")
-    .replace(/([^\s（）「」]+)（\1＝/g, "$1（")
-    .replace(/([^\s（）「」]+)（\1、/g, "$1（")
+  out = collapseRepeatedTerms(out)
     .replace(/（\s*）/g, "")
     .replace(/（\s*＝/g, "（")
     // 番号を外した跡に残る空白（「これまでの確認作業 でその記録を反映し」等）を詰める。

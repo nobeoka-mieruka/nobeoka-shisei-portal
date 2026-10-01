@@ -164,6 +164,60 @@ if (existsSync(join(distDir, "index.html"))) {
   console.log("[test-hydration-safety] dist/ が無いため、プリレンダリング済みHTMLの検査は省略しました。");
 }
 
+// --- Phase269：表示用の文字列整形が、サーバー（Node.js）とブラウザで同じ結果になること ---
+// /finance/budget・/finance/funds の #418 は、humanizeDataNote() の重複整理に使っていた後方参照の
+// 正規表現（`([^\s（）「」]+)（\1）`）が、Node.js とブラウザ（Chrome 153）で一致する範囲が異なり、
+// 事前生成HTMLとブラウザの初回描画で文字列が食い違ったことが原因だった。
+{
+  const { collapseRepeatedTerms, humanizeDataNote } = await import("../src/lib/citizenTermLabels.ts");
+  const cases = [
+    // 言い換えでできた重複は整理する（語全体が括弧内と同じ場合）
+    ["減債基金（減債基金）", "減債基金"],
+    ["財調・減債基金（減債基金＝「減債」）", "財調・減債基金（「減債」）"],
+    ["減債基金（減債基金、千円）", "減債基金（千円）"],
+    // 語の途中と括弧内が一致するだけのものは、資料の引用・議決結果なので残す
+    ["歳入合計（計）行の構成比", "歳入合計（計）行の構成比"],
+    ["決算の認定（認定）", "決算の認定（認定）"],
+    ["就任日（日）は不一致", "就任日（日）は不一致"],
+  ];
+  for (const [input, expected] of cases) {
+    const actual = collapseRepeatedTerms(input);
+    check(`collapseRepeatedTerms(${input})`, actual === expected, `期待「${expected}」・実際「${actual}」`);
+  }
+  // 実データ：/finance/budget・/finance/funds で食い違っていた注記
+  check(
+    "humanizeDataNote は財政の注記の引用「歳入合計（計）行」を書き換えない",
+    humanizeDataNote("表題を目視確認済み。歳入合計（計）行の構成比") === "表題を目視確認済み。歳入合計（計）行の構成比",
+  );
+  check(
+    "humanizeDataNote は「減債基金（bondRedemptionFundYen＝…）」の言い換え後の重複を整理する",
+    humanizeDataNote("財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）") ===
+      "財政調整基金（カード上「財調」）・減債基金（「減債」）",
+    humanizeDataNote("財政調整基金（fiscalReserveFundYen＝カード上「財調」）・減債基金（bondRedemptionFundYen＝「減債」）"),
+  );
+
+  // 再発防止：画面に出す文字列を作る src/ 配下のコードで、後方参照（\1〜\9）を含む正規表現を使わない。
+  // 後方参照と貪欲な繰り返しの組み合わせは、実行環境（Node.js／ブラウザのV8の版）によって
+  // 一致結果が変わりうるため、事前生成HTMLとブラウザの表示が食い違う原因になる。
+  const srcFiles = listFiles(join(root, "src"), [".ts", ".tsx"]);
+  const backrefOffenders = [];
+  for (const file of srcFiles) {
+    const lines = readFileSync(file, "utf8").split("\n");
+    lines.forEach((line, i) => {
+      const code = line.replace(/^\s*(\/\/|\*).*$/, "");
+      // 正規表現リテラル /…\1…/ と new RegExp("…\\1…") の両方を検出する。
+      if (/\/[^/\n]*\\[1-9][^/\n]*\/[dgimsuy]*/.test(code) || /RegExp\([^)]*\\\\[1-9]/.test(code)) {
+        backrefOffenders.push(`${relative(root, file)}:${i + 1}`);
+      }
+    });
+  }
+  check(
+    "src/ の表示用コードに後方参照（\\1〜\\9）を含む正規表現が無い",
+    backrefOffenders.length === 0,
+    backrefOffenders.join(", "),
+  );
+}
+
 if (failures.length > 0) {
   console.error(`[test-hydration-safety] ${failures.length} 件の不合格:`);
   for (const f of failures) console.error(`  - ${f}`);

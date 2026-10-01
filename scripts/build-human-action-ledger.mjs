@@ -290,7 +290,8 @@ const md = renderMarkdown(ledger);
 
 if (checkOnly) {
   const existing = existsSync(JSON_OUT) ? readFileSync(JSON_OUT, "utf8") : "";
-  const stripDate = (s) => s.replace(/"generatedAt": "[^"]*"/, '"generatedAt": ""');
+  // Windowsのチェックアウト（core.autocrlf）では既存ファイルがCRLFになるため、改行の違いだけでは差分としない。
+  const stripDate = (s) => s.replace(/\r\n/g, "\n").replace(/"generatedAt": "[^"]*"/, '"generatedAt": ""');
   if (stripDate(existing) !== stripDate(json)) {
     console.error("[build-human-action-ledger] 台帳の内容が変わっています。再生成してください。");
     process.exit(1);

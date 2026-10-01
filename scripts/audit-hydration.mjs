@@ -134,6 +134,14 @@ const TARGETS = [
   { path: "/petitions/", queries: ["", ...archiveDocQueries("petition")] },
   { path: "/requests/", queries: ["", ...archiveDocQueries("request")] },
   { path: `/members/${members[0]?.id ?? ""}/`, queries: ["", "?questionTopic=%E9%98%B2%E7%81%BD"] },
+  // Phase269：クエリを使わないページでも、データの注記を整形する処理（humanizeDataNote）が
+  // サーバーとブラウザで違う文字列を作ると #418 になる（/finance/budget・/finance/funds で発生）。
+  // 財政の注記を多く表示するページを、クエリなしで検査対象に含める。
+  { path: "/finance/", queries: [""] },
+  { path: "/finance/budget/", queries: [""] },
+  { path: "/finance/funds/", queries: [""] },
+  { path: "/finance/debt/", queries: [""] },
+  { path: "/data-status/", queries: [""] },
 ];
 
 /**
