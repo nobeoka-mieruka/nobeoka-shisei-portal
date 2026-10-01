@@ -1986,12 +1986,17 @@ export type CouncilVerificationStatus = "確認済み" | "要確認" | "自動�
 /**
  * 資料の公開状態。未設定（省略）の場合は"published"として扱う（既存データとの後方互換のため）。
  * pendingReview系の資料は、一般公開ページ（一覧・詳細）には表示しない。
+ *
+ * "superseded"（Phase270）：公式サイトで新しい版に差し替えられ、旧版のURLが無くなったことを
+ * 人が確認済みの資料。removedPendingReview（消えた理由が未確認）とは区別する。
+ * 一般公開ページには表示せず、supersededByDocumentId で同じ会期の公開中の新しい版を指す。
  */
 export type CouncilPublicationStatus =
   | "published"
   | "pendingReview"
   | "updatedPendingReview"
   | "removedPendingReview"
+  | "superseded"
   | "error";
 
 /** 定例会・議会資料ページにおける、資料（PDF）1件分のデータ。 */
@@ -2020,6 +2025,8 @@ export interface CouncilDocument {
   verificationStatus?: CouncilVerificationStatus;
   /** 未設定（省略）の場合は"published"として扱う。 */
   publicationStatus?: CouncilPublicationStatus;
+  /** publicationStatus="superseded"のときだけ設定する。差し替え後の新しい版（同じ会期の資料ID）。 */
+  supersededByDocumentId?: string;
   notes?: string;
   /**
    * PDF本文のテキスト抽出状態。

@@ -5455,9 +5455,11 @@
         "verifiedAt": "2026-09-05",
         "isOfficial": true,
         "verificationStatus": "自動取得",
-        "publicationStatus": "removedPendingReview",
+        "publicationStatus": "superseded",
+        "supersededByDocumentId": "2026-09-results-2",
         "textExtractionStatus": "extracted",
-        "textExtractedAt": "2026-09-05"
+        "textExtractedAt": "2026-09-05",
+        "notes": "延岡市議会「議案等審議結果」ページで、この版（令和8年8月28日現在、attachment/28811.pdf、議案第48号のみ掲載）は令和8年9月18日現在の版（attachment/29070.pdf＝2026-09-results-2）に差し替えられ、旧URLは404になった（2026-10-01確認）。新しい版にも議案第48号が同じ件名・議決結果・議決日で掲載されていることを確認し、議案第48号の出典は2026-09-21に新しい版へ移している。旧版は一般公開ページに表示しない。"
       },
       {
         "id": "2026-09-results-2",

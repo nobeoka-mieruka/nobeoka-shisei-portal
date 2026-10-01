@@ -120,4 +120,50 @@ check("検索順位に新しさ・種類・人物・重要度による補正が�
   assert.ok(/a\.tier - b\.tier/.test(src), "一致段階（tier）を第1基準にした並び替えがありません");
 });
 
+// --- Phase270：検索インデックスの重複判定（scripts/lib/search-index-keys.mjs） ---
+// 題名だけで重複としない。同じ記録の二重登録だけを重複とする。
+const { findSearchIndexDuplicates, searchIndexDuplicateKey } = await import("./lib/search-index-keys.mjs");
+
+check("重複判定：同じ記録（type・URL・sourceIdが同一）の二重登録は検出する", () => {
+  const dup = findSearchIndexDuplicates([
+    { id: "a", type: "bill", url: "/bills/votes/x", title: "議案", sourceId: "x" },
+    { id: "b", type: "bill", url: "/bills/votes/x/", title: "議案（別表記）", sourceId: "x" },
+  ]);
+  assert.deepEqual(dup, [["a", "b"]]);
+});
+
+check("重複判定：同じ題名でもURLが違えば正常", () => {
+  const dup = findSearchIndexDuplicates([
+    { id: "a", type: "page", url: "/about", title: "このサイトについて" },
+    { id: "b", type: "page", url: "/policy", title: "このサイトについて" },
+  ]);
+  assert.equal(dup.length, 0);
+});
+
+check("重複判定：同じ題名・同じURLでも、別の記録（sourceIdが違う）なら正常（例：日付の違う自動更新の履歴）", () => {
+  const dup = findSearchIndexDuplicates([
+    { id: "update-u139", type: "update", url: "/updates", title: "延岡市議会公式サイトの議会資料を自動更新しました（1件）", sourceId: "u139" },
+    { id: "update-u153", type: "update", url: "/updates", title: "延岡市議会公式サイトの議会資料を自動更新しました（1件）", sourceId: "u153" },
+  ]);
+  assert.equal(dup.length, 0);
+});
+
+check("重複判定：sourceIdの無い項目は、同じ題名・同じURLなら重複として検出する", () => {
+  const dup = findSearchIndexDuplicates([
+    { id: "p1", type: "page", url: "/about", title: "このサイトについて" },
+    { id: "p2", type: "page", url: "/about/", title: "このサイトについて" },
+  ]);
+  assert.deepEqual(dup, [["p1", "p2"]]);
+  assert.notEqual(
+    searchIndexDuplicateKey({ type: "page", url: "/about", title: "A" }),
+    searchIndexDuplicateKey({ type: "page", url: "/about", title: "A", sourceId: "s1" }),
+  );
+});
+
+check("実データ：searchIndex.json に同じ記録の二重登録が無い", () => {
+  const all = readJson("src/data/searchIndex.json");
+  const dup = findSearchIndexDuplicates(all);
+  assert.equal(dup.length, 0, `重複: ${dup.map((p) => p.join(" / ")).join(", ")}`);
+});
+
 console.log(`\n✅ test-unified-search-index: ${passCount} checks passed（索引 ${entries.length}件）`);

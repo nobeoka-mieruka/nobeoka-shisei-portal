@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { councilSpeechPeriod } from "./lib/council-speech-period.mjs";
+import { searchIndexDuplicateKey } from "./lib/search-index-keys.mjs";
 import { QUESTION_LIKE_SPEECH_TYPES } from "../src/lib/questionLikeSpeechTypes.ts";
 import { summarizeVoteClassification } from "../src/lib/billVotes.ts";
 import { findMayorTermGaps } from "../src/lib/archiveMayors.ts";
@@ -481,6 +482,7 @@ const VALID_PUBLICATION_STATUSES = new Set([
   "pendingReview",
   "updatedPendingReview",
   "removedPendingReview",
+  "superseded",
   "error",
 ]);
 
@@ -602,7 +604,23 @@ try {
       if (d.publicationStatus && !VALID_PUBLICATION_STATUSES.has(d.publicationStatus)) {
         err(docTag, `未定義のpublicationStatusです: ${d.publicationStatus}`);
       }
-      if (d.publicationStatus && d.publicationStatus !== "published") {
+      if (d.publicationStatus === "superseded") {
+        // Phase270：公式サイトで新しい版に差し替えられたことを人が確認済みの旧版。
+        // 確認待ちではないためwarningにしないが、差し替え先が同じ会期の公開中の同種資料であることは必須にする
+        // （差し替え先を確かめずに「superseded」と書いて警告を消すことを防ぐ）。
+        const replacement = (s.documents ?? []).find((x) => x.id === d.supersededByDocumentId);
+        if (isBlank(d.supersededByDocumentId)) {
+          err(docTag, "publicationStatus=supersededなのにsupersededByDocumentId（差し替え後の資料ID）がありません");
+        } else if (!replacement) {
+          err(docTag, `supersededByDocumentIdが同じ会期の資料に存在しません: ${d.supersededByDocumentId}`);
+        } else if (replacement.publicationStatus && replacement.publicationStatus !== "published") {
+          err(docTag, `差し替え後の資料（${replacement.id}）が公開状態ではありません: ${replacement.publicationStatus}`);
+        } else if (replacement.category !== d.category) {
+          err(docTag, `差し替え後の資料（${replacement.id}）の種類が異なります: ${replacement.category}`);
+        }
+      } else if (d.supersededByDocumentId != null) {
+        err(docTag, "supersededByDocumentIdはpublicationStatus=supersededのときだけ設定できます");
+      } else if (d.publicationStatus && d.publicationStatus !== "published") {
         warn(docTag, `公開保留状態です（publicationStatus: ${d.publicationStatus}）。一般公開ページには表示されません。`);
       }
       if (d.sourcePageUrl && !URL_RE.test(d.sourcePageUrl)) {
@@ -3428,8 +3446,12 @@ try {
     }
     if (s.date && !DATE_RE.test(s.date)) err(tag, `dateの形式が不正です: ${s.date}`);
 
-    const pairKey = `${s.type}:${s.url}:${s.title}`;
-    if (seenPairs.has(pairKey)) warn(tag, `同一内容（type/url/title）のエントリが重複登録されています`);
+    // Phase270：題名だけでなく生成元の記録ID（sourceId）で判定する（scripts/lib/search-index-keys.mjs）。
+    // 同じ題名・同じリンク先でも、別々の記録（例：日付の違う自動更新の履歴）は正常として扱う。
+    const pairKey = searchIndexDuplicateKey(s);
+    if (seenPairs.has(pairKey)) {
+      warn(tag, `同じ記録が検索インデックスに重複登録されています（type/url/${s.sourceId ? "sourceId" : "title"}が同一）`);
+    }
     seenPairs.add(pairKey);
 
     if (s.sourceId) {
