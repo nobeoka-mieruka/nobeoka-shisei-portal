@@ -69,6 +69,9 @@ const FinanceBudgetPage = lazy(() =>
   import("./pages/FinanceBudgetPage").then((m) => ({ default: m.FinanceBudgetPage })),
 );
 const FinanceDebtPage = lazy(() => import("./pages/FinanceDebtPage").then((m) => ({ default: m.FinanceDebtPage })));
+const FinanceForestEnvironmentTaxPage = lazy(() =>
+  import("./pages/FinanceForestEnvironmentTaxPage").then((m) => ({ default: m.FinanceForestEnvironmentTaxPage })),
+);
 const FinanceFundsPage = lazy(() =>
   import("./pages/FinanceFundsPage").then((m) => ({ default: m.FinanceFundsPage })),
 );
@@ -278,6 +281,7 @@ function App() {
               <Route path="/finance/budget" element={<FinanceBudgetPage />} />
               <Route path="/finance/debt" element={<FinanceDebtPage />} />
               <Route path="/finance/funds" element={<FinanceFundsPage />} />
+              <Route path="/finance/forest-environment-tax" element={<FinanceForestEnvironmentTaxPage />} />
               <Route path="/compare" element={<ComparePage />} />
               <Route path="/compare/mayors" element={<CompareMayorsPage />} />
               <Route path="/compare/members" element={<CompareMembersPage />} />

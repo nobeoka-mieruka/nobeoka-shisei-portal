@@ -145,6 +145,12 @@ export function FinancePage() {
           <Link to="/finance/funds" className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}>
             基金残高の推移
           </Link>
+          <Link
+            to="/finance/forest-environment-tax"
+            className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}
+          >
+            森林環境譲与税の使途
+          </Link>
           <Link to="/compare/finance" className={`inline-flex min-h-11 items-center rounded-full bg-surface-container-high px-3 py-1.5 text-primary underline ${linkClass}`}>
             年度を比較する
           </Link>

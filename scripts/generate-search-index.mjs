@@ -835,6 +835,13 @@ const staticPages = [
     url: "/finance/funds",
     keywords: ["基金", "財政調整基金", "貯金", "残高", "財政"],
   },
+  {
+    id: "page-finance-forest-environment-tax",
+    title: "森林環境譲与税の使途",
+    description: "延岡市が受け取った森林環境譲与税の年度別の譲与額と、令和7年度の使途（森林整備・人材育成・木材利用の事業別決算）を、市の公表資料の数値のまま整理しています。",
+    url: "/finance/forest-environment-tax",
+    keywords: ["森林環境譲与税", "森林環境税", "森林整備", "林業", "譲与税", "使途", "財政"],
+  },
   // --- 比較機能（ComparePage.tsx以下。最大4件までの並べ比較。点数化・優劣判定は行わない） ---
   {
     id: "page-compare",

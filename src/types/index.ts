@@ -2809,3 +2809,75 @@ export interface CouncilReportItem {
   lastVerified: string;
   notes: string | null;
 }
+
+/**
+ * 森林環境譲与税の譲与額と使途（src/data/forestEnvironmentTax.json）。
+ * 延岡市（林務課）が公表した資料の数値をそのまま転記する。換算・推計・補完はしない。
+ * 金額はすべて円。記載の無い欄はnull（0とは区別する）。
+ */
+export interface ForestEnvironmentTaxAmounts {
+  totalYen: number;
+  forestTaxCurrentYen: number | null;
+  forestTaxCarriedOverYen: number | null;
+  fundDrawdownCurrentYen: number | null;
+  fundDrawdownCarriedOverYen: number | null;
+  otherCurrentYen: number | null;
+  otherCarriedOverYen: number | null;
+  fundDepositYen: number | null;
+}
+
+export interface ForestEnvironmentTaxSettlementRow extends ForestEnvironmentTaxAmounts {
+  id: string;
+  /** 決算一覧の番号（同じ事業が2行に分かれる場合は同じ番号）。 */
+  no: string;
+  /** 決算一覧の大区分（森林整備／人材育成／木材利用・普及啓発／基金積立）。 */
+  group: string;
+  /** 決算一覧の事業区分。 */
+  category: string;
+  projectName: string;
+  /** 決算一覧の備考欄（例：令和8年度へ繰越）。 */
+  remarks: string | null;
+}
+
+export interface ForestEnvironmentTaxData {
+  title: string;
+  organization: string;
+  sourcePageTitle: string;
+  sourcePageUrl: string;
+  /** 公式ページの「更新日」。 */
+  sourcePageUpdatedAt: string;
+  /** 当サイトの最終確認日。 */
+  lastVerified: string;
+  unit: "円";
+  note: string;
+  transferAmounts: { fiscalYear: number; fiscalYearLabel: string; amountYen: number }[];
+  transferTotalYen: number;
+  transferSource: { title: string; url: string };
+  usageSummary: {
+    fiscalYear: number;
+    fiscalYearLabel: string;
+    usedYen: { cumulativeBeforeLabel: string; cumulativeBefore: number; current: number; total: number };
+    transferredYen: { cumulativeBeforeLabel: string; cumulativeBefore: number; current: number; total: number };
+    /** 公式資料の活用率の表記（当サイトで計算し直さない）。 */
+    usageRateLabel: string;
+    usageRateNote: string;
+    unexecutedPolicy: string;
+    categories: { category: string; projectLabel: string; projectCostYen: number; forestTaxYen: number; summary: string }[];
+    categoriesTotal: { projectCostYen: number; forestTaxYen: number };
+    fundDeposit: { label: string; projectCostYen: number; forestTaxYen: number };
+    source: { title: string; url: string };
+  };
+  settlement: {
+    fiscalYear: number;
+    fiscalYearLabel: string;
+    title: string;
+    source: { title: string; url: string };
+    columnsNote: string;
+    rows: ForestEnvironmentTaxSettlementRow[];
+    groupSubtotals: Record<string, ForestEnvironmentTaxAmounts>;
+    grandTotal: ForestEnvironmentTaxAmounts;
+    reconciliationNote: string;
+  };
+  documents: { fiscalYearLabel: string; title: string; url: string }[];
+  pastYearsNote: string;
+}

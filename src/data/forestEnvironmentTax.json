@@ -1,0 +1,556 @@
+{
+  "title": "森林環境譲与税の使途",
+  "organization": "延岡市（農林水産部 林務課）",
+  "sourcePageTitle": "延岡市「令和7年度森林環境譲与税の使途について」",
+  "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/39/45391.html",
+  "sourcePageUpdatedAt": "2026-10-07",
+  "lastVerified": "2026-10-09",
+  "unit": "円",
+  "note": "延岡市が公表した森林環境譲与税の譲与額と使途（決算）を、公式資料の数値のまま転記しています。金額は円単位で、当サイトでの換算・推計・補完はしていません。各事業の内容の説明は公式PDFをご確認ください。",
+  "transferAmounts": [
+    {
+      "fiscalYear": 2019,
+      "fiscalYearLabel": "令和元年度",
+      "amountYen": 50805000
+    },
+    {
+      "fiscalYear": 2020,
+      "fiscalYearLabel": "令和2年度",
+      "amountYen": 107962000
+    },
+    {
+      "fiscalYear": 2021,
+      "fiscalYearLabel": "令和3年度",
+      "amountYen": 106696000
+    },
+    {
+      "fiscalYear": 2022,
+      "fiscalYearLabel": "令和4年度",
+      "amountYen": 150100000
+    },
+    {
+      "fiscalYear": 2023,
+      "fiscalYearLabel": "令和5年度",
+      "amountYen": 150100000
+    },
+    {
+      "fiscalYear": 2024,
+      "fiscalYearLabel": "令和6年度",
+      "amountYen": 201116000
+    },
+    {
+      "fiscalYear": 2025,
+      "fiscalYearLabel": "令和7年度",
+      "amountYen": 211925000
+    }
+  ],
+  "transferTotalYen": 978704000,
+  "transferSource": {
+    "title": "延岡市「令和7年度森林環境譲与税の使途について」（森林環境譲与税 譲与額）",
+    "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/39/45391.html"
+  },
+  "usageSummary": {
+    "fiscalYear": 2025,
+    "fiscalYearLabel": "令和7年度",
+    "usedYen": {
+      "cumulativeBeforeLabel": "令和元年度〜令和6年度",
+      "cumulativeBefore": 648413449,
+      "current": 207658347,
+      "total": 856071796
+    },
+    "transferredYen": {
+      "cumulativeBeforeLabel": "令和元年度〜令和6年度",
+      "cumulativeBefore": 766779000,
+      "current": 211925000,
+      "total": 978704000
+    },
+    "usageRateLabel": "87%",
+    "usageRateNote": "令和7年度末時点の活用率（公式資料の表記のまま）",
+    "unexecutedPolicy": "再造林、除間伐等の森林整備及び森林境界の明確化事業等に活用",
+    "categories": [
+      {
+        "category": "森林整備",
+        "projectLabel": "私有林整備　他11件",
+        "projectCostYen": 305924399,
+        "forestTaxYen": 161172329,
+        "summary": "森林資源を確保するため、再造林(278.0ha)や新植後の下刈（1,198.69ha）、除間伐（99.97ha）を支援した。"
+      },
+      {
+        "category": "人材育成",
+        "projectLabel": "担い手確保　他1件",
+        "projectCostYen": 39624000,
+        "forestTaxYen": 31624000,
+        "summary": "新規林業就業者を雇用する事業体を支援し、林業の担い手確保を実施した。（対象者31名、月10万円助成）"
+      },
+      {
+        "category": "木材利用",
+        "projectLabel": "森林・林業・木材普及啓発　他3件",
+        "projectCostYen": 14862018,
+        "forestTaxYen": 14862018,
+        "summary": "素材生産・加工・製造・流通等の3者による木材製品の開発費等を支援した。"
+      }
+    ],
+    "categoriesTotal": {
+      "projectCostYen": 360410417,
+      "forestTaxYen": 207658347
+    },
+    "fundDeposit": {
+      "label": "延岡市森林環境譲与税積立基金",
+      "projectCostYen": 30702115,
+      "forestTaxYen": 30702115
+    },
+    "source": {
+      "title": "宮崎県延岡市における森林環境譲与税の活用について（令和7年度）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29247.pdf"
+    }
+  },
+  "settlement": {
+    "fiscalYear": 2025,
+    "fiscalYearLabel": "令和7年度",
+    "title": "令和7年度　宮崎県延岡市　森林環境譲与税に関する決算一覧",
+    "source": {
+      "title": "令和7年度決算一覧（延岡市）",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29230.pdf"
+    },
+    "columnsNote": "事業総額＝(A)森林環境譲与税＋(B)森林環境譲与税基金繰入金＋(C)その他財源。(A)(B)はそれぞれ令和7年度分と令和6年度からの繰越分に分かれています。「(C)その他財源 令和6年度からの繰越分」の列は、資料ではすべての行が空欄のため省略しています。",
+    "rows": [
+      {
+        "id": "fet-2025-01",
+        "no": "1",
+        "group": "森林整備",
+        "category": "意向調査の準備作業",
+        "projectName": "森林境界明確化事業",
+        "totalYen": 18960000,
+        "forestTaxCurrentYen": 18960000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": "令和8年度へ繰越"
+      },
+      {
+        "id": "fet-2025-02",
+        "no": "1",
+        "group": "森林整備",
+        "category": "意向調査の準備作業",
+        "projectName": "森林境界明確化事業",
+        "totalYen": 29831462,
+        "forestTaxCurrentYen": null,
+        "forestTaxCarriedOverYen": 16867462,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": 12964000,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": "令和6年度からの繰越"
+      },
+      {
+        "id": "fet-2025-03",
+        "no": "2",
+        "group": "森林整備",
+        "category": "意向調査の準備作業",
+        "projectName": "林地台帳整備事業",
+        "totalYen": 13484838,
+        "forestTaxCurrentYen": 13484838,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-04",
+        "no": "3",
+        "group": "森林整備",
+        "category": "意向調査の準備作業",
+        "projectName": "森林経営管理システム推進事業",
+        "totalYen": 4123065,
+        "forestTaxCurrentYen": 4123065,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-05",
+        "no": "4",
+        "group": "森林整備",
+        "category": "私有林整備",
+        "projectName": "コミュニティ林業推進事業",
+        "totalYen": 722000,
+        "forestTaxCurrentYen": 422000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 300000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-06",
+        "no": "5",
+        "group": "森林整備",
+        "category": "私有林整備",
+        "projectName": "公益的機能促進間伐事業",
+        "totalYen": 1810600,
+        "forestTaxCurrentYen": 492600,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 1318000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-07",
+        "no": "6",
+        "group": "森林整備",
+        "category": "私有林整備",
+        "projectName": "循環型林業促進事業",
+        "totalYen": 102364694,
+        "forestTaxCurrentYen": 53406694,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": 19831000,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 29127000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-08",
+        "no": "7",
+        "group": "森林整備",
+        "category": "公有林整備",
+        "projectName": "森林由来のJ－クレジット創出事業",
+        "totalYen": 1728800,
+        "forestTaxCurrentYen": 28800,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 1700000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-09",
+        "no": "8",
+        "group": "森林整備",
+        "category": "森林保護対策",
+        "projectName": "鳥獣被害防止緊急捕獲活動支援事業",
+        "totalYen": 55162070,
+        "forestTaxCurrentYen": 4800000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 50362070,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-10",
+        "no": "9",
+        "group": "森林整備",
+        "category": "公有林整備",
+        "projectName": "森林整備作業道補修事業",
+        "totalYen": 10692250,
+        "forestTaxCurrentYen": 8959250,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": 733000,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 1000000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-11",
+        "no": "10",
+        "group": "森林整備",
+        "category": "林道・林専道の整備等",
+        "projectName": "林道路面整備事業",
+        "totalYen": 15981961,
+        "forestTaxCurrentYen": 581961,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 15400000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-12",
+        "no": "11",
+        "group": "森林整備",
+        "category": "林道・林専道の整備等",
+        "projectName": "林道維持補修事業",
+        "totalYen": 68697709,
+        "forestTaxCurrentYen": 24152709,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 44545000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-13",
+        "no": "12",
+        "group": "森林整備",
+        "category": "林道・林専道の整備等",
+        "projectName": "協働・共汗林業用施設整備事業",
+        "totalYen": 1324950,
+        "forestTaxCurrentYen": 324950,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 1000000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-14",
+        "no": "13",
+        "group": "森林整備",
+        "category": "林道・林専道の整備等",
+        "projectName": "愛宕山線安全施設等整備事業",
+        "totalYen": 5000000,
+        "forestTaxCurrentYen": 5000000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": "令和8年度へ繰越"
+      },
+      {
+        "id": "fet-2025-15",
+        "no": "14",
+        "group": "人材育成",
+        "category": "担い手確保",
+        "projectName": "林業担い手育成推進事業",
+        "totalYen": 28424000,
+        "forestTaxCurrentYen": 20424000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 8000000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-16",
+        "no": "15",
+        "group": "人材育成",
+        "category": "林業就業者の育成",
+        "projectName": "高性能林業機械等整備事業",
+        "totalYen": 11200000,
+        "forestTaxCurrentYen": 11200000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-17",
+        "no": "16",
+        "group": "木材利用・普及啓発",
+        "category": "その他（木材・普及啓発関係）",
+        "projectName": "連携型みらい林業創出モデル事業",
+        "totalYen": 3306300,
+        "forestTaxCurrentYen": 3306300,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-18",
+        "no": "17",
+        "group": "木材利用・普及啓発",
+        "category": "森林・林業・木材普及活動等",
+        "projectName": "はじめての木づかい事業",
+        "totalYen": 3142260,
+        "forestTaxCurrentYen": 3142260,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-19",
+        "no": "18",
+        "group": "木材利用・普及啓発",
+        "category": "その他（木材・普及啓発関係）",
+        "projectName": "のべおか産材サプライチェーン構築事業",
+        "totalYen": 2979458,
+        "forestTaxCurrentYen": 2979458,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-20",
+        "no": "19",
+        "group": "木材利用・普及啓発",
+        "category": "その他（木材・普及啓発関係）",
+        "projectName": "木のぬくもりを感じる備品整備事業",
+        "totalYen": 5434000,
+        "forestTaxCurrentYen": 5434000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null,
+        "remarks": null
+      },
+      {
+        "id": "fet-2025-21",
+        "no": "20",
+        "group": "基金積立",
+        "category": "基金積立（木材利用等）",
+        "projectName": "森林環境譲与税基金積立金",
+        "totalYen": 30702115,
+        "forestTaxCurrentYen": 30702115,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": 30702115,
+        "remarks": null
+      }
+    ],
+    "groupSubtotals": {
+      "森林整備": {
+        "totalYen": 329884399,
+        "forestTaxCurrentYen": 134736867,
+        "forestTaxCarriedOverYen": 16867462,
+        "fundDrawdownCurrentYen": 20564000,
+        "fundDrawdownCarriedOverYen": 12964000,
+        "otherCurrentYen": 144752070,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null
+      },
+      "人材育成": {
+        "totalYen": 39624000,
+        "forestTaxCurrentYen": 31624000,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": 8000000,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null
+      },
+      "木材利用・普及啓発": {
+        "totalYen": 14862018,
+        "forestTaxCurrentYen": 14862018,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": null
+      },
+      "基金積立": {
+        "totalYen": 30702115,
+        "forestTaxCurrentYen": 30702115,
+        "forestTaxCarriedOverYen": null,
+        "fundDrawdownCurrentYen": null,
+        "fundDrawdownCarriedOverYen": null,
+        "otherCurrentYen": null,
+        "otherCarriedOverYen": null,
+        "fundDepositYen": 30702115
+      }
+    },
+    "grandTotal": {
+      "totalYen": 415072532,
+      "forestTaxCurrentYen": 211925000,
+      "forestTaxCarriedOverYen": 16867462,
+      "fundDrawdownCurrentYen": 20564000,
+      "fundDrawdownCarriedOverYen": 12964000,
+      "otherCurrentYen": 152752070,
+      "otherCarriedOverYen": null,
+      "fundDepositYen": 30702115
+    },
+    "reconciliationNote": "決算一覧の「森林整備」小計（329,884,399円）と、活用状況の「森林整備」事業費（305,924,399円）の差は23,960,000円で、決算一覧の備考欄で「令和8年度へ繰越」とされた2事業（森林境界明確化事業 18,960,000円、愛宕山線安全施設等整備事業 5,000,000円）の合計と一致します。"
+  },
+  "documents": [
+    {
+      "fiscalYearLabel": "令和7年度",
+      "title": "森林環境譲与税の活用について",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29247.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和7年度",
+      "title": "令和7年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29230.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和7年度",
+      "title": "主な取組事例",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29273.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和6年度",
+      "title": "令和6年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29232.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和5年度",
+      "title": "令和5年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24756.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和4年度",
+      "title": "令和4年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24757.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和3年度",
+      "title": "令和3年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24758.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和2年度",
+      "title": "令和2年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24759.pdf"
+    },
+    {
+      "fiscalYearLabel": "令和元年度",
+      "title": "令和元年度決算一覧",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24760.pdf"
+    }
+  ],
+  "pastYearsNote": "令和元年度〜令和6年度の事業ごとの明細は、上記の公式PDFでご確認ください（当サイトでは令和7年度分のみ明細を転記しています）。"
+}

@@ -82,6 +82,7 @@ export const STATIC_INDEXABLE_PAGES = [
   "/finance/budget",
   "/finance/debt",
   "/finance/funds",
+  "/finance/forest-environment-tax",
   "/compare",
   "/timeline",
   "/dashboard",
@@ -143,6 +144,7 @@ function loadData() {
   const mayorPressConferences = readMayorPressConferences();
   const mayor = readJson("src/data/mayor.json");
   const financeDashboard = readJson("src/data/financeDashboard.json");
+  const forestEnvironmentTax = readJson("src/data/forestEnvironmentTax.json");
   const mayorEntertainmentExpenses = readJson("src/data/mayorEntertainmentExpenses.json");
   const compensationComparison = readJson("src/data/compensationComparison.json");
   const cityGuideEntries = readJson("src/data/cityGuideEntries.json");
@@ -179,6 +181,7 @@ function loadData() {
     mayorPressConferences,
     mayor,
     financeDashboard,
+    forestEnvironmentTax,
     mayorEntertainmentExpenses,
     compensationComparison,
     cityGuideEntries,
@@ -361,6 +364,8 @@ function staticPageLastmod(path, data) {
         [maxValidDate(archiveFiscalYearDates(data.archiveFiscalYears))],
         ["src/data/archiveFiscalYears.json"],
       );
+    case "/finance/forest-environment-tax":
+      return resolveLastmod(path, [data.forestEnvironmentTax.lastVerified], ["src/data/forestEnvironmentTax.json"]);
     case "/compare":
       return resolveLastmod(
         path,

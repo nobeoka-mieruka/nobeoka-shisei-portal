@@ -4878,17 +4878,82 @@ try {
   else throw e;
 }
 
-// --- report ---
-for (const w of warnings) console.warn(w);
-for (const e of errors) console.error(e);
 
-console.log(
-  `[validate-data] members=${members.length} generalQuestions=${generalQuestions.length} billVotes=${billVotes.length} councilSessions=${councilSessions.length} — errors=${errors.length} warnings=${warnings.length}`,
-);
+// --- forestEnvironmentTax.json（森林環境譲与税の譲与額と使途） ---
+// 公式資料の数値を転記したデータ。転記誤りを、資料自身の合計欄（小計・計）との突き合わせで検出する。
+try {
+  const fet = readJson("src/data/forestEnvironmentTax.json");
+  const tag = "forestEnvironmentTax.json";
+  const AMOUNT_KEYS = [
+    "forestTaxCurrentYen",
+    "forestTaxCarriedOverYen",
+    "fundDrawdownCurrentYen",
+    "fundDrawdownCarriedOverYen",
+    "otherCurrentYen",
+    "otherCarriedOverYen",
+  ];
+  const isAmount = (v) => v === null || (Number.isInteger(v) && v >= 0);
+  for (const k of ["sourcePageUpdatedAt", "lastVerified"]) {
+    if (!DATE_RE.test(fet[k] ?? "")) err(tag, `${k}の形式が不正です: ${fet[k]}`);
+  }
+  const urls = [
+    fet.sourcePageUrl,
+    fet.transferSource?.url,
+    fet.usageSummary?.source?.url,
+    fet.settlement?.source?.url,
+    ...(fet.documents ?? []).map((d) => d.url),
+  ];
+  for (const u of urls) {
+    if (!URL_RE.test(u ?? "") || !u.startsWith("https://www.city.nobeoka.miyazaki.jp/")) err(tag, `URLが延岡市公式の形式ではありません: ${u}`);
+  }
+  if (new Set(fet.documents.map((d) => d.url)).size !== fet.documents.length) err(tag, "公式資料のURLが重複しています");
 
-if (errors.length > 0) {
-  console.error("\nデータ検証でエラーが見つかったため、ビルドを中止します。上記のエラー内容を確認してください。");
-  process.exit(1);
+  // 譲与額：年度別の合計が資料の「計」と一致する
+  const transferSum = fet.transferAmounts.reduce((s, t) => s + t.amountYen, 0);
+  if (transferSum !== fet.transferTotalYen) err(tag, `年度別譲与額の合計（${transferSum}）が資料の計（${fet.transferTotalYen}）と一致しません`);
+  if (new Set(fet.transferAmounts.map((t) => t.fiscalYear)).size !== fet.transferAmounts.length) err(tag, "譲与額に同じ年度が重複しています");
+
+  // 活用状況：前年度までの累計＋当年度＝計、譲与額の当年度分・計が年度別の表と一致する
+  const us = fet.usageSummary;
+  for (const [name, v] of [["活用額", us.usedYen], ["譲与額", us.transferredYen]]) {
+    if (v.cumulativeBefore + v.current !== v.total) err(tag, `活用状況の${name}：累計＋当年度が計と一致しません`);
+  }
+  const currentTransfer = fet.transferAmounts.find((t) => t.fiscalYear === us.fiscalYear)?.amountYen;
+  if (currentTransfer !== us.transferredYen.current) err(tag, "活用状況の譲与額（当年度）が年度別の譲与額と一致しません");
+  if (us.transferredYen.total !== fet.transferTotalYen) err(tag, "活用状況の譲与額（計）が年度別の譲与額の計と一致しません");
+  const catCost = us.categories.reduce((s, c) => s + c.projectCostYen, 0);
+  const catTax = us.categories.reduce((s, c) => s + c.forestTaxYen, 0);
+  if (catCost !== us.categoriesTotal.projectCostYen) err(tag, `分野別の事業費の合計（${catCost}）が資料の合計と一致しません`);
+  if (catTax !== us.categoriesTotal.forestTaxYen) err(tag, `分野別の譲与税の合計（${catTax}）が資料の合計と一致しません`);
+  if (us.categoriesTotal.forestTaxYen !== us.usedYen.current) err(tag, "分野別の譲与税の合計が当年度の活用額と一致しません");
+
+  // 決算一覧：各行の内訳の合計＝事業総額、大区分ごとの列合計＝小計、全体の列合計＝計
+  const st = fet.settlement;
+  const ids = new Set();
+  for (const r of st.rows) {
+    const rTag = `${tag} (${r.id})`;
+    if (ids.has(r.id)) err(rTag, "idが重複しています");
+    ids.add(r.id);
+    for (const k of ["totalYen", ...AMOUNT_KEYS, "fundDepositYen"]) {
+      if (!isAmount(r[k]) || (k === "totalYen" && r[k] === null)) err(rTag, `${k}が0以上の整数（またはnull）ではありません: ${r[k]}`);
+    }
+    const parts = AMOUNT_KEYS.reduce((s, k) => s + (r[k] ?? 0), 0);
+    if (parts !== r.totalYen) err(rTag, `内訳の合計（${parts}）が事業総額（${r.totalYen}）と一致しません`);
+    if (!st.groupSubtotals[r.group]) err(rTag, `小計の無い大区分です: ${r.group}`);
+  }
+  const colSum = (key, group) => st.rows.filter((r) => !group || r.group === group).reduce((s, r) => s + (r[key] ?? 0), 0);
+  for (const key of ["totalYen", ...AMOUNT_KEYS, "fundDepositYen"]) {
+    for (const [group, sub] of Object.entries(st.groupSubtotals)) {
+      if ((sub[key] ?? 0) !== colSum(key, group)) err(tag, `決算一覧「${group}」の${key}の合計が資料の小計と一致しません`);
+    }
+    if ((st.grandTotal[key] ?? 0) !== colSum(key)) err(tag, `決算一覧の${key}の合計が資料の計と一致しません`);
+  }
+  if (st.grandTotal.forestTaxCurrentYen !== us.transferredYen.current) {
+    err(tag, "決算一覧の(A)譲与税（当年度分）の計が当年度の譲与額と一致しません");
+  }
+} catch (e) {
+  if (e?.code === "ENOENT") warn("forestEnvironmentTax.json", "読み込めませんでした（存在しない場合はスキップ）");
+  else throw e;
 }
 
 // --- councilReports.json（市長報告：議決を要しない案件） ---
@@ -4969,4 +5034,18 @@ try {
 } catch (e) {
   if (e?.code === "ENOENT") warn("councilReports.json", "読み込めませんでした（存在しない場合はスキップ）");
   else throw e;
+}
+
+// レポートは必ずファイルの最後に置く（この後ろに検査を足すと、そのエラーが集計・表示されないため）。
+// --- report ---
+for (const w of warnings) console.warn(w);
+for (const e of errors) console.error(e);
+
+console.log(
+  `[validate-data] members=${members.length} generalQuestions=${generalQuestions.length} billVotes=${billVotes.length} councilSessions=${councilSessions.length} — errors=${errors.length} warnings=${warnings.length}`,
+);
+
+if (errors.length > 0) {
+  console.error("\nデータ検証でエラーが見つかったため、ビルドを中止します。上記のエラー内容を確認してください。");
+  process.exit(1);
 }

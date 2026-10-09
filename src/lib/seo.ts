@@ -776,6 +776,27 @@ function staticPageSeo(pathname: string, options?: SeoOptions): SeoResult | unde
         options,
       );
 
+    case "/finance/forest-environment-tax":
+      return makeResult(
+        {
+          path: "/finance/forest-environment-tax",
+          pageTitle: "森林環境譲与税の使途",
+          description:
+            "延岡市が国から受け取った森林環境譲与税の年度別の譲与額と、令和7年度の使途（森林整備・人材育成・木材利用の事業別決算）を、市の公表資料の数値のまま整理しています。",
+          breadcrumbs: [{ label: "ホーム", to: "/" }, { label: "延岡市の財政", to: "/finance" }, { label: "森林環境譲与税の使途" }],
+          extraJsonLd: [
+            datasetJsonLd({
+              id: "dataset-finance-forest-environment-tax-jsonld",
+              name: "延岡市 森林環境譲与税の譲与額と使途",
+              description: "延岡市の森林環境譲与税の年度別譲与額と、令和7年度の事業別決算を整理したデータです。",
+              url: `${SITE_URL}/finance/forest-environment-tax`,
+              dateModified: lastmod,
+            }),
+          ],
+        },
+        options,
+      );
+
     case "/compare":
       return makeResult(
         {
