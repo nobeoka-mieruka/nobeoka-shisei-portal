@@ -1,101 +1,19 @@
 {
-  "checkedAt": "2026-10-09T02:24:47.857Z",
+  "checkedAt": "2026-10-09T02:52:39.981Z",
   "dryRun": false,
   "sessionFilter": null,
   "limit": null,
-  "documentsProcessed": 1,
-  "documentsSkippedUnchanged": 52,
+  "documentsProcessed": 0,
+  "documentsSkippedUnchanged": 53,
   "documentsOcrRequired": 0,
   "documentsError": 0,
-  "proposalsExtracted": 38,
-  "proposalsPublished": 9,
+  "proposalsExtracted": 0,
+  "proposalsPublished": 0,
   "proposalsPendingReview": 0,
   "proposalsUpdatedPendingReview": 0,
   "proposalsSupplementalUpdated": 0,
-  "proposalsUnchanged": 29,
+  "proposalsUnchanged": 0,
   "proposalsConflict": 0,
   "memberVoteNote": "このPDF（議案等審議結果）には議員個人の賛否は記載されていないため、議員別賛否（memberVotes）は抽出していません。",
-  "items": [
-    {
-      "id": "2026-09-gian-22",
-      "session": "2026-09",
-      "billNumber": "議案第22号",
-      "title": "令和7年度延岡市一般会計歳入歳出決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-23",
-      "session": "2026-09",
-      "billNumber": "議案第23号",
-      "title": "令和7年度延岡市国民健康保険特別会計歳入歳出決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-24",
-      "session": "2026-09",
-      "billNumber": "議案第24号",
-      "title": "令和7年度延岡市食肉センター特別会計歳入歳出決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-25",
-      "session": "2026-09",
-      "billNumber": "議案第25号",
-      "title": "令和7年度延岡市介護保険特別会計歳入歳出決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-26",
-      "session": "2026-09",
-      "billNumber": "議案第26号",
-      "title": "令和7年度延岡市後期高齢者医療特別会計歳入歳出決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-27",
-      "session": "2026-09",
-      "billNumber": "議案第27号",
-      "title": "令和7年度延岡市水道事業会計剰余金の処分及び決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-28",
-      "session": "2026-09",
-      "billNumber": "議案第28号",
-      "title": "令和7年度延岡市下水道事業会計剰余金の処分及び決算の認定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-gian-55",
-      "session": "2026-09",
-      "billNumber": "議案第55号",
-      "title": "延岡市議会の議員の定数を定める条例の一部を改正する条例の制定",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    },
-    {
-      "id": "2026-09-chinjo-7",
-      "session": "2026-09",
-      "billNumber": "陳情第7号",
-      "title": "延岡市議会議員定数削減に関する陳情",
-      "outcome": "new",
-      "publicationStatus": "published",
-      "reasons": []
-    }
-  ]
+  "items": []
 }
