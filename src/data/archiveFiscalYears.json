@@ -6604,14 +6604,14 @@
       "prefecturalSubsidiesYen": 5899621000,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
           "sourceUrl": "https://www.soumu.go.jp/main_content/000804191.xlsx",
@@ -6669,14 +6669,14 @@
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。perCapitaYenは当該年度population（119,164人）で除して当サイトが計算した参考値。",
         "sourceRefs": [
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
@@ -6730,14 +6730,14 @@
         "definitionNote": "財政調整基金（fiscalReserveFundYen）・減債基金（bondRedemptionFundYen）・その他特定目的基金は、いずれも延岡市「財政状況資料集」総括表の区分（総務省統一様式）。既存のfiscalAdjustmentFundYen（財政調整積立基金等4基金の広義合計、financeDashboard.jsonの定義）とは別の一次資料・別の分類基準のため、この年度はfiscalAdjustmentFundYenを登録しない。totalYen（基金全体、24,335,835千円）は、財政状況資料集とは分類基準が異なる「令和2年度延岡市歳入歳出決算審査意見書・基金運用状況審査意見書」の「基金の増減状況表」合計行（一般会計・特別会計ベース）から新規登録した（FY2024で確立済みの手法を踏襲）。同資料内のfiscalReserveFundYen・bondRedemptionFundYenが本ファイルの既存値と完全一致することを確認済み（クロスチェック）。",
         "sourceRefs": [
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/6024.pdf",
@@ -6762,14 +6762,14 @@
       "financialStrengthIndex": 0.49,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BV/DB列（令和2年度＝前年度列）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ],
       "notes": "将来負担比率は資料上「-」（将来負担額が充当可能財源等を下回るため、算定なし。0％や未確認とは異なる）。実質収支2,109,555千円、実質収支比率6.6%、標準財政規模32,195,730千円も同資料に記載。",
@@ -6874,14 +6874,14 @@
             "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和3年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://web.archive.org/web/20231024104156/https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/11482.pdf",
@@ -6910,14 +6910,14 @@
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
@@ -6959,13 +6959,13 @@
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版、普通会計の状況シート「地方債」行）",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "「普通会計の状況」シートの「地方債」行（決算額）7,038,061千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（71,960,873千円）が、既に登録済みのbudget.totalExpenditureYen（FY2021）と完全一致することで、この資料がFY2021のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）7,038,061千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（71,960,873千円）が、既に登録済みのbudget.totalExpenditureYen（FY2021）と完全一致することで、この資料がFY2021のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ]
     },
@@ -6984,23 +6984,23 @@
       "prefecturalSubsidiesYen": 6631228000,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」令和3年度版「(1)普通会計の状況」",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。"
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
@@ -7046,14 +7046,14 @@
       "financialStrengthIndex": 0.5,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和3年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和3年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125897_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134801_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2023-10-02）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ],
       "notes": "実質収支2,543,985千円、実質収支比率7.7%、標準財政規模33,171,044千円も同資料に記載。",
@@ -7158,14 +7158,14 @@
             "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和4年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和4年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2024-09-27）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
@@ -7194,14 +7194,14 @@
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和4年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2024-09-27）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15731.pdf",
@@ -7232,13 +7232,13 @@
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和4年度版、普通会計の状況シート「地方債」行）",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "「普通会計の状況」シートの「地方債」行（決算額）4,724,117千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（69,471,701千円）が、既に登録済みのbudget.totalExpenditureYen（FY2022）と完全一致することで、この資料がFY2022のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）4,724,117千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（69,471,701千円）が、既に登録済みのbudget.totalExpenditureYen（FY2022）と完全一致することで、この資料がFY2022のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和4年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2024-09-27）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ]
     },
@@ -7257,23 +7257,23 @@
       "prefecturalSubsidiesYen": 5367358000,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和4年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2024-09-27）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」令和4年度版「(1)普通会計の状況」",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。"
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和4年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2024-09-27）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
@@ -7308,14 +7308,14 @@
       "financialStrengthIndex": 0.5,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和4年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和4年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125896_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134800_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2024-09-27）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ],
       "notes": "実質収支2,104,150千円、実質収支比率6.6%、標準財政規模32,067,253千円も同資料に記載。 【2026-09-23】公債費負担比率を14.4%から14.7%に訂正（14.4%は令和5年度の値を読み違えたもの。令和4年度決算カード、令和5年度決算カードの前年度列、令和5年度財政状況資料集の3か所で14.7%）。",
@@ -7420,14 +7420,14 @@
             "notes": "既存financeDashboard.jsonのfundBalance.fiscalAdjustmentFunds（令和5年度末）から移行。 Phase90（UNR-030実地調査、2026-08-23）にて、延岡市「財政状況資料集」令和3〜6年度版の4つのExcelファイルをすべて個別にダウンロードし、xlsxパッケージで「総括表」シート（当該年度の値）と「基金残高に係る経年分析」シート（複数年度トレンド、独立集計）の両方を確認した。4年度分すべてで値が一致しており、抽出時のセル参照固定バグの可能性は排除された（実際に4年度連続で残高が変動しなかったことを示す）。"
           },
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和5年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2025-09-29）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20032.pdf",
@@ -7456,14 +7456,14 @@
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和5年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2025-09-29）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
@@ -7505,13 +7505,13 @@
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和5年度版、普通会計の状況シート「地方債」行）",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "「普通会計の状況」シートの「地方債」行（決算額）5,463,242千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（69,891,005千円）が、既に登録済みのbudget.totalExpenditureYen（FY2023）と完全一致することで、この資料がFY2023のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）5,463,242千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（69,891,005千円）が、既に登録済みのbudget.totalExpenditureYen（FY2023）と完全一致することで、この資料がFY2023のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和5年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2025-09-29）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ]
     },
@@ -7530,23 +7530,23 @@
       "prefecturalSubsidiesYen": 5255149000,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和5年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2025-09-29）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」令和5年度版「(1)普通会計の状況」",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。"
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和5年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2025-09-29）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",
@@ -7592,14 +7592,14 @@
       "financialStrengthIndex": 0.52,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和5年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和5年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125895_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134799_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2025-09-29）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ],
       "notes": "実質収支1,815,659千円、実質収支比率5.6%、標準財政規模32,545,525千円も同資料に記載。",
@@ -7715,14 +7715,14 @@
             "notes": "既存financeDashboard.jsonのfundBalance.totalFunds（令和6年度末、その他特定目的基金・基金全体）から移行。 【2026-09-23】原本を再取得し、この年度の値が原本の該当箇所と一致することを確認した。公表日を、表紙の日付（延監第73号、令和7年8月15日）に訂正した。"
           },
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 財政調整基金・減債基金のみ登録。その他特定目的基金・基金全体は既存の決算審査意見書ベースの値を維持。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 財政調整基金・減債基金のみ登録。その他特定目的基金・基金全体は既存の決算審査意見書ベースの値を維持。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和6年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2026-09-06）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           }
         ],
         "fiscalReserveFundYen": 5032997000
@@ -7748,14 +7748,14 @@
           "notes": "既存financeDashboard.jsonのfinancialIndicators（令和6年度決算）から移行。財政力指数・経常収支比率・実質収支は既存データでも「確認中」（未特定）。 【2026-09-23】原本ページを再取得し、実質公債費比率8.6％・将来負担比率15.9％が登録値と一致することを確認した（財政力指数・経常収支比率・公債費負担比率は本ページに記載がなく、同年度の財政状況資料集を出典とする）。"
         },
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 financialStrengthIndex(0.53)・currentAccountRatioPercent(97.2)は、既存financeDashboard.jsonのfinancialIndicators（TASK-035で確認済み）とも一致。debtServiceRatioPercent(公債費負担比率)を新規追加。realDebtServiceRatioPercent・futureBurdenRatioPercentは既存値（8.6/15.9）と完全一致のため変更なし。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 financialStrengthIndex(0.53)・currentAccountRatioPercent(97.2)は、既存financeDashboard.jsonのfinancialIndicators（TASK-035で確認済み）とも一致。debtServiceRatioPercent(公債費負担比率)を新規追加。realDebtServiceRatioPercent・futureBurdenRatioPercentは既存値（8.6/15.9）と完全一致のため変更なし。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和6年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2026-09-06）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ],
       "notes": "実質赤字比率・連結実質赤字比率・資金不足比率は延岡市の公表資料で「対象なし」（赤字・資金不足が生じていない）とされている。 financialStrengthIndex・currentAccountRatioPercent・debtServiceRatioPercentは財政状況資料集で確認し追加登録（既存のTASK-035確認値と一致）。",
@@ -7827,14 +7827,14 @@
         "definitionNote": "延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）。企業会計（水道事業債・下水道事業債）は含まない。既存src/data/financeDashboard.jsonのdebtBalanceTrendから移行（令和3〜6年度分の隣接年度版間の数値一致をクロスチェック済み）。",
         "sourceRefs": [
           {
-            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+            "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsx",
             "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
             "sourceOrganization": "延岡市",
             "sourcePublishedDate": "2025-03-31",
-            "accessedAt": "2026-09-23",
+            "accessedAt": "2026-10-09",
             "extractionMethod": "manual",
             "verificationStatus": "verified",
-            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+            "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間で数値が完全一致することを確認済み。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和6年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2026-09-06）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
           },
           {
             "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
@@ -7865,13 +7865,13 @@
       "municipalBondIssuanceStatus": "settlementConfirmed",
       "municipalBondIssuanceSourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和6年度版、普通会計の状況シート「地方債」行）",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "「普通会計の状況」シートの「地方債」行（決算額）5,953,987千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（70,924,122千円）が、既に登録済みのbudget.totalExpenditureYen（FY2024）と完全一致することで、この資料がFY2024のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "「普通会計の状況」シートの「地方債」行（決算額）5,953,987千円を、xlsxパッケージでの解析により確認。同シートの「歳出合計」行（70,924,122千円）が、既に登録済みのbudget.totalExpenditureYen（FY2024）と完全一致することで、この資料がFY2024のデータであることをクロスチェック済み。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「普通会計の状況」「地方債」行（決算額、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和6年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2026-09-06）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         }
       ]
     },
@@ -7890,23 +7890,23 @@
       "prefecturalSubsidiesYen": 5438036000,
       "sourceRefs": [
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」（総務省統一様式、令和3年度版〜令和6年度版、総括表）",
           "sourceOrganization": "延岡市",
           "sourcePublishedDate": "2025-03-31",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。"
+          "notes": "総括表シートをxlsxパッケージで解析し、隣接年度版間（例：令和6年度版のR5列と令和5年度版のR5列）で数値が完全一致することを確認済み。 歳入総額・歳出総額（決算）のみ。当初予算額・補正後予算額・決算額（一般会計単独の区分）は総括表に記載が無いため未確認。 【2026-09-23】掲載ページからリンクされる令和6年度版XLSX（https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx）のシート「総括表」BN/CT列（当該年度）（歳入総額・歳出総額・財政力指数・公債費負担比率・実質公債費比率・将来負担比率・経常収支比率・地方債現在高・積立金現在高、千円）で値を確認し、出典URLを値が記載されたファイルへ改めた。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和6年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2026-09-06）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
-          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsx",
+          "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsx",
           "sourceTitle": "延岡市「財政状況資料集」令和6年度版「(1)普通会計の状況」",
           "sourceOrganization": "延岡市",
-          "accessedAt": "2026-09-23",
+          "accessedAt": "2026-10-09",
           "extractionMethod": "manual",
           "verificationStatus": "verified",
-          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。"
+          "notes": "Phase113で新規登録。延岡市「財政状況資料集」（総務省統一様式、xlsx）の「(1)普通会計の状況」シートをxlsxパッケージでセル単位で読み取った。歳入内訳4項目（地方税・地方交付税・国庫支出金・都道府県支出金、従来はすべて未登録）を新規登録。同シートの歳入合計が既存登録のtotalRevenueYen（同一資料「総括表」シート由来）と完全一致することを確認済み（同一出典内での内部整合性を確認）。会計区分は「普通会計」ベース。 【2026-09-23】原本XLSX「普通会計の状況」シートを再取得し、歳入内訳4項目が登録値と一致することを確認した。 【2026-10-09】掲載ページ（延岡市財政課「財政状況資料集」、2026年9月30日更新）で令和6年度版のファイルURLがhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/48504_125894_misc.xlsxからhttps://www.city.nobeoka.miyazaki.jp/uploaded/life/52190_134798_misc.xlsxへ変わり、旧URLは404になった。新しいファイル（ファイル内の更新日時2026-09-06）を取得し、この項目で財政状況資料集を出典としている値が同じシートに同じ数値で記載されていることを確認したうえで、出典URLを改めた（登録値は変更なし）。"
         },
         {
           "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/25836.pdf",

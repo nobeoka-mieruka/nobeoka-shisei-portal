@@ -4311,7 +4311,7 @@
     "id": "koho-2026-09",
     "issueYearMonth": "2026-09",
     "title": "広報のべおか2026年9月号",
-    "pdfUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28843.pdf",
+    "pdfUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28842.pdf",
     "sourceOrganization": "延岡市",
     "fileSizeApproxMb": 17.54,
     "checkedAt": "2026-09-05",
@@ -4323,7 +4323,26 @@
     "pageCount": 13,
     "indexed": false,
     "researchStatus": "tested_pdftotext_sample",
-    "lastCheckedAt": "2026-09-05",
+    "lastCheckedAt": "2026-10-09",
+    "ocrCompleted": false
+  },
+  {
+    "id": "koho-2026-10",
+    "issueYearMonth": "2026-10",
+    "title": "広報のべおか2026年10月号",
+    "pdfUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29199.pdf",
+    "sourceOrganization": "延岡市",
+    "fileSizeApproxMb": 18.9,
+    "checkedAt": "2026-10-09",
+    "fileType": "imagePdf",
+    "textExtractable": false,
+    "imagePdf": true,
+    "ocrRequired": true,
+    "extractedNonWhitespaceChars": 2698,
+    "pageCount": 13,
+    "indexed": false,
+    "researchStatus": "tested_pdftotext_sample",
+    "lastCheckedAt": "2026-10-09",
     "ocrCompleted": false
   }
 ]
