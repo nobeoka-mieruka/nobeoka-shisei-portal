@@ -76,6 +76,14 @@ export function CouncilSessionDetailPage() {
   const sessionBills = billsForSession(billVotes, session);
   // 市長報告は議決・採決を要しない案件。議案と同じ一覧に混ぜず、別の節として見せる。
   const sessionReports = councilReports.filter((r) => r.sessionId === session.id);
+  // 出典資料ごとの代表（同じsourceUrlの報告は公開日・注記が同じであることをvalidate-dataで検査している）。
+  // 確認日は、その資料を出典とする報告のうち最も新しい日を示す。
+  const reportSources = [...new Map(sessionReports.map((r) => [r.sourceUrl, r])).values()].map((r) => ({
+    ...r,
+    lastVerified: sessionReports
+      .filter((x) => x.sourceUrl === r.sourceUrl)
+      .reduce((latest, x) => (x.lastVerified > latest ? x.lastVerified : latest), r.lastVerified),
+  }));
   const stats = sessionBillStats(sessionBills);
   const summaryStatus = session.summaryStatus;
 
@@ -370,14 +378,21 @@ export function CouncilSessionDetailPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs leading-relaxed text-on-surface-variant">
-            出典：
-            <a href={sessionReports[0].sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
-              {sessionReports[0].sourceTitle}
-            </a>
-            （延岡市議会、公開日：{formatJapaneseDate(sessionReports[0].publishedDate)}／当サイト確認日：
-            {formatJapaneseDate(sessionReports[0].lastVerified)}／延岡市公式の一次資料）
-          </p>
+          {/* 出典は資料（sourceUrl）ごとに1行ずつ出す。先頭の報告の日付を全体の代表にすると、
+              出典の版が混在したときに別の版の公開日を表示してしまうため。 */}
+          {reportSources.map((source) => (
+            <div key={source.sourceUrl} className="mt-3 text-xs leading-relaxed text-on-surface-variant">
+              <p>
+                出典：
+                <a href={source.sourceUrl} target="_blank" rel="noopener noreferrer" className={`text-primary underline ${linkClass}`}>
+                  {source.sourceTitle}
+                </a>
+                （延岡市議会、この版の公開日：{formatJapaneseDate(source.publishedDate)}／当サイト確認日：
+                {formatJapaneseDate(source.lastVerified)}／延岡市公式の一次資料）
+              </p>
+              {source.publishedDateNote && <p className="mt-1">{source.publishedDateNote}</p>}
+            </div>
+          ))}
         </SectionCard>
       )}
 

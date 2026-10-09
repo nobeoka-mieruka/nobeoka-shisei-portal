@@ -2796,8 +2796,14 @@ export interface CouncilReportItem {
   sourceTitle: string;
   sourceFilePath: string;
   sourcePage: number;
-  /** 公式資料の公開日。報告日と同じとは限らないため別に持つ。 */
+  /**
+   * 出典資料（sourceUrlが指す版）が公式サイトに掲載された日。報告日と同じとは限らないため別に持つ。
+   * 審議結果PDFは会期中に新しい版へ差し替えられるため、出典を別の版へ移したときは、その版の掲載日にそろえる
+   * （差し替え前の版の掲載日を残さない）。同じsourceUrlの報告は同じ日付になる（validate-dataで検査）。
+   */
   publishedDate: string;
+  /** publishedDateの根拠や、差し替え前の版との関係の説明（確認できた場合のみ）。 */
+  publishedDateNote?: string;
   trustLevel: "PRIMARY";
   verificationStatus: "verified" | "partially-verified" | "unverified";
   lastVerified: string;

@@ -98,6 +98,29 @@ check("令和8年9月定例会の市長報告は、審議結果資料のとお�
   }
 });
 
+// 出典の版と公開日の対応（2026-10-09）。10月5日現在の版（29234.pdf）は、一覧ページの更新日・
+// PDFファイルの更新日時・表題がいずれも2026年10月5日で一致する。9月18日は差し替え前の版（29070.pdf）の掲載日。
+check("令和8年10月5日現在の版を出典とする報告は、公開日が2026-10-05（前の版の9月18日ではない）", () => {
+  const latest = reports.filter((r) => r.sourceUrl.endsWith("/29234.pdf"));
+  assert.ok(latest.length > 0, "29234.pdfを出典とする報告がありません");
+  for (const r of latest) {
+    assert.equal(r.publishedDate, "2026-10-05", `${r.reportNumber}の公開日が${r.publishedDate}です`);
+    assert.ok(r.publishedDateNote, `${r.reportNumber}に公開日の根拠の注記がありません`);
+  }
+});
+
+/** 故障注入：同じ出典の報告で公開日が混在した場合に検出できることを確かめる。 */
+check("同じ出典で公開日が混在すると検出される（故障注入）", () => {
+  const broken = reports.map((r, i) => (i === 0 ? { ...r, publishedDate: "2026-09-18" } : r));
+  const dates = new Map();
+  let mixed = false;
+  for (const r of broken) {
+    if (dates.has(r.sourceUrl) && dates.get(r.sourceUrl) !== r.publishedDate) mixed = true;
+    dates.set(r.sourceUrl, r.publishedDate);
+  }
+  assert.ok(mixed, "公開日の混在を検出できませんでした");
+});
+
 /** 故障注入：報告を議案の配列へ混ぜてしまった場合に検出できることを確かめる。 */
 check("報告を議案として登録すると検出される（故障注入）", () => {
   const brokenBillKeys = new Set([...bills.map((b) => `${b.sessionId}/${b.billNumber}`), "2026-09/報告第6号"]);

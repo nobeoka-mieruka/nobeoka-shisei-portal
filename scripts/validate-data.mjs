@@ -4936,6 +4936,22 @@ try {
     }
   }
 
+  // 同じ出典資料（同じ版のPDF）を指す報告は、公開日とその注記が同じでなければならない。
+  // 出典を新しい版へ移したときに、差し替え前の版の公開日が一部の報告に残る取り違えを防ぐ
+  // （2026-10-09：令和8年10月5日現在の版を指しながら公開日が9月18日（前の版の掲載日）のままだった）。
+  const publishedBySource = new Map();
+  for (const r of reportsData.reports) {
+    const key = `${r.publishedDate}|${r.publishedDateNote ?? ""}`;
+    const seen = publishedBySource.get(r.sourceUrl);
+    if (seen === undefined) publishedBySource.set(r.sourceUrl, { key, id: r.id });
+    else if (seen.key !== key) {
+      err(tag, `同じ出典（${r.sourceUrl}）なのに公開日または注記が異なります: ${seen.id} と ${r.id}`);
+    }
+    if (DATE_RE.test(r.publishedDate ?? "") && DATE_RE.test(r.lastVerified ?? "") && r.publishedDate > r.lastVerified) {
+      err(tag, `${r.id}: 公開日（${r.publishedDate}）が当サイト確認日（${r.lastVerified}）より後になっています`);
+    }
+  }
+
   // 報告番号は議案番号とは別系列。同じ会期の議案と取り違えていないかを確かめる。
   try {
     const billsForCheck = readJson("src/data/billVotes.json");
