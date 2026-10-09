@@ -23,6 +23,7 @@ DONE 106／BLOCKED 12／READY 0／IN_PROGRESS 0（残差は分割管理のみの
 （2026-09-22・Phase280時点：TASK-199「公開記録による議会活動の本番完成と0件表示の是正」をDONEとして追加）
 （2026-09-23時点：TASK-200「本会議の議員別出席状況の収録」を追加。ウェブ公開の一次資料が無くBLOCKED）
 （2026-09-24時点：TASK-201「市民向けの統合検索・テーマ横断・市政タイムライン・確認できる関連の横断導線」をDONEとして追加）
+（2026-10-09時点：TASK-204「公式情報との差分取り込み（令和8年9月定例会10月5日版ほか）」をDONEとして追加。BLOCKED・READY・IN_PROGRESSの件数に変更なし）
 ／`### TASK-`見出し総数155（2026-09-23に実データから再集計：DONE 139／BLOCKED 12／READY 0／IN_PROGRESS 0）
 
 READY・IN_PROGRESSともに0件。BLOCKED 12件（2026-09-23再集計。TASK-200を追加）
@@ -11320,3 +11321,33 @@ BLOCKED理由・再開条件：
   9〜11pxの説明文を12px以上へ（グラフの目盛りは除く）。内部コード露出検査に小文字コードとTASK-番号を追加。
 
 完了日：2026-09-24
+
+### TASK-204 公式情報との差分取り込み（令和8年9月定例会10月5日版ほか）（2026-10-09）
+
+状態：DONE（2026-10-09）
+優先度：A（公式の審議結果PDFが差し替えられ、既存の出典URLが404になっていたため）
+対象：`src/data/billVotes.json`、`src/data/councilReports.json`、`src/data/councilSessions.json`、
+`src/data/councilWatchedDocuments.json`、`src/data/questionCollectionStatus.json`、
+`src/data/mayorEntertainmentExpenses.json`、`src/data/publicComments.json`、`src/data/updateHistory.json`、
+`scripts/sync-council-data.mjs`、件数固定テスト各種
+
+実施内容：
+- 議案等審議結果（第27回、令和8年10月5日現在、attachment/29234.pdf）を既存の
+  `fetch:council-documents`・`extract:council-data`で取得・抽出。9件を追加
+  （議案第22〜26号「認定」、第27・28号「原案可決及び認定」、第55号「原案可決」、陳情第7号「採択」、いずれも10月5日）。
+- 9月18日版（29070.pdf、404）と10月5日版の本文を正規化して全文比較し、追加行以外は同一であることを確認。
+  既存の議案29件・報告第6〜21号の出典を新版へ移行（登録内容は不変）。報告第22・23号（専決処分、10月5日報告）を
+  `councilReports.json`へ追加（議決結果・賛否は持たない）。
+- 意見書・決議ページ（19435.html、2026-10-05更新）の新規PDF 3件を巡回スクリプトで取り込み。件名と議決日が
+  ともに一致した35件の議案詳細に本文PDFを`relatedDocumentUrls`として追加（一致しない9件は付けていない）。
+- `sync-council-data.mjs`の不具合を修正：表の同じ行の次セルにある議決日を拾えず1行前の日付を入れていた／
+  人手で確定した`removed-confirmed`を`-suspected`へ戻していた。
+- 議員定数：改正後の人数・施行日・適用選挙は公式資料（例規集・選管「公職の任期、定数」＝27人のまま、
+  2023-06-28更新）で確認できず未掲載。`COUNCIL_STATUTORY_SEATS`（現在の定数27）は変更しない。
+- 会期：会議録未公開（2026-10-09確認）のため閉会日は未登録のまま（会期「確認中」）。TASK-197で
+  「9月18日時点で閉会済み」とした注記は、決算等が10月5日に議決されていたため訂正した。
+- 市長交際費8月分（29038.pdf、5件、合計22,340円・累計313,492円を検算）、パブリックコメント
+  （教育大綱を結果準備中へ、2件追加）を反映。記者会見・委員会・公約関連・会議録・人口・財政は変更なし。
+
+検証：validate:data errors=0、typecheck・lint（エラー0）・build・npm test 全件成功、内部リンク切れ0、SEO failures=0。
+

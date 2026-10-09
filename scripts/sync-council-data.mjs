@@ -80,7 +80,18 @@ function parseGenericPdfListing(html) {
     // 議決日を直前に置く意見書・決議ページ等の既存の拾い方には影響しない）。
     const followingWindow = html.slice(m.index + m[0].length, m.index + m[0].length + 120);
     const followingDate = followingWindow.match(/更新日\s*[：:]\s*(令和(?:元|\d+)年\d{1,2}月\d{1,2}日)/);
-    const decidedDate = followingDate ? followingDate[1] : dateMatch ? dateMatch[dateMatch.length - 1] : null;
+    // 意見書・決議ページ（/site/gikai/19435.html）は「資料名｜議決日」の表で、議決日はリンクと同じ行の
+    // 次のセルにある。この場合も直前ウィンドウには「1つ前の行の議決日」しか無く、1行ずれて取り違える
+    // （2026-10-09に実データで確認：非核三原則の意見書（7月3日議決）に9月18日が入っていた）。
+    // 同じ行の次のセルに日付だけが入っている場合は、そちらを優先する。
+    const sameRowCellDate = followingWindow.match(/^\s*<\/td>\s*<td[^>]*>\s*(令和(?:元|\d+)年\d{1,2}月\d{1,2}日)\s*<\/td>/);
+    const decidedDate = followingDate
+      ? followingDate[1]
+      : sameRowCellDate
+        ? sameRowCellDate[1]
+        : dateMatch
+          ? dateMatch[dateMatch.length - 1]
+          : null;
     entries.push({ href, linkText, decidedDate });
   }
   return entries;
@@ -244,7 +255,8 @@ async function syncGenericListing({ category, categoryLabel, pageUrl, records, r
     for (const r of records) {
       if (r.category !== category) continue;
       if (seenUrls.has(r.sourceUrl)) continue;
-      if (r.status === "removed-confirmed-suspected") continue;
+      // 人手で「取得不能として確定」（removed-confirmed）済みの資料を、確認待ちの状態へ戻さない。
+      if (r.status === "removed-confirmed-suspected" || r.status === "removed-confirmed") continue;
       r.missingStreak = (r.missingStreak ?? 0) + 1;
       r.lastCheckedAt = todayIso();
       if (r.missingStreak >= 2) {
@@ -487,7 +499,8 @@ async function syncQuestionNotices({ records, report, members }) {
     for (const r of records) {
       if (r.category !== "question-notice") continue;
       if (seenUrls.has(r.sourceUrl)) continue;
-      if (r.status === "removed-confirmed-suspected") continue;
+      // 人手で「取得不能として確定」（removed-confirmed）済みの資料を、確認待ちの状態へ戻さない。
+      if (r.status === "removed-confirmed-suspected" || r.status === "removed-confirmed") continue;
       r.missingStreak = (r.missingStreak ?? 0) + 1;
       r.lastCheckedAt = todayIso();
       if (r.missingStreak >= 2) {

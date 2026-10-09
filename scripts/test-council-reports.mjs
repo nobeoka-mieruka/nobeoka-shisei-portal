@@ -84,13 +84,17 @@ check("報告が参照する会期と会期資料が実在する", () => {
   }
 });
 
-check("令和8年9月定例会の市長報告は、審議結果資料のとおり報告第6号から第21号の16件", () => {
+// 2026-10-09：審議結果資料が令和8年10月5日現在の版（attachment/29234.pdf）に差し替えられ、
+// 報告第22号・第23号（専決処分の報告、10月5日報告）が追加された。第6〜21号は9月18日のまま。
+check("令和8年9月定例会の市長報告は、審議結果資料のとおり報告第6号から第23号の18件", () => {
   const sept = reports.filter((r) => r.sessionId === "2026-09");
-  assert.equal(sept.length, 16, `件数が16件ではありません（${sept.length}件）`);
+  assert.equal(sept.length, 18, `件数が18件ではありません（${sept.length}件）`);
   const numbers = sept.map((r) => Number(r.reportNumber.replace(/[^0-9]/g, ""))).sort((a, b) => a - b);
-  assert.deepEqual(numbers, [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], `報告番号が想定と異なります: ${numbers.join("、")}`);
+  assert.deepEqual(numbers, [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], `報告番号が想定と異なります: ${numbers.join("、")}`);
   for (const r of sept) {
-    assert.equal(r.reportedDate, "2026-09-18", `${r.reportNumber}の報告日が資料（9月18日）と異なります`);
+    const n = Number(r.reportNumber.replace(/[^0-9]/g, ""));
+    const expected = n >= 22 ? "2026-10-05" : "2026-09-18";
+    assert.equal(r.reportedDate, expected, `${r.reportNumber}の報告日が資料（${expected}）と異なります`);
   }
 });
 

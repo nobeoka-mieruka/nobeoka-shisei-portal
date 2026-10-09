@@ -1,12 +1,14 @@
 {
   "note": "延岡市政策等の形成過程における市民等参加条例（パブリックコメント条例）に基づいて延岡市が実施した意見募集を、延岡市公式ホームページ「運用状況」一覧と各案件のページに基づいて整理したものです。案件の状態（募集中・結果公表済み等）は、市が一覧のどの見出しの下に掲載しているかをそのまま転記しており、募集期間の日付から推定していません。提出された意見の本文と市の考え方は転載せず、公式ページ・公式PDFへリンクしています。",
-  "coveredFiscalYears": ["令和8年度"],
+  "coveredFiscalYears": [
+    "令和8年度"
+  ],
   "statusSource": {
     "label": "令和8年度延岡市政策等の形成過程における市民等参加条例(パブリックコメント条例)運用状況 - 延岡市公式ホームページ",
     "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1699.html"
   },
-  "statusSourceUpdatedAt": "2026-09-28",
-  "lastVerifiedAt": "2026-10-01",
+  "statusSourceUpdatedAt": "2026-10-06",
+  "lastVerifiedAt": "2026-10-09",
   "entries": [
     {
       "id": "pc-r08-001",
@@ -47,7 +49,9 @@
       "endDate": "2026-05-29",
       "status": "result-published",
       "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/81/50255.html",
-      "documentUrls": ["https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27866.pdf"],
+      "documentUrls": [
+        "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27866.pdf"
+      ],
       "resultUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27865.pdf",
       "submitterCount": 14,
       "opinionCount": 21,
@@ -75,7 +79,9 @@
       "endDate": "2026-07-06",
       "status": "result-published",
       "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/4/50218.html",
-      "documentUrls": ["https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28128.pdf"],
+      "documentUrls": [
+        "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28128.pdf"
+      ],
       "resultUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/4/50218.html",
       "submitterCount": 0,
       "opinionCount": 0,
@@ -138,13 +144,15 @@
       "department": "総合政策課",
       "startDate": "2026-09-03",
       "endDate": "2026-10-02",
-      "status": "open",
+      "status": "closed-preparing-result",
       "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/1/51626.html",
-      "documentUrls": ["https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28700.pdf"],
+      "documentUrls": [
+        "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28700.pdf"
+      ],
       "resultUrl": null,
       "submitterCount": null,
       "opinionCount": null,
-      "note": "市長と教育委員会が本市の教育施策の方向性を共有するために設置している「延岡市総合教育会議」において、延岡市教育委員会からの意見を踏まえ、3期目となる「延岡市教育大綱」の策定が進められていると公式ページに記載されています。結果はまだ公表されていません。",
+      "note": "市長と教育委員会が本市の教育施策の方向性を共有するために設置している「延岡市総合教育会議」において、延岡市教育委員会からの意見を踏まえ、3期目となる「延岡市教育大綱」の策定が進められていると公式ページに記載されています。意見募集は終了し、運用状況一覧では「意見募集を終了した案件（結果準備中）」に掲載されています（2026-10-09確認）。結果はまだ公表されていません。",
       "sourceOrganization": "延岡市",
       "trustLevel": "OFFICIAL_ARCHIVE",
       "sourceRefs": [
@@ -158,7 +166,65 @@
         }
       ],
       "sourcePageUpdatedAt": "2026-09-03",
-      "lastVerifiedAt": "2026-10-01"
+      "lastVerifiedAt": "2026-10-09"
+    },
+    {
+      "id": "pc-r08-006",
+      "title": "中小企業振興センター設備等改修事業",
+      "department": "産業政策課",
+      "startDate": "2026-10-06",
+      "endDate": "2026-10-26",
+      "status": "open",
+      "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/40/52207.html",
+      "documentUrls": [],
+      "resultUrl": null,
+      "submitterCount": null,
+      "opinionCount": null,
+      "note": "運用状況一覧の「意見募集中の案件」に掲載されています（2026-10-09確認）。案件のページには、確認時点で資料（PDF等）へのリンクは掲載されていません。結果はまだ公表されていません。",
+      "sourceOrganization": "延岡市",
+      "trustLevel": "OFFICIAL_ARCHIVE",
+      "sourceRefs": [
+        {
+          "label": "中小企業振興センター設備等改修事業への意見を募集します - 延岡市公式ホームページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/40/52207.html"
+        },
+        {
+          "label": "令和8年度延岡市政策等の形成過程における市民等参加条例(パブリックコメント条例)運用状況 - 延岡市公式ホームページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1699.html"
+        }
+      ],
+      "sourcePageUpdatedAt": "2026-09-26",
+      "lastVerifiedAt": "2026-10-09"
+    },
+    {
+      "id": "pc-r08-007",
+      "title": "西階公園陸上競技場整備基本計画（案）",
+      "department": "アスリートタウン推進課",
+      "startDate": "2026-10-13",
+      "endDate": "2026-11-12",
+      "status": "planned",
+      "officialUrl": "https://www.city.nobeoka.miyazaki.jp/soshiki/60/52197.html",
+      "documentUrls": [
+        "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29186.pdf"
+      ],
+      "resultUrl": null,
+      "submitterCount": null,
+      "opinionCount": null,
+      "note": "運用状況一覧の「意見募集予定の案件」に掲載されています（2026-10-09確認）。募集期間は公式ページに記載された予定です。",
+      "sourceOrganization": "延岡市",
+      "trustLevel": "OFFICIAL_ARCHIVE",
+      "sourceRefs": [
+        {
+          "label": "西階公園陸上競技場整備基本計画（案）に関する意見募集 - 延岡市公式ホームページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/60/52197.html"
+        },
+        {
+          "label": "令和8年度延岡市政策等の形成過程における市民等参加条例(パブリックコメント条例)運用状況 - 延岡市公式ホームページ",
+          "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/6/1699.html"
+        }
+      ],
+      "sourcePageUpdatedAt": "2026-10-02",
+      "lastVerifiedAt": "2026-10-09"
     }
   ]
 }

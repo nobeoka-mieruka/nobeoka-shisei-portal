@@ -294,14 +294,21 @@ check("内部の呼び名（重点8公約）が公開ページの文言に混ざ
  * scripts/lib/council-bill-extraction.mjs により既存の表記「同意」へ正規化されている）。報告第6〜21号は
  * 議案ではないため登録対象外。
  *
- * したがって 1,206 が現在値であり、1,177・1,178 は「当時の記録」としてのみ残してよい。
+ * 1,206 件 → 1,215 件（2026-10-09）。同会期の審議結果PDFが令和8年10月5日現在の版
+ * （https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29234.pdf）へ差し替えられ、
+ * 議案第22〜28号（令和7年度決算。第22〜26号は「認定」、第27・28号は「原案可決及び認定」）、
+ * 議案第55号（議員定数条例の一部改正、原案可決）、陳情第7号（採択）の9件（いずれも10月5日議決）を
+ * 既存の抽出スクリプトで追加した。9月18日版の記載29件は新しい版にも同じ内容で載っていることを
+ * 本文の照合で確認している。報告第22・23号は議案ではないため councilReports.json 側へ登録した。
+ *
+ * したがって 1,215 が現在値であり、1,177・1,178・1,206 は「当時の記録」としてのみ残してよい。
  * 画面に出す件数は必ず billVotes.json の実データから算出し、ページへ直書きしない。
  *
  * 議案が増えるのは、延岡市議会公式資料で新しい議案が確認できた場合だけである。
  * その場合に限り BILL_TOTAL を更新し、根拠（会期・議案番号・出典PDFのURL）を
  * このコメントへ追記すること。件数を推測で動かさない。
  */
-const BILL_TOTAL = 1206;
+const BILL_TOTAL = 1215;
 
 /** 議案の件数を画面へ出す（または画面用の集計を組み立てる）ファイル。 */
 const BILL_COUNT_DISPLAY_FILES = [
@@ -337,8 +344,8 @@ check(`議案総数が実データ・軽量インデックス・検索索引で�
 });
 
 check("議案の件数を画面へ出すファイルに、議案総数が固定値で直書きされていない（現在値・旧値とも）", () => {
-  // 1177・1178 は旧値、1206 は現在値。いずれも直書きしてはならない（増えたときに画面ごとの数字がずれる）。
-  const forbidden = [/1,?177/, /1,?178/, /1,?206/];
+  // 1177・1178・1206 は旧値、1215 は現在値。いずれも直書きしてはならない（増えたときに画面ごとの数字がずれる）。
+  const forbidden = [/1,?177/, /1,?178/, /1,?206/, /1,?215/];
   for (const file of BILL_COUNT_DISPLAY_FILES) {
     const src = readSrc(file);
     for (const re of forbidden) {
@@ -393,11 +400,17 @@ const readScope = (key) => {
 
 check("画面に出す「議案・審議結果の収録範囲」が、実際に登録されている会期まで届いている", () => {
   const bills = readJson("src/data/billVotes.json");
-  const votingDates = bills.map((b) => b.votingDate).filter(Boolean).sort();
-  const latest = eraYearMonth(votingDates[votingDates.length - 1]);
-  const oldest = eraYearMonth(votingDates[0]);
+  // 収録範囲の文言は「〜令和8年9月の会期分」のように会期（sessionIdの年月）で書いている。
+  // 議決日で比べると、9月定例会の決算認定（10月5日議決）のように会期の翌月にまたがる議決で
+  // 「10月まで届いていない」と誤判定するため、会期の年月で突き合わせる。
+  const sessionMonths = bills
+    .map((b) => b.sessionId?.match(/^\d{4}-\d{2}/)?.[0])
+    .filter(Boolean)
+    .sort();
+  const latest = eraYearMonth(sessionMonths[sessionMonths.length - 1]);
+  const oldest = eraYearMonth(sessionMonths[0]);
   const scope = readScope("billVotes:");
-  assert.ok(scope.includes(latest), `議案の収録範囲が最新の議決（${latest}）まで届いていません: 「${scope}」`);
+  assert.ok(scope.includes(latest), `議案の収録範囲が最新の会期（${latest}）まで届いていません: 「${scope}」`);
   assert.ok(scope.includes(oldest), `議案の収録範囲の開始（${oldest}）が実データと合っていません: 「${scope}」`);
 });
 

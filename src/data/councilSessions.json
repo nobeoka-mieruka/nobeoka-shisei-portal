@@ -5456,10 +5456,10 @@
         "isOfficial": true,
         "verificationStatus": "自動取得",
         "publicationStatus": "superseded",
-        "supersededByDocumentId": "2026-09-results-2",
+        "supersededByDocumentId": "2026-09-results-3",
         "textExtractionStatus": "extracted",
         "textExtractedAt": "2026-09-05",
-        "notes": "延岡市議会「議案等審議結果」ページで、この版（令和8年8月28日現在、attachment/28811.pdf、議案第48号のみ掲載）は令和8年9月18日現在の版（attachment/29070.pdf＝2026-09-results-2）に差し替えられ、旧URLは404になった（2026-10-01確認）。新しい版にも議案第48号が同じ件名・議決結果・議決日で掲載されていることを確認し、議案第48号の出典は2026-09-21に新しい版へ移している。旧版は一般公開ページに表示しない。"
+        "notes": "延岡市議会「議案等審議結果」ページで、この版（令和8年8月28日現在、attachment/28811.pdf、議案第48号のみ掲載）は令和8年9月18日現在の版（attachment/29070.pdf＝2026-09-results-2）に差し替えられ、旧URLは404になった（2026-10-01確認）。新しい版にも議案第48号が同じ件名・議決結果・議決日で掲載されていることを確認し、議案第48号の出典は2026-09-21に新しい版へ移している。旧版は一般公開ページに表示しない。 その後、9月18日現在の版も令和8年10月5日現在の版（attachment/29234.pdf＝2026-09-results-3）に差し替えられたため、差し替え先を最新の版に改めた（2026-10-09確認。議案第48号の記載は同じ）。"
       },
       {
         "id": "2026-09-results-2",
@@ -5474,30 +5474,49 @@
         "verifiedAt": "2026-09-18",
         "isOfficial": true,
         "verificationStatus": "自動取得",
+        "publicationStatus": "superseded",
+        "textExtractionStatus": "extracted",
+        "textExtractedAt": "2026-09-18",
+        "supersededByDocumentId": "2026-09-results-3",
+        "notes": "延岡市議会「議案等審議結果」ページで、この版（令和8年9月18日現在、attachment/29070.pdf）は令和8年10月5日現在の版（attachment/29234.pdf＝2026-09-results-3）に差し替えられ、旧URLは404になった（2026-10-09確認）。両版の本文を照合し、新しい版は9月18日版の記載をすべて同じ内容で含み、決算等の議案第22〜28号・議案第55号・陳情第7号・報告第22・23号（いずれも10月5日）が追加されただけであることを確認した。この版を出典としていた議案・報告は2026-10-09に新しい版へ移している。旧版は一般公開ページに表示しない。"
+      },
+      {
+        "id": "2026-09-results-3",
+        "category": "results",
+        "title": "議案等審議結果",
+        "storageType": "local",
+        "filePath": "/council-documents/2026/2026-09/results/deliberation-results-03.pdf",
+        "fileType": "PDF",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29234.pdf",
+        "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
+        "fileSize": "154KB",
+        "verifiedAt": "2026-10-09",
+        "isOfficial": true,
+        "verificationStatus": "自動取得",
         "publicationStatus": "published",
         "textExtractionStatus": "extracted",
-        "textExtractedAt": "2026-09-18"
+        "textExtractedAt": "2026-10-09"
       }
     ],
     "officialSessionUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html",
     "status": "自動取得",
-    "lastVerified": "2026-09-18",
-    "shortSummary": "令和8年9月定例会では、その他、条例、予算、契約などに関する議案が審議されました。議決結果は原案可決25件、同意4件などです。",
-    "summary": "令和8年9月定例会では、その他、条例、予算、契約などに関する議案が審議されました。一般質問は、質問通告書で予定が公表されている段階です（実施内容は会議録の公開後に確認します）。登録議案数は29件です。主な審議結果は、原案可決25件、同意4件などです。このページでは、議案一覧、審議結果、一般質問、関連する公式資料を掲載しています。",
+    "lastVerified": "2026-10-09",
+    "shortSummary": "令和8年9月定例会では、条例、その他、決算、予算などに関する議案が審議されました。議決結果は原案可決26件、認定5件、同意4件、原案可決及び認定2件などです。",
+    "summary": "令和8年9月定例会では、条例、その他、決算、予算などに関する議案が審議されました。一般質問は、質問通告書で予定が公表されている段階です（実施内容は会議録の公開後に確認します）。請願・陳情も審議されました。登録議案数は38件です。主な審議結果は、原案可決26件、認定5件、同意4件、原案可決及び認定2件などです。このページでは、議案一覧、審議結果、一般質問、関連する公式資料を掲載しています。",
     "summaryStatus": "verified",
-    "summaryGeneratedAt": "2026-09-22",
-    "summaryVerifiedAt": "2026-09-22",
+    "summaryGeneratedAt": "2026-10-09",
+    "summaryVerifiedAt": "2026-10-09",
     "summarySources": [
       {
-        "documentId": "2026-09-results-2",
+        "documentId": "2026-09-results-3",
         "title": "議案等審議結果",
-        "filePath": "/council-documents/2026/2026-09/results/deliberation-results-02.pdf",
-        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29070.pdf"
+        "filePath": "/council-documents/2026/2026-09/results/deliberation-results-03.pdf",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29234.pdf"
       }
     ],
     "meetingDaysStatus": "minutesNotYetPublished",
-    "meetingDaysStatusNote": "会期中のため、会議録検索システムに本会期の会議録がまだ掲載されていない（2026年9月23日確認。2026年の掲載は第24回〜第26回まで）。議会が公表した会議日程（案）（令和8年8月21日付）には本会議の予定日が載っているが、予定であり開催の記録ではないため、開催日としては登録していない。会議録の公開後に登録する。",
-    "meetingDaysStatusCheckedAt": "2026-09-23",
+    "meetingDaysStatusNote": "会議録検索システムに本会期の会議録はまだ掲載されていない（2026年10月9日確認。2026年の掲載は第24回〜第26回まで）。議案等審議結果（令和8年10月5日現在）では、決算認定（議案第22〜28号）・議員定数条例の改正（議案第55号）・陳情第7号が10月5日に議決されたことを確認できる。ただし閉会日（会期の終わり）は、他の会期と同様に会議録（初日の会期決定の宣告）で確認してから登録するため、現時点では会期を「確認中」としている。議会が公表した会議日程（案）（令和8年8月21日付）の本会議の予定日も、予定であり開催の記録ではないため、開催日としては登録していない。会議録の公開後に登録する。",
+    "meetingDaysStatusCheckedAt": "2026-10-09",
     "meetingDaysScheduleSourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28674.pdf",
     "recordedVideo": {
       "linkTitle": "令和8年9月定例会",
