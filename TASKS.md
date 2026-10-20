@@ -11413,3 +11413,28 @@ BLOCKED理由・再開条件：
   test-human-action-ledgerで失敗していた。
 - 会議録検索システム：令和8年は第24〜26回のみで第27回は未掲載。議案第48号はWAITING_EXTERNALのまま。
 - 松田満男議員の逝去（2026-10-13、市議会公式 52556.html）に伴う現職→元議員の移行は TASK-208 で実施。
+
+### TASK-208 松田満男議員の逝去に伴う現職→元議員への移行（2026-10-20）
+
+状態：DONE（2026-10-20、ユーザー指示「今回、元議員へ移行」）
+優先度：A（逝去した議員を現職として表示し続けることになるため）
+対象：`src/data/members.json`、`src/data/formerMembers.json`、`src/data/archiveMemberProfiles.json`、
+`src/data/archiveMemberTerms.json`、`src/data/committees.json`、`src/data/factions.json`、`src/data/councilDebateSpeeches.json`、
+`src/data/councilWatchedDocuments.json`、`scripts/validate-data.mjs`、`scripts/test-council-activity-profile.mjs`、
+`src/pages/MethodologyCouncilActivityPage.tsx`
+
+実施内容：
+- 根拠：延岡市議会「故 松田満男議員を悼む」（52556.html、2026-10-16掲載、10月13日逝去）、議員名簿（1455.html、
+  令和8年10月14日現在、定数27名-現員25名）。旧プロフィール1445.htmlは404。
+- members.jsonから除き、formerMembers.jsonへ**同じID（m22）**で追加。議案賛否（billVotes 2件）・発言要約・
+  選挙結果・委員会履歴・議長任期（councilLeadershipTerms）・政治団体の参照はIDを変えずにそのまま有効
+  （validate-dataは「退任してformerMembersへ移った議員」の参照を既に許容している）。
+- archiveMemberProfiles：legacyMemberId→legacyFormerMemberId、status=deceased、retirementReason=死去。
+  archiveMemberTerms：2023年任期のtermEnd=2026-10-13。councilDebateSpeeches：元議員と同じ持ち方（memberId=null、formerMemberId）。
+- 委員会名簿・会派名簿（10月14日現在、29348/29349.pdf）で6委員会・7会派の全員と役員を照合。変化は
+  厚生教育委員会の委員8→7名と自民党きずなの会9→8人のみ。会派名簿の旧版27272.pdf（404）は新版へ差し替え、
+  委員会名簿の旧版27271.pdf（404）は5月8日時点の根拠として残し新版を追加。
+- validate-data：現任期の途中で退任した元議員（isFormerMember:false）が旧任期発言にterm:"previous"を持つことは
+  正当なため、「不要」警告をisFormerMember:trueのレコードに限定。
+- 現員25名の固定値テストを更新。方法論ページの「26名中13名」は見直し時点の数値と明記。
+- 議員定数（27）・補欠選挙は変更・登録なし（告示等の一次資料なし）。

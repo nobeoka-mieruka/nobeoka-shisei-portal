@@ -12,6 +12,7 @@ import {
   type CivicEvent,
   type CivicEventType,
 } from "../../lib/civicEventTimeline";
+import { BROKEN_SOURCE_LINK_LABEL, isKnownBrokenSourceLink } from "../../lib/brokenSourceLinks";
 
 const allEvents = (civicEventTimelineData as { events: CivicEvent[] }).events;
 const years = yearsOfCivicEvents(allEvents);
@@ -20,6 +21,15 @@ const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 function SourceAnchor({ url, label }: { url: string; label: string }) {
+  // 外部リンク監査で到達できないと確認済みのURLはリンクにしない（Phase209と同じ方針）。
+  if (isKnownBrokenSourceLink(url)) {
+    return (
+      <span className="inline-flex min-h-11 items-center gap-1 text-xs text-on-surface-variant">
+        一次資料
+        <span className="rounded-full bg-surface-container-high px-2 py-0.5">{BROKEN_SOURCE_LINK_LABEL}</span>
+      </span>
+    );
+  }
   return (
     <a
       href={url}

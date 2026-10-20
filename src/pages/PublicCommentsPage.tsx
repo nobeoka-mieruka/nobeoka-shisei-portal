@@ -12,6 +12,7 @@ import { GlobeIcon, LandmarkIcon } from "../components/icons";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { useTodayJst } from "../hooks/useTodayJst";
 import { getSeoForPath } from "../lib/seo";
+import { BROKEN_SOURCE_LINK_LABEL, isKnownBrokenSourceLink } from "../lib/brokenSourceLinks";
 import { formatJapaneseDate, SITE_URL } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
 
@@ -68,6 +69,16 @@ const PUBLIC_COMMENT_CSV_COLUMNS: CsvColumn<PublicComment>[] = [
 ];
 
 function ExternalDocumentLink({ href, label }: { href: string; label: string }) {
+  // 外部リンク監査で到達できないと確認済みのURLはリンクにしない（Phase209と同じ方針）。
+  if (isKnownBrokenSourceLink(href)) {
+    return (
+      <span className="inline-flex min-h-11 flex-wrap items-center gap-1.5 py-1 text-sm text-on-surface-variant">
+        <GlobeIcon className="h-4 w-4 shrink-0" aria-hidden />
+        <span className="break-words">{label}</span>
+        <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs">{BROKEN_SOURCE_LINK_LABEL}</span>
+      </span>
+    );
+  }
   return (
     <a
       href={href}

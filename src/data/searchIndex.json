@@ -589,34 +589,6 @@
     ]
   },
   {
-    "id": "member-m22",
-    "type": "member",
-    "title": "松田 満男",
-    "description": "自民党きずなの会／厚生教育委員会",
-    "url": "/members/m22",
-    "keywords": [
-      "市議会議員",
-      "市議",
-      "議員",
-      "現職議員",
-      "まつだ みつお",
-      "自民党きずなの会",
-      "厚生教育委員会"
-    ],
-    "content": "【市議会公式情報】議席番号19番。（出典：延岡市議会公式プロフィールページ）",
-    "sourceId": "m22",
-    "sourceRefs": [
-      {
-        "label": "延岡市議会 議員プロフィール",
-        "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1445.html"
-      },
-      {
-        "label": "延岡市議会議員選挙公報（令和5年4月23日執行、延岡市選挙管理委員会発行）",
-        "url": "https://prod-cdn.go2senkyo.com/public/senkyo_koho/21947/%E5%BA%83%E5%A0%B193%E5%BB%B6%E5%B2%A1%E5%B8%82%E8%AD%B0%E4%BC%9A%E8%AD%B0%E5%93%A1%E9%81%B8%E6%8C%99_21947_42633.pdf"
-      }
-    ]
-  },
-  {
     "id": "member-m23",
     "type": "member",
     "title": "峯田 克明",
@@ -972,6 +944,31 @@
       {
         "label": "のべおか市議会だより第87号（令和3年度延岡市一般会計補正予算（第1号）に関する審議・記名投票結果一覧）",
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/1726.pdf"
+      }
+    ]
+  },
+  {
+    "id": "former-member-archive-m22",
+    "type": "former-member",
+    "title": "松田 満男（元議員）",
+    "description": "現職ではない過去の延岡市議会議員。公式資料で確認できた在職・活動の記録を掲載しています。",
+    "url": "/members/former/m22",
+    "keywords": [
+      "まつだ みつお",
+      "元議員",
+      "過去の議員"
+    ],
+    "content": "令和8年10月13日に逝去し、退任した（延岡市議会の公式ページで確認）。",
+    "date": "2026-10-20",
+    "sourceId": "archive-m22",
+    "sourceRefs": [
+      {
+        "label": "選挙結果について（令和5年4月23日執行の延岡市議会議員選挙）",
+        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/14188.pdf"
+      },
+      {
+        "label": "故 松田満男議員を悼む",
+        "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/52556.html"
       }
     ]
   },
@@ -52774,7 +52771,7 @@
     "id": "committee-committee-kosei-kyoiku",
     "type": "committee",
     "title": "厚生教育委員会（常任委員会）",
-    "description": "厚生教育委員会の委員名簿です。委員長：猪之鼻 哲。委員8名。",
+    "description": "厚生教育委員会の委員名簿です。委員長：猪之鼻 哲。委員7名。",
     "url": "/committees/committee-kosei-kyoiku",
     "keywords": [
       "厚生教育委員会",
@@ -52784,7 +52781,6 @@
       "吉田 茂仁",
       "小御門 綾",
       "稲田 雅之",
-      "松田 満男",
       "中城 あかね",
       "上杉 泰洋",
       "環境に配慮したごみ処理に関する取り組み／ICTを活用した重層的支援に関する取り組み",
@@ -59378,6 +59374,22 @@
         "url": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1456.html"
       }
     ]
+  },
+  {
+    "id": "update-u196",
+    "type": "update",
+    "title": "松田満男議員の逝去に伴い、現職議員を25名とし、松田議員を元議員として掲載しました",
+    "description": "延岡市議会の公式ページ「故 松田満男議員を悼む」（2026年10月16日掲載）で、松田満男議員（自民党きずなの会）が令和8年10月13日に逝去されたことを確認し…",
+    "url": "/updates",
+    "keywords": [
+      "データ更新",
+      "議員一覧",
+      "元議員一覧",
+      "委員会",
+      "会派"
+    ],
+    "date": "2026-10-20",
+    "sourceId": "u196"
   },
   {
     "id": "update-u195",

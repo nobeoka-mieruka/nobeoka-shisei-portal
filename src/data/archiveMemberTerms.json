@@ -24,7 +24,7 @@
     "memberProfileId": "archive-m22",
     "electionDate": "2023-04-23",
     "termStart": "2023-04-23",
-    "termEnd": null,
+    "termEnd": "2026-10-13",
     "termNumber": 5,
     "status": "elected",
     "sourceRefs": [
@@ -36,6 +36,15 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "得票数2104票（無所属、現職として立候補）。termStartは選挙日を用いており、実際の就任日（初議会招集日等）とは数日程度前後する可能性がある（延岡市長の任期の扱いと同様の慣例）。"
+      },
+      {
+        "sourceTitle": "故 松田満男議員を悼む",
+        "sourceOrganization": "延岡市議会",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/52556.html",
+        "accessedAt": "2026-10-20",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "termEnd は逝去の日（10月13日）。任期は逝去により終了した（任期満了・辞職ではない）。"
       }
     ]
   },

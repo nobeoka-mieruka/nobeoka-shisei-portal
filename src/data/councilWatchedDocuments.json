@@ -1156,12 +1156,13 @@
     "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
     "sourcePageUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1455.html",
     "fileHash": "d99c41b078605b5a2e0fa72ba5c0b372e882c6b8010a4851854ca3365637921e",
-    "status": "要確認（変更検知）",
+    "status": "baseline",
     "isOfficial": true,
     "firstDetectedAt": "2026-08-03",
     "lastCheckedAt": "2026-10-20",
     "updatedAt": "2026-10-20",
-    "missingStreak": 0
+    "missingStreak": 0,
+    "notes": "【2026-10-20】変更検知の内容を確認した。令和8年10月14日現在（定数27名-現員25名）へ更新され、松田満男議員（令和8年10月13日逝去）の行が削除されていた。現職議員一覧から元議員へ移し、検知用ハッシュを新しい基準として確定した。"
   },
   {
     "id": "question-notice-index-state",

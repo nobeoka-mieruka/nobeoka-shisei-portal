@@ -542,12 +542,12 @@
   },
   {
     "id": "archive-m22",
-    "legacyMemberId": "m22",
+    "legacyFormerMemberId": "m22",
     "slug": "m22",
     "name": "松田 満男",
     "nameKana": "まつだ みつお",
-    "status": "current",
-    "currentMember": true,
+    "status": "deceased",
+    "currentMember": false,
     "firstElectedDate": null,
     "termCount": 5,
     "sourceRefs": [
@@ -559,10 +559,20 @@
         "extractionMethod": "manual",
         "verificationStatus": "verified",
         "notes": "令和5年4月23日執行の延岡市議会議員選挙結果PDFで、無所属公認・現職として2104票を得て当選したことを直接確認した。"
+      },
+      {
+        "sourceTitle": "故 松田満男議員を悼む",
+        "sourceOrganization": "延岡市議会",
+        "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/site/gikai/52556.html",
+        "accessedAt": "2026-10-20",
+        "extractionMethod": "manual",
+        "verificationStatus": "verified",
+        "notes": "「松田満男議員(自民党きずなの会)が、去る10月13日に70歳でご逝去されました」との記載を直接確認した（2026年10月16日掲載）。議員名簿（令和8年10月14日現在、定数27名-現員25名）に氏名が無いことも確認した。"
       }
     ],
-    "notes": null,
-    "lastVerifiedAt": "2026-08-11"
+    "notes": "令和8年10月13日に逝去し、退任した（延岡市議会の公式ページで確認）。",
+    "lastVerifiedAt": "2026-10-20",
+    "retirementReason": "死去"
   },
   {
     "id": "archive-m24",

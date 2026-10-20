@@ -162,9 +162,10 @@ check("総合点・順位・優劣の語を生成していない", () => {
   }
 });
 
-check("実データ：26名全員で軸を組み立てられる", () => {
+check("実データ：現職25名全員で軸を組み立てられる", () => {
   const members = readJson("src/data/members.json");
-  assert.equal(members.length, 26, "現職議員は26名のはずです（前提が変わった可能性）");
+  // 2026-10-20：松田満男議員（m22）の逝去（2026-10-13）により現員25名（定数27）。
+  assert.equal(members.length, 25, "現職議員は25名のはずです（前提が変わった可能性）");
   // 軸の並び順が1から連番で重複していないこと。
   const orders = [...profileSrc.matchAll(/^\s*order: (\d),$/gm)].map((m) => Number(m[1]));
   assert.deepEqual([...orders].sort((a, b) => a - b), [1, 2, 3, 4], "軸の並び順が1〜4ではありません");

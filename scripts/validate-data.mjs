@@ -3707,7 +3707,10 @@ try {
             `term:"previous"（旧任期）と設定されていますが、発言日（${speech.date}）が現任期の対象期間（${councilSpeechPeriod.from}以降）です`,
           );
         }
-        if (formerMemberIds.has(record.memberId) && speech.term === "previous") {
+        // 旧任期のみ在職した元議員（isFormerMember:true）のレコードは全体が旧任期扱いのため不要。
+        // 現任期の途中で退任した元議員（例：m22、2026-10-13逝去）は現任期の発言も持つため、
+        // 旧任期の発言を区別するterm:"previous"が引き続き必要で、警告の対象にしない。
+        if (formerMemberIds.has(record.memberId) && record.isFormerMember && speech.term === "previous") {
           warn(speechTag, 'formerMembers.jsonの元議員レコードにterm:"previous"は不要です（レコード全体が旧任期扱いのため）');
         }
         if (!VALID_SPEECH_SUMMARY_STATUSES.has(speech.summaryStatus)) {
