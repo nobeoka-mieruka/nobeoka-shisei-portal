@@ -3,7 +3,7 @@
  *
  * 【なぜ必要か】
  * 延岡市公式サイトは、統計ファイルを更新するたびに添付ファイルID（/uploaded/attachment/NNNNN.xls）を
- * 変更し、**古いIDは404にする**。実際に 27980 → 28569 → 28990 と2回変わっており、そのたびに
+ * 変更し、**古いIDは404にする**。実際に 27980 → 28569 → 28990 → 29305 と3回変わっており、そのたびに
  * 自動更新パイプラインが「主資料の取得に失敗」で停止して人手での定数書き換えが必要になっていた。
  * 固定IDを新しいIDへ置き換えるだけでは、次の差し替えで同じことが起きる。
  *
@@ -37,7 +37,7 @@ export const POPULATION_STATS_PAGE_URL = "https://www.city.nobeoka.miyazaki.jp/s
  * 既知の最新版（fallback 兼 高速経路）。一覧ページが取得できない場合だけ使う。
  * ここが404でも、一覧ページから解決できればパイプラインは止まらない。
  */
-export const PINNED_POPULATION_XLS_URL = "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls";
+export const PINNED_POPULATION_XLS_URL = "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29305.xls";
 
 /** 対象系列（現住人口）のラベル。「現住人口」＋「世帯数の推移」の両方を含むものだけを対象にする。 */
 const TARGET_LABEL_PATTERN = /現住人口/;

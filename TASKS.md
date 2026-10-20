@@ -11392,3 +11392,24 @@ BLOCKED理由・再開条件：
 - あわせて、`validate-data.mjs`で集計・終了処理より後ろに置かれていた検査（councilReports.json、9月22日追加分）が
   エラーを数えていなかった不具合を修正（集計処理をファイル末尾へ移動）。
 
+### TASK-207 延岡市公式サイトの差分監査と反映（2026-10-09〜10-20更新分）（2026-10-20）
+
+状態：DONE（2026-10-20）
+優先度：A
+対象：`src/data/mayorEntertainmentExpenses.json`、`src/data/committeeMeetingSchedule.json`、`src/data/councilWatchedDocuments.json`、
+`src/data/financeDashboard.json`、`src/data/archiveFiscalYears.json`、`src/data/municipalityComparison.json`、
+`src/data/archiveCrawlerTargets.json`、`scripts/auto-update/population/resolve-population-source.mjs`、
+`.github/workflows/update-council-documents.yml`、`reports/latest-update-audit-2026-10-20.md`
+
+実施内容（詳細は `reports/latest-update-audit-2026-10-20.md`・`reports/latest-update-result-2026-10-20.md`）：
+- 市長交際費 令和8年9月分（29347.pdf、3件・合計56,912円・累計370,404円を検算）を追加。
+- 委員会開催予定表を10月13日現在版（29336.pdf）へ。既存35件は全項目一致、10月15日の議会活性化特別委員会1件を追加（sched-2026-036）。
+  旧版29104.pdfは404を確認しremoved-confirmedへ。
+- 人口：10月1日現在版（29305.xls）で令和7年10月1日以降の月次値が改定されていた。登録30年度分のうち29件は一致、
+  令和8年1月1日のみ 109,266人・50,224世帯 → 109,181人・50,215世帯。最新値 107,614人（10月1日現在）、
+  他市比較の7月1日現在 108,044 → 107,959人。旧版28990.xls（404、Waybackなし）の出典URLを全件差し替え。改定理由は資料に記載なし。
+- 日次ワークフロー（update-council-documents.yml）で運用台帳を再生成し、コミット対象に追加。
+  会議録監視がTASK-004の確認日を毎日書き換えるのに台帳を再生成しておらず、Civic archive crawler（10/18）が
+  test-human-action-ledgerで失敗していた。
+- 会議録検索システム：令和8年は第24〜26回のみで第27回は未掲載。議案第48号はWAITING_EXTERNALのまま。
+- 松田満男議員の逝去（2026-10-13、市議会公式 52556.html）に伴う現職→元議員の移行は TASK-208 で実施。

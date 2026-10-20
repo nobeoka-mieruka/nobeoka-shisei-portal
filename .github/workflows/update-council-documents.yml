@@ -99,6 +99,13 @@ jobs:
             echo "一般質問の会議録公開監視: $OUTCOME（実データに影響する変化はありません）" >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # 上の会議録監視が blockedTaskClassification.json の lastCheckedAt・attemptCount を毎日書き換えるため、
+      # その値から導出する運用台帳（reports/human-action-ledger.*）も同じ実行で再生成する。
+      # 再生成しないと台帳と実データがずれ、npm test（test-human-action-ledger）を実行する
+      # Civic archive crawler が失敗する（2026-10-18に実際に発生）。
+      - name: Rebuild human-action ledger
+        run: node scripts/build-human-action-ledger.mjs
+
       - name: Validate data
         run: npm run validate:data
 
@@ -128,7 +135,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/councilSessions.json src/data/councilDocumentSources.json src/data/councilExtractionSources.json src/data/billVotes.json src/data/updateHistory.json src/data/searchIndex.json src/data/siteUpdate.json src/data/blockedTaskClassification.json public/council-documents public/sitemap.xml public/robots.txt reports/council-document-update-report.json reports/council-extraction-review.json reports/council-extraction-review.md reports/question-transcript-publication.json
+          git add src/data/councilSessions.json src/data/councilDocumentSources.json src/data/councilExtractionSources.json src/data/billVotes.json src/data/updateHistory.json src/data/searchIndex.json src/data/siteUpdate.json src/data/blockedTaskClassification.json public/council-documents public/sitemap.xml public/robots.txt reports/council-document-update-report.json reports/council-extraction-review.json reports/council-extraction-review.md reports/question-transcript-publication.json reports/human-action-ledger.json reports/human-action-ledger.md
           if git diff --cached --name-only | grep -q "^src/data/blockedTaskClassification.json$" && git diff --cached -- src/data/blockedTaskClassification.json | grep -q '^-.*"status": "WAITING_EXTERNAL"'; then
             echo "notice=公開待ち資料の状態が遷移しました（blockedTaskClassification.jsonを確認してください）" >> "$GITHUB_STEP_SUMMARY"
           fi

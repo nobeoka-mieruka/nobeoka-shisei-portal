@@ -72,11 +72,11 @@
       { "year": "令和5年", "referenceDate": "2023-01-01", "population": 114777 },
       { "year": "令和6年", "referenceDate": "2024-01-01", "population": 113061 },
       { "year": "令和7年", "referenceDate": "2025-01-01", "population": 111150 },
-      { "year": "令和8年", "referenceDate": "2026-01-01", "population": 109266 }
+      { "year": "令和8年", "referenceDate": "2026-01-01", "population": 109181 }
     ],
-    "latest": { "referenceDate": "2026-09-01", "population": 107803 },
-    "decreaseCount": 9898,
-    "decreaseRatePercent": 8.3,
+    "latest": { "referenceDate": "2026-10-01", "population": 107614 },
+    "decreaseCount": 9983,
+    "decreaseRatePercent": 8.4,
     "note": "各年1月1日現在の現住人口を比較しています。現住人口は住民基本台帳人口と異なる場合があります。"
   },
   "debtNote": "ここで表示する市債（歳入）は、令和8年度予算に計上された市債額です。市債残高ではありません。下記「市債残高の年度推移」は、延岡市公表の「財政状況資料集」（総務省統一様式）の総括表に記載された地方債現在高（普通債・災害復旧債・特例地方債の合計、決算ベース）を、令和2〜6年度分すべて同一資料の同一項目で統一して掲載しています。予算計上額とは対象が異なるほか、企業会計（水道事業債・下水道事業債）は含みません。別に公表されている「市債残高」資料（会計区分・算定基準が異なる場合がある）とは数値が完全には一致しないことがあります。",
@@ -170,11 +170,11 @@
     },
     {
       "section": "population",
-      "title": "延岡市「現住人口及び世帯数の推移」（令和8年9月1日現在）",
+      "title": "延岡市「現住人口及び世帯数の推移」（令和8年10月1日現在）",
       "organization": "延岡市",
-      "referenceDate": "2026-09-01",
-      "confirmedDate": "2026-09-12",
-      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28990.xls",
+      "referenceDate": "2026-10-01",
+      "confirmedDate": "2026-10-20",
+      "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/29305.xls",
       "page": 1,
       "trustLevel": "OFFICIAL_ARCHIVE"
     },
