@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T10:49:31.451Z",
+  "generatedAt": "2026-10-21T05:35:01.508Z",
   "sourceHealth": {
     "errors": 0,
     "warnings": 23,
@@ -17,9 +17,9 @@
   "linkHealth": {
     "generatedAt": "2026-10-20T09:42:34.316Z",
     "totalChecked": 1417,
-    "ok": 1375,
+    "ok": 1378,
     "redirect": 14,
-    "notFound404": 25,
+    "notFound404": 22,
     "serverError": 0,
     "broken": [
       {
@@ -52,34 +52,6 @@
       },
       {
         "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/15733.pdf",
-        "files": [
-          "archiveFiscalYears.json"
-        ],
-        "category": "not_found_404",
-        "status": 404,
-        "disposition": "no_alternative"
-      },
-      {
-        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/20032.pdf",
-        "files": [
-          "archiveFiscalYears.json"
-        ],
-        "category": "not_found_404",
-        "status": 404,
-        "disposition": "no_alternative"
-      },
-      {
-        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24565.pdf",
-        "files": [
-          "archiveFiscalYears.json",
-          "financeDashboard.json"
-        ],
-        "category": "not_found_404",
-        "status": 404,
-        "disposition": "no_alternative"
-      },
-      {
-        "url": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/24566.pdf",
         "files": [
           "archiveFiscalYears.json"
         ],
@@ -288,7 +260,7 @@
     "note": "この集計のために作ったまとめ自身と、市議会が会期ごとに差し替える資料のうち、市議会サイトからの削除を確認済みで公開ページには表示していない19件だけが参照するURLは数えていません。到達できないURLは、公開元で掲載が終わり代わりの資料（会議録・後継の資料）があるものと、代わりの資料が無い（調査済み）ものに分けて示しています。"
   },
   "publicExposure": {
-    "generatedAt": "2026-10-20T10:18:35.533Z",
+    "generatedAt": "2026-10-21T05:32:41.857Z",
     "checkedPages": 2320,
     "clickableBrokenLinks": 0,
     "note": "プリレンダリング済みの公開HTML（dist/）を実際に走査し、到達できないURLが<a href>として出ていないかを数えた結果。0でなければビルドが失敗する。"
