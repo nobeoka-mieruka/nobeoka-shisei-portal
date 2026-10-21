@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { sortedCommittees } from "../lib/committees";
+import { latestCommitteeRosterAsOf, sortedCommittees } from "../lib/committees";
 import committeeActivityReportsData from "../data/committeeActivityReports.json";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { JsonLd } from "../components/JsonLd";
@@ -58,6 +58,7 @@ export function CommitteesPage() {
     .filter((d): d is string => !!d)
     .sort()
     .at(-1);
+  const rosterAsOf = latestCommitteeRosterAsOf(committees);
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-4 sm:px-6">
@@ -70,6 +71,7 @@ export function CommitteesPage() {
         <h1 className="text-xl font-semibold text-on-primary-container sm:text-2xl">委員会一覧</h1>
         <p className="mt-2 text-sm leading-relaxed text-on-primary-container/80">
           延岡市議会の常任委員会・議会運営委員会・特別委員会について、延岡市議会公式ホームページが公表する委員名簿に基づいて整理しています。当サイトは公式サイトではありません。
+          {rosterAsOf && `現行名簿の基準日：${formatJapaneseDate(rosterAsOf)}。`}
         </p>
       </div>
 

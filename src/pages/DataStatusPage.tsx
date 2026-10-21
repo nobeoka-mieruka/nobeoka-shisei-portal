@@ -36,7 +36,8 @@ import { SOURCE_RETRIEVAL_CATEGORY_LABEL } from "../lib/billSourceRetrieval";
 import { TRUST_LEVEL_LABEL } from "../lib/councilGlossary";
 import { citizenDataFileLabel, humanizeDataNote } from "../lib/citizenTermLabels";
 import { BROKEN_SOURCE_LINK_LABEL } from "../lib/brokenSourceLinks";
-import { formatJapaneseDateIfIso } from "../config/site";
+import { formatJapaneseDateIfIso, toEraYearLabel } from "../config/site";
+import { latestCommitteeRosterAsOf } from "../lib/committees";
 import { getAllFormerMembers } from "../lib/formerMemberActivity";
 import { getPeopleDataStatus } from "../lib/people";
 import committeeReportActivityData from "../data/committeeReportActivity.json";
@@ -177,6 +178,12 @@ const questionCoverageScope = questionArchiveRangeLabel
   ? `現任期（令和5年5月15日〜）＋旧任期以前の一般質問アーカイブ（${questionArchiveRangeLabel}）`
   : "現任期（令和5年5月15日〜）";
 const committees = committeesData as Committee[];
+
+/** "2026-10-14" → "令和8年10月14日" */
+function formatEraDate(iso: string): string {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${toEraYearLabel(y)}${m}月${d}日`;
+}
 const committeeActivityReports = committeeActivityReportsData as CommitteeActivityReport[];
 const politicalFundOrganizations = politicalFundOrganizationsData as PoliticalFundOrganization[];
 const politicalFundReports = politicalFundReportsData as PoliticalFundReport[];
@@ -764,11 +771,15 @@ export function DataStatusPage() {
     .filter((y) => !committeeMembershipHistoryYears.includes(y))
     .join("・");
 
+  // 名簿の基準日は委員会データの出典（各委員会等名簿）から算出する（直書きすると名簿差し替え時に古い日付が残る）。
+  const committeeRosterAsOf = latestCommitteeRosterAsOf(committees);
   const councilCommittees: DataDomain = {
     label: "委員会（常任・議会運営・特別）",
     count: committees.length,
     unit: "件",
-    scope: "現行の委員名簿（令和8年5月8日現在）",
+    scope: committeeRosterAsOf
+      ? `現行の委員名簿（${formatEraDate(committeeRosterAsOf)}現在）`
+      : "現行の委員名簿（基準日確認中）",
     // 「所管事項が確認できたもの：n／m件」の括弧内説明は、未確認の委員会が実際に残っている
     // 場合のみ表示する。かつては延岡市議会委員会条例の条文が未確認で一部委員会の所管事項を
     // 特定できていなかったが、その後全件確認できたため、旧来の説明文が「6/6件確認済み」表示と

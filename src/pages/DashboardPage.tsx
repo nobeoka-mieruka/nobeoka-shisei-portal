@@ -24,7 +24,7 @@ import type {
   FinanceDashboardData,
 } from "../types";
 import type { ArchiveMayor, ArchiveMayorTerm } from "../types/historicalArchive";
-import { allFactions, getFaction, sortedFactionOfficers } from "../lib/factions";
+import { allFactions, formatFactionOfficersNote, getFaction, sortedFactionOfficers } from "../lib/factions";
 import { COUNCIL_STATUTORY_SEATS } from "../lib/constants";
 import { SectionCard } from "../components/SectionCard";
 import { StatCard } from "../components/StatCard";
@@ -722,7 +722,7 @@ export function DashboardPage() {
                 ) : null}
                 {group.faction.officersNote && (
                   <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
-                    {group.faction.officersNote}
+                    {formatFactionOfficersNote(group.faction, factionMemberCounts.get(group.faction.id) ?? 0)}
                   </p>
                 )}
               </li>

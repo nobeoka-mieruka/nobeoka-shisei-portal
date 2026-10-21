@@ -49,3 +49,16 @@ export function sortedFactionOfficers(faction: Faction): FactionOfficer[] {
     (a, b) => OFFICER_ROLE_ORDER.indexOf(a.role) - OFFICER_ROLE_ORDER.indexOf(b.role),
   );
 }
+
+/**
+ * 会派役員の補足説明を表示用の文に組み立てる。人数は名簿の転記ミスや議員の異動で
+ * 古くなりやすいため、officersNote には `{memberCount}`（現職議員の所属人数）と
+ * `{officerCount}`（名簿で役職を確認できた人数）のプレースホルダーだけを書き、
+ * 実際の人数は members.json と officers から算出する。
+ */
+export function formatFactionOfficersNote(faction: Faction, memberCount: number): string | undefined {
+  if (!faction.officersNote) return undefined;
+  return faction.officersNote
+    .replaceAll("{memberCount}", String(memberCount))
+    .replaceAll("{officerCount}", String(faction.officers?.length ?? 0));
+}

@@ -178,5 +178,38 @@ check("会派ごとの所属人数が members.json の集計と一致する", ()
   );
 });
 
+check("会派役員の補足説明（officersNote）に人数を直書きせず、表示人数が所属議員の件数と一致する", () => {
+  // 2026-10-20：自民党きずなの会の名簿が9名→8名に変わった後も「所属議員9名」の文が残っていた。
+  // 人数は {memberCount}・{officerCount} のプレースホルダーで書き、表示時に算出する。
+  const counts = new Map();
+  for (const m of members) counts.set(m.factionId, (counts.get(m.factionId) ?? 0) + 1);
+  for (const f of factions) {
+    if (!f.officersNote) continue;
+    assert.ok(!/\d+\s*名/.test(f.officersNote), `${f.id}: officersNote に人数が直書きされている: ${f.officersNote}`);
+    const rendered = f.officersNote
+      .replaceAll("{memberCount}", String(counts.get(f.id) ?? 0))
+      .replaceAll("{officerCount}", String(f.officers?.length ?? 0));
+    assert.ok(!/[{}]/.test(rendered), `${f.id}: 未知のプレースホルダーが残っている: ${rendered}`);
+    const m = rendered.match(/所属議員(\d+)名/);
+    if (m) assert.equal(Number(m[1]), counts.get(f.id) ?? 0, `${f.id}: 説明の所属人数が members.json の件数と一致しない`);
+  }
+  for (const page of ["src/pages/DashboardPage.tsx", "src/pages/MemberDetailPage.tsx"]) {
+    const src = readSrc(page);
+    assert.ok(!/\{(group\.)?faction\.officersNote\}/.test(src), `${page}: officersNote をプレースホルダーのまま表示している`);
+  }
+});
+
+check("現職議員25名・7会派で、全会派の所属人数の合計が現職議員数と一致する", () => {
+  const known = new Set(factions.map((f) => f.id));
+  assert.equal(members.length, 25, "現職議員数が25名ではない");
+  assert.equal(factions.length, 7, "会派数が7ではない");
+  const total = factions.reduce((s, f) => s + members.filter((m) => m.factionId === f.id).length, 0);
+  assert.equal(total, members.length, "会派別人数の合計が現職議員数と一致しない");
+  assert.ok(members.every((m) => known.has(m.factionId)));
+  assert.equal(members.filter((m) => m.factionId === "jimin-kizuna").length, 8, "自民党きずなの会が8人ではない");
+  const asOf = new Set(factions.map((f) => f.officersAsOf));
+  assert.deepEqual([...asOf], ["2026-10-14"], "会派名簿の基準日が2026-10-14で統一されていない");
+});
+
 console.log(`\n${passCount}件成功`);
 console.log("すべてのテストが成功しました。");

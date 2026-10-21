@@ -917,7 +917,7 @@ async function main() {
       `総合判定=${overallLevel} サーキットブレーカー=${circuitBreaker.tripped ? "発動" : "正常"} 連続正常実行=${status.consecutiveSuccessfulRuns}`,
   );
   console.log(`[update-finance] レポート書き出し: ${outPath}`);
-  process.exitCode = summary.red > 0 ? 1 : 0;
+  process.exitCode = overallLevel === "RED" ? 1 : 0;
 }
 
 main();

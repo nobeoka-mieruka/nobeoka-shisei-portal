@@ -42,7 +42,8 @@ import { fileURLToPath } from "node:url";
 import { fetchCitySiteText, fetchCitySiteWithMeta, sha256OfBuffer, ALLOWED_HOSTS as CITY_SITE_ALLOWED_HOSTS } from "../../lib/city-site-fetch.mjs";
 import { resolvePopulationSource, highestSeverity, PINNED_POPULATION_XLS_URL, POPULATION_STATS_PAGE_URL } from "./resolve-population-source.mjs";
 import { fetchWithRetry } from "../core/fetch.mjs";
-import { classifyItem, checkCircuitBreaker } from "../core/classify.mjs";
+import { classifyItem } from "../core/classify.mjs";
+import { checkPopulationCircuitBreaker, computePopulationOverallLevel } from "./population-levels.mjs";
 import { validateEntry } from "../core/validate.mjs";
 import { writeRunReport, updateStatus, ROOT } from "../core/report.mjs";
 
@@ -431,25 +432,21 @@ async function main() {
     error: 0,
   };
 
-  const circuitBreaker = checkCircuitBreaker({
+  // 監視対象は常に1件のため、割合ではなく件数で判定する（population-levels.mjs参照）。
+  const circuitBreaker = checkPopulationCircuitBreaker({
     target: TARGET,
     newCount: circuitBreakerNewCount,
-    updatedCount: 0,
-    removedCandidateCount: 0,
     detectedTotal: entries.length,
-    previousKnownTotal: 1, // 監視対象resourceは常に1件（人口xls）。
   });
 
   // Phase249：出典URL解決の段階で検出した異常（リダイレクト・添付ID変更・逆戻り等）も総合判定へ反映する。
   // INFO（添付ファイルIDが変わったが一覧ページから解決できた）はGREENのままにする
   // ＝IDの差し替えだけで自動更新が止まらないことが、この改善の目的であるため。
-  const baseLevel = circuitBreaker.tripped ? "RED" : summary.red > 0 ? "RED" : summary.yellow > 0 ? "YELLOW" : "GREEN";
-  const overallLevel =
-    baseLevel === "RED" || resolutionSeverity === "RED"
-      ? "RED"
-      : baseLevel === "YELLOW" || resolutionSeverity === "YELLOW"
-        ? "YELLOW"
-        : "GREEN";
+  const overallLevel = computePopulationOverallLevel({
+    circuitBreakerTripped: circuitBreaker.tripped,
+    summary,
+    resolutionSeverity,
+  });
 
   const report = {
     target: TARGET,
@@ -489,7 +486,7 @@ async function main() {
       `総合判定=${overallLevel} サーキットブレーカー=${circuitBreaker.tripped ? "発動" : "正常"} 連続正常実行=${status.consecutiveSuccessfulRuns}`,
   );
   console.log(`[update-population] レポート書き出し: ${outPath}`);
-  process.exitCode = summary.red > 0 ? 1 : 0;
+  process.exitCode = overallLevel === "RED" ? 1 : 0;
 }
 
 main();

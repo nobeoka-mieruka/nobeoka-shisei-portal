@@ -142,3 +142,21 @@ export function meetingScheduleForCommittee(committeeId: string): CommitteeMeeti
     .filter((s) => s.committeeId === committeeId)
     .sort((a, b) => b.date.localeCompare(a.date));
 }
+
+/**
+ * 現行の委員名簿の基準日（ISO形式）。各委員会の sourceRefs に登録された延岡市議会
+ * 「各委員会等名簿（令和○年○月○日現在）」のうち最も新しいものを採る。画面に基準日を
+ * 直書きすると名簿差し替え時に古い日付が残るため、出典ラベルから算出する。
+ */
+export function latestCommitteeRosterAsOf(list: Committee[] = committees): string | undefined {
+  const dates: string[] = [];
+  for (const c of list) {
+    for (const ref of c.sourceRefs ?? []) {
+      const m = ref.label.match(/委員会等名簿（令和(\d+)年(\d+)月(\d+)日現在）/);
+      if (!m) continue;
+      const year = 2018 + Number(m[1]);
+      dates.push(`${year}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")}`);
+    }
+  }
+  return dates.sort().at(-1);
+}

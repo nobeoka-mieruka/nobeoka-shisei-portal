@@ -11490,3 +11490,19 @@ BLOCKED理由・再開条件：
 - `npm run update:questions:dry-run`：RED 14→0、GREEN 13、YELLOW 0、サーキットブレーカー正常（reports/auto-update/run-questions-2026-10-21T00-58-57-422Z.json）。
 - 本番データの変更なし。画面の変更なしのため画面幅の確認は対象外。
 - 残る自動更新の判断事項：finance YELLOW（24913.pdf、人の確認待ち）、Sync council data のPR作成無効（BOT_PULL_REQUESTS_ENABLED、ユーザー判断）。
+
+### TASK-212 公開版の説明文3か所の不整合と、dry-run監査がREDでもSuccessになる問題の修正（2026-10-21）
+
+状態：DONE（2026-10-21、ユーザー指示）
+優先度：A
+対象：`src/data/factions.json`、`src/lib/factions.ts`、`src/lib/committees.ts`、`src/lib/publicComments.ts`（新規）、`src/pages/DashboardPage.tsx`・`MemberDetailPage.tsx`・`DataStatusPage.tsx`・`CommitteesPage.tsx`・`PublicCommentsPage.tsx`、`src/data/publicComments.json`、`scripts/auto-update/core/gate.mjs`（新規）、`scripts/auto-update/population/population-levels.mjs`（新規）、各Updater、`.github/workflows/auto-update-dryrun.yml`
+
+原因と対応：
+- /dashboard：会派役員の補足説明（officersNote）に「所属議員9名」が直書きされ、2026-10-20の名簿更新（8名）で更新漏れ。人数を `{memberCount}`・`{officerCount}` のプレースホルダーにし、members.json から算出（友愛クラブの「4名」も同様）。
+- /data-status：委員会の収録範囲「令和8年5月8日現在」が直書き。委員会データの出典（各委員会等名簿）から最新の基準日を算出（令和8年10月14日現在）。/committees にも同じ関数で現行名簿の基準日を表示。
+- /public-comments：dataset.lastVerifiedAt（運用状況一覧の確認日）を「掲載データの最終確認日」と表示しており、個別案件の確認日と食い違っていた。2026-10-21に運用状況一覧（2026年10月13日更新）と7案件を再確認したため、一覧更新日=10/13、全体確認日=10/21に更新。全案件が確認済みでない場合は「運用状況一覧の確認日」＋「各案件の最終確認日は個別欄」と表示する。再確認で西階公園陸上競技場整備基本計画（案）が「意見募集中の案件」に移っていたため status を planned→open に更新。教育大綱は案件ページ・素案PDFとも404のまま、保存版出典を維持。
+- dry-run：最終判定が品質監査の失敗しか見ていなかった。`gate.mjs` で Updaterの終了コード・overallLevel=RED・circuitBreakerTripped・error>0・validate/typecheck/lint/build の失敗を集計し、該当すればジョブを失敗させる。build 監査を追加。
+- 人口：監視対象1件に既定の割合閾値（30%）を当てていたため、正常な月次更新1件で「新規1/既知1=100%」となり発動していた。人口は「1回で2件以上の新しい基準日」または「検出0件」のときだけ発動に変更。各Updaterの終了コードを overallLevel===RED に統一。
+- 一般質問：removed-confirmed 14件の除外は TASK-211 で実施済み（dry-run #61 はその前の実行）。最終判定のジョブ要約に既知の除外対象件数を表示。
+
+検証：validate:data（errors=0）、typecheck、lint（エラー0）、npm test、build（prerender・SEO・内部リンク・リンク切れ露出監査を含む）すべて成功。回帰テスト `scripts/test-display-consistency-and-dryrun-gate.mjs`（15件）を追加し、`test-faction-officers.mjs` に2件追加。

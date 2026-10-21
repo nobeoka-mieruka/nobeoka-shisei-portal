@@ -24,7 +24,7 @@ import type {
   CitySpecialPost,
 } from "../types";
 import type { ArchiveMemberProfile, ArchiveMemberTerm } from "../types/historicalArchive";
-import { getFaction, getFactionOfficerRole } from "../lib/factions";
+import { formatFactionOfficersNote, getFaction, getFactionOfficerRole } from "../lib/factions";
 import { getCommitteeByName } from "../lib/committees";
 import {
   archiveCoverageRangeLabel,
@@ -628,7 +628,9 @@ export function MemberDetailPage() {
             </p>
           ) : faction.officers.length === 0 ? (
             // 会派に所属しない議員など、その会派に役員が置かれていないことを確認済みの場合。
-            <p className="text-sm leading-relaxed text-on-surface-variant">{faction.officersNote}</p>
+            <p className="text-sm leading-relaxed text-on-surface-variant">
+              {formatFactionOfficersNote(faction, members.filter((m) => m.factionId === faction.id).length)}
+            </p>
           ) : (
             <p className="text-sm leading-relaxed text-on-surface-variant">
               延岡市議会の会派名簿に、この議員の会派内の役職は記載されていません（役職に就いていないという意味ではありません）。

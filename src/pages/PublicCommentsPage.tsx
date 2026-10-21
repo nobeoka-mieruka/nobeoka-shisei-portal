@@ -15,9 +15,11 @@ import { getSeoForPath } from "../lib/seo";
 import { BROKEN_SOURCE_LINK_LABEL, isKnownBrokenSourceLink } from "../lib/brokenSourceLinks";
 import { formatJapaneseDate, SITE_URL } from "../config/site";
 import type { CsvColumn } from "../lib/csv";
+import { publicCommentVerificationSummary } from "../lib/publicComments";
 
 const dataset = publicCommentsData as PublicCommentDataset;
 const entries = dataset.entries as PublicComment[];
+const verification = publicCommentVerificationSummary(dataset);
 
 /**
  * 市の公表区分をそのまま日本語で表示する。募集期間の日付から状態を計算しない
@@ -207,9 +209,9 @@ export function PublicCommentsPage() {
 
       <div className="mb-5 rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-on-surface-variant">
         <p>
-          各案件が「意見募集中」なのか「終了して結果が公表済み」なのかは、延岡市が公表している区分をそのまま掲載しています。当サイトが募集期間の日付から自動で判定することはありません。市の一覧ページの更新日は
-          {formatJapaneseDate(dataset.statusSourceUpdatedAt)}、当サイトが最後に確認した日は
-          {formatJapaneseDate(dataset.lastVerifiedAt)}です。
+          各案件が「意見募集中」なのか「終了して結果が公表済み」なのかは、延岡市が公表している区分をそのまま掲載しています。当サイトが募集期間の日付から自動で判定することはありません。市の運用状況一覧ページの更新日（市の表示）は
+          {formatJapaneseDate(dataset.statusSourceUpdatedAt)}、{verification.label}は
+          {formatJapaneseDate(verification.date)}です。{verification.note}
         </p>
         <p className="mt-2">
           意見の提出方法・提出先・様式は延岡市の公式ページに掲載されています。当サイトから意見を提出することはできません。提出された意見の本文と市の考え方も転載せず、公式資料へのリンクで案内しています。
@@ -247,8 +249,8 @@ export function PublicCommentsPage() {
 
       <LastUpdated
         className="mt-4"
-        dataAsOfLabel="掲載データの最終確認日"
-        dataAsOf={formatJapaneseDate(dataset.lastVerifiedAt)}
+        dataAsOfLabel={verification.label}
+        dataAsOf={formatJapaneseDate(verification.date)}
       />
 
       <div className="mt-4">

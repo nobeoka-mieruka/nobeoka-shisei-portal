@@ -183,6 +183,12 @@ jobs:
         continue-on-error: true
         run: npm run lint
 
+      # 本番ビルド（プリレンダリング・SEO検証・内部リンク監査を含む）。デプロイはしない。
+      - name: "Audit: build"
+        id: audit_build
+        continue-on-error: true
+        run: npm run build
+
       - name: Check for report changes
         id: diff
         run: |
@@ -199,6 +205,7 @@ jobs:
           VALIDATE_OUTCOME: ${{ steps.audit_validate.outcome }}
           TYPECHECK_OUTCOME: ${{ steps.audit_typecheck.outcome }}
           LINT_OUTCOME: ${{ steps.audit_lint.outcome }}
+          BUILD_OUTCOME: ${{ steps.audit_build.outcome }}
           BILLS_IMPLEMENTED: ${{ steps.run_bills.outputs.implemented }}
           QUESTIONS_IMPLEMENTED: ${{ steps.run_questions.outputs.implemented }}
           FINANCE_IMPLEMENTED: ${{ steps.run_finance.outputs.implemented }}
@@ -281,9 +288,11 @@ jobs:
           lines.push(`- validate:data: ${process.env.VALIDATE_OUTCOME}`);
           lines.push(`- typecheck: ${process.env.TYPECHECK_OUTCOME}`);
           lines.push(`- lint: ${process.env.LINT_OUTCOME}`);
+          lines.push(`- build: ${process.env.BUILD_OUTCOME}`);
           if (["failure", "cancelled"].includes(process.env.VALIDATE_OUTCOME) ||
               ["failure", "cancelled"].includes(process.env.TYPECHECK_OUTCOME) ||
-              ["failure", "cancelled"].includes(process.env.LINT_OUTCOME)) {
+              ["failure", "cancelled"].includes(process.env.LINT_OUTCOME) ||
+              ["failure", "cancelled"].includes(process.env.BUILD_OUTCOME)) {
             lines.push("");
             lines.push("**品質監査のいずれかが失敗しています。マージ前に必ず内容を確認してください。**");
           }
@@ -360,15 +369,28 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
-      # 監査（validate:data / typecheck / lint）のいずれかが失敗していた場合、レポート作成・
-      # PR作成が完了した後にジョブ全体を失敗として終了する（continue-on-error:trueにより
-      # ここまでの各ステップは実行され続けるが、GitHub Actions上でのジョブの成否は
-      # 監査結果を正しく反映させる）。
-      - name: Fail job if any audit step failed
-        if: steps.audit_validate.outcome == 'failure' || steps.audit_typecheck.outcome == 'failure' || steps.audit_lint.outcome == 'failure'
+      # 最終判定（scripts/auto-update/core/gate.mjs）。continue-on-error:true の各ステップの結果と、
+      # 今回生成したレポート（run-*.json）を最後に集計し、次のいずれかがあればジョブを失敗させる：
+      #   Updaterの終了コードが0以外／overallLevel === "RED"／circuitBreakerTripped === true／
+      #   summary.error > 0／validate:data・typecheck・lint・build のいずれかの失敗。
+      # 以前は品質監査の失敗しか見ておらず、Updaterが終了コード1・総合REDでも全体がSuccessになっていた
+      # （2026-10-20のdry-run #61）。レポートのArtifact保存（if: always()）より後に置く。
+      - name: Fail job on updater/report/audit failures
+        if: always()
+        env:
+          BILLS_OUTCOME: ${{ steps.run_bills.outcome }}
+          QUESTIONS_OUTCOME: ${{ steps.run_questions.outcome }}
+          FINANCE_OUTCOME: ${{ steps.run_finance.outcome }}
+          POPULATION_OUTCOME: ${{ steps.run_population.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.audit_validate.outcome }}
+          TYPECHECK_OUTCOME: ${{ steps.audit_typecheck.outcome }}
+          LINT_OUTCOME: ${{ steps.audit_lint.outcome }}
+          BUILD_OUTCOME: ${{ steps.audit_build.outcome }}
         run: |
-          echo "品質監査（validate:data / typecheck / lint）のいずれかが失敗しました。詳細は各ステップのログを確認してください。" >&2
-          exit 1
+          git status --porcelain --untracked-files=all -- reports/auto-update \
+            | awk '{print $NF}' \
+            | grep -E 'run-.*\.json$' > /tmp/gate-reports.txt || true
+          node scripts/auto-update/core/gate.mjs /tmp/gate-reports.txt
 
   # Phase271：opt-in時だけ動く、PR作成専用のジョブ。書き込み権限はこのジョブにだけ与える。
   # BOT_PULL_REQUESTS_ENABLED が未設定（既定）なら、ジョブごとスキップされる

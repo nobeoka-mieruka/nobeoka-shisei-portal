@@ -460,7 +460,7 @@ async function main() {
       `総合判定=${overallLevel} サーキットブレーカー=${circuitBreaker.tripped ? "発動" : "正常"} 連続正常実行=${status.consecutiveSuccessfulRuns}`,
   );
   console.log(`[update-questions] レポート書き出し: ${outPath}`);
-  process.exitCode = summary.red > 0 ? 1 : 0;
+  process.exitCode = overallLevel === "RED" ? 1 : 0;
 }
 
 // `node scripts/auto-update/questions/update-questions.mjs`として直接実行された場合のみ本処理を
