@@ -11466,3 +11466,27 @@ BLOCKED理由・再開条件：
 - Internet Archive に2026-10-12保存の案件ページあり（内容は登録内容と一致：2026-09-03更新、募集期間9/3〜10/2、総合政策課）。
   素案PDFの保存版は無い。
 - officialUrl（元の公式URL）は記録として残し（公開画面ではリンク切れ表示）、保存版を出典に追加。statusはclosed-preparing-resultのまま。
+
+### TASK-211 自動更新dry-run（questions）が取得不能確定済みの質問通告書で毎回REDになる問題の解消（2026-10-21）
+
+状態：DONE（2026-10-21、READY 0件のため「次へ」指示で新規登録。2026-10-20結果レポート§12-4）
+優先度：B
+対象：`scripts/auto-update/questions/update-questions.mjs`、`scripts/test-question-notice-lifecycle.mjs`
+
+背景：
+- 令和8年6月定例会の質問通告書14件は、2026-09-22に404・保存版なしを確認して removed-confirmed（取得不能として確定）にしている。
+  sync-council-data.mjs はこの状態の資料を巡回対象から外すが、update-questions.mjs は判定対象に含めていた。
+- その結果、毎回 (1) 会議録確認済み会期の通告書として anomalyDetected→RED が14件、(2) 消失候補14件／公開中13件でサーキットブレーカー発動、
+  となり、2026-08以降のRUNがすべてREDで、新しい異常と見分けがつかなかった。
+
+実施内容：
+- `isResolvedQuestionNoticeRecord()`（status==="removed-confirmed" のみ）を追加し、該当資料をGREEN/YELLOW/RED判定とサーキットブレーカーの母数から除外。
+  レポートには `excludedResolvedEntries`（URL・会期・状態）と注記で残す。台帳（councilWatchedDocuments.json）は変更していない。
+- 消失の疑い段階（removed-suspected・removed-confirmed-suspected）と公開中の通告書は従来どおり判定する。
+  会議録確認済み会期の公開中の通告書を無条件REDにする安全装置、予定→確認済みの自動昇格禁止は変更なし。
+- 回帰テスト2件を追加（test-question-notice-lifecycle：29→31件）。
+
+結果：
+- `npm run update:questions:dry-run`：RED 14→0、GREEN 13、YELLOW 0、サーキットブレーカー正常（reports/auto-update/run-questions-2026-10-21T00-58-57-422Z.json）。
+- 本番データの変更なし。画面の変更なしのため画面幅の確認は対象外。
+- 残る自動更新の判断事項：finance YELLOW（24913.pdf、人の確認待ち）、Sync council data のPR作成無効（BOT_PULL_REQUESTS_ENABLED、ユーザー判断）。

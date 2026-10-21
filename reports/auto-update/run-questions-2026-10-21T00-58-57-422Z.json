@@ -1,0 +1,288 @@
+{
+  "target": "questions",
+  "startedAt": "2026-10-21T00:58:57.422Z",
+  "finishedAt": "2026-10-21T00:59:00.339Z",
+  "dryRun": true,
+  "watchedSource": "https://www.city.nobeoka.miyazaki.jp/site/gikai/1416.html",
+  "baseScriptExitCode": 0,
+  "overallLevel": "GREEN",
+  "summary": {
+    "detected": 27,
+    "green": 13,
+    "yellow": 0,
+    "red": 0,
+    "error": 0
+  },
+  "entries": [
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28849.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "c60d5c1af6f1df64771a4f658b4ceee8f3bfd5ef42ba2cc3b2638f3b1086c19d",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28850.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "66b71f63266f42bcc78b5fd635faeee3b3bf53daedd08bdd67a75562cecc58d6",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28851.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "589159710779e41e17a7d24b15adc129498a784f159286f318d2f3f93d022d50",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28852.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "48b9aea504d8cfdb5c211be76fb96d42ebe41ce9ca54dac160be10b81924cf21",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28853.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "db2c604f24a90b386c6294dad7e66e8a8a8e1df2ba3b03d028dfd6b65681704d",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28854.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "965f39b75ef4d52fa02fdbd60741c20dcdee733594da69d75dc2d70b57f47d53",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28855.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "19ab0873418c83f7512dd10289a9fabf4cdef89a90de99b7506ffee543bcab18",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28856.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "feb5e2577ade3c959620a386f81a1954e97138e631084da55c1c3b4bfee78424",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28857.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "b88a2b0471fec1f8f6ac893036869fa5179ed2bac0af396b3fc8197fd0fe7339",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28858.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "9dca68c2d6fde99f92c8373f72c213c93b58035e8a20dca5865c64b3a31fdcda",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28859.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "515472ff59ef96ba9f6e501438b4b2f1206dad3eda0ab2c5c95c26de54d34859",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28860.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "429e7485953ba68e35bbe205dff01e7bc3cf8aaaef7b311725a31cd61959d91f",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/28861.pdf",
+      "sourceType": "一般質問（総括質疑及び一般質問）通告書PDF（延岡市議会公式）",
+      "sessionId": "2026-09",
+      "outcome": "unchanged",
+      "lastCheckedAt": "2026-10-21T00:58:57.422Z",
+      "httpStatus": null,
+      "contentHash": "ad73594c3b07801982964b82cc5375f1d7b542c03a4f8893ee72590b299955d9",
+      "parserVersion": "sync-council-data.mjs(question-notice)@2026-08+update-questions.mjs@2026-08-cross-check-v1",
+      "extractionStatus": "not_reextracted（既存fileHashによる差分照合のみ。公式サーバー負荷対策のため再取得していない）",
+      "validationStatus": "schema_valid",
+      "validationErrors": [],
+      "level": "GREEN",
+      "reason": "既知資料・変更なし（機械的に確定）"
+    }
+  ],
+  "excludedResolvedEntries": [
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27613.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27614.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27615.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27617.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27618.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27619.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27620.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27621.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27622.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27623.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27624.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27625.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27626.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    },
+    {
+      "sourceUrl": "https://www.city.nobeoka.miyazaki.jp/uploaded/attachment/27627.pdf",
+      "sessionId": "2026-06",
+      "status": "removed-confirmed"
+    }
+  ],
+  "circuitBreakerTripped": false,
+  "circuitBreakerReason": null,
+  "note": "dryRun=trueのため、本番データ（src/data/generalQuestions.json・src/data/councilSpeechSummaries.json・src/data/councilWatchedDocuments.json等）への書き込みは一切行っていない。GREEN判定であっても、このレポート自体が自動で本番反映を行うことはない（別途、明示的な本番実行コマンドと人間の承認、およびAUTO_APPLY_GREENフラグの有効化が必要）。 新規に検出した質問通告書は、常に「予定質問（generalQuestions.json）」の追加候補としてのみ扱っており、会議録確認済み（councilSpeechSummaries.json）への昇格は本Updaterでは一切行わない。会議録本文の解釈・質問項目の抽出・答弁の紐付けはAI推定であり、対象外（GREENにはしない）。 取得不能として確定済み（removed-confirmed）の質問通告書14件は判定対象外とした（excludedResolvedEntriesに記録。台帳上の記録は削除していない）。"
+}

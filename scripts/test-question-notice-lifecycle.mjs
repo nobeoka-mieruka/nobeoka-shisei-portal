@@ -24,7 +24,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import assert from "node:assert/strict";
-import { deriveSessionInfo, evaluateQuestionNoticeRecord } from "./auto-update/questions/update-questions.mjs";
+import { deriveSessionInfo, evaluateQuestionNoticeRecord, isResolvedQuestionNoticeRecord } from "./auto-update/questions/update-questions.mjs";
 import { classifyItem } from "./auto-update/core/classify.mjs";
 import { readAutoApplyGreenFlag, listApplicableGreenItems, isEligibleForAutoApply } from "./auto-update/integration/apply-green.mjs";
 import { isWithinCouncilSpeechPeriod } from "./lib/council-speech-period.mjs";
@@ -368,6 +368,20 @@ check("evaluateQuestionNoticeRecord()：members.jsonに存在しないmemberId�
   });
   assert.equal(evalResult.anomalyDetected, true);
   assert.match(evalResult.anomalyReason, /members\.jsonに存在しない/);
+});
+
+check("isResolvedQuestionNoticeRecord()：判定対象から外すのは人手で取得不能と確定した通告書（removed-confirmed）だけで、消失の疑い段階（removed-suspected等）や公開中の通告書は外さない", () => {
+  assert.equal(isResolvedQuestionNoticeRecord({ status: "removed-confirmed" }), true);
+  for (const status of ["published", "removed-suspected", "removed-confirmed-suspected", undefined]) {
+    assert.equal(isResolvedQuestionNoticeRecord({ status }), false, `status=${status}は判定対象に残すべきです`);
+  }
+});
+
+check("councilWatchedDocuments.jsonの公開中（published）の質問通告書は判定対象から外れない（会議録確認済み会期の安全装置〈RED〉は公開中の通告書に引き続き効く）", () => {
+  const notices = readJson("src/data/councilWatchedDocuments.json").filter((r) => r.category === "question-notice");
+  const published = notices.filter((r) => r.status === "published");
+  assert.ok(published.length > 0, "公開中の質問通告書が0件です");
+  assert.ok(published.every((r) => !isResolvedQuestionNoticeRecord(r)));
 });
 
 console.log("\nPhase171-5：GREEN自動反映エンジン（apply-green.mjs）が本番データへ一切書き込まないことの確認");

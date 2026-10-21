@@ -120,6 +120,18 @@ export function deriveSessionInfo(title) {
 }
 
 /**
+ * 人手で「取得不能として確定」（status="removed-confirmed"）済みの質問通告書か。
+ * sync-council-data.mjsもこの状態の資料を確認待ちへ戻さない（巡回対象から外している）。
+ * 公式サイトにもう存在せず、予定質問・確認済み質問のどちらへも反映される経路が無いため、
+ * GREEN/YELLOW/RED判定とサーキットブレーカーの母数から除外し、レポートには件数とURLだけを残す。
+ * （除外しないと、会議録確認済み会期の通告書は毎回anomalyDetectedでREDになり、
+ *  消失候補の件数も毎回サーキットブレーカーの閾値を超えて、新しい異常と見分けがつかなくなる。）
+ */
+export function isResolvedQuestionNoticeRecord(record) {
+  return record?.status === "removed-confirmed";
+}
+
+/**
  * 質問通告書1件分について、outcome（new/updated/unchanged/removed_candidate）・
  * 「予定」と「確認済み」の混同防止のための異常検知（anomalyDetected）・人間確認要否を
  * 判定する（I/O・非同期処理を一切含まない純粋関数）。
@@ -268,7 +280,9 @@ async function main() {
   const transcriptAvailableSessionIds = new Set(
     questionCollectionStatus.sessions.filter((s) => s.transcriptAvailable === true).map((s) => s.sessionId),
   );
-  const questionNoticeRecords = watchedDocuments.filter((r) => r.category === "question-notice");
+  const allQuestionNoticeRecords = watchedDocuments.filter((r) => r.category === "question-notice");
+  const resolvedRecords = allQuestionNoticeRecords.filter(isResolvedQuestionNoticeRecord);
+  const questionNoticeRecords = allQuestionNoticeRecords.filter((r) => !isResolvedQuestionNoticeRecord(r));
   const indexState = watchedDocuments.find((r) => r.id === "question-notice-index-state");
 
   const classifiedEntries = [];
@@ -403,6 +417,12 @@ async function main() {
       "会議録確認済み（councilSpeechSummaries.json）への昇格は本Updaterでは一切行わない。" +
       "会議録本文の解釈・質問項目の抽出・答弁の紐付けはAI推定であり、対象外（GREENにはしない）。",
   ];
+  if (resolvedRecords.length > 0) {
+    noteParts.push(
+      `取得不能として確定済み（removed-confirmed）の質問通告書${resolvedRecords.length}件は判定対象外とした` +
+        "（excludedResolvedEntriesに記録。台帳上の記録は削除していない）。",
+    );
+  }
   if (baseDetectionGapNote) noteParts.push(baseDetectionGapNote);
   if (baseCategoryErrorNote) noteParts.push(baseCategoryErrorNote);
   if (!baseGateRan) {
@@ -422,6 +442,11 @@ async function main() {
     overallLevel,
     summary,
     entries: classifiedEntries,
+    excludedResolvedEntries: resolvedRecords.map((r) => ({
+      sourceUrl: r.sourceUrl,
+      sessionId: deriveSessionInfo(r.title)?.sessionId ?? null,
+      status: r.status,
+    })),
     circuitBreakerTripped: circuitBreaker.tripped,
     circuitBreakerReason: circuitBreaker.reason,
     note: noteParts.join(" "),
