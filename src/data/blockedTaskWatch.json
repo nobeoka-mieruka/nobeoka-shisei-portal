@@ -36,7 +36,7 @@
   {
     "taskId": "TASK-016B",
     "title": "年度別収支報告書データ登録（pf-org-001＝市長の後援会、令和7年分待ち）",
-    "status": "blocked",
+    "status": "review_required",
     "autoResumeClass": "auto",
     "detectionMode": "hash",
     "resumeCondition": "宮崎県選挙管理委員会が、市長の後援会（pf-org-001）の令和7年分政治資金収支報告書を公表すること（令和8年11月頃公表見込み）。",
@@ -46,8 +46,8 @@
     "matchConfidence": "exact",
     "lastAcknowledgedHash": "00e2dec7dad6c51ca8cb0e8ed49d606a97afbd3661c83b5ac0e44fdedeabab77",
     "lastAcknowledgedAt": "2026-08-10T07:40:00+09:00",
-    "lastTransitionAt": null,
-    "lastCheckedAt": "2026-08-10T07:40:00+09:00",
+    "lastTransitionAt": "2026-10-23T21:53:28.667Z",
+    "lastCheckedAt": "2026-10-23T21:53:28.667Z",
     "notes": "2026-08-10、本エントリ新設時にページのハッシュが前回確認時（2026-08-09）から変化していたため内容を確認したところ、「令和8年8月3日公表分」（解散団体分の追加公表）であり、市長の後援会（活動継続中、解散団体ではない）とは無関係と判明した（WebFetchで直接内容を確認、推測ではない）。さらに調査の結果、このページがCloudflareのメールアドレス難読化機能（cdn-cgi/l/email-protection）を使用しており、リクエストのたびにランダムな鍵で再エンコードされるため、単純なsha256ハッシュでは実際の表示内容が同じでも毎回ハッシュが変わってしまう（誤検知の原因）ことが判明した。scripts/lib/city-site-fetch.mjsへ`sha256OfBufferForDiff`（難読化部分を正規化してからハッシュ化する関数）を追加し、scripts/run-archive-crawler.mjsで採用した。修正後、2回連続の巡回でハッシュが安定する（unchanged）ことを確認したうえで、このハッシュを正式なベースラインとして記録する。"
   },
   {

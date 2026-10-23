@@ -1,16 +1,11 @@
 {
-  "checkedAt": "2026-08-11T12:42:14.858Z",
-  "anyTransition": false,
+  "checkedAt": "2026-10-23T21:53:28.667Z",
+  "anyTransition": true,
   "results": [
     {
       "taskId": "TASK-004",
       "action": "skipped",
       "reason": "detectionMode=existing-pipeline（監視対象URLなし、または既存の別の仕組みでカバー済み）"
-    },
-    {
-      "taskId": "TASK-011",
-      "action": "no_change",
-      "reason": "前回承認済みハッシュと一致（変化なし）"
     },
     {
       "taskId": "TASK-012",
@@ -19,8 +14,10 @@
     },
     {
       "taskId": "TASK-016B",
-      "action": "no_change",
-      "reason": "前回承認済みハッシュと一致（変化なし）"
+      "action": "transitioned_to_review_required",
+      "reason": "監視対象（election-fund-report）のコンテンツハッシュが変化しました（旧: 00e2dec7dad6c51ca8cb0e8ed49d606a97afbd3661c83b5ac0e44fdedeabab77 → 新: 1314e14e781c0d8742cc5776e51927d5c412059a1baaee2eca97823e249161a7）。内容の確認・承認（lastAcknowledgedHashの更新）は人が行ってください。",
+      "previousHash": "00e2dec7dad6c51ca8cb0e8ed49d606a97afbd3661c83b5ac0e44fdedeabab77",
+      "newHash": "1314e14e781c0d8742cc5776e51927d5c412059a1baaee2eca97823e249161a7"
     },
     {
       "taskId": "TASK-023",
